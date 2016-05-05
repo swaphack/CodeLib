@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Data\DBRecord.h" />
+    <ClInclude Include="Data\DBSheet.h" />
+    <ClInclude Include="Data\DBStorage.h" />
+    <ClInclude Include="Data\DBWarehouse.h" />
+    <ClInclude Include="Data\import.h" />
+    <ClInclude Include="db.h" />
+    <ClInclude Include="DataBase.h" />
+    <ClInclude Include="Query\DBExpression.h" />
+    <ClInclude Include="Query\DBQuery.h" />
+    <ClInclude Include="Query\DBResult.h" />
+    <ClInclude Include="Query\import.h" />
+    <ClInclude Include="Struct\DBCode.h" />
+    <ClInclude Include="Struct\DBContent.h" />
+    <ClInclude Include="Struct\DBTable.h" />
+    <ClInclude Include="Struct\DBTemplate.h" />
+    <ClInclude Include="Struct\import.h" />
+    <ClInclude Include="Tool\DBFileh.h" />
+    <ClInclude Include="Tool\DBHelper.h" />
+    <ClInclude Include="Tool\DBMacros.h" />
+    <ClInclude Include="Tool\import.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="DataBase.cpp" />
+    <ClCompile Include="Data\DBRecord.cpp" />
+    <ClCompile Include="Data\DBSheet.cpp" />
+    <ClCompile Include="Data\DBStorage.cpp" />
+    <ClCompile Include="Data\DBWarehouse.cpp" />
+    <ClCompile Include="Struct\DBCode.cpp" />
+    <ClCompile Include="Struct\DBContent.cpp" />
+    <ClCompile Include="Struct\DBTable.cpp" />
+    <ClCompile Include="Tool\DBFile.cpp" />
+    <ClCompile Include="Tool\DBHelper.cpp" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{B078654D-5498-4748-B6DF-B742DC79C720}</ProjectGuid>
+    <RootNamespace>Database</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup />
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>../System/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <BrowseInformation>true</BrowseInformation>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+    <Bscmake>
+      <PreserveSbr>true</PreserveSbr>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

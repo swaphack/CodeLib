@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Parser">
+      <UniqueIdentifier>{fe17fc71-d074-49b3-bcb7-601228271c57}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="String">
+      <UniqueIdentifier>{e6f2a3fc-7e6d-4d1d-99d6-732b6b182344}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Statistic">
+      <UniqueIdentifier>{08b52d95-1907-4c59-9764-e951423f9560}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Target">
+      <UniqueIdentifier>{64f5f89e-d459-41b3-8e49-78142b65e9d2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Context">
+      <UniqueIdentifier>{149c571f-f23c-4041-8a82-5d854ae0752f}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Parser\TextParser.cpp">
+      <Filter>Parser</Filter>
+    </ClCompile>
+    <ClCompile Include="String\StringPool.cpp">
+      <Filter>String</Filter>
+    </ClCompile>
+    <ClCompile Include="Statistic\Statistic.cpp">
+      <Filter>Statistic</Filter>
+    </ClCompile>
+    <ClCompile Include="Target\Target.cpp">
+      <Filter>Target</Filter>
+    </ClCompile>
+    <ClCompile Include="Context\Content.cpp">
+      <Filter>Context</Filter>
+    </ClCompile>
+    <ClCompile Include="SearchProxy.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Parser\TextParser.h">
+      <Filter>Parser</Filter>
+    </ClInclude>
+    <ClInclude Include="String\StringPool.h">
+      <Filter>String</Filter>
+    </ClInclude>
+    <ClInclude Include="Statistic\Statistic.h">
+      <Filter>Statistic</Filter>
+    </ClInclude>
+    <ClInclude Include="Target\Target.h">
+      <Filter>Target</Filter>
+    </ClInclude>
+    <ClInclude Include="Context\Content.h">
+      <Filter>Context</Filter>
+    </ClInclude>
+    <ClInclude Include="SearchProxy.h" />
+    <ClInclude Include="Context\import.h">
+      <Filter>Context</Filter>
+    </ClInclude>
+    <ClInclude Include="Parser\import.h">
+      <Filter>Parser</Filter>
+    </ClInclude>
+    <ClInclude Include="Statistic\import.h">
+      <Filter>Statistic</Filter>
+    </ClInclude>
+    <ClInclude Include="String\import.h">
+      <Filter>String</Filter>
+    </ClInclude>
+    <ClInclude Include="Target\import.h">
+      <Filter>Target</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

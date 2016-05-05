@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="BLL\Account\AccountAction.cpp">
+      <Filter>BLL\Account</Filter>
+    </ClCompile>
+    <ClCompile Include="BLL\BusinessGlobal.cpp">
+      <Filter>BLL</Filter>
+    </ClCompile>
+    <ClCompile Include="BLL\BLLAction.cpp">
+      <Filter>BLL</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="BLL">
+      <UniqueIdentifier>{b0ee0b7c-339f-4e9a-8145-22ed6cee1e33}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BLL\Account">
+      <UniqueIdentifier>{6583717c-3cf5-4ea5-a05d-6584b2716325}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DAL">
+      <UniqueIdentifier>{6dc83ced-6b85-4fea-b067-53d1d367a65e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Net">
+      <UniqueIdentifier>{ec7922c0-ef6e-48b7-84fa-bb638419588e}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="BLL\BusinessMacros.h">
+      <Filter>BLL</Filter>
+    </ClInclude>
+    <ClInclude Include="BLL\Account\AccountAction.h">
+      <Filter>BLL\Account</Filter>
+    </ClInclude>
+    <ClInclude Include="BLL\BLLAction.h">
+      <Filter>BLL</Filter>
+    </ClInclude>
+    <ClInclude Include="DAL\Account.h">
+      <Filter>DAL</Filter>
+    </ClInclude>
+    <ClInclude Include="DAL\Item.h">
+      <Filter>DAL</Filter>
+    </ClInclude>
+    <ClInclude Include="BLL\import.h">
+      <Filter>BLL</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

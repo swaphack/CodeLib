@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Map">
+      <UniqueIdentifier>{86d2cd45-6b70-495e-b43e-54f898e54da8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="People">
+      <UniqueIdentifier>{71b1d31f-a557-4e38-b04d-52ce8206ef11}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Log">
+      <UniqueIdentifier>{34ced14e-a500-4e07-8265-3462448bd703}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Society">
+      <UniqueIdentifier>{61e04024-d4ab-4098-8384-6a07d8990548}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="People\Human.h">
+      <Filter>People</Filter>
+    </ClInclude>
+    <ClInclude Include="People\macros.h">
+      <Filter>People</Filter>
+    </ClInclude>
+    <ClInclude Include="People\Property.h">
+      <Filter>People</Filter>
+    </ClInclude>
+    <ClInclude Include="People\Job.h">
+      <Filter>People</Filter>
+    </ClInclude>
+    <ClInclude Include="People\Finance.h">
+      <Filter>People</Filter>
+    </ClInclude>
+    <ClInclude Include="People\Person.h">
+      <Filter>People</Filter>
+    </ClInclude>
+    <ClInclude Include="Society\Family.h">
+      <Filter>Society</Filter>
+    </ClInclude>
+    <ClInclude Include="Society\Organization.h">
+      <Filter>Society</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="People\Human.cpp">
+      <Filter>People</Filter>
+    </ClCompile>
+    <ClCompile Include="People\Job.cpp">
+      <Filter>People</Filter>
+    </ClCompile>
+    <ClCompile Include="People\Property.cpp">
+      <Filter>People</Filter>
+    </ClCompile>
+    <ClCompile Include="People\Finace.cpp">
+      <Filter>People</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

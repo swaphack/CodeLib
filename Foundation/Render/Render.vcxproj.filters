@@ -1,0 +1,1115 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="Canvas.cpp" />
+    <ClCompile Include="RenderApplication.cpp" />
+    <ClCompile Include="Common\Node\Node.cpp">
+      <Filter>Common\Node</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Tool\Tool.cpp">
+      <Filter>Common\Tool</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Action\Action.cpp">
+      <Filter>Common\Action</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Action\ActionManager.cpp">
+      <Filter>Common\Action</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Action\IntervalAction.cpp">
+      <Filter>Common\Action</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\DrawNode\DrawNode.cpp">
+      <Filter>Common\DrawNode</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\DrawNode\LineNode.cpp">
+      <Filter>Common\DrawNode</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\DrawNode\PointNode.cpp">
+      <Filter>Common\DrawNode</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Shader\TexFrame.cpp">
+      <Filter>Common\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Shader\Texture.cpp">
+      <Filter>Common\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\View\View.cpp">
+      <Filter>Common\View</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\View\ViewConfig.cpp">
+      <Filter>Common\View</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Scene\Scene.cpp">
+      <Filter>Common\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\View\Camera.cpp">
+      <Filter>Common\View</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Tool\UITool.cpp">
+      <Filter>Common\Tool</Filter>
+    </ClCompile>
+    <ClCompile Include="3d\Cube\Cube.cpp">
+      <Filter>3d\Cube</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Tool\TextureTool.cpp">
+      <Filter>Common\Tool</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Tool\GLTool.cpp">
+      <Filter>Common\Tool</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Shader\TextureCache.cpp">
+      <Filter>Common\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="3d\Cube\Sphere.cpp">
+      <Filter>3d\Cube</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Shader\Material.cpp">
+      <Filter>Common\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\XControl\CtrlPixel.cpp">
+      <Filter>Common\XControl</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\GL\protocol_common.cpp">
+      <Filter>Common\GL</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Action\Scheduler.cpp">
+      <Filter>Common\Action</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource\Componet\Image.cpp">
+      <Filter>Resource\Componet</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource\Componet\Media.cpp">
+      <Filter>Resource\Componet</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource\FilePath.cpp">
+      <Filter>Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource\Paser\FFmpeg.cpp">
+      <Filter>Resource\Parser</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource\Paser\LabelImage.cpp">
+      <Filter>Resource\Parser</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource\Paser\PNGImage.cpp">
+      <Filter>Resource\Parser</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Node\ColorNode.cpp">
+      <Filter>Common\Node</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Control\Static\CtrlFog.cpp">
+      <Filter>Common\Control\Static</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Control\Static\CtrlImage.cpp">
+      <Filter>Common\Control\Static</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Control\Static\CtrlLight.cpp">
+      <Filter>Common\Control\Static</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Control\Static\CtrlMask.cpp">
+      <Filter>Common\Control\Static</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Control\Static\CtrlModel.cpp">
+      <Filter>Common\Control\Static</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Control\Static\CtrlSpotLight.cpp">
+      <Filter>Common\Control\Static</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Control\Static\CtrlText.cpp">
+      <Filter>Common\Control\Static</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Control\Dynamic\CtrlMedia.cpp">
+      <Filter>Common\Control\Dynamic</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Node\Animation.cpp">
+      <Filter>Common\Node</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Action\ActionProxy.cpp">
+      <Filter>Common\Action</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Control\Dynamic\CtrlParticleSystem.cpp">
+      <Filter>Common\Control\Dynamic</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Canvas.h" />
+    <ClInclude Include="RenderApplication.h" />
+    <ClInclude Include="render.h" />
+    <ClInclude Include="Common\GL\import.h">
+      <Filter>Common\GL</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\GL\macros.h">
+      <Filter>Common\GL</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\GL\texture_common.h">
+      <Filter>Common\GL</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\GL\matrix_common.h">
+      <Filter>Common\GL</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Node\import.h">
+      <Filter>Common\Node</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Node\Node.h">
+      <Filter>Common\Node</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Tool\Tool.h">
+      <Filter>Common\Tool</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Tool\UITool.h">
+      <Filter>Common\Tool</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Tool\ModelTool.h">
+      <Filter>Common\Tool</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Scene\Scene.h">
+      <Filter>Common\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Action\Action.h">
+      <Filter>Common\Action</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Action\ActionManager.h">
+      <Filter>Common\Action</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Action\import.h">
+      <Filter>Common\Action</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Action\IntervalAction.h">
+      <Filter>Common\Action</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\DrawNode\DrawNode.h">
+      <Filter>Common\DrawNode</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\DrawNode\import.h">
+      <Filter>Common\DrawNode</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\DrawNode\LineNode.h">
+      <Filter>Common\DrawNode</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\DrawNode\PointNode.h">
+      <Filter>Common\DrawNode</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Shader\import.h">
+      <Filter>Common\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Shader\macros.h">
+      <Filter>Common\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Shader\TexFrame.h">
+      <Filter>Common\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Shader\Texture.h">
+      <Filter>Common\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\View\View.h">
+      <Filter>Common\View</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\View\import.h">
+      <Filter>Common\View</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\View\ViewConfig.h">
+      <Filter>Common\View</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\common.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Tool\import.h">
+      <Filter>Common\Tool</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Scene\import.h">
+      <Filter>Common\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\View\Camera.h">
+      <Filter>Common\View</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\DrawNode\TestDrawNode.h">
+      <Filter>Common\DrawNode</Filter>
+    </ClInclude>
+    <ClInclude Include="3d\Cube\Cube.h">
+      <Filter>3d\Cube</Filter>
+    </ClInclude>
+    <ClInclude Include="3d\Cube\import.h">
+      <Filter>3d\Cube</Filter>
+    </ClInclude>
+    <ClInclude Include="3d\3d.h">
+      <Filter>3d</Filter>
+    </ClInclude>
+    <ClInclude Include="2d\UI\UIImage.h">
+      <Filter>2d\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="2d\UI\UINode.h">
+      <Filter>2d\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="2d\UI\macros.h">
+      <Filter>2d\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Tool\TextureTool.h">
+      <Filter>Common\Tool</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Tool\GLTool.h">
+      <Filter>Common\Tool</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Shader\TextureCache.h">
+      <Filter>Common\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="3d\Cube\Sphere.h">
+      <Filter>3d\Cube</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Shader\Material.h">
+      <Filter>Common\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\opengl\GL.H">
+      <Filter>third_party\opengl</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\opengl\GLAUX.H">
+      <Filter>third_party\opengl</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\opengl\GLEXT.H">
+      <Filter>third_party\opengl</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\opengl\GLU.H">
+      <Filter>third_party\opengl</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\opengl\GLUT.H">
+      <Filter>third_party\opengl</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\opengl\WGLEXT.H">
+      <Filter>third_party\opengl</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\png\png.h">
+      <Filter>third_party\png</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\png\pngconf.h">
+      <Filter>third_party\png</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\png\pngdebug.h">
+      <Filter>third_party\png</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\png\pnginfo.h">
+      <Filter>third_party\png</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\png\pnglibconf.h">
+      <Filter>third_party\png</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\png\pngpriv.h">
+      <Filter>third_party\png</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\png\pngstruct.h">
+      <Filter>third_party\png</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\third_party.h">
+      <Filter>third_party</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\freetype\ft2build.h">
+      <Filter>third_party\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\freetype\freetype\freetype.h">
+      <Filter>third_party\freetype\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\freetype\freetype\ftadvanc.h">
+      <Filter>third_party\freetype\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\freetype\freetype\ftautoh.h">
+      <Filter>third_party\freetype\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\freetype\freetype\ftbbox.h">
+      <Filter>third_party\freetype\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\freetype\freetype\ftbdf.h">
+      <Filter>third_party\freetype\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\freetype\freetype\ftbitmap.h">
+      <Filter>third_party\freetype\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\freetype\freetype\ftbzip2.h">
+      <Filter>third_party\freetype\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\freetype\freetype\ftcache.h">
+      <Filter>third_party\freetype\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\freetype\freetype\ftcffdrv.h">
+      <Filter>third_party\freetype\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\freetype\freetype\ftchapters.h">
+      <Filter>third_party\freetype\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\freetype\freetype\ftcid.h">
+      <Filter>third_party\freetype\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\freetype\freetype\fterrdef.h">
+      <Filter>third_party\freetype\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\freetype\freetype\fterrors.h">
+      <Filter>third_party\freetype\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\freetype\freetype\ftfntfmt.h">
+      <Filter>third_party\freetype\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\freetype\freetype\ftgasp.h">
+      <Filter>third_party\freetype\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\freetype\freetype\ftglyph.h">
+      <Filter>third_party\freetype\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\freetype\freetype\ftgxval.h">
+      <Filter>third_party\freetype\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\freetype\freetype\ftgzip.h">
+      <Filter>third_party\freetype\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\freetype\freetype\ftimage.h">
+      <Filter>third_party\freetype\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\freetype\freetype\ftincrem.h">
+      <Filter>third_party\freetype\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\freetype\freetype\ftlcdfil.h">
+      <Filter>third_party\freetype\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\freetype\freetype\ftlist.h">
+      <Filter>third_party\freetype\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\freetype\freetype\ftlzw.h">
+      <Filter>third_party\freetype\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\freetype\freetype\ftmac.h">
+      <Filter>third_party\freetype\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\freetype\freetype\ftmm.h">
+      <Filter>third_party\freetype\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\freetype\freetype\ftmodapi.h">
+      <Filter>third_party\freetype\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\freetype\freetype\ftmoderr.h">
+      <Filter>third_party\freetype\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\freetype\freetype\ftotval.h">
+      <Filter>third_party\freetype\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\freetype\freetype\ftoutln.h">
+      <Filter>third_party\freetype\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\freetype\freetype\ftpfr.h">
+      <Filter>third_party\freetype\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\freetype\freetype\ftrender.h">
+      <Filter>third_party\freetype\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\freetype\freetype\ftsizes.h">
+      <Filter>third_party\freetype\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\freetype\freetype\ftsnames.h">
+      <Filter>third_party\freetype\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\freetype\freetype\ftstroke.h">
+      <Filter>third_party\freetype\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\freetype\freetype\ftsynth.h">
+      <Filter>third_party\freetype\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\freetype\freetype\ftsystem.h">
+      <Filter>third_party\freetype\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\freetype\freetype\fttrigon.h">
+      <Filter>third_party\freetype\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\freetype\freetype\ftttdrv.h">
+      <Filter>third_party\freetype\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\freetype\freetype\fttypes.h">
+      <Filter>third_party\freetype\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\freetype\freetype\ftwinfnt.h">
+      <Filter>third_party\freetype\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\freetype\freetype\t1tables.h">
+      <Filter>third_party\freetype\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\freetype\freetype\ttnameid.h">
+      <Filter>third_party\freetype\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\freetype\freetype\tttables.h">
+      <Filter>third_party\freetype\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\freetype\freetype\tttags.h">
+      <Filter>third_party\freetype\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\freetype\freetype\ttunpat.h">
+      <Filter>third_party\freetype\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\freetype\freetype\config\ftconfig.h">
+      <Filter>third_party\freetype\freetype\config</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\freetype\freetype\config\ftheader.h">
+      <Filter>third_party\freetype\freetype\config</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\freetype\freetype\config\ftmodule.h">
+      <Filter>third_party\freetype\freetype\config</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\freetype\freetype\config\ftoption.h">
+      <Filter>third_party\freetype\freetype\config</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\freetype\freetype\config\ftstdlib.h">
+      <Filter>third_party\freetype\freetype\config</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\freetype\freetype\internal\autohint.h">
+      <Filter>third_party\freetype\freetype\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\freetype\freetype\internal\ftcalc.h">
+      <Filter>third_party\freetype\freetype\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\freetype\freetype\internal\ftdebug.h">
+      <Filter>third_party\freetype\freetype\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\freetype\freetype\internal\ftdriver.h">
+      <Filter>third_party\freetype\freetype\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\freetype\freetype\internal\ftgloadr.h">
+      <Filter>third_party\freetype\freetype\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\freetype\freetype\internal\fthash.h">
+      <Filter>third_party\freetype\freetype\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\freetype\freetype\internal\ftmemory.h">
+      <Filter>third_party\freetype\freetype\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\freetype\freetype\internal\ftobjs.h">
+      <Filter>third_party\freetype\freetype\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\freetype\freetype\internal\ftpic.h">
+      <Filter>third_party\freetype\freetype\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\freetype\freetype\internal\ftrfork.h">
+      <Filter>third_party\freetype\freetype\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\freetype\freetype\internal\ftserv.h">
+      <Filter>third_party\freetype\freetype\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\freetype\freetype\internal\ftstream.h">
+      <Filter>third_party\freetype\freetype\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\freetype\freetype\internal\fttrace.h">
+      <Filter>third_party\freetype\freetype\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\freetype\freetype\internal\ftvalid.h">
+      <Filter>third_party\freetype\freetype\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\freetype\freetype\internal\internal.h">
+      <Filter>third_party\freetype\freetype\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\freetype\freetype\internal\psaux.h">
+      <Filter>third_party\freetype\freetype\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\freetype\freetype\internal\pshints.h">
+      <Filter>third_party\freetype\freetype\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\freetype\freetype\internal\sfnt.h">
+      <Filter>third_party\freetype\freetype\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\freetype\freetype\internal\t1types.h">
+      <Filter>third_party\freetype\freetype\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\freetype\freetype\internal\tttypes.h">
+      <Filter>third_party\freetype\freetype\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\freetype\freetype\internal\services\svbdf.h">
+      <Filter>third_party\freetype\freetype\internal\services</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\freetype\freetype\internal\services\svcid.h">
+      <Filter>third_party\freetype\freetype\internal\services</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\freetype\freetype\internal\services\svfntfmt.h">
+      <Filter>third_party\freetype\freetype\internal\services</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\freetype\freetype\internal\services\svgldict.h">
+      <Filter>third_party\freetype\freetype\internal\services</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\freetype\freetype\internal\services\svgxval.h">
+      <Filter>third_party\freetype\freetype\internal\services</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\freetype\freetype\internal\services\svkern.h">
+      <Filter>third_party\freetype\freetype\internal\services</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\freetype\freetype\internal\services\svmm.h">
+      <Filter>third_party\freetype\freetype\internal\services</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\freetype\freetype\internal\services\svotval.h">
+      <Filter>third_party\freetype\freetype\internal\services</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\freetype\freetype\internal\services\svpfr.h">
+      <Filter>third_party\freetype\freetype\internal\services</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\freetype\freetype\internal\services\svpostnm.h">
+      <Filter>third_party\freetype\freetype\internal\services</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\freetype\freetype\internal\services\svprop.h">
+      <Filter>third_party\freetype\freetype\internal\services</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\freetype\freetype\internal\services\svpscmap.h">
+      <Filter>third_party\freetype\freetype\internal\services</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\freetype\freetype\internal\services\svpsinfo.h">
+      <Filter>third_party\freetype\freetype\internal\services</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\freetype\freetype\internal\services\svsfnt.h">
+      <Filter>third_party\freetype\freetype\internal\services</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\freetype\freetype\internal\services\svttcmap.h">
+      <Filter>third_party\freetype\freetype\internal\services</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\freetype\freetype\internal\services\svtteng.h">
+      <Filter>third_party\freetype\freetype\internal\services</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\freetype\freetype\internal\services\svttglyf.h">
+      <Filter>third_party\freetype\freetype\internal\services</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\freetype\freetype\internal\services\svwinfnt.h">
+      <Filter>third_party\freetype\freetype\internal\services</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\XControl\CtrlPixel.h">
+      <Filter>Common\XControl</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\XControl\import.h">
+      <Filter>Common\XControl</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\GL\protocol_common.h">
+      <Filter>Common\GL</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\GL\shape_commond.h">
+      <Filter>Common\GL</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\GL\enum_common.h">
+      <Filter>Common\GL</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\ffmpeg\libavcodec\avcodec.h">
+      <Filter>third_party\ffmpeg\libavcodec</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\ffmpeg\libavcodec\avdct.h">
+      <Filter>third_party\ffmpeg\libavcodec</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\ffmpeg\libavcodec\avfft.h">
+      <Filter>third_party\ffmpeg\libavcodec</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\ffmpeg\libavcodec\d3d11va.h">
+      <Filter>third_party\ffmpeg\libavcodec</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\ffmpeg\libavcodec\dirac.h">
+      <Filter>third_party\ffmpeg\libavcodec</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\ffmpeg\libavcodec\dv_profile.h">
+      <Filter>third_party\ffmpeg\libavcodec</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\ffmpeg\libavcodec\dxva2.h">
+      <Filter>third_party\ffmpeg\libavcodec</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\ffmpeg\libavcodec\jni.h">
+      <Filter>third_party\ffmpeg\libavcodec</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\ffmpeg\libavcodec\qsv.h">
+      <Filter>third_party\ffmpeg\libavcodec</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\ffmpeg\libavcodec\vaapi.h">
+      <Filter>third_party\ffmpeg\libavcodec</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\ffmpeg\libavcodec\vda.h">
+      <Filter>third_party\ffmpeg\libavcodec</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\ffmpeg\libavcodec\vdpau.h">
+      <Filter>third_party\ffmpeg\libavcodec</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\ffmpeg\libavcodec\version.h">
+      <Filter>third_party\ffmpeg\libavcodec</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\ffmpeg\libavcodec\videotoolbox.h">
+      <Filter>third_party\ffmpeg\libavcodec</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\ffmpeg\libavcodec\vorbis_parser.h">
+      <Filter>third_party\ffmpeg\libavcodec</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\ffmpeg\libavcodec\xvmc.h">
+      <Filter>third_party\ffmpeg\libavcodec</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\ffmpeg\libavdevice\avdevice.h">
+      <Filter>third_party\ffmpeg\libavdevice</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\ffmpeg\libavdevice\version.h">
+      <Filter>third_party\ffmpeg\libavdevice</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\ffmpeg\libavfilter\avfilter.h">
+      <Filter>third_party\ffmpeg\libavfilter</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\ffmpeg\libavfilter\avfiltergraph.h">
+      <Filter>third_party\ffmpeg\libavfilter</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\ffmpeg\libavfilter\buffersink.h">
+      <Filter>third_party\ffmpeg\libavfilter</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\ffmpeg\libavfilter\buffersrc.h">
+      <Filter>third_party\ffmpeg\libavfilter</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\ffmpeg\libavfilter\version.h">
+      <Filter>third_party\ffmpeg\libavfilter</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\ffmpeg\libavformat\avformat.h">
+      <Filter>third_party\ffmpeg\libavformat</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\ffmpeg\libavformat\avio.h">
+      <Filter>third_party\ffmpeg\libavformat</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\ffmpeg\libavformat\version.h">
+      <Filter>third_party\ffmpeg\libavformat</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\ffmpeg\libavutil\adler32.h">
+      <Filter>third_party\ffmpeg\libavutil</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\ffmpeg\libavutil\aes.h">
+      <Filter>third_party\ffmpeg\libavutil</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\ffmpeg\libavutil\aes_ctr.h">
+      <Filter>third_party\ffmpeg\libavutil</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\ffmpeg\libavutil\attributes.h">
+      <Filter>third_party\ffmpeg\libavutil</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\ffmpeg\libavutil\audio_fifo.h">
+      <Filter>third_party\ffmpeg\libavutil</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\ffmpeg\libavutil\avassert.h">
+      <Filter>third_party\ffmpeg\libavutil</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\ffmpeg\libavutil\avconfig.h">
+      <Filter>third_party\ffmpeg\libavutil</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\ffmpeg\libavutil\avstring.h">
+      <Filter>third_party\ffmpeg\libavutil</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\ffmpeg\libavutil\avutil.h">
+      <Filter>third_party\ffmpeg\libavutil</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\ffmpeg\libavutil\base64.h">
+      <Filter>third_party\ffmpeg\libavutil</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\ffmpeg\libavutil\blowfish.h">
+      <Filter>third_party\ffmpeg\libavutil</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\ffmpeg\libavutil\bprint.h">
+      <Filter>third_party\ffmpeg\libavutil</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\ffmpeg\libavutil\bswap.h">
+      <Filter>third_party\ffmpeg\libavutil</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\ffmpeg\libavutil\buffer.h">
+      <Filter>third_party\ffmpeg\libavutil</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\ffmpeg\libavutil\camellia.h">
+      <Filter>third_party\ffmpeg\libavutil</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\ffmpeg\libavutil\cast5.h">
+      <Filter>third_party\ffmpeg\libavutil</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\ffmpeg\libavutil\channel_layout.h">
+      <Filter>third_party\ffmpeg\libavutil</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\ffmpeg\libavutil\common.h">
+      <Filter>third_party\ffmpeg\libavutil</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\ffmpeg\libavutil\cpu.h">
+      <Filter>third_party\ffmpeg\libavutil</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\ffmpeg\libavutil\crc.h">
+      <Filter>third_party\ffmpeg\libavutil</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\ffmpeg\libavutil\des.h">
+      <Filter>third_party\ffmpeg\libavutil</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\ffmpeg\libavutil\dict.h">
+      <Filter>third_party\ffmpeg\libavutil</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\ffmpeg\libavutil\display.h">
+      <Filter>third_party\ffmpeg\libavutil</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\ffmpeg\libavutil\downmix_info.h">
+      <Filter>third_party\ffmpeg\libavutil</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\ffmpeg\libavutil\error.h">
+      <Filter>third_party\ffmpeg\libavutil</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\ffmpeg\libavutil\eval.h">
+      <Filter>third_party\ffmpeg\libavutil</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\ffmpeg\libavutil\ffversion.h">
+      <Filter>third_party\ffmpeg\libavutil</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\ffmpeg\libavutil\fifo.h">
+      <Filter>third_party\ffmpeg\libavutil</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\ffmpeg\libavutil\file.h">
+      <Filter>third_party\ffmpeg\libavutil</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\ffmpeg\libavutil\frame.h">
+      <Filter>third_party\ffmpeg\libavutil</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\ffmpeg\libavutil\hash.h">
+      <Filter>third_party\ffmpeg\libavutil</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\ffmpeg\libavutil\hmac.h">
+      <Filter>third_party\ffmpeg\libavutil</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\ffmpeg\libavutil\hwcontext.h">
+      <Filter>third_party\ffmpeg\libavutil</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\ffmpeg\libavutil\hwcontext_cuda.h">
+      <Filter>third_party\ffmpeg\libavutil</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\ffmpeg\libavutil\hwcontext_vdpau.h">
+      <Filter>third_party\ffmpeg\libavutil</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\ffmpeg\libavutil\imgutils.h">
+      <Filter>third_party\ffmpeg\libavutil</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\ffmpeg\libavutil\intfloat.h">
+      <Filter>third_party\ffmpeg\libavutil</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\ffmpeg\libavutil\intreadwrite.h">
+      <Filter>third_party\ffmpeg\libavutil</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\ffmpeg\libavutil\lfg.h">
+      <Filter>third_party\ffmpeg\libavutil</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\ffmpeg\libavutil\log.h">
+      <Filter>third_party\ffmpeg\libavutil</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\ffmpeg\libavutil\lzo.h">
+      <Filter>third_party\ffmpeg\libavutil</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\ffmpeg\libavutil\macros.h">
+      <Filter>third_party\ffmpeg\libavutil</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\ffmpeg\libavutil\mastering_display_metadata.h">
+      <Filter>third_party\ffmpeg\libavutil</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\ffmpeg\libavutil\mathematics.h">
+      <Filter>third_party\ffmpeg\libavutil</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\ffmpeg\libavutil\md5.h">
+      <Filter>third_party\ffmpeg\libavutil</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\ffmpeg\libavutil\mem.h">
+      <Filter>third_party\ffmpeg\libavutil</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\ffmpeg\libavutil\motion_vector.h">
+      <Filter>third_party\ffmpeg\libavutil</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\ffmpeg\libavutil\murmur3.h">
+      <Filter>third_party\ffmpeg\libavutil</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\ffmpeg\libavutil\opt.h">
+      <Filter>third_party\ffmpeg\libavutil</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\ffmpeg\libavutil\parseutils.h">
+      <Filter>third_party\ffmpeg\libavutil</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\ffmpeg\libavutil\pixdesc.h">
+      <Filter>third_party\ffmpeg\libavutil</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\ffmpeg\libavutil\pixelutils.h">
+      <Filter>third_party\ffmpeg\libavutil</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\ffmpeg\libavutil\pixfmt.h">
+      <Filter>third_party\ffmpeg\libavutil</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\ffmpeg\libavutil\random_seed.h">
+      <Filter>third_party\ffmpeg\libavutil</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\ffmpeg\libavutil\rational.h">
+      <Filter>third_party\ffmpeg\libavutil</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\ffmpeg\libavutil\rc4.h">
+      <Filter>third_party\ffmpeg\libavutil</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\ffmpeg\libavutil\replaygain.h">
+      <Filter>third_party\ffmpeg\libavutil</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\ffmpeg\libavutil\ripemd.h">
+      <Filter>third_party\ffmpeg\libavutil</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\ffmpeg\libavutil\samplefmt.h">
+      <Filter>third_party\ffmpeg\libavutil</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\ffmpeg\libavutil\sha.h">
+      <Filter>third_party\ffmpeg\libavutil</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\ffmpeg\libavutil\sha512.h">
+      <Filter>third_party\ffmpeg\libavutil</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\ffmpeg\libavutil\stereo3d.h">
+      <Filter>third_party\ffmpeg\libavutil</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\ffmpeg\libavutil\tea.h">
+      <Filter>third_party\ffmpeg\libavutil</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\ffmpeg\libavutil\threadmessage.h">
+      <Filter>third_party\ffmpeg\libavutil</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\ffmpeg\libavutil\time.h">
+      <Filter>third_party\ffmpeg\libavutil</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\ffmpeg\libavutil\timecode.h">
+      <Filter>third_party\ffmpeg\libavutil</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\ffmpeg\libavutil\timestamp.h">
+      <Filter>third_party\ffmpeg\libavutil</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\ffmpeg\libavutil\tree.h">
+      <Filter>third_party\ffmpeg\libavutil</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\ffmpeg\libavutil\twofish.h">
+      <Filter>third_party\ffmpeg\libavutil</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\ffmpeg\libavutil\version.h">
+      <Filter>third_party\ffmpeg\libavutil</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\ffmpeg\libavutil\xtea.h">
+      <Filter>third_party\ffmpeg\libavutil</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\ffmpeg\libpostproc\postprocess.h">
+      <Filter>third_party\ffmpeg\libpostproc</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\ffmpeg\libpostproc\version.h">
+      <Filter>third_party\ffmpeg\libpostproc</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\ffmpeg\libswresample\swresample.h">
+      <Filter>third_party\ffmpeg\libswresample</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\ffmpeg\libswresample\version.h">
+      <Filter>third_party\ffmpeg\libswresample</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\ffmpeg\libswscale\swscale.h">
+      <Filter>third_party\ffmpeg\libswscale</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\ffmpeg\libswscale\version.h">
+      <Filter>third_party\ffmpeg\libswscale</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Action\Scheduler.h">
+      <Filter>Common\Action</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\Componet\Image.h">
+      <Filter>Resource\Componet</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\Componet\Media.h">
+      <Filter>Resource\Componet</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\Componet\Model.h">
+      <Filter>Resource\Componet</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\FilePath.h">
+      <Filter>Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\import.h">
+      <Filter>Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\IResourceLoader.h">
+      <Filter>Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\macros.h">
+      <Filter>Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\Resource.h">
+      <Filter>Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\Paser\PNGImage.h">
+      <Filter>Resource\Parser</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\Paser\FFmpeg.h">
+      <Filter>Resource\Parser</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\Paser\LabelImage.h">
+      <Filter>Resource\Parser</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\struct_common.h">
+      <Filter>Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\enum_common.h">
+      <Filter>Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\Componet\import.h">
+      <Filter>Resource\Componet</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\Paser\import.h">
+      <Filter>Resource\Parser</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\Paser\macros.h">
+      <Filter>Resource\Parser</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Control\ctrl_common.h">
+      <Filter>Common\Control</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Node\ColorNode.h">
+      <Filter>Common\Node</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Control\Static\CtrlFog.h">
+      <Filter>Common\Control\Static</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Control\Static\CtrlImage.h">
+      <Filter>Common\Control\Static</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Control\Static\CtrlLight.h">
+      <Filter>Common\Control\Static</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Control\Static\CtrlMask.h">
+      <Filter>Common\Control\Static</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Control\Static\CtrlModel.h">
+      <Filter>Common\Control\Static</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Control\Static\CtrlSpotLight.h">
+      <Filter>Common\Control\Static</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Control\Static\CtrlText.h">
+      <Filter>Common\Control\Static</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Control\Static\import.h">
+      <Filter>Common\Control\Static</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Control\Static\macros.h">
+      <Filter>Common\Control\Static</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Control\Dynamic\CtrlMedia.h">
+      <Filter>Common\Control\Dynamic</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Control\Dynamic\import.h">
+      <Filter>Common\Control\Dynamic</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Node\Animation.h">
+      <Filter>Common\Node</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Control\Dynamic\macros.h">
+      <Filter>Common\Control\Dynamic</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Control\import.h">
+      <Filter>Common\Control</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Control\Dynamic\CtrlFluid.h">
+      <Filter>Common\Control\Dynamic</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Action\ActionProxy.h">
+      <Filter>Common\Action</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Control\Dynamic\CtrlParticleSystem.h">
+      <Filter>Common\Control\Dynamic</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Common">
+      <UniqueIdentifier>{9cdc0d0a-4f1c-4121-938c-d25fc9b1103f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common\GL">
+      <UniqueIdentifier>{a4c06e44-b038-4733-b6e2-09cec111de75}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common\Node">
+      <UniqueIdentifier>{a34218fa-86f1-404a-9737-b2c387dfce15}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common\Tool">
+      <UniqueIdentifier>{e5114a92-a104-4929-bca2-d9d99bea4ec8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common\Scene">
+      <UniqueIdentifier>{047d16c0-0c89-43a7-9bb9-c667b50acd6a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common\View">
+      <UniqueIdentifier>{26240f59-9a91-4697-81d5-9318ce730ec0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common\Action">
+      <UniqueIdentifier>{1c8ab4ae-8924-4c39-8889-09946c2fdfe0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common\Control">
+      <UniqueIdentifier>{5a0df66e-333f-4f27-b4df-8e15e34d0e3f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common\DrawNode">
+      <UniqueIdentifier>{3e44173c-6952-46ba-8fb6-1ece5af3e59b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common\Shader">
+      <UniqueIdentifier>{af282e8f-c075-4311-a9d5-b6128b397090}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3d">
+      <UniqueIdentifier>{8ffa7b3f-1dfd-407f-8836-58bac15fd524}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3d\Cube">
+      <UniqueIdentifier>{2c39b975-13a1-4d99-82c2-406516f65b75}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2d">
+      <UniqueIdentifier>{591dc522-2c7b-4029-8d14-9bd2f6a9f4ac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2d\UI">
+      <UniqueIdentifier>{d88ba6b5-83d8-4f6f-83ad-5af8aad3320a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="third_party">
+      <UniqueIdentifier>{7c650d1e-e5fc-4fc4-8272-b6908f465e5d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="third_party\opengl">
+      <UniqueIdentifier>{952456ae-6b47-474a-b1fa-72927d0e99af}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="third_party\png">
+      <UniqueIdentifier>{1019e611-bd53-46c2-82eb-a75c1ce0d485}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="third_party\freetype">
+      <UniqueIdentifier>{ecd276a8-2c91-4209-a898-19c0c21f4013}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="third_party\freetype\freetype">
+      <UniqueIdentifier>{71624ed8-ec37-41c2-82fe-d2142598a2be}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="third_party\freetype\freetype\config">
+      <UniqueIdentifier>{b0ef7cf9-f35c-45f5-a2a9-d0fac178a883}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="third_party\freetype\freetype\internal">
+      <UniqueIdentifier>{3a8a872d-8c3d-4dad-a097-cf7312dd1429}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="third_party\freetype\freetype\internal\services">
+      <UniqueIdentifier>{1c53cbe9-80fd-495c-8287-ca9be747980e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common\XControl">
+      <UniqueIdentifier>{e6030aa8-169f-48b1-87a5-8a74ffba7103}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="third_party\ffmpeg">
+      <UniqueIdentifier>{29936e53-fb9e-4935-8a6a-e8d956d02d2d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="third_party\ffmpeg\libavcodec">
+      <UniqueIdentifier>{4bf343cf-d0ab-4571-93c0-0f74541310d6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="third_party\ffmpeg\libavdevice">
+      <UniqueIdentifier>{3dbf2eaf-6c06-400d-972b-514057aa87ef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="third_party\ffmpeg\libavfilter">
+      <UniqueIdentifier>{a449b02a-5814-4da9-a267-7f494f5bee76}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="third_party\ffmpeg\libavformat">
+      <UniqueIdentifier>{c4d282df-0891-4bf2-8968-d1bdc76561d5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="third_party\ffmpeg\libavutil">
+      <UniqueIdentifier>{cda66776-343b-48ed-a950-d8eb078cf575}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="third_party\ffmpeg\libpostproc">
+      <UniqueIdentifier>{78cfef14-a561-41cb-9b27-545d02872a4c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="third_party\ffmpeg\libswresample">
+      <UniqueIdentifier>{be0e2f01-9f01-4eb5-be12-c5968bdea4c9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="third_party\ffmpeg\libswscale">
+      <UniqueIdentifier>{46db9a52-8d1c-4c78-8469-01e959cb226a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource">
+      <UniqueIdentifier>{f2319a96-c99c-437a-98e9-9151cfb1b46d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource\Componet">
+      <UniqueIdentifier>{9df81cfb-9846-4989-81c1-b7ad6ba47ba6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource\Parser">
+      <UniqueIdentifier>{5000cb09-fb3c-4b63-963b-db40ce7a3db0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common\Control\Static">
+      <UniqueIdentifier>{41e328c9-4cba-41bd-96a3-c67773f733a5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common\Control\Dynamic">
+      <UniqueIdentifier>{a3cc60f5-a961-4271-a139-71a511a6684f}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

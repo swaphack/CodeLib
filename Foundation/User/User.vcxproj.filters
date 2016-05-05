@@ -1,0 +1,115 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Logger">
+      <UniqueIdentifier>{16612fa3-0c28-455a-8ce3-b32545dc99d3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Business">
+      <UniqueIdentifier>{87c0f2c1-2fd9-4eb4-96ee-04cdaa5fcf5e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Data">
+      <UniqueIdentifier>{da4c1d3c-d3d5-4681-80a0-b57e059d2ef9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Action">
+      <UniqueIdentifier>{714bd2e2-3702-4da5-907b-f5b94d6368c4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Data\Player">
+      <UniqueIdentifier>{847f981d-a539-44b7-9a4d-71a8daa405ad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DataBase">
+      <UniqueIdentifier>{a137351b-78a3-481b-a26d-382a68e066f7}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Logger\ILogger.h">
+      <Filter>Logger</Filter>
+    </ClInclude>
+    <ClInclude Include="Logger\Logger.h">
+      <Filter>Logger</Filter>
+    </ClInclude>
+    <ClInclude Include="Action\Action.h">
+      <Filter>Action</Filter>
+    </ClInclude>
+    <ClInclude Include="Action\IAction.h">
+      <Filter>Action</Filter>
+    </ClInclude>
+    <ClInclude Include="Business\BusinessAction.h">
+      <Filter>Business</Filter>
+    </ClInclude>
+    <ClInclude Include="Data\Player\IPlayer.h">
+      <Filter>Data\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Data\Player\Player.h">
+      <Filter>Data\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Data\Macros.h">
+      <Filter>Data</Filter>
+    </ClInclude>
+    <ClInclude Include="Business\BusinessLogger.h">
+      <Filter>Business</Filter>
+    </ClInclude>
+    <ClInclude Include="Data\DataTemplate.h">
+      <Filter>Data</Filter>
+    </ClInclude>
+    <ClInclude Include="user.h" />
+    <ClInclude Include="Business\BusinessDataBase.h">
+      <Filter>Business</Filter>
+    </ClInclude>
+    <ClInclude Include="DataBase\DataBase.h">
+      <Filter>DataBase</Filter>
+    </ClInclude>
+    <ClInclude Include="DataBase\IDataBase.h">
+      <Filter>DataBase</Filter>
+    </ClInclude>
+    <ClInclude Include="Logger\ILoggerRecord.h">
+      <Filter>Logger</Filter>
+    </ClInclude>
+    <ClInclude Include="DataBase\IDBRecord.h">
+      <Filter>DataBase</Filter>
+    </ClInclude>
+    <ClInclude Include="Business\BusinessGlobal.h">
+      <Filter>Business</Filter>
+    </ClInclude>
+    <ClInclude Include="Action\import.h">
+      <Filter>Action</Filter>
+    </ClInclude>
+    <ClInclude Include="Business\import.h">
+      <Filter>Business</Filter>
+    </ClInclude>
+    <ClInclude Include="Logger\import.h">
+      <Filter>Logger</Filter>
+    </ClInclude>
+    <ClInclude Include="DataBase\import.h">
+      <Filter>DataBase</Filter>
+    </ClInclude>
+    <ClInclude Include="Data\import.h">
+      <Filter>Data</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Logger\Logger.cpp">
+      <Filter>Logger</Filter>
+    </ClCompile>
+    <ClCompile Include="Action\Action.cpp">
+      <Filter>Action</Filter>
+    </ClCompile>
+    <ClCompile Include="Business\BusinessAction.cpp">
+      <Filter>Business</Filter>
+    </ClCompile>
+    <ClCompile Include="Data\Player\Player.cpp">
+      <Filter>Data\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Business\BusinessLogger.cpp">
+      <Filter>Business</Filter>
+    </ClCompile>
+    <ClCompile Include="Business\BusinessDataBase.cpp">
+      <Filter>Business</Filter>
+    </ClCompile>
+    <ClCompile Include="DataBase\DataBase.cpp">
+      <Filter>DataBase</Filter>
+    </ClCompile>
+    <ClCompile Include="Business\BusinessGlobal.cpp">
+      <Filter>Business</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Activity">
+      <UniqueIdentifier>{141fea11-a033-4440-a0d8-25b94d4d96d3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Command">
+      <UniqueIdentifier>{fc143c6b-8ee2-462f-9ea8-9613ac0bcc00}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Activity\HttpActivity.cpp">
+      <Filter>Activity</Filter>
+    </ClCompile>
+    <ClCompile Include="Command\HttpCommand.cpp">
+      <Filter>Command</Filter>
+    </ClCompile>
+    <ClCompile Include="WebApplication.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Activity\HttpActivity.h">
+      <Filter>Activity</Filter>
+    </ClInclude>
+    <ClInclude Include="Command\HttpCommand.h">
+      <Filter>Command</Filter>
+    </ClInclude>
+    <ClInclude Include="WebApplication.h" />
+    <ClInclude Include="Activity\import.h">
+      <Filter>Activity</Filter>
+    </ClInclude>
+    <ClInclude Include="Command\import.h">
+      <Filter>Command</Filter>
+    </ClInclude>
+    <ClInclude Include="web.h" />
+  </ItemGroup>
+</Project>

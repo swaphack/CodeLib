@@ -1,0 +1,268 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Base">
+      <UniqueIdentifier>{d7162747-1f51-4d4b-88f7-a8e65223d357}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework">
+      <UniqueIdentifier>{3591df3a-3cdc-40c4-b3bb-8fa9947420d2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Net">
+      <UniqueIdentifier>{d526387d-1b21-4352-9ba1-5082b5a28f56}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Stream">
+      <UniqueIdentifier>{2af82b78-bd87-4c0d-8f78-862e7a93f2c4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Security">
+      <UniqueIdentifier>{aec85179-4a37-401f-bcf2-03b5ece2b33c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Device">
+      <UniqueIdentifier>{90bd55d0-8005-43b5-b99b-2ce17e402ed3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Platform">
+      <UniqueIdentifier>{c92bde3a-6cd8-4880-8290-412380ace6c4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Platform\Window">
+      <UniqueIdentifier>{b42468cb-6164-46c2-aae3-706b8cb9a770}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Platform\Android">
+      <UniqueIdentifier>{f5db4de5-3d66-485f-80af-58887c59d61c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Platform\Implement">
+      <UniqueIdentifier>{be27e494-b965-4ce1-bb82-a163909e2182}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Base\File.h">
+      <Filter>Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\geometry.h">
+      <Filter>Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\Hash.h">
+      <Filter>Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\import.h">
+      <Filter>Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\Instance.h">
+      <Filter>Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\macros.h">
+      <Filter>Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\Types.h">
+      <Filter>Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Application.h">
+      <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\AutoReleasePool.h">
+      <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Command.h">
+      <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Container.h">
+      <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Dispatcher.h">
+      <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\IHandler.h">
+      <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\import.h">
+      <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\ITimer.h">
+      <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Object.h">
+      <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="Net\Client.h">
+      <Filter>Net</Filter>
+    </ClInclude>
+    <ClInclude Include="Net\DataQueue.h">
+      <Filter>Net</Filter>
+    </ClInclude>
+    <ClInclude Include="Net\import.h">
+      <Filter>Net</Filter>
+    </ClInclude>
+    <ClInclude Include="Net\macros.h">
+      <Filter>Net</Filter>
+    </ClInclude>
+    <ClInclude Include="Net\NetData.h">
+      <Filter>Net</Filter>
+    </ClInclude>
+    <ClInclude Include="Net\Server.h">
+      <Filter>Net</Filter>
+    </ClInclude>
+    <ClInclude Include="Net\Socket.h">
+      <Filter>Net</Filter>
+    </ClInclude>
+    <ClInclude Include="Net\SocketRecvHandler.h">
+      <Filter>Net</Filter>
+    </ClInclude>
+    <ClInclude Include="system.h" />
+    <ClInclude Include="Stream\import.h">
+      <Filter>Stream</Filter>
+    </ClInclude>
+    <ClInclude Include="Security\Decrypt.h">
+      <Filter>Security</Filter>
+    </ClInclude>
+    <ClInclude Include="Security\Encrypt.h">
+      <Filter>Security</Filter>
+    </ClInclude>
+    <ClInclude Include="Security\UnZip.h">
+      <Filter>Security</Filter>
+    </ClInclude>
+    <ClInclude Include="Security\Zip.h">
+      <Filter>Security</Filter>
+    </ClInclude>
+    <ClInclude Include="Security\ZipCommon.h">
+      <Filter>Security</Filter>
+    </ClInclude>
+    <ClInclude Include="Stream\Stream.h">
+      <Filter>Stream</Filter>
+    </ClInclude>
+    <ClInclude Include="Stream\StreamWriter.h">
+      <Filter>Stream</Filter>
+    </ClInclude>
+    <ClInclude Include="Stream\StreamReader.h">
+      <Filter>Stream</Filter>
+    </ClInclude>
+    <ClInclude Include="Stream\StreamReader.h">
+      <Filter>Stream</Filter>
+    </ClInclude>
+    <ClInclude Include="Stream\FileStream.h">
+      <Filter>Stream</Filter>
+    </ClInclude>
+    <ClInclude Include="Stream\IStreamBase.h">
+      <Filter>Stream</Filter>
+    </ClInclude>
+    <ClInclude Include="Stream\StreamBase.h">
+      <Filter>Stream</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\Directory.h">
+      <Filter>Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\BitHelper.h">
+      <Filter>Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Stream\MultiStream.h">
+      <Filter>Stream</Filter>
+    </ClInclude>
+    <ClInclude Include="Device\import.h">
+      <Filter>Device</Filter>
+    </ClInclude>
+    <ClInclude Include="Device\KeyBoard.h">
+      <Filter>Device</Filter>
+    </ClInclude>
+    <ClInclude Include="Device\Mouse.h">
+      <Filter>Device</Filter>
+    </ClInclude>
+    <ClInclude Include="Device\macros.h">
+      <Filter>Device</Filter>
+    </ClInclude>
+    <ClInclude Include="Platform\Implement\WindowImpl.h">
+      <Filter>Platform\Implement</Filter>
+    </ClInclude>
+    <ClInclude Include="Platform\Implement\MessageImpl.h">
+      <Filter>Platform\Implement</Filter>
+    </ClInclude>
+    <ClInclude Include="Device\DeviceEventHandler.h">
+      <Filter>Device</Filter>
+    </ClInclude>
+    <ClInclude Include="Platform\Window\Window.h">
+      <Filter>Platform\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="Platform\Implement\import.h">
+      <Filter>Platform\Implement</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\Random.h">
+      <Filter>Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\FuncHandler.h">
+      <Filter>Base</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Base\File.cpp">
+      <Filter>Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Base\Hash.cpp">
+      <Filter>Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Application.cpp">
+      <Filter>Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\AutoReleasePool.cpp">
+      <Filter>Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Command.cpp">
+      <Filter>Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Container.cpp">
+      <Filter>Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Dispatcher.cpp">
+      <Filter>Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Object.cpp">
+      <Filter>Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="Net\Client.cpp">
+      <Filter>Net</Filter>
+    </ClCompile>
+    <ClCompile Include="Net\DataQueue.cpp">
+      <Filter>Net</Filter>
+    </ClCompile>
+    <ClCompile Include="Net\Server.cpp">
+      <Filter>Net</Filter>
+    </ClCompile>
+    <ClCompile Include="Net\Socket.cpp">
+      <Filter>Net</Filter>
+    </ClCompile>
+    <ClCompile Include="Security\Zip.cpp">
+      <Filter>Security</Filter>
+    </ClCompile>
+    <ClCompile Include="Security\ZipCommon.cpp">
+      <Filter>Security</Filter>
+    </ClCompile>
+    <ClCompile Include="Stream\StreamBase.cpp">
+      <Filter>Stream</Filter>
+    </ClCompile>
+    <ClCompile Include="Stream\Stream.cpp">
+      <Filter>Stream</Filter>
+    </ClCompile>
+    <ClCompile Include="Stream\StreamWriter.cpp">
+      <Filter>Stream</Filter>
+    </ClCompile>
+    <ClCompile Include="Stream\StreamReader.cpp">
+      <Filter>Stream</Filter>
+    </ClCompile>
+    <ClCompile Include="Stream\FileStream.cpp">
+      <Filter>Stream</Filter>
+    </ClCompile>
+    <ClCompile Include="Base\Directory.cpp">
+      <Filter>Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Base\BitHelper.cpp">
+      <Filter>Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Stream\MultiStream.cpp">
+      <Filter>Stream</Filter>
+    </ClCompile>
+    <ClCompile Include="Device\Mouse.cpp">
+      <Filter>Device</Filter>
+    </ClCompile>
+    <ClCompile Include="Device\KeyBoard.cpp">
+      <Filter>Device</Filter>
+    </ClCompile>
+    <ClCompile Include="Base\Random.cpp">
+      <Filter>Base</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

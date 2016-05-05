@@ -1,0 +1,151 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{BEAC5C99-0F40-47AE-8093-1B5F8C5FF6BA}</ProjectGuid>
+    <RootNamespace>System</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup />
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <BrowseInformation>true</BrowseInformation>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+    <Bscmake>
+      <PreserveSbr>true</PreserveSbr>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="Base\BitHelper.h" />
+    <ClInclude Include="Base\Directory.h" />
+    <ClInclude Include="Base\File.h" />
+    <ClInclude Include="Base\FuncHandler.h" />
+    <ClInclude Include="Base\geometry.h" />
+    <ClInclude Include="Base\Hash.h" />
+    <ClInclude Include="Base\import.h" />
+    <ClInclude Include="Base\Instance.h" />
+    <ClInclude Include="Base\macros.h" />
+    <ClInclude Include="Base\Random.h" />
+    <ClInclude Include="Base\Types.h" />
+    <ClInclude Include="Device\DeviceEventHandler.h" />
+    <ClInclude Include="Device\import.h" />
+    <ClInclude Include="Device\KeyBoard.h" />
+    <ClInclude Include="Device\macros.h" />
+    <ClInclude Include="Device\Mouse.h" />
+    <ClInclude Include="Framework\Application.h" />
+    <ClInclude Include="Framework\AutoReleasePool.h" />
+    <ClInclude Include="Framework\Command.h" />
+    <ClInclude Include="Framework\Container.h" />
+    <ClInclude Include="Framework\Dispatcher.h" />
+    <ClInclude Include="Framework\IHandler.h" />
+    <ClInclude Include="Framework\import.h" />
+    <ClInclude Include="Framework\ITimer.h" />
+    <ClInclude Include="Framework\Object.h" />
+    <ClInclude Include="Net\Client.h" />
+    <ClInclude Include="Net\DataQueue.h" />
+    <ClInclude Include="Net\import.h" />
+    <ClInclude Include="Net\macros.h" />
+    <ClInclude Include="Net\NetData.h" />
+    <ClInclude Include="Net\Server.h" />
+    <ClInclude Include="Net\Socket.h" />
+    <ClInclude Include="Net\SocketRecvHandler.h" />
+    <ClInclude Include="Platform\Implement\import.h" />
+    <ClInclude Include="Platform\Implement\MessageImpl.h" />
+    <ClInclude Include="Platform\Implement\WindowImpl.h" />
+    <ClInclude Include="Platform\Window\Window.h" />
+    <ClInclude Include="Security\Decrypt.h" />
+    <ClInclude Include="Security\Encrypt.h" />
+    <ClInclude Include="Security\UnZip.h" />
+    <ClInclude Include="Security\Zip.h" />
+    <ClInclude Include="Security\ZipCommon.h" />
+    <ClInclude Include="Stream\FileStream.h" />
+    <ClInclude Include="Stream\import.h" />
+    <ClInclude Include="Stream\MultiStream.h" />
+    <ClInclude Include="Stream\Stream.h" />
+    <ClInclude Include="Stream\IStreamBase.h" />
+    <ClInclude Include="Stream\StreamBase.h" />
+    <ClInclude Include="Stream\StreamReader.h" />
+    <ClInclude Include="Stream\StreamWriter.h" />
+    <ClInclude Include="system.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Base\BitHelper.cpp" />
+    <ClCompile Include="Base\Directory.cpp" />
+    <ClCompile Include="Base\File.cpp" />
+    <ClCompile Include="Base\Hash.cpp" />
+    <ClCompile Include="Base\Random.cpp" />
+    <ClCompile Include="Device\KeyBoard.cpp" />
+    <ClCompile Include="Device\Mouse.cpp" />
+    <ClCompile Include="Framework\Application.cpp" />
+    <ClCompile Include="Framework\AutoReleasePool.cpp" />
+    <ClCompile Include="Framework\Command.cpp" />
+    <ClCompile Include="Framework\Container.cpp" />
+    <ClCompile Include="Framework\Dispatcher.cpp" />
+    <ClCompile Include="Framework\Object.cpp" />
+    <ClCompile Include="Net\Client.cpp" />
+    <ClCompile Include="Net\DataQueue.cpp" />
+    <ClCompile Include="Net\Server.cpp" />
+    <ClCompile Include="Net\Socket.cpp" />
+    <ClCompile Include="Security\Zip.cpp" />
+    <ClCompile Include="Security\ZipCommon.cpp" />
+    <ClCompile Include="Stream\FileStream.cpp" />
+    <ClCompile Include="Stream\MultiStream.cpp" />
+    <ClCompile Include="Stream\StreamReader.cpp" />
+    <ClCompile Include="Stream\Stream.cpp" />
+    <ClCompile Include="Stream\StreamBase.cpp" />
+    <ClCompile Include="Stream\StreamWriter.cpp" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
