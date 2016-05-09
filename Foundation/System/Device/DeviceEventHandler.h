@@ -5,7 +5,9 @@
 namespace sys
 {
 	// ¼üÅÌ°´Å¥ÊÂ¼þ
-	typedef void(Object::*KEYBOARD_BUTTON_HANDLER)(BoardKey key, ButtonStatus status);
+	typedef void (Object::*KEYBOARD_BUTTON_HANDLER)(BoardKey key, ButtonStatus status);
+
+	
 
 	struct KeyBoardButtonEvent
 	{

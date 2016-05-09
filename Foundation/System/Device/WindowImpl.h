@@ -1,5 +1,8 @@
 #pragma once
 
+#include "Signal.h"
+#include ""
+
 namespace sys
 {
 	class WindowImpl
@@ -13,5 +16,7 @@ namespace sys
 		virtual void setSize(float width, float height) = 0;
 		// 设置标题
 		virtual void setTitle(const char* title) = 0;
+		// 接受信号的处理
+		virtual void onRecvSignal(Signal* signal) = 0;
 	};
 }

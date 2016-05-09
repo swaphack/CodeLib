@@ -33,6 +33,8 @@ namespace sys
 		}
 	};
 
+
+
 	// 客户端处理接收数据的函数指针
 	typedef void (Object::*CLIENT_RECV_HANDLER)(DataQueue& data);
 	// 客户端接收数据的处理者

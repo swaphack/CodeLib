@@ -166,25 +166,25 @@
     <ClInclude Include="Device\macros.h">
       <Filter>Device</Filter>
     </ClInclude>
-    <ClInclude Include="Platform\Implement\WindowImpl.h">
-      <Filter>Platform\Implement</Filter>
-    </ClInclude>
-    <ClInclude Include="Platform\Implement\MessageImpl.h">
-      <Filter>Platform\Implement</Filter>
-    </ClInclude>
     <ClInclude Include="Device\DeviceEventHandler.h">
       <Filter>Device</Filter>
     </ClInclude>
     <ClInclude Include="Platform\Window\Window.h">
       <Filter>Platform\Window</Filter>
     </ClInclude>
-    <ClInclude Include="Platform\Implement\import.h">
-      <Filter>Platform\Implement</Filter>
-    </ClInclude>
     <ClInclude Include="Base\Random.h">
       <Filter>Base</Filter>
     </ClInclude>
     <ClInclude Include="Base\FuncHandler.h">
+      <Filter>Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Device\WindowImpl.h">
+      <Filter>Device</Filter>
+    </ClInclude>
+    <ClInclude Include="Device\Signal.h">
+      <Filter>Device</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\Tuple.h">
       <Filter>Base</Filter>
     </ClInclude>
   </ItemGroup>
@@ -263,6 +263,9 @@
     </ClCompile>
     <ClCompile Include="Base\Random.cpp">
       <Filter>Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Device\Signal.cpp">
+      <Filter>Device</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

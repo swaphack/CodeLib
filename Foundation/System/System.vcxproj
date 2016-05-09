@@ -76,12 +76,15 @@
     <ClInclude Include="Base\Instance.h" />
     <ClInclude Include="Base\macros.h" />
     <ClInclude Include="Base\Random.h" />
+    <ClInclude Include="Base\Tuple.h" />
     <ClInclude Include="Base\Types.h" />
     <ClInclude Include="Device\DeviceEventHandler.h" />
     <ClInclude Include="Device\import.h" />
     <ClInclude Include="Device\KeyBoard.h" />
     <ClInclude Include="Device\macros.h" />
+    <ClInclude Include="Device\Signal.h" />
     <ClInclude Include="Device\Mouse.h" />
+    <ClInclude Include="Device\WindowImpl.h" />
     <ClInclude Include="Framework\Application.h" />
     <ClInclude Include="Framework\AutoReleasePool.h" />
     <ClInclude Include="Framework\Command.h" />
@@ -99,9 +102,6 @@
     <ClInclude Include="Net\Server.h" />
     <ClInclude Include="Net\Socket.h" />
     <ClInclude Include="Net\SocketRecvHandler.h" />
-    <ClInclude Include="Platform\Implement\import.h" />
-    <ClInclude Include="Platform\Implement\MessageImpl.h" />
-    <ClInclude Include="Platform\Implement\WindowImpl.h" />
     <ClInclude Include="Platform\Window\Window.h" />
     <ClInclude Include="Security\Decrypt.h" />
     <ClInclude Include="Security\Encrypt.h" />
@@ -126,6 +126,7 @@
     <ClCompile Include="Base\Random.cpp" />
     <ClCompile Include="Device\KeyBoard.cpp" />
     <ClCompile Include="Device\Mouse.cpp" />
+    <ClCompile Include="Device\Signal.cpp" />
     <ClCompile Include="Framework\Application.cpp" />
     <ClCompile Include="Framework\AutoReleasePool.cpp" />
     <ClCompile Include="Framework\Command.cpp" />

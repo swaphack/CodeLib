@@ -10,23 +10,24 @@ namespace sys
 
 		FuncHandler() :target(nullptr), handler(nullptr){}
 
+
 		void hand(...)
 		{
 			if (!empty())
 			{
-				(target->*hander)(...);
+				(target->*handler)(...);
 			}
 		}
 
 		bool empty()
 		{
-			return target == nullptr || hander == nullptr;
+			return target == nullptr || handler == nullptr;
 		}
 
 		void clean()
 		{
 			target = nullptr;
-			hander = nullptr;
+			handler = nullptr;
 		}
 	};
 }
