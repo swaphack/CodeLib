@@ -83,7 +83,9 @@ void Node::clearAllChildren()
 
 	while (begin != _children.end())
 	{
-		static_cast<Node*>((*begin))->removeFromParent();
+		Node* node = dynamic_cast<Node*>((*begin));
+		ASSERT(node != nullptr);
+		node->removeFromParent();
 		begin++;
 	}
 
@@ -92,7 +94,7 @@ void Node::clearAllChildren()
 
 Node* Node::getChildByID( long id )
 {
-	return static_cast<Node*>(_children.getObject(id));
+	return dynamic_cast<Node*>(_children.getObject(id));
 }
 
 void Node::setTag( int tag )

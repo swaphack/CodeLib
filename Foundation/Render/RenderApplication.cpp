@@ -121,3 +121,8 @@ void RenderApplication::initProtocolManagers()
 {
 
 }
+
+void RenderApplication::show()
+{
+
+}

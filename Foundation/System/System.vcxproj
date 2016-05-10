@@ -104,8 +104,8 @@
     <ClInclude Include="Net\SocketRecvHandler.h" />
     <ClInclude Include="Platform\import.h" />
     <ClInclude Include="Platform\macros.h" />
-    <ClInclude Include="Platform\Window\import.h" />
-    <ClInclude Include="Platform\Window\Window.h" />
+    <ClInclude Include="Platform\Windows\import.h" />
+    <ClInclude Include="Platform\Windows\Window.h" />
     <ClInclude Include="Security\Decrypt.h" />
     <ClInclude Include="Security\Encrypt.h" />
     <ClInclude Include="Security\UnZip.h" />
@@ -140,7 +140,7 @@
     <ClCompile Include="Net\DataQueue.cpp" />
     <ClCompile Include="Net\Server.cpp" />
     <ClCompile Include="Net\Socket.cpp" />
-    <ClCompile Include="Platform\Window\Window.cpp" />
+    <ClCompile Include="Platform\Windows\Window.cpp" />
     <ClCompile Include="Security\Zip.cpp" />
     <ClCompile Include="Security\ZipCommon.cpp" />
     <ClCompile Include="Stream\FileStream.cpp" />

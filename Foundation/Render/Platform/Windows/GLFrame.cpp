@@ -14,11 +14,13 @@ _render(nullptr)
 
 GLFrame::~GLFrame()
 {
-
+	SAFE_DELETE(_render);
 }
 
 void GLFrame::initWindow(const char* title, int width, int height, int bits, RenderApplication* render)
 {
+	ASSERT(render != nullptr);
+
 	_bits = bits;
 	_render = render;
 	Window::initWindow(title, width, height);
@@ -117,6 +119,12 @@ void GLFrame::listen()
 {
 	MSG msg;
 	bool done = false;
+
+	if (_render)
+	{
+		_render->setFrameSize(getWidth(), getHeight());
+		_render->show();
+	}
 
 	while (!done)
 	{

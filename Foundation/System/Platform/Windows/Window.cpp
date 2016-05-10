@@ -105,11 +105,14 @@ bool Window::init()
 	DWORD dwStyle;				// 窗口风格
 	RECT WindowRect;			// 取得矩形的左上角和右下角的坐标值
 
+	long left = (GetSystemMetrics(SM_CXSCREEN) - _width)* 0.5f;
+	long top = (GetSystemMetrics(SM_CYSCREEN) - _height)* 0.5f;
 
-	WindowRect.left = (long)0;			// 将Left   设为 0
-	WindowRect.right = (long)_width;       // 将Right 设为要求的宽度
-	WindowRect.top = (long)0;             // 将Top    设为 0
-	WindowRect.bottom = (long)_height;     // 将Bottom 设为要求的高度
+
+	WindowRect.left = (long)left;			// 将Left   设为 0
+	WindowRect.right = (long)left + _width;       // 将Right 设为要求的宽度
+	WindowRect.top = (long)top;             // 将Top    设为 0
+	WindowRect.bottom = (long)top + _height;     // 将Bottom 设为要求的高度
 
 	_instance = GetModuleHandle(NULL);          // 取得我们窗口的实例
 
@@ -133,7 +136,7 @@ bool Window::init()
 	dwExStyle = WS_EX_APPWINDOW | WS_EX_WINDOWEDGE;	// 扩展窗体风格
 	dwStyle = WS_OVERLAPPEDWINDOW;                    // 窗体风格
 
-	AdjustWindowRectEx(&WindowRect, dwStyle, FALSE, dwExStyle); // 调整窗口大小
+	//AdjustWindowRectEx(&WindowRect, dwStyle, FALSE, dwExStyle); // 调整窗口大小
 	if (!(_wnd = CreateWindowEx(
 		dwExStyle,									// 扩展窗体风格
 		TEXT("OpenGL"),								// 类名字
@@ -141,7 +144,7 @@ bool Window::init()
 		WS_CLIPSIBLINGS |							// 必须的窗体风格属性
 		WS_CLIPCHILDREN |							// 必须的窗体风格属性
 		dwStyle,									// 选择的窗体属性
-		0, 0,										// 窗口位置
+		WindowRect.left, WindowRect.top,			// 窗口位置
 		WindowRect.right - WindowRect.left,			// 宽度
 		WindowRect.bottom - WindowRect.top,			// 高度
 		NULL,                                       // 无父窗口
@@ -153,10 +156,6 @@ bool Window::init()
 		MessageBox(NULL, TEXT("不能创建一个窗口设备描述表"), TEXT("错误"), MB_OK | MB_ICONEXCLAMATION);
 		return false;	// 返回 FALSE
 	}
-
-	ShowWindow(_wnd, SW_SHOW);	// 显示窗口
-	SetForegroundWindow(_wnd);	// 略略提高优先级
-	SetFocus(_wnd);	// 设置键盘的焦点至此窗口
 
 	return true;
 }

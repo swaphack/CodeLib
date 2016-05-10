@@ -14,20 +14,20 @@ WndRender::~WndRender()
 	this->dispose();
 }
 
-void WndRender::test()
+void WndRender::show()
 {
-	// this->testFog();
+	// for 3d
 
-	//this->testImage();
+	//this->testFog();
+	//this->testModel();
 
-	//this->testText();
+	this->testImage();
+
+	this->testText();
 
 	//this->testMask();
 
 	//this->testMedia();
-
-	//this->testModel();
-	
 
 // 	TestDrawNode* pTestDrawNode = new TestDrawNode();
 // 	pTestDrawNode->setScale(0.125f, 0.125f, 0.125f);
@@ -35,7 +35,7 @@ void WndRender::test()
 // 	AUTO_RELEASE_OBJECT(pTestDrawNode);
 // 	this->getCanvas()->getRoot()->addChild(pTestDrawNode);
 
-	this->testParticle();
+	//this->testParticle();
 
 }
 
@@ -44,31 +44,31 @@ void WndRender::testImage()
 	CtrlImage* pImage = new CtrlImage();
 	pImage->setImagePath("Resource/sqi.png");
 	pImage->setPosition(512, 384, 0);
-	pImage->setRectVisible(true);
-	pImage->setRectColor(sys::Color4B(255, 0, 0, 255));
+	//pImage->setRectVisible(true);
+	//pImage->setRectColor(sys::Color4B(255, 0, 0, 255));
 	//pImage->setVolume(200, 200, 0);
 	AUTO_RELEASE_OBJECT(pImage);
 	this->getCanvas()->getRoot()->addChild(pImage);
 
-	/*
-	pImage = new CtrlImage();
-	pImage->setImagePath("Resource/sqi.png");
-	pImage->setPosition(500, 350, 0);
-	AUTO_RELEASE_OBJECT(pImage);
-	this->getCanvas()->getRoot()->addChild(pImage);
-
-	pImage = new CtrlImage();
-	pImage->setImagePath("Resource/sqi.png");
-	pImage->setPosition(550, 384, 0);
-	AUTO_RELEASE_OBJECT(pImage);
-	this->getCanvas()->getRoot()->addChild(pImage);
-
-	pImage = new CtrlImage();
-	pImage->setImagePath("Resource/sqi.png");
-	pImage->setPosition(450, 350, 0);
-	AUTO_RELEASE_OBJECT(pImage);
-	this->getCanvas()->getRoot()->addChild(pImage);
-	*/
+	
+// 	pImage = new CtrlImage();
+// 	pImage->setImagePath("Resource/sqi.png");
+// 	pImage->setPosition(500, 350, 0);
+// 	AUTO_RELEASE_OBJECT(pImage);
+// 	this->getCanvas()->getRoot()->addChild(pImage);
+// 
+// 	pImage = new CtrlImage();
+// 	pImage->setImagePath("Resource/sqi.png");
+// 	pImage->setPosition(550, 384, 0);
+// 	AUTO_RELEASE_OBJECT(pImage);
+// 	this->getCanvas()->getRoot()->addChild(pImage);
+// 
+// 	pImage = new CtrlImage();
+// 	pImage->setImagePath("Resource/sqi.png");
+// 	pImage->setPosition(450, 350, 0);
+// 	AUTO_RELEASE_OBJECT(pImage);
+// 	this->getCanvas()->getRoot()->addChild(pImage);
+	
 }
 
 void WndRender::testClock()
@@ -210,6 +210,7 @@ void WndRender::testMask()
 void WndRender::testMedia()
 {
 	CtrlMedia* pMedia = new CtrlMedia();
+	AUTO_RELEASE_OBJECT(pMedia);
 	pMedia->setMediaPath("Resource/1.flv");
 	pMedia->setPosition(512, 384, 0.0f);
 	pMedia->start();

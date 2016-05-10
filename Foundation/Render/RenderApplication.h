@@ -13,6 +13,8 @@ namespace render
 		virtual void init();
 		virtual void update();
 		virtual void dispose(); 
+
+		virtual void show();
 		
 		Canvas* getCanvas();
 

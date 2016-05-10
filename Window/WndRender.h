@@ -8,7 +8,7 @@ public:
 	WndRender();
 	virtual ~WndRender();
 public:
-	void test();
+	virtual void show();
 	void testImage();
 	void testClock();
 	void testModel();
