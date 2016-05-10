@@ -107,6 +107,7 @@
     <ClCompile Include="Common\View\View.cpp" />
     <ClCompile Include="Common\View\ViewConfig.cpp" />
     <ClCompile Include="Common\XControl\CtrlPixel.cpp" />
+    <ClCompile Include="Platform\Window\GLFrame.cpp" />
     <ClCompile Include="RenderApplication.cpp" />
     <ClCompile Include="Resource\Componet\Image.cpp" />
     <ClCompile Include="Resource\Componet\Media.cpp" />
@@ -183,6 +184,9 @@
     <ClInclude Include="Common\View\ViewConfig.h" />
     <ClInclude Include="Common\XControl\CtrlPixel.h" />
     <ClInclude Include="Common\XControl\import.h" />
+    <ClInclude Include="Platform\import.h" />
+    <ClInclude Include="Platform\Window\GLFrame.h" />
+    <ClInclude Include="Platform\Window\import.h" />
     <ClInclude Include="render.h" />
     <ClInclude Include="RenderApplication.h" />
     <ClInclude Include="Resource\Componet\Image.h" />

@@ -1,3 +1,4 @@
+/*
 #include <windows.h>
 #include <stdio.h>
 
@@ -310,7 +311,7 @@ int  WINAPI WinMain(HINSTANCE	hInstance,                 // 当前窗口实例
 
 	fullscreen = FALSE; // FALSE为窗口模式
 	// 创建OpenGL窗口
-	/*CreateGLWindow函数的参数依次为标题、宽度、高度、色彩深度，以及全屏标志。就这么简单！我很欣赏这段代码的简洁。如果未能创建成功，函数返回FALSE。程序立即退出。*/
+	// CreateGLWindow函数的参数依次为标题、宽度、高度、色彩深度，以及全屏标志。就这么简单！我很欣赏这段代码的简洁。如果未能创建成功，函数返回FALSE。程序立即退出
 	if (!CreateGLWindow("win32 ",WINDOW_SIZE_WIDTH,WINDOW_SIZE_HEIGHT,16,fullscreen))
 	{
 		return 0;	// 失败退出
@@ -358,3 +359,5 @@ int  WINAPI WinMain(HINSTANCE	hInstance,                 // 当前窗口实例
 	KillGLWindow();                                                                                                                                                          // 销毁窗口
 	return (msg.wParam);                                                                                                                           // 退出程序
 }
+
+*/

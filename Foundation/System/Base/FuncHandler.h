@@ -11,11 +11,11 @@ namespace sys
 		FuncHandler() :target(nullptr), handler(nullptr){}
 
 
-		void hand(...)
+		void hand(void* params)
 		{
 			if (!empty())
 			{
-				(target->*handler)(...);
+				(target->*handler)(params);
 			}
 		}
 

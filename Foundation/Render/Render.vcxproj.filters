@@ -129,6 +129,9 @@
     <ClCompile Include="Common\Control\Dynamic\CtrlParticleSystem.cpp">
       <Filter>Common\Control\Dynamic</Filter>
     </ClCompile>
+    <ClCompile Include="Platform\Window\GLFrame.cpp">
+      <Filter>Platform\Window</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Canvas.h" />
@@ -998,6 +1001,15 @@
     <ClInclude Include="Common\Control\Dynamic\CtrlParticleSystem.h">
       <Filter>Common\Control\Dynamic</Filter>
     </ClInclude>
+    <ClInclude Include="Platform\Window\GLFrame.h">
+      <Filter>Platform\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="Platform\import.h">
+      <Filter>Platform</Filter>
+    </ClInclude>
+    <ClInclude Include="Platform\Window\import.h">
+      <Filter>Platform\Window</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Common">
@@ -1110,6 +1122,12 @@
     </Filter>
     <Filter Include="Common\Control\Dynamic">
       <UniqueIdentifier>{a3cc60f5-a961-4271-a139-71a511a6684f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Platform">
+      <UniqueIdentifier>{bdcc9f5f-cc09-4649-ba7d-b20f2f85158e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Platform\Window">
+      <UniqueIdentifier>{b2c7b399-fa6c-49e8-9325-933e2dcec101}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

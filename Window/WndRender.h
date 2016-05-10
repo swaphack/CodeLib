@@ -6,7 +6,7 @@ class WndRender : public render::RenderApplication
 {
 public:
 	WndRender();
-	~WndRender();
+	virtual ~WndRender();
 public:
 	void test();
 	void testImage();

@@ -187,6 +187,15 @@
     <ClInclude Include="Base\Tuple.h">
       <Filter>Base</Filter>
     </ClInclude>
+    <ClInclude Include="Platform\macros.h">
+      <Filter>Platform</Filter>
+    </ClInclude>
+    <ClInclude Include="Platform\import.h">
+      <Filter>Platform</Filter>
+    </ClInclude>
+    <ClInclude Include="Platform\Window\import.h">
+      <Filter>Platform\Window</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Base\File.cpp">
@@ -266,6 +275,9 @@
     </ClCompile>
     <ClCompile Include="Device\Signal.cpp">
       <Filter>Device</Filter>
+    </ClCompile>
+    <ClCompile Include="Platform\Window\Window.cpp">
+      <Filter>Platform\Window</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

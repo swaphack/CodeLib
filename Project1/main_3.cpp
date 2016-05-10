@@ -2,6 +2,8 @@
 
 #include <vadefs.h>
 
+#include <tuple>
+
 using namespace  sys;
 
 typedef void (Object::*find)(int id);
@@ -26,10 +28,4 @@ private:
 int main(int argc, char** argv)
 {
 	Test* test = new Test();
-
-	Finder finder;
-	finder.target = test;
-	finder.handler = find_selector(Test::search);
-
-	finder.hand(12);
 }

@@ -1,22 +1,26 @@
 #pragma once
 
 #include "Signal.h"
-#include ""
+
 
 namespace sys
 {
 	class WindowImpl
 	{
 	public:
-		virtual ~WindowImpl() = 0;
+		virtual ~WindowImpl(){};
 	public:
-		// 设置窗口位置
-		virtual void setPosition(float x, float y) = 0;
-		// 设置窗口大小
-		virtual void setSize(float width, float height) = 0;
-		// 设置标题
-		virtual void setTitle(const char* title) = 0;
+		// 窗口位置x
+		virtual float getPositionX() = 0;
+		// 窗口位置y
+		virtual float getPositionY() = 0;
+		// 窗口宽度
+		virtual float getWidth() = 0;
+		// 窗口高度
+		virtual float getHeight() = 0;
+		// 标题
+		virtual const char* getTitle() = 0;
 		// 接受信号的处理
-		virtual void onRecvSignal(Signal* signal) = 0;
+		virtual bool onRecvSignal(Signal* signal) = 0;
 	};
 }
