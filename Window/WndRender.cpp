@@ -35,7 +35,7 @@ void WndRender::show()
 // 	AUTO_RELEASE_OBJECT(pTestDrawNode);
 // 	this->getCanvas()->getRoot()->addChild(pTestDrawNode);
 
-	//this->testParticle();
+	this->testParticle();
 
 }
 

@@ -1,5 +1,8 @@
 #pragma once
 
+#include <string>
+#include "system.h"
+
 namespace render
 {
 	// 图片数据描述结构
