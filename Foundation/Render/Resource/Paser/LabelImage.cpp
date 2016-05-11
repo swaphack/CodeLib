@@ -34,10 +34,10 @@ struct FT_CHAR_DATA
 
 	void printString()
 	{
-		printf("width %d, height %d\n", width, height);
-		printf("advX %d, advY %d\n", advX, advY);
-		printf("deltaX %d, deltaY %d\n", deltaX, deltaY);
-		printf("\n");
+		LOG("width %d, height %d\n", width, height);
+		LOG("advX %d, advY %d\n", advX, advY);
+		LOG("deltaX %d, deltaY %d\n", deltaX, deltaY);
+		LOG("\n");
 	}
 };
 

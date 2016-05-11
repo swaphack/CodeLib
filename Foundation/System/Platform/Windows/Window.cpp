@@ -2,21 +2,71 @@
 
 using namespace sys;
 
+#include <map>
 
-static Window* g_Window = nullptr;
+class Windows
+{
+public:
+	Windows();
+	~Windows();
+public:
+	void addWindow(HWND wnd, Window* window);
+	void removeWindow(HWND wnd);
+	Window* getWindow(HWND hwnd);
+private:
+	std::map<HWND, Window*> _windows;
+};
 
+Windows::Windows()
+{
+
+}
+
+Windows::~Windows()
+{
+	_windows.clear();
+}
+
+void Windows::addWindow(HWND wnd, Window* window)
+{
+	if (window == nullptr)
+	{
+		return;
+	}
+	_windows[wnd] = window;
+}
+
+void Windows::removeWindow(HWND wnd)
+{
+	_windows.erase(wnd);
+}
+
+Window* Windows::getWindow(HWND hwnd)
+{
+	std::map<HWND, Window*>::iterator it = _windows.find(hwnd);
+	if (it != _windows.end())
+	{
+		return it->second;
+	}
+
+	return nullptr;
+}
+
+
+//////////////////////////////////////////////////////////////////////////
 LRESULT CALLBACK WndProc(
 	HWND hWnd,                          // 窗口的句柄
 	UINT uMsg,                          // 窗口的消息
 	WPARAM wParam,                      // 附加的消息内容
 	LPARAM lParam)						// 附加的消息内容
 {
-	if (g_Window)
+	Window* window = Instance<Windows>::getInstance()->getWindow(hWnd);
+	if (window)
 	{
 		Tuple3<UINT, WPARAM, LPARAM>* params = new Tuple3<UINT, WPARAM, LPARAM>(uMsg, wParam, lParam);
 		Signal* signal = new Signal();
 		signal->setMessage(params);
-		if (g_Window->onRecvSignal(signal))
+		if (window->onRecvSignal(signal))
 		{
 			delete params;
 			delete signal;
@@ -43,22 +93,25 @@ LPCWCHAR getWCHAR(const char* szStr)
 
 //////////////////////////////////////////////////////////////////////////
 
+#define CLASS_NAME "OpenGL"
+
 Window::Window()
 :_wnd(NULL),
 _instance(NULL),
 _width(0),
 _height(0),
 _posX(-1),
-_posY(-1)
+_posY(-1),
+_keyBoard(nullptr),
+_mouse(nullptr)
 {
-	ASSERT(g_Window == nullptr);
-	g_Window = this;
 }
 
 Window::~Window()
 {
 	this->dispose();
-	g_Window = nullptr;
+
+	Instance<Windows>::getInstance()->removeWindow(getWnd());
 }
 
 void Window::initWindow(const char* title, int width, int height)
@@ -82,19 +135,22 @@ bool Window::onRecvSignal(Signal* signal)
 		return false;
 	}
 
-	Tuple3<UINT, WPARAM, LPARAM>* params = static_cast<Tuple3<UINT, WPARAM, LPARAM>*>(signal->getMessage());
-	if (params == nullptr)
+	if (onHandSignal(signal))
 	{
-		return false;
+		return true;
 	}
 
-	switch (params->t1)
-	{
-	default:
-		return false;
-	}
+	return false;
+}
 
-	return true;
+KeyBoard* Window::getKeyBoard()
+{
+	return _keyBoard;
+}
+
+Mouse* Window::getMouse()
+{
+	return _mouse;
 }
 
 bool Window::init()
@@ -103,16 +159,9 @@ bool Window::init()
 	WNDCLASS sys;				// 窗口类结构
 	DWORD dwExStyle;			// 扩展窗口风格
 	DWORD dwStyle;				// 窗口风格
-	RECT WindowRect;			// 取得矩形的左上角和右下角的坐标值
 
 	long left = (GetSystemMetrics(SM_CXSCREEN) - _width)* 0.5f;
 	long top = (GetSystemMetrics(SM_CYSCREEN) - _height)* 0.5f;
-
-
-	WindowRect.left = (long)left;			// 将Left   设为 0
-	WindowRect.right = (long)left + _width;       // 将Right 设为要求的宽度
-	WindowRect.top = (long)top;             // 将Top    设为 0
-	WindowRect.bottom = (long)top + _height;     // 将Bottom 设为要求的高度
 
 	_instance = GetModuleHandle(NULL);          // 取得我们窗口的实例
 
@@ -125,7 +174,7 @@ bool Window::init()
 	sys.hCursor = LoadCursor(NULL, IDC_ARROW);		// 装入默认鼠标指针
 	sys.hbrBackground = NULL;                        // GL不需要背景
 	sys.lpszMenuName = NULL;                        // 不需要菜单
-	sys.lpszClassName = TEXT("OpenGL");              // 设定类名字
+	sys.lpszClassName = TEXT(CLASS_NAME);              // 设定类名字
 
 	if (!RegisterClass(&sys))	// 尝试注册窗口类
 	{
@@ -139,14 +188,14 @@ bool Window::init()
 	//AdjustWindowRectEx(&WindowRect, dwStyle, FALSE, dwExStyle); // 调整窗口大小
 	if (!(_wnd = CreateWindowEx(
 		dwExStyle,									// 扩展窗体风格
-		TEXT("OpenGL"),								// 类名字
+		TEXT(CLASS_NAME),								// 类名字
 		TEXT(_title.c_str()),							// 窗口标题
 		WS_CLIPSIBLINGS |							// 必须的窗体风格属性
 		WS_CLIPCHILDREN |							// 必须的窗体风格属性
 		dwStyle,									// 选择的窗体属性
-		WindowRect.left, WindowRect.top,			// 窗口位置
-		WindowRect.right - WindowRect.left,			// 宽度
-		WindowRect.bottom - WindowRect.top,			// 高度
+		left, top,									// 窗口位置
+		_width,										// 宽度
+		_height,									// 高度
 		NULL,                                       // 无父窗口
 		NULL,                                       // 无菜单
 		_instance,                                  // 实例
@@ -156,6 +205,8 @@ bool Window::init()
 		MessageBox(NULL, TEXT("不能创建一个窗口设备描述表"), TEXT("错误"), MB_OK | MB_ICONEXCLAMATION);
 		return false;	// 返回 FALSE
 	}
+
+	Instance<Windows>::getInstance()->addWindow(this->getWnd(), this);
 
 	return true;
 }
@@ -198,6 +249,93 @@ void Window::listen()
 	}
 	// 关闭程序
 	dispose();
+}
+
+bool Window::onHandSignal(Signal* signal)
+{
+	if (signal == nullptr)
+	{
+		return false;
+	}
+	Tuple3<UINT, WPARAM, LPARAM>* params = static_cast<Tuple3<UINT, WPARAM, LPARAM>*>(signal->getMessage());
+	if (params == nullptr)
+	{
+		return false;
+	}
+	switch (params->t1)
+	{
+	case WM_ACTIVATE:
+	{
+		if (!HIWORD(params->t2))
+		{
+		}
+		break;
+	}
+	case WM_CLOSE:
+	{
+		PostQuitMessage(0);
+		break;
+	}
+	case WM_KEYDOWN:
+	{
+		if (getKeyBoard())
+		{
+			getKeyBoard()->onKeyEvent((BoardKey)params->t2, EBS_BUTTON_DOWN);
+		}
+		break;
+	}
+	case WM_KEYUP:
+	{
+		if (getKeyBoard())
+		{
+			getKeyBoard()->onKeyEvent((BoardKey)params->t2, EBS_BUTTON_UP);
+		}
+		break;
+	}
+	case WM_LBUTTONDOWN:
+	{
+		if (getMouse())
+		{
+			getMouse()->onButtonHandler(EMK_LEFTBUTTON, EBS_BUTTON_DOWN, LOWORD(params->t3), HIWORD(params->t3));
+		}
+		break;
+	}
+	case WM_LBUTTONUP:
+	{
+		if (getMouse())
+		{
+			getMouse()->onButtonHandler(EMK_LEFTBUTTON, EBS_BUTTON_UP, LOWORD(params->t3), HIWORD(params->t3));
+		}
+		break;
+	}
+	case WM_RBUTTONDOWN:
+	{
+		if (getMouse())
+		{
+			getMouse()->onButtonHandler(EMK_RIGHTBUTTON, EBS_BUTTON_DOWN, LOWORD(params->t3), HIWORD(params->t3));
+		}
+		break;
+	}
+	case WM_RBUTTONUP:
+	{
+		if (getMouse())
+		{
+			getMouse()->onButtonHandler(EMK_RIGHTBUTTON, EBS_BUTTON_UP, LOWORD(params->t3), HIWORD(params->t3));
+		}
+		break;
+	}
+	case WM_MOUSEMOVE:
+		if (getMouse())
+		{
+			getMouse()->onMoveHandler(LOWORD(params->t3), HIWORD(params->t3));
+		}
+		break;
+	default:
+		return false;
+		break;
+	}
+
+	return true;
 }
 
 

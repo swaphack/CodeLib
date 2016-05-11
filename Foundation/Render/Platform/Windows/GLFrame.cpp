@@ -9,7 +9,8 @@ _dc(NULL),
 _bits(0),
 _render(nullptr)
 {
-
+	_keyBoard = new sys::KeyBoard();
+	_mouse = new sys::Mouse();
 }
 
 GLFrame::~GLFrame()
@@ -23,6 +24,7 @@ void GLFrame::initWindow(const char* title, int width, int height, int bits, Ren
 
 	_bits = bits;
 	_render = render;
+
 	Window::initWindow(title, width, height);
 }
 
@@ -151,4 +153,40 @@ void GLFrame::listen()
 	}
 	// ¹Ø±Õ³ÌÐò
 	dispose();
+}
+
+bool GLFrame::onHandSignal(sys::Signal* signal)
+{
+	if (signal == nullptr)
+	{
+		return false;
+	}
+
+	if (Window::onHandSignal(signal))
+	{
+		return true;
+	}
+
+	sys::Tuple3<UINT, WPARAM, LPARAM>* params = static_cast<sys::Tuple3<UINT, WPARAM, LPARAM>*>(signal->getMessage());
+	if (params == nullptr)
+	{
+		return false;
+	}
+
+	switch (params->t1)
+	{
+	case WM_SIZE:
+	{
+		if (_render)
+		{
+			_render->setFrameSize(LOWORD(params->t3), HIWORD(params->t3));
+		}
+		break;
+	}
+	default:
+		return false;
+		break;
+	}
+
+	return true;
 }

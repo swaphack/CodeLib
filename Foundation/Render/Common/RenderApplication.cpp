@@ -67,8 +67,6 @@ void RenderApplication::dispose()
 	this->clearProtocolManagers();
 }
 
-
-
 Canvas* RenderApplication::getCanvas()
 {
 	return _canvas;

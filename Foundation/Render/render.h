@@ -1,7 +1,9 @@
 #pragma once
 
-#include "Canvas.h"
+#include "third_party/third_party.h"
 
-#include "RenderApplication.h"
+#include "Resource/import.h"
+
+#include "Common/import.h"
 
 #include "Platform/import.h"

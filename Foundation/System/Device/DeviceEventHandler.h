@@ -27,7 +27,7 @@ namespace sys
 	};
 
 	// 鼠标按钮事件
-	typedef void (Object::*MOUSE_BUTTON_HANDLER)(MouseKey Key, ButtonStatus type);
+	typedef void (Object::*MOUSE_BUTTON_HANDLER)(MouseKey Key, ButtonStatus type, float x, float y);
 	// 鼠标滚轮事件
 	typedef void (Object::*MOUSE_SCROLL_HANDLER)(ScrollEvent type, float param);
 	// 鼠标滑动
@@ -45,11 +45,11 @@ namespace sys
 
 		}
 
-		void hand(MouseKey key, ButtonStatus type)
+		void hand(MouseKey key, ButtonStatus type, float x, float y)
 		{
 			if (target && handler)
 			{
-				(target->*handler)(key, type);
+				(target->*handler)(key, type, x, y);
 			}
 		}
 	};

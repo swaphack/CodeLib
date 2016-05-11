@@ -11,13 +11,13 @@ int allocCount = 0;
 void addAlloc()
 {
 	allocCount++;
-	printf("add malloc count %d\n", allocCount);
+	LOG("add malloc count %d\n", allocCount);
 }
 
 void subAlloc()
 {
 	allocCount--;
-	printf("sub malloc count %d\n", allocCount);
+	LOG("sub malloc count %d\n", allocCount);
 }
 
 char* StreamHelper::mallocStream(void* data, ss_t size)

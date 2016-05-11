@@ -1,8 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="Canvas.cpp" />
-    <ClCompile Include="RenderApplication.cpp" />
     <ClCompile Include="Common\Node\Node.cpp">
       <Filter>Common\Node</Filter>
     </ClCompile>
@@ -132,11 +130,14 @@
     <ClCompile Include="Platform\Windows\GLFrame.cpp">
       <Filter>Platform\Windows</Filter>
     </ClCompile>
+    <ClCompile Include="Common\Canvas.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\RenderApplication.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Canvas.h" />
-    <ClInclude Include="RenderApplication.h" />
-    <ClInclude Include="render.h" />
     <ClInclude Include="Common\GL\import.h">
       <Filter>Common\GL</Filter>
     </ClInclude>
@@ -1009,6 +1010,16 @@
     </ClInclude>
     <ClInclude Include="Platform\Windows\import.h">
       <Filter>Platform\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Canvas.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="render.h" />
+    <ClInclude Include="Common\RenderApplication.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\import.h">
+      <Filter>Common</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

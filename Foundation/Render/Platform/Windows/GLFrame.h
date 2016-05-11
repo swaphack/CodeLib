@@ -3,7 +3,7 @@
 #include "system.h"
 #include <windows.h>
 
-#include "../../RenderApplication.h"
+#include "../../Common/RenderApplication.h"
 
 namespace render
 {
@@ -23,6 +23,8 @@ namespace render
 		virtual bool dispose();
 		// 监听窗口
 		virtual void listen();
+		// 接受信号的处理
+		virtual bool onHandSignal(sys::Signal* signal);
 	protected:
 		// 窗口着色描述表句柄
 		HGLRC _glrc;

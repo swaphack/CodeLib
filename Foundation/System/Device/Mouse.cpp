@@ -31,9 +31,9 @@ void Mouse::setMoveHandler(Object* target, MOUSE_MOVE_HANDLER handler)
 	_moveHandler.handler = handler;
 }
 
-void Mouse::onButtonHandler(MouseKey Key, ButtonStatus type)
+void Mouse::onButtonHandler(MouseKey Key, ButtonStatus type, float x, float y)
 {
-	_buttonHandler.hand(Key, type);
+	_buttonHandler.hand(Key, type, x, y);
 }
 
 void Mouse::onScrollHandler(ScrollEvent type, float param)

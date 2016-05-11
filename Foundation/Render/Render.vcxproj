@@ -72,12 +72,12 @@
   <ItemGroup>
     <ClCompile Include="3d\Cube\Cube.cpp" />
     <ClCompile Include="3d\Cube\Sphere.cpp" />
-    <ClCompile Include="Canvas.cpp" />
     <ClCompile Include="Common\Action\Action.cpp" />
     <ClCompile Include="Common\Action\ActionManager.cpp" />
     <ClCompile Include="Common\Action\ActionProxy.cpp" />
     <ClCompile Include="Common\Action\IntervalAction.cpp" />
     <ClCompile Include="Common\Action\Scheduler.cpp" />
+    <ClCompile Include="Common\Canvas.cpp" />
     <ClCompile Include="Common\Control\Dynamic\CtrlMedia.cpp" />
     <ClCompile Include="Common\Control\Dynamic\CtrlParticleSystem.cpp" />
     <ClCompile Include="Common\Control\Static\CtrlFog.cpp" />
@@ -94,6 +94,7 @@
     <ClCompile Include="Common\Node\Animation.cpp" />
     <ClCompile Include="Common\Node\ColorNode.cpp" />
     <ClCompile Include="Common\Node\Node.cpp" />
+    <ClCompile Include="Common\RenderApplication.cpp" />
     <ClCompile Include="Common\Scene\Scene.cpp" />
     <ClCompile Include="Common\Shader\Material.cpp" />
     <ClCompile Include="Common\Shader\TexFrame.cpp" />
@@ -108,7 +109,6 @@
     <ClCompile Include="Common\View\ViewConfig.cpp" />
     <ClCompile Include="Common\XControl\CtrlPixel.cpp" />
     <ClCompile Include="Platform\Windows\GLFrame.cpp" />
-    <ClCompile Include="RenderApplication.cpp" />
     <ClCompile Include="Resource\Componet\Image.cpp" />
     <ClCompile Include="Resource\Componet\Media.cpp" />
     <ClCompile Include="Resource\FilePath.cpp" />
@@ -124,13 +124,13 @@
     <ClInclude Include="3d\Cube\Cube.h" />
     <ClInclude Include="3d\Cube\import.h" />
     <ClInclude Include="3d\Cube\Sphere.h" />
-    <ClInclude Include="Canvas.h" />
     <ClInclude Include="Common\Action\Action.h" />
     <ClInclude Include="Common\Action\ActionManager.h" />
     <ClInclude Include="Common\Action\ActionProxy.h" />
     <ClInclude Include="Common\Action\import.h" />
     <ClInclude Include="Common\Action\IntervalAction.h" />
     <ClInclude Include="Common\Action\Scheduler.h" />
+    <ClInclude Include="Common\Canvas.h" />
     <ClInclude Include="Common\common.h" />
     <ClInclude Include="Common\Control\ctrl_common.h" />
     <ClInclude Include="Common\Control\Dynamic\CtrlFluid.h" />
@@ -160,10 +160,12 @@
     <ClInclude Include="Common\GL\protocol_common.h" />
     <ClInclude Include="Common\GL\shape_commond.h" />
     <ClInclude Include="Common\GL\texture_common.h" />
+    <ClInclude Include="Common\import.h" />
     <ClInclude Include="Common\Node\Animation.h" />
     <ClInclude Include="Common\Node\ColorNode.h" />
     <ClInclude Include="Common\Node\import.h" />
     <ClInclude Include="Common\Node\Node.h" />
+    <ClInclude Include="Common\RenderApplication.h" />
     <ClInclude Include="Common\Scene\import.h" />
     <ClInclude Include="Common\Scene\Scene.h" />
     <ClInclude Include="Common\Shader\import.h" />
@@ -188,7 +190,6 @@
     <ClInclude Include="Platform\Windows\GLFrame.h" />
     <ClInclude Include="Platform\Windows\import.h" />
     <ClInclude Include="render.h" />
-    <ClInclude Include="RenderApplication.h" />
     <ClInclude Include="Resource\Componet\Image.h" />
     <ClInclude Include="Resource\Componet\import.h" />
     <ClInclude Include="Resource\Componet\Media.h" />

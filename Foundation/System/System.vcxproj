@@ -75,6 +75,7 @@
     <ClInclude Include="Base\import.h" />
     <ClInclude Include="Base\Instance.h" />
     <ClInclude Include="Base\macros.h" />
+    <ClInclude Include="Base\Platform.h" />
     <ClInclude Include="Base\Random.h" />
     <ClInclude Include="Base\Tuple.h" />
     <ClInclude Include="Base\Types.h" />

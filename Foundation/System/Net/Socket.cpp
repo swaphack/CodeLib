@@ -128,7 +128,7 @@ bool Socket::HasError()
 {
 #ifdef _WIN32
 	int error = WSAGetLastError();
-	//printf("error id %d\n", error);
+	//LOG("error id %d\n", error);
 	if (error != WSAEWOULDBLOCK) 
 	{
 		return true;

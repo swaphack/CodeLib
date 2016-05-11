@@ -1,7 +1,8 @@
 #pragma once
 
 #include "Signal.h"
-
+#include "KeyBoard.h"
+#include "Mouse.h"
 
 namespace sys
 {
@@ -22,5 +23,10 @@ namespace sys
 		virtual const char* getTitle() = 0;
 		// 接受信号的处理
 		virtual bool onRecvSignal(Signal* signal) = 0;
+	public:// 外设
+		// 键盘
+		virtual KeyBoard* getKeyBoard() = 0;
+		// 鼠标
+		virtual Mouse* getMouse() = 0;
 	};
 }

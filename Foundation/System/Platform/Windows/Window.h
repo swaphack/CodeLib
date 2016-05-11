@@ -6,6 +6,7 @@
 
 namespace sys
 {
+	// windows 窗口
 	class Window : public WindowImpl
 	{
 	public:
@@ -14,6 +15,8 @@ namespace sys
 	public:
 		virtual void initWindow(const char* title, int width, int height);
 	public:
+		// 窗口句柄
+		inline HWND getWnd() { return _wnd; }
 		// 窗口位置x
 		virtual float getPositionX() { return _posX; }
 		// 窗口位置y
@@ -26,6 +29,11 @@ namespace sys
 		virtual const char* getTitle() { return _title.c_str(); }
 		// 接受信号的处理
 		virtual bool onRecvSignal(Signal* signal);
+	public:// 外设
+		// 键盘
+		virtual KeyBoard* getKeyBoard();
+		// 鼠标
+		virtual Mouse* getMouse();
 	protected:
 		// 初始化窗口
 		virtual bool init();
@@ -33,6 +41,8 @@ namespace sys
 		virtual bool dispose();
 		// 监听窗口
 		virtual void listen();
+		// 处理接收到的信息
+		virtual bool onHandSignal(Signal* signal);
 	protected:
 		// 保存我们的窗口句柄
 		HWND _wnd;
@@ -43,6 +53,9 @@ namespace sys
 		float _posX;
 		float _posY;
 		std::string _title;
+	protected:
+		KeyBoard* _keyBoard;
+		Mouse* _mouse;
 	};
 
 }

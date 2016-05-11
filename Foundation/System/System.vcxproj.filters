@@ -196,6 +196,9 @@
     <ClInclude Include="Platform\Windows\Window.h">
       <Filter>Platform\Windows</Filter>
     </ClInclude>
+    <ClInclude Include="Base\Platform.h">
+      <Filter>Base</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Base\File.cpp">

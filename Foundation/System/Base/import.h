@@ -12,3 +12,4 @@
 #include "Random.h"
 #include "FuncHandler.h"
 #include "Tuple.h"
+#include "Platform.h"
