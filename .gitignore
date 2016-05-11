@@ -1,0 +1,9 @@
+*.log
+Foundation/Database/Debug/DataBase.sbr
+*.tlog
+*.sbr
+*.obj
+Window/Debug/vc120.pdb
+*.idb
+WebCat.opensdf
+*.pdb
