@@ -10,6 +10,8 @@ Canvas::Canvas()
 	_root->setView(_view);
 
 	_actionManager = G_ACTIONMANAGER;
+
+	_touchManager = G_TOUCHMANAGER;
 }
 
 Canvas::~Canvas()

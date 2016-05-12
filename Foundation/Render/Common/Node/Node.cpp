@@ -305,6 +305,11 @@ void Node::setRectColor(const sys::Color4B& color)
 	_rectColor = color;
 }
 
+bool Node::containTouchPoint(float x, float y)
+{
+	return false;
+}
+
 void Node::updateTranform()
 {
 	if (!this->isRelativeWithParent())

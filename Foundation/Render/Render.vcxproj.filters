@@ -136,6 +136,15 @@
     <ClCompile Include="Common\RenderApplication.cpp">
       <Filter>Common</Filter>
     </ClCompile>
+    <ClCompile Include="Common\Touch\TouchProtocol.cpp">
+      <Filter>Common\Touch</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Touch\TouchManager.cpp">
+      <Filter>Common\Touch</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Tool\ModelTool.cpp">
+      <Filter>Common\Tool</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Common\GL\import.h">
@@ -1021,6 +1030,18 @@
     <ClInclude Include="Common\import.h">
       <Filter>Common</Filter>
     </ClInclude>
+    <ClInclude Include="Common\Touch\TouchProtocol.h">
+      <Filter>Common\Touch</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Touch\import.h">
+      <Filter>Common\Touch</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Touch\macros.h">
+      <Filter>Common\Touch</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Touch\TouchManager.h">
+      <Filter>Common\Touch</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Common">
@@ -1139,6 +1160,9 @@
     </Filter>
     <Filter Include="Platform\Windows">
       <UniqueIdentifier>{b2c7b399-fa6c-49e8-9325-933e2dcec101}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common\Touch">
+      <UniqueIdentifier>{2f218a69-d8e9-4b3a-8f41-c4dc02aabb6c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

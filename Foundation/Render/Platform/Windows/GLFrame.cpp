@@ -2,12 +2,68 @@
 
 using namespace render;
 
+using namespace sys;
 
+
+
+DeviceProxy::DeviceProxy(const TouchManager* touchManager)
+{
+	ASSERT(touchManager != nullptr);
+	_touchManager = (TouchManager*)touchManager;
+}
+
+DeviceProxy::~DeviceProxy()
+{
+
+}
+
+void DeviceProxy::onMouseButtonHandler(MouseKey Key, ButtonStatus type, float x, float y)
+{
+	if (Key != EMK_LEFTBUTTON)
+	{
+		return;
+	}
+
+	if (_touchManager == nullptr)
+	{
+		return;
+	}
+
+	sys::Volume size = Tool::getGLViewSize();
+	if (type == EBS_BUTTON_DOWN)
+	{
+		_touchManager->onTouchBegan(x, size.height - y);
+	}
+	else if (type == EBS_BUTTON_UP)
+	{
+		_touchManager->onTouchEnd(x, size.height - y);
+	}
+}
+
+void DeviceProxy::onMouseMoveHandler(float x, float y)
+{
+	if (_touchManager == nullptr)
+	{
+		return;
+	}
+
+	sys::Volume size = Tool::getGLViewSize();
+	_touchManager->onTouchMove(x, size.height - y);
+}
+
+void DeviceProxy::onKeyBoardButtonHandler(sys::BoardKey Key, sys::ButtonStatus type)
+{
+
+}
+
+
+//////////////////////////////////////////////////////////////////////////
 GLFrame::GLFrame()
 :_glrc(NULL),
 _dc(NULL),
 _bits(0),
-_render(nullptr)
+_render(nullptr),
+_deviceProxy(nullptr)
 {
 	_keyBoard = new sys::KeyBoard();
 	_mouse = new sys::Mouse();
@@ -15,6 +71,7 @@ _render(nullptr)
 
 GLFrame::~GLFrame()
 {
+	SAFE_DELETE(_deviceProxy);
 	SAFE_DELETE(_render);
 }
 
@@ -126,6 +183,7 @@ void GLFrame::listen()
 	{
 		_render->setFrameSize(getWidth(), getHeight());
 		_render->show();
+		this->initDevice();
 	}
 
 	while (!done)
@@ -189,4 +247,26 @@ bool GLFrame::onHandSignal(sys::Signal* signal)
 	}
 
 	return true;
+}
+
+void GLFrame::initDevice()
+{
+	if (_render == nullptr)
+	{
+		return;
+	}
+	if (_deviceProxy == nullptr)
+	{
+		_deviceProxy = new DeviceProxy(_render->getCanvas()->getTouchManager());
+	}
+	if (getMouse())
+	{
+		getMouse()->setButtonHandler(_deviceProxy, MOUSE_BUTTON_SELECTOR(DeviceProxy::onMouseButtonHandler));
+		getMouse()->setMoveHandler(_deviceProxy, MOUSE_MOVE_SELECTOR(DeviceProxy::onMouseMoveHandler));
+	}
+
+	if (getKeyBoard())
+	{
+		getKeyBoard()->setKeyhandler(_deviceProxy, KEYBOARD_BUTTON_SELECTOR(DeviceProxy::onKeyBoardButtonHandler));
+	}
 }

@@ -31,6 +31,9 @@
     <Filter Include="Platform\Windows">
       <UniqueIdentifier>{b42468cb-6164-46c2-aae3-706b8cb9a770}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Math">
+      <UniqueIdentifier>{ff9f9eca-de1e-4109-a1d9-7bba7962d911}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Base\File.h">
@@ -198,6 +201,30 @@
     </ClInclude>
     <ClInclude Include="Base\Platform.h">
       <Filter>Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Math\macros.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Math\import.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Math\Vector.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Math\Volume.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Math\Point.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Math\Color.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Math\Rect.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Math\Size.h">
+      <Filter>Math</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

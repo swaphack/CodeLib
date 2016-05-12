@@ -4,3 +4,4 @@
 #include "UITool.h"
 #include "TextureTool.h"
 #include "GLTool.h"
+#include "ModelTool.h"

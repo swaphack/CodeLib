@@ -27,10 +27,3 @@ sys::Vector Tool::convertToAngle(const sys::Vector& src)
 {
 	return sys::Vector(src.x / PI * (float)180, src.y / PI * (float)180, src.z / PI * (float)180);
 }
-
-//////////////////////////////////////////////////////////////////////////
-
-sys::Volume ModelTool::convertToOGLVolume(const sys::Volume& src)
-{
-	return sys::Volume(src.width / Tool::getGLViewSize().width * 2 - 1, src.height / Tool::getGLViewSize().height * 2 - 1, src.deep);
-}

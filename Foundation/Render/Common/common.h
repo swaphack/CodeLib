@@ -10,3 +10,4 @@
 #include "View/import.h"
 #include "Scene/import.h"
 #include "XControl/import.h"
+#include "Touch/import.h"

@@ -89,6 +89,9 @@ namespace render
 		void setRectVisible(bool status);
 		// 设置矩形框显示颜色
 		void setRectColor(const sys::Color4B& color);
+
+		// 点击是否命中
+		bool containTouchPoint(float x, float y);
 	protected:
 		virtual void updateTranform();
 		// 重新计算参数

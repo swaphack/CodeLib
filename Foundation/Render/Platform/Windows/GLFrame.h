@@ -9,6 +9,24 @@ namespace render
 {
 	class RenderApplication;
 
+	// 设备代理
+	class DeviceProxy : public sys::Object
+	{
+	public:
+		DeviceProxy(const TouchManager* touchManager);
+		~DeviceProxy();
+	public:
+		void onMouseButtonHandler(sys::MouseKey Key, sys::ButtonStatus type, float x, float y);
+
+		void onMouseMoveHandler(float x, float y);
+
+		void onKeyBoardButtonHandler(sys::BoardKey Key, sys::ButtonStatus type);
+	protected:
+	private:
+		TouchManager* _touchManager;
+	};
+
+	// gl窗口
 	class GLFrame : public sys::Window
 	{
 	public:
@@ -25,6 +43,8 @@ namespace render
 		virtual void listen();
 		// 接受信号的处理
 		virtual bool onHandSignal(sys::Signal* signal);
+		// 重置外设
+		virtual void initDevice();
 	protected:
 		// 窗口着色描述表句柄
 		HGLRC _glrc;
@@ -34,5 +54,7 @@ namespace render
 		int _bits;
 		// 渲染
 		RenderApplication* _render;
+		// 设备代理
+		DeviceProxy* _deviceProxy;
 	};
 }

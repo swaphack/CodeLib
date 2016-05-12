@@ -21,5 +21,10 @@ namespace render
 		{
 
 		}
+
+		bool containPoint(float x, float y)
+		{
+
+		}
 	};
 }
