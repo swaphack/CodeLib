@@ -8,3 +8,7 @@ Window/Debug/vc120.pdb
 WebCat.opensdf
 *.pdb
 *.opendb
+*.suo
+*.bsc
+Debug/Render.lib
+*.bsc
