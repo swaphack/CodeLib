@@ -8,7 +8,7 @@ using namespace render;
 View::View()
 :_camera(nullptr)
 {
-
+	_scale = sys::Vector(1, 1, 1);
 }
 
 View::~View()
@@ -55,6 +55,18 @@ Camera* View::getCamera()
 	return _camera;
 }
 
+void View::setScale(float x, float y, float z)
+{
+	_scale.x = x;
+	_scale.y = y;
+	_scale.z = z;
+}
+
+sys::Vector View::getScale()
+{
+	return _scale;
+}
+
 void View::initView()
 {
 	if (isDirty())
@@ -63,6 +75,8 @@ void View::initView()
 		glViewport(_position.x, _position.y, _size.width, _size.height);
 		glMatrixMode(GL_PROJECTION);
 		glLoadIdentity();
+
+		glScalef(_scale.x, _scale.y, _scale.z);
 
 		setDirty(false);
 	}

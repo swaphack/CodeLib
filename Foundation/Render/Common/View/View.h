@@ -27,6 +27,10 @@ namespace render
 		void setCamera(Camera* camera);
 		// 获取摄像机
 		Camera* getCamera();
+		// 设置缩放比
+		void setScale(float x, float y, float z);
+		// 获取缩放比
+		sys::Vector getScale();
 		// 重置视图
 		void initView();
 		// 更新视图
@@ -40,5 +44,7 @@ namespace render
 		ViewConfig _viewConfig;
 		// 摄像机
 		Camera* _camera;
+		// 设置缩放比
+		sys::Vector _scale;
 	};
 }
