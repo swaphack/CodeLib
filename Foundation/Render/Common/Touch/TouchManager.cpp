@@ -10,17 +10,17 @@ TouchManager::TouchManager()
 
 TouchManager::~TouchManager()
 {
-
+	this->removeAllTouches();
 }
 
-void TouchManager::addTouch(TouchProtocol* protocol)
+void TouchManager::addTouch(TouchProxy* protocol)
 {
 	if (protocol == nullptr)
 	{
 		return;
 	}
 
-	std::vector<TouchProtocol*>::iterator it = _touchProtocols.begin();
+	std::vector<TouchProxy*>::iterator it = _touchProtocols.begin();
 	while (it != _touchProtocols.end())
 	{
 		if ((*it) == protocol)
@@ -33,14 +33,14 @@ void TouchManager::addTouch(TouchProtocol* protocol)
 	_touchProtocols.push_back(protocol);
 }
 
-void TouchManager::removeTouch(TouchProtocol* protocol)
+void TouchManager::removeTouch(TouchProxy* protocol)
 {
 	if (protocol == nullptr)
 	{
 		return;
 	}
 
-	std::vector<TouchProtocol*>::iterator it = _touchProtocols.begin();
+	std::vector<TouchProxy*>::iterator it = _touchProtocols.begin();
 	while (it != _touchProtocols.end())
 	{
 		if ((*it) == protocol)
@@ -49,6 +49,11 @@ void TouchManager::removeTouch(TouchProtocol* protocol)
 			break;
 		}
 		it++;
+	}
+
+	if (_lastTouchProtocol == protocol)
+	{
+		_lastTouchProtocol = nullptr;
 	}
 }
 
@@ -59,10 +64,10 @@ void TouchManager::removeAllTouches()
 
 bool TouchManager::onTouchBegan(float x, float y)
 {
-	std::vector<TouchProtocol*>::reverse_iterator it = _touchProtocols.rbegin();
+	std::vector<TouchProxy*>::reverse_iterator it = _touchProtocols.rbegin();
 	while (it != _touchProtocols.rend())
 	{
-		if ((*it)->onTouchBegan(x, y))
+		if ((*it)->isTouchEnabled() && (*it)->onTouchBegan(x, y))
 		{
 			_lastTouchProtocol = (*it);
 			return true;
@@ -80,7 +85,10 @@ void TouchManager::onTouchMove(float x, float y)
 		return;
 	}
 
-	_lastTouchProtocol->onTouchMove(x, y);
+	if (_lastTouchProtocol->isTouchEnabled())
+	{
+		_lastTouchProtocol->onTouchMove(x, y);
+	}
 }
 
 void TouchManager::onTouchEnd(float x, float y)
@@ -90,5 +98,10 @@ void TouchManager::onTouchEnd(float x, float y)
 		return;
 	}
 
-	_lastTouchProtocol->onTouchEnd(x, y);
+	if (_lastTouchProtocol->isTouchEnabled())
+	{
+		_lastTouchProtocol->onTouchEnd(x, y);
+	}
+
+	_lastTouchProtocol = nullptr;
 }

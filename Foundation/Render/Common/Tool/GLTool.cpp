@@ -1,5 +1,5 @@
 #include "GLTool.h"
-#include "UITool.h"
+#include "Tool.h"
 
 using namespace render;
 
@@ -101,20 +101,20 @@ void GLTool::calRect(const sys::Vector& position, const sys::Volume& volume, con
 	// left down
 	x = position.x - volume.width * anchor.x;
 	y = position.y - volume.height * anchor.y;
-	rectVertex.leftDown = UITool::convertToOGLPoisition(x, y, position.z);
+	rectVertex.leftDown = Tool::convertToOGLPoisition(x, y, position.z);
 
 	// right down
 	x = position.x + volume.width * (1 - anchor.x);
 	y = position.y - volume.height * anchor.y;
-	rectVertex.rightDown = UITool::convertToOGLPoisition(x, y, position.z);
+	rectVertex.rightDown = Tool::convertToOGLPoisition(x, y, position.z);
 
 	// right up
 	x = position.x + volume.width * (1 - anchor.x);
 	y = position.y + volume.height * (1 - anchor.y);
-	rectVertex.rightUp = UITool::convertToOGLPoisition(x, y, position.z);
+	rectVertex.rightUp = Tool::convertToOGLPoisition(x, y, position.z);
 
 	// left up
 	x = position.x - volume.width * anchor.x;
 	y = position.y + volume.height * (1 - anchor.y);
-	rectVertex.leftUp = UITool::convertToOGLPoisition(x, y, position.z);
+	rectVertex.leftUp = Tool::convertToOGLPoisition(x, y, position.z);
 }

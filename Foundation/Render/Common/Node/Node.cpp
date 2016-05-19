@@ -1,4 +1,5 @@
 #include "Node.h"
+#include "../Touch/TouchProxy.h"
 #include <algorithm>
 
 using namespace render;
@@ -15,9 +16,9 @@ Node::Node()
 , _bRelative(true)
 , _zOrder(0.0f)
 , _bShowRect(false)
+, _touchProxy(nullptr)
 {
 	this->setVisible(true);
-	this->setTouchEnabled(true);
 	this->setPosition(0, 0, 0);
 	this->setScale(1, 1, 1);
 	this->setRotation(0, 0, 0);
@@ -211,21 +212,6 @@ bool Node::isVisible()
 	return _bVisibled;
 }
 
-void Node::setTouchEnabled( bool status )
-{
-	if (_bTouchEnabled == status)
-	{
-		return;
-	}
-
-	_bTouchEnabled = status;
-}
-
-bool Node::isTouchEnabled()
-{
-	return _bTouchEnabled;
-}
-
 void Node::draw()
 {
 	if (_bShowRect)
@@ -307,7 +293,17 @@ void Node::setRectColor(const sys::Color4B& color)
 
 bool Node::containTouchPoint(float x, float y)
 {
+
 	return false;
+}
+
+TouchProxy* Node::getTouchProxy()
+{
+	if (_touchProxy == nullptr)
+	{
+		_touchProxy = new TouchProxy(this);
+	}
+	return _touchProxy;
 }
 
 void Node::updateTranform()
@@ -327,7 +323,7 @@ void Node::updateTranform()
 
 void Node::initSelf()
 {
-	UITool::convertToOGLPoisition(_position, _obPosition);
+	Tool::convertToOGLPoisition(_position, _obPosition);
 
 	GLTool::calRect(_position, _volume, _anchor, _rectVertex);
 

@@ -43,9 +43,6 @@
     <ClCompile Include="Common\View\Camera.cpp">
       <Filter>Common\View</Filter>
     </ClCompile>
-    <ClCompile Include="Common\Tool\UITool.cpp">
-      <Filter>Common\Tool</Filter>
-    </ClCompile>
     <ClCompile Include="3d\Cube\Cube.cpp">
       <Filter>3d\Cube</Filter>
     </ClCompile>
@@ -136,14 +133,14 @@
     <ClCompile Include="Common\RenderApplication.cpp">
       <Filter>Common</Filter>
     </ClCompile>
-    <ClCompile Include="Common\Touch\TouchProtocol.cpp">
-      <Filter>Common\Touch</Filter>
-    </ClCompile>
     <ClCompile Include="Common\Touch\TouchManager.cpp">
       <Filter>Common\Touch</Filter>
     </ClCompile>
-    <ClCompile Include="Common\Tool\ModelTool.cpp">
-      <Filter>Common\Tool</Filter>
+    <ClCompile Include="Common\GL\matrix_common.cpp">
+      <Filter>Common\GL</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Touch\TouchProxy.cpp">
+      <Filter>Common\Touch</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -166,12 +163,6 @@
       <Filter>Common\Node</Filter>
     </ClInclude>
     <ClInclude Include="Common\Tool\Tool.h">
-      <Filter>Common\Tool</Filter>
-    </ClInclude>
-    <ClInclude Include="Common\Tool\UITool.h">
-      <Filter>Common\Tool</Filter>
-    </ClInclude>
-    <ClInclude Include="Common\Tool\ModelTool.h">
       <Filter>Common\Tool</Filter>
     </ClInclude>
     <ClInclude Include="Common\Scene\Scene.h">
@@ -1030,9 +1021,6 @@
     <ClInclude Include="Common\import.h">
       <Filter>Common</Filter>
     </ClInclude>
-    <ClInclude Include="Common\Touch\TouchProtocol.h">
-      <Filter>Common\Touch</Filter>
-    </ClInclude>
     <ClInclude Include="Common\Touch\import.h">
       <Filter>Common\Touch</Filter>
     </ClInclude>
@@ -1040,6 +1028,12 @@
       <Filter>Common\Touch</Filter>
     </ClInclude>
     <ClInclude Include="Common\Touch\TouchManager.h">
+      <Filter>Common\Touch</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Touch\TouchDelegate.h">
+      <Filter>Common\Touch</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Touch\TouchProxy.h">
       <Filter>Common\Touch</Filter>
     </ClInclude>
   </ItemGroup>

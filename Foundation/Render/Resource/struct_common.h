@@ -52,5 +52,9 @@ namespace render
 		// ÎÄ¼şÂ·¾¶
 		std::string filepath;
 
+
+		MediaDefine()
+			:filepath("")
+		{}
 	};
 }

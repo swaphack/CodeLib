@@ -138,12 +138,14 @@ std::set<Target*>* Content::getTargetsByKey(const char* key)
 
 	std::string* word = GET_STRING_PTR(key);
 
-	if (_keyTargets.find(word) == _keyTargets.end())
+	std::map<std::string*, std::set<Target*>>::iterator it = _keyTargets.find(word);
+
+	if (it == _keyTargets.end())
 	{
 		return nullptr;
 	}
 
-	return &_keyTargets[word];
+	return &it->second;
 }
 
 std::set<std::string*>* Content::getKeysByTarget(Target* target)
@@ -153,12 +155,14 @@ std::set<std::string*>* Content::getKeysByTarget(Target* target)
 		return nullptr;
 	}
 
-	if (_targetKeys.find(target) == _targetKeys.end())
+	std::map<Target*, std::set<std::string*>>::iterator it = _targetKeys.find(target);
+
+	if (it == _targetKeys.end())
 	{
 		return nullptr;
 	}
 
-	return &_targetKeys[target];
+	return &it->second;
 }
 
 void Content::addNewKeyTarget( const char* key, Target* target )

@@ -1,4 +1,4 @@
 #pragma once
 
-#include "TouchProtocol.h"
+#include "TouchProxy.h"
 #include "TouchManager.h"

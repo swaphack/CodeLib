@@ -1,5 +1,5 @@
 #include "TextureTool.h"
-#include "UITool.h"
+#include "Tool.h"
 
 using namespace render;
 
@@ -50,22 +50,22 @@ void TextureTool::setTexture2DVertexts(TextureRect* texRect, const sys::Vector& 
 	// left down
 	x = position.x - volume.width * anchor.x;
 	y = position.y - volume.height * anchor.y;
-	texRect->leftDown.point = UITool::convertToOGLPoisition(x, y, position.z);
+	texRect->leftDown.point = Tool::convertToOGLPoisition(x, y, position.z);
 
 	// right down
 	x = position.x + volume.width * (1 - anchor.x);
 	y = position.y - volume.height * anchor.y;
-	texRect->rightDown.point = UITool::convertToOGLPoisition(x, y, position.z);
+	texRect->rightDown.point = Tool::convertToOGLPoisition(x, y, position.z);
 
 	// right up
 	x = position.x + volume.width * (1 - anchor.x);
 	y = position.y + volume.height * (1 - anchor.y);
-	texRect->rightUp.point = UITool::convertToOGLPoisition(x, y, position.z);
+	texRect->rightUp.point = Tool::convertToOGLPoisition(x, y, position.z);
 
 	// left up
 	x = position.x - volume.width * anchor.x;
 	y = position.y + volume.height * (1 - anchor.y);
-	texRect->leftUp.point = UITool::convertToOGLPoisition(x, y, position.z);
+	texRect->leftUp.point = Tool::convertToOGLPoisition(x, y, position.z);
 }
 
 /*
@@ -94,7 +94,7 @@ void TextureTool::setTexture3DVertexts(TextureCube* texcube, const sys::Vector& 
 	y = position.y - volume.height * anchor.y;
 	z = position.z - volume.deep * anchor.z;
 
-	point = UITool::convertToOGLPoisition(x, y, z);
+	point = Tool::convertToOGLPoisition(x, y, z);
 	texcube->front.leftDown.point = point;
 	texcube->left.rightDown.point = point;
 	texcube->bottom.leftUp.point = point;
@@ -104,7 +104,7 @@ void TextureTool::setTexture3DVertexts(TextureCube* texcube, const sys::Vector& 
 	y = position.y - volume.height * anchor.y;
 	z = position.z - volume.deep * anchor.z;
 
-	point = UITool::convertToOGLPoisition(x, y, z);
+	point = Tool::convertToOGLPoisition(x, y, z);
 	texcube->front.rightDown.point = point;
 	texcube->right.leftDown.point = point;
 	texcube->bottom.rightUp.point = point;
@@ -114,7 +114,7 @@ void TextureTool::setTexture3DVertexts(TextureCube* texcube, const sys::Vector& 
 	y = position.y + volume.height * (1 - anchor.y);
 	z = position.z - volume.deep * anchor.z;
 
-	point = UITool::convertToOGLPoisition(x, y, z);
+	point = Tool::convertToOGLPoisition(x, y, z);
 	texcube->front.rightUp.point = point;
 	texcube->right.leftUp.point = point;
 	texcube->top.rightDown.point = point;
@@ -124,7 +124,7 @@ void TextureTool::setTexture3DVertexts(TextureCube* texcube, const sys::Vector& 
 	y = position.y + volume.height * (1 - anchor.y);
 	z = position.z - volume.deep * anchor.z;
 
-	point = UITool::convertToOGLPoisition(x, y, z);
+	point = Tool::convertToOGLPoisition(x, y, z);
 	texcube->front.leftUp.point = point;
 	texcube->left.rightUp.point = point;
 	texcube->top.leftDown.point = point;
@@ -136,7 +136,7 @@ void TextureTool::setTexture3DVertexts(TextureCube* texcube, const sys::Vector& 
 	y = position.y - volume.height * anchor.y;
 	z = position.z + volume.deep * (1 - anchor.z);
 
-	point = UITool::convertToOGLPoisition(x, y, z);
+	point = Tool::convertToOGLPoisition(x, y, z);
 	texcube->back.rightDown.point = point;
 	texcube->left.leftDown.point = point;
 	texcube->bottom.leftDown.point = point;
@@ -146,7 +146,7 @@ void TextureTool::setTexture3DVertexts(TextureCube* texcube, const sys::Vector& 
 	y = position.y - volume.height * anchor.y;
 	z = position.z + volume.deep * (1 - anchor.z);
 
-	point = UITool::convertToOGLPoisition(x, y, z);
+	point = Tool::convertToOGLPoisition(x, y, z);
 	texcube->back.leftDown.point = point;
 	texcube->right.rightDown.point = point;
 	texcube->bottom.rightDown.point = point;
@@ -156,7 +156,7 @@ void TextureTool::setTexture3DVertexts(TextureCube* texcube, const sys::Vector& 
 	y = position.y + volume.height * (1 - anchor.y);
 	z = position.z + volume.deep * (1 - anchor.z);
 
-	point = UITool::convertToOGLPoisition(x, y, z);
+	point = Tool::convertToOGLPoisition(x, y, z);
 	texcube->back.leftUp.point = point;
 	texcube->top.rightUp.point = point;
 	texcube->right.rightUp.point = point;
@@ -166,7 +166,7 @@ void TextureTool::setTexture3DVertexts(TextureCube* texcube, const sys::Vector& 
 	y = position.y + volume.height * (1 - anchor.y);
 	z = position.z + volume.deep * (1 - anchor.z);
 
-	point = UITool::convertToOGLPoisition(x, y, z);
+	point = Tool::convertToOGLPoisition(x, y, z);
 	texcube->back.rightUp.point = point;
 	texcube->left.leftUp.point = point;
 	texcube->top.leftUp.point = point;

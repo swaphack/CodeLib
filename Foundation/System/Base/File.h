@@ -14,6 +14,6 @@ namespace sys
 		// 从本地读取数据
 		static char* read(const char* url, long& size);
 		// 判断文件是否存在
-		static bool isExistsFile(const char* url);
+		static bool isFileExists(const char* url);
 	};
 }

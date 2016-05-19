@@ -129,6 +129,7 @@
     <ClInclude Include="Stream\StreamReader.h" />
     <ClInclude Include="Stream\StreamWriter.h" />
     <ClInclude Include="system.h" />
+    <ClInclude Include="Thread\Thread.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Base\BitHelper.cpp" />

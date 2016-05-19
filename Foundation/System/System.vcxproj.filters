@@ -34,6 +34,9 @@
     <Filter Include="Math">
       <UniqueIdentifier>{ff9f9eca-de1e-4109-a1d9-7bba7962d911}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Thread">
+      <UniqueIdentifier>{21e7f534-8eb4-4f47-b1e3-c103cf74ba92}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Base\File.h">
@@ -225,6 +228,9 @@
     </ClInclude>
     <ClInclude Include="Math\Size.h">
       <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Thread\Thread.h">
+      <Filter>Thread</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

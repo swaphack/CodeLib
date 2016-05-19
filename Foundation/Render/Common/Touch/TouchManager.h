@@ -1,13 +1,13 @@
 #pragma once
 
 #include "system.h"
-#include "TouchProtocol.h"
+#include "TouchProxy.h"
 
 #include <set>
 
 namespace render
 {
-	class TouchProtocol;
+	class TouchProxy;
 	// 触摸管理
 	class TouchManager
 	{
@@ -16,18 +16,18 @@ namespace render
 		virtual ~TouchManager();
 	public:
 		// 添加触摸代理
-		void addTouch(TouchProtocol* protocol);
+		void addTouch(TouchProxy* protocol);
 		// 移除触摸代理
-		void removeTouch(TouchProtocol* protocol);
+		void removeTouch(TouchProxy* protocol);
 		// 移除所有触摸代理
 		void removeAllTouches();
 
-		virtual bool onTouchBegan(float x, float y);
-		virtual void onTouchMove(float x, float y);
-		virtual void onTouchEnd(float x, float y);
+		bool onTouchBegan(float x, float y);
+		void onTouchMove(float x, float y);
+		void onTouchEnd(float x, float y);
 	private:
-		std::vector<TouchProtocol*> _touchProtocols;
-		TouchProtocol* _lastTouchProtocol;
+		std::vector<TouchProxy*> _touchProtocols;
+		TouchProxy* _lastTouchProtocol;
 	};
 
 	#define G_TOUCHMANAGER sys::Instance<TouchManager>::getInstance()

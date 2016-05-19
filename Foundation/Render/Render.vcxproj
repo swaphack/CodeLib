@@ -90,6 +90,7 @@
     <ClCompile Include="Common\DrawNode\DrawNode.cpp" />
     <ClCompile Include="Common\DrawNode\LineNode.cpp" />
     <ClCompile Include="Common\DrawNode\PointNode.cpp" />
+    <ClCompile Include="Common\GL\matrix_common.cpp" />
     <ClCompile Include="Common\GL\protocol_common.cpp" />
     <ClCompile Include="Common\Node\Animation.cpp" />
     <ClCompile Include="Common\Node\ColorNode.cpp" />
@@ -101,12 +102,10 @@
     <ClCompile Include="Common\Shader\Texture.cpp" />
     <ClCompile Include="Common\Shader\TextureCache.cpp" />
     <ClCompile Include="Common\Tool\GLTool.cpp" />
-    <ClCompile Include="Common\Tool\ModelTool.cpp" />
     <ClCompile Include="Common\Tool\TextureTool.cpp" />
     <ClCompile Include="Common\Tool\Tool.cpp" />
-    <ClCompile Include="Common\Tool\UITool.cpp" />
     <ClCompile Include="Common\Touch\TouchManager.cpp" />
-    <ClCompile Include="Common\Touch\TouchProtocol.cpp" />
+    <ClCompile Include="Common\Touch\TouchProxy.cpp" />
     <ClCompile Include="Common\View\Camera.cpp" />
     <ClCompile Include="Common\View\View.cpp" />
     <ClCompile Include="Common\View\ViewConfig.cpp" />
@@ -179,13 +178,12 @@
     <ClInclude Include="Common\Shader\TextureCache.h" />
     <ClInclude Include="Common\Tool\GLTool.h" />
     <ClInclude Include="Common\Tool\import.h" />
-    <ClInclude Include="Common\Tool\ModelTool.h" />
     <ClInclude Include="Common\Tool\TextureTool.h" />
     <ClInclude Include="Common\Tool\Tool.h" />
-    <ClInclude Include="Common\Tool\UITool.h" />
     <ClInclude Include="Common\Touch\import.h" />
     <ClInclude Include="Common\Touch\macros.h" />
-    <ClInclude Include="Common\Touch\TouchProtocol.h" />
+    <ClInclude Include="Common\Touch\TouchDelegate.h" />
+    <ClInclude Include="Common\Touch\TouchProxy.h" />
     <ClInclude Include="Common\Touch\TouchManager.h" />
     <ClInclude Include="Common\View\Camera.h" />
     <ClInclude Include="Common\View\import.h" />

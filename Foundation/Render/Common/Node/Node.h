@@ -6,10 +6,12 @@
 #include "../Tool/import.h"
 #include "../Action/import.h"
 #include "../Shader/import.h"
+//#include "../Touch/TouchProxy.h"
 
 namespace render
 {
 	//struct PSR;
+	class TouchProxy;
 
 	// 绘制节点
 	class Node : public sys::Object, public DirtyProtocol
@@ -71,20 +73,19 @@ namespace render
 		void setVisible(bool status);
 		// 是否可见
 		bool isVisible();
-		// 设置可点击性
-		void setTouchEnabled(bool status);
-		// 是否可点击
-		bool isTouchEnabled();
+		
 		// 绘制
 		virtual void draw();
 		// 遍历所有节点
 		void visit();
 		// 获取动作代理
 		ActionProxy* getActionProxy();
+
 		// 是否和父节点关联
 		bool isRelativeWithParent();
 		// 设置是否和父节点关联
 		void setRelativeWithParent(bool status);
+
 		// 设置矩形框是否可见
 		void setRectVisible(bool status);
 		// 设置矩形框显示颜色
@@ -92,6 +93,8 @@ namespace render
 
 		// 点击是否命中
 		bool containTouchPoint(float x, float y);
+		// 获取触摸代理
+		TouchProxy* getTouchProxy();
 	protected:
 		virtual void updateTranform();
 		// 重新计算参数
@@ -129,6 +132,8 @@ namespace render
 		bool _bRelative;
 		// 动作代理
 		ActionProxy* _actionProxy;
+		// 触摸代理
+		TouchProxy* _touchProxy;
 		// 矩形框
 		RectangeVertex _rectVertex;
 		// 矩形框颜色

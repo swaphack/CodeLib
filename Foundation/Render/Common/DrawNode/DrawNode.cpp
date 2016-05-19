@@ -40,25 +40,9 @@ float DrawNode::getWidth()
 void DrawNode::updateTranform()
 {
 	Node::updateTranform();
-// 	if (!this->isRelativeWithParent())
-// 	{
-// 		glLoadIdentity();
-// 	}
-// 
-// 	glTranslatef(_obPosition.x, _obPosition.y, _obPosition.z);
-// 	glRotatef(_rotation.x, 1, 0, 0);
-// 	glRotatef(_rotation.y, 0, 1, 0);
-// 	glRotatef(_rotation.z, 0, 0, 1);
-// 	glScalef(_scale.x, _scale.y, _scale.z);
 }
 
 void DrawNode::initSelf()
 {
 	Node::initSelf();
 }
-
-// void DrawNode::updateSelf()
-// {
-// 	this->initTranform();
-// 	_psr.initDrawNode();
-// }

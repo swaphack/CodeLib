@@ -56,7 +56,7 @@ char* File::read( const char* url, long& size )
 	return str;
 }
 
-bool File::isExistsFile(const char* url)
+bool File::isFileExists(const char* url)
 {
 	if (url == nullptr)
 	{

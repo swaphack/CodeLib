@@ -61,6 +61,6 @@ void LineNode::initSelf()
 	_obLine[1] = _destPosition;
 	_obLine[1].add(_position);
 
-	UITool::convertToOGLPoisition(_obLine[0], _obLine[0]);
-	UITool::convertToOGLPoisition(_obLine[1], _obLine[1]);
+	Tool::convertToOGLPoisition(_obLine[0], _obLine[0]);
+	Tool::convertToOGLPoisition(_obLine[1], _obLine[1]);
 }
