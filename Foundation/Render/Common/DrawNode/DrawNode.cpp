@@ -14,17 +14,7 @@ DrawNode::~DrawNode()
 
 void DrawNode::draw()
 {
-	Node::draw();
-}
-
-void DrawNode::setColor( sys::Color4B color )
-{
-	_color = color;
-}
-
-sys::Color4B& DrawNode::getColor()
-{
-	return _color;
+	ColorNode::draw();
 }
 
 void DrawNode::setWidth( float width )
@@ -35,11 +25,6 @@ void DrawNode::setWidth( float width )
 float DrawNode::getWidth()
 {
 	return _width;
-}
-
-void DrawNode::updateTranform()
-{
-	Node::updateTranform();
 }
 
 void DrawNode::initSelf()

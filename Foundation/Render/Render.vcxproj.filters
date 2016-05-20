@@ -43,9 +43,6 @@
     <ClCompile Include="Common\View\Camera.cpp">
       <Filter>Common\View</Filter>
     </ClCompile>
-    <ClCompile Include="3d\Cube\Cube.cpp">
-      <Filter>3d\Cube</Filter>
-    </ClCompile>
     <ClCompile Include="Common\Tool\TextureTool.cpp">
       <Filter>Common\Tool</Filter>
     </ClCompile>
@@ -54,9 +51,6 @@
     </ClCompile>
     <ClCompile Include="Common\Shader\TextureCache.cpp">
       <Filter>Common\Shader</Filter>
-    </ClCompile>
-    <ClCompile Include="3d\Cube\Sphere.cpp">
-      <Filter>3d\Cube</Filter>
     </ClCompile>
     <ClCompile Include="Common\Shader\Material.cpp">
       <Filter>Common\Shader</Filter>
@@ -141,6 +135,15 @@
     </ClCompile>
     <ClCompile Include="Common\Touch\TouchProxy.cpp">
       <Filter>Common\Touch</Filter>
+    </ClCompile>
+    <ClCompile Include="3d\Shape\Cube.cpp">
+      <Filter>3d\Shape</Filter>
+    </ClCompile>
+    <ClCompile Include="3d\Shape\Sphere.cpp">
+      <Filter>3d\Shape</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Control\Static\CtrlStencil.cpp">
+      <Filter>Common\Control\Static</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -228,15 +231,6 @@
     <ClInclude Include="Common\DrawNode\TestDrawNode.h">
       <Filter>Common\DrawNode</Filter>
     </ClInclude>
-    <ClInclude Include="3d\Cube\Cube.h">
-      <Filter>3d\Cube</Filter>
-    </ClInclude>
-    <ClInclude Include="3d\Cube\import.h">
-      <Filter>3d\Cube</Filter>
-    </ClInclude>
-    <ClInclude Include="3d\3d.h">
-      <Filter>3d</Filter>
-    </ClInclude>
     <ClInclude Include="2d\UI\UIImage.h">
       <Filter>2d\UI</Filter>
     </ClInclude>
@@ -254,9 +248,6 @@
     </ClInclude>
     <ClInclude Include="Common\Shader\TextureCache.h">
       <Filter>Common\Shader</Filter>
-    </ClInclude>
-    <ClInclude Include="3d\Cube\Sphere.h">
-      <Filter>3d\Cube</Filter>
     </ClInclude>
     <ClInclude Include="Common\Shader\Material.h">
       <Filter>Common\Shader</Filter>
@@ -1036,6 +1027,24 @@
     <ClInclude Include="Common\Touch\TouchProxy.h">
       <Filter>Common\Touch</Filter>
     </ClInclude>
+    <ClInclude Include="3d\Shape\Cube.h">
+      <Filter>3d\Shape</Filter>
+    </ClInclude>
+    <ClInclude Include="3d\Shape\import.h">
+      <Filter>3d\Shape</Filter>
+    </ClInclude>
+    <ClInclude Include="3d\Shape\Sphere.h">
+      <Filter>3d\Shape</Filter>
+    </ClInclude>
+    <ClInclude Include="3d\macros.h">
+      <Filter>3d</Filter>
+    </ClInclude>
+    <ClInclude Include="3d\import.h">
+      <Filter>3d</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Control\Static\CtrlStencil.h">
+      <Filter>Common\Control\Static</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Common">
@@ -1070,9 +1079,6 @@
     </Filter>
     <Filter Include="3d">
       <UniqueIdentifier>{8ffa7b3f-1dfd-407f-8836-58bac15fd524}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="3d\Cube">
-      <UniqueIdentifier>{2c39b975-13a1-4d99-82c2-406516f65b75}</UniqueIdentifier>
     </Filter>
     <Filter Include="2d">
       <UniqueIdentifier>{591dc522-2c7b-4029-8d14-9bd2f6a9f4ac}</UniqueIdentifier>
@@ -1157,6 +1163,9 @@
     </Filter>
     <Filter Include="Common\Touch">
       <UniqueIdentifier>{2f218a69-d8e9-4b3a-8f41-c4dc02aabb6c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3d\Shape">
+      <UniqueIdentifier>{ac244ac0-0e32-49a2-b0c2-cccbd2b85bff}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

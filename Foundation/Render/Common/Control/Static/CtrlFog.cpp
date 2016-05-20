@@ -19,7 +19,7 @@ CtrlFog::~CtrlFog()
 
 void CtrlFog::draw()
 {
-	Node::draw();
+	ColorNode::draw();
 
 	sys::Color4B c = getColor();
 	float color[4] = { c.red / sys::COLOR_FLOAT_VALUE, c.green / sys::COLOR_FLOAT_VALUE, c.blue / sys::COLOR_FLOAT_VALUE, c.alpha / sys::COLOR_FLOAT_VALUE };

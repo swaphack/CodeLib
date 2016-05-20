@@ -214,11 +214,7 @@ bool Node::isVisible()
 
 void Node::draw()
 {
-	if (_bShowRect)
-	{
-		GLTool::setColor(_rectColor);
-		GLTool::drawRect(&_rectVertex, GL_LINE_LOOP);
-	}
+	
 }
 
 void Node::visit()
@@ -236,11 +232,12 @@ void Node::visit()
 
 		setDirty(false);
 	}
-	this->updateTranform();
+	this->updateSelf();
 
 	if (_children.count() == 0)
 	{
 		this->draw();
+		this->drawRect();
 	}
 	else
 	{
@@ -249,9 +246,10 @@ void Node::visit()
 		while (iter != _children.end())
 		{
 			Node* node = dynamic_cast<Node*>(*iter);
-			if (node->getZOrder() >= 0 && show == false)
+			if (show == false && node->getZOrder() >= 0)
 			{
 				this->draw();
+				this->drawRect();
 				show = true;
 			}
 			node->visit();
@@ -318,14 +316,20 @@ void Node::updateTranform()
 	glRotatef(_rotation.y, 0, 1, 0);
 	glRotatef(_rotation.z, 0, 0, 1);
 	glScalef(_scale.x, _scale.y, _scale.z);
-	glTranslatef(-_obPosition.x, -_obPosition.y, -_obPosition.z);
+	//glTranslatef(-_obPosition.x, -_obPosition.y, -_obPosition.z);
 }
+
+void Node::updateSelf()
+{
+	this->updateTranform();
+}
+
 
 void Node::initSelf()
 {
 	Tool::convertToOGLPoisition(_position, _obPosition);
 
-	GLTool::calRect(_position, _volume, _anchor, _rectVertex);
+	GLTool::calRect(sys::Vector::Zero, _volume, _anchor, _rectVertex);
 
 	sortChildren();
 }
@@ -370,5 +374,16 @@ void Node::sortChildren()
 		(*oIt)->release();
 		_children.addObject((*oIt));
 		oIt++;
+	}
+}
+
+void Node::drawRect()
+{
+	if (_bShowRect)
+	{
+		GLTool::beginBlend(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		GLTool::setColor(_rectColor);
+		GLTool::drawRect(&_rectVertex, GL_LINE_LOOP);
+		GLTool::endBlend();
 	}
 }

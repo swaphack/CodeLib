@@ -16,27 +16,27 @@ WndRender::~WndRender()
 
 void WndRender::show()
 {
-	// for 3d
-
-	//this->testFog();
-	//this->testModel();
-
-	this->testImage();
-
-	this->testText();
-
-	//this->testMask();
-
-	//this->testMedia();
-
 // 	TestDrawNode* pTestDrawNode = new TestDrawNode();
 // 	pTestDrawNode->setScale(0.125f, 0.125f, 0.125f);
 // 	pTestDrawNode->setPosition(200, 100, 0);
 // 	AUTO_RELEASE_OBJECT(pTestDrawNode);
 // 	this->getCanvas()->getRoot()->addChild(pTestDrawNode);
 
-	this->testParticle();
+	// for 3d
 
+	//this->testFog();
+	//this->testModel();
+
+	//this->testImage();
+
+	//this->testText();
+
+	//this->testMask();
+
+	//this->testMedia();
+	//this->testParticle();
+
+	this->testStencil();
 }
 
 void WndRender::testImage()
@@ -44,9 +44,10 @@ void WndRender::testImage()
 	CtrlImage* pImage = new CtrlImage();
 	pImage->setImagePath("Resource/sqi.png");
 	pImage->setPosition(512, 384, 0);
-	//pImage->setRectVisible(true);
-	//pImage->setRectColor(sys::Color4B(255, 0, 0, 255));
-	//pImage->setVolume(200, 200, 0);
+	pImage->setRectVisible(true);
+	pImage->setRectColor(sys::Color4B(255, 0, 0, 255));
+	pImage->setVolume(200, 200, 0);
+	pImage->setScale(1.5, 1.0, 2);
 	AUTO_RELEASE_OBJECT(pImage);
 	this->getCanvas()->getRoot()->addChild(pImage);
 
@@ -126,9 +127,9 @@ void WndRender::testModel()
 	AUTO_RELEASE_OBJECT(frame);
 	frame->setTextureWithRect(texture2D);
 
-	CtrlModel* pModel = new CtrlModel();
+	Cube* pModel = new Cube();
 	AUTO_RELEASE_OBJECT(pModel);
-	pModel->setAllFacesFrame(frame);
+	pModel->setTexFrame(frame);
 	pModel->setPosition(512, 384, 0);
 	pModel->setVolume(256.0f, 256.0f, 256.0f);
 	pModel->getMatrial()->setShiness(1.0f);
@@ -201,8 +202,8 @@ void WndRender::testMask()
 	pMask->setOpacity(opacity);
 	pMask->setPosition(512, 384, 0.0f);
 	pMask->setVolume(200, 300, 0);
-	pMask->setRectVisible(true);
-	pMask->setRectColor(sys::Color4B(255, 0, 0, 100));
+// 	pMask->setRectVisible(true);
+// 	pMask->setRectColor(sys::Color4B(255, 0, 0, 100));
 	this->getCanvas()->getRoot()->addChild(pMask);
 	
 }
@@ -238,8 +239,31 @@ void WndRender::testParticle()
 	CtrlParticleSystem* node = new CtrlParticleSystem();
 	node->setPosition(512, 386, 0);
 	node->setCount(100);
+	node->setScale(2, 1, 1);
 	node->init();
 	node->start();
 	AUTO_RELEASE_OBJECT(node);
 	this->getCanvas()->getRoot()->addChild(node);
+}
+
+void WndRender::testStencil()
+{
+	CtrlStencil* pStencil = new CtrlStencil();
+	AUTO_RELEASE_OBJECT(pStencil);
+
+	pStencil->setPosition(512, 384, 0);
+	pStencil->setVolume(100, 100, 0);
+	pStencil->setRectVisible(true);
+	pStencil->setRectColor(sys::Color4B(0, 0, 0, 255));
+	this->getCanvas()->getRoot()->addChild(pStencil);
+
+	CtrlImage* pImage = new CtrlImage();
+	AUTO_RELEASE_OBJECT(pImage);
+	pImage->setImagePath("Resource/sqi.png");
+	pImage->setPosition(0, 0, 0);
+	pImage->setRectVisible(true);
+	pImage->setRectColor(sys::Color4B(255, 0, 0, 255));
+	pImage->setVolume(200, 200, 0);
+	pImage->setScale(1.5, 1.0, 2);
+	pStencil->addChild(pImage);
 }

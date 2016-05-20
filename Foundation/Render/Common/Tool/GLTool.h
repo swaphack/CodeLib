@@ -64,5 +64,21 @@ namespace render
 		* @param rectVertex 矩形顶点
 		*/
 		static void calRect(const sys::Vector& position, const sys::Volume& volume, const sys::Vector& anchor, RectangeVertex& rectVertex);
+
+		/**
+		* 开始混合
+		* @param blend 混合条件
+		*/
+		static void beginBlend(const BlendParam& blend);
+		/**
+		* 开始混合
+		* @param src 混合条件
+		* @param dest 混合条件
+		*/
+		static void beginBlend(int src, int dest);
+		/**
+		* 混合结束
+		*/
+		static void endBlend();
 	};
 }

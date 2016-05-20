@@ -96,6 +96,8 @@
     <ClInclude Include="Framework\ITimer.h" />
     <ClInclude Include="Framework\Object.h" />
     <ClInclude Include="Math\Color.h" />
+    <ClInclude Include="Math\define.cpp" />
+    <ClInclude Include="Math\define.h" />
     <ClInclude Include="Math\import.h" />
     <ClInclude Include="Math\macros.h" />
     <ClInclude Include="Math\Point.h" />

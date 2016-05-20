@@ -59,5 +59,11 @@ namespace sys
 			y = vector.y;
 			z = vector.z;
 		}
+
+	public:
+		static Vector Zero;
 	};
+
+	__declspec(selectany) sys::Vector Vector::Zero;
+
 }

@@ -59,9 +59,6 @@ void GLTool::setColor(sys::Color4B color)
 
 void GLTool::drawRect(const RectangeVertex* rectVertex, uint type)
 {
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
 	glBegin(type);
 
 	glVertex3f(rectVertex->leftDown.x, rectVertex->leftDown.y, rectVertex->leftDown.z);
@@ -117,4 +114,21 @@ void GLTool::calRect(const sys::Vector& position, const sys::Volume& volume, con
 	x = position.x - volume.width * anchor.x;
 	y = position.y + volume.height * (1 - anchor.y);
 	rectVertex.leftUp = Tool::convertToOGLPoisition(x, y, position.z);
+}
+
+void GLTool::beginBlend(const BlendParam& blend)
+{
+	glEnable(GL_BLEND);
+	glBlendFunc(blend.src, blend.dest);
+}
+
+void GLTool::beginBlend(int src, int dest)
+{
+	glEnable(GL_BLEND);
+	glBlendFunc(src, dest);
+}
+
+void GLTool::endBlend()
+{
+	glDisable(GL_BLEND);
 }

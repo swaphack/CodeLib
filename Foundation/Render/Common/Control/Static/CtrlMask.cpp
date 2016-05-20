@@ -5,7 +5,8 @@ using namespace render;
 CtrlMask::CtrlMask()
 :_opacity(255)
 {
-
+	_blend.src = GL_DST_COLOR;
+	_blend.dest = GL_ZERO;
 }
 
 CtrlMask::~CtrlMask()
@@ -15,10 +16,9 @@ CtrlMask::~CtrlMask()
 
 void CtrlMask::draw()
 {
-	Node::draw();
+	ColorNode::draw();
 
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_DST_COLOR, GL_ZERO);
+	GLTool::beginBlend(_blend);
 
 	sys::Color4B color = getColor();
 	color.red *= (255 - _opacity) / sys::COLOR_FLOAT_VALUE;
@@ -30,7 +30,7 @@ void CtrlMask::draw()
 
 	GLTool::drawRect(&_rectVertex, GL_QUADS);
 
-	glDisable(GL_BLEND);
+	GLTool::endBlend();
 }
 
 void CtrlMask::setOpacity(uchar opacity)

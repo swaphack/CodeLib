@@ -17,5 +17,6 @@ public:
 	void testMedia();
 	void testFog();
 	void testAnimation();
-	void testParticle();
+	void testParticle(); 
+	void testStencil();
 };

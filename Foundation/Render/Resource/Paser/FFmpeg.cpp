@@ -98,7 +98,7 @@ void setStreamType(int type, int& streamIndex)
 	{
 		return;
 	}
-	for (int i = 0; i < _formatContext->nb_streams; i++)
+	for (uint i = 0; i < _formatContext->nb_streams; i++)
 	{
 		if ((_formatContext->streams[i])->codec->codec_type == type)
 		{

@@ -52,10 +52,9 @@ namespace render
 		void setCount(uint count);
 		// 获取粒子个数
 		uint getCount();
-
+		// 粒子播放结束后处理 override
 		virtual void onParticleEndHandler();
-
-		// 创建粒子
+		// 创建粒子 override
 		virtual ParticleNode* createParticle();
 	protected:
 		virtual void updateSelf(float interval);

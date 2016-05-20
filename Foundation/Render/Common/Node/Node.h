@@ -77,7 +77,7 @@ namespace render
 		// 绘制
 		virtual void draw();
 		// 遍历所有节点
-		void visit();
+		virtual void visit();
 		// 获取动作代理
 		ActionProxy* getActionProxy();
 
@@ -96,11 +96,16 @@ namespace render
 		// 获取触摸代理
 		TouchProxy* getTouchProxy();
 	protected:
+		// 更新空间位置
 		virtual void updateTranform();
-		// 重新计算参数
+		// 更新自己
+		virtual void updateSelf();
+		// 重新初始化自己
 		virtual void initSelf();
 		// 对子节点进行排序
 		virtual void sortChildren();
+		// 显示绘制区域
+		void drawRect();
 	protected:
 		sys::Vector _obPosition;
 		// 标签

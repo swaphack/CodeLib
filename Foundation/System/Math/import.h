@@ -6,3 +6,4 @@
 #include "Volume.h"
 #include "Rect.h"
 #include "Color.h"
+#include "define.h"

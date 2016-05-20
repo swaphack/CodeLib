@@ -14,7 +14,7 @@ CtrlText::~CtrlText()
 
 void CtrlText::draw()
 {
-	Node::draw();
+	ColorNode::draw();
 
 	if (_texFrame == nullptr || _texFrame->getTexture() == nullptr)
 	{
@@ -25,15 +25,14 @@ void CtrlText::draw()
 
 	int textID = _texFrame->getTexture()->getTextureID();
 
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	GLTool::beginBlend(_blend);
 
 	glEnable(GL_TEXTURE_2D);
 	glBindTexture(GL_TEXTURE_2D, textID);
 	GLTool::drawRectVertex(&_texRect);
 	glDisable(GL_TEXTURE_2D);
 
-	glDisable(GL_BLEND);
+	GLTool::endBlend();
 }
 
 void CtrlText::setFontPath(const char* fonturl)
@@ -156,7 +155,7 @@ void CtrlText::initSelf()
 
 	Node::initSelf();
 
-	TextureTool::setTexture2DVertexts(&_texRect, _position, _volume, _anchor);
+	TextureTool::setTexture2DVertexts(&_texRect, sys::Vector::Zero, _volume, _anchor);
 }
 
 

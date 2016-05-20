@@ -232,6 +232,12 @@
     <ClInclude Include="Thread\Thread.h">
       <Filter>Thread</Filter>
     </ClInclude>
+    <ClInclude Include="Math\define.cpp">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Math\define.h">
+      <Filter>Math</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Base\File.cpp">

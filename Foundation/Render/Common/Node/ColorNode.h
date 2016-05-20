@@ -10,7 +10,14 @@ namespace render
 	public:
 		ColorNode();
 		virtual ~ColorNode();
+	public:
+		virtual void draw();
+		// 设置混合条件
+		void setBlend(int src, int dest);
+		// 获取混合参数
+		const BlendParam& getBlend();
 	protected:
-	private:
+		// 混合参数
+		BlendParam _blend;
 	};
 }

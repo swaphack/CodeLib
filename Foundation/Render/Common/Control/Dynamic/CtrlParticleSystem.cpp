@@ -15,16 +15,15 @@ ParticleNode::~ParticleNode()
 
 void ParticleNode::draw()
 {
-	Node::draw();
+	ColorNode::draw();
 
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	GLTool::beginBlend(_blend);
 
 	GLTool::setColor(getColor());
 
 	GLTool::drawTriangleVertex(&_texRect);
 
-	glDisable(GL_BLEND);
+	GLTool::endBlend();
 }
 
 void ParticleNode::setSpeedAcceleration(float x, float y, float z)
@@ -75,7 +74,9 @@ void ParticleNode::update(float interval)
 	_position.add(_speedAcceleration);
 
 	convertColor4FTo4B(_colorInit, _color);
-	TextureTool::setTexture2DVertexts(&_texRect, _position, _volume, _anchor);
+	TextureTool::setTexture2DVertexts(&_texRect, sys::Vector::Zero, _volume, _anchor);
+
+	Tool::convertToOGLPoisition(_position, _obPosition);
 }
 
 void ParticleNode::initSelf()
@@ -86,8 +87,9 @@ void ParticleNode::initSelf()
 
 	sys::Size size = sys::Size(_volume.width, _volume.height);
 	sys::Rect rect = sys::Rect(0, 0, _volume.width, _volume.height);
+
 	TextureTool::setTexture2DCoords(&_texRect, size, rect);
-	TextureTool::setTexture2DVertexts(&_texRect, _position, _volume, _anchor);
+	TextureTool::setTexture2DVertexts(&_texRect, sys::Vector::Zero, _volume, _anchor);
 }
 
 //////////////////////////////////////////////////////////////////////////

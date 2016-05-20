@@ -13,12 +13,11 @@ CtrlImage::~CtrlImage()
 
 void CtrlImage::draw()
 {
-	Node::draw();
+	ColorNode::draw();
 
 	int textID = _texFrame.getTexture()->getTextureID();
 
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);	
+	GLTool::beginBlend(_blend);
 
 	GLTool::setColor(getColor());
 
@@ -27,7 +26,7 @@ void CtrlImage::draw()
 	GLTool::drawRectVertex(&_texRect);
 	glDisable(GL_TEXTURE_2D);
 
-	glDisable(GL_BLEND);
+	GLTool::endBlend();
 }
 
 void CtrlImage::setImagePath(const char* path, ImageFormat format/* = EIF_PNG*/)
@@ -90,7 +89,7 @@ void CtrlImage::initSelf()
 	}
 
 	sys::Size size = sys::Size(texture->getWidth(), texture->getHeight());
-	TextureTool::setTexture2DCoords(&_texRect, size, _texFrame.getRect());
 
-	TextureTool::setTexture2DVertexts(&_texRect, _position, _volume, _anchor);
+	TextureTool::setTexture2DCoords(&_texRect, size, _texFrame.getRect());
+	TextureTool::setTexture2DVertexts(&_texRect, sys::Vector::Zero, _volume, _anchor);
 }

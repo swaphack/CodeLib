@@ -70,8 +70,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="3d\Cube\Cube.cpp" />
-    <ClCompile Include="3d\Cube\Sphere.cpp" />
+    <ClCompile Include="3d\Shape\Cube.cpp" />
+    <ClCompile Include="3d\Shape\Sphere.cpp" />
     <ClCompile Include="Common\Action\Action.cpp" />
     <ClCompile Include="Common\Action\ActionManager.cpp" />
     <ClCompile Include="Common\Action\ActionProxy.cpp" />
@@ -86,6 +86,7 @@
     <ClCompile Include="Common\Control\Static\CtrlMask.cpp" />
     <ClCompile Include="Common\Control\Static\CtrlModel.cpp" />
     <ClCompile Include="Common\Control\Static\CtrlSpotLight.cpp" />
+    <ClCompile Include="Common\Control\Static\CtrlStencil.cpp" />
     <ClCompile Include="Common\Control\Static\CtrlText.cpp" />
     <ClCompile Include="Common\DrawNode\DrawNode.cpp" />
     <ClCompile Include="Common\DrawNode\LineNode.cpp" />
@@ -122,10 +123,11 @@
     <ClInclude Include="2d\UI\macros.h" />
     <ClInclude Include="2d\UI\UIImage.h" />
     <ClInclude Include="2d\UI\UINode.h" />
-    <ClInclude Include="3d\3d.h" />
-    <ClInclude Include="3d\Cube\Cube.h" />
-    <ClInclude Include="3d\Cube\import.h" />
-    <ClInclude Include="3d\Cube\Sphere.h" />
+    <ClInclude Include="3d\import.h" />
+    <ClInclude Include="3d\macros.h" />
+    <ClInclude Include="3d\Shape\Cube.h" />
+    <ClInclude Include="3d\Shape\import.h" />
+    <ClInclude Include="3d\Shape\Sphere.h" />
     <ClInclude Include="Common\Action\Action.h" />
     <ClInclude Include="Common\Action\ActionManager.h" />
     <ClInclude Include="Common\Action\ActionProxy.h" />
@@ -147,6 +149,7 @@
     <ClInclude Include="Common\Control\Static\CtrlMask.h" />
     <ClInclude Include="Common\Control\Static\CtrlModel.h" />
     <ClInclude Include="Common\Control\Static\CtrlSpotLight.h" />
+    <ClInclude Include="Common\Control\Static\CtrlStencil.h" />
     <ClInclude Include="Common\Control\Static\CtrlText.h" />
     <ClInclude Include="Common\Control\Static\import.h" />
     <ClInclude Include="Common\Control\Static\macros.h" />

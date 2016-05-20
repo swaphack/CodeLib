@@ -31,8 +31,7 @@ void CtrlMedia::draw()
 		textID = _texFrame->getTexture()->getTextureID();
 	}
 
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	GLTool::beginBlend(_blend);
 
 	GLTool::setColor(getColor());
 
@@ -41,7 +40,7 @@ void CtrlMedia::draw()
 	GLTool::drawRectVertex(&_texRect);
 	glDisable(GL_TEXTURE_2D);
 
-	glDisable(GL_BLEND);
+	GLTool::endBlend();
 }
 
 void CtrlMedia::setMediaPath(const char* path)
@@ -93,8 +92,9 @@ void CtrlMedia::initSelf()
 	_texFrame->setTextureWithRect(texture);
 
 	sys::Size size = sys::Size(_texFrame->getTexture()->getWidth(), _texFrame->getTexture()->getHeight());
+
 	TextureTool::setTexture2DCounterCoords(&_texRect, size, _texFrame->getRect());
-	TextureTool::setTexture2DVertexts(&_texRect, _position, _volume, _anchor);
+	TextureTool::setTexture2DVertexts(&_texRect, sys::Vector::Zero, _volume, _anchor);
 }
 
 void CtrlMedia::updateSelf(float interval)

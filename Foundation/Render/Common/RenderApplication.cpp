@@ -56,8 +56,6 @@ void RenderApplication::update()
 
 		checkAutoRealsePool();
 	}
-
-	
 }
 
 void RenderApplication::dispose()
