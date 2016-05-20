@@ -13,98 +13,32 @@ namespace render
 		}
 		virtual ~TestDrawNode(){}
 	public:
+		void drawSphere()
+		{
+			//glutSolidSphere(0.5, 20, 20);
+		}
+
 		virtual void draw()
 		{
-			DrawNode::draw();
 
-			
-			//glDepthMask(GL_FALSE);
+			drawSphere();
 
-			glEnable(GL_TEXTURE_2D);
-			glBindTexture(GL_TEXTURE_2D, 1);
-
-			glEnable(GL_BLEND);
-			glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
-			glBegin(GL_QUADS);
-
-			// 前侧面
-
-			glNormal3f(0.0f, 0.0f, 1.0f);					// 法线指向观察者
-
-			glTexCoord2f(0.0f, 0.0f); glVertex3f(-1.0f, -1.0f, 1.0f);
-
-			glTexCoord2f(1.0f, 0.0f); glVertex3f(1.0f, -1.0f, 1.0f);
-
-			glTexCoord2f(1.0f, 1.0f); glVertex3f(1.0f, 1.0f, 1.0f);
-
-			glTexCoord2f(0.0f, 1.0f); glVertex3f(-1.0f, 1.0f, 1.0f);
-
-			// 后侧面
-
-			glNormal3f(0.0f, 0.0f, -1.0f);					// 法线背向观察者
-
-			glTexCoord2f(1.0f, 0.0f); glVertex3f(-1.0f, -1.0f, -1.0f);
-
-			glTexCoord2f(1.0f, 1.0f); glVertex3f(-1.0f, 1.0f, -1.0f);
-
-			glTexCoord2f(0.0f, 1.0f); glVertex3f(1.0f, 1.0f, -1.0f);
-
-			glTexCoord2f(0.0f, 0.0f); glVertex3f(1.0f, -1.0f, -1.0f);
-
-			// 顶面
-
-			glNormal3f(0.0f, 1.0f, 0.0f);					// 法线向上
-
-			glTexCoord2f(0.0f, 1.0f); glVertex3f(-1.0f, 1.0f, -1.0f);
-
-			glTexCoord2f(0.0f, 0.0f); glVertex3f(-1.0f, 1.0f, 1.0f);
-
-			glTexCoord2f(1.0f, 0.0f); glVertex3f(1.0f, 1.0f, 1.0f);
-
-			glTexCoord2f(1.0f, 1.0f); glVertex3f(1.0f, 1.0f, -1.0f);
-
-			// 底面
-
-			glNormal3f(0.0f, -1.0f, 0.0f);					// 法线朝下
-
-			glTexCoord2f(1.0f, 1.0f); glVertex3f(-1.0f, -1.0f, -1.0f);
-
-			glTexCoord2f(0.0f, 1.0f); glVertex3f(1.0f, -1.0f, -1.0f);
-
-			glTexCoord2f(0.0f, 0.0f); glVertex3f(1.0f, -1.0f, 1.0f);
-
-			glTexCoord2f(1.0f, 0.0f); glVertex3f(-1.0f, -1.0f, 1.0f);
-
-			// 右侧面
-
-			glNormal3f(1.0f, 0.0f, 0.0f);					// 法线朝右
-
-			glTexCoord2f(1.0f, 0.0f); glVertex3f(1.0f, -1.0f, -1.0f);
-
-			glTexCoord2f(1.0f, 1.0f); glVertex3f(1.0f, 1.0f, -1.0f);
-
-			glTexCoord2f(0.0f, 1.0f); glVertex3f(1.0f, 1.0f, 1.0f);
-
-			glTexCoord2f(0.0f, 0.0f); glVertex3f(1.0f, -1.0f, 1.0f);
-
-			// 左侧面
-
-			glNormal3f(-1.0f, 0.0f, 0.0f);					// 法线朝左
-
-			glTexCoord2f(0.0f, 0.0f); glVertex3f(-1.0f, -1.0f, -1.0f);
-
-			glTexCoord2f(1.0f, 0.0f); glVertex3f(-1.0f, -1.0f, 1.0f);
-
-			glTexCoord2f(1.0f, 1.0f); glVertex3f(-1.0f, 1.0f, 1.0f);
-
-			glTexCoord2f(0.0f, 1.0f); glVertex3f(-1.0f, 1.0f, -1.0f);
-
-			glEnd();
-
-			glDisable(GL_BLEND);
-
-			//glDepthMask(GL_TRUE);
+// 			glClearStencil(0x0);
+// 			glClear(GL_STENCIL_BUFFER_BIT);
+// 			glStencilFunc(GL_ALWAYS, 1, 0xFF);
+// 			glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
+// 			glEnable(GL_STENCIL_TEST);
+// 
+// 			glColor3f(0.5f, 0.5f, 0.5f);
+// 			glDepthMask(GL_FALSE);//设置深度缓冲区为只读
+// 			glRectf(-1.5f, -1.5f, 1.5f, 1.5f);
+// 
+// 			glDepthMask(GL_TRUE);//重新启用深度缓冲区
+// 
+// 			glStencilFunc(GL_EQUAL, 1, 0xFF);
+// 			glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
+// 			glScalef(1.0f, 1.0f, -1.0f);
+// 			drawSphere();
 		}
 	protected:
 	private:

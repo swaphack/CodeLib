@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="AI">
+      <UniqueIdentifier>{f5b6e293-6b3d-49b9-a8ff-20cb44e43f4b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Brain">
+      <UniqueIdentifier>{e6943823-e0f5-4e64-8fe6-029c98639c67}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AI\Solution">
+      <UniqueIdentifier>{5df77005-5427-436f-8007-e32a6bbaddd2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AI\Base">
+      <UniqueIdentifier>{213963d7-a604-47fd-826b-861fa8597cd2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AI\Study">
+      <UniqueIdentifier>{58d41aee-2e58-4cc2-bd03-2e8762ed0bf3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AI\Experience">
+      <UniqueIdentifier>{c1922982-cf80-435d-9ecb-debf3c852555}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Brain\Memory.h">
+      <Filter>Brain</Filter>
+    </ClInclude>
+    <ClInclude Include="Brain\Input.h">
+      <Filter>Brain</Filter>
+    </ClInclude>
+    <ClInclude Include="Brain\Output.h">
+      <Filter>Brain</Filter>
+    </ClInclude>
+    <ClInclude Include="Brain\Control.h">
+      <Filter>Brain</Filter>
+    </ClInclude>
+    <ClInclude Include="Brain\Arithmetical.h">
+      <Filter>Brain</Filter>
+    </ClInclude>
+    <ClInclude Include="Brain\Cell.h">
+      <Filter>Brain</Filter>
+    </ClInclude>
+    <ClInclude Include="AI\Solution\Analysis.h">
+      <Filter>AI\Solution</Filter>
+    </ClInclude>
+    <ClInclude Include="AI\Solution\import.h">
+      <Filter>AI\Solution</Filter>
+    </ClInclude>
+    <ClInclude Include="AI\Solution\macros.h">
+      <Filter>AI\Solution</Filter>
+    </ClInclude>
+    <ClInclude Include="AI\Solution\Solution.h">
+      <Filter>AI\Solution</Filter>
+    </ClInclude>
+    <ClInclude Include="AI\Base\Event.h">
+      <Filter>AI\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="AI\Base\Message.h">
+      <Filter>AI\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="AI\Base\import.h">
+      <Filter>AI\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="AI\Base\IWorker.h">
+      <Filter>AI\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="AI\Study\Study.h">
+      <Filter>AI\Study</Filter>
+    </ClInclude>
+    <ClInclude Include="AI\Study\macros.h">
+      <Filter>AI\Study</Filter>
+    </ClInclude>
+    <ClInclude Include="AI\Experience\Experience.h">
+      <Filter>AI\Experience</Filter>
+    </ClInclude>
+    <ClInclude Include="AI\Experience\macros.h">
+      <Filter>AI\Experience</Filter>
+    </ClInclude>
+    <ClInclude Include="AI\Base\Result.h">
+      <Filter>AI\Base</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,12 @@
+#pragma once
+
+namespace idea
+{
+	// ‘ÀÀ„
+	class Arithmetical
+	{
+	public:
+	protected:
+	private:
+	};
+}
