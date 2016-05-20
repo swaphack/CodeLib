@@ -73,6 +73,7 @@
     <ClInclude Include="AI\Experience\macros.h" />
     <ClInclude Include="AI\Solution\Analysis.h" />
     <ClInclude Include="AI\Solution\import.h" />
+    <ClInclude Include="AI\Solution\Log.h" />
     <ClInclude Include="AI\Solution\macros.h" />
     <ClInclude Include="AI\Solution\Solution.h" />
     <ClInclude Include="AI\Study\macros.h" />

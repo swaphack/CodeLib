@@ -10,11 +10,4 @@ namespace idea
 	protected:
 	private:
 	};
-
-	class BoolResult
-	{
-	public:
-	protected:
-	private:
-	};
 }

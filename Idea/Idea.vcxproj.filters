@@ -78,5 +78,8 @@
     <ClInclude Include="AI\Base\Result.h">
       <Filter>AI\Base</Filter>
     </ClInclude>
+    <ClInclude Include="AI\Solution\Log.h">
+      <Filter>AI\Solution</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
