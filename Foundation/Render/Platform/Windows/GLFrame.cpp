@@ -4,8 +4,6 @@ using namespace render;
 
 using namespace sys;
 
-
-
 DeviceProxy::DeviceProxy(const TouchManager* touchManager)
 {
 	ASSERT(touchManager != nullptr);
@@ -101,7 +99,7 @@ bool GLFrame::init()
 		PFD_SUPPORT_OPENGL |						// 格式必须支持OpenGL
 		PFD_DOUBLEBUFFER,							// 必须支持双缓冲
 		PFD_TYPE_RGBA,								// 申请 RGBA 格式
-		_bits,                                       // 选定色彩深度
+		_bits,                                      // 选定色彩深度
 		0, 0, 0, 0, 0, 0,                           // 忽略的色彩位
 		0,                                          // 无Alpha缓存
 		0,                                          // 忽略Shift Bit

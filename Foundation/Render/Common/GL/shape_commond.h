@@ -17,14 +17,10 @@ namespace render
 		// ×óÉÏ½Ç
 		sys::Vector leftUp;
 
-		RectangeVertex()
-		{
+		RectangeVertex();
 
-		}
+		bool containPoint(float x, float y);
 
-		bool containPoint(float x, float y)
-		{
-
-		}
+		bool containPoint(float x, float y, float z);
 	};
 }

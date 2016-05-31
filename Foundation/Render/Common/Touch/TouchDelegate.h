@@ -12,7 +12,7 @@ namespace render
 		ETT_UP,		// ∑≈ ÷
 	};
 
-	typedef bool (sys::Object::*TOUCH_DELEGATE_HANDLER)(float x, float y);
+	typedef void (*TOUCH_DELEGATE_HANDLER)(sys::Object* object, float x, float y);
 
 	#define TOUCH_DELEGATTE_SELECTOR(HANDLER_SEL) static_cast<TOUCH_DELEGATE_HANDLER>(&HANDLER_SEL)
 
@@ -27,12 +27,12 @@ namespace render
 		void hand(float x, float y)
 		{
 			if (!empty())
-				(target->*handler)(x, y);
+				(*handler)(target, x, y);
 		}
 
 		bool empty()
 		{
-			return target == nullptr || handler == nullptr;
+			return handler == nullptr;
 		}
 
 		bool isEquals(sys::Object* t, TOUCH_DELEGATE_HANDLER h)

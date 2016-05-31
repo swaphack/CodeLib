@@ -6,14 +6,15 @@ using namespace render;
 
 TouchProxy::TouchProxy(Node* target)
 :_target(target)
-, _bTouchEnabled(false)
+, _bTouchEnabled(true)
 {
-
+	G_TOUCHMANAGER->addTouch(this);
 }
 
 TouchProxy::~TouchProxy()
 {
 	this->removeAllTouchEvent();
+	G_TOUCHMANAGER->removeTouch(this);
 }
 
 void TouchProxy::setTarget(Node* target) 

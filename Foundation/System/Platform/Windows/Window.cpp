@@ -185,17 +185,20 @@ bool Window::init()
 	dwExStyle = WS_EX_APPWINDOW | WS_EX_WINDOWEDGE;	// 扩展窗体风格
 	dwStyle = WS_OVERLAPPEDWINDOW;                    // 窗体风格
 
-	//AdjustWindowRectEx(&WindowRect, dwStyle, FALSE, dwExStyle); // 调整窗口大小
+	RECT rect;
+	SetRect(&rect, left, top, left + _width, top + _height);
+	AdjustWindowRectEx(&rect, dwStyle, FALSE, dwExStyle); // 调整窗口大小
+
 	if (!(_wnd = CreateWindowEx(
 		dwExStyle,									// 扩展窗体风格
-		TEXT(CLASS_NAME),								// 类名字
-		TEXT(_title.c_str()),							// 窗口标题
+		TEXT(CLASS_NAME),							// 类名字
+		TEXT(_title.c_str()),						// 窗口标题
 		WS_CLIPSIBLINGS |							// 必须的窗体风格属性
 		WS_CLIPCHILDREN |							// 必须的窗体风格属性
 		dwStyle,									// 选择的窗体属性
-		left, top,									// 窗口位置
-		_width,										// 宽度
-		_height,									// 高度
+		rect.left, rect.top,						// 窗口位置
+		rect.right - rect.left,						// 宽度
+		rect.bottom - rect.top,						// 高度
 		NULL,                                       // 无父窗口
 		NULL,                                       // 无菜单
 		_instance,                                  // 实例

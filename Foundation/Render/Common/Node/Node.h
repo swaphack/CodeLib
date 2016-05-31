@@ -35,14 +35,17 @@ namespace render
 		void clearAllChildren();
 		// 根据id获取字节点
 		Node* getChildByID(long id);
+
 		// 设置标签
 		void setTag(int tag);
 		// 获取标签
 		int getTag();
+
 		// 设置数据
 		void setUserData(void* data);
 		// 获取数据
 		void* getUserData();
+
 		// 设置z轴坐标
 		void setZOrder(float z);
 		// 获取z轴坐标
@@ -104,6 +107,8 @@ namespace render
 		virtual void initSelf();
 		// 对子节点进行排序
 		virtual void sortChildren();
+		// 空间物理坐标
+		virtual void calRealSpaceInfo();
 		// 显示绘制区域
 		void drawRect();
 	protected:
@@ -145,5 +150,7 @@ namespace render
 		sys::Color4B _rectColor;
 		// 是否显示矩形框
 		bool _bShowRect;
+		// 空间坐标
+		RectangeVertex _realSpaceVertex;
 	};
 }

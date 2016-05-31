@@ -71,51 +71,6 @@ void GLTool::drawRect(const RectangeVertex* rectVertex, uint type)
 	glDisable(GL_BLEND);
 }
 
-void GLTool::calNormal(const sys::Vector& p1, const sys::Vector& p2, const sys::Vector& p3, sys::Vector& normal)
-{
-	sys::Vector vc1, vc2;
-	float a, b, c;
-	double r;
-
-	vc1.x = p2.x - p1.x; vc1.y = p2.y - p1.y; vc1.z = p2.z - p1.z;
-	vc2.x = p3.x - p1.x; vc2.y = p3.y - p1.y; vc2.z = p3.z - p1.z;
-
-	a = vc1.y * vc2.z - vc2.y * vc1.z;
-	b = vc2.x * vc1.z - vc1.x * vc2.z;
-	c = vc1.x * vc2.y - vc2.x * vc1.y;
-	r = sqrt(a * a + b* b + c * c);
-
-	normal.x = a / r;
-	normal.y = b / r;
-	normal.z = c / r;
-}
-
-void GLTool::calRect(const sys::Vector& position, const sys::Volume& volume, const sys::Vector& anchor, RectangeVertex& rectVertex)
-{
-	float x = 0;
-	float y = 0;
-
-	// left down
-	x = position.x - volume.width * anchor.x;
-	y = position.y - volume.height * anchor.y;
-	rectVertex.leftDown = Tool::convertToOGLPoisition(x, y, position.z);
-
-	// right down
-	x = position.x + volume.width * (1 - anchor.x);
-	y = position.y - volume.height * anchor.y;
-	rectVertex.rightDown = Tool::convertToOGLPoisition(x, y, position.z);
-
-	// right up
-	x = position.x + volume.width * (1 - anchor.x);
-	y = position.y + volume.height * (1 - anchor.y);
-	rectVertex.rightUp = Tool::convertToOGLPoisition(x, y, position.z);
-
-	// left up
-	x = position.x - volume.width * anchor.x;
-	y = position.y + volume.height * (1 - anchor.y);
-	rectVertex.leftUp = Tool::convertToOGLPoisition(x, y, position.z);
-}
-
 void GLTool::beginBlend(const BlendParam& blend)
 {
 	glEnable(GL_BLEND);

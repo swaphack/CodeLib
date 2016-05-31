@@ -93,6 +93,7 @@
     <ClCompile Include="Common\DrawNode\PointNode.cpp" />
     <ClCompile Include="Common\GL\matrix_common.cpp" />
     <ClCompile Include="Common\GL\protocol_common.cpp" />
+    <ClCompile Include="Common\GL\shape_commond.cpp" />
     <ClCompile Include="Common\Node\Animation.cpp" />
     <ClCompile Include="Common\Node\ColorNode.cpp" />
     <ClCompile Include="Common\Node\Node.cpp" />

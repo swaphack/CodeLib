@@ -32,31 +32,31 @@ Time* Time::getNow()
 void Time::addSecond(int val)
 {
 	_tm.tm_sec += val;
-	this->adjustTM();
+	this->resetTime();
 }
 
 void Time::addMinute(int val)
 {
 	_tm.tm_min += val;
-	this->adjustTM();
+	this->resetTime();
 }
 
 void Time::addHour(int val)
 {
 	_tm.tm_hour += val;
-	this->adjustTM();
+	this->resetTime();
 }
 
 void Time::addDay(int val)
 {
 	_tm.tm_yday += val;
-	this->adjustTM();
+	this->resetTime();
 }
 
 void Time::addYear(int val)
 {
 	_tm.tm_year += val;
-	this->adjustTM();
+	this->resetTime();
 }
 
 void Time::setTM(struct tm* stm)
@@ -81,7 +81,13 @@ void Time::setTime(time_t tt)
 	localtime_s(&_tm, &tt);
 }
 
-void Time::adjustTM()
+time_t sys::Time::getTime()
+{
+	time_t tt = mktime(&_tm);
+	return tt;
+}
+
+void Time::resetTime()
 {
 	time_t tt = mktime(&_tm);
 	localtime_s(&_tm, &tt);

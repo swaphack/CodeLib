@@ -65,6 +65,9 @@ void TouchManager::removeAllTouches()
 bool TouchManager::onTouchBegan(float x, float y)
 {
 	std::vector<TouchProxy*>::reverse_iterator it = _touchProtocols.rbegin();
+	x = x / Tool::getGLViewSize().width;
+	y = y / Tool::getGLViewSize().height;
+
 	while (it != _touchProtocols.rend())
 	{
 		if ((*it)->isTouchEnabled() && (*it)->onTouchBegan(x, y))

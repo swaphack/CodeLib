@@ -145,6 +145,9 @@
     <ClCompile Include="Common\Control\Static\CtrlStencil.cpp">
       <Filter>Common\Control\Static</Filter>
     </ClCompile>
+    <ClCompile Include="Common\GL\shape_commond.cpp">
+      <Filter>Common\GL</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Common\GL\import.h">

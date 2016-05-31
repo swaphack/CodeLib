@@ -29,6 +29,7 @@ Node::Node()
 Node::~Node()
 {
 	SAFE_DELETE(_actionProxy);
+	SAFE_DELETE(_touchProxy);
 	this->clearAllChildren();
 }
 
@@ -291,8 +292,7 @@ void Node::setRectColor(const sys::Color4B& color)
 
 bool Node::containTouchPoint(float x, float y)
 {
-
-	return false;
+	return _realSpaceVertex.containPoint(x, y);
 }
 
 TouchProxy* Node::getTouchProxy()
@@ -329,7 +329,9 @@ void Node::initSelf()
 {
 	Tool::convertToOGLPoisition(_position, _obPosition);
 
-	GLTool::calRect(sys::Vector::Zero, _volume, _anchor, _rectVertex);
+	Tool::calRect(sys::Vector::Zero, _volume, _anchor, _rectVertex);
+
+	calRealSpaceInfo();
 
 	sortChildren();
 }
@@ -375,6 +377,32 @@ void Node::sortChildren()
 		_children.addObject((*oIt));
 		oIt++;
 	}
+}
+
+void Node::calRealSpaceInfo()
+{
+	Node* temp = this;
+	sys::Vector position;
+	sys::Vector scale = sys::Vector::One;
+	sys::Volume volume = _volume;
+	do 
+	{
+		if (!temp->isRelativeWithParent())
+		{
+			position = temp->getPosition();
+			scale = temp->getScale();
+			break;
+		}
+		else
+		{
+			position.add(temp->getPosition());
+			scale.mult(temp->getScale());
+			temp = temp->getParent();
+		}
+	} while (temp != NULL);
+	volume.mult(scale);
+
+	Tool::calRect(position, volume, _anchor, _realSpaceVertex);
 }
 
 void Node::drawRect()

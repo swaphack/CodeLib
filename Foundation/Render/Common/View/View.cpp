@@ -8,7 +8,7 @@ using namespace render;
 View::View()
 :_camera(nullptr)
 {
-	_scale = sys::Vector(1, 1, 1);
+	_scale = sys::Vector::One;
 }
 
 View::~View()

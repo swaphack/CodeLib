@@ -49,23 +49,6 @@ namespace render
 		static void drawRect(const RectangeVertex* rectVertex, uint type);
 
 		/**
-		* 法线的计算
-		* @param p1 顶点1
-		* @param p2 顶点2
-		* @param p3 顶点3
-		* @param normal 法线
-		*/
-		static void calNormal(const sys::Vector& p1, const sys::Vector& p2, const sys::Vector& p3, sys::Vector& normal);
-		/**
-		* 矩形顶点的计算
-		* @param position 位置
-		* @param volume 体积
-		* @param anchor 锚点
-		* @param rectVertex 矩形顶点
-		*/
-		static void calRect(const sys::Vector& position, const sys::Volume& volume, const sys::Vector& anchor, RectangeVertex& rectVertex);
-
-		/**
 		* 开始混合
 		* @param blend 混合条件
 		*/
