@@ -1,8 +1,8 @@
 #pragma once
 
-namespace game
+namespace sys
 {
-	class Map
+	class Thread
 	{
 	public:
 	protected:

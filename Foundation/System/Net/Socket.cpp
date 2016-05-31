@@ -45,13 +45,13 @@ void Socket::InitSockModule()
 
 	wVersionRequested = MAKEWORD( 1, 1 );
 
-	err = WSAStartup( wVersionRequested, &wsaData );  
+	err = ::WSAStartup(wVersionRequested, &wsaData);
 	if ( err != 0 ) {  
 		return;
 	}  
 
 	if ( LOBYTE( wsaData.wVersion ) != 1 || HIBYTE( wsaData.wVersion ) != 1 ) {  
-		WSACleanup( );  
+		::WSACleanup();
 		return;   
 	}  
 #endif
@@ -60,7 +60,7 @@ void Socket::InitSockModule()
 void Socket::ReleaseSockModule()
 {
 #ifdef _WIN32
-	WSACleanup( );  
+	::WSACleanup();
 #endif
 }
 
@@ -127,7 +127,7 @@ void Socket::ShutDown( int type )
 bool Socket::HasError()
 {
 #ifdef _WIN32
-	int error = WSAGetLastError();
+	int error = ::WSAGetLastError();
 	//LOG("error id %d\n", error);
 	if (error != WSAEWOULDBLOCK) 
 	{

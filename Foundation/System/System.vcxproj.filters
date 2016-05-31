@@ -34,9 +34,6 @@
     <Filter Include="Math">
       <UniqueIdentifier>{ff9f9eca-de1e-4109-a1d9-7bba7962d911}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Thread">
-      <UniqueIdentifier>{21e7f534-8eb4-4f47-b1e3-c103cf74ba92}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Base\File.h">
@@ -229,14 +226,17 @@
     <ClInclude Include="Math\Size.h">
       <Filter>Math</Filter>
     </ClInclude>
-    <ClInclude Include="Thread\Thread.h">
-      <Filter>Thread</Filter>
-    </ClInclude>
     <ClInclude Include="Math\define.cpp">
       <Filter>Math</Filter>
     </ClInclude>
     <ClInclude Include="Math\define.h">
       <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\Time.h">
+      <Filter>Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\Thread.h">
+      <Filter>Base</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -320,6 +320,9 @@
     </ClCompile>
     <ClCompile Include="Platform\Windows\Window.cpp">
       <Filter>Platform\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="Base\Time.cpp">
+      <Filter>Base</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

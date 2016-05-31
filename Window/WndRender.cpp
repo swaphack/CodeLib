@@ -36,6 +36,15 @@ void WndRender::show()
 	//this->testMedia();
 	//this->testParticle();
 
+	Time* t = Time::getNow();
+	LOG("%d-%d-%d %02d:%02d:%02d\n", t->getYear(), t->getMonth(), t->getMonthDay(), t->getHour(), t->getMinute(), t->getSecond());
+
+	t->addSecond(-1989456);
+	LOG("%d-%d-%d %02d:%02d:%02d\n", t->getYear(), t->getMonth(), t->getMonthDay(), t->getHour(), t->getMinute(), t->getSecond());
+
+	t->addSecond(10989456);
+	LOG("%d-%d-%d %02d:%02d:%02d\n", t->getYear(), t->getMonth(), t->getMonthDay(), t->getHour(), t->getMinute(), t->getSecond());
+
 	this->testStencil();
 }
 

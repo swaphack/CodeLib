@@ -13,7 +13,6 @@ Random::Random()
 , _max(1)
 {
 	srand(time(nullptr));
-	
 }
 
 Random::~Random()

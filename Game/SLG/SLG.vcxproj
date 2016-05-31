@@ -10,6 +10,25 @@
       <Platform>Win32</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Data\Building.h" />
+    <ClInclude Include="Data\Human.h" />
+    <ClInclude Include="Data\Job.h" />
+    <ClInclude Include="Data\Target.h" />
+    <ClInclude Include="Finance\Finance.h" />
+    <ClInclude Include="Log\ILog.h" />
+    <ClInclude Include="Log\import.h" />
+    <ClInclude Include="Log\IRecord.h" />
+    <ClInclude Include="Map\Grid.h" />
+    <ClInclude Include="Map\IGrid.h" />
+    <ClInclude Include="Map\Map.h" />
+    <ClInclude Include="Organization\Organization.h" />
+    <ClInclude Include="Task\Task.h" />
+    <ClInclude Include="Task\TaskCondition.h" />
+    <ClInclude Include="Task\TaskReward.h" />
+    <ClInclude Include="Time\DateTime.h" />
+    <ClInclude Include="Time\TimeSpan.h" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{600B7A13-F8A6-4530-A1A1-CD02970FFCAD}</ProjectGuid>
     <RootNamespace>SLG</RootNamespace>
@@ -63,10 +82,6 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClInclude Include="Logic\Build.h" />
-    <ClInclude Include="Logic\Map.h" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

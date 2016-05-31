@@ -5,15 +5,78 @@
       <UniqueIdentifier>{ef504502-6e70-4e75-8287-63034c98883c}</UniqueIdentifier>
     </Filter>
     <Filter Include="Logic">
-      <UniqueIdentifier>{df1d69fd-fb48-46b8-8c60-dfc1eb423bfc}</UniqueIdentifier>
+      <UniqueIdentifier>{93a9d671-63f8-4236-bbf2-ca4275eb186a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Map">
+      <UniqueIdentifier>{3bd39794-2b87-46e7-ac02-1fb24ae634e8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Task">
+      <UniqueIdentifier>{f41494a8-dd4f-4850-8f34-807cf2310b9b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Organization">
+      <UniqueIdentifier>{9d3a6a5e-d9d6-4048-b534-d6f5b430104e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Finance">
+      <UniqueIdentifier>{66805196-cd6e-4fd8-a119-a87988a15bb7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Log">
+      <UniqueIdentifier>{5ea31088-3adc-46e8-8a5f-7127aaccf68a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Time">
+      <UniqueIdentifier>{625a851f-262a-4969-9f56-cf2901e077ba}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Logic\Map.h">
-      <Filter>Logic</Filter>
+    <ClInclude Include="Data\Human.h">
+      <Filter>Data</Filter>
     </ClInclude>
-    <ClInclude Include="Logic\Build.h">
-      <Filter>Logic</Filter>
+    <ClInclude Include="Data\Job.h">
+      <Filter>Data</Filter>
+    </ClInclude>
+    <ClInclude Include="Data\Target.h">
+      <Filter>Data</Filter>
+    </ClInclude>
+    <ClInclude Include="Task\Task.h">
+      <Filter>Task</Filter>
+    </ClInclude>
+    <ClInclude Include="Map\Grid.h">
+      <Filter>Map</Filter>
+    </ClInclude>
+    <ClInclude Include="Map\Map.h">
+      <Filter>Map</Filter>
+    </ClInclude>
+    <ClInclude Include="Organization\Organization.h">
+      <Filter>Organization</Filter>
+    </ClInclude>
+    <ClInclude Include="Map\IGrid.h">
+      <Filter>Map</Filter>
+    </ClInclude>
+    <ClInclude Include="Finance\Finance.h">
+      <Filter>Finance</Filter>
+    </ClInclude>
+    <ClInclude Include="Data\Building.h">
+      <Filter>Data</Filter>
+    </ClInclude>
+    <ClInclude Include="Log\ILog.h">
+      <Filter>Log</Filter>
+    </ClInclude>
+    <ClInclude Include="Log\IRecord.h">
+      <Filter>Log</Filter>
+    </ClInclude>
+    <ClInclude Include="Time\DateTime.h">
+      <Filter>Time</Filter>
+    </ClInclude>
+    <ClInclude Include="Time\TimeSpan.h">
+      <Filter>Time</Filter>
+    </ClInclude>
+    <ClInclude Include="Log\import.h">
+      <Filter>Time</Filter>
+    </ClInclude>
+    <ClInclude Include="Task\TaskCondition.h">
+      <Filter>Task</Filter>
+    </ClInclude>
+    <ClInclude Include="Task\TaskReward.h">
+      <Filter>Task</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

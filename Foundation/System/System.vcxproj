@@ -77,6 +77,8 @@
     <ClInclude Include="Base\macros.h" />
     <ClInclude Include="Base\Platform.h" />
     <ClInclude Include="Base\Random.h" />
+    <ClInclude Include="Base\Thread.h" />
+    <ClInclude Include="Base\Time.h" />
     <ClInclude Include="Base\Tuple.h" />
     <ClInclude Include="Base\Types.h" />
     <ClInclude Include="Device\DeviceEventHandler.h" />
@@ -131,7 +133,6 @@
     <ClInclude Include="Stream\StreamReader.h" />
     <ClInclude Include="Stream\StreamWriter.h" />
     <ClInclude Include="system.h" />
-    <ClInclude Include="Thread\Thread.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Base\BitHelper.cpp" />
@@ -139,6 +140,7 @@
     <ClCompile Include="Base\File.cpp" />
     <ClCompile Include="Base\Hash.cpp" />
     <ClCompile Include="Base\Random.cpp" />
+    <ClCompile Include="Base\Time.cpp" />
     <ClCompile Include="Device\KeyBoard.cpp" />
     <ClCompile Include="Device\Mouse.cpp" />
     <ClCompile Include="Device\Signal.cpp" />

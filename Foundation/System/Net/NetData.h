@@ -27,9 +27,6 @@ namespace sys
 		void init(char* data, int size)
 		{
  			int len = size * sizeof(char);
-// 			this->data = (char*)malloc(len);
-// 			memset(this->data, 0, len);
-// 			memcpy(this->data, data, len);
 
 			this->data = StreamHelper::mallocStream(len, data, size);
 
