@@ -146,3 +146,37 @@ void Tool::calRect(const sys::Vector& position, const sys::Volume& volume, const
 	y = position.y + volume.height * (1 - anchor.y);
 	rectVertex.leftUp = Tool::convertToOGLPoisition(x, y, position.z);
 }
+
+void Tool::calRealRect(const sys::Vector& position, const sys::Volume& volume, const sys::Vector& anchor, RectangeVertex& rectVertex)
+{
+	float x = 0;
+	float y = 0;
+
+	// left down
+	x = position.x - volume.width * anchor.x;
+	y = position.y - volume.height * anchor.y;
+	rectVertex.leftDown.x = x;
+	rectVertex.leftDown.y = y;
+	rectVertex.leftDown.z = position.z;
+
+	// right down
+	x = position.x + volume.width * (1 - anchor.x);
+	y = position.y - volume.height * anchor.y;
+	rectVertex.rightDown.x = x;
+	rectVertex.rightDown.y = y;
+	rectVertex.rightDown.z = position.z;
+
+	// right up
+	x = position.x + volume.width * (1 - anchor.x);
+	y = position.y + volume.height * (1 - anchor.y);
+	rectVertex.rightUp.x = x;
+	rectVertex.rightUp.y = y;
+	rectVertex.rightUp.z = position.z;
+
+	// left up
+	x = position.x - volume.width * anchor.x;
+	y = position.y + volume.height * (1 - anchor.y);
+	rectVertex.leftUp.x = x;
+	rectVertex.leftUp.y = y;
+	rectVertex.leftUp.z = position.z;
+}

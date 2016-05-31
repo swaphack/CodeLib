@@ -32,7 +32,6 @@ bool RectangeVertex::containPoint(float x, float y)
 
 	float s5 = getArea(rightUp, leftUp, leftDown) + getArea(rightUp, leftDown, rightDown);
 
-	// 转化为opengl（0，1）会有误差
 	if (s1 + s2 + s3 + s4 <= s5)
 	{
 		bRet = true;

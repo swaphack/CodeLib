@@ -64,9 +64,10 @@ void TouchManager::removeAllTouches()
 
 bool TouchManager::onTouchBegan(float x, float y)
 {
+	// 转化为opengl（0，1）会有误差,所以采用实际大小
+// 	x = x / Tool::getGLViewSize().width;
+// 	y = y / Tool::getGLViewSize().height;
 	std::vector<TouchProxy*>::reverse_iterator it = _touchProtocols.rbegin();
-	x = x / Tool::getGLViewSize().width;
-	y = y / Tool::getGLViewSize().height;
 
 	while (it != _touchProtocols.rend())
 	{

@@ -402,7 +402,7 @@ void Node::calRealSpaceInfo()
 	} while (temp != NULL);
 	volume.mult(scale);
 
-	Tool::calRect(position, volume, _anchor, _realSpaceVertex);
+	Tool::calRealRect(position, volume, _anchor, _realSpaceVertex);
 }
 
 void Node::drawRect()

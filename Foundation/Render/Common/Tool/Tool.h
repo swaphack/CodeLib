@@ -53,7 +53,14 @@ namespace render
 		* @param rectVertex 矩形顶点
 		*/
 		static void calRect(const sys::Vector& position, const sys::Volume& volume, const sys::Vector& anchor, RectangeVertex& rectVertex);
-
+		/**
+		* 矩形顶点的计算
+		* @param position 位置
+		* @param volume 体积
+		* @param anchor 锚点
+		* @param rectVertex 矩形顶点
+		*/
+		static void calRealRect(const sys::Vector& position, const sys::Volume& volume, const sys::Vector& anchor, RectangeVertex& rectVertex);
 	private:
 		// 视窗大小
 		static sys::Volume GL_VIEW_SIZE;
