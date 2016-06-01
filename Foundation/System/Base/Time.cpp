@@ -29,6 +29,14 @@ Time* Time::getNow()
 	return time;
 }
 
+time_t sys::Time::getNowTimeStamp()
+{
+	time_t now;
+	time(&now);
+
+	return now;
+}
+
 void Time::addSecond(int val)
 {
 	_tm.tm_sec += val;

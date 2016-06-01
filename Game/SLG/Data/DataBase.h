@@ -1,11 +1,12 @@
 #pragma once
 
-#include "Target.h"
-
 namespace slg
 {
-	class Building : public Target
+	class DataBase
 	{
+	public:
+		DataBase();
+		~DataBase();
 	public:
 	protected:
 	private:

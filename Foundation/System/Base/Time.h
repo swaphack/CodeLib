@@ -12,6 +12,10 @@ namespace sys
 	public:
 		static const int StartYear = 1900;
 		static const int AddMonth = 1;
+		// 获取本地当前时间
+		static Time* getNow();
+		// 获取本地当前时间戳
+		static time_t getNowTimeStamp();
 		// 获取年份
 		inline int getYear() const { return _tm.tm_year + StartYear; }
 		// 获取该年的第几天
@@ -28,8 +32,6 @@ namespace sys
 		inline int getMinute() const { return _tm.tm_min; }
 		// 获取秒数
 		inline int getSecond() const { return _tm.tm_sec; }
-		// 获取本地当前时间
-		static Time* getNow();
 		// 改变秒数
 		void addSecond(int val);
 		// 改变分钟

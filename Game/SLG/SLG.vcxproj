@@ -11,23 +11,38 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Data\Building.h" />
-    <ClInclude Include="Data\Human.h" />
-    <ClInclude Include="Data\Job.h" />
-    <ClInclude Include="Data\Target.h" />
     <ClInclude Include="Finance\Finance.h" />
     <ClInclude Include="Log\Log.h" />
     <ClInclude Include="Log\Record.h" />
     <ClInclude Include="Map\Grid.h" />
-    <ClInclude Include="Map\IGrid.h" />
     <ClInclude Include="Map\Map.h" />
-    <ClInclude Include="Organization\Organization.h" />
+    <ClInclude Include="Object\import.h" />
+    <ClInclude Include="Object\Target.h" />
+    <ClInclude Include="Organization\Company\Building.h" />
+    <ClInclude Include="Organization\Company\Site.h" />
+    <ClInclude Include="Organization\Company\Company.h" />
+    <ClInclude Include="Organization\Company\JobPosition.h" />
+    <ClInclude Include="Organization\Company\Wages.h" />
+    <ClInclude Include="Organization\Company\Worker.h" />
+    <ClInclude Include="Organization\Company\Job.h" />
+    <ClInclude Include="Organization\Family\Family.h" />
+    <ClInclude Include="Organization\Family\Human.h" />
+    <ClInclude Include="Organization\Family\import.h" />
+    <ClInclude Include="Organization\macros.h" />
+    <ClInclude Include="Organization\Technic\import.h" />
+    <ClInclude Include="Organization\Technic\Skill.h" />
+    <ClInclude Include="Protocol\import.h" />
+    <ClInclude Include="Protocol\LevelProtocol.h" />
+    <ClInclude Include="Protocol\LivingProtocol.h" />
+    <ClInclude Include="Protocol\LocationProtocol.h" />
     <ClInclude Include="Task\Task.h" />
     <ClInclude Include="Task\TaskCondition.h" />
     <ClInclude Include="Task\TaskReward.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Organization\Organization.cpp" />
+    <ClCompile Include="Object\Target.cpp" />
+    <ClCompile Include="Protocol\LevelProtocol.cpp" />
+    <ClCompile Include="Protocol\LivingProtocol.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{600B7A13-F8A6-4530-A1A1-CD02970FFCAD}</ProjectGuid>

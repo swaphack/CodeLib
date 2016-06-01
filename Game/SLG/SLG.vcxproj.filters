@@ -22,17 +22,23 @@
     <Filter Include="Log">
       <UniqueIdentifier>{5ea31088-3adc-46e8-8a5f-7127aaccf68a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Protocol">
+      <UniqueIdentifier>{3f3bc2df-cd53-49dd-bdb3-354c005b178c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object">
+      <UniqueIdentifier>{6cd1c555-ad4f-4e7a-a5f2-4fdb50364e2f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Organization\Family">
+      <UniqueIdentifier>{cc91a314-8dd5-4c40-86ee-00d1fb022895}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Organization\Company">
+      <UniqueIdentifier>{d5af87e3-67f1-4a79-a892-75ace2c11a9b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Organization\Technic">
+      <UniqueIdentifier>{72d389c9-1ed9-4a1f-b94c-594e4407ef19}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Data\Human.h">
-      <Filter>Data</Filter>
-    </ClInclude>
-    <ClInclude Include="Data\Job.h">
-      <Filter>Data</Filter>
-    </ClInclude>
-    <ClInclude Include="Data\Target.h">
-      <Filter>Data</Filter>
-    </ClInclude>
     <ClInclude Include="Task\Task.h">
       <Filter>Task</Filter>
     </ClInclude>
@@ -42,17 +48,8 @@
     <ClInclude Include="Map\Map.h">
       <Filter>Map</Filter>
     </ClInclude>
-    <ClInclude Include="Organization\Organization.h">
-      <Filter>Organization</Filter>
-    </ClInclude>
-    <ClInclude Include="Map\IGrid.h">
-      <Filter>Map</Filter>
-    </ClInclude>
     <ClInclude Include="Finance\Finance.h">
       <Filter>Finance</Filter>
-    </ClInclude>
-    <ClInclude Include="Data\Building.h">
-      <Filter>Data</Filter>
     </ClInclude>
     <ClInclude Include="Task\TaskCondition.h">
       <Filter>Task</Filter>
@@ -66,10 +63,73 @@
     <ClInclude Include="Log\Log.h">
       <Filter>Log</Filter>
     </ClInclude>
+    <ClInclude Include="Object\Target.h">
+      <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Protocol\LevelProtocol.h">
+      <Filter>Protocol</Filter>
+    </ClInclude>
+    <ClInclude Include="Protocol\LivingProtocol.h">
+      <Filter>Protocol</Filter>
+    </ClInclude>
+    <ClInclude Include="Protocol\import.h">
+      <Filter>Protocol</Filter>
+    </ClInclude>
+    <ClInclude Include="Protocol\LocationProtocol.h">
+      <Filter>Protocol</Filter>
+    </ClInclude>
+    <ClInclude Include="Organization\Family\Human.h">
+      <Filter>Organization\Family</Filter>
+    </ClInclude>
+    <ClInclude Include="Organization\Family\Family.h">
+      <Filter>Organization\Family</Filter>
+    </ClInclude>
+    <ClInclude Include="Organization\Company\Building.h">
+      <Filter>Organization\Company</Filter>
+    </ClInclude>
+    <ClInclude Include="Organization\Company\Company.h">
+      <Filter>Organization\Company</Filter>
+    </ClInclude>
+    <ClInclude Include="Organization\Company\Worker.h">
+      <Filter>Organization\Company</Filter>
+    </ClInclude>
+    <ClInclude Include="Organization\macros.h">
+      <Filter>Organization</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\import.h">
+      <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Organization\Family\import.h">
+      <Filter>Organization\Family</Filter>
+    </ClInclude>
+    <ClInclude Include="Organization\Technic\Skill.h">
+      <Filter>Organization\Technic</Filter>
+    </ClInclude>
+    <ClInclude Include="Organization\Technic\import.h">
+      <Filter>Organization\Technic</Filter>
+    </ClInclude>
+    <ClInclude Include="Organization\Company\JobPosition.h">
+      <Filter>Organization\Company</Filter>
+    </ClInclude>
+    <ClInclude Include="Organization\Company\Job.h">
+      <Filter>Organization\Company</Filter>
+    </ClInclude>
+    <ClInclude Include="Organization\Company\Wages.h">
+      <Filter>Organization\Company</Filter>
+    </ClInclude>
+    <ClInclude Include="Organization\Company\Site.h">
+      <Filter>Organization\Company</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Organization\Organization.cpp">
-      <Filter>Organization</Filter>
+    <ClCompile Include="Protocol\LevelProtocol.cpp">
+      <Filter>Protocol</Filter>
+    </ClCompile>
+    <ClCompile Include="Protocol\LivingProtocol.cpp">
+      <Filter>Protocol</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\Target.cpp">
+      <Filter>Object</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
