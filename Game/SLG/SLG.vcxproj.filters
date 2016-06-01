@@ -22,9 +22,6 @@
     <Filter Include="Log">
       <UniqueIdentifier>{5ea31088-3adc-46e8-8a5f-7127aaccf68a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Time">
-      <UniqueIdentifier>{625a851f-262a-4969-9f56-cf2901e077ba}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Data\Human.h">
@@ -57,26 +54,22 @@
     <ClInclude Include="Data\Building.h">
       <Filter>Data</Filter>
     </ClInclude>
-    <ClInclude Include="Log\ILog.h">
-      <Filter>Log</Filter>
-    </ClInclude>
-    <ClInclude Include="Log\IRecord.h">
-      <Filter>Log</Filter>
-    </ClInclude>
-    <ClInclude Include="Time\DateTime.h">
-      <Filter>Time</Filter>
-    </ClInclude>
-    <ClInclude Include="Time\TimeSpan.h">
-      <Filter>Time</Filter>
-    </ClInclude>
-    <ClInclude Include="Log\import.h">
-      <Filter>Time</Filter>
-    </ClInclude>
     <ClInclude Include="Task\TaskCondition.h">
       <Filter>Task</Filter>
     </ClInclude>
     <ClInclude Include="Task\TaskReward.h">
       <Filter>Task</Filter>
     </ClInclude>
+    <ClInclude Include="Log\Record.h">
+      <Filter>Log</Filter>
+    </ClInclude>
+    <ClInclude Include="Log\Log.h">
+      <Filter>Log</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Organization\Organization.cpp">
+      <Filter>Organization</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

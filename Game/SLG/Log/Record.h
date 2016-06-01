@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../Time/import.h"
+#include "system.h"
 
 namespace slg
 {
@@ -9,8 +9,6 @@ namespace slg
 	public:
 		virtual ~IRecord() {}
 	public:
-		virtual const DateTime* getTime() = 0;
-	protected:
-	private:
+
 	};
 }

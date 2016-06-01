@@ -3,10 +3,10 @@
 namespace slg
 {
 	// ÈÎÎñ½±Àø
-	class TaskReward
+	class ITaskReward
 	{
 	public:
-	protected:
-	private:
+		virtual ~ITaskReward() {}
+	public:
 	};
 }

@@ -9,7 +9,7 @@ namespace slg
 	public:
 		virtual ~ILog() {}
 	public:
-		virtual IRecord* create();
+		virtual IRecord* create() = 0;
 	protected:
 	private:
 	};

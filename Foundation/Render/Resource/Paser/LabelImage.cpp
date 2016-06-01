@@ -73,13 +73,14 @@ protected:
 	// 是否FT模块
 	void disposeFT();
 private:
-	// 讲数据写入流中
+	// 将数据写入流中
 	void writeStream(ulong ch, LabelStream* stream);
 private:
 	FT_Library    _library;
 	FT_Face       _face;
 	FT_Error      _error;
 	int			  _lowY;
+	int			  _fontSize;
 	static std::map<ulong, FT_CHAR_DATA> _datas;
 };
 
@@ -91,6 +92,7 @@ FT_LABEL::FT_LABEL()
 , _face(nullptr)
 , _error(0)
 , _lowY(0)
+, _fontSize(0)
 {
 	
 }
@@ -110,6 +112,7 @@ void FT_LABEL::load(const TextDefine& textDefine, LabelStream* stream)
 		return;
 	}
 	_lowY = gData->deltaY;
+	_fontSize = textDefine.fontSize;
 
 	char* text = (char*)textDefine.text.c_str();
 	wchar_t* dest = sys::BitHelper::convertToWideChar(text);
@@ -247,14 +250,19 @@ void FT_LABEL::disposeFT()
 
 void FT_LABEL::writeStream(ulong ch, LabelStream* stream)
 {
-	FT_CHAR_DATA* data = getCharData(ch);
-	if (data == nullptr)
+	if (ch == '\n')
 	{
 		return;
 	}
+	FT_CHAR_DATA* data = getCharData(ch);
+	int width = _fontSize;
+	int height = _fontSize;
 
-	int width = data->width;
-	int height = data->height;
+	if (data)
+	{
+		width = data->width;
+		height = data->height;
+	}
 
 	// 获取rgba数据
 	char* pBuf = sys::StreamHelper::mallocStream(width * 4 * height);
@@ -266,7 +274,11 @@ void FT_LABEL::writeStream(ulong ch, LabelStream* stream)
 	{
 		for (int i = 0; i < width; i++)
 		{
-			uchar _vl = data->data[i + width*j];
+			uchar _vl = 0;
+			if (data)
+			{
+				_vl = data->data[i + width*j];
+			}
 			if (_vl == 0)
 			{
 				pBuf[(4 * i + (height - j - 1) * width * 4)] = 0;
@@ -284,10 +296,18 @@ void FT_LABEL::writeStream(ulong ch, LabelStream* stream)
 		}
 	}
 
-	int advX = data->advX;
-	int advY = data->advY;
-	int deltaX = data->deltaX;
-	int deltaY = data->deltaY - _lowY;
+	int advX = _fontSize;
+	int advY = _fontSize;
+	int deltaX = 0;
+	int deltaY = 0;
+
+	if (data)
+	{
+		advX = data->advX;
+		advY = data->advY;
+		deltaX = data->deltaX;
+		deltaY = data->deltaY - _lowY;
+	}
 
 	stream->writeLabelBlock(width, height, deltaX, deltaY, advY, pBuf);
 

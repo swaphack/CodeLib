@@ -39,14 +39,14 @@ void WndRender::show()
 
 	//this->testImage();
 
-	//this->testText();
+	this->testText();
 
 	//this->testMask();
 
 	//this->testMedia();
 	//this->testParticle();
 
-	this->testStencil();
+	//this->testStencil();
 }
 
 void WndRender::testImage()
@@ -157,18 +157,18 @@ void WndRender::testModel()
 
 void WndRender::testText()
 {
+	char strVal[255] = {};
 	Time* t = Time::getNow();
 	LOG("%d-%d-%d %02d:%02d:%02d\n", t->getYear(), t->getMonth(), t->getMonthDay(), t->getHour(), t->getMinute(), t->getSecond());
-
+	sprintf(strVal, "%d-%d-%d %02d:%02d:%02d\n", t->getYear(), t->getMonth(), t->getMonthDay(), t->getHour(), t->getMinute(), t->getSecond());
 	delete t;
 
 	CtrlText* pCtrlText = new CtrlText();
 	AUTO_RELEASE_OBJECT(pCtrlText);
 	pCtrlText->setFontPath("Resource/font_2.ttf");
 	pCtrlText->setFontSize(58);
-	pCtrlText->setString("abc");
+	pCtrlText->setString("ÖÐ¹ú");
 	pCtrlText->setPosition(512, 384, 0);
-	pCtrlText->setRotation(0, 0, 20);
 	pCtrlText->setRectVisible(true);
 	pCtrlText->setRectColor(sys::Color4B(255, 0, 0, 255));
 	pCtrlText->setColor(sys::Color4B(125, 80, 255, 255));

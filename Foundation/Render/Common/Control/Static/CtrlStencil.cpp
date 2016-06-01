@@ -76,7 +76,7 @@ void CtrlStencil::visit()
 		}
 	}
 
-	glStencilFunc(GL_EQUAL, 0x1, mask);
+	glStencilFunc(GL_EQUAL, 0x1, 0x1);
 	glStencilOp(GL_KEEP, GL_KEEP, GL_KEEP);
 	glPopMatrix();
 }

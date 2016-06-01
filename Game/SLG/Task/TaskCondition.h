@@ -3,13 +3,11 @@
 namespace slg
 {
 	// 任务条件
-	class TaskCondition
+	class ITaskCondition
 	{
 	public:
-		virtual ~TaskCondition() {}
+		virtual ~ITaskCondition() {}
 	public:
 		virtual bool isFinish() = 0;
-	protected:
-	private:
 	};
 }
