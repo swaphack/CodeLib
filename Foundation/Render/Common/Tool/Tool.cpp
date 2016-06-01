@@ -67,7 +67,7 @@ sys::Volume Tool::convertToOGLVolume(const sys::Volume& src)
 	return sys::Volume(src.width / Tool::getGLViewSize().width * 2 - 1, src.height / Tool::getGLViewSize().height * 2 - 1, src.deep);
 }
 
-sys::Vector Tool::getPosition(const sys::Vector& vector, const sys::Vector& rotation)
+sys::Vector Tool::getRotationPosition(const sys::Vector& vector, const sys::Vector& rotation)
 {
 	float sinx, siny, sinz;
 	float cosx, cosy, cosz;

@@ -22,6 +22,16 @@ void WndRender::show()
 // 	AUTO_RELEASE_OBJECT(pTestDrawNode);
 // 	this->getCanvas()->getRoot()->addChild(pTestDrawNode);
 
+
+
+// 	Time* t = Time::getNow();
+// 	LOG("%d-%d-%d %02d:%02d:%02d\n", t->getYear(), t->getMonth(), t->getMonthDay(), t->getHour(), t->getMinute(), t->getSecond());
+// 	t->addSecond(-1989456);
+// 	LOG("%d-%d-%d %02d:%02d:%02d\n", t->getYear(), t->getMonth(), t->getMonthDay(), t->getHour(), t->getMinute(), t->getSecond());
+// 	t->addSecond(10989456);
+// 	LOG("%d-%d-%d %02d:%02d:%02d\n", t->getYear(), t->getMonth(), t->getMonthDay(), t->getHour(), t->getMinute(), t->getSecond());
+// 	delete t;
+
 	// for 3d
 
 	//this->testFog();
@@ -35,15 +45,6 @@ void WndRender::show()
 
 	//this->testMedia();
 	//this->testParticle();
-
-	Time* t = Time::getNow();
-	LOG("%d-%d-%d %02d:%02d:%02d\n", t->getYear(), t->getMonth(), t->getMonthDay(), t->getHour(), t->getMinute(), t->getSecond());
-
-	t->addSecond(-1989456);
-	LOG("%d-%d-%d %02d:%02d:%02d\n", t->getYear(), t->getMonth(), t->getMonthDay(), t->getHour(), t->getMinute(), t->getSecond());
-
-	t->addSecond(10989456);
-	LOG("%d-%d-%d %02d:%02d:%02d\n", t->getYear(), t->getMonth(), t->getMonthDay(), t->getHour(), t->getMinute(), t->getSecond());
 
 	this->testStencil();
 }
@@ -60,25 +61,9 @@ void WndRender::testImage()
 	AUTO_RELEASE_OBJECT(pImage);
 	this->getCanvas()->getRoot()->addChild(pImage);
 
-	
-// 	pImage = new CtrlImage();
-// 	pImage->setImagePath("Resource/sqi.png");
-// 	pImage->setPosition(500, 350, 0);
-// 	AUTO_RELEASE_OBJECT(pImage);
-// 	this->getCanvas()->getRoot()->addChild(pImage);
-// 
-// 	pImage = new CtrlImage();
-// 	pImage->setImagePath("Resource/sqi.png");
-// 	pImage->setPosition(550, 384, 0);
-// 	AUTO_RELEASE_OBJECT(pImage);
-// 	this->getCanvas()->getRoot()->addChild(pImage);
-// 
-// 	pImage = new CtrlImage();
-// 	pImage->setImagePath("Resource/sqi.png");
-// 	pImage->setPosition(450, 350, 0);
-// 	AUTO_RELEASE_OBJECT(pImage);
-// 	this->getCanvas()->getRoot()->addChild(pImage);
-	
+	pImage->getTouchProxy()->addTouchDelegate(ETT_DOWN, [](sys::Object* object, float x, float y){
+		LOG("touch me\n");
+	});
 }
 
 void WndRender::testClock()
@@ -172,6 +157,11 @@ void WndRender::testModel()
 
 void WndRender::testText()
 {
+	Time* t = Time::getNow();
+	LOG("%d-%d-%d %02d:%02d:%02d\n", t->getYear(), t->getMonth(), t->getMonthDay(), t->getHour(), t->getMinute(), t->getSecond());
+
+	delete t;
+
 	CtrlText* pCtrlText = new CtrlText();
 	AUTO_RELEASE_OBJECT(pCtrlText);
 	pCtrlText->setFontPath("Resource/font_2.ttf");
@@ -258,18 +248,22 @@ void WndRender::testParticle()
 void WndRender::testStencil()
 {
 	CtrlStencil* pStencil = new CtrlStencil();
-	AUTO_RELEASE_OBJECT(pStencil);
-
 	pStencil->setPosition(512, 384, 0);
-	pStencil->setVolume(100, 100, 0);
-	pStencil->setRectVisible(true);
-	pStencil->setRectColor(sys::Color4B(0, 0, 0, 255));
+	AUTO_RELEASE_OBJECT(pStencil);
 	this->getCanvas()->getRoot()->addChild(pStencil);
+
+	Node* pNode = new Node();
+	AUTO_RELEASE_OBJECT(pNode);
+	pNode->setPosition(512, 384, 0);
+	pNode->setVolume(100, 100, 0);
+	pNode->setRectVisible(true);
+	pNode->setRectColor(sys::Color4B(0, 0, 0, 255));
+	pStencil->setStencilNode(pNode);
+	
 
 	CtrlImage* pImage = new CtrlImage();
 	AUTO_RELEASE_OBJECT(pImage);
 	pImage->setImagePath("Resource/sqi.png");
-	pImage->setPosition(0, 0, 0);
 	pImage->setRectVisible(true);
 	pImage->setRectColor(sys::Color4B(255, 0, 0, 255));
 	pImage->setVolume(200, 200, 0);

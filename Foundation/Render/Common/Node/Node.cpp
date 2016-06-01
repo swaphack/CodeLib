@@ -379,6 +379,7 @@ void Node::sortChildren()
 	}
 }
 
+// 还未对旋转后坐标进行计算
 void Node::calRealSpaceInfo()
 {
 	Node* temp = this;
@@ -387,16 +388,15 @@ void Node::calRealSpaceInfo()
 	sys::Volume volume = _volume;
 	do 
 	{
+		position.add(temp->getPosition());
+		scale.mult(temp->getScale());
+
 		if (!temp->isRelativeWithParent())
 		{
-			position = temp->getPosition();
-			scale = temp->getScale();
 			break;
 		}
 		else
 		{
-			position.add(temp->getPosition());
-			scale.mult(temp->getScale());
 			temp = temp->getParent();
 		}
 	} while (temp != NULL);

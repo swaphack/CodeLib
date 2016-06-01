@@ -36,7 +36,7 @@ namespace render
 		// 将屏幕体积转为opengl坐标
 		static sys::Volume convertToOGLVolume(const sys::Volume& src);
 		// 获取经过旋转的坐标
-		static sys::Vector getPosition(const sys::Vector& vector, const sys::Vector& rotation);
+		static sys::Vector getRotationPosition(const sys::Vector& vector, const sys::Vector& rotation);
 		/**
 		* 法线的计算
 		* @param p1 顶点1
