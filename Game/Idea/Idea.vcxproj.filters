@@ -81,5 +81,40 @@
     <ClInclude Include="AI\Solution\Log.h">
       <Filter>AI\Solution</Filter>
     </ClInclude>
+    <ClInclude Include="Brain\Brain.h">
+      <Filter>Brain</Filter>
+    </ClInclude>
+    <ClInclude Include="AI\ai.h">
+      <Filter>AI</Filter>
+    </ClInclude>
+    <ClInclude Include="AI\Experience\import.h">
+      <Filter>AI\Experience</Filter>
+    </ClInclude>
+    <ClInclude Include="AI\Study\import.h">
+      <Filter>AI\Study</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Brain\Control.cpp">
+      <Filter>Brain</Filter>
+    </ClCompile>
+    <ClCompile Include="AI\Base\Result.cpp">
+      <Filter>AI\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="AI\Base\Message.cpp">
+      <Filter>AI\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Brain\Storage.cpp">
+      <Filter>Brain</Filter>
+    </ClCompile>
+    <ClCompile Include="Brain\Memory.cpp">
+      <Filter>Brain</Filter>
+    </ClCompile>
+    <ClCompile Include="AI\Base\Event.cpp">
+      <Filter>AI\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Brain\Arithmetical.cpp">
+      <Filter>Brain</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

@@ -1,13 +1,16 @@
 #pragma once
 
+#include "Property.h"
+
 namespace slg
 {
-	class DataBase
+	class BaseData
 	{
 	public:
-		DataBase();
-		~DataBase();
+		BaseData();
+		virtual ~BaseData();
 	public:
+
 	protected:
 	private:
 	};

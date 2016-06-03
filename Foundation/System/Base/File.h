@@ -10,9 +10,11 @@ namespace sys
 		~File() {}
 	public:
 		// 将数据写到本地
-		static void write(const char* url, const char* data, long size);
+		static bool write(const char* url, const char* data, long size);
 		// 从本地读取数据
 		static char* read(const char* url, long& size);
+		// 追加数据到本地
+		static bool append(const char* url, const char* data, long size);
 		// 判断文件是否存在
 		static bool isFileExists(const char* url);
 	};

@@ -40,5 +40,9 @@ namespace sys
 			x *= ratio;
 			y *= ratio;
 		}
+
+		static Point Zero;
 	};
+
+	__declspec(selectany) Point Point::Zero;
 }

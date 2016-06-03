@@ -9,10 +9,14 @@ namespace idea
 	{
 	public:
 		Event();
-		virtual ~Event() {}
+		virtual ~Event();
 	public:
-		virtual Message* getMessage() = 0;
-	protected:
+		// 设置信息
+		void setMessage(Message* message);
+		// 获取信息
+		Message* getMessage();
 	private:
+		// 信息
+		Message* _message;
 	};
 }

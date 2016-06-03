@@ -34,6 +34,9 @@
     <Filter Include="Math">
       <UniqueIdentifier>{ff9f9eca-de1e-4109-a1d9-7bba7962d911}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Type">
+      <UniqueIdentifier>{6a833bb5-08b6-4839-a92c-20e9177ca8ba}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Base\File.h">
@@ -237,6 +240,12 @@
     </ClInclude>
     <ClInclude Include="Base\Thread.h">
       <Filter>Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Type\String.h">
+      <Filter>Type</Filter>
+    </ClInclude>
+    <ClInclude Include="Type\Number.h">
+      <Filter>Type</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -44,6 +44,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>../../Foundation/System/</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -64,26 +65,39 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="AI\ai.h" />
     <ClInclude Include="AI\Base\Event.h" />
     <ClInclude Include="AI\Base\IWorker.h" />
     <ClInclude Include="AI\Base\import.h" />
     <ClInclude Include="AI\Base\Message.h" />
     <ClInclude Include="AI\Base\Result.h" />
     <ClInclude Include="AI\Experience\Experience.h" />
+    <ClInclude Include="AI\Experience\import.h" />
     <ClInclude Include="AI\Experience\macros.h" />
     <ClInclude Include="AI\Solution\Analysis.h" />
     <ClInclude Include="AI\Solution\import.h" />
     <ClInclude Include="AI\Solution\Log.h" />
     <ClInclude Include="AI\Solution\macros.h" />
     <ClInclude Include="AI\Solution\Solution.h" />
+    <ClInclude Include="AI\Study\import.h" />
     <ClInclude Include="AI\Study\macros.h" />
     <ClInclude Include="AI\Study\Study.h" />
     <ClInclude Include="Brain\Arithmetical.h" />
+    <ClInclude Include="Brain\Brain.h" />
     <ClInclude Include="Brain\Control.h" />
     <ClInclude Include="Brain\Input.h" />
     <ClInclude Include="Brain\Memory.h" />
     <ClInclude Include="Brain\Cell.h" />
     <ClInclude Include="Brain\Output.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="AI\Base\Event.cpp" />
+    <ClCompile Include="AI\Base\Message.cpp" />
+    <ClCompile Include="AI\Base\Result.cpp" />
+    <ClCompile Include="Brain\Arithmetical.cpp" />
+    <ClCompile Include="Brain\Control.cpp" />
+    <ClCompile Include="Brain\Memory.cpp" />
+    <ClCompile Include="Brain\Storage.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

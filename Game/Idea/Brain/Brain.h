@@ -1,35 +1,35 @@
 #pragma once
 
-#include "../AI/ai.h"
 #include "Arithmetical.h"
 #include "Input.h"
 #include "Output.h"
 #include "Memory.h"
+#include "Control.h"
 
 namespace idea
 {
-	// 控制
-	class Control : public IWorker
+	class Brain
 	{
 	public:
-		Control();
-		~Control();
+		Brain();
+		~Brain();
 	public:
-		void setInput(Input* input);
-		void setOutput(Output* output);
-		void setArithmetical(Arithmetical* arithmetical);
-		void setMemory(Memory* memory);
-
-		virtual Result* run(Event* e);
-	protected:
 		Input* getInput();
 		Output* getOutput();
 		Arithmetical* getArithmetical();
 		Memory* getMemory();
-	private:
+
+		void update();
+	protected:
+		// 控制器
+		Control* _control;
+		// 运算器
 		Arithmetical* _arithmetical;
+		// 输入设备
 		Input* _input;
+		// 输出设备
 		Output* _output;
+		// 存储
 		Memory* _memory;
 	};
 }

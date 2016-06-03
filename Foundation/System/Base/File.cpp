@@ -7,22 +7,24 @@
 
 using namespace sys;
 
-void File::write( const char* url, const char* data, long size)
+bool File::write(const char* url, const char* data, long size)
 {
 	if (url == nullptr || data == nullptr)
 	{
-		return;
+		return false;
 	}
 
 	FILE* fptr = fopen(url, "wb+");
 	if (fptr == nullptr)
 	{
-		return;
+		return false;
 	}
 
 	fwrite(data, sizeof(char), size, fptr);
 
 	fclose(fptr);
+
+	return true;
 }
 
 char* File::read( const char* url, long& size )
@@ -42,9 +44,6 @@ char* File::read( const char* url, long& size )
 	long count = ftell(fptr);
 	fseek(fptr, 0, SEEK_SET);
 
-// 	char* str = (char*)malloc(count * sizeof(char));
-// 	memset(str, 0, count);
-
 	char* str = StreamHelper::mallocStream(count * sizeof(char));
 
 	fread(str, sizeof(char), count, fptr);
@@ -54,6 +53,26 @@ char* File::read( const char* url, long& size )
 	size = count;
 
 	return str;
+}
+
+bool File::append(const char* url, const char* data, long size)
+{
+	if (url == nullptr || data == nullptr)
+	{
+		return false;
+	}
+
+	FILE* fptr = fopen(url, "ab");
+	if (fptr == nullptr)
+	{
+		return false;
+	}
+
+	fwrite(data, sizeof(char), size, fptr);
+
+	fclose(fptr);
+
+	return true;
 }
 
 bool File::isFileExists(const char* url)

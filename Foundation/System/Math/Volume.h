@@ -57,5 +57,10 @@ namespace sys
 			height = volume.height;
 			deep = volume.deep;
 		}
+
+		static Volume Zero;
+		static Volume One;
 	};
+	__declspec(selectany) sys::Volume Volume::Zero;
+	__declspec(selectany) sys::Volume Volume::One = Volume(1,1,1);
 }

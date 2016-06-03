@@ -11,6 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Data\BaseData.h" />
     <ClInclude Include="Finance\Finance.h" />
     <ClInclude Include="Log\Log.h" />
     <ClInclude Include="Log\Record.h" />
@@ -25,24 +26,33 @@
     <ClInclude Include="Organization\Company\Wages.h" />
     <ClInclude Include="Organization\Company\Worker.h" />
     <ClInclude Include="Organization\Company\Job.h" />
+    <ClInclude Include="Organization\Container\Bag.h" />
+    <ClInclude Include="Organization\Container\IContainer.h" />
+    <ClInclude Include="Organization\Container\Item.h" />
     <ClInclude Include="Organization\Family\Family.h" />
     <ClInclude Include="Organization\Family\Human.h" />
     <ClInclude Include="Organization\Family\import.h" />
     <ClInclude Include="Organization\macros.h" />
+    <ClInclude Include="Organization\Technic\Buffer.h" />
     <ClInclude Include="Organization\Technic\import.h" />
     <ClInclude Include="Organization\Technic\Skill.h" />
     <ClInclude Include="Protocol\import.h" />
     <ClInclude Include="Protocol\LevelProtocol.h" />
     <ClInclude Include="Protocol\LivingProtocol.h" />
     <ClInclude Include="Protocol\LocationProtocol.h" />
+    <ClInclude Include="Protocol\VolumeProtocol.h" />
     <ClInclude Include="Task\Task.h" />
     <ClInclude Include="Task\TaskCondition.h" />
     <ClInclude Include="Task\TaskReward.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Object\Target.cpp" />
+    <ClCompile Include="Organization\Container\Bag.cpp" />
+    <ClCompile Include="Organization\Container\Item.cpp" />
     <ClCompile Include="Protocol\LevelProtocol.cpp" />
     <ClCompile Include="Protocol\LivingProtocol.cpp" />
+    <ClCompile Include="Protocol\LocationProtocol.cpp" />
+    <ClCompile Include="Protocol\VolumeProtocol.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{600B7A13-F8A6-4530-A1A1-CD02970FFCAD}</ProjectGuid>

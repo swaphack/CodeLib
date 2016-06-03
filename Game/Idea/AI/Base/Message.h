@@ -1,11 +1,17 @@
 #pragma once
 
+#include "Result.h"
+
 namespace idea
 {
 	class Message
 	{
 	public:
-	protected:
-	private:
+		Message(Result* result);
+		~Message();
+	public:
+		Result* getResult();
+	public:
+		Result* _result;
 	};
 }

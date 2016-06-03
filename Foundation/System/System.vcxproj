@@ -133,6 +133,8 @@
     <ClInclude Include="Stream\StreamReader.h" />
     <ClInclude Include="Stream\StreamWriter.h" />
     <ClInclude Include="system.h" />
+    <ClInclude Include="Type\Number.h" />
+    <ClInclude Include="Type\String.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Base\BitHelper.cpp" />

@@ -37,9 +37,9 @@ void WndRender::show()
 	//this->testFog();
 	//this->testModel();
 
-	//this->testImage();
+	this->testImage();
 
-	this->testText();
+	//this->testText();
 
 	//this->testMask();
 
@@ -58,6 +58,7 @@ void WndRender::testImage()
 	pImage->setRectColor(sys::Color4B(255, 0, 0, 255));
 	pImage->setVolume(200, 200, 0);
 	pImage->setScale(1.5, 1.0, 2);
+	pImage->setRotation(0, 0, 10);
 	AUTO_RELEASE_OBJECT(pImage);
 	this->getCanvas()->getRoot()->addChild(pImage);
 

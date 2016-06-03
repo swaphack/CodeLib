@@ -37,6 +37,9 @@
     <Filter Include="Organization\Technic">
       <UniqueIdentifier>{72d389c9-1ed9-4a1f-b94c-594e4407ef19}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Organization\Container">
+      <UniqueIdentifier>{d7c8b33e-4e7c-427a-8d5d-ca5c81a2756a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Task\Task.h">
@@ -120,6 +123,24 @@
     <ClInclude Include="Organization\Company\Site.h">
       <Filter>Organization\Company</Filter>
     </ClInclude>
+    <ClInclude Include="Protocol\VolumeProtocol.h">
+      <Filter>Protocol</Filter>
+    </ClInclude>
+    <ClInclude Include="Organization\Container\Bag.h">
+      <Filter>Organization\Container</Filter>
+    </ClInclude>
+    <ClInclude Include="Organization\Container\Item.h">
+      <Filter>Organization\Container</Filter>
+    </ClInclude>
+    <ClInclude Include="Organization\Container\IContainer.h">
+      <Filter>Organization\Container</Filter>
+    </ClInclude>
+    <ClInclude Include="Data\BaseData.h">
+      <Filter>Data</Filter>
+    </ClInclude>
+    <ClInclude Include="Organization\Technic\Buffer.h">
+      <Filter>Organization\Technic</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Protocol\LevelProtocol.cpp">
@@ -130,6 +151,18 @@
     </ClCompile>
     <ClCompile Include="Object\Target.cpp">
       <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Protocol\VolumeProtocol.cpp">
+      <Filter>Protocol</Filter>
+    </ClCompile>
+    <ClCompile Include="Organization\Container\Item.cpp">
+      <Filter>Organization\Container</Filter>
+    </ClCompile>
+    <ClCompile Include="Organization\Container\Bag.cpp">
+      <Filter>Organization\Container</Filter>
+    </ClCompile>
+    <ClCompile Include="Protocol\LocationProtocol.cpp">
+      <Filter>Protocol</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
