@@ -4,9 +4,8 @@
 using namespace idea;
 
 Event::Event()
-:_message(nullptr)
 {
-
+	_message = new Message();
 }
 
 Event::~Event()
@@ -16,6 +15,8 @@ Event::~Event()
 
 void Event::setMessage(Message* message)
 {
+	ASSERT(message != nullptr);
+	SAFE_DELETE(_message);
 	_message = message;
 }
 

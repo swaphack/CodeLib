@@ -19,7 +19,7 @@ namespace idea
 	};
 
 	// ½á¹û
-	class Result
+	class Result : public sys::Object
 	{
 	public:
 		Result();

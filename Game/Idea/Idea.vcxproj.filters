@@ -93,6 +93,15 @@
     <ClInclude Include="AI\Study\import.h">
       <Filter>AI\Study</Filter>
     </ClInclude>
+    <ClInclude Include="AI\Solution\Record.h">
+      <Filter>AI\Solution</Filter>
+    </ClInclude>
+    <ClInclude Include="AI\Study\Method.h">
+      <Filter>AI\Study</Filter>
+    </ClInclude>
+    <ClInclude Include="AI\Study\Step.h">
+      <Filter>AI\Study</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Brain\Control.cpp">
@@ -115,6 +124,9 @@
     </ClCompile>
     <ClCompile Include="Brain\Arithmetical.cpp">
       <Filter>Brain</Filter>
+    </ClCompile>
+    <ClCompile Include="AI\Solution\Record.cpp">
+      <Filter>AI\Solution</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

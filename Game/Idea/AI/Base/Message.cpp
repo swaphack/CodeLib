@@ -4,17 +4,29 @@
 
 using namespace idea;
 
-Message::Message(Result* result)
-:_result(result)
+Message::Message()
+:_result(nullptr)
 {
+
 }
 
 Message::~Message()
 {
-	SAFE_DELETE(_result);
+	SAFE_RELEASE(_result);
 }
 
 Result* Message::getResult()
 {
 	return _result;
+}
+
+void Message::setResult(Result* result)
+{
+	if (result == nullptr)
+	{
+		return;
+	}
+	SAFE_RETAIN(result);
+	SAFE_RELEASE(_result);
+	_result = result;
 }

@@ -9,7 +9,7 @@ namespace idea
 	{
 	public:
 		Analysis();
-		~Analysis();
+		virtual ~Analysis();
 	public:
 		// ·ÖÎöÎÊÌâ
 		virtual Result* run(Event* e);

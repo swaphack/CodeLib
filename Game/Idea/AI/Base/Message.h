@@ -4,13 +4,14 @@
 
 namespace idea
 {
-	class Message
+	class Message : public sys::Object
 	{
 	public:
-		Message(Result* result);
-		~Message();
+		Message();
+		virtual ~Message();
 	public:
 		Result* getResult();
+		void setResult(Result* result);
 	public:
 		Result* _result;
 	};

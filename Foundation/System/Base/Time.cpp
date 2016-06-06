@@ -8,6 +8,21 @@ Time::Time()
 
 }
 
+Time::Time()
+{
+
+}
+
+Time::Time(time_t tt)
+{
+	this->setTime(tt);
+}
+
+Time::Time(struct tm* stm)
+{
+	this->setTM(stm);
+}
+
 Time::~Time()
 {
 
@@ -23,7 +38,7 @@ Time* Time::getNow()
 	localtime_s(stm, &now);
 
 	Time* time = new Time();
-	time->setTM(stm);
+	time->setTime(stm);
 	delete stm;
 
 	return time;
@@ -67,7 +82,7 @@ void Time::addYear(int val)
 	this->resetTime();
 }
 
-void Time::setTM(struct tm* stm)
+void Time::setTime(struct tm* stm)
 {
 	if (stm == nullptr)
 	{
@@ -89,10 +104,20 @@ void Time::setTime(time_t tt)
 	localtime_s(&_tm, &tt);
 }
 
-time_t sys::Time::getTime()
+time_t sys::Time::getTimeStamp()
 {
 	time_t tt = mktime(&_tm);
 	return tt;
+}
+
+void Time::setTime(Time* time)
+{
+	if (time == nullptr)
+	{
+		return;
+	}
+
+	this->setTime(time->getTimeStamp());
 }
 
 void Time::resetTime()

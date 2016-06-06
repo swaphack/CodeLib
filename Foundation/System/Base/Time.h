@@ -4,14 +4,19 @@
 
 namespace sys
 {
+	// 时间
 	class Time
 	{
 	public:
 		Time();
+		Time(time_t tt);
+		Time(struct tm* stm);
 		~Time();
 	public:
+		// 起始计算年份
 		static const int StartYear = 1900;
-		static const int AddMonth = 1;
+		// 实际月份索引
+		static const int IndexOfMonth = 1;
 		// 获取本地当前时间
 		static Time* getNow();
 		// 获取本地当前时间戳
@@ -21,7 +26,7 @@ namespace sys
 		// 获取该年的第几天
 		inline int getYearDay() const { return _tm.tm_yday; }
 		// 获取月份
-		inline int getMonth() const { return _tm.tm_mon + AddMonth; }
+		inline int getMonth() const { return _tm.tm_mon + IndexOfMonth; }
 		// 获取该月的第几天
 		inline int getMonthDay() const { return _tm.tm_mday; }
 		// 获取星期几
@@ -42,12 +47,14 @@ namespace sys
 		void addDay(int val);
 		// 改变年份
 		void addYear(int val);
-		// 设置时间戳
+		// 由时间戳设置
 		void setTime(time_t tt);
-		// 设置时间格式
-		void setTM(struct tm* stm);
+		// 由时间格式设置
+		void setTime(struct tm* stm);
+		// 设置时间
+		void setTime(Time* time);
 		// 获取时间戳
-		time_t getTime();
+		time_t getTimeStamp();
 	protected:
 		// 更新事件
 		void resetTime();

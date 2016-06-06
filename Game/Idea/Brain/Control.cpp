@@ -44,14 +44,21 @@ Result* Control::run(Event* e)
 	}
 
 	Result* result;
-	result = getMemory()->run(e->getMessage());
+	// ¼ÇÒä²éÕÒ
+	result = getMemory()->run(e);
 	if (result)
 	{
 		return result;
 	}
 
-	getArithmetical()->
+	// Âß¼­ÔËËã
+	result = getArithmetical()->run(e);
+	if (result)
+	{
+		return result;
+	}
 
+	return nullptr;
 }
 
 Input* Control::getInput()
