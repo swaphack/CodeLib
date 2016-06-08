@@ -16,8 +16,7 @@ Event::~Event()
 void Event::setMessage(Message* message)
 {
 	ASSERT(message != nullptr);
-	SAFE_DELETE(_message);
-	_message = message;
+	_message->setResult(message->getResult());
 }
 
 Message* Event::getMessage()

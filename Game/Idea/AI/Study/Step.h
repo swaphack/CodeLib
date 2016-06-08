@@ -9,7 +9,8 @@ namespace idea
 	{
 	public:
 		Step();
-		~Step();
+		virtual ~Step();
+	public:
 	protected:
 	private:
 	};

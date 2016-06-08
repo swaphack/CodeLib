@@ -3,7 +3,6 @@
 
 using namespace idea;
 
-
 Result::Result()
 :_type(ERT_NONE)
 {

@@ -27,8 +27,6 @@ Storage* Memory::pick(const char* name)
 	}
 
 	return nullptr;
-
-	
 }
 
 Storage* Memory::alloc(const char* name, int capacity)

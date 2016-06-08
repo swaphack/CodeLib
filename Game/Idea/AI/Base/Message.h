@@ -4,7 +4,7 @@
 
 namespace idea
 {
-	class Message : public sys::Object
+	class Message
 	{
 	public:
 		Message();

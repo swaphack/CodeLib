@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Script">
+      <UniqueIdentifier>{326722d2-f600-44b0-aac5-0f42bef3dcc9}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Script\ScriptLoader.h">
+      <Filter>Script</Filter>
+    </ClInclude>
+    <ClInclude Include="Script\Symbol.h">
+      <Filter>Script</Filter>
+    </ClInclude>
+    <ClInclude Include="Script\SymbolDefine.h">
+      <Filter>Script</Filter>
+    </ClInclude>
+    <ClInclude Include="Script\SymbolSystem.h">
+      <Filter>Script</Filter>
+    </ClInclude>
+    <ClInclude Include="math.h" />
+    <ClInclude Include="Script\import.h">
+      <Filter>Script</Filter>
+    </ClInclude>
+    <ClInclude Include="Script\ScriptText.h">
+      <Filter>Script</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Script\ScriptLoader.cpp">
+      <Filter>Script</Filter>
+    </ClCompile>
+    <ClCompile Include="Script\SymbolDefine.cpp">
+      <Filter>Script</Filter>
+    </ClCompile>
+    <ClCompile Include="Script\ScriptText.cpp">
+      <Filter>Script</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
