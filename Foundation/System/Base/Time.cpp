@@ -3,14 +3,11 @@
 
 using namespace sys;
 
-Time::Time()
-{
-
-}
+Time* Time::s_now = nullptr;
 
 Time::Time()
 {
-
+	this->setTime(getNowTimeStamp());
 }
 
 Time::Time(time_t tt)
@@ -20,7 +17,7 @@ Time::Time(time_t tt)
 
 Time::Time(struct tm* stm)
 {
-	this->setTM(stm);
+	this->setTime(stm);
 }
 
 Time::~Time()
@@ -30,18 +27,22 @@ Time::~Time()
 
 Time* Time::getNow()
 {
-	time_t now;
-	time(&now);
+	if (s_now == nullptr)
+	{
+		s_now = new Time();
+	}
 
-	struct tm* stm = new struct tm;
-	
+	time_t now = 0;
+	struct tm* stm = new struct tm();
+
+	time(&now);
 	localtime_s(stm, &now);
 
-	Time* time = new Time();
-	time->setTime(stm);
+	s_now->setTime(stm);
+
 	delete stm;
 
-	return time;
+	return s_now;
 }
 
 time_t sys::Time::getNowTimeStamp()

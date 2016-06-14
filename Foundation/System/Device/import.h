@@ -6,3 +6,4 @@
 #include "Mouse.h"
 #include "Signal.h"
 #include "WindowImpl.h"
+#include "ConsoleImpl.h"

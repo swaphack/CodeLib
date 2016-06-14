@@ -41,11 +41,11 @@ namespace web
 		}
 	};
 
-	class WebApplication : public sys::Object, public sys::IApplication
+	class WebApplication : public sys::Application
 	{
 	public:
 		WebApplication(const char* ip, int port, int maxWaitCount = WAIT_LISTEN_COUNT);
-		~WebApplication();
+		virtual ~WebApplication();
 	public:
 		static WebApplication* getInstance();
 
@@ -57,6 +57,7 @@ namespace web
 		void removeRecvHandler(sys::Object* target, WEB_RECV_HANDLER handler);
 
 		void postResponse(int id, HttpResponse* response);
+		void postBroadcast(HttpResponse* response);
 	protected:
 		void initNet();
 		void disposeNet();
@@ -69,14 +70,17 @@ namespace web
 		// 将http反馈转成网络数据
 		sys::NetData* createResponseData(HttpResponse* response);
 	protected:
+		// 端口
 		int _port;
+		// ip
 		std::string _ip;
+		// 最大等待数
 		int _maxWaitCount;
-
+		// 服务器
 		sys::Server* _server;
-
+		// 接受处理
 		std::vector<WebRecvHandler> _recvHandlers;
-
+		// web服务器实例
 		static WebApplication* s_pWebApplication;
 	};
 }

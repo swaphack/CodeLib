@@ -81,6 +81,7 @@
     <ClInclude Include="Base\Time.h" />
     <ClInclude Include="Base\Tuple.h" />
     <ClInclude Include="Base\Types.h" />
+    <ClInclude Include="Device\ConsoleImpl.h" />
     <ClInclude Include="Device\DeviceEventHandler.h" />
     <ClInclude Include="Device\import.h" />
     <ClInclude Include="Device\KeyBoard.h" />
@@ -117,6 +118,7 @@
     <ClInclude Include="Net\SocketRecvHandler.h" />
     <ClInclude Include="Platform\import.h" />
     <ClInclude Include="Platform\macros.h" />
+    <ClInclude Include="Platform\Windows\Console.h" />
     <ClInclude Include="Platform\Windows\import.h" />
     <ClInclude Include="Platform\Windows\Window.h" />
     <ClInclude Include="Security\Decrypt.h" />
@@ -156,6 +158,7 @@
     <ClCompile Include="Net\DataQueue.cpp" />
     <ClCompile Include="Net\Server.cpp" />
     <ClCompile Include="Net\Socket.cpp" />
+    <ClCompile Include="Platform\Windows\Console.cpp" />
     <ClCompile Include="Platform\Windows\Window.cpp" />
     <ClCompile Include="Security\Zip.cpp" />
     <ClCompile Include="Security\ZipCommon.cpp" />

@@ -30,6 +30,8 @@ namespace sys
 		void setRecvHandler(Object* target, SERVER_RECV_HANDLER handler);
 		// 发送消息, 使用new，发送完毕后会自动释放
 		void sendMessage(int id, NetData* data);
+		// 广播
+		void sendBroadcast(NetData* data);
 	protected:
 		// 添加客户端
 		void addClient(Socket* sock);

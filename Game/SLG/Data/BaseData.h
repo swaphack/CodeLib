@@ -1,7 +1,5 @@
 #pragma once
 
-#include "Property.h"
-
 namespace slg
 {
 	class BaseData

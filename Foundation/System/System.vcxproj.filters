@@ -247,6 +247,12 @@
     <ClInclude Include="Type\Number.h">
       <Filter>Type</Filter>
     </ClInclude>
+    <ClInclude Include="Device\ConsoleImpl.h">
+      <Filter>Device</Filter>
+    </ClInclude>
+    <ClInclude Include="Platform\Windows\Console.h">
+      <Filter>Platform\Windows</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Base\File.cpp">
@@ -332,6 +338,9 @@
     </ClCompile>
     <ClCompile Include="Base\Time.cpp">
       <Filter>Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Platform\Windows\Console.cpp">
+      <Filter>Platform\Windows</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

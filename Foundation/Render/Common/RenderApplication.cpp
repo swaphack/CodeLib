@@ -53,9 +53,9 @@ void RenderApplication::update()
 //		_canvas->update(interval);
 
 		_canvas->draw();
-
-		checkAutoRealsePool();
 	}
+
+	checkAutoRealsePool();
 }
 
 void RenderApplication::dispose()

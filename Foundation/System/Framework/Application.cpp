@@ -12,7 +12,6 @@ Application::~Application()
 	this->clearProtocolManagers();
 }
 
-
 void Application::addProtocolManager( const char* protocolName, Object* protocolManager )
 {
 	if (protocolName == nullptr || protocolManager == nullptr)

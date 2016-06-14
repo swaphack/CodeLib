@@ -60,5 +60,7 @@ namespace sys
 		void resetTime();
 	protected:
 		tm _tm;
+	private:
+		static Time* s_now;
 	};
 }

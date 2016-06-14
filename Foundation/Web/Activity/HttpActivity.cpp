@@ -42,7 +42,21 @@ void HttpActivity::doPost( HttpResponse* response )
 	this->sendResponse(_srcID, response);
 }
 
+void HttpActivity::doBroadCast(HttpResponse* response)
+{
+	if (response == nullptr)
+	{
+		return;
+	}
+	this->sendBroadcast(response);
+}
+
 void HttpActivity::sendResponse(int id, HttpResponse* response)
 {
 	WebApplication::getInstance()->postResponse(id, response);
+}
+
+void HttpActivity::sendBroadcast(HttpResponse* response)
+{
+	WebApplication::getInstance()->postBroadcast(response);
 }

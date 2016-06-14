@@ -15,6 +15,10 @@ DBContent::~DBContent()
 
 void DBContent::addTable( const DBTable& dbTable )
 {
+	if (dbTable.getName() == nullptr)
+	{
+		return;
+	}
 	_dbTables[dbTable.getName()] = dbTable;
 }
 

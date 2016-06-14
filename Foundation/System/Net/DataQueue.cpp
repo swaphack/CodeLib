@@ -5,7 +5,7 @@ using namespace sys;
 
 DataQueue::DataQueue()
 {
-
+	_datas = std::queue<NetData*>();
 }
 
 DataQueue::~DataQueue()

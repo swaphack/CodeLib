@@ -14,11 +14,11 @@ class HttpActivityTest : public HttpActivity
 protected:
 	virtual void doGet(HttpRequest* request)
 	{
-		std::string data = "Hello world";
+		std::string data = request->getMessage();
 
 		HttpResponse response;
 		response.setMessage(data.c_str(), data.size());
-		this->doPost(&response);
+		this->doBroadCast(&response);
 	}
 };
 

@@ -38,8 +38,11 @@ namespace sys
 		// 发送消息
 		void _flushData();
 	protected:
+		// socket
 		Socket* _socket;
+		// 接收到的数据
 		DataQueue _recvDatas;
+		// 待发送的数据
 		DataQueue _sendDatas;
 		// 接收数据时的处理
 		ClientRecvHandler _recvHandler;

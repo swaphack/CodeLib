@@ -22,6 +22,8 @@ bool Bag::addItem(Item* item)
 	SAFE_RETAIN(item);
 
 	_items[item->getItemID()] = item;
+
+	return true;
 }
 
 bool Bag::removeItem(int itemID)

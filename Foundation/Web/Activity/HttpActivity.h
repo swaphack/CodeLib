@@ -13,10 +13,15 @@ namespace web
 	public:
 		void onReceiveRequest(int id, HttpRequest* request);
 	protected:
+		// 收到数据
 		virtual void doGet(HttpRequest* request);
+		// 发送给接收方
 		virtual void doPost(HttpResponse* response);
+		// 广播
+		virtual void doBroadCast(HttpResponse* response);
 	private:
 		void sendResponse(int id, HttpResponse* response);
+		void sendBroadcast(HttpResponse* response);
 	private:
 		int _srcID;
 	};

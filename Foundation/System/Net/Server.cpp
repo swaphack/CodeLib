@@ -33,7 +33,7 @@ void Server::update()
 	if (socket)
 	{
 		this->addClient(socket);
-		LOG("connect socket %d\n", socket->getID());
+		//LOG("connect socket %d\n", socket->getID());
 	}
 
 	// disabled socket
@@ -63,6 +63,23 @@ void Server::setRecvHandler( Object* target, SERVER_RECV_HANDLER handler )
 void Server::sendMessage( int id, NetData* data )
 {
 	this->addSendBuffer(id, data);
+}
+
+void Server::sendBroadcast(NetData* data)
+{
+	if (data == nullptr)
+	{
+		return;
+	}
+	std::map<int, DataQueue>::iterator it = _sendDatas.begin();
+	while (it != _sendDatas.end())
+	{
+		NetData* temp = new NetData(data->data, data->size);
+		it->second.push(temp);
+		it++;
+	}
+
+	delete data;
 }
 
 void Server::addClient( Socket* sock )
@@ -182,7 +199,7 @@ void Server::_removeSockets( std::vector<int>& removedSocks )
 		this->removeClient(sockId);
 		if (socket)
 		{
-			LOG("disconnect socket %d\n", socket->getID());
+			//LOG("disconnect socket %d\n", socket->getID());
 			delete socket;
 		}
 	}

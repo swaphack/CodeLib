@@ -20,15 +20,19 @@ namespace sys
 			this->size = size;
 			this->pos = 0;
 		}
-		NetData(char* data, int size)
+		NetData(const char* data)
+		{
+			this->init(data, strlen(data));
+		}
+		NetData(const char* data, int size)
 		{
 			this->init(data, size);
 		}
-		void init(char* data, int size)
+		void init(const char* data, int size)
 		{
  			int len = size * sizeof(char);
 
-			this->data = StreamHelper::mallocStream(len, data, size);
+			this->data = StreamHelper::mallocStream(len, (char*)data, size);
 
 			this->size = size;
 			this->pos = 0;

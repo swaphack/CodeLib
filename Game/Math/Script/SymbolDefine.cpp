@@ -53,13 +53,14 @@ bool SymbolDefine::loadString(const char* value)
 {
 	if (value == nullptr)
 	{
-		return;
+		return false;
 	}
 
 	ScriptText* text = new ScriptText();
 	text->loadString(value);
-	text->getRoot()
+	
 
+	return true;
 }
 
 const Symbol* SymbolDefine::getSymbol()

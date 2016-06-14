@@ -1,5 +1,6 @@
 #include "system.h"
 #include <windows.h>
+#include <thread>
 using namespace sys;
 
 const char* WEB_IP = "127.0.0.1";
@@ -12,9 +13,13 @@ public:
 public:
 	void onRecv(DataQueue& dataQueue)
 	{
+		if (dataQueue.empty())
+		{
+			return;
+		}
 		NetData* top = dataQueue.top();
 		std::string recvData = std::string(top->data, top->size);
-		_client->sendMessage(new NetData(top->data, top->size));
+		LOG("Receive : %s\n", recvData.c_str());
 		dataQueue.pop();
 		delete top;
 	}
@@ -45,19 +50,36 @@ int main(int argc, char** argv)
 	
 	std::map<int, std::pair<Client*, ClientRecv*>> clients;
 
-	initManyClients(clients, 1000);
+	initManyClients(clients, 1);
 
-	std::map<int, std::pair<Client*, ClientRecv*>>::iterator it = clients.begin();
+	std::map<int, std::pair<Client*, ClientRecv*>>::iterator it;
+
+	std::thread* th = new std::thread([&]() {
+		while (true)
+		{
+			Sleep(100);
+			it = clients.begin();
+			while (it != clients.end())
+			{
+				it->second.first->update();
+				it++;
+			}
+		}
+	});
+	th->detach();
 
 	while (true)
 	{
-		Sleep(100);
-		while (it != clients.end())
+		std::string word = G_CONSOLE->readLine();
+		if (word.empty())
 		{
-			it->second.first->update();
+			continue;
 		}
+		NetData* data = new NetData(word.c_str());
+		clients[0].first->sendMessage(data);
 	}
 
+	delete th;
 	Socket::ReleaseSockModule();
 	return 0;
 };

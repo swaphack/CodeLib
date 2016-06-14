@@ -33,6 +33,8 @@ void WebApplication::update()
 	{
 		_server->update();
 	}
+
+	checkAutoRealsePool();
 }
 
 void WebApplication::dispose()
@@ -93,6 +95,17 @@ void WebApplication::postResponse( int id, HttpResponse* response )
 	}
 
 	_server->sendMessage(id, data);
+}
+
+void WebApplication::postBroadcast(HttpResponse* response)
+{
+	sys::NetData* data = this->createResponseData(response);
+	if (data == nullptr)
+	{
+		return;
+	}
+
+	_server->sendBroadcast(data);
 }
 
 void WebApplication::parserData( int id, sys::DataQueue& dataQueue )
