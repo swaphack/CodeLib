@@ -79,6 +79,16 @@ Scene* Canvas::getRoot()
 	return _root;
 }
 
+Camera* Canvas::getCamera()
+{
+	if (_view == nullptr)
+	{
+		return nullptr;
+	}
+
+	return _view->getCamera();
+}
+
 
 
 

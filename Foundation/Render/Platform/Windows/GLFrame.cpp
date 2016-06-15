@@ -8,6 +8,8 @@ DeviceProxy::DeviceProxy(const TouchManager* touchManager)
 {
 	ASSERT(touchManager != nullptr);
 	_touchManager = (TouchManager*)touchManager;
+
+	_keyboardManager = G_KEYBOARDMANAGER;
 }
 
 DeviceProxy::~DeviceProxy()
@@ -15,9 +17,9 @@ DeviceProxy::~DeviceProxy()
 
 }
 
-void DeviceProxy::onMouseButtonHandler(MouseKey Key, ButtonStatus type, float x, float y)
+void DeviceProxy::onMouseButtonHandler(MouseKey key, ButtonStatus type, float x, float y)
 {
-	if (Key != EMK_LEFTBUTTON)
+	if (key != EMK_LEFTBUTTON)
 	{
 		return;
 	}
@@ -49,9 +51,9 @@ void DeviceProxy::onMouseMoveHandler(float x, float y)
 	_touchManager->onTouchMove(x, size.height - y);
 }
 
-void DeviceProxy::onKeyBoardButtonHandler(sys::BoardKey Key, sys::ButtonStatus type)
+void DeviceProxy::onKeyBoardButtonHandler(sys::BoardKey key, sys::ButtonStatus type)
 {
-
+	_keyboardManager->onDispatcher(key, type);
 }
 
 
@@ -63,7 +65,7 @@ _bits(0),
 _render(nullptr),
 _deviceProxy(nullptr)
 {
-	_keyBoard = new sys::KeyBoard();
+	_keyboard = new sys::Keyboard();
 	_mouse = new sys::Mouse();
 }
 
@@ -76,6 +78,8 @@ GLFrame::~GLFrame()
 void GLFrame::initWindow(const char* title, int width, int height, int bits, RenderApplication* render)
 {
 	ASSERT(render != nullptr);
+
+	ASSERT(_render == nullptr);
 
 	_bits = bits;
 	_render = render;
@@ -263,8 +267,8 @@ void GLFrame::initDevice()
 		getMouse()->setMoveHandler(_deviceProxy, MOUSE_MOVE_SELECTOR(DeviceProxy::onMouseMoveHandler));
 	}
 
-	if (getKeyBoard())
+	if (getKeyboard())
 	{
-		getKeyBoard()->setKeyhandler(_deviceProxy, KEYBOARD_BUTTON_SELECTOR(DeviceProxy::onKeyBoardButtonHandler));
+		getKeyboard()->setKeyhandler(_deviceProxy, KEYBOARD_BUTTON_SELECTOR(DeviceProxy::onKeyBoardButtonHandler));
 	}
 }

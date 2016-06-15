@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Step.h"
+#include <vector>
 
 namespace idea
 {
@@ -13,7 +14,13 @@ namespace idea
 	public:
 		Step* getCurrentStep();
 		Step* nextStep();
+
+		void addStep(Step* step);
+		void removeStep(Step* step);
+		void removeAllSteps();
 	protected:
 	private:
+		int _cursor;
+		std::vector<Step*> _steps;
 	};
 }

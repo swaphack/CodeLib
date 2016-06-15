@@ -31,7 +31,7 @@ namespace sys
 		virtual bool onRecvSignal(Signal* signal);
 	public:// Õ‚…Ë
 		// º¸≈Ã
-		virtual KeyBoard* getKeyBoard();
+		virtual Keyboard* getKeyboard();
 		//  Û±Í
 		virtual Mouse* getMouse();
 	protected:
@@ -54,7 +54,7 @@ namespace sys
 		float _posY;
 		std::string _title;
 	protected:
-		KeyBoard* _keyBoard;
+		Keyboard* _keyboard;
 		Mouse* _mouse;
 	};
 

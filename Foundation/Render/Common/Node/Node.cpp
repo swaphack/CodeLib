@@ -19,11 +19,6 @@ Node::Node()
 , _touchProxy(nullptr)
 {
 	this->setVisible(true);
-	this->setPosition(0, 0, 0);
-	this->setScale(1, 1, 1);
-	this->setRotation(0, 0, 0);
-	this->setAnchorPoint(0.5, 0.5, 0.5);
-	this->setVolume(1,1,1);
 }
 
 Node::~Node()
@@ -121,7 +116,6 @@ void* Node::getUserData()
 
 void Node::setZOrder(float z)
 {
-	_position.z = z;
 	_zOrder = z;
 	setDirty(true);
 }
@@ -129,73 +123,6 @@ void Node::setZOrder(float z)
 float Node::getZOrder()
 {
 	return _zOrder;
-}
-
-void Node::setPosition( float x, float y, float z )
-{
-	_position.x = x;
-	_position.y = y;
-	_position.z = z;
-	_zOrder = z;
-	setDirty(true);
-}
-
-const sys::Vector& Node::getPosition()
-{
-	return _position;
-}
-
-void Node::setScale( float x, float y, float z )
-{
-	_scale.x = x;
-	_scale.y = y;
-	_scale.z = z;
-	setDirty(true);
-}
-
-const sys::Vector& Node::getScale()
-{
-	return _scale;
-}
-
-void Node::setRotation( float x, float y, float z )
-{
-	_rotation.x = x;
-	_rotation.y = y;
-	_rotation.z = z;
-	setDirty(true);
-}
-
-const sys::Vector& Node::getRotation()
-{
-	return _rotation;
-}
-
-void Node::setAnchorPoint( float x, float y, float z )
-{
-	_anchor.x = x;
-	_anchor.y = y;
-	_anchor.z = z;
-	setDirty(true);
-}
-
-const sys::Vector& Node::getAnchorPoint()
-{
-	return _anchor;
-}
-
-void Node::setVolume( float w, float h, float d )
-{
-	_volume.width = w;
-	_volume.height = h;
-	_volume.deep = d;
-
-	setDirty(true);
-}
-
-const sys::Volume& Node::getVolume()
-{
-	return _volume;
 }
 
 void Node::setVisible( bool status )
@@ -414,4 +341,14 @@ void Node::drawRect()
 		GLTool::drawRect(&_rectVertex, GL_LINE_LOOP);
 		GLTool::endBlend();
 	}
+}
+
+void Node::onSpaceChange()
+{
+	setDirty(true);
+}
+
+void Node::onBodyChange()
+{
+	setDirty(true);
 }

@@ -7,6 +7,7 @@
 
 namespace render
 {
+	class Node;
 	class TouchProxy;
 	// ´¥Ãş¹ÜÀí
 	class TouchManager

@@ -79,7 +79,7 @@ const char* ResultString::getValue()
 ResultPtr::ResultPtr(void* value)
 :_value(value)
 {
-	setType(ERT_PTR);
+	setType(ERT_POINTER);
 }
 
 ResultPtr::~ResultPtr()
@@ -88,6 +88,23 @@ ResultPtr::~ResultPtr()
 }
 
 void* ResultPtr::getValue()
+{
+	return _value;
+}
+//////////////////////////////////////////////////////////////////////////
+ResultRef::ResultRef(void* value)
+:_value(value)
+{
+	setType(ERT_REFERENCE);
+
+}
+
+ResultRef::~ResultRef()
+{
+
+}
+
+void* ResultRef::getValue()
 {
 	return _value;
 }

@@ -25,7 +25,7 @@ namespace sys
 		virtual bool onRecvSignal(Signal* signal) = 0;
 	public:// Õ‚…Ë
 		// º¸≈Ã
-		virtual KeyBoard* getKeyBoard() = 0;
+		virtual Keyboard* getKeyboard() = 0;
 		//  Û±Í
 		virtual Mouse* getMouse() = 0;
 	};

@@ -19,4 +19,5 @@ public:
 	void testAnimation();
 	void testParticle(); 
 	void testStencil();
+	void testCamera();
 };

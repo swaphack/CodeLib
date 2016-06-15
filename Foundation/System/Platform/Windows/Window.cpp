@@ -102,7 +102,7 @@ _width(0),
 _height(0),
 _posX(-1),
 _posY(-1),
-_keyBoard(nullptr),
+_keyboard(nullptr),
 _mouse(nullptr)
 {
 }
@@ -143,9 +143,9 @@ bool Window::onRecvSignal(Signal* signal)
 	return false;
 }
 
-KeyBoard* Window::getKeyBoard()
+Keyboard* Window::getKeyboard()
 {
-	return _keyBoard;
+	return _keyboard;
 }
 
 Mouse* Window::getMouse()
@@ -281,17 +281,17 @@ bool Window::onHandSignal(Signal* signal)
 	}
 	case WM_KEYDOWN:
 	{
-		if (getKeyBoard())
+		if (getKeyboard())
 		{
-			getKeyBoard()->onKeyEvent((BoardKey)params->t2, EBS_BUTTON_DOWN);
+			getKeyboard()->onKeyEvent((BoardKey)params->t2, EBS_BUTTON_DOWN);
 		}
 		break;
 	}
 	case WM_KEYUP:
 	{
-		if (getKeyBoard())
+		if (getKeyboard())
 		{
-			getKeyBoard()->onKeyEvent((BoardKey)params->t2, EBS_BUTTON_UP);
+			getKeyboard()->onKeyEvent((BoardKey)params->t2, EBS_BUTTON_UP);
 		}
 		break;
 	}

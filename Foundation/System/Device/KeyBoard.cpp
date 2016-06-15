@@ -1,25 +1,25 @@
-#include "KeyBoard.h"
+#include "Keyboard.h"
 
 using namespace sys;
 
 
-KeyBoard::KeyBoard()
+Keyboard::Keyboard()
 {
 
 }
 
-KeyBoard::~KeyBoard()
+Keyboard::~Keyboard()
 {
 
 }
 
-void KeyBoard::setKeyhandler(Object* target, KEYBOARD_BUTTON_HANDLER handler)
+void Keyboard::setKeyhandler(Object* target, KEYBOARD_BUTTON_HANDLER handler)
 {
 	_buttonHandler.target = target;
 	_buttonHandler.handler = handler;
 }
 
-void KeyBoard::onKeyEvent(BoardKey key, ButtonStatus status)
+void Keyboard::onKeyEvent(BoardKey key, ButtonStatus status)
 {
 	_buttonHandler.hand(key, status);
 }

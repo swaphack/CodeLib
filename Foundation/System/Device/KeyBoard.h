@@ -6,13 +6,13 @@
 namespace sys
 {	
 	// 键盘
-	class KeyBoard
+	class Keyboard
 	{
 	private:
 		
 	public:
-		KeyBoard();
-		virtual ~KeyBoard();
+		Keyboard();
+		virtual ~Keyboard();
 	public:
 		// 设置接收处理
 		void setKeyhandler(Object* target, KEYBOARD_BUTTON_HANDLER handler);

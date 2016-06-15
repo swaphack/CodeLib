@@ -33,6 +33,8 @@ namespace render
 		inline const ActionManager* getActionManager() { return _actionManager; }
 		// 触摸管理
 		inline const TouchManager* getTouchManager() { return _touchManager; }
+		// 获取摄像机
+		Camera* getCamera();
 	private:
 		// 场景
 		Scene* _root;

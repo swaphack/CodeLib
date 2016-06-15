@@ -34,7 +34,7 @@ namespace web
 		int _srcID;
 	};
 
-
+	//////////////////////////////////////////////////////////////////////////
 	struct HttpResponse : public HttpCommand
 	{
 	public:

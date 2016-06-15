@@ -2,8 +2,6 @@
 
 #include "macros.h"
 
-#include "Analysis.h"
-
 namespace idea
 {
 	// ½â¾ö

@@ -19,6 +19,12 @@
     <Filter Include="AI\Experience">
       <UniqueIdentifier>{c1922982-cf80-435d-9ecb-debf3c852555}</UniqueIdentifier>
     </Filter>
+    <Filter Include="AI\Method">
+      <UniqueIdentifier>{0bee10ee-ab68-40ec-9057-260109a38fdc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AI\Analysis">
+      <UniqueIdentifier>{c549f872-f1a2-4828-8115-b9930d78d08d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Brain\Memory.h">
@@ -38,9 +44,6 @@
     </ClInclude>
     <ClInclude Include="Brain\Cell.h">
       <Filter>Brain</Filter>
-    </ClInclude>
-    <ClInclude Include="AI\Solution\Analysis.h">
-      <Filter>AI\Solution</Filter>
     </ClInclude>
     <ClInclude Include="AI\Solution\import.h">
       <Filter>AI\Solution</Filter>
@@ -78,14 +81,8 @@
     <ClInclude Include="AI\Base\Result.h">
       <Filter>AI\Base</Filter>
     </ClInclude>
-    <ClInclude Include="AI\Solution\Log.h">
-      <Filter>AI\Solution</Filter>
-    </ClInclude>
     <ClInclude Include="Brain\Brain.h">
       <Filter>Brain</Filter>
-    </ClInclude>
-    <ClInclude Include="AI\ai.h">
-      <Filter>AI</Filter>
     </ClInclude>
     <ClInclude Include="AI\Experience\import.h">
       <Filter>AI\Experience</Filter>
@@ -93,14 +90,35 @@
     <ClInclude Include="AI\Study\import.h">
       <Filter>AI\Study</Filter>
     </ClInclude>
-    <ClInclude Include="AI\Solution\Record.h">
-      <Filter>AI\Solution</Filter>
+    <ClInclude Include="AI\Method\Step.h">
+      <Filter>AI\Method</Filter>
     </ClInclude>
-    <ClInclude Include="AI\Study\Method.h">
-      <Filter>AI\Study</Filter>
+    <ClInclude Include="AI\Method\Method.h">
+      <Filter>AI\Method</Filter>
     </ClInclude>
-    <ClInclude Include="AI\Study\Step.h">
-      <Filter>AI\Study</Filter>
+    <ClInclude Include="AI\Analysis\Analysis.h">
+      <Filter>AI\Analysis</Filter>
+    </ClInclude>
+    <ClInclude Include="AI\Analysis\macros.h">
+      <Filter>AI\Analysis</Filter>
+    </ClInclude>
+    <ClInclude Include="AI\Analysis\import.h">
+      <Filter>AI\Analysis</Filter>
+    </ClInclude>
+    <ClInclude Include="AI\Method\macros.h">
+      <Filter>AI\Method</Filter>
+    </ClInclude>
+    <ClInclude Include="AI\Method\import.h">
+      <Filter>AI\Method</Filter>
+    </ClInclude>
+    <ClInclude Include="AI\import.h">
+      <Filter>AI</Filter>
+    </ClInclude>
+    <ClInclude Include="AI\AI.h">
+      <Filter>AI</Filter>
+    </ClInclude>
+    <ClInclude Include="AI\Analysis\AnalysisEvent.h">
+      <Filter>AI\Analysis</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -124,9 +142,6 @@
     </ClCompile>
     <ClCompile Include="Brain\Arithmetical.cpp">
       <Filter>Brain</Filter>
-    </ClCompile>
-    <ClCompile Include="AI\Solution\Record.cpp">
-      <Filter>AI\Solution</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -163,9 +163,6 @@
     <ClInclude Include="Device\import.h">
       <Filter>Device</Filter>
     </ClInclude>
-    <ClInclude Include="Device\KeyBoard.h">
-      <Filter>Device</Filter>
-    </ClInclude>
     <ClInclude Include="Device\Mouse.h">
       <Filter>Device</Filter>
     </ClInclude>
@@ -253,6 +250,9 @@
     <ClInclude Include="Platform\Windows\Console.h">
       <Filter>Platform\Windows</Filter>
     </ClInclude>
+    <ClInclude Include="Device\KeyBoard.h">
+      <Filter>Device</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Base\File.cpp">
@@ -324,9 +324,6 @@
     <ClCompile Include="Device\Mouse.cpp">
       <Filter>Device</Filter>
     </ClCompile>
-    <ClCompile Include="Device\KeyBoard.cpp">
-      <Filter>Device</Filter>
-    </ClCompile>
     <ClCompile Include="Base\Random.cpp">
       <Filter>Base</Filter>
     </ClCompile>
@@ -341,6 +338,9 @@
     </ClCompile>
     <ClCompile Include="Platform\Windows\Console.cpp">
       <Filter>Platform\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="Device\Keyboard.cpp">
+      <Filter>Device</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

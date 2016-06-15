@@ -65,7 +65,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="AI\ai.h" />
+    <ClInclude Include="AI\AI.h" />
+    <ClInclude Include="AI\Analysis\AnalysisEvent.h" />
+    <ClInclude Include="AI\import.h" />
+    <ClInclude Include="AI\Analysis\Analysis.h" />
+    <ClInclude Include="AI\Analysis\import.h" />
+    <ClInclude Include="AI\Analysis\macros.h" />
     <ClInclude Include="AI\Base\Event.h" />
     <ClInclude Include="AI\Base\IWorker.h" />
     <ClInclude Include="AI\Base\import.h" />
@@ -74,16 +79,15 @@
     <ClInclude Include="AI\Experience\Experience.h" />
     <ClInclude Include="AI\Experience\import.h" />
     <ClInclude Include="AI\Experience\macros.h" />
-    <ClInclude Include="AI\Solution\Analysis.h" />
+    <ClInclude Include="AI\Method\import.h" />
+    <ClInclude Include="AI\Method\macros.h" />
+    <ClInclude Include="AI\Method\Method.h" />
+    <ClInclude Include="AI\Method\Step.h" />
     <ClInclude Include="AI\Solution\import.h" />
-    <ClInclude Include="AI\Solution\Log.h" />
     <ClInclude Include="AI\Solution\macros.h" />
-    <ClInclude Include="AI\Solution\Record.h" />
     <ClInclude Include="AI\Solution\Solution.h" />
     <ClInclude Include="AI\Study\import.h" />
     <ClInclude Include="AI\Study\macros.h" />
-    <ClInclude Include="AI\Study\Method.h" />
-    <ClInclude Include="AI\Study\Step.h" />
     <ClInclude Include="AI\Study\Study.h" />
     <ClInclude Include="Brain\Arithmetical.h" />
     <ClInclude Include="Brain\Brain.h" />
@@ -97,7 +101,6 @@
     <ClCompile Include="AI\Base\Event.cpp" />
     <ClCompile Include="AI\Base\Message.cpp" />
     <ClCompile Include="AI\Base\Result.cpp" />
-    <ClCompile Include="AI\Solution\Record.cpp" />
     <ClCompile Include="Brain\Arithmetical.cpp" />
     <ClCompile Include="Brain\Control.cpp" />
     <ClCompile Include="Brain\Memory.cpp" />

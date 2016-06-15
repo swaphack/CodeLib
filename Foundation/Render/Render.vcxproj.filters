@@ -148,6 +148,9 @@
     <ClCompile Include="Common\GL\shape_commond.cpp">
       <Filter>Common\GL</Filter>
     </ClCompile>
+    <ClCompile Include="Platform\Windows\KeyboardManager.cpp">
+      <Filter>Platform\Windows</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Common\GL\import.h">
@@ -1047,6 +1050,9 @@
     </ClInclude>
     <ClInclude Include="Common\Control\Static\CtrlStencil.h">
       <Filter>Common\Control\Static</Filter>
+    </ClInclude>
+    <ClInclude Include="Platform\Windows\KeyboardManager.h">
+      <Filter>Platform\Windows</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

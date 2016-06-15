@@ -14,7 +14,10 @@ namespace render
 	class TouchProxy;
 
 	// 绘制节点
-	class Node : public sys::Object, public DirtyProtocol
+	class Node : public sys::Object, 
+		public DirtyProtocol, 
+		public SpaceProtocol,
+		public BodyProtocol
 	{
 	public:
 		Node();
@@ -50,27 +53,6 @@ namespace render
 		void setZOrder(float z);
 		// 获取z轴坐标
 		float getZOrder();
-		// 设置坐标
-		void setPosition(float x, float y, float z);
-		// 获取坐标
-		const sys::Vector& getPosition();
-		// 设置缩放比
-		void setScale(float x, float y, float z);
-		// 获取缩放比
-		const sys::Vector& getScale();
-		// 设置旋转系数
-		void setRotation(float x, float y, float z);
-		// 获取旋转系数
-		const sys::Vector& getRotation();
-
-		// 设置描点
-		void setAnchorPoint(float x, float y, float z);
-		// 获取描点
-		const sys::Vector& getAnchorPoint();
-		// 设置体积
-		void setVolume(float w, float h, float d);
-		// 获取体积
-		const sys::Volume& getVolume();
 
 		// 设置可见性
 		void setVisible(bool status);
@@ -111,7 +93,12 @@ namespace render
 		virtual void calRealSpaceInfo();
 		// 显示绘制区域
 		void drawRect();
+		// 空间属性发生改变
+		virtual void onSpaceChange();
+		// 物体属性发生改变
+		virtual void onBodyChange();
 	protected:
+		// opengl 位置
 		sys::Vector _obPosition;
 		// 标签
 		int _tag;
@@ -119,17 +106,6 @@ namespace render
 		void* _userData;
 		// z轴坐标
 		float _zOrder;
-		// 位置坐标
-		sys::Vector _position;
-		// 缩放比
-		sys::Vector _scale;
-		// 旋转
-		sys::Vector _rotation;
-
-		// 锚点
-		sys::Vector _anchor;
-		// 体积
-		sys::Volume _volume;
 		// 父节点
 		Node* _parent;
 		// 子节点

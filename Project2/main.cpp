@@ -66,7 +66,7 @@ private:
 	PrimeValue _values;
 };
 
-int main(int argc, char** argv)
+void testPrime()
 {
 	freopen("input.txt", "r", stdin);
 	freopen("output.txt", "w", stdout);
@@ -81,7 +81,7 @@ int main(int argc, char** argv)
 		}
 	}
 
-	PrimeValue::iterator iter; 
+	PrimeValue::iterator iter;
 	int count;
 	for (int i = 2; i < MAX_VALUE; i++)
 	{
@@ -98,6 +98,24 @@ int main(int argc, char** argv)
 		}
 		printf("number %d: %d\n", i, count);
 	}
+}
+
+std::string mak_p(size_t ctr, const std::string& word, const std::string& ending)
+{
+	return (ctr == 1) ? word : word + ending;
+}
+
+int main(int argc, char** argv)
+{
+	std::string m = "hello, kety!";
+	std::string& md = m;
+
+	std::string n = "s";
+	std::string& nd = n;
+
+	const std::string& s = mak_p(1, m, n);
+
+	printf("%s", s.c_str());
 	
 	return 0;
 }

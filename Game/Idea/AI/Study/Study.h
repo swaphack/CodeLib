@@ -9,7 +9,7 @@ namespace idea
 	{
 	public:
 		Study();
-		~Study();
+		virtual ~Study();
 	public:
 		// 学习
 		virtual Result* run(Event* e);

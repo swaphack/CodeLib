@@ -3,11 +3,13 @@
 #include "system.h"
 #include <windows.h>
 
+#include "KeyboardManager.h"
 #include "../../Common/RenderApplication.h"
 
 namespace render
 {
 	class RenderApplication;
+	#define G_KEYBOARDMANAGER sys::Instance<KeyboardManager>::getInstance()
 
 	// 设备代理
 	class DeviceProxy : public sys::Object
@@ -16,14 +18,17 @@ namespace render
 		DeviceProxy(const TouchManager* touchManager);
 		~DeviceProxy();
 	public:
-		void onMouseButtonHandler(sys::MouseKey Key, sys::ButtonStatus type, float x, float y);
+		void onMouseButtonHandler(sys::MouseKey key, sys::ButtonStatus type, float x, float y);
 
 		void onMouseMoveHandler(float x, float y);
 
-		void onKeyBoardButtonHandler(sys::BoardKey Key, sys::ButtonStatus type);
+		void onKeyBoardButtonHandler(sys::BoardKey key, sys::ButtonStatus type);
 	protected:
 	private:
+		// 触摸事件
 		TouchManager* _touchManager;
+		// 键盘事件
+		KeyboardManager* _keyboardManager;
 	};
 
 	// gl窗口

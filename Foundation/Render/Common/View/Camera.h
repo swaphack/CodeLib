@@ -6,29 +6,29 @@
 namespace render
 {
 	// 摄像机
-	class Camera
+	class Camera : public sys::Object,
+		public DirtyProtocol,
+		public SpaceProtocol,
+		public BodyProtocol
 	{
 	public:
 		Camera();
 		virtual ~Camera();
 	public:
-		void setPosition(float px, float py, float pz);
-		const sys::Vector& getPosition();
-
-		void setRotation(float rx, float ry, float rz);
-		const sys::Vector& getRotation();
-
-		void setScale(float sx, float sy, float sz);
-		const sys::Vector& getScale();
-
 		virtual void updateCamera();
+		// 相机对准指定位置
+		virtual void onLookAt(const sys::Vector& position);
+	protected:
+		virtual void onSpaceChange();
 	protected:
 		// 摄像机位置
-		sys::Vector _position;
+		//sys::Vector _position;
 		// 摄像机旋转角度
-		sys::Vector _rotation;
+		//sys::Vector _rotation;
 		// 摄像机焦距
-		sys::Vector _scale;
+		//sys::Vector _scale;
+		// opengl 位置
+		sys::Vector _obPosition;
 	};
 	// 2d 摄像头
 	class Camera2D : public Camera

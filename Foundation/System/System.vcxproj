@@ -145,7 +145,7 @@
     <ClCompile Include="Base\Hash.cpp" />
     <ClCompile Include="Base\Random.cpp" />
     <ClCompile Include="Base\Time.cpp" />
-    <ClCompile Include="Device\KeyBoard.cpp" />
+    <ClCompile Include="Device\Keyboard.cpp" />
     <ClCompile Include="Device\Mouse.cpp" />
     <ClCompile Include="Device\Signal.cpp" />
     <ClCompile Include="Framework\Application.cpp" />

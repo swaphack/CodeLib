@@ -2,7 +2,7 @@
 
 // …Ë±∏
 #include "macros.h"
-#include "KeyBoard.h"
+#include "Keyboard.h"
 #include "Mouse.h"
 #include "Signal.h"
 #include "WindowImpl.h"

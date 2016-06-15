@@ -1,6 +1,7 @@
 #include "Camera.h"
 
 #include "../GL/import.h"
+#include "../Tool/import.h"
 
 using namespace render;
 
@@ -25,45 +26,19 @@ Camera::~Camera()
 
 }
 
-void Camera::setPosition(float px, float py, float pz)
-{
-	_position.x = px;
-	_position.y = py;
-	_position.z = pz;
-}
-
-const sys::Vector& Camera::getPosition()
-{
-	return _position;
-}
-
-void Camera::setRotation(float rx, float ry, float rz)
-{
-	_rotation.x = rx;
-	_rotation.y = ry;
-	_rotation.z = rz;
-}
-
-const sys::Vector& Camera::getRotation()
-{
-	return _rotation;
-}
-
-void Camera::setScale(float sx, float sy, float sz)
-{
-	_scale.x = sx;
-	_scale.y = sy;
-	_scale.z = sz;
-}
-
-const sys::Vector& Camera::getScale()
-{
-	return _position;
-}
-
 void Camera::updateCamera()
 {
 	
+}
+
+void Camera::onLookAt(const sys::Vector& position)
+{
+
+}
+
+void Camera::onSpaceChange()
+{
+	Tool::convertToOGLPoisition(_position, _obPosition);
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -79,11 +54,11 @@ Camera2D::~Camera2D()
 
 void Camera2D::updateCamera()
 {
-	glMatrixMode(GL_MODELVIEW);
-	glLoadIdentity();
+// 	glMatrixMode(GL_MODELVIEW);
+// 	glLoadIdentity();
 	glOrtho(0, 1, 0, 1, 0, 1);
 
-	glTranslatef(_position.x, _position.y, _position.z);
+	glTranslatef(_obPosition.x, _obPosition.y, _obPosition.z);
 	glRotatef(_rotation.x, 1, 0, 0);
 	glRotatef(_rotation.y, 0, 1, 0);
 	glRotatef(_rotation.z, 0, 0, 1);
@@ -103,11 +78,11 @@ Camera3D::~Camera3D()
 
 void Camera3D::updateCamera()
 {
-	glMatrixMode(GL_MODELVIEW);
-	glLoadIdentity();
+// 	glMatrixMode(GL_MODELVIEW);
+// 	glLoadIdentity();
 	glFrustum(0, 1, 0, 1, 0, 1);
 
-	glTranslatef(_position.x, _position.y, _position.z);
+	glTranslatef(_obPosition.x, _obPosition.y, _obPosition.z);
 	glRotatef(_rotation.x, 1, 0, 0);
 	glRotatef(_rotation.y, 0, 1, 0);
 	glRotatef(_rotation.z, 0, 0, 1);

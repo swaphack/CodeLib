@@ -15,7 +15,9 @@ namespace idea
 		// 字符串类型
 		ERT_STRING,
 		// 指针类型
-		ERT_PTR,
+		ERT_POINTER,
+		// 引用类型
+		ERT_REFERENCE,
 	};
 
 	// 结果
@@ -74,6 +76,18 @@ namespace idea
 	public:
 		ResultPtr(void* value);
 		virtual ~ResultPtr();
+	public:
+		void* getValue();
+	private:
+		void* _value;
+	};
+
+	// 引用类型
+	class ResultRef : public Result
+	{
+	public:
+		ResultRef(void* value);
+		virtual ~ResultRef();
 	public:
 		void* getValue();
 	private:

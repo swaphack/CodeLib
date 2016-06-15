@@ -113,6 +113,7 @@
     <ClCompile Include="Common\View\ViewConfig.cpp" />
     <ClCompile Include="Common\XControl\CtrlPixel.cpp" />
     <ClCompile Include="Platform\Windows\GLFrame.cpp" />
+    <ClCompile Include="Platform\Windows\KeyboardManager.cpp" />
     <ClCompile Include="Resource\Componet\Image.cpp" />
     <ClCompile Include="Resource\Componet\Media.cpp" />
     <ClCompile Include="Resource\FilePath.cpp" />
@@ -198,6 +199,7 @@
     <ClInclude Include="Platform\import.h" />
     <ClInclude Include="Platform\Windows\GLFrame.h" />
     <ClInclude Include="Platform\Windows\import.h" />
+    <ClInclude Include="Platform\Windows\KeyboardManager.h" />
     <ClInclude Include="render.h" />
     <ClInclude Include="Resource\Componet\Image.h" />
     <ClInclude Include="Resource\Componet\import.h" />
