@@ -2,6 +2,10 @@
 
 #include "../Node/import.h"
 
+#include "../Touch/import.h"
+
+#include "../Keyboard/import.h"
+
 namespace render
 {
 	//---------------------Ã¶¾Ù---------------------

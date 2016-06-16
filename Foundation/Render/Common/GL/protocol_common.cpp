@@ -324,3 +324,28 @@ float BodyProtocol::getDeep()
 {
 	return _volume.deep;
 }
+
+//////////////////////////////////////////////////////////////////////////
+TextProtocol::TextProtocol()
+:_textBody("")
+{
+
+}
+
+TextProtocol::~TextProtocol()
+{
+
+}
+
+void TextProtocol::setString(const char* text)
+{
+	if (text)
+	{
+		_textBody = text;
+	}
+}
+
+const char* TextProtocol::getString()
+{
+	return _textBody.c_str();
+}

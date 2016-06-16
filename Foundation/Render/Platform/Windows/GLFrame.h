@@ -2,14 +2,11 @@
 
 #include "system.h"
 #include <windows.h>
-
-#include "KeyboardManager.h"
 #include "../../Common/RenderApplication.h"
 
 namespace render
 {
 	class RenderApplication;
-	#define G_KEYBOARDMANAGER sys::Instance<KeyboardManager>::getInstance()
 
 	// 设备代理
 	class DeviceProxy : public sys::Object

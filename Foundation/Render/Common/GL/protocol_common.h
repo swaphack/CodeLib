@@ -168,4 +168,17 @@ namespace render
 		sys::Volume _volume;
 	private:
 	};
+
+	// 用于文本
+	class TextProtocol
+	{
+	public:
+		TextProtocol();
+		virtual ~TextProtocol();
+	public:
+		virtual void setString(const char* text);
+		const char* getString();
+	private:
+		std::string _textBody;
+	};
 }

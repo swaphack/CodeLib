@@ -148,8 +148,14 @@
     <ClCompile Include="Common\GL\shape_commond.cpp">
       <Filter>Common\GL</Filter>
     </ClCompile>
-    <ClCompile Include="Platform\Windows\KeyboardManager.cpp">
-      <Filter>Platform\Windows</Filter>
+    <ClCompile Include="Common\Control\Static\CtrlEditBox.cpp">
+      <Filter>Common\Control\Static</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Keyboard\KeyboardManager.cpp">
+      <Filter>Common\Keyboard</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Control\Static\CtrlEditLabel.cpp">
+      <Filter>Common\Control\Static</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -236,9 +242,6 @@
     </ClInclude>
     <ClInclude Include="Common\DrawNode\TestDrawNode.h">
       <Filter>Common\DrawNode</Filter>
-    </ClInclude>
-    <ClInclude Include="2d\UI\UIImage.h">
-      <Filter>2d\UI</Filter>
     </ClInclude>
     <ClInclude Include="2d\UI\UINode.h">
       <Filter>2d\UI</Filter>
@@ -1051,8 +1054,17 @@
     <ClInclude Include="Common\Control\Static\CtrlStencil.h">
       <Filter>Common\Control\Static</Filter>
     </ClInclude>
-    <ClInclude Include="Platform\Windows\KeyboardManager.h">
-      <Filter>Platform\Windows</Filter>
+    <ClInclude Include="Common\Control\Static\CtrlEditBox.h">
+      <Filter>Common\Control\Static</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Keyboard\KeyboardManager.h">
+      <Filter>Common\Keyboard</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Keyboard\import.h">
+      <Filter>Common\Keyboard</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Control\Static\CtrlEditLabel.h">
+      <Filter>Common\Control\Static</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1175,6 +1187,9 @@
     </Filter>
     <Filter Include="3d\Shape">
       <UniqueIdentifier>{ac244ac0-0e32-49a2-b0c2-cccbd2b85bff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common\Keyboard">
+      <UniqueIdentifier>{a6dde4f6-3baa-4bd1-ac2d-6e093a8890f7}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

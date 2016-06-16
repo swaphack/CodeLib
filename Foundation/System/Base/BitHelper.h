@@ -27,7 +27,7 @@ namespace sys
 		// »ñÈ¡utf8ÎÄ×Ö
 		static char* convertToUTF8(wchar_t* src);
 		// zh_CN.utf8 zh_CN.GB2312 
-		static wchar_t* convertToWideChar(const char* src);
+		static wchar_t* convertToWideChar(const char* src, int& length);
 
 		static wchar_t* convertToWideCharWnd(const char *str);
 	protected:

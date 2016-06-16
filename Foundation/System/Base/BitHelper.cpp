@@ -103,7 +103,7 @@ char* BitHelper::convertToUTF8(wchar_t* src)
 	return mbs;
 }
 
-wchar_t* BitHelper::convertToWideChar(const char* src)
+wchar_t* BitHelper::convertToWideChar(const char* src, int& length)
 {
 	if (src == NULL) {
 		return nullptr;
@@ -125,7 +125,10 @@ wchar_t* BitHelper::convertToWideChar(const char* src)
 
 	wchar_t* wc = (wchar_t*)malloc(sizeof(wchar_t)*(mbs_size + 1));
 	if (wc != 0)
+	{
 		wc_size = mbstowcs(wc, src, mbs_size);
+		length = mbs_size;
+	}
 
 	return wc;
 }

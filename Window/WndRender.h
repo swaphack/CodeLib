@@ -20,4 +20,5 @@ public:
 	void testParticle(); 
 	void testStencil();
 	void testCamera();
+	void testEditBox();
 };

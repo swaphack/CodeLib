@@ -25,7 +25,7 @@ void WndRender::show()
 
 	//this->testStencil();
 
-	this->testText();
+	this->testEditBox();
 }
 
 void WndRender::testImage()
@@ -288,4 +288,41 @@ void WndRender::testCamera()
 			//pNode->setPositionX(pNode->getPositionX() + 1);
 		}
 	});
+}
+
+void WndRender::testEditBox()
+{
+	CtrlEditLabel* pEditLabel = new CtrlEditLabel();
+	AUTO_RELEASE_OBJECT(pEditLabel);
+
+	CtrlText* pCtrlText = pEditLabel->getCtrlText();
+	pCtrlText->setFontPath("Resource/font_3.ttf");
+	pCtrlText->setFontSize(58);
+	pCtrlText->setAnchorPoint(0.0f, 0.0f, 0.0f);
+	pCtrlText->setColor(sys::Color4B(125, 80, 255, 255));
+
+	pEditLabel->setPosition(512, 384, 0);
+	pEditLabel->setAnchorPoint(0.0f, 0.0f, 0.0f);
+	pEditLabel->setVolume(200, 100, 0);
+	pEditLabel->setKeyboardEnable(true);
+	pEditLabel->setRectVisible(true);
+	pEditLabel->setRectColor(sys::Color4B(255, 0, 0, 100));
+	pEditLabel->setInputListen([](sys::Object* object, EditInputStatus status){
+		CtrlEditLabel* pNode = dynamic_cast<CtrlEditLabel*>(object);
+		if (pNode == nullptr)
+		{
+			return;
+		}
+
+		if (status == EEIS_BEGIN)
+		{
+			pNode->setString("");
+		}
+		else if (status == EEIS_END)
+		{
+			LOG("Input Text %s\n", pNode->getString());
+		}
+	});
+
+	this->getCanvas()->getRoot()->addChild(pEditLabel);
 }

@@ -114,21 +114,34 @@ void FT_LABEL::load(const TextDefine& textDefine, LabelStream* stream)
 	_lowY = gData->deltaY;
 	_fontSize = textDefine.fontSize;
 
+	if (textDefine.text.empty())
+	{
+		return;
+	}
 	char* text = (char*)textDefine.text.c_str();
-	wchar_t* dest = sys::BitHelper::convertToWideChar(text);
+	int length = -1;
+	wchar_t* dest = sys::BitHelper::convertToWideChar(text, length);
+	if (dest == nullptr || length == -1)
+	{
+		return;
+	}
  	wchar_t* ptr = dest;
-	while (*ptr != 0)
+	int offset = 0;
+	while (*ptr != 0 && offset < length)
 	{
 		this->loadChar(*ptr, textDefine.fontSize);
 		ptr++;
+		offset++;
 	}
 
 	stream->resetOffset();
 	ptr = dest;
-	while (*ptr != 0)
+	offset = 0;
+	while (*ptr != 0 && offset < length)
 	{
 		this->writeStream(*ptr, stream);
 		ptr++;
+		offset++;
 	}
 
 	delete (dest);

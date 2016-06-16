@@ -8,3 +8,5 @@
 #include "CtrlMask.h"
 #include "CtrlFog.h"
 #include "CtrlStencil.h"
+#include "CtrlEditBox.h"
+#include "CtrlEditLabel.h"

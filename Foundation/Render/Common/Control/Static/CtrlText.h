@@ -5,7 +5,7 @@
 namespace render
 {
 	// 2d文本
-	class CtrlText : public ColorNode
+	class CtrlText : public ColorNode, public TextProtocol
 	{
 	public:
 		CtrlText();
@@ -29,9 +29,9 @@ namespace render
 		// 获取垂直间距
 		float getVerticalDistance();
 		// 设置显示的文本
-		void setString(const char* text);
+		virtual void setString(const char* text);
 		// 获取显示的文本
-		const char* getString();
+		//virtual const char* getString();
 
 		// 设置水平对齐方式
 		void setHorizontalAlignment(HorizontalAlignment alignment);

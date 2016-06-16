@@ -81,14 +81,15 @@ float CtrlText::getVerticalDistance()
 
 void CtrlText::setString(const char* text)
 {
+	TextProtocol::setString(text);
 	_textDefine.text = text;
 	setDirty(true);
 }
 
-const char* CtrlText::getString()
-{
-	return _textDefine.text.c_str();
-}
+// const char* CtrlText::getString()
+// {
+// 	return _textDefine.text.c_str();
+// }
 
 void CtrlText::setHorizontalAlignment(HorizontalAlignment alignment)
 {
