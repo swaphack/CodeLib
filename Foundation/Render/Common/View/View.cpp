@@ -87,8 +87,9 @@ void View::initView()
 void View::updateView()
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
-// 	glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
-// 	glClearDepth(1.0f);
+	glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
+	glClearDepth(1.0f);
+	glClearStencil(0);
 	if (_camera)
 	{
 		_camera->updateCamera();

@@ -116,7 +116,7 @@ void FT_LABEL::load(const TextDefine& textDefine, LabelStream* stream)
 
 	char* text = (char*)textDefine.text.c_str();
 	wchar_t* dest = sys::BitHelper::convertToWideChar(text);
-	wchar_t* ptr = dest;
+ 	wchar_t* ptr = dest;
 	while (*ptr != 0)
 	{
 		this->loadChar(*ptr, textDefine.fontSize);
@@ -176,7 +176,11 @@ FT_CHAR_DATA* FT_LABEL::loadChar(ulong ch, int fontSize)
 	FT_BBox bbox;
 	FT_Glyph_Get_CBox(glyph, FT_GLYPH_BBOX_PIXELS, &bbox);
 
-	_error = FT_Glyph_To_Bitmap(&glyph, ft_render_mode_normal, 0, 1);
+	FT_Vector  origin;
+	origin.x = 0;
+	origin.y = 0;
+
+	_error = FT_Glyph_To_Bitmap(&glyph, ft_render_mode_normal, &origin, 1);
 	if (_error != 0)
 	{
 		return nullptr;
@@ -307,6 +311,13 @@ void FT_LABEL::writeStream(ulong ch, LabelStream* stream)
 		advY = data->advY;
 		deltaX = data->deltaX;
 		deltaY = data->deltaY - _lowY;
+
+		deltaY = deltaY < 0 ? 0 : deltaY;
+	}
+
+	if (deltaY + height > advY)
+	{
+		deltaY = advY - height;
 	}
 
 	stream->writeLabelBlock(width, height, deltaX, deltaY, advY, pBuf);

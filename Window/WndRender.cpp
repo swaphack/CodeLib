@@ -1,4 +1,4 @@
-#include "WndRender.h"
+﻿#include "WndRender.h"
 
 using namespace render;
 using namespace sys;
@@ -6,7 +6,7 @@ using namespace sys;
 WndRender::WndRender()
 {
 	this->init();
-	this->getCanvas()->setDimensions(render::ED_3D);
+	this->getCanvas()->setDimensions(render::ED_2D);
 }
 
 WndRender::~WndRender()
@@ -22,10 +22,10 @@ void WndRender::show()
 	LOG("%d-%d-%d %02d:%02d:%02d\n", t->getYear(), t->getMonth(), t->getMonthDay(), t->getHour(), t->getMinute(), t->getSecond());
 	t->addSecond(10989456);
 	LOG("%d-%d-%d %02d:%02d:%02d\n", t->getYear(), t->getMonth(), t->getMonthDay(), t->getHour(), t->getMinute(), t->getSecond());
-	delete t;
 
-	this->testModel();
-	this->testCamera();
+	//this->testStencil();
+
+	this->testText();
 }
 
 void WndRender::testImage()
@@ -163,13 +163,12 @@ void WndRender::testText()
 	Time* t = Time::getNow();
 	LOG("%d-%d-%d %02d:%02d:%02d\n", t->getYear(), t->getMonth(), t->getMonthDay(), t->getHour(), t->getMinute(), t->getSecond());
 	sprintf(strVal, "%d-%d-%d %02d:%02d:%02d\n", t->getYear(), t->getMonth(), t->getMonthDay(), t->getHour(), t->getMinute(), t->getSecond());
-	delete t;
 
 	CtrlText* pCtrlText = new CtrlText();
 	AUTO_RELEASE_OBJECT(pCtrlText);
-	pCtrlText->setFontPath("Resource/font_2.ttf");
+	pCtrlText->setFontPath("Resource/font_3.ttf");
 	pCtrlText->setFontSize(58);
-	pCtrlText->setString("�й�");
+	pCtrlText->setString("中华人民共和国");
 	pCtrlText->setPosition(512, 384, 0);
 	pCtrlText->setRectVisible(true);
 	pCtrlText->setRectColor(sys::Color4B(255, 0, 0, 255));
@@ -242,20 +241,17 @@ void WndRender::testStencil()
 	AUTO_RELEASE_OBJECT(pStencil);
 	this->getCanvas()->getRoot()->addChild(pStencil);
 
-	Node* pNode = new Node();
-	AUTO_RELEASE_OBJECT(pNode);
-	pNode->setPosition(512, 384, 0);
+	CtrlImage* pNode = new CtrlImage();
+	AUTO_RELEASE_OBJECT(pNode); 
+	pNode->setImagePath("Resource/sqi.png");
+	pNode->setColor(sys::Color4B(255, 0, 0, 255));
 	pNode->setVolume(100, 100, 0);
-	pNode->setRectVisible(true);
-	pNode->setRectColor(sys::Color4B(0, 0, 0, 255));
 	pStencil->setStencilNode(pNode);
 	
 
 	CtrlImage* pImage = new CtrlImage();
 	AUTO_RELEASE_OBJECT(pImage);
 	pImage->setImagePath("Resource/sqi.png");
-	pImage->setRectVisible(true);
-	pImage->setRectColor(sys::Color4B(255, 0, 0, 255));
 	pImage->setVolume(200, 200, 0);
 	pImage->setScale(1.5, 1.0, 2);
 	pStencil->addChild(pImage);

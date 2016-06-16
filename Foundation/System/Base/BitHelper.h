@@ -25,7 +25,11 @@ namespace sys
 		// 获取utf8文字数量
 		static int getUTF8WordCount(const char* data);
 		// 获取utf8文字
-		static wchar_t* convertToWideChar(char* &src, const char *locale = "zh_CN.utf8");
+		static char* convertToUTF8(wchar_t* src);
+		// zh_CN.utf8 zh_CN.GB2312 
+		static wchar_t* convertToWideChar(const char* src);
+
+		static wchar_t* convertToWideCharWnd(const char *str);
 	protected:
 	private:
 	};

@@ -1,5 +1,13 @@
 #include "BitHelper.h"
 
+#if (defined WIN32) ||  (defined _WIN32)  
+#include<Windows.h>  
+#else  
+#include<unistd.h>   
+#include<sys/types.h>  
+#include<strings.h>  
+#endif  
+
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -74,33 +82,59 @@ int BitHelper::getUTF8WordCount(const char* data)
 	return count;
 }
 
-wchar_t* BitHelper::convertToWideChar(char* &src, const char *locale /*= "zh_CN.utf8"*/)
+char* BitHelper::convertToUTF8(wchar_t* src)
+{
+	int mbs_size;
+#if (defined WIN32) ||  (defined _WIN32)  
+	setlocale(LC_ALL, "chs");
+#else  
+	setlocale(LC_ALL, "zh_CN.gbk");
+#endif  
+	int wc_size = wcslen(src);
+	if (wc_size == 0)
+		wc_size = UINT_MAX;
+
+	mbs_size = wcstombs(0, src, wc_size);
+
+	char* mbs = (char*)malloc(sizeof(wchar_t)*(mbs_size + 1));
+	if (mbs != 0)
+		mbs_size = wcstombs(mbs, src, wc_size);
+
+	return mbs;
+}
+
+wchar_t* BitHelper::convertToWideChar(const char* src)
 {
 	if (src == NULL) {
 		return nullptr;
 	}
 
 	// 根据环境变量设置locale
-	setlocale(LC_CTYPE, locale);
+#if (defined WIN32) ||  (defined _WIN32)  
+	setlocale(LC_ALL, "chs");
+#else  
+	setlocale(LC_ALL, "zh_CN.gbk");
+#endif  
+	int wc_size;
+	int mbs_size = strlen(src);
 
-	// 得到转化为需要的宽字符大小
-	int w_size = mbstowcs(NULL, src, 0) + 1;
+	if (mbs_size == 0)
+		mbs_size = UINT_MAX;
 
-	// w_size = 0 说明mbstowcs返回值为-1。即在运行过程中遇到了非法字符(很有可能使locale
-	// 没有设置正确)
-	if (w_size == 0) {
-		return nullptr;
-	}
+	wc_size = mbstowcs(0, src, mbs_size);
 
-	wchar_t* dest = new wchar_t[w_size];
-	if (!dest) {
-		return nullptr;
-	}
+	wchar_t* wc = (wchar_t*)malloc(sizeof(wchar_t)*(mbs_size + 1));
+	if (wc != 0)
+		wc_size = mbstowcs(wc, src, mbs_size);
 
-	int ret = mbstowcs(dest, src, strlen(src) + 1);
-	if (ret <= 0) {
-		delete dest;
-		return nullptr;
-	}
-	return dest;
+	return wc;
+}
+
+wchar_t* BitHelper::convertToWideCharWnd(const char *str)
+{
+	int length = strlen(str) + 1;
+	wchar_t *t = (wchar_t*)malloc(sizeof(wchar_t)*length);
+	memset(t, 0, length*sizeof(wchar_t));
+	MultiByteToWideChar(CP_ACP, 0, str, strlen(str), t, length);
+	return t;
 }

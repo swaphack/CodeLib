@@ -54,8 +54,8 @@ Camera2D::~Camera2D()
 
 void Camera2D::updateCamera()
 {
-// 	glMatrixMode(GL_MODELVIEW);
-// 	glLoadIdentity();
+ 	glMatrixMode(GL_MODELVIEW);
+ 	glLoadIdentity();
 	glOrtho(0, 1, 0, 1, 0, 1);
 
 	glTranslatef(_obPosition.x, _obPosition.y, _obPosition.z);
@@ -78,8 +78,8 @@ Camera3D::~Camera3D()
 
 void Camera3D::updateCamera()
 {
-// 	glMatrixMode(GL_MODELVIEW);
-// 	glLoadIdentity();
+ 	glMatrixMode(GL_MODELVIEW);
+ 	glLoadIdentity();
 	glFrustum(0, 1, 0, 1, 0, 1);
 
 	glTranslatef(_obPosition.x, _obPosition.y, _obPosition.z);
