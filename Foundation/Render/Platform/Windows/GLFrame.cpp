@@ -270,5 +270,16 @@ void GLFrame::initDevice()
 	if (getKeyboard())
 	{
 		getKeyboard()->setKeyhandler(_deviceProxy, KEYBOARD_BUTTON_SELECTOR(DeviceProxy::onKeyBoardButtonHandler));
+
+		// ´óÐ¡Ð´Ëø
+		if (GetKeyState(VK_CAPITAL) & 1)
+		{
+			getKeyboard()->onKeyEvent(sys::EBK_CAPITAL, sys::EBS_BUTTON_DOWN);
+		}
+		// Êý×ÖËø
+		if (GetKeyState(VK_NUMLOCK) & 1)
+		{
+			getKeyboard()->onKeyEvent(sys::EBK_NUMLOCK, sys::EBS_BUTTON_DOWN);
+		}
 	}
 }

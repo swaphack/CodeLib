@@ -18,7 +18,6 @@ namespace render
 		CtrlText* getCtrlText();
 		// 输出操作处理
 		virtual void onInputHand(sys::BoardKey key, sys::ButtonStatus type);
-	protected:
 	private:
 		CtrlText* _ctrlText;
 	};
