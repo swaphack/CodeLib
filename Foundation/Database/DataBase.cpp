@@ -149,7 +149,7 @@ void DataBase::saveData( const char* filepath )
 	std::map<std::string, DBTable>::const_iterator tableIter = tables.begin();
 
 	std::string fullpath;
-	Directory::getDir(filepath, fullpath);
+	Directory::getDirectory(filepath, fullpath);
 
 	while (tableIter != tables.end())
 	{
