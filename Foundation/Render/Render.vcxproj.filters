@@ -157,6 +157,9 @@
     <ClCompile Include="Common\Control\Static\CtrlEditLabel.cpp">
       <Filter>Common\Control\Static</Filter>
     </ClCompile>
+    <ClCompile Include="2d\UI\UINode.cpp">
+      <Filter>2d\UI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Common\GL\import.h">
@@ -242,9 +245,6 @@
     </ClInclude>
     <ClInclude Include="Common\DrawNode\TestDrawNode.h">
       <Filter>Common\DrawNode</Filter>
-    </ClInclude>
-    <ClInclude Include="2d\UI\UINode.h">
-      <Filter>2d\UI</Filter>
     </ClInclude>
     <ClInclude Include="2d\UI\macros.h">
       <Filter>2d\UI</Filter>
@@ -1065,6 +1065,12 @@
     </ClInclude>
     <ClInclude Include="Common\Control\Static\CtrlEditLabel.h">
       <Filter>Common\Control\Static</Filter>
+    </ClInclude>
+    <ClInclude Include="2d\UI\UINode.h">
+      <Filter>2d\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="2d\UI\import.h">
+      <Filter>2d\UI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

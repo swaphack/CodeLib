@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="UILoader">
+      <UniqueIdentifier>{a07e7395-6f01-44d2-b72f-27f1e218c6b4}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="UILoader\macros.h">
+      <Filter>UILoader</Filter>
+    </ClInclude>
+    <ClInclude Include="UILoader\UIElementLoader.h">
+      <Filter>UILoader</Filter>
+    </ClInclude>
+    <ClInclude Include="UILoader\UILoader.h">
+      <Filter>UILoader</Filter>
+    </ClInclude>
+    <ClInclude Include="UILoader\UINodeLoader.h">
+      <Filter>UILoader</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

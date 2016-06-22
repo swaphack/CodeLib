@@ -47,7 +47,6 @@ void CtrlStencil::visit()
 	if (_children.count() == 0)
 	{
 		this->draw();
-		this->drawRect();
 	}
 	else
 	{
@@ -59,7 +58,6 @@ void CtrlStencil::visit()
 			if (show == false && node->getZOrder() >= 0)
 			{
 				this->draw();
-				this->drawRect();
 				show = true;
 			}
 			node->visit();

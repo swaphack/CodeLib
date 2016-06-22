@@ -71,11 +71,6 @@ namespace render
 		// 设置是否和父节点关联
 		void setRelativeWithParent(bool status);
 
-		// 设置矩形框是否可见
-		void setRectVisible(bool status);
-		// 设置矩形框显示颜色
-		void setRectColor(const sys::Color4B& color);
-
 		// 点击是否命中
 		bool containTouchPoint(float x, float y);
 		// 获取触摸代理
@@ -91,8 +86,6 @@ namespace render
 		virtual void sortChildren();
 		// 空间物理坐标
 		virtual void calRealSpaceInfo();
-		// 显示绘制区域
-		void drawRect();
 		// 空间属性发生改变
 		virtual void onSpaceChange();
 		// 物体属性发生改变
@@ -122,10 +115,6 @@ namespace render
 		TouchProxy* _touchProxy;
 		// 矩形框
 		RectangeVertex _rectVertex;
-		// 矩形框颜色
-		sys::Color4B _rectColor;
-		// 是否显示矩形框
-		bool _bShowRect;
 		// 空间坐标
 		RectangeVertex _realSpaceVertex;
 	};

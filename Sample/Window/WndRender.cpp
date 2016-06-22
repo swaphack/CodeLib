@@ -33,8 +33,6 @@ void WndRender::testImage()
 	CtrlImage* pImage = new CtrlImage();
 	pImage->setImagePath("Resource/sqi.png");
 	pImage->setPosition(512, 384, 0);
-	pImage->setRectVisible(true);
-	pImage->setRectColor(sys::Color4B(255, 0, 0, 255));
 	AUTO_RELEASE_OBJECT(pImage);
 	this->getCanvas()->getRoot()->addChild(pImage);
 
@@ -170,8 +168,6 @@ void WndRender::testText()
 	pCtrlText->setFontSize(58);
 	pCtrlText->setString("中华人民共和国");
 	pCtrlText->setPosition(512, 384, 0);
-	pCtrlText->setRectVisible(true);
-	pCtrlText->setRectColor(sys::Color4B(255, 0, 0, 255));
 	pCtrlText->setColor(sys::Color4B(125, 80, 255, 255));
 	this->getCanvas()->getRoot()->addChild(pCtrlText);
 }
@@ -190,8 +186,6 @@ void WndRender::testMask()
 	pMask->setOpacity(opacity);
 	pMask->setPosition(512, 384, 0.0f);
 	pMask->setVolume(200, 300, 0);
-// 	pMask->setRectVisible(true);
-// 	pMask->setRectColor(sys::Color4B(255, 0, 0, 100));
 	this->getCanvas()->getRoot()->addChild(pMask);
 	
 }
@@ -305,8 +299,6 @@ void WndRender::testEditBox()
 	pEditLabel->setAnchorPoint(0.0f, 0.0f, 0.0f);
 	pEditLabel->setVolume(200, 100, 0);
 	pEditLabel->setKeyboardEnable(true);
-	pEditLabel->setRectVisible(true);
-	pEditLabel->setRectColor(sys::Color4B(255, 0, 0, 100));
 	pEditLabel->setInputListen([](sys::Object* object, EditInputStatus status){
 		CtrlEditLabel* pNode = dynamic_cast<CtrlEditLabel*>(object);
 		if (pNode == nullptr)

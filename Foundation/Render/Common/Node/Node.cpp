@@ -15,7 +15,6 @@ Node::Node()
 ,_actionProxy(nullptr)
 , _bRelative(true)
 , _zOrder(0.0f)
-, _bShowRect(false)
 , _touchProxy(nullptr)
 {
 	this->setVisible(true);
@@ -165,7 +164,6 @@ void Node::visit()
 	if (_children.count() == 0)
 	{
 		this->draw();
-		this->drawRect();
 	}
 	else
 	{
@@ -177,7 +175,6 @@ void Node::visit()
 			if (show == false && node->getZOrder() >= 0)
 			{
 				this->draw();
-				this->drawRect();
 				show = true;
 			}
 			node->visit();
@@ -205,16 +202,6 @@ bool Node::isRelativeWithParent()
 void Node::setRelativeWithParent(bool status)
 {
 	_bRelative = status;
-}
-
-void Node::setRectVisible(bool status)
-{
-	_bShowRect = status;
-}
-
-void Node::setRectColor(const sys::Color4B& color)
-{
-	_rectColor = color;
 }
 
 bool Node::containTouchPoint(float x, float y)
@@ -330,17 +317,6 @@ void Node::calRealSpaceInfo()
 	volume.mult(scale);
 
 	Tool::calRealRect(position, volume, _anchor, _realSpaceVertex);
-}
-
-void Node::drawRect()
-{
-	if (_bShowRect)
-	{
-		GLTool::beginBlend(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-		GLTool::setColor(_rectColor);
-		GLTool::drawRect(&_rectVertex, GL_LINE_LOOP);
-		GLTool::endBlend();
-	}
 }
 
 void Node::onSpaceChange()
