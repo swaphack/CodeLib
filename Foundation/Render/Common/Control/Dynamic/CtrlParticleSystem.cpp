@@ -46,6 +46,30 @@ void ParticleNode::setColorAcceleration(float red, float green, float blue, floa
 	_colorAcceleration.alpha = alpha;
 }
 
+void ParticleNode::setAngleAcceleration(float x, float y, float z)
+{
+	_angleAcceleration.x = x;
+	_angleAcceleration.y = y;
+	_angleAcceleration.z = z;
+}
+
+sys::Vector ParticleNode::getAngleAcceleration()
+{
+	return _angleAcceleration;
+}
+
+void ParticleNode::setScaleAcceleration(float x, float y, float z)
+{
+	_scaleAcceleration.x = x;
+	_scaleAcceleration.y = y;
+	_scaleAcceleration.z = z;
+}
+
+sys::Vector ParticleNode::getScaleAcceleration()
+{
+	return _scaleAcceleration;
+}
+
 sys::Color4F ParticleNode::getColorAcceleration()
 {
 	return _colorAcceleration;
@@ -72,6 +96,8 @@ void ParticleNode::update(float interval)
 
 	_colorInit.add(_colorAcceleration);
 	_position.add(_speedAcceleration);
+	_scale.add(_scaleAcceleration);
+	_rotation.add(_angleAcceleration);
 
 	convertColor4FTo4B(_colorInit, _color);
 	TextureTool::setTexture2DVertexts(&_texRect, sys::Vector::Zero, _volume, _anchor);
@@ -179,6 +205,10 @@ ParticleNode* CtrlParticleSystem::createParticle()
 	float b = 0;
 	float a = 0;
 
+	float rx = 0;
+	float ry = 0;
+	float rz = 0;
+
 	sys::Random* rand = sys::Random::getInstance();
 
 	rand->setRange(0, 2);
@@ -195,6 +225,11 @@ ParticleNode* CtrlParticleSystem::createParticle()
 	b = rand->getNextNumber();
 	a = rand->getNextNumber();
 
+	rand->setRange(20.0f / 360, 120.0f / 360);
+	rx = rand->getNextNumber();
+	ry = rand->getNextNumber();
+	rz = rand->getNextNumber();
+
 	ParticleNode* node = new ParticleNode();
 	AUTO_RELEASE_OBJECT(node);
 	node->setColor(0, 0, 0, 0);
@@ -202,6 +237,7 @@ ParticleNode* CtrlParticleSystem::createParticle()
 	node->setColorAcceleration(r, g, b, a);
 	node->setLifeTime(life);
 	node->setSpeedAcceleration(x, y, z);
+	node->setAngleAcceleration(rx, ry, rz);
 
 	return node;
 }

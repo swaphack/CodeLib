@@ -15,6 +15,11 @@ Media::~Media()
 {
 }
 
+void Media::autoNextFrame()
+{
+
+}
+
 Image* Media::getNextVideo()
 {
 	return nullptr;

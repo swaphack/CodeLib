@@ -22,7 +22,7 @@ namespace render
 		virtual void load(const TextDefine& textDefine) = 0;
 	};
 
-	// 加载多媒体
+	// 加载多媒体接口
 	class IMediaLoader
 	{
 	public:

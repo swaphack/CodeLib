@@ -25,16 +25,26 @@ void WndRender::show()
 
 	//this->testStencil();
 
-	this->testEditBox();
+	this->testImage();
 }
 
 void WndRender::testImage()
 {
 	CtrlImage* pImage = new CtrlImage();
-	pImage->setImagePath("Resource/sqi.png");
+	pImage->setImagePath("Resource/NeHe.png");
 	pImage->setPosition(512, 384, 0);
 	AUTO_RELEASE_OBJECT(pImage);
 	this->getCanvas()->getRoot()->addChild(pImage);
+
+	pImage->getTouchProxy()->addTouchDelegate(ETT_DOWN, [](sys::Object* object, float x, float y){
+		CtrlImage* pNode = dynamic_cast<CtrlImage*>(object);
+		if (pNode == nullptr)
+		{
+			return;
+		}
+
+		pNode->setPosition(x, y, 0);
+	});
 
 	pImage->getTouchProxy()->addTouchDelegate(ETT_ON, [](sys::Object* object, float x, float y){
 		CtrlImage* pNode = dynamic_cast<CtrlImage*>(object);

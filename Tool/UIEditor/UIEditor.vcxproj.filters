@@ -19,4 +19,9 @@
       <Filter>UILoader</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="UILoader\UILoader.cpp">
+      <Filter>UILoader</Filter>
+    </ClCompile>
+  </ItemGroup>
 </Project>

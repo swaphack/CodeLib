@@ -121,10 +121,12 @@
     <ClCompile Include="Resource\Componet\Media.cpp" />
     <ClCompile Include="Resource\FilePath.cpp" />
     <ClCompile Include="Resource\Paser\FFmpeg.cpp" />
+    <ClCompile Include="Resource\Paser\JPEGImage.cpp" />
     <ClCompile Include="Resource\Paser\LabelImage.cpp" />
     <ClCompile Include="Resource\Paser\PNGImage.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="2d\import.h" />
     <ClInclude Include="2d\UI\import.h" />
     <ClInclude Include="2d\UI\macros.h" />
     <ClInclude Include="2d\UI\UINode.h" />
@@ -218,6 +220,7 @@
     <ClInclude Include="Resource\macros.h" />
     <ClInclude Include="Resource\Paser\FFmpeg.h" />
     <ClInclude Include="Resource\Paser\import.h" />
+    <ClInclude Include="Resource\Paser\JPEGImage.h" />
     <ClInclude Include="Resource\Paser\LabelImage.h" />
     <ClInclude Include="Resource\Paser\macros.h" />
     <ClInclude Include="Resource\Paser\PNGImage.h" />
@@ -415,6 +418,15 @@
     <ClInclude Include="third_party\freetype\freetype\tttags.h" />
     <ClInclude Include="third_party\freetype\freetype\ttunpat.h" />
     <ClInclude Include="third_party\freetype\ft2build.h" />
+    <ClInclude Include="third_party\jpeg\jconfig.h" />
+    <ClInclude Include="third_party\jpeg\jdct.h" />
+    <ClInclude Include="third_party\jpeg\jerror.h" />
+    <ClInclude Include="third_party\jpeg\jinclude.h" />
+    <ClInclude Include="third_party\jpeg\jmemsys.h" />
+    <ClInclude Include="third_party\jpeg\jmorecfg.h" />
+    <ClInclude Include="third_party\jpeg\jpegint.h" />
+    <ClInclude Include="third_party\jpeg\jpeglib.h" />
+    <ClInclude Include="third_party\jpeg\jversion.h" />
     <ClInclude Include="third_party\opengl\GL.H" />
     <ClInclude Include="third_party\opengl\GLAUX.H" />
     <ClInclude Include="third_party\opengl\GLEXT.H" />

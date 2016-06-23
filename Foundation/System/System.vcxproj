@@ -77,7 +77,6 @@
     <ClInclude Include="Base\macros.h" />
     <ClInclude Include="Base\Platform.h" />
     <ClInclude Include="Base\Random.h" />
-    <ClInclude Include="Base\Thread.h" />
     <ClInclude Include="Base\Time.h" />
     <ClInclude Include="Base\Tuple.h" />
     <ClInclude Include="Base\Types.h" />
@@ -135,6 +134,7 @@
     <ClInclude Include="Stream\StreamReader.h" />
     <ClInclude Include="Stream\StreamWriter.h" />
     <ClInclude Include="system.h" />
+    <ClInclude Include="Type\import.h" />
     <ClInclude Include="Type\Number.h" />
     <ClInclude Include="Type\String.h" />
   </ItemGroup>
@@ -168,6 +168,7 @@
     <ClCompile Include="Stream\Stream.cpp" />
     <ClCompile Include="Stream\StreamBase.cpp" />
     <ClCompile Include="Stream\StreamWriter.cpp" />
+    <ClCompile Include="Type\String.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -160,6 +160,7 @@ namespace sys
 			green += color.green;
 			blue += color.blue;
 			alpha += color.alpha;
+			adjust();
 		}
 
 		void sub(const Color4B& color)
@@ -168,6 +169,7 @@ namespace sys
 			green -= color.green;
 			blue -= color.blue;
 			alpha -= color.alpha;
+			adjust();
 		}
 
 		void mult(const Color4B& color)
@@ -176,6 +178,7 @@ namespace sys
 			green *= color.green;
 			blue *= color.blue;
 			alpha *= color.alpha;
+			adjust();
 		}
 
 		void div(const Color4B& color)
@@ -184,6 +187,7 @@ namespace sys
 			green /= color.green;
 			blue /= color.blue;
 			alpha /= color.alpha;
+			adjust();
 		}
 
 		void mult(const float ratio)
@@ -192,6 +196,15 @@ namespace sys
 			green = (uchar)(red * ratio);
 			blue = (uchar)(red * ratio);
 			alpha = (uchar)(red * ratio);
+			adjust();
+		}
+	protected:
+		void adjust()
+		{
+			ADJUST_DURATION_VALUE_RANGE(red, 0, 255, 255);
+			ADJUST_DURATION_VALUE_RANGE(green, 0, 255, 255);
+			ADJUST_DURATION_VALUE_RANGE(blue, 0, 255, 255);
+			ADJUST_DURATION_VALUE_RANGE(alpha, 0, 255, 255);
 		}
 	};
 

@@ -160,6 +160,9 @@
     <ClCompile Include="2d\UI\UINode.cpp">
       <Filter>2d\UI</Filter>
     </ClCompile>
+    <ClCompile Include="Resource\Paser\JPEGImage.cpp">
+      <Filter>Resource\Parser</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Common\GL\import.h">
@@ -1072,6 +1075,39 @@
     <ClInclude Include="2d\UI\import.h">
       <Filter>2d\UI</Filter>
     </ClInclude>
+    <ClInclude Include="2d\import.h">
+      <Filter>2d</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\jpeg\jconfig.h">
+      <Filter>third_party\jpeg</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\jpeg\jdct.h">
+      <Filter>third_party\jpeg</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\jpeg\jerror.h">
+      <Filter>third_party\jpeg</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\jpeg\jinclude.h">
+      <Filter>third_party\jpeg</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\jpeg\jmemsys.h">
+      <Filter>third_party\jpeg</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\jpeg\jmorecfg.h">
+      <Filter>third_party\jpeg</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\jpeg\jpegint.h">
+      <Filter>third_party\jpeg</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\jpeg\jpeglib.h">
+      <Filter>third_party\jpeg</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\jpeg\jversion.h">
+      <Filter>third_party\jpeg</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\Paser\JPEGImage.h">
+      <Filter>Resource\Parser</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Common">
@@ -1196,6 +1232,9 @@
     </Filter>
     <Filter Include="Common\Keyboard">
       <UniqueIdentifier>{a6dde4f6-3baa-4bd1-ac2d-6e093a8890f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="third_party\jpeg">
+      <UniqueIdentifier>{af1b1b2c-8e49-4ac3-95ce-ccf29bfc02df}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

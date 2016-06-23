@@ -235,9 +235,6 @@
     <ClInclude Include="Base\Time.h">
       <Filter>Base</Filter>
     </ClInclude>
-    <ClInclude Include="Base\Thread.h">
-      <Filter>Base</Filter>
-    </ClInclude>
     <ClInclude Include="Type\String.h">
       <Filter>Type</Filter>
     </ClInclude>
@@ -252,6 +249,9 @@
     </ClInclude>
     <ClInclude Include="Device\KeyBoard.h">
       <Filter>Device</Filter>
+    </ClInclude>
+    <ClInclude Include="Type\import.h">
+      <Filter>Type</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -341,6 +341,9 @@
     </ClCompile>
     <ClCompile Include="Device\Keyboard.cpp">
       <Filter>Device</Filter>
+    </ClCompile>
+    <ClCompile Include="Type\String.cpp">
+      <Filter>Type</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -1,7 +1,5 @@
 #include "FFmpeg.h"
 
-using namespace render;
-
 #ifndef INT64_C
 #define INT64_C(c) (c ## LL)
 #define UINT64_C(c) (c ## ULL)
@@ -20,41 +18,10 @@ extern "C" {
 }
 #endif
 
+using namespace render;
+
 //////////////////////////////////////////////////////////////////////////
-bool _bInitFFmpeg = false;
-AVFormatContext* _formatContext = nullptr;
-AVCodecContext* _codecContext = nullptr;
-
-void disposeFFM()
-{
-	if (_codecContext)
-	{
-		avcodec_close(_codecContext);
-	}
-
-	if (_formatContext)
-	{
-		avformat_close_input(&_formatContext);
-	}
-}
-
-void initFFmpeg(const char* path)
-{
-	if (!_bInitFFmpeg)
-	{
-		av_register_all();
-		_bInitFFmpeg = true;
-	}
-
-	disposeFFM();
-
-	avformat_open_input(&_formatContext, path, 0, nullptr);
-
-	if (avformat_find_stream_info(_formatContext, nullptr) < 0)
-	{
-		return;
-	}
-}
+bool FFmpeg::s_bInitFFmpeg = false;
 
 void createNewVideoFrame(const AVFrame* frame, AVPixelFormat format, VideoFrameImage* image)
 {
@@ -92,36 +59,6 @@ void createNewVideoFrame(const AVFrame* frame, AVPixelFormat format, VideoFrameI
 	image->init(glFormat, glInternalFormat, destPixels, width, height);
 }
 
-void setStreamType(int type, int& streamIndex)
-{
-	if (_formatContext == nullptr)
-	{
-		return;
-	}
-	for (uint i = 0; i < _formatContext->nb_streams; i++)
-	{
-		if ((_formatContext->streams[i])->codec->codec_type == type)
-		{
-			streamIndex = i;
-			break;
-		}
-	}
-
-	if (streamIndex == -1)
-	{
-		return;
-	}
-
-	_codecContext = _formatContext->streams[streamIndex]->codec;
-	AVCodec* codec = avcodec_find_decoder(_codecContext->codec_id);
-	if (codec == nullptr)
-	{
-		return;
-	}
-
-	avcodec_open2(_codecContext, codec, nullptr);
-}
-
 //////////////////////////////////////////////////////////////////////////
 VideoFrameImage::VideoFrameImage()
 {
@@ -147,8 +84,11 @@ void VideoFrameImage::init(int format, int internalFormat, uchar* pixels, uint w
 //////////////////////////////////////////////////////////////////////////
 FFmpeg::FFmpeg()
 :_videoStream(-1)
+, _audioStream(-1)
+, _subTitleStream(-1)
+, _formatContext(nullptr)
 {
-	
+	_text = "";
 }
 
 FFmpeg::~FFmpeg()
@@ -159,11 +99,12 @@ FFmpeg::~FFmpeg()
 void FFmpeg::load(const MediaDefine& mediaDefine)
 {
 	this->loadFFM(mediaDefine);
-
-	this->setWidth(_codecContext->width);
-	this->setHeight(_codecContext->height);
 	
 	AVStream* stream = _formatContext->streams[_videoStream];
+	AVCodecContext* pCodecContext = stream->codec;
+
+	this->setWidth(pCodecContext->width);
+	this->setHeight(pCodecContext->height);
 
 	float time = 1.0f * stream->duration * av_q2d(stream->time_base);
 	this->setTime(time);
@@ -180,33 +121,60 @@ void FFmpeg::load(const MediaDefine& mediaDefine)
 
 Image* FFmpeg::getNextVideo()
 {
+	return &_image;
+}
+
+void FFmpeg::autoNextFrame()
+{
 	// 解析每一帧数据
 	int got_picture = 0;
 	int error = 0;
 
 	AVPacket* packet = av_packet_alloc();
-	AVFrame* frame = av_frame_alloc();
+	AVFrame* videoFrame = av_frame_alloc();
+	AVFrame* audioFrame = av_frame_alloc();
+
+	AVSubtitle subTitle;
+	AVCodecContext* pCodecContext = nullptr;
 
 	if (av_read_frame(_formatContext, packet) >= 0)
 	{
 		if (packet->stream_index == _videoStream)
 		{
-			error = avcodec_decode_video2(_codecContext, frame, &got_picture, packet);
-			if (error >= 0)
+			pCodecContext = _formatContext->streams[packet->stream_index]->codec;
+
+			error = avcodec_decode_video2(pCodecContext, videoFrame, &got_picture, packet);
+			if (error >= 0 && got_picture)
 			{
-				if (got_picture)
-				{
-					// 内存泄漏
-					createNewVideoFrame(frame, _codecContext->pix_fmt, &_image);
-				}
+				createNewVideoFrame(videoFrame, pCodecContext->pix_fmt, &_image);
+			}
+		}
+		got_picture = 0;
+		if (packet->stream_index == _audioStream)
+		{
+			pCodecContext = _formatContext->streams[packet->stream_index]->codec;
+			error = avcodec_decode_audio4(pCodecContext, audioFrame, &got_picture, packet);
+			if (error >= 0 && got_picture)
+			{
+
+			}
+		}
+		got_picture = 0;
+		if (packet->stream_index == _subTitleStream)
+		{
+			pCodecContext = _formatContext->streams[packet->stream_index]->codec;
+			error = avcodec_decode_subtitle2(pCodecContext, &subTitle, &got_picture, packet);
+			if (error >= 0 && got_picture)
+			{
+
 			}
 		}
 	}
 
-	av_frame_free(&frame);
-	av_packet_free(&packet);
+	av_frame_free(&videoFrame);
+	av_frame_free(&audioFrame);
 
-	return &_image;
+	av_packet_free(&packet);
 }
 
 void FFmpeg::setVideoFrame(mf_s frame)
@@ -227,5 +195,66 @@ void FFmpeg::loadFFM(const MediaDefine& mediaDefine)
 {
 	initFFmpeg(mediaDefine.filepath.c_str());
 
-	setStreamType(AVMEDIA_TYPE_VIDEO, _videoStream);
+	getStreamIndex(AVMEDIA_TYPE_VIDEO, _videoStream);
+
+	getStreamIndex(AVMEDIA_TYPE_AUDIO, _audioStream);
+
+	getStreamIndex(AVMEDIA_TYPE_SUBTITLE, _subTitleStream);
+}
+
+void FFmpeg::disposeFFM()
+{
+	if (_formatContext)
+	{
+		avformat_close_input(&_formatContext);
+	}
+}
+
+void FFmpeg::initFFmpeg(const char* path)
+{
+	if (!s_bInitFFmpeg)
+	{
+		av_register_all();
+		s_bInitFFmpeg = true;
+	}
+
+	disposeFFM();
+
+	avformat_open_input(&_formatContext, path, 0, nullptr);
+
+	if (avformat_find_stream_info(_formatContext, nullptr) < 0)
+	{
+		return;
+	}
+}
+
+
+void FFmpeg::getStreamIndex(int type, int& streamIndex)
+{
+	if (_formatContext == nullptr)
+	{
+		return;
+	}
+	for (uint i = 0; i < _formatContext->nb_streams; i++)
+	{
+		if ((_formatContext->streams[i])->codec->codec_type == type)
+		{
+			streamIndex = i;
+			break;
+		}
+	}
+
+	if (streamIndex == -1)
+	{
+		return;
+	}
+
+	AVCodecContext* codecContext = _formatContext->streams[streamIndex]->codec;
+	AVCodec* codec = avcodec_find_decoder(codecContext->codec_id);
+	if (codec == nullptr)
+	{
+		return;
+	}
+
+	avcodec_open2(codecContext, codec, nullptr);
 }

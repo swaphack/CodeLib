@@ -15,7 +15,7 @@ PNGImage::~PNGImage()
 {
 
 }
-void PNGImage::getTextureInfo(int color_type)
+void PNGImage::setTextureInfo(int color_type)
 {
 	switch (color_type)
 	{
@@ -122,7 +122,7 @@ void PNGImage::load(const char* filename)
 	this->setWidth(w);
 	this->setHeight(h);
 	/* Get image format and components per pixel */
-	getTextureInfo(color_type);
+	setTextureInfo(color_type);
 
 	rowbytes = png_get_rowbytes(png_ptr, info_ptr);
 

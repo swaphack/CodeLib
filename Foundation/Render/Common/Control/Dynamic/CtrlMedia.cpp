@@ -76,6 +76,11 @@ void CtrlMedia::initSelf()
 		_texFrame = new TexFrame();
 	}
 
+	if (_media)
+	{
+		_media->autoNextFrame();
+	}
+
 	Texture2D* texture = getNextTexture();
 	AUTO_RELEASE_OBJECT(texture);
 	if (texture == nullptr)

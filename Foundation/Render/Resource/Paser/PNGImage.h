@@ -14,6 +14,6 @@ namespace render
 		virtual void load(const char* filename);
 	private:
 		// 获取纹理信息
-		void getTextureInfo(int color_type);
+		void setTextureInfo(int color_type);
 	};
 }
