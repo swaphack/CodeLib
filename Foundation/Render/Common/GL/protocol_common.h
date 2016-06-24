@@ -79,6 +79,8 @@ namespace render
 		void setPositionZ(float z);
 		
 		void setPosition(float x, float y, float z);
+
+		void setPosition(sys::Vector& position);
 		// 获取坐标
 		float getPositionX();
 
@@ -95,6 +97,8 @@ namespace render
 		void setScaleZ(float z);
 
 		void setScale(float x, float y, float z);
+
+		void setScale(sys::Vector& scale);
 		// 获取缩放比
 		float getScaleX();
 
@@ -111,6 +115,8 @@ namespace render
 		void setRotationZ(float z);
 
 		void setRotation(float x, float y, float z);
+
+		void setRotation(sys::Vector& rotation);
 		// 获取旋转系数
 		float getRotationX();
 

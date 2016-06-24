@@ -8,6 +8,7 @@ float getArea(const sys::Vector& p1, const sys::Vector& p2, const sys::Vector& p
 	return abs(s);
 }
 
+//////////////////////////////////////////////////////////////////////////
 RectangeVertex::RectangeVertex()
 {
 
@@ -40,7 +41,12 @@ bool RectangeVertex::containPoint(float x, float y)
 	return bRet;
 }
 
-bool RectangeVertex::containPoint(float x, float y, float z)
+sys::Vector RectangeVertex::getAnchorByPoint(float x, float y)
 {
-	return false;
+	sys::Vector p;
+
+	p.x = (x - leftUp.x) / (rightUp.x - leftUp.x);
+	p.y = (y - leftUp.y) / (leftUp.y - leftDown.y);
+
+	return p;
 }

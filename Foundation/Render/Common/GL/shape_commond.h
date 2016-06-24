@@ -19,8 +19,9 @@ namespace render
 
 		RectangeVertex();
 
+		// 判断
 		bool containPoint(float x, float y);
-
-		bool containPoint(float x, float y, float z);
+		//  获取点坐在的锚点位置
+		sys::Vector getAnchorByPoint(float x, float y);
 	};
 }

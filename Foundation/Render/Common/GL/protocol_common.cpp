@@ -124,6 +124,12 @@ void SpaceProtocol::setPosition(float x, float y, float z)
 	onSpaceChange();
 }
 
+void SpaceProtocol::setPosition(sys::Vector& position)
+{
+	_position = position;
+	onSpaceChange();
+}
+
 const sys::Vector& SpaceProtocol::getPosition()
 {
 	return _position;
@@ -137,6 +143,12 @@ void SpaceProtocol::setScale(float x, float y, float z)
 	onSpaceChange();
 }
 
+void SpaceProtocol::setScale(sys::Vector& scale)
+{
+	_scale = scale;
+	onSpaceChange();
+}
+
 const sys::Vector& SpaceProtocol::getScale()
 {
 	return _scale;
@@ -147,6 +159,12 @@ void SpaceProtocol::setRotation(float x, float y, float z)
 	_rotation.x = x;
 	_rotation.y = y;
 	_rotation.z = z;
+	onSpaceChange();
+}
+
+void SpaceProtocol::setRotation(sys::Vector& rotation)
+{
+	_rotation = rotation;
 	onSpaceChange();
 }
 

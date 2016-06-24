@@ -51,9 +51,7 @@ void JPEGImage::load(const char* filename)
 	while (jds.output_scanline < jds.output_height)
 	{
 		jpeg_read_scanlines(&jds, tmp, 1);
-		LOG("line number %d\n", jds.output_scanline);
 		start = lineSize * (jds.output_height - jds.output_scanline);
-
 		memcpy(buffer + start, tmp[0], lineSize);
 	}
 

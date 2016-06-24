@@ -126,6 +126,9 @@
     <ClCompile Include="Resource\Paser\PNGImage.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="2d\Control\import.h" />
+    <ClInclude Include="2d\Control\macros.h" />
+    <ClInclude Include="2d\Control\UITime.h" />
     <ClInclude Include="2d\import.h" />
     <ClInclude Include="2d\UI\import.h" />
     <ClInclude Include="2d\UI\macros.h" />

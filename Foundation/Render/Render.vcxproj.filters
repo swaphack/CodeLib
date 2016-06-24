@@ -1108,6 +1108,15 @@
     <ClInclude Include="Resource\Paser\JPEGImage.h">
       <Filter>Resource\Parser</Filter>
     </ClInclude>
+    <ClInclude Include="2d\Control\UITime.h">
+      <Filter>2d\Control</Filter>
+    </ClInclude>
+    <ClInclude Include="2d\Control\macros.h">
+      <Filter>2d\Control</Filter>
+    </ClInclude>
+    <ClInclude Include="2d\Control\import.h">
+      <Filter>2d\Control</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Common">
@@ -1235,6 +1244,9 @@
     </Filter>
     <Filter Include="third_party\jpeg">
       <UniqueIdentifier>{af1b1b2c-8e49-4ac3-95ce-ccf29bfc02df}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2d\Control">
+      <UniqueIdentifier>{ac988b82-ac66-4c8a-95c2-2db52b26cc7d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

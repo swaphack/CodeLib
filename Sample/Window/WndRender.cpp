@@ -26,12 +26,14 @@ void WndRender::show()
 	//this->testStencil();
 
 	this->testImage();
+
+	this->testText();
 }
 
 void WndRender::testImage()
 {
 	CtrlImage* pImage = new CtrlImage();
-	pImage->setImagePath("Resource/1.jpg", EIF_JPEG);
+	pImage->setImagePath("Resource/world.jpg", EIF_JPEG);
 	pImage->setPosition(512, 384, 0);
 	AUTO_RELEASE_OBJECT(pImage);
 	this->getCanvas()->getRoot()->addChild(pImage);
@@ -43,7 +45,14 @@ void WndRender::testImage()
 			return;
 		}
 
-		pNode->setPosition(x, y, 0);
+		std::vector<sys::Vector>* pAry = new std::vector<sys::Vector>(2);
+		(*pAry)[0].x = pNode->getPositionX();
+		(*pAry)[0].y = pNode->getPositionY();
+
+		(*pAry)[1].x = x;
+		(*pAry)[1].y = y;
+
+		pNode->setUserData(pAry);
 	});
 
 	pImage->getTouchProxy()->addTouchDelegate(ETT_ON, [](sys::Object* object, float x, float y){
@@ -53,7 +62,19 @@ void WndRender::testImage()
 			return;
 		}
 
-		pNode->setPosition(x, y, 0);
+		std::vector<sys::Vector>* pAry = static_cast<std::vector<sys::Vector>*>(pNode->getUserData());
+		pNode->setPosition((*pAry)[0].x + x - (*pAry)[1].x, (*pAry)[0].y + y - (*pAry)[1].y, 0);
+	});
+
+	pImage->getTouchProxy()->addTouchDelegate(ETT_UP, [](sys::Object* object, float x, float y){
+		CtrlImage* pNode = dynamic_cast<CtrlImage*>(object);
+		if (pNode == nullptr)
+		{
+			return;
+		}
+
+		std::vector<sys::Vector>* pAry = static_cast<std::vector<sys::Vector>*>(pNode->getUserData());
+		SAFE_DELETE(pAry);
 	});
 
 	G_KEYBOARDMANAGER->addDispatcher(pImage, [](sys::Object* object, sys::BoardKey key, sys::ButtonStatus type){
@@ -66,21 +87,23 @@ void WndRender::testImage()
 		{
 			return;
 		}
+
+		float speed = 5;
 		if (key == EBK_W)
 		{
-			pNode->setPositionY(pNode->getPositionY() + 1);
-		}
-		else if (key == EBK_S)
-		{
-			pNode->setPositionY(pNode->getPositionY() - 1);
-		}
-		else if (key == EBK_A)
-		{
-			pNode->setPositionX(pNode->getPositionX() - 1);
+			pNode->setPositionY(pNode->getPositionY() + speed);
+		}												
+		else if (key == EBK_S)							
+		{												
+			pNode->setPositionY(pNode->getPositionY() - speed);
+		}												
+		else if (key == EBK_A)							
+		{												
+			pNode->setPositionX(pNode->getPositionX() - speed);
 		}
 		else if (key == EBK_D)
 		{
-			pNode->setPositionX(pNode->getPositionX() + 1);
+			pNode->setPositionX(pNode->getPositionX() + speed);
 		}
 	});
 }
@@ -176,7 +199,7 @@ void WndRender::testText()
 	AUTO_RELEASE_OBJECT(pCtrlText);
 	pCtrlText->setFontPath("Resource/font_3.ttf");
 	pCtrlText->setFontSize(58);
-	pCtrlText->setString("中华人民共和国");
+	pCtrlText->setString(strVal);
 	pCtrlText->setPosition(512, 384, 0);
 	pCtrlText->setColor(sys::Color4B(125, 80, 255, 255));
 	this->getCanvas()->getRoot()->addChild(pCtrlText);
