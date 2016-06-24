@@ -2,6 +2,7 @@
 
 #include <string>
 #include "system.h"
+#include "enum_common.h"
 
 namespace render
 {
@@ -10,6 +11,14 @@ namespace render
 	{
 		// 图片路径
 		std::string filepath;
+
+		// 图片格式
+		ImageFormat format;
+
+		ImageDefine(const char* filename = "", ImageFormat format = EIF_PNG)
+			:filepath(filename)
+			,format(format)
+		{}
 	};
 
 	// 文本数据描述结构

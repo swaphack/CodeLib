@@ -29,7 +29,7 @@ namespace db
 		// 保存路径参数
 		void save(const char* configFilepath);
 	};
-
+	// 数据库
 	class DataBase
 	{
 	public:

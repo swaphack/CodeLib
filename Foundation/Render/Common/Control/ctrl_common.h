@@ -71,11 +71,7 @@ namespace render
 	// 控件图片数据描述结构
 	struct Ctrl_ImageDefine : public ImageDefine
 	{
-		// 图片格式
-		ImageFormat format;
-
-		Ctrl_ImageDefine() 
-			:format(EIF_PNG)
+		Ctrl_ImageDefine()
 		{}
 	};
 

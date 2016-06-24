@@ -80,23 +80,27 @@ Texture2D* TextureCache::getTexture2D(const ImageDefine& imageDefine)
 		return dynamic_cast<Texture2D*>(texture);
 	}
 
+	Image* image = nullptr;
 	// png
-// 	if (imageDefine.format == EIF_PNG)
-// 	{
-		PNGImage* image = Resource::load<PNGImage>(imageDefine.filepath.c_str());
-		if (image == nullptr)
-		{
-			return nullptr;
-		}
+	if (imageDefine.format == EIF_PNG)
+	{
+		image = Resource::load<PNGImage>(imageDefine.filepath.c_str());
+	}
+	else if (imageDefine.format == EIF_JPEG)
+	{
+		image = Resource::load<JPEGImage>(imageDefine.filepath.c_str());
+	}
 
-		Texture2D* texture2D = new Texture2D();
-		texture2D->load(image);
-		addTexture(imageDefine.filepath.c_str(), texture2D);
+	if (image == nullptr)
+	{
+		return nullptr;
+	}
 
-		return texture2D;
-//	}
+	Texture2D* texture2D = new Texture2D();
+	texture2D->load(image);
+	addTexture(imageDefine.filepath.c_str(), texture2D);
 
-	return nullptr;
+	return texture2D;
 }
 
 Texture2D* TextureCache::getTexture2D(const TextDefine& textDefine)

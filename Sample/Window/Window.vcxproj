@@ -106,7 +106,7 @@
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>../../Lib/lib;$(OutDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>opengl.lib;glu.lib;glut.lib;System.lib;Web.lib;Render.lib;zlib.lib;libpng16.lib;freetype263.lib;avutil.lib;avcodec.lib;avformat.lib;swscale.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opengl.lib;glu.lib;glut.lib;System.lib;Web.lib;Render.lib;zlib.lib;libpng16.lib;freetype263.lib;avutil.lib;avcodec.lib;avformat.lib;swscale.lib;jpeg.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <Bscmake>
       <PreserveSbr>true</PreserveSbr>

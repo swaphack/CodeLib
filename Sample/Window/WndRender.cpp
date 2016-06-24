@@ -31,7 +31,7 @@ void WndRender::show()
 void WndRender::testImage()
 {
 	CtrlImage* pImage = new CtrlImage();
-	pImage->setImagePath("Resource/NeHe.png");
+	pImage->setImagePath("Resource/1.jpg", EIF_JPEG);
 	pImage->setPosition(512, 384, 0);
 	AUTO_RELEASE_OBJECT(pImage);
 	this->getCanvas()->getRoot()->addChild(pImage);
@@ -123,7 +123,7 @@ void WndRender::testClock()
 
 void WndRender::testModel()
 {
-	ImageDefine imageDefine = { "Resource/NeHe.png"};
+	ImageDefine imageDefine = { "Resource/NeHe.png", EIF_PNG};
 	Texture2D* texture2D = G_TEXTURE_CACHE->getTexture2D(imageDefine);
 
 	TexFrame* frame = new TexFrame();
@@ -327,4 +327,26 @@ void WndRender::testEditBox()
 	});
 
 	this->getCanvas()->getRoot()->addChild(pEditLabel);
+}
+
+void WndRender::testImages()
+{
+	CtrlImage* pImage = new CtrlImage();
+	pImage->setImagePath("Resource/NeHe.png");
+	pImage->setPosition(0, 0, 0);
+	AUTO_RELEASE_OBJECT(pImage);
+	this->getCanvas()->getRoot()->addChild(pImage);
+
+	int count = 100;
+	CtrlImage* pChild = nullptr;
+	while (count-- > 0)
+	{
+		pChild = new CtrlImage();
+		pChild->setImagePath("Resource/NeHe.png");
+		pChild->setPosition(4, 4, 0);
+		AUTO_RELEASE_OBJECT(pChild);
+		pImage->addChild(pChild);
+		pImage = pChild;
+		pChild = nullptr;
+	}
 }

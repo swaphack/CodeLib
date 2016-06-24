@@ -21,4 +21,5 @@ public:
 	void testStencil();
 	void testCamera();
 	void testEditBox();
+	void testImages();
 };

@@ -20,3 +20,5 @@
 
 
 #include "png/png.h"
+
+#include "jpeg/jpeglib.h"

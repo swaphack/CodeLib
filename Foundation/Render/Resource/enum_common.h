@@ -8,5 +8,6 @@ namespace render
 	{
 		EIF_NONE = 0,
 		EIF_PNG,	// png
+		EIF_JPEG,	// jpeg;
 	};
 }
