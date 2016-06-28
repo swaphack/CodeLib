@@ -22,12 +22,6 @@ FileStream::~FileStream()
 	SAFE_DELETE(_baseStream);
 }
 
-void FileStream::setData(const char* data, ss_t size)
-{
-	Stream::setData(data, size);
-}
-
-
 void FileStream::load(const char* filepath)
 {
 	if (filepath == nullptr)

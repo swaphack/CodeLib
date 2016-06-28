@@ -20,6 +20,9 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "User", "Foundation\User\User.vcxproj", "{717BAACF-885C-46E7-9DA7-C2BBCD6DF1B0}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Web", "Foundation\Web\Web.vcxproj", "{99422F86-35B7-4026-A9A8-EE181F151B7E}"
+	ProjectSection(ProjectDependencies) = postProject
+		{BEAC5C99-0F40-47AE-8093-1B5F8C5FF6BA} = {BEAC5C99-0F40-47AE-8093-1B5F8C5FF6BA}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Client", "Linker\Client\Client.vcxproj", "{1F2075FB-4AF8-4E54-9F17-C358EAF22670}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -27,6 +30,10 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Client", "Linker\Client\Cli
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GateWay", "Linker\GateWay\GateWay.vcxproj", "{34926FA0-C813-4D9F-910C-E5DF52D3ABCC}"
+	ProjectSection(ProjectDependencies) = postProject
+		{99422F86-35B7-4026-A9A8-EE181F151B7E} = {99422F86-35B7-4026-A9A8-EE181F151B7E}
+		{BEAC5C99-0F40-47AE-8093-1B5F8C5FF6BA} = {BEAC5C99-0F40-47AE-8093-1B5F8C5FF6BA}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Text", "Foundation\Text\Text.vcxproj", "{055E992E-F80D-453D-A9C8-EB12CEC1267D}"
 EndProject
@@ -44,6 +51,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "UIEditor", "Tool\UIEditor\U
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Window", "Sample\Window\Window.vcxproj", "{77D97D71-2814-4AA5-BE4A-2F63C216529F}"
 	ProjectSection(ProjectDependencies) = postProject
+		{99422F86-35B7-4026-A9A8-EE181F151B7E} = {99422F86-35B7-4026-A9A8-EE181F151B7E}
 		{BEAC5C99-0F40-47AE-8093-1B5F8C5FF6BA} = {BEAC5C99-0F40-47AE-8093-1B5F8C5FF6BA}
 		{340633A3-0EC6-4B8A-A2CE-6F701A18666C} = {340633A3-0EC6-4B8A-A2CE-6F701A18666C}
 	EndProjectSection

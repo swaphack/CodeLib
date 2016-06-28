@@ -16,6 +16,8 @@ protected:
 	{
 		std::string data = request->getMessage();
 
+		LOG("Receive:\n%s\n", data.c_str());
+
 		HttpResponse response;
 		response.setMessage(data.c_str(), data.size());
 		this->doBroadCast(&response);

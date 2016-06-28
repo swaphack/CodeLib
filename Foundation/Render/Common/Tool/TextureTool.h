@@ -52,5 +52,13 @@ namespace render
 		* @param anchor 锚点
 		*/
 		static void setTexture3DVertexts(TextureCube* texcube, const sys::Vector& position, const sys::Volume& volume, const sys::Vector& anchor);
+		/**
+		*
+		* 设置2d纹理顶点翻转
+		* @param texcube 纹理数据 out
+		* @param bFlipX 是否水平翻转
+		* @param bFlipY 是否垂直翻转
+		*/
+		static void setTexture2DFlip(TextureRect* texRect, bool bFlipX, bool bFlipY);
 	};
 }

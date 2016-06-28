@@ -172,4 +172,29 @@ void TextureTool::setTexture3DVertexts(TextureCube* texcube, const sys::Vector& 
 	texcube->top.leftUp.point = point;
 }
 
+void TextureTool::setTexture2DFlip(TextureRect* texRect, bool bFlipX, bool bFlipY)
+{
+	sys::Vector temp;
 
+	if (bFlipX)
+	{
+		temp = texRect->leftDown.point;
+		texRect->leftDown.point = texRect->rightDown.point;
+		texRect->rightDown.point = temp;
+
+		temp = texRect->leftUp.point;
+		texRect->leftUp.point = texRect->rightUp.point;
+		texRect->rightUp.point = temp;
+	}
+
+	if (bFlipY)
+	{
+		temp = texRect->leftDown.point;
+		texRect->leftDown.point = texRect->leftUp.point;
+		texRect->leftUp.point = temp;
+
+		temp = texRect->rightDown.point;
+		texRect->rightDown.point = texRect->rightUp.point;
+		texRect->rightUp.point = temp;
+	}
+}

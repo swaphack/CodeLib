@@ -1,50 +1,30 @@
 #pragma once
 
+#include <map>
 #include <string>
 
 namespace web
 {
+	// http命令
 	struct HttpCommand
 	{
 	public:
 		HttpCommand();
 		virtual ~HttpCommand();
 	public:
+		// 设置消息
 		void setMessage(const char* msg, int size);
+		// 获取消息
 		char* getMessage();
-
+		// 消息大小
 		int size();
-
+		// 是否有值
 		virtual bool empty();
+	protected:
+		// 解析消息
+		void parseMessage();
 	private:
 		std::string _msg;
-	};
-
-	//////////////////////////////////////////////////////////////////////////
-	struct HttpRequest: public HttpCommand
-	{
-	public:
-		HttpRequest();
-		~HttpRequest();
-	public:
-		void setSrcID(int id);
-		int getSrcID();
-	protected:
-	private:
-		int _srcID;
-	};
-
-	//////////////////////////////////////////////////////////////////////////
-	struct HttpResponse : public HttpCommand
-	{
-	public:
-		HttpResponse();
-		~HttpResponse();
-	public:
-		void setDestID(int id);
-		int getDestID();
-	protected:
-	private:
-		int _destID;
+		std::map<std::string, std::string> _params;
 	};
 }

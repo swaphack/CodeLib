@@ -22,4 +22,5 @@ public:
 	void testCamera();
 	void testEditBox();
 	void testImages();
+	void testString();
 };

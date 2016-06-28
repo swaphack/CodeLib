@@ -24,6 +24,12 @@ namespace render
 		void setTexFrame(const TexFrame* texFrame);
 		// 获取纹理帧
 		const TexFrame* getTexFrame();
+		// 设置水平翻转
+		void setFlipX(bool status);
+		bool isFlipX();
+		// 设置垂直翻转
+		void setFlipY(bool status);
+		bool isFlipY();
 	protected:
 		virtual void initSelf();
 	protected:
@@ -33,5 +39,9 @@ namespace render
 		TexFrame _texFrame;
 		// 纹理坐标
 		TextureRect _texRect;
+		// 是否水平翻转
+		bool _bFlipX;
+		// 是否垂直翻转
+		bool _bFlipY;
 	};
 }

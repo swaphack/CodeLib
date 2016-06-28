@@ -21,11 +21,6 @@ int  WINAPI WinMain(HINSTANCE	hInstance,                 // 当前窗口实例
 	int height = 768;
 	int bits = 32;
 
-	//WndRender* render = new WndRender();
-	// 非主线程会有问题
-	//render->setFrameSize(width, height);
-	//render->test();
-
 	render::GLFrame* frame = new render::GLFrame();
 	frame->initWindow("OpenGL", width, height, bits, new WndRender());
 

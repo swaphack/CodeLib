@@ -1,20 +1,22 @@
 #pragma once
 
-#ifdef USE_STRING
-
-
 #include "../Base/import.h"
 
 #include <vector>
 
 namespace sys
 {
+	// 字符串，以'\0'结尾
 	class String
 	{
 	public:
+		String();
+		String(const String& value);
 		String(const char* value);
+		String(char* value, int count);
 		~String();
 	public:
+		virtual String& operator=(const String& value);
 		// 赋值
 		virtual String& operator=(const char* value);
 		// 拼接
@@ -43,19 +45,17 @@ namespace sys
 		String& trimRight();
 
 		// 格式化
-		String& format(const char* format, ...);
+		String& make(const char* format, ...);
 		// 分割
-		void split(char spot, std::vector<String>& dest);
+		void split(char spot, std::vector<String*>& dest);
 
 		// 获取字符串数据
-		const char* getString();
+		const char* getString() const;
 		// 获取字符串长度
-		uint getSize();
+		uint getSize() const;
 	protected:
 	private:
 		char* _value;
 		uint _size;
 	};
 }
-
-#endif

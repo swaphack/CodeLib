@@ -6,7 +6,7 @@ using namespace sys;
 WndRender::WndRender()
 {
 	this->init();
-	this->getCanvas()->setDimensions(render::ED_2D);
+	this->getCanvas()->setDimensions(render::ED_3D);
 }
 
 WndRender::~WndRender()
@@ -16,25 +16,21 @@ WndRender::~WndRender()
 
 void WndRender::show()
 {
-	Time* t = Time::getNow();
-	LOG("%d-%d-%d %02d:%02d:%02d\n", t->getYear(), t->getMonth(), t->getMonthDay(), t->getHour(), t->getMinute(), t->getSecond());
-	t->addSecond(-1989456);
-	LOG("%d-%d-%d %02d:%02d:%02d\n", t->getYear(), t->getMonth(), t->getMonthDay(), t->getHour(), t->getMinute(), t->getSecond());
-	t->addSecond(10989456);
-	LOG("%d-%d-%d %02d:%02d:%02d\n", t->getYear(), t->getMonth(), t->getMonthDay(), t->getHour(), t->getMinute(), t->getSecond());
+	this->testString();
 
-	//this->testStencil();
 
 	this->testImage();
 
-	this->testText();
+	this->testModel();
 }
 
 void WndRender::testImage()
 {
 	CtrlImage* pImage = new CtrlImage();
-	pImage->setImagePath("Resource/world.jpg", EIF_JPEG);
+	pImage->setImagePath("Resource/NeHe.png", EIF_PNG);
 	pImage->setPosition(512, 384, 0);
+	pImage->setFlipX(true);
+	//pImage->setFlipY(true);
 	AUTO_RELEASE_OBJECT(pImage);
 	this->getCanvas()->getRoot()->addChild(pImage);
 
@@ -166,15 +162,15 @@ void WndRender::testModel()
 	pModel->getMatrial()->setEmisiion(255, 255, 255, 255);
 	this->getCanvas()->getRoot()->addChild(pModel);
 
-// 	int count = 1024;
-// 	float interval = 5;
-// 	float rx = 45;
-// 	float ry = 45;
-// 	float rz = 0;
-// 	RotateToAction* pRotateToAction = new RotateToAction();
-// 	pRotateToAction->setRotation(rx * count, ry * count, rz * count);
-// 	pRotateToAction->setInterval(interval * count);
-// 	pModel->getActionProxy()->runAction(pRotateToAction);
+	int count = 1024;
+	float interval = 5;
+	float rx = 45;
+	float ry = 45;
+	float rz = 0;
+	RotateToAction* pRotateToAction = new RotateToAction();
+	pRotateToAction->setRotation(rx * count, ry * count, rz * count);
+	pRotateToAction->setInterval(interval * count);
+	pModel->getActionProxy()->runAction(pRotateToAction);
 
 // 	CtrlSpotLight1* pCtrlSpotLight = new CtrlSpotLight1();
 // 	AUTO_RELEASE_OBJECT(pCtrlSpotLight);
@@ -372,4 +368,18 @@ void WndRender::testImages()
 		pImage = pChild;
 		pChild = nullptr;
 	}
+}
+
+void WndRender::testString()
+{
+	Time* t = Time::getNow();
+	LOG("%d-%d-%d %02d:%02d:%02d\n", t->getYear(), t->getMonth(), t->getMonthDay(), t->getHour(), t->getMinute(), t->getSecond());
+
+	const char* data = "{json; big; none}";
+
+	String str = String(data);
+	LOG("%s\n", str.getString());
+
+	String str2 = str.subString(0, 10);
+	LOG("%s\n", str2.getString());
 }

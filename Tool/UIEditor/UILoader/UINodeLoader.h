@@ -10,7 +10,7 @@ namespace uieditor
 	class UINodeLoader
 	{
 	public:
-		UINodeLoader();
+		UINodeLoader();  
 		virtual ~UINodeLoader();
 	public:
 		// ½âÎöÊôĞÔ

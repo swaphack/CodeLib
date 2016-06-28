@@ -133,6 +133,7 @@
     <ClInclude Include="Stream\StreamBase.h" />
     <ClInclude Include="Stream\StreamReader.h" />
     <ClInclude Include="Stream\StreamWriter.h" />
+    <ClInclude Include="Stream\StringStream.h" />
     <ClInclude Include="system.h" />
     <ClInclude Include="Type\import.h" />
     <ClInclude Include="Type\Number.h" />
@@ -168,6 +169,7 @@
     <ClCompile Include="Stream\Stream.cpp" />
     <ClCompile Include="Stream\StreamBase.cpp" />
     <ClCompile Include="Stream\StreamWriter.cpp" />
+    <ClCompile Include="Stream\StringStream.cpp" />
     <ClCompile Include="Type\String.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -253,6 +253,9 @@
     <ClInclude Include="Type\import.h">
       <Filter>Type</Filter>
     </ClInclude>
+    <ClInclude Include="Stream\StringStream.h">
+      <Filter>Stream</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Base\File.cpp">
@@ -341,6 +344,9 @@
     </ClCompile>
     <ClCompile Include="Device\Keyboard.cpp">
       <Filter>Device</Filter>
+    </ClCompile>
+    <ClCompile Include="Stream\StringStream.cpp">
+      <Filter>Stream</Filter>
     </ClCompile>
     <ClCompile Include="Type\String.cpp">
       <Filter>Type</Filter>

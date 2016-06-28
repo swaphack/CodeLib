@@ -38,7 +38,7 @@ char* StreamHelper::mallocStream(ss_t capacity, void* data, ss_t size)
 {
 	ASSERT(capacity > 0);
 
-	char* newData = mallocStream(size);
+	char* newData = mallocStream(capacity);
 
 	if (data != nullptr && size > 0)
 	{

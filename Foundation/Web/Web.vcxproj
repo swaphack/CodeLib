@@ -69,12 +69,16 @@
   <ItemGroup>
     <ClCompile Include="Activity\HttpActivity.cpp" />
     <ClCompile Include="Command\HttpCommand.cpp" />
+    <ClCompile Include="Command\HttpRequest.cpp" />
+    <ClCompile Include="Command\HttpResponse.cpp" />
     <ClCompile Include="WebApplication.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Activity\HttpActivity.h" />
     <ClInclude Include="Activity\import.h" />
     <ClInclude Include="Command\HttpCommand.h" />
+    <ClInclude Include="Command\HttpRequest.h" />
+    <ClInclude Include="Command\HttpResponse.h" />
     <ClInclude Include="Command\import.h" />
     <ClInclude Include="web.h" />
     <ClInclude Include="WebApplication.h" />

@@ -1,5 +1,7 @@
 #include "HttpCommand.h"
 
+#include "system.h"
+
 using namespace web;
 
 
@@ -16,6 +18,7 @@ HttpCommand::~HttpCommand()
 void HttpCommand::setMessage( const char* msg, int size )
 {
 	_msg = std::string(msg, size);
+	this->parseMessage();
 }
 
 char* HttpCommand::getMessage()
@@ -33,46 +36,18 @@ bool HttpCommand::empty()
 	return _msg.empty();
 }
 
-//////////////////////////////////////////////////////////////////////////
-HttpRequest::HttpRequest()
-:_srcID(0)
+void HttpCommand::parseMessage()
 {
-
-}
-
-HttpRequest::~HttpRequest()
-{
-	
-}
-
-void HttpRequest::setSrcID( int id )
-{
-	_srcID = id;
-}
-
-int HttpRequest::getSrcID()
-{
-	return _srcID;
-}
-
-//////////////////////////////////////////////////////////////////////////
-HttpResponse::HttpResponse()
-:_destID(0)
-{
-
-}
-
-HttpResponse::~HttpResponse()
-{
-
-}
-
-void HttpResponse::setDestID( int id )
-{
-	_destID = id;
-}
-
-int HttpResponse::getDestID()
-{
-	return _destID;
+	_params.clear();
+	sys::StringStream* ss = new sys::StringStream(_msg.c_str());
+	std::string line;
+	int index;
+	while (!ss->readEnd())
+	{
+		line = ss->readLine();
+		line = line.substr(0, line.size() - 2);
+		LOG("line message %s\n", line.c_str());
+		int len = strlen(line.c_str());
+		LOG("line length %s\n", len);
+	}
 }

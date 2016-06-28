@@ -10,8 +10,11 @@ namespace sys
 	struct NetData
 	{
 	public:
+		// 数据
 		char* data;
+		// 大小
 		int size;
+		// 游标
 		int pos;
 	public:
 		NetData()

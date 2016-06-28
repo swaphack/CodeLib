@@ -16,6 +16,12 @@
       <Filter>Command</Filter>
     </ClCompile>
     <ClCompile Include="WebApplication.cpp" />
+    <ClCompile Include="Command\HttpRequest.cpp">
+      <Filter>Command</Filter>
+    </ClCompile>
+    <ClCompile Include="Command\HttpResponse.cpp">
+      <Filter>Command</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Activity\HttpActivity.h">
@@ -32,5 +38,11 @@
       <Filter>Command</Filter>
     </ClInclude>
     <ClInclude Include="web.h" />
+    <ClInclude Include="Command\HttpRequest.h">
+      <Filter>Command</Filter>
+    </ClInclude>
+    <ClInclude Include="Command\HttpResponse.h">
+      <Filter>Command</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

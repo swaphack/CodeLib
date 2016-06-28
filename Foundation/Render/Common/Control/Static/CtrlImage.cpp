@@ -3,6 +3,8 @@
 using namespace render;
 
 CtrlImage::CtrlImage()
+:_bFlipX(false)
+, _bFlipY(false)
 {
 
 }
@@ -92,4 +94,29 @@ void CtrlImage::initSelf()
 
 	TextureTool::setTexture2DCoords(&_texRect, size, _texFrame.getRect());
 	TextureTool::setTexture2DVertexts(&_texRect, sys::Vector::Zero, _volume, _anchor);
+
+
+	TextureTool::setTexture2DFlip(&_texRect, _bFlipX, _bFlipY);
+}
+
+void CtrlImage::setFlipX(bool status)
+{
+	_bFlipX = status;
+	setDirty(true);
+}
+
+bool CtrlImage::isFlipX()
+{
+	return _bFlipX;
+}
+
+void CtrlImage::setFlipY(bool status)
+{
+	_bFlipY = status;
+	setDirty(true);
+}
+
+bool CtrlImage::isFlipY()
+{
+	return _bFlipY;
 }

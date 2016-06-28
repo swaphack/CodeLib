@@ -9,3 +9,7 @@
 #include "StreamWriter.h"
 
 #include "MultiStream.h"
+
+#include "FileStream.h"
+
+#include "StringStream.h"

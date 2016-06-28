@@ -31,8 +31,8 @@
 	}
 
 #ifdef REALSE
-#define LOG(format, ...)
+#define LOG(FORMAT, ...)
 #else
 #include <cstddef>
-#define LOG(format, ...)  printf(format, __VA_ARGS__)
+#define LOG(FORMAT, ...)  printf(FORMAT, __VA_ARGS__)
 #endif

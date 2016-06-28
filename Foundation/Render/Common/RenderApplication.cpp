@@ -46,12 +46,10 @@ void RenderApplication::update()
 	{
 		if (interval >= _refreshInterval)
 		{
-			//interval = 0.0f;
 			_canvas->update(interval);
 			_lastClock = nowClock;
 		}
-//		_canvas->update(interval);
-
+		// ±ÜÃâË«»º´æ²úÉúÇø¶¶¶¯
 		_canvas->draw();
 	}
 
