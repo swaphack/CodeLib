@@ -13,8 +13,8 @@ namespace sys
 		String();
 		String(const String& value);
 		String(const char* value);
-		String(char* value, int count);
-		~String();
+		String(const char* value, int count);
+		virtual ~String();
 	public:
 		virtual String& operator=(const String& value);
 		// ¸³Öµ

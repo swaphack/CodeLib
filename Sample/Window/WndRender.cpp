@@ -377,9 +377,9 @@ void WndRender::testString()
 
 	const char* data = "{json; big; none}";
 
-	String str = String(data);
+	String str = String(data, 10);
 	LOG("%s\n", str.getString());
 
-	String str2 = str.subString(0, 10);
+	String str2 = str.subString(0, 5);
 	LOG("%s\n", str2.getString());
 }

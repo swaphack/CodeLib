@@ -37,7 +37,7 @@ String::String(const char* value)
 	_value = StreamHelper::mallocStream((char*)value, _size);
 }
 
-String::String(char* value, int count)
+String::String(const char* value, int count)
 :String()
 {
 	if (value == nullptr)
