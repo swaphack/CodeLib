@@ -6,7 +6,7 @@
 namespace web
 {
 	// httpÃüÁî
-	struct HttpCommand
+	class HttpCommand
 	{
 	public:
 		HttpCommand();
@@ -22,9 +22,8 @@ namespace web
 		virtual bool empty();
 	protected:
 		// ½âÎöÏûÏ¢
-		void parseMessage();
-	private:
+		virtual void parseMessage();
+	protected:
 		std::string _msg;
-		std::map<std::string, std::string> _params;
 	};
 }

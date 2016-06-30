@@ -7,6 +7,9 @@
     <Filter Include="Command">
       <UniqueIdentifier>{fc143c6b-8ee2-462f-9ea8-9613ac0bcc00}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource">
+      <UniqueIdentifier>{f6809233-12b8-49dd-bd89-b74fd138b9f8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Activity\HttpActivity.cpp">
@@ -20,6 +23,9 @@
       <Filter>Command</Filter>
     </ClCompile>
     <ClCompile Include="Command\HttpResponse.cpp">
+      <Filter>Command</Filter>
+    </ClCompile>
+    <ClCompile Include="Command\HttpConstant.cpp">
       <Filter>Command</Filter>
     </ClCompile>
   </ItemGroup>
@@ -42,6 +48,15 @@
       <Filter>Command</Filter>
     </ClInclude>
     <ClInclude Include="Command\HttpResponse.h">
+      <Filter>Command</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\Resource.h">
+      <Filter>Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\import.h">
+      <Filter>Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="Command\HttpConstant.h">
       <Filter>Command</Filter>
     </ClInclude>
   </ItemGroup>

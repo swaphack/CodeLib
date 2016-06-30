@@ -38,16 +38,5 @@ bool HttpCommand::empty()
 
 void HttpCommand::parseMessage()
 {
-	_params.clear();
-	sys::StringStream* ss = new sys::StringStream(_msg.c_str());
-	std::string line;
-	int index;
-	while (!ss->readEnd())
-	{
-		line = ss->readLine();
-		line = line.substr(0, line.size() - 2);
-		LOG("line message %s\n", line.c_str());
-		int len = strlen(line.c_str());
-		LOG("line length %s\n", len);
-	}
+	
 }

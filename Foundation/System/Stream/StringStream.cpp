@@ -24,6 +24,14 @@ std::string StringStream::readLine()
 {
 	char* cursor = getPtr();
 	char* ptr = getPtr();
+	int ext = 0;
+#if PLATFORM_TARGET == EPT_WINDOWS
+	ext = 2;
+#elif PLATFORM_TARGET == EPT_MAC
+	ext = 1;
+#elif PLATFORM_TARGET == EPT_LINUX
+	ext = 1;
+#endif
 
 	while (ptr != nullptr
 #if PLATFORM_TARGET == EPT_WINDOWS
@@ -40,7 +48,7 @@ std::string StringStream::readLine()
 	ptr++;
 	ss_t size = ptr - cursor;
 	this->setCursor(getCursor() + size);
-	return std::string(cursor, size);
+	return std::string(cursor, size - ext);
 }
 
 void StringStream::writeLine(const char* line)

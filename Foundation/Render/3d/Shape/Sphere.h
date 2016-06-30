@@ -4,8 +4,8 @@
 
 namespace render
 {
-#define SPHERE_HORIZONTAL_COUNT 20
-#define SPHERE_VERTICAL_COUNT 20
+#define SPHERE_HORIZONTAL_COUNT 100
+#define SPHERE_VERTICAL_COUNT 100
 
 	// 3dÄ£ÐÍ»ù´¡£¬Çò
 	class Sphere : public CtrlModel

@@ -3,38 +3,56 @@
 #include <cstring>
 #include <cstdarg>
 
-void test(char * format, ...)
+class IA
 {
-	va_list args;
-	int len = 1024;
-	char * buffer;
+public:
+	virtual ~IA()
+	{
+	}
+protected:
+private:
+};
 
-	va_start(args, format);
-	len = _vscprintf(format, args) + 1;  //怎么做这个类似功能
+class A : public IA
+{
+public:
+	A()
+	{
+	}
+	virtual ~A()
+	{
+	}
+public:
+	virtual int getNumber() 
+	{ 
+		return 1; 
+	}
+};
 
-	buffer = (char*)malloc(len * sizeof(char));
-	vsprintf(buffer, format, args);
-	printf(buffer);
-
-	va_end(args);
-	free(buffer);
-}
+class B : public A
+{
+public:
+	B()
+	{
+	}
+	virtual ~B()
+	{
+	}
+protected:  
+	virtual int getNumber() 
+	{ 
+		return 2; 
+	}
+};
 
 int main(int argc, char** argv)
 {
-	int len = 1;
-	int offset = -1;
-	const char* str = "hello world!";
-	do 
-	{
-		char * dest = new char[len];
-		memset(dest, 0, len);
-		offset = _snprintf(dest, len, "%s", str);
-		delete[] dest;
-		len *= 2;
-	} while (offset == -1);
+	A* a = new B();
 
-	test("%s", str);
+	printf("%d", a->A::getNumber());
+	printf("%d", a->getNumber());
+
+	delete a;
 
 	return 0;
 }

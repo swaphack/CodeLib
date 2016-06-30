@@ -16,12 +16,13 @@ WndRender::~WndRender()
 
 void WndRender::show()
 {
-	this->testString();
+	this->addLight();
 
+	this->testString();
 
 	this->testImage();
 
-	this->testModel();
+	this->testSphereModel();
 }
 
 void WndRender::testImage()
@@ -140,7 +141,7 @@ void WndRender::testClock()
 	pMinuteLineNode->getActionProxy()->runAction(pMinuteAction);
 }
 
-void WndRender::testModel()
+void WndRender::testCubeModel()
 {
 	ImageDefine imageDefine = { "Resource/NeHe.png", EIF_PNG};
 	Texture2D* texture2D = G_TEXTURE_CACHE->getTexture2D(imageDefine);
@@ -171,17 +172,24 @@ void WndRender::testModel()
 	pRotateToAction->setRotation(rx * count, ry * count, rz * count);
 	pRotateToAction->setInterval(interval * count);
 	pModel->getActionProxy()->runAction(pRotateToAction);
+}
 
-// 	CtrlSpotLight1* pCtrlSpotLight = new CtrlSpotLight1();
-// 	AUTO_RELEASE_OBJECT(pCtrlSpotLight);
-// 	pCtrlSpotLight->setExponent(1.0f);
-// 	pCtrlSpotLight->setPosition(0, 0, -1);
-// 	pCtrlSpotLight->setAmbient(255, 255, 255, 255);
-// 	pCtrlSpotLight->setDiffuse(255, 255, 255, 255);
-// 	pCtrlSpotLight->setCutOff(45);
-// 	pCtrlSpotLight->setDirection(0.0f, 0.0f, 1.0f);
-// 	
-// 	this->getCanvas()->getRoot()->addChild(pCtrlSpotLight);
+void WndRender::testSphereModel()
+{
+	Sphere* pSphere = new Sphere();
+	AUTO_RELEASE_OBJECT(pSphere);
+	pSphere->setRadius(0.2);
+	this->getCanvas()->getRoot()->addChild(pSphere);
+
+	int count = 1024;
+	float interval = 5;
+	float rx = 45;
+	float ry = 45;
+	float rz = 0;
+	RotateToAction* pRotateToAction = new RotateToAction();
+	pRotateToAction->setRotation(rx * count, ry * count, rz * count);
+	pRotateToAction->setInterval(interval * count);
+	pSphere->getActionProxy()->runAction(pRotateToAction);
 }
 
 void WndRender::testText()
@@ -377,9 +385,33 @@ void WndRender::testString()
 
 	const char* data = "{json; big; none}";
 
-	String str = String(data, 10);
-	LOG("%s\n", str.getString());
+	String str = String(data);
 
-	String str2 = str.subString(0, 5);
-	LOG("%s\n", str2.getString());
+	std::vector<String> dest;
+	str.split("| ", dest);
+
+	bool bContain = str.contains(";]");
+	bContain = str.contains("}");
+	bContain = str.contains("{j");
+	bContain = str.contains("{ja");
+
+	str.concat("hello");
+
+	str.concat("hello", ", CN");
+
+	str.concat("hello", ", CN", ", PNG");
+}
+
+void WndRender::addLight()
+{
+	CtrlSpotLight1* pCtrlSpotLight = new CtrlSpotLight1();
+	AUTO_RELEASE_OBJECT(pCtrlSpotLight);
+	pCtrlSpotLight->setExponent(1.0f);
+	pCtrlSpotLight->setPosition(0, 0, -1);
+	pCtrlSpotLight->setAmbient(255, 255, 255, 255);
+	pCtrlSpotLight->setDiffuse(255, 255, 255, 255);
+	pCtrlSpotLight->setCutOff(45);
+	pCtrlSpotLight->setDirection(0.0f, 0.0f, 1.0f);
+
+	this->getCanvas()->getRoot()->addChild(pCtrlSpotLight);
 }

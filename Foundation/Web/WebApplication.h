@@ -1,6 +1,7 @@
 #pragma once
 
 #include "system.h"
+#include "Resource/import.h"
 #include "Command/import.h"
 
 #include <map>
@@ -41,6 +42,7 @@ namespace web
 		}
 	};
 
+	// web 应用
 	class WebApplication : public sys::Application
 	{
 	public:
@@ -53,16 +55,23 @@ namespace web
 		virtual void update();
 		virtual void dispose(); 
 
+		// 添加接受数据处理
 		void addRecvHandler(sys::Object* target, WEB_RECV_HANDLER handler);
+		// 移除接受数据处理
 		void removeRecvHandler(sys::Object* target, WEB_RECV_HANDLER handler);
-
+		// 反馈给客户端
 		void postResponse(int id, HttpResponse* response);
+		// 广播
 		void postBroadcast(HttpResponse* response);
 	protected:
+		// 初始化网络
 		void initNet();
+		// 销毁网络
 		void disposeNet();
 	private:
-		void parserData(int id, sys::DataQueue& dataQueue);
+		// 解析数据
+		void parseData(int id, sys::DataQueue& dataQueue);
+		// 接受请求处理
 		void onRecvHander(int id, HttpRequest* data);
 
 		// 从接收的数据中创建http请求，并且删除已完成的数据

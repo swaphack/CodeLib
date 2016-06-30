@@ -12,11 +12,11 @@ void drawSphere(GLfloat xx, GLfloat yy, GLfloat zz, GLfloat radius)
 	float angle_xy = 0.0;
 	int i = 0, j = 0;
 	glBegin(GL_QUADS);
-	for (i = 0; i < M; i++)
+	for (i = 0; i < SPHERE_HORIZONTAL_COUNT; i++)
 	{
 		angle_z = i * step_z;
 
-		for (j = 0; j < N; j++)
+		for (j = 0; j < SPHERE_VERTICAL_COUNT; j++)
 		{
 			angle_xy = j * step_xy;
 			x[0] = radius * sin(angle_z) * cos(angle_xy);

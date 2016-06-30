@@ -2,6 +2,7 @@
 
 #include "../Base/import.h"
 
+#include <string>
 #include <vector>
 
 namespace sys
@@ -16,14 +17,22 @@ namespace sys
 		String(const char* value, int count);
 		virtual ~String();
 	public:
-		virtual String& operator=(const String& value);
 		// 赋值
+		virtual String& operator=(const String& value);
+		virtual String& operator=(const std::string& value);
 		virtual String& operator=(const char* value);
 		// 拼接
 		virtual String& concat(const char* value);
+		virtual String& concat(const char* value1, const char* value2);
+		virtual String& concat(const char* value1, const char* value2, const char* value3);
+
+		// 是否包含
+		bool contains(const char* value);
 
 		// 比较两字符串是否相同
 		bool compare(const char* value);
+		bool compare(int offset, const char* value);
+		bool compare(int offset, const char* value, int count);
 		// 以指定字符串结尾
 		bool endWith(const char* value);
 		// 以指定字符串开头
@@ -47,15 +56,20 @@ namespace sys
 		// 格式化
 		String& make(const char* format, ...);
 		// 分割
-		void split(char spot, std::vector<String*>& dest);
+		void split(char spot, std::vector<String>& dest);
+		// 分割
+		void split(const char* spot, std::vector<String>& dest);
+		// 是否数据为空
+		bool empty();
 
 		// 获取字符串数据
 		const char* getString() const;
 		// 获取字符串长度
-		uint getSize() const;
-	protected:
+		int getSize() const;
 	private:
+		// 数据
 		char* _value;
-		uint _size;
+		// 长度
+		int _size;
 	};
 }

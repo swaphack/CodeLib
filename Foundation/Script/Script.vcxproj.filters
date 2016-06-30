@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Python">
+      <UniqueIdentifier>{0deb0dbe-f1c2-4d73-8b44-9e514dd2f83f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Lua">
+      <UniqueIdentifier>{c0602a1f-8375-42b2-9afb-75e8daa65a26}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

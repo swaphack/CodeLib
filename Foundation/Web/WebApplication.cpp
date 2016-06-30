@@ -45,7 +45,7 @@ void WebApplication::dispose()
 void WebApplication::initNet()
 {
 	_server = new sys::Server(_ip.c_str(), _port, _maxWaitCount);
-	_server->setRecvHandler(this, static_cast<sys::SERVER_RECV_HANDLER>(&WebApplication::parserData));
+	_server->setRecvHandler(this, static_cast<sys::SERVER_RECV_HANDLER>(&WebApplication::parseData));
 }
 
 void WebApplication::disposeNet()
@@ -108,7 +108,7 @@ void WebApplication::postBroadcast(HttpResponse* response)
 	_server->sendBroadcast(data);
 }
 
-void WebApplication::parserData( int id, sys::DataQueue& dataQueue )
+void WebApplication::parseData( int id, sys::DataQueue& dataQueue )
 {
 	HttpRequest* request = this->createHttpRequest(dataQueue);
 	if (request == nullptr || request->empty())

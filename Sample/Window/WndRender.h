@@ -11,7 +11,8 @@ public:
 	virtual void show();
 	void testImage();
 	void testClock();
-	void testModel();
+	void testCubeModel();
+	void testSphereModel();
 	void testText();
 	void testMask();
 	void testMedia();
@@ -23,4 +24,5 @@ public:
 	void testEditBox();
 	void testImages();
 	void testString();
+	void addLight();
 };
