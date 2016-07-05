@@ -82,6 +82,7 @@
     <ClInclude Include="JSON\value.h" />
     <ClInclude Include="JSON\version.h" />
     <ClInclude Include="JSON\writer.h" />
+    <ClInclude Include="text.h" />
     <ClInclude Include="XML\tinyxml2.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

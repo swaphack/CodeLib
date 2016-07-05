@@ -18,14 +18,11 @@ HttpRequest::~HttpRequest()
 
 }
 
-void HttpRequest::setSrcID(int id)
+void HttpRequest::setMessage(const char* msg, int size)
 {
-	_srcID = id;
-}
+	HttpCommand::setMessage(msg, size);
 
-int HttpRequest::getSrcID()
-{
-	return _srcID;
+	this->parseMessage();
 }
 
 const char* HttpRequest::getLineParam(const char* key)
@@ -133,7 +130,6 @@ void HttpRequest::parseMessage(const char* msg)
 
 void HttpRequest::reset()
 {
-	_srcID = 0;
 	_lineParams.clear();
 	_headParams.clear();
 	_extMessage = "";

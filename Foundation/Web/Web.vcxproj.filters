@@ -10,33 +10,49 @@
     <Filter Include="Resource">
       <UniqueIdentifier>{f6809233-12b8-49dd-bd89-b74fd138b9f8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="WebSite">
+      <UniqueIdentifier>{b55035fa-e342-4d52-b009-1b8de1743b37}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Http">
+      <UniqueIdentifier>{4c169d3b-fdb4-4e78-82b4-1854b5303f08}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Activity\HttpActivity.cpp">
       <Filter>Activity</Filter>
     </ClCompile>
-    <ClCompile Include="Command\HttpCommand.cpp">
+    <ClCompile Include="Resource.cpp">
+      <Filter>Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="Command\Command.cpp">
       <Filter>Command</Filter>
     </ClCompile>
-    <ClCompile Include="WebApplication.cpp" />
-    <ClCompile Include="Command\HttpRequest.cpp">
-      <Filter>Command</Filter>
+    <ClCompile Include="Http\HttpCommand.cpp">
+      <Filter>Http</Filter>
     </ClCompile>
-    <ClCompile Include="Command\HttpResponse.cpp">
-      <Filter>Command</Filter>
+    <ClCompile Include="Http\HttpConstant.cpp">
+      <Filter>Http</Filter>
     </ClCompile>
-    <ClCompile Include="Command\HttpConstant.cpp">
-      <Filter>Command</Filter>
+    <ClCompile Include="Http\HttpRequest.cpp">
+      <Filter>Http</Filter>
+    </ClCompile>
+    <ClCompile Include="Http\HttpResponse.cpp">
+      <Filter>Http</Filter>
+    </ClCompile>
+    <ClCompile Include="WebSite\WebApplication.cpp">
+      <Filter>WebSite</Filter>
+    </ClCompile>
+    <ClCompile Include="WebSite\Session.cpp">
+      <Filter>WebSite</Filter>
+    </ClCompile>
+    <ClCompile Include="WebSite\HttpApplication.cpp">
+      <Filter>WebSite</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Activity\HttpActivity.h">
       <Filter>Activity</Filter>
     </ClInclude>
-    <ClInclude Include="Command\HttpCommand.h">
-      <Filter>Command</Filter>
-    </ClInclude>
-    <ClInclude Include="WebApplication.h" />
     <ClInclude Include="Activity\import.h">
       <Filter>Activity</Filter>
     </ClInclude>
@@ -44,20 +60,47 @@
       <Filter>Command</Filter>
     </ClInclude>
     <ClInclude Include="web.h" />
-    <ClInclude Include="Command\HttpRequest.h">
-      <Filter>Command</Filter>
-    </ClInclude>
-    <ClInclude Include="Command\HttpResponse.h">
-      <Filter>Command</Filter>
-    </ClInclude>
     <ClInclude Include="Resource\Resource.h">
       <Filter>Resource</Filter>
     </ClInclude>
     <ClInclude Include="Resource\import.h">
       <Filter>Resource</Filter>
     </ClInclude>
-    <ClInclude Include="Command\HttpConstant.h">
+    <ClInclude Include="Command\Command.h">
       <Filter>Command</Filter>
+    </ClInclude>
+    <ClInclude Include="Http\HttpCommand.h">
+      <Filter>Http</Filter>
+    </ClInclude>
+    <ClInclude Include="Http\HttpConstant.h">
+      <Filter>Http</Filter>
+    </ClInclude>
+    <ClInclude Include="Http\HttpRequest.h">
+      <Filter>Http</Filter>
+    </ClInclude>
+    <ClInclude Include="Http\HttpResponse.h">
+      <Filter>Http</Filter>
+    </ClInclude>
+    <ClInclude Include="Http\import.h">
+      <Filter>Http</Filter>
+    </ClInclude>
+    <ClInclude Include="Activity\HttpRecvHandler.h">
+      <Filter>Activity</Filter>
+    </ClInclude>
+    <ClInclude Include="WebSite\Session.h">
+      <Filter>WebSite</Filter>
+    </ClInclude>
+    <ClInclude Include="WebSite\WebApplication.h">
+      <Filter>WebSite</Filter>
+    </ClInclude>
+    <ClInclude Include="WebSite\macros.h">
+      <Filter>WebSite</Filter>
+    </ClInclude>
+    <ClInclude Include="WebSite\import.h">
+      <Filter>WebSite</Filter>
+    </ClInclude>
+    <ClInclude Include="WebSite\HttpApplication.h">
+      <Filter>WebSite</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

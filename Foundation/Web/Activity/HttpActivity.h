@@ -2,6 +2,7 @@
 
 #include "system.h"
 #include "../Command/import.h"
+#include "../Http/import.h"
 
 namespace web
 {
@@ -11,7 +12,7 @@ namespace web
 		HttpActivity();
 		virtual ~HttpActivity();
 	public:
-		void onReceiveRequest(int id, HttpRequest* request);
+		void onReceiveRequest(const char* sessionID, HttpRequest* request);
 	protected:
 		// 收到数据
 		virtual void doGet(HttpRequest* request);
@@ -20,9 +21,9 @@ namespace web
 		// 广播
 		virtual void doBroadCast(HttpResponse* response);
 	private:
-		void sendResponse(int id, HttpResponse* response);
-		void sendBroadcast(HttpResponse* response);
+		void sendResponse(const char* sessionID, HttpResponse* response);
+		void sendBroadcast(const char* sessionID, HttpResponse* response);
 	private:
-		int _srcID;
+		std::string _sessionID;
 	};
 }

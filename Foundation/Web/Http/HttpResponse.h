@@ -34,19 +34,30 @@ namespace web
 	class HttpResponse : public HttpCommand
 	{
 	public:
+		// http 版本				
+		static const char* HTTP_RESPONSE_VERSION/* = "VERSION"*/;
+		// 状态码
+		static const char* HTTP_RESPONSE_STATUS/* = "STATUS"*/;
+		// 说明
+		static const char* HTTP_RESPONSE_DESCRIBE/* = "DESCRIBE"*/;
+	public:
 		HttpResponse();
-		~HttpResponse();
+		virtual ~HttpResponse();
 	public:
-		// 设置目标id
-		void setDestID(int id);
-		// 获取目标id
-		int getDestID();
-	public:
-		// 设置要发送的字符串
-		void setPostString(const char* data);
-	protected:
+		// 转态行参数
+		void setStatusParam(const char* key, const char* value);
+		// 报头参数
+		void setHeadParam(const char* key, const char* value);
+		// 可选的消息体
+		void setExtMessage(const char* value);
+		// 生成消息
+		void makeMessage();
 	private:
-		int _destID;
-
+		// 请求行参数
+		std::map<std::string, std::string> _lineParams;
+		// 报头参数
+		std::map<std::string, std::string> _headParams;
+		// 可选的消息体
+		std::string _extMessage;
 	};
 }

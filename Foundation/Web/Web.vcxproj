@@ -43,7 +43,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>../System/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../System/;../Text/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <BrowseInformation>true</BrowseInformation>
     </ClCompile>
     <Link>
@@ -68,24 +68,35 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Activity\HttpActivity.cpp" />
-    <ClCompile Include="Command\HttpCommand.cpp" />
-    <ClCompile Include="Command\HttpConstant.cpp" />
-    <ClCompile Include="Command\HttpRequest.cpp" />
-    <ClCompile Include="Command\HttpResponse.cpp" />
-    <ClCompile Include="WebApplication.cpp" />
+    <ClCompile Include="Command\Command.cpp" />
+    <ClCompile Include="Http\HttpCommand.cpp" />
+    <ClCompile Include="Http\HttpConstant.cpp" />
+    <ClCompile Include="Http\HttpRequest.cpp" />
+    <ClCompile Include="Http\HttpResponse.cpp" />
+    <ClCompile Include="Resource.cpp" />
+    <ClCompile Include="WebSite\HttpApplication.cpp" />
+    <ClCompile Include="WebSite\Session.cpp" />
+    <ClCompile Include="WebSite\WebApplication.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Activity\HttpActivity.h" />
     <ClInclude Include="Activity\import.h" />
-    <ClInclude Include="Command\HttpCommand.h" />
-    <ClInclude Include="Command\HttpConstant.h" />
-    <ClInclude Include="Command\HttpRequest.h" />
-    <ClInclude Include="Command\HttpResponse.h" />
+    <ClInclude Include="Activity\HttpRecvHandler.h" />
+    <ClInclude Include="Command\Command.h" />
     <ClInclude Include="Command\import.h" />
+    <ClInclude Include="Http\HttpCommand.h" />
+    <ClInclude Include="Http\HttpConstant.h" />
+    <ClInclude Include="Http\HttpRequest.h" />
+    <ClInclude Include="Http\HttpResponse.h" />
+    <ClInclude Include="Http\import.h" />
     <ClInclude Include="Resource\import.h" />
     <ClInclude Include="Resource\Resource.h" />
     <ClInclude Include="web.h" />
-    <ClInclude Include="WebApplication.h" />
+    <ClInclude Include="WebSite\HttpApplication.h" />
+    <ClInclude Include="WebSite\import.h" />
+    <ClInclude Include="WebSite\macros.h" />
+    <ClInclude Include="WebSite\Session.h" />
+    <ClInclude Include="WebSite\WebApplication.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

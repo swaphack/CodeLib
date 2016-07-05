@@ -6,6 +6,7 @@
 
 namespace sys
 {
+	// 数据队列
 	class DataQueue
 	{
 	public:
@@ -23,7 +24,6 @@ namespace sys
 		bool empty();
 
 		void dispose();
-	protected:
 	private:
 		std::queue<NetData*> _datas;
 	};

@@ -62,5 +62,6 @@
     <ClInclude Include="JSON\writer.h">
       <Filter>JSON</Filter>
     </ClInclude>
+    <ClInclude Include="text.h" />
   </ItemGroup>
 </Project>

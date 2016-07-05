@@ -21,6 +21,11 @@ namespace sys
 		virtual String& operator=(const String& value);
 		virtual String& operator=(const std::string& value);
 		virtual String& operator=(const char* value);
+
+		virtual String operator+(const String& value);
+		virtual String operator+(const std::string& value);
+		virtual String operator+(const char* value);
+
 		// Æ´½Ó
 		virtual String& concat(const char* value);
 		virtual String& concat(const char* value1, const char* value2);

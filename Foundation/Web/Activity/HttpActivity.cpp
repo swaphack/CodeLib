@@ -1,23 +1,23 @@
 #include "HttpActivity.h"
-#include "../WebApplication.h"
+#include "HttpRecvHandler.h"
+#include "../WebSite/HttpApplication.h"
 
 using namespace web;
 
 
 HttpActivity::HttpActivity()
-:_srcID(0)
 {
-	WebApplication::getInstance()->addRecvHandler(this, static_cast<WEB_RECV_HANDLER>(&HttpActivity::onReceiveRequest));
+	G_HTTPAPPLICATION->addRecvHandler(this, static_cast<HTTP_RECV_HANDLER>(&HttpActivity::onReceiveRequest));
 }
 
 HttpActivity::~HttpActivity()
 {
-	WebApplication::getInstance()->removeRecvHandler(this, static_cast<WEB_RECV_HANDLER>(&HttpActivity::onReceiveRequest));
+	G_HTTPAPPLICATION->removeRecvHandler(this, static_cast<HTTP_RECV_HANDLER>(&HttpActivity::onReceiveRequest));
 }
 
-void HttpActivity::onReceiveRequest(int id, HttpRequest* request)
+void HttpActivity::onReceiveRequest(const char* sessionID, HttpRequest* request)
 {
-	_srcID = id;
+	_sessionID = sessionID;
 
 	if (request == nullptr)
 	{
@@ -39,7 +39,10 @@ void HttpActivity::doPost( HttpResponse* response )
 	{
 		return;
 	}
-	this->sendResponse(_srcID, response);
+
+	response->makeMessage();
+
+	this->sendResponse(_sessionID.c_str(), response);
 }
 
 void HttpActivity::doBroadCast(HttpResponse* response)
@@ -48,15 +51,20 @@ void HttpActivity::doBroadCast(HttpResponse* response)
 	{
 		return;
 	}
-	this->sendBroadcast(response);
+
+	response->makeMessage();
+
+	this->sendBroadcast(_sessionID.c_str(), response);
 }
 
-void HttpActivity::sendResponse(int id, HttpResponse* response)
+void HttpActivity::sendResponse(const char* sessionID, HttpResponse* response)
 {
-	WebApplication::getInstance()->postResponse(id, response);
+	response->setSessionID(sessionID);
+	G_HTTPAPPLICATION->postResponse(response);
 }
 
-void HttpActivity::sendBroadcast(HttpResponse* response)
+void HttpActivity::sendBroadcast(const char* sessionID, HttpResponse* response)
 {
-	WebApplication::getInstance()->postBroadcast(response);
+	response->setSessionID(sessionID);
+	G_HTTPAPPLICATION->postBroadcast(response);
 }

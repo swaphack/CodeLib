@@ -16,17 +16,15 @@ protected:
 	{
 		std::string data = request->getMessage();
 
-		LOG("Receive:\n%s\n", data.c_str());
-
 		HttpResponse response;
-		response.setMessage(data.c_str(), data.size());
+		response.setExtMessage(data.c_str());
 		this->doBroadCast(&response);
 	}
 };
 
 int main(int argc, char** argv)
 {
-	WebApplication* web = new WebApplication(WEB_IP, WEB_PORT, 10000);
+	HttpApplication* web = new HttpApplication(WEB_IP, WEB_PORT, 10000);
 	web->init();
 
 	new HttpActivityTest();

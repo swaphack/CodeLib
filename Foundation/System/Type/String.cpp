@@ -16,7 +16,7 @@ String::String()
 :_value(nullptr)
 , _size(0)
 {
-
+	*this = "";
 }
 
 String::String(const String& value)
@@ -85,6 +85,30 @@ String& String::operator=(const char* value)
 	return *this;
 }
 
+String String::operator+(const String& value)
+{
+	String temp = *this;
+	temp.concat(value.getString());
+
+	return temp;
+}
+
+String String::operator+(const std::string& value)
+{
+	String temp = *this;
+	temp.concat(value.c_str());
+
+	return temp;
+}
+
+String String::operator+(const char* value)
+{
+	String temp = *this;
+	temp.concat(value);
+
+	return temp;
+}
+
 String& String::concat(const char* value)
 {
 	if (value == nullptr)
@@ -101,6 +125,10 @@ String& String::concat(const char* value)
 	_value = temp;
 
 	int offset = _size - 1;
+	if (offset < 0)
+	{
+		offset = 0;
+	}
 	for (int i = 0; i < count; i++)
 	{
 		*(_value + offset + i) = *(value + i);
@@ -134,6 +162,10 @@ String& String::concat(const char* value1, const char* value2)
 	_value = temp;
 
 	int offset = _size - 1;
+	if (offset < 0)
+	{
+		offset = 0;
+	}
 	for (int i = 0; i < count1; i++)
 	{
 		*(_value + offset + i) = *(value1 + i);
@@ -179,6 +211,10 @@ String& String::concat(const char* value1, const char* value2, const char* value
 	_value = temp;
 
 	int offset = _size - 1;
+	if (offset < 0)
+	{
+		offset = 0;
+	}
 	for (int i = 0; i < count1; i++)
 	{
 		*(_value + offset + i) = *(value1 + i);

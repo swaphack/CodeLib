@@ -48,16 +48,14 @@ namespace web
 		static const char* HTTP_REQUEST_METHOD/* = "METHOD"*/;
 		// 请求参数
 		static const char* HTTP_REQUEST_PARAM/* = "PARAM"*/;
-		// 请求参数
+		// http 版本
 		static const char* HTTP_REQUEST_VERSION/* = "VERSION"*/;
 	public:
 		HttpRequest();
-		~HttpRequest();
+		virtual ~HttpRequest();
 	public:
-		// 设置来源
-		void setSrcID(int id);
-		// 获取来源
-		int getSrcID();
+		// 设置消息
+		virtual void setMessage(const char* msg, int size);
 		// 请求行参数
 		const char* getLineParam(const char* key);
 		// 报头参数
@@ -66,19 +64,17 @@ namespace web
 		const char* getExtMessage();
 	protected:
 		// 解析消息
-		virtual void parseMessage();
+		void parseMessage();
 	private:
 		// 解析请求行
-		virtual void parseLine(const char* line);
+		void parseLine(const char* line);
 		// 解析消息报头
-		virtual void parseHead(const char* key, const char* value);
+		void parseHead(const char* key, const char* value);
 		// 可选的消息体
-		virtual void parseMessage(const char* msg);
+		void parseMessage(const char* msg);
 		// 重置
 		void reset();
 	private:
-		// 来源
-		int _srcID;
 		// 请求行参数
 		std::map<std::string, std::string> _lineParams;
 		// 报头参数
