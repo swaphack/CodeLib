@@ -2,6 +2,9 @@
 
 #include "system.h"
 
+#include "HttpTime.h"
+#include "HttpConstant.h"
+
 using namespace web;
 
 #define DEFAULT_HTTP_VERSION "HTTP/1.1"
@@ -16,9 +19,9 @@ const char* HttpResponse::HTTP_RESPONSE_DESCRIBE = "DESCRIBE";
 
 HttpResponse::HttpResponse()
 {
-	_lineParams[HTTP_RESPONSE_VERSION] = DEFAULT_HTTP_VERSION;
-	_lineParams[HTTP_RESPONSE_STATUS] = DEFAULT_HTTP_STATUS;
-	_lineParams[HTTP_RESPONSE_DESCRIBE] = DEFAULT_HTTP_DESCRIBE;
+	_responseParams[HTTP_RESPONSE_VERSION] = DEFAULT_HTTP_VERSION;
+	_responseParams[HTTP_RESPONSE_STATUS] = DEFAULT_HTTP_STATUS;
+	_responseParams[HTTP_RESPONSE_DESCRIBE] = DEFAULT_HTTP_DESCRIBE;
 }
 
 HttpResponse::~HttpResponse()
@@ -26,17 +29,17 @@ HttpResponse::~HttpResponse()
 
 }
 
-void HttpResponse::setStatusParam(const char* key, const char* value)
+void HttpResponse::setResponse(const char* key, const char* value)
 {
 	if (key == nullptr)
 	{
 		return;
 	}
 
-	_lineParams[key] = value;
+	_responseParams[key] = value;
 }
 
-void HttpResponse::setHeadParam(const char* key, const char* value)
+void HttpResponse::setHeader(const char* key, const char* value)
 {
 	if (key == nullptr)
 	{
@@ -46,9 +49,34 @@ void HttpResponse::setHeadParam(const char* key, const char* value)
 	_headParams[key] = value;
 }
 
-void HttpResponse::setExtMessage(const char* value)
+void HttpResponse::setDateHeader(const char* key, sys::Time* value)
 {
-	_extMessage = value;
+	sys::String strTime = HttpTime::getRFC882Time(value);
+
+	this->setHeader(key, strTime.getString());
+}
+
+void HttpResponse::setIntegerHeader(const char* key, int value)
+{
+	sys::String strTime;
+	strTime.make("%d", value);
+
+	this->setHeader(key, strTime.getString());
+}
+
+void HttpResponse::setContentType(const char* value)
+{
+	this->setHeader(HttpResponeField::CONTENT_TYPE, value);
+}
+
+void HttpResponse::setContentLength(int value)
+{
+	this->setIntegerHeader(HttpResponeField::CONTENT_LENGTH, value);
+}
+
+void HttpResponse::setBody(const char* value)
+{
+	_body = value;
 }
 
 void HttpResponse::makeMessage()
@@ -58,11 +86,11 @@ void HttpResponse::makeMessage()
 	sys::String line;
 	sys::StringStream ss;
 
-	line.concat(_lineParams[HTTP_RESPONSE_VERSION].c_str());
+	line.concat(_responseParams[HTTP_RESPONSE_VERSION].c_str());
 	line.concat(" ");
-	line.concat(_lineParams[HTTP_RESPONSE_STATUS].c_str());
+	line.concat(_responseParams[HTTP_RESPONSE_STATUS].c_str());
 	line.concat(" ");
-	line.concat(_lineParams[HTTP_RESPONSE_DESCRIBE].c_str());
+	line.concat(_responseParams[HTTP_RESPONSE_DESCRIBE].c_str());
 
 	ss.writeLine(line.getString());
 
@@ -75,10 +103,12 @@ void HttpResponse::makeMessage()
 		line.concat(it->second.c_str());
 
 		ss.writeLine(line.getString());
+
+		it++;
 	}
 
 	ss.writeLine();
-	ss.writeLine(_extMessage.c_str());
+	ss.writeLine(_body.c_str());
 
 	this->setMessage(ss.getData(), ss.getLength());
 }

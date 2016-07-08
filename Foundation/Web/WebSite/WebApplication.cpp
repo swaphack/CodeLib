@@ -53,7 +53,7 @@ void WebApplication::parseData( int id, sys::DataQueue& dataQueue )
 	this->onParseData(id, dataQueue);
 }
 
-void web::WebApplication::onParseData(int id, sys::DataQueue& dataQueue)
+void WebApplication::onParseData(int id, sys::DataQueue& dataQueue)
 {
 
 }

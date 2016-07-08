@@ -2,57 +2,22 @@
 #include <cstdlib>
 #include <cstring>
 #include <cstdarg>
-
-class IA
-{
-public:
-	virtual ~IA()
-	{
-	}
-protected:
-private:
-};
-
-class A : public IA
-{
-public:
-	A()
-	{
-	}
-	virtual ~A()
-	{
-	}
-public:
-	virtual int getNumber() 
-	{ 
-		return 1; 
-	}
-};
-
-class B : public A
-{
-public:
-	B()
-	{
-	}
-	virtual ~B()
-	{
-	}
-protected:  
-	virtual int getNumber() 
-	{ 
-		return 2; 
-	}
-};
+#include <ctime>
 
 int main(int argc, char** argv)
 {
-	A* a = new B();
+	
+	time_t now = 0;
+	struct tm* stm = new struct tm();
 
-	printf("%d", a->A::getNumber());
-	printf("%d", a->getNumber());
+	time(&now);
+	localtime_s(stm, &now);
 
-	delete a;
+	delete stm;
+	
+	char* strTime = ctime(&now);
+
+	printf("%s\n", strTime);
 
 	return 0;
 }

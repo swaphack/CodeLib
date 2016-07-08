@@ -2,21 +2,21 @@
 
 using namespace web;
 
-const char* HttpRequestConstant::HTTP_GET = "GET";
+const char* HttpRequestConstant::HTTP_REQ_GET = "GET";
 
-const char* HttpRequestConstant::HTTP_POST = "POST";
+const char* HttpRequestConstant::HTTP_REQ_POST = "POST";
 
-const char* HttpRequestConstant::HTTP_HEAD = "HEAD";
+const char* HttpRequestConstant::HTTP_REQ_HEAD = "HEAD";
 
-const char* HttpRequestConstant::HTTP_PUT = "PUT";
+const char* HttpRequestConstant::HTTP_REQ_PUT = "PUT";
 
-const char* HttpRequestConstant::HTTP_DELETE = "DELETE";
+const char* HttpRequestConstant::HTTP_REQ_DELETE = "DELETE";
 
-const char* HttpRequestConstant::HTTP_TRACE = "TRACE";
+const char* HttpRequestConstant::HTTP_REQ_TRACE = "TRACE";
 
-const char* HttpRequestConstant::HTTP_CONNECT = "CONNECT";
+const char* HttpRequestConstant::HTTP_REQ_CONNECT = "CONNECT";
 
-const char* HttpRequestConstant::HTTP_OPTIONS = "OPTIONS";
+const char* HttpRequestConstant::HTTP_REQ_OPTIONS = "OPTIONS";
 
 
 //////////////////////////////////////////////////////////////////////////

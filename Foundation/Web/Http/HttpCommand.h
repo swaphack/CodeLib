@@ -3,7 +3,7 @@
 #include <map>
 #include <string>
 
-#include "../Command/Command.h"
+#include "macros.h"
 
 namespace web
 {

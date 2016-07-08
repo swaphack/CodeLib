@@ -14,11 +14,20 @@ class HttpActivityTest : public HttpActivity
 protected:
 	virtual void doGet(HttpRequest* request)
 	{
-		std::string data = request->getMessage();
+		std::string respData = "Hello";
+
+		Time* now = Time::getGM();
 
 		HttpResponse response;
-		response.setExtMessage(data.c_str());
-		this->doBroadCast(&response);
+		response.setContentType("text/html");
+		response.setContentLength(respData.size());
+		response.setDateHeader(HttpResponeField::DATE, now);
+		response.setDateHeader(HttpResponeField::LAST_MODIFIED, now);
+		response.setHeader(HttpResponeField::SERVER, "Windows");
+		response.setHeader(HttpResponeField::CONNECTION, "close");
+		response.setBody(respData.c_str());
+
+		this->doPost(&response);
 	}
 };
 

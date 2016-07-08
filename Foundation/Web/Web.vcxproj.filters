@@ -48,6 +48,9 @@
     <ClCompile Include="WebSite\HttpApplication.cpp">
       <Filter>WebSite</Filter>
     </ClCompile>
+    <ClCompile Include="Http\HttpTime.cpp">
+      <Filter>Http</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Activity\HttpActivity.h">
@@ -101,6 +104,12 @@
     </ClInclude>
     <ClInclude Include="WebSite\HttpApplication.h">
       <Filter>WebSite</Filter>
+    </ClInclude>
+    <ClInclude Include="Http\macros.h">
+      <Filter>Http</Filter>
+    </ClInclude>
+    <ClInclude Include="Http\HttpTime.h">
+      <Filter>Http</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

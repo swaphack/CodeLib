@@ -114,7 +114,7 @@ HttpRequest* HttpApplication::createHttpRequest(int id, sys::DataQueue& dataQueu
 	request->setMessage(data->data, data->size);
 	request->setSessionID(session.getString());
 
-	sys::String cookie = request->getHeadParam(HttpRequestField::COOKIE);
+	sys::String cookie = request->getHeader(HttpRequestField::COOKIE);
 
 	dataQueue.pop();
 	delete data;

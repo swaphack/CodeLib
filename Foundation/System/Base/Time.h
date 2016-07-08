@@ -17,10 +17,14 @@ namespace sys
 		static const int StartYear = 1900;
 		// 实际月份索引
 		static const int IndexOfMonth = 1;
-		// 获取本地当前时间
+		// 获取本地当前时间,不用释放
 		static Time* getNow();
+		// 获取格林时间,不用释放
+		static Time* getGM();
 		// 获取本地当前时间戳
 		static time_t getNowTimeStamp();
+		// 获取本地当前时间戳
+		static time_t getGMTimeStamp();
 		// 获取年份
 		inline int getYear() const { return _tm.tm_year + StartYear; }
 		// 获取该年的第几天
@@ -61,6 +65,9 @@ namespace sys
 	protected:
 		tm _tm;
 	private:
+		// 本地时间
 		static Time* s_now;
+		// 格林时间
+		static Time* s_gm;
 	};
 }

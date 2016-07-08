@@ -2,6 +2,7 @@
 
 #include <string>
 #include "HttpCommand.h"
+#include "system.h"
 
 namespace web
 {
@@ -44,20 +45,28 @@ namespace web
 		HttpResponse();
 		virtual ~HttpResponse();
 	public:
-		// 转态行参数
-		void setStatusParam(const char* key, const char* value);
+		// 状态行参数
+		void setResponse(const char* key, const char* value);
 		// 报头参数
-		void setHeadParam(const char* key, const char* value);
+		void setHeader(const char* key, const char* value);
+		// 时间格式报头参数
+		void setDateHeader(const char* key, sys::Time* value);
+		// 整形格式报头参数
+		void setIntegerHeader(const char* key, int value);
+		// 消息体文本格式
+		void setContentType(const char* value);
+		// 消息体文本长度
+		void setContentLength(int value);
 		// 可选的消息体
-		void setExtMessage(const char* value);
+		void setBody(const char* value);
 		// 生成消息
 		void makeMessage();
 	private:
 		// 请求行参数
-		std::map<std::string, std::string> _lineParams;
+		std::map<std::string, std::string> _responseParams;
 		// 报头参数
 		std::map<std::string, std::string> _headParams;
 		// 可选的消息体
-		std::string _extMessage;
+		std::string _body;
 	};
 }

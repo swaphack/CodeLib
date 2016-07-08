@@ -57,29 +57,29 @@ namespace web
 		// 设置消息
 		virtual void setMessage(const char* msg, int size);
 		// 请求行参数
-		const char* getLineParam(const char* key);
+		const char* getRequest(const char* key);
 		// 报头参数
-		const char* getHeadParam(const char* key);
+		const char* getHeader(const char* key);
 		// 可选的消息体
-		const char* getExtMessage();
+		const char* getBody();
 	protected:
 		// 解析消息
-		void parseMessage();
+		void parseRequest();
 	private:
 		// 解析请求行
-		void parseLine(const char* line);
+		void parseRequest(const char* line);
 		// 解析消息报头
-		void parseHead(const char* key, const char* value);
+		void parseHeader(const char* key, const char* value);
 		// 可选的消息体
-		void parseMessage(const char* msg);
+		void parseBody(const char* msg);
 		// 重置
 		void reset();
 	private:
 		// 请求行参数
-		std::map<std::string, std::string> _lineParams;
+		std::map<std::string, std::string> _requestParams;
 		// 报头参数
 		std::map<std::string, std::string> _headParams;
 		// 可选的消息体
-		std::string _extMessage;
+		std::string _body;
 	};
 }

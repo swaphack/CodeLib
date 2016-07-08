@@ -4,6 +4,7 @@
 using namespace sys;
 
 Time* Time::s_now = nullptr;
+Time* Time::s_gm = nullptr;
 
 Time::Time()
 {
@@ -45,10 +46,38 @@ Time* Time::getNow()
 	return s_now;
 }
 
-time_t sys::Time::getNowTimeStamp()
+Time* Time::getGM()
+{
+	if (s_gm == nullptr)
+	{
+		s_gm = new Time();
+	}
+
+	time_t now = 0;
+	struct tm* stm = new struct tm();
+
+	time(&now);
+	gmtime_s(stm, &now);
+
+	s_gm->setTime(stm);
+
+	delete stm;
+
+	return s_gm;
+}
+
+time_t Time::getNowTimeStamp()
 {
 	time_t now;
 	time(&now);
+
+	return now;
+}
+
+time_t Time::getGMTimeStamp()
+{
+	time_t now;
+	gmtime(&now);
 
 	return now;
 }
@@ -105,7 +134,7 @@ void Time::setTime(time_t tt)
 	localtime_s(&_tm, &tt);
 }
 
-time_t sys::Time::getTimeStamp()
+time_t Time::getTimeStamp()
 {
 	time_t tt = mktime(&_tm);
 	return tt;

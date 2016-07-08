@@ -24,7 +24,6 @@ namespace web
 		void initNet();
 		// 销毁网络
 		void disposeNet();
-
 		// 解析数据
 		void parseData(int id, sys::DataQueue& dataQueue);
 	private:

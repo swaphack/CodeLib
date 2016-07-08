@@ -73,6 +73,7 @@
     <ClCompile Include="Http\HttpConstant.cpp" />
     <ClCompile Include="Http\HttpRequest.cpp" />
     <ClCompile Include="Http\HttpResponse.cpp" />
+    <ClCompile Include="Http\HttpTime.cpp" />
     <ClCompile Include="Resource.cpp" />
     <ClCompile Include="WebSite\HttpApplication.cpp" />
     <ClCompile Include="WebSite\Session.cpp" />
@@ -88,7 +89,9 @@
     <ClInclude Include="Http\HttpConstant.h" />
     <ClInclude Include="Http\HttpRequest.h" />
     <ClInclude Include="Http\HttpResponse.h" />
+    <ClInclude Include="Http\HttpTime.h" />
     <ClInclude Include="Http\import.h" />
+    <ClInclude Include="Http\macros.h" />
     <ClInclude Include="Resource\import.h" />
     <ClInclude Include="Resource\Resource.h" />
     <ClInclude Include="web.h" />
