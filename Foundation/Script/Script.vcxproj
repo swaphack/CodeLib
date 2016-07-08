@@ -44,6 +44,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>../System/</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -64,6 +65,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Loader\import.h" />
+    <ClInclude Include="Loader\ScriptLoader.h" />
+    <ClInclude Include="Loader\ScriptText.h" />
+    <ClInclude Include="Loader\Symbol.h" />
+    <ClInclude Include="Loader\SymbolDefine.h" />
+    <ClInclude Include="Loader\SymbolSystem.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Loader\ScriptLoader.cpp" />
+    <ClCompile Include="Loader\ScriptText.cpp" />
+    <ClCompile Include="Loader\SymbolDefine.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

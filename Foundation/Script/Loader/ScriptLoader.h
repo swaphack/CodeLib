@@ -14,9 +14,5 @@ namespace math
 		bool loadFile(const char* filepath);
 		// ¼ÓÔØ×Ö·û´®
 		bool loadString(const char* value);
-	protected:
-	private:
 	};
-
-#define G_SCRIPTLOADER sys::Instance<ScriptLoader>::getInstance()
 }

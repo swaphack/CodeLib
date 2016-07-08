@@ -12,17 +12,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="math.h" />
-    <ClInclude Include="Script\import.h" />
-    <ClInclude Include="Script\ScriptLoader.h" />
-    <ClInclude Include="Script\ScriptText.h" />
-    <ClInclude Include="Script\Symbol.h" />
-    <ClInclude Include="Script\SymbolDefine.h" />
-    <ClInclude Include="Script\SymbolSystem.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="Script\ScriptLoader.cpp" />
-    <ClCompile Include="Script\ScriptText.cpp" />
-    <ClCompile Include="Script\SymbolDefine.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{E622E82D-76D3-4D8D-9212-094C846070F9}</ProjectGuid>
