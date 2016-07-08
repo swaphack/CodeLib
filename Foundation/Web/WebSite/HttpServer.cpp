@@ -1,29 +1,23 @@
-#include "HttpApplication.h"
+#include "HttpServer.h"
 
 using namespace web;
 
-static HttpApplication* s_pHttpApplication = nullptr;
 
 //////////////////////////////////////////////////////////////////////////
-HttpApplication::HttpApplication(const char* ip, int port, int maxWaitCount /*= WAIT_LISTEN_COUNT*/)
-:WebApplication(ip, port, maxWaitCount)
+HttpServer::HttpServer(sys::Server* server)
 {
+	ASSERT(_server != nullptr);
+	_server = server;
 	_session = new Session();
-
-	s_pHttpApplication = this;
 }
 
-HttpApplication::~HttpApplication()
+HttpServer::~HttpServer()
 {
 	SAFE_DELETE(_session);
+	SAFE_DELETE(_server);
 }
 
-HttpApplication* HttpApplication::getInstance()
-{
-	return s_pHttpApplication;
-}
-
-void HttpApplication::addRecvHandler(sys::Object* target, HTTP_RECV_HANDLER handler)
+void HttpServer::addRecvHandler(sys::Object* target, HTTP_RECV_HANDLER handler)
 {
 	if (target == nullptr || handler == nullptr)
 	{
@@ -37,7 +31,7 @@ void HttpApplication::addRecvHandler(sys::Object* target, HTTP_RECV_HANDLER hand
 	_recvHandlers.push_back(singleHandler);
 }
 
-void HttpApplication::removeRecvHandler(sys::Object* target, HTTP_RECV_HANDLER handler)
+void HttpServer::removeRecvHandler(sys::Object* target, HTTP_RECV_HANDLER handler)
 {
 	if (target == nullptr || handler == nullptr)
 	{
@@ -56,7 +50,7 @@ void HttpApplication::removeRecvHandler(sys::Object* target, HTTP_RECV_HANDLER h
 	}
 }
 
-void HttpApplication::postResponse(HttpResponse* response)
+void HttpServer::postResponse(HttpResponse* response)
 {
 	sys::NetData* data = this->createResponseData(response);
 	if (data == nullptr)
@@ -73,7 +67,7 @@ void HttpApplication::postResponse(HttpResponse* response)
 	_server->sendMessage(client->clientID, data);
 }
 
-void HttpApplication::postBroadcast(HttpResponse* response)
+void HttpServer::postBroadcast(HttpResponse* response)
 {
 	sys::NetData* data = this->createResponseData(response);
 	if (data == nullptr)
@@ -84,12 +78,36 @@ void HttpApplication::postBroadcast(HttpResponse* response)
 	_server->sendBroadcast(data);
 }
 
-Session* HttpApplication::getSession()
+void HttpServer::update()
+{
+	_server->update();
+}
+
+void HttpServer::onParseData(int id, sys::DataQueue& dataQueue)
+{
+	HttpRequest* request = this->createHttpRequest(id, dataQueue);
+	if (request == nullptr || request->empty())
+	{
+		return;
+	}
+
+	HttpClient client;
+	client.sessionID = request->getSessionID();
+	client.clientID = id;
+
+	this->getSession()->addHttpClient(client.sessionID.c_str(), client);
+
+	this->onRecvHander(request);
+
+	delete request;
+}
+
+Session* HttpServer::getSession()
 {
 	return _session;
 }
 
-void HttpApplication::onRecvHander(HttpRequest* data)
+void HttpServer::onRecvHander(HttpRequest* data)
 {
 	std::vector<HttpRecvHandler>::iterator it = _recvHandlers.begin();
 	while (it != _recvHandlers.end())
@@ -99,7 +117,7 @@ void HttpApplication::onRecvHander(HttpRequest* data)
 	}
 }
 
-HttpRequest* HttpApplication::createHttpRequest(int id, sys::DataQueue& dataQueue)
+HttpRequest* HttpServer::createHttpRequest(int id, sys::DataQueue& dataQueue)
 {
 	sys::NetData* data = dataQueue.top();
 	if (data == nullptr)
@@ -122,7 +140,7 @@ HttpRequest* HttpApplication::createHttpRequest(int id, sys::DataQueue& dataQueu
 	return request;
 }
 
-sys::NetData* HttpApplication::createResponseData(HttpResponse* response)
+sys::NetData* HttpServer::createResponseData(HttpResponse* response)
 {
 	if (response == nullptr)
 	{
@@ -130,23 +148,4 @@ sys::NetData* HttpApplication::createResponseData(HttpResponse* response)
 	}
 
 	return new sys::NetData(response->getMessage(), response->size());
-}
-
-void HttpApplication::onParseData(int id, sys::DataQueue& dataQueue)
-{
-	HttpRequest* request = this->createHttpRequest(id, dataQueue);
-	if (request == nullptr || request->empty())
-	{
-		return;
-	}
-
-	HttpClient client;
-	client.sessionID = request->getSessionID();
-	client.clientID = id;
-
-	this->getSession()->addHttpClient(client.sessionID.c_str(), client);
-
-	this->onRecvHander(request);
-
-	delete request;
 }

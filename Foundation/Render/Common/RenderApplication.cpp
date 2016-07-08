@@ -92,10 +92,8 @@ float RenderApplication::getRefreshInterval()
 
 void RenderApplication::initFilePath()
 {
-	char filepath[255] = { 0 };
-	getcwd(filepath, 255);
-
-	std::string path = filepath;
+	std::string path;
+	sys::Directory::getCurrentDirectory(path);
 	std::vector<std::string> allPaths = G_FILEPATH->getSearchPath();
 	allPaths.push_back(path);
 	G_FILEPATH->setSearchPath(allPaths);

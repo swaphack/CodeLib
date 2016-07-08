@@ -2,24 +2,51 @@
 
 using namespace web;
 
+static WebApplication* s_pWebApplication = nullptr;
+//////////////////////////////////////////////////////////////////////////
 WebApplication::WebApplication( const char* ip, int port, int maxWaitCount )
 :_ip(ip)
 ,_port(port)
 ,_maxWaitCount(maxWaitCount)
 ,_server(nullptr)
 {
+	s_pWebApplication = this;
+
 	sys::Socket::InitSockModule();
+
+	this->init();
 }
 
 WebApplication::~WebApplication()
 {
+	this->disponse();
 
 	sys::Socket::ReleaseSockModule();
 }
 
+WebApplication* WebApplication::getInstance()
+{
+	return s_pWebApplication;
+}
+
+HttpServer* WebApplication::getServer()
+{
+	return _server;
+}
+
+Resource* WebApplication::getResource()
+{
+	return _resource;
+}
+
 void WebApplication::init()
 {
-	this->initNet();
+	sys::Server* server = new sys::Server(_ip.c_str(), _port, _maxWaitCount);
+	server->setRecvHandler(this, static_cast<sys::SERVER_RECV_HANDLER>(&WebApplication::parseData));
+
+	_server = new HttpServer(server);
+
+	_resource = new Resource();
 }
 
 void WebApplication::update()
@@ -34,26 +61,11 @@ void WebApplication::update()
 
 void WebApplication::dispose()
 {
-	this->disposeNet();
-}
-
-void WebApplication::initNet()
-{
-	_server = new sys::Server(_ip.c_str(), _port, _maxWaitCount);
-	_server->setRecvHandler(this, static_cast<sys::SERVER_RECV_HANDLER>(&WebApplication::parseData));
-}
-
-void WebApplication::disposeNet()
-{
 	SAFE_DELETE(_server);
+	SAFE_DELETE(_resource);
 }
 
 void WebApplication::parseData( int id, sys::DataQueue& dataQueue )
 {
-	this->onParseData(id, dataQueue);
-}
-
-void WebApplication::onParseData(int id, sys::DataQueue& dataQueue)
-{
-
+	_server->onParseData(id, dataQueue);
 }

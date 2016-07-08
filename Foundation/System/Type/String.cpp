@@ -307,7 +307,7 @@ bool String::compare(int offset, const char* value, int count)
 {
 	for (int i = 0; i < count; i++)
 	{
-		if (*(_value + offset + i) != *(value))
+		if (*(_value + offset + i) != *(value + i))
 		{
 			return false;
 		}

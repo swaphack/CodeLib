@@ -5,6 +5,10 @@
 #include "HttpTime.h"
 #include "HttpConstant.h"
 
+#include "../WebSite/WebApplication.h"
+
+#define G_RESOURCE WebApplication::getInstance()->getResource()
+
 using namespace web;
 
 #define DEFAULT_HTTP_VERSION "HTTP/1.1"
@@ -51,7 +55,7 @@ void HttpResponse::setHeader(const char* key, const char* value)
 
 void HttpResponse::setDateHeader(const char* key, sys::Time* value)
 {
-	sys::String strTime = HttpTime::getRFC882Time(value);
+	sys::String strTime = HttpTime::getRFC822Time(value);
 
 	this->setHeader(key, strTime.getString());
 }
@@ -77,6 +81,27 @@ void HttpResponse::setContentLength(int value)
 void HttpResponse::setBody(const char* value)
 {
 	_body = value;
+}
+
+void HttpResponse::writeString(const char* value)
+{
+	if (value == nullptr)
+	{
+		return;
+	}
+
+	this->setBody(value);
+
+	this->setContentLength(strlen(value));
+}
+
+void HttpResponse::writeFile(const char* filename)
+{
+	std::string data = G_RESOURCE->loadFile(filename);
+
+	this->setBody(data.c_str());
+
+	this->setContentLength(data.size());
 }
 
 void HttpResponse::makeMessage()

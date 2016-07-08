@@ -10,7 +10,7 @@ const char*HttpTime::TIME_MONTH[12] = { "Jan", "Feb", "Mar", "Apr", "May", "Jun"
 
 //////////////////////////////////////////////////////////////////////////
 /* Sun, 06 Nov 1994 08:49:37 GMT */
-sys::String HttpTime::getRFC882Time(sys::Time* time)
+sys::String HttpTime::getRFC822Time(sys::Time* time)
 {
 	sys::String strTime;
 	if (time == nullptr)

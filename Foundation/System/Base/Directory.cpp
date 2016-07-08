@@ -90,11 +90,12 @@ int Directory::renameDirectory(const char* oldDirname, const char* newDirname)
 	return rename(oldDirname, newDirname);
 }
 
-const char* Directory::getCurrentDirectory()
+void Directory::getCurrentDirectory(std::string& dir)
 {
 	char dirname[FILENAME_MAX];
 	getcwd(dirname, FILENAME_MAX);
-	return dirname;
+
+	dir = dirname;
 }
 
 int Directory::setCurrentDirectory(const char* name)

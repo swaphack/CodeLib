@@ -21,9 +21,6 @@
     <ClCompile Include="Activity\HttpActivity.cpp">
       <Filter>Activity</Filter>
     </ClCompile>
-    <ClCompile Include="Resource.cpp">
-      <Filter>Resource</Filter>
-    </ClCompile>
     <ClCompile Include="Command\Command.cpp">
       <Filter>Command</Filter>
     </ClCompile>
@@ -45,11 +42,14 @@
     <ClCompile Include="WebSite\Session.cpp">
       <Filter>WebSite</Filter>
     </ClCompile>
-    <ClCompile Include="WebSite\HttpApplication.cpp">
-      <Filter>WebSite</Filter>
-    </ClCompile>
     <ClCompile Include="Http\HttpTime.cpp">
       <Filter>Http</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource\Resource.cpp">
+      <Filter>Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="WebSite\HttpServer.cpp">
+      <Filter>WebSite</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -102,14 +102,14 @@
     <ClInclude Include="WebSite\import.h">
       <Filter>WebSite</Filter>
     </ClInclude>
-    <ClInclude Include="WebSite\HttpApplication.h">
-      <Filter>WebSite</Filter>
-    </ClInclude>
     <ClInclude Include="Http\macros.h">
       <Filter>Http</Filter>
     </ClInclude>
     <ClInclude Include="Http\HttpTime.h">
       <Filter>Http</Filter>
+    </ClInclude>
+    <ClInclude Include="WebSite\HttpServer.h">
+      <Filter>WebSite</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

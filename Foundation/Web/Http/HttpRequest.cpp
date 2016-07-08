@@ -1,5 +1,6 @@
 #include "HttpRequest.h"
 #include "system.h"
+#include "HttpConstant.h"
 
 using namespace web;
 
@@ -76,7 +77,22 @@ void HttpRequest::parseRequest()
 		line = ss->readLine();
 		if (index == 0)	// 请求行
 		{
-			this->parseRequest(line.getString());
+			if (line.startWith(HttpRequestConstant::HTTP_REQ_GET)
+				|| line.startWith(HttpRequestConstant::HTTP_REQ_POST)
+				|| line.startWith(HttpRequestConstant::HTTP_REQ_HEAD)
+				|| line.startWith(HttpRequestConstant::HTTP_REQ_PUT)
+				|| line.startWith(HttpRequestConstant::HTTP_REQ_DELETE)
+				|| line.startWith(HttpRequestConstant::HTTP_REQ_TRACE)
+				|| line.startWith(HttpRequestConstant::HTTP_REQ_CONNECT)
+				|| line.startWith(HttpRequestConstant::HTTP_REQ_OPTIONS)
+				)
+			{
+				this->parseRequest(line.getString());
+			}
+			else
+			{
+				index++;
+			}
 		}
 		else if (index == -1) // 可选的消息体
 		{
@@ -113,6 +129,11 @@ void HttpRequest::parseRequest(const char* line)
 
 	method.split(' ', dest);
 
+	// 验证是否是标准请求  
+	if (dest.size() != 3)
+	{
+		return;
+	}
 	_requestParams[HTTP_REQUEST_METHOD] = dest[0].getString();
 	_requestParams[HTTP_REQUEST_PARAM] = dest[1].getString();
 	_requestParams[HTTP_REQUEST_VERSION] = dest[2].getString();

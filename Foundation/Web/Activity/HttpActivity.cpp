@@ -1,8 +1,10 @@
 #include "HttpActivity.h"
 #include "HttpRecvHandler.h"
-#include "../WebSite/HttpApplication.h"
+#include "../WebSite/WebApplication.h"
 
 using namespace web;
+
+#define G_HTTPAPPLICATION WebApplication::getInstance()->getServer()
 
 
 HttpActivity::HttpActivity()

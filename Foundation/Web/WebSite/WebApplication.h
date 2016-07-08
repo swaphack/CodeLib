@@ -1,7 +1,7 @@
 #pragma once
 
 #include "system.h"
-
+#include "HttpServer.h"
 
 #include <map>
 
@@ -16,19 +16,19 @@ namespace web
 		WebApplication(const char* ip, int port, int maxWaitCount = WAIT_LISTEN_COUNT);
 		virtual ~WebApplication();
 	public:
+		// 获取应用实例
+		static WebApplication* getInstance();
+		// 获取服务器
+		HttpServer* getServer();
+		// 获取资源
+		Resource* getResource();
+	public:
 		virtual void init();
 		virtual void update();
 		virtual void dispose(); 
 	protected:
-		// 初始化网络
-		void initNet();
-		// 销毁网络
-		void disposeNet();
 		// 解析数据
 		void parseData(int id, sys::DataQueue& dataQueue);
-	private:
-		// 解析数据
-		virtual	void onParseData(int id, sys::DataQueue& dataQueue);
 	protected:
 		// 端口
 		int _port;
@@ -37,6 +37,8 @@ namespace web
 		// 最大等待数
 		int _maxWaitCount;
 		// 服务器
-		sys::Server* _server;
+		HttpServer* _server;
+		// 资源管理
+		Resource* _resource;
 	};
 }

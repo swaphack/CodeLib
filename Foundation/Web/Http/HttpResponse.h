@@ -31,6 +31,17 @@ namespace web
 	2、响应报头后述
 
 	3、响应正文就是服务器返回的资源的内容
+
+	Sample:
+	std::string respData = "Hello";
+	HttpResponse response;
+	response.setContentType("text/html");
+	response.setDateHeader(HttpResponeField::DATE, now);
+	response.setDateHeader(HttpResponeField::LAST_MODIFIED, now);
+	response.setHeader(HttpResponeField::SERVER, "Windows");
+	response.setHeader(HttpResponeField::CONNECTION, "close");
+	response.setContentLength(respData.size());
+	response.setBody(respData.c_str());
 	*/
 	class HttpResponse : public HttpCommand
 	{
@@ -59,6 +70,10 @@ namespace web
 		void setContentLength(int value);
 		// 可选的消息体
 		void setBody(const char* value);
+		// 写入字符串
+		void writeString(const char* value);
+		// 写入文件
+		void writeFile(const char* filename);
 		// 生成消息
 		void makeMessage();
 	private:

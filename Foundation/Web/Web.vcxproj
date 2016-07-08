@@ -74,8 +74,8 @@
     <ClCompile Include="Http\HttpRequest.cpp" />
     <ClCompile Include="Http\HttpResponse.cpp" />
     <ClCompile Include="Http\HttpTime.cpp" />
-    <ClCompile Include="Resource.cpp" />
-    <ClCompile Include="WebSite\HttpApplication.cpp" />
+    <ClCompile Include="Resource\Resource.cpp" />
+    <ClCompile Include="WebSite\HttpServer.cpp" />
     <ClCompile Include="WebSite\Session.cpp" />
     <ClCompile Include="WebSite\WebApplication.cpp" />
   </ItemGroup>
@@ -95,7 +95,7 @@
     <ClInclude Include="Resource\import.h" />
     <ClInclude Include="Resource\Resource.h" />
     <ClInclude Include="web.h" />
-    <ClInclude Include="WebSite\HttpApplication.h" />
+    <ClInclude Include="WebSite\HttpServer.h" />
     <ClInclude Include="WebSite\import.h" />
     <ClInclude Include="WebSite\macros.h" />
     <ClInclude Include="WebSite\Session.h" />

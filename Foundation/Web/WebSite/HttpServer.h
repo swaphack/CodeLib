@@ -2,19 +2,16 @@
 
 #include "macros.h"
 #include "Session.h"
-#include "WebApplication.h"
 
 namespace web
 {
 	// http应用服务器
-	class HttpApplication : public WebApplication
+	class HttpServer
 	{
 	public:
-		HttpApplication(const char* ip, int port, int maxWaitCount = WAIT_LISTEN_COUNT);
-		virtual ~HttpApplication();
+		HttpServer(sys::Server* server);
+		virtual ~HttpServer();
 	public:
-		// 获取http实例
-		static HttpApplication* getInstance();
 		// 添加接受数据处理
 		void addRecvHandler(sys::Object* target, HTTP_RECV_HANDLER handler);
 		// 移除接受数据处理
@@ -23,6 +20,10 @@ namespace web
 		void postResponse(HttpResponse* response);
 		// 广播
 		void postBroadcast(HttpResponse* response);
+		// 更新
+		void update();
+		// 解析数据
+		void onParseData(int id, sys::DataQueue& dataQueue);
 	protected:
 		// 客户端信息
 		Session* getSession();
@@ -33,14 +34,12 @@ namespace web
 		HttpRequest* createHttpRequest(int id, sys::DataQueue& dataQueue);
 		// 将http反馈转成网络数据
 		sys::NetData* createResponseData(HttpResponse* response);
-		// 解析数据
-		virtual void onParseData(int id, sys::DataQueue& dataQueue);
 	private:
+		// 服务器
+		sys::Server* _server;
 		// 客户端信息
 		Session* _session;
 		// http接受处理
 		std::vector<HttpRecvHandler> _recvHandlers;
 	};
-
-	#define G_HTTPAPPLICATION HttpApplication::getInstance()
 }

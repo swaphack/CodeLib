@@ -1,20 +1,24 @@
 #pragma once
 
-#include "system.h"
-#include "text.h"
+#include <string>
 
 namespace web
 {
+	// 站点资源管理
 	class Resource
 	{
 	public:
+		Resource();
+		~Resource();
+	public:
+		// 设置资源路径
+		void setResourcePath(const char* resPath);
+		// 获取资源路径
+		const char* getResourcePath();
 		// 加载文件
-		const char* loadFile(const char* filename, ulong& size);
-		// 加载xml文件
-		tinyxml2::XMLDocument* loadXMLFile(const char* filename);
-		// 加载json文件
-		Json::Reader* loadJsonFile(const char* filename);
-	protected:
+		std::string loadFile(const char* filename);
 	private:
+		// 资源位置
+		std::string _resPath;
 	};
 }

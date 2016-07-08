@@ -14,28 +14,43 @@ class HttpActivityTest : public HttpActivity
 protected:
 	virtual void doGet(HttpRequest* request)
 	{
-		std::string respData = "Hello";
-
-		Time* now = Time::getGM();
-
 		HttpResponse response;
-		response.setContentType("text/html");
-		response.setContentLength(respData.size());
-		response.setDateHeader(HttpResponeField::DATE, now);
-		response.setDateHeader(HttpResponeField::LAST_MODIFIED, now);
-		response.setHeader(HttpResponeField::SERVER, "Windows");
-		response.setHeader(HttpResponeField::CONNECTION, "close");
-		response.setBody(respData.c_str());
+		response.setContentType(request->getHeader(HttpRequestField::ACCEPT));
 
+		std::string url;
+		sys::String method = request->getRequest(HttpRequest::HTTP_REQUEST_METHOD);
+		sys::String params = request->getRequest(HttpRequest::HTTP_REQUEST_PARAM);
+		sys::String body = request->getBody();
+
+		if (method.compare(HttpRequestConstant::HTTP_REQ_GET)) 
+		{// get
+			if (params.compare("/"))
+			{
+				url = "/index.html";
+			}
+			else
+			{
+				url = params.getString();
+			}
+		}
+		else if (method.compare(HttpRequestConstant::HTTP_REQ_POST))
+		{// post
+
+		}
+		
+		response.writeFile(url.c_str());
 		this->doPost(&response);
 	}
 };
 
 int main(int argc, char** argv)
 {
-	HttpApplication* web = new HttpApplication(WEB_IP, WEB_PORT, 10000);
-	web->init();
+	std::string websit;
+	sys::Directory::getCurrentDirectory(websit);
+	websit = websit + "/WebSite";
 
+	WebApplication* web = new WebApplication(WEB_IP, WEB_PORT, 10000);
+	web->getResource()->setResourcePath(websit.c_str());
 	new HttpActivityTest();
 
 	while (true)

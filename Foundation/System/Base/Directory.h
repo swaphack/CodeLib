@@ -23,7 +23,7 @@ namespace sys
 		static int renameDirectory(const char* oldDirname, const char* newDirname);
 
 		// 获取当前目录
-		static const char* getCurrentDirectory();
+		static void getCurrentDirectory(std::string& dir);
 		// 设置当前目录
 		static int setCurrentDirectory(const char* name);
 	protected:
