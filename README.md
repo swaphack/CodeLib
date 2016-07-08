@@ -1,5 +1,5 @@
 # CodeLib
-code library, for upgrade and devolpment
+code library, for upgrade and development
 
 System:Net,Base Type, Stream,Framework
 Render:opengl application
