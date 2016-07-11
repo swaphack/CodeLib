@@ -45,7 +45,7 @@ void HttpResponse::setResponse(const char* key, const char* value)
 
 void HttpResponse::setHeader(const char* key, const char* value)
 {
-	if (key == nullptr)
+	if (key == nullptr || value == nullptr)
 	{
 		return;
 	}
@@ -62,10 +62,7 @@ void HttpResponse::setDateHeader(const char* key, sys::Time* value)
 
 void HttpResponse::setIntegerHeader(const char* key, int value)
 {
-	sys::String strTime;
-	strTime.make("%d", value);
-
-	this->setHeader(key, strTime.getString());
+	this->setHeader(key, getCString("%d", value));
 }
 
 void HttpResponse::setContentType(const char* value)
@@ -78,9 +75,9 @@ void HttpResponse::setContentLength(int value)
 	this->setIntegerHeader(HttpResponeField::CONTENT_LENGTH, value);
 }
 
-void HttpResponse::setBody(const char* value)
+void HttpResponse::setBody(const char* value, int size)
 {
-	_body = value;
+	_body = std::string(value, size);
 }
 
 void HttpResponse::writeString(const char* value)
@@ -90,7 +87,7 @@ void HttpResponse::writeString(const char* value)
 		return;
 	}
 
-	this->setBody(value);
+	this->setBody(value, strlen(value));
 
 	this->setContentLength(strlen(value));
 }
@@ -99,7 +96,7 @@ void HttpResponse::writeFile(const char* filename)
 {
 	std::string data = G_RESOURCE->loadFile(filename);
 
-	this->setBody(data.c_str());
+	this->setBody(data.c_str(), data.size());
 
 	this->setContentLength(data.size());
 }
@@ -117,7 +114,7 @@ void HttpResponse::makeMessage()
 	line.concat(" ");
 	line.concat(_responseParams[HTTP_RESPONSE_DESCRIBE].c_str());
 
-	ss.writeLine(line.getString());
+	ss.writeLine(line.getString(), line.getSize());
 
 	std::map<std::string, std::string>::const_iterator it = _headParams.begin();
 	while (it != _headParams.end())
@@ -127,13 +124,13 @@ void HttpResponse::makeMessage()
 		line.concat(": ");
 		line.concat(it->second.c_str());
 
-		ss.writeLine(line.getString());
+		ss.writeLine(line.getString(), line.getSize());
 
 		it++;
 	}
 
 	ss.writeLine();
-	ss.writeLine(_body.c_str());
+	ss.writeString(_body.c_str(), _body.size());
 
 	this->setMessage(ss.getData(), ss.getLength());
 }

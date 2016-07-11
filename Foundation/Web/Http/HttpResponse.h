@@ -69,7 +69,7 @@ namespace web
 		// 消息体文本长度
 		void setContentLength(int value);
 		// 可选的消息体
-		void setBody(const char* value);
+		void setBody(const char* value, int size);
 		// 写入字符串
 		void writeString(const char* value);
 		// 写入文件

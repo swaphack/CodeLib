@@ -22,8 +22,6 @@ StringStream::~StringStream()
 
 std::string StringStream::readLine()
 {
-	
-
 	int ext = 0;
 #if PLATFORM_TARGET == EPT_WINDOWS
 	ext = 2;
@@ -56,13 +54,34 @@ std::string StringStream::readLine()
 	return std::string(cursor, size - ext);
 }
 
-void StringStream::writeLine(const char* line)
+void StringStream::writeString(const char* line, int size)
 {
 	if (line == nullptr)
 	{
 		return;
 	}
-	
+
+	int newCursor = size + this->getCursor();
+	if (newCursor + 1 > this->getCapacity())
+	{
+		char* newData = StreamHelper::mallocStream(newCursor + 1, (char*)this->getData(), this->getCapacity());
+		this->setData(newData, newCursor + 1);
+	}
+
+	char* ptr = getPtr();
+	memcpy(ptr, line, size);
+
+	this->setCursor(newCursor);
+}
+
+void StringStream::writeLine(const char* line, int size)
+{
+	this->writeString(line, size);
+	this->writeLine();
+}
+
+void StringStream::writeLine()
+{
 	int ext = 0;
 #if PLATFORM_TARGET == EPT_WINDOWS
 	ext = 2;
@@ -71,33 +90,24 @@ void StringStream::writeLine(const char* line)
 #elif PLATFORM_TARGET == EPT_LINUX
 	ext = 1;
 #endif
-
-	std::size_t size = strlen(line);
-	int newCursor = size + ext + this->getCursor();
+	int newCursor = ext + this->getCursor();
 	if (newCursor + 1 > this->getCapacity())
 	{
 		char* newData = StreamHelper::mallocStream(newCursor + 1, (char*)this->getData(), this->getCapacity());
 		this->setData(newData, newCursor + 1);
 	}
-	
+
 	char* ptr = getPtr();
-	memcpy(ptr, line, size);
 #if PLATFORM_TARGET == EPT_WINDOWS
-	*(ptr + size) = '\r';
-	*(ptr + size + 1) = '\n';
+	*(ptr) = '\r';
+	*(ptr + 1) = '\n';
 #elif PLATFORM_TARGET == EPT_MAC
-	*(ptr + size) = '\r';
+	*(ptr) = '\r';
 #elif PLATFORM_TARGET == EPT_LINUX
-	*(ptr + size) = '\n';
+	*(ptr) = '\n';
 #endif
 
-
 	this->setCursor(newCursor);
-}
-
-void StringStream::writeLine()
-{
-	this->writeLine("");
 }
 
 bool StringStream::readEnd()

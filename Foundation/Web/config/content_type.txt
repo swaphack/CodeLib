@@ -1,4 +1,4 @@
-.*（ 二进制流，不知道下载文件类型）	application/octet-stream	
+﻿.*（ 二进制流，不知道下载文件类型）	application/octet-stream	
 .tif	image/tiff
 .001	application/x-001	
 .301	application/x-301
@@ -7,7 +7,7 @@
 .907	drawing/907	
 .a11	application/x-a11
 .acp	audio/x-mei-aac	
-.ai		application/postscript
+.ai	application/postscript
 .aif	audio/aiff	
 .aifc	audio/aiff
 .aiff	audio/aiff	
@@ -185,7 +185,7 @@
 .pgl	application/x-pgl	
 .pic	application/x-pic
 .pko	application/vnd.ms-pki.pko	
-.pl		application/x-perl
+.pl	application/x-perl
 .plg	text/html	
 .pls	audio/scpls
 .plt	application/x-plt	
@@ -197,16 +197,16 @@
 .pps	application/vnd.ms-powerpoint	
 .ppt	application/vnd.ms-powerpoint
 .ppt	application/x-ppt	
-.pr		application/x-pr
+.pr	application/x-pr
 .prf	application/pics-rules	
 .prn	application/x-prn
 .prt	application/x-prt	
-.ps		application/x-ps
-.ps		application/postscript	
+.ps	application/x-ps
+.ps	application/postscript	
 .ptn	application/x-ptn
 .pwz	application/vnd.ms-powerpoint	
 .r3t	text/vnd.rn-realtext3d
-.ra		audio/vnd.rn-realaudio	
+.ra	audio/vnd.rn-realaudio	
 .ram	audio/x-pn-realaudio
 .ras	application/x-ras	
 .rat	application/rat-file
@@ -218,7 +218,7 @@
 .rjt	application/vnd.rn-realsystem-rjt
 .rlc	application/x-rlc	
 .rle	application/x-rle
-.rm		application/vnd.rn-realmedia	
+.rm	application/vnd.rn-realmedia	
 .rmf	application/vnd.adobe.rmf
 .rmi	audio/mid	
 .rmj	application/vnd.rn-realsystem-rmj
@@ -228,10 +228,10 @@
 .rmvb	application/vnd.rn-realmedia-vbr
 .rmx	application/vnd.rn-realsystem-rmx	
 .rnx	application/vnd.rn-realplayer
-.rp		image/vnd.rn-realpix	
+.rp	image/vnd.rn-realpix	
 .rpm	audio/x-pn-realaudio-plugin
 .rsml	application/vnd.rn-rsml	
-.rt		text/vnd.rn-realtext
+.rt	text/vnd.rn-realtext
 .rtf	application/msword	
 .rtf	application/x-rtf
 .rv	video/vnd.rn-realvideo	
@@ -297,7 +297,7 @@
 .wk4	application/x-wk4	
 .wkq	application/x-wkq
 .wks	application/x-wks	
-.wm		video/x-ms-wm
+.wm	video/x-ms-wm
 .wma	audio/x-ms-wma	
 .wmd	application/x-ms-wmd
 .wmf	application/x-wmf	
@@ -313,7 +313,7 @@
 .wr1	application/x-wr1	
 .wri	application/x-wri
 .wrk	application/x-wrk	
-.ws		application/x-ws
+.ws	application/x-ws
 .ws2	application/x-ws	
 .wsc	text/scriptlet
 .wsdl	text/xml	
@@ -328,7 +328,7 @@
 .xlw	application/x-xlw
 .xml	text/xml	
 .xpl	audio/scpls
-.xq		text/xml	
+.xq	text/xml	
 .xql	text/xml
 .xquery	text/xml	
 .xsd	text/xml

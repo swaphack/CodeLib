@@ -5,3 +5,5 @@
 #include "Solution/import.h"
 #include "Experience/import.h"
 #include "Study/import.h"
+
+#include "AI.h"

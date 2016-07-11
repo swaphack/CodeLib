@@ -10,6 +10,8 @@ WebApplication::WebApplication( const char* ip, int port, int maxWaitCount )
 ,_maxWaitCount(maxWaitCount)
 ,_server(nullptr)
 {
+	ASSERT(s_pWebApplication == nullptr);
+
 	s_pWebApplication = this;
 
 	sys::Socket::InitSockModule();
@@ -22,6 +24,8 @@ WebApplication::~WebApplication()
 	this->disponse();
 
 	sys::Socket::ReleaseSockModule();
+
+	s_pWebApplication = nullptr;
 }
 
 WebApplication* WebApplication::getInstance()

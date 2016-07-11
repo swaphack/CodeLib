@@ -1,13 +1,14 @@
 #pragma once
-#include "../AI/ai.h"
+#include "../macros.h"
 
 namespace idea
 {
+	// 算术逻辑单元
 	class ALU
 	{
 	public:
 		ALU();
-		~ALU();
+		virtual ~ALU();
 	public:
 		template<typename T>
 		T add(T a, T b) { return a + b; }
@@ -25,7 +26,7 @@ namespace idea
 		template<typename T>
 		T not(T a) { return !a; }
 		template<typename T>
-		T xor(T a, T b) { return (!a && b)||(!b && a); }
+		T xor(T a, T b) { return (!a && b) || (!b && a); }
 
 		template<typename T>
 		T LShift(T a, int bit) { return a << bit; }
@@ -43,34 +44,6 @@ namespace idea
 		template<typename T>
 		bool isEqual(T a, T b) { return a == b; }
 
-		ResultNumber* eval(const char* text) const;
-	};
-
-	// 累加器
-	class Accumulator
-	{
-	public:
-		Accumulator() { _value = 0; }
-		~Accumulator() {}
-	public:
-		void reset() { _value = 0; }
-		void add(double value) { _value += value; }
-		double getValue() { return _value; }
-	private:
-		double _value;
-	};
-
-	// 运算
-	class Arithmetical : public IWorker
-	{
-	public:
-		Arithmetical();
-		virtual ~Arithmetical();
-	public:
-		virtual Result* run(Event* e);
-		const ALU* getALU();
-	protected:
-	private:
-		ALU _alu;
+		Result* eval(const char* text) const;
 	};
 }

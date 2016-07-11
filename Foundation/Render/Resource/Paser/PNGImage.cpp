@@ -61,8 +61,8 @@ void PNGImage::load(const char* filename)
 	const char* fullpaht = G_FILEPATH->getFilePath(filename);
 
 	/* Open image file */
-	fp = fopen(filename, "rb");
-	if (!fp)
+	int result = fopen_s(&fp, filename, "rb");
+	if (result != 0)
 	{
 		return;
 	}
@@ -144,6 +144,7 @@ void PNGImage::load(const char* filename)
 	/* We don't need row pointers anymore */
 	free(row_pointers);
 	fclose(fp);
+
 	this->setPixels(texels);
 }
 

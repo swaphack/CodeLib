@@ -1,22 +1,26 @@
 #pragma once
 
-#include "Arithmetical.h"
-#include "Input.h"
-#include "Output.h"
-#include "Memory.h"
-#include "Control.h"
+#include "Arithmetical/import.h"
+#include "IO/import.h"
+#include "Memory/import.h"
+#include "Control/import.h"
 
 namespace idea
 {
+	// 大脑
 	class Brain
 	{
 	public:
 		Brain();
-		~Brain();
+		virtual ~Brain();
 	public:
+		// 输入设备
 		Input* getInput();
+		// 输出设备
 		Output* getOutput();
+		// 运算器
 		Arithmetical* getArithmetical();
+		// 存储
 		Memory* getMemory();
 
 		void update();

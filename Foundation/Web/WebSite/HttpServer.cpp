@@ -124,13 +124,10 @@ HttpRequest* HttpServer::createHttpRequest(int id, sys::DataQueue& dataQueue)
 	{
 		return nullptr;
 	}
-
-	sys::String session;
-	session.make("%d", id);
-
+	
 	HttpRequest* request = new HttpRequest();
 	request->setMessage(data->data, data->size);
-	request->setSessionID(session.getString());
+	request->setSessionID(getCString("%d", id));
 
 	sys::String cookie = request->getHeader(HttpRequestField::COOKIE);
 

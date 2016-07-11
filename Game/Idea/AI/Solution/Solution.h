@@ -4,7 +4,7 @@
 
 namespace idea
 {
-	// 解决
+	// 解决方案
 	class Solution : public IWorker
 	{
 	public:

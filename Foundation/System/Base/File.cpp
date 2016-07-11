@@ -14,14 +14,14 @@ bool File::write(const char* url, const char* data, long size)
 		return false;
 	}
 
-	FILE* fptr = fopen(url, "wb+");
-	if (fptr == nullptr)
+	FILE* fptr = 0;
+	int result = fopen_s(&fptr, url, "wb+");
+	if (result != 0)
 	{
 		return false;
 	}
 
 	fwrite(data, sizeof(char), size, fptr);
-
 	fclose(fptr);
 
 	return true;
@@ -34,8 +34,9 @@ char* File::read( const char* url, long& size )
 		return nullptr;
 	}
 
-	FILE* fptr = fopen(url, "rb");
-	if (fptr == nullptr)
+	FILE* fptr = 0;
+	int result = fopen_s(&fptr, url, "rb");
+	if (result != 0)
 	{
 		return nullptr;
 	}
@@ -62,14 +63,15 @@ bool File::append(const char* url, const char* data, long size)
 		return false;
 	}
 
-	FILE* fptr = fopen(url, "ab");
-	if (fptr == nullptr)
+	FILE* fptr = 0;
+
+	int result = fopen_s(&fptr, url, "ab");
+	if (result != 0)
 	{
 		return false;
 	}
 
 	fwrite(data, sizeof(char), size, fptr);
-
 	fclose(fptr);
 
 	return true;
@@ -82,8 +84,9 @@ bool File::isFileExists(const char* url)
 		return false;
 	}
 
-	FILE* fptr = fopen(url, "rb");
-	if (fptr == nullptr)
+	FILE* fptr = 0;
+	int result = fopen_s(&fptr, url, "rb");
+	if (result != 0)
 	{
 		return false;
 	}

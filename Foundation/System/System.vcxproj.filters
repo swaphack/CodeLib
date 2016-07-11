@@ -354,5 +354,8 @@
     <ClCompile Include="Type\String.cpp">
       <Filter>Type</Filter>
     </ClCompile>
+    <ClCompile Include="Base\macros.cpp">
+      <Filter>Base</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

@@ -19,12 +19,12 @@ namespace idea
 	protected:
 	private:
 		// 分析问题
-		Analysis _analysis;
+		Analysis* _analysis;
 		// 解决问题
-		Solution _solution;
+		Solution* _solution;
 		// 总结经验
-		Experience _experience;
+		Experience* _experience;
 		// 学习知识
-		Study _study;
+		Study* _study;
 	};
 }

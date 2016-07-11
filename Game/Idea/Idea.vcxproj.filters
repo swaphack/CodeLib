@@ -10,41 +10,35 @@
     <Filter Include="AI\Solution">
       <UniqueIdentifier>{5df77005-5427-436f-8007-e32a6bbaddd2}</UniqueIdentifier>
     </Filter>
-    <Filter Include="AI\Base">
-      <UniqueIdentifier>{213963d7-a604-47fd-826b-861fa8597cd2}</UniqueIdentifier>
-    </Filter>
     <Filter Include="AI\Study">
       <UniqueIdentifier>{58d41aee-2e58-4cc2-bd03-2e8762ed0bf3}</UniqueIdentifier>
     </Filter>
     <Filter Include="AI\Experience">
       <UniqueIdentifier>{c1922982-cf80-435d-9ecb-debf3c852555}</UniqueIdentifier>
     </Filter>
-    <Filter Include="AI\Method">
-      <UniqueIdentifier>{0bee10ee-ab68-40ec-9057-260109a38fdc}</UniqueIdentifier>
-    </Filter>
     <Filter Include="AI\Analysis">
       <UniqueIdentifier>{c549f872-f1a2-4828-8115-b9930d78d08d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Brain\IO">
+      <UniqueIdentifier>{c164412f-2b88-40ca-9969-8a5b3592add7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Brain\Memory">
+      <UniqueIdentifier>{9374b9d4-8f1f-496f-a1bd-69cfdc54aa97}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Brain\Control">
+      <UniqueIdentifier>{a7ca58ad-1d2f-40f2-a2b4-5e89358e60f8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Brain\Arithmetical">
+      <UniqueIdentifier>{2c91d498-f429-470a-99bd-7fb9498c3842}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Base">
+      <UniqueIdentifier>{213963d7-a604-47fd-826b-861fa8597cd2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Method">
+      <UniqueIdentifier>{ccfda238-04f2-4792-b307-4f80cba7a33b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Brain\Memory.h">
-      <Filter>Brain</Filter>
-    </ClInclude>
-    <ClInclude Include="Brain\Input.h">
-      <Filter>Brain</Filter>
-    </ClInclude>
-    <ClInclude Include="Brain\Output.h">
-      <Filter>Brain</Filter>
-    </ClInclude>
-    <ClInclude Include="Brain\Control.h">
-      <Filter>Brain</Filter>
-    </ClInclude>
-    <ClInclude Include="Brain\Arithmetical.h">
-      <Filter>Brain</Filter>
-    </ClInclude>
-    <ClInclude Include="Brain\Cell.h">
-      <Filter>Brain</Filter>
-    </ClInclude>
     <ClInclude Include="AI\Solution\import.h">
       <Filter>AI\Solution</Filter>
     </ClInclude>
@@ -53,18 +47,6 @@
     </ClInclude>
     <ClInclude Include="AI\Solution\Solution.h">
       <Filter>AI\Solution</Filter>
-    </ClInclude>
-    <ClInclude Include="AI\Base\Event.h">
-      <Filter>AI\Base</Filter>
-    </ClInclude>
-    <ClInclude Include="AI\Base\Message.h">
-      <Filter>AI\Base</Filter>
-    </ClInclude>
-    <ClInclude Include="AI\Base\import.h">
-      <Filter>AI\Base</Filter>
-    </ClInclude>
-    <ClInclude Include="AI\Base\IWorker.h">
-      <Filter>AI\Base</Filter>
     </ClInclude>
     <ClInclude Include="AI\Study\Study.h">
       <Filter>AI\Study</Filter>
@@ -78,9 +60,6 @@
     <ClInclude Include="AI\Experience\macros.h">
       <Filter>AI\Experience</Filter>
     </ClInclude>
-    <ClInclude Include="AI\Base\Result.h">
-      <Filter>AI\Base</Filter>
-    </ClInclude>
     <ClInclude Include="Brain\Brain.h">
       <Filter>Brain</Filter>
     </ClInclude>
@@ -89,12 +68,6 @@
     </ClInclude>
     <ClInclude Include="AI\Study\import.h">
       <Filter>AI\Study</Filter>
-    </ClInclude>
-    <ClInclude Include="AI\Method\Step.h">
-      <Filter>AI\Method</Filter>
-    </ClInclude>
-    <ClInclude Include="AI\Method\Method.h">
-      <Filter>AI\Method</Filter>
     </ClInclude>
     <ClInclude Include="AI\Analysis\Analysis.h">
       <Filter>AI\Analysis</Filter>
@@ -105,43 +78,130 @@
     <ClInclude Include="AI\Analysis\import.h">
       <Filter>AI\Analysis</Filter>
     </ClInclude>
-    <ClInclude Include="AI\Method\macros.h">
-      <Filter>AI\Method</Filter>
-    </ClInclude>
-    <ClInclude Include="AI\Method\import.h">
-      <Filter>AI\Method</Filter>
-    </ClInclude>
     <ClInclude Include="AI\import.h">
       <Filter>AI</Filter>
     </ClInclude>
     <ClInclude Include="AI\AI.h">
       <Filter>AI</Filter>
     </ClInclude>
-    <ClInclude Include="AI\Analysis\AnalysisEvent.h">
-      <Filter>AI\Analysis</Filter>
+    <ClInclude Include="Brain\import.h">
+      <Filter>Brain</Filter>
+    </ClInclude>
+    <ClInclude Include="Brain\IO\IO.h">
+      <Filter>Brain\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="Brain\Memory\Memory.h">
+      <Filter>Brain\Memory</Filter>
+    </ClInclude>
+    <ClInclude Include="Brain\Memory\Storage.h">
+      <Filter>Brain\Memory</Filter>
+    </ClInclude>
+    <ClInclude Include="Brain\Control\Control.h">
+      <Filter>Brain\Control</Filter>
+    </ClInclude>
+    <ClInclude Include="Brain\Arithmetical\Arithmetical.h">
+      <Filter>Brain\Arithmetical</Filter>
+    </ClInclude>
+    <ClInclude Include="Brain\IO\Input.h">
+      <Filter>Brain\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="Brain\IO\Output.h">
+      <Filter>Brain\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="Brain\macros.h">
+      <Filter>Brain</Filter>
+    </ClInclude>
+    <ClInclude Include="Brain\IO\import.h">
+      <Filter>Brain\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="Brain\Arithmetical\ALU.h">
+      <Filter>Brain\Arithmetical</Filter>
+    </ClInclude>
+    <ClInclude Include="Brain\Arithmetical\import.h">
+      <Filter>Brain\Arithmetical</Filter>
+    </ClInclude>
+    <ClInclude Include="Brain\Arithmetical\Accumulator.h">
+      <Filter>Brain\Arithmetical</Filter>
+    </ClInclude>
+    <ClInclude Include="Brain\Memory\import.h">
+      <Filter>Brain\Memory</Filter>
+    </ClInclude>
+    <ClInclude Include="Brain\Control\import.h">
+      <Filter>Brain\Control</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\Event.h">
+      <Filter>Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\import.h">
+      <Filter>Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\IWorker.h">
+      <Filter>Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\Message.h">
+      <Filter>Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\Result.h">
+      <Filter>Base</Filter>
+    </ClInclude>
+    <ClInclude Include="AI\macros.h">
+      <Filter>AI</Filter>
+    </ClInclude>
+    <ClInclude Include="Method\import.h">
+      <Filter>Method</Filter>
+    </ClInclude>
+    <ClInclude Include="Method\macros.h">
+      <Filter>Method</Filter>
+    </ClInclude>
+    <ClInclude Include="Method\Method.h">
+      <Filter>Method</Filter>
+    </ClInclude>
+    <ClInclude Include="Method\Step.h">
+      <Filter>Method</Filter>
+    </ClInclude>
+    <ClInclude Include="AI\Study\StudyStep.h">
+      <Filter>AI\Study</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Brain\Control.cpp">
+    <ClCompile Include="Brain\Brain.cpp">
       <Filter>Brain</Filter>
     </ClCompile>
-    <ClCompile Include="AI\Base\Result.cpp">
-      <Filter>AI\Base</Filter>
+    <ClCompile Include="Brain\IO\IO.cpp">
+      <Filter>Brain\IO</Filter>
     </ClCompile>
-    <ClCompile Include="AI\Base\Message.cpp">
-      <Filter>AI\Base</Filter>
+    <ClCompile Include="Brain\Memory\Memory.cpp">
+      <Filter>Brain\Memory</Filter>
     </ClCompile>
-    <ClCompile Include="Brain\Storage.cpp">
-      <Filter>Brain</Filter>
+    <ClCompile Include="Brain\Memory\Storage.cpp">
+      <Filter>Brain\Memory</Filter>
     </ClCompile>
-    <ClCompile Include="Brain\Memory.cpp">
-      <Filter>Brain</Filter>
+    <ClCompile Include="Brain\Control\Control.cpp">
+      <Filter>Brain\Control</Filter>
     </ClCompile>
-    <ClCompile Include="AI\Base\Event.cpp">
-      <Filter>AI\Base</Filter>
+    <ClCompile Include="Brain\Arithmetical\Arithmetical.cpp">
+      <Filter>Brain\Arithmetical</Filter>
     </ClCompile>
-    <ClCompile Include="Brain\Arithmetical.cpp">
-      <Filter>Brain</Filter>
+    <ClCompile Include="Brain\Arithmetical\ALU.cpp">
+      <Filter>Brain\Arithmetical</Filter>
+    </ClCompile>
+    <ClCompile Include="AI\AI.cpp">
+      <Filter>AI</Filter>
+    </ClCompile>
+    <ClCompile Include="Base\Event.cpp">
+      <Filter>Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Base\Message.cpp">
+      <Filter>Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Base\Result.cpp">
+      <Filter>Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Method\Method.cpp">
+      <Filter>Method</Filter>
+    </ClCompile>
+    <ClCompile Include="AI\Study\StudyStep.cpp">
+      <Filter>AI\Study</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

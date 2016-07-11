@@ -2,6 +2,10 @@
 
 #include <cassert>
 #include <cstdlib>
+#include <cstdarg>
+#include <cstdio>
+#include <cstdlib>
+#include <cstring>
 
 #define SAFE_DELETE(x) {if(x) {delete(x); (x) = 0;}}
 #define SAFE_FREE(x) {if(x) {free(x); (x) = 0;}}
@@ -36,3 +40,6 @@
 #include <cstddef>
 #define LOG(FORMAT, ...)  printf(FORMAT, __VA_ARGS__)
 #endif
+
+// 获取格式化的字符串，无需删除
+extern const char* getCString(const char* format, ...);

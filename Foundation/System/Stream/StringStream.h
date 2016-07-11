@@ -20,8 +20,9 @@ namespace sys
 	public:
 		// 读取一行
 		std::string readLine();
+		void writeString(const char* line, int size);
 		// 写入一行
-		void writeLine(const char* line);
+		void writeLine(const char* line, int size);
 		// 写入空行
 		void writeLine();
 		// 是否读到结束

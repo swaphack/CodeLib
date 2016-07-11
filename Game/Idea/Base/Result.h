@@ -27,10 +27,15 @@ namespace idea
 		Result();
 		virtual ~Result();
 	public:
+		// 获取类型
 		ResultType getType();
+		// 获取字符串值
+		virtual const char* getStringValue();
 	protected:
+		// 设置类型
 		void setType(ResultType value);
 	private:
+		// 结果类型
 		ResultType _type;
 	};
 
@@ -42,6 +47,9 @@ namespace idea
 		virtual ~ResultBoolean();
 	public:
 		bool getValue();
+		// 获取字符串值
+		// 如果true,返回“TRUE”,否则“FALSE”
+		virtual const char* getStringValue();
 	private:
 		bool _value;
 	};
@@ -54,6 +62,8 @@ namespace idea
 		virtual ~ResultNumber();
 	public:
 		float getValue();
+		// 获取字符串值
+		virtual const char* getStringValue();
 	private:
 		float _value;
 	};
@@ -66,6 +76,8 @@ namespace idea
 		virtual ~ResultString();
 	public:
 		const char* getValue();
+		// 获取字符串值
+		virtual const char* getStringValue();
 	private:
 		std::string _value;
 	};
@@ -78,6 +90,8 @@ namespace idea
 		virtual ~ResultPtr();
 	public:
 		void* getValue();
+		// 获取字符串值
+		virtual const char* getStringValue();
 	private:
 		void* _value;
 	};
@@ -90,6 +104,8 @@ namespace idea
 		virtual ~ResultRef();
 	public:
 		void* getValue();
+		// 获取字符串值
+		virtual const char* getStringValue();
 	private:
 		void* _value;
 	};

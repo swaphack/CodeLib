@@ -1,5 +1,5 @@
-#include "Arithmetical.h"
-#include <cstring>
+#include "ALU.h"
+
 using namespace idea;
 
 namespace
@@ -33,52 +33,12 @@ ALU::~ALU()
 
 }
 
-ResultNumber* ALU::eval(const char* text) const
+Result* ALU::eval(const char* text) const
 {
 	if (text == nullptr)
 	{
 		return nullptr;
 	}
 
-	strstr()
 
-}
-//////////////////////////////////////////////////////////////////////////
-Arithmetical::Arithmetical()
-{
-
-}
-
-Arithmetical::~Arithmetical()
-{
-
-}
-
-Result* Arithmetical::run(Event* e)
-{
-	if (e == nullptr || e->getMessage() == nullptr)
-	{
-		return nullptr;
-	}
-
-	Message* message = e->getMessage();
-
-	ResultString* result = dynamic_cast<ResultString*>(message->getResult());
-	if (result == nullptr)
-	{
-		return nullptr;
-	}
-
-	ResultNumber* value = getALU()->eval(result->getValue());
-	if (value == nullptr)
-	{
-		return nullptr;
-	}
-
-	return value;
-}
-
-const ALU* Arithmetical::getALU()
-{
-	return &_alu;
 }

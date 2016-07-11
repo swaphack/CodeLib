@@ -5,25 +5,14 @@ using namespace idea;
 
 Control::Control()
 :_arithmetical(nullptr)
-, _input(nullptr)
-, _output(nullptr)
 , _memory(nullptr)
 {
-
+	_ai = new AI();
 }
 
 Control::~Control()
 {
-}
-
-void Control::setInput(Input* input)
-{
-	_input = input;
-}
-
-void Control::setOutput(Output* output)
-{
-	_output = output;
+	SAFE_DELETE(_ai);
 }
 
 void Control::setArithmetical(Arithmetical* arithmetical)
@@ -44,6 +33,7 @@ Result* Control::run(Event* e)
 	}
 
 	Result* result;
+
 	// 记忆查找
 	result = getMemory()->run(e);
 	if (result)
@@ -58,17 +48,16 @@ Result* Control::run(Event* e)
 		return result;
 	}
 
+	// ai 处理
+	result = _ai->run(e);
+	if (result)
+	{
+		// 写入题目-答案组合
+		getMemory()->alloc(e->getMessage()->getStringValue(), result);
+		return result;
+	}
+
 	return nullptr;
-}
-
-Input* Control::getInput()
-{
-	return _input;
-}
-
-Output* Control::getOutput()
-{
-	return _output;
 }
 
 Arithmetical* Control::getArithmetical()

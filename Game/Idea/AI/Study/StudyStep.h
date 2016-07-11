@@ -4,14 +4,13 @@
 
 namespace idea
 {
-	// Â≠¶‰π†
-	class Study : public Method
+	// —ßœ∞≤Ω÷Ë
+	class StudyStep : public Step
 	{
 	public:
-		Study();
-		virtual ~Study();
+		StudyStep();
+		virtual ~StudyStep();
 	public:
-		// Â≠¶‰π†
 		virtual Result* run(Event* e);
 	};
 }

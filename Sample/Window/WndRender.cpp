@@ -16,13 +16,13 @@ WndRender::~WndRender()
 
 void WndRender::show()
 {
-	this->addLight();
-
-	this->testString();
+	//this->addLight();
 
 	this->testImage();
 
-	this->testSphereModel();
+	this->testCubeModel();
+
+	this->testCamera();
 }
 
 void WndRender::testImage()
@@ -163,6 +163,7 @@ void WndRender::testCubeModel()
 	pModel->getMatrial()->setEmisiion(255, 255, 255, 255);
 	this->getCanvas()->getRoot()->addChild(pModel);
 
+	/*
 	int count = 1024;
 	float interval = 5;
 	float rx = 45;
@@ -172,6 +173,7 @@ void WndRender::testCubeModel()
 	pRotateToAction->setRotation(rx * count, ry * count, rz * count);
 	pRotateToAction->setInterval(interval * count);
 	pModel->getActionProxy()->runAction(pRotateToAction);
+	*/
 }
 
 void WndRender::testSphereModel()
@@ -224,7 +226,6 @@ void WndRender::testMask()
 	pMask->setPosition(512, 384, 0.0f);
 	pMask->setVolume(200, 300, 0);
 	this->getCanvas()->getRoot()->addChild(pMask);
-	
 }
 
 void WndRender::testMedia()
@@ -304,19 +305,19 @@ void WndRender::testCamera()
 		float zOrderDiff = 10;
 		if (key == EBK_W)
 		{
-			pNode->setPositionZ(pNode->getPositionZ() + zOrderDiff);
+			pNode->setRotationZ(pNode->getRotationZ() + 1);
 		}
 		else if (key == EBK_S)
 		{
-			pNode->setPositionZ(pNode->getPositionZ() - zOrderDiff);
+			pNode->setRotationZ(pNode->getRotationZ() - 1);
 		}
 		else if (key == EBK_A)
 		{
-			//pNode->setro(pNode->getPositionX() - 1);
+			pNode->setRotationY(pNode->getRotationY() - 1);
 		}
 		else if (key == EBK_D)
 		{
-			//pNode->setPositionX(pNode->getPositionX() + 1);
+			pNode->setRotationY(pNode->getRotationY() + 1);
 		}
 	});
 }

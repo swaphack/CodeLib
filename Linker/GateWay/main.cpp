@@ -14,9 +14,6 @@ class HttpActivityTest : public HttpActivity
 protected:
 	virtual void doGet(HttpRequest* request)
 	{
-		HttpResponse response;
-		response.setContentType(request->getHeader(HttpRequestField::ACCEPT));
-
 		std::string url;
 		sys::String method = request->getRequest(HttpRequest::HTTP_REQUEST_METHOD);
 		sys::String params = request->getRequest(HttpRequest::HTTP_REQUEST_PARAM);
@@ -24,22 +21,33 @@ protected:
 
 		if (method.compare(HttpRequestConstant::HTTP_REQ_GET)) 
 		{// get
-			if (params.compare("/"))
-			{
-				url = "/index.html";
-			}
-			else
-			{
-				url = params.getString();
-			}
+			handUrlMethod(params, url);
 		}
 		else if (method.compare(HttpRequestConstant::HTTP_REQ_POST))
 		{// post
 
 		}
-		
+
+		HttpResponse response;		
 		response.writeFile(url.c_str());
 		this->doPost(&response);
+	}
+
+	void handUrlMethod(sys::String& inString, std::string& outString)
+	{
+		if (inString.compare("/"))
+		{
+			outString = "/index.html";
+		}
+		else
+		{
+			outString = inString.getString();
+		}
+	}
+	// for url param(?xx=xx) and post body(\r\n body)
+	void handParamMethod(sys::String& inString, std::string& outString)
+	{
+		
 	}
 };
 

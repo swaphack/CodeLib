@@ -6,21 +6,22 @@
 namespace idea
 {
 	// 方法
-	class Method
+	class Method : public IWorker
 	{
 	public:
 		Method();
 		virtual ~Method();
 	public:
-		Step* getCurrentStep();
-		Step* nextStep();
-
+		// 添加步骤
 		void addStep(Step* step);
+		// 移除步骤
 		void removeStep(Step* step);
+		// 移除所有步骤
 		void removeAllSteps();
-	protected:
+		// 使用步骤尝试解决问题
+		virtual Result* run(Event* e);
 	private:
-		int _cursor;
+		// 步骤集
 		std::vector<Step*> _steps;
 	};
 }

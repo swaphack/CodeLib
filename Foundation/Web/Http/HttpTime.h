@@ -23,12 +23,12 @@ namespace web
 		static const char*	TIME_MONTH[12];
 	public:
 		// 获取 RFC 822 时间格式
-		static sys::String getRFC822Time(sys::Time* time);
+		static const char* getRFC822Time(sys::Time* time);
 
 		// 获取 RFC 822 时间格式
-		static sys::String getRFC850Time(sys::Time* time);
+		static const char* getRFC850Time(sys::Time* time);
 
 		// 获取 RFC 822 时间格式
-		static sys::String getANSITime(sys::Time* time);
+		static const char* getANSITime(sys::Time* time);
 	};
 }

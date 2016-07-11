@@ -17,10 +17,10 @@ void JPEGImage::load(const char* filename)
 {
 	struct jpeg_decompress_struct jds;
 	struct jpeg_error_mgr jem;
-	FILE* fptr;
+	FILE* fptr = 0;
 
-	fptr = fopen(filename, "rb");
-	if (fptr == nullptr)
+	int result = fopen_s(&fptr, filename, "rb");
+	if (result != 0)
 	{
 		return;
 	}

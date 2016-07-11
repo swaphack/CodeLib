@@ -29,15 +29,13 @@ void Directory::getDirectory(const char* fullpath, std::string& dir)
 
 int Directory::createFile(const char* filename)
 {
-	FILE* fptr;
-	fptr = fopen(filename, "wb");
-	if (fptr)
+	FILE* fptr = 0;
+	int result = fopen_s(&fptr, filename, "wb");
+	if (result == 0)
 	{
 		fclose(fptr);
-		return 0;
 	}
-
-	return -1;
+	return result;
 }
 
 int Directory::deleteFile(const char* filename)
