@@ -35,15 +35,19 @@ protected:
 
 	void handUrlMethod(sys::String& inString, std::string& outString)
 	{
-		if (inString.compare("/"))
-		{
+		int index = inString.findFirstOf('?');
+		sys::String url = "";
+		if (index == -1) 
+			url = inString;
+		else 
+			url = inString.subString(0, index);
+
+		if (url.compare("/"))
 			outString = "/index.html";
-		}
 		else
-		{
-			outString = inString.getString();
-		}
+			outString = url.getString();
 	}
+
 	// for url param(?xx=xx) and post body(\r\n body)
 	void handParamMethod(sys::String& inString, std::string& outString)
 	{

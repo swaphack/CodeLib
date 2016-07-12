@@ -28,10 +28,7 @@ String::String(const String& value)
 String::String(const char* value)
 :String()
 {
-	if (value == nullptr)
-	{
-		return;
-	}
+	ASSERT(value != nullptr);
 
 	_size = strlen(value) + 1;
 	_value = StreamHelper::mallocStream((char*)value, _size);
@@ -40,10 +37,7 @@ String::String(const char* value)
 String::String(const char* value, int count)
 :String()
 {
-	if (value == nullptr)
-	{
-		return;
-	}
+	ASSERT(value != nullptr);
 
 	_size = count + 1;
 	_value = StreamHelper::mallocStream(_size);
@@ -69,18 +63,12 @@ String& String::operator=(const std::string& value)
 
 String& String::operator=(const char* value)
 {
+	ASSERT(value != nullptr);
+
 	StreamHelper::freeStream(_value);
 
-	if (value == nullptr)
-	{
-		_size = 0;
-		_value = nullptr;
-	}
-	else
-	{
-		_size = strlen(value) + 1;
-		_value = StreamHelper::mallocStream((char*)value, _size);
-	}
+	_size = strlen(value) + 1;
+	_value = StreamHelper::mallocStream((char*)value, _size);
 
 	return *this;
 }
@@ -103,6 +91,11 @@ String String::operator+(const std::string& value)
 
 String String::operator+(const char* value)
 {
+	if (value == nullptr)
+	{
+		return *this;
+	}
+
 	String temp = *this;
 	temp.concat(value);
 
@@ -453,6 +446,132 @@ String String::subString(int offset, int count)
 	String str = String(_value + offset, count);
 	return str;
 }
+
+
+int String::findFirstOf(char value)
+{
+	int offset = 0;
+
+	for (; offset < getSize(); offset++)
+	{
+		if (*(_value + offset) == value)
+		{
+			break;
+		}
+	}
+
+	if (offset == getSize())
+	{
+		return -1;
+	}
+
+	return offset;
+}
+
+int String::findFirstOf(const char* value)
+{
+	int offset = 0;
+	int index = 0;
+	int len = strlen(value);
+	int i = 0;
+
+	while (offset < getSize())
+	{
+		if (offset + len >= getSize())
+		{
+			return -1;
+		}
+		index = 0;
+		for (i = 0; i < len; i++)
+		{
+			// 下一次索引位置
+			if (*value == *(_value + offset + i))
+			{
+				index = i;
+			}
+			if (*(value + i) != *(_value + offset + i))
+			{
+				break;
+			}
+		}
+
+		if (i == len)
+		{
+			return offset;
+		}
+		offset += index + 1;
+	}
+
+	if (offset >= getSize())
+	{
+		return -1;
+	}
+
+	return offset;
+}
+
+int String::findLastOf(char value)
+{
+	int offset = getSize() - 1;
+
+	for (; offset >= 0; offset--)
+	{
+		if (*(_value + offset) == value)
+		{
+			break;
+		}
+	}
+
+	if (offset == -1)
+	{
+		return -1;
+	}
+
+	return offset;
+}
+
+int String::findLastOf(const char* value)
+{
+	int offset = getSize() - 1;
+	int index = 0;
+	int len = strlen(value);
+	int i = 0;
+
+	while (offset >= 0)
+	{
+		if (offset - len < 0)
+		{
+			return -1;
+		}
+		index = 0;
+		for (i = 0; i < len; i++)
+		{
+			// 下一次索引位置
+			if (*(value + len - 1) == *(_value + offset - i))
+			{
+				index = i;
+			}
+			if (*(value + len - 1 - i) != *(_value + offset - i))
+			{
+				break;
+			}
+		}
+
+		if (i == len)
+		{
+			return offset;
+		}
+		offset -= index + 1;
+	}
+
+	if (offset < 0)
+	{
+		return -1;
+	}
+
+	return offset;
+}
+
 
 String& String::trim()
 {

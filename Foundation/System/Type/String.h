@@ -51,6 +51,15 @@ namespace sys
 		// 移除从指定位置开始的一段字符串
 		String subString(int offset, int count);
 
+		// 开始位置查找匹配字符的索引位置
+		int findFirstOf(char value);
+		// 开始位置查找匹配字符串的索引位置
+		int findFirstOf(const char* value);
+		// 结束位置查找匹配字符的索引位置
+		int findLastOf(char value);
+		// 结束位置查找匹配字符的索引位置
+		int findLastOf(const char* value);
+
 		// 去掉空格
 		String& trim();
 		// 去掉左边空格
