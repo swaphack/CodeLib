@@ -34,7 +34,21 @@ void Client::setRecvHandler( Object* target, CLIENT_RECV_HANDLER handler )
 
 void Client::sendMessage(NetData* data )
 {
+	if (data == nullptr)
+	{
+		return;
+	}
 	this->addSendBuffer(data);
+}
+
+void Client::sendString(const char* data)
+{
+	if (data == nullptr)
+	{
+		return;
+	}
+
+	this->sendMessage(new NetData(data, strlen(data)));
 }
 
 void Client::addRecvBuffer( NetData* data )

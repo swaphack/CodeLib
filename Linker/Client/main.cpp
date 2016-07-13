@@ -22,6 +22,8 @@ public:
 		LOG("Receive : %s\n", recvData.c_str());
 		dataQueue.pop();
 		delete top;
+
+		_client->sendString(recvData.c_str());
 	}
 private:
 	Client* _client;
@@ -37,7 +39,7 @@ void initManyClients(std::map<int, std::pair<Client*, ClientRecv*>>& clients, in
 		client->setRecvHandler(recv, static_cast<CLIENT_RECV_HANDLER>(&ClientRecv::onRecv));
 
  		std::string msg = "Hello world!";
- 		client->sendMessage(new NetData((char*)msg.c_str(), msg.size()));
+		client->sendString(msg.c_str());
 
 		clients[i] = std::make_pair(client, recv);
 	}

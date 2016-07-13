@@ -25,6 +25,8 @@ namespace sys
 		void setRecvHandler(Object* target, CLIENT_RECV_HANDLER handler);
 		// 发送消息, 使用new，发送完毕后会自动释放
 		void sendMessage(NetData* data);
+		// 发送消息
+		void sendString(const char* data);
 	protected:
 		// 添加接收到的数据
 		void addRecvBuffer(NetData* data);
