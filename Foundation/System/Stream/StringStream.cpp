@@ -12,7 +12,9 @@ StringStream::StringStream()
 StringStream::StringStream(const char* text)
 : Stream(new StreamBaseRef())
 {
-	this->setData(text, strlen(text));
+	char* newData = StreamHelper::mallocStream((void*)text, strlen(text));
+
+	this->setData(newData, strlen(newData));
 }
 
 StringStream::~StringStream()
@@ -46,7 +48,21 @@ std::string StringStream::readLine()
 	{
 		ptr++;
 	}
-	ptr++;
+
+#if PLATFORM_TARGET == EPT_WINDOWS
+	if (*(ptr) == '\n')
+#elif PLATFORM_TARGET == EPT_MAC
+	if ((*(ptr) == '\r')
+#elif PLATFORM_TARGET == EPT_LINUX
+	if ((*(ptr) == '\n')
+#endif
+	{
+		ptr++;
+	}
+	else
+	{
+		ext = 0;
+	}
 
 	ss_t size = ptr - cursor;
 	this->setCursor(getCursor() + size);

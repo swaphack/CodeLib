@@ -42,7 +42,10 @@ void HttpActivity::doPost( HttpResponse* response )
 		return;
 	}
 
-	response->makeMessage();
+	if (response->isHttpFormat())
+	{
+		response->makeMessage();
+	}
 
 	this->sendResponse(_sessionID.c_str(), response);
 }
@@ -54,7 +57,10 @@ void HttpActivity::doBroadCast(HttpResponse* response)
 		return;
 	}
 
-	response->makeMessage();
+	if (response->isHttpFormat())
+	{
+		response->makeMessage();
+	}
 
 	this->sendBroadcast(_sessionID.c_str(), response);
 }

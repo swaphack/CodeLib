@@ -3,8 +3,8 @@
 #include <thread>
 using namespace sys;
 
-const char* WEB_IP = "220.181.57.217";
-int WEB_PORT = 80;
+const char* WEB_IP = "127.0.0.1";
+int WEB_PORT = 9547;
 
 class ClientRecv : public Object
 {
@@ -23,7 +23,6 @@ public:
 		dataQueue.pop();
 		delete top;
 	}
-protected:
 private:
 	Client* _client;
 };
@@ -37,8 +36,8 @@ void initManyClients(std::map<int, std::pair<Client*, ClientRecv*>>& clients, in
 		ClientRecv* recv = new ClientRecv(client);
 		client->setRecvHandler(recv, static_cast<CLIENT_RECV_HANDLER>(&ClientRecv::onRecv));
 
-// 		std::string msg = "Hello world!";
-// 		client->sendMessage(new NetData((char*)msg.c_str(), msg.size()));
+ 		std::string msg = "Hello world!";
+ 		client->sendMessage(new NetData((char*)msg.c_str(), msg.size()));
 
 		clients[i] = std::make_pair(client, recv);
 	}

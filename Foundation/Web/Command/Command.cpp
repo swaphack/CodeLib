@@ -8,6 +8,7 @@ using namespace web;
 Command::Command()
 {
 	_msg = "";
+	_bFullCommand = true;
 }
 
 Command::~Command()
@@ -33,4 +34,14 @@ int Command::size()
 bool Command::empty()
 {
 	return _msg.empty();
+}
+
+bool Command::isFullCommand()
+{
+	return _bFullCommand;
+}
+
+void Command::setFullCommand(bool status)
+{
+	_bFullCommand = status;
 }

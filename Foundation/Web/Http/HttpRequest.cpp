@@ -71,11 +71,13 @@ void HttpRequest::parseRequest()
 
 	this->reset();
 
-	int index = 0;
+	// 解析顺序 请求行->头信息->消息体
+	HttpRequestParseOrder order = EHRPO_BEGIN;
+
 	while (!ss->readEnd())
 	{
 		line = ss->readLine();
-		if (index == 0)	// 请求行
+		if (order == EHRPO_BEGIN)	// 请求行
 		{
 			if (line.startWith(HttpRequestConstant::HTTP_REQ_GET)
 				|| line.startWith(HttpRequestConstant::HTTP_REQ_POST)
@@ -84,25 +86,27 @@ void HttpRequest::parseRequest()
 				|| line.startWith(HttpRequestConstant::HTTP_REQ_DELETE)
 				|| line.startWith(HttpRequestConstant::HTTP_REQ_TRACE)
 				|| line.startWith(HttpRequestConstant::HTTP_REQ_CONNECT)
-				|| line.startWith(HttpRequestConstant::HTTP_REQ_OPTIONS)
-				)
+				|| line.startWith(HttpRequestConstant::HTTP_REQ_OPTIONS))
 			{
 				this->parseRequest(line.getString());
+				order = EHRPO_HEADER;
 			}
 			else
 			{
-				index++;
+				this->setHttpFormat(false);
+				break;
 			}
 		}
-		else if (index == -1) // 可选的消息体
+		else if (order == EHRPO_BODY) // 可选的消息体
 		{
 			this->parseBody(line.getString());
+			order = EHRPO_END;
 		}
-		else
+		else if (order == EHRPO_HEADER)
 		{
 			if (line.empty()) // 下一行
 			{
-				index = -1;
+				order = EHRPO_BODY;
 				continue;
 			}
 			else // 消息报头
@@ -115,10 +119,16 @@ void HttpRequest::parseRequest()
 				}
 			}
 		}
-		index++;
 	}
 
 	dest.clear();
+
+	delete ss;
+
+	if (order != EHRPO_END && this->isHttpFormat())
+	{
+		this->setFullCommand(false);
+	}
 }
 
 

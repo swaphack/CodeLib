@@ -7,6 +7,7 @@ using namespace web;
 HttpServer::HttpServer(sys::Server* server)
 {
 	ASSERT(_server != nullptr);
+
 	_server = server;
 	_session = new Session();
 }
@@ -127,12 +128,20 @@ HttpRequest* HttpServer::createHttpRequest(int id, sys::DataQueue& dataQueue)
 	
 	HttpRequest* request = new HttpRequest();
 	request->setMessage(data->data, data->size);
-	request->setSessionID(getCString("%d", id));
 
-	sys::String cookie = request->getHeader(HttpRequestField::COOKIE);
+	// 需判断接受数据是个完整的http包
+	if (request->isFullCommand())
+	{
+		request->setSessionID(getCString("%d", id));
 
-	dataQueue.pop();
-	delete data;
+		dataQueue.pop();
+		delete data;
+	}
+	else
+	{
+		delete request;
+		request = nullptr;
+	}
 
 	return request;
 }

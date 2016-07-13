@@ -14,9 +14,9 @@ namespace web
 	public:
 		void onReceiveRequest(const char* sessionID, HttpRequest* request);
 	protected:
-		// 收到数据
+		// 收到http请求
 		virtual void doGet(HttpRequest* request);
-		// 发送给接收方
+		// 发送http反馈
 		virtual void doPost(HttpResponse* response);
 		// 广播
 		virtual void doBroadCast(HttpResponse* response);

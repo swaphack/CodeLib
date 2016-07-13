@@ -50,6 +50,16 @@ namespace web
 		static const char* HTTP_REQUEST_PARAM/* = "PARAM"*/;
 		// http 版本
 		static const char* HTTP_REQUEST_VERSION/* = "VERSION"*/;
+
+		// http 请求解析顺序
+		enum HttpRequestParseOrder
+		{
+			EHRPO_BEGIN,	// 开始
+			EHRPO_REQUEST,	// 请求行
+			EHRPO_HEADER,	// 头信息
+			EHRPO_BODY,		// 消息体
+			EHRPO_END,		// 结束
+		};
 	public:
 		HttpRequest();
 		virtual ~HttpRequest();

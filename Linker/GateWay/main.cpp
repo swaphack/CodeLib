@@ -3,57 +3,13 @@
 #include <ctime>
 #include <windows.h>
 
+#include "HttpActivityTest.h"
+
 using namespace sys;
 using namespace web;
 
 const char* WEB_IP = "127.0.0.1";
 int WEB_PORT = 9547;
-
-class HttpActivityTest : public HttpActivity
-{
-protected:
-	virtual void doGet(HttpRequest* request)
-	{
-		std::string url;
-		sys::String method = request->getRequest(HttpRequest::HTTP_REQUEST_METHOD);
-		sys::String params = request->getRequest(HttpRequest::HTTP_REQUEST_PARAM);
-		sys::String body = request->getBody();
-
-		if (method.compare(HttpRequestConstant::HTTP_REQ_GET)) 
-		{// get
-			handUrlMethod(params, url);
-		}
-		else if (method.compare(HttpRequestConstant::HTTP_REQ_POST))
-		{// post
-
-		}
-
-		HttpResponse response;		
-		response.writeFile(url.c_str());
-		this->doPost(&response);
-	}
-
-	void handUrlMethod(sys::String& inString, std::string& outString)
-	{
-		int index = inString.findFirstOf('?');
-		sys::String url = "";
-		if (index == -1) 
-			url = inString;
-		else 
-			url = inString.subString(0, index);
-
-		if (url.compare("/"))
-			outString = "/index.html";
-		else
-			outString = url.getString();
-	}
-
-	// for url param(?xx=xx) and post body(\r\n body)
-	void handParamMethod(sys::String& inString, std::string& outString)
-	{
-		
-	}
-};
 
 int main(int argc, char** argv)
 {

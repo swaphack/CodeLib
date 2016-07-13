@@ -5,7 +5,7 @@
 
 namespace web
 {
-	// http命令
+	// 命令
 	class Command
 	{
 	public:
@@ -20,7 +20,14 @@ namespace web
 		int size();
 		// 是否有值
 		virtual bool empty();
+		// 是否是个完整的命令
+		bool isFullCommand();
 	protected:
+		void setFullCommand(bool status);
+	protected:
+		// 消息
 		std::string _msg;
+		// 是否是个完整的命令
+		bool _bFullCommand;
 	};
 }
