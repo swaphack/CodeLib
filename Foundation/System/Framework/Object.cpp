@@ -50,3 +50,8 @@ void Object::autoRelease()
 	G_AUTORELEASEPOOL->addObject(this);
 	this->_bAutoRelease = true;
 }
+
+void Object::setID(int id)
+{
+	_id = id;
+}

@@ -52,7 +52,7 @@ void GLTool::setColor(uchar red, uchar green, uchar blue, uchar alpha)
 	glColor4f(red / sys::COLOR_FLOAT_VALUE, green / sys::COLOR_FLOAT_VALUE, blue / sys::COLOR_FLOAT_VALUE, alpha / sys::COLOR_FLOAT_VALUE);
 }
 
-void GLTool::setColor(sys::Color4B color)
+void GLTool::setColor(const sys::Color4B& color)
 {
 	glColor4f(color.red / sys::COLOR_FLOAT_VALUE, color.green / sys::COLOR_FLOAT_VALUE, color.blue / sys::COLOR_FLOAT_VALUE, color.alpha / sys::COLOR_FLOAT_VALUE);
 }

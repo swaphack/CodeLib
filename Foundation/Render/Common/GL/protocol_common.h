@@ -32,9 +32,11 @@ namespace render
 		// 设置颜色
 		void setColor(uchar r, uchar g, uchar b, uchar a);
 		// 设置颜色
-		void setColor(sys::Color4B color);
+		void setColor(const sys::Color4B& color);
+		// 设置颜色
+		void setColor(const sys::Color3B& color);
 		// 获取颜色
-		sys::Color4B getColor();
+		const sys::Color4B& getColor();
 	protected:
 		// 混合
 		sys::Color4B _color;
@@ -80,7 +82,7 @@ namespace render
 		
 		void setPosition(float x, float y, float z);
 
-		void setPosition(sys::Vector& position);
+		void setPosition(const sys::Vector& position);
 		// 获取坐标
 		float getPositionX();
 
@@ -98,7 +100,7 @@ namespace render
 
 		void setScale(float x, float y, float z);
 
-		void setScale(sys::Vector& scale);
+		void setScale(const sys::Vector& scale);
 		// 获取缩放比
 		float getScaleX();
 
@@ -116,7 +118,7 @@ namespace render
 
 		void setRotation(float x, float y, float z);
 
-		void setRotation(sys::Vector& rotation);
+		void setRotation(const sys::Vector& rotation);
 		// 获取旋转系数
 		float getRotationX();
 
@@ -147,6 +149,8 @@ namespace render
 	public:
 		// 设置描点
 		void setAnchorPoint(float x, float y, float z);
+
+		void setAnchorPoint(const sys::Vector& anchor);
 		// 获取描点
 		const sys::Vector& getAnchorPoint();
 		// 设置体积
@@ -157,6 +161,10 @@ namespace render
 		void setDeep(float d);
 
 		void setVolume(float w, float h, float d);
+
+		void setVolume(const sys::Volume& volume);
+
+		void setSize(const sys::Size& size);
 		// 获取体积
 		float getWidth();
 
@@ -165,6 +173,8 @@ namespace render
 		float getDeep();
 
 		const sys::Volume& getVolume();
+
+		sys::Size getSize();
 	public:
 		virtual void onBodyChange() {}
 	protected:
@@ -182,7 +192,7 @@ namespace render
 		TextProtocol();
 		virtual ~TextProtocol();
 	public:
-		virtual void setString(const char* text);
+		void setString(const char* text);
 		const char* getString();
 	private:
 		std::string _textBody;

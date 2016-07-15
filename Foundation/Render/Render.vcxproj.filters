@@ -55,9 +55,6 @@
     <ClCompile Include="Common\Shader\Material.cpp">
       <Filter>Common\Shader</Filter>
     </ClCompile>
-    <ClCompile Include="Common\XControl\CtrlPixel.cpp">
-      <Filter>Common\XControl</Filter>
-    </ClCompile>
     <ClCompile Include="Common\GL\protocol_common.cpp">
       <Filter>Common\GL</Filter>
     </ClCompile>
@@ -162,6 +159,12 @@
     </ClCompile>
     <ClCompile Include="Resource\Paser\JPEGImage.cpp">
       <Filter>Resource\Parser</Filter>
+    </ClCompile>
+    <ClCompile Include="2d\UI\UIProtocol.cpp">
+      <Filter>2d\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\XControl\Pixel.cpp">
+      <Filter>Common\XControl</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -572,9 +575,6 @@
     </ClInclude>
     <ClInclude Include="third_party\freetype\freetype\internal\services\svwinfnt.h">
       <Filter>third_party\freetype\freetype\internal\services</Filter>
-    </ClInclude>
-    <ClInclude Include="Common\XControl\CtrlPixel.h">
-      <Filter>Common\XControl</Filter>
     </ClInclude>
     <ClInclude Include="Common\XControl\import.h">
       <Filter>Common\XControl</Filter>
@@ -1116,6 +1116,18 @@
     </ClInclude>
     <ClInclude Include="2d\Control\import.h">
       <Filter>2d\Control</Filter>
+    </ClInclude>
+    <ClInclude Include="2d\UI\UIText.h">
+      <Filter>2d\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="2d\UI\UIProtocol.h">
+      <Filter>2d\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="2d\UI\UIImage.h">
+      <Filter>2d\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\XControl\Pixel.h">
+      <Filter>Common\XControl</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

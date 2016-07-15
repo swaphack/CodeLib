@@ -36,6 +36,9 @@ namespace render
 		void addKeyboardDelegate();
 		// ÒÆ³ı¼üÅÌ¼àÌıÎ¯ÍĞ
 		void removeKeyboardDelegate();
+	protected:
+		void onTouchUp(sys::Object* object, float x, float y);
+		void onKeyBoardInput(sys::Object* object, sys::BoardKey key, sys::ButtonStatus type);
 	private:
 		// ÊÇ·ñÏàÓ¦¼üÅÌ
 		bool _keyboardEnabled;

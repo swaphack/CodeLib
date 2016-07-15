@@ -40,7 +40,7 @@ namespace render
 		* 绘制颜色
 		* @param color
 		*/
-		static void setColor(sys::Color4B color);
+		static void setColor(const sys::Color4B& color);
 		/**
 		* 绘制矩形
 		* @param rectVertex 矩形四个顶点坐标

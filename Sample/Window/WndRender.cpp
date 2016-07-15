@@ -6,7 +6,7 @@ using namespace sys;
 WndRender::WndRender()
 {
 	this->init();
-	this->getCanvas()->setDimensions(render::ED_3D);
+	this->getCanvas()->setDimensions(render::ED_2D);
 }
 
 WndRender::~WndRender()
@@ -16,93 +16,26 @@ WndRender::~WndRender()
 
 void WndRender::show()
 {
-	//this->addLight();
+	this->testPixelImage();
 
-	this->testImage();
-
-	this->testCubeModel();
-
-	this->testCamera();
+	this->testEditBox();
 }
 
-void WndRender::testImage()
+void WndRender::testMoveImage()
 {
 	CtrlImage* pImage = new CtrlImage();
-	pImage->setImagePath("Resource/NeHe.png", EIF_PNG);
+	pImage->setImagePath("Resource/world.jpg", EIF_JPEG);
 	pImage->setPosition(512, 384, 0);
-	pImage->setFlipX(true);
-	//pImage->setFlipY(true);
 	AUTO_RELEASE_OBJECT(pImage);
 	this->getCanvas()->getRoot()->addChild(pImage);
 
-	pImage->getTouchProxy()->addTouchDelegate(ETT_DOWN, [](sys::Object* object, float x, float y){
-		CtrlImage* pNode = dynamic_cast<CtrlImage*>(object);
-		if (pNode == nullptr)
-		{
-			return;
-		}
+	pImage->getTouchProxy()->addTouchDelegate(ETT_DOWN, this, TOUCH_DELEGATTE_SELECTOR(WndRender::onTouchBegin));
 
-		std::vector<sys::Vector>* pAry = new std::vector<sys::Vector>(2);
-		(*pAry)[0].x = pNode->getPositionX();
-		(*pAry)[0].y = pNode->getPositionY();
+	pImage->getTouchProxy()->addTouchDelegate(ETT_ON, this, TOUCH_DELEGATTE_SELECTOR(WndRender::onTouchMove));
 
-		(*pAry)[1].x = x;
-		(*pAry)[1].y = y;
+	pImage->getTouchProxy()->addTouchDelegate(ETT_UP, this, TOUCH_DELEGATTE_SELECTOR(WndRender::onTouchEnd));
 
-		pNode->setUserData(pAry);
-	});
-
-	pImage->getTouchProxy()->addTouchDelegate(ETT_ON, [](sys::Object* object, float x, float y){
-		CtrlImage* pNode = dynamic_cast<CtrlImage*>(object);
-		if (pNode == nullptr)
-		{
-			return;
-		}
-
-		std::vector<sys::Vector>* pAry = static_cast<std::vector<sys::Vector>*>(pNode->getUserData());
-		pNode->setPosition((*pAry)[0].x + x - (*pAry)[1].x, (*pAry)[0].y + y - (*pAry)[1].y, 0);
-	});
-
-	pImage->getTouchProxy()->addTouchDelegate(ETT_UP, [](sys::Object* object, float x, float y){
-		CtrlImage* pNode = dynamic_cast<CtrlImage*>(object);
-		if (pNode == nullptr)
-		{
-			return;
-		}
-
-		std::vector<sys::Vector>* pAry = static_cast<std::vector<sys::Vector>*>(pNode->getUserData());
-		SAFE_DELETE(pAry);
-	});
-
-	G_KEYBOARDMANAGER->addDispatcher(pImage, [](sys::Object* object, sys::BoardKey key, sys::ButtonStatus type){
-		CtrlImage* pNode = dynamic_cast<CtrlImage*>(object);
-		if (pNode == nullptr)
-		{
-			return;
-		}
-		if (type == EBS_BUTTON_UP)
-		{
-			return;
-		}
-
-		float speed = 5;
-		if (key == EBK_W)
-		{
-			pNode->setPositionY(pNode->getPositionY() + speed);
-		}												
-		else if (key == EBK_S)							
-		{												
-			pNode->setPositionY(pNode->getPositionY() - speed);
-		}												
-		else if (key == EBK_A)							
-		{												
-			pNode->setPositionX(pNode->getPositionX() - speed);
-		}
-		else if (key == EBK_D)
-		{
-			pNode->setPositionX(pNode->getPositionX() + speed);
-		}
-	});
+	G_KEYBOARDMANAGER->addDispatcher(pImage, this, KEYBOARD_DELEGATTE_SELECTOR(WndRender::onKeyBoard));
 }
 
 void WndRender::testClock()
@@ -292,34 +225,7 @@ void WndRender::testStencil()
 void WndRender::testCamera()
 {
 	Camera* camera = this->getCanvas()->getCamera();
-	G_KEYBOARDMANAGER->addDispatcher(camera, [](sys::Object* object, sys::BoardKey key, sys::ButtonStatus type){
-		Camera* pNode = dynamic_cast<Camera*>(object);
-		if (pNode == nullptr)
-		{
-			return;
-		}
-		if (type == EBS_BUTTON_UP)
-		{
-			return;
-		}
-		float zOrderDiff = 10;
-		if (key == EBK_W)
-		{
-			pNode->setRotationZ(pNode->getRotationZ() + 1);
-		}
-		else if (key == EBK_S)
-		{
-			pNode->setRotationZ(pNode->getRotationZ() - 1);
-		}
-		else if (key == EBK_A)
-		{
-			pNode->setRotationY(pNode->getRotationY() - 1);
-		}
-		else if (key == EBK_D)
-		{
-			pNode->setRotationY(pNode->getRotationY() + 1);
-		}
-	});
+	G_KEYBOARDMANAGER->addDispatcher(camera, this, KEYBOARD_DELEGATTE_SELECTOR(WndRender::onKeyBoardCamera));
 }
 
 void WndRender::testEditBox()
@@ -415,4 +321,147 @@ void WndRender::addLight()
 	pCtrlSpotLight->setDirection(0.0f, 0.0f, 1.0f);
 
 	this->getCanvas()->getRoot()->addChild(pCtrlSpotLight);
+}
+
+void WndRender::testPixelImage()
+{
+	CtrlImage* pImage = new CtrlImage();
+	pImage->setImagePath("Resource/world.jpg", EIF_JPEG);
+	pImage->setPosition(512, 384, 0);
+	AUTO_RELEASE_OBJECT(pImage);
+	this->getCanvas()->getRoot()->addChild(pImage);
+
+	CtrlText* pCtrlText = new CtrlText();
+	AUTO_RELEASE_OBJECT(pCtrlText);
+	pCtrlText->setFontPath("Resource/font_3.ttf");
+	pCtrlText->setAnchorPoint(0, 0, 0);
+	pCtrlText->setFontSize(58);
+	pCtrlText->setString("点击后移动鼠标，改变颜色");
+	pCtrlText->setPosition(0, 0, 0);
+	pCtrlText->setColor(sys::Color4B(125, 80, 255, 255));
+	this->getCanvas()->getRoot()->addChild(pCtrlText);
+
+	pImage->setUserData(pCtrlText);
+	pImage->getTouchProxy()->addTouchDelegate(ETT_ON, this, TOUCH_DELEGATTE_SELECTOR(WndRender::onTouchImage));
+}
+
+void WndRender::onTouchBegin(sys::Object* object, float x, float y)
+{
+	CtrlImage* pNode = dynamic_cast<CtrlImage*>(object);
+	if (pNode == nullptr)
+	{
+		return;
+	}
+
+	std::vector<sys::Vector>* pAry = new std::vector<sys::Vector>(2);
+	(*pAry)[0].x = pNode->getPositionX();
+	(*pAry)[0].y = pNode->getPositionY();
+
+	(*pAry)[1].x = x;
+	(*pAry)[1].y = y;
+
+	pNode->setUserData(pAry);
+}
+
+void WndRender::onTouchMove(sys::Object* object, float x, float y)
+{
+	CtrlImage* pNode = dynamic_cast<CtrlImage*>(object);
+	if (pNode == nullptr)
+	{
+		return;
+	}
+
+	std::vector<sys::Vector>* pAry = static_cast<std::vector<sys::Vector>*>(pNode->getUserData());
+	pNode->setPosition((*pAry)[0].x + x - (*pAry)[1].x, (*pAry)[0].y + y - (*pAry)[1].y, 0);
+}
+
+void WndRender::onTouchEnd(sys::Object* object, float x, float y)
+{
+	CtrlImage* pNode = dynamic_cast<CtrlImage*>(object);
+	if (pNode == nullptr)
+	{
+		return;
+	}
+
+	std::vector<sys::Vector>* pAry = static_cast<std::vector<sys::Vector>*>(pNode->getUserData());
+	SAFE_DELETE(pAry);
+}
+
+void WndRender::onKeyBoard(sys::Object* object, sys::BoardKey key, sys::ButtonStatus type)
+{
+	CtrlImage* pNode = dynamic_cast<CtrlImage*>(object);
+	if (pNode == nullptr)
+	{
+		return;
+	}
+	if (type == EBS_BUTTON_UP)
+	{
+		return;
+	}
+
+	float speed = 5;
+	if (key == EBK_W)
+	{
+		pNode->setPositionY(pNode->getPositionY() + speed);
+	}
+	else if (key == EBK_S)
+	{
+		pNode->setPositionY(pNode->getPositionY() - speed);
+	}
+	else if (key == EBK_A)
+	{
+		pNode->setPositionX(pNode->getPositionX() - speed);
+	}
+	else if (key == EBK_D)
+	{
+		pNode->setPositionX(pNode->getPositionX() + speed);
+	}
+}
+
+void WndRender::onTouchImage(sys::Object* object, float x, float y)
+{
+	CtrlImage* pImage = dynamic_cast<CtrlImage*>(object);
+	if (pImage == nullptr)
+	{
+		return;
+	}
+	CtrlText* pText = static_cast<CtrlText*>(pImage->getUserData());
+	if (pText == nullptr)
+	{
+		return;
+	}
+
+	sys::Color4B color = Pixel::getPixel(x, y);
+	pText->setString(getCString("##%02x%02x%02x%02x", color.red, color.green, color.blue, color.alpha));
+	//pText->setColor(color);
+}
+
+void WndRender::onKeyBoardCamera(sys::Object* object, sys::BoardKey key, sys::ButtonStatus type)
+{
+	Camera* pNode = dynamic_cast<Camera*>(object);
+	if (pNode == nullptr)
+	{
+		return;
+	}
+	if (type == EBS_BUTTON_UP)
+	{
+		return;
+	}
+	float zOrderDiff = 10;
+	if (key == EBK_W)
+	{
+		pNode->setRotationZ(pNode->getRotationZ() + 1);
+	}
+	else if (key == EBK_S)
+	{
+		pNode->setRotationZ(pNode->getRotationZ() - 1);
+	}
+	else if (key == EBK_A)
+	{
+		pNode->setRotationY(pNode->getRotationY() - 1);
+	}
+	else if (key == EBK_D)
+	{
+		pNode->setRotationY(pNode->getRotationY() + 1);
+	}
 }

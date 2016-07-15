@@ -1,6 +1,8 @@
 #include "system.h"
 #include "../Node/import.h"
 
+#include <functional>
+
 namespace render
 {
 	// 触摸类型
@@ -12,27 +14,29 @@ namespace render
 		ETT_UP,		// 放手
 	};
 
-	typedef void (*TOUCH_DELEGATE_HANDLER)(sys::Object* object, float x, float y);
+	typedef void (sys::Object::*TOUCH_DELEGATE_HANDLER)(sys::Object* object, float x, float y);
 
 	#define TOUCH_DELEGATTE_SELECTOR(HANDLER_SEL) static_cast<TOUCH_DELEGATE_HANDLER>(&HANDLER_SEL)
 
 	// 触摸委托
 	struct TouchDelegate
 	{
+	public:
 		sys::Object* target;
+
 		TOUCH_DELEGATE_HANDLER handler;
 
 		TouchDelegate() :target(nullptr), handler(nullptr){}
 
-		void hand(float x, float y)
+		void hand(sys::Object* obj, float x, float y)
 		{
 			if (!empty())
-				(*handler)(target, x, y);
+				(target->*handler)(obj, x, y);
 		}
 
 		bool empty()
 		{
-			return handler == nullptr;
+			return handler == nullptr || target == nullptr;
 		}
 
 		bool isEquals(sys::Object* t, TOUCH_DELEGATE_HANDLER h)

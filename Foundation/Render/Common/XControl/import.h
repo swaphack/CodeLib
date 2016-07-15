@@ -1,3 +1,3 @@
 #pragma once
 
-#include "CtrlPixel.h"
+#include "Pixel.h"

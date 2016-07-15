@@ -13,7 +13,7 @@ KeyboardManager::~KeyboardManager()
 	this->removeAllDispatchers();
 }
 
-void KeyboardManager::addDispatcher(sys::Object* node, KEYBOARD_DELEGATE_HANDLER handler)
+void KeyboardManager::addDispatcher(sys::Object* node, sys::Object* target, KEYBOARD_DELEGATE_HANDLER handler)
 {
 	if (node == nullptr || handler == nullptr)
 	{
@@ -23,8 +23,9 @@ void KeyboardManager::addDispatcher(sys::Object* node, KEYBOARD_DELEGATE_HANDLER
 	this->removeDispatcher(node);
 
 	KeyBoardDelegate* del = new KeyBoardDelegate();
-	del->target = node;
+	del->target = target;
 	del->handler = handler;
+	del->object = node;
 
 	_keyboardDispatchers.push_back(del);
 }

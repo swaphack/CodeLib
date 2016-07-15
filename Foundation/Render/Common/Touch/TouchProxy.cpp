@@ -74,15 +74,15 @@ void TouchProxy::onTouchEnd(float x, float y)
 	dispatchTouchEvent(ETT_UP, x, y);
 }
 
-void TouchProxy::addTouchDelegate(TouchType type, TOUCH_DELEGATE_HANDLER handler)
+void TouchProxy::addTouchDelegate(TouchType type, sys::Object* object, TOUCH_DELEGATE_HANDLER handler)
 {
 	TouchDelegate* del = new TouchDelegate();
-	del->target = _target;
+	del->target = object;
 	del->handler = handler;
 	_touchEvent[type].push_back(del);
 }
 
-void TouchProxy::removeTouchDelegate(TouchType type, TOUCH_DELEGATE_HANDLER handler)
+void TouchProxy::removeTouchDelegate(TouchType type, sys::Object* object, TOUCH_DELEGATE_HANDLER handler)
 {
 	std::map<TouchType, std::vector<TouchDelegate*>>::iterator it = _touchEvent.find(type);
 	if (it == _touchEvent.end())
@@ -93,7 +93,7 @@ void TouchProxy::removeTouchDelegate(TouchType type, TOUCH_DELEGATE_HANDLER hand
 	std::vector<TouchDelegate*>::iterator itD = it->second.begin();
 	while (itD != it->second.end())
 	{
-		if ((*itD)->isEquals(_target, handler))
+		if ((*itD)->isEquals(object, handler))
 		{
 			delete (*itD);
 			it->second.erase(itD);
@@ -151,7 +151,7 @@ void TouchProxy::dispatchTouchEvent(TouchType type, float x, float y)
 	std::vector<TouchDelegate*>::iterator itD = it->second.begin();
 	while (itD != it->second.end())
 	{
-		(*itD)->hand(x, y);
+		(*itD)->hand(_target, x, y);
 		itD++;
 	}
 }

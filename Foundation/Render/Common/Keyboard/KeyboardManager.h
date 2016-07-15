@@ -4,7 +4,7 @@
 
 namespace render
 {
-	typedef void(*KEYBOARD_DELEGATE_HANDLER)(sys::Object* object, sys::BoardKey key, sys::ButtonStatus type);
+	typedef void(sys::Object::*KEYBOARD_DELEGATE_HANDLER)(sys::Object* object, sys::BoardKey key, sys::ButtonStatus type);
 
 	#define KEYBOARD_DELEGATTE_SELECTOR(HANDLER_SEL) static_cast<KEYBOARD_DELEGATE_HANDLER>(&HANDLER_SEL)
 
@@ -13,13 +13,14 @@ namespace render
 	{
 		sys::Object* target;
 		KEYBOARD_DELEGATE_HANDLER handler;
+		sys::Object* object;
 
 		KeyBoardDelegate() :target(nullptr), handler(nullptr){}
 
 		void hand(sys::BoardKey key, sys::ButtonStatus type)
 		{
 			if (!empty())
-				(*handler)(target, key, type);
+				(target->*handler)(object, key, type);
 		}
 
 		bool empty()
@@ -46,9 +47,9 @@ namespace render
 		~KeyboardManager();
 	public:
 		// 添加按键派发对象
-		void addDispatcher(sys::Object* node, KEYBOARD_DELEGATE_HANDLER handler);
+		void addDispatcher(sys::Object* node, sys::Object* target, KEYBOARD_DELEGATE_HANDLER handler);
 		// 移除按键派发对象
-		void removeDispatcher(sys::Object* node);
+		void removeDispatcher(sys::Object* target);
 		// 移除所有按键派发对象
 		void removeAllDispatchers();
 		// 派发接受到的按钮事件

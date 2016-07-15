@@ -27,9 +27,9 @@ namespace render
 		void onTouchEnd(float x, float y);
 
 		// 添加触摸事件
-		void addTouchDelegate(TouchType type, TOUCH_DELEGATE_HANDLER handler);
+		void addTouchDelegate(TouchType type, sys::Object* object, TOUCH_DELEGATE_HANDLER handler);
 		// 移除触摸事件
-		void removeTouchDelegate(TouchType type, TOUCH_DELEGATE_HANDLER handler);
+		void removeTouchDelegate(TouchType type, sys::Object* object, TOUCH_DELEGATE_HANDLER handler);
 		// 移除指定类型的触摸事件
 		void removeTouchEvent(TouchType type);
 		// 移除所有触摸事件

@@ -46,6 +46,11 @@ void CtrlImage::setImagePath(const char* path, ImageFormat format/* = EIF_PNG*/)
 	this->setVolume(texture->getWidth(), texture->getHeight(), texture->getDeep());
 }
 
+const char* CtrlImage::getImagePath()
+{
+	return _imageDefine.filepath.c_str();
+}
+
 void CtrlImage::setTexture(const Texture* texture)
 {
 	if (texture == nullptr)

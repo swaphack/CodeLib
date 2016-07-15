@@ -66,6 +66,6 @@ namespace sys
 		static Vector One;
 	};
 
-	__declspec(selectany) sys::Vector Vector::Zero;
-	__declspec(selectany) sys::Vector Vector::One = sys::Vector(1,1,1);
+	__declspec(selectany) Vector Vector::Zero;
+	__declspec(selectany) Vector Vector::One = Vector(1,1,1);
 }

@@ -7,15 +7,7 @@ CtrlEditBox::CtrlEditBox()
 :_keyboardEnabled(false)
 , _editInputHandler(nullptr)
 {
-	this->getTouchProxy()->addTouchDelegate(ETT_UP, [](sys::Object* object, float x, float y){
-		CtrlEditBox* editBox = dynamic_cast<CtrlEditBox*>(object);
-		if (editBox == nullptr)
-		{
-			return;
-		}
-
-		editBox->setKeyboardEnable(true);
-	});
+	this->getTouchProxy()->addTouchDelegate(ETT_UP, this, TOUCH_DELEGATTE_SELECTOR(CtrlEditBox::onTouchUp));
 
 	this->addKeyboardDelegate();
 }
@@ -66,18 +58,32 @@ void CtrlEditBox::dispatchInputListen(EditInputStatus status)
 
 void CtrlEditBox::addKeyboardDelegate()
 {
-	G_KEYBOARDMANAGER->addDispatcher(this, [](sys::Object* object, sys::BoardKey key, sys::ButtonStatus type){
-		CtrlEditBox* editBox = dynamic_cast<CtrlEditBox*>(object);
-		if (editBox == nullptr || editBox->isKeyboardEnable() == false)
-		{
-			return;
-		}
-
-		editBox->onInputHand(key, type);
-	});
+	G_KEYBOARDMANAGER->addDispatcher(this, this, KEYBOARD_DELEGATTE_SELECTOR(CtrlEditBox::onKeyBoardInput));
 }
 
 void CtrlEditBox::removeKeyboardDelegate()
 {
 	G_KEYBOARDMANAGER->removeDispatcher(this);
+}
+
+void CtrlEditBox::onTouchUp(sys::Object* object, float x, float y)
+{
+	CtrlEditBox* editBox = dynamic_cast<CtrlEditBox*>(object);
+	if (editBox == nullptr)
+	{
+		return;
+	}
+
+	editBox->setKeyboardEnable(true);
+}
+
+void CtrlEditBox::onKeyBoardInput(sys::Object* object, sys::BoardKey key, sys::ButtonStatus type)
+{
+	CtrlEditBox* editBox = dynamic_cast<CtrlEditBox*>(object);
+	if (editBox == nullptr || editBox->isKeyboardEnable() == false)
+	{
+		return;
+	}
+
+	editBox->onInputHand(key, type);
 }

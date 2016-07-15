@@ -16,6 +16,8 @@ namespace render
 
 		// 设置图片路径
 		void setImagePath(const char* path, ImageFormat format = EIF_PNG);
+		// 获取图片路径
+		const char* getImagePath();
 		// 设置图片纹理
 		void setTexture(const Texture* texture);
 		// 设置要显示的纹理区域
@@ -26,9 +28,11 @@ namespace render
 		const TexFrame* getTexFrame();
 		// 设置水平翻转
 		void setFlipX(bool status);
+		// 是否水平翻转
 		bool isFlipX();
 		// 设置垂直翻转
 		void setFlipY(bool status);
+		// 是否垂直翻转
 		bool isFlipY();
 	protected:
 		virtual void initSelf();

@@ -10,6 +10,26 @@
       <Platform>Win32</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="NodeLoader\helper.h" />
+    <ClInclude Include="NodeLoader\INodeLoader.h" />
+    <ClInclude Include="NodeLoader\macros.h" />
+    <ClInclude Include="NodeLoader\NodeProperty.h" />
+    <ClInclude Include="NodeLoader\ImageLoader.h" />
+    <ClInclude Include="NodeLoader\NodeLoader.h" />
+    <ClInclude Include="NodeLoader\UIProxy.h" />
+    <ClInclude Include="NodeLoader\TextLoader.h" />
+    <ClInclude Include="UIFace\IUIFace.h" />
+    <ClInclude Include="UIFace\macros.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="NodeLoader\INodeLoader.cpp" />
+    <ClCompile Include="NodeLoader\NodeProperty.cpp" />
+    <ClCompile Include="NodeLoader\ImageLoader.cpp" />
+    <ClCompile Include="NodeLoader\NodeLoader.cpp" />
+    <ClCompile Include="NodeLoader\UIProxy.cpp" />
+    <ClCompile Include="NodeLoader\TextLoader.cpp" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{CBDBD1AC-664E-414E-ABC6-47640D4A6111}</ProjectGuid>
     <RootNamespace>UIEditor</RootNamespace>
@@ -44,7 +64,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>../../Foundation/System/;../../Foundation/Web/;../../Foundation/Render/;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../Foundation/System/;../../Foundation/Text/;../../Foundation/Render/</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -64,15 +84,6 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClInclude Include="UILoader\macros.h" />
-    <ClInclude Include="UILoader\UIElementLoader.h" />
-    <ClInclude Include="UILoader\UILoader.h" />
-    <ClInclude Include="UILoader\UINodeLoader.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="UILoader\UILoader.cpp" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

@@ -9,7 +9,7 @@ public:
 	virtual ~WndRender();
 public:
 	virtual void show();
-	void testImage();
+	void testMoveImage();
 	void testClock();
 	void testCubeModel();
 	void testSphereModel();
@@ -25,4 +25,13 @@ public:
 	void testImages();
 	void testString();
 	void addLight();
+	void testPixelImage();
+protected:
+	void onTouchBegin(sys::Object* object, float x, float y);
+	void onTouchMove(sys::Object* object, float x, float y);
+	void onTouchEnd(sys::Object* object, float x, float y);
+	void onKeyBoard(sys::Object* object, sys::BoardKey key, sys::ButtonStatus type);
+
+	void onTouchImage(sys::Object* object, float x, float y);
+	void onKeyBoardCamera(sys::Object* object, sys::BoardKey key, sys::ButtonStatus type);
 };

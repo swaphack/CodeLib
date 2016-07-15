@@ -5,6 +5,13 @@
 namespace render
 {
 	// 2d文本
+	/*
+		生成在指定区域的文字
+		水平对齐方式：左对齐，右对齐， 居中
+
+		在指定框内显示
+		垂直对齐方式：顶对齐，底对齐，居中
+	*/
 	class CtrlText : public ColorNode, public TextProtocol
 	{
 	public:
@@ -29,9 +36,7 @@ namespace render
 		// 获取垂直间距
 		float getVerticalDistance();
 		// 设置显示的文本
-		virtual void setString(const char* text);
-		// 获取显示的文本
-		//virtual const char* getString();
+		void setString(const char* text);
 
 		// 设置水平对齐方式
 		void setHorizontalAlignment(HorizontalAlignment alignment);
@@ -46,9 +51,7 @@ namespace render
 		// 获取显示区域
 		sys::Size getDimensions();
 		// 设置颜色
-		void setColor(sys::Color4B color);
-		// 获取颜色
-		sys::Color4B getColor();
+		void setColor(const sys::Color4B& color);
 	protected:
 		virtual void initSelf();
 	private:

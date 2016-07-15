@@ -86,11 +86,6 @@ void CtrlText::setString(const char* text)
 	setDirty(true);
 }
 
-// const char* CtrlText::getString()
-// {
-// 	return _textDefine.text.c_str();
-// }
-
 void CtrlText::setHorizontalAlignment(HorizontalAlignment alignment)
 {
 	_textDefine.horizontalAlignment = alignment;
@@ -126,15 +121,11 @@ sys::Size CtrlText::getDimensions()
 	return sys::Size(_textDefine.width, _textDefine.height);
 }
 
-void CtrlText::setColor(sys::Color4B color)
+void CtrlText::setColor(const sys::Color4B& color)
 {
+	ColorProtocol::setColor(color);
 	_textDefine.color = color;
 	setDirty(true);
-}
-
-sys::Color4B CtrlText::getColor()
-{
-	return _textDefine.color;
 }
 
 void CtrlText::initSelf()

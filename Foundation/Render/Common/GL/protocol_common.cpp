@@ -51,12 +51,20 @@ void ColorProtocol::setColor(uchar r, uchar g, uchar b, uchar a)
 	_color.alpha = a;
 }
 
-void ColorProtocol::setColor(sys::Color4B color)
+void ColorProtocol::setColor(const sys::Color4B& color)
 {
 	_color = color;
 }
 
-sys::Color4B ColorProtocol::getColor()
+void ColorProtocol::setColor(const sys::Color3B& color)
+{
+	_color.red = color.red;
+	_color.green = color.green;
+	_color.blue = color.blue;
+	_color.red = 255;
+}
+
+const sys::Color4B& ColorProtocol::getColor()
 {
 	return _color;
 }
@@ -124,7 +132,7 @@ void SpaceProtocol::setPosition(float x, float y, float z)
 	onSpaceChange();
 }
 
-void SpaceProtocol::setPosition(sys::Vector& position)
+void SpaceProtocol::setPosition(const sys::Vector& position)
 {
 	_position = position;
 	onSpaceChange();
@@ -143,7 +151,7 @@ void SpaceProtocol::setScale(float x, float y, float z)
 	onSpaceChange();
 }
 
-void SpaceProtocol::setScale(sys::Vector& scale)
+void SpaceProtocol::setScale(const sys::Vector& scale)
 {
 	_scale = scale;
 	onSpaceChange();
@@ -162,7 +170,7 @@ void SpaceProtocol::setRotation(float x, float y, float z)
 	onSpaceChange();
 }
 
-void SpaceProtocol::setRotation(sys::Vector& rotation)
+void SpaceProtocol::setRotation(const sys::Vector& rotation)
 {
 	_rotation = rotation;
 	onSpaceChange();
@@ -292,6 +300,12 @@ void BodyProtocol::setAnchorPoint(float x, float y, float z)
 	onBodyChange();
 }
 
+void BodyProtocol::setAnchorPoint(const sys::Vector& anchor)
+{
+	_anchor = anchor;
+	onBodyChange();
+}
+
 const sys::Vector& BodyProtocol::getAnchorPoint()
 {
 	return _anchor;
@@ -302,6 +316,21 @@ void BodyProtocol::setVolume(float w, float h, float d)
 	_volume.width = w;
 	_volume.height = h;
 	_volume.deep = d;
+	onBodyChange();
+}
+
+void BodyProtocol::setVolume(const sys::Volume& volume)
+{
+	_volume = volume;
+	onBodyChange();
+}
+
+void BodyProtocol::setSize(const sys::Size& size)
+{
+	_volume.width = size.width;
+	_volume.height = size.height;
+	_volume.deep = 0;
+
 	onBodyChange();
 }
 
@@ -341,6 +370,11 @@ float BodyProtocol::getHeight()
 float BodyProtocol::getDeep()
 {
 	return _volume.deep;
+}
+
+sys::Size BodyProtocol::getSize()
+{
+	return sys::Size(_volume.width, _volume.height);
 }
 
 //////////////////////////////////////////////////////////////////////////
