@@ -117,8 +117,8 @@ Window::~Window()
 void Window::initWindow(const char* title, int width, int height)
 {
 	_title = title;
-	_width = width;
-	_height = height;
+	_width = static_cast<float>(width);
+	_height = static_cast<float>(height);
 
 	if (!this->init())
 	{

@@ -43,7 +43,7 @@ namespace sys
 		// 以指定字符串开头
 		bool startWith(const char* value);
 		// 获取索引的字符
-		virtual char operator[](uint index);
+		virtual char operator[](int index);
 		// 移除从指定位置开始的一段字符串
 		String& remove(int offset, int count);
 		// 插入字符串
@@ -59,6 +59,8 @@ namespace sys
 		int findLastOf(char value);
 		// 结束位置查找匹配字符的索引位置
 		int findLastOf(const char* value);
+		// 是否是句子
+		bool isLine();
 
 		// 去掉空格
 		String& trim();

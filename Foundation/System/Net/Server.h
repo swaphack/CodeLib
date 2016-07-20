@@ -50,8 +50,12 @@ namespace sys
 		void _recvData(std::vector<int>& removedSocks);
 		// 移除socekt
 		void _removeSockets(std::vector<int>& removedSocks);
-		// 发送消息
+		// 清除数据检查
 		void _flushData();
+		// 发送消息
+		void _flushSendData();
+		// 接受消息
+		void _flushRecvData();
 	protected:
 		Socket* _socket;
 		// 客户端

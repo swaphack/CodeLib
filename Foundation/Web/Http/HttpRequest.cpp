@@ -19,11 +19,11 @@ HttpRequest::~HttpRequest()
 
 }
 
-void HttpRequest::setMessage(const char* msg, int size)
+void HttpRequest::setMessage(const char* msg, int size, int& offset)
 {
 	HttpCommand::setMessage(msg, size);
 
-	this->parseRequest();
+	offset = this->parseMessage();
 }
 
 const char* HttpRequest::getRequest(const char* key)
@@ -63,7 +63,7 @@ const char* HttpRequest::getBody()
 	return _body.c_str();
 }
 
-void HttpRequest::parseRequest()
+int HttpRequest::parseMessage()
 {
 	sys::StringStream* ss = new sys::StringStream(_msg.c_str());
 	sys::String line;
@@ -77,6 +77,11 @@ void HttpRequest::parseRequest()
 	while (!ss->readEnd())
 	{
 		line = ss->readLine();
+		if (!line.isLine())
+		{
+			break;
+		}
+		line = line.subString(0, line.getSize() - strlen(LINE_MARK));
 		if (order == EHRPO_BEGIN)	// ÇëÇóĞĞ
 		{
 			if (line.startWith(HttpRequestConstant::HTTP_REQ_GET)
@@ -117,18 +122,29 @@ void HttpRequest::parseRequest()
 				{
 					this->parseHeader(dest[0].getString(), dest[1].getString());
 				}
+				else
+				{
+					break;
+				}
 			}
 		}
 	}
 
 	dest.clear();
 
-	delete ss;
-
-	if (order != EHRPO_END && this->isHttpFormat())
+	int offset = 0;
+	if (!(order == EHRPO_END || order == EHRPO_BODY) && this->isHttpFormat())
 	{
 		this->setFullCommand(false);
 	}
+	else
+	{
+		offset = ss->getCursor() - 1;
+	}
+
+	delete ss;
+
+	return offset;
 }
 
 

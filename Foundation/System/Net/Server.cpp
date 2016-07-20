@@ -132,6 +132,10 @@ void Server::addRecvBuffer( int id, NetData* data )
 	{
 		_recvDatas[id].push(data);
 	}
+	else
+	{
+		delete data;
+	}
 }
 
 void Server::addSendBuffer( int id, NetData* data )
@@ -154,11 +158,6 @@ void Server::onRecvHandler( int id, NetData* data )
 		return;
 	}
 	this->addRecvBuffer(id, data);
-
-	if (! this->_recvHandler.empty())
-	{
-		this->_recvHandler.hand(id, this->_recvDatas[id]);	
-	}
 }
 
 void Server::_recvData( std::vector<int>& removedSocks )
@@ -207,6 +206,12 @@ void Server::_removeSockets( std::vector<int>& removedSocks )
 
 void Server::_flushData()
 {
+	this->_flushSendData();
+	this->_flushRecvData();
+}
+
+void Server::_flushSendData()
+{
 	int size;
 
 	for (std::map<int, Socket*>::iterator it = _clients.begin();
@@ -230,6 +235,25 @@ void Server::_flushData()
 					_sendDatas[sockId].pop();
 					SAFE_DELETE(data);
 				}
+			}
+		}
+	}
+}
+
+void Server::_flushRecvData()
+{
+	int id;
+
+	for (std::map<int, Socket*>::iterator it = _clients.begin();
+		it != _clients.end();
+		it++)
+	{
+		id = it->first;
+		if (!this->_recvHandler.empty())
+		{
+			if (this->_recvDatas.find(id) != this->_recvDatas.end() && !this->_recvDatas[id].empty())
+			{
+				this->_recvHandler.hand(id, this->_recvDatas[id]);
 			}
 		}
 	}

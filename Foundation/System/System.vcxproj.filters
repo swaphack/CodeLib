@@ -37,6 +37,9 @@
     <Filter Include="Type">
       <UniqueIdentifier>{6a833bb5-08b6-4839-a92c-20e9177ca8ba}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Thread">
+      <UniqueIdentifier>{1bcb798a-0625-43f0-a101-f52267ef2a0b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Base\File.h">

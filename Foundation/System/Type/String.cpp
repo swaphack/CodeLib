@@ -367,9 +367,9 @@ bool String::startWith(const char* value)
 	return true;
 }
 
-char String::operator[](uint index)
+char String::operator[](int index)
 {
-	if (index >= _size)
+	if (index >= _size || index < 0)
 	{
 		return 0;
 	}
@@ -572,6 +572,10 @@ int String::findLastOf(const char* value)
 	return offset;
 }
 
+bool String::isLine()
+{
+	return this->endWith(LINE_MARK);
+}
 
 String& String::trim()
 {

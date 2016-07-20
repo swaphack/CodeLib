@@ -12,9 +12,11 @@ StringStream::StringStream()
 StringStream::StringStream(const char* text)
 : Stream(new StreamBaseRef())
 {
-	char* newData = StreamHelper::mallocStream((void*)text, strlen(text));
+	int len = strlen(text) + 1;
 
-	this->setData(newData, strlen(newData));
+	char* newData = StreamHelper::mallocStream((void*)text, len);
+
+	this->setData(newData, len);
 }
 
 StringStream::~StringStream()
@@ -24,38 +26,21 @@ StringStream::~StringStream()
 
 std::string StringStream::readLine()
 {
-	int ext = 0;
-#if PLATFORM_TARGET == EPT_WINDOWS
-	ext = 2;
-#elif PLATFORM_TARGET == EPT_MAC
-	ext = 1;
-#elif PLATFORM_TARGET == EPT_LINUX
-	ext = 1;
-#endif
+	int ext = strlen(LINE_MARK);
 
 	char* cursor = getPtr();
 	char* ptr = getPtr();
 
-	while (ptr != nullptr
-#if PLATFORM_TARGET == EPT_WINDOWS
-		&& !(*(ptr - 1) == '\r' && *(ptr) == '\n')
-#elif PLATFORM_TARGET == EPT_MAC
-		&& !(*(ptr) == '\r')
-#elif PLATFORM_TARGET == EPT_LINUX
-		&& !(*(ptr) == '\n')
-#endif
-		&& (*ptr) != 0)
+	while ((ext - 1 >= 0) && (*ptr) != 0)
 	{
+		if (LINE_EQUAL(ptr - ext + 1))
+		{
+			break;
+		}
 		ptr++;
 	}
 
-#if PLATFORM_TARGET == EPT_WINDOWS
-	if (*(ptr) == '\n')
-#elif PLATFORM_TARGET == EPT_MAC
-	if ((*(ptr) == '\r')
-#elif PLATFORM_TARGET == EPT_LINUX
-	if ((*(ptr) == '\n')
-#endif
+	if (LINE_EQUAL(ptr - ext + 1))
 	{
 		ptr++;
 	}
@@ -65,9 +50,16 @@ std::string StringStream::readLine()
 	}
 
 	ss_t size = ptr - cursor;
-	this->setCursor(getCursor() + size);
-
-	return std::string(cursor, size - ext);
+	if ((*ptr) == 0)
+	{
+		this->setCursor(getCursor() + size + 1);
+		return std::string(cursor, size);
+	}
+	else
+	{
+		this->setCursor(getCursor() + size);
+		return std::string(cursor, size);
+	}
 }
 
 void StringStream::writeString(const char* line, int size)
@@ -98,14 +90,8 @@ void StringStream::writeLine(const char* line, int size)
 
 void StringStream::writeLine()
 {
-	int ext = 0;
-#if PLATFORM_TARGET == EPT_WINDOWS
-	ext = 2;
-#elif PLATFORM_TARGET == EPT_MAC
-	ext = 1;
-#elif PLATFORM_TARGET == EPT_LINUX
-	ext = 1;
-#endif
+	int ext = strlen(LINE_MARK);
+
 	int newCursor = ext + this->getCursor();
 	if (newCursor + 1 > this->getCapacity())
 	{
@@ -114,14 +100,7 @@ void StringStream::writeLine()
 	}
 
 	char* ptr = getPtr();
-#if PLATFORM_TARGET == EPT_WINDOWS
-	*(ptr) = '\r';
-	*(ptr + 1) = '\n';
-#elif PLATFORM_TARGET == EPT_MAC
-	*(ptr) = '\r';
-#elif PLATFORM_TARGET == EPT_LINUX
-	*(ptr) = '\n';
-#endif
+	LINE_APPEND(ptr);
 
 	this->setCursor(newCursor);
 }

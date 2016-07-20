@@ -120,27 +120,63 @@ void HttpServer::onRecvHander(HttpRequest* data)
 
 HttpRequest* HttpServer::createHttpRequest(int id, sys::DataQueue& dataQueue)
 {
-	sys::NetData* data = dataQueue.top();
-	if (data == nullptr)
+	sys::NetData* netData = dataQueue.top();
+	if (netData == nullptr)
 	{
 		return nullptr;
 	}
 	
+	int offset = 0;
 	HttpRequest* request = new HttpRequest();
-	request->setMessage(data->data, data->size);
+	request->setMessage(netData->data + netData->pos, netData->size, offset);
 
 	// 需判断接受数据是个完整的http包
 	if (request->isFullCommand())
 	{
 		request->setSessionID(getCString("%d", id));
-
-		dataQueue.pop();
-		delete data;
 	}
 	else
 	{
 		delete request;
 		request = nullptr;
+	}
+
+	if (offset > 0)
+	{
+		if (offset == netData->size)
+		{// 数据解析完毕
+			if (request->isFullCommand())
+			{// 完整的包
+				dataQueue.pop();
+				delete netData;
+			}
+			else
+			{
+				if (dataQueue.count() > 1)
+				{// 保留到下一条数据
+					dataQueue.pop();
+					sys::NetData* nextData = dataQueue.top();
+					nextData->insert(netData->getCursorPtr(), netData->size - offset);
+					delete netData;
+				}
+				// 保留当前
+			}
+		}
+		else
+		{
+			netData->pos = offset;
+		}
+	}
+	else
+	{
+		if (dataQueue.count() > 1)
+		{// 保留到下一条数据
+			dataQueue.pop();
+			sys::NetData* nextData = dataQueue.top();
+			nextData->insert(netData->getCursorPtr(), netData->size - offset);
+			delete netData;
+		}
+		// 保留当前
 	}
 
 	return request;

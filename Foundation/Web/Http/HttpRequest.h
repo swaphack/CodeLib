@@ -65,7 +65,7 @@ namespace web
 		virtual ~HttpRequest();
 	public:
 		// 设置消息
-		virtual void setMessage(const char* msg, int size);
+		virtual void setMessage(const char* msg, int size, int& offset);
 		// 请求行参数
 		const char* getRequest(const char* key);
 		// 报头参数
@@ -73,8 +73,8 @@ namespace web
 		// 可选的消息体
 		const char* getBody();
 	protected:
-		// 解析消息
-		void parseRequest();
+		// 解析消息,返回读取解析的长度
+		int parseMessage();
 	private:
 		// 解析请求行
 		void parseRequest(const char* line);

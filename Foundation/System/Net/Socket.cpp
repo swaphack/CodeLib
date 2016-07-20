@@ -20,6 +20,8 @@
 #define INVALID_SOCKET_VALUE -1
 #endif
 
+static char s_recvData[SOCKET_DATA_SIZE];
+
 using namespace sys;
 
 Socket::Socket()
@@ -114,9 +116,9 @@ int Socket::Send( const char* data, int size )
 
 char* Socket::Recv( int& size )
 {
-	char data[SOCKET_DATA_SIZE];
-	size = ::recv(_sock, data, SOCKET_DATA_SIZE, 0);
-	return data;
+	memset(s_recvData, 0, SOCKET_DATA_SIZE);
+	size = ::recv(_sock, s_recvData, SOCKET_DATA_SIZE, 0);
+	return s_recvData;
 }
 
 void Socket::ShutDown( int type )

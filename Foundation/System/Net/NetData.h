@@ -23,22 +23,35 @@ namespace sys
 			this->size = size;
 			this->pos = 0;
 		}
-		NetData(const char* data)
+		NetData(const char* value)
+			:NetData()
 		{
-			this->init(data, strlen(data));
+			this->init(value, strlen(value));
 		}
-		NetData(const char* data, int size)
+		NetData(const char* value, int size)
+			:NetData()
 		{
-			this->init(data, size);
+			this->init(value, size);
 		}
-		void init(const char* data, int size)
+		const char* getCursorPtr()
 		{
- 			int len = size * sizeof(char);
+			return data + pos;
+		}
+		void init(const char* value, int len)
+		{// ÖØÖÃ
+			StreamHelper::freeStream(this->data);
 
-			this->data = StreamHelper::mallocStream(len, (char*)data, size);
-
-			this->size = size;
+			this->data = StreamHelper::mallocStream(len, (char*)value, len);
+			this->size = len;
 			this->pos = 0;
+		}
+		// ²åÈëÍ·
+		void insert(const char* data, int len)
+		{
+			char* newData = StreamHelper::mallocStream(len + size, (char*)data, len);
+			memcpy(newData + len, this->data, this->size);
+
+			this->init(newData, len + size);
 		}
 		~NetData()
 		{
