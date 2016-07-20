@@ -31,16 +31,16 @@ std::string StringStream::readLine()
 	char* cursor = getPtr();
 	char* ptr = getPtr();
 
-	while ((ext - 1 >= 0) && (*ptr) != 0)
+	while ((*ptr) != 0)
 	{
-		if (LINE_EQUAL(ptr - ext + 1))
+		if ((ext - 1 >= 0) && LINE_EQUAL(ptr - ext + 1))
 		{
 			break;
 		}
 		ptr++;
 	}
 
-	if (LINE_EQUAL(ptr - ext + 1))
+	if ((ext - 1 >= 0) && LINE_EQUAL(ptr - ext + 1))
 	{
 		ptr++;
 	}
