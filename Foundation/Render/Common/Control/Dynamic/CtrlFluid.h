@@ -1,12 +1,12 @@
 #pragma onc
 
-#include "macros.h"
+#include "CtrlAnimation.h"
 #include <map>
 
 namespace render
 {
 	// Á÷Ìå
-	class CtrlFluid : public Animation
+	class CtrlFluid : public CtrlAnimation
 	{
 	public:
 		CtrlFluid();

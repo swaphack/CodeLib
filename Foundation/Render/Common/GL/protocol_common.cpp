@@ -70,6 +70,28 @@ const sys::Color4B& ColorProtocol::getColor()
 }
 
 //////////////////////////////////////////////////////////////////////////
+BlendProtocol::BlendProtocol()
+{
+
+}
+
+BlendProtocol::~BlendProtocol()
+{
+
+}
+
+void BlendProtocol::setBlend(int src, int dest)
+{
+	_blend.src = src;
+	_blend.dest = dest;
+}
+
+const BlendParam& BlendProtocol::getBlend()
+{
+	return _blend;
+}
+
+//////////////////////////////////////////////////////////////////////////
 SystemProtocol::SystemProtocol()
 :_actionStatus(EAS_NONE)
 {

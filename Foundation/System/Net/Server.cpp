@@ -149,6 +149,10 @@ void Server::addSendBuffer( int id, NetData* data )
 	{
 		_sendDatas[id].push(data);
 	}
+	else
+	{
+		delete data;
+	}
 }
 
 void Server::onRecvHandler( int id, NetData* data )

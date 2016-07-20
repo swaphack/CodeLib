@@ -1,11 +1,11 @@
 #pragma once
 
-#include "ColorNode.h"
+#include "Node.h"
 
 namespace render
 {
 	// ¶¯»­
-	class Animation : public ColorNode/*, public sys::ITimer*/
+	class Animation : public Node
 	{
 	public:
 		Animation();

@@ -34,7 +34,7 @@ void Object::retain()
 void Object::release()
 {
 	this->RetainCount--;
-	if (this->RetainCount <= 1)
+	if (this->RetainCount <= 0)
 	{
 		this->disponse();
 	}

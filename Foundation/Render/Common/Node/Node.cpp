@@ -282,7 +282,7 @@ void Node::sortChildren()
 		}
 		it++;
 	}
-
+	// ¼ÆÊýÆ÷¼õ1
 	_children.clear();
 	oIt = orderNodes.begin();
 	while (oIt != orderNodes.end())

@@ -26,6 +26,7 @@ public:
 	void testString();
 	void addLight();
 	void testPixelImage();
+	void testSequenceFrame();
 protected:
 	void onTouchBegin(sys::Object* object, float x, float y);
 	void onTouchMove(sys::Object* object, float x, float y);

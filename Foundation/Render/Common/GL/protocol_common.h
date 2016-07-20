@@ -1,3 +1,7 @@
+#pragma once
+
+#include "macros.h"
+
 #include "system.h"
 
 #include "enum_common.h"
@@ -40,6 +44,22 @@ namespace render
 	protected:
 		// 混合
 		sys::Color4B _color;
+	};
+
+	// 混合
+	class BlendProtocol
+	{
+	public:
+		BlendProtocol();
+		virtual ~BlendProtocol();
+	public:
+		// 设置混合条件
+		void setBlend(int src, int dest);
+		// 获取混合参数
+		const BlendParam& getBlend();
+	protected:
+		// 混合参数
+		BlendParam _blend;
 	};
 
 	// 用于系统类

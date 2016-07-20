@@ -15,7 +15,6 @@
 #define AUTO_RELEASE_OBJECT(object) \
 	{ \
 		if (object) {\
-		object->retain(); \
 		object->autoRelease(); \
 		} \
 	}

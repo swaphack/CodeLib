@@ -41,7 +41,7 @@ const char* FilePath::getFilePath(const char* filename)
 			_filePathCache[filename] = fullpath;
 			return _filePathCache[filename].c_str();
 		}
-		it++;
+		it2++;
 	}
 
 	return nullptr;

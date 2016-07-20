@@ -16,9 +16,9 @@ WndRender::~WndRender()
 
 void WndRender::show()
 {
-	this->testPixelImage();
+	//this->testMedia();
 
-	this->testEditBox();
+	this->testSequenceFrame();
 }
 
 void WndRender::testMoveImage()
@@ -343,6 +343,18 @@ void WndRender::testPixelImage()
 
 	pImage->setUserData(pCtrlText);
 	pImage->getTouchProxy()->addTouchDelegate(ETT_ON, this, TOUCH_DELEGATTE_SELECTOR(WndRender::onTouchImage));
+}
+
+void WndRender::testSequenceFrame()
+{
+	CtrlSequenceFrame* pSequenceFrame = new CtrlSequenceFrame();
+	AUTO_RELEASE_OBJECT(pSequenceFrame);
+	pSequenceFrame->setFramePath("Resource/1/20%d.png", 9);
+	pSequenceFrame->setPosition(512, 384, 0);
+	pSequenceFrame->setFrameRate(1.0f / 10);
+	pSequenceFrame->start();
+
+	this->getCanvas()->getRoot()->addChild(pSequenceFrame);
 }
 
 void WndRender::onTouchBegin(sys::Object* object, float x, float y)

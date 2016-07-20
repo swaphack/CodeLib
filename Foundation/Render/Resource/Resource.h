@@ -34,7 +34,7 @@ namespace render
 	}
 
 	template<typename T>
-	T* render::Resource::load(const MediaDefine& mediaDefine)
+	T* Resource::load(const MediaDefine& mediaDefine)
 	{
 		T* t = new T();
 		t->load(mediaDefine);

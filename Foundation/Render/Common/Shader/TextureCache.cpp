@@ -20,7 +20,7 @@ void TextureCache::addTexture(const char* path, Texture* texture)
 		return;
 	}
 
-	AUTO_RELEASE_OBJECT(texture);
+	texture->retain();
 	_textures[path] = texture;
 }
 
@@ -96,9 +96,18 @@ Texture2D* TextureCache::getTexture2D(const ImageDefine& imageDefine)
 		return nullptr;
 	}
 
+	if (image->getPixels() == nullptr)
+	{
+		SAFE_DELETE(image);
+		return nullptr;
+	}
+
 	Texture2D* texture2D = new Texture2D();
 	texture2D->load(image);
+	AUTO_RELEASE_OBJECT(texture2D);
 	addTexture(imageDefine.filepath.c_str(), texture2D);
+
+	SAFE_DELETE(image);
 
 	return texture2D;
 }

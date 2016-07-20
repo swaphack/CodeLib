@@ -3,7 +3,7 @@
 
 namespace render
 {
-	struct BlendParam 
+	struct BlendParam
 	{
 		int src;
 		int dest;

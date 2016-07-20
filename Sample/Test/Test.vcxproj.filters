@@ -22,9 +22,6 @@
     <Filter Include="DAL">
       <UniqueIdentifier>{6dc83ced-6b85-4fea-b067-53d1d367a65e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Net">
-      <UniqueIdentifier>{ec7922c0-ef6e-48b7-84fa-bb638419588e}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BLL\BusinessMacros.h">

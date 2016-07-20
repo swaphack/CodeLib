@@ -3,44 +3,19 @@
 using namespace render;
 
 CtrlMedia::CtrlMedia()
-:_frame(0)
-, _texFrame(nullptr)
-, _media(nullptr)
+:_media(nullptr)
 {
-
+	_ctrlFrame->setCounter(true);
 }
 
 CtrlMedia::~CtrlMedia()
 {
-	this->removeAllTextures();
-	SAFE_DELETE(_texFrame);
 	SAFE_DELETE(_media);
 }
 
 void CtrlMedia::draw()
 {
-	Node::draw();
-	if (_texFrame == nullptr)
-	{
-		return;
-	}
-
-	int textID = 0;
-	if (_texFrame->getTexture())
-	{
-		textID = _texFrame->getTexture()->getTextureID();
-	}
-
-	GLTool::beginBlend(_blend);
-
-	GLTool::setColor(getColor());
-
-	glEnable(GL_TEXTURE_2D);
-	glBindTexture(GL_TEXTURE_2D, textID);
-	GLTool::drawRectVertex(&_texRect);
-	glDisable(GL_TEXTURE_2D);
-
-	GLTool::endBlend();
+	CtrlAnimation::draw();
 }
 
 void CtrlMedia::setMediaPath(const char* path)
@@ -53,28 +28,15 @@ void CtrlMedia::setMediaPath(const char* path)
 	_media = Resource::load<FFmpeg>(_mediaDefine);
 
 	this->setVolume(_media->getWidth(), _media->getHeight(), 0);
+
+	this->setFrameRate(1.0f / _media->getFrameRate());
+
+	_ctrlFrame->setVolume(this->getWidth(), this->getHeight(), 0);
 }	
-
-void CtrlMedia::setFrame(int frame)
-{
-	_frame = frame;
-
-	setDirty(true);
-}
-
-int CtrlMedia::getFrame()
-{
-	return _frame;
-}
 
 void CtrlMedia::initSelf()
 {
-	Node::initSelf();	
-
-	if (_texFrame == nullptr)
-	{
-		_texFrame = new TexFrame();
-	}
+	CtrlAnimation::initSelf();
 
 	if (_media)
 	{
@@ -82,34 +44,16 @@ void CtrlMedia::initSelf()
 	}
 
 	Texture2D* texture = getNextTexture();
+
+	if (texture == nullptr) return;
+
 	AUTO_RELEASE_OBJECT(texture);
-	if (texture == nullptr)
+
+	if (_ctrlFrame)
 	{
-		return;
-	}
-
-	Texture* oldTexture = (Texture*)_texFrame->getTexture();
-	if (oldTexture)
-	{
-		oldTexture->release();
-	}
-
-	_texFrame->setTextureWithRect(texture);
-
-	sys::Size size = sys::Size(_texFrame->getTexture()->getWidth(), _texFrame->getTexture()->getHeight());
-
-	TextureTool::setTexture2DCounterCoords(&_texRect, size, _texFrame->getRect());
-	TextureTool::setTexture2DVertexts(&_texRect, sys::Vector::Zero, _volume, _anchor);
-}
-
-void CtrlMedia::updateSelf(float interval)
-{
-	_frame += interval;
-	float frame = 1.0f / _media->getFrameRate();
-	if (_frame > frame)
-	{
-		setDirty(true);
-		_frame -= frame;
+		_ctrlFrame->setTexture(texture);
+		_ctrlFrame->setTexRect(sys::Rect(0, 0, this->getWidth(), this->getHeight()));
+		_ctrlFrame->setVolume(this->getWidth(), this->getHeight(), 0);
 	}
 }
 
@@ -131,18 +75,3 @@ Texture2D* CtrlMedia::getNextTexture()
 
 	return texture2D;
 }
-
-void CtrlMedia::removeAllTextures()
-{
-	std::map<mf_s, Texture2D*>::iterator it = _texures.begin();
-
-	while (it != _texures.end())
-	{
-		SAFE_RELEASE(it->second);
-		it++;
-	}
-
-	_texures.clear();
-}
-
-

@@ -94,6 +94,10 @@ void HttpResponse::writeString(const char* value)
 
 void HttpResponse::writeFile(const char* filename)
 {
+	if (filename == nullptr)
+	{
+		return;
+	}
 	std::string data = G_RESOURCE->loadFile(filename);
 
 	this->setBody(data.c_str(), data.size());

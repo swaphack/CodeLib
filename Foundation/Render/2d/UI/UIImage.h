@@ -6,7 +6,7 @@
 
 namespace render
 {
-	class UIImage : public CtrlImage, public UINameProtocol
+	class UIImage : public CtrlFrame, public UINameProtocol
 	{
 	public:
 	protected:

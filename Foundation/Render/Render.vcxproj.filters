@@ -85,9 +85,6 @@
     <ClCompile Include="Common\Control\Static\CtrlFog.cpp">
       <Filter>Common\Control\Static</Filter>
     </ClCompile>
-    <ClCompile Include="Common\Control\Static\CtrlImage.cpp">
-      <Filter>Common\Control\Static</Filter>
-    </ClCompile>
     <ClCompile Include="Common\Control\Static\CtrlLight.cpp">
       <Filter>Common\Control\Static</Filter>
     </ClCompile>
@@ -165,6 +162,18 @@
     </ClCompile>
     <ClCompile Include="Common\XControl\Pixel.cpp">
       <Filter>Common\XControl</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Control\Static\CtrlFrame.cpp">
+      <Filter>Common\Control\Static</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Control\Static\CtrlImage.cpp">
+      <Filter>Common\Control\Static</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Control\Dynamic\CtrlAnimation.cpp">
+      <Filter>Common\Control\Dynamic</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Control\Dynamic\CtrlSequenceFrame.cpp">
+      <Filter>Common\Control\Dynamic</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -957,9 +966,6 @@
     <ClInclude Include="Common\Control\Static\CtrlFog.h">
       <Filter>Common\Control\Static</Filter>
     </ClInclude>
-    <ClInclude Include="Common\Control\Static\CtrlImage.h">
-      <Filter>Common\Control\Static</Filter>
-    </ClInclude>
     <ClInclude Include="Common\Control\Static\CtrlLight.h">
       <Filter>Common\Control\Static</Filter>
     </ClInclude>
@@ -1128,6 +1134,18 @@
     </ClInclude>
     <ClInclude Include="Common\XControl\Pixel.h">
       <Filter>Common\XControl</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Control\Dynamic\CtrlSequenceFrame.h">
+      <Filter>Common\Control\Dynamic</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Control\Static\CtrlFrame.h">
+      <Filter>Common\Control\Static</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Control\Static\CtrlImage.h">
+      <Filter>Common\Control\Static</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Control\Dynamic\CtrlAnimation.h">
+      <Filter>Common\Control\Dynamic</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
