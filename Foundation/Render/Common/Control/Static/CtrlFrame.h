@@ -15,6 +15,8 @@ namespace render
 
 		// 设置图片纹理
 		void setTexture(const Texture* texture);
+		// 设置图片纹理
+		void setTextureWithRect(const Texture* texture);
 		// 设置要显示的纹理区域
 		void setTexRect(const sys::Rect& rect);
 		// 设置图片纹理帧

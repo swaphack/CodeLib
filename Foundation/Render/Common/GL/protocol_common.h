@@ -99,6 +99,8 @@ namespace render
 		void setPositionY(float y);
 
 		void setPositionZ(float z);
+
+		void setPosition(float x, float y);
 		
 		void setPosition(float x, float y, float z);
 

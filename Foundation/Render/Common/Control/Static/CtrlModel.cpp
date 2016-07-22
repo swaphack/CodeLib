@@ -8,12 +8,13 @@ CtrlModel::CtrlModel()
 , _texFrame(nullptr)
 {
 	_material = new Material();
-	AUTO_RELEASE_OBJECT(_material);
+	_texFrame = new TexFrame();
 }
 
 CtrlModel::~CtrlModel()
 {
-	SAFE_RELEASE(_material);
+	SAFE_DELETE(_material);
+	SAFE_DELETE(_texFrame);
 }
 
 void CtrlModel::draw()
@@ -27,15 +28,18 @@ void CtrlModel::draw()
 	Material::applyDefault();
 }
 
-void CtrlModel::setMatrial(Material* material)
+void CtrlModel::setMatrial(const Material* material)
 {
 	if (material == nullptr)
 	{
 		return;
 	}
-	SAFE_RELEASE(_material);
-	SAFE_RETAIN(material);
-	_material = material;
+	*_material = *material;
+}
+
+const Material* CtrlModel::getMatrial() const
+{
+	return _material;
 }
 
 Material* CtrlModel::getMatrial()
@@ -48,13 +52,12 @@ void CtrlModel::initSelf()
 	Node::initSelf();
 }
 
-void CtrlModel::setTexFrame(TexFrame* frame)
+void CtrlModel::setTexFrame(const TexFrame* frame)
 {
 	if (frame == nullptr)
 	{
 		return;
 	}
-	SAFE_RELEASE(_texFrame);
-	SAFE_RETAIN(frame);
-	_texFrame = frame;
+
+	*_texFrame = *frame;
 }

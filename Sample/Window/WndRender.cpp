@@ -16,9 +16,12 @@ WndRender::~WndRender()
 
 void WndRender::show()
 {
-	//this->testMedia();
 
-	this->testSequenceFrame();
+	ImageDefine imageDefine = {"Resource/world.jpg", EIF_JPEG};
+	Texture2D* pTexture = G_TEXTURE_CACHE->getTexture2D(imageDefine);
+	pTexture->retain();
+
+	this->testSphereModel();
 }
 
 void WndRender::testMoveImage()
@@ -113,12 +116,13 @@ void WndRender::testSphereModel()
 {
 	Sphere* pSphere = new Sphere();
 	AUTO_RELEASE_OBJECT(pSphere);
-	pSphere->setRadius(0.2);
+	pSphere->setRadius(250);
+	pSphere->setPosition(512, 384, 0);
 	this->getCanvas()->getRoot()->addChild(pSphere);
 
 	int count = 1024;
-	float interval = 5;
-	float rx = 45;
+	float interval = 0.8f;
+	float rx = 0;
 	float ry = 45;
 	float rz = 0;
 	RotateToAction* pRotateToAction = new RotateToAction();
@@ -338,6 +342,7 @@ void WndRender::testPixelImage()
 	pCtrlText->setFontSize(58);
 	pCtrlText->setString("点击后移动鼠标，改变颜色");
 	pCtrlText->setPosition(0, 0, 0);
+	pCtrlText->setDimensions(100, 50);
 	pCtrlText->setColor(sys::Color4B(125, 80, 255, 255));
 	this->getCanvas()->getRoot()->addChild(pCtrlText);
 
@@ -349,7 +354,7 @@ void WndRender::testSequenceFrame()
 {
 	CtrlSequenceFrame* pSequenceFrame = new CtrlSequenceFrame();
 	AUTO_RELEASE_OBJECT(pSequenceFrame);
-	pSequenceFrame->setFramePath("Resource/1/20%d.png", 9);
+	pSequenceFrame->setFramePath("Resource/1/20%d.png", 8);
 	pSequenceFrame->setPosition(512, 384, 0);
 	pSequenceFrame->setFrameRate(1.0f / 10);
 	pSequenceFrame->start();

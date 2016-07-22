@@ -175,6 +175,9 @@
     <ClCompile Include="Common\Control\Dynamic\CtrlSequenceFrame.cpp">
       <Filter>Common\Control\Dynamic</Filter>
     </ClCompile>
+    <ClCompile Include="Common\Control\Dynamic\Particle.cpp">
+      <Filter>Common\Control\Dynamic</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Common\GL\import.h">
@@ -1145,6 +1148,9 @@
       <Filter>Common\Control\Static</Filter>
     </ClInclude>
     <ClInclude Include="Common\Control\Dynamic\CtrlAnimation.h">
+      <Filter>Common\Control\Dynamic</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Control\Dynamic\Particle.h">
       <Filter>Common\Control\Dynamic</Filter>
     </ClInclude>
   </ItemGroup>

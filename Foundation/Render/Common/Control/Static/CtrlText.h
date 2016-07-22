@@ -1,6 +1,6 @@
 #pragma once
 
-#include "macros.h"
+#include "CtrlFrame.h"
 
 namespace render
 {
@@ -12,7 +12,7 @@ namespace render
 		在指定框内显示
 		垂直对齐方式：顶对齐，底对齐，居中
 	*/
-	class CtrlText : public ColorNode, public TextProtocol
+	class CtrlText : public CtrlFrame, public TextProtocol
 	{
 	public:
 		CtrlText();
@@ -57,9 +57,5 @@ namespace render
 	private:
 		// 文本结构
 		Ctrl_TextDefine _textDefine;
-		// 纹理帧
-		TexFrame* _texFrame;
-		// 纹理坐标
-		TextureRect _texRect;
 	};
 }

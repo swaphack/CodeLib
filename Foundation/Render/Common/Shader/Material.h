@@ -17,23 +17,25 @@ namespace render
 		void apply();
 		// 环境光
 		void setAmbient(uchar red, uchar green, uchar blue, uchar alpha);
-		const float* getAmbient();
+		const float* getAmbient() const;
 
 		// 漫射光
 		void setDiffuse(uchar red, uchar green, uchar blue, uchar alpha);
-		const float* getDiffuse();
+		const float* getDiffuse() const;
 
 		// 反射光
 		void setSpecular(uchar red, uchar green, uchar blue, uchar alpha);
-		const float* getSpecular();
+		const float* getSpecular() const;
 
 		// 镜面指数
 		void setShiness(float value);
-		float getShiness();
+		float getShiness() const;
 
 		// 辐射光颜色
 		void setEmisiion(uchar red, uchar green, uchar blue, uchar alpha);
-		const float* getEmisiion();
+		const float* getEmisiion() const;
+
+		Material& operator = (const Material& value);
 	protected:
 		// 环境光
 		float _matrialAmbient[4];

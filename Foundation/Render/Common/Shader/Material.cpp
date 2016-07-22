@@ -34,6 +34,21 @@ Material::~Material()
 
 }
 
+void Material::applyDefault()
+{
+	float matrialAmbient[] = { 0.2f, 0.2f, 0.2f, 1.0f };
+	float matrialDiffuse[] = { 0.8f, 0.8f, 0.8f, 1.0f };
+	float matrialSpecular[] = { 0.0f, 0.0f, 0.0f, 1.0f };
+	float matrialShiness = 0.0f;
+	float matrialEmission[] = { 0.0f, 0.0f, 0.0f, 1.0f };
+
+	glMaterialfv(GL_FRONT, GL_AMBIENT, matrialAmbient);
+	glMaterialfv(GL_FRONT, GL_DIFFUSE, matrialDiffuse);
+	glMaterialfv(GL_FRONT, GL_SPECULAR, matrialSpecular);
+	glMaterialfv(GL_FRONT, GL_SHININESS, &matrialShiness);
+	glMaterialfv(GL_FRONT, GL_EMISSION, matrialEmission);
+}
+
 void Material::apply()
 {
 	glMaterialfv(GL_FRONT, GL_AMBIENT, _matrialAmbient);
@@ -51,7 +66,7 @@ void Material::setAmbient(uchar red, uchar green, uchar blue, uchar alpha)
 	_matrialAmbient[3] = alpha / sys::COLOR_FLOAT_VALUE;
 }
 
-const float* Material::getAmbient()
+const float* Material::getAmbient() const
 {
 	return _matrialAmbient;
 }
@@ -64,7 +79,7 @@ void Material::setDiffuse(uchar red, uchar green, uchar blue, uchar alpha)
 	_matrialDiffuse[3] = alpha / sys::COLOR_FLOAT_VALUE;
 }
 
-const float* Material::getDiffuse()
+const float* Material::getDiffuse() const
 {
 	return _matrialDiffuse;
 }
@@ -77,7 +92,7 @@ void Material::setSpecular(uchar red, uchar green, uchar blue, uchar alpha)
 	_matrialSpecular[3] = alpha / sys::COLOR_FLOAT_VALUE;
 }
 
-const float* Material::getSpecular()
+const float* Material::getSpecular() const
 {
 	return _matrialSpecular;
 }
@@ -87,7 +102,7 @@ void Material::setShiness(float value)
 	_matrialShiness = value;
 }
 
-float Material::getShiness()
+float Material::getShiness() const
 {
 	return _matrialShiness;
 }
@@ -100,22 +115,19 @@ void Material::setEmisiion(uchar red, uchar green, uchar blue, uchar alpha)
 	_matrialEmission[3] = alpha / sys::COLOR_FLOAT_VALUE;
 }
 
-const float* Material::getEmisiion()
+const float* Material::getEmisiion() const
 {
 	return _matrialEmission;
 }
 
-void Material::applyDefault()
+Material& Material::operator = (const Material& value)
 {
-	float matrialAmbient[] = { 0.2f, 0.2f, 0.2f, 1.0f };
-	float matrialDiffuse[] = { 0.8f, 0.8f, 0.8f, 1.0f };
-	float matrialSpecular[] = { 0.0f, 0.0f, 0.0f, 1.0f};
-	float matrialShiness = 0.0f;
-	float matrialEmission[] = { 0.0f, 0.0f, 0.0f, 1.0f };
+	memcpy(_matrialAmbient, (float*)value.getAmbient(), sizeof(_matrialAmbient));
+	memcpy(_matrialDiffuse, (float*)value.getDiffuse(), sizeof(_matrialDiffuse));
+	memcpy(_matrialSpecular, (float*)value.getSpecular(), sizeof(_matrialSpecular));
+	memcpy(_matrialEmission, (float*)value.getEmisiion(), sizeof(_matrialEmission));
 
-	glMaterialfv(GL_FRONT, GL_AMBIENT, matrialAmbient);
-	glMaterialfv(GL_FRONT, GL_DIFFUSE, matrialDiffuse);
-	glMaterialfv(GL_FRONT, GL_SPECULAR, matrialSpecular);
-	glMaterialfv(GL_FRONT, GL_SHININESS, &matrialShiness);
-	glMaterialfv(GL_FRONT, GL_EMISSION, matrialEmission);
+	_matrialShiness = value.getShiness();
+
+	return *this;
 }

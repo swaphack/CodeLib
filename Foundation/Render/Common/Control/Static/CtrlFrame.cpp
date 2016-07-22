@@ -44,6 +44,12 @@ void CtrlFrame::setTexture(const Texture* texture)
 	setDirty(true);
 }
 
+void CtrlFrame::setTextureWithRect(const Texture* texture)
+{
+	_texFrame->setTextureWithRect(texture);
+	setDirty(true);
+}
+
 void CtrlFrame::setTexRect(const sys::Rect& rect)
 {
 	_texFrame->setRect(rect);
@@ -57,8 +63,7 @@ void CtrlFrame::setTexFrame(const TexFrame* texFrame)
 		return;
 	}
 
-	_texFrame->setTexture(texFrame->getTexture());
-	_texFrame->setRect(texFrame->getRect());
+	*_texFrame = *texFrame;
 	setDirty(true);
 }
 

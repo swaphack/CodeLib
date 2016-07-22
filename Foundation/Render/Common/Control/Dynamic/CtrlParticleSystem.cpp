@@ -3,7 +3,6 @@
 using namespace render;
 
 ParticleNode::ParticleNode()
-:_liftTime(0)
 {
 
 }
@@ -24,65 +23,6 @@ void ParticleNode::draw()
 	GLTool::drawTriangleVertex(&_texRect);
 
 	GLTool::endBlend();
-}
-
-void ParticleNode::setSpeedAcceleration(float x, float y, float z)
-{
-	_speedAcceleration.x = x;
-	_speedAcceleration.y = y;
-	_speedAcceleration.z = z;
-}
-
-sys::Vector ParticleNode::getSpeedAccelertaion()
-{
-	return _speedAcceleration;
-}
-
-void ParticleNode::setColorAcceleration(float red, float green, float blue, float alpha)
-{
-	_colorAcceleration.red = red;
-	_colorAcceleration.green = green;
-	_colorAcceleration.blue = blue;
-	_colorAcceleration.alpha = alpha;
-}
-
-void ParticleNode::setAngleAcceleration(float x, float y, float z)
-{
-	_angleAcceleration.x = x;
-	_angleAcceleration.y = y;
-	_angleAcceleration.z = z;
-}
-
-sys::Vector ParticleNode::getAngleAcceleration()
-{
-	return _angleAcceleration;
-}
-
-void ParticleNode::setScaleAcceleration(float x, float y, float z)
-{
-	_scaleAcceleration.x = x;
-	_scaleAcceleration.y = y;
-	_scaleAcceleration.z = z;
-}
-
-sys::Vector ParticleNode::getScaleAcceleration()
-{
-	return _scaleAcceleration;
-}
-
-sys::Color4F ParticleNode::getColorAcceleration()
-{
-	return _colorAcceleration;
-}
-
-void ParticleNode::setLifeTime(float time)
-{
-	_liftTime = time;
-}
-
-float ParticleNode::getLifeTime()
-{
-	return _liftTime;
 }
 
 void ParticleNode::update(float interval)

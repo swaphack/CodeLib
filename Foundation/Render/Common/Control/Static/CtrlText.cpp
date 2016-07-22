@@ -3,36 +3,16 @@
 using namespace render;
 
 CtrlText::CtrlText()
-:_texFrame(nullptr)
 {
 }
 
 CtrlText::~CtrlText()
 {
-
 }
 
 void CtrlText::draw()
 {
-	ColorNode::draw();
-
-	if (_texFrame == nullptr || _texFrame->getTexture() == nullptr)
-	{
-		return;
-	}
-
-	GLTool::setColor(getColor());
-
-	int textID = _texFrame->getTexture()->getTextureID();
-
-	GLTool::beginBlend(_blend);
-
-	glEnable(GL_TEXTURE_2D);
-	glBindTexture(GL_TEXTURE_2D, textID);
-	GLTool::drawRectVertex(&_texRect);
-	glDisable(GL_TEXTURE_2D);
-
-	GLTool::endBlend();
+	CtrlFrame::draw();
 }
 
 void CtrlText::setFontPath(const char* fonturl)
@@ -113,6 +93,7 @@ void CtrlText::setDimensions(float width, float height)
 	_textDefine.width = width;
 	_textDefine.height = height;
 	this->setVolume(width, height, 0);
+
 	setDirty(true);
 }
 
@@ -136,18 +117,8 @@ void CtrlText::initSelf()
 		return;
 	}
 
-	if (_texFrame == nullptr)
-	{
-		_texFrame = new TexFrame();
-		AUTO_RELEASE_OBJECT(_texFrame);
-	}
-
-	_texFrame->setTextureWithRect(texture);
-	this->setDimensions(texture->getWidth(), texture->getHeight());
-
-	Node::initSelf();
-
-	TextureTool::setTexture2DVertexts(&_texRect, sys::Vector::Zero, _volume, _anchor);
+	this->setTextureWithRect(texture);
+	CtrlFrame::initSelf();
 }
 
 

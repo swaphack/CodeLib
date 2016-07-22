@@ -146,6 +146,13 @@ SpaceProtocol::~SpaceProtocol()
 
 }
 
+void SpaceProtocol::setPosition(float x, float y)
+{
+	_position.x = x;
+	_position.y = y; 
+	onSpaceChange();
+}
+
 void SpaceProtocol::setPosition(float x, float y, float z)
 {
 	_position.x = x;

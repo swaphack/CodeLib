@@ -84,6 +84,7 @@
     <ClCompile Include="Common\Control\Dynamic\CtrlMedia.cpp" />
     <ClCompile Include="Common\Control\Dynamic\CtrlParticleSystem.cpp" />
     <ClCompile Include="Common\Control\Dynamic\CtrlSequenceFrame.cpp" />
+    <ClCompile Include="Common\Control\Dynamic\Particle.cpp" />
     <ClCompile Include="Common\Control\Static\CtrlEditBox.cpp" />
     <ClCompile Include="Common\Control\Static\CtrlEditLabel.cpp" />
     <ClCompile Include="Common\Control\Static\CtrlFog.cpp" />
@@ -161,6 +162,7 @@
     <ClInclude Include="Common\Control\Dynamic\CtrlSequenceFrame.h" />
     <ClInclude Include="Common\Control\Dynamic\import.h" />
     <ClInclude Include="Common\Control\Dynamic\macros.h" />
+    <ClInclude Include="Common\Control\Dynamic\Particle.h" />
     <ClInclude Include="Common\Control\import.h" />
     <ClInclude Include="Common\Control\Static\CtrlEditBox.h" />
     <ClInclude Include="Common\Control\Static\CtrlEditLabel.h" />
