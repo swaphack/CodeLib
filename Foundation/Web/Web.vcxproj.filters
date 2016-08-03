@@ -16,6 +16,12 @@
     <Filter Include="Http">
       <UniqueIdentifier>{4c169d3b-fdb4-4e78-82b4-1854b5303f08}</UniqueIdentifier>
     </Filter>
+    <Filter Include="DB">
+      <UniqueIdentifier>{14543202-160d-4902-9f24-47703ff12b67}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Log">
+      <UniqueIdentifier>{34df898d-b126-476f-9601-48f340d0bb6f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Activity\HttpActivity.cpp">

@@ -1,0 +1,59 @@
+#pragma once
+
+#include "common.h"
+
+#if (defined(_WIN32) || defined(WIN32))
+#include <windows.h>
+#endif
+
+//////////////////////////////////////////////////////////////////////////
+// opengl
+
+#if defined(USE_OPENGL)
+#ifdef USE_GLUT
+#define GLUT_DISABLE_ATEXIT_HACK
+#include "opengl/GLUT.H"
+#else
+#include "opengl/GL.H"
+#include "opengl/GLU.H"
+#endif // USE_GLUT
+#endif
+
+//////////////////////////////////////////////////////////////////////////
+// png
+
+#if defined(USE_PNG)
+#include "png/png.h"
+#endif
+
+//////////////////////////////////////////////////////////////////////////
+// jpeg
+
+#if defined(USE_JPEG)
+#include "jpeg/jpeglib.h"
+#endif
+
+//////////////////////////////////////////////////////////////////////////
+// ffmpeg
+
+#if defined(USE_FFMPEG)
+#include "ffmpeg/ffmpeg.h"
+#endif
+
+//////////////////////////////////////////////////////////////////////////
+// freetype2
+
+#if defined(USE_FREETYPE)
+#include <freetype/ft2build.h>
+#include FT_FREETYPE_H
+#include FT_GLYPH_H
+#endif
+
+//////////////////////////////////////////////////////////////////////////
+// fmod
+
+#if defined(USE_FMOD)
+#include "fmod/fmod.h"
+#endif
+
+

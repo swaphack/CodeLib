@@ -12,6 +12,7 @@ Animation::Animation()
 Animation::~Animation()
 {
 	this->unregisterScheduler();
+	SAFE_DELETE(_scheduler);
 }
 
 void Animation::start()
@@ -49,8 +50,11 @@ void Animation::registerScheduler()
 {
 	this->unregisterScheduler();
 
-	_scheduler = new Scheduler();
-	_scheduler->setHandler(SEL_ACTION_UPDATE(Animation::update));
+	if (_scheduler == nullptr)
+	{
+		_scheduler = new Scheduler();
+		_scheduler->setHandler(SEL_ACTION_UPDATE(Animation::update));
+	}
 	this->getActionProxy()->runAction(_scheduler);
 }
 
@@ -59,7 +63,6 @@ void Animation::unregisterScheduler()
 	if (_scheduler)
 	{
 		this->getActionProxy()->stopAction(_scheduler);
-		SAFE_DELETE(_scheduler);
 	}
 }
 

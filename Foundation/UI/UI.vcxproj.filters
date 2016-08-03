@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="UIBase">
+      <UniqueIdentifier>{3e463f27-1201-4472-ba51-90b8df4318e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Control">
+      <UniqueIdentifier>{1f7fa921-3298-4ac3-807c-61486102e78c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Loader">
+      <UniqueIdentifier>{5cd78107-f8ec-4d2b-84e8-4574482e3e1f}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="UIBase\import.h">
+      <Filter>UIBase</Filter>
+    </ClInclude>
+    <ClInclude Include="UIBase\macros.h">
+      <Filter>UIBase</Filter>
+    </ClInclude>
+    <ClInclude Include="UIBase\UIImage.h">
+      <Filter>UIBase</Filter>
+    </ClInclude>
+    <ClInclude Include="UIBase\UINode.h">
+      <Filter>UIBase</Filter>
+    </ClInclude>
+    <ClInclude Include="UIBase\UIProtocol.h">
+      <Filter>UIBase</Filter>
+    </ClInclude>
+    <ClInclude Include="UIBase\UIText.h">
+      <Filter>UIBase</Filter>
+    </ClInclude>
+    <ClInclude Include="Control\import.h">
+      <Filter>Control</Filter>
+    </ClInclude>
+    <ClInclude Include="Control\macros.h">
+      <Filter>Control</Filter>
+    </ClInclude>
+    <ClInclude Include="Control\UITime.h">
+      <Filter>Control</Filter>
+    </ClInclude>
+    <ClInclude Include="ui.h" />
+    <ClInclude Include="NodeLoader\helper.h">
+      <Filter>Loader</Filter>
+    </ClInclude>
+    <ClInclude Include="NodeLoader\ImageLoader.h">
+      <Filter>Loader</Filter>
+    </ClInclude>
+    <ClInclude Include="NodeLoader\INodeLoader.h">
+      <Filter>Loader</Filter>
+    </ClInclude>
+    <ClInclude Include="NodeLoader\macros.h">
+      <Filter>Loader</Filter>
+    </ClInclude>
+    <ClInclude Include="NodeLoader\NodeLoader.h">
+      <Filter>Loader</Filter>
+    </ClInclude>
+    <ClInclude Include="NodeLoader\NodeProperty.h">
+      <Filter>Loader</Filter>
+    </ClInclude>
+    <ClInclude Include="NodeLoader\TextLoader.h">
+      <Filter>Loader</Filter>
+    </ClInclude>
+    <ClInclude Include="NodeLoader\UIProxy.h">
+      <Filter>Loader</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="UIBase\UINode.cpp">
+      <Filter>UIBase</Filter>
+    </ClCompile>
+    <ClCompile Include="UIBase\UIProtocol.cpp">
+      <Filter>UIBase</Filter>
+    </ClCompile>
+    <ClCompile Include="NodeLoader\ImageLoader.cpp">
+      <Filter>Loader</Filter>
+    </ClCompile>
+    <ClCompile Include="NodeLoader\INodeLoader.cpp">
+      <Filter>Loader</Filter>
+    </ClCompile>
+    <ClCompile Include="NodeLoader\NodeLoader.cpp">
+      <Filter>Loader</Filter>
+    </ClCompile>
+    <ClCompile Include="NodeLoader\NodeProperty.cpp">
+      <Filter>Loader</Filter>
+    </ClCompile>
+    <ClCompile Include="NodeLoader\TextLoader.cpp">
+      <Filter>Loader</Filter>
+    </ClCompile>
+    <ClCompile Include="NodeLoader\UIProxy.cpp">
+      <Filter>Loader</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

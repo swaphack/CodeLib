@@ -1,22 +1,6 @@
 #include "FFmpeg.h"
 
-#ifndef INT64_C
-#define INT64_C(c) (c ## LL)
-#define UINT64_C(c) (c ## ULL)
-#endif
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#include <libavformat/avformat.h>
-#include <libavcodec/avcodec.h>
-#include <libavutil/pixdesc.h>
-#include <libavutil/imgutils.h>
-#include <libswscale/swscale.h>
-#ifdef __cplusplus
-}
-#endif
+#pragma warning (disable : 4996)
 
 using namespace render;
 
@@ -101,19 +85,20 @@ void FFmpeg::load(const MediaDefine& mediaDefine)
 	this->loadFFM(mediaDefine);
 	
 	AVStream* stream = _formatContext->streams[_videoStream];
-	AVCodecContext* pCodecContext = stream->codec;
+	/*AVCodecContext* pCodecContext = stream->codec;*/
+	AVCodecParameters* pParameters = stream->codecpar;
 
-	this->setWidth(pCodecContext->width);
-	this->setHeight(pCodecContext->height);
+	this->setWidth(pParameters->width);
+	this->setHeight(pParameters->height);
 
-	float time = 1.0f * stream->duration * av_q2d(stream->time_base);
+	float time = (float)(1.0f * stream->duration * av_q2d(stream->time_base));
 	this->setTime(time);
 
-	float fps = av_q2d(stream->r_frame_rate);
-	if (fps < 0)
-	{
-		fps = 1.0f / av_q2d(stream->codec->time_base);
-	}
+	float fps = (float)(av_q2d(stream->r_frame_rate));
+// 	if (fps < 0)
+// 	{
+// 		fps = (float)(1.0f / av_q2d(stream->codec->time_base));
+// 	}
 
 	this->setFrameRate(fps);
 }
@@ -185,8 +170,8 @@ void FFmpeg::setVideoFrame(mf_s frame)
 
 	AVRational timeBase = _formatContext->streams[_videoStream]->time_base;
 
-	ulong timestamp = frame * 1000;
-	timestamp = av_rescale_q(timestamp, bqTimebase, timeBase);
+	ulong timestamp = (ulong)(frame * 1000);
+	timestamp = (ulong)(av_rescale_q(timestamp, bqTimebase, timeBase));
 
 	av_seek_frame(_formatContext, _videoStream, timestamp, AVSEEK_FLAG_BACKWARD);
 }

@@ -16,12 +16,11 @@ WndRender::~WndRender()
 
 void WndRender::show()
 {
-
 	ImageDefine imageDefine = {"Resource/world.jpg", EIF_JPEG};
 	Texture2D* pTexture = G_TEXTURE_CACHE->getTexture2D(imageDefine);
 	pTexture->retain();
 
-	this->testSphereModel();
+	this->testSequenceFrame();
 }
 
 void WndRender::testMoveImage()

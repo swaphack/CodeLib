@@ -11,24 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="NodeLoader\helper.h" />
-    <ClInclude Include="NodeLoader\INodeLoader.h" />
-    <ClInclude Include="NodeLoader\macros.h" />
-    <ClInclude Include="NodeLoader\NodeProperty.h" />
-    <ClInclude Include="NodeLoader\ImageLoader.h" />
-    <ClInclude Include="NodeLoader\NodeLoader.h" />
-    <ClInclude Include="NodeLoader\UIProxy.h" />
-    <ClInclude Include="NodeLoader\TextLoader.h" />
-    <ClInclude Include="UIFace\IUIFace.h" />
-    <ClInclude Include="UIFace\macros.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="NodeLoader\INodeLoader.cpp" />
-    <ClCompile Include="NodeLoader\NodeProperty.cpp" />
-    <ClCompile Include="NodeLoader\ImageLoader.cpp" />
-    <ClCompile Include="NodeLoader\NodeLoader.cpp" />
-    <ClCompile Include="NodeLoader\UIProxy.cpp" />
-    <ClCompile Include="NodeLoader\TextLoader.cpp" />
+    <ClInclude Include="EditFramework\EditFrame.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{CBDBD1AC-664E-414E-ABC6-47640D4A6111}</ProjectGuid>

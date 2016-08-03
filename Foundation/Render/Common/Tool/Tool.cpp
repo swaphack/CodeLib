@@ -1,6 +1,8 @@
 #include "Tool.h"
 #include <cmath>
 
+#define HALF_CIRCLE_ANGEL 180.0f
+
 using namespace render;
 
 sys::Volume Tool::GL_VIEW_SIZE = sys::Volume();
@@ -20,12 +22,12 @@ const sys::Volume& Tool::getGLViewSize()
 
 sys::Vector Tool::convertToRadian(const sys::Vector& src)
 {
-	return sys::Vector(src.x / (float)180 * PI, src.y / (float)180 * PI, src.z / (float)180 * PI);
+	return sys::Vector(src.x / HALF_CIRCLE_ANGEL * PI, src.y / HALF_CIRCLE_ANGEL * PI, src.z / HALF_CIRCLE_ANGEL * PI);
 }
 
 sys::Vector Tool::convertToAngle(const sys::Vector& src)
 {
-	return sys::Vector(src.x / PI * (float)180, src.y / PI * (float)180, src.z / PI * (float)180);
+	return sys::Vector(src.x / PI * HALF_CIRCLE_ANGEL, src.y / PI * HALF_CIRCLE_ANGEL, src.z / PI * HALF_CIRCLE_ANGEL);
 }
 
 void Tool::convertToOGLPoisition(float x, float y, float z, sys::Vector& dest)
@@ -73,9 +75,9 @@ sys::Vector Tool::getRotationPosition(const sys::Vector& vector, const sys::Vect
 	float cosx, cosy, cosz;
 	float ax, ay, az;
 
-	ax = rotation.x * PI / 180;
-	ay = rotation.y * PI / 180;
-	az = rotation.z * PI / 180;
+	ax = rotation.x * PI / HALF_CIRCLE_ANGEL;
+	ay = rotation.y * PI / HALF_CIRCLE_ANGEL;
+	az = rotation.z * PI / HALF_CIRCLE_ANGEL;
 
 	sinx = sin(ax);
 	siny = sin(ay);
@@ -106,7 +108,7 @@ void Tool::calNormal(const sys::Vector& p1, const sys::Vector& p2, const sys::Ve
 {
 	sys::Vector vc1, vc2;
 	float a, b, c;
-	double r;
+	float r;
 
 	vc1.x = p2.x - p1.x; vc1.y = p2.y - p1.y; vc1.z = p2.z - p1.z;
 	vc2.x = p3.x - p1.x; vc2.y = p3.y - p1.y; vc2.z = p3.z - p1.z;

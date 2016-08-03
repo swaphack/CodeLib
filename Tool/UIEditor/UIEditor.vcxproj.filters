@@ -1,63 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="UIFace">
-      <UniqueIdentifier>{ea70a2f3-6d89-4931-9ccf-496d3146a5cf}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="NodeLoader">
-      <UniqueIdentifier>{a07e7395-6f01-44d2-b72f-27f1e218c6b4}</UniqueIdentifier>
+    <Filter Include="EditFramework">
+      <UniqueIdentifier>{979b3282-6b4f-4302-ac72-4d1fb8e7aacf}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="NodeLoader\helper.h">
-      <Filter>NodeLoader</Filter>
+    <ClInclude Include="EditFramework\EditFrame.h">
+      <Filter>EditFramework</Filter>
     </ClInclude>
-    <ClInclude Include="NodeLoader\INodeLoader.h">
-      <Filter>NodeLoader</Filter>
-    </ClInclude>
-    <ClInclude Include="NodeLoader\macros.h">
-      <Filter>NodeLoader</Filter>
-    </ClInclude>
-    <ClInclude Include="NodeLoader\UIProxy.h">
-      <Filter>NodeLoader</Filter>
-    </ClInclude>
-    <ClInclude Include="UIFace\IUIFace.h">
-      <Filter>UIFace</Filter>
-    </ClInclude>
-    <ClInclude Include="UIFace\macros.h">
-      <Filter>UIFace</Filter>
-    </ClInclude>
-    <ClInclude Include="NodeLoader\NodeProperty.h">
-      <Filter>NodeLoader</Filter>
-    </ClInclude>
-    <ClInclude Include="NodeLoader\NodeLoader.h">
-      <Filter>NodeLoader</Filter>
-    </ClInclude>
-    <ClInclude Include="NodeLoader\ImageLoader.h">
-      <Filter>NodeLoader</Filter>
-    </ClInclude>
-    <ClInclude Include="NodeLoader\TextLoader.h">
-      <Filter>NodeLoader</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="NodeLoader\INodeLoader.cpp">
-      <Filter>NodeLoader</Filter>
-    </ClCompile>
-    <ClCompile Include="NodeLoader\UIProxy.cpp">
-      <Filter>NodeLoader</Filter>
-    </ClCompile>
-    <ClCompile Include="NodeLoader\NodeProperty.cpp">
-      <Filter>NodeLoader</Filter>
-    </ClCompile>
-    <ClCompile Include="NodeLoader\NodeLoader.cpp">
-      <Filter>NodeLoader</Filter>
-    </ClCompile>
-    <ClCompile Include="NodeLoader\ImageLoader.cpp">
-      <Filter>NodeLoader</Filter>
-    </ClCompile>
-    <ClCompile Include="NodeLoader\TextLoader.cpp">
-      <Filter>NodeLoader</Filter>
-    </ClCompile>
   </ItemGroup>
 </Project>

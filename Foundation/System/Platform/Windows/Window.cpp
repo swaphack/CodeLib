@@ -110,8 +110,6 @@ _mouse(nullptr)
 Window::~Window()
 {
 	this->dispose();
-
-	Instance<Windows>::getInstance()->removeWindow(getWnd());
 }
 
 void Window::initWindow(const char* title, int width, int height)
@@ -226,6 +224,8 @@ bool Window::dispose()
 		MessageBox(NULL, TEXT("不能注销窗口类。"), TEXT("关闭错误"), MB_OK | MB_ICONINFORMATION);
 		_instance = NULL;	// 将 hInstance 设为 NULL
 	}
+
+	Instance<Windows>::getInstance()->removeWindow(getWnd());
 
 	return true;
 }

@@ -53,7 +53,7 @@ void TexFrame::setTextureWithRect(const Texture* texture, const sys::Rect& rect)
 
 void TexFrame::setTextureWithRect(const Texture* texture)
 {
-	this->setTextureWithRect(texture, sys::Rect(0.0f, 0.0f, texture->getWidth(), texture->getHeight()));
+	this->setTextureWithRect(texture, sys::Rect(0.0f, 0.0f, 1.0f * texture->getWidth(), 1.0f * texture->getHeight()));
 }
 
 TexFrame& TexFrame::operator=(const TexFrame& value)

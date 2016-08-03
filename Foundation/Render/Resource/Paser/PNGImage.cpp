@@ -131,7 +131,7 @@ void PNGImage::load(const char* filename)
 	/* Setup a pointer array. Each one points at the begening of a row. */
 	row_pointers = (png_bytep *)malloc(sizeof (png_bytep)* h);
 
-	for (int i = 0; i < h; i++)
+	for (unsigned int i = 0; i < h; i++)
 	{
 		row_pointers[i] = texels + (h - i - 1) * rowbytes;
 	}

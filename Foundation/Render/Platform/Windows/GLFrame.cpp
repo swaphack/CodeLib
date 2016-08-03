@@ -183,7 +183,7 @@ void GLFrame::listen()
 
 	if (_render)
 	{
-		_render->setFrameSize(getWidth(), getHeight());
+		_render->setFrameSize((int)getWidth(), (int)getHeight());
 		_render->show();
 		this->initDevice();
 	}

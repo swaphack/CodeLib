@@ -33,6 +33,10 @@ namespace sys
 		{
 			this->init(value, size);
 		}
+		~NetData()
+		{
+			StreamHelper::freeStream(data);
+		}
 		const char* getCursorPtr()
 		{
 			return data + pos;
@@ -52,10 +56,6 @@ namespace sys
 			memcpy(newData + len, this->data, this->size);
 
 			this->init(newData, len + size);
-		}
-		~NetData()
-		{
-			StreamHelper::freeStream(data);
 		}
 	};
 }

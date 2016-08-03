@@ -1,9 +1,7 @@
 #include "LabelImage.h"
 #include "system.h"
 
-#include <ft2build.h>
-#include FT_FREETYPE_H
-#include FT_GLYPH_H
+
 #define FREETYPE_PIXEL_UNIT 64
 #define RGBA_PIXEL_UNIT 4
 
@@ -104,15 +102,15 @@ FT_LABEL::~FT_LABEL()
 
 void FT_LABEL::load(const TextDefine& textDefine, LabelStream* stream)
 {
-	this->initFT(textDefine.filepath.c_str(), textDefine.fontSize);
+	this->initFT(textDefine.filepath.c_str(), (int)textDefine.fontSize);
 
-	FT_CHAR_DATA* gData = loadChar(char('g'), textDefine.fontSize);
+	FT_CHAR_DATA* gData = loadChar(char('g'), (int)textDefine.fontSize);
 	if (gData == nullptr)
 	{
 		return;
 	}
 	_lowY = gData->deltaY;
-	_fontSize = textDefine.fontSize;
+	_fontSize = (int)textDefine.fontSize;
 
 	if (textDefine.text.empty())
 	{
@@ -129,7 +127,7 @@ void FT_LABEL::load(const TextDefine& textDefine, LabelStream* stream)
 	int offset = 0;
 	while (*ptr != 0 && offset < length)
 	{
-		this->loadChar(*ptr, textDefine.fontSize);
+		this->loadChar(*ptr, (int)textDefine.fontSize);
 		ptr++;
 		offset++;
 	}
@@ -282,7 +280,7 @@ void FT_LABEL::writeStream(ulong ch, LabelStream* stream)
 	}
 
 	// 获取rgba数据
-	char* pBuf = sys::StreamHelper::mallocStream(width * 4 * height);
+	uchar* pBuf = (uchar*)sys::StreamHelper::mallocStream(width * 4 * height);
 	if (pBuf == nullptr)
 	{
 		return;
@@ -298,17 +296,17 @@ void FT_LABEL::writeStream(ulong ch, LabelStream* stream)
 			}
 			if (_vl == 0)
 			{
-				pBuf[(4 * i + (height - j - 1) * width * 4)] = 0;
-				pBuf[(4 * i + (height - j - 1) * width * 4) + 1] = 0;
-				pBuf[(4 * i + (height - j - 1) * width * 4) + 2] = 0;
-				pBuf[(4 * i + (height - j - 1) * width * 4) + 3] = 0;
+				pBuf[(4 * i + (height - j - 1) * width * 4)] = (uchar)0;
+				pBuf[(4 * i + (height - j - 1) * width * 4) + 1] = (uchar)0;
+				pBuf[(4 * i + (height - j - 1) * width * 4) + 2] = (uchar)0;
+				pBuf[(4 * i + (height - j - 1) * width * 4) + 3] = (uchar)0;
 			}
 			else
 			{
-				pBuf[(4 * i + (height - j - 1) * width * 4)] = 255;
-				pBuf[(4 * i + (height - j - 1) * width * 4) + 1] = 255;
-				pBuf[(4 * i + (height - j - 1) * width * 4) + 2] = 255;
-				pBuf[(4 * i + (height - j - 1) * width * 4) + 3] = _vl;
+				pBuf[(4 * i + (height - j - 1) * width * 4)] = (uchar)255;
+				pBuf[(4 * i + (height - j - 1) * width * 4) + 1] = (uchar)255;
+				pBuf[(4 * i + (height - j - 1) * width * 4) + 2] = (uchar)255;
+				pBuf[(4 * i + (height - j - 1) * width * 4) + 3] = (uchar)_vl;
 			}
 		}
 	}
@@ -333,7 +331,7 @@ void FT_LABEL::writeStream(ulong ch, LabelStream* stream)
 		deltaY = advY - height;
 	}
 
-	stream->writeLabelBlock(width, height, deltaX, deltaY, advY, pBuf);
+	stream->writeLabelBlock(width, height, deltaX, deltaY, advY, (char*)pBuf);
 
 	sys::StreamHelper::freeStream(pBuf);
 }

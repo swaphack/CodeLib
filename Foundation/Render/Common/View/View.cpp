@@ -72,7 +72,7 @@ void View::initView()
 	if (isDirty())
 	{
 		// 定义视窗位置
-		glViewport(_position.x, _position.y, _size.width, _size.height);
+		glViewport((int)_position.x, (int)_position.y, _size.width, _size.height);
 		glMatrixMode(GL_PROJECTION);
 		glLoadIdentity();
 

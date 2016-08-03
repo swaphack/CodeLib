@@ -14,7 +14,8 @@ namespace render
 	class TouchProxy;
 
 	// »æÖÆ½Úµã
-	class Node : public sys::Object, 
+	class Node : 
+		public sys::Object, 
 		public DirtyProtocol, 
 		public SpaceProtocol,
 		public BodyProtocol
