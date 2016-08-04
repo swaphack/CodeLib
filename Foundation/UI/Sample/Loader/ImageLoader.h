@@ -6,16 +6,16 @@ using namespace render;
 
 namespace ui
 {
-	class TextLoader : public NodeLoader
+	class ImageLoader : public NodeLoader
 	{
 	public:
-		TextLoader();
-		virtual ~TextLoader();
+		ImageLoader();
+		virtual ~ImageLoader();
 	protected:
 		virtual void parseAttribute();
 
 		virtual void saveAttributes();
 	private:
-		INIT_LOADER_NODE(UIText);
+		INIT_LOADER_NODE(CtrlImage);
 	};
 }

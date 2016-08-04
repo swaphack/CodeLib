@@ -68,13 +68,20 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Activity\HttpActivity.cpp" />
+    <ClCompile Include="Cache\CacheGroup.cpp" />
+    <ClCompile Include="Cache\CacheIdentity.cpp" />
+    <ClCompile Include="Cache\CacheMgr.cpp" />
     <ClCompile Include="Command\Command.cpp" />
     <ClCompile Include="Http\HttpCommand.cpp" />
     <ClCompile Include="Http\HttpConstant.cpp" />
     <ClCompile Include="Http\HttpRequest.cpp" />
     <ClCompile Include="Http\HttpResponse.cpp" />
     <ClCompile Include="Http\HttpTime.cpp" />
+    <ClCompile Include="Resource\LocalResource.cpp" />
+    <ClCompile Include="Resource\RemoteResource.cpp" />
+    <ClCompile Include="Resource\RemoteResource.h" />
     <ClCompile Include="Resource\Resource.cpp" />
+    <ClCompile Include="Resource\ResourceMgr.cpp" />
     <ClCompile Include="WebSite\HttpServer.cpp" />
     <ClCompile Include="WebSite\Session.cpp" />
     <ClCompile Include="WebSite\WebApplication.cpp" />
@@ -83,6 +90,10 @@
     <ClInclude Include="Activity\HttpActivity.h" />
     <ClInclude Include="Activity\import.h" />
     <ClInclude Include="Activity\HttpRecvHandler.h" />
+    <ClInclude Include="Cache\CacheGroup.h" />
+    <ClInclude Include="Cache\CacheMgr.h" />
+    <ClInclude Include="Cache\CacheIdentity.h" />
+    <ClInclude Include="Cache\import.h" />
     <ClInclude Include="Command\Command.h" />
     <ClInclude Include="Command\import.h" />
     <ClInclude Include="Http\HttpCommand.h" />
@@ -93,7 +104,10 @@
     <ClInclude Include="Http\import.h" />
     <ClInclude Include="Http\macros.h" />
     <ClInclude Include="Resource\import.h" />
+    <ClInclude Include="Resource\IResource.h" />
+    <ClInclude Include="Resource\LocalResource.h" />
     <ClInclude Include="Resource\Resource.h" />
+    <ClInclude Include="Resource\ResourceMgr.h" />
     <ClInclude Include="web.h" />
     <ClInclude Include="WebSite\HttpServer.h" />
     <ClInclude Include="WebSite\import.h" />

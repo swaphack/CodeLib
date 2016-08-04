@@ -6,7 +6,6 @@
 #include "../Tool/import.h"
 #include "../Action/import.h"
 #include "../Shader/import.h"
-//#include "../Touch/TouchProxy.h"
 
 namespace render
 {
@@ -76,6 +75,8 @@ namespace render
 		bool containTouchPoint(float x, float y);
 		// 获取触摸代理
 		TouchProxy* getTouchProxy();
+
+		const RectangeVertex& getRectVertex();
 	protected:
 		// 更新空间位置
 		virtual void updateTranform();

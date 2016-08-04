@@ -16,7 +16,7 @@
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v120</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
@@ -68,30 +68,34 @@
     <ClInclude Include="Control\import.h" />
     <ClInclude Include="Control\macros.h" />
     <ClInclude Include="Control\UITime.h" />
-    <ClInclude Include="NodeLoader\helper.h" />
-    <ClInclude Include="NodeLoader\ImageLoader.h" />
-    <ClInclude Include="NodeLoader\INodeLoader.h" />
-    <ClInclude Include="NodeLoader\macros.h" />
-    <ClInclude Include="NodeLoader\NodeLoader.h" />
-    <ClInclude Include="NodeLoader\NodeProperty.h" />
-    <ClInclude Include="NodeLoader\TextLoader.h" />
-    <ClInclude Include="NodeLoader\UIProxy.h" />
+    <ClInclude Include="Parser\helper.h" />
+    <ClInclude Include="Parser\import.h" />
+    <ClInclude Include="Parser\INodeLoad.h" />
+    <ClInclude Include="Parser\INodeSave.h" />
+    <ClInclude Include="Parser\macros.h" />
+    <ClInclude Include="Parser\INodeParser.h" />
+    <ClInclude Include="Parser\NodeProperty.h" />
+    <ClInclude Include="Parser\UIProxy.h" />
+    <ClInclude Include="Sample\import.h" />
+    <ClInclude Include="Sample\Loader\ImageLoader.h" />
+    <ClInclude Include="Sample\Loader\macros.h" />
+    <ClInclude Include="Sample\Loader\NodeLoader.h" />
+    <ClInclude Include="Sample\Loader\TextLoader.h" />
+    <ClInclude Include="Sample\macros.h" />
     <ClInclude Include="ui.h" />
     <ClInclude Include="UIBase\import.h" />
     <ClInclude Include="UIBase\macros.h" />
-    <ClInclude Include="UIBase\UIImage.h" />
-    <ClInclude Include="UIBase\UINode.h" />
+    <ClInclude Include="UIBase\NodeExt.h" />
     <ClInclude Include="UIBase\UIProtocol.h" />
-    <ClInclude Include="UIBase\UIText.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="NodeLoader\ImageLoader.cpp" />
-    <ClCompile Include="NodeLoader\INodeLoader.cpp" />
-    <ClCompile Include="NodeLoader\NodeLoader.cpp" />
-    <ClCompile Include="NodeLoader\NodeProperty.cpp" />
-    <ClCompile Include="NodeLoader\TextLoader.cpp" />
-    <ClCompile Include="NodeLoader\UIProxy.cpp" />
-    <ClCompile Include="UIBase\UINode.cpp" />
+    <ClCompile Include="Parser\INodeParser.cpp" />
+    <ClCompile Include="Parser\NodeProperty.cpp" />
+    <ClCompile Include="Parser\UIProxy.cpp" />
+    <ClCompile Include="Sample\Loader\ImageLoader.cpp" />
+    <ClCompile Include="Sample\Loader\NodeLoader.cpp" />
+    <ClCompile Include="Sample\Loader\TextLoader.cpp" />
+    <ClCompile Include="UIBase\NodeExt.cpp" />
     <ClCompile Include="UIBase\UIProtocol.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

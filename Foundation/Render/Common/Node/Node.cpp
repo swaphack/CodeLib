@@ -218,6 +218,11 @@ TouchProxy* Node::getTouchProxy()
 	return _touchProxy;
 }
 
+const RectangeVertex& Node::getRectVertex()
+{
+	return _rectVertex;
+}
+
 void Node::updateTranform()
 {
 	if (!this->isRelativeWithParent())

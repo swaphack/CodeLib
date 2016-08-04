@@ -41,6 +41,8 @@ namespace ui
 		void setAttribute(const char* name, const sys::Size& value);
 		void setAttribute(const char* name, const sys::Rect& value);
 
+		template<typename T>
+		void setAttribute(const char* name, const T& value);
 
 		// 获取属性值
 		bool getAttribute(const char* name, bool& value);
@@ -61,6 +63,9 @@ namespace ui
 		bool getAttribute(const char* name, sys::Size& defaultValue);
 		bool getAttribute(const char* name, sys::Rect& defaultValue);
 
+		template<typename T>
+		bool getAttribute(const char* name, T& defaultValue);
+
 		Attributes::const_iterator getAttributeFirst();
 		Attributes::const_iterator getAttributeEnd();
 	protected:
@@ -72,4 +77,29 @@ namespace ui
 		// 名称
 		std::string _name;
 	};
+
+	template<typename T>
+	bool NodeProperty::getAttribute(const char* name, T& defaultValue)
+	{
+		std::string value = "";
+		if (!getAttribute(name, value))
+		{
+			return false;
+		}
+
+		defaultValue = *((T*)(value.c_str()));
+
+		return true;
+	}
+
+	template<typename T>
+	void NodeProperty::setAttribute(const char* name, const T& value)
+	{
+		int size = sizeof(T);
+		char* dest = (char*)malloc(size);
+		memcpy(dest, &defaultValue, size);
+		this->setAttribute(name, dest);
+		free(dest);
+	}
+
 }

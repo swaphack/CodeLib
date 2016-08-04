@@ -2,19 +2,13 @@
 
 #include "macros.h"
 
-#include "INodeLoader.h"
-
-#include "helper.h"
-
-#include "../UIBase/import.h"
-
 using namespace render;
 
 namespace ui
 {
 	// UI节点
-	class NodeLoader : public INodeLoader
-	{
+	class NodeLoader : public INodeParser
+	{ 
 	public:
 		NodeLoader();
 		virtual ~NodeLoader();
@@ -23,7 +17,10 @@ namespace ui
 		virtual void parseAttribute();
 		// 保存属性
 		virtual void saveAttributes();
+	protected:
+		// ui节点
+		Node* _node;
 	private:
-		INIT_LOADER_NODE(UINode);
+		INIT_LOADER_NODE(Node);
 	};
 }

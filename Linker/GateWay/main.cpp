@@ -18,7 +18,8 @@ int main(int argc, char** argv)
 	websit = websit + "/WebSite";
 
 	WebApplication* web = new WebApplication(WEB_IP, WEB_PORT, 10000);
-	web->getResource()->setResourcePath(websit.c_str());
+	web->getResource()->setLocalUrl(websit.c_str());
+	web->getResource()->getRemote();
 	new HttpActivityTest();
 
 	while (true)

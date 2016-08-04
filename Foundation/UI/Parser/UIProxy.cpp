@@ -41,7 +41,7 @@ render::Node* UIProxy::loadFile(const char* filepath)
 	return pNode;
 }
 
-void UIProxy::registerNodeParser(const char* name, INodeLoader* parser)
+void UIProxy::registerNodeParser(const char* name, INodeParser* parser)
 {
 	if (name == nullptr || parser == NULL)
 	{
@@ -58,7 +58,7 @@ render::Node* UIProxy::loadNode(tinyxml2::XMLElement* pXmlNode)
 		return nullptr;
 	}
 
-	std::map<std::string, INodeLoader*>::const_iterator iter = _nodeParsers.find(pXmlNode->Name());
+	std::map<std::string, INodeParser*>::const_iterator iter = _nodeParsers.find(pXmlNode->Name());
 	if (iter == _nodeParsers.end())
 	{
 		return nullptr;

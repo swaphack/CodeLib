@@ -38,7 +38,7 @@ HttpServer* WebApplication::getServer()
 	return _server;
 }
 
-Resource* WebApplication::getResource()
+ResourceMgr* WebApplication::getResource()
 {
 	return _resource;
 }
@@ -49,8 +49,7 @@ void WebApplication::init()
 	server->setRecvHandler(this, static_cast<sys::SERVER_RECV_HANDLER>(&WebApplication::parseData));
 
 	_server = new HttpServer(server);
-
-	_resource = new Resource();
+	_resource = new ResourceMgr();
 }
 
 void WebApplication::update()

@@ -22,6 +22,9 @@
     <Filter Include="Log">
       <UniqueIdentifier>{34df898d-b126-476f-9601-48f340d0bb6f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Cache">
+      <UniqueIdentifier>{36d907b6-7060-4083-aa53-315918617408}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Activity\HttpActivity.cpp">
@@ -56,6 +59,27 @@
     </ClCompile>
     <ClCompile Include="WebSite\HttpServer.cpp">
       <Filter>WebSite</Filter>
+    </ClCompile>
+    <ClCompile Include="Cache\CacheMgr.cpp">
+      <Filter>Cache</Filter>
+    </ClCompile>
+    <ClCompile Include="Cache\CacheIdentity.cpp">
+      <Filter>Cache</Filter>
+    </ClCompile>
+    <ClCompile Include="Cache\CacheGroup.cpp">
+      <Filter>Cache</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource\LocalResource.cpp">
+      <Filter>Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource\RemoteResource.h">
+      <Filter>Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource\RemoteResource.cpp">
+      <Filter>Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource\ResourceMgr.cpp">
+      <Filter>Resource</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -116,6 +140,27 @@
     </ClInclude>
     <ClInclude Include="WebSite\HttpServer.h">
       <Filter>WebSite</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\LocalResource.h">
+      <Filter>Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\IResource.h">
+      <Filter>Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="Cache\CacheGroup.h">
+      <Filter>Cache</Filter>
+    </ClInclude>
+    <ClInclude Include="Cache\CacheIdentity.h">
+      <Filter>Cache</Filter>
+    </ClInclude>
+    <ClInclude Include="Cache\CacheMgr.h">
+      <Filter>Cache</Filter>
+    </ClInclude>
+    <ClInclude Include="Cache\import.h">
+      <Filter>Cache</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\ResourceMgr.h">
+      <Filter>Resource</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

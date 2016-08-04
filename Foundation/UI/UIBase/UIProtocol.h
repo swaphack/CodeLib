@@ -2,7 +2,7 @@
 
 #include "macros.h"
 
-namespace render
+namespace ui
 {
 	// ui ¿Ø¼þÃû³Æ
 	class UINameProtocol

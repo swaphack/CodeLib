@@ -38,11 +38,12 @@ void CtrlStencil::visit()
 		setDirty(false);
 	}
 
+	glPushMatrix();
+
 	glEnable(GL_STENCIL_TEST);
 	glStencilFunc(GL_NEVER, 0x0, 0xFF);
 	glStencilOp(GL_INCR, GL_INCR, GL_INCR);
 
-	glPushMatrix();
 	this->updateSelf();
 	if (_children.count() == 0)
 	{
@@ -72,6 +73,8 @@ void CtrlStencil::visit()
 		_stencilNode->visit();
 		
 	}
+
+	glDisable(GL_STENCIL_TEST);
 
 	glPopMatrix();
 }

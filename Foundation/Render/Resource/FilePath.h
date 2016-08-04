@@ -15,7 +15,7 @@ namespace render
 		// 获取文件路径
 		const char* getFilePath(const char* filename);
 		// 获取文件数据
-		char* getFileData(const char* filename, long& count);
+		bool getFileData(const char* filename, std::string& data);
 		// 设置搜索路径
 		void setSearchPath(std::vector<std::string> paths);
 		// 获取搜索路径

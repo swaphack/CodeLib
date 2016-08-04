@@ -2,18 +2,20 @@
 
 #include "NodeLoader.h"
 
+using namespace render;
+
 namespace ui
 {
-	class ImageLoader : public NodeLoader
+	class TextLoader : public NodeLoader
 	{
 	public:
-		ImageLoader();
-		virtual ~ImageLoader();
+		TextLoader();
+		virtual ~TextLoader();
 	protected:
 		virtual void parseAttribute();
 
 		virtual void saveAttributes();
 	private:
-		INIT_LOADER_NODE(UIImage);
+		INIT_LOADER_NODE(CtrlText);
 	};
 }

@@ -4,30 +4,19 @@
 #include <cstdarg>
 #include <ctime>
 
-class A
-{
-public:
-	int getNumber() { return 1; }
-	virtual int getCount() { return 2; }
-protected:
-private:
-};
+#define GET_STRING(x) (#x)
 
-class B : public A
+void setMember()
 {
-public:
-	int getNumber() { return A::getNumber(); }
-	virtual int getCount() { return A::getCount(); }
-protected:
-private:
-};
+	printf("1\n");
+}
+
+void(*func)();
 
 int main(int argc, char** argv)
 {
-	B b;
+	const char* a = GET_STRING(int);
 
-	int num = b.getNumber();
-	int count = b.getCount();
 
 	return 0;
 }

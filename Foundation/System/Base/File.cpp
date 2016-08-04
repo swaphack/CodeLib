@@ -56,6 +56,29 @@ char* File::read( const char* url, long& size )
 	return str;
 }
 
+bool File::read(const char* url, std::string& data)
+{
+	data = "";
+	if (url == nullptr)
+	{
+		return false;
+	}
+
+	long size = 0;
+
+	char* temp = read(url, size);
+	if (temp == nullptr)
+	{
+		return false;
+	}
+
+	data = std::string(temp, size);
+
+	free(temp);
+
+	return true;
+}
+
 bool File::append(const char* url, const char* data, long size)
 {
 	if (url == nullptr || data == nullptr)

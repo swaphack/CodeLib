@@ -3,68 +3,85 @@
 #include "system.h"
 #include "text.h"
 #include <string>
+
 using namespace web;
 
 
 Resource::Resource()
 {
-	_resPath;
-	sys::Directory::getCurrentDirectory(_resPath);
+	this->init();
 }
 
 Resource::~Resource()
 {
+	this->dispose();
+}
+
+void Resource::init()
+{
+	_url = "";
+	_bCacheEnabled = false;
+	_cache = nullptr;
+}
+
+void Resource::save()
+{
 
 }
 
-void Resource::setResourcePath(const char* resPath)
+void Resource::dispose()
 {
-	_resPath = resPath;
+	SAFE_DELETE(_cache);
 }
 
-const char* Resource::getResourcePath()
+CacheGroup* Resource::getCache()
 {
-	return	_resPath.c_str();
+	return _cache;
 }
 
-std::string Resource::loadFile(const char* filename)
+void Resource::setUrl(const char* url)
 {
-	if (filename == nullptr)
+	_url = url;
+}
+
+const char* Resource::getUrl()
+{
+	return	_url.c_str();
+}
+
+void Resource::setCacheEnable(bool status)
+{
+	if (_bCacheEnabled == status)
 	{
-		return "";
+		return;
 	}
 
-	std::string fullpath;
-	if (sys::File::isFileExists(filename))
+	_bCacheEnabled = status;
+
+	if (strcmp(getName(), "") == 0)
 	{
-		fullpath = filename;
+		return;
 	}
 
-	if (fullpath.empty())
+	if (_bCacheEnabled && _cache == nullptr)
 	{
-		fullpath = _resPath + filename;
+		_cache = CacheGroup::create(getName());
 	}
-	
-	if (!sys::File::isFileExists(fullpath.c_str()))
+	else
 	{
-		fullpath = "";
+		SAFE_DELETE(_cache);
 	}
+}
 
-	if (fullpath.empty())
+bool Resource::isCacheEnable()
+{
+	return _bCacheEnabled;
+}
+
+void Resource::clearCache()
+{
+	if (_cache)
 	{
-		return "";
+		_cache->clear();
 	}
-
-	long size = 0;
-	char* data = sys::File::read(fullpath.c_str(), size);
-	if (data == nullptr)
-	{
-		return nullptr;
-	}
-
-	std::string fileData = std::string(data, size);
-
-	sys::StreamHelper::freeStream(data);
-
-	return fileData;
 }

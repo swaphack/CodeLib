@@ -47,22 +47,21 @@ const char* FilePath::getFilePath(const char* filename)
 	return nullptr;
 }
 
-char* FilePath::getFileData(const char* filename, long& count)
+bool FilePath::getFileData(const char* filename, std::string& data)
 {
+	data = "";
 	if (filename == nullptr)
 	{
-		return nullptr;
+		return false;
 	}
 
 	const char* fullpath = getFilePath(filename);
 	if (fullpath == nullptr)
 	{
-		return nullptr;
+		return false;
 	}
 
-	char* data = sys::File::read(fullpath, count);
-
-	return data;
+	return sys::File::read(fullpath, data);
 }
 
 void FilePath::setSearchPath(std::vector<std::string> paths)

@@ -21,7 +21,7 @@ namespace web
 		// 获取服务器
 		HttpServer* getServer();
 		// 获取资源
-		Resource* getResource();
+		ResourceMgr* getResource();
 	public:
 		virtual void init();
 		virtual void update();
@@ -39,6 +39,6 @@ namespace web
 		// 服务器
 		HttpServer* _server;
 		// 资源管理
-		Resource* _resource;
+		ResourceMgr* _resource;
 	};
 }

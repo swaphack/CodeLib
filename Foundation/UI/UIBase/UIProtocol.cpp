@@ -1,6 +1,6 @@
 #include "UIProtocol.h"
 
-using namespace render;
+using namespace ui;
 
 
 UINameProtocol::UINameProtocol()

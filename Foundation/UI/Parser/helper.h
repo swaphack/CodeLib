@@ -11,11 +11,11 @@ namespace ui
 	{ \
 	if (_node == nullptr) \
 	{ \
-	_node = new T(); \
-	AUTO_RELEASE_OBJECT(_node); \
+		_node = new T(); \
+		AUTO_RELEASE_OBJECT(_node); \
 	} \
 	return _node; \
-	} 
+	}
 
 	// 注册解析
 #define REGISTER_LOAER_NODE(NAME) \
@@ -23,7 +23,7 @@ namespace ui
 	{ \
 	G_UIPROXY->registerNodeParser(#NAME, this); \
 	}
-	
+
 	// 初始化节点加载方法
 #define INIT_LOADER_NODE(T) \
 	CREATE_LOADER_NODE(T) \

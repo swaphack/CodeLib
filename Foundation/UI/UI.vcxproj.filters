@@ -7,7 +7,13 @@
     <Filter Include="Control">
       <UniqueIdentifier>{1f7fa921-3298-4ac3-807c-61486102e78c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Loader">
+    <Filter Include="Sample">
+      <UniqueIdentifier>{2fd960a6-271c-4926-92df-6d020512e795}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sample\Loader">
+      <UniqueIdentifier>{7c593123-f606-4252-a2c0-74f6c5f26976}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Parser">
       <UniqueIdentifier>{5cd78107-f8ec-4d2b-84e8-4574482e3e1f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -18,16 +24,7 @@
     <ClInclude Include="UIBase\macros.h">
       <Filter>UIBase</Filter>
     </ClInclude>
-    <ClInclude Include="UIBase\UIImage.h">
-      <Filter>UIBase</Filter>
-    </ClInclude>
-    <ClInclude Include="UIBase\UINode.h">
-      <Filter>UIBase</Filter>
-    </ClInclude>
     <ClInclude Include="UIBase\UIProtocol.h">
-      <Filter>UIBase</Filter>
-    </ClInclude>
-    <ClInclude Include="UIBase\UIText.h">
       <Filter>UIBase</Filter>
     </ClInclude>
     <ClInclude Include="Control\import.h">
@@ -40,55 +37,76 @@
       <Filter>Control</Filter>
     </ClInclude>
     <ClInclude Include="ui.h" />
-    <ClInclude Include="NodeLoader\helper.h">
-      <Filter>Loader</Filter>
+    <ClInclude Include="Sample\Loader\TextLoader.h">
+      <Filter>Sample\Loader</Filter>
     </ClInclude>
-    <ClInclude Include="NodeLoader\ImageLoader.h">
-      <Filter>Loader</Filter>
+    <ClInclude Include="Sample\Loader\ImageLoader.h">
+      <Filter>Sample\Loader</Filter>
     </ClInclude>
-    <ClInclude Include="NodeLoader\INodeLoader.h">
-      <Filter>Loader</Filter>
+    <ClInclude Include="Sample\Loader\NodeLoader.h">
+      <Filter>Sample\Loader</Filter>
     </ClInclude>
-    <ClInclude Include="NodeLoader\macros.h">
-      <Filter>Loader</Filter>
+    <ClInclude Include="Sample\macros.h">
+      <Filter>Sample</Filter>
     </ClInclude>
-    <ClInclude Include="NodeLoader\NodeLoader.h">
-      <Filter>Loader</Filter>
+    <ClInclude Include="Sample\import.h">
+      <Filter>Sample</Filter>
     </ClInclude>
-    <ClInclude Include="NodeLoader\NodeProperty.h">
-      <Filter>Loader</Filter>
+    <ClInclude Include="Parser\helper.h">
+      <Filter>Parser</Filter>
     </ClInclude>
-    <ClInclude Include="NodeLoader\TextLoader.h">
-      <Filter>Loader</Filter>
+    <ClInclude Include="Parser\import.h">
+      <Filter>Parser</Filter>
     </ClInclude>
-    <ClInclude Include="NodeLoader\UIProxy.h">
-      <Filter>Loader</Filter>
+    <ClInclude Include="Parser\macros.h">
+      <Filter>Parser</Filter>
+    </ClInclude>
+    <ClInclude Include="Parser\NodeProperty.h">
+      <Filter>Parser</Filter>
+    </ClInclude>
+    <ClInclude Include="Parser\UIProxy.h">
+      <Filter>Parser</Filter>
+    </ClInclude>
+    <ClInclude Include="Parser\INodeSave.h">
+      <Filter>Parser</Filter>
+    </ClInclude>
+    <ClInclude Include="Parser\INodeLoad.h">
+      <Filter>Parser</Filter>
+    </ClInclude>
+    <ClInclude Include="Parser\INodeParser.h">
+      <Filter>Parser</Filter>
+    </ClInclude>
+    <ClInclude Include="Sample\Loader\macros.h">
+      <Filter>Sample\Loader</Filter>
+    </ClInclude>
+    <ClInclude Include="UIBase\NodeExt.h">
+      <Filter>UIBase</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="UIBase\UINode.cpp">
-      <Filter>UIBase</Filter>
-    </ClCompile>
     <ClCompile Include="UIBase\UIProtocol.cpp">
       <Filter>UIBase</Filter>
     </ClCompile>
-    <ClCompile Include="NodeLoader\ImageLoader.cpp">
-      <Filter>Loader</Filter>
+    <ClCompile Include="Sample\Loader\ImageLoader.cpp">
+      <Filter>Sample\Loader</Filter>
     </ClCompile>
-    <ClCompile Include="NodeLoader\INodeLoader.cpp">
-      <Filter>Loader</Filter>
+    <ClCompile Include="Sample\Loader\NodeLoader.cpp">
+      <Filter>Sample\Loader</Filter>
     </ClCompile>
-    <ClCompile Include="NodeLoader\NodeLoader.cpp">
-      <Filter>Loader</Filter>
+    <ClCompile Include="Sample\Loader\TextLoader.cpp">
+      <Filter>Sample\Loader</Filter>
     </ClCompile>
-    <ClCompile Include="NodeLoader\NodeProperty.cpp">
-      <Filter>Loader</Filter>
+    <ClCompile Include="Parser\NodeProperty.cpp">
+      <Filter>Parser</Filter>
     </ClCompile>
-    <ClCompile Include="NodeLoader\TextLoader.cpp">
-      <Filter>Loader</Filter>
+    <ClCompile Include="Parser\UIProxy.cpp">
+      <Filter>Parser</Filter>
     </ClCompile>
-    <ClCompile Include="NodeLoader\UIProxy.cpp">
-      <Filter>Loader</Filter>
+    <ClCompile Include="Parser\INodeParser.cpp">
+      <Filter>Parser</Filter>
+    </ClCompile>
+    <ClCompile Include="UIBase\NodeExt.cpp">
+      <Filter>UIBase</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
