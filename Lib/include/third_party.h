@@ -56,4 +56,11 @@
 #include "fmod/fmod.h"
 #endif
 
+//////////////////////////////////////////////////////////////////////////
+// sqlite
+
+#if defined(USE_SQLITE)
+#include "sqlite/sqlite3.h"
+#endif
+
 

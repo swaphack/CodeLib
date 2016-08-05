@@ -15,6 +15,15 @@ namespace sys
 		Client(const char* ip, int port);
 		~Client();
 	public:
+		int getID();
+		// 设置远程信息
+		void setRemote(const char* ip, int port);
+		// 连接服务器
+		bool connect();
+		// 断开连接
+		bool disconnect();
+		// 是否连接成功
+		bool isConnected();
 		/*
 		 * 更新
 		 * 接收数据
@@ -40,6 +49,11 @@ namespace sys
 		// 发送消息
 		void _flushData();
 	protected:
+		int _ID;
+		// 远程信息{地址，端口}
+		std::pair<const char*, int> _remote;
+		// 是否连接服务器
+		bool _bConnected;
 		// socket
 		Socket* _socket;
 		// 接收到的数据

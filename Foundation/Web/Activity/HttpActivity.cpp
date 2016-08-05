@@ -1,6 +1,6 @@
 #include "HttpActivity.h"
 #include "HttpRecvHandler.h"
-#include "../WebSite/WebApplication.h"
+#include "../WebApp/WebApplication.h"
 
 using namespace web;
 

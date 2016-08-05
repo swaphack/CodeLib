@@ -19,13 +19,6 @@ HttpRequest::~HttpRequest()
 
 }
 
-void HttpRequest::setMessage(const char* msg, int size, int& offset)
-{
-	HttpCommand::setMessage(msg, size);
-
-	offset = this->parseMessage();
-}
-
 const char* HttpRequest::getRequest(const char* key)
 {
 	if (key == nullptr)
@@ -33,8 +26,8 @@ const char* HttpRequest::getRequest(const char* key)
 		return nullptr;
 	}
 
-	std::map<std::string, std::string>::const_iterator it = _requestParams.find(key);
-	if (it != _requestParams.end())
+	std::map<std::string, std::string>::const_iterator it = _firstHeader.find(key);
+	if (it != _firstHeader.end())
 	{
 		return it->second.c_str();
 	}
@@ -42,30 +35,43 @@ const char* HttpRequest::getRequest(const char* key)
 	return nullptr;
 }
 
-const char* HttpRequest::getHeader(const char* key)
+void HttpRequest::makeMessage()
 {
-	if (key == nullptr)
+	_msg.clear();
+
+	sys::String line;
+	sys::StringStream ss;
+
+	line.concat(_firstHeader[HTTP_REQUEST_METHOD].c_str());
+	line.concat(" ");
+	line.concat(_firstHeader[HTTP_REQUEST_PARAM].c_str());
+	line.concat(" ");
+	line.concat(_firstHeader[HTTP_REQUEST_VERSION].c_str());
+
+	ss.writeLine(line.getString(), line.getSize());
+
+	std::map<std::string, std::string>::const_iterator it = _headParams.begin();
+	while (it != _headParams.end())
 	{
-		return nullptr;
+		line = "";
+		line.concat(it->first.c_str());
+		line.concat(": ");
+		line.concat(it->second.c_str());
+
+		ss.writeLine(line.getString(), line.getSize());
+
+		it++;
 	}
 
-	std::map<std::string, std::string>::const_iterator it = _headParams.find(key);
-	if (it != _headParams.end())
-	{
-		return it->second.c_str();
-	}
+	ss.writeLine();
+	ss.writeString(_body.c_str(), _body.size());
 
-	return nullptr;
+	this->setMessage(ss.getData(), ss.getLength());
 }
 
-const char* HttpRequest::getBody()
+int HttpRequest::tryParseMessage(const char* msg, int size)
 {
-	return _body.c_str();
-}
-
-int HttpRequest::parseMessage()
-{
-	sys::StringStream* ss = new sys::StringStream(_msg.c_str());
+	sys::StringStream* ss = new sys::StringStream(msg, size);
 	sys::String line;
 	std::vector<sys::String> dest;
 
@@ -104,7 +110,7 @@ int HttpRequest::parseMessage()
 		}
 		else if (order == EHRPO_BODY) // 可选的消息体
 		{
-			this->parseBody(line.getString());
+			this->setBody(line.getString(), line.getSize());
 			order = EHRPO_END;
 		}
 		else if (order == EHRPO_HEADER)
@@ -120,7 +126,7 @@ int HttpRequest::parseMessage()
 				line.split(": ", dest);
 				if (dest.size() == 2)
 				{
-					this->parseHeader(dest[0].getString(), dest[1].getString());
+					this->setHeader(dest[0].getString(), dest[1].getString());
 				}
 				else
 				{
@@ -160,24 +166,7 @@ void HttpRequest::parseRequest(const char* line)
 	{
 		return;
 	}
-	_requestParams[HTTP_REQUEST_METHOD] = dest[0].getString();
-	_requestParams[HTTP_REQUEST_PARAM] = dest[1].getString();
-	_requestParams[HTTP_REQUEST_VERSION] = dest[2].getString();
-}
-
-void HttpRequest::parseHeader(const char* key, const char* value)
-{
-	_headParams[key] = value;
-}
-
-void HttpRequest::parseBody(const char* msg)
-{
-	_body = msg;
-}
-
-void HttpRequest::reset()
-{
-	_requestParams.clear();
-	_headParams.clear();
-	_body = "";
+	_firstHeader[HTTP_REQUEST_METHOD] = dest[0].getString();
+	_firstHeader[HTTP_REQUEST_PARAM] = dest[1].getString();
+	_firstHeader[HTTP_REQUEST_VERSION] = dest[2].getString();
 }

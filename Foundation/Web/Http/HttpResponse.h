@@ -58,30 +58,20 @@ namespace web
 	public:
 		// 状态行参数
 		void setResponse(const char* key, const char* value);
-		// 报头参数
-		void setHeader(const char* key, const char* value);
-		// 时间格式报头参数
-		void setDateHeader(const char* key, sys::Time* value);
-		// 整形格式报头参数
-		void setIntegerHeader(const char* key, int value);
 		// 消息体文本格式
 		void setContentType(const char* value);
 		// 消息体文本长度
 		void setContentLength(int value);
-		// 可选的消息体
-		void setBody(const char* value, int size);
 		// 写入字符串
 		void writeString(const char* value);
 		// 写入文件
 		void writeFile(const char* filename);
 		// 生成消息
-		void makeMessage();
+		virtual void makeMessage();
+		// 解析消息,返回读取解析的长度
+		virtual int tryParseMessage(const char* msg, int size);
 	private:
-		// 请求行参数
-		std::map<std::string, std::string> _responseParams;
-		// 报头参数
-		std::map<std::string, std::string> _headParams;
-		// 可选的消息体
-		std::string _body;
+		// 解析请求行
+		void parseResponse(const char* line);
 	};
 }

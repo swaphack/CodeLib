@@ -205,7 +205,13 @@
     <ClInclude Include="..\..\Lib\include\png\pnglibconf.h" />
     <ClInclude Include="..\..\Lib\include\png\pngpriv.h" />
     <ClInclude Include="..\..\Lib\include\png\pngstruct.h" />
+    <ClInclude Include="..\..\Lib\include\sqlite\sqlite3.h" />
+    <ClInclude Include="..\..\Lib\include\sqlite\sqlite3ext.h" />
     <ClInclude Include="..\..\Lib\include\third_party.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\Lib\include\sqlite\shell.c" />
+    <ClCompile Include="..\..\Lib\include\sqlite\sqlite3.c" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -39,6 +39,11 @@ CacheGroup* Resource::getCache()
 	return _cache;
 }
 
+bool Resource::loadFileData(const char* filename, std::string& data)
+{
+	return false;
+}
+
 void Resource::setUrl(const char* url)
 {
 	_url = url;

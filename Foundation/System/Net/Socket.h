@@ -9,7 +9,7 @@ namespace sys
 	// IO 缓存大小
 	#define SOCKET_BUFFER_SIZE 1024 * 1024
 	// 超时时间（单位：毫秒）
-	#define SOCKET_TIME_OUT 100
+	#define SOCKET_TIME_OUT 5000
 
 	class Socket
 	{

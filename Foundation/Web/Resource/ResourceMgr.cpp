@@ -1,36 +1,74 @@
 #include "ResourceMgr.h"
+
 #include "system.h"
+#include "LocalResource.h"
+#include "RemoteResource.h"
 
 using namespace web;
 
 ResourceMgr::ResourceMgr()
 {
-	_localRes = new LocalResource();
-	//_remoteRes = new RemoteResource();
+	_resType = ERT_LOCAL;
+
+	this->init();
 }
 
 ResourceMgr::~ResourceMgr()
 {
-	SAFE_DELETE(_localRes);
-	SAFE_DELETE(_remoteRes);
+	this->disponse();
 }
 
-LocalResource* ResourceMgr::getLocal()
+void ResourceMgr::setResourceType(ResourceType type)
 {
-	return _localRes;
+	_resType = type;
 }
 
-void ResourceMgr::setLocalUrl(const char* url)
+ResourceType ResourceMgr::getResourceType()
+{
+	return _resType;
+}
+
+void ResourceMgr::setUrl(const char* url)
 {
 	if (url == nullptr)
 	{
 		return;
 	}
+	Resource* resource = getResource();
+	if (resource == nullptr)
+	{
+		return;
+	}
 
-	getLocal()->setUrl(url);
+	resource->setUrl(url);
 }
 
-RemoteResource* ResourceMgr::getRemote()
+Resource* ResourceMgr::getResource()
 {
-	return _remoteRes;
+	std::map<ResourceType, IResource*>::iterator iter = _resources.find(_resType);
+	if (iter != _resources.end())
+	{
+		return dynamic_cast<Resource*>(iter->second);
+	}
+
+	return nullptr;
+}
+
+void ResourceMgr::init()
+{
+	this->disponse();
+	_resources[ERT_LOCAL] = new	LocalResource();
+	_resources[ERT_REMOTE] = new RemoteResource();
+}
+
+void ResourceMgr::disponse()
+{
+	std::map<ResourceType, IResource*>::iterator iter = _resources.begin();
+	while (iter != _resources.end())
+	{
+		SAFE_DELETE(iter->second);
+		iter++;
+	}
+
+	_resources.clear();
 }

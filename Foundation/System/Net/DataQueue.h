@@ -14,7 +14,7 @@ namespace sys
 		~DataQueue();
 	public:
 		void push(NetData* data);
-
+		// 需手动释放NetData数据
 		NetData* pop();
 
 		NetData* top();

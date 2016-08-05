@@ -50,46 +50,18 @@ namespace web
 		static const char* HTTP_REQUEST_PARAM/* = "PARAM"*/;
 		// http 版本
 		static const char* HTTP_REQUEST_VERSION/* = "VERSION"*/;
-
-		// http 请求解析顺序
-		enum HttpRequestParseOrder
-		{
-			EHRPO_BEGIN,	// 开始
-			EHRPO_REQUEST,	// 请求行
-			EHRPO_HEADER,	// 头信息
-			EHRPO_BODY,		// 消息体
-			EHRPO_END,		// 结束
-		};
 	public:
 		HttpRequest();
 		virtual ~HttpRequest();
 	public:
-		// 设置消息
-		virtual void setMessage(const char* msg, int size, int& offset);
 		// 请求行参数
 		const char* getRequest(const char* key);
-		// 报头参数
-		const char* getHeader(const char* key);
-		// 可选的消息体
-		const char* getBody();
-	protected:
+		// 生成消息
+		void makeMessage();
 		// 解析消息,返回读取解析的长度
-		int parseMessage();
+		virtual int tryParseMessage(const char* msg, int size);
 	private:
 		// 解析请求行
 		void parseRequest(const char* line);
-		// 解析消息报头
-		void parseHeader(const char* key, const char* value);
-		// 可选的消息体
-		void parseBody(const char* msg);
-		// 重置
-		void reset();
-	private:
-		// 请求行参数
-		std::map<std::string, std::string> _requestParams;
-		// 报头参数
-		std::map<std::string, std::string> _headParams;
-		// 可选的消息体
-		std::string _body;
 	};
 }

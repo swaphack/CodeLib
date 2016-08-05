@@ -14,7 +14,7 @@ namespace web
 		// 名称
 		virtual const char* getName() { return "LOCAL"; }
 		// 加载文件
-		bool loadFileData(const char* filename, std::string& data);
+		virtual bool loadFileData(const char* filename, std::string& data);
 	protected:
 		// 获取完整路径
 		std::string getFullPath(const char* filename);

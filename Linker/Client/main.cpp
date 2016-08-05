@@ -1,4 +1,5 @@
 #include "system.h"
+#include "web.h"
 #include <windows.h>
 #include <thread>
 using namespace sys;
@@ -11,7 +12,7 @@ class ClientRecv : public Object
 public:
 	ClientRecv(Client* client):_client(client){}
 public:
-	void onRecv(DataQueue& dataQueue)
+	void onRecv(int id, DataQueue& dataQueue)
 	{
 		if (dataQueue.empty())
 		{
@@ -34,6 +35,11 @@ void initManyClients(std::map<int, std::pair<Client*, ClientRecv*>>& clients, in
 	for (int i = 0; i < count; i++)
 	{
 		Client* client = new Client(WEB_IP, WEB_PORT);
+		if (!client->connect())
+		{
+			delete client;
+			break;
+		}
 
 		ClientRecv* recv = new ClientRecv(client);
 		client->setRecvHandler(recv, static_cast<CLIENT_RECV_HANDLER>(&ClientRecv::onRecv));
@@ -45,10 +51,10 @@ void initManyClients(std::map<int, std::pair<Client*, ClientRecv*>>& clients, in
 	}
 }
 
-int main(int argc, char** argv)
+void test1()
 {
 	Socket::InitSockModule();
-	
+
 	std::map<int, std::pair<Client*, ClientRecv*>> clients;
 
 	initManyClients(clients, 1);
@@ -81,6 +87,38 @@ int main(int argc, char** argv)
 	}
 
 	delete th;
+
 	Socket::ReleaseSockModule();
+}
+
+void onDownloadCallback(int tag, const char* data, int size)
+{
+	LOG("%s", data);
+}
+
+void test2()
+{
+	const char* url = "blog.csdn.net";
+	const char* ip = "127.0.0.1";
+	int port = 9547;
+
+	Socket::InitSockModule();
+
+	web::HttpDownload* pDownload = new web::HttpDownload();
+
+	if (pDownload->download(ip, port, "", onDownloadCallback, 1))
+	{
+		while (true);
+	}
+
+	Socket::ReleaseSockModule();
+}
+
+int main(int argc, char** argv)
+{
+	
+	test2();
+	
+	
 	return 0;
 };

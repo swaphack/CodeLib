@@ -110,6 +110,7 @@
     <ClInclude Include="Math\Volume.h" />
     <ClInclude Include="Net\Client.h" />
     <ClInclude Include="Net\DataQueue.h" />
+    <ClInclude Include="Net\DNS.h" />
     <ClInclude Include="Net\import.h" />
     <ClInclude Include="Net\macros.h" />
     <ClInclude Include="Net\NetData.h" />
@@ -159,6 +160,7 @@
     <ClCompile Include="Framework\Object.cpp" />
     <ClCompile Include="Net\Client.cpp" />
     <ClCompile Include="Net\DataQueue.cpp" />
+    <ClCompile Include="Net\DNS.cpp" />
     <ClCompile Include="Net\Server.cpp" />
     <ClCompile Include="Net\Socket.cpp" />
     <ClCompile Include="Platform\Windows\Console.cpp" />

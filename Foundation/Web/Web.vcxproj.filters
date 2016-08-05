@@ -10,9 +10,6 @@
     <Filter Include="Resource">
       <UniqueIdentifier>{f6809233-12b8-49dd-bd89-b74fd138b9f8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="WebSite">
-      <UniqueIdentifier>{b55035fa-e342-4d52-b009-1b8de1743b37}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Http">
       <UniqueIdentifier>{4c169d3b-fdb4-4e78-82b4-1854b5303f08}</UniqueIdentifier>
     </Filter>
@@ -24,6 +21,9 @@
     </Filter>
     <Filter Include="Cache">
       <UniqueIdentifier>{36d907b6-7060-4083-aa53-315918617408}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WebApp">
+      <UniqueIdentifier>{b55035fa-e342-4d52-b009-1b8de1743b37}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -45,20 +45,11 @@
     <ClCompile Include="Http\HttpResponse.cpp">
       <Filter>Http</Filter>
     </ClCompile>
-    <ClCompile Include="WebSite\WebApplication.cpp">
-      <Filter>WebSite</Filter>
-    </ClCompile>
-    <ClCompile Include="WebSite\Session.cpp">
-      <Filter>WebSite</Filter>
-    </ClCompile>
     <ClCompile Include="Http\HttpTime.cpp">
       <Filter>Http</Filter>
     </ClCompile>
     <ClCompile Include="Resource\Resource.cpp">
       <Filter>Resource</Filter>
-    </ClCompile>
-    <ClCompile Include="WebSite\HttpServer.cpp">
-      <Filter>WebSite</Filter>
     </ClCompile>
     <ClCompile Include="Cache\CacheMgr.cpp">
       <Filter>Cache</Filter>
@@ -72,14 +63,29 @@
     <ClCompile Include="Resource\LocalResource.cpp">
       <Filter>Resource</Filter>
     </ClCompile>
-    <ClCompile Include="Resource\RemoteResource.h">
+    <ClCompile Include="Resource\ResourceMgr.cpp">
       <Filter>Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="DB\SQLite.cpp">
+      <Filter>DB</Filter>
+    </ClCompile>
+    <ClCompile Include="DB\DataSheet.cpp">
+      <Filter>DB</Filter>
     </ClCompile>
     <ClCompile Include="Resource\RemoteResource.cpp">
       <Filter>Resource</Filter>
     </ClCompile>
-    <ClCompile Include="Resource\ResourceMgr.cpp">
-      <Filter>Resource</Filter>
+    <ClCompile Include="WebApp\HttpDownload.cpp">
+      <Filter>WebApp</Filter>
+    </ClCompile>
+    <ClCompile Include="WebApp\HttpServer.cpp">
+      <Filter>WebApp</Filter>
+    </ClCompile>
+    <ClCompile Include="WebApp\Session.cpp">
+      <Filter>WebApp</Filter>
+    </ClCompile>
+    <ClCompile Include="WebApp\WebApplication.cpp">
+      <Filter>WebApp</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -120,26 +126,11 @@
     <ClInclude Include="Activity\HttpRecvHandler.h">
       <Filter>Activity</Filter>
     </ClInclude>
-    <ClInclude Include="WebSite\Session.h">
-      <Filter>WebSite</Filter>
-    </ClInclude>
-    <ClInclude Include="WebSite\WebApplication.h">
-      <Filter>WebSite</Filter>
-    </ClInclude>
-    <ClInclude Include="WebSite\macros.h">
-      <Filter>WebSite</Filter>
-    </ClInclude>
-    <ClInclude Include="WebSite\import.h">
-      <Filter>WebSite</Filter>
-    </ClInclude>
     <ClInclude Include="Http\macros.h">
       <Filter>Http</Filter>
     </ClInclude>
     <ClInclude Include="Http\HttpTime.h">
       <Filter>Http</Filter>
-    </ClInclude>
-    <ClInclude Include="WebSite\HttpServer.h">
-      <Filter>WebSite</Filter>
     </ClInclude>
     <ClInclude Include="Resource\LocalResource.h">
       <Filter>Resource</Filter>
@@ -161,6 +152,45 @@
     </ClInclude>
     <ClInclude Include="Resource\ResourceMgr.h">
       <Filter>Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="DB\IDataBase.h">
+      <Filter>DB</Filter>
+    </ClInclude>
+    <ClInclude Include="DB\IDataRecord.h">
+      <Filter>DB</Filter>
+    </ClInclude>
+    <ClInclude Include="DB\IDataSheet.h">
+      <Filter>DB</Filter>
+    </ClInclude>
+    <ClInclude Include="DB\SQLite.h">
+      <Filter>DB</Filter>
+    </ClInclude>
+    <ClInclude Include="DB\DataSheet.h">
+      <Filter>DB</Filter>
+    </ClInclude>
+    <ClInclude Include="DB\import.h">
+      <Filter>DB</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\RemoteResource.h">
+      <Filter>Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="WebApp\HttpDownload.h">
+      <Filter>WebApp</Filter>
+    </ClInclude>
+    <ClInclude Include="WebApp\HttpServer.h">
+      <Filter>WebApp</Filter>
+    </ClInclude>
+    <ClInclude Include="WebApp\import.h">
+      <Filter>WebApp</Filter>
+    </ClInclude>
+    <ClInclude Include="WebApp\macros.h">
+      <Filter>WebApp</Filter>
+    </ClInclude>
+    <ClInclude Include="WebApp\Session.h">
+      <Filter>WebApp</Filter>
+    </ClInclude>
+    <ClInclude Include="WebApp\WebApplication.h">
+      <Filter>WebApp</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

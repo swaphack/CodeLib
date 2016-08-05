@@ -34,10 +34,7 @@ bool RemoteResource::loadFileData(const char* filename, std::string& data)
 		return true;
 	}
 
-	if (!sys::File::read(fullpath.c_str(), data))
-	{
-		return false;
-	}
+	
 
 	getCache()->set(fullpath.c_str(), data.c_str());
 
@@ -46,21 +43,7 @@ bool RemoteResource::loadFileData(const char* filename, std::string& data)
 
 std::string RemoteResource::getFullPath(const char* filename)
 {
-	std::string fullpath;
-	if (sys::File::isFileExists(filename))
-	{
-		fullpath = filename;
-	}
-
-	if (fullpath.empty())
-	{
-		fullpath = _url + filename;
-
-		if (!sys::File::isFileExists(fullpath.c_str()))
-		{
-			fullpath = "";
-		}
-	}
+	std::string fullpath = _url + filename;
 
 	return fullpath;
 }

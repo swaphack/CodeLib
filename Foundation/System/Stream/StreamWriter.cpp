@@ -17,6 +17,8 @@ StreamWriter::StreamWriter(const char* data, int size)
 	char* newData = StreamHelper::mallocStream((void*)data, size);
 
 	this->setData(newData, size);
+
+	this->setCursorAndLength(size);
 }
 
 StreamWriter::~StreamWriter()
@@ -85,7 +87,7 @@ void StreamWriter::writeString( char* data, int size )
 {
 	while (getCursor() + size > this->getCapacity())
 	{
-		this->realloct(2 * this->getCapacity());
+		this->realloct(size + this->getCursor() + 1);
 	}
 
 	memcpy(getPtr(), data, size);
@@ -113,7 +115,6 @@ void StreamWriter::realloct(ss_t size)
 	ss_t length = getStream()->getLength();
 	char* newData = StreamHelper::mallocStream(size, (void*)getStream()->getData(), length);
 
-	getStream()->freeStream();
 	getStream()->setData(newData, size);
 	setLength(length);
 

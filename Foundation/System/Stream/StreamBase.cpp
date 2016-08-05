@@ -108,6 +108,7 @@ int StreamBase::getLength() const
 void StreamBase::freeStream()
 {
 	StreamHelper::freeStream(_data);
+	_data = nullptr;
 	_length = 0;
 }
 
@@ -153,6 +154,7 @@ int StreamBaseRef::getLength() const
 void StreamBaseRef::freeStream()
 {
 	StreamHelper::freeStream(_data);
+	_data = nullptr;
 	_length = 0;
 }
 

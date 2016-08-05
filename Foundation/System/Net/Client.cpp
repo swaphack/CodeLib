@@ -4,14 +4,46 @@ using namespace sys;
 
 
 Client::Client( const char* ip, int port )
+:_bConnected(false)
 {
 	_socket = new Socket();
-	_socket->Connect(ip, port);
+	_ID = _socket->getID();
+	this->setRemote(ip, port);
 }
 
 Client::~Client()
 {
 	SAFE_DELETE(_socket);
+}
+
+int Client::getID()
+{
+	return _ID;
+}
+
+void Client::setRemote(const char* ip, int port)
+{
+	_remote.first = ip;
+	_remote.second = port;
+}
+bool Client::connect()
+{
+	_socket->Connect(_remote.first, _remote.second);
+	_bConnected = true;
+
+	return true;
+}
+
+bool Client::disconnect()
+{
+	_socket->Close();
+	_bConnected = false;
+	return true;
+}
+
+bool Client::isConnected()
+{
+	return _bConnected;
 }
 
 void Client::update()
@@ -76,11 +108,6 @@ void Client::onRecvHandler( NetData* data )
 		return;
 	}
 	this->addRecvBuffer(data);
-
-	if (! this->_recvHandler.empty())
-	{
-		this->_recvHandler.hand(this->_recvDatas);	
-	}
 }
 
 void Client::_recvData()
@@ -91,7 +118,7 @@ void Client::_recvData()
 	{
 		if (_socket->HasError() == true)
 		{
-			_socket->Close();
+			this->disconnect();
 			return;
 		}
 	}
@@ -103,6 +130,7 @@ void Client::_recvData()
 
 void Client::_flushData()
 {
+	// 发送数据
 	int size;
 	NetData* data = _sendDatas.top();
 	if (data)
@@ -113,9 +141,18 @@ void Client::_flushData()
 			data->pos = data->pos + size;
 			if (data->pos >= data->size)
 			{
-				_sendDatas.pop();
 				SAFE_DELETE(data);
+				_sendDatas.pop();
 			}
+		}
+	}
+
+	// 处理接收的数据
+	while (!this->_recvDatas.empty())
+	{
+		if (!this->_recvHandler.empty())
+		{
+			this->_recvHandler.hand(_socket->getID(), this->_recvDatas);
 		}
 	}
 }

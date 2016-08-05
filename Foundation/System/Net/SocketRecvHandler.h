@@ -36,7 +36,7 @@ namespace sys
 
 
 	// 客户端处理接收数据的函数指针
-	typedef void (Object::*CLIENT_RECV_HANDLER)(DataQueue& data);
+	typedef void (Object::*CLIENT_RECV_HANDLER)(int id, DataQueue& data);
 	// 客户端接收数据的处理者
 	struct ClientRecvHandler
 	{
@@ -45,10 +45,10 @@ namespace sys
 
 		ClientRecvHandler():target(nullptr), hander(nullptr){}
 
-		void hand(DataQueue& data)
+		void hand(int id, DataQueue& data)
 		{
 			if (!empty())
-				(target->*hander)(data);
+				(target->*hander)(id, data);
 		}
 
 		bool empty() 

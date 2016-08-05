@@ -259,6 +259,9 @@
     <ClInclude Include="Math\Equation.h">
       <Filter>Math</Filter>
     </ClInclude>
+    <ClInclude Include="Net\DNS.h">
+      <Filter>Net</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Base\File.cpp">
@@ -356,6 +359,9 @@
     </ClCompile>
     <ClCompile Include="Base\macros.cpp">
       <Filter>Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Net\DNS.cpp">
+      <Filter>Net</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

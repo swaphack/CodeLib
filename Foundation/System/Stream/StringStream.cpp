@@ -19,6 +19,17 @@ StringStream::StringStream(const char* text)
 	this->setData(newData, len);
 }
 
+StringStream::StringStream(const char* text, int size)
+: Stream(new StreamBaseRef())
+{
+	int len = size + 1;
+
+	char* newData = StreamHelper::mallocStream((void*)text, len);
+	newData[size] = '\0';
+
+	this->setData(newData, len);
+}
+
 StringStream::~StringStream()
 {
 	SAFE_DELETE(_baseStream);

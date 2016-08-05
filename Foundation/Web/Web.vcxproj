@@ -43,7 +43,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>../System/;../Text/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../System/;../Text/;../../Lib/include/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <BrowseInformation>true</BrowseInformation>
     </ClCompile>
     <Link>
@@ -72,6 +72,8 @@
     <ClCompile Include="Cache\CacheIdentity.cpp" />
     <ClCompile Include="Cache\CacheMgr.cpp" />
     <ClCompile Include="Command\Command.cpp" />
+    <ClCompile Include="DB\DataSheet.cpp" />
+    <ClCompile Include="DB\SQLite.cpp" />
     <ClCompile Include="Http\HttpCommand.cpp" />
     <ClCompile Include="Http\HttpConstant.cpp" />
     <ClCompile Include="Http\HttpRequest.cpp" />
@@ -79,12 +81,12 @@
     <ClCompile Include="Http\HttpTime.cpp" />
     <ClCompile Include="Resource\LocalResource.cpp" />
     <ClCompile Include="Resource\RemoteResource.cpp" />
-    <ClCompile Include="Resource\RemoteResource.h" />
     <ClCompile Include="Resource\Resource.cpp" />
     <ClCompile Include="Resource\ResourceMgr.cpp" />
-    <ClCompile Include="WebSite\HttpServer.cpp" />
-    <ClCompile Include="WebSite\Session.cpp" />
-    <ClCompile Include="WebSite\WebApplication.cpp" />
+    <ClCompile Include="WebApp\HttpDownload.cpp" />
+    <ClCompile Include="WebApp\HttpServer.cpp" />
+    <ClCompile Include="WebApp\Session.cpp" />
+    <ClCompile Include="WebApp\WebApplication.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Activity\HttpActivity.h" />
@@ -96,6 +98,12 @@
     <ClInclude Include="Cache\import.h" />
     <ClInclude Include="Command\Command.h" />
     <ClInclude Include="Command\import.h" />
+    <ClInclude Include="DB\DataSheet.h" />
+    <ClInclude Include="DB\IDataBase.h" />
+    <ClInclude Include="DB\IDataRecord.h" />
+    <ClInclude Include="DB\IDataSheet.h" />
+    <ClInclude Include="DB\import.h" />
+    <ClInclude Include="DB\SQLite.h" />
     <ClInclude Include="Http\HttpCommand.h" />
     <ClInclude Include="Http\HttpConstant.h" />
     <ClInclude Include="Http\HttpRequest.h" />
@@ -106,14 +114,16 @@
     <ClInclude Include="Resource\import.h" />
     <ClInclude Include="Resource\IResource.h" />
     <ClInclude Include="Resource\LocalResource.h" />
+    <ClInclude Include="Resource\RemoteResource.h" />
     <ClInclude Include="Resource\Resource.h" />
     <ClInclude Include="Resource\ResourceMgr.h" />
     <ClInclude Include="web.h" />
-    <ClInclude Include="WebSite\HttpServer.h" />
-    <ClInclude Include="WebSite\import.h" />
-    <ClInclude Include="WebSite\macros.h" />
-    <ClInclude Include="WebSite\Session.h" />
-    <ClInclude Include="WebSite\WebApplication.h" />
+    <ClInclude Include="WebApp\HttpDownload.h" />
+    <ClInclude Include="WebApp\HttpServer.h" />
+    <ClInclude Include="WebApp\import.h" />
+    <ClInclude Include="WebApp\macros.h" />
+    <ClInclude Include="WebApp\Session.h" />
+    <ClInclude Include="WebApp\WebApplication.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

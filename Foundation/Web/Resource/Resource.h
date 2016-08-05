@@ -22,6 +22,8 @@ namespace web
 		virtual const char* getName() { return ""; }
 		// 缓存
 		virtual CacheGroup* getCache();
+		// 加载文件数据
+		virtual bool loadFileData(const char* filename, std::string& data);
 	public:
 		// 设置资源位置
 		void setUrl(const char* url);
