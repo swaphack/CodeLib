@@ -43,6 +43,15 @@ namespace render
 		void setTag(int tag);
 		// 获取标签
 		int getTag();
+		// 根据标签获取字节点
+		Node* getChildByTag(int tag);
+
+		// 设置名称
+		void setName(const char* name);
+		// 获取名称
+		const char* getName();
+		// 根据名称获取字节点
+		Node* getChildByName(const char* name); 
 
 		// 设置数据
 		void setUserData(void* data);
@@ -97,6 +106,8 @@ namespace render
 		sys::Vector _obPosition;
 		// 标签
 		int _tag;
+		// 名称
+		std::string _name;
 		// 数据
 		void* _userData;
 		// z轴坐标

@@ -4,6 +4,8 @@
 
 #include <thread>
 
+#define SLEEP_MILLISECOND 200
+
 using namespace web;
 
 HttpDownload::HttpDownload()
@@ -36,6 +38,7 @@ bool HttpDownload::download(const char* url, int port, const char* filepath, dow
 	std::thread th([&](){
 		while (client->isConnected())
 		{
+			std::this_thread::sleep_for(std::chrono::milliseconds(SLEEP_MILLISECOND));
 			client->update();
 		}
 		this->flushListenData(client->getID());

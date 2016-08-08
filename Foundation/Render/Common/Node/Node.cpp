@@ -103,6 +103,59 @@ int Node::getTag()
 	return _tag;
 }
 
+Node* Node::getChildByTag(int tag)
+{
+	std::vector<Object*>::iterator iter = _children.begin();
+
+	Node* node;
+	while (iter != _children.end())
+	{
+		node = dynamic_cast<Node*>(*iter);
+		if (node && node->getTag() == tag)
+		{
+			return node;
+		}
+		iter++;
+	}
+
+	return nullptr;
+}
+
+void Node::setName(const char* name)
+{
+	if (name)
+	{
+		_name = name;
+	}
+}
+
+const char* Node::getName()
+{
+	return _name.c_str();
+}
+
+Node* Node::getChildByName(const char* name)
+{
+	if (name == nullptr)
+	{
+		return nullptr;
+	}
+	std::vector<Object*>::iterator iter = _children.begin();
+
+	Node* node;
+	while (iter != _children.end())
+	{
+		node = dynamic_cast<Node*>(*iter);
+		if (node && strcmp(node->getName(), name) == 0)
+		{
+			return node;
+		}
+		iter++;
+	}
+
+	return nullptr;
+}
+
 void Node::setUserData( void* data )
 {
 	_userData = data;

@@ -98,9 +98,9 @@ void onDownloadCallback(int tag, const char* data, int size)
 
 void test2()
 {
-	const char* url = "blog.csdn.net";
-	const char* ip = "127.0.0.1";
-	int port = 9547;
+	const char* url = "www.baidu.com";
+	const char* ip = "111.13.101.208";
+	int port = 80;
 
 	Socket::InitSockModule();
 

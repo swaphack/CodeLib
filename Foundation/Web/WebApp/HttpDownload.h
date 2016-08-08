@@ -13,6 +13,14 @@ namespace web
 		HttpDownload();
 		~HttpDownload();
 	public:
+		/*
+		@brief 下载文件
+		@param url 远程ip地址
+		@param port 端口号
+		@param filepath 文件路径
+		@param callback 下载完成回调
+		@param tag 标示
+		*/
 		bool download(const char* url, int port, const char* filepath, downloadCallback callback, int tag);
 		// 推送监听到的数据
 		void flushListenData(int id);

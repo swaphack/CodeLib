@@ -5,9 +5,9 @@
 
 namespace ui
 {
-	// ui节点
+	// ui扩张，用于显示外框
 	class NodeExt :
-		public UINameProtocol,
+		public render::Node,
 		public UIBoxProtocol
 	{
 	public:
@@ -15,9 +15,6 @@ namespace ui
 		virtual ~NodeExt();
 	public:
 		virtual void draw();
-
-		// 根据名称获取控件
-		UINameProtocol* getChildByName(const char* name);
 	public:
 		// 开始绘制UI
 		virtual void beginDraw();
