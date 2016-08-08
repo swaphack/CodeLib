@@ -88,7 +88,7 @@ bool File::append(const char* url, const char* data, long size)
 
 	FILE* fptr = 0;
 
-	int result = fopen_s(&fptr, url, "ab");
+	int result = fopen_s(&fptr, url, "ab+");
 	if (result != 0)
 	{
 		return false;

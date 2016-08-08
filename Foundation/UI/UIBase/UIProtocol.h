@@ -4,22 +4,6 @@
 
 namespace ui
 {
-	// ui 控件名称
-	class UINameProtocol
-	{
-	public:
-		UINameProtocol();
-		virtual ~UINameProtocol();
-	public:
-		// 设置名称
-		void setName(const char* name);
-		// 获取名称
-		const char* getName();
-	private:
-		// ui控件名称
-		std::string _name;
-	};
-
 	// ui 控件显示区域
 	class UIBoxProtocol
 	{

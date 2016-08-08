@@ -34,7 +34,7 @@ char Console::readChar()
 
 void Console::writeLine(const char* words)
 {
-	printf(words);
+	printf("%s", words);
 }
 
 void Console::writeChar(char word)

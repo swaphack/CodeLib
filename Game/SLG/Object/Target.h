@@ -15,19 +15,13 @@
 namespace slg
 {
 	// 对象
-	class Target : public sys::Object
+	class Target : public sys::Object , public sys::Name, public Identify
 	{
 	public:
 		Target();
 		virtual ~Target();
 	public:
-		// 名称
-		const char* getName();
-		// 设置名称
-		void setName(const char* name);
 	private:
-		// 名称
-		std::string _name;
 		// 目标编号
 		static int g_TargetID;
 	};

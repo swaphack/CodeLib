@@ -2,31 +2,6 @@
 
 using namespace ui;
 
-
-UINameProtocol::UINameProtocol()
-:_name("")
-{
-
-}
-
-UINameProtocol::~UINameProtocol()
-{
-
-}
-
-void UINameProtocol::setName(const char* name)
-{
-	if (name)
-	{
-		_name = name;
-	}
-}
-
-const char* UINameProtocol::getName()
-{
-	return _name.c_str();
-}
-
 //////////////////////////////////////////////////////////////////////////
 UIBoxProtocol::UIBoxProtocol()
 :_bBoxVisible(false)

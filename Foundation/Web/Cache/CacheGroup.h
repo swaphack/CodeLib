@@ -16,6 +16,7 @@ namespace web
 	public:
 		virtual ~CacheGroup();
 	public:
+		// 创建一个缓存组
 		static CacheGroup* create(const char* name);
 	public:
 		// 添加键值对数据

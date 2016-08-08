@@ -14,13 +14,3 @@ Target::~Target()
 {
 
 }
-
-const char* Target::getName()
-{
-	return _name.c_str();
-}
-
-void Target::setName(const char* name)
-{
-	_name = name;
-}

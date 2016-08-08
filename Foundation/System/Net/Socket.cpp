@@ -130,7 +130,7 @@ bool Socket::HasError()
 {
 #ifdef _WIN32
 	int error = ::WSAGetLastError();
-	//LOG("error id %d\n", error);
+	PRINT("error id %d\n", error);
 	if (error != WSAEWOULDBLOCK) 
 	{
 		return true;

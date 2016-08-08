@@ -10,11 +10,16 @@ std::string* StringPool::getString( const char* str )
 		return nullptr;
 	} 
 
-	uint key = sys::Hash::getBKDRHash((char*)str);
+	uint key = getHash((char*)str);
 	if (_strings.find(key) == _strings.end())
 	{
 		_strings[key] = std::string(str);
 	}
 	
 	return &_strings[key];
+}
+
+uint StringPool::getHash(const char* str)
+{
+	return sys::Hash::getBKDRHash((char*)str);
 }

@@ -24,19 +24,6 @@ int CacheIdentity::getID()
 	return _id;
 }
 
-const char* CacheIdentity::getName()
-{
-	return _name.c_str();
-}
-
-void CacheIdentity::setName(const char* name)
-{
-	if (name)
-	{
-		_name = name;
-	}
-}
-
 void CacheIdentity::setInControl(bool status)
 {
 	if (_bInCacheControl == status)

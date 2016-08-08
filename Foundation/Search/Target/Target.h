@@ -2,6 +2,7 @@
 
 #include <vector>
 #include <string>
+#include <set>
 
 namespace search
 {	
@@ -9,24 +10,22 @@ namespace search
 	class Target
 	{
 	public:
-		Target() {}
-		virtual ~Target() {}
+		Target();
+		virtual ~Target();
 	public:
-		virtual const char* getString() { return ""; }
-
-		virtual void dispose() { delete this; }
-	}; 
-
-	// ×Ö·û´®
-	class StringTarget : public Target
-	{
-	public:
-		StringTarget(const char* text);
-	public:
-		void setString(const char* text);
 		virtual const char* getString();
-	protected:
+
+		virtual void dispose();
 	private:
-		std::string _text;
-	};
+		std::set<std::string*> _marks;
+	}; 
 }
+
+template<>
+struct std::less<search::Target*>
+{
+	bool operator()(search::Target*_X, search::Target* _Y) const
+	{
+		return _X->getString() < _Y->getString();
+	}
+};
