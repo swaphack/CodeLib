@@ -18,19 +18,6 @@ void NodeProperty::Clear()
 	_attributes.clear();
 }
 
-void NodeProperty::setName(const char* name)
-{
-	if (name)
-	{
-		_name = name;
-	}
-}
-
-const char* NodeProperty::getName()
-{
-	return _name.c_str();
-}
-
 void NodeProperty::setAttribute(const char* name, bool value)
 {
 	int val = value ? 1 : 0;

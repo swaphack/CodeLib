@@ -34,6 +34,9 @@
       <Filter>Context</Filter>
     </ClCompile>
     <ClCompile Include="SearchProxy.cpp" />
+    <ClCompile Include="Target\TargetString.cpp">
+      <Filter>Target</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Parser\TextParser.h">
@@ -65,6 +68,9 @@
       <Filter>String</Filter>
     </ClInclude>
     <ClInclude Include="Target\import.h">
+      <Filter>Target</Filter>
+    </ClInclude>
+    <ClInclude Include="Target\TargetString.h">
       <Filter>Target</Filter>
     </ClInclude>
   </ItemGroup>

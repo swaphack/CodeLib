@@ -77,6 +77,7 @@
     <ClInclude Include="Base\macros.h" />
     <ClInclude Include="Base\Platform.h" />
     <ClInclude Include="Base\Random.h" />
+    <ClInclude Include="Base\Protocol.h" />
     <ClInclude Include="Base\Time.h" />
     <ClInclude Include="Base\Tuple.h" />
     <ClInclude Include="Base\Types.h" />
@@ -108,6 +109,9 @@
     <ClInclude Include="Math\Size.h" />
     <ClInclude Include="Math\Vector.h" />
     <ClInclude Include="Math\Volume.h" />
+    <ClInclude Include="Memory\PtrCache.h" />
+    <ClInclude Include="Memory\Memory.h" />
+    <ClInclude Include="Memory\PtrInfo.h" />
     <ClInclude Include="Net\Client.h" />
     <ClInclude Include="Net\DataQueue.h" />
     <ClInclude Include="Net\DNS.h" />
@@ -122,11 +126,8 @@
     <ClInclude Include="Platform\Windows\Console.h" />
     <ClInclude Include="Platform\Windows\import.h" />
     <ClInclude Include="Platform\Windows\Window.h" />
-    <ClInclude Include="Security\Decrypt.h" />
     <ClInclude Include="Security\Encrypt.h" />
-    <ClInclude Include="Security\UnZip.h" />
     <ClInclude Include="Security\Zip.h" />
-    <ClInclude Include="Security\ZipCommon.h" />
     <ClInclude Include="Stream\FileStream.h" />
     <ClInclude Include="Stream\import.h" />
     <ClInclude Include="Stream\MultiStream.h" />
@@ -158,6 +159,8 @@
     <ClCompile Include="Framework\Container.cpp" />
     <ClCompile Include="Framework\Dispatcher.cpp" />
     <ClCompile Include="Framework\Object.cpp" />
+    <ClCompile Include="Memory\PtrCache.cpp" />
+    <ClCompile Include="Memory\Memory.cpp" />
     <ClCompile Include="Net\Client.cpp" />
     <ClCompile Include="Net\DataQueue.cpp" />
     <ClCompile Include="Net\DNS.cpp" />
@@ -166,7 +169,6 @@
     <ClCompile Include="Platform\Windows\Console.cpp" />
     <ClCompile Include="Platform\Windows\Window.cpp" />
     <ClCompile Include="Security\Zip.cpp" />
-    <ClCompile Include="Security\ZipCommon.cpp" />
     <ClCompile Include="Stream\FileStream.cpp" />
     <ClCompile Include="Stream\MultiStream.cpp" />
     <ClCompile Include="Stream\StreamReader.cpp" />

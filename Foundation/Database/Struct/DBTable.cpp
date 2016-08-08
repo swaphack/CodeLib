@@ -6,8 +6,7 @@ using namespace db;
 
 
 DBField::DBField()
-:_name("")
-,_type(EFT_NONE)
+:_type(EFT_NONE)
 ,_length(0)
 {
 
@@ -16,16 +15,6 @@ DBField::DBField()
 DBField::~DBField()
 {
 
-}
-
-void DBField::setName( const char* name )
-{
-	_name = name;
-}
-
-const char* DBField::getName() const
-{
-	return _name.c_str();
 }
 
 void DBField::setType( FieldType type )
@@ -57,16 +46,6 @@ DBTable::DBTable()
 DBTable::~DBTable()
 {
 
-}
-
-void DBTable::setName( const char* name )
-{
-	_name = name;
-}
-
-const char* DBTable::getName() const
-{
-	return _name.c_str();
 }
 
 void DBTable::addKey( const char* key )

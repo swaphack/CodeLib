@@ -20,7 +20,7 @@ public:
 		}
 		NetData* top = dataQueue.top();
 		std::string recvData = std::string(top->data, top->size);
-		LOG("Receive : %s\n", recvData.c_str());
+		PRINT("Receive : %s\n", recvData.c_str());
 		dataQueue.pop();
 		delete top;
 
@@ -93,7 +93,7 @@ void test1()
 
 void onDownloadCallback(int tag, const char* data, int size)
 {
-	LOG("%s", data);
+	PRINT("%s", data);
 }
 
 void test2()

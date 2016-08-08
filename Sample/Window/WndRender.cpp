@@ -134,7 +134,7 @@ void WndRender::testText()
 {
 	char strVal[255] = {};
 	Time* t = Time::getNow();
-	LOG("%d-%d-%d %02d:%02d:%02d\n", t->getYear(), t->getMonth(), t->getMonthDay(), t->getHour(), t->getMinute(), t->getSecond());
+	PRINT("%d-%d-%d %02d:%02d:%02d\n", t->getYear(), t->getMonth(), t->getMonthDay(), t->getHour(), t->getMinute(), t->getSecond());
 	sprintf(strVal, "%d-%d-%d %02d:%02d:%02d\n", t->getYear(), t->getMonth(), t->getMonthDay(), t->getHour(), t->getMinute(), t->getSecond());
 
 	CtrlText* pCtrlText = new CtrlText();
@@ -259,7 +259,7 @@ void WndRender::testEditBox()
 		}
 		else if (status == EEIS_END)
 		{
-			LOG("Input Text %s\n", pNode->getString());
+			PRINT("Input Text %s\n", pNode->getString());
 		}
 	});
 
@@ -291,7 +291,7 @@ void WndRender::testImages()
 void WndRender::testString()
 {
 	Time* t = Time::getNow();
-	LOG("%d-%d-%d %02d:%02d:%02d\n", t->getYear(), t->getMonth(), t->getMonthDay(), t->getHour(), t->getMinute(), t->getSecond());
+	PRINT("%d-%d-%d %02d:%02d:%02d\n", t->getYear(), t->getMonth(), t->getMonthDay(), t->getHour(), t->getMinute(), t->getSecond());
 
 	const char* data = "{json; big; none}";
 

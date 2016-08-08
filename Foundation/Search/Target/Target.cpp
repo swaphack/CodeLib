@@ -2,23 +2,23 @@
 
 using namespace search;
 
-StringTarget::StringTarget( const char* text )
+
+Target::Target()
 {
-	_text = "";
-	this->setString(text);
+
 }
 
-void StringTarget::setString( const char* text )
+Target::~Target()
 {
-	if (text == nullptr)
-	{
-		return;
-	}
 
-	_text = text;
 }
 
-const char* StringTarget::getString()
+const char* Target::getString()
 {
-	return _text.c_str();
+	return "";
+}
+
+void Target::dispose()
+{
+	delete this;
 }

@@ -9,7 +9,7 @@ namespace ui
 	typedef std::map<std::string, std::string> Attributes;
 
 	// ui属性
-	class NodeProperty
+	class NodeProperty: public sys::Name
 	{
 	public:
 		NodeProperty();
@@ -17,10 +17,6 @@ namespace ui
 	public:
 		// 清除已有属性配置
 		void Clear();
-		// 设置拥有者（节点类型）名称
-		void setName(const char* name);
-		// 获取拥有者（节点类型）名称
-		const char* getName();
 
 		// 设置属性值
 		void setAttribute(const char* name, bool value);
@@ -74,8 +70,6 @@ namespace ui
 	protected:
 		// 属性
 		Attributes _attributes;
-		// 名称
-		std::string _name;
 	};
 
 	template<typename T>

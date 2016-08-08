@@ -9,16 +9,12 @@
 namespace db
 {
 	// 数据字段结构
-	class DBField
+	class DBField : public sys::Name
 	{
 	public:
 		DBField();
 		~DBField();
 	public:
-		// 设置字段名称
-		void setName(const char* name);
-		// 获取字段名称
-		const char* getName() const;
 		// 设置字段值类型
 		void setType(FieldType type);
 		// 获取字段值类型
@@ -28,8 +24,6 @@ namespace db
 		// 获取字段值长度
 		int getLength() const;
 	protected:
-		// 字段名称
-		std::string _name;
 		// 字段值类型
 		FieldType _type;
 		// 字段值长度
@@ -38,16 +32,12 @@ namespace db
 
 	//////////////////////////////////////////////////////////////////////////
 	// 数据表结构
-	class DBTable
+	class DBTable : public sys::Name
 	{
 	public:
 		DBTable();
 		~DBTable();
 	public:
-		// 设置表名称
-		void setName(const char* name);
-		// 获取表名称
-		const char* getName() const;
 		// 添加关键字
 		void addKey(const char* key);
 		// 移除关键字

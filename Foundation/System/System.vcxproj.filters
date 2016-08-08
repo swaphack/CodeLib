@@ -37,6 +37,9 @@
     <Filter Include="Type">
       <UniqueIdentifier>{6a833bb5-08b6-4839-a92c-20e9177ca8ba}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Memory">
+      <UniqueIdentifier>{488662cd-70ca-4b4f-94cd-c3bb5a307904}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Base\File.h">
@@ -115,19 +118,10 @@
     <ClInclude Include="Stream\import.h">
       <Filter>Stream</Filter>
     </ClInclude>
-    <ClInclude Include="Security\Decrypt.h">
-      <Filter>Security</Filter>
-    </ClInclude>
     <ClInclude Include="Security\Encrypt.h">
       <Filter>Security</Filter>
     </ClInclude>
-    <ClInclude Include="Security\UnZip.h">
-      <Filter>Security</Filter>
-    </ClInclude>
     <ClInclude Include="Security\Zip.h">
-      <Filter>Security</Filter>
-    </ClInclude>
-    <ClInclude Include="Security\ZipCommon.h">
       <Filter>Security</Filter>
     </ClInclude>
     <ClInclude Include="Stream\Stream.h">
@@ -262,6 +256,18 @@
     <ClInclude Include="Net\DNS.h">
       <Filter>Net</Filter>
     </ClInclude>
+    <ClInclude Include="Memory\Memory.h">
+      <Filter>Memory</Filter>
+    </ClInclude>
+    <ClInclude Include="Memory\PtrCache.h">
+      <Filter>Memory</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\Protocol.h">
+      <Filter>Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Memory\PtrInfo.h">
+      <Filter>Memory</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Base\File.cpp">
@@ -301,9 +307,6 @@
       <Filter>Net</Filter>
     </ClCompile>
     <ClCompile Include="Security\Zip.cpp">
-      <Filter>Security</Filter>
-    </ClCompile>
-    <ClCompile Include="Security\ZipCommon.cpp">
       <Filter>Security</Filter>
     </ClCompile>
     <ClCompile Include="Stream\StreamBase.cpp">
@@ -362,6 +365,12 @@
     </ClCompile>
     <ClCompile Include="Net\DNS.cpp">
       <Filter>Net</Filter>
+    </ClCompile>
+    <ClCompile Include="Memory\Memory.cpp">
+      <Filter>Memory</Filter>
+    </ClCompile>
+    <ClCompile Include="Memory\PtrCache.cpp">
+      <Filter>Memory</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
