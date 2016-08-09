@@ -15,6 +15,7 @@ namespace render
 	// 绘制节点
 	class Node : 
 		public sys::Object, 
+		public sys::Name,
 		public DirtyProtocol, 
 		public SpaceProtocol,
 		public BodyProtocol
@@ -46,10 +47,6 @@ namespace render
 		// 根据标签获取字节点
 		Node* getChildByTag(int tag);
 
-		// 设置名称
-		void setName(const char* name);
-		// 获取名称
-		const char* getName();
 		// 根据名称获取字节点
 		Node* getChildByName(const char* name); 
 

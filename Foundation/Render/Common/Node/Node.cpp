@@ -121,19 +121,6 @@ Node* Node::getChildByTag(int tag)
 	return nullptr;
 }
 
-void Node::setName(const char* name)
-{
-	if (name)
-	{
-		_name = name;
-	}
-}
-
-const char* Node::getName()
-{
-	return _name.c_str();
-}
-
 Node* Node::getChildByName(const char* name)
 {
 	if (name == nullptr)
