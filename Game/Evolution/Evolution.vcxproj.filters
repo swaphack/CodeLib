@@ -1,0 +1,210 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Biotic">
+      <UniqueIdentifier>{a1308288-4b99-4608-8c4e-9b905b5b42f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Abiotic">
+      <UniqueIdentifier>{eb3be78d-e132-44bd-a5bd-b7f741f88813}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Environment">
+      <UniqueIdentifier>{779e2864-ef70-4c13-9e00-7c54f9d2fcab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object">
+      <UniqueIdentifier>{fcbaca9d-875a-4a7d-a52c-e3a9b967610e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Biotic\Cell">
+      <UniqueIdentifier>{2554cb31-0255-4b75-8a3f-34ed40c32aaa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource">
+      <UniqueIdentifier>{ecf66a0f-2260-42ac-b00b-a46bd3871aab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Biotic\Organ">
+      <UniqueIdentifier>{8f017e24-8c4e-442a-b52a-0405367de1ba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Chemistry">
+      <UniqueIdentifier>{ae39dade-4f6f-4882-ac44-d70b6ace17cd}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Biotic\import.h">
+      <Filter>Biotic</Filter>
+    </ClInclude>
+    <ClInclude Include="Biotic\macros.h">
+      <Filter>Biotic</Filter>
+    </ClInclude>
+    <ClInclude Include="Abiotic\macros.h">
+      <Filter>Abiotic</Filter>
+    </ClInclude>
+    <ClInclude Include="Environment\NEnvironment.h">
+      <Filter>Environment</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\import.h">
+      <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\macros.h">
+      <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\NObject.h">
+      <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\NProperty.h">
+      <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\NStatus.h">
+      <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Environment\macros.h">
+      <Filter>Environment</Filter>
+    </ClInclude>
+    <ClInclude Include="Environment\import.h">
+      <Filter>Environment</Filter>
+    </ClInclude>
+    <ClInclude Include="Biotic\Cell\NCell.h">
+      <Filter>Biotic\Cell</Filter>
+    </ClInclude>
+    <ClInclude Include="Biotic\Cell\macros.h">
+      <Filter>Biotic\Cell</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\NMark.h">
+      <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Biotic\NBiotic.h">
+      <Filter>Biotic</Filter>
+    </ClInclude>
+    <ClInclude Include="Abiotic\NAbiotic.h">
+      <Filter>Abiotic</Filter>
+    </ClInclude>
+    <ClInclude Include="Biotic\NOrganism.h">
+      <Filter>Biotic</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\NPropertyProtocol.h">
+      <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\NStatusProtocol.h">
+      <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Biotic\Cell\import.h">
+      <Filter>Biotic\Cell</Filter>
+    </ClInclude>
+    <ClInclude Include="Biotic\Organ\NInterstitialSubstance.h">
+      <Filter>Biotic\Organ</Filter>
+    </ClInclude>
+    <ClInclude Include="Biotic\Organ\NCellOrgan.h">
+      <Filter>Biotic\Organ</Filter>
+    </ClInclude>
+    <ClInclude Include="Biotic\Organ\NCellSystem.h">
+      <Filter>Biotic\Organ</Filter>
+    </ClInclude>
+    <ClInclude Include="Biotic\Organ\NCellTissue.h">
+      <Filter>Biotic\Organ</Filter>
+    </ClInclude>
+    <ClInclude Include="Biotic\Organ\NDigestion.h">
+      <Filter>Biotic\Organ</Filter>
+    </ClInclude>
+    <ClInclude Include="Biotic\Organ\NFunctionCell.h">
+      <Filter>Biotic\Organ</Filter>
+    </ClInclude>
+    <ClInclude Include="Biotic\NSimpleBiotic.h">
+      <Filter>Biotic</Filter>
+    </ClInclude>
+    <ClInclude Include="Chemistry\macros.h">
+      <Filter>Chemistry</Filter>
+    </ClInclude>
+    <ClInclude Include="Chemistry\ChemFormula.h">
+      <Filter>Chemistry</Filter>
+    </ClInclude>
+    <ClInclude Include="Chemistry\ChemCondition.h">
+      <Filter>Chemistry</Filter>
+    </ClInclude>
+    <ClInclude Include="Chemistry\ChemEffect.h">
+      <Filter>Chemistry</Filter>
+    </ClInclude>
+    <ClInclude Include="Chemistry\ChemInput.h">
+      <Filter>Chemistry</Filter>
+    </ClInclude>
+    <ClInclude Include="Chemistry\ChemOutput.h">
+      <Filter>Chemistry</Filter>
+    </ClInclude>
+    <ClInclude Include="Abiotic\NAbioticProtocol.h">
+      <Filter>Abiotic</Filter>
+    </ClInclude>
+    <ClInclude Include="Biotic\NMetabolismProtocol.h">
+      <Filter>Biotic</Filter>
+    </ClInclude>
+    <ClInclude Include="Biotic\NBioticProtocol.h">
+      <Filter>Biotic</Filter>
+    </ClInclude>
+    <ClInclude Include="Abiotic\NOrganicCompound.h">
+      <Filter>Abiotic</Filter>
+    </ClInclude>
+    <ClInclude Include="Abiotic\NInorganicCompound.h">
+      <Filter>Abiotic</Filter>
+    </ClInclude>
+    <ClInclude Include="Chemistry\ChemConstitution.h">
+      <Filter>Chemistry</Filter>
+    </ClInclude>
+    <ClInclude Include="Chemistry\ChemDocument.h">
+      <Filter>Chemistry</Filter>
+    </ClInclude>
+    <ClInclude Include="Biotic\Organ\macros.h">
+      <Filter>Biotic\Organ</Filter>
+    </ClInclude>
+    <ClInclude Include="Chemistry\import.h">
+      <Filter>Chemistry</Filter>
+    </ClInclude>
+    <ClInclude Include="Chemistry\ChemPeriodicTable.h">
+      <Filter>Chemistry</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Object\NObject.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\NProperty.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\NStatus.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\NMark.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Biotic\Cell\NCell.cpp">
+      <Filter>Biotic\Cell</Filter>
+    </ClCompile>
+    <ClCompile Include="Biotic\NBiotic.cpp">
+      <Filter>Biotic</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\NPropertyProtocol.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\NStatusProtocol.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Biotic\NOrganism.cpp">
+      <Filter>Biotic</Filter>
+    </ClCompile>
+    <ClCompile Include="Biotic\Organ\NCellTissue.cpp">
+      <Filter>Biotic\Organ</Filter>
+    </ClCompile>
+    <ClCompile Include="Biotic\NSimpleBiotic.cpp">
+      <Filter>Biotic</Filter>
+    </ClCompile>
+    <ClCompile Include="Chemistry\ChemConstitution.cpp">
+      <Filter>Chemistry</Filter>
+    </ClCompile>
+    <ClCompile Include="Chemistry\ChemDocumnet.cpp">
+      <Filter>Chemistry</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="Chemistry\ChemPeriodicTable.cpp">
+      <Filter>Chemistry</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="Resource\Constants.xml">
+      <Filter>Resource</Filter>
+    </Xml>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,134 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{3ECFD68A-EF33-4C5B-9E27-1EF6F81C7F32}</ProjectGuid>
+    <RootNamespace>Evolution</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup />
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="Abiotic\macros.h" />
+    <ClInclude Include="Abiotic\NAbiotic.h" />
+    <ClInclude Include="Abiotic\NAbioticProtocol.h" />
+    <ClInclude Include="Abiotic\NInorganicCompound.h" />
+    <ClInclude Include="Abiotic\NOrganicCompound.h" />
+    <ClInclude Include="Biotic\Cell\import.h" />
+    <ClInclude Include="Biotic\Cell\macros.h" />
+    <ClInclude Include="Biotic\Cell\NCell.h" />
+    <ClInclude Include="Biotic\import.h" />
+    <ClInclude Include="Biotic\macros.h" />
+    <ClInclude Include="Biotic\NMetabolismProtocol.h" />
+    <ClInclude Include="Biotic\NBioticProtocol.h" />
+    <ClInclude Include="Biotic\NOrganism.h" />
+    <ClInclude Include="Biotic\NBiotic.h" />
+    <ClInclude Include="Biotic\NSimpleBiotic.h" />
+    <ClInclude Include="Biotic\Organ\macros.h" />
+    <ClInclude Include="Biotic\Organ\NCellOrgan.h" />
+    <ClInclude Include="Biotic\Organ\NCellSystem.h" />
+    <ClInclude Include="Biotic\Organ\NCellTissue.h" />
+    <ClInclude Include="Biotic\Organ\NDigestion.h" />
+    <ClInclude Include="Biotic\Organ\NFunctionCell.h" />
+    <ClInclude Include="Biotic\Organ\NInterstitialSubstance.h" />
+    <ClInclude Include="Chemistry\ChemCondition.h" />
+    <ClInclude Include="Chemistry\ChemDocument.h" />
+    <ClInclude Include="Chemistry\ChemEffect.h" />
+    <ClInclude Include="Chemistry\ChemInput.h" />
+    <ClInclude Include="Chemistry\ChemOutput.h" />
+    <ClInclude Include="Chemistry\import.h" />
+    <ClInclude Include="Chemistry\macros.h" />
+    <ClInclude Include="Chemistry\ChemFormula.h" />
+    <ClInclude Include="Chemistry\ChemConstitution.h" />
+    <ClInclude Include="Chemistry\ChemPeriodicTable.h" />
+    <ClInclude Include="Environment\import.h" />
+    <ClInclude Include="Environment\macros.h" />
+    <ClInclude Include="Environment\NEnvironment.h" />
+    <ClInclude Include="Object\import.h" />
+    <ClInclude Include="Object\macros.h" />
+    <ClInclude Include="Object\NMark.h" />
+    <ClInclude Include="Object\NObject.h" />
+    <ClInclude Include="Object\NProperty.h" />
+    <ClInclude Include="Object\NPropertyProtocol.h" />
+    <ClInclude Include="Object\NStatus.h" />
+    <ClInclude Include="Object\NStatusProtocol.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Biotic\Cell\NCell.cpp" />
+    <ClCompile Include="Biotic\NBiotic.cpp" />
+    <ClCompile Include="Biotic\NOrganism.cpp" />
+    <ClCompile Include="Biotic\NSimpleBiotic.cpp" />
+    <ClCompile Include="Biotic\Organ\NCellTissue.cpp" />
+    <ClCompile Include="Chemistry\ChemConstitution.cpp" />
+    <ClCompile Include="Chemistry\ChemDocumnet.cpp" />
+    <ClCompile Include="Chemistry\ChemPeriodicTable.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="Object\NMark.cpp" />
+    <ClCompile Include="Object\NObject.cpp" />
+    <ClCompile Include="Object\NProperty.cpp" />
+    <ClCompile Include="Object\NPropertyProtocol.cpp" />
+    <ClCompile Include="Object\NStatus.cpp" />
+    <ClCompile Include="Object\NStatusProtocol.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="Resource\Constants.xml" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
