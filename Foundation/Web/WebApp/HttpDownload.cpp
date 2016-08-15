@@ -18,7 +18,7 @@ HttpDownload::~HttpDownload()
 	this->clear();
 }
 
-bool HttpDownload::download(const char* url, int port, const char* filepath, downloadCallback callback, int tag)
+bool HttpDownload::download(const char* url, int port, const char* filepath, sys::Object* pTarget, downloadCallback callback, int tag)
 {
 	if (url == NULL)
 	{
@@ -46,7 +46,7 @@ bool HttpDownload::download(const char* url, int port, const char* filepath, dow
 	});
 	th.detach();
 
-	this->addListen(client, callback, tag);
+	this->addListen(client, pTarget, callback, tag);
 
 	return true;
 }
@@ -72,7 +72,7 @@ void HttpDownload::flushListenData(int id)
 	int result = pResp->tryParseMessage(iter1->second->getData(), iter1->second->getLength());
 	if (pResp->isHttpFormat() && pResp->isFullCommand())
 	{// 完整的http
-		iter2->second.t2(iter2->second.t1, pResp->getBody(), pResp->getBodySize());
+		(iter2->second.t2.first->*iter2->second.t2.second)(iter2->second.t1, pResp->getBody(), pResp->getBodySize());
 	}
 	else
 	{
@@ -130,14 +130,14 @@ void HttpDownload::onRecvHand(int id, sys::DataQueue& data)
 	delete pResp;
 }
 
-void HttpDownload::addListen(sys::Client* client, downloadCallback callback, int tag)
+void HttpDownload::addListen(sys::Client* client, sys::Object* pTarget, downloadCallback callback, int tag)
 {// 添加一个下载监听
-	if (client == nullptr || callback == nullptr)
+	if (client == nullptr || pTarget == nullptr|| callback == nullptr)
 	{
 		return;
 	}
 
-	_downloadCallbacks[client->getID()] = sys::make_tuple3(tag, callback, client);
+	_downloadCallbacks[client->getID()] = sys::make_tuple3(tag, std::make_pair(pTarget, callback), client);
 }
 
 void HttpDownload::clear()

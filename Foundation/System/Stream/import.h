@@ -1,5 +1,7 @@
 #pragma once
 
+#include "StreamHelper.h"
+
 #include "StreamBase.h"
 
 #include "Stream.h"

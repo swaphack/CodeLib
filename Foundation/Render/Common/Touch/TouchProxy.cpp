@@ -76,26 +76,25 @@ void TouchProxy::onTouchEnd(float x, float y)
 
 void TouchProxy::addTouchDelegate(TouchType type, sys::Object* object, TOUCH_DELEGATE_HANDLER handler)
 {
-	TouchDelegate* del = new TouchDelegate();
-	del->target = object;
-	del->handler = handler;
+	TouchDelegate del;
+	del.first = object;
+	del.second = handler;
 	_touchEvent[type].push_back(del);
 }
 
 void TouchProxy::removeTouchDelegate(TouchType type, sys::Object* object, TOUCH_DELEGATE_HANDLER handler)
 {
-	std::map<TouchType, std::vector<TouchDelegate*>>::iterator it = _touchEvent.find(type);
+	std::map<TouchType, std::vector<TouchDelegate>>::iterator it = _touchEvent.find(type);
 	if (it == _touchEvent.end())
 	{
 		return;
 	}
 
-	std::vector<TouchDelegate*>::iterator itD = it->second.begin();
+	std::vector<TouchDelegate>::iterator itD = it->second.begin();
 	while (itD != it->second.end())
 	{
-		if ((*itD)->isEquals(object, handler))
+		if ((*itD).first == object && (*itD).second == handler)
 		{
-			delete (*itD);
 			it->second.erase(itD);
 			break;
 		}
@@ -105,17 +104,10 @@ void TouchProxy::removeTouchDelegate(TouchType type, sys::Object* object, TOUCH_
 
 void TouchProxy::removeTouchEvent(TouchType type)
 {
-	std::map<TouchType, std::vector<TouchDelegate*>>::iterator it = _touchEvent.find(type);
+	std::map<TouchType, std::vector<TouchDelegate>>::iterator it = _touchEvent.find(type);
 	if (it == _touchEvent.end())
 	{
 		return;
-	}
-
-	std::vector<TouchDelegate*>::iterator itD = it->second.begin();
-	while (itD != it->second.end())
-	{
-		delete (*itD);
-		itD++;
 	}
 
 	it->second.clear();
@@ -124,34 +116,21 @@ void TouchProxy::removeTouchEvent(TouchType type)
 
 void TouchProxy::removeAllTouchEvent()
 {
-	std::map<TouchType, std::vector<TouchDelegate*>>::iterator it = _touchEvent.begin();
-	while (it != _touchEvent.end())
-	{
-		std::vector<TouchDelegate*>::iterator itD = it->second.begin();
-		while (itD != it->second.end())
-		{
-			delete (*itD);
-			itD++;
-		}
-
-		it++;
-	}
-
 	_touchEvent.clear();
 }
 
 void TouchProxy::dispatchTouchEvent(TouchType type, float x, float y)
 {
-	std::map<TouchType, std::vector<TouchDelegate*>>::iterator it = _touchEvent.find(type);
+	std::map<TouchType, std::vector<TouchDelegate>>::iterator it = _touchEvent.find(type);
 	if (it == _touchEvent.end())
 	{
 		return;
 	}
 
-	std::vector<TouchDelegate*>::iterator itD = it->second.begin();
+	std::vector<TouchDelegate>::iterator itD = it->second.begin();
 	while (itD != it->second.end())
 	{
-		(*itD)->hand(_target, x, y);
+		((*itD).first->*(*itD).second)(_target, x, y);
 		itD++;
 	}
 }

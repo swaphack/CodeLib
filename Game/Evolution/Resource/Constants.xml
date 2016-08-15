@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+	<Property>
+		<Item Name="Hunger" Des="饥饿"/>
+		<Item Name="Thirst" Des="口渴"/>
+		<Item Name="Fatigue" Des="疲劳"/>
+		<Item Name="Weight" Des="负重"/>
+		<Item Name="Comfort" Des="舒适度"/>
+		<Item Name="Temperature" Des="温度"/>
+		<Item Name="Injuries" Des="受伤情况"/>
+	</Property>
+	<Status>
+		<Item Name="Dead" Value="0" Des="是否死亡"/>
+	</Status>
+</root>

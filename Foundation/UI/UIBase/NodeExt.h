@@ -5,22 +5,18 @@
 
 namespace ui
 {
+	#define NODE_EXT_ZORDER INT_MAX
 	// ui扩张，用于显示外框
 	class NodeExt :
 		public render::Node,
 		public UIBoxProtocol
 	{
 	public:
-		NodeExt(render::Node* node);
+		NodeExt(render::Node* parent);
 		virtual ~NodeExt();
 	public:
 		virtual void draw();
-	public:
-		// 开始绘制UI
-		virtual void beginDraw();
-		// 结束绘制
-		virtual void afterDraw();
 	private:
-		render::Node* _pThis;
+		render::Node* _parent;
 	};
 }

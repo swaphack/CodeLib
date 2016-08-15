@@ -130,7 +130,6 @@ bool Socket::HasError()
 {
 #ifdef _WIN32
 	int error = ::WSAGetLastError();
-	PRINT("error id %d\n", error);
 	if (error != WSAEWOULDBLOCK) 
 	{
 		return true;
@@ -178,4 +177,3 @@ void Socket::initDefaultOPT()
 	::setsockopt(_sock, SOL_SOCKET, SO_SNDBUF, (const char*)&nBufSize, sizeof(int));
 	::setsockopt(_sock, SOL_SOCKET, SO_RCVBUF, (const char*)&nBufSize, sizeof(int));
 }
-

@@ -25,6 +25,9 @@
     <Filter Include="Chemistry">
       <UniqueIdentifier>{ae39dade-4f6f-4882-ac44-d70b6ace17cd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Config">
+      <UniqueIdentifier>{6d28962a-5a3f-4880-ba21-b066512fb47e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Biotic\import.h">
@@ -156,6 +159,15 @@
     <ClInclude Include="Chemistry\ChemPeriodicTable.h">
       <Filter>Chemistry</Filter>
     </ClInclude>
+    <ClInclude Include="Config\ConfigLoader.h">
+      <Filter>Config</Filter>
+    </ClInclude>
+    <ClInclude Include="Config\IConfigLoader.h">
+      <Filter>Config</Filter>
+    </ClInclude>
+    <ClInclude Include="Config\ConfigManager.h">
+      <Filter>Config</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Object\NObject.cpp">
@@ -201,9 +213,15 @@
     <ClCompile Include="Chemistry\ChemPeriodicTable.cpp">
       <Filter>Chemistry</Filter>
     </ClCompile>
+    <ClCompile Include="Config\ConfigLoader.cpp">
+      <Filter>Config</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Xml Include="Resource\Constants.xml">
+      <Filter>Resource</Filter>
+    </Xml>
+    <Xml Include="Resource\Elements.xml">
       <Filter>Resource</Filter>
     </Xml>
   </ItemGroup>

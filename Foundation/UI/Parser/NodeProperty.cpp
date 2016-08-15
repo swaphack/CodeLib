@@ -5,7 +5,6 @@ using namespace ui;
 
 NodeProperty::NodeProperty()
 {
-	_name = "";
 }
 
 NodeProperty::~NodeProperty()

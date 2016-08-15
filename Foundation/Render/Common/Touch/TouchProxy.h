@@ -40,6 +40,6 @@ namespace render
 	private:
 		Node* _target;
 		bool _bTouchEnabled;
-		std::map<TouchType, std::vector<TouchDelegate*>> _touchEvent;
+		std::map<TouchType, std::vector<TouchDelegate>> _touchEvent;
 	};
 }

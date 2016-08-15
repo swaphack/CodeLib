@@ -44,6 +44,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>../../Foundation/System/;../../Foundation/Text/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -96,6 +97,9 @@
     <ClInclude Include="Chemistry\ChemFormula.h" />
     <ClInclude Include="Chemistry\ChemConstitution.h" />
     <ClInclude Include="Chemistry\ChemPeriodicTable.h" />
+    <ClInclude Include="Config\ConfigLoader.h" />
+    <ClInclude Include="Config\ConfigManager.h" />
+    <ClInclude Include="Config\IConfigLoader.h" />
     <ClInclude Include="Environment\import.h" />
     <ClInclude Include="Environment\macros.h" />
     <ClInclude Include="Environment\NEnvironment.h" />
@@ -117,6 +121,7 @@
     <ClCompile Include="Chemistry\ChemConstitution.cpp" />
     <ClCompile Include="Chemistry\ChemDocumnet.cpp" />
     <ClCompile Include="Chemistry\ChemPeriodicTable.cpp" />
+    <ClCompile Include="Config\ConfigLoader.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Object\NMark.cpp" />
     <ClCompile Include="Object\NObject.cpp" />
@@ -127,6 +132,7 @@
   </ItemGroup>
   <ItemGroup>
     <Xml Include="Resource\Constants.xml" />
+    <Xml Include="Resource\Elements.xml" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

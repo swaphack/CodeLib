@@ -15,33 +15,42 @@ Mouse::~Mouse()
 
 void Mouse::setButtonHandler(Object* target, MOUSE_BUTTON_HANDLER handler)
 {
-	_buttonHandler.target = target;
-	_buttonHandler.handler = handler;
+	_buttonHandler.first = target;
+	_buttonHandler.second = handler;
 }
 
 void Mouse::setScrollHandler(Object* target, MOUSE_SCROLL_HANDLER handler)
 {
-	_scrollHandler.target = target;
-	_scrollHandler.handler = handler;
+	_scrollHandler.first = target;
+	_scrollHandler.second = handler;
 }
 
 void Mouse::setMoveHandler(Object* target, MOUSE_MOVE_HANDLER handler)
 {
-	_moveHandler.target = target;
-	_moveHandler.handler = handler;
+	_moveHandler.first = target;
+	_moveHandler.second = handler;
 }
 
 void Mouse::onButtonHandler(MouseKey Key, ButtonStatus type, float x, float y)
 {
-	_buttonHandler.hand(Key, type, x, y);
+	if (_buttonHandler.first && _buttonHandler.second)
+	{
+		(_buttonHandler.first->*_buttonHandler.second)(Key, type, x, y);
+	}
 }
 
 void Mouse::onScrollHandler(ScrollEvent type, float param)
 {
-	_scrollHandler.hand(type, param);
+	if (_scrollHandler.first && _scrollHandler.second)
+	{
+		(_scrollHandler.first->*_scrollHandler.second)(type, param);
+	}
 }
 
 void Mouse::onMoveHandler(float x, float y)
 {
-	_moveHandler.hand(x, y);
+	if (_moveHandler.first && _moveHandler.second)
+	{
+		(_moveHandler.first->*_moveHandler.second)(x, y);
+	}
 }

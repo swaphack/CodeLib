@@ -22,12 +22,7 @@ void KeyboardManager::addDispatcher(sys::Object* node, sys::Object* target, KEYB
 
 	this->removeDispatcher(node);
 
-	KeyBoardDelegate* del = new KeyBoardDelegate();
-	del->target = target;
-	del->handler = handler;
-	del->object = node;
-
-	_keyboardDispatchers.push_back(del);
+	_keyboardDispatchers.push_back(sys::make_tuple3(target, handler, node));
 }
 
 void KeyboardManager::removeDispatcher(sys::Object* node)
@@ -37,13 +32,12 @@ void KeyboardManager::removeDispatcher(sys::Object* node)
 		return;
 	}
 
-	std::vector<KeyBoardDelegate*>::iterator iter = _keyboardDispatchers.begin();
+	std::vector<KeyBoardDelegate>::iterator iter = _keyboardDispatchers.begin();
 
 	while (iter != _keyboardDispatchers.end())
 	{
-		if ((*iter)->target == node)
+		if ((*iter).t3 == node)
 		{
-			delete (*iter);
 			_keyboardDispatchers.erase(iter);
 			break;
 		}
@@ -54,24 +48,16 @@ void KeyboardManager::removeDispatcher(sys::Object* node)
 
 void KeyboardManager::removeAllDispatchers()
 {
-	std::vector<KeyBoardDelegate*>::iterator iter = _keyboardDispatchers.begin();
-
-	while (iter != _keyboardDispatchers.end())
-	{
-		delete (*iter);
-		iter++;
-	}
-
 	_keyboardDispatchers.clear();
 }
 
 void KeyboardManager::onDispatcher(sys::BoardKey key, sys::ButtonStatus type)
 {
-	std::vector<KeyBoardDelegate*>::iterator iter = _keyboardDispatchers.begin();
+	std::vector<KeyBoardDelegate>::iterator iter = _keyboardDispatchers.begin();
 
 	while (iter != _keyboardDispatchers.end())
 	{
-		(*iter)->hand(key, type);
+		((*iter).t1->*(*iter).t2)((*iter).t3, key, type);
 		iter++;
 	}
 }

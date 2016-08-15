@@ -102,7 +102,6 @@ ChemNode* ChemDocument::readExpression()
 	
 	while (*_cursor)
 	{
-		int cursor = 0;
 		bool endBlock = false;
 		if (innerNode = readBlock(endBlock))
 		{
@@ -131,10 +130,18 @@ ChemNode* ChemDocument::readExpression()
 
 		if (!symbol.empty())
 		{
-			nextNode = new ChemNode();
-			nextNode->symbol = symbol;
-			nextNode->count = number.empty() ? "1": number;
-			node->next.push_back(nextNode);
+			if (node->symbol.empty())
+			{
+				node->symbol = symbol;
+				node->count = number.empty() ? "1" : number;
+			}
+			else
+			{
+				nextNode = new ChemNode();
+				nextNode->symbol = symbol;
+				nextNode->count = number.empty() ? "1" : number;
+				node->next.push_back(nextNode);
+			}
 		}
 	}
 	return node;

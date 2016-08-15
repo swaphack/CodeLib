@@ -56,8 +56,8 @@ void Server::setRecvHandler( Object* target, SERVER_RECV_HANDLER handler )
 		return;
 	}
 
-	_recvHandler.target = target;
-	_recvHandler.hander = handler;
+	_recvHandler.first = target;
+	_recvHandler.second = handler;
 }
 
 void Server::sendMessage( int id, NetData* data )
@@ -253,11 +253,11 @@ void Server::_flushRecvData()
 		it++)
 	{
 		id = it->first;
-		if (!this->_recvHandler.empty())
+		if (this->_recvHandler.first && this->_recvHandler.second)
 		{
 			if (this->_recvDatas.find(id) != this->_recvDatas.end() && !this->_recvDatas[id].empty())
 			{
-				this->_recvHandler.hand(id, this->_recvDatas[id]);
+				(this->_recvHandler.first->*this->_recvHandler.second)(id, this->_recvDatas[id]);
 			}
 		}
 	}

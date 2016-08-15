@@ -1,12 +1,9 @@
 #pragma once
 
-#include "../Base/import.h"
+#include "macros.h"
 
 namespace sys
 {
-	// 定义流数据大小类型
-	typedef long ss_t;
-
 	// 流数据读取接口
 	class IStreamReader
 	{

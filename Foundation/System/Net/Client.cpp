@@ -60,8 +60,8 @@ void Client::setRecvHandler( Object* target, CLIENT_RECV_HANDLER handler )
 		return;
 	}
 
-	_recvHandler.target = target;
-	_recvHandler.hander = handler;
+	_recvHandler.first = target;
+	_recvHandler.second = handler;
 }
 
 void Client::sendMessage(NetData* data )
@@ -150,9 +150,9 @@ void Client::_flushData()
 	// 处理接收的数据
 	while (!this->_recvDatas.empty())
 	{
-		if (!this->_recvHandler.empty())
+		if (this->_recvHandler.first && this->_recvHandler.second)
 		{
-			this->_recvHandler.hand(_socket->getID(), this->_recvDatas);
+			(this->_recvHandler.first->*this->_recvHandler.second)(_socket->getID(), this->_recvDatas);
 		}
 	}
 }

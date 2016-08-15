@@ -6,7 +6,6 @@ using namespace web;
 
 CacheIdentity::CacheIdentity()
 {
-	_name = "";
 	_id = 0;
 	_bInCacheControl = false;
 }

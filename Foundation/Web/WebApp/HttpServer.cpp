@@ -26,8 +26,8 @@ void HttpServer::addRecvHandler(sys::Object* target, HTTP_RECV_HANDLER handler)
 	}
 
 	HttpRecvHandler singleHandler;
-	singleHandler.target = target;
-	singleHandler.hander = handler;
+	singleHandler.first = target;
+	singleHandler.second = handler;
 
 	_recvHandlers.push_back(singleHandler);
 }
@@ -42,7 +42,7 @@ void HttpServer::removeRecvHandler(sys::Object* target, HTTP_RECV_HANDLER handle
 	std::vector<HttpRecvHandler>::iterator it = _recvHandlers.begin();
 	while (it != _recvHandlers.end())
 	{
-		if (it->equals(target, handler))
+		if (it->first == target && it->second ==  handler)
 		{
 			_recvHandlers.erase(it);
 			break;
@@ -113,7 +113,7 @@ void HttpServer::onRecvHander(HttpRequest* data)
 	std::vector<HttpRecvHandler>::iterator it = _recvHandlers.begin();
 	while (it != _recvHandlers.end())
 	{
-		it->hand(data->getSessionID(), data);
+		(it->first->*it->second)(data->getSessionID(), data);
 		it++;
 	}
 }

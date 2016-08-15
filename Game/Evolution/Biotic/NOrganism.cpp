@@ -34,6 +34,8 @@ bool NOrganism::input(NObject* pObject)
 	pTargetHandler->Target = pObject;
 
 	_inputTargets.push(pTargetHandler);
+
+	return true;
 }
 
 bool NOrganism::canAddInputTarget(NObject* pObject)

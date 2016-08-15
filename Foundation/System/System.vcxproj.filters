@@ -268,6 +268,15 @@
     <ClInclude Include="Memory\PtrInfo.h">
       <Filter>Memory</Filter>
     </ClInclude>
+    <ClInclude Include="Base\Convert.h">
+      <Filter>Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Stream\StreamHelper.h">
+      <Filter>Stream</Filter>
+    </ClInclude>
+    <ClInclude Include="Stream\macros.h">
+      <Filter>Stream</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Base\File.cpp">
@@ -371,6 +380,9 @@
     </ClCompile>
     <ClCompile Include="Memory\PtrCache.cpp">
       <Filter>Memory</Filter>
+    </ClCompile>
+    <ClCompile Include="Stream\StreamHelper.cpp">
+      <Filter>Stream</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

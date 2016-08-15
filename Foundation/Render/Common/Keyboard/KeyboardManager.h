@@ -8,38 +8,6 @@ namespace render
 
 	#define KEYBOARD_DELEGATTE_SELECTOR(HANDLER_SEL) static_cast<KEYBOARD_DELEGATE_HANDLER>(&HANDLER_SEL)
 
-	// 触摸委托
-	struct KeyBoardDelegate
-	{
-		sys::Object* target;
-		KEYBOARD_DELEGATE_HANDLER handler;
-		sys::Object* object;
-
-		KeyBoardDelegate() :target(nullptr), handler(nullptr){}
-
-		void hand(sys::BoardKey key, sys::ButtonStatus type)
-		{
-			if (!empty())
-				(target->*handler)(object, key, type);
-		}
-
-		bool empty()
-		{
-			return handler == nullptr;
-		}
-
-		bool isEquals(sys::Object* t, KEYBOARD_DELEGATE_HANDLER h)
-		{
-			return target == t && handler == h;
-		}
-
-		void clean()
-		{
-			target = nullptr;
-			handler = nullptr;
-		}
-	};
-
 	class KeyboardManager
 	{
 	public:
@@ -56,8 +24,10 @@ namespace render
 		void onDispatcher(sys::BoardKey key, sys::ButtonStatus type);
 	protected:
 	private:
+		// 回调对象，回调接口，回调传入参数
+		typedef sys::Tuple3<sys::Object*, KEYBOARD_DELEGATE_HANDLER, sys::Object*> KeyBoardDelegate;
 		// 键盘事件委托集
-		std::vector<KeyBoardDelegate*> _keyboardDispatchers;
+		std::vector<KeyBoardDelegate> _keyboardDispatchers;
 	};
 
 

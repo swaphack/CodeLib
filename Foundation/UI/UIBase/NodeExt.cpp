@@ -7,10 +7,13 @@ using namespace render;
 using namespace ui;
 
 
-NodeExt::NodeExt(Node* node)
-:_pThis(node)
+NodeExt::NodeExt(Node* parent)
+:_parent(parent)
 {
+	ASSERT(_parent != nullptr);
 
+	_parent->addChild(this);
+	this->setZOrder(NODE_EXT_ZORDER);
 }
 
 NodeExt::~NodeExt()
@@ -20,28 +23,13 @@ NodeExt::~NodeExt()
 
 void NodeExt::draw()
 {
-	this->beginDraw();
-	_pThis->draw();
-	this->afterDraw();
-}
+	Node::draw();
 
-UINameProtocol* NodeExt::getChildByName(const char* name)
-{
-	
-}
-
-void NodeExt::beginDraw()
-{
-
-}
-
-void NodeExt::afterDraw()
-{
 	if (isBoxVisible())
 	{
 		GLTool::beginBlend(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		GLTool::setColor(getBoxColor());
-		GLTool::drawRect(&_pThis->getRectVertex(), GL_LINE_LOOP);
+		GLTool::drawRect(&_parent->getRectVertex(), GL_LINE_LOOP);
 		GLTool::endBlend();
 	}
 }
