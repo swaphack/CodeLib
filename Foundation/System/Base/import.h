@@ -14,5 +14,6 @@
 #include "Tuple.h"
 #include "Platform.h"
 #include "Time.h"
+#include "BitConvert.h"
 
 #include "Protocol.h"

@@ -30,7 +30,7 @@ namespace sys
 	};
 
 	template<typename T>
-	T sys::StreamReader::read()
+	T StreamReader::read()
 	{
 		if ((int)(getCursor() + sizeof(T)) > this->getLength())
 		{

@@ -34,7 +34,7 @@ namespace sys
 	};
 
 	template<typename T>
-	void sys::StreamWriter::write( T data )
+	void StreamWriter::write( T data )
 	{
 		while ((int)(getCursor() + sizeof(data)) > this->getCapacity())
 		{

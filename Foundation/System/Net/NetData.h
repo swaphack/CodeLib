@@ -41,6 +41,10 @@ namespace sys
 		{
 			return data + pos;
 		}
+		int getRemainSize()
+		{
+			return size - pos;
+		}
 		void init(const char* value, int len)
 		{// ÖØÖÃ
 			StreamHelper::freeStream(this->data);

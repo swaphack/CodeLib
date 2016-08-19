@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Base">
+      <UniqueIdentifier>{b8cfb750-ef32-4d6b-8392-58fff067ce8a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Formula">
+      <UniqueIdentifier>{fa3bc414-d881-4e6b-979c-33e911ec777a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PeriodicTable">
+      <UniqueIdentifier>{86f2b75a-26db-49aa-af25-eccf23fe99ad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Expression">
+      <UniqueIdentifier>{8624dcea-a957-4efb-83a6-8107562e286c}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="PeriodicTable\ChemPeriodicTable.cpp">
+      <Filter>PeriodicTable</Filter>
+    </ClCompile>
+    <ClCompile Include="Base\Molecule.cpp">
+      <Filter>Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Base\Hydrogenion.cpp">
+      <Filter>Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Base\Constitution.cpp">
+      <Filter>Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Expression\ChemDocumnet.cpp">
+      <Filter>Expression</Filter>
+    </ClCompile>
+    <ClCompile Include="Expression\ChemNode.cpp">
+      <Filter>Expression</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="PeriodicTable\ChemPeriodicTable.h">
+      <Filter>PeriodicTable</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\Molecule.h">
+      <Filter>Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\Hydrogenion.h">
+      <Filter>Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\import.h">
+      <Filter>Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\macros.h">
+      <Filter>Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\Constitution.h">
+      <Filter>Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Formula\macros.h">
+      <Filter>Formula</Filter>
+    </ClInclude>
+    <ClInclude Include="chem.h" />
+    <ClInclude Include="Expression\import.h">
+      <Filter>Expression</Filter>
+    </ClInclude>
+    <ClInclude Include="Expression\ChemDocument.h">
+      <Filter>Expression</Filter>
+    </ClInclude>
+    <ClInclude Include="Expression\ChemNode.h">
+      <Filter>Expression</Filter>
+    </ClInclude>
+    <ClInclude Include="Formula\ChemFormula.h">
+      <Filter>Formula</Filter>
+    </ClInclude>
+    <ClInclude Include="Formula\ChemCondition.h">
+      <Filter>Formula</Filter>
+    </ClInclude>
+    <ClInclude Include="Formula\ChemEffect.h">
+      <Filter>Formula</Filter>
+    </ClInclude>
+    <ClInclude Include="Formula\import.h">
+      <Filter>Formula</Filter>
+    </ClInclude>
+    <ClInclude Include="PeriodicTable\import.h">
+      <Filter>PeriodicTable</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

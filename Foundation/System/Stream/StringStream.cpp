@@ -12,22 +12,13 @@ StringStream::StringStream()
 StringStream::StringStream(const char* text)
 : Stream(new StreamBaseRef())
 {
-	int len = strlen(text) + 1;
-
-	char* newData = StreamHelper::mallocStream((void*)text, len);
-
-	this->setData(newData, len);
+	this->initWithText(text);
 }
 
 StringStream::StringStream(const char* text, int size)
 : Stream(new StreamBaseRef())
 {
-	int len = size + 1;
-
-	char* newData = StreamHelper::mallocStream((void*)text, len);
-	newData[size] = '\0';
-
-	this->setData(newData, len);
+	this->initWithText(text, size);
 }
 
 StringStream::~StringStream()
@@ -35,42 +26,65 @@ StringStream::~StringStream()
 	SAFE_DELETE(_baseStream);
 }
 
-std::string StringStream::readLine()
+void StringStream::initWithText(const char* text)
 {
+	this->initWithText(text, strlen(text));
+}
+
+void StringStream::initWithText(const char* text, int size)
+{
+	int len = size + 1;
+
+	char* newData = StreamHelper::mallocStream((void*)text, len);
+
+	this->setData(newData, len);
+}
+
+void StringStream::readLine(std::string& text)
+{
+	text.clear();
+
 	int ext = strlen(LINE_MARK);
 
 	char* cursor = getPtr();
+	if (*cursor == 0)
+	{
+		return;
+	}
 	char* ptr = getPtr();
 
 	while ((*ptr) != 0)
 	{
-		if ((ext - 1 >= 0) && LINE_EQUAL(ptr - ext + 1))
+		if (LINE_EQUAL(ptr - ext + 1))
 		{
 			break;
 		}
 		ptr++;
 	}
 
-	if ((ext - 1 >= 0) && LINE_EQUAL(ptr - ext + 1))
+	if (LINE_EQUAL(ptr - ext + 1))
 	{
 		ptr++;
-	}
-	else
-	{
-		ext = 0;
 	}
 
 	ss_t size = ptr - cursor;
 	if ((*ptr) == 0)
 	{
-		this->setCursor(getCursor() + size + 1);
-		return std::string(cursor, size);
+		this->setCursor(getCursor() + size);
 	}
 	else
 	{
 		this->setCursor(getCursor() + size);
-		return std::string(cursor, size);
 	}
+
+	text = std::string(cursor, size);
+}
+
+void StringStream::readRemain(std::string& text)
+{
+	text.clear();
+	text = std::string(this->getData() + this->getCursor(), this->getCapacity() - this->getCursor() - 1);
+	this->setCursor(this->getCapacity() - 1);
 }
 
 void StringStream::writeString(const char* line, int size)
@@ -81,7 +95,7 @@ void StringStream::writeString(const char* line, int size)
 	}
 
 	int newCursor = size + this->getCursor();
-	if (newCursor + 1 > this->getCapacity())
+	if (newCursor > this->getCapacity() - 1)
 	{
 		char* newData = StreamHelper::mallocStream(newCursor + 1, (char*)this->getData(), this->getCapacity());
 		this->setData(newData, newCursor + 1);
@@ -93,10 +107,20 @@ void StringStream::writeString(const char* line, int size)
 	this->setCursor(newCursor);
 }
 
+void StringStream::writeString(const std::string& text)
+{
+	writeString(text.c_str(), text.size());
+}
+
 void StringStream::writeLine(const char* line, int size)
 {
 	this->writeString(line, size);
 	this->writeLine();
+}
+
+void StringStream::writeLine(const std::string& text)
+{
+	writeLine(text.c_str(), text.size());
 }
 
 void StringStream::writeLine()
@@ -104,7 +128,7 @@ void StringStream::writeLine()
 	int ext = strlen(LINE_MARK);
 
 	int newCursor = ext + this->getCursor();
-	if (newCursor + 1 > this->getCapacity())
+	if (newCursor > this->getCapacity() - 1)
 	{
 		char* newData = StreamHelper::mallocStream(newCursor + 1, (char*)this->getData(), this->getCapacity());
 		this->setData(newData, newCursor + 1);

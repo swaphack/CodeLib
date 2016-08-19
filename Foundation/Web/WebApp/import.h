@@ -1,7 +1,5 @@
 #pragma once
 
 #include "Session.h"
-#include "HttpServer.h"
+#include "WebServer.h"
 #include "WebApplication.h"
-
-#include "HttpDownload.h"

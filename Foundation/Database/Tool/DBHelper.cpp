@@ -1,5 +1,6 @@
 #include "DBHelper.h"
 
+#include "system.h"
 using namespace db;
 
 
@@ -100,52 +101,52 @@ void DBHelper::getFieldValue(const char* ptr, FieldType type, long& offset, long
 	case EFT_CHAR:
 		char ct;
 		getValueFromPtr<char>(ct, ptr, offset);
-		DBHelper::getNumberString(ct, value);
+		sys::BitConvert::getNumberString(ct, value);
 		break;
 	case EFT_UCHAR:
 		uchar uct;
 		getValueFromPtr<uchar>(uct, ptr, offset);
-		DBHelper::getNumberString(uct, value);
+		sys::BitConvert::getNumberString(uct, value);
 		break;
 	case EFT_SHORT:
 		short st;
 		getValueFromPtr<short>(st, ptr, offset);
-		DBHelper::getNumberString(st, value);
+		sys::BitConvert::getNumberString(st, value);
 		break;
 	case EFT_USHORT:
 		ushort ust;
 		getValueFromPtr<ushort>(ust, ptr, offset);
-		DBHelper::getNumberString(ust, value);
+		sys::BitConvert::getNumberString(ust, value);
 		break;
 	case EFT_INT:
 		int it;
 		getValueFromPtr<int>(it, ptr, offset);
-		DBHelper::getNumberString(it, value);
+		sys::BitConvert::getNumberString(it, value);
 		break;
 	case EFT_UINT:
 		uint uit;
 		getValueFromPtr<uint>(uit, ptr, offset);
-		DBHelper::getNumberString((int)uit, value);
+		sys::BitConvert::getNumberString((int)uit, value);
 		break;
 	case EFT_LONG:
 		long lt;
 		getValueFromPtr<long>(lt, ptr, offset);
-		DBHelper::getNumberString(lt, value);
+		sys::BitConvert::getNumberString(lt, value);
 		break;
 	case EFT_ULONG:
 		ulong ult;
 		getValueFromPtr<ulong>(ult, ptr, offset);
-		DBHelper::getNumberString(ult, value);
+		sys::BitConvert::getNumberString(ult, value);
 		break;
 	case EFT_FLOAT:
 		float ft;
 		getValueFromPtr<float>(ft, ptr, offset);
-		DBHelper::getNumberString(ft, value);
+		sys::BitConvert::getNumberString(ft, value);
 		break;
 	case EFT_DOUBLE:
 		double dt;
 		getValueFromPtr<double>(dt, ptr, offset);
-		DBHelper::getNumberString(dt, value);
+		sys::BitConvert::getNumberString(dt, value);
 		break;
 	case EFT_STRING:
 		value = std::string(ptr + offset, length);
@@ -155,32 +156,4 @@ void DBHelper::getFieldValue(const char* ptr, FieldType type, long& offset, long
 		value = "";
 		break;
 	}
-}
-
-void DBHelper::getNumberString( int number, std::string& value )
-{
-	char str[255];
-	itoa(number, str, 10);
-	value = str;
-}
-
-void DBHelper::getNumberString(long number, std::string& value)
-{
-	char str[255];
-	ltoa(number, str, 10);
-	value = str;
-}
-
-void DBHelper::getNumberString(ulong number, std::string& value)
-{
-	char str[255];
-	ultoa(number, str, 10);
-	value = str;
-}
-
-void DBHelper::getNumberString(double number, std::string& value)
-{
-	char str[255];
-	gcvt(number, 255, str);
-	value = str;
 }

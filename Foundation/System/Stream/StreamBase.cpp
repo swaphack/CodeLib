@@ -68,7 +68,6 @@ void StreamBaseRef::setData(const char* data, ss_t size)
 
 	this->_data = (char*)data;
 	this->_length = size;
-
 }
 
 const char* StreamBaseRef::getData() const

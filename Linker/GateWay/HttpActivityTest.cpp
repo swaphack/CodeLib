@@ -1,23 +1,18 @@
 #include "HttpActivityTest.h"
 
-void HttpActivityTest::doGet(HttpRequest* request)
+#define G_RESOURCE WebApplication::getInstance()->getResourceMgr()->getResource()
+
+void HttpActivityTest::doGet(sys::HttpRequest* request)
 {
-	if (request->isHttpFormat())
-	{
-		this->doHttpGet(request);
-	}
-	else
-	{
-		this->doSocketGet(request);
-	}
+	this->doHttpGet(request);
 }
 
-void HttpActivityTest::doHttpGet(HttpRequest* request)
+void HttpActivityTest::doHttpGet(sys::HttpRequest* request)
 {
 	std::string url;
-	sys::String method = request->getRequest(HttpRequest::HTTP_REQUEST_METHOD);
-	sys::String params = request->getRequest(HttpRequest::HTTP_REQUEST_PARAM);
-	sys::String body = request->getBody();
+	sys::String method = request->getDocument()->getMethod();
+	sys::String params = request->getDocument()->getUrl();
+	sys::String body = request->getDocument()->getBody();
 
 	std::map<std::string, std::string> reqParams;
 
@@ -36,15 +31,18 @@ void HttpActivityTest::doHttpGet(HttpRequest* request)
 	}
 
 	HttpResponse response;
-	response.writeFile(url.c_str());
+	response.getDocument()->setHttpVersion("HTTP/1.1");
+	response.getDocument()->setResponseCode("200");
+	response.getDocument()->setDescribe("OK");
+	response.getDocument()->setResource(G_RESOURCE);
+	response.getDocument()->writeFile(url.c_str());
 	this->doPost(&response);
 }
 
-void HttpActivityTest::doSocketGet(HttpRequest* request)
+void HttpActivityTest::doSocketGet(sys::HttpRequest* request)
 {
 	const char* data = request->getMessage();
 	HttpResponse response;
-	response.setHttpFormat(false);
 	response.setMessage(data, strlen(data));
 	this->doPost(&response);
 }

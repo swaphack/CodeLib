@@ -110,8 +110,3 @@ void Stream::setLength(ss_t length)
 
 	getStream()->setLength(length);
 }
-
-
-
-
-

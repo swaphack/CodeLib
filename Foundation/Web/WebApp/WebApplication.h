@@ -2,7 +2,7 @@
 
 #include "system.h"
 #include "macros.h"
-#include "HttpServer.h"
+#include "WebServer.h"
 #include <map>
 
 namespace web
@@ -19,9 +19,9 @@ namespace web
 		// 获取应用实例
 		static WebApplication* getInstance();
 		// 获取服务器
-		HttpServer* getServer();
+		WebServer* getServer();
 		// 获取资源
-		ResourceMgr* getResourceMgr();
+		sys::ResourceMgr* getResourceMgr();
 	public:
 		virtual void init();
 		virtual void update();
@@ -37,8 +37,8 @@ namespace web
 		// 最大等待数
 		int _maxWaitCount;
 		// 服务器
-		HttpServer* _server;
+		WebServer* _server;
 		// 资源管理
-		ResourceMgr* _resource;
+		sys::ResourceMgr* _resource;
 	};
 }

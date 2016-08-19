@@ -40,6 +40,18 @@
     <Filter Include="Memory">
       <UniqueIdentifier>{488662cd-70ca-4b4f-94cd-c3bb5a307904}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Cache">
+      <UniqueIdentifier>{ad77781c-5f83-4bab-bbf3-c50e5782b2ee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource">
+      <UniqueIdentifier>{b65ddeea-853e-4ba6-ba03-0ec160d5ba8e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DataBase">
+      <UniqueIdentifier>{02861e4c-0b7d-4341-952b-65eb09bd918d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Http">
+      <UniqueIdentifier>{a5e6934a-e4be-4fec-a6c1-cf5cdc886e98}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Base\File.h">
@@ -67,9 +79,6 @@
       <Filter>Framework</Filter>
     </ClInclude>
     <ClInclude Include="Framework\AutoReleasePool.h">
-      <Filter>Framework</Filter>
-    </ClInclude>
-    <ClInclude Include="Framework\Command.h">
       <Filter>Framework</Filter>
     </ClInclude>
     <ClInclude Include="Framework\Container.h">
@@ -268,14 +277,86 @@
     <ClInclude Include="Memory\PtrInfo.h">
       <Filter>Memory</Filter>
     </ClInclude>
-    <ClInclude Include="Base\Convert.h">
-      <Filter>Base</Filter>
-    </ClInclude>
     <ClInclude Include="Stream\StreamHelper.h">
       <Filter>Stream</Filter>
     </ClInclude>
     <ClInclude Include="Stream\macros.h">
       <Filter>Stream</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\BitConvert.h">
+      <Filter>Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Cache\CacheGroup.h">
+      <Filter>Cache</Filter>
+    </ClInclude>
+    <ClInclude Include="Cache\CacheIdentity.h">
+      <Filter>Cache</Filter>
+    </ClInclude>
+    <ClInclude Include="Cache\CacheMgr.h">
+      <Filter>Cache</Filter>
+    </ClInclude>
+    <ClInclude Include="Cache\import.h">
+      <Filter>Cache</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\import.h">
+      <Filter>Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\IResource.h">
+      <Filter>Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\LocalResource.h">
+      <Filter>Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\RemoteResource.h">
+      <Filter>Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\Resource.h">
+      <Filter>Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\ResourceMgr.h">
+      <Filter>Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="DataBase\DataSheet.h">
+      <Filter>DataBase</Filter>
+    </ClInclude>
+    <ClInclude Include="DataBase\IDataBase.h">
+      <Filter>DataBase</Filter>
+    </ClInclude>
+    <ClInclude Include="DataBase\IDataRecord.h">
+      <Filter>DataBase</Filter>
+    </ClInclude>
+    <ClInclude Include="DataBase\IDataSheet.h">
+      <Filter>DataBase</Filter>
+    </ClInclude>
+    <ClInclude Include="DataBase\import.h">
+      <Filter>DataBase</Filter>
+    </ClInclude>
+    <ClInclude Include="Http\HttpCommand.h">
+      <Filter>Http</Filter>
+    </ClInclude>
+    <ClInclude Include="Http\HttpConstant.h">
+      <Filter>Http</Filter>
+    </ClInclude>
+    <ClInclude Include="Http\HttpRequest.h">
+      <Filter>Http</Filter>
+    </ClInclude>
+    <ClInclude Include="Http\HttpResponse.h">
+      <Filter>Http</Filter>
+    </ClInclude>
+    <ClInclude Include="Http\HttpTime.h">
+      <Filter>Http</Filter>
+    </ClInclude>
+    <ClInclude Include="Http\import.h">
+      <Filter>Http</Filter>
+    </ClInclude>
+    <ClInclude Include="Http\macros.h">
+      <Filter>Http</Filter>
+    </ClInclude>
+    <ClInclude Include="Http\HttpDocument.h">
+      <Filter>Http</Filter>
+    </ClInclude>
+    <ClInclude Include="Http\HttpDownload.h">
+      <Filter>Http</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -289,9 +370,6 @@
       <Filter>Framework</Filter>
     </ClCompile>
     <ClCompile Include="Framework\AutoReleasePool.cpp">
-      <Filter>Framework</Filter>
-    </ClCompile>
-    <ClCompile Include="Framework\Command.cpp">
       <Filter>Framework</Filter>
     </ClCompile>
     <ClCompile Include="Framework\Container.cpp">
@@ -383,6 +461,60 @@
     </ClCompile>
     <ClCompile Include="Stream\StreamHelper.cpp">
       <Filter>Stream</Filter>
+    </ClCompile>
+    <ClCompile Include="Base\BitConvert.cpp">
+      <Filter>Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Cache\CacheGroup.cpp">
+      <Filter>Cache</Filter>
+    </ClCompile>
+    <ClCompile Include="Cache\CacheIdentity.cpp">
+      <Filter>Cache</Filter>
+    </ClCompile>
+    <ClCompile Include="Cache\CacheMgr.cpp">
+      <Filter>Cache</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource\LocalResource.cpp">
+      <Filter>Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource\RemoteResource.cpp">
+      <Filter>Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource\Resource.cpp">
+      <Filter>Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource\ResourceMgr.cpp">
+      <Filter>Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="DataBase\DataSheet.cpp">
+      <Filter>DataBase</Filter>
+    </ClCompile>
+    <ClCompile Include="Http\HttpCommand.cpp">
+      <Filter>Http</Filter>
+    </ClCompile>
+    <ClCompile Include="Http\HttpConstant.cpp">
+      <Filter>Http</Filter>
+    </ClCompile>
+    <ClCompile Include="Http\HttpRequest.cpp">
+      <Filter>Http</Filter>
+    </ClCompile>
+    <ClCompile Include="Http\HttpResponse.cpp">
+      <Filter>Http</Filter>
+    </ClCompile>
+    <ClCompile Include="Http\HttpTime.cpp">
+      <Filter>Http</Filter>
+    </ClCompile>
+    <ClCompile Include="Http\HttpDownload.cpp">
+      <Filter>Http</Filter>
+    </ClCompile>
+    <ClCompile Include="Http\HttpDocument.cpp">
+      <Filter>Http</Filter>
+    </ClCompile>
+    <ClCompile Include="Http\HttpReqDocument.cpp">
+      <Filter>Http</Filter>
+    </ClCompile>
+    <ClCompile Include="Http\HttpRespDocument.cpp">
+      <Filter>Http</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

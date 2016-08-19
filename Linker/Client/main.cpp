@@ -91,10 +91,19 @@ void test1()
 	Socket::ReleaseSockModule();
 }
 
-void onDownloadCallback(int tag, const char* data, int size)
+class DownloadListener : public sys::Object
 {
-	PRINT("%s", data);
-}
+public:
+	DownloadListener(){}
+	~DownloadListener(){}
+public:
+	void onDownloadCallback(int tag, const char* data, int size)
+	{
+		PRINT("%s", data);
+	}
+};
+
+
 
 void test2()
 {
@@ -104,9 +113,10 @@ void test2()
 
 	Socket::InitSockModule();
 
-	web::HttpDownload* pDownload = new web::HttpDownload();
+	sys::HttpDownload* pDownload = new sys::HttpDownload();
+	DownloadListener* pListener = new DownloadListener();
 
-	if (pDownload->download(ip, port, "", onDownloadCallback, 1))
+	if (pDownload->download(ip, port, "", pListener, (downloadCallback)(&DownloadListener::onDownloadCallback), 1))
 	{
 		while (true);
 	}

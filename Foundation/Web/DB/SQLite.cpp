@@ -5,7 +5,7 @@
 #endif
 #include "third_party.h"
 
-using namespace web;
+using namespace sys;
 
 SQLite::SQLite()
 :_instance(nullptr)
@@ -18,7 +18,7 @@ SQLite::~SQLite()
 
 }
 
-bool SQLite::connect(const char* url, int port /*= 0*/, const char* username /*= nullptr*/, const char* password /*= nullptr*/)
+bool SQLite::connect(const char* url, const char* username /*= nullptr*/, const char* password /*= nullptr*/)
 {
 	if (url == nullptr)
 	{

@@ -1,12 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Data">
-      <UniqueIdentifier>{ef504502-6e70-4e75-8287-63034c98883c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Logic">
-      <UniqueIdentifier>{93a9d671-63f8-4236-bbf2-ca4275eb186a}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Map">
       <UniqueIdentifier>{3bd39794-2b87-46e7-ac02-1fb24ae634e8}</UniqueIdentifier>
     </Filter>
@@ -134,9 +128,6 @@
     </ClInclude>
     <ClInclude Include="Organization\Container\IContainer.h">
       <Filter>Organization\Container</Filter>
-    </ClInclude>
-    <ClInclude Include="Data\BaseData.h">
-      <Filter>Data</Filter>
     </ClInclude>
     <ClInclude Include="Organization\Technic\Buffer.h">
       <Filter>Organization\Technic</Filter>

@@ -16,7 +16,7 @@
 
 using namespace sys;
 
-char sys::DNS::s_common[DNS_IP_MAX] = { 0 };
+char DNS::s_common[DNS_IP_MAX] = { 0 };
 
 const char* DNS::getIPAddress(const char* url)
 {

@@ -25,6 +25,12 @@ String::String(const String& value)
 	*this = value;
 }
 
+String::String(const std::string& value)
+:String()
+{
+	*this = value;
+}
+
 String::String(const char* value)
 :String()
 {

@@ -8,7 +8,7 @@
 namespace sys
 {
 	// 缓存
-	class PtrCache : public sys::Name
+	class PtrCache : public Name
 	{
 		friend class Memory; 
 	private:
@@ -28,7 +28,7 @@ namespace sys
 		char* alloctPtr(uint size);
 	private:
 		// PtrCache信息{指针， 大小}
-		sys::Tuple2<char*, uint> _cacheInfo;
+		Tuple2<char*, uint> _cacheInfo;
 
 		// 当前游标位置
 		uint _cursor;
@@ -44,7 +44,7 @@ namespace sys
 	}
 
 	template<typename T>
-	T sys::PtrCache::getValue()
+	T PtrCache::getValue()
 	{
 		uint size = sizeof(T);
 		return *((T*)alloctPtr(size));

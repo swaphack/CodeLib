@@ -1,20 +1,20 @@
 #pragma once
 
-#include "IDataBase.h"
+#include "system.h"
 
 struct sqlite3;
 
-namespace web
+namespace sys
 {
 	// mysql 数据
-	class SQLite : public IDataBase
+	class SQLite : public sys::IDataBase
 	{
 	public:
 		SQLite();
 		virtual ~SQLite();
 	public:
 		// 连接数据库
-		virtual bool connect(const char* url, int port = 0, const char* username = nullptr, const char* password = nullptr);
+		virtual bool connect(const char* url, const char* username = nullptr, const char* password = nullptr);
 		// 断开数据库连接
 		virtual bool disconnect();
 		// 执行sql语句

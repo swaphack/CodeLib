@@ -66,8 +66,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Base\BitConvert.h" />
     <ClInclude Include="Base\BitHelper.h" />
-    <ClInclude Include="Base\Convert.h" />
     <ClInclude Include="Base\Directory.h" />
     <ClInclude Include="Base\File.h" />
     <ClInclude Include="Base\FuncHandler.h" />
@@ -82,6 +82,15 @@
     <ClInclude Include="Base\Time.h" />
     <ClInclude Include="Base\Tuple.h" />
     <ClInclude Include="Base\Types.h" />
+    <ClInclude Include="Cache\CacheGroup.h" />
+    <ClInclude Include="Cache\CacheIdentity.h" />
+    <ClInclude Include="Cache\CacheMgr.h" />
+    <ClInclude Include="Cache\import.h" />
+    <ClInclude Include="DataBase\DataSheet.h" />
+    <ClInclude Include="DataBase\IDataBase.h" />
+    <ClInclude Include="DataBase\IDataRecord.h" />
+    <ClInclude Include="DataBase\IDataSheet.h" />
+    <ClInclude Include="DataBase\import.h" />
     <ClInclude Include="Device\ConsoleImpl.h" />
     <ClInclude Include="Device\DeviceEventHandler.h" />
     <ClInclude Include="Device\import.h" />
@@ -92,13 +101,21 @@
     <ClInclude Include="Device\WindowImpl.h" />
     <ClInclude Include="Framework\Application.h" />
     <ClInclude Include="Framework\AutoReleasePool.h" />
-    <ClInclude Include="Framework\Command.h" />
     <ClInclude Include="Framework\Container.h" />
     <ClInclude Include="Framework\Dispatcher.h" />
     <ClInclude Include="Framework\IHandler.h" />
     <ClInclude Include="Framework\import.h" />
     <ClInclude Include="Framework\ITimer.h" />
     <ClInclude Include="Framework\Object.h" />
+    <ClInclude Include="Http\HttpCommand.h" />
+    <ClInclude Include="Http\HttpConstant.h" />
+    <ClInclude Include="Http\HttpDocument.h" />
+    <ClInclude Include="Http\HttpDownload.h" />
+    <ClInclude Include="Http\HttpRequest.h" />
+    <ClInclude Include="Http\HttpResponse.h" />
+    <ClInclude Include="Http\HttpTime.h" />
+    <ClInclude Include="Http\import.h" />
+    <ClInclude Include="Http\macros.h" />
     <ClInclude Include="Math\Color.h" />
     <ClInclude Include="Math\define.cpp" />
     <ClInclude Include="Math\define.h" />
@@ -127,6 +144,12 @@
     <ClInclude Include="Platform\Windows\Console.h" />
     <ClInclude Include="Platform\Windows\import.h" />
     <ClInclude Include="Platform\Windows\Window.h" />
+    <ClInclude Include="Resource\import.h" />
+    <ClInclude Include="Resource\IResource.h" />
+    <ClInclude Include="Resource\LocalResource.h" />
+    <ClInclude Include="Resource\RemoteResource.h" />
+    <ClInclude Include="Resource\Resource.h" />
+    <ClInclude Include="Resource\ResourceMgr.h" />
     <ClInclude Include="Security\Encrypt.h" />
     <ClInclude Include="Security\Zip.h" />
     <ClInclude Include="Stream\FileStream.h" />
@@ -146,6 +169,7 @@
     <ClInclude Include="Type\String.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Base\BitConvert.cpp" />
     <ClCompile Include="Base\BitHelper.cpp" />
     <ClCompile Include="Base\Directory.cpp" />
     <ClCompile Include="Base\File.cpp" />
@@ -153,15 +177,27 @@
     <ClCompile Include="Base\macros.cpp" />
     <ClCompile Include="Base\Random.cpp" />
     <ClCompile Include="Base\Time.cpp" />
+    <ClCompile Include="Cache\CacheGroup.cpp" />
+    <ClCompile Include="Cache\CacheIdentity.cpp" />
+    <ClCompile Include="Cache\CacheMgr.cpp" />
+    <ClCompile Include="DataBase\DataSheet.cpp" />
     <ClCompile Include="Device\Keyboard.cpp" />
     <ClCompile Include="Device\Mouse.cpp" />
     <ClCompile Include="Device\Signal.cpp" />
     <ClCompile Include="Framework\Application.cpp" />
     <ClCompile Include="Framework\AutoReleasePool.cpp" />
-    <ClCompile Include="Framework\Command.cpp" />
     <ClCompile Include="Framework\Container.cpp" />
     <ClCompile Include="Framework\Dispatcher.cpp" />
     <ClCompile Include="Framework\Object.cpp" />
+    <ClCompile Include="Http\HttpCommand.cpp" />
+    <ClCompile Include="Http\HttpConstant.cpp" />
+    <ClCompile Include="Http\HttpDocument.cpp" />
+    <ClCompile Include="Http\HttpDownload.cpp" />
+    <ClCompile Include="Http\HttpReqDocument.cpp" />
+    <ClCompile Include="Http\HttpRequest.cpp" />
+    <ClCompile Include="Http\HttpRespDocument.cpp" />
+    <ClCompile Include="Http\HttpResponse.cpp" />
+    <ClCompile Include="Http\HttpTime.cpp" />
     <ClCompile Include="Memory\PtrCache.cpp" />
     <ClCompile Include="Memory\Memory.cpp" />
     <ClCompile Include="Net\Client.cpp" />
@@ -171,6 +207,10 @@
     <ClCompile Include="Net\Socket.cpp" />
     <ClCompile Include="Platform\Windows\Console.cpp" />
     <ClCompile Include="Platform\Windows\Window.cpp" />
+    <ClCompile Include="Resource\LocalResource.cpp" />
+    <ClCompile Include="Resource\RemoteResource.cpp" />
+    <ClCompile Include="Resource\Resource.cpp" />
+    <ClCompile Include="Resource\ResourceMgr.cpp" />
     <ClCompile Include="Security\Zip.cpp" />
     <ClCompile Include="Stream\FileStream.cpp" />
     <ClCompile Include="Stream\MultiStream.cpp" />

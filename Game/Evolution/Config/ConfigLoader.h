@@ -27,16 +27,4 @@ namespace nature
 		// ÅäÖÃÂ·¾¶
 		std::string _configPath;
 	};
-
-	/**
-	* ÔªËØÅäÖÃ±í
-	*/
-	class ElementConfig : public ConfigLoader
-	{
-	public:
-		ElementConfig();
-		virtual ~ElementConfig();
-	public:
-		virtual bool load();
-	};
 }

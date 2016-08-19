@@ -33,12 +33,12 @@ WebApplication* WebApplication::getInstance()
 	return s_pWebApplication;
 }
 
-HttpServer* WebApplication::getServer()
+WebServer* WebApplication::getServer()
 {
 	return _server;
 }
 
-ResourceMgr* WebApplication::getResourceMgr()
+sys::ResourceMgr* WebApplication::getResourceMgr()
 {
 	return _resource;
 }
@@ -48,8 +48,8 @@ void WebApplication::init()
 	sys::Server* server = new sys::Server(_ip.c_str(), _port, _maxWaitCount);
 	server->setRecvHandler(this, static_cast<sys::SERVER_RECV_HANDLER>(&WebApplication::parseData));
 
-	_server = new HttpServer(server);
-	_resource = new ResourceMgr();
+	_server = new WebServer(server);
+	_resource = new sys::ResourceMgr();
 }
 
 void WebApplication::update()

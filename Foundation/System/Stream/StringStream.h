@@ -19,12 +19,18 @@ namespace sys
 		StringStream(const char* text, int size);
 		virtual ~StringStream();
 	public:
+		void initWithText(const char* text);
+		void initWithText(const char* text, int size);
 		// 读取一行
-		std::string readLine();
+		void readLine(std::string& text);
+		// 读取剩余
+		void readRemain(std::string& text);
 		// 写入字符串
 		void writeString(const char* line, int size);
+		void writeString(const std::string& text);
 		// 写入一行字符串
 		void writeLine(const char* line, int size);
+		void writeLine(const std::string& text);
 		// 写入空行
 		void writeLine();
 		// 是否读到结束

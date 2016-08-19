@@ -3,7 +3,7 @@
 
 using namespace sys;
 
-Memory* sys::Memory::s_pMemory = nullptr;
+Memory* Memory::s_pMemory = nullptr;
 
 
 Memory::Memory()

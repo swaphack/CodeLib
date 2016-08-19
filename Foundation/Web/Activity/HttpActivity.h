@@ -1,8 +1,6 @@
 #pragma once
 
 #include "system.h"
-#include "../Command/import.h"
-#include "../Http/import.h"
 
 namespace web
 {
@@ -12,17 +10,17 @@ namespace web
 		HttpActivity();
 		virtual ~HttpActivity();
 	public:
-		void onReceiveRequest(const char* sessionID, HttpRequest* request);
+		void onReceiveRequest(const char* sessionID, sys::HttpRequest* request);
 	protected:
 		// 收到http请求
-		virtual void doGet(HttpRequest* request);
+		virtual void doGet(sys::HttpRequest* request);
 		// 发送http反馈
-		virtual void doPost(HttpResponse* response);
+		virtual void doPost(sys::HttpResponse* response);
 		// 广播
-		virtual void doBroadCast(HttpResponse* response);
+		virtual void doBroadCast(sys::HttpResponse* response);
 	private:
-		void sendResponse(const char* sessionID, HttpResponse* response);
-		void sendBroadcast(const char* sessionID, HttpResponse* response);
+		void sendResponse(const char* sessionID, sys::HttpResponse* response);
+		void sendBroadcast(const char* sessionID, sys::HttpResponse* response);
 	private:
 		std::string _sessionID;
 	};

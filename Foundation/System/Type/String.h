@@ -13,6 +13,7 @@ namespace sys
 	public:
 		String();
 		String(const String& value);
+		String(const std::string& value);
 		String(const char* value);
 		String(const char* value, int count);
 		virtual ~String();

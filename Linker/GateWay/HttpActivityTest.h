@@ -5,15 +5,15 @@ using namespace sys;
 using namespace web;
 
 // http 应答
-class HttpActivityTest : public HttpActivity
+class HttpActivityTest : public web::HttpActivity
 {
 protected:
 	// 接收请求处理
-	virtual void doGet(HttpRequest* request);
+	virtual void doGet(sys::HttpRequest* request);
 	// http 请求
-	virtual void doHttpGet(HttpRequest* request);
+	virtual void doHttpGet(sys::HttpRequest* request);
 	// socket 请求
-	virtual void doSocketGet(HttpRequest* request);
+	virtual void doSocketGet(sys::HttpRequest* request);
 private:
 	// 获取请求的页面
 	void handUrlMethod(sys::String& inString, std::string& outString);

@@ -21,7 +21,7 @@ namespace sys
 	};
 
 	// app 接口管理
-	class Application : public sys::Object, public IApplication
+	class Application : public Object, public IApplication
 	{
 	public:
 		Application();
