@@ -29,5 +29,17 @@
 #define LOG(FORMAT, ...)  printf(FORMAT, __VA_ARGS__)
 
 
+// 是否大写字母
+#define IS_CAPITAL_LETTER(X) (X >= 'A' && X <= 'Z')
+// 是否小写字母
+#define IS_LOWER_CASE_LETTER(X) (X >= 'a' && X <= 'z')
+// 是否是数字
+#define IS_NUMBER(X) (X >= '0' && X <= '9')
+// 左括号
+#define LEFT_PARENTHESIS '('
+// 右括号
+#define RIGHT_PARENTHESIS ')'
+
+
 // 获取格式化的字符串，无需删除
 extern const char* getCString(const char* format, ...);

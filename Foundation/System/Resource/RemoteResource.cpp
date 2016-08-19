@@ -1,6 +1,7 @@
 #include "RemoteResource.h"
 #include "../Http/import.h"
 #include "../Net/import.h"
+#include "../Type/import.h"
 
 using namespace sys;
 

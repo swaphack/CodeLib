@@ -27,6 +27,10 @@ namespace sys
 		virtual String operator+(const std::string& value);
 		virtual String operator+(const char* value);
 
+		// 获取索引的字符
+		virtual char operator[](int index);
+		virtual char& at(int index);
+
 		// 拼接
 		virtual String& concat(const char* value);
 		virtual String& concat(const char* value1, const char* value2);
@@ -43,8 +47,6 @@ namespace sys
 		bool endWith(const char* value);
 		// 以指定字符串开头
 		bool startWith(const char* value);
-		// 获取索引的字符
-		virtual char operator[](int index);
 		// 移除从指定位置开始的一段字符串
 		String& remove(int offset, int count);
 		// 插入字符串
@@ -69,6 +71,11 @@ namespace sys
 		String& trimLeft();
 		// 去掉右边空格
 		String& trimRight();
+
+		// 转小写
+		String toLower();
+		// 转大写
+		String toUpper();
 
 		// 格式化
 		String& make(const char* format, ...);

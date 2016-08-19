@@ -5,6 +5,7 @@
 #include <cstring>
 #include <cstdarg>
 #include "../Stream/import.h"
+#include <cctype>
 
 #if _MSC_VER
 #define snprintf _snprintf
@@ -106,6 +107,26 @@ String String::operator+(const char* value)
 	temp.concat(value);
 
 	return temp;
+}
+
+char String::operator[](int index)
+{
+	if (index >= _size || index < 0)
+	{
+		return 0;
+	}
+
+	return _value[index];
+}
+
+char& String::at(int index)
+{
+	if (index >= _size || index < 0)
+	{
+		ASSERT(false);
+	}
+
+	return _value[index];
 }
 
 String& String::concat(const char* value)
@@ -373,16 +394,6 @@ bool String::startWith(const char* value)
 	return true;
 }
 
-char String::operator[](int index)
-{
-	if (index >= _size || index < 0)
-	{
-		return 0;
-	}
-
-	return _value[index];
-}
-
 String& String::remove(int offset, int count)
 {
 	if (offset >= _size || offset < 0)
@@ -449,8 +460,7 @@ String String::subString(int offset, int count)
 	{
 		count = _size - offset;
 	}
-	String str = String(_value + offset, count);
-	return str;
+	return String(_value + offset, count);
 }
 
 
@@ -618,6 +628,26 @@ String& String::trimRight()
 	_value = _value;
 
 	return *this;
+}
+
+String String::toLower()
+{
+	String text = getString();
+	for (int i = 0; i < _size; i++)
+	{
+		text.at(i) = tolower(text.at(i));
+	}
+	return text;
+}
+
+String String::toUpper()
+{
+	String text = getString();
+	for (int i = 0; i < _size; i++)
+	{
+		text.at(i) = toupper(text.at(i));
+	}
+	return text;
 }
 
 String& String::make(const char* format, ...)

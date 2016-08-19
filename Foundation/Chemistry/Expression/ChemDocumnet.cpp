@@ -1,18 +1,8 @@
 #include "ChemDocument.h"
 
+#include "system.h"
+
 using namespace chem;
-
-
-// ÊÇ·ñ´óÐ´×ÖÄ¸
-#define IS_CAPITAL_LETTER(X) (X >= 'A' && X <= 'Z')
-// ÊÇ·ñÐ¡Ð´×ÖÄ¸
-#define IS_LOWER_CASE_LETTER(X) (X >= 'a' && X <= 'z')
-// ÊÇ·ñÊÇÊý×Ö
-#define IS_NUMBER(X) (X >= '0' && X <= '9')
-// ×óÀ¨ºÅ
-#define LEFT_PARENTHESIS '('
-// ÓÒÀ¨ºÅ
-#define RIGHT_PARENTHESIS ')'
 
 //////////////////////////////////////////////////////////////////////////
 
