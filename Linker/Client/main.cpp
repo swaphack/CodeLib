@@ -127,8 +127,15 @@ void test2()
 int main(int argc, char** argv)
 {
 	
-	test2();
-	
-	
+	//test2();
+
+	const char* url = "www.baidu.com";
+
+	std::string ip;
+
+	sys::DNS::getIPAddress(url, ip);
+
+	PRINT(ip.c_str());
+
 	return 0;
 };

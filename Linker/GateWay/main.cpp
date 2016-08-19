@@ -26,7 +26,7 @@ int main(int argc, char** argv)
 #endif
 
 	WebApplication* web = new WebApplication(WEB_IP, WEB_PORT, 10000);
-	web->getResourceMgr()->setUrl(websit.c_str());
+	web->getResourceMgr()->getResource(ERT_LOCAL)->setUrl(websit.c_str());
 	new HttpActivityTest();
 
 	while (true)

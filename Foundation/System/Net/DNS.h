@@ -1,16 +1,17 @@
 #pragma once
 
+#include <string>
+#include <vector>
+
 namespace sys
 {
-	#define DNS_IP_MAX 256
-
 	class DNS
 	{
 	public:
-		// 地址转ip
-		static const char* getIPAddress(const char* url);
-
-	private: 
-		static char s_common[DNS_IP_MAX];
+		// 获取首个ip地址
+		static void getIPAddress(const char* url, std::string& ip);
+		// 获取所有ip地址
+		static void getIPAddress(const char* url, std::vector<std::string>& ips);
+	private:
 	};
 }

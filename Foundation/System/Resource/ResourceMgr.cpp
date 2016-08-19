@@ -7,8 +7,6 @@ using namespace sys;
 
 ResourceMgr::ResourceMgr()
 {
-	_resType = ERT_LOCAL;
-
 	this->init();
 }
 
@@ -16,36 +14,10 @@ ResourceMgr::~ResourceMgr()
 {
 	this->disponse();
 }
-
-void ResourceMgr::setResourceType(ResourceType type)
+Resource* ResourceMgr::getResource(int type)
 {
-	_resType = type;
-}
-
-ResourceType ResourceMgr::getResourceType()
-{
-	return _resType;
-}
-
-void ResourceMgr::setUrl(const char* url)
-{
-	if (url == nullptr)
-	{
-		return;
-	}
-	Resource* resource = getResource();
-	if (resource == nullptr)
-	{
-		return;
-	}
-
-	resource->setUrl(url);
-}
-
-Resource* ResourceMgr::getResource()
-{
-	std::map<ResourceType, IResource*>::iterator iter = _resources.find(_resType);
-	if (iter != _resources.end())
+	std::map<int, IResource*>::iterator iter = _getResMethods.find(type);
+	if (iter != _getResMethods.end())
 	{
 		return dynamic_cast<Resource*>(iter->second);
 	}
@@ -53,21 +25,45 @@ Resource* ResourceMgr::getResource()
 	return nullptr;
 }
 
+void ResourceMgr::addMethod(int type, IResource* res)
+{
+	if (res == nullptr)
+	{
+		return;
+	}
+
+	removeMethod(type);
+
+	_getResMethods[type] = res;
+}
+
+void ResourceMgr::removeMethod(int type)
+{
+	std::map<int, IResource*>::iterator iter = _getResMethods.find(type);
+	if (iter == _getResMethods.end())
+	{
+		return;
+	}
+
+	SAFE_DELETE(iter->second);
+	_getResMethods.erase(iter);
+}
+
 void ResourceMgr::init()
 {
 	this->disponse();
-	_resources[ERT_LOCAL] = new	LocalResource();
-	_resources[ERT_REMOTE] = new RemoteResource();
+	_getResMethods[ERT_LOCAL] = new	LocalResource();
+	_getResMethods[ERT_REMOTE] = new RemoteResource();
 }
 
 void ResourceMgr::disponse()
 {
-	std::map<ResourceType, IResource*>::iterator iter = _resources.begin();
-	while (iter != _resources.end())
+	std::map<int, IResource*>::iterator iter = _getResMethods.begin();
+	while (iter != _getResMethods.end())
 	{
 		SAFE_DELETE(iter->second);
 		iter++;
 	}
 
-	_resources.clear();
+	_getResMethods.clear();
 }

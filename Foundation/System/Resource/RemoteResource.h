@@ -4,7 +4,10 @@
 
 namespace sys
 {
-	// 本地数据
+	/**
+	*	远程数据
+	*	url： http://www.baidu.com:80;
+	*/
 	class RemoteResource : public Resource
 	{
 	public:

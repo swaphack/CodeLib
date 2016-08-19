@@ -15,4 +15,3 @@
 #endif
 
 #define LINE_EQUAL(ptr) (memcmp(ptr, LINE_MARK, strlen(LINE_MARK)) == 0)
-#define LINE_APPEND(ptr) strcpy(ptr, LINE_MARK)

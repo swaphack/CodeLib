@@ -16,15 +16,12 @@ namespace sys
 		ResourceMgr();
 		~ResourceMgr();
 	public:
-		// 设置资源途径类型
-		void setResourceType(ResourceType type);
-		// 获取资源途径类型
-		ResourceType getResourceType();
-
-		// 设置资源位置
-		void setUrl(const char* url);
 		// 资源管理
-		Resource* getResource();
+		Resource* getResource(int type);
+		// 添加一种新的获取资源的方式
+		void addMethod(int type, IResource* res);
+		// 移除就有的获取资源的方式
+		void removeMethod(int type);
 	private:
 		// 初始化
 		void init();
@@ -32,8 +29,8 @@ namespace sys
 		void disponse();
 	private:
 		// 资源途径类型
-		ResourceType _resType;
+		int _resType;
 		// 资源途径管理
-		std::map<ResourceType, IResource*> _resources;
+		std::map<int, IResource*> _getResMethods;
 	};
 }

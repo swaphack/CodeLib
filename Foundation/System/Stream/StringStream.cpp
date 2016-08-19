@@ -33,7 +33,7 @@ void StringStream::initWithText(const char* text)
 
 void StringStream::initWithText(const char* text, int size)
 {
-	int len = size + 1;
+	int len = size;
 
 	char* newData = StreamHelper::mallocStream((void*)text, len);
 
@@ -53,7 +53,7 @@ void StringStream::readLine(std::string& text)
 	}
 	char* ptr = getPtr();
 
-	while ((*ptr) != 0)
+	while (ptr - getData() < getCapacity())
 	{
 		if (LINE_EQUAL(ptr - ext + 1))
 		{
@@ -68,14 +68,8 @@ void StringStream::readLine(std::string& text)
 	}
 
 	ss_t size = ptr - cursor;
-	if ((*ptr) == 0)
-	{
-		this->setCursor(getCursor() + size);
-	}
-	else
-	{
-		this->setCursor(getCursor() + size);
-	}
+
+	this->setCursor(getCursor() + size);
 
 	text = std::string(cursor, size);
 }
@@ -83,8 +77,8 @@ void StringStream::readLine(std::string& text)
 void StringStream::readRemain(std::string& text)
 {
 	text.clear();
-	text = std::string(this->getData() + this->getCursor(), this->getCapacity() - this->getCursor() - 1);
-	this->setCursor(this->getCapacity() - 1);
+	text = std::string(this->getData() + this->getCursor(), this->getCapacity() - this->getCursor());
+	this->setCursor(this->getCapacity());
 }
 
 void StringStream::writeString(const char* line, int size)
@@ -95,10 +89,10 @@ void StringStream::writeString(const char* line, int size)
 	}
 
 	int newCursor = size + this->getCursor();
-	if (newCursor > this->getCapacity() - 1)
+	if (newCursor > this->getCapacity())
 	{
-		char* newData = StreamHelper::mallocStream(newCursor + 1, (char*)this->getData(), this->getCapacity());
-		this->setData(newData, newCursor + 1);
+		char* newData = StreamHelper::mallocStream(newCursor, (char*)this->getData(), this->getCapacity());
+		this->setData(newData, newCursor);
 	}
 
 	char* ptr = getPtr();
@@ -126,18 +120,7 @@ void StringStream::writeLine(const std::string& text)
 void StringStream::writeLine()
 {
 	int ext = strlen(LINE_MARK);
-
-	int newCursor = ext + this->getCursor();
-	if (newCursor > this->getCapacity() - 1)
-	{
-		char* newData = StreamHelper::mallocStream(newCursor + 1, (char*)this->getData(), this->getCapacity());
-		this->setData(newData, newCursor + 1);
-	}
-
-	char* ptr = getPtr();
-	LINE_APPEND(ptr);
-
-	this->setCursor(newCursor);
+	this->writeString(LINE_MARK, ext);
 }
 
 bool StringStream::readEnd()

@@ -1,4 +1,6 @@
 #include "RemoteResource.h"
+#include "../Http/import.h"
+#include "../Net/import.h"
 
 using namespace sys;
 
@@ -32,9 +34,13 @@ bool RemoteResource::loadFileData(const char* filename, std::string& data)
 		return true;
 	}
 
-	
-
-	getCache()->set(fullpath.c_str(), data.c_str());
+// 	DNS::getIPAddress(_url);
+// 
+// 	HttpDownload download;
+// 	download.download(url, filename, )
+// 	
+// 
+// 	getCache()->set(fullpath.c_str(), data.c_str());
 
 	return true;
 }

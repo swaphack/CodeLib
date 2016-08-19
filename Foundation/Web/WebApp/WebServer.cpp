@@ -87,6 +87,10 @@ void WebServer::update()
 void WebServer::onParseData(int id, sys::DataQueue& dataQueue)
 {
 	sys::HttpRequest* request = this->createHttpRequest(id, dataQueue);
+	if (request == nullptr)
+	{
+		return;
+	}
 	if (request->getDocument()->getStreamSize() == 0)
 	{
 		return;
@@ -141,8 +145,12 @@ sys::HttpRequest* WebServer::createHttpRequest(int id, sys::DataQueue& dataQueue
 		return nullptr;
 	}
 
+	std::string sessionID;
+	sys::BitConvert::getNumberString(id, sessionID);
+
 	sys::HttpRequest* pReq = new sys::HttpRequest();
 	pReq->setDocument(pDoc);
+	pReq->setSessionID(sessionID.c_str());
 
 	if (parseLen + netData->pos == netData->size)
 	{

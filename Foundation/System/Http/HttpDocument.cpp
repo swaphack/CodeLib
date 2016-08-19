@@ -23,7 +23,7 @@ HttpDocument::~HttpDocument()
 bool HttpDocument::parse(const char* msg, int size)
 {
 	_stream->initWithText(msg, size);
-
+	_stream->setCursor(0);
 	do 
 	{
 		if (!readStatusSection())
@@ -244,14 +244,13 @@ bool HttpDocument::readHeaderSection()
 
 bool HttpDocument::readBodySection()
 {
+	_bodySection.clear();
 	if (_stream->readEnd())
 	{
-		return false;
+		return true;
 	}
 
-	_bodySection.clear();
 	_stream->readRemain(_bodySection);
-
 	return true;
 }
 
