@@ -176,7 +176,7 @@ void Server::_recvData( std::vector<int>& removedSocks )
 
 		char* buff = it->second->Recv(size);
 		if (size == -1)
-		{
+		{// 等待
 			Socket* socket = it->second;
 			if (socket->HasError() == true)
 			{
@@ -184,8 +184,14 @@ void Server::_recvData( std::vector<int>& removedSocks )
 				removedSocks.push_back(sockId);
 			}
 		}
+		else if (size == 0)
+		{// 断开连接
+			Socket* socket = it->second;
+			int sockId = socket->getID();
+			removedSocks.push_back(sockId);
+		}
 		else if (size > 0)
-		{
+		{// 接收到数据
 			this->onRecvHandler(it->second->getID(), new NetData(buff, size));
 		}
 	}

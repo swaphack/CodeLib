@@ -32,7 +32,12 @@ namespace sys
 		bool Connect(const char* addr, int port);
 		// 发送消息
 		int Send(const char* data, int size);
-		// 接收消息
+		/** 
+		*	接收消息
+		*	-1 等待，判断是否连接有错
+		*	0 断开连接
+		*	大于0， 接收到数据
+		*/
 		char* Recv(int& size);
 		// 关闭指定Socket IO
 		void ShutDown(int type);
