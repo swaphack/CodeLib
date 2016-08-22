@@ -17,6 +17,7 @@ namespace nature
 		static ConfigManager* getInstance();
 		static void purgeInstance();
 	public:
+		// 加载所有配置数据
 		void loadAllDatas();
 		// 添加加载接口
 		void addLoader(const char* name, IConfigLoader* loader);

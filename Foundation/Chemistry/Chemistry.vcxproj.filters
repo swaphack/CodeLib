@@ -15,9 +15,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="PeriodicTable\ChemPeriodicTable.cpp">
-      <Filter>PeriodicTable</Filter>
-    </ClCompile>
     <ClCompile Include="Base\Molecule.cpp">
       <Filter>Base</Filter>
     </ClCompile>
@@ -33,11 +30,11 @@
     <ClCompile Include="Expression\ChemNode.cpp">
       <Filter>Expression</Filter>
     </ClCompile>
+    <ClCompile Include="PeriodicTable\PeriodicTable.cpp">
+      <Filter>PeriodicTable</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="PeriodicTable\ChemPeriodicTable.h">
-      <Filter>PeriodicTable</Filter>
-    </ClInclude>
     <ClInclude Include="Base\Molecule.h">
       <Filter>Base</Filter>
     </ClInclude>
@@ -79,6 +76,12 @@
       <Filter>Formula</Filter>
     </ClInclude>
     <ClInclude Include="PeriodicTable\import.h">
+      <Filter>PeriodicTable</Filter>
+    </ClInclude>
+    <ClInclude Include="PeriodicTable\Element.h">
+      <Filter>PeriodicTable</Filter>
+    </ClInclude>
+    <ClInclude Include="PeriodicTable\PeriodicTable.h">
       <Filter>PeriodicTable</Filter>
     </ClInclude>
   </ItemGroup>

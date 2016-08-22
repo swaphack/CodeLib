@@ -70,7 +70,7 @@
     <ClCompile Include="Base\Molecule.cpp" />
     <ClCompile Include="Expression\ChemDocumnet.cpp" />
     <ClCompile Include="Expression\ChemNode.cpp" />
-    <ClCompile Include="PeriodicTable\ChemPeriodicTable.cpp" />
+    <ClCompile Include="PeriodicTable\PeriodicTable.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Base\Constitution.h" />
@@ -87,7 +87,8 @@
     <ClInclude Include="Formula\ChemFormula.h" />
     <ClInclude Include="Formula\import.h" />
     <ClInclude Include="Formula\macros.h" />
-    <ClInclude Include="PeriodicTable\ChemPeriodicTable.h" />
+    <ClInclude Include="PeriodicTable\Element.h" />
+    <ClInclude Include="PeriodicTable\PeriodicTable.h" />
     <ClInclude Include="PeriodicTable\import.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

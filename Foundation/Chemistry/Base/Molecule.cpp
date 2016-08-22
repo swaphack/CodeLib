@@ -42,12 +42,12 @@ void Molecule::parseConstitution()
 		delete pDoc;
 	}
 
-	const ChemElementInfo* pElementInfo = nullptr;
+	const Element* pElement = nullptr;
 	pNode->foreach([&](const std::string& symbol, const std::string& number){
-		pElementInfo = ChemPeriodicTable::getInstance()->getElementBySymbol(symbol.c_str());
-		if (pElementInfo)
+		pElement = PeriodicTable::getInstance()->getElementBySymbol(symbol.c_str());
+		if (pElement)
 		{
-			_elements[pElementInfo->ID] += atoi(number.c_str());
+			_elements[pElement->ID] += atoi(number.c_str());
 		}
 	});
 

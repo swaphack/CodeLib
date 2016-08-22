@@ -129,7 +129,7 @@ int main(int argc, char** argv)
 	
 	//test2();
 
-	const char* url = "www.baidu.com";
+	const char* url = "baidu.com";
 
 	std::string ip;
 

@@ -31,7 +31,7 @@ namespace chem
 		static void purgeInstance();
 	public:
 		/**
-		*	反应
+		*	判断物质在特殊的条件下，是否会发生化学反应
 		*/
 		bool reaction(const Molecules& input, const ChemCondition& env, Molecules& output, ChemEffect& effect);
 		/**
@@ -41,6 +41,5 @@ namespace chem
 		void addFormula(const char* formula);
 	private:
 		static ChemFormula* s_pChemFormula;
-		std::
 	};
 }

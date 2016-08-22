@@ -31,63 +31,46 @@ ChemNode* ChemDocument::readExpression()
 
 	ChemNode* node = new ChemNode();
 	ChemNode* innerNode = nullptr;
-	ChemNode* nextNode = nullptr;
+	ChemNode* ptr = nullptr;
 
 	std::string symbol;
 	std::string number;
 	
-	while (*_cursor)
+	do
 	{
 		bool endBlock = false;
 		if (innerNode = readBlock(endBlock))
 		{
 			node->inner = innerNode;
-		}
-
-		if (endBlock)
-		{
-			return node;
-		}
-
-		if (innerNode)
-		{
-			number.clear();
+			if (endBlock) 
+				return node;
 			if (readNumber(number))
-			{
 				node->innerCount = number;
-			}
 		}
 
-		symbol.clear();
 		readSymbol(symbol);
-
-		number.clear();
+		if (symbol.empty()) continue;
+		
 		readNumber(number);
-
-		if (!symbol.empty())
+		if (node->symbol.empty())
+			ptr = node;
+		else
 		{
-			if (node->symbol.empty())
-			{
-				node->symbol = symbol;
-				node->count = number.empty() ? "1" : number;
-			}
-			else
-			{
-				nextNode = new ChemNode();
-				nextNode->symbol = symbol;
-				nextNode->count = number.empty() ? "1" : number;
-				node->next.push_back(nextNode);
-			}
+			ptr = new ChemNode();
+			node->next.push_back(ptr);
 		}
-	}
+		node->symbol = symbol;
+		node->count = number.empty() ? "1" : number;
+	} while (*_cursor);
+
 	return node;
 }
 
 ChemNode* ChemDocument::readBlock(bool& endBlock)
 {
+	endBlock = false;
 	char* ptr = (char*)_cursor;
 	char tempChar;
-	endBlock = false;
 	
 	while (*_cursor)
 	{
@@ -126,8 +109,9 @@ ChemNode* ChemDocument::readBlock(bool& endBlock)
 
 bool ChemDocument::readSymbol(std::string& symbol)
 {
-	char tempChar;
 	symbol.clear();
+
+	char tempChar;
 
 	while (*_cursor)
 	{
@@ -155,8 +139,8 @@ bool ChemDocument::readSymbol(std::string& symbol)
 
 bool ChemDocument::readNumber(std::string& number)
 {
-	char tempChar;
 	number.clear();
+	char tempChar;
 
 	while (*_cursor)
 	{

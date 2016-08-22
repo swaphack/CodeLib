@@ -18,8 +18,9 @@ namespace sys
 		Socket(int sock);
 		~Socket();
 	public:
-		// 用于socket模块启动和销毁
+		// 用于socket模块启动
 		static void InitSockModule();
+		// 用于socket模块销毁
 		static void ReleaseSockModule();
 
 		// 绑定ip和端口

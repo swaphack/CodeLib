@@ -1,3 +1,4 @@
 #pragma once
 
-#include "ChemPeriodicTable.h"
+#include "Element.h"
+#include "PeriodicTable.h"

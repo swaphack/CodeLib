@@ -42,19 +42,3 @@ void ConfigLoader::setConfigPath(const char* path)
 		_configPath = path;
 	}
 }
-
-//////////////////////////////////////////////////////////////////////////
-ElementConfig::ElementConfig()
-{
-	setConfigPath();
-}
-
-ElementConfig::~ElementConfig()
-{
-
-}
-
-bool ElementConfig::load()
-{
-
-}
