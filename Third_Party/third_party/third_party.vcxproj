@@ -175,6 +175,7 @@
     <ClInclude Include="..\..\Lib\include\fmod\fsbank\fsbank.h" />
     <ClInclude Include="..\..\Lib\include\fmod\fsbank\fsbank_errors.h" />
     <ClInclude Include="..\..\Lib\include\fmod\lowlevel\fmod.h" />
+    <ClInclude Include="..\..\Lib\include\fmod\lowlevel\fmod.hpp" />
     <ClInclude Include="..\..\Lib\include\fmod\lowlevel\fmod_codec.h" />
     <ClInclude Include="..\..\Lib\include\fmod\lowlevel\fmod_common.h" />
     <ClInclude Include="..\..\Lib\include\fmod\lowlevel\fmod_dsp.h" />

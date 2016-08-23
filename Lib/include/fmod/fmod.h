@@ -9,5 +9,5 @@
 #else
 #include "fsbank/fsbank.h"
 #include "lowlevel/fmod.hpp"
-#include "studio/fmod_studio.hpp"
+#include "studio/fmod_studio.h"
 #endif

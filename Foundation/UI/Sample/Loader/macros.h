@@ -21,4 +21,9 @@ namespace ui
 	getNodeProperty()->setAttribute(NAME, GET_NODE->FUNC());
 #define SAVE_CAST_ATTRIBUTE(NAME, FUNC, TYPE)\
 	getNodeProperty()->setAttribute(NAME, static_cast<TYPE>(GET_NODE->FUNC()));
+
+	// CHANGE ATTRIBUTE
+#define ADD_ATTRIBUTE_CHANGED(NAME, FUNC) \
+	SAVE_ATTRIBUTE(NAME, FUNC) \
+
 }

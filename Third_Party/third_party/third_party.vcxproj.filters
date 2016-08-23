@@ -479,6 +479,9 @@
     <ClInclude Include="..\..\Lib\include\sqlite\sqlite3ext.h">
       <Filter>sqlite</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Lib\include\fmod\lowlevel\fmod.hpp">
+      <Filter>fmod\lowlevel</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Lib\include\sqlite\shell.c">

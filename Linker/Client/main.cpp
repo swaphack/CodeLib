@@ -129,11 +129,12 @@ int main(int argc, char** argv)
 	
 	//test2();
 
-	const char* url = "baidu.com";
+	const char* url = "www.baidu.com";
 
 	std::string ip;
+	int port;
 
-	sys::DNS::getIPAddress(url, ip);
+	sys::DNS::getFirstIPAddress(url, ip, port);
 
 	PRINT(ip.c_str());
 

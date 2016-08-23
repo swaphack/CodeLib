@@ -74,19 +74,14 @@ void HttpRespDocument::setContentLength(int value)
 	this->setIntegerHeader(HttpResponeField::CONTENT_LENGTH, value);
 }
 
-void HttpRespDocument::writeString(const char* value)
+void HttpRespDocument::writeContentString(const std::string& value)
 {
-	if (value == nullptr)
-	{
-		return;
-	}
+	this->setBody(value.c_str(), value.size());
 
-	this->setBody(value, strlen(value));
-
-	this->setContentLength(strlen(value));
+	this->setContentLength(value.size());
 }
 
-void HttpRespDocument::writeFile(const char* filename)
+void HttpRespDocument::writeContentFile(const char* filename)
 {
 	if (filename == nullptr)
 	{
@@ -99,9 +94,11 @@ void HttpRespDocument::writeFile(const char* filename)
 	{
 		getResource()->loadFileData(filename, data);
 
-		this->setBody(data.c_str(), data.size());
-
-		this->setContentLength(data.size());
+		this->writeContentString(data);
+	}
+	else
+	{
+		this->writeContentString("");
 	}
 }
 

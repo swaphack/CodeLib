@@ -116,8 +116,8 @@ namespace db
 		}
 
 		StreamWriter writer;
-
 		writer.writeInt(datas.size());
+
 		std::vector<T>::const_iterator iter = datas.begin();
 		while (iter != datas.end())
 		{

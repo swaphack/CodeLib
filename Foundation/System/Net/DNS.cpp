@@ -20,11 +20,12 @@ static char s_common[DNS_IP_MAX] = {0};
 
 using namespace sys;
 
-void DNS::getIPAddress(const char* url, std::string& ip)
+void DNS::getFirstIPAddress(const char* url, std::string& ip)
 {
-	sys::Socket::InitSockModule();
+	Socket::InitSockModule();
 
 	ip.clear();
+
 	if (url == nullptr)
 	{
 		return;
@@ -66,12 +67,12 @@ void DNS::getIPAddress(const char* url, std::string& ip)
 		break;
 	}
 
-	sys::Socket::ReleaseSockModule();
+	Socket::ReleaseSockModule();
 }
 
-void DNS::getIPAddress(const char* url, std::vector<std::string>& ips)
+void DNS::getAllIPAddress(const char* url, std::vector<std::string>& ips)
 {
-	sys::Socket::InitSockModule();
+	Socket::InitSockModule();
 
 	ips.clear();
 	if (url == nullptr)
@@ -120,7 +121,72 @@ void DNS::getIPAddress(const char* url, std::vector<std::string>& ips)
 		}
 	}
 
-	sys::Socket::ReleaseSockModule();
+	Socket::ReleaseSockModule();
+}
+
+void DNS::getIPAddress(struct addrinfo* addr_info, std::string& ip, int& port)
+{
+	ip.clear();
+	port = 0;
+
+	if (addr_info == nullptr)
+	{
+		return;
+	}
+
+	switch (addr_info->ai_family)
+	{
+	case AF_INET:
+	{
+					memset(s_common, 0, DNS_IP_MAX);
+					struct sockaddr_in *sockaddr_ipv4 = (struct sockaddr_in *) addr_info->ai_addr;
+					ip = inet_ntop(sockaddr_ipv4->sin_family, &sockaddr_ipv4->sin_addr, s_common, DNS_IP_MAX);
+					port = ntohs(sockaddr_ipv4->sin_port);
+					break;
+	}
+	case AF_INET6:
+	{
+					 memset(s_common, 0, DNS_IP_MAX);
+					 struct sockaddr_in6 *sockaddr_ipv6 = (struct sockaddr_in6 *) addr_info->ai_addr;
+					 ip = inet_ntop(sockaddr_ipv6->sin6_family, &sockaddr_ipv6->sin6_addr, s_common, DNS_IP_MAX);
+					 port = ntohs(sockaddr_ipv6->sin6_port);
+					 break;
+	}
+	default:
+		break;
+	}
+}
+
+void DNS::getIPAddress(struct sockaddr_in* addr_in, std::string& ip, int& port)
+{
+	ip.clear();
+	port = 0;
+
+	if (addr_in == nullptr)
+	{
+		return;
+	}
+
+	switch (addr_in->sin_family)
+	{
+	case AF_INET:
+	{		
+					memset(s_common, 0, DNS_IP_MAX);
+					ip = inet_ntop(addr_in->sin_family, &addr_in->sin_addr, s_common, DNS_IP_MAX);
+					port = ntohs(addr_in->sin_port);
+					break;
+	}
+	case AF_INET6:
+	{
+					 memset(s_common, 0, DNS_IP_MAX);
+					 struct sockaddr_in6 *sockaddr_ipv6 = (struct sockaddr_in6 *) addr_in;
+					 ip = inet_ntop(sockaddr_ipv6->sin6_family, &sockaddr_ipv6->sin6_addr, s_common, DNS_IP_MAX);
+					 port = ntohs(sockaddr_ipv6->sin6_port);
+					 break;
+	}
+	default:
+		break;
+	}
 }
 
 

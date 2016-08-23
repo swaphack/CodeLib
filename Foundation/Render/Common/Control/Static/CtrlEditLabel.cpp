@@ -183,22 +183,39 @@ void CtrlEditLabel::onInputHand(sys::BoardKey key, sys::ButtonStatus type)
 
 	if (key == sys::EBK_RETURN)
 	{
-		this->setKeyboardEnable(false);
+		onInputKeyReturnHandler();
 		return;
 	}
 
 	std::string text = this->getString();
 	if (key == sys::EBK_BACK)
 	{
-		text = text.substr(0, text.size() - 1);
+		onInputKeyBackHandler();
+		return;
 	}
-	else
+
+	char value = G_KEYCHAR->getChar(key);
+	if (value)
 	{
-		char value = G_KEYCHAR->getChar(key);
-		if (value)
-		{
-			text.append(1, value);
-		}
+		onInputKeyCharHandler(value);
 	}
+}
+
+void CtrlEditLabel::onInputKeyBackHandler()
+{
+	std::string text = this->getString();
+	text = text.substr(0, text.size() - 1);
+	this->setString(text.c_str());
+}
+
+void CtrlEditLabel::onInputKeyReturnHandler()
+{
+	this->setKeyboardEnable(false);
+}
+
+void CtrlEditLabel::onInputKeyCharHandler(char value)
+{
+	std::string text = this->getString();
+	text.append(1, value);
 	this->setString(text.c_str());
 }

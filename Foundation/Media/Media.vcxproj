@@ -11,12 +11,12 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{99422F86-35B7-4026-A9A8-EE181F151B7E}</ProjectGuid>
-    <RootNamespace>Web</RootNamespace>
+    <ProjectGuid>{1D743E15-C094-4422-89E3-77159D74D97D}</ProjectGuid>
+    <RootNamespace>Media</RootNamespace>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v120</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
@@ -43,15 +43,12 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>../System/;../Text/;../../Lib/include/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <BrowseInformation>true</BrowseInformation>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>../../Lib/include/</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
-    <Bscmake>
-      <PreserveSbr>true</PreserveSbr>
-    </Bscmake>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -59,6 +56,7 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -67,28 +65,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Activity\HttpActivity.cpp" />
-    <ClCompile Include="DB\SQLite.cpp" />
-    <ClCompile Include="WebApp\WebServer.cpp" />
-    <ClCompile Include="WebApp\Session.cpp" />
-    <ClCompile Include="WebApp\WebApplication.cpp" />
+    <ClInclude Include="Audio\Audio.h" />
+    <ClInclude Include="Audio\Audio3D.h" />
+    <ClInclude Include="Video\Video.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Activity\HttpActivity.h" />
-    <ClInclude Include="Activity\import.h" />
-    <ClInclude Include="Activity\HttpRecvHandler.h" />
-    <ClInclude Include="DB\DataBase.h" />
-    <ClInclude Include="DB\SQLite.h" />
-    <ClInclude Include="web.h" />
-    <ClInclude Include="WebApp\WebServer.h" />
-    <ClInclude Include="WebApp\import.h" />
-    <ClInclude Include="WebApp\macros.h" />
-    <ClInclude Include="WebApp\Session.h" />
-    <ClInclude Include="WebApp\WebApplication.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <Xml Include="Resource\DB.xml" />
-    <Xml Include="Resource\Server.xml" />
+    <ClCompile Include="Audio\1.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

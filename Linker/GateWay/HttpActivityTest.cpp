@@ -1,6 +1,6 @@
 #include "HttpActivityTest.h"
 
-#define G_RESOURCE WebApplication::getInstance()->getResourceMgr()->getResource()
+#define G_RESOURCE WebApplication::getInstance()->getResourceMgr()->getResource(ERT_LOCAL)
 
 void HttpActivityTest::doGet(sys::HttpRequest* request)
 {
@@ -35,7 +35,7 @@ void HttpActivityTest::doHttpGet(sys::HttpRequest* request)
 	response.getDocument()->setResponseCode("200");
 	response.getDocument()->setDescribe("OK");
 	response.getDocument()->setResource(G_RESOURCE);
-	response.getDocument()->writeFile(url.c_str());
+	response.getDocument()->writeContentFile(url.c_str());
 	this->doPost(&response);
 }
 

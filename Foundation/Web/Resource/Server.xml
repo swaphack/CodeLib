@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <server>
+    <ip>127.0.0.1</ip>
+    <port>9547</port>
+  </server>
+  <projdir>
+    <path>F:/WebCat/sqlite-doc-3130000</path>
+  </projdir>
+</root>

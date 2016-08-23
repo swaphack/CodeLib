@@ -13,33 +13,22 @@ namespace db
 	class DBSheet
 	{
 	public:
-		DBSheet(DBTable* table);
+		DBSheet();
 		virtual ~DBSheet();
 	public:
-		// 重新加载表结构，结构同步
-		// 表结构发生修改，表数据也要修改
-		void reloadStruct(DBTable* table);
-		// 获取表结构
-		const DBTable* getTable() const;
-
-		void addRecord(DBRecord* record);
 		// 添加纪录
-		void addRecord(int key, DBRecord* record);
+		void addRecord(DBRecord* record);
 		// 移除纪录
-		void removeRecord(int key);
+		void removeRecord(DBRecord* record);
+		void removeRecord(int index);
 		// 获取纪录
-		DBRecord* getRecord(int key);
-
-		// 纪录迭代器
-		std::map<int, DBRecord*>::const_iterator beginRecord() const;
-		std::map<int, DBRecord*>::const_iterator endRecord() const;
+		DBRecord* getRecord(int index);
+		bool findRecord(DBRecord* record);
 
 		// 清除记录
 		void clear();
 	protected:
-		// 表结构(指针引用)
-		DBTable* _table;
 		// 表数据
-		std::map<int, DBRecord*> _records;
+		std::vector<DBRecord*> _records;
 	};
 }

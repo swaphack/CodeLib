@@ -1,9 +1,10 @@
 #include "Socket.h"
+#include "EndPoint.h"
+#include "DNS.h"
 #include <cstdio>
 
 #if (defined(_WIN32) || defined(WIN32))
 #include <WinSock2.h>
-#pragma comment(lib, "WS2_32.lib")
 #else
 #include <stdio.h>
 #include <stdlib.h>
@@ -36,11 +37,15 @@ Socket::Socket(int sock)
 	_sock = sock;
 
 	this->initDefaultOPT();
+
+	initLocalAndRemote();
 }
 
 void Socket::InitSockModule()
 {
 #ifdef _WIN32
+#pragma comment(lib, "WS2_32.lib")
+
 	WORD wVersionRequested;  
 	WSADATA wsaData;
 	int err;  
@@ -71,14 +76,13 @@ Socket::~Socket()
 	Close();
 }
 
-void Socket::Bind( const char* addr, int port )
+void Socket::Bind(const char* addr, int port, bool ipv6)
 {
-	SOCKADDR_IN addrSrv;  
-	addrSrv.sin_addr.S_un.S_addr = inet_addr(addr);
-	addrSrv.sin_family = AF_INET;  
-	addrSrv.sin_port = htons(port); 
+	struct sockaddr_in addrSrv;  
+	EndPoint point(addr, port, ipv6);
+	point.getAddr(&addrSrv);
 
-	::bind(_sock, (SOCKADDR*)&addrSrv, sizeof(SOCKADDR));
+	::bind(_sock, (struct sockaddr*)&addrSrv, sizeof(struct sockaddr));
 }
 
 void Socket::Listen(int maxCount)
@@ -88,9 +92,9 @@ void Socket::Listen(int maxCount)
 
 Socket* Socket::Accept()
 {
-	SOCKADDR_IN  addrClient;  
-	int len = sizeof(SOCKADDR);  
-	SOCKET sock = ::accept(_sock, (SOCKADDR*)&addrClient, &len);
+	struct sockaddr_in addrClient;  
+	int len = sizeof(struct sockaddr);  
+	SOCKET sock = ::accept(_sock, (struct sockaddr*)&addrClient, &len);
 	if (sock == INVALID_SOCKET_VALUE)
 	{
 		return nullptr;
@@ -99,14 +103,19 @@ Socket* Socket::Accept()
 	return new Socket(sock);
 }
 
-bool Socket::Connect( const char* addr, int port )
+bool Socket::Connect(const char* addr, int port, bool ipv6)
 {
-	SOCKADDR_IN addrSrv;  
-	addrSrv.sin_addr.S_un.S_addr = inet_addr(addr);
-	addrSrv.sin_family = AF_INET;  
-	addrSrv.sin_port = htons(port); 
+	struct sockaddr_in addrSrv;
+	EndPoint point(addr, port, ipv6);
+	point.getAddr(&addrSrv);
 
-	return ::connect(_sock, (SOCKADDR*)&addrSrv, sizeof(SOCKADDR)) == 0;
+	bool result = ::connect(_sock, (struct sockaddr*)&addrSrv, sizeof(struct sockaddr)) == 0;
+	if (result)
+	{
+		initLocalAndRemote();
+	}
+
+	return result;
 }
 
 int Socket::Send( const char* data, int size )
@@ -155,6 +164,26 @@ int Socket::getID()
 	return _sock;
 }
 
+const char* Socket::getLocalIP()
+{
+	return _localEP.first.c_str();
+}
+
+int Socket::getLocalPort()
+{
+	return _localEP.second;
+}
+
+const char* Socket::getRemoteIP()
+{
+	return _remoteEP.first.c_str();
+}
+
+int Socket::getRemotePort()
+{
+	return _remoteEP.second;
+}
+
 void Socket::initDefaultOPT()
 {
 	//non-blocking mode is enabled.
@@ -176,4 +205,34 @@ void Socket::initDefaultOPT()
 	int nBufSize = SOCKET_BUFFER_SIZE;
 	::setsockopt(_sock, SOL_SOCKET, SO_SNDBUF, (const char*)&nBufSize, sizeof(int));
 	::setsockopt(_sock, SOL_SOCKET, SO_RCVBUF, (const char*)&nBufSize, sizeof(int));
+
+	_localEP.first = "";
+	_localEP.second = 0;
+
+	_remoteEP.first = "";
+	_remoteEP.second = 0;
+}
+
+void Socket::initLocalAndRemote()
+{
+	if (_sock == INVALID_SOCKET_VALUE)
+	{
+		return;
+	}
+
+	struct sockaddr_in addr_in;
+	int len;
+	std::string ip;
+	int port;
+
+	len = sizeof(struct sockaddr_in);
+	::getsockname(_sock, (struct sockaddr*)&addr_in, &len);
+	DNS::getIPAddress(&addr_in, ip, port);
+	_localEP.first = ip;
+	_localEP.second = port;
+
+	::getpeername(_sock, (struct sockaddr*)&addr_in, &len);
+	DNS::getIPAddress(&addr_in, ip, port);
+	_remoteEP.first = ip;
+	_remoteEP.second = port;
 }

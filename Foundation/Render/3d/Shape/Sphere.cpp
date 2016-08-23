@@ -13,10 +13,18 @@ using namespace render;
 1.绕z轴行走，直至绕z轴一圈，到2
 2.绕x轴行走，重复1，直至全部结束
 
-纹理解析过程
-1.绕
 */
-void drawSphere(GLfloat radius, float xDy)
+
+void getXY(float& x, float& y, int i, int j)
+{
+	x = sin(PI * 0.5f * j / SPHERE_VERTICAL_COUNT);
+	y = sin(PI * 0.5f * i / SPHERE_HORIZONTAL_COUNT);
+
+	x = 1.0f * j / SPHERE_VERTICAL_COUNT;
+	y = 1.0f * i / SPHERE_HORIZONTAL_COUNT;
+}
+
+void drawSphere(GLfloat radius)
 {
 	float step_z = 1.0f * PI / SPHERE_HORIZONTAL_COUNT;
 	float step_xy = 2.0f * PI / SPHERE_VERTICAL_COUNT;
@@ -31,8 +39,6 @@ void drawSphere(GLfloat radius, float xDy)
 	float sinz, cosz, sinza, cosza;
 
 	float sinxy, cosxy, sinxya, cosxya;
-
-	glScalef(1, xDy, 1);
 
 	glBegin(GL_QUADS);
 	for (i = 0; i < SPHERE_HORIZONTAL_COUNT; i++)
@@ -57,53 +63,30 @@ void drawSphere(GLfloat radius, float xDy)
 			y[0] = sinz * sinxy;
 			z[0] = cosz;
 
+			getXY(cx[0], cy[0], i, j);
+
 			x[1] = sinza * cosxy;
 			y[1] = sinza * sinxy;
 			z[1] = cosza;
+
+			getXY(cx[1], cy[1], i, j + 1);
 
 			x[2] = sinza * cosxya;
 			y[2] = sinza * sinxya;
 			z[2] = cosza;
 
+			getXY(cx[2], cy[2], i + 1, j + 1);
+
 			x[3] = sinz * cosxya;
 			y[3] = sinz * sinxya;
 			z[3] = cosz;
 
+			getXY(cx[3], cy[3], i + 1, j);
+
 			for (int k = 0; k < 4; k++)
 			{
-				cx[k] = 1.0f;
-				if (j < SPHERE_VERTICAL_COUNT * 0.25f)
-				{
-					cx[k] = 0.25f * x[k];
-				}
-				else if (j < SPHERE_VERTICAL_COUNT * 0.5f)
-				{
-					cx[k] = 0.25f * x[k] - 0.5f;
-				}
-				else if (j < SPHERE_VERTICAL_COUNT * 0.75f)
-				{
-					//cx[k] = -0.25f * x[k] + 0.5f;
-				}
-				else
-				{
-					//cx[k] = 0.25f * x[k] + 0.75f;
-				}
-
-				cy[k] = 1.0f;
-				if (i < SPHERE_HORIZONTAL_COUNT * 0.5f)
-				{
-					cy[k] = 0.5f * y[k] + 0.5f;
-				}
-				else if (i < SPHERE_HORIZONTAL_COUNT)
-				{
-					cy[k] = 0.5f * y[k] + 0.5f;
-				}				
-
-				ADJUST_DURATION_VALUE_RANGE(cx[k], 0, 1, 1);
-				ADJUST_DURATION_VALUE_RANGE(cy[k], 0, 1, 1);
-
 				glTexCoord3f(cx[k], cy[k], cz[k]);
-				glVertex3f(radius * x[k], radius * y[k], radius * z[k]);
+				glVertex3f(x[k], y[k], z[k]);
 			}
 		}
 	}
@@ -126,10 +109,21 @@ void Sphere::draw()
 {
 	CtrlModel::draw();
 
+	const sys::Volume& volume = Tool::getGLViewSize();
+	const sys::Vector& scale = getScale();
+	float scaleX = scale.x * _radius / volume.width;
+	float scaleY = scale.y * _radius / volume.height;
+	float scaleZ = scale.z * _radius / volume.deep;
+	glScalef(scaleX, scaleY, scaleZ);
+
 	glEnable(GL_TEXTURE_2D);
 	glBindTexture(GL_TEXTURE_2D, 1);
-	drawSphere(_obRadius, Tool::getGLViewSize().width / Tool::getGLViewSize().height);
+
+	drawSphere(_obRadius);
+
 	glDisable(GL_TEXTURE_2D);
+
+	Material::applyDefault();
 }
 
 void Sphere::setRadius(float radius)

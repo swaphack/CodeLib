@@ -14,23 +14,6 @@ DBRecord::~DBRecord()
 	this->clear();
 }
 
-void DBRecord::loadTable(const DBTable* table)
-{
-	if (table == nullptr)
-	{
-		return;
-	}
-
-	const std::vector<DBField*>& fields = table->getMemoryFields();
-	std::vector<DBField*>::const_iterator iter = fields.begin();
-
-	while (iter != fields.end())
-	{
-		this->addField((*iter)->getName());
-		iter++;
-	}
-}
-
 void DBRecord::loadText(const DBTable* table, const char* ptr, long& length)
 {
 	if (table == nullptr || ptr == nullptr)
@@ -90,76 +73,6 @@ void DBRecord::makeText(const DBTable* table, std::string& data)
 	}
 
 	data = std::string(writer.getData(), writer.getLength());
-}
-
-void DBRecord::addField( const char* key )
-{
-	if (key == nullptr)
-	{
-		return;
-	}
-
-	ASSERT(_fieldValues[key] == nullptr);
-
-	StreamBase* ptr = new StreamBase();
-	_fieldValues[key] = ptr;
-}
-
-void DBRecord::removeField( const char* key )
-{
-	if (key == nullptr)
-	{
-		return;
-	}
-
-	std::map<std::string, StreamBase*>::iterator iter = _fieldValues.find(key);
-	if (iter != _fieldValues.end())
-	{
-		delete iter->second;
-		_fieldValues.erase(iter);
-	}
-}
-
-const StreamBase* DBRecord::getField( const char* key ) const
-{
-	if (key == nullptr)
-	{
-		return nullptr;
-	}
-
-	std::map<std::string, StreamBase*>::const_iterator iter = _fieldValues.find(key);
-	if (iter != _fieldValues.end())
-	{
-		return iter->second;
-	}
-
-	return nullptr;
-}
-
-StreamBase* DBRecord::getField( const char* key )
-{
-	if (key == nullptr)
-	{
-		return nullptr;
-	}
-
-	std::map<std::string, StreamBase*>::iterator iter = _fieldValues.find(key);
-	if (iter != _fieldValues.end())
-	{
-		return iter->second;
-	}
-
-	return nullptr;
-}
-
-void DBRecord::clear()
-{
-	std::map<std::string, StreamBase*>::iterator iter = _fieldValues.begin();
-	if (iter != _fieldValues.end())
-	{
-		delete iter->second;
-		iter++;
-	}
 }
 
 // 获取字段的值
@@ -265,52 +178,43 @@ void DBRecord::setFieldValue(const char* key, double value)
 	this->setFieldValue<double>(key, value);
 }
 
-// 添加字段
-void DBRecord::addField(const char* key, const char* value)
+void DBRecord::removeField(const char* key)
 {
-	this->addField(key);
-	this->setFieldValue(key, value);
+	if (key == nullptr)
+	{
+		return;
+	}
+
+	std::map<std::string, StreamBase*>::iterator iter = _fieldValues.find(key);
+	if (iter != _fieldValues.end())
+	{
+		delete iter->second;
+		_fieldValues.erase(iter);
+	}
 }
 
-void DBRecord::addField(const char* key, char value)
+void DBRecord::clear()
 {
-	this->addField<char>(key, value);
-}
-void DBRecord::addField(const char* key, uchar value)
-{
-	this->addField<uchar>(key, value);
-}
-void DBRecord::addField(const char* key, short value)
-{
-	this->addField<short>(key, value);
-}
-void DBRecord::addField(const char* key, ushort value)
-{
-	this->addField<ushort>(key, value);
-}
-void DBRecord::addField(const char* key, int value)
-{
-	this->addField<int>(key, value);
-}
-void DBRecord::addField(const char* key, uint value)
-{
-	this->addField<uint>(key, value);
-}
-void DBRecord::addField(const char* key, long value)
-{
-	this->addField<long>(key, value);
-}
-void DBRecord::addField(const char* key, ulong value)
-{
-	this->addField<ulong>(key, value);
-}
-void DBRecord::addField(const char* key, float value)
-{
-	this->addField<float>(key, value);
-}
-void DBRecord::addField(const char* key, double value)
-{
-	this->addField<double>(key, value);
+	std::map<std::string, StreamBase*>::iterator iter = _fieldValues.begin();
+	if (iter != _fieldValues.end())
+	{
+		delete iter->second;
+		iter++;
+	}
 }
 
+StreamBase* DBRecord::getField(const char* key)
+{
+	if (key == nullptr)
+	{
+		return nullptr;
+	}
 
+	std::map<std::string, StreamBase*>::iterator iter = _fieldValues.find(key);
+	if (iter != _fieldValues.end())
+	{
+		return iter->second;
+	}
+
+	return nullptr;
+}

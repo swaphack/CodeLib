@@ -35,5 +35,7 @@ namespace ui
 	private:
 		// 节点属性
 		NodeProperty* _nodeProperty;
+		// 属性发生改变时的处理
+		std::map<std::string, std::function<void>(std::string, std::string) > _onChangedHandler;
 	};
 }

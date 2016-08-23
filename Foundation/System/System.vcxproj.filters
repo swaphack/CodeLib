@@ -358,6 +358,9 @@
     <ClInclude Include="Http\HttpDownload.h">
       <Filter>Http</Filter>
     </ClInclude>
+    <ClInclude Include="Net\EndPoint.h">
+      <Filter>Net</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Base\File.cpp">
@@ -515,6 +518,9 @@
     </ClCompile>
     <ClCompile Include="Http\HttpRespDocument.cpp">
       <Filter>Http</Filter>
+    </ClCompile>
+    <ClCompile Include="Net\EndPoint.cpp">
+      <Filter>Net</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

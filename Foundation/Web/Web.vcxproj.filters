@@ -10,6 +10,9 @@
     <Filter Include="DB">
       <UniqueIdentifier>{42d3416d-64dd-44de-bac8-b836d3149bd8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource">
+      <UniqueIdentifier>{d5120778-8a59-457f-8654-a62f977aa4f8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Activity\HttpActivity.cpp">
@@ -57,5 +60,16 @@
     <ClInclude Include="WebApp\WebServer.h">
       <Filter>WebApp</Filter>
     </ClInclude>
+    <ClInclude Include="DB\DataBase.h">
+      <Filter>DB</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="Resource\DB.xml">
+      <Filter>Resource</Filter>
+    </Xml>
+    <Xml Include="Resource\Server.xml">
+      <Filter>Resource</Filter>
+    </Xml>
   </ItemGroup>
 </Project>

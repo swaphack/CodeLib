@@ -29,7 +29,7 @@ void createStructStream( const DBTable* dbTable, StreamWriter& writer )
 		if ((*iter)->getType() == EFT_STRING)
 		{
 			writer.writeString("[");
-			DBHelper::getNumberString((*iter)->getLength(), value);
+			sys::BitConvert::getNumberString((*iter)->getLength(), value);
 			writer.writeString(value.c_str());
 			writer.writeString("]");
 		}

@@ -6,7 +6,7 @@ using namespace sys;
 WndRender::WndRender()
 {
 	this->init();
-	this->getCanvas()->setDimensions(render::ED_2D);
+	this->getCanvas()->setDimensions(render::ED_3D);
 }
 
 WndRender::~WndRender()
@@ -20,7 +20,9 @@ void WndRender::show()
 	Texture2D* pTexture = G_TEXTURE_CACHE->getTexture2D(imageDefine);
 	pTexture->retain();
 
-	this->testSequenceFrame();
+	//this->testCubeModel();
+
+	this->testSphereModel();
 }
 
 void WndRender::testMoveImage()
@@ -98,7 +100,7 @@ void WndRender::testCubeModel()
 	pModel->getMatrial()->setEmisiion(255, 255, 255, 255);
 	this->getCanvas()->getRoot()->addChild(pModel);
 
-	/*
+	
 	int count = 1024;
 	float interval = 5;
 	float rx = 45;
@@ -108,15 +110,14 @@ void WndRender::testCubeModel()
 	pRotateToAction->setRotation(rx * count, ry * count, rz * count);
 	pRotateToAction->setInterval(interval * count);
 	pModel->getActionProxy()->runAction(pRotateToAction);
-	*/
+	
 }
 
 void WndRender::testSphereModel()
 {
 	Sphere* pSphere = new Sphere();
 	AUTO_RELEASE_OBJECT(pSphere);
-	pSphere->setRadius(250);
-	pSphere->setPosition(512, 384, 0);
+	pSphere->setRadius(512);
 	this->getCanvas()->getRoot()->addChild(pSphere);
 
 	int count = 1024;

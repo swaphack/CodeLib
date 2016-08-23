@@ -25,7 +25,6 @@ void CtrlModel::draw()
 	{
 		_material->apply();
 	}
-	Material::applyDefault();
 }
 
 void CtrlModel::setMatrial(const Material* material)

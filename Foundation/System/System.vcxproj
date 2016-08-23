@@ -138,6 +138,7 @@
     <ClInclude Include="Net\NetData.h" />
     <ClInclude Include="Net\Server.h" />
     <ClInclude Include="Net\Socket.h" />
+    <ClInclude Include="Net\EndPoint.h" />
     <ClInclude Include="Net\SocketRecvHandler.h" />
     <ClInclude Include="Platform\import.h" />
     <ClInclude Include="Platform\macros.h" />
@@ -205,6 +206,7 @@
     <ClCompile Include="Net\DNS.cpp" />
     <ClCompile Include="Net\Server.cpp" />
     <ClCompile Include="Net\Socket.cpp" />
+    <ClCompile Include="Net\EndPoint.cpp" />
     <ClCompile Include="Platform\Windows\Console.cpp" />
     <ClCompile Include="Platform\Windows\Window.cpp" />
     <ClCompile Include="Resource\LocalResource.cpp" />

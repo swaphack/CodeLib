@@ -4,9 +4,8 @@
 using namespace db;
 
 
-DBSheet::DBSheet( DBTable* table )
+DBSheet::DBSheet( )
 {
-	_table = table;
 }
 
 DBSheet::~DBSheet()
@@ -14,73 +13,69 @@ DBSheet::~DBSheet()
 	this->clear();
 }
 
-void DBSheet::reloadStruct( DBTable* table )
-{
-
-}
-
-const DBTable* DBSheet::getTable() const
-{
-	return _table;
-}
-
-void DBSheet::addRecord( int key, DBRecord* record )
+void DBSheet::addRecord(DBRecord* record)
 {
 	if (record == nullptr)
 	{
 		return;
 	}
 
-	ASSERT(_records[key] == nullptr);
-
-	_records[key] = record;
+	_records.push_back(record);
 }
 
-void DBSheet::addRecord(DBRecord* record)
+void DBSheet::removeRecord(DBRecord* record)
 {
-	int key = DBStorage::getHashKey(getTable(), record, _records.size() + 1);
-	this->addRecord(key, record);
-}
-
-void DBSheet::removeRecord( int key )
-{
-	std::map<int, DBRecord*>::iterator iter = _records.find(key);
-	if (iter != _records.end())
+	if (record == nullptr)
 	{
-		SAFE_DELETE(iter->second);
-		_records.erase(iter);
+		return;
+	}
+
+	std::vector<DBRecord*>::iterator iter = _records.begin();
+
+	while (iter != _records.end())
+	{
+		if (*iter == record)
+		{
+			SAFE_DELETE(*iter);
+			_records.erase(iter);
+			break;
+		}
+		iter++;
 	}
 }
 
-DBRecord* DBSheet::getRecord( int key )
+void DBSheet::removeRecord(int index)
 {
-	std::map<int, DBRecord*>::iterator iter = _records.find(key);
-	if (iter != _records.end())
+	int size = _records.size();
+	if (index < 0 || index >= size)
 	{
-		return iter->second;
+		return;
 	}
 
-	return nullptr;
+	_records.erase(_records.begin() + index);
 }
 
-std::map<int, DBRecord*>::const_iterator DBSheet::beginRecord() const
+DBRecord* DBSheet::getRecord(int index)
 {
-	return _records.begin();
-}
+	int size = _records.size();
+	if (index < 0 || index >= size)
+	{
+		return nullptr;
+	}
 
-std::map<int, DBRecord*>::const_iterator DBSheet::endRecord() const
-{
-	return _records.end();
+	return _records[index];
 }
 
 void DBSheet::clear()
 {
-	std::map<int, DBRecord*>::iterator iter = _records.begin();
+	std::vector<DBRecord*>::iterator iter = _records.begin();
 	if (iter != _records.end())
 	{
-		SAFE_DELETE(iter->second);
+		SAFE_DELETE(*iter);
 		iter++;
 	}
+
+	_records.clear();
 }
 
 

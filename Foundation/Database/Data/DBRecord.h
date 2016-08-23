@@ -16,21 +16,10 @@ namespace db
 		DBRecord();
 		virtual ~DBRecord();
 	public:
-		// 加载表
-		void loadTable(const DBTable* table);
 		// 加载记录
 		void loadText(const DBTable* table, const char* ptr, long& length);
 		// 生成记录
 		void makeText(const DBTable* table, std::string& data);
-
-		// 添加一个字段
-		void addField(const char* key);
-		// 移除一个字段
-		void removeField(const char* key);
-		// 获取字段的参数
-		const StreamBase* getField(const char* key) const;
-		// 清空数据
-		void clear();
 
 		// 获取字段的值
 		void getFieldValue(const char* key, std::string& value);
@@ -58,18 +47,10 @@ namespace db
 		void setFieldValue(const char* key, float value);
 		void setFieldValue(const char* key, double value);
 
-		// 添加字段
-		void addField(const char* key, const char* value);
-		void addField(const char* key, char value);
-		void addField(const char* key, uchar value);
-		void addField(const char* key, short value);
-		void addField(const char* key, ushort value);
-		void addField(const char* key, int value);
-		void addField(const char* key, uint value);
-		void addField(const char* key, long value);
-		void addField(const char* key, ulong value);
-		void addField(const char* key, float value);
-		void addField(const char* key, double value);
+		// 移除一个字段
+		void removeField(const char* key);
+		// 清空数据
+		void clear();
 	protected:
 		StreamBase* getField(const char* key);
 	private:
@@ -105,10 +86,12 @@ namespace db
 		StreamBase* ptr = this->getField(key);
 		if (ptr == nullptr)
 		{
-			return;
+			addField(key, t);
 		}
-
-		ptr->setData((char*)&t, sizeof(t));
+		else
+		{
+			ptr->setData((char*)&t, sizeof(t));
+		}
 	}
 
 	template<typename T>

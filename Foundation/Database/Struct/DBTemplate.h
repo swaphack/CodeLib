@@ -12,12 +12,12 @@ namespace db
 		DBTemplate();
 		virtual ~DBTemplate();
 	public:
-		void add(std::string name, T t);
+		void add(std::string name, T* t);
 		void remove(std::string name);
-		T find(std::string name);
+		T* find(std::string name);
 		void clear();
 	private:
-		std::map<std::string, T> _items;
+		std::map<std::string, T*> _items;
 	};
 
 	template<typename T>
@@ -33,18 +33,14 @@ namespace db
 	}
 
 	template<typename T>
-	void DBTemplate<T>::add( std::string name, T t )
+	void DBTemplate<T>::add(std::string name, T* t)
 	{
 		if (t == nullptr)
 		{
 			return;
 		}
 
-		std::map<std::string, T>::iterator iter = _items.find(name);
-		if (iter != _items.end())
-		{
-			delete iter->second;
-		}
+		remove(name);
 
 		_items[name] = t;
 	}
@@ -52,17 +48,18 @@ namespace db
 	template<typename T>
 	void DBTemplate<T>::remove( std::string name )
 	{
-		std::map<std::string, T>::iterator iter = _items.find(name);
+		std::map<std::string, T*>::iterator iter = _items.find(name);
 		if (iter != _items.end())
 		{
 			delete iter->second;
+			_items.erase(iter);
 		}
 	}
 
 	template<typename T>
-	T DBTemplate<T>::find( std::string name )
+	T* DBTemplate<T>::find(std::string name)
 	{
-		std::map<std::string, T>::iterator iter = _items.find(name);
+		std::map<std::string, T*>::iterator iter = _items.find(name);
 		if (iter != _items.end())
 		{
 			return iter->second;
@@ -74,11 +71,10 @@ namespace db
 	template<typename T>
 	void DBTemplate<T>::clear()
 	{
-		std::map<std::string, T>::iterator iter = _items.begin();
+		std::map<std::string, T*>::iterator iter = _items.begin();
 		while (iter != _items.end())
 		{
 			delete iter->second;
-
 			iter++;
 		}
 
