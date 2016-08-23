@@ -67,6 +67,7 @@
   <ItemGroup>
     <ClInclude Include="Audio\Audio.h" />
     <ClInclude Include="Audio\Audio3D.h" />
+    <ClInclude Include="Audio\macros.h" />
     <ClInclude Include="Video\Video.h" />
   </ItemGroup>
   <ItemGroup>
