@@ -1,11 +1,31 @@
 #pragma once
 
 #include "system.h"
+#include "IDBString.h"
 
 struct sqlite3;
 
-namespace sys
+namespace web
 {
+	class SQLiteString : public IDBString
+	{
+	public:
+		SQLiteString(IDataBase* db);
+		virtual ~SQLiteString();
+	public:
+		virtual bool createDataBase(const char* name);
+
+		virtual bool deleteDataBase(const char* name);
+
+		virtual bool createTable(const char* name, const std::vector<TableMember>& members);
+
+		virtual bool deleteTable(const char* name);
+
+		virtual bool selectTable(const char* name, sys::IDataSheet* pDataSheet = nullptr);
+	private:
+		IDataBase* _db;
+	};
+
 	// mysql Êý¾Ý
 	class SQLite : public sys::IDataBase
 	{
@@ -19,7 +39,10 @@ namespace sys
 		virtual bool disconnect();
 		// Ö´ÐÐsqlÓï¾ä
 		virtual bool exec_sql(const char* sqlExpression, IDataSheet* pDataSheet = nullptr);
+
+		const IDBString* getDBString();
 	private:
 		sqlite3* _instance;
+		IDBString* _dbString;
 	};
 }

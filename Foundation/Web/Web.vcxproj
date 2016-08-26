@@ -78,6 +78,8 @@
     <ClInclude Include="Activity\import.h" />
     <ClInclude Include="Activity\HttpRecvHandler.h" />
     <ClInclude Include="DB\DataBase.h" />
+    <ClInclude Include="DB\DataMember.h" />
+    <ClInclude Include="DB\IDBString.h" />
     <ClInclude Include="DB\SQLite.h" />
     <ClInclude Include="web.h" />
     <ClInclude Include="WebApp\WebServer.h" />
@@ -87,7 +89,7 @@
     <ClInclude Include="WebApp\WebApplication.h" />
   </ItemGroup>
   <ItemGroup>
-    <Xml Include="Resource\DB.xml" />
+    <Xml Include="Resource\DBString.xml" />
     <Xml Include="Resource\Server.xml" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

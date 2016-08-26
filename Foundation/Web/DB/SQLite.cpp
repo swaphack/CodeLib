@@ -5,17 +5,56 @@
 #endif
 #include "third_party.h"
 
+using namespace web;
 using namespace sys;
 
+SQLiteString::SQLiteString(IDataBase* db)
+:_db(db)
+{
+
+}
+
+SQLiteString::~SQLiteString()
+{
+
+}
+
+bool SQLiteString::createDataBase(const char* name)
+{
+	
+}
+
+bool SQLiteString::deleteDataBase(const char* name)
+{
+	
+}
+
+bool SQLiteString::createTable(const char* name, const std::vector<TableMember>& members)
+{
+	
+}
+
+bool SQLiteString::deleteTable(const char* name)
+{
+	
+}
+
+bool SQLiteString::selectTable(const char* name, sys::IDataSheet* pDataSheet /*= nullptr*/)
+{
+	
+}
+
+//////////////////////////////////////////////////////////////////////////
 SQLite::SQLite()
 :_instance(nullptr)
+, _dbString(nullptr)
 {
 
 }
 
 SQLite::~SQLite()
 {
-
+	SAFE_DELETE(_dbString);
 }
 
 bool SQLite::connect(const char* url, const char* username /*= nullptr*/, const char* password /*= nullptr*/)
@@ -26,7 +65,14 @@ bool SQLite::connect(const char* url, const char* username /*= nullptr*/, const 
 	}
 
 	int result = sqlite3_open(url, &_instance);
-	return result == SQLITE_OK;
+	if (result == SQLITE_OK)
+	{
+		SAFE_DELETE(_dbString);
+		_dbString = new SQLiteString(this);
+		return true;
+	}
+
+	return false;
 }
 
 bool SQLite::disconnect()

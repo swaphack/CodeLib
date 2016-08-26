@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Root>
+  <SQL DB="SQLite">
+    <String ID="1" name="create_db" sql="sqlite3 %s"/>
+    <String ID="2" name="create_db" sql="sqlite3 %s"/>
+  </SQL>
+</Root>

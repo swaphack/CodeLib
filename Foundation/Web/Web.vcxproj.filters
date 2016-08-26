@@ -63,12 +63,18 @@
     <ClInclude Include="DB\DataBase.h">
       <Filter>DB</Filter>
     </ClInclude>
+    <ClInclude Include="DB\IDBString.h">
+      <Filter>DB</Filter>
+    </ClInclude>
+    <ClInclude Include="DB\DataMember.h">
+      <Filter>DB</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Xml Include="Resource\DB.xml">
+    <Xml Include="Resource\Server.xml">
       <Filter>Resource</Filter>
     </Xml>
-    <Xml Include="Resource\Server.xml">
+    <Xml Include="Resource\DBString.xml">
       <Filter>Resource</Filter>
     </Xml>
   </ItemGroup>
