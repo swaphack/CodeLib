@@ -69,7 +69,6 @@
     <ClInclude Include="instance\ePlayerProperty.h" />
     <ClInclude Include="instance\eSystem.h" />
     <ClInclude Include="instance\Field.h" />
-    <ClInclude Include="instance\IRuleItem.h" />
     <ClInclude Include="instance\Match.h" />
     <ClInclude Include="instance\Person.h" />
     <ClInclude Include="instance\Player.h" />
@@ -89,6 +88,7 @@
     <ClInclude Include="interface\ICountry.h" />
     <ClInclude Include="interface\ICup.h" />
     <ClInclude Include="interface\IField.h" />
+    <ClInclude Include="interface\IFieldSide.h" />
     <ClInclude Include="interface\IFinance.h" />
     <ClInclude Include="interface\IFormation.h" />
     <ClInclude Include="interface\Identity.h" />
@@ -106,6 +106,7 @@
     <ClInclude Include="interface\IRank.h" />
     <ClInclude Include="interface\IRole.h" />
     <ClInclude Include="interface\IRule.h" />
+    <ClInclude Include="interface\IRuleItem.h" />
     <ClInclude Include="interface\IScene.h" />
     <ClInclude Include="interface\ISchedule.h" />
     <ClInclude Include="interface\ICondition.h" />
@@ -118,7 +119,6 @@
     <ClInclude Include="interface\IWorld.h" />
     <ClInclude Include="main.h" />
     <ClInclude Include="struct\Circle.h" />
-    <ClInclude Include="struct\IFieldSide.h" />
     <ClInclude Include="struct\Line.h" />
     <ClInclude Include="struct\Parabola.h" />
     <ClInclude Include="struct\Point.h" />

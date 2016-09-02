@@ -156,9 +156,6 @@
     <ClInclude Include="interface\IContract.h">
       <Filter>interface\club</Filter>
     </ClInclude>
-    <ClInclude Include="interface\IBody.h">
-      <Filter>interface\match</Filter>
-    </ClInclude>
     <ClInclude Include="interface\IProperty.h">
       <Filter>interface\property</Filter>
     </ClInclude>
@@ -192,9 +189,6 @@
     <ClInclude Include="struct\Circle.h">
       <Filter>struct</Filter>
     </ClInclude>
-    <ClInclude Include="struct\IFieldSide.h">
-      <Filter>interface\field</Filter>
-    </ClInclude>
     <ClInclude Include="interface\IMatchPart.h">
       <Filter>interface\match</Filter>
     </ClInclude>
@@ -218,9 +212,6 @@
     </ClInclude>
     <ClInclude Include="interface\ICatchAction.h">
       <Filter>interface\movement</Filter>
-    </ClInclude>
-    <ClInclude Include="instance\IRuleItem.h">
-      <Filter>interface\rule</Filter>
     </ClInclude>
     <ClInclude Include="interface\ILineUp.h">
       <Filter>interface\match</Filter>
@@ -267,6 +258,15 @@
     </ClInclude>
     <ClInclude Include="instance\eSystem.h">
       <Filter>instance\enum</Filter>
+    </ClInclude>
+    <ClInclude Include="interface\IRuleItem.h">
+      <Filter>interface\rule</Filter>
+    </ClInclude>
+    <ClInclude Include="interface\IFieldSide.h">
+      <Filter>interface\field</Filter>
+    </ClInclude>
+    <ClInclude Include="interface\IBody.h">
+      <Filter>interface\person</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
