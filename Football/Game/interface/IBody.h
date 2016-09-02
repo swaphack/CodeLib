@@ -38,5 +38,13 @@ namespace game
 		*	是否与其他相交
 		*/
 		virtual bool intersectBody(const IBody* pBody) const = 0;
+		/**
+		*	获取位置
+		*/
+		virtual const Vector& getPosition() const = 0;
+		/**
+		*	看向某一点
+		*/
+		virtual void lookAt(const Vector& point) const = 0;
 	};
 }
