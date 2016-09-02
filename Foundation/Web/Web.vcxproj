@@ -88,10 +88,6 @@
     <ClInclude Include="WebApp\Session.h" />
     <ClInclude Include="WebApp\WebApplication.h" />
   </ItemGroup>
-  <ItemGroup>
-    <Xml Include="Resource\DBString.xml" />
-    <Xml Include="Resource\Server.xml" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

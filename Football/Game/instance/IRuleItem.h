@@ -1,0 +1,14 @@
+#pragma once
+
+namespace game
+{
+	/**
+	*	πÊ‘ÚœÓ
+	*/
+	class IRuleItem
+	{
+	public:
+		virtual ~IRuleItem() {}
+	public:
+	};
+}

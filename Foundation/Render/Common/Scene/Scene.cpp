@@ -23,12 +23,12 @@ bool Scene::init()
 	return true;
 }
 
-View* render::Scene::getView()
+View* Scene::getView()
 {
 	return _view;
 }
 
-void render::Scene::setView(View* view)
+void Scene::setView(View* view)
 {
 	_view = view;
 }

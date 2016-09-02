@@ -25,12 +25,6 @@
     <ClCompile Include="Common\DrawNode\PointNode.cpp">
       <Filter>Common\DrawNode</Filter>
     </ClCompile>
-    <ClCompile Include="Common\Shader\TexFrame.cpp">
-      <Filter>Common\Shader</Filter>
-    </ClCompile>
-    <ClCompile Include="Common\Shader\Texture.cpp">
-      <Filter>Common\Shader</Filter>
-    </ClCompile>
     <ClCompile Include="Common\View\View.cpp">
       <Filter>Common\View</Filter>
     </ClCompile>
@@ -48,9 +42,6 @@
     </ClCompile>
     <ClCompile Include="Common\Tool\GLTool.cpp">
       <Filter>Common\Tool</Filter>
-    </ClCompile>
-    <ClCompile Include="Common\Shader\TextureCache.cpp">
-      <Filter>Common\Shader</Filter>
     </ClCompile>
     <ClCompile Include="Common\Shader\Material.cpp">
       <Filter>Common\Shader</Filter>
@@ -124,9 +115,6 @@
     <ClCompile Include="Common\Touch\TouchManager.cpp">
       <Filter>Common\Touch</Filter>
     </ClCompile>
-    <ClCompile Include="Common\GL\matrix_common.cpp">
-      <Filter>Common\GL</Filter>
-    </ClCompile>
     <ClCompile Include="Common\Touch\TouchProxy.cpp">
       <Filter>Common\Touch</Filter>
     </ClCompile>
@@ -138,9 +126,6 @@
     </ClCompile>
     <ClCompile Include="Common\Control\Static\CtrlStencil.cpp">
       <Filter>Common\Control\Static</Filter>
-    </ClCompile>
-    <ClCompile Include="Common\GL\shape_commond.cpp">
-      <Filter>Common\GL</Filter>
     </ClCompile>
     <ClCompile Include="Common\Control\Static\CtrlEditBox.cpp">
       <Filter>Common\Control\Static</Filter>
@@ -172,18 +157,54 @@
     <ClCompile Include="Common\Control\Dynamic\Particle.cpp">
       <Filter>Common\Control\Dynamic</Filter>
     </ClCompile>
+    <ClCompile Include="Common\Shader\TexFrame.cpp">
+      <Filter>Common\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Shader\Texture.cpp">
+      <Filter>Common\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Shader\TextureCache.cpp">
+      <Filter>Common\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphic\Command\DrawCommander.cpp">
+      <Filter>Graphic\Command</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphic\Command\DrawCommandList.cpp">
+      <Filter>Graphic\Command</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphic\Command\GUID.cpp">
+      <Filter>Graphic\Command</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphic\Command\DrawCommand.cpp">
+      <Filter>Graphic\Command</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphic\Struct\shape_commond.cpp">
+      <Filter>Graphic\Struct</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphic\DCSample\DCColor.cpp">
+      <Filter>Graphic\DCSample</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphic\DCSample\DCVertex.cpp">
+      <Filter>Graphic\DCSample</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphic\DCSample\DCVertexPointer.cpp">
+      <Filter>Graphic\DCSample</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphic\DCSample\DCColorPointer.cpp">
+      <Filter>Graphic\DCSample</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphic\DCSample\DCNormal.cpp">
+      <Filter>Graphic\DCSample</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphic\DCSample\DCBlend.cpp">
+      <Filter>Graphic\DCSample</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Common\GL\import.h">
       <Filter>Common\GL</Filter>
     </ClInclude>
     <ClInclude Include="Common\GL\macros.h">
-      <Filter>Common\GL</Filter>
-    </ClInclude>
-    <ClInclude Include="Common\GL\texture_common.h">
-      <Filter>Common\GL</Filter>
-    </ClInclude>
-    <ClInclude Include="Common\GL\matrix_common.h">
       <Filter>Common\GL</Filter>
     </ClInclude>
     <ClInclude Include="Common\Node\import.h">
@@ -228,12 +249,6 @@
     <ClInclude Include="Common\Shader\macros.h">
       <Filter>Common\Shader</Filter>
     </ClInclude>
-    <ClInclude Include="Common\Shader\TexFrame.h">
-      <Filter>Common\Shader</Filter>
-    </ClInclude>
-    <ClInclude Include="Common\Shader\Texture.h">
-      <Filter>Common\Shader</Filter>
-    </ClInclude>
     <ClInclude Include="Common\View\View.h">
       <Filter>Common\View</Filter>
     </ClInclude>
@@ -264,9 +279,6 @@
     <ClInclude Include="Common\Tool\GLTool.h">
       <Filter>Common\Tool</Filter>
     </ClInclude>
-    <ClInclude Include="Common\Shader\TextureCache.h">
-      <Filter>Common\Shader</Filter>
-    </ClInclude>
     <ClInclude Include="Common\Shader\Material.h">
       <Filter>Common\Shader</Filter>
     </ClInclude>
@@ -274,9 +286,6 @@
       <Filter>Common\XControl</Filter>
     </ClInclude>
     <ClInclude Include="Common\GL\protocol_common.h">
-      <Filter>Common\GL</Filter>
-    </ClInclude>
-    <ClInclude Include="Common\GL\shape_commond.h">
       <Filter>Common\GL</Filter>
     </ClInclude>
     <ClInclude Include="Common\GL\enum_common.h">
@@ -472,6 +481,81 @@
     <ClInclude Include="Common\Control\Dynamic\Particle.h">
       <Filter>Common\Control\Dynamic</Filter>
     </ClInclude>
+    <ClInclude Include="Graphic\Command\macros.h">
+      <Filter>Graphic\Command</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Shader\TexFrame.h">
+      <Filter>Common\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Shader\Texture.h">
+      <Filter>Common\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Shader\TextureCache.h">
+      <Filter>Common\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphic\Command\DrawCommander.h">
+      <Filter>Graphic\Command</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphic\Command\DCTexture.h">
+      <Filter>Graphic\Command</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphic\Command\DrawCommandList.h">
+      <Filter>Graphic\Command</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphic\Command\GUID.h">
+      <Filter>Graphic\Command</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphic\Command\DCVertex.h">
+      <Filter>Graphic\Command</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphic\Command\DrawCommand.h">
+      <Filter>Graphic\Command</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphic\Command\DCSpace.h">
+      <Filter>Graphic\Command</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphic\Struct\shape_commond.h">
+      <Filter>Graphic\Struct</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphic\Struct\texture_common.h">
+      <Filter>Graphic\Struct</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphic\DCSample\DCVertex.h">
+      <Filter>Graphic\DCSample</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphic\DCSample\DCSpace.h">
+      <Filter>Graphic\DCSample</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphic\DCSample\DCTexture.h">
+      <Filter>Graphic\DCSample</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphic\DCSample\DCColor.h">
+      <Filter>Graphic\DCSample</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphic\DCSample\DCPlane.h">
+      <Filter>Graphic\DCSample</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphic\DCSample\macros.h">
+      <Filter>Graphic\DCSample</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphic\DCSample\DCPiture.h">
+      <Filter>Graphic\DCSample</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphic\DCSample\DCPitures.h">
+      <Filter>Graphic\DCSample</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphic\DCSample\DCVertexPointer.h">
+      <Filter>Graphic\DCSample</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphic\DCSample\DCColorPointer.h">
+      <Filter>Graphic\DCSample</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphic\DCSample\DCNormal.h">
+      <Filter>Graphic\DCSample</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphic\DCSample\DCBlend.h">
+      <Filter>Graphic\DCSample</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Common">
@@ -539,6 +623,18 @@
     </Filter>
     <Filter Include="Common\Keyboard">
       <UniqueIdentifier>{a6dde4f6-3baa-4bd1-ac2d-6e093a8890f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphic">
+      <UniqueIdentifier>{b0c0f800-c2ea-47bf-a1f2-f696a2daf561}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphic\Command">
+      <UniqueIdentifier>{78dae838-a77b-404b-8dcf-4fcc748483fe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphic\Struct">
+      <UniqueIdentifier>{4900d796-901c-48f3-98be-6678bd9a6220}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphic\DCSample">
+      <UniqueIdentifier>{6f7278bf-4cab-49ed-bb7b-57b0acf4fe0d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

@@ -110,22 +110,22 @@ TextureRect* Cube::getTextureRect(ModelFace face)
 {
 	switch (face)
 	{
-	case render::ECF_FRONT:
+	case ECF_FRONT:
 		return &_texCube.front;
 		break;
-	case render::ECF_BACK:
+	case ECF_BACK:
 		return &_texCube.back;
 		break;
-	case render::ECF_LEFT:
+	case ECF_LEFT:
 		return &_texCube.left;
 		break;
-	case render::ECF_RIGHT:
+	case ECF_RIGHT:
 		return &_texCube.right;
 		break;
-	case render::ECF_TOP:
+	case ECF_TOP:
 		return &_texCube.top;
 		break;
-	case render::ECF_BOTTOM:
+	case ECF_BOTTOM:
 		return &_texCube.bottom;
 		break;
 	default:

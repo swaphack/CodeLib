@@ -1,0 +1,21 @@
+#pragma once
+
+#include "macros.h"
+
+namespace render
+{
+	/**
+	*	ªÊ÷∆∂•µ„√¸¡Ó
+	*/
+	class DCVertexPointer : public DrawCommand
+	{
+	public:
+		float* Pointer;
+		int Count;
+	public:
+		DCVertexPointer();
+		virtual ~DCVertexPointer();
+	public:
+		virtual void draw();
+	};
+}

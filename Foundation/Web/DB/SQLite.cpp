@@ -11,7 +11,7 @@ using namespace sys;
 SQLiteString::SQLiteString(IDataBase* db)
 :_db(db)
 {
-
+	ASSERT(db != nullptr);
 }
 
 SQLiteString::~SQLiteString()
@@ -19,29 +19,13 @@ SQLiteString::~SQLiteString()
 
 }
 
-bool SQLiteString::createDataBase(const char* name)
+bool SQLiteString::excuteSQL(const char* sqlExpression, sys::IDataSheet* pDataSheet /*= nullptr*/)
 {
-	
-}
-
-bool SQLiteString::deleteDataBase(const char* name)
-{
-	
-}
-
-bool SQLiteString::createTable(const char* name, const std::vector<TableMember>& members)
-{
-	
-}
-
-bool SQLiteString::deleteTable(const char* name)
-{
-	
-}
-
-bool SQLiteString::selectTable(const char* name, sys::IDataSheet* pDataSheet /*= nullptr*/)
-{
-	
+	if (sqlExpression == nullptr)
+	{
+		return false;
+	}
+	return _db->executeSQL(sqlExpression, pDataSheet);
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -104,7 +88,7 @@ int onExecCallback(void* inParams, int argc, char** argv, char** colName)
 	return 0;
 }
 
-bool SQLite::exec_sql(const char* sqlExpression, IDataSheet* pDataSheet)
+bool SQLite::executeSQL(const char* sqlExpression, IDataSheet* pDataSheet)
 {
 	int result;
 	if (pDataSheet)

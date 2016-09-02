@@ -1,0 +1,292 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="interface">
+      <UniqueIdentifier>{00603919-cdd9-4718-9433-f9e2a662fddd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="struct">
+      <UniqueIdentifier>{b7a955af-fa13-431a-92dd-d2afa7056362}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="interface\match">
+      <UniqueIdentifier>{5dcc03e4-b67e-4eb4-b2f0-0d5c7456ca98}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="interface\club">
+      <UniqueIdentifier>{51f15f3d-2c43-4b67-8c9f-9567b0081549}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="interface\league">
+      <UniqueIdentifier>{8792f3ab-2dde-4b74-8c16-47932dd847bc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="instance">
+      <UniqueIdentifier>{69b92aad-3c76-4cb4-90cc-ae7ced321540}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="instance\match">
+      <UniqueIdentifier>{8d414c15-c807-4ad7-974a-264bccc19ff3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="instance\role">
+      <UniqueIdentifier>{2fcc6075-9b08-4f4a-a537-ab87ff446805}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="interface\world">
+      <UniqueIdentifier>{e79ce5b4-0220-4ee3-81c4-fcd8c6707bb5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="interface\country">
+      <UniqueIdentifier>{38f8855b-1f8b-4980-97f4-3affd136712c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="interface\person">
+      <UniqueIdentifier>{0cb5fc15-e181-450e-a83b-a465ec718092}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="interface\team">
+      <UniqueIdentifier>{c9536d9c-4787-40d6-9748-40ad530a2191}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="interface\transfer">
+      <UniqueIdentifier>{d8301763-f329-44c2-9217-ead6160c8616}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="interface\property">
+      <UniqueIdentifier>{e7906b05-4322-46dc-8d75-92a68cd17605}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="interface\movement">
+      <UniqueIdentifier>{fd6ba001-e9d8-40f8-8b4e-192b934f4bfb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="interface\honour">
+      <UniqueIdentifier>{1b254aeb-b055-4830-800a-8f0faac13a8a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="interface\field">
+      <UniqueIdentifier>{a7f49756-ecc3-4fc4-9457-45f461242701}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="interface\rule">
+      <UniqueIdentifier>{1b76b0cd-f87b-4dbf-a402-31a765f4d074}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="interface\scene">
+      <UniqueIdentifier>{5507352c-708d-4fca-a226-ac12060380bd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="interface\coach">
+      <UniqueIdentifier>{4598436b-d729-42e3-9dbb-f896426d3540}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="interface\player">
+      <UniqueIdentifier>{4326d2ca-d297-4dd6-ac55-d0984673e365}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="interface\formation">
+      <UniqueIdentifier>{d4ed35d9-c13c-4e57-8648-87c6e721ffdc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="instance\enum">
+      <UniqueIdentifier>{a22041cc-826d-4059-b3c4-3ebd5df42f16}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="instance\property">
+      <UniqueIdentifier>{d2728ada-cd6d-43a3-9c00-4b3c9a532044}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="instance\person">
+      <UniqueIdentifier>{82918123-a88c-44fa-ac48-e6c43a7584e6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="instance\world">
+      <UniqueIdentifier>{fa1476ff-a460-48dd-9241-dc48fe9d72dd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="instance\transfer">
+      <UniqueIdentifier>{1e92ed51-2a30-4428-8b75-1070e2dffc8b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="interface\condition">
+      <UniqueIdentifier>{455bcecf-7513-4a64-8661-3be116c27b00}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="interface\system">
+      <UniqueIdentifier>{3a825297-120d-4045-93f0-a99a673e7144}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="struct\Point.h">
+      <Filter>struct</Filter>
+    </ClInclude>
+    <ClInclude Include="struct\Vector.h">
+      <Filter>struct</Filter>
+    </ClInclude>
+    <ClInclude Include="struct\Parabola.h">
+      <Filter>struct</Filter>
+    </ClInclude>
+    <ClInclude Include="interface\IClub.h">
+      <Filter>interface\club</Filter>
+    </ClInclude>
+    <ClInclude Include="interface\IRole.h">
+      <Filter>interface\person</Filter>
+    </ClInclude>
+    <ClInclude Include="interface\IStadium.h">
+      <Filter>interface\club</Filter>
+    </ClInclude>
+    <ClInclude Include="interface\ILeague.h">
+      <Filter>interface\league</Filter>
+    </ClInclude>
+    <ClInclude Include="interface\ICup.h">
+      <Filter>interface\league</Filter>
+    </ClInclude>
+    <ClInclude Include="instance\Player.h">
+      <Filter>instance\role</Filter>
+    </ClInclude>
+    <ClInclude Include="instance\Match.h">
+      <Filter>instance\match</Filter>
+    </ClInclude>
+    <ClInclude Include="instance\Field.h">
+      <Filter>instance\match</Filter>
+    </ClInclude>
+    <ClInclude Include="interface\IBall.h">
+      <Filter>interface\match</Filter>
+    </ClInclude>
+    <ClInclude Include="interface\IWorld.h">
+      <Filter>interface\world</Filter>
+    </ClInclude>
+    <ClInclude Include="interface\ICountry.h">
+      <Filter>interface\country</Filter>
+    </ClInclude>
+    <ClInclude Include="interface\IPerson.h">
+      <Filter>interface\person</Filter>
+    </ClInclude>
+    <ClInclude Include="interface\IRank.h">
+      <Filter>interface\world</Filter>
+    </ClInclude>
+    <ClInclude Include="interface\ITeam.h">
+      <Filter>interface\team</Filter>
+    </ClInclude>
+    <ClInclude Include="interface\ISet.h">
+      <Filter>interface\world</Filter>
+    </ClInclude>
+    <ClInclude Include="interface\Identity.h">
+      <Filter>interface\world</Filter>
+    </ClInclude>
+    <ClInclude Include="interface\ITransferMarket.h">
+      <Filter>interface\transfer</Filter>
+    </ClInclude>
+    <ClInclude Include="interface\IFinance.h">
+      <Filter>interface\club</Filter>
+    </ClInclude>
+    <ClInclude Include="interface\IContract.h">
+      <Filter>interface\club</Filter>
+    </ClInclude>
+    <ClInclude Include="interface\IBody.h">
+      <Filter>interface\match</Filter>
+    </ClInclude>
+    <ClInclude Include="interface\IProperty.h">
+      <Filter>interface\property</Filter>
+    </ClInclude>
+    <ClInclude Include="interface\IPropertySheet.h">
+      <Filter>interface\property</Filter>
+    </ClInclude>
+    <ClInclude Include="interface\IAction.h">
+      <Filter>interface\movement</Filter>
+    </ClInclude>
+    <ClInclude Include="interface\ISchedule.h">
+      <Filter>interface\league</Filter>
+    </ClInclude>
+    <ClInclude Include="interface\IMatchDetailedList.h">
+      <Filter>interface\league</Filter>
+    </ClInclude>
+    <ClInclude Include="struct\Line.h">
+      <Filter>struct</Filter>
+    </ClInclude>
+    <ClInclude Include="struct\Rectangle.h">
+      <Filter>struct</Filter>
+    </ClInclude>
+    <ClInclude Include="interface\IField.h">
+      <Filter>interface\field</Filter>
+    </ClInclude>
+    <ClInclude Include="interface\IRule.h">
+      <Filter>interface\rule</Filter>
+    </ClInclude>
+    <ClInclude Include="interface\IScene.h">
+      <Filter>interface\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="struct\Circle.h">
+      <Filter>struct</Filter>
+    </ClInclude>
+    <ClInclude Include="struct\IFieldSide.h">
+      <Filter>interface\field</Filter>
+    </ClInclude>
+    <ClInclude Include="interface\IMatchPart.h">
+      <Filter>interface\match</Filter>
+    </ClInclude>
+    <ClInclude Include="interface\IMatch.h">
+      <Filter>interface\match</Filter>
+    </ClInclude>
+    <ClInclude Include="interface\IPassAction.h">
+      <Filter>interface\movement</Filter>
+    </ClInclude>
+    <ClInclude Include="interface\ICoach.h">
+      <Filter>interface\coach</Filter>
+    </ClInclude>
+    <ClInclude Include="interface\IFormation.h">
+      <Filter>interface\formation</Filter>
+    </ClInclude>
+    <ClInclude Include="interface\IPlayer.h">
+      <Filter>interface\player</Filter>
+    </ClInclude>
+    <ClInclude Include="interface\IGoalKeeper.h">
+      <Filter>interface\player</Filter>
+    </ClInclude>
+    <ClInclude Include="interface\ICatchAction.h">
+      <Filter>interface\movement</Filter>
+    </ClInclude>
+    <ClInclude Include="instance\IRuleItem.h">
+      <Filter>interface\rule</Filter>
+    </ClInclude>
+    <ClInclude Include="interface\ILineUp.h">
+      <Filter>interface\match</Filter>
+    </ClInclude>
+    <ClInclude Include="instance\ePlayerProperty.h">
+      <Filter>instance\enum</Filter>
+    </ClInclude>
+    <ClInclude Include="interface\eLineUp.h">
+      <Filter>instance\enum</Filter>
+    </ClInclude>
+    <ClInclude Include="instance\Property.h">
+      <Filter>instance\property</Filter>
+    </ClInclude>
+    <ClInclude Include="instance\PropertySheet.h">
+      <Filter>instance\property</Filter>
+    </ClInclude>
+    <ClInclude Include="instance\eGender.h">
+      <Filter>instance\enum</Filter>
+    </ClInclude>
+    <ClInclude Include="instance\Person.h">
+      <Filter>instance\person</Filter>
+    </ClInclude>
+    <ClInclude Include="instance\World.h">
+      <Filter>instance\world</Filter>
+    </ClInclude>
+    <ClInclude Include="instance\TransferMarket.h">
+      <Filter>instance\transfer</Filter>
+    </ClInclude>
+    <ClInclude Include="interface\ICondition.h">
+      <Filter>interface\condition</Filter>
+    </ClInclude>
+    <ClInclude Include="instance\eOperator.h">
+      <Filter>instance\enum</Filter>
+    </ClInclude>
+    <ClInclude Include="main.h" />
+    <ClInclude Include="interface\IConditionSheet.h">
+      <Filter>interface\condition</Filter>
+    </ClInclude>
+    <ClInclude Include="interface\ISystem.h">
+      <Filter>interface\system</Filter>
+    </ClInclude>
+    <ClInclude Include="interface\ISystemController.h">
+      <Filter>interface\system</Filter>
+    </ClInclude>
+    <ClInclude Include="instance\eSystem.h">
+      <Filter>instance\enum</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="instance\Field.cpp">
+      <Filter>instance\match</Filter>
+    </ClCompile>
+    <ClCompile Include="interface\Identity.cpp">
+      <Filter>interface\world</Filter>
+    </ClCompile>
+    <ClCompile Include="instance\Property.cpp">
+      <Filter>instance\property</Filter>
+    </ClCompile>
+    <ClCompile Include="instance\PropertySheet.cpp">
+      <Filter>instance\property</Filter>
+    </ClCompile>
+    <ClCompile Include="instance\Person.cpp">
+      <Filter>instance\person</Filter>
+    </ClCompile>
+    <ClCompile Include="instance\World.cpp">
+      <Filter>instance\world</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

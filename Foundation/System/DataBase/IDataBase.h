@@ -15,6 +15,6 @@ namespace sys
 		// 断开数据库连接
 		virtual bool disconnect() = 0;
 		// 执行sql语句
-		virtual bool exec_sql(const char* sqlExpression, IDataSheet* pDataSheet = nullptr) = 0;
+		virtual bool executeSQL(const char* sqlExpression, IDataSheet* pDataSheet = nullptr) = 0;
 	};
 }

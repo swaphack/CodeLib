@@ -1,0 +1,139 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{3C23CE89-68C9-4776-AD03-1F48CE28C322}</ProjectGuid>
+    <RootNamespace>Game</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup />
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="instance\eGender.h" />
+    <ClInclude Include="instance\eOperator.h" />
+    <ClInclude Include="instance\ePlayerProperty.h" />
+    <ClInclude Include="instance\eSystem.h" />
+    <ClInclude Include="instance\Field.h" />
+    <ClInclude Include="instance\IRuleItem.h" />
+    <ClInclude Include="instance\Match.h" />
+    <ClInclude Include="instance\Person.h" />
+    <ClInclude Include="instance\Player.h" />
+    <ClInclude Include="instance\Property.h" />
+    <ClInclude Include="instance\PropertySheet.h" />
+    <ClInclude Include="instance\TransferMarket.h" />
+    <ClInclude Include="instance\World.h" />
+    <ClInclude Include="interface\eLineUp.h" />
+    <ClInclude Include="interface\IAction.h" />
+    <ClInclude Include="interface\IBall.h" />
+    <ClInclude Include="interface\IBody.h" />
+    <ClInclude Include="interface\ICatchAction.h" />
+    <ClInclude Include="interface\IClub.h" />
+    <ClInclude Include="interface\ICoach.h" />
+    <ClInclude Include="interface\IConditionSheet.h" />
+    <ClInclude Include="interface\IContract.h" />
+    <ClInclude Include="interface\ICountry.h" />
+    <ClInclude Include="interface\ICup.h" />
+    <ClInclude Include="interface\IField.h" />
+    <ClInclude Include="interface\IFinance.h" />
+    <ClInclude Include="interface\IFormation.h" />
+    <ClInclude Include="interface\Identity.h" />
+    <ClInclude Include="interface\ILineUp.h" />
+    <ClInclude Include="interface\IMatch.h" />
+    <ClInclude Include="interface\IGoalKeeper.h" />
+    <ClInclude Include="interface\ILeague.h" />
+    <ClInclude Include="interface\IMatchPart.h" />
+    <ClInclude Include="interface\IMatchDetailedList.h" />
+    <ClInclude Include="interface\IPassAction.h" />
+    <ClInclude Include="interface\IPerson.h" />
+    <ClInclude Include="interface\IPlayer.h" />
+    <ClInclude Include="interface\IProperty.h" />
+    <ClInclude Include="interface\IPropertySheet.h" />
+    <ClInclude Include="interface\IRank.h" />
+    <ClInclude Include="interface\IRole.h" />
+    <ClInclude Include="interface\IRule.h" />
+    <ClInclude Include="interface\IScene.h" />
+    <ClInclude Include="interface\ISchedule.h" />
+    <ClInclude Include="interface\ICondition.h" />
+    <ClInclude Include="interface\ISet.h" />
+    <ClInclude Include="interface\IStadium.h" />
+    <ClInclude Include="interface\ISystem.h" />
+    <ClInclude Include="interface\ISystemController.h" />
+    <ClInclude Include="interface\ITeam.h" />
+    <ClInclude Include="interface\ITransferMarket.h" />
+    <ClInclude Include="interface\IWorld.h" />
+    <ClInclude Include="main.h" />
+    <ClInclude Include="struct\Circle.h" />
+    <ClInclude Include="struct\IFieldSide.h" />
+    <ClInclude Include="struct\Line.h" />
+    <ClInclude Include="struct\Parabola.h" />
+    <ClInclude Include="struct\Point.h" />
+    <ClInclude Include="struct\Rectangle.h" />
+    <ClInclude Include="struct\Vector.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="instance\Field.cpp" />
+    <ClCompile Include="instance\Person.cpp" />
+    <ClCompile Include="instance\Property.cpp" />
+    <ClCompile Include="instance\PropertySheet.cpp" />
+    <ClCompile Include="instance\World.cpp" />
+    <ClCompile Include="interface\Identity.cpp" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

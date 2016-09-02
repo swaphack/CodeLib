@@ -13,6 +13,10 @@
   <ItemGroup>
     <ClCompile Include="main.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Cube.h" />
+    <ClInclude Include="Map.h" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{CC169BAE-58A6-4D64-988F-8E33734DD741}</ProjectGuid>
     <RootNamespace>Project1</RootNamespace>

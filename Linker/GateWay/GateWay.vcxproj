@@ -26,6 +26,19 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="GateWay\GateWay.cpp" />
+    <ClCompile Include="GateWay\HttpActivityTest.cpp" />
+    <ClCompile Include="main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="GateWay\GateWay.h" />
+    <ClInclude Include="GateWay\HttpActivityTest.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="Resource\DBString.xml" />
+    <Xml Include="Resource\Server.xml" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{34926FA0-C813-4D9F-910C-E5DF52D3ABCC}</ProjectGuid>
     <RootNamespace>GateWay</RootNamespace>
@@ -133,13 +146,6 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="HttpActivityTest.cpp" />
-    <ClCompile Include="main.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="HttpActivityTest.h" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
