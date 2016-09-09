@@ -1,5 +1,7 @@
 #include "World.h"
 
+#include "TransferMarket.h"
+
 using namespace game;
 
 static World* s_world = nullptr;

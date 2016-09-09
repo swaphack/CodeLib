@@ -2,6 +2,7 @@
 
 namespace game
 {
+	class Vector;
 	/**
 	*	ÇûÌו
 	*/

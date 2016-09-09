@@ -11,12 +11,12 @@ namespace web
 	class SQLiteString : public IDBString
 	{
 	public:
-		SQLiteString(IDataBase* db);
+		SQLiteString(sys::IDataBase* db);
 		virtual ~SQLiteString();
 	public:
 		virtual bool excuteSQL(const char* sqlExpression, sys::IDataSheet* pDataSheet = nullptr);
 	private:
-		IDataBase* _db;
+		sys::IDataBase* _db;
 	};
 
 	// mysql 数据
@@ -31,7 +31,7 @@ namespace web
 		// 断开数据库连接
 		virtual bool disconnect();
 		// 执行sql语句
-		virtual bool executeSQL(const char* sqlExpression, IDataSheet* pDataSheet = nullptr);
+		virtual bool executeSQL(const char* sqlExpression, sys::IDataSheet* pDataSheet = nullptr);
 
 		const IDBString* getDBString();
 	private:

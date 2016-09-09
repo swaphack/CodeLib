@@ -10,10 +10,10 @@ namespace game
 	/**
 	*	比赛段
 	*/
-	class IMatchPart
+	class IPartMatch
 	{
 	public:
-		virtual ~IMatchPart() {}
+		virtual ~IPartMatch() {}
 	public:
 		/**
 		*	正常时间
@@ -35,5 +35,13 @@ namespace game
 		*	比赛场地
 		*/
 		virtual const IField* getField() const = 0;
+		/**
+		*	左边场地
+		*/
+		virtual IFieldSide* getLeftSide() = 0;
+		/**
+		*	右边场地
+		*/
+		virtual IFieldSide* getRightSide() = 0;
 	};
 }

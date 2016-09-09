@@ -2,6 +2,8 @@
 
 #include "Identity.h"
 
+#include <map>
+
 namespace game
 {
 	class IPlayer;
@@ -15,6 +17,11 @@ namespace game
 	class ITeam : public Identity
 	{
 	public:
+		/**
+		*	阵型分数 {阵型，分数}
+		*/
+		typedef std::map<int, int> FormationScoreMap;
+	public:
 		virtual ~ITeam() {}
 	public:
 		/**
@@ -26,16 +33,20 @@ namespace game
 		*/
 		virtual int getLeagueID() const = 0;
 		/**
-		*	获取阵型
+		*	阵型的评分
 		*/
-		virtual const IFormation* getFormation(int nID) const = 0;
+		virtual int getFormationScore(int nFormationID) = 0;
+		/**
+		*	常用的阵型列表
+		*/
+		virtual bool getFormationScoreTable(FormationScoreMap& formation) = 0;
 		/**
 		*	获取上阵信息
 		*/
 		virtual const ILineUp* getLineUp() const = 0;
 		/**
 		*	获取运动员
-		*/
+		*/ 
 		virtual const IPlayer* getPlayer(int nID) const = 0;
 		/**
 		*	添加运动员

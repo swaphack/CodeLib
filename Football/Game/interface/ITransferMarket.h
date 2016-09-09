@@ -29,13 +29,12 @@ namespace game
 		/**
 		*	查询
 		*	@param condition 搜索条件
-		*	@param targets 收索结果
+		*	@param targets 搜索结果
 		*/
 		virtual bool findPerson(const IConditionSheet* condition, std::vector<IPerson*>& targets) const = 0;
 		/**
 		*	达成协议
 		*/
 		virtual bool makeDeal(int nClubID, int nPersonID, IContract* pContract) = 0;
-		
 	};
 }

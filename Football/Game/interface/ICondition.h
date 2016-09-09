@@ -33,7 +33,7 @@ namespace game
 		/**
 		*	属性值
 		*/
-		virtual float getValue();
+		virtual float getValue() const = 0;
 	};
 
 	/**
@@ -47,10 +47,10 @@ namespace game
 		/**
 		*	属性最小值
 		*/
-		virtual float getMinValue();
+		virtual float getMinValue() const = 0;
 		/**
 		*	属性最大值
 		*/
-		virtual float getMinValue();
+		virtual float getMinValue() const = 0;
 	};
 }

@@ -9,6 +9,7 @@ void HttpActivityTest::doGet(sys::HttpRequest* request)
 
 void HttpActivityTest::doHttpGet(sys::HttpRequest* request)
 {
+
 	std::string url;
 	sys::String method = request->getDocument()->getMethod();
 	sys::String params = request->getDocument()->getUrl();

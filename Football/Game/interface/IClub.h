@@ -9,6 +9,7 @@ namespace game
 	class IPerson;
 	class ITeam;
 	class IFinance;
+	class IContract;
 
 	/**
 	*	俱乐部
@@ -28,16 +29,30 @@ namespace game
 		virtual const IFinance* getFinance() const = 0;
 		/**
 		*	雇佣
+		*	@param pPerson 员工
+		*	@param pContract 协议
 		*/
-		virtual bool hireEmployee(IPerson* pPerson) const = 0;
+		virtual bool hireEmployee(IPerson* pPerson, IContract* pContract) const = 0;
 		/**
 		*	解雇
 		*/
 		virtual bool fireEmployee(IPerson* pPerson) const = 0;
 		/**
-		*	获取员工，根据编号
+		*	根据员工编号，获取员工信息
 		*/
 		virtual const IPerson* getEmployee(int nPersonID) const = 0;
+		/**
+		*	添加一份协议
+		*/
+		virtual void addContract(IContract* pContract) = 0;
+		/**
+		*	移除一份协议
+		*/
+		virtual void removeContract(IContract* pContract) = 0;
+		/**
+		*	获取员工协议
+		*/
+		virtual const IContract* getContract(int nEmployeeID) const = 0;
 		/**
 		*	生成队伍
 		*/

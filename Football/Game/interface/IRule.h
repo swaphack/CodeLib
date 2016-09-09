@@ -7,6 +7,7 @@ namespace game
 	class IBall;
 	class IPlayer;
 	class IField;
+	class ITeam;
 	/**
 	*	比赛规则
 	*/
@@ -21,6 +22,11 @@ namespace game
 		*	@param action 触犯条例
 		*/
 		virtual bool isBreakRule(const IScene* pScene, int& nBreakRule) const = 0;
+		/**
+		*	检查上阵人数是否足够
+		*	@param ITeam 队伍
+		*/
+		virtual bool isEnoughLineUpPlayer(const ITeam* pTeam) const = 0;
 		/**
 		*	超出边线
 		*	@param pBall 球

@@ -3,7 +3,7 @@
 #include <ctime>
 #include <windows.h>
 
-#include "HttpActivityTest.h"
+#include "GateWay/HttpActivityTest.h"
 
 using namespace sys;
 using namespace web;
@@ -11,7 +11,7 @@ using namespace web;
 const char* WEB_IP = "127.0.0.1";
 int WEB_PORT = 9547;
 
-const char* WEB_SITE_URL = "F:/WebCat/sqlite-doc-3130000";
+const char* WEB_SITE_URL = "E:/website/";
 
 //#define USE_DEFAULT_WEBSITE
 

@@ -1,24 +1,23 @@
 #pragma once
 
-#include "IPerson.h"
+#include "IRole.h"
 
 namespace game
 {
 	class IPropertySheet;
-	class IRole;
 	class IFormation;
 
 	/**
 	*	教练
 	*/
-	class ICoach : public IPerson
+	class ICoach : public IRole
 	{
 	public:
 		virtual ~ICoach() {}
 	public:
 		/**
-		*	扮演角色
+		*	获取教练属性
 		*/
-		virtual const IRole* getRole() const = 0;
+		virtual const IPropertySheet* getCoachProperty() const = 0;
 	};
 }

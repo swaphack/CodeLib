@@ -10,12 +10,6 @@
     <Filter Include="interface\match">
       <UniqueIdentifier>{5dcc03e4-b67e-4eb4-b2f0-0d5c7456ca98}</UniqueIdentifier>
     </Filter>
-    <Filter Include="interface\club">
-      <UniqueIdentifier>{51f15f3d-2c43-4b67-8c9f-9567b0081549}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="interface\league">
-      <UniqueIdentifier>{8792f3ab-2dde-4b74-8c16-47932dd847bc}</UniqueIdentifier>
-    </Filter>
     <Filter Include="instance">
       <UniqueIdentifier>{69b92aad-3c76-4cb4-90cc-ae7ced321540}</UniqueIdentifier>
     </Filter>
@@ -27,48 +21,6 @@
     </Filter>
     <Filter Include="interface\world">
       <UniqueIdentifier>{e79ce5b4-0220-4ee3-81c4-fcd8c6707bb5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="interface\country">
-      <UniqueIdentifier>{38f8855b-1f8b-4980-97f4-3affd136712c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="interface\person">
-      <UniqueIdentifier>{0cb5fc15-e181-450e-a83b-a465ec718092}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="interface\team">
-      <UniqueIdentifier>{c9536d9c-4787-40d6-9748-40ad530a2191}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="interface\transfer">
-      <UniqueIdentifier>{d8301763-f329-44c2-9217-ead6160c8616}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="interface\property">
-      <UniqueIdentifier>{e7906b05-4322-46dc-8d75-92a68cd17605}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="interface\movement">
-      <UniqueIdentifier>{fd6ba001-e9d8-40f8-8b4e-192b934f4bfb}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="interface\honour">
-      <UniqueIdentifier>{1b254aeb-b055-4830-800a-8f0faac13a8a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="interface\field">
-      <UniqueIdentifier>{a7f49756-ecc3-4fc4-9457-45f461242701}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="interface\rule">
-      <UniqueIdentifier>{1b76b0cd-f87b-4dbf-a402-31a765f4d074}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="interface\scene">
-      <UniqueIdentifier>{5507352c-708d-4fca-a226-ac12060380bd}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="interface\coach">
-      <UniqueIdentifier>{4598436b-d729-42e3-9dbb-f896426d3540}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="interface\player">
-      <UniqueIdentifier>{4326d2ca-d297-4dd6-ac55-d0984673e365}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="interface\formation">
-      <UniqueIdentifier>{d4ed35d9-c13c-4e57-8648-87c6e721ffdc}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="instance\enum">
-      <UniqueIdentifier>{a22041cc-826d-4059-b3c4-3ebd5df42f16}</UniqueIdentifier>
     </Filter>
     <Filter Include="instance\property">
       <UniqueIdentifier>{d2728ada-cd6d-43a3-9c00-4b3c9a532044}</UniqueIdentifier>
@@ -82,11 +34,77 @@
     <Filter Include="instance\transfer">
       <UniqueIdentifier>{1e92ed51-2a30-4428-8b75-1070e2dffc8b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="interface\condition">
-      <UniqueIdentifier>{455bcecf-7513-4a64-8661-3be116c27b00}</UniqueIdentifier>
-    </Filter>
     <Filter Include="interface\system">
       <UniqueIdentifier>{3a825297-120d-4045-93f0-a99a673e7144}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="interface\role">
+      <UniqueIdentifier>{19c6a45a-36a7-4fb7-9941-73e5d4592ac0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="interface\role\player">
+      <UniqueIdentifier>{4326d2ca-d297-4dd6-ac55-d0984673e365}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="interface\role\coach">
+      <UniqueIdentifier>{4598436b-d729-42e3-9dbb-f896426d3540}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="interface\role\person">
+      <UniqueIdentifier>{0cb5fc15-e181-450e-a83b-a465ec718092}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="interface\role\referee">
+      <UniqueIdentifier>{84ae05b6-8bfb-482a-9230-a36a3a23cfdb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="interface\match\league">
+      <UniqueIdentifier>{8792f3ab-2dde-4b74-8c16-47932dd847bc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="interface\match\formation">
+      <UniqueIdentifier>{d4ed35d9-c13c-4e57-8648-87c6e721ffdc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="interface\match\field">
+      <UniqueIdentifier>{a7f49756-ecc3-4fc4-9457-45f461242701}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="interface\match\honour">
+      <UniqueIdentifier>{1b254aeb-b055-4830-800a-8f0faac13a8a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="interface\match\rule">
+      <UniqueIdentifier>{1b76b0cd-f87b-4dbf-a402-31a765f4d074}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="interface\match\team">
+      <UniqueIdentifier>{c9536d9c-4787-40d6-9748-40ad530a2191}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="interface\base">
+      <UniqueIdentifier>{49014dc4-d3c0-479b-8964-d00d424ad544}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="interface\match\scene">
+      <UniqueIdentifier>{5507352c-708d-4fca-a226-ac12060380bd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="interface\organization">
+      <UniqueIdentifier>{faa1ae44-3b26-46aa-b488-56aeaa6b17fb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="interface\organization\club">
+      <UniqueIdentifier>{51f15f3d-2c43-4b67-8c9f-9567b0081549}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="interface\organization\country">
+      <UniqueIdentifier>{38f8855b-1f8b-4980-97f4-3affd136712c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="interface\organization\transfer">
+      <UniqueIdentifier>{d8301763-f329-44c2-9217-ead6160c8616}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="interface\match\action">
+      <UniqueIdentifier>{fd6ba001-e9d8-40f8-8b4e-192b934f4bfb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="interface\match\tactics">
+      <UniqueIdentifier>{bd5daba4-60be-41d7-a8c0-1875b6be4e37}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="enum">
+      <UniqueIdentifier>{a22041cc-826d-4059-b3c4-3ebd5df42f16}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="constant">
+      <UniqueIdentifier>{e5f54f0e-bdd0-4876-9b43-849d6940ded3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="interface\finance">
+      <UniqueIdentifier>{1696d935-8763-40c8-be03-6054f1fd586f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="interface\match\mind">
+      <UniqueIdentifier>{9d95d91c-f84d-498b-94a6-be7ce2e27c91}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -100,19 +118,19 @@
       <Filter>struct</Filter>
     </ClInclude>
     <ClInclude Include="interface\IClub.h">
-      <Filter>interface\club</Filter>
+      <Filter>interface\organization\club</Filter>
     </ClInclude>
     <ClInclude Include="interface\IRole.h">
-      <Filter>interface\person</Filter>
+      <Filter>interface\role\person</Filter>
     </ClInclude>
     <ClInclude Include="interface\IStadium.h">
-      <Filter>interface\club</Filter>
+      <Filter>interface\organization\club</Filter>
     </ClInclude>
     <ClInclude Include="interface\ILeague.h">
-      <Filter>interface\league</Filter>
+      <Filter>interface\match\league</Filter>
     </ClInclude>
     <ClInclude Include="interface\ICup.h">
-      <Filter>interface\league</Filter>
+      <Filter>interface\match\league</Filter>
     </ClInclude>
     <ClInclude Include="instance\Player.h">
       <Filter>instance\role</Filter>
@@ -123,53 +141,38 @@
     <ClInclude Include="instance\Field.h">
       <Filter>instance\match</Filter>
     </ClInclude>
-    <ClInclude Include="interface\IBall.h">
-      <Filter>interface\match</Filter>
-    </ClInclude>
     <ClInclude Include="interface\IWorld.h">
       <Filter>interface\world</Filter>
     </ClInclude>
     <ClInclude Include="interface\ICountry.h">
-      <Filter>interface\country</Filter>
+      <Filter>interface\organization\country</Filter>
     </ClInclude>
     <ClInclude Include="interface\IPerson.h">
-      <Filter>interface\person</Filter>
+      <Filter>interface\role\person</Filter>
     </ClInclude>
     <ClInclude Include="interface\IRank.h">
       <Filter>interface\world</Filter>
     </ClInclude>
     <ClInclude Include="interface\ITeam.h">
-      <Filter>interface\team</Filter>
+      <Filter>interface\match\team</Filter>
     </ClInclude>
     <ClInclude Include="interface\ISet.h">
       <Filter>interface\world</Filter>
     </ClInclude>
-    <ClInclude Include="interface\Identity.h">
-      <Filter>interface\world</Filter>
-    </ClInclude>
     <ClInclude Include="interface\ITransferMarket.h">
-      <Filter>interface\transfer</Filter>
-    </ClInclude>
-    <ClInclude Include="interface\IFinance.h">
-      <Filter>interface\club</Filter>
+      <Filter>interface\organization\transfer</Filter>
     </ClInclude>
     <ClInclude Include="interface\IContract.h">
-      <Filter>interface\club</Filter>
-    </ClInclude>
-    <ClInclude Include="interface\IProperty.h">
-      <Filter>interface\property</Filter>
-    </ClInclude>
-    <ClInclude Include="interface\IPropertySheet.h">
-      <Filter>interface\property</Filter>
+      <Filter>interface\organization\club</Filter>
     </ClInclude>
     <ClInclude Include="interface\IAction.h">
-      <Filter>interface\movement</Filter>
+      <Filter>interface\match\action</Filter>
     </ClInclude>
     <ClInclude Include="interface\ISchedule.h">
-      <Filter>interface\league</Filter>
+      <Filter>interface\match\league</Filter>
     </ClInclude>
     <ClInclude Include="interface\IMatchDetailedList.h">
-      <Filter>interface\league</Filter>
+      <Filter>interface\match\league</Filter>
     </ClInclude>
     <ClInclude Include="struct\Line.h">
       <Filter>struct</Filter>
@@ -178,58 +181,31 @@
       <Filter>struct</Filter>
     </ClInclude>
     <ClInclude Include="interface\IField.h">
-      <Filter>interface\field</Filter>
+      <Filter>interface\match\field</Filter>
     </ClInclude>
     <ClInclude Include="interface\IRule.h">
-      <Filter>interface\rule</Filter>
+      <Filter>interface\match\rule</Filter>
     </ClInclude>
     <ClInclude Include="interface\IScene.h">
-      <Filter>interface\scene</Filter>
+      <Filter>interface\match\scene</Filter>
     </ClInclude>
     <ClInclude Include="struct\Circle.h">
       <Filter>struct</Filter>
     </ClInclude>
-    <ClInclude Include="interface\IMatchPart.h">
-      <Filter>interface\match</Filter>
-    </ClInclude>
-    <ClInclude Include="interface\IMatch.h">
-      <Filter>interface\match</Filter>
-    </ClInclude>
-    <ClInclude Include="interface\IPassAction.h">
-      <Filter>interface\movement</Filter>
-    </ClInclude>
     <ClInclude Include="interface\ICoach.h">
-      <Filter>interface\coach</Filter>
+      <Filter>interface\role\coach</Filter>
     </ClInclude>
     <ClInclude Include="interface\IFormation.h">
-      <Filter>interface\formation</Filter>
+      <Filter>interface\match\formation</Filter>
     </ClInclude>
     <ClInclude Include="interface\IPlayer.h">
-      <Filter>interface\player</Filter>
-    </ClInclude>
-    <ClInclude Include="interface\IGoalKeeper.h">
-      <Filter>interface\player</Filter>
-    </ClInclude>
-    <ClInclude Include="interface\ICatchAction.h">
-      <Filter>interface\movement</Filter>
-    </ClInclude>
-    <ClInclude Include="interface\ILineUp.h">
-      <Filter>interface\match</Filter>
-    </ClInclude>
-    <ClInclude Include="instance\ePlayerProperty.h">
-      <Filter>instance\enum</Filter>
-    </ClInclude>
-    <ClInclude Include="interface\eLineUp.h">
-      <Filter>instance\enum</Filter>
+      <Filter>interface\role\player</Filter>
     </ClInclude>
     <ClInclude Include="instance\Property.h">
       <Filter>instance\property</Filter>
     </ClInclude>
     <ClInclude Include="instance\PropertySheet.h">
       <Filter>instance\property</Filter>
-    </ClInclude>
-    <ClInclude Include="instance\eGender.h">
-      <Filter>instance\enum</Filter>
     </ClInclude>
     <ClInclude Include="instance\Person.h">
       <Filter>instance\person</Filter>
@@ -240,41 +216,128 @@
     <ClInclude Include="instance\TransferMarket.h">
       <Filter>instance\transfer</Filter>
     </ClInclude>
-    <ClInclude Include="interface\ICondition.h">
-      <Filter>interface\condition</Filter>
-    </ClInclude>
-    <ClInclude Include="instance\eOperator.h">
-      <Filter>instance\enum</Filter>
-    </ClInclude>
     <ClInclude Include="main.h" />
-    <ClInclude Include="interface\IConditionSheet.h">
-      <Filter>interface\condition</Filter>
-    </ClInclude>
     <ClInclude Include="interface\ISystem.h">
       <Filter>interface\system</Filter>
     </ClInclude>
     <ClInclude Include="interface\ISystemController.h">
       <Filter>interface\system</Filter>
     </ClInclude>
-    <ClInclude Include="instance\eSystem.h">
-      <Filter>instance\enum</Filter>
-    </ClInclude>
     <ClInclude Include="interface\IRuleItem.h">
-      <Filter>interface\rule</Filter>
-    </ClInclude>
-    <ClInclude Include="interface\IFieldSide.h">
-      <Filter>interface\field</Filter>
+      <Filter>interface\match\rule</Filter>
     </ClInclude>
     <ClInclude Include="interface\IBody.h">
-      <Filter>interface\person</Filter>
+      <Filter>interface\role\person</Filter>
+    </ClInclude>
+    <ClInclude Include="interface\IActionWithBall.h">
+      <Filter>interface\match\action</Filter>
+    </ClInclude>
+    <ClInclude Include="interface\IReferee.h">
+      <Filter>interface\role\referee</Filter>
+    </ClInclude>
+    <ClInclude Include="interface\IMainReferee.h">
+      <Filter>interface\role\referee</Filter>
+    </ClInclude>
+    <ClInclude Include="interface\IAssistantReferee.h">
+      <Filter>interface\role\referee</Filter>
+    </ClInclude>
+    <ClInclude Include="interface\IMind.h">
+      <Filter>interface\match\mind</Filter>
+    </ClInclude>
+    <ClInclude Include="interface\Identity.h">
+      <Filter>interface\base</Filter>
+    </ClInclude>
+    <ClInclude Include="interface\IPropertySheet.h">
+      <Filter>interface\base</Filter>
+    </ClInclude>
+    <ClInclude Include="interface\IProperty.h">
+      <Filter>interface\base</Filter>
+    </ClInclude>
+    <ClInclude Include="interface\ICondition.h">
+      <Filter>interface\base</Filter>
+    </ClInclude>
+    <ClInclude Include="interface\IConditionSheet.h">
+      <Filter>interface\base</Filter>
+    </ClInclude>
+    <ClInclude Include="interface\IActionWithOutBall.h">
+      <Filter>interface\match\action</Filter>
+    </ClInclude>
+    <ClInclude Include="interface\ITimer.h">
+      <Filter>interface\base</Filter>
+    </ClInclude>
+    <ClInclude Include="interface\ITactics.h">
+      <Filter>interface\match\tactics</Filter>
+    </ClInclude>
+    <ClInclude Include="enum\eSystem.h">
+      <Filter>enum</Filter>
+    </ClInclude>
+    <ClInclude Include="enum\eGender.h">
+      <Filter>enum</Filter>
+    </ClInclude>
+    <ClInclude Include="enum\eOperator.h">
+      <Filter>enum</Filter>
+    </ClInclude>
+    <ClInclude Include="instance\ILevel.h">
+      <Filter>interface\base</Filter>
+    </ClInclude>
+    <ClInclude Include="interface\IRuleAction.h">
+      <Filter>interface\match\rule</Filter>
+    </ClInclude>
+    <ClInclude Include="constant\Constants.h">
+      <Filter>constant</Filter>
+    </ClInclude>
+    <ClInclude Include="struct\Interval.h">
+      <Filter>struct</Filter>
+    </ClInclude>
+    <ClInclude Include="struct\Size.h">
+      <Filter>struct</Filter>
+    </ClInclude>
+    <ClInclude Include="interface\ILineUp.h">
+      <Filter>interface\match\team</Filter>
+    </ClInclude>
+    <ClInclude Include="enum\ePosition.h">
+      <Filter>enum</Filter>
+    </ClInclude>
+    <ClInclude Include="interface\IPlayerMark.h">
+      <Filter>interface\role\player</Filter>
+    </ClInclude>
+    <ClInclude Include="enum\ePlayStyle.h">
+      <Filter>enum</Filter>
+    </ClInclude>
+    <ClInclude Include="interface\IFinance.h">
+      <Filter>interface\finance</Filter>
+    </ClInclude>
+    <ClInclude Include="interface\IBill.h">
+      <Filter>interface\finance</Filter>
+    </ClInclude>
+    <ClInclude Include="enum\eProperty.h">
+      <Filter>enum</Filter>
+    </ClInclude>
+    <ClInclude Include="interface\eSearchCondition.h">
+      <Filter>enum</Filter>
+    </ClInclude>
+    <ClInclude Include="interface\IPartMatch.h">
+      <Filter>interface\match\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="interface\IFullMatch.h">
+      <Filter>interface\match\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="interface\IFieldSide.h">
+      <Filter>interface\match\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="interface\IBall.h">
+      <Filter>interface\match\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="interface\ICommand.h">
+      <Filter>interface\match\mind</Filter>
+    </ClInclude>
+    <ClInclude Include="interface\IActionManger.h">
+      <Filter>interface\match\action</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="instance\Field.cpp">
       <Filter>instance\match</Filter>
-    </ClCompile>
-    <ClCompile Include="interface\Identity.cpp">
-      <Filter>interface\world</Filter>
     </ClCompile>
     <ClCompile Include="instance\Property.cpp">
       <Filter>instance\property</Filter>
@@ -287,6 +350,12 @@
     </ClCompile>
     <ClCompile Include="instance\World.cpp">
       <Filter>instance\world</Filter>
+    </ClCompile>
+    <ClCompile Include="interface\Identity.cpp">
+      <Filter>interface\base</Filter>
+    </ClCompile>
+    <ClCompile Include="constant\Constants.cpp">
+      <Filter>constant</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

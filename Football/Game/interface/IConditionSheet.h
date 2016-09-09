@@ -7,7 +7,7 @@ namespace game
 	class ICondition;
 
 	/**
-	*	条件比较
+	*	条件栏
 	*/
 	class IConditionSheet
 	{

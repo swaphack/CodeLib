@@ -15,7 +15,7 @@ namespace game
 		/**
 		*	是否开始
 		*/
-		virtual bool isBegan() const = 0;
+		virtual bool isStarted() const = 0;
 		/**
 		*	是否运行
 		*/
@@ -27,11 +27,11 @@ namespace game
 		/**
 		*	是否结束
 		*/
-		virtual bool isEnded() const = 0;
+		virtual bool isFinished() const = 0;
 		/**
 		*	开始
 		*/
-		virtual bool start() = 0;
+		virtual bool begin() = 0;
 		/**
 		*	暂停
 		*/
@@ -43,7 +43,7 @@ namespace game
 		/**
 		*	结束
 		*/
-		virtual bool finish() = 0;
+		virtual bool end() = 0;
 		/**
 		*	更新
 		*/

@@ -10,7 +10,7 @@ namespace game
 	class ITeam;
 
 	/**
-	*	比赛场面（左右之分）
+	*	左右两只队伍所在场地
 	*/
 	class IFieldSide
 	{
@@ -20,7 +20,7 @@ namespace game
 		/**
 		*	所属队伍
 		*/
-		virtual int getTeamID() const = 0;
+		virtual const ITeam* getTeam() const = 0;
 		/**
 		*	底线
 		*/
@@ -52,14 +52,14 @@ namespace game
 		/**
 		*	左边线
 		*/
-		virtual Line getLeftByLine() = 0;
+		virtual const Line& getLeftByLine() const = 0;
 		/**
 		*	右边线
 		*/
-		virtual Line getRightByLine() = 0;
+		virtual const Line& getRightByLine() const = 0;
 		/**
 		*	中线
 		*/
-		virtual Line getHalfWayLine() = 0;
+		virtual const Line& getHalfWayLine() const = 0;
 	};
 }

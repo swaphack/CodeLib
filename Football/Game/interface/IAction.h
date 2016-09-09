@@ -1,14 +1,17 @@
 #pragma once
 
+#include "ITimer.h"
+
 namespace game
 {
+	class IPerson;
 	class IPlayer;
 	class IBall;
 
 	/**
 	*	比赛动作
 	*/
-	class IAction
+	class IAction : public ITimer
 	{
 	public:
 		virtual ~IAction() {}
@@ -16,39 +19,36 @@ namespace game
 		/**
 		*	发起者
 		*/
-		virtual const IPlayer* getPlayer() const = 0;
+		virtual const IPerson* getInitiator() const = 0;
+		/**
+		*	执行动作
+		*/
+		virtual void run() = 0;
+		/**
+		*	是否结束
+		*/
+		virtual bool isFinish() = 0;
+	};
+
+	/**
+	*	球员比赛动作
+	*/
+	class IPlayerAction : public ITimer
+	{
+	public:
+		virtual ~IPlayerAction() {}
+	public:
 		/**
 		*	发起者
 		*/
 		virtual const IPlayer* getPlayer() const = 0;
 		/**
-		*	触犯规则
+		*	执行动作
 		*/
-		virtual int getBreakRuleID() const = 0;
-	};
-
-	/**
-	*	有球动作
-	*/
-	class IActionWithBall : public IAction
-	{
-	public:
-		virtual ~IActionWithBall() {}
-	public:
+		virtual void run() = 0;
 		/**
-		*	球
+		*	是否结束
 		*/
-		virtual const IBall* getBall() const = 0;
-	};
-
-	/**
-	*	无球动作
-	*/
-	class IActionWithOutBall : public IAction
-	{
-	public:
-		virtual ~IActionWithOutBall() {}
-	public:
-		
+		virtual bool isFinish() = 0;
 	};
 }

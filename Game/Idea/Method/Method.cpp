@@ -58,6 +58,7 @@ Result* Method::run(Event* e)
 	stepEvent->setMessage(e->getMessage());
 	Result* result;
 
+	// ´®ĞĞ´¦Àí
 	std::vector<Step*>::iterator iter = _steps.begin();
 	while (iter != _steps.end())
 	{

@@ -26,15 +26,7 @@ namespace game
 		*/
 		virtual int getCountryID() const = 0;
 		/**
-		*	所属俱乐部
-		*/
-		virtual int getClubID() const = 0;
-		/**
-		*	所属队伍
-		*/
-		virtual int getTeamID() const = 0;
-		/**
-		*	获取属性
+		*	获取基础属性
 		*/
 		virtual const IPropertySheet* getProperty() const = 0;
 	};

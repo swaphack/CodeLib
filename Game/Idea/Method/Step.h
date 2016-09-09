@@ -12,7 +12,5 @@ namespace idea
 		virtual ~Step();
 	public:
 		virtual Result* run(Event* e);
-	protected:
-	private:
 	};
 }

@@ -100,14 +100,5 @@ namespace game
 		*	右球门线
 		*/
 		virtual Line getRightGoalLine() = 0;
-
-		/**
-		*	左边场地
-		*/
-		virtual IFieldSide* getLeftSide() = 0;
-		/**
-		*	右边场地
-		*/
-		virtual IFieldSide* getRightSide() = 0;
 	};
 }
