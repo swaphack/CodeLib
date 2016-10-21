@@ -20,6 +20,6 @@ void DCColorPointer::draw()
 	if (Pointer)
 	{
 		glColorPointer(4, GL_BYTE, 0, Pointer);
-		glDrawArrays()
+		glDrawArrays(GL_TRIANGLE_STRIP, 0, Count);
 	}
 }

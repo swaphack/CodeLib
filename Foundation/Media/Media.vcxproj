@@ -70,9 +70,6 @@
     <ClInclude Include="Audio\macros.h" />
     <ClInclude Include="Video\Video.h" />
   </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="Audio\1.cpp" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

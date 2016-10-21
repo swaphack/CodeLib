@@ -9,22 +9,21 @@ using namespace web;
 
 HttpActivity::HttpActivity()
 {
-	G_HTTPAPPLICATION->addRecvHandler(this, static_cast<HTTP_RECV_HANDLER>(&HttpActivity::onReceiveRequest));
+	G_HTTPAPPLICATION->getHttpListener()->addRecvHandler(this, static_cast<HTTP_RECV_HANDLER>(&HttpActivity::onReceiveRequest));
 }
 
 HttpActivity::~HttpActivity()
 {
-	G_HTTPAPPLICATION->removeRecvHandler(this, static_cast<HTTP_RECV_HANDLER>(&HttpActivity::onReceiveRequest));
+	G_HTTPAPPLICATION->getHttpListener()->removeRecvHandler(this, static_cast<HTTP_RECV_HANDLER>(&HttpActivity::onReceiveRequest));
 }
 
 void HttpActivity::onReceiveRequest(const char* sessionID, sys::HttpRequest* request)
 {
-	_sessionID = sessionID;
-
-	if (request == nullptr)
+	if (sessionID == nullptr || request == nullptr)
 	{
 		return;
 	}
+	_sessionID = sessionID;
 
 	this->doGet(request);
 }
@@ -62,11 +61,11 @@ void HttpActivity::doBroadCast(sys::HttpResponse* response)
 void HttpActivity::sendResponse(const char* sessionID, sys::HttpResponse* response)
 {
 	response->setSessionID(sessionID);
-	G_HTTPAPPLICATION->postResponse(response);
+	G_HTTPAPPLICATION->postResponse(sessionID, new sys::NetData(response->getMessage(), response->getMessageSize()));
 }
 
 void HttpActivity::sendBroadcast(const char* sessionID, sys::HttpResponse* response)
 {
 	response->setSessionID(sessionID);
-	G_HTTPAPPLICATION->postBroadcast(response);
+	G_HTTPAPPLICATION->postBroadcast(new sys::NetData(response->getMessage(), response->getMessageSize()));
 }

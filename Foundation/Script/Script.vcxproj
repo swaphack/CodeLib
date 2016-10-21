@@ -10,6 +10,40 @@
       <Platform>Win32</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Core\Base.h" />
+    <ClInclude Include="Core\common.h" />
+    <ClInclude Include="Core\Variables.h" />
+    <ClInclude Include="Core\Console.h" />
+    <ClInclude Include="Core\Function.h" />
+    <ClInclude Include="Core\import.h" />
+    <ClInclude Include="Core\Memory.h" />
+    <ClInclude Include="Core\Message.h" />
+    <ClInclude Include="Core\Scope.h" />
+    <ClInclude Include="Core\Struct.h" />
+    <ClInclude Include="Core\Tip.h" />
+    <ClInclude Include="Core\Variable.h" />
+    <ClInclude Include="Document\Command.h" />
+    <ClInclude Include="Document\Document.h" />
+    <ClInclude Include="Document\Expression.h" />
+    <ClInclude Include="Env\Define.h" />
+    <ClInclude Include="Env\Environment.h" />
+    <ClInclude Include="Env\FilePath.h" />
+    <ClInclude Include="Env\KeyWord.h" />
+    <ClInclude Include="Env\Module.h" />
+    <ClInclude Include="Script.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Core\Base.cpp" />
+    <ClCompile Include="Core\Variables.cpp" />
+    <ClCompile Include="Core\Console.cpp" />
+    <ClCompile Include="Core\Message.cpp" />
+    <ClCompile Include="Core\Scope.cpp" />
+    <ClCompile Include="Core\Struct.cpp" />
+    <ClCompile Include="Core\Variable.cpp" />
+    <ClCompile Include="Document\Expression.cpp" />
+    <ClCompile Include="Env\Environment.cpp" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{1F21A8AB-293F-4932-BA27-184C94FA4DCD}</ProjectGuid>
     <RootNamespace>Script</RootNamespace>

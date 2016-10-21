@@ -67,20 +67,29 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Activity\HttpActivity.cpp" />
     <ClCompile Include="DB\SQLite.cpp" />
+    <ClCompile Include="Http\HttpActivity.cpp" />
+    <ClCompile Include="Http\HttpActivityListener.cpp" />
+    <ClCompile Include="Packet\PacketActivity.cpp" />
+    <ClCompile Include="Packet\PacketActivityListener.cpp" />
     <ClCompile Include="WebApp\WebServer.cpp" />
     <ClCompile Include="WebApp\Session.cpp" />
     <ClCompile Include="WebApp\WebApplication.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Activity\HttpActivity.h" />
-    <ClInclude Include="Activity\import.h" />
-    <ClInclude Include="Activity\HttpRecvHandler.h" />
     <ClInclude Include="DB\DataBase.h" />
     <ClInclude Include="DB\DataMember.h" />
     <ClInclude Include="DB\IDBString.h" />
     <ClInclude Include="DB\SQLite.h" />
+    <ClInclude Include="Http\HttpActivity.h" />
+    <ClInclude Include="Http\HttpActivityListener.h" />
+    <ClInclude Include="Http\HttpRecvHandler.h" />
+    <ClInclude Include="Http\import.h" />
+    <ClInclude Include="IActivityListener.h" />
+    <ClInclude Include="Packet\import.h" />
+    <ClInclude Include="Packet\PacketActivity.h" />
+    <ClInclude Include="Packet\PacketActivityListener.h" />
+    <ClInclude Include="Packet\PacketRecvHandler.h" />
     <ClInclude Include="web.h" />
     <ClInclude Include="WebApp\WebServer.h" />
     <ClInclude Include="WebApp\import.h" />

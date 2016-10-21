@@ -2,17 +2,17 @@
 
 using namespace web;
 
-Session::Session()
+Sessions::Sessions()
 {
 
 }
 
-Session::~Session()
+Sessions::~Sessions()
 {
 	this->removeAllHtppClients();
 }
 
-void Session::addHttpClient(const char* sessionID, const HttpClient& client)
+void Sessions::addHttpClient(const char* sessionID, const ClientSession& client)
 {
 	if (sessionID == nullptr)
 	{
@@ -22,14 +22,14 @@ void Session::addHttpClient(const char* sessionID, const HttpClient& client)
 	_httpClients[sessionID] = client;
 }
 
-HttpClient* Session::getHttpClient(const char* sessionID)
+ClientSession* Sessions::getHttpClient(const char* sessionID)
 {
 	if (sessionID == nullptr)
 	{
 		return nullptr;
 	}
 
-	std::map<std::string, HttpClient>::iterator it = _httpClients.find(sessionID);
+	std::map<std::string, ClientSession>::iterator it = _httpClients.find(sessionID);
 	if (it == _httpClients.end())
 	{
 		return nullptr;
@@ -38,7 +38,7 @@ HttpClient* Session::getHttpClient(const char* sessionID)
 	return &it->second;
 }
 
-void Session::removeHttpClient(const char* sessionID)
+void Sessions::removeHttpClient(const char* sessionID)
 {
 	if (sessionID == nullptr)
 	{
@@ -48,7 +48,7 @@ void Session::removeHttpClient(const char* sessionID)
 	_httpClients.erase(sessionID);
 }
 
-void Session::removeAllHtppClients()
+void Sessions::removeAllHtppClients()
 {
 	_httpClients.clear();
 }

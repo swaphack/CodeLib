@@ -4,7 +4,7 @@
 
 namespace render
 {
-	// 默认逆时针绘制
+	// 帧图片，默认逆时针绘制
 	class CtrlFrame : public ColorNode
 	{
 	public:

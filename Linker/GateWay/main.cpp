@@ -4,11 +4,12 @@
 #include <windows.h>
 
 #include "GateWay/HttpActivityTest.h"
+#include "GateWay/PacketActivityTest.h"
 
 using namespace sys;
 using namespace web;
 
-const char* WEB_IP = "127.0.0.1";
+const char* WEB_IP = "10.0.22.63";
 int WEB_PORT = 9547;
 
 const char* WEB_SITE_URL = "E:/website/";
@@ -27,7 +28,9 @@ int main(int argc, char** argv)
 
 	WebApplication* web = new WebApplication(WEB_IP, WEB_PORT, 10000);
 	web->getResourceMgr()->getResource(ERT_LOCAL)->setUrl(websit.c_str());
+
 	new HttpActivityTest();
+	new PacketActivityTest();
 
 	while (true)
 	{

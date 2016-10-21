@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<root Describe="协议">
+	<Protocol Name="ReqPacket_Login" ProtocolID="100" Describe="登录请求">
+		<Param Name="Name" Type="String" Length="15" Describe="用户名"/>
+		<Param Name="Password" Type="String" Length="20" Describe="密码"/>
+	</Protocol>
+	<Protocol Name="RespPacket_PlayerInfo" ProtocolID="100" Describe="返回玩家信息">
+	<Param Name="PlayerID" Type="int" Describe="玩家名称"/>
+		<Param Name="Level" Type="int" Describe="玩家等级"/>
+		<Param Name="Experience" Type="int" Describe="玩家经验"/>
+	</Protocol>
+</root>
+
+
+<!--
+	Name 名称
+	ProtocolID 协议号
+	Type 类型 Request-请求 Response-反馈
+	Describe 描述
+
+	Field 字段
+	Type 字段类型
+	Length 字段长度 数组类型有用
+	Describe 描述
+-->

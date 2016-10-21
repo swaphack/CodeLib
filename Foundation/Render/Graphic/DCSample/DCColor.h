@@ -7,7 +7,7 @@ namespace render
 	class DCColor : public DrawCommand
 	{
 	public:
-		sys::Color4B* Color;
+		sys::Color4B Color;
 	public:
 		DCColor();
 		virtual ~DCColor();

@@ -10,8 +10,8 @@ namespace render
 	class DCSpace : public DrawCommand
 	{
 	public:
-		sys::Vector* Point;
-		sys::Vector* Scale;
+		sys::Vector Point;
+		sys::Vector Scale;
 	public:
 		DCSpace();
 		virtual ~DCSpace();

@@ -1,9 +1,9 @@
 #pragma once
 
 
-// #ifndef USE_OPENGL
-// #define USE_OPENGL
-// #endif
+#ifndef USE_OPENGL
+#define USE_OPENGL
+#endif
 
 #ifndef USE_PNG
 #define USE_PNG

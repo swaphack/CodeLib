@@ -17,6 +17,4 @@ GateWay::~GateWay()
 void GateWay::init()
 {
 	WebApplication::init();
-
-	
 }

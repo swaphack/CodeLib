@@ -182,22 +182,22 @@
       <Filter>Graphic\Struct</Filter>
     </ClCompile>
     <ClCompile Include="Graphic\DCSample\DCColor.cpp">
-      <Filter>Graphic\DCSample</Filter>
-    </ClCompile>
-    <ClCompile Include="Graphic\DCSample\DCVertex.cpp">
-      <Filter>Graphic\DCSample</Filter>
-    </ClCompile>
-    <ClCompile Include="Graphic\DCSample\DCVertexPointer.cpp">
-      <Filter>Graphic\DCSample</Filter>
+      <Filter>Graphic\DCSample\Base</Filter>
     </ClCompile>
     <ClCompile Include="Graphic\DCSample\DCColorPointer.cpp">
-      <Filter>Graphic\DCSample</Filter>
+      <Filter>Graphic\DCSample\Pointer</Filter>
     </ClCompile>
     <ClCompile Include="Graphic\DCSample\DCNormal.cpp">
-      <Filter>Graphic\DCSample</Filter>
+      <Filter>Graphic\DCSample\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphic\DCSample\DCVertex.cpp">
+      <Filter>Graphic\DCSample\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphic\DCSample\DCVertexPointer.cpp">
+      <Filter>Graphic\DCSample\Pointer</Filter>
     </ClCompile>
     <ClCompile Include="Graphic\DCSample\DCBlend.cpp">
-      <Filter>Graphic\DCSample</Filter>
+      <Filter>Graphic\DCSample\Base</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -496,22 +496,13 @@
     <ClInclude Include="Graphic\Command\DrawCommander.h">
       <Filter>Graphic\Command</Filter>
     </ClInclude>
-    <ClInclude Include="Graphic\Command\DCTexture.h">
-      <Filter>Graphic\Command</Filter>
-    </ClInclude>
     <ClInclude Include="Graphic\Command\DrawCommandList.h">
       <Filter>Graphic\Command</Filter>
     </ClInclude>
     <ClInclude Include="Graphic\Command\GUID.h">
       <Filter>Graphic\Command</Filter>
     </ClInclude>
-    <ClInclude Include="Graphic\Command\DCVertex.h">
-      <Filter>Graphic\Command</Filter>
-    </ClInclude>
     <ClInclude Include="Graphic\Command\DrawCommand.h">
-      <Filter>Graphic\Command</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphic\Command\DCSpace.h">
       <Filter>Graphic\Command</Filter>
     </ClInclude>
     <ClInclude Include="Graphic\Struct\shape_commond.h">
@@ -520,16 +511,7 @@
     <ClInclude Include="Graphic\Struct\texture_common.h">
       <Filter>Graphic\Struct</Filter>
     </ClInclude>
-    <ClInclude Include="Graphic\DCSample\DCVertex.h">
-      <Filter>Graphic\DCSample</Filter>
-    </ClInclude>
     <ClInclude Include="Graphic\DCSample\DCSpace.h">
-      <Filter>Graphic\DCSample</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphic\DCSample\DCTexture.h">
-      <Filter>Graphic\DCSample</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphic\DCSample\DCColor.h">
       <Filter>Graphic\DCSample</Filter>
     </ClInclude>
     <ClInclude Include="Graphic\DCSample\DCPlane.h">
@@ -544,17 +526,35 @@
     <ClInclude Include="Graphic\DCSample\DCPitures.h">
       <Filter>Graphic\DCSample</Filter>
     </ClInclude>
-    <ClInclude Include="Graphic\DCSample\DCVertexPointer.h">
-      <Filter>Graphic\DCSample</Filter>
+    <ClInclude Include="Graphic\DCSample\DCColor.h">
+      <Filter>Graphic\DCSample\Base</Filter>
     </ClInclude>
     <ClInclude Include="Graphic\DCSample\DCColorPointer.h">
-      <Filter>Graphic\DCSample</Filter>
+      <Filter>Graphic\DCSample\Pointer</Filter>
     </ClInclude>
     <ClInclude Include="Graphic\DCSample\DCNormal.h">
-      <Filter>Graphic\DCSample</Filter>
+      <Filter>Graphic\DCSample\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphic\DCSample\DCNormalPointer.h">
+      <Filter>Graphic\DCSample\Pointer</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphic\DCSample\DCVertex.h">
+      <Filter>Graphic\DCSample\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphic\DCSample\DCVertexPointer.h">
+      <Filter>Graphic\DCSample\Pointer</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphic\DCSample\DCTexture.h">
+      <Filter>Graphic\DCSample\Base</Filter>
     </ClInclude>
     <ClInclude Include="Graphic\DCSample\DCBlend.h">
-      <Filter>Graphic\DCSample</Filter>
+      <Filter>Graphic\DCSample\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphic\import.h">
+      <Filter>Graphic</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphic\Struct\import.h">
+      <Filter>Graphic\Struct</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -635,6 +635,12 @@
     </Filter>
     <Filter Include="Graphic\DCSample">
       <UniqueIdentifier>{6f7278bf-4cab-49ed-bb7b-57b0acf4fe0d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphic\DCSample\Base">
+      <UniqueIdentifier>{adf0d055-c056-44b0-9fbe-37e76f428f8c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphic\DCSample\Pointer">
+      <UniqueIdentifier>{13000221-43bf-402b-a7c1-ee77d2996895}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

@@ -11,6 +11,6 @@ namespace render
 		static int getID();
 		static void resetID();
 	private:
-		static int s_nID:
+		static int s_nID;
 	};
 }

@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Jackpot">
+      <UniqueIdentifier>{969efb34-527f-40c2-89ee-68402f04f91f}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Jackpot\Item.h">
+      <Filter>Jackpot</Filter>
+    </ClInclude>
+    <ClInclude Include="Jackpot\IJackpot.h">
+      <Filter>Jackpot</Filter>
+    </ClInclude>
+    <ClInclude Include="Jackpot\IDraw.h">
+      <Filter>Jackpot</Filter>
+    </ClInclude>
+    <ClInclude Include="Jackpot\Draw.h">
+      <Filter>Jackpot</Filter>
+    </ClInclude>
+    <ClInclude Include="Jackpot\IProbablity.h">
+      <Filter>Jackpot</Filter>
+    </ClInclude>
+    <ClInclude Include="Jackpot\import.h">
+      <Filter>Jackpot</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Jackpot\Draw.cpp">
+      <Filter>Jackpot</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp" />
+  </ItemGroup>
+</Project>

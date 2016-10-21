@@ -14,9 +14,6 @@ DCNormal::~DCNormal()
 
 void DCNormal::draw()
 {
-	if (Normal)
-	{
-		glNormal3f(Normal->x, Normal->y, Normal->z);
-	}
+	glNormal3f(Normal.x, Normal.y, Normal.z);
 }
 

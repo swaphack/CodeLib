@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="XML">
+      <UniqueIdentifier>{a32f09c7-bbf4-44b3-8ca1-df40925faaf9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Creater">
+      <UniqueIdentifier>{72c5ab26-33e5-4882-8a7d-0a5e27046350}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource">
+      <UniqueIdentifier>{628aa589-0133-4037-a3d9-98ac3c5be313}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sample">
+      <UniqueIdentifier>{16556905-5740-49b8-b317-e9f2edf6ce4c}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="XML\tinyxml2.cpp">
+      <Filter>XML</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="Creater\ProtocolCreater.cpp">
+      <Filter>Creater</Filter>
+    </ClCompile>
+    <ClCompile Include="Sample\CPlusProtocol.cpp">
+      <Filter>Sample</Filter>
+    </ClCompile>
+    <ClCompile Include="Sample\CSharpProtocol.cpp">
+      <Filter>Sample</Filter>
+    </ClCompile>
+    <ClCompile Include="Sample\CSharpProtocolID.cpp">
+      <Filter>Sample</Filter>
+    </ClCompile>
+    <ClCompile Include="Sample\CPlusProtocolID.cpp">
+      <Filter>Sample</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="XML\tinyxml2.h">
+      <Filter>XML</Filter>
+    </ClInclude>
+    <ClInclude Include="Creater\ProtocolCreater.h">
+      <Filter>Creater</Filter>
+    </ClInclude>
+    <ClInclude Include="Sample\CSharpProtocol.h">
+      <Filter>Sample</Filter>
+    </ClInclude>
+    <ClInclude Include="Sample\CPlusProtocol.h">
+      <Filter>Sample</Filter>
+    </ClInclude>
+    <ClInclude Include="Sample\Common.h">
+      <Filter>Sample</Filter>
+    </ClInclude>
+    <ClInclude Include="Creater\IProtocolFile.h">
+      <Filter>Creater</Filter>
+    </ClInclude>
+    <ClInclude Include="Sample\CSharpProtocolID.h">
+      <Filter>Sample</Filter>
+    </ClInclude>
+    <ClInclude Include="Sample\CPlusProtocolID.h">
+      <Filter>Sample</Filter>
+    </ClInclude>
+    <ClInclude Include="Sample\import.h">
+      <Filter>Sample</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="Protocol.xml">
+      <Filter>Resource</Filter>
+    </Xml>
+    <Xml Include="ProtocolID.xml">
+      <Filter>Resource</Filter>
+    </Xml>
+  </ItemGroup>
+</Project>

@@ -10,7 +10,7 @@ namespace render
 	class DCVertex : public DrawCommand
 	{
 	public:
-		sys::Vector* Vertex;
+		sys::Vector Vertex;
 	public:
 		DCVertex();
 		virtual ~DCVertex();

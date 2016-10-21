@@ -1,0 +1,26 @@
+#pragma once
+
+namespace lottery
+{
+	class IJackpot;
+	class IProbablity;
+	struct Item;
+
+	// ≥ÈΩ±
+	class IDraw
+	{
+	public:
+		virtual ~IDraw() {}
+	public:
+		// …Ë÷√Ω±≥ÿ
+		virtual void setJackpot(IJackpot* pJackpot) = 0;
+		// ªÒ»°Ω±≥ÿ
+		virtual IJackpot* getJackpot() = 0;
+		// …Ë÷√∏≈¬ 
+		virtual void setProbablity(IProbablity* pPropbablity) = 0;
+		// …Ë÷√∏≈¬ 
+		virtual IProbablity* getProbablity() = 0;
+		// ≥ÈΩ±
+		virtual const ItemDetail* pick(float fProbablity) = 0;
+	};
+}

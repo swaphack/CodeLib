@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root Name="PacketID" Describe="协议号">
+	<Protocol ProtocolID="100" Name="Login" Describe="登录"/>
+	<Protocol ProtocolID="101" Name="PlayerInfo" Describe="玩家信息"/>
+</root>
+
+
+<!--
+	ProtocolID 协议号
+	Name 名称
+	Describe 描述
+-->

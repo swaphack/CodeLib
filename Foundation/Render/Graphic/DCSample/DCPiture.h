@@ -4,14 +4,15 @@
 
 namespace render
 {
-	class DCColor : public DrawCommand
+	// ªÊ÷∆Õº∆¨
+	class DCPicture : public DrawCommand
 	{
 	public:
 		uchar* Pointer;
 		int Count;
 	public:
-		DCColor();
-		virtual ~DCColor();
+		DCPicture();
+		virtual ~DCPicture();
 	public:
 		virtual void draw();
 	};

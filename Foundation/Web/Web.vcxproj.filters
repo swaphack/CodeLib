@@ -1,20 +1,20 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Activity">
-      <UniqueIdentifier>{141fea11-a033-4440-a0d8-25b94d4d96d3}</UniqueIdentifier>
-    </Filter>
     <Filter Include="WebApp">
       <UniqueIdentifier>{b55035fa-e342-4d52-b009-1b8de1743b37}</UniqueIdentifier>
     </Filter>
     <Filter Include="DB">
       <UniqueIdentifier>{42d3416d-64dd-44de-bac8-b836d3149bd8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Http">
+      <UniqueIdentifier>{cb0862ac-85be-4a76-b96c-91707b8a38f5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Packet">
+      <UniqueIdentifier>{13645238-e549-4bc9-bad7-c99eff4ad56e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Activity\HttpActivity.cpp">
-      <Filter>Activity</Filter>
-    </ClCompile>
     <ClCompile Include="WebApp\Session.cpp">
       <Filter>WebApp</Filter>
     </ClCompile>
@@ -27,18 +27,21 @@
     <ClCompile Include="WebApp\WebServer.cpp">
       <Filter>WebApp</Filter>
     </ClCompile>
+    <ClCompile Include="Http\HttpActivity.cpp">
+      <Filter>Http</Filter>
+    </ClCompile>
+    <ClCompile Include="Packet\PacketActivity.cpp">
+      <Filter>Packet</Filter>
+    </ClCompile>
+    <ClCompile Include="Http\HttpActivityListener.cpp">
+      <Filter>Http</Filter>
+    </ClCompile>
+    <ClCompile Include="Packet\PacketActivityListener.cpp">
+      <Filter>Packet</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Activity\HttpActivity.h">
-      <Filter>Activity</Filter>
-    </ClInclude>
-    <ClInclude Include="Activity\import.h">
-      <Filter>Activity</Filter>
-    </ClInclude>
     <ClInclude Include="web.h" />
-    <ClInclude Include="Activity\HttpRecvHandler.h">
-      <Filter>Activity</Filter>
-    </ClInclude>
     <ClInclude Include="WebApp\import.h">
       <Filter>WebApp</Filter>
     </ClInclude>
@@ -65,6 +68,31 @@
     </ClInclude>
     <ClInclude Include="DB\DataMember.h">
       <Filter>DB</Filter>
+    </ClInclude>
+    <ClInclude Include="Http\HttpActivity.h">
+      <Filter>Http</Filter>
+    </ClInclude>
+    <ClInclude Include="Http\HttpRecvHandler.h">
+      <Filter>Http</Filter>
+    </ClInclude>
+    <ClInclude Include="Http\import.h">
+      <Filter>Http</Filter>
+    </ClInclude>
+    <ClInclude Include="Packet\PacketActivity.h">
+      <Filter>Packet</Filter>
+    </ClInclude>
+    <ClInclude Include="Packet\PacketRecvHandler.h">
+      <Filter>Packet</Filter>
+    </ClInclude>
+    <ClInclude Include="Http\HttpActivityListener.h">
+      <Filter>Http</Filter>
+    </ClInclude>
+    <ClInclude Include="Packet\PacketActivityListener.h">
+      <Filter>Packet</Filter>
+    </ClInclude>
+    <ClInclude Include="IActivityListener.h" />
+    <ClInclude Include="Packet\import.h">
+      <Filter>Packet</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

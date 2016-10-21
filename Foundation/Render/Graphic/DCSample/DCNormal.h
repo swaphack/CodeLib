@@ -10,7 +10,7 @@ namespace render
 	class DCNormal : public DrawCommand
 	{
 	public:
-		sys::Vector* Normal;
+		sys::Vector Normal;
 	public:
 		DCNormal();
 		virtual ~DCNormal();

@@ -215,10 +215,7 @@
     <ClInclude Include="Common\XControl\Pixel.h" />
     <ClInclude Include="Common\XControl\import.h" />
     <ClInclude Include="Graphic\Command\GUID.h" />
-    <ClInclude Include="Graphic\Command\DCTexture.h" />
-    <ClInclude Include="Graphic\Command\DCVertex.h" />
     <ClInclude Include="Graphic\Command\DrawCommandList.h" />
-    <ClInclude Include="Graphic\Command\DCSpace.h" />
     <ClInclude Include="Graphic\Command\DrawCommand.h" />
     <ClInclude Include="Graphic\Command\DrawCommander.h" />
     <ClInclude Include="Graphic\Command\macros.h" />
@@ -226,6 +223,7 @@
     <ClInclude Include="Graphic\DCSample\DCColor.h" />
     <ClInclude Include="Graphic\DCSample\DCColorPointer.h" />
     <ClInclude Include="Graphic\DCSample\DCNormal.h" />
+    <ClInclude Include="Graphic\DCSample\DCNormalPointer.h" />
     <ClInclude Include="Graphic\DCSample\DCPiture.h" />
     <ClInclude Include="Graphic\DCSample\DCPitures.h" />
     <ClInclude Include="Graphic\DCSample\DCPlane.h" />
@@ -234,6 +232,8 @@
     <ClInclude Include="Graphic\DCSample\DCVertex.h" />
     <ClInclude Include="Graphic\DCSample\DCVertexPointer.h" />
     <ClInclude Include="Graphic\DCSample\macros.h" />
+    <ClInclude Include="Graphic\import.h" />
+    <ClInclude Include="Graphic\Struct\import.h" />
     <ClInclude Include="Graphic\Struct\shape_commond.h" />
     <ClInclude Include="Graphic\Struct\texture_common.h" />
     <ClInclude Include="Platform\import.h" />

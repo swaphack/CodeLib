@@ -7,6 +7,9 @@
     <Filter Include="Resource">
       <UniqueIdentifier>{3d862a11-844a-4492-b6fa-029d81081d35}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Protocols">
+      <UniqueIdentifier>{aa38ec5a-c742-4820-bb29-f2abc4dfc063}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
@@ -16,6 +19,9 @@
     <ClCompile Include="GateWay\GateWay.cpp">
       <Filter>GateWay</Filter>
     </ClCompile>
+    <ClCompile Include="GateWay\PacketActivityTest.cpp">
+      <Filter>GateWay</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GateWay\HttpActivityTest.h">
@@ -23,6 +29,18 @@
     </ClInclude>
     <ClInclude Include="GateWay\GateWay.h">
       <Filter>GateWay</Filter>
+    </ClInclude>
+    <ClInclude Include="GateWay\PacketActivityTest.h">
+      <Filter>GateWay</Filter>
+    </ClInclude>
+    <ClInclude Include="Protocols\PacketID.h">
+      <Filter>Protocols</Filter>
+    </ClInclude>
+    <ClInclude Include="Protocols\Packets.h">
+      <Filter>Protocols</Filter>
+    </ClInclude>
+    <ClInclude Include="Protocols\import.h">
+      <Filter>Protocols</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
