@@ -3,17 +3,17 @@
 using namespace nature;
 
 
-nature::PeriodicTableLoader::PeriodicTableLoader()
+PeriodicTableLoader::PeriodicTableLoader()
 {
 
 }
 
-nature::PeriodicTableLoader::~PeriodicTableLoader()
+PeriodicTableLoader::~PeriodicTableLoader()
 {
 
 }
 
-bool nature::PeriodicTableLoader::load()
+bool PeriodicTableLoader::load()
 {
 
 }

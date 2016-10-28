@@ -5,6 +5,8 @@
 
 using namespace sys;
 
+int sys::RemoteResource::s_Tag = 0;
+
 RemoteResource::RemoteResource()
 {
 	this->setCacheEnable(true);
@@ -35,13 +37,25 @@ bool RemoteResource::loadFileData(const char* filename, std::string& data)
 		return true;
 	}
 
-// 	DNS::getIPAddress(_url);
-// 
-// 	HttpDownload download;
-// 	download.download(url, filename, )
-// 	
-// 
-// 	getCache()->set(fullpath.c_str(), data.c_str());
+	String temp = _url.c_str();
+	String low = temp.toLower();
+	if (!low.startWith("http://"))
+	{
+		return false;
+	}
+	std::vector<String> params;
+	temp = temp.subString(7, temp.getSize() - 7);
+	temp.split(':', params);
+
+	std::string ip = params[0].getString();
+	int port = atoi(params[1].getString());
+
+	s_Tag++;
+	_downloadPath.insert(std::make_pair(s_Tag, fullpath));
+
+
+	HttpDownload download;
+	download.download(ip.c_str(), port, filename, this, (downloadCallback)&RemoteResource::onDownloadCallback, 1);
 
 	return true;
 }
@@ -67,4 +81,14 @@ bool RemoteResource::getCacheData(const char* fullpath, std::string& data)
 	}
 
 	return true;
+}
+
+void RemoteResource::onDownloadCallback(int tag, const char* data, int size)
+{
+	if (_downloadPath.find(tag) == _downloadPath.end()) {
+		return;
+	}
+	std::string fullpath = _downloadPath[tag];
+
+	getCache()->set(fullpath.c_str(), std::string(data, size));
 }

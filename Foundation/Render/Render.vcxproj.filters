@@ -199,6 +199,9 @@
     <ClCompile Include="Graphic\DCSample\DCBlend.cpp">
       <Filter>Graphic\DCSample\Base</Filter>
     </ClCompile>
+    <ClCompile Include="Graphic\DCSample\DCNormalPointer.cpp">
+      <Filter>Graphic\DCSample\Pointer</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Common\GL\import.h">

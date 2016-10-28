@@ -19,7 +19,7 @@ namespace web
 		sys::IDataBase* _db;
 	};
 
-	// mysql 数据
+	// SQLite 数据
 	class SQLite : public sys::IDataBase
 	{
 	public:

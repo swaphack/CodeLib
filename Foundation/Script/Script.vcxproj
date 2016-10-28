@@ -12,7 +12,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Core\Base.h" />
+    <ClInclude Include="Core\CodeBlock.h" />
     <ClInclude Include="Core\common.h" />
+    <ClInclude Include="Core\Expression.h" />
     <ClInclude Include="Core\Variables.h" />
     <ClInclude Include="Core\Console.h" />
     <ClInclude Include="Core\Function.h" />
@@ -25,7 +27,7 @@
     <ClInclude Include="Core\Variable.h" />
     <ClInclude Include="Document\Command.h" />
     <ClInclude Include="Document\Document.h" />
-    <ClInclude Include="Document\Expression.h" />
+    <ClInclude Include="Document\import.h" />
     <ClInclude Include="Env\Define.h" />
     <ClInclude Include="Env\Environment.h" />
     <ClInclude Include="Env\FilePath.h" />
@@ -35,14 +37,18 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Core\Base.cpp" />
+    <ClCompile Include="Core\CodeBlock.cpp" />
+    <ClCompile Include="Core\Expression.cpp" />
+    <ClCompile Include="Core\Function.cpp" />
     <ClCompile Include="Core\Variables.cpp" />
     <ClCompile Include="Core\Console.cpp" />
     <ClCompile Include="Core\Message.cpp" />
     <ClCompile Include="Core\Scope.cpp" />
     <ClCompile Include="Core\Struct.cpp" />
     <ClCompile Include="Core\Variable.cpp" />
-    <ClCompile Include="Document\Expression.cpp" />
+    <ClCompile Include="Document\Document.cpp" />
     <ClCompile Include="Env\Environment.cpp" />
+    <ClCompile Include="Script.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{1F21A8AB-293F-4932-BA27-184C94FA4DCD}</ProjectGuid>
@@ -78,7 +84,9 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>../System/</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>
+      </AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>

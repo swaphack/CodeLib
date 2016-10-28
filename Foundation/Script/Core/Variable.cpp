@@ -1,5 +1,7 @@
 #include "Variable.h"
 
+#include "Function.h"
+
 using namespace script;
 
 
@@ -82,7 +84,7 @@ Function* Variable::getFunction(const char* name)
 	return iter->second;
 }
 
-bool Variable::callFunction(const char* pFuncName, std::vector<Variable*> inputs, std::vector<Variable*>& outputs)
+bool Variable::callFunction(const char* pFuncName, std::vector<Variable*>& inputs, std::vector<Variable*>& outputs)
 {
 	if (pFuncName == nullptr)
 	{

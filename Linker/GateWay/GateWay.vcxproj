@@ -36,12 +36,8 @@
     <ClInclude Include="GateWay\GateWay.h" />
     <ClInclude Include="GateWay\HttpActivityTest.h" />
     <ClInclude Include="GateWay\PacketActivityTest.h" />
-    <ClInclude Include="Protocols\import.h" />
-    <ClInclude Include="Protocols\PacketID.h" />
-    <ClInclude Include="Protocols\Packets.h" />
   </ItemGroup>
   <ItemGroup>
-    <Xml Include="Resource\DBString.xml" />
     <Xml Include="Resource\Server.xml" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

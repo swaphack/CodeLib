@@ -2,8 +2,7 @@
 
 namespace script
 {
-	class Scope;
-
+	// ½Å±¾ÎÄµµ½âÎö
 	class Document
 	{
 	public:

@@ -82,62 +82,62 @@ Variable* Environment::getVariable(const char* name)
 	return nullptr;
 }
 
-void Environment::addStruct(Struct* pStruct)
-{
-	if (!pStruct)
-	{
-		return;
-	}
-
-	removeStruct(pStruct->getName());
-
-	m_pStructs[pStruct->getName()] = pStruct;
-}
-
-void Environment::removeStruct(const char* name)
-{
-	if (name == nullptr)
-	{
-		return;
-	}
-
-	Structs::iterator iter = m_pStructs.find(name);
-	if (iter == m_pStructs.end())
-	{
-		return;
-	}
-
-	iter->second->disponse();
-	m_pStructs.erase(iter);
-}
-
-void Environment::removeAllStructs()
-{
-	Structs::iterator iter = m_pStructs.begin();
-	while (iter != m_pStructs.end())
-	{
-		delete iter->second;
-		iter++;
-	}
-
-	m_pStructs.clear();
-}
-
-Struct* Environment::getStruct(const char* name)
-{
-	if (name == nullptr)
-	{
-		return nullptr;
-	}
-
-	Structs::iterator iter = m_pStructs.find(name);
-	if (iter != m_pStructs.end())
-	{
-		return iter->second;
-	}
-
-	return nullptr;
-}
+// void Environment::addStruct(Struct* pStruct)
+// {
+// 	if (!pStruct)
+// 	{
+// 		return;
+// 	}
+// 
+// 	removeStruct(pStruct->getName());
+// 
+// 	m_pStructs[pStruct->getName()] = pStruct;
+// }
+// 
+// void Environment::removeStruct(const char* name)
+// {
+// 	if (name == nullptr)
+// 	{
+// 		return;
+// 	}
+// 
+// 	Structs::iterator iter = m_pStructs.find(name);
+// 	if (iter == m_pStructs.end())
+// 	{
+// 		return;
+// 	}
+// 
+// 	iter->second->disponse();
+// 	m_pStructs.erase(iter);
+// }
+// 
+// void Environment::removeAllStructs()
+// {
+// 	Structs::iterator iter = m_pStructs.begin();
+// 	while (iter != m_pStructs.end())
+// 	{
+// 		delete iter->second;
+// 		iter++;
+// 	}
+// 
+// 	m_pStructs.clear();
+// }
+// 
+// Struct* Environment::getStruct(const char* name)
+// {
+// 	if (name == nullptr)
+// 	{
+// 		return nullptr;
+// 	}
+// 
+// 	Structs::iterator iter = m_pStructs.find(name);
+// 	if (iter != m_pStructs.end())
+// 	{
+// 		return iter->second;
+// 	}
+// 
+// 	return nullptr;
+// }
 
 void Environment::addFunction(Function* pFunction)
 {
@@ -205,7 +205,7 @@ void Environment::dispose()
 {
 	removeAllVariables();
 	removeAllFunctions();
-	removeAllStructs();
+	//removeAllStructs();
 }
 
 Environment* getEnv()

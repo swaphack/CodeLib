@@ -103,8 +103,6 @@ public:
 	}
 };
 
-
-
 void test2()
 {
 	const char* url = "www.baidu.com";

@@ -2,12 +2,14 @@
 
 #include <string>
 
+#include "../Framework/Object.h"
+
 #include "IResource.h"
 
 namespace sys
 {
 	// 站点资源管理
-	class Resource : public IResource
+	class Resource : public Object, public IResource
 	{
 	public:
 		Resource();

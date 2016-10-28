@@ -34,6 +34,8 @@ namespace script
 		Real* clone();
 		// 分配新的内存，为变量赋值
 		Real* alloct(const char* name);
+	protected:
+		void initFunctions();
 	private:
 		float m_fValue;
 	};

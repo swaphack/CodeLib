@@ -44,6 +44,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>../../Foundation/System/;../../Foundation/Web/;../../Foundation/Text/;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -64,6 +65,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Protocols\import.h" />
+    <ClInclude Include="Protocols\PacketID.h" />
+    <ClInclude Include="Protocols\Packets.h" />
+    <ClInclude Include="Server\GameServer.h" />
+    <ClInclude Include="Server\PacketReceiver.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Server\GameServer.cpp" />
+    <ClCompile Include="Server\PacketReceiver.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,16 +1,19 @@
 #include "Scope.h"
+#include "Variable.h"
+#include "CodeBlock.h"
+
 using namespace script;
 
 
 Scope::Scope()
 : m_pParent(nullptr)
 {
-
+	m_pCodeBlock = new CodeBlock();
 }
 
 Scope::~Scope()
 {
-
+	delete m_pCodeBlock;
 }
 
 void Scope::addChild(Scope* pChild)
@@ -77,7 +80,7 @@ Scope* Scope::getChild(const char* name)
 {
 	if (name == nullptr)
 	{
-		return;
+		return nullptr;
 	}
 
 	Scopes::iterator iter = m_pChildren.find(name);
@@ -156,14 +159,24 @@ Variable* Scope::getMember(const char* name)
 	return nullptr;
 }
 
-bool Scope::call(std::vector<Variable*> inputs, std::vector<Variable*>& outputs)
+CodeBlock* Scope::getCodeBlock()
 {
+	return m_pCodeBlock;
+}
 
+bool Scope::call(std::vector<Variable*>& inputs, std::vector<Variable*>& outputs)
+{
+	if (m_pCodeBlock)
+	{
+		return m_pCodeBlock->run(inputs, outputs);
+	}
+	return true;
 }
 
 void Scope::disponse()
 {
 	removeAllChildren();
 	removeAllMembers();
+	
 	Base::disponse();
 }

@@ -54,14 +54,16 @@ void Struct::removeAllMembers()
 	m_pMembers.clear();
 }
 
-Struct* Struct::inherit(Struct* pParent)
+bool Struct::inherit(Struct* pParent)
 {
-	if (pParent == nullptr)
+	if (this->m_pParent == nullptr)
 	{
-		return;
+		return false;
 	}
 
 	this->m_pParent = pParent->clone();
+
+	return true;
 }
 
 Struct* Struct::getParent()
@@ -90,9 +92,9 @@ Variable* Struct::getMember(const char* name)
 	return nullptr;
 }
 
-bool Struct::callFunction(const char* pFuncName, std::vector<Variable*> inputs, std::vector<Variable*>& outputs)
+bool Struct::callFunction(const char* pFuncName, std::vector<Variable*>& inputs, std::vector<Variable*>& outputs)
 {
-	if (callFunction(pFuncName, inputs, outputs))
+	if (Variable::callFunction(pFuncName, inputs, outputs))
 	{
 		return true;
 	}
@@ -138,7 +140,7 @@ Struct* Struct::alloct(const char* name)
 {
 	if (name == nullptr)
 	{
-		return;
+		return nullptr;
 	}
 
 	Struct* pVal = this->clone();

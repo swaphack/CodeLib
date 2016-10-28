@@ -1,5 +1,6 @@
 #include "Variables.h"
 #include "common.h"
+#include "Function.h"
 using namespace script;
 
 
@@ -116,6 +117,31 @@ Real* Real::alloct(const char* name)
 	Real* pVal = this->clone();
 	pVal->setName(name);
 	return pVal;
+}
+
+void Real::initFunctions()
+{
+// 	this->removeAllFunctions();
+// 
+// 	this->addFunction(Function::create("+", [](std::vector<Variable*>& inputs, std::vector<Variable*>& outputs){
+// 		if (outputs.size() != 1)
+// 		{
+// 			return false;
+// 		}
+// 		Real* pValue = nullptr;
+// 		Real* pSum = static_cast<Real*>(outputs[0]);
+// 		for (int i = 0; i < inputs.size(); i++)
+// 		{
+// 			if (inputs[i]->getDataType() != E_DATATYPE_REAL) 
+// 			{
+// 				return false;
+// 			}
+// 			pValue = static_cast<Real*>(inputs[i]);
+// 			*pSum += *pValue;
+// 		}
+// 
+// 		return true;
+// 	}));
 }
 
 //////////////////////////////////////////////////////////////////////////

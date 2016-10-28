@@ -125,6 +125,7 @@
     <ClCompile Include="Graphic\DCSample\DCColor.cpp" />
     <ClCompile Include="Graphic\DCSample\DCColorPointer.cpp" />
     <ClCompile Include="Graphic\DCSample\DCNormal.cpp" />
+    <ClCompile Include="Graphic\DCSample\DCNormalPointer.cpp" />
     <ClCompile Include="Graphic\DCSample\DCVertex.cpp" />
     <ClCompile Include="Graphic\DCSample\DCVertexPointer.cpp" />
     <ClCompile Include="Graphic\Struct\shape_commond.cpp" />

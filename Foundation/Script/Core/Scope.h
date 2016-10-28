@@ -1,12 +1,14 @@
 #pragma once
 
 #include "Base.h"
-#include "Variable.h"
 
 #include <vector>
 
 namespace script
 {
+	class Variable;
+	class CodeBlock;
+
 	// 作用域，特定功能的区域
 	class Scope : public Base
 	{
@@ -36,19 +38,25 @@ namespace script
 		// 获取局部变量
 		Variable* getMember(const char* name);
 
+		// 获取代码块逻辑
+		CodeBlock* getCodeBlock();
+
 		// 调用
-		bool call(std::vector<Variable*> inputs, std::vector<Variable*>& outputs);
+		bool call(std::vector<Variable*>& inputs, std::vector<Variable*>& outputs);
 
 		// 离开作用域后，移除所有成员信息
 		virtual void disponse();
 	private:
 		typedef std::map<std::string, Scope*> Scopes;
 		typedef std::map<std::string, Variable*> Members;
+		
 		// 子域
 		Scopes m_pChildren;
 		// 局部变量
 		Members m_pMembers;
 		// 父类
 		Scope* m_pParent;
+		// 代码块逻辑
+		CodeBlock* m_pCodeBlock;
 	};
 }

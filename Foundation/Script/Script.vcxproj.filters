@@ -70,7 +70,13 @@
     <ClInclude Include="Document\Command.h">
       <Filter>Document</Filter>
     </ClInclude>
-    <ClInclude Include="Document\Expression.h">
+    <ClInclude Include="Core\Expression.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\CodeBlock.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Document\import.h">
       <Filter>Document</Filter>
     </ClInclude>
   </ItemGroup>
@@ -99,8 +105,18 @@
     <ClCompile Include="Core\Variables.cpp">
       <Filter>Core</Filter>
     </ClCompile>
-    <ClCompile Include="Document\Expression.cpp">
+    <ClCompile Include="Document\Document.cpp">
       <Filter>Document</Filter>
     </ClCompile>
+    <ClCompile Include="Core\Function.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Expression.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\CodeBlock.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Script.cpp" />
   </ItemGroup>
 </Project>

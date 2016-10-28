@@ -1,4 +1,5 @@
 #include "Expression.h"
+#include "Variable.h"
 
 using namespace script;
 
@@ -13,17 +14,10 @@ Expression::~Expression()
 
 }
 
-bool Expression::readLine(char* cursor, int offset)
-{
-
-}
-
 void Expression::setString(const char* pszWords, int nLength)
 {
-	m_strWords = std::string(pszWords, nLength);
 }
 
-const std::string& Expression::getString() const
+bool Expression::run(std::vector<Variable*>& inputs, std::vector<Variable*>& outputs)
 {
-	return m_strWords;
 }

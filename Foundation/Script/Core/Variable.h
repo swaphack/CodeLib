@@ -1,7 +1,6 @@
 #pragma once
 
 #include "Base.h"
-#include "Function.h"
 
 #include <string>
 #include <vector>
@@ -24,6 +23,8 @@ namespace script
 		E_DATATYPE_STRUCT,
 	};
 
+	class Function;
+
 	// 变量
 	class Variable : public Base
 	{
@@ -45,7 +46,7 @@ namespace script
 		// 获取函数
 		Function* getFunction(const char* name);
 		// 调用
-		virtual bool callFunction(const char* pFuncName, std::vector<Variable*> inputs, std::vector<Variable*>& outputs);
+		virtual bool callFunction(const char* pFuncName, std::vector<Variable*>& inputs, std::vector<Variable*>& outputs);
 		// 销毁
 		virtual void disponse();
 	public: // 覆盖

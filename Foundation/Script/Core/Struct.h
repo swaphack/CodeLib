@@ -1,12 +1,12 @@
 #pragma once
 
 #include "Variable.h"
-#include "Function.h"
 
 #include <map>
 
 namespace script
 {
+	class Function;
 	// 数据结构类
 	class Struct : public Variable
 	{
@@ -22,14 +22,14 @@ namespace script
 		void removeAllMembers();
 
 		// 继承
-		Struct* inherit(Struct* pParent);
+		bool inherit(Struct* pParent);
 		// 父类
 		Struct* getParent();
 
 		// 获取成员变量
 		Variable* getMember(const char* name);
 		// 调用
-		virtual bool callFunction(const char* pFuncName, std::vector<Variable*> inputs, std::vector<Variable*>& outputs);
+		virtual bool callFunction(const char* pFuncName, std::vector<Variable*>& inputs, std::vector<Variable*>& outputs);
 		// 销毁
 		virtual void disponse();
 	public: // 覆盖
