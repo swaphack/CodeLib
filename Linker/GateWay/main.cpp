@@ -1,34 +1,37 @@
-#include "web.h"
+#include "GateWay/import.h"
+#include "text.h"
 #include "system.h"
+
 #include <ctime>
 #include <windows.h>
+#include <string>
 
-#include "GateWay/HttpActivityTest.h"
-#include "GateWay/PacketActivityTest.h"
-
+using namespace gw;
 using namespace sys;
-using namespace web;
-
-const char* WEB_IP = "10.0.22.63";
-int WEB_PORT = 9547;
-
-const char* WEB_SITE_URL = "E:/website/";
-
-//#define USE_DEFAULT_WEBSITE
 
 int main(int argc, char** argv)
 {
-	std::string websit;
-#ifdef USE_DEFAULT_WEBSITE
-	sys::Directory::getCurrentDirectory(websit);
-	websit = websit + "/WebSite";
-#else
-	websit = WEB_SITE_URL;
-#endif
+	// 工程路径
+	std::string projectPath;
+	Directory::getCurrentDirectory(projectPath);
 
-	WebApplication* web = new WebApplication(WEB_IP, WEB_PORT, 10000);
-	web->getResourceMgr()->getResource(ERT_LOCAL)->setUrl(websit.c_str());
+	// 服务器配置路径
+	std::string configPath = projectPath + "/Resource/GateWay.xml";
+	XmlConfig* config = new XmlConfig();
+	if (!config->loadFile(configPath.c_str()))
+	{
+		return -1;
+	}
 
+	// 服务器
+	GateWay* web = new GateWay(
+		config->getValue("server.local", "ip"), 
+		atoi(config->getValue("server.local", "port")), 
+		10000);
+
+	web->getResourceMgr()->getResource(ERT_LOCAL)->setUrl(config->getValue("resource.websit", "path"));
+
+	// 注册监听
 	new HttpActivityTest();
 	new PacketActivityTest();
 
@@ -37,6 +40,8 @@ int main(int argc, char** argv)
 		Sleep(100);
 		web->update();
 	}
+
+	delete web;
 
 	return 0;
 };

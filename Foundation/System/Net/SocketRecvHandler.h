@@ -14,4 +14,9 @@ namespace sys
 	typedef void (Object::*CLIENT_RECV_HANDLER)(int id, DataQueue& data);
 	// 客户端接收数据的处理者
 	typedef std::pair<Object*, CLIENT_RECV_HANDLER> ClientRecvHandler;
+
+	// 客户端断开连接的函数指针
+	typedef void (Object::*CLIENT_CLOSE_HANDLER)(int id);
+	// 客户端断开连接的处理者
+	typedef std::pair<Object*, CLIENT_CLOSE_HANDLER> ClientCloseHandler;
 }

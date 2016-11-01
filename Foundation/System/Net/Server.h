@@ -26,8 +26,10 @@ namespace sys
 		 * 发送数据给客户端
 		 */
 		void update();
-		// 设置接收导数据时的处理
+		// 设置接收数据时的处理
 		void setRecvHandler(Object* target, SERVER_RECV_HANDLER handler);
+		// 设置客户端断开时的处理
+		void setCloseHandler(Object* target, CLIENT_CLOSE_HANDLER handler);
 		// 发送消息, 使用new，发送完毕后会自动释放
 		void sendMessage(int id, NetData* data);
 		// 广播
@@ -66,5 +68,7 @@ namespace sys
 		std::map<int, DataQueue> _sendDatas;
 		// 接收数据时的处理
 		ServerRecvHandler _recvHandler;
+		// 客户端断开时的处理
+		ClientCloseHandler _closeHandler;
 	};
 }

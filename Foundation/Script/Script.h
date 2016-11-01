@@ -1,5 +1,8 @@
 #pragma once
 
+#include <string>
+#include <map>
+
 namespace script
 {
 	class Document;
@@ -13,15 +16,23 @@ namespace script
 	public:
 		static Script* getInstance();
 		// 加载脚本文件
-		virtual bool load(const char* filepath);
-		// 加载脚本
-		virtual bool loadString(const char* text);
-	protected:
+		bool load(const char* filepath);
+		// 导入引用文本
+		bool import(const char* filepath);
 		// 执行脚本
-		virtual void run();
+		void run();
+	protected:
+		// 添加文档
+		void addDocument(const char* name, Document* document);
+		// 移除文档
+		void removeDocument(const char* name);
+		// 移除所有文档
+		void removeAllDocuments();
 	private:
 		static Script* s_script;
 		// 脚本文档
-		Document* _document;
+		std::map<std::string, Document*> _documents;
+		// 入口脚本文档
+		Document* _mainDocument;
 	};
 }

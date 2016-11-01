@@ -1,19 +1,17 @@
 #include "Scope.h"
 #include "Variable.h"
-#include "CodeBlock.h"
 
 using namespace script;
 
 
 Scope::Scope()
 : m_pParent(nullptr)
+, m_pHandler(nullptr)
 {
-	m_pCodeBlock = new CodeBlock();
 }
 
 Scope::~Scope()
 {
-	delete m_pCodeBlock;
 }
 
 void Scope::addChild(Scope* pChild)
@@ -159,18 +157,19 @@ Variable* Scope::getMember(const char* name)
 	return nullptr;
 }
 
-CodeBlock* Scope::getCodeBlock()
+void Scope::setHandler(ScopeHandler handler)
 {
-	return m_pCodeBlock;
+	m_pHandler = handler;
 }
 
 bool Scope::call(std::vector<Variable*>& inputs, std::vector<Variable*>& outputs)
 {
-	if (m_pCodeBlock)
+	if (m_pHandler == nullptr)
 	{
-		return m_pCodeBlock->run(inputs, outputs);
+		return false;
 	}
-	return true;
+
+	return m_pHandler(inputs, outputs);
 }
 
 void Scope::disponse()

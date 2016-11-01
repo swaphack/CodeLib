@@ -2,6 +2,8 @@
 
 namespace script
 {
+	class Block;
+	class Scanner;
 	// 脚本文档解析
 	class Document
 	{
@@ -9,16 +11,14 @@ namespace script
 		Document();
 		virtual ~Document();
 	public:
-		// 加载字符串
-		bool loadString(const char* text);
-		// 获取当前指针
-		char* getPtr();
+		// 加载文件
+		bool loadFile(const char* filepath);
+		// 解析
+		bool parse(const char* text, int size);
 	private:
-		// 文本内容指针
-		char* m_pContent;
-		// 偏移位置
-		int m_nOffset;
-		// 文本大小
-		int m_nSize;
+		// 代码块
+		Block* m_pBlock;
+		// 扫描器
+		Scanner* m_pScanner;
 	};
 }

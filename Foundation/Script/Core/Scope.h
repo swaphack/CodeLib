@@ -2,12 +2,14 @@
 
 #include "Base.h"
 
+#include <functional>
 #include <vector>
 
 namespace script
 {
 	class Variable;
-	class CodeBlock;
+
+	typedef std::function<bool(std::vector<Variable*>& inputs, std::vector<Variable*>& outputs)> ScopeHandler;
 
 	// 作用域，特定功能的区域
 	class Scope : public Base
@@ -38,11 +40,11 @@ namespace script
 		// 获取局部变量
 		Variable* getMember(const char* name);
 
-		// 获取代码块逻辑
-		CodeBlock* getCodeBlock();
+		// 设置块执行逻辑
+		void setHandler(ScopeHandler handler);
 
 		// 调用
-		bool call(std::vector<Variable*>& inputs, std::vector<Variable*>& outputs);
+		virtual bool call(std::vector<Variable*>& inputs, std::vector<Variable*>& outputs);
 
 		// 离开作用域后，移除所有成员信息
 		virtual void disponse();
@@ -56,7 +58,7 @@ namespace script
 		Members m_pMembers;
 		// 父类
 		Scope* m_pParent;
-		// 代码块逻辑
-		CodeBlock* m_pCodeBlock;
+		// 块执行逻辑
+		ScopeHandler m_pHandler;
 	};
 }

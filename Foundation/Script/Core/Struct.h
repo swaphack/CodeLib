@@ -37,6 +37,9 @@ namespace script
 		Struct* alloct(const char* name);
 		// 克隆
 		Struct* clone();
+	protected:
+		// 初始化默认函数
+		virtual void initFunctions();
 	private:
 		typedef std::map<std::string, Variable*> Members;
 		// 成员变量

@@ -36,6 +36,10 @@ bool Client::connect()
 
 bool Client::disconnect()
 {
+	if (this->_closeHandler.first && this->_closeHandler.second)
+	{
+		(this->_closeHandler.first->*this->_closeHandler.second)(getID());
+	}
 	_socket->Close();
 	_bConnected = false;
 	return true;
@@ -62,6 +66,17 @@ void Client::setRecvHandler( Object* target, CLIENT_RECV_HANDLER handler )
 
 	_recvHandler.first = target;
 	_recvHandler.second = handler;
+}
+
+void Client::setCloseHandler(Object* target, CLIENT_CLOSE_HANDLER handler)
+{
+	if (target == nullptr || handler == nullptr)
+	{
+		return;
+	}
+
+	_closeHandler.first = target;
+	_closeHandler.second = handler;
 }
 
 void Client::sendMessage(NetData* data )
@@ -115,15 +130,18 @@ void Client::_recvData()
 	int size;
 	char* buff = _socket->Recv(size);
 	if (size == -1)
-	{
+	{// 等待
 		if (_socket->HasError() == true)
 		{
 			this->disconnect();
-			return;
 		}
 	}
+	else if (size == 0)
+	{// 断开连接
+		this->disconnect();
+	}
 	else
-	{
+	{// 接收到数据
 		this->onRecvHandler(new NetData(buff, size));
 	}
 }

@@ -3,10 +3,9 @@
 using namespace web;
 using namespace gw;
 
-GateWay::GateWay(const char* ip, int port)
-:WebApplication(ip, port)
+GateWay::GateWay(const char* ip, int port, int maxWaitCount)
+:WebApplication(ip, port, maxWaitCount)
 {
-	this->init();
 }
 
 GateWay::~GateWay()

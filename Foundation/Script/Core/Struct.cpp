@@ -1,5 +1,5 @@
 #include "Struct.h"
-
+#include "Function.h"
 using namespace script;
 
 Struct::Struct()
@@ -94,6 +94,11 @@ Variable* Struct::getMember(const char* name)
 
 bool Struct::callFunction(const char* pFuncName, std::vector<Variable*>& inputs, std::vector<Variable*>& outputs)
 {
+	if (pFuncName == nullptr)
+	{
+		return false;
+	}
+
 	if (Variable::callFunction(pFuncName, inputs, outputs))
 	{
 		return true;
@@ -146,4 +151,25 @@ Struct* Struct::alloct(const char* name)
 	Struct* pVal = this->clone();
 	pVal->setName(name);
 	return pVal;
+}
+
+void Struct::initFunctions()
+{
+	this->addFunction(Function::create(".", [](std::vector<Variable*>& inputs, std::vector<Variable*>& outputs){
+		if (inputs.size() != 2 || outputs.size() != 1)
+		{
+			return false;
+		}
+		
+		if (!IS_DATATYPE(inputs[0], E_DATATYPE_STRUCT))
+		{
+			return false;
+		}
+
+		Struct* input = static_cast<Struct*>(inputs[0]);
+		Variable* member = input->getMember(inputs[1]->getName());
+		outputs[0] = member;
+
+		return true;
+	}));
 }

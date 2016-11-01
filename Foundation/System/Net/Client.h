@@ -32,6 +32,8 @@ namespace sys
 		void update();
 		// 设置接收导数据时的处理
 		void setRecvHandler(Object* target, CLIENT_RECV_HANDLER handler);
+		// 设置客户端断开时的处理
+		void setCloseHandler(Object* target, CLIENT_CLOSE_HANDLER handler);
 		// 发送消息, 使用new，发送完毕后会自动释放
 		void sendMessage(NetData* data);
 		// 发送消息
@@ -62,5 +64,7 @@ namespace sys
 		DataQueue _sendDatas;
 		// 接收数据时的处理
 		ClientRecvHandler _recvHandler;
+		// 客户端断开时的处理
+		ClientCloseHandler _closeHandler;
 	};
 }

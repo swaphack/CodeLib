@@ -18,24 +18,14 @@ namespace script
 		void setValue(float value);
 		// 获取变量值
 		float getValue();
-
-		Real operator + (Real& value);
-		Real operator - (Real& value);
-		Real operator * (Real& value);
-		Real operator / (Real& value);
-
-		Real& operator = (Real& value);
-		Real& operator += (Real& value);
-		Real& operator -= (Real& value);
-		Real& operator *= (Real& value);
-		Real& operator /= (Real& value);
 	public: // 覆盖
 		// 克隆
 		Real* clone();
 		// 分配新的内存，为变量赋值
 		Real* alloct(const char* name);
 	protected:
-		void initFunctions();
+		// 初始化默认函数
+		virtual void initFunctions();
 	private:
 		float m_fValue;
 	};

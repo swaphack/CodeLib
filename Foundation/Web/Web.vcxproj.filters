@@ -13,19 +13,22 @@
     <Filter Include="Packet">
       <UniqueIdentifier>{13645238-e549-4bc9-bad7-c99eff4ad56e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Server">
+      <UniqueIdentifier>{9127fa99-695e-4137-846f-6cd98e664a7c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Client">
+      <UniqueIdentifier>{36403142-a2b3-4f2d-9548-e4f0e21e5d9c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Listener">
+      <UniqueIdentifier>{bd40ca15-63f2-406e-9915-92cd7aeed715}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="WebApp\Session.cpp">
-      <Filter>WebApp</Filter>
-    </ClCompile>
     <ClCompile Include="WebApp\WebApplication.cpp">
       <Filter>WebApp</Filter>
     </ClCompile>
     <ClCompile Include="DB\SQLite.cpp">
       <Filter>DB</Filter>
-    </ClCompile>
-    <ClCompile Include="WebApp\WebServer.cpp">
-      <Filter>WebApp</Filter>
     </ClCompile>
     <ClCompile Include="Http\HttpActivity.cpp">
       <Filter>Http</Filter>
@@ -39,6 +42,18 @@
     <ClCompile Include="Packet\PacketActivityListener.cpp">
       <Filter>Packet</Filter>
     </ClCompile>
+    <ClCompile Include="Server\Session.cpp">
+      <Filter>Server</Filter>
+    </ClCompile>
+    <ClCompile Include="Server\WebServer.cpp">
+      <Filter>Server</Filter>
+    </ClCompile>
+    <ClCompile Include="Listener\ListenerPool.cpp">
+      <Filter>Listener</Filter>
+    </ClCompile>
+    <ClCompile Include="Client\WebClient.cpp">
+      <Filter>Client</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="web.h" />
@@ -48,17 +63,11 @@
     <ClInclude Include="WebApp\macros.h">
       <Filter>WebApp</Filter>
     </ClInclude>
-    <ClInclude Include="WebApp\Session.h">
-      <Filter>WebApp</Filter>
-    </ClInclude>
     <ClInclude Include="WebApp\WebApplication.h">
       <Filter>WebApp</Filter>
     </ClInclude>
     <ClInclude Include="DB\SQLite.h">
       <Filter>DB</Filter>
-    </ClInclude>
-    <ClInclude Include="WebApp\WebServer.h">
-      <Filter>WebApp</Filter>
     </ClInclude>
     <ClInclude Include="DB\DataBase.h">
       <Filter>DB</Filter>
@@ -90,9 +99,32 @@
     <ClInclude Include="Packet\PacketActivityListener.h">
       <Filter>Packet</Filter>
     </ClInclude>
-    <ClInclude Include="IActivityListener.h" />
     <ClInclude Include="Packet\import.h">
       <Filter>Packet</Filter>
+    </ClInclude>
+    <ClInclude Include="Server\WebServer.h">
+      <Filter>Server</Filter>
+    </ClInclude>
+    <ClInclude Include="Server\Session.h">
+      <Filter>Server</Filter>
+    </ClInclude>
+    <ClInclude Include="Server\import.h">
+      <Filter>Server</Filter>
+    </ClInclude>
+    <ClInclude Include="Client\WebClient.h">
+      <Filter>Client</Filter>
+    </ClInclude>
+    <ClInclude Include="Client\import.h">
+      <Filter>Client</Filter>
+    </ClInclude>
+    <ClInclude Include="Listener\IActivityListener.h">
+      <Filter>Listener</Filter>
+    </ClInclude>
+    <ClInclude Include="Listener\ListenerPool.h">
+      <Filter>Listener</Filter>
+    </ClInclude>
+    <ClInclude Include="Listener\import.h">
+      <Filter>Listener</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

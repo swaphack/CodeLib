@@ -44,6 +44,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>../System/</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -64,12 +65,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Config\XmlConfig.cpp" />
     <ClCompile Include="JSON\json_reader.cpp" />
     <ClCompile Include="JSON\json_value.cpp" />
     <ClCompile Include="JSON\json_writer.cpp" />
     <ClCompile Include="XML\tinyxml2.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Config\import.h" />
+    <ClInclude Include="Config\XmlConfig.h" />
     <ClInclude Include="JSON\allocator.h" />
     <ClInclude Include="JSON\assertions.h" />
     <ClInclude Include="JSON\autolink.h" />

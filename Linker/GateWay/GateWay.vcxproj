@@ -35,10 +35,11 @@
   <ItemGroup>
     <ClInclude Include="GateWay\GateWay.h" />
     <ClInclude Include="GateWay\HttpActivityTest.h" />
+    <ClInclude Include="GateWay\import.h" />
     <ClInclude Include="GateWay\PacketActivityTest.h" />
   </ItemGroup>
   <ItemGroup>
-    <Xml Include="Resource\Server.xml" />
+    <Xml Include="Resource\GateWay.xml" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{34926FA0-C813-4D9F-910C-E5DF52D3ABCC}</ProjectGuid>

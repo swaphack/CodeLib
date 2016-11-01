@@ -1,20 +1,19 @@
 #include "Script.h"
 #include "Document/import.h"
-#include <cstdio>
-#include <cstdlib>
+
 
 using namespace script;
 
 Script* Script::s_script = nullptr;
 
 Script::Script()
+:_mainDocument(nullptr)
 {
-	_document = new Document();
 }
 
 Script::~Script()
 {
-	delete _document;
+	removeAllDocuments();
 }
 
 Script* Script::getInstance()
@@ -35,39 +34,84 @@ bool Script::load(const char* filepath)
 		return false;
 	}
 
-	FILE* fptr = fopen(filepath, "rb");
-	if (fptr == NULL)
+	Document* pDoc = new Document();
+	if (!pDoc->loadFile(filepath))
 	{
+		delete pDoc;
 		return false;
 	}
 
-	fseek(fptr, 0, SEEK_END);
-	int size = ftell(fptr);
-	fseek(fptr, 0, SEEK_SET);
+	_mainDocument = pDoc;
 
-	char* text = (char*)malloc(size + 1);
-	fread(text, size, 1, fptr);
-	fclose(fptr);
+	this->run();
 
-	text[size] = '\0';
-	
-	bool bRet = loadString(text);
-	free(text);
-
-	return bRet;
+	return true;
 }
 
-bool Script::loadString(const char* text)
+bool Script::import(const char* filepath)
 {
-	if (text == nullptr)
+	if (filepath == nullptr)
 	{
 		return false;
 	}
 
-	return _document->loadString(text);
+	Document* pDoc = new Document();
+	if (!pDoc->loadFile(filepath))
+	{
+		delete pDoc;
+		return false;
+	}
+
+	this->addDocument(filepath, pDoc);
+
+	return true;
 }
 
 void Script::run()
 {
 
+}
+
+void Script::addDocument(const char* name, Document* document)
+{
+	if (name == nullptr || document == nullptr)
+	{
+		return;
+	}
+
+	removeDocument(name);
+
+	_documents[name] = document;
+}
+
+void Script::removeDocument(const char* name)
+{
+	if (name == nullptr)
+	{
+		return;
+	}
+
+	std::map<std::string, Document*>::iterator iter = _documents.find(name);
+	
+	if (iter == _documents.end())
+	{
+		return;
+	}
+
+	delete iter->second;
+
+	_documents.erase(iter);
+}
+
+void Script::removeAllDocuments()
+{
+	std::map<std::string, Document*>::iterator iter = _documents.begin();
+
+	while (iter != _documents.end())
+	{
+		delete iter->second;
+		iter++;
+	}
+
+	_documents.clear();
 }

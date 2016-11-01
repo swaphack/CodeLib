@@ -75,6 +75,9 @@
     <ClCompile Include="Server\GameServer.cpp" />
     <ClCompile Include="Server\PacketReceiver.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <Xml Include="Resource\Server.xml" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

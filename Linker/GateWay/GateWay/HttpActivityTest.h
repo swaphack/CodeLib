@@ -18,6 +18,8 @@ private:
 	// 获取请求的页面
 	void handUrlMethod(sys::String& inString, std::string& outString);
 	// 获取上传的参数
-	// for url param(?xx=xx) and post body(body)
-	void handParamMethod(sys::String& inString, std::map<std::string, std::string>& outParams);
+	// for url get param(?xx=xx)
+	void handGetParamMethod(sys::String& inString, std::map<std::string, std::string>& outParams);
+	// for url get param(?xx=xx)
+	void handPostParamMethod(sys::String& inString, std::map<std::string, std::string>& outParams);
 };

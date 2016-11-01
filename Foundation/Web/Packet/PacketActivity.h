@@ -16,13 +16,12 @@ namespace web
 	protected:
 		// 收到http请求
 		virtual void doGet(const char* buffer, int size);
-		// 发送http反馈
+		// 发送反馈
 		virtual void doPost(const PacketHeader& packet);
+		// 发送给指定目标
+		virtual void doPost(int destID, const PacketHeader& packet);
 		// 广播
 		virtual void doBroadCast(const PacketHeader& packet);
-	private:
-		void sendResponse(const char* sessionID, const char* bytes, int size);
-		void sendBroadcast(const char* sessionID, const char* bytes, int size);
 	private:
 		std::string _sessionID;
 	};

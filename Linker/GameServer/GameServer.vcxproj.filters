@@ -7,6 +7,9 @@
     <Filter Include="Protocols">
       <UniqueIdentifier>{8eecd3cd-d771-40ce-93c2-3f2106b61b69}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource">
+      <UniqueIdentifier>{e64f5a99-8e7f-4d2d-be5b-23bd8f04cd20}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Server\GameServer.h">
@@ -32,5 +35,10 @@
     <ClCompile Include="Server\PacketReceiver.cpp">
       <Filter>Server</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="Resource\Server.xml">
+      <Filter>Resource</Filter>
+    </Xml>
   </ItemGroup>
 </Project>

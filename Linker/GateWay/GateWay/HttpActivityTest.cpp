@@ -19,12 +19,11 @@ void HttpActivityTest::doHttpGet(sys::HttpRequest* request)
 
 	// 获取请求的页面
 	handUrlMethod(params, url);
-	// 获取上传的参数
-	handParamMethod(params, reqParams);
-
+	
 	if (method.compare(HttpRequestConstant::HTTP_REQ_GET))
 	{// get
-
+		// 获取上传的参数
+		handGetParamMethod(params, reqParams);
 	}
 	else if (method.compare(HttpRequestConstant::HTTP_REQ_POST))
 	{// post
@@ -64,7 +63,7 @@ void HttpActivityTest::handUrlMethod(sys::String& inString, std::string& outStri
 }
 
 
-void HttpActivityTest::handParamMethod(sys::String& inString, std::map<std::string, std::string>& outParams)
+void HttpActivityTest::handGetParamMethod(sys::String& inString, std::map<std::string, std::string>& outParams)
 {
 	int index = inString.findFirstOf('?');
 	sys::String params = "";
@@ -76,6 +75,24 @@ void HttpActivityTest::handParamMethod(sys::String& inString, std::map<std::stri
 
 	std::vector<sys::String> vecParams;
 	params.split('&', vecParams);
+
+	std::vector<sys::String> kv;
+	std::vector<sys::String>::iterator iter = vecParams.begin();
+	while (iter != vecParams.end())
+	{
+		(*iter).split('=', kv);
+		if (kv.size() == 2)
+		{
+			outParams[kv[0].getString()] = kv[1].getString();
+		}
+		iter++;
+	}
+}
+
+void HttpActivityTest::handPostParamMethod(sys::String& inString, std::map<std::string, std::string>& outParams)
+{
+	std::vector<sys::String> vecParams;
+	inString.split('&', vecParams);
 
 	std::vector<sys::String> kv;
 	std::vector<sys::String>::iterator iter = vecParams.begin();

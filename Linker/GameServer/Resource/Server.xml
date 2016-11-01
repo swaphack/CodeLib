@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <server>
+    <gateway ip="127.0.0.1" port="9547" />
+    <local ip="127.0.0.1" port="9548" />
+  </server>
+</root>

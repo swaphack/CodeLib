@@ -16,11 +16,10 @@ namespace web
 		virtual void doGet(sys::HttpRequest* request);
 		// 发送http反馈
 		virtual void doPost(sys::HttpResponse* response);
+		// 发送给指定目标
+		virtual void doPost(int destID, sys::HttpResponse* response);
 		// 广播
 		virtual void doBroadCast(sys::HttpResponse* response);
-	private:
-		void sendResponse(const char* sessionID, sys::HttpResponse* response);
-		void sendBroadcast(const char* sessionID, sys::HttpResponse* response);
 	private:
 		std::string _sessionID;
 	};

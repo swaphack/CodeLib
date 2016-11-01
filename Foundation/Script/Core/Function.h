@@ -17,5 +17,7 @@ namespace script
 		Function();
 		virtual ~Function();
 	public:
+		// ´´½¨º¯Êý
+		static Function* create(const char* funcName, ScopeHandler handler, AccessType accesType = E_ACCESSTYPE_PUBLIC);
 	};
 }

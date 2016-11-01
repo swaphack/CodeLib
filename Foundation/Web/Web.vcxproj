@@ -67,16 +67,20 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Client\WebClient.cpp" />
     <ClCompile Include="DB\SQLite.cpp" />
     <ClCompile Include="Http\HttpActivity.cpp" />
     <ClCompile Include="Http\HttpActivityListener.cpp" />
+    <ClCompile Include="Listener\ListenerPool.cpp" />
     <ClCompile Include="Packet\PacketActivity.cpp" />
     <ClCompile Include="Packet\PacketActivityListener.cpp" />
-    <ClCompile Include="WebApp\WebServer.cpp" />
-    <ClCompile Include="WebApp\Session.cpp" />
+    <ClCompile Include="Server\Session.cpp" />
+    <ClCompile Include="Server\WebServer.cpp" />
     <ClCompile Include="WebApp\WebApplication.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Client\import.h" />
+    <ClInclude Include="Client\WebClient.h" />
     <ClInclude Include="DB\DataBase.h" />
     <ClInclude Include="DB\DataMember.h" />
     <ClInclude Include="DB\IDBString.h" />
@@ -85,16 +89,19 @@
     <ClInclude Include="Http\HttpActivityListener.h" />
     <ClInclude Include="Http\HttpRecvHandler.h" />
     <ClInclude Include="Http\import.h" />
-    <ClInclude Include="IActivityListener.h" />
+    <ClInclude Include="Listener\IActivityListener.h" />
+    <ClInclude Include="Listener\import.h" />
+    <ClInclude Include="Listener\ListenerPool.h" />
     <ClInclude Include="Packet\import.h" />
     <ClInclude Include="Packet\PacketActivity.h" />
     <ClInclude Include="Packet\PacketActivityListener.h" />
     <ClInclude Include="Packet\PacketRecvHandler.h" />
+    <ClInclude Include="Server\import.h" />
+    <ClInclude Include="Server\Session.h" />
+    <ClInclude Include="Server\WebServer.h" />
     <ClInclude Include="web.h" />
-    <ClInclude Include="WebApp\WebServer.h" />
     <ClInclude Include="WebApp\import.h" />
     <ClInclude Include="WebApp\macros.h" />
-    <ClInclude Include="WebApp\Session.h" />
     <ClInclude Include="WebApp\WebApplication.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

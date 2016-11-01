@@ -30,9 +30,12 @@
     <ClInclude Include="GateWay\PacketActivityTest.h">
       <Filter>GateWay</Filter>
     </ClInclude>
+    <ClInclude Include="GateWay\import.h">
+      <Filter>GateWay</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Xml Include="Resource\Server.xml">
+    <Xml Include="Resource\GateWay.xml">
       <Filter>Resource</Filter>
     </Xml>
   </ItemGroup>

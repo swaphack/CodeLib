@@ -124,3 +124,8 @@ Variable* Variable::alloct(const char* name)
 	pVal->setName(name);
 	return pVal;
 }
+
+void Variable::initFunctions()
+{
+
+}

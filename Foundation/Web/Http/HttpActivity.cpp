@@ -4,8 +4,7 @@
 
 using namespace web;
 
-#define G_HTTPAPPLICATION WebApplication::getInstance()->getServer()
-
+#define G_HTTPAPPLICATION WebApplication::getInstance()
 
 HttpActivity::HttpActivity()
 {
@@ -42,8 +41,17 @@ void HttpActivity::doPost(sys::HttpResponse* response)
 	}
 
 	response->makeMessage();
+	response->setSessionID(_sessionID.c_str());
 
-	this->sendResponse(_sessionID.c_str(), response);
+	G_HTTPAPPLICATION->postResponse(_sessionID.c_str(), new sys::NetData(response->getMessage(), response->getMessageSize()));
+}
+
+void HttpActivity::doPost(int destID, sys::HttpResponse* response)
+{
+	response->makeMessage();
+	response->setSessionID(_sessionID.c_str());
+
+	G_HTTPAPPLICATION->postResponse(destID, new sys::NetData(response->getMessage(), response->getMessageSize()));
 }
 
 void HttpActivity::doBroadCast(sys::HttpResponse* response)
@@ -54,18 +62,7 @@ void HttpActivity::doBroadCast(sys::HttpResponse* response)
 	}
 
 	response->makeMessage();
+	response->setSessionID(_sessionID.c_str());
 
-	this->sendBroadcast(_sessionID.c_str(), response);
-}
-
-void HttpActivity::sendResponse(const char* sessionID, sys::HttpResponse* response)
-{
-	response->setSessionID(sessionID);
-	G_HTTPAPPLICATION->postResponse(sessionID, new sys::NetData(response->getMessage(), response->getMessageSize()));
-}
-
-void HttpActivity::sendBroadcast(const char* sessionID, sys::HttpResponse* response)
-{
-	response->setSessionID(sessionID);
 	G_HTTPAPPLICATION->postBroadcast(new sys::NetData(response->getMessage(), response->getMessageSize()));
 }

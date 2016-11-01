@@ -6,7 +6,7 @@
 
 using namespace web;
 
-#define G_HTTPAPPLICATION WebApplication::getInstance()->getServer()
+#define G_HTTPAPPLICATION WebApplication::getInstance()
 
 PacketActivity::PacketActivity()
 {
@@ -41,31 +41,32 @@ void PacketActivity::doPost(const PacketHeader& packet)
 	char* bytes = (char*)malloc(pPacket->Length);
 	memset(bytes, 0, pPacket->Length);
 	memcpy(bytes, (char*)pPacket, pPacket->Length);
-	this->sendResponse(_sessionID.c_str(), bytes, pPacket->Length);
+	G_HTTPAPPLICATION->postResponse(_sessionID.c_str(), new sys::NetData(bytes, pPacket->Length));
+
+	free(bytes);
+}
+
+void PacketActivity::doPost(int destID, const PacketHeader& packet)
+{
+	const PacketHeader* pPacket = &packet;
+	char* bytes = (char*)malloc(pPacket->Length);
+	memset(bytes, 0, pPacket->Length);
+	memcpy(bytes, (char*)pPacket, pPacket->Length);
+
+	G_HTTPAPPLICATION->postResponse(destID, new sys::NetData(bytes, pPacket->Length));
+
 	free(bytes);
 }
 
 void PacketActivity::doBroadCast(const PacketHeader& packet)
 {
-	this->sendBroadcast(_sessionID.c_str(), (char*)&packet, packet.Length);
-}
+	const PacketHeader* pPacket = &packet;
+	char* bytes = (char*)malloc(pPacket->Length);
+	memset(bytes, 0, pPacket->Length);
+	memcpy(bytes, (char*)pPacket, pPacket->Length);
 
-void PacketActivity::sendResponse(const char* sessionID, const char* bytes, int size)
-{
-	if (sessionID == nullptr || bytes == nullptr || size <= 0)
-	{
-		return;
-	}
+	G_HTTPAPPLICATION->postBroadcast(new sys::NetData(bytes, pPacket->Length));
 
-	G_HTTPAPPLICATION->postResponse(sessionID, new sys::NetData(bytes, size));
-}
-
-void PacketActivity::sendBroadcast(const char* sessionID, const char* bytes, int size)
-{
-	if (sessionID == nullptr || bytes == nullptr || size <= 0)
-	{
-		return;
-	}
-	G_HTTPAPPLICATION->postBroadcast(new sys::NetData(bytes, size));
+	free(bytes);
 }
 

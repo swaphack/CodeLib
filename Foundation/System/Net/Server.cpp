@@ -60,6 +60,17 @@ void Server::setRecvHandler( Object* target, SERVER_RECV_HANDLER handler )
 	_recvHandler.second = handler;
 }
 
+void Server::setCloseHandler(Object* target, CLIENT_CLOSE_HANDLER handler)
+{
+	if (target == nullptr || handler == nullptr)
+	{
+		return;
+	}
+
+	_closeHandler.first = target;
+	_closeHandler.second = handler;
+}
+
 void Server::sendMessage( int id, NetData* data )
 {
 	this->addSendBuffer(id, data);
@@ -105,6 +116,11 @@ void Server::removeClient( int sockId )
 	_clients.erase(sockId);
 	_recvDatas.erase(sockId);
 	_sendDatas.erase(sockId);
+
+	if (this->_closeHandler.first && this->_closeHandler.second)
+	{
+		(this->_closeHandler.first->*this->_closeHandler.second)(sockId);
+	}
 }
 
 void Server::removeAllClients()
@@ -173,11 +189,10 @@ void Server::_recvData( std::vector<int>& removedSocks )
 		it++)
 	{
 		size = 0;
-
-		char* buff = it->second->Recv(size);
+		Socket* socket = it->second;
+		char* buff = socket->Recv(size);
 		if (size == -1)
 		{// 等待
-			Socket* socket = it->second;
 			if (socket->HasError() == true)
 			{
 				int sockId = socket->getID();
@@ -186,13 +201,12 @@ void Server::_recvData( std::vector<int>& removedSocks )
 		}
 		else if (size == 0)
 		{// 断开连接
-			Socket* socket = it->second;
 			int sockId = socket->getID();
 			removedSocks.push_back(sockId);
 		}
 		else if (size > 0)
 		{// 接收到数据
-			this->onRecvHandler(it->second->getID(), new NetData(buff, size));
+			this->onRecvHandler(socket->getID(), new NetData(buff, size));
 		}
 	}
 }
