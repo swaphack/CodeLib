@@ -16,24 +16,20 @@ namespace game
 		*/
 		EO_NOTEQUAL = 1,
 		/**
-		*	不等于
-		*/
-		EO_NOTEQUAL = 2,
-		/**
 		*	大于
 		*/
-		EO_GREATER = 3,
+		EO_GREATER = 2,
 		/**
 		*	小于
 		*/
-		EO_LESS = 4,
+		EO_LESS = 3,
 		/**
 		*	大等于
 		*/
-		EO_GREATER_OR_EQUAL = 5,
+		EO_GREATER_OR_EQUAL = 4,
 		/**
 		*	小等于
 		*/
-		EO_LESS_OR_EQUAL = 6,
+		EO_LESS_OR_EQUAL = 5,
 	};
 }

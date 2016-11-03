@@ -1,48 +1,33 @@
 #pragma once
 
-#include "../interface/IPerson.h"
+#include "Component.h"
 
-#include "PropertySheet.h"
+#include "../interface/IPerson.h"
+#include "../enum/ePlayerProperty.h"
+
+#include "Body.h"
 
 namespace game
 {
-	class Person : public IPerson
+	class Person : public Component, public IPerson
 	{
 	public:
 		Person();
 		virtual ~Person();
 	public:
-		void setGender(int nGender);
-
-		virtual int getGender() const;
-
-		void setBirthDay(int nBirthDay);
-
-		virtual int getBirthDay() const;
-
-		void setCountryID(int nCountryID);
-
-		virtual int getCountryID() const;
-
-		void setClubID(int nClubID);
-
-		virtual int getClubID() const;
-
-		void setTeamID(int nTeamID);
-
-		virtual int getTeamID() const;
-
-		virtual const IPropertySheet* getProperty() const;
-
-		virtual void onBorn();
-
-		virtual void onDead();
-	private:
-		int m_gender;
-		int m_birthday;
-		int m_countryID;
-		int m_clubID;
-		int m_teamID;
-		IPropertySheet* m_propertySheet;
+		/**
+		*	设置属性值
+		*/
+		template<typename T>
+		void setPropertyValue(float value);
+		/**
+		*	获取属性值
+		*/
+		template<typename T>
+		int getPropertyValue() const;
+		/**
+		*	执行动作
+		*/
+		virtual bool runAction(IAction* pAction);
 	};
 }

@@ -11,11 +11,19 @@ namespace game
 	/**
 	*	全场比赛
 	*/
-	class IFullMatch : public Identity
+	class IFullMatch
 	{
 	public:
 		virtual ~IFullMatch() {}
 	public:
+		/**
+		*	比赛规则
+		*/
+		virtual const IRule* getRule() const = 0;
+		/**
+		*	比赛场地
+		*/
+		virtual const IField* getField() const = 0;
 		/**
 		*	上半程
 		*/
@@ -36,10 +44,6 @@ namespace game
 		*	客队
 		*/
 		virtual const ITeam* getVisiterTeam() const = 0;
-		/**
-		*	比赛场地
-		*/
-		virtual const IField* getField() const = 0;
 		/**
 		*	获取队伍
 		*/

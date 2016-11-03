@@ -24,8 +24,8 @@ float Field::getHeight() const
 
 bool Field::contains(const Point& point)
 {
-	if (point.x >= 0 && point.x <= getWidth()
-		&& point.y	>= 0 && point.y <= getHeight())
+	if (point.X >= 0 && point.X <= getWidth()
+		&& point.Y	>= 0 && point.Y <= getHeight())
 	{
 		return true;
 	}

@@ -3,18 +3,28 @@
 using namespace game;
 
 
-void PropertySheet::removeProperty(int nPropertyType)
+PropertySheet::PropertySheet()
 {
-	Properties::const_iterator iter = m_mProperties.find(nPropertyType);
-	if (iter != m_mProperties.end())
-	{
-		delete iter->second;
 
-		m_mProperties.erase(iter);
-	}
 }
 
-void PropertySheet::addProperty(IProperty* pProperty)
+PropertySheet::~PropertySheet()
+{
+	this->removeAllProperties();
+}
+
+Property* PropertySheet::getProperty(int nPropertyType)
+{
+	Properties::const_iterator iter = m_mProperties.find(nPropertyType);
+	if (iter == m_mProperties.end())
+	{
+		return nullptr;
+	}
+
+	return iter->second;
+}
+
+void PropertySheet::addProperty(Property* pProperty)
 {
 	if (pProperty == nullptr)
 	{
@@ -26,25 +36,20 @@ void PropertySheet::addProperty(IProperty* pProperty)
 	m_mProperties[pProperty->getType()] = pProperty;
 }
 
-const IProperty* PropertySheet::getProperty(int nPropertyType) const
+void PropertySheet::removeProperty(int nPropertyType)
 {
 	Properties::const_iterator iter = m_mProperties.find(nPropertyType);
-	if (iter == m_mProperties.end())
+	if (iter != m_mProperties.end())
 	{
-		return nullptr;
+		delete iter->second;
+
+		m_mProperties.erase(iter);
 	}
-
-	return iter->second;
 }
 
-PropertySheet::PropertySheet()
+void PropertySheet::removeAllProperties()
 {
-
-}
-
-PropertySheet::~PropertySheet()
-{
-	Properties::iterator iter = m_mProperties.begin;
+	Properties::iterator iter = m_mProperties.begin();
 	while (iter == m_mProperties.end())
 	{
 		delete iter->second;
@@ -52,4 +57,27 @@ PropertySheet::~PropertySheet()
 	}
 
 	m_mProperties.clear();
+}
+
+void PropertySheet::foreach(std::function<void(Property*)> handler)
+{
+	Properties::iterator iter = m_mProperties.begin();
+	while (iter == m_mProperties.end())
+	{
+		handler(iter->second);
+		iter++;
+	}
+}
+
+PropertySheet* PropertySheet::clone()
+{
+	PropertySheet* pSheet = new PropertySheet();
+	Properties::iterator iter = m_mProperties.begin();
+	while (iter == m_mProperties.end())
+	{
+		pSheet->addProperty(iter->second->clone());
+		iter++;
+	}
+
+	return pSheet;
 }

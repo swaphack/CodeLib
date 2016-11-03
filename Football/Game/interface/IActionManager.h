@@ -7,10 +7,10 @@ namespace game
 	/**
 	*	比赛场景
 	*/
-	class IActionManger
+	class IActionManager
 	{
 	public:
-		virtual ~IActionManger() {}
+		virtual ~IActionManager() {}
 	public:
 		/**
 		*	添加动作
@@ -20,5 +20,9 @@ namespace game
 		*	移除动作
 		*/
 		virtual void removeAction(IAction* action) = 0;
+		/**
+		*	移除所有动作
+		*/
+		virtual void removeAllActions() = 0;
 	};
 }

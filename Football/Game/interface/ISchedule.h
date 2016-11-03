@@ -1,7 +1,5 @@
 #pragma once
 
-#include "Identity.h"
-
 #include <vector>
 
 namespace game
@@ -11,7 +9,7 @@ namespace game
 	/**
 	*	比赛赛程
 	*/
-	class ISchedule : public Identity
+	class ISchedule
 	{
 	public:
 		virtual ~ISchedule() {}
@@ -19,6 +17,10 @@ namespace game
 		/**
 		*	获取指定时间的比赛
 		*/
-		virtual bool getMatchList(int time, std::vector<IMatchDetailedList>& matchDetailedList);
+		virtual bool getMatchsByTime(int time, std::vector<IMatchDetailedList>& matchDetailedList);
+		/**
+		*	获取指定队伍的比赛赛程
+		*/
+		virtual bool getMatchByTeam(int teamID, std::vector<IMatchDetailedList>& matchDetailedList);
 	};
 }

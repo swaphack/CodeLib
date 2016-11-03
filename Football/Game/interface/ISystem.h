@@ -7,7 +7,7 @@ namespace game
 	/**
 	*	ϵͳ
 	*/
-	class ISystem : public Identity
+	class ISystem
 	{
 	public:
 		virtual ~ISystem() {}

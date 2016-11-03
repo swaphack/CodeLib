@@ -2,7 +2,7 @@
 
 namespace game
 {
-	class Vector;
+	struct Vector;
 	/**
 	*	躯体
 	*/
@@ -46,6 +46,6 @@ namespace game
 		/**
 		*	看向某一点
 		*/
-		virtual void lookAt(const Vector& point) const = 0;
+		virtual void lookAt(const Vector& point) = 0;
 	};
 }

@@ -4,7 +4,7 @@ namespace game
 {
 	struct Interval
 	{
-		float min;
-		float max
+		float Min;
+		float Max;
 	};
 }

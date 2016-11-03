@@ -9,7 +9,7 @@ namespace game
 	/**
 	*	¹ú¼Ò
 	*/
-	class ICountry : public Identity
+	class ICountry
 	{
 	public:
 		virtual ~ICountry() {}

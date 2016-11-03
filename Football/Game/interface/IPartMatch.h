@@ -28,13 +28,17 @@ namespace game
 		*/
 		virtual bool isMatchOver() const = 0;
 		/**
-		*	比赛规则
-		*/
-		virtual const IRule* getRule() const = 0;
-		/**
 		*	比赛场地
 		*/
-		virtual const IField* getField() const = 0;
+		virtual IField* getField() const = 0;
+		/**
+		*	左边队伍
+		*/
+		virtual int getLeftTeamID() const = 0;
+		/**
+		*	右边队伍
+		*/
+		virtual int getRightTeamID() const = 0;
 		/**
 		*	左边场地
 		*/
@@ -43,5 +47,13 @@ namespace game
 		*	右边场地
 		*/
 		virtual IFieldSide* getRightSide() = 0;
+		/**
+		*	左边分数
+		*/
+		virtual int getLeftScore() const = 0;
+		/**
+		*	右边分数
+		*/
+		virtual int getRightScore() const = 0;
 	};
 }

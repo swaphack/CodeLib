@@ -67,7 +67,7 @@ const TransferMarket* World::getTransferMarket() const
 	return m_transferMarket;
 }
 
-void :World::update()
+void World::update()
 {
 
 }

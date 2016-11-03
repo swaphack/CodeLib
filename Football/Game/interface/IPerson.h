@@ -1,14 +1,16 @@
 #pragma once
 
-#include "Identity.h"
-
 namespace game
 {
-	class IPropertySheet;
+	class PropertySheet;
+	class ComponentSheet;
+	class IBody;
+	class IAction;
+
 	/**
 	*	人
 	*/
-	class IPerson : public Identity
+	class IPerson
 	{
 	public:
 		virtual ~IPerson() {}
@@ -26,8 +28,20 @@ namespace game
 		*/
 		virtual int getCountryID() const = 0;
 		/**
-		*	获取基础属性
+		*	所属俱乐部
 		*/
-		virtual const IPropertySheet* getProperty() const = 0;
+		virtual int getClubID() const = 0;
+		/**
+		*	所属队伍
+		*/
+		virtual int getTeamID() const = 0;
+		/**
+		*	身体，用于动作表现
+		*/
+		virtual IBody* getBody() = 0;
+		/**
+		*	执行动作
+		*/
+		virtual bool runAction(IAction* pAction) = 0;
 	};
 }

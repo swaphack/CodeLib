@@ -26,14 +26,6 @@ namespace game
 		*	设置名字
 		*/
 		void setName(const char* name);
-		/**
-		*	出生
-		*/
-		virtual void onBorn() = 0;
-		/**
-		*	死亡
-		*/
-		virtual void onDead() = 0;
 	private:
 		int	_id;
 		std::string _name;

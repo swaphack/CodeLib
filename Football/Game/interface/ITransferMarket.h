@@ -8,6 +8,7 @@ namespace game
 	class IClub;
 	class IContract;
 	class IConditionSheet;
+	class PropertySheet;
 
 	/**
 	*	转会市场
@@ -19,22 +20,25 @@ namespace game
 	public:
 		/**
 		*	挂牌到市场
-		*	@param condition 挂牌条件
+		*	@param nPersonID 人员
+		*	@param pCondition 挂牌条件
+		*	@param nClubID 所属俱乐部
 		*/
-		virtual bool onSale(IPerson* pPerson, IConditionSheet* condition) const = 0;
+		virtual bool onSale(int nPersonID, IConditionSheet* pCondition, int nClubID = -1) = 0;
 		/**
 		*	从市场上移除
+		*	@param nPersonID 人员
 		*/
-		virtual bool offShelf(IPerson* pPerson) const = 0;
+		virtual bool offShelf(int nPersonID) = 0;
 		/**
 		*	查询
-		*	@param condition 搜索条件
+		*	@param pCondition 搜索条件
 		*	@param targets 搜索结果
 		*/
-		virtual bool findPerson(const IConditionSheet* condition, std::vector<IPerson*>& targets) const = 0;
+		virtual bool findPerson(const PropertySheet* pCondition, std::vector<int>& targets) const = 0;
 		/**
-		*	达成协议
+		*	清空
 		*/
-		virtual bool makeDeal(int nClubID, int nPersonID, IContract* pContract) = 0;
+		virtual void clear() = 0;
 	};
 }

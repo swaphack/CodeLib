@@ -14,7 +14,7 @@ namespace game
 	/**
 	*	±ÈÈü¶ÓÎé
 	*/
-	class ITeam : public Identity
+	class ITeam
 	{
 	public:
 		/**

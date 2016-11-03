@@ -5,6 +5,7 @@
 namespace game
 {
 	class ICondition;
+	class PropertySheet;
 
 	/**
 	*	条件栏
@@ -16,14 +17,18 @@ namespace game
 	public:
 		/**
 		*	添加条件
+		*	@param nConditionID 限制条件类型
+		*	@param pCondtion 限制条件
 		*/
-		virtual void addCondition(ICondition* pCondtion) = 0;
+		virtual void addCondition(int nConditionID, ICondition* pCondtion) = 0;
 		/**
 		*	移除条件
+		*	@param nConditionID 限制条件类型
 		*/
 		virtual void removeCondition(int nConditionID) = 0;
 		/**
 		*	获取条件
+		*	@param nConditionID 限制条件类型
 		*/
 		virtual const ICondition* getCondition(int nConditionID) const = 0;
 		/**
@@ -32,8 +37,9 @@ namespace game
 		virtual void removeAllConditions() = 0;
 		/**
 		*	是否满足条件
-		*	@param vNotMatchConditions 不匹配的条件
+		*	@param pSearchSheet 查找条件表
+		*	@param pNotMatchSheet 不匹配表
 		*/
-		virtual bool match(float value, std::vector<ICondition*>& vNotMatchConditions) const = 0;
+		virtual bool match(const PropertySheet* pSearchSheet, std::vector<ICondition*>& pNotMatchSheet) const = 0;
 	};
 }

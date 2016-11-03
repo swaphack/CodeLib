@@ -1,7 +1,5 @@
 #pragma once
 
-#include "Identity.h"
-
 namespace game
 {
 	class IPropertySheet;
@@ -9,7 +7,7 @@ namespace game
 	/**
 	*	ºÏÍ¬
 	*/
-	class IContract : public Identity
+	class IContract
 	{
 	public:
 		virtual ~IContract() {}

@@ -8,7 +8,7 @@ namespace game
 	/**
 	*	ÌåÓı¹İ
 	*/
-	class IStadium : public Identity
+	class IStadium
 	{
 	public:
 		virtual ~IStadium() {}

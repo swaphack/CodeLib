@@ -1,13 +1,11 @@
 #pragma once
 
-#include "Identity.h"
-
 namespace game
 {
 	/**
 	*	比赛清单
 	*/
-	class IMatchDetailedList : public Identity
+	class IMatchDetailedList
 	{
 	public:
 		virtual ~IMatchDetailedList() {}
@@ -27,6 +25,6 @@ namespace game
 		/**
 		*	客队
 		*/
-		virtual int getVisitersTeamID() const = 0;
+		virtual int getVisiterTeamID() const = 0;
 	};
 }
