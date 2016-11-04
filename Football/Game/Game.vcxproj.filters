@@ -444,5 +444,8 @@
     <ClCompile Include="instance\Mind.cpp">
       <Filter>instance\mind</Filter>
     </ClCompile>
+    <ClCompile Include="instance\Club.cpp">
+      <Filter>instance\organization\club</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

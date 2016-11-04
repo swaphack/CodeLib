@@ -160,6 +160,7 @@
     <ClCompile Include="instance\ActionWithBall.cpp" />
     <ClCompile Include="instance\ActionWithOutBall.cpp" />
     <ClCompile Include="instance\Body.cpp" />
+    <ClCompile Include="instance\Club.cpp" />
     <ClCompile Include="instance\Component.cpp" />
     <ClCompile Include="instance\ComponentSheet.cpp" />
     <ClCompile Include="instance\Condition.cpp" />
