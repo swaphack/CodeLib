@@ -21,9 +21,17 @@ namespace game
 		virtual IComponent* getComponent(const char* pszType) = 0;
 		/**
 		*	添加组件
+		*	如果已存在，返回false并且不添加
 		*	@param pComponent 组件
 		*/
-		virtual void addComponent(IComponent* pComponent) = 0;
+		virtual bool addComponent(IComponent* pComponent) = 0;
+		/**
+		*	添加组件
+		*	如果已存在，返回false并且不添加
+		*	@param pszType 组件类型
+		*	@param pComponent 组件
+		*/
+		virtual bool addComponent(const char* pszType, IComponent* pComponent) = 0;
 		/**
 		*	移除组件
 		*	@param pszType 组件类型

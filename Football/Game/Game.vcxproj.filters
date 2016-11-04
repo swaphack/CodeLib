@@ -115,6 +115,9 @@
     <Filter Include="interface\mind">
       <UniqueIdentifier>{9d95d91c-f84d-498b-94a6-be7ce2e27c91}</UniqueIdentifier>
     </Filter>
+    <Filter Include="instance\mind">
+      <UniqueIdentifier>{4fea6061-75e8-424a-9df9-6bd59112c6af}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="struct\Point.h">
@@ -279,7 +282,6 @@
     <ClInclude Include="interface\ICommand.h">
       <Filter>interface\mind</Filter>
     </ClInclude>
-    <ClInclude Include="interface\IActionCommand.h" />
     <ClInclude Include="interface\IResult.h">
       <Filter>interface\match\result</Filter>
     </ClInclude>
@@ -334,9 +336,6 @@
     <ClInclude Include="interface\IBody.h">
       <Filter>interface\people</Filter>
     </ClInclude>
-    <ClInclude Include="interface\IPerson.h">
-      <Filter>interface\people</Filter>
-    </ClInclude>
     <ClInclude Include="interface\IMark.h">
       <Filter>interface\people</Filter>
     </ClInclude>
@@ -351,9 +350,6 @@
     </ClInclude>
     <ClInclude Include="instance\ActionManager.h">
       <Filter>instance\match\action</Filter>
-    </ClInclude>
-    <ClInclude Include="interface\IPlayer.h">
-      <Filter>interface\people</Filter>
     </ClInclude>
     <ClInclude Include="instance\Player.h">
       <Filter>instance\people</Filter>
@@ -375,6 +371,21 @@
     </ClInclude>
     <ClInclude Include="enum\eProperty.h">
       <Filter>enum</Filter>
+    </ClInclude>
+    <ClInclude Include="interface\IActionCommand.h">
+      <Filter>interface\mind</Filter>
+    </ClInclude>
+    <ClInclude Include="instance\Mind.h">
+      <Filter>instance\mind</Filter>
+    </ClInclude>
+    <ClInclude Include="interface\IPerson.h">
+      <Filter>interface\people</Filter>
+    </ClInclude>
+    <ClInclude Include="interface\IPlayer.h">
+      <Filter>interface\people</Filter>
+    </ClInclude>
+    <ClInclude Include="instance\Club.h">
+      <Filter>instance\organization\club</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -429,6 +440,9 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="instance\ActionWithOutBall.cpp">
       <Filter>instance\match\action</Filter>
+    </ClCompile>
+    <ClCompile Include="instance\Mind.cpp">
+      <Filter>instance\mind</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

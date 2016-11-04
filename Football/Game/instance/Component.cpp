@@ -24,29 +24,78 @@ ComponentSheet* Component::getComponentSheet()
 	return m_pComponentSheet;
 }
 
-void Component::addComponent(IComponent* pComponent)
+bool Component::copyTo(IComponent* pComponent)
 {
 	if (pComponent == nullptr)
 	{
-		return;
+		return false;
 	}
 
-	m_pComponentSheet->addComponent(pComponent);
-}
-
-IComponent* Component::clone()
-{
-	IComponent* pComponent = new Component();
 	getPropertySheet()->foreach([&](Property* handler){
-		Property* pProperty = handler->clone();
-		pComponent->getPropertySheet()->addProperty(pProperty);
+		Property* pProperty = pComponent->getPropertySheet()->getProperty(handler->getType());
+		if (pProperty == nullptr)
+		{
+			pProperty = handler->clone();
+			pComponent->getPropertySheet()->addProperty(pProperty);
+		}
+		// 复制属性
+		pProperty->setValue(handler->getValue());
+		pProperty->setChangedHandler(handler->getChangedHandler());
 	});
 	getComponentSheet()->foreach([&](IComponent* handler){
-		IComponent* pComponent = handler->clone();
-		pComponent->getComponentSheet()->addComponent(pComponent);
+		IComponent* pChild = pComponent->getComponentSheet()->getComponent(handler->getType());
+		if (pChild == nullptr)
+		{
+			pChild = handler->clone();
+			pComponent->getComponentSheet()->addComponent(pChild);
+		}
+		// 复制属性
+		handler->copyTo(pChild);
 	});
 
-	return pComponent;
+	return true;
+}
+
+bool Component::copy(IComponent* pComponent)
+{
+	if (pComponent == nullptr)
+	{
+		return false;
+	}
+
+	pComponent->copyTo(this);
+
+	return true;
+}
+
+bool Component::addCloneComponent(IComponent* pComponent)
+{
+	if (pComponent == nullptr)
+	{
+		return false;
+	}
+
+	return this->getComponentSheet()->addComponent(pComponent->clone());
+}
+
+bool Component::addComponent(IComponent* pComponent)
+{
+	if (pComponent == nullptr)
+	{
+		return false;
+	}
+
+	return this->getComponentSheet()->addComponent(pComponent);
+}
+
+IComponent* Component::getComponent(const char* name)
+{
+	if (name == nullptr)
+	{
+		return false;
+	}
+
+	return this->getComponentSheet()->getComponent(name);
 }
 
 void Component::setPropertyValue(int key, float value)
@@ -56,6 +105,7 @@ void Component::setPropertyValue(int key, float value)
 	{
 		pProperty = new Property();
 		pProperty->setType(key);
+		getPropertySheet()->addProperty(pProperty);
 	}
 
 	pProperty->setValue(value);
@@ -68,6 +118,7 @@ void Component::setPropertyChangedHandler(int key, PropertyHandler handler)
 	{
 		pProperty = new Property();
 		pProperty->setType(key);
+		getPropertySheet()->addProperty(pProperty);
 	}
 
 	pProperty->setChangedHandler(handler);

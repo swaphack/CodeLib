@@ -6,6 +6,7 @@
 #include <functional>
 #include <map>
 #include <string>
+#include <typeinfo>
 
 namespace game
 {
@@ -28,10 +29,20 @@ namespace game
 		virtual IComponent* getComponent(const char* pszType);
 		/**
 		*	添加组件
+		*	如果已存在，返回false并且不添加
+		*	@param pComponent 组件
 		*/
-		virtual void addComponent(IComponent* pComponent);
+		virtual bool addComponent(IComponent* pComponent);
+		/**
+		*	添加组件
+		*	如果已存在，返回false并且不添加
+		*	@param pszType 组件类型
+		*	@param pComponent 组件
+		*/
+		virtual bool addComponent(const char* pszType, IComponent* pComponent);
 		/**
 		*	移除组件
+		*	删除旧有资源
 		*	@param pszType 组件类型
 		*/
 		virtual void removeComponent(const char* pszType);
@@ -54,7 +65,7 @@ namespace game
 	template<typename T>
 	T* ComponentSheet::getComponent()
 	{
-		const char* name = GET_COMPONENT_TYPE(T);
+		const char* name = typeid(T).name();
 
 		IComponent* pComponent = getComponent(name); 
 		if (pComponent == nullptr)

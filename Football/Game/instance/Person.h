@@ -3,31 +3,51 @@
 #include "Component.h"
 
 #include "../interface/IPerson.h"
-#include "../enum/ePlayerProperty.h"
+#include "../enum/eProperty.h"
 
 #include "Body.h"
+#include "Mind.h"
 
 namespace game
 {
+	/**
+	*	人
+	*/
 	class Person : public Component, public IPerson
 	{
 	public:
 		Person();
 		virtual ~Person();
 	public:
+		CREATE_COMPONENT_TYPE();
+		CREATE_COMPONENT_CLONE(Person);
 		/**
-		*	设置属性值
+		*	性别
 		*/
-		template<typename T>
-		void setPropertyValue(float value);
+		CREATE_COMPONENT_PROPERTY2(EPP_GENDER, Gender, int);
 		/**
-		*	获取属性值
+		*	出生日期
 		*/
-		template<typename T>
-		int getPropertyValue() const;
+		CREATE_COMPONENT_PROPERTY2(EPP_BIRTHDAY, BirthDay, int);
 		/**
-		*	执行动作
+		*	国籍
 		*/
-		virtual bool runAction(IAction* pAction);
+		CREATE_COMPONENT_PROPERTY2(EPP_COUNTRY, Country, int);
+		/**
+		*	所属俱乐部
+		*/
+		CREATE_COMPONENT_PROPERTY2(EPP_CLUB, Club, int);
+		/**
+		*	所属队伍
+		*/
+		CREATE_COMPONENT_PROPERTY2(EPP_TEAM, Team, int);
+		/**
+		*	身躯
+		*/
+		CREATE_COMPONENT_FUNCTION2(Body, Body);
+		/**
+		*	大脑
+		*/
+		CREATE_COMPONENT_FUNCTION2(Mind, Mind);
 	};
 }

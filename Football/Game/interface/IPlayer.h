@@ -2,6 +2,9 @@
 
 namespace game
 {
+	class IBody;
+	class IMind;
+
 	/**
 	*	‘À∂Ø‘±
 	*/
@@ -10,6 +13,5 @@ namespace game
 	public:
 		virtual ~IPlayer() {}
 	public:
-
 	};
 }

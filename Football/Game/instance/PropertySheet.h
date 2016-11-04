@@ -20,6 +20,7 @@ namespace game
 		Property* getProperty(int nPropertyType);
 		/**
 		*	添加属性
+		*	添加新的属性前，需判断是否存在
 		*/
 		void addProperty(Property* pProperty);
 		/**

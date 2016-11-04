@@ -31,8 +31,6 @@ void PropertySheet::addProperty(Property* pProperty)
 		return;
 	}
 
-	removeProperty(pProperty->getType());
-
 	m_mProperties[pProperty->getType()] = pProperty;
 }
 
@@ -50,7 +48,7 @@ void PropertySheet::removeProperty(int nPropertyType)
 void PropertySheet::removeAllProperties()
 {
 	Properties::iterator iter = m_mProperties.begin();
-	while (iter == m_mProperties.end())
+	while (iter != m_mProperties.end())
 	{
 		delete iter->second;
 		iter++;
@@ -62,7 +60,7 @@ void PropertySheet::removeAllProperties()
 void PropertySheet::foreach(std::function<void(Property*)> handler)
 {
 	Properties::iterator iter = m_mProperties.begin();
-	while (iter == m_mProperties.end())
+	while (iter != m_mProperties.end())
 	{
 		handler(iter->second);
 		iter++;
@@ -73,7 +71,7 @@ PropertySheet* PropertySheet::clone()
 {
 	PropertySheet* pSheet = new PropertySheet();
 	Properties::iterator iter = m_mProperties.begin();
-	while (iter == m_mProperties.end())
+	while (iter != m_mProperties.end())
 	{
 		pSheet->addProperty(iter->second->clone());
 		iter++;

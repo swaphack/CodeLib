@@ -4,7 +4,7 @@ namespace game
 {
 
 	/**
-	*	属性
+	*	人物属性
 	*/
 	enum ePersonProperty
 	{
@@ -28,5 +28,44 @@ namespace game
 		*	所属队伍
 		*/
 		EPP_TEAM,
+		/**
+		*	最大值
+		*/
+		EPP_MAX,
+	};
+
+	/**
+	*	身躯属性
+	*/
+	enum eBodyProperty
+	{
+		/**
+		*	坐标x
+		*/
+		EBP_POSITION_X = EPP_MAX,
+		/**
+		*	坐标y
+		*/
+		EBP_POSITION_Y,
+		/**
+		*	坐标z
+		*/
+		EBP_POSITION_Z,
+		/**
+		*	长度
+		*/
+		EBP_VOLUME_LENGTH,
+		/**
+		*	宽度
+		*/
+		EBP_VOLUME_WIDTH,
+		/**
+		*	高度
+		*/
+		EBP_VOLUME_HEIGHT,
+		/**
+		*	最大值
+		*/
+		EBP_MAX,
 	};
 }

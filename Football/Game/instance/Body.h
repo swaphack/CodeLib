@@ -4,81 +4,58 @@
 
 #include "../struct/Vector.h"
 
+#include "Component.h"
+#include "../enum/eProperty.h"
+
 namespace game
 {
 	/**
+	*	身躯
 	*	以脚底为中心
 	*/
-	class Body : public IBody
+	class Body : public Component, public IBody
 	{
 	public:
 		Body();
 		virtual ~Body();
 	public:
-		/**
-		*	设置长度
-		*/
-		void setLength(float value);
+		CREATE_COMPONENT_TYPE();
+		CREATE_COMPONENT_CLONE(Body);
 		/**
 		*	获取长度
 		*/
-		virtual float getLength() const;
-		/**
-		*	设置宽度
-		*/
-		void setWidth(float value);
+		CREATE_COMPONENT_PROPERTY(EBP_VOLUME_LENGTH, Length);
 		/**
 		*	获取宽度
 		*/
-		virtual float getWidth() const;
-		/**
-		*	设置高度
-		*/
-		void setHeight(float value);
+		CREATE_COMPONENT_PROPERTY(EBP_VOLUME_WIDTH, Width);
 		/**
 		*	获取高度
 		*/
-		virtual float getHeight() const;
-		/**
-		*	设置x轴位置
-		*/
-		void setPositionX(float value);
+		CREATE_COMPONENT_PROPERTY(EBP_VOLUME_HEIGHT, Height);
 		/**
 		*	获取x轴位置
 		*/
-		virtual float getPositionX() const;
-		/**
-		*	设置y轴位置
-		*/
-		void setPositionY(float value);
+		CREATE_COMPONENT_PROPERTY(EBP_POSITION_X, PositionX);
 		/**
 		*	获取y轴位置
 		*/
-		virtual float getPositionY() const;
-		/**
-		*	设置z轴位置
-		*/
-		void setPositionZ(float value);
+		CREATE_COMPONENT_PROPERTY(EBP_POSITION_Y, PositionY);
 		/**
 		*	获取z轴位置
 		*/
-		virtual float getPositionZ() const;
+		CREATE_COMPONENT_PROPERTY(EBP_POSITION_Z, PositionZ);
 		/**
 		*	是否与其他相交
 		*/
-		virtual bool intersectBody(const IBody* pBody) const;
+		virtual bool intersectBody(IBody* pBody);
 		/**
 		*	获取位置
 		*/
-		virtual const Vector& getPosition() const;
+		virtual Vector getPosition();
 		/**
 		*	看向某一点
 		*/
 		virtual void lookAt(const Vector& point);
-	public:
-		// 坐标
-		Vector m_vPosition;
-		// 体积
-		Vector m_vVolume;
 	};
 }

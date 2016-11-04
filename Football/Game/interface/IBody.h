@@ -14,35 +14,35 @@ namespace game
 		/**
 		*	获取长度
 		*/
-		virtual float getLength() const = 0;
+		virtual float getLength() = 0;
 		/**
 		*	获取宽度
 		*/
-		virtual float getWidth() const = 0;
+		virtual float getWidth() = 0;
 		/**
 		*	获取高度
 		*/
-		virtual float getHeight() const = 0;
+		virtual float getHeight() = 0;
 		/**
 		*	获取x轴位置
 		*/
-		virtual float getPositionX() const = 0;
+		virtual float getPositionX() = 0;
 		/**
 		*	获取y轴位置
 		*/
-		virtual float getPositionY() const = 0;
+		virtual float getPositionY() = 0;
 		/**
 		*	获取z轴位置
 		*/
-		virtual float getPositionZ() const = 0;
+		virtual float getPositionZ() = 0;
 		/**
 		*	是否与其他相交
 		*/
-		virtual bool intersectBody(const IBody* pBody) const = 0;
+		virtual bool intersectBody(IBody* pBody) = 0;
 		/**
 		*	获取位置
 		*/
-		virtual const Vector& getPosition() const = 0;
+		virtual Vector getPosition() = 0;
 		/**
 		*	看向某一点
 		*/

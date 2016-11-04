@@ -4,18 +4,10 @@ using namespace game;
 
 Person::Person()
 {
+	addComponent(new Body());
+	addComponent(new Mind());
 }
 
 Person::~Person()
 {
-}
-
-bool Person::runAction(IAction* pAction)
-{
-	if (pAction == nullptr)
-	{
-		return false;
-	}
-
-	return true;
 }

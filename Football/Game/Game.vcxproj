@@ -77,6 +77,7 @@
     <ClInclude Include="enum\eSystem.h" />
     <ClInclude Include="instance\ActionManager.h" />
     <ClInclude Include="instance\Body.h" />
+    <ClInclude Include="instance\Club.h" />
     <ClInclude Include="instance\Coach.h" />
     <ClInclude Include="instance\Component.h" />
     <ClInclude Include="instance\ComponentSheet.h" />
@@ -88,6 +89,7 @@
     <ClInclude Include="instance\Identity.h" />
     <ClInclude Include="instance\ILevel.h" />
     <ClInclude Include="instance\Match.h" />
+    <ClInclude Include="instance\Mind.h" />
     <ClInclude Include="instance\Notification.h" />
     <ClInclude Include="instance\Person.h" />
     <ClInclude Include="instance\Player.h" />
@@ -123,8 +125,8 @@
     <ClInclude Include="interface\IPartMatch.h" />
     <ClInclude Include="interface\IMatchDetailedList.h" />
     <ClInclude Include="interface\IMind.h" />
-    <ClInclude Include="interface\IPerson.h" />
     <ClInclude Include="interface\IMark.h" />
+    <ClInclude Include="interface\IPerson.h" />
     <ClInclude Include="interface\IPlayer.h" />
     <ClInclude Include="interface\IRank.h" />
     <ClInclude Include="interface\IResult.h" />
@@ -164,6 +166,7 @@
     <ClCompile Include="instance\ConditionSheet.cpp" />
     <ClCompile Include="instance\Field.cpp" />
     <ClCompile Include="instance\Identity.cpp" />
+    <ClCompile Include="instance\Mind.cpp" />
     <ClCompile Include="instance\Person.cpp" />
     <ClCompile Include="instance\Player.cpp" />
     <ClCompile Include="instance\Property.cpp" />

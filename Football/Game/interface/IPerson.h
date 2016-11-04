@@ -6,6 +6,7 @@ namespace game
 	class ComponentSheet;
 	class IBody;
 	class IAction;
+	class IMind;
 
 	/**
 	*	人
@@ -18,30 +19,30 @@ namespace game
 		/**
 		*	性别
 		*/
-		virtual int getGender() const = 0;
+		virtual int getGender() = 0;
 		/**
 		*	出生日期
 		*/
-		virtual int getBirthDay() const = 0;
+		virtual int getBirthDay() = 0;
 		/**
 		*	国籍
 		*/
-		virtual int getCountryID() const = 0;
+		virtual int getCountry() = 0;
 		/**
 		*	所属俱乐部
 		*/
-		virtual int getClubID() const = 0;
+		virtual int getClub() = 0;
 		/**
 		*	所属队伍
 		*/
-		virtual int getTeamID() const = 0;
+		virtual int getTeam() = 0;
 		/**
-		*	身体，用于动作表现
+		*	身躯
 		*/
 		virtual IBody* getBody() = 0;
 		/**
-		*	执行动作
+		*	大脑
 		*/
-		virtual bool runAction(IAction* pAction) = 0;
+		virtual IMind* getMind() = 0;
 	};
 }

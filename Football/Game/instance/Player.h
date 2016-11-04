@@ -1,16 +1,19 @@
 #pragma once
 
 #include "../interface/IPlayer.h"
-#include "Person.h"
+#include "Component.h"
 
 namespace game
 {
-	class Player : public Person, public IPlayer
+	class Person;
+
+	class Player : public Component, public IPlayer
 	{
 	public:
-		Player(Person& person);
+		Player();
 		virtual ~Player();
 	public:
-
+		CREATE_COMPONENT_TYPE();
+		CREATE_COMPONENT_CLONE(Player);
 	};
 }

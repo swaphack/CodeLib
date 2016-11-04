@@ -25,19 +25,30 @@ IComponent* ComponentSheet::getComponent(const char* pszType)
 	return nullptr;
 }
 
-void ComponentSheet::addComponent(IComponent* pComponent)
+bool ComponentSheet::addComponent(IComponent* pComponent)
 {
 	if (pComponent == nullptr)
 	{
-		return;
+		return false;
 	}
-	std::map<std::string, IComponent*>::iterator iter = m_mComponents.find(pComponent->getType());
+	return addComponent(pComponent->getType(), pComponent);
+}
+
+bool ComponentSheet::addComponent(const char* pszType, IComponent* pComponent)
+{
+	if (pszType == nullptr || pComponent == nullptr)
+	{
+		return false;
+	}
+	std::map<std::string, IComponent*>::iterator iter = m_mComponents.find(pszType);
 	if (iter != m_mComponents.end())
 	{
-		return;
+		return false;
 	}
 
-	m_mComponents[pComponent->getType()] = pComponent;
+	m_mComponents[pszType] = pComponent;
+
+	return true;
 }
 
 void ComponentSheet::removeComponent(const char* pszType)

@@ -28,5 +28,13 @@ namespace game
 		*	克隆
 		*/
 		virtual IComponent* clone() = 0;
+		/**
+		*	复制信息到目标组件
+		*/
+		virtual bool copyTo(IComponent*) = 0;
+		/**
+		*	复制组件信息
+		*/
+		virtual bool copy(IComponent* pComponent) = 0;
 	};
 }

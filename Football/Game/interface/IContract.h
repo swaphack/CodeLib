@@ -15,14 +15,14 @@ namespace game
 		/**
 		*	俱乐部
 		*/
-		virtual int getClubID() const = 0;
+		virtual int getClubID() = 0;
 		/**
 		*	员工
 		*/
-		virtual int getPersonID() const = 0;
+		virtual int getPersonID() = 0;
 		/**
 		*	协定条件
 		*/
-		virtual const IPropertySheet* getAgreement() const = 0;
+		virtual const IPropertySheet* getAgreement() = 0;
 	};
 }
