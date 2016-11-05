@@ -2,7 +2,7 @@
 
 namespace game
 {
-	class Interval;
+	struct Interval;
 
 	/**
 	*	³£Á¿	
