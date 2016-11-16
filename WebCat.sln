@@ -97,6 +97,11 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ProtocolCreate", "Tool\ProtocolCreate\ProtocolCreate.vcxproj", "{B9DABDB6-A239-444F-8853-D9A3F61882D8}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GameServer", "Linker\GameServer\GameServer.vcxproj", "{BE1060E7-7558-4F39-A54D-B0B86780314B}"
+	ProjectSection(ProjectDependencies) = postProject
+		{055E992E-F80D-453D-A9C8-EB12CEC1267D} = {055E992E-F80D-453D-A9C8-EB12CEC1267D}
+		{99422F86-35B7-4026-A9A8-EE181F151B7E} = {99422F86-35B7-4026-A9A8-EE181F151B7E}
+		{BEAC5C99-0F40-47AE-8093-1B5F8C5FF6BA} = {BEAC5C99-0F40-47AE-8093-1B5F8C5FF6BA}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

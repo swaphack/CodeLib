@@ -63,9 +63,9 @@ namespace sys
 		// 客户端
 		std::map<int, Socket*> _clients;
 		// 接收到的数据
-		std::map<int, DataQueue> _recvDatas;
+		std::map<int, DataQueue*> _recvDatas;
 		// 待发送的数据
-		std::map<int, DataQueue> _sendDatas;
+		std::map<int, DataQueue*> _sendDatas;
 		// 接收数据时的处理
 		ServerRecvHandler _recvHandler;
 		// 客户端断开时的处理

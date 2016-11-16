@@ -1,5 +1,5 @@
 #pragma once
 
 #include "GateWay.h"
-#include "HttpActivityTest.h"
-#include "PacketActivityTest.h"
+#include "HttpActivityReceiver.h"
+#include "PacketActivityReceiver.h"

@@ -10,27 +10,33 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="GateWay\HttpActivityTest.cpp">
-      <Filter>GateWay</Filter>
-    </ClCompile>
     <ClCompile Include="GateWay\GateWay.cpp">
       <Filter>GateWay</Filter>
     </ClCompile>
-    <ClCompile Include="GateWay\PacketActivityTest.cpp">
+    <ClCompile Include="GateWay\PacketActivityReceiver.cpp">
+      <Filter>GateWay</Filter>
+    </ClCompile>
+    <ClCompile Include="GateWay\HttpActivityReceiver.cpp">
+      <Filter>GateWay</Filter>
+    </ClCompile>
+    <ClCompile Include="GateWay\TextActivityListener.cpp">
       <Filter>GateWay</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="GateWay\HttpActivityTest.h">
-      <Filter>GateWay</Filter>
-    </ClInclude>
     <ClInclude Include="GateWay\GateWay.h">
       <Filter>GateWay</Filter>
     </ClInclude>
-    <ClInclude Include="GateWay\PacketActivityTest.h">
+    <ClInclude Include="GateWay\import.h">
       <Filter>GateWay</Filter>
     </ClInclude>
-    <ClInclude Include="GateWay\import.h">
+    <ClInclude Include="GateWay\PacketActivityReceiver.h">
+      <Filter>GateWay</Filter>
+    </ClInclude>
+    <ClInclude Include="GateWay\HttpActivityReceiver.h">
+      <Filter>GateWay</Filter>
+    </ClInclude>
+    <ClInclude Include="GateWay\TextActivityListener.h">
       <Filter>GateWay</Filter>
     </ClInclude>
   </ItemGroup>

@@ -6,7 +6,7 @@ namespace game
 	class ICoach;
 	class IPerson;
 	class ITeam;
-	class IFinance;
+	class Finance;
 	class IContract;
 
 	/**
@@ -18,13 +18,17 @@ namespace game
 		virtual ~IClub() {}
 	public:
 		/**
+		*	名称
+		*/
+		virtual int getName() = 0;
+		/**
 		*	所在国家
 		*/
 		virtual int getCountry() = 0;
 		/**
 		*	俱乐部财政
 		*/
-		virtual IFinance* getFinance() = 0;
+		virtual Finance* getFinance() = 0;
 		/**
 		*	雇佣
 		*	@param nPersonID 员工

@@ -44,8 +44,8 @@ void initManyClients(std::map<int, std::pair<Client*, ClientRecv*>>& clients, in
 		ClientRecv* recv = new ClientRecv(client);
 		client->setRecvHandler(recv, static_cast<CLIENT_RECV_HANDLER>(&ClientRecv::onRecv));
 
- 		std::string msg = "Hello world!";
-		client->sendString(msg.c_str());
+  		std::string msg = "Hello world!";
+ 		client->sendString(msg.c_str());
 
 		clients[i] = std::make_pair(client, recv);
 	}
@@ -57,7 +57,7 @@ void test1()
 
 	std::map<int, std::pair<Client*, ClientRecv*>> clients;
 
-	initManyClients(clients, 1);
+	initManyClients(clients, 10000);
 
 	std::map<int, std::pair<Client*, ClientRecv*>>::iterator it;
 
@@ -127,14 +127,7 @@ int main(int argc, char** argv)
 	
 	//test2();
 
-	const char* url = "www.baidu.com";
-
-	std::string ip;
-	int port;
-
-	sys::DNS::getFirstIPAddress(url, ip, port);
-
-	PRINT(ip.c_str());
+	test1();
 
 	return 0;
 };

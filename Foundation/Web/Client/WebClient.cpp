@@ -14,10 +14,20 @@ WebClient::~WebClient()
 
 sys::Client* WebClient::createClient(const char* ip, int port)
 {
+	if (ip == nullptr || port < 0)
+	{
+		return nullptr;
+	}
 	sys::Client* pClient = new sys::Client(ip, port);
+	if (pClient == nullptr)
+	{
+		return nullptr;
+	}
 	pClient->connect();
 	pClient->setRecvHandler(_recvHandler.first, _recvHandler.second);
 	pClient->setCloseHandler(_closeHandler.first, _closeHandler.second);
+
+	_clients[pClient->getID()] = pClient;
 
 	return pClient;
 }
@@ -38,6 +48,8 @@ void WebClient::closeClient(int id)
 	if (iter != _clients.end())
 	{
 		iter->second->disconnect();
+		delete iter->second;
+		_clients.erase(iter);
 	}
 }
 
@@ -78,10 +90,21 @@ void WebClient::setCloseHandler(sys::Object* target, sys::CLIENT_CLOSE_HANDLER h
 
 void WebClient::update()
 {
+	std::vector<int> clientIDs;
+
 	std::map<int, sys::Client*>::iterator iter = _clients.begin();
 	while (iter != _clients.end())
 	{
 		iter->second->update();
+		if (!iter->second->isConnected())
+		{
+			clientIDs.push_back(iter->first);
+		}
 		iter++;
+	}
+
+	for (int i = 0; i < clientIDs.size(); i++)
+	{
+		this->closeClient(clientIDs[i]);
 	}
 }

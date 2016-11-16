@@ -4,68 +4,76 @@ namespace game
 {
 
 	/**
-	*	人物属性
+	*	属性
 	*/
-	enum ePersonProperty
+	enum eNoramlProperty
 	{
+		/**
+		*	名称
+		*/
+		eNoramlProperty_Name,
 		/**
 		*	性别
 		*/
-		EPP_GENDER,
+		eNoramlProperty_Gender,
 		/**
 		*	出生日期
 		*/
-		EPP_BIRTHDAY,
+		eNoramlProperty_Birthday,
 		/**
 		*	国籍
 		*/
-		EPP_COUNTRY,
+		eNoramlProperty_Country,
+		/**
+		*	城市
+		*/
+		eNoramlProperty_City,
 		/**
 		*	所属俱乐部
 		*/
-		EPP_CLUB,
+		eNoramlProperty_Club,
 		/**
 		*	所属队伍
 		*/
-		EPP_TEAM,
+		eNoramlProperty_Team,
 		/**
 		*	最大值
 		*/
-		EPP_MAX,
+		eNoramlProperty_Max,
 	};
 
 	/**
-	*	身躯属性
+	*	空间属性
 	*/
-	enum eBodyProperty
+	enum eSpaceProperty
 	{
 		/**
 		*	坐标x
 		*/
-		EBP_POSITION_X = EPP_MAX,
+		eSpaceProperty_Position_X,
 		/**
 		*	坐标y
 		*/
-		EBP_POSITION_Y,
+		eSpaceProperty_Position_Y,
 		/**
 		*	坐标z
 		*/
-		EBP_POSITION_Z,
+		eSpaceProperty_Position_Z,
 		/**
 		*	长度
 		*/
-		EBP_VOLUME_LENGTH,
+		eSpaceProperty_Volume_Length,
 		/**
 		*	宽度
 		*/
-		EBP_VOLUME_WIDTH,
+		eSpaceProperty_Volume_Width,
 		/**
 		*	高度
 		*/
-		EBP_VOLUME_HEIGHT,
+		eSpaceProperty_Volume_Height,
 		/**
 		*	最大值
 		*/
-		EBP_MAX,
+		eSpaceProperty_Max,
 	};
 }

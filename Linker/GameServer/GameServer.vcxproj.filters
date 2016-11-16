@@ -10,12 +10,21 @@
     <Filter Include="Resource">
       <UniqueIdentifier>{e64f5a99-8e7f-4d2d-be5b-23bd8f04cd20}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Module">
+      <UniqueIdentifier>{f1acbc17-a04d-4454-af1c-62de53612e1f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Module\Player">
+      <UniqueIdentifier>{d23aefba-99c8-4710-af3c-2b446b630293}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Module\User">
+      <UniqueIdentifier>{84759780-556f-4f90-9de1-87e38f0f57f0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Module\Packet">
+      <UniqueIdentifier>{71afcc55-f208-46cb-871c-029b50fab2b7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Server\GameServer.h">
-      <Filter>Server</Filter>
-    </ClInclude>
-    <ClInclude Include="Server\PacketReceiver.h">
       <Filter>Server</Filter>
     </ClInclude>
     <ClInclude Include="Protocols\import.h">
@@ -27,13 +36,44 @@
     <ClInclude Include="Protocols\Packets.h">
       <Filter>Protocols</Filter>
     </ClInclude>
+    <ClInclude Include="Module\Player\Player.h">
+      <Filter>Module\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Module\import.h">
+      <Filter>Module</Filter>
+    </ClInclude>
+    <ClInclude Include="Module\macros.h">
+      <Filter>Module</Filter>
+    </ClInclude>
+    <ClInclude Include="Module\User\Users.h">
+      <Filter>Module\User</Filter>
+    </ClInclude>
+    <ClInclude Include="Module\Packet\PacketReceiver.h">
+      <Filter>Module\Packet</Filter>
+    </ClInclude>
+    <ClInclude Include="Module\Packet\PacketDispatcher.h">
+      <Filter>Module\Packet</Filter>
+    </ClInclude>
+    <ClInclude Include="Module\Packet\import.h">
+      <Filter>Module\Packet</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Server\GameServer.cpp">
       <Filter>Server</Filter>
     </ClCompile>
-    <ClCompile Include="Server\PacketReceiver.cpp">
-      <Filter>Server</Filter>
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="Module\Player\Player.cpp">
+      <Filter>Module\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Module\User\Users.cpp">
+      <Filter>Module\User</Filter>
+    </ClCompile>
+    <ClCompile Include="Module\Packet\PacketDispatcher.cpp">
+      <Filter>Module\Packet</Filter>
+    </ClCompile>
+    <ClCompile Include="Module\Packet\PacketReceiver.cpp">
+      <Filter>Module\Packet</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

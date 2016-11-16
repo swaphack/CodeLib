@@ -95,6 +95,7 @@
     <ClInclude Include="Packet\import.h" />
     <ClInclude Include="Packet\PacketActivity.h" />
     <ClInclude Include="Packet\PacketActivityListener.h" />
+    <ClInclude Include="Packet\PacketHeader.h" />
     <ClInclude Include="Packet\PacketRecvHandler.h" />
     <ClInclude Include="Server\import.h" />
     <ClInclude Include="Server\Session.h" />

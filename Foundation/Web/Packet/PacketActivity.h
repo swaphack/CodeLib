@@ -14,7 +14,7 @@ namespace web
 	public:
 		void onReceiveRequest(const char* sessionID, const char* buffer, int size);
 	protected:
-		// 收到http请求
+		// 收到报文请求
 		virtual void doGet(const char* buffer, int size);
 		// 发送反馈
 		virtual void doPost(const PacketHeader& packet);
@@ -22,7 +22,7 @@ namespace web
 		virtual void doPost(int destID, const PacketHeader& packet);
 		// 广播
 		virtual void doBroadCast(const PacketHeader& packet);
-	private:
+	protected:
 		std::string _sessionID;
 	};
 }

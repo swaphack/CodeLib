@@ -1,7 +1,5 @@
 #pragma once
 
-#include "../interface/IComponent.h"
-
 #include "Identity.h"
 #include "PropertySheet.h"
 #include "ComponentSheet.h"
@@ -16,7 +14,7 @@ namespace game
 	*	每个继承类的属性实现 CREATE_COMPONENT_PROPERTY|CREATE_COMPONENT_PROPERTY2
 	*	每个继承类的新的组件 CREATE_COMPONENT_FUNCTION
 	*/
-	class Component : public IComponent
+	class Component : public Identity
 	{
 	public:
 		// 创建组件类型,每个继承类都必须调用
@@ -27,23 +25,36 @@ namespace game
 		// 创建克隆方法,每个继承类都必须调用
 #define CREATE_COMPONENT_CLONE(T) \
 	public:\
-	virtual IComponent* clone() \
+	virtual Component* clone() \
 	{\
-	IComponent* pComponent = new T(); \
+	Component* pComponent = new T(); \
 	copyTo(pComponent); \
 	return pComponent; \
 	}
 
-		// 创建组件属性, 自动义实数类型
+		/** 
+		*	创建组件获取属性和设置属性方法, 保存为实数类型
+		*	@param Enum 枚举
+		*	@param FunName 函数名称
+		*	@param Type 类型
+		*/
 #define CREATE_COMPONENT_PROPERTY2(Enum, FunName, Type) \
 	public:\
 	void set##FunName(Type value) { setPropertyValue((int)Enum, (Type)(value)); } \
 	virtual Type get##FunName() { return (Type)(getPropertyValue((int)Enum)); }
 
-		// 创建组件属性, 默认float类型
+		/**
+		*	创建组件属性, 默认float类型
+		*	@param Enum 枚举
+		*	@param FunName 函数名称
+		*/
 #define CREATE_COMPONENT_PROPERTY(Enum, FunName) CREATE_COMPONENT_PROPERTY2(Enum, FunName, float)
 
-		// 创建组件方法
+		/**
+		*	创建组件获取方法，不存在时，创建一个新的
+		*	@param Type 组件类型
+		*	@param FunName 函数名称
+		*/
 #define CREATE_COMPONENT_FUNCTION(Type, FunName) \
 	public:\
 	Type* get##FunName() \
@@ -56,7 +67,11 @@ namespace game
 		} \
 		return value; \
 	}
-		// 创建组件方法
+		/**
+		*	创建组件获取方法
+		*	@param Type 组件类型
+		*	@param FunName 函数名称
+		*/
 #define CREATE_COMPONENT_FUNCTION2(Type, FunName) \
 	public:\
 	Type* get##FunName() \
@@ -72,39 +87,9 @@ namespace game
 		CREATE_COMPONENT_TYPE();
 		CREATE_COMPONENT_CLONE(Component);
 		/**
-		*	获取属性列表
+		*	获取属性值
 		*/
-		virtual PropertySheet* getPropertySheet();
-		/**
-		*	获取组件列表
-		*/
-		virtual ComponentSheet* getComponentSheet();
-		/**
-		*	获取组件
-		*/
-		template<typename T>
-		T* getComponent();
-		/**
-		*	复制信息到目标组件
-		*/
-		virtual bool copyTo(IComponent* pComponent);
-		/**
-		*	复制组件信息
-		*/
-		virtual bool copy(IComponent* pComponent);
-		/**
-		*	添加新的克隆组件
-		*/
-		bool addCloneComponent(IComponent* pComponent);
-		/**
-		*	添加新的组件
-		*/
-		bool addComponent(IComponent* pComponent);
-		/**
-		*	获取组件
-		*/
-		IComponent* getComponent(const char* name);
-	protected:
+		float getPropertyValue(int key);
 		/**
 		*	设置属性值
 		*/
@@ -113,10 +98,38 @@ namespace game
 		*	设置属性值
 		*/
 		void setPropertyChangedHandler(int key, PropertyHandler handler);
+
 		/**
-		*	获取属性值
+		*	获取组件
 		*/
-		float getPropertyValue(int key);
+		template<typename T>
+		T* getComponent();
+		/**
+		*	添加新的组件
+		*/
+		bool addComponent(Component* pComponent);
+		/**
+		*	获取组件
+		*/
+		Component* getComponent(const char* name);
+
+		/**
+		*	复制信息到目标组件
+		*/
+		bool copyTo(Component* pComponent);
+		/**
+		*	复制组件信息
+		*/
+		bool copy(Component* pComponent);
+	protected:
+		/**
+		*	获取属性列表
+		*/
+		PropertySheet* getPropertySheet();
+		/**
+		*	获取组件列表
+		*/
+		ComponentSheet* getComponentSheet();
 	private:
 		// 属性列表
 		PropertySheet* m_pPropertySheet;
@@ -127,7 +140,19 @@ namespace game
 	template<typename T>
 	T* Component::getComponent()
 	{
-		return getComponentSheet()->getComponent<T>();
+		const char* name = typeid(T).name();
+		if (name == nullptr)
+		{
+			return nullptr;
+		}
+
+		Component* pComponent = getComponentSheet()->getComponent(name);
+		if (pComponent == nullptr)
+		{
+			return nullptr;
+		}
+
+		return dynamic_cast<T*>(pComponent);
 	}
 
 	// 	template float Person::getValue<ePersonProperty>(ePersonProperty key);

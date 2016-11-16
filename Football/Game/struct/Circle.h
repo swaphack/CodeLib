@@ -5,7 +5,7 @@
 namespace game
 {
 	/**
-	*	Բ
+	*	圆
 	*/
 	struct Circle 
 	{

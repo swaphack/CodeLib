@@ -1,8 +1,5 @@
 #pragma once
 
-#include "../interface/IComponentSheet.h"
-#include "Component.h"
-
 #include <functional>
 #include <map>
 #include <string>
@@ -10,7 +7,9 @@
 
 namespace game
 {
-	class ComponentSheet : public IComponentSheet
+	class Component;
+
+	class ComponentSheet
 	{
 	public:
 		ComponentSheet();
@@ -26,40 +25,40 @@ namespace game
 		*	获取组件
 		*	@param pszType 组件类型
 		*/
-		virtual IComponent* getComponent(const char* pszType);
+		Component* getComponent(const char* pszType);
 		/**
 		*	添加组件
 		*	如果已存在，返回false并且不添加
 		*	@param pComponent 组件
 		*/
-		virtual bool addComponent(IComponent* pComponent);
+		bool addComponent(Component* pComponent);
 		/**
 		*	添加组件
 		*	如果已存在，返回false并且不添加
 		*	@param pszType 组件类型
 		*	@param pComponent 组件
 		*/
-		virtual bool addComponent(const char* pszType, IComponent* pComponent);
+		bool addComponent(const char* pszType, Component* pComponent);
 		/**
 		*	移除组件
 		*	删除旧有资源
 		*	@param pszType 组件类型
 		*/
-		virtual void removeComponent(const char* pszType);
+		void removeComponent(const char* pszType);
 		/**
 		*	移除所有组件
 		*/
-		virtual void removeAllComponents();
+		void removeAllComponents();
 		/**
 		*	遍历
 		*/
-		void foreach(std::function<void(IComponent*)> handler);
+		void foreach(std::function<void(Component*)> handler);
 		/**
 		*	克隆
 		*/
-		virtual IComponentSheet* clone();
+		ComponentSheet* clone();
 	private:
-		std::map<std::string, IComponent*> m_mComponents;
+		std::map<std::string, Component*> m_mComponents;
 	};
 
 	template<typename T>
@@ -67,7 +66,7 @@ namespace game
 	{
 		const char* name = typeid(T).name();
 
-		IComponent* pComponent = getComponent(name); 
+		Component* pComponent = getComponent(name); 
 		if (pComponent == nullptr)
 		{
 			return nullptr;

@@ -44,10 +44,12 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>../../Foundation/System/;../../Foundation/Web/;../../Foundation/Text/;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../Foundation/System/;../../Foundation/Web/;../../Foundation/Text/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>System.lib;Web.lib;Text.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(OutDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -65,15 +67,25 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Module\import.h" />
+    <ClInclude Include="Module\macros.h" />
+    <ClInclude Include="Module\Packet\import.h" />
+    <ClInclude Include="Module\Packet\PacketDispatcher.h" />
+    <ClInclude Include="Module\Packet\PacketReceiver.h" />
+    <ClInclude Include="Module\Player\Player.h" />
+    <ClInclude Include="Module\User\Users.h" />
     <ClInclude Include="Protocols\import.h" />
     <ClInclude Include="Protocols\PacketID.h" />
     <ClInclude Include="Protocols\Packets.h" />
     <ClInclude Include="Server\GameServer.h" />
-    <ClInclude Include="Server\PacketReceiver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="Module\Packet\PacketDispatcher.cpp" />
+    <ClCompile Include="Module\Packet\PacketReceiver.cpp" />
+    <ClCompile Include="Module\Player\Player.cpp" />
+    <ClCompile Include="Module\User\Users.cpp" />
     <ClCompile Include="Server\GameServer.cpp" />
-    <ClCompile Include="Server\PacketReceiver.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Xml Include="Resource\Server.xml" />

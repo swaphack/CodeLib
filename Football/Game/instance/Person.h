@@ -22,25 +22,29 @@ namespace game
 		CREATE_COMPONENT_TYPE();
 		CREATE_COMPONENT_CLONE(Person);
 		/**
+		*	名称
+		*/
+		CREATE_COMPONENT_PROPERTY2(eNoramlProperty_Name, Name, int);
+		/**
 		*	性别
 		*/
-		CREATE_COMPONENT_PROPERTY2(EPP_GENDER, Gender, int);
+		CREATE_COMPONENT_PROPERTY2(eNoramlProperty_Gender, Gender, int);
 		/**
 		*	出生日期
 		*/
-		CREATE_COMPONENT_PROPERTY2(EPP_BIRTHDAY, BirthDay, int);
+		CREATE_COMPONENT_PROPERTY2(eNoramlProperty_Birthday, BirthDay, int);
 		/**
 		*	国籍
 		*/
-		CREATE_COMPONENT_PROPERTY2(EPP_COUNTRY, Country, int);
+		CREATE_COMPONENT_PROPERTY2(eNoramlProperty_Country, Country, int);
 		/**
 		*	所属俱乐部
 		*/
-		CREATE_COMPONENT_PROPERTY2(EPP_CLUB, Club, int);
+		CREATE_COMPONENT_PROPERTY2(eNoramlProperty_Club, Club, int);
 		/**
 		*	所属队伍
 		*/
-		CREATE_COMPONENT_PROPERTY2(EPP_TEAM, Team, int);
+		CREATE_COMPONENT_PROPERTY2(eNoramlProperty_Team, Team, int);
 		/**
 		*	身躯
 		*/

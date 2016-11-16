@@ -76,8 +76,8 @@ bool ListenerPool::onDispatch(const char* sessionID, sys::DataQueue& dataQueue)
 		int cursor = netData->pos + size;
 		if (cursor == netData->size)
 		{// ¸ÕºÃ½âÎöÍê±Ï
-			dataQueue.pop();
 			delete netData;
+			dataQueue.pop();
 		}
 		else
 		{

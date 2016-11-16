@@ -86,7 +86,9 @@
   </ItemGroup>
   <ItemGroup>
     <Xml Include="Protocol.xml" />
-    <Xml Include="ProtocolID.xml" />
+    <Xml Include="ProtocolID.xml">
+      <SubType>Designer</SubType>
+    </Xml>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -66,7 +66,7 @@ void Sessions::removeSession(const char* sessionID)
 void Sessions::removeClient(int clientID)
 {
 	std::map<std::string, ClientSession>::iterator iter = _clientSessions.begin();
-	while (iter == _clientSessions.end())
+	while (iter != _clientSessions.end())
 	{
 		if (iter->second.clientID == clientID)
 		{

@@ -4,12 +4,12 @@ using namespace web;
 
 HttpActivityListener::HttpActivityListener()
 {
-
+	_httpReqDoc = new sys::HttpReqDocument();
 }
 
 HttpActivityListener::~HttpActivityListener()
 {
-
+	delete _httpReqDoc;
 }
 
 void HttpActivityListener::addRecvHandler(sys::Object* target, HTTP_RECV_HANDLER handler)
@@ -88,13 +88,13 @@ sys::HttpRequest* HttpActivityListener::createRequest(const char* sessionID, sys
 	{
 		return nullptr;
 	}
-
-	sys::HttpReqDocument* pDoc = new sys::HttpReqDocument();
-	if (!pDoc->parseRequest(netData->getCursorPtr(), netData->getRemainSize()))
+	if (!_httpReqDoc->parseRequest(netData->getCursorPtr(), netData->getRemainSize()))
 	{
-		delete pDoc;
 		return nullptr;
 	}
+
+	sys::HttpReqDocument* pDoc = new sys::HttpReqDocument();
+	pDoc->parseRequest(netData->getCursorPtr(), netData->getRemainSize());
 
 	int parseLen = pDoc->getStreamSize();
 	int cursor = parseLen + netData->pos;

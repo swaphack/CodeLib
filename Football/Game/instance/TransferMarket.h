@@ -20,7 +20,7 @@ namespace game
 			// 人员
 			int PersonID;
 			// 挂牌条件
-			IConditionSheet* Condition;
+			ConditionSheet* Condition;
 			// 所属俱乐部
 			int ClubID;
 
@@ -42,7 +42,7 @@ namespace game
 		*	@param pCondition 挂牌条件
 		*	@param nClubID 所属俱乐部
 		*/
-		virtual bool onSale(int nPersonID, IConditionSheet* pCondition, int nClubID = -1);
+		virtual bool onSale(int nPersonID, ConditionSheet* pCondition, int nClubID = -1);
 		/**
 		*	从市场上移除
 		*	@param nPersonID 人员

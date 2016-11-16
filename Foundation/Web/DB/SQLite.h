@@ -32,7 +32,7 @@ namespace web
 		virtual bool disconnect();
 		// Ö´ÐÐsqlÓï¾ä
 		virtual bool executeSQL(const char* sqlExpression, sys::IDataSheet* pDataSheet = nullptr);
-
+		// »ñÈ¡db²Ù×Ý
 		const IDBString* getDBString();
 	private:
 		sqlite3* _instance;

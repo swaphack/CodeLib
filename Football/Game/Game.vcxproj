@@ -109,9 +109,6 @@
     <ClInclude Include="interface\IClub.h" />
     <ClInclude Include="interface\ICommand.h" />
     <ClInclude Include="interface\IActionCommand.h" />
-    <ClInclude Include="interface\IComponent.h" />
-    <ClInclude Include="interface\IComponentSheet.h" />
-    <ClInclude Include="interface\IConditionSheet.h" />
     <ClInclude Include="interface\IContract.h" />
     <ClInclude Include="interface\ICountry.h" />
     <ClInclude Include="interface\ICup.h" />
@@ -135,7 +132,6 @@
     <ClInclude Include="interface\IRuleItem.h" />
     <ClInclude Include="interface\IScene.h" />
     <ClInclude Include="interface\ISchedule.h" />
-    <ClInclude Include="interface\ICondition.h" />
     <ClInclude Include="interface\ISet.h" />
     <ClInclude Include="interface\IStadium.h" />
     <ClInclude Include="interface\ISystem.h" />

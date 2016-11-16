@@ -1,6 +1,6 @@
 #include "ComponentSheet.h"
 
-#include "../interface/IComponent.h"
+#include "Component.h"
 
 using namespace game;
 
@@ -14,9 +14,9 @@ ComponentSheet::~ComponentSheet()
 	this->removeAllComponents();
 }
 
-IComponent* ComponentSheet::getComponent(const char* pszType)
+Component* ComponentSheet::getComponent(const char* pszType)
 {
-	std::map<std::string, IComponent*>::iterator iter = m_mComponents.find(pszType);
+	std::map<std::string, Component*>::iterator iter = m_mComponents.find(pszType);
 	if (iter != m_mComponents.end())
 	{
 		return iter->second;
@@ -25,7 +25,7 @@ IComponent* ComponentSheet::getComponent(const char* pszType)
 	return nullptr;
 }
 
-bool ComponentSheet::addComponent(IComponent* pComponent)
+bool ComponentSheet::addComponent(Component* pComponent)
 {
 	if (pComponent == nullptr)
 	{
@@ -34,13 +34,13 @@ bool ComponentSheet::addComponent(IComponent* pComponent)
 	return addComponent(pComponent->getType(), pComponent);
 }
 
-bool ComponentSheet::addComponent(const char* pszType, IComponent* pComponent)
+bool ComponentSheet::addComponent(const char* pszType, Component* pComponent)
 {
 	if (pszType == nullptr || pComponent == nullptr)
 	{
 		return false;
 	}
-	std::map<std::string, IComponent*>::iterator iter = m_mComponents.find(pszType);
+	std::map<std::string, Component*>::iterator iter = m_mComponents.find(pszType);
 	if (iter != m_mComponents.end())
 	{
 		return false;
@@ -53,7 +53,7 @@ bool ComponentSheet::addComponent(const char* pszType, IComponent* pComponent)
 
 void ComponentSheet::removeComponent(const char* pszType)
 {
-	std::map<std::string, IComponent*>::iterator iter = m_mComponents.find(pszType);
+	std::map<std::string, Component*>::iterator iter = m_mComponents.find(pszType);
 	if (iter != m_mComponents.end())
 	{
 		delete iter->second;
@@ -63,7 +63,7 @@ void ComponentSheet::removeComponent(const char* pszType)
 
 void ComponentSheet::removeAllComponents()
 {
-	std::map<std::string, IComponent*>::iterator iter = m_mComponents.begin();
+	std::map<std::string, Component*>::iterator iter = m_mComponents.begin();
 	while (iter != m_mComponents.end())
 	{
 		delete iter->second;
@@ -73,9 +73,9 @@ void ComponentSheet::removeAllComponents()
 	m_mComponents.clear();
 }
 
-void ComponentSheet::foreach(std::function<void(IComponent*)> handler)
+void ComponentSheet::foreach(std::function<void(Component*)> handler)
 {
-	std::map<std::string, IComponent*>::iterator iter = m_mComponents.begin();
+	std::map<std::string, Component*>::iterator iter = m_mComponents.begin();
 	while (iter != m_mComponents.end())
 	{
 		handler(iter->second);
@@ -83,10 +83,10 @@ void ComponentSheet::foreach(std::function<void(IComponent*)> handler)
 	}
 }
 
-IComponentSheet* ComponentSheet::clone()
+ComponentSheet* ComponentSheet::clone()
 {
 	ComponentSheet* pSheet = new ComponentSheet();
-	std::map<std::string, IComponent*>::iterator iter = m_mComponents.begin();
+	std::map<std::string, Component*>::iterator iter = m_mComponents.begin();
 	while (iter != m_mComponents.end())
 	{
 		pSheet->addComponent(iter->second->clone());

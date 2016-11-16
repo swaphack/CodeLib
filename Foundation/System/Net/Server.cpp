@@ -82,11 +82,11 @@ void Server::sendBroadcast(NetData* data)
 	{
 		return;
 	}
-	std::map<int, DataQueue>::iterator it = _sendDatas.begin();
+	std::map<int, DataQueue*>::iterator it = _sendDatas.begin();
 	while (it != _sendDatas.end())
 	{
 		NetData* temp = new NetData(data->data, data->size);
-		it->second.push(temp);
+		it->second->push(temp);
 		it++;
 	}
 
@@ -104,18 +104,32 @@ void Server::addClient( Socket* sock )
 
 	_clients[sockId] = sock;
 
-	DataQueue data1;
-	_recvDatas[sockId] = data1;
-
-	DataQueue data2;
-	_sendDatas[sockId] = data2;
+	if (_recvDatas.find(sockId) == _recvDatas.end())
+	{
+		_recvDatas[sockId] = new DataQueue();
+	}
+	
+	if (_sendDatas.find(sockId) == _sendDatas.end())
+	{
+		DataQueue data2;
+		_sendDatas[sockId] = new DataQueue();
+	}
 }
 
 void Server::removeClient( int sockId )
 {
 	_clients.erase(sockId);
-	_recvDatas.erase(sockId);
-	_sendDatas.erase(sockId);
+	if (_recvDatas.find(sockId) != _recvDatas.end())
+	{
+		delete _recvDatas[sockId];
+		_recvDatas.erase(sockId);
+	}
+	
+	if (_sendDatas.find(sockId) != _sendDatas.end())
+	{
+		delete _sendDatas[sockId];
+		_sendDatas.erase(sockId);
+	}
 
 	if (this->_closeHandler.first && this->_closeHandler.second)
 	{
@@ -146,7 +160,7 @@ void Server::addRecvBuffer( int id, NetData* data )
 	}
 	if (_recvDatas.find(id) != _recvDatas.end())
 	{
-		_recvDatas[id].push(data);
+		_recvDatas[id]->push(data);
 	}
 	else
 	{
@@ -163,7 +177,7 @@ void Server::addSendBuffer( int id, NetData* data )
 
 	if (_sendDatas.find(id) != _sendDatas.end())
 	{
-		_sendDatas[id].push(data);
+		_sendDatas[id]->push(data);
 	}
 	else
 	{
@@ -246,7 +260,7 @@ void Server::_flushSendData()
 
 		int sockId = it->first;
 
-		NetData* data = _sendDatas[sockId].top();
+		NetData* data = _sendDatas[sockId]->top();
 		if (data)
 		{
 			Socket* socket = _clients[sockId];
@@ -256,8 +270,8 @@ void Server::_flushSendData()
 				data->pos = data->pos + size;
 				if (data->pos >= data->size)
 				{
-					_sendDatas[sockId].pop();
 					SAFE_DELETE(data);
+					_sendDatas[sockId]->pop();
 				}
 			}
 		}
@@ -275,9 +289,9 @@ void Server::_flushRecvData()
 		id = it->first;
 		if (this->_recvHandler.first && this->_recvHandler.second)
 		{
-			if (this->_recvDatas.find(id) != this->_recvDatas.end() && !this->_recvDatas[id].empty())
+			if (this->_recvDatas.find(id) != this->_recvDatas.end() && !this->_recvDatas[id]->empty())
 			{
-				(this->_recvHandler.first->*this->_recvHandler.second)(id, this->_recvDatas[id]);
+				(this->_recvHandler.first->*this->_recvHandler.second)(id, *this->_recvDatas[id]);
 			}
 		}
 	}

@@ -11,6 +11,12 @@ namespace web
 	// web 应用服务器
 	class WebApplication : public sys::Application
 	{
+	protected:
+		enum SockType
+		{
+			EST_SERVER,
+			EST_CLIENT,
+		};
 	public:
 		WebApplication(const char* ip, int port, int maxWaitCount = WAIT_LISTEN_COUNT);
 		virtual ~WebApplication();
@@ -35,13 +41,19 @@ namespace web
 		void postResponse(int clientID, sys::NetData* data);
 		// 广播
 		void postBroadcast(sys::NetData* data);
+		// 获取socket ID
+		int getSocketID(const char* sessionID);
 	public:
 		virtual void init();
 		virtual void update();
 		virtual void dispose(); 
 	protected:
+		// 解析接收到服务器的数据
+		void parseReceiveServerData(int id, sys::DataQueue& dataQueue);
+		// 解析接收到客户端的数据
+		void parseReceiveClientData(int id, sys::DataQueue& dataQueue);
 		// 解析接收到的数据
-		void parseReceivedData(int id, sys::DataQueue& dataQueue);
+		void parseReceiveData(int id, sys::DataQueue& dataQueue, int tag);
 		// 关闭客户端处理
 		void closeClient(int id);
 	protected:

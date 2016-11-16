@@ -1,6 +1,5 @@
 #include "Document.h"
-#include "Block.h"
-#include "Scanner.h"
+#include "../Compile/import.h"
 #include <cstring>
 #include <cstdlib>
 #include <cstdio>
@@ -10,14 +9,11 @@ using namespace script;
 
 Document::Document()
 {
-	m_pBlock = new Block();
 	m_pScanner = new Scanner();
-	m_pScanner->setBlock(m_pBlock);
 }
 
 Document::~Document()
 {
-	delete m_pBlock;
 	delete m_pScanner;
 }
 
@@ -58,5 +54,11 @@ bool Document::parse(const char* text, int size)
 		return false;
 	}
 
-	return m_pScanner->read(text, size);
+	bool bRet = m_pScanner->read(text, size);
+	if (bRet == false)
+	{
+		return false;
+	}
+
+	return true;
 }

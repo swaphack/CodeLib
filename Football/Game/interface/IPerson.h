@@ -17,6 +17,10 @@ namespace game
 		virtual ~IPerson() {}
 	public:
 		/**
+		*	ĞÕÃû±àºÅ
+		*/
+		virtual int getName() = 0;
+		/**
 		*	ĞÔ±ğ
 		*/
 		virtual int getGender() = 0;

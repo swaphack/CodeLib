@@ -20,7 +20,7 @@ namespace web
 		virtual void doPost(int destID, sys::HttpResponse* response);
 		// ¹ã²¥
 		virtual void doBroadCast(sys::HttpResponse* response);
-	private:
+	protected:
 		std::string _sessionID;
 	};
 }

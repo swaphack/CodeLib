@@ -16,7 +16,7 @@ int main(int argc, char** argv)
 	pPerson->getComponent<Body>()->setPositionZ(0.5f);
 
 	Player* pPlayer = new Player();
-	pPlayer->addCloneComponent(pPerson);
+	pPlayer->addComponent(pPerson->clone());
 
 	Person* pComponent = pPlayer->getComponent<Person>();
 

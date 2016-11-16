@@ -3,18 +3,17 @@
 using namespace web;
 using namespace gs;
 
-GameServer::GameServer(const char* ip, int port)
-:WebApplication(ip, port)
+GameServer::GameServer(const char* ip, int port, int maxWaitCount)
+:WebApplication(ip, port, maxWaitCount)
 {
-	this->init();
+	this->initSelf();
 }
 
 GameServer::~GameServer()
 {
-
+	
 }
 
-void GameServer::init()
+void GameServer::initSelf()
 {
-	WebApplication::init();
 }

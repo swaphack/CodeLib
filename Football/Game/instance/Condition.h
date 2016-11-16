@@ -1,13 +1,20 @@
 #pragma once
 
-#include "../interface/ICondition.h"
-
 namespace game
 {
+	class ICondition
+	{
+	public:
+		virtual ~ICondition() {}
+		/**
+		*	是否匹配条件
+		*/
+		virtual bool match(float value) const = 0;
+	};
 	/**
 	*	单值条件型
 	*/
-	class SingleCondtion : public ICondition
+	class SingleCondtion
 	{
 	public:
 		SingleCondtion();

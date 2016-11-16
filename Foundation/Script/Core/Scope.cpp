@@ -95,6 +95,11 @@ Scope* Scope::getParent()
 	return m_pParent;
 }
 
+void Scope::setParent(Scope* pParent)
+{
+	m_pParent = pParent;
+}
+
 void Scope::addMember(Variable* pVariable)
 {
 	if (!pVariable)

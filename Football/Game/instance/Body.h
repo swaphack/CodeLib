@@ -24,27 +24,27 @@ namespace game
 		/**
 		*	获取长度
 		*/
-		CREATE_COMPONENT_PROPERTY(EBP_VOLUME_LENGTH, Length);
+		CREATE_COMPONENT_PROPERTY(eSpaceProperty_Volume_Length, Length);
 		/**
 		*	获取宽度
 		*/
-		CREATE_COMPONENT_PROPERTY(EBP_VOLUME_WIDTH, Width);
+		CREATE_COMPONENT_PROPERTY(eSpaceProperty_Volume_Width, Width);
 		/**
 		*	获取高度
 		*/
-		CREATE_COMPONENT_PROPERTY(EBP_VOLUME_HEIGHT, Height);
+		CREATE_COMPONENT_PROPERTY(eSpaceProperty_Volume_Height, Height);
 		/**
 		*	获取x轴位置
 		*/
-		CREATE_COMPONENT_PROPERTY(EBP_POSITION_X, PositionX);
+		CREATE_COMPONENT_PROPERTY(eSpaceProperty_Position_X, PositionX);
 		/**
 		*	获取y轴位置
 		*/
-		CREATE_COMPONENT_PROPERTY(EBP_POSITION_Y, PositionY);
+		CREATE_COMPONENT_PROPERTY(eSpaceProperty_Position_Y, PositionY);
 		/**
 		*	获取z轴位置
 		*/
-		CREATE_COMPONENT_PROPERTY(EBP_POSITION_Z, PositionZ);
+		CREATE_COMPONENT_PROPERTY(eSpaceProperty_Position_Z, PositionZ);
 		/**
 		*	是否与其他相交
 		*/

@@ -29,6 +29,9 @@ namespace script
 		// 移除所有文档
 		void removeAllDocuments();
 	private:
+		// 解析文件 判断是否属于标准文档
+		Document* parseFile(const char* filepath);
+	private:
 		static Script* s_script;
 		// 脚本文档
 		std::map<std::string, Document*> _documents;

@@ -21,8 +21,6 @@
 #define INVALID_SOCKET_VALUE -1
 #endif
 
-static char s_recvData[SOCKET_DATA_SIZE];
-
 using namespace sys;
 
 Socket::Socket()
@@ -82,12 +80,15 @@ void Socket::Bind(const char* addr, int port, bool ipv6)
 	EndPoint point(addr, port, ipv6);
 	point.getAddr(&addrSrv);
 
-	::bind(_sock, (struct sockaddr*)&addrSrv, sizeof(struct sockaddr));
+	int result = ::bind(_sock, (struct sockaddr*)&addrSrv, sizeof(struct sockaddr));
+	PRINT("Socket Bind Result, code:%d\n", result);
 }
 
 void Socket::Listen(int maxCount)
 {
-	::listen(_sock, maxCount);
+	int result = ::listen(_sock, maxCount);
+
+	PRINT("Socket Listen Result, code:%d\n", result);
 }
 
 Socket* Socket::Accept()
@@ -125,6 +126,7 @@ int Socket::Send( const char* data, int size )
 
 char* Socket::Recv( int& size )
 {
+	static char s_recvData[SOCKET_DATA_SIZE] = { 0 };
 	memset(s_recvData, 0, SOCKET_DATA_SIZE);
 	size = ::recv(_sock, s_recvData, SOCKET_DATA_SIZE, 0);
 	return s_recvData;

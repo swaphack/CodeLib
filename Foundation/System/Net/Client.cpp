@@ -28,10 +28,9 @@ void Client::setRemote(const char* ip, int port)
 }
 bool Client::connect()
 {
-	_socket->Connect(_remote.first, _remote.second);
+	bool result = _socket->Connect(_remote.first, _remote.second);
 	_bConnected = true;
-
-	return true;
+	return _bConnected;
 }
 
 bool Client::disconnect()

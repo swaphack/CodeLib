@@ -6,6 +6,9 @@ namespace game
 {
 	typedef std::function<void(int type, float newValue, float lastValue)> PropertyHandler;
 
+	/**
+	*	属性
+	*/
 	class Property
 	{
 	public:
@@ -14,10 +17,12 @@ namespace game
 	public:
 		/**
 		*	设置属性类型
+		*	@see eProperty
 		*/
 		void setType(int nType);
 		/**
 		*	属性类型
+		*	@see eProperty
 		*/
 		int getType() const;
 		/**
@@ -32,6 +37,10 @@ namespace game
 		*	改变属性值
 		*/
 		void addValue(float value);
+		/**
+		*	重置属性值
+		*/
+		void reset();
 		/**
 		*	设置属性改变时的通知
 		*/
@@ -50,8 +59,11 @@ namespace game
 		*/
 		void onChangedHandler(float newValue);
 	private:
+		// 类型
 		int m_nType;
+		// 值
 		float m_nValue;
+		// 属性值改变时处理
 		PropertyHandler m_pHandler;
 	};
 }

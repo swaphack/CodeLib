@@ -13,6 +13,9 @@
     <Filter Include="Resource">
       <UniqueIdentifier>{01726520-9551-43dc-8530-e8f44ffa51f2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Compile">
+      <UniqueIdentifier>{22976c53-358c-440f-9e56-dcc9907ee80a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Script.h" />
@@ -70,14 +73,32 @@
     <ClInclude Include="Document\import.h">
       <Filter>Document</Filter>
     </ClInclude>
-    <ClInclude Include="Document\Expression.h">
-      <Filter>Document</Filter>
+    <ClInclude Include="Compile\TargetCodeOptimizer.h">
+      <Filter>Compile</Filter>
     </ClInclude>
-    <ClInclude Include="Document\Block.h">
-      <Filter>Document</Filter>
+    <ClInclude Include="Compile\CodeGenerator.h">
+      <Filter>Compile</Filter>
     </ClInclude>
-    <ClInclude Include="Document\Scanner.h">
-      <Filter>Document</Filter>
+    <ClInclude Include="Compile\Parser.h">
+      <Filter>Compile</Filter>
+    </ClInclude>
+    <ClInclude Include="Compile\Scanner.h">
+      <Filter>Compile</Filter>
+    </ClInclude>
+    <ClInclude Include="Compile\SemanticAnalyzer.h">
+      <Filter>Compile</Filter>
+    </ClInclude>
+    <ClInclude Include="Compile\SourceCodeOptimizer.h">
+      <Filter>Compile</Filter>
+    </ClInclude>
+    <ClInclude Include="Compile\import.h">
+      <Filter>Compile</Filter>
+    </ClInclude>
+    <ClInclude Include="Compile\Error.h">
+      <Filter>Compile</Filter>
+    </ClInclude>
+    <ClInclude Include="Compile\KeyWord.h">
+      <Filter>Compile</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -112,20 +133,28 @@
       <Filter>Core</Filter>
     </ClCompile>
     <ClCompile Include="Script.cpp" />
-    <ClCompile Include="Document\Expression.cpp">
-      <Filter>Document</Filter>
-    </ClCompile>
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Document\Block.cpp">
-      <Filter>Document</Filter>
+    <ClCompile Include="Compile\Scanner.cpp">
+      <Filter>Compile</Filter>
     </ClCompile>
-    <ClCompile Include="Document\Scanner.cpp">
-      <Filter>Document</Filter>
+    <ClCompile Include="Compile\Error.cpp">
+      <Filter>Compile</Filter>
+    </ClCompile>
+    <ClCompile Include="Compile\KeyWord.cpp">
+      <Filter>Compile</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resource\main.script">
       <Filter>Resource</Filter>
     </None>
+    <None Include="Compile\function.script">
+      <Filter>Resource</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Compile\compile.txt">
+      <Filter>Compile</Filter>
+    </Text>
   </ItemGroup>
 </Project>

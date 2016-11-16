@@ -213,12 +213,6 @@
     <ClInclude Include="interface\IMind.h">
       <Filter>interface\mind</Filter>
     </ClInclude>
-    <ClInclude Include="interface\ICondition.h">
-      <Filter>interface\base</Filter>
-    </ClInclude>
-    <ClInclude Include="interface\IConditionSheet.h">
-      <Filter>interface\base</Filter>
-    </ClInclude>
     <ClInclude Include="interface\ITimer.h">
       <Filter>interface\base</Filter>
     </ClInclude>
@@ -308,12 +302,6 @@
     </ClInclude>
     <ClInclude Include="instance\Identity.h">
       <Filter>instance\base</Filter>
-    </ClInclude>
-    <ClInclude Include="interface\IComponent.h">
-      <Filter>interface\base</Filter>
-    </ClInclude>
-    <ClInclude Include="interface\IComponentSheet.h">
-      <Filter>interface\base</Filter>
     </ClInclude>
     <ClInclude Include="instance\ConditionSheet.h">
       <Filter>instance\base</Filter>

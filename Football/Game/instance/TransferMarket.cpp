@@ -15,7 +15,7 @@ TransferMarket::~TransferMarket()
 	this->clear();
 }
 
-bool TransferMarket::onSale(int nPersonID, IConditionSheet* pCondition, int nClubID)
+bool TransferMarket::onSale(int nPersonID, ConditionSheet* pCondition, int nClubID)
 {
 	if (pCondition == nullptr)
 	{

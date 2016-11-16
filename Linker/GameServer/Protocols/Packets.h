@@ -1,11 +1,11 @@
 ﻿#pragma once
 
 #include "web.h"
-using namespace web;
+using namespace web; 
 
 // 登录请求
-struct ReqPacketLogin: public PacketHeader
-{
+struct ReqPacketLogin : public UserPacketHeader
+{                                                                                                                                                                                                                                                   
 	// 用户名
 	char Name[15];
 	// 密码
@@ -19,7 +19,7 @@ struct ReqPacketLogin: public PacketHeader
 };
 
 // 返回玩家信息
-struct RespPacketPlayerInfo: public PacketHeader
+struct RespPacketPlayerInfo : public UserPacketHeader
 {
 	// 玩家名称
 	int PlayerID;

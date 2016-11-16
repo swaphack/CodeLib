@@ -12,10 +12,13 @@ namespace web
 		std::string sessionID;
 		// 客户端id
 		int clientID;
+		// 标识
+		int tag;
 
 		ClientSession() 
-			:sessionID(""), 
-			clientID(0)
+			:sessionID("")
+			, clientID(0)
+			, tag(0)
 		{}
 	};
 

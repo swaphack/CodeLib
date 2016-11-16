@@ -1,15 +1,16 @@
 #pragma once
 
-#include "../interface/IConditionSheet.h"
-
+#include "PropertySheet.h"
+#include "Condition.h"
 #include <map>
+#include <vector>
 
 namespace game
 {
 	/**
 	*	Ìõ¼þÀ¸
 	*/
-	class ConditionSheet : public IConditionSheet
+	class ConditionSheet
 	{
 	public:
 		ConditionSheet();

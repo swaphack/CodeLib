@@ -28,15 +28,17 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GateWay\GateWay.cpp" />
-    <ClCompile Include="GateWay\HttpActivityTest.cpp" />
-    <ClCompile Include="GateWay\PacketActivityTest.cpp" />
+    <ClCompile Include="GateWay\HttpActivityReceiver.cpp" />
+    <ClCompile Include="GateWay\PacketActivityReceiver.cpp" />
+    <ClCompile Include="GateWay\TextActivityListener.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GateWay\GateWay.h" />
-    <ClInclude Include="GateWay\HttpActivityTest.h" />
+    <ClInclude Include="GateWay\HttpActivityReceiver.h" />
     <ClInclude Include="GateWay\import.h" />
-    <ClInclude Include="GateWay\PacketActivityTest.h" />
+    <ClInclude Include="GateWay\PacketActivityReceiver.h" />
+    <ClInclude Include="GateWay\TextActivityListener.h" />
   </ItemGroup>
   <ItemGroup>
     <Xml Include="Resource\GateWay.xml" />

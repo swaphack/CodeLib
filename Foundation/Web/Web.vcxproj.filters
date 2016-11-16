@@ -126,5 +126,8 @@
     <ClInclude Include="Listener\import.h">
       <Filter>Listener</Filter>
     </ClInclude>
+    <ClInclude Include="Packet\PacketHeader.h">
+      <Filter>Packet</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

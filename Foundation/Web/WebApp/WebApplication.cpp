@@ -65,13 +65,24 @@ void WebApplication::postResponse(const char* sessionID, sys::NetData* data)
 		return;
 	}
 
-	ClientSession* client = _session->getSession(sessionID);
-	if (client == nullptr)
+	ClientSession* session = _session->getSession(sessionID);
+	if (session == nullptr)
 	{
 		return;
 	}
 
-	_server->postResponse(client->clientID, data);
+	if (session->tag == EST_SERVER)
+	{
+		_server->postResponse(session->clientID, data);
+	}
+	else if (session->tag == EST_CLIENT)
+	{
+		sys::Client* client = _client->getClient(session->clientID);
+		if (client)
+		{
+			client->sendMessage(data);
+		}
+	}
 }
 
 void WebApplication::postResponse(int clientID, sys::NetData* data)
@@ -81,13 +92,20 @@ void WebApplication::postResponse(int clientID, sys::NetData* data)
 		return;
 	}
 
-// 	ClientSession* client = _session->getSession(clientID);
-// 	if (client == nullptr)
-// 	{
-// 		return;
-// 	}
-
-	_server->postResponse(clientID, data);
+	ClientSession* session = _session->getSession(clientID);
+	if (session)
+	{
+		if (session->tag == EST_SERVER)
+		{
+			_server->postResponse(session->clientID, data);
+			return;
+		}
+	}	
+	sys::Client* client = _client->getClient(clientID);
+	if (client)
+	{
+		client->sendMessage(data);
+	}
 }
 
 void WebApplication::postBroadcast(sys::NetData* data)
@@ -100,6 +118,22 @@ void WebApplication::postBroadcast(sys::NetData* data)
 	_server->postBroadcast(data);
 }
 
+int WebApplication::getSocketID(const char* sessionID)
+{
+	if (sessionID == nullptr)
+	{
+		return -1;
+	}
+
+	ClientSession* client = _session->getSession(sessionID);
+	if (client == nullptr)
+	{
+		return -1;
+	}
+
+	return client->clientID;
+}
+
 void WebApplication::init()
 {
 	_resource = new sys::ResourceMgr();
@@ -107,16 +141,16 @@ void WebApplication::init()
 	_listenerPool = new ListenerPool();
 	_httpListenerID = _listenerPool->addListener(new HttpActivityListener());
 	_packetListenerID = _listenerPool->addListener(new PacketActivityListener());
-
+	
 	
 	_server = new WebServer();
-	_server->setRecvHandler(this, static_cast<sys::SERVER_RECV_HANDLER>(&WebApplication::parseReceivedData));
+	_server->setRecvHandler(this, static_cast<sys::SERVER_RECV_HANDLER>(&WebApplication::parseReceiveServerData));
 	_server->setCloseHandler(this, static_cast<sys::CLIENT_CLOSE_HANDLER>(&WebApplication::closeClient));
 
 	_server->createServer(_ip.c_str(), _port, _maxWaitCount);
 
 	_client = new WebClient();
-	_client->setRecvHandler(this, static_cast<sys::CLIENT_RECV_HANDLER>(&WebApplication::parseReceivedData));
+	_client->setRecvHandler(this, static_cast<sys::CLIENT_RECV_HANDLER>(&WebApplication::parseReceiveClientData));
 	_client->setCloseHandler(this, static_cast<sys::CLIENT_CLOSE_HANDLER>(&WebApplication::closeClient));
 
 	_session = new Sessions();
@@ -146,18 +180,32 @@ void WebApplication::dispose()
 	SAFE_DELETE(_session);
 }
 
-void WebApplication::parseReceivedData(int id, sys::DataQueue& dataQueue)
+void WebApplication::parseReceiveServerData(int id, sys::DataQueue& dataQueue)
+{
+	parseReceiveData(id, dataQueue, EST_SERVER);
+}
+
+void WebApplication::parseReceiveClientData(int id, sys::DataQueue& dataQueue)
+{
+	parseReceiveData(id, dataQueue, EST_CLIENT);
+}
+
+void WebApplication::parseReceiveData(int id, sys::DataQueue& dataQueue, int tag)
 {
 	std::string sessionID;
 	sys::BitConvert::getNumberString(id, sessionID);
-
-	ClientSession client;
-	client.sessionID = sessionID;
-	client.clientID = id;
-
+	
 	// ·þÎñ¶Ësession
-	_session->addSession(client.sessionID.c_str(), client);
+	if (!_session->getSession(sessionID.c_str()))
+	{
+		ClientSession client;
+		client.sessionID = sessionID;
+		client.clientID = id;
+		client.tag = tag;
 
+		_session->addSession(client.sessionID.c_str(), client);
+	}
+	
 	if (_listenerPool->onDispatch(sessionID.c_str(), dataQueue))
 	{
 	}

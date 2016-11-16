@@ -50,7 +50,7 @@ namespace script
 		// 调用函数
 		virtual bool callFunction(const char* pFuncName, std::vector<Variable*>& inputs, std::vector<Variable*>& outputs);
 		// 调用操作符函数
-		virtual bool callOperator(const char* pOperatorName, std::vector<Variable*>& inputs, std::vector<Variable*>& outputs);
+		virtual bool callOperator(const char* pOperatorName, std::vector<Variable*>& inputs, std::vector<Variable*>& outputs) { return false; }
 		// 销毁
 		virtual void disponse();
 	public: // 覆盖

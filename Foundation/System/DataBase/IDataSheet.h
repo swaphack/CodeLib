@@ -15,6 +15,8 @@ namespace sys
 		virtual int count() = 0;
 		// 重置游标
 		virtual void reset() = 0;
+		// 清空数据
+		virtual void clear() = 0;
 		// 读取下一条记录
 		virtual IDataRecord* next() = 0;
 	};

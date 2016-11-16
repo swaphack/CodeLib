@@ -24,7 +24,6 @@ Script* Script::getInstance()
 	}
 
 	return s_script;
-
 }
 
 bool Script::load(const char* filepath)
@@ -34,10 +33,9 @@ bool Script::load(const char* filepath)
 		return false;
 	}
 
-	Document* pDoc = new Document();
-	if (!pDoc->loadFile(filepath))
+	Document* pDoc = parseFile(filepath);
+	if (pDoc == nullptr)
 	{
-		delete pDoc;
 		return false;
 	}
 
@@ -55,10 +53,9 @@ bool Script::import(const char* filepath)
 		return false;
 	}
 
-	Document* pDoc = new Document();
-	if (!pDoc->loadFile(filepath))
+	Document* pDoc = parseFile(filepath);
+	if (pDoc == nullptr)
 	{
-		delete pDoc;
 		return false;
 	}
 
@@ -114,4 +111,16 @@ void Script::removeAllDocuments()
 	}
 
 	_documents.clear();
+}
+
+Document* Script::parseFile(const char* filepath)
+{
+	Document* pDoc = new Document();
+	if (!pDoc->loadFile(filepath))
+	{
+		delete pDoc;
+		return nullptr;
+	}
+
+	return pDoc;
 }

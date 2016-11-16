@@ -8,6 +8,9 @@
 
 namespace game
 {
+	/**
+	*	属性列表
+	*/
 	class PropertySheet
 	{
 	public:
@@ -41,7 +44,7 @@ namespace game
 		PropertySheet* clone();
 	private:
 		typedef std::map<int, Property*> Properties;
-
+		// 属性集合
 		Properties m_mProperties;
 	};
 }

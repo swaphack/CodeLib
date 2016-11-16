@@ -2,8 +2,9 @@
 
 namespace script
 {
-	class Block;
 	class Scanner;
+	class Parser;
+
 	// 脚本文档解析
 	class Document
 	{
@@ -16,9 +17,9 @@ namespace script
 		// 解析
 		bool parse(const char* text, int size);
 	private:
-		// 代码块
-		Block* m_pBlock;
 		// 扫描器
 		Scanner* m_pScanner;
+		// 语法分析
+		Parser* m_pParser;
 	};
 }

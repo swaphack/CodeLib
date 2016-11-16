@@ -11,6 +11,15 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Compile\CodeGenerator.h" />
+    <ClInclude Include="Compile\Error.h" />
+    <ClInclude Include="Compile\import.h" />
+    <ClInclude Include="Compile\KeyWord.h" />
+    <ClInclude Include="Compile\Parser.h" />
+    <ClInclude Include="Compile\Scanner.h" />
+    <ClInclude Include="Compile\SemanticAnalyzer.h" />
+    <ClInclude Include="Compile\SourceCodeOptimizer.h" />
+    <ClInclude Include="Compile\TargetCodeOptimizer.h" />
     <ClInclude Include="Core\Base.h" />
     <ClInclude Include="Core\common.h" />
     <ClInclude Include="Core\Variables.h" />
@@ -22,11 +31,8 @@
     <ClInclude Include="Core\Struct.h" />
     <ClInclude Include="Core\Tip.h" />
     <ClInclude Include="Core\Variable.h" />
-    <ClInclude Include="Document\Block.h" />
     <ClInclude Include="Document\Document.h" />
-    <ClInclude Include="Document\Expression.h" />
     <ClInclude Include="Document\import.h" />
-    <ClInclude Include="Document\Scanner.h" />
     <ClInclude Include="Env\Define.h" />
     <ClInclude Include="Env\Environment.h" />
     <ClInclude Include="Env\FilePath.h" />
@@ -35,6 +41,9 @@
     <ClInclude Include="Script.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Compile\Error.cpp" />
+    <ClCompile Include="Compile\KeyWord.cpp" />
+    <ClCompile Include="Compile\Scanner.cpp" />
     <ClCompile Include="Core\Base.cpp" />
     <ClCompile Include="Core\Function.cpp" />
     <ClCompile Include="Core\Variables.cpp" />
@@ -43,16 +52,17 @@
     <ClCompile Include="Core\Scope.cpp" />
     <ClCompile Include="Core\Struct.cpp" />
     <ClCompile Include="Core\Variable.cpp" />
-    <ClCompile Include="Document\Block.cpp" />
     <ClCompile Include="Document\Document.cpp" />
-    <ClCompile Include="Document\Expression.cpp" />
-    <ClCompile Include="Document\Scanner.cpp" />
     <ClCompile Include="Env\Environment.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Script.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Compile\function.script" />
     <None Include="Resource\main.script" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Compile\compile.txt" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{1F21A8AB-293F-4932-BA27-184C94FA4DCD}</ProjectGuid>
@@ -60,7 +70,7 @@
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v120</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>

@@ -1,13 +1,15 @@
-#include "HttpActivityTest.h"
+#include "HttpActivityReceiver.h"
+
+using namespace gw;
 
 #define G_RESOURCE WebApplication::getInstance()->getResourceMgr()->getResource(ERT_LOCAL)
 
-void HttpActivityTest::doGet(sys::HttpRequest* request)
+void HttpActivityReceiver::doGet(sys::HttpRequest* request)
 {
 	this->doHttpGet(request);
 }
 
-void HttpActivityTest::doHttpGet(sys::HttpRequest* request)
+void HttpActivityReceiver::doHttpGet(sys::HttpRequest* request)
 {
 
 	std::string url;
@@ -39,7 +41,7 @@ void HttpActivityTest::doHttpGet(sys::HttpRequest* request)
 	this->doPost(&response);
 }
 
-void HttpActivityTest::doSocketGet(sys::HttpRequest* request)
+void HttpActivityReceiver::doSocketGet(sys::HttpRequest* request)
 {
 	const char* data = request->getMessage();
 	HttpResponse response;
@@ -47,7 +49,7 @@ void HttpActivityTest::doSocketGet(sys::HttpRequest* request)
 	this->doPost(&response);
 }
 
-void HttpActivityTest::handUrlMethod(sys::String& inString, std::string& outString)
+void HttpActivityReceiver::handUrlMethod(sys::String& inString, std::string& outString)
 {
 	int index = inString.findFirstOf('?');
 	sys::String url = "";
@@ -63,7 +65,7 @@ void HttpActivityTest::handUrlMethod(sys::String& inString, std::string& outStri
 }
 
 
-void HttpActivityTest::handGetParamMethod(sys::String& inString, std::map<std::string, std::string>& outParams)
+void HttpActivityReceiver::handGetParamMethod(sys::String& inString, std::map<std::string, std::string>& outParams)
 {
 	int index = inString.findFirstOf('?');
 	sys::String params = "";
@@ -89,7 +91,7 @@ void HttpActivityTest::handGetParamMethod(sys::String& inString, std::map<std::s
 	}
 }
 
-void HttpActivityTest::handPostParamMethod(sys::String& inString, std::map<std::string, std::string>& outParams)
+void HttpActivityReceiver::handPostParamMethod(sys::String& inString, std::map<std::string, std::string>& outParams)
 {
 	std::vector<sys::String> vecParams;
 	inString.split('&', vecParams);

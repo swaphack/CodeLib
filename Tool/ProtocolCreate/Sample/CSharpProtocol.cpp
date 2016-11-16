@@ -91,6 +91,9 @@ bool CSharpProtocol::createProtocol(XMLNode* pXmlNode, string& text)
 	text.append("/// ");
 	text.append(pElement->Attribute(PROTOCOL_DESCRIBE));
 	text.append("\n");
+	text.append("/// ");
+	text.append(pElement->Attribute(PROTOCOL_PROTOCOLID));
+	text.append("\n");
 	text.append("/// </summary>\n");
 	text.append("[StructLayout(LayoutKind.Sequential, CharSet=CharSet.Unicode)]\n");
 	text.append("public struct ");

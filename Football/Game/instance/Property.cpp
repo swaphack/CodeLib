@@ -56,6 +56,12 @@ void Property::addValue(float value)
 	m_nValue += value;
 }
 
+void Property::reset()
+{
+	onChangedHandler(0);
+	m_nValue = 0;
+}
+
 PropertyHandler Property::getChangedHandler()
 {
 	return m_pHandler;

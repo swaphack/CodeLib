@@ -31,5 +31,6 @@ namespace web
 	private:
 		// http接受处理
 		std::vector<HttpRecvHandler> _recvHandlers;
+		sys::HttpReqDocument* _httpReqDoc;
 	};
 }

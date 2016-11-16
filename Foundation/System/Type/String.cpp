@@ -21,34 +21,35 @@ String::String()
 }
 
 String::String(const String& value)
-:String()
+:_value(nullptr)
+, _size(0)
 {
 	*this = value;
 }
 
 String::String(const std::string& value)
-:String()
+:_value(nullptr)
+, _size(0)
 {
 	*this = value;
 }
 
 String::String(const char* value)
-:String()
+:_value(nullptr)
+, _size(0)
 {
 	ASSERT(value != nullptr);
 
-	_size = strlen(value) + 1;
-	_value = StreamHelper::mallocStream((char*)value, _size);
+	*this = value;
 }
 
 String::String(const char* value, int count)
-:String()
+:_value(nullptr)
+, _size(0)
 {
 	ASSERT(value != nullptr);
 
-	_size = count + 1;
-	_value = StreamHelper::mallocStream(_size);
-	memcpy(_value, value, count);
+	*this = std::string(value, count);
 }
 
 String::~String()
