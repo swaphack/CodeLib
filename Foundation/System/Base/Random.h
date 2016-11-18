@@ -7,8 +7,9 @@ namespace sys
 	// Ëæ»úÊı
 	class Random
 	{
-	public:
+	private:
 		Random();
+	public:
 		~Random();
 	public:
 		static Random* getInstance();

@@ -91,6 +91,7 @@
     <ClCompile Include="Common\Control\Static\CtrlLight.cpp" />
     <ClCompile Include="Common\Control\Static\CtrlMask.cpp" />
     <ClCompile Include="Common\Control\Static\CtrlModel.cpp" />
+    <ClCompile Include="Common\Control\Static\CtrlPixels.cpp" />
     <ClCompile Include="Common\Control\Static\CtrlSpotLight.cpp" />
     <ClCompile Include="Common\Control\Static\CtrlStencil.cpp" />
     <ClCompile Include="Common\Control\Static\CtrlText.cpp" />
@@ -130,8 +131,8 @@
     <ClCompile Include="Graphic\DCSample\DCVertexPointer.cpp" />
     <ClCompile Include="Graphic\Struct\shape_commond.cpp" />
     <ClCompile Include="Platform\Windows\GLFrame.cpp" />
-    <ClCompile Include="Resource\Componet\Image.cpp" />
-    <ClCompile Include="Resource\Componet\Media.cpp" />
+    <ClCompile Include="Resource\Component\Image.cpp" />
+    <ClCompile Include="Resource\Component\Media.cpp" />
     <ClCompile Include="Resource\FilePath.cpp" />
     <ClCompile Include="Resource\Paser\FFmpeg.cpp" />
     <ClCompile Include="Resource\Paser\JPEGImage.cpp" />
@@ -170,6 +171,7 @@
     <ClInclude Include="Common\Control\Static\CtrlLight.h" />
     <ClInclude Include="Common\Control\Static\CtrlMask.h" />
     <ClInclude Include="Common\Control\Static\CtrlModel.h" />
+    <ClInclude Include="Common\Control\Static\CtrlPixels.h" />
     <ClInclude Include="Common\Control\Static\CtrlSpotLight.h" />
     <ClInclude Include="Common\Control\Static\CtrlStencil.h" />
     <ClInclude Include="Common\Control\Static\CtrlText.h" />
@@ -241,10 +243,10 @@
     <ClInclude Include="Platform\Windows\GLFrame.h" />
     <ClInclude Include="Platform\Windows\import.h" />
     <ClInclude Include="render.h" />
-    <ClInclude Include="Resource\Componet\Image.h" />
-    <ClInclude Include="Resource\Componet\import.h" />
-    <ClInclude Include="Resource\Componet\Media.h" />
-    <ClInclude Include="Resource\Componet\Model.h" />
+    <ClInclude Include="Resource\Component\Image.h" />
+    <ClInclude Include="Resource\Component\import.h" />
+    <ClInclude Include="Resource\Component\Media.h" />
+    <ClInclude Include="Resource\Component\Model.h" />
     <ClInclude Include="Resource\enum_common.h" />
     <ClInclude Include="Resource\FilePath.h" />
     <ClInclude Include="Resource\import.h" />

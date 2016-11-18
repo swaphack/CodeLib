@@ -6,7 +6,7 @@ using namespace sys;
 WndRender::WndRender()
 {
 	this->init();
-	this->getCanvas()->setDimensions(render::ED_3D);
+	this->getCanvas()->setDimensions(render::ED_2D);
 }
 
 WndRender::~WndRender()
@@ -20,9 +20,9 @@ void WndRender::show()
 	Texture2D* pTexture = G_TEXTURE_CACHE->getTexture2D(imageDefine);
 	pTexture->retain();
 
-	//this->testCubeModel();
+	this->testSequenceFrame();
 
-	this->testSphereModel();
+	this->testCamera();
 }
 
 void WndRender::testMoveImage()
@@ -245,7 +245,7 @@ void WndRender::testEditBox()
 
 	pEditLabel->setPosition(512, 384, 0);
 	pEditLabel->setAnchorPoint(0.0f, 0.0f, 0.0f);
-	pEditLabel->setVolume(200, 100, 0);
+	pEditLabel->setVolume(400, 100, 0);
 	pEditLabel->setKeyboardEnable(true);
 	pEditLabel->setInputListen([](sys::Object* object, EditInputStatus status){
 		CtrlEditLabel* pNode = dynamic_cast<CtrlEditLabel*>(object);
@@ -342,24 +342,28 @@ void WndRender::testPixelImage()
 	pCtrlText->setFontSize(58);
 	pCtrlText->setString("点击后移动鼠标，改变颜色");
 	pCtrlText->setPosition(0, 0, 0);
-	pCtrlText->setDimensions(100, 50);
 	pCtrlText->setColor(sys::Color4B(125, 80, 255, 255));
 	this->getCanvas()->getRoot()->addChild(pCtrlText);
 
 	pImage->setUserData(pCtrlText);
 	pImage->getTouchProxy()->addTouchDelegate(ETT_ON, this, TOUCH_DELEGATTE_SELECTOR(WndRender::onTouchImage));
+
+	CtrlPixels* pPixels = new CtrlPixels();
+	AUTO_RELEASE_OBJECT(pPixels);
+	this->getCanvas()->getRoot()->addChild(pPixels);
 }
 
 void WndRender::testSequenceFrame()
 {
 	CtrlSequenceFrame* pSequenceFrame = new CtrlSequenceFrame();
 	AUTO_RELEASE_OBJECT(pSequenceFrame);
-	pSequenceFrame->setFramePath("Resource/1/20%d.png", 8);
+	pSequenceFrame->setFrameImagePath("Resource/Role/1/20%d.png", 8);
 	pSequenceFrame->setPosition(512, 384, 0);
 	pSequenceFrame->setFrameRate(1.0f / 10);
 	pSequenceFrame->start();
 
 	this->getCanvas()->getRoot()->addChild(pSequenceFrame);
+	G_KEYBOARDMANAGER->addDispatcher(pSequenceFrame, this, KEYBOARD_DELEGATTE_SELECTOR(WndRender::onKeyBoardRole));
 }
 
 void WndRender::onTouchBegin(sys::Object* object, float x, float y)
@@ -450,7 +454,9 @@ void WndRender::onTouchImage(sys::Object* object, float x, float y)
 
 	sys::Color4B color = Pixel::getPixel(x, y);
 	pText->setString(getCString("##%02x%02x%02x%02x", color.red, color.green, color.blue, color.alpha));
-	//pText->setColor(color);
+	pText->setColor(color);
+
+	Pixel::setPixel(x, y, 100, 100, color);
 }
 
 void WndRender::onKeyBoardCamera(sys::Object* object, sys::BoardKey key, sys::ButtonStatus type)
@@ -460,25 +466,84 @@ void WndRender::onKeyBoardCamera(sys::Object* object, sys::BoardKey key, sys::Bu
 	{
 		return;
 	}
-	if (type == EBS_BUTTON_UP)
+	if (type != EBS_BUTTON_DOWN)
 	{
 		return;
 	}
-	float zOrderDiff = 10;
-	if (key == EBK_W)
+
+	float speed = 2;
+	if (key == EBK_UP)
 	{
-		pNode->setRotationZ(pNode->getRotationZ() + 1);
+		pNode->setPositionY(pNode->getPositionY() + speed);		
 	}
-	else if (key == EBK_S)
+	else if (key == EBK_DOWN)
 	{
-		pNode->setRotationZ(pNode->getRotationZ() - 1);
+		pNode->setPositionY(pNode->getPositionY() - speed);
 	}
-	else if (key == EBK_A)
+	else if (key == EBK_LEFT)
 	{
-		pNode->setRotationY(pNode->getRotationY() - 1);
+		pNode->setPositionX(pNode->getPositionX() - speed);
 	}
-	else if (key == EBK_D)
+	else if (key == EBK_RIGHT)
 	{
-		pNode->setRotationY(pNode->getRotationY() + 1);
+		pNode->setPositionX(pNode->getPositionX() + speed);
+	}
+}
+
+void WndRender::onKeyBoardRole(sys::Object* object, sys::BoardKey key, sys::ButtonStatus type)
+{
+	if (type != EBS_BUTTON_DOWN)
+	{
+		return;
+	}
+
+	CtrlSequenceFrame* pRole = static_cast<CtrlSequenceFrame*>(object);
+	if (pRole == nullptr)
+	{
+		return;
+	}
+
+	struct DirectionAction
+	{
+		bool bFlipX;
+		char path[25];
+		int count;
+	};
+
+	static DirectionAction ActionConfigs[4] = {
+		{ false, "Resource/Role/3/24%d.png", 8 },
+		{ false, "Resource/Role/1/20%d.png", 8 }, 
+		{ false, "Resource/Role/2/22%d.png", 8 },
+		{ true, "Resource/Role/2/22%d.png", 8 },
+	};
+
+
+	int index = 0;
+
+	if (key == EBK_UP)
+	{
+		index = 0;
+	}
+	else if (key == EBK_DOWN)
+	{
+		index = 1;
+	}
+	else if (key == EBK_LEFT)
+	{
+		index = 2;
+	}
+	else if (key == EBK_RIGHT)
+	{
+		index = 3;
+	}
+
+	if (pRole)
+	{
+		DirectionAction* pConfig = &ActionConfigs[index];
+		if (pRole->getMovie()->isFlipX() != pConfig->bFlipX)
+		{
+			pRole->getMovie()->setFlipX(pConfig->bFlipX);
+		}
+		pRole->setFrameImagePath(pConfig->path, pConfig->count);
 	}
 }

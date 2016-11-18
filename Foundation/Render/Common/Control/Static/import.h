@@ -10,3 +10,4 @@
 #include "CtrlStencil.h"
 #include "CtrlEditBox.h"
 #include "CtrlEditLabel.h"
+#include "CtrlPixels.h"

@@ -22,6 +22,9 @@
     <Filter Include="Module\Packet">
       <UniqueIdentifier>{71afcc55-f208-46cb-871c-029b50fab2b7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Module\Database">
+      <UniqueIdentifier>{7bc95a0f-33e9-49b4-9d89-e36772f9d4e3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Server\GameServer.h">

@@ -4,7 +4,7 @@ using namespace render;
 
 
 CtrlSequenceFrame::CtrlSequenceFrame()
-:_frameCount(0)
+:_frameImageCount(0)
 {
 
 }
@@ -19,10 +19,20 @@ void CtrlSequenceFrame::draw()
 	CtrlAnimation::draw();
 }
 
-void CtrlSequenceFrame::setFramePath(const char* urlFormat, int count)
+void CtrlSequenceFrame::setFrameImagePath(const char* urlFormat, int count)
 {
-	_frameUrlFormat = urlFormat;
-	_frameCount = count;
+	_frameImageUrl = urlFormat;
+	_frameImageCount = count;
+}
+
+const char* CtrlSequenceFrame::getFrameImagePath()
+{
+	return _frameImageUrl.c_str();
+}
+
+int CtrlSequenceFrame::getFrameImageCount()
+{
+	return _frameImageCount;
 }
 
 void CtrlSequenceFrame::initSelf()
@@ -43,12 +53,12 @@ void CtrlSequenceFrame::initSelf()
 
 Texture2D* CtrlSequenceFrame::getNextTexture()
 {
-	if (getFrame() >= _frameCount)
+	if (getFrame() >= _frameImageCount)
 	{
 		setFrame(0);
 	}
 
-	const char* imageUrl = getCString(_frameUrlFormat.c_str(), getFrame());
+	const char* imageUrl = getCString(_frameImageUrl.c_str(), getFrame());
 
 	Ctrl_ImageDefine imageDefine;
 	imageDefine.filepath = imageUrl;

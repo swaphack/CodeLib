@@ -12,9 +12,9 @@ namespace gs
 	// 用户信息
 	struct T_UserInfo
 	{
-		// sock编号
+		// socket编号
 		int Mark;
-		// 用户id
+		// 用户id, 随机生成
 		int UserID;
 	};
 

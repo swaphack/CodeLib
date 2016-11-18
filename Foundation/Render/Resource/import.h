@@ -6,5 +6,5 @@
 #include "Resource.h"
 #include "FilePath.h"
 
-#include "Componet/import.h"
+#include "Component/import.h"
 #include "Paser/import.h"

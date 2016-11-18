@@ -18,7 +18,7 @@ NodeLoader::~NodeLoader()
 
 }
 
-void NodeLoader::parseAttribute()
+void NodeLoader::parseAttributes()
 {
 	sys::Vector vec;
 	sys::Size size;

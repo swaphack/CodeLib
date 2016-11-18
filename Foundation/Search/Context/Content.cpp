@@ -17,21 +17,21 @@ Content::~Content()
 	this->removeAllTargets();
 }
 
-void search::Content::addTarget(const char* key, Target* target)
+void Content::addTarget(const char* key, Target* target)
 {
-	std::map<std::string*, Target*>::iterator iter = _targets.find(key);
-	if (iter)
+	std::string* pString = GET_STRING_PTR(key);
+	if (_targets.find(pString) != _targets.end()) 
 	{
-		WARING
+
 	}
 }
 
-void search::Content::removeTarget(const char* key)
+void Content::removeTarget(const char* key)
 {
 
 }
 
-Target* search::Content::findTarget(const char* key)
+Target* Content::findTarget(const char* key)
 {
 
 }

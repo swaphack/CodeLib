@@ -19,8 +19,11 @@ namespace render
 		// 输出操作处理
 		virtual void onInputHand(sys::BoardKey key, sys::ButtonStatus type);
 	protected:
+		// 回退按钮事件
 		virtual void onInputKeyBackHandler();
+		// 回车按钮事件
 		virtual void onInputKeyReturnHandler();
+		// 输入字符事件
 		virtual void onInputKeyCharHandler(char value);
 	private:
 		CtrlText* _ctrlText;

@@ -56,6 +56,11 @@ int CtrlAnimation::getFrame()
 	return _frame;
 }
 
+CtrlFrame* CtrlAnimation::getMovie()
+{
+	return _ctrlFrame;
+}
+
 void CtrlAnimation::updateSelf(float interval)
 {
 	_duration += interval * getSpeedRatio();

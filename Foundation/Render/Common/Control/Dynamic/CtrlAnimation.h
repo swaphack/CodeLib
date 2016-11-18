@@ -25,6 +25,8 @@ namespace render
 		virtual void setFrame(int frame);
 		// 获取当前帧
 		int getFrame();
+		// 获取当前动画
+		CtrlFrame* getMovie();
 	protected:
 		// 定时更新事件
 		virtual void updateSelf(float interval);

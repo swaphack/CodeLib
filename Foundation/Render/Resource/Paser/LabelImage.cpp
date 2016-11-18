@@ -270,7 +270,7 @@ void FT_LABEL::writeStream(ulong ch, LabelStream* stream)
 		return;
 	}
 	FT_CHAR_DATA* data = getCharData(ch);
-	int width = _fontSize;
+	int width = _fontSize * 0.5f;
 	int height = _fontSize;
 
 	if (data)

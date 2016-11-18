@@ -19,7 +19,9 @@ namespace sys
 		StringStream(const char* text, int size);
 		virtual ~StringStream();
 	public:
+		// 字符串初始化
 		void initWithText(const char* text);
+		// 字符串初始化
 		void initWithText(const char* text, int size);
 		// 读取一行
 		void readLine(std::string& text);
@@ -27,9 +29,11 @@ namespace sys
 		void readRemain(std::string& text);
 		// 写入字符串
 		void writeString(const char* line, int size);
+		// 写入字符串
 		void writeString(const std::string& text);
 		// 写入一行字符串
 		void writeLine(const char* line, int size);
+		// 写入一行字符串
 		void writeLine(const std::string& text);
 		// 写入空行
 		void writeLine();

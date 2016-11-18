@@ -12,7 +12,7 @@ namespace ui
 		ImageLoader();
 		virtual ~ImageLoader();
 	protected:
-		virtual void parseAttribute();
+		virtual void parseAttributes();
 
 		virtual void saveAttributes();
 	private:

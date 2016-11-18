@@ -165,6 +165,12 @@
     <ClInclude Include="Stream\StreamWriter.h" />
     <ClInclude Include="Stream\StringStream.h" />
     <ClInclude Include="system.h" />
+    <ClInclude Include="Thread\Asynchronous.h" />
+    <ClInclude Include="Thread\import.h" />
+    <ClInclude Include="Thread\Mutex.h" />
+    <ClInclude Include="Thread\Thread.h" />
+    <ClInclude Include="Thread\Threading.h" />
+    <ClInclude Include="Thread\ThreadPool.h" />
     <ClInclude Include="Type\import.h" />
     <ClInclude Include="Type\Number.h" />
     <ClInclude Include="Type\String.h" />
@@ -222,6 +228,10 @@
     <ClCompile Include="Stream\StreamBase.cpp" />
     <ClCompile Include="Stream\StreamWriter.cpp" />
     <ClCompile Include="Stream\StringStream.cpp" />
+    <ClCompile Include="Thread\Mutex.cpp" />
+    <ClCompile Include="Thread\Thread.cpp" />
+    <ClCompile Include="Thread\Threading.cpp" />
+    <ClCompile Include="Thread\ThreadPool.cpp" />
     <ClCompile Include="Type\String.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

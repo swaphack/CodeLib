@@ -21,9 +21,9 @@ TextLoader::~TextLoader()
 
 }
 
-void TextLoader::parseAttribute()
+void TextLoader::parseAttributes()
 {
-	NodeLoader::parseAttribute();
+	NodeLoader::parseAttributes();
 
 	sys::Color4B color;
 	std::string str;

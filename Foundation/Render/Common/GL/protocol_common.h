@@ -169,33 +169,35 @@ namespace render
 		BodyProtocol();
 		virtual ~BodyProtocol();
 	public:
-		// 设置描点
+		// 设置锚点
 		void setAnchorPoint(float x, float y, float z);
-
+		// 设置锚点
+		void setAnchorPoint(float x, float y);
+		// 设置锚点
 		void setAnchorPoint(const sys::Vector& anchor);
-		// 获取描点
+		// 获取锚点
 		const sys::Vector& getAnchorPoint();
-		// 设置体积
+		// 设置宽度
 		void setWidth(float w);
-
+		// 设置高度
 		void setHeight(float h);
-
+		// 设置深度
 		void setDeep(float d);
-
+		// 设置体积
 		void setVolume(float w, float h, float d);
-
+		// 设置体积
 		void setVolume(const sys::Volume& volume);
-
+		// 设置面积，默认深度
 		void setSize(const sys::Size& size);
-		// 获取体积
+		// 获取宽度
 		float getWidth();
-
+		// 获取高度
 		float getHeight();
-
+		// 获取深度
 		float getDeep();
-
+		// 获取体积
 		const sys::Volume& getVolume();
-
+		// 获取面积
 		sys::Size getSize();
 	public:
 		virtual void onBodyChange() {}

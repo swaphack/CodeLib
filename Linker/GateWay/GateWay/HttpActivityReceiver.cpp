@@ -11,7 +11,6 @@ void HttpActivityReceiver::doGet(sys::HttpRequest* request)
 
 void HttpActivityReceiver::doHttpGet(sys::HttpRequest* request)
 {
-
 	std::string url;
 	sys::String method = request->getDocument()->getMethod();
 	sys::String params = request->getDocument()->getUrl();
@@ -29,7 +28,7 @@ void HttpActivityReceiver::doHttpGet(sys::HttpRequest* request)
 	}
 	else if (method.compare(HttpRequestConstant::HTTP_REQ_POST))
 	{// post
-
+		handPostParamMethod(body, reqParams);
 	}
 
 	HttpResponse response;
@@ -38,14 +37,6 @@ void HttpActivityReceiver::doHttpGet(sys::HttpRequest* request)
 	response.getDocument()->setDescribe("OK");
 	response.getDocument()->setResource(G_RESOURCE);
 	response.getDocument()->writeContentFile(url.c_str());
-	this->doPost(&response);
-}
-
-void HttpActivityReceiver::doSocketGet(sys::HttpRequest* request)
-{
-	const char* data = request->getMessage();
-	HttpResponse response;
-	response.setMessage(data, strlen(data));
 	this->doPost(&response);
 }
 
@@ -64,7 +55,6 @@ void HttpActivityReceiver::handUrlMethod(sys::String& inString, std::string& out
 		outString = url.getString();
 }
 
-
 void HttpActivityReceiver::handGetParamMethod(sys::String& inString, std::map<std::string, std::string>& outParams)
 {
 	int index = inString.findFirstOf('?');
@@ -75,20 +65,7 @@ void HttpActivityReceiver::handGetParamMethod(sys::String& inString, std::map<st
 	index += 1;
 	params = inString.subString(index, inString.getSize() - index);
 
-	std::vector<sys::String> vecParams;
-	params.split('&', vecParams);
-
-	std::vector<sys::String> kv;
-	std::vector<sys::String>::iterator iter = vecParams.begin();
-	while (iter != vecParams.end())
-	{
-		(*iter).split('=', kv);
-		if (kv.size() == 2)
-		{
-			outParams[kv[0].getString()] = kv[1].getString();
-		}
-		iter++;
-	}
+	handPostParamMethod(params, outParams);
 }
 
 void HttpActivityReceiver::handPostParamMethod(sys::String& inString, std::map<std::string, std::string>& outParams)
@@ -100,6 +77,7 @@ void HttpActivityReceiver::handPostParamMethod(sys::String& inString, std::map<s
 	std::vector<sys::String>::iterator iter = vecParams.begin();
 	while (iter != vecParams.end())
 	{
+		kv.clear();
 		(*iter).split('=', kv);
 		if (kv.size() == 2)
 		{

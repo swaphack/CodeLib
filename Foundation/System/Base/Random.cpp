@@ -1,6 +1,5 @@
 #include "Random.h"
 #include "macros.h"
-#include "Instance.h"
 
 #include <cmath>
 #include <cstdlib>
@@ -39,5 +38,10 @@ float Random::getNextNumber()
 
 Random* Random::getInstance()
 {
-	return Instance<Random>::getInstance();
+	static Random* s_Random = nullptr;
+	if (s_Random == nullptr)
+	{
+		s_Random = new Random();
+	}
+	return s_Random;
 }

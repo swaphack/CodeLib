@@ -117,6 +117,12 @@ void CtrlText::initSelf()
 		return;
 	}
 
+	if (_textDefine.width == 0 && _textDefine.height == 0)
+	{
+		this->setWidth(texture->getWidth());
+		this->setHeight(texture->getHeight());
+	}
+
 	this->setTextureWithRect(texture);
 	CtrlFrame::initSelf();
 }

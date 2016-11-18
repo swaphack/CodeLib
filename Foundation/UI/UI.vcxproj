@@ -67,7 +67,6 @@
   <ItemGroup>
     <ClInclude Include="Control\import.h" />
     <ClInclude Include="Control\macros.h" />
-    <ClInclude Include="Control\UITime.h" />
     <ClInclude Include="Parser\helper.h" />
     <ClInclude Include="Parser\import.h" />
     <ClInclude Include="Parser\INodeLoad.h" />

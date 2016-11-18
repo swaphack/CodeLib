@@ -9,8 +9,5 @@ namespace ui
 		virtual ~EditFrame();
 	public:
 		virtual bool loadConfig(const char* filepath);
-
-	protected:
-	private:
 	};
 }

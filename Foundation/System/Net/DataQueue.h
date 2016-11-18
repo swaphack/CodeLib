@@ -13,16 +13,17 @@ namespace sys
 		DataQueue();
 		~DataQueue();
 	public:
+		// 添加数据
 		void push(NetData* data);
 		// 需手动释放NetData数据
 		NetData* pop();
-
+		// 队列头元素
 		NetData* top();
-
+		// 队列中元素个数
 		int count();
-
+		// 队列是否为空
 		bool empty();
-
+		// 释放队列元素
 		void dispose();
 	private:
 		std::queue<NetData*> _datas;

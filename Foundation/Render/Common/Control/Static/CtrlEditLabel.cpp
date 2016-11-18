@@ -19,8 +19,12 @@ public:
 		if (value != 0) return value;
 
 		value = getLetter(key);
+		if (value != 0) return value;
+
+		value = getFuncChar(key);
 		return value;
 	}
+	// 数字
 	char getNumber(sys::BoardKey key)
 	{
 		switch (key)
@@ -38,6 +42,7 @@ public:
 		default: return 0;
 		}
 	}
+	// 数字板数字
 	char getPadNumber(sys::BoardKey key)
 	{
 		if (_controlkeys[sys::EBK_NUMLOCK] == false)
@@ -59,6 +64,8 @@ public:
 			default: return 0;
 		}
 	}
+
+	// 字符
 	char getLetter(sys::BoardKey key)
 	{
 		if (_controlkeys[sys::EBK_CAPITAL])
@@ -126,6 +133,16 @@ public:
 			case sys::EBK_Z: return 'z';
 			default: return 0;
 			}
+		}
+	}
+
+	// 功能字符
+	char getFuncChar(sys::BoardKey key)
+	{
+		switch (key)
+		{
+		case sys::EBK_SPACE: return ' ';
+		default: return 0;
 		}
 	}
 

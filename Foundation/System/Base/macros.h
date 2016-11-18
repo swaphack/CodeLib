@@ -11,6 +11,9 @@
 #define SAFE_DELETE(x) { if(x) { delete(x); (x) = 0;} }
 #define SAFE_FREE(x) { if(x) { free(x); (x) = 0; } }
 
+#define BREAK_IF(x) { if(x) { break; } }
+#define RETURN_IF(x) { if(x) { return; } }
+
 #define AUTO_RELEASE_OBJECT(object) { if(object) { object->autoRelease(); } }
 
 #define SAFE_RETAIN(x) { if(x) { (x)->retain(); } }

@@ -35,4 +35,6 @@ protected:
 
 	void onTouchImage(sys::Object* object, float x, float y);
 	void onKeyBoardCamera(sys::Object* object, sys::BoardKey key, sys::ButtonStatus type);
+	void onKeyBoardRole(sys::Object* object, sys::BoardKey key, sys::ButtonStatus type);
+private:
 };

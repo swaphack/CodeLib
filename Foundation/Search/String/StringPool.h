@@ -15,10 +15,11 @@ namespace search
 	class StringPool
 	{
 	public:
-		uint getHash(const char* str);
 		// »ñÈ¡×Ö·û´®
 		std::string* getString(const char* str);
-	protected:
+	private:
+		uint getHash(const char* str);
+	private:
 		std::map<uint, std::string> _strings;
 	};
 

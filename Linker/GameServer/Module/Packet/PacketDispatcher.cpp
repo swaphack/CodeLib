@@ -31,5 +31,5 @@ void PacketDispatcher::setPacketHandler(PacketHandler handler)
 
 web::UserPacketHeader* PacketDispatcher::dispathPacket(const web::UserPacketHeader& header)
 {
-
+	return nullptr;
 }

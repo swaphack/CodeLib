@@ -14,7 +14,7 @@ namespace ui
 		virtual ~NodeLoader();
 	protected:
 		// 解析属性
-		virtual void parseAttribute();
+		virtual void parseAttributes();
 		// 保存属性
 		virtual void saveAttributes();
 	protected:

@@ -39,7 +39,7 @@ int main(int argc, char** argv)
 
 	while (true)
 	{
-		Sleep(100);
+		Sleep(10);
 		gameServer->update();
 	}
 

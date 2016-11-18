@@ -52,12 +52,6 @@
     <ClCompile Include="Common\Action\Scheduler.cpp">
       <Filter>Common\Action</Filter>
     </ClCompile>
-    <ClCompile Include="Resource\Componet\Image.cpp">
-      <Filter>Resource\Componet</Filter>
-    </ClCompile>
-    <ClCompile Include="Resource\Componet\Media.cpp">
-      <Filter>Resource\Componet</Filter>
-    </ClCompile>
     <ClCompile Include="Resource\FilePath.cpp">
       <Filter>Resource</Filter>
     </ClCompile>
@@ -202,6 +196,15 @@
     <ClCompile Include="Graphic\DCSample\DCNormalPointer.cpp">
       <Filter>Graphic\DCSample\Pointer</Filter>
     </ClCompile>
+    <ClCompile Include="Resource\Component\Image.cpp">
+      <Filter>Resource\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource\Component\Media.cpp">
+      <Filter>Resource\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Control\Static\CtrlPixels.cpp">
+      <Filter>Common\Control\Static</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Common\GL\import.h">
@@ -297,15 +300,6 @@
     <ClInclude Include="Common\Action\Scheduler.h">
       <Filter>Common\Action</Filter>
     </ClInclude>
-    <ClInclude Include="Resource\Componet\Image.h">
-      <Filter>Resource\Componet</Filter>
-    </ClInclude>
-    <ClInclude Include="Resource\Componet\Media.h">
-      <Filter>Resource\Componet</Filter>
-    </ClInclude>
-    <ClInclude Include="Resource\Componet\Model.h">
-      <Filter>Resource\Componet</Filter>
-    </ClInclude>
     <ClInclude Include="Resource\FilePath.h">
       <Filter>Resource</Filter>
     </ClInclude>
@@ -335,9 +329,6 @@
     </ClInclude>
     <ClInclude Include="Resource\enum_common.h">
       <Filter>Resource</Filter>
-    </ClInclude>
-    <ClInclude Include="Resource\Componet\import.h">
-      <Filter>Resource\Componet</Filter>
     </ClInclude>
     <ClInclude Include="Resource\Paser\import.h">
       <Filter>Resource\Parser</Filter>
@@ -559,6 +550,21 @@
     <ClInclude Include="Graphic\Struct\import.h">
       <Filter>Graphic\Struct</Filter>
     </ClInclude>
+    <ClInclude Include="Resource\Component\Image.h">
+      <Filter>Resource\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\Component\import.h">
+      <Filter>Resource\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\Component\Media.h">
+      <Filter>Resource\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\Component\Model.h">
+      <Filter>Resource\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Control\Static\CtrlPixels.h">
+      <Filter>Common\Control\Static</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Common">
@@ -599,9 +605,6 @@
     </Filter>
     <Filter Include="Resource">
       <UniqueIdentifier>{f2319a96-c99c-437a-98e9-9151cfb1b46d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Resource\Componet">
-      <UniqueIdentifier>{9df81cfb-9846-4989-81c1-b7ad6ba47ba6}</UniqueIdentifier>
     </Filter>
     <Filter Include="Resource\Parser">
       <UniqueIdentifier>{5000cb09-fb3c-4b63-963b-db40ce7a3db0}</UniqueIdentifier>
@@ -644,6 +647,9 @@
     </Filter>
     <Filter Include="Graphic\DCSample\Pointer">
       <UniqueIdentifier>{13000221-43bf-402b-a7c1-ee77d2996895}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource\Component">
+      <UniqueIdentifier>{9df81cfb-9846-4989-81c1-b7ad6ba47ba6}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

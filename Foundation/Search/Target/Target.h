@@ -22,9 +22,9 @@ namespace search
 }
 
 template<>
-struct std::less<search::Target*>
+struct std::less<Target*>
 {
-	bool operator()(search::Target*_X, search::Target* _Y) const
+	bool operator()(Target* _X, Target* _Y) const
 	{
 		return _X->getString() < _Y->getString();
 	}

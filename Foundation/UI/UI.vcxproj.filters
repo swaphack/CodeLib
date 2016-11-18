@@ -33,9 +33,6 @@
     <ClInclude Include="Control\macros.h">
       <Filter>Control</Filter>
     </ClInclude>
-    <ClInclude Include="Control\UITime.h">
-      <Filter>Control</Filter>
-    </ClInclude>
     <ClInclude Include="ui.h" />
     <ClInclude Include="Sample\Loader\TextLoader.h">
       <Filter>Sample\Loader</Filter>

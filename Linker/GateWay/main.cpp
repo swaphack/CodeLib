@@ -10,7 +10,7 @@
 // #define new DEBUG_CLIENTBLOCK
 // #endif  // _DEBUG
 
-#include <vld.h>
+//#include <vld.h>
 
 #include "GateWay/import.h"
 #include "text.h"
@@ -20,15 +20,13 @@
 #include <windows.h>
 #include <string>
 
-
-
 using namespace gw;
 using namespace sys;
 
 int main(int argc, char** argv)
 {
 
-	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+	//_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 
 	// ¹¤³ÌÂ·¾¶
 	std::string projectPath;
@@ -63,7 +61,7 @@ int main(int argc, char** argv)
 
 	while (true)
 	{
-		Sleep(100);
+		Sleep(10);
 		gateWay->update();
 	}
 

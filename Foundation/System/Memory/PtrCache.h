@@ -29,7 +29,6 @@ namespace sys
 	private:
 		// PtrCache信息{指针， 大小}
 		Tuple2<char*, uint> _cacheInfo;
-
 		// 当前游标位置
 		uint _cursor;
 		// 已分配的内存块

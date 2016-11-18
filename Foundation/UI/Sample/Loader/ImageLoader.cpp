@@ -18,9 +18,9 @@ ImageLoader::~ImageLoader()
 
 }
 
-void ImageLoader::parseAttribute()
+void ImageLoader::parseAttributes()
 {
-	NodeLoader::parseAttribute();
+	NodeLoader::parseAttributes();
 
 	sys::Color4B color;
 	std::string str;

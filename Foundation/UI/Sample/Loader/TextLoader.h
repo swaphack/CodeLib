@@ -12,7 +12,7 @@ namespace ui
 		TextLoader();
 		virtual ~TextLoader();
 	protected:
-		virtual void parseAttribute();
+		virtual void parseAttributes();
 
 		virtual void saveAttributes();
 	private:

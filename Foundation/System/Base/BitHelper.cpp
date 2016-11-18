@@ -75,7 +75,7 @@ int BitHelper::getUTF8WordCount(const char* data)
 		}
 		else
 		{
-			break;;
+			break;
 		}
 	}
 
