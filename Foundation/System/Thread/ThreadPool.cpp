@@ -54,6 +54,8 @@ void ThreadPool::add(Thread* pThread)
 		return;
 	}
 
+	printf("try add push lock\n");
+
 	m_pMutex.lock();
 
 	m_mThreads[pThread->getID()] = pThread;
@@ -68,6 +70,8 @@ void ThreadPool::remove(size_t nThreadID)
 		return;
 	}
 
+	printf("try add remove lock\n");
+
 	m_pMutex.lock();
 
 	m_mThreads.erase(nThreadID);
@@ -81,6 +85,8 @@ void ThreadPool::update()
 	{
 		return;
 	}
+
+	printf("try add check lock\n");
 
 	std::vector<size_t> invialdThreadIDs;
 	Threads::iterator iter = m_mThreads.begin();

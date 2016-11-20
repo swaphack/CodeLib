@@ -12,14 +12,14 @@ namespace sys
 	struct AsynchronousResult
 	{
 		// 是否结束
-		bool finish;
+		bool completed;
 		// 扩展
 		void* object;
 		// 回调处理
 		AsynchronousCallback callback;
 
 		AsynchronousResult()
-			:finish(false)
+			:completed(false)
 			, object(nullptr)
 			, callback(nullptr)
 		{
@@ -29,7 +29,7 @@ namespace sys
 
 	// 异步
 	class Asynchronous
-	{		
+	{
 	private:
 		Asynchronous() {}
 		~Asynchronous() {}
@@ -40,6 +40,17 @@ namespace sys
 		// 开始执行无参数的异步操作
 		template<class _Fn>
 		static AsynchronousResult* beginInvoke(AsynchronousCallback callback, _Fn&& handler);
+
+		// 结束异步操作
+		static void endInvoke(AsynchronousResult* asynResult)
+		{
+			if (asynResult == nullptr || asynResult->completed)
+			{
+				return;
+			}
+
+			asynResult->completed =true;
+		}
 
 	};
 
@@ -52,13 +63,17 @@ namespace sys
 		}
 		AsynchronousResult* pResult = new AsynchronousResult();
 		pResult->callback = callback;
+		pResult->handler = handler;
 		Thread thread;
 		thread.startWithParams([&](AsynchronousResult* asynResult) {
 			if (asynResult == nullptr) return;
-			handler();
-			asynResult->finish = true;
-			if (asynResult->callback)
-				asynResult->callback(asynResult);
+			if (!asynResult->completed)
+			{
+				asynResult->completed = true;
+				handler();
+				if (asynResult->callback)
+					asynResult->callback(asynResult);
+			}
 			delete asynResult;
 		}, pResult);
 		thread.detach();
@@ -79,10 +94,13 @@ namespace sys
 		Thread thread;
 		thread.startWithParams([&](AsynchronousResult* asynResult) {
 			if (asynResult == nullptr) return;
-			handler(asynResult->object);
-			asynResult->finish = true;
-			if (asynResult->callback)
-				asynResult->callback(asynResult);
+			if (!asynResult->completed)
+			{
+				asynResult->completed = true;
+				handler(asynResult->object);
+				if (asynResult->callback)
+					asynResult->callback(asynResult);
+			}
 			delete asynResult;
 		}, pResult);
 		thread.detach();
