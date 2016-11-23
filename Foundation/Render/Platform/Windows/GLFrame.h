@@ -2,7 +2,7 @@
 
 #include "system.h"
 #include <windows.h>
-#include "../../Common/RenderApplication.h"
+#include "../../RenderApplication.h"
 
 namespace render
 {

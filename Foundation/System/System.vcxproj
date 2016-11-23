@@ -103,6 +103,7 @@
     <ClInclude Include="Framework\AutoReleasePool.h" />
     <ClInclude Include="Framework\Container.h" />
     <ClInclude Include="Framework\Dispatcher.h" />
+    <ClInclude Include="Framework\FilePath.h" />
     <ClInclude Include="Framework\IHandler.h" />
     <ClInclude Include="Framework\import.h" />
     <ClInclude Include="Framework\ITimer.h" />
@@ -140,9 +141,9 @@
     <ClInclude Include="Net\Socket.h" />
     <ClInclude Include="Net\EndPoint.h" />
     <ClInclude Include="Net\SocketRecvHandler.h" />
+    <ClInclude Include="Platform\Console.h" />
     <ClInclude Include="Platform\import.h" />
     <ClInclude Include="Platform\macros.h" />
-    <ClInclude Include="Platform\Windows\Console.h" />
     <ClInclude Include="Platform\Windows\import.h" />
     <ClInclude Include="Platform\Windows\Window.h" />
     <ClInclude Include="Resource\import.h" />
@@ -195,6 +196,7 @@
     <ClCompile Include="Framework\AutoReleasePool.cpp" />
     <ClCompile Include="Framework\Container.cpp" />
     <ClCompile Include="Framework\Dispatcher.cpp" />
+    <ClCompile Include="Framework\FilePath.cpp" />
     <ClCompile Include="Framework\Object.cpp" />
     <ClCompile Include="Http\HttpCommand.cpp" />
     <ClCompile Include="Http\HttpConstant.cpp" />
@@ -213,7 +215,7 @@
     <ClCompile Include="Net\Server.cpp" />
     <ClCompile Include="Net\Socket.cpp" />
     <ClCompile Include="Net\EndPoint.cpp" />
-    <ClCompile Include="Platform\Windows\Console.cpp" />
+    <ClCompile Include="Platform\Console.cpp" />
     <ClCompile Include="Platform\Windows\Window.cpp" />
     <ClCompile Include="Resource\LocalResource.cpp" />
     <ClCompile Include="Resource\RemoteResource.cpp" />

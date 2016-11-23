@@ -1,3 +1,4 @@
+
 #include "JPEGImage.h"
 
 using namespace render;
@@ -36,7 +37,7 @@ void JPEGImage::load(const char* filename)
 	this->setWidth(jds.output_width);
 	this->setHeight(jds.output_height);
 	this->setInternalFormat(internalFormat);
-	this->setFormat(GL_RGB);
+	this->setFormat(EPF_RGB);
 
 	uint lineSize = jds.output_width * internalFormat;
 	uint totoalSize = this->getWidth()* this->getHeight() * internalFormat;

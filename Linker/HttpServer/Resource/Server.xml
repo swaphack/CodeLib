@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <server>
+    <local ip="127.0.0.1" port="9549" />
+  </server>
+  <resource>
+    <websit path="E:/website" />
+  </resource>
+</root>

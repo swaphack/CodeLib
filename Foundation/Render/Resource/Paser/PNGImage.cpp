@@ -1,8 +1,8 @@
 #include "PNGImage.h"
 
-#include "macros.h"
-#include <stdlib.h>
-#include <stdio.h>
+#include "system.h"
+#include <cstdlib>
+#include <cstdio>
 
 using namespace render;
 
@@ -55,7 +55,7 @@ void PNGImage::load(const char* filename)
 	FILE *fp = NULL;
 	png_bytep *row_pointers = NULL;
 	png_uint_32 w, h;
-	GLubyte* texels;
+	png_byte* texels;
 	png_uint_32 rowbytes;
 
 	const char* fullpaht = G_FILEPATH->getFilePath(filename);
@@ -127,7 +127,7 @@ void PNGImage::load(const char* filename)
 	rowbytes = png_get_rowbytes(png_ptr, info_ptr);
 
 	/* We can now allocate memory for storing pixel data */
-	texels = (GLubyte *)malloc(sizeof (GLubyte)* h * rowbytes);
+	texels = (png_byte *)malloc(sizeof (png_byte)* h * rowbytes);
 	/* Setup a pointer array. Each one points at the begening of a row. */
 	row_pointers = (png_bytep *)malloc(sizeof (png_bytep)* h);
 

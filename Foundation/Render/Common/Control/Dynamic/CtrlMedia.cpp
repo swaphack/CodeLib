@@ -25,7 +25,7 @@ void CtrlMedia::setMediaPath(const char* path)
 	SAFE_DELETE(_media);
 	this->stop();
 
-	_media = Resource::load<FFmpeg>(_mediaDefine);
+	_media = Loader::load<FFmpeg>(_mediaDefine);
 
 	this->setVolume(_media->getWidth(), _media->getHeight(), 0);
 

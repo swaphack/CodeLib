@@ -179,10 +179,28 @@ bool Node::isVisible()
 	return _bVisibled;
 }
 
-void Node::draw()
-{
-	
-}
+// void Node::calculate()
+// {
+// 	if (this->isVisible() == false)
+// 	{
+// 		return;
+// 	}
+// 
+// 	if (isDirty())
+// 	{
+// 		this->initSelf();
+// 
+// 		setDirty(false);
+// 	}
+// 
+// 	std::vector<Object*>::iterator iter = _children.begin();
+// 	while (iter != _children.end())
+// 	{
+// 		Node* node = dynamic_cast<Node*>(*iter);
+// 		node->calculate();
+// 		iter++;
+// 	}
+// }
 
 void Node::visit()
 {
@@ -191,14 +209,18 @@ void Node::visit()
 		return;
 	}
 
-	glPushMatrix();
-
+	// 数值计算
 	if (isDirty())
 	{
 		this->initSelf();
 
 		setDirty(false);
 	}
+
+	// 图形命令
+	//glPushMatrix();
+	G_DRAWCOMMANDER->addCommand(DCMatrix::create(true));
+
 	this->updateSelf();
 
 	if (_children.count() == 0)
@@ -222,7 +244,8 @@ void Node::visit()
 		}
 	}
 
-	glPopMatrix();
+	//glPopMatrix();
+	G_DRAWCOMMANDER->addCommand(DCMatrix::create(false));
 }
 
 ActionProxy* Node::getActionProxy()
@@ -263,19 +286,25 @@ const RectangeVertex& Node::getRectVertex()
 	return _rectVertex;
 }
 
+void Node::draw()
+{
+
+}
+
 void Node::updateTranform()
 {
-	if (!this->isRelativeWithParent())
-	{
-		glLoadIdentity();
-	}
+// 	if (!this->isRelativeWithParent())
+// 	{
+// 		glLoadIdentity();
+// 	}
+// 
+// 	glTranslatef(_obPosition.x, _obPosition.y, _obPosition.z);
+// 	glRotatef(_rotation.x, 1, 0, 0);
+// 	glRotatef(_rotation.y, 0, 1, 0);
+// 	glRotatef(_rotation.z, 0, 0, 1);
+// 	glScalef(_scale.x, _scale.y, _scale.z);
 
-	glTranslatef(_obPosition.x, _obPosition.y, _obPosition.z);
-	glRotatef(_rotation.x, 1, 0, 0);
-	glRotatef(_rotation.y, 0, 1, 0);
-	glRotatef(_rotation.z, 0, 0, 1);
-	glScalef(_scale.x, _scale.y, _scale.z);
-	//glTranslatef(-_obPosition.x, -_obPosition.y, -_obPosition.z);
+	G_DRAWCOMMANDER->addCommand(DCSpace::create(_obPosition, _scale, _rotation, _bRelative));
 }
 
 void Node::updateSelf()

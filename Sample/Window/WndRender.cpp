@@ -6,7 +6,7 @@ using namespace sys;
 WndRender::WndRender()
 {
 	this->init();
-	this->getCanvas()->setDimensions(render::ED_2D);
+	this->getCanvas()->setDimensions(render::ED_3D);
 }
 
 WndRender::~WndRender()
@@ -23,6 +23,10 @@ void WndRender::show()
 	this->testSequenceFrame();
 
 	this->testCamera();
+
+	//this->testClock();
+
+	this->testCubeModel();
 }
 
 void WndRender::testMoveImage()
@@ -44,73 +48,59 @@ void WndRender::testMoveImage()
 
 void WndRender::testClock()
 {
-	LineNode* pSecondLineNode = new LineNode();
-	AUTO_RELEASE_OBJECT(pSecondLineNode);
+	DrawNode* pDrawNode = new DrawNode();
+	AUTO_RELEASE_OBJECT(pDrawNode);
 
-	pSecondLineNode->setWidth(2);
-	pSecondLineNode->setPosition(512, 384, 0);
-	pSecondLineNode->setSource(0, 0);
-	pSecondLineNode->setDestination(300, 300);
+	pDrawNode->setDrawMode(EBM_LINE_LOOP);
+	pDrawNode->setWidth(20);
+	pDrawNode->setPosition(300, 384);
+	pDrawNode->appendPoint(sys::Vector(0, 200));
+	pDrawNode->appendPoint(sys::Vector(150, 300));
+	pDrawNode->appendPoint(sys::Vector(200, 200));
+	pDrawNode->setColor(sys::Color3B(0, 255, 0));
+
+	//pDrawNode->setRotationZ(20);
 	
-	this->getCanvas()->getRoot()->addChild(pSecondLineNode);
-
-	LineNode* pMinuteLineNode = new LineNode();
-	AUTO_RELEASE_OBJECT(pMinuteLineNode);
-	pMinuteLineNode->setWidth(5);
-	pMinuteLineNode->setPosition(512, 384, 0);
-	pMinuteLineNode->setSource(0, 0);
-	pMinuteLineNode->setDestination(300, 300);
-	pMinuteLineNode->setColor(sys::Color4B(255, 0, 0, 255));
-	
-	this->getCanvas()->getRoot()->addChild(pMinuteLineNode);
-
-	float ratio = 0.5;
-	int count = 1024;
-
-	RotateToAction* pSecondAction = new RotateToAction();
-	pSecondAction->setRotation(0, 0, 360 * count);
-	pSecondAction->setInterval(ratio * 60 * count);
-	pSecondLineNode->getActionProxy()->runAction(pSecondAction);
-
-	RotateToAction* pMinuteAction = new RotateToAction();
-	pMinuteAction->setRotation(0, 0, 360 * count);
-	pMinuteAction->setInterval(ratio * 60 * 60 * count);
-	pMinuteLineNode->getActionProxy()->runAction(pMinuteAction);
+	this->getCanvas()->getRoot()->addChild(pDrawNode);
 }
 
 void WndRender::testCubeModel()
 {
-	ImageDefine imageDefine = { "Resource/NeHe.png", EIF_PNG};
-	Texture2D* texture2D = G_TEXTURE_CACHE->getTexture2D(imageDefine);
+	int nCount = 1000;
+	for (int i = 0; i < nCount; i++)
+	{
+		ImageDefine imageDefine = { "Resource/NeHe.png", EIF_PNG };
+		Texture2D* texture2D = G_TEXTURE_CACHE->getTexture2D(imageDefine);
 
-	TexFrame* frame = new TexFrame();
-	AUTO_RELEASE_OBJECT(frame);
-	frame->setTextureWithRect(texture2D);
+		TexFrame* frame = new TexFrame();
+		AUTO_RELEASE_OBJECT(frame);
+		frame->setTextureWithRect(texture2D);
 
-	Cube* pModel = new Cube();
-	AUTO_RELEASE_OBJECT(pModel);
-	pModel->setTexFrame(frame);
-	//pModel->setPosition(512, 384, 0);
-	pModel->setVolume(256.0f, 256.0f, 256.0f);
-	pModel->setRotation(0, 0, 10);
-	pModel->getMatrial()->setShiness(1.0f);
-	pModel->getMatrial()->setAmbient(255, 255, 255, 255);
-	pModel->getMatrial()->setDiffuse(255, 255, 255, 255);
-	pModel->getMatrial()->setSpecular(255, 255, 255, 255);
-	pModel->getMatrial()->setEmisiion(255, 255, 255, 255);
-	this->getCanvas()->getRoot()->addChild(pModel);
+		Cube* pModel = new Cube();
+		AUTO_RELEASE_OBJECT(pModel);
+		pModel->setPosition(i % 100, i % 100, i % 100);
+		pModel->setTexFrame(frame);
+		pModel->setVolume(256.0f, 256.0f, 256.0f);
+		pModel->setRotation(0, 0, 10);
+		pModel->getMatrial()->setShiness(1.0f);
+		pModel->getMatrial()->setAmbient(255, 255, 255, 255);
+		pModel->getMatrial()->setDiffuse(255, 255, 255, 255);
+		pModel->getMatrial()->setSpecular(255, 255, 255, 255);
+		pModel->getMatrial()->setEmisiion(255, 255, 255, 255);
+		this->getCanvas()->getRoot()->addChild(pModel);
 
-	
-	int count = 1024;
-	float interval = 5;
-	float rx = 45;
-	float ry = 45;
-	float rz = 0;
-	RotateToAction* pRotateToAction = new RotateToAction();
-	pRotateToAction->setRotation(rx * count, ry * count, rz * count);
-	pRotateToAction->setInterval(interval * count);
-	pModel->getActionProxy()->runAction(pRotateToAction);
-	
+
+		int count = 1024;
+		float interval = 5;
+		float rx = i % 360;
+		float ry = i % 360;
+		float rz = i % 360;
+		RotateToAction* pRotateToAction = new RotateToAction();
+		pRotateToAction->setRotation(rx * count, ry * count, rz * count);
+		pRotateToAction->setInterval(interval * count);
+		pModel->getActionProxy()->runAction(pRotateToAction);
+	}
+
 }
 
 void WndRender::testSphereModel()
@@ -155,13 +145,14 @@ void WndRender::testMask()
 // 	this->getCanvas()->getRoot()->addChild(pImage);
 	//Color4B color = pImage->getPixel(512, 384);
 
-	uchar opacity = 200;
+	uchar opacity = 255;
 
 	CtrlMask* pMask = new CtrlMask();
 	AUTO_RELEASE_OBJECT(pMask);
 	pMask->setOpacity(opacity);
 	pMask->setPosition(512, 384, 0.0f);
 	pMask->setVolume(200, 300, 0);
+	pMask->setColor(Color3B(0.299f * 255, 0.587f * 255, 0.114f * 255));
 	this->getCanvas()->getRoot()->addChild(pMask);
 }
 
@@ -177,13 +168,13 @@ void WndRender::testMedia()
 
 void WndRender::testFog()
 {
-	CtrlFog* pFog = new CtrlFog();
-	pFog->setDensity(0.015);
-	pFog->setNear(60);
-	pFog->setFar(100);
-	pFog->setColor(125, 125, 125, 125);
-	AUTO_RELEASE_OBJECT(pFog);
-	this->getCanvas()->getRoot()->addChild(pFog);
+// 	CtrlFog* pFog = new CtrlFog();
+// 	pFog->setDensity(0.015);
+// 	pFog->setNear(60);
+// 	pFog->setFar(100);
+// 	pFog->setColor(125, 125, 125, 125);
+// 	AUTO_RELEASE_OBJECT(pFog);
+// 	this->getCanvas()->getRoot()->addChild(pFog);
 }
 
 void WndRender::testAnimation()
@@ -205,25 +196,25 @@ void WndRender::testParticle()
 
 void WndRender::testStencil()
 {
-	CtrlStencil* pStencil = new CtrlStencil();
-	pStencil->setPosition(512, 384, 0);
-	AUTO_RELEASE_OBJECT(pStencil);
-	this->getCanvas()->getRoot()->addChild(pStencil);
-
-	CtrlImage* pNode = new CtrlImage();
-	AUTO_RELEASE_OBJECT(pNode); 
-	pNode->setImagePath("Resource/sqi.png");
-	pNode->setColor(sys::Color4B(255, 0, 0, 255));
-	pNode->setVolume(100, 100, 0);
-	pStencil->setStencilNode(pNode);
-	
-
-	CtrlImage* pImage = new CtrlImage();
-	AUTO_RELEASE_OBJECT(pImage);
-	pImage->setImagePath("Resource/sqi.png");
-	pImage->setVolume(200, 200, 0);
-	pImage->setScale(1.5, 1.0, 2);
-	pStencil->addChild(pImage);
+// 	CtrlStencil* pStencil = new CtrlStencil();
+// 	pStencil->setPosition(512, 384, 0);
+// 	AUTO_RELEASE_OBJECT(pStencil);
+// 	this->getCanvas()->getRoot()->addChild(pStencil);
+// 
+// 	CtrlImage* pNode = new CtrlImage();
+// 	AUTO_RELEASE_OBJECT(pNode); 
+// 	pNode->setImagePath("Resource/sqi.png");
+// 	pNode->setColor(sys::Color4B(255, 0, 0, 255));
+// 	pNode->setVolume(100, 100, 0);
+// 	pStencil->setStencilNode(pNode);
+// 	
+// 
+// 	CtrlImage* pImage = new CtrlImage();
+// 	AUTO_RELEASE_OBJECT(pImage);
+// 	pImage->setImagePath("Resource/sqi.png");
+// 	pImage->setVolume(200, 200, 0);
+// 	pImage->setScale(1.5, 1.0, 2);
+// 	pStencil->addChild(pImage);
 }
 
 void WndRender::testCamera()
@@ -315,16 +306,16 @@ void WndRender::testString()
 
 void WndRender::addLight()
 {
-	CtrlSpotLight1* pCtrlSpotLight = new CtrlSpotLight1();
-	AUTO_RELEASE_OBJECT(pCtrlSpotLight);
-	pCtrlSpotLight->setExponent(1.0f);
-	pCtrlSpotLight->setPosition(0, 0, -1);
-	pCtrlSpotLight->setAmbient(255, 255, 255, 255);
-	pCtrlSpotLight->setDiffuse(255, 255, 255, 255);
-	pCtrlSpotLight->setCutOff(45);
-	pCtrlSpotLight->setDirection(0.0f, 0.0f, 1.0f);
-
-	this->getCanvas()->getRoot()->addChild(pCtrlSpotLight);
+// 	CtrlSpotLight1* pCtrlSpotLight = new CtrlSpotLight1();
+// 	AUTO_RELEASE_OBJECT(pCtrlSpotLight);
+// 	pCtrlSpotLight->setExponent(1.0f);
+// 	pCtrlSpotLight->setPosition(0, 0, -1);
+// 	pCtrlSpotLight->setAmbient(255, 255, 255, 255);
+// 	pCtrlSpotLight->setDiffuse(255, 255, 255, 255);
+// 	pCtrlSpotLight->setCutOff(45);
+// 	pCtrlSpotLight->setDirection(0.0f, 0.0f, 1.0f);
+// 
+// 	this->getCanvas()->getRoot()->addChild(pCtrlSpotLight);
 }
 
 void WndRender::testPixelImage()
@@ -347,10 +338,6 @@ void WndRender::testPixelImage()
 
 	pImage->setUserData(pCtrlText);
 	pImage->getTouchProxy()->addTouchDelegate(ETT_ON, this, TOUCH_DELEGATTE_SELECTOR(WndRender::onTouchImage));
-
-	CtrlPixels* pPixels = new CtrlPixels();
-	AUTO_RELEASE_OBJECT(pPixels);
-	this->getCanvas()->getRoot()->addChild(pPixels);
 }
 
 void WndRender::testSequenceFrame()
@@ -361,6 +348,10 @@ void WndRender::testSequenceFrame()
 	pSequenceFrame->setPosition(512, 384, 0);
 	pSequenceFrame->setFrameRate(1.0f / 10);
 	pSequenceFrame->start();
+
+	//pSequenceFrame->getMovie()->setBlend(EBFS_SRC_ALPHA, EBFD_ONE_MINUS_SRC_ALPHA);
+	pSequenceFrame->getMovie()->setColor(Color3B(0.299f * 255, 0.587f * 255, 0.114f * 255));
+	//pSequenceFrame->getMovie()->setOpacity(255);
 
 	this->getCanvas()->getRoot()->addChild(pSequenceFrame);
 	G_KEYBOARDMANAGER->addDispatcher(pSequenceFrame, this, KEYBOARD_DELEGATTE_SELECTOR(WndRender::onKeyBoardRole));
@@ -455,8 +446,6 @@ void WndRender::onTouchImage(sys::Object* object, float x, float y)
 	sys::Color4B color = Pixel::getPixel(x, y);
 	pText->setString(getCString("##%02x%02x%02x%02x", color.red, color.green, color.blue, color.alpha));
 	pText->setColor(color);
-
-	Pixel::setPixel(x, y, 100, 100, color);
 }
 
 void WndRender::onKeyBoardCamera(sys::Object* object, sys::BoardKey key, sys::ButtonStatus type)

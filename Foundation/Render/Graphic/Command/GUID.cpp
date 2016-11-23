@@ -19,7 +19,7 @@ int GUID::getID()
 	return ++s_nID;
 }
 
-void GUID::resetID()
+void GUID::reset()
 {
 	s_nID = 0;
 }

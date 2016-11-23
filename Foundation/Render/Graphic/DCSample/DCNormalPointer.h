@@ -5,7 +5,7 @@
 namespace render
 {
 	/**
-	*	绘制法线命令
+	*	绘制法线数组命令
 	*/
 	class DCNormalPointer : public DrawCommand
 	{

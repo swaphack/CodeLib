@@ -70,9 +70,31 @@ const sys::Color4B& ColorProtocol::getColor()
 }
 
 //////////////////////////////////////////////////////////////////////////
-BlendProtocol::BlendProtocol()
+OpacityProtocol::OpacityProtocol()
+:_opacity(255)
 {
 
+}
+
+OpacityProtocol::~OpacityProtocol()
+{
+
+}
+
+void OpacityProtocol::setOpacity(uchar opacity)
+{
+	_opacity = opacity;
+}
+
+uchar OpacityProtocol::getOpacity()
+{
+	return _opacity;
+}
+
+//////////////////////////////////////////////////////////////////////////
+BlendProtocol::BlendProtocol()
+{
+	_blend = { EBFD_SRC_ALPHA, EBFS_ONE_MINUS_SRC_ALPHA };
 }
 
 BlendProtocol::~BlendProtocol()

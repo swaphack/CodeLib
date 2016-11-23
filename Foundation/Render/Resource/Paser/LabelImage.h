@@ -14,7 +14,7 @@ namespace render
 	public:
 		// 重置游标
 		void resetOffset();
-		
+
 		// 写入开始的位置x
 		sys::ss_t getOffsetX() const { return _offsetX; }
 		void setOffsetX(sys::ss_t val) { _offsetX = val; }
@@ -48,7 +48,7 @@ namespace render
 		sys::ss_t _heightX;
 		// 最大y
 		sys::ss_t _heightY;
-		
+
 		// 写入开始的位置x
 		sys::ss_t _offsetX;
 		// 写入开始的位置y
@@ -56,6 +56,7 @@ namespace render
 		// 行高
 		sys::ss_t _lineHeight;
 	};
+
 	// 文本图片
 	// 文本变成图片，只关心图片的生成，不考虑实际摆放的位置
 	class LabelImage : public Image, public ILabelLoader

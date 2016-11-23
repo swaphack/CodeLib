@@ -2,12 +2,14 @@
 
 #include "CtrlImage.h"
 #include "CtrlText.h"
-#include "CtrlLight.h"
-#include "CtrlSpotLight.h"
-#include "CtrlModel.h"
+
 #include "CtrlMask.h"
-#include "CtrlFog.h"
-#include "CtrlStencil.h"
+
+
 #include "CtrlEditBox.h"
 #include "CtrlEditLabel.h"
-#include "CtrlPixels.h"
+
+//#include "CtrlFog.h"
+//#include "CtrlLight.h"
+//#include "CtrlSpotLight.h"
+//#include "CtrlStencil.h"

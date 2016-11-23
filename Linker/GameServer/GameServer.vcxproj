@@ -67,6 +67,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Module\DataBase\DataBase.h" />
+    <ClInclude Include="Module\DataBase\DBConnect.h" />
     <ClInclude Include="Module\import.h" />
     <ClInclude Include="Module\macros.h" />
     <ClInclude Include="Module\Packet\import.h" />

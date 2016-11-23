@@ -16,14 +16,15 @@ namespace sys
 		Dispatcher();
 		~Dispatcher();
 	public:
+		// 添加派发事件
 		void addDispatcher(long commandID, T* handler);
-		
+		// 移除派发事件
 		void removeDispatcher(long commanID);
-
+		// 接收到消息，派发
 		bool dispatch(Object* command);
-
-		void dispatchAll(Object* command);
-
+		// 接收到消息，广播
+		void broadcast(Object* command);
+		// 清空所有派发处理
 		void clear();
 	private:
 		std::map<long, T*> _handlers;
@@ -88,7 +89,7 @@ namespace sys
 	}
 
 	template<typename T>
-	void Dispatcher<T>::dispatchAll( Object* command )
+	void Dispatcher<T>::broadcast( Object* command )
 	{
 		if (command == nullptr)
 		{

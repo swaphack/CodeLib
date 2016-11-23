@@ -13,11 +13,6 @@ Action::~Action()
 	
 }
 
-void Action::update(float duration)
-{
-	
-}
-
 void Action::setTarget(sys::Object* target)
 {
 	_target = target;

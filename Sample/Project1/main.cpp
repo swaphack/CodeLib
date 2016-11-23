@@ -1,7 +1,7 @@
 #include "system.h"
 using namespace sys;
 
-int bb = 2;
+volatile int bb = 2;
 
 void show(int a)
 {
@@ -21,25 +21,40 @@ void test_thread()
 	}
 }
 
-void show_asyn(void* a)
+void show_asyn(int a)
 {
 	do
 	{
-		bb = *((int*)a);
-	} while (0);
+		bb = a;
+
+		printf("asyn data %d\n", bb);
+	} while (true);
 }
+
+#define ARY_LENGTH 64
+int data[ARY_LENGTH] = { 0 };
+volatile int cc = 0;
 
 void test_asyn()
 {
-	for (int i = 0; i < 100; i++)
+	for (int i = 0; i < ARY_LENGTH; i++)
 	{
-		int data = i;
+		data[i] = i;
+	}
+	for (int i = 0; i < ARY_LENGTH; i++)
+	{
 		AsynchronousResult* asynResult = Asynchronous::beginInvoke([](AsynchronousResult* pResult){
 			if (pResult->completed == true)
 			{
-				int cc = *((int*)pResult->object);
+				cc = *((int*)pResult->object);
+				delete pResult->object;
+				pResult->object = nullptr;
+				printf("finish data %d\n", cc);
 			}
-		}, show_asyn, &data);
+		}, show_asyn, data[i]);
+
+		int* value = new int(data[i]);
+		asynResult->object = value;
 
 		if (!asynResult->completed)
 		{
@@ -48,9 +63,49 @@ void test_asyn()
 	}
 }
 
+void test_struct()
+{
+#pragma pack(1)
+	typedef struct Header
+	{
+		unsigned int i : 1;
+		unsigned int j : 2;
+		unsigned int k : 29;
+		int d;
+	};
+#pragma  pack()
+
+	typedef struct Header2
+	{
+		int d;
+		union
+		{
+			char i;
+			char j;
+			char k;
+			char s;
+		}a;
+	};
+
+	printf("Header size is %d\n", sizeof(Header));
+
+	Header header;
+	header.i = 1;
+	header.j = 2;
+	header.k = 4;
+	header.d = 5;
+
+	printf("Header2 size is %d\n", sizeof(Header2));
+
+	Header2 header2;
+	header2.d = 15;
+
+	int a = 1;
+}
+
 int main(int argc, char** argv)
 {
-	test_thread();
+	test_asyn();
 
 	getchar();
 

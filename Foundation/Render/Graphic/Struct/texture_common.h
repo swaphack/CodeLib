@@ -62,4 +62,10 @@ namespace render
 		{
 		}
 	};
+
+	struct BlendParam
+	{
+		int src;
+		int dest;
+	};
 }

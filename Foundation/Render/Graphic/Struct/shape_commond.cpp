@@ -2,7 +2,7 @@
 
 using namespace render;
 
-float getArea(const sys::Vector& p1, const sys::Vector& p2, const sys::Vector& p3)
+static float getArea(const sys::Vector& p1, const sys::Vector& p2, const sys::Vector& p3)
 {
 	float s = 0.5f * (p1.x*p2.y + p2.x*p3.y + p3.x*p1.y - p1.x*p3.y - p2.x*p1.y - p3.x*p2.y);
 	return abs(s);

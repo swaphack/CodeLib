@@ -8,6 +8,7 @@ namespace render
 	class ColorNode :  
 		public Node, 
 		public ColorProtocol, 
+		public OpacityProtocol,
 		public BlendProtocol
 	{
 	public:

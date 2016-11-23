@@ -1,8 +1,8 @@
 #include "FFmpeg.h"
 
-#pragma warning (disable : 4996)
-
 using namespace render;
+
+#pragma warning(disable:4996)
 
 //////////////////////////////////////////////////////////////////////////
 bool FFmpeg::s_bInitFFmpeg = false;

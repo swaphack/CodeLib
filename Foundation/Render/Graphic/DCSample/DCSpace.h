@@ -5,17 +5,21 @@
 namespace render
 {
 	/**
-	*	空间转换命令
+	*	空间属性
 	*/
 	class DCSpace : public DrawCommand
 	{
 	public:
-		sys::Vector Point;
+		bool Relative;
+		sys::Vector Position;
 		sys::Vector Scale;
+		sys::Vector Rotation;
 	public:
 		DCSpace();
 		virtual ~DCSpace();
 	public:
-
+		virtual void draw();
+	public:
+		static DCSpace* create(const sys::Vector& position, const sys::Vector& scale, const sys::Vector& rotation, bool relative);
 	};
 }

@@ -1,6 +1,5 @@
 #include "DrawCommander.h"
 #include "DrawCommand.h"
-
 using namespace render;
 
 
@@ -21,18 +20,23 @@ void DrawCommander::addCommand(DrawCommand* pCommand)
 		return;
 	}
 
-	_commands.push_back(pCommand);
+	pCommand->draw();
+
+	//_commands.push_back(pCommand);
 }
 
-void DrawCommander::flushAllCommands()
+void DrawCommander::flush()
 {
+	/**
 	std::vector<DrawCommand*>::iterator iter = _commands.begin();
 
 	while (iter != _commands.end())
 	{
 		(*iter)->draw();
+		(*iter)->release();
 		iter++;
 	}
 
 	_commands.clear();
+	*/
 }

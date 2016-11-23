@@ -21,16 +21,7 @@ void CtrlFrame::draw()
 
 	int textID = _texFrame->getTexture()->getTextureID();
 
-	GLTool::beginBlend(_blend);
-
-	GLTool::setColor(getColor());
-
-	glEnable(GL_TEXTURE_2D);
-	glBindTexture(GL_TEXTURE_2D, textID);
-	GLTool::drawRectVertex(&_texRect);
-	glDisable(GL_TEXTURE_2D);
-
-	GLTool::endBlend();
+	G_DRAWCOMMANDER->addCommand(DCTexture::create(textID, &_texRect, _color, _opacity, _blend));
 }
 
 void CtrlFrame::setTexture(const Texture* texture)

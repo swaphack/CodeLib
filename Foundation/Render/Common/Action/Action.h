@@ -13,7 +13,7 @@ namespace render
 		Action();
 		virtual ~Action();
 	public:
-		virtual void update(float duration);
+		virtual void update(float duration) {}
 		// 设置动作执行目标
 		void setTarget(sys::Object* target);		
 		// 判断动作执行对象是否相同

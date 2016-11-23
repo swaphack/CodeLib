@@ -12,13 +12,6 @@ namespace render
 		virtual ~CtrlMask();
 	public:
 		virtual void draw();
-
-		// 设置不透明度
-		void setOpacity(uchar opacity);
-		// 设置不透明度
-		uchar getOpacity();
 	protected:
-	private:
-		uchar _opacity;
 	};
 }

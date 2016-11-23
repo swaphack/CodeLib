@@ -1,3 +1,3 @@
 #pragma once
 
-#include "../Common/common.h"
+#include "../Common/import.h"

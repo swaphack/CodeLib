@@ -285,21 +285,21 @@ namespace sys
 		}
 	};
 
-	static void convertColor3BTo3F(Color3B & b3, Color3F & f3)
+	static void convertColor3BTo3F(const Color3B & b3, Color3F & f3)
 	{
 		f3.red = b3.red / COLOR_FLOAT_VALUE;
 		f3.green = b3.green / COLOR_FLOAT_VALUE;
 		f3.blue = b3.blue / COLOR_FLOAT_VALUE;
 	}
 
-	static void convertColor3FTo3B(Color3F & f3, Color3B & b3)
+	static void convertColor3FTo3B(const Color3F & f3, Color3B & b3)
 	{
 		b3.red = (uchar)(f3.red * COLOR_FLOAT_VALUE);
 		b3.green = (uchar)(f3.green * COLOR_FLOAT_VALUE);
 		b3.blue = (uchar)(f3.blue * COLOR_FLOAT_VALUE);
 	}
 
-	static void convertColor4BTo4F(Color4B & b4, Color4F & f4)
+	static void convertColor4BTo4F(const Color4B & b4, Color4F & f4)
 	{
 		f4.red = b4.red / COLOR_FLOAT_VALUE;
 		f4.green = b4.green / COLOR_FLOAT_VALUE;
@@ -307,7 +307,7 @@ namespace sys
 		f4.alpha = b4.alpha / COLOR_FLOAT_VALUE;
 	}
 
-	static void convertColor4FTo4B(Color4F & f4, Color4B & b4)
+	static void convertColor4FTo4B(const Color4F & f4, Color4B & b4)
 	{
 		b4.red = (uchar)(f4.red * COLOR_FLOAT_VALUE);
 		b4.green = (uchar)(f4.green * COLOR_FLOAT_VALUE);

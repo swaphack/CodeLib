@@ -13,8 +13,9 @@ namespace render
 		DrawCommandList();
 		virtual ~DrawCommandList();
 	public:
+		// 追加一条命令
 		void appendCommand(DrawCommand* pCommand);
-
+		// 绘制
 		virtual void draw();
 	private:
 		std::vector<DrawCommand*> _commandList;

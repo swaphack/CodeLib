@@ -4,6 +4,9 @@
 
 namespace render
 {
+	/**
+	*	ÑÕÉ«Êý×é
+	*/
 	class DCColorPointer : public DrawCommand
 	{
 	public:

@@ -84,11 +84,11 @@ Texture2D* TextureCache::getTexture2D(const ImageDefine& imageDefine)
 	// png
 	if (imageDefine.format == EIF_PNG)
 	{
-		image = Resource::load<PNGImage>(imageDefine.filepath.c_str());
+		image = Loader::load<PNGImage>(imageDefine.filepath.c_str());
 	}
 	else if (imageDefine.format == EIF_JPEG)
 	{
-		image = Resource::load<JPEGImage>(imageDefine.filepath.c_str());
+		image = Loader::load<JPEGImage>(imageDefine.filepath.c_str());
 	}
 
 	if (image == nullptr)
@@ -114,7 +114,7 @@ Texture2D* TextureCache::getTexture2D(const ImageDefine& imageDefine)
 
 Texture2D* TextureCache::getTexture2D(const TextDefine& textDefine)
 {
-	LabelImage* image = Resource::load<LabelImage>(textDefine);
+	LabelImage* image = Loader::load<LabelImage>(textDefine);
 	if (image == nullptr)
 	{
 		return nullptr;

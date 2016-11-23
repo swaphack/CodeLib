@@ -44,14 +44,19 @@ namespace sys
 		// 处理接收到的信息
 		virtual bool onHandSignal(Signal* signal);
 	protected:
-		// 保存我们的窗口句柄
+		// 窗口句柄
 		HWND _wnd;
-		// 保存程序的实例
+		// 程序实例
 		HINSTANCE _instance;
+		// 窗口宽度
 		float _width;
+		// 窗口高度
 		float _height;
+		// 窗口x轴位置
 		float _posX;
+		// 窗口y轴位置
 		float _posY;
+		// 窗口标题
 		std::string _title;
 	protected:
 		Keyboard* _keyboard;

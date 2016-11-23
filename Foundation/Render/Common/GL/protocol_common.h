@@ -46,6 +46,22 @@ namespace render
 		sys::Color4B _color;
 	};
 
+	// 不透明度设置
+	class OpacityProtocol
+	{
+	public:
+		OpacityProtocol();
+		virtual ~OpacityProtocol();
+	public:
+		// 设置不透明度
+		void setOpacity(uchar opacity);
+		// 设置不透明度
+		uchar getOpacity();
+	protected:
+		// 不透明度
+		uchar _opacity;
+	};
+
 	// 混合
 	class BlendProtocol
 	{

@@ -35,8 +35,8 @@ namespace sys
 		~Asynchronous() {}
 	public:
 		// 开始执行有参数的异步操作
-		template<class _Fn>
-		static AsynchronousResult* beginInvoke(AsynchronousCallback callback, _Fn&& handler, void* object);
+		template<class _Fn, class... _Args>
+		static AsynchronousResult* beginInvoke(AsynchronousCallback callback, _Fn&& handler, _Args&&... _Ax);
 		// 开始执行无参数的异步操作
 		template<class _Fn>
 		static AsynchronousResult* beginInvoke(AsynchronousCallback callback, _Fn&& handler);
@@ -49,7 +49,7 @@ namespace sys
 				return;
 			}
 
-			asynResult->completed =true;
+			asynResult->completed = true;
 		}
 
 	};
@@ -63,7 +63,6 @@ namespace sys
 		}
 		AsynchronousResult* pResult = new AsynchronousResult();
 		pResult->callback = callback;
-		pResult->handler = handler;
 		Thread thread;
 		thread.startWithParams([&](AsynchronousResult* asynResult) {
 			if (asynResult == nullptr) return;
@@ -81,15 +80,14 @@ namespace sys
 		return pResult;
 	}
 
-	template<class _Fn>
-	AsynchronousResult* Asynchronous::beginInvoke(AsynchronousCallback callback, _Fn&& handler, void* object)
+	template<class _Fn, class... _Args>
+	AsynchronousResult* Asynchronous::beginInvoke(AsynchronousCallback callback, _Fn&& handler, _Args&&... _Ax)
 	{
 		if (callback == nullptr)
 		{
 			return nullptr;
 		}
 		AsynchronousResult* pResult = new AsynchronousResult();
-		pResult->object = object;
 		pResult->callback = callback;
 		Thread thread;
 		thread.startWithParams([&](AsynchronousResult* asynResult) {
@@ -97,7 +95,7 @@ namespace sys
 			if (!asynResult->completed)
 			{
 				asynResult->completed = true;
-				handler(asynResult->object);
+				handler(_Ax...);
 				if (asynResult->callback)
 					asynResult->callback(asynResult);
 			}

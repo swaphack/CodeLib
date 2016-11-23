@@ -64,9 +64,8 @@ namespace render
 		void setVisible(bool status);
 		// 是否可见
 		bool isVisible();
-		
-		// 绘制
-		virtual void draw();
+		// 数值计算
+		//virtual void calculate();
 		// 遍历所有节点
 		virtual void visit();
 		// 获取动作代理
@@ -84,6 +83,8 @@ namespace render
 
 		const RectangeVertex& getRectVertex();
 	protected:
+		// 绘制,重写
+		virtual void draw();
 		// 更新空间位置
 		virtual void updateTranform();
 		// 更新自己

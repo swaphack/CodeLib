@@ -253,9 +253,6 @@
     <ClInclude Include="Device\ConsoleImpl.h">
       <Filter>Device</Filter>
     </ClInclude>
-    <ClInclude Include="Platform\Windows\Console.h">
-      <Filter>Platform\Windows</Filter>
-    </ClInclude>
     <ClInclude Include="Device\KeyBoard.h">
       <Filter>Device</Filter>
     </ClInclude>
@@ -385,6 +382,12 @@
     <ClInclude Include="Thread\Asynchronous.h">
       <Filter>Thread</Filter>
     </ClInclude>
+    <ClInclude Include="Platform\Console.h">
+      <Filter>Platform</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\FilePath.h">
+      <Filter>Framework</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Base\File.cpp">
@@ -461,9 +464,6 @@
     </ClCompile>
     <ClCompile Include="Base\Time.cpp">
       <Filter>Base</Filter>
-    </ClCompile>
-    <ClCompile Include="Platform\Windows\Console.cpp">
-      <Filter>Platform\Windows</Filter>
     </ClCompile>
     <ClCompile Include="Device\Keyboard.cpp">
       <Filter>Device</Filter>
@@ -557,6 +557,12 @@
     </ClCompile>
     <ClCompile Include="Thread\Threading.cpp">
       <Filter>Thread</Filter>
+    </ClCompile>
+    <ClCompile Include="Platform\Console.cpp">
+      <Filter>Platform</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\FilePath.cpp">
+      <Filter>Framework</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

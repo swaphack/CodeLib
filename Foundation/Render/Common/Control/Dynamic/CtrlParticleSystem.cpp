@@ -16,13 +16,13 @@ void ParticleNode::draw()
 {
 	ColorNode::draw();
 
-	GLTool::beginBlend(_blend);
-
-	GLTool::setColor(getColor());
-
-	GLTool::drawTriangleVertex(&_texRect);
-
-	GLTool::endBlend();
+// 	GLTool::beginBlend(_blend);
+// 
+// 	GLTool::setColor(getColor());
+// 
+// 	GLTool::drawTriangleVertex(&_texRect);
+// 
+// 	GLTool::endBlend();
 }
 
 void ParticleNode::update(float interval)

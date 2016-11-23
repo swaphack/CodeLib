@@ -1,6 +1,8 @@
 #pragma once
 
 #include <vector>
+#include <string>
+#include <map>
 
 namespace render
 {
@@ -12,13 +14,15 @@ namespace render
 	{
 	public:
 		DrawCommander();
-		virtual ~DrawCommander();
+		~DrawCommander();
 	public:
 		// 推送命令
-		virtual void addCommand(DrawCommand* pCommand);
+		void addCommand(DrawCommand* pCommand);
 		// 执行所有命令
-		virtual void flushAllCommands();
+		void flush();
 	private:
 		std::vector<DrawCommand*> _commands;
 	};
+
+	#define G_DRAWCOMMANDER sys::Instance<DrawCommander>::getInstance()
 }
