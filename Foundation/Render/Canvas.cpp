@@ -28,9 +28,7 @@ void Canvas::draw()
 	_view->updateView();
 
 	_root->init();
-	//_root->calculate();
 	_root->visit();
-	//glFlush();
 
 	_drawCommander->flush();
 }

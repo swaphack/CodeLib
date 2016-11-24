@@ -4,7 +4,7 @@
 
 namespace render
 {
-	// 3d模型
+	// 模型
 	class CtrlModel : public ColorNode
 	{
 	public:
@@ -21,6 +21,15 @@ namespace render
 		
 		// 设置所有面的纹理帧
 		virtual void setTexFrame(const TexFrame* frame);
+
+		// 设置顶点,法线，纹理坐标信息
+		void setVertexs(int count, float* vertexs, float* normals, float* colors, float* texCoords);
+		// 设置三角形索引
+		void setIndices(int count, ushort* indices);
+		// 顶点数
+		int getVertexCount();
+		// 三角形数
+		int getTriangleCount();
 	protected:
 		virtual void initSelf();
 	protected:
@@ -28,5 +37,21 @@ namespace render
 		Material* _material;
 		// 纹理
 		TexFrame* _texFrame;
+
+		// 顶点数
+		int _vertexCount;
+		// 顶点坐标 (x,y,z)
+		float* _vertexs;
+		// 法线 (x,y,z)
+		float* _normals;
+		// 颜色 (r,g,b)
+		float* _colors;
+		// 纹理坐标 (x,y,z)
+		float* _texCoords;
+		
+		// 三角形数
+		int _triangleCount;
+		// 顶点索引
+		ushort* _indices;
 	};
 }

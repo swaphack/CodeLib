@@ -6,6 +6,4 @@
 #include "DCMask.h"
 #include "DCDraw.h"
 
-#include "DCColorPointer.h"
-#include "DCNormalPointer.h"
-#include "DCVertexPointer.h"
+#include "DCTextureBatch.h"

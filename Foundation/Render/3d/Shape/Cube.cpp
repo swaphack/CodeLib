@@ -42,17 +42,6 @@ void Cube::draw()
 				textID = _faceFrames[i]->getTexture()->getTextureID();
 			}
 
-// 			GLTool::beginBlend(_blend);
-// 
-// 			GLTool::setColor(getColor());
-// 
-// 			glEnable(GL_TEXTURE_2D);
-// 			glBindTexture(GL_TEXTURE_2D, textID);
-// 			GLTool::drawRectVertexWithNormal(texRect, _normal[i]);
-// 			glDisable(GL_TEXTURE_2D);
-// 
-// 			GLTool::endBlend();
-
 			G_DRAWCOMMANDER->addCommand(DCTexture::create(textID, texRect, getColor(), _opacity, _blend, _normal[i]));
 		}
 	}

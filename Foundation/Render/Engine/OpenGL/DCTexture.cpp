@@ -20,12 +20,14 @@ void DCTexture::draw()
 
 	glEnable(GL_TEXTURE_2D);
 	glBindTexture(GL_TEXTURE_2D, TextureID);
-	glNormal3f(Normal.x, Normal.y, Normal.z);
 	glBegin(GL_QUADS);
-	for (int i = 0; i < 4; i++)
 	{
-		glTexCoord3f(Coord[i].x, Coord[i].y, Coord[i].z);
-		glVertex3f(Position[i].x, Position[i].y, Position[i].z);
+		glNormal3f(Normal.x, Normal.y, Normal.z);
+		for (int i = 0; i < 4; i++)
+		{
+			glVertex3f(Position[i].x, Position[i].y, Position[i].z);
+			glTexCoord3f(Coord[i].x, Coord[i].y, Coord[i].z);
+		}
 	}
 	glEnd();
 

@@ -5,7 +5,7 @@ using namespace render;
 
 
 IntervalAction::IntervalAction()
-:_interval(0)
+:_totalInterval(0)
 , _currentInterval(0)
 {
 
@@ -30,13 +30,13 @@ void IntervalAction::update(float duration)
 
 void IntervalAction::setInterval(float interval)
 {
-	_interval = interval;
+	_totalInterval = interval;
 	_currentInterval = interval;
 }
 
 float IntervalAction::getInterval()
 {
-	return _interval;
+	return _totalInterval;
 }
 
 void IntervalAction::updateInterval(float duration)
@@ -47,14 +47,12 @@ void IntervalAction::updateInterval(float duration)
 //////////////////////////////////////////////////////////////////////////
 
 MoveToAction::MoveToAction()
-:_offset(nullptr)
 {
 
 }
 
 MoveToAction::~MoveToAction()
 {
-	SAFE_DELETE(_offset);
 }
 
 void MoveToAction::setDestination(float x, float y, float z)
@@ -72,19 +70,20 @@ sys::Vector MoveToAction::getDestination()
 void MoveToAction::updateInterval(float duration)
 {
 	Node* node = dynamic_cast<Node*>(_target);
-	if (_offset == nullptr)
+	if (_currentInterval == _totalInterval)
 	{
-		_offset = new sys::Vector(_destination);
-		_offset->sub(node->getPosition());
+		_offset = _destination;
+		_offset.sub(node->getPosition());
+		_src = node->getPosition();
 	}
 	if (node)
 	{
 		const sys::Vector& current = node->getPosition();
 
 		node->setPosition(
-			current.x + _offset->x * duration / _interval,
-			current.y + _offset->y * duration / _interval,
-			current.z + _offset->z * duration / _interval);
+			current.x + _offset.x * duration / _totalInterval,
+			current.y + _offset.y * duration / _totalInterval,
+			current.z + _offset.z * duration / _totalInterval);
 	}
 
 	_currentInterval -= duration;
@@ -92,14 +91,12 @@ void MoveToAction::updateInterval(float duration)
 
 //////////////////////////////////////////////////////////////////////////
 RotateToAction::RotateToAction()
-:_offset(nullptr)
 {
 
 }
 
 RotateToAction::~RotateToAction()
 {
-	SAFE_DELETE(_offset);
 }
 
 void RotateToAction::setRotation(float x, float y, float z /*= 0*/)
@@ -117,19 +114,20 @@ sys::Vector RotateToAction::getRotation()
 void RotateToAction::updateInterval(float duration)
 {
 	Node* node = dynamic_cast<Node*>(_target);
-	if (_offset == nullptr)
+	if (_currentInterval == _totalInterval)
 	{
-		_offset = new sys::Vector(_rotation);
-		_offset->sub(node->getRotation());
+		_offset = _rotation;
+		_offset.sub(node->getRotation());
+		_src = node->getRotation();
 	}
 	if (node)
 	{
 		const sys::Vector& current = node->getRotation();
 
 		node->setRotation(
-			current.x + _offset->x * duration / _interval,
-			current.y + _offset->y * duration / _interval,
-			current.z + _offset->z * duration / _interval);
+			current.x + _offset.x * duration / _totalInterval,
+			current.y + _offset.y * duration / _totalInterval,
+			current.z + _offset.z * duration / _totalInterval);
 	}
 
 	_currentInterval -= duration;
@@ -143,7 +141,6 @@ ScaleToAction::ScaleToAction()
 
 ScaleToAction::~ScaleToAction()
 {
-	SAFE_DELETE(_offset);
 }
 
 void ScaleToAction::setScale(float x, float y, float z /*= 0*/)
@@ -161,19 +158,20 @@ sys::Vector ScaleToAction::getScale()
 void ScaleToAction::updateInterval(float duration)
 {
 	Node* node = dynamic_cast<Node*>(_target);
-	if (_offset == nullptr)
+	if (_currentInterval == _totalInterval)
 	{
-		_offset = new sys::Vector(_scale);
-		_offset->sub(node->getScale());
+		_offset = _scale;
+		_offset.sub(node->getScale());
+		_src = node->getScale();
 	}
 	if (node)
 	{
 		const sys::Vector& current = node->getPosition();
 
 		node->setScale(
-			current.x + _offset->x * duration / _interval,
-			current.y + _offset->y * duration / _interval,
-			current.z + _offset->z * duration / _interval);
+			current.x + _offset.x * duration / _totalInterval,
+			current.y + _offset.y * duration / _totalInterval,
+			current.z + _offset.z * duration / _totalInterval);
 	}
 
 	_currentInterval -= duration;

@@ -21,7 +21,7 @@ namespace render
 		virtual void updateInterval(float duration);
 	protected:
 		// 总时长
-		float _interval;
+		float _totalInterval;
 		// 当前间隔
 		float _currentInterval;
 	};
@@ -33,13 +33,18 @@ namespace render
 		MoveToAction();
 		virtual ~MoveToAction();
 	public:
+		// 目标位置
 		void setDestination(float x, float y, float z = 0);
 		sys::Vector getDestination();
 	protected:
 		virtual void updateInterval(float duration);
 	protected:
+		// 初始位置
+		sys::Vector _src;
+		// 目标位置
 		sys::Vector _destination;
-		sys::Vector* _offset;
+		// 偏移总量
+		sys::Vector _offset;
 	};
 
 	// 旋转
@@ -49,13 +54,18 @@ namespace render
 		RotateToAction();
 		virtual ~RotateToAction();
 	public:
+		// 最终旋转角度
 		void setRotation(float x, float y, float z = 0);
 		sys::Vector getRotation();
 	protected:
 		virtual void updateInterval(float duration);
 	protected:
+		// 初始旋转度数
+		sys::Vector _src;
+		// 最终旋转角度
 		sys::Vector _rotation;
-		sys::Vector* _offset;
+		// 总改变量
+		sys::Vector _offset;
 	};
 
 	// 缩放
@@ -70,7 +80,11 @@ namespace render
 	protected:
 		virtual void updateInterval(float duration);
 	protected:
+		// 初始缩放比例
+		sys::Vector _src;
+		// 最终缩放比例
 		sys::Vector _scale;
-		sys::Vector* _offset;
+		// 总改变量
+		sys::Vector _offset;
 	};
 }

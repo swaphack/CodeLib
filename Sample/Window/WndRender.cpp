@@ -20,13 +20,8 @@ void WndRender::show()
 	Texture2D* pTexture = G_TEXTURE_CACHE->getTexture2D(imageDefine);
 	pTexture->retain();
 
-	this->testSequenceFrame();
-
-	this->testCamera();
-
-	//this->testClock();
-
-	this->testCubeModel();
+	//this->testSequenceFrame();
+	this->testModel();
 }
 
 void WndRender::testMoveImage()
@@ -51,12 +46,13 @@ void WndRender::testClock()
 	DrawNode* pDrawNode = new DrawNode();
 	AUTO_RELEASE_OBJECT(pDrawNode);
 
-	pDrawNode->setDrawMode(EBM_LINE_LOOP);
+	pDrawNode->setDrawMode(EBM_TRIANGLE_STRIP);
 	pDrawNode->setWidth(20);
-	pDrawNode->setPosition(300, 384);
+	pDrawNode->setPosition(-400, -300, 0);
 	pDrawNode->appendPoint(sys::Vector(0, 200));
 	pDrawNode->appendPoint(sys::Vector(150, 300));
 	pDrawNode->appendPoint(sys::Vector(200, 200));
+	pDrawNode->appendPoint(sys::Vector(300, 100));
 	pDrawNode->setColor(sys::Color3B(0, 255, 0));
 
 	//pDrawNode->setRotationZ(20);
@@ -535,4 +531,59 @@ void WndRender::onKeyBoardRole(sys::Object* object, sys::BoardKey key, sys::Butt
 		}
 		pRole->setFrameImagePath(pConfig->path, pConfig->count);
 	}
+}
+
+void WndRender::testModel()
+{
+	ImageDefine imageDefine = { "Resource/NeHe.png", EIF_PNG };
+	Texture2D* texture2D = G_TEXTURE_CACHE->getTexture2D(imageDefine);
+
+	TexFrame* frame = new TexFrame();
+	AUTO_RELEASE_OBJECT(frame);
+	frame->setTextureWithRect(texture2D);
+
+	CtrlModel* pModel = new CtrlModel();
+	AUTO_RELEASE_OBJECT(pModel);
+	pModel->setTexFrame(frame);
+
+	#define vertexCount 15
+
+	float coords[vertexCount] = {
+		0, 0, 0, 
+		1, 0, 0, 
+		1, 1, 0, 
+		0, 1, 0,
+		0, 0.5, 0,
+	};
+
+	float normals[vertexCount] = { 
+		0 
+	};
+	float colors[vertexCount] = {
+		1, 1, 1,
+		1, 1, 1,
+		1, 1, 1, 
+		1, 1, 1,
+	};
+
+	float vertexs[vertexCount] = {
+		-0.25, -0.25, -0.25,
+		0.25, -0.25, -0.25,
+		0.25, 0.25, -0.25,
+		-0.25, 0.25, -0.25,
+		-0, 0.5, -0.25,
+	};
+
+	#define indexCount 6
+
+	ushort indices[indexCount] = {
+		1, 2, 4,
+		0, 2, 3,
+	};
+
+	pModel->setColor(sys::Color3B(255, 255, 255));
+	pModel->setVertexs(vertexCount, vertexs, normals, colors, coords);
+	pModel->setIndices(indexCount, indices);
+
+	this->getCanvas()->getRoot()->addChild(pModel);
 }

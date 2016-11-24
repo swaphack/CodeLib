@@ -147,19 +147,10 @@
     </ClCompile>
     <ClCompile Include="Canvas.cpp" />
     <ClCompile Include="RenderApplication.cpp" />
-    <ClCompile Include="Engine\OpenGL\DCColorPointer.cpp">
-      <Filter>Engine\OpenGL</Filter>
-    </ClCompile>
     <ClCompile Include="Engine\OpenGL\DCMask.cpp">
       <Filter>Engine\OpenGL</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\OpenGL\DCNormalPointer.cpp">
-      <Filter>Engine\OpenGL</Filter>
-    </ClCompile>
     <ClCompile Include="Engine\OpenGL\DCTexture.cpp">
-      <Filter>Engine\OpenGL</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\OpenGL\DCVertexPointer.cpp">
       <Filter>Engine\OpenGL</Filter>
     </ClCompile>
     <ClCompile Include="Engine\OpenGL\DCSpace.cpp">
@@ -175,6 +166,9 @@
       <Filter>DrawNode</Filter>
     </ClCompile>
     <ClCompile Include="Engine\OpenGL\DCDraw.cpp">
+      <Filter>Engine\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\OpenGL\DCTextureBatch.cpp">
       <Filter>Engine\OpenGL</Filter>
     </ClCompile>
   </ItemGroup>
@@ -471,16 +465,7 @@
     <ClInclude Include="Engine\OpenGL\macros.h">
       <Filter>Engine\OpenGL</Filter>
     </ClInclude>
-    <ClInclude Include="Graphic\DCSample\DCColorPointer.h">
-      <Filter>Graphic\DCSample</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphic\DCSample\DCNormalPointer.h">
-      <Filter>Graphic\DCSample</Filter>
-    </ClInclude>
     <ClInclude Include="Graphic\DCSample\DCTexture.h">
-      <Filter>Graphic\DCSample</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphic\DCSample\DCVertexPointer.h">
       <Filter>Graphic\DCSample</Filter>
     </ClInclude>
     <ClInclude Include="Graphic\Command\import.h">
@@ -528,6 +513,9 @@
       <Filter>DrawNode</Filter>
     </ClInclude>
     <ClInclude Include="Graphic\DCSample\DCDraw.h">
+      <Filter>Graphic\DCSample</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphic\DCSample\DCTextureBatch.h">
       <Filter>Graphic\DCSample</Filter>
     </ClInclude>
   </ItemGroup>

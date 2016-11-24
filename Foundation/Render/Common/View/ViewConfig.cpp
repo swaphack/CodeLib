@@ -39,14 +39,10 @@ void ViewConfig::apply()
 
 	glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
 
-// 	glEnable(GL_POINT_SMOOTH);
-// 	glHint(GL_POINT_SMOOTH, GL_NICEST);
-// 
-// 	glEnable(GL_LINE_SMOOTH);
-// 	glHint(GL_LINE_SMOOTH_HINT, GL_NICEST);
-// 
-// 	glEnable(GL_POLYGON_SMOOTH_HINT);
-// 	glHint(GL_POLYGON_SMOOTH_HINT, GL_NICEST);
+	glEnableClientState(GL_VERTEX_ARRAY);
+	glEnableClientState(GL_NORMAL_ARRAY);
+	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+	glEnableClientState(GL_COLOR_ARRAY);
 }
 
 void ViewConfig::addSetting(ViewSetting vs, int mark)
