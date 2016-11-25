@@ -106,7 +106,7 @@
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>../../Lib/lib/freetype;../../Lib/lib/jpeg;../../Lib/lib/opengl;../../Lib/lib/png;../../Lib/lib/zlib;../../Lib/lib/ffmpeg;$(OutDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>opengl.lib;glu.lib;glut.lib;System.lib;Web.lib;Render.lib;zlib.lib;libpng16.lib;freetype263.lib;avutil.lib;avcodec.lib;avformat.lib;swscale.lib;jpeg.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opengl.lib;glu.lib;glut.lib;System.lib;Web.lib;Render.lib;zlib.lib;libpng16.lib;freetype263.lib;avutil.lib;avcodec.lib;avformat.lib;swscale.lib;jpeg.lib;Text.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <Bscmake>
       <PreserveSbr>true</PreserveSbr>
@@ -190,6 +190,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="ribbon1.mfcribbon-ms" />
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="Resource\3DModel\Test.xml" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

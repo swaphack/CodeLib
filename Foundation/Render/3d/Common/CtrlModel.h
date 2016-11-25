@@ -12,7 +12,7 @@ namespace render
 		virtual ~CtrlModel();
 	public:
 		virtual void draw();
-		// 设置模型材质
+		// 设置模型材质 
 		void setMatrial(const Material* material);
 		// 获取模型材质
 		const Material* getMatrial() const;
@@ -23,9 +23,9 @@ namespace render
 		virtual void setTexFrame(const TexFrame* frame);
 
 		// 设置顶点,法线，纹理坐标信息
-		void setVertexs(int count, float* vertexs, float* normals, float* colors, float* texCoords);
+		void setVertexes(int count, float* vertexes, float* normals, float* colors, float* texCoords);
 		// 设置三角形索引
-		void setIndices(int count, ushort* indices);
+		void setIndices(int count, int* indices);
 		// 顶点数
 		int getVertexCount();
 		// 三角形数
@@ -41,7 +41,7 @@ namespace render
 		// 顶点数
 		int _vertexCount;
 		// 顶点坐标 (x,y,z)
-		float* _vertexs;
+		float* _vertexes;
 		// 法线 (x,y,z)
 		float* _normals;
 		// 颜色 (r,g,b)
@@ -52,6 +52,6 @@ namespace render
 		// 三角形数
 		int _triangleCount;
 		// 顶点索引
-		ushort* _indices;
+		int* _indices;
 	};
 }

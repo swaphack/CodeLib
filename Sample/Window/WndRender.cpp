@@ -16,7 +16,7 @@ WndRender::~WndRender()
 
 void WndRender::show()
 {
-	ImageDefine imageDefine = {"Resource/world.jpg", EIF_JPEG};
+	ImageDefine imageDefine = {"Resource/Image/world.jpg", EIF_JPEG};
 	Texture2D* pTexture = G_TEXTURE_CACHE->getTexture2D(imageDefine);
 	pTexture->retain();
 
@@ -27,7 +27,7 @@ void WndRender::show()
 void WndRender::testMoveImage()
 {
 	CtrlImage* pImage = new CtrlImage();
-	pImage->setImagePath("Resource/world.jpg", EIF_JPEG);
+	pImage->setImagePath("Resource/Image/world.jpg", EIF_JPEG);
 	pImage->setPosition(512, 384, 0);
 	AUTO_RELEASE_OBJECT(pImage);
 	this->getCanvas()->getRoot()->addChild(pImage);
@@ -65,7 +65,7 @@ void WndRender::testCubeModel()
 	int nCount = 1000;
 	for (int i = 0; i < nCount; i++)
 	{
-		ImageDefine imageDefine = { "Resource/NeHe.png", EIF_PNG };
+		ImageDefine imageDefine = { "Resource/Image/NeHe.png", EIF_PNG };
 		Texture2D* texture2D = G_TEXTURE_CACHE->getTexture2D(imageDefine);
 
 		TexFrame* frame = new TexFrame();
@@ -257,7 +257,7 @@ void WndRender::testEditBox()
 void WndRender::testImages()
 {
 	CtrlImage* pImage = new CtrlImage();
-	pImage->setImagePath("Resource/NeHe.png");
+	pImage->setImagePath("Resource/Image/NeHe.png");
 	pImage->setPosition(0, 0, 0);
 	AUTO_RELEASE_OBJECT(pImage);
 	this->getCanvas()->getRoot()->addChild(pImage);
@@ -267,7 +267,7 @@ void WndRender::testImages()
 	while (count-- > 0)
 	{
 		pChild = new CtrlImage();
-		pChild->setImagePath("Resource/NeHe.png");
+		pChild->setImagePath("Resource/Image/NeHe.png");
 		pChild->setPosition(4, 4, 0);
 		AUTO_RELEASE_OBJECT(pChild);
 		pImage->addChild(pChild);
@@ -317,7 +317,7 @@ void WndRender::addLight()
 void WndRender::testPixelImage()
 {
 	CtrlImage* pImage = new CtrlImage();
-	pImage->setImagePath("Resource/world.jpg", EIF_JPEG);
+	pImage->setImagePath("Resource/Image/world.jpg", EIF_JPEG);
 	pImage->setPosition(512, 384, 0);
 	AUTO_RELEASE_OBJECT(pImage);
 	this->getCanvas()->getRoot()->addChild(pImage);
@@ -535,55 +535,19 @@ void WndRender::onKeyBoardRole(sys::Object* object, sys::BoardKey key, sys::Butt
 
 void WndRender::testModel()
 {
-	ImageDefine imageDefine = { "Resource/NeHe.png", EIF_PNG };
-	Texture2D* texture2D = G_TEXTURE_CACHE->getTexture2D(imageDefine);
-
-	TexFrame* frame = new TexFrame();
-	AUTO_RELEASE_OBJECT(frame);
-	frame->setTextureWithRect(texture2D);
-
-	CtrlModel* pModel = new CtrlModel();
-	AUTO_RELEASE_OBJECT(pModel);
-	pModel->setTexFrame(frame);
-
-	#define vertexCount 15
-
-	float coords[vertexCount] = {
-		0, 0, 0, 
-		1, 0, 0, 
-		1, 1, 0, 
-		0, 1, 0,
-		0, 0.5, 0,
-	};
-
-	float normals[vertexCount] = { 
-		0 
-	};
-	float colors[vertexCount] = {
-		1, 1, 1,
-		1, 1, 1,
-		1, 1, 1, 
-		1, 1, 1,
-	};
-
-	float vertexs[vertexCount] = {
-		-0.25, -0.25, -0.25,
-		0.25, -0.25, -0.25,
-		0.25, 0.25, -0.25,
-		-0.25, 0.25, -0.25,
-		-0, 0.5, -0.25,
-	};
-
-	#define indexCount 6
-
-	ushort indices[indexCount] = {
-		1, 2, 4,
-		0, 2, 3,
-	};
-
-	pModel->setColor(sys::Color3B(255, 255, 255));
-	pModel->setVertexs(vertexCount, vertexs, normals, colors, coords);
-	pModel->setIndices(indexCount, indices);
+	CtrlModel* pModel = ModelFile::getInstance()->load("Resource/3DModel/Test.xml");
+	//pModel->setPosition(512, 384);
+	pModel->setRotation(0, 45, 45);
 
 	this->getCanvas()->getRoot()->addChild(pModel);
+
+	int count = 1024;
+	float interval = 5;
+	float rx = 360;
+	float ry = 360;
+	float rz = 360;
+	RotateToAction* pRotateToAction = new RotateToAction();
+	pRotateToAction->setRotation(rx * count, ry * count, rz * count);
+	pRotateToAction->setInterval(interval * count);
+	pModel->getActionProxy()->runAction(pRotateToAction);
 }

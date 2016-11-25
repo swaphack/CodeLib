@@ -43,7 +43,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>../System/;../../Lib/include/;../../Lib/include/freetype/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../System/;../../Lib/include/;../../Lib/include/freetype/;../Text/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <BrowseInformation>true</BrowseInformation>
     </ClCompile>
     <Link>
@@ -71,6 +71,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="3d\Common\CtrlModel.cpp" />
+    <ClCompile Include="3d\Common\ModelFile.cpp" />
     <ClCompile Include="3d\Shape\Cube.cpp" />
     <ClCompile Include="3d\Shape\Sphere.cpp" />
     <ClCompile Include="Canvas.cpp" />
@@ -132,6 +133,7 @@
   <ItemGroup>
     <ClInclude Include="3d\Common\CtrlModel.h" />
     <ClInclude Include="3d\Common\import.h" />
+    <ClInclude Include="3d\Common\ModelFile.h" />
     <ClInclude Include="3d\import.h" />
     <ClInclude Include="3d\macros.h" />
     <ClInclude Include="3d\Shape\Cube.h" />

@@ -171,6 +171,9 @@
     <ClCompile Include="Engine\OpenGL\DCTextureBatch.cpp">
       <Filter>Engine\OpenGL</Filter>
     </ClCompile>
+    <ClCompile Include="3d\Common\ModelFile.cpp">
+      <Filter>3d\Common</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Common\GL\import.h">
@@ -517,6 +520,9 @@
     </ClInclude>
     <ClInclude Include="Graphic\DCSample\DCTextureBatch.h">
       <Filter>Graphic\DCSample</Filter>
+    </ClInclude>
+    <ClInclude Include="3d\Common\ModelFile.h">
+      <Filter>3d\Common</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

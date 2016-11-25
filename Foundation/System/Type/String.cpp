@@ -130,6 +130,72 @@ char& String::at(int index)
 	return _value[index];
 }
 
+// Î²²¿×·¼Ó×Ö·û
+void String::append(int count, char value)
+{
+	char str[2] = { "A" };
+	for (int i = 0; i < count; i++)
+	{
+		str[0] = value;
+		this->concat(str);
+	}
+}
+void String::append(int count, char* value)
+{
+	if (value == nullptr)
+	{
+		return;
+	}
+
+	for (int i = 0; i < count; i++)
+	{
+		this->concat(value);
+	}
+}
+String String::replace(char spot, char* value)
+{
+	String str;
+
+	char* ptr = _value;
+	while (*ptr != 0)
+	{
+		if (*ptr == spot)
+		{
+			str.append(1, value);
+		}
+		else
+		{
+			str.append(1, *ptr);
+		}
+
+		ptr++;
+	}
+
+	return str;
+}
+
+String String::replace(char* spot, char* value)
+{
+	String str;
+	int len = strlen(spot);
+	char* ptr = _value;
+	while (*ptr != 0)
+	{
+		if (this->compare(ptr - _value, spot, len))
+		{
+			str.append(1, value);
+			ptr += len;
+		}
+		else
+		{
+			str.append(1, *ptr);
+			ptr++;
+		}
+	}
+
+	return str;
+}
+
 String& String::concat(const char* value)
 {
 	if (value == nullptr)
@@ -594,29 +660,40 @@ bool String::isLine()
 	return this->endWith(LINE_MARK);
 }
 
-String& String::trim()
+String String::trim()
 {
-	this->trimLeft();
-	this->trimRight();
+	String value = "";
 
-	return *this;
+	char* ptr = _value;
+	char val;
+	while (*ptr != 0)
+	{
+		val = *ptr;
+		if (val != ' ')
+		{
+			value.append(1, val);
+		}
+		ptr++;
+	}
+
+	return value;
 }
 
-String& String::trimLeft()
+String String::trimLeft()
 {
+	String value = "";
 	char* ptr = _value;
 	while (*ptr == ' ')
 	{
 		ptr++;
 	}
 
-	_size = _size - (ptr - _value);
-	_value = ptr;
+	value.append(1, ptr);
 
-	return *this;
+	return value;
 }
 
-String& String::trimRight()
+String String::trimRight()
 {
 	char* ptr = _value + _size - 1;
 	while (*ptr == ' ')
@@ -625,10 +702,7 @@ String& String::trimRight()
 		ptr--;
 	}
 
-	_size = _size - (_value + _size - 1 - ptr);
-	_value = _value;
-
-	return *this;
+	return String(_value, _size - (_value + _size - 1 - ptr));
 }
 
 String String::toLower()
@@ -741,6 +815,22 @@ void String::split(const char* spot, std::vector<String>& dest)
 bool String::empty()
 {
 	return this->compare("") || _value == nullptr;
+}
+
+String String::reverse()
+{
+	String value = *this;
+
+	int half = _size / 2;
+	char temp;
+	for (int i = 0; i < half; i++)
+	{
+		temp = value[i];
+		value.at(i) = value[_size - i];
+		value.at(_size - i) = temp;
+	}
+
+	return value;
 }
 
 const char* String::getString() const

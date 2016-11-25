@@ -18,7 +18,7 @@ namespace render
 		// 顶点数
 		int VertexCount;
 		// 顶点坐标 (x,y,z)
-		float* Vertexs;
+		float* Vertexes;
 		// 法线 (x,y,z)
 		float* Normals;
 		// 颜色 (r,g,b)
@@ -29,7 +29,7 @@ namespace render
 		// 顶点数
 		int IndexCount;
 		// 顶点索引
-		ushort* Indices;
+		int* Indices;
 
 		// 混色参数
 		BlendParam Blend;
@@ -42,6 +42,6 @@ namespace render
 		static DCTextureBatch* create(int textureID,
 			const sys::Color4B& color, uchar opacity, const BlendParam& blend,
 			int vertexCount, float* normals, float* positions, float* colors, float* coords,
-			int indexCount, ushort* indices);
+			int indexCount, int* indices);
 	};
 }

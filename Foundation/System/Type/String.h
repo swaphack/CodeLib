@@ -16,25 +16,34 @@ namespace sys
 		String(const std::string& value);
 		String(const char* value);
 		String(const char* value, int count);
-		virtual ~String();
+		~String();
 	public:
 		// 赋值
-		virtual String& operator=(const String& value);
-		virtual String& operator=(const std::string& value);
-		virtual String& operator=(const char* value);
+		String& operator=(const String& value);
+		String& operator=(const std::string& value);
+		String& operator=(const char* value);
 
-		virtual String operator+(const String& value);
-		virtual String operator+(const std::string& value);
-		virtual String operator+(const char* value);
+		String operator+(const String& value);
+		String operator+(const std::string& value);
+		String operator+(const char* value);
 
 		// 获取索引的字符
-		virtual char operator[](int index);
-		virtual char& at(int index);
+		char operator[](int index);
+		char& at(int index);
+
+		// 尾部追加字符
+		void append(int count, char value);
+		// 尾部追加字符串
+		void append(int count, char* value);
+		// 替换指定的字符
+		String replace(char spot, char* value);
+		// 替换指定的字符串
+		String replace(char* spot, char* value);
 
 		// 拼接
-		virtual String& concat(const char* value);
-		virtual String& concat(const char* value1, const char* value2);
-		virtual String& concat(const char* value1, const char* value2, const char* value3);
+		String& concat(const char* value);
+		String& concat(const char* value1, const char* value2);
+		String& concat(const char* value1, const char* value2, const char* value3);
 
 		// 是否包含
 		bool contains(const char* value);
@@ -65,12 +74,12 @@ namespace sys
 		// 是否是句子
 		bool isLine();
 
-		// 去掉空格
-		String& trim();
+		// 去掉所有空格
+		String trim();
 		// 去掉左边空格
-		String& trimLeft();
+		String trimLeft();
 		// 去掉右边空格
-		String& trimRight();
+		String trimRight();
 
 		// 转小写
 		String toLower();
@@ -85,6 +94,8 @@ namespace sys
 		void split(const char* spot, std::vector<String>& dest);
 		// 是否数据为空
 		bool empty();
+		// 反转
+		String reverse();
 
 		// 获取字符串数据
 		const char* getString() const;

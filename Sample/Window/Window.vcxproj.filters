@@ -13,6 +13,12 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Resource">
+      <UniqueIdentifier>{4cd8b734-a723-456b-b670-585c7d45e60a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource\3DModel">
+      <UniqueIdentifier>{ad016814-e5ec-4aa0-9bc1-e885004c07f6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WndWeb.cpp">
@@ -56,5 +62,10 @@
     <None Include="ribbon1.mfcribbon-ms">
       <Filter>资源文件</Filter>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="Resource\3DModel\Test.xml">
+      <Filter>Resource\3DModel</Filter>
+    </Xml>
   </ItemGroup>
 </Project>
