@@ -1,15 +1,15 @@
 #pragma once
 
-#include "macros.h"
+#include "../macros.h"
 
 namespace render
 {
 	// 光,点光源
-	class CtrlLight : public Node
+	class Light : public Node
 	{
 	public:
-		CtrlLight();
-		virtual ~CtrlLight();
+		Light();
+		virtual ~Light();
 	public:
 		virtual LightIndex getLightIndex() { return ELI_NONE; }
 
@@ -38,17 +38,17 @@ namespace render
 		float _lightPosition[4];
 	};
 #define CTREATE_LIGHT_CLASS_0(index) \
-	class CtrlLight##index : public CtrlLight \
+	class Light##index : public Light \
 	{ \
 	public: \
 	virtual LightIndex getLightIndex() { return ELI_LIGHT##index; } \
 	};
 
 #define CTREATE_LIGHT_CLASS_1(index) \
-	class CtrlLight##index : public CtrlLight \
+	class Light##index : public Light \
 	{ \
 	public: \
-	CtrlLight##index() \
+	Light##index() \
 	{ \
 	_lightDiffuse[0] = 0.0f; \
 	_lightDiffuse[1] = 0.0f; \

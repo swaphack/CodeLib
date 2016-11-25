@@ -1,15 +1,15 @@
 #pragma once
 
-#include "CtrlLight.h"
+#include "Light.h"
 
 namespace render
 {
 	// ¹â£¬¾Û¹âµÆ
-	class CtrlSpotLight : public CtrlLight
+	class SpotLight : public Light
 	{
 	public:
-		CtrlSpotLight();
-		virtual ~CtrlSpotLight();
+		SpotLight();
+		virtual ~SpotLight();
 	public:
 		virtual void draw();
 
@@ -52,17 +52,17 @@ namespace render
 	};
 
 #define CTREATE_SPOT_LIGHT_CLASS_0(index) \
-	class CtrlSpotLight##index : public CtrlSpotLight \
+	class SpotLight##index : public SpotLight \
 	{ \
 	public: \
 	virtual LightIndex getLightIndex() { return ELI_LIGHT##index; } \
 	};
 
 #define CTREATE_SPOT_LIGHT_CLASS_1(index) \
-	class CtrlSpotLight##index : public CtrlSpotLight \
+	class SpotLight##index : public SpotLight \
 	{ \
 	public: \
-	CtrlSpotLight##index() \
+	SpotLight##index() \
 	{ \
 	_lightDiffuse[0] = 0.0f; \
 	_lightDiffuse[1] = 0.0f; \

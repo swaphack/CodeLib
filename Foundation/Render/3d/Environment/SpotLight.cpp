@@ -1,9 +1,9 @@
-#include "CtrlSpotLight.h"
+#include "SpotLight.h"
 
 using namespace render;
 
 
-CtrlSpotLight::CtrlSpotLight()
+SpotLight::SpotLight()
 {
 	_spotExponent = 0.0f;
 	_spotCutOff = 180.0;
@@ -16,14 +16,14 @@ CtrlSpotLight::CtrlSpotLight()
 	_quadraticAttenuation = 0.0f;
 }
 
-CtrlSpotLight::~CtrlSpotLight()
+SpotLight::~SpotLight()
 {
 
 }
 
-void CtrlSpotLight::draw()
+void SpotLight::draw()
 {
-	CtrlLight::draw();
+	Light::draw();
 
 	glLightfv(getLightIndex(), GL_SPOT_DIRECTION, _spotDirection);
 	glLightfv(getLightIndex(), GL_SPOT_EXPONENT, &_spotExponent);
@@ -33,64 +33,64 @@ void CtrlSpotLight::draw()
 	glLightfv(getLightIndex(), GL_QUADRATIC_ATTENUATION, &_quadraticAttenuation);
 }
 
-void CtrlSpotLight::setExponent(float value)
+void SpotLight::setExponent(float value)
 {
 	_spotExponent = value;
 }
 
-float CtrlSpotLight::getExponent()
+float SpotLight::getExponent()
 {
 	return _spotExponent;
 }
 
-void CtrlSpotLight::setCutOff(float value)
+void SpotLight::setCutOff(float value)
 {
 	_spotCutOff = value;
 }
 
-float CtrlSpotLight::getCutOff()
+float SpotLight::getCutOff()
 {
 	return _spotCutOff;
 }
 
-void CtrlSpotLight::setDirection(float x, float y, float z)
+void SpotLight::setDirection(float x, float y, float z)
 {
 	_spotDirection[0] = x;
 	_spotDirection[1] = y;
 	_spotDirection[2] = z;
 }
 
-const float* CtrlSpotLight::getDirection()
+const float* SpotLight::getDirection()
 {
 	return _spotDirection;
 }
 
-void CtrlSpotLight::setConstantAttenuation(float value)
+void SpotLight::setConstantAttenuation(float value)
 {
 	_constantAttenuation = value;
 }
 
-float CtrlSpotLight::getConstantAttenuation()
+float SpotLight::getConstantAttenuation()
 {
 	return _constantAttenuation;
 }
 
-void CtrlSpotLight::setLinearAttenuation(float value)
+void SpotLight::setLinearAttenuation(float value)
 {
 	_linearAttenuation = value;
 }
 
-float CtrlSpotLight::getLinearAttenuation()
+float SpotLight::getLinearAttenuation()
 {
 	return _linearAttenuation;
 }
 
-void CtrlSpotLight::setQuadraticAttenuation(float value)
+void SpotLight::setQuadraticAttenuation(float value)
 {
 	_quadraticAttenuation = value;
 }
 
-float CtrlSpotLight::getQuadraticAttenuation()
+float SpotLight::getQuadraticAttenuation()
 {
 	return _quadraticAttenuation;
 }

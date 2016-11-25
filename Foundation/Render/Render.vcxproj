@@ -72,6 +72,9 @@
   <ItemGroup>
     <ClCompile Include="3d\Common\CtrlModel.cpp" />
     <ClCompile Include="3d\Common\ModelFile.cpp" />
+    <ClCompile Include="3d\Environment\Fog.cpp" />
+    <ClCompile Include="3d\Environment\Light.cpp" />
+    <ClCompile Include="3d\Environment\SpotLight.cpp" />
     <ClCompile Include="3d\Shape\Cube.cpp" />
     <ClCompile Include="3d\Shape\Sphere.cpp" />
     <ClCompile Include="Canvas.cpp" />
@@ -134,6 +137,10 @@
     <ClInclude Include="3d\Common\CtrlModel.h" />
     <ClInclude Include="3d\Common\import.h" />
     <ClInclude Include="3d\Common\ModelFile.h" />
+    <ClInclude Include="3d\Environment\Fog.h" />
+    <ClInclude Include="3d\Environment\Light.h" />
+    <ClInclude Include="3d\Environment\SpotLight.h" />
+    <ClInclude Include="3d\Environment\import.h" />
     <ClInclude Include="3d\import.h" />
     <ClInclude Include="3d\macros.h" />
     <ClInclude Include="3d\Shape\Cube.h" />

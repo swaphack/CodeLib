@@ -1,8 +1,8 @@
-#include "CtrlLight.h"
+#include "Light.h"
 
 using namespace render;
 
-CtrlLight::CtrlLight()
+Light::Light()
 {
 	_lightAmbient[0] = 0.0f;
 	_lightAmbient[1] = 0.0f;
@@ -26,12 +26,12 @@ CtrlLight::CtrlLight()
 
 }
 
-CtrlLight::~CtrlLight()
+Light::~Light()
 {
 
 }
 
-void CtrlLight::draw()
+void Light::draw()
 {
 	Node::draw();
 	if (getLightIndex() == ELI_NONE)
@@ -52,7 +52,7 @@ void CtrlLight::draw()
 	glEnable(getLightIndex());
 }
 
-void CtrlLight::setAmbient(uchar red, uchar green, uchar blue, uchar alpha)
+void Light::setAmbient(uchar red, uchar green, uchar blue, uchar alpha)
 {
 	_lightAmbient[0] = red / sys::COLOR_FLOAT_VALUE;
 	_lightAmbient[1] = green / sys::COLOR_FLOAT_VALUE;
@@ -60,12 +60,12 @@ void CtrlLight::setAmbient(uchar red, uchar green, uchar blue, uchar alpha)
 	_lightAmbient[3] = alpha / sys::COLOR_FLOAT_VALUE;
 }
 
-const float* CtrlLight::getAmbient()
+const float* Light::getAmbient()
 {
 	return _lightAmbient;
 }
 
-void CtrlLight::setDiffuse(uchar red, uchar green, uchar blue, uchar alpha)
+void Light::setDiffuse(uchar red, uchar green, uchar blue, uchar alpha)
 {
 	_lightDiffuse[0] = red / sys::COLOR_FLOAT_VALUE;
 	_lightDiffuse[1] = green / sys::COLOR_FLOAT_VALUE;
@@ -73,12 +73,12 @@ void CtrlLight::setDiffuse(uchar red, uchar green, uchar blue, uchar alpha)
 	_lightDiffuse[3] = alpha / sys::COLOR_FLOAT_VALUE;
 }
 
-const float* CtrlLight::getDiffuse()
+const float* Light::getDiffuse()
 {
 	return _lightDiffuse;
 }
 
-void CtrlLight::setSpecular(uchar red, uchar green, uchar blue, uchar alpha)
+void Light::setSpecular(uchar red, uchar green, uchar blue, uchar alpha)
 {
 	_lightSpecular[0] = red / sys::COLOR_FLOAT_VALUE;
 	_lightSpecular[1] = green / sys::COLOR_FLOAT_VALUE;
@@ -86,12 +86,12 @@ void CtrlLight::setSpecular(uchar red, uchar green, uchar blue, uchar alpha)
 	_lightSpecular[3] = alpha / sys::COLOR_FLOAT_VALUE;
 }
 
-const float* CtrlLight::getSpecular()
+const float* Light::getSpecular()
 {
 	return _lightSpecular;
 }
 
-void CtrlLight::initSelf()
+void Light::initSelf()
 {
 	Node::initSelf();
 

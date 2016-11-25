@@ -174,6 +174,15 @@
     <ClCompile Include="3d\Common\ModelFile.cpp">
       <Filter>3d\Common</Filter>
     </ClCompile>
+    <ClCompile Include="3d\Environment\Light.cpp">
+      <Filter>3d\Environment</Filter>
+    </ClCompile>
+    <ClCompile Include="3d\Environment\SpotLight.cpp">
+      <Filter>3d\Environment</Filter>
+    </ClCompile>
+    <ClCompile Include="3d\Environment\Fog.cpp">
+      <Filter>3d\Environment</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Common\GL\import.h">
@@ -524,6 +533,18 @@
     <ClInclude Include="3d\Common\ModelFile.h">
       <Filter>3d\Common</Filter>
     </ClInclude>
+    <ClInclude Include="3d\Environment\import.h">
+      <Filter>3d\Environment</Filter>
+    </ClInclude>
+    <ClInclude Include="3d\Environment\SpotLight.h">
+      <Filter>3d\Environment</Filter>
+    </ClInclude>
+    <ClInclude Include="3d\Environment\Light.h">
+      <Filter>3d\Environment</Filter>
+    </ClInclude>
+    <ClInclude Include="3d\Environment\Fog.h">
+      <Filter>3d\Environment</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Common">
@@ -627,6 +648,9 @@
     </Filter>
     <Filter Include="DrawNode">
       <UniqueIdentifier>{c3eeb252-4d38-4194-8503-f7bbbff42e74}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3d\Environment">
+      <UniqueIdentifier>{81978b8e-264f-4191-bee5-fb134f29e041}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

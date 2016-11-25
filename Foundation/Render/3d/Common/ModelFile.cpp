@@ -131,7 +131,6 @@ CtrlModel* ModelFile::loadModel(T_ModelData* pData)
 	frame->setTextureWithRect(texture2D);
 
 	CtrlModel* pModel = new CtrlModel();
-	AUTO_RELEASE_OBJECT(pModel);
 	pModel->setTexFrame(frame);
 
 	pModel->setVertexes(pData->VertexCount, pData->Vertexes, pData->Normals, pData->Colors, pData->TexCoords);

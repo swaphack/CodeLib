@@ -20,8 +20,11 @@ void WndRender::show()
 	Texture2D* pTexture = G_TEXTURE_CACHE->getTexture2D(imageDefine);
 	pTexture->retain();
 
+	this->addLight();
 	//this->testSequenceFrame();
 	this->testModel();
+
+	//this->testFog();
 }
 
 void WndRender::testMoveImage()
@@ -164,13 +167,13 @@ void WndRender::testMedia()
 
 void WndRender::testFog()
 {
-// 	CtrlFog* pFog = new CtrlFog();
-// 	pFog->setDensity(0.015);
-// 	pFog->setNear(60);
-// 	pFog->setFar(100);
-// 	pFog->setColor(125, 125, 125, 125);
-// 	AUTO_RELEASE_OBJECT(pFog);
-// 	this->getCanvas()->getRoot()->addChild(pFog);
+	Fog* pFog = new Fog();
+	pFog->setDensity(0.015);
+	pFog->setNear(0);
+	pFog->setFar(100);
+	pFog->setColor(125, 125, 125, 125);
+	AUTO_RELEASE_OBJECT(pFog);
+	this->getCanvas()->getRoot()->addChild(pFog);
 }
 
 void WndRender::testAnimation()
@@ -302,16 +305,16 @@ void WndRender::testString()
 
 void WndRender::addLight()
 {
-// 	CtrlSpotLight1* pCtrlSpotLight = new CtrlSpotLight1();
-// 	AUTO_RELEASE_OBJECT(pCtrlSpotLight);
-// 	pCtrlSpotLight->setExponent(1.0f);
-// 	pCtrlSpotLight->setPosition(0, 0, -1);
-// 	pCtrlSpotLight->setAmbient(255, 255, 255, 255);
-// 	pCtrlSpotLight->setDiffuse(255, 255, 255, 255);
-// 	pCtrlSpotLight->setCutOff(45);
-// 	pCtrlSpotLight->setDirection(0.0f, 0.0f, 1.0f);
-// 
-// 	this->getCanvas()->getRoot()->addChild(pCtrlSpotLight);
+	Light0* pSpotLight = new Light0();
+	AUTO_RELEASE_OBJECT(pSpotLight);
+	pSpotLight->setPosition(0, 0, 200);
+	pSpotLight->setAmbient(255, 255, 255, 255);
+	pSpotLight->setDiffuse(255, 255, 255, 255);
+	pSpotLight->setSpecular(255, 255, 255, 255);
+
+	this->getCanvas()->getRoot()->addChild(pSpotLight);
+
+	G_KEYBOARDMANAGER->addDispatcher(pSpotLight, this, KEYBOARD_DELEGATTE_SELECTOR(WndRender::onKeyBoardCamera));
 }
 
 void WndRender::testPixelImage()
@@ -536,10 +539,16 @@ void WndRender::onKeyBoardRole(sys::Object* object, sys::BoardKey key, sys::Butt
 void WndRender::testModel()
 {
 	CtrlModel* pModel = ModelFile::getInstance()->load("Resource/3DModel/Test.xml");
-	//pModel->setPosition(512, 384);
+	AUTO_RELEASE_OBJECT(pModel);
 	pModel->setRotation(0, 45, 45);
 
 	this->getCanvas()->getRoot()->addChild(pModel);
+
+	pModel->getMatrial()->setAmbient(255, 0, 255, 255);
+	pModel->getMatrial()->setDiffuse(255, 255, 255, 255);
+	pModel->getMatrial()->setSpecular(255, 0, 0, 255);
+	pModel->getMatrial()->setEmisiion(255, 0, 0, 255);
+	pModel->getMatrial()->setShiness(0.5f);
 
 	int count = 1024;
 	float interval = 5;
