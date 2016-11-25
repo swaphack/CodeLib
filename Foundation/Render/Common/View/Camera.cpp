@@ -31,9 +31,12 @@ void Camera::updateCamera()
 	
 }
 
-void Camera::onLookAt(const sys::Vector& position)
+void Camera::lookAt(const sys::Vector& position)
 {
+	_position = position;
+	_position.mult(-1);
 
+	onSpaceChange();
 }
 
 void Camera::onSpaceChange()
@@ -54,7 +57,7 @@ Camera2D::~Camera2D()
 
 void Camera2D::updateCamera()
 {
- 	glMatrixMode(GL_MODELVIEW);
+	glMatrixMode(GL_PROJECTION);
  	glLoadIdentity();
 	glOrtho(0, 1, 0, 1, 0, 1);
 
@@ -78,7 +81,7 @@ Camera3D::~Camera3D()
 
 void Camera3D::updateCamera()
 {
-	glMatrixMode(GL_MODELVIEW);
+	glMatrixMode(GL_PROJECTION);
  	glLoadIdentity();
 
 	glFrustum(0, 1, 0, 1, 0, 1);

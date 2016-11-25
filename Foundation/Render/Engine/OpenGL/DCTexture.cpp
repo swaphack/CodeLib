@@ -25,8 +25,8 @@ void DCTexture::draw()
 		glNormal3f(Normal.x, Normal.y, Normal.z);
 		for (int i = 0; i < 4; i++)
 		{
-			glVertex3f(Position[i].x, Position[i].y, Position[i].z);
 			glTexCoord3f(Coord[i].x, Coord[i].y, Coord[i].z);
+			glVertex3f(Position[i].x, Position[i].y, Position[i].z);
 		}
 	}
 	glEnd();

@@ -60,6 +60,8 @@ void View::setScale(float x, float y, float z)
 	_scale.x = x;
 	_scale.y = y;
 	_scale.z = z;
+
+	_camera->setScale(_scale);
 }
 
 sys::Vector View::getScale()
@@ -75,12 +77,8 @@ void View::initView()
 		glViewport((int)_position.x, (int)_position.y, (int)_size.width, (int)_size.height);
 		glMatrixMode(GL_PROJECTION);
 		glLoadIdentity();
-
-		glScalef(_scale.x, _scale.y, _scale.z);
-
 		setDirty(false);
 	}
-
 	_viewConfig.apply();
 }
 

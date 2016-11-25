@@ -20,9 +20,10 @@ void WndRender::show()
 	Texture2D* pTexture = G_TEXTURE_CACHE->getTexture2D(imageDefine);
 	pTexture->retain();
 
-	this->addLight();
-	//this->testSequenceFrame();
+	//this->addLight();
 	this->testModel();
+
+	this->testSequenceFrame();
 
 	//this->testFog();
 }
@@ -313,8 +314,6 @@ void WndRender::addLight()
 	pSpotLight->setSpecular(255, 255, 255, 255);
 
 	this->getCanvas()->getRoot()->addChild(pSpotLight);
-
-	G_KEYBOARDMANAGER->addDispatcher(pSpotLight, this, KEYBOARD_DELEGATTE_SELECTOR(WndRender::onKeyBoardCamera));
 }
 
 void WndRender::testPixelImage()
@@ -349,7 +348,7 @@ void WndRender::testSequenceFrame()
 	pSequenceFrame->start();
 
 	//pSequenceFrame->getMovie()->setBlend(EBFS_SRC_ALPHA, EBFD_ONE_MINUS_SRC_ALPHA);
-	pSequenceFrame->getMovie()->setColor(Color3B(0.299f * 255, 0.587f * 255, 0.114f * 255));
+	//pSequenceFrame->getMovie()->setColor(Color3B(0.299f * 255, 0.587f * 255, 0.114f * 255));
 	//pSequenceFrame->getMovie()->setOpacity(255);
 
 	this->getCanvas()->getRoot()->addChild(pSequenceFrame);
@@ -541,10 +540,11 @@ void WndRender::testModel()
 	CtrlModel* pModel = ModelFile::getInstance()->load("Resource/3DModel/Test.xml");
 	AUTO_RELEASE_OBJECT(pModel);
 	pModel->setRotation(0, 45, 45);
+	pModel->setPosition(512, 384);
 
 	this->getCanvas()->getRoot()->addChild(pModel);
 
-	pModel->getMatrial()->setAmbient(255, 0, 255, 255);
+	pModel->getMatrial()->setAmbient(255, 255, 255, 255);
 	pModel->getMatrial()->setDiffuse(255, 255, 255, 255);
 	pModel->getMatrial()->setSpecular(255, 0, 0, 255);
 	pModel->getMatrial()->setEmisiion(255, 0, 0, 255);
@@ -559,4 +559,7 @@ void WndRender::testModel()
 	pRotateToAction->setRotation(rx * count, ry * count, rz * count);
 	pRotateToAction->setInterval(interval * count);
 	pModel->getActionProxy()->runAction(pRotateToAction);
+
+
+	this->getCanvas()->getCamera()->lookAt(pModel->getPosition());
 }

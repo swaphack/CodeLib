@@ -34,6 +34,9 @@ void DCTextureBatch::draw()
 	glEnable(GL_TEXTURE_2D);
 	glBindTexture(GL_TEXTURE_2D, TextureID);
 	{
+		//glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+		glTexCoordPointer(3, GL_FLOAT, 0, TexCoords);
+
 		//glEnableClientState(GL_VERTEX_ARRAY);
 		glVertexPointer(3, GL_FLOAT, 0, Vertexes);
 
@@ -42,9 +45,6 @@ void DCTextureBatch::draw()
 
 		// glEnableClientState(GL_COLOR_ARRAY);
 		glColorPointer(3, GL_FLOAT, 0, Colors);
-
-		//glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-		glTexCoordPointer(3, GL_FLOAT, 0, TexCoords);
 
 		glDrawElements(GL_TRIANGLES, IndexCount, GL_UNSIGNED_INT, Indices);
 	}

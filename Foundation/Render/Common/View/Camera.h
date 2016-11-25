@@ -17,7 +17,7 @@ namespace render
 	public:
 		virtual void updateCamera();
 		// 相机对准指定位置
-		virtual void onLookAt(const sys::Vector& position);
+		virtual void lookAt(const sys::Vector& position);
 	protected:
 		virtual void onSpaceChange();
 	protected:
