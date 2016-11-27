@@ -104,7 +104,7 @@ T_ModelData* ModelFile::loadData(const char* filepath)
 		}
 		else if (strcmp(pElement->Value(), "Indices") == 0)
 		{
-			modelData.Indices = getIntAry(pElement->GetText(), modelData.IndexCount);
+			modelData.Indices = getUShortAry(pElement->GetText(), modelData.IndexCount);
 		}
 		
 		pRoot = pRoot->NextSibling();
@@ -159,20 +159,20 @@ float* ModelFile::getFloatAry(const char* text, int count)
 	return data;
 }
 
-int* ModelFile::getIntAry(const char* text, int count)
+ushort* ModelFile::getUShortAry(const char* text, int count)
 {
 	sys::String value = text;
 	value = value.trim();
 	std::vector<sys::String> strAry;
 	value.split(',', strAry);
 
-	int* data = (int*)malloc(count * sizeof(int));
-	memset(data, 0, count * sizeof(int));
+	ushort* data = (ushort*)malloc(count * sizeof(ushort));
+	memset(data, 0, count * sizeof(ushort));
 	for (int i = 0; i < strAry.size(); i++)
 	{
 		if (i < count)
 		{
-			data[i] = atoi(strAry[i].getString());
+			data[i] = (ushort)atoi(strAry[i].getString());
 		}
 	}
 

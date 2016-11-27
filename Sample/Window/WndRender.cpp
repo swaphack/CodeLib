@@ -537,7 +537,7 @@ void WndRender::onKeyBoardRole(sys::Object* object, sys::BoardKey key, sys::Butt
 
 void WndRender::testModel()
 {
-	CtrlModel* pModel = ModelFile::getInstance()->load("Resource/3DModel/Test.xml");
+	CtrlModel* pModel = ModelFile::getInstance()->load("Resource/3DModel/Image.xml");
 	AUTO_RELEASE_OBJECT(pModel);
 	pModel->setRotation(0, 45, 45);
 	pModel->setPosition(512, 384);

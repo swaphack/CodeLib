@@ -128,7 +128,7 @@ void CtrlModel::setVertexes(int count, float* vertexes, float* normals, float* c
 	memcpy(_texCoords, texCoords, count * sizeof(float));
 }
 
-void CtrlModel::setIndices(int count, int* indices)
+void CtrlModel::setIndices(int count, ushort* indices)
 {
 	if (indices == nullptr)
 	{
@@ -139,10 +139,10 @@ void CtrlModel::setIndices(int count, int* indices)
 
 	SAFE_FREE(_indices);
 
-	_indices = (int*)malloc(count * sizeof(int));
+	_indices = (ushort*)malloc(count * sizeof(ushort));
 
 	// Ë÷Òý
-	memcpy(_indices, indices, count * sizeof(int));
+	memcpy(_indices, indices, count * sizeof(ushort));
 }
 
 int CtrlModel::getVertexCount()

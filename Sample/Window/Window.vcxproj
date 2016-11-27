@@ -37,6 +37,7 @@
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v120</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
+    <CLRSupport>false</CLRSupport>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -192,7 +193,10 @@
     <None Include="ribbon1.mfcribbon-ms" />
   </ItemGroup>
   <ItemGroup>
-    <Xml Include="Resource\3DModel\Test.xml" />
+    <Xml Include="Resource\3DModel\Image.xml" />
+    <Xml Include="Resource\3DModel\Test.xml">
+      <SubType>Designer</SubType>
+    </Xml>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -29,7 +29,7 @@ namespace render
 		// 顶点索引长度
 		int IndexCount;
 		// 顶点索引
-		int* Indices;
+		ushort* Indices;
 
 		T_ModelData()
 		{
@@ -75,7 +75,7 @@ namespace render
 	private:
 		// 获取浮点数组
 		float* getFloatAry(const char* text, int count);
-		int* getIntAry(const char* text, int count);
+		ushort* getUShortAry(const char* text, int count);
 	private:
 		// 模型配置
 		std::map<std::string, T_ModelData> _modelDatas;

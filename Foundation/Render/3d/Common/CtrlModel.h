@@ -25,7 +25,7 @@ namespace render
 		// 设置顶点,法线，纹理坐标信息
 		void setVertexes(int count, float* vertexes, float* normals, float* colors, float* texCoords);
 		// 设置三角形索引
-		void setIndices(int count, int* indices);
+		void setIndices(int count, ushort* indices);
 		// 顶点数
 		int getVertexCount();
 		// 三角形数
@@ -52,6 +52,6 @@ namespace render
 		// 三角形数
 		int _triangleCount;
 		// 顶点索引
-		int* _indices;
+		ushort* _indices;
 	};
 }
