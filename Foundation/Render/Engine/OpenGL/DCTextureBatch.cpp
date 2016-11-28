@@ -2,6 +2,9 @@
 
 using namespace render;
 
+// 如果 USE_MEMORY_CLONE 为1，使用内存分配和拷贝
+//#define USE_MEMORY_CLONE 1
+
 DCTextureBatch::DCTextureBatch()
 :TexCoords(nullptr)
 , Vertexes(nullptr)
@@ -14,13 +17,13 @@ DCTextureBatch::DCTextureBatch()
 
 DCTextureBatch::~DCTextureBatch()
 {
-	/**
+#if defined(USE_MEMORY_CLONE) && USE_MEMORY_CLONE == 1
 	SAFE_FREE(pTextureBatch->TexCoords);
 	SAFE_FREE(pTextureBatch->Vertexs);
 	SAFE_FREE(pTextureBatch->Normals);
 	SAFE_FREE(pTextureBatch->Colors);
 	SAFE_FREE(pTextureBatch->Indices);
-	*/
+#endif
 }
 
 void DCTextureBatch::draw()
@@ -41,19 +44,15 @@ void DCTextureBatch::draw()
 	{
 		//glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 		glTexCoordPointer(3, GL_FLOAT, 0, TexCoords);
-		SHOW_OPENGL_ERROR_MESSAGE();
 
 		//glEnableClientState(GL_VERTEX_ARRAY);
 		glVertexPointer(3, GL_FLOAT, 0, Vertexes);
-		SHOW_OPENGL_ERROR_MESSAGE();
 
 		//glEnableClientState(GL_NORMAL_ARRAY);
 		glNormalPointer(3, GL_FLOAT, Normals);
-		SHOW_OPENGL_ERROR_MESSAGE();
 
 		// glEnableClientState(GL_COLOR_ARRAY);
 		glColorPointer(3, GL_FLOAT, 0, Colors);
-		SHOW_OPENGL_ERROR_MESSAGE();
 
 		glDrawElements(GL_TRIANGLES, IndexCount, GL_UNSIGNED_SHORT, Indices);
 
@@ -85,18 +84,7 @@ DCTextureBatch* DCTextureBatch::create(int textureID,
 	pTextureBatch->VertexCount = vertexCount;
 	pTextureBatch->IndexCount = indexCount;
 
-	///*
-	pTextureBatch->TexCoords = coords;
-	pTextureBatch->Vertexes = positions;
-	pTextureBatch->Normals = normals;
-	pTextureBatch->Colors = colors;
-	pTextureBatch->Indices = indices;
-
-	PRINT("size of indices %d \n", sizeof(*indices));
-	PRINT("size of Indices %d \n", sizeof(*pTextureBatch->Indices));
-	//*/
-
-	/*
+#if defined(USE_MEMORY_CLONE) && USE_MEMORY_CLONE == 1
 	SAFE_FREE(pTextureBatch->Vertexes);
 	SAFE_FREE(pTextureBatch->Normals);
 	SAFE_FREE(pTextureBatch->Colors);
@@ -125,7 +113,13 @@ DCTextureBatch* DCTextureBatch::create(int textureID,
 	memcpy(pTextureBatch->TexCoords, coords, vertexCount* sizeof(float));
 	// 顶点顺序
 	memcpy(pTextureBatch->Indices, indices, indexCount* sizeof(ushort));
-	*/
+#else
+	pTextureBatch->TexCoords = coords;
+	pTextureBatch->Vertexes = positions;
+	pTextureBatch->Normals = normals;
+	pTextureBatch->Colors = colors;
+	pTextureBatch->Indices = indices;
+#endif
 
 	return pTextureBatch;
 }

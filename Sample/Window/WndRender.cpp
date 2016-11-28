@@ -537,9 +537,8 @@ void WndRender::onKeyBoardRole(sys::Object* object, sys::BoardKey key, sys::Butt
 
 void WndRender::testModel()
 {
-	CtrlModel* pModel = ModelFile::getInstance()->load("Resource/3DModel/Image.xml");
+	CtrlModel* pModel = ModelFile::getInstance()->load("Resource/3DModel/Test.xml");
 	AUTO_RELEASE_OBJECT(pModel);
-	pModel->setRotation(0, 45, 45);
 	pModel->setPosition(512, 384);
 
 	this->getCanvas()->getRoot()->addChild(pModel);
@@ -550,15 +549,15 @@ void WndRender::testModel()
 	pModel->getMatrial()->setEmisiion(255, 0, 0, 255);
 	pModel->getMatrial()->setShiness(0.5f);
 
-	int count = 1024;
-	float interval = 5;
-	float rx = 360;
-	float ry = 360;
-	float rz = 360;
-	RotateToAction* pRotateToAction = new RotateToAction();
-	pRotateToAction->setRotation(rx * count, ry * count, rz * count);
-	pRotateToAction->setInterval(interval * count);
-	pModel->getActionProxy()->runAction(pRotateToAction);
+// 	int count = 1024;
+// 	float interval = 5;
+// 	float rx = 360;
+// 	float ry = 360;
+// 	float rz = 360;
+// 	RotateToAction* pRotateToAction = new RotateToAction();
+// 	pRotateToAction->setRotation(rx * count, ry * count, rz * count);
+// 	pRotateToAction->setInterval(interval * count);
+// 	pModel->getActionProxy()->runAction(pRotateToAction);
 
 
 	this->getCanvas()->getCamera()->lookAt(pModel->getPosition());
