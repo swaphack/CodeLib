@@ -129,7 +129,6 @@ void CtrlText::onTextChange()
 		this->setWidth(static_cast<float>(texture->getWidth()));
 		this->setHeight(static_cast<float>(texture->getHeight()));
 	}
-
 	this->setTextureWithRect(texture);
 }
 

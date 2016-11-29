@@ -8,12 +8,14 @@ static int s_ref = 0;
 
 
 Stencil::Stencil()
+:_stencilNode(nullptr)
 {
 	_ref = s_ref++;
 }
 
 Stencil::~Stencil()
 {
+	SAFE_RELEASE(_stencilNode);
 }
 
 void shwoStencilInformation()
@@ -67,7 +69,10 @@ void Stencil::visit()
 	glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
 	glEnable(GL_STENCIL_TEST);
 	glDepthMask(GL_FALSE);
-	_stencilNode->visit();
+	if (_stencilNode)
+	{
+		_stencilNode->visit();
+	}
 	glDepthMask(GL_TRUE);
 
 	glStencilFunc(GL_EQUAL, 1, 0xff);
@@ -85,6 +90,12 @@ void Stencil::visit()
 
 void Stencil::setStencilNode(Node* node)
 {
+	if (node == nullptr)
+	{
+		return;
+	}
+	SAFE_RELEASE(_stencilNode);
+	SAFE_RETAIN(node);
 	_stencilNode = node;
 }
 

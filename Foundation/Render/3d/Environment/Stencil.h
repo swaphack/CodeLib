@@ -38,8 +38,9 @@ namespace render
 		virtual void draw();
 
 		virtual void visit();
-
+		// 设置模板节点
 		void setStencilNode(Node* node);
+		// 获取模板节点
 		Node* getStencilNode();
 	protected:
 		// 引用计数器

@@ -6,7 +6,7 @@ using namespace sys;
 WndRender::WndRender()
 {
 	this->init();
-	this->getCanvas()->setDimensions(render::ED_2D);
+	this->getCanvas()->setDimensions(render::ED_3D);
 }
 
 WndRender::~WndRender()
@@ -19,18 +19,10 @@ void WndRender::show()
 	ImageDefine imageDefine = {"Resource/Image/world.jpg", EIF_JPEG};
 	Texture2D* pTexture = G_TEXTURE_CACHE->getTexture2D(imageDefine);
 	pTexture->retain();
+	
+ 	this->testSequenceFrame();
 
-	// 	this->testMedia();
-// 
- 	//this->testModel();
-// 
- 	//this->testSequenceFrame();
-
-	//this->testImages();
- 
-	this->testScrollView();
-
-// this->testText();
+	this->testModel();
 }
 
 void WndRender::testMoveImage()
@@ -133,12 +125,19 @@ void WndRender::testText()
 	sprintf(strVal, "%d-%d-%d %02d:%02d:%02d\n", t->getYear(), t->getMonth(), t->getMonthDay(), t->getHour(), t->getMinute(), t->getSecond());
 
 	CtrlText* pCtrlText = CREATE_NODE(CtrlText);
-
 	pCtrlText->setFontPath("Resource/Font/font_3.ttf");
 	pCtrlText->setFontSize(58);
 	pCtrlText->setString(strVal);
 	pCtrlText->setPosition(512, 384, 0);
 	pCtrlText->setColor(sys::Color4B(125, 80, 255, 255));
+	this->getCanvas()->getRoot()->addChild(pCtrlText);
+
+	pCtrlText = CREATE_NODE(CtrlText);
+	pCtrlText->setFontPath("Resource/Font/font_2.ttf");
+	pCtrlText->setFontSize(58);
+	pCtrlText->setString("中华人民共和国");
+	pCtrlText->setPosition(200, 200, 0);
+	pCtrlText->setColor(sys::Color4B(125, 255, 255, 255));
 	this->getCanvas()->getRoot()->addChild(pCtrlText);
 }
 
@@ -157,7 +156,7 @@ void WndRender::testMask()
 void WndRender::testMedia()
 {
 	CtrlMedia* pMedia = CREATE_NODE(CtrlMedia);
-	pMedia->setVolume(200, 100);
+	pMedia->setVolume(400, 300);
 	pMedia->setMediaPath("Resource/Video/1.flv", false);
 	pMedia->setAnchorPoint(0, 0);
 	pMedia->setPosition(0, 384, 0.0f);
@@ -194,18 +193,23 @@ void WndRender::testParticle()
 
 void WndRender::testStencil()
 {
-	Stencil* pStencil = new Stencil();
-	AUTO_RELEASE_OBJECT(pStencil);
+	Stencil* pStencil = CREATE_NODE(Stencil);
 	pStencil->setPosition(512, 384, 0);
 	pStencil->setVolume(200, 100, 0);
 	
 	this->getCanvas()->getRoot()->addChild(pStencil);	
 
-	CtrlImage* pImage = new CtrlImage();
-	AUTO_RELEASE_OBJECT(pImage);
+	CtrlImage* pImage = CREATE_NODE(CtrlImage);
 	pImage->setImagePath("Resource/Image/sqi.png");
 	pImage->setVolume(200, 200, 0);
-	pImage->setScale(1.5, 1.0, 2);
+
+	pStencil->setStencilNode(pImage);
+
+	pImage  = CREATE_NODE(CtrlImage);
+	pImage->setImagePath("Resource/Image/sqi.png");
+	pImage->setVolume(300, 300, 0);
+	pImage->setPosition(100, 200);
+
 	pStencil->addChild(pImage);
 }
 
