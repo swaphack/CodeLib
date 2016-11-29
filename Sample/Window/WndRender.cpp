@@ -6,7 +6,7 @@ using namespace sys;
 WndRender::WndRender()
 {
 	this->init();
-	this->getCanvas()->setDimensions(render::ED_3D);
+	this->getCanvas()->setDimensions(render::ED_2D);
 }
 
 WndRender::~WndRender()
@@ -20,12 +20,17 @@ void WndRender::show()
 	Texture2D* pTexture = G_TEXTURE_CACHE->getTexture2D(imageDefine);
 	pTexture->retain();
 
-	//this->addLight();
-	this->testModel();
+	// 	this->testMedia();
+// 
+ 	//this->testModel();
+// 
+ 	//this->testSequenceFrame();
 
-	this->testSequenceFrame();
+	//this->testImages();
+ 
+	this->testScrollView();
 
-	//this->testFog();
+// this->testText();
 }
 
 void WndRender::testMoveImage()
@@ -47,8 +52,7 @@ void WndRender::testMoveImage()
 
 void WndRender::testClock()
 {
-	DrawNode* pDrawNode = new DrawNode();
-	AUTO_RELEASE_OBJECT(pDrawNode);
+	DrawNode* pDrawNode = CREATE_NODE(DrawNode);
 
 	pDrawNode->setDrawMode(EBM_TRIANGLE_STRIP);
 	pDrawNode->setWidth(20);
@@ -128,9 +132,9 @@ void WndRender::testText()
 	PRINT("%d-%d-%d %02d:%02d:%02d\n", t->getYear(), t->getMonth(), t->getMonthDay(), t->getHour(), t->getMinute(), t->getSecond());
 	sprintf(strVal, "%d-%d-%d %02d:%02d:%02d\n", t->getYear(), t->getMonth(), t->getMonthDay(), t->getHour(), t->getMinute(), t->getSecond());
 
-	CtrlText* pCtrlText = new CtrlText();
-	AUTO_RELEASE_OBJECT(pCtrlText);
-	pCtrlText->setFontPath("Resource/font_3.ttf");
+	CtrlText* pCtrlText = CREATE_NODE(CtrlText);
+
+	pCtrlText->setFontPath("Resource/Font/font_3.ttf");
 	pCtrlText->setFontSize(58);
 	pCtrlText->setString(strVal);
 	pCtrlText->setPosition(512, 384, 0);
@@ -140,15 +144,9 @@ void WndRender::testText()
 
 void WndRender::testMask()
 {
-// 	CtrlPixel* pImage = new CtrlPixel();
-// 	AUTO_RELEASE_OBJECT(pImage);
-// 	this->getCanvas()->getRoot()->addChild(pImage);
-	//Color4B color = pImage->getPixel(512, 384);
-
 	uchar opacity = 255;
 
-	CtrlMask* pMask = new CtrlMask();
-	AUTO_RELEASE_OBJECT(pMask);
+	CtrlMask* pMask = CREATE_NODE(CtrlMask);
 	pMask->setOpacity(opacity);
 	pMask->setPosition(512, 384, 0.0f);
 	pMask->setVolume(200, 300, 0);
@@ -158,22 +156,22 @@ void WndRender::testMask()
 
 void WndRender::testMedia()
 {
-	CtrlMedia* pMedia = new CtrlMedia();
-	AUTO_RELEASE_OBJECT(pMedia);
-	pMedia->setMediaPath("Resource/1.flv");
-	pMedia->setPosition(512, 384, 0.0f);
+	CtrlMedia* pMedia = CREATE_NODE(CtrlMedia);
+	pMedia->setVolume(200, 100);
+	pMedia->setMediaPath("Resource/Video/1.flv", false);
+	pMedia->setAnchorPoint(0, 0);
+	pMedia->setPosition(0, 384, 0.0f);
 	pMedia->start();
 	this->getCanvas()->getRoot()->addChild(pMedia);
 }
 
 void WndRender::testFog()
 {
-	Fog* pFog = new Fog();
+	Fog* pFog = CREATE_NODE(Fog);
 	pFog->setDensity(0.015);
 	pFog->setNear(0);
 	pFog->setFar(100);
 	pFog->setColor(125, 125, 125, 125);
-	AUTO_RELEASE_OBJECT(pFog);
 	this->getCanvas()->getRoot()->addChild(pFog);
 }
 
@@ -196,25 +194,19 @@ void WndRender::testParticle()
 
 void WndRender::testStencil()
 {
-// 	CtrlStencil* pStencil = new CtrlStencil();
-// 	pStencil->setPosition(512, 384, 0);
-// 	AUTO_RELEASE_OBJECT(pStencil);
-// 	this->getCanvas()->getRoot()->addChild(pStencil);
-// 
-// 	CtrlImage* pNode = new CtrlImage();
-// 	AUTO_RELEASE_OBJECT(pNode); 
-// 	pNode->setImagePath("Resource/sqi.png");
-// 	pNode->setColor(sys::Color4B(255, 0, 0, 255));
-// 	pNode->setVolume(100, 100, 0);
-// 	pStencil->setStencilNode(pNode);
-// 	
-// 
-// 	CtrlImage* pImage = new CtrlImage();
-// 	AUTO_RELEASE_OBJECT(pImage);
-// 	pImage->setImagePath("Resource/sqi.png");
-// 	pImage->setVolume(200, 200, 0);
-// 	pImage->setScale(1.5, 1.0, 2);
-// 	pStencil->addChild(pImage);
+	Stencil* pStencil = new Stencil();
+	AUTO_RELEASE_OBJECT(pStencil);
+	pStencil->setPosition(512, 384, 0);
+	pStencil->setVolume(200, 100, 0);
+	
+	this->getCanvas()->getRoot()->addChild(pStencil);	
+
+	CtrlImage* pImage = new CtrlImage();
+	AUTO_RELEASE_OBJECT(pImage);
+	pImage->setImagePath("Resource/Image/sqi.png");
+	pImage->setVolume(200, 200, 0);
+	pImage->setScale(1.5, 1.0, 2);
+	pStencil->addChild(pImage);
 }
 
 void WndRender::testCamera()
@@ -225,8 +217,7 @@ void WndRender::testCamera()
 
 void WndRender::testEditBox()
 {
-	CtrlEditLabel* pEditLabel = new CtrlEditLabel();
-	AUTO_RELEASE_OBJECT(pEditLabel);
+	CtrlEditLabel* pEditLabel = CREATE_NODE(CtrlEditLabel);
 
 	CtrlText* pCtrlText = pEditLabel->getCtrlText();
 	pCtrlText->setFontPath("Resource/font_3.ttf");
@@ -260,20 +251,18 @@ void WndRender::testEditBox()
 
 void WndRender::testImages()
 {
-	CtrlImage* pImage = new CtrlImage();
+	CtrlImage* pImage = CREATE_NODE(CtrlImage);
 	pImage->setImagePath("Resource/Image/NeHe.png");
 	pImage->setPosition(0, 0, 0);
-	AUTO_RELEASE_OBJECT(pImage);
 	this->getCanvas()->getRoot()->addChild(pImage);
 
 	int count = 100;
 	CtrlImage* pChild = nullptr;
 	while (count-- > 0)
 	{
-		pChild = new CtrlImage();
+		pChild = CREATE_NODE(CtrlImage);
 		pChild->setImagePath("Resource/Image/NeHe.png");
 		pChild->setPosition(4, 4, 0);
-		AUTO_RELEASE_OBJECT(pChild);
 		pImage->addChild(pChild);
 		pImage = pChild;
 		pChild = nullptr;
@@ -306,8 +295,7 @@ void WndRender::testString()
 
 void WndRender::addLight()
 {
-	Light0* pSpotLight = new Light0();
-	AUTO_RELEASE_OBJECT(pSpotLight);
+	Light0* pSpotLight = CREATE_NODE(Light0);
 	pSpotLight->setPosition(0, 0, 200);
 	pSpotLight->setAmbient(255, 255, 255, 255);
 	pSpotLight->setDiffuse(255, 255, 255, 255);
@@ -318,14 +306,12 @@ void WndRender::addLight()
 
 void WndRender::testPixelImage()
 {
-	CtrlImage* pImage = new CtrlImage();
+	CtrlImage* pImage = CREATE_NODE(CtrlImage);
 	pImage->setImagePath("Resource/Image/world.jpg", EIF_JPEG);
 	pImage->setPosition(512, 384, 0);
-	AUTO_RELEASE_OBJECT(pImage);
 	this->getCanvas()->getRoot()->addChild(pImage);
 
-	CtrlText* pCtrlText = new CtrlText();
-	AUTO_RELEASE_OBJECT(pCtrlText);
+	CtrlText* pCtrlText = CREATE_NODE(CtrlText);
 	pCtrlText->setFontPath("Resource/font_3.ttf");
 	pCtrlText->setAnchorPoint(0, 0, 0);
 	pCtrlText->setFontSize(58);
@@ -340,8 +326,8 @@ void WndRender::testPixelImage()
 
 void WndRender::testSequenceFrame()
 {
-	CtrlSequenceFrame* pSequenceFrame = new CtrlSequenceFrame();
-	AUTO_RELEASE_OBJECT(pSequenceFrame);
+	CtrlSequenceFrame* pSequenceFrame = CREATE_NODE(CtrlSequenceFrame);
+	pSequenceFrame->setVolume(1024, 768);
 	pSequenceFrame->setFrameImagePath("Resource/Role/1/20%d.png", 8);
 	pSequenceFrame->setPosition(512, 384, 0);
 	pSequenceFrame->setFrameRate(1.0f / 10);
@@ -538,8 +524,7 @@ void WndRender::onKeyBoardRole(sys::Object* object, sys::BoardKey key, sys::Butt
 void WndRender::testModel()
 {
 	CtrlModel* pModel = ModelFile::getInstance()->load("Resource/3DModel/Test.xml");
-	AUTO_RELEASE_OBJECT(pModel);
-	pModel->setPosition(512, 384);
+	pModel->setPosition(700, 384);
 
 	this->getCanvas()->getRoot()->addChild(pModel);
 
@@ -549,16 +534,58 @@ void WndRender::testModel()
 	pModel->getMatrial()->setEmisiion(255, 0, 0, 255);
 	pModel->getMatrial()->setShiness(0.5f);
 
-// 	int count = 1024;
-// 	float interval = 5;
-// 	float rx = 360;
-// 	float ry = 360;
-// 	float rz = 360;
-// 	RotateToAction* pRotateToAction = new RotateToAction();
-// 	pRotateToAction->setRotation(rx * count, ry * count, rz * count);
-// 	pRotateToAction->setInterval(interval * count);
-// 	pModel->getActionProxy()->runAction(pRotateToAction);
+	int count = 1024;
+	float interval = 5;
+	float rx = 360;
+	float ry = 360;
+	float rz = 360;
+	RotateToAction* pRotateToAction = new RotateToAction();
+	pRotateToAction->setRotation(rx * count, ry * count, rz * count);
+	pRotateToAction->setInterval(interval * count);
+	pModel->getActionProxy()->runAction(pRotateToAction);
 
 
-	this->getCanvas()->getCamera()->lookAt(pModel->getPosition());
+	//this->getCanvas()->getCamera()->lookAt(pModel->getPosition());
+}
+
+void WndRender::testClipPlane()
+{
+	ClipPlane0* pClipPlane = CREATE_NODE(ClipPlane0);
+	pClipPlane->setPosition(512, 384);
+	pClipPlane->setClipNormal(1, 1, 0);
+
+	this->getCanvas()->getRoot()->addChild(pClipPlane);
+}
+
+void WndRender::testScissor()
+{
+	CtrlScissor* pScissor = CREATE_NODE(CtrlScissor);
+	pScissor->setVolume(100, 200, 0);
+	pScissor->setPosition(0, 0);
+	this->getCanvas()->getRoot()->addChild(pScissor);
+
+	CtrlImage* pImage = CREATE_NODE(CtrlImage);
+	pImage->setImagePath("Resource/Image/sqi.png");
+	pImage->setVolume(200, 200, 0);
+	pImage->setScale(1.5, 1.0, 2);
+	pScissor->addChild(pImage);
+}
+
+void WndRender::testScrollView()
+{
+	CtrlScrollView* pScrollView = CREATE_NODE(CtrlScrollView);
+	pScrollView->setPosition(512, 384);
+	pScrollView->setVolume(200, 600);
+	pScrollView->setItemSize(200, 200);
+	this->getCanvas()->getRoot()->addChild(pScrollView);
+
+	for (int i = 0; i < 10; i++)
+	{
+		CtrlImage* pImage = CREATE_NODE(CtrlImage);
+		pImage->setImagePath("Resource/Image/sqi.png");
+		pImage->setVolume(200, 200, 0);
+		pScrollView->append(pImage);
+	}
+
+	pScrollView->setScrollDirection(ESD_VERTICAL_BOTTOM);
 }

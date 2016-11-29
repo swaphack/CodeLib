@@ -30,6 +30,8 @@ namespace render
 	protected:
 		// 定时更新事件
 		virtual void updateSelf(float interval);
+		// 帧数改变
+		virtual void onFrameChange();
 	protected:
 		// 图片帧
 		CtrlFrame* _ctrlFrame;

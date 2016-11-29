@@ -18,17 +18,29 @@ Node::Node()
 , _touchProxy(nullptr)
 {
 	this->setVisible(true);
+
+	_notify = new Notify();
 }
 
 Node::~Node()
 {
 	SAFE_DELETE(_actionProxy);
 	SAFE_DELETE(_touchProxy);
+	SAFE_DELETE(_notify);
 	this->clearAllChildren();
 }
 
 bool Node::init()
 {
+	// 添加属性改变监听
+	_notify->addListen(ENP_SPACE, [&](){
+		Tool::convertToOGLPoisition(_position, _obPosition);
+		Tool::calRect(sys::Vector::Zero, _volume, _anchor, _rectVertex);
+		calRealSpaceInfo(); 
+	});
+
+	_notify->addListen(ENP_NODE, [&](){ this->sortChildren(); });
+
 	return true;
 }
 
@@ -59,7 +71,7 @@ void Node::addChild( Node* node )
 
 	_children.addObject(node);
 
-	setDirty(true);
+	onChildrenChange();
 }
 
 void Node::removeChild( Node* node )
@@ -70,7 +82,7 @@ void Node::removeChild( Node* node )
 
 	_children.removeObject(node);
 
-	setDirty(true);
+	onChildrenChange();
 }
 
 void Node::clearAllChildren()
@@ -86,6 +98,7 @@ void Node::clearAllChildren()
 	}
 
 	_children.clear();
+	onChildrenChange();
 }
 
 Node* Node::getChildByID( long id )
@@ -143,6 +156,16 @@ Node* Node::getChildByName(const char* name)
 	return nullptr;
 }
 
+Node* Node::getFirstChild()
+{
+	if (_children.count() == 0)
+	{
+		return nullptr;
+	}
+
+	return static_cast<Node*>(*_children.begin());
+}
+
 void Node::setUserData( void* data )
 {
 	_userData = data;
@@ -179,29 +202,6 @@ bool Node::isVisible()
 	return _bVisibled;
 }
 
-// void Node::calculate()
-// {
-// 	if (this->isVisible() == false)
-// 	{
-// 		return;
-// 	}
-// 
-// 	if (isDirty())
-// 	{
-// 		this->initSelf();
-// 
-// 		setDirty(false);
-// 	}
-// 
-// 	std::vector<Object*>::iterator iter = _children.begin();
-// 	while (iter != _children.end())
-// 	{
-// 		Node* node = dynamic_cast<Node*>(*iter);
-// 		node->calculate();
-// 		iter++;
-// 	}
-// }
-
 void Node::visit()
 {
 	if (this->isVisible() == false)
@@ -218,7 +218,6 @@ void Node::visit()
 	}
 
 	// 图形命令
-	//glPushMatrix();
 	G_DRAWCOMMANDER->addCommand(DCMatrix::create(true));
 
 	this->updateSelf();
@@ -244,7 +243,6 @@ void Node::visit()
 		}
 	}
 
-	//glPopMatrix();
 	G_DRAWCOMMANDER->addCommand(DCMatrix::create(false));
 }
 
@@ -293,17 +291,6 @@ void Node::draw()
 
 void Node::updateTranform()
 {
-// 	if (!this->isRelativeWithParent())
-// 	{
-// 		glLoadIdentity();
-// 	}
-// 
-// 	glTranslatef(_obPosition.x, _obPosition.y, _obPosition.z);
-// 	glRotatef(_rotation.x, 1, 0, 0);
-// 	glRotatef(_rotation.y, 0, 1, 0);
-// 	glRotatef(_rotation.z, 0, 0, 1);
-// 	glScalef(_scale.x, _scale.y, _scale.z);
-
 	G_DRAWCOMMANDER->addCommand(DCSpace::create(_obPosition, _scale, _rotation, _bRelative));
 }
 
@@ -315,13 +302,7 @@ void Node::updateSelf()
 
 void Node::initSelf()
 {
-	Tool::convertToOGLPoisition(_position, _obPosition);
-
-	Tool::calRect(sys::Vector::Zero, _volume, _anchor, _rectVertex);
-
-	calRealSpaceInfo();
-
-	sortChildren();
+	_notify->notify();
 }
 
 void Node::sortChildren()
@@ -396,9 +377,17 @@ void Node::calRealSpaceInfo()
 void Node::onSpaceChange()
 {
 	setDirty(true);
+	_notify->addMark(ENP_SPACE);
 }
 
 void Node::onBodyChange()
 {
 	setDirty(true);
+	_notify->addMark(ENP_SPACE);
+}
+
+void Node::onChildrenChange()
+{
+	setDirty(true);
+	_notify->addMark(ENP_NODE);
 }

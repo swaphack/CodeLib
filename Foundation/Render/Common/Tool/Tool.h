@@ -14,6 +14,10 @@ namespace render
 		// 获取opengl视窗大小
 		static const sys::Volume& getGLViewSize();
 
+		// 获取当前维度模式，2d还是3d
+		static Dimensions getDimensions();
+		static void setDimensions(Dimensions d);
+
 		// 角度转弧度
 		static sys::Vector convertToRadian(const sys::Vector& src);
 		// 弧度转角度
@@ -64,5 +68,7 @@ namespace render
 	private:
 		// 视窗大小
 		static sys::Volume GL_VIEW_SIZE;
+		// 维度模式
+		static Dimensions E_DIMENSIONS;
 	};
 }

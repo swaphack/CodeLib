@@ -1,7 +1,7 @@
 #pragma once
 
 #include "system.h"
-
+#include "Notify.h"
 #include "../GL/import.h"
 #include "../Tool/import.h"
 #include "../Action/import.h"
@@ -11,6 +11,11 @@ namespace render
 {
 	//struct PSR;
 	class TouchProxy;
+
+	template<typename T>
+	T* createNode();
+	// 创建节点
+	#define CREATE_NODE(NODE_TYPE) createNode<NODE_TYPE>()
 
 	// 绘制节点
 	class Node : 
@@ -24,6 +29,7 @@ namespace render
 		Node();
 		virtual ~Node();
 	public:
+		// 务必调用，包含属性修改时通知
 		virtual bool init();
 		// 设置父节点
 		void setParent(Node* node);
@@ -49,6 +55,8 @@ namespace render
 
 		// 根据名称获取字节点
 		Node* getChildByName(const char* name); 
+		// 获取第一个子节点
+		Node* getFirstChild();
 
 		// 设置数据
 		void setUserData(void* data);
@@ -99,6 +107,8 @@ namespace render
 		virtual void onSpaceChange();
 		// 物体属性发生改变
 		virtual void onBodyChange();
+		// 子节点发生改变
+		virtual void onChildrenChange();
 	protected:
 		// opengl 位置
 		sys::Vector _obPosition;
@@ -128,5 +138,23 @@ namespace render
 		RectangeVertex _rectVertex;
 		// 空间坐标
 		RectangeVertex _realSpaceVertex;
+		// 通知
+		Notify* _notify;
 	};
+
+	template<typename T>
+	T* render::createNode()
+	{
+		T* temp = new T();
+		if (temp->init() == false)
+		{
+			delete temp;
+			return nullptr;
+		}
+
+		AUTO_RELEASE_OBJECT(temp);
+
+		return temp;
+	}
+
 }

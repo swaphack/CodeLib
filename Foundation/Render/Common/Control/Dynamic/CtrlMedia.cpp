@@ -13,12 +13,45 @@ CtrlMedia::~CtrlMedia()
 	SAFE_DELETE(_media);
 }
 
+bool CtrlMedia::init()
+{
+	CtrlAnimation::init();
+
+	_notify->addListen(ENP_ANIMATION_FRAME, [&](){
+		if (_media)
+		{
+			_media->autoNextFrame();
+		}
+
+		Texture2D* texture = getNextTexture();
+
+		if (texture == nullptr) return;
+
+		AUTO_RELEASE_OBJECT(texture);
+
+		if (_ctrlFrame)
+		{
+			_ctrlFrame->setTextureWithRect(texture);
+		}
+	});
+
+	_notify->addListen(ENP_SPACE, [&](){
+		if (_ctrlFrame)
+		{
+			_ctrlFrame->setVolume(this->getWidth(), this->getHeight(), 0);
+			_ctrlFrame->setAnchorPoint(this->getAnchorPoint());
+		}
+	});
+
+	return true;
+}
+
 void CtrlMedia::draw()
 {
 	CtrlAnimation::draw();
 }
 
-void CtrlMedia::setMediaPath(const char* path)
+void CtrlMedia::setMediaPath(const char* path, bool defaultSize)
 {
 	_mediaDefine.filepath = path;
 
@@ -26,35 +59,19 @@ void CtrlMedia::setMediaPath(const char* path)
 	this->stop();
 
 	_media = Loader::load<FFmpeg>(_mediaDefine);
-
-	this->setVolume(_media->getWidth(), _media->getHeight(), 0);
-
 	this->setFrameRate(1.0f / _media->getFrameRate());
 
-	_ctrlFrame->setVolume(this->getWidth(), this->getHeight(), 0);
+	// ÏÔÊ¾´óÐ¡
+	if (defaultSize)
+	{
+		this->setVolume(static_cast<float>(_media->getWidth()), static_cast<float>(_media->getHeight()), 0);
+		_ctrlFrame->setVolume(this->getWidth(), this->getHeight(), 0);
+	}
 }	
 
 void CtrlMedia::initSelf()
 {
 	CtrlAnimation::initSelf();
-
-	if (_media)
-	{
-		_media->autoNextFrame();
-	}
-
-	Texture2D* texture = getNextTexture();
-
-	if (texture == nullptr) return;
-
-	AUTO_RELEASE_OBJECT(texture);
-
-	if (_ctrlFrame)
-	{
-		_ctrlFrame->setTexture(texture);
-		_ctrlFrame->setTexRect(sys::Rect(0, 0, this->getWidth(), this->getHeight()));
-		_ctrlFrame->setVolume(this->getWidth(), this->getHeight(), 0);
-	}
 }
 
 Texture2D* CtrlMedia::getNextTexture()
@@ -72,6 +89,12 @@ Texture2D* CtrlMedia::getNextTexture()
 
 	Texture2D* texture2D = new Texture2D();
 	texture2D->load(image);
+
+	if (!texture2D->isEnable())
+	{
+		delete texture2D;
+		return nullptr;
+	}
 
 	return texture2D;
 }

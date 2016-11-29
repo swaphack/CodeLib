@@ -74,7 +74,7 @@ Material* CtrlModel::getMatrial()
 
 void CtrlModel::initSelf()
 {
-	Node::initSelf();
+	ColorNode::initSelf();
 }
 
 void CtrlModel::setTexFrame(const TexFrame* frame)

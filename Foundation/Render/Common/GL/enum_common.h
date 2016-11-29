@@ -3,7 +3,14 @@
 // 枚举
 namespace render
 {
-	
+	// 维度模式
+	enum Dimensions
+	{
+		ED_NONE,
+		ED_2D,
+		ED_3D
+	};
+
 	// 动作状态
 	enum ActionStatus
 	{

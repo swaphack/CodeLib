@@ -111,6 +111,13 @@ void CtrlText::setColor(const sys::Color4B& color)
 
 void CtrlText::initSelf()
 {
+	onTextChange();
+
+	CtrlFrame::initSelf();
+}
+
+void CtrlText::onTextChange()
+{
 	Texture2D* texture = G_TEXTURE_CACHE->getTexture2D(_textDefine);
 	if (texture == nullptr)
 	{
@@ -119,12 +126,11 @@ void CtrlText::initSelf()
 
 	if (_textDefine.width == 0 && _textDefine.height == 0)
 	{
-		this->setWidth(texture->getWidth());
-		this->setHeight(texture->getHeight());
+		this->setWidth(static_cast<float>(texture->getWidth()));
+		this->setHeight(static_cast<float>(texture->getHeight()));
 	}
 
 	this->setTextureWithRect(texture);
-	CtrlFrame::initSelf();
 }
 
 

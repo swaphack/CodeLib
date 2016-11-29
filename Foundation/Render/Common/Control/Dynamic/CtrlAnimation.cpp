@@ -9,8 +9,7 @@ CtrlAnimation::CtrlAnimation()
 , _frame(0)
 , _duration(0)
 {
-	_ctrlFrame = new CtrlFrame();
-	AUTO_RELEASE_OBJECT(_ctrlFrame);
+	_ctrlFrame = CREATE_NODE(CtrlFrame);
 	this->addChild(_ctrlFrame);
 }
 
@@ -46,14 +45,14 @@ float CtrlAnimation::getFrameRate()
 
 void CtrlAnimation::setFrame(int frame)
 {
-	_frame = frame;
+	_frame = static_cast<float>(frame);
 	_duration = 0;
-	setDirty(true);
+	onFrameChange();
 }
 
 int CtrlAnimation::getFrame()
 {
-	return _frame;
+	return static_cast<int>(_frame);
 }
 
 CtrlFrame* CtrlAnimation::getMovie()
@@ -68,6 +67,13 @@ void CtrlAnimation::updateSelf(float interval)
 	{
 		_duration -= getFrameRate();
 		_frame+=1;
-		setDirty(true);
+		onFrameChange();
 	}
+}
+
+void CtrlAnimation::onFrameChange()
+{
+	setDirty(true);
+
+	_notify->addMark(ENP_ANIMATION_FRAME);
 }

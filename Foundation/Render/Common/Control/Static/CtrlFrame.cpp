@@ -15,9 +15,38 @@ CtrlFrame::~CtrlFrame()
 	SAFE_DELETE(_texFrame);
 }
 
+bool CtrlFrame::init()
+{
+	ColorNode::init();
+
+	_notify->addListen(ENP_TEXTURE_FRAME, [&](){
+		const Texture* texture = _texFrame->getTexture();
+		if (texture == nullptr)
+		{
+			return;
+		}
+
+		sys::Size size = sys::Size(static_cast<float>(texture->getWidth()), static_cast<float>(texture->getHeight()));
+
+		if (isCounter())TextureTool::setTexture2DCounterCoords(&_texRect, size, _texFrame->getRect());
+		else TextureTool::setTexture2DCoords(&_texRect, size, _texFrame->getRect());
+		TextureTool::setTexture2DVertexts(&_texRect, sys::Vector::Zero, _volume, _anchor);
+
+		TextureTool::setTexture2DFlip(&_texRect, _bFlipX, _bFlipY);
+	});
+
+
+	return true;
+}
+
 void CtrlFrame::draw()
 {
 	ColorNode::draw();
+
+	if (_texFrame->getTexture() == nullptr)
+	{
+		return;
+	}
 
 	int textID = _texFrame->getTexture()->getTextureID();
 
@@ -32,19 +61,19 @@ void CtrlFrame::setTexture(const Texture* texture)
 	}
 
 	_texFrame->setTexture(texture);
-	setDirty(true);
+	onTextureChange();
 }
 
 void CtrlFrame::setTextureWithRect(const Texture* texture)
 {
 	_texFrame->setTextureWithRect(texture);
-	setDirty(true);
+	onTextureChange();
 }
 
 void CtrlFrame::setTexRect(const sys::Rect& rect)
 {
 	_texFrame->setRect(rect);
-	setDirty(true);
+	onTextureChange();
 } 
 
 void CtrlFrame::setTexFrame(const TexFrame* texFrame)
@@ -55,7 +84,7 @@ void CtrlFrame::setTexFrame(const TexFrame* texFrame)
 	}
 
 	*_texFrame = *texFrame;
-	setDirty(true);
+	onTextureChange();
 }
 
 const TexFrame* CtrlFrame::getTexFrame()
@@ -66,7 +95,7 @@ const TexFrame* CtrlFrame::getTexFrame()
 void CtrlFrame::setFlipX(bool status)
 {
 	_bFlipX = status;
-	setDirty(true);
+	onTextureChange();
 }
 
 bool CtrlFrame::isFlipX()
@@ -77,7 +106,7 @@ bool CtrlFrame::isFlipX()
 void CtrlFrame::setFlipY(bool status)
 {
 	_bFlipY = status;
-	setDirty(true);
+	onTextureChange();
 }
 
 bool CtrlFrame::isFlipY()
@@ -97,19 +126,12 @@ void CtrlFrame::setCounter(bool status)
 
 void CtrlFrame::initSelf()
 {
-	Node::initSelf();
+	ColorNode::initSelf();
+}
 
-	const Texture* texture = _texFrame->getTexture();
-	if (texture == nullptr)
-	{
-		return;
-	}
-
-	sys::Size size = sys::Size(texture->getWidth(), texture->getHeight());
-
-	if (isCounter())TextureTool::setTexture2DCounterCoords(&_texRect, size, _texFrame->getRect());
-	else TextureTool::setTexture2DCoords(&_texRect, size, _texFrame->getRect());
-	TextureTool::setTexture2DVertexts(&_texRect, sys::Vector::Zero, _volume, _anchor);
-
-	TextureTool::setTexture2DFlip(&_texRect, _bFlipX, _bFlipY);
+void CtrlFrame::onTextureChange()
+{
+	setDirty(true);
+	_notify->addMark(ENP_SPACE);
+	_notify->addMark(ENP_TEXTURE_FRAME);
 }

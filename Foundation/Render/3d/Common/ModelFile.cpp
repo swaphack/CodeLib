@@ -130,9 +130,8 @@ CtrlModel* ModelFile::loadModel(T_ModelData* pData)
 	AUTO_RELEASE_OBJECT(frame);
 	frame->setTextureWithRect(texture2D);
 
-	CtrlModel* pModel = new CtrlModel();
+	CtrlModel* pModel = CREATE_NODE(CtrlModel);
 	pModel->setTexFrame(frame);
-
 	pModel->setVertexes(pData->VertexCount, pData->Vertexes, pData->Normals, pData->Colors, pData->TexCoords);
 	pModel->setIndices(pData->IndexCount, pData->Indices);
 
@@ -148,7 +147,8 @@ float* ModelFile::getFloatAry(const char* text, int count)
 
 	float* data = (float*)malloc(count * sizeof(float));
 	memset(data, 0, count * sizeof(float));
-	for (int i = 0; i < strAry.size(); i++)
+	int len = strAry.size();
+	for (int i = 0; i < len; i++)
 	{
 		if (i < count)
 		{
@@ -168,7 +168,8 @@ ushort* ModelFile::getUShortAry(const char* text, int count)
 
 	ushort* data = (ushort*)malloc(count * sizeof(ushort));
 	memset(data, 0, count * sizeof(ushort));
-	for (int i = 0; i < strAry.size(); i++)
+	int len = strAry.size();
+	for (int i = 0; i < len; i++)
 	{
 		if (i < count)
 		{

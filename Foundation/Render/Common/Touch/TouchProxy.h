@@ -7,7 +7,7 @@
 
 namespace render
 {
-	class TouchProxy
+	class TouchProxy : public TouchProtocol
 	{
 	public:
 		TouchProxy(Node* target);
@@ -22,9 +22,9 @@ namespace render
 		bool isTouchEnabled();
 
 		// 触摸处理
-		bool onTouchBegan(float x, float y);
-		void onTouchMove(float x, float y);
-		void onTouchEnd(float x, float y);
+		virtual bool onTouchBegan(float x, float y);
+		virtual void onTouchMoved(float x, float y);
+		virtual void onTouchEnded(float x, float y);
 
 		// 添加触摸事件
 		void addTouchDelegate(TouchType type, sys::Object* object, TOUCH_DELEGATE_HANDLER handler);

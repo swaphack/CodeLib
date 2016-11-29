@@ -11,9 +11,11 @@ namespace render
 		CtrlMedia();
 		virtual ~CtrlMedia();
 	public:
+		virtual bool init();
+
 		virtual void draw();
 		// 设置媒体文件
-		virtual void setMediaPath(const char* path);
+		void setMediaPath(const char* path, bool defaultSize = true);
 	protected:
 		// 重新计算参数
 		virtual void initSelf();

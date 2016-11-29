@@ -26,6 +26,27 @@ Cube::~Cube()
 	}
 }
 
+bool Cube::init()
+{
+	CtrlModel::init();
+
+	_notify->addListen(ENP_CUBE_FRAME, [&](){
+		for (int i = 0; i < 6; i++)
+		{
+			TexFrame* frame = _faceFrames[i];
+			if (frame && frame->getTexture())
+			{
+				sys::Size size = sys::Size(frame->getTexture()->getWidth(), frame->getTexture()->getHeight());
+				TextureTool::setTexture2DCoords(getTextureRect(static_cast<ModelFace>(i)), size, frame->getRect());
+			}
+		}
+
+		TextureTool::setTexture3DVertexts(&_texCube, _position, _volume, _anchor);
+	});
+
+	return true;
+}
+
 void Cube::draw()
 {
 	CtrlModel::draw();
@@ -64,7 +85,7 @@ void Cube::setFaceFrame(CubeFace face, TexFrame* frame)
 
 	_faceFrames[face] = frame;
 
-	setDirty(true);
+	onFaceFrameChange();
 }
 
 void Cube::setTexFrame(TexFrame* frame)
@@ -83,18 +104,6 @@ void Cube::setTexFrame(TexFrame* frame)
 void Cube::initSelf()
 {
 	CtrlModel::initSelf();
-
-	for (int i = 0; i < 6; i++)
-	{
-		TexFrame* frame = _faceFrames[i];
-		if (frame && frame->getTexture())
-		{
-			sys::Size size = sys::Size(frame->getTexture()->getWidth(), frame->getTexture()->getHeight());
-			TextureTool::setTexture2DCoords(getTextureRect(static_cast<ModelFace>(i)), size, frame->getRect());
-		}
-	}
-
-	TextureTool::setTexture3DVertexts(&_texCube, _position, _volume, _anchor);
 }
 
 TextureRect* Cube::getTextureRect(ModelFace face)
@@ -124,4 +133,9 @@ TextureRect* Cube::getTextureRect(ModelFace face)
 	}
 
 	return nullptr;
+}
+
+void Cube::onFaceFrameChange()
+{
+	_notify->addMark(ENP_CUBE_FRAME);
 }

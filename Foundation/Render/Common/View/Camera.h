@@ -50,6 +50,4 @@ namespace render
 		// ªÊ÷∆ ”Õº
 		virtual void updateCamera();
 	};
-
-
 }

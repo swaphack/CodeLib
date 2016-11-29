@@ -183,6 +183,21 @@
     <ClCompile Include="3d\Environment\Fog.cpp">
       <Filter>3d\Environment</Filter>
     </ClCompile>
+    <ClCompile Include="3d\Environment\ClipPlane.cpp">
+      <Filter>3d\Environment</Filter>
+    </ClCompile>
+    <ClCompile Include="3d\Environment\Stencil.cpp">
+      <Filter>3d\Environment</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Control\Static\CtrlScissor.cpp">
+      <Filter>Common\Control\Static</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Control\Static\CtrlScrollView.cpp">
+      <Filter>Common\Control\Static</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Node\Notify.cpp">
+      <Filter>Common\Node</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Common\GL\import.h">
@@ -544,6 +559,21 @@
     </ClInclude>
     <ClInclude Include="3d\Environment\Fog.h">
       <Filter>3d\Environment</Filter>
+    </ClInclude>
+    <ClInclude Include="3d\Environment\ClipPlane.h">
+      <Filter>3d\Environment</Filter>
+    </ClInclude>
+    <ClInclude Include="3d\Environment\Stencil.h">
+      <Filter>3d\Environment</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Control\Static\CtrlScissor.h">
+      <Filter>Common\Control\Static</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Control\Static\CtrlScrollView.h">
+      <Filter>Common\Control\Static</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Node\Notify.h">
+      <Filter>Common\Node</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -11,6 +11,8 @@ namespace render
 		CtrlSequenceFrame();
 		virtual ~CtrlSequenceFrame();
 	public:
+		virtual bool init();
+
 		virtual void draw();
 		// 设置序列帧图片地址和图片张数
 		void setFrameImagePath(const char* urlFormat, int count);

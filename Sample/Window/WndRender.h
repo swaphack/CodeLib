@@ -29,6 +29,10 @@ public:
 	void testSequenceFrame();
 
 	void testModel();
+	void testClipPlane();
+	void testScissor();
+
+	void testScrollView();
 protected:
 	void onTouchBegin(sys::Object* object, float x, float y);
 	void onTouchMove(sys::Object* object, float x, float y);

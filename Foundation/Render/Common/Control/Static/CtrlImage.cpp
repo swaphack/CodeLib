@@ -29,8 +29,8 @@ void CtrlImage::setImagePath(const char* path, ImageFormat format /*= EIF_PNG*/)
 		return;
 	}
 
-	_texFrame->setTextureWithRect(texture);
-	this->setVolume(texture->getWidth(), texture->getHeight(), texture->getDeep());
+	this->setTextureWithRect(texture);
+	this->setVolume(static_cast<float>(texture->getWidth()), static_cast<float>(texture->getHeight()), static_cast<float>(texture->getDeep()));
 }
 
 const char* CtrlImage::getImagePath()

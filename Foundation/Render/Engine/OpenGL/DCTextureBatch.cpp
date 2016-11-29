@@ -28,16 +28,10 @@ DCTextureBatch::~DCTextureBatch()
 
 void DCTextureBatch::draw()
 {
-	SHOW_OPENGL_ERROR_MESSAGE();
 	glEnable(GL_DEPTH_TEST);
-	SHOW_OPENGL_ERROR_MESSAGE();
 	glEnable(GL_BLEND);
-	SHOW_OPENGL_ERROR_MESSAGE();
 	glBlendFunc(Blend.src, Blend.dest);
-	SHOW_OPENGL_ERROR_MESSAGE();
 	glColor4f(Color.red, Color.green, Color.blue, Color.alpha);
-
-	SHOW_OPENGL_ERROR_MESSAGE();
 
 	glEnable(GL_TEXTURE_2D);
 	glBindTexture(GL_TEXTURE_2D, TextureID);

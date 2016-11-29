@@ -36,7 +36,7 @@ void DeviceProxy::onMouseButtonHandler(MouseKey key, ButtonStatus type, float x,
 	}
 	else if (type == EBS_BUTTON_UP)
 	{
-		_touchManager->onTouchEnd(x, size.height - y);
+		_touchManager->onTouchEnded(x, size.height - y);
 	}
 }
 
@@ -48,7 +48,7 @@ void DeviceProxy::onMouseMoveHandler(float x, float y)
 	}
 
 	sys::Volume size = Tool::getGLViewSize();
-	_touchManager->onTouchMove(x, size.height - y);
+	_touchManager->onTouchMoved(x, size.height - y);
 }
 
 void DeviceProxy::onKeyBoardButtonHandler(sys::BoardKey key, sys::ButtonStatus type)

@@ -377,6 +377,13 @@ void BodyProtocol::setVolume(float w, float h, float d)
 	onBodyChange();
 }
 
+void BodyProtocol::setVolume(float w, float h)
+{
+	_volume.width = w;
+	_volume.height = h;
+	onBodyChange();
+}
+
 void BodyProtocol::setVolume(const sys::Volume& volume)
 {
 	_volume = volume;

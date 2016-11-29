@@ -5,13 +5,6 @@
 
 namespace render
 {
-	enum Dimensions
-	{
-		ED_NONE,
-		ED_2D,
-		ED_3D
-	};
-
 	class Canvas
 	{
 	public:

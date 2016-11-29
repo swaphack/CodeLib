@@ -22,6 +22,8 @@ namespace render
 		Cube();
 		virtual ~Cube();
 	public:
+		virtual bool init();
+
 		virtual void draw();
 
 		// 设置单面的纹理帧
@@ -32,6 +34,8 @@ namespace render
 		virtual void initSelf();
 		// 获取面的纹理
 		TextureRect* getTextureRect(ModelFace face);
+
+		void onFaceFrameChange();
 	private:
 		// 六个面的纹理
 		TexFrame* _faceFrames[6];

@@ -11,6 +11,8 @@ namespace render
 		CtrlFrame();
 		virtual ~CtrlFrame();
 	public:
+		virtual bool init();
+
 		virtual void draw();
 
 		// …Ë÷√Õº∆¨Œ∆¿Ì
@@ -37,6 +39,7 @@ namespace render
 		void setCounter(bool status);
 	protected:
 		virtual void initSelf();
+		void onTextureChange();
 	protected:
 		// Œ∆¿Ì÷°
 		TexFrame* _texFrame;

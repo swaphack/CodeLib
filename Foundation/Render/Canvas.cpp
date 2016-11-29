@@ -48,6 +48,7 @@ void Canvas::setDimensions(Dimensions d)
 		return;
 	}
 	_dimensions = d;
+	Tool::setDimensions(d);
 
 	if (_dimensions == ED_2D)
 	{

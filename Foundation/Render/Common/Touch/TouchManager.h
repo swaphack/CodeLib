@@ -10,7 +10,7 @@ namespace render
 	class Node;
 	class TouchProxy;
 	// ´¥Ãþ¹ÜÀí
-	class TouchManager
+	class TouchManager : public TouchProtocol
 	{
 	public:
 		TouchManager();
@@ -24,8 +24,8 @@ namespace render
 		void removeAllTouches();
 
 		bool onTouchBegan(float x, float y);
-		void onTouchMove(float x, float y);
-		void onTouchEnd(float x, float y);
+		void onTouchMoved(float x, float y);
+		void onTouchEnded(float x, float y);
 	private:
 		std::vector<TouchProxy*> _touchProtocols;
 		TouchProxy* _lastTouchProtocol;

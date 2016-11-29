@@ -82,7 +82,7 @@ bool TouchManager::onTouchBegan(float x, float y)
 	return false;
 }
 
-void TouchManager::onTouchMove(float x, float y)
+void TouchManager::onTouchMoved(float x, float y)
 {
 	if (_lastTouchProtocol == nullptr)
 	{
@@ -91,11 +91,11 @@ void TouchManager::onTouchMove(float x, float y)
 
 	if (_lastTouchProtocol->isTouchEnabled())
 	{
-		_lastTouchProtocol->onTouchMove(x, y);
+		_lastTouchProtocol->onTouchMoved(x, y);
 	}
 }
 
-void TouchManager::onTouchEnd(float x, float y)
+void TouchManager::onTouchEnded(float x, float y)
 {
 	if (_lastTouchProtocol == nullptr)
 	{
@@ -104,7 +104,7 @@ void TouchManager::onTouchEnd(float x, float y)
 
 	if (_lastTouchProtocol->isTouchEnabled())
 	{
-		_lastTouchProtocol->onTouchEnd(x, y);
+		_lastTouchProtocol->onTouchEnded(x, y);
 	}
 
 	_lastTouchProtocol = nullptr;

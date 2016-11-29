@@ -54,7 +54,7 @@ bool TouchProxy::onTouchBegan(float x, float y)
 	return true;
 }
 
-void TouchProxy::onTouchMove(float x, float y)
+void TouchProxy::onTouchMoved(float x, float y)
 {
 	if (_target == nullptr)
 	{
@@ -64,7 +64,7 @@ void TouchProxy::onTouchMove(float x, float y)
 	dispatchTouchEvent(ETT_ON, x, y);
 }
 
-void TouchProxy::onTouchEnd(float x, float y)
+void TouchProxy::onTouchEnded(float x, float y)
 {
 	if (_target == nullptr)
 	{

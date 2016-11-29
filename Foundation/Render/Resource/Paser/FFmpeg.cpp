@@ -83,6 +83,11 @@ FFmpeg::~FFmpeg()
 void FFmpeg::load(const MediaDefine& mediaDefine)
 {
 	this->loadFFM(mediaDefine);
+
+	if (_formatContext == nullptr)
+	{
+		return;
+	}
 	
 	AVStream* stream = _formatContext->streams[_videoStream];
 	/*AVCodecContext* pCodecContext = stream->codec;*/
@@ -178,7 +183,8 @@ void FFmpeg::setVideoFrame(mf_s frame)
 
 void FFmpeg::loadFFM(const MediaDefine& mediaDefine)
 {
-	initFFmpeg(mediaDefine.filepath.c_str());
+	std::string fullpath = G_FILEPATH->getFilePath(mediaDefine.filepath.c_str());
+	initFFmpeg(fullpath.c_str());
 
 	getStreamIndex(AVMEDIA_TYPE_VIDEO, _videoStream);
 

@@ -41,6 +41,15 @@ namespace render
 		{
 			_deep = val;
 		}
+
+		bool isEnable()
+		{
+			if (_textureID == 0)
+				return false;
+			if (_width == 0 || _height == 0) 
+				return false;
+			return true;
+		}
 	protected:
 		uint _textureID;
 		uint _width;

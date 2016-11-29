@@ -7,6 +7,8 @@ using namespace render;
 
 sys::Volume Tool::GL_VIEW_SIZE = sys::Volume();
 
+Dimensions Tool::E_DIMENSIONS = ED_NONE;
+
 void Tool::setGLViewSize(float width, float height)
 {
 	GL_VIEW_SIZE.width = width;
@@ -18,6 +20,16 @@ void Tool::setGLViewSize(float width, float height)
 const sys::Volume& Tool::getGLViewSize()
 {
 	return GL_VIEW_SIZE;
+}
+
+Dimensions Tool::getDimensions()
+{
+	return E_DIMENSIONS;
+}
+
+void Tool::setDimensions(Dimensions d)
+{
+	E_DIMENSIONS = d;
 }
 
 sys::Vector Tool::convertToRadian(const sys::Vector& src)
@@ -182,3 +194,5 @@ void Tool::calRealRect(const sys::Vector& position, const sys::Volume& volume, c
 	rectVertex.leftUp.y = y;
 	rectVertex.leftUp.z = position.z;
 }
+
+
