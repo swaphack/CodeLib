@@ -16,6 +16,27 @@
     <Filter Include="Compile">
       <UniqueIdentifier>{22976c53-358c-440f-9e56-dcc9907ee80a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Compile\Common">
+      <UniqueIdentifier>{863312aa-3f87-4adc-9bf0-d82f632c79cb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Compile\Parse">
+      <UniqueIdentifier>{4e01ee02-fc24-42ab-a924-24acf2b82e21}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Compile\Scan">
+      <UniqueIdentifier>{019b1b06-78ec-4bd8-a955-2f300a15e212}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Compile\CodeGenerate">
+      <UniqueIdentifier>{501bd8e9-87ee-4ec1-a5d2-a0c6e9a3a911}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Compile\SemanticAnalyze">
+      <UniqueIdentifier>{5e881062-7f6d-423b-8d28-effe88ff42c2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Compile\SourceCodeOptimize">
+      <UniqueIdentifier>{7de185a4-bd7c-4019-9ea3-2ff658f5a0fb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Compile\TargetCodeOptimize">
+      <UniqueIdentifier>{9a88978e-1313-49f3-a0ec-0405d5e1a196}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Script.h" />
@@ -73,32 +94,41 @@
     <ClInclude Include="Document\import.h">
       <Filter>Document</Filter>
     </ClInclude>
-    <ClInclude Include="Compile\TargetCodeOptimizer.h">
-      <Filter>Compile</Filter>
-    </ClInclude>
-    <ClInclude Include="Compile\CodeGenerator.h">
-      <Filter>Compile</Filter>
-    </ClInclude>
-    <ClInclude Include="Compile\Parser.h">
-      <Filter>Compile</Filter>
-    </ClInclude>
-    <ClInclude Include="Compile\Scanner.h">
-      <Filter>Compile</Filter>
-    </ClInclude>
-    <ClInclude Include="Compile\SemanticAnalyzer.h">
-      <Filter>Compile</Filter>
-    </ClInclude>
-    <ClInclude Include="Compile\SourceCodeOptimizer.h">
-      <Filter>Compile</Filter>
-    </ClInclude>
     <ClInclude Include="Compile\import.h">
       <Filter>Compile</Filter>
     </ClInclude>
-    <ClInclude Include="Compile\Error.h">
+    <ClInclude Include="Compile\KeyWordSet.h">
+      <Filter>Compile\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Compile\SingalSet.h">
+      <Filter>Compile\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Compile\Scanner.h">
+      <Filter>Compile\Scan</Filter>
+    </ClInclude>
+    <ClInclude Include="Compile\Parser.h">
+      <Filter>Compile\Parse</Filter>
+    </ClInclude>
+    <ClInclude Include="Compile\AbstractSyntaxCode.h">
+      <Filter>Compile\Parse</Filter>
+    </ClInclude>
+    <ClInclude Include="Compile\Compiler.h">
       <Filter>Compile</Filter>
     </ClInclude>
-    <ClInclude Include="Compile\KeyWord.h">
-      <Filter>Compile</Filter>
+    <ClInclude Include="Compile\CodeGenerator.h">
+      <Filter>Compile\CodeGenerate</Filter>
+    </ClInclude>
+    <ClInclude Include="Compile\SemanticAnalyzer.h">
+      <Filter>Compile\SemanticAnalyze</Filter>
+    </ClInclude>
+    <ClInclude Include="Compile\SourceCodeOptimizer.h">
+      <Filter>Compile\SourceCodeOptimize</Filter>
+    </ClInclude>
+    <ClInclude Include="Compile\TargetCodeOptimizer.h">
+      <Filter>Compile\TargetCodeOptimize</Filter>
+    </ClInclude>
+    <ClInclude Include="Compile\Error.h">
+      <Filter>Compile\Common</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -134,13 +164,19 @@
     </ClCompile>
     <ClCompile Include="Script.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Compile\KeyWordSet.cpp">
+      <Filter>Compile\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="Compile\SingalSet.cpp">
+      <Filter>Compile\Common</Filter>
+    </ClCompile>
     <ClCompile Include="Compile\Scanner.cpp">
-      <Filter>Compile</Filter>
+      <Filter>Compile\Scan</Filter>
     </ClCompile>
     <ClCompile Include="Compile\Error.cpp">
-      <Filter>Compile</Filter>
+      <Filter>Compile\Common</Filter>
     </ClCompile>
-    <ClCompile Include="Compile\KeyWord.cpp">
+    <ClCompile Include="Compile\Compiler.cpp">
       <Filter>Compile</Filter>
     </ClCompile>
   </ItemGroup>

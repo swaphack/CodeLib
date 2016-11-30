@@ -9,12 +9,12 @@ using namespace script;
 
 Document::Document()
 {
-	m_pScanner = new Scanner();
+	m_pCompiler = new Scanner();
 }
 
 Document::~Document()
 {
-	delete m_pScanner;
+	delete m_pCompiler;
 }
 
 bool Document::loadFile(const char* filepath)
@@ -54,7 +54,7 @@ bool Document::parse(const char* text, int size)
 		return false;
 	}
 
-	bool bRet = m_pScanner->read(text, size);
+	bool bRet = m_pCompiler->read(text, size);
 	if (bRet == false)
 	{
 		return false;

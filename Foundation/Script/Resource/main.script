@@ -1,7 +1,1 @@
-import function
-
-a = {}
-a.b = 1
-a.c = 2
-
-c = add(a, b)
+ssd 1.121312

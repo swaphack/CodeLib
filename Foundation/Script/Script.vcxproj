@@ -11,10 +11,13 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Compile\AbstractSyntaxCode.h" />
     <ClInclude Include="Compile\CodeGenerator.h" />
+    <ClInclude Include="Compile\Compiler.h" />
     <ClInclude Include="Compile\Error.h" />
     <ClInclude Include="Compile\import.h" />
-    <ClInclude Include="Compile\KeyWord.h" />
+    <ClInclude Include="Compile\SingalSet.h" />
+    <ClInclude Include="Compile\KeyWordSet.h" />
     <ClInclude Include="Compile\Parser.h" />
     <ClInclude Include="Compile\Scanner.h" />
     <ClInclude Include="Compile\SemanticAnalyzer.h" />
@@ -41,8 +44,10 @@
     <ClInclude Include="Script.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Compile\Compiler.cpp" />
     <ClCompile Include="Compile\Error.cpp" />
-    <ClCompile Include="Compile\KeyWord.cpp" />
+    <ClCompile Include="Compile\KeyWordSet.cpp" />
+    <ClCompile Include="Compile\SingalSet.cpp" />
     <ClCompile Include="Compile\Scanner.cpp" />
     <ClCompile Include="Core\Base.cpp" />
     <ClCompile Include="Core\Function.cpp" />

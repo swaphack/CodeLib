@@ -2,7 +2,7 @@
 
 namespace script
 {
-	class Scanner;
+	class Compiler;
 	class Parser;
 
 	// 脚本文档解析
@@ -18,7 +18,7 @@ namespace script
 		bool parse(const char* text, int size);
 	private:
 		// 扫描器
-		Scanner* m_pScanner;
+		Compiler* m_pCompiler;
 		// 语法分析
 		Parser* m_pParser;
 	};
