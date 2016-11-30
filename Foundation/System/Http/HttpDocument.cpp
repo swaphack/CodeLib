@@ -128,6 +128,21 @@ bool HttpDocument::getIntegerHeader(const char* key, int& value)
 	return true;
 }
 
+void HttpDocument::removeHeader(const char* key)
+{
+	if (key == nullptr )
+	{
+		return;
+	}
+
+	if (_headerSection.find(key) == _headerSection.end())
+	{
+		return;
+	}
+
+	_headerSection.erase(key);
+}
+
 void HttpDocument::setHeader(const char* key, const char* value)
 {
 	if (key == nullptr || value == nullptr)

@@ -16,21 +16,33 @@ namespace web
 		virtual ~HttpActivityListener();
 	public:
 		// 添加接受数据处理
-		void addRecvHandler(sys::Object* target, HTTP_RECV_HANDLER handler);
+		void addRecvHandler(sys::Object* target, HTTP_RECV_REQUEST_HANDLER handler);
 		// 移除接受数据处理
-		void removeRecvHandler(sys::Object* target, HTTP_RECV_HANDLER handler);
+		void removeRecvHandler(sys::Object* target, HTTP_RECV_REQUEST_HANDLER handler);
+
+		// 添加接受数据处理
+		void addRecvHandler(sys::Object* target, HTTP_RECV_RESPONE_HANDLER handler);
+		// 移除接受数据处理
+		void removeRecvHandler(sys::Object* target, HTTP_RECV_RESPONE_HANDLER handler);
 
 		virtual bool onDispatch(const char* sessionID, sys::DataQueue& dataQueue, int& packetSize);
 	protected:
 		// 接受请求处理
 		void onRecvHander(sys::HttpRequest* data);
+		// 接受请求处理
+		void onRecvHander(sys::HttpResponse* data);
 		// 从接收的数据中创建http请求，并且删除已完成的数据
 		sys::HttpRequest* createRequest(const char* sessionID, sys::DataQueue& dataQueue, int& packetSize);
-		// 将http反馈转成网络数据
-		sys::NetData* createResponseData(sys::HttpResponse* response);
+		// 从接收的数据中创建http请求，并且删除已完成的数据
+		sys::HttpResponse* createResponse(const char* sessionID, sys::DataQueue& dataQueue, int& packetSize);
 	private:
-		// http接受处理
-		std::vector<HttpRecvHandler> _recvHandlers;
+		// 接受http请求处理
+		std::vector<HttpRecvRequestHandler> _recvRequestHandlers;
+		// 接受http反馈处理
+		std::vector<HttpRecvResponseHandler> _recvResponseHandlers;
+		// http请求解析文档
 		sys::HttpReqDocument* _httpReqDoc;
+		// http反馈解析文档
+		sys::HttpRespDocument* _httpRespDoc;
 	};
 }

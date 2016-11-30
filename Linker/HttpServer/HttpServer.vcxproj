@@ -10,6 +10,19 @@
       <Platform>Win32</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <Xml Include="Resource\Server.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="Server\HttpReceiver.cpp" />
+    <ClCompile Include="Server\HttpServer.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Server\HttpReceiver.h" />
+    <ClInclude Include="Server\HttpServer.h" />
+    <ClInclude Include="Server\import.h" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{6E4751E6-6212-4269-8169-ACE36D074111}</ProjectGuid>
     <RootNamespace>HttpServer</RootNamespace>
@@ -66,16 +79,6 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClInclude Include="Server\HttpServer.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="Server\HttpServer.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <Xml Include="Resource\Server.xml" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

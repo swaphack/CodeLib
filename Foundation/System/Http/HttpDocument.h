@@ -66,6 +66,8 @@ namespace sys
 		// 整形格式报头参数
 		bool getIntegerHeader(const char* key, int& value);
 
+		// 移除报头参数
+		void removeHeader(const char* key);
 		// 设置报头参数
 		void setHeader(const char* key, const char* value);
 		// 时间格式报头参数

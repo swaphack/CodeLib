@@ -48,10 +48,15 @@ int main(int argc, char** argv)
 
 	gateWay->getResourceMgr()->getResource(ERT_LOCAL)->setUrl(config->getValue("resource.websit", "path"));
 
-	
+	// 游戏服务器
 	gateWay->createGameServerListener(
 		config->getValue("server.gameserver", "ip"),
 		atoi(config->getValue("server.gameserver", "port")));
+
+	// 网站服务器
+	gateWay->createHttpServerListener(
+		config->getValue("server.httpserver", "ip"),
+		atoi(config->getValue("server.httpserver", "port")));
 
 	delete config;
 
@@ -66,8 +71,6 @@ int main(int argc, char** argv)
 	}
 
 	delete gateWay;
-
-	_CrtDumpMemoryLeaks();
 
 	return 0;
 };

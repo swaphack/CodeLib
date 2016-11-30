@@ -1,4 +1,4 @@
-#include "Server/HttpServer.h"
+#include "Server/import.h"
 #include "text.h"
 #include "system.h"
 
@@ -33,7 +33,7 @@ int main(int argc, char** argv)
 	delete config;
 
 	// ×¢²á¼àÌý
-	new PacketReceiver();
+	new hs::HttpReceiver();
 
 	while (true)
 	{

@@ -49,7 +49,7 @@ void RenderApplication::update()
 			_canvas->update(interval);
 			_lastClock = nowClock;
 		}
-		// ±ÜÃâË«»º´æ²úÉúÇø¶¶¶¯
+		// ±ÜÃâË«»ºÇø´æ²úÉú¶¶¶¯
 		_canvas->draw();
 	}
 
