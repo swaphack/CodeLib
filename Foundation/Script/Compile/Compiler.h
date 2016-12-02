@@ -16,14 +16,7 @@ namespace script
 		Compiler();
 		~Compiler();
 	public:
-		void read(const char* text, int size);
-	protected:
-		bool doScan();
-		bool doParse();
-		bool doSemanticAnalyze();
-		bool doSourceCodeOptimize();
-		bool doCodeGenerate();
-		bool doTargetCodeOptimize();
+		bool compile(const char* text, int size);
 	private:
 		// …®√Ë≥Ã–Ú
 		Scanner* m_pScanner;

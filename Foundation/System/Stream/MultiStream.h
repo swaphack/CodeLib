@@ -31,7 +31,9 @@ namespace sys
 		virtual ~MultiStream();
 	public:
 		// 初始化流
-		void initStream(ss_t width, ss_t height, ss_t deep = 1);
+		void initSteam(ss_t width, ss_t height, ss_t deep = 1);
+		// 扩展流，如果有旧数据，旧数据也复制到新流中
+		void expendStream(ss_t width, ss_t height, ss_t deep = 1, bool bBottom = false);
 
 		// 从流中读取一组2维数据
 		void readBlock(ss_t x, ss_t y, ss_t width, ss_t height, char* outData, ss_t z = 0);
@@ -39,6 +41,9 @@ namespace sys
 		void writeBlock(ss_t x, ss_t y, ss_t width, ss_t height, const char* inData, ss_t z = 0);
 		// 移动内存流
 		void moveBlock(ss_t srcX, ss_t srcY, ss_t width, ss_t height, ss_t destX, ss_t destY, ss_t z = 0);
+
+		// 清空内存流数据
+		void resetBlock(ss_t x, ss_t y, ss_t width, ss_t height, ss_t z = 0);
 
 		// 从流中读取一组3维数据
 		void readBlock(ss_t x, ss_t y, ss_t z, ss_t width, ss_t height, ss_t deep, char* outData);

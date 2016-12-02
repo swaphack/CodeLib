@@ -14,12 +14,11 @@ struct FT_CHAR_DATA
 {
 	// 字符bit数据
 	char* data;
-	// 宽度
+	// 实际显示面积，宽度
 	int width;
-	// 高度
 	int height;
 
-	// 步进宽度
+	// 实际标准面积-步进,宽度
 	int advX;
 	int advY;
 
@@ -111,7 +110,7 @@ void FT_LABEL::load(const TextDefine& textDefine, LabelStream* stream)
 	}
 	_lowY = gData->deltaY;
 	_fontSize = (int)textDefine.fontSize;
-
+	stream->setLineHeight(gData->advY);
 	if (textDefine.text.empty())
 	{
 		return;
@@ -141,6 +140,8 @@ void FT_LABEL::load(const TextDefine& textDefine, LabelStream* stream)
 		ptr++;
 		offset++;
 	}
+
+	stream->endStream();
 
 	delete (dest);
 	this->disposeFT();
@@ -210,9 +211,9 @@ FT_CHAR_DATA* FT_LABEL::loadChar(ulong ch, int fontSize)
 	data = &_datas[ch];
 	data->width = width ;
 	data->height = height;
-	data->advX = _face->glyph->metrics.horiAdvance / 64;
-	data->advY = _face->glyph->metrics.vertAdvance / 64;
-	data->deltaX = _face->glyph->metrics.horiBearingX / 64;
+	data->advX = _face->glyph->metrics.horiAdvance / FREETYPE_PIXEL_UNIT;
+	data->advY = _face->glyph->metrics.vertAdvance / FREETYPE_PIXEL_UNIT;
+	data->deltaX = _face->glyph->metrics.horiBearingX / FREETYPE_PIXEL_UNIT;
 	data->deltaY = bitmap_glyph->top - height;
 	data->data = sys::StreamHelper::mallocStream((char*)bitmap.buffer, width * height);
 
@@ -267,6 +268,10 @@ void FT_LABEL::writeStream(ulong ch, LabelStream* stream)
 {
 	if (ch == '\n')
 	{
+		if (stream->isFixWidth())
+		{
+			stream->writeEndLine();
+		}
 		return;
 	}
 	FT_CHAR_DATA* data = getCharData(ch);
@@ -280,7 +285,7 @@ void FT_LABEL::writeStream(ulong ch, LabelStream* stream)
 	}
 
 	// 获取rgba数据
-	uchar* pBuf = (uchar*)sys::StreamHelper::mallocStream(width * 4 * height);
+	uchar* pBuf = (uchar*)sys::StreamHelper::mallocStream(width * RGBA_PIXEL_UNIT * height);
 	if (pBuf == nullptr)
 	{
 		return;
@@ -296,42 +301,42 @@ void FT_LABEL::writeStream(ulong ch, LabelStream* stream)
 			}
 			if (_vl == 0)
 			{
-				pBuf[(4 * i + (height - j - 1) * width * 4)] = (uchar)0;
-				pBuf[(4 * i + (height - j - 1) * width * 4) + 1] = (uchar)0;
-				pBuf[(4 * i + (height - j - 1) * width * 4) + 2] = (uchar)0;
-				pBuf[(4 * i + (height - j - 1) * width * 4) + 3] = (uchar)0;
+				pBuf[(4 * i + (height - j - 1) * width * RGBA_PIXEL_UNIT)] = (uchar)0;
+				pBuf[(4 * i + (height - j - 1) * width * RGBA_PIXEL_UNIT) + 1] = (uchar)0;
+				pBuf[(4 * i + (height - j - 1) * width * RGBA_PIXEL_UNIT) + 2] = (uchar)0;
+				pBuf[(4 * i + (height - j - 1) * width * RGBA_PIXEL_UNIT) + 3] = (uchar)0;
 			}
 			else
 			{
-				pBuf[(4 * i + (height - j - 1) * width * 4)] = (uchar)255;
-				pBuf[(4 * i + (height - j - 1) * width * 4) + 1] = (uchar)255;
-				pBuf[(4 * i + (height - j - 1) * width * 4) + 2] = (uchar)255;
-				pBuf[(4 * i + (height - j - 1) * width * 4) + 3] = (uchar)_vl;
+				pBuf[(4 * i + (height - j - 1) * width * RGBA_PIXEL_UNIT)] = (uchar)255;
+				pBuf[(4 * i + (height - j - 1) * width * RGBA_PIXEL_UNIT) + 1] = (uchar)255;
+				pBuf[(4 * i + (height - j - 1) * width * RGBA_PIXEL_UNIT) + 2] = (uchar)255;
+				pBuf[(4 * i + (height - j - 1) * width * RGBA_PIXEL_UNIT) + 3] = (uchar)_vl;
 			}
 		}
 	}
 
-	int advX = _fontSize;
-	int advY = _fontSize;
-	int deltaX = 0;
 	int deltaY = 0;
 
 	if (data)
 	{
-		advX = data->advX;
-		advY = data->advY;
-		deltaX = data->deltaX;
 		deltaY = data->deltaY - _lowY;
-
 		deltaY = deltaY < 0 ? 0 : deltaY;
 	}
 
-	if (deltaY + height > advY)
+	if (deltaY + height > stream->getLineHeight())
 	{
-		deltaY = advY - height;
+		deltaY = stream->getLineHeight() - height;
 	}
 
-	stream->writeLabelBlock(width, height, deltaX, deltaY, advY, (char*)pBuf);
+	if (stream->isFixWidth())
+	{
+		stream->writeMultiLineBlock(width, height, (char*)pBuf, deltaY);
+	}
+	else
+	{
+		stream->writeOneLineBlock(width, height, (char*)pBuf, deltaY);
+	}
 
 	sys::StreamHelper::freeStream(pBuf);
 }
@@ -341,10 +346,7 @@ LabelStream::LabelStream()
 :_offsetX(0)
 , _offsetY(0)
 , _lineHeight(0)
-, _lowX(0)
-, _lowY(0)
-, _heightX(0)
-, _heightY(0)
+, _fixWidth(0)
 {
 
 }
@@ -360,18 +362,17 @@ void LabelStream::resetOffset()
 	_offsetY = 0;
 }
 
-void LabelStream::writeLabelBlock(int width, int height, int deltaX, int deltaY, int advY, const char* buffer)
+void LabelStream::writeOneLineBlock(int width, int height, const char* buffer, int deltaY)
 {
 	// 实际大小
 	int realWidth = width * RGBA_PIXEL_UNIT;
-	int realHeight = advY;
+	int realHeight = getLineHeight();
 
 	int newW = realWidth + _offsetX > getWidth() ? realWidth + _offsetX : getWidth();
-	int newH = realHeight + _offsetY > getHeigth() ? realHeight + _offsetY : getHeigth();
 
-	if (newW > getWidth() || newH > getHeigth())
+	if (newW > getWidth())
 	{
-		this->initStream(newW, newH);
+		this->expendStream(newW, realHeight);
 	}
 
 	char* faceData = _data;
@@ -382,6 +383,111 @@ void LabelStream::writeLabelBlock(int width, int height, int deltaX, int deltaY,
 
 	_offsetX += realWidth;
 }
+
+void LabelStream::writeMultiLineBlock(int width, int height, const char* buffer, int deltaY)
+{
+	// 实际大小
+	int realWidth = width * RGBA_PIXEL_UNIT;
+	int realHeight = getLineHeight();
+
+	int newW = realWidth + _offsetX > getWidth() ? realWidth + _offsetX : getWidth();
+
+	if (newW <= getFixWidth())
+	{// 可填充
+		if (newW > getWidth())
+		{
+			this->expendStream(newW, getLineHeight());
+		}
+	}
+	else
+	{// 换行
+		this->writeEndLine();
+	}
+
+	char* faceData = _data;
+	for (int i = 0; i < height; i++)
+	{
+		memcpy(faceData + (i + _offsetY + deltaY) * _width + _offsetX, buffer + i * realWidth, realWidth);
+	}
+
+	_offsetX += realWidth;
+}
+
+void LabelStream::writeEndLine()
+{
+	if (isFixWidth() == false)
+	{
+		return;
+	}
+
+	_lineWidthStack.push(_offsetX);
+
+	this->expendStream(getFixWidth(), getHeigth() + getLineHeight(),1,true);
+
+	_offsetX = 0;
+	_offsetY = 0;
+}
+
+void LabelStream::writeSpaceLine()
+{
+	if (isFixWidth() == false)
+	{
+		return;
+	}
+	_lineWidthStack.push(_offsetX);
+	_lineWidthStack.push(0);
+	this->expendStream(getFixWidth(), getHeigth() + 2 * getLineHeight(), 1, true);
+
+	_offsetX = 0;
+	_offsetY = 0;
+}
+
+void LabelStream::endStream()
+{
+	_lineWidthStack.push(_offsetX);
+}
+
+void LabelStream::format(HorizontalAlignment ha)
+{
+	if (_lineWidthStack.empty() || isFixWidth() == false)
+	{
+		return;
+	}
+	int count = _heigth / getLineHeight();
+	int width = 0;
+	int offsetX = 0;
+
+	if (ha == EHA_LEFT)
+	{// 默认左对齐
+		while (!_lineWidthStack.empty())
+		{
+			_lineWidthStack.pop();
+		}
+	}
+	else if (ha == EHA_CENTER)
+	{// 居中对齐
+		for (int i = 0; i < count; i++)
+		{
+			width = _lineWidthStack.top();
+			offsetX = (getFixWidth() - width) * 0.5f;
+			offsetX = 10;
+			moveBlock(0, i * getLineHeight(), width, getLineHeight(), offsetX, i * getLineHeight());
+			_lineWidthStack.pop();
+		}
+	}
+	else if (ha == EHA_RIGHT)
+	{// 右对齐
+		for (int i = 0; i < count; i++)
+		{
+			width = _lineWidthStack.top();
+			offsetX = getFixWidth() - width;
+			moveBlock(0, i * getLineHeight(), width, getLineHeight(), offsetX, i * getLineHeight());
+			_lineWidthStack.pop();
+		}
+	}
+}
+
+
 
 //////////////////////////////////////////////////////////////////////////
 LabelImage::LabelImage()
@@ -399,16 +505,22 @@ void LabelImage::load(const TextDefine& textDefine)
 {
 	SAFE_DELETE(_stream);
 	_stream = new LabelStream();
+	_stream->setFixWidth((sys::ss_t)textDefine.width * RGBA_PIXEL_UNIT);
 
 	FT_LABEL* label = new FT_LABEL();
 	label->load(textDefine, _stream);
 	SAFE_DELETE(label);
 
+	if (_stream->isFixWidth())
+	{
+		_stream->format(textDefine.horizontalAlignment);
+	}
+
 	this->setPixels((uchar*)_stream->getData());
-	this->setWidth(_stream->getWidth() / 4);
+	this->setWidth(_stream->getWidth() / RGBA_PIXEL_UNIT);
 	this->setHeight(_stream->getHeigth());
 	this->setFormat(GL_RGBA);
-	this->setInternalFormat(4);
+	this->setInternalFormat(RGBA_PIXEL_UNIT);
 }
 
 

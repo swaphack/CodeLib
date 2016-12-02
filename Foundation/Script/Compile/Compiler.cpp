@@ -18,37 +18,24 @@ Compiler::~Compiler()
 
 }
 
-void Compiler::read(const char* text, int size)
+bool Compiler::compile(const char* text, int size)
 {
 
-}
+	if (text == nullptr)
+	{
+		return false;
+	}
 
-bool Compiler::doScan()
-{
+	if (!m_pScanner->scan(text, size))
+	{
+		return false;
+	}
 
-}
+	if (!m_pParser->parse(m_pScanner->tokenBegin(), m_pScanner->tokenEnd()))
+	{
+		return false;
+	}
 
-bool Compiler::doParse()
-{
 
-}
-
-bool Compiler::doSemanticAnalyze()
-{
-
-}
-
-bool Compiler::doSourceCodeOptimize()
-{
-
-}
-
-bool Compiler::doCodeGenerate()
-{
-
-}
-
-bool Compiler::doTargetCodeOptimize()
-{
-
+	return false;
 }

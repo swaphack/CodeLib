@@ -1,7 +1,11 @@
 #pragma once
 
+#include <functional>
 #include <vector>
+#include <map>
 #include <string>
+
+#include "macros.h"
 
 namespace script
 {
@@ -14,18 +18,26 @@ namespace script
 		~SingalSet();
 	public:
 		static SingalSet* getInstance();
-		// 追加一个关键字
-		void append(const char* keyword);
-		// 判断是否包含改关键字,
-		// 成功返回关键字长度，失败返回-1
-		int contain(const char* keyword);
-		// 清空所有关键字
+		/** 
+		*	添加一个运算符
+		*	@param name 运算符
+		*/
+		void addOperator(const char* name);
+		/**
+		*	判断是否包含改运算符,优先判断字符串长度
+		*	成功返回运算符长度，失败返回-1
+		*	@param name 运算符
+		*/
+		int containOperator(const char* name);
+		/** 
+		*	清空所有运算符
+		*/
 		void clear();
 	protected:
 		void init();
 	private:
-		typedef std::vector<std::string> Words;
-		// 符号字
-		Words m_vSingals;
+		typedef std::vector<std::vector<std::string> > OperatorLevelAry;
+		OperatorLevelAry m_vOperatorSingals;
+
 	};	
 }

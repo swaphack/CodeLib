@@ -2,7 +2,7 @@
 
 using namespace script;
 
-static SingalSet* s_KeyWord = nullptr;
+static SingalSet* s_name = nullptr;
 
 SingalSet::SingalSet()
 {
@@ -16,104 +16,130 @@ SingalSet::~SingalSet()
 
 SingalSet* SingalSet::getInstance()
 {
-	if (s_KeyWord == nullptr)
+	if (s_name == nullptr)
 	{
-		s_KeyWord = new SingalSet();
-		s_KeyWord->init();
+		s_name = new SingalSet();
+		s_name->init();
 	}
 
-	return s_KeyWord;
+	return s_name;
 }
 
-void SingalSet::append(const char* keyword)
+void SingalSet::addOperator(const char* name)
 {
-	if (keyword == nullptr)
+	if (name == nullptr)
 	{
 		return;
 	}
 
-	m_vSingals.push_back(keyword);
+	int len = strlen(name);
+	for (int i = 1; i <= len; i ++)
+	{
+		if (m_vOperatorSingals.size() < i)
+		{
+			std::vector<std::string> operatorAry;
+			m_vOperatorSingals.push_back(operatorAry);
+		}
+	}
+
+	m_vOperatorSingals[len - 1].push_back(name);
 }
 
-int SingalSet::contain(const char* keyword)
+int SingalSet::containOperator(const char* name)
 {
-	if (keyword == nullptr)
+	if (name == nullptr)
 	{
 		return -1;
 	}
 
-	for (Words::const_iterator iter = m_vSingals.begin(); iter != m_vSingals.end(); iter++)
+	int len = strlen(name);
+	if (len	<= 0)
 	{
-		char* ptr = (char*)strstr(keyword, (*iter).c_str());
-		if (ptr != nullptr && (ptr - keyword) == 0)
+		return -1;
+	}
+
+	if (m_vOperatorSingals.size() < len)
+	{
+		return -1;
+	}
+
+	for (std::vector<std::string>::const_iterator iter = m_vOperatorSingals[len - 1].begin();
+		iter != m_vOperatorSingals[len - 1].end();
+		iter++)
+	{
+		if ((*iter).compare(name) == 0)
 		{
-			return (*iter).size();
+			return len;
 		}
 	}
 
-	return -1;
+	return len;
 }
 
 void SingalSet::clear()
 {
-	m_vSingals.clear();
+	m_vOperatorSingals.clear();
 }
 
 void SingalSet::init()
 {
-	append(">>=");
-	append("<<=");
+	addOperator("{", 0);
+	addOperator("}", 0);
 
-	append("|=");
-	append("^=");
-	append("&=");
-	append("-=");
-	append("+=");
-	append("%=");
-	append("*=");
-	append("/=");
+	addOperator("->", 1);
+	addOperator(".", 1);
+	addOperator("(", 1);
+	addOperator(")", 1);
+	addOperator("[", 1);
+	addOperator("]", 1);
 
-	append("||");
-	append("&&");
-	append("!=");
-	append("==");
-	append("<=");
-	append(">=");
+	addOperator("++", 2);
+	addOperator("--", 2);
+	addOperator("~", 2);
+	addOperator("!", 2);
 
-	append(">>");
-	append("<<");
+	addOperator("*", 3);
+	addOperator("/", 3);
+	addOperator("%", 3);
 
-	append("++");
-	append("--");
-	append("->");
+	addOperator("+", 4);
+	addOperator("-", 4);
 
+	addOperator(">>", 5);
+	addOperator("<<", 5);
 
-	append("|");
-	append("^");
-	append("&");
-	append("<");
-	append(">");
+	addOperator("<", 6);
+	addOperator(">", 6);
+	addOperator("<=", 6);
+	addOperator(">=", 6);
 
-	append("?");
-	append(":");
+	addOperator("!=", 7);
+	addOperator("==", 7);
 
-	append(".");
-	append("=");
+	addOperator("&", 8);
 
-	append(",");
-	append("+");
-	append("-");
-	append("*");
-	append("/");
+	addOperator("^", 9);
 
-	append("~");
+	addOperator("|", 10);
 
-	append("!");
+	addOperator("&&", 11);
+
+	addOperator("||", 12);
+
+	addOperator("?", 13);
+	addOperator(":", 13);
+
+	addOperator("=", 14);
+	addOperator("/=", 14);
+	addOperator("*=", 14);
+	addOperator("%=", 14);
+	addOperator("+=", 14);
+	addOperator("-=", 14);
+	addOperator("<<=", 14);
+	addOperator(">>=", 14);
+	addOperator("&=", 14);
+	addOperator("^=", 14);
+	addOperator("|=", 14);
 	
-	append("{");
-	append("}");
-	append("(");
-	append(")");
-	append("[");
-	append("]");
+	addOperator(",", 15);
 }

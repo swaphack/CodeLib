@@ -1,1 +1,15 @@
-ssd 1.121312
+
+
+function add(var a, var b) 
+{
+var c = a + b;
+return c;
+}
+
+function sum(var tbl)
+{
+var sum = 0;
+for k in tbl:
+	sum += tbl[k];
+return sum;
+}

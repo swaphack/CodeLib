@@ -25,33 +25,32 @@ KeyWordSet* KeyWordSet::getInstance()
 	return s_KeyWord;
 }
 
-void KeyWordSet::append(const char* keyword)
+void KeyWordSet::appendKeyWord(const char* name)
 {
-	if (keyword == nullptr)
+	if (name == nullptr)
 	{
 		return;
 	}
 
-	m_vKeyWords.push_back(keyword);
+	m_vKeyWords.push_back(name);
 }
 
-int KeyWordSet::contain(const char* keyword)
+bool KeyWordSet::containKeyWord(const char* name)
 {
-	if (keyword == nullptr)
+	if (name == nullptr)
 	{
 		return -1;
 	}
 
 	for (Words::const_iterator iter = m_vKeyWords.begin(); iter != m_vKeyWords.end(); iter++)
 	{
-		char* ptr = (char*)strstr(keyword, (*iter).c_str());
-		if (ptr != nullptr && (ptr - keyword) == 0)
+		if ((*iter).compare(name) == 0)
 		{
-			return (*iter).size();
+			return true;
 		}
 	}
 
-	return -1;
+	return false;
 }
 
 void KeyWordSet::clear()
@@ -61,5 +60,23 @@ void KeyWordSet::clear()
 
 void KeyWordSet::init()
 {
-	append("import");
+	// 类
+	appendKeyWord("class");
+	// 函数
+	appendKeyWord("function");
+	// 变量
+	appendKeyWord("var");
+	// 返回值
+	appendKeyWord("return");
+
+	// +
+	appendKeyWord("__add");
+	// -
+	appendKeyWord("__minus");
+	// *
+	appendKeyWord("__multiply");
+	// /
+	appendKeyWord("__divide");
+	// =
+	appendKeyWord("__equal");
 }

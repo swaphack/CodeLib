@@ -6,7 +6,7 @@ using namespace sys;
 WndRender::WndRender()
 {
 	this->init();
-	this->getCanvas()->setDimensions(render::ED_3D);
+	this->getCanvas()->setDimensions(render::ED_2D);
 }
 
 WndRender::~WndRender()
@@ -20,9 +20,8 @@ void WndRender::show()
 	Texture2D* pTexture = G_TEXTURE_CACHE->getTexture2D(imageDefine);
 	pTexture->retain();
 	
- 	this->testSequenceFrame();
-
-	this->testModel();
+	
+	this->testText();
 }
 
 void WndRender::testMoveImage()
@@ -124,19 +123,22 @@ void WndRender::testText()
 	PRINT("%d-%d-%d %02d:%02d:%02d\n", t->getYear(), t->getMonth(), t->getMonthDay(), t->getHour(), t->getMinute(), t->getSecond());
 	sprintf(strVal, "%d-%d-%d %02d:%02d:%02d\n", t->getYear(), t->getMonth(), t->getMonthDay(), t->getHour(), t->getMinute(), t->getSecond());
 
-	CtrlText* pCtrlText = CREATE_NODE(CtrlText);
-	pCtrlText->setFontPath("Resource/Font/font_3.ttf");
-	pCtrlText->setFontSize(58);
-	pCtrlText->setString(strVal);
-	pCtrlText->setPosition(512, 384, 0);
-	pCtrlText->setColor(sys::Color4B(125, 80, 255, 255));
-	this->getCanvas()->getRoot()->addChild(pCtrlText);
+ 	CtrlText* pCtrlText;
+// 	pCtrlText = CREATE_NODE(CtrlText);
+// 	pCtrlText->setFontPath("Resource/Font/font_3.ttf");
+// 	pCtrlText->setFontSize(58);
+// 	pCtrlText->setString(strVal);
+// 	pCtrlText->setPosition(512, 450, 0);
+// 	pCtrlText->setColor(sys::Color4B(125, 80, 255, 255));
+// 	this->getCanvas()->getRoot()->addChild(pCtrlText);
 
 	pCtrlText = CREATE_NODE(CtrlText);
+	pCtrlText->setHorizontalAlignment(EHA_CENTER);
 	pCtrlText->setFontPath("Resource/Font/font_2.ttf");
 	pCtrlText->setFontSize(58);
-	pCtrlText->setString("中华人民共和国");
-	pCtrlText->setPosition(200, 200, 0);
+	pCtrlText->setString("SAVE\n中华人民共和国");
+	pCtrlText->setPosition(512, 384, 0);
+	pCtrlText->setDimensions(200, 0);
 	pCtrlText->setColor(sys::Color4B(125, 255, 255, 255));
 	this->getCanvas()->getRoot()->addChild(pCtrlText);
 }

@@ -1,12 +1,9 @@
 #pragma once
 
-#include <string>
-#include <vector>
+#include "macros.h"
 
 namespace script
 {
-	typedef std::vector<std::string> Token;
-
 	/**
 	*	文档扫描器
 	*	定义关键字和运算符
@@ -18,7 +15,7 @@ namespace script
 		~Scanner();
 	public:
 		// 浏览文本
-		bool read(const char* ptr, int size);
+		bool scan(const char* ptr, int size);
 		// 清空扫描信息
 		void clear();
 		// 单词起始位置

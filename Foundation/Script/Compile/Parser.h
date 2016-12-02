@@ -1,5 +1,9 @@
 #pragma once
 
+#include "macros.h"
+
+#include "SyntaxAnalysis.h"
+
 namespace script
 {
 	/**
@@ -8,7 +12,11 @@ namespace script
 	class Parser
 	{
 	public:
-	protected:
+		Parser();
+		~Parser();
+	public:
+		bool parse(Token::const_iterator begin, Token::const_iterator end);
 	private:
+		SyntaxAnalysis* m_pSyntaxAnalysis;
 	};
 }

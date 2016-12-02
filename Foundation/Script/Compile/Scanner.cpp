@@ -18,7 +18,7 @@ Scanner::~Scanner()
 	}
 }
 
-bool Scanner::read(const char* ptr, int size)
+bool Scanner::scan(const char* ptr, int size)
 {
 	if (ptr == nullptr || size <= 0)
 	{
@@ -34,7 +34,6 @@ bool Scanner::read(const char* ptr, int size)
 
 	return this->parse();
 }
-
 void Scanner::clear()
 {
 	if (m_pContent != nullptr)
@@ -243,7 +242,7 @@ bool Scanner::isSingalFormat(const char* text, int& size)
 	{
 		return false;
 	}
-	size = SingalSet::getInstance()->contain(text);
+	size = SingalSet::getInstance()->containOperator(text);
 
 	return size != -1;
 }

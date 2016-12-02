@@ -5,6 +5,22 @@
 
 namespace render
 {
+	// 水平对齐方式
+	enum HorizontalAlignment
+	{
+		EHA_LEFT,		// 左对齐
+		EHA_CENTER,		// 居中对齐
+		EHA_RIGHT,		// 右对齐
+	};
+
+	// 垂直对齐方式
+	enum VerticalAlignment
+	{
+		EVA_TOP,		// 顶对齐
+		EVA_CENTER,		// 居中对齐
+		EVA_BOTTOM,		// 底对齐
+	};
+
 	// 文本数据描述结构
 	struct TextDefine
 	{
@@ -23,8 +39,14 @@ namespace render
 		float width;
 		// 高度
 		float height;
+
 		// 颜色
 		sys::Color4B color;
+
+		// 水平对齐方式
+		HorizontalAlignment horizontalAlignment;
+		// 垂直对齐方式
+		VerticalAlignment verticalAlignment;
 
 		TextDefine()
 			:filepath("")
@@ -34,6 +56,8 @@ namespace render
 			, text("")
 			, width(0)
 			, height(0)
+			, horizontalAlignment(EHA_CENTER)
+			, verticalAlignment(EVA_CENTER)
 		{
 
 		}

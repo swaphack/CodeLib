@@ -124,7 +124,7 @@ void CtrlText::onTextChange()
 		return;
 	}
 
-	if (_textDefine.width == 0 && _textDefine.height == 0)
+	if (_textDefine.width == 0 || _textDefine.height == 0)
 	{
 		this->setWidth(static_cast<float>(texture->getWidth()));
 		this->setHeight(static_cast<float>(texture->getHeight()));

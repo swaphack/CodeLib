@@ -73,13 +73,7 @@
     <ClInclude Include="Env\Environment.h">
       <Filter>Env</Filter>
     </ClInclude>
-    <ClInclude Include="Env\FilePath.h">
-      <Filter>Env</Filter>
-    </ClInclude>
     <ClInclude Include="Env\Module.h">
-      <Filter>Env</Filter>
-    </ClInclude>
-    <ClInclude Include="Env\KeyWord.h">
       <Filter>Env</Filter>
     </ClInclude>
     <ClInclude Include="Core\import.h">
@@ -87,9 +81,6 @@
     </ClInclude>
     <ClInclude Include="Core\Variables.h">
       <Filter>Core</Filter>
-    </ClInclude>
-    <ClInclude Include="Env\Define.h">
-      <Filter>Env</Filter>
     </ClInclude>
     <ClInclude Include="Document\import.h">
       <Filter>Document</Filter>
@@ -109,9 +100,6 @@
     <ClInclude Include="Compile\Parser.h">
       <Filter>Compile\Parse</Filter>
     </ClInclude>
-    <ClInclude Include="Compile\AbstractSyntaxCode.h">
-      <Filter>Compile\Parse</Filter>
-    </ClInclude>
     <ClInclude Include="Compile\Compiler.h">
       <Filter>Compile</Filter>
     </ClInclude>
@@ -129,6 +117,24 @@
     </ClInclude>
     <ClInclude Include="Compile\Error.h">
       <Filter>Compile\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Compile\macros.h">
+      <Filter>Compile\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Compile\Expression.h">
+      <Filter>Compile\Parse</Filter>
+    </ClInclude>
+    <ClInclude Include="Compile\AbstractSyntaxTree.h">
+      <Filter>Compile\Parse</Filter>
+    </ClInclude>
+    <ClInclude Include="Compile\SyntaxAnalysis.h">
+      <Filter>Compile\Parse</Filter>
+    </ClInclude>
+    <ClInclude Include="Compile\CodeBlock.h">
+      <Filter>Compile\Parse</Filter>
+    </ClInclude>
+    <ClInclude Include="Compile\OperatorDelegate.h">
+      <Filter>Compile\Parse</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -179,6 +185,15 @@
     <ClCompile Include="Compile\Compiler.cpp">
       <Filter>Compile</Filter>
     </ClCompile>
+    <ClCompile Include="Compile\Parser.cpp">
+      <Filter>Compile\Parse</Filter>
+    </ClCompile>
+    <ClCompile Include="Compile\Expression.cpp">
+      <Filter>Compile\Parse</Filter>
+    </ClCompile>
+    <ClCompile Include="Compile\AbstractSyntaxTree.cpp">
+      <Filter>Compile\Parse</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resource\main.script">
@@ -187,9 +202,15 @@
     <None Include="Compile\function.script">
       <Filter>Resource</Filter>
     </None>
+    <None Include="Resource\grammer.script">
+      <Filter>Resource</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Compile\compile.txt">
+      <Filter>Compile</Filter>
+    </Text>
+    <Text Include="Compile\grammar.txt">
       <Filter>Compile</Filter>
     </Text>
   </ItemGroup>

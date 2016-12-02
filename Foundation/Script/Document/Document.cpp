@@ -9,7 +9,7 @@ using namespace script;
 
 Document::Document()
 {
-	m_pCompiler = new Scanner();
+	m_pCompiler = new Compiler();
 }
 
 Document::~Document()
@@ -54,7 +54,7 @@ bool Document::parse(const char* text, int size)
 		return false;
 	}
 
-	bool bRet = m_pCompiler->read(text, size);
+	bool bRet = m_pCompiler->compile(text, size);
 	if (bRet == false)
 	{
 		return false;

@@ -15,10 +15,17 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Server\HttpHandler.cpp" />
     <ClCompile Include="Server\HttpReceiver.cpp" />
     <ClCompile Include="Server\HttpServer.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Module\HttpDispatcher\AccountHttpRequest.h" />
+    <ClInclude Include="Module\HttpDispatcher\GuestHttpDispatcher.h" />
+    <ClInclude Include="Module\HttpDispatcher\import.h" />
+    <ClInclude Include="Module\HttpDispatcher\macros.h" />
+    <ClInclude Include="Server\HttpDispatcher.h" />
+    <ClInclude Include="Server\HttpHandler.h" />
     <ClInclude Include="Server\HttpReceiver.h" />
     <ClInclude Include="Server\HttpServer.h" />
     <ClInclude Include="Server\import.h" />

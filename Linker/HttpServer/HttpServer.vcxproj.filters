@@ -7,6 +7,12 @@
     <Filter Include="Server">
       <UniqueIdentifier>{33986f81-eba2-464c-81d8-ef97e5668897}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Module">
+      <UniqueIdentifier>{3caeb02c-1334-4950-8b54-a75bf60971cc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Module\HttpDispatcher">
+      <UniqueIdentifier>{7025ce87-845e-4099-871e-5439ae7fb5de}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Xml Include="Resource\Server.xml">
@@ -21,6 +27,9 @@
     <ClCompile Include="Server\HttpReceiver.cpp">
       <Filter>Server</Filter>
     </ClCompile>
+    <ClCompile Include="Server\HttpHandler.cpp">
+      <Filter>Server</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Server\HttpServer.h">
@@ -31,6 +40,24 @@
     </ClInclude>
     <ClInclude Include="Server\import.h">
       <Filter>Server</Filter>
+    </ClInclude>
+    <ClInclude Include="Server\HttpHandler.h">
+      <Filter>Server</Filter>
+    </ClInclude>
+    <ClInclude Include="Server\HttpDispatcher.h">
+      <Filter>Server</Filter>
+    </ClInclude>
+    <ClInclude Include="Module\HttpDispatcher\GuestHttpDispatcher.h">
+      <Filter>Module\HttpDispatcher</Filter>
+    </ClInclude>
+    <ClInclude Include="Module\HttpDispatcher\macros.h">
+      <Filter>Module\HttpDispatcher</Filter>
+    </ClInclude>
+    <ClInclude Include="Module\HttpDispatcher\AccountHttpRequest.h">
+      <Filter>Module\HttpDispatcher</Filter>
+    </ClInclude>
+    <ClInclude Include="Module\HttpDispatcher\import.h">
+      <Filter>Module\HttpDispatcher</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
