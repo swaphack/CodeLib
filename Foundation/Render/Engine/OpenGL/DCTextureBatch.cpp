@@ -28,6 +28,8 @@ DCTextureBatch::~DCTextureBatch()
 
 void DCTextureBatch::draw()
 {
+	
+
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_BLEND);
 	glBlendFunc(Blend.src, Blend.dest);
@@ -43,10 +45,16 @@ void DCTextureBatch::draw()
 		glVertexPointer(3, GL_FLOAT, 0, Vertexes);
 
 		//glEnableClientState(GL_NORMAL_ARRAY);
-		glNormalPointer(3, GL_FLOAT, Normals);
+		glNormalPointer(GL_FLOAT, 0, Normals);
 
-		// glEnableClientState(GL_COLOR_ARRAY);
+		//glEnableClientState(GL_COLOR_ARRAY);
 		glColorPointer(3, GL_FLOAT, 0, Colors);
+
+		// for debug
+		//glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+		//glDisableClientState(GL_VERTEX_ARRAY);
+		//glDisableClientState(GL_NORMAL_ARRAY);
+		//glDisableClientState(GL_COLOR_ARRAY);
 
 		glDrawElements(GL_TRIANGLES, IndexCount, GL_UNSIGNED_SHORT, Indices);
 

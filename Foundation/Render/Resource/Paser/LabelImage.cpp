@@ -470,7 +470,6 @@ void LabelStream::format(HorizontalAlignment ha)
 		{
 			width = _lineWidthStack.top();
 			offsetX = (getFixWidth() - width) * 0.5f;
-			offsetX = 10;
 			moveBlock(0, i * getLineHeight(), width, getLineHeight(), offsetX, i * getLineHeight());
 			_lineWidthStack.pop();
 		}

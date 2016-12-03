@@ -130,7 +130,7 @@ void MultiStream::moveBlock(ss_t srcX, ss_t srcY, ss_t width, ss_t height, ss_t 
 	char* faceData = _data + _width * _heigth * z;
 	for (int i = 0; i < height; i++)
 	{
-		memset(newData, 0, width);
+		//memset(newData, 0, width);
 		memcpy(newData, faceData + (i + srcY) * _width + srcX, width);
 		memset(faceData + (i + srcY) * _width + srcX, 0, width);
 		memmove(faceData + (i + destY) * _width + destX, newData, width);

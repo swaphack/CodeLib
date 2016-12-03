@@ -6,7 +6,7 @@ using namespace sys;
 WndRender::WndRender()
 {
 	this->init();
-	this->getCanvas()->setDimensions(render::ED_2D);
+	this->getCanvas()->setDimensions(render::ED_3D);
 }
 
 WndRender::~WndRender()
@@ -16,12 +16,14 @@ WndRender::~WndRender()
 
 void WndRender::show()
 {
-	ImageDefine imageDefine = {"Resource/Image/world.jpg", EIF_JPEG};
-	Texture2D* pTexture = G_TEXTURE_CACHE->getTexture2D(imageDefine);
-	pTexture->retain();
+// 	ImageDefine imageDefine = {"Resource/Image/world.jpg", EIF_JPEG};
+// 	Texture2D* pTexture = G_TEXTURE_CACHE->getTexture2D(imageDefine);
+// 	pTexture->retain();
 	
 	
 	this->testText();
+
+	this->testModel();
 }
 
 void WndRender::testMoveImage()
@@ -133,10 +135,10 @@ void WndRender::testText()
 // 	this->getCanvas()->getRoot()->addChild(pCtrlText);
 
 	pCtrlText = CREATE_NODE(CtrlText);
-	pCtrlText->setHorizontalAlignment(EHA_CENTER);
+	//pCtrlText->setHorizontalAlignment(EHA_LEFT);
 	pCtrlText->setFontPath("Resource/Font/font_2.ttf");
 	pCtrlText->setFontSize(58);
-	pCtrlText->setString("SAVE\n中华人民共和国");
+	pCtrlText->setString("SAVE\n中华\n人民共和国");
 	pCtrlText->setPosition(512, 384, 0);
 	pCtrlText->setDimensions(200, 0);
 	pCtrlText->setColor(sys::Color4B(125, 255, 255, 255));
@@ -530,7 +532,7 @@ void WndRender::onKeyBoardRole(sys::Object* object, sys::BoardKey key, sys::Butt
 void WndRender::testModel()
 {
 	CtrlModel* pModel = ModelFile::getInstance()->load("Resource/3DModel/Test.xml");
-	pModel->setPosition(700, 384);
+	//pModel->setPosition(700, 384);
 
 	this->getCanvas()->getRoot()->addChild(pModel);
 
