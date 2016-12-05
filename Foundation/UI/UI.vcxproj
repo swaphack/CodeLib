@@ -67,6 +67,11 @@
   <ItemGroup>
     <ClInclude Include="Control\import.h" />
     <ClInclude Include="Control\macros.h" />
+    <ClInclude Include="Loader\ImageLoader.h" />
+    <ClInclude Include="Loader\import.h" />
+    <ClInclude Include="Loader\macros.h" />
+    <ClInclude Include="Loader\NodeLoader.h" />
+    <ClInclude Include="Loader\TextLoader.h" />
     <ClInclude Include="Parser\helper.h" />
     <ClInclude Include="Parser\import.h" />
     <ClInclude Include="Parser\INodeLoad.h" />
@@ -75,12 +80,6 @@
     <ClInclude Include="Parser\INodeParser.h" />
     <ClInclude Include="Parser\NodeProperty.h" />
     <ClInclude Include="Parser\UIProxy.h" />
-    <ClInclude Include="Sample\import.h" />
-    <ClInclude Include="Sample\Loader\ImageLoader.h" />
-    <ClInclude Include="Sample\Loader\macros.h" />
-    <ClInclude Include="Sample\Loader\NodeLoader.h" />
-    <ClInclude Include="Sample\Loader\TextLoader.h" />
-    <ClInclude Include="Sample\macros.h" />
     <ClInclude Include="ui.h" />
     <ClInclude Include="UIBase\import.h" />
     <ClInclude Include="UIBase\macros.h" />
@@ -88,12 +87,12 @@
     <ClInclude Include="UIBase\UIProtocol.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Loader\ImageLoader.cpp" />
+    <ClCompile Include="Loader\NodeLoader.cpp" />
+    <ClCompile Include="Loader\TextLoader.cpp" />
     <ClCompile Include="Parser\INodeParser.cpp" />
     <ClCompile Include="Parser\NodeProperty.cpp" />
     <ClCompile Include="Parser\UIProxy.cpp" />
-    <ClCompile Include="Sample\Loader\ImageLoader.cpp" />
-    <ClCompile Include="Sample\Loader\NodeLoader.cpp" />
-    <ClCompile Include="Sample\Loader\TextLoader.cpp" />
     <ClCompile Include="UIBase\NodeExt.cpp" />
     <ClCompile Include="UIBase\UIProtocol.cpp" />
   </ItemGroup>

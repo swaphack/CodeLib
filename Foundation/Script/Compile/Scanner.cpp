@@ -7,6 +7,7 @@ Scanner::Scanner()
 , m_nOffset(0)
 , m_nSize(0)
 {
+	m_pTokenTable = new TokenTable();
 }
 
 Scanner::~Scanner()
@@ -15,6 +16,11 @@ Scanner::~Scanner()
 	{
 		free(m_pContent);
 		m_pContent = nullptr;
+	}
+
+	if (m_pTokenTable != nullptr)
+	{
+		delete m_pTokenTable;
 	}
 }
 
@@ -44,7 +50,7 @@ void Scanner::clear()
 
 	m_nSize = 0; 
 	m_nOffset = 0;
-	m_vWords.clear();
+	m_pTokenTable->removeAllTokens();
 }
 bool Scanner::parse()
 {
@@ -177,11 +183,22 @@ bool Scanner::isNumberFormat(const char* text, int& size)
 
 	char ch;
 	int i;
+	bool bExistSpot = false;
 	for (i = 0; i < len; i++)
 	{
 		ch = *(text + i);
+		if (ch == 0x2E)
+		{
+			if (bExistSpot == false) 
+				bExistSpot = true;
+			else 
+			{
+				size = i;
+				return i > 0;
+			}
+		}
 		// ·ÇÊý×ÖºÍ.
-		if (!((ch >= 0x30 && ch <= 0x39) || (ch == 0x2E)))
+		if (!(ch >= 0x30 && ch <= 0x39))
 		{
 			size = i;
 			return i > 0;
@@ -251,7 +268,7 @@ void Scanner::appendWord(std::string& word)
 {
 	if (word.size() > 0)
 	{
-		m_vWords.push_back(word);
+		m_pTokenTable->addToken(word.c_str());
 		word.clear();
 	}
 }

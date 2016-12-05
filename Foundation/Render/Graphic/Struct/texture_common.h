@@ -67,5 +67,19 @@ namespace render
 	{
 		int src;
 		int dest;
+
+		BlendParam() :src(0), dest(0)
+		{}
+
+		BlendParam(int src, int dest) :src(src), dest(dest)
+		{}
+
+		BlendParam& operator=(const BlendParam& blend)
+		{
+			src = blend.src;
+			dest = blend.dest;
+
+			return *this;
+		}
 	};
 }

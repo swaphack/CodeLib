@@ -28,6 +28,7 @@
     <ClInclude Include="Compile\SourceCodeOptimizer.h" />
     <ClInclude Include="Compile\SyntaxAnalysis.h" />
     <ClInclude Include="Compile\TargetCodeOptimizer.h" />
+    <ClInclude Include="Compile\TokenTable.h" />
     <ClInclude Include="Core\Base.h" />
     <ClInclude Include="Core\common.h" />
     <ClInclude Include="Core\Variables.h" />
@@ -54,6 +55,7 @@
     <ClCompile Include="Compile\Parser.cpp" />
     <ClCompile Include="Compile\SingalSet.cpp" />
     <ClCompile Include="Compile\Scanner.cpp" />
+    <ClCompile Include="Compile\TokenTable.cpp" />
     <ClCompile Include="Core\Base.cpp" />
     <ClCompile Include="Core\Function.cpp" />
     <ClCompile Include="Core\Variables.cpp" />

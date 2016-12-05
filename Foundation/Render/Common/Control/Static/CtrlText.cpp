@@ -10,6 +10,59 @@ CtrlText::~CtrlText()
 {
 }
 
+bool CtrlText::init()
+{
+	CtrlFrame::init();
+
+	_notify->removeListens(ENP_TEXTURE_FRAME);
+
+	_notify->addListen(ENP_TEXTURE_FRAME, [&](){
+		const Texture* texture = _texFrame->getTexture();
+		if (texture == nullptr)
+		{
+			return;
+		}
+
+		sys::Size size = sys::Size(static_cast<float>(texture->getWidth()), static_cast<float>(texture->getHeight()));
+
+		if (isCounter())TextureTool::setTexture2DCounterCoords(&_texRect, size, _texFrame->getRect());
+		else TextureTool::setTexture2DCoords(&_texRect, size, _texFrame->getRect());
+
+		sys::Vector orgin = sys::Vector::Zero;
+		sys::Volume volume = sys::Volume(static_cast<float>(texture->getWidth()), static_cast<float>(texture->getHeight()));
+		sys::Vector anchor = sys::Vector(0.5f, 0.5f, 0.5f);
+		if (_textDefine.verticalAlignment == EVA_BOTTOM)
+		{
+		}
+		else if (_textDefine.verticalAlignment == EVA_CENTER)
+		{
+			orgin.y = (_volume.height - volume.height) * 0.5f;
+		}
+		else if (_textDefine.verticalAlignment == EVA_TOP)
+		{
+			orgin.y = _volume.height - volume.height;
+		}
+
+		if (_textDefine.horizontalAlignment == EHA_LEFT)
+		{
+		}
+		else if (_textDefine.verticalAlignment == EHA_CENTER)
+		{
+			orgin.x = (_volume.width - volume.width) * 0.5f;
+		}
+		else if (_textDefine.verticalAlignment == EHA_RIGHT)
+		{
+			orgin.x = _volume.width - volume.width;
+		}
+
+		TextureTool::setTexture2DVertexts(&_texRect, orgin, volume, anchor);
+		TextureTool::setTexture2DFlip(&_texRect, _bFlipX, _bFlipY);
+	});
+	
+
+	return true;
+}
+
 void CtrlText::draw()
 {
 	CtrlFrame::draw();
@@ -95,6 +148,11 @@ void CtrlText::setDimensions(float width, float height)
 	this->setVolume(width, height, 0);
 
 	setDirty(true);
+}
+
+void CtrlText::setDimensions(const sys::Size& size)
+{
+	this->setDimensions(size.width, size.height);
 }
 
 sys::Size CtrlText::getDimensions()

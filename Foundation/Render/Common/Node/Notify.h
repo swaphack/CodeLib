@@ -20,6 +20,8 @@ namespace render
 		ENP_CUBE_FRAME,
 		// 动作帧数改变
 		ENP_ANIMATION_FRAME,
+		// 界面
+		ENP_USER_INTERFACE,
 	};
 
 	// 推送委托
@@ -33,6 +35,8 @@ namespace render
 	public:
 		// 添加监听
 		void addListen(int k, NotifyDelegate handler);
+		// 移除某一类型的监听
+		void removeListens(int k);
 		// 添加标记
 		void addMark(int k);
 		// 执行

@@ -71,6 +71,8 @@ namespace render
 	public:
 		// 设置混合条件
 		void setBlend(int src, int dest);
+		// 设置混合条件
+		void setBlend(const BlendParam& blend);
 		// 获取混合参数
 		const BlendParam& getBlend();
 	protected:
@@ -207,6 +209,8 @@ namespace render
 		void setVolume(const sys::Volume& volume);
 		// 设置面积，默认深度
 		void setSize(const sys::Size& size);
+		// 设置面积
+		void setSize(float w, float h);
 		// 获取宽度
 		float getWidth();
 		// 获取高度

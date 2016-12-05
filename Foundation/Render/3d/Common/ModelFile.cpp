@@ -132,8 +132,8 @@ CtrlModel* ModelFile::loadModel(T_ModelData* pData)
 
 	CtrlModel* pModel = CREATE_NODE(CtrlModel);
 	pModel->setTexFrame(frame);
-	pModel->setVertexes(pData->VertexCount, pData->Vertexes, pData->Normals, pData->Colors, pData->TexCoords);
-	pModel->setIndices(pData->IndexCount, pData->Indices);
+	pModel->getMesh()->setVertexes(pData->VertexCount, pData->Vertexes, pData->Normals, pData->Colors, pData->TexCoords);
+	pModel->getMesh()->setIndices(pData->IndexCount, pData->Indices);
 
 	return pModel;
 }

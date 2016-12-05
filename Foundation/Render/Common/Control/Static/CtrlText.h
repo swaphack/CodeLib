@@ -18,6 +18,8 @@ namespace render
 		CtrlText();
 		virtual ~CtrlText();
 	public:
+		virtual bool init();
+
 		virtual void draw();
 		// 设置字库路径
 		void setFontPath(const char* fonturl);
@@ -29,25 +31,27 @@ namespace render
 		float getFontSize();
 		// 设置水平字间距
 		void setHorizontalDistance(float distance);
-		// 获取垂直间距
+		// 获取水平间距
 		float getHorizontalDistance();
-		// 设置水平间距
+		// 设置垂直间距
 		void setVerticalDistance(float distance);
 		// 获取垂直间距
 		float getVerticalDistance();
 		// 设置显示的文本
 		void setString(const char* text);
 
-		// 设置水平对齐方式
+		// 设置文本水平对齐方式
 		void setHorizontalAlignment(HorizontalAlignment alignment);
-		// 获取水平对齐方式
+		// 获取文本水平对齐方式
 		HorizontalAlignment getHorizontalAlignment();
-		// 设置垂直对齐方式
+		// 设置文本垂直对齐方式
 		void setVerticalAlignment(VerticalAlignment alignment);
-		// 获取垂直对齐方式
+		// 获取文本垂直对齐方式
 		VerticalAlignment getVerticalAlignment();
 		// 设置显示区域
 		void setDimensions(float width, float height);
+		// 设置显示区域
+		void setDimensions(const sys::Size& size);
 		// 获取显示区域
 		sys::Size getDimensions();
 		// 设置颜色

@@ -8,7 +8,5 @@ namespace sys
 		virtual ~ITimer() {}
 	public:
 		virtual void update(float interval) = 0;
-	protected:
-	private:
 	};
 }

@@ -108,6 +108,12 @@ void BlendProtocol::setBlend(int src, int dest)
 	_blend.dest = dest;
 }
 
+void BlendProtocol::setBlend(const BlendParam& blend)
+{
+	_blend.src = blend.src;
+	_blend.dest = blend.dest;
+}
+
 const BlendParam& BlendProtocol::getBlend()
 {
 	return _blend;
@@ -395,6 +401,14 @@ void BodyProtocol::setSize(const sys::Size& size)
 	_volume.width = size.width;
 	_volume.height = size.height;
 	_volume.deep = 0;
+
+	onBodyChange();
+}
+
+void BodyProtocol::setSize(float w, float h)
+{
+	_volume.width = w;
+	_volume.height = h;
 
 	onBodyChange();
 }

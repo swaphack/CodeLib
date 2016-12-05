@@ -198,6 +198,18 @@
     <ClCompile Include="Common\Node\Notify.cpp">
       <Filter>Common\Node</Filter>
     </ClCompile>
+    <ClCompile Include="Widget\Layout.cpp">
+      <Filter>Widget</Filter>
+    </ClCompile>
+    <ClCompile Include="Widget\Widget.cpp">
+      <Filter>Widget</Filter>
+    </ClCompile>
+    <ClCompile Include="Widget\LayoutManager.cpp">
+      <Filter>Widget</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Shader\Mesh.cpp">
+      <Filter>Common\Shader</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Common\GL\import.h">
@@ -574,6 +586,21 @@
     </ClInclude>
     <ClInclude Include="Common\Node\Notify.h">
       <Filter>Common\Node</Filter>
+    </ClInclude>
+    <ClInclude Include="Widget\Widget.h">
+      <Filter>Widget</Filter>
+    </ClInclude>
+    <ClInclude Include="Widget\Layout.h">
+      <Filter>Widget</Filter>
+    </ClInclude>
+    <ClInclude Include="Widget\macros.h">
+      <Filter>Widget</Filter>
+    </ClInclude>
+    <ClInclude Include="Widget\LayoutManager.h">
+      <Filter>Widget</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Shader\Mesh.h">
+      <Filter>Common\Shader</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

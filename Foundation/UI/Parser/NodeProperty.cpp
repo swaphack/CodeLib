@@ -181,6 +181,16 @@ void NodeProperty::setAttribute(const char* name, const sys::Rect& value)
 	setAttribute(name, getCString("%d,%d,%d,%d", value.x, value.y, value.width, value.height));
 }
 
+void NodeProperty::setAttribute(const char* name, const render::BlendParam& value)
+{
+	if (name == nullptr)
+	{
+		return;
+	}
+
+	setAttribute(name, getCString("%d,%d", value.src, value.dest));
+}
+
 bool NodeProperty::getAttribute(const char* name, bool& defaultValue)
 {
 	int value = 0;
@@ -448,6 +458,29 @@ bool NodeProperty::getAttribute(const char* name, sys::Rect& defaultValue)
 	}
 
 	defaultValue = sys::Rect(atof(params[0].getString()), atof(params[1].getString()), atof(params[2].getString()), atof(params[3].getString()));
+
+	return true;
+}
+
+bool NodeProperty::getAttribute(const char* name, render::BlendParam& defaultValue)
+{
+	const char* value = getAttribute(name);
+	if (value == nullptr)
+	{
+		return false;
+	}
+
+	sys::String val = value;
+	std::vector<sys::String> params;
+
+	val.split(",", params);
+
+	if (params.size() != 2)
+	{
+		return false;
+	}
+
+	defaultValue = render::BlendParam(atoi(params[0].getString()), atoi(params[1].getString()));
 
 	return true;
 }

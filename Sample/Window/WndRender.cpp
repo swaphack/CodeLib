@@ -126,21 +126,23 @@ void WndRender::testText()
 	sprintf(strVal, "%d-%d-%d %02d:%02d:%02d\n", t->getYear(), t->getMonth(), t->getMonthDay(), t->getHour(), t->getMinute(), t->getSecond());
 
  	CtrlText* pCtrlText;
-// 	pCtrlText = CREATE_NODE(CtrlText);
-// 	pCtrlText->setFontPath("Resource/Font/font_3.ttf");
-// 	pCtrlText->setFontSize(58);
-// 	pCtrlText->setString(strVal);
-// 	pCtrlText->setPosition(512, 450, 0);
-// 	pCtrlText->setColor(sys::Color4B(125, 80, 255, 255));
-// 	this->getCanvas()->getRoot()->addChild(pCtrlText);
+	pCtrlText = CREATE_NODE(CtrlText);
+	pCtrlText->setFontPath("Resource/Font/font_3.ttf");
+	pCtrlText->setFontSize(58);
+	pCtrlText->setString(strVal);
+	pCtrlText->setPosition(512, 450, 0);
+	pCtrlText->setVerticalAlignment(EVA_CENTER);
+	pCtrlText->setColor(sys::Color4B(125, 80, 255, 255));
+	this->getCanvas()->getRoot()->addChild(pCtrlText);
 
 	pCtrlText = CREATE_NODE(CtrlText);
-	//pCtrlText->setHorizontalAlignment(EHA_LEFT);
+	pCtrlText->setHorizontalAlignment(EHA_RIGHT);
+	pCtrlText->setVerticalAlignment(EVA_CENTER);
 	pCtrlText->setFontPath("Resource/Font/font_2.ttf");
 	pCtrlText->setFontSize(58);
-	pCtrlText->setString("SAVE\n中华\n人民共和国");
+	pCtrlText->setString("中华\n人民共和国");
 	pCtrlText->setPosition(512, 384, 0);
-	pCtrlText->setDimensions(200, 0);
+	pCtrlText->setDimensions(200, 600);
 	pCtrlText->setColor(sys::Color4B(125, 255, 255, 255));
 	this->getCanvas()->getRoot()->addChild(pCtrlText);
 }

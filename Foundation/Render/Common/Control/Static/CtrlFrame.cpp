@@ -30,8 +30,8 @@ bool CtrlFrame::init()
 
 		if (isCounter())TextureTool::setTexture2DCounterCoords(&_texRect, size, _texFrame->getRect());
 		else TextureTool::setTexture2DCoords(&_texRect, size, _texFrame->getRect());
-		TextureTool::setTexture2DVertexts(&_texRect, sys::Vector::Zero, _volume, _anchor);
 
+		TextureTool::setTexture2DVertexts(&_texRect, sys::Vector::Zero, _volume, _anchor);
 		TextureTool::setTexture2DFlip(&_texRect, _bFlipX, _bFlipY);
 	});
 

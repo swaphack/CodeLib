@@ -18,17 +18,17 @@ namespace render
 		ImageFormat Format;
 		// 顶点数组长度
 		int VertexCount;
-		// 纹理坐标
+		// 纹理坐标(（u,v,0 三维）)
 		float* TexCoords;
-		// 顶点坐标
+		// 顶点坐标（x,y,z 三维）
 		float* Vertexes;
-		// 顶点法线
+		// 顶点法线（x,y,z 三维）
 		float* Normals;
-		// 顶点颜色
+		// 顶点颜色（r,g,b 三色）
 		float* Colors;
 		// 顶点索引长度
 		int IndexCount;
-		// 顶点索引
+		// 顶点索引(三角形，三个点决定一个三角形)
 		ushort* Indices;
 
 		T_ModelData()

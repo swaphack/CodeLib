@@ -136,6 +136,9 @@
     <ClInclude Include="Compile\OperatorDelegate.h">
       <Filter>Compile\Parse</Filter>
     </ClInclude>
+    <ClInclude Include="Compile\TokenTable.h">
+      <Filter>Compile\Scan</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Core\Variable.cpp">
@@ -193,6 +196,9 @@
     </ClCompile>
     <ClCompile Include="Compile\AbstractSyntaxTree.cpp">
       <Filter>Compile\Parse</Filter>
+    </ClCompile>
+    <ClCompile Include="Compile\TokenTable.cpp">
+      <Filter>Compile\Scan</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

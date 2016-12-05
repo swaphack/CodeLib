@@ -1,6 +1,7 @@
 #pragma once
 
 #include "macros.h"
+#include "TokenTable.h"
 
 namespace script
 {
@@ -18,16 +19,8 @@ namespace script
 		bool scan(const char* ptr, int size);
 		// 清空扫描信息
 		void clear();
-		// 单词起始位置
-		inline Token::const_iterator tokenBegin()
-		{
-			return m_vWords.begin();
-		}
-		// 单词结束位置
-		inline Token::const_iterator tokenEnd()
-		{
-			return m_vWords.end();
-		}
+		// 符号表
+		inline TokenTable* getTokenTable() { return m_pTokenTable; }
 	protected:
 		// 解析
 		bool parse();
@@ -53,7 +46,7 @@ namespace script
 		int m_nOffset;
 		// 文本大小
 		int m_nSize;
-		// 单词
-		Token m_vWords;
+		// 符号表
+		TokenTable* m_pTokenTable;
 	};
 }

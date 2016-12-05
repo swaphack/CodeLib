@@ -18,40 +18,19 @@ namespace render
 		const Material* getMatrial() const;
 		// 获取模型材质
 		Material* getMatrial();
+		// 获取模型纹理格子
+		const Mesh* getMesh() const;
+		// 获取模型纹理格子
+		Mesh* getMesh();
 		
 		// 设置所有面的纹理帧
-		virtual void setTexFrame(const TexFrame* frame);
-
-		// 设置顶点,法线，纹理坐标信息
-		void setVertexes(int count, float* vertexes, float* normals, float* colors, float* texCoords);
-		// 设置三角形索引
-		void setIndices(int count, ushort* indices);
-		// 顶点数
-		int getVertexCount();
-		// 三角形数
-		int getTriangleCount();
-	protected:
-		virtual void initSelf();
+		void setTexFrame(const TexFrame* frame);
 	protected:
 		// 模型材质
 		Material* _material;
 		// 纹理
 		TexFrame* _texFrame;
-
-		// 顶点数
-		int _vertexCount;
-		// 顶点坐标 (x,y,z)
-		float* _vertexes;
-		// 法线 (x,y,z)
-		float* _normals;
-		// 颜色 (r,g,b)
-		float* _colors;
-		// 纹理坐标 (x,y,z)
-		float* _texCoords;
-		
-		// 三角形数
-		int _triangleCount;
-		// 顶点索引
-		ushort* _indices;
+		// 纹理网格
+		Mesh* _mesh;
 	};
 }

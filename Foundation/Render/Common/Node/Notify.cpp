@@ -21,6 +21,16 @@ void Notify::addListen(int k, NotifyDelegate handler)
 	_notifyEvent[k].push_back(handler);
 }
 
+void Notify::removeListens(int k)
+{
+	if (_notifyEvent.find(k) == _notifyEvent.end())
+	{
+		return;
+	}
+
+	_notifyEvent.erase(k);
+}
+
 void Notify::addMark(int k)
 {
 	_notifyMark.insert(k);
