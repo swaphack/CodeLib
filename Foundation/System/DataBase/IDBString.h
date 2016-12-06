@@ -3,15 +3,9 @@
 #include <string>
 #include <vector>
 
-
 namespace sys
 {
 	class IDataSheet;
-}
-
-namespace web
-{
-	class TableMember;
 
 	// Êý¾Ý¿â²Ù×÷Óï¾ä
 	class IDBString

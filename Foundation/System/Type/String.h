@@ -92,6 +92,10 @@ namespace sys
 		void split(char spot, std::vector<String>& dest);
 		// 分割
 		void split(const char* spot, std::vector<String>& dest);
+		// 分割
+		void split(char spot, std::vector<std::string>& dest);
+		// 分割
+		void split(const char* spot, std::vector<std::string>& dest);
 		// 是否数据为空
 		bool empty();
 		// 反转

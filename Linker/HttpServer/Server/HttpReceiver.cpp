@@ -1,6 +1,8 @@
 #include "HttpReceiver.h"
 #include "HttpHandler.h"
 
+#include "../Module/HttpDispatcher/import.h"
+
 using namespace hs;
 
 #define G_RESOURCE WebApplication::getInstance()->getResourceMgr()->getResource(ERT_LOCAL)
@@ -8,7 +10,8 @@ using namespace hs;
 
 HttpReceiver::HttpReceiver()
 {
-	G_HANDLER->addDispatcher();
+	G_HANDLER->addDispatcher(new GuestHttpDispatcher());
+	G_HANDLER->addDispatcher(new AccountHttpDispatcher());
 }
 
 void HttpReceiver::doGetRequest(sys::HttpRequest* request)

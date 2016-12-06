@@ -86,10 +86,12 @@
     <ClInclude Include="Cache\CacheIdentity.h" />
     <ClInclude Include="Cache\CacheMgr.h" />
     <ClInclude Include="Cache\import.h" />
+    <ClInclude Include="DataBase\DataRecord.h" />
     <ClInclude Include="DataBase\DataSheet.h" />
     <ClInclude Include="DataBase\IDataBase.h" />
     <ClInclude Include="DataBase\IDataRecord.h" />
     <ClInclude Include="DataBase\IDataSheet.h" />
+    <ClInclude Include="DataBase\IDBString.h" />
     <ClInclude Include="DataBase\import.h" />
     <ClInclude Include="Device\ConsoleImpl.h" />
     <ClInclude Include="Device\DeviceEventHandler.h" />
@@ -188,6 +190,7 @@
     <ClCompile Include="Cache\CacheGroup.cpp" />
     <ClCompile Include="Cache\CacheIdentity.cpp" />
     <ClCompile Include="Cache\CacheMgr.cpp" />
+    <ClCompile Include="DataBase\DataRecord.cpp" />
     <ClCompile Include="DataBase\DataSheet.cpp" />
     <ClCompile Include="Device\Keyboard.cpp" />
     <ClCompile Include="Device\Mouse.cpp" />

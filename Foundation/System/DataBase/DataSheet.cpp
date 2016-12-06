@@ -1,46 +1,5 @@
 #include "DataSheet.h"
-
-#include <map>
-
-namespace sys
-{
-	// 数据记录
-	class DataRecord : public IDataRecord
-	{
-	public:
-		DataRecord();
-		virtual ~DataRecord();
-
-		virtual const char* getValue(const char* key)
-		{
-			if (key == nullptr)
-			{
-				return nullptr;
-			}
-
-			std::map<std::string, std::string>::const_iterator iter = _values.find(key);
-			if (iter != _values.end())
-			{
-				return iter->second.c_str();
-			}
-
-			return nullptr;
-		}
-
-		virtual void setValue(const char* key, const char* value)
-		{
-			if (key == nullptr || value == nullptr)
-			{
-				return;
-			}
-
-			_values[key] = value;
-		}
-	private:
-		// 键值对数据
-		std::map<std::string, std::string> _values;
-	};
-}
+#include "DataRecord.h"
 
 using namespace sys;
 

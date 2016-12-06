@@ -9,9 +9,8 @@ namespace hs
 	{
 	public:
 		GuestHttpDispatcher();
-		~GuestHttpDispatcher();
+		virtual ~GuestHttpDispatcher();
 	public:
-	protected:
-	private:
+		virtual bool hand(const char* url, std::map<std::string, std::string> params, sys::HttpResponse& response);
 	};
 }

@@ -1,14 +1,13 @@
 #pragma once
 
 #include "system.h"
-#include "IDBString.h"
 
 struct sqlite3;
 
 namespace web
 {
 	// sqlite Óï¾ä
-	class SQLiteString : public IDBString
+	class SQLiteString : public sys::IDBString
 	{
 	public:
 		SQLiteString(sys::IDataBase* db);
@@ -33,9 +32,9 @@ namespace web
 		// Ö´ÐÐsqlÓï¾ä
 		virtual bool executeSQL(const char* sqlExpression, sys::IDataSheet* pDataSheet = nullptr);
 		// »ñÈ¡db²Ù×Ý
-		const IDBString* getDBString();
+		virtual sys::IDBString* getDBString();
 	private:
 		sqlite3* _instance;
-		IDBString* _dbString;
+		sys::IDBString* _dbString;
 	};
 }

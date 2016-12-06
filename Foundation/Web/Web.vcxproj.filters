@@ -54,6 +54,9 @@
     <ClCompile Include="Client\WebClient.cpp">
       <Filter>Client</Filter>
     </ClCompile>
+    <ClCompile Include="DB\DBConnect.cpp">
+      <Filter>DB</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="web.h" />
@@ -67,15 +70,6 @@
       <Filter>WebApp</Filter>
     </ClInclude>
     <ClInclude Include="DB\SQLite.h">
-      <Filter>DB</Filter>
-    </ClInclude>
-    <ClInclude Include="DB\DataBase.h">
-      <Filter>DB</Filter>
-    </ClInclude>
-    <ClInclude Include="DB\IDBString.h">
-      <Filter>DB</Filter>
-    </ClInclude>
-    <ClInclude Include="DB\DataMember.h">
       <Filter>DB</Filter>
     </ClInclude>
     <ClInclude Include="Http\HttpActivity.h">
@@ -128,6 +122,12 @@
     </ClInclude>
     <ClInclude Include="Packet\PacketHeader.h">
       <Filter>Packet</Filter>
+    </ClInclude>
+    <ClInclude Include="DB\import.h">
+      <Filter>DB</Filter>
+    </ClInclude>
+    <ClInclude Include="DB\DBConnect.h">
+      <Filter>DB</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

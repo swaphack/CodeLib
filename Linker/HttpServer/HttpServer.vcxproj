@@ -15,15 +15,22 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Module\DataBase\DBManager.cpp" />
+    <ClCompile Include="Module\HttpDispatcher\AccountHttpDispatcher.cpp" />
+    <ClCompile Include="Module\HttpDispatcher\GuestHttpDispatcher.cpp" />
+    <ClCompile Include="Server\HttpDispatcher.cpp" />
     <ClCompile Include="Server\HttpHandler.cpp" />
     <ClCompile Include="Server\HttpReceiver.cpp" />
     <ClCompile Include="Server\HttpServer.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Module\HttpDispatcher\AccountHttpRequest.h" />
+    <ClInclude Include="Module\DataBase\DBManager.h" />
+    <ClInclude Include="Module\DataBase\import.h" />
+    <ClInclude Include="Module\HttpDispatcher\AccountHttpDispatcher.h" />
     <ClInclude Include="Module\HttpDispatcher\GuestHttpDispatcher.h" />
     <ClInclude Include="Module\HttpDispatcher\import.h" />
     <ClInclude Include="Module\HttpDispatcher\macros.h" />
+    <ClInclude Include="Module\import.h" />
     <ClInclude Include="Server\HttpDispatcher.h" />
     <ClInclude Include="Server\HttpHandler.h" />
     <ClInclude Include="Server\HttpReceiver.h" />
@@ -64,12 +71,12 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>../../Foundation/System/;../../Foundation/Web/;../../Foundation/Text/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../Foundation/System/;../../Foundation/Web/;../../Foundation/Text/;../../Lib/include/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>System.lib;Web.lib;Text.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(OutDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>System.lib;Web.lib;Text.lib;sqlite3.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>../../Lib/lib/sqlite3;$(OutDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">

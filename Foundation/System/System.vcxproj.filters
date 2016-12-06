@@ -388,6 +388,12 @@
     <ClInclude Include="Framework\FilePath.h">
       <Filter>Framework</Filter>
     </ClInclude>
+    <ClInclude Include="DataBase\DataRecord.h">
+      <Filter>DataBase</Filter>
+    </ClInclude>
+    <ClInclude Include="DataBase\IDBString.h">
+      <Filter>DataBase</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Base\File.cpp">
@@ -563,6 +569,9 @@
     </ClCompile>
     <ClCompile Include="Framework\FilePath.cpp">
       <Filter>Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="DataBase\DataRecord.cpp">
+      <Filter>DataBase</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

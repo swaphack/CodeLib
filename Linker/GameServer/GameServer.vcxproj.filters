@@ -60,12 +60,6 @@
     <ClInclude Include="Module\Packet\import.h">
       <Filter>Module\Packet</Filter>
     </ClInclude>
-    <ClInclude Include="Module\DataBase\DataBase.h">
-      <Filter>Module\DataBase</Filter>
-    </ClInclude>
-    <ClInclude Include="Module\DataBase\DBConnect.h">
-      <Filter>Module\DataBase</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Server\GameServer.cpp">

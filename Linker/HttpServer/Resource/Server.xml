@@ -6,4 +6,8 @@
   <resource>
     <websit path="E:/website" />
   </resource>
+  <database>
+    <url path="E:/GIT/CodeLib/Linker/HttpServer/Resource/hs.db" />
+    <table names="User" />
+  </database>
 </root>

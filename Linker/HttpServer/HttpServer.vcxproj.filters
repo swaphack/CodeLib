@@ -13,6 +13,9 @@
     <Filter Include="Module\HttpDispatcher">
       <UniqueIdentifier>{7025ce87-845e-4099-871e-5439ae7fb5de}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Module\DataBase">
+      <UniqueIdentifier>{d5dcfb3b-4731-4072-8191-08e25eeb3a78}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Xml Include="Resource\Server.xml">
@@ -29,6 +32,18 @@
     </ClCompile>
     <ClCompile Include="Server\HttpHandler.cpp">
       <Filter>Server</Filter>
+    </ClCompile>
+    <ClCompile Include="Module\DataBase\DBManager.cpp">
+      <Filter>Module\DataBase</Filter>
+    </ClCompile>
+    <ClCompile Include="Server\HttpDispatcher.cpp">
+      <Filter>Server</Filter>
+    </ClCompile>
+    <ClCompile Include="Module\HttpDispatcher\GuestHttpDispatcher.cpp">
+      <Filter>Module\HttpDispatcher</Filter>
+    </ClCompile>
+    <ClCompile Include="Module\HttpDispatcher\AccountHttpDispatcher.cpp">
+      <Filter>Module\HttpDispatcher</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -53,10 +68,19 @@
     <ClInclude Include="Module\HttpDispatcher\macros.h">
       <Filter>Module\HttpDispatcher</Filter>
     </ClInclude>
-    <ClInclude Include="Module\HttpDispatcher\AccountHttpRequest.h">
+    <ClInclude Include="Module\HttpDispatcher\import.h">
       <Filter>Module\HttpDispatcher</Filter>
     </ClInclude>
-    <ClInclude Include="Module\HttpDispatcher\import.h">
+    <ClInclude Include="Module\DataBase\DBManager.h">
+      <Filter>Module\DataBase</Filter>
+    </ClInclude>
+    <ClInclude Include="Module\import.h">
+      <Filter>Module</Filter>
+    </ClInclude>
+    <ClInclude Include="Module\DataBase\import.h">
+      <Filter>Module\DataBase</Filter>
+    </ClInclude>
+    <ClInclude Include="Module\HttpDispatcher\AccountHttpDispatcher.h">
       <Filter>Module\HttpDispatcher</Filter>
     </ClInclude>
   </ItemGroup>

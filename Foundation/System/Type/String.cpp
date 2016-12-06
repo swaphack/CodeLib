@@ -744,6 +744,7 @@ void String::split(char spot, std::vector<String>& dest)
 	char* ptr = _value;
 	int offset = 0;
 	int count = 0;
+	dest.clear();
 	while (offset + count <= _size)
 	{
 		if (*(ptr + offset + count) == spot || offset + count == _size)
@@ -769,6 +770,7 @@ void String::split(const char* spot, std::vector<String>& dest)
 	int i = 0;
 	int beginIndex = -1;
 	char tempChar = 0;
+	dest.clear();
 	while (offset + count <= _size)
 	{
 		if (offset + count == _size)
@@ -804,6 +806,81 @@ void String::split(const char* spot, std::vector<String>& dest)
 			if (i == len)
 			{
 				String str(ptr + offset, count);
+				dest.push_back(str);
+				offset = count + offset + len;
+				count = 0;
+			}
+		}
+	}
+}
+
+void String::split(char spot, std::vector<std::string>& dest)
+{
+	char* ptr = _value;
+	int offset = 0;
+	int count = 0;
+	dest.clear();
+	while (offset + count <= _size)
+	{
+		if (*(ptr + offset + count) == spot || offset + count == _size)
+		{
+			std::string str(ptr + offset, count);
+			dest.push_back(str);
+			offset = count + offset + 1;
+			count = 0;
+		}
+		else
+		{
+			count++;
+		}
+	}
+}
+
+void String::split(const char* spot, std::vector<std::string>& dest)
+{
+	char* ptr = _value;
+	int len = strlen(spot);
+	int offset = 0;
+	int count = 0;
+	int i = 0;
+	int beginIndex = -1;
+	char tempChar = 0;
+	dest.clear();
+	while (offset + count <= _size)
+	{
+		if (offset + count == _size)
+		{
+			std::string str(ptr + offset, count);
+			dest.push_back(str);
+			offset = count + offset + 1;
+			count = 0;
+		}
+		else
+		{
+			for (i = 0; i < len; i++)
+			{
+				tempChar = *(_value + offset + count + i);
+				if (tempChar == *spot)
+				{
+					beginIndex = i;
+				}
+				if (*(spot + i) != tempChar)
+				{
+					if (beginIndex != -1)
+					{
+						count += beginIndex + 1;
+					}
+					else
+					{
+						count++;
+					}
+					break;
+				}
+			}
+
+			if (i == len)
+			{
+				std::string str(ptr + offset, count);
 				dest.push_back(str);
 				offset = count + offset + len;
 				count = 0;

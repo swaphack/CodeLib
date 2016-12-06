@@ -42,7 +42,7 @@ namespace hs
 		// for url post param(xx=xx)
 		void handPostMethodParams(sys::String& inString, std::map<std::string, std::string>& outParams);
 	private:
-		typedef std::map<std::string, HttpDispatcher*> HttpDispatchers;
+		typedef std::map<int, HttpDispatcher*> HttpDispatchers;
 		HttpDispatchers m_mDispathers;
 	};
 }

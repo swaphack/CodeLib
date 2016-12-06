@@ -32,7 +32,7 @@ void HttpHandler::addDispatcher(HttpDispatcher* dispatcher)
 		return;
 	}
 
-	HttpDispatchers::iterator iter = m_mDispathers.find(dispatcher->getUrl());
+	HttpDispatchers::iterator iter = m_mDispathers.find(dispatcher->getIndex());
 
 	if (iter != m_mDispathers.end())
 	{
@@ -41,7 +41,7 @@ void HttpHandler::addDispatcher(HttpDispatcher* dispatcher)
 		m_mDispathers.erase(iter);
 	}
 
-	m_mDispathers[dispatcher->getUrl()] = dispatcher;
+	m_mDispathers[dispatcher->getIndex()] = dispatcher;
 }
 
 void HttpHandler::removeDispatcher(HttpDispatcher* dispatcher)
@@ -51,7 +51,7 @@ void HttpHandler::removeDispatcher(HttpDispatcher* dispatcher)
 		return;
 	}
 
-	HttpDispatchers::iterator iter = m_mDispathers.find(dispatcher->getUrl());
+	HttpDispatchers::iterator iter = m_mDispathers.find(dispatcher->getIndex());
 
 	if (iter != m_mDispathers.end())
 	{
@@ -77,14 +77,17 @@ void HttpHandler::dispatch(sys::HttpRequest* request, sys::HttpResponse& respons
 {
 	sys::HttpReqDocument* pDocument = request->getDocument();
 
-	if (!checkRequest(pDocument, response))
-	{
-		return;
-	}
+	bool bOK = true;
+
+	if (bOK) bOK = checkRequest(pDocument, response);
+	if (bOK) bOK = handRequest(pDocument, response);
 	
-	if (!handRequest(pDocument, response))
+	if (!bOK)
 	{
-		return;
+		response.getDocument()->setHttpVersion("HTTP/1.1");
+		response.getDocument()->setResponseCode("400");
+		response.getDocument()->setDescribe("ERROR");
+		response.getDocument()->writeContentString("ERROR");
 	}
 }
 
@@ -95,11 +98,8 @@ bool HttpHandler::checkRequest(sys::HttpReqDocument* pDocument, sys::HttpRespons
 	sys::String body = pDocument->getBody();
 
 	if (!method.compare(sys::HttpRequestConstant::HTTP_REQ_GET)
-		|| !method.compare(sys::HttpRequestConstant::HTTP_REQ_POST))
+		&& !method.compare(sys::HttpRequestConstant::HTTP_REQ_POST))
 	{// 非get和post请求，直接退出
-		response.getDocument()->setHttpVersion("HTTP/1.1");
-		response.getDocument()->setResponseCode("400");
-		response.getDocument()->setDescribe("ERROR");
 		return false;
 	}
 
@@ -129,7 +129,31 @@ bool HttpHandler::handRequest(sys::HttpReqDocument* pDocument, sys::HttpResponse
 		handPostMethodParams(body, reqParams);
 	}
 
-	return true;
+	if (reqParams.empty())
+	{
+		response.getDocument()->setHttpVersion("HTTP/1.1");
+		response.getDocument()->setResponseCode("200");
+		response.getDocument()->setDescribe("OK");
+		response.getDocument()->writeContentFile(url.c_str());
+
+		return true;
+	}
+	else
+	{
+		bool bFind = false;
+		HttpDispatchers::iterator iter = m_mDispathers.begin();
+		while (iter != m_mDispathers.end())
+		{
+			bFind = iter->second->hand(url.c_str(), reqParams, response);
+			if (bFind)
+			{
+				break;
+			}
+			iter++;
+		}
+
+		return bFind;
+	}
 }
 
 void HttpHandler::getRequestUrl(sys::String& inString, std::string& outString)

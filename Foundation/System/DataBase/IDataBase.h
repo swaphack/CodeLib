@@ -1,6 +1,7 @@
 #pragma once
 
 #include "IDataSheet.h"
+#include "IDBString.h"
 
 namespace sys
 {
@@ -16,5 +17,7 @@ namespace sys
 		virtual bool disconnect() = 0;
 		// Ö´ÐÐsqlÓï¾ä
 		virtual bool executeSQL(const char* sqlExpression, IDataSheet* pDataSheet = nullptr) = 0;
+		// »ñÈ¡db²Ù×ÝÓï¾ä
+		virtual IDBString* getDBString() = 0;
 	};
 }

@@ -1,4 +1,6 @@
 #include "Server/import.h"
+#include "Module/import.h"
+
 #include "text.h"
 #include "system.h"
 
@@ -28,7 +30,14 @@ int main(int argc, char** argv)
 		atoi(config->getValue("server.local", "port")),
 		10000);
 
+	// 网站本地资源路径
 	HttpServer->getResourceMgr()->getResource(ERT_LOCAL)->setUrl(config->getValue("resource.websit", "path"));
+
+	// 数据库
+	sys::String tables = config->getValue("database.table", "names"); 
+	std::vector<std::string> tableNameAry;
+	tables.split(',', tableNameAry);
+	hs::DBManager::getInstance()->init(config->getValue("database.url", "path"), tableNameAry);
 
 	delete config;
 

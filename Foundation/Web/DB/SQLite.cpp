@@ -2,8 +2,9 @@
 
 #ifndef USE_SQLITE
 #define USE_SQLITE
-#endif
 #include "third_party.h"
+#endif
+
 
 using namespace web;
 using namespace sys;
@@ -38,6 +39,7 @@ SQLite::SQLite()
 
 SQLite::~SQLite()
 {
+	this->disconnect();
 	SAFE_DELETE(_dbString);
 }
 
@@ -101,4 +103,9 @@ bool SQLite::executeSQL(const char* sqlExpression, IDataSheet* pDataSheet)
 	}
 
 	return result == SQLITE_OK;
+}
+
+IDBString* SQLite::getDBString()
+{
+	return _dbString;
 }
