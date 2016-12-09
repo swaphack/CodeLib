@@ -193,7 +193,6 @@
     <None Include="ribbon1.mfcribbon-ms" />
   </ItemGroup>
   <ItemGroup>
-    <Xml Include="Resource\3DModel\Image.xml" />
     <Xml Include="Resource\3DModel\Test.xml">
       <SubType>Designer</SubType>
     </Xml>

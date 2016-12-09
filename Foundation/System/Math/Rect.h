@@ -30,5 +30,18 @@ namespace sys
 				getMaxY() < _y ||
 				_y + _h < getMinY());
 		}
+
+		Rect& operator=(const Rect& rect)
+		{
+			x = rect.x;
+			y = rect.y;
+			width = rect.width;
+			height = rect.height;
+		}
+
+
+		static Rect Zero;
 	};
+
+	__declspec(selectany) Rect Rect::Zero = Rect();
 }

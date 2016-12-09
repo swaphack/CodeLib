@@ -2,4 +2,6 @@
 
 #include "texture_common.h"
 
-#include "shape_commond.h"
+#include "shape_common.h"
+
+#include "pointer_common.h"

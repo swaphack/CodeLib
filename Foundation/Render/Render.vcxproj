@@ -129,7 +129,7 @@
     <ClCompile Include="Graphic\Command\DrawCommander.cpp" />
     <ClCompile Include="Graphic\Command\DrawCommandList.cpp" />
     <ClCompile Include="Graphic\Command\GUID.cpp" />
-    <ClCompile Include="Graphic\Struct\shape_commond.cpp" />
+    <ClCompile Include="Graphic\Struct\shape_common.cpp" />
     <ClCompile Include="Platform\Windows\GLFrame.cpp" />
     <ClCompile Include="RenderApplication.cpp" />
     <ClCompile Include="Resource\Component\Image.cpp" />
@@ -138,9 +138,6 @@
     <ClCompile Include="Resource\Paser\JPEGImage.cpp" />
     <ClCompile Include="Resource\Paser\LabelImage.cpp" />
     <ClCompile Include="Resource\Paser\PNGImage.cpp" />
-    <ClCompile Include="Widget\Layout.cpp" />
-    <ClCompile Include="Widget\LayoutManager.cpp" />
-    <ClCompile Include="Widget\Widget.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="3d\Common\CtrlModel.h" />
@@ -243,7 +240,8 @@
     <ClInclude Include="Graphic\DCSample\macros.h" />
     <ClInclude Include="Graphic\import.h" />
     <ClInclude Include="Graphic\Struct\import.h" />
-    <ClInclude Include="Graphic\Struct\shape_commond.h" />
+    <ClInclude Include="Graphic\Struct\pointer_common.h" />
+    <ClInclude Include="Graphic\Struct\shape_common.h" />
     <ClInclude Include="Graphic\Struct\texture_common.h" />
     <ClInclude Include="Platform\import.h" />
     <ClInclude Include="Platform\Windows\GLFrame.h" />
@@ -271,10 +269,6 @@
     <ClInclude Include="Resource\Paser\LabelImage.h" />
     <ClInclude Include="Resource\Paser\macros.h" />
     <ClInclude Include="Resource\Paser\PNGImage.h" />
-    <ClInclude Include="Widget\Layout.h" />
-    <ClInclude Include="Widget\LayoutManager.h" />
-    <ClInclude Include="Widget\macros.h" />
-    <ClInclude Include="Widget\Widget.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -16,37 +16,23 @@ namespace render
 		std::string ImagePath;
 		// 纹理图片格式
 		ImageFormat Format;
-		// 顶点数组长度
-		int VertexCount;
-		// 纹理坐标(（u,v,0 三维）)
-		float* TexCoords;
+		// 纹理坐标(（u,v 三维）)
+		T_Vertex TexCoords;
 		// 顶点坐标（x,y,z 三维）
-		float* Vertexes;
+		T_Vertex Vertexes;
 		// 顶点法线（x,y,z 三维）
-		float* Normals;
-		// 顶点颜色（r,g,b 三色）
-		float* Colors;
-		// 顶点索引长度
-		int IndexCount;
+		T_Vertex Normals;
+		// 顶点颜色（r,g,b,a 三色+alpha）
+		T_Vertex Colors;
 		// 顶点索引(三角形，三个点决定一个三角形)
-		ushort* Indices;
+		T_Indice Indices;
 
 		T_ModelData()
 		{
-			TexCoords = nullptr;
-			Vertexes = nullptr;
-			Normals = nullptr;
-			Colors = nullptr;
-			Indices = nullptr;
 		}
 
 		~T_ModelData()
 		{
-			SAFE_FREE(TexCoords);
-			SAFE_FREE(Vertexes);
-			SAFE_FREE(Normals);
-			SAFE_FREE(Colors);
-			SAFE_FREE(Indices);
 		}
 	};
 	/**

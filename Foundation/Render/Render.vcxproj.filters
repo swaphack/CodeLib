@@ -136,9 +136,6 @@
     <ClCompile Include="Graphic\Command\DrawCommand.cpp">
       <Filter>Graphic\Command</Filter>
     </ClCompile>
-    <ClCompile Include="Graphic\Struct\shape_commond.cpp">
-      <Filter>Graphic\Struct</Filter>
-    </ClCompile>
     <ClCompile Include="Resource\Component\Image.cpp">
       <Filter>Resource\Component</Filter>
     </ClCompile>
@@ -198,17 +195,11 @@
     <ClCompile Include="Common\Node\Notify.cpp">
       <Filter>Common\Node</Filter>
     </ClCompile>
-    <ClCompile Include="Widget\Layout.cpp">
-      <Filter>Widget</Filter>
-    </ClCompile>
-    <ClCompile Include="Widget\Widget.cpp">
-      <Filter>Widget</Filter>
-    </ClCompile>
-    <ClCompile Include="Widget\LayoutManager.cpp">
-      <Filter>Widget</Filter>
-    </ClCompile>
     <ClCompile Include="Common\Shader\Mesh.cpp">
       <Filter>Common\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphic\Struct\shape_common.cpp">
+      <Filter>Graphic\Struct</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -444,9 +435,6 @@
     <ClInclude Include="Graphic\Command\DrawCommand.h">
       <Filter>Graphic\Command</Filter>
     </ClInclude>
-    <ClInclude Include="Graphic\Struct\shape_commond.h">
-      <Filter>Graphic\Struct</Filter>
-    </ClInclude>
     <ClInclude Include="Graphic\Struct\texture_common.h">
       <Filter>Graphic\Struct</Filter>
     </ClInclude>
@@ -587,20 +575,14 @@
     <ClInclude Include="Common\Node\Notify.h">
       <Filter>Common\Node</Filter>
     </ClInclude>
-    <ClInclude Include="Widget\Widget.h">
-      <Filter>Widget</Filter>
-    </ClInclude>
-    <ClInclude Include="Widget\Layout.h">
-      <Filter>Widget</Filter>
-    </ClInclude>
-    <ClInclude Include="Widget\macros.h">
-      <Filter>Widget</Filter>
-    </ClInclude>
-    <ClInclude Include="Widget\LayoutManager.h">
-      <Filter>Widget</Filter>
-    </ClInclude>
     <ClInclude Include="Common\Shader\Mesh.h">
       <Filter>Common\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphic\Struct\pointer_common.h">
+      <Filter>Graphic\Struct</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphic\Struct\shape_common.h">
+      <Filter>Graphic\Struct</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -699,9 +681,6 @@
     </Filter>
     <Filter Include="3d\Common">
       <UniqueIdentifier>{fe27589b-7893-4862-9ec5-65916e21cc3e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Widget">
-      <UniqueIdentifier>{e892e171-2f26-47ae-9580-732482eefe7f}</UniqueIdentifier>
     </Filter>
     <Filter Include="DrawNode">
       <UniqueIdentifier>{c3eeb252-4d38-4194-8503-f7bbbff42e74}</UniqueIdentifier>

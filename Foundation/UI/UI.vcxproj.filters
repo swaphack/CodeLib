@@ -1,103 +1,55 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="UIBase">
-      <UniqueIdentifier>{3e463f27-1201-4472-ba51-90b8df4318e3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Control">
-      <UniqueIdentifier>{1f7fa921-3298-4ac3-807c-61486102e78c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Parser">
-      <UniqueIdentifier>{5cd78107-f8ec-4d2b-84e8-4574482e3e1f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Loader">
-      <UniqueIdentifier>{4049444b-6911-4b2d-8b55-59f447dcad3c}</UniqueIdentifier>
-    </Filter>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="UIBase\import.h">
-      <Filter>UIBase</Filter>
-    </ClInclude>
-    <ClInclude Include="UIBase\macros.h">
-      <Filter>UIBase</Filter>
-    </ClInclude>
-    <ClInclude Include="UIBase\UIProtocol.h">
-      <Filter>UIBase</Filter>
-    </ClInclude>
-    <ClInclude Include="Control\import.h">
-      <Filter>Control</Filter>
-    </ClInclude>
-    <ClInclude Include="Control\macros.h">
-      <Filter>Control</Filter>
-    </ClInclude>
     <ClInclude Include="ui.h" />
-    <ClInclude Include="Parser\helper.h">
-      <Filter>Parser</Filter>
+    <ClInclude Include="Widget\macros.h">
+      <Filter>Widget</Filter>
     </ClInclude>
-    <ClInclude Include="Parser\import.h">
-      <Filter>Parser</Filter>
+    <ClInclude Include="Widget\Widget.h">
+      <Filter>Widget</Filter>
     </ClInclude>
-    <ClInclude Include="Parser\macros.h">
-      <Filter>Parser</Filter>
+    <ClInclude Include="Layout\Layout.h">
+      <Filter>Layout</Filter>
     </ClInclude>
-    <ClInclude Include="Parser\NodeProperty.h">
-      <Filter>Parser</Filter>
+    <ClInclude Include="Layout\SizePolicy.h">
+      <Filter>Layout</Filter>
     </ClInclude>
-    <ClInclude Include="Parser\UIProxy.h">
-      <Filter>Parser</Filter>
+    <ClInclude Include="Layout\LayoutItem.h">
+      <Filter>Layout</Filter>
     </ClInclude>
-    <ClInclude Include="Parser\INodeSave.h">
-      <Filter>Parser</Filter>
+    <ClInclude Include="Layout\macros.h">
+      <Filter>Layout</Filter>
     </ClInclude>
-    <ClInclude Include="Parser\INodeLoad.h">
-      <Filter>Parser</Filter>
+    <ClInclude Include="Widget\import.h">
+      <Filter>Widget</Filter>
     </ClInclude>
-    <ClInclude Include="Parser\INodeParser.h">
-      <Filter>Parser</Filter>
-    </ClInclude>
-    <ClInclude Include="UIBase\NodeExt.h">
-      <Filter>UIBase</Filter>
-    </ClInclude>
-    <ClInclude Include="Loader\ImageLoader.h">
-      <Filter>Loader</Filter>
-    </ClInclude>
-    <ClInclude Include="Loader\import.h">
-      <Filter>Loader</Filter>
-    </ClInclude>
-    <ClInclude Include="Loader\macros.h">
-      <Filter>Loader</Filter>
-    </ClInclude>
-    <ClInclude Include="Loader\NodeLoader.h">
-      <Filter>Loader</Filter>
-    </ClInclude>
-    <ClInclude Include="Loader\TextLoader.h">
-      <Filter>Loader</Filter>
+    <ClInclude Include="Widget\NWidget.h">
+      <Filter>Widget</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="UIBase\UIProtocol.cpp">
-      <Filter>UIBase</Filter>
+    <Filter Include="Widget">
+      <UniqueIdentifier>{1635ebad-92e1-4c87-8a18-0057db159e87}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Layout">
+      <UniqueIdentifier>{25c75f58-eb86-4a54-bbe3-e3e0a690a482}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Widget\Widget.cpp">
+      <Filter>Widget</Filter>
     </ClCompile>
-    <ClCompile Include="Parser\NodeProperty.cpp">
-      <Filter>Parser</Filter>
+    <ClCompile Include="Layout\Layout.cpp">
+      <Filter>Layout</Filter>
     </ClCompile>
-    <ClCompile Include="Parser\UIProxy.cpp">
-      <Filter>Parser</Filter>
+    <ClCompile Include="Layout\LayoutItem.cpp">
+      <Filter>Layout</Filter>
     </ClCompile>
-    <ClCompile Include="Parser\INodeParser.cpp">
-      <Filter>Parser</Filter>
+    <ClCompile Include="Layout\SizePolicy.cpp">
+      <Filter>Layout</Filter>
     </ClCompile>
-    <ClCompile Include="UIBase\NodeExt.cpp">
-      <Filter>UIBase</Filter>
-    </ClCompile>
-    <ClCompile Include="Loader\ImageLoader.cpp">
-      <Filter>Loader</Filter>
-    </ClCompile>
-    <ClCompile Include="Loader\NodeLoader.cpp">
-      <Filter>Loader</Filter>
-    </ClCompile>
-    <ClCompile Include="Loader\TextLoader.cpp">
-      <Filter>Loader</Filter>
+    <ClCompile Include="Widget\NWidget.cpp">
+      <Filter>Widget</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

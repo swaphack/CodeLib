@@ -74,8 +74,6 @@ T_ModelData* ModelFile::loadData(const char* filepath)
 
 	pElement = (tinyxml2::XMLElement*)pRoot;
 	modelData.Name = pElement->Attribute("Name");
-	modelData.VertexCount = atoi(pElement->Attribute("VertexCount"));
-	modelData.IndexCount = atoi(pElement->Attribute("IndexCount"));
 
 	pRoot = pRoot->FirstChild();
 	while (pRoot)
@@ -88,27 +86,38 @@ T_ModelData* ModelFile::loadData(const char* filepath)
 		}
 		else if (strcmp(pElement->Value(), "TexCoords") == 0)
 		{
-			modelData.TexCoords = getFloatAry(pElement->GetText(), modelData.VertexCount);
+			modelData.TexCoords.count = pElement->IntAttribute("count");
+			modelData.TexCoords.size = pElement->IntAttribute("size");
+			modelData.TexCoords.value = getFloatAry(pElement->GetText(), modelData.TexCoords.count);
 		}
 		else if (strcmp(pElement->Value(), "Vertexes") == 0)
 		{
-			modelData.Vertexes = getFloatAry(pElement->GetText(), modelData.VertexCount);
+			modelData.Vertexes.count = pElement->IntAttribute("count");
+			modelData.Vertexes.size = pElement->IntAttribute("size");
+			modelData.Vertexes.value = getFloatAry(pElement->GetText(), modelData.Vertexes.count);
 		}
 		else if (strcmp(pElement->Value(), "Normals") == 0)
 		{
-			modelData.Normals = getFloatAry(pElement->GetText(), modelData.VertexCount);
+			modelData.Normals.count = pElement->IntAttribute("count");
+			modelData.Normals.size = pElement->IntAttribute("size");
+			modelData.Normals.value = getFloatAry(pElement->GetText(), modelData.Normals.count);
 		}
 		else if (strcmp(pElement->Value(), "Colors") == 0)
 		{
-			modelData.Colors = getFloatAry(pElement->GetText(), modelData.VertexCount);
+			modelData.Colors.count = pElement->IntAttribute("count");
+			modelData.Colors.size = pElement->IntAttribute("size");
+			modelData.Colors.value = getFloatAry(pElement->GetText(), modelData.Colors.count);
 		}
 		else if (strcmp(pElement->Value(), "Indices") == 0)
 		{
-			modelData.Indices = getUShortAry(pElement->GetText(), modelData.IndexCount);
+			modelData.Indices.count = pElement->IntAttribute("count");
+			modelData.Indices.value = getUShortAry(pElement->GetText(), modelData.Indices.count);
 		}
 		
 		pRoot = pRoot->NextSibling();
 	}
+
+	delete pDoccument;
 
 	return &modelData;
 }
@@ -132,8 +141,11 @@ CtrlModel* ModelFile::loadModel(T_ModelData* pData)
 
 	CtrlModel* pModel = CREATE_NODE(CtrlModel);
 	pModel->setTexFrame(frame);
-	pModel->getMesh()->setVertexes(pData->VertexCount, pData->Vertexes, pData->Normals, pData->Colors, pData->TexCoords);
-	pModel->getMesh()->setIndices(pData->IndexCount, pData->Indices);
+	pModel->getMesh()->setVertexes(pData->Vertexes.count, pData->Vertexes.value);
+	pModel->getMesh()->setNormals(pData->Normals.count, pData->Normals.value);
+	pModel->getMesh()->setColors(pData->Colors.count, pData->Colors.value, pData->Colors.size);
+	pModel->getMesh()->setUV(pData->TexCoords.count, pData->TexCoords.value, pData->TexCoords.size);
+	pModel->getMesh()->setIndices(pData->Indices.count, pData->Indices.value);
 
 	return pModel;
 }

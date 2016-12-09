@@ -92,7 +92,3 @@ Camera* Canvas::getCamera()
 
 	return _view->getCamera();
 }
-
-
-
-

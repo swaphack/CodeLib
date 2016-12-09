@@ -14,25 +14,19 @@ namespace render
 		int TextureID;
 		// 颜色
 		sys::Color4F Color;
-
-		// 顶点数
-		int VertexCount;
-		// 顶点坐标 (x,y,z)
-		float* Vertexes;
-		// 法线 (x,y,z)
-		float* Normals;
-		// 颜色 (r,g,b)
-		float* Colors;
-		// 纹理坐标 (x,y,z)
-		float* TexCoords;
-
-		// 顶点数
-		int IndexCount;
-		// 顶点索引
-		ushort* Indices;
-
 		// 混色参数
 		BlendParam Blend;
+
+		// 顶点坐标 (x,y,z)
+		T_Vertex* Vertexes;
+		// 法线 (x,y,z)
+		T_Vertex* Normals;
+		// 颜色 (r,g,b)
+		T_Vertex* Colors;
+		// 纹理坐标 (x,y,z)
+		T_Vertex* TexCoords;
+		// 顶点索引
+		T_Indice* Indices;
 	public:
 		DCTextureBatch();
 		virtual ~DCTextureBatch();
@@ -41,7 +35,7 @@ namespace render
 
 		static DCTextureBatch* create(int textureID,
 			const sys::Color4B& color, uchar opacity, const BlendParam& blend,
-			int vertexCount, float* normals, float* positions, float* colors, float* coords,
-			int indexCount, ushort* indices);
+			const T_Vertex* vertexes, const T_Vertex* normals, const T_Vertex* colors, const T_Vertex* coords,
+			const T_Indice* indices);
 	};
 }

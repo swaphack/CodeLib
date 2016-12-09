@@ -63,6 +63,7 @@ namespace render
 		}
 	};
 
+	// »ìºÏ²ÎÊı
 	struct BlendParam
 	{
 		int src;

@@ -5,101 +5,81 @@
 using namespace render;
 
 Mesh::Mesh()
-:_vertexes(nullptr)
-, _texCoords(nullptr)
-, _indices(nullptr)
-, _normals(nullptr)
-, _colors(nullptr)
-, _triangleCount(0)
-, _vertexCount(0)
 {
 
 }
 
 Mesh::~Mesh()
 {
-	SAFE_FREE(_normals);
-	SAFE_FREE(_vertexes);
-	SAFE_FREE(_colors);
-	SAFE_FREE(_texCoords);
-	SAFE_FREE(_indices);
 }
 
-void Mesh::setVertexes(int count, float* vertexes, float* normals, float* colors, float* texCoords)
+void Mesh::setVertexes(int count, float* vertexes)
 {
-	if (vertexes == nullptr || normals == nullptr || colors == nullptr || texCoords == nullptr)
+	float* vertors = (float*)malloc(count * sizeof(float));
+
+	int size = 3;
+	const sys::Volume& volume = Tool::getGLViewSize();
+
+	for (int i = 0; i < count / size; i++)
 	{
-		return;
+		vertors[size * i] = vertexes[size * i] / volume.width;
+		vertors[size * i + 1] = vertexes[size * i + 1] / volume.height;
+		vertors[size * i + 2] = vertexes[size * i + 2] / volume.deep;
 	}
 
-	_vertexCount = count;
+	_vertexes.init(count, vertors, size);
 
-	SAFE_FREE(_vertexes);
-	SAFE_FREE(_normals);
-	SAFE_FREE(_colors);
-	SAFE_FREE(_texCoords);
+	free(vertors);
+}
 
-	for (int i = 0; i < count / 3; i++)
+void Mesh::setNormals(int count, float* normals)
+{
+	int size = 3;
+
+	_normals.init(count, normals, size);
+}
+
+void Mesh::setColors(int count, float* colors, int size)
+{
+	float* vertors = (float*)malloc(count * sizeof(float));
+
+	for (int i = 0; i < count; i++)
 	{
-		vertexes[3 * i] /= Tool::getGLViewSize().width;
-		vertexes[3 * i + 1] /= Tool::getGLViewSize().height;
-		vertexes[3 * i + 2] /= Tool::getGLViewSize().deep;
-
-		colors[3 * i] /= sys::COLOR_FLOAT_VALUE;
-		colors[3 * i + 1] /= sys::COLOR_FLOAT_VALUE;
-		colors[3 * i + 2] /= sys::COLOR_FLOAT_VALUE;
+		vertors[i] = colors[i] / sys::COLOR_FLOAT_VALUE;
 	}
 
+	_colors.init(count, vertors, size);
 
-	_vertexes = (float*)malloc(count * sizeof(float));
-	_normals = (float*)malloc(count * sizeof(float));
-	_colors = (float*)malloc(count * sizeof(float));
-	_texCoords = (float*)malloc(count * sizeof(float));
+	free(vertors);
+}
 
-	// 顶点
-	memcpy(_vertexes, vertexes, count * sizeof(float));
-	// 法线
-	memcpy(_normals, normals, count * sizeof(float));
-	// 颜色
-	memcpy(_colors, colors, count * sizeof(float));
-	// 纹理坐标
-	memcpy(_texCoords, texCoords, count * sizeof(float));
+void Mesh::setUV(int count, float* texCoords, int size)
+{
+	_uvs.init(count, texCoords, size);
 }
 
 void Mesh::setIndices(int count, ushort* indices)
 {
-	if (indices == nullptr)
-	{
-		return;
-	}
-
-	_triangleCount = count;
-
-	SAFE_FREE(_indices);
-
-	_indices = (ushort*)malloc(count * sizeof(ushort));
-
-	// 索引
-	memcpy(_indices, indices, count * sizeof(ushort));
+	_indices.init(count, indices);
 }
 
 int Mesh::getVertexCount()
 {
-	return _vertexCount / 3;
+	return _vertexes.count / _vertexes.size;
 }
 
 int Mesh::getTriangleCount()
 {
-	return _triangleCount / 3;
+	return _indices.count / 3;
 }
 
 void Mesh::apply(int textureID, const sys::Color4B& color, uchar opacity, const BlendParam& blend)
 {
-	if (_vertexes == nullptr 
-		|| _normals == nullptr 
-		|| _colors == nullptr 
-		|| _texCoords == nullptr
-		|| _indices == nullptr)
+	if (_vertexes.value == nullptr 
+		|| _normals.value == nullptr
+		|| _colors.value == nullptr
+		|| _uvs.value == nullptr
+		|| _indices.value == nullptr)
 	{
 		return;
 	}
@@ -107,6 +87,6 @@ void Mesh::apply(int textureID, const sys::Color4B& color, uchar opacity, const 
 	G_DRAWCOMMANDER->addCommand(
 		DCTextureBatch::create(textureID,
 		color, opacity, blend,
-		_vertexCount, _normals, _vertexes, _colors, _texCoords,
-		_triangleCount, _indices));
+		&_vertexes, &_normals, &_colors, &_uvs,
+		&_indices));
 }

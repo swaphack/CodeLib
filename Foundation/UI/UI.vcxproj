@@ -65,36 +65,22 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Control\import.h" />
-    <ClInclude Include="Control\macros.h" />
-    <ClInclude Include="Loader\ImageLoader.h" />
-    <ClInclude Include="Loader\import.h" />
-    <ClInclude Include="Loader\macros.h" />
-    <ClInclude Include="Loader\NodeLoader.h" />
-    <ClInclude Include="Loader\TextLoader.h" />
-    <ClInclude Include="Parser\helper.h" />
-    <ClInclude Include="Parser\import.h" />
-    <ClInclude Include="Parser\INodeLoad.h" />
-    <ClInclude Include="Parser\INodeSave.h" />
-    <ClInclude Include="Parser\macros.h" />
-    <ClInclude Include="Parser\INodeParser.h" />
-    <ClInclude Include="Parser\NodeProperty.h" />
-    <ClInclude Include="Parser\UIProxy.h" />
+    <ClInclude Include="Layout\Layout.h" />
+    <ClInclude Include="Layout\LayoutItem.h" />
+    <ClInclude Include="Layout\macros.h" />
+    <ClInclude Include="Layout\SizePolicy.h" />
     <ClInclude Include="ui.h" />
-    <ClInclude Include="UIBase\import.h" />
-    <ClInclude Include="UIBase\macros.h" />
-    <ClInclude Include="UIBase\NodeExt.h" />
-    <ClInclude Include="UIBase\UIProtocol.h" />
+    <ClInclude Include="Widget\import.h" />
+    <ClInclude Include="Widget\macros.h" />
+    <ClInclude Include="Widget\NWidget.h" />
+    <ClInclude Include="Widget\Widget.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Loader\ImageLoader.cpp" />
-    <ClCompile Include="Loader\NodeLoader.cpp" />
-    <ClCompile Include="Loader\TextLoader.cpp" />
-    <ClCompile Include="Parser\INodeParser.cpp" />
-    <ClCompile Include="Parser\NodeProperty.cpp" />
-    <ClCompile Include="Parser\UIProxy.cpp" />
-    <ClCompile Include="UIBase\NodeExt.cpp" />
-    <ClCompile Include="UIBase\UIProtocol.cpp" />
+    <ClCompile Include="Layout\Layout.cpp" />
+    <ClCompile Include="Layout\LayoutItem.cpp" />
+    <ClCompile Include="Layout\SizePolicy.cpp" />
+    <ClCompile Include="Widget\NWidget.cpp" />
+    <ClCompile Include="Widget\Widget.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

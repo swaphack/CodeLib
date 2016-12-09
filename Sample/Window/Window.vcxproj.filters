@@ -67,8 +67,5 @@
     <Xml Include="Resource\3DModel\Test.xml">
       <Filter>Resource\3DModel</Filter>
     </Xml>
-    <Xml Include="Resource\3DModel\Image.xml">
-      <Filter>Resource\3DModel</Filter>
-    </Xml>
   </ItemGroup>
 </Project>
