@@ -1,25 +1,28 @@
 #include "Expression.h"
 #include "AbstractSyntaxTree.h"
 
+#include <stack>
+
 using namespace script;
 
 Expression::Expression()
 {
-	m_pAST = new AbstractSyntaxTree();
 }
 
 Expression::~Expression()
 {
-	delete m_pAST;
 }
 
-AbstractSyntaxTree* Expression::getAST()
+Token::const_iterator Expression::read(Token::const_iterator begin, Token::const_iterator end)
 {
-	return m_pAST;
-}
+	std::stack<>
+	Token::const_iterator iter = begin;
+	while (iter != end)
+	{
+		
 
-bool Expression::read(Token::const_iterator begin, Token::const_iterator end)
-{
-	return false;
+		iter++;
+	}
+	return begin;
 }
 

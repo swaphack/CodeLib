@@ -65,18 +65,18 @@ void Stencil::visit()
 	glGetIntegerv(GL_STENCIL_PASS_DEPTH_FAIL, &nStencilPassDepthFail);
 	glGetIntegerv(GL_STENCIL_PASS_DEPTH_PASS, &nStencilPassDepthPass);
 
-	glStencilFunc(GL_ALWAYS, 1, 0xff);
-	glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
 	glEnable(GL_STENCIL_TEST);
-	glDepthMask(GL_FALSE);
+
+	glStencilFunc(GL_NEVER, 0x00, 0x00);
+	glStencilOp(GL_INCR, GL_INCR, GL_INCR);
+
 	if (_stencilNode)
 	{
 		_stencilNode->visit();
 	}
-	glDepthMask(GL_TRUE);
 
-	glStencilFunc(GL_EQUAL, 1, 0xff);
-	glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
+	glStencilFunc(GL_EQUAL, 0x02, 0xff);
+	glStencilOp(GL_KEEP, GL_KEEP, GL_KEEP);
 
 	Node::visit();
 
@@ -86,6 +86,8 @@ void Stencil::visit()
 	{
 		glDisable(GL_DEPTH_TEST);
 	}
+
+	glDisable(GL_STENCIL_TEST);
 }
 
 void Stencil::setStencilNode(Node* node)

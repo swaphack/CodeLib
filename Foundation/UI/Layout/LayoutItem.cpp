@@ -129,14 +129,6 @@ SizePolicy& LayoutItem::getSizePolicy()
 	return m_spAdjust;
 }
 
-void LayoutItem::onViewSizeChanged(const sys::Size& inputSize)
-{
-	if (m_pWidget == nullptr)
-	{
-		return;
-	}
-}
-
 void LayoutItem::setLayoutItemGeometry(const sys::Rect& rect)
 {
 	if (m_pWidget == nullptr)
@@ -144,11 +136,11 @@ void LayoutItem::setLayoutItemGeometry(const sys::Rect& rect)
 		return;
 	}
 
-	m_pWidget->setGeometry(rect);
+	this->setWidgetGeomerty(rect);
 
 	if (m_pLayout)
 	{
-		m_pLayout->onViewSizeChanged(sys::Size(rect.width, rect.height));
+		m_pLayout->resize(sys::Size(rect.width, rect.height));
 	}
 }
 
@@ -238,10 +230,20 @@ sys::Size LayoutItem::getLayoutItemMaxSize()
 
 void LayoutItem::setWidgetGeomerty(const sys::Rect& geometry)
 {
-	if (m_pWidget)
+	if (m_pWidget == nullptr)
 	{
-		m_pWidget->setGeometry(geometry);
+		return;
 	}
+
+	const sys::Vector& anchorPoint = m_pWidget->getAnchorPoint();
+
+	float posX = geometry.x + anchorPoint.x * geometry.width;
+	float posY = geometry.y + anchorPoint.y * geometry.height;
+	float width = geometry.width;
+	float height = geometry.height;
+
+	m_pWidget->setPosition(posX, posY);
+	m_pWidget->setSize(width, height);
 }
 
 //////////////////////////////////////////////////////////////////////////

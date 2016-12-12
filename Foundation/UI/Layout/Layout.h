@@ -6,19 +6,6 @@
 
 namespace ui
 {
-	// 大小约束
-	enum SizeConstraint
-	{
-		// 固定大小
-		ESC_FixedSize,
-		// 缩小到最小时保持最小
-		ESC_MinimumSize,
-		// 放大到最大是保持最大
-		ESC_MaximumSize,
-		// 自动缩放
-		ESC_Expending,
-	};
-
 	/**
 	*	界面布局
 	*	所有布局中的项均为水平居中
@@ -79,7 +66,7 @@ namespace ui
 		/**
 		*	当窗口大小发生改变时
 		*/
-		virtual void onViewSizeChanged(const sys::Size& inputSize);
+		virtual void resize(const sys::Size& inputSize);
 		/**
 		*	获取布局的最小面积
 		*/
@@ -102,7 +89,7 @@ namespace ui
 		*	包含固定大小和百分比两种情况
 		*	先计算固定大小的值，再计算百分比的值
 		*/
-		virtual void onLayoutInnerSizeChanged(const sys::Size& innerSize) = 0;
+		virtual void onLayoutInnerSizeChanged(const sys::Size& innerSize);
 		/**
 		*	计算布局项宽度
 		*/
@@ -141,11 +128,6 @@ namespace ui
 		*	获取布局内部的最大面积
 		*/
 		virtual sys::Size getLayoutInnerMaxSize();
-		/**
-		*	布局内部大小改变
-		*	 
-		*/
-		virtual void onLayoutInnerSizeChanged(const sys::Size& innerSize);
 	};
 
 	/** 
@@ -165,9 +147,6 @@ namespace ui
 		*	获取布局的最大面积
 		*/
 		virtual sys::Size getLayoutItemMaxSize();
-	protected:
-		// 当窗口大小发生改变时
-		virtual void onLayoutInnerSizeChanged(const sys::Size& innerSize);
 	};
 
 	// 格子布局
@@ -177,7 +156,13 @@ namespace ui
 		GridLayout();
 		virtual ~GridLayout();
 	public:
-		// 当窗口大小发生改变时
-		virtual void onLayoutInnerSizeChanged(const sys::Size& innerSize);
+		/**
+		*	获取布局的最小面积
+		*/
+		virtual sys::Size getLayoutItemMinSize();
+		/**
+		*	获取布局的最大面积
+		*/
+		virtual sys::Size getLayoutItemMaxSize();
 	};
 }

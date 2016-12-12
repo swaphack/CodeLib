@@ -23,9 +23,7 @@ void WndRender::show()
 	
 	//this->testText();
 
-	this->testScrollView();
-
-	this->testModel();
+	this->testStencil();
 }
 
 void WndRender::testMoveImage()
@@ -210,13 +208,13 @@ void WndRender::testStencil()
 	CtrlImage* pImage = CREATE_NODE(CtrlImage);
 	pImage->setImagePath("Resource/Image/sqi.png");
 	pImage->setVolume(200, 200, 0);
+	pImage->setPosition(512, 384, 0);
 
 	pStencil->setStencilNode(pImage);
 
 	pImage  = CREATE_NODE(CtrlImage);
 	pImage->setImagePath("Resource/Image/sqi.png");
 	pImage->setVolume(300, 300, 0);
-	pImage->setPosition(100, 200);
 
 	pStencil->addChild(pImage);
 }

@@ -2,12 +2,6 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClInclude Include="ui.h" />
-    <ClInclude Include="Widget\macros.h">
-      <Filter>Widget</Filter>
-    </ClInclude>
-    <ClInclude Include="Widget\Widget.h">
-      <Filter>Widget</Filter>
-    </ClInclude>
     <ClInclude Include="Layout\Layout.h">
       <Filter>Layout</Filter>
     </ClInclude>
@@ -20,25 +14,89 @@
     <ClInclude Include="Layout\macros.h">
       <Filter>Layout</Filter>
     </ClInclude>
-    <ClInclude Include="Widget\import.h">
-      <Filter>Widget</Filter>
+    <ClInclude Include="File\Load\ImageLoader.h">
+      <Filter>File\Load</Filter>
     </ClInclude>
-    <ClInclude Include="Widget\NWidget.h">
-      <Filter>Widget</Filter>
+    <ClInclude Include="File\Load\import.h">
+      <Filter>File\Load</Filter>
+    </ClInclude>
+    <ClInclude Include="File\Load\macros.h">
+      <Filter>File\Load</Filter>
+    </ClInclude>
+    <ClInclude Include="File\Load\TextLoader.h">
+      <Filter>File\Load</Filter>
+    </ClInclude>
+    <ClInclude Include="File\Parse\helper.h">
+      <Filter>File\Parse</Filter>
+    </ClInclude>
+    <ClInclude Include="File\Parse\import.h">
+      <Filter>File\Parse</Filter>
+    </ClInclude>
+    <ClInclude Include="File\Parse\macros.h">
+      <Filter>File\Parse</Filter>
+    </ClInclude>
+    <ClInclude Include="File\import.h">
+      <Filter>File</Filter>
+    </ClInclude>
+    <ClInclude Include="File\UIProxy.h">
+      <Filter>File</Filter>
+    </ClInclude>
+    <ClInclude Include="Layout\import.h">
+      <Filter>Layout</Filter>
+    </ClInclude>
+    <ClInclude Include="Display\Display.h">
+      <Filter>Display</Filter>
+    </ClInclude>
+    <ClInclude Include="File\Parse\WidgetProperty.h">
+      <Filter>File\Parse</Filter>
+    </ClInclude>
+    <ClInclude Include="macros.h" />
+    <ClInclude Include="File\macros.h">
+      <Filter>File</Filter>
+    </ClInclude>
+    <ClInclude Include="Display\import.h">
+      <Filter>Display</Filter>
+    </ClInclude>
+    <ClInclude Include="Display\macros.h">
+      <Filter>Display</Filter>
+    </ClInclude>
+    <ClInclude Include="File\Parse\IXmlSaver.h">
+      <Filter>File\Parse</Filter>
+    </ClInclude>
+    <ClInclude Include="File\Parse\IXmlLoader.h">
+      <Filter>File\Parse</Filter>
+    </ClInclude>
+    <ClInclude Include="File\Load\NodeLoader.h">
+      <Filter>File\Load</Filter>
+    </ClInclude>
+    <ClInclude Include="File\Parse\WidgetParser.h">
+      <Filter>File\Parse</Filter>
+    </ClInclude>
+    <ClInclude Include="File\Parse\LayoutParser.h">
+      <Filter>File\Parse</Filter>
+    </ClInclude>
+    <ClInclude Include="File\Parse\LayoutItemParser.h">
+      <Filter>File\Parse</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Filter Include="Widget">
-      <UniqueIdentifier>{1635ebad-92e1-4c87-8a18-0057db159e87}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Layout">
       <UniqueIdentifier>{25c75f58-eb86-4a54-bbe3-e3e0a690a482}</UniqueIdentifier>
     </Filter>
+    <Filter Include="File">
+      <UniqueIdentifier>{f4961c8d-bcbc-4200-ba95-4e6bcb507eb1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="File\Load">
+      <UniqueIdentifier>{e11f3531-b386-4473-aeed-6b64a9be76cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="File\Parse">
+      <UniqueIdentifier>{6644c169-2edf-4c5c-a413-bf0adc974e17}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Display">
+      <UniqueIdentifier>{1c8ec4f5-d498-4823-a48b-5df1683c61d4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Widget\Widget.cpp">
-      <Filter>Widget</Filter>
-    </ClCompile>
     <ClCompile Include="Layout\Layout.cpp">
       <Filter>Layout</Filter>
     </ClCompile>
@@ -48,8 +106,29 @@
     <ClCompile Include="Layout\SizePolicy.cpp">
       <Filter>Layout</Filter>
     </ClCompile>
-    <ClCompile Include="Widget\NWidget.cpp">
-      <Filter>Widget</Filter>
+    <ClCompile Include="File\Load\ImageLoader.cpp">
+      <Filter>File\Load</Filter>
+    </ClCompile>
+    <ClCompile Include="File\Load\TextLoader.cpp">
+      <Filter>File\Load</Filter>
+    </ClCompile>
+    <ClCompile Include="File\UIProxy.cpp">
+      <Filter>File</Filter>
+    </ClCompile>
+    <ClCompile Include="File\Parse\WidgetProperty.cpp">
+      <Filter>File\Parse</Filter>
+    </ClCompile>
+    <ClCompile Include="Display\Display.cpp">
+      <Filter>Display</Filter>
+    </ClCompile>
+    <ClCompile Include="File\Load\NodeLoader.cpp">
+      <Filter>File\Load</Filter>
+    </ClCompile>
+    <ClCompile Include="File\Parse\WidgetParser.cpp">
+      <Filter>File\Parse</Filter>
+    </ClCompile>
+    <ClCompile Include="File\Parse\LayoutItemParser.cpp">
+      <Filter>File\Parse</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

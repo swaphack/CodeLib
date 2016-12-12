@@ -125,9 +125,9 @@ void test2()
 int main(int argc, char** argv)
 {
 	
-	//test2();
+	test2();
 
-	test1();
+	//test1();
 
 	return 0;
 };

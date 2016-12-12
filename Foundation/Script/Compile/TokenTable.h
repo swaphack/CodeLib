@@ -1,12 +1,9 @@
 #pragma once
 
-#include <string>
-#include <vector>
+#include "macros.h"
 
 namespace script
 {
-	typedef std::vector<std::string> Token;
-
 	// ·ûºÅ±í
 	class TokenTable
 	{

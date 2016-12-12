@@ -128,9 +128,9 @@ bool HttpHandler::handRequest(sys::HttpReqDocument* pDocument, sys::HttpResponse
 	{// post
 		handPostMethodParams(body, reqParams);
 	}
-
+	
 	if (reqParams.empty())
-	{
+	{// 不带参数的请求
 		response.getDocument()->setHttpVersion("HTTP/1.1");
 		response.getDocument()->setResponseCode("200");
 		response.getDocument()->setDescribe("OK");
@@ -139,7 +139,7 @@ bool HttpHandler::handRequest(sys::HttpReqDocument* pDocument, sys::HttpResponse
 		return true;
 	}
 	else
-	{
+	{// 带参数的请求
 		bool bFind = false;
 		HttpDispatchers::iterator iter = m_mDispathers.begin();
 		while (iter != m_mDispathers.end())

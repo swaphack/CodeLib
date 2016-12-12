@@ -28,7 +28,7 @@ bool CtrlSequenceFrame::init()
 		if (_ctrlFrame)
 		{
 			_ctrlFrame->setTextureWithRect(texture);
-// 			_ctrlFrame->setVolume(this->getWidth(), this->getHeight(), 0);
+// 			_ctrlFrame->setSize(this->getWidth(), this->getHeight());
 // 			_ctrlFrame->setAnchorPoint(this->getAnchorPoint());
 		}
 	});
@@ -36,7 +36,7 @@ bool CtrlSequenceFrame::init()
 	_notify->addListen(ENP_SPACE, [&](){
 		if (_ctrlFrame)
 		{
-			_ctrlFrame->setVolume(this->getWidth(), this->getHeight(), 0);
+			_ctrlFrame->setSize(this->getWidth(), this->getHeight());
 			_ctrlFrame->setAnchorPoint(this->getAnchorPoint());
 		}
 	});

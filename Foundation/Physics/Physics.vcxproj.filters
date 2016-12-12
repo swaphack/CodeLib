@@ -5,9 +5,4 @@
       <UniqueIdentifier>{d401d161-96da-48df-b61c-d3025da2ed69}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Definition\Vector.h">
-      <Filter>Definition</Filter>
-    </ClInclude>
-  </ItemGroup>
 </Project>

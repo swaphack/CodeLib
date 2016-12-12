@@ -19,7 +19,7 @@ void ScrollItem::addItem(Node* node, const sys::Size& size)
 	}
 	node->setPosition(size.width * 0.5f, size.height * 0.5f);
 	this->addChild(node);
-	this->setVolume(size.width, size.height, 0);
+	this->setSize(size.width, size.height);
 }
 
 ScrollItem* ScrollItem::create(Node* node, const sys::Size& size)
@@ -279,7 +279,7 @@ void CtrlScrollView::initItems()
 			posX += pItem->getWidth();
 			iter++;
 		}
-		_content->setVolume(abs(posX), getHeight());
+		_content->setSize(abs(posX), getHeight());
 		break;
 	}
 	case ESD_HORIZONTAL_RIGHT:
@@ -292,7 +292,7 @@ void CtrlScrollView::initItems()
 			posX += pItem->getWidth();
 			iter++;
 		}
-		_content->setVolume(abs(posX), getHeight());
+		_content->setSize(abs(posX), getHeight());
 		break;
 	}
 	case ESD_VERTICAL_TOP:
@@ -305,7 +305,7 @@ void CtrlScrollView::initItems()
 			posY += pItem->getHeight();
 			iter++;
 		}
-		_content->setVolume(getWidth(), abs(posY));
+		_content->setSize(getWidth(), abs(posY));
 		break;
 	}
 	case ESD_VERTICAL_BOTTOM:
@@ -318,7 +318,7 @@ void CtrlScrollView::initItems()
 			posY += pItem->getHeight();
 			iter++;
 		}
-		_content->setVolume(getWidth(), abs(posY));
+		_content->setSize(getWidth(), abs(posY));
 		break;
 	}
 	default:

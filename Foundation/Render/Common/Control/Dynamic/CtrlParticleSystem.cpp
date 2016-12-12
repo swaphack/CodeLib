@@ -173,7 +173,7 @@ ParticleNode* CtrlParticleSystem::createParticle()
 	ParticleNode* node = new ParticleNode();
 	AUTO_RELEASE_OBJECT(node);
 	node->setColor(0, 0, 0, 0);
-	node->setVolume(5, 5, 0);
+	node->setSize(5, 5);
 	node->setColorAcceleration(r, g, b, a);
 	node->setLifeTime(life);
 	node->setSpeedAcceleration(x, y, z);

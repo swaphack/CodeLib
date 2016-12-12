@@ -10,9 +10,13 @@ namespace sys
 	public:
 		DataRecord();
 		virtual ~DataRecord();
-
+		/**
+		*	获取指定参数的值
+		*/
 		virtual const char* getValue(const char* key);
-
+		/**
+		*	设置键值对
+		*/
 		virtual void setValue(const char* key, const char* value);
 	private:
 		// 键值对数据

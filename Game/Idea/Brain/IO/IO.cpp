@@ -10,7 +10,7 @@ IO::IO()
 
 IO::~IO()
 {
-	this->clearAllMessages();
+	this->removeAllMessages();
 }
 
 void IO::push(Message* msg)
@@ -37,7 +37,7 @@ Message* IO::pick()
 	return msg;
 }
 
-void IO::clearAllMessages()
+void IO::removeAllMessages()
 {
 	Message* msg;
 	while (!_msgs.empty())

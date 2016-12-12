@@ -35,9 +35,25 @@ namespace ui
 		*/
 		void setPosition(float x, float y);
 		/**
+		*	设置几何位置
+		*/
+		void setPosition(const sys::Point& position);
+		/**
+		*	获取几何位置
+		*/
+		sys::Point getPosition();
+		/**
 		*	设置几何面积
 		*/
 		void setSize(float width, float height);
+		/**
+		*	设置几何面积
+		*/
+		void setSize(const sys::Size& size);
+		/**
+		*	获取几何面积
+		*/
+		sys::Size getSize();
 		/**
 		*	获取最小长宽的信息
 		*/
@@ -47,9 +63,17 @@ namespace ui
 		*/
 		void setMinSize(float width, float height);
 		/**
+		*	设置最小长宽的信息
+		*/
+		void setMinSize(const sys::Size& size);
+		/**
 		*	获取最大长宽的信息
 		*/
 		const sys::Size& getMaxSize();
+		/**
+		*	设置最大长宽的信息
+		*/
+		void setMaxSize(float width, float height);
 		/**
 		*	设置最大长宽的信息
 		*/
@@ -75,10 +99,6 @@ namespace ui
 		*/
 		SizePolicy& getSizePolicy();
 	public: // 可能需重载的方法
-		/**
-		*	当窗口大小发生改变时
-		*/
-		virtual void onViewSizeChanged(const sys::Size& inputSize);
 		/**
 		*	设置布局项的几何信息
 		*/

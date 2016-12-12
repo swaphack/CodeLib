@@ -37,6 +37,8 @@ namespace sys
 			y = rect.y;
 			width = rect.width;
 			height = rect.height;
+
+			return *this;
 		}
 
 

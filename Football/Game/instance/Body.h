@@ -10,7 +10,7 @@
 namespace game
 {
 	/**
-	*	身躯
+	*	躯体
 	*	以脚底为中心
 	*/
 	class Body : public Component, public IBody
@@ -46,7 +46,7 @@ namespace game
 		*/
 		CREATE_COMPONENT_PROPERTY(eSpaceProperty_Position_Z, PositionZ);
 		/**
-		*	是否与其他相交
+		*	是否与其他躯体相交
 		*/
 		virtual bool intersectBody(IBody* pBody);
 		/**

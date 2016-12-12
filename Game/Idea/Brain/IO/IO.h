@@ -18,7 +18,7 @@ namespace idea
 		// 获取最早输入的信息
 		Message* pick();
 	protected:
-		void clearAllMessages();
+		void removeAllMessages();
 	private:
 		std::queue<Message*> _msgs;
 	};

@@ -31,8 +31,6 @@ namespace script
 		void addParser(const T_Operator& opeartor);
 		// Çå¿Õ²Ù×÷·û½âÎö
 		void clear();
-
-		T_
 	private:
 		std::map<std::string, T_Operator> m_mOperatorParsers;
 	};

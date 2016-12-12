@@ -65,22 +65,46 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Display\Display.h" />
+    <ClInclude Include="Display\import.h" />
+    <ClInclude Include="Display\macros.h" />
+    <ClInclude Include="File\import.h" />
+    <ClInclude Include="File\Load\ImageLoader.h" />
+    <ClInclude Include="File\Load\import.h" />
+    <ClInclude Include="File\Load\macros.h" />
+    <ClInclude Include="File\Load\NodeLoader.h" />
+    <ClInclude Include="File\Load\TextLoader.h" />
+    <ClInclude Include="File\macros.h" />
+    <ClInclude Include="File\Parse\helper.h" />
+    <ClInclude Include="File\Parse\LayoutItemParser.h" />
+    <ClInclude Include="File\Parse\LayoutParser.h" />
+    <ClInclude Include="File\Parse\import.h" />
+    <ClInclude Include="File\Parse\IXmlLoader.h" />
+    <ClInclude Include="File\Parse\WidgetParser.h" />
+    <ClInclude Include="File\Parse\IXmlSaver.h" />
+    <ClInclude Include="File\Parse\macros.h" />
+    <ClInclude Include="File\Parse\WidgetProperty.h" />
+    <ClInclude Include="File\UIProxy.h" />
+    <ClInclude Include="Layout\import.h" />
     <ClInclude Include="Layout\Layout.h" />
     <ClInclude Include="Layout\LayoutItem.h" />
     <ClInclude Include="Layout\macros.h" />
     <ClInclude Include="Layout\SizePolicy.h" />
     <ClInclude Include="ui.h" />
-    <ClInclude Include="Widget\import.h" />
-    <ClInclude Include="Widget\macros.h" />
-    <ClInclude Include="Widget\NWidget.h" />
-    <ClInclude Include="Widget\Widget.h" />
+    <ClInclude Include="macros.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Display\Display.cpp" />
+    <ClCompile Include="File\Load\ImageLoader.cpp" />
+    <ClCompile Include="File\Load\NodeLoader.cpp" />
+    <ClCompile Include="File\Load\TextLoader.cpp" />
+    <ClCompile Include="File\Parse\LayoutItemParser.cpp" />
+    <ClCompile Include="File\Parse\WidgetParser.cpp" />
+    <ClCompile Include="File\Parse\WidgetProperty.cpp" />
+    <ClCompile Include="File\UIProxy.cpp" />
     <ClCompile Include="Layout\Layout.cpp" />
     <ClCompile Include="Layout\LayoutItem.cpp" />
     <ClCompile Include="Layout\SizePolicy.cpp" />
-    <ClCompile Include="Widget\NWidget.cpp" />
-    <ClCompile Include="Widget\Widget.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
