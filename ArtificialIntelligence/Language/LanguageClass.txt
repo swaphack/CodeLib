@@ -1,0 +1,502 @@
+Abkhaz 阿布哈兹语
+
+Achinese 亚齐语
+
+Acoli 阿乔利语
+
+Adangme 阿当梅语
+
+Afar
+
+Afrihili(Aritifical language) 阿弗里希利语
+
+Afrikaans 南非所用之荷兰语(阿非利卡语)
+
+Afro Asiatic(Other) 其它亚非语系
+
+Akan 阿坎语
+
+Akkadian 阿卡德语
+
+Albanian 阿尔巴尼亚语
+
+Aleut 阿留申群岛之土语
+
+Algonquian(Other) 其它阿尔贡语系
+
+Altaic(Other) 其它阿尔泰语系
+
+Amharic 阿比尼亚宫廷贵族的语言(阿姆哈拉语,一种南族语)
+
+Apache languages 阿帕切语
+
+Arabic 阿拉伯语
+
+Aramaic 阿拉米语
+
+Arapaho 阿拉帕霍语
+
+Arawak 阿拉瓦克语
+
+Armenian 亚美尼亚语
+
+Artificial(Other) 其它人工语言
+
+Assamese 阿萨姆语
+
+Athapascan(Other) 其它阿撒巴斯卡语系
+
+Australian languages 
+
+阿塞拜疆语
+
+Balinese 巴里语
+
+Baltic(Other) 波罗的海地区之语言
+
+Baluchi 俾路支语
+
+Bambara 班巴拉语
+
+Bamileke languages 巴米累克语
+
+Banda 班达语
+
+Bantu(Other)
+
+Basa 巴萨语
+
+Bashkir 巴什基尔语
+
+Basque 巴斯克语
+
+Batak
+
+Beja 别札语
+
+Belarusian 白俄罗斯语
+
+Bemba 别姆巴语
+
+Bengali 孟加拉语
+
+Berber(Other) 北非&#0;回教土族之语言
+
+Bhojpuri 博杰普尔语
+
+Bihari
+
+Bikol
+
+Bini
+
+Bislama
+
+Braj 布拉杰语
+
+Breton 布尔吞语
+
+Buginese 布吉语
+
+Bulgarian 保加利亚语
+
+Buriat
+
+Burmese 缅甸语
+
+Caddo 卡多语
+
+Carib 巴勒比语
+
+Catalan 加泰隆语
+
+Caucasian(Other) 其它高加索语系
+
+Cebuano 宿务语
+
+Celtic(Other) 其它凯尔特语系
+
+Central American Indian(Other) 其它中美印第安语系
+
+Chagatai 查加语
+
+Chamic languages
+
+Chamorro 查莫罗语
+
+Chechen 车臣语
+
+Cherokee 彻罗基语
+
+Cheyenne 夏延语(切延内语)
+
+Chibcha 契布卡语
+
+Chinese 汉语
+
+Chinook Jargon 契努克语
+
+Chipewyan
+
+Choctaw 乔克托语
+
+Czech 捷克语
+
+Dakota 达科他语
+
+Danish 丹麦语
+
+Dayak
+
+Delaware 特拉瓦印第安人语
+
+Dinka 丁卡语
+
+Divehi
+
+埃塞俄比亚语
+
+Ewe 幽语
+
+Ewondo
+
+Fang 芳格语
+
+Fanti 芳蒂语
+
+Faroese 法罗语
+
+Fijian 斐济语
+
+Finnish 芬兰语
+
+Finno-Ugrian(Other) 芬匈语(其它)
+
+German,MiddleHigh(ca.3050-3500) 中古高地德语
+
+German,OldHigh(ca.750-3050) 古代高地德语
+
+Germanic(Other) 其它德语语系
+
+Gilbertese 吉尔伯特斯语
+
+Gondi 岗德语
+
+Gorontalo
+
+Gothic 哥达语
+
+Grebo 格列博语
+
+Greek,Ancient(to 3453) 古希腊语
+
+Greek,Modern(3453-) 近代希腊语
+
+Guarani 瓜拉尼语
+
+Gujarati 古吉拉特语
+
+Gwich’in
+
+Haida 海达语
+
+Hausa 豪萨语
+
+Hawaiian 夏威夷语
+
+Hebrew 希伯来语
+
+Herero 赫雷罗语
+
+Hiligaynon 希利盖农语
+
+Himachali 赫马查利语
+
+Hindi 北印度语(印地语)
+
+Hiri Motu
+
+Hittite
+
+Hmong
+
+Hnpa 胡帕语
+　　) 印度语(其它)
+
+Indo-European(Other) 其它印欧语系
+
+Indonesian 印尼语
+
+Interligua(International Auxiliary Language Association) 国际辅助语
+
+Interlingue
+
+Inuktitut
+
+Inupiaq
+
+Iranian(Other) 其它伊朗语系
+
+Irish 爱尔兰语
+
+Irish(Old) to 3300
+
+Japanese 日语
+
+Javanese 爪哇语
+
+Judeo-Arabic 犹太&#0;阿拉伯语系
+
+Judeo-Persian 犹太&#0;波斯语系
+
+Kabyle 卡比尔语
+
+Kachin 卡琴语
+
+Kalatdlisut
+
+Kamba 卡姆巴语
+
+Kannada 坎纳达语
+
+Kinyarwanda 卢旺达语
+
+Kongo 刚果语
+
+Konkani 刚卡尼语
+
+Korean 朝语
+
+Kpelle 克佩列语
+
+Kru 克鲁语
+
+Kuanyama
+
+Kumyk
+
+Kurdish 库尔德语
+
+Kurukh 库鲁克语
+
+Kusaie
+
+Kutenai 库特内语
+
+Kyrgyz 柯尔克孜语
+
+Ladino 拉迪诺语
+
+Lahndi 拉亨达语
+
+Lamba 兰巴语
+
+Lao 老挝语
+
+Latin 拉丁语
+
+Latvian 拉脱维亚语
+
+Letzeburgesch
+
+Lezgian
+
+Makasar 望加锡语
+
+Malagasy 马拉加斯语
+
+Malay 马来语
+
+Malayalam 德威拉土语之一(马拉维拉姆语)
+
+Maltese 马耳他语
+
+Mandar
+
+Mandingo 曼丁哥语
+
+Manipuri 曼尼普里
+
+Manobolanguages 马诺博污
+
+Manx 人岛语
+
+Maori 毛利语
+
+Mapuche
+
+Marathi 马拉蒂语
+
+Mari
+
+Marshall 马歇尔语
+
+Marwari 马尔尼里语
+
+Masai 萨伊语
+
+Mayan Languages 玛雅语系
+
+Nahuatl
+
+Nauru
+
+Northern Sotho 北索托语
+
+Norwegian 挪威语
+
+Nubian languages 努比亚语
+
+Nyamwezi 尼亚姆韦齐语
+
+Nyanja 尼昂加语
+
+Nyankole
+
+Nyoro 尼约罗语族
+
+Nzima
+
+Occitan(post-3500)
+
+Ojibwa 北美印第安人&#0;大种族之语(奥季布瓦语)
+
+Old Norse
+
+Old Persian(ca.600-400B.C.)
+
+Oriya 奥里亚语
+
+语
+
+Papuan-Australian(Other) 其它巴布亚&#0;澳洲语系
+
+Persian 波斯语
+
+Philippine(Other) 其它菲律宾语系
+
+Phoenician
+
+Polish 波兰语
+
+Ponape 波纳佩语
+
+Quechua 盖丘亚语
+
+Raeto-Romance 罗曼斯方言
+
+Rajasthani 拉贾斯坦语
+
+Rapanui
+
+Rarotongan 拉罗汤加语
+
+Santali
+
+Sardinian
+
+Sasak
+
+Scots 苏格兰语
+
+Selkup 塞尔库普语
+
+Semitic(Other) 其它闪族语系
+
+Serbo-Croatian(Cyrillic) 塞尔维亚&#0;克罗地亚语(基里尔字母之一)
+
+Serbo-Croatian(Roman) 塞尔维亚&#0;克罗地亚语(罗马字母)
+
+Serer 谢列尔语 srr
+
+Shan 掸语
+
+Shona 绍纳语
+
+Sorbian languages 索布诸语言(西斯拉夫诸语言和方言)
+
+Sotho 索托语
+
+South American Indian(Other)其它南美印第安语系
+
+Spanish 西班牙语
+
+Tatar 塔塔尔语
+
+Telugu 泰卢固语
+
+Temne 提姆语
+
+Terena 泰雷诺语
+
+Tetum
+
+Thai 泰语
+
+Tibetan 藏语
+
+Tigre 提格雷语
+
+Turkish 土耳其语
+
+Turkish,Ottoman 奥托曼土耳其语
+
+Turkmen 土库曼语
+
+Ukrainian 乌克兰语
+
+Umbundu 莱都(姆崩杜语)
+
+Undetermined 未定语种
+
+Urdu 印度斯坦回教徒所通用之一种语言(乌尔都语)
+
+Uzbek 乌兹别克语
+
+Vai 瓦伊语
+
+Venda 文达语
+
+Vietnamese 越南语
+
+Volapuk
+
+Votic 沃提克语
+
+Wakashan languages
+
+Walamo 瓦拉莫语
+
+Warav
+
+Washo 瓦绍语
+
+Welsh 威尔斯语
+
+Wolof 沃洛夫语
+
+Xhosa 科萨语
+
+Yakut
+
+Yao 瑶族语
+
+Yap 雅浦语
+
+Yiddish 依地语
+
+Yoruba 约鲁巴语
+
+Yupik languages
+
+Zande
+
+Zapotec 萨波蒂克语
+
+Zenaga 泽纳加语
+
+Zhuang
+
+Zulu 祖鲁语
+
+Zuni 祖尼语

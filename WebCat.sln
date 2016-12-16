@@ -91,8 +91,6 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Maze", "Sample\Maze\Maze.vc
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SimpleGame", "Football\SimpleGame\SimpleGame.vcxproj", "{5527631C-693F-47A6-B080-CA13E227CB28}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WebCat", "WebCat", "{5E2DD45B-0F8A-45F2-9393-5FB6CC67B8D6}"
-EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Lottery", "Game\Lottery\Lottery.vcxproj", "{2E60D2A8-8776-4D60-896B-6E19E605A8A8}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ProtocolCreate", "Tool\ProtocolCreate\ProtocolCreate.vcxproj", "{B9DABDB6-A239-444F-8853-D9A3F61882D8}"
@@ -107,6 +105,19 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "XPixel", "Tool\XPixel\XPixel.vcxproj", "{B6C6D5BC-FAC8-46D8-A47F-99CC3A07123F}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "HttpServer", "Linker\HttpServer\HttpServer.vcxproj", "{6E4751E6-6212-4269-8169-ACE36D074111}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ArtificialIntelligence", "ArtificialIntelligence", "{6491E926-B0AE-4DA9-80A0-B5464ACABEB5}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MachineLearning", "ArtificialIntelligence\MachineLearning\MachineLearning.vcxproj", "{5BCCB747-1D42-409E-A20A-91B08ABFF720}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LanguageLibrary", "ArtificialIntelligence\LanguageLibrary\LanguageLibrary.vcxproj", "{768BE604-DB07-416B-AD20-69C0907EABE3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Language", "Language", "{077B1495-BF5D-44E4-86C6-4397ABBAF93D}"
+	ProjectSection(SolutionItems) = preProject
+		ArtificialIntelligence\Language\Chinese.txt = ArtificialIntelligence\Language\Chinese.txt
+		ArtificialIntelligence\Language\English.txt = ArtificialIntelligence\Language\English.txt
+		ArtificialIntelligence\Language\LanguageClass.txt = ArtificialIntelligence\Language\LanguageClass.txt
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -394,6 +405,22 @@ Global
 		{6E4751E6-6212-4269-8169-ACE36D074111}.Release|Win32.ActiveCfg = Release|Win32
 		{6E4751E6-6212-4269-8169-ACE36D074111}.Release|Win32.Build.0 = Release|Win32
 		{6E4751E6-6212-4269-8169-ACE36D074111}.Release|x64.ActiveCfg = Release|Win32
+		{5BCCB747-1D42-409E-A20A-91B08ABFF720}.Debug|ARM.ActiveCfg = Debug|Win32
+		{5BCCB747-1D42-409E-A20A-91B08ABFF720}.Debug|Win32.ActiveCfg = Debug|Win32
+		{5BCCB747-1D42-409E-A20A-91B08ABFF720}.Debug|Win32.Build.0 = Debug|Win32
+		{5BCCB747-1D42-409E-A20A-91B08ABFF720}.Debug|x64.ActiveCfg = Debug|Win32
+		{5BCCB747-1D42-409E-A20A-91B08ABFF720}.Release|ARM.ActiveCfg = Release|Win32
+		{5BCCB747-1D42-409E-A20A-91B08ABFF720}.Release|Win32.ActiveCfg = Release|Win32
+		{5BCCB747-1D42-409E-A20A-91B08ABFF720}.Release|Win32.Build.0 = Release|Win32
+		{5BCCB747-1D42-409E-A20A-91B08ABFF720}.Release|x64.ActiveCfg = Release|Win32
+		{768BE604-DB07-416B-AD20-69C0907EABE3}.Debug|ARM.ActiveCfg = Debug|Win32
+		{768BE604-DB07-416B-AD20-69C0907EABE3}.Debug|Win32.ActiveCfg = Debug|Win32
+		{768BE604-DB07-416B-AD20-69C0907EABE3}.Debug|Win32.Build.0 = Debug|Win32
+		{768BE604-DB07-416B-AD20-69C0907EABE3}.Debug|x64.ActiveCfg = Debug|Win32
+		{768BE604-DB07-416B-AD20-69C0907EABE3}.Release|ARM.ActiveCfg = Release|Win32
+		{768BE604-DB07-416B-AD20-69C0907EABE3}.Release|Win32.ActiveCfg = Release|Win32
+		{768BE604-DB07-416B-AD20-69C0907EABE3}.Release|Win32.Build.0 = Release|Win32
+		{768BE604-DB07-416B-AD20-69C0907EABE3}.Release|x64.ActiveCfg = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -431,5 +458,8 @@ Global
 		{68E2B6B4-B5D8-4CED-9126-EA4C6C95E5AD} = {B61D0033-9E36-40B8-BEC4-178C971EB7DA}
 		{3C23CE89-68C9-4776-AD03-1F48CE28C322} = {F9FF5C4B-BD5C-41E5-A42F-85FE9EC75D52}
 		{5527631C-693F-47A6-B080-CA13E227CB28} = {F9FF5C4B-BD5C-41E5-A42F-85FE9EC75D52}
+		{5BCCB747-1D42-409E-A20A-91B08ABFF720} = {6491E926-B0AE-4DA9-80A0-B5464ACABEB5}
+		{768BE604-DB07-416B-AD20-69C0907EABE3} = {6491E926-B0AE-4DA9-80A0-B5464ACABEB5}
+		{077B1495-BF5D-44E4-86C6-4397ABBAF93D} = {6491E926-B0AE-4DA9-80A0-B5464ACABEB5}
 	EndGlobalSection
 EndGlobal

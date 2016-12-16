@@ -13,15 +13,19 @@
   <ItemGroup>
     <ClInclude Include="Compile\AbstractSyntaxTree.h" />
     <ClInclude Include="Compile\CodeBlock.h" />
+    <ClInclude Include="Compile\CodeFilter.h" />
     <ClInclude Include="Compile\CodeGenerator.h" />
     <ClInclude Include="Compile\Compiler.h" />
     <ClInclude Include="Compile\Error.h" />
     <ClInclude Include="Compile\Expression.h" />
     <ClInclude Include="Compile\import.h" />
+    <ClInclude Include="Compile\ITextFilter.h" />
     <ClInclude Include="Compile\macros.h" />
-    <ClInclude Include="Compile\OperatorDelegate.h" />
-    <ClInclude Include="Compile\SingalSet.h" />
-    <ClInclude Include="Compile\KeyWordSet.h" />
+    <ClInclude Include="Compile\SymbolDelegate.h" />
+    <ClInclude Include="Compile\SymbolHandler.h" />
+    <ClInclude Include="Compile\SymbolParser.h" />
+    <ClInclude Include="Compile\WordFilters.h" />
+    <ClInclude Include="Compile\WordSet.h" />
     <ClInclude Include="Compile\Parser.h" />
     <ClInclude Include="Compile\Scanner.h" />
     <ClInclude Include="Compile\SemanticAnalyzer.h" />
@@ -40,8 +44,10 @@
     <ClInclude Include="Core\Struct.h" />
     <ClInclude Include="Core\Tip.h" />
     <ClInclude Include="Core\Variable.h" />
+    <ClInclude Include="Document\CompilerDocument.h" />
     <ClInclude Include="Document\Document.h" />
     <ClInclude Include="Document\import.h" />
+    <ClInclude Include="Document\WordDocument.h" />
     <ClInclude Include="Env\Environment.h" />
     <ClInclude Include="Env\Module.h" />
     <ClInclude Include="Script.h" />
@@ -51,9 +57,11 @@
     <ClCompile Include="Compile\Compiler.cpp" />
     <ClCompile Include="Compile\Error.cpp" />
     <ClCompile Include="Compile\Expression.cpp" />
-    <ClCompile Include="Compile\KeyWordSet.cpp" />
+    <ClCompile Include="Compile\SymbolDelegate.cpp" />
+    <ClCompile Include="Compile\SymbolHandler.cpp" />
+    <ClCompile Include="Compile\WordFilters.cpp" />
+    <ClCompile Include="Compile\WordSet.cpp" />
     <ClCompile Include="Compile\Parser.cpp" />
-    <ClCompile Include="Compile\SingalSet.cpp" />
     <ClCompile Include="Compile\Scanner.cpp" />
     <ClCompile Include="Compile\TokenTable.cpp" />
     <ClCompile Include="Core\Base.cpp" />
@@ -64,19 +72,25 @@
     <ClCompile Include="Core\Scope.cpp" />
     <ClCompile Include="Core\Struct.cpp" />
     <ClCompile Include="Core\Variable.cpp" />
+    <ClCompile Include="Document\CompilerDocument.cpp" />
     <ClCompile Include="Document\Document.cpp" />
+    <ClCompile Include="Document\WordDocument.cpp" />
     <ClCompile Include="Env\Environment.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Script.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Compile\function.script" />
-    <None Include="Resource\grammer.script" />
     <None Include="Resource\main.script" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Compile\compile.txt" />
     <Text Include="Compile\grammar.txt" />
+    <Text Include="Resource\word.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="Resource\Symbol.xml">
+      <SubType>Designer</SubType>
+    </Xml>
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{1F21A8AB-293F-4932-BA27-184C94FA4DCD}</ProjectGuid>

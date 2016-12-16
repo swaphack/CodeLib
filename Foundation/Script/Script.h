@@ -6,7 +6,7 @@
 namespace script
 {
 	class Document;
-
+	// 脚本处理
 	class Script
 	{
 	private:
@@ -15,6 +15,10 @@ namespace script
 		virtual ~Script();
 	public:
 		static Script* getInstance();
+		// 初始化单词库
+		bool initWordSet(const char* filepath);
+		// 初始化过滤器
+		bool initWordFilter();
 		// 加载脚本文件
 		bool load(const char* filepath);
 		// 导入引用文本
@@ -29,8 +33,8 @@ namespace script
 		// 移除所有文档
 		void removeAllDocuments();
 	private:
-		// 解析文件 判断是否属于标准文档
-		Document* parseFile(const char* filepath);
+		// 编译文件 判断是否属于标准文档
+		Document* complieFile(const char* filepath);
 	private:
 		static Script* s_script;
 		// 脚本文档

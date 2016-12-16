@@ -46,7 +46,7 @@ Widget* UIProxy::loadFile(const char* filepath)
 		return nullptr;
 	}
 
-	Widget* pNode = this->loadNode(pRoot);
+	Widget* pNode = this->loadWidget(pRoot);
 
 	delete doc;
 

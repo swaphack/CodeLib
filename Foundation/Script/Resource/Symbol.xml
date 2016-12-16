@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root Des="先按照优先级计算，level越小，优先级越高；参数传入按照索引排序，索引越小越先计算">
+  <symbol name="++" level="1">0++</symbol>
+  <symbol name="--" level="1">0--</symbol>
+  <symbol name="[]" level="1">[0]</symbol>
+  <symbol name="()" level="1">(0)</symbol>
+  <symbol name="." level="1">0.</symbol>
+  <symbol name="->" level="1">0-></symbol>
+  <symbol name="-" level="2">-0</symbol>
+  <symbol name="++" level="2">++0</symbol>
+  <symbol name="--" level="2">--0</symbol>
+  <symbol name="*" level="2">*0</symbol>
+  <symbol name="" level="2">&0</symbol>
+</root>

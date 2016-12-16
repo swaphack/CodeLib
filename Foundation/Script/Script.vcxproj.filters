@@ -37,6 +37,9 @@
     <Filter Include="Compile\TargetCodeOptimize">
       <UniqueIdentifier>{9a88978e-1313-49f3-a0ec-0405d5e1a196}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Compile\Sample">
+      <UniqueIdentifier>{eeb492f3-3744-4de1-823f-9f076860c64a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Script.h" />
@@ -88,12 +91,6 @@
     <ClInclude Include="Compile\import.h">
       <Filter>Compile</Filter>
     </ClInclude>
-    <ClInclude Include="Compile\KeyWordSet.h">
-      <Filter>Compile\Common</Filter>
-    </ClInclude>
-    <ClInclude Include="Compile\SingalSet.h">
-      <Filter>Compile\Common</Filter>
-    </ClInclude>
     <ClInclude Include="Compile\Scanner.h">
       <Filter>Compile\Scan</Filter>
     </ClInclude>
@@ -133,11 +130,35 @@
     <ClInclude Include="Compile\CodeBlock.h">
       <Filter>Compile\Parse</Filter>
     </ClInclude>
-    <ClInclude Include="Compile\OperatorDelegate.h">
-      <Filter>Compile\Parse</Filter>
-    </ClInclude>
     <ClInclude Include="Compile\TokenTable.h">
       <Filter>Compile\Scan</Filter>
+    </ClInclude>
+    <ClInclude Include="Compile\WordSet.h">
+      <Filter>Compile\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Compile\WordFilters.h">
+      <Filter>Compile\Scan</Filter>
+    </ClInclude>
+    <ClInclude Include="Document\CompilerDocument.h">
+      <Filter>Document</Filter>
+    </ClInclude>
+    <ClInclude Include="Document\WordDocument.h">
+      <Filter>Document</Filter>
+    </ClInclude>
+    <ClInclude Include="Compile\ITextFilter.h">
+      <Filter>Compile\Scan</Filter>
+    </ClInclude>
+    <ClInclude Include="Compile\CodeFilter.h">
+      <Filter>Compile\Sample</Filter>
+    </ClInclude>
+    <ClInclude Include="Compile\SymbolDelegate.h">
+      <Filter>Compile\Parse</Filter>
+    </ClInclude>
+    <ClInclude Include="Compile\SymbolHandler.h">
+      <Filter>Compile\Parse</Filter>
+    </ClInclude>
+    <ClInclude Include="Compile\SymbolParser.h">
+      <Filter>Compile\Sample</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -165,20 +186,11 @@
     <ClCompile Include="Core\Variables.cpp">
       <Filter>Core</Filter>
     </ClCompile>
-    <ClCompile Include="Document\Document.cpp">
-      <Filter>Document</Filter>
-    </ClCompile>
     <ClCompile Include="Core\Function.cpp">
       <Filter>Core</Filter>
     </ClCompile>
     <ClCompile Include="Script.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Compile\KeyWordSet.cpp">
-      <Filter>Compile\Common</Filter>
-    </ClCompile>
-    <ClCompile Include="Compile\SingalSet.cpp">
-      <Filter>Compile\Common</Filter>
-    </ClCompile>
     <ClCompile Include="Compile\Scanner.cpp">
       <Filter>Compile\Scan</Filter>
     </ClCompile>
@@ -200,15 +212,30 @@
     <ClCompile Include="Compile\TokenTable.cpp">
       <Filter>Compile\Scan</Filter>
     </ClCompile>
+    <ClCompile Include="Compile\WordSet.cpp">
+      <Filter>Compile\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="Compile\WordFilters.cpp">
+      <Filter>Compile\Scan</Filter>
+    </ClCompile>
+    <ClCompile Include="Document\CompilerDocument.cpp">
+      <Filter>Document</Filter>
+    </ClCompile>
+    <ClCompile Include="Document\Document.cpp">
+      <Filter>Document</Filter>
+    </ClCompile>
+    <ClCompile Include="Document\WordDocument.cpp">
+      <Filter>Document</Filter>
+    </ClCompile>
+    <ClCompile Include="Compile\SymbolDelegate.cpp">
+      <Filter>Compile\Parse</Filter>
+    </ClCompile>
+    <ClCompile Include="Compile\SymbolHandler.cpp">
+      <Filter>Compile\Parse</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resource\main.script">
-      <Filter>Resource</Filter>
-    </None>
-    <None Include="Compile\function.script">
-      <Filter>Resource</Filter>
-    </None>
-    <None Include="Resource\grammer.script">
       <Filter>Resource</Filter>
     </None>
   </ItemGroup>
@@ -219,5 +246,13 @@
     <Text Include="Compile\grammar.txt">
       <Filter>Compile</Filter>
     </Text>
+    <Text Include="Resource\word.txt">
+      <Filter>Resource</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="Resource\Symbol.xml">
+      <Filter>Resource</Filter>
+    </Xml>
   </ItemGroup>
 </Project>

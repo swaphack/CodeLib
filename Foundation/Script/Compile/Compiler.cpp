@@ -1,4 +1,5 @@
 #include "Compiler.h"
+#include "../Document/CompilerDocument.h"
 
 using namespace  script;
 
@@ -18,24 +19,17 @@ Compiler::~Compiler()
 
 }
 
-bool Compiler::compile(const char* text, int size)
+bool Compiler::compile(CompilerDocument* document)
 {
-
-	if (text == nullptr)
+	if (document == nullptr)
 	{
 		return false;
 	}
 
-	if (!m_pScanner->scan(text, size))
+	if (!m_pScanner->scan(document))
 	{
 		return false;
 	}
-
-	if (!m_pParser->parse(m_pScanner->tokenBegin(), m_pScanner->tokenEnd()))
-	{
-		return false;
-	}
-
 
 	return false;
 }

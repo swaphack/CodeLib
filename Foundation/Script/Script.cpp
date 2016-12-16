@@ -1,5 +1,6 @@
 #include "Script.h"
 #include "Document/import.h"
+#include "Compile/import.h"
 
 
 using namespace script;
@@ -26,6 +27,35 @@ Script* Script::getInstance()
 	return s_script;
 }
 
+bool Script::initWordSet(const char* filepath)
+{
+	if (filepath == nullptr)
+	{
+		return false;
+	}
+
+	Document* pDoc = new WordDocument();
+	if (!pDoc->loadFile(filepath))
+	{
+		delete pDoc;
+		return false;
+	}
+	if (!pDoc->parse())
+	{
+		delete pDoc;
+		return false;
+	}
+	delete pDoc;
+	return true;
+}
+
+bool Script::initWordFilter()
+{
+	WordFilters::getInstance()->addFilter(new TextFilter());
+
+	return true;
+}
+
 bool Script::load(const char* filepath)
 {
 	if (filepath == nullptr)
@@ -33,7 +63,7 @@ bool Script::load(const char* filepath)
 		return false;
 	}
 
-	Document* pDoc = parseFile(filepath);
+	Document* pDoc = complieFile(filepath);
 	if (pDoc == nullptr)
 	{
 		return false;
@@ -53,7 +83,7 @@ bool Script::import(const char* filepath)
 		return false;
 	}
 
-	Document* pDoc = parseFile(filepath);
+	Document* pDoc = complieFile(filepath);
 	if (pDoc == nullptr)
 	{
 		return false;
@@ -113,10 +143,16 @@ void Script::removeAllDocuments()
 	_documents.clear();
 }
 
-Document* Script::parseFile(const char* filepath)
+Document* Script::complieFile(const char* filepath)
 {
-	Document* pDoc = new Document();
+	Document* pDoc = new CompilerDocument();
 	if (!pDoc->loadFile(filepath))
+	{
+		delete pDoc;
+		return nullptr;
+	}
+
+	if (!pDoc->parse())
 	{
 		delete pDoc;
 		return nullptr;

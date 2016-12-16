@@ -1,33 +1,21 @@
 #pragma once
 
-#include "macros.h"
 #include "helper.h"
-#include "WidgetProperty.h"
-#include "IXmlLoader.h"
-#include "IXmlSaver.h"
+#include "IElement.h"
 
 namespace ui
 {
 	// 节点解析器
-	class WidgetParser : 
-		public IXmlLoader, 
-		public IXmlSaver
+	class WidgetParser : public IElement
 	{
 	public:
 		WidgetParser();
 		virtual ~WidgetParser();
-	public:
-		// 加载节点
-		virtual Widget* load(tinyxml2::XMLElement* pXmlNode, bool clean = true);
-		// 保存节点
-		virtual void save(tinyxml2::XMLElement* pXmlNode, bool clean = true);
 	protected:
-		// 属性
-		WidgetProperty* getNodeProperty();
 		// 解析属性
-		virtual void parseAttributes();
+		virtual void parseAttributes() = 0;
 		// 保存属性
-		virtual void saveAttributes();
+		virtual void saveAttributes() = 0;
 		// 获取ui节点
 		virtual Widget* getWidget() = 0;
 		// 注册解析

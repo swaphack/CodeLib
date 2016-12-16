@@ -16,7 +16,7 @@ namespace ui
 
 	// ×¢²á½âÎö
 #define REGISTER_LOAER_WIDGET(NAME) \
-	void registerNodeParser() \
+	virtual void registerNodeParser() \
 	{ \
 	G_UIPROXY->registerNodeParser(#NAME, this); \
 	}

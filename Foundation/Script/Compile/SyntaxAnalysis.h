@@ -11,8 +11,8 @@ namespace script
 	class SyntaxAnalysis
 	{
 	public:
-		SyntaxAnalysis();
-		~SyntaxAnalysis();
+		SyntaxAnalysis(){}
+		~SyntaxAnalysis(){}
 	public:
 	protected:
 	private:

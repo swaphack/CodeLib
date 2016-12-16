@@ -1,19 +1,20 @@
 #pragma once
 
-#include "macros.h"
-#include "WidgetProperty.h"
-#include "IXmlLoader.h"
-#include "IXmlSaver.h"
+#include "IElement.h"
 
 namespace ui
 {
 	// ²¼¾Ö½âÎöÆ÷
-	class LayoutItemParser :
-		public IXmlLoader,
-		public IXmlSaver
+	class LayoutItemParser : public IElement
 	{
 	public:
+		LayoutItemParser();
+		virtual ~LayoutItemParser();
 	protected:
+		virtual void parseAttributes();
+		virtual void saveAttributes();
+
+		virtual LayoutItem* getLayoutItem();
 	private:
 	};
 }

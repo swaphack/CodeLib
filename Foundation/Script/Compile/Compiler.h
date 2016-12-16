@@ -9,6 +9,7 @@
 
 namespace script
 {
+	class CompilerDocument;
 	// ±‡“Î∆˜
 	class Compiler
 	{
@@ -16,7 +17,7 @@ namespace script
 		Compiler();
 		~Compiler();
 	public:
-		bool compile(const char* text, int size);
+		bool compile(CompilerDocument* document);
 	private:
 		// …®√Ë≥Ã–Ú
 		Scanner* m_pScanner;

@@ -45,11 +45,11 @@ namespace ui
 		*	窗口界面大小
 		*/
 		const sys::Size& getViewSize();
+	protected:
 		/**
 		*	当窗口大小发生改变时
 		*/
 		void onViewSizeChanged(const sys::Size& inputSize);
-	protected:
 		/**
 		*	加载界面文件
 		*/

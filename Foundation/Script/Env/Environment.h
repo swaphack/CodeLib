@@ -22,9 +22,7 @@ namespace script
 		// 移除所有变量
 		void removeAllVariables();
 		// 获取变量
-		Variable* getVariable(const char* name);
-
-		 
+		Variable* getVariable(const char* name);		 
 
 		// 添加函数
 		void addFunction(Function* pFunction);

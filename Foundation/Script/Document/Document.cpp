@@ -1,20 +1,23 @@
 #include "Document.h"
-#include "../Compile/import.h"
 #include <cstring>
 #include <cstdlib>
 #include <cstdio>
 
 using namespace script;
 
-
 Document::Document()
+:_buffer(nullptr)
+, _size(0)
 {
-	m_pCompiler = new Compiler();
 }
 
 Document::~Document()
 {
-	delete m_pCompiler;
+	if (_buffer)
+	{
+		free(_buffer);
+		_buffer = nullptr;
+	}
 }
 
 bool Document::loadFile(const char* filepath)
@@ -40,25 +43,27 @@ bool Document::loadFile(const char* filepath)
 
 	text[size] = '\0';
 
-	bool bRet = this->parse(text, size);
-
-	free(text);
-
-	return bRet;
-}
-
-bool Document::parse(const char* text, int size)
-{
-	if (text == nullptr)
+	if (_buffer)
 	{
-		return false;
+		free(_buffer);
 	}
-
-	bool bRet = m_pCompiler->compile(text, size);
-	if (bRet == false)
-	{
-		return false;
-	}
+	_buffer = text;
+	_size = size + 1;
 
 	return true;
+}
+
+bool Document::parse()
+{
+	return false;
+}
+
+char* Document::getPtr()
+{
+	return _buffer;
+}
+
+int Document::getSize()
+{
+	return _size;
 }

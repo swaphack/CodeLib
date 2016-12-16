@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Library">
+      <UniqueIdentifier>{adc4bd6c-f805-4f44-aeb2-f3b1d8bfc96a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Base">
+      <UniqueIdentifier>{c12f3fe3-f89d-47b6-be74-349295d8f6b2}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Library\LanguageClass.h">
+      <Filter>Library</Filter>
+    </ClInclude>
+    <ClInclude Include="Library\macros.h">
+      <Filter>Library</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\import.h">
+      <Filter>Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\Word.h">
+      <Filter>Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\Sentence.h">
+      <Filter>Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\T_Sentence.h">
+      <Filter>Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\Enumerator.h">
+      <Filter>Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\T_Text.h">
+      <Filter>Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Library\LibEnglish.h">
+      <Filter>Library</Filter>
+    </ClInclude>
+    <ClInclude Include="Library\LibChinese.h">
+      <Filter>Library</Filter>
+    </ClInclude>
+    <ClInclude Include="Library\LibLanguage.h">
+      <Filter>Library</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

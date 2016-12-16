@@ -1,5 +1,8 @@
 #include "Scanner.h"
-#include "SingalSet.h"
+#include "WordSet.h"
+
+#include "../Document/Document.h"
+
 using namespace script;
 
 Scanner::Scanner()
@@ -12,42 +15,29 @@ Scanner::Scanner()
 
 Scanner::~Scanner()
 {
-	if (m_pContent != nullptr)
-	{
-		free(m_pContent);
-		m_pContent = nullptr;
-	}
-
 	if (m_pTokenTable != nullptr)
 	{
 		delete m_pTokenTable;
 	}
 }
 
-bool Scanner::scan(const char* ptr, int size)
+bool Scanner::scan(Document* document)
 {
-	if (ptr == nullptr || size <= 0)
+	if (document == nullptr || document->getPtr() == nullptr || document->getSize() <= 0)
 	{
 		return false;
 	}
 
 	this->clear();
 
-	m_pContent = (char*)malloc(size + 1);
-	memcpy(m_pContent, ptr, size);
-	m_pContent[size] = '\0';
-	m_nSize = size;
+	m_pContent = document->getPtr();
+	m_nSize = document->getSize();
 
 	return this->parse();
 }
 void Scanner::clear()
 {
-	if (m_pContent != nullptr)
-	{
-		free(m_pContent);
-		m_pContent = nullptr;
-	}
-
+	m_pContent = nullptr;
 	m_nSize = 0; 
 	m_nOffset = 0;
 	m_pTokenTable->removeAllTokens();
@@ -70,198 +60,43 @@ bool Scanner::parse()
 
 void Scanner::readWord()
 {
-	int size = 0;
-	std::string word = "";
-	std::string key = "";
+	std::string key;
+	int offset = 0;
 	do 
 	{
-		char ch = *getPtr();
-		if (ch == ' ' || ch == '\r' || ch == '\n')
-		{// 排除空格，回车，换行
-			m_nOffset+=1;
-			break;
-		}
-
-		// 变量
-		if (isVariableFormat(getPtr(), size))
+		if (m_nOffset >= m_nSize)
 		{
-			key = std::string(getPtr(), size);
-			m_nOffset += size;
+			appendWord(key);
 			break;
 		}
 
-		// 字符串
-		if (isStringFormat(getPtr(), size))
+		if (*getPtr() == ' ' || *getPtr() == '\r' || *getPtr() == '\n')
 		{
-			key = std::string(getPtr(), size);
-			m_nOffset += size;
+			appendWord(key);
+			m_nOffset += 1;
 			break;
 		}
 
-		// 数值
-		if (isNumberFormat(getPtr(), size))
+		if (WordSet::getInstance()->pickWord(getPtr(), offset))
 		{
-			key = std::string(getPtr(), size);
-			m_nOffset += size;
+			appendWord(key);
+
+			key = std::string(getPtr(), offset);
+			appendWord(key);
+			m_nOffset += offset;
 			break;
 		}
-
-		// 关键字
-		if (isSingalFormat(getPtr(), size))
+		else
 		{
-			key = std::string(getPtr(), size);
-			m_nOffset += size;
-			break;
+			key.append(1, *getPtr());
+			m_nOffset += 1;
 		}
-
-		word.append(1, ch);
-
-		m_nOffset++;
 	} while (true);
-
-	appendWord(word);
-	appendWord(key);
 }
 
 char* Scanner::getPtr()
 {
 	return m_pContent + m_nOffset;
-}
-
-bool Scanner::isVariableFormat(const char* text, int& size)
-{
-	if (text == nullptr)
-	{
-		return false;
-	}
-
-	int len = strlen(text);
-	if (len	 <= 0)
-	{
-		return false;
-	}
-
-	char ch = *text;
-	if (ch >= 0x30 && ch <= 0x39)
-	{// 数字开头
-		return false;
-	}
-
-	int i;
-	for (i = 0; i < len; i++)
-	{
-		ch = *(text + i);
-		// 数字，字母，下划线
-		if (!((ch >= 0x30 && ch <= 0x39) || (ch >= 0x41 && ch <= 0x5A) || (ch >= 0x61 && ch <= 0x7A) || (ch == 0x5f)))
-		{
-			size = i;
-			return i > 0;
-		}
-	}
-
-	if (i == len)
-	{
-		size = i;
-		return true;
-	}
-
-	return false;
-}
-
-bool Scanner::isNumberFormat(const char* text, int& size)
-{
-	if (text == nullptr)
-	{
-		return false;
-	}
-
-	int len = strlen(text);
-	if (len <= 0)
-	{
-		return false;
-	}
-
-	char ch;
-	int i;
-	bool bExistSpot = false;
-	for (i = 0; i < len; i++)
-	{
-		ch = *(text + i);
-		if (ch == 0x2E)
-		{
-			if (bExistSpot == false) 
-				bExistSpot = true;
-			else 
-			{
-				size = i;
-				return i > 0;
-			}
-		}
-		// 非数字和.
-		if (!(ch >= 0x30 && ch <= 0x39))
-		{
-			size = i;
-			return i > 0;
-		}
-	}
-
-	if (i == len)
-	{
-		size = i;
-		return true;
-	}
-
-	return false;
-}
-
-bool Scanner::isStringFormat(const char* text, int& size)
-{
-	if (text == nullptr)
-	{
-		return false;
-	}
-
-
-	int len = strlen(text);
-	if (len <= 0)
-	{
-		return false;
-	}
-
-	if (*text != 0x22)
-	{
-		return false;
-	}
-	char ch;
-	int i;
-	for (i = 1; i < len; i++)
-	{
-		ch = *(text + i);
-		if (ch == 0x22)
-		{
-			size = i + 1;
-			return true;
-		}
-	}
-
-	if (i == len)
-	{
-		size = i;
-		return true;
-	}
-
-	return false;
-}
-
-bool Scanner::isSingalFormat(const char* text, int& size)
-{
-	if (text == nullptr)
-	{
-		return false;
-	}
-	size = SingalSet::getInstance()->containOperator(text);
-
-	return size != -1;
 }
 
 void Scanner::appendWord(std::string& word)

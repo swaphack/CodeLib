@@ -2,9 +2,6 @@
 
 namespace script
 {
-	class Compiler;
-	class Parser;
-
 	// 脚本文档解析
 	class Document
 	{
@@ -15,11 +12,16 @@ namespace script
 		// 加载文件
 		bool loadFile(const char* filepath);
 		// 解析
-		bool parse(const char* text, int size);
+		virtual bool parse();
+	public:
+		// 文本指针
+		char* getPtr();
+		// 文本大小
+		int getSize();
 	private:
-		// 扫描器
-		Compiler* m_pCompiler;
-		// 语法分析
-		Parser* m_pParser;
+		// 文本指针
+		char* _buffer;
+		// 文本大小
+		int _size;
 	};
 }

@@ -1,33 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Coordinates">
-      <UniqueIdentifier>{466b3c5b-b357-4c3b-9032-e0fc15727a49}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Matrix">
       <UniqueIdentifier>{55f170fa-8a53-4628-8c73-02b5e44d5a92}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Geometry">
-      <UniqueIdentifier>{955e6dc6-67d6-43c8-88e2-2f464bf5b405}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Coordinates\Coordinates.h">
-      <Filter>Coordinates</Filter>
-    </ClInclude>
-    <ClInclude Include="Coordinates\Vector3.h">
-      <Filter>Coordinates</Filter>
-    </ClInclude>
     <ClInclude Include="Matrix\Matrix4.h">
       <Filter>Matrix</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="Coordinates\Coordinates.cpp">
-      <Filter>Coordinates</Filter>
-    </ClCompile>
-    <ClCompile Include="Coordinates\Vector3.cpp">
-      <Filter>Coordinates</Filter>
-    </ClCompile>
   </ItemGroup>
 </Project>

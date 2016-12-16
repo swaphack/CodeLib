@@ -76,12 +76,11 @@
     <ClInclude Include="File\Load\TextLoader.h" />
     <ClInclude Include="File\macros.h" />
     <ClInclude Include="File\Parse\helper.h" />
+    <ClInclude Include="File\Parse\IElement.h" />
     <ClInclude Include="File\Parse\LayoutItemParser.h" />
     <ClInclude Include="File\Parse\LayoutParser.h" />
     <ClInclude Include="File\Parse\import.h" />
-    <ClInclude Include="File\Parse\IXmlLoader.h" />
     <ClInclude Include="File\Parse\WidgetParser.h" />
-    <ClInclude Include="File\Parse\IXmlSaver.h" />
     <ClInclude Include="File\Parse\macros.h" />
     <ClInclude Include="File\Parse\WidgetProperty.h" />
     <ClInclude Include="File\UIProxy.h" />
@@ -98,6 +97,7 @@
     <ClCompile Include="File\Load\ImageLoader.cpp" />
     <ClCompile Include="File\Load\NodeLoader.cpp" />
     <ClCompile Include="File\Load\TextLoader.cpp" />
+    <ClCompile Include="File\Parse\IElement.cpp" />
     <ClCompile Include="File\Parse\LayoutItemParser.cpp" />
     <ClCompile Include="File\Parse\WidgetParser.cpp" />
     <ClCompile Include="File\Parse\WidgetProperty.cpp" />
