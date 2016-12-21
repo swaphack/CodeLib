@@ -12,7 +12,6 @@ NodeLoader::NodeLoader()
 
 NodeLoader::~NodeLoader()
 {
-
 }
 
 void NodeLoader::parseAttributes()

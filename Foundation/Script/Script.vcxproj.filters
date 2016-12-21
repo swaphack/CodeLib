@@ -118,16 +118,7 @@
     <ClInclude Include="Compile\macros.h">
       <Filter>Compile\Common</Filter>
     </ClInclude>
-    <ClInclude Include="Compile\Expression.h">
-      <Filter>Compile\Parse</Filter>
-    </ClInclude>
     <ClInclude Include="Compile\AbstractSyntaxTree.h">
-      <Filter>Compile\Parse</Filter>
-    </ClInclude>
-    <ClInclude Include="Compile\SyntaxAnalysis.h">
-      <Filter>Compile\Parse</Filter>
-    </ClInclude>
-    <ClInclude Include="Compile\CodeBlock.h">
       <Filter>Compile\Parse</Filter>
     </ClInclude>
     <ClInclude Include="Compile\TokenTable.h">
@@ -159,6 +150,12 @@
     </ClInclude>
     <ClInclude Include="Compile\SymbolParser.h">
       <Filter>Compile\Sample</Filter>
+    </ClInclude>
+    <ClInclude Include="Compile\ASTNode.h">
+      <Filter>Compile\Parse</Filter>
+    </ClInclude>
+    <ClInclude Include="Compile\SymbolInformation.h">
+      <Filter>Compile\Parse</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -201,9 +198,6 @@
       <Filter>Compile</Filter>
     </ClCompile>
     <ClCompile Include="Compile\Parser.cpp">
-      <Filter>Compile\Parse</Filter>
-    </ClCompile>
-    <ClCompile Include="Compile\Expression.cpp">
       <Filter>Compile\Parse</Filter>
     </ClCompile>
     <ClCompile Include="Compile\AbstractSyntaxTree.cpp">

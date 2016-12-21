@@ -2,13 +2,68 @@
 <root Des="先按照优先级计算，level越小，优先级越高；参数传入按照索引排序，索引越小越先计算">
   <symbol name="++" level="1">0++</symbol>
   <symbol name="--" level="1">0--</symbol>
-  <symbol name="[]" level="1">[0]</symbol>
-  <symbol name="()" level="1">(0)</symbol>
+  <symbol name="[]" level="1" embed="1" begin="[" end="]">[0]</symbol>
+  <symbol name="()" level="1" embed="1" begin="(" end=")">(0)</symbol>
   <symbol name="." level="1">0.</symbol>
   <symbol name="->" level="1">0-></symbol>
+  
   <symbol name="-" level="2">-0</symbol>
   <symbol name="++" level="2">++0</symbol>
   <symbol name="--" level="2">--0</symbol>
   <symbol name="*" level="2">*0</symbol>
-  <symbol name="" level="2">&0</symbol>
+  <symbol name="&amp;" level="2">&amp;0</symbol>
+  <symbol name="!" level="2">!0</symbol>
+  <symbol name="~" level="2">~0</symbol>
+  
+  <symbol name="/" level="3">0/1</symbol>
+  <symbol name="*" level="3">0*1</symbol>
+  <symbol name="%" level="3">0%1</symbol>
+  
+  <symbol name="+" level="4">0+1</symbol>
+  <symbol name="-" level="4">0-1</symbol>
+  
+  <symbol name="&lt;&lt;" level="5">0&lt;&lt;1</symbol>
+  <symbol name=">>" level="5">0>>1</symbol>
+
+  <symbol name=">" level="6">0>1</symbol>
+  <symbol name=">=" level="6">0>=1</symbol>
+  <symbol name="&lt;" level="6">0&lt;1</symbol>
+  <symbol name="&lt;=" level="6">0&lt;=1</symbol>
+
+  <symbol name="==" level="7">0==1</symbol>
+  <symbol name="!=" level="7">0!=1</symbol>
+
+  <symbol name="&amp;" level="8">0&amp;1</symbol>
+  <symbol name="^" level="9">0^1</symbol>
+  <symbol name="|" level="10">0|1</symbol>
+  <symbol name="&amp;&amp;" level="11">0&amp;&amp;1</symbol>
+  <symbol name="||" level="12">0||1</symbol>
+  
+  <symbol name="?:" level="13" embed="1">2?0:1</symbol>
+
+  <symbol name="=" level="14">1=0</symbol>
+  <symbol name="/=" level="14">1/=0</symbol>
+  <symbol name="*=" level="14">1*=0</symbol>
+  <symbol name="+=" level="14">1+=0</symbol>
+  <symbol name="-=" level="14">1-=0</symbol>
+  <symbol name="&lt;&lt;=" level="14">1&lt;&lt;=0</symbol>
+  <symbol name=">>=" level="14">1>=0</symbol>
+  <symbol name="&amp;=" level="14">1&amp;=0</symbol>
+  <symbol name="^=" level="14">1^=0</symbol>
+  <symbol name="|=" level="14">1|=0</symbol>
+  
+  <symbol name="," level="15" embed="1">0,1</symbol>
+
 </root>
+
+<!--
+&lt; < 小于号 
+&gt; > 大于号 
+&amp; & 和 
+&apos; ' 单引号 
+&quot; " 双引号
+
+name 符号名称
+level 优先级
+embed 是否内嵌
+-->

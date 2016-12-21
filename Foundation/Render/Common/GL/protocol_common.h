@@ -123,6 +123,8 @@ namespace render
 		void setPosition(float x, float y, float z);
 
 		void setPosition(const sys::Vector& position);
+
+		void setPosition(const sys::Point& position);
 		// »ñÈ¡×ø±ê
 		float getPositionX();
 

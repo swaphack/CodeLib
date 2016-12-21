@@ -97,5 +97,4 @@ namespace ui
 		this->setAttribute(name, dest);
 		free(dest);
 	}
-
 }

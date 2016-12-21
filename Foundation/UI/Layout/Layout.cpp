@@ -2,7 +2,7 @@
 
 using namespace ui;
 
-typedef struct InnerItem
+struct InnerItem
 {
 	float fixX;
 	float perX;
@@ -402,10 +402,10 @@ GridLayout::~GridLayout()
 
 sys::Size GridLayout::getLayoutItemMinSize()
 {
-
+	return getMinSize();
 }
 
 sys::Size GridLayout::getLayoutItemMaxSize()
 {
-
+	return getMaxSize();
 }

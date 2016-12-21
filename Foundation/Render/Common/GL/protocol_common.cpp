@@ -195,6 +195,13 @@ void SpaceProtocol::setPosition(const sys::Vector& position)
 	onSpaceChange();
 }
 
+void SpaceProtocol::setPosition(const sys::Point& position)
+{
+	_position.x = position.x;
+	_position.y = position.y;
+	onSpaceChange();
+}
+
 const sys::Vector& SpaceProtocol::getPosition()
 {
 	return _position;

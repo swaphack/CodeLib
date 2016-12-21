@@ -1,5 +1,4 @@
 #include "UIProxy.h"
-#include "../Widget/import.h"
 
 using namespace ui;
 
@@ -51,6 +50,23 @@ Widget* UIProxy::loadFile(const char* filepath)
 	delete doc;
 
 	return pNode;
+}
+
+bool UIProxy::saveFile(Widget* widget, const char* filepath)
+{
+	if (widget == nullptr || filepath == nullptr)
+	{
+		return false;
+	}
+
+	tinyxml2::XMLDocument doc;
+
+	if (!saveWidget(&doc, widget))
+	{
+		return false;
+	}
+
+	return tinyxml2::XML_SUCCESS == doc.SaveFile(filepath);
 }
 
 void UIProxy::registerNodeParser(const char* name, WidgetParser* parser)
@@ -107,7 +123,14 @@ Widget* UIProxy::loadWidget(tinyxml2::XMLElement* pXmlNode)
 		return nullptr;
 	}
 
-	Widget* pWidget = iter->second->load(pXmlNode);
+	if (!iter->second->load(pXmlNode))
+	{
+		return nullptr;
+	}
+
+	Widget* pWidget = iter->second->getWidget();
+	iter->second->setWidget(nullptr);
+
 	if (pWidget == nullptr)
 	{
 		return nullptr;
@@ -126,4 +149,42 @@ Widget* UIProxy::loadWidget(tinyxml2::XMLElement* pXmlNode)
 	}
 
 	return pWidget;
+}
+
+tinyxml2::XMLElement* UIProxy::saveWidget(tinyxml2::XMLDocument* pDocument, Widget* pWidget)
+{
+	if (pDocument == nullptr || pWidget == nullptr)
+	{
+		return nullptr;
+	}
+
+	const char* name = typeid(pWidget).name();
+	NodeParsers::const_iterator iter = _nodeParsers.find(name);
+	if (iter == _nodeParsers.end())
+	{
+		return nullptr;
+	}
+
+	iter->second->setWidget(pWidget);
+	tinyxml2::XMLElement* pXmlElement = pDocument->NewElement(name);
+	if (!iter->second->save(pXmlElement))
+	{
+		pDocument->DeleteNode(pXmlElement);
+		return nullptr;
+	}
+
+	std::vector<sys::Object*>::iterator begin = pWidget->beginChild();
+	std::vector<sys::Object*>::iterator end = pWidget->endChild();
+
+	while (begin != end)
+	{
+		tinyxml2::XMLElement* pChildNode = saveWidget(pDocument, pWidget);
+		if (pChildNode)
+		{
+			pXmlElement->InsertEndChild(pChildNode);
+		}
+		begin++;
+	}
+
+	return pXmlElement;
 }

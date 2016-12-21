@@ -89,7 +89,6 @@ void LayoutItem::setMaxSize(float width, float height)
 	m_sMaxSize.height = height;
 }
 
-
 void LayoutItem::setWidget(Widget* widget)
 {
 	if (widget == nullptr)

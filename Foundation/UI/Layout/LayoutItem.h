@@ -75,10 +75,6 @@ namespace ui
 		*/
 		void setMaxSize(float width, float height);
 		/**
-		*	设置最大长宽的信息
-		*/
-		void setMaxSize(float width, float height);
-		/**
 		*	设置元件
 		*/
 		void setWidget(Widget* widget);

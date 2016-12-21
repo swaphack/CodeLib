@@ -166,6 +166,26 @@ Node* Node::getFirstChild()
 	return static_cast<Node*>(*_children.begin());
 }
 
+std::vector<sys::Object*>::iterator Node::beginChild()
+{
+	return _children.begin();
+}
+
+std::vector<sys::Object*>::iterator Node::endChild()
+{
+	return _children.end();
+}
+
+// void Node::foreachChild(std::function<void(Node*)> handler)
+// {
+// 	std::vector<Object*>::iterator iter = _children.begin();
+// 	while (iter != _children.end())
+// 	{
+// 		handler(dynamic_cast<Node*>(*iter));
+// 		iter++;
+// 	}
+// }
+
 void Node::setUserData( void* data )
 {
 	_userData = data;

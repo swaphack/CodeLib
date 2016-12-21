@@ -1,5 +1,7 @@
 #include "SymbolHandler.h"
 
+#include "text.h"
+
 using namespace script;
 
 
@@ -24,53 +26,104 @@ SymbolHandler* SymbolHandler::getInstance()
 	return s_OperatorHandler;
 }
 
-void SymbolHandler::addParser(SymbolDelegate* opeartor)
+void SymbolHandler::addSymbolDelegate(SymbolDelegate* pDelegate)
 {
-	if (opeartor == nullptr)
+	if (pDelegate == nullptr)
 	{
 		return;
 	}
 
-	m_mOperatorParsers.push_back(opeartor);
+	removeSymbolDelegate(pDelegate);
+
+	m_mSymbolDelegates[pDelegate->getSymbolInformation().name] = pDelegate;
 }
 
-void SymbolHandler::removeParser(SymbolDelegate* opeartor)
+void SymbolHandler::removeSymbolDelegate(SymbolDelegate* pDelegate)
 {
-	if (opeartor == nullptr)
+	if (pDelegate == nullptr)
 	{
 		return;
 	}
 
-	for (int i = 0; i < m_mOperatorParsers.size(); i++)
+	SymbolDelegates::iterator iter = m_mSymbolDelegates.find(pDelegate->getSymbolInformation().name);
+	if (iter == m_mSymbolDelegates.end())
 	{
-		if (m_mOperatorParsers[i] == opeartor)
-		{
-			delete opeartor;
-			m_mOperatorParsers.erase(m_mOperatorParsers.begin() + i);
-			return;
-		}
+		return;
 	}
+
+	delete iter->second;
+	m_mSymbolDelegates.erase(iter);
 }
 
-void SymbolHandler::removeAllParsers()
+void SymbolHandler::removeAllSymbolDelegates()
 {
-	for (int i = 0; i < m_mOperatorParsers.size(); i++)
+	SymbolDelegates::iterator iter = m_mSymbolDelegates.begin();
+	while (iter != m_mSymbolDelegates.end())
 	{
-		delete m_mOperatorParsers[i];
+		delete iter->second;
+		iter++;
 	}
-
-	m_mOperatorParsers.clear();
+	m_mSymbolDelegates.clear();
 }
 
-bool SymbolHandler::match(Token::const_iterator begin, Token::const_iterator end, Token::const_iterator& offset)
+SymbolDelegate* SymbolHandler::getSymbolDelegate(const char* name)
 {
-	for (int i = 0; i < m_mOperatorParsers.size(); i++)
+	if (name == nullptr)
 	{
-		if (m_mOperatorParsers[i]->match(begin, end, offset))
+		return nullptr;
+	}
+
+	SymbolDelegates::iterator iter = m_mSymbolDelegates.find(name);
+	if (iter == m_mSymbolDelegates.end())
+	{
+		return nullptr;
+	}
+
+	return iter->second;
+}
+
+ASTNode* SymbolHandler::match(Token::const_iterator begin, Token::const_iterator end, Token::const_iterator& offset)
+{
+	ASTNode* pNode = nullptr;
+
+	for (int i = 0; i < m_mSymbolDelegates.size(); i++)
+	{
+		pNode = m_mSymbolDelegates[i]->makeASTNode(begin, end, offset);
+		if (pNode)
 		{
-			return true;
+			return pNode;
 		}
 	}
 
-	return false;
+	return nullptr;
+}
+
+bool SymbolHandler::load(const char* filepath)
+{
+	tinyxml2::XMLDocument document;
+	tinyxml2::XMLError error = document.LoadFile(filepath);
+	if (error != tinyxml2::XML_SUCCESS)
+	{
+		return false;
+	}
+
+	tinyxml2::XMLElement* pRoot = document.RootElement();
+
+	tinyxml2::XMLElement* pElement = pRoot->FirstChildElement();
+
+	while (pElement)
+	{
+		SymbolDelegate* pDelegate = new SymbolDelegate();
+		pDelegate->getSymbolInformation().name = pElement->Attribute("name");
+		pDelegate->getSymbolInformation().expression = pElement->GetText();
+		pDelegate->getSymbolInformation().priorityLevel = pElement->IntAttribute("level");
+		pDelegate->getSymbolInformation().embed = pElement->IntAttribute("embed") == 1;
+		pDelegate->makeASTNode();
+
+		this->addSymbolDelegate(pDelegate);
+
+		pElement = pElement->NextSiblingElement();
+	}
+
+	return true;
 }

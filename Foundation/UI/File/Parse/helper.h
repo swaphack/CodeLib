@@ -1,5 +1,7 @@
 #pragma once
 
+#include "../UIProxy.h"
+
 namespace ui
 {
 	// 创建节点

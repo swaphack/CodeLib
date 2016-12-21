@@ -60,12 +60,6 @@
     <ClInclude Include="Display\macros.h">
       <Filter>Display</Filter>
     </ClInclude>
-    <ClInclude Include="File\Parse\IXmlSaver.h">
-      <Filter>File\Parse</Filter>
-    </ClInclude>
-    <ClInclude Include="File\Parse\IXmlLoader.h">
-      <Filter>File\Parse</Filter>
-    </ClInclude>
     <ClInclude Include="File\Load\NodeLoader.h">
       <Filter>File\Load</Filter>
     </ClInclude>
@@ -76,6 +70,9 @@
       <Filter>File\Parse</Filter>
     </ClInclude>
     <ClInclude Include="File\Parse\LayoutItemParser.h">
+      <Filter>File\Parse</Filter>
+    </ClInclude>
+    <ClInclude Include="File\Parse\IElement.h">
       <Filter>File\Parse</Filter>
     </ClInclude>
   </ItemGroup>
@@ -128,6 +125,9 @@
       <Filter>File\Parse</Filter>
     </ClCompile>
     <ClCompile Include="File\Parse\LayoutItemParser.cpp">
+      <Filter>File\Parse</Filter>
+    </ClCompile>
+    <ClCompile Include="File\Parse\IElement.cpp">
       <Filter>File\Parse</Filter>
     </ClCompile>
   </ItemGroup>

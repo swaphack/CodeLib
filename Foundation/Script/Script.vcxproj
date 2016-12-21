@@ -12,17 +12,17 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Compile\AbstractSyntaxTree.h" />
-    <ClInclude Include="Compile\CodeBlock.h" />
+    <ClInclude Include="Compile\ASTNode.h" />
     <ClInclude Include="Compile\CodeFilter.h" />
     <ClInclude Include="Compile\CodeGenerator.h" />
     <ClInclude Include="Compile\Compiler.h" />
     <ClInclude Include="Compile\Error.h" />
-    <ClInclude Include="Compile\Expression.h" />
     <ClInclude Include="Compile\import.h" />
     <ClInclude Include="Compile\ITextFilter.h" />
     <ClInclude Include="Compile\macros.h" />
     <ClInclude Include="Compile\SymbolDelegate.h" />
     <ClInclude Include="Compile\SymbolHandler.h" />
+    <ClInclude Include="Compile\SymbolInformation.h" />
     <ClInclude Include="Compile\SymbolParser.h" />
     <ClInclude Include="Compile\WordFilters.h" />
     <ClInclude Include="Compile\WordSet.h" />
@@ -30,7 +30,6 @@
     <ClInclude Include="Compile\Scanner.h" />
     <ClInclude Include="Compile\SemanticAnalyzer.h" />
     <ClInclude Include="Compile\SourceCodeOptimizer.h" />
-    <ClInclude Include="Compile\SyntaxAnalysis.h" />
     <ClInclude Include="Compile\TargetCodeOptimizer.h" />
     <ClInclude Include="Compile\TokenTable.h" />
     <ClInclude Include="Core\Base.h" />
@@ -56,7 +55,6 @@
     <ClCompile Include="Compile\AbstractSyntaxTree.cpp" />
     <ClCompile Include="Compile\Compiler.cpp" />
     <ClCompile Include="Compile\Error.cpp" />
-    <ClCompile Include="Compile\Expression.cpp" />
     <ClCompile Include="Compile\SymbolDelegate.cpp" />
     <ClCompile Include="Compile\SymbolHandler.cpp" />
     <ClCompile Include="Compile\WordFilters.cpp" />
@@ -126,12 +124,13 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>
-      </AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../Text/</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>Text.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(OutDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">

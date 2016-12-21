@@ -56,6 +56,16 @@ bool Script::initWordFilter()
 	return true;
 }
 
+bool Script::initSysmbolRule(const char* filepath)
+{
+	if (filepath == nullptr)
+	{
+		return false;
+	}
+
+	return SymbolHandler::getInstance()->load(filepath);
+}
+
 bool Script::load(const char* filepath)
 {
 	if (filepath == nullptr)

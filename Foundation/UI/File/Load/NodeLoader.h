@@ -17,9 +17,6 @@ namespace ui
 		virtual void parseAttributes();
 		// 保存属性
 		virtual void saveAttributes();
-	protected:
-		// ui节点
-		Widget* _node;
 	private:
 		INIT_LOADER_WIDGET(Widget);
 	};

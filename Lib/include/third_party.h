@@ -63,4 +63,11 @@
 #include "sqlite/sqlite3.h"
 #endif
 
+//////////////////////////////////////////////////////////////////////////
+// opencl
+
+#if defined(USE_OPENCL)
+#include "opencl/CL/cl.h"
+#endif
+
 

@@ -136,20 +136,29 @@ bool Display::loadFile()
 	{
 		return false;
 	}
-	UIProxy::getInstance()->loadFile(fullpath.c_str());
+	Widget* pWidget = UIProxy::getInstance()->loadFile(fullpath.c_str());
+	if (pWidget == nullptr)
+	{
+		return false;
+	}
+
+	// 水平布局
+	m_pLayoutItem = new HorizontalLayout();
+	m_pLayoutItem->setWidget(pWidget);
+
+	return true;
 }
 
-bool Display::initUI()
+void Display::initUI()
+{
+}
+
+void Display::initEvent()
 {
 
 }
 
-bool Display::initEvent()
-{
-
-}
-
-bool Display::initText()
+void Display::initText()
 {
 
 }
@@ -158,7 +167,7 @@ Widget* Display::getWidget()
 {
 	if (m_pLayoutItem == nullptr)
 	{
-		return;
+		return nullptr;
 	}
 
 	return m_pLayoutItem->getWidget();

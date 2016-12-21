@@ -11,7 +11,7 @@ namespace ui
 	// ui加载
 	class UIProxy
 	{
-	public:
+	private:
 		UIProxy();
 		virtual ~UIProxy();
 	public:
@@ -20,6 +20,10 @@ namespace ui
 		*	加载ui配置文件
 		*/
 		Widget* loadFile(const char* filepath);
+		/**
+		*	保存ui配置文件
+		*/
+		bool saveFile(Widget* widget, const char* filepath);
 		/**
 		*	注册节点解析
 		*/
@@ -36,10 +40,13 @@ namespace ui
 		// 加载节点
 		Widget* loadWidget(tinyxml2::XMLElement* pXmlNode);
 
+		// 加载节点
+		tinyxml2::XMLElement* saveWidget(tinyxml2::XMLDocument* pDocument, Widget* pWidget);
+
 		typedef std::map<std::string, WidgetParser*> NodeParsers;
 		// 节点解析集合
 		NodeParsers _nodeParsers;
 	}; 
 
-	#define G_UIPROXY sys::Instance<UIProxy>::getInstance()
+	#define G_UIPROXY UIProxy::getInstance()
 }

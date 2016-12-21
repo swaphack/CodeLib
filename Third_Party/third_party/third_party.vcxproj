@@ -44,7 +44,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>../../Lib/include/freetype/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../Lib/include/freetype/;../../Lib/include/opencl/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -193,6 +193,22 @@
     <ClInclude Include="..\..\Lib\include\jpeg\jpegint.h" />
     <ClInclude Include="..\..\Lib\include\jpeg\jpeglib.h" />
     <ClInclude Include="..\..\Lib\include\jpeg\jversion.h" />
+    <ClInclude Include="..\..\Lib\include\opencl\CL\cl.h" />
+    <ClInclude Include="..\..\Lib\include\opencl\CL\cl.hpp" />
+    <ClInclude Include="..\..\Lib\include\opencl\CL\cl2.hpp" />
+    <ClInclude Include="..\..\Lib\include\opencl\CL\cl_d3d10.h" />
+    <ClInclude Include="..\..\Lib\include\opencl\CL\cl_d3d11.h" />
+    <ClInclude Include="..\..\Lib\include\opencl\CL\cl_driver_diagnostics_intel.h" />
+    <ClInclude Include="..\..\Lib\include\opencl\CL\cl_dx9_media_sharing.h" />
+    <ClInclude Include="..\..\Lib\include\opencl\CL\cl_egl.h" />
+    <ClInclude Include="..\..\Lib\include\opencl\CL\cl_egl_intel.h" />
+    <ClInclude Include="..\..\Lib\include\opencl\CL\cl_ext.h" />
+    <ClInclude Include="..\..\Lib\include\opencl\CL\cl_gl.h" />
+    <ClInclude Include="..\..\Lib\include\opencl\CL\cl_gl_ext.h" />
+    <ClInclude Include="..\..\Lib\include\opencl\CL\cl_packed_yuv_intel.h" />
+    <ClInclude Include="..\..\Lib\include\opencl\CL\cl_platform.h" />
+    <ClInclude Include="..\..\Lib\include\opencl\CL\opencl.h" />
+    <ClInclude Include="..\..\Lib\include\opencl\CL\va_ext.h" />
     <ClInclude Include="..\..\Lib\include\opengl\GL.H" />
     <ClInclude Include="..\..\Lib\include\opengl\GLAUX.H" />
     <ClInclude Include="..\..\Lib\include\opengl\GLEXT.H" />

@@ -19,6 +19,8 @@ namespace script
 		bool initWordSet(const char* filepath);
 		// 初始化过滤器
 		bool initWordFilter();
+		// 初始化符号解析规则
+		bool initSysmbolRule(const char* filepath);
 		// 加载脚本文件
 		bool load(const char* filepath);
 		// 导入引用文本

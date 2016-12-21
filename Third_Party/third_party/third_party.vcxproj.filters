@@ -55,6 +55,12 @@
     <Filter Include="mysql">
       <UniqueIdentifier>{d5758a07-ced5-4d17-acf0-c6f26b4a6ff1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="opencl">
+      <UniqueIdentifier>{308f13db-1cbc-4d3f-926a-13501217150c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="opencl\CL">
+      <UniqueIdentifier>{40ae0594-1d84-4e77-98c9-da81d689322d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Lib\include\png\png.h">
@@ -484,6 +490,54 @@
     </ClInclude>
     <ClInclude Include="..\..\Lib\include\fmod\lowlevel\fmod.hpp">
       <Filter>fmod\lowlevel</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Lib\include\opencl\CL\cl.h">
+      <Filter>opencl\CL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Lib\include\opencl\CL\cl.hpp">
+      <Filter>opencl\CL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Lib\include\opencl\CL\cl_d3d10.h">
+      <Filter>opencl\CL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Lib\include\opencl\CL\cl_d3d11.h">
+      <Filter>opencl\CL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Lib\include\opencl\CL\cl_driver_diagnostics_intel.h">
+      <Filter>opencl\CL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Lib\include\opencl\CL\cl_dx9_media_sharing.h">
+      <Filter>opencl\CL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Lib\include\opencl\CL\cl_egl.h">
+      <Filter>opencl\CL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Lib\include\opencl\CL\cl_egl_intel.h">
+      <Filter>opencl\CL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Lib\include\opencl\CL\cl_ext.h">
+      <Filter>opencl\CL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Lib\include\opencl\CL\cl_gl.h">
+      <Filter>opencl\CL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Lib\include\opencl\CL\cl_gl_ext.h">
+      <Filter>opencl\CL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Lib\include\opencl\CL\cl_packed_yuv_intel.h">
+      <Filter>opencl\CL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Lib\include\opencl\CL\cl_platform.h">
+      <Filter>opencl\CL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Lib\include\opencl\CL\cl2.hpp">
+      <Filter>opencl\CL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Lib\include\opencl\CL\opencl.h">
+      <Filter>opencl\CL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Lib\include\opencl\CL\va_ext.h">
+      <Filter>opencl\CL</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -1,6 +1,8 @@
 #pragma once
 
 #include <vector>
+#include <map>
+#include <string>
 
 #include "SymbolDelegate.h"
 
@@ -15,14 +17,20 @@ namespace script
 	public:
 		static SymbolHandler* getInstance();
 		// 添加解析
-		void addParser(SymbolDelegate* opeartor);
+		void addSymbolDelegate(SymbolDelegate* opeartor);
 		// 移除解析
-		void removeParser(SymbolDelegate* opeartor);
+		void removeSymbolDelegate(SymbolDelegate* opeartor);
 		// 移除所有解析
-		void removeAllParsers();
+		void removeAllSymbolDelegates();
+		// 查找解析
+		SymbolDelegate* getSymbolDelegate(const char* name);
 		// 匹配解析
-		bool match(Token::const_iterator begin, Token::const_iterator end, Token::const_iterator& offset);
+		ASTNode* match(Token::const_iterator begin, Token::const_iterator end, Token::const_iterator& offset);
+		// 加载配置文件
+		bool load(const char* filepath);
 	private:
-		std::vector<SymbolDelegate*> m_mOperatorParsers;
+		typedef std::map<std::string, SymbolDelegate*> SymbolDelegates;
+		// 符号处理委托
+		SymbolDelegates m_mSymbolDelegates;
 	};
 }

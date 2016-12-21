@@ -2,7 +2,7 @@
 
 #include "macros.h"
 
-#include "SyntaxAnalysis.h"
+#include <stack>
 
 namespace script
 {
@@ -16,7 +16,5 @@ namespace script
 		~Parser();
 	public:
 		bool parse(Token::const_iterator begin, Token::const_iterator end);
-	private:
-		SyntaxAnalysis* m_pSyntaxAnalysis;
 	};
 }

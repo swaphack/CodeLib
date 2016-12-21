@@ -31,5 +31,12 @@ bool Compiler::compile(CompilerDocument* document)
 		return false;
 	}
 
+	if (!m_pParser->parse(
+		m_pScanner->getTokenTable()->tokenBegin(), 
+		m_pScanner->getTokenTable()->tokenEnd()))
+	{
+		return false;
+	}
+
 	return false;
 }

@@ -58,6 +58,9 @@ namespace render
 		// 获取第一个子节点
 		Node* getFirstChild();
 
+		std::vector<sys::Object*>::iterator beginChild();
+		std::vector<sys::Object*>::iterator endChild();
+
 		// 设置数据
 		void setUserData(void* data);
 		// 获取数据

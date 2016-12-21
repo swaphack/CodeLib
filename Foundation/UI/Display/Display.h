@@ -57,15 +57,15 @@ namespace ui
 		/**
 		*	初始化
 		*/
-		bool initUI();
+		void initUI();
 		/**
 		*	事件绑定
 		*/
-		virtual bool initEvent();
+		virtual void initEvent();
 		/**
 		*	初始化文本
 		*/
-		virtual bool initText();
+		virtual void initText();
 		/**
 		*	获取元件根节点
 		*/

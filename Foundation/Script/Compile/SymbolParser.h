@@ -11,10 +11,10 @@ namespace script
 		SymbolEqual()
 		{
 			m_strSymbol = "=";
-			m_strExpression = "1 = 0";
+			m_strExpression = "1=0";
 		}
 
-		virtual bool match(Token::const_iterator begin, Token::const_iterator end, Token::const_iterator& offset)
+		virtual bool makeASTNode(Token::const_iterator begin, Token::const_iterator end, Token::const_iterator& offset)
 		{
 			offset = begin;
 			while (offset != end)

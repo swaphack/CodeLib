@@ -19,6 +19,9 @@
     <Filter Include="Resource\3DModel">
       <UniqueIdentifier>{ad016814-e5ec-4aa0-9bc1-e885004c07f6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource\Layout">
+      <UniqueIdentifier>{3cec0570-ce9d-40fa-9a02-8328801c307d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WndWeb.cpp">
@@ -66,6 +69,9 @@
   <ItemGroup>
     <Xml Include="Resource\3DModel\Test.xml">
       <Filter>Resource\3DModel</Filter>
+    </Xml>
+    <Xml Include="Resource\Layout\Test.xml">
+      <Filter>Resource\Layout</Filter>
     </Xml>
   </ItemGroup>
 </Project>

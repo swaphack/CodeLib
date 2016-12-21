@@ -178,7 +178,7 @@ void WidgetProperty::setAttribute(const char* name, const sys::Rect& value)
 		return;
 	}
 
-	setAttribute(name, getCString("%d,%d,%d,%d", value.x, value.y, value.width, value.height));
+	setAttribute(name, getCString("%f,%f,%f,%f", value.x, value.y, value.width, value.height));
 }
 
 void WidgetProperty::setAttribute(const char* name, const render::BlendParam& value)
