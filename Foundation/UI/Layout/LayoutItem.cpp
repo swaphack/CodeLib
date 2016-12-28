@@ -55,7 +55,7 @@ void LayoutItem::setGeometry(const sys::Rect& rect)
 	m_rGeometry = rect;
 }
 
-void LayoutItem::setPosition(float x, float y)
+void LayoutItem::setOrgin(float x, float y)
 {
 	m_rGeometry.x = x;
 	m_rGeometry.y = y;
@@ -78,6 +78,11 @@ void LayoutItem::setMinSize(float width, float height)
 	m_sMinSize.height = height;
 }
 
+void LayoutItem::setMinSize(const sys::Size& size)
+{
+	m_sMinSize = size;
+}
+
 const sys::Size& LayoutItem::getMaxSize()
 {
 	return m_sMaxSize;
@@ -87,6 +92,11 @@ void LayoutItem::setMaxSize(float width, float height)
 {
 	m_sMaxSize.width = width;
 	m_sMaxSize.height = height;
+}
+
+void LayoutItem::setMaxSize(const sys::Size& size)
+{
+	m_sMaxSize = size;	
 }
 
 void LayoutItem::setWidget(Widget* widget)
@@ -126,6 +136,11 @@ Layout* LayoutItem::getLayout()
 SizePolicy& LayoutItem::getSizePolicy()
 {
 	return m_spAdjust;
+}
+
+void LayoutItem::setSizePolicy(const SizePolicy& policy)
+{
+	m_spAdjust = policy;
 }
 
 void LayoutItem::setLayoutItemGeometry(const sys::Rect& rect)
@@ -242,52 +257,5 @@ void LayoutItem::setWidgetGeomerty(const sys::Rect& geometry)
 	float height = geometry.height;
 
 	m_pWidget->setPosition(posX, posY);
-	m_pWidget->setSize(width, height);
-}
-
-//////////////////////////////////////////////////////////////////////////
-LayoutSpacerItem::LayoutSpacerItem()
-{
-	this->setWidget(new Widget());
-	this->setGeometry(0, 0, 20, 20);
-	this->setOrientation(EO_Horizontal);
-}
-
-LayoutSpacerItem::~LayoutSpacerItem()
-{
-
-}
-
-void LayoutSpacerItem::setOrientation(Orientation eType)
-{
-	m_eOrientation = eType;
-
-	if (m_eOrientation == EO_Horizontal)
-	{
-		this->getSizePolicy().setHeightType(EST_Expanding);
-	}
-	else if (m_eOrientation == EO_Vertial)
-	{
-		this->getSizePolicy().setWidthType(EST_Expanding);
-	}
-}
-
-Orientation LayoutSpacerItem::getOrientation()
-{
-	return m_eOrientation;
-}
-
-
-//////////////////////////////////////////////////////////////////////////
-
-LayoutWidgetItem::LayoutWidgetItem(Widget* widget)
-{
-	ASSERT(widget != nullptr);
-
-	this->setWidget(widget);
-}
-
-LayoutWidgetItem::~LayoutWidgetItem()
-{
-
+	m_pWidget->setVolume(width, height);
 }

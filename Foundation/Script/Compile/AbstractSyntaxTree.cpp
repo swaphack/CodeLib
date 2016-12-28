@@ -52,9 +52,12 @@ bool AbstractSyntaxTree::createExpression(ASTNode* node, Token::const_iterator& 
 	{
 		pDelegate = SymbolHandler::getInstance()->getSymbolDelegate("?:");
 	}
-	else if (strValue.compare("]") == 0 || strValue.compare(":") == 0)
+	else if (strValue.compare("]") == 0)
 	{
 
+	}
+	else if ()
+	{
 	}
 	else
 	{

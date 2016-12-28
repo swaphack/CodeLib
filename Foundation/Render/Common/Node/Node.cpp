@@ -27,7 +27,7 @@ Node::~Node()
 	SAFE_DELETE(_actionProxy);
 	SAFE_DELETE(_touchProxy);
 	SAFE_DELETE(_notify);
-	this->clearAllChildren();
+	this->removeAllChildren();
 }
 
 bool Node::init()
@@ -85,7 +85,7 @@ void Node::removeChild( Node* node )
 	onChildrenChange();
 }
 
-void Node::clearAllChildren()
+void Node::removeAllChildren()
 {
 	std::vector<Object*>::iterator begin = _children.begin();
 

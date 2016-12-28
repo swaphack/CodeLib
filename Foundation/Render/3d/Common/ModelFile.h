@@ -26,14 +26,6 @@ namespace render
 		T_Vertex Colors;
 		// 顶点索引(三角形，三个点决定一个三角形)
 		T_Indice Indices;
-
-		T_ModelData()
-		{
-		}
-
-		~T_ModelData()
-		{
-		}
 	};
 	/**
 	*	3d模型配置文件

@@ -9,10 +9,10 @@ namespace ui
 	class Layout;
 
 	/**
-	*	布局项
+	*	布局项, 抽象类
 	*	布局项的集合信息在界面调整中不做改变，改变的只有widget的集合信息
 	*/
-	class LayoutItem : public sys::Object
+	class LayoutItem
 	{
 	public:
 		LayoutItem();
@@ -33,15 +33,15 @@ namespace ui
 		/**
 		*	设置几何位置
 		*/
-		void setPosition(float x, float y);
+		void setOrgin(float x, float y);
 		/**
 		*	设置几何位置
 		*/
-		void setPosition(const sys::Point& position);
+		void setOrgin(const sys::Point& position);
 		/**
 		*	获取几何位置
 		*/
-		sys::Point getPosition();
+		sys::Point getOrgin();
 		/**
 		*	设置几何面积
 		*/
@@ -75,6 +75,10 @@ namespace ui
 		*/
 		void setMaxSize(float width, float height);
 		/**
+		*	设置最大长宽的信息
+		*/
+		void setMaxSize(const sys::Size& size);
+		/**
 		*	设置元件
 		*/
 		void setWidget(Widget* widget);
@@ -94,6 +98,10 @@ namespace ui
 		*	获取在窗体大小改变时的自我调整策略
 		*/
 		SizePolicy& getSizePolicy();
+		/**
+		*	获取在窗体大小改变时的自我调整策略
+		*/
+		void setSizePolicy(const SizePolicy& policy);
 	public: // 可能需重载的方法
 		/**
 		*	设置布局项的几何信息
@@ -145,47 +153,5 @@ namespace ui
 		Layout* m_pLayout;
 		// 大小调整策略
 		SizePolicy m_spAdjust;
-	};
-
-	// 方向
-	enum Orientation
-	{
-		// 水平
-		EO_Horizontal,
-		// 垂直
-		EO_Vertial,
-	};
-
-	/**
-	*	空置项，用于填充
-	*/
-	class LayoutSpacerItem : public LayoutItem
-	{
-	public:
-		LayoutSpacerItem();
-		virtual ~LayoutSpacerItem();
-	public:
-		/**
-		*	设置空置项方向
-		*/
-		void setOrientation(Orientation eType);
-		/**
-		*	获取空置项方向
-		*/
-		Orientation getOrientation();
-	protected:
-		// 空置项方向
-		Orientation m_eOrientation;
-	};
-
-	/**
-	*	元件项，用于元件在界面位置和大小设定
-	*/
-	class LayoutWidgetItem : public LayoutItem
-	{
-	public:
-		LayoutWidgetItem(Widget* widget);
-		virtual ~LayoutWidgetItem();
-	public:
 	};
 }

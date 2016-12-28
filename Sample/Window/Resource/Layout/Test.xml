@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Node position="0,0" scale="1,1">
-</Node>
+<Layout rect="0,0,200,200" minsize="10, 10" maxsize="200, 200" sizetype="1" margin="0,0,0,0">
+  <Image></Image>
+  <Text></Text>
+</Layout>

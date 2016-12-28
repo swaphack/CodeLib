@@ -20,9 +20,6 @@ bool Parser::parse(Token::const_iterator begin, Token::const_iterator end)
 	Token::const_iterator iter = begin;
 	while (iter != end)
 	{
-		if ()
-		{
-		}
 		iter++;
 	}
 	return false;

@@ -42,6 +42,7 @@ DCTexture* DCTexture::create(int textureID, const TextureRect* texRect, const sy
 	{
 		return nullptr;
 	}
+
 	DCTexture* pTexture = sys::Instance<DCTexture>::getInstance();
 	pTexture->TextureID = textureID;
 	pTexture->Normal = normal;

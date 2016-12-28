@@ -18,7 +18,7 @@ DCTextureBatch::~DCTextureBatch()
 
 void DCTextureBatch::draw()
 {
-	glEnable(GL_DEPTH_TEST);
+	//glEnable(GL_DEPTH_TEST);
 	glEnable(GL_BLEND);
 	glBlendFunc(Blend.src, Blend.dest);
 	glColor4f(Color.red, Color.green, Color.blue, Color.alpha);
@@ -52,7 +52,7 @@ void DCTextureBatch::draw()
 
 	glDisable(GL_BLEND);
 
-	glDisable(GL_DEPTH_TEST);
+	//glDisable(GL_DEPTH_TEST);
 }
 
 DCTextureBatch* DCTextureBatch::create(int textureID,

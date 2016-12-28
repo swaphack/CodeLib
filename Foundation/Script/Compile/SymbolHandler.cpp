@@ -12,7 +12,7 @@ SymbolHandler::SymbolHandler()
 
 SymbolHandler::~SymbolHandler()
 {
-	this->removeAllParsers();
+	this->removeAllSymbolDelegates();
 }
 
 SymbolHandler* SymbolHandler::getInstance()
@@ -84,15 +84,15 @@ SymbolDelegate* SymbolHandler::getSymbolDelegate(const char* name)
 
 ASTNode* SymbolHandler::match(Token::const_iterator begin, Token::const_iterator end, Token::const_iterator& offset)
 {
-	ASTNode* pNode = nullptr;
+	SymbolDelegates::iterator iter = m_mSymbolDelegates.begin();
 
-	for (int i = 0; i < m_mSymbolDelegates.size(); i++)
+	while (iter != m_mSymbolDelegates.end())
 	{
-		pNode = m_mSymbolDelegates[i]->makeASTNode(begin, end, offset);
-		if (pNode)
+		if (iter->second->match(begin, end, offset))
 		{
-			return pNode;
+			return iter->second->createASTNode(begin, end, offset);
 		}
+		iter++;
 	}
 
 	return nullptr;

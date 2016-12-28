@@ -12,15 +12,13 @@ namespace ll
 	{
 	public:
 		// 单词意思 {词性，说明}
-		typedef std::map<WordNominal, T_Text> WordMeaning;
+		typedef std::map<WordNominal, Text> WordMeaning;
 	public:
 		// 文本
-		T_Text Text;
+		Text Value;
 		// 发音(拼音)
-		T_Text Pronunciation;
+		Text Pronunciation;
 		// 词意
 		WordMeaning Meaning;
-	public:
-
 	};
 }

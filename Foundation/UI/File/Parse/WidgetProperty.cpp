@@ -191,6 +191,26 @@ void WidgetProperty::setAttribute(const char* name, const render::BlendParam& va
 	setAttribute(name, getCString("%d,%d", value.src, value.dest));
 }
 
+void WidgetProperty::setAttribute(const char* name, const sys::Margin& value)
+{
+	if (name == nullptr)
+	{
+		return;
+	}
+
+	setAttribute(name, getCString("%f,%f,%f,%f", value.left, value.right, value.bottom, value.top));
+}
+
+void WidgetProperty::setAttribute(const char* name, const SizePolicy& value)
+{
+	if (name == nullptr)
+	{
+		return;
+	}
+
+	setAttribute(name, getCString("%d,%d", value.width, value.height));
+}
+
 bool WidgetProperty::getAttribute(const char* name, bool& defaultValue)
 {
 	int value = 0;
@@ -462,6 +482,29 @@ bool WidgetProperty::getAttribute(const char* name, sys::Rect& defaultValue)
 	return true;
 }
 
+bool WidgetProperty::getAttribute(const char* name, sys::Margin& defaultValue)
+{
+	const char* value = getAttribute(name);
+	if (value == nullptr)
+	{
+		return false;
+	}
+
+	sys::String val = value;
+	std::vector<sys::String> params;
+
+	val.split(",", params);
+
+	if (params.size() != 4)
+	{
+		return false;
+	}
+
+	defaultValue = sys::Margin(atof(params[0].getString()), atof(params[1].getString()), atof(params[2].getString()), atof(params[3].getString()));
+
+	return true;
+}
+
 bool WidgetProperty::getAttribute(const char* name, render::BlendParam& defaultValue)
 {
 	const char* value = getAttribute(name);
@@ -481,6 +524,29 @@ bool WidgetProperty::getAttribute(const char* name, render::BlendParam& defaultV
 	}
 
 	defaultValue = render::BlendParam(atoi(params[0].getString()), atoi(params[1].getString()));
+
+	return true;
+}
+
+bool WidgetProperty::getAttribute(const char* name, SizePolicy& defaultValue)
+{
+	const char* value = getAttribute(name);
+	if (value == nullptr)
+	{
+		return false;
+	}
+
+	sys::String val = value;
+	std::vector<sys::String> params;
+
+	val.split(",", params);
+
+	if (params.size() != 2)
+	{
+		return false;
+	}
+
+	defaultValue = SizePolicy((SizeType)atoi(params[0].getString()), (SizeType)atoi(params[1].getString()));
 
 	return true;
 }

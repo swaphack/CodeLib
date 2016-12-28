@@ -36,7 +36,7 @@ bool CtrlSequenceFrame::init()
 	_notify->addListen(ENP_SPACE, [&](){
 		if (_ctrlFrame)
 		{
-			_ctrlFrame->setSize(this->getWidth(), this->getHeight());
+			_ctrlFrame->setVolume(this->getWidth(), this->getHeight());
 			_ctrlFrame->setAnchorPoint(this->getAnchorPoint());
 		}
 	});

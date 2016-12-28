@@ -15,7 +15,8 @@ struct InnerItem
 
 Layout::Layout()
 {
-
+	this->setWidget(this);
+	this->setLayout(this);
 }
 
 Layout::~Layout()
@@ -25,42 +26,42 @@ Layout::~Layout()
 
 void Layout::setLeftMargin(float margin)
 {
-	m_fLeftMargin = margin;
+	m_fMargin.left = margin;
 }
 
 float Layout::getLeftMargin()
 {
-	return m_fLeftMargin;
+	return m_fMargin.left;
 }
 
 void Layout::setRightMargin(float margin)
 {
-	m_fRightMargin = margin;
+	m_fMargin.right = margin;
 }
 
 float Layout::getRightMargin()
 {
-	return m_fRightMargin;
+	return m_fMargin.right;
 }
 
 void Layout::setTopMargin(float margin)
 {
-	m_fTopMargin = margin;
+	m_fMargin.top = margin;
 }
 
 float Layout::getTopMargin()
 {
-	return m_fTopMargin;
+	return m_fMargin.top;
 }
 
 void Layout::setBottomMargin(float margin)
 {
-	m_fBottomMargin = margin;
+	m_fMargin.bottom = margin;
 }
 
 float Layout::getBottomMargin()
 {
-	return m_fBottomMargin;
+	return m_fMargin.bottom;
 }
 
 void Layout::addItem(LayoutItem* item)
@@ -68,6 +69,11 @@ void Layout::addItem(LayoutItem* item)
 	ASSERT(item != nullptr);
 
 	m_vChildren.push_back(item);
+	
+	if (item->getWidget())
+	{
+		this->addChild(item->getWidget());
+	}
 }
 
 void Layout::removeItem(LayoutItem* item)
@@ -83,6 +89,11 @@ void Layout::removeItem(LayoutItem* item)
 			break;
 		}
 	}
+
+	if (item->getWidget())
+	{
+		this->removeChild(item->getWidget());
+	}
 }
 
 void Layout::removeAllItems()
@@ -94,17 +105,19 @@ void Layout::removeAllItems()
 		delete *iter;
 		iter++;
 	}
+
+	this->removeAllChildren();
 }
 
 void Layout::resize(const sys::Size& inputSize)
 {
 	sys::Rect innerRect;
-	innerRect.x = m_fLeftMargin;
-	innerRect.y = m_fBottomMargin;
+	innerRect.x = m_fMargin.left;
+	innerRect.y = m_fMargin.bottom;
 
 	sys::Size innerSize;
-	innerSize.width = inputSize.width - m_fLeftMargin - m_fRightMargin;
-	innerSize.height = inputSize.height - m_fBottomMargin - m_fTopMargin;
+	innerSize.width = inputSize.width - m_fMargin.left - m_fMargin.right;
+	innerSize.height = inputSize.height - m_fMargin.bottom - m_fMargin.top;
 
 	this->onLayoutInnerSizeChanged(innerSize);
 }
@@ -112,8 +125,8 @@ void Layout::resize(const sys::Size& inputSize)
 sys::Size Layout::getLayoutItemMinSize()
 {
 	sys::Size size = getLayoutInnerMinSize();
-	size.width += m_fLeftMargin + m_fRightMargin;
-	size.height += m_fBottomMargin + m_fTopMargin;
+	size.width += m_fMargin.left + m_fMargin.right;
+	size.height += m_fMargin.bottom + m_fMargin.top;
 
 	return size;
 }
@@ -121,8 +134,8 @@ sys::Size Layout::getLayoutItemMinSize()
 sys::Size Layout::getLayoutItemMaxSize()
 {
 	sys::Size size = getLayoutInnerMaxSize();
-	size.width += m_fLeftMargin + m_fRightMargin;
-	size.height += m_fBottomMargin + m_fTopMargin;
+	size.width += m_fMargin.left + m_fMargin.right;
+	size.height += m_fMargin.bottom + m_fMargin.top;
 
 	return size;
 }
@@ -216,8 +229,8 @@ void Layout::onLayoutInnerSizeChanged(const sys::Size& innerSize)
 	float reallocHS = innerSize.height - allocH;
 
 	// 内部计算时，需要补差原点坐标的偏移量
-	float offX = m_fLeftMargin;
-	float offY = m_fBottomMargin;
+	float offX = m_fMargin.left;
+	float offY = m_fMargin.bottom;
 
 	sys::Rect allocRect;
 	allocRect.x = offX;
@@ -237,6 +250,16 @@ void Layout::onLayoutInnerSizeChanged(const sys::Size& innerSize)
 		m_vChildren[i]->setLayoutItemGeometry(allocRect);
 		allocRect.x += allocRect.width;
 	}
+}
+
+void Layout::setMargin(const sys::Margin& margin)
+{
+	m_fMargin = margin;
+}
+
+const sys::Margin& Layout::getMargin()
+{
+	return m_fMargin;
 }
 
 //////////////////////////////////////////////////////////////////////////

@@ -23,7 +23,7 @@ void WndRender::show()
 	
 	//this->testText();
 
-	this->testStencil();
+	this->testModel();
 }
 
 void WndRender::testMoveImage()
@@ -537,6 +537,8 @@ void WndRender::testModel()
 
 	this->getCanvas()->getRoot()->addChild(pModel);
 
+	pModel->setPosition(512, 384);
+	pModel->setColor(0, 255, 0);
 	pModel->getMatrial()->setAmbient(255, 255, 255, 255);
 	pModel->getMatrial()->setDiffuse(255, 255, 255, 255);
 	pModel->getMatrial()->setSpecular(255, 0, 0, 255);

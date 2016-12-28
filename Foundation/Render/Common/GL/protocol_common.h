@@ -210,9 +210,7 @@ namespace render
 		// 设置体积
 		void setVolume(const sys::Volume& volume);
 		// 设置面积，默认深度
-		void setSize(const sys::Size& size);
-		// 设置面积
-		void setSize(float w, float h);
+		void setVolume(const sys::Size& size);
 		// 获取宽度
 		float getWidth();
 		// 获取高度

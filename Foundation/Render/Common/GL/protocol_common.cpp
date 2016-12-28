@@ -403,19 +403,11 @@ void BodyProtocol::setVolume(const sys::Volume& volume)
 	onBodyChange();
 }
 
-void BodyProtocol::setSize(const sys::Size& size)
+void BodyProtocol::setVolume(const sys::Size& size)
 {
 	_volume.width = size.width;
 	_volume.height = size.height;
 	_volume.deep = 0;
-
-	onBodyChange();
-}
-
-void BodyProtocol::setSize(float w, float h)
-{
-	_volume.width = w;
-	_volume.height = h;
 
 	onBodyChange();
 }

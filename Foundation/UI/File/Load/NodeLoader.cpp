@@ -21,7 +21,7 @@ void NodeLoader::parseAttributes()
 
 	LOAD_NAME();
 	LOAD_ATTRIBUTE(PROPERTY_POSTION, setPosition, pos);
-	LOAD_ATTRIBUTE(PROPERTY_SIZE, setSize, size);
+	LOAD_ATTRIBUTE(PROPERTY_SIZE, setVolume, size);
 }
 
 void NodeLoader::saveAttributes()

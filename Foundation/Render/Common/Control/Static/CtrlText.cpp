@@ -145,7 +145,7 @@ void CtrlText::setDimensions(float width, float height)
 {
 	_textDefine.width = width;
 	_textDefine.height = height;
-	this->setSize(width, height);
+	this->setVolume(width, height);
 
 	setDirty(true);
 }

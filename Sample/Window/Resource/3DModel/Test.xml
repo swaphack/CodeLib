@@ -4,6 +4,6 @@
   <TexCoords count="12" size ="3">0,0,0, 1,0,0, 1,1,0, 0,1,0</TexCoords>
   <Vertexes count="12" size ="3">-200,-200,-200, 200,-200,-200, 200,200,-200, -200,200,-200</Vertexes>
   <Normals count="12" size ="3">0,0,1, 0,0,1, 0,0,1, 0,0,1</Normals>
-  <Colors count="12" size ="3">255,255,255, 255,255,255, 255,255,255, 255,255,255</Colors>
+  <Colors count="16" size ="4">255,0,255,255, 0,255,255,255, 255,255,0,255, 0,0,0,255</Colors>
   <Indices count="6" size ="3">0,1,3,1,2,3</Indices>
 </Root>

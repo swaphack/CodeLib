@@ -235,9 +235,6 @@
     <ClInclude Include="Math\Size.h">
       <Filter>Math</Filter>
     </ClInclude>
-    <ClInclude Include="Math\define.cpp">
-      <Filter>Math</Filter>
-    </ClInclude>
     <ClInclude Include="Math\define.h">
       <Filter>Math</Filter>
     </ClInclude>
@@ -393,6 +390,9 @@
     </ClInclude>
     <ClInclude Include="DataBase\IDBString.h">
       <Filter>DataBase</Filter>
+    </ClInclude>
+    <ClInclude Include="Math\Margin.h">
+      <Filter>Math</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

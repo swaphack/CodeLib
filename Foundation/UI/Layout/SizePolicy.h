@@ -20,32 +20,22 @@ namespace ui
 	/**
 	*	 面积大小调整策略
 	*/
-	class SizePolicy : public sys::Object
+	struct SizePolicy 
 	{
-	public:
-		SizePolicy();
-		virtual ~SizePolicy();
-	public:
-		/**
-		*	 设置宽度调整策略
-		*/
-		void setWidthType(SizeType type);
-		/**
-		*	 获取宽度调整策略
-		*/
-		SizeType getWidthType();
-		/**
-		*	 设置高度调整策略
-		*/
-		void setHeightType(SizeType type);
-		/**
-		*	 获取高度调整策略
-		*/
-		SizeType getHeightType();
-	protected:
 		// 宽度调整策略
-		SizeType m_stWidth;
+		SizeType width;
 		// 高度调整策略
-		SizeType m_stHeight;
+		SizeType height;
+
+		SizePolicy() :width(EST_Expanding), height(EST_Expanding){}
+		SizePolicy(SizeType w, SizeType h) :width(w), height(h){}
+
+		SizePolicy& operator=(const SizePolicy& value)
+		{
+			width = value.width;
+			height = value.height;
+
+			return *this;
+		}
 	};
 }

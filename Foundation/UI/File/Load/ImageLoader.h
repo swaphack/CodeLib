@@ -16,6 +16,6 @@ namespace ui
 
 		virtual void saveAttributes();
 	private:
-		INIT_LOADER_WIDGET(CtrlImage);
+		INIT_LOADER_WIDGET(CtrlImage, Image);
 	};
 }

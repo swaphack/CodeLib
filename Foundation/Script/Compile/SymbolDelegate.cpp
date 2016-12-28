@@ -38,7 +38,67 @@ SymbolDelegate::~SymbolDelegate()
 	m_rASTTemplate.clear();
 }
 
-ASTNode* SymbolDelegate::makeASTNode(Token::const_iterator begin, Token::const_iterator end, Token::const_iterator& offset)
+bool SymbolDelegate::makeASTNode()
+{
+	const char* pExpression = m_rSymbolInformation.expression.c_str();
+	int nSize = m_rSymbolInformation.expression.size();
+
+	std::string symbol;
+	m_rASTTemplate.clear();
+	ASTNode* pNode = &m_rASTTemplate;
+
+	for (int i = 0; i < nSize; i++)
+	{
+		if (IS_NUMBER(pExpression[i]))
+		{// 是否是数字
+			if (!symbol.empty())
+			{// 符号
+				pNode = setValue(pNode, symbol.c_str());
+				if (pNode == nullptr)
+				{
+					return false;
+				}
+				symbol.clear();
+			}
+			pNode = setValue(pNode, pExpression[i]);
+			if (pNode == nullptr)
+			{
+				return false;
+			}
+		}
+		else
+		{
+			symbol.append(1, pExpression[i]);
+		}
+	}
+
+	if (!symbol.empty())
+	{
+		pNode = setValue(pNode, symbol.c_str());
+		if (pNode == nullptr)
+		{
+			return false;
+		}
+		symbol.clear();
+	}
+
+	return true;
+}
+
+bool SymbolDelegate::match(Token::const_iterator begin, Token::const_iterator end, Token::const_iterator& offset)
+{
+	offset = begin;
+
+	ASTNode* pLastNode = &m_rASTTemplate;
+
+	while (offset != end)
+	{
+
+		offset++;
+	}
+}
+
+ASTNode* SymbolDelegate::createASTNode(Token::const_iterator begin, Token::const_iterator end, Token::const_iterator& offset)
 {
 	ASTNode* pLastNode = &m_rASTTemplate;
 
@@ -109,53 +169,6 @@ ASTNode* SymbolDelegate::makeASTNode(Token::const_iterator begin, Token::const_i
 	}
 
 	return pNewNode;
-}
-
-bool SymbolDelegate::makeASTNode()
-{
-	const char* pExpression = m_rSymbolInformation.expression.c_str();
-	int nSize = m_rSymbolInformation.expression.size();
-
-	std::string symbol;
-	m_rASTTemplate.clear();
-	ASTNode* pNode = &m_rASTTemplate;
-
-	for (int i = 0; i < nSize; i++)
-	{
-		if (IS_NUMBER(pExpression[i]))
-		{// 是否是数字
-			if (!symbol.empty())
-			{// 符号
-				pNode = setValue(pNode, symbol.c_str());
-				if (pNode == nullptr)
-				{
-					return false;
-				}
-				symbol.clear();
-			}
-			pNode = setValue(pNode, pExpression[i]);
-			if (pNode == nullptr)
-			{
-				return false;
-			}
-		}
-		else
-		{
-			symbol.append(1, pExpression[i]);
-		}
-	}
-
-	if (!symbol.empty())
-	{
-		pNode = setValue(pNode, symbol.c_str());
-		if (pNode == nullptr)
-		{
-			return false;
-		}
-		symbol.clear();
-	}
-
-	return true;
 }
 
 ASTNode* SymbolDelegate::setValue(ASTNode* pNode, char value)

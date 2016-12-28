@@ -66,14 +66,20 @@
     <ClInclude Include="File\Parse\WidgetParser.h">
       <Filter>File\Parse</Filter>
     </ClInclude>
-    <ClInclude Include="File\Parse\LayoutParser.h">
-      <Filter>File\Parse</Filter>
-    </ClInclude>
-    <ClInclude Include="File\Parse\LayoutItemParser.h">
-      <Filter>File\Parse</Filter>
-    </ClInclude>
     <ClInclude Include="File\Parse\IElement.h">
       <Filter>File\Parse</Filter>
+    </ClInclude>
+    <ClInclude Include="File\Load\LayoutLoader.h">
+      <Filter>File\Load</Filter>
+    </ClInclude>
+    <ClInclude Include="Layout\LayoutSpacerItem.h">
+      <Filter>Layout</Filter>
+    </ClInclude>
+    <ClInclude Include="Layout\LayoutWidgetItem.h">
+      <Filter>Layout</Filter>
+    </ClInclude>
+    <ClInclude Include="File\Load\LayoutItemLoader.h">
+      <Filter>File\Load</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -100,9 +106,6 @@
     <ClCompile Include="Layout\LayoutItem.cpp">
       <Filter>Layout</Filter>
     </ClCompile>
-    <ClCompile Include="Layout\SizePolicy.cpp">
-      <Filter>Layout</Filter>
-    </ClCompile>
     <ClCompile Include="File\Load\ImageLoader.cpp">
       <Filter>File\Load</Filter>
     </ClCompile>
@@ -124,11 +127,20 @@
     <ClCompile Include="File\Parse\WidgetParser.cpp">
       <Filter>File\Parse</Filter>
     </ClCompile>
-    <ClCompile Include="File\Parse\LayoutItemParser.cpp">
-      <Filter>File\Parse</Filter>
-    </ClCompile>
     <ClCompile Include="File\Parse\IElement.cpp">
       <Filter>File\Parse</Filter>
+    </ClCompile>
+    <ClCompile Include="Layout\LayoutWidgetItem.cpp">
+      <Filter>Layout</Filter>
+    </ClCompile>
+    <ClCompile Include="Layout\LayoutSpacerItem.cpp">
+      <Filter>Layout</Filter>
+    </ClCompile>
+    <ClCompile Include="File\Load\LayoutLoader.cpp">
+      <Filter>File\Load</Filter>
+    </ClCompile>
+    <ClCompile Include="File\Load\LayoutItemLoader.cpp">
+      <Filter>File\Load</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

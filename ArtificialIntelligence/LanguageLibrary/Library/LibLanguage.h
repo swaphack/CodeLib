@@ -23,7 +23,7 @@ namespace ll
 		const Word* getWord(const char* word);
 	private:
 		// 一级索引 文本
-		typedef std::map<T_Text, Word*> FirstIndex;
+		typedef std::map<Text, Word*> FirstIndex;
 		// 二级索引 文本开头-26个字母
 		typedef std::map<int, FirstIndex> SecondIndex;
 	private:

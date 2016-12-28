@@ -196,7 +196,9 @@
     <Xml Include="Resource\3DModel\Test.xml">
       <SubType>Designer</SubType>
     </Xml>
-    <Xml Include="Resource\Layout\Test.xml" />
+    <Xml Include="Resource\Layout\Test.xml">
+      <SubType>Designer</SubType>
+    </Xml>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

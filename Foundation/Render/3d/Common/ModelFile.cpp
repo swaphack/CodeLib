@@ -128,19 +128,20 @@ CtrlModel* ModelFile::loadModel(T_ModelData* pData)
 	{
 		return nullptr;
 	}
-	ImageDefine imageDefine = { pData->ImagePath.c_str(), pData->Format };
-	Texture2D* texture2D = G_TEXTURE_CACHE->getTexture2D(imageDefine);
-	if (texture2D == nullptr)
-	{
-		return nullptr;
-	}
-
-	TexFrame* frame = new TexFrame();
-	AUTO_RELEASE_OBJECT(frame);
-	frame->setTextureWithRect(texture2D);
-
 	CtrlModel* pModel = CREATE_NODE(CtrlModel);
-	pModel->setTexFrame(frame);
+
+	if (!pData->ImagePath.empty())
+	{
+		ImageDefine imageDefine = { pData->ImagePath.c_str(), pData->Format };
+		Texture2D* texture2D = G_TEXTURE_CACHE->getTexture2D(imageDefine);
+		if (texture2D)
+		{
+			TexFrame* frame = new TexFrame();
+			AUTO_RELEASE_OBJECT(frame);
+			frame->setTextureWithRect(texture2D);
+			pModel->setTexFrame(frame);
+		}
+	}
 	pModel->getMesh()->setVertexes(pData->Vertexes.count, pData->Vertexes.value);
 	pModel->getMesh()->setNormals(pData->Normals.count, pData->Normals.value);
 	pModel->getMesh()->setColors(pData->Colors.count, pData->Colors.value, pData->Colors.size);

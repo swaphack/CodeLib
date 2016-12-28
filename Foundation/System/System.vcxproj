@@ -120,11 +120,11 @@
     <ClInclude Include="Http\import.h" />
     <ClInclude Include="Http\macros.h" />
     <ClInclude Include="Math\Color.h" />
-    <ClInclude Include="Math\define.cpp" />
     <ClInclude Include="Math\define.h" />
     <ClInclude Include="Math\Equation.h" />
     <ClInclude Include="Math\import.h" />
     <ClInclude Include="Math\macros.h" />
+    <ClInclude Include="Math\Margin.h" />
     <ClInclude Include="Math\Point.h" />
     <ClInclude Include="Math\Rect.h" />
     <ClInclude Include="Math\Size.h" />

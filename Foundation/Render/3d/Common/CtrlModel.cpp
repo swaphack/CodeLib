@@ -29,7 +29,12 @@ void CtrlModel::draw()
 
 	if (_mesh)
 	{
-		_mesh->apply(_texFrame->getTexture()->getTextureID(), _color, _opacity, _blend);
+		int textureID = 0;
+		if (_texFrame->getTexture())
+		{
+			textureID = _texFrame->getTexture()->getTextureID();
+		}
+		_mesh->apply(textureID, _color, _opacity, _blend);
 	}
 	
 	Material::applyDefault();

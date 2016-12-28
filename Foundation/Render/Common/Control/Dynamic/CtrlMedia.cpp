@@ -38,7 +38,7 @@ bool CtrlMedia::init()
 	_notify->addListen(ENP_SPACE, [&](){
 		if (_ctrlFrame)
 		{
-			_ctrlFrame->setSize(this->getWidth(), this->getHeight());
+			_ctrlFrame->setVolume(this->getWidth(), this->getHeight());
 			_ctrlFrame->setAnchorPoint(this->getAnchorPoint());
 		}
 	});
@@ -64,8 +64,8 @@ void CtrlMedia::setMediaPath(const char* path, bool defaultSize)
 	// ÏÔÊ¾´óÐ¡
 	if (defaultSize)
 	{
-		this->setSize(static_cast<float>(_media->getWidth()), static_cast<float>(_media->getHeight()));
-		_ctrlFrame->setSize(this->getWidth(), this->getHeight());
+		this->setVolume(static_cast<float>(_media->getWidth()), static_cast<float>(_media->getHeight()));
+		_ctrlFrame->setVolume(this->getWidth(), this->getHeight());
 	}
 }	
 

@@ -31,7 +31,7 @@ namespace script
 		*	@param offset 解析成功后的偏移值
 		*	@return ASTNode 是否解析成功,解析成功返回语法节点，否则返回空
 		*/
-		ASTNode* makeASTNode(Token::const_iterator begin, Token::const_iterator end, Token::const_iterator& offset);
+		ASTNode* createASTNode(Token::const_iterator begin, Token::const_iterator end, Token::const_iterator& offset);
 	protected:
 		bool isFormat();
 		// 设置索引

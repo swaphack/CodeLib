@@ -584,6 +584,15 @@
     <ClInclude Include="Graphic\Struct\shape_common.h">
       <Filter>Graphic\Struct</Filter>
     </ClInclude>
+    <ClInclude Include="3d\Map\macros.h">
+      <Filter>3d\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="3d\Map\Terrian.h">
+      <Filter>3d\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="3d\Common\CastRay.h">
+      <Filter>3d\Common</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Common">
@@ -687,6 +696,9 @@
     </Filter>
     <Filter Include="3d\Environment">
       <UniqueIdentifier>{81978b8e-264f-4191-bee5-fb134f29e041}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3d\Map">
+      <UniqueIdentifier>{39b72897-e237-4d06-b0ad-dc4d6a4b036c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

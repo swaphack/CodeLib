@@ -36,7 +36,9 @@ namespace ui
 		void setAttribute(const char* name, const sys::Color4B& value);
 		void setAttribute(const char* name, const sys::Size& value);
 		void setAttribute(const char* name, const sys::Rect& value);
+		void setAttribute(const char* name, const sys::Margin& value);
 		void setAttribute(const char* name, const render::BlendParam& value);
+		void setAttribute(const char* name, const SizePolicy& value);
 
 		template<typename T>
 		void setAttribute(const char* name, const T& value);
@@ -59,7 +61,9 @@ namespace ui
 		bool getAttribute(const char* name, sys::Color4B& defaultValue);
 		bool getAttribute(const char* name, sys::Size& defaultValue);
 		bool getAttribute(const char* name, sys::Rect& defaultValue);
+		bool getAttribute(const char* name, sys::Margin& defaultValue);
 		bool getAttribute(const char* name, render::BlendParam& defaultValue);
+		bool getAttribute(const char* name, SizePolicy& defaultValue);
 
 		template<typename T>
 		bool getAttribute(const char* name, T& defaultValue);

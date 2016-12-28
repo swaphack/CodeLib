@@ -12,7 +12,7 @@ namespace ui
 	*	外框大小改变时，调整内部结构，当内部结构达到临界值时，外框大小不能改变
 	*	管理布局中的元件，当界面大小发生改变时，调整元件的位置和大小
 	*/
-	class Layout : public LayoutItem
+	class Layout : public render::Node, public LayoutItem
 	{
 	public:
 		Layout();
@@ -50,6 +50,14 @@ namespace ui
 		*	获取左边缘距离
 		*/
 		float getBottomMargin();
+		/**
+		*	设置边缘距离
+		*/
+		void setMargin(const sys::Margin& margin);
+		/**
+		*	获取边缘距离
+		*/
+		const sys::Margin& getMargin();
 		/**
 		*	添加一个元件
 		*/
@@ -99,14 +107,8 @@ namespace ui
 		*/
 		virtual float calItemHeight(LayoutItem* item, float height);
 	protected:
-		// 左边缘距离
-		float m_fLeftMargin;
-		// 右边缘距离
-		float m_fRightMargin;
-		// 上边缘距离
-		float m_fTopMargin;
-		// 下边缘距离
-		float m_fBottomMargin;
+		// 边缘距离
+		sys::Margin m_fMargin;
 		// 子元件集合
 		std::vector<LayoutItem*> m_vChildren;		
 	};

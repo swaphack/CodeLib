@@ -42,7 +42,7 @@ namespace render
 		// 移除子节点
 		void removeChild(Node* node);
 		// 移除所有子节点
-		void clearAllChildren();
+		void removeAllChildren();
 		// 根据id获取字节点
 		Node* getChildByID(long id);
 
@@ -88,7 +88,7 @@ namespace render
 		void setRelativeWithParent(bool status);
 
 		// 点击是否命中
-		bool containTouchPoint(float x, float y);
+		virtual bool containTouchPoint(float x, float y);
 		// 获取触摸代理
 		TouchProxy* getTouchProxy();
 
