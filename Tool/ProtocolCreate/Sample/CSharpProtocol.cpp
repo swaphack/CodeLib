@@ -183,7 +183,7 @@ bool CSharpProtocol::createFunction(XMLNode* pXmlNode, string& text)
 	text = "";
 	text.append("\n\tvoid Init()\n");
 	text.append("\t{\n");
-	text.append("\t\PacketHeader.PacketID=");
+	text.append("\t\tPacketHeader.PacketID=");
 	text.append(pElement->Attribute(PROTOCOL_PROTOCOLID));
 	text.append(";\n");
 	text.append("\t}\n");
