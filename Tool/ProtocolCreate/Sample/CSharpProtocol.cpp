@@ -112,14 +112,19 @@ bool CSharpProtocol::createProtocol(XMLNode* pXmlNode, string& text)
 
 	XMLNode* pParamNode = pXmlNode->FirstChild();
 
+	string field;
 	while (pParamNode != NULL)
 	{
-		string field;
 		if (createField(pParamNode, field))
 		{
 			text.append(field);
 		}
 		pParamNode = pParamNode->NextSibling();
+	}
+
+	if (createFunction(pXmlNode, field))
+	{
+		text.append(field);
 	}
 
 	text.append("}\n");
@@ -164,6 +169,24 @@ bool CSharpProtocol::createField(XMLNode* pXmlNode, string& text)
 		text.append(pElement->Attribute(PARAM_NAME));
 		text.append(";\n");
 	}
+
+	return true;
+}
+
+bool CSharpProtocol::createFunction(XMLNode* pXmlNode, string& text)
+{
+	if (pXmlNode == nullptr)
+	{
+		return false;
+	}
+	XMLElement* pElement = (XMLElement*)pXmlNode;
+	text = "";
+	text.append("\n\tvoid Init()\n");
+	text.append("\t{\n");
+	text.append("\t\tHeader.PacketID=");
+	text.append(pElement->Attribute(PROTOCOL_PROTOCOLID));
+	text.append(";\n");
+	text.append("\t}\n");
 
 	return true;
 }

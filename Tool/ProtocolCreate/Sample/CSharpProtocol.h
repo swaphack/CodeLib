@@ -25,5 +25,7 @@ protected:
 	bool createProtocol(XMLNode* pXmlNode, string& text);
 	// 创建字段
 	bool createField(XMLNode* pXmlNode, string& text);
+	// 创建初始化函数
+	bool createFunction(XMLNode* pXmlNode, string& text);
 private:
 };
