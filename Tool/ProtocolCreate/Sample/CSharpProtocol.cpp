@@ -181,7 +181,7 @@ bool CSharpProtocol::createFunction(XMLNode* pXmlNode, string& text)
 	}
 	XMLElement* pElement = (XMLElement*)pXmlNode;
 	text = "";
-	text.append("\n\tvoid Init()\n");
+	text.append("\n\tpublic void Init()\n");
 	text.append("\t{\n");
 	text.append("\t\tPacketHeader.PacketID=");
 	text.append(pElement->Attribute(PROTOCOL_PROTOCOLID));
