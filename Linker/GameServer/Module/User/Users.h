@@ -30,6 +30,11 @@ namespace gs
 	public:
 		static Users* getInstance();
 		/**
+		*  派发收到的包
+		*/
+		void dispatcherPacket(const web::UserPacketHeader& header);
+
+		/**
 		*	添加玩家
 		*/
 		void addPlayer(T_UserInfo pUserInfo);
