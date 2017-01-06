@@ -5,64 +5,61 @@ using namespace ui;
 
 
 Display::Display()
+:m_pLayout(nullptr)
+,m_eLayoutDirection(ELD_NONE)
 {
 
 }
 
 Display::~Display()
 {
-
+	this->close();
 }
 
 void Display::show()
 {
-	if (m_pLayoutItem == nullptr)
+	if (m_pLayout == nullptr)
 	{
 		if (!loadFile())
+		{
 			return;
+		}
 		initUI();
 		initText();
 		initEvent();
 	}
 
-	if (getWidget() == nullptr)
+	if (m_pLayout->getWidget())
 	{
-		return;
-	}
-
-	if (!getWidget()->isVisible())
-	{
-		getWidget()->setVisible(true);
+		m_pLayout->getWidget()->setVisible(true);
 	}
 }
 
 void Display::hide()
 {
-	if (m_pLayoutItem == nullptr)
+	if (m_pLayout == nullptr)
 	{
 		return;
 	}
 
-	if (getWidget() == nullptr)
+	if (m_pLayout->getWidget())
 	{
-		return;
-	}
-
-	if (getWidget()->isVisible())
-	{
-		getWidget()->setVisible(false);
+		m_pLayout->getWidget()->setVisible(false);
 	}
 }
 
-void Display::dispose()
+void Display::close()
 {
-	delete m_pLayoutItem;
-	m_pLayoutItem = nullptr;
+	if (m_pLayout && m_pLayout->getWidget())
+	{
+		m_pLayout->getWidget()->removeFromParent();
+	}
+	SAFE_RELEASE(m_pLayout);
 }
 
 void Display::reload()
 {
-	if (m_pLayoutItem == nullptr)
+	if (m_pLayout == nullptr)
 	{
 		if (!loadFile())
 			return;
@@ -103,15 +100,52 @@ const sys::Size& Display::getViewSize()
 	return m_sViewSize;
 }
 
-void Display::onViewSizeChanged(const sys::Size& inputSize)
+void Display::setLayoutDirection(LayoutDirection eDirection)
 {
-	if (m_pLayoutItem == nullptr)
+	if (m_eLayoutDirection == eDirection)
+	{
+		return;
+	}
+	m_eLayoutDirection = eDirection;
+
+	Layout* pNewLayout = nullptr;
+
+	switch (eDirection)
+	{
+	case ui::ELD_NONE:
+		break;
+	case ui::ELD_HORIZONTAL:
+		pNewLayout = new HorizontalLayout();
+		break;
+	case ui::ELD_VERTICAL:
+		pNewLayout = new VerticalLayout();
+		break;
+	default:
+		break;
+	}
+
+	if (pNewLayout == nullptr)
 	{
 		return;
 	}
 
-	sys::Size minSize = m_pLayoutItem->getLayoutItemMinSize();
-	sys::Size maxSize = m_pLayoutItem->getLayoutItemMaxSize();
+	pNewLayout->copy(m_pLayout);
+}
+
+LayoutDirection Display::getLayoutDirection()
+{
+	return m_eLayoutDirection;
+}
+
+void Display::onViewSizeChanged(const sys::Size& inputSize)
+{
+	if (m_pLayout == nullptr)
+	{
+		return;
+	}
+
+	sys::Size minSize = m_pLayout->getLayoutMinSize();
+	sys::Size maxSize = m_pLayout->getLayoutMaxSize();
 
 	// 超出限定范围的不做处理
 	if (minSize.width > inputSize.width || minSize.height > inputSize.height
@@ -119,14 +153,11 @@ void Display::onViewSizeChanged(const sys::Size& inputSize)
 	{
 		return;
 	}
+	sys::Size size;
+	size.width = inputSize.width;
+	size.height = inputSize.height;
 
-	sys::Rect rect;
-	rect.x = 0;
-	rect.y = 0;
-	rect.width = inputSize.width;
-	rect.height = inputSize.height;
-
-	m_pLayoutItem->setLayoutItemGeometry(rect);
+	m_pLayout->resize(size);
 }
 
 bool Display::loadFile()
@@ -136,15 +167,16 @@ bool Display::loadFile()
 	{
 		return false;
 	}
-	Widget* pWidget = UIProxy::getInstance()->loadFile(fullpath.c_str());
-	if (pWidget == nullptr)
+	Layout* pLayout = UIProxy::getInstance()->loadFile(fullpath.c_str());
+	if (pLayout == nullptr)
 	{
 		return false;
 	}
 
-	// 水平布局
-	m_pLayoutItem = new HorizontalLayout();
-	m_pLayoutItem->setWidget(pWidget);
+	SAFE_RELEASE(m_pLayout);
+	SAFE_RETAIN(pLayout);
+
+	m_pLayout = pLayout;
 
 	return true;
 }
@@ -161,14 +193,4 @@ void Display::initEvent()
 void Display::initText()
 {
 
-}
-
-Widget* Display::getWidget()
-{
-	if (m_pLayoutItem == nullptr)
-	{
-		return nullptr;
-	}
-
-	return m_pLayoutItem->getWidget();
 }

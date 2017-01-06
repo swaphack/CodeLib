@@ -12,7 +12,7 @@ namespace ui
 	*	外框大小改变时，调整内部结构，当内部结构达到临界值时，外框大小不能改变
 	*	管理布局中的元件，当界面大小发生改变时，调整元件的位置和大小
 	*/
-	class Layout : public render::Node, public LayoutItem
+	class Layout : public LayoutItem
 	{
 	public:
 		Layout();
@@ -70,6 +70,10 @@ namespace ui
 		*	移除所有元件
 		*/
 		void removeAllItems();
+		/**
+		*	获取子元件元件
+		*/
+		const std::vector<LayoutItem*>& getChildren();
 	public:
 		/**
 		*	当窗口大小发生改变时
@@ -78,20 +82,24 @@ namespace ui
 		/**
 		*	获取布局的最小面积
 		*/
-		virtual sys::Size getLayoutItemMinSize();
+		virtual sys::Size getLayoutMinSize();
 		/**
 		*	获取布局的最大面积
 		*/
-		virtual sys::Size getLayoutItemMaxSize();
+		virtual sys::Size getLayoutMaxSize();
+		/**
+		*	复制对象
+		*/
+		virtual bool copy(Layout* item);
 	protected:
 		/**
 		*	获取布局内部的最小面积
 		*/
-		virtual sys::Size getLayoutInnerMinSize() = 0;
+		virtual sys::Size getLayoutInnerMinSize();
 		/**
 		*	获取布局内部的最大面积
 		*/
-		virtual sys::Size getLayoutInnerMaxSize() = 0;
+		virtual sys::Size getLayoutInnerMaxSize();
 		/**
 		*	布局内部大小改变
 		*	包含固定大小和百分比两种情况
@@ -144,11 +152,11 @@ namespace ui
 		/**
 		*	获取布局的最小面积
 		*/
-		virtual sys::Size getLayoutItemMinSize();
+		virtual sys::Size getLayoutInnerMinSize();
 		/**
 		*	获取布局的最大面积
 		*/
-		virtual sys::Size getLayoutItemMaxSize();
+		virtual sys::Size getLayoutInnerMaxSize();
 	};
 
 	// 格子布局
@@ -161,10 +169,10 @@ namespace ui
 		/**
 		*	获取布局的最小面积
 		*/
-		virtual sys::Size getLayoutItemMinSize();
+		virtual sys::Size getLayoutInnerMinSize();
 		/**
 		*	获取布局的最大面积
 		*/
-		virtual sys::Size getLayoutItemMaxSize();
+		virtual sys::Size getLayoutInnerMaxSize();
 	};
 }

@@ -19,14 +19,12 @@ void LayoutLoader::parseAttributes()
 
 	sys::Margin margin;
 
-	LOAD_NAME();
-	LOAD_ATTRIBUTE(PROPERTY_MARGIN, setMargin, margin);
+	LOAD_LAYOUTITEM_ATTRIBUTE(PROPERTY_MARGIN, setMargin, margin);
 }
 
 void LayoutLoader::saveAttributes()
 {
 	LayoutItemLoader::saveAttributes();
 
-	SAVE_NAME();
-	SAVE_ATTRIBUTE(PROPERTY_MARGIN, getMargin);
+	SAVE_LAYOUTITEM_ATTRIBUTE(PROPERTY_MARGIN, getMargin);
 }

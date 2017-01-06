@@ -1,3 +1,5 @@
+#pragma once
+
 // 协议号
 enum PacketID
 {
@@ -5,4 +7,4 @@ enum PacketID
 	Login = 100,
 	// 玩家信息
 	PlayerInfo = 101,
-}
+};

@@ -5,6 +5,18 @@
 namespace ui
 {
 	/**
+	*	布局方向
+	*/
+	enum LayoutDirection
+	{
+		// 无
+		ELD_NONE,
+		// 垂直布局
+		ELD_HORIZONTAL,
+		// 水平布局
+		ELD_VERTICAL,
+	};
+	/**
 	*	界面显示
 	*/
 	class Display : public sys::Object
@@ -24,7 +36,7 @@ namespace ui
 		/**
 		*	销毁
 		*/
-		void dispose();
+		void close();
 		/**
 		*	重新加载
 		*/
@@ -45,6 +57,14 @@ namespace ui
 		*	窗口界面大小
 		*/
 		const sys::Size& getViewSize();
+		/**
+		*	设置布局方向
+		*/
+		void setLayoutDirection(LayoutDirection eDirection);
+		/**
+		*	获取布局方向
+		*/
+		LayoutDirection getLayoutDirection();
 	protected:
 		/**
 		*	当窗口大小发生改变时
@@ -66,15 +86,13 @@ namespace ui
 		*	初始化文本
 		*/
 		virtual void initText();
-		/**
-		*	获取元件根节点
-		*/
-		Widget* getWidget();
 	protected:
 		// 文件路径
 		std::string m_strFilePath;
 		// 布局
-		LayoutItem* m_pLayoutItem;
+		Layout* m_pLayout;
+		// 布局方向
+		LayoutDirection m_eLayoutDirection;
 		// 窗口界面大小
 		sys::Size m_sViewSize;
 	};

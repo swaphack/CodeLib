@@ -12,7 +12,7 @@ bool HttpActivityReceiver::isHttpServer()
 
 void HttpActivityReceiver::doGetRequest(sys::HttpRequest* request)
 {
-	if (isHttpServer())
+	if (request == nullptr || isHttpServer())
 	{
 		return;
 	}
@@ -27,7 +27,7 @@ void HttpActivityReceiver::doGetRequest(sys::HttpRequest* request)
 
 void HttpActivityReceiver::doGetResponse(sys::HttpResponse* response)
 {
-	if (!isHttpServer())
+	if (response == nullptr || !isHttpServer())
 	{
 		return;
 	}

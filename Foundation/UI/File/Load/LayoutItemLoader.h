@@ -4,8 +4,9 @@
 
 namespace ui
 {
+#define ELEMENT_NAME_LAYOUTITEM		"LayoutItem"
 	// 布局节点
-	class LayoutItemLoader : public WidgetParser
+	class LayoutItemLoader : public LayoutItemParser
 	{
 	public:
 		LayoutItemLoader();
@@ -15,5 +16,7 @@ namespace ui
 		virtual void parseAttributes();
 		// 保存属性
 		virtual void saveAttributes();
+	public:
+		INIT_LOADER_LAYOUTITEM(LayoutItem, ELEMENT_NAME_LAYOUTITEM);
 	};
 }

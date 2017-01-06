@@ -80,6 +80,7 @@
     <ClInclude Include="File\Parse\helper.h" />
     <ClInclude Include="File\Parse\IElement.h" />
     <ClInclude Include="File\Parse\import.h" />
+    <ClInclude Include="File\Parse\LayoutItemParser.h" />
     <ClInclude Include="File\Parse\WidgetParser.h" />
     <ClInclude Include="File\Parse\macros.h" />
     <ClInclude Include="File\Parse\WidgetProperty.h" />
@@ -102,6 +103,7 @@
     <ClCompile Include="File\Load\NodeLoader.cpp" />
     <ClCompile Include="File\Load\TextLoader.cpp" />
     <ClCompile Include="File\Parse\IElement.cpp" />
+    <ClCompile Include="File\Parse\LayoutItemParser.cpp" />
     <ClCompile Include="File\Parse\WidgetParser.cpp" />
     <ClCompile Include="File\Parse\WidgetProperty.cpp" />
     <ClCompile Include="File\UIProxy.cpp" />
@@ -109,6 +111,9 @@
     <ClCompile Include="Layout\LayoutItem.cpp" />
     <ClCompile Include="Layout\LayoutSpacerItem.cpp" />
     <ClCompile Include="Layout\LayoutWidgetItem.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="Resource\SampleLayout.xml" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

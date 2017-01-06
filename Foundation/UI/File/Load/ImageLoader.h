@@ -6,6 +6,8 @@ using namespace render;
 
 namespace ui
 {
+#define ELEMENT_NAME_IMAGE			"Image"
+
 	class ImageLoader : public NodeLoader
 	{
 	public:
@@ -15,7 +17,7 @@ namespace ui
 		virtual void parseAttributes();
 
 		virtual void saveAttributes();
-	private:
-		INIT_LOADER_WIDGET(CtrlImage, Image);
+	public:
+		INIT_LOADER_WIDGET(CtrlImage, ELEMENT_NAME_IMAGE);
 	};
 }

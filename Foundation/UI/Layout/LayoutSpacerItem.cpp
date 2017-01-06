@@ -4,9 +4,10 @@ using namespace ui;
 
 LayoutSpacerItem::LayoutSpacerItem()
 {
-	this->setWidget(this);
+	Widget* pWidget = render::createNode<Widget>();
+	this->setWidget(pWidget);
 	this->setGeometry(0, 0, 20, 20);
-	this->setOrientation(EO_Horizontal);
+	this->setOrientation(ESO_Horizontal);
 }
 
 LayoutSpacerItem::~LayoutSpacerItem()
@@ -14,21 +15,23 @@ LayoutSpacerItem::~LayoutSpacerItem()
 
 }
 
-void LayoutSpacerItem::setOrientation(Orientation eType)
+void LayoutSpacerItem::setOrientation(SpacerOrientation eType)
 {
 	m_eOrientation = eType;
 
-	if (m_eOrientation == EO_Horizontal)
+	if (m_eOrientation == ESO_Horizontal)
 	{
-		this->getSizePolicy().setHeightType(EST_Expanding);
+		this->getSizePolicy().width = EST_Expanding;
+		this->getSizePolicy().height = EST_Fixed;
 	}
-	else if (m_eOrientation == EO_Vertial)
+	else if (m_eOrientation == ESO_Vertial)
 	{
-		this->getSizePolicy().setWidthType(EST_Expanding);
+		this->getSizePolicy().width = EST_Fixed;
+		this->getSizePolicy().height = EST_Expanding;
 	}
 }
 
-Orientation LayoutSpacerItem::getOrientation()
+SpacerOrientation LayoutSpacerItem::getOrientation()
 {
 	return m_eOrientation;
 }

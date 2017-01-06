@@ -1,3 +1,5 @@
+#pragma once
+
 #include "web.h"
 using namespace web;
 

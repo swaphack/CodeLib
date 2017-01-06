@@ -6,6 +6,8 @@ using namespace render;
 
 namespace ui
 {
+#define ELEMENT_NAME_TEXT			"Text"
+
 	class TextLoader : public NodeLoader
 	{
 	public:
@@ -15,7 +17,7 @@ namespace ui
 		virtual void parseAttributes();
 
 		virtual void saveAttributes();
-	private:
-		INIT_LOADER_WIDGET(CtrlText, Text);
+	public:
+		INIT_LOADER_WIDGET(CtrlText, ELEMENT_NAME_TEXT);
 	};
 }

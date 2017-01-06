@@ -15,7 +15,7 @@ struct InnerItem
 
 Layout::Layout()
 {
-	this->setWidget(this);
+	this->setWidget(render::createNode<Widget>());
 	this->setLayout(this);
 }
 
@@ -64,15 +64,25 @@ float Layout::getBottomMargin()
 	return m_fMargin.bottom;
 }
 
+void Layout::setMargin(const sys::Margin& margin)
+{
+	m_fMargin = margin;
+}
+
+const sys::Margin& Layout::getMargin()
+{
+	return m_fMargin;
+}
+
 void Layout::addItem(LayoutItem* item)
 {
 	ASSERT(item != nullptr);
 
 	m_vChildren.push_back(item);
 	
-	if (item->getWidget())
+	if (item->getWidget() && this->getWidget())
 	{
-		this->addChild(item->getWidget());
+		this->getWidget()->addChild(item->getWidget());
 	}
 }
 
@@ -90,9 +100,9 @@ void Layout::removeItem(LayoutItem* item)
 		}
 	}
 
-	if (item->getWidget())
+	if (item->getWidget() && this->getWidget())
 	{
-		this->removeChild(item->getWidget());
+		this->getWidget()->removeChild(item->getWidget());
 	}
 }
 
@@ -106,7 +116,15 @@ void Layout::removeAllItems()
 		iter++;
 	}
 
-	this->removeAllChildren();
+	if (this->getWidget())
+	{
+		this->getWidget()->removeAllChildren();
+	}
+}
+
+const std::vector<LayoutItem*>& Layout::getChildren()
+{
+	return m_vChildren;
 }
 
 void Layout::resize(const sys::Size& inputSize)
@@ -122,7 +140,7 @@ void Layout::resize(const sys::Size& inputSize)
 	this->onLayoutInnerSizeChanged(innerSize);
 }
 
-sys::Size Layout::getLayoutItemMinSize()
+sys::Size Layout::getLayoutMinSize()
 {
 	sys::Size size = getLayoutInnerMinSize();
 	size.width += m_fMargin.left + m_fMargin.right;
@@ -131,7 +149,7 @@ sys::Size Layout::getLayoutItemMinSize()
 	return size;
 }
 
-sys::Size Layout::getLayoutItemMaxSize()
+sys::Size Layout::getLayoutMaxSize()
 {
 	sys::Size size = getLayoutInnerMaxSize();
 	size.width += m_fMargin.left + m_fMargin.right;
@@ -140,38 +158,37 @@ sys::Size Layout::getLayoutItemMaxSize()
 	return size;
 }
 
-float Layout::calItemWidth(LayoutItem* item, float width)
+bool Layout::copy(Layout* item)
 {
-	SizeType st = item->getSizePolicy().getWidthType();
-	float w = 0;
-	
-	if (item->getLayoutItemMinSize().width > 0 && item->getLayoutItemMinSize().width > width)
+	if (item == nullptr) 
 	{
-		w = item->getLayoutItemMinSize().width;
-	}
-	if (item->getLayoutItemMaxSize().width > 0 && item->getLayoutItemMaxSize().width < width)
-	{
-		w = item->getLayoutItemMaxSize().width;
+		return false;
 	}
 
-	return w;
+	setMargin(item->getMargin());
+
+	std::vector<LayoutItem*>::const_iterator iter = item->getChildren().begin();
+	while (iter != item->getChildren().end())
+	{
+		this->addItem(*iter);
+		iter++;
+	}
+
+	return LayoutItem::copy(item);
 }
 
-float Layout::calItemHeight(LayoutItem* item, float height)
+sys::Size Layout::getLayoutInnerMinSize()
 {
-	SizeType st = item->getSizePolicy().getHeightType();
-	float h = 0;
+	return sys::Size(
+		m_sMinSize.width - m_fMargin.left - m_fMargin.right,
+		m_sMinSize.height - m_fMargin.bottom - m_fMargin.top);
+}
 
-	if (item->getLayoutItemMinSize().height > 0 && item->getLayoutItemMinSize().height > height)
-	{
-		h = item->getLayoutItemMinSize().height;
-	}
-
-	if (item->getLayoutItemMaxSize().height > 0 && item->getLayoutItemMaxSize().height < height)
-	{
-		h = item->getLayoutItemMaxSize().height;
-	}
-	return h;
+sys::Size Layout::getLayoutInnerMaxSize()
+{
+	return sys::Size(
+		m_sMaxSize.width - m_fMargin.left - m_fMargin.right,
+		m_sMaxSize.height - m_fMargin.bottom - m_fMargin.top);
 }
 
 void Layout::onLayoutInnerSizeChanged(const sys::Size& innerSize)
@@ -247,19 +264,43 @@ void Layout::onLayoutInnerSizeChanged(const sys::Size& innerSize)
 			allocRect.height = innerItems[i].perY / reallocH * reallocHS;
 
 		allocRect.y = (innerSize.height - allocRect.height) * 0.5f + offY;
-		m_vChildren[i]->setLayoutItemGeometry(allocRect);
+		m_vChildren[i]->setLayoutGeometry(allocRect);
 		allocRect.x += allocRect.width;
 	}
 }
 
-void Layout::setMargin(const sys::Margin& margin)
+float Layout::calItemWidth(LayoutItem* item, float width)
 {
-	m_fMargin = margin;
+	SizeType st = item->getSizePolicy().width;
+	float w = 0;
+	
+	if (item->getLayoutMinSize().width > 0 && item->getLayoutMinSize().width > width)
+	{
+		w = item->getLayoutMinSize().width;
+	}
+	if (item->getLayoutMaxSize().width > 0 && item->getLayoutMaxSize().width < width)
+	{
+		w = item->getLayoutMaxSize().width;
+	}
+
+	return w;
 }
 
-const sys::Margin& Layout::getMargin()
+float Layout::calItemHeight(LayoutItem* item, float height)
 {
-	return m_fMargin;
+	SizeType st = item->getSizePolicy().height;
+	float h = 0;
+
+	if (item->getLayoutMinSize().height > 0 && item->getLayoutMinSize().height > height)
+	{
+		h = item->getLayoutMinSize().height;
+	}
+
+	if (item->getLayoutMaxSize().height > 0 && item->getLayoutMaxSize().height < height)
+	{
+		h = item->getLayoutMaxSize().height;
+	}
+	return h;
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -284,14 +325,14 @@ sys::Size HorizontalLayout::getLayoutInnerMinSize()
 	{
 		pItem = *iter;
 		// 宽度拼接
-		size.width += pItem->getLayoutItemMinSize().width;
+		size.width += pItem->getLayoutMinSize().width;
 		// 高度判断
-		if (pItem->getLayoutItemMinSize().height > size.height)
-			size.height = pItem->getLayoutItemMinSize().height;
+		if (pItem->getLayoutMinSize().height > size.height)
+			size.height = pItem->getLayoutMinSize().height;
 		iter++;
 	}
 
-	sys::Size defaultSize = Layout::getLayoutItemMinSize();
+	sys::Size defaultSize = Layout::getLayoutInnerMinSize();
 	if (size.width < defaultSize.width)
 	{
 		size.width = defaultSize.width;
@@ -315,14 +356,14 @@ sys::Size HorizontalLayout::getLayoutInnerMaxSize()
 	{
 		pItem = *iter;
 		// 宽度拼接
-		size.width += pItem->getLayoutItemMaxSize().width;
+		size.width += pItem->getLayoutMaxSize().width;
 		// 高度判断
-		if (pItem->getLayoutItemMaxSize().height > size.height)
-			size.height = pItem->getLayoutItemMaxSize().height;
+		if (pItem->getLayoutMaxSize().height > size.height)
+			size.height = pItem->getLayoutMaxSize().height;
 		iter++;
 	}
 
-	sys::Size defaultSize = Layout::getLayoutItemMaxSize();
+	sys::Size defaultSize = Layout::getLayoutInnerMaxSize();
 	if (size.width < defaultSize.width)
 	{
 		size.width = defaultSize.width;
@@ -348,7 +389,7 @@ VerticalLayout::~VerticalLayout()
 
 }
 
-sys::Size VerticalLayout::getLayoutItemMinSize()
+sys::Size VerticalLayout::getLayoutInnerMinSize()
 {
 	sys::Size size;
 	LayoutItem* pItem;
@@ -358,14 +399,14 @@ sys::Size VerticalLayout::getLayoutItemMinSize()
 	{
 		pItem = *iter;
 		// 高度拼接
-		size.height += pItem->getLayoutItemMinSize().height;
+		size.height += pItem->getLayoutMinSize().height;
 		// 宽度判断
-		if (pItem->getLayoutItemMinSize().width > size.width)
-			size.width = pItem->getLayoutItemMinSize().width;
+		if (pItem->getLayoutMinSize().width > size.width)
+			size.width = pItem->getLayoutMinSize().width;
 		iter++;
 	}
 
-	sys::Size defaultSize = Layout::getLayoutItemMinSize();
+	sys::Size defaultSize = Layout::getLayoutInnerMinSize();
 	if (size.width < defaultSize.width)
 	{
 		size.width = defaultSize.width;
@@ -379,7 +420,7 @@ sys::Size VerticalLayout::getLayoutItemMinSize()
 	return size;
 }
 
-sys::Size VerticalLayout::getLayoutItemMaxSize()
+sys::Size VerticalLayout::getLayoutInnerMaxSize()
 {
 	sys::Size size;
 	LayoutItem* pItem;
@@ -389,14 +430,14 @@ sys::Size VerticalLayout::getLayoutItemMaxSize()
 	{
 		pItem = *iter;
 		// 高度拼接
-		size.height += pItem->getLayoutItemMaxSize().height;
+		size.height += pItem->getLayoutMaxSize().height;
 		// 宽度判断
-		if (pItem->getLayoutItemMaxSize().width > size.width)
-			size.width = pItem->getLayoutItemMaxSize().width;
+		if (pItem->getLayoutMaxSize().width > size.width)
+			size.width = pItem->getLayoutMaxSize().width;
 		iter++;
 	}
 
-	sys::Size defaultSize = Layout::getLayoutItemMaxSize();
+	sys::Size defaultSize = Layout::getLayoutInnerMaxSize();
 	if (size.width < defaultSize.width)
 	{
 		size.width = defaultSize.width;
@@ -423,12 +464,12 @@ GridLayout::~GridLayout()
 
 }
 
-sys::Size GridLayout::getLayoutItemMinSize()
+sys::Size GridLayout::getLayoutInnerMinSize()
 {
 	return getMinSize();
 }
 
-sys::Size GridLayout::getLayoutItemMaxSize()
+sys::Size GridLayout::getLayoutInnerMaxSize()
 {
 	return getMaxSize();
 }

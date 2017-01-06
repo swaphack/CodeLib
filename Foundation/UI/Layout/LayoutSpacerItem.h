@@ -7,18 +7,18 @@
 namespace ui
 {
 	// 方向
-	enum Orientation
+	enum SpacerOrientation
 	{
 		// 水平
-		EO_Horizontal,
+		ESO_Horizontal,
 		// 垂直
-		EO_Vertial,
+		ESO_Vertial,
 	};
 
 	/**
 	*	空置项，用于填充
 	*/
-	class LayoutSpacerItem : public render::Node, public LayoutItem
+	class LayoutSpacerItem : public LayoutItem
 	{
 	public:
 		LayoutSpacerItem();
@@ -27,13 +27,13 @@ namespace ui
 		/**
 		*	设置空置项方向
 		*/
-		void setOrientation(Orientation eType);
+		void setOrientation(SpacerOrientation eType);
 		/**
 		*	获取空置项方向
 		*/
-		Orientation getOrientation();
+		SpacerOrientation getOrientation();
 	protected:
 		// 空置项方向
-		Orientation m_eOrientation;
+		SpacerOrientation m_eOrientation;
 	};
 }

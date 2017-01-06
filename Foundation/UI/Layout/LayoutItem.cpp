@@ -9,32 +9,14 @@ LayoutItem::LayoutItem()
 , m_pLayout(nullptr)
 , m_bBoxVisible(false)
 {
-}
-
-void LayoutItem::setBoxVisible(bool status)
-{
-	m_bBoxVisible = status;
-}
-
-bool LayoutItem::isBoxVisible()
-{
-	return m_bBoxVisible;
-}
-
-void LayoutItem::setBoxColor(const sys::Color4B& color)
-{
-	m_rectColor = color;
-}
-
-const sys::Color4B& LayoutItem::getBoxColor()
-{
-	return m_rectColor;
+	setMinSize(LAYOUT_SIZE_MIN_WIDTH, LAYOUT_SIZE_MIN_HEIGHT);
+	setMaxSize(LAYOUT_SIZE_MAX_WIDTH, LAYOUT_SIZE_MAX_HEIGHT);
 }
 
 LayoutItem::~LayoutItem()
 {
-	SAFE_DELETE(m_pWidget);
-	SAFE_DELETE(m_pLayout);
+	SAFE_RELEASE(m_pWidget);
+	SAFE_RELEASE(m_pLayout);
 }
 
 const sys::Rect& LayoutItem::getGeometry()
@@ -106,7 +88,8 @@ void LayoutItem::setWidget(Widget* widget)
 		return;
 	}
 
-	SAFE_DELETE(m_pWidget);
+	SAFE_RELEASE(m_pWidget);
+	SAFE_RETAIN(widget);
 
 	m_pWidget = widget;
 }
@@ -123,7 +106,8 @@ void LayoutItem::setLayout(Layout* layout)
 		return;
 	}
 
-	SAFE_DELETE(m_pLayout);
+	SAFE_RELEASE(m_pLayout);
+	SAFE_RETAIN(layout);
 
 	m_pLayout = layout;
 }
@@ -143,7 +127,7 @@ void LayoutItem::setSizePolicy(const SizePolicy& policy)
 	m_spAdjust = policy;
 }
 
-void LayoutItem::setLayoutItemGeometry(const sys::Rect& rect)
+void LayoutItem::setLayoutGeometry(const sys::Rect& rect)
 {
 	if (m_pWidget == nullptr)
 	{
@@ -158,10 +142,10 @@ void LayoutItem::setLayoutItemGeometry(const sys::Rect& rect)
 	}
 }
 
-sys::Size LayoutItem::getLayoutItemMinSize()
+sys::Size LayoutItem::getLayoutMinSize()
 {
 	sys::Size size;
-	SizeType st = getSizePolicy().getWidthType();
+	SizeType st = getSizePolicy().width;
 	switch (st)
 	{
 	case ui::EST_Fixed:
@@ -179,7 +163,7 @@ sys::Size LayoutItem::getLayoutItemMinSize()
 	default:
 		break;
 	}
-	st = getSizePolicy().getHeightType();
+	st = getSizePolicy().height;
 	switch (st)
 	{
 	case ui::EST_Fixed:
@@ -200,10 +184,10 @@ sys::Size LayoutItem::getLayoutItemMinSize()
 	return size;
 }
 
-sys::Size LayoutItem::getLayoutItemMaxSize()
+sys::Size LayoutItem::getLayoutMaxSize()
 {
 	sys::Size size;
-	SizeType st = getSizePolicy().getWidthType();
+	SizeType st = getSizePolicy().width;
 	switch (st)
 	{
 	case ui::EST_Fixed:
@@ -221,7 +205,7 @@ sys::Size LayoutItem::getLayoutItemMaxSize()
 	default:
 		break;
 	}
-	st = getSizePolicy().getHeightType();
+	st = getSizePolicy().height;
 	switch (st)
 	{
 	case ui::EST_Fixed:
@@ -240,6 +224,45 @@ sys::Size LayoutItem::getLayoutItemMaxSize()
 		break;
 	}
 	return size;
+}
+
+bool LayoutItem::copy(LayoutItem* item)
+{
+	if (item == nullptr)
+	{
+		return false;
+	}
+
+	setGeometry(item->getGeometry());
+	setMinSize(item->getMinSize());
+	setMaxSize(item->getMaxSize());
+	setBoxColor(item->getBoxColor());
+	setBoxVisible(item->isBoxVisible());
+	setWidget(item->getWidget());
+	setLayout(item->getLayout());
+	setSizePolicy(item->getSizePolicy());
+
+	return true;
+}
+
+void LayoutItem::setBoxVisible(bool status)
+{
+	m_bBoxVisible = status;
+}
+
+bool LayoutItem::isBoxVisible()
+{
+	return m_bBoxVisible;
+}
+
+void LayoutItem::setBoxColor(const sys::Color4B& color)
+{
+	m_rectColor = color;
+}
+
+const sys::Color4B& LayoutItem::getBoxColor()
+{
+	return m_rectColor;
 }
 
 void LayoutItem::setWidgetGeomerty(const sys::Rect& geometry)

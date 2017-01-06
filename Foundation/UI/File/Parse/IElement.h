@@ -16,6 +16,8 @@ namespace ui
 		bool load(tinyxml2::XMLElement* pXmlNode, bool clean = true);
 		// 保存节点
 		bool save(tinyxml2::XMLElement* pXmlNode, bool clean = true);
+		// 解析节点的名称
+		virtual const char* getName() = 0;
 	protected:
 		// 属性
 		WidgetProperty* getNodeProperty();

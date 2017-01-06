@@ -10,7 +10,7 @@ UIProxy::UIProxy()
 
 UIProxy::~UIProxy()
 {
-	removeAllNodeParsers();
+	removeAllElementParsers();
 }
 
 UIProxy* UIProxy::getInstance()
@@ -19,12 +19,13 @@ UIProxy* UIProxy::getInstance()
 	if (s_UIProxy == nullptr)
 	{
 		s_UIProxy = new UIProxy();
+		s_UIProxy->init();
 	}
 
 	return s_UIProxy;
 }
 
-Widget* UIProxy::loadFile(const char* filepath)
+Layout* UIProxy::loadFile(const char* filepath)
 {
 	if (filepath == nullptr)
 	{
@@ -45,146 +46,371 @@ Widget* UIProxy::loadFile(const char* filepath)
 		return nullptr;
 	}
 
-	Widget* pNode = this->loadWidget(pRoot);
 
-	delete doc;
+	IElement* element = loadRoot(pRoot);
 
-	return pNode;
+	return static_cast<LayoutLoader*>(element)->getCastLayoutItem();
 }
 
-bool UIProxy::saveFile(Widget* widget, const char* filepath)
+bool UIProxy::saveFile(Layout* layout, const char* filepath)
 {
-	if (widget == nullptr || filepath == nullptr)
+	if (layout == nullptr || filepath == nullptr)
 	{
 		return false;
 	}
 
 	tinyxml2::XMLDocument doc;
 
-	if (!saveWidget(&doc, widget))
+	if (!saveRoot(layout, &doc))
 	{
+		doc.Clear();
 		return false;
 	}
 
 	return tinyxml2::XML_SUCCESS == doc.SaveFile(filepath);
 }
 
-void UIProxy::registerNodeParser(const char* name, WidgetParser* parser)
+void UIProxy::registerElementParser(const char* name, IElement* parser)
 {
 	if (name == nullptr || parser == NULL)
 	{
 		return;
 	}
 
-	unregisterNodeParser(name);
+	unregisterElementParser(name);
 
-	_nodeParsers[name] = parser;
+	_elementParsers[name] = parser;
 }
 
-void UIProxy::unregisterNodeParser(const char* name)
+void UIProxy::unregisterElementParser(const char* name)
 {
 	if (name == nullptr)
 	{
 		return;
 	}
 
-	NodeParsers::const_iterator iter = _nodeParsers.find(name);
-	if (iter == _nodeParsers.end())
+	ElementParsers::const_iterator iter = _elementParsers.find(name);
+	if (iter == _elementParsers.end())
 	{
 		return;
 	}
 
 	delete iter->second;
-	_nodeParsers.erase(iter);
+	_elementParsers.erase(iter);
 }
 
-void UIProxy::removeAllNodeParsers()
+void UIProxy::removeAllElementParsers()
 {
-	NodeParsers::const_iterator iter = _nodeParsers.begin();
-	while (iter != _nodeParsers.end())
+	ElementParsers::const_iterator iter = _elementParsers.begin();
+	while (iter != _elementParsers.end())
 	{
 		delete iter->second;
 		iter++;
 	}
 
-	_nodeParsers.clear();
+	_elementParsers.clear();
 }
 
-Widget* UIProxy::loadWidget(tinyxml2::XMLElement* pXmlNode)
+void UIProxy::init()
 {
-	if (pXmlNode == nullptr)
-	{
-		return nullptr;
-	}
-
-	NodeParsers::const_iterator iter = _nodeParsers.find(pXmlNode->Name());
-	if (iter == _nodeParsers.end())
-	{
-		return nullptr;
-	}
-
-	if (!iter->second->load(pXmlNode))
-	{
-		return nullptr;
-	}
-
-	Widget* pWidget = iter->second->getWidget();
-	iter->second->setWidget(nullptr);
-
-	if (pWidget == nullptr)
-	{
-		return nullptr;
-	}
-
-	Widget* pChildNode;
-	tinyxml2::XMLElement* pChildXml = pXmlNode->FirstChildElement();
-	while (pChildXml)
-	{
-		pChildNode = this->loadWidget(pChildXml);
-		if (pChildNode)
-		{
-			pWidget->addChild(pChildNode);
-		}
-		pChildXml = pChildXml->NextSiblingElement();
-	}
-
-	return pWidget;
+	this->registerElementParser(ELEMENT_NAME_LAYOUTITEM, new LayoutItemLoader());
+	this->registerElementParser(ELEMENT_NAME_LAYOUT, new LayoutLoader());
+	this->registerElementParser(ELEMENT_NAME_HLAYOUT, new HLayoutLoader());
+	this->registerElementParser(ELEMENT_NAME_VLAYOUT, new VLayoutLoader());
+	this->registerElementParser(ELEMENT_NAME_WIDGET, new NodeLoader());
+	this->registerElementParser(ELEMENT_NAME_TEXT, new TextLoader());
+	this->registerElementParser(ELEMENT_NAME_IMAGE, new ImageLoader());
 }
 
-tinyxml2::XMLElement* UIProxy::saveWidget(tinyxml2::XMLDocument* pDocument, Widget* pWidget)
+// 获取控件名称
+const char* getWidgetName(Widget* widget)
 {
-	if (pDocument == nullptr || pWidget == nullptr)
+	if (widget == nullptr)
 	{
 		return nullptr;
 	}
 
-	const char* name = typeid(pWidget).name();
-	NodeParsers::const_iterator iter = _nodeParsers.find(name);
-	if (iter == _nodeParsers.end())
-	{
-		return nullptr;
-	}
-
-	iter->second->setWidget(pWidget);
-	tinyxml2::XMLElement* pXmlElement = pDocument->NewElement(name);
-	if (!iter->second->save(pXmlElement))
-	{
-		pDocument->DeleteNode(pXmlElement);
-		return nullptr;
-	}
-
-	std::vector<sys::Object*>::iterator begin = pWidget->beginChild();
-	std::vector<sys::Object*>::iterator end = pWidget->endChild();
-
-	while (begin != end)
-	{
-		tinyxml2::XMLElement* pChildNode = saveWidget(pDocument, pWidget);
-		if (pChildNode)
-		{
-			pXmlElement->InsertEndChild(pChildNode);
-		}
-		begin++;
-	}
-
-	return pXmlElement;
+	if (static_cast<CtrlText*>(widget))	
+		return ELEMENT_NAME_TEXT;
+	else if (static_cast<CtrlImage*>(widget))	
+		return ELEMENT_NAME_IMAGE;
+	else 
+		return ELEMENT_NAME_WIDGET;
 }
+
+// 获取布局名称
+const char* getLayoutName(Layout* layout)
+{
+	if (layout == nullptr)
+	{
+		return nullptr;
+	}
+
+	if (static_cast<HorizontalLayout*>(layout))
+		return ELEMENT_NAME_HLAYOUT;
+	else if (static_cast<VerticalLayout*>(layout))
+		return ELEMENT_NAME_VLAYOUT;
+	else
+		return ELEMENT_NAME_LAYOUT;
+}
+
+IElement* UIProxy::getElement(const char* name)
+{
+	if (_elementParsers.find(name) == _elementParsers.end())
+	{
+		return nullptr;
+	}
+
+	return _elementParsers[name];
+}
+
+IElement* UIProxy::loadSingleElement(tinyxml2::XMLElement* xmlNode, ElementType& type)
+{
+	type = EET_NONE;
+	if (xmlNode == nullptr)
+	{
+		return nullptr;
+	}
+
+	ElementParsers::const_iterator iter = _elementParsers.find(xmlNode->Name());
+	if (iter == _elementParsers.end())
+	{
+		return nullptr;
+	}
+
+	if (!iter->second->load(xmlNode))
+	{
+		return nullptr;
+	}
+
+	IElement* element = iter->second;
+	// 空间节点
+	NodeLoader* widgetLoader = static_cast<NodeLoader*>(element);
+	if (widgetLoader != nullptr)
+	{
+		type = EET_WIDGET;
+		return widgetLoader;
+	}
+	// 布局节点
+	LayoutItemLoader* layoutItemLoader = static_cast<LayoutItemLoader*>(element);
+	if (layoutItemLoader != nullptr)
+	{
+		type = EET_LAYOUTITEM;
+		return layoutItemLoader;
+	}
+
+	// 布局节点
+	LayoutLoader* layoutLoader = static_cast<LayoutLoader*>(element);
+	if (layoutLoader != nullptr)
+	{
+		type = EET_LAYOUT;
+		return layoutLoader;
+	}
+
+	return nullptr;
+}
+
+bool UIProxy::loadLayoutItem(LayoutItemLoader* loader, tinyxml2::XMLElement* xmlNode)
+{
+	if (loader == nullptr || xmlNode == nullptr)
+	{
+		return false;
+	}
+
+	ElementType childType = EET_NONE;
+	IElement* childElement = nullptr;
+	while (xmlNode)
+	{
+		childElement = loadSingleElement(xmlNode, childType);
+		if (childElement == nullptr || childType != EET_WIDGET)
+		{
+			return false;
+		}
+
+		NodeLoader* pChildNodeLoader = static_cast<NodeLoader*>(childElement);
+		if (pChildNodeLoader)
+		{
+			loader->getCastLayoutItem()->setWidget(pChildNodeLoader->getCastWidget());
+		}
+
+		xmlNode = xmlNode->NextSiblingElement();
+	}
+
+	return true;
+}
+
+bool UIProxy::loadLayout(LayoutLoader* loader, tinyxml2::XMLElement* xmlNode)
+{
+	if (loader == nullptr || xmlNode == nullptr)
+	{
+		return false;
+	}
+
+	ElementType childType = EET_NONE;
+	IElement* childElement = nullptr;
+
+	while (xmlNode)
+	{
+		childElement = loadSingleElement(xmlNode->FirstChildElement(), childType);
+		if (childElement && childType == EET_LAYOUTITEM)
+		{
+			LayoutItemLoader* pChildLayoutItemLoader = static_cast<LayoutItemLoader*>(childElement);
+			if (pChildLayoutItemLoader)
+			{
+				loadLayoutItem(pChildLayoutItemLoader, xmlNode->FirstChildElement());
+				loader->getCastLayoutItem()->addItem(pChildLayoutItemLoader->getCastLayoutItem());
+			}
+		}
+		else if (childElement && childType == EET_LAYOUT)
+		{
+			LayoutLoader* pChildLayoutLoader = static_cast<LayoutLoader*>(childElement);
+			if (pChildLayoutLoader)
+			{
+				loadLayout(pChildLayoutLoader, xmlNode->FirstChildElement());
+				loader->getCastLayoutItem()->addItem(pChildLayoutLoader->getCastLayoutItem());
+			}
+		}
+		xmlNode = xmlNode->NextSiblingElement();
+	}
+
+	return true;
+}
+
+IElement* UIProxy::loadRoot(tinyxml2::XMLElement* xmlNode)
+{
+	if (xmlNode == nullptr)
+	{
+		return nullptr;
+	}
+
+	ElementType type;
+	IElement* currentElement = loadSingleElement(xmlNode, type);
+	if (currentElement == nullptr || type != EET_LAYOUT)
+	{// 空节点或者非布局节点
+		return nullptr;
+	}
+
+	loadLayout(static_cast<LayoutLoader*>(currentElement), xmlNode->FirstChildElement());
+
+	return currentElement;
+}
+
+bool UIProxy::saveWidget(Widget* widget, tinyxml2::XMLElement* xmlNode)
+{
+	if (widget == nullptr || xmlNode == nullptr)
+	{
+		return false;
+	}
+
+	const char* name = getWidgetName(widget);
+	if (name == nullptr)
+	{
+		return false;
+	}
+
+	IElement* element = getElement(name);
+	if (element == nullptr)
+	{
+		return false;
+	}
+
+	NodeLoader* pLoader = (NodeLoader*)(element);
+	pLoader->setWidget(widget);
+	pLoader->save(xmlNode);
+
+	return true;
+}
+
+bool UIProxy::saveLayoutItem(LayoutItem* layoutItem, tinyxml2::XMLElement* xmlNode)
+{
+	if (layoutItem == nullptr || xmlNode == nullptr)
+	{
+		return false;
+	}
+
+	IElement* pElement = getElement(ELEMENT_NAME_LAYOUTITEM);
+	if (pElement == nullptr)
+	{
+		return false;
+	}
+	LayoutItemLoader* pLoader = static_cast<LayoutItemLoader*>(pElement);
+	pLoader->setLayoutItem(layoutItem);
+	pLoader->save(xmlNode);
+
+	if (layoutItem->getWidget())
+	{
+		const char* name = getWidgetName(layoutItem->getWidget());
+		if (name == nullptr)
+		{
+			return false;
+		}
+		tinyxml2::XMLElement* pChildNode = xmlNode->GetDocument()->NewElement(name);
+		saveWidget(layoutItem->getWidget(), pChildNode);
+		xmlNode->InsertEndChild(pChildNode);
+	}
+
+	return true;
+}
+
+bool UIProxy::saveLayout(Layout* layout, tinyxml2::XMLElement* xmlNode)
+{
+	if (layout == nullptr || xmlNode == nullptr)
+	{
+		return false;
+	}
+
+	const char* name = getLayoutName(layout);
+	if (name == nullptr)
+	{
+		return false;
+	}
+
+	IElement* pElement = getElement(name);
+	if (pElement == nullptr)
+	{
+		return false;
+	}
+	LayoutLoader* pLoader = static_cast<LayoutLoader*>(pElement);
+	pLoader->setLayoutItem(layout);
+	pLoader->save(xmlNode);
+
+	std::vector<LayoutItem*>::const_iterator iter = layout->getChildren().begin();
+	while (iter != layout->getChildren().end())
+	{
+		tinyxml2::XMLElement* pChildNode = nullptr;
+		if (static_cast<Layout*>(*iter))
+		{// 布局
+			name = getLayoutName(static_cast<Layout*>(*iter));
+			if (name == nullptr)
+			{
+				return false;
+			}
+			pChildNode = xmlNode->GetDocument()->NewElement(name);
+			this->saveLayout(static_cast<Layout*>(*iter), pChildNode);
+		}
+		else
+		{// 节点节点
+			pChildNode = xmlNode->GetDocument()->NewElement(ELEMENT_NAME_LAYOUTITEM);
+			this->saveLayoutItem(*iter, pChildNode);
+		}
+
+		xmlNode->InsertEndChild(pChildNode);
+		iter++;
+	}
+
+	return true;
+}
+
+bool UIProxy::saveRoot(Layout* layout, tinyxml2::XMLDocument* document)
+{
+	if (layout == nullptr || document == nullptr)
+	{
+		return false;
+	}
+
+	tinyxml2::XMLElement* pChildNode = document->NewElement(ELEMENT_NAME_LAYOUT);
+	document->InsertFirstChild(pChildNode);
+	return saveLayout(layout, pChildNode);
+}
+
+

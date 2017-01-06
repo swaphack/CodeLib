@@ -69,16 +69,19 @@
     <ClInclude Include="File\Parse\IElement.h">
       <Filter>File\Parse</Filter>
     </ClInclude>
-    <ClInclude Include="File\Load\LayoutLoader.h">
-      <Filter>File\Load</Filter>
-    </ClInclude>
     <ClInclude Include="Layout\LayoutSpacerItem.h">
       <Filter>Layout</Filter>
     </ClInclude>
     <ClInclude Include="Layout\LayoutWidgetItem.h">
       <Filter>Layout</Filter>
     </ClInclude>
+    <ClInclude Include="File\Parse\LayoutItemParser.h">
+      <Filter>File\Parse</Filter>
+    </ClInclude>
     <ClInclude Include="File\Load\LayoutItemLoader.h">
+      <Filter>File\Load</Filter>
+    </ClInclude>
+    <ClInclude Include="File\Load\LayoutLoader.h">
       <Filter>File\Load</Filter>
     </ClInclude>
   </ItemGroup>
@@ -97,6 +100,9 @@
     </Filter>
     <Filter Include="Display">
       <UniqueIdentifier>{1c8ec4f5-d498-4823-a48b-5df1683c61d4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource">
+      <UniqueIdentifier>{7c1ebd8a-3116-46ab-9b57-3570cf0c386c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -136,11 +142,19 @@
     <ClCompile Include="Layout\LayoutSpacerItem.cpp">
       <Filter>Layout</Filter>
     </ClCompile>
-    <ClCompile Include="File\Load\LayoutLoader.cpp">
-      <Filter>File\Load</Filter>
+    <ClCompile Include="File\Parse\LayoutItemParser.cpp">
+      <Filter>File\Parse</Filter>
     </ClCompile>
     <ClCompile Include="File\Load\LayoutItemLoader.cpp">
       <Filter>File\Load</Filter>
     </ClCompile>
+    <ClCompile Include="File\Load\LayoutLoader.cpp">
+      <Filter>File\Load</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="Resource\SampleLayout.xml">
+      <Filter>Resource</Filter>
+    </Xml>
   </ItemGroup>
 </Project>

@@ -8,11 +8,16 @@ namespace ui
 {
 	class Layout;
 
+	static const int LAYOUT_SIZE_MIN_WIDTH = 0;
+	static const int LAYOUT_SIZE_MIN_HEIGHT = 0;
+	static const int LAYOUT_SIZE_MAX_WIDTH = 65536;
+	static const int LAYOUT_SIZE_MAX_HEIGHT = 65536;
+
 	/**
 	*	布局项, 抽象类
 	*	布局项的集合信息在界面调整中不做改变，改变的只有widget的集合信息
 	*/
-	class LayoutItem
+	class LayoutItem : public sys::Object, public sys::Name
 	{
 	public:
 		LayoutItem();
@@ -106,15 +111,19 @@ namespace ui
 		/**
 		*	设置布局项的几何信息
 		*/
-		virtual void setLayoutItemGeometry(const sys::Rect& rect);
+		virtual void setLayoutGeometry(const sys::Rect& rect);
 		/**
 		*	获取布局的最小面积
 		*/
-		virtual sys::Size getLayoutItemMinSize();
+		virtual sys::Size getLayoutMinSize();
 		/**
 		*	获取布局的最大面积
 		*/
-		virtual sys::Size getLayoutItemMaxSize();
+		virtual sys::Size getLayoutMaxSize();
+		/**
+		*	复制对象
+		*/
+		virtual bool copy(LayoutItem* item);
 	public: // 其他辅助方法
 		/**
 		*	设置矩形框是否可见

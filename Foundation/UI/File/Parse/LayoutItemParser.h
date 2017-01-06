@@ -5,25 +5,24 @@
 
 namespace ui
 {
-	// 节点解析器
-	class WidgetParser : public IElement
+	// 布局解析器
+	class LayoutItemParser : public IElement
 	{
 	public:
-		WidgetParser();
-		virtual ~WidgetParser();
+		LayoutItemParser();
+		virtual ~LayoutItemParser();
 	public:
 		// 设置ui节点
-		void setWidget(Widget* widget);
+		void setLayoutItem(LayoutItem* item);
 
 		// 获取ui节点
-		virtual Widget* getWidget() = 0;
+		virtual LayoutItem* getLayoutItem() = 0;
 	protected:
 		// 解析属性
 		virtual void parseAttributes() = 0;
 		// 保存属性
 		virtual void saveAttributes() = 0;
 	protected:
-		// ui节点
-		Widget* _node;
+		LayoutItem* m_pLayoutItem;
 	};
 }

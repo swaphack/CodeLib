@@ -67,6 +67,11 @@ void Node::addChild( Node* node )
 {
 	ASSERT(node != nullptr);
 
+	if (node->getParent() == this)
+	{
+		return;
+	}
+
 	node->setParent(this);
 
 	_children.addObject(node);
@@ -77,6 +82,11 @@ void Node::addChild( Node* node )
 void Node::removeChild( Node* node )
 {
 	ASSERT(node != nullptr);
+
+	if (node->getParent() != this)
+	{
+		return;
+	}
 
 	node->setParent(nullptr);
 
