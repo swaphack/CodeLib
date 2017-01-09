@@ -4,12 +4,7 @@
 
 namespace ui
 {
-
-
-#define ELEMENT_NAME_LAYOUT			"Layout"
-#define ELEMENT_NAME_HLAYOUT		"HLayout"
-#define ELEMENT_NAME_VLAYOUT		"VLayout"
-
+	class Layout;
 	// 布局
 	class LayoutLoader : public LayoutItemLoader
 	{
@@ -25,6 +20,7 @@ namespace ui
 		INIT_LOADER_LAYOUTITEM(Layout, ELEMENT_NAME_LAYOUT);
 	};
 
+	class HorizontalLayout;
 	// 水平布局
 	class HLayoutLoader : public LayoutLoader
 	{
@@ -32,6 +28,7 @@ namespace ui
 		INIT_LOADER_LAYOUTITEM(HorizontalLayout, ELEMENT_NAME_HLAYOUT);
 	};
 
+	class VerticalLayout;
 	// 水平布局
 	class VLayoutLoader : public LayoutLoader
 	{

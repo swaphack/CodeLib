@@ -257,12 +257,12 @@ bool LayoutItem::isBoxVisible()
 
 void LayoutItem::setBoxColor(const sys::Color4B& color)
 {
-	m_rectColor = color;
+	m_cBoxColor = color;
 }
 
 const sys::Color4B& LayoutItem::getBoxColor()
 {
-	return m_rectColor;
+	return m_cBoxColor;
 }
 
 void LayoutItem::setWidgetGeomerty(const sys::Rect& geometry)

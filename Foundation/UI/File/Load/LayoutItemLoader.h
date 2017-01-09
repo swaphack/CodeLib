@@ -4,7 +4,6 @@
 
 namespace ui
 {
-#define ELEMENT_NAME_LAYOUTITEM		"LayoutItem"
 	// 布局节点
 	class LayoutItemLoader : public LayoutItemParser
 	{

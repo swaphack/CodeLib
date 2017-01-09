@@ -1,4 +1,5 @@
 #include "LayoutItemParser.h"
+#include "../../Layout/LayoutItem.h"
 
 using namespace ui;
 

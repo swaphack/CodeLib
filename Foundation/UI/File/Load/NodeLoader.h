@@ -2,12 +2,8 @@
 
 #include "macros.h"
 
-using namespace render;
-
 namespace ui
 {
-#define ELEMENT_NAME_WIDGET			"Widget"
-
 	// UI½Úµã
 	class NodeLoader : public WidgetParser
 	{ 

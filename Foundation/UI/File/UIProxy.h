@@ -44,7 +44,7 @@ namespace ui
 		/**
 		*	保存ui配置文件
 		*/
-		bool saveFile(Layout* layout, const char* filepath);
+		bool saveFile(Layout* layout, const char* filepath, const sys::Size& designSize);
 		/**
 		*	注册节点解析
 		*/
@@ -57,6 +57,10 @@ namespace ui
 		*	移除所有节点解析
 		*/
 		void removeAllElementParsers();
+		/**
+		*	设计大小
+		*/
+		const sys::Size& getDesignSize();
 	protected:
 		/**
 		*	初始化
@@ -89,6 +93,8 @@ namespace ui
 		typedef std::map<std::string, IElement*> ElementParsers;
 		// 节点解析集合
 		ElementParsers _elementParsers;
+		// 设计大小
+		sys::Size _designSize;
 	}; 
 
 	#define G_UIPROXY UIProxy::getInstance()

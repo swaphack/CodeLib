@@ -7,6 +7,7 @@ using namespace ui;
 Display::Display()
 :m_pLayout(nullptr)
 ,m_eLayoutDirection(ELD_NONE)
+, m_pRoot(nullptr)
 {
 
 }
@@ -14,6 +15,14 @@ Display::Display()
 Display::~Display()
 {
 	this->close();
+}
+
+void Display::setUIRoot(Widget* root)
+{
+	if (root)
+	{
+		m_pRoot = root;
+	}
 }
 
 void Display::show()
@@ -27,6 +36,10 @@ void Display::show()
 		initUI();
 		initText();
 		initEvent();
+		if (m_pRoot)
+		{
+			m_pRoot->addChild(m_pLayout->getWidget());
+		}
 	}
 
 	if (m_pLayout->getWidget())
@@ -137,6 +150,11 @@ LayoutDirection Display::getLayoutDirection()
 	return m_eLayoutDirection;
 }
 
+Layout* Display::getLayout()
+{
+	return m_pLayout;
+}
+
 void Display::onViewSizeChanged(const sys::Size& inputSize)
 {
 	if (m_pLayout == nullptr)
@@ -177,6 +195,8 @@ bool Display::loadFile()
 	SAFE_RETAIN(pLayout);
 
 	m_pLayout = pLayout;
+
+	this->setViewSize(UIProxy::getInstance()->getDesignSize());
 
 	return true;
 }

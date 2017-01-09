@@ -1,7 +1,6 @@
 #pragma once
 
 #include "macros.h"
-
 #include "SizePolicy.h"
 
 namespace ui
@@ -153,7 +152,7 @@ namespace ui
 		// 最大面积
 		sys::Size m_sMaxSize;
 		// 矩形框颜色
-		sys::Color4B m_rectColor;
+		sys::Color4B m_cBoxColor;
 		// 是否显示矩形框
 		bool m_bBoxVisible;
 		// 空置项

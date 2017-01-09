@@ -1,6 +1,5 @@
 #pragma once
 
-#include "helper.h"
 #include "IElement.h"
 
 namespace ui
@@ -14,9 +13,11 @@ namespace ui
 	public:
 		// 设置ui节点
 		void setWidget(Widget* widget);
-
 		// 获取ui节点
 		virtual Widget* getWidget() = 0;
+
+		// 解析节点的名称
+		virtual const char* getName() = 0;
 	protected:
 		// 解析属性
 		virtual void parseAttributes() = 0;

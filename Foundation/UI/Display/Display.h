@@ -26,6 +26,10 @@ namespace ui
 		virtual ~Display();
 	public:
 		/**
+		*	设置ui根节点
+		*/
+		void setUIRoot(Widget* root);
+		/**
 		*	显示
 		*/
 		void show();
@@ -65,6 +69,10 @@ namespace ui
 		*	获取布局方向
 		*/
 		LayoutDirection getLayoutDirection();
+		/**
+		*	获取布局
+		*/
+		Layout* getLayout();
 	protected:
 		/**
 		*	当窗口大小发生改变时
@@ -89,6 +97,8 @@ namespace ui
 	protected:
 		// 文件路径
 		std::string m_strFilePath;
+		// ui根节点
+		Widget* m_pRoot;
 		// 布局
 		Layout* m_pLayout;
 		// 布局方向

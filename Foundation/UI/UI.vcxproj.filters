@@ -26,9 +26,6 @@
     <ClInclude Include="File\Load\TextLoader.h">
       <Filter>File\Load</Filter>
     </ClInclude>
-    <ClInclude Include="File\Parse\helper.h">
-      <Filter>File\Parse</Filter>
-    </ClInclude>
     <ClInclude Include="File\Parse\import.h">
       <Filter>File\Parse</Filter>
     </ClInclude>

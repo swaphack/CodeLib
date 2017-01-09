@@ -6,8 +6,6 @@ using namespace render;
 
 namespace ui
 {
-#define ELEMENT_NAME_TEXT			"Text"
-
 	class TextLoader : public NodeLoader
 	{
 	public:

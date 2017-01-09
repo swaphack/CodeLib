@@ -3,6 +3,7 @@
 #include "../macros.h"
 
 #include "../Parse/import.h"
+#include "../../Layout/import.h"
 
 namespace ui
 {
@@ -123,5 +124,15 @@ namespace ui
 #define SAVE_LAYOUTITEM_CAST_ATTRIBUTE(NAME, FUNC, TYPE) SAVE_CAST_ATTRIBUTE(GET_LAYOUTITEM, NAME, FUNC, TYPE)
 
 #define ADD_LAYOUTITEM_ATTRIBUTE(NAME, FUNC) ADD_ATTRIBUTE(GET_LAYOUTITEM, NAME, FUNC)
+
+//////////////////////////////////////////////////////////////////////////
+#define ELEMENT_NAME_WIDGET			"Widget"
+#define ELEMENT_NAME_IMAGE			"Image"
+#define ELEMENT_NAME_TEXT			"Text"
+
+#define ELEMENT_NAME_LAYOUTITEM		"LayoutItem"
+#define ELEMENT_NAME_LAYOUT			"Layout"
+#define ELEMENT_NAME_HLAYOUT		"HLayout"
+#define ELEMENT_NAME_VLAYOUT		"VLayout"
 
 }

@@ -8,6 +8,8 @@ namespace ui
 {
 	typedef std::map<std::string, std::string> Attributes;
 
+	struct SizePolicy;
+
 	// ui Ù–‘
 	class WidgetProperty: public sys::Name
 	{

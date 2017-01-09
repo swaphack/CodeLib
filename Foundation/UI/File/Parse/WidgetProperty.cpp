@@ -1,4 +1,5 @@
 #include "WidgetProperty.h"
+#include "../../Layout/SizePolicy.h"
 
 using namespace ui;
 

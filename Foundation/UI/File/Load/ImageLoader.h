@@ -6,7 +6,7 @@ using namespace render;
 
 namespace ui
 {
-#define ELEMENT_NAME_IMAGE			"Image"
+
 
 	class ImageLoader : public NodeLoader
 	{

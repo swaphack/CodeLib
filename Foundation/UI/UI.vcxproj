@@ -77,7 +77,6 @@
     <ClInclude Include="File\Load\NodeLoader.h" />
     <ClInclude Include="File\Load\TextLoader.h" />
     <ClInclude Include="File\macros.h" />
-    <ClInclude Include="File\Parse\helper.h" />
     <ClInclude Include="File\Parse\IElement.h" />
     <ClInclude Include="File\Parse\import.h" />
     <ClInclude Include="File\Parse\LayoutItemParser.h" />
