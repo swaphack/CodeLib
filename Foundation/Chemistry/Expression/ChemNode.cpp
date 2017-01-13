@@ -2,54 +2,67 @@
 
 using namespace chem;
 
-ChemNode::ChemNode()
-:symbol("")
-, count("")
-, inner(nullptr)
-, innerCount("")
+void ChemNode::appendNode(const std::string& symbol, const std::string& count)
 {
-}
-
-ChemNode::~ChemNode()
-{
-	this->disponse();
-}
-
-void ChemNode::foreach(std::function<void(const std::string& symbol, const std::string& number)> func)
-{
-	func(symbol, count);
-
-	int count = next.size();
-
-	for (int i = 0; i < count; i++)
+	if (symbol.empty())
 	{
-		ChemNode* pNode = next[i];
-		pNode->foreach(func);
+		return;
 	}
 
-	if (inner)
+	AtomNode* node = new AtomNode();
+	node->symbol = symbol;
+	node->count = count.empty() ? "1" : count;
+
+	this->appendNode(node);
+}
+
+void ChemNode::appendNode(const AtomNode* node)
+{
+	if (node == nullptr) 
 	{
-		inner->foreach(func);
+		return;
+	}
+
+	MoleculeNode* combineNode = new MoleculeNode();
+	combineNode->count = "1";
+	combineNode->elements.push_back((AtomNode*)node);
+
+	appendNode(combineNode);
+}
+
+void ChemNode::appendNode(const CombineNode* node)
+{
+	if (node == nullptr)
+	{
+		return;
+	}
+
+	CombineNodes.push_back((CombineNode*)node);
+}
+
+void ChemNode::appendNode(const ChemNode* node)
+{
+	if (node == nullptr)
+	{
+		return;
+	}
+
+	std::vector<CombineNode*>::const_iterator iter = node->CombineNodes.begin();
+	while (iter != node->CombineNodes.end())
+	{
+		this->appendNode(*iter);
+		iter++;
 	}
 }
 
 void ChemNode::disponse()
 {
-	int count = next.size();
-
-	for (int i = 0; i < count; i++)
+	std::vector<CombineNode*>::iterator iter = CombineNodes.begin();
+	while (iter != CombineNodes.end())
 	{
-		ChemNode* pNode = next[i];
-		pNode->disponse();
-		delete pNode;
+		delete *iter;
+		iter++;
 	}
 
-	next.clear();
-
-	if (inner)
-	{
-		inner->disponse();
-		delete inner;
-		inner = nullptr;
-	}
+	CombineNodes.clear();
 }

@@ -42,7 +42,9 @@ namespace game
 		*/
 		void setValue(float value);
 	private:
+		// 默认值
 		float m_fValue;
+		// 操作符类型
 		int m_nOperator;
 	};
 
@@ -85,8 +87,11 @@ namespace game
 		*/
 		virtual void setMaxValue(float value);
 	private:
+		// 最小值
 		float m_fMinValue;
+		// 最大值
 		float m_fMaxValue;
+		// 区间类型
 		int m_nInterval;
 	};
 }

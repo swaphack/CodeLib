@@ -14,4 +14,11 @@ void PacketReceiver::doGet(const char* buffer, int size)
 	{
 		doPost(*pResponse);
 	}
+	else
+	{
+		UserPacketHeader* packet = new UserPacketHeader();
+		packet->Mark = header->Mark;
+		doPost(*packet);
+		delete packet;
+	}
 }

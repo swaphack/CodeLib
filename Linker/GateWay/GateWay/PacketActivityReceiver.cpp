@@ -13,7 +13,7 @@ void PacketActivityReceiver::doGet(const char* buffer, int size)
 		UserPacketHeader* userHeader = (UserPacketHeader*)buffer;
 		int sockID = userHeader->Mark;
 
-		PRINT("Receive Packet From Server, Dest ID : %d\n", userHeader->PacketID);
+		PRINT("Receive Packet From Server, Dest ID : %d Packet ID %d\n", sockID, userHeader->PacketID);
 
 		int nNewPacketSize = size + nPacketHeaderSize - nUserPacketHeaderSize;
 		char* stream = (char*)malloc(nNewPacketSize);
@@ -32,10 +32,10 @@ void PacketActivityReceiver::doGet(const char* buffer, int size)
 	else
 	{// 来自客户端，转给服务器 PacketHeader转UserPacketHeader
 		PacketHeader* header = (PacketHeader*)buffer;
-
-		PRINT("Receive Packet From Client ID : %d\n", header->PacketID);
-
 		int sockID = sGateWay->getSocketID(_sessionID.c_str());
+
+		PRINT("Receive Packet From Client ID : %d Packet ID %d\n", sockID, header->PacketID);
+
 		int nNewPacketSize = size + nUserPacketHeaderSize - nPacketHeaderSize;
 		char* stream = (char*)malloc(nNewPacketSize);
 		// 复制头

@@ -375,6 +375,9 @@
     <ClInclude Include="instance\Club.h">
       <Filter>instance\organization\club</Filter>
     </ClInclude>
+    <ClInclude Include="instance\PropertyComponent.h">
+      <Filter>instance\base</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="instance\Person.cpp">
@@ -434,6 +437,9 @@
     </ClCompile>
     <ClCompile Include="instance\Club.cpp">
       <Filter>instance\organization\club</Filter>
+    </ClCompile>
+    <ClCompile Include="instance\PropertyComponent.cpp">
+      <Filter>instance\base</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

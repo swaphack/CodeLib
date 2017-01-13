@@ -1,7 +1,6 @@
 #include <windows.h>
 #include <stdio.h>
 
-
 #include "resource.h"
 #include "WndRender.h"
 

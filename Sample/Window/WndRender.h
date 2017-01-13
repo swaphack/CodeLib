@@ -1,6 +1,7 @@
 #pragma once
 
 #include "render.h"
+#include "ui.h"
 
 class WndRender : public render::RenderApplication
 {
@@ -33,6 +34,8 @@ public:
 	void testScissor();
 
 	void testScrollView();
+
+	void testUI();
 protected:
 	void onTouchBegin(sys::Object* object, float x, float y);
 	void onTouchMove(sys::Object* object, float x, float y);

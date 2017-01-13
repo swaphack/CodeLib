@@ -57,7 +57,7 @@ void PropertySheet::removeAllProperties()
 	m_mProperties.clear();
 }
 
-void PropertySheet::foreach(std::function<void(Property*)> handler)
+void PropertySheet::foreach(const std::function<void(Property*)>& handler)
 {
 	Properties::iterator iter = m_mProperties.begin();
 	while (iter != m_mProperties.end())

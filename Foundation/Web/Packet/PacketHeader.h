@@ -9,6 +9,12 @@ namespace web
 		int Length;
 		// 报文编号
 		int PacketID;
+
+		PacketHeader()
+		{
+			PacketID = 0;
+			Length = sizeof(*this);
+		}
 	};
 
 	// 用户报文头部
@@ -16,5 +22,12 @@ namespace web
 	{
 		// 用户标识
 		int Mark;
+
+		UserPacketHeader()
+		{
+			Mark = 0;
+			PacketID = 0;
+			Length = sizeof(*this);
+		}
 	};
 }

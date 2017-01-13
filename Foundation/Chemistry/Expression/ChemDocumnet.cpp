@@ -7,8 +7,8 @@ using namespace chem;
 //////////////////////////////////////////////////////////////////////////
 
 ChemDocument::ChemDocument()
+:_chemNode(nullptr)
 {
-
 }
 
 ChemDocument::~ChemDocument()
@@ -16,59 +16,65 @@ ChemDocument::~ChemDocument()
 
 }
 
-ChemNode* ChemDocument::loadMolecular(const char* expression)
+ChemDocument* ChemDocument::~getInstance()
 {
-	_cursor = (char*)expression;
-	return readExpression();
+	static ChemDocument* sChemDocument = nullptr;
+	if (sChemDocument == nullptr)
+	{
+		sChemDocument = new ChemDocument();
+	}
+
+	return sChemDocument;
 }
 
-ChemNode* ChemDocument::readExpression()
+ChemNode* ChemDocument::loadMolecular(const char* expression)
 {
-	if (_cursor == nullptr || *_cursor == 0)
+	if (expression == nullptr)
 	{
 		return nullptr;
 	}
+	_cursor = (char*)expression;
+	if (_chemNode != nullptr) 
+	{
+		delete _chemNode;
+	}
+	_chemNode = new ChemNode();
 
-	ChemNode* node = new ChemNode();
-	ChemNode* innerNode = nullptr;
-	ChemNode* ptr = nullptr;
+	readExpression();
+
+	return _chemNode;
+}
+
+bool ChemDocument::readExpression(ChemNode* chemNode)
+{
+	if (_cursor == nullptr || *_cursor == 0 || chemNode == nullptr)
+	{
+		return nullptr;
+	}
 
 	std::string symbol;
 	std::string number;
 	
 	do
 	{
-		bool endBlock = false;
-		if (innerNode = readBlock(endBlock))
-		{
-			node->inner = innerNode;
-			if (endBlock) 
-				return node;
-			if (readNumber(number))
-				node->innerCount = number;
+		if (readBlock(chemNode))
+		{ // 组合体
+		}
+		else if (readSymbol(symbol))
+		{ // 单个元素
+			readNumber(number);
+
+			chemNode->appendNode(symbol, number);
 		}
 
-		readSymbol(symbol);
-		if (symbol.empty()) continue;
-		
-		readNumber(number);
-		if (node->symbol.empty())
-			ptr = node;
-		else
-		{
-			ptr = new ChemNode();
-			node->next.push_back(ptr);
-		}
-		node->symbol = symbol;
-		node->count = number.empty() ? "1" : number;
 	} while (*_cursor);
 
-	return node;
+	return true;
 }
 
-ChemNode* ChemDocument::readBlock(bool& endBlock)
+bool ChemDocument::readBlock(ChemNode* chemNode)
 {
-	endBlock = false;
+	bool endBlock = false;
 	char* ptr = (char*)_cursor;
 	char tempChar;
 	
@@ -89,22 +95,22 @@ ChemNode* ChemDocument::readBlock(bool& endBlock)
 
 	if (_cursor - ptr == 0)
 	{
-		return nullptr;
+		return false;
 	}
 
 	if (endBlock)
 	{
-		return nullptr;
+		return true;
 	}
-
-	int cursor = 0;
-	ChemNode* temp = readExpression();
-	if (temp)
+	ChemNode* newBlockNode = new ChemNode();
+	if (readExpression(newBlockNode))
 	{
-		return temp;
+		chemNode->appendNode(newBlockNode);
+		delete newBlockNode;
+		return true;
 	}
 
-	return nullptr;
+	return false;
 }
 
 bool ChemDocument::readSymbol(std::string& symbol)
@@ -134,7 +140,7 @@ bool ChemDocument::readSymbol(std::string& symbol)
 		}
 		_cursor++;
 	}
-	return true;
+	return !symbol.empty();
 }
 
 bool ChemDocument::readNumber(std::string& number)
@@ -156,5 +162,5 @@ bool ChemDocument::readNumber(std::string& number)
 		_cursor++;
 	}
 
-	return true;
+	return !number.empty();
 }

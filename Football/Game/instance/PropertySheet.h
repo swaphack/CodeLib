@@ -37,7 +37,7 @@ namespace game
 		/**
 		*	±éÀú
 		*/
-		void foreach(std::function<void(Property*)> handler);
+		void foreach(const std::function<void(Property*)>& handler);
 		/**
 		*	¿ËÂ¡
 		*/

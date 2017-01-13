@@ -31,25 +31,6 @@ namespace game
 	copyTo(pComponent); \
 	return pComponent; \
 	}
-
-		/** 
-		*	创建组件获取属性和设置属性方法, 保存为实数类型
-		*	@param Enum 枚举
-		*	@param FunName 函数名称
-		*	@param Type 类型
-		*/
-#define CREATE_COMPONENT_PROPERTY2(Enum, FunName, Type) \
-	public:\
-	void set##FunName(Type value) { setPropertyValue((int)Enum, (Type)(value)); } \
-	virtual Type get##FunName() { return (Type)(getPropertyValue((int)Enum)); }
-
-		/**
-		*	创建组件属性, 默认float类型
-		*	@param Enum 枚举
-		*	@param FunName 函数名称
-		*/
-#define CREATE_COMPONENT_PROPERTY(Enum, FunName) CREATE_COMPONENT_PROPERTY2(Enum, FunName, float)
-
 		/**
 		*	创建组件获取方法，不存在时，创建一个新的
 		*	@param Type 组件类型
@@ -84,21 +65,14 @@ namespace game
 		Component();
 		virtual ~Component();
 	public:
+		/**
+		*	创建：获取组件名称
+		*/
 		CREATE_COMPONENT_TYPE();
+		/**
+		*	创建：获取组件复制体
+		*/
 		CREATE_COMPONENT_CLONE(Component);
-		/**
-		*	获取属性值
-		*/
-		float getPropertyValue(int key);
-		/**
-		*	设置属性值
-		*/
-		void setPropertyValue(int key, float value);
-		/**
-		*	设置属性值
-		*/
-		void setPropertyChangedHandler(int key, PropertyHandler handler);
-
 		/**
 		*	获取组件
 		*/
@@ -116,23 +90,17 @@ namespace game
 		/**
 		*	复制信息到目标组件
 		*/
-		bool copyTo(Component* pComponent);
+		virtual bool copyTo(Component* pComponent);
 		/**
 		*	复制组件信息
 		*/
-		bool copy(Component* pComponent);
+		virtual bool copy(Component* pComponent);
 	protected:
-		/**
-		*	获取属性列表
-		*/
-		PropertySheet* getPropertySheet();
 		/**
 		*	获取组件列表
 		*/
 		ComponentSheet* getComponentSheet();
 	private:
-		// 属性列表
-		PropertySheet* m_pPropertySheet;
 		// 组件列表
 		ComponentSheet* m_pComponentSheet;
 	};

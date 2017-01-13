@@ -2,6 +2,7 @@
 
 using namespace render;
 using namespace sys;
+using namespace ui;
 
 WndRender::WndRender()
 {
@@ -23,7 +24,7 @@ void WndRender::show()
 	
 	//this->testText();
 
-	this->testModel();
+	this->testUI();
 }
 
 void WndRender::testMoveImage()
@@ -599,4 +600,14 @@ void WndRender::testScrollView()
 	}
 
 	pScrollView->setScrollDirection(ESD_VERTICAL_BOTTOM);
+}
+    
+void WndRender::testUI()
+{
+	Display* pUIFrame = new Display();
+	pUIFrame->setUIRoot(this->getCanvas()->getRoot());
+	pUIFrame->setFilePath("Resource/Layout/Test.xml");
+	pUIFrame->show();
+
+	int a = 1;
 }

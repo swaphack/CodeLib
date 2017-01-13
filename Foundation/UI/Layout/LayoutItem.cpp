@@ -35,6 +35,8 @@ void LayoutItem::setGeometry(float x, float y, float width, float height)
 void LayoutItem::setGeometry(const sys::Rect& rect)
 {
 	m_rGeometry = rect;
+
+	//this->setLayoutGeometry(rect);
 }
 
 void LayoutItem::setOrgin(float x, float y)

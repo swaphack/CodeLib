@@ -4,51 +4,12 @@ using namespace game;
 
 Component::Component()
 {
-	m_pPropertySheet = new PropertySheet();
 	m_pComponentSheet = new ComponentSheet();
 }
 
 Component::~Component()
 {
-	delete m_pPropertySheet;
 	delete m_pComponentSheet;
-}
-
-float Component::getPropertyValue(int key)
-{
-	Property* pProperty = getPropertySheet()->getProperty(key);
-	if (!pProperty)
-	{
-		return 0;
-	}
-
-	return pProperty->getValue();
-}
-
-void Component::setPropertyValue(int key, float value)
-{
-	Property* pProperty = getPropertySheet()->getProperty(key);
-	if (!pProperty)
-	{
-		pProperty = new Property();
-		pProperty->setType(key);
-		getPropertySheet()->addProperty(pProperty);
-	}
-
-	pProperty->setValue(value);
-}
-
-void Component::setPropertyChangedHandler(int key, PropertyHandler handler)
-{
-	Property* pProperty = getPropertySheet()->getProperty(key);
-	if (!pProperty)
-	{
-		pProperty = new Property();
-		pProperty->setType(key);
-		getPropertySheet()->addProperty(pProperty);
-	}
-
-	pProperty->setChangedHandler(handler);
 }
 
 bool Component::addComponent(Component* pComponent)
@@ -77,18 +38,6 @@ bool Component::copyTo(Component* pComponent)
 	{
 		return false;
 	}
-
-	getPropertySheet()->foreach([&](Property* target){
-		Property* pProperty = pComponent->getPropertySheet()->getProperty(target->getType());
-		if (pProperty == nullptr)
-		{
-			pProperty = target->clone();
-			pComponent->getPropertySheet()->addProperty(pProperty);
-		}
-		// ¸´ÖÆÊôÐÔÖµ
-		pProperty->setValue(target->getValue());
-		pProperty->setChangedHandler(target->getChangedHandler());
-	});
 	getComponentSheet()->foreach([&](Component* target){
 		Component* pChild = pComponent->getComponentSheet()->getComponent(target->getType());
 		if (pChild == nullptr)
@@ -113,11 +62,6 @@ bool Component::copy(Component* pComponent)
 	pComponent->copyTo(this);
 
 	return true;
-}
-
-PropertySheet* Component::getPropertySheet()
-{
-	return m_pPropertySheet;
 }
 
 ComponentSheet* Component::getComponentSheet()

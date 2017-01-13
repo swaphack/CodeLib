@@ -36,7 +36,7 @@ bool Cube::init()
 			TexFrame* frame = _faceFrames[i];
 			if (frame && frame->getTexture())
 			{
-				sys::Size size = sys::Size(frame->getTexture()->getWidth(), frame->getTexture()->getHeight());
+				sys::Size size = sys::Size((float)frame->getTexture()->getWidth(), (float)frame->getTexture()->getHeight());
 				TextureTool::setTexture2DCoords(getTextureRect(static_cast<ModelFace>(i)), size, frame->getRect());
 			}
 		}

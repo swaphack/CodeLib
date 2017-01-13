@@ -94,6 +94,7 @@
     <ClInclude Include="instance\Person.h" />
     <ClInclude Include="instance\Player.h" />
     <ClInclude Include="instance\Property.h" />
+    <ClInclude Include="instance\PropertyComponent.h" />
     <ClInclude Include="instance\PropertySheet.h" />
     <ClInclude Include="instance\Referee.h" />
     <ClInclude Include="instance\System.h" />
@@ -167,6 +168,7 @@
     <ClCompile Include="instance\Person.cpp" />
     <ClCompile Include="instance\Player.cpp" />
     <ClCompile Include="instance\Property.cpp" />
+    <ClCompile Include="instance\PropertyComponent.cpp" />
     <ClCompile Include="instance\PropertySheet.cpp" />
     <ClCompile Include="instance\TransferMarket.cpp" />
     <ClCompile Include="instance\World.cpp" />

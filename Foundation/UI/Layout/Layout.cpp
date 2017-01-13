@@ -116,10 +116,12 @@ void Layout::removeAllItems()
 		iter++;
 	}
 
-	if (this->getWidget())
-	{
-		this->getWidget()->removeAllChildren();
-	}
+	m_vChildren.clear();
+
+// 	if (this->getWidget())
+// 	{
+// 		this->getWidget()->removeAllChildren();
+// 	}
 }
 
 const std::vector<LayoutItem*>& Layout::getChildren()
