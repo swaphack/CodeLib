@@ -7,16 +7,15 @@ using namespace chem;
 //////////////////////////////////////////////////////////////////////////
 
 ChemDocument::ChemDocument()
-:_chemNode(nullptr)
+:_cursor(nullptr)
 {
 }
 
 ChemDocument::~ChemDocument()
 {
-
 }
 
-ChemDocument* ChemDocument::~getInstance()
+ChemDocument* ChemDocument::getInstance()
 {
 	static ChemDocument* sChemDocument = nullptr;
 	if (sChemDocument == nullptr)
@@ -33,50 +32,54 @@ ChemNode* ChemDocument::loadMolecular(const char* expression)
 	{
 		return nullptr;
 	}
+	releaseNode();
 	_cursor = (char*)expression;
-	if (_chemNode != nullptr) 
-	{
-		delete _chemNode;
-	}
 	_chemNode = new ChemNode();
-
-	readExpression();
-
-	return _chemNode;
+	if (readExpression())
+	{
+		return _chemNode;
+	}
+	return nullptr;
 }
 
-bool ChemDocument::readExpression(ChemNode* chemNode)
+void ChemDocument::releaseNode()
 {
-	if (_cursor == nullptr || *_cursor == 0 || chemNode == nullptr)
+	if (_chemNode != nullptr)
 	{
-		return nullptr;
+		delete _chemNode;
+		_chemNode = nullptr;
 	}
+}
 
-	std::string symbol;
-	std::string number;
+bool ChemDocument::readExpression()
+{
+	if (_cursor == nullptr || *_cursor == 0)
+	{
+		return false;
+	}
 	
 	do
 	{
-		if (readBlock(chemNode))
-		{ // 组合体
-		}
-		else if (readSymbol(symbol))
-		{ // 单个元素
-			readNumber(number);
-
-			chemNode->appendNode(symbol, number);
+		CombineNode* root = readBlock();
+		if (!root)
+		{
+			return false;
 		}
 
-	} while (*_cursor);
+		_chemNode->setRoot(root);
+
+	} while (0);
 
 	return true;
 }
 
-bool ChemDocument::readBlock(ChemNode* chemNode)
+CombineNode* ChemDocument::readBlock()
 {
-	bool endBlock = false;
 	char* ptr = (char*)_cursor;
 	char tempChar;
+
+	CombineNode* root = nullptr;
+	CombineNode* temp = nullptr;
 	
 	while (*_cursor)
 	{
@@ -84,33 +87,81 @@ bool ChemDocument::readBlock(ChemNode* chemNode)
 		if (tempChar == LEFT_PARENTHESIS)
 		{
 			_cursor++;
-		}		
+			CombineNode* child = readBlock();
+			if (!child)
+			{
+				return root;
+			}
+
+			if (root == nullptr)
+			{
+				root = _chemNode->createNode("", "");
+				root->firstChild = child;
+				temp = root;
+			}
+			else
+			{
+				if (!_chemNode->addChild(temp, child))
+				{
+					return root;
+				}
+				else
+				{
+					temp = child;
+				}
+			}
+		}
 		else if (tempChar == RIGHT_PARENTHESIS)
 		{
-			endBlock = true;
 			_cursor++;
+			std::string count;
+			if (readNumber(count))
+			{
+				root->childCount = count;
+			}
+			return root;
 		}
-		break;
+		else
+		{
+			CombineNode* next = readNode();
+			if (!next)
+			{
+				return root;
+			}
+			if (root == nullptr)
+			{
+				root = next;
+				temp = root;
+			}
+			else
+			{
+				if (!_chemNode->addNode(temp, next))
+				{
+					return root;
+				}
+				else
+				{
+					temp = next;
+				}
+			}
+		}		
 	}
 
-	if (_cursor - ptr == 0)
-	{
-		return false;
+	return root;
+}
+
+CombineNode* ChemDocument::readNode()
+{
+	std::string symbol;
+	if (!readSymbol(symbol))
+	{ 
+		return nullptr;
 	}
 
-	if (endBlock)
-	{
-		return true;
-	}
-	ChemNode* newBlockNode = new ChemNode();
-	if (readExpression(newBlockNode))
-	{
-		chemNode->appendNode(newBlockNode);
-		delete newBlockNode;
-		return true;
-	}
+	std::string count;
+	readNumber(count);
 
-	return false;
+	return _chemNode->createNode(symbol, count);
 }
 
 bool ChemDocument::readSymbol(std::string& symbol)

@@ -33,6 +33,7 @@
     <ClCompile Include="PeriodicTable\PeriodicTable.cpp">
       <Filter>PeriodicTable</Filter>
     </ClCompile>
+    <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Base\Molecule.h">

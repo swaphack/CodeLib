@@ -70,6 +70,7 @@
     <ClCompile Include="Base\Molecule.cpp" />
     <ClCompile Include="Expression\ChemDocumnet.cpp" />
     <ClCompile Include="Expression\ChemNode.cpp" />
+    <ClCompile Include="main.cpp" />
     <ClCompile Include="PeriodicTable\PeriodicTable.cpp" />
   </ItemGroup>
   <ItemGroup>

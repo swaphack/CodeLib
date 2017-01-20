@@ -2,67 +2,167 @@
 
 using namespace chem;
 
-void ChemNode::appendNode(const std::string& symbol, const std::string& count)
+ChemNode::ChemNode()
+:_root(nullptr)
 {
-	if (symbol.empty())
-	{
+
+}
+
+ChemNode::~ChemNode()
+{
+	this->disponse();
+}
+
+void ChemNode::setRoot(CombineNode* node)
+{
+	if (node == nullptr)
+	{ 
 		return;
 	}
 
-	AtomNode* node = new AtomNode();
-	node->symbol = symbol;
-	node->count = count.empty() ? "1" : count;
+	this->disponse();
 
-	this->appendNode(node);
+	_root = node;
 }
 
-void ChemNode::appendNode(const AtomNode* node)
+CombineNode* ChemNode::createRoot(const std::string& symbol, const std::string& count)
 {
-	if (node == nullptr) 
-	{
-		return;
-	}
+	_root = createNode(symbol, count);
 
-	MoleculeNode* combineNode = new MoleculeNode();
-	combineNode->count = "1";
-	combineNode->elements.push_back((AtomNode*)node);
-
-	appendNode(combineNode);
+	return _root;
 }
 
-void ChemNode::appendNode(const CombineNode* node)
+CombineNode* ChemNode::createNode(const std::string& symbol, const std::string& count)
+{
+	AtomNode* value = new AtomNode(); 
+	value->symbol = symbol;
+	value->count = count;
+
+	CombineNode* node = new CombineNode();
+	node->value = value;
+
+	return node;
+}
+
+bool ChemNode::disponseNode(CombineNode* node)
 {
 	if (node == nullptr)
 	{
-		return;
+		return false;
 	}
+	
+	if (node->value)
+	{
+		delete node->value;
+		node->value = nullptr;
+	}
+	delete node;
+	node = nullptr;
 
-	CombineNodes.push_back((CombineNode*)node);
+	return true;
 }
 
-void ChemNode::appendNode(const ChemNode* node)
+bool ChemNode::addNode(CombineNode* previous, CombineNode* next)
 {
-	if (node == nullptr)
+	if (previous == nullptr || next == nullptr)
 	{
-		return;
+		return false;
 	}
 
-	std::vector<CombineNode*>::const_iterator iter = node->CombineNodes.begin();
-	while (iter != node->CombineNodes.end())
+	if (previous->next != nullptr)
 	{
-		this->appendNode(*iter);
-		iter++;
+		return false;
 	}
+
+	previous->next = next;
+
+	return true;
+}
+
+bool ChemNode::addChild(CombineNode* parent, CombineNode* child)
+{
+	if (parent == nullptr || child == nullptr)
+	{
+		return false;
+	}
+
+	if (parent->firstChild != nullptr)
+	{
+		return false;
+	}
+
+	parent->firstChild = child;
+
+	return true;
 }
 
 void ChemNode::disponse()
 {
-	std::vector<CombineNode*>::iterator iter = CombineNodes.begin();
-	while (iter != CombineNodes.end())
+	if (_root == nullptr)
 	{
-		delete *iter;
-		iter++;
+		return;
 	}
 
-	CombineNodes.clear();
+	disponseTree(_root);
+	_root = nullptr;
 }
+
+void ChemNode::foreach(const LookNodeHandler& handler)
+{
+	if (handler == nullptr || _root == nullptr)
+	{
+		return;
+	}
+	
+	foreachTree(_root, handler);
+}
+
+bool ChemNode::disponseTree(CombineNode* node)
+{
+	if (node == nullptr)
+	{
+		return false;
+	}
+
+	CombineNode* current = node;
+	CombineNode* last = nullptr;
+	while (current != nullptr)
+	{
+		disponseTree(current->firstChild);
+		delete current->value;
+		last = current;
+		current = last->next;
+		delete last;
+	}
+
+	return true;
+}
+
+void ChemNode::foreachTree(CombineNode* node, const LookNodeHandler& handler)
+{
+	if (node == nullptr || handler == nullptr)
+	{
+		return;
+	}
+
+	CombineNode* current = node;
+
+	while (current != nullptr)
+	{
+		if (current->firstChild)
+		{
+			int count = atoi(current->childCount.c_str());
+			for (int i = 0; i < count; i++)
+			{
+				foreachTree(current->firstChild, handler);
+			}
+		}
+		if (current->value)
+		{
+			handler(current->value);
+		}
+		current = current->next;
+	}
+}
+
+

@@ -43,11 +43,11 @@ void Molecule::parseConstitution()
 	}
 
 	const Element* pElement = nullptr;
-	pNode->foreach([&](const std::string& symbol, const std::string& number){
-		pElement = PeriodicTable::getInstance()->getElementBySymbol(symbol.c_str());
+	pNode->foreach([&](const AtomNode* value){
+		pElement = PeriodicTable::getInstance()->getElementBySymbol(value->symbol.c_str());
 		if (pElement)
 		{
-			_elements[pElement->ID] += atoi(number.c_str());
+			_elements[pElement->ID] += atoi(value->count.c_str());
 		}
 	});
 

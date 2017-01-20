@@ -14,53 +14,78 @@ namespace chem
 		std::string symbol;
 		// 数量
 		std::string count;
-	};
 
-	// 分子节点
-	struct MoleculeNode
-	{
-		// 组合的元素
-		std::vector<AtomNode*> elements;
-		// 数量
-		std::string count;
-	};
-
-	// 离子节点
-	struct IonNode : public MoleculeNode
-	{
-		// 电子数
-		std::string electron;
+		AtomNode() :count("1"){}
 	};
 
 	// 组合体节点
 	struct CombineNode
 	{
-		// 串行节点
-		std::vector<MoleculeNode*> SequenceNodeAry;
-		// 并行节点
-		std::stack<MoleculeNode*> SpawnNodeAry;
+		// 当前节点的值
+		AtomNode* value;
+		// 下一个相邻节点
+		CombineNode* next;
+		// 第一个子节点
+		CombineNode* firstChild;
+		// 数量
+		std::string childCount;
+
+		CombineNode() :value(nullptr), next(nullptr), firstChild(nullptr), childCount("1")
+		{}
 	};
+
+	typedef std::function<void(const AtomNode* value)> LookNodeHandler;
 
 	// 化学式节点
 	class ChemNode
 	{
+	public: 
+		ChemNode();
+		~ChemNode();
 	public:
-		// 各个节点
-		std::vector<CombineNode*> CombineNodes;
-	public:
-		// 在尾部添加一个元素
-		void appendNode(const std::string& symbol, const std::string& count);
-		// 在尾部添加一个元素
-		void appendNode(const AtomNode* node);
-		// 在尾部添加一个元素
-		void appendNode(const MoleculeNode* node);
-		// 在尾部添加一个元素
-		void appendNode(const IonNode* node);
-		// 在尾部添加一个组合体
-		void appendNode(const CombineNode* node);
-		// 在尾部添加化学式节点
-		void appendNode(const ChemNode* node);
-		// 销毁
+		/**
+		*	设置根节点
+		*/
+		void setRoot(CombineNode* node);
+		/**
+		*	创建根节点
+		*/
+		CombineNode* createRoot(const std::string& symbol, const std::string& count);
+		/**
+		*	创建一个节点
+		*/
+		CombineNode* createNode(const std::string& symbol, const std::string& count);
+		/**
+		*	销毁一个节点
+		*/
+		bool disponseNode(CombineNode* node);
+		/**
+		*	追加一个节点
+		*/
+		bool addNode(CombineNode* previous, CombineNode* next);
+		/**
+		*	添加一个子节点
+		*/
+		bool addChild(CombineNode* parent, CombineNode* child);
+		/**
+		*	销毁当前节点
+		*/
 		void disponse();
+		/**
+		*	遍历节点
+		*/
+		void foreach(const LookNodeHandler& handler);
+	private:
+		/**
+		*	级联销毁一个节点
+		*/
+		bool disponseTree(CombineNode* node);
+		/**
+		*	遍历节点
+		*/
+		void foreachTree(CombineNode* node, const LookNodeHandler& handler);
+	private:
+		// 根节点
+		CombineNode* _root;
 	};
 }
