@@ -58,7 +58,7 @@ namespace chem
 		/**
 		*	销毁一个节点
 		*/
-		bool disponseNode(CombineNode* node);
+		bool disposeNode(CombineNode* node);
 		/**
 		*	追加一个节点
 		*/
@@ -70,7 +70,7 @@ namespace chem
 		/**
 		*	销毁当前节点
 		*/
-		void disponse();
+		void dispose();
 		/**
 		*	遍历节点
 		*/
@@ -79,7 +79,7 @@ namespace chem
 		/**
 		*	级联销毁一个节点
 		*/
-		bool disponseTree(CombineNode* node);
+		bool disposeTree(CombineNode* node);
 		/**
 		*	遍历节点
 		*/

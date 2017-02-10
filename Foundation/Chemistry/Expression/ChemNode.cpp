@@ -10,7 +10,7 @@ ChemNode::ChemNode()
 
 ChemNode::~ChemNode()
 {
-	this->disponse();
+	this->dispose();
 }
 
 void ChemNode::setRoot(CombineNode* node)
@@ -20,7 +20,7 @@ void ChemNode::setRoot(CombineNode* node)
 		return;
 	}
 
-	this->disponse();
+	this->dispose();
 
 	_root = node;
 }
@@ -44,7 +44,7 @@ CombineNode* ChemNode::createNode(const std::string& symbol, const std::string& 
 	return node;
 }
 
-bool ChemNode::disponseNode(CombineNode* node)
+bool ChemNode::disposeNode(CombineNode* node)
 {
 	if (node == nullptr)
 	{
@@ -96,14 +96,14 @@ bool ChemNode::addChild(CombineNode* parent, CombineNode* child)
 	return true;
 }
 
-void ChemNode::disponse()
+void ChemNode::dispose()
 {
 	if (_root == nullptr)
 	{
 		return;
 	}
 
-	disponseTree(_root);
+	disposeTree(_root);
 	_root = nullptr;
 }
 
@@ -117,7 +117,7 @@ void ChemNode::foreach(const LookNodeHandler& handler)
 	foreachTree(_root, handler);
 }
 
-bool ChemNode::disponseTree(CombineNode* node)
+bool ChemNode::disposeTree(CombineNode* node)
 {
 	if (node == nullptr)
 	{
@@ -128,7 +128,7 @@ bool ChemNode::disponseTree(CombineNode* node)
 	CombineNode* last = nullptr;
 	while (current != nullptr)
 	{
-		disponseTree(current->firstChild);
+		disposeTree(current->firstChild);
 		delete current->value;
 		last = current;
 		current = last->next;

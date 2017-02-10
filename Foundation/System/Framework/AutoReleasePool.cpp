@@ -59,7 +59,7 @@ void AutoReleasePool::checkAutoRelease()
 
 	while (roIter != removeObjects.end())
 	{
-		(*roIter)->disponse();
+		(*roIter)->dispose();
 		roIter++;
 	}
 }

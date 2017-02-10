@@ -12,7 +12,7 @@ ResourceMgr::ResourceMgr()
 
 ResourceMgr::~ResourceMgr()
 {
-	this->disponse();
+	this->dispose();
 }
 Resource* ResourceMgr::getResource(int type)
 {
@@ -51,12 +51,12 @@ void ResourceMgr::removeMethod(int type)
 
 void ResourceMgr::init()
 {
-	this->disponse();
+	this->dispose();
 	_getResMethods[ERT_LOCAL] = new	LocalResource();
 	_getResMethods[ERT_REMOTE] = new RemoteResource();
 }
 
-void ResourceMgr::disponse()
+void ResourceMgr::dispose()
 {
 	std::map<int, IResource*>::iterator iter = _getResMethods.begin();
 	while (iter != _getResMethods.end())

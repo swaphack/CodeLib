@@ -15,7 +15,7 @@ namespace sys
 		// 减少引用次数
 		void release();
 		// 销毁
-		void disponse();
+		void dispose();
 		// 自动释放，需要调用G_AUTORELEASEPOOL的管理
 		void autoRelease();
 	public:

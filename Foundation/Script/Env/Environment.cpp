@@ -50,7 +50,7 @@ void Environment::removeVariable(const char* name)
 		return;
 	}
 
-	iter->second->disponse();
+	iter->second->dispose();
 	m_pVariables.erase(iter);
 }
 
@@ -107,7 +107,7 @@ Variable* Environment::getVariable(const char* name)
 // 		return;
 // 	}
 // 
-// 	iter->second->disponse();
+// 	iter->second->dispose();
 // 	m_pStructs.erase(iter);
 // }
 // 
@@ -164,7 +164,7 @@ void Environment::removeFunction(const char* name)
 		return;
 	}
 
-	iter->second->disponse();
+	iter->second->dispose();
 	m_pFunctions.erase(iter);
 }
 

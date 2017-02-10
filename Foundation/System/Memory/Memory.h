@@ -22,7 +22,7 @@ namespace sys
 		// 销毁一个缓存
 		void destory(const char* name);
 	protected:
-		void disponse();
+		void dispose();
 	private:
 		// 已分配的缓存
 		std::map<std::string, PtrCache*> _caches;

@@ -57,7 +57,7 @@ void Scope::removeChild(const char* name)
 		return;
 	}
 
-	pScope->disponse();
+	pScope->dispose();
 
 	m_pChildren.erase(name);
 }
@@ -67,7 +67,7 @@ void Scope::removeAllChildren()
 	Scopes::iterator iter = m_pChildren.begin();
 	while (iter != m_pChildren.end())
 	{
-		iter->second->disponse();
+		iter->second->dispose();
 		iter++;
 	}
 
@@ -125,7 +125,7 @@ void Scope::removeMember(const char* name)
 		return;
 	}
 
-	iter->second->disponse();
+	iter->second->dispose();
 	m_pMembers.erase(iter);
 }
 
@@ -177,10 +177,10 @@ bool Scope::call(std::vector<Variable*>& inputs, std::vector<Variable*>& outputs
 	return m_pHandler(inputs, outputs);
 }
 
-void Scope::disponse()
+void Scope::dispose()
 {
 	removeAllChildren();
 	removeAllMembers();
 	
-	Base::disponse();
+	Base::dispose();
 }

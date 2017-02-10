@@ -13,7 +13,7 @@ Memory::Memory()
 
 Memory::~Memory()
 {
-	this->disponse();
+	this->dispose();
 
 	SAFE_DELETE(s_pMemory);
 }
@@ -58,7 +58,7 @@ void Memory::destory(const char* name)
 	SAFE_DELETE(pCache);
 }
 
-void Memory::disponse()
+void Memory::dispose()
 {
 	std::map<std::string, PtrCache*>::iterator iter = _caches.begin();
 	while (iter != _caches.end())

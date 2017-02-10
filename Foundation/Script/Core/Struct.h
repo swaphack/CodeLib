@@ -31,7 +31,7 @@ namespace script
 		// 调用
 		virtual bool callFunction(const char* pFuncName, std::vector<Variable*>& inputs, std::vector<Variable*>& outputs);
 		// 销毁
-		virtual void disponse();
+		virtual void dispose();
 	public: // 覆盖
 		// 分配新的内存，为变量赋值
 		Struct* alloct(const char* name);

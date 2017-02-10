@@ -47,7 +47,7 @@ namespace script
 		virtual bool call(std::vector<Variable*>& inputs, std::vector<Variable*>& outputs);
 
 		// 离开作用域后，移除所有成员信息
-		virtual void disponse();
+		virtual void dispose();
 	private:
 		typedef std::map<std::string, Scope*> Scopes;
 		typedef std::map<std::string, Variable*> Members;

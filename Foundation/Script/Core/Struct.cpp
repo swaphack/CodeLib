@@ -38,7 +38,7 @@ void Struct::removeMember(const char* name)
 		return;
 	}
 
-	iter->second->disponse();
+	iter->second->dispose();
 	m_pMembers.erase(iter);
 }
 
@@ -112,10 +112,10 @@ bool Struct::callFunction(const char* pFuncName, std::vector<Variable*>& inputs,
 	return false;
 }
 
-void Struct::disponse()
+void Struct::dispose()
 {
 	removeAllMembers();
-	Variable::disponse();
+	Variable::dispose();
 }
 
 Struct* Struct::clone()

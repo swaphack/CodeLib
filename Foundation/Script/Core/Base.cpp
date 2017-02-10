@@ -37,7 +37,7 @@ void Base::setName(const char* name)
 	}
 }
 
-void Base::disponse()
+void Base::dispose()
 {
 	delete this;
 }

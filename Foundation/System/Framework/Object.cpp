@@ -36,11 +36,11 @@ void Object::release()
 	this->RetainCount--;
 	if (this->RetainCount <= 0)
 	{
-		this->disponse();
+		this->dispose();
 	}
 }
 
-void Object::disponse()
+void Object::dispose()
 {
 	delete this;
 }

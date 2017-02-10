@@ -21,7 +21,7 @@ WebApplication::WebApplication( const char* ip, int port, int maxWaitCount )
 
 WebApplication::~WebApplication()
 {
-	this->disponse();
+	this->dispose();
 
 	sys::Socket::ReleaseSockModule();
 

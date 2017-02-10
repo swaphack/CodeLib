@@ -52,7 +52,7 @@ void Variable::removeFunction(const char* name)
 		return;
 	}
 
-	iter->second->disponse();
+	iter->second->dispose();
 	m_pFunctions.erase(iter);
 }
 
@@ -100,11 +100,11 @@ bool Variable::callFunction(const char* pFuncName, std::vector<Variable*>& input
 	return pFunc->call(inputs, outputs);
 }
 
-void Variable::disponse()
+void Variable::dispose()
 {
 	removeAllFunctions();
 
-	Base::disponse();
+	Base::dispose();
 }
 
 Variable* Variable::clone()

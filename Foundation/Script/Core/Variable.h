@@ -52,7 +52,7 @@ namespace script
 		// 调用操作符函数
 		virtual bool callOperator(const char* pOperatorName, std::vector<Variable*>& inputs, std::vector<Variable*>& outputs) { return false; }
 		// 销毁
-		virtual void disponse();
+		virtual void dispose();
 	public: // 覆盖
 		// 克隆,继承
 		Variable* clone();

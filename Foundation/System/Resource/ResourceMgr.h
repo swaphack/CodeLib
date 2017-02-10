@@ -26,7 +26,7 @@ namespace sys
 		// 初始化
 		void init();
 		// 销毁
-		void disponse();
+		void dispose();
 	private:
 		// 资源途径类型
 		int _resType;

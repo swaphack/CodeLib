@@ -34,7 +34,7 @@ namespace script
 		// 设置名称
 		void setName(const char* name);
 		// 销毁
-		virtual void disponse();
+		virtual void dispose();
 	private:
 		std::string m_strName;
 		// 访问域类型
