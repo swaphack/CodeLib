@@ -89,13 +89,16 @@ bool SymbolDelegate::match(Token::const_iterator begin, Token::const_iterator en
 {
 	offset = begin;
 
-	ASTNode* pLastNode = &m_rASTTemplate;
+	ASTNode* pTemplateNode = &m_rASTTemplate;
 
 	while (offset != end)
 	{
+		
 
 		offset++;
 	}
+
+	return true;
 }
 
 ASTNode* SymbolDelegate::createASTNode(Token::const_iterator begin, Token::const_iterator end, Token::const_iterator& offset)

@@ -227,6 +227,9 @@
     <ClCompile Include="Compile\SymbolHandler.cpp">
       <Filter>Compile\Parse</Filter>
     </ClCompile>
+    <ClCompile Include="Compile\ASTNode.cpp">
+      <Filter>Compile\Parse</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resource\main.script">

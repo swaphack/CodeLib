@@ -5,8 +5,9 @@
 namespace script
 {
 	// 语法节点
-	struct ASTNode
+	class ASTNode
 	{
+	public:
 		// 节点值
 		std::string value;
 		// 左节点
@@ -19,47 +20,18 @@ namespace script
 		bool builtin;
 		// 标记位
 		int flag;
-
-		ASTNode() 
-			:left(nullptr), right(nullptr) 
-			, isSymbol(false), builtin(false)
-			, flag(0){}
-		~ASTNode() { clear(); }
-
+	public:
+		ASTNode();
+		~ASTNode();
+	public:
 		// 清理节点
-		void clear()
-		{
-			cleanNode(this->left);
-			cleanNode(this->right);
-		}
-
+		void clear();
 		// 重置标记位
-		void resetFlag()
-		{
-			resetFlag(this);
-		}
+		void resetFlag();
 	protected:
 		// 清理节点
-		void cleanNode(ASTNode* ptr)
-		{
-			if (ptr == nullptr)
-				return;
+		void cleanNode(ASTNode* ptr);
 
-			cleanNode(ptr->left);
-			cleanNode(ptr->right);
-
-			delete ptr;
-		}
-
-		void resetFlag(ASTNode* ptr)
-		{
-			if (ptr == nullptr)
-				return;
-
-			resetFlag(ptr->left);
-			resetFlag(ptr->right);
-
-			ptr->flag = 0;
-		}
+		void resetFlag(ASTNode* ptr);
 	};
 }

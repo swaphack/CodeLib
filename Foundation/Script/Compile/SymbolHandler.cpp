@@ -82,24 +82,13 @@ SymbolDelegate* SymbolHandler::getSymbolDelegate(const char* name)
 	return iter->second;
 }
 
-ASTNode* SymbolHandler::match(Token::const_iterator begin, Token::const_iterator end, Token::const_iterator& offset)
-{
-	SymbolDelegates::iterator iter = m_mSymbolDelegates.begin();
-
-	while (iter != m_mSymbolDelegates.end())
-	{
-		if (iter->second->match(begin, end, offset))
-		{
-			return iter->second->createASTNode(begin, end, offset);
-		}
-		iter++;
-	}
-
-	return nullptr;
-}
-
 bool SymbolHandler::load(const char* filepath)
 {
+	if (filepath == nullptr)
+	{
+		return false;
+	}
+
 	tinyxml2::XMLDocument document;
 	tinyxml2::XMLError error = document.LoadFile(filepath);
 	if (error != tinyxml2::XML_SUCCESS)

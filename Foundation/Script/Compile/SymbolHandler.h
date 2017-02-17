@@ -24,8 +24,6 @@ namespace script
 		void removeAllSymbolDelegates();
 		// 查找解析
 		SymbolDelegate* getSymbolDelegate(const char* name);
-		// 匹配解析
-		ASTNode* match(Token::const_iterator begin, Token::const_iterator end, Token::const_iterator& offset);
 		// 加载配置文件
 		bool load(const char* filepath);
 	private:

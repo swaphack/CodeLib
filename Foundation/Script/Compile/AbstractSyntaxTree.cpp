@@ -21,9 +21,9 @@ bool AbstractSyntaxTree::load(Token::const_iterator begin, Token::const_iterator
 	Token::const_iterator iter = begin;
 	while (iter != end)
 	{
-		if (createBlock(pLastNode))
-		{
-		}
+// 		if (createBlock(pLastNode))
+// 		{
+// 		}
 
 		iter++;
 	}
@@ -56,9 +56,9 @@ bool AbstractSyntaxTree::createExpression(ASTNode* node, Token::const_iterator& 
 	{
 
 	}
-	else if ()
-	{
-	}
+// 	else if ()
+// 	{
+// 	}
 	else
 	{
 		pDelegate = SymbolHandler::getInstance()->getSymbolDelegate(strValue.c_str());
@@ -70,6 +70,7 @@ bool AbstractSyntaxTree::createExpression(ASTNode* node, Token::const_iterator& 
 	}
 
 
+	return true;
 }
 
 bool AbstractSyntaxTree::createBlock(ASTNode* node, Token::const_iterator& iter, Token::const_iterator& end)

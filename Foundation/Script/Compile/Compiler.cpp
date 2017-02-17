@@ -31,9 +31,12 @@ bool Compiler::compile(CompilerDocument* document)
 		return false;
 	}
 
+	std::vector<ASTNode*> nodeAry;
+
 	if (!m_pParser->parse(
 		m_pScanner->getTokenTable()->tokenBegin(), 
-		m_pScanner->getTokenTable()->tokenEnd()))
+		m_pScanner->getTokenTable()->tokenEnd(), 
+		nodeAry))
 	{
 		return false;
 	}

@@ -53,6 +53,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Compile\AbstractSyntaxTree.cpp" />
+    <ClCompile Include="Compile\ASTNode.cpp" />
     <ClCompile Include="Compile\Compiler.cpp" />
     <ClCompile Include="Compile\Error.cpp" />
     <ClCompile Include="Compile\SymbolDelegate.cpp" />
