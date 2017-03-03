@@ -17,7 +17,7 @@ namespace render
 	public:
 		virtual void updateCamera();
 		// 相机对准指定位置
-		virtual void lookAt(const sys::Vector& position);
+		virtual void lookAt(const sys::Vector3& position);
 	protected:
 		virtual void onSpaceChange();
 	protected:
@@ -28,7 +28,7 @@ namespace render
 		// 摄像机焦距
 		//sys::Vector _scale;
 		// opengl 位置
-		sys::Vector _obPosition;
+		sys::Vector3 _obPosition;
 	};
 	// 2d 摄像头
 	class Camera2D : public Camera

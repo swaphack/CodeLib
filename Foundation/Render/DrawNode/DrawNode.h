@@ -19,7 +19,7 @@ namespace render
 		void setDrawMode(int mode);
 		int getDrawMode();
 		// 添加一个点坐标
-		void appendPoint(const sys::Vector& point);
+		void appendPoint(const sys::Vector3& point);
 		// 移除所有点坐标
 		void removeAllPoints();
 	protected:
@@ -31,6 +31,6 @@ namespace render
 		// 模式
 		int _drawMode;
 		// 点坐标
-		std::vector<sys::Vector> _points;
+		std::vector<sys::Vector3> _points;
 	};
 }

@@ -40,7 +40,7 @@ void ParticleNode::update(float interval)
 	_rotation.add(_angleAcceleration);
 
 	convertColor4FTo4B(_colorInit, _color);
-	TextureTool::setTexture2DVertexts(&_texRect, sys::Vector::Zero, _volume, _anchor);
+	TextureTool::setTexture2DVertexts(&_texRect, sys::Vector3::Zero, _volume, _anchor);
 
 	Tool::convertToOGLPoisition(_position, _obPosition);
 }
@@ -55,7 +55,7 @@ void ParticleNode::initSelf()
 	sys::Rect rect = sys::Rect(0, 0, _volume.width, _volume.height);
 
 	TextureTool::setTexture2DCoords(&_texRect, size, rect);
-	TextureTool::setTexture2DVertexts(&_texRect, sys::Vector::Zero, _volume, _anchor);
+	TextureTool::setTexture2DVertexts(&_texRect, sys::Vector3::Zero, _volume, _anchor);
 }
 
 //////////////////////////////////////////////////////////////////////////

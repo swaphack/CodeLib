@@ -14,7 +14,12 @@ namespace sys
 	// 调整限定值得区间
 #define ADJUST_LIMIT_VALUE_RANGE(r, min, max) { if (r < min) r = min; if (r > max) r = max; }
 
+
+
 #ifndef PI
 #define PI 3.14159265358979323846f
 #endif
+
+#define ANGLE_TO_RADIAN(x) (x * PI / 180)
+#define RADIAN_TO_ANGLE(x) (x * 180 / PI)
 }

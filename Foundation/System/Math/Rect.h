@@ -2,6 +2,10 @@
 
 namespace sys
 {
+	/**
+	*	矩形框
+	*	已左下角为原点
+	*/
 	struct Rect
 	{
 		float x;

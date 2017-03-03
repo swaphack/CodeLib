@@ -40,7 +40,7 @@ namespace render
 		// 六个面的纹理
 		TexFrame* _faceFrames[6];
 		// 法线
-		sys::Vector _normal[6];
+		sys::Vector3 _normal[6];
 		// 纹理坐标
 		TextureCube _texCube;
 	};

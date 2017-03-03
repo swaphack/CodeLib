@@ -31,7 +31,7 @@ void Camera::updateCamera()
 	
 }
 
-void Camera::lookAt(const sys::Vector& position)
+void Camera::lookAt(const sys::Vector3& position)
 {
 	_position = position;
 	_position.mult(-1);

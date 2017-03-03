@@ -62,7 +62,7 @@ void MoveToAction::setDestination(float x, float y, float z)
 	_destination.z = z;
 }
 
-sys::Vector MoveToAction::getDestination()
+sys::Vector3 MoveToAction::getDestination()
 {
 	return _destination;
 }
@@ -78,7 +78,7 @@ void MoveToAction::updateInterval(float duration)
 	}
 	if (node)
 	{
-		const sys::Vector& current = node->getPosition();
+		const sys::Vector3& current = node->getPosition();
 
 		node->setPosition(
 			current.x + _offset.x * duration / _totalInterval,
@@ -106,7 +106,7 @@ void RotateToAction::setRotation(float x, float y, float z /*= 0*/)
 	_rotation.z = z;
 }
 
-sys::Vector RotateToAction::getRotation()
+sys::Vector3 RotateToAction::getRotation()
 {
 	return _rotation;
 }
@@ -122,7 +122,7 @@ void RotateToAction::updateInterval(float duration)
 	}
 	if (node)
 	{
-		const sys::Vector& current = node->getRotation();
+		const sys::Vector3& current = node->getRotation();
 
 		node->setRotation(
 			current.x + _offset.x * duration / _totalInterval,
@@ -150,7 +150,7 @@ void ScaleToAction::setScale(float x, float y, float z /*= 0*/)
 	_scale.z = z;
 }
 
-sys::Vector ScaleToAction::getScale()
+sys::Vector3 ScaleToAction::getScale()
 {
 	return _scale;
 }
@@ -166,7 +166,7 @@ void ScaleToAction::updateInterval(float duration)
 	}
 	if (node)
 	{
-		const sys::Vector& current = node->getPosition();
+		const sys::Vector3& current = node->getPosition();
 
 		node->setScale(
 			current.x + _offset.x * duration / _totalInterval,

@@ -35,16 +35,16 @@ namespace render
 	public:
 		// 目标位置
 		void setDestination(float x, float y, float z = 0);
-		sys::Vector getDestination();
+		sys::Vector3 getDestination();
 	protected:
 		virtual void updateInterval(float duration);
 	protected:
 		// 初始位置
-		sys::Vector _src;
+		sys::Vector3 _src;
 		// 目标位置
-		sys::Vector _destination;
+		sys::Vector3 _destination;
 		// 偏移总量
-		sys::Vector _offset;
+		sys::Vector3 _offset;
 	};
 
 	// 旋转
@@ -56,16 +56,16 @@ namespace render
 	public:
 		// 最终旋转角度
 		void setRotation(float x, float y, float z = 0);
-		sys::Vector getRotation();
+		sys::Vector3 getRotation();
 	protected:
 		virtual void updateInterval(float duration);
 	protected:
 		// 初始旋转度数
-		sys::Vector _src;
+		sys::Vector3 _src;
 		// 最终旋转角度
-		sys::Vector _rotation;
+		sys::Vector3 _rotation;
 		// 总改变量
-		sys::Vector _offset;
+		sys::Vector3 _offset;
 	};
 
 	// 缩放
@@ -76,15 +76,15 @@ namespace render
 		virtual ~ScaleToAction();
 	public:
 		void setScale(float x, float y, float z = 0);
-		sys::Vector getScale();
+		sys::Vector3 getScale();
 	protected:
 		virtual void updateInterval(float duration);
 	protected:
 		// 初始缩放比例
-		sys::Vector _src;
+		sys::Vector3 _src;
 		// 最终缩放比例
-		sys::Vector _scale;
+		sys::Vector3 _scale;
 		// 总改变量
-		sys::Vector _offset;
+		sys::Vector3 _offset;
 	};
 }

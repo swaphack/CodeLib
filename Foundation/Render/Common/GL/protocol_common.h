@@ -122,9 +122,9 @@ namespace render
 		
 		void setPosition(float x, float y, float z);
 
-		void setPosition(const sys::Vector& position);
+		void setPosition(const sys::Vector3& position);
 
-		void setPosition(const sys::Point& position);
+		void setPosition(const sys::Vector2& position);
 		// 获取坐标
 		float getPositionX();
 
@@ -132,7 +132,7 @@ namespace render
 
 		float getPositionZ();
 		
-		const sys::Vector& getPosition();
+		const sys::Vector3& getPosition();
 		// 设置缩放比
 		void setScaleX(float x);
 
@@ -142,7 +142,7 @@ namespace render
 
 		void setScale(float x, float y, float z);
 
-		void setScale(const sys::Vector& scale);
+		void setScale(const sys::Vector3& scale);
 		// 获取缩放比
 		float getScaleX();
 
@@ -150,7 +150,7 @@ namespace render
 
 		float getScaleZ();
 
-		const sys::Vector& getScale();
+		const sys::Vector3& getScale();
 		// 设置旋转系数
 		void setRotationX(float x);
 
@@ -160,7 +160,7 @@ namespace render
 
 		void setRotation(float x, float y, float z);
 
-		void setRotation(const sys::Vector& rotation);
+		void setRotation(const sys::Vector3& rotation);
 		// 获取旋转系数
 		float getRotationX();
 
@@ -168,16 +168,16 @@ namespace render
 
 		float getRotationZ();
 
-		const sys::Vector& getRotation();
+		const sys::Vector3& getRotation();
 	public:
 		virtual void onSpaceChange() {}
 	protected:
 		// 位置坐标
-		sys::Vector _position;
+		sys::Vector3 _position;
 		// 缩放比
-		sys::Vector _scale;
+		sys::Vector3 _scale;
 		// 旋转
-		sys::Vector _rotation;
+		sys::Vector3 _rotation;
 	private:
 	};
 
@@ -194,9 +194,9 @@ namespace render
 		// 设置锚点
 		void setAnchorPoint(float x, float y);
 		// 设置锚点
-		void setAnchorPoint(const sys::Vector& anchor);
+		void setAnchorPoint(const sys::Vector3& anchor);
 		// 获取锚点
-		const sys::Vector& getAnchorPoint();
+		const sys::Vector3& getAnchorPoint();
 		// 设置宽度
 		void setWidth(float w);
 		// 设置高度
@@ -225,7 +225,7 @@ namespace render
 		virtual void onBodyChange() {}
 	protected:
 		// 锚点
-		sys::Vector _anchor;
+		sys::Vector3 _anchor;
 		// 体积
 		sys::Volume _volume;
 	private:

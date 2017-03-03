@@ -31,7 +31,7 @@ void DCDraw::draw()
 
 	glBegin(Type);
 
-	std::vector<sys::Vector>::const_iterator iter = Points.begin();
+	std::vector<sys::Vector3>::const_iterator iter = Points.begin();
 	while (iter != Points.end())
 	{
 		glVertex3f((*iter).x, (*iter).y, (*iter).z);
@@ -43,7 +43,7 @@ void DCDraw::draw()
 	glDisable(GL_BLEND);
 }
 
-DCDraw* DCDraw::create(int type, const std::vector<sys::Vector>& points, float width, const sys::Color4B& color, uchar opacity, const BlendParam& blend)
+DCDraw* DCDraw::create(int type, const std::vector<sys::Vector3>& points, float width, const sys::Color4B& color, uchar opacity, const BlendParam& blend)
 {
 	DCDraw* pDraw = sys::Instance<DCDraw>::getInstance();
 	pDraw->Type = type;

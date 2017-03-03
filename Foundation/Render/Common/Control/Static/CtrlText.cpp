@@ -28,9 +28,9 @@ bool CtrlText::init()
 		if (isCounter())TextureTool::setTexture2DCounterCoords(&_texRect, size, _texFrame->getRect());
 		else TextureTool::setTexture2DCoords(&_texRect, size, _texFrame->getRect());
 
-		sys::Vector orgin = sys::Vector::Zero;
+		sys::Vector3 orgin = sys::Vector3::Zero;
 		sys::Volume volume = sys::Volume(static_cast<float>(texture->getWidth()), static_cast<float>(texture->getHeight()));
-		sys::Vector anchor = sys::Vector(0.5f, 0.5f, 0.5f);
+		sys::Vector3 anchor = sys::Vector3(0.5f, 0.5f, 0.5f);
 		if (_textDefine.verticalAlignment == EVA_BOTTOM)
 		{
 		}

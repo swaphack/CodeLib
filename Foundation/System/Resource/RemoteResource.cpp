@@ -53,9 +53,9 @@ bool RemoteResource::loadFileData(const char* filename, std::string& data)
 	s_Tag++;
 	_downloadPath.insert(std::make_pair(s_Tag, fullpath));
 
-
+	OnHttpDownloadCallback handler = std::make_pair(this, (downloadCallback)&RemoteResource::onDownloadCallback);
 	HttpDownload download;
-	download.download(ip.c_str(), port, filename, this, (downloadCallback)&RemoteResource::onDownloadCallback, 1);
+	download.download(ip.c_str(), port, filename, handler, 1);
 
 	return true;
 }

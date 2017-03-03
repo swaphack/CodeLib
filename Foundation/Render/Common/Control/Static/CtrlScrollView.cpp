@@ -186,13 +186,13 @@ bool CtrlScrollView::onTouchBegan(float x, float y)
 
 void CtrlScrollView::onTouchMoved(float x, float y)
 {
-	sys::Point delta = sys::Point(x, y);
+	sys::Vector2 delta = sys::Vector2(x, y);
 	delta.sub(_touchPosition);
 
 	float offX = -getAnchorPoint().x * getWidth();
 	float offY = -getAnchorPoint().y * getHeight();
 
-	sys::Vector pos = _content->getPosition();
+	sys::Vector3 pos = _content->getPosition();
 
 	float min = 0;
 	float max = 0;
@@ -241,7 +241,7 @@ void CtrlScrollView::onTouchMoved(float x, float y)
 
 	_content->setPosition(pos);
 
-	_touchPosition = sys::Point(x, y);
+	_touchPosition = sys::Vector2(x, y);
 }
 
 void CtrlScrollView::onTouchEnded(float x, float y)

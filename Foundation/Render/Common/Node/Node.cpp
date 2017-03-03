@@ -35,7 +35,7 @@ bool Node::init()
 	// 添加属性改变监听
 	_notify->addListen(ENP_SPACE, [&](){
 		Tool::convertToOGLPoisition(_position, _obPosition);
-		Tool::calRect(sys::Vector::Zero, _volume, _anchor, _rectVertex);
+		Tool::calRect(sys::Vector3::Zero, _volume, _anchor, _rectVertex);
 		calRealSpaceInfo(); 
 	});
 
@@ -382,8 +382,8 @@ void Node::sortChildren()
 void Node::calRealSpaceInfo()
 {
 	Node* temp = this;
-	sys::Vector position;
-	sys::Vector scale = sys::Vector::One;
+	sys::Vector3 position;
+	sys::Vector3 scale = sys::Vector3::One;
 	sys::Volume volume = _volume;
 	do 
 	{

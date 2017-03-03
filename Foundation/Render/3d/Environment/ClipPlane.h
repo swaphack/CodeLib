@@ -27,7 +27,7 @@ namespace render
 		// 设置显示面法线方向
 		void setClipNormal(float x, float y, float z);
 		// 获取显示面法线方向
-		sys::Vector getClipNormal();
+		sys::Vector3 getClipNormal();
 	protected:
 		// 裁剪平面显示的法线方向
 		double _clipNormal[4];

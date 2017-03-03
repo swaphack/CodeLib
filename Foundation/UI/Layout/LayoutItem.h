@@ -41,11 +41,11 @@ namespace ui
 		/**
 		*	设置几何位置
 		*/
-		void setOrgin(const sys::Point& position);
+		void setOrgin(const sys::Vector2& position);
 		/**
 		*	获取几何位置
 		*/
-		sys::Point getOrgin();
+		sys::Vector2 getOrgin();
 		/**
 		*	设置几何面积
 		*/

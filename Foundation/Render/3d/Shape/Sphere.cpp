@@ -110,7 +110,7 @@ void Sphere::draw()
 	CtrlModel::draw();
 
 	const sys::Volume& volume = Tool::getGLViewSize();
-	const sys::Vector& scale = getScale();
+	const sys::Vector3& scale = getScale();
 	float scaleX = scale.x * _radius / volume.width;
 	float scaleY = scale.y * _radius / volume.height;
 	float scaleZ = scale.z * _radius / volume.deep;

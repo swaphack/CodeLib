@@ -189,20 +189,20 @@ void SpaceProtocol::setPosition(float x, float y, float z)
 	onSpaceChange();
 }
 
-void SpaceProtocol::setPosition(const sys::Vector& position)
+void SpaceProtocol::setPosition(const sys::Vector3& position)
 {
 	_position = position;
 	onSpaceChange();
 }
 
-void SpaceProtocol::setPosition(const sys::Point& position)
+void SpaceProtocol::setPosition(const sys::Vector2& position)
 {
 	_position.x = position.x;
 	_position.y = position.y;
 	onSpaceChange();
 }
 
-const sys::Vector& SpaceProtocol::getPosition()
+const sys::Vector3& SpaceProtocol::getPosition()
 {
 	return _position;
 }
@@ -215,13 +215,13 @@ void SpaceProtocol::setScale(float x, float y, float z)
 	onSpaceChange();
 }
 
-void SpaceProtocol::setScale(const sys::Vector& scale)
+void SpaceProtocol::setScale(const sys::Vector3& scale)
 {
 	_scale = scale;
 	onSpaceChange();
 }
 
-const sys::Vector& SpaceProtocol::getScale()
+const sys::Vector3& SpaceProtocol::getScale()
 {
 	return _scale;
 }
@@ -234,13 +234,13 @@ void SpaceProtocol::setRotation(float x, float y, float z)
 	onSpaceChange();
 }
 
-void SpaceProtocol::setRotation(const sys::Vector& rotation)
+void SpaceProtocol::setRotation(const sys::Vector3& rotation)
 {
 	_rotation = rotation;
 	onSpaceChange();
 }
 
-const sys::Vector& SpaceProtocol::getRotation()
+const sys::Vector3& SpaceProtocol::getRotation()
 {
 	return _rotation;
 }
@@ -371,13 +371,13 @@ void BodyProtocol::setAnchorPoint(float x, float y)
 	onBodyChange();
 }
 
-void BodyProtocol::setAnchorPoint(const sys::Vector& anchor)
+void BodyProtocol::setAnchorPoint(const sys::Vector3& anchor)
 {
 	_anchor = anchor;
 	onBodyChange();
 }
 
-const sys::Vector& BodyProtocol::getAnchorPoint()
+const sys::Vector3& BodyProtocol::getAnchorPoint()
 {
 	return _anchor;
 }

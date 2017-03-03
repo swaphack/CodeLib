@@ -66,6 +66,11 @@ DBRecord* DBSheet::getRecord(int index)
 	return _records[index];
 }
 
+int DBSheet::count()
+{
+	return _records.size();
+}
+
 void DBSheet::clear()
 {
 	std::vector<DBRecord*>::iterator iter = _records.begin();

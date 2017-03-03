@@ -2,6 +2,9 @@
 
 namespace sys
 {
+	/**
+	*	Ãæ»ý
+	*/
 	struct Size
 	{
 		float width;

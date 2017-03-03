@@ -45,9 +45,9 @@ void DrawNode::initSelf()
 	Node::initSelf();
 }
 
-void DrawNode::appendPoint(const sys::Vector& point)
+void DrawNode::appendPoint(const sys::Vector3& point)
 {
-	sys::Vector pos;
+	sys::Vector3 pos;
 	Tool::convertToOGLPoisition(point, pos);
 	_points.push_back(pos);
 }

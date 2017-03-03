@@ -51,10 +51,10 @@ void WndRender::testClock()
 	pDrawNode->setDrawMode(EBM_TRIANGLE_STRIP);
 	pDrawNode->setWidth(20);
 	pDrawNode->setPosition(-400, -300, 0);
-	pDrawNode->appendPoint(sys::Vector(0, 200));
-	pDrawNode->appendPoint(sys::Vector(150, 300));
-	pDrawNode->appendPoint(sys::Vector(200, 200));
-	pDrawNode->appendPoint(sys::Vector(300, 100));
+	pDrawNode->appendPoint(sys::Vector3(0, 200));
+	pDrawNode->appendPoint(sys::Vector3(150, 300));
+	pDrawNode->appendPoint(sys::Vector3(200, 200));
+	pDrawNode->appendPoint(sys::Vector3(300, 100));
 	pDrawNode->setColor(sys::Color3B(0, 255, 0));
 
 	//pDrawNode->setRotationZ(20);
@@ -360,7 +360,7 @@ void WndRender::onTouchBegin(sys::Object* object, float x, float y)
 		return;
 	}
 
-	std::vector<sys::Vector>* pAry = new std::vector<sys::Vector>(2);
+	std::vector<sys::Vector3>* pAry = new std::vector<sys::Vector3>(2);
 	(*pAry)[0].x = pNode->getPositionX();
 	(*pAry)[0].y = pNode->getPositionY();
 
@@ -378,7 +378,7 @@ void WndRender::onTouchMove(sys::Object* object, float x, float y)
 		return;
 	}
 
-	std::vector<sys::Vector>* pAry = static_cast<std::vector<sys::Vector>*>(pNode->getUserData());
+	std::vector<sys::Vector3>* pAry = static_cast<std::vector<sys::Vector3>*>(pNode->getUserData());
 	pNode->setPosition((*pAry)[0].x + x - (*pAry)[1].x, (*pAry)[0].y + y - (*pAry)[1].y, 0);
 }
 
@@ -390,7 +390,7 @@ void WndRender::onTouchEnd(sys::Object* object, float x, float y)
 		return;
 	}
 
-	std::vector<sys::Vector>* pAry = static_cast<std::vector<sys::Vector>*>(pNode->getUserData());
+	std::vector<sys::Vector3>* pAry = static_cast<std::vector<sys::Vector3>*>(pNode->getUserData());
 	SAFE_DELETE(pAry);
 }
 

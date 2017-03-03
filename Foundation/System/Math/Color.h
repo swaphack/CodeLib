@@ -11,55 +11,36 @@ namespace sys
 		uchar green;
 		uchar blue;
 
-		Color3B() :red(COLOR_UCHAR_VALUE), green(COLOR_UCHAR_VALUE), blue(COLOR_UCHAR_VALUE){}
-		Color3B(uchar r, uchar g, uchar b) :red(r), green(g), blue(b){}
-
-		bool isEquals(const Color3B& color)
-		{
-			return red == color.red	 && green == color.green && blue == color.blue;
-		}
-
-		virtual void operator=(const Color3B& color)
-		{
-			red = color.red;
-			green = color.green;
-			blue = color.blue;
-		}
-
-		void add(const Color3B& color)
-		{
-			red += color.red;
-			green += color.green;
-			blue += color.blue;
-		}
-
-		void sub(const Color3B& color)
-		{
-			red -= color.red;
-			green -= color.green;
-			blue -= color.blue;
-		}
-
-		void mult(const Color3B& color)
-		{
-			red *= color.red;
-			green *= color.green;
-			blue *= color.blue;
-		}
-
-		void div(const Color3B& color)
-		{
-			red /= color.red;
-			green /= color.green;
-			blue /= color.blue;
-		}
-
-		void mult(const float ratio)
-		{
-			red = (uchar)(red * ratio);
-			green = (uchar)(red * ratio);
-			blue = (uchar)(red * ratio);
-		}
+		Color3B();
+		Color3B(uchar r, uchar g, uchar b);
+		/**
+		*	是否相等
+		*/
+		bool isEquals(const Color3B& color);
+		/**
+		*	重载=
+		*/
+		void operator=(const Color3B& color);
+		/**
+		*	和
+		*/
+		void add(const Color3B& color);
+		/**
+		*	差
+		*/
+		void sub(const Color3B& color);
+		/**
+		*	乘以
+		*/
+		void mult(const Color3B& color);
+		/**
+		*	除以
+		*/
+		void div(const Color3B& color);
+		/**
+		*	乘以
+		*/
+		void mult(const float ratio);
 	};
 
 	struct Color3F
@@ -68,67 +49,39 @@ namespace sys
 		float green;
 		float blue;
 
-		Color3F() :red(1), green(1), blue(1){}
-		Color3F(float r, float g, float b) :red(r), green(g), blue(b){}
+		Color3F();
+		Color3F(float r, float g, float b);
+		/**
+		*	是否相等
+		*/
+		bool isEquals(const Color3F& color);
+		/**
+		*	重载=
+		*/
+		void operator=(const Color3F& color);
+		/**
+		*	和
+		*/
+		void add(const Color3F& color);
+		/**
+		*	差
+		*/
+		void sub(const Color3F& color);
 
-		bool isEquals(const Color3F& color)
-		{
-			return red == color.red	 && green == color.green && blue == color.blue;
-		}
-
-		virtual void operator=(const Color3F& color)
-		{
-			red = color.red;
-			green = color.green;
-			blue = color.blue;
-		}
-
-		void add(const Color3F& color)
-		{
-			red += color.red;
-			green += color.green;
-			blue += color.blue;
-			adjust();
-		}
-
-		void sub(const Color3F& color)
-		{
-			red -= color.red;
-			green -= color.green;
-			blue -= color.blue;
-			adjust();
-		}
-
-		void mult(const Color3F& color)
-		{
-			red *= color.red;
-			green *= color.green;
-			blue *= color.blue;
-			adjust();
-		}
-
-		void div(const Color3F& color)
-		{
-			red /= color.red;
-			green /= color.green;
-			blue /= color.blue;
-			adjust();
-		}
-
-		void mult(const float ratio)
-		{
-			red *= ratio;
-			green *= ratio;
-			blue *= ratio;
-			adjust();
-		}
+		/**
+		*	乘以
+		*/
+		void mult(const Color3F& color);
+		/**
+		*	除以
+		*/
+		void div(const Color3F& color);
+		/**
+		*	乘以
+		*/
+		void mult(const float ratio);
 	protected:
-		void adjust()
-		{
-			ADJUST_DURATION_VALUE_RANGE(red, 0, 1, 1);
-			ADJUST_DURATION_VALUE_RANGE(green, 0, 1, 1);
-			ADJUST_DURATION_VALUE_RANGE(blue, 0, 1, 1);
-		}
+		void adjust();
 	};
 
 	struct Color4B
@@ -138,74 +91,38 @@ namespace sys
 		uchar blue;
 		uchar alpha;
 
-		Color4B() :red(COLOR_UCHAR_VALUE), green(COLOR_UCHAR_VALUE), blue(COLOR_UCHAR_VALUE), alpha(COLOR_UCHAR_VALUE){}
-		Color4B(uchar r, uchar g, uchar b, uchar a) :red(r), green(g), blue(b), alpha(a){}
-
-		bool isEquals(const Color4B& color)
-		{
-			return red == color.red	 && green == color.green && blue == color.blue && alpha == color.alpha;
-		}
-
-		virtual void operator=(const Color4B& color)
-		{
-			red = color.red;
-			green = color.green;
-			blue = color.blue;
-			alpha = color.alpha;
-		}
-
-		void add(const Color4B& color)
-		{
-			red += color.red;
-			green += color.green;
-			blue += color.blue;
-			alpha += color.alpha;
-			adjust();
-		}
-
-		void sub(const Color4B& color)
-		{
-			red -= color.red;
-			green -= color.green;
-			blue -= color.blue;
-			alpha -= color.alpha;
-			adjust();
-		}
-
-		void mult(const Color4B& color)
-		{
-			red *= color.red;
-			green *= color.green;
-			blue *= color.blue;
-			alpha *= color.alpha;
-			adjust();
-		}
-
-		void div(const Color4B& color)
-		{
-			red /= color.red;
-			green /= color.green;
-			blue /= color.blue;
-			alpha /= color.alpha;
-			adjust();
-		}
-
-		void mult(const float ratio)
-		{
-			red = (uchar)(red * ratio);
-			green = (uchar)(red * ratio);
-			blue = (uchar)(red * ratio);
-			alpha = (uchar)(red * ratio);
-			adjust();
-		}
+		Color4B();
+		Color4B(uchar r, uchar g, uchar b, uchar a);
+		/**
+		*	是否相等
+		*/
+		bool isEquals(const Color4B& color);
+		/**
+		*	重载=
+		*/
+		void operator=(const Color4B& color);
+		/**
+		*	和
+		*/
+		void add(const Color4B& color);
+		/**
+		*	差
+		*/
+		void sub(const Color4B& color);
+		/**
+		*	乘以
+		*/
+		void mult(const Color4B& color);
+		/**
+		*	除以
+		*/
+		void div(const Color4B& color);
+		/**
+		*	乘以
+		*/
+		void mult(const float ratio);
 	protected:
-		void adjust()
-		{
-			ADJUST_DURATION_VALUE_RANGE(red, 0, 255, 255);
-			ADJUST_DURATION_VALUE_RANGE(green, 0, 255, 255);
-			ADJUST_DURATION_VALUE_RANGE(blue, 0, 255, 255);
-			ADJUST_DURATION_VALUE_RANGE(alpha, 0, 255, 255);
-		}
+		void adjust();
 	};
 
 	struct Color4F
@@ -215,103 +132,45 @@ namespace sys
 		float blue;
 		float alpha;
 
-		Color4F() :red(1), green(1), blue(1), alpha(1){}
-		Color4F(float r, float g, float b, float a) :red(r), green(g), blue(b), alpha(a){}
-
-		bool isEquals(const Color4F& color)
-		{
-			return red == color.red	 && green == color.green && blue == color.blue && alpha == color.alpha;
-		}
-
-		virtual void operator=(const Color4F& color)
-		{
-			red = color.red;
-			green = color.green;
-			blue = color.blue;
-			alpha = color.alpha;
-		}
-
-		void add(const Color4F& color)
-		{
-			red += color.red;
-			green += color.green;
-			blue += color.blue;
-			alpha += color.alpha;
-			adjust();
-		}
-
-		void sub(const Color4F& color)
-		{
-			red -= color.red;
-			green -= color.green;
-			blue -= color.blue;
-			alpha -= color.alpha;
-			adjust();
-		}
-
-		void mult(const Color4F& color)
-		{
-			red *= color.red;
-			green *= color.green;
-			blue *= color.blue;
-			alpha *= color.alpha;
-			adjust();
-		}
-
-		void div(const Color4F& color)
-		{
-			red /= color.red;
-			green /= color.green;
-			blue /= color.blue;
-			alpha /= color.alpha;
-			adjust();
-		}
-
-		void mult(const float ratio)
-		{
-			red *= ratio;
-			green *= ratio;
-			blue *= ratio;
-			alpha *= ratio;
-			adjust();
-		}
+		Color4F();
+		Color4F(float r, float g, float b, float a);
+		/**
+		*	是否相等
+		*/
+		bool isEquals(const Color4F& color);
+		/**
+		*	重载=
+		*/
+		void operator=(const Color4F& color);
+		/**
+		*	和
+		*/
+		void add(const Color4F& color);
+		/**
+		*	差
+		*/
+		void sub(const Color4F& color);
+		/**
+		*	乘以
+		*/
+		void mult(const Color4F& color);
+		/**
+		*	除以
+		*/
+		void div(const Color4F& color);
+		/**
+		*	乘以
+		*/
+		void mult(const float ratio);
 	protected:
-		void adjust()
-		{
-			ADJUST_DURATION_VALUE_RANGE(red, 0, 1, 1);
-			ADJUST_DURATION_VALUE_RANGE(green, 0, 1, 1);
-			ADJUST_DURATION_VALUE_RANGE(blue, 0, 1, 1);
-			ADJUST_DURATION_VALUE_RANGE(alpha, 0, 1, 1);
-		}
+		void adjust();
 	};
 
-	static void convertColor3BTo3F(const Color3B & b3, Color3F & f3)
-	{
-		f3.red = b3.red / COLOR_FLOAT_VALUE;
-		f3.green = b3.green / COLOR_FLOAT_VALUE;
-		f3.blue = b3.blue / COLOR_FLOAT_VALUE;
-	}
+	static void convertColor3BTo3F(const Color3B & b3, Color3F & f3);
 
-	static void convertColor3FTo3B(const Color3F & f3, Color3B & b3)
-	{
-		b3.red = (uchar)(f3.red * COLOR_FLOAT_VALUE);
-		b3.green = (uchar)(f3.green * COLOR_FLOAT_VALUE);
-		b3.blue = (uchar)(f3.blue * COLOR_FLOAT_VALUE);
-	}
+	static void convertColor3FTo3B(const Color3F & f3, Color3B & b3);
 
-	static void convertColor4BTo4F(const Color4B & b4, Color4F & f4)
-	{
-		f4.red = b4.red / COLOR_FLOAT_VALUE;
-		f4.green = b4.green / COLOR_FLOAT_VALUE;
-		f4.blue = b4.blue / COLOR_FLOAT_VALUE;
-		f4.alpha = b4.alpha / COLOR_FLOAT_VALUE;
-	}
+	static void convertColor4BTo4F(const Color4B & b4, Color4F & f4);
 
-	static void convertColor4FTo4B(const Color4F & f4, Color4B & b4)
-	{
-		b4.red = (uchar)(f4.red * COLOR_FLOAT_VALUE);
-		b4.green = (uchar)(f4.green * COLOR_FLOAT_VALUE);
-		b4.blue = (uchar)(f4.blue * COLOR_FLOAT_VALUE);
-		b4.alpha = (uchar)(f4.alpha * COLOR_FLOAT_VALUE);
-	}
+	static void convertColor4FTo4B(const Color4F & f4, Color4B & b4);
 }

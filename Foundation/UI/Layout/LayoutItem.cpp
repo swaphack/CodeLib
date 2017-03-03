@@ -274,7 +274,7 @@ void LayoutItem::setWidgetGeomerty(const sys::Rect& geometry)
 		return;
 	}
 
-	const sys::Vector& anchorPoint = m_pWidget->getAnchorPoint();
+	const sys::Vector3& anchorPoint = m_pWidget->getAnchorPoint();
 
 	float posX = geometry.x + anchorPoint.x * geometry.width;
 	float posY = geometry.y + anchorPoint.y * geometry.height;

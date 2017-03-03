@@ -78,7 +78,7 @@ namespace render
 		// 项
 		std::vector<Node*> _nodes;
 		// 点击位置
-		sys::Point _touchPosition;
+		sys::Vector2 _touchPosition;
 		// 项的大小
 		sys::Size _itemSize;
 	};

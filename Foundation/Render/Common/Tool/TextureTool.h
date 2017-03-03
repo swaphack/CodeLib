@@ -33,7 +33,7 @@ namespace render
 		* @param volume 体积
 		* @param anchor 锚点
 		*/
-		static void setTexture2DVertexts(TextureRect* texRect, const sys::Vector& position, const sys::Volume& volume, const sys::Vector& anchor);
+		static void setTexture2DVertexts(TextureRect* texRect, const sys::Vector3& position, const sys::Volume& volume, const sys::Vector3& anchor);
 
 		/**
 		* 设置3d纹理坐标
@@ -51,7 +51,7 @@ namespace render
 		* @param volume 体积
 		* @param anchor 锚点
 		*/
-		static void setTexture3DVertexts(TextureCube* texcube, const sys::Vector& position, const sys::Volume& volume, const sys::Vector& anchor);
+		static void setTexture3DVertexts(TextureCube* texcube, const sys::Vector3& position, const sys::Volume& volume, const sys::Vector3& anchor);
 		/**
 		*
 		* 设置2d纹理顶点翻转

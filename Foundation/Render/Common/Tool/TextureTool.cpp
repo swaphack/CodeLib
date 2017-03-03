@@ -42,7 +42,7 @@ void TextureTool::setTexture2DCoords(TextureRect* texRect, const sys::Size& size
 	texRect->leftUp.coords.y = (rect.y + rect.height) / size.height;
 }
 
-void TextureTool::setTexture2DVertexts(TextureRect* texRect, const sys::Vector& position, const sys::Volume& volume, const sys::Vector& anchor)
+void TextureTool::setTexture2DVertexts(TextureRect* texRect, const sys::Vector3& position, const sys::Volume& volume, const sys::Vector3& anchor)
 {
 	float x = 0;
 	float y = 0;
@@ -80,12 +80,12 @@ void TextureTool::setTexture3DCoords(TextureCube* texcube, const sys::Size& size
 }
 */
 
-void TextureTool::setTexture3DVertexts(TextureCube* texcube, const sys::Vector& position, const sys::Volume& volume, const sys::Vector& anchor)
+void TextureTool::setTexture3DVertexts(TextureCube* texcube, const sys::Vector3& position, const sys::Volume& volume, const sys::Vector3& anchor)
 {
 	float x;
 	float y;
 	float z;
-	sys::Vector point;
+	sys::Vector3 point;
 
 	//------ front ------
 
@@ -174,7 +174,7 @@ void TextureTool::setTexture3DVertexts(TextureCube* texcube, const sys::Vector& 
 
 void TextureTool::setTexture2DFlip(TextureRect* texRect, bool bFlipX, bool bFlipY)
 {
-	sys::Vector temp;
+	sys::Vector3 temp;
 
 	if (bFlipX)
 	{

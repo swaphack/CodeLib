@@ -127,8 +127,8 @@ void DataBase::loadData( const char* filepath )
 		table = (DBTable*)_content.getTable(configIter->first.c_str());
 		if (table)
 		{
-			DBSheet* sheet = new DBSheet(table);
-			DBStorage::loadSheetFromFile(configIter->second.c_str(), sheet);
+			DBSheet* sheet = new DBSheet();
+			DBStorage::loadSheetFromFile(configIter->second.c_str(), table, sheet);
 			_warehouse.addSheet(configIter->first.c_str(), sheet);
 		}
 		configIter++;
@@ -155,7 +155,7 @@ void DataBase::saveData( const char* filepath )
 	{
 		std::string name = tableIter->first;
 		std::string path = fullpath + tableIter->first;
-		DBStorage::saveSheetToFile(path.c_str(), _warehouse.getSheet(name.c_str()));
+		DBStorage::saveSheetToFile(path.c_str(), &tableIter->second, _warehouse.getSheet(name.c_str()));
 		configs[name] = path;
 		tableIter++;
 	}

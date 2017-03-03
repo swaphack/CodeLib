@@ -10,6 +10,13 @@
       <Platform>Win32</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="ComputationalGeometry\ConvexHull.h" />
+    <ClInclude Include="ComputationalGeometry\VoronoiDiagram.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="ComputationalGeometry\ConvexHull.cpp" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{E088FAA5-08A2-4860-8C60-FA67DCE69E06}</ProjectGuid>
     <RootNamespace>Math</RootNamespace>
@@ -63,9 +70,6 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClInclude Include="Matrix\Matrix4.h" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

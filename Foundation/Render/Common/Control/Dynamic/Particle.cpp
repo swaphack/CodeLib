@@ -20,7 +20,7 @@ void ParticleProtocol::setSpeedAcceleration(float x, float y, float z)
 	_speedAcceleration.z = z;
 }
 
-sys::Vector ParticleProtocol::getSpeedAccelertaion()
+sys::Vector3 ParticleProtocol::getSpeedAccelertaion()
 {
 	return _speedAcceleration;
 }
@@ -40,7 +40,7 @@ void ParticleProtocol::setAngleAcceleration(float x, float y, float z)
 	_angleAcceleration.z = z;
 }
 
-sys::Vector ParticleProtocol::getAngleAcceleration()
+sys::Vector3 ParticleProtocol::getAngleAcceleration()
 {
 	return _angleAcceleration;
 }
@@ -52,7 +52,7 @@ void ParticleProtocol::setScaleAcceleration(float x, float y, float z)
 	_scaleAcceleration.z = z;
 }
 
-sys::Vector ParticleProtocol::getScaleAcceleration()
+sys::Vector3 ParticleProtocol::getScaleAcceleration()
 {
 	return _scaleAcceleration;
 }

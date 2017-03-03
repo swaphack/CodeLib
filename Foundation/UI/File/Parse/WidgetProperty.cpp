@@ -132,7 +132,7 @@ void WidgetProperty::setAttribute(const char* name, ulong value)
 	setAttribute(name, getCString("%lu", value));
 }
 
-void WidgetProperty::setAttribute(const char* name, const sys::Vector& value)
+void WidgetProperty::setAttribute(const char* name, const sys::Vector3& value)
 {
 	if (name == nullptr)
 	{
@@ -142,7 +142,7 @@ void WidgetProperty::setAttribute(const char* name, const sys::Vector& value)
 	setAttribute(name, getCString("%f,%f,%f", value.x, value.y, value.z));
 }
 
-void WidgetProperty::setAttribute(const char* name, const sys::Point& value)
+void WidgetProperty::setAttribute(const char* name, const sys::Vector2& value)
 {
 	if (name == nullptr)
 	{
@@ -368,7 +368,7 @@ bool WidgetProperty::getAttribute(const char* name, ulong& defaultValue)
 	return true;
 }
 
-bool WidgetProperty::getAttribute(const char* name, sys::Vector& defaultValue)
+bool WidgetProperty::getAttribute(const char* name, sys::Vector3& defaultValue)
 {
 	const char* value = getAttribute(name);
 	if (value == nullptr)
@@ -386,12 +386,12 @@ bool WidgetProperty::getAttribute(const char* name, sys::Vector& defaultValue)
 		return false;
 	}
 
-	defaultValue = sys::Vector(atof(params[0].getString()), atof(params[1].getString()), atof(params[2].getString()));
+	defaultValue = sys::Vector3(atof(params[0].getString()), atof(params[1].getString()), atof(params[2].getString()));
 
 	return true;
 }
 
-bool WidgetProperty::getAttribute(const char* name, sys::Point& defaultValue)
+bool WidgetProperty::getAttribute(const char* name, sys::Vector2& defaultValue)
 {
 	const char* value = getAttribute(name);
 	if (value == nullptr)
@@ -409,7 +409,7 @@ bool WidgetProperty::getAttribute(const char* name, sys::Point& defaultValue)
 		return false;
 	}
 
-	defaultValue = sys::Point(atof(params[0].getString()), atof(params[1].getString()));
+	defaultValue = sys::Vector2(atof(params[0].getString()), atof(params[1].getString()));
 
 	return true;
 }

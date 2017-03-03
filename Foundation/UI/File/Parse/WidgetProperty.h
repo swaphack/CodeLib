@@ -33,8 +33,8 @@ namespace ui
 		void setAttribute(const char* name, ushort value);
 		void setAttribute(const char* name, uint value);
 		void setAttribute(const char* name, ulong value);
-		void setAttribute(const char* name, const sys::Vector& value);
-		void setAttribute(const char* name, const sys::Point& value);
+		void setAttribute(const char* name, const sys::Vector3& value);
+		void setAttribute(const char* name, const sys::Vector2& value);
 		void setAttribute(const char* name, const sys::Color4B& value);
 		void setAttribute(const char* name, const sys::Size& value);
 		void setAttribute(const char* name, const sys::Rect& value);
@@ -58,8 +58,8 @@ namespace ui
 		bool getAttribute(const char* name, ushort& defaultValue);
 		bool getAttribute(const char* name, uint& defaultValue);
 		bool getAttribute(const char* name, ulong& defaultValue);
-		bool getAttribute(const char* name, sys::Vector& defaultValue);
-		bool getAttribute(const char* name, sys::Point& defaultValue);
+		bool getAttribute(const char* name, sys::Vector3& defaultValue);
+		bool getAttribute(const char* name, sys::Vector2& defaultValue);
 		bool getAttribute(const char* name, sys::Color4B& defaultValue);
 		bool getAttribute(const char* name, sys::Size& defaultValue);
 		bool getAttribute(const char* name, sys::Rect& defaultValue);

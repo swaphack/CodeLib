@@ -33,7 +33,7 @@ void Content::removeTarget(const char* key)
 
 Target* Content::findTarget(const char* key)
 {
-
+	return nullptr;
 }
 
 void Content::removeAllTargets()

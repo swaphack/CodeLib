@@ -17,11 +17,11 @@ namespace render
 		// 不透明度
 		//uchar Opacity;
 		// 四个顶点坐标
-		sys::Vector Position[4];
+		sys::Vector3 Position[4];
 		// 四个纹理坐标
-		sys::Vector Coord[4];
+		sys::Vector3 Coord[4];
 		// 法线
-		sys::Vector Normal;
+		sys::Vector3 Normal;
 		// 混色参数
 		BlendParam Blend;
 	public:
@@ -30,6 +30,6 @@ namespace render
 	public:
 		virtual void draw();
 	public:
-		static DCTexture* create(int textureID, const TextureRect* texRect, const sys::Color4B& color, uchar opacity, const BlendParam& blend, const sys::Vector& normal = sys::Vector::Zero);
+		static DCTexture* create(int textureID, const TextureRect* texRect, const sys::Color4B& color, uchar opacity, const BlendParam& blend, const sys::Vector3& normal = sys::Vector3::Zero);
 	};
 }

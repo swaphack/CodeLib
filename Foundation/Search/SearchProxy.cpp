@@ -34,11 +34,11 @@ std::set<Target*> SearchProxy::getTargets( const char* word )
 	{
 		ADD_SEARCH_STATISTIC((*it));
 
-		std::set<Target*>* temp = sys::Instance<Content>::getInstance()->getTargetsByKey((*it).c_str());
-		if (temp)
-		{
-			targets.insert(temp->begin(), temp->end());
-		}
+// 		std::set<Target*>* temp = sys::Instance<Content>::getInstance()->getTargetsByKey((*it).c_str());
+// 		if (temp)
+// 		{
+// 			targets.insert(temp->begin(), temp->end());
+// 		}
 		
 	}
 

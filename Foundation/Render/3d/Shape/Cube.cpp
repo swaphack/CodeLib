@@ -4,17 +4,17 @@ using namespace render;
 
 Cube::Cube()
 {
-	_normal[EMF_FRONT] = sys::Vector(0.0f, 0.0f, 1.0f);
-	_normal[EMF_BACK] = sys::Vector(0.0f, 0.0f, -1.0f);
-	_normal[EMF_TOP] = sys::Vector(0.0f, 1.0f, 0.0f);
-	_normal[EMF_BOTTOM] = sys::Vector(0.0f, -1.0f, 0.0f);
-	_normal[EMF_LEFT] = sys::Vector(0.0f, 1.0f, 0.0f);
-	_normal[EMF_RIGHT] = sys::Vector(0.0f, -1.0f, 0.0f);
+	_normal[EMF_FRONT] = sys::Vector3(0.0f, 0.0f, 1.0f);
+	_normal[EMF_BACK] = sys::Vector3(0.0f, 0.0f, -1.0f);
+	_normal[EMF_TOP] = sys::Vector3(0.0f, 1.0f, 0.0f);
+	_normal[EMF_BOTTOM] = sys::Vector3(0.0f, -1.0f, 0.0f);
+	_normal[EMF_LEFT] = sys::Vector3(0.0f, 1.0f, 0.0f);
+	_normal[EMF_RIGHT] = sys::Vector3(0.0f, -1.0f, 0.0f);
 
 	for (int i = 0; i < 6; i++)
 	{
 		_faceFrames[i] = nullptr;
-		_normal[i] = sys::Vector(0.0f, 0.0f, 1.0f);
+		_normal[i] = sys::Vector3(0.0f, 0.0f, 1.0f);
 	}
 }
 

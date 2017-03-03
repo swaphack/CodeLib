@@ -40,9 +40,9 @@ void DBStorage::writeDataConfig(const char* filename, std::map<std::string, std:
 }
 //////////////////////////////////////////////////////////////////////////
 
-void DBStorage::loadSheetFromFile( const char* filename, DBSheet* sheet )
+void DBStorage::loadSheetFromFile(const char* filename, const DBTable* table, DBSheet* sheet)
 {
-	if (filename == nullptr)
+	if (filename == nullptr || table == nullptr || sheet == nullptr)
 	{
 		return;
 	}
@@ -61,7 +61,7 @@ void DBStorage::loadSheetFromFile( const char* filename, DBSheet* sheet )
 	{
 		length = 0;
 		DBRecord* record = new DBRecord();
-		record->loadText(sheet->getTable(), data + offset, length);
+		record->loadText(table, data + offset, length);
 		sheet->addRecord(record);
 		offset += length;
 	}
@@ -69,24 +69,23 @@ void DBStorage::loadSheetFromFile( const char* filename, DBSheet* sheet )
 	SAFE_FREE(data);
 }
 
-void DBStorage::saveSheetToFile( const char* filename, const DBSheet* sheet )
+void DBStorage::saveSheetToFile(const char* filename, const DBTable* table, const DBSheet* sheet)
 {
-	if (filename == nullptr || sheet == nullptr)
+	if (filename == nullptr || table  == nullptr || sheet == nullptr)
 	{
 		return;
 	}
 
 	StreamWriter writer;
 
-	std::map<int, DBRecord*>::const_iterator beginIter = sheet->beginRecord();
-	std::map<int, DBRecord*>::const_iterator endIter = sheet->endRecord();
+	int count = ((DBSheet*)sheet)->count();
 
-	while (beginIter != endIter)
+	for (int i = 0; i < count; i++)
 	{
+		DBRecord* record = ((DBSheet*)sheet)->getRecord(i);
 		std::string data;
-		beginIter->second->makeText(sheet->getTable(), data);
+		record->makeText(table, data);
 		writer.writeString((char*)data.c_str(), (int)data.size());
-		beginIter++;
 	}
 
 	File::write(filename, writer.getData(), writer.getLength());

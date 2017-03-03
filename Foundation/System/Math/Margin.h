@@ -2,11 +2,18 @@
 
 namespace sys
 {
+	/**
+	*	±ßÔµ
+	*/
 	struct Margin
 	{
+		// ×ó±ßÁô°×
 		float left;
+		// ÓÒ±ßÁô°×
 		float right;
+		// ¶¥²¿Áô°×
 		float top;
+		// µ×²¿Áô°×
 		float bottom;
 
 		Margin() :left(0), right(0), top(0), bottom(0){}

@@ -6,7 +6,7 @@ const char* HttpTime::TIME_WKDAY[7] = { "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"
 
 const char* HttpTime::TIME_WEEKDAY[7] = { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday" };
 
-const char*HttpTime::TIME_MONTH[12] = { "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" };
+const char* HttpTime::TIME_MONTH[12] = { "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" };
 
 //////////////////////////////////////////////////////////////////////////
 /* Sun, 06 Nov 1994 08:49:37 GMT */

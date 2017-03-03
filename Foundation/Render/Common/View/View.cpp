@@ -8,7 +8,7 @@ using namespace render;
 View::View()
 :_camera(nullptr)
 {
-	_scale = sys::Vector::One;
+	_scale = sys::Vector3::One;
 }
 
 View::~View()
@@ -27,7 +27,7 @@ void View::setPosition(float x, float y)
 	_position.y = y;
 }
 
-const sys::Point& View::getPosition()
+const sys::Vector2& View::getPosition()
 {
 	return _position;
 }
@@ -64,7 +64,7 @@ void View::setScale(float x, float y, float z)
 	_camera->setScale(_scale);
 }
 
-sys::Vector View::getScale()
+sys::Vector3 View::getScale()
 {
 	return _scale;
 }

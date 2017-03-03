@@ -43,6 +43,12 @@
 // 右括号
 #define RIGHT_PARENTHESIS ')'
 
+/* Miscellaneous useful macros */
+
+#undef MAX
+#define MAX(a,b)	((a) > (b) ? (a) : (b))
+#undef MIN
+#define MIN(a,b)	((a) < (b) ? (a) : (b))
 
 // 获取格式化的字符串，无需删除
 extern const char* getCString(const char* format, ...);

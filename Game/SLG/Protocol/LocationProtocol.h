@@ -22,6 +22,6 @@ namespace slg
 	protected:
 	private:
 		// Œª÷√
-		sys::Vector _position;
+		sys::Vector3 _position;
 	};
 }

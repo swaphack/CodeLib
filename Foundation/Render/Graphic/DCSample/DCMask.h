@@ -12,7 +12,7 @@ namespace render
 	public:
 		sys::Color4F Color;
 		BlendParam Blend;
-		sys::Vector Position[4];
+		sys::Vector3 Position[4];
 	public:
 		DCMask();
 		virtual ~DCMask();

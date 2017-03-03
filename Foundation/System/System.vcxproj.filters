@@ -58,6 +58,12 @@
     <Filter Include="Process">
       <UniqueIdentifier>{c2c30974-8279-4d1b-aeab-67a2028489f7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Geometry">
+      <UniqueIdentifier>{65982d65-f080-4799-92c1-6af8eb3206d1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Collider">
+      <UniqueIdentifier>{e71cf1cf-f2c8-47b0-9fb4-30b22c1ccbfe}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Base\File.h">
@@ -217,13 +223,7 @@
     <ClInclude Include="Math\import.h">
       <Filter>Math</Filter>
     </ClInclude>
-    <ClInclude Include="Math\Vector.h">
-      <Filter>Math</Filter>
-    </ClInclude>
     <ClInclude Include="Math\Volume.h">
-      <Filter>Math</Filter>
-    </ClInclude>
-    <ClInclude Include="Math\Point.h">
       <Filter>Math</Filter>
     </ClInclude>
     <ClInclude Include="Math\Color.h">
@@ -233,9 +233,6 @@
       <Filter>Math</Filter>
     </ClInclude>
     <ClInclude Include="Math\Size.h">
-      <Filter>Math</Filter>
-    </ClInclude>
-    <ClInclude Include="Math\define.h">
       <Filter>Math</Filter>
     </ClInclude>
     <ClInclude Include="Base\Time.h">
@@ -392,6 +389,66 @@
       <Filter>DataBase</Filter>
     </ClInclude>
     <ClInclude Include="Math\Margin.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Math\Vector3.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Math\Vector2.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Math\Matrix44.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Math\Matrix33.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Math\Matrix.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Geometry\macros.h">
+      <Filter>Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="Geometry\import.h">
+      <Filter>Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="Collider\macros.h">
+      <Filter>Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="Collider\import.h">
+      <Filter>Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="Collider\AABB.h">
+      <Filter>Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="Collider\OBB.h">
+      <Filter>Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="Geometry\Polygon.h">
+      <Filter>Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="Geometry\Sphere.h">
+      <Filter>Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="Geometry\Circle.h">
+      <Filter>Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="Geometry\Triangle.h">
+      <Filter>Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="Geometry\Surface.h">
+      <Filter>Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="Geometry\Line3.h">
+      <Filter>Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="Geometry\Line2.h">
+      <Filter>Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="Geometry\Polyhedron.h">
+      <Filter>Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="Math\Quaternion.h">
       <Filter>Math</Filter>
     </ClInclude>
   </ItemGroup>
@@ -572,6 +629,48 @@
     </ClCompile>
     <ClCompile Include="DataBase\DataRecord.cpp">
       <Filter>DataBase</Filter>
+    </ClCompile>
+    <ClCompile Include="Math\Vector3.cpp">
+      <Filter>Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Math\Vector2.cpp">
+      <Filter>Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Math\Color.cpp">
+      <Filter>Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Math\Matrix.cpp">
+      <Filter>Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Math\Matrix33.cpp">
+      <Filter>Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Math\Matrix44.cpp">
+      <Filter>Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Collider\AABB.cpp">
+      <Filter>Collider</Filter>
+    </ClCompile>
+    <ClCompile Include="Collider\OBB.cpp">
+      <Filter>Collider</Filter>
+    </ClCompile>
+    <ClCompile Include="Geometry\Polygon.cpp">
+      <Filter>Geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="Geometry\Polyhedron.cpp">
+      <Filter>Geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="Geometry\Surface.cpp">
+      <Filter>Geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="Geometry\Line3.cpp">
+      <Filter>Geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="Geometry\Line2.cpp">
+      <Filter>Geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="Math\Quaternion.cpp">
+      <Filter>Math</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

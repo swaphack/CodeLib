@@ -25,7 +25,7 @@ void DCSpace::draw()
 	glScalef(Scale.x, Scale.y, Scale.z);
 }
 
-DCSpace* DCSpace::create(const sys::Vector& position, const sys::Vector& scale, const sys::Vector& rotation, bool relative)
+DCSpace* DCSpace::create(const sys::Vector3& position, const sys::Vector3& scale, const sys::Vector3& rotation, bool relative)
 {
 	DCSpace* pSpace = sys::Instance<DCSpace>::getInstance();
 	pSpace->Position = position;

@@ -25,6 +25,8 @@ namespace db
 		DBRecord* getRecord(int index);
 		bool findRecord(DBRecord* record);
 
+		int count();
+
 		// Çå³ý¼ÇÂ¼
 		void clear();
 	protected:

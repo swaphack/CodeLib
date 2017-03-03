@@ -66,13 +66,13 @@ namespace db
 		/*
 		*	加载表数据
 		*/
-		static void loadSheetFromFile(const char* filename, DBSheet* sheet);
+		static void loadSheetFromFile(const char* filename, const DBTable* table, DBSheet* sheet);
 
 		/*
 		*	保存表数据
 		*/
 		
-		static void saveSheetToFile(const char* filename, const DBSheet* sheet);
+		static void saveSheetToFile(const char* filename, const DBTable* table, const DBSheet* sheet);
 
 		/*
 		*	获取表的关键字

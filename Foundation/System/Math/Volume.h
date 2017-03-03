@@ -2,10 +2,16 @@
 
 namespace sys
 {
+	/**
+	*	体积
+	*/
 	struct Volume
 	{
+		// 宽（x）
 		float width;
+		// 高（y）
 		float height;
+		// 深度（z）
 		float deep;
 
 		Volume() :width(0), height(0), deep(0){}
@@ -25,7 +31,7 @@ namespace sys
 			deep -= volume.deep;
 		}
 
-		void mult(const Vector& scale)
+		void mult(const Vector3& scale)
 		{
 			width *= scale.x;
 			height *= scale.y;

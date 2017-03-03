@@ -2,7 +2,7 @@
 
 using namespace render;
 
-static float getArea(const sys::Vector& p1, const sys::Vector& p2, const sys::Vector& p3)
+static float getArea(const sys::Vector3& p1, const sys::Vector3& p2, const sys::Vector3& p3)
 {
 	float s = 0.5f * (p1.x*p2.y + p2.x*p3.y + p3.x*p1.y - p1.x*p3.y - p2.x*p1.y - p3.x*p2.y);
 	return abs(s);
@@ -18,7 +18,7 @@ bool RectangeVertex::containPoint(float x, float y)
 {
 	bool bRet = false;
 	
-	sys::Vector p = sys::Vector(x, y);
+	sys::Vector3 p = sys::Vector3(x, y);
 
 	float s1 = getArea(p, leftUp, leftDown);
 	float s2 = getArea(p, leftUp, rightUp);
@@ -35,9 +35,9 @@ bool RectangeVertex::containPoint(float x, float y)
 	return bRet;
 }
 
-sys::Vector RectangeVertex::getAnchorByPoint(float x, float y)
+sys::Vector3 RectangeVertex::getAnchorByPoint(float x, float y)
 {
-	sys::Vector p;
+	sys::Vector3 p;
 
 	p.x = (x - leftUp.x) / (rightUp.x - leftUp.x);
 	p.y = (y - leftUp.y) / (leftUp.y - leftDown.y);

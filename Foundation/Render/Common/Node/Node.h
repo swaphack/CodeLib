@@ -112,7 +112,7 @@ namespace render
 		virtual void onChildrenChange();
 	protected:
 		// opengl Œª÷√
-		sys::Vector _obPosition;
+		sys::Vector3 _obPosition;
 		// ±Í«©
 		int _tag;
 		// √˚≥∆

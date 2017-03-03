@@ -9,19 +9,19 @@ namespace render
 	struct RectangeVertex
 	{
 		// 左下角
-		sys::Vector leftDown;
+		sys::Vector3 leftDown;
 		// 右下角
-		sys::Vector rightDown;
+		sys::Vector3 rightDown;
 		// 右上角
-		sys::Vector rightUp;
+		sys::Vector3 rightUp;
 		// 左上角
-		sys::Vector leftUp;
+		sys::Vector3 leftUp;
 
 		RectangeVertex();
 
 		// 判断
 		bool containPoint(float x, float y);
 		//  获取点坐在的锚点位置
-		sys::Vector getAnchorByPoint(float x, float y);
+		sys::Vector3 getAnchorByPoint(float x, float y);
 	};
 }

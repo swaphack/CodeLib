@@ -139,7 +139,7 @@ bool Parser::makeSingleAstNode(TokenAry::const_reverse_iterator tokenAryBegin, T
 		Token::const_iterator iter = tokenAryIter->begin();
 		while (iter != tokenAryIter->end())
 		{
-			pNode->right = 
+			/*pNode->right = */
 
 			iter++;
 		}

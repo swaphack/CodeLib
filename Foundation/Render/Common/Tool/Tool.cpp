@@ -32,48 +32,48 @@ void Tool::setDimensions(Dimensions d)
 	E_DIMENSIONS = d;
 }
 
-sys::Vector Tool::convertToRadian(const sys::Vector& src)
+sys::Vector3 Tool::convertToRadian(const sys::Vector3& src)
 {
-	return sys::Vector(src.x / HALF_CIRCLE_ANGEL * PI, src.y / HALF_CIRCLE_ANGEL * PI, src.z / HALF_CIRCLE_ANGEL * PI);
+	return sys::Vector3(src.x / HALF_CIRCLE_ANGEL * PI, src.y / HALF_CIRCLE_ANGEL * PI, src.z / HALF_CIRCLE_ANGEL * PI);
 }
 
-sys::Vector Tool::convertToAngle(const sys::Vector& src)
+sys::Vector3 Tool::convertToAngle(const sys::Vector3& src)
 {
-	return sys::Vector(src.x / PI * HALF_CIRCLE_ANGEL, src.y / PI * HALF_CIRCLE_ANGEL, src.z / PI * HALF_CIRCLE_ANGEL);
+	return sys::Vector3(src.x / PI * HALF_CIRCLE_ANGEL, src.y / PI * HALF_CIRCLE_ANGEL, src.z / PI * HALF_CIRCLE_ANGEL);
 }
 
-void Tool::convertToOGLPoisition(float x, float y, float z, sys::Vector& dest)
+void Tool::convertToOGLPoisition(float x, float y, float z, sys::Vector3& dest)
 {
 	dest.x = x / Tool::getGLViewSize().width;
 	dest.y = y / Tool::getGLViewSize().height;
 	dest.z = z / Tool::getGLViewSize().deep;
 }
 
-sys::Vector Tool::convertToOGLPoisition(float x, float y, float z)
+sys::Vector3 Tool::convertToOGLPoisition(float x, float y, float z)
 {
-	return sys::Vector(x / Tool::getGLViewSize().width, y / Tool::getGLViewSize().height, z / Tool::getGLViewSize().deep);
+	return sys::Vector3(x / Tool::getGLViewSize().width, y / Tool::getGLViewSize().height, z / Tool::getGLViewSize().deep);
 }
 
-sys::Vector Tool::convertToOGLPoisition(const sys::Vector& src)
+sys::Vector3 Tool::convertToOGLPoisition(const sys::Vector3& src)
 {
-	return sys::Vector(src.x / Tool::getGLViewSize().width, src.y / Tool::getGLViewSize().height, src.z / Tool::getGLViewSize().deep);
+	return sys::Vector3(src.x / Tool::getGLViewSize().width, src.y / Tool::getGLViewSize().height, src.z / Tool::getGLViewSize().deep);
 }
 
-void Tool::convertToOGLPoisition(const sys::Vector& src, sys::Vector& dest)
+void Tool::convertToOGLPoisition(const sys::Vector3& src, sys::Vector3& dest)
 {
 	dest.x = src.x / Tool::getGLViewSize().width;
 	dest.y = src.y / Tool::getGLViewSize().height;
 	dest.z = src.z / Tool::getGLViewSize().deep;
 }
 
-sys::Vector Tool::convertToWindowPosition(float x, float y, float z)
+sys::Vector3 Tool::convertToWindowPosition(float x, float y, float z)
 {
-	return sys::Vector(x * Tool::getGLViewSize().width, y * Tool::getGLViewSize().height, z * Tool::getGLViewSize().deep);
+	return sys::Vector3(x * Tool::getGLViewSize().width, y * Tool::getGLViewSize().height, z * Tool::getGLViewSize().deep);
 }
 
-sys::Vector Tool::convertToWindowPosition(const sys::Vector& src)
+sys::Vector3 Tool::convertToWindowPosition(const sys::Vector3& src)
 {
-	return sys::Vector(src.x * Tool::getGLViewSize().width, src.y * Tool::getGLViewSize().height, src.z * Tool::getGLViewSize().deep);
+	return sys::Vector3(src.x * Tool::getGLViewSize().width, src.y * Tool::getGLViewSize().height, src.z * Tool::getGLViewSize().deep);
 }
 
 sys::Volume Tool::convertToOGLVolume(const sys::Volume& src)
@@ -81,7 +81,7 @@ sys::Volume Tool::convertToOGLVolume(const sys::Volume& src)
 	return sys::Volume(src.width / Tool::getGLViewSize().width * 2 - 1, src.height / Tool::getGLViewSize().height * 2 - 1, src.deep);
 }
 
-sys::Vector Tool::getRotationPosition(const sys::Vector& vector, const sys::Vector& rotation)
+sys::Vector3 Tool::getRotationPosition(const sys::Vector3& vector, const sys::Vector3& rotation)
 {
 	float sinx, siny, sinz;
 	float cosx, cosy, cosz;
@@ -99,7 +99,7 @@ sys::Vector Tool::getRotationPosition(const sys::Vector& vector, const sys::Vect
 	cosy = cos(ay);
 	cosz = cos(az);
 
-	sys::Vector dest;
+	sys::Vector3 dest;
 
 	dest.x = vector.x * (cosy * cosz - sinx * siny * sinz)
 		- vector.y * cosx * sinz
@@ -116,9 +116,9 @@ sys::Vector Tool::getRotationPosition(const sys::Vector& vector, const sys::Vect
 	return dest;
 }
 
-void Tool::calNormal(const sys::Vector& p1, const sys::Vector& p2, const sys::Vector& p3, sys::Vector& normal)
+void Tool::calNormal(const sys::Vector3& p1, const sys::Vector3& p2, const sys::Vector3& p3, sys::Vector3& normal)
 {
-	sys::Vector vc1, vc2;
+	sys::Vector3 vc1, vc2;
 	float a, b, c;
 	float r;
 
@@ -135,7 +135,7 @@ void Tool::calNormal(const sys::Vector& p1, const sys::Vector& p2, const sys::Ve
 	normal.z = c / r;
 }
 
-void Tool::calRect(const sys::Vector& position, const sys::Volume& volume, const sys::Vector& anchor, RectangeVertex& rectVertex)
+void Tool::calRect(const sys::Vector3& position, const sys::Volume& volume, const sys::Vector3& anchor, RectangeVertex& rectVertex)
 {
 	float x = 0;
 	float y = 0;
@@ -161,7 +161,7 @@ void Tool::calRect(const sys::Vector& position, const sys::Volume& volume, const
 	rectVertex.leftUp = Tool::convertToOGLPoisition(x, y, position.z);
 }
 
-void Tool::calRealRect(const sys::Vector& position, const sys::Volume& volume, const sys::Vector& anchor, RectangeVertex& rectVertex)
+void Tool::calRealRect(const sys::Vector3& position, const sys::Volume& volume, const sys::Vector3& anchor, RectangeVertex& rectVertex)
 {
 	float x = 0;
 	float y = 0;
