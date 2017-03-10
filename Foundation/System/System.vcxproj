@@ -115,6 +115,7 @@
     <ClInclude Include="Framework\ITimer.h" />
     <ClInclude Include="Framework\Object.h" />
     <ClInclude Include="Geometry\Circle.h" />
+    <ClInclude Include="Geometry\Convex.h" />
     <ClInclude Include="Geometry\Line2.h" />
     <ClInclude Include="Geometry\Polyhedron.h" />
     <ClInclude Include="Geometry\Surface.h" />
@@ -220,6 +221,7 @@
     <ClCompile Include="Framework\Dispatcher.cpp" />
     <ClCompile Include="Framework\FilePath.cpp" />
     <ClCompile Include="Framework\Object.cpp" />
+    <ClCompile Include="Geometry\Convex.cpp" />
     <ClCompile Include="Geometry\Line2.cpp" />
     <ClCompile Include="Geometry\Surface.cpp" />
     <ClCompile Include="Geometry\Line3.cpp" />

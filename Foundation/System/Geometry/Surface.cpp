@@ -4,7 +4,21 @@
 
 using namespace sys;
 
+Surface::Surface()
+:points(nullptr)
+, count(0)
+{
+
+}
+
+Surface::Surface(const Surface& surface)
+:Surface(surface.points, surface.count)
+{
+
+}
+
 Surface::Surface(Vector3* points, int count)
+:Surface()
 {
 	if (points == nullptr || count < 3)
 	{
@@ -19,11 +33,12 @@ Surface::Surface(Vector3* points, int count)
 	}
 }
 
+
 Surface::~Surface()
 {
 	if (points != nullptr)
 	{
-		delete points;
+		delete[] points;
 	}
 }
 
@@ -95,6 +110,26 @@ bool Surface::contain(const Vector3& point)
 	bool result = polygon.contains(target);
 	delete ps;
 	return result;
+}
+
+Surface& Surface::operator=(const Surface& surface)
+{
+	if (surface.points == nullptr || surface.count < 3)
+	{
+		return;
+	}
+
+	if (this->points != nullptr)
+	{
+		delete[] this->points;
+	}
+
+	this->points = new Vector3[surface.count];
+	this->count = surface.count;
+	for (int i = 0; i < surface.count; i++)
+	{
+		this->points[i] = surface.points[i];
+	}
 }
 
 bool Surface::isStandard(const Surface& surface)

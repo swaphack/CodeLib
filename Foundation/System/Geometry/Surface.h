@@ -13,6 +13,8 @@ namespace sys
 		Vector3* points;
 		int count;
 
+		Surface();
+		Surface(const Surface& surface);
 		Surface(Vector3* points, int count);
 
 		~Surface();
@@ -29,6 +31,10 @@ namespace sys
 		*	先判断是否共面，在判断投影是否包含
 		*/
 		bool contain(const Vector3& point);
+		/**
+		*	重载=
+		*/
+		Surface& operator=(const Surface& surface);
 	public:
 		/**
 		*	是否是标准的多边形，顶点数大于等于3,并且相邻不存在共线的情况

@@ -11,9 +11,13 @@ namespace sys
 	*/ 
 	struct Polygon
 	{
+		// 顶点
 		Vector2* points;
+		// 顶点数
 		int count;
 
+		Polygon();
+		Polygon(const Polygon & polygon);
 		Polygon(Vector2* points, int count);
 
 		~Polygon();
@@ -37,6 +41,14 @@ namespace sys
 		*	是否与线段相交
 		*/
 		bool intersects(const Line2& line);
+		/**
+		*	是否与多边形相交
+		*/
+		bool intersects(const Polygon& polygon);
+		/**
+		*	重载=
+		*/
+		Polygon& operator=(const Polygon& polygon);
 	public:
 		/**
 		*	是否是标准的多边形，顶点数大于等于3,并且相邻不存在共线的情况

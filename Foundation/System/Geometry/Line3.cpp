@@ -57,6 +57,23 @@ bool Line3::contains(const Vector3& point)
 	return bounds.contains(point);
 }
 
+bool Line3::contains(const Line3& line)
+{
+	Vector3 v0 = src - line.src;
+	Vector3 v1 = dest - src;
+	Vector3 v2 = line.dest - src;
+
+	float d0 = Vector3::dot(v0, v1);
+	float d1 = Vector3::dot(v1, v2);
+	// 共线，或相交
+	if (d0 * d1 != 0)
+	{
+		return false;
+	}
+
+	return this->contains(line.src) && this->contains(line.dest);
+}
+
 bool Line3::intersects(const Line3& line)
 {
 	AABB bounds0 = getBounds();

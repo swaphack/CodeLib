@@ -57,6 +57,23 @@ bool Line2::contains(const Vector2& point)
 	return bounds.contains(point);
 }
 
+bool Line2::contains(const Line2& line)
+{
+	Vector2 v0 = src - line.src;
+	Vector2 v1 = dest - src;
+	Vector2 v2 = line.dest - src;
+
+	float d0 = Vector2::dot(v0, v1);
+	float d1 = Vector2::dot(v1, v2);
+	// 共线，或相交
+	if (d0 * d1 != 0)
+	{
+		return false;
+	}
+
+	return this->contains(line.src) && this->contains(line.dest);
+}
+
 bool Line2::intersects(const Line2& line)
 {
 	AABB bounds0 = getBounds();
@@ -73,7 +90,7 @@ bool Line2::intersects(const Line2& line)
 
 	float d0 = Vector2::dot(v0, v1);
 	float d1 = Vector2::dot(v1, v2);
-	// 在同一方向
+	// 共线，或相交
 	return d0 * d1 >= 0;
 }
 /**
@@ -91,6 +108,7 @@ Vector2 Line2::closestPoint(const Vector2& point)
 
 	float x0 = dest.x - src.x;
 	float y0 = dest.y - src.y;
+
 	if (y0 == 0 && x0 == 0)
 	{// 线段为点
 		return src;

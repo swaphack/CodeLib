@@ -48,7 +48,7 @@ bool OBB::intersects(const OBB& bounds)
 	float z00 = minZ();
 	float z01 = maxZ();
 	
-	Vector3 points0[9];
+	Vector3 points0[8];
 	points0[0] = Vector3(x00, y00, z00);
 	points0[1] = Vector3(x00, y01, z00);
 	points0[2] = Vector3(x00, y00, z01);
@@ -57,7 +57,6 @@ bool OBB::intersects(const OBB& bounds)
 	points0[5] = Vector3(x01, y01, z00);
 	points0[6] = Vector3(x01, y00, z01);
 	points0[7] = Vector3(x01, y01, z01);
-	points0[8] = center;
 
 	Matrix44 matr1;
 	matr1.rotate(bounds.rotation);
@@ -69,7 +68,7 @@ bool OBB::intersects(const OBB& bounds)
 	float z10 = bounds.minZ();
 	float z11 = bounds.maxZ();
 
-	Vector3 points1[9];
+	Vector3 points1[8];
 	points1[0] = Vector3(x10, y10, z10);
 	points1[1] = Vector3(x10, y11, z10);
 	points1[2] = Vector3(x10, y10, z11);
@@ -78,10 +77,9 @@ bool OBB::intersects(const OBB& bounds)
 	points1[5] = Vector3(x11, y11, z10);
 	points1[6] = Vector3(x11, y10, z11);
 	points1[7] = Vector3(x11, y11, z11);
-	points0[9] = bounds.center;
 
 	Matrix matp(1, 4);
-	int count = 9;
+	int count = 8;
 	for (int i = 0; i < count; i++)
 	{
 		matp[0] = points0[i].x;

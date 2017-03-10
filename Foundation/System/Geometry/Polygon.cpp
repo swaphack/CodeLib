@@ -5,6 +5,7 @@
 using namespace sys;
 
 Polygon::Polygon(Vector2* points, int count) 
+:Polygon()
 {
 	if (points == nullptr || count < 3)
 	{
@@ -17,6 +18,19 @@ Polygon::Polygon(Vector2* points, int count)
 	{
 		this->points[i] = points[i];
 	}
+}
+
+Polygon::Polygon()
+:points(nullptr)
+,count(0)
+{
+
+}
+
+Polygon::Polygon(const Polygon & polygon)
+:Polygon(polygon.points, polygon.count)
+{
+
 }
 
 Polygon::~Polygon()
@@ -131,6 +145,40 @@ bool Polygon::intersects(const Line2& line)
 	}
 
 	return false;
+}
+
+bool Polygon::intersects(const Polygon& polygon)
+{
+	for (int i = 0; i < polygon.count; i++)
+	{
+		Line2 line(polygon.points[i], polygon.points[(i + 1) % polygon.count]);
+		if (this->intersects(line) || this->contains(line))
+		{
+			return true;
+		}
+	}
+
+	return false;
+}
+
+Polygon& Polygon::operator=(const Polygon& polygon)
+{
+	if (polygon.points == nullptr || polygon.count < 3)
+	{
+		return;
+	}
+
+	if (this->points != nullptr)
+	{
+		delete[] this->points;
+	}
+
+	this->points = new Vector2[count];
+	this->count = count;
+	for (int i = 0; i < count; i++)
+	{
+		this->points[i] = points[i];
+	}
 }
 
 bool Polygon::isStandard(const Polygon& polygon)

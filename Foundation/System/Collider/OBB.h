@@ -118,5 +118,7 @@ namespace sys
 		*	z轴的最大值
 		*/
 		float maxZ() const;
+	public:
+		static vec
 	};
 }

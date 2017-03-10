@@ -47,6 +47,10 @@ namespace sys
 		*/
 		bool contains(const Vector3& point);
 		/**
+		*	是否包含线段
+		*/
+		bool contains(const Line3& line);
+		/**
 		*	线段是否相交
 		*/
 		bool intersects(const Line3& line);
