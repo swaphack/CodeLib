@@ -211,16 +211,6 @@ Vector3& Vector3::operator/=(const float k)
 	return *this;
 }
 
-float Vector3::operator*(const Vector3& vector)
-{
-	return x * vector.x + y * vector.y + z * vector.z;
-}
-
-float Vector3::operator*(const Vector3& vector) const
-{
-	return x * vector.x + y * vector.y + z * vector.z;
-}
-
 bool Vector3::operator==(const Vector3& vector)
 {
 	return x == vector.x && y == vector.y && z == vector.z;
@@ -233,9 +223,7 @@ bool Vector3::operator!=(const Vector3& vector)
 
 float Vector3::dot(const Vector3& vector0, const Vector3& vector1)
 {
-	return vector0.x * (vector1.y - vector1.z)
-		+ vector0.y * (vector1.z - vector1.x)
-		+ vector0.z * (vector1.x - vector1.y);
+	return vector0.x * vector1.x + vector0.y * vector1.y + vector0.z * vector1.z;
 }
 
 Vector3 Vector3::cross(const Vector3& vector0, const Vector3& vector1)
@@ -282,7 +270,7 @@ float Vector3::cosAngle(const Vector3& vector0, const Vector3& vector1)
 		return 0;
 	}
 	
-	return (vector0 * vector1) / (l0 * l1);
+	return Vector3::dot(vector0, vector1) / (l0 * l1);
 }
 
 float Vector3::project(const Vector3& vector0, const Vector3& vector1)
@@ -292,7 +280,7 @@ float Vector3::project(const Vector3& vector0, const Vector3& vector1)
 	{
 		return 0;
 	}
-	return (vector0 * vector1) / l0;
+	return Vector3::dot(vector1, vector0) / l0;
 }
 
 

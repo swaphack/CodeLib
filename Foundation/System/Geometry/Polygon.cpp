@@ -165,7 +165,7 @@ Polygon& Polygon::operator=(const Polygon& polygon)
 {
 	if (polygon.points == nullptr || polygon.count < 3)
 	{
-		return;
+		return *this;
 	}
 
 	if (this->points != nullptr)
@@ -179,6 +179,8 @@ Polygon& Polygon::operator=(const Polygon& polygon)
 	{
 		this->points[i] = points[i];
 	}
+
+	return *this;
 }
 
 bool Polygon::isStandard(const Polygon& polygon)

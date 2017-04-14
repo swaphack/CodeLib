@@ -454,6 +454,9 @@
     <ClInclude Include="Geometry\Convex.h">
       <Filter>Geometry</Filter>
     </ClInclude>
+    <ClInclude Include="Collider\Box.h">
+      <Filter>Collider</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Base\File.cpp">
@@ -677,6 +680,9 @@
     </ClCompile>
     <ClCompile Include="Geometry\Convex.cpp">
       <Filter>Geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="Collider\Box.cpp">
+      <Filter>Collider</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

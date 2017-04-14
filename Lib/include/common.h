@@ -10,4 +10,5 @@
 #define USE_FREETYPE
 #define USE_SQLITE
 #define USE_OPENCL
+#define USE_CG
 */

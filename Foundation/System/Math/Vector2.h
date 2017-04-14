@@ -92,15 +92,6 @@ namespace sys
 		*	重载/=
 		*/
 		Vector2& operator/=(const float k);
-
-		/**
-		*	重载*
-		*/
-		float operator*(const Vector2& vector);
-		/**
-		*	重载*
-		*/
-		float operator*(const Vector2& vector) const;
 		/**
 		*	判断两向量是否相等
 		*/

@@ -70,4 +70,12 @@
 #include "opencl/CL/cl.h"
 #endif
 
+//////////////////////////////////////////////////////////////////////////
+// Cg
+
+#if defined(USE_CG)
+#include "cg/Cg/cg.h"
+#include "cg/Cg/cgGL.h"
+#endif
+
 

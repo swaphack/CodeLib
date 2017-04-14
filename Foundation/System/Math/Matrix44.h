@@ -27,7 +27,7 @@ namespace sys
 		/**
 		*	旋转
 		*/
-		void rotate(const Vector3& vector);
+		void rotate(const Vector3& rotation);
 		/**
 		*	绕x轴旋转
 		*/
@@ -40,5 +40,14 @@ namespace sys
 		*	绕z轴旋转
 		*/
 		void rotateZ(float z);
+	public:
+		/**
+		*	旋转
+		*/
+		static Matrix44 createWithRotation(const Vector3& rotation);
+		/**
+		*	绕轴旋转度数
+		*/
+		static Matrix44 createWithRotationByAxis(const Vector3& axis, float radian);
 	};
 }

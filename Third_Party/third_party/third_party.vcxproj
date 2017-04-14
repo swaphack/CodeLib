@@ -65,6 +65,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\Lib\include\cg\Cg\cg.h" />
+    <ClInclude Include="..\..\Lib\include\cg\Cg\cgD3D10.h" />
+    <ClInclude Include="..\..\Lib\include\cg\Cg\cgD3D11.h" />
+    <ClInclude Include="..\..\Lib\include\cg\Cg\cgD3D9.h" />
+    <ClInclude Include="..\..\Lib\include\cg\Cg\cgGL.h" />
+    <ClInclude Include="..\..\Lib\include\cg\GL\glut.h" />
     <ClInclude Include="..\..\Lib\include\common.h" />
     <ClInclude Include="..\..\Lib\include\ffmpeg\ffmpeg.h" />
     <ClInclude Include="..\..\Lib\include\ffmpeg\libavcodec\avcodec.h" />

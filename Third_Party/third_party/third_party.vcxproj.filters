@@ -61,6 +61,15 @@
     <Filter Include="opencl\CL">
       <UniqueIdentifier>{40ae0594-1d84-4e77-98c9-da81d689322d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="cg">
+      <UniqueIdentifier>{bb315aea-0b92-42a0-b2e4-a2735a5e6a16}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cg\Cg">
+      <UniqueIdentifier>{f642d48e-da4a-483d-93df-2461614e0e55}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cg\GL">
+      <UniqueIdentifier>{3965084d-a381-4ffe-8c1d-e24df19b49cf}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Lib\include\png\png.h">
@@ -538,6 +547,24 @@
     </ClInclude>
     <ClInclude Include="..\..\Lib\include\opencl\CL\va_ext.h">
       <Filter>opencl\CL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Lib\include\cg\Cg\cg.h">
+      <Filter>cg\Cg</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Lib\include\cg\Cg\cgD3D9.h">
+      <Filter>cg\Cg</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Lib\include\cg\Cg\cgD3D10.h">
+      <Filter>cg\Cg</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Lib\include\cg\Cg\cgD3D11.h">
+      <Filter>cg\Cg</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Lib\include\cg\Cg\cgGL.h">
+      <Filter>cg\Cg</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Lib\include\cg\GL\glut.h">
+      <Filter>cg\GL</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

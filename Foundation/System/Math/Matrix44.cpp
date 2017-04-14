@@ -35,34 +35,9 @@ void Matrix44::scale(const Vector3& vector)
 	*this *= mat;
 }
 
-void Matrix44::rotate(const Vector3& vector)
+void Matrix44::rotate(const Vector3& rotation)
 {
-// 	Matrix44 matZ;
-// 	matZ[0] = cos(vector.z); matZ[1] = sin(vector.z);
-// 	matZ[4] = -sin(vector.z); matZ[5] = cos(vector.z);
-// 
-// 	Matrix44 matY;
-// 	matY[0] = cos(vector.y); matY[2] = -sin(vector.y);
-// 	matY[8] = sin(vector.y); matY[10] = cos(vector.y);
-// 
-// 	Matrix44 matX;
-// 	matX[5] = cos(vector.x); matX[6] = sin(vector.x);
-// 	matX[9] = -sin(vector.x); matX[10] = cos(vector.x);
-
-	Matrix44 mat;
-
-	values[0] = cos(vector.y) * cos(vector.z);  
-	values[1] = cos(vector.y) * sin(vector.z);  
-	values[2] = -sin(vector.y);
-
-	values[4] = -cos(vector.x) * sin(vector.z) + sin(vector.x) * sin(vector.y) * cos(vector.z);
-	values[5] = cos(vector.x) * cos(vector.z) + sin(vector.x) * sin(vector.y) * cos(vector.z);
-	values[6] = sin(vector.x) * cos(vector.y);
-
-	values[8] = sin(vector.x) * sin(vector.z) + cos(vector.x) * sin(vector.y) * cos(vector.z);
-	values[9] = -sin(vector.x) * cos(vector.z) + cos(vector.x) * sin(vector.y) * sin(vector.z);
-	values[10] = cos(vector.x) * cos(vector.y);
-	
+	Matrix44 mat = Matrix44::createWithRotation(rotation);
 	*this *= mat;
 }
 
@@ -88,4 +63,51 @@ void Matrix44::rotateZ(float z)
 	mat[0] = cos(z); mat[1] = sin(z);
 	mat[4] = -sin(z); mat[5] = cos(z);
 	*this *= mat;
+}
+
+
+Matrix44 Matrix44::createWithRotation(const Vector3& rotation)
+{
+	float cosA = cos(rotation.x);
+	float cosB = cos(rotation.y);
+	float cosR = cos(rotation.z);
+	float sinA = sin(rotation.x);
+	float sinB = sin(rotation.y);
+	float sinR = sin(rotation.z);
+
+	Matrix44 mat;
+	mat.values[0] = cosA * cosR - cosB * sinA * sinR;
+	mat.values[1] = -cosB * cosR * sinA - cosA * sinR;
+	mat.values[2] = sinA * sinB;
+
+	mat.values[4] = cosR * sinA + cosA * cosB * sinR;
+	mat.values[5] = cosA * cosB * cosR - sinA * sinR;
+	mat.values[6] = -cosA * sinB;
+
+	mat.values[8] = sinB * sinR;
+	mat.values[9] = cosR * sinB;
+	mat.values[10] = cosB;
+
+	return mat;
+}
+
+Matrix44 Matrix44::createWithRotationByAxis(const Vector3& axis, float radian)
+{
+	float cosR = cos(radian);
+	float sinR = sin(radian);
+	Matrix44 mat;
+
+	mat.values[0] = cosR + (1 - cosR) * axis.x * axis.x;
+	mat.values[1] = (1 - cosR) * axis.x * axis.y - sinR * axis.z;
+	mat.values[2] = (1 - cosR) * axis.x * axis.z + sinR * axis.y;
+
+	mat.values[4] = (1 - cosR) * axis.x * axis.y + sinR * axis.z;
+	mat.values[5] = cosR + (1 - cosR) * axis.y * axis.y;
+	mat.values[6] = (1 - cosR) * axis.y * axis.z - sinR * axis.x;
+
+	mat.values[8] = (1 - cosR) * axis.x * axis.z - sinR * axis.y;
+	mat.values[9] = (1 - cosR) * axis.y * axis.z + sinR * axis.x;
+	mat.values[10] = cosR + (1 - cosR) * axis.z * axis.z;
+
+	return mat;
 }

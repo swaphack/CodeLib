@@ -60,5 +60,5 @@ bool Polyhedron::contiains(const Vector3& point)
 
 bool Polyhedron::intersects(const Polyhedron& polyhedron)
 {
-
+	return false;
 }

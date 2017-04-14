@@ -6,6 +6,7 @@ namespace sys
 {
 	struct Line3;
 	struct Line2;
+	struct Polygon;
 
 	/**
 	*	OBB碰撞盒
@@ -14,17 +15,28 @@ namespace sys
 	*/
 	struct OBB 
 	{
+	public:
 		// 中性点
 		Vector3 center;
 		// 面积
 		Vector3 size;
+		// 外围
+		Vector3 extents;
 		// 旋转角度
 		Vector3 rotation;
-
+		// 最小坐标
+		Vector3 minPos;
+		// 最大坐标
+		Vector3 maxPos;
+	public:
 		/**
 		*	构造
 		*/
 		OBB(const Vector3& center, const Vector3& size, const Vector3& rotation);
+		/**
+		*	构造
+		*/
+		OBB(const Vector3& center, const Vector3& size);
 		/**
 		*	是否包含点
 		*/
@@ -61,64 +73,14 @@ namespace sys
 		*	两个多边形在所有轴上的投影都发生重叠，则判定为碰撞；否则，没有发生碰撞
 		*/
 		bool intersects(const OBB& bounds);
-
 		/**
 		*	重载=
 		*/
 		void operator=(const OBB& obb);
-
+	private:
 		/**
-		*	x轴的最小值
+		*	计算投影
 		*/
-		float minX();
-		/**
-		*	y轴的最小值
-		*/
-		float minY();
-		/**
-		*	z轴的最小值
-		*/
-		float minZ();
-
-		/**
-		*	x轴的最大值
-		*/
-		float maxX();
-		/**
-		*	y轴的最大值
-		*/
-		float maxY();
-		/**
-		*	z轴的最大值
-		*/
-		float maxZ();
-
-		/**
-		*	x轴的最小值
-		*/
-		float minX() const;
-		/**
-		*	y轴的最小值
-		*/
-		float minY() const;
-		/**
-		*	z轴的最小值
-		*/
-		float minZ() const;
-
-		/**
-		*	x轴的最大值
-		*/
-		float maxX() const;
-		/**
-		*	y轴的最大值
-		*/
-		float maxY() const;
-		/**
-		*	z轴的最大值
-		*/
-		float maxZ() const;
-	public:
-		static vec
+		void calProjections();
 	};
 }

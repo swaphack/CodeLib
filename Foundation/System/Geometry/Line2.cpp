@@ -155,24 +155,10 @@ Vector2 Line2::closestPoint(const Vector2& point)
 
 float Line2::distance(const Line2& line, const Vector2& point)
 {
-// 	float x0 = line.dest.x - line.src.x;
-// 	float y0 = line.dest.y - line.src.y;
-// 
-// 	float a = y0;
-// 	float b = -x0;
-// 	float c = line.src.y * x0 - line.src.x * y0;
-// 	float top = abs(a * point.x + b * point.y  + c);
-// 	float bottom = sqrt(pow(a, 2) + pow(b, 2));
-// 
-// 	if (bottom == 0) return 0;
-// 
-// 	return top / bottom;
-
-
 	Vector2 v0 = line.dest - line.src;
-	Vector2 v1 = point - line.src;
+	Vector2 v1 = point - line.src;  
 
-	float top = Vector2::cross(v0, v1).getLength();
+	float top = Vector2::dot(v0, v1);
 	float bottom = v0.getLength();
 
 	if (bottom == 0) return 0;

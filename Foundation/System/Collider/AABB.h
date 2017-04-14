@@ -13,10 +13,16 @@ namespace sys
 	*/
 	struct AABB
 	{
+	private:
 		// 中心点
 		Vector3 center;
 		// 面积
 		Vector3 size;
+		// 最小坐标
+		Vector3 minPos;
+		// 最大坐标
+		Vector3 maxPos;
+	public:
 		/**
 		*	构造
 		*/
@@ -57,62 +63,17 @@ namespace sys
 		*	两盒子是否相交
 		*/
 		bool intersects(const AABB& bounds);
-
+		/**
+		*	最小坐标
+		*/
+		inline const Vector3& Min() const { return minPos;  }
+		/**
+		*	最大坐标
+		*/
+		inline const Vector3& Max() const { return maxPos; }
 		/**
 		*	重载=
 		*/
 		void operator=(const AABB& aabb);
-
-		/**
-		*	x轴的最小值
-		*/
-		float minX();
-		/**
-		*	y轴的最小值
-		*/
-		float minY();
-		/**
-		*	z轴的最小值
-		*/
-		float minZ();
-
-		/**
-		*	x轴的最大值
-		*/
-		float maxX();
-		/**
-		*	y轴的最大值
-		*/
-		float maxY();
-		/**
-		*	z轴的最大值
-		*/
-		float maxZ();
-
-		/**
-		*	x轴的最小值
-		*/
-		float minX() const;
-		/**
-		*	y轴的最小值
-		*/
-		float minY() const;
-		/**
-		*	z轴的最小值
-		*/
-		float minZ() const;
-
-		/**
-		*	x轴的最大值
-		*/
-		float maxX() const;
-		/**
-		*	y轴的最大值
-		*/
-		float maxY() const;
-		/**
-		*	z轴的最大值
-		*/
-		float maxZ() const;
 	};
 }

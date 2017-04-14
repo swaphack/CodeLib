@@ -87,6 +87,7 @@
     <ClInclude Include="Cache\CacheMgr.h" />
     <ClInclude Include="Cache\import.h" />
     <ClInclude Include="Collider\AABB.h" />
+    <ClInclude Include="Collider\Box.h" />
     <ClInclude Include="Collider\import.h" />
     <ClInclude Include="Collider\macros.h" />
     <ClInclude Include="Collider\OBB.h" />
@@ -209,6 +210,7 @@
     <ClCompile Include="Cache\CacheIdentity.cpp" />
     <ClCompile Include="Cache\CacheMgr.cpp" />
     <ClCompile Include="Collider\AABB.cpp" />
+    <ClCompile Include="Collider\Box.cpp" />
     <ClCompile Include="Collider\OBB.cpp" />
     <ClCompile Include="DataBase\DataRecord.cpp" />
     <ClCompile Include="DataBase\DataSheet.cpp" />

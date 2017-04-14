@@ -1,5 +1,11 @@
 #pragma once
 
+namespace sys
+{
+	struct Vector2;
+	struct Polygon;
+}
+
 namespace math
 {
 	namespace cg
@@ -10,8 +16,10 @@ namespace math
 		class ConvexHull
 		{
 		public:
+			ConvexHull(Vector2* points, int length);
 		protected:
 		private:
+			Polygon m_Polygon;
 		};
 	}
 }

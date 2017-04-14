@@ -130,25 +130,10 @@ Vector3 Line3::closestPoint(const Vector3& point)
 
 float Line3::distance(const Line3& line, const Vector3& point)
 {
-// 	float x0 = line.dest.x - line.src.x;
-// 	float y0 = line.dest.y - line.src.y;
-// 	float z0 = line.dest.z - line.src.z;
-// 
-// 	float a = y0 * z0;
-// 	float b = -x0 * z0;
-// 	float c = -x0 * y0;
-// 	float d = -line.src.x * y0 * z0 + line.src.y * x0 * z0 + line.src.z * x0 * y0;
-// 	float top = abs(a * point.x + b * point.y + c * point.z + d);
-// 	float bottom = sqrt(pow(a, 2) + pow(b, 2) + pow(c, 2));
-// 
-// 	if (bottom == 0) return 0;
-// 
-// 	return top / bottom;
-
 	Vector3 v0 = line.dest - line.src;
 	Vector3 v1 = point - line.src;
 
-	float top = Vector3::cross(v0, v1).getLength();
+	float top = Vector3::dot(v0, v1);
 	float bottom = v0.getLength();
 
 	if (bottom == 0) return 0;

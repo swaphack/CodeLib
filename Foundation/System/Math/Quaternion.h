@@ -117,7 +117,7 @@ namespace sys
 		*/
 		static Quaternion rotate(const Vector3& vector, float angle);
 		/**
-		*	绕z轴旋转yaw度，y轴旋转pitch度，x轴旋转roll度，形成的四元素
+		*	绕x轴旋转roll度，y轴旋转pitch度，z轴旋转yaw度，形成的四元素
 		*/
 		static Quaternion rotate(float roll, float pitch, float yaw);
 		/**

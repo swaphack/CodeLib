@@ -116,7 +116,7 @@ Surface& Surface::operator=(const Surface& surface)
 {
 	if (surface.points == nullptr || surface.count < 3)
 	{
-		return;
+		return *this;
 	}
 
 	if (this->points != nullptr)
@@ -130,6 +130,8 @@ Surface& Surface::operator=(const Surface& surface)
 	{
 		this->points[i] = surface.points[i];
 	}
+
+	return  *this;
 }
 
 bool Surface::isStandard(const Surface& surface)
