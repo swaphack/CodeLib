@@ -23,7 +23,6 @@
     <ClInclude Include="Compile\SymbolDelegate.h" />
     <ClInclude Include="Compile\SymbolHandler.h" />
     <ClInclude Include="Compile\SymbolInformation.h" />
-    <ClInclude Include="Compile\SymbolParser.h" />
     <ClInclude Include="Compile\WordFilters.h" />
     <ClInclude Include="Compile\WordSet.h" />
     <ClInclude Include="Compile\Parser.h" />
@@ -49,6 +48,7 @@
     <ClInclude Include="Document\WordDocument.h" />
     <ClInclude Include="Env\Environment.h" />
     <ClInclude Include="Env\Module.h" />
+    <ClInclude Include="macros.h" />
     <ClInclude Include="Script.h" />
   </ItemGroup>
   <ItemGroup>
@@ -127,12 +127,16 @@
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>../Text/</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BrowseInformation>true</BrowseInformation>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>Text.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(OutDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
+    <Bscmake>
+      <PreserveSbr>true</PreserveSbr>
+    </Bscmake>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>

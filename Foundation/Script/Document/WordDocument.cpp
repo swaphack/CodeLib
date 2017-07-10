@@ -1,5 +1,6 @@
 #include "WordDocument.h"
 #include "../Compile/WordSet.h"
+#include "../macros.h"
 using namespace script;
 
 
@@ -28,14 +29,14 @@ bool WordDocument::parse()
 		}
 
 		spot = *(getPtr() + offset);
-		if (spot == ' ' || spot == '\r' || spot == '\n')
+		if (IS_DECORATOR(spot))
 		{
 			WordSet::getInstance()->appendWord(word.c_str());
 			word.clear();
 		}
 		else
 		{
-			word.append(1, *(getPtr() + offset));
+			word.append(1, spot);
 		}
 		offset++;
 	}

@@ -1,10 +1,13 @@
 #include "Parser.h"
 #include "ASTNode.h"
 #include "SymbolHandler.h"
-
+#include "../Core/Console.h"
 #include <stack>
 
 using namespace script;
+
+
+#define AUTO_INCREASE(x, end) { if ((x) != (end))  (x)++; }
 
 Parser::Parser()
 {
@@ -14,8 +17,10 @@ Parser::~Parser()
 {
 }
 
-bool Parser::parse(Token::const_iterator begin, Token::const_iterator end, std::vector<ASTNode*>& nodeAry)
+bool Parser::parse(Token::const_iterator begin, Token::const_iterator end)
 {
+	m_pASTNodeList.clear();
+
 	Token::const_iterator iter = begin;
 	Token::const_iterator offset;
 	while (iter != end)
@@ -25,7 +30,7 @@ bool Parser::parse(Token::const_iterator begin, Token::const_iterator end, std::
 		{
 			return false;
 		}
-		nodeAry.push_back(pNode);
+		m_pASTNodeList.push_back(pNode);
 		iter = offset;
 	}
 	return true;
@@ -33,117 +38,128 @@ bool Parser::parse(Token::const_iterator begin, Token::const_iterator end, std::
 
 ASTNode* Parser::parseSingleNode(Token::const_iterator begin, Token::const_iterator end, Token::const_iterator& offset)
 {
-
-	std::vector<Token> tokenStack;
-
-	if (!parseSingleASTNode(begin, end, offset, tokenStack))
+	ASTNode* pNode = parseSingleASTNode(begin, end, offset);
+	if (pNode == nullptr)
 	{
-		return nullptr;
-	}
-
-	ASTNode* pNode = new ASTNode();
-	if (!makeSingleAstNode(tokenStack.rbegin(), tokenStack.rend(), pNode))
-	{
-		delete pNode;
 		return nullptr;
 	}
 
 	return pNode;
 }
 
-bool Parser::parseSingleASTNode(Token::const_iterator begin, Token::const_iterator end, Token::const_iterator& offset, TokenAry& tokenStack)
+/**
+* 分析采用左优先原则
+* 1: a = b * ( c + d )
+*	a = 
+*	  b *
+*		(c + d)
+* 2: (a + 1) * (c + 2) == b * ( c + d )
+*	a + 1 
+*		*
+*		c + 2
+*			==
+*/
+ASTNode* Parser::parseSingleASTNode(Token::const_iterator begin, Token::const_iterator end, Token::const_iterator& offset)
 {
 	Token::const_iterator iter = begin;
 
 	SymbolDelegate* pDelegate = nullptr;
 	const ASTNode* pTempNode = nullptr;
+	const SymbolInformation* pInfo = nullptr;
 
-	tokenStack.clear();
+	ASTNode* pCurrentNode = nullptr;
+	ASTNode* pLeftNode = nullptr;
+	ASTNode* pRightNode = nullptr;
 
 	while (iter != end)
 	{
 		pDelegate = SymbolHandler::getInstance()->getSymbolDelegate(iter->c_str());
 		if (pDelegate)
 		{ // 是符号
-			pTempNode = &pDelegate->getASTTemplate();
-			if (pTempNode->left == nullptr && tokenStack.back().size() != 0)
-			{// 节点读取结束
-				break;
+			pTempNode = pDelegate->getASTTemplate();
+			pInfo = pDelegate->getSymbolInformation();
+			if (pInfo->embed)
+			{ // 内联
+				if (pInfo->isBegin(iter->c_str()))
+				{ // 开始标识
+					pCurrentNode = parseSingleASTNode(++iter, end, offset);
+					if (pCurrentNode != nullptr)
+					{
+						iter = offset;
+						AUTO_INCREASE(iter, end);
+						return pCurrentNode;
+					}
+					break;
+				}
+				else if (pInfo->isEnd(iter->c_str()))
+				{// 结束标识
+					AUTO_INCREASE(iter, end);
+					break;
+				}
 			}
 
-			if (pTempNode->left != nullptr && tokenStack.back().size() == 0)
-			{// 节点读取结束
-				break;
-			}
+			if (pCurrentNode == nullptr)
+			{
+				if ((pTempNode->left == nullptr && pLeftNode != nullptr)
+					|| (pTempNode->left != nullptr && pLeftNode == nullptr))
+				{
+					Console::getInstance()->error("null left node");
+					break;
+				}
+				pCurrentNode = new ASTNode();
+				pCurrentNode->value = *iter;
+				pCurrentNode->left = pLeftNode;
+				pCurrentNode->isSymbol = true;
 
-			tokenStack.push_back(Token());
-			tokenStack.back().push_back(*iter);
+				if (pTempNode->right == nullptr)
+				{// 解析完毕
+					AUTO_INCREASE(iter, end);
+					return pCurrentNode;
+				}
 
-			if (pTempNode->right != nullptr)
-			{ // 右节点不为空，继续读取
-				tokenStack.push_back(Token());
+				pRightNode = parseSingleASTNode(++iter, end, offset);
+				if (pRightNode == nullptr)
+				{
+					delete pCurrentNode;
+					pCurrentNode = nullptr;
+					break;
+				}
+
+				pCurrentNode->right = pRightNode;
+				iter = offset;
+				// 解析完毕
+				return pCurrentNode;
 			}
 			else
-			{// 右节点为空，读取结束
-				iter++;
+			{
+				delete pCurrentNode;
+				pCurrentNode = nullptr;
 				break;
 			}
 		}
 		else
-		{// 是常量
-			if (tokenStack.back().size() != 0)
-			{
-				pDelegate = SymbolHandler::getInstance()->getSymbolDelegate(tokenStack.back().front().c_str());
-				if (pDelegate)
-				{// 是符号
-					pTempNode = &pDelegate->getASTTemplate();
-					if (pTempNode->right != nullptr)
-					{
-
-					}
-				}
-				else
-				{
-
-				}
+		{ // 常量
+			if (pLeftNode == nullptr)  
+			{ // 左边为空
+				pLeftNode = new ASTNode();
+				pLeftNode->value = *iter;
+				AUTO_INCREASE(iter, end);
 			}
 			else
-			{ // 添加常量
-				tokenStack.push_back(Token());
-				tokenStack.back().push_back(*iter);
+			{
+				break;
 			}
 		}
-		iter++;
 	}
 
-	bool result = tokenStack.size() > 0;
-	if (result)
+	if (pCurrentNode == nullptr)
 	{
+		pCurrentNode = pLeftNode;
+	}
+
+	if (pCurrentNode != nullptr) {
 		offset = iter;
 	}
 
-	return result;
-}
-
-bool Parser::makeSingleAstNode(TokenAry::const_reverse_iterator tokenAryBegin, TokenAry::const_reverse_iterator tokenAryEnd, ASTNode* pNode)
-{
-	if (pNode == nullptr)
-	{
-		return false;
-	}
-
-	TokenAry::const_reverse_iterator tokenAryIter = tokenAryBegin;
-
-	while (tokenAryIter != tokenAryEnd)
-	{
-		Token::const_iterator iter = tokenAryIter->begin();
-		while (iter != tokenAryIter->end())
-		{
-			/*pNode->right = */
-
-			iter++;
-		}
-
-		tokenAryIter++;
-	}
+	return pCurrentNode;
 }

@@ -85,22 +85,6 @@ bool SymbolDelegate::makeASTNode()
 	return true;
 }
 
-bool SymbolDelegate::match(Token::const_iterator begin, Token::const_iterator end, Token::const_iterator& offset)
-{
-	offset = begin;
-
-	ASTNode* pTemplateNode = &m_rASTTemplate;
-
-	while (offset != end)
-	{
-		
-
-		offset++;
-	}
-
-	return true;
-}
-
 ASTNode* SymbolDelegate::createASTNode(Token::const_iterator begin, Token::const_iterator end, Token::const_iterator& offset)
 {
 	ASTNode* pLastNode = &m_rASTTemplate;
@@ -217,14 +201,12 @@ ASTNode* SymbolDelegate::setValue(ASTNode* pNode, const char* value)
 	{
 		pNode->value = value;
 		pNode->isSymbol = true;
-		pNode->builtin = true;
 	}
 	else
 	{
 		ASTNode* pMiddle = new ASTNode();
 		pMiddle->value = value;
 		pMiddle->isSymbol = true;
-		pMiddle->builtin = true;
 
 		pMiddle->left = pNode->right;
 		pNode->right = pMiddle;
@@ -274,4 +256,10 @@ ASTNode* SymbolDelegate::ergodicNode(ASTNode* pNode, Token::const_iterator iter)
 	pNode->flag = 0;
 
 	return pCopyNode;
+}
+
+void SymbolDelegate::setSymbolInformation(const SymbolInformation& value)
+{
+	m_rSymbolInformation = value;
+	makeASTNode();
 }

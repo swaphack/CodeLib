@@ -22,9 +22,4 @@
       <Filter>Audio</Filter>
     </ClInclude>
   </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="Audio\1.cpp">
-      <Filter>Audio</Filter>
-    </ClCompile>
-  </ItemGroup>
 </Project>

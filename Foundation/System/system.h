@@ -14,3 +14,4 @@
 #include "Thread/import.h"
 #include "Geometry/import.h"
 #include "Collider/import.h"
+#include "Text/import.h"

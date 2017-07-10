@@ -47,7 +47,7 @@ void StringStream::readLine(std::string& text)
 	int ext = strlen(LINE_MARK);
 
 	char* cursor = getPtr();
-	if (*cursor == 0)
+	if (*cursor == NULL)
 	{
 		return;
 	}

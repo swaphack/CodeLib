@@ -1,4 +1,5 @@
 #include "Script.h"
+#include "Core/Console.h"
 
 using namespace script;
 
@@ -18,6 +19,8 @@ int main(int argc, char** argv)
 	// ½âÎö½Å±¾
 	const char* scriptFile = "Resource/main.script";
 	Script::getInstance()->load(scriptFile);
+
+	Console::getInstance()->pause();
 
 	return 0;
 }

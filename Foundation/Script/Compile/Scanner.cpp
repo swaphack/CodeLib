@@ -2,6 +2,7 @@
 #include "WordSet.h"
 
 #include "../Document/Document.h"
+#include "../macros.h"
 
 using namespace script;
 
@@ -70,7 +71,7 @@ void Scanner::readWord()
 			break;
 		}
 
-		if (*getPtr() == ' ' || *getPtr() == '\r' || *getPtr() == '\n')
+		if (IS_DECORATOR(*getPtr()))
 		{
 			appendWord(key);
 			m_nOffset += 1;

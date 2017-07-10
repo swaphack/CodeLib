@@ -148,15 +148,13 @@
     <ClInclude Include="Compile\SymbolHandler.h">
       <Filter>Compile\Parse</Filter>
     </ClInclude>
-    <ClInclude Include="Compile\SymbolParser.h">
-      <Filter>Compile\Sample</Filter>
-    </ClInclude>
     <ClInclude Include="Compile\ASTNode.h">
       <Filter>Compile\Parse</Filter>
     </ClInclude>
     <ClInclude Include="Compile\SymbolInformation.h">
       <Filter>Compile\Parse</Filter>
     </ClInclude>
+    <ClInclude Include="macros.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Core\Variable.cpp">

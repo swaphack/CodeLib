@@ -19,5 +19,19 @@ namespace script
 		void error(bool condition, const char* text);
 		// 调试
 		void debug(bool condition, const char* text);
+		// 信息
+		void info(const char* text);
+		// 警告
+		void warning(const char* text);
+		// 错误
+		void error(const char* text);
+		// 调试
+		void debug(const char* text);
+		// 显示
+		void open();
+		// 关闭
+		void close();
+		// 暂停
+		void pause();
 	};
 }

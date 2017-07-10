@@ -183,6 +183,7 @@
     <ClCompile Include="Config\ConfigManager.cpp">
       <Filter>Config</Filter>
     </ClCompile>
+    <ClCompile Include="Environment\EnvLoader.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Xml Include="Resource\Constants.xml">

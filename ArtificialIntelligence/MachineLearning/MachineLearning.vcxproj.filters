@@ -1,2 +1,31 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" />
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Memory">
+      <UniqueIdentifier>{fafc25a5-b869-4a7d-a118-4c568b20b24f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Learn">
+      <UniqueIdentifier>{7d8fc7bc-d144-4ff2-a9c8-6088897e7e91}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Creativity">
+      <UniqueIdentifier>{d45228f8-ef1c-4963-bc61-7e70ee4baf9f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rule">
+      <UniqueIdentifier>{bcc4868d-4846-4766-b4ba-6f088420ec36}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Memory\Memory.h">
+      <Filter>Memory</Filter>
+    </ClInclude>
+    <ClInclude Include="Rule\Rule.h">
+      <Filter>Rule</Filter>
+    </ClInclude>
+    <ClInclude Include="Rule\RuleItem.h">
+      <Filter>Rule</Filter>
+    </ClInclude>
+    <ClInclude Include="Rule\RuleCase.h">
+      <Filter>Rule</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

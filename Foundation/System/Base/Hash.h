@@ -29,7 +29,5 @@ namespace sys
 
 		// AP Hash Function
 		static uint getAPHash(char *str);
-	protected:
-	private:
 	};
 }

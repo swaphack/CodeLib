@@ -16,14 +16,11 @@ namespace script
 		virtual ~SymbolDelegate();
 	public:
 		// 符号信息
-		inline SymbolInformation& getSymbolInformation() { return m_rSymbolInformation; }
+		inline const SymbolInformation* getSymbolInformation() { return &m_rSymbolInformation; }
 		// 语法书节点模板
-		inline const ASTNode& getASTTemplate() { return m_rASTTemplate; }
+		inline const ASTNode* getASTTemplate() { return &m_rASTTemplate; }
 
-		// 生成语法节点
-		bool makeASTNode();
-		// 是否匹配格式
-		bool match(Token::const_iterator begin, Token::const_iterator end, Token::const_iterator& offset);
+		void setSymbolInformation(const SymbolInformation& value);
 		/**
 		*	创建语法节点
 		*	@param begin 输入表达式开始位置
@@ -40,6 +37,9 @@ namespace script
 		ASTNode* setValue(ASTNode* pNode, const char* value);
 		// 遍历节点
 		ASTNode* ergodicNode(ASTNode* pNode, Token::const_iterator iter);
+	private:
+		// 生成语法节点
+		bool makeASTNode();
 	protected:
 		// 语法节点模板
 		ASTNode m_rASTTemplate;

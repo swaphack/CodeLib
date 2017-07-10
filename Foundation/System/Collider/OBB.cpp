@@ -52,13 +52,10 @@ bool OBB::contains(const OBB& bounds)
 bool OBB::intersects(const OBB& bounds)
 {
 	Vector3 nv = bounds.center - center;
-
 	
 
 	Matrix44 mat1;
 	mat1.rotate(bounds.rotation);
-
-
 
 	return false;
 }

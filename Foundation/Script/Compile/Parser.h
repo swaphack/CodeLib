@@ -14,14 +14,14 @@ namespace script
 	*/
 	class Parser
 	{
-	private:
-		typedef std::vector<Token> TokenAry;
 	public:
 		Parser();
 		~Parser();
 	public:
 		// 单行和嵌套
-		bool parse(Token::const_iterator begin, Token::const_iterator end, std::vector<ASTNode*>& nodeAry);
+		bool parse(Token::const_iterator begin, Token::const_iterator end);
+		// 语法树组
+		const std::vector<ASTNode*>& getASTNodeList() { return m_pASTNodeList; }
 	protected:
 		/**
 		*	解析单一节点
@@ -33,10 +33,9 @@ namespace script
 		*	vector每一层数据存储AST结构，以左节点，符号，右节点的顺序存储
 		*	如果包含嵌套的话，嵌套从右节点扩展
 		*/
-		bool parseSingleASTNode(Token::const_iterator begin, Token::const_iterator end, Token::const_iterator& offset, TokenAry& tokenStack);
-		/**
-		*	根据语法树，生成AST节点
-		*/
-		bool makeSingleAstNode(TokenAry::const_reverse_iterator tokenAryBegin, TokenAry::const_reverse_iterator tokenAryEnd, ASTNode* pNode);
+		ASTNode* parseSingleASTNode(Token::const_iterator begin, Token::const_iterator end, Token::const_iterator& offset);
+	private:
+		// 语法树组
+		std::vector<ASTNode*> m_pASTNodeList;
 	};
 }

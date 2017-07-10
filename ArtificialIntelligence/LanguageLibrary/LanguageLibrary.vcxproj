@@ -44,10 +44,14 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
+      <BrowseInformation>true</BrowseInformation>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <Bscmake>
+      <PreserveSbr>true</PreserveSbr>
+    </Bscmake>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -67,14 +71,22 @@
     <ClInclude Include="Base\import.h" />
     <ClInclude Include="Base\Sentence.h" />
     <ClInclude Include="Base\T_Sentence.h" />
-    <ClInclude Include="Base\T_Text.h" />
     <ClInclude Include="Base\Word.h" />
     <ClInclude Include="Base\Enumerator.h" />
-    <ClInclude Include="Library\LibChinese.h" />
-    <ClInclude Include="Library\LibEnglish.h" />
-    <ClInclude Include="Library\LanguageClass.h" />
-    <ClInclude Include="Library\LibLanguage.h" />
+    <ClInclude Include="Instance\Chinese.h" />
+    <ClInclude Include="Instance\English.h" />
+    <ClInclude Include="Instance\LanguageClass.h" />
+    <ClInclude Include="Instance\macros.h" />
+    <ClInclude Include="Library\import.h" />
+    <ClInclude Include="Library\Library.h" />
+    <ClInclude Include="Library\Dictionary.h" />
     <ClInclude Include="Library\macros.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Base\Word.cpp" />
+    <ClCompile Include="Instance\English.cpp" />
+    <ClCompile Include="Library\Dictionary.cpp" />
+    <ClCompile Include="Library\Library.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

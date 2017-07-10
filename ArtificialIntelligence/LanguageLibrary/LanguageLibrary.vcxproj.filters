@@ -7,11 +7,11 @@
     <Filter Include="Base">
       <UniqueIdentifier>{c12f3fe3-f89d-47b6-be74-349295d8f6b2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Instance">
+      <UniqueIdentifier>{a3e15990-042a-4c4a-a69e-badb59a5cf64}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Library\LanguageClass.h">
-      <Filter>Library</Filter>
-    </ClInclude>
     <ClInclude Include="Library\macros.h">
       <Filter>Library</Filter>
     </ClInclude>
@@ -30,17 +30,40 @@
     <ClInclude Include="Base\Enumerator.h">
       <Filter>Base</Filter>
     </ClInclude>
-    <ClInclude Include="Base\T_Text.h">
+    <ClInclude Include="Library\Library.h">
+      <Filter>Library</Filter>
+    </ClInclude>
+    <ClInclude Include="Library\Dictionary.h">
+      <Filter>Library</Filter>
+    </ClInclude>
+    <ClInclude Include="Instance\English.h">
+      <Filter>Instance</Filter>
+    </ClInclude>
+    <ClInclude Include="Instance\Chinese.h">
+      <Filter>Instance</Filter>
+    </ClInclude>
+    <ClInclude Include="Instance\macros.h">
+      <Filter>Instance</Filter>
+    </ClInclude>
+    <ClInclude Include="Library\import.h">
+      <Filter>Library</Filter>
+    </ClInclude>
+    <ClInclude Include="Instance\LanguageClass.h">
+      <Filter>Instance</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Library\Dictionary.cpp">
+      <Filter>Library</Filter>
+    </ClCompile>
+    <ClCompile Include="Base\Word.cpp">
       <Filter>Base</Filter>
-    </ClInclude>
-    <ClInclude Include="Library\LibEnglish.h">
+    </ClCompile>
+    <ClCompile Include="Library\Library.cpp">
       <Filter>Library</Filter>
-    </ClInclude>
-    <ClInclude Include="Library\LibChinese.h">
-      <Filter>Library</Filter>
-    </ClInclude>
-    <ClInclude Include="Library\LibLanguage.h">
-      <Filter>Library</Filter>
-    </ClInclude>
+    </ClCompile>
+    <ClCompile Include="Instance\English.cpp">
+      <Filter>Instance</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

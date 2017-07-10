@@ -7,18 +7,35 @@
 
 namespace ll
 {
+	// 文本结构
+	typedef std::string Text;
+
+	// 单词意思 {词性，说明}
+	typedef std::map<WordNominal, Text> WordMeaning;
+
 	// 单词
-	class Word
-	{
+	struct Word
+	{		
 	public:
-		// 单词意思 {词性，说明}
-		typedef std::map<WordNominal, Text> WordMeaning;
-	public:
+		Word(const Text& value);
+		Word(const Text& value, const WordMeaning& meaning);
+		// 哈希编号
+		int hashID() const;
 		// 文本
-		Text Value;
-		// 发音(拼音)
-		Text Pronunciation;
+		const Text& value() const;
+		// 顺序
+		const char index() const;
+		// 是否为空
+		bool empty() const;
+		// 销毁
+		void release();
+	private:
+		static int s_HashID;
+		// 文本
+		Text _value;
 		// 词意
-		WordMeaning Meaning;
+		WordMeaning _meaning;
+		// 哈希编号
+		int _hashID;
 	};
 }

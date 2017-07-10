@@ -187,6 +187,10 @@
     <ClInclude Include="Stream\StreamWriter.h" />
     <ClInclude Include="Stream\StringStream.h" />
     <ClInclude Include="system.h" />
+    <ClInclude Include="Text\Encoding.h" />
+    <ClInclude Include="Text\import.h" />
+    <ClInclude Include="Text\TextParser.h" />
+    <ClInclude Include="Text\IBlockParser.h" />
     <ClInclude Include="Thread\Asynchronous.h" />
     <ClInclude Include="Thread\import.h" />
     <ClInclude Include="Thread\Mutex.h" />
@@ -268,6 +272,9 @@
     <ClCompile Include="Stream\StreamBase.cpp" />
     <ClCompile Include="Stream\StreamWriter.cpp" />
     <ClCompile Include="Stream\StringStream.cpp" />
+    <ClCompile Include="Text\Encoding.cpp" />
+    <ClCompile Include="Text\TextParser.cpp" />
+    <ClCompile Include="Text\IBlockParser.cpp" />
     <ClCompile Include="Thread\Mutex.cpp" />
     <ClCompile Include="Thread\Thread.cpp" />
     <ClCompile Include="Thread\Threading.cpp" />

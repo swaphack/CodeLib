@@ -64,6 +64,9 @@
     <Filter Include="Collider">
       <UniqueIdentifier>{e71cf1cf-f2c8-47b0-9fb4-30b22c1ccbfe}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Text">
+      <UniqueIdentifier>{0249e361-7a0f-46ab-84bf-a679cb642ff6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Base\File.h">
@@ -457,6 +460,18 @@
     <ClInclude Include="Collider\Box.h">
       <Filter>Collider</Filter>
     </ClInclude>
+    <ClInclude Include="Text\IBlockParser.h">
+      <Filter>Text</Filter>
+    </ClInclude>
+    <ClInclude Include="Text\TextParser.h">
+      <Filter>Text</Filter>
+    </ClInclude>
+    <ClInclude Include="Text\import.h">
+      <Filter>Text</Filter>
+    </ClInclude>
+    <ClInclude Include="Text\Encoding.h">
+      <Filter>Text</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Base\File.cpp">
@@ -683,6 +698,15 @@
     </ClCompile>
     <ClCompile Include="Collider\Box.cpp">
       <Filter>Collider</Filter>
+    </ClCompile>
+    <ClCompile Include="Text\IBlockParser.cpp">
+      <Filter>Text</Filter>
+    </ClCompile>
+    <ClCompile Include="Text\TextParser.cpp">
+      <Filter>Text</Filter>
+    </ClCompile>
+    <ClCompile Include="Text\Encoding.cpp">
+      <Filter>Text</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

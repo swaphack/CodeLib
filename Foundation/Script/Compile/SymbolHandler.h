@@ -30,5 +30,9 @@ namespace script
 		typedef std::map<std::string, SymbolDelegate*> SymbolDelegates;
 		// 符号处理委托
 		SymbolDelegates m_mSymbolDelegates;
+		// 内联开始符号处理委托
+		SymbolDelegates m_mEmbedBeginSymbolDelegates;
+		// 内联结束符号处理委托
+		SymbolDelegates m_mEmbedEndSymbolDelegates;
 	};
 }

@@ -6,7 +6,6 @@ ASTNode::ASTNode()
 :left(nullptr)
 , right(nullptr)
 , isSymbol(false)
-, builtin(false)
 , flag(0)
 {
 

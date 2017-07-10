@@ -16,8 +16,6 @@ namespace script
 		ASTNode* right;
 		// 是否是符号
 		bool isSymbol;
-		// 是否内嵌
-		bool builtin;
 		// 标记位
 		int flag;
 	public:
