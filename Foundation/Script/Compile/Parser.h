@@ -1,7 +1,6 @@
 #pragma once
 
 #include "macros.h"
-#include "IStep.h"
 #include <vector>
 
 namespace script
