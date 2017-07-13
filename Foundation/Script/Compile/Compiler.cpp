@@ -1,6 +1,12 @@
 #include "Compiler.h"
 #include "../Document/CompilerDocument.h"
 #include "../Core/Console.h"
+#include "Scanner.h"
+#include "Parser.h"
+#include "SemanticAnalyzer.h"
+#include "SourceCodeOptimizer.h"
+#include "CodeGenerator.h"
+#include "TargetCodeOptimizer.h"
 
 using namespace  script;
 
@@ -20,6 +26,12 @@ Compiler::~Compiler()
 
 }
 
+Compiler* Compiler::getInstance()
+{
+	static Compiler s_Compiler;
+	return &s_Compiler;
+}
+
 bool Compiler::compile(CompilerDocument* document)
 {
 	if (document == nullptr)
@@ -33,7 +45,7 @@ bool Compiler::compile(CompilerDocument* document)
 		Console::getInstance()->info("1. scan document");
 		if (!m_pScanner->scan(document))
 		{
-			Console::getInstance()->warning("scan error");
+			Console::getInstance()->warn("scan error");
 			break;
 		}
 
@@ -42,7 +54,7 @@ bool Compiler::compile(CompilerDocument* document)
 			m_pScanner->getTokenTable()->tokenBegin(),
 			m_pScanner->getTokenTable()->tokenEnd()))
 		{
-			Console::getInstance()->warning("parse error");
+			Console::getInstance()->warn("parse error");
 			break;
 		}
 	} while (0);

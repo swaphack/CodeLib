@@ -2,6 +2,7 @@
 
 #include "macros.h"
 #include "TokenTable.h"
+#include "IStep.h"
 
 namespace script
 {

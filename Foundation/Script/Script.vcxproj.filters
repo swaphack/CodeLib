@@ -4,9 +4,6 @@
     <Filter Include="Document">
       <UniqueIdentifier>{b8f52b13-9168-4572-8a28-d00c29aedc3b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Core">
-      <UniqueIdentifier>{18c3ab89-d8cb-44b1-8fba-6c130ba5b117}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Env">
       <UniqueIdentifier>{1c584696-cfe3-4244-885d-d759a56964ac}</UniqueIdentifier>
     </Filter>
@@ -40,50 +37,20 @@
     <Filter Include="Compile\Sample">
       <UniqueIdentifier>{eeb492f3-3744-4de1-823f-9f076860c64a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Core">
+      <UniqueIdentifier>{2dc2a2ac-8949-4811-b667-37af6f10ab18}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Script.h" />
     <ClInclude Include="Document\Document.h">
       <Filter>Document</Filter>
     </ClInclude>
-    <ClInclude Include="Core\Scope.h">
-      <Filter>Core</Filter>
-    </ClInclude>
-    <ClInclude Include="Core\Variable.h">
-      <Filter>Core</Filter>
-    </ClInclude>
-    <ClInclude Include="Core\Struct.h">
-      <Filter>Core</Filter>
-    </ClInclude>
-    <ClInclude Include="Core\Base.h">
-      <Filter>Core</Filter>
-    </ClInclude>
-    <ClInclude Include="Core\Function.h">
-      <Filter>Core</Filter>
-    </ClInclude>
-    <ClInclude Include="Core\Console.h">
-      <Filter>Core</Filter>
-    </ClInclude>
-    <ClInclude Include="Core\Message.h">
-      <Filter>Core</Filter>
-    </ClInclude>
-    <ClInclude Include="Core\common.h">
-      <Filter>Core</Filter>
-    </ClInclude>
-    <ClInclude Include="Core\Tip.h">
-      <Filter>Core</Filter>
-    </ClInclude>
     <ClInclude Include="Env\Environment.h">
       <Filter>Env</Filter>
     </ClInclude>
     <ClInclude Include="Env\Module.h">
       <Filter>Env</Filter>
-    </ClInclude>
-    <ClInclude Include="Core\import.h">
-      <Filter>Core</Filter>
-    </ClInclude>
-    <ClInclude Include="Core\Variables.h">
-      <Filter>Core</Filter>
     </ClInclude>
     <ClInclude Include="Document\import.h">
       <Filter>Document</Filter>
@@ -155,34 +122,47 @@
       <Filter>Compile\Parse</Filter>
     </ClInclude>
     <ClInclude Include="macros.h" />
+    <ClInclude Include="Compile\IStep.h" />
+    <ClInclude Include="Core\Base.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\common.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Console.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Function.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\import.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Logger.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Message.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Scope.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Struct.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Tip.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Variable.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Variables.h">
+      <Filter>Core</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Core\Variable.cpp">
-      <Filter>Core</Filter>
-    </ClCompile>
-    <ClCompile Include="Core\Base.cpp">
-      <Filter>Core</Filter>
-    </ClCompile>
-    <ClCompile Include="Core\Struct.cpp">
-      <Filter>Core</Filter>
-    </ClCompile>
-    <ClCompile Include="Core\Console.cpp">
-      <Filter>Core</Filter>
-    </ClCompile>
-    <ClCompile Include="Core\Message.cpp">
-      <Filter>Core</Filter>
-    </ClCompile>
-    <ClCompile Include="Core\Scope.cpp">
-      <Filter>Core</Filter>
-    </ClCompile>
     <ClCompile Include="Env\Environment.cpp">
       <Filter>Env</Filter>
-    </ClCompile>
-    <ClCompile Include="Core\Variables.cpp">
-      <Filter>Core</Filter>
-    </ClCompile>
-    <ClCompile Include="Core\Function.cpp">
-      <Filter>Core</Filter>
     </ClCompile>
     <ClCompile Include="Script.cpp" />
     <ClCompile Include="main.cpp" />
@@ -227,6 +207,33 @@
     </ClCompile>
     <ClCompile Include="Compile\ASTNode.cpp">
       <Filter>Compile\Parse</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Base.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Console.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Function.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Logger.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Message.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Scope.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Struct.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Variable.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Variables.cpp">
+      <Filter>Core</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

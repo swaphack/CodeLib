@@ -2,6 +2,8 @@
 
 namespace script
 {
+	class ASTNode;
+
 	/**
 	*	ÓïÒå·ÖÎö
 	*/

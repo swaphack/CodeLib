@@ -68,7 +68,7 @@ void Console::info(bool condition, const char* text)
 	printf("[INFO] %s\r\n", text);
 }
 
-void Console::warning(bool condition, const char* text)
+void Console::warn(bool condition, const char* text)
 {
 	if (!text || condition)
 	{
@@ -106,9 +106,9 @@ void Console::info(const char* text)
 	info(false, text);
 }
 
-void Console::warning(const char* text)
+void Console::warn(const char* text)
 {
-	warning(false, text);
+	warn(false, text);
 }
 
 void Console::error(const char* text)
@@ -136,4 +136,10 @@ void Console::close()
 void Console::pause()
 {
 	system("pause");
+}
+
+void Console::show(const char* text)
+{
+	setConsoleColor(CTC_WHITE, CBC_BLACK);
+	printf("%s\r\n", text);
 }

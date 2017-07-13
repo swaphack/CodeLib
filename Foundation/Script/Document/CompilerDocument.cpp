@@ -5,12 +5,10 @@ using namespace script;
 
 CompilerDocument::CompilerDocument()
 {
-	m_pCompiler = new Compiler();
 }
 
 CompilerDocument::~CompilerDocument()
 {
-	delete m_pCompiler;
 }
 
 bool CompilerDocument::parse()
@@ -20,7 +18,7 @@ bool CompilerDocument::parse()
 		return false;
 	}
 
-	bool bRet = m_pCompiler->compile(this);
+	bool bRet = Compiler::getInstance()->compile(this);
 	if (bRet == false)
 	{
 		return false;

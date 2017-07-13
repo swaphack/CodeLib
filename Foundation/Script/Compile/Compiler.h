@@ -1,22 +1,24 @@
 #pragma once
 
-#include "Scanner.h"
-#include "Parser.h"
-#include "SemanticAnalyzer.h"
-#include "SourceCodeOptimizer.h"
-#include "CodeGenerator.h"
-#include "TargetCodeOptimizer.h"
-
 namespace script
 {
+	class Scanner;
+	class Parser;
+	class SemanticAnalyzer;
+	class SourceCodeOptimizer;
+	class CodeGenerator;
+	class TargetCodeOptimizer;
+
 	class CompilerDocument;
 	// ±‡“Î∆˜
 	class Compiler
 	{
-	public:
+	private:
 		Compiler();
 		~Compiler();
 	public:
+		static Compiler* getInstance();
+
 		bool compile(CompilerDocument* document);
 	private:
 		// …®√Ë≥Ã–Ú
