@@ -127,9 +127,18 @@ namespace sys
 		*/
 		static float cosAngle(const Vector2& vector0, const Vector2& vector1);
 		/**
+		*	vector1和vector0的夹角正弦值(0,PI)
+		*/
+		static float sinAngle(const Vector2& vector0, const Vector2& vector1);
+		/**
 		*	获得vector1在vector0的投影长度
 		*/
 		static float project(const Vector2& vector0, const Vector2& vector1);
+
+		/**
+		*	vector1相对vector0的旋转角度(0,2PI)
+		*/
+		static float getRotateAngle(const Vector2& vector0, const Vector2& vector1);
 	};
 
 	__declspec(selectany) Vector2 Vector2::Zero;

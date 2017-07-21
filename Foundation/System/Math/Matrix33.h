@@ -14,7 +14,7 @@ namespace sys
 		/**
 		*	标准化,单位矩阵
 		*/
-		void unit();
+		void normalize();
 		/**
 		*	平移
 		*/

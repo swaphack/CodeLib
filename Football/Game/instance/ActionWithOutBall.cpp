@@ -3,39 +3,39 @@
 using namespace game;
 
 
-ActionWithOutBall::ActionWithOutBall()
+ActionWithoutBall::ActionWithoutBall()
 :m_bFinish(false)
 , m_pPerson(nullptr)
 {
 
 }
 
-ActionWithOutBall::~ActionWithOutBall()
+ActionWithoutBall::~ActionWithoutBall()
 {
 
 }
 
-IPerson* ActionWithOutBall::getInitiator()
+IPerson* ActionWithoutBall::getInitiator()
 {
 	return m_pPerson;
 }
 
-void ActionWithOutBall::setInitiator(IPerson* pPerson)
+void ActionWithoutBall::setInitiator(IPerson* pPerson)
 {
 	m_pPerson = pPerson;
 }
 
-bool ActionWithOutBall::run()
+bool ActionWithoutBall::run()
 {
 	return false;
 }
 
-void ActionWithOutBall::update(float dt)
+void ActionWithoutBall::update(float dt)
 {
 
 }
 
-bool ActionWithOutBall::isFinish()
+bool ActionWithoutBall::isFinish()
 {
 	return m_bFinish;
 }

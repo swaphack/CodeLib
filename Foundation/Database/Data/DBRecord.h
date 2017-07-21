@@ -22,17 +22,17 @@ namespace db
 		void makeText(const DBTable* table, std::string& data);
 
 		// 获取字段的值
-		void getFieldValue(const char* key, std::string& value);
-		void getFieldValue(const char* key, char& value);
-		void getFieldValue(const char* key, uchar& value);
-		void getFieldValue(const char* key, short& value);
-		void getFieldValue(const char* key, ushort& value);
-		void getFieldValue(const char* key, int& value);
-		void getFieldValue(const char* key, uint& value);
-		void getFieldValue(const char* key, long& value);
-		void getFieldValue(const char* key, ulong& value);
-		void getFieldValue(const char* key, float& value);
-		void getFieldValue(const char* key, double& value);
+		bool getFieldValue(const char* key, std::string& value);
+		bool getFieldValue(const char* key, char& value);
+		bool getFieldValue(const char* key, uchar& value);
+		bool getFieldValue(const char* key, short& value);
+		bool getFieldValue(const char* key, ushort& value);
+		bool getFieldValue(const char* key, int& value);
+		bool getFieldValue(const char* key, uint& value);
+		bool getFieldValue(const char* key, long& value);
+		bool getFieldValue(const char* key, ulong& value);
+		bool getFieldValue(const char* key, float& value);
+		bool getFieldValue(const char* key, double& value);
 
 		// 设置字段的值
 		void setFieldValue(const char* key, const char* value);
@@ -56,7 +56,7 @@ namespace db
 	private:
 		// 使用模板获取字段的值
 		template<typename T>
-		void getFieldValue(const char* key, T& t);
+		bool getFieldValue(const char* key, T& t);
 		// 使用模板设置字段的值
 		template<typename T>
 		void setFieldValue(const char* key, T t);
@@ -69,15 +69,17 @@ namespace db
 	};	
 
 	template<typename T>
-	void DBRecord::getFieldValue( const char* key, T& t )
+	bool DBRecord::getFieldValue(const char* key, T& t)
 	{
 		const StreamBase* value = this->getField(key);
 		if (value == nullptr)
 		{
-			return;
+			return false;
 		}
 
 		t = *(T*)value->getData();
+
+		return true;
 	}
 
 	template<typename T>

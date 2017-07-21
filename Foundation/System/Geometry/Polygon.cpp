@@ -226,12 +226,9 @@ bool Polygon::isConvex(const Polygon& polygon)
 		{
 			lastDirection = direction;
 		}
-		else 
+		else if (direction != lastDirection)
 		{
-			if (direction != lastDirection)
-			{
-				return false;
-			}
+			return false;
 		}
 	}
 

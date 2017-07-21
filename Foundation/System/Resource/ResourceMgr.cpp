@@ -14,9 +14,9 @@ ResourceMgr::~ResourceMgr()
 {
 	this->dispose();
 }
-Resource* ResourceMgr::getResource(int type)
+Resource* ResourceMgr::getResource(ResourceType type)
 {
-	std::map<int, IResource*>::iterator iter = _getResMethods.find(type);
+	std::map<ResourceType, IResource*>::iterator iter = _getResMethods.find(type);
 	if (iter != _getResMethods.end())
 	{
 		return dynamic_cast<Resource*>(iter->second);
@@ -25,7 +25,7 @@ Resource* ResourceMgr::getResource(int type)
 	return nullptr;
 }
 
-void ResourceMgr::addMethod(int type, IResource* res)
+void ResourceMgr::addMethod(ResourceType type, IResource* res)
 {
 	if (res == nullptr)
 	{
@@ -37,9 +37,9 @@ void ResourceMgr::addMethod(int type, IResource* res)
 	_getResMethods[type] = res;
 }
 
-void ResourceMgr::removeMethod(int type)
+void ResourceMgr::removeMethod(ResourceType type)
 {
-	std::map<int, IResource*>::iterator iter = _getResMethods.find(type);
+	std::map<ResourceType, IResource*>::iterator iter = _getResMethods.find(type);
 	if (iter == _getResMethods.end())
 	{
 		return;
@@ -58,7 +58,7 @@ void ResourceMgr::init()
 
 void ResourceMgr::dispose()
 {
-	std::map<int, IResource*>::iterator iter = _getResMethods.begin();
+	std::map<ResourceType, IResource*>::iterator iter = _getResMethods.begin();
 	while (iter != _getResMethods.end())
 	{
 		SAFE_DELETE(iter->second);

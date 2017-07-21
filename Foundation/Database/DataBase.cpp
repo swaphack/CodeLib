@@ -73,6 +73,11 @@ void DataBase::loadDB( const char* configFilepath )
 	this->loadDB(config);
 }
 
+void DataBase::loadDB(const std::string& configFilepath)
+{
+	loadDB(configFilepath.c_str());
+}
+
 void DataBase::loadDB(const DBConfig& dbConfig)
 {
 	_config = dbConfig;
@@ -87,7 +92,7 @@ void DataBase::loadDB(const DBConfig& dbConfig)
 	}
 }
 
-void db::DataBase::saveDB(const char* configFilepath)
+void DataBase::saveDB(const char* configFilepath)
 {
 	if (configFilepath == nullptr)
 	{
@@ -107,10 +112,15 @@ void db::DataBase::saveDB(const char* configFilepath)
 	_config.save(configFilepath);
 }
 
+void DataBase::saveDB(const std::string& configFilepath)
+{
+	saveDB(configFilepath.c_str());
+}
+
 void DataBase::loadContent( const char* filepath )
 {
 	_content.removeAllTables();
-	DBCode::loadContent(filepath, &_content);
+	DBStructTemplate::loadContent(filepath, &_content);
 }
 
 void DataBase::loadData( const char* filepath )
@@ -137,7 +147,7 @@ void DataBase::loadData( const char* filepath )
 
 void DataBase::saveContent( const char* filepath )
 {
-	DBCode::saveContent(filepath, &_content);
+	DBStructTemplate::saveContent(filepath, &_content);
 }
 
 void DataBase::saveData( const char* filepath )

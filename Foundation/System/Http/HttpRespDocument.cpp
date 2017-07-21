@@ -54,6 +54,11 @@ void HttpRespDocument::setResponseCode(const char* code)
 	setStatus(1, code);
 }
 
+void HttpRespDocument::setResponseCode(int code)
+{
+	setResponseCode(getCString("%d", code));
+}
+
 const char* HttpRespDocument::getDescribe()
 {
 	return getStatus(2);

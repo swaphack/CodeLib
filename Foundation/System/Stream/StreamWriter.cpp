@@ -14,9 +14,7 @@ StreamWriter::StreamWriter(int size)
 StreamWriter::StreamWriter(const char* data, int size)
 : Stream(new StreamBaseRef())
 {
-	char* newData = StreamHelper::mallocStream((void*)data, size);
-
-	this->setData(newData, size);
+	this->setData(data, size);
 
 	this->setCursorAndLength(size);
 }
@@ -112,11 +110,11 @@ void StreamWriter::realloct(ss_t size)
 		return;
 	}
 
-	ss_t length = getStream()->getLength();
-	char* newData = StreamHelper::mallocStream(size, (void*)getStream()->getData(), length);
+	ss_t len = getStream()->getLength();
+	char* newData = StreamHelper::mallocStream(size, (void*)getStream()->getData(), len);
 
 	getStream()->setData(newData, size);
-	setLength(length);
+	setLength(len);
 
 	_capacity = size;
 }

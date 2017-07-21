@@ -29,6 +29,7 @@ namespace db
 		// 保存路径参数
 		void save(const char* configFilepath);
 	};
+
 	// 数据库
 	class DataBase
 	{
@@ -46,9 +47,13 @@ namespace db
 		// 加载数据库
 		void loadDB(const char* configFilepath);
 		// 加载数据库
+		void loadDB(const std::string& configFilepath);
+		// 加载数据库
 		void loadDB(const DBConfig& dbConfig);
 		// 保存配置
 		void saveDB(const char* configFilepath);
+		// 保存配置
+		void saveDB(const std::string& configFilepath);
 	protected:
 		// 加载数据库索引目录
 		void loadContent(const char* filepath);

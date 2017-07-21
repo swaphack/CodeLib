@@ -1,8 +1,5 @@
 #pragma once
 
-#include "Base.h"
-#include "Variable.h"
-#include "Variables.h"
-#include "Function.h"
-#include "Struct.h"
-#include "Scope.h"
+#include "Base/import.h"
+#include "Common/import.h"
+#include "Instance/import.h"

@@ -8,11 +8,11 @@ namespace game
 	/**
 	*	无球动作
 	*/
-	class ActionWithOutBall : public IAction, public ITimer
+	class ActionWithoutBall : public IAction, public ITimer
 	{
 	public:
-		ActionWithOutBall();
-		virtual ~ActionWithOutBall();
+		ActionWithoutBall();
+		virtual ~ActionWithoutBall();
 	public:
 		/**
 		*	发起者
@@ -42,7 +42,7 @@ namespace game
 	/**
 	*	无球启动动作
 	*/
-	class StartAction : public ActionWithOutBall
+	class StartAction : public ActionWithoutBall
 	{
 	public:
 		virtual ~StartAction() {}
@@ -51,7 +51,7 @@ namespace game
 	/**
 	*	无球跑动动作
 	*/
-	class RunAction : public ActionWithOutBall
+	class RunAction : public ActionWithoutBall
 	{
 	public:
 		virtual ~RunAction() {}
@@ -60,7 +60,7 @@ namespace game
 	/**
 	*	无球急停动作
 	*/
-	class EmergencyAction : public ActionWithOutBall
+	class EmergencyAction : public ActionWithoutBall
 	{
 	public:
 		virtual ~EmergencyAction() {}
@@ -69,7 +69,7 @@ namespace game
 	/**
 	*	无球转身动作
 	*/
-	class TurnAroundAction : public ActionWithOutBall
+	class TurnAroundAction : public ActionWithoutBall
 	{
 	public:
 		virtual ~TurnAroundAction() {}
@@ -78,7 +78,7 @@ namespace game
 	/**
 	*	无球假动作
 	*/
-	class FeintAction : public ActionWithOutBall
+	class FeintAction : public ActionWithoutBall
 	{
 	public:
 		virtual ~FeintAction() {}

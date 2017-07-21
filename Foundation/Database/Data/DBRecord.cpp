@@ -76,55 +76,57 @@ void DBRecord::makeText(const DBTable* table, std::string& data)
 }
 
 // 获取字段的值
-void DBRecord::getFieldValue(const char* key, std::string& value)
+bool DBRecord::getFieldValue(const char* key, std::string& value)
 {
 	const StreamBase* ptr = this->getField(key);
 	if (ptr == nullptr)
 	{
-		return;
+		return false;
 	}
 
 	value = std::string(ptr->getData(), ptr->getLength());
+
+	return true;
 }
-void DBRecord::getFieldValue(const char* key, char& value)
+bool DBRecord::getFieldValue(const char* key, char& value)
 {
-	this->getFieldValue<char>(key, value);
+	return this->getFieldValue<char>(key, value);
 }
-void DBRecord::getFieldValue(const char* key, uchar& value)
+bool DBRecord::getFieldValue(const char* key, uchar& value)
 {
-	this->getFieldValue<uchar>(key, value);
+	return this->getFieldValue<uchar>(key, value);
 }
-void DBRecord::getFieldValue(const char* key, short& value)
+bool DBRecord::getFieldValue(const char* key, short& value)
 {
-	this->getFieldValue<short>(key, value);
+	return this->getFieldValue<short>(key, value);
 }
-void DBRecord::getFieldValue(const char* key, ushort& value)
+bool DBRecord::getFieldValue(const char* key, ushort& value)
 {
-	this->getFieldValue<ushort>(key, value);
+	return this->getFieldValue<ushort>(key, value);
 }
-void DBRecord::getFieldValue(const char* key, int& value)
+bool DBRecord::getFieldValue(const char* key, int& value)
 {
-	this->getFieldValue<int>(key, value);
+	return this->getFieldValue<int>(key, value);
 }
-void DBRecord::getFieldValue(const char* key, uint& value)
+bool DBRecord::getFieldValue(const char* key, uint& value)
 {
-	this->getFieldValue<uint>(key, value);
+	return this->getFieldValue<uint>(key, value);
 }
-void DBRecord::getFieldValue(const char* key, long& value)
+bool DBRecord::getFieldValue(const char* key, long& value)
 {
-	this->getFieldValue<long>(key, value);
+	return this->getFieldValue<long>(key, value);
 }
-void DBRecord::getFieldValue(const char* key, ulong& value)
+bool DBRecord::getFieldValue(const char* key, ulong& value)
 {
-	this->getFieldValue<ulong>(key, value);
+	return this->getFieldValue<ulong>(key, value);
 }
-void DBRecord::getFieldValue(const char* key, float& value)
+bool DBRecord::getFieldValue(const char* key, float& value)
 {
-	this->getFieldValue<float>(key, value);
+	return this->getFieldValue<float>(key, value);
 }
-void DBRecord::getFieldValue(const char* key, double& value)
+bool DBRecord::getFieldValue(const char* key, double& value)
 {
-	this->getFieldValue<double>(key, value);
+	return this->getFieldValue<double>(key, value);
 }
 
 // 设置字段的值

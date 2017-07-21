@@ -22,6 +22,16 @@ bool Component::addComponent(Component* pComponent)
 	return this->getComponentSheet()->addComponent(pComponent);
 }
 
+void Component::removeComponent(Component* pComponent)
+{
+	if (pComponent == nullptr)
+	{
+		return;
+	}
+
+	this->getComponentSheet()->removeComponent(pComponent->getType());
+}
+
 Component* Component::getComponent(const char* name)
 {
 	if (name == nullptr)
@@ -30,6 +40,11 @@ Component* Component::getComponent(const char* name)
 	}
 
 	return this->getComponentSheet()->getComponent(name);
+}
+
+void Component::removeAllComponents()
+{
+	this->getComponentSheet()->removeAllComponents();
 }
 
 bool Component::copyTo(Component* pComponent)

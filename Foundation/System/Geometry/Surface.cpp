@@ -183,12 +183,9 @@ bool Surface::isConvex(const Surface& surface)
 		{
 			lastDirection = direction;
 		}
-		else
+		else if (direction != lastDirection)
 		{
-			if (direction != lastDirection)
-			{
-				return false;
-			}
+			return false;
 		}
 	}
 

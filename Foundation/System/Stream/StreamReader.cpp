@@ -11,9 +11,7 @@ StreamReader::StreamReader()
 StreamReader::StreamReader(const char* data, ss_t size)
 : Stream(new StreamBaseRef())
 {
-	char* newData = StreamHelper::mallocStream((void*)data, size);
-
-	this->setData(newData, size);
+	this->setData(data, size);
 }
 
 

@@ -40,6 +40,15 @@
     <Filter Include="Core">
       <UniqueIdentifier>{2dc2a2ac-8949-4811-b667-37af6f10ab18}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Core\Base">
+      <UniqueIdentifier>{5203b480-0d9d-45a4-b2df-4d7b82dd0952}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Common">
+      <UniqueIdentifier>{a0191664-34fc-495e-94cd-e887ec578079}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Instance">
+      <UniqueIdentifier>{655ee069-598d-4b99-bbcf-0e5c5fe23812}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Script.h" />
@@ -58,44 +67,8 @@
     <ClInclude Include="Compile\import.h">
       <Filter>Compile</Filter>
     </ClInclude>
-    <ClInclude Include="Compile\Scanner.h">
-      <Filter>Compile\Scan</Filter>
-    </ClInclude>
-    <ClInclude Include="Compile\Parser.h">
-      <Filter>Compile\Parse</Filter>
-    </ClInclude>
     <ClInclude Include="Compile\Compiler.h">
       <Filter>Compile</Filter>
-    </ClInclude>
-    <ClInclude Include="Compile\CodeGenerator.h">
-      <Filter>Compile\CodeGenerate</Filter>
-    </ClInclude>
-    <ClInclude Include="Compile\SemanticAnalyzer.h">
-      <Filter>Compile\SemanticAnalyze</Filter>
-    </ClInclude>
-    <ClInclude Include="Compile\SourceCodeOptimizer.h">
-      <Filter>Compile\SourceCodeOptimize</Filter>
-    </ClInclude>
-    <ClInclude Include="Compile\TargetCodeOptimizer.h">
-      <Filter>Compile\TargetCodeOptimize</Filter>
-    </ClInclude>
-    <ClInclude Include="Compile\Error.h">
-      <Filter>Compile\Common</Filter>
-    </ClInclude>
-    <ClInclude Include="Compile\macros.h">
-      <Filter>Compile\Common</Filter>
-    </ClInclude>
-    <ClInclude Include="Compile\AbstractSyntaxTree.h">
-      <Filter>Compile\Parse</Filter>
-    </ClInclude>
-    <ClInclude Include="Compile\TokenTable.h">
-      <Filter>Compile\Scan</Filter>
-    </ClInclude>
-    <ClInclude Include="Compile\WordSet.h">
-      <Filter>Compile\Common</Filter>
-    </ClInclude>
-    <ClInclude Include="Compile\WordFilters.h">
-      <Filter>Compile\Scan</Filter>
     </ClInclude>
     <ClInclude Include="Document\CompilerDocument.h">
       <Filter>Document</Filter>
@@ -103,61 +76,156 @@
     <ClInclude Include="Document\WordDocument.h">
       <Filter>Document</Filter>
     </ClInclude>
-    <ClInclude Include="Compile\ITextFilter.h">
+    <ClInclude Include="macros.h" />
+    <ClInclude Include="Compile\Parse\ASTNode.h">
+      <Filter>Compile\Parse</Filter>
+    </ClInclude>
+    <ClInclude Include="Compile\Parse\Parser.h">
+      <Filter>Compile\Parse</Filter>
+    </ClInclude>
+    <ClInclude Include="Compile\Parse\SymbolDelegate.h">
+      <Filter>Compile\Parse</Filter>
+    </ClInclude>
+    <ClInclude Include="Compile\Parse\SymbolHandler.h">
+      <Filter>Compile\Parse</Filter>
+    </ClInclude>
+    <ClInclude Include="Compile\Common\Error.h">
+      <Filter>Compile\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Compile\Common\macros.h">
+      <Filter>Compile\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Compile\Common\WordSet.h">
+      <Filter>Compile\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Compile\Scan\Scanner.h">
       <Filter>Compile\Scan</Filter>
     </ClInclude>
-    <ClInclude Include="Compile\CodeFilter.h">
-      <Filter>Compile\Sample</Filter>
+    <ClInclude Include="Compile\Scan\TokenTable.h">
+      <Filter>Compile\Scan</Filter>
     </ClInclude>
-    <ClInclude Include="Compile\SymbolDelegate.h">
+    <ClInclude Include="Compile\Scan\WordFilters.h">
+      <Filter>Compile\Scan</Filter>
+    </ClInclude>
+    <ClInclude Include="Compile\SemanticAnalyze\SANode.h">
+      <Filter>Compile\SemanticAnalyze</Filter>
+    </ClInclude>
+    <ClInclude Include="Compile\SemanticAnalyze\SemanticAnalyzer.h">
+      <Filter>Compile\SemanticAnalyze</Filter>
+    </ClInclude>
+    <ClInclude Include="Compile\SemanticAnalyze\VariableFilter.h">
+      <Filter>Compile\SemanticAnalyze</Filter>
+    </ClInclude>
+    <ClInclude Include="Compile\SemanticAnalyze\VariableTable.h">
+      <Filter>Compile\SemanticAnalyze</Filter>
+    </ClInclude>
+    <ClInclude Include="Compile\Parse\SymbolInformation.h">
       <Filter>Compile\Parse</Filter>
     </ClInclude>
-    <ClInclude Include="Compile\SymbolHandler.h">
+    <ClInclude Include="Compile\Parse\macros.h">
       <Filter>Compile\Parse</Filter>
     </ClInclude>
-    <ClInclude Include="Compile\ASTNode.h">
+    <ClInclude Include="Compile\Scan\macros.h">
+      <Filter>Compile\Scan</Filter>
+    </ClInclude>
+    <ClInclude Include="Compile\SemanticAnalyze\macros.h">
+      <Filter>Compile\SemanticAnalyze</Filter>
+    </ClInclude>
+    <ClInclude Include="Compile\Common\ITextFilter.h">
+      <Filter>Compile\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Compile\Common\import.h">
+      <Filter>Compile\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Compile\Parse\import.h">
       <Filter>Compile\Parse</Filter>
     </ClInclude>
-    <ClInclude Include="Compile\SymbolInformation.h">
-      <Filter>Compile\Parse</Filter>
+    <ClInclude Include="Compile\Scan\import.h">
+      <Filter>Compile\Scan</Filter>
     </ClInclude>
-    <ClInclude Include="macros.h" />
-    <ClInclude Include="Compile\IStep.h" />
-    <ClInclude Include="Core\Base.h">
-      <Filter>Core</Filter>
+    <ClInclude Include="Compile\SemanticAnalyze\import.h">
+      <Filter>Compile\SemanticAnalyze</Filter>
     </ClInclude>
-    <ClInclude Include="Core\common.h">
-      <Filter>Core</Filter>
+    <ClInclude Include="Compile\SourceCodeOptimize\import.h">
+      <Filter>Compile\SourceCodeOptimize</Filter>
     </ClInclude>
-    <ClInclude Include="Core\Console.h">
-      <Filter>Core</Filter>
+    <ClInclude Include="Compile\SourceCodeOptimize\SourceCodeOptimizer.h">
+      <Filter>Compile\SourceCodeOptimize</Filter>
     </ClInclude>
-    <ClInclude Include="Core\Function.h">
-      <Filter>Core</Filter>
+    <ClInclude Include="Compile\TargetCodeOptimize\import.h">
+      <Filter>Compile\TargetCodeOptimize</Filter>
+    </ClInclude>
+    <ClInclude Include="Compile\TargetCodeOptimize\TargetCodeOptimizer.h">
+      <Filter>Compile\TargetCodeOptimize</Filter>
+    </ClInclude>
+    <ClInclude Include="Compile\CodeGenerate\CodeGenerator.h">
+      <Filter>Compile\CodeGenerate</Filter>
+    </ClInclude>
+    <ClInclude Include="Compile\CodeGenerate\macros.h">
+      <Filter>Compile\CodeGenerate</Filter>
+    </ClInclude>
+    <ClInclude Include="Compile\CodeGenerate\import.h">
+      <Filter>Compile\CodeGenerate</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Base\Base.h">
+      <Filter>Core\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Base\Function.h">
+      <Filter>Core\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Base\Members.h">
+      <Filter>Core\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Base\Scope.h">
+      <Filter>Core\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Base\Struct.h">
+      <Filter>Core\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Base\Variable.h">
+      <Filter>Core\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Common\common.h">
+      <Filter>Core\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Common\Console.h">
+      <Filter>Core\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Common\Logger.h">
+      <Filter>Core\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Common\Message.h">
+      <Filter>Core\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Common\Tip.h">
+      <Filter>Core\Common</Filter>
     </ClInclude>
     <ClInclude Include="Core\import.h">
       <Filter>Core</Filter>
     </ClInclude>
-    <ClInclude Include="Core\Logger.h">
-      <Filter>Core</Filter>
+    <ClInclude Include="Core\Base\import.h">
+      <Filter>Core\Base</Filter>
     </ClInclude>
-    <ClInclude Include="Core\Message.h">
-      <Filter>Core</Filter>
+    <ClInclude Include="Core\Common\import.h">
+      <Filter>Core\Common</Filter>
     </ClInclude>
-    <ClInclude Include="Core\Scope.h">
-      <Filter>Core</Filter>
+    <ClInclude Include="Core\Instance\import.h">
+      <Filter>Core\Instance</Filter>
     </ClInclude>
-    <ClInclude Include="Core\Struct.h">
-      <Filter>Core</Filter>
+    <ClInclude Include="Core\Instance\macros.h">
+      <Filter>Core\Instance</Filter>
     </ClInclude>
-    <ClInclude Include="Core\Tip.h">
-      <Filter>Core</Filter>
+    <ClInclude Include="Core\Instance\Real.h">
+      <Filter>Core\Instance</Filter>
     </ClInclude>
-    <ClInclude Include="Core\Variable.h">
-      <Filter>Core</Filter>
+    <ClInclude Include="Core\Instance\Text.h">
+      <Filter>Core\Instance</Filter>
     </ClInclude>
-    <ClInclude Include="Core\Variables.h">
-      <Filter>Core</Filter>
+    <ClInclude Include="Core\Instance\None.h">
+      <Filter>Core\Instance</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Base\macros.h">
+      <Filter>Core\Base</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -166,29 +234,8 @@
     </ClCompile>
     <ClCompile Include="Script.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Compile\Scanner.cpp">
-      <Filter>Compile\Scan</Filter>
-    </ClCompile>
-    <ClCompile Include="Compile\Error.cpp">
-      <Filter>Compile\Common</Filter>
-    </ClCompile>
     <ClCompile Include="Compile\Compiler.cpp">
       <Filter>Compile</Filter>
-    </ClCompile>
-    <ClCompile Include="Compile\Parser.cpp">
-      <Filter>Compile\Parse</Filter>
-    </ClCompile>
-    <ClCompile Include="Compile\AbstractSyntaxTree.cpp">
-      <Filter>Compile\Parse</Filter>
-    </ClCompile>
-    <ClCompile Include="Compile\TokenTable.cpp">
-      <Filter>Compile\Scan</Filter>
-    </ClCompile>
-    <ClCompile Include="Compile\WordSet.cpp">
-      <Filter>Compile\Common</Filter>
-    </ClCompile>
-    <ClCompile Include="Compile\WordFilters.cpp">
-      <Filter>Compile\Scan</Filter>
     </ClCompile>
     <ClCompile Include="Document\CompilerDocument.cpp">
       <Filter>Document</Filter>
@@ -199,41 +246,80 @@
     <ClCompile Include="Document\WordDocument.cpp">
       <Filter>Document</Filter>
     </ClCompile>
-    <ClCompile Include="Compile\SymbolDelegate.cpp">
+    <ClCompile Include="Compile\Parse\ASTNode.cpp">
       <Filter>Compile\Parse</Filter>
     </ClCompile>
-    <ClCompile Include="Compile\SymbolHandler.cpp">
+    <ClCompile Include="Compile\Parse\Parser.cpp">
       <Filter>Compile\Parse</Filter>
     </ClCompile>
-    <ClCompile Include="Compile\ASTNode.cpp">
+    <ClCompile Include="Compile\Parse\SymbolDelegate.cpp">
       <Filter>Compile\Parse</Filter>
     </ClCompile>
-    <ClCompile Include="Core\Base.cpp">
-      <Filter>Core</Filter>
+    <ClCompile Include="Compile\Parse\SymbolHandler.cpp">
+      <Filter>Compile\Parse</Filter>
     </ClCompile>
-    <ClCompile Include="Core\Console.cpp">
-      <Filter>Core</Filter>
+    <ClCompile Include="Compile\Common\Error.cpp">
+      <Filter>Compile\Common</Filter>
     </ClCompile>
-    <ClCompile Include="Core\Function.cpp">
-      <Filter>Core</Filter>
+    <ClCompile Include="Compile\Common\WordSet.cpp">
+      <Filter>Compile\Common</Filter>
     </ClCompile>
-    <ClCompile Include="Core\Logger.cpp">
-      <Filter>Core</Filter>
+    <ClCompile Include="Compile\Scan\Scanner.cpp">
+      <Filter>Compile\Scan</Filter>
     </ClCompile>
-    <ClCompile Include="Core\Message.cpp">
-      <Filter>Core</Filter>
+    <ClCompile Include="Compile\Scan\TokenTable.cpp">
+      <Filter>Compile\Scan</Filter>
     </ClCompile>
-    <ClCompile Include="Core\Scope.cpp">
-      <Filter>Core</Filter>
+    <ClCompile Include="Compile\Scan\WordFilters.cpp">
+      <Filter>Compile\Scan</Filter>
     </ClCompile>
-    <ClCompile Include="Core\Struct.cpp">
-      <Filter>Core</Filter>
+    <ClCompile Include="Compile\SemanticAnalyze\SANode.cpp">
+      <Filter>Compile\SemanticAnalyze</Filter>
     </ClCompile>
-    <ClCompile Include="Core\Variable.cpp">
-      <Filter>Core</Filter>
+    <ClCompile Include="Compile\SemanticAnalyze\VariableFilter.cpp">
+      <Filter>Compile\SemanticAnalyze</Filter>
     </ClCompile>
-    <ClCompile Include="Core\Variables.cpp">
-      <Filter>Core</Filter>
+    <ClCompile Include="Compile\SemanticAnalyze\SemanticAnalyzer.cpp">
+      <Filter>Compile\SemanticAnalyze</Filter>
+    </ClCompile>
+    <ClCompile Include="Compile\SemanticAnalyze\VariableTable.cpp">
+      <Filter>Compile\SemanticAnalyze</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Base\Base.cpp">
+      <Filter>Core\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Base\Function.cpp">
+      <Filter>Core\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Base\Members.cpp">
+      <Filter>Core\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Base\Scope.cpp">
+      <Filter>Core\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Base\Struct.cpp">
+      <Filter>Core\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Base\Variable.cpp">
+      <Filter>Core\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Common\Console.cpp">
+      <Filter>Core\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Common\Logger.cpp">
+      <Filter>Core\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Common\Message.cpp">
+      <Filter>Core\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Instance\Real.cpp">
+      <Filter>Core\Instance</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Instance\Text.cpp">
+      <Filter>Core\Instance</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Instance\None.cpp">
+      <Filter>Core\Instance</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

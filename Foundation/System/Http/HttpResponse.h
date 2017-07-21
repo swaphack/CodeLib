@@ -21,6 +21,7 @@ namespace sys
 		// ×´Ì¬Âë
 		const char* getResponseCode();
 		void setResponseCode(const char* code);
+		void setResponseCode(int code);
 		// ËµÃ÷
 		const char* getDescribe();
 		void setDescribe(const char* desc);

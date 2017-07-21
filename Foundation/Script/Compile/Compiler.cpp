@@ -1,12 +1,12 @@
 #include "Compiler.h"
 #include "../Document/CompilerDocument.h"
-#include "../Core/Console.h"
-#include "Scanner.h"
-#include "Parser.h"
-#include "SemanticAnalyzer.h"
-#include "SourceCodeOptimizer.h"
-#include "CodeGenerator.h"
-#include "TargetCodeOptimizer.h"
+#include "../Core/import.h"
+#include "Parse/import.h"
+#include "Scan/import.h"
+#include "SemanticAnalyze/import.h"
+#include "SourceCodeOptimize/import.h"
+#include "CodeGenerate/import.h"
+#include "TargetCodeOptimize/import.h"
 
 using namespace  script;
 

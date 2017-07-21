@@ -21,6 +21,8 @@ void Stream::setData(const char* data, ss_t size)
 {
 	ASSERT(data != nullptr && getStream() != nullptr && size > 0);
 
+	getStream()->freeStream();
+
 	getStream()->setData(data, size);
 	
 	_capacity = size;

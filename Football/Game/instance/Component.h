@@ -83,9 +83,17 @@ namespace game
 		*/
 		bool addComponent(Component* pComponent);
 		/**
+		*	移除组件
+		*/
+		void removeComponent(Component* pComponent);
+		/**
 		*	获取组件
 		*/
 		Component* getComponent(const char* name);
+		/**
+		*	移除所有组件
+		*/
+		void removeAllComponents();
 
 		/**
 		*	复制信息到目标组件

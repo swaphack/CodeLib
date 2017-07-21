@@ -1,7 +1,7 @@
 #include "Script.h"
 #include "Document/import.h"
 #include "Compile/import.h"
-
+#include "Core/import.h"
 
 using namespace script;
 

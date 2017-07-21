@@ -10,6 +10,7 @@ namespace sys
 		ERT_REMOTE, // 远程
 	};
 
+	// 资源方式管理
 	class ResourceMgr
 	{
 	public:
@@ -17,11 +18,11 @@ namespace sys
 		~ResourceMgr();
 	public:
 		// 资源管理
-		Resource* getResource(int type);
+		Resource* getResource(ResourceType type);
 		// 添加一种新的获取资源的方式
-		void addMethod(int type, IResource* res);
+		void addMethod(ResourceType type, IResource* res);
 		// 移除就有的获取资源的方式
-		void removeMethod(int type);
+		void removeMethod(ResourceType type);
 	private:
 		// 初始化
 		void init();
@@ -29,8 +30,8 @@ namespace sys
 		void dispose();
 	private:
 		// 资源途径类型
-		int _resType;
+		ResourceType _resType;
 		// 资源途径管理
-		std::map<int, IResource*> _getResMethods;
+		std::map<ResourceType, IResource*> _getResMethods;
 	};
 }

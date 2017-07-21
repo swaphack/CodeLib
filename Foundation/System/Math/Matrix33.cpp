@@ -6,10 +6,10 @@ using namespace sys;
 Matrix33::Matrix33() 
 :Matrix(3, 3)
 {
-	this->unit();
+	this->normalize();
 }
 
-void Matrix33::unit()
+void Matrix33::normalize()
 {
 	values[0] = 1; values[1] = 0; values[2] = 0; // x
 	values[3] = 0; values[4] = 1; values[5] = 0; // y

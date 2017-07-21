@@ -22,7 +22,7 @@
     <ClInclude Include="Query\DBQuery.h" />
     <ClInclude Include="Query\DBResult.h" />
     <ClInclude Include="Query\import.h" />
-    <ClInclude Include="Struct\DBCode.h" />
+    <ClInclude Include="Struct\DBStructTemplate.h" />
     <ClInclude Include="Struct\DBContent.h" />
     <ClInclude Include="Struct\DBTable.h" />
     <ClInclude Include="Struct\DBTemplate.h" />
@@ -38,11 +38,15 @@
     <ClCompile Include="Data\DBSheet.cpp" />
     <ClCompile Include="Data\DBStorage.cpp" />
     <ClCompile Include="Data\DBWarehouse.cpp" />
-    <ClCompile Include="Struct\DBCode.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="Struct\DBStructTemplate.cpp" />
     <ClCompile Include="Struct\DBContent.cpp" />
     <ClCompile Include="Struct\DBTable.cpp" />
     <ClCompile Include="Tool\DBFile.cpp" />
     <ClCompile Include="Tool\DBHelper.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="db.txt" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{B078654D-5498-4748-B6DF-B742DC79C720}</ProjectGuid>

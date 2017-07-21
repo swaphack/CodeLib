@@ -246,6 +246,21 @@ float Vector2::cosAngle(const Vector2& vector0, const Vector2& vector1)
 	return Vector2::dot(vector0, vector1) / (l0 * l1);
 }
 
+float Vector2::sinAngle(const Vector2& vector0, const Vector2& vector1)
+{
+	float l0 = vector0.getLength();
+	float l1 = vector1.getLength();
+
+	if (l0 == 0 || l1 == 0)
+	{
+		return 0;
+	}
+
+	float l2 = Vector2::cross(vector0, vector1).getLength();
+
+	return l2 / (l0 * l1);
+}
+
 float Vector2::project(const Vector2& vector0, const Vector2& vector1)
 {
 	float l0 = vector0.getLength();
@@ -254,4 +269,45 @@ float Vector2::project(const Vector2& vector0, const Vector2& vector1)
 		return 0;
 	}
 	return Vector2::dot(vector0, vector1) / l0;
+}
+
+float Vector2::getRotateAngle(const Vector2& vector0, const Vector2& vector1)
+{
+	const float epsilon = 1.0e-6;
+	const float nyPI = acos(-1.0f);
+
+	float distVal, dotVal, degreeVal, angleVal;
+
+	float l0 = vector0.getLength();
+	float l1 = vector1.getLength();
+
+	float x1 = vector0.x / l0;
+	float y1 = vector0.y / l0;
+
+	float x2 = vector1.x / l1;
+	float y2 = vector1.y / l1;
+
+	dotVal = x1 * x2 + y1 * y2;
+	if (fabs(dotVal - 1.0f) <= epsilon)
+	{
+		angleVal = 0;
+	}
+	else if (fabs(dotVal + 1.0f) <= epsilon)
+	{
+		angleVal = nyPI;
+	}
+	else
+	{
+		float crossVal;
+		angleVal = acos(dotVal);
+		crossVal = x1 * y2 - x2 * y1;
+		if (crossVal < 0)
+		{
+			angleVal = 2 * nyPI - angleVal;
+		}
+	}
+
+	degreeVal = angleVal* 180.0 / nyPI;
+
+	return degreeVal;
 }

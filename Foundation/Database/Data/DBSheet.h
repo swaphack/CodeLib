@@ -20,13 +20,14 @@ namespace db
 		void addRecord(DBRecord* record);
 		// 移除纪录
 		void removeRecord(DBRecord* record);
+		// 移除记录
 		void removeRecord(int index);
 		// 获取纪录
 		DBRecord* getRecord(int index);
+		// 是否有改记录
 		bool findRecord(DBRecord* record);
-
+		// 记录数
 		int count();
-
 		// 清除记录
 		void clear();
 	protected:

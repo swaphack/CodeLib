@@ -1,6 +1,6 @@
 #pragma once
 
-#include "WordSet.h"
-#include "WordFilters.h"
+#include "Common/import.h"
+#include "Parse/import.h"
+#include "Scan/import.h"
 #include "Compiler.h"
-#include "SymbolHandler.h"

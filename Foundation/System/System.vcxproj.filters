@@ -67,6 +67,9 @@
     <Filter Include="Text">
       <UniqueIdentifier>{0249e361-7a0f-46ab-84bf-a679cb642ff6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ComputationalGeometry">
+      <UniqueIdentifier>{a5b11a85-3d5d-46e3-9b21-0ea844aa327b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Base\File.h">
@@ -454,9 +457,6 @@
     <ClInclude Include="Geometry\Polygon.h">
       <Filter>Geometry</Filter>
     </ClInclude>
-    <ClInclude Include="Geometry\Convex.h">
-      <Filter>Geometry</Filter>
-    </ClInclude>
     <ClInclude Include="Collider\Box.h">
       <Filter>Collider</Filter>
     </ClInclude>
@@ -471,6 +471,18 @@
     </ClInclude>
     <ClInclude Include="Text\Encoding.h">
       <Filter>Text</Filter>
+    </ClInclude>
+    <ClInclude Include="ComputationalGeometry\Convex.h">
+      <Filter>ComputationalGeometry</Filter>
+    </ClInclude>
+    <ClInclude Include="ComputationalGeometry\macros.h">
+      <Filter>ComputationalGeometry</Filter>
+    </ClInclude>
+    <ClInclude Include="ComputationalGeometry\Triangulation.h">
+      <Filter>ComputationalGeometry</Filter>
+    </ClInclude>
+    <ClInclude Include="ComputationalGeometry\VertexSet.h">
+      <Filter>ComputationalGeometry</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -693,9 +705,6 @@
     <ClCompile Include="Geometry\Polygon.cpp">
       <Filter>Geometry</Filter>
     </ClCompile>
-    <ClCompile Include="Geometry\Convex.cpp">
-      <Filter>Geometry</Filter>
-    </ClCompile>
     <ClCompile Include="Collider\Box.cpp">
       <Filter>Collider</Filter>
     </ClCompile>
@@ -707,6 +716,15 @@
     </ClCompile>
     <ClCompile Include="Text\Encoding.cpp">
       <Filter>Text</Filter>
+    </ClCompile>
+    <ClCompile Include="ComputationalGeometry\Convex.cpp">
+      <Filter>ComputationalGeometry</Filter>
+    </ClCompile>
+    <ClCompile Include="ComputationalGeometry\Triangulation.cpp">
+      <Filter>ComputationalGeometry</Filter>
+    </ClCompile>
+    <ClCompile Include="ComputationalGeometry\VertexSet.cpp">
+      <Filter>ComputationalGeometry</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -1,5 +1,5 @@
 #include "WordDocument.h"
-#include "../Compile/WordSet.h"
+#include "../Compile/import.h"
 #include "../macros.h"
 using namespace script;
 

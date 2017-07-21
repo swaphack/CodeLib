@@ -2,18 +2,8 @@
 
 using namespace db;
 
-DBFileReader::DBFileReader( const char* filepath )
+DBFileReader::DBFileReader()
 {
-	long size = 0;
-	char* data = sys::File::read(filepath, size);
-	if (data == nullptr)
-	{
-		return;
-	}
-
-	char* newData = sys::StreamHelper::mallocStream(data, size);
-	this->setData(newData, size);
-	SAFE_FREE(data);
 }
 
 std::string DBFileReader::readDBString()
@@ -23,6 +13,18 @@ std::string DBFileReader::readDBString()
 	std::string value = std::string(data, size);
 
 	return value;
+}
+
+bool DBFileReader::load(const char* filepath)
+{
+	long size = 0;
+	char* data = sys::File::read(filepath, size);
+	if (data == nullptr)
+	{
+		return false;
+	}
+	this->setData(data, size);
+	return true;
 }
 
 DBFileReader::~DBFileReader()
@@ -47,7 +49,7 @@ void DBFileWriter::writeDBString(const std::string& value)
 	this->writeString(value.c_str());
 }
 
-void DBFileWriter::save( const char* filepath )
+bool DBFileWriter::save(const char* filepath)
 {
-	sys::File::write(filepath, this->getData(), this->getLength());
+	 return sys::File::write(filepath, this->getData(), this->getLength());
 }

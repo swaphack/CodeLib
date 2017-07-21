@@ -42,7 +42,7 @@ namespace game
 		/**
 		*	获取位置
 		*/
-		virtual Vector getPosition() = 0;
+		virtual const Vector& getPosition() = 0;
 		/**
 		*	看向某一点
 		*/

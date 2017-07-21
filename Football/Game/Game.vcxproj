@@ -89,7 +89,7 @@
     <ClInclude Include="instance\ConditionSheet.h" />
     <ClInclude Include="instance\Field.h" />
     <ClInclude Include="instance\ActionWithBall.h" />
-    <ClInclude Include="instance\ActionWithOutBall.h" />
+    <ClInclude Include="instance\ActionWithoutBall.h" />
     <ClInclude Include="instance\Identity.h" />
     <ClInclude Include="instance\ILevel.h" />
     <ClInclude Include="instance\Match.h" />
@@ -159,7 +159,7 @@
     <ClCompile Include="constant\Constants.cpp" />
     <ClCompile Include="instance\ActionManager.cpp" />
     <ClCompile Include="instance\ActionWithBall.cpp" />
-    <ClCompile Include="instance\ActionWithOutBall.cpp" />
+    <ClCompile Include="instance\ActionWithoutBall.cpp" />
     <ClCompile Include="instance\Body.cpp" />
     <ClCompile Include="instance\Club.cpp" />
     <ClCompile Include="instance\Component.cpp" />

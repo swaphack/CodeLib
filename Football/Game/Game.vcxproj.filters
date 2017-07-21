@@ -291,9 +291,6 @@
     <ClInclude Include="instance\ActionWithBall.h">
       <Filter>instance\match\action</Filter>
     </ClInclude>
-    <ClInclude Include="instance\ActionWithOutBall.h">
-      <Filter>instance\match\action</Filter>
-    </ClInclude>
     <ClInclude Include="instance\System.h">
       <Filter>instance\system</Filter>
     </ClInclude>
@@ -378,6 +375,9 @@
     <ClInclude Include="instance\PropertyComponent.h">
       <Filter>instance\base</Filter>
     </ClInclude>
+    <ClInclude Include="instance\ActionWithoutBall.h">
+      <Filter>instance\match\action</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="instance\Person.cpp">
@@ -429,9 +429,6 @@
       <Filter>instance\people</Filter>
     </ClCompile>
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="instance\ActionWithOutBall.cpp">
-      <Filter>instance\match\action</Filter>
-    </ClCompile>
     <ClCompile Include="instance\Mind.cpp">
       <Filter>instance\mind</Filter>
     </ClCompile>
@@ -440,6 +437,9 @@
     </ClCompile>
     <ClCompile Include="instance\PropertyComponent.cpp">
       <Filter>instance\base</Filter>
+    </ClCompile>
+    <ClCompile Include="instance\ActionWithoutBall.cpp">
+      <Filter>instance\match\action</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

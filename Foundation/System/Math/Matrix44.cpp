@@ -6,10 +6,10 @@ using namespace sys;
 Matrix44::Matrix44()
 :Matrix(4, 4)
 {
-	this->unit();
+	this->normalize();
 }
 
-void Matrix44::unit()
+void Matrix44::normalize()
 {
 	values[0] = 1;  values[1] = 0;  values[2] = 0;  values[3] = 0; // x
 	values[4] = 0;  values[5] = 1;  values[6] = 0;  values[7] = 0; // y
