@@ -124,7 +124,7 @@ bool Convex::makeConvexHull(Vector2* points, int count, VertexSet& vertexes)
 		return false;
 	}
 
-	points = sortByXAxis(points, count);
+	points = sortByAxisX(points, count);
 
 	// ио╟Э
 	VertexSet& upper = vertexes;

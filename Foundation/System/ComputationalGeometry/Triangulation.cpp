@@ -69,6 +69,8 @@ Triangulation::Vertex Triangulation::vertexOfIndex(int index)
 			vertex.type = VertexType::eMerge;
 		}
 	}
+
+	return vertex;
 }
 
 bool Triangulation::indicesOfPolygon(Vector2* points, int count)
@@ -82,4 +84,6 @@ bool Triangulation::indicesOfPolygon(Vector2* points, int count)
 	m_nCount = count;
 
 
+
+	return false;
 }

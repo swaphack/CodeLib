@@ -8,7 +8,7 @@ namespace sys
 	/**
 	*	顶点
 	*/
-	struct VertexSet
+	class VertexSet
 	{
 	public:
 		// 顶点数量
