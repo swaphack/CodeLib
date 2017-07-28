@@ -2,6 +2,7 @@
 
 #include "render.h"
 #include "ui.h"
+#include "algorithm.h"
 
 class WndRender : public render::RenderApplication
 {
@@ -36,6 +37,8 @@ public:
 	void testScrollView();
 
 	void testUI();
+
+	void testDrawNode();
 protected:
 	void onTouchBegin(sys::Object* object, float x, float y);
 	void onTouchMove(sys::Object* object, float x, float y);

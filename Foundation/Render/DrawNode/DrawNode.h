@@ -16,7 +16,7 @@ namespace render
 		void setWidth(float width);
 		float getWidth();
 		// 模式
-		void setDrawMode(int mode);
+		void setDrawMode(BeginMode mode);
 		int getDrawMode();
 		// 添加一个点坐标
 		void appendPoint(const sys::Vector3& point);
@@ -29,7 +29,7 @@ namespace render
 		// 宽度
 		float _width;
 		// 模式
-		int _drawMode;
+		BeginMode _drawMode;
 		// 点坐标
 		std::vector<sys::Vector3> _points;
 	};

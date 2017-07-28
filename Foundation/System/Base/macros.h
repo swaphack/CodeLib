@@ -8,6 +8,7 @@
 #include <cstring>
 #include <cstddef>
 
+#define SAFE_DELETE_ARRAY(x) { if(x) { delete[] (x); (x) = 0;} }
 #define SAFE_DELETE(x) { if(x) { delete(x); (x) = 0;} }
 #define SAFE_FREE(x) { if(x) { free(x); (x) = 0; } }
 

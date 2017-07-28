@@ -23,6 +23,7 @@ Vector3::Vector3(float x, float y, float z /*= 0*/)
 Vector3::Vector3(const Vector2& vector)
 : x(vector.x)
 , y(vector.y)
+, z(0)
 {
 
 }

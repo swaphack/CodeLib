@@ -16,7 +16,5 @@ namespace sys
 			:center(center), radius(radius)
 		{
 		}
-
-
 	};
 }

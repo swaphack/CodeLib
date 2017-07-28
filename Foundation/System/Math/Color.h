@@ -166,11 +166,11 @@ namespace sys
 		void adjust();
 	};
 
-	static void convertColor3BTo3F(const Color3B & b3, Color3F & f3);
+	void convertColor3BTo3F(const Color3B & b3, Color3F & f3);
 
-	static void convertColor3FTo3B(const Color3F & f3, Color3B & b3);
+	void convertColor3FTo3B(const Color3F & f3, Color3B & b3);
 
-	static void convertColor4BTo4F(const Color4B & b4, Color4F & f4);
+	void convertColor4BTo4F(const Color4B & b4, Color4F & f4);
 
-	static void convertColor4FTo4B(const Color4F & f4, Color4B & b4);
+	void convertColor4FTo4B(const Color4F & f4, Color4B & b4);
 }

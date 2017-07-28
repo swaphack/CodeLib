@@ -8,7 +8,7 @@ namespace game
 	enum eCoachProperty
 	{
 		/**
-		*	¾«¹¤ÑµÁ·
+		*	½ø¹¥ÑµÁ·
 		*/
 		ECP_ATTACKING,
 		/**

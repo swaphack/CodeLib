@@ -2,58 +2,57 @@
 
 using namespace sys;
 
-
-sys::Color3B::Color3B() :red(COLOR_UCHAR_VALUE), green(COLOR_UCHAR_VALUE), blue(COLOR_UCHAR_VALUE)
+Color3B::Color3B() :red(COLOR_UCHAR_VALUE), green(COLOR_UCHAR_VALUE), blue(COLOR_UCHAR_VALUE)
 {
 
 }
 
-sys::Color3B::Color3B(uchar r, uchar g, uchar b) : red(r), green(g), blue(b)
+Color3B::Color3B(uchar r, uchar g, uchar b) : red(r), green(g), blue(b)
 {
 
 }
 
-bool sys::Color3B::isEquals(const Color3B& color)
+bool Color3B::isEquals(const Color3B& color)
 {
 	return red == color.red	 && green == color.green && blue == color.blue;
 }
 
-void sys::Color3B::operator=(const Color3B& color)
+void Color3B::operator=(const Color3B& color)
 {
 	red = color.red;
 	green = color.green;
 	blue = color.blue;
 }
 
-void sys::Color3B::add(const Color3B& color)
+void Color3B::add(const Color3B& color)
 {
 	red += color.red;
 	green += color.green;
 	blue += color.blue;
 }
 
-void sys::Color3B::sub(const Color3B& color)
+void Color3B::sub(const Color3B& color)
 {
 	red -= color.red;
 	green -= color.green;
 	blue -= color.blue;
 }
 
-void sys::Color3B::mult(const Color3B& color)
+void Color3B::mult(const Color3B& color)
 {
 	red *= color.red;
 	green *= color.green;
 	blue *= color.blue;
 }
 
-void sys::Color3B::mult(const float ratio)
+void Color3B::mult(const float ratio)
 {
 	red = (uchar)(red * ratio);
 	green = (uchar)(red * ratio);
 	blue = (uchar)(red * ratio);
 }
 
-void sys::Color3B::div(const Color3B& color)
+void Color3B::div(const Color3B& color)
 {
 	red /= color.red;
 	green /= color.green;
@@ -61,29 +60,29 @@ void sys::Color3B::div(const Color3B& color)
 }
 //////////////////////////////////////////////////////////////////////////
 
-sys::Color3F::Color3F() :red(1), green(1), blue(1)
+Color3F::Color3F() :red(1), green(1), blue(1)
 {
 
 }
 
-sys::Color3F::Color3F(float r, float g, float b) : red(r), green(g), blue(b)
+Color3F::Color3F(float r, float g, float b) : red(r), green(g), blue(b)
 {
 
 }
 
-bool sys::Color3F::isEquals(const Color3F& color)
+bool Color3F::isEquals(const Color3F& color)
 {
 	return red == color.red	 && green == color.green && blue == color.blue;
 }
 
-void sys::Color3F::operator=(const Color3F& color)
+void Color3F::operator=(const Color3F& color)
 {
 	red = color.red;
 	green = color.green;
 	blue = color.blue;
 }
 
-void sys::Color3F::add(const Color3F& color)
+void Color3F::add(const Color3F& color)
 {
 	red += color.red;
 	green += color.green;
@@ -91,7 +90,7 @@ void sys::Color3F::add(const Color3F& color)
 	adjust();
 }
 
-void sys::Color3F::sub(const Color3F& color)
+void Color3F::sub(const Color3F& color)
 {
 	red -= color.red;
 	green -= color.green;
@@ -99,7 +98,7 @@ void sys::Color3F::sub(const Color3F& color)
 	adjust();
 }
 
-void sys::Color3F::mult(const Color3F& color)
+void Color3F::mult(const Color3F& color)
 {
 	red *= color.red;
 	green *= color.green;
@@ -107,7 +106,7 @@ void sys::Color3F::mult(const Color3F& color)
 	adjust();
 }
 
-void sys::Color3F::mult(const float ratio)
+void Color3F::mult(const float ratio)
 {
 	red *= ratio;
 	green *= ratio;
@@ -115,7 +114,7 @@ void sys::Color3F::mult(const float ratio)
 	adjust();
 }
 
-void sys::Color3F::div(const Color3F& color)
+void Color3F::div(const Color3F& color)
 {
 	red /= color.red;
 	green /= color.green;
@@ -123,7 +122,7 @@ void sys::Color3F::div(const Color3F& color)
 	adjust();
 }
 
-void sys::Color3F::adjust()
+void Color3F::adjust()
 {
 	ADJUST_DURATION_VALUE_RANGE(red, 0, 1, 1);
 	ADJUST_DURATION_VALUE_RANGE(green, 0, 1, 1);
@@ -133,22 +132,22 @@ void sys::Color3F::adjust()
 //////////////////////////////////////////////////////////////////////////
 
 
-sys::Color4B::Color4B() :red(COLOR_UCHAR_VALUE), green(COLOR_UCHAR_VALUE), blue(COLOR_UCHAR_VALUE), alpha(COLOR_UCHAR_VALUE)
+Color4B::Color4B() :red(COLOR_UCHAR_VALUE), green(COLOR_UCHAR_VALUE), blue(COLOR_UCHAR_VALUE), alpha(COLOR_UCHAR_VALUE)
 {
 
 }
 
-sys::Color4B::Color4B(uchar r, uchar g, uchar b, uchar a) : red(r), green(g), blue(b), alpha(a)
+Color4B::Color4B(uchar r, uchar g, uchar b, uchar a) : red(r), green(g), blue(b), alpha(a)
 {
 
 }
 
-bool sys::Color4B::isEquals(const Color4B& color)
+bool Color4B::isEquals(const Color4B& color)
 {
 	return red == color.red	 && green == color.green && blue == color.blue && alpha == color.alpha;
 }
 
-void sys::Color4B::add(const Color4B& color)
+void Color4B::add(const Color4B& color)
 {
 	red += color.red;
 	green += color.green;
@@ -157,7 +156,7 @@ void sys::Color4B::add(const Color4B& color)
 	adjust();
 }
 
-void sys::Color4B::sub(const Color4B& color)
+void Color4B::sub(const Color4B& color)
 {
 	red -= color.red;
 	green -= color.green;
@@ -166,7 +165,7 @@ void sys::Color4B::sub(const Color4B& color)
 	adjust();
 }
 
-void sys::Color4B::mult(const Color4B& color)
+void Color4B::mult(const Color4B& color)
 {
 	red *= color.red;
 	green *= color.green;
@@ -175,7 +174,7 @@ void sys::Color4B::mult(const Color4B& color)
 	adjust();
 }
 
-void sys::Color4B::mult(const float ratio)
+void Color4B::mult(const float ratio)
 {
 	red = (uchar)(red * ratio);
 	green = (uchar)(red * ratio);
@@ -184,7 +183,7 @@ void sys::Color4B::mult(const float ratio)
 	adjust();
 }
 
-void sys::Color4B::div(const Color4B& color)
+void Color4B::div(const Color4B& color)
 {
 	red /= color.red;
 	green /= color.green;
@@ -193,7 +192,7 @@ void sys::Color4B::div(const Color4B& color)
 	adjust();
 }
 
-void sys::Color4B::adjust()
+void Color4B::adjust()
 {
 	ADJUST_DURATION_VALUE_RANGE(red, 0, 255, 255);
 	ADJUST_DURATION_VALUE_RANGE(green, 0, 255, 255);
@@ -213,22 +212,22 @@ void Color4B::operator=(const Color4B& color)
 //////////////////////////////////////////////////////////////////////////
 
 
-sys::Color4F::Color4F() :red(1), green(1), blue(1), alpha(1)
+Color4F::Color4F() :red(1), green(1), blue(1), alpha(1)
 {
 
 }
 
-sys::Color4F::Color4F(float r, float g, float b, float a) : red(r), green(g), blue(b), alpha(a)
+Color4F::Color4F(float r, float g, float b, float a) : red(r), green(g), blue(b), alpha(a)
 {
 
 }
 
-bool sys::Color4F::isEquals(const Color4F& color)
+bool Color4F::isEquals(const Color4F& color)
 {
 	return red == color.red	 && green == color.green && blue == color.blue && alpha == color.alpha;
 }
 
-void sys::Color4F::operator=(const Color4F& color)
+void Color4F::operator=(const Color4F& color)
 {
 	red = color.red;
 	green = color.green;
@@ -236,7 +235,7 @@ void sys::Color4F::operator=(const Color4F& color)
 	alpha = color.alpha;
 }
 
-void sys::Color4F::add(const Color4F& color)
+void Color4F::add(const Color4F& color)
 {
 	red += color.red;
 	green += color.green;
@@ -245,7 +244,7 @@ void sys::Color4F::add(const Color4F& color)
 	adjust();
 }
 
-void sys::Color4F::sub(const Color4F& color)
+void Color4F::sub(const Color4F& color)
 {
 	red -= color.red;
 	green -= color.green;
@@ -254,7 +253,7 @@ void sys::Color4F::sub(const Color4F& color)
 	adjust();
 }
 
-void sys::Color4F::mult(const Color4F& color)
+void Color4F::mult(const Color4F& color)
 {
 	red *= color.red;
 	green *= color.green;
@@ -263,7 +262,7 @@ void sys::Color4F::mult(const Color4F& color)
 	adjust();
 }
 
-void sys::Color4F::mult(const float ratio)
+void Color4F::mult(const float ratio)
 {
 	red *= ratio;
 	green *= ratio;
@@ -272,7 +271,7 @@ void sys::Color4F::mult(const float ratio)
 	adjust();
 }
 
-void sys::Color4F::div(const Color4F& color)
+void Color4F::div(const Color4F& color)
 {
 	red /= color.red;
 	green /= color.green;
@@ -281,7 +280,7 @@ void sys::Color4F::div(const Color4F& color)
 	adjust();
 }
 
-void sys::Color4F::adjust()
+void Color4F::adjust()
 {
 	ADJUST_DURATION_VALUE_RANGE(red, 0, 1, 1);
 	ADJUST_DURATION_VALUE_RANGE(green, 0, 1, 1);

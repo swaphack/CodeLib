@@ -61,7 +61,6 @@ void ColorProtocol::setColor(const sys::Color3B& color)
 	_color.red = color.red;
 	_color.green = color.green;
 	_color.blue = color.blue;
-	_color.red = 255;
 }
 
 const sys::Color4B& ColorProtocol::getColor()

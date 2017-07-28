@@ -100,14 +100,14 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>../../Foundation/System/;../../Foundation/Web/;../../Foundation/Render/;../../Foundation/UI/;../../Foundation/Text/;../../Lib/include/;../../Lib/include/freetype/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../Foundation/System/;../../Foundation/Web/;../../Foundation/Render/;../../Foundation/UI/;../../Foundation/Algorithm;../../Foundation/Text/;../../Lib/include/;../../Lib/include/freetype/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <BrowseInformation>true</BrowseInformation>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>../../Lib/lib/freetype;../../Lib/lib/jpeg;../../Lib/lib/opengl;../../Lib/lib/png;../../Lib/lib/zlib;../../Lib/lib/ffmpeg;$(OutDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>opengl.lib;glu.lib;glut.lib;System.lib;Web.lib;Render.lib;zlib.lib;libpng16.lib;freetype263.lib;avutil.lib;avcodec.lib;avformat.lib;swscale.lib;jpeg.lib;Text.lib;UI.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opengl.lib;glu.lib;glut.lib;System.lib;Web.lib;Render.lib;zlib.lib;libpng16.lib;freetype263.lib;avutil.lib;avcodec.lib;avformat.lib;swscale.lib;jpeg.lib;Text.lib;UI.lib;Algorithm.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <Bscmake>
       <PreserveSbr>true</PreserveSbr>

@@ -119,7 +119,7 @@ namespace sys
 		*	判断vector1在vector0的位置方向
 		*	0 共线
 		*	1 在左边
-		*	2 右边
+		*	2 在右边
 		*/
 		static int direction(const Vector2& vector0, const Vector2& vector1);
 		/**
@@ -136,7 +136,7 @@ namespace sys
 		static float project(const Vector2& vector0, const Vector2& vector1);
 
 		/**
-		*	vector1相对vector0的旋转角度(0,2PI)
+		*	vector1相对vector0的旋转角度(0,360)
 		*/
 		static float getRotateAngle(const Vector2& vector0, const Vector2& vector1);
 	};

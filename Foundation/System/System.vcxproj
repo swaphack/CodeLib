@@ -91,10 +91,6 @@
     <ClInclude Include="Collider\import.h" />
     <ClInclude Include="Collider\macros.h" />
     <ClInclude Include="Collider\OBB.h" />
-    <ClInclude Include="ComputationalGeometry\Convex.h" />
-    <ClInclude Include="ComputationalGeometry\macros.h" />
-    <ClInclude Include="ComputationalGeometry\Triangulation.h" />
-    <ClInclude Include="ComputationalGeometry\VertexSet.h" />
     <ClInclude Include="DataBase\DataRecord.h" />
     <ClInclude Include="DataBase\DataSheet.h" />
     <ClInclude Include="DataBase\IDataBase.h" />
@@ -219,9 +215,6 @@
     <ClCompile Include="Collider\AABB.cpp" />
     <ClCompile Include="Collider\Box.cpp" />
     <ClCompile Include="Collider\OBB.cpp" />
-    <ClCompile Include="ComputationalGeometry\Convex.cpp" />
-    <ClCompile Include="ComputationalGeometry\Triangulation.cpp" />
-    <ClCompile Include="ComputationalGeometry\VertexSet.cpp" />
     <ClCompile Include="DataBase\DataRecord.cpp" />
     <ClCompile Include="DataBase\DataSheet.cpp" />
     <ClCompile Include="Device\Keyboard.cpp" />

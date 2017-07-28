@@ -24,7 +24,7 @@ void WndRender::show()
 	
 	//this->testText();
 
-	this->testUI();
+	this->testDrawNode();
 }
 
 void WndRender::testMoveImage()
@@ -103,7 +103,7 @@ void WndRender::testCubeModel()
 
 void WndRender::testSphereModel()
 {
-	Sphere* pSphere = new Sphere();
+	render::Sphere* pSphere = new render::Sphere();
 	AUTO_RELEASE_OBJECT(pSphere);
 	pSphere->setRadius(512);
 	this->getCanvas()->getRoot()->addChild(pSphere);
@@ -610,4 +610,34 @@ void WndRender::testUI()
 	pUIFrame->show();
 
 	int a = 1;
+}
+
+void WndRender::testDrawNode()
+{
+	Vector2 points[] = {
+		{ 100, 100 },
+		{ 50, 50 },
+		{ 75, 60 },
+		{ 150, 50 },
+		{ 200, 100 },
+		{ 120, 110 },
+	};
+
+	int COUNT = (sizeof(points) / sizeof(Vector2));
+
+	acg::VertexSet vertexSet = acg::VertexSet();
+
+	acg::Convex::makeConvexHull(points, COUNT, vertexSet);
+
+	acg::Triangulation* pTriangulation = new acg::Triangulation();
+	pTriangulation->indicesOfPolygon(points, COUNT);
+
+	DrawNode* pDrawNode = new DrawNode();
+	pDrawNode->setDrawMode(EBM_POLYGON);
+	pDrawNode->setColor(sys::Color3B(0, 255, 0));
+	for (int i = 0; i < COUNT; i++)
+	{
+		pDrawNode->appendPoint(Vector3(points[i]));
+	}
+	this->getCanvas()->getRoot()->addChild(pDrawNode);
 }

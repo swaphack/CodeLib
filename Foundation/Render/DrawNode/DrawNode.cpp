@@ -30,7 +30,7 @@ float DrawNode::getWidth()
 	return _width;
 }
 
-void DrawNode::setDrawMode(int mode)
+void DrawNode::setDrawMode(BeginMode mode)
 {
 	_drawMode = mode;
 }
