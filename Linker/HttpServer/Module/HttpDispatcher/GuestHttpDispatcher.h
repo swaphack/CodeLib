@@ -11,6 +11,6 @@ namespace hs
 		GuestHttpDispatcher();
 		virtual ~GuestHttpDispatcher();
 	public:
-		virtual bool hand(const char* url, std::map<std::string, std::string> params, sys::HttpResponse& response);
+		void init();
 	};
 }

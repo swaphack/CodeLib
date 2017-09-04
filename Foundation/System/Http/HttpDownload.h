@@ -32,7 +32,7 @@ namespace sys
 		void flushListenData(int id);
 	protected:
 		// 接收数据回调
-		void onRecvHand(int id, DataQueue& data);
+		void onRecvHandle(int id, DataQueue& data);
 		// 添加一个下载监听
 		void addListen(Client* client, OnHttpDownloadCallback callback, int tag);
 		// 清空数据

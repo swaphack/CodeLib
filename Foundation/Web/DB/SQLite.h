@@ -26,7 +26,7 @@ namespace web
 		virtual ~SQLite();
 	public:
 		// 连接数据库
-		virtual bool connect(const char* url, const char* username = nullptr, const char* password = nullptr);
+		virtual bool connect(const sys::Author& info);
 		// 断开数据库连接
 		virtual bool disconnect();
 		// 执行sql语句

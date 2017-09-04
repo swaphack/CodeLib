@@ -14,6 +14,7 @@ namespace render
 		virtual bool init();
 
 		virtual void draw();
+
 		// 设置媒体文件
 		void setMediaPath(const char* path, bool defaultSize = true);
 	protected:

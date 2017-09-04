@@ -11,8 +11,6 @@ namespace hs
 		AccountHttpDispatcher();
 		virtual ~AccountHttpDispatcher();
 	public:
-		virtual bool hand(const char* url, std::map<std::string, std::string> params, sys::HttpResponse& response);
-	protected:
-	private:
+		void init();
 	};
 }

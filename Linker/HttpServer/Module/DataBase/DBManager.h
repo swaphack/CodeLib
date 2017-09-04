@@ -21,7 +21,7 @@ namespace hs
 		*	@param url 数据库文件地址
 		*	@param readTableNames 要读取的表
 		*/
-		bool init(const char* url, std::vector<std::string> readTableNames);
+		bool init(const sys::Author& info, std::vector<std::string> readTableNames);
 		/**
 		*	更新表数据
 		*	@param tableName 表名称
@@ -35,6 +35,12 @@ namespace hs
 		*	@param values 改变的字段名和值
 		*/
 		bool insert(const char* tableName, const std::map<std::string, std::string>& values);
+		/**
+		*	查找数据
+		*	@param tableName 表名称
+		*	@param values 查找的字段名和值
+		*/
+		sys::IDataRecord* find(const char* tableName, const std::map<std::string, std::string>& values);
 	protected:
 		// 添加一个表数据
 		void addDataSheet(const char* tableName, sys::DataSheet* pDataSheet);

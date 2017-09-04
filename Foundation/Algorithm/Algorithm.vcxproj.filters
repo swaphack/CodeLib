@@ -1,37 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="ComputationalGeometry">
-      <UniqueIdentifier>{150cd8ce-565a-4124-bf42-4cc06bdaed3e}</UniqueIdentifier>
+    <ClInclude Include="algorithm.h" />
+    <ClInclude Include="Sort\Sort.h">
+      <Filter>Sort</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Sort">
+      <UniqueIdentifier>{9009857c-58eb-4404-a8f0-3241054304c2}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="ComputationalGeometry\Convex.cpp">
-      <Filter>ComputationalGeometry</Filter>
-    </ClCompile>
-    <ClCompile Include="ComputationalGeometry\Triangulation.cpp">
-      <Filter>ComputationalGeometry</Filter>
-    </ClCompile>
-    <ClCompile Include="ComputationalGeometry\VertexSet.cpp">
-      <Filter>ComputationalGeometry</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="ComputationalGeometry\Convex.h">
-      <Filter>ComputationalGeometry</Filter>
-    </ClInclude>
-    <ClInclude Include="ComputationalGeometry\import.h">
-      <Filter>ComputationalGeometry</Filter>
-    </ClInclude>
-    <ClInclude Include="ComputationalGeometry\macros.h">
-      <Filter>ComputationalGeometry</Filter>
-    </ClInclude>
-    <ClInclude Include="ComputationalGeometry\Triangulation.h">
-      <Filter>ComputationalGeometry</Filter>
-    </ClInclude>
-    <ClInclude Include="ComputationalGeometry\VertexSet.h">
-      <Filter>ComputationalGeometry</Filter>
-    </ClInclude>
-    <ClInclude Include="algorithm.h" />
+    <ClCompile Include="main.cpp" />
   </ItemGroup>
 </Project>

@@ -2,6 +2,7 @@
 
 #include "IDataSheet.h"
 #include "IDBString.h"
+#include "../Security/Author.h"
 
 namespace sys
 {
@@ -12,7 +13,7 @@ namespace sys
 	public:
 		// ------------------ 数据库连接操作 ------------------ 
 		// 连接数据库
-		virtual bool connect(const char* url, const char* username = nullptr, const char* password = nullptr) = 0;
+		virtual bool connect(const Author& info) = 0;
 		// 断开数据库连接
 		virtual bool disconnect() = 0;
 		// 执行sql语句

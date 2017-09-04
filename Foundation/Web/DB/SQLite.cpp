@@ -43,14 +43,14 @@ SQLite::~SQLite()
 	SAFE_DELETE(_dbString);
 }
 
-bool SQLite::connect(const char* url, const char* username /*= nullptr*/, const char* password /*= nullptr*/)
+bool SQLite::connect(const sys::Author& info)
 {
-	if (url == nullptr)
+	if (info.url.empty())
 	{
 		return false;
 	}
 
-	int result = sqlite3_open(url, &_instance);
+	int result = sqlite3_open(info.url.c_str(), &_instance);
 	if (result == SQLITE_OK)
 	{
 		SAFE_DELETE(_dbString);
@@ -69,7 +69,7 @@ bool SQLite::disconnect()
 
 int onExecCallback(void* inParams, int argc, char** argv, char** colName)
 {
-	if (inParams = nullptr)
+	if (inParams == nullptr)
 	{
 		return 0;
 	}

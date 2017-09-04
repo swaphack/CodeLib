@@ -106,6 +106,10 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "XPixel", "Tool\XPixel\XPixel.vcxproj", "{B6C6D5BC-FAC8-46D8-A47F-99CC3A07123F}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "HttpServer", "Linker\HttpServer\HttpServer.vcxproj", "{6E4751E6-6212-4269-8169-ACE36D074111}"
+	ProjectSection(ProjectDependencies) = postProject
+		{99422F86-35B7-4026-A9A8-EE181F151B7E} = {99422F86-35B7-4026-A9A8-EE181F151B7E}
+		{BEAC5C99-0F40-47AE-8093-1B5F8C5FF6BA} = {BEAC5C99-0F40-47AE-8093-1B5F8C5FF6BA}
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ArtificialIntelligence", "ArtificialIntelligence", "{6491E926-B0AE-4DA9-80A0-B5464ACABEB5}"
 EndProject

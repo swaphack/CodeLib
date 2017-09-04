@@ -16,7 +16,10 @@ public:
 	// 更新时间
 	void Update(float dt);
 private:
+	// 待增加的定时器
 	std::set<ITimer*> m_setAddTimer;
+	// 待移除的定时器
 	std::set<ITimer*> m_setRemoveTimer;
+	// 正在运行的定时器
 	std::set<ITimer*> m_setRunningTimer;
 };

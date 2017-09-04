@@ -142,12 +142,6 @@
     <ClInclude Include="Stream\import.h">
       <Filter>Stream</Filter>
     </ClInclude>
-    <ClInclude Include="Security\Encrypt.h">
-      <Filter>Security</Filter>
-    </ClInclude>
-    <ClInclude Include="Security\Zip.h">
-      <Filter>Security</Filter>
-    </ClInclude>
     <ClInclude Include="Stream\Stream.h">
       <Filter>Stream</Filter>
     </ClInclude>
@@ -469,6 +463,15 @@
     <ClInclude Include="Text\Encoding.h">
       <Filter>Text</Filter>
     </ClInclude>
+    <ClInclude Include="Security\Authorization.h">
+      <Filter>Security</Filter>
+    </ClInclude>
+    <ClInclude Include="Security\import.h">
+      <Filter>Security</Filter>
+    </ClInclude>
+    <ClInclude Include="Security\Author.h">
+      <Filter>Security</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Base\File.cpp">
@@ -503,9 +506,6 @@
     </ClCompile>
     <ClCompile Include="Net\Socket.cpp">
       <Filter>Net</Filter>
-    </ClCompile>
-    <ClCompile Include="Security\Zip.cpp">
-      <Filter>Security</Filter>
     </ClCompile>
     <ClCompile Include="Stream\StreamBase.cpp">
       <Filter>Stream</Filter>
@@ -701,6 +701,9 @@
     </ClCompile>
     <ClCompile Include="Text\Encoding.cpp">
       <Filter>Text</Filter>
+    </ClCompile>
+    <ClCompile Include="Security\Authorization.cpp">
+      <Filter>Security</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

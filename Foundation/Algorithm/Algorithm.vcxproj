@@ -16,7 +16,7 @@
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v120</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
@@ -65,17 +65,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="ComputationalGeometry\Convex.cpp" />
-    <ClCompile Include="ComputationalGeometry\Triangulation.cpp" />
-    <ClCompile Include="ComputationalGeometry\VertexSet.cpp" />
+    <ClInclude Include="algorithm.h" />
+    <ClInclude Include="Sort\Sort.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ComputationalGeometry\Convex.h" />
-    <ClInclude Include="ComputationalGeometry\import.h" />
-    <ClInclude Include="ComputationalGeometry\macros.h" />
-    <ClInclude Include="ComputationalGeometry\Triangulation.h" />
-    <ClInclude Include="ComputationalGeometry\VertexSet.h" />
-    <ClInclude Include="algorithm.h" />
+    <ClCompile Include="main.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

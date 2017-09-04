@@ -24,7 +24,7 @@ void WndRender::show()
 	
 	//this->testText();
 
-	this->testDrawNode();
+	this->testMedia();
 }
 
 void WndRender::testMoveImage()
@@ -546,16 +546,15 @@ void WndRender::testModel()
 	pModel->getMatrial()->setEmisiion(255, 0, 0, 255);
 	pModel->getMatrial()->setShiness(0.5f);
 
-// 	int count = 1024;
-// 	float interval = 5;
-// 	float rx = 360;
-// 	float ry = 360;
-// 	float rz = 360;
-// 	RotateToAction* pRotateToAction = new RotateToAction();
-// 	pRotateToAction->setRotation(rx * count, ry * count, rz * count);
-// 	pRotateToAction->setInterval(interval * count);
-// 	pModel->getActionProxy()->runAction(pRotateToAction);
-
+	int count = 1024;
+	float interval = 5;
+	float rx = 360;
+	float ry = 360;
+	float rz = 360;
+	RotateToAction* pRotateToAction = new RotateToAction();
+	pRotateToAction->setRotation(rx * count, ry * count, rz * count);
+	pRotateToAction->setInterval(interval * count);
+	pModel->getActionProxy()->runAction(pRotateToAction);
 
 	//this->getCanvas()->getCamera()->lookAt(pModel->getPosition());
 }
@@ -599,7 +598,7 @@ void WndRender::testScrollView()
 		pScrollView->append(pImage);
 	}
 
-	pScrollView->setScrollDirection(ESD_VERTICAL_BOTTOM);
+	pScrollView->setScrollDirection(ESD_HORIZONTAL_LEFT);
 }
     
 void WndRender::testUI()
@@ -624,13 +623,6 @@ void WndRender::testDrawNode()
 	};
 
 	int COUNT = (sizeof(points) / sizeof(Vector2));
-
-	acg::VertexSet vertexSet = acg::VertexSet();
-
-	acg::Convex::makeConvexHull(points, COUNT, vertexSet);
-
-	acg::Triangulation* pTriangulation = new acg::Triangulation();
-	pTriangulation->indicesOfPolygon(points, COUNT);
 
 	DrawNode* pDrawNode = new DrawNode();
 	pDrawNode->setDrawMode(EBM_POLYGON);

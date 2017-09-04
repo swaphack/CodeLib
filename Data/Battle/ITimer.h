@@ -1,6 +1,7 @@
 #pragma once
 #include <functional>
 
+// 定时器
 class ITimer
 {
 public:
@@ -10,6 +11,7 @@ public:
 	virtual bool Finish() { return false; }
 };
 
+// 带有时长的定时器
 class IIntervalTimer : public ITimer
 {
 public:

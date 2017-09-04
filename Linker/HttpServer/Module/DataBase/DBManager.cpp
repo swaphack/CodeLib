@@ -23,9 +23,9 @@ DBManager* DBManager::getInstance()
 	return s_DBManager;
 }
 
-bool DBManager::init(const char* url, std::vector<std::string> readTableNames)
+bool DBManager::init(const sys::Author& info, std::vector<std::string> readTableNames)
 {
-	_db = web::DBConnect::getInstance()->createSQLite(url);
+	_db = web::DBConnect::getInstance()->create<web::SQLite>(info);
 	if (_db	 == nullptr)
 	{
 		return false;
@@ -42,7 +42,7 @@ bool DBManager::init(const char* url, std::vector<std::string> readTableNames)
 		{
 			PRINT("Read Table %s Error!\n", (*iter).c_str());
 		}
-		
+		addDataSheet((*iter).c_str(), pDataSheet);
 		iter++;
 	}
 
@@ -80,9 +80,56 @@ bool DBManager::insert(const char* tableName, const std::map<std::string, std::s
 		return false;
 	}
 
+	if (getDataSheet(tableName) == nullptr)
+	{
+		addDataSheet(tableName, new sys::DataSheet());
+	}
+
 	bRet = insertMemory(tableName, values);
 
 	return bRet;
+}
+
+sys::IDataRecord* DBManager::find(const char* tableName, const std::map<std::string, std::string>& values)
+{
+	if (tableName == nullptr)
+	{
+		return nullptr;
+	}
+
+	sys::DataSheet* pSheet = getDataSheet(tableName);
+	if (pSheet == nullptr)
+	{
+		return nullptr;
+	}
+
+	pSheet->reset();
+
+	sys::IDataRecord* pRecord = nullptr;
+	bool bFind = false;
+	while (pRecord = pSheet->next())
+	{
+		bFind = true;
+		for (std::map<std::string, std::string>::const_iterator cit = values.begin();
+			cit != values.end();
+			cit++)
+		{
+			if (cit->second.compare(pRecord->getValue(cit->first.c_str())) != 0)
+			{
+				bFind = false;
+				break;
+			}
+		}
+
+		if (bFind)
+		{
+			pSheet->reset();
+			return pRecord;
+		}
+	}
+
+	pSheet->reset();
+	return nullptr;
 }
 
 void DBManager::addDataSheet(const char* tableName, sys::DataSheet* pDataSheet)
@@ -188,7 +235,7 @@ bool DBManager::updateMemory(const char* tableName, const std::map<std::string, 
 bool DBManager::insertMemory(const char* tableName, const std::map<std::string, std::string>& values)
 {
 	sys::DataSheet* pDataSheet = getDataSheet(tableName);
-	if (pDataSheet != nullptr)
+	if (pDataSheet == nullptr)
 	{
 		return false;
 	}

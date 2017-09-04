@@ -37,7 +37,8 @@ int main(int argc, char** argv)
 	sys::String tables = config->getValue("database.table", "names"); 
 	std::vector<std::string> tableNameAry;
 	tables.split(',', tableNameAry);
-	hs::DBManager::getInstance()->init(config->getValue("database.url", "path"), tableNameAry);
+	sys::Author dbInfo(config->getValue("database.url", "path"), 0);
+	hs::DBManager::getInstance()->init(dbInfo, tableNameAry);
 
 	delete config;
 

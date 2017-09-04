@@ -2,6 +2,9 @@
 
 #include "IDataRecord.h"
 
+#include <map>
+#include <string>
+
 namespace sys
 {
 	class IDataSheet

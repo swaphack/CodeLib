@@ -23,24 +23,3 @@ DBConnect* DBConnect::getInstance()
 
 	return s_DBConnect;
 }
-
-SQLite* DBConnect::createSQLite(const char* url)
-{
-	if (url == nullptr)
-	{
-		return nullptr;
-	}
-	SQLite* db = new SQLite();
-	if (db == nullptr)
-	{
-		return nullptr;
-	}
-
-	if (!db->connect(url))
-	{
-		delete db;
-		return nullptr;
-	}
-
-	return db;
-}

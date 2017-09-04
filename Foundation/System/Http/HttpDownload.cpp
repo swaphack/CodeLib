@@ -25,7 +25,7 @@ bool HttpDownload::download(const char* url, int port, const char* filepath, OnH
 		return false;
 	}
 	Client* client = new Client(url, port);
-	client->setRecvHandler(this, static_cast<CLIENT_RECV_HANDLER>(&HttpDownload::onRecvHand));
+	client->setRecvHandler(this, static_cast<CLIENT_RECV_HANDLER>(&HttpDownload::onRecvHandle));
 	if (!client->connect())
 	{
 		delete client;
@@ -85,7 +85,7 @@ void HttpDownload::flushListenData(int id)
 	_downloadDatas.erase(iter1);
 }
 
-void HttpDownload::onRecvHand(int id, DataQueue& data)
+void HttpDownload::onRecvHandle(int id, DataQueue& data)
 {// 接收数据回调
 	if (data.empty())
 	{

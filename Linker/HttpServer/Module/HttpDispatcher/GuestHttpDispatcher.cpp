@@ -5,7 +5,7 @@ using namespace hs;
 
 GuestHttpDispatcher::GuestHttpDispatcher()
 {
-
+	this->init();
 }
 
 GuestHttpDispatcher::~GuestHttpDispatcher()
@@ -13,7 +13,7 @@ GuestHttpDispatcher::~GuestHttpDispatcher()
 
 }
 
-bool GuestHttpDispatcher::hand(const char* url, std::map<std::string, std::string> params, sys::HttpResponse& response)
+void GuestHttpDispatcher::init()
 {
-	return false;
+
 }
