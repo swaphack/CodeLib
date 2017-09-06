@@ -57,6 +57,9 @@
     <ClCompile Include="DB\DBConnect.cpp">
       <Filter>DB</Filter>
     </ClCompile>
+    <ClCompile Include="DB\DBServer.cpp">
+      <Filter>DB</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="web.h" />
@@ -127,6 +130,9 @@
       <Filter>DB</Filter>
     </ClInclude>
     <ClInclude Include="DB\DBConnect.h">
+      <Filter>DB</Filter>
+    </ClInclude>
+    <ClInclude Include="DB\DBServer.h">
       <Filter>DB</Filter>
     </ClInclude>
   </ItemGroup>

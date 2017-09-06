@@ -4,11 +4,12 @@ using namespace hs;
 
 DBManager::DBManager()
 {
-
 }
 
 DBManager::~DBManager()
 {
+	SAFE_DELETE(_dbServer);
+
 	clearDataSheets();
 }
 
@@ -23,46 +24,46 @@ DBManager* DBManager::getInstance()
 	return s_DBManager;
 }
 
-bool DBManager::init(const sys::Author& info, std::vector<std::string> readTableNames)
+bool DBManager::init(const sys::Author& info)
 {
-	_db = web::DBConnect::getInstance()->create<web::SQLite>(info);
-	if (_db	 == nullptr)
+	sys::IDataBase* db = web::DBConnect::getInstance()->create<web::SQLite>(info);
+	if (db == nullptr)
 	{
 		return false;
 	}
 
-	sys::IDBString* pDBString = _db->getDBString();
-
-	std::vector<std::string>::const_iterator iter = readTableNames.begin();
-	while (iter != readTableNames.end())
-	{
-		const char* pSqlString = getCString("select * from %s", (*iter).c_str());
-		sys::DataSheet* pDataSheet = new sys::DataSheet();
-		if (!pDBString->excuteSQL(pSqlString, pDataSheet))
-		{
-			PRINT("Read Table %s Error!\n", (*iter).c_str());
-		}
-		addDataSheet((*iter).c_str(), pDataSheet);
-		iter++;
-	}
+	_dbServer = new web::DBServer(db);
 
 	return true;
 }
 
-bool DBManager::update(const char* tableName, const std::map<std::string, std::string>& keys, const std::map<std::string, std::string>& values)
+bool DBManager::load(const std::vector<std::string>& readTableNames)
+{
+	if (_dbServer == nullptr)
+	{
+		return false;
+	}
+	return _dbServer->load(readTableNames, _tableSheet);
+}
+
+bool DBManager::update(const char* tableName, const std::map<std::string, std::string>& conditions, const std::map<std::string, std::string>& values)
 {
 	if (tableName == nullptr)
 	{
 		return false;
 	}
 
-	bool bRet = updateDataBase(tableName, keys, values);
+	bool bRet = true;
+	if (_dbServer)
+	{
+		bRet = _dbServer->update(tableName, conditions, values);
+	}
 	if (bRet == false)
 	{
 		return false;
 	}
 
-	bRet = updateMemory(tableName, keys, values);
+	bRet = updateMemory(tableName, conditions, values);
 
 	return bRet;
 }
@@ -74,10 +75,10 @@ bool DBManager::insert(const char* tableName, const std::map<std::string, std::s
 		return false;
 	}
 
-	bool bRet = insertDataBase(tableName, values);
-	if (bRet == false)
+	bool bRet = true;
+	if (_dbServer)
 	{
-		return false;
+		bRet = _dbServer->insert(tableName, values);
 	}
 
 	if (getDataSheet(tableName) == nullptr)
@@ -247,90 +248,6 @@ bool DBManager::insertMemory(const char* tableName, const std::map<std::string, 
 	{
 		pDataRecord->setValue(iter->first.c_str(), iter->second.c_str());
 		iter++;
-	}
-
-	return true;
-}
-
-
-bool DBManager::updateDataBase(const char* tableName, const std::map<std::string, std::string>& keys, const std::map<std::string, std::string>& values)
-{
-	std::string conditionValues = "";
-	std::string changedValues = "";
-
-	std::map<std::string, std::string>::const_iterator iter = keys.begin();
-	while (iter != keys.end())
-	{
-		conditionValues.append(iter->first);
-		conditionValues.append("=");
-		conditionValues.append(iter->second);
-		iter++;
-
-		if (iter != keys.end())
-		{
-			conditionValues.append(",");
-		}
-	}
-
-	iter = values.begin();
-	while (iter != values.end())
-	{
-		changedValues.append(iter->first);
-		changedValues.append("=");
-		changedValues.append(iter->second);
-		iter++;
-
-		if (iter != keys.end())
-		{
-			changedValues.append(",");
-		}
-	}
-
-	std::string pSqlString = "";
-	if (conditionValues.empty())
-	{
-		pSqlString = getCString("update %s %s;", tableName, changedValues.c_str());
-	}
-	else
-	{
-		pSqlString = getCString("update %s %s where %s;", tableName, changedValues.c_str(), conditionValues.c_str());
-	}
-
-	sys::IDBString* pDBString = _db->getDBString();
-	bool result = pDBString->excuteSQL(pSqlString.c_str());
-	if (result == false)
-	{
-		return false;
-	}
-
-	return true;
-}
-
-bool DBManager::insertDataBase(const char* tableName, const std::map<std::string, std::string>& values)
-{
-	std::string conditionValues = "";
-	std::string changedValues = "";
-
-	std::map<std::string, std::string>::const_iterator iter = values.begin();
-	while (iter != values.end())
-	{
-		conditionValues.append(iter->first);
-		changedValues.append(iter->second);
-		iter++;
-
-		if (iter != values.end())
-		{
-			conditionValues.append(",");
-			changedValues.append(",");
-		}
-	}
-
-	std::string pSqlString = getCString("insert into %s (%s) values (%s);", tableName, conditionValues.c_str(), changedValues.c_str());
-	sys::IDBString* pDBString = _db->getDBString();
-	bool result = pDBString->excuteSQL(pSqlString.c_str());
-	if (result == false)
-	{
-		return false;
 	}
 
 	return true;

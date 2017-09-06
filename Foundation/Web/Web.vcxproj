@@ -69,6 +69,7 @@
   <ItemGroup>
     <ClCompile Include="Client\WebClient.cpp" />
     <ClCompile Include="DB\DBConnect.cpp" />
+    <ClCompile Include="DB\DBServer.cpp" />
     <ClCompile Include="DB\SQLite.cpp" />
     <ClCompile Include="Http\HttpActivity.cpp" />
     <ClCompile Include="Http\HttpActivityListener.cpp" />
@@ -83,6 +84,7 @@
     <ClInclude Include="Client\import.h" />
     <ClInclude Include="Client\WebClient.h" />
     <ClInclude Include="DB\DBConnect.h" />
+    <ClInclude Include="DB\DBServer.h" />
     <ClInclude Include="DB\import.h" />
     <ClInclude Include="DB\SQLite.h" />
     <ClInclude Include="Http\HttpActivity.h" />

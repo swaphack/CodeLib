@@ -4,6 +4,7 @@
 #include "web.h"
 
 #include <vector>
+#include <map>
 #include <string>
 
 namespace hs
@@ -21,14 +22,19 @@ namespace hs
 		*	@param url 数据库文件地址
 		*	@param readTableNames 要读取的表
 		*/
-		bool init(const sys::Author& info, std::vector<std::string> readTableNames);
+		bool init(const sys::Author& info);
+		/**
+		*	加载表
+		*	@param readTableNames 要读取的表
+		*/
+		bool load(const std::vector<std::string>& readTableNames);
 		/**
 		*	更新表数据
 		*	@param tableName 表名称
-		*	@param keys 查找条件的字段名和值
+		*	@param conditions 查找条件的字段名和值
 		*	@param values 改变的字段名和值
 		*/
-		bool update(const char* tableName, const std::map<std::string, std::string>& keys, const std::map<std::string, std::string>& values);
+		bool update(const char* tableName, const std::map<std::string, std::string>& conditions, const std::map<std::string, std::string>& values);
 		/**
 		*	插入数据
 		*	@param tableName 表名称
@@ -54,14 +60,9 @@ namespace hs
 		bool updateMemory(const char* tableName, const std::map<std::string, std::string>& keys, const std::map<std::string, std::string>& values);
 		// 添加到缓存
 		bool insertMemory(const char* tableName, const std::map<std::string, std::string>& values);
-	protected:
-		// 更新数据库
-		bool updateDataBase(const char* tableName, const std::map<std::string, std::string>& keys, const std::map<std::string, std::string>& values);
-		// 添加到数据库
-		bool insertDataBase(const char* tableName, const std::map<std::string, std::string>& values);
 	private:
 		// 数据库sqlite
-		sys::IDataBase* _db;
+		web::DBServer* _dbServer;
 		// 数据表
 		std::map<std::string, sys::DataSheet*> _tableSheet;
 	};

@@ -23,3 +23,15 @@ DBConnect* DBConnect::getInstance()
 
 	return s_DBConnect;
 }
+
+sys::IDataBase* DBConnect::create(const sys::Author& info, DBType type)
+{
+	if (type == DBType::SQLITT)
+	{
+		return create<SQLite>(info);
+	}
+	else
+	{
+		return nullptr;
+	}
+}

@@ -22,7 +22,7 @@ SQLiteString::~SQLiteString()
 
 bool SQLiteString::excuteSQL(const char* sqlExpression, sys::IDataSheet* pDataSheet /*= nullptr*/)
 {
-	if (sqlExpression == nullptr)
+	if (_db == nullptr || sqlExpression == nullptr)
 	{
 		return false;
 	}
