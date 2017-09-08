@@ -27,7 +27,7 @@
     <ClInclude Include="Struct\DBTable.h" />
     <ClInclude Include="Struct\DBTemplate.h" />
     <ClInclude Include="Struct\import.h" />
-    <ClInclude Include="Tool\DBFileh.h" />
+    <ClInclude Include="Tool\DBFile.h" />
     <ClInclude Include="Tool\DBHelper.h" />
     <ClInclude Include="Tool\DBMacros.h" />
     <ClInclude Include="Tool\import.h" />

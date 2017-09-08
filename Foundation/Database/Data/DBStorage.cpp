@@ -1,4 +1,5 @@
 #include "DBStorage.h"
+#include "../Tool/DBFile.h"
 
 using namespace db;
 
@@ -8,8 +9,14 @@ using namespace sys;
 
 void DBStorage::readDataConfig(const char* filename, std::map<std::string, std::string>& dbConfigs)
 {
-	DBFileReader reader = DBFileReader(filename);
+	DBFileReader reader;
 
+	if (!reader.load(filename))
+	{
+		return;
+	}
+
+	dbConfigs.clear();
 	int count = reader.readUInt();
 	for (int i = 0; i < count; i++)
 	{

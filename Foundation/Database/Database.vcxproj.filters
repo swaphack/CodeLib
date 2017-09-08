@@ -59,9 +59,6 @@
     <ClInclude Include="Tool\DBHelper.h">
       <Filter>Tool</Filter>
     </ClInclude>
-    <ClInclude Include="Tool\DBFileh.h">
-      <Filter>Tool</Filter>
-    </ClInclude>
     <ClInclude Include="Tool\import.h">
       <Filter>Tool</Filter>
     </ClInclude>
@@ -73,6 +70,9 @@
     </ClInclude>
     <ClInclude Include="Struct\DBStructTemplate.h">
       <Filter>Struct</Filter>
+    </ClInclude>
+    <ClInclude Include="Tool\DBFile.h">
+      <Filter>Tool</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

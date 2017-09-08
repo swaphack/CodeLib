@@ -45,10 +45,20 @@ void LayoutItem::setOrgin(float x, float y)
 	m_rGeometry.y = y;
 }
 
+sys::Vector2 LayoutItem::getOrgin()
+{
+	return sys::Vector2(m_rGeometry.x, m_rGeometry.y);
+}
+
 void LayoutItem::setSize(float width, float height)
 {
 	m_rGeometry.width = width;
 	m_rGeometry.height = height;
+}
+
+sys::Size LayoutItem::getSize()
+{
+	return sys::Size(m_rGeometry.width, m_rGeometry.height);
 }
 
 const sys::Size& LayoutItem::getMinSize()
