@@ -16,7 +16,7 @@ bool Authorization::isRemoteEnable(const std::string& url, int port)
 	}
 
 	Client* pClient = new Client(url.c_str(), port);
-	if (!pClient->connect())
+	if (!pClient && !pClient->connect())
 	{
 		return false;
 	}
@@ -34,7 +34,7 @@ bool Authorization::isRemoteEnable(const std::string& url, int port)
 
 bool Authorization::isPermissionEnable(const Author& info)
 {
-	if (!isRemoteEnable(info.url, info.port))
+	if (!isRemoteEnable(info.host, info.port))
 	{
 		return false;
 	}

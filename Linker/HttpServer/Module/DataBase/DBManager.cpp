@@ -8,7 +8,7 @@ DBManager::DBManager()
 
 DBManager::~DBManager()
 {
-	SAFE_DELETE(_dbServer);
+	SAFE_DELETE(_dbProxy);
 
 	clearDataSheets();
 }
@@ -24,26 +24,26 @@ DBManager* DBManager::getInstance()
 	return s_DBManager;
 }
 
-bool DBManager::init(const sys::Author& info)
+bool DBManager::init(const web::DBAuthor& info, int dbType)
 {
-	sys::IDataBase* db = web::DBConnect::getInstance()->create<web::SQLite>(info);
+	sys::IDataBase* db = web::DBConnect::getInstance()->create(info, (web::DBType)dbType);
 	if (db == nullptr)
 	{
 		return false;
 	}
 
-	_dbServer = new web::DBServer(db);
+	_dbProxy = new web::DBProxy(db);
 
 	return true;
 }
 
 bool DBManager::load(const std::vector<std::string>& readTableNames)
 {
-	if (_dbServer == nullptr)
+	if (_dbProxy == nullptr)
 	{
 		return false;
 	}
-	return _dbServer->load(readTableNames, _tableSheet);
+	return _dbProxy->load(readTableNames, _tableSheet);
 }
 
 bool DBManager::update(const char* tableName, const std::map<std::string, std::string>& conditions, const std::map<std::string, std::string>& values)
@@ -54,9 +54,9 @@ bool DBManager::update(const char* tableName, const std::map<std::string, std::s
 	}
 
 	bool bRet = true;
-	if (_dbServer)
+	if (_dbProxy)
 	{
-		bRet = _dbServer->update(tableName, conditions, values);
+		bRet = _dbProxy->update(tableName, conditions, values);
 	}
 	if (bRet == false)
 	{
@@ -76,9 +76,9 @@ bool DBManager::insert(const char* tableName, const std::map<std::string, std::s
 	}
 
 	bool bRet = true;
-	if (_dbServer)
+	if (_dbProxy)
 	{
-		bRet = _dbServer->insert(tableName, values);
+		bRet = _dbProxy->insert(tableName, values);
 	}
 
 	if (getDataSheet(tableName) == nullptr)

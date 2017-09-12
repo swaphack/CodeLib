@@ -21,6 +21,11 @@
 #define INVALID_SOCKET_VALUE -1
 #endif
 
+#ifdef _WIN32
+static int s_InitSocketModuleCount = 0;
+#endif // #ifdef _WIN32
+
+
 using namespace sys;
 
 Socket::Socket()
@@ -43,6 +48,11 @@ void Socket::InitSockModule()
 {
 #ifdef _WIN32
 #pragma comment(lib, "WS2_32.lib")
+	if (s_InitSocketModuleCount != 0)
+	{
+		s_InitSocketModuleCount++;
+		return;
+	}
 
 	WORD wVersionRequested;  
 	WSADATA wsaData;
@@ -65,7 +75,15 @@ void Socket::InitSockModule()
 void Socket::ReleaseSockModule()
 {
 #ifdef _WIN32
-	::WSACleanup();
+	if (s_InitSocketModuleCount == 0)
+	{
+		return;
+	}
+	s_InitSocketModuleCount--;
+	if (s_InitSocketModuleCount == 0)
+	{
+		::WSACleanup();
+	}
 #endif
 }
 

@@ -34,12 +34,20 @@ int main(int argc, char** argv)
 	HttpServer->getResourceMgr()->getResource(ERT_LOCAL)->setUrl(config->getValue("resource.websit", "path"));
 
 	// Êý¾Ý¿â
-	sys::String tables = config->getValue("database.table", "names"); 
-	std::vector<std::string> tableNameAry;
-	tables.split(',', tableNameAry);
-	sys::Author dbInfo(config->getValue("database.url", "path"), 0);
-	if (hs::DBManager::getInstance()->init(dbInfo)) 
+	std::string host = config->getValue("database.url", "host");
+	int port = atoi(config->getValue("database.url", "port"));
+	std::string username = config->getValue("database.url", "username");
+	std::string password = config->getValue("database.url", "password");
+	std::string dbname = config->getValue("database.url", "dbname");
+	int dbType = atoi(config->getValue("database.url", "type"));
+
+	web::DBAuthor dbInfo(host, port, username, password, dbname);
+	if (hs::DBManager::getInstance()->init(dbInfo, dbType))
 	{
+		sys::String tables = config->getValue("database.table", "names");
+		std::vector<std::string> tableNameAry;
+		tables.split(',', tableNameAry);
+
 		hs::DBManager::getInstance()->load(tableNameAry);
 	}
 

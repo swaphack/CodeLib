@@ -1,5 +1,7 @@
 #pragma once
 
+#include "DBAuthor.h"
 #include "SQLite.h"
+#include "MySQL.h"
 #include "DBConnect.h"
-#include "DBServer.h"
+#include "DBProxy.h"

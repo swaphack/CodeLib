@@ -1,40 +1,19 @@
 #include "SQLite.h"
+#include "DBString.h"
 
 #ifndef USE_SQLITE
 #define USE_SQLITE
 #include "third_party.h"
 #endif
 
-
 using namespace web;
-using namespace sys;
-
-SQLiteString::SQLiteString(IDataBase* db)
-:_db(db)
-{
-	ASSERT(db != nullptr);
-}
-
-SQLiteString::~SQLiteString()
-{
-
-}
-
-bool SQLiteString::excuteSQL(const char* sqlExpression, sys::IDataSheet* pDataSheet /*= nullptr*/)
-{
-	if (_db == nullptr || sqlExpression == nullptr)
-	{
-		return false;
-	}
-	return _db->executeSQL(sqlExpression, pDataSheet);
-}
 
 //////////////////////////////////////////////////////////////////////////
 SQLite::SQLite()
 :_instance(nullptr)
 , _dbString(nullptr)
 {
-
+	_dbString = new DBString(this);
 }
 
 SQLite::~SQLite()
@@ -45,26 +24,36 @@ SQLite::~SQLite()
 
 bool SQLite::connect(const sys::Author& info)
 {
-	if (info.url.empty())
+	if (info.host.empty())
 	{
 		return false;
 	}
 
-	int result = sqlite3_open(info.url.c_str(), &_instance);
-	if (result == SQLITE_OK)
-	{
-		SAFE_DELETE(_dbString);
-		_dbString = new SQLiteString(this);
-		return true;
-	}
+	this->disconnect();
 
-	return false;
+	int result = sqlite3_open(info.host.c_str(), &_instance);
+	if (result != SQLITE_OK)
+	{
+		return false;
+	}
+	
+	return true;
 }
 
 bool SQLite::disconnect()
 {
+	if (_instance == nullptr)
+	{
+		return false;
+	}
 	int result = sqlite3_close(_instance);
-	return result == SQLITE_OK;
+	bool bRet = result == SQLITE_OK;
+	if (bRet )
+	{
+		_instance = nullptr;
+	}
+
+	return bRet;
 }
 
 int onExecCallback(void* inParams, int argc, char** argv, char** colName)
@@ -74,9 +63,9 @@ int onExecCallback(void* inParams, int argc, char** argv, char** colName)
 		return 0;
 	}
 
-	IDataSheet* pSheet = static_cast<IDataSheet*>(inParams);
+	sys::IDataSheet* pSheet = static_cast<sys::IDataSheet*>(inParams);
 
-	IDataRecord* pRecord = pSheet->create();
+	sys::IDataRecord* pRecord = pSheet->create();
 	if (pSheet == nullptr)
 	{
 		return 0;
@@ -90,7 +79,7 @@ int onExecCallback(void* inParams, int argc, char** argv, char** colName)
 	return 0;
 }
 
-bool SQLite::executeSQL(const char* sqlExpression, IDataSheet* pDataSheet)
+bool SQLite::executeSQL(const char* sqlExpression, sys::IDataSheet* pDataSheet)
 {
 	int result;
 	if (pDataSheet)
@@ -105,7 +94,7 @@ bool SQLite::executeSQL(const char* sqlExpression, IDataSheet* pDataSheet)
 	return result == SQLITE_OK;
 }
 
-IDBString* SQLite::getDBString()
+sys::IDBString* SQLite::getDBString()
 {
 	return _dbString;
 }

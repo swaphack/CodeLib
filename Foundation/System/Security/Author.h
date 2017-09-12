@@ -9,7 +9,7 @@ namespace sys
 	{
 	public:
 		// 地址
-		std::string url;
+		std::string host;
 		// 端口
 		int port = 0;
 		// 用户名称
@@ -18,10 +18,10 @@ namespace sys
 		std::string password;
 	public:
 		Author()
-			:url(""), port(0), username(""), password("")
+			:host(""), port(0), username(""), password("")
 		{}
-		Author(const std::string& url, int port) 
-			:url(url), port(port), username(""), password("")
+		Author(const std::string& host, int port)
+			:host(host), port(port), username(""), password("")
 		{}
 	};
 }

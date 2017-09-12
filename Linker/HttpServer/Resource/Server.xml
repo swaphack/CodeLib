@@ -7,7 +7,11 @@
     <websit path="E:/website" />
   </resource>
   <database>
-    <url path="E:/GIT/CodeLib/Linker/HttpServer/Resource/hs.db" />
+    <url host="127.0.0.1" port="3306" username="root" password="123456" dbname="author" type="1"/>
     <table names="User" />
   </database>
 </root>
+
+<!--
+<url host="E:/GIT/CodeLib/Linker/HttpServer/Resource/hs.db"/>
+-->

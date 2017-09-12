@@ -44,7 +44,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>../../Lib/include/freetype/;../../Lib/include/opencl/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../Lib/include/freetype/;../../Lib/include/opencl/;../../Lib/include/mysql/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <BrowseInformation>true</BrowseInformation>
     </ClCompile>
     <Link>
@@ -203,6 +203,107 @@
     <ClInclude Include="..\..\Lib\include\jpeg\jpegint.h" />
     <ClInclude Include="..\..\Lib\include\jpeg\jpeglib.h" />
     <ClInclude Include="..\..\Lib\include\jpeg\jversion.h" />
+    <ClInclude Include="..\..\Lib\include\mysql\big_endian.h" />
+    <ClInclude Include="..\..\Lib\include\mysql\binary_log_types.h" />
+    <ClInclude Include="..\..\Lib\include\mysql\byte_order_generic.h" />
+    <ClInclude Include="..\..\Lib\include\mysql\byte_order_generic_x86.h" />
+    <ClInclude Include="..\..\Lib\include\mysql\decimal.h" />
+    <ClInclude Include="..\..\Lib\include\mysql\errmsg.h" />
+    <ClInclude Include="..\..\Lib\include\mysql\keycache.h" />
+    <ClInclude Include="..\..\Lib\include\mysql\little_endian.h" />
+    <ClInclude Include="..\..\Lib\include\mysql\mysql.h" />
+    <ClInclude Include="..\..\Lib\include\mysql\mysqld_ername.h" />
+    <ClInclude Include="..\..\Lib\include\mysql\mysqld_error.h" />
+    <ClInclude Include="..\..\Lib\include\mysql\mysql\client_authentication.h" />
+    <ClInclude Include="..\..\Lib\include\mysql\mysql\client_plugin.h" />
+    <ClInclude Include="..\..\Lib\include\mysql\mysql\com_data.h" />
+    <ClInclude Include="..\..\Lib\include\mysql\mysql\get_password.h" />
+    <ClInclude Include="..\..\Lib\include\mysql\mysql\group_replication_priv.h" />
+    <ClInclude Include="..\..\Lib\include\mysql\mysql\innodb_priv.h" />
+    <ClInclude Include="..\..\Lib\include\mysql\mysql\mysql_lex_string.h" />
+    <ClInclude Include="..\..\Lib\include\mysql\mysql\plugin.h" />
+    <ClInclude Include="..\..\Lib\include\mysql\mysql\plugin_audit.h" />
+    <ClInclude Include="..\..\Lib\include\mysql\mysql\plugin_auth.h" />
+    <ClInclude Include="..\..\Lib\include\mysql\mysql\plugin_auth_common.h" />
+    <ClInclude Include="..\..\Lib\include\mysql\mysql\plugin_ftparser.h" />
+    <ClInclude Include="..\..\Lib\include\mysql\mysql\plugin_group_replication.h" />
+    <ClInclude Include="..\..\Lib\include\mysql\mysql\plugin_keyring.h" />
+    <ClInclude Include="..\..\Lib\include\mysql\mysql\plugin_trace.h" />
+    <ClInclude Include="..\..\Lib\include\mysql\mysql\plugin_validate_password.h" />
+    <ClInclude Include="..\..\Lib\include\mysql\mysql\psi\mysql_file.h" />
+    <ClInclude Include="..\..\Lib\include\mysql\mysql\psi\mysql_idle.h" />
+    <ClInclude Include="..\..\Lib\include\mysql\mysql\psi\mysql_mdl.h" />
+    <ClInclude Include="..\..\Lib\include\mysql\mysql\psi\mysql_memory.h" />
+    <ClInclude Include="..\..\Lib\include\mysql\mysql\psi\mysql_ps.h" />
+    <ClInclude Include="..\..\Lib\include\mysql\mysql\psi\mysql_socket.h" />
+    <ClInclude Include="..\..\Lib\include\mysql\mysql\psi\mysql_sp.h" />
+    <ClInclude Include="..\..\Lib\include\mysql\mysql\psi\mysql_stage.h" />
+    <ClInclude Include="..\..\Lib\include\mysql\mysql\psi\mysql_statement.h" />
+    <ClInclude Include="..\..\Lib\include\mysql\mysql\psi\mysql_table.h" />
+    <ClInclude Include="..\..\Lib\include\mysql\mysql\psi\mysql_thread.h" />
+    <ClInclude Include="..\..\Lib\include\mysql\mysql\psi\mysql_transaction.h" />
+    <ClInclude Include="..\..\Lib\include\mysql\mysql\psi\psi.h" />
+    <ClInclude Include="..\..\Lib\include\mysql\mysql\psi\psi_base.h" />
+    <ClInclude Include="..\..\Lib\include\mysql\mysql\psi\psi_memory.h" />
+    <ClInclude Include="..\..\Lib\include\mysql\mysql\services.h" />
+    <ClInclude Include="..\..\Lib\include\mysql\mysql\service_command.h" />
+    <ClInclude Include="..\..\Lib\include\mysql\mysql\service_locking.h" />
+    <ClInclude Include="..\..\Lib\include\mysql\mysql\service_mysql_alloc.h" />
+    <ClInclude Include="..\..\Lib\include\mysql\mysql\service_mysql_keyring.h" />
+    <ClInclude Include="..\..\Lib\include\mysql\mysql\service_mysql_password_policy.h" />
+    <ClInclude Include="..\..\Lib\include\mysql\mysql\service_mysql_string.h" />
+    <ClInclude Include="..\..\Lib\include\mysql\mysql\service_my_plugin_log.h" />
+    <ClInclude Include="..\..\Lib\include\mysql\mysql\service_my_snprintf.h" />
+    <ClInclude Include="..\..\Lib\include\mysql\mysql\service_parser.h" />
+    <ClInclude Include="..\..\Lib\include\mysql\mysql\service_rpl_transaction_ctx.h" />
+    <ClInclude Include="..\..\Lib\include\mysql\mysql\service_rpl_transaction_write_set.h" />
+    <ClInclude Include="..\..\Lib\include\mysql\mysql\service_rules_table.h" />
+    <ClInclude Include="..\..\Lib\include\mysql\mysql\service_security_context.h" />
+    <ClInclude Include="..\..\Lib\include\mysql\mysql\service_srv_session.h" />
+    <ClInclude Include="..\..\Lib\include\mysql\mysql\service_srv_session_info.h" />
+    <ClInclude Include="..\..\Lib\include\mysql\mysql\service_ssl_wrapper.h" />
+    <ClInclude Include="..\..\Lib\include\mysql\mysql\service_thd_alloc.h" />
+    <ClInclude Include="..\..\Lib\include\mysql\mysql\service_thd_engine_lock.h" />
+    <ClInclude Include="..\..\Lib\include\mysql\mysql\service_thd_wait.h" />
+    <ClInclude Include="..\..\Lib\include\mysql\mysql\service_thread_scheduler.h" />
+    <ClInclude Include="..\..\Lib\include\mysql\mysql\thread_pool_priv.h" />
+    <ClInclude Include="..\..\Lib\include\mysql\mysql\thread_type.h" />
+    <ClInclude Include="..\..\Lib\include\mysql\mysql_com.h" />
+    <ClInclude Include="..\..\Lib\include\mysql\mysql_com_server.h" />
+    <ClInclude Include="..\..\Lib\include\mysql\mysql_embed.h" />
+    <ClInclude Include="..\..\Lib\include\mysql\mysql_time.h" />
+    <ClInclude Include="..\..\Lib\include\mysql\mysql_version.h" />
+    <ClInclude Include="..\..\Lib\include\mysql\my_alloc.h" />
+    <ClInclude Include="..\..\Lib\include\mysql\my_byteorder.h" />
+    <ClInclude Include="..\..\Lib\include\mysql\my_command.h" />
+    <ClInclude Include="..\..\Lib\include\mysql\my_compiler.h" />
+    <ClInclude Include="..\..\Lib\include\mysql\my_config.h" />
+    <ClInclude Include="..\..\Lib\include\mysql\my_dbug.h" />
+    <ClInclude Include="..\..\Lib\include\mysql\my_dir.h" />
+    <ClInclude Include="..\..\Lib\include\mysql\my_getopt.h" />
+    <ClInclude Include="..\..\Lib\include\mysql\my_global.h" />
+    <ClInclude Include="..\..\Lib\include\mysql\my_list.h" />
+    <ClInclude Include="..\..\Lib\include\mysql\my_sys.h" />
+    <ClInclude Include="..\..\Lib\include\mysql\my_thread.h" />
+    <ClInclude Include="..\..\Lib\include\mysql\my_thread_local.h" />
+    <ClInclude Include="..\..\Lib\include\mysql\my_xml.h" />
+    <ClInclude Include="..\..\Lib\include\mysql\m_ctype.h" />
+    <ClInclude Include="..\..\Lib\include\mysql\m_string.h" />
+    <ClInclude Include="..\..\Lib\include\mysql\plugin.h" />
+    <ClInclude Include="..\..\Lib\include\mysql\plugin_audit.h" />
+    <ClInclude Include="..\..\Lib\include\mysql\plugin_ftparser.h" />
+    <ClInclude Include="..\..\Lib\include\mysql\plugin_group_replication.h" />
+    <ClInclude Include="..\..\Lib\include\mysql\plugin_keyring.h" />
+    <ClInclude Include="..\..\Lib\include\mysql\plugin_validate_password.h" />
+    <ClInclude Include="..\..\Lib\include\mysql\sql_common.h" />
+    <ClInclude Include="..\..\Lib\include\mysql\sql_state.h" />
+    <ClInclude Include="..\..\Lib\include\mysql\sslopt-case.h" />
+    <ClInclude Include="..\..\Lib\include\mysql\sslopt-longopts.h" />
+    <ClInclude Include="..\..\Lib\include\mysql\sslopt-vars.h" />
+    <ClInclude Include="..\..\Lib\include\mysql\thr_cond.h" />
+    <ClInclude Include="..\..\Lib\include\mysql\thr_mutex.h" />
+    <ClInclude Include="..\..\Lib\include\mysql\thr_rwlock.h" />
+    <ClInclude Include="..\..\Lib\include\mysql\typelib.h" />
     <ClInclude Include="..\..\Lib\include\opencl\CL\cl.h" />
     <ClInclude Include="..\..\Lib\include\opencl\CL\cl.hpp" />
     <ClInclude Include="..\..\Lib\include\opencl\CL\cl2.hpp" />
@@ -239,6 +340,14 @@
   <ItemGroup>
     <ClCompile Include="..\..\Lib\include\sqlite\shell.c" />
     <ClCompile Include="..\..\Lib\include\sqlite\sqlite3.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\Lib\include\mysql\mysql\client_plugin.h.pp" />
+    <None Include="..\..\Lib\include\mysql\mysql\plugin_audit.h.pp" />
+    <None Include="..\..\Lib\include\mysql\mysql\plugin_auth.h.pp" />
+    <None Include="..\..\Lib\include\mysql\mysql\plugin_ftparser.h.pp" />
+    <None Include="..\..\Lib\include\mysql\mysql\plugin_keyring.h.pp" />
+    <None Include="..\..\Lib\include\mysql\mysql\services.h.pp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

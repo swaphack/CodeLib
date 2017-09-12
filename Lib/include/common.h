@@ -11,4 +11,5 @@
 #define USE_SQLITE
 #define USE_OPENCL
 #define USE_CG
+#define USE_MYSQL
 */

@@ -20,9 +20,9 @@ namespace hs
 		/** 
 		*	初始化
 		*	@param url 数据库文件地址
-		*	@param readTableNames 要读取的表
+		*	@param dbType 数据库类型
 		*/
-		bool init(const sys::Author& info);
+		bool init(const web::DBAuthor& info, int dbType = 0);
 		/**
 		*	加载表
 		*	@param readTableNames 要读取的表
@@ -62,7 +62,7 @@ namespace hs
 		bool insertMemory(const char* tableName, const std::map<std::string, std::string>& values);
 	private:
 		// 数据库sqlite
-		web::DBServer* _dbServer;
+		web::DBProxy* _dbProxy;
 		// 数据表
 		std::map<std::string, sys::DataSheet*> _tableSheet;
 	};

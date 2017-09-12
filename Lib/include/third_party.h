@@ -78,4 +78,11 @@
 #include "cg/Cg/cgGL.h"
 #endif
 
+//////////////////////////////////////////////////////////////////////////
+// mysql
+
+#if defined(USE_MYSQL)
+#include "mysql/mysql.h"
+#endif
+
 

@@ -7,10 +7,10 @@ namespace web
 	// 数据库类型
 	enum class DBType
 	{
-		SQLITT,
-		MYSQL,
-		SQLSERVER, 
-		ORACLE,
+		DB_SQLITT,
+		DB_MYSQL,
+		DB_SQLSERVER,
+		DB_ORACLE,
 	};
 	// 数据库连接
 	class DBConnect

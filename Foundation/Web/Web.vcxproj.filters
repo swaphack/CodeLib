@@ -57,7 +57,13 @@
     <ClCompile Include="DB\DBConnect.cpp">
       <Filter>DB</Filter>
     </ClCompile>
-    <ClCompile Include="DB\DBServer.cpp">
+    <ClCompile Include="DB\MySQL.cpp">
+      <Filter>DB</Filter>
+    </ClCompile>
+    <ClCompile Include="DB\DBProxy.cpp">
+      <Filter>DB</Filter>
+    </ClCompile>
+    <ClCompile Include="DB\DBString.cpp">
       <Filter>DB</Filter>
     </ClCompile>
   </ItemGroup>
@@ -132,7 +138,16 @@
     <ClInclude Include="DB\DBConnect.h">
       <Filter>DB</Filter>
     </ClInclude>
-    <ClInclude Include="DB\DBServer.h">
+    <ClInclude Include="DB\MySQL.h">
+      <Filter>DB</Filter>
+    </ClInclude>
+    <ClInclude Include="DB\DBAuthor.h">
+      <Filter>DB</Filter>
+    </ClInclude>
+    <ClInclude Include="DB\DBProxy.h">
+      <Filter>DB</Filter>
+    </ClInclude>
+    <ClInclude Include="DB\DBString.h">
       <Filter>DB</Filter>
     </ClInclude>
   </ItemGroup>

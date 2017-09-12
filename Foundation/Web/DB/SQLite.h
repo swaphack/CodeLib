@@ -6,18 +6,6 @@ struct sqlite3;
 
 namespace web
 {
-	// sqlite Óï¾ä
-	class SQLiteString : public sys::IDBString
-	{
-	public:
-		SQLiteString(sys::IDataBase* db);
-		virtual ~SQLiteString();
-	public:
-		virtual bool excuteSQL(const char* sqlExpression, sys::IDataSheet* pDataSheet = nullptr);
-	private:
-		sys::IDataBase* _db;
-	};
-
 	// SQLite Êý¾Ý
 	class SQLite : public sys::IDataBase
 	{
