@@ -60,6 +60,9 @@
     <ClInclude Include="Module\Packet\import.h">
       <Filter>Module\Packet</Filter>
     </ClInclude>
+    <ClInclude Include="Module\Packet\PacketProtocol.h">
+      <Filter>Module\Packet</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Server\GameServer.cpp">
@@ -76,6 +79,9 @@
       <Filter>Module\Packet</Filter>
     </ClCompile>
     <ClCompile Include="Module\Packet\PacketReceiver.cpp">
+      <Filter>Module\Packet</Filter>
+    </ClCompile>
+    <ClCompile Include="Module\Packet\PacketProtocol.cpp">
       <Filter>Module\Packet</Filter>
     </ClCompile>
   </ItemGroup>

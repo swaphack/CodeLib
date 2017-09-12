@@ -21,6 +21,10 @@ bool DBProxy::load(const std::vector<std::string>& readTableNames, std::map<std:
 	tableSheet.clear();
 
 	sys::IDBString* pDBString = _db->getDBString();
+	if (pDBString == nullptr)
+	{
+		return false;
+	}
 
 	std::vector<std::string>::const_iterator iter = readTableNames.begin();
 	while (iter != readTableNames.end())
@@ -30,6 +34,9 @@ bool DBProxy::load(const std::vector<std::string>& readTableNames, std::map<std:
 		if (!pDBString->excuteSQL(pSqlString, pDataSheet))
 		{
 			PRINT("Read Table %s Error!\n", (*iter).c_str());
+			delete pDataSheet;
+			iter++;
+			continue;
 		}
 		tableSheet[(*iter).c_str()] = pDataSheet;
 		iter++;
@@ -161,6 +168,10 @@ bool DBProxy::exec(const char* strSQL, sys::IDataSheet* pDataSheet)
 		return false;
 	}
 	sys::IDBString* pDBString = _db->getDBString();
+	if (pDBString == nullptr)
+	{
+		return false;
+	}
 	bool result = pDBString->excuteSQL(strSQL, pDataSheet);
 	if (result == false)
 	{

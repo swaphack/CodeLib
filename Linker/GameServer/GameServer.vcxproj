@@ -74,6 +74,7 @@
     <ClInclude Include="Module\import.h" />
     <ClInclude Include="Module\macros.h" />
     <ClInclude Include="Module\Packet\import.h" />
+    <ClInclude Include="Module\Packet\PacketProtocol.h" />
     <ClInclude Include="Module\Packet\PacketDispatcher.h" />
     <ClInclude Include="Module\Packet\PacketReceiver.h" />
     <ClInclude Include="Module\Player\Player.h" />
@@ -86,6 +87,7 @@
   <ItemGroup>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Module\Packet\PacketDispatcher.cpp" />
+    <ClCompile Include="Module\Packet\PacketProtocol.cpp" />
     <ClCompile Include="Module\Packet\PacketReceiver.cpp" />
     <ClCompile Include="Module\Player\Player.cpp" />
     <ClCompile Include="Module\User\Users.cpp" />

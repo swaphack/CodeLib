@@ -14,6 +14,6 @@ namespace sys
 		virtual ~IDBString() {}
 	public:
 		// ≤È—Ø±Ì
-		virtual bool excuteSQL(const char* name, sys::IDataSheet* pDataSheet = nullptr) = 0;
+		virtual bool excuteSQL(const char* sqlExpression, sys::IDataSheet* pDataSheet = nullptr) = 0;
 	};
 }

@@ -9,16 +9,18 @@ void PacketReceiver::doGet(const char* buffer, int size)
 
 	PRINT("Receive Client :%d Packet : %d\n", header->Mark, header->PacketID);
 
-	UserPacketHeader* pResponse = PacketDispatcher::getInstance()->dispathPacket(*header);
+	PacketDispatcher::getInstance()->dispathPacket(*header);
+	/*
+	UserPacketHeader* pResponse =
 	if (pResponse)
 	{
 		doPost(*pResponse);
 	}
 	else
 	{
-		UserPacketHeader* packet = new UserPacketHeader();
+		UserPacketHeader packet;
 		packet->Mark = header->Mark;
-		doPost(*packet);
-		delete packet;
+		doPost(packet);
 	}
+	*/
 }

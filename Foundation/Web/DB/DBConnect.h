@@ -9,8 +9,6 @@ namespace web
 	{
 		DB_SQLITT,
 		DB_MYSQL,
-		DB_SQLSERVER,
-		DB_ORACLE,
 	};
 	// 数据库连接
 	class DBConnect
