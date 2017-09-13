@@ -15,7 +15,7 @@ TextActivityListener::~TextActivityListener()
 
 bool TextActivityListener::onDispatch(const char* sessionID, sys::DataQueue& dataQueue, int& packetSize)
 {
-	sys::NetData* top = dataQueue.top();
+	sys::NetData* top = dataQueue.topData();
 	std::string recvData = std::string(top->data, top->size);
 	PRINT("Receive : %s\n", recvData.c_str());
 // 	dataQueue.pop();

@@ -25,6 +25,13 @@
 static int s_InitSocketModuleCount = 0;
 #endif // #ifdef _WIN32
 
+// 接收数据大小
+#define	SOCKET_DATA_SIZE 32 * 1024
+// IO 缓存大小
+#define SOCKET_BUFFER_SIZE 1024 * 1024
+// 超时时间（单位：毫秒）
+#define SOCKET_TIME_OUT 5000
+
 
 using namespace sys;
 
@@ -99,14 +106,17 @@ void Socket::Bind(const char* addr, int port, bool ipv6)
 	point.getAddr(&addrSrv);
 
 	int result = ::bind(_sock, (struct sockaddr*)&addrSrv, sizeof(struct sockaddr));
+#if _DEBUG
 	PRINT("Socket Bind Result, code:%d\n", result);
+#endif
 }
 
 void Socket::Listen(int maxCount)
 {
 	int result = ::listen(_sock, maxCount);
-
+#if _DEBUG
 	PRINT("Socket Listen Result, code:%d\n", result);
+#endif
 }
 
 Socket* Socket::Accept()
@@ -146,7 +156,13 @@ char* Socket::Recv( int& size )
 {
 	static char s_recvData[SOCKET_DATA_SIZE] = { 0 };
 	memset(s_recvData, 0, SOCKET_DATA_SIZE);
-	size = ::recv(_sock, s_recvData, SOCKET_DATA_SIZE, 0);
+	size = ::recv(_sock, s_recvData, SOCKET_DATA_SIZE - 1, 0);
+#if _DEBUG
+	if (size > 0)
+	{
+		PRINT("%s", s_recvData);
+	}
+#endif
 	return s_recvData;
 }
 
@@ -175,7 +191,16 @@ bool Socket::HasError()
 
 void Socket::Close()
 {
-	::closesocket(_sock);
+	if (_sock != INVALID_SOCKET_VALUE)
+	{
+		::closesocket(_sock);
+	}
+#if _DEBUG
+	if (_sock != INVALID_SOCKET_VALUE)
+	{
+		PRINT("Socket close %d\n", _sock);
+	}
+#endif
 	_sock = INVALID_SOCKET_VALUE;
 }
 

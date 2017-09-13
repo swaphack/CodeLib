@@ -24,14 +24,14 @@ Users* Users::getInstance()
 	return s_UserInfo;
 }
 
-void Users::addPlayer(const T_UserInfo& userInfo)
+void Users::addUser(const T_UserInfo& userInfo)
 {
 	m_mUserInfos[userInfo.UserID] = userInfo;
 
 	m_mUserMarks[userInfo.Mark] = &m_mUserInfos[userInfo.UserID];
 }
 
-const T_UserInfo* Users::getPlayer(int nUserID)
+const T_UserInfo* Users::getUser(int nUserID)
 {
 	T_UserInfos::iterator iter = m_mUserInfos.find(nUserID);
 	if (iter == m_mUserInfos.end())
@@ -42,7 +42,7 @@ const T_UserInfo* Users::getPlayer(int nUserID)
 	return &iter->second;
 }
 
-const T_UserInfo* Users::getPlayerByMark(int nMark)
+const T_UserInfo* Users::getUserByMark(int nMark)
 {
 	T_PtrUserInfos::iterator iter = m_mUserMarks.find(nMark);
 	if (iter == m_mUserMarks.end())
@@ -53,7 +53,7 @@ const T_UserInfo* Users::getPlayerByMark(int nMark)
 	return iter->second;
 }
 
-void Users::removePlayer(int nUserID)
+void Users::removeUser(int nUserID)
 {
 	T_UserInfos::iterator iter = m_mUserInfos.find(nUserID);
 	if (iter != m_mUserInfos.end())
@@ -64,7 +64,7 @@ void Users::removePlayer(int nUserID)
 	m_mUserInfos.erase(nUserID);
 }
 
-void Users::clearAllPlayers()
+void Users::removeAllUsers()
 {
 	m_mUserInfos.clear();
 }

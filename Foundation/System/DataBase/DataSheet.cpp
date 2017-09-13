@@ -5,12 +5,21 @@ using namespace sys;
 
 DataSheet::DataSheet()
 {
-	this->reset();
 }
 
 DataSheet::~DataSheet()
 {
 	this->clear();
+}
+
+void DataSheet::setKey(const std::string& key)
+{
+	_key = key;
+}
+
+const char* DataSheet::getKey()
+{
+	return _key.c_str();
 }
 
 IDataRecord* DataSheet::create()
@@ -24,27 +33,35 @@ IDataRecord* DataSheet::create()
 	return record;
 }
 
-int DataSheet::count()
+const IDataRecord* DataSheet::operator[](int index)
 {
-	return _records.size();
-}
-
-void DataSheet::reset()
-{
-	_cursor = 0;
-}
-
-IDataRecord* DataSheet::next()
-{
-	if (_cursor >= this->count())
+	if (index < 0 || index >= count())
 	{
 		return nullptr;
 	}
 
-	IDataRecord* record = _records[_cursor];
-	_cursor++;
+	return _records[index];
+}
 
-	return record;
+void DataSheet::setRecord(const std::string& key, const IDataRecord* record)
+{
+	_keyRecords[key] = (IDataRecord*)record;
+}
+
+const IDataRecord* DataSheet::getRecord(const std::string& key)
+{
+	if (_keyRecords.find(key) == _keyRecords.end())
+	{
+		return nullptr;
+	}
+
+	return _keyRecords[key];
+}
+
+
+int DataSheet::count()
+{
+	return _records.size();
 }
 
 void DataSheet::clear()
@@ -58,4 +75,5 @@ void DataSheet::clear()
 	}
 
 	_records.clear();
+	_keyRecords.clear();
 }

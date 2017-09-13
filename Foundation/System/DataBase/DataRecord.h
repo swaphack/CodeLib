@@ -10,6 +10,7 @@ namespace sys
 	public:
 		DataRecord();
 		virtual ~DataRecord();
+		
 		/**
 		*	获取指定参数的值
 		*/

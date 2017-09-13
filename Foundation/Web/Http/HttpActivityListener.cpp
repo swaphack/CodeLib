@@ -131,7 +131,7 @@ sys::HttpRequest* HttpActivityListener::createRequest(const char* sessionID, sys
 	{
 		return nullptr;
 	}
-	sys::NetData* netData = dataQueue.top();
+	sys::NetData* netData = dataQueue.topData();
 	if (netData == nullptr)
 	{
 		return nullptr;
@@ -170,7 +170,7 @@ sys::HttpResponse* HttpActivityListener::createResponse(const char* sessionID, s
 	{
 		return nullptr;
 	}
-	sys::NetData* netData = dataQueue.top();
+	sys::NetData* netData = dataQueue.topData();
 	if (netData == nullptr)
 	{
 		return nullptr;

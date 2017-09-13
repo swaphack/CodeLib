@@ -10,6 +10,56 @@
 
 using namespace sys;
 
+hs::HttpServer* initSock(XmlConfig* config)
+{
+	hs::HttpServer* httpServer = new hs::HttpServer(
+		config->getValue("server.local", "ip"),
+		atoi(config->getValue("server.local", "port")),
+		10000);
+
+	// 网站本地资源路径
+	httpServer->getResourceMgr()->getResource(ERT_LOCAL)->setUrl(config->getValue("resource.websit", "path"));
+
+	// 注册监听
+	new hs::HttpReceiver();
+
+	httpServer->run(10);
+
+	return httpServer;
+}
+
+void initDataBase(XmlConfig* config)
+{
+	std::string host = config->getValue("database.url", "host");
+	const char* strPort = config->getValue("database.url", "port");
+	int port = strPort ? atoi(strPort) : 0;
+	std::string username = config->getValue("database.url", "username");
+	std::string password = config->getValue("database.url", "password");
+	std::string dbname = config->getValue("database.url", "dbname");
+	const char* strType = config->getValue("database.url", "type");
+	int dbType = strType ? atoi(strType) : 0;
+
+	web::DBAuthor dbInfo(host, port, username, password, dbname);
+	if (hs::DBManager::getInstance()->init(dbInfo, dbType))
+	{
+		sys::String tables = config->getValue("database.table", "names");
+		std::vector<std::string> tableAry;
+		tables.split(';', tableAry);
+
+		std::map<std::string, std::string> tableKeyMap;
+
+		for (size_t i = 0; i < tableAry.size(); i++)
+		{
+			sys::String table = tableAry[i];
+			std::vector<std::string> tableKey;
+			table.split(',', tableKey);
+			tableKeyMap[tableKey[0]] = tableKey[1];
+		}
+
+		hs::DBManager::getInstance()->load(tableKeyMap);
+	}
+}
+
 int main(int argc, char** argv)
 {
 	// 工程路径
@@ -23,46 +73,15 @@ int main(int argc, char** argv)
 	{
 		return -1;
 	}
-
-	// 服务器
-	hs::HttpServer* HttpServer = new hs::HttpServer(
-		config->getValue("server.local", "ip"),
-		atoi(config->getValue("server.local", "port")),
-		10000);
-
-	// 网站本地资源路径
-	HttpServer->getResourceMgr()->getResource(ERT_LOCAL)->setUrl(config->getValue("resource.websit", "path"));
-
 	// 数据库
-	std::string host = config->getValue("database.url", "host");
-	int port = atoi(config->getValue("database.url", "port"));
-	std::string username = config->getValue("database.url", "username");
-	std::string password = config->getValue("database.url", "password");
-	std::string dbname = config->getValue("database.url", "dbname");
-	int dbType = atoi(config->getValue("database.url", "type"));
-
-	web::DBAuthor dbInfo(host, port, username, password, dbname);
-	if (hs::DBManager::getInstance()->init(dbInfo, dbType))
-	{
-		sys::String tables = config->getValue("database.table", "names");
-		std::vector<std::string> tableNameAry;
-		tables.split(',', tableNameAry);
-
-		hs::DBManager::getInstance()->load(tableNameAry);
-	}
+	initDataBase(config);
+	// 服务器
+	hs::HttpServer* httpServer = initSock(config);
 
 	delete config;
 
-	// 注册监听
-	new hs::HttpReceiver();
-
-	while (true)
-	{
-		Sleep(10);
-		HttpServer->update();
-	}
-
-	delete HttpServer;
+	httpServer->run(10);
+	delete httpServer;
 
 	return 0;
 }

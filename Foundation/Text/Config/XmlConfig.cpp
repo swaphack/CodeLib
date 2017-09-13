@@ -74,14 +74,20 @@ const char* XmlConfig::getValue(const char* nodepath, const char* attributeName)
 {
 	if (nodepath == nullptr || attributeName == nullptr)
 	{
-		return nullptr;
+		return "";
 	}
 
 	tinyxml2::XMLElement* element = getElement(nodepath);
 	if (element == nullptr)
 	{
-		return nullptr;
+		return "";
 	}
 
-	return element->Attribute(attributeName);
+	const char* result = element->Attribute(attributeName);
+	if (result)
+	{
+		return result;
+	}
+
+	return "";
 }

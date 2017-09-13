@@ -63,17 +63,22 @@ int onExecCallback(void* inParams, int argc, char** argv, char** colName)
 		return 0;
 	}
 
-	sys::IDataSheet* pSheet = static_cast<sys::IDataSheet*>(inParams);
+	sys::IDataSheet* pDataSheet = static_cast<sys::IDataSheet*>(inParams);
 
-	sys::IDataRecord* pRecord = pSheet->create();
-	if (pSheet == nullptr)
+	sys::IDataRecord* pRecord = pDataSheet->create();
+	if (pDataSheet == nullptr)
 	{
 		return 0;
 	}
-
+	std::string key = pDataSheet->getKey();
 	for (int i = 0; i < argc; i++)
 	{
 		pRecord->setValue(colName[i], argv[i]);
+		if (key.compare(colName[i]) == 0)
+		{
+			std::string value = argv[i];
+			pDataSheet->setRecord(value, pRecord);
+		}
 	}
 
 	return 0;

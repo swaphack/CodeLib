@@ -37,7 +37,7 @@ bool DBManager::init(const web::DBAuthor& info, int dbType)
 	return true;
 }
 
-bool DBManager::load(const std::vector<std::string>& readTableNames)
+bool DBManager::load(const std::map<std::string, std::string>& readTableNames)
 {
 	if (_dbProxy == nullptr)
 	{
@@ -98,24 +98,24 @@ sys::IDataRecord* DBManager::find(const char* tableName, const std::map<std::str
 		return nullptr;
 	}
 
-	sys::DataSheet* pSheet = getDataSheet(tableName);
-	if (pSheet == nullptr)
+	sys::DataSheet* pDataSheet = getDataSheet(tableName);
+	if (pDataSheet == nullptr)
 	{
 		return nullptr;
 	}
 
-	pSheet->reset();
-
-	sys::IDataRecord* pRecord = nullptr;
+	sys::IDataRecord* pDataRecord = nullptr;
 	bool bFind = false;
-	while (pRecord = pSheet->next())
+	int count = pDataSheet->count();
+	for (int i = 0; i < count; i++)
 	{
 		bFind = true;
+		pDataRecord = (sys::IDataRecord*)(*pDataSheet)[i];
 		for (std::map<std::string, std::string>::const_iterator cit = values.begin();
 			cit != values.end();
 			cit++)
 		{
-			if (cit->second.compare(pRecord->getValue(cit->first.c_str())) != 0)
+			if (cit->second.compare(pDataRecord->getValue(cit->first.c_str())) != 0)
 			{
 				bFind = false;
 				break;
@@ -124,12 +124,9 @@ sys::IDataRecord* DBManager::find(const char* tableName, const std::map<std::str
 
 		if (bFind)
 		{
-			pSheet->reset();
-			return pRecord;
+			return pDataRecord;
 		}
 	}
-
-	pSheet->reset();
 	return nullptr;
 }
 
@@ -197,16 +194,16 @@ bool DBManager::updateMemory(const char* tableName, const std::map<std::string, 
 		return false;
 	}
 
-	pDataSheet->reset();
-
 	std::map<std::string, std::string>::const_iterator iter = keys.begin();
 
 	sys::IDataRecord* pDataRecord = nullptr;
 	bool bFind = true;
 	const char* keyValue = nullptr;
-	while ((pDataRecord == pDataSheet->next()))
+	int count = pDataSheet->count();
+	for (int i = 0; i < count; i++)
 	{
 		bFind = true;
+		pDataRecord = (sys::IDataRecord*)(*pDataSheet)[i];
 		while (iter != keys.end())
 		{
 			keyValue = pDataRecord->getValue(iter->first.c_str());

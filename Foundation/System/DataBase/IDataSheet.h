@@ -12,15 +12,21 @@ namespace sys
 	public:
 		virtual ~IDataSheet() {}
 	public:
-		// 创建一条记录
+		// 设置关键字
+		virtual void setKey(const std::string& key) = 0;
+		// 查找关键字
+		virtual const char* getKey() = 0;
+		// 创建一条带主键的记录
 		virtual IDataRecord* create() = 0;
+		// 索引记录
+		virtual const IDataRecord* operator[](int index) { return nullptr; }
+		// 按照主键设置记录
+		virtual void setRecord(const std::string& key, const IDataRecord* record) = 0;
+		// 按照主键查找
+		virtual const IDataRecord* getRecord(const std::string& key) = 0;
 		// 记录个数
 		virtual int count() = 0;
-		// 重置游标
-		virtual void reset() = 0;
 		// 清空数据
 		virtual void clear() = 0;
-		// 读取下一条记录
-		virtual IDataRecord* next() = 0;
 	};
 }

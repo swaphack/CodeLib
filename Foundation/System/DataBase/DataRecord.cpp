@@ -27,7 +27,7 @@ const char* DataRecord::getValue(const char* key)
 {
 	if (key == nullptr)
 	{
-		return nullptr;
+		return "";
 	}
 
 	std::map<std::string, std::string>::const_iterator iter = _values.find(key);
@@ -36,5 +36,5 @@ const char* DataRecord::getValue(const char* key)
 		return iter->second.c_str();
 	}
 
-	return nullptr;
+	return "";
 }

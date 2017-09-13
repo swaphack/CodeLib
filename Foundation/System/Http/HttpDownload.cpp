@@ -94,7 +94,7 @@ void HttpDownload::onRecvHandle(int id, DataQueue& data)
 
 	StreamWriter* pWriter;
 
-	NetData* netData = data.pop();
+	NetData* netData = data.popData();
 
 	std::map<int, StreamWriter*>::iterator iter = _downloadDatas.find(id);
 	if (iter == _downloadDatas.end())

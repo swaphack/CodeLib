@@ -21,7 +21,7 @@ GateWay::~GateWay()
 
 void GateWay::initSelf()
 {
-	_listenerPool->addListener(new TextActivityListener());
+	//_listenerPool->addListener(new TextActivityListener());
 }
 
 bool GateWay::createGameServerListener(const char* ip, int port)

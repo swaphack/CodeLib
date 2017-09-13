@@ -47,6 +47,8 @@ namespace web
 		virtual void init();
 		virtual void update();
 		virtual void dispose(); 
+		
+		void run(int interval);
 	protected:
 		// 解析接收到服务器的数据
 		void parseReceiveServerData(int id, sys::DataQueue& dataQueue);

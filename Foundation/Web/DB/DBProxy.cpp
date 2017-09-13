@@ -12,7 +12,7 @@ DBProxy::~DBProxy()
 	SAFE_DELETE(_db);
 }
 
-bool DBProxy::load(const std::vector<std::string>& readTableNames, std::map<std::string, sys::DataSheet*>& tableSheet)
+bool DBProxy::load(const std::map<std::string, std::string>& readTableNames, std::map<std::string, sys::DataSheet*>& tableSheet)
 {
 	if (_db == nullptr || readTableNames.size() == 0)
 	{
@@ -26,19 +26,20 @@ bool DBProxy::load(const std::vector<std::string>& readTableNames, std::map<std:
 		return false;
 	}
 
-	std::vector<std::string>::const_iterator iter = readTableNames.begin();
+	std::map<std::string, std::string>::const_iterator iter = readTableNames.begin();
 	while (iter != readTableNames.end())
 	{
-		const char* pSqlString = getCString("select * from %s", (*iter).c_str());
+		const char* pSqlString = getCString("select * from %s", iter->first.c_str());
 		sys::DataSheet* pDataSheet = new sys::DataSheet();
+		pDataSheet->setKey(iter->second);
 		if (!pDBString->excuteSQL(pSqlString, pDataSheet))
 		{
-			PRINT("Read Table %s Error!\n", (*iter).c_str());
+			PRINT("Read Table %s Error!\n", iter->first.c_str());
 			delete pDataSheet;
 			iter++;
 			continue;
 		}
-		tableSheet[(*iter).c_str()] = pDataSheet;
+		tableSheet[iter->first.c_str()] = pDataSheet;
 		iter++;
 	}
 	

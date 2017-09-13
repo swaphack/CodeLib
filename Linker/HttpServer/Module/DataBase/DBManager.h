@@ -27,7 +27,7 @@ namespace hs
 		*	加载表
 		*	@param readTableNames 要读取的表
 		*/
-		bool load(const std::vector<std::string>& readTableNames);
+		bool load(const std::map<std::string, std::string>& readTableNames);
 		/**
 		*	更新表数据
 		*	@param tableName 表名称

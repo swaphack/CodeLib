@@ -87,16 +87,23 @@ bool MySQL::executeSQL(const char* sqlExpression, sys::IDataSheet* pDataSheet /*
 	}
 
 	MYSQL_ROW row = nullptr;
+	int count = mysql_num_fields(res);
+	std::string key = pDataSheet->getKey();
 	while (row = mysql_fetch_row(res))
 	{
 		sys::IDataRecord* pRecord = pDataSheet->create();
 		if (pDataSheet == nullptr)
 		{
 			return false;
-		}
-		for (int i = 0; i < mysql_num_rows(res); i++)
+		}	
+		for (int i = 0; i < count ; i++)
 		{
 			pRecord->setValue(field[i].name, row[i]);
+			if (key.compare(field[i].name) == 0)
+			{
+				std::string value = row[i];
+				pDataSheet->setRecord(value, pRecord);
+			}
 		}
 	}
 

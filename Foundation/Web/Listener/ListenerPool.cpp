@@ -71,20 +71,20 @@ bool ListenerPool::onDispatch(const char* sessionID, sys::DataQueue& dataQueue)
 
 	if (bRet)
 	{
-		sys::NetData* netData = dataQueue.top();
+		sys::NetData* netData = dataQueue.topData();
 
 		int cursor = netData->pos + size;
 		if (cursor == netData->size)
 		{// 刚好解析完毕
 			delete netData;
-			dataQueue.pop();
+			dataQueue.popData();
 		}
 		else
 		{
 			if (dataQueue.count() > 1)
 			{// 保留到下一条数据
-				dataQueue.pop();
-				sys::NetData* nextData = dataQueue.top();
+				dataQueue.popData();
+				sys::NetData* nextData = dataQueue.topData();
 				nextData->insert(netData->getCursorPtr() + size, netData->size - cursor);
 				delete netData;
 			}
@@ -93,6 +93,12 @@ bool ListenerPool::onDispatch(const char* sessionID, sys::DataQueue& dataQueue)
 				netData->pos += size;
 			}
 		}
+	}
+	else if (dataQueue.count() > 1)
+	{
+		sys::NetData* netData = dataQueue.popData();
+		dataQueue.topData()->insert(netData->data, netData->size);
+		delete netData;
 	}
 
 	return bRet;

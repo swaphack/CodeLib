@@ -180,6 +180,15 @@ void WebApplication::dispose()
 	SAFE_DELETE(_session);
 }
 
+void WebApplication::run(int interval)
+{
+	while (true)
+	{
+		Sleep(interval);
+		this->update();
+	}
+}
+
 void WebApplication::parseReceiveServerData(int id, sys::DataQueue& dataQueue)
 {
 	parseReceiveData(id, dataQueue, EST_SERVER);

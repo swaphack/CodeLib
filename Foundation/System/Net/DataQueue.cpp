@@ -13,7 +13,7 @@ DataQueue::~DataQueue()
 	this->dispose();
 }
 
-void DataQueue::push( NetData* data )
+void DataQueue::pushData( NetData* data )
 {
 	if (data == nullptr)
 	{
@@ -22,7 +22,7 @@ void DataQueue::push( NetData* data )
 	_datas.push(data);
 }
 
-NetData* DataQueue::pop()
+NetData* DataQueue::popData()
 {
 	if (this->empty())
 	{
@@ -35,7 +35,7 @@ NetData* DataQueue::pop()
 	return top;
 }
 
-NetData* DataQueue::top()
+NetData* DataQueue::topData()
 {
 	if (this->empty())
 	{
@@ -59,7 +59,7 @@ void DataQueue::dispose()
 {
 	while (!_datas.empty())
 	{
-		NetData* data = this->pop();
+		NetData* data = this->popData();
 		SAFE_DELETE(data);
 	}
 }

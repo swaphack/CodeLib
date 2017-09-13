@@ -64,12 +64,7 @@ int main(int argc, char** argv)
 	new HttpActivityReceiver();
 	new PacketActivityReceiver();
 
-	while (true)
-	{
-		Sleep(10);
-		gateWay->update();
-	}
-
+	gateWay->run(10);
 	delete gateWay;
 
 	return 0;

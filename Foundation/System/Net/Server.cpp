@@ -33,7 +33,7 @@ void Server::update()
 	if (socket)
 	{
 		this->addClient(socket);
-		PRINT("connect socket %s:%d\n", socket->getRemoteIP(), socket->getRemotePort());
+		PRINT("client %s:%d connect\n", socket->getRemoteIP(), socket->getRemotePort());
 	}
 
 	// disabled socket
@@ -86,7 +86,7 @@ void Server::sendBroadcast(NetData* data)
 	while (it != _sendDatas.end())
 	{
 		NetData* temp = new NetData(data->data, data->size);
-		it->second->push(temp);
+		it->second->pushData(temp);
 		it++;
 	}
 
@@ -160,7 +160,7 @@ void Server::addRecvBuffer( int id, NetData* data )
 	}
 	if (_recvDatas.find(id) != _recvDatas.end())
 	{
-		_recvDatas[id]->push(data);
+		_recvDatas[id]->pushData(data);
 	}
 	else
 	{
@@ -177,7 +177,7 @@ void Server::addSendBuffer( int id, NetData* data )
 
 	if (_sendDatas.find(id) != _sendDatas.end())
 	{
-		_sendDatas[id]->push(data);
+		_sendDatas[id]->pushData(data);
 	}
 	else
 	{
@@ -236,7 +236,7 @@ void Server::_removeSockets( std::vector<int>& removedSocks )
 		this->removeClient(sockId);
 		if (socket)
 		{
-			PRINT("disconnect socket %s:%d\n", socket->getRemoteIP(), socket->getRemotePort());
+			PRINT("client %s:%d disconnect\n", socket->getRemoteIP(), socket->getRemotePort());
 			delete socket;
 		}
 	}
@@ -260,7 +260,7 @@ void Server::_flushSendData()
 
 		int sockId = it->first;
 
-		NetData* data = _sendDatas[sockId]->top();
+		NetData* data = _sendDatas[sockId]->topData();
 		if (data)
 		{
 			Socket* socket = _clients[sockId];
@@ -271,7 +271,7 @@ void Server::_flushSendData()
 				if (data->pos >= data->size)
 				{
 					SAFE_DELETE(data);
-					_sendDatas[sockId]->pop();
+					_sendDatas[sockId]->popData();
 				}
 			}
 		}

@@ -14,11 +14,11 @@ namespace sys
 		~DataQueue();
 	public:
 		// 添加数据
-		void push(NetData* data);
+		void pushData(NetData* data);
 		// 需手动释放NetData数据
-		NetData* pop();
+		NetData* popData();
 		// 队列头元素
-		NetData* top();
+		NetData* topData();
 		// 队列中元素个数
 		int count();
 		// 队列是否为空

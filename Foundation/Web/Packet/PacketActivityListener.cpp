@@ -87,7 +87,7 @@ const char* PacketActivityListener::createRequest(const char* sessionID, sys::Da
 		return nullptr;
 	}
 
-	sys::NetData* netData = dataQueue.top();
+	sys::NetData* netData = dataQueue.topData();
 	if (netData == nullptr)
 	{
 		return nullptr;

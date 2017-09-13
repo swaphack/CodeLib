@@ -103,7 +103,7 @@ void Client::addRecvBuffer( NetData* data )
 	{
 		return;
 	}
-	_recvDatas.push(data);
+	_recvDatas.pushData(data);
 }
 
 void Client::addSendBuffer( NetData* data )
@@ -112,7 +112,7 @@ void Client::addSendBuffer( NetData* data )
 	{
 		return;
 	}
-	_sendDatas.push(data);
+	_sendDatas.pushData(data);
 }
 
 void Client::onRecvHandler( NetData* data )
@@ -149,7 +149,7 @@ void Client::_flushData()
 {
 	// 发送数据
 	int size;
-	NetData* data = _sendDatas.top();
+	NetData* data = _sendDatas.topData();
 	if (data)
 	{
 		size = _socket->Send(data->data + data->pos, data->size - data->pos);
@@ -159,13 +159,13 @@ void Client::_flushData()
 			if (data->pos >= data->size)
 			{
 				SAFE_DELETE(data);
-				_sendDatas.pop();
+				_sendDatas.popData();
 			}
 		}
 	}
 
 	// 处理接收的数据
-	while (!this->_recvDatas.empty())
+	if (!this->_recvDatas.empty())
 	{
 		if (this->_recvHandler.first && this->_recvHandler.second)
 		{

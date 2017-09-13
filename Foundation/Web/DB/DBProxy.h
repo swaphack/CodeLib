@@ -16,10 +16,10 @@ namespace web
 	public:
 		/** 
 		*	加载表数据
-		*	@param readTableNames 要读取的表名称
+		*	@param readTableNames 要读取的表名称 {表明，关键字}
 		*	@param tableSheet 读出后缓存的地方
 		*/
-		bool load(const std::vector<std::string>& readTableNames, std::map<std::string, sys::DataSheet*>& tableSheet);
+		bool load(const std::map<std::string, std::string>& readTableNames, std::map<std::string, sys::DataSheet*>& tableSheet);
 		/**
 		*	插入数据
 		*	@param tableName 表名称

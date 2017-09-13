@@ -30,25 +30,25 @@ namespace gs
 	public:
 		static Users* getInstance();
 		/**
-		*	添加玩家
+		*	添加角色
 		*/
-		void addPlayer(const T_UserInfo& userInfo);
+		void addUser(const T_UserInfo& userInfo);
 		/**
-		*	获取玩家
+		*	获取角色
 		*/
-		const T_UserInfo* getPlayer(int nUserID);
+		const T_UserInfo* getUser(int nUserID);
 		/**
-		*	获取玩家
+		*	获取角色
 		*/
-		const T_UserInfo* getPlayerByMark(int nMark);
+		const T_UserInfo* getUserByMark(int nMark);
 		/**
-		*	移除玩家
+		*	移除角色
 		*/
-		void removePlayer(int nUserID);
+		void removeUser(int nUserID);
 		/**
-		*	清空用户数据
+		*	清空角色数据
 		*/
-		void clearAllPlayers();
+		void removeAllUsers();
 	private:
 		typedef std::map<int, T_UserInfo> T_UserInfos;
 		typedef std::map<int, T_UserInfo*> T_PtrUserInfos;
