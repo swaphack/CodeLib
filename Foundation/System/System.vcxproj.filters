@@ -67,6 +67,9 @@
     <Filter Include="Text">
       <UniqueIdentifier>{0249e361-7a0f-46ab-84bf-a679cb642ff6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Command">
+      <UniqueIdentifier>{2290d14d-0653-4d28-a88c-97aa2e5f36ff}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Base\File.h">
@@ -241,9 +244,6 @@
     <ClInclude Include="Type\Number.h">
       <Filter>Type</Filter>
     </ClInclude>
-    <ClInclude Include="Device\ConsoleImpl.h">
-      <Filter>Device</Filter>
-    </ClInclude>
     <ClInclude Include="Device\KeyBoard.h">
       <Filter>Device</Filter>
     </ClInclude>
@@ -373,9 +373,6 @@
     <ClInclude Include="Thread\Asynchronous.h">
       <Filter>Thread</Filter>
     </ClInclude>
-    <ClInclude Include="Platform\Console.h">
-      <Filter>Platform</Filter>
-    </ClInclude>
     <ClInclude Include="Framework\FilePath.h">
       <Filter>Framework</Filter>
     </ClInclude>
@@ -471,6 +468,21 @@
     </ClInclude>
     <ClInclude Include="Security\Author.h">
       <Filter>Security</Filter>
+    </ClInclude>
+    <ClInclude Include="Command\CommandLine.h">
+      <Filter>Command</Filter>
+    </ClInclude>
+    <ClInclude Include="Command\CommandParser.h">
+      <Filter>Command</Filter>
+    </ClInclude>
+    <ClInclude Include="Device\Console.h">
+      <Filter>Device</Filter>
+    </ClInclude>
+    <ClInclude Include="Device\ConsoleListener.h">
+      <Filter>Device</Filter>
+    </ClInclude>
+    <ClInclude Include="Device\IConsoleImpl.h">
+      <Filter>Device</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -639,9 +651,6 @@
     <ClCompile Include="Thread\Threading.cpp">
       <Filter>Thread</Filter>
     </ClCompile>
-    <ClCompile Include="Platform\Console.cpp">
-      <Filter>Platform</Filter>
-    </ClCompile>
     <ClCompile Include="Framework\FilePath.cpp">
       <Filter>Framework</Filter>
     </ClCompile>
@@ -704,6 +713,18 @@
     </ClCompile>
     <ClCompile Include="Security\Authorization.cpp">
       <Filter>Security</Filter>
+    </ClCompile>
+    <ClCompile Include="Command\CommandLine.cpp">
+      <Filter>Command</Filter>
+    </ClCompile>
+    <ClCompile Include="Command\CommandParser.cpp">
+      <Filter>Command</Filter>
+    </ClCompile>
+    <ClCompile Include="Device\Console.cpp">
+      <Filter>Device</Filter>
+    </ClCompile>
+    <ClCompile Include="Device\ConsoleListener.cpp">
+      <Filter>Device</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

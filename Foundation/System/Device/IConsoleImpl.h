@@ -2,10 +2,10 @@
 
 namespace sys
 {
-	class ConsoleImpl
+	class IConsoleImpl
 	{
 	public:
-		virtual ~ConsoleImpl() {}
+		virtual ~IConsoleImpl() {}
 	public:
 		// ∂¡»°“ª––
 		virtual const char* readLine() = 0;

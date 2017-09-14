@@ -2,6 +2,8 @@
 #include "Thread.h"
 #include <vector>
 
+#include "../Base/macros.h"
+
 using namespace sys;
 
 
@@ -54,7 +56,7 @@ void ThreadPool::add(Thread* pThread)
 		return;
 	}
 
-	printf("try add push lock\n");
+	PRINT("try add push lock\n");
 
 	m_pMutex.lock();
 
@@ -70,7 +72,7 @@ void ThreadPool::remove(size_t nThreadID)
 		return;
 	}
 
-	printf("try add remove lock\n");
+	PRINT("try add remove lock\n");
 
 	m_pMutex.lock();
 
@@ -86,7 +88,7 @@ void ThreadPool::update()
 		return;
 	}
 
-	printf("try add check lock\n");
+	PRINT("try add check lock\n");
 
 	std::vector<size_t> invialdThreadIDs;
 	Threads::iterator iter = m_mThreads.begin();

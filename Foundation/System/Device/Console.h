@@ -1,10 +1,10 @@
 #pragma once
 #include <string>
-#include "macros.h"
+#include "IConsoleImpl.h"
 
 namespace sys
 {
-	class Console : public ConsoleImpl
+	class Console : public IConsoleImpl
 	{
 	public:
 		Console();
@@ -18,9 +18,7 @@ namespace sys
 		virtual void writeLine(const char* words);
 		// Ð´ÈëÒ»¸ö×Ö·û
 		virtual void writeChar(char word);
-	private:
-		std::string _word;
 	};
 
-	#define G_CONSOLE Instance<Console>::getInstance()
+#define G_CONSOLE sys::Instance<sys::Console>::getInstance()
 }

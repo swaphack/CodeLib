@@ -9,7 +9,7 @@ namespace db
 {
 	// 数据结构
 	// 创建结构的代码
-	class DBStructTemplate
+	class DBStructFile
 	{
 	private:
 		/*

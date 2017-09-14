@@ -10,7 +10,7 @@ namespace sys
 	class Object;
 	class AutoReleasePool;
 
-	#define G_AUTORELEASEPOOL Instance<AutoReleasePool>::getInstance()
+#define G_AUTORELEASEPOOL sys::Instance<sys::AutoReleasePool>::getInstance()
 
 	// 对象自动释放管理池
 	// 引用计数的值为1时，会被释放

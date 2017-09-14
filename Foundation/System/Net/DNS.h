@@ -1,7 +1,7 @@
 #pragma once
 
 #include <string>
-#include <vector>
+#include <map>
 
 struct addrinfo;
 struct sockaddr_in;
@@ -14,7 +14,7 @@ namespace sys
 		// 获取首个ip地址
 		static void getFirstIPAddress(const char* url, std::string& ip);
 		// 获取所有ip地址
-		static void getAllIPAddress(const char* url, std::vector<std::string>& ips);
+		static void getAllIPAddress(const char* url, std::map<std::string, int>& ipAddresses);
 		// 获取ip地址和端口
 		static void getIPAddress(struct addrinfo* addr_info, std::string& ip, int& port);
 		// 获取ip地址和端口

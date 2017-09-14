@@ -18,10 +18,10 @@ public:
 		{
 			return;
 		}
-		NetData* top = dataQueue.top();
+		NetData* top = dataQueue.topData();
 		std::string recvData = std::string(top->data, top->size);
 		PRINT("Receive : %s\n", recvData.c_str());
-		dataQueue.pop();
+		dataQueue.popData();
 		delete top;
 
 		_client->sendString(recvData.c_str());
@@ -114,7 +114,9 @@ void test2()
 	sys::HttpDownload* pDownload = new sys::HttpDownload();
 	DownloadListener* pListener = new DownloadListener();
 
-	if (pDownload->download(ip, port, "", pListener, (downloadCallback)(&DownloadListener::onDownloadCallback), 1))
+	OnHttpDownloadCallback pair = std::make_pair(pListener, (downloadCallback)(&DownloadListener::onDownloadCallback));
+
+	if (pDownload->download(ip, port, "", pair, 1))
 	{
 		while (true);
 	}

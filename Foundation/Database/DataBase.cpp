@@ -18,7 +18,12 @@ void DBConfig::reset()
 
 void DBConfig::load( const char* configFilepath )
 {
-	DBFileReader reader(configFilepath);
+	if (configFilepath == nullptr)
+	{
+		return;
+	}
+	DBFileReader reader;
+	reader.load(configFilepath);
 	dbStructFilepath = reader.readDBString();
 	dbTableFilepath = reader.readDBString();
 	dbDataFilepath = reader.readDBString();
@@ -120,7 +125,7 @@ void DataBase::saveDB(const std::string& configFilepath)
 void DataBase::loadContent( const char* filepath )
 {
 	_content.removeAllTables();
-	DBStructTemplate::loadContent(filepath, &_content);
+	DBStructFile::loadContent(filepath, &_content);
 }
 
 void DataBase::loadData( const char* filepath )
@@ -147,7 +152,7 @@ void DataBase::loadData( const char* filepath )
 
 void DataBase::saveContent( const char* filepath )
 {
-	DBStructTemplate::saveContent(filepath, &_content);
+	DBStructFile::saveContent(filepath, &_content);
 }
 
 void DataBase::saveData( const char* filepath )

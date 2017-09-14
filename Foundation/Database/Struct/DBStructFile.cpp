@@ -1,4 +1,4 @@
-#include "DBStructTemplate.h"
+#include "DBStructFile.h"
 #include "../Tool/import.h"
 #include "system.h"
 
@@ -40,7 +40,7 @@ void createStructStream( const DBTable* dbTable, StreamWriter& writer )
 	writer.writeString("};\n");
 }
 
-void DBStructTemplate::createStructCPPFile( const char* filename, const std::map<std::string, DBTable>& structFiles )
+void DBStructFile::createStructCPPFile( const char* filename, const std::map<std::string, DBTable>& structFiles )
 {
 	if (filename == nullptr)
 	{
@@ -62,9 +62,14 @@ void DBStructTemplate::createStructCPPFile( const char* filename, const std::map
 
 //////////////////////////////////////////////////////////////////////////
 
-void DBStructTemplate::readTableStruct( const char* filename, std::map<std::string, DBTable>& dbTables )
+void DBStructFile::readTableStruct( const char* filename, std::map<std::string, DBTable>& dbTables )
 {
-	DBFileReader reader = DBFileReader(filename);
+	if (filename == nullptr)
+	{
+		return;
+	}
+	DBFileReader reader;
+	reader.load(filename);
 	
 	int count = reader.readUInt();
 	for (int i = 0; i < count; i++)
@@ -91,7 +96,7 @@ void DBStructTemplate::readTableStruct( const char* filename, std::map<std::stri
 	}
 }
 
-void DBStructTemplate::writeTableStruct( const char* filename, const std::map<std::string, DBTable>& dbTables )
+void DBStructFile::writeTableStruct( const char* filename, const std::map<std::string, DBTable>& dbTables )
 {
 	DBFileWriter writer;
 	writer.writeInt(dbTables.size());
@@ -130,17 +135,17 @@ void DBStructTemplate::writeTableStruct( const char* filename, const std::map<st
 	File::write(filename, writer.getData(), writer.getLength());
 }
 //////////////////////////////////////////////////////////////////////////
-void DBStructTemplate::createStructCode( std::string headFilename, const DBContent* content )
+void DBStructFile::createStructCode( std::string headFilename, const DBContent* content )
 {
 	createStructCPPFile(headFilename.c_str(), content->getTables());
 }
 
-void DBStructTemplate::saveContent( std::string filename, const DBContent* content )
+void DBStructFile::saveContent( std::string filename, const DBContent* content )
 {
 	writeTableStruct(filename.c_str(), content->getTables());
 }
 
-void DBStructTemplate::loadContent(std::string configFilename, DBContent* content)
+void DBStructFile::loadContent(std::string configFilename, DBContent* content)
 {
 	std::map<std::string, DBTable> dbTables;
 

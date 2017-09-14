@@ -63,18 +63,15 @@ LRESULT CALLBACK WndProc(
 	Window* window = Instance<Windows>::getInstance()->getWindow(hWnd);
 	if (window)
 	{
-		Tuple3<UINT, WPARAM, LPARAM>* params = new Tuple3<UINT, WPARAM, LPARAM>(uMsg, wParam, lParam);
+		Tuple3<UINT, WPARAM, LPARAM> params(uMsg, wParam, lParam);
 		Signal* signal = new Signal();
-		signal->setMessage(params);
-		if (window->onRecvSignal(signal))
+		signal->setMessage(&params);
+		bool result = window->onRecvSignal(signal);
+		delete signal;
+		if (result)
 		{
-			delete params;
-			delete signal;
 			return 0;
 		}
-		delete params;
-		delete signal;
-
 	}
 	// 向 DefWindowProc传递所有未处理的默认消息。
 	return DefWindowProc(hWnd, uMsg, wParam, lParam);

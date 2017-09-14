@@ -22,7 +22,7 @@
     <ClInclude Include="Query\DBQuery.h" />
     <ClInclude Include="Query\DBResult.h" />
     <ClInclude Include="Query\import.h" />
-    <ClInclude Include="Struct\DBStructTemplate.h" />
+    <ClInclude Include="Struct\DBStructFile.h" />
     <ClInclude Include="Struct\DBContent.h" />
     <ClInclude Include="Struct\DBTable.h" />
     <ClInclude Include="Struct\DBTemplate.h" />
@@ -39,7 +39,7 @@
     <ClCompile Include="Data\DBStorage.cpp" />
     <ClCompile Include="Data\DBWarehouse.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Struct\DBStructTemplate.cpp" />
+    <ClCompile Include="Struct\DBStructFile.cpp" />
     <ClCompile Include="Struct\DBContent.cpp" />
     <ClCompile Include="Struct\DBTable.cpp" />
     <ClCompile Include="Tool\DBFile.cpp" />

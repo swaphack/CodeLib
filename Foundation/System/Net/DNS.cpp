@@ -70,11 +70,11 @@ void DNS::getFirstIPAddress(const char* url, std::string& ip)
 	Socket::ReleaseSockModule();
 }
 
-void DNS::getAllIPAddress(const char* url, std::vector<std::string>& ips)
+void DNS::getAllIPAddress(const char* url, std::map<std::string, int>& ipAddresses)
 {
 	Socket::InitSockModule();
 
-	ips.clear();
+	ipAddresses.clear();
 	if (url == nullptr)
 	{
 		return;
@@ -85,6 +85,7 @@ void DNS::getAllIPAddress(const char* url, std::vector<std::string>& ips)
 	struct addrinfo hints;
 	int dwRetval;
 	std::string ip;
+	int port;
 
 	ZeroMemory(&hints, sizeof(hints));
 	hints.ai_family = AF_UNSPEC;
@@ -105,7 +106,8 @@ void DNS::getAllIPAddress(const char* url, std::vector<std::string>& ips)
 						memset(s_common, 0, DNS_IP_MAX);
 						struct sockaddr_in *sockaddr_ipv4 = (struct sockaddr_in *) ptr->ai_addr;
 						ip = inet_ntop(ptr->ai_family, &sockaddr_ipv4->sin_addr, s_common, DNS_IP_MAX);
-						ips.push_back(ip);
+						port = ntohs(sockaddr_ipv4->sin_port);
+						ipAddresses[ip] = port;
 						break;
 		}
 		case AF_INET6:
@@ -113,7 +115,8 @@ void DNS::getAllIPAddress(const char* url, std::vector<std::string>& ips)
 						 memset(s_common, 0, DNS_IP_MAX);
 						 struct sockaddr_in6 *sockaddr_ipv6 = (struct sockaddr_in6 *) ptr->ai_addr;
 						 ip = inet_ntop(ptr->ai_family, &sockaddr_ipv6->sin6_addr, s_common, DNS_IP_MAX);
-						 ips.push_back(ip);
+						 port = ntohs(sockaddr_ipv6->sin6_port);
+						 ipAddresses[ip] = port;
 						 break;
 		}
 		default:

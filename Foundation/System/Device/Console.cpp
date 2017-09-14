@@ -1,4 +1,5 @@
 #include "Console.h"
+#include "../Base/macros.h"
 #include <cstdio>
 #include <fcntl.h>  
 
@@ -18,12 +19,12 @@ Console::~Console()
 const char* Console::readLine()
 {
 	char ch;
-	_word = "";
+	std::string line = "";
 	while ((ch = getchar()) != '\n')
 	{
-		_word.append(1, ch);
+		line.append(1, ch);
 	}
-	return _word.c_str();
+	return line.c_str();
 }
 
 char Console::readChar()
@@ -34,10 +35,10 @@ char Console::readChar()
 
 void Console::writeLine(const char* words)
 {
-	printf("%s", words);
+	PRINT("%s", words);
 }
 
 void Console::writeChar(char word)
 {
-	printf("%c", word);
+	PRINT("%c", word);
 }

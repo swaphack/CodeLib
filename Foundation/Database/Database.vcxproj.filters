@@ -68,11 +68,11 @@
     <ClInclude Include="Data\DBRecord.h">
       <Filter>Data</Filter>
     </ClInclude>
-    <ClInclude Include="Struct\DBStructTemplate.h">
-      <Filter>Struct</Filter>
-    </ClInclude>
     <ClInclude Include="Tool\DBFile.h">
       <Filter>Tool</Filter>
+    </ClInclude>
+    <ClInclude Include="Struct\DBStructFile.h">
+      <Filter>Struct</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -101,10 +101,10 @@
     <ClCompile Include="Data\DBStorage.cpp">
       <Filter>Data</Filter>
     </ClCompile>
-    <ClCompile Include="Struct\DBStructTemplate.cpp">
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="Struct\DBStructFile.cpp">
       <Filter>Struct</Filter>
     </ClCompile>
-    <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="db.txt">

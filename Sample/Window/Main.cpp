@@ -4,6 +4,8 @@
 #include "resource.h"
 #include "WndRender.h"
 
+//using namespace sys;
+
 int  WINAPI WinMain(HINSTANCE	hInstance,                 // 当前窗口实例
 	HINSTANCE	hPrevInstance,             // 前一个窗口实例
 	LPSTR		lpCmdLine,                 // 命令行参数
@@ -15,6 +17,8 @@ int  WINAPI WinMain(HINSTANCE	hInstance,                 // 当前窗口实例
 	//AttachConsole(ATTACH_PARENT_PROCESS); // 将当前程序附着到父进程上  
 	freopen("CONIN$", "r+t", stdin); // 重定向 STDIN  
 	freopen("CONOUT$", "w+t", stdout); // 重定向STDOUT  
+
+	G_CONSOLELISTENER->run();
 
 	int width = 1024;
 	int height = 768;

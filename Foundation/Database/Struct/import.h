@@ -2,4 +2,4 @@
 
 #include "DBTable.h"
 #include "DBContent.h"
-#include "DBStructTemplate.h"
+#include "DBStructFile.h"

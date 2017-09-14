@@ -91,6 +91,8 @@
     <ClInclude Include="Collider\import.h" />
     <ClInclude Include="Collider\macros.h" />
     <ClInclude Include="Collider\OBB.h" />
+    <ClInclude Include="Command\CommandLine.h" />
+    <ClInclude Include="Command\CommandParser.h" />
     <ClInclude Include="DataBase\DataRecord.h" />
     <ClInclude Include="DataBase\DataSheet.h" />
     <ClInclude Include="DataBase\IDataBase.h" />
@@ -98,7 +100,9 @@
     <ClInclude Include="DataBase\IDataSheet.h" />
     <ClInclude Include="DataBase\IDBString.h" />
     <ClInclude Include="DataBase\import.h" />
-    <ClInclude Include="Device\ConsoleImpl.h" />
+    <ClInclude Include="Device\Console.h" />
+    <ClInclude Include="Device\IConsoleImpl.h" />
+    <ClInclude Include="Device\ConsoleListener.h" />
     <ClInclude Include="Device\DeviceEventHandler.h" />
     <ClInclude Include="Device\import.h" />
     <ClInclude Include="Device\KeyBoard.h" />
@@ -161,7 +165,6 @@
     <ClInclude Include="Net\Socket.h" />
     <ClInclude Include="Net\EndPoint.h" />
     <ClInclude Include="Net\SocketRecvHandler.h" />
-    <ClInclude Include="Platform\Console.h" />
     <ClInclude Include="Platform\import.h" />
     <ClInclude Include="Platform\macros.h" />
     <ClInclude Include="Platform\Windows\import.h" />
@@ -216,8 +219,12 @@
     <ClCompile Include="Collider\AABB.cpp" />
     <ClCompile Include="Collider\Box.cpp" />
     <ClCompile Include="Collider\OBB.cpp" />
+    <ClCompile Include="Command\CommandLine.cpp" />
+    <ClCompile Include="Command\CommandParser.cpp" />
     <ClCompile Include="DataBase\DataRecord.cpp" />
     <ClCompile Include="DataBase\DataSheet.cpp" />
+    <ClCompile Include="Device\Console.cpp" />
+    <ClCompile Include="Device\ConsoleListener.cpp" />
     <ClCompile Include="Device\Keyboard.cpp" />
     <ClCompile Include="Device\Mouse.cpp" />
     <ClCompile Include="Device\Signal.cpp" />
@@ -256,7 +263,6 @@
     <ClCompile Include="Net\Server.cpp" />
     <ClCompile Include="Net\Socket.cpp" />
     <ClCompile Include="Net\EndPoint.cpp" />
-    <ClCompile Include="Platform\Console.cpp" />
     <ClCompile Include="Platform\Windows\Window.cpp" />
     <ClCompile Include="Resource\LocalResource.cpp" />
     <ClCompile Include="Resource\RemoteResource.cpp" />

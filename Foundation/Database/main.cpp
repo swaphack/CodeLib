@@ -14,8 +14,6 @@ void createDB()
 	pConfig->dbTableFilepath = "table.db";
 	pConfig->dbDataFilepath = "data.db";
 
-
-
 	pDataBase->saveDB(curDir + dbFilePath);
 
 	delete pDataBase;
