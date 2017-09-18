@@ -58,9 +58,6 @@
     <ClCompile Include="Common\Control\Static\CtrlText.cpp">
       <Filter>Common\Control\Static</Filter>
     </ClCompile>
-    <ClCompile Include="Common\Control\Dynamic\CtrlMedia.cpp">
-      <Filter>Common\Control\Dynamic</Filter>
-    </ClCompile>
     <ClCompile Include="Common\Node\Animation.cpp">
       <Filter>Common\Node</Filter>
     </ClCompile>
@@ -201,6 +198,24 @@
     <ClCompile Include="Graphic\Struct\shape_common.cpp">
       <Filter>Graphic\Struct</Filter>
     </ClCompile>
+    <ClCompile Include="Common\Control\Media\CtrlMedia.cpp">
+      <Filter>Common\Control\Media</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Audio\AudioManager.cpp">
+      <Filter>Common\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Audio\CtrlAudioListener.cpp">
+      <Filter>Common\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Audio\CtrlAudioSource.cpp">
+      <Filter>Common\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Audio\AudioControl.cpp">
+      <Filter>Common\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Audio\CtrlAudioSource3D.cpp">
+      <Filter>Common\Audio</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Common\GL\import.h">
@@ -313,9 +328,6 @@
     </ClInclude>
     <ClInclude Include="Common\Control\Static\macros.h">
       <Filter>Common\Control\Static</Filter>
-    </ClInclude>
-    <ClInclude Include="Common\Control\Dynamic\CtrlMedia.h">
-      <Filter>Common\Control\Dynamic</Filter>
     </ClInclude>
     <ClInclude Include="Common\Control\Dynamic\import.h">
       <Filter>Common\Control\Dynamic</Filter>
@@ -593,6 +605,39 @@
     <ClInclude Include="3d\Common\CastRay.h">
       <Filter>3d\Common</Filter>
     </ClInclude>
+    <ClInclude Include="Common\Control\Media\CtrlMedia.h">
+      <Filter>Common\Control\Media</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Control\Media\macros.h">
+      <Filter>Common\Control\Media</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Control\Media\import.h">
+      <Filter>Common\Control\Media</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Audio\AudioManager.h">
+      <Filter>Common\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Audio\import.h">
+      <Filter>Common\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Audio\CtrlAudioListener.h">
+      <Filter>Common\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Audio\CtrlAudioSource.h">
+      <Filter>Common\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Audio\CtrlAudioSpeaker.h">
+      <Filter>Common\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Audio\macros.h">
+      <Filter>Common\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Audio\CtrlAudioSource3D.h">
+      <Filter>Common\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Audio\AudioControl3D.h">
+      <Filter>Common\Audio</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Common">
@@ -699,6 +744,12 @@
     </Filter>
     <Filter Include="3d\Map">
       <UniqueIdentifier>{39b72897-e237-4d06-b0ad-dc4d6a4b036c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common\Control\Media">
+      <UniqueIdentifier>{053f2af4-4b9b-4714-b735-5bf6db1a9b98}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common\Audio">
+      <UniqueIdentifier>{61b06823-1aed-4daf-8287-4d1d7f5d9149}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

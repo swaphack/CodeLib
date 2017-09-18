@@ -39,6 +39,8 @@ void Canvas::update(float interval)
 	{
 		_actionManager->update(interval);
 	}
+
+	G_AUDIO->update();
 }
 
 void Canvas::setDimensions(Dimensions d)

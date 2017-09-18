@@ -22,6 +22,7 @@ const char* Console::readLine()
 	std::string line = "";
 	while ((ch = getchar()) != '\n')
 	{
+
 		line.append(1, ch);
 	}
 	return line.c_str();

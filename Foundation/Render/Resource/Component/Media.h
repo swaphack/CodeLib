@@ -18,8 +18,8 @@ namespace render
 	public:
 		// 自动跳转到下一帧
 		virtual void autoNextFrame();
-		// 获取下一帧视频
-		virtual Image* getNextVideo();
+		// 获取下一帧视频图片
+		virtual Image* getNextPicture();
 		// 设置视频帧位置
 		virtual void setVideoFrame(mf_s frame);
 

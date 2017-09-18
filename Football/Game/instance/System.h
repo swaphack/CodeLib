@@ -18,13 +18,13 @@ namespace game
 
 		virtual bool isFinished() const;
 
-		virtual bool begin();
+		virtual bool start();
 
 		virtual bool pause();
 
 		virtual bool resume();
 
-		virtual bool end();
+		virtual bool stop();
 
 		virtual void update();
 	};

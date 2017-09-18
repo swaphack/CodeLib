@@ -20,7 +20,7 @@ void Media::autoNextFrame()
 
 }
 
-Image* Media::getNextVideo()
+Image* Media::getNextPicture()
 {
 	return nullptr;
 }

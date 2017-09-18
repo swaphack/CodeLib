@@ -80,30 +80,6 @@ namespace render
 		BlendParam _blend;
 	};
 
-	// 用于系统类
-	class SystemProtocol
-	{
-	public:
-		SystemProtocol();
-		virtual ~SystemProtocol();
-	public:
-		// 暂停
-		void pause();
-		// 恢复
-		void resume();
-		// 开始
-		void start();
-		// 停止
-		void stop();
-		// 是否结束
-		bool isFinish();
-		// 是否正在运行
-		bool isRunning();
-	protected:
-		// 动作状态
-		ActionStatus _actionStatus;
-	};
-
 	// 空间属性
 	class SpaceProtocol
 	{
@@ -243,4 +219,45 @@ namespace render
 	private:
 		std::string _textBody;
 	};
+
+	// 控制
+	class IControlProtocol
+	{
+	public:
+		virtual ~IControlProtocol() {}
+	public:
+		// 开始
+		virtual void start() = 0;
+		// 恢复
+		virtual void pause() = 0;
+		// 暂停
+		virtual void resume() = 0;
+		// 结束
+		virtual void stop() = 0;
+	};
+
+	// 用于系统类
+	class SystemProtocol : public IControlProtocol
+	{
+	public:
+		SystemProtocol();
+		virtual ~SystemProtocol();
+	public:
+		// 暂停
+		virtual void pause();
+		// 恢复
+		virtual void resume();
+		// 开始
+		virtual void start();
+		// 停止
+		virtual void stop();
+		// 是否结束
+		bool isFinish();
+		// 是否正在运行
+		bool isRunning();
+	protected:
+		// 动作状态
+		ActionStatus _actionStatus;
+	};
+
 }

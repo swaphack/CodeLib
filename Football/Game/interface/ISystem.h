@@ -31,7 +31,7 @@ namespace game
 		/**
 		*	开始
 		*/
-		virtual bool begin() = 0;
+		virtual bool start() = 0;
 		/**
 		*	暂停
 		*/
@@ -43,7 +43,7 @@ namespace game
 		/**
 		*	结束
 		*/
-		virtual bool end() = 0;
+		virtual bool stop() = 0;
 		/**
 		*	更新
 		*/

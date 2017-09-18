@@ -20,4 +20,8 @@
 #define USE_OPENGL
 #endif
 
+#ifndef USE_FMOD
+#define USE_FMOD
+#endif
+
 #include "third_party.h"

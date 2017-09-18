@@ -43,6 +43,10 @@ void createNewVideoFrame(const AVFrame* frame, AVPixelFormat format, VideoFrameI
 	image->init(glFormat, glInternalFormat, destPixels, width, height);
 }
 
+void createNewVideoAudio(const AVFrame* frame, AVPixelFormat format, VideoFrameImage* image)
+{
+}
+
 //////////////////////////////////////////////////////////////////////////
 VideoFrameImage::VideoFrameImage()
 {
@@ -109,7 +113,7 @@ void FFmpeg::load(const MediaDefine& mediaDefine)
 }
 
 
-Image* FFmpeg::getNextVideo()
+Image* FFmpeg::getNextPicture()
 {
 	return &_image;
 }
@@ -118,6 +122,8 @@ void FFmpeg::autoNextFrame()
 {
 	// 解析每一帧数据
 	int got_picture = 0;
+	int got_audio = 0;
+	int got_title = 0;
 	int error = 0;
 
 	AVPacket* packet = av_packet_alloc();
@@ -139,22 +145,22 @@ void FFmpeg::autoNextFrame()
 				createNewVideoFrame(videoFrame, pCodecContext->pix_fmt, &_image);
 			}
 		}
-		got_picture = 0;
+		got_audio = 0;
 		if (packet->stream_index == _audioStream)
 		{
 			pCodecContext = _formatContext->streams[packet->stream_index]->codec;
-			error = avcodec_decode_audio4(pCodecContext, audioFrame, &got_picture, packet);
-			if (error >= 0 && got_picture)
+			error = avcodec_decode_audio4(pCodecContext, audioFrame, &got_audio, packet);
+			if (error >= 0 && got_audio)
 			{
 
 			}
 		}
-		got_picture = 0;
+		got_title = 0;
 		if (packet->stream_index == _subTitleStream)
 		{
 			pCodecContext = _formatContext->streams[packet->stream_index]->codec;
-			error = avcodec_decode_subtitle2(pCodecContext, &subTitle, &got_picture, packet);
-			if (error >= 0 && got_picture)
+			error = avcodec_decode_subtitle2(pCodecContext, &subTitle, &got_title, packet);
+			if (error >= 0 && got_title)
 			{
 
 			}

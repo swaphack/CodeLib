@@ -13,3 +13,5 @@
 #include "Matrix44.h"
 
 #include "Quaternion.h"
+
+#include "Range.h"

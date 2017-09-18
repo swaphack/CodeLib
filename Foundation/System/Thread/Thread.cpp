@@ -15,7 +15,7 @@ Thread::~Thread()
 
 void Thread::start(std::function<void()> handler)
 {
-	m_pThread = std::thread([&](){
+	m_pThread = std::thread([=](){
 		do
 		{
 			handler();

@@ -2,6 +2,8 @@
 #include "../Thread/Thread.h"
 #include "Console.h"
 
+#include <thread>
+
 using namespace sys;
 
 
@@ -29,8 +31,8 @@ void ConsoleListener::run()
 		return;
 	}
 	_running = true;
-	Thread th;
-	th.start([this](){
+
+	std::thread th([this](){
 		while (_running)
 		{
 			std::string line = G_CONSOLE->readLine();

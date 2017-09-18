@@ -81,7 +81,7 @@ Texture2D* CtrlMedia::getNextTexture()
 		return nullptr;
 	}
 
-	const Image* image = _media->getNextVideo();
+	const Image* image = _media->getNextPicture();
 	if (image == nullptr)
 	{
 		return nullptr;

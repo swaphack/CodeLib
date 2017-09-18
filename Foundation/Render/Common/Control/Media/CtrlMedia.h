@@ -1,6 +1,6 @@
 #pragma once
 
-#include "CtrlAnimation.h"
+#include "../Dynamic/CtrlAnimation.h"
 
 namespace render
 {

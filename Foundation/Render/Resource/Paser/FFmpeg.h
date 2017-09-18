@@ -28,7 +28,7 @@ namespace render
 		// 加载视频
 		virtual void load(const MediaDefine& mediaDefine);
 		// 获取下一帧视频
-		virtual Image* getNextVideo();
+		virtual Image* getNextPicture();
 		// 自动跳转到下一帧
 		virtual void autoNextFrame();
 		// 设置视频帧位置

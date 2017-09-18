@@ -43,7 +43,7 @@ namespace sys
 	template<class _Fn, class... _Args>
 	void Thread::startWithParams(_Fn&& handler, _Args&&... _Ax)
 	{
-		m_pThread = std::thread([&](_Args&&... _Bx){
+		m_pThread = std::thread([=](_Args&&... _Bx){
 			do 
 			{
 				handler(_Bx...);

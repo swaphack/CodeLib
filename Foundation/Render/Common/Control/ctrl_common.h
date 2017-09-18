@@ -8,6 +8,8 @@
 
 #include "../macros.h"
 
+#include "../Audio/AudioManager.h"
+
 namespace render
 {
 	//---------------------Ã¶¾Ù---------------------

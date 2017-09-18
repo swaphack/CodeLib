@@ -484,6 +484,9 @@
     <ClInclude Include="Device\IConsoleImpl.h">
       <Filter>Device</Filter>
     </ClInclude>
+    <ClInclude Include="Math\Range.h">
+      <Filter>Math</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Base\File.cpp">
