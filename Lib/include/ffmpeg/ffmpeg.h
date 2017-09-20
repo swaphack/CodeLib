@@ -18,6 +18,7 @@ extern "C" {
 #include "libavutil/pixdesc.h"
 #include "libavutil/imgutils.h"
 #include "libswscale/swscale.h"
+#include "libavutil/audio_fifo.h"
 #ifdef __cplusplus
 }
 #endif

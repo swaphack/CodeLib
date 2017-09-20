@@ -221,10 +221,10 @@ namespace render
 	};
 
 	// 控制
-	class IControlProtocol
+	class ControlProtocol
 	{
 	public:
-		virtual ~IControlProtocol() {}
+		virtual ~ControlProtocol() {}
 	public:
 		// 开始
 		virtual void start() = 0;
@@ -237,7 +237,7 @@ namespace render
 	};
 
 	// 用于系统类
-	class SystemProtocol : public IControlProtocol
+	class SystemProtocol : public ControlProtocol
 	{
 	public:
 		SystemProtocol();

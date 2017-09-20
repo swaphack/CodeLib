@@ -15,6 +15,15 @@ namespace render
 
 		virtual void draw();
 
+		// 开始
+		virtual void start();
+		// 恢复
+		virtual void pause();
+		// 暂停
+		virtual void resume();
+		// 结束
+		virtual void stop();
+
 		// 设置媒体文件
 		void setMediaPath(const char* path, bool defaultSize = true);
 	protected:

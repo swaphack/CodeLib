@@ -2,6 +2,7 @@
 
 #include "system.h"
 #include "Image.h"
+#include "Audio.h"
 #include <map>
 
 namespace render
@@ -20,6 +21,13 @@ namespace render
 		virtual void autoNextFrame();
 		// 获取下一帧视频图片
 		virtual Image* getNextPicture();
+
+		// 获取下一帧音频图片
+		virtual Audio* getNextAudio();
+
+		// 获取下一帧标题
+		virtual std::string getNextTitle();
+
 		// 设置视频帧位置
 		virtual void setVideoFrame(mf_s frame);
 
@@ -42,6 +50,8 @@ namespace render
 		void setTime(float val);
 		// 加载视频数据
 		virtual Image* loadVideoFrame(mf_s frame_time) { return nullptr; }
+		// 加载音频数据
+		virtual Audio* loadAudioFrame(mf_s frame_time) { return nullptr; }
 	private:
 		// 帧率
 		float _frameRate;

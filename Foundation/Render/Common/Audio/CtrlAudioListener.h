@@ -35,12 +35,27 @@ namespace render
 		virtual ~CtrlAudioListener();
 	public:
 		virtual bool init();
-
 		int getListenerID();
+
+		void setVelocity(const sys::Vector3& velocity);
+		const sys::Vector3& getVelocity();
+
+
+		void setForward(const sys::Vector3& forward);
+		const sys::Vector3& getForward();
+
+		void setUp(const sys::Vector3& up);
+		const sys::Vector3& getUp();
+	protected:
+		void onListenerChange();
+	private:
+		void updateListener();
 	private:
 		// ¼àÌýÕßÊýÁ¿
 		static int s_ListenerCount;
 		// ±àºÅ
 		int _listenerID;
+
+		ListenerBody _listenerBody;
 	};
 }

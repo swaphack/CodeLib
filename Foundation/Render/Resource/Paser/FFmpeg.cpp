@@ -1,5 +1,7 @@
 #include "FFmpeg.h"
 
+#include <string>
+
 using namespace render;
 
 #pragma warning(disable:4996)
@@ -7,9 +9,9 @@ using namespace render;
 //////////////////////////////////////////////////////////////////////////
 bool FFmpeg::s_bInitFFmpeg = false;
 
-void createNewVideoFrame(const AVFrame* frame, AVPixelFormat format, VideoFrameImage* image)
+void createVideoImage(const AVFrame* frame, VideoFrameImage* image)
 {
-	if (image == nullptr)
+	if (frame == nullptr || image == nullptr)
 	{
 		return;
 	}
@@ -27,24 +29,63 @@ void createNewVideoFrame(const AVFrame* frame, AVPixelFormat format, VideoFrameI
 	AVFrame* destFrame = av_frame_alloc();
 	av_image_fill_arrays(destFrame->data, destFrame->linesize, destPixels, AV_PIX_FMT_RGB24, width, height, 1);
 
-	struct SwsContext* swsContext = sws_getContext(width, height, format,
+	struct SwsContext* pContext = sws_getContext(width, height, (AVPixelFormat)frame->format,
 		width, height, AV_PIX_FMT_RGB24,
 		SWS_BICUBIC, nullptr, nullptr, nullptr);
 
-	sws_scale(swsContext, 
+	sws_scale(pContext,
 		frame->data, frame->linesize, 
 		0, height,
 		destFrame->data, destFrame->linesize);
 
-	sws_freeContext(swsContext);
+	sws_freeContext(pContext);
 
 	av_frame_free(&destFrame);
 
 	image->init(glFormat, glInternalFormat, destPixels, width, height);
 }
 
-void createNewVideoAudio(const AVFrame* frame, AVPixelFormat format, VideoFrameImage* image)
+void createVideoAudio(const AVFrame* frame, VideoAudioClip* audio)
 {
+	if (frame == nullptr || audio == nullptr)
+	{
+		return;
+	}
+
+	int dataSize = 0;
+	int resampledDataSize = 0;
+	int64_t decChannelLayout;
+	int channels = 0;
+	int nbChannels = 0;
+	int bytesPerSec = 0;
+
+	dataSize = av_samples_get_buffer_size(nullptr, channels, 1, (AVSampleFormat)frame->format, 1);
+	bytesPerSec = av_samples_get_buffer_size(nullptr, channels, frame->nb_samples, (AVSampleFormat)frame->format, 1);
+
+	if (dataSize <= 0 || bytesPerSec <= 0)
+	{
+		audio->init(nullptr, 0);
+		return;
+	}
+
+	channels = av_frame_get_channels(frame);
+	nbChannels = av_get_channel_layout_nb_channels(frame->channel_layout);
+
+	if (frame->channel_layout && channels == nbChannels)
+	{
+		decChannelLayout = frame->channel_layout;
+	}
+	else
+	{
+		decChannelLayout = av_get_default_channel_layout(channels);
+	}
+
+	audio->init(frame->data[0], dataSize, decChannelLayout, channels, frame->format, frame->sample_rate, bytesPerSec);
+}
+
+void createVideoTitle(const AVSubtitle* subTitle, std::string* title)
+{
+
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -68,6 +109,35 @@ void VideoFrameImage::init(int format, int internalFormat, uchar* pixels, uint w
 	this->setWidth(width);
 	this->setHeight(height);
 }
+//////////////////////////////////////////////////////////////////////////
+
+VideoAudioClip::VideoAudioClip()
+{
+
+}
+
+VideoAudioClip::~VideoAudioClip()
+{
+
+}
+
+void VideoAudioClip::init(uchar* data, int frameSize, int channels, int64_t channelLayout, int format, int sampleRate, int bytesPerSec)
+{
+	this->setData(data);
+	this->setFrameSize(frameSize);
+	this->setChannelLayout(channelLayout);
+	this->setChannels(channels);
+	this->setFormat(format);
+	this->setSampleRate(sampleRate);
+	this->setBytesPerSec(bytesPerSec);
+}
+
+void VideoAudioClip::init(uchar* data, int frameSize)
+{
+	this->setData(data);
+	this->setFrameSize(frameSize);
+}
+
 
 //////////////////////////////////////////////////////////////////////////
 FFmpeg::FFmpeg()
@@ -118,6 +188,16 @@ Image* FFmpeg::getNextPicture()
 	return &_image;
 }
 
+Audio* FFmpeg::getNextAudio()
+{
+	return &_audio;
+}
+
+std::string FFmpeg::getNextTitle()
+{
+	return _text;
+}
+
 void FFmpeg::autoNextFrame()
 {
 	// 解析每一帧数据
@@ -142,7 +222,7 @@ void FFmpeg::autoNextFrame()
 			error = avcodec_decode_video2(pCodecContext, videoFrame, &got_picture, packet);
 			if (error >= 0 && got_picture)
 			{
-				createNewVideoFrame(videoFrame, pCodecContext->pix_fmt, &_image);
+				createVideoImage(videoFrame, &_image);
 			}
 		}
 		got_audio = 0;
@@ -152,7 +232,7 @@ void FFmpeg::autoNextFrame()
 			error = avcodec_decode_audio4(pCodecContext, audioFrame, &got_audio, packet);
 			if (error >= 0 && got_audio)
 			{
-
+				createVideoAudio(audioFrame, &_audio);
 			}
 		}
 		got_title = 0;
@@ -162,7 +242,7 @@ void FFmpeg::autoNextFrame()
 			error = avcodec_decode_subtitle2(pCodecContext, &subTitle, &got_title, packet);
 			if (error >= 0 && got_title)
 			{
-
+				createVideoTitle(&subTitle, &_text);
 			}
 		}
 	}
@@ -171,8 +251,8 @@ void FFmpeg::autoNextFrame()
 	av_frame_free(&audioFrame);
 
 	av_packet_free(&packet);
-}
 
+}
 void FFmpeg::setVideoFrame(mf_s frame)
 {
 	AVRational bqTimebase;
@@ -255,3 +335,5 @@ void FFmpeg::getStreamIndex(int type, int& streamIndex)
 
 	avcodec_open2(codecContext, codec, nullptr);
 }
+
+

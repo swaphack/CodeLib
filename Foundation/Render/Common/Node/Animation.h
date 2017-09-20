@@ -5,20 +5,20 @@
 namespace render
 {
 	// 动画
-	class Animation : public Node
+	class Animation : public Node, ControlProtocol
 	{
 	public:
 		Animation();
 		virtual ~Animation();
 	public:
 		// 开始
-		void start();
+		virtual void start();
 		// 恢复
-		void pause();
+		virtual void pause();
 		// 暂停
-		void resume();
+		virtual void resume();
 		// 结束
-		void stop();
+		virtual void stop();
 
 		// 定时更新事件,不要修改
 		virtual void update(float interval);

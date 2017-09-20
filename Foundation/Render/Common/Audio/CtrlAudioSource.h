@@ -9,15 +9,6 @@ namespace FMOD
 }
 namespace render
 {
-
-#define AUDIO_DO_FUNC(Target, FuncName, ...) \
-	if (Target) { Target->FuncName(__VA_ARGS__); }
-
-#define AUDIO_SET_FUNC AUDIO_DO_FUNC
-
-#define AUDIO_GET_FUNC(Target, FuncName, Type) \
-	{ Type value = 0; AUDIO_DO_FUNC(Target, FuncName, &value); return value; }
-
 	// “Ù∆µ
 	class CtrlAudioSource : public Node
 	{
@@ -25,7 +16,7 @@ namespace render
 		CtrlAudioSource();
 		virtual ~CtrlAudioSource();
 	public:
-		void load(const std::string& filepath);
+		bool load(const std::string& filepath);
 
 		void setMusicSpeed(float speed);
 		float getMusicSpeed();

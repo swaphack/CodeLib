@@ -25,6 +25,16 @@ Image* Media::getNextPicture()
 	return nullptr;
 }
 
+Audio* Media::getNextAudio()
+{
+	return nullptr;
+}
+
+std::string Media::getNextTitle()
+{
+	return "";
+}
+
 void Media::setVideoFrame(mf_s frame)
 {
 

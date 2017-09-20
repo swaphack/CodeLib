@@ -7,6 +7,12 @@ namespace FMOD
 {
 	class Sound;
 	class System;
+	struct FMOD_VECTOR;
+}
+
+namespace sys
+{
+	struct Vector3;
 }
 
 namespace render

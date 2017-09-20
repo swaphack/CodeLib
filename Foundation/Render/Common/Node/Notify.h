@@ -22,6 +22,8 @@ namespace render
 		ENP_ANIMATION_FRAME,
 		// 界面
 		ENP_USER_INTERFACE,
+		// 音效
+		ENP_AUDIO,
 	};
 
 	// 推送委托

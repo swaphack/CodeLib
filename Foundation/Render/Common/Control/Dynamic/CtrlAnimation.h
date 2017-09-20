@@ -2,6 +2,7 @@
 
 #include "macros.h"
 #include "../Static/CtrlFrame.h"
+#include "../../Audio/CtrlAudioSource.h"
 
 namespace render
 {
@@ -35,6 +36,8 @@ namespace render
 	protected:
 		// 图片帧
 		CtrlFrame* _ctrlFrame;
+		// 音效
+		CtrlAudioSource* _ctrlAudio;
 	private:
 		// 速度系数
 		float _speedRatio;

@@ -17,17 +17,17 @@ CtrlAudioSource::~CtrlAudioSource()
 	}
 }
 
-void CtrlAudioSource::load(const std::string& filepath)
+bool CtrlAudioSource::load(const std::string& filepath)
 {
 	std::string fullpath = G_FILEPATH->getFilePath(filepath.c_str());
 	if (fullpath.empty())
 	{
-		return;
+		return false;
 	}
 	std::string data;
 	if (!sys::File::read(fullpath.c_str(), data))
 	{
-		return;
+		return false;
 	}
 
 	if (_sound)
@@ -39,16 +39,18 @@ void CtrlAudioSource::load(const std::string& filepath)
 	FMOD::System* system = G_AUDIO->getSystem();
 	if (system == nullptr)
 	{
-		return;
+		return false;
 	}
 	FMOD_RESULT result = system->createStream(data.c_str(), FMOD_DEFAULT, 0, &_sound);
 	if (result != FMOD_OK)
 	{
-		return;
+		return false;
 	}
 
 	setMode(FMOD_LOOP_NORMAL);
-	system->playSound(_sound, nullptr, false, &_channel);
+	result = system->playSound(_sound, nullptr, false, &_channel);
+
+	return result == FMOD_OK;
 }
 
 void CtrlAudioSource::setMusicSpeed(float speed)

@@ -156,9 +156,6 @@
     <ClCompile Include="3d\Common\CtrlModel.cpp">
       <Filter>3d\Common</Filter>
     </ClCompile>
-    <ClCompile Include="DrawNode\DrawNode.cpp">
-      <Filter>DrawNode</Filter>
-    </ClCompile>
     <ClCompile Include="Engine\OpenGL\DCDraw.cpp">
       <Filter>Engine\OpenGL</Filter>
     </ClCompile>
@@ -210,18 +207,21 @@
     <ClCompile Include="Common\Audio\CtrlAudioSource.cpp">
       <Filter>Common\Audio</Filter>
     </ClCompile>
-    <ClCompile Include="Common\Audio\AudioControl.cpp">
-      <Filter>Common\Audio</Filter>
-    </ClCompile>
     <ClCompile Include="Common\Audio\CtrlAudioSource3D.cpp">
       <Filter>Common\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource\Component\Audio.cpp">
+      <Filter>Resource\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Audio\macros.cpp">
+      <Filter>Common\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\DrawNode\DrawNode.cpp">
+      <Filter>Common\DrawNode</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Common\GL\import.h">
-      <Filter>Common\GL</Filter>
-    </ClInclude>
-    <ClInclude Include="Common\GL\macros.h">
       <Filter>Common\GL</Filter>
     </ClInclude>
     <ClInclude Include="Common\Node\import.h">
@@ -545,12 +545,6 @@
     <ClInclude Include="3d\Common\import.h">
       <Filter>3d\Common</Filter>
     </ClInclude>
-    <ClInclude Include="DrawNode\DrawNode.h">
-      <Filter>DrawNode</Filter>
-    </ClInclude>
-    <ClInclude Include="DrawNode\import.h">
-      <Filter>DrawNode</Filter>
-    </ClInclude>
     <ClInclude Include="Graphic\DCSample\DCDraw.h">
       <Filter>Graphic\DCSample</Filter>
     </ClInclude>
@@ -635,8 +629,17 @@
     <ClInclude Include="Common\Audio\CtrlAudioSource3D.h">
       <Filter>Common\Audio</Filter>
     </ClInclude>
-    <ClInclude Include="Common\Audio\AudioControl3D.h">
-      <Filter>Common\Audio</Filter>
+    <ClInclude Include="Resource\Component\Audio.h">
+      <Filter>Resource\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\DrawNode\DrawNode.h">
+      <Filter>Common\DrawNode</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\DrawNode\import.h">
+      <Filter>Common\DrawNode</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\GL\macros.h">
+      <Filter>Common\GL</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -736,9 +739,6 @@
     <Filter Include="3d\Common">
       <UniqueIdentifier>{fe27589b-7893-4862-9ec5-65916e21cc3e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="DrawNode">
-      <UniqueIdentifier>{c3eeb252-4d38-4194-8503-f7bbbff42e74}</UniqueIdentifier>
-    </Filter>
     <Filter Include="3d\Environment">
       <UniqueIdentifier>{81978b8e-264f-4191-bee5-fb134f29e041}</UniqueIdentifier>
     </Filter>
@@ -750,6 +750,9 @@
     </Filter>
     <Filter Include="Common\Audio">
       <UniqueIdentifier>{61b06823-1aed-4daf-8287-4d1d7f5d9149}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common\DrawNode">
+      <UniqueIdentifier>{c3eeb252-4d38-4194-8503-f7bbbff42e74}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

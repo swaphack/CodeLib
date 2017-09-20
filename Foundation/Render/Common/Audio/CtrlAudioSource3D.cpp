@@ -1,20 +1,7 @@
 #include "CtrlAudioSource3D.h"
+#include "AudioManager.h"
 
 using namespace render;
-
-void ConvertToFMODVector(const sys::Vector3& src, FMOD_VECTOR& dest)
-{
-	dest.x = src.x;
-	dest.y = src.y;
-	dest.z = src.z;
-}
-
-void ConvertToSysVector(const FMOD_VECTOR& src, sys::Vector3& dest)
-{
-	dest.x = src.x;
-	dest.y = src.y;
-	dest.z = src.z;
-}
 
 
 CtrlAudioSource3D::CtrlAudioSource3D()

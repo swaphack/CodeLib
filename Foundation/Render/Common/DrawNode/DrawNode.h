@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../Common/import.h"
+#include "../Node/ColorNode.h"
 
 namespace render
 {

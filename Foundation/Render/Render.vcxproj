@@ -85,11 +85,11 @@
     <ClCompile Include="Common\Action\ActionProxy.cpp" />
     <ClCompile Include="Common\Action\IntervalAction.cpp" />
     <ClCompile Include="Common\Action\Scheduler.cpp" />
-    <ClCompile Include="Common\Audio\AudioControl.cpp" />
     <ClCompile Include="Common\Audio\AudioManager.cpp" />
     <ClCompile Include="Common\Audio\CtrlAudioSource3D.cpp" />
     <ClCompile Include="Common\Audio\CtrlAudioListener.cpp" />
     <ClCompile Include="Common\Audio\CtrlAudioSource.cpp" />
+    <ClCompile Include="Common\Audio\macros.cpp" />
     <ClCompile Include="Common\Control\Dynamic\CtrlAnimation.cpp" />
     <ClCompile Include="Common\Control\Dynamic\CtrlParticleSystem.cpp" />
     <ClCompile Include="Common\Control\Dynamic\CtrlSequenceFrame.cpp" />
@@ -103,6 +103,7 @@
     <ClCompile Include="Common\Control\Static\CtrlScrollView.cpp" />
     <ClCompile Include="Common\Control\Static\CtrlText.cpp" />
     <ClCompile Include="Common\Control\Static\CtrlScissor.cpp" />
+    <ClCompile Include="Common\DrawNode\DrawNode.cpp" />
     <ClCompile Include="Common\GL\protocol_common.cpp" />
     <ClCompile Include="Common\Keyboard\KeyboardManager.cpp" />
     <ClCompile Include="Common\Node\Animation.cpp" />
@@ -123,7 +124,6 @@
     <ClCompile Include="Common\View\View.cpp" />
     <ClCompile Include="Common\View\ViewConfig.cpp" />
     <ClCompile Include="Common\XControl\Pixel.cpp" />
-    <ClCompile Include="DrawNode\DrawNode.cpp" />
     <ClCompile Include="Engine\OpenGL\DCDraw.cpp" />
     <ClCompile Include="Engine\OpenGL\DCMask.cpp" />
     <ClCompile Include="Engine\OpenGL\DCMatrix.cpp" />
@@ -137,6 +137,7 @@
     <ClCompile Include="Graphic\Struct\shape_common.cpp" />
     <ClCompile Include="Platform\Windows\GLFrame.cpp" />
     <ClCompile Include="RenderApplication.cpp" />
+    <ClCompile Include="Resource\Component\Audio.cpp" />
     <ClCompile Include="Resource\Component\Image.cpp" />
     <ClCompile Include="Resource\Component\Media.cpp" />
     <ClCompile Include="Resource\Paser\FFmpeg.cpp" />
@@ -176,12 +177,13 @@
     <ClInclude Include="Common\Audio\CtrlAudioSpeaker.h" />
     <ClInclude Include="Common\Audio\import.h" />
     <ClInclude Include="Common\Audio\macros.h" />
-    <ClInclude Include="Common\Audio\AudioControl3D.h" />
     <ClInclude Include="Common\Control\Media\CtrlMedia.h" />
     <ClInclude Include="Common\Control\Media\import.h" />
     <ClInclude Include="Common\Control\Media\macros.h" />
     <ClInclude Include="Common\Control\Static\CtrlScissor.h" />
     <ClInclude Include="Common\Control\Static\CtrlScrollView.h" />
+    <ClInclude Include="Common\DrawNode\DrawNode.h" />
+    <ClInclude Include="Common\DrawNode\import.h" />
     <ClInclude Include="Common\import.h" />
     <ClInclude Include="Common\macros.h" />
     <ClInclude Include="Common\Control\ctrl_common.h" />
@@ -235,8 +237,6 @@
     <ClInclude Include="Common\View\ViewConfig.h" />
     <ClInclude Include="Common\XControl\Pixel.h" />
     <ClInclude Include="Common\XControl\import.h" />
-    <ClInclude Include="DrawNode\DrawNode.h" />
-    <ClInclude Include="DrawNode\import.h" />
     <ClInclude Include="Engine\import.h" />
     <ClInclude Include="Engine\OpenGL\DCEnum.h" />
     <ClInclude Include="Engine\OpenGL\import.h" />
@@ -266,6 +266,7 @@
     <ClInclude Include="Platform\Windows\import.h" />
     <ClInclude Include="render.h" />
     <ClInclude Include="RenderApplication.h" />
+    <ClInclude Include="Resource\Component\Audio.h" />
     <ClInclude Include="Resource\Component\Image.h" />
     <ClInclude Include="Resource\Component\import.h" />
     <ClInclude Include="Resource\Component\Media.h" />

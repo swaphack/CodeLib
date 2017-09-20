@@ -51,6 +51,42 @@ void CtrlMedia::draw()
 	CtrlAnimation::draw();
 }
 
+void CtrlMedia::start()
+{
+	CtrlAnimation::start();
+	if (_ctrlAudio)
+	{
+		_ctrlAudio->setPaused(false);
+	}
+}
+
+void CtrlMedia::pause()
+{
+	CtrlAnimation::pause();
+	if (_ctrlAudio)
+	{
+		_ctrlAudio->setPaused(true);
+	}
+}
+
+void CtrlMedia::resume()
+{
+	CtrlAnimation::resume();
+	if (_ctrlAudio)
+	{
+		_ctrlAudio->setPaused(true);
+	}
+}
+
+void CtrlMedia::stop()
+{
+	CtrlAnimation::stop();
+	if (_ctrlAudio)
+	{
+		_ctrlAudio->stop();
+	}
+}
+
 void CtrlMedia::setMediaPath(const char* path, bool defaultSize)
 {
 	_mediaDefine.filepath = path;

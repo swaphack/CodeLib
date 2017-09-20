@@ -59,9 +59,12 @@ void AudioManager::set3DSettings(const Audio3DSettings& setting)
 
 Audio3DSettings AudioManager::get3DSettings()
 {
-	if (!_system) return;
 	Audio3DSettings setting;
+	if (!_system) return setting;
+	
 	_system->get3DSettings(&setting.dopplerscale, &setting.distancefactor, &setting.rolloffscale);
+
+	return setting;
 }
 
 void AudioManager::set3DNumListeners(int numlisteners)

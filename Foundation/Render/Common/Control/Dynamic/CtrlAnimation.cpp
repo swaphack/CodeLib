@@ -11,6 +11,9 @@ CtrlAnimation::CtrlAnimation()
 {
 	_ctrlFrame = CREATE_NODE(CtrlFrame);
 	this->addChild(_ctrlFrame);
+
+	_ctrlAudio = CREATE_NODE(CtrlAudioSource);
+	this->addChild(_ctrlAudio);
 }
 
 CtrlAnimation::~CtrlAnimation()
