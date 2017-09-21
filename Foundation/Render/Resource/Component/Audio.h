@@ -17,7 +17,6 @@ namespace render
 		int getFormat();
 		int getSampleRate();
 		int getFrameSize();
-		int getBytesPerSec();
 	protected:
 		void setData(uchar* data);
 		void setChannels(int channels);
@@ -25,7 +24,6 @@ namespace render
 		void setFormat(int format);
 		void setSampleRate(int sampleRate);
 		void setFrameSize(int size);
-		void setBytesPerSec(int bytesPerSec);
 	private:
 		// 数据
 		uchar* _data;
@@ -39,7 +37,5 @@ namespace render
 		int _format;
 		// 采样频率
 		int _sampleRate;
-		// 每秒的数据大小
-		int _bytesPerSec;
 	};
 }

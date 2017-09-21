@@ -9,14 +9,12 @@ Audio::Audio()
 , _format(0)
 , _sampleRate(0)
 , _frameSize(0)
-, _bytesPerSec(0)
 {
-
+	//SAFE_FREE(_data);
 }
 
 Audio::~Audio()
 {
-	SAFE_FREE(_data);
 }
 
 uchar* Audio::getData()
@@ -26,7 +24,7 @@ uchar* Audio::getData()
 
 void Audio::setData(uchar* data)
 {
-	SAFE_FREE(_data);
+	//SAFE_FREE(_data);
 	_data = data;
 }
 
@@ -78,14 +76,4 @@ int Audio::getFrameSize()
 void Audio::setFrameSize(int size)
 {
 	_frameSize = size;
-}
-
-int Audio::getBytesPerSec()
-{
-	return _bytesPerSec;
-}
-
-void Audio::setBytesPerSec(int bytesPerSec)
-{
-	_bytesPerSec = bytesPerSec;
 }

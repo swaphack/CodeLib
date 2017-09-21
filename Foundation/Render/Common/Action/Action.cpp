@@ -10,7 +10,6 @@ Action::Action()
 
 Action::~Action()
 {
-	
 }
 
 void Action::setTarget(sys::Object* target)

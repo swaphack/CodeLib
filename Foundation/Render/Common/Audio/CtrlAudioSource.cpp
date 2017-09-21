@@ -17,15 +17,9 @@ CtrlAudioSource::~CtrlAudioSource()
 	}
 }
 
-bool CtrlAudioSource::load(const std::string& filepath)
+bool CtrlAudioSource::loadData(const uchar* data)
 {
-	std::string fullpath = G_FILEPATH->getFilePath(filepath.c_str());
-	if (fullpath.empty())
-	{
-		return false;
-	}
-	std::string data;
-	if (!sys::File::read(fullpath.c_str(), data))
+	if (data == nullptr)
 	{
 		return false;
 	}
@@ -41,7 +35,7 @@ bool CtrlAudioSource::load(const std::string& filepath)
 	{
 		return false;
 	}
-	FMOD_RESULT result = system->createStream(data.c_str(), FMOD_DEFAULT, 0, &_sound);
+	FMOD_RESULT result = system->createStream((char*)data, FMOD_DEFAULT, 0, &_sound);
 	if (result != FMOD_OK)
 	{
 		return false;
@@ -51,6 +45,22 @@ bool CtrlAudioSource::load(const std::string& filepath)
 	result = system->playSound(_sound, nullptr, false, &_channel);
 
 	return result == FMOD_OK;
+}
+
+bool CtrlAudioSource::loadFromFile(const std::string& filepath)
+{
+	std::string fullpath = G_FILEPATH->getFilePath(filepath.c_str());
+	if (fullpath.empty())
+	{
+		return false;
+	}
+	std::string data;
+	if (!sys::File::read(fullpath.c_str(), data))
+	{
+		return false;
+	}
+
+	return loadData((uchar*)data.c_str());
 }
 
 void CtrlAudioSource::setMusicSpeed(float speed)

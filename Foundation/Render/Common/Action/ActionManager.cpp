@@ -37,7 +37,7 @@ void ActionManager::update(float interval)
 	std::vector<Action*>::iterator raIter = removeActions.begin();
 	while (raIter != removeActions.end())
 	{
-		delete (*raIter);
+		(*raIter)->release();
 		this->removeAction(*raIter);
 		raIter++;
 	}
@@ -49,7 +49,7 @@ void ActionManager::addAction(Action* action)
 	{
 		return;
 	}
-
+	SAFE_RETAIN(action);
 	_actions.insert(action);
 }
 
@@ -59,7 +59,7 @@ void ActionManager::removeAction(Action* action)
 	{
 		return;
 	}
-	
+	SAFE_RELEASE(action);
 	_actions.erase(action);
 }
 
@@ -68,7 +68,7 @@ void ActionManager::removeAllActions()
 	std::set<Action*>::iterator it = _actions.begin();
 	while (it != _actions.end())
 	{
-		delete (*it);
+		(*it)->release();
 		it =_actions.erase(it);
 	}
 }
@@ -129,7 +129,7 @@ void ActionManager::removeAllActionsByTargets(sys::Object* target)
 	std::vector<Action*>::iterator raIter = removeActions.begin();
 	while (raIter != removeActions.end())
 	{
-		delete (*raIter);
+		(*raIter)->release();
 		this->removeAction(*raIter);
 		raIter++;
 	}

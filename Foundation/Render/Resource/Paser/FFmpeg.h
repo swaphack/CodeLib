@@ -26,7 +26,7 @@ namespace render
 		virtual ~VideoAudioClip();
 	public:
 		void init(uchar* data, int frameSize);
-		void init(uchar* data, int frameSize, int channels, int64_t channelLayout, int format, int sampleRate, int bytesPerSec);
+		void init(uchar* data, int frameSize, int channels, int64_t channelLayout, int format, int sampleRate);
 	};
 
 	// ffmpeg ½âÎö

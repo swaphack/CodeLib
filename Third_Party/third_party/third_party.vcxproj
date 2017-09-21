@@ -193,6 +193,7 @@
     <ClInclude Include="..\..\Lib\include\fmod\lowlevel\fmod_errors.h" />
     <ClInclude Include="..\..\Lib\include\fmod\lowlevel\fmod_output.h" />
     <ClInclude Include="..\..\Lib\include\fmod\studio\fmod_studio.h" />
+    <ClInclude Include="..\..\Lib\include\fmod\studio\fmod_studio.hpp" />
     <ClInclude Include="..\..\Lib\include\fmod\studio\fmod_studio_common.h" />
     <ClInclude Include="..\..\Lib\include\jpeg\jconfig.h" />
     <ClInclude Include="..\..\Lib\include\jpeg\jdct.h" />

@@ -12,10 +12,22 @@ namespace render
 	//struct PSR;
 	class TouchProxy;
 
+#define CREATE_NODE(NODE_TYPE) createNode<NODE_TYPE>()
+
 	template<typename T>
-	T* createNode();
-	// 创建节点
-	#define CREATE_NODE(NODE_TYPE) createNode<NODE_TYPE>()
+	T* createNode()
+	{
+		T* temp = new T();
+		if (temp && temp->init() == false)
+		{
+			delete temp;
+			return nullptr;
+		}
+
+		AUTO_RELEASE_OBJECT(temp);
+
+		return temp;
+	}
 
 	// 绘制节点
 	class Node : 
@@ -142,20 +154,4 @@ namespace render
 		// 通知
 		Notify* _notify;
 	};
-
-	template<typename T>
-	T* render::createNode()
-	{
-		T* temp = new T();
-		if (temp->init() == false)
-		{
-			delete temp;
-			return nullptr;
-		}
-
-		AUTO_RELEASE_OBJECT(temp);
-
-		return temp;
-	}
-
 }

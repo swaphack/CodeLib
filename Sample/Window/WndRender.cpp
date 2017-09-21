@@ -7,7 +7,7 @@ using namespace ui;
 WndRender::WndRender()
 {
 	this->init();
-	this->getCanvas()->setDimensions(render::ED_2D);
+	this->getCanvas()->setDimensions(render::ED_3D);
 }
 
 WndRender::~WndRender()
@@ -24,12 +24,12 @@ void WndRender::show()
 	
 	//this->testText();
 
-	this->testMedia();
+	this->testCubeModel();
 }
 
 void WndRender::testMoveImage()
 {
-	CtrlImage* pImage = new CtrlImage();
+	CtrlImage* pImage = CREATE_NODE(CtrlImage);
 	pImage->setImagePath("Resource/Image/world.jpg", EIF_JPEG);
 	pImage->setPosition(512, 384, 0);
 	AUTO_RELEASE_OBJECT(pImage);
@@ -64,7 +64,7 @@ void WndRender::testClock()
 
 void WndRender::testCubeModel()
 {
-	int nCount = 1000;
+	int nCount = 1;
 	for (int i = 0; i < nCount; i++)
 	{
 		ImageDefine imageDefine = { "Resource/Image/NeHe.png", EIF_PNG };
@@ -74,9 +74,9 @@ void WndRender::testCubeModel()
 		AUTO_RELEASE_OBJECT(frame);
 		frame->setTextureWithRect(texture2D);
 
-		Cube* pModel = new Cube();
+		Cube* pModel = CREATE_NODE(Cube);
 		AUTO_RELEASE_OBJECT(pModel);
-		pModel->setPosition(i % 100, i % 100, i % 100);
+		pModel->setPosition(i % 200, i % 200, i % 200);
 		pModel->setTexFrame(frame);
 		pModel->setVolume(256.0f, 256.0f, 256.0f);
 		pModel->setRotation(0, 0, 10);
@@ -87,15 +87,13 @@ void WndRender::testCubeModel()
 		pModel->getMatrial()->setEmisiion(255, 255, 255, 255);
 		this->getCanvas()->getRoot()->addChild(pModel);
 
-
-		int count = 1024;
-		float interval = 5;
-		float rx = i % 360;
-		float ry = i % 360;
-		float rz = i % 360;
-		RotateToAction* pRotateToAction = new RotateToAction();
-		pRotateToAction->setRotation(rx * count, ry * count, rz * count);
-		pRotateToAction->setInterval(interval * count);
+		float interval = 2;
+		float rx = 360;
+		float ry = 360;
+		float rz = 360;
+		RotateByAction* pRotateToAction = CREATE_ACTION(RotateByAction);
+		pRotateToAction->setOffset(rx, ry, rz);
+		pRotateToAction->setInterval(interval);
 		pModel->getActionProxy()->runAction(pRotateToAction);
 	}
 
@@ -103,7 +101,7 @@ void WndRender::testCubeModel()
 
 void WndRender::testSphereModel()
 {
-	render::Sphere* pSphere = new render::Sphere();
+	render::Sphere* pSphere = CREATE_NODE(render::Sphere);
 	AUTO_RELEASE_OBJECT(pSphere);
 	pSphere->setRadius(512);
 	this->getCanvas()->getRoot()->addChild(pSphere);
@@ -113,7 +111,7 @@ void WndRender::testSphereModel()
 	float rx = 0;
 	float ry = 45;
 	float rz = 0;
-	RotateToAction* pRotateToAction = new RotateToAction();
+	RotateToAction* pRotateToAction = CREATE_ACTION(RotateToAction);
 	pRotateToAction->setRotation(rx * count, ry * count, rz * count);
 	pRotateToAction->setInterval(interval * count);
 	pSphere->getActionProxy()->runAction(pRotateToAction);
@@ -188,11 +186,10 @@ void WndRender::testAnimation()
 
 void WndRender::testParticle()
 {
-	CtrlParticleSystem* node = new CtrlParticleSystem();
+	CtrlParticleSystem* node = CREATE_NODE(CtrlParticleSystem);
 	node->setPosition(512, 386, 0);
 	node->setCount(100);
 	node->setScale(2, 1, 1);
-	node->init();
 	node->start();
 	AUTO_RELEASE_OBJECT(node);
 	this->getCanvas()->getRoot()->addChild(node);
@@ -551,7 +548,7 @@ void WndRender::testModel()
 	float rx = 360;
 	float ry = 360;
 	float rz = 360;
-	RotateToAction* pRotateToAction = new RotateToAction();
+	RotateToAction* pRotateToAction = CREATE_ACTION(RotateToAction);
 	pRotateToAction->setRotation(rx * count, ry * count, rz * count);
 	pRotateToAction->setInterval(interval * count);
 	pModel->getActionProxy()->runAction(pRotateToAction);
@@ -624,7 +621,7 @@ void WndRender::testDrawNode()
 
 	int COUNT = (sizeof(points) / sizeof(Vector2));
 
-	DrawNode* pDrawNode = new DrawNode();
+	DrawNode* pDrawNode = CREATE_NODE(DrawNode);
 	pDrawNode->setDrawMode(EBM_POLYGON);
 	pDrawNode->setColor(sys::Color3B(0, 255, 0));
 	for (int i = 0; i < COUNT; i++)

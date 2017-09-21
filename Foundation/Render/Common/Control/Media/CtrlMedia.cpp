@@ -18,20 +18,28 @@ bool CtrlMedia::init()
 	CtrlAnimation::init();
 
 	_notify->addListen(ENP_ANIMATION_FRAME, [&](){
-		if (_media)
+		if (_media == nullptr)
 		{
-			_media->autoNextFrame();
+			return;
 		}
 
+		_media->autoNextFrame();
+
 		Texture2D* texture = getNextTexture();
-
-		if (texture == nullptr) return;
-
-		AUTO_RELEASE_OBJECT(texture);
-
-		if (_ctrlFrame)
+		if (texture)
 		{
-			_ctrlFrame->setTextureWithRect(texture);
+			AUTO_RELEASE_OBJECT(texture);
+
+			if (_ctrlFrame)
+			{
+				_ctrlFrame->setTextureWithRect(texture);
+			}
+		}		
+
+		Audio* audio = _media->getNextAudio();
+		if (audio)
+		{
+			_ctrlAudio->loadData(audio->getData());
 		}
 	});
 

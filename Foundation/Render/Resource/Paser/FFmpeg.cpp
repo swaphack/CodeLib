@@ -57,18 +57,16 @@ void createVideoAudio(const AVFrame* frame, VideoAudioClip* audio)
 	int64_t decChannelLayout;
 	int channels = 0;
 	int nbChannels = 0;
-	int bytesPerSec = 0;
 
-	dataSize = av_samples_get_buffer_size(nullptr, channels, 1, (AVSampleFormat)frame->format, 1);
-	bytesPerSec = av_samples_get_buffer_size(nullptr, channels, frame->nb_samples, (AVSampleFormat)frame->format, 1);
+	channels = av_frame_get_channels(frame);
+	dataSize = av_samples_get_buffer_size(nullptr, channels, frame->nb_samples, (AVSampleFormat)frame->format, 1);
 
-	if (dataSize <= 0 || bytesPerSec <= 0)
+	if (dataSize <= 0)
 	{
 		audio->init(nullptr, 0);
 		return;
 	}
 
-	channels = av_frame_get_channels(frame);
 	nbChannels = av_get_channel_layout_nb_channels(frame->channel_layout);
 
 	if (frame->channel_layout && channels == nbChannels)
@@ -80,7 +78,11 @@ void createVideoAudio(const AVFrame* frame, VideoAudioClip* audio)
 		decChannelLayout = av_get_default_channel_layout(channels);
 	}
 
-	audio->init(frame->data[0], dataSize, decChannelLayout, channels, frame->format, frame->sample_rate, bytesPerSec);
+// 	uchar* destData = (uchar *)malloc(sizeof(uchar)* dataSize);
+// 	memset(destData, 0, dataSize);
+// 	memcpy(destData, frame->data[0], dataSize);
+
+	audio->init(frame->data[0], dataSize, channels, decChannelLayout, frame->format, frame->sample_rate);
 }
 
 void createVideoTitle(const AVSubtitle* subTitle, std::string* title)
@@ -101,8 +103,6 @@ VideoFrameImage::~VideoFrameImage()
 
 void VideoFrameImage::init(int format, int internalFormat, uchar* pixels, uint width, uint height)
 {
-	SAFE_FREE(_pixels);
-
 	this->setFormat(format);
 	this->setInternalFormat(internalFormat);
 	this->setPixels(pixels);
@@ -121,15 +121,13 @@ VideoAudioClip::~VideoAudioClip()
 
 }
 
-void VideoAudioClip::init(uchar* data, int frameSize, int channels, int64_t channelLayout, int format, int sampleRate, int bytesPerSec)
+void VideoAudioClip::init(uchar* data, int frameSize, int channels, int64_t channelLayout, int format, int sampleRat)
 {
 	this->setData(data);
 	this->setFrameSize(frameSize);
 	this->setChannelLayout(channelLayout);
 	this->setChannels(channels);
 	this->setFormat(format);
-	this->setSampleRate(sampleRate);
-	this->setBytesPerSec(bytesPerSec);
 }
 
 void VideoAudioClip::init(uchar* data, int frameSize)

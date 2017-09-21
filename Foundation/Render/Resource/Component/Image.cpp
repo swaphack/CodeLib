@@ -20,6 +20,7 @@ Image::~Image()
 
 void Image::setPixels(uchar * val)
 {
+	SAFE_FREE(_pixels);
 	_pixels = val;
 }
 

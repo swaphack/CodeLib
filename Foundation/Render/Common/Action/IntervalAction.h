@@ -17,13 +17,22 @@ namespace render
 		void setInterval(float duration);
 		// 获取动作时长
 		float getInterval();
+		// 重置
+		virtual void reset();
+		// 反转
+		virtual void reverse();
 	protected:
 		virtual void updateInterval(float duration);
 	protected:
 		// 总时长
-		float _totalInterval;
+		float _totalTime;
 		// 当前间隔
-		float _currentInterval;
+		float _currentTime;
+	};
+
+	class DelayAction : public IntervalAction
+	{
+
 	};
 
 	// 移动
@@ -36,13 +45,31 @@ namespace render
 		// 目标位置
 		void setDestination(float x, float y, float z = 0);
 		sys::Vector3 getDestination();
+		// 反转
+		virtual void reverse();
 	protected:
 		virtual void updateInterval(float duration);
 	protected:
-		// 初始位置
-		sys::Vector3 _src;
 		// 目标位置
 		sys::Vector3 _destination;
+		// 偏移总量
+		sys::Vector3 _offset;
+	};
+
+	class MoveByAction : public IntervalAction
+	{
+	public:
+		MoveByAction();
+		virtual ~MoveByAction();
+	public:
+		// 偏移
+		void setOffset(float x, float y, float z = 0);
+		sys::Vector3 getOffset();
+		// 反转
+		virtual void reverse();
+	protected:
+		virtual void updateInterval(float duration);
+	protected:
 		// 偏移总量
 		sys::Vector3 _offset;
 	};
@@ -57,14 +84,32 @@ namespace render
 		// 最终旋转角度
 		void setRotation(float x, float y, float z = 0);
 		sys::Vector3 getRotation();
+		// 反转
+		virtual void reverse();
 	protected:
 		virtual void updateInterval(float duration);
 	protected:
-		// 初始旋转度数
-		sys::Vector3 _src;
 		// 最终旋转角度
 		sys::Vector3 _rotation;
 		// 总改变量
+		sys::Vector3 _offset;
+	};
+
+	class RotateByAction : public IntervalAction
+	{
+	public:
+		RotateByAction();
+		virtual ~RotateByAction();
+	public:
+		// 偏移
+		void setOffset(float x, float y, float z = 0);
+		sys::Vector3 getOffset();
+		// 反转
+		virtual void reverse();
+	protected:
+		virtual void updateInterval(float duration);
+	protected:
+		// 偏移总量
 		sys::Vector3 _offset;
 	};
 
@@ -77,6 +122,8 @@ namespace render
 	public:
 		void setScale(float x, float y, float z = 0);
 		sys::Vector3 getScale();
+		// 反转
+		virtual void reverse();
 	protected:
 		virtual void updateInterval(float duration);
 	protected:
@@ -85,6 +132,23 @@ namespace render
 		// 最终缩放比例
 		sys::Vector3 _scale;
 		// 总改变量
+		sys::Vector3 _offset;
+	};
+
+	class ScaleByAction : public IntervalAction
+	{
+	public:
+		ScaleByAction();
+		virtual ~ScaleByAction();
+	public:
+		void setOffset(float x, float y, float z = 0);
+		sys::Vector3 getOffset();
+		// 反转
+		virtual void reverse();
+	protected:
+		virtual void updateInterval(float duration);
+	protected:
+		// 偏移总量
 		sys::Vector3 _offset;
 	};
 }

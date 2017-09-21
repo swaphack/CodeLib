@@ -19,18 +19,16 @@ static const char *FSBank_ErrorString(FSBANK_RESULT result)
         case FSBANK_ERR_FMOD:                           return "Internal error from FMOD sub-system.";
         case FSBANK_ERR_INITIALIZED:                    return "Already initialized.";
         case FSBANK_ERR_INVALID_FORMAT:                 return "The format of the source file is invalid.";
-        case FSBANK_ERR_INVALID_FORMAT_PCMBITS:         return "The format of the source file is invalid, the source bit formats (i.e. PCM8, PCM16, etc) must match for all sub-sounds";
         case FSBANK_ERR_INVALID_PARAM:                  return "An invalid parameter has been passed to this function.";
         case FSBANK_ERR_MEMORY:                         return "Run out of memory.";
         case FSBANK_ERR_UNINITIALIZED:                  return "Not initialized yet.";
         case FSBANK_ERR_WRITER_FORMAT:                  return "Chosen encode format is not supported by this FSB version.";
         case FSBANK_WARN_CANNOTLOOP:                    return "Source file is too short for seamless looping. Looping disabled.";
-        case FSBANK_WARN_IGNORED_OPTIMIZESAMPLERATE:    return "FSBANK_BUILD_OPTIMIZESAMPLERATE flag ignored: MP2 and MP3 formats, and the USEBASICHEADERS flag make this option irrelevant.";
         case FSBANK_WARN_IGNORED_FILTERHIGHFREQ:        return "FSBANK_BUILD_FILTERHIGHFREQ flag ignored: feature only supported by XMA format.";
         case FSBANK_WARN_IGNORED_DISABLESEEKING:        return "FSBANK_BUILD_DISABLESEEKING flag ignored: feature only supported by XMA format.";
-        case FSBANK_WARN_IGNORED_DONTINTERLEAVE:        return "FSBANK_BUILD_DONTINTERLEAVE flag ignored: feature only supported by VAG and GCADPCM formats.";
-        case FSBANK_ERR_ENCODER_FILE_NOTFOUND:          return "External encoder dynamic library not found";
-        case FSBANK_ERR_ENCODER_FILE_BAD:               return "External encoder dynamic library could not be loaded, possibly incorrect binary format, incorrect architecture, or file corruption";
+        case FSBANK_WARN_FORCED_DONTWRITENAMES:         return "FSBANK_BUILD_FSB5_DONTWRITENAMES flag forced: cannot write names when source is from memory.";
+        case FSBANK_ERR_ENCODER_FILE_NOTFOUND:          return "External encoder dynamic library not found.";
+        case FSBANK_ERR_ENCODER_FILE_BAD:               return "External encoder dynamic library could not be loaded, possibly incorrect binary format, incorrect architecture, or file corruption.";
         default:                                        return "Unknown error.";
     }
 }

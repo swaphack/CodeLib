@@ -875,6 +875,9 @@
     <ClInclude Include="..\..\Lib\include\mysql\mysql\psi\psi_memory.h">
       <Filter>mysql\mysql\psi</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Lib\include\fmod\studio\fmod_studio.hpp">
+      <Filter>fmod\studio</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Lib\include\sqlite\shell.c">

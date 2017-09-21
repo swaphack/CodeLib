@@ -16,7 +16,10 @@ namespace render
 		CtrlAudioSource();
 		virtual ~CtrlAudioSource();
 	public:
-		bool load(const std::string& filepath);
+		// 加载数据
+		bool loadData(const uchar* data);
+		// 加载文件数据
+		bool loadFromFile(const std::string& filepath);
 
 		void setMusicSpeed(float speed);
 		float getMusicSpeed();

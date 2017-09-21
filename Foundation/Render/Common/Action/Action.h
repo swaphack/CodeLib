@@ -5,9 +5,21 @@
 
 namespace render
 {
+#define CREATE_ACTION(ACTION_TYPE) createAction<ACTION_TYPE>()
+
+	template<typename T>
+	T* createAction()
+	{
+		T* temp = new T();
+
+		AUTO_RELEASE_OBJECT(temp);
+
+		return temp;
+	}
+
 	//class ActionManager;
 	// 动作接口
-	class Action : public SystemProtocol, public sys::ITimer
+	class Action : public sys::Object, public SystemProtocol, public sys::ITimer
 	{
 	public:
 		Action();

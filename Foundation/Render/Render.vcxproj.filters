@@ -219,6 +219,9 @@
     <ClCompile Include="Common\DrawNode\DrawNode.cpp">
       <Filter>Common\DrawNode</Filter>
     </ClCompile>
+    <ClCompile Include="Common\Action\ExtAction.cpp">
+      <Filter>Common\Action</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Common\GL\import.h">
@@ -596,9 +599,6 @@
     <ClInclude Include="3d\Map\Terrian.h">
       <Filter>3d\Map</Filter>
     </ClInclude>
-    <ClInclude Include="3d\Common\CastRay.h">
-      <Filter>3d\Common</Filter>
-    </ClInclude>
     <ClInclude Include="Common\Control\Media\CtrlMedia.h">
       <Filter>Common\Control\Media</Filter>
     </ClInclude>
@@ -640,6 +640,12 @@
     </ClInclude>
     <ClInclude Include="Common\GL\macros.h">
       <Filter>Common\GL</Filter>
+    </ClInclude>
+    <ClInclude Include="3d\Common\Ray.h">
+      <Filter>3d\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Action\ExtAction.h">
+      <Filter>Common\Action</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
