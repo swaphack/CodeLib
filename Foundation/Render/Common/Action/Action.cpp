@@ -22,5 +22,10 @@ bool Action::isEqualsTarget(const sys::Object* target)
 	return _target == target;
 }
 
+void Action::reset()
+{
+	this->start();
+}
+
 
 

@@ -24,7 +24,7 @@ void WndRender::show()
 	
 	//this->testText();
 
-	this->testCubeModel();
+	//this->testSphereModel();
 }
 
 void WndRender::testMoveImage()
@@ -32,7 +32,6 @@ void WndRender::testMoveImage()
 	CtrlImage* pImage = CREATE_NODE(CtrlImage);
 	pImage->setImagePath("Resource/Image/world.jpg", EIF_JPEG);
 	pImage->setPosition(512, 384, 0);
-	AUTO_RELEASE_OBJECT(pImage);
 	this->getCanvas()->getRoot()->addChild(pImage);
 
 	pImage->getTouchProxy()->addTouchDelegate(ETT_DOWN, this, TOUCH_DELEGATTE_SELECTOR(WndRender::onTouchBegin));
@@ -64,7 +63,7 @@ void WndRender::testClock()
 
 void WndRender::testCubeModel()
 {
-	int nCount = 1;
+	int nCount = 100;
 	for (int i = 0; i < nCount; i++)
 	{
 		ImageDefine imageDefine = { "Resource/Image/NeHe.png", EIF_PNG };
@@ -75,35 +74,65 @@ void WndRender::testCubeModel()
 		frame->setTextureWithRect(texture2D);
 
 		Cube* pModel = CREATE_NODE(Cube);
-		AUTO_RELEASE_OBJECT(pModel);
 		pModel->setPosition(i % 200, i % 200, i % 200);
 		pModel->setTexFrame(frame);
 		pModel->setVolume(256.0f, 256.0f, 256.0f);
-		pModel->setRotation(0, 0, 10);
+		//pModel->setRotation(0, 0, 10);
 		pModel->getMatrial()->setShiness(1.0f);
 		pModel->getMatrial()->setAmbient(255, 255, 255, 255);
 		pModel->getMatrial()->setDiffuse(255, 255, 255, 255);
-		pModel->getMatrial()->setSpecular(255, 255, 255, 255);
+		pModel->getMatrial()->setSpecular(0, 0, 0, 255);
 		pModel->getMatrial()->setEmisiion(255, 255, 255, 255);
 		this->getCanvas()->getRoot()->addChild(pModel);
 
 		float interval = 2;
-		float rx = 360;
-		float ry = 360;
-		float rz = 360;
-		RotateByAction* pRotateToAction = CREATE_ACTION(RotateByAction);
-		pRotateToAction->setOffset(rx, ry, rz);
-		pRotateToAction->setInterval(interval);
-		pModel->getActionProxy()->runAction(pRotateToAction);
+		float rx = 180;
+		float ry = 180;
+		float rz = 45;
+		RotateByAction* pRotateByAction = CREATE_ACTION(RotateByAction);
+		pRotateByAction->setRotation(rx, ry, rz);
+		pRotateByAction->setDuration(interval);
+
+		MoveToAction* pMoveToAction = CREATE_ACTION(MoveToAction);
+		pMoveToAction->setDuration(interval);
+		pMoveToAction->setPosition(200, 200, 20);
+
+		ScaleByAction* pScaleByAction = CREATE_ACTION(ScaleByAction);
+		pScaleByAction->setDuration(interval);
+		pScaleByAction->setScale(1.5f, 1.5f, 1.5f);
+
+		ScaleByAction* pScaleByAction2 = CREATE_ACTION(ScaleByAction);
+		pScaleByAction2->setDuration(interval);
+		pScaleByAction2->setScale(-1.5f, -1.5f, -1.5f);
+
+		SequenceAction* pSequenece = CREATE_ACTION(SequenceAction);
+		pSequenece->addAction(pScaleByAction);
+		pSequenece->addAction(pScaleByAction2);
+
+		RepeateForeverAction* pRepeateAction = CREATE_ACTION(RepeateForeverAction);
+		pRepeateAction->setAction(pSequenece);
+
+		SpawnAction* pSpawnAction = CREATE_ACTION(SpawnAction);
+		pSpawnAction->addAction(pRepeateAction);
+		pSpawnAction->addAction(pMoveToAction);
+
+		pModel->getActionProxy()->runAction(pRepeateAction);
 	}
 
 }
 
 void WndRender::testSphereModel()
 {
+	ImageDefine imageDefine = { "Resource/Image/NeHe.png", EIF_PNG };
+	Texture2D* texture2D = G_TEXTURE_CACHE->getTexture2D(imageDefine);
+
+	TexFrame* frame = new TexFrame();
+	AUTO_RELEASE_OBJECT(frame);
+	frame->setTextureWithRect(texture2D);
+
 	render::Sphere* pSphere = CREATE_NODE(render::Sphere);
-	AUTO_RELEASE_OBJECT(pSphere);
 	pSphere->setRadius(512);
+	pSphere->setTexFrame(frame);
 	this->getCanvas()->getRoot()->addChild(pSphere);
 
 	int count = 1024;
@@ -113,7 +142,7 @@ void WndRender::testSphereModel()
 	float rz = 0;
 	RotateToAction* pRotateToAction = CREATE_ACTION(RotateToAction);
 	pRotateToAction->setRotation(rx * count, ry * count, rz * count);
-	pRotateToAction->setInterval(interval * count);
+	pRotateToAction->setDuration(interval * count);
 	pSphere->getActionProxy()->runAction(pRotateToAction);
 }
 
@@ -191,7 +220,6 @@ void WndRender::testParticle()
 	node->setCount(100);
 	node->setScale(2, 1, 1);
 	node->start();
-	AUTO_RELEASE_OBJECT(node);
 	this->getCanvas()->getRoot()->addChild(node);
 }
 
@@ -550,7 +578,7 @@ void WndRender::testModel()
 	float rz = 360;
 	RotateToAction* pRotateToAction = CREATE_ACTION(RotateToAction);
 	pRotateToAction->setRotation(rx * count, ry * count, rz * count);
-	pRotateToAction->setInterval(interval * count);
+	pRotateToAction->setDuration(interval * count);
 	pModel->getActionProxy()->runAction(pRotateToAction);
 
 	//this->getCanvas()->getCamera()->lookAt(pModel->getPosition());

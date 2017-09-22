@@ -26,8 +26,12 @@ namespace render
 		virtual ~Action();
 	public:
 		virtual void update(float duration) {}
+		// 重置
+		virtual void reset();
+		// 反转
+		virtual void reverse() {}
 		// 设置动作执行目标
-		void setTarget(sys::Object* target);		
+		virtual void setTarget(sys::Object* target);
 		// 判断动作执行对象是否相同
 		bool isEqualsTarget(const sys::Object* target);
 	protected:

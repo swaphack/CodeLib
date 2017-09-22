@@ -16,13 +16,20 @@ namespace render
 	public:
 		int getCount();
 		void setCount(int count);
-		void setAction(IntervalAction* action);
+
+		void setAction(Action* action);
+		virtual void setTarget(sys::Object* target);
 	protected:
+		// 重置
+		virtual void reset();
+		// 反转
+		virtual void reverse();
+
 		virtual void update(float duration);
 	private:
 		int _count;
 		int _totalCount;
-		IntervalAction* _action;
+		Action* _action;
 	};
 
 	// 永远执行下去
@@ -32,11 +39,18 @@ namespace render
 		RepeateForeverAction();
 		virtual ~RepeateForeverAction();
 	public:
-		void setAction(IntervalAction* action);
+		void setAction(Action* action);
+		virtual void setTarget(sys::Object* target);
+		
 	protected:
+		// 重置
+		virtual void reset();
+		// 反转
+		virtual void reverse();
+
 		virtual void update(float duration);
 	private:
-		IntervalAction* _action;
+		Action* _action;
 	};
 
 	// 顺序执行动作
@@ -49,10 +63,17 @@ namespace render
 		void addAction(Action* action);
 		void removeAction(Action* action);
 		void removeAllActions();
+		virtual void setTarget(sys::Object* target);
 	protected:
+		// 重置
+		virtual void reset();
+		// 反转
+		virtual void reverse();
+
 		virtual void update(float duration);
 	private:
 		std::list<Action*> _actions;
+		std::list<Action*> _removeActions;
 	};
 
 	// 并行执行动作
@@ -65,10 +86,17 @@ namespace render
 		void addAction(Action* action);
 		void removeAction(Action* action);
 		void removeAllActions();
+		virtual void setTarget(sys::Object* target);
 	protected:
+		// 重置
+		virtual void reset();
+		// 反转
+		virtual void reverse();
+
 		virtual void update(float duration);
 	private:
 		std::list<Action*> _actions;
+		std::list<Action*> _removeActions;
 	};
 
 	// 无参数调用函数
