@@ -1,6 +1,6 @@
 #include "Camera.h"
 
-#include "../GL/import.h"
+#include "ext-config.h"
 #include "../Tool/import.h"
 
 using namespace render;

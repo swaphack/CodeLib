@@ -70,6 +70,9 @@
     <Filter Include="Command">
       <UniqueIdentifier>{2290d14d-0653-4d28-a88c-97aa2e5f36ff}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Concurrent">
+      <UniqueIdentifier>{2a07eeb9-88bb-4785-95c1-9e07167b7085}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Base\File.h">
@@ -343,9 +346,6 @@
     <ClInclude Include="Http\import.h">
       <Filter>Http</Filter>
     </ClInclude>
-    <ClInclude Include="Http\macros.h">
-      <Filter>Http</Filter>
-    </ClInclude>
     <ClInclude Include="Http\HttpDocument.h">
       <Filter>Http</Filter>
     </ClInclude>
@@ -486,6 +486,21 @@
     </ClInclude>
     <ClInclude Include="Math\Range.h">
       <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Command\import.h">
+      <Filter>Command</Filter>
+    </ClInclude>
+    <ClInclude Include="Concurrent\ConcurrentFile.h">
+      <Filter>Concurrent</Filter>
+    </ClInclude>
+    <ClInclude Include="Concurrent\import.h">
+      <Filter>Concurrent</Filter>
+    </ClInclude>
+    <ClInclude Include="Concurrent\Concurrents.h">
+      <Filter>Concurrent</Filter>
+    </ClInclude>
+    <ClInclude Include="Concurrent\Concurrent.h">
+      <Filter>Concurrent</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -728,6 +743,12 @@
     </ClCompile>
     <ClCompile Include="Device\ConsoleListener.cpp">
       <Filter>Device</Filter>
+    </ClCompile>
+    <ClCompile Include="Concurrent\ConcurrentFile.cpp">
+      <Filter>Concurrent</Filter>
+    </ClCompile>
+    <ClCompile Include="Concurrent\Concurrent.cpp">
+      <Filter>Concurrent</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

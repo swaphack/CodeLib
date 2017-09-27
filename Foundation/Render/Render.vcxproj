@@ -43,7 +43,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>../System/;../../Lib/include/;../../Lib/include/freetype/;../Text/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../System/;../../Lib/include/;../../Lib/include/freetype/;../Text/;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <BrowseInformation>true</BrowseInformation>
     </ClCompile>
     <Link>
@@ -70,7 +70,20 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="3d\Common\CtrlModel.cpp" />
+    <ClCompile Include="2d\Animation\CtrlAnimation.cpp" />
+    <ClCompile Include="2d\Animation\CtrlMedia.cpp" />
+    <ClCompile Include="2d\Animation\CtrlParticleSystem.cpp" />
+    <ClCompile Include="2d\Animation\CtrlSequenceFrame.cpp" />
+    <ClCompile Include="2d\Animation\Particle.cpp" />
+    <ClCompile Include="2d\UI\CtrlEditBox.cpp" />
+    <ClCompile Include="2d\UI\CtrlEditLabel.cpp" />
+    <ClCompile Include="2d\UI\CtrlFrame.cpp" />
+    <ClCompile Include="2d\UI\CtrlImage.cpp" />
+    <ClCompile Include="2d\UI\CtrlMask.cpp" />
+    <ClCompile Include="2d\UI\CtrlScissor.cpp" />
+    <ClCompile Include="2d\UI\CtrlScrollView.cpp" />
+    <ClCompile Include="2d\UI\CtrlText.cpp" />
+    <ClCompile Include="3d\Common\Model.cpp" />
     <ClCompile Include="3d\Common\ModelFile.cpp" />
     <ClCompile Include="3d\Environment\ClipPlane.cpp" />
     <ClCompile Include="3d\Environment\Stencil.cpp" />
@@ -91,21 +104,9 @@
     <ClCompile Include="Common\Audio\CtrlAudioListener.cpp" />
     <ClCompile Include="Common\Audio\CtrlAudioSource.cpp" />
     <ClCompile Include="Common\Audio\macros.cpp" />
-    <ClCompile Include="Common\Control\Dynamic\CtrlAnimation.cpp" />
-    <ClCompile Include="Common\Control\Dynamic\CtrlParticleSystem.cpp" />
-    <ClCompile Include="Common\Control\Dynamic\CtrlSequenceFrame.cpp" />
-    <ClCompile Include="Common\Control\Dynamic\Particle.cpp" />
-    <ClCompile Include="Common\Control\Media\CtrlMedia.cpp" />
-    <ClCompile Include="Common\Control\Static\CtrlEditBox.cpp" />
-    <ClCompile Include="Common\Control\Static\CtrlEditLabel.cpp" />
-    <ClCompile Include="Common\Control\Static\CtrlFrame.cpp" />
-    <ClCompile Include="Common\Control\Static\CtrlImage.cpp" />
-    <ClCompile Include="Common\Control\Static\CtrlMask.cpp" />
-    <ClCompile Include="Common\Control\Static\CtrlScrollView.cpp" />
-    <ClCompile Include="Common\Control\Static\CtrlText.cpp" />
-    <ClCompile Include="Common\Control\Static\CtrlScissor.cpp" />
     <ClCompile Include="Common\DrawNode\DrawNode.cpp" />
     <ClCompile Include="Common\GL\protocol_common.cpp" />
+    <ClCompile Include="Common\GL\shape_common.cpp" />
     <ClCompile Include="Common\Keyboard\KeyboardManager.cpp" />
     <ClCompile Include="Common\Node\Animation.cpp" />
     <ClCompile Include="Common\Node\ColorNode.cpp" />
@@ -125,17 +126,16 @@
     <ClCompile Include="Common\View\View.cpp" />
     <ClCompile Include="Common\View\ViewConfig.cpp" />
     <ClCompile Include="Common\XControl\Pixel.cpp" />
-    <ClCompile Include="Engine\OpenGL\DCDraw.cpp" />
-    <ClCompile Include="Engine\OpenGL\DCMask.cpp" />
-    <ClCompile Include="Engine\OpenGL\DCMatrix.cpp" />
-    <ClCompile Include="Engine\OpenGL\DCSpace.cpp" />
-    <ClCompile Include="Engine\OpenGL\DCTexture.cpp" />
-    <ClCompile Include="Engine\OpenGL\DCTextureBatch.cpp" />
     <ClCompile Include="Graphic\Command\DrawCommand.cpp" />
     <ClCompile Include="Graphic\Command\DrawCommander.cpp" />
     <ClCompile Include="Graphic\Command\DrawCommandList.cpp" />
     <ClCompile Include="Graphic\Command\GUID.cpp" />
-    <ClCompile Include="Graphic\Struct\shape_common.cpp" />
+    <ClCompile Include="Graphic\DCSample\DCDraw.cpp" />
+    <ClCompile Include="Graphic\DCSample\DCMask.cpp" />
+    <ClCompile Include="Graphic\DCSample\DCMatrix.cpp" />
+    <ClCompile Include="Graphic\DCSample\DCSpace.cpp" />
+    <ClCompile Include="Graphic\DCSample\DCTexture.cpp" />
+    <ClCompile Include="Graphic\DCSample\DCTextureBatch.cpp" />
     <ClCompile Include="Platform\Windows\GLFrame.cpp" />
     <ClCompile Include="RenderApplication.cpp" />
     <ClCompile Include="Resource\Component\Audio.cpp" />
@@ -147,8 +147,28 @@
     <ClCompile Include="Resource\Paser\PNGImage.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="2d\Animation\CtrlAnimation.h" />
+    <ClInclude Include="2d\Animation\CtrlFluid.h" />
+    <ClInclude Include="2d\Animation\CtrlMedia.h" />
+    <ClInclude Include="2d\Animation\CtrlParticleSystem.h" />
+    <ClInclude Include="2d\Animation\CtrlSequenceFrame.h" />
+    <ClInclude Include="2d\Animation\import.h" />
+    <ClInclude Include="2d\Animation\macros.h" />
+    <ClInclude Include="2d\Animation\Particle.h" />
+    <ClInclude Include="2d\ctrl_common.h" />
+    <ClInclude Include="2d\import.h" />
+    <ClInclude Include="2d\UI\CtrlEditBox.h" />
+    <ClInclude Include="2d\UI\CtrlEditLabel.h" />
+    <ClInclude Include="2d\UI\CtrlFrame.h" />
+    <ClInclude Include="2d\UI\CtrlImage.h" />
+    <ClInclude Include="2d\UI\CtrlMask.h" />
+    <ClInclude Include="2d\UI\CtrlScissor.h" />
+    <ClInclude Include="2d\UI\CtrlScrollView.h" />
+    <ClInclude Include="2d\UI\CtrlText.h" />
+    <ClInclude Include="2d\UI\import.h" />
+    <ClInclude Include="2d\UI\macros.h" />
     <ClInclude Include="3d\Common\Ray.h" />
-    <ClInclude Include="3d\Common\CtrlModel.h" />
+    <ClInclude Include="3d\Common\Model.h" />
     <ClInclude Include="3d\Common\import.h" />
     <ClInclude Include="3d\Common\ModelFile.h" />
     <ClInclude Include="3d\Environment\ClipPlane.h" />
@@ -179,35 +199,15 @@
     <ClInclude Include="Common\Audio\CtrlAudioSpeaker.h" />
     <ClInclude Include="Common\Audio\import.h" />
     <ClInclude Include="Common\Audio\macros.h" />
-    <ClInclude Include="Common\Control\Media\CtrlMedia.h" />
-    <ClInclude Include="Common\Control\Media\import.h" />
-    <ClInclude Include="Common\Control\Media\macros.h" />
-    <ClInclude Include="Common\Control\Static\CtrlScissor.h" />
-    <ClInclude Include="Common\Control\Static\CtrlScrollView.h" />
     <ClInclude Include="Common\DrawNode\DrawNode.h" />
     <ClInclude Include="Common\DrawNode\import.h" />
+    <ClInclude Include="Common\GL\pointer_common.h" />
+    <ClInclude Include="Common\GL\shape_common.h" />
+    <ClInclude Include="Common\GL\texture_common.h" />
     <ClInclude Include="Common\import.h" />
     <ClInclude Include="Common\macros.h" />
-    <ClInclude Include="Common\Control\ctrl_common.h" />
-    <ClInclude Include="Common\Control\Dynamic\CtrlAnimation.h" />
-    <ClInclude Include="Common\Control\Dynamic\CtrlFluid.h" />
-    <ClInclude Include="Common\Control\Dynamic\CtrlParticleSystem.h" />
-    <ClInclude Include="Common\Control\Dynamic\CtrlSequenceFrame.h" />
-    <ClInclude Include="Common\Control\Dynamic\import.h" />
-    <ClInclude Include="Common\Control\Dynamic\macros.h" />
-    <ClInclude Include="Common\Control\Dynamic\Particle.h" />
-    <ClInclude Include="Common\Control\import.h" />
-    <ClInclude Include="Common\Control\Static\CtrlEditBox.h" />
-    <ClInclude Include="Common\Control\Static\CtrlEditLabel.h" />
-    <ClInclude Include="Common\Control\Static\CtrlFrame.h" />
-    <ClInclude Include="Common\Control\Static\CtrlImage.h" />
-    <ClInclude Include="Common\Control\Static\CtrlMask.h" />
-    <ClInclude Include="Common\Control\Static\CtrlText.h" />
-    <ClInclude Include="Common\Control\Static\import.h" />
-    <ClInclude Include="Common\Control\Static\macros.h" />
     <ClInclude Include="Common\GL\import.h" />
     <ClInclude Include="Common\GL\enum_common.h" />
-    <ClInclude Include="Common\GL\macros.h" />
     <ClInclude Include="Common\GL\protocol_common.h" />
     <ClInclude Include="Common\Keyboard\import.h" />
     <ClInclude Include="Common\Keyboard\KeyboardManager.h" />
@@ -219,7 +219,6 @@
     <ClInclude Include="Common\Scene\import.h" />
     <ClInclude Include="Common\Scene\Scene.h" />
     <ClInclude Include="Common\Shader\import.h" />
-    <ClInclude Include="Common\Shader\macros.h" />
     <ClInclude Include="Common\Shader\Material.h" />
     <ClInclude Include="Common\Shader\Mesh.h" />
     <ClInclude Include="Common\Shader\TexFrame.h" />
@@ -239,11 +238,7 @@
     <ClInclude Include="Common\View\ViewConfig.h" />
     <ClInclude Include="Common\XControl\Pixel.h" />
     <ClInclude Include="Common\XControl\import.h" />
-    <ClInclude Include="Engine\import.h" />
-    <ClInclude Include="Engine\OpenGL\DCEnum.h" />
-    <ClInclude Include="Engine\OpenGL\import.h" />
-    <ClInclude Include="Engine\OpenGL\macros.h" />
-    <ClInclude Include="Engine\OpenGL\opengl.h" />
+    <ClInclude Include="ext-config.h" />
     <ClInclude Include="Graphic\Command\GUID.h" />
     <ClInclude Include="Graphic\Command\DrawCommandList.h" />
     <ClInclude Include="Graphic\Command\DrawCommand.h" />
@@ -259,10 +254,6 @@
     <ClInclude Include="Graphic\DCSample\import.h" />
     <ClInclude Include="Graphic\DCSample\macros.h" />
     <ClInclude Include="Graphic\import.h" />
-    <ClInclude Include="Graphic\Struct\import.h" />
-    <ClInclude Include="Graphic\Struct\pointer_common.h" />
-    <ClInclude Include="Graphic\Struct\shape_common.h" />
-    <ClInclude Include="Graphic\Struct\texture_common.h" />
     <ClInclude Include="Platform\import.h" />
     <ClInclude Include="Platform\Windows\GLFrame.h" />
     <ClInclude Include="Platform\Windows\import.h" />

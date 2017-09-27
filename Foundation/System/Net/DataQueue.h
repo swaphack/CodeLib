@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../Net/NetData.h"
+#include "Net/NetData.h"
 
 #include <queue>
 

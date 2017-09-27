@@ -1,7 +1,7 @@
 #include "HttpCommand.h"
 
 #include "HttpTime.h"
-#include "../Type/import.h"
+#include "Type/import.h"
 
 using namespace sys;
 

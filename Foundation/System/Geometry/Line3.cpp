@@ -1,5 +1,5 @@
 #include "Line3.h"
-#include "../Collider/import.h"
+#include "Collider/import.h"
 
 using namespace sys;
 

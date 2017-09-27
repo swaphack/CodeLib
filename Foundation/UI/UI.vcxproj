@@ -44,7 +44,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>../System/;../Render/;../Text/;../../Lib/include/;../../Lib/include/freetype/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../System/;../Render/;../Text/;../../Lib/include/;../../Lib/include/freetype/;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <BrowseInformation>true</BrowseInformation>
     </ClCompile>
     <Link>
@@ -71,21 +71,18 @@
   <ItemGroup>
     <ClInclude Include="Display\Display.h" />
     <ClInclude Include="Display\import.h" />
-    <ClInclude Include="Display\macros.h" />
     <ClInclude Include="File\import.h" />
     <ClInclude Include="File\Load\ImageLoader.h" />
     <ClInclude Include="File\Load\import.h" />
     <ClInclude Include="File\Load\LayoutItemLoader.h" />
     <ClInclude Include="File\Load\LayoutLoader.h" />
-    <ClInclude Include="File\Load\macros.h" />
+    <ClInclude Include="File\Load\define.h" />
     <ClInclude Include="File\Load\NodeLoader.h" />
     <ClInclude Include="File\Load\TextLoader.h" />
-    <ClInclude Include="File\macros.h" />
     <ClInclude Include="File\Parse\IElement.h" />
     <ClInclude Include="File\Parse\import.h" />
     <ClInclude Include="File\Parse\LayoutItemParser.h" />
     <ClInclude Include="File\Parse\WidgetParser.h" />
-    <ClInclude Include="File\Parse\macros.h" />
     <ClInclude Include="File\Parse\WidgetProperty.h" />
     <ClInclude Include="File\UIProxy.h" />
     <ClInclude Include="Layout\import.h" />
@@ -93,10 +90,9 @@
     <ClInclude Include="Layout\LayoutItem.h" />
     <ClInclude Include="Layout\LayoutSpacerItem.h" />
     <ClInclude Include="Layout\LayoutWidgetItem.h" />
-    <ClInclude Include="Layout\macros.h" />
     <ClInclude Include="Layout\SizePolicy.h" />
-    <ClInclude Include="ui.h" />
     <ClInclude Include="macros.h" />
+    <ClInclude Include="ui.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Display\Display.cpp" />

@@ -1,5 +1,5 @@
-
 #include "JPEGImage.h"
+#include "ext-config.h"
 
 using namespace render;
 

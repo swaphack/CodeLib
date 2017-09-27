@@ -44,6 +44,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <BrowseInformation>true</BrowseInformation>
+      <AdditionalIncludeDirectories>$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -93,6 +94,11 @@
     <ClInclude Include="Collider\OBB.h" />
     <ClInclude Include="Command\CommandLine.h" />
     <ClInclude Include="Command\CommandParser.h" />
+    <ClInclude Include="Command\import.h" />
+    <ClInclude Include="Concurrent\ConcurrentFile.h" />
+    <ClInclude Include="Concurrent\Concurrent.h" />
+    <ClInclude Include="Concurrent\Concurrents.h" />
+    <ClInclude Include="Concurrent\import.h" />
     <ClInclude Include="DataBase\DataRecord.h" />
     <ClInclude Include="DataBase\DataSheet.h" />
     <ClInclude Include="DataBase\IDataBase.h" />
@@ -137,7 +143,6 @@
     <ClInclude Include="Http\HttpResponse.h" />
     <ClInclude Include="Http\HttpTime.h" />
     <ClInclude Include="Http\import.h" />
-    <ClInclude Include="Http\macros.h" />
     <ClInclude Include="Math\Color.h" />
     <ClInclude Include="Math\Equation.h" />
     <ClInclude Include="Math\import.h" />
@@ -222,6 +227,8 @@
     <ClCompile Include="Collider\OBB.cpp" />
     <ClCompile Include="Command\CommandLine.cpp" />
     <ClCompile Include="Command\CommandParser.cpp" />
+    <ClCompile Include="Concurrent\ConcurrentFile.cpp" />
+    <ClCompile Include="Concurrent\Concurrent.cpp" />
     <ClCompile Include="DataBase\DataRecord.cpp" />
     <ClCompile Include="DataBase\DataSheet.cpp" />
     <ClCompile Include="Device\Console.cpp" />

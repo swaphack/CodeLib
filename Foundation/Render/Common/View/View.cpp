@@ -1,6 +1,5 @@
 #include "View.h"
-
-#include "../GL/import.h"
+#include "ext-config.h"
 
 using namespace render;
 

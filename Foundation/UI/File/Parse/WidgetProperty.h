@@ -1,6 +1,7 @@
 #pragma once
 
-#include "macros.h"
+#include "system.h"
+#include "render.h"
 #include <map>
 #include <string>
 

@@ -107,7 +107,7 @@ Sphere::~Sphere()
 
 void Sphere::draw()
 {
-	CtrlModel::draw();
+	Model::draw();
 
 	const sys::Volume& volume = Tool::getGLViewSize();
 	const sys::Vector3& scale = getScale();
@@ -139,7 +139,7 @@ float Sphere::getRadius()
 
 void Sphere::initSelf()
 {
-	CtrlModel::initSelf();
+	Model::initSelf();
 
 	_obRadius = _radius / Tool::getGLViewSize().width;
 }

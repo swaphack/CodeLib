@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../Framework/import.h"
-#include "../Base/import.h"
+#include "Framework/import.h"
+#include "Base/import.h"
 
 
 #if PLATFORM_TARGET == EPT_WINDOWS

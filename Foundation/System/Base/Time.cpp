@@ -1,5 +1,5 @@
 #include "Time.h"
-#include "../Math/import.h"
+#include "Math/import.h"
 
 using namespace sys;
 

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../Node/ColorNode.h"
+#include "ext-config.h"
 
 namespace render
 {

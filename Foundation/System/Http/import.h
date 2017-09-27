@@ -1,7 +1,5 @@
 #pragma once
 
-#include "macros.h"
-
 #include "HttpConstant.h"
 #include "HttpTime.h"
 

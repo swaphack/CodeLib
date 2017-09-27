@@ -3,7 +3,7 @@
 #include <string>
 #include "HttpCommand.h"
 #include "HttpDocument.h"
-#include "../Resource/import.h"
+#include "Resource/import.h"
 
 namespace sys
 {

@@ -5,7 +5,7 @@
 namespace render
 {
 	// 地形模型
-	class Terrian : public CtrlModel
+	class Terrian : public Model
 	{
 	public:
 		Terrian();

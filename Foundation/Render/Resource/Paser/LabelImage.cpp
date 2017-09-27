@@ -1,6 +1,6 @@
 #include "LabelImage.h"
 #include "system.h"
-
+#include "ext-config.h"
 
 #define FREETYPE_PIXEL_UNIT 64
 #define RGBA_PIXEL_UNIT 4

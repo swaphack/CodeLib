@@ -1,12 +1,18 @@
 #pragma once
 
 #include "system.h"
-#include "macros.h"
 #include <map>
 
 namespace web
 {
 	#define WAIT_LISTEN_COUNT 1024
+
+	class WebServer;
+	class WebClient;
+	class HttpActivityListener;
+	class PacketActivityListener;
+	class ListenerPool;
+	class Sessions;
 
 	// web 应用服务器
 	class WebApplication : public sys::Application

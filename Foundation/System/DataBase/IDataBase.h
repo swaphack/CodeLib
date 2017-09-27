@@ -2,7 +2,7 @@
 
 #include "IDataSheet.h"
 #include "IDBString.h"
-#include "../Security/Author.h"
+#include "Security/Author.h"
 
 namespace sys
 {

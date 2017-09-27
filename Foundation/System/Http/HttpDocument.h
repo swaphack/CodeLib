@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../Stream/import.h"
+#include "Stream/import.h"
 
 #include <string>
 #include <vector>

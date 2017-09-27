@@ -12,11 +12,11 @@ namespace render
 	};
 
 	// 3d模型
-	class Model
+	class Model3D
 	{
 	public:
-		Model();
-		virtual ~Model();
+		Model3D();
+		virtual ~Model3D();
 	public:
 		// 获取图像格式
 		virtual ModelResourceFormat getModelFormat() { return EMRF_NONE; }

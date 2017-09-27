@@ -1,5 +1,5 @@
 #include "FFmpeg.h"
-
+#include "ext-config.h"
 #include <string>
 
 using namespace render;

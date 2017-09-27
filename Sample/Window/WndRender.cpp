@@ -7,7 +7,7 @@ using namespace ui;
 WndRender::WndRender()
 {
 	this->init();
-	this->getCanvas()->setDimensions(render::ED_3D);
+	this->getCanvas()->setDimensions(render::ED_2D);
 }
 
 WndRender::~WndRender()
@@ -23,8 +23,7 @@ void WndRender::show()
 	
 	
 	//this->testText();
-
-	//this->testSphereModel();
+	this->testConcurrent();
 }
 
 void WndRender::testMoveImage()
@@ -190,10 +189,9 @@ void WndRender::testMask()
 void WndRender::testMedia()
 {
 	CtrlMedia* pMedia = CREATE_NODE(CtrlMedia);
-	pMedia->setVolume(400, 300);
+	pMedia->setVolume(Tool::getGLViewWidth(), Tool::getGLViewHeight());
 	pMedia->setMediaPath("Resource/Video/1.flv", false);
 	pMedia->setAnchorPoint(0, 0);
-	pMedia->setPosition(0, 384, 0.0f);
 	pMedia->start();
 	this->getCanvas()->getRoot()->addChild(pMedia);
 }
@@ -559,7 +557,7 @@ void WndRender::onKeyBoardRole(sys::Object* object, sys::BoardKey key, sys::Butt
 
 void WndRender::testModel()
 {
-	CtrlModel* pModel = ModelFile::getInstance()->load("Resource/3DModel/Test.xml");
+	Model* pModel = ModelFile::getInstance()->load("Resource/3DModel/Test.xml");
 
 	this->getCanvas()->getRoot()->addChild(pModel);
 
@@ -657,4 +655,44 @@ void WndRender::testDrawNode()
 		pDrawNode->appendPoint(Vector3(points[i]));
 	}
 	this->getCanvas()->getRoot()->addChild(pDrawNode);
+}
+
+void WndRender::testConcurrent()
+{
+	ConcurrentFile* pFile = new ConcurrentFile("F:/1.txt");
+
+	Thread th0;
+	th0.start([pFile](){
+		int count = 10;
+		while (count > 0)
+		{
+			char* strText = "afdafdsss";
+			pFile->write(strText, strlen(strText));
+			count--;
+		}
+	});
+	th0.detach();
+	Thread th1;
+	th1.start([pFile](){
+		int count = 10;
+		int offset = 0;
+		int size = 10;
+		char strText[10] = { 0 };
+
+		while (count > 0)
+		{
+			memset(strText, 0, sizeof(strText));
+			pFile->read(strText, offset, size);
+			if (strlen(strText) == 0)
+			{
+				continue;
+			}
+			printf("%s\n", strText);
+			offset += size;
+			count--;
+		}
+
+		pFile->finish();
+	});
+	th1.detach();
 }

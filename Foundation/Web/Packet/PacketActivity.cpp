@@ -1,6 +1,8 @@
 #include "PacketActivity.h"
 #include "PacketRecvHandler.h"
-#include "../WebApp/WebApplication.h"
+#include "WebApp/WebApplication.h"
+#include "PacketActivityListener.h"
+#include "PacketHeader.h"
 
 #include <cstring>
 

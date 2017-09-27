@@ -1,5 +1,5 @@
 #include "CommandParser.h"
-#include "../Type/String.h"
+#include "Type/String.h"
 
 using namespace sys;
 

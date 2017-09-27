@@ -2,4 +2,4 @@
 
 #include "system.h"
 #include "../Command/DrawCommand.h"
-#include "../Struct/import.h"
+#include "../../Common/import.h"

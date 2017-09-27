@@ -1,5 +1,5 @@
 #include "Scene.h"
-
+#include "ext-config.h"
 using namespace render;
 
 

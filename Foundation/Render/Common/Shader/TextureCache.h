@@ -1,12 +1,19 @@
 #pragma once
 
 #include "system.h"
-#include "Texture.h"
 #include <map>
 #include <string>
 
+#include "Resource/Config/ImageDefine.h"
+#include "Resource/Config/TextDefine.h"
+
 namespace render
 {
+	struct ImageDefine;
+	struct TextDefine;
+	class Texture;
+	class Texture2D;
+
 	// Œ∆¿Ì≥ÿ
 	class TextureCache
 	{

@@ -16,6 +16,8 @@ namespace ui
 		// 水平布局
 		ELD_VERTICAL,
 	};
+
+	class Layout;
 	/**
 	*	界面显示
 	*/

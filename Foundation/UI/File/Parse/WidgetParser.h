@@ -1,6 +1,7 @@
 #pragma once
 
 #include "IElement.h"
+#include "macros.h"
 
 namespace ui
 {

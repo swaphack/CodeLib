@@ -39,6 +39,8 @@ public:
 	void testUI();
 
 	void testDrawNode();
+
+	void testConcurrent();
 protected:
 	void onTouchBegin(sys::Object* object, float x, float y);
 	void onTouchMove(sys::Object* object, float x, float y);

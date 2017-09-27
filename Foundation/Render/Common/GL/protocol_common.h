@@ -1,10 +1,9 @@
 #pragma once
 
-#include "macros.h"
-
 #include "system.h"
 
 #include "enum_common.h"
+#include "texture_common.h"
 
 // ½Ó¿Ú
 namespace render

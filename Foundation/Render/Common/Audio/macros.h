@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../Node/Node.h"
+#include "ext-config.h"
 
 
 #define AUDIO_DO_FUNC(Target, FuncName, ...) \

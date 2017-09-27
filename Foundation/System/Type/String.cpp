@@ -4,7 +4,7 @@
 #include <cstdlib>
 #include <cstring>
 #include <cstdarg>
-#include "../Stream/import.h"
+#include "Stream/import.h"
 #include <cctype>
 
 #if _MSC_VER

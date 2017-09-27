@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Common/import.h"
+#include "Graphic/import.h"
 
 namespace render
 {

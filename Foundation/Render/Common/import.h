@@ -3,7 +3,6 @@
 #include "Tool/import.h"
 #include "GL/import.h"
 #include "Node/import.h"
-#include "Control/import.h"
 #include "Action/import.h"
 #include "Shader/import.h"
 #include "View/import.h"

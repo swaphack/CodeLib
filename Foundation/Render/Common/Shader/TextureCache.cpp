@@ -1,4 +1,8 @@
 #include "TextureCache.h"
+#include "Texture.h"
+
+#include "Resource/Loader/Loader.h"
+#include "Resource/Paser/import.h"
 
 using namespace render;
 

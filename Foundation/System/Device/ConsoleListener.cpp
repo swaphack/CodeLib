@@ -1,5 +1,5 @@
 #include "ConsoleListener.h"
-#include "../Thread/Thread.h"
+#include "Thread/Thread.h"
 #include "Console.h"
 
 #include <thread>

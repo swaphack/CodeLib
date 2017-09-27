@@ -1,7 +1,7 @@
 #pragma once
 
-#include "macros.h"
 #include "SizePolicy.h"
+#include "macros.h"
 
 namespace ui
 {

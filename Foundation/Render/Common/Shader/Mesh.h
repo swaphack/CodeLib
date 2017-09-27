@@ -1,6 +1,8 @@
 #pragma once
 
-#include "macros.h"
+#include "system.h"
+#include "../GL/pointer_common.h"
+#include "../GL/texture_common.h"
 
 namespace render
 {

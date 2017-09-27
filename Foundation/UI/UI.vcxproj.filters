@@ -11,25 +11,16 @@
     <ClInclude Include="Layout\LayoutItem.h">
       <Filter>Layout</Filter>
     </ClInclude>
-    <ClInclude Include="Layout\macros.h">
-      <Filter>Layout</Filter>
-    </ClInclude>
     <ClInclude Include="File\Load\ImageLoader.h">
       <Filter>File\Load</Filter>
     </ClInclude>
     <ClInclude Include="File\Load\import.h">
       <Filter>File\Load</Filter>
     </ClInclude>
-    <ClInclude Include="File\Load\macros.h">
-      <Filter>File\Load</Filter>
-    </ClInclude>
     <ClInclude Include="File\Load\TextLoader.h">
       <Filter>File\Load</Filter>
     </ClInclude>
     <ClInclude Include="File\Parse\import.h">
-      <Filter>File\Parse</Filter>
-    </ClInclude>
-    <ClInclude Include="File\Parse\macros.h">
       <Filter>File\Parse</Filter>
     </ClInclude>
     <ClInclude Include="File\import.h">
@@ -47,14 +38,7 @@
     <ClInclude Include="File\Parse\WidgetProperty.h">
       <Filter>File\Parse</Filter>
     </ClInclude>
-    <ClInclude Include="macros.h" />
-    <ClInclude Include="File\macros.h">
-      <Filter>File</Filter>
-    </ClInclude>
     <ClInclude Include="Display\import.h">
-      <Filter>Display</Filter>
-    </ClInclude>
-    <ClInclude Include="Display\macros.h">
       <Filter>Display</Filter>
     </ClInclude>
     <ClInclude Include="File\Load\NodeLoader.h">
@@ -79,6 +63,10 @@
       <Filter>File\Load</Filter>
     </ClInclude>
     <ClInclude Include="File\Load\LayoutLoader.h">
+      <Filter>File\Load</Filter>
+    </ClInclude>
+    <ClInclude Include="macros.h" />
+    <ClInclude Include="File\Load\define.h">
       <Filter>File\Load</Filter>
     </ClInclude>
   </ItemGroup>

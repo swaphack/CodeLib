@@ -1,7 +1,7 @@
 #include "Texture.h"
-#include "macros.h"
 #include <exception>
-
+#include "ext-config.h"
+#include "Resource/Component/Image.h"
 using namespace render;
 
 

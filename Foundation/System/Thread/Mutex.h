@@ -1,6 +1,7 @@
 #pragma once
 
 #include <mutex>
+#include <string>
 
 namespace sys
 {
@@ -12,20 +13,16 @@ namespace sys
 		~Mutex();
 	public:
 		// 加锁
-		void lock();
+		void lock(const std::string& msg = "");
 		// 尝试加锁
-		bool tryLock();
+		bool tryLock(const std::string& msg = "");
 		// 解锁
-		void unlock();
-		// 是否加锁
-		bool isLock();
+		void unlock(const std::string& msg = "");
 	private:
 		// 互斥锁
 		std::mutex m_pMutex;
 		// 守护锁
 		std::unique_lock<std::mutex> m_pLock;
-		// 是否加锁
-		bool m_bLock;
 	};
 
 	// 多重互斥锁

@@ -1,5 +1,5 @@
 #include "File.h"
-#include "../Stream/StreamBase.h"
+#include "Stream/StreamBase.h"
 
 #include <cstdio>
 #include <cstdlib>

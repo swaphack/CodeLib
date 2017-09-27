@@ -1,5 +1,5 @@
 #include "HttpDocument.h"
-#include "../Type/import.h"
+#include "Type/import.h"
 #include "HttpTime.h"
 
 #define STATUS_KEY_VALUE_SIGN " "

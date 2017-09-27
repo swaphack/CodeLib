@@ -2,7 +2,7 @@
 
 #include <string>
 
-#include "../Framework/Object.h"
+#include "Framework/Object.h"
 
 #include "IResource.h"
 

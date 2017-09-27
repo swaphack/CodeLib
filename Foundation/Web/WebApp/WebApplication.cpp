@@ -1,5 +1,12 @@
 #include "WebApplication.h"
 
+#include "Server/WebServer.h"
+#include "Client/WebClient.h"
+#include "Http/HttpActivityListener.h"
+#include "Packet/PacketActivityListener.h"
+#include "Listener/ListenerPool.h"
+#include "Server/Session.h"
+
 using namespace web;
 
 static WebApplication* s_pWebApplication = nullptr;

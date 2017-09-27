@@ -1,6 +1,6 @@
 #include "Polygon.h"
 #include "Line2.h"
-#include "../Collider/import.h"
+#include "Collider/import.h"
 
 using namespace sys;
 

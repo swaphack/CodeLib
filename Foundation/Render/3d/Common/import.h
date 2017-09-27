@@ -1,4 +1,4 @@
 #pragma once
 
-#include "CtrlModel.h"
+#include "Model.h"
 #include "ModelFile.h"

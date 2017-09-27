@@ -52,20 +52,11 @@
     <ClCompile Include="Common\Node\ColorNode.cpp">
       <Filter>Common\Node</Filter>
     </ClCompile>
-    <ClCompile Include="Common\Control\Static\CtrlMask.cpp">
-      <Filter>Common\Control\Static</Filter>
-    </ClCompile>
-    <ClCompile Include="Common\Control\Static\CtrlText.cpp">
-      <Filter>Common\Control\Static</Filter>
-    </ClCompile>
     <ClCompile Include="Common\Node\Animation.cpp">
       <Filter>Common\Node</Filter>
     </ClCompile>
     <ClCompile Include="Common\Action\ActionProxy.cpp">
       <Filter>Common\Action</Filter>
-    </ClCompile>
-    <ClCompile Include="Common\Control\Dynamic\CtrlParticleSystem.cpp">
-      <Filter>Common\Control\Dynamic</Filter>
     </ClCompile>
     <ClCompile Include="Platform\Windows\GLFrame.cpp">
       <Filter>Platform\Windows</Filter>
@@ -82,35 +73,14 @@
     <ClCompile Include="3d\Shape\Sphere.cpp">
       <Filter>3d\Shape</Filter>
     </ClCompile>
-    <ClCompile Include="Common\Control\Static\CtrlEditBox.cpp">
-      <Filter>Common\Control\Static</Filter>
-    </ClCompile>
     <ClCompile Include="Common\Keyboard\KeyboardManager.cpp">
       <Filter>Common\Keyboard</Filter>
-    </ClCompile>
-    <ClCompile Include="Common\Control\Static\CtrlEditLabel.cpp">
-      <Filter>Common\Control\Static</Filter>
     </ClCompile>
     <ClCompile Include="Resource\Paser\JPEGImage.cpp">
       <Filter>Resource\Parser</Filter>
     </ClCompile>
     <ClCompile Include="Common\XControl\Pixel.cpp">
       <Filter>Common\XControl</Filter>
-    </ClCompile>
-    <ClCompile Include="Common\Control\Static\CtrlFrame.cpp">
-      <Filter>Common\Control\Static</Filter>
-    </ClCompile>
-    <ClCompile Include="Common\Control\Static\CtrlImage.cpp">
-      <Filter>Common\Control\Static</Filter>
-    </ClCompile>
-    <ClCompile Include="Common\Control\Dynamic\CtrlAnimation.cpp">
-      <Filter>Common\Control\Dynamic</Filter>
-    </ClCompile>
-    <ClCompile Include="Common\Control\Dynamic\CtrlSequenceFrame.cpp">
-      <Filter>Common\Control\Dynamic</Filter>
-    </ClCompile>
-    <ClCompile Include="Common\Control\Dynamic\Particle.cpp">
-      <Filter>Common\Control\Dynamic</Filter>
     </ClCompile>
     <ClCompile Include="Common\Shader\TexFrame.cpp">
       <Filter>Common\Shader</Filter>
@@ -141,27 +111,6 @@
     </ClCompile>
     <ClCompile Include="Canvas.cpp" />
     <ClCompile Include="RenderApplication.cpp" />
-    <ClCompile Include="Engine\OpenGL\DCMask.cpp">
-      <Filter>Engine\OpenGL</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\OpenGL\DCTexture.cpp">
-      <Filter>Engine\OpenGL</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\OpenGL\DCSpace.cpp">
-      <Filter>Engine\OpenGL</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\OpenGL\DCMatrix.cpp">
-      <Filter>Engine\OpenGL</Filter>
-    </ClCompile>
-    <ClCompile Include="3d\Common\CtrlModel.cpp">
-      <Filter>3d\Common</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\OpenGL\DCDraw.cpp">
-      <Filter>Engine\OpenGL</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\OpenGL\DCTextureBatch.cpp">
-      <Filter>Engine\OpenGL</Filter>
-    </ClCompile>
     <ClCompile Include="3d\Common\ModelFile.cpp">
       <Filter>3d\Common</Filter>
     </ClCompile>
@@ -180,23 +129,11 @@
     <ClCompile Include="3d\Environment\Stencil.cpp">
       <Filter>3d\Environment</Filter>
     </ClCompile>
-    <ClCompile Include="Common\Control\Static\CtrlScissor.cpp">
-      <Filter>Common\Control\Static</Filter>
-    </ClCompile>
-    <ClCompile Include="Common\Control\Static\CtrlScrollView.cpp">
-      <Filter>Common\Control\Static</Filter>
-    </ClCompile>
     <ClCompile Include="Common\Node\Notify.cpp">
       <Filter>Common\Node</Filter>
     </ClCompile>
     <ClCompile Include="Common\Shader\Mesh.cpp">
       <Filter>Common\Shader</Filter>
-    </ClCompile>
-    <ClCompile Include="Graphic\Struct\shape_common.cpp">
-      <Filter>Graphic\Struct</Filter>
-    </ClCompile>
-    <ClCompile Include="Common\Control\Media\CtrlMedia.cpp">
-      <Filter>Common\Control\Media</Filter>
     </ClCompile>
     <ClCompile Include="Common\Audio\AudioManager.cpp">
       <Filter>Common\Audio</Filter>
@@ -221,6 +158,69 @@
     </ClCompile>
     <ClCompile Include="Common\Action\ExtAction.cpp">
       <Filter>Common\Action</Filter>
+    </ClCompile>
+    <ClCompile Include="2d\UI\CtrlEditBox.cpp">
+      <Filter>2d\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="2d\UI\CtrlEditLabel.cpp">
+      <Filter>2d\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="2d\UI\CtrlFrame.cpp">
+      <Filter>2d\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="2d\UI\CtrlImage.cpp">
+      <Filter>2d\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="2d\UI\CtrlMask.cpp">
+      <Filter>2d\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="2d\UI\CtrlScissor.cpp">
+      <Filter>2d\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="2d\UI\CtrlScrollView.cpp">
+      <Filter>2d\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="2d\UI\CtrlText.cpp">
+      <Filter>2d\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="2d\Animation\CtrlAnimation.cpp">
+      <Filter>2d\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="2d\Animation\CtrlParticleSystem.cpp">
+      <Filter>2d\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="2d\Animation\CtrlSequenceFrame.cpp">
+      <Filter>2d\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="2d\Animation\Particle.cpp">
+      <Filter>2d\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="2d\Animation\CtrlMedia.cpp">
+      <Filter>2d\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="3d\Common\Model.cpp">
+      <Filter>3d\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\GL\shape_common.cpp">
+      <Filter>Common\GL</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphic\DCSample\DCDraw.cpp">
+      <Filter>Graphic\DCSample</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphic\DCSample\DCMask.cpp">
+      <Filter>Graphic\DCSample</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphic\DCSample\DCMatrix.cpp">
+      <Filter>Graphic\DCSample</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphic\DCSample\DCSpace.cpp">
+      <Filter>Graphic\DCSample</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphic\DCSample\DCTexture.cpp">
+      <Filter>Graphic\DCSample</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphic\DCSample\DCTextureBatch.cpp">
+      <Filter>Graphic\DCSample</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -252,9 +252,6 @@
       <Filter>Common\Action</Filter>
     </ClInclude>
     <ClInclude Include="Common\Shader\import.h">
-      <Filter>Common\Shader</Filter>
-    </ClInclude>
-    <ClInclude Include="Common\Shader\macros.h">
       <Filter>Common\Shader</Filter>
     </ClInclude>
     <ClInclude Include="Common\View\View.h">
@@ -314,44 +311,14 @@
     <ClInclude Include="Resource\Paser\macros.h">
       <Filter>Resource\Parser</Filter>
     </ClInclude>
-    <ClInclude Include="Common\Control\ctrl_common.h">
-      <Filter>Common\Control</Filter>
-    </ClInclude>
     <ClInclude Include="Common\Node\ColorNode.h">
       <Filter>Common\Node</Filter>
-    </ClInclude>
-    <ClInclude Include="Common\Control\Static\CtrlMask.h">
-      <Filter>Common\Control\Static</Filter>
-    </ClInclude>
-    <ClInclude Include="Common\Control\Static\CtrlText.h">
-      <Filter>Common\Control\Static</Filter>
-    </ClInclude>
-    <ClInclude Include="Common\Control\Static\import.h">
-      <Filter>Common\Control\Static</Filter>
-    </ClInclude>
-    <ClInclude Include="Common\Control\Static\macros.h">
-      <Filter>Common\Control\Static</Filter>
-    </ClInclude>
-    <ClInclude Include="Common\Control\Dynamic\import.h">
-      <Filter>Common\Control\Dynamic</Filter>
     </ClInclude>
     <ClInclude Include="Common\Node\Animation.h">
       <Filter>Common\Node</Filter>
     </ClInclude>
-    <ClInclude Include="Common\Control\Dynamic\macros.h">
-      <Filter>Common\Control\Dynamic</Filter>
-    </ClInclude>
-    <ClInclude Include="Common\Control\import.h">
-      <Filter>Common\Control</Filter>
-    </ClInclude>
-    <ClInclude Include="Common\Control\Dynamic\CtrlFluid.h">
-      <Filter>Common\Control\Dynamic</Filter>
-    </ClInclude>
     <ClInclude Include="Common\Action\ActionProxy.h">
       <Filter>Common\Action</Filter>
-    </ClInclude>
-    <ClInclude Include="Common\Control\Dynamic\CtrlParticleSystem.h">
-      <Filter>Common\Control\Dynamic</Filter>
     </ClInclude>
     <ClInclude Include="Platform\import.h">
       <Filter>Platform</Filter>
@@ -393,38 +360,17 @@
     <ClInclude Include="3d\import.h">
       <Filter>3d</Filter>
     </ClInclude>
-    <ClInclude Include="Common\Control\Static\CtrlEditBox.h">
-      <Filter>Common\Control\Static</Filter>
-    </ClInclude>
     <ClInclude Include="Common\Keyboard\KeyboardManager.h">
       <Filter>Common\Keyboard</Filter>
     </ClInclude>
     <ClInclude Include="Common\Keyboard\import.h">
       <Filter>Common\Keyboard</Filter>
     </ClInclude>
-    <ClInclude Include="Common\Control\Static\CtrlEditLabel.h">
-      <Filter>Common\Control\Static</Filter>
-    </ClInclude>
     <ClInclude Include="Resource\Paser\JPEGImage.h">
       <Filter>Resource\Parser</Filter>
     </ClInclude>
     <ClInclude Include="Common\XControl\Pixel.h">
       <Filter>Common\XControl</Filter>
-    </ClInclude>
-    <ClInclude Include="Common\Control\Dynamic\CtrlSequenceFrame.h">
-      <Filter>Common\Control\Dynamic</Filter>
-    </ClInclude>
-    <ClInclude Include="Common\Control\Static\CtrlFrame.h">
-      <Filter>Common\Control\Static</Filter>
-    </ClInclude>
-    <ClInclude Include="Common\Control\Static\CtrlImage.h">
-      <Filter>Common\Control\Static</Filter>
-    </ClInclude>
-    <ClInclude Include="Common\Control\Dynamic\CtrlAnimation.h">
-      <Filter>Common\Control\Dynamic</Filter>
-    </ClInclude>
-    <ClInclude Include="Common\Control\Dynamic\Particle.h">
-      <Filter>Common\Control\Dynamic</Filter>
     </ClInclude>
     <ClInclude Include="Graphic\Command\macros.h">
       <Filter>Graphic\Command</Filter>
@@ -450,17 +396,11 @@
     <ClInclude Include="Graphic\Command\DrawCommand.h">
       <Filter>Graphic\Command</Filter>
     </ClInclude>
-    <ClInclude Include="Graphic\Struct\texture_common.h">
-      <Filter>Graphic\Struct</Filter>
-    </ClInclude>
     <ClInclude Include="Graphic\DCSample\macros.h">
       <Filter>Graphic\DCSample</Filter>
     </ClInclude>
     <ClInclude Include="Graphic\import.h">
       <Filter>Graphic</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphic\Struct\import.h">
-      <Filter>Graphic\Struct</Filter>
     </ClInclude>
     <ClInclude Include="Resource\Component\Image.h">
       <Filter>Resource\Component</Filter>
@@ -501,12 +441,6 @@
     <ClInclude Include="Resource\Config\TextDefine.h">
       <Filter>Resource\Config</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\import.h">
-      <Filter>Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\OpenGL\macros.h">
-      <Filter>Engine\OpenGL</Filter>
-    </ClInclude>
     <ClInclude Include="Graphic\DCSample\DCTexture.h">
       <Filter>Graphic\DCSample</Filter>
     </ClInclude>
@@ -521,17 +455,8 @@
     <ClInclude Include="Common\macros.h">
       <Filter>Common</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\OpenGL\import.h">
-      <Filter>Engine\OpenGL</Filter>
-    </ClInclude>
     <ClInclude Include="Graphic\DCSample\DCMask.h">
       <Filter>Graphic\DCSample</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\OpenGL\DCEnum.h">
-      <Filter>Engine\OpenGL</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\OpenGL\opengl.h">
-      <Filter>Engine\OpenGL</Filter>
     </ClInclude>
     <ClInclude Include="Common\import.h">
       <Filter>Common</Filter>
@@ -541,9 +466,6 @@
     </ClInclude>
     <ClInclude Include="Graphic\DCSample\DCMatrix.h">
       <Filter>Graphic\DCSample</Filter>
-    </ClInclude>
-    <ClInclude Include="3d\Common\CtrlModel.h">
-      <Filter>3d\Common</Filter>
     </ClInclude>
     <ClInclude Include="3d\Common\import.h">
       <Filter>3d\Common</Filter>
@@ -575,38 +497,17 @@
     <ClInclude Include="3d\Environment\Stencil.h">
       <Filter>3d\Environment</Filter>
     </ClInclude>
-    <ClInclude Include="Common\Control\Static\CtrlScissor.h">
-      <Filter>Common\Control\Static</Filter>
-    </ClInclude>
-    <ClInclude Include="Common\Control\Static\CtrlScrollView.h">
-      <Filter>Common\Control\Static</Filter>
-    </ClInclude>
     <ClInclude Include="Common\Node\Notify.h">
       <Filter>Common\Node</Filter>
     </ClInclude>
     <ClInclude Include="Common\Shader\Mesh.h">
       <Filter>Common\Shader</Filter>
     </ClInclude>
-    <ClInclude Include="Graphic\Struct\pointer_common.h">
-      <Filter>Graphic\Struct</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphic\Struct\shape_common.h">
-      <Filter>Graphic\Struct</Filter>
-    </ClInclude>
     <ClInclude Include="3d\Map\macros.h">
       <Filter>3d\Map</Filter>
     </ClInclude>
     <ClInclude Include="3d\Map\Terrian.h">
       <Filter>3d\Map</Filter>
-    </ClInclude>
-    <ClInclude Include="Common\Control\Media\CtrlMedia.h">
-      <Filter>Common\Control\Media</Filter>
-    </ClInclude>
-    <ClInclude Include="Common\Control\Media\macros.h">
-      <Filter>Common\Control\Media</Filter>
-    </ClInclude>
-    <ClInclude Include="Common\Control\Media\import.h">
-      <Filter>Common\Control\Media</Filter>
     </ClInclude>
     <ClInclude Include="Common\Audio\AudioManager.h">
       <Filter>Common\Audio</Filter>
@@ -638,14 +539,84 @@
     <ClInclude Include="Common\DrawNode\import.h">
       <Filter>Common\DrawNode</Filter>
     </ClInclude>
-    <ClInclude Include="Common\GL\macros.h">
-      <Filter>Common\GL</Filter>
-    </ClInclude>
     <ClInclude Include="3d\Common\Ray.h">
       <Filter>3d\Common</Filter>
     </ClInclude>
     <ClInclude Include="Common\Action\ExtAction.h">
       <Filter>Common\Action</Filter>
+    </ClInclude>
+    <ClInclude Include="2d\UI\CtrlEditBox.h">
+      <Filter>2d\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="2d\UI\CtrlEditLabel.h">
+      <Filter>2d\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="2d\UI\CtrlFrame.h">
+      <Filter>2d\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="2d\UI\CtrlImage.h">
+      <Filter>2d\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="2d\UI\CtrlMask.h">
+      <Filter>2d\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="2d\UI\CtrlScissor.h">
+      <Filter>2d\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="2d\UI\CtrlScrollView.h">
+      <Filter>2d\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="2d\UI\CtrlText.h">
+      <Filter>2d\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="2d\UI\import.h">
+      <Filter>2d\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="2d\UI\macros.h">
+      <Filter>2d\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="2d\Animation\CtrlAnimation.h">
+      <Filter>2d\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="2d\Animation\CtrlFluid.h">
+      <Filter>2d\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="2d\Animation\CtrlParticleSystem.h">
+      <Filter>2d\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="2d\Animation\CtrlSequenceFrame.h">
+      <Filter>2d\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="2d\Animation\import.h">
+      <Filter>2d\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="2d\Animation\macros.h">
+      <Filter>2d\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="2d\Animation\Particle.h">
+      <Filter>2d\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="2d\Animation\CtrlMedia.h">
+      <Filter>2d\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="3d\Common\Model.h">
+      <Filter>3d\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="2d\ctrl_common.h">
+      <Filter>2d</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\GL\pointer_common.h">
+      <Filter>Common\GL</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\GL\shape_common.h">
+      <Filter>Common\GL</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\GL\texture_common.h">
+      <Filter>Common\GL</Filter>
+    </ClInclude>
+    <ClInclude Include="ext-config.h" />
+    <ClInclude Include="2d\import.h">
+      <Filter>2d</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -670,9 +641,6 @@
     <Filter Include="Common\Action">
       <UniqueIdentifier>{1c8ab4ae-8924-4c39-8889-09946c2fdfe0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Common\Control">
-      <UniqueIdentifier>{5a0df66e-333f-4f27-b4df-8e15e34d0e3f}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Common\Shader">
       <UniqueIdentifier>{af282e8f-c075-4311-a9d5-b6128b397090}</UniqueIdentifier>
     </Filter>
@@ -687,12 +655,6 @@
     </Filter>
     <Filter Include="Resource\Parser">
       <UniqueIdentifier>{5000cb09-fb3c-4b63-963b-db40ce7a3db0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Common\Control\Static">
-      <UniqueIdentifier>{41e328c9-4cba-41bd-96a3-c67773f733a5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Common\Control\Dynamic">
-      <UniqueIdentifier>{a3cc60f5-a961-4271-a139-71a511a6684f}</UniqueIdentifier>
     </Filter>
     <Filter Include="Platform">
       <UniqueIdentifier>{bdcc9f5f-cc09-4649-ba7d-b20f2f85158e}</UniqueIdentifier>
@@ -715,20 +677,11 @@
     <Filter Include="Graphic\Command">
       <UniqueIdentifier>{78dae838-a77b-404b-8dcf-4fcc748483fe}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Graphic\Struct">
-      <UniqueIdentifier>{4900d796-901c-48f3-98be-6678bd9a6220}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Graphic\DCSample">
       <UniqueIdentifier>{6f7278bf-4cab-49ed-bb7b-57b0acf4fe0d}</UniqueIdentifier>
     </Filter>
     <Filter Include="Resource\Component">
       <UniqueIdentifier>{9df81cfb-9846-4989-81c1-b7ad6ba47ba6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Engine">
-      <UniqueIdentifier>{6fb99d2a-8915-42cf-9323-27779ebd2c20}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Engine\OpenGL">
-      <UniqueIdentifier>{ba70c07c-ee40-4fcc-9cef-9708d0a4c722}</UniqueIdentifier>
     </Filter>
     <Filter Include="Resource\Loader">
       <UniqueIdentifier>{10a041a0-5d1b-46d1-ae1b-5831c145bfc0}</UniqueIdentifier>
@@ -751,14 +704,20 @@
     <Filter Include="3d\Map">
       <UniqueIdentifier>{39b72897-e237-4d06-b0ad-dc4d6a4b036c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Common\Control\Media">
-      <UniqueIdentifier>{053f2af4-4b9b-4714-b735-5bf6db1a9b98}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Common\Audio">
       <UniqueIdentifier>{61b06823-1aed-4daf-8287-4d1d7f5d9149}</UniqueIdentifier>
     </Filter>
     <Filter Include="Common\DrawNode">
       <UniqueIdentifier>{c3eeb252-4d38-4194-8503-f7bbbff42e74}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2d">
+      <UniqueIdentifier>{393be6e1-62a4-4a86-989e-db31f9a3a3e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2d\UI">
+      <UniqueIdentifier>{96321678-d993-4d34-8a32-ac33f162b0c3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2d\Animation">
+      <UniqueIdentifier>{91b9cdf2-865f-40ac-ae8f-a0605a0fa54e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

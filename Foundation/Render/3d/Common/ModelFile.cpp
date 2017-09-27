@@ -1,4 +1,5 @@
 #include "ModelFile.h"
+#include "Model.h"
 #include "system.h"
 #include "text.h"
 using namespace render;
@@ -24,7 +25,7 @@ ModelFile* ModelFile::getInstance()
 	return s_ModelFile;
 }
 
-CtrlModel* ModelFile::load(const char* filepath)
+Model* ModelFile::load(const char* filepath)
 {
 	if (filepath == nullptr)
 	{
@@ -37,7 +38,7 @@ CtrlModel* ModelFile::load(const char* filepath)
 		return nullptr;
 	}
 
-	CtrlModel* pModel = loadModel(pData);
+	Model* pModel = loadModel(pData);
 	if (pModel == nullptr)
 	{
 		return nullptr;
@@ -122,13 +123,13 @@ T_ModelData* ModelFile::loadData(const char* filepath)
 	return &modelData;
 }
 
-CtrlModel* ModelFile::loadModel(T_ModelData* pData)
+Model* ModelFile::loadModel(T_ModelData* pData)
 {
 	if (pData == nullptr)
 	{
 		return nullptr;
 	}
-	CtrlModel* pModel = CREATE_NODE(CtrlModel);
+	Model* pModel = CREATE_NODE(Model);
 
 	if (!pData->ImagePath.empty())
 	{

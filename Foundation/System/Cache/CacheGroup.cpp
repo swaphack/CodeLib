@@ -1,6 +1,6 @@
 #include "CacheGroup.h"
 
-#include "../Stream/import.h"
+#include "Stream/import.h"
 
 using namespace sys;
 

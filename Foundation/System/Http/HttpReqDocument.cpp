@@ -1,6 +1,6 @@
 #include "HttpRequest.h"
 #include "HttpConstant.h"
-#include "../Type/import.h"
+#include "Type/import.h"
 
 using namespace sys;
 

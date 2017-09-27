@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../Base/Types.h"
+#include "Base/Types.h"
 #include "IStreamBase.h"
 #include "StreamHelper.h"
 

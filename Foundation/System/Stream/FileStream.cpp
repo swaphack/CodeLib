@@ -1,7 +1,7 @@
 #include "FileStream.h"
 #include "StreamBase.h"
 
-#include "../Base/import.h"
+#include "Base/import.h"
 
 using namespace sys;
 

@@ -4,19 +4,20 @@
 
 namespace render
 {
-	// 立方体的六个面
-	enum CubeFace
+	//---------------------枚举---------------------
+	// 六个面
+	enum ModelFace
 	{
-		ECF_FRONT = 0,	// 前面
-		ECF_BACK,		// 背面
-		ECF_LEFT,		// 左面
-		ECF_RIGHT,		// 右面
-		ECF_TOP,		// 上面
-		ECF_BOTTOM,		// 下面
+		EMF_FRONT,		// 前面
+		EMF_BACK,		// 背面
+		EMF_LEFT,		// 左面
+		EMF_RIGHT,		// 右面
+		EMF_TOP,		// 上面
+		EMF_BOTTOM,		// 下面
 	};
 
 	// 3d模型基础，空间立方体
-	class Cube : public CtrlModel
+	class Cube : public Model
 	{
 	public:
 		Cube();
@@ -27,7 +28,7 @@ namespace render
 		virtual void draw();
 
 		// 设置单面的纹理帧
-		void setFaceFrame(CubeFace face, TexFrame* frame);
+		void setFaceFrame(ModelFace face, TexFrame* frame);
 		// 设置所有面的纹理帧
 		virtual void setTexFrame(TexFrame* frame);
 	protected:

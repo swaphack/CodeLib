@@ -1,12 +1,14 @@
 #pragma once
 
-#include "CtrlModel.h"
-
 #include <string>
 #include <map>
 
+#include "Resource/Config/import.h"
+#include "Common/GL/pointer_common.h"
+
 namespace render
 {
+	class Model;
 	// 模型数据
 	struct T_ModelData
 	{
@@ -44,12 +46,12 @@ namespace render
 	public:
 		static ModelFile* getInstance();
 		// 从配置加载模型
-		CtrlModel* load(const char* filepath);
+		Model* load(const char* filepath);
 	protected:
 		// 加载数据
 		T_ModelData* loadData(const char* filepath);
 		// 加载模型
-		CtrlModel* loadModel(T_ModelData* pData);
+		Model* loadModel(T_ModelData* pData);
 	private:
 		// 获取浮点数组
 		float* getFloatAry(const char* text, int count);

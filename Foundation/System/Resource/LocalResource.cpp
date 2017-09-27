@@ -1,6 +1,6 @@
 #include "LocalResource.h"
 
-#include "../Base/import.h"
+#include "Base/import.h"
 
 using namespace sys;
 

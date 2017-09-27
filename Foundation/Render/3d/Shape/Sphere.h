@@ -37,7 +37,7 @@ namespace render
 	¦Õ = arctan(y/x)
 
 	*/
-	class Sphere : public CtrlModel
+	class Sphere : public Model
 	{
 	public:
 		Sphere();

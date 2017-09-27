@@ -1,6 +1,5 @@
 #include "ViewConfig.h"
-#include "../GL/import.h"
-
+#include "ext-config.h"
 using namespace render;
 
 ViewConfig::ViewConfig()

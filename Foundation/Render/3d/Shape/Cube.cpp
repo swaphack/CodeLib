@@ -1,5 +1,5 @@
 #include "Cube.h"
-
+#include "Graphic/import.h"
 using namespace render;
 
 Cube::Cube()
@@ -28,7 +28,7 @@ Cube::~Cube()
 
 bool Cube::init()
 {
-	CtrlModel::init();
+	Model::init();
 
 	_notify->addListen(ENP_CUBE_FRAME, [&](){
 		for (int i = 0; i < 6; i++)
@@ -49,7 +49,7 @@ bool Cube::init()
 
 void Cube::draw()
 {
-	CtrlModel::draw();
+	Model::draw();
 
 	glEnable(GL_DEPTH_TEST);
 	for (int i = 0; i < 6; i++)
@@ -73,7 +73,7 @@ void Cube::draw()
 }
 
 
-void Cube::setFaceFrame(CubeFace face, TexFrame* frame)
+void Cube::setFaceFrame(ModelFace face, TexFrame* frame)
 {
 	if (frame == nullptr)
 	{
@@ -94,38 +94,38 @@ void Cube::setTexFrame(TexFrame* frame)
 	{
 		return;
 	}
-	CtrlModel::setTexFrame(frame);
+	Model::setTexFrame(frame);
 	for (int i = 0; i < 6; i++)
 	{
-		this->setFaceFrame(static_cast<CubeFace>(i), frame);
+		this->setFaceFrame(static_cast<ModelFace>(i), frame);
 	}
 }
 
 void Cube::initSelf()
 {
-	CtrlModel::initSelf();
+	Model::initSelf();
 }
 
 TextureRect* Cube::getTextureRect(ModelFace face)
 {
 	switch (face)
 	{
-	case ECF_FRONT:
+	case EMF_FRONT:
 		return &_texCube.front;
 		break;
-	case ECF_BACK:
+	case EMF_BACK:
 		return &_texCube.back;
 		break;
-	case ECF_LEFT:
+	case EMF_LEFT:
 		return &_texCube.left;
 		break;
-	case ECF_RIGHT:
+	case EMF_RIGHT:
 		return &_texCube.right;
 		break;
-	case ECF_TOP:
+	case EMF_TOP:
 		return &_texCube.top;
 		break;
-	case ECF_BOTTOM:
+	case EMF_BOTTOM:
 		return &_texCube.bottom;
 		break;
 	default:

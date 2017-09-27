@@ -1,6 +1,6 @@
 #include "DNS.h"
 #include "Socket.h"
-#include "../Base/import.h"
+#include "Base/import.h"
 
 #if PLATFORM_TARGET == EPT_WINDOWS
 #include <WS2tcpip.h>

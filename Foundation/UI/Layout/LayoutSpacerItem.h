@@ -1,7 +1,5 @@
 #pragma once
 
-#include "macros.h"
-
 #include "LayoutWidgetItem.h"
 
 namespace ui

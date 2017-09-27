@@ -1,4 +1,5 @@
 #include "IElement.h"
+#include "text.h"
 
 using namespace ui;
 

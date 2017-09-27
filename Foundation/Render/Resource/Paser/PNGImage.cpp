@@ -1,5 +1,5 @@
 #include "PNGImage.h"
-
+#include "ext-config.h"
 #include "system.h"
 #include <cstdlib>
 #include <cstdio>

@@ -1,53 +1,34 @@
 #include "Mutex.h"
-#include "../Base/import.h"
+#include "Base/import.h"
 
 using namespace sys;
 
 Mutex::Mutex()
 {
-	m_bLock = false;
 	m_pLock = std::unique_lock<std::mutex>(m_pMutex, std::defer_lock);
 }
 
 Mutex::~Mutex()
 {
-	m_pLock.release();
 }
 
-void Mutex::lock()
+void Mutex::lock(const std::string& msg)
 {
-	if (m_bLock == true)
-	{
-		return;
-	}
-	m_bLock = true;
 	m_pLock.lock();
+	PRINT(msg.c_str());
 }
 
-bool Mutex::tryLock()
+bool Mutex::tryLock(const std::string& msg)
 {
-	if (m_bLock == true)
-	{
-		return false;
-	}
-	m_bLock = true;
-	m_bLock = m_pLock.try_lock();
-	return m_bLock;
+	bool bRet = m_pLock.try_lock();
+	PRINT(msg.c_str());
+	return bRet;
 }
 
-void Mutex::unlock()
+void Mutex::unlock(const std::string& msg)
 {
-	if (m_bLock == false)
-	{
-		return;
-	}
-	m_bLock = false;
-	return m_pLock.unlock();
-}
-
-bool Mutex::isLock()
-{
-	return m_bLock;
+	m_pLock.unlock();
+	PRINT(msg.c_str());
 }
 
 //////////////////////////////////////////////////////////////////////////

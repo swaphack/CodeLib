@@ -1,5 +1,5 @@
 #include "IBlockParser.h"
-#include "../Base/geometry.h"
+#include "Base/geometry.h"
 using namespace sys;
 
 bool LineParser::readBlock(char* inPtr, std::string& outData)

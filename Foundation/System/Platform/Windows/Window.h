@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../macros.h"
+#include "Platform/macros.h"
 #include <string>
 #include <windows.h>
 

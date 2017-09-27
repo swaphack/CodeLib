@@ -1,8 +1,8 @@
 #pragma once
 
-#include "../Framework/Object.h"
-#include "../Net/import.h"
-#include "../Stream/import.h"
+#include "Framework/Object.h"
+#include "Net/import.h"
+#include "Stream/import.h"
 
 namespace sys
 {

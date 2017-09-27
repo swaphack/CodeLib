@@ -1,6 +1,6 @@
 #include "Authorization.h"
 #include "Author.h"
-#include "../Net/Client.h"
+#include "Net/Client.h"
 
 #include <thread>
 

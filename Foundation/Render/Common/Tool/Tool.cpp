@@ -195,4 +195,14 @@ void Tool::calRealRect(const sys::Vector3& position, const sys::Volume& volume, 
 	rectVertex.leftUp.z = position.z;
 }
 
+float Tool::getGLViewWidth()
+{
+	return GL_VIEW_SIZE.width;
+}
+
+float Tool::getGLViewHeight()
+{
+	return GL_VIEW_SIZE.height;
+}
+
 

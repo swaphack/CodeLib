@@ -1,7 +1,6 @@
 #pragma once
 
 #include "system.h"
-#include "../GL/import.h"
 
 namespace render
 {
@@ -58,6 +57,8 @@ namespace render
 	};
 
 	//////////////////////////////////////////////////////////////////////////
+
+	class Image;
 
 	// 2dŒ∆¿Ì
 	class Texture2D : public Texture

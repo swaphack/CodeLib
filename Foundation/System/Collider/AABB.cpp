@@ -1,5 +1,5 @@
 #include "AABB.h"
-#include "../Geometry/import.h"
+#include "Geometry/import.h"
 
 using namespace sys;
 

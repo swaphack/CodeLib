@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Object.h"
-#include "../Base/import.h"
+#include "Base/import.h"
 
 #include <map>
 #include <string>

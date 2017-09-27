@@ -1,7 +1,6 @@
 #include "Pixel.h"
-
+#include "ext-config.h"
 #include "../Tool/import.h"
-#include "../Control/import.h"
 
 using namespace render;
 

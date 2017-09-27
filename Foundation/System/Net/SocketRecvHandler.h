@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../Framework/Object.h"
+#include "Framework/Object.h"
 #include "DataQueue.h"
 
 namespace sys

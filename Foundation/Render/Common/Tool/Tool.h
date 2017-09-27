@@ -65,6 +65,9 @@ namespace render
 		* @param rectVertex 矩形顶点
 		*/
 		static void calRealRect(const sys::Vector3& position, const sys::Volume& volume, const sys::Vector3& anchor, RectangeVertex& rectVertex);
+
+		static float getGLViewWidth();
+		static float getGLViewHeight();
 	private:
 		// 视窗大小
 		static sys::Volume GL_VIEW_SIZE;

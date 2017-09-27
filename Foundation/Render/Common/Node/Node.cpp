@@ -1,6 +1,7 @@
 #include "Node.h"
 #include "../Touch/TouchProxy.h"
 #include <algorithm>
+#include "Graphic/import.h"
 
 using namespace render;
 

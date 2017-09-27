@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../Framework/Object.h"
+#include "Framework/Object.h"
 #include "Socket.h"
 #include "NetData.h"
 #include "DataQueue.h"

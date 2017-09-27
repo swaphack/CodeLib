@@ -1,4 +1,5 @@
 #include "protocol_common.h"
+#include "ext-config.h"
 
 using namespace render;
 

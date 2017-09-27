@@ -6,8 +6,6 @@ using namespace render;
 
 namespace ui
 {
-
-
 	class ImageLoader : public NodeLoader
 	{
 	public:
