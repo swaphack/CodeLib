@@ -23,7 +23,7 @@ void WndRender::show()
 	
 	
 	//this->testText();
-	this->testParticle();
+	this->testText();
 }
 
 void WndRender::testMoveImage()
@@ -147,20 +147,35 @@ void WndRender::testSphereModel()
 
 void WndRender::testText()
 {
-	char strVal[255] = {};
-	Time* t = Time::getNow();
-	PRINT("%d-%d-%d %02d:%02d:%02d\n", t->getYear(), t->getMonth(), t->getMonthDay(), t->getHour(), t->getMinute(), t->getSecond());
-	sprintf(strVal, "%d-%d-%d %02d:%02d:%02d\n", t->getYear(), t->getMonth(), t->getMonthDay(), t->getHour(), t->getMinute(), t->getSecond());
-
  	CtrlText* pCtrlText;
 	pCtrlText = CREATE_NODE(CtrlText);
 	pCtrlText->setFontPath("Resource/Font/font_3.ttf");
 	pCtrlText->setFontSize(58);
-	pCtrlText->setString(strVal);
 	pCtrlText->setPosition(512, 450, 0);
 	pCtrlText->setVerticalAlignment(EVA_CENTER);
 	pCtrlText->setColor(sys::Color4B(125, 80, 255, 255));
 	this->getCanvas()->getRoot()->addChild(pCtrlText);
+
+
+	CallFuncN* pCallFunc = CREATE_ACTION(CallFuncN);
+	pCallFunc->setFunc([](sys::Object* sender){
+		char strVal[255] = {};
+		Time* t = Time::getNow();
+		sprintf(strVal, "%d-%d-%d %02d:%02d:%02d\n", t->getYear(), t->getMonth(), t->getMonthDay(), t->getHour(), t->getMinute(), t->getSecond());
+		((CtrlText*)sender)->setString(strVal);
+	});
+
+	DelayAction* pDelayAction = CREATE_ACTION(DelayAction);
+	pDelayAction->setDuration(1);
+
+	SequenceAction* pSequenceAction = CREATE_ACTION(SequenceAction);
+	pSequenceAction->addAction(pCallFunc);
+	pSequenceAction->addAction(pDelayAction);
+
+	RepeateForeverAction* pRepeateForeverAction = CREATE_ACTION(RepeateForeverAction);
+	pRepeateForeverAction->setAction(pSequenceAction);
+	
+	pCtrlText->getActionProxy()->runAction(pRepeateForeverAction);
 
 	pCtrlText = CREATE_NODE(CtrlText);
 	pCtrlText->setHorizontalAlignment(EHA_RIGHT);
