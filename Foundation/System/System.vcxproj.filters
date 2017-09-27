@@ -25,9 +25,6 @@
     <Filter Include="Platform\Android">
       <UniqueIdentifier>{f5db4de5-3d66-485f-80af-58887c59d61c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Platform\Implement">
-      <UniqueIdentifier>{be27e494-b965-4ce1-bb82-a163909e2182}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Platform\Windows">
       <UniqueIdentifier>{b42468cb-6164-46c2-aae3-706b8cb9a770}</UniqueIdentifier>
     </Filter>

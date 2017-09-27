@@ -9,6 +9,7 @@
 namespace sys
 {
 	// 并发处理
+	// 使用finish函数，来释放当前类
 	class Concurrent : public sys::Object
 	{
 	protected:
@@ -102,7 +103,5 @@ namespace sys
 		WriteFunc _writeFunc;
 		// 事件队列
 		std::queue<Data*> _eventQueue;
-		// 是否正在运行中
-		bool _bRunning;
 	};
 }

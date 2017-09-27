@@ -23,7 +23,7 @@ void WndRender::show()
 	
 	
 	//this->testText();
-	this->testConcurrent();
+	this->testParticle();
 }
 
 void WndRender::testMoveImage()
@@ -204,7 +204,7 @@ void WndRender::testFog()
 	pFog->setFar(100);
 	pFog->setColor(125, 125, 125, 125);
 	this->getCanvas()->getRoot()->addChild(pFog);
-}
+} 
 
 void WndRender::testAnimation()
 {
@@ -659,40 +659,4 @@ void WndRender::testDrawNode()
 
 void WndRender::testConcurrent()
 {
-	ConcurrentFile* pFile = new ConcurrentFile("F:/1.txt");
-
-	Thread th0;
-	th0.start([pFile](){
-		int count = 10;
-		while (count > 0)
-		{
-			char* strText = "afdafdsss";
-			pFile->write(strText, strlen(strText));
-			count--;
-		}
-	});
-	th0.detach();
-	Thread th1;
-	th1.start([pFile](){
-		int count = 10;
-		int offset = 0;
-		int size = 10;
-		char strText[10] = { 0 };
-
-		while (count > 0)
-		{
-			memset(strText, 0, sizeof(strText));
-			pFile->read(strText, offset, size);
-			if (strlen(strText) == 0)
-			{
-				continue;
-			}
-			printf("%s\n", strText);
-			offset += size;
-			count--;
-		}
-
-		pFile->finish();
-	});
-	th1.detach();
 }

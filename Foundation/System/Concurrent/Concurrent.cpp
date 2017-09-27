@@ -7,7 +7,6 @@ using namespace sys;
 Concurrent::Concurrent()
 	:_readFunc(nullptr)
 	, _writeFunc(nullptr)
-	, _bRunning(false)
 {
 	this->init();
 }
@@ -115,6 +114,8 @@ void Concurrent::init()
 			delete data;
 			_mutex.unlock("End Concurrent::Try Parser Data\n");
 		}
+
+		delete this;
 	});
 	th.detach();
 }

@@ -2,7 +2,6 @@
 #include <thread>
 #include <chrono>
 
-
 int main(int argc, char** argv)
 {
 	sys::ConcurrentFile* pFile = new sys::ConcurrentFile("F:/1.txt");
@@ -47,8 +46,6 @@ int main(int argc, char** argv)
 				break;
 			}
 		}
-
-		delete pFile;
 	});
 
 	th3.join();
