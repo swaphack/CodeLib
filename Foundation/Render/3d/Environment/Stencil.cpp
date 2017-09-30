@@ -18,7 +18,7 @@ Stencil::~Stencil()
 	SAFE_RELEASE(_stencilNode);
 }
 
-void shwoStencilInformation()
+void showStencilInformation()
 {
 	int value = 0;
 	glGetIntegerv(GL_STENCIL_FUNC, &value);
@@ -65,28 +65,36 @@ void Stencil::visit()
 	glGetIntegerv(GL_STENCIL_PASS_DEPTH_FAIL, &nStencilPassDepthFail);
 	glGetIntegerv(GL_STENCIL_PASS_DEPTH_PASS, &nStencilPassDepthPass);
 
+	
+	glStencilFunc(GL_ALWAYS, 1, 0xFF);
+	glStencilOp(GL_KEEP, GL_KEEP, GL_INCR);
+
+	//showStencilInformation();
+
 	glEnable(GL_STENCIL_TEST);
 
-	glStencilFunc(GL_NEVER, 0x00, 0x00);
-	glStencilOp(GL_INCR, GL_INCR, GL_INCR);
-
+	glDepthMask(GL_FALSE);
 	if (_stencilNode)
 	{
 		_stencilNode->visit();
 	}
 
-	glStencilFunc(GL_EQUAL, 0x02, 0xff);
-	glStencilOp(GL_KEEP, GL_KEEP, GL_KEEP);
+	glDepthMask(GL_TRUE);
+
+	glStencilFunc(GL_EQUAL, 0x1, 0xff);
+	glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
+
+	//showStencilInformation();
 
 	Node::visit();
-
+	/*
 	glStencilFunc(nStencilFun, nStencilRef, nStencilValueMask);
 	glStencilOp(nStencilFail, nStencilPassDepthFail, nStencilPassDepthPass);
 	if (isEnableDepthTest == GL_FALSE)
 	{
 		glDisable(GL_DEPTH_TEST);
 	}
-
+	*/
 	glDisable(GL_STENCIL_TEST);
 }
 

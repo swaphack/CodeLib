@@ -2,6 +2,8 @@
 
 using namespace render;
 
+int render::CtrlScissor::s_nScissorCount = 0;
+sys::Rect CtrlScissor::s_rect = sys::Rect::Zero;
 
 CtrlScissor::CtrlScissor()
 {
@@ -25,23 +27,49 @@ void CtrlScissor::visit()
 		return;
 	}
 
-	GLboolean isScissorEnable = GL_FALSE;
-	isScissorEnable = glIsEnabled(GL_SCISSOR_TEST);
-
 	if (Tool::getDimensions() == ED_2D)
 	{
-		glScissor(static_cast<int>(_realSpaceVertex.leftDown.x),
-			static_cast<int>(_realSpaceVertex.leftDown.y),
-			static_cast<int>(_realSpaceVertex.rightDown.x - _realSpaceVertex.leftDown.x),
-			static_cast<int>(_realSpaceVertex.leftUp.y - _realSpaceVertex.leftDown.y));
+		sys::Rect rect = makeRect();
 
-		glEnable(GL_SCISSOR_TEST);
-	}
+		if (s_nScissorCount == 0)
+		{
+			s_rect = rect;
+		}
+		else
+		{
+			s_rect = s_rect.intersectRect(rect);
+		}
+
+		glScissor((int)s_rect.x, (int)s_rect.y, (int)s_rect.width, (int)s_rect.height);
+
+		s_nScissorCount++;
+
+		if (s_nScissorCount == 1)
+		{
+			glEnable(GL_SCISSOR_TEST);
+		}
+	}	
 
 	Node::visit();
-
-	if (isScissorEnable == GL_FALSE)
+	if (Tool::getDimensions() == ED_2D)
 	{
-		glDisable(GL_SCISSOR_TEST);
+		s_nScissorCount--;
+
+		if (s_nScissorCount == 0)
+		{
+			s_rect = sys::Rect::Zero;
+			glDisable(GL_SCISSOR_TEST);
+		}
 	}
+}
+
+sys::Rect CtrlScissor::makeRect()
+{
+	sys::Rect rect;
+	rect.x = _realSpaceVertex.leftDown.x;
+	rect.y = _realSpaceVertex.leftDown.y;
+	rect.width = _realSpaceVertex.rightDown.x - _realSpaceVertex.leftDown.x;
+	rect.height = _realSpaceVertex.leftUp.y - _realSpaceVertex.leftDown.y;
+
+	return rect;
 }

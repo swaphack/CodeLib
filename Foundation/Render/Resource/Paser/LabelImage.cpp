@@ -143,7 +143,7 @@ void FT_LABEL::load(const TextDefine& textDefine, LabelStream* stream)
 
 	stream->endStream();
 
-	delete (dest);
+	free (dest);
 	this->disposeFT();
 	_datas.clear();
 }

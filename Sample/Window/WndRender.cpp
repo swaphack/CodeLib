@@ -7,7 +7,7 @@ using namespace ui;
 WndRender::WndRender()
 {
 	this->init();
-	this->getCanvas()->setDimensions(render::ED_2D);
+	this->getCanvas()->setDimensions(render::ED_3D);
 }
 
 WndRender::~WndRender()
@@ -23,7 +23,12 @@ void WndRender::show()
 	
 	
 	//this->testText();
-	this->testText();
+	//this->testMedia();
+	//this->testScissor();
+
+	this->addLight();
+
+	this->testStencil();
 }
 
 void WndRender::testMoveImage()
@@ -238,24 +243,36 @@ void WndRender::testParticle()
 
 void WndRender::testStencil()
 {
+	Texture2D* texture2D = G_TEXTURE_CACHE->getTexture2D({ "Resource/Image/NeHe.png", EIF_PNG });
+
+	TexFrame* frame = new TexFrame();
+	AUTO_RELEASE_OBJECT(frame);
+	frame->setTextureWithRect(texture2D);
+
 	Stencil* pStencil = CREATE_NODE(Stencil);
-	pStencil->setPosition(512, 384, 0);
-	pStencil->setVolume(200, 100, 0);
-	
+	pStencil->setVolume(400, 400, 400);
+
 	this->getCanvas()->getRoot()->addChild(pStencil);	
 
-	CtrlImage* pImage = CREATE_NODE(CtrlImage);
-	pImage->setImagePath("Resource/Image/sqi.png");
-	pImage->setVolume(200, 200, 0);
-	pImage->setPosition(512, 384, 0);
+	Cube* pCube = CREATE_NODE(Cube);
+	pCube->setVolume(400, 400, 200);
+	pCube->setColor(sys::Color3B(255, 255, 255));
+	pCube->setTexFrame(frame);
+	pCube->setRotation(45, 45, 0);
+	pStencil->setStencilNode(pCube);
 
-	pStencil->setStencilNode(pImage);
+	texture2D = G_TEXTURE_CACHE->getTexture2D({ "Resource/Image/sqi.png", EIF_PNG });
 
-	pImage  = CREATE_NODE(CtrlImage);
-	pImage->setImagePath("Resource/Image/sqi.png");
-	pImage->setVolume(300, 300, 0);
+	frame = new TexFrame();
+	AUTO_RELEASE_OBJECT(frame);
+	frame->setTextureWithRect(texture2D);
 
-	pStencil->addChild(pImage);
+	pCube = CREATE_NODE(Cube);
+	pCube->setVolume(100, 100, 100);
+	pCube->setRotation(-45, -45, 0);
+	pCube->setTexFrame(frame);
+
+	pStencil->addChild(pCube);
 }
 
 void WndRender::testCamera()
@@ -608,16 +625,28 @@ void WndRender::testClipPlane()
 
 void WndRender::testScissor()
 {
-	CtrlScissor* pScissor = CREATE_NODE(CtrlScissor);
-	pScissor->setVolume(100, 200, 0);
-	pScissor->setPosition(0, 0);
-	this->getCanvas()->getRoot()->addChild(pScissor);
+	CtrlScissor* pScissor1 = CREATE_NODE(CtrlScissor);
+	pScissor1->setVolume(100, 200, 0);
+	pScissor1->setPosition(512, 384);
+	this->getCanvas()->getRoot()->addChild(pScissor1);
 
-	CtrlImage* pImage = CREATE_NODE(CtrlImage);
+	CtrlImage* pImage;
+	pImage = CREATE_NODE(CtrlImage);
 	pImage->setImagePath("Resource/Image/sqi.png");
 	pImage->setVolume(200, 200, 0);
-	pImage->setScale(1.5, 1.0, 2);
-	pScissor->addChild(pImage);
+	pImage->setPosition(100, 100);
+	pScissor1->addChild(pImage);
+
+	CtrlScissor* pScissor2 = CREATE_NODE(CtrlScissor);
+	pScissor2->setVolume(100, 100, 0);
+	pScissor1->addChild(pScissor2);
+
+	pImage = CREATE_NODE(CtrlImage);
+	pImage->setImagePath("Resource/Image/sqi.png");
+	pImage->setVolume(200, 200, 0);
+	pImage->setPosition(100, 100);
+	pImage->setScale(3, 3, 1);
+	pScissor2->addChild(pImage);
 }
 
 void WndRender::testScrollView()
