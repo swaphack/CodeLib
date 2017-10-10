@@ -17,9 +17,15 @@ CtrlAudioSource::~CtrlAudioSource()
 	}
 }
 
-bool CtrlAudioSource::loadData(const uchar* data)
+bool CtrlAudioSource::loadDataFromFile(const std::string& filepath)
 {
-	if (data == nullptr)
+	if (filepath.empty())
+	{
+		return false;
+	}
+
+	std::string fullpath = G_FILEPATH->getFilePath(filepath.c_str());
+	if (fullpath.empty())
 	{
 		return false;
 	}
@@ -35,32 +41,26 @@ bool CtrlAudioSource::loadData(const uchar* data)
 	{
 		return false;
 	}
-	FMOD_RESULT result = system->createStream((char*)data, FMOD_DEFAULT, 0, &_sound);
+	FMOD_RESULT result = system->createSound(filepath.c_str(), getInitMode(), 0, &_sound);
 	if (result != FMOD_OK)
 	{
 		return false;
 	}
 
-	setMode(FMOD_LOOP_NORMAL);
-	result = system->playSound(_sound, nullptr, false, &_channel);
+	result = system->playSound(_sound, nullptr, true, &_channel);
+	if (result != FMOD_OK)
+	{
+		return false;
+	}
+
+	result = _channel->setMode(FMOD_LOOP_NORMAL);
 
 	return result == FMOD_OK;
 }
 
-bool CtrlAudioSource::loadFromFile(const std::string& filepath)
+bool CtrlAudioSource::loadDataFromClip(const uchar* data)
 {
-	std::string fullpath = G_FILEPATH->getFilePath(filepath.c_str());
-	if (fullpath.empty())
-	{
-		return false;
-	}
-	std::string data;
-	if (!sys::File::read(fullpath.c_str(), data))
-	{
-		return false;
-	}
-
-	return loadData((uchar*)data.c_str());
+	return false;
 }
 
 void CtrlAudioSource::setMusicSpeed(float speed)
@@ -71,6 +71,11 @@ void CtrlAudioSource::setMusicSpeed(float speed)
 float CtrlAudioSource::getMusicSpeed()
 {
 	AUDIO_GET_FUNC(_sound, getMusicSpeed, float);
+}
+
+void CtrlAudioSource::play()
+{
+	this->setPaused(false);
 }
 
 void CtrlAudioSource::stop()
@@ -88,12 +93,12 @@ bool CtrlAudioSource::getPaused()
 	AUDIO_GET_FUNC(_channel, getPaused, bool);
 }
 
-void CtrlAudioSource::setVolume(float volume)
+void CtrlAudioSource::setAudioVolume(float volume)
 {
 	AUDIO_SET_FUNC(_channel, setVolume, volume);
 }
 
-float CtrlAudioSource::getVolume()
+float CtrlAudioSource::getAudioVolume()
 {
 	AUDIO_GET_FUNC(_channel, getVolume, float);
 }
@@ -177,6 +182,11 @@ void CtrlAudioSource::setLoopCount(int loopCount)
 int CtrlAudioSource::getLoopCount()
 {
 	AUDIO_GET_FUNC(_channel, getLoopCount, int);
+}
+
+int CtrlAudioSource::getInitMode()
+{
+	return FMOD_2D;
 }
 
 

@@ -16,19 +16,20 @@ namespace render
 		CtrlAudioSource();
 		virtual ~CtrlAudioSource();
 	public:
-		// 加载数据
-		bool loadData(const uchar* data);
 		// 加载文件数据
-		bool loadFromFile(const std::string& filepath);
+		bool loadDataFromFile(const std::string& filepath);
+		// 加载音效块数据
+		bool loadDataFromClip(const uchar* data);
 
 		void setMusicSpeed(float speed);
 		float getMusicSpeed();
 
+		void play();
 		void stop();
 		void setPaused(bool paused);
 		bool getPaused();
-		void setVolume(float volume);
-		float getVolume();
+		void setAudioVolume(float volume);
+		float getAudioVolume();
 		void setVolumeRamp(bool ramp);
 		bool getVolumeRamp();
 		float getAudibility();
@@ -44,9 +45,13 @@ namespace render
 		float getFrequency();
 		void setPriority(int priority);
 		int getPriority();
+
+		//0 = oneshot, 1 = loop once then stop, -1 = loop forever, default = -1
 		void setLoopCount(int loopcount);
 		int getLoopCount();
-
+	protected:
+		// 初始化默认配置
+		virtual int getInitMode();
 	protected:
 		// 声音
 		FMOD::Sound* _sound;

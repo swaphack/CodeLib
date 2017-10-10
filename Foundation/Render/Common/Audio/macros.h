@@ -3,11 +3,17 @@
 #include "../Node/Node.h"
 #include "ext-config.h"
 
+#define AUDIO_DEBUG true
+
 
 #define AUDIO_DO_FUNC(Target, FuncName, ...) \
 if (Target) \
 {\
-	Target->FuncName(__VA_ARGS__);\
+	FMOD_RESULT ret = Target->FuncName(__VA_ARGS__);\
+	if (AUDIO_DEBUG && ret != FMOD_OK) \
+	{ \
+		PRINT("Audio Error, Function Name %s\n", #FuncName);\
+	} \
 }
 
 #define AUDIO_SET_FUNC AUDIO_DO_FUNC

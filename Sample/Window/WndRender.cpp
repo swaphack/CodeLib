@@ -26,9 +26,9 @@ void WndRender::show()
 	//this->testMedia();
 	//this->testScissor();
 
-	this->addLight();
+	//this->addLight();
 
-	this->testStencil();
+	this->testAudio3D();
 }
 
 void WndRender::testMoveImage()
@@ -703,4 +703,122 @@ void WndRender::testDrawNode()
 
 void WndRender::testConcurrent()
 {
+}
+
+void WndRender::testAudio()
+{
+	CtrlAudioSource* pSrcAudio = CREATE_NODE(CtrlAudioSource);
+	pSrcAudio->setPosition(200, 100, 50);
+	pSrcAudio->loadDataFromFile("Resource/Audio/city_build.mp3");
+	pSrcAudio->setLoopCount(-1);
+	this->getCanvas()->getRoot()->addChild(pSrcAudio);
+
+	PRINT("OK");
+}
+
+#define DISTANCEFACTOR 1
+
+void WndRender::testAudio3D()
+{
+	int nCount = G_AUDIO->get3DNumListeners();
+	G_AUDIO->set3DNumListeners(1);
+	G_AUDIO->set3DSettings(render::Audio3DSettings(1.0f, DISTANCEFACTOR, 1.0f));
+
+	CtrlAudioListener* pListener = CREATE_NODE(CtrlAudioListener);
+	pListener->setPosition(0, 0, -1);
+	this->getCanvas()->getRoot()->addChild(pListener);
+
+	DrawNode* pListenerDrawNode = CREATE_NODE(DrawNode);
+	pListenerDrawNode->setColor(Color3B(0, 255, 0));
+	pListenerDrawNode->setWidth(100);
+	pListenerDrawNode->setDrawMode(EBM_POINTS);
+	pListenerDrawNode->appendPoint(Vector3::Zero);
+	pListener->addChild(pListenerDrawNode);
+
+	G_KEYBOARDMANAGER->addDispatcher(pListener, this, KEYBOARD_DELEGATTE_SELECTOR(WndRender::onKeyBoardListener));
+
+	CtrlAudioSource3D* pSrcAudio = CREATE_NODE(CtrlAudioSource3D);
+	pSrcAudio->loadDataFromFile("Resource/Audio/city_castle.mp3");
+	pSrcAudio->set3DMinMaxDistance({ 0.5f, 10000 });
+	pSrcAudio->setPosition(-200, 0, 0);
+	pSrcAudio->setVelocity({ 0, 0, 0 });
+	pSrcAudio->setAudioVolume(100);
+	pSrcAudio->play();
+	this->getCanvas()->getRoot()->addChild(pSrcAudio);
+
+	DrawNode* pSrcDrawNode = CREATE_NODE(DrawNode);
+	pSrcDrawNode->setColor(Color3B(255, 0, 0));
+	pSrcDrawNode->setWidth(100);
+	pSrcDrawNode->setDrawMode(EBM_POINTS);
+	pSrcDrawNode->appendPoint(Vector3::Zero);
+	pSrcAudio->addChild(pSrcDrawNode);
+
+
+	pSrcAudio = CREATE_NODE(CtrlAudioSource3D);
+	pSrcAudio->loadDataFromFile("Resource/Audio/m_city.mp3");
+	pSrcAudio->set3DMinMaxDistance({ 0.5f, 10000 });
+	pSrcAudio->setPosition(200, 0, 0);
+	pSrcAudio->setVelocity({ 0, 0, 0 });
+	pSrcAudio->setAudioVolume(100);
+	pSrcAudio->play();
+	this->getCanvas()->getRoot()->addChild(pSrcAudio);
+
+	pSrcDrawNode = CREATE_NODE(DrawNode);
+	pSrcDrawNode->setColor(Color3B(255, 0, 0));
+	pSrcDrawNode->setWidth(100);
+	pSrcDrawNode->setDrawMode(EBM_POINTS);
+	pSrcDrawNode->appendPoint(Vector3::Zero);
+	pSrcAudio->addChild(pSrcDrawNode);
+}
+
+void WndRender::onKeyBoardListener(sys::Object* object, sys::BoardKey key, sys::ButtonStatus type)
+{
+	CtrlAudioListener* pNode = dynamic_cast<CtrlAudioListener*>(object);
+	if (pNode == nullptr)
+	{
+		return;
+	}
+	if (type == EBS_BUTTON_UP)
+	{
+		return;
+	}
+
+	sys::Vector3 lastPos;
+	sys::Vector3 vel;
+	sys::Vector3 curPos;
+
+	bool bMatch = true;
+	float speed = 5;
+	lastPos = pNode->getPosition();
+	
+	if (key == EBK_LEFT)
+	{
+		pNode->setPositionX(pNode->getPositionX() - speed);
+	}
+	else if (key == EBK_RIGHT)
+	{
+		pNode->setPositionX(pNode->getPositionX() + speed);
+	}
+	else if(key == EBK_UP)
+	{
+		pNode->setPositionY(pNode->getPositionY() + speed);
+	}
+	else if (key == EBK_DOWN)
+	{
+		pNode->setPositionY(pNode->getPositionY() - speed);
+	}
+	else
+	{
+		bMatch = false;
+	}
+
+	if (!bMatch)
+	{
+		return;
+	}
+
+	curPos = pNode->getPosition();
+	vel = curPos - lastPos;
+	//vel *= 1000.0f * this->getRefreshInterval();
+	pNode->setVelocity(vel);
 }

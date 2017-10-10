@@ -22,9 +22,15 @@ bool CtrlAudioSource3D::init()
 	}
 
 	_notify->addListen(ENP_SPACE, [&](){
-		Attribute3DSettings settting = get3DAttributes();
-		settting.position = this->getPosition();
-		this->set3DAttributes(settting);
+		FMOD_VECTOR pos;
+		FMOD_VECTOR vel;
+
+		_3dSettings.position = this->getPosition();
+
+		ConvertToFMODVector(_3dSettings.position, pos);
+		ConvertToFMODVector(_3dSettings.velocity, vel);
+
+		AUDIO_SET_FUNC(_channel, set3DAttributes, &pos, &vel);
 	});
 
 	return true;
@@ -32,27 +38,12 @@ bool CtrlAudioSource3D::init()
 
 void CtrlAudioSource3D::set3DAttributes(const Attribute3DSettings& setting)
 {
-	FMOD_VECTOR pos;
-	FMOD_VECTOR vel;
-
-	ConvertToFMODVector(setting.position, pos);
-	ConvertToFMODVector(setting.velocity, vel);
-	
-	AUDIO_SET_FUNC(_channel, set3DAttributes, &pos, &vel);
+	_3dSettings = setting;
 }
 
 Attribute3DSettings CtrlAudioSource3D::get3DAttributes()
 {
-	FMOD_VECTOR pos;
-	FMOD_VECTOR vel;
-
-	AUDIO_DO_FUNC(_channel, get3DAttributes, &pos, &vel);
-	
-	Attribute3DSettings setting;
-	ConvertToSysVector(pos, setting.position);
-	ConvertToSysVector(vel, setting.velocity);
-
-	return setting;
+	return _3dSettings;
 }
 
 void CtrlAudioSource3D::set3DMinMaxDistance(const sys::Range& distance)
@@ -199,4 +190,19 @@ Distance3DFilterSettings CtrlAudioSource3D::get3DDistanceFilter()
 	Distance3DFilterSettings setting;
 	AUDIO_DO_FUNC(_channel, get3DDistanceFilter, &setting.custom, &setting.customLevel, &setting.centerFreq);
 	return setting;
+}
+
+void CtrlAudioSource3D::setVelocity(const sys::Vector3& velocity)
+{
+	_3dSettings.velocity = velocity;
+}
+
+const sys::Vector3& CtrlAudioSource3D::getVelocity()
+{
+	return _3dSettings.velocity;
+}
+
+int CtrlAudioSource3D::getInitMode()
+{
+	return FMOD_3D;
 }

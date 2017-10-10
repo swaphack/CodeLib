@@ -20,7 +20,7 @@ const char* FilePath::getFilePath(const char* filename)
 {
 	if (filename == nullptr)
 	{
-		return nullptr;
+		return "";
 	}
 
 	
@@ -46,7 +46,7 @@ const char* FilePath::getFilePath(const char* filename)
 		it2++;
 	}
 
-	return nullptr;
+	return "";
 }
 
 bool FilePath::getFileData(const char* filename, std::string& data)

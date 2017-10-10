@@ -102,5 +102,13 @@ namespace render
 		float get3DDopplerLevel();
 		void set3DDistanceFilter(const Distance3DFilterSettings& setting);
 		Distance3DFilterSettings get3DDistanceFilter();
+
+		void setVelocity(const sys::Vector3& velocity);
+		const sys::Vector3& getVelocity();
+	protected:
+		// ≥ı ºªØƒ¨»œ≈‰÷√
+		virtual int getInitMode();
+	private:
+		Attribute3DSettings _3dSettings;
 	};
 }

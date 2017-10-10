@@ -41,6 +41,9 @@ public:
 	void testDrawNode();
 
 	void testConcurrent();
+
+	void testAudio();
+	void testAudio3D();
 protected:
 	void onTouchBegin(sys::Object* object, float x, float y);
 	void onTouchMove(sys::Object* object, float x, float y);
@@ -50,5 +53,6 @@ protected:
 	void onTouchImage(sys::Object* object, float x, float y);
 	void onKeyBoardCamera(sys::Object* object, sys::BoardKey key, sys::ButtonStatus type);
 	void onKeyBoardRole(sys::Object* object, sys::BoardKey key, sys::ButtonStatus type);
+	void onKeyBoardListener(sys::Object* object, sys::BoardKey key, sys::ButtonStatus type);
 private:
 };
