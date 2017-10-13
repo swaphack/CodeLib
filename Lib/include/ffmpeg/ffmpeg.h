@@ -19,6 +19,7 @@ extern "C" {
 #include "libavutil/imgutils.h"
 #include "libswscale/swscale.h"
 #include "libavutil/audio_fifo.h"
+#include "libswresample/swresample.h"
 #ifdef __cplusplus
 }
 #endif

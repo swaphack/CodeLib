@@ -14,7 +14,9 @@ namespace web
 			:dbname("")
 		{}
 
-		DBAuthor(const std::string& host, int port, const std::string& username, const std::string& password, const std::string& dbname)
+		DBAuthor(const std::string& host, int port, 
+			const std::string& username, const std::string& password, 
+			const std::string& dbname)
 			:dbname(dbname)
 		{
 			this->host = host;

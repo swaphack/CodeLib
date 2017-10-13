@@ -19,20 +19,12 @@ bool CtrlFrame::init()
 {
 	ColorNode::init();
 
-	_notify->addListen(ENP_TEXTURE_FRAME, [&](){
-		const Texture* texture = _texFrame->getTexture();
-		if (texture == nullptr)
-		{
-			return;
-		}
+	_notify->addListen(ENP_SPACE, [this](){
+		onTextureChange();
+	});
 
-		sys::Size size = sys::Size(static_cast<float>(texture->getWidth()), static_cast<float>(texture->getHeight()));
-
-		if (isCounter())TextureTool::setTexture2DCounterCoords(&_texRect, size, _texFrame->getRect());
-		else TextureTool::setTexture2DCoords(&_texRect, size, _texFrame->getRect());
-
-		TextureTool::setTexture2DVertexts(&_texRect, sys::Vector3::Zero, _volume, _anchor);
-		TextureTool::setTexture2DFlip(&_texRect, _bFlipX, _bFlipY);
+	_notify->addListen(ENP_TEXTURE_FRAME, [this](){
+		onTextureChange();
 	});
 
 
@@ -61,19 +53,22 @@ void CtrlFrame::setTexture(const Texture* texture)
 	}
 
 	_texFrame->setTexture(texture);
-	onTextureChange();
+	setDirty(true);
+	_notify->addMark(ENP_TEXTURE_FRAME);
 }
 
 void CtrlFrame::setTextureWithRect(const Texture* texture)
 {
 	_texFrame->setTextureWithRect(texture);
-	onTextureChange();
+	setDirty(true);
+	_notify->addMark(ENP_TEXTURE_FRAME);
 }
 
 void CtrlFrame::setTexRect(const sys::Rect& rect)
 {
 	_texFrame->setRect(rect);
-	onTextureChange();
+	setDirty(true);
+	_notify->addMark(ENP_TEXTURE_FRAME);
 } 
 
 void CtrlFrame::setTexFrame(const TexFrame* texFrame)
@@ -84,7 +79,8 @@ void CtrlFrame::setTexFrame(const TexFrame* texFrame)
 	}
 
 	*_texFrame = *texFrame;
-	onTextureChange();
+	setDirty(true);
+	_notify->addMark(ENP_TEXTURE_FRAME);
 }
 
 const TexFrame* CtrlFrame::getTexFrame()
@@ -95,7 +91,8 @@ const TexFrame* CtrlFrame::getTexFrame()
 void CtrlFrame::setFlipX(bool status)
 {
 	_bFlipX = status;
-	onTextureChange();
+	setDirty(true);
+	_notify->addMark(ENP_TEXTURE_FRAME);
 }
 
 bool CtrlFrame::isFlipX()
@@ -106,7 +103,8 @@ bool CtrlFrame::isFlipX()
 void CtrlFrame::setFlipY(bool status)
 {
 	_bFlipY = status;
-	onTextureChange();
+	setDirty(true);
+	_notify->addMark(ENP_TEXTURE_FRAME);
 }
 
 bool CtrlFrame::isFlipY()
@@ -131,7 +129,17 @@ void CtrlFrame::initSelf()
 
 void CtrlFrame::onTextureChange()
 {
-	setDirty(true);
-	_notify->addMark(ENP_SPACE);
-	_notify->addMark(ENP_TEXTURE_FRAME);
+	const Texture* texture = _texFrame->getTexture();
+	if (texture == nullptr)
+	{
+		return;
+	}
+
+	sys::Size size = sys::Size(static_cast<float>(texture->getWidth()), static_cast<float>(texture->getHeight()));
+
+	if (isCounter())TextureTool::setTexture2DCounterCoords(&_texRect, size, _texFrame->getRect());
+	else TextureTool::setTexture2DCoords(&_texRect, size, _texFrame->getRect());
+
+	TextureTool::setTexture2DVertexts(&_texRect, sys::Vector3::Zero, _volume, _anchor);
+	TextureTool::setTexture2DFlip(&_texRect, _bFlipX, _bFlipY);
 }

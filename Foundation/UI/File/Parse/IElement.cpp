@@ -1,5 +1,6 @@
 #include "IElement.h"
 #include "text.h"
+#include "Layout/LayoutItem.h"
 
 using namespace ui;
 
@@ -26,8 +27,6 @@ bool IElement::load(tinyxml2::XMLElement* pXmlNode, bool clean/* = true*/)
 
 	tinyxml2::XMLAttribute* pAttribute = (tinyxml2::XMLAttribute*)pXmlNode->FirstAttribute();
 
-	getNodeProperty()->setName(pXmlNode->Name());
-
 	while (pAttribute)
 	{
 		getNodeProperty()->setAttribute(pAttribute->Name(), pAttribute->Value());
@@ -36,6 +35,12 @@ bool IElement::load(tinyxml2::XMLElement* pXmlNode, bool clean/* = true*/)
 	}
 
 	this->parseAttributes();
+
+	if (getLayoutItem())
+	{
+		getLayoutItem()->setWidget(getWidget());
+		getLayoutItem()->setName(pXmlNode->Name());
+	}
 
 	return true;
 }
@@ -71,4 +76,14 @@ bool IElement::save(tinyxml2::XMLElement* pXmlNode, bool clean/* = true*/)
 WidgetProperty* IElement::getNodeProperty()
 {
 	return _nodeProperty;
+}
+
+void ui::IElement::setWidget(Widget* node)
+{
+	_node = node;
+}
+
+void ui::IElement::setLayoutItem(LayoutItem* item)
+{
+	_layoutItem = item;
 }

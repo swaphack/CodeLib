@@ -2,12 +2,13 @@
 
 #include <string>
 #include <map>
+#include "macros.h"
+#include "AudioProtocol.h"
 
 namespace FMOD
 {
 	class Sound;
 	class System;
-	struct FMOD_VECTOR;
 }
 
 namespace sys
@@ -17,24 +18,6 @@ namespace sys
 
 namespace render
 {
-	// 音频3d设置
-	struct Audio3DSettings
-	{
-	public:
-		// 多普勒缩放比例
-		float dopplerscale = 1;
-		// 距离系数
-		float distancefactor = 1;
-		// 衰减缩放比例
-		float rolloffscale =1;
-	public:
-		Audio3DSettings()
-			:dopplerscale(1), distancefactor(1), rolloffscale(1)
-		{}
-		Audio3DSettings(float dopplerscale, float distancefactor, float rolloffscale)
-			:dopplerscale(dopplerscale), distancefactor(distancefactor), rolloffscale(rolloffscale)
-		{}
-	};
 	// 音频管理
 	class AudioManager
 	{
@@ -46,6 +29,7 @@ namespace render
 		void update();
 		void close();
 		void dispose();
+
 		// 3d效果
 		void set3DSettings(const Audio3DSettings& setting);
 		Audio3DSettings get3DSettings();
@@ -53,6 +37,10 @@ namespace render
 		// 3d监听者数量
 		void set3DNumListeners(int numlisteners);
 		int get3DNumListeners();
+
+		// 几何特性
+		void setGeometrySettings(float maxworldsize);
+		float getGeometrySettings();
 
 		inline FMOD::System* getSystem() const { return _system; };
 	private:

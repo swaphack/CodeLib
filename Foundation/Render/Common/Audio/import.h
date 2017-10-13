@@ -5,3 +5,5 @@
 #include "CtrlAudioSource.h"
 #include "CtrlAudioSource3D.h"
 #include "CtrlAudioSpeaker.h"
+#include "CtrlAudioGeometry.h"
+#include "CtrlAudioReverb3D.h"

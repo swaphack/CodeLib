@@ -7,10 +7,11 @@ Audio::Audio()
 , _channels(0)
 , _channelLayout(0)
 , _format(0)
-, _sampleRate(0)
-, _frameSize(0)
+, _frequency(0)
+, _size(0)
+, _samples(0)
 {
-	//SAFE_FREE(_data);
+	SAFE_FREE(_data);
 }
 
 Audio::~Audio()
@@ -24,7 +25,7 @@ uchar* Audio::getData()
 
 void Audio::setData(uchar* data)
 {
-	//SAFE_FREE(_data);
+	SAFE_FREE(_data);
 	_data = data;
 }
 
@@ -58,22 +59,32 @@ void Audio::setFormat(int format)
 	_format = format;
 }
 
-int Audio::getSampleRate()
+int Audio::getFrequency()
 {
-	return _sampleRate;
+	return _frequency;
 }
 
-void Audio::setSampleRate(int sampleRate)
+void Audio::setFrequency(int frequency)
 {
-	_sampleRate = sampleRate;
+	_frequency = frequency;
 }
 
-int Audio::getFrameSize()
+int Audio::getSize()
 {
-	return _frameSize;
+	return _size;
 }
 
-void Audio::setFrameSize(int size)
+void Audio::setSize(int size)
 {
-	_frameSize = size;
+	_size = size;
+}
+
+int Audio::getSamples()
+{
+	return _samples;
+}
+
+void Audio::setSamples(int samples)
+{
+	_samples = samples;
 }

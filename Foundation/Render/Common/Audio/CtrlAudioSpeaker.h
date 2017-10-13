@@ -4,6 +4,13 @@
 
 namespace render
 {
+	struct SpeakerSettings
+	{
+		FMOD_SPEAKER speaker = FMOD_SPEAKER_FRONT_CENTER;
+		sys::Vector2 pos;
+		bool active = false;
+
+	};
 	// “Ù∆µº‡Ã˝
 	class CtrlAudioSpeaker : public Node
 	{
@@ -15,8 +22,12 @@ namespace render
 
 		void setMode(FMOD_SPEAKER speek);
 		FMOD_SPEAKER getMode();
+
+		void setActive(bool active);
+		bool isActive();
 	protected:
+		void updateSpeaker();
 	private:
-		FMOD_SPEAKER _speekMode;
+		SpeakerSettings _speekSettings;
 	};
 }

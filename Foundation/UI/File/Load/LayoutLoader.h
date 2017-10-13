@@ -1,12 +1,12 @@
 #pragma once
 
-#include "LayoutItemLoader.h"
+#include "NodeLoader.h"
 
 namespace ui
 {
 	class Layout;
 	// 布局
-	class LayoutLoader : public LayoutItemLoader
+	class LayoutLoader : public NodeLoader
 	{
 	public:
 		LayoutLoader();
@@ -17,9 +17,10 @@ namespace ui
 		// 保存属性
 		virtual void saveAttributes();
 	public:
-		INIT_LOADER_LAYOUTITEM(Layout, ELEMENT_NAME_LAYOUT);
+		INIT_LOADER_WIDGET(Layout, render::Node, ELEMENT_NAME_LAYOUT);
 	};
 
+	/*
 	class HorizontalLayout;
 	// 水平布局
 	class HLayoutLoader : public LayoutLoader
@@ -35,4 +36,5 @@ namespace ui
 	public:
 		INIT_LOADER_LAYOUTITEM(VerticalLayout, ELEMENT_NAME_VLAYOUT);
 	};
+	*/
 }

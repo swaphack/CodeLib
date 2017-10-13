@@ -221,6 +221,14 @@ void SpaceProtocol::setScale(const sys::Vector3& scale)
 	onSpaceChange();
 }
 
+void SpaceProtocol::setScale(float scale)
+{
+	_scale.x = scale;
+	_scale.y = scale;
+	_scale.z = scale;
+	onSpaceChange();
+}
+
 const sys::Vector3& SpaceProtocol::getScale()
 {
 	return _scale;
@@ -348,7 +356,7 @@ float SpaceProtocol::getRotationZ()
 BodyProtocol::BodyProtocol()
 {
 	this->setAnchorPoint(0.5, 0.5, 0.5);
-	this->setVolume(1, 1, 1);
+	this->setVolume(0, 0, 0);
 }
 
 BodyProtocol::~BodyProtocol()

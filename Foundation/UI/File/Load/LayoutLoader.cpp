@@ -15,7 +15,7 @@ LayoutLoader::~LayoutLoader()
 
 void LayoutLoader::parseAttributes()
 {
-	LayoutItemLoader::parseAttributes();
+	NodeLoader::parseAttributes();
 
 	sys::Margin margin;
 
@@ -24,7 +24,7 @@ void LayoutLoader::parseAttributes()
 
 void LayoutLoader::saveAttributes()
 {
-	LayoutItemLoader::saveAttributes();
+	NodeLoader::saveAttributes();
 
 	SAVE_LAYOUTITEM_ATTRIBUTE(PROPERTY_MARGIN, getMargin);
 }

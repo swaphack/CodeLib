@@ -9,6 +9,8 @@ namespace FMOD
 }
 namespace render
 {
+	class Audio;
+
 	// 音频
 	class CtrlAudioSource : public Node
 	{
@@ -19,7 +21,7 @@ namespace render
 		// 加载文件数据
 		bool loadDataFromFile(const std::string& filepath);
 		// 加载音效块数据
-		bool loadDataFromClip(const uchar* data);
+		bool loadDataFromClip(Audio* audioClip);
 
 		void setMusicSpeed(float speed);
 		float getMusicSpeed();
@@ -28,8 +30,8 @@ namespace render
 		void stop();
 		void setPaused(bool paused);
 		bool getPaused();
-		void setAudioVolume(float volume);
-		float getAudioVolume();
+		void setMusicVolume(float volume);
+		float getMusicVolume();
 		void setVolumeRamp(bool ramp);
 		bool getVolumeRamp();
 		float getAudibility();

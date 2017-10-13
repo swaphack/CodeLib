@@ -22,8 +22,6 @@ ImageLoader::~ImageLoader()
 
 void ImageLoader::parseAttributes()
 {
-	NodeLoader::parseAttributes();
-
 	sys::Color4B color;
 	std::string str;
 	bool boolVal;
@@ -36,6 +34,8 @@ void ImageLoader::parseAttributes()
 	LOAD_WDIGET_STRING_ATTRIBUTE(PROPERTY_PATH, setImagePath, str);
 	LOAD_WDIGET_ATTRIBUTE(PROPERTY_FLIPX, setFlipX, boolVal);
 	LOAD_WDIGET_ATTRIBUTE(PROPERTY_FLIPY, setFlipY, boolVal);
+
+	NodeLoader::parseAttributes();
 }
 
 void ImageLoader::saveAttributes()

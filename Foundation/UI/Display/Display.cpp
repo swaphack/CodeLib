@@ -20,10 +20,7 @@ Display::~Display()
 
 void Display::setUIRoot(Widget* root)
 {
-	if (root)
-	{
-		m_pRoot = root;
-	}
+	m_pRoot = root;
 }
 
 void Display::show()
@@ -37,10 +34,6 @@ void Display::show()
 		initUI();
 		initText();
 		initEvent();
-		if (m_pRoot)
-		{
-			m_pRoot->addChild(m_pLayout->getWidget());
-		}
 	}
 
 	if (m_pLayout->getWidget())
@@ -64,11 +57,7 @@ void Display::hide()
 
 void Display::close()
 {
-	if (m_pLayout && m_pLayout->getWidget())
-	{
-		m_pLayout->getWidget()->removeFromParent();
-	}
-	SAFE_RELEASE(m_pLayout);
+	SAFE_DELETE(m_pLayout);
 }
 
 void Display::reload()
@@ -97,55 +86,6 @@ const char* Display::getFilePath()
 	return m_strFilePath.c_str();
 }
 
-void Display::setViewSize(const sys::Size& inputSize)
-{
-	if (m_sViewSize.equal(inputSize))
-	{
-		return;
-	}
-
-	m_sViewSize = inputSize;
-
-	onViewSizeChanged(inputSize);
-}
-
-const sys::Size& Display::getViewSize()
-{
-	return m_sViewSize;
-}
-
-void Display::setLayoutDirection(LayoutDirection eDirection)
-{
-	if (m_eLayoutDirection == eDirection)
-	{
-		return;
-	}
-	m_eLayoutDirection = eDirection;
-
-	Layout* pNewLayout = nullptr;
-
-	switch (eDirection)
-	{
-	case ui::ELD_NONE:
-		break;
-	case ui::ELD_HORIZONTAL:
-		pNewLayout = new HorizontalLayout();
-		break;
-	case ui::ELD_VERTICAL:
-		pNewLayout = new VerticalLayout();
-		break;
-	default:
-		break;
-	}
-
-	if (pNewLayout == nullptr)
-	{
-		return;
-	}
-
-	pNewLayout->copy(m_pLayout);
-}
-
 LayoutDirection Display::getLayoutDirection()
 {
 	return m_eLayoutDirection;
@@ -163,18 +103,26 @@ void Display::onViewSizeChanged(const sys::Size& inputSize)
 		return;
 	}
 
-	sys::Size minSize = m_pLayout->getLayoutMinSize();
-	sys::Size maxSize = m_pLayout->getLayoutMaxSize();
-
-	// 超出限定范围的不做处理
-	if (minSize.width > inputSize.width || minSize.height > inputSize.height
-		|| maxSize.width < inputSize.width || maxSize.height < inputSize.height)
+	float scale = 1.0f;
+	if (m_pLayout->getWidget())
 	{
-		return;
+		if (m_eLayoutDirection == ELD_VERTICAL)
+		{
+			scale = inputSize.height / m_sViewSize.height;
+		}
+		else if (m_eLayoutDirection == ELD_HORIZONTAL)
+		{
+			scale = inputSize.width / m_sViewSize.width;
+		}
+
+		//m_pLayout->getWidget()->setScale(scale);
 	}
+
+	sys::Size defaultSize = m_pLayout->getSize();
+
 	sys::Size size;
-	size.width = inputSize.width;
-	size.height = inputSize.height;
+	size.width = defaultSize.width * scale;
+	size.height = defaultSize.height * scale;
 
 	m_pLayout->resize(size);
 }
@@ -192,12 +140,17 @@ bool Display::loadFile()
 		return false;
 	}
 
-	SAFE_RELEASE(m_pLayout);
-	SAFE_RETAIN(pLayout);
-
+	SAFE_DELETE(m_pLayout);
 	m_pLayout = pLayout;
+	m_sViewSize = UIProxy::getInstance()->getDesignSize();
+	m_eLayoutDirection = UIProxy::getInstance()->getDesignDirection();
 
-	this->setViewSize(UIProxy::getInstance()->getDesignSize());
+	this->autoResize();
+
+	if (m_pRoot && m_pLayout->getWidget())
+	{
+		m_pRoot->addChild(m_pLayout->getWidget());
+	}
 
 	return true;
 }
@@ -214,4 +167,11 @@ void Display::initEvent()
 void Display::initText()
 {
 
+}
+
+void Display::autoResize()
+{
+	sys::Size viewSize(render::Tool::getGLViewWidth(), render::Tool::getGLViewHeight());
+
+	this->onViewSizeChanged(viewSize);
 }

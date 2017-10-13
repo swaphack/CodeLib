@@ -7,13 +7,15 @@
 
 
 #define AUDIO_DO_FUNC(Target, FuncName, ...) \
-if (Target) \
 {\
-	FMOD_RESULT ret = Target->FuncName(__VA_ARGS__);\
-	if (AUDIO_DEBUG && ret != FMOD_OK) \
-	{ \
-		PRINT("Audio Error, Function Name %s\n", #FuncName);\
-	} \
+	if (Target) \
+	{\
+		FMOD_RESULT ret = Target->FuncName(__VA_ARGS__);\
+		if (AUDIO_DEBUG && ret != FMOD_OK) \
+		{ \
+			PRINT("Audio Error, Function Name %s\n", #FuncName);\
+		} \
+	}\
 }
 
 #define AUDIO_SET_FUNC AUDIO_DO_FUNC
@@ -21,7 +23,10 @@ if (Target) \
 #define AUDIO_GET_FUNC(Target, FuncName, Type) \
 {\
 	Type value = 0;\
-	AUDIO_DO_FUNC(Target, FuncName, &value);\
+	if (Target) \
+	{\
+		AUDIO_DO_FUNC(Target, FuncName, &value);\
+	}\
 	return value;\
 }
 

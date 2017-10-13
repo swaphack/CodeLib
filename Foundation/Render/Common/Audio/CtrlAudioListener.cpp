@@ -33,7 +33,7 @@ bool CtrlAudioListener::init()
 	_listenerID = s_ListenerCount++;
 
 	_notify->addListen(ENP_SPACE, [this](){
-		_listenerBody.position = this->getPosition();
+		_listenerBody.position = _realPosition;
 		updateListener();
 	});
 
@@ -101,7 +101,4 @@ void CtrlAudioListener::updateListener()
 	ConvertToFMODVector(_listenerBody.up, up);
 
 	AUDIO_SET_FUNC(G_AUDIO->getSystem(), set3DListenerAttributes, _listenerID, &position, &velocity, &forward, &up);
-
-
-	//AUDIO_DO_FUNC(G_AUDIO->getSystem(), get3DListenerAttributes, _listenerID, &position, &velocity, &forward, &up);
 }

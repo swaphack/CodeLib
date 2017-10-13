@@ -16,14 +16,16 @@ namespace render
 		ENP_NODE,
 		// 纹理
 		ENP_TEXTURE_FRAME,
-		// 立方体纹理
-		ENP_CUBE_FRAME,
+		// 模型纹理
+		ENP_MODEL_FRAME,
 		// 动作帧数改变
 		ENP_ANIMATION_FRAME,
 		// 界面
 		ENP_USER_INTERFACE,
 		// 音效
 		ENP_AUDIO,
+		// 几何
+		ENP_GEOMETRY,
 	};
 
 	// 推送委托

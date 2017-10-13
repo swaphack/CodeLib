@@ -3,6 +3,7 @@
 #include "macros.h"
 #include <map>
 #include <string>
+#include "EndPoint.h"
 
 namespace sys
 {
@@ -62,9 +63,9 @@ namespace sys
 		// socket id
 		int _sock;
 		// 本地地址和端口信息
-		std::pair<std::string, int> _localEP;
+		EndPoint _localEP;
 		// 远程地址和端口信息
-		std::pair<std::string, int> _remoteEP;
+		EndPoint _remoteEP;
 	};
 
 

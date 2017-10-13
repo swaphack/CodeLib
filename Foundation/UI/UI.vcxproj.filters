@@ -5,9 +5,6 @@
     <ClInclude Include="Layout\Layout.h">
       <Filter>Layout</Filter>
     </ClInclude>
-    <ClInclude Include="Layout\SizePolicy.h">
-      <Filter>Layout</Filter>
-    </ClInclude>
     <ClInclude Include="Layout\LayoutItem.h">
       <Filter>Layout</Filter>
     </ClInclude>
@@ -41,32 +38,33 @@
     <ClInclude Include="Display\import.h">
       <Filter>Display</Filter>
     </ClInclude>
-    <ClInclude Include="File\Load\NodeLoader.h">
-      <Filter>File\Load</Filter>
-    </ClInclude>
-    <ClInclude Include="File\Parse\WidgetParser.h">
-      <Filter>File\Parse</Filter>
-    </ClInclude>
     <ClInclude Include="File\Parse\IElement.h">
       <Filter>File\Parse</Filter>
-    </ClInclude>
-    <ClInclude Include="Layout\LayoutSpacerItem.h">
-      <Filter>Layout</Filter>
-    </ClInclude>
-    <ClInclude Include="Layout\LayoutWidgetItem.h">
-      <Filter>Layout</Filter>
-    </ClInclude>
-    <ClInclude Include="File\Parse\LayoutItemParser.h">
-      <Filter>File\Parse</Filter>
-    </ClInclude>
-    <ClInclude Include="File\Load\LayoutItemLoader.h">
-      <Filter>File\Load</Filter>
     </ClInclude>
     <ClInclude Include="File\Load\LayoutLoader.h">
       <Filter>File\Load</Filter>
     </ClInclude>
     <ClInclude Include="macros.h" />
     <ClInclude Include="File\Load\define.h">
+      <Filter>File\Load</Filter>
+    </ClInclude>
+    <ClInclude Include="LayoutEx\import.h">
+      <Filter>LayoutEx</Filter>
+    </ClInclude>
+    <ClInclude Include="LayoutEx\LayoutSpacerItem.h">
+      <Filter>LayoutEx</Filter>
+    </ClInclude>
+    <ClInclude Include="LayoutEx\LayoutWidgetItem.h">
+      <Filter>LayoutEx</Filter>
+    </ClInclude>
+    <ClInclude Include="LayoutEx\LayoutItemEx.h">
+      <Filter>LayoutEx</Filter>
+    </ClInclude>
+    <ClInclude Include="LayoutEx\LayoutEx.h">
+      <Filter>LayoutEx</Filter>
+    </ClInclude>
+    <ClInclude Include="ui_common.h" />
+    <ClInclude Include="File\Load\NodeLoader.h">
       <Filter>File\Load</Filter>
     </ClInclude>
   </ItemGroup>
@@ -88,6 +86,9 @@
     </Filter>
     <Filter Include="Resource">
       <UniqueIdentifier>{7c1ebd8a-3116-46ab-9b57-3570cf0c386c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="LayoutEx">
+      <UniqueIdentifier>{c2bca5f9-40b6-409c-b310-3ef2afa0db1b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -112,28 +113,25 @@
     <ClCompile Include="Display\Display.cpp">
       <Filter>Display</Filter>
     </ClCompile>
-    <ClCompile Include="File\Load\NodeLoader.cpp">
-      <Filter>File\Load</Filter>
-    </ClCompile>
-    <ClCompile Include="File\Parse\WidgetParser.cpp">
-      <Filter>File\Parse</Filter>
-    </ClCompile>
     <ClCompile Include="File\Parse\IElement.cpp">
       <Filter>File\Parse</Filter>
     </ClCompile>
-    <ClCompile Include="Layout\LayoutWidgetItem.cpp">
-      <Filter>Layout</Filter>
-    </ClCompile>
-    <ClCompile Include="Layout\LayoutSpacerItem.cpp">
-      <Filter>Layout</Filter>
-    </ClCompile>
-    <ClCompile Include="File\Parse\LayoutItemParser.cpp">
-      <Filter>File\Parse</Filter>
-    </ClCompile>
-    <ClCompile Include="File\Load\LayoutItemLoader.cpp">
+    <ClCompile Include="File\Load\LayoutLoader.cpp">
       <Filter>File\Load</Filter>
     </ClCompile>
-    <ClCompile Include="File\Load\LayoutLoader.cpp">
+    <ClCompile Include="LayoutEx\LayoutSpacerItem.cpp">
+      <Filter>LayoutEx</Filter>
+    </ClCompile>
+    <ClCompile Include="LayoutEx\LayoutWidgetItem.cpp">
+      <Filter>LayoutEx</Filter>
+    </ClCompile>
+    <ClCompile Include="LayoutEx\LayoutItemEx.cpp">
+      <Filter>LayoutEx</Filter>
+    </ClCompile>
+    <ClCompile Include="LayoutEx\LayoutEx.cpp">
+      <Filter>LayoutEx</Filter>
+    </ClCompile>
+    <ClCompile Include="File\Load\NodeLoader.cpp">
       <Filter>File\Load</Filter>
     </ClCompile>
   </ItemGroup>

@@ -12,7 +12,7 @@ namespace render
 	//struct PSR;
 	class TouchProxy;
 
-#define CREATE_NODE(NODE_TYPE) createNode<NODE_TYPE>()
+#define CREATE_NODE(NODE_TYPE) render::createNode<NODE_TYPE>()
 
 	template<typename T>
 	T* createNode()
@@ -149,8 +149,12 @@ namespace render
 		TouchProxy* _touchProxy;
 		// 矩形框
 		RectangeVertex _rectVertex;
-		// 空间坐标
+		// 空间坐标（实际）
 		RectangeVertex _realSpaceVertex;
+		// 空间位置（实际）
+		sys::Vector3 _realPosition;
+		// 缩放比例（实际）
+		sys::Vector3 _realScale;
 		// 通知
 		Notify* _notify;
 	};

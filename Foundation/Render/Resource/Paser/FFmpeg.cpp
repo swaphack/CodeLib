@@ -78,11 +78,62 @@ void createVideoAudio(const AVFrame* frame, VideoAudioClip* audio)
 		decChannelLayout = av_get_default_channel_layout(channels);
 	}
 
-// 	uchar* destData = (uchar *)malloc(sizeof(uchar)* dataSize);
-// 	memset(destData, 0, dataSize);
-// 	memcpy(destData, frame->data[0], dataSize);
+	/*
+	AVSampleFormat destFormat = AV_SAMPLE_FMT_U8;
+	int destChannel = 1;
 
-	audio->init(frame->data[0], dataSize, channels, decChannelLayout, frame->format, frame->sample_rate);
+	AVFrame* destFrame = av_frame_alloc();
+	av_samples_alloc(destFrame->data, destFrame->linesize, nbChannels, frame->nb_samples, destFormat, 1);
+	struct SwrContext* pContext = swr_alloc_set_opts(NULL,
+		decChannelLayout, destFormat, frame->sample_rate,
+		decChannelLayout, (AVSampleFormat)frame->format, frame->sample_rate,
+		0, NULL);
+
+	int outCount = frame->nb_samples + 256;
+	int outSize = av_samples_get_buffer_size(nullptr, destChannel, outCount, destFormat, 0);
+	if (outSize == 0)
+	{
+		swr_free(&pContext);
+		return;
+	}
+	const uint8_t **in = (const uint8_t **)frame->extended_data;
+	uchar* destData = (uchar*)malloc(outCount);	
+	memset(destData, 0, outCount);
+	uint destDataSize = outSize;
+	uint8_t **out = &destData;
+	//av_fast_malloc(destData, &destDataSize, outSize);
+	if (!destData)
+	{
+		swr_free(&pContext);
+		return;
+	}
+	int cvtLen = swr_convert(pContext, out, outCount, in, frame->nb_samples);
+	if (cvtLen < 0)
+	{
+		swr_free(&pContext);
+		return;
+	}
+
+	swr_free(&pContext);
+	int totalSize = cvtLen * destChannel * av_get_bytes_per_sample(destFormat);
+	*/
+
+	uchar* destData = (uchar*)malloc(dataSize);
+	memset(destData, 0, dataSize);
+	//memcpy(destData, frame->extended_data, totalSize);
+
+	for (int i = 0; i < frame->linesize[0]; i++)
+	{
+		for (int j = 0; j < nbChannels; j++)
+		{
+			if (frame->extended_data[j][i])
+			{
+				destData[nbChannels * i + j] = frame->extended_data[j][i];
+			}
+		}
+	}
+
+	audio->init(destData, dataSize, nbChannels, decChannelLayout, frame->format, frame->sample_rate, frame->nb_samples);
 }
 
 void createVideoTitle(const AVSubtitle* subTitle, std::string* title)
@@ -121,19 +172,21 @@ VideoAudioClip::~VideoAudioClip()
 
 }
 
-void VideoAudioClip::init(uchar* data, int frameSize, int channels, int64_t channelLayout, int format, int sampleRat)
+void VideoAudioClip::init(uchar* data, int frameSize, int channels, int64_t channelLayout, int format, int frequency, int samples)
 {
 	this->setData(data);
-	this->setFrameSize(frameSize);
+	this->setSize(frameSize);
 	this->setChannelLayout(channelLayout);
 	this->setChannels(channels);
 	this->setFormat(format);
+	this->setFrequency(frequency);
+	this->setSamples(samples);
 }
 
 void VideoAudioClip::init(uchar* data, int frameSize)
 {
 	this->setData(data);
-	this->setFrameSize(frameSize);
+	this->setSize(frameSize);
 }
 
 

@@ -330,7 +330,6 @@ void Node::updateSelf()
 	this->updateTranform();
 }
 
-
 void Node::initSelf()
 {
 	_notify->notify();
@@ -403,6 +402,9 @@ void Node::calRealSpaceInfo()
 	volume.mult(scale);
 
 	Tool::calRealRect(position, volume, _anchor, _realSpaceVertex);
+
+	_realPosition = position;
+	_realScale = scale;
 }
 
 void Node::onSpaceChange()

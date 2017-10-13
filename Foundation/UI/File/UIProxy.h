@@ -3,32 +3,10 @@
 #include "Parse/import.h"
 #include "Load/import.h"
 #include "text.h"
+#include "ui_common.h"
 
 namespace ui
 {
-	/**
-	*	元素类型
-	*/
-	enum ElementType
-	{
-		/**
-		*	未定义
-		*/
-		EET_NONE,
-		/**
-		*	控件
-		*/
-		EET_WIDGET,
-		/**
-		*	布局节点
-		*/
-		EET_LAYOUTITEM,
-		/**
-		*	布局
-		*/
-		EET_LAYOUT,
-	};
-
 	// ui加载
 	class UIProxy
 	{
@@ -61,6 +39,10 @@ namespace ui
 		*	设计大小
 		*/
 		const sys::Size& getDesignSize();
+		/**
+		*	获取布局方向
+		*/
+		LayoutDirection getDesignDirection();
 	protected:
 		/**
 		*	初始化
@@ -73,20 +55,16 @@ namespace ui
 	protected:
 		//////////////////////////////////////////////////////////////////////////
 		// 加载单一节点
-		IElement* loadSingleElement(tinyxml2::XMLElement* xmlNode, ElementType& type);
-		// 加载布局节点
-		bool loadLayoutItem(LayoutItemLoader* loader, tinyxml2::XMLElement* xmlNode);
+		IElement* loadSingleElement(tinyxml2::XMLElement* xmlNode);
 		// 加载布局
-		bool loadLayout(LayoutLoader* loader, tinyxml2::XMLElement* xmlNode);
+		bool loadLayoutItem(IElement* loader, tinyxml2::XMLElement* xmlNode);
 		// 加载根元素
 		IElement* loadRoot(tinyxml2::XMLElement* xmlNode);
 		//////////////////////////////////////////////////////////////////////////
 		// 保存节点
 		bool saveWidget(Widget* widget, tinyxml2::XMLElement* xmlNode);
-		// 保存布局项
-		bool saveLayoutItem(LayoutItem* layoutItem, tinyxml2::XMLElement* xmlNode);
 		// 保存布局
-		bool saveLayout(Layout* layout, tinyxml2::XMLElement* xmlNode);
+		bool saveLayoutItem(LayoutItem* item, tinyxml2::XMLElement* xmlNode);
 		// 保存根元素
 		bool saveRoot(Layout* layout, tinyxml2::XMLDocument* document);
 	private:
@@ -95,6 +73,8 @@ namespace ui
 		ElementParsers _elementParsers;
 		// 设计大小
 		sys::Size _designSize;
+		// 布局方向
+		LayoutDirection _designDirection;
 	}; 
 
 	#define G_UIPROXY UIProxy::getInstance()

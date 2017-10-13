@@ -15,20 +15,22 @@ namespace render
 		int getChannels();
 		int64_t getChannelLayout();
 		int getFormat();
-		int getSampleRate();
-		int getFrameSize();
+		int getFrequency();
+		int getSize();
+		int getSamples();
 	protected:
 		void setData(uchar* data);
 		void setChannels(int channels);
 		void setChannelLayout(int64_t channelLayout);
 		void setFormat(int format);
-		void setSampleRate(int sampleRate);
-		void setFrameSize(int size);
+		void setFrequency(int frequency);
+		void setSize(int size);
+		void setSamples(int samples);
 	private:
 		// 数据
 		uchar* _data;
 		// 大小
-		int _frameSize;
+		int _size;
 		// 通道数
 		int _channels;
 		// 通道布局
@@ -36,6 +38,8 @@ namespace render
 		// 格式
 		int _format;
 		// 采样频率
-		int _sampleRate;
+		int _frequency;
+		// 采样数
+		int _samples;
 	};
 }

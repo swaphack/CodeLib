@@ -38,4 +38,36 @@ namespace ui
 			return *this;
 		}
 	};
+
+	/**
+	*	元素类型
+	*/
+	enum ElementType
+	{
+		/**
+		*	未定义
+		*/
+		EET_NONE,
+		/**
+		*	控件
+		*/
+		EET_WIDGET,
+		/**
+		*	布局
+		*/
+		EET_LAYOUT,
+	};
+
+	/**
+	*	布局方向
+	*/
+	enum LayoutDirection
+	{
+		// 无
+		ELD_NONE,
+		// 垂直布局
+		ELD_HORIZONTAL,
+		// 水平布局
+		ELD_VERTICAL,
+	};
 }

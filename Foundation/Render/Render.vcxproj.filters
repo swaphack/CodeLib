@@ -222,6 +222,15 @@
     <ClCompile Include="Graphic\DCSample\DCTextureBatch.cpp">
       <Filter>Graphic\DCSample</Filter>
     </ClCompile>
+    <ClCompile Include="Common\Audio\CtrlAudioGeometry.cpp">
+      <Filter>Common\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Audio\CtrlAudioSpeaker.cpp">
+      <Filter>Common\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Audio\AudioProtocol.cpp">
+      <Filter>Common\Audio</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Common\GL\import.h">
@@ -617,6 +626,15 @@
     <ClInclude Include="ext-config.h" />
     <ClInclude Include="2d\import.h">
       <Filter>2d</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Audio\CtrlAudioGeometry.h">
+      <Filter>Common\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Audio\CtrlAudioReverb3D.h">
+      <Filter>Common\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Audio\AudioProtocol.h">
+      <Filter>Common\Audio</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

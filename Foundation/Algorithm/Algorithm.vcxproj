@@ -66,6 +66,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="algorithm.h" />
+    <ClInclude Include="Path\AStar.h" />
+    <ClInclude Include="Path\Voronoi.h" />
     <ClInclude Include="Sort\Sort.h" />
   </ItemGroup>
   <ItemGroup>

@@ -6,55 +6,23 @@
 
 namespace ui
 {
-	// 创建节点
-#define CREATE_LOADER_WIDGET(T) \
-	virtual Widget* getWidget() \
-	{ \
-	if (_node == nullptr) \
-	{ \
-	_node = new T(); \
-	AUTO_RELEASE_OBJECT(_node); \
-} \
-	return _node; \
-}
-
 	/**
 	*	初始化节点加载方法
-	*	@param T 类名称
+	*	@param TL 布局类型
+	*	@param TW 空间类型
 	*	@param NAME 解析节点的名称
 	*/
-#define INIT_LOADER_WIDGET(T, NAME) \
-	CREATE_LOADER_WIDGET(T) \
+#define INIT_LOADER_WIDGET(TL,TW, NAME) \
+public:\
+	virtual LayoutItem* getLayoutItem() { if (_layoutItem == nullptr) { _layoutItem = new TL();} return _layoutItem;}\
+	virtual Widget* getWidget() { if (_node == nullptr) {_node = CREATE_NODE(TW);} return _node; }\
 	virtual const char* getName() { return NAME; }\
-	T* getCastWidget() { return static_cast<T*>(getWidget()); }
+	TW* getCastWidget() { return static_cast<TW*>(getWidget()); }\
+	TL* getCastLayoutItem() { return static_cast<TL*>(getLayoutItem()); } \
 
 	// 获取当前节点：子类会隐藏父类同名函数
 #define GET_WIDGET getCastWidget()
-	//////////////////////////////////////////////////////////////////////////
-
-	// 创建节点
-#define CREATE_LOADER_LAYOUTITEM(T) \
-	virtual LayoutItem* getLayoutItem() \
-	{ \
-	if (m_pLayoutItem == nullptr) \
-	{ \
-	m_pLayoutItem = new T(); \
-	AUTO_RELEASE_OBJECT(m_pLayoutItem); \
-} \
-	return m_pLayoutItem; \
-}
-
-	/**
-	*	初始化节点加载方法
-	*	@param T 类名称
-	*	@param NAME 解析节点的名称
-	*/
-#define INIT_LOADER_LAYOUTITEM(T, NAME) \
-	CREATE_LOADER_LAYOUTITEM(T) \
-	virtual const char* getName() { return NAME; }\
-	T* getCastLayoutItem() { return static_cast<T*>(getLayoutItem()); }
-
-	// 获取当前节点：子类会隐藏父类同名函数
+	// 获取当前布局项：子类会隐藏父类同名函数
 #define GET_LAYOUTITEM getCastLayoutItem()
 //////////////////////////////////////////////////////////////////////////
 	// LOAD  ATTRIBUTE
@@ -125,13 +93,8 @@ namespace ui
 #define ADD_LAYOUTITEM_ATTRIBUTE(NAME, FUNC) ADD_ATTRIBUTE(GET_LAYOUTITEM, NAME, FUNC)
 
 //////////////////////////////////////////////////////////////////////////
-#define ELEMENT_NAME_WIDGET			"Widget"
+#define ELEMENT_NAME_LAYOUT			"Layout"
+#define ELEMENT_NAME_NODE			"Node"
 #define ELEMENT_NAME_IMAGE			"Image"
 #define ELEMENT_NAME_TEXT			"Text"
-
-#define ELEMENT_NAME_LAYOUTITEM		"LayoutItem"
-#define ELEMENT_NAME_LAYOUT			"Layout"
-#define ELEMENT_NAME_HLAYOUT		"HLayout"
-#define ELEMENT_NAME_VLAYOUT		"VLayout"
-
 }

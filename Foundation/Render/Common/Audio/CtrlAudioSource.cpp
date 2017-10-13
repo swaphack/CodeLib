@@ -1,8 +1,37 @@
 #include "CtrlAudioSource.h"
 #include "AudioManager.h"
+#include "Resource/Component/Audio.h"
 #include <map>
 
 using namespace render;
+
+FMOD_RESULT F_CALLBACK pcmreadcallback(FMOD_SOUND* /*sound*/, void *data, unsigned int datalen)
+{
+	static float  t1 = 0, t2 = 0;        // time
+	static float  v1 = 0, v2 = 0;        // velocity
+	signed short *stereo16bitbuffer = (signed short *)data;
+
+	for (unsigned int count = 0; count < (datalen >> 2); count++)     // >>2 = 16bit stereo (4 bytes per sample)
+	{
+		*stereo16bitbuffer++ = (signed short)(sin(t1) * 32767.0f);    // left channel
+		*stereo16bitbuffer++ = (signed short)(sin(t2) * 32767.0f);    // right channel
+
+		t1 += 0.01f + v1;
+		t2 += 0.0142f + v2;
+		v1 += (float)(sin(t1) * 0.002f);
+		v2 += (float)(sin(t2) * 0.002f);
+	}
+
+	return FMOD_OK;
+}
+
+FMOD_RESULT F_CALLBACK pcmsetposcallback(FMOD_SOUND* /*sound*/, int /*subsound*/, unsigned int /*position*/, FMOD_TIMEUNIT /*postype*/)
+{
+	/*
+	This is useful if the user calls Channel::setPosition and you want to seek your data accordingly.
+	*/
+	return FMOD_OK;
+}
 
 CtrlAudioSource::CtrlAudioSource()
 {
@@ -58,9 +87,50 @@ bool CtrlAudioSource::loadDataFromFile(const std::string& filepath)
 	return result == FMOD_OK;
 }
 
-bool CtrlAudioSource::loadDataFromClip(const uchar* data)
+bool CtrlAudioSource::loadDataFromClip(Audio* audioClip)
 {
-	return false;
+	if (audioClip == nullptr || audioClip->getData() == nullptr)
+	{
+		return false;
+	}
+	if (_sound)
+	{
+		_sound->release();
+		_sound = nullptr;
+	}
+
+	FMOD::System* system = G_AUDIO->getSystem();
+	if (system == nullptr)
+	{
+		return false;
+	}
+	FMOD_CREATESOUNDEXINFO exinfo;
+	memset(&exinfo, 0, sizeof(FMOD_CREATESOUNDEXINFO));
+	exinfo.cbsize = sizeof(FMOD_CREATESOUNDEXINFO);
+	exinfo.defaultfrequency = audioClip->getFrequency();
+	exinfo.numchannels = audioClip->getChannels();
+	//exinfo.length = audioClip->getFrameSize();
+	exinfo.length = audioClip->getSize();
+	//exinfo.format = FMOD_SOUND_FORMAT_PCM16;
+	//exinfo.pcmreadcallback = pcmreadcallback;
+	//exinfo.pcmsetposcallback = pcmsetposcallback;
+
+
+	FMOD_RESULT result = system->createStream((char*)audioClip->getData(), FMOD_OPENRAW, &exinfo, &_sound);
+	if (result != FMOD_OK)
+	{
+		return false;
+	}
+
+	result = system->playSound(_sound, nullptr, true, &_channel);
+	if (result != FMOD_OK)
+	{
+		return false;
+	}
+
+	result = _channel->setMode(FMOD_LOOP_NORMAL);
+
+	return result == FMOD_OK;
 }
 
 void CtrlAudioSource::setMusicSpeed(float speed)
@@ -93,12 +163,12 @@ bool CtrlAudioSource::getPaused()
 	AUDIO_GET_FUNC(_channel, getPaused, bool);
 }
 
-void CtrlAudioSource::setAudioVolume(float volume)
+void CtrlAudioSource::setMusicVolume(float volume)
 {
 	AUDIO_SET_FUNC(_channel, setVolume, volume);
 }
 
-float CtrlAudioSource::getAudioVolume()
+float CtrlAudioSource::getMusicVolume()
 {
 	AUDIO_GET_FUNC(_channel, getVolume, float);
 }

@@ -3,33 +3,30 @@ using namespace ui;
 
 #define LAYOUT_ROOT_NAME	"root"
 #define LAYOUT_SIZE_WIDTH	"width"
-#define LAYOUT_SIZE_Height	"height"
+#define LAYOUT_SIZE_HEIGHT	"height"
+#define LAYOUT_DERECTION	"layout"
 
 void UIProxy::init()
 {
-	this->registerElementParser(ELEMENT_NAME_LAYOUTITEM, new LayoutItemLoader());
+	//this->registerElementParser(ELEMENT_NAME_LAYOUTITEM, new LayoutItemLoader());
+	//this->registerElementParser(ELEMENT_NAME_LAYOUT, new LayoutLoader());
 	this->registerElementParser(ELEMENT_NAME_LAYOUT, new LayoutLoader());
-	this->registerElementParser(ELEMENT_NAME_HLAYOUT, new HLayoutLoader());
-	this->registerElementParser(ELEMENT_NAME_VLAYOUT, new VLayoutLoader());
-	this->registerElementParser(ELEMENT_NAME_WIDGET, new NodeLoader());
 	this->registerElementParser(ELEMENT_NAME_TEXT, new TextLoader());
 	this->registerElementParser(ELEMENT_NAME_IMAGE, new ImageLoader());
+
+	//this->registerElementParser(ELEMENT_NAME_HLAYOUT, new HLayoutLoader());
+	//this->registerElementParser(ELEMENT_NAME_VLAYOUT, new VLayoutLoader());
 }
 
 // 获取控件名称
-const char* getWidgetName(Widget* widget)
+const char* getWidgetName(LayoutItem* item)
 {
-	if (widget == nullptr)
+	if (item == nullptr)
 	{
 		return nullptr;
 	}
 
-	if (dynamic_cast<CtrlText*>(widget))
-		return ELEMENT_NAME_TEXT;
-	else if (dynamic_cast<CtrlImage*>(widget))
-		return ELEMENT_NAME_IMAGE;
-	else
-		return ELEMENT_NAME_WIDGET;
+	return item->getName();
 }
 
 // 获取布局名称
@@ -40,11 +37,11 @@ const char* getLayoutName(Layout* layout)
 		return nullptr;
 	}
 
-	if (dynamic_cast<HorizontalLayout*>(layout))
-		return ELEMENT_NAME_HLAYOUT;
-	else if (dynamic_cast<VerticalLayout*>(layout))
-		return ELEMENT_NAME_VLAYOUT;
-	else
+// 	if (dynamic_cast<HorizontalLayout*>(layout))
+// 		return ELEMENT_NAME_HLAYOUT;
+// 	else if (dynamic_cast<VerticalLayout*>(layout))
+// 		return ELEMENT_NAME_VLAYOUT;
+// 	else
 		return ELEMENT_NAME_LAYOUT;
 }
 
@@ -90,14 +87,15 @@ Layout* UIProxy::loadFile(const char* filepath)
 		return nullptr;
 	}
 
-
 	IElement* element = loadRoot(pRoot);
 	if (element == nullptr)
 	{
 		return nullptr;
 	}
 
-	return static_cast<LayoutLoader*>(element)->getCastLayoutItem();
+	ui::Layout* pLayout = static_cast<LayoutLoader*>(element)->getCastLayoutItem();
+
+	return pLayout;
 }
 
 bool UIProxy::saveFile(Layout* layout, const char* filepath, const sys::Size& designSize)
@@ -170,6 +168,11 @@ const sys::Size& UIProxy::getDesignSize()
 	return _designSize;
 }
 
+LayoutDirection UIProxy::getDesignDirection()
+{
+	return _designDirection;
+}
+
 IElement* UIProxy::getElement(const char* name)
 {
 	if (_elementParsers.find(name) == _elementParsers.end())
@@ -180,9 +183,8 @@ IElement* UIProxy::getElement(const char* name)
 	return _elementParsers[name];
 }
 
-IElement* UIProxy::loadSingleElement(tinyxml2::XMLElement* xmlNode, ElementType& type)
+IElement* UIProxy::loadSingleElement(tinyxml2::XMLElement* xmlNode)
 {
-	type = EET_NONE;
 	if (xmlNode == nullptr)
 	{
 		return nullptr;
@@ -193,100 +195,57 @@ IElement* UIProxy::loadSingleElement(tinyxml2::XMLElement* xmlNode, ElementType&
 	{
 		return nullptr;
 	}
+	IElement* element = iter->second;
 
-	if (!iter->second->load(xmlNode))
+	NodeLoader* loader = dynamic_cast<NodeLoader*>(element);
+	if (loader == nullptr)
 	{
 		return nullptr;
 	}
 
-	IElement* element = iter->second;
-	// 空间节点
-	NodeLoader* widgetLoader = dynamic_cast<NodeLoader*>(element);
-	if (widgetLoader != nullptr)
+	loader->setLayoutItem(nullptr);
+	loader->setWidget(nullptr);
+
+	if (!loader->load(xmlNode))
 	{
-		type = EET_WIDGET;
-		return widgetLoader;
-	}
-	// 布局节点
-	LayoutLoader* layoutLoader = dynamic_cast<LayoutLoader*>(element);
-	if (layoutLoader != nullptr)
-	{
-		type = EET_LAYOUT;
-		return layoutLoader;
-	}
-	// 布局节点
-	LayoutItemLoader* layoutItemLoader = dynamic_cast<LayoutItemLoader*>(element);
-	if (layoutItemLoader != nullptr)
-	{
-		type = EET_LAYOUTITEM;
-		return layoutItemLoader;
+		return nullptr;
 	}
 
-	return nullptr;
+	return element;
 }
 
-bool UIProxy::loadLayoutItem(LayoutItemLoader* loader, tinyxml2::XMLElement* xmlNode)
+bool UIProxy::loadLayoutItem(IElement* loader, tinyxml2::XMLElement* xmlNode)
 {
 	if (loader == nullptr || xmlNode == nullptr)
 	{
 		return false;
 	}
 
-	ElementType childType = EET_NONE;
-	IElement* childElement = nullptr;
-	tinyxml2::XMLElement* pChildNode = xmlNode->FirstChildElement();
-	while (pChildNode)
-	{
-		childElement = loadSingleElement(pChildNode, childType);
-		if (childElement == nullptr || childType != EET_WIDGET)
-		{
-			return false;
-		}
-
-		NodeLoader* pChildNodeLoader = dynamic_cast<NodeLoader*>(childElement);
-		if (pChildNodeLoader)
-		{
-			loader->getCastLayoutItem()->setWidget(pChildNodeLoader->getCastWidget());
-		}
-
-		pChildNode = pChildNode->NextSiblingElement();
-	}
-
-	return true;
-}
-
-bool UIProxy::loadLayout(LayoutLoader* loader, tinyxml2::XMLElement* xmlNode)
-{
-	if (loader == nullptr || xmlNode == nullptr)
+	LayoutLoader* pLayoutLoader = dynamic_cast<LayoutLoader*>(loader);
+	if (pLayoutLoader == nullptr)
 	{
 		return false;
 	}
 
-	ElementType childType = EET_NONE;
 	IElement* childElement = nullptr;
-
+	tinyxml2::XMLElement* childXmlNode = nullptr;
 	while (xmlNode)
 	{
-		childElement = loadSingleElement(xmlNode->FirstChildElement(), childType);
-		if (childElement && childType == EET_LAYOUTITEM)
+		childXmlNode = xmlNode->FirstChildElement();
+		while (childXmlNode)
 		{
-			LayoutItemLoader* pChildLayoutItemLoader = dynamic_cast<LayoutItemLoader*>(childElement);
-			if (pChildLayoutItemLoader)
+			childElement = loadSingleElement(childXmlNode);
+			if (childElement)
 			{
-				loadLayoutItem(pChildLayoutItemLoader, xmlNode->FirstChildElement());
+				NodeLoader* pChildLayoutLoader = dynamic_cast<NodeLoader*>(childElement);
+				if (pLayoutLoader && pChildLayoutLoader)
+				{
+					pLayoutLoader->getCastLayoutItem()->addItem(pChildLayoutLoader->getCastLayoutItem());
+				}
 
-				loader->getCastLayoutItem()->addItem(pChildLayoutItemLoader->getCastLayoutItem());
+				loadLayoutItem(childElement, childXmlNode->FirstChildElement());
 			}
-		}
-		else if (childElement && childType == EET_LAYOUT)
-		{
-			LayoutLoader* pChildLayoutLoader = dynamic_cast<LayoutLoader*>(childElement);
-			if (pChildLayoutLoader)
-			{
-				loadLayout(pChildLayoutLoader, xmlNode->FirstChildElement());
-
-				loader->getCastLayoutItem()->addItem(pChildLayoutLoader->getCastLayoutItem());
-			}
+			childXmlNode = childXmlNode->NextSiblingElement();
 		}
 		xmlNode = xmlNode->NextSiblingElement();
 	}
@@ -301,8 +260,9 @@ IElement* UIProxy::loadRoot(tinyxml2::XMLElement* xmlNode)
 		return nullptr;
 	}
 
-	_designSize.width = xmlNode->IntAttribute("width");
-	_designSize.height = xmlNode->IntAttribute("height");
+	_designSize.width = xmlNode->IntAttribute(LAYOUT_SIZE_WIDTH);
+	_designSize.height = xmlNode->IntAttribute(LAYOUT_SIZE_HEIGHT);
+	_designDirection = (LayoutDirection)xmlNode->IntAttribute(LAYOUT_DERECTION);
 
 	tinyxml2::XMLElement* firstChild = xmlNode->FirstChildElement();
 	if (firstChild == nullptr)
@@ -310,87 +270,25 @@ IElement* UIProxy::loadRoot(tinyxml2::XMLElement* xmlNode)
 		return nullptr;
 	}
 
-	ElementType type;
-	IElement* currentElement = loadSingleElement(firstChild, type);
-	if (currentElement == nullptr || type != EET_LAYOUT)
+	IElement* currentElement = loadSingleElement(firstChild);
+	if (currentElement == nullptr)
 	{// 空节点或者非布局节点
 		return nullptr;
 	}
 
-	loadLayout(static_cast<LayoutLoader*>(currentElement), firstChild);
+	loadLayoutItem(currentElement, firstChild);
 
 	return currentElement;
 }
 
-bool UIProxy::saveWidget(Widget* widget, tinyxml2::XMLElement* xmlNode)
+bool UIProxy::saveLayoutItem(LayoutItem* item, tinyxml2::XMLElement* xmlNode)
 {
-	if (widget == nullptr || xmlNode == nullptr)
+	if (item == nullptr || xmlNode == nullptr)
 	{
 		return false;
 	}
 
-	const char* name = getWidgetName(widget);
-	if (name == nullptr)
-	{
-		return false;
-	}
-
-	IElement* element = getElement(name);
-	if (element == nullptr)
-	{
-		return false;
-	}
-
-	NodeLoader* pLoader = (NodeLoader*)(element);
-	pLoader->setWidget(widget);
-	pLoader->save(xmlNode);
-
-	return true;
-}
-
-bool UIProxy::saveLayoutItem(LayoutItem* layoutItem, tinyxml2::XMLElement* xmlNode)
-{
-	if (layoutItem == nullptr || xmlNode == nullptr)
-	{
-		return false;
-	}
-
-	IElement* pElement = getElement(ELEMENT_NAME_LAYOUTITEM);
-	if (pElement == nullptr)
-	{
-		return false;
-	}
-	LayoutItemLoader* pLoader = dynamic_cast<LayoutItemLoader*>(pElement);
-	if (pLoader == nullptr)
-	{
-		return false;
-	}
-	pLoader->setLayoutItem(layoutItem);
-	pLoader->save(xmlNode);
-
-	if (layoutItem->getWidget())
-	{
-		const char* name = getWidgetName(layoutItem->getWidget());
-		if (name == nullptr)
-		{
-			return false;
-		}
-		tinyxml2::XMLElement* pChildNode = xmlNode->GetDocument()->NewElement(name);
-		saveWidget(layoutItem->getWidget(), pChildNode);
-		xmlNode->InsertEndChild(pChildNode);
-	}
-
-	return true;
-}
-
-bool UIProxy::saveLayout(Layout* layout, tinyxml2::XMLElement* xmlNode)
-{
-	if (layout == nullptr || xmlNode == nullptr)
-	{
-		return false;
-	}
-
-	const char* name = getLayoutName(layout);
+	const char* name = getWidgetName(item);
 	if (name == nullptr)
 	{
 		return false;
@@ -406,28 +304,28 @@ bool UIProxy::saveLayout(Layout* layout, tinyxml2::XMLElement* xmlNode)
 	{
 		return false;
 	}
-	pLoader->setLayoutItem(layout);
+	pLoader->setLayoutItem(item);
+	pLoader->setWidget(item->getWidget());
 	pLoader->save(xmlNode);
+
+	Layout* layout = dynamic_cast<Layout*>(item);
+	if (layout == nullptr)
+	{
+		return true;
+	}
 
 	std::vector<LayoutItem*>::const_iterator iter = layout->getChildren().begin();
 	while (iter != layout->getChildren().end())
 	{
 		tinyxml2::XMLElement* pChildNode = nullptr;
-		if (dynamic_cast<Layout*>(*iter))
-		{// 布局
-			name = getLayoutName(dynamic_cast<Layout*>(*iter));
-			if (name == nullptr)
-			{
-				return false;
-			}
-			pChildNode = xmlNode->GetDocument()->NewElement(name);
-			this->saveLayout(dynamic_cast<Layout*>(*iter), pChildNode);
+
+		name = getWidgetName(*iter);
+		if (name == nullptr)
+		{
+			continue;
 		}
-		else
-		{// 节点节点
-			pChildNode = xmlNode->GetDocument()->NewElement(ELEMENT_NAME_LAYOUTITEM);
-			this->saveLayoutItem(*iter, pChildNode);
-		}
+		pChildNode = xmlNode->GetDocument()->NewElement(name);
+		this->saveLayoutItem(*iter, pChildNode);
 
 		xmlNode->InsertEndChild(pChildNode);
 		iter++;
@@ -445,10 +343,11 @@ bool UIProxy::saveRoot(Layout* layout, tinyxml2::XMLDocument* document)
 
 	tinyxml2::XMLElement* pRootNode = document->NewElement(LAYOUT_ROOT_NAME);
 	pRootNode->SetAttribute(LAYOUT_SIZE_WIDTH, _designSize.width);
-	pRootNode->SetAttribute(LAYOUT_SIZE_Height, _designSize.height);
+	pRootNode->SetAttribute(LAYOUT_SIZE_HEIGHT, _designSize.height);
+	pRootNode->SetAttribute(LAYOUT_DERECTION, _designDirection);
 	document->InsertEndChild(pRootNode);
 
 	tinyxml2::XMLElement* pChildNode = document->NewElement(ELEMENT_NAME_LAYOUT);
 	pRootNode->InsertEndChild(pChildNode);
-	return saveLayout(layout, pChildNode);
+	return saveLayoutItem(layout, pChildNode);
 }

@@ -118,6 +118,8 @@ namespace render
 		void setScale(float x, float y, float z);
 
 		void setScale(const sys::Vector3& scale);
+
+		void setScale(float scale);
 		// 获取缩放比
 		float getScaleX();
 

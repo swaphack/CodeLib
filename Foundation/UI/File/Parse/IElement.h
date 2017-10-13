@@ -2,9 +2,12 @@
 
 #include "WidgetProperty.h"
 #include "text.h"
+#include "macros.h"
 
 namespace ui
 {
+	class LayoutItem;
+
 	// 节点解析器
 	class IElement
 	{
@@ -18,6 +21,14 @@ namespace ui
 		bool save(tinyxml2::XMLElement* pXmlNode, bool clean = true);
 		// 解析节点的名称
 		virtual const char* getName() = 0;
+		// 获取布局节点
+		virtual LayoutItem* getLayoutItem() = 0;
+		// 获取ui节点
+		virtual Widget* getWidget() = 0;
+		// 设置布局节点
+		void setLayoutItem(LayoutItem* item);
+		// 设置ui节点
+		void setWidget(Widget* node);
 	protected:
 		// 属性
 		WidgetProperty* getNodeProperty();
@@ -28,5 +39,8 @@ namespace ui
 	private:
 		// 节点属性
 		WidgetProperty* _nodeProperty;
+	protected:
+		Widget* _node = nullptr;
+		LayoutItem* _layoutItem = nullptr;
 	};
 }

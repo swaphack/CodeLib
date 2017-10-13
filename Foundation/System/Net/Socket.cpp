@@ -211,22 +211,22 @@ int Socket::getID()
 
 const char* Socket::getLocalIP()
 {
-	return _localEP.first.c_str();
+	return _localEP.addr.c_str();
 }
 
 int Socket::getLocalPort()
 {
-	return _localEP.second;
+	return _localEP.port;
 }
 
 const char* Socket::getRemoteIP()
 {
-	return _remoteEP.first.c_str();
+	return _remoteEP.addr.c_str();
 }
 
 int Socket::getRemotePort()
 {
-	return _remoteEP.second;
+	return _remoteEP.port;
 }
 
 void Socket::initDefaultOPT()
@@ -237,7 +237,7 @@ void Socket::initDefaultOPT()
 	::ioctlsocket(_sock, FIONBIO, &iMode);
 #else
 	int flags = fcntl(_sock, F_GETFL, 0); 
-	fcntl(socket, F_SETFL, flags | O_NONBLOCK);
+	fcntl(_sock, F_SETFL, flags | O_NONBLOCK);
 #endif 	
 
 	bool bDtLger = false;
@@ -251,11 +251,11 @@ void Socket::initDefaultOPT()
 	::setsockopt(_sock, SOL_SOCKET, SO_SNDBUF, (const char*)&nBufSize, sizeof(int));
 	::setsockopt(_sock, SOL_SOCKET, SO_RCVBUF, (const char*)&nBufSize, sizeof(int));
 
-	_localEP.first = "";
-	_localEP.second = 0;
+	_localEP.addr = "";
+	_localEP.port = 0;
 
-	_remoteEP.first = "";
-	_remoteEP.second = 0;
+	_remoteEP.addr = "";
+	_remoteEP.port = 0;
 }
 
 void Socket::initLocalAndRemote()
@@ -273,11 +273,13 @@ void Socket::initLocalAndRemote()
 	len = sizeof(struct sockaddr_in);
 	::getsockname(_sock, (struct sockaddr*)&addr_in, &len);
 	DNS::getIPAddress(&addr_in, ip, port);
-	_localEP.first = ip;
-	_localEP.second = port;
+	_localEP.addr = ip;
+	_localEP.port = port;
+	_localEP.ipv6 = addr_in.sin_family == AF_INET6;
 
 	::getpeername(_sock, (struct sockaddr*)&addr_in, &len);
 	DNS::getIPAddress(&addr_in, ip, port);
-	_remoteEP.first = ip;
-	_remoteEP.second = port;
+	_remoteEP.addr = ip;
+	_remoteEP.port = port;
+	_remoteEP.ipv6 = addr_in.sin_family == AF_INET6;
 }

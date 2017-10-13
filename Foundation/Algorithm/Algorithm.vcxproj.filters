@@ -5,10 +5,19 @@
     <ClInclude Include="Sort\Sort.h">
       <Filter>Sort</Filter>
     </ClInclude>
+    <ClInclude Include="Path\AStar.h">
+      <Filter>Path</Filter>
+    </ClInclude>
+    <ClInclude Include="Path\Voronoi.h">
+      <Filter>Path</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Sort">
       <UniqueIdentifier>{9009857c-58eb-4404-a8f0-3241054304c2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Path">
+      <UniqueIdentifier>{4aff5cd0-556e-4cce-8e0e-c0ff72ac91d1}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

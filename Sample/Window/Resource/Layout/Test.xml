@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<root width="1024" height="768">
-  <Layout rect="0,0,200,200" minsize="20,20" maxsize="65536,65536" sizepolicy="0,0" margin="0,0,0,0">
-    <LayoutItem rect="0,0,200,200" minsize="20,20" maxsize="65536,65536" sizepolicy="0,0">
-      <Image color="255,255,255,255" opacity="255" path="Resource/Image/NeHe.png" flipX="0" flipY="0"/>
-    </LayoutItem>
+<root width="1024" height="768" layout="1">
+  <Layout rect="0,568,200,200" margin="0,0,0,0">
+     <Image rect="0,0,200,200" color="255,255,255,255" opacity="255" path="Resource/Image/NeHe.png" flipX="0" flipY="0"/>
+     <Text rect="0,0,200,50" dimensions="200,50" text="255,255,255,255" path="Resource/Font/font_3.ttf" fontsize="24"/>
   </Layout>
 </root>
 
 <!--
 Layout 包含 Layout 和 LayoutItem
 LayoutItem 包含 Widget
+<Image rect="0,0,200,200" color="255,255,255,255" opacity="255" path="Resource/Image/NeHe.png" flipX="0" flipY="0"/>
 -->

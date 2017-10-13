@@ -1,17 +1,10 @@
 #pragma once
 
-#include "SizePolicy.h"
 #include "macros.h"
 
 namespace ui
 {
-	class Layout;
-
-	static const int LAYOUT_SIZE_MIN_WIDTH = 0;
-	static const int LAYOUT_SIZE_MIN_HEIGHT = 0;
-	static const int LAYOUT_SIZE_MAX_WIDTH = 65536;
-	static const int LAYOUT_SIZE_MAX_HEIGHT = 65536;
-
+	class LayoutEx;
 	/**
 	*	布局项, 抽象类
 	*	布局项的集合信息在界面调整中不做改变，改变的只有widget的集合信息
@@ -59,30 +52,6 @@ namespace ui
 		*/
 		sys::Size getSize();
 		/**
-		*	获取最小长宽的信息
-		*/
-		const sys::Size& getMinSize();
-		/**
-		*	设置最小长宽的信息
-		*/
-		void setMinSize(float width, float height);
-		/**
-		*	设置最小长宽的信息
-		*/
-		void setMinSize(const sys::Size& size);
-		/**
-		*	获取最大长宽的信息
-		*/
-		const sys::Size& getMaxSize();
-		/**
-		*	设置最大长宽的信息
-		*/
-		void setMaxSize(float width, float height);
-		/**
-		*	设置最大长宽的信息
-		*/
-		void setMaxSize(const sys::Size& size);
-		/**
 		*	设置元件
 		*/
 		void setWidget(Widget* widget);
@@ -90,39 +59,11 @@ namespace ui
 		*	获取元件
 		*/
 		Widget* getWidget();
-		/**
-		*	设置布局
-		*/
-		void setLayout(Layout* layout);
-		/**
-		*	获取布局
-		*/
-		Layout* getLayout();
-		/**
-		*	获取在窗体大小改变时的自我调整策略
-		*/
-		SizePolicy& getSizePolicy();
-		/**
-		*	获取在窗体大小改变时的自我调整策略
-		*/
-		void setSizePolicy(const SizePolicy& policy);
 	public: // 可能需重载的方法
-		/**
-		*	设置布局项的几何信息
-		*/
-		virtual void setLayoutGeometry(const sys::Rect& rect);
-		/**
-		*	获取布局的最小面积
-		*/
-		virtual sys::Size getLayoutMinSize();
-		/**
-		*	获取布局的最大面积
-		*/
-		virtual sys::Size getLayoutMaxSize();
 		/**
 		*	复制对象
 		*/
-		virtual bool copy(LayoutItem* item);
+		bool copy(LayoutItem* item);
 	public: // 其他辅助方法
 		/**
 		*	设置矩形框是否可见
@@ -147,19 +88,11 @@ namespace ui
 	protected:
 		// 几何信息
 		sys::Rect m_rGeometry;
-		// 最小面积
-		sys::Size m_sMinSize;
-		// 最大面积
-		sys::Size m_sMaxSize;
 		// 矩形框颜色
 		sys::Color4B m_cBoxColor;
 		// 是否显示矩形框
 		bool m_bBoxVisible;
 		// 空置项
 		Widget* m_pWidget;
-		// 布局
-		Layout* m_pLayout;
-		// 大小调整策略
-		SizePolicy m_spAdjust;
 	};
 }

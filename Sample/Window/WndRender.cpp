@@ -7,7 +7,7 @@ using namespace ui;
 WndRender::WndRender()
 {
 	this->init();
-	this->getCanvas()->setDimensions(render::ED_3D);
+	this->getCanvas()->setDimensions(render::ED_2D);
 }
 
 WndRender::~WndRender()
@@ -28,7 +28,7 @@ void WndRender::show()
 
 	//this->addLight();
 
-	this->testAudio3D();
+	this->testLayout();
 }
 
 void WndRender::testMoveImage()
@@ -708,9 +708,9 @@ void WndRender::testConcurrent()
 void WndRender::testAudio()
 {
 	CtrlAudioSource* pSrcAudio = CREATE_NODE(CtrlAudioSource);
-	pSrcAudio->setPosition(200, 100, 50);
 	pSrcAudio->loadDataFromFile("Resource/Audio/city_build.mp3");
-	pSrcAudio->setLoopCount(-1);
+	pSrcAudio->setMusicVolume(0.1f);
+	pSrcAudio->play();
 	this->getCanvas()->getRoot()->addChild(pSrcAudio);
 
 	PRINT("OK");
@@ -725,7 +725,7 @@ void WndRender::testAudio3D()
 	G_AUDIO->set3DSettings(render::Audio3DSettings(1.0f, DISTANCEFACTOR, 1.0f));
 
 	CtrlAudioListener* pListener = CREATE_NODE(CtrlAudioListener);
-	pListener->setPosition(0, 0, -1);
+	pListener->setPosition(100, 25, 0);
 	this->getCanvas()->getRoot()->addChild(pListener);
 
 	DrawNode* pListenerDrawNode = CREATE_NODE(DrawNode);
@@ -740,9 +740,9 @@ void WndRender::testAudio3D()
 	CtrlAudioSource3D* pSrcAudio = CREATE_NODE(CtrlAudioSource3D);
 	pSrcAudio->loadDataFromFile("Resource/Audio/city_castle.mp3");
 	pSrcAudio->set3DMinMaxDistance({ 0.5f, 10000 });
-	pSrcAudio->setPosition(-200, 0, 0);
+	pSrcAudio->setPosition(100, 50, 0);
 	pSrcAudio->setVelocity({ 0, 0, 0 });
-	pSrcAudio->setAudioVolume(100);
+	pSrcAudio->setMusicVolume(100);
 	pSrcAudio->play();
 	this->getCanvas()->getRoot()->addChild(pSrcAudio);
 
@@ -757,9 +757,9 @@ void WndRender::testAudio3D()
 	pSrcAudio = CREATE_NODE(CtrlAudioSource3D);
 	pSrcAudio->loadDataFromFile("Resource/Audio/m_city.mp3");
 	pSrcAudio->set3DMinMaxDistance({ 0.5f, 10000 });
-	pSrcAudio->setPosition(200, 0, 0);
+	pSrcAudio->setPosition(400, 100, 0);
 	pSrcAudio->setVelocity({ 0, 0, 0 });
-	pSrcAudio->setAudioVolume(100);
+	pSrcAudio->setMusicVolume(100);
 	pSrcAudio->play();
 	this->getCanvas()->getRoot()->addChild(pSrcAudio);
 
@@ -769,6 +769,34 @@ void WndRender::testAudio3D()
 	pSrcDrawNode->setDrawMode(EBM_POINTS);
 	pSrcDrawNode->appendPoint(Vector3::Zero);
 	pSrcAudio->addChild(pSrcDrawNode);
+
+	float maxSize = G_AUDIO->getGeometrySettings();
+	G_AUDIO->setGeometrySettings(10);
+
+	CtrlAudioGeometry* pGeometryNode = CREATE_NODE(CtrlAudioGeometry);
+	pGeometryNode->init(1, 20);
+	pGeometryNode->setForward({ 1, 0, 0 });
+	pGeometryNode->setUp({ 0, 1, 0 });
+	pGeometryNode->setActive(true);
+	this->getCanvas()->getRoot()->addChild(pGeometryNode);
+
+	std::vector<sys::Vector3> vertices;
+	vertices.push_back({ 250, 0, 0 });
+	vertices.push_back({ 300, 0, 0 });
+	vertices.push_back({ 300, 600, 0 });
+	vertices.push_back({ 250, 600, 0 });
+
+// 	CtrlAudioGeometryPolygon* pPolygonNode = pGeometryNode->addPolygon(vertices);
+// 	pPolygonNode->setDirectOcclusion(1.0f);
+// 	pPolygonNode->setReverbOcclusion(1.0f);
+// 	pPolygonNode->setDoubleSided(true);
+// 
+// 	pSrcDrawNode = CREATE_NODE(DrawNode);
+// 	pSrcDrawNode->setColor(Color3B(255, 0, 0));
+// 	pSrcDrawNode->setWidth(100);
+// 	pSrcDrawNode->setDrawMode(EBM_POLYGON);
+// 	pSrcDrawNode->setPoints(vertices);
+// 	pPolygonNode->addChild(pSrcDrawNode);
 }
 
 void WndRender::onKeyBoardListener(sys::Object* object, sys::BoardKey key, sys::ButtonStatus type)
@@ -819,6 +847,13 @@ void WndRender::onKeyBoardListener(sys::Object* object, sys::BoardKey key, sys::
 
 	curPos = pNode->getPosition();
 	vel = curPos - lastPos;
-	//vel *= 1000.0f * this->getRefreshInterval();
 	pNode->setVelocity(vel);
+}
+
+void WndRender::testLayout()
+{
+	Display* pDisplay = new Display();
+	pDisplay->setUIRoot(this->getCanvas()->getRoot());
+	pDisplay->setFilePath("Resource/Layout/test.xml");
+	pDisplay->show();
 }

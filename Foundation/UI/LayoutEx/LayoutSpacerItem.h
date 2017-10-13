@@ -1,6 +1,6 @@
 #pragma once
 
-#include "LayoutWidgetItem.h"
+#include "LayoutItemEx.h"
 
 namespace ui
 {
@@ -16,7 +16,7 @@ namespace ui
 	/**
 	*	ø’÷√œÓ£¨”√”⁄ÃÓ≥‰
 	*/
-	class LayoutSpacerItem : public LayoutItem
+	class LayoutSpacerItem : public LayoutItemEx
 	{
 	public:
 		LayoutSpacerItem();

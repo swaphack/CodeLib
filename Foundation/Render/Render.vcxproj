@@ -99,10 +99,13 @@
     <ClCompile Include="Common\Action\ExtAction.cpp" />
     <ClCompile Include="Common\Action\IntervalAction.cpp" />
     <ClCompile Include="Common\Action\Scheduler.cpp" />
+    <ClCompile Include="Common\Audio\AudioProtocol.cpp" />
     <ClCompile Include="Common\Audio\AudioManager.cpp" />
+    <ClCompile Include="Common\Audio\CtrlAudioGeometry.cpp" />
     <ClCompile Include="Common\Audio\CtrlAudioSource3D.cpp" />
     <ClCompile Include="Common\Audio\CtrlAudioListener.cpp" />
     <ClCompile Include="Common\Audio\CtrlAudioSource.cpp" />
+    <ClCompile Include="Common\Audio\CtrlAudioSpeaker.cpp" />
     <ClCompile Include="Common\Audio\macros.cpp" />
     <ClCompile Include="Common\DrawNode\DrawNode.cpp" />
     <ClCompile Include="Common\GL\protocol_common.cpp" />
@@ -192,7 +195,10 @@
     <ClInclude Include="Common\Action\IntervalAction.h" />
     <ClInclude Include="Common\Action\ExtAction.h" />
     <ClInclude Include="Common\Action\Scheduler.h" />
+    <ClInclude Include="Common\Audio\AudioProtocol.h" />
     <ClInclude Include="Common\Audio\AudioManager.h" />
+    <ClInclude Include="Common\Audio\CtrlAudioGeometry.h" />
+    <ClInclude Include="Common\Audio\CtrlAudioReverb3D.h" />
     <ClInclude Include="Common\Audio\CtrlAudioSource3D.h" />
     <ClInclude Include="Common\Audio\CtrlAudioListener.h" />
     <ClInclude Include="Common\Audio\CtrlAudioSource.h" />

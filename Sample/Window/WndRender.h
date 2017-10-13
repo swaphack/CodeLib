@@ -44,6 +44,7 @@ public:
 
 	void testAudio();
 	void testAudio3D();
+	void testLayout();
 protected:
 	void onTouchBegin(sys::Object* object, float x, float y);
 	void onTouchMove(sys::Object* object, float x, float y);

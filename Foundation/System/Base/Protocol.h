@@ -18,6 +18,11 @@ namespace sys
 			}
 		}
 
+		void setName(const std::string& name)
+		{
+			_name = name;
+		}
+
 		const char* getName() const
 		{
 			return _name.c_str();

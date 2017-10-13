@@ -4,9 +4,9 @@
 
 namespace ui
 {
-	// UI节点
-	class NodeLoader : public WidgetParser
-	{ 
+	// 布局节点
+	class NodeLoader : public IElement
+	{
 	public:
 		NodeLoader();
 		virtual ~NodeLoader();
@@ -16,6 +16,6 @@ namespace ui
 		// 保存属性
 		virtual void saveAttributes();
 	public:
-		INIT_LOADER_WIDGET(Widget, ELEMENT_NAME_WIDGET);
+		INIT_LOADER_WIDGET(LayoutItem, Widget, ELEMENT_NAME_LAYOUT);
 	};
 }

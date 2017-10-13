@@ -1,22 +1,10 @@
 #pragma once
 
 #include "macros.h"
+#include "ui_common.h"
 
 namespace ui
 {
-	/**
-	*	布局方向
-	*/
-	enum LayoutDirection
-	{
-		// 无
-		ELD_NONE,
-		// 垂直布局
-		ELD_HORIZONTAL,
-		// 水平布局
-		ELD_VERTICAL,
-	};
-
 	class Layout;
 	/**
 	*	界面显示
@@ -56,17 +44,9 @@ namespace ui
 		*/
 		const char* getFilePath();
 		/**
-		*	设置窗口界面大小
-		*/
-		void setViewSize(const sys::Size& inputSize);
-		/**
 		*	窗口界面大小
 		*/
 		const sys::Size& getViewSize();
-		/**
-		*	设置布局方向
-		*/
-		void setLayoutDirection(LayoutDirection eDirection);
 		/**
 		*	获取布局方向
 		*/
@@ -96,6 +76,10 @@ namespace ui
 		*	初始化文本
 		*/
 		virtual void initText();
+		/**
+		*	大小自动设置
+		*/
+		void autoResize();
 	protected:
 		// 文件路径
 		std::string m_strFilePath;

@@ -3,76 +3,10 @@
 #include "macros.h"
 
 #include "CtrlAudioSource.h"
+#include "AudioProtocol.h"
 
 namespace render
 {
-	struct Cone3DSettings
-	{
-	public:
-		// 内锥角
-		float insideconeangle = 0;
-		// 外锥角
-		float outsideconeangle = 0;
-		// 外体积
-		float outsidevolume = 0;
-	public:
-		Cone3DSettings() {}
-		Cone3DSettings(float insideconeangle, float outsideconeangle, float outsidevolume)
-		{
-			this->insideconeangle = insideconeangle;
-			this->outsideconeangle = outsideconeangle;
-			this->outsidevolume = outsidevolume;
-		}
-	};
-
-	struct Attribute3DSettings
-	{
-	public:
-		// 位置
-		sys::Vector3 position;
-		// 速度
-		sys::Vector3 velocity;
-	public:
-		Attribute3DSettings() {}
-		Attribute3DSettings(const sys::Vector3& pos, const sys::Vector3& vel)
-		{
-			this->position = pos;
-			this->velocity = vel;
-		}
-	};
-
-	struct Occlusion3DSettings
-	{
-	public:
-		// 直接吸收
-		float directocclusion = 0;
-		// 混响吸收
-		float reverbocclusion = 0;
-	public:
-		Occlusion3DSettings() {}
-		Occlusion3DSettings(float directocclusion, float reverbocclusion)
-		{
-			this->directocclusion = directocclusion;
-			this->reverbocclusion = reverbocclusion;
-		}
-	};
-
-	struct Distance3DFilterSettings
-	{
-	public:
-		bool custom = false;
-		float customLevel = 0;
-		float centerFreq = 0;
-	public:
-		Distance3DFilterSettings() {}
-		Distance3DFilterSettings(bool custom, float customLevel, float centerFreq)
-		{
-			this->custom = custom;
-			this->customLevel = customLevel;
-			this->centerFreq = centerFreq;
-		}
-	};
-
 	// 音频
 	class CtrlAudioSource3D : public CtrlAudioSource
 	{
