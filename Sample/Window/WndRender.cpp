@@ -777,26 +777,10 @@ void WndRender::testAudio3D()
 	pGeometryNode->init(1, 20);
 	pGeometryNode->setForward({ 1, 0, 0 });
 	pGeometryNode->setUp({ 0, 1, 0 });
+	pGeometryNode->setPosition(300, 75);
+	pGeometryNode->setVolume(200, 100, 100);
 	pGeometryNode->setActive(true);
 	this->getCanvas()->getRoot()->addChild(pGeometryNode);
-
-	std::vector<sys::Vector3> vertices;
-	vertices.push_back({ 250, 0, 0 });
-	vertices.push_back({ 300, 0, 0 });
-	vertices.push_back({ 300, 600, 0 });
-	vertices.push_back({ 250, 600, 0 });
-
-// 	CtrlAudioGeometryPolygon* pPolygonNode = pGeometryNode->addPolygon(vertices);
-// 	pPolygonNode->setDirectOcclusion(1.0f);
-// 	pPolygonNode->setReverbOcclusion(1.0f);
-// 	pPolygonNode->setDoubleSided(true);
-// 
-// 	pSrcDrawNode = CREATE_NODE(DrawNode);
-// 	pSrcDrawNode->setColor(Color3B(255, 0, 0));
-// 	pSrcDrawNode->setWidth(100);
-// 	pSrcDrawNode->setDrawMode(EBM_POLYGON);
-// 	pSrcDrawNode->setPoints(vertices);
-// 	pPolygonNode->addChild(pSrcDrawNode);
 }
 
 void WndRender::onKeyBoardListener(sys::Object* object, sys::BoardKey key, sys::ButtonStatus type)

@@ -87,13 +87,11 @@ Layout* UIProxy::loadFile(const char* filepath)
 		return nullptr;
 	}
 
-	IElement* element = loadRoot(pRoot);
-	if (element == nullptr)
+	Layout* pLayout = loadRoot(pRoot);
+	if (pLayout == nullptr)
 	{
 		return nullptr;
 	}
-
-	ui::Layout* pLayout = static_cast<LayoutLoader*>(element)->getCastLayoutItem();
 
 	return pLayout;
 }
@@ -183,7 +181,7 @@ IElement* UIProxy::getElement(const char* name)
 	return _elementParsers[name];
 }
 
-IElement* UIProxy::loadSingleElement(tinyxml2::XMLElement* xmlNode)
+LayoutItem* UIProxy::initLoadItem(tinyxml2::XMLElement* xmlNode)
 {
 	if (xmlNode == nullptr)
 	{
@@ -210,50 +208,37 @@ IElement* UIProxy::loadSingleElement(tinyxml2::XMLElement* xmlNode)
 	{
 		return nullptr;
 	}
-
-	return element;
+	return loader->getLayoutItem();
 }
 
-bool UIProxy::loadLayoutItem(IElement* loader, tinyxml2::XMLElement* xmlNode)
+bool UIProxy::loadLayout(Layout* loader, tinyxml2::XMLElement* xmlNode)
 {
 	if (loader == nullptr || xmlNode == nullptr)
 	{
 		return false;
 	}
 
-	LayoutLoader* pLayoutLoader = dynamic_cast<LayoutLoader*>(loader);
-	if (pLayoutLoader == nullptr)
+	LayoutItem* childItem = nullptr;
+	tinyxml2::XMLElement* childNode = xmlNode;
+	while (childNode)
 	{
-		return false;
-	}
-
-	IElement* childElement = nullptr;
-	tinyxml2::XMLElement* childXmlNode = nullptr;
-	while (xmlNode)
-	{
-		childXmlNode = xmlNode->FirstChildElement();
-		while (childXmlNode)
+		childItem = initLoadItem(childNode);
+		if (childItem)
 		{
-			childElement = loadSingleElement(childXmlNode);
-			if (childElement)
+			loader->addItem(childItem);
+			Layout* childLayout = dynamic_cast<Layout*>(childItem);
+			if (childNode->FirstChild() && childLayout)
 			{
-				NodeLoader* pChildLayoutLoader = dynamic_cast<NodeLoader*>(childElement);
-				if (pLayoutLoader && pChildLayoutLoader)
-				{
-					pLayoutLoader->getCastLayoutItem()->addItem(pChildLayoutLoader->getCastLayoutItem());
-				}
-
-				loadLayoutItem(childElement, childXmlNode->FirstChildElement());
+				loadLayout(childLayout, childNode->FirstChildElement());
 			}
-			childXmlNode = childXmlNode->NextSiblingElement();
 		}
-		xmlNode = xmlNode->NextSiblingElement();
+		childNode = childNode->NextSiblingElement();
 	}
 
 	return true;
 }
 
-IElement* UIProxy::loadRoot(tinyxml2::XMLElement* xmlNode)
+Layout* UIProxy::loadRoot(tinyxml2::XMLElement* xmlNode)
 {
 	if (xmlNode == nullptr)
 	{
@@ -270,15 +255,21 @@ IElement* UIProxy::loadRoot(tinyxml2::XMLElement* xmlNode)
 		return nullptr;
 	}
 
-	IElement* currentElement = loadSingleElement(firstChild);
-	if (currentElement == nullptr)
-	{// 空节点或者非布局节点
+	LayoutItem* pRootItem = initLoadItem(firstChild);
+	if (pRootItem == nullptr)
+	{// 空节点
 		return nullptr;
 	}
 
-	loadLayoutItem(currentElement, firstChild);
+	Layout* pLayout = dynamic_cast<Layout*>(pRootItem);
+	if (pLayout == nullptr)
+	{// 非布局节点
+		return nullptr;
+	}
 
-	return currentElement;
+	loadLayout(pLayout, firstChild->FirstChildElement());
+
+	return pLayout;
 }
 
 bool UIProxy::saveLayoutItem(LayoutItem* item, tinyxml2::XMLElement* xmlNode)

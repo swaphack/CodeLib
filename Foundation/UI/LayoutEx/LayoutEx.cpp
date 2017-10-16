@@ -129,7 +129,7 @@ void LayoutEx::resize(const sys::Vector2& position, const sys::Size& size)
 
 void LayoutEx::resize(const sys::Rect& rect)
 {
-	this->setWidgetGeomerty(rect);
+	this->resize(rect);
 
 	sys::Size innerSize;
 	innerSize.width = rect.width - m_fMargin.left - m_fMargin.right;

@@ -42,11 +42,17 @@ void TextLoader::parseAttributes()
 
 	LOAD_WDIGET_STRING_ATTRIBUTE(PROPERTY_PATH, setFontPath, str);
 	LOAD_WDIGET_ATTRIBUTE(PROPERTY_FONTSIZE, setFontSize, floatVal);
+	LOAD_WDIGET_STRING_ATTRIBUTE(PROPERTY_TEXT, setString, str);
+
 	LOAD_WDIGET_CAST_ATTRIBUTE(PROPERTY_HORIZONTAL, setHorizontalAlignment, intVal, render::HorizontalAlignment);
 	LOAD_WDIGET_CAST_ATTRIBUTE(PROPERTY_VERTICAL, setVerticalAlignment, intVal, render::VerticalAlignment);
-
-	LOAD_WDIGET_STRING_ATTRIBUTE(PROPERTY_TEXT, setString, str);
 	LOAD_WDIGET_ATTRIBUTE(PROPERTY_DIMENSIONS, setDimensions, size);
+
+// 	int anchorPos = getLayoutItem()->getAnchorPosition();
+// 	anchorPos -= 1;
+// 	getCastWidget()->setHorizontalAlignment((render::HorizontalAlignment)(anchorPos % 3));
+// 	getCastWidget()->setVerticalAlignment((render::VerticalAlignment)(anchorPos / 3));
+// 	getCastWidget()->setDimensions(getLayoutItem()->getSize());
 }
 
 void TextLoader::saveAttributes()
@@ -59,9 +65,9 @@ void TextLoader::saveAttributes()
 
 	SAVE_WDIGET_ATTRIBUTE(PROPERTY_PATH, getFontPath);
 	SAVE_WDIGET_ATTRIBUTE(PROPERTY_FONTSIZE, getFontSize);
+	SAVE_WDIGET_ATTRIBUTE(PROPERTY_TEXT, getString);
+
 	SAVE_WDIGET_CAST_ATTRIBUTE(PROPERTY_HORIZONTAL, getHorizontalAlignment, int);
 	SAVE_WDIGET_CAST_ATTRIBUTE(PROPERTY_VERTICAL, getVerticalAlignment, int);
-
-	SAVE_WDIGET_ATTRIBUTE(PROPERTY_TEXT, getString);
 	SAVE_WDIGET_ATTRIBUTE(PROPERTY_DIMENSIONS, getDimensions);
 }

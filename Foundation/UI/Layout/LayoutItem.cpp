@@ -1,5 +1,4 @@
 #include "LayoutItem.h"
-
 #include "Layout.h"
 
 using namespace ui;
@@ -7,6 +6,7 @@ using namespace ui;
 LayoutItem::LayoutItem()
 :m_pWidget(nullptr)
 , m_bBoxVisible(false)
+, m_eAnchorPosition(EAP_NONE)
 {
 }
 
@@ -74,6 +74,16 @@ Widget* LayoutItem::getWidget()
 	return m_pWidget;
 }
 
+void LayoutItem::setAnchorPosition(AnchorPosition anchorPos)
+{
+	m_eAnchorPosition = (AnchorPosition)anchorPos;
+}
+
+AnchorPosition LayoutItem::getAnchorPosition()
+{
+	return m_eAnchorPosition;
+}
+
 bool LayoutItem::copy(LayoutItem* item)
 {
 	if (item == nullptr)
@@ -85,8 +95,16 @@ bool LayoutItem::copy(LayoutItem* item)
 	setBoxColor(item->getBoxColor());
 	setBoxVisible(item->isBoxVisible());
 	setWidget(item->getWidget());
+	setAnchorPosition(item->getAnchorPosition());
 
 	return true;
+}
+
+void LayoutItem::resize(const sys::Rect& rect)
+{
+	sys::Vector2 anchorPoint;
+	calAnchorPoint(anchorPoint.x, anchorPoint.y);
+	this->setWidgetGeomerty(rect, anchorPoint);
 }
 
 void LayoutItem::setBoxVisible(bool status)
@@ -109,20 +127,64 @@ const sys::Color4B& LayoutItem::getBoxColor()
 	return m_cBoxColor;
 }
 
-void LayoutItem::setWidgetGeomerty(const sys::Rect& geometry)
+void LayoutItem::setWidgetGeomerty(const sys::Rect& geometry, const sys::Vector2& anchorPoint)
 {
 	if (m_pWidget == nullptr)
 	{
 		return;
 	}
 
-	sys::Vector3 anchor = m_pWidget->getAnchorPoint();
-
-	float width = geometry.width;
-	float height = geometry.height;
-	float posX = geometry.x + anchor.x * width;
-	float posY = geometry.y + anchor.y * height;
-
-	m_pWidget->setPosition(posX, posY);
-	m_pWidget->setVolume(width, height);
+	m_pWidget->setPosition(geometry.x, geometry.y);
+	m_pWidget->setVolume(geometry.width, geometry.height);
+	m_pWidget->setAnchorPoint(anchorPoint.x, anchorPoint.y);
 }
+
+void LayoutItem::calAnchorPoint(float& x, float& y)
+{
+	switch (m_eAnchorPosition)
+	{
+	case ui::EAP_NONE:
+		x = 0;
+		y = 0;
+		break;
+	case ui::EAP_DOWN_LEFT:
+		x = 0;
+		y = 0;
+		break;
+	case ui::EAP_DOWN_CENTER:
+		x = 0.5f;
+		y = 0;
+		break;
+	case ui::EAP_DOWN_RIGHT:
+		x = 1;
+		y = 0;
+		break;
+	case ui::EAP_CENTER_LEFT:
+		x = 0;
+		y = 0.5f;
+		break;
+	case ui::EAP_CENTER_CENTER:
+		x = 0.5f;
+		y = 0.5f;
+		break;
+	case ui::EAP_CENTER_RIGHT:
+		x = 1;
+		y = 0.5f;
+		break;
+	case ui::EAP_UP_LEFT:
+		x = 0;
+		y = 1;
+		break;
+	case ui::EAP_UP_CENTER:
+		x = 0.5f;
+		y = 1;
+		break;
+	case ui::EAP_UP_RIGHT:
+		x = 1;
+		y = 1;
+		break;
+	default:
+		break;
+	}
+}
+

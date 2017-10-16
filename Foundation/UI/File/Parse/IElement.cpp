@@ -34,6 +34,9 @@ bool IElement::load(tinyxml2::XMLElement* pXmlNode, bool clean/* = true*/)
 		pAttribute = (tinyxml2::XMLAttribute*)pAttribute->Next();
 	}
 
+	initLayoutItem();
+	initWidget();
+
 	this->parseAttributes();
 
 	if (getLayoutItem())
@@ -78,12 +81,22 @@ WidgetProperty* IElement::getNodeProperty()
 	return _nodeProperty;
 }
 
-void ui::IElement::setWidget(Widget* node)
+void IElement::setWidget(Widget* node)
 {
 	_node = node;
 }
 
-void ui::IElement::setLayoutItem(LayoutItem* item)
+void IElement::setLayoutItem(LayoutItem* item)
 {
 	_layoutItem = item;
+}
+
+LayoutItem* ui::IElement::getLayoutItem()
+{
+	return _layoutItem;
+}
+
+Widget* ui::IElement::getWidget()
+{
+	return _node;
 }

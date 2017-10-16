@@ -172,6 +172,8 @@ namespace render
 		void setAnchorPoint(float x, float y);
 		// 设置锚点
 		void setAnchorPoint(const sys::Vector3& anchor);
+		// 设置锚点
+		void setAnchorPoint(const sys::Vector2& anchor);
 		// 获取锚点
 		const sys::Vector3& getAnchorPoint();
 		// 设置宽度
@@ -259,6 +261,15 @@ namespace render
 	protected:
 		// 动作状态
 		ActionStatus _actionStatus;
+	};
+
+	// 空间属性
+	struct BodySpace
+	{
+		// 空间位置（实际）
+		sys::Vector3 position;
+		// 空间大小
+		sys::Volume volume;
 	};
 
 }

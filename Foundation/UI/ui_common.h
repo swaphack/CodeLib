@@ -70,4 +70,22 @@ namespace ui
 		// 水平布局
 		ELD_VERTICAL,
 	};
+
+	/**
+	* 位置
+	*/
+	enum AnchorPosition
+	{
+		// 无，默认
+		EAP_NONE,
+		EAP_DOWN_LEFT,
+		EAP_DOWN_CENTER,
+		EAP_DOWN_RIGHT,
+		EAP_CENTER_LEFT,
+		EAP_CENTER_CENTER,
+		EAP_CENTER_RIGHT,
+		EAP_UP_LEFT,
+		EAP_UP_CENTER,
+		EAP_UP_RIGHT,
+	};
 }

@@ -385,6 +385,14 @@ void BodyProtocol::setAnchorPoint(const sys::Vector3& anchor)
 	onBodyChange();
 }
 
+void BodyProtocol::setAnchorPoint(const sys::Vector2& anchor)
+{
+	_anchor.x = anchor.x;
+	_anchor.y = anchor.y;
+	onBodyChange();
+
+}
+
 const sys::Vector3& BodyProtocol::getAnchorPoint()
 {
 	return _anchor;

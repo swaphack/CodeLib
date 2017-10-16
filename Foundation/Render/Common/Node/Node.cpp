@@ -66,7 +66,7 @@ void Node::removeFromParent()
 
 void Node::addChild( Node* node )
 {
-	ASSERT(node != nullptr);
+	ASSERT(node != nullptr && node->getParent() == nullptr);
 
 	if (node->getParent() == this)
 	{
@@ -310,7 +310,7 @@ TouchProxy* Node::getTouchProxy()
 	return _touchProxy;
 }
 
-const RectangeVertex& Node::getRectVertex()
+const RectVertex& Node::getRectVertex()
 {
 	return _rectVertex;
 }
@@ -403,8 +403,8 @@ void Node::calRealSpaceInfo()
 
 	Tool::calRealRect(position, volume, _anchor, _realSpaceVertex);
 
-	_realPosition = position;
-	_realScale = scale;
+	_realBodySpace.position = position;
+	_realBodySpace.volume = volume;
 }
 
 void Node::onSpaceChange()

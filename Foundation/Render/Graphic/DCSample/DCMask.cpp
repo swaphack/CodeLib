@@ -30,7 +30,7 @@ void DCMask::draw()
 	glDisable(GL_BLEND);
 }
 
-DCMask* DCMask::create(const RectangeVertex* rectVertex, const sys::Color4B& color, uchar opacity, const BlendParam& blend)
+DCMask* DCMask::create(const RectVertex* rectVertex, const sys::Color4B& color, uchar opacity, const BlendParam& blend)
 {
 	DCMask* pMask = sys::Instance<DCMask>::getInstance();
 	pMask->Blend = blend;

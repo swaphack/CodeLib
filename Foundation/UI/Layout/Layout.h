@@ -88,13 +88,23 @@ namespace ui
 		*	复制对象
 		*/
 		bool copy(Layout* item);
+		/**
+		*	布局内部大小改变
+		*	计算位置
+		*/
+		static void calLayoutPosition(LayoutItem* child, const sys::Size& srcSize, const sys::Size& newSize, float& x, float& y);
+		/**
+		*	布局内部大小改变
+		*	计算大小
+		*/
+		static void calLayoutSize(LayoutItem* child, const sys::Size& srcSize, const sys::Size& newSize, float& w, float& h);
 	protected:
 		/**
 		*	布局内部大小改变
 		*	包含固定大小和百分比两种情况
 		*	先计算固定大小的值，再计算百分比的值
 		*/
-		virtual void onLayoutSizeChanged(const sys::Size& innerSize);
+		virtual void onLayoutSizeChanged(const sys::Size& innerSize);		
 	protected:
 		// 边缘距离
 		sys::Margin m_fMargin;

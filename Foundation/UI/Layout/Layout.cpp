@@ -121,7 +121,11 @@ const std::vector<LayoutItem*>& Layout::getChildren()
 
 void Layout::resize(const sys::Size& inputSize)
 {
-	this->resize(getOrgin(), inputSize);
+	sys::Vector2 pos = getOrgin();
+	pos.x = pos.x / this->getGeometry().width * inputSize.width;
+	pos.y = pos.y / this->getGeometry().height * inputSize.height;
+
+	this->resize(pos, inputSize);
 }
 
 void Layout::resize(const sys::Vector2& position, const sys::Size& size)
@@ -131,12 +135,11 @@ void Layout::resize(const sys::Vector2& position, const sys::Size& size)
 
 void Layout::resize(const sys::Rect& rect)
 {
-	this->setWidgetGeomerty(rect);
+	LayoutItem::resize(rect);
 
 	sys::Size innerSize;
 	innerSize.width = rect.width - m_fMargin.left - m_fMargin.right;
 	innerSize.height = rect.height - m_fMargin.bottom - m_fMargin.top;
-
 	this->onLayoutSizeChanged(innerSize);
 }
 
@@ -168,27 +171,104 @@ void Layout::onLayoutSizeChanged(const sys::Size& innerSize)
 	float realH = 0;
 
 	std::vector<sys::Rect> innerItems;
+	const sys::Size& parentSize = this->getSize();
+	sys::Vector2 parentAnchor;
+	calAnchorPoint(parentAnchor.x, parentAnchor.y);
 
 	int count = m_vChildren.size();
 	for (int i = 0; i < count; i++)
 	{
+		LayoutItem* child = m_vChildren[i];
+		if (child == nullptr)
+		{
+			continue;
+		}
+
 		// 内部大小
 		sys::Rect innerItem;
-		const sys::Rect& itemRect = m_vChildren[i]->getGeometry();
+		const sys::Size& srcSize = child->getSize();
 
-		innerItem.x = itemRect.x / this->getGeometry().width * innerSize.width;
-		innerItem.y = itemRect.x / this->getGeometry().height * innerSize.height;
-		innerItem.width = itemRect.width / this->getGeometry().width * innerSize.width;
-		innerItem.height = itemRect.height / this->getGeometry().height * innerSize.height;
+		calLayoutPosition(child, srcSize, innerSize, innerItem.x, innerItem.y);
+		calLayoutSize(child, parentSize, innerSize, innerItem.width, innerItem.height);
+		innerItem.x -= parentSize.width * parentAnchor.x;
+		innerItem.y -= parentSize.height * parentAnchor.y;
 
-		Layout* pLayout = dynamic_cast<Layout*>(m_vChildren[i]);
-		if (pLayout)
-		{
-			pLayout->resize(innerItem);
-		}
-		else
-		{
-			m_vChildren[i]->setWidgetGeomerty(innerItem);
-		}
+		child->resize(innerItem);
 	}
+}
+
+void Layout::calLayoutPosition(LayoutItem* child, const sys::Size& srcSize, const sys::Size& newSize, float& x, float& y)
+{
+	if (child == nullptr)
+	{
+		return;
+	}
+
+	const sys::Rect& itemRect = child->getGeometry();
+	AnchorPosition anchorPos = (AnchorPosition)child->getAnchorPosition();
+	switch (anchorPos)
+	{
+	case ui::EAP_NONE:
+		x = itemRect.x / srcSize.width * newSize.width;
+		y = itemRect.y / srcSize.height * newSize.height;
+		break;
+	case ui::EAP_DOWN_LEFT:
+		x = 0;
+		y = 0;
+		break;
+	case ui::EAP_DOWN_CENTER:
+		x = newSize.width * 0.5f;
+		y = 0;
+		break;
+	case ui::EAP_DOWN_RIGHT:
+		x = newSize.width;
+		y = 0;
+		break;
+	case ui::EAP_CENTER_LEFT:
+		x = 0;
+		y = newSize.height * 0.5f;
+		break;
+	case ui::EAP_CENTER_CENTER:
+		x = newSize.width * 0.5f;
+		y = newSize.height * 0.5f;
+		break;
+	case ui::EAP_CENTER_RIGHT:
+		x = newSize.width;
+		y = newSize.height * 0.5f;
+		break;
+	case ui::EAP_UP_LEFT:
+		x = 0;
+		y = newSize.height;
+		break;
+	case ui::EAP_UP_CENTER:
+		x = newSize.width * 0.5f;
+		y = newSize.height;
+		break;
+	case ui::EAP_UP_RIGHT:
+		x = newSize.width;
+		y = newSize.height;
+		break;
+	default:
+		break;
+	}
+}
+
+void Layout::calLayoutSize(LayoutItem* child, const sys::Size& srcSize, const sys::Size& newSize, float& w, float& h)
+{
+	if (child == nullptr)
+	{
+		return;
+	}
+
+	float scaleX = newSize.width / srcSize.width;
+	float scaleY = newSize.height / srcSize.height;
+	float scale = 1;
+	if (scaleX < 1 || scaleY < 1)
+	{
+		scale = scaleX < scaleY ? scaleX : scaleY;
+	}
+
+	const sys::Size& childSize = child->getSize();
+	w = childSize.width * scale;
+	h = childSize.height * scale;
 }

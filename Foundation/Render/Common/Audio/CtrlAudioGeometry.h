@@ -41,8 +41,9 @@ namespace render
 
 		CtrlAudioGeometryPolygon* getPolygon(ModelFace face);
 	protected:
-		CtrlAudioGeometryPolygon* addPolygon(const std::vector<sys::Vector3>& vertices);
-
+		CtrlAudioGeometryPolygon* addPolygon(const std::vector<sys::Vector3>& vertexes);
+		CtrlAudioGeometryPolygon* addPolygon(const RectVertex& vertexes);
+		const RectVertex& getRectVertex(int i);
 		void onGeometryChange();
 		void onPolygonsChange();
 	private:
@@ -56,6 +57,8 @@ namespace render
 		int _maxVerticesCount;
 		// 六面
 		CtrlAudioGeometryPolygon* _polygons[EMF_MAX];
+		// 立方体顶点
+		CubeVertex _cubeVertex;
 	};
 
 	//////////////////////////////////////////////////////////////////////////
@@ -84,6 +87,7 @@ namespace render
 		// 设置顶点
 		bool setVertexes(const sys::Vector3* vertexes, int numvertices);
 		bool setVertexes(const std::vector<sys::Vector3>& vertexes);
+		bool setVertexes(const RectVertex& vertexes);
 		// 添加顶点
 		bool updateVertex(int index, const sys::Vector3& vertex);
 	protected:

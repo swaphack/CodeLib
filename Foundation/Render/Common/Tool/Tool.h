@@ -14,6 +14,9 @@ namespace render
 		// 获取opengl视窗大小
 		static const sys::Volume& getGLViewSize();
 
+		static float getGLViewWidth();
+		static float getGLViewHeight();
+
 		// 获取当前维度模式，2d还是3d
 		static Dimensions getDimensions();
 		static void setDimensions(Dimensions d);
@@ -56,7 +59,7 @@ namespace render
 		* @param anchor 锚点
 		* @param rectVertex 矩形顶点
 		*/
-		static void calRect(const sys::Vector3& position, const sys::Volume& volume, const sys::Vector3& anchor, RectangeVertex& rectVertex);
+		static void calRect(const sys::Vector3& position, const sys::Volume& volume, const sys::Vector3& anchor, RectVertex& rectVertex);
 		/**
 		* 矩形顶点的计算
 		* @param position 位置
@@ -64,10 +67,16 @@ namespace render
 		* @param anchor 锚点
 		* @param rectVertex 矩形顶点
 		*/
-		static void calRealRect(const sys::Vector3& position, const sys::Volume& volume, const sys::Vector3& anchor, RectangeVertex& rectVertex);
+		static void calRealRect(const sys::Vector3& position, const sys::Volume& volume, const sys::Vector3& anchor, RectVertex& rectVertex);
 
-		static float getGLViewWidth();
-		static float getGLViewHeight();
+		/**
+		* 立方体顶点的计算
+		* @param position 位置
+		* @param volume 体积
+		* @param anchor 锚点
+		* @param cube 正方体
+		*/
+		static void calRealCube(const sys::Vector3& position, const sys::Volume& volume, const sys::Vector3& anchor, CubeVertex& cube);
 	private:
 		// 视窗大小
 		static sys::Volume GL_VIEW_SIZE;

@@ -103,28 +103,11 @@ void Display::onViewSizeChanged(const sys::Size& inputSize)
 		return;
 	}
 
-	float scale = 1.0f;
-	if (m_pLayout->getWidget())
-	{
-		if (m_eLayoutDirection == ELD_VERTICAL)
-		{
-			scale = inputSize.height / m_sViewSize.height;
-		}
-		else if (m_eLayoutDirection == ELD_HORIZONTAL)
-		{
-			scale = inputSize.width / m_sViewSize.width;
-		}
+	sys::Rect innerItem;
+	Layout::calLayoutPosition(m_pLayout, m_sViewSize, inputSize, innerItem.x, innerItem.y);
+	Layout::calLayoutSize(m_pLayout, m_sViewSize, inputSize, innerItem.width, innerItem.height);
 
-		//m_pLayout->getWidget()->setScale(scale);
-	}
-
-	sys::Size defaultSize = m_pLayout->getSize();
-
-	sys::Size size;
-	size.width = defaultSize.width * scale;
-	size.height = defaultSize.height * scale;
-
-	m_pLayout->resize(size);
+	m_pLayout->resize(innerItem);
 }
 
 bool Display::loadFile()

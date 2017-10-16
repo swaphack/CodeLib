@@ -33,6 +33,10 @@ void Notify::removeListens(int k)
 
 void Notify::addMark(int k)
 {
+	if (_notifyMark.find(k) != _notifyMark.end())
+	{
+		return;
+	}
 	_notifyMark.insert(k);
 }
 

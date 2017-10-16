@@ -22,6 +22,16 @@ const sys::Volume& Tool::getGLViewSize()
 	return GL_VIEW_SIZE;
 }
 
+float Tool::getGLViewWidth()
+{
+	return GL_VIEW_SIZE.width;
+}
+
+float Tool::getGLViewHeight()
+{
+	return GL_VIEW_SIZE.height;
+}
+
 Dimensions Tool::getDimensions()
 {
 	return E_DIMENSIONS;
@@ -135,7 +145,7 @@ void Tool::calNormal(const sys::Vector3& p1, const sys::Vector3& p2, const sys::
 	normal.z = c / r;
 }
 
-void Tool::calRect(const sys::Vector3& position, const sys::Volume& volume, const sys::Vector3& anchor, RectangeVertex& rectVertex)
+void Tool::calRect(const sys::Vector3& position, const sys::Volume& volume, const sys::Vector3& anchor, RectVertex& rectVertex)
 {
 	float x = 0;
 	float y = 0;
@@ -161,7 +171,7 @@ void Tool::calRect(const sys::Vector3& position, const sys::Volume& volume, cons
 	rectVertex.leftUp = Tool::convertToOGLPoisition(x, y, position.z);
 }
 
-void Tool::calRealRect(const sys::Vector3& position, const sys::Volume& volume, const sys::Vector3& anchor, RectangeVertex& rectVertex)
+void Tool::calRealRect(const sys::Vector3& position, const sys::Volume& volume, const sys::Vector3& anchor, RectVertex& rectVertex)
 {
 	float x = 0;
 	float y = 0;
@@ -195,14 +205,83 @@ void Tool::calRealRect(const sys::Vector3& position, const sys::Volume& volume, 
 	rectVertex.leftUp.z = position.z;
 }
 
-float Tool::getGLViewWidth()
+void Tool::calRealCube(const sys::Vector3& position, const sys::Volume& volume, const sys::Vector3& anchor, CubeVertex& cube)
 {
-	return GL_VIEW_SIZE.width;
-}
+	sys::Vector3 point;
 
-float Tool::getGLViewHeight()
-{
-	return GL_VIEW_SIZE.height;
+	//------ front ------
+
+	// left down
+	point.x = position.x - volume.width * anchor.x;
+	point.y = position.y - volume.height * anchor.y;
+	point.z = position.z - volume.deep * anchor.z;
+
+	cube.front.leftDown = point;
+	cube.left.rightDown = point;
+	cube.bottom.leftUp = point;
+
+	// right down
+	point.x = position.x + volume.width * (1 - anchor.x);
+	point.y = position.y - volume.height * anchor.y;
+	point.z = position.z - volume.deep * anchor.z;
+
+	cube.front.rightDown = point;
+	cube.right.leftDown = point;
+	cube.bottom.rightUp = point;
+
+	// right up
+	point.x = position.x + volume.width * (1 - anchor.x);
+	point.y = position.y + volume.height * (1 - anchor.y);
+	point.z = position.z - volume.deep * anchor.z;
+	cube.front.rightUp = point;
+	cube.right.leftUp = point;
+	cube.top.rightDown = point;
+
+	// left up
+	point.x = position.x - volume.width * anchor.x;
+	point.y = position.y + volume.height * (1 - anchor.y);
+	point.z = position.z - volume.deep * anchor.z;
+	cube.front.leftUp = point;
+	cube.left.rightUp = point;
+	cube.top.leftDown = point;
+
+	//------ back ------
+
+	// left down
+	point.x = position.x - volume.width * anchor.x;
+	point.y = position.y - volume.height * anchor.y;
+	point.z = position.z + volume.deep * (1 - anchor.z);
+
+	cube.back.rightDown = point;
+	cube.left.leftDown = point;
+	cube.bottom.leftDown = point;
+
+	// right down
+	point.x = position.x + volume.width * (1 - anchor.x);
+	point.y = position.y - volume.height * anchor.y;
+	point.z = position.z + volume.deep * (1 - anchor.z);
+
+	cube.back.leftDown = point;
+	cube.right.rightDown = point;
+	cube.bottom.rightDown = point;
+
+	// right up
+	point.x = position.x + volume.width * (1 - anchor.x);
+	point.y = position.y + volume.height * (1 - anchor.y);
+	point.z = position.z + volume.deep * (1 - anchor.z);
+
+	cube.back.leftUp = point;
+	cube.top.rightUp = point;
+	cube.right.rightUp = point;
+
+	// left up
+	point.x = position.x - volume.width * anchor.x;
+	point.y = position.y + volume.height * (1 - anchor.y);
+	point.z = position.z + volume.deep * (1 - anchor.z);
+
+	cube.back.rightUp = point;
+	cube.left.leftUp = point;
+	cube.top.leftUp = point;
 }
 
 

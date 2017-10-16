@@ -25,7 +25,7 @@ bool CtrlAudioSource3D::init()
 		FMOD_VECTOR pos;
 		FMOD_VECTOR vel;
 
-		_3dSettings.position = _realPosition;
+		_3dSettings.position = _realBodySpace.position;
 
 		ConvertToFMODVector(_3dSettings.position, pos);
 		ConvertToFMODVector(_3dSettings.velocity, vel);

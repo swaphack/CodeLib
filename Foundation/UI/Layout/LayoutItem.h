@@ -1,10 +1,11 @@
 #pragma once
 
 #include "macros.h"
+#include "ui_common.h"
 
 namespace ui
 {
-	class LayoutEx;
+	class Layout;
 	/**
 	*	布局项, 抽象类
 	*	布局项的集合信息在界面调整中不做改变，改变的只有widget的集合信息
@@ -59,11 +60,23 @@ namespace ui
 		*	获取元件
 		*/
 		Widget* getWidget();
+		/**
+		*	设置锚点位置
+		*/
+		void setAnchorPosition(AnchorPosition anchorPos);
+		/**
+		*	获取锚点位置
+		*/
+		AnchorPosition getAnchorPosition();
 	public: // 可能需重载的方法
 		/**
 		*	复制对象
 		*/
 		bool copy(LayoutItem* item);
+		/**
+		*	当窗口位置和大小发生改变时
+		*/
+		virtual void resize(const sys::Rect& rect);
 	public: // 其他辅助方法
 		/**
 		*	设置矩形框是否可见
@@ -84,10 +97,14 @@ namespace ui
 		/**
 		*	设置元件的集合信息
 		*/
-		void setWidgetGeomerty(const sys::Rect& geometry);
+		void setWidgetGeomerty(const sys::Rect& geometry, const sys::Vector2& anchorPoint);
+	protected:
+		void calAnchorPoint(float& x, float& y);
 	protected:
 		// 几何信息
 		sys::Rect m_rGeometry;
+		// 锚点位置
+		AnchorPosition m_eAnchorPosition;
 		// 矩形框颜色
 		sys::Color4B m_cBoxColor;
 		// 是否显示矩形框

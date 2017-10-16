@@ -14,11 +14,11 @@ namespace ui
 	*/
 #define INIT_LOADER_WIDGET(TL,TW, NAME) \
 public:\
-	virtual LayoutItem* getLayoutItem() { if (_layoutItem == nullptr) { _layoutItem = new TL();} return _layoutItem;}\
-	virtual Widget* getWidget() { if (_node == nullptr) {_node = CREATE_NODE(TW);} return _node; }\
 	virtual const char* getName() { return NAME; }\
 	TW* getCastWidget() { return static_cast<TW*>(getWidget()); }\
 	TL* getCastLayoutItem() { return static_cast<TL*>(getLayoutItem()); } \
+	virtual void initLayoutItem() { _layoutItem = new TL();} \
+	virtual void initWidget() {_node = CREATE_NODE(TW);}
 
 	// 获取当前节点：子类会隐藏父类同名函数
 #define GET_WIDGET getCastWidget()

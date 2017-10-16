@@ -104,7 +104,7 @@ namespace render
 		// 获取触摸代理
 		TouchProxy* getTouchProxy();
 
-		const RectangeVertex& getRectVertex();
+		const RectVertex& getRectVertex();
 	protected:
 		// 更新空间位置
 		virtual void updateTranform();
@@ -148,13 +148,11 @@ namespace render
 		// 触摸代理
 		TouchProxy* _touchProxy;
 		// 矩形框
-		RectangeVertex _rectVertex;
+		RectVertex _rectVertex;
 		// 空间坐标（实际）
-		RectangeVertex _realSpaceVertex;
-		// 空间位置（实际）
-		sys::Vector3 _realPosition;
-		// 缩放比例（实际）
-		sys::Vector3 _realScale;
+		RectVertex _realSpaceVertex;
+		// 实际躯体空间信息
+		BodySpace _realBodySpace;
 		// 通知
 		Notify* _notify;
 	};

@@ -55,11 +55,11 @@ namespace ui
 	protected:
 		//////////////////////////////////////////////////////////////////////////
 		// 加载单一节点
-		IElement* loadSingleElement(tinyxml2::XMLElement* xmlNode);
+		LayoutItem* initLoadItem(tinyxml2::XMLElement* xmlNode);
 		// 加载布局
-		bool loadLayoutItem(IElement* loader, tinyxml2::XMLElement* xmlNode);
+		bool loadLayout(Layout* loader, tinyxml2::XMLElement* xmlNode);
 		// 加载根元素
-		IElement* loadRoot(tinyxml2::XMLElement* xmlNode);
+		Layout* loadRoot(tinyxml2::XMLElement* xmlNode);
 		//////////////////////////////////////////////////////////////////////////
 		// 保存节点
 		bool saveWidget(Widget* widget, tinyxml2::XMLElement* xmlNode);

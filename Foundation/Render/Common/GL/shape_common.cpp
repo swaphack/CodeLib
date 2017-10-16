@@ -9,12 +9,12 @@ static float getArea(const sys::Vector3& p1, const sys::Vector3& p2, const sys::
 }
 
 //////////////////////////////////////////////////////////////////////////
-RectangeVertex::RectangeVertex()
+RectVertex::RectVertex()
 {
 
 }
 
-bool RectangeVertex::containPoint(float x, float y)
+bool RectVertex::containPoint(float x, float y)
 {
 	bool bRet = false;
 	
@@ -35,7 +35,7 @@ bool RectangeVertex::containPoint(float x, float y)
 	return bRet;
 }
 
-sys::Vector3 RectangeVertex::getAnchorByPoint(float x, float y)
+sys::Vector3 RectVertex::getAnchorByPoint(float x, float y)
 {
 	sys::Vector3 p;
 

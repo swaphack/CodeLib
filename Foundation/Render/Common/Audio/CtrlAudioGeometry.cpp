@@ -130,6 +130,7 @@ void CtrlAudioGeometry::setForward(const sys::Vector3& forward)
 {
 	_geometryBody.forward = forward;
 	_notify->addMark(ENP_AUDIO);
+	setDirty(true);
 }
 
 const sys::Vector3& CtrlAudioGeometry::getForward()
@@ -141,6 +142,7 @@ void CtrlAudioGeometry::setUp(const sys::Vector3& up)
 {
 	_geometryBody.up = up;
 	_notify->addMark(ENP_AUDIO);
+	setDirty(true);
 }
 
 const sys::Vector3& CtrlAudioGeometry::getUp()
@@ -177,9 +179,9 @@ int CtrlAudioGeometry::getVerticesCount()
 	return totalvertice;
 }
 
-CtrlAudioGeometryPolygon* CtrlAudioGeometry::addPolygon(const std::vector<sys::Vector3>& vertices)
+CtrlAudioGeometryPolygon* CtrlAudioGeometry::addPolygon(const std::vector<sys::Vector3>& vertexes)
 {
-	if (vertices.size() == 0)
+	if (vertexes.size() == 0)
 	{
 		return nullptr;
 	}
@@ -198,7 +200,33 @@ CtrlAudioGeometryPolygon* CtrlAudioGeometry::addPolygon(const std::vector<sys::V
 
 	CtrlAudioGeometryPolygon* polygon = CREATE_NODE(CtrlAudioGeometryPolygon);
 	polygon->setGeometry(_geometry);
-	polygon->setVertexes(vertices);
+	polygon->setVertexes(vertexes);
+
+	this->addChild(polygon);
+
+	return polygon;
+}
+
+CtrlAudioGeometryPolygon* CtrlAudioGeometry::addPolygon(const RectVertex& vertexes)
+{
+	if (_geometry == nullptr)
+	{
+		return nullptr;
+	}
+
+	int maxPolygons = getMaxPolygons();
+	int curPolygons = getPolygonsCount();
+	if (curPolygons >= maxPolygons)
+	{
+		return false;
+	}
+
+	CtrlAudioGeometryPolygon* polygon = CREATE_NODE(CtrlAudioGeometryPolygon);
+	polygon->setGeometry(_geometry);
+	polygon->setVertexes(vertexes);
+	polygon->setDoubleSided(true);
+	polygon->setDirectOcclusion(1.0f);
+	polygon->setReverbOcclusion(1.0f);
 
 	this->addChild(polygon);
 
@@ -234,19 +262,54 @@ void CtrlAudioGeometry::onGeometryChange()
 
 void CtrlAudioGeometry::onPolygonsChange()
 {
+	Tool::calRealCube(_realBodySpace.position, _realBodySpace.volume, getAnchorPoint(), _cubeVertex);
 	for (int i = 0; i < EMF_MAX; i++)
 	{
 		CtrlAudioGeometryPolygon* polygon = getPolygon((ModelFace)i);
+		RectVertex rectVertex = getRectVertex(i);
 		if (polygon == nullptr)
 		{
-
-			//this->addPolygon()
+			this->addPolygon(rectVertex);
 		}
 		else
 		{
-			//polygon->setVertexes()
+			polygon->setVertexes(rectVertex);
 		}
 	}
+}
+
+const RectVertex& CtrlAudioGeometry::getRectVertex(int i)
+{
+	if (i < 0 || i >= EMF_MAX)
+	{
+		return _cubeVertex.front;
+	}
+	ModelFace face = (ModelFace)i;
+	switch (face)
+	{
+	case render::EMF_FRONT:
+		return _cubeVertex.front;
+		break;
+	case render::EMF_BACK:
+		return _cubeVertex.back;
+		break;
+	case render::EMF_LEFT:
+		return _cubeVertex.left;
+		break;
+	case render::EMF_RIGHT:
+		return _cubeVertex.right;
+		break;
+	case render::EMF_TOP:
+		return _cubeVertex.top;
+		break;
+	case render::EMF_BOTTOM:
+		return _cubeVertex.bottom;
+		break;
+	default:
+		break;
+	}
+
+	return _cubeVertex.front;
 }
 
 
@@ -382,6 +445,18 @@ bool CtrlAudioGeometryPolygon::setVertexes(const std::vector<sys::Vector3>& vert
 	return true;
 }
 
+bool CtrlAudioGeometryPolygon::setVertexes(const RectVertex& vertexes)
+{
+	_vertexes.clear();
+	_vertexes.push_back(vertexes.leftDown);
+	_vertexes.push_back(vertexes.rightDown);
+	_vertexes.push_back(vertexes.rightUp);
+	_vertexes.push_back(vertexes.leftUp);
+	_notify->addMark(ENP_GEOMETRY);
+	this->setDirty(true);
+	return true;
+}
+
 bool CtrlAudioGeometryPolygon::updateVertex(int index, const sys::Vector3& vertex)
 {
 	int count = _vertexes.size();
@@ -422,7 +497,7 @@ void CtrlAudioGeometryPolygon::onPolygonChange()
 		_realVerticeCount = count;
 		for (int i = 0; i < count; i++)
 		{
-			ConvertToFMODVector(_vertexes[i] + _realPosition, _realVertexes[i]);
+			ConvertToFMODVector(_vertexes[i] + _realBodySpace.position, _realVertexes[i]);
 		}
 
 		FMOD_RESULT result = _geometry->addPolygon(_geometrySettings.directocclusion, _geometrySettings.reverbocclusion, _geometrySettings.doublesided,
@@ -437,7 +512,7 @@ void CtrlAudioGeometryPolygon::onPolygonChange()
 		for (int i = 0; i < count; i++)
 		{
 			FMOD_VECTOR pos;
-			ConvertToFMODVector(_vertexes[i] + _realPosition, pos);
+			ConvertToFMODVector(_vertexes[i] + _realBodySpace.position, pos);
 			_geometry->setPolygonVertex(_index, i, &pos);
 		}
 	}
