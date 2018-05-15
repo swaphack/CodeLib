@@ -71,7 +71,7 @@ namespace ui
 		template<typename T>
 		bool getAttribute(const char* name, T& defaultValue);
 
-		Attributes::const_iterator getAttributeFirst();
+		Attributes::const_iterator getAttributeBegin();
 		Attributes::const_iterator getAttributeEnd();
 	protected:
 		// 通用，获取属性的值（字符串类型）

@@ -3,7 +3,7 @@
 
 #include "File.h"
 #include "Directory.h"
-#include "geometry.h"
+#include "str.h"
 #include "Hash.h"
 #include "Instance.h"
 #include "macros.h"

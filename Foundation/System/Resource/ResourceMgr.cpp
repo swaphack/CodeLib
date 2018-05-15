@@ -52,6 +52,7 @@ void ResourceMgr::removeMethod(ResourceType type)
 void ResourceMgr::init()
 {
 	this->dispose();
+
 	_getResMethods[ERT_LOCAL] = new	LocalResource();
 	_getResMethods[ERT_REMOTE] = new RemoteResource();
 }

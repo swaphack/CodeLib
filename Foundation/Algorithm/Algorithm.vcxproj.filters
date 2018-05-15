@@ -19,6 +19,9 @@
     <Filter Include="Path">
       <UniqueIdentifier>{4aff5cd0-556e-4cce-8e0e-c0ff72ac91d1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Picture">
+      <UniqueIdentifier>{798d6ba2-d60a-407a-acfb-28bdbc205895}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />

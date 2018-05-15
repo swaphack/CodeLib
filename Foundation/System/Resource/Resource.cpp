@@ -36,7 +36,7 @@ CacheGroup* Resource::getCache()
 	return _cache;
 }
 
-bool Resource::loadFileData(const char* filename, std::string& data)
+bool Resource::loadFileData(const char* filename, GetDataCallback handler)
 {
 	return false;
 }

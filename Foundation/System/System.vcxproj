@@ -72,7 +72,7 @@
     <ClInclude Include="Base\Directory.h" />
     <ClInclude Include="Base\File.h" />
     <ClInclude Include="Base\FuncHandler.h" />
-    <ClInclude Include="Base\geometry.h" />
+    <ClInclude Include="Base\str.h" />
     <ClInclude Include="Base\Hash.h" />
     <ClInclude Include="Base\import.h" />
     <ClInclude Include="Base\Instance.h" />
@@ -180,6 +180,7 @@
     <ClInclude Include="Resource\LocalResource.h" />
     <ClInclude Include="Resource\RemoteResource.h" />
     <ClInclude Include="Resource\Resource.h" />
+    <ClInclude Include="Resource\ResourceBundle.h" />
     <ClInclude Include="Resource\ResourceMgr.h" />
     <ClInclude Include="Security\Author.h" />
     <ClInclude Include="Security\Authorization.h" />
@@ -275,6 +276,7 @@
     <ClCompile Include="Resource\LocalResource.cpp" />
     <ClCompile Include="Resource\RemoteResource.cpp" />
     <ClCompile Include="Resource\Resource.cpp" />
+    <ClCompile Include="Resource\ResourceBundle.cpp" />
     <ClCompile Include="Resource\ResourceMgr.cpp" />
     <ClCompile Include="Security\Authorization.cpp" />
     <ClCompile Include="Stream\FileStream.cpp" />

@@ -14,7 +14,7 @@ namespace sys
 		// 名称
 		virtual const char* getName() { return "LOCAL"; }
 		// 加载文件
-		virtual bool loadFileData(const char* filename, std::string& data);
+		virtual bool loadFileData(const char* filename, GetDataCallback handler);
 	protected:
 		// 获取完整路径
 		std::string getFullPath(const char* filename);

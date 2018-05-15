@@ -66,6 +66,8 @@ namespace alg
 			values[i] = tempArr[k];
 
 		delete tempArr;
+
+		return true;
 	}
 
 	template<typename T>

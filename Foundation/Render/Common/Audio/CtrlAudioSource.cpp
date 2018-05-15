@@ -111,7 +111,7 @@ bool CtrlAudioSource::loadDataFromClip(Audio* audioClip)
 	exinfo.numchannels = audioClip->getChannels();
 	//exinfo.length = audioClip->getFrameSize();
 	exinfo.length = audioClip->getSize();
-	//exinfo.format = FMOD_SOUND_FORMAT_PCM16;
+	exinfo.format = FMOD_SOUND_FORMAT_PCM16;
 	//exinfo.pcmreadcallback = pcmreadcallback;
 	//exinfo.pcmsetposcallback = pcmsetposcallback;
 

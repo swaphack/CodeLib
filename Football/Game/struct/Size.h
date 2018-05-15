@@ -4,7 +4,7 @@ namespace game
 {
 	struct Size
 	{
-		float Width;
-		float Height;
+		float Width = 0;
+		float Height = 0;
 	};
 }

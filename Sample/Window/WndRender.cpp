@@ -23,12 +23,12 @@ void WndRender::show()
 	
 	
 	//this->testText();
-	//this->testMedia();
+	this->testMedia();
 	//this->testScissor();
 
 	//this->addLight();
 
-	this->testLayout();
+	//this->testAudio3D();
 }
 
 void WndRender::testMoveImage()
@@ -774,7 +774,7 @@ void WndRender::testAudio3D()
 	G_AUDIO->setGeometrySettings(10);
 
 	CtrlAudioGeometry* pGeometryNode = CREATE_NODE(CtrlAudioGeometry);
-	pGeometryNode->init(1, 20);
+	pGeometryNode->init(6, 24);
 	pGeometryNode->setForward({ 1, 0, 0 });
 	pGeometryNode->setUp({ 0, 1, 0 });
 	pGeometryNode->setPosition(300, 75);

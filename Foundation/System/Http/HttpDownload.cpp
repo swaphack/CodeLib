@@ -59,8 +59,8 @@ void HttpDownload::flushListenData(int id)
 		return;
 	}
 
-	DownloadCallback::iterator iter2 = _downloadCallbacks.find(id);
-	if (iter2 == _downloadCallbacks.end())
+	std::map<int, DownloadSlot >::iterator iter2 = _downloadSlots.find(id);
+	if (iter2 == _downloadSlots.end())
 	{// 无下载监听
 		SAFE_DELETE(iter1->second);
 		_downloadDatas.erase(iter1);
@@ -72,13 +72,13 @@ void HttpDownload::flushListenData(int id)
 	if (pDoc->parseResponse(iter1->second->getData(), iter1->second->getLength()))
 	{
 		// 完整的http
-		(iter2->second.t2.first->*iter2->second.t2.second)(iter2->second.t1, pDoc->getBody(), pDoc->getBodySize());
+		(iter2->second.handler.first->*iter2->second.handler.second)(iter2->second.tag, pDoc->getBody(), pDoc->getBodySize());
 	}
 	delete pDoc;
 
 	// 删除客户端
-	SAFE_DELETE(iter2->second.t3);
-	_downloadCallbacks.erase(iter2);
+	SAFE_DELETE(iter2->second.client);
+	_downloadSlots.erase(iter2);
 	
 	// 删除数据
 	SAFE_DELETE(iter1->second);
@@ -118,9 +118,9 @@ void HttpDownload::onRecvHandle(int id, DataQueue& data)
 			if (len == pDoc->getBodySize())
 			{
 				// 下载完毕，断开连接
-				if (_downloadCallbacks.find(id) != _downloadCallbacks.end())
+				if (_downloadSlots.find(id) != _downloadSlots.end())
 				{
-					_downloadCallbacks[id].t3->disconnect();
+					_downloadSlots[id].client->disconnect();
 				}
 			}
 		}
@@ -136,16 +136,22 @@ void HttpDownload::addListen(Client* client, OnHttpDownloadCallback callback, in
 		return;
 	}
 
-	_downloadCallbacks[client->getID()] = make_tuple3(tag, callback, client);
+	DownloadSlot slot;
+	slot.id = client->getID();
+	slot.tag = tag;
+	slot.client = client;
+	slot.handler = callback;
+
+	_downloadSlots[client->getID()] = slot;
 }
 
 void HttpDownload::clear()
 {
-	DownloadCallback::iterator iter2 = _downloadCallbacks.begin();
-	while (iter2 != _downloadCallbacks.end())
+	std::map<int, DownloadSlot >::iterator iter2 = _downloadSlots.begin();
+	while (iter2 != _downloadSlots.end())
 	{// 关闭线程，注销客户端
-		iter2->second.t3->disconnect();
-		SAFE_DELETE(iter2->second.t3);
+		iter2->second.client->disconnect();
+		SAFE_DELETE(iter2->second.client);
 		iter2++;
 	}
 

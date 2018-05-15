@@ -14,10 +14,8 @@ LocalResource::~LocalResource()
 
 }
 
-bool LocalResource::loadFileData(const char* filename, std::string& data)
+bool LocalResource::loadFileData(const char* filename, GetDataCallback handler)
 {
-	data = "";
-
 	if (filename == nullptr)
 	{
 		return false;
@@ -29,8 +27,13 @@ bool LocalResource::loadFileData(const char* filename, std::string& data)
 		return false;
 	}
 
+	std::string data;
 	if (getCacheData(fullpath.c_str(), data))
 	{
+		if (handler)
+		{
+			handler(data);
+		}
 		return true;
 	}
 
@@ -40,6 +43,10 @@ bool LocalResource::loadFileData(const char* filename, std::string& data)
 	}
 
 	getCache()->set(fullpath, data);
+	if (handler)
+	{
+		handler(data);
+	}
 
 	return true;
 }

@@ -212,6 +212,11 @@ bool HttpDocument::readStatusSection()
 	std::vector<String> dest;
 	line.split(STATUS_KEY_VALUE_SIGN, dest);
 
+	if (dest.size() != 3)
+	{
+		return false;
+	}
+
 	int offset = dest[0].getSize() + dest[1].getSize() + 2;
 	_statusSection[0] = dest[0].getString();
 	_statusSection[1] = dest[1].getString();
@@ -244,7 +249,8 @@ bool HttpDocument::readHeaderSection()
 		line = line.subString(0, line.getSize() - strlen(LINE_MARK));
 		if (line.empty())
 		{
-			if (_headerSection.empty()) return false;
+			if (_headerSection.empty()) 
+				return false;
 			break;
 		}
 		offset = line.findFirstOf(HEADER_KEY_VALUE_SIGN);

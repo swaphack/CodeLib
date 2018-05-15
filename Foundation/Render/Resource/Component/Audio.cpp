@@ -16,6 +16,7 @@ Audio::Audio()
 
 Audio::~Audio()
 {
+	SAFE_FREE(_data);
 }
 
 uchar* Audio::getData()

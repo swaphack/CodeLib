@@ -75,9 +75,6 @@
     <ClInclude Include="Base\File.h">
       <Filter>Base</Filter>
     </ClInclude>
-    <ClInclude Include="Base\geometry.h">
-      <Filter>Base</Filter>
-    </ClInclude>
     <ClInclude Include="Base\Hash.h">
       <Filter>Base</Filter>
     </ClInclude>
@@ -499,6 +496,12 @@
     <ClInclude Include="Concurrent\Concurrent.h">
       <Filter>Concurrent</Filter>
     </ClInclude>
+    <ClInclude Include="Resource\ResourceBundle.h">
+      <Filter>Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\str.h">
+      <Filter>Base</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Base\File.cpp">
@@ -746,6 +749,9 @@
     </ClCompile>
     <ClCompile Include="Concurrent\Concurrent.cpp">
       <Filter>Concurrent</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource\ResourceBundle.cpp">
+      <Filter>Resource</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

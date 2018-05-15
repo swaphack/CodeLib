@@ -10,6 +10,6 @@ namespace game
 	struct Circle 
 	{
 		Point Center;
-		float Radius;
+		float Radius = 0;
 	};
 }

@@ -7,7 +7,7 @@ namespace game
 	*/
 	struct Point
 	{
-		float X;
-		float Y;
+		float X = 0;
+		float Y = 0;
 	};
 }

@@ -93,13 +93,12 @@ void HttpRespDocument::writeContentFile(const char* filename)
 		return;
 	}
 
-	std::string data;
-
 	if (getResource())
 	{
-		getResource()->loadFileData(filename, data);
-
-		this->writeContentString(data);
+		getResource()->loadFileData(filename, [this](std::string& data)
+		{
+			this->writeContentString(data);
+		});
 	}
 	else
 	{

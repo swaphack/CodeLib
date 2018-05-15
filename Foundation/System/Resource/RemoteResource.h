@@ -2,6 +2,7 @@
 
 #include "Resource.h"
 
+
 namespace sys
 {
 	/**
@@ -11,13 +12,21 @@ namespace sys
 	class RemoteResource : public Resource
 	{
 	public:
+
+		struct DownloadTask
+		{
+			int tag = 0;
+			std::string path = "";
+			GetDataCallback handler = nullptr;
+		};
+	public:
 		RemoteResource();
 		virtual ~RemoteResource();
 	public:
 		// 名称
 		virtual const char* getName() { return "REMOTE"; }
 		// 加载文件
-		bool loadFileData(const char* filename, std::string& data);
+		bool loadFileData(const char* filename, GetDataCallback handler);
 	protected:
 		// 获取完整路径
 		std::string getFullPath(const char* filename);
@@ -29,6 +38,6 @@ namespace sys
 		// 递增标识
 		static int s_Tag;
 
-		std::map<int, std::string> _downloadPath;
+		std::map<int, DownloadTask> _downloadTasks;
 	};
 }

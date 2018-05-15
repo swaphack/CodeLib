@@ -57,9 +57,10 @@ void createVideoAudio(const AVFrame* frame, VideoAudioClip* audio)
 	int64_t decChannelLayout;
 	int channels = 0;
 	int nbChannels = 0;
+	int linesize = 0;
 
 	channels = av_frame_get_channels(frame);
-	dataSize = av_samples_get_buffer_size(nullptr, channels, frame->nb_samples, (AVSampleFormat)frame->format, 1);
+	dataSize = av_samples_get_buffer_size(&linesize, channels, frame->nb_samples, (AVSampleFormat)frame->format, 1);
 
 	if (dataSize <= 0)
 	{

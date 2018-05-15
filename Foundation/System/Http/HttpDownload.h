@@ -15,6 +15,13 @@ namespace sys
 	// http下载
 	class HttpDownload : public Object
 	{
+		struct DownloadSlot
+		{
+			int id = 0;
+			int tag = 0;
+			OnHttpDownloadCallback handler;
+			Client* client = nullptr;
+		};
 	public:
 		HttpDownload();
 		~HttpDownload();
@@ -28,6 +35,7 @@ namespace sys
 		@param tag 标示
 		*/
 		bool download(const char* url, int port, const char* filepath, OnHttpDownloadCallback callback, int tag);
+
 		// 推送监听到的数据
 		void flushListenData(int id);
 	protected:
@@ -41,8 +49,7 @@ namespace sys
 		// 下载数据
 		std::map<int, StreamWriter*> _downloadDatas;
 
-		typedef std::map<int, Tuple3<int, OnHttpDownloadCallback, Client*> > DownloadCallback;
 		// 下载回调
-		DownloadCallback _downloadCallbacks;
+		std::map<int, DownloadSlot > _downloadSlots;
 	};
 }

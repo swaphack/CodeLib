@@ -551,7 +551,7 @@ bool WidgetProperty::getAttribute(const char* name, SizePolicy& defaultValue)
 	return true;
 }
 
-Attributes::const_iterator WidgetProperty::getAttributeFirst()
+Attributes::const_iterator WidgetProperty::getAttributeBegin()
 {
 	return _attributes.begin();
 }

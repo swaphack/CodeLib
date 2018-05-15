@@ -17,45 +17,73 @@ RemoteResource::~RemoteResource()
 
 }
 
-bool RemoteResource::loadFileData(const char* filename, std::string& data)
+bool RemoteResource::loadFileData(const char* filename, GetDataCallback handler)
 {
-	data = "";
-
 	if (filename == nullptr)
 	{
 		return false;
 	}
 
 	std::string fullpath = getFullPath(filename);
-	if (fullpath.empty())
+	if (!fullpath.empty())
 	{
 		return false;
 	}
 
+	std::string data;
 	if (getCacheData(fullpath.c_str(), data))
 	{
+		if (handler)
+		{
+			handler(data);
+		}
+		
 		return true;
 	}
 
 	String temp = _url.c_str();
 	String low = temp.toLower();
-	if (!low.startWith("http://"))
+	if (!low.startWith("http://") || !low.startWith("https://"))
 	{
 		return false;
 	}
 	std::vector<String> params;
-	temp = temp.subString(7, temp.getSize() - 7);
+	if (low.startWith("http://"))
+	{
+		temp = temp.subString(7, temp.getSize() - 7);
+	}
+	else if (low.startWith("https://"))
+	{
+		temp = temp.subString(8, temp.getSize() - 8);
+	}
+	
 	temp.split(':', params);
 
-	std::string ip = params[0].getString();
-	int port = atoi(params[1].getString());
+	std::string ip;
+	int port = 80;
+	if (params.size() >= 1)
+	{
+		ip = params[0].getString();
+	}
+
+	if (params.size() >= 2)
+	{
+		port = atoi(params[1].getString());
+	}
 
 	s_Tag++;
-	_downloadPath.insert(std::make_pair(s_Tag, fullpath));
 
-	OnHttpDownloadCallback handler = std::make_pair(this, (downloadCallback)&RemoteResource::onDownloadCallback);
+	DownloadTask task;
+	task.tag = s_Tag;
+	task.path = fullpath;
+	task.handler = handler;
+
+	_downloadTasks.insert(std::make_pair(s_Tag, task));
+
+	OnHttpDownloadCallback downloadHandler = std::make_pair(this, (downloadCallback)&RemoteResource::onDownloadCallback);
+
 	HttpDownload download;
-	download.download(ip.c_str(), port, filename, handler, 1);
+	download.download(ip.c_str(), port, filename, downloadHandler, 1);
 
 	return true;
 }
@@ -85,10 +113,17 @@ bool RemoteResource::getCacheData(const char* fullpath, std::string& data)
 
 void RemoteResource::onDownloadCallback(int tag, const char* data, int size)
 {
-	if (_downloadPath.find(tag) == _downloadPath.end()) {
+	if (_downloadTasks.find(tag) == _downloadTasks.end()) {
 		return;
 	}
-	std::string fullpath = _downloadPath[tag];
+	DownloadTask task = _downloadTasks[tag];
 
-	getCache()->set(fullpath.c_str(), std::string(data, size));
+	std::string downloadData = std::string(data, size);
+
+	getCache()->set(task.path.c_str(), downloadData);
+
+	if (task.handler)
+	{
+		task.handler(downloadData);
+	}
 }

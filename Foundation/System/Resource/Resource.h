@@ -25,7 +25,7 @@ namespace sys
 		// 缓存
 		virtual CacheGroup* getCache();
 		// 加载文件数据
-		virtual bool loadFileData(const char* filename, std::string& data);
+		virtual bool loadFileData(const char* filename, GetDataCallback handler);
 	public:
 		// 设置资源位置
 		void setUrl(const char* url);
