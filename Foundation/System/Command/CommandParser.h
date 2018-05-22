@@ -8,6 +8,30 @@
 namespace sys
 {
 	typedef std::function<bool(const std::vector<std::string>& params)> ParseCommand;
+
+	// 关键值
+	class CommandParams
+	{
+	public:
+		CommandParams();
+		~CommandParams();
+	public:
+		void setKey(const std::string& key);
+		const std::string& getKey();
+
+		void addParam(const std::string& param);
+		void removeParam(const std::string& param);
+		void removeAllParams();
+
+		int getParamsCount();
+		std::string item(int index);
+	private:
+		// 关键字
+		std::string _key;
+		// 参数
+		std::vector<std::string> _params;
+	};
+
 	// 命令解析
 	class CommandParser
 	{
@@ -21,8 +45,16 @@ namespace sys
 		void removeParser(const std::string& key);
 		// 移除所有解析器
 		void removeAllParsers();
-
-		void parse(const std::string& line);
+		/*
+		格式 sudo -rm -rf rn a b
+		*/
+		void parseLine(const std::string& line);
+		/*
+		格式 sudo -rm -rf
+		*/
+		void parseCommand(const std::string& commamd);
+	protected:
+		void dispatch(const std::string& key, const std::vector<std::string>& params);
 	private:
 		// 解析方式
 		std::map<std::string, ParseCommand> _commandParsers;

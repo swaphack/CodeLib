@@ -36,6 +36,7 @@ void ConsoleListener::run()
 		while (_running)
 		{
 			std::string line = G_CONSOLE->readLine();
+
 			_receiveLineHandler(line);
 		}
 	});
