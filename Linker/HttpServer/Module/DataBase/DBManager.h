@@ -20,7 +20,7 @@ namespace hs
 		/** 
 		*	初始化
 		*	@param url 数据库文件地址
-		*	@param dbType 数据库类型
+		*	@param dbType 数据库类型 web::DBType
 		*/
 		bool init(const web::DBAuthor& info, int dbType = 0);
 		/**
