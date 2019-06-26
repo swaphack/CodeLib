@@ -187,6 +187,12 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="bitmap1.bmp" />
+    <Image Include="Resource\Image\1.jpg" />
+    <Image Include="Resource\Image\empty.png" />
+    <Image Include="Resource\Image\NeHe.bmp" />
+    <Image Include="Resource\Image\NeHe.png" />
+    <Image Include="Resource\Image\sqi.png" />
+    <Image Include="Resource\Image\world.jpg" />
     <Image Include="toolbar1.bmp" />
   </ItemGroup>
   <ItemGroup>

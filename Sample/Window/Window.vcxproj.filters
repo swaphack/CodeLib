@@ -22,6 +22,9 @@
     <Filter Include="Resource\Layout">
       <UniqueIdentifier>{3cec0570-ce9d-40fa-9a02-8328801c307d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource\Image">
+      <UniqueIdentifier>{2349ce8e-2a21-4d17-a990-06a6993909c5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WndWeb.cpp">
@@ -59,6 +62,24 @@
     </Image>
     <Image Include="toolbar1.bmp">
       <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="Resource\Image\1.jpg">
+      <Filter>Resource\Image</Filter>
+    </Image>
+    <Image Include="Resource\Image\empty.png">
+      <Filter>Resource\Image</Filter>
+    </Image>
+    <Image Include="Resource\Image\NeHe.bmp">
+      <Filter>Resource\Image</Filter>
+    </Image>
+    <Image Include="Resource\Image\NeHe.png">
+      <Filter>Resource\Image</Filter>
+    </Image>
+    <Image Include="Resource\Image\sqi.png">
+      <Filter>Resource\Image</Filter>
+    </Image>
+    <Image Include="Resource\Image\world.jpg">
+      <Filter>Resource\Image</Filter>
     </Image>
   </ItemGroup>
   <ItemGroup>

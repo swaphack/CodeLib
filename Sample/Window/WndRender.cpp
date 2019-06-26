@@ -21,14 +21,43 @@ void WndRender::show()
 // 	Texture2D* pTexture = G_TEXTURE_CACHE->getTexture2D(imageDefine);
 // 	pTexture->retain();
 	
+	//testMoveImage();
+	//testClock();
+	//testCubeModel();
+	//testSphereModel();
+	//testText();
+	//testMask();
+	//testMedia();
 	
-	//this->testText();
-	this->testMedia();
-	//this->testScissor();
+	//testAnimation();
+	//testParticle();
+	//testStencil();
+	//testCamera();
+	//testEditBox();
+	//testImages();
+	//testString();
+	testPixelImage();
+	testSequenceFrame();
 
-	//this->addLight();
-
-	//this->testAudio3D();
+	//testFog();
+	//addLight();
+	
+	//
+	//testModel();
+	//testClipPlane();
+	//testScissor();
+	//
+	//testScrollView();
+	//
+	//testUI();
+	//
+	//testDrawNode();
+	//
+	//testConcurrent();
+	//
+	//testAudio();
+	//testAudio3D();
+	//testLayout();
 }
 
 void WndRender::testMoveImage()
@@ -51,13 +80,13 @@ void WndRender::testClock()
 {
 	DrawNode* pDrawNode = CREATE_NODE(DrawNode);
 
-	pDrawNode->setDrawMode(EBM_TRIANGLE_STRIP);
+	pDrawNode->setDrawMode(EBM_QUAD_STRIP);
 	pDrawNode->setWidth(20);
-	pDrawNode->setPosition(-400, -300, 0);
+	pDrawNode->setPosition(125, 125, 0);
 	pDrawNode->appendPoint(sys::Vector3(0, 200));
 	pDrawNode->appendPoint(sys::Vector3(150, 300));
 	pDrawNode->appendPoint(sys::Vector3(200, 200));
-	pDrawNode->appendPoint(sys::Vector3(300, 100));
+	pDrawNode->appendPoint(sys::Vector3(150, 100));
 	pDrawNode->setColor(sys::Color3B(0, 255, 0));
 
 	//pDrawNode->setRotationZ(20);
@@ -67,7 +96,7 @@ void WndRender::testClock()
 
 void WndRender::testCubeModel()
 {
-	int nCount = 100;
+	int nCount = 2;
 	for (int i = 0; i < nCount; i++)
 	{
 		ImageDefine imageDefine = { "Resource/Image/NeHe.png", EIF_PNG };
@@ -78,10 +107,10 @@ void WndRender::testCubeModel()
 		frame->setTextureWithRect(texture2D);
 
 		Cube* pModel = CREATE_NODE(Cube);
-		pModel->setPosition(i % 200, i % 200, i % 200);
+		pModel->setPosition(i * 150, i * 150, i * 150);
 		pModel->setTexFrame(frame);
-		pModel->setVolume(256.0f, 256.0f, 256.0f);
-		//pModel->setRotation(0, 0, 10);
+		pModel->setVolume(100, 100, 100);
+		pModel->setRotation(45, 45, 0);
 		pModel->getMatrial()->setShiness(1.0f);
 		pModel->getMatrial()->setAmbient(255, 255, 255, 255);
 		pModel->getMatrial()->setDiffuse(255, 255, 255, 255);
@@ -110,6 +139,7 @@ void WndRender::testCubeModel()
 		pScaleByAction2->setScale(-1.5f, -1.5f, -1.5f);
 
 		SequenceAction* pSequenece = CREATE_ACTION(SequenceAction);
+		pSequenece->addAction(pRotateByAction);
 		pSequenece->addAction(pScaleByAction);
 		pSequenece->addAction(pScaleByAction2);
 
@@ -183,13 +213,13 @@ void WndRender::testText()
 	pCtrlText->getActionProxy()->runAction(pRepeateForeverAction);
 
 	pCtrlText = CREATE_NODE(CtrlText);
-	pCtrlText->setHorizontalAlignment(EHA_RIGHT);
+	pCtrlText->setHorizontalAlignment(EHA_CENTER);
 	pCtrlText->setVerticalAlignment(EVA_CENTER);
 	pCtrlText->setFontPath("Resource/Font/font_2.ttf");
 	pCtrlText->setFontSize(58);
-	pCtrlText->setString("中华\n人民共和国");
+	pCtrlText->setString("中华 fdsaf545放大发人民共和国");
 	pCtrlText->setPosition(512, 384, 0);
-	pCtrlText->setDimensions(200, 600);
+	pCtrlText->setDimensions(300, 600);
 	pCtrlText->setColor(sys::Color4B(125, 255, 255, 255));
 	this->getCanvas()->getRoot()->addChild(pCtrlText);
 }
@@ -209,7 +239,7 @@ void WndRender::testMask()
 void WndRender::testMedia()
 {
 	CtrlMedia* pMedia = CREATE_NODE(CtrlMedia);
-	pMedia->setVolume(Tool::getGLViewWidth(), Tool::getGLViewHeight());
+	pMedia->setVolume(Tool::getGLViewWidth() * 0.5, Tool::getGLViewHeight() * 0.5);
 	pMedia->setMediaPath("Resource/Video/1.flv", false);
 	pMedia->setAnchorPoint(0, 0);
 	pMedia->start();
@@ -373,7 +403,7 @@ void WndRender::addLight()
 void WndRender::testPixelImage()
 {
 	CtrlImage* pImage = CREATE_NODE(CtrlImage);
-	pImage->setImagePath("Resource/Image/world.jpg", EIF_JPEG);
+	pImage->setImagePath("Resource/Image/sqi.png", EIF_PNG);
 	pImage->setPosition(512, 384, 0);
 	this->getCanvas()->getRoot()->addChild(pImage);
 
@@ -382,11 +412,11 @@ void WndRender::testPixelImage()
 	pCtrlText->setAnchorPoint(0, 0, 0);
 	pCtrlText->setFontSize(58);
 	pCtrlText->setString("点击后移动鼠标，改变颜色");
-	pCtrlText->setPosition(0, 0, 0);
-	pCtrlText->setColor(sys::Color4B(125, 80, 255, 255));
+	pCtrlText->setPosition(100, 100, 0);
+	pCtrlText->setColor(sys::Color4B(255, 255, 255, 255));
 	this->getCanvas()->getRoot()->addChild(pCtrlText);
 
-	pImage->setUserData(pCtrlText);
+	//pImage->setUserData(pCtrlText);
 	pImage->getTouchProxy()->addTouchDelegate(ETT_ON, this, TOUCH_DELEGATTE_SELECTOR(WndRender::onTouchImage));
 }
 
