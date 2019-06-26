@@ -21,11 +21,11 @@ namespace game
 		/**
 		*	名称
 		*/
-		CREATE_COMPONENT_PROPERTY2(eNoramlProperty_Name, Name, int);
+		CREATE_COMPONENT_PROPERTY(AttributeType::Name, Name);
 		/**
 		*	所在国家
 		*/
-		CREATE_COMPONENT_PROPERTY2(eNoramlProperty_Country, Country, int);
+		CREATE_COMPONENT_PROPERTY(AttributeType::Country, Country);
 		/**
 		*	俱乐部财政
 		*/

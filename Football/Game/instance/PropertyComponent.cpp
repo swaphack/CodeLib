@@ -12,7 +12,7 @@ PropertyComponent::~PropertyComponent()
 
 }
 
-void PropertyComponent::setPropertyValue(int key, float value)
+void PropertyComponent::setValue(int key, float value)
 {
 	Property* pProperty = getPropertySheet()->getProperty(key);
 	if (!pProperty)
@@ -25,7 +25,7 @@ void PropertyComponent::setPropertyValue(int key, float value)
 	pProperty->setValue(value);
 }
 
-void PropertyComponent::setPropertyChangedHandler(int key, PropertyHandler handler)
+void PropertyComponent::setChangedHandler(int key, PropertyHandler handler)
 {
 	Property* pProperty = getPropertySheet()->getProperty(key);
 	if (!pProperty)
@@ -38,7 +38,7 @@ void PropertyComponent::setPropertyChangedHandler(int key, PropertyHandler handl
 	pProperty->setChangedHandler(handler);
 }
 
-float PropertyComponent::getPropertyValue(int key)
+float PropertyComponent::getValue(int key)
 {
 	Property* pProperty = getPropertySheet()->getProperty(key);
 	if (!pProperty)

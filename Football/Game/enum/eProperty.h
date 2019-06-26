@@ -6,74 +6,74 @@ namespace game
 	/**
 	*	属性
 	*/
-	enum eNoramlProperty
+	enum class AttributeType : int
 	{
 		/**
 		*	名称
 		*/
-		eNoramlProperty_Name,
+		Name,
 		/**
 		*	性别
 		*/
-		eNoramlProperty_Gender,
+		Gender,
 		/**
 		*	出生日期
 		*/
-		eNoramlProperty_Birthday,
+		Birthday,
 		/**
 		*	国籍
 		*/
-		eNoramlProperty_Country,
+		Country,
 		/**
 		*	城市
 		*/
-		eNoramlProperty_City,
+		City,
 		/**
 		*	所属俱乐部
 		*/
-		eNoramlProperty_Club,
+		Club,
 		/**
 		*	所属队伍
 		*/
-		eNoramlProperty_Team,
+		Team,
 		/**
 		*	最大值
 		*/
-		eNoramlProperty_Max,
+		Max,
 	};
 
 	/**
 	*	空间属性
 	*/
-	enum eSpaceProperty
+	enum class SpaceType : int
 	{
 		/**
 		*	坐标x
 		*/
-		eSpaceProperty_Position_X,
+		PositionX,
 		/**
 		*	坐标y
 		*/
-		eSpaceProperty_Position_Y,
+		PositionY,
 		/**
 		*	坐标z
 		*/
-		eSpaceProperty_Position_Z,
+		PositionZ,
 		/**
 		*	长度
 		*/
-		eSpaceProperty_Volume_Length,
+		Length,
 		/**
 		*	宽度
 		*/
-		eSpaceProperty_Volume_Width,
+		Width,
 		/**
 		*	高度
 		*/
-		eSpaceProperty_Volume_Height,
+		Height,
 		/**
 		*	最大值
 		*/
-		eSpaceProperty_Max,
+		Max,
 	};
 }

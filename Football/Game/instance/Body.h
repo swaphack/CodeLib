@@ -20,31 +20,33 @@ namespace game
 		virtual ~Body();
 	public:
 		CREATE_COMPONENT_TYPE();
+
 		CREATE_COMPONENT_CLONE(Body);
+
 		/**
 		*	获取长度
 		*/
-		CREATE_COMPONENT_PROPERTY(eSpaceProperty_Volume_Length, Length);
+		CREATE_COMPONENT_PROPERTY( SpaceType::Length, Length);
 		/**
 		*	获取宽度
 		*/
-		CREATE_COMPONENT_PROPERTY(eSpaceProperty_Volume_Width, Width);
+		CREATE_COMPONENT_PROPERTY( SpaceType::Width, Width);
 		/**
 		*	获取高度
 		*/
-		CREATE_COMPONENT_PROPERTY(eSpaceProperty_Volume_Height, Height);
+		CREATE_COMPONENT_PROPERTY( SpaceType::Height, Height);
 		/**
 		*	获取x轴位置
 		*/
-		CREATE_COMPONENT_PROPERTY(eSpaceProperty_Position_X, PositionX);
+		CREATE_COMPONENT_PROPERTY(SpaceType::PositionX, PositionX);
 		/**
 		*	获取y轴位置
 		*/
-		CREATE_COMPONENT_PROPERTY(eSpaceProperty_Position_Y, PositionY);
+		CREATE_COMPONENT_PROPERTY(SpaceType::PositionY, PositionY);
 		/**
 		*	获取z轴位置
 		*/
-		CREATE_COMPONENT_PROPERTY(eSpaceProperty_Position_Z, PositionZ);
+		CREATE_COMPONENT_PROPERTY(SpaceType::PositionZ, PositionZ);
 		/**
 		*	是否与其他躯体相交
 		*/

@@ -13,5 +13,8 @@ namespace game
 
 		Vector() :X(0), Y(0), Z(0)
 		{}
+
+		Vector(float x, float y, float z) :X(x), Y(y), Z(z)
+		{}
 	};
 }

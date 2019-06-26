@@ -24,27 +24,27 @@ namespace game
 		/**
 		*	名称
 		*/
-		CREATE_COMPONENT_PROPERTY2(eNoramlProperty_Name, Name, int);
+		CREATE_COMPONENT_PROPERTY(AttributeType::Name, Name, int);
 		/**
 		*	性别
 		*/
-		CREATE_COMPONENT_PROPERTY2(eNoramlProperty_Gender, Gender, int);
+		CREATE_COMPONENT_PROPERTY(AttributeType::Gender, Gender, int);
 		/**
 		*	出生日期
 		*/
-		CREATE_COMPONENT_PROPERTY2(eNoramlProperty_Birthday, BirthDay, int);
+		CREATE_COMPONENT_PROPERTY(AttributeType::Birthday, BirthDay, int);
 		/**
 		*	国籍
 		*/
-		CREATE_COMPONENT_PROPERTY2(eNoramlProperty_Country, Country, int);
+		CREATE_COMPONENT_PROPERTY(AttributeType::Country, Country, int);
 		/**
 		*	所属俱乐部
 		*/
-		CREATE_COMPONENT_PROPERTY2(eNoramlProperty_Club, Club, int);
+		CREATE_COMPONENT_PROPERTY(AttributeType::Club, Club, int);
 		/**
 		*	所属队伍
 		*/
-		CREATE_COMPONENT_PROPERTY2(eNoramlProperty_Team, Team, int);
+		CREATE_COMPONENT_PROPERTY(AttributeType::Team, Team, int);
 		/**
 		*	身躯
 		*/

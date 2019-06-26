@@ -11,7 +11,7 @@ namespace game
 	/**
 	*	组件
 	*	每个继承类都必须添加 CREATE_COMPONENT_TYPE CREATE_COMPONENT_CLONE
-	*	每个继承类的属性实现 CREATE_COMPONENT_PROPERTY|CREATE_COMPONENT_PROPERTY2
+	*	每个继承类的属性实现 CREATE_COMPONENT_PROPERTY|CREATE_COMPONENT_PROPERTY
 	*	每个继承类的新的组件 CREATE_COMPONENT_FUNCTION
 	*/
 	class Component : public Identity
@@ -26,11 +26,11 @@ namespace game
 #define CREATE_COMPONENT_CLONE(T) \
 	public:\
 	virtual Component* clone() \
-	{\
+		{\
 	Component* pComponent = new T(); \
 	copyTo(pComponent); \
 	return pComponent; \
-	}
+		}
 		/**
 		*	创建组件获取方法，不存在时，创建一个新的
 		*	@param Type 组件类型
@@ -39,27 +39,40 @@ namespace game
 #define CREATE_COMPONENT_FUNCTION(Type, FunName) \
 	public:\
 	Type* get##FunName() \
-	{ \
+		{ \
 		Type* value = getComponent<Type>(); \
 		if (!value) \
-		{ \
+				{ \
 			value = new Type(); \
 			addComponent(value); \
-		} \
+				} \
 		return value; \
-	}
+		}
 		/**
 		*	创建组件获取方法
 		*	@param Type 组件类型
 		*	@param FunName 函数名称
 		*/
-#define CREATE_COMPONENT_FUNCTION2(Type, FunName) \
+#define GET_COMPONENT_FUNCTION2(Type, FunName) \
 	public:\
 	Type* get##FunName() \
-	{ \
+		{ \
 	Type* value = getComponent<Type>(); \
 	return value; \
-	}
+		}
+
+		/**
+		*	创建组件获取属性和设置属性方法, 保存为实数类型
+		*	@param FunName 函数名称
+		*	@param Type 类型
+		*/
+#define CREATE_COMPONENT_PROPERTY(FunName, Type) \
+	public:\
+	void set##FunName(Type value) { _##FunName = value; } \
+	Type get##FunName() { return _##FunName; } \
+	private: \
+	Type _##FunName;
+
 
 	public:
 		Component();
