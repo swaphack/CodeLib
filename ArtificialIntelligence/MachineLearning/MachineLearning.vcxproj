@@ -10,6 +10,21 @@
       <Platform>Win32</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Maths\Combinatorics.h" />
+    <ClInclude Include="Maths\Probability.h" />
+    <ClInclude Include="Maths\Random.h" />
+    <ClInclude Include="Maths\Set.h" />
+    <ClInclude Include="Maths\Statistics.h" />
+    <ClInclude Include="Maths\Number.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="Maths\Combinatorics.cpp" />
+    <ClCompile Include="Maths\Number.cpp" />
+    <ClCompile Include="Maths\Random.cpp" />
+    <ClCompile Include="Maths\Set.cpp" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{5BCCB747-1D42-409E-A20A-91B08ABFF720}</ProjectGuid>
     <RootNamespace>MachineLearning</RootNamespace>
@@ -67,12 +82,6 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClInclude Include="Memory\Memory.h" />
-    <ClInclude Include="Rule\RuleCase.h" />
-    <ClInclude Include="Rule\Rule.h" />
-    <ClInclude Include="Rule\RuleItem.h" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
