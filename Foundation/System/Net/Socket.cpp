@@ -22,7 +22,7 @@
 #endif
 
 #ifdef _WIN32
-static int s_InitSocketModuleCount = 0;
+static int32 s_InitSocketModuleCount = 0;
 #endif // #ifdef _WIN32
 
 // 接收数据大小
@@ -42,7 +42,7 @@ Socket::Socket()
 	this->initDefaultOPT();
 }
 
-Socket::Socket(int sock)
+Socket::Socket(int32 sock)
 {
 	_sock = sock;
 
@@ -63,7 +63,7 @@ void Socket::InitSockModule()
 
 	WORD wVersionRequested;  
 	WSADATA wsaData;
-	int err;  
+	int32 err;  
 
 	wVersionRequested = MAKEWORD( 1, 1 );
 
@@ -96,33 +96,33 @@ void Socket::ReleaseSockModule()
 
 Socket::~Socket()
 {
-	Close();
+	close();
 }
 
-void Socket::Bind(const char* addr, int port, bool ipv6)
+void Socket:: bind(const char* addr, int32 port, bool ipv6)
 {
 	struct sockaddr_in addrSrv;  
-	EndPoint point(addr, port, ipv6);
-	point.getAddr(&addrSrv);
+	EndPoint point32(addr, port, ipv6);
+	point32.getAddr(&addrSrv);
 
-	int result = ::bind(_sock, (struct sockaddr*)&addrSrv, sizeof(struct sockaddr));
+	int32 result = ::bind(_sock, (struct sockaddr*)&addrSrv, sizeof(struct sockaddr));
 #if _DEBUG
 	PRINT("Socket Bind Result, code:%d\n", result);
 #endif
 }
 
-void Socket::Listen(int maxCount)
+void Socket::listen(int32 maxCount)
 {
-	int result = ::listen(_sock, maxCount);
+	int32 result = ::listen(_sock, maxCount);
 #if _DEBUG
 	PRINT("Socket Listen Result, code:%d\n", result);
 #endif
 }
 
-Socket* Socket::Accept()
+Socket* Socket::accept()
 {
 	struct sockaddr_in addrClient;  
-	int len = sizeof(struct sockaddr);  
+	int32 len = sizeof(struct sockaddr);  
 	SOCKET sock = ::accept(_sock, (struct sockaddr*)&addrClient, &len);
 	if (sock == INVALID_SOCKET_VALUE)
 	{
@@ -132,11 +132,11 @@ Socket* Socket::Accept()
 	return new Socket(sock);
 }
 
-bool Socket::Connect(const char* addr, int port, bool ipv6)
+bool Socket::connect(const char* addr, int32 port, bool ipv6)
 {
 	struct sockaddr_in addrSrv;
-	EndPoint point(addr, port, ipv6);
-	point.getAddr(&addrSrv);
+	EndPoint point32(addr, port, ipv6);
+	point32.getAddr(&addrSrv);
 
 	bool result = ::connect(_sock, (struct sockaddr*)&addrSrv, sizeof(struct sockaddr)) == 0;
 	if (result)
@@ -147,12 +147,12 @@ bool Socket::Connect(const char* addr, int port, bool ipv6)
 	return result;
 }
 
-int Socket::Send( const char* data, int size )
+int32 Socket::write( const char* data, int32 size )
 {
 	return ::send(_sock, data, size, 0);
 }
 
-char* Socket::Recv( int& size )
+char* Socket::read( int32& size )
 {
 	static char s_recvData[SOCKET_DATA_SIZE] = { 0 };
 	memset(s_recvData, 0, SOCKET_DATA_SIZE);
@@ -166,21 +166,21 @@ char* Socket::Recv( int& size )
 	return s_recvData;
 }
 
-void Socket::ShutDown( int type )
+void Socket::shutDown( int32 type )
 {
 	::shutdown(_sock, type);
 }
 
-bool Socket::HasError()
+bool Socket::hasError()
 {
 #ifdef _WIN32
-	int error = ::WSAGetLastError();
+	int32 error = ::WSAGetLastError();
 	if (error != WSAEWOULDBLOCK) 
 	{
 		return true;
 	}
 #else
-	int err = errno;
+	int32 err = errno;
 	if(err != EINPROGRESS && err != EAGAIN) 
 	{
 		return true;
@@ -189,7 +189,7 @@ bool Socket::HasError()
 	return false;
 }
 
-void Socket::Close()
+void Socket::close()
 {
 	if (_sock != INVALID_SOCKET_VALUE)
 	{
@@ -204,7 +204,7 @@ void Socket::Close()
 	_sock = INVALID_SOCKET_VALUE;
 }
 
-int Socket::getID()
+int32 Socket::getID()
 {
 	return _sock;
 }
@@ -214,7 +214,7 @@ const char* Socket::getLocalIP()
 	return _localEP.addr.c_str();
 }
 
-int Socket::getLocalPort()
+int32 Socket::getLocalPort()
 {
 	return _localEP.port;
 }
@@ -224,7 +224,7 @@ const char* Socket::getRemoteIP()
 	return _remoteEP.addr.c_str();
 }
 
-int Socket::getRemotePort()
+int32 Socket::getRemotePort()
 {
 	return _remoteEP.port;
 }
@@ -236,20 +236,20 @@ void Socket::initDefaultOPT()
 	u_long iMode = 1;
 	::ioctlsocket(_sock, FIONBIO, &iMode);
 #else
-	int flags = fcntl(_sock, F_GETFL, 0); 
+	int32 flags = fcntl(_sock, F_GETFL, 0); 
 	fcntl(_sock, F_SETFL, flags | O_NONBLOCK);
 #endif 	
 
 	bool bDtLger = false;
 	::setsockopt(_sock, SOL_SOCKET, SO_DONTLINGER, (const char*)&bDtLger, sizeof(bool));
 
-	int nNetTimeout = SOCKET_TIME_OUT;
-	::setsockopt(_sock, SOL_SOCKET, SO_SNDTIMEO, (const char*)&nNetTimeout, sizeof(int));
-	::setsockopt(_sock, SOL_SOCKET, SO_RCVTIMEO, (const char*)&nNetTimeout, sizeof(int));
+	int32 nNetTimeout = SOCKET_TIME_OUT;
+	::setsockopt(_sock, SOL_SOCKET, SO_SNDTIMEO, (const char*)&nNetTimeout, sizeof(int32));
+	::setsockopt(_sock, SOL_SOCKET, SO_RCVTIMEO, (const char*)&nNetTimeout, sizeof(int32));
 
-	int nBufSize = SOCKET_BUFFER_SIZE;
-	::setsockopt(_sock, SOL_SOCKET, SO_SNDBUF, (const char*)&nBufSize, sizeof(int));
-	::setsockopt(_sock, SOL_SOCKET, SO_RCVBUF, (const char*)&nBufSize, sizeof(int));
+	int32 nBufSize = SOCKET_BUFFER_SIZE;
+	::setsockopt(_sock, SOL_SOCKET, SO_SNDBUF, (const char*)&nBufSize, sizeof(int32));
+	::setsockopt(_sock, SOL_SOCKET, SO_RCVBUF, (const char*)&nBufSize, sizeof(int32));
 
 	_localEP.addr = "";
 	_localEP.port = 0;
@@ -266,9 +266,9 @@ void Socket::initLocalAndRemote()
 	}
 
 	struct sockaddr_in addr_in;
-	int len;
+	int32 len;
 	std::string ip;
-	int port;
+	int32 port;
 
 	len = sizeof(struct sockaddr_in);
 	::getsockname(_sock, (struct sockaddr*)&addr_in, &len);

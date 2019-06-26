@@ -24,12 +24,12 @@ OBB::OBB(const Vector3& center, const Vector3& size)
 {
 }
 
-bool OBB::contains(const Vector2&  point)
+bool OBB::contains(const Vector2&  point32)
 {
 	return false;
 }
 
-bool OBB::contains(const Vector3& point)
+bool OBB::contains(const Vector3& point32)
 {
 	return false;
 }
@@ -49,7 +49,7 @@ bool OBB::contains(const OBB& bounds)
 	return false;
 }
 
-bool OBB::intersects(const OBB& bounds)
+bool OBB::int32ersects(const OBB& bounds)
 {
 	Vector3 nv = bounds.center - center;
 	

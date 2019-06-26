@@ -56,14 +56,14 @@ Window* Windows::getWindow(HWND hwnd)
 //////////////////////////////////////////////////////////////////////////
 LRESULT CALLBACK WndProc(
 	HWND hWnd,                          // 窗口的句柄
-	UINT uMsg,                          // 窗口的消息
+	UINT32 uMsg,                          // 窗口的消息
 	WPARAM wParam,                      // 附加的消息内容
 	LPARAM lParam)						// 附加的消息内容
 {
 	Window* window = Instance<Windows>::getInstance()->getWindow(hWnd);
 	if (window)
 	{
-		Tuple3<UINT, WPARAM, LPARAM> params(uMsg, wParam, lParam);
+		Tuple3<UINT32, WPARAM, LPARAM> params(uMsg, wParam, lParam);
 		Signal* signal = new Signal();
 		signal->setMessage(&params);
 		bool result = window->onRecvSignal(signal);
@@ -109,7 +109,7 @@ Window::~Window()
 	this->dispose();
 }
 
-void Window::initWindow(const char* title, int width, int height)
+void Window::initWindow(const char* title, int32 width, int32 height)
 {
 	_title = title;
 	_width = static_cast<float>(width);
@@ -155,8 +155,8 @@ bool Window::init()
 	DWORD dwExStyle;			// 扩展窗口风格
 	DWORD dwStyle;				// 窗口风格
 
-	long left = (GetSystemMetrics(SM_CXSCREEN) - _width)* 0.5f;
-	long top = (GetSystemMetrics(SM_CYSCREEN) - _height)* 0.5f;
+	int64 left = (GetSystemMetrics(SM_CXSCREEN) - _width)* 0.5f;
+	int64 top = (GetSystemMetrics(SM_CYSCREEN) - _height)* 0.5f;
 
 	_instance = GetModuleHandle(NULL);          // 取得我们窗口的实例
 
@@ -257,7 +257,7 @@ bool Window::onHandSignal(Signal* signal)
 	{
 		return false;
 	}
-	Tuple3<UINT, WPARAM, LPARAM>* params = static_cast<Tuple3<UINT, WPARAM, LPARAM>*>(signal->getMessage());
+	Tuple3<UINT32, WPARAM, LPARAM>* params = static_cast<Tuple3<UINT32, WPARAM, LPARAM>*>(signal->getMessage());
 	if (params == nullptr)
 	{
 		return false;

@@ -4,7 +4,7 @@
 using namespace sys;
 
 
-PtrCache::PtrCache(char* ptr, uint size)
+PtrCache::PtrCache(char* ptr, uint32 size)
 {
 	_cacheInfo.t1 = ptr;
 	_cacheInfo.t2 = size;
@@ -20,7 +20,7 @@ void PtrCache::reset()
 	_cursor = 0;
 }
 
-char* PtrCache::alloctPtr(uint size)
+char* PtrCache::alloctPtr(uint32 size)
 {
 	if (size + _cursor >= _cacheInfo.t2)
 	{

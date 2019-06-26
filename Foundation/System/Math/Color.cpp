@@ -7,7 +7,7 @@ Color3B::Color3B() :red(COLOR_UCHAR_VALUE), green(COLOR_UCHAR_VALUE), blue(COLOR
 
 }
 
-Color3B::Color3B(uchar r, uchar g, uchar b) : red(r), green(g), blue(b)
+Color3B::Color3B(uint8 r, uint8 g, uint8 b) : red(r), green(g), blue(b)
 {
 
 }
@@ -47,9 +47,9 @@ void Color3B::mult(const Color3B& color)
 
 void Color3B::mult(const float ratio)
 {
-	red = (uchar)(red * ratio);
-	green = (uchar)(red * ratio);
-	blue = (uchar)(red * ratio);
+	red = (uint8)(red * ratio);
+	green = (uint8)(red * ratio);
+	blue = (uint8)(red * ratio);
 }
 
 void Color3B::div(const Color3B& color)
@@ -137,7 +137,7 @@ Color4B::Color4B() :red(COLOR_UCHAR_VALUE), green(COLOR_UCHAR_VALUE), blue(COLOR
 
 }
 
-Color4B::Color4B(uchar r, uchar g, uchar b, uchar a) : red(r), green(g), blue(b), alpha(a)
+Color4B::Color4B(uint8 r, uint8 g, uint8 b, uint8 a) : red(r), green(g), blue(b), alpha(a)
 {
 
 }
@@ -176,10 +176,10 @@ void Color4B::mult(const Color4B& color)
 
 void Color4B::mult(const float ratio)
 {
-	red = (uchar)(red * ratio);
-	green = (uchar)(red * ratio);
-	blue = (uchar)(red * ratio);
-	alpha = (uchar)(red * ratio);
+	red = (uint8)(red * ratio);
+	green = (uint8)(red * ratio);
+	blue = (uint8)(red * ratio);
+	alpha = (uint8)(red * ratio);
 	adjust();
 }
 
@@ -297,9 +297,9 @@ void sys::convertColor3BTo3F(const Color3B & b3, Color3F & f3)
 
 void sys::convertColor3FTo3B(const Color3F & f3, Color3B & b3)
 {
-	b3.red = (uchar)(f3.red * COLOR_FLOAT_VALUE);
-	b3.green = (uchar)(f3.green * COLOR_FLOAT_VALUE);
-	b3.blue = (uchar)(f3.blue * COLOR_FLOAT_VALUE);
+	b3.red = (uint8)(f3.red * COLOR_FLOAT_VALUE);
+	b3.green = (uint8)(f3.green * COLOR_FLOAT_VALUE);
+	b3.blue = (uint8)(f3.blue * COLOR_FLOAT_VALUE);
 }
 
 void sys::convertColor4BTo4F(const Color4B & b4, Color4F & f4)
@@ -312,8 +312,8 @@ void sys::convertColor4BTo4F(const Color4B & b4, Color4F & f4)
 
 void sys::convertColor4FTo4B(const Color4F & f4, Color4B & b4)
 {
-	b4.red = (uchar)(f4.red * COLOR_FLOAT_VALUE);
-	b4.green = (uchar)(f4.green * COLOR_FLOAT_VALUE);
-	b4.blue = (uchar)(f4.blue * COLOR_FLOAT_VALUE);
-	b4.alpha = (uchar)(f4.alpha * COLOR_FLOAT_VALUE);
+	b4.red = (uint8)(f4.red * COLOR_FLOAT_VALUE);
+	b4.green = (uint8)(f4.green * COLOR_FLOAT_VALUE);
+	b4.blue = (uint8)(f4.blue * COLOR_FLOAT_VALUE);
+	b4.alpha = (uint8)(f4.alpha * COLOR_FLOAT_VALUE);
 }

@@ -12,10 +12,10 @@ namespace sys
 	class RemoteResource : public Resource
 	{
 	public:
-
+		// 下载任务
 		struct DownloadTask
 		{
-			int tag = 0;
+			int32 tag = 0;
 			std::string path = "";
 			GetDataCallback handler = nullptr;
 		};
@@ -33,11 +33,11 @@ namespace sys
 		// 获取数据
 		bool getCacheData(const char* fullpath, std::string& data);
 		// 下载数据
-		void onDownloadCallback(int tag, const char* data, int size);
+		void onDownloadCallback(int32 tag, const char* data, int32 size);
 	private:
 		// 递增标识
-		static int s_Tag;
+		static int32 s_Tag;
 
-		std::map<int, DownloadTask> _downloadTasks;
+		std::map<int32, DownloadTask> _downloadTasks;
 	};
 }

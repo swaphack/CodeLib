@@ -12,21 +12,21 @@ namespace sys
 		// 面
 		Surface* surfaces;
 		// 面数
-		int count;
+		int32 count;
 		
 		Polyhedron();
-		Polyhedron(Surface* surfaces, int count);
+		Polyhedron(Surface* surfaces, int32 count);
 		~Polyhedron();
 
 		/**
 		*	是否包含点
 		*	各个坐标面的投影都包含点
 		*/
-		bool contiains(const Vector3& point);
+		bool contiains(const Vector3& point32);
 		/**
 		*	两多面体是否相交
 		*	
 		*/
-		bool intersects(const Polyhedron& polyhedron);
+		bool int32ersects(const Polyhedron& polyhedron);
 	};
 }

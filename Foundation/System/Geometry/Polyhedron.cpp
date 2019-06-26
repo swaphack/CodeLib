@@ -3,7 +3,7 @@
 #include "Polygon.h"
 using namespace sys;
 
-Polyhedron::Polyhedron(Surface* surfaces, int count)
+Polyhedron::Polyhedron(Surface* surfaces, int32 count)
 :surfaces(nullptr)
 {
 	if (surfaces == nullptr || count < 4)
@@ -14,7 +14,7 @@ Polyhedron::Polyhedron(Surface* surfaces, int count)
 	this->surfaces = new Surface[count];
 	this->count = count;
 
-	for (int i = 0; i < count; i++)
+	for (int32 i = 0; i < count; i++)
 	{
 		this->surfaces[i] = surfaces[i];
 	}
@@ -28,7 +28,7 @@ Polyhedron::~Polyhedron()
 	}
 }
 
-bool Polyhedron::contiains(const Vector3& point)
+bool Polyhedron::contiains(const Vector3& point32)
 {
 	if (surfaces == nullptr || count < 4)
 	{
@@ -39,11 +39,11 @@ bool Polyhedron::contiains(const Vector3& point)
 	Polygon pyoz;
 	Polygon pxoz;
 
-	Vector2 pxy(point.x, point.y);
-	Vector2 pyz(point.y, point.z);
-	Vector2 pxz(point.x, point.z);
+	Vector2 pxy(point32.x, point32.y);
+	Vector2 pyz(point32.y, point32.z);
+	Vector2 pxz(point32.x, point32.z);
 
-	for (int i = 0; i < count; i++)
+	for (int32 i = 0; i < count; i++)
 	{
 		pxoy = Surface::projectOnXOY(surfaces[i]);
 		pyoz = Surface::projectOnYOZ(surfaces[i]);
@@ -58,7 +58,7 @@ bool Polyhedron::contiains(const Vector3& point)
 	return false;
 }
 
-bool Polyhedron::intersects(const Polyhedron& polyhedron)
+bool Polyhedron::int32ersects(const Polyhedron& polyhedron)
 {
 	return false;
 }

@@ -54,7 +54,7 @@ bool LocalResource::loadFileData(const char* filename, GetDataCallback handler)
 std::string LocalResource::getFullPath(const char* filename)
 {
 	std::string fullpath;
-	if (File::isFileExists(filename))
+	if (File::exists(filename))
 	{
 		fullpath = filename;
 	}
@@ -63,7 +63,7 @@ std::string LocalResource::getFullPath(const char* filename)
 	{
 		fullpath = _url + filename;
 
-		if (!File::isFileExists(fullpath.c_str()))
+		if (!File::exists(fullpath.c_str()))
 		{
 			fullpath = "";
 		}

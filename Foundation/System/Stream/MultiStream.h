@@ -60,6 +60,8 @@ namespace sys
 		inline ss_t getDeep() const { return _deep; }
 		// 获取数据
 		inline const char* getData() const { return _data; }
+
+		void clear();
 	protected:
 		// 数据
 		char* _data;

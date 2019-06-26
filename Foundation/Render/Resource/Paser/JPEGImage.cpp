@@ -39,10 +39,10 @@ void JPEGImage::load(const char* filename)
 	this->setInternalFormat(internalFormat);
 	this->setFormat(EPF_RGB);
 
-	uint lineSize = jds.output_width * internalFormat;
-	uint totoalSize = this->getWidth()* this->getHeight() * internalFormat;
+	uint32 lineSize = jds.output_width * internalFormat;
+	uint32 totoalSize = this->getWidth()* this->getHeight() * internalFormat;
 
-	uchar* buffer = new uchar[totoalSize];
+	uint8* buffer = new uint8[totoalSize];
 	memset(buffer, 0, totoalSize);
 
 	JSAMPARRAY tmp = (*jds.mem->alloc_sarray)((j_common_ptr)&jds, JPOOL_IMAGE, lineSize, 1);

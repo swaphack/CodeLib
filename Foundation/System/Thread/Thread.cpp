@@ -57,7 +57,7 @@ bool Thread::isFinish()
 	return m_bFinish;
 }
 
-int Thread::getID()
+int32 Thread::getID()
 {
 	return m_nID;
 }

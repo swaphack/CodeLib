@@ -13,7 +13,7 @@ Memory::Memory()
 
 Memory::~Memory()
 {
-	this->dispose();
+	this->clear();
 
 	SAFE_DELETE(s_pMemory);
 }
@@ -28,7 +28,7 @@ Memory* Memory::getInstance()
 	return s_pMemory;
 }
 
-PtrCache* Memory::alloct(const char* name, uint size)
+PtrCache* Memory::alloct(const char* name, uint32 size)
 {
 	ASSERT(name != nullptr && size > 0);
 	ASSERT(_caches.find(name) != _caches.end());
@@ -58,7 +58,7 @@ void Memory::destory(const char* name)
 	SAFE_DELETE(pCache);
 }
 
-void Memory::dispose()
+void Memory::clear()
 {
 	std::map<std::string, PtrCache*>::iterator iter = _caches.begin();
 	while (iter != _caches.end())

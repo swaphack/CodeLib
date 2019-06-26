@@ -1,7 +1,6 @@
 #pragma once
 
 #include "Types.h"
-#include <string>
 
 namespace sys
 {
@@ -12,7 +11,7 @@ namespace sys
 		~BitConvert();
 	public:
 		// 获取10进制整数的字符串
-		static void getNumberString(int number, std::string& value);
+		static void getNumberString(int32 number, std::string& value);
 		// 获取10进制整数的字符串
 		static void getNumberString(long number, std::string& value);
 		// 获取10进制整数的字符串

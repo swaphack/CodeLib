@@ -1,20 +1,44 @@
 #include "WordDocument.h"
-#include "../Compile/import.h"
 #include "../macros.h"
+#include "WordSet.h"
+
 using namespace script;
 
 
 WordDocument::WordDocument()
 {
-
+	m_pWordSet = new WordSet;
 }
 
 WordDocument::~WordDocument()
 {
-
+	if (m_pWordSet)
+	{
+		delete m_pWordSet;
+	}
 }
 
-bool WordDocument::parse()
+void WordDocument::setWordSet(WordSet* pWordSet)
+{
+	if (pWordSet == nullptr)
+	{
+		return;
+	}
+
+	if (m_pWordSet)
+	{
+		delete m_pWordSet;
+	}
+
+	m_pWordSet = pWordSet;
+}
+
+WordSet* WordDocument::getWordSet()
+{
+	return m_pWordSet;
+}
+
+bool WordDocument::convertToDocumentStruct()
 {
 	int offset = 0;
 	char spot = 0;
@@ -23,7 +47,7 @@ bool WordDocument::parse()
 	{
 		if (offset >= getSize())
 		{
-			WordSet::getInstance()->appendWord(word.c_str());
+			m_pWordSet->appendWord(word.c_str());
 			word.clear();
 			break;
 		}
@@ -31,7 +55,7 @@ bool WordDocument::parse()
 		spot = *(getPtr() + offset);
 		if (IS_DECORATOR(spot))
 		{
-			WordSet::getInstance()->appendWord(word.c_str());
+			m_pWordSet->appendWord(word.c_str());
 			word.clear();
 		}
 		else
@@ -42,4 +66,9 @@ bool WordDocument::parse()
 	}
 
 	return true;
+}
+
+bool WordDocument::convertToTextStruct()
+{
+
 }

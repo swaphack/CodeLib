@@ -9,9 +9,9 @@ namespace sys
 		// 指针
 		char* ptr;
 		// 在Cache位置
-		uint begin;
+		uint32 begin;
 		// 分配大小
-		uint size;
+		uint32 size;
 
 		PtrInfo()
 		{

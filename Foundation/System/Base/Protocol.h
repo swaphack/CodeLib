@@ -1,6 +1,6 @@
 #pragma once
 
-#include <string>
+#include "Types.h"
 
 namespace sys
 {
@@ -37,15 +37,15 @@ namespace sys
 		Identify() :_id(0) {}
 		virtual ~Identify() {}
 	public:
-		void setID(int id)
+		void setID(int32 id)
 		{
 			_id = id;
 		}
-		int getID()
+		int32 getID()
 		{
 			return _id;
 		}
 	private:
-		int _id;
+		int32 _id;
 	};
 }

@@ -55,7 +55,7 @@ namespace render
 	private:
 		// 获取浮点数组
 		float* getFloatAry(const char* text, int count);
-		ushort* getUShortAry(const char* text, int count);
+		uint16* getUShortAry(const char* text, int count);
 	private:
 		// 模型配置
 		std::map<std::string, T_ModelData> _modelDatas;

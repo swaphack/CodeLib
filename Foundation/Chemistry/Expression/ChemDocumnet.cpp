@@ -80,7 +80,7 @@ CombineNode* ChemDocument::readBlock()
 
 	CombineNode* root = nullptr;
 	CombineNode* temp = nullptr;
-	
+	 
 	while (*_cursor)
 	{
 		tempChar = *_cursor;

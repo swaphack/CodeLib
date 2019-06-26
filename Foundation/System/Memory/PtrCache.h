@@ -2,8 +2,6 @@
 
 #include "Base/import.h"
 #include "PtrInfo.h"
-#include <string>
-#include <map>
 
 namespace sys
 {
@@ -12,7 +10,7 @@ namespace sys
 	{
 		friend class Memory; 
 	private:
-		PtrCache(char* ptr, uint size);
+		PtrCache(char* ptr, uint32 size);
 		virtual ~PtrCache();
 	public:
 		// 获取用户自定义类型的缓存指针
@@ -25,27 +23,27 @@ namespace sys
 		void reset();
 	protected:
 		// 分配空间
-		char* alloctPtr(uint size);
+		char* alloctPtr(uint32 size);
 	private:
 		// PtrCache信息{指针， 大小}
-		Tuple2<char*, uint> _cacheInfo;
+		Tuple2<char*, uint32> _cacheInfo;
 		// 当前游标位置
-		uint _cursor;
+		uint32 _cursor;
 		// 已分配的内存块
-		std::map<uint, PtrInfo> _alloctedPtrs;
+		std::map<uint32, PtrInfo> _alloctedPtrs;
 	};
 
 	template<typename T>
 	T* PtrCache::getPtr()
 	{
-		uint size = sizeof(T);
+		uint32 size = sizeof(T);
 		return (T*)alloctPtr(size);
 	}
 
 	template<typename T>
 	T PtrCache::getValue()
 	{
-		uint size = sizeof(T);
+		uint32 size = sizeof(T);
 		return *((T*)alloctPtr(size));
 	}
 }

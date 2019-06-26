@@ -19,12 +19,12 @@ Audio::~Audio()
 	SAFE_FREE(_data);
 }
 
-uchar* Audio::getData()
+uint8* Audio::getData()
 {
 	return _data;
 }
 
-void Audio::setData(uchar* data)
+void Audio::setData(uint8* data)
 {
 	SAFE_FREE(_data);
 	_data = data;
@@ -40,12 +40,12 @@ void Audio::setChannels(int channels)
 	_channels = channels;
 }
 
-int64_t Audio::getChannelLayout()
+int64 Audio::getChannelLayout()
 {
 	return _channelLayout;
 }
 
-void Audio::setChannelLayout(int64_t channelLayout)
+void Audio::setChannelLayout(int64 channelLayout)
 {
 	_channelLayout = channelLayout;
 }

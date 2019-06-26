@@ -166,9 +166,6 @@
     <ClInclude Include="Base\Directory.h">
       <Filter>Base</Filter>
     </ClInclude>
-    <ClInclude Include="Base\BitHelper.h">
-      <Filter>Base</Filter>
-    </ClInclude>
     <ClInclude Include="Stream\MultiStream.h">
       <Filter>Stream</Filter>
     </ClInclude>
@@ -502,6 +499,15 @@
     <ClInclude Include="Base\str.h">
       <Filter>Base</Filter>
     </ClInclude>
+    <ClInclude Include="Process\Pipe.h">
+      <Filter>Process</Filter>
+    </ClInclude>
+    <ClInclude Include="Type\Bit.h">
+      <Filter>Type</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\CharsetHelper.h">
+      <Filter>Base</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Base\File.cpp">
@@ -553,9 +559,6 @@
       <Filter>Stream</Filter>
     </ClCompile>
     <ClCompile Include="Base\Directory.cpp">
-      <Filter>Base</Filter>
-    </ClCompile>
-    <ClCompile Include="Base\BitHelper.cpp">
       <Filter>Base</Filter>
     </ClCompile>
     <ClCompile Include="Stream\MultiStream.cpp">
@@ -752,6 +755,9 @@
     </ClCompile>
     <ClCompile Include="Resource\ResourceBundle.cpp">
       <Filter>Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="Base\CharsetHelper.cpp">
+      <Filter>Base</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

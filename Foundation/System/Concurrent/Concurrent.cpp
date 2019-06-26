@@ -15,7 +15,7 @@ Concurrent::~Concurrent()
 {
 }
 
-bool Concurrent::read(char* data, int offset, int size, ReadDataCallback callback)
+bool Concurrent::read(char* data, int32 offset, int32 size, ReadDataCallback callback)
 {
 	if (data == nullptr || offset < 0)
 	{
@@ -28,7 +28,7 @@ bool Concurrent::read(char* data, int offset, int size, ReadDataCallback callbac
 	return true;
 }
 
-bool Concurrent::write(const char* data, int size)
+bool Concurrent::write(const char* data, int32 size)
 {
 	if (data == nullptr || size <= 0)
 	{

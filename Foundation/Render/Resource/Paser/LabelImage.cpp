@@ -48,7 +48,7 @@ FT_CHAR_DATA::FT_CHAR_DATA()
 
 FT_CHAR_DATA::~FT_CHAR_DATA()
 {
-	SAFE_FREE(data);
+	sys::StreamHelper::freeStream(data);
 }
 
 // 文本数据
@@ -60,6 +60,8 @@ public:
 public:
 	// 加载文本
 	void load(const TextDefine& textDefine, LabelStream* stream);
+	// 清空缓存
+	void clear();
 protected:
 	// 获取字符数据
 	FT_CHAR_DATA* getCharData(ulong ch);
@@ -96,7 +98,7 @@ FT_LABEL::FT_LABEL()
 
 FT_LABEL::~FT_LABEL()
 {
-	
+	this->clear();
 }
 
 void FT_LABEL::load(const TextDefine& textDefine, LabelStream* stream)
@@ -117,7 +119,7 @@ void FT_LABEL::load(const TextDefine& textDefine, LabelStream* stream)
 	}
 	char* text = (char*)textDefine.text.c_str();
 	int length = -1;
-	wchar_t* dest = sys::BitHelper::convertToWideChar(text, length);
+	wchar_t* dest = sys::CharsetHelper::convertToWideChar(text, length);
 	if (dest == nullptr || length == -1)
 	{
 		return;
@@ -146,6 +148,10 @@ void FT_LABEL::load(const TextDefine& textDefine, LabelStream* stream)
 	free (dest);
 	this->disposeFT();
 	_datas.clear();
+}
+
+void FT_LABEL::clear()
+{
 }
 
 FT_CHAR_DATA* FT_LABEL::getCharData(ulong ch)
@@ -285,7 +291,7 @@ void FT_LABEL::writeStream(ulong ch, LabelStream* stream)
 	}
 
 	// 获取rgba数据
-	uchar* pBuf = (uchar*)sys::StreamHelper::mallocStream(width * RGBA_PIXEL_UNIT * height);
+	uint8* pBuf = (uint8*)sys::StreamHelper::mallocStream(width * RGBA_PIXEL_UNIT * height);
 	if (pBuf == nullptr)
 	{
 		return;
@@ -294,24 +300,24 @@ void FT_LABEL::writeStream(ulong ch, LabelStream* stream)
 	{
 		for (int i = 0; i < width; i++)
 		{
-			uchar _vl = 0;
+			uint8 _vl = 0;
 			if (data)
 			{
 				_vl = data->data[i + width*j];
 			}
 			if (_vl == 0)
 			{
-				pBuf[(4 * i + (height - j - 1) * width * RGBA_PIXEL_UNIT)] = (uchar)0;
-				pBuf[(4 * i + (height - j - 1) * width * RGBA_PIXEL_UNIT) + 1] = (uchar)0;
-				pBuf[(4 * i + (height - j - 1) * width * RGBA_PIXEL_UNIT) + 2] = (uchar)0;
-				pBuf[(4 * i + (height - j - 1) * width * RGBA_PIXEL_UNIT) + 3] = (uchar)0;
+				pBuf[(4 * i + (height - j - 1) * width * RGBA_PIXEL_UNIT)] = (uint8)0;
+				pBuf[(4 * i + (height - j - 1) * width * RGBA_PIXEL_UNIT) + 1] = (uint8)0;
+				pBuf[(4 * i + (height - j - 1) * width * RGBA_PIXEL_UNIT) + 2] = (uint8)0;
+				pBuf[(4 * i + (height - j - 1) * width * RGBA_PIXEL_UNIT) + 3] = (uint8)0;
 			}
 			else
 			{
-				pBuf[(4 * i + (height - j - 1) * width * RGBA_PIXEL_UNIT)] = (uchar)255;
-				pBuf[(4 * i + (height - j - 1) * width * RGBA_PIXEL_UNIT) + 1] = (uchar)255;
-				pBuf[(4 * i + (height - j - 1) * width * RGBA_PIXEL_UNIT) + 2] = (uchar)255;
-				pBuf[(4 * i + (height - j - 1) * width * RGBA_PIXEL_UNIT) + 3] = (uchar)_vl;
+				pBuf[(4 * i + (height - j - 1) * width * RGBA_PIXEL_UNIT)] = (uint8)255;
+				pBuf[(4 * i + (height - j - 1) * width * RGBA_PIXEL_UNIT) + 1] = (uint8)255;
+				pBuf[(4 * i + (height - j - 1) * width * RGBA_PIXEL_UNIT) + 2] = (uint8)255;
+				pBuf[(4 * i + (height - j - 1) * width * RGBA_PIXEL_UNIT) + 3] = (uint8)_vl;
 			}
 		}
 	}
@@ -490,9 +496,8 @@ void LabelStream::format(HorizontalAlignment ha)
 
 //////////////////////////////////////////////////////////////////////////
 LabelImage::LabelImage()
-:_stream(nullptr)
 {
-	
+	_stream = new LabelStream();
 }
 
 LabelImage::~LabelImage()
@@ -502,8 +507,6 @@ LabelImage::~LabelImage()
 
 void LabelImage::load(const TextDefine& textDefine)
 {
-	SAFE_DELETE(_stream);
-	_stream = new LabelStream();
 	_stream->setFixWidth((sys::ss_t)textDefine.width * RGBA_PIXEL_UNIT);
 
 	FT_LABEL* label = new FT_LABEL();
@@ -515,11 +518,17 @@ void LabelImage::load(const TextDefine& textDefine)
 		_stream->format(textDefine.horizontalAlignment);
 	}
 
-	this->setPixels((uchar*)_stream->getData());
+	int count = _stream->getWidth() * _stream->getHeigth();
+	uint8* destPixels = (uint8 *)malloc(sizeof(uint8)* count);
+	memcpy(destPixels, _stream->getData(), sizeof(uint8)* count);
+
+	this->setPixels(destPixels);
 	this->setWidth(_stream->getWidth() / RGBA_PIXEL_UNIT);
 	this->setHeight(_stream->getHeigth());
 	this->setFormat(GL_RGBA);
 	this->setInternalFormat(RGBA_PIXEL_UNIT);
+
+	_stream->clear();
 }
 
 

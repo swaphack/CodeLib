@@ -5,62 +5,62 @@
 using namespace sys;
 
 Surface::Surface()
-:points(nullptr)
+:point32s(nullptr)
 , count(0)
 {
 
 }
 
 Surface::Surface(const Surface& surface)
-:Surface(surface.points, surface.count)
+:Surface(surface.point32s, surface.count)
 {
 
 }
 
-Surface::Surface(Vector3* points, int count)
+Surface::Surface(Vector3* point32s, int32 count)
 :Surface()
 {
-	if (points == nullptr || count < 3)
+	if (point32s == nullptr || count < 3)
 	{
 		return;
 	}
 
-	this->points = new Vector3[count];
+	this->point32s = new Vector3[count];
 	this->count = count;
-	for (int i = 0; i < count; i++)
+	for (int32 i = 0; i < count; i++)
 	{
-		this->points[i] = points[i];
+		this->point32s[i] = point32s[i];
 	}
 }
 
 
 Surface::~Surface()
 {
-	if (points != nullptr)
+	if (point32s != nullptr)
 	{
-		delete[] points;
+		delete[] point32s;
 	}
 }
 
 Vector3 Surface::normalVector()
 {
-	Vector3 v0 = points[1] - points[0];
-	Vector3 v1 = points[2] - points[1];
+	Vector3 v0 = point32s[1] - point32s[0];
+	Vector3 v1 = point32s[2] - point32s[1];
 
 	return Vector3::cross(v0, v1);
 }
 
 Vector3 Surface::normalVector() const
 {
-	Vector3 v0 = points[1] - points[0];
-	Vector3 v1 = points[2] - points[1];
+	Vector3 v0 = point32s[1] - point32s[0];
+	Vector3 v1 = point32s[2] - point32s[1];
 
 	return Vector3::cross(v0, v1);
 }
 
-bool Surface::contain(const Vector3& point)
+bool Surface::contain(const Vector3& point32)
 {
-	if (!isCoplanar(*this, point))
+	if (!isCoplanar(*this, point32))
 	{ // 不共面
 		return false;
 	}
@@ -70,38 +70,38 @@ bool Surface::contain(const Vector3& point)
 	Vector2 target;
 	if (nv.x == 0)
 	{// 平行yoz面
-		target.x = point.y;
-		target.y = point.z;
+		target.x = point32.y;
+		target.y = point32.z;
 	}
 	else if (nv.y == 0)
 	{// 平行xoz面
-		target.x = point.x;
-		target.y = point.z;
+		target.x = point32.x;
+		target.y = point32.z;
 	}
 	else/* if (nv.z == 0)*/
 	{// 平行xoy面
-		target.x = point.x;
-		target.y = point.y;
+		target.x = point32.x;
+		target.y = point32.y;
 	}
 
 	// 投影坐标计算
 	Vector2* ps = new Vector2[count];
-	for (int i = 0; i < count; i++)
+	for (int32 i = 0; i < count; i++)
 	{
 		if (nv.x == 0)
 		{// 平行yoz面
-			ps[i].x = points[i].y;
-			ps[i].y = points[i].z;
+			ps[i].x = point32s[i].y;
+			ps[i].y = point32s[i].z;
 		}
 		else if (nv.y == 0)
 		{// 平行xoz面
-			ps[i].x = points[i].x;
-			ps[i].y = points[i].z;
+			ps[i].x = point32s[i].x;
+			ps[i].y = point32s[i].z;
 		}
 		else/* if (nv.z == 0)*/
 		{// 平行xoy面
-			ps[i].x = points[i].x;
-			ps[i].y = points[i].y;
+			ps[i].x = point32s[i].x;
+			ps[i].y = point32s[i].y;
 		}
 	}
 
@@ -114,21 +114,21 @@ bool Surface::contain(const Vector3& point)
 
 Surface& Surface::operator=(const Surface& surface)
 {
-	if (surface.points == nullptr || surface.count < 3)
+	if (surface.point32s == nullptr || surface.count < 3)
 	{
 		return *this;
 	}
 
-	if (this->points != nullptr)
+	if (this->point32s != nullptr)
 	{
-		delete[] this->points;
+		delete[] this->point32s;
 	}
 
-	this->points = new Vector3[surface.count];
+	this->point32s = new Vector3[surface.count];
 	this->count = surface.count;
-	for (int i = 0; i < surface.count; i++)
+	for (int32 i = 0; i < surface.count; i++)
 	{
-		this->points[i] = surface.points[i];
+		this->point32s[i] = surface.point32s[i];
 	}
 
 	return  *this;
@@ -136,18 +136,18 @@ Surface& Surface::operator=(const Surface& surface)
 
 bool Surface::isStandard(const Surface& surface)
 {
-	if (surface.points == nullptr || surface.count < 3)
+	if (surface.point32s == nullptr || surface.count < 3)
 	{
 		return false;
 	}
 
-	int lineCount = surface.count;
-	for (int i = 0; i < lineCount; i++)
+	int32 lineCount = surface.count;
+	for (int32 i = 0; i < lineCount; i++)
 	{
 		// 邻边的向量
-		Vector3 l0 = surface.points[(i + 1) % lineCount] - surface.points[i % lineCount];
-		Vector3 l1 = surface.points[(i + 2) % lineCount] - surface.points[(i + 1) % lineCount];
-		Vector3 l2 = surface.points[(i + 3) % lineCount] - surface.points[(i + 2) % lineCount];
+		Vector3 l0 = surface.point32s[(i + 1) % lineCount] - surface.point32s[i % lineCount];
+		Vector3 l1 = surface.point32s[(i + 2) % lineCount] - surface.point32s[(i + 1) % lineCount];
+		Vector3 l2 = surface.point32s[(i + 3) % lineCount] - surface.point32s[(i + 2) % lineCount];
 		// 两向量所在平面的法向量
 		Vector3 n0 = Vector3::cross(l0, l1);
 		Vector3 n1 = Vector3::cross(l1, l2);
@@ -171,14 +171,14 @@ bool Surface::isConvex(const Surface& surface)
 		return false;
 	}
 
-	int lineCount = surface.count - 2;
-	int lastDirection = -1;
-	for (int i = 0; i < lineCount; i++)
+	int32 lineCount = surface.count - 2;
+	int32 lastDirection = -1;
+	for (int32 i = 0; i < lineCount; i++)
 	{
-		Vector3 l0 = surface.points[(i + 1) % lineCount] - surface.points[i % lineCount];
-		Vector3 l1 = surface.points[(i + 2) % lineCount] - surface.points[(i + 1) % lineCount];
+		Vector3 l0 = surface.point32s[(i + 1) % lineCount] - surface.point32s[i % lineCount];
+		Vector3 l1 = surface.point32s[(i + 2) % lineCount] - surface.point32s[(i + 1) % lineCount];
 
-		int direction = Vector3::direction(l1, l0);
+		int32 direction = Vector3::direction(l1, l0);
 		if (lastDirection == -1)
 		{
 			lastDirection = direction;
@@ -192,17 +192,17 @@ bool Surface::isConvex(const Surface& surface)
 	return true;
 }
 
-bool Surface::isCoplanar(const Surface& surface, const Vector3& point)
+bool Surface::isCoplanar(const Surface& surface, const Vector3& point32)
 {
 	if (!isStandard(surface))
 	{
 		return false;
 	}
-	int lineCount = surface.count;
+	int32 lineCount = surface.count;
 	// 邻边的向量
-	Vector3 l0 = surface.points[1] - surface.points[0];
-	Vector3 l1 = surface.points[2] - surface.points[1];
-	Vector3 l2 = point - surface.points[2];
+	Vector3 l0 = surface.point32s[1] - surface.point32s[0];
+	Vector3 l1 = surface.point32s[2] - surface.point32s[1];
+	Vector3 l2 = point32 - surface.point32s[2];
 	// 法向量
 	Vector3 n0 = Vector3::cross(l0, l1);
 	Vector3 n1 = Vector3::cross(l1, l2);
@@ -218,13 +218,13 @@ bool Surface::isCoplanar(const Surface& surface, const Vector3& point)
 	return true;
 }
 
-bool Surface::isCoplanar(const Vector3& point0, const Vector3& point1, const Vector3& point2, 
-	const Vector3& point3)
+bool Surface::isCoplanar(const Vector3& point320, const Vector3& point321, const Vector3& point322, 
+	const Vector3& point323)
 {
 	// 邻边的向量
-	Vector3 l0 = point1 - point0;
-	Vector3 l1 = point2 - point1;
-	Vector3 l2 = point3 - point2;
+	Vector3 l0 = point321 - point320;
+	Vector3 l1 = point322 - point321;
+	Vector3 l2 = point323 - point322;
 
 	if (Vector3::direction(l0, l1) == 0 
 		|| Vector3::direction(l1, l2) == 0
@@ -251,13 +251,13 @@ bool Surface::isCoplanar(const Vector3& point0, const Vector3& point1, const Vec
 
 Polygon Surface::projectOnXOY(const Surface& surface)
 {
-	int count = surface.count;
+	int32 count = surface.count;
 	// 投影坐标计算
 	Vector2* ps = new Vector2[count];
-	for (int i = 0; i < count; i++)
+	for (int32 i = 0; i < count; i++)
 	{
-		ps[i].x = surface.points[i].x;
-		ps[i].y = surface.points[i].y;
+		ps[i].x = surface.point32s[i].x;
+		ps[i].y = surface.point32s[i].y;
 	}
 
 	// 投影
@@ -269,13 +269,13 @@ Polygon Surface::projectOnXOY(const Surface& surface)
 
 Polygon Surface::projectOnYOZ(const Surface& surface)
 {
-	int count = surface.count;
+	int32 count = surface.count;
 	// 投影坐标计算
 	Vector2* ps = new Vector2[count];
-	for (int i = 0; i < count; i++)
+	for (int32 i = 0; i < count; i++)
 	{
-		ps[i].x = surface.points[i].y;
-		ps[i].y = surface.points[i].z;
+		ps[i].x = surface.point32s[i].y;
+		ps[i].y = surface.point32s[i].z;
 	}
 
 	// 投影
@@ -287,13 +287,13 @@ Polygon Surface::projectOnYOZ(const Surface& surface)
 
 Polygon Surface::projectOnXOZ(const Surface& surface)
 {
-	int count = surface.count;
+	int32 count = surface.count;
 	// 投影坐标计算
 	Vector2* ps = new Vector2[count];
-	for (int i = 0; i < count; i++)
+	for (int32 i = 0; i < count; i++)
 	{
-		ps[i].x = surface.points[i].x;
-		ps[i].y = surface.points[i].z;
+		ps[i].x = surface.point32s[i].x;
+		ps[i].y = surface.point32s[i].z;
 	}
 
 	// 投影

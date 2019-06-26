@@ -38,7 +38,7 @@ const char* FilePath::getFilePath(const char* filename)
 		fullpath = (*it2);
 		fullpath += "/";
 		fullpath += filename;
-		if (File::isFileExists(fullpath.c_str()))
+		if (File::exists(fullpath.c_str()))
 		{
 			_filePathCache[filename] = fullpath;
 			return _filePathCache[filename].c_str();

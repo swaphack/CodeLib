@@ -5,13 +5,13 @@
 
 using namespace sys;
 
-StreamWriter::StreamWriter(int size)
+StreamWriter::StreamWriter(int32 size)
 :Stream(new StreamBaseRef())
 {
 	this->realloct(size);
 }
 
-StreamWriter::StreamWriter(const char* data, int size)
+StreamWriter::StreamWriter(const char* data, int32 size)
 : Stream(new StreamBaseRef())
 {
 	this->setData(data, size);
@@ -24,44 +24,44 @@ StreamWriter::~StreamWriter()
 	SAFE_DELETE(_baseStream);
 }
 
-void StreamWriter::writeChar( char data )
+void StreamWriter::writeInt8( char data )
 {
 	this->write<char>(data);
 }
 
-void StreamWriter::writeUChar( uchar data )
+void StreamWriter::writeUInt8( uint8 data )
 {
-	this->write<uchar>(data);
+	this->write<uint8>(data);
 }
 
-void StreamWriter::writeShort( short data )
+void StreamWriter::writeInt16( short data )
 {
 	this->write<short>(data);
 }
 
-void StreamWriter::writeUShort( ushort data )
+void StreamWriter::writeUInt16( uint16 data )
 {
-	this->write<ushort>(data);
+	this->write<uint16>(data);
 }
 
-void StreamWriter::writeInt( int data )
+void StreamWriter::writeInt32( int32 data )
 {
-	this->write<int>(data);
+	this->write<int32>(data);
 }
 
-void StreamWriter::writeUInt( uint data )
+void StreamWriter::writeUInt32( uint32 data )
 {
-	this->write<int>(data);
+	this->write<int32>(data);
 }
 
-void StreamWriter::writeLong( long data )
+void StreamWriter::writeInt64( int64 data )
 {
-	this->write<long>(data);
+	this->write<int64>(data);
 }
 
-void StreamWriter::writeULong( ulong data )
+void StreamWriter::writeUInt64( uint64 data )
 {
-	this->write<ulong>(data);
+	this->write<uint64>(data);
 }
 
 void StreamWriter::writeFloat( float data )
@@ -76,12 +76,12 @@ void StreamWriter::writeDouble( double data )
 
 void StreamWriter::writeString(const char* data )
 {
-	int size = strlen(data);
+	int32 size = strlen(data);
 
 	this->writeString((char*)data, size);
 }
 
-void StreamWriter::writeString( char* data, int size )
+void StreamWriter::writeString( char* data, int32 size )
 {
 	while (getCursor() + size > this->getCapacity())
 	{

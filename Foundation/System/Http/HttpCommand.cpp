@@ -30,7 +30,7 @@ const char* HttpCommand::getSessionID()
 	return _sessionID.c_str();
 }
 
-void HttpCommand::setMessage(const char* msg, int size)
+void HttpCommand::setMessage(const char* msg, int32 size)
 {
 	_msg = std::string(msg, size);
 }
@@ -45,7 +45,7 @@ const char* HttpCommand::getMessage()
 	return _msg.c_str();
 }
 
-int HttpCommand::getMessageSize()
+int32 HttpCommand::getMessageSize()
 {
 	return _msg.size();
 }

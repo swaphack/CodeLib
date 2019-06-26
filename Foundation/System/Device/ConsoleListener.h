@@ -3,8 +3,7 @@
 #include "Base/Instance.h"
 #include "IConsoleImpl.h"
 
-#include <functional>
-#include <string>
+#include "Base/Types.h"
 
 namespace sys
 {

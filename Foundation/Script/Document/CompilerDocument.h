@@ -13,9 +13,11 @@ namespace script
 	public:
 		CompilerDocument();
 		virtual ~CompilerDocument();
-	public:
-		// 解析
-		virtual bool parse();
+	protected:
+		// 转化成文档格式
+		virtual bool convertToDocumentStruct();
+		// 转化成文本格式
+		virtual bool convertToTextStruct();
 	private:
 		// 扫描器
 		Compiler* m_pCompiler;

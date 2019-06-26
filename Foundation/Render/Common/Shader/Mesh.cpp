@@ -59,7 +59,7 @@ void Mesh::setUV(int count, float* texCoords, int size)
 	_uvs.init(count, texCoords, size);
 }
 
-void Mesh::setIndices(int count, ushort* indices)
+void Mesh::setIndices(int count, uint16* indices)
 {
 	_indices.init(count, indices);
 }
@@ -74,7 +74,7 @@ int Mesh::getTriangleCount()
 	return _indices.count / 3;
 }
 
-void Mesh::apply(int textureID, const sys::Color4B& color, uchar opacity, const BlendParam& blend)
+void Mesh::apply(int textureID, const sys::Color4B& color, uint8 opacity, const BlendParam& blend)
 {
 	if (_vertexes.value == nullptr 
 		|| _normals.value == nullptr

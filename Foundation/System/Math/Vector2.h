@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Base/Types.h"
+
 namespace sys
 {
 	// 2d
@@ -10,7 +12,7 @@ namespace sys
 
 		Vector2();
 		Vector2(float x, float y);
-		Vector2(const Vector2& point);
+		Vector2(const Vector2& point32);
 		/**
 		*	长度
 		*/
@@ -18,19 +20,19 @@ namespace sys
 		/**
 		*	两向量和
 		*/
-		void add(const Vector2& point);
+		void add(const Vector2& point32);
 		/**
 		*	两向量差
 		*/
-		void sub(const Vector2& point);
+		void sub(const Vector2& point32);
 		/**
 		*	乘以
 		*/
-		void mult(const Vector2& point);
+		void mult(const Vector2& point32);
 		/**
 		*	除以
 		*/
-		void div(const Vector2& point);
+		void div(const Vector2& point32);
 
 		/**
 		*	乘以
@@ -43,7 +45,7 @@ namespace sys
 		/**
 		*	重载=
 		*/
-		Vector2& operator = (const Vector2& point);
+		Vector2& operator = (const Vector2& point32);
 		/**
 		*	重载+
 		*/
@@ -114,14 +116,14 @@ namespace sys
 		/**
 		*	距离
 		*/
-		static float distance(const Vector2& point0, const Vector2& point1);
+		static float distance(const Vector2& point320, const Vector2& point321);
 		/**
 		*	判断vector1在vector0的位置方向
 		*	0 共线
 		*	1 在左边
 		*	2 在右边
 		*/
-		static int direction(const Vector2& vector0, const Vector2& vector1);
+		static int32 direction(const Vector2& vector0, const Vector2& vector1);
 		/**
 		*	vector1和vector0的夹角余弦值
 		*/

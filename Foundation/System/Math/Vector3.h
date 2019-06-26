@@ -1,6 +1,7 @@
 #pragma once
 
 #include <cmath>
+#include "Base/Types.h"
 
 namespace sys
 {
@@ -123,14 +124,14 @@ namespace sys
 		/**
 		*	两点间的距离
 		*/
-		static float distance(const Vector3& point0, const Vector3& point1);
+		static float distance(const Vector3& point320, const Vector3& point321);
 		/**
 		*	判断vector1在vector0的位置方向
 		*	0 共线
 		*	1 在左边
 		*	2 右边
 		*/
-		static int direction(const Vector3& vector0, const Vector3& vector1);
+		static int32 direction(const Vector3& vector0, const Vector3& vector1);
 		/**
 		*	vector1和vector0的夹角余弦值
 		*/

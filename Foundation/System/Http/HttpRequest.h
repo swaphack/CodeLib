@@ -1,6 +1,6 @@
 #pragma once
 
-#include <string>
+#include "Base/Types.h"
 #include "HttpCommand.h"
 #include "HttpDocument.h"
 
@@ -50,7 +50,7 @@ namespace sys
 		virtual ~HttpReqDocument();
 	public:
 		// 解析字符串，是否是http请求文档
-		bool parseRequest(const char* msg, int size);
+		bool parseRequest(const char* msg, int32 size);
 		// 请求方式
 		const char* getMethod();
 		void setMethod(const char* method);

@@ -8,22 +8,22 @@ namespace sys
 	class StreamWriter : public Stream, public IStreamWriter
 	{
 	public:
-		StreamWriter(int size = STREAM_DEFAULT_SIZE);
-		StreamWriter(const char* data, int size);
+		StreamWriter(int32 size = STREAM_DEFAULT_SIZE);
+		StreamWriter(const char* data, int32 size);
 		virtual ~StreamWriter();
 	public:
-		void writeChar(char data);
-		void writeUChar(uchar data);
-		void writeShort(short data);
-		void writeUShort(ushort data);
-		void writeInt(int data);
-		void writeUInt(uint data);
-		void writeLong(long data);
-		void writeULong(ulong data);
+		void writeInt8(char data);
+		void writeUInt8(uint8 data);
+		void writeInt16(int16 data);
+		void writeUInt16(uint16 data);
+		void writeInt32(int32 data);
+		void writeUInt32(uint32 data);
+		void writeInt64(int64 data);
+		void writeUInt64(uint64 data);
 		void writeFloat(float data);
 		void writeDouble(double data);
 		void writeString(const char* data);
-		void writeString(char* data, int size);
+		void writeString(char* data, int32 size);
 	public:
 		template<typename T>
 		void write(T data);
@@ -36,7 +36,7 @@ namespace sys
 	template<typename T>
 	void StreamWriter::write( T data )
 	{
-		while ((int)(getCursor() + sizeof(data)) > this->getCapacity())
+		while ((int32)(getCursor() + sizeof(data)) > this->getCapacity())
 		{
 			this->realloct(2 * this->getCapacity());
 		}

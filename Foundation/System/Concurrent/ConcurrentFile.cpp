@@ -16,7 +16,7 @@ ConcurrentFile::ConcurrentFile(const std::string& filepath)
 		{
 			return;
 		}
-		int size = data->size;
+		int32 size = data->size;
 		fseek(_fptr, data->offset, SEEK_SET);
 		char* buff = (char*)malloc(size * sizeof(char));
 		memset(buff, 0, size);

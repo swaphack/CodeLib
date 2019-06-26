@@ -42,7 +42,7 @@ namespace render
 	struct T_Indice
 	{
 		int count;
-		ushort* value;
+		uint16* value;
 
 		T_Indice()
 		{
@@ -55,7 +55,7 @@ namespace render
 			SAFE_FREE(value);
 		}
 
-		void init(int _count, ushort* _value)
+		void init(int _count, uint16* _value)
 		{
 			if (_value == nullptr)
 			{
@@ -64,8 +64,8 @@ namespace render
 			SAFE_FREE(value);
 			count = _count;
 
-			value = (ushort*)malloc(count * sizeof(ushort));
-			memcpy(value, _value, count * sizeof(ushort));
+			value = (uint16*)malloc(count * sizeof(uint16));
+			memcpy(value, _value, count * sizeof(uint16));
 		}
 	};
 }

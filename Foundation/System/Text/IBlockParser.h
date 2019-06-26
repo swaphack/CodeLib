@@ -1,6 +1,6 @@
 #pragma once
 
-#include <string>
+#include "Base/Types.h"
 
 namespace sys
 {
@@ -8,6 +8,7 @@ namespace sys
 	class IBlockParser
 	{
 	public:
+		virtual ~IBlockParser() {}
 		// ½âÎöÎÄ±¾¿é
 		virtual bool readBlock(char* inPtr, std::string& outData) = 0;
 	};

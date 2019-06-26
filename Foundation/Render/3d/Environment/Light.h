@@ -15,15 +15,15 @@ namespace render
 
 		virtual void draw();
 		// 环境光
-		void setAmbient(uchar red, uchar green, uchar blue, uchar alpha);
+		void setAmbient(uint8 red, uint8 green, uint8 blue, uint8 alpha);
 		const float* getAmbient();
 
 		// 漫射光
-		void setDiffuse(uchar red, uchar green, uchar blue, uchar alpha);
+		void setDiffuse(uint8 red, uint8 green, uint8 blue, uint8 alpha);
 		const float* getDiffuse();
 
 		// 反射光
-		void setSpecular(uchar red, uchar green, uchar blue, uchar alpha);
+		void setSpecular(uint8 red, uint8 green, uint8 blue, uint8 alpha);
 		const float* getSpecular();
 	protected:
 		virtual void initSelf();

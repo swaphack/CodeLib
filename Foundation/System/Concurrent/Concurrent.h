@@ -1,8 +1,6 @@
 #pragma once
 
-#include <string>
-#include <queue>
-#include <functional>
+#include "Base/Types.h"
 #include "Thread/Mutex.h"
 #include "Framework/Object.h"
 
@@ -15,8 +13,8 @@ namespace sys
 	protected:
 		struct Data
 		{
-			int type;
-			Data(int type)
+			int32 type;
+			Data(int32 type)
 			{
 				this->type = type;
 			}
@@ -30,17 +28,17 @@ namespace sys
 		};
 
 		// 读取数据回调
-		typedef std::function<void(const char* data, int size)> ReadDataCallback;
+		typedef std::function<void(const char* data, int32 size)> ReadDataCallback;
 
 		struct ReadData : public Data
 		{
 			char* data;
-			int offset;
-			int size;
+			int32 offset;
+			int32 size;
 			ReadDataCallback callback;
 
-			ReadData(char* data, int offset, int size, ReadDataCallback callback)
-				:Data((int)EET_READ)
+			ReadData(char* data, int32 offset, int32 size, ReadDataCallback callback)
+				:Data((int32)EET_READ)
 			{
 				this->data = data;
 				this->offset = offset;
@@ -52,10 +50,10 @@ namespace sys
 		struct WriteData : public Data
 		{
 			const char* data;
-			int size;
+			int32 size;
 
-			WriteData(const char* data, int size)
-				:Data((int)EET_WRITE)
+			WriteData(const char* data, int32 size)
+				:Data((int32)EET_WRITE)
 			{
 				this->data = data;
 				this->size = size;
@@ -65,7 +63,7 @@ namespace sys
 		struct FinishData : public Data
 		{
 			FinishData()
-				:Data((int)EET_FINISH)
+				:Data((int32)EET_FINISH)
 			{}
 		};
 
@@ -79,9 +77,9 @@ namespace sys
 		virtual ~Concurrent();
 	public:
 		// 读取数据
-		bool read(char* data, int offset, int size, ReadDataCallback callback);
+		bool read(char* data, int32 offset, int32 size, ReadDataCallback callback);
 		// 写入数据
-		bool write(const char* data, int size);
+		bool write(const char* data, int32 size);
 		// 结束操作
 		void finish();
 		// 设置读取函数

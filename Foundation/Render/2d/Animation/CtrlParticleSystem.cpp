@@ -16,13 +16,7 @@ void ParticleNode::draw()
 {
 	ColorNode::draw();
 
-// 	GLTool::beginBlend(_blend);
-// 
-// 	GLTool::setColor(getColor());
-// 
-// 	GLTool::drawTriangleVertex(&_texRect);
-// 
-// 	GLTool::endBlend();
+	G_DRAWCOMMANDER->addCommand(DCTexture::create(0, &_texRect, _color, _opacity, _blend));
 }
 
 void ParticleNode::update(float interval)
@@ -77,8 +71,22 @@ bool CtrlParticleSystem::init()
 	{
 		return false;
 	}
+	
+	return true;
+}
+
+void CtrlParticleSystem::setCount(uint32 count)
+{
+	if (_particleCount == count) 
+	{
+		return;
+	}
+	this->removeAllChildren();
+
+	_particleCount = count;
+
 	// for test
-	for (uint i = 0; i < _particleCount; i++)
+	for (uint32 i = 0; i < count; i++)
 	{
 		ParticleNode* node = createParticle();
 		if (node)
@@ -86,16 +94,9 @@ bool CtrlParticleSystem::init()
 			this->addChild(node);
 		}
 	}
-	
-	return true;
 }
 
-void CtrlParticleSystem::setCount(uint count)
-{
-	_particleCount = count;
-}
-
-uint CtrlParticleSystem::getCount()
+uint32 CtrlParticleSystem::getCount()
 {
 	return _particleCount;
 }
@@ -173,7 +174,7 @@ ParticleNode* CtrlParticleSystem::createParticle()
 	ParticleNode* node = new ParticleNode();
 	AUTO_RELEASE_OBJECT(node);
 	node->setColor(0, 0, 0, 0);
-	node->setVolume(5, 5);
+	node->setVolume(200, 200);
 	node->setColorAcceleration(r, g, b, a);
 	node->setLifeTime(life);
 	node->setSpeedAcceleration(x, y, z);

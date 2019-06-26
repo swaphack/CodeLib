@@ -56,8 +56,8 @@ void DBStructFile::createStructCPPFile( const char* filename, const std::map<std
 		createStructStream(&iter->second, writer);
 		iter++;
 	}
-
-	File::write(filename, writer.getData(), writer.getLength());
+	int64 writtenSize = 0;
+	File::write(filename, writer.getData(), writer.getLength(), writtenSize);
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -71,21 +71,21 @@ void DBStructFile::readTableStruct( const char* filename, std::map<std::string, 
 	DBFileReader reader;
 	reader.load(filename);
 	
-	int count = reader.readUInt();
+	uint32 count = reader.readUInt32();
 	for (int i = 0; i < count; i++)
 	{
 		DBTable dbTable;
 		dbTable.setName(reader.readDBString().c_str());
 
-		int size = reader.readInt();
+		uint32 size = reader.readInt32();
 		for (int j = 0; j < size; j++)
 		{
 			std::string key = reader.readDBString();
-			FieldType type = (FieldType)reader.readChar();
+			FieldType type = (FieldType)reader.readInt8();
 			dbTable.addField(key.c_str(), type);
 		}
 
-		size = reader.readInt();
+		size = reader.readInt32();
 		for (int j = 0; j < size; j++)
 		{
 			std::string key = reader.readDBString();
@@ -99,7 +99,7 @@ void DBStructFile::readTableStruct( const char* filename, std::map<std::string, 
 void DBStructFile::writeTableStruct( const char* filename, const std::map<std::string, DBTable>& dbTables )
 {
 	DBFileWriter writer;
-	writer.writeInt(dbTables.size());
+	writer.writeInt32(dbTables.size());
 
 	std::map<std::string, DBTable>::const_iterator iter = dbTables.begin();
 	while (iter != dbTables.end())
@@ -109,19 +109,19 @@ void DBStructFile::writeTableStruct( const char* filename, const std::map<std::s
 		writer.writeDBString(name);
 
 		const std::vector<DBField*>& fields = dbTable.getMemoryFields();
-		writer.writeInt(fields.size());
+		writer.writeInt32(fields.size());
 		std::vector<DBField*>::const_iterator memeberIter = fields.begin();
 		while (memeberIter != fields.end())
 		{
 			std::string key = (*memeberIter)->getName();
 			char type = (*memeberIter)->getType();
 			writer.writeDBString(key);
-			writer.writeChar(type);
+			writer.writeInt8(type);
 			memeberIter++;
 		}
 
 		const std::set<std::string>& keys = dbTable.getKeys();
-		writer.writeInt(keys.size());
+		writer.writeInt32(keys.size());
 		std::set<std::string>::const_iterator keyIter = keys.begin();
 		while (keyIter != keys.end())
 		{
@@ -132,7 +132,8 @@ void DBStructFile::writeTableStruct( const char* filename, const std::map<std::s
 		iter++;
 	}
 
-	File::write(filename, writer.getData(), writer.getLength());
+	int64 writtenSize = 0;
+	File::write(filename, writer.getData(), writer.getLength(), writtenSize);
 }
 //////////////////////////////////////////////////////////////////////////
 void DBStructFile::createStructCode( std::string headFilename, const DBContent* content )

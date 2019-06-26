@@ -32,7 +32,7 @@ void TextLoader::parseAttributes()
 	std::string str;
 	float floatVal;
 	int intVal;
-	uchar ucVal;
+	uint8 ucVal;
 	BlendParam blend;
 	sys::Size size;
 

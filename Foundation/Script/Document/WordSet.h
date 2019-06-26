@@ -9,12 +9,10 @@ namespace script
 	// 单词集合
 	class WordSet
 	{
-	private:
-		WordSet();
 	public:
+		WordSet();
 		~WordSet();
 	public:
-		static WordSet* getInstance();
 		/**
 		*	添加一个单词
 		*	@param name 单词名称

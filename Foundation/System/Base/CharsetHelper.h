@@ -19,15 +19,15 @@ namespace sys
 	#define UTF8_MARK_6 0xFD	// 1111 1101
 	#define UTF8_MARK_7 0xBF	// 1011 1111
 
-	class BitHelper
+	class CharsetHelper
 	{
 	public:
 		// 获取utf8文字数量
-		static int getUTF8WordCount(const char* data);
+		static int32 getUTF8WordCount(const char* data);
 		// 获取utf8文字
 		static char* convertToUTF8(wchar_t* src);
 		// zh_CN.utf8 zh_CN.GB2312 
-		static wchar_t* convertToWideChar(const char* src, int& length);
+		static wchar_t* convertToWideChar(const char* src, int32& length);
 
 		static wchar_t* convertToWideCharWnd(const char *str);
 	protected:

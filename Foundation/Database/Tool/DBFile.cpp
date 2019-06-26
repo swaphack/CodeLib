@@ -8,7 +8,7 @@ DBFileReader::DBFileReader()
 
 std::string DBFileReader::readDBString()
 {
-	int size = this->readInt();
+	int size = this->readInt32();
 	char* data = this->readString(size);
 	std::string value = std::string(data, size);
 
@@ -17,7 +17,7 @@ std::string DBFileReader::readDBString()
 
 bool DBFileReader::load(const char* filepath)
 {
-	long size = 0;
+	int64 size = 0;
 	char* data = sys::File::read(filepath, size);
 	if (data == nullptr)
 	{
@@ -45,11 +45,12 @@ DBFileWriter::~DBFileWriter()
 
 void DBFileWriter::writeDBString(const std::string& value)
 {
-	this->writeInt(value.size());
+	this->writeInt32(value.size());
 	this->writeString(value.c_str());
 }
 
 bool DBFileWriter::save(const char* filepath)
 {
-	 return sys::File::write(filepath, this->getData(), this->getLength());
+	int64 writtenSize;
+	return sys::File::write(filepath, this->getData(), this->getLength(), writtenSize);
 }

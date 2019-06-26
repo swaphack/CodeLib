@@ -25,7 +25,7 @@ namespace render
 	};
 
 	// 粒子系统
-	class CtrlParticleSystem : public Animation
+	class CtrlParticleSystem : public Animation // 还有问题
 	{
 	public:
 		CtrlParticleSystem();
@@ -33,9 +33,9 @@ namespace render
 	public:
 		virtual bool init();
 		// 设置粒子个数
-		void setCount(uint count);
+		void setCount(uint32 count);
 		// 获取粒子个数
-		uint getCount();
+		uint32 getCount();
 		// 粒子播放结束后处理 override
 		virtual void onParticleEndHandler();
 		// 创建粒子 override
@@ -43,6 +43,6 @@ namespace render
 	protected:
 		virtual void updateSelf(float interval);
 	private:
-		uint _particleCount;
+		uint32 _particleCount;
 	};
 }

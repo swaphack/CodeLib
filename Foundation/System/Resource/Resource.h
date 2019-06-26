@@ -1,6 +1,6 @@
 #pragma once
 
-#include <string>
+#include "Base/Types.h"
 
 #include "Framework/Object.h"
 

@@ -18,9 +18,9 @@ namespace search
 		// »ñÈ¡×Ö·û´®
 		std::string* getString(const char* str);
 	private:
-		uint getHash(const char* str);
+		uint32 getHash(const char* str);
 	private:
-		std::map<uint, std::string> _strings;
+		std::map<uint32, std::string> _strings;
 	};
 
 	#define GET_STRING_PTR(str) (sys::Instance<StringPool>::getInstance()->getString(str))

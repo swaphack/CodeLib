@@ -103,8 +103,8 @@ void ThreadPool::update()
 
 		iter++;
 	}
-	int count = invialdThreadIDs.size();
-	for (int i = 0; i < count; i++)
+	int32 count = invialdThreadIDs.size();
+	for (int32 i = 0; i < count; i++)
 	{
 		this->remove(invialdThreadIDs[i]);
 	}

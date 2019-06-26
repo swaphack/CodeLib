@@ -3,9 +3,6 @@
 #include "Base/import.h"
 #include "PtrCache.h"
 
-#include <string>
-#include <map>
-
 namespace sys
 {
 	// 内存分配
@@ -13,16 +10,15 @@ namespace sys
 	{
 	private:
 		Memory();
-	public:
 		~Memory();
 	public:
 		static Memory* getInstance();
 		// 分配一个缓存
-		PtrCache* alloct(const char* name, uint size);
+		PtrCache* alloct(const char* name, uint32 size);
 		// 销毁一个缓存
 		void destory(const char* name);
-	protected:
-		void dispose();
+		// 清空
+		void clear();
 	private:
 		// 已分配的缓存
 		std::map<std::string, PtrCache*> _caches;

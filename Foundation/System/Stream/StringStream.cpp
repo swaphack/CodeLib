@@ -15,7 +15,7 @@ StringStream::StringStream(const char* text)
 	this->initWithText(text);
 }
 
-StringStream::StringStream(const char* text, int size)
+StringStream::StringStream(const char* text, int32 size)
 : Stream(new StreamBaseRef())
 {
 	this->initWithText(text, size);
@@ -31,9 +31,9 @@ void StringStream::initWithText(const char* text)
 	this->initWithText(text, strlen(text));
 }
 
-void StringStream::initWithText(const char* text, int size)
+void StringStream::initWithText(const char* text, int32 size)
 {
-	int len = size;
+	int32 len = size;
 
 	char* newData = StreamHelper::mallocStream((void*)text, len);
 
@@ -44,7 +44,7 @@ void StringStream::readLine(std::string& text)
 {
 	text.clear();
 
-	int ext = strlen(LINE_MARK);
+	int32 ext = strlen(LINE_MARK);
 
 	char* cursor = getPtr();
 	if (*cursor == NULL)
@@ -81,14 +81,14 @@ void StringStream::readRemain(std::string& text)
 	this->setCursor(this->getCapacity());
 }
 
-void StringStream::writeString(const char* line, int size)
+void StringStream::writeString(const char* line, int32 size)
 {
 	if (line == nullptr)
 	{
 		return;
 	}
 
-	int newCursor = size + this->getCursor();
+	int32 newCursor = size + this->getCursor();
 	if (newCursor > this->getCapacity())
 	{
 		char* newData = StreamHelper::mallocStream(newCursor, (char*)this->getData(), this->getCapacity());
@@ -106,7 +106,7 @@ void StringStream::writeString(const std::string& text)
 	writeString(text.c_str(), text.size());
 }
 
-void StringStream::writeLine(const char* line, int size)
+void StringStream::writeLine(const char* line, int32 size)
 {
 	this->writeString(line, size);
 	this->writeLine();
@@ -119,7 +119,7 @@ void StringStream::writeLine(const std::string& text)
 
 void StringStream::writeLine()
 {
-	int ext = strlen(LINE_MARK);
+	int32 ext = strlen(LINE_MARK);
 	this->writeString(LINE_MARK, ext);
 }
 

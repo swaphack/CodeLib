@@ -43,5 +43,7 @@ namespace script
 		std::map<std::string, Document*> _documents;
 		// 入口脚本文档
 		Document* _mainDocument;
+		// 关键字配置文档
+		WordDocument* _wordDocument;
 	};
 }

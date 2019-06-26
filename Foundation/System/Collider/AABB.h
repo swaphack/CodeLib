@@ -34,11 +34,11 @@ namespace sys
 		/**
 		*	是否包含点
 		*/
-		bool contains(const Vector2& point);
+		bool contains(const Vector2& point32);
 		/**
 		*	是否包含点
 		*/
-		bool contains(const Vector3& point);
+		bool contains(const Vector3& point32);
 		/**
 		*	是否包含线段
 		*/
@@ -50,11 +50,11 @@ namespace sys
 		/**
 		*	是否与线段相交
 		*/
-		bool intersects(const Line2& line);
+		bool int32ersects(const Line2& line);
 		/**
 		*	是否与线段相交
 		*/
-		bool intersects(const Line3& line);
+		bool int32ersects(const Line3& line);
 		/**
 		*	是否包含盒子
 		*/
@@ -62,7 +62,7 @@ namespace sys
 		/**
 		*	两盒子是否相交
 		*/
-		bool intersects(const AABB& bounds);
+		bool int32ersects(const AABB& bounds);
 		/**
 		*	最小坐标
 		*/

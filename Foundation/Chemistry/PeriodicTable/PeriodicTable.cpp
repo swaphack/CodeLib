@@ -27,14 +27,14 @@ PeriodicTable* PeriodicTable::getInstance()
 
 void PeriodicTable::addElement(const Element& info)
 {
-	_elementIDInfos[info.ID] = info;
-	_elementSymbolInfos[info.Symbol] = info;
+	_elementInfos[info.ID] = info;
+	_elementSymbols[info.Symbol] = info.ID;
 }
 
 const Element* PeriodicTable::getElementByID(int elementID)
 {
-	std::map<int, Element>::const_iterator iter = _elementIDInfos.find(elementID);
-	if (iter == _elementIDInfos.end())
+	std::map<int, Element>::const_iterator iter = _elementInfos.find(elementID);
+	if (iter == _elementInfos.end())
 	{
 		return &iter->second;
 	}
@@ -48,10 +48,14 @@ const Element* PeriodicTable::getElementBySymbol(const char* symbol)
 	{
 		return nullptr;
 	}
-	std::map<std::string, Element>::const_iterator iter = _elementSymbolInfos.find(symbol);
-	if (iter == _elementSymbolInfos.end())
+	std::map<std::string, int>::const_iterator iter = _elementSymbols.find(symbol);
+	if (iter != _elementSymbols.end())
 	{
-		return &iter->second;
+		std::map<int, Element>::const_iterator iter2 = _elementInfos.find(iter->second);
+		if (iter2 != _elementInfos.end())
+		{
+			return &iter2->second;
+		}
 	}
 
 	return nullptr;

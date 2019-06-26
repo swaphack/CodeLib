@@ -1,6 +1,6 @@
 #pragma once
 
-#include <string>
+#include "Base/Types.h"
 #include "HttpCommand.h"
 #include "HttpDocument.h"
 #include "Resource/import.h"
@@ -14,14 +14,14 @@ namespace sys
 		virtual ~HttpRespDocument();
 	public:
 		// 解析字符串，是否是http请求文档
-		bool parseResponse(const char* msg, int size);
+		bool parseResponse(const char* msg, int32 size);
 		// 版本
 		const char* getHttpVersion();
 		void setHttpVersion(const char* version);
 		// 状态码
 		const char* getResponseCode();
 		void setResponseCode(const char* code);
-		void setResponseCode(int code);
+		void setResponseCode(int32 code);
 		// 说明
 		const char* getDescribe();
 		void setDescribe(const char* desc);
@@ -29,7 +29,7 @@ namespace sys
 		// 消息体文本格式
 		void setContentType(const char* value);
 		// 消息体文本长度
-		void setContentLength(int value);
+		void setContentLength(int32 value);
 
 		// 写入字符串
 		void writeContentString(const std::string& value);
@@ -57,13 +57,13 @@ namespace sys
 		void setDocument(HttpRespDocument* doc);
 
 		// 设置分块长度
-		inline void setChunkSize(int size) { _chunkedSize = size; }
+		inline void setChunkSize(int32 size) { _chunkedSize = size; }
 		// 获取分块长度
-		inline int getChunkSize() { return _chunkedSize; }
+		inline int32 getChunkSize() { return _chunkedSize; }
 		// 生成消息
 		virtual void makeMessage();
 	private:
 		HttpRespDocument* _document;
-		int _chunkedSize;
+		int32 _chunkedSize;
 	};
 }

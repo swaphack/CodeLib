@@ -58,7 +58,7 @@ void MultiStream::expendStream(ss_t width, ss_t height, ss_t deep /*= 1*/, bool 
 		ss_t cpyH = 0;
 		ss_t cpyD = 0;
 
-		int i, j;
+		int32 i, j;
 		if (bBottom == false)
 		{
 			cpyW = _width > width ? width : _width;
@@ -106,7 +106,7 @@ void MultiStream::readBlock(ss_t x, ss_t y, ss_t width, ss_t height, char* outDa
 	}
 	
 	char* faceData = _data + _width * _heigth * z;
-	for (int i = 0; i < height; i++)
+	for (int32 i = 0; i < height; i++)
 	{
 		memcpy(newData + i * width, faceData + (y + i) * _width + x, width);
 	}
@@ -117,7 +117,7 @@ void MultiStream::readBlock(ss_t x, ss_t y, ss_t width, ss_t height, char* outDa
 void MultiStream::writeBlock(ss_t x, ss_t y, ss_t width, ss_t height, const char* inData, ss_t z /*= 0*/)
 {
 	char* faceData = _data + _width * _heigth * z;
-	for (int i = 0; i < height; i++)
+	for (int32 i = 0; i < height; i++)
 	{
 		memcpy(faceData + (i + y) * _width + x, inData + i * width, width);
 	}
@@ -128,7 +128,7 @@ void MultiStream::moveBlock(ss_t srcX, ss_t srcY, ss_t width, ss_t height, ss_t 
 	char* newData = (char*)malloc(width);
 
 	char* faceData = _data + _width * _heigth * z;
-	for (int i = 0; i < height; i++)
+	for (int32 i = 0; i < height; i++)
 	{
 		//memset(newData, 0, width);
 		memcpy(newData, faceData + (i + srcY) * _width + srcX, width);
@@ -142,7 +142,7 @@ void MultiStream::moveBlock(ss_t srcX, ss_t srcY, ss_t width, ss_t height, ss_t 
 void MultiStream::resetBlock(ss_t x, ss_t y, ss_t width, ss_t height, ss_t z /*= 0*/)
 {
 	char* faceData = _data + _width * _heigth * z;
-	for (int i = 0; i < height; i++)
+	for (int32 i = 0; i < height; i++)
 	{
 		memset(faceData + (i + y) * _width + x,  0, width);
 	}
@@ -158,7 +158,7 @@ void MultiStream::readBlock(ss_t x, ss_t y, ss_t z, ss_t width, ss_t height, ss_
 		return;
 	}
 
-	int i, j;
+	int32 i, j;
 
 	for (i = 0; i < deep; i ++)
 	{
@@ -175,7 +175,7 @@ void MultiStream::readBlock(ss_t x, ss_t y, ss_t z, ss_t width, ss_t height, ss_
 
 void MultiStream::writeBlock(ss_t x, ss_t y, ss_t z, ss_t width, ss_t height, ss_t deep, const char* inData)
 {
-	int i, j;
+	int32 i, j;
 
 	for (i = 0; i < deep; i++)
 	{
@@ -192,4 +192,13 @@ void MultiStream::moveBlock(ss_t x, ss_t y, ss_t z, ss_t width, ss_t height, ss_
 
 }
 
+void MultiStream::clear()
+{
+	StreamHelper::freeStream(_data);
+
+	_data = nullptr;
+	_width = 0;
+	_heigth = 0;
+	_deep = 0;
+}
 

@@ -13,7 +13,7 @@ Matrix::Matrix()
 {
 }
 
-Matrix::Matrix(uint w, uint h)
+Matrix::Matrix(uint32 w, uint32 h)
 :Matrix()
 {
 	this->reset(w, h);
@@ -24,17 +24,17 @@ Matrix::~Matrix()
 	this->dispose();
 }
 
-uint Matrix::getWidth()
+uint32 Matrix::getWidth()
 {
 	return width;
 }
 
-uint Matrix::getHeight()
+uint32 Matrix::getHeight()
 {
 	return height;
 }
 
-void Matrix::reset(uint w, uint h)
+void Matrix::reset(uint32 w, uint32 h)
 {
 	if (w == 0 || h == 0)
 	{
@@ -56,7 +56,7 @@ void Matrix::reset()
 	}
 }
 
-float Matrix::getValue(uint index) const
+float Matrix::getValue(uint32 index) const
 {
 	if (index >= width * height)
 	{
@@ -66,7 +66,7 @@ float Matrix::getValue(uint index) const
 	return values[index];
 }
 
-float Matrix::getValue(uint w, uint h) const
+float Matrix::getValue(uint32 w, uint32 h) const
 {
 	if (w >= width || h >= height)
 	{
@@ -76,7 +76,7 @@ float Matrix::getValue(uint w, uint h) const
 	return values[h * width + w];
 }
 
-void Matrix::setValue(uint w, uint h, float value)
+void Matrix::setValue(uint32 w, uint32 h, float value)
 {
 	if (w >= width || h >= height)
 	{
@@ -86,7 +86,7 @@ void Matrix::setValue(uint w, uint h, float value)
 	values[h * width + w] = value;
 }
 
-void Matrix::setValue(uint index, float value)
+void Matrix::setValue(uint32 index, float value)
 {
 	if (index >= width * height)
 	{
@@ -101,9 +101,9 @@ Matrix Matrix::transpose()
 	Matrix mat;
 	mat.reset(height, width);
 
-	for (uint i = 0; i < height; i++)
+	for (uint32 i = 0; i < height; i++)
 	{
-		for (uint j = 0; j < width; j++)
+		for (uint32 j = 0; j < width; j++)
 		{
 			mat.setValue(j * height + i, values[i * width + j]);
 		}
@@ -124,8 +124,8 @@ void Matrix::dispose()
 Matrix& Matrix::operator=(const Matrix& mat)
 {
 	this->reset(mat.width, mat.height);
-	int len = mat.width * mat.height;
-	for (int i = 0; i < len; i++)
+	int32 len = mat.width * mat.height;
+	for (int32 i = 0; i < len; i++)
 	{
 		values[i] = mat[i];
 	}
@@ -133,7 +133,7 @@ Matrix& Matrix::operator=(const Matrix& mat)
 	return *this;
 }
 
-float& Matrix::operator[](uint index)
+float& Matrix::operator[](uint32 index)
 {
 	if (index >= width * height)
 	{
@@ -143,7 +143,7 @@ float& Matrix::operator[](uint index)
 	return values[index];
 }
 
-float Matrix::operator[](uint index) const
+float Matrix::operator[](uint32 index) const
 {
 	if (index >= width * height)
 	{
@@ -161,8 +161,8 @@ Matrix Matrix::operator+(const Matrix& mat)
 		return result;
 	}
 
-	int len = width * height;
-	for (int i = 0; i < len; i++)
+	int32 len = width * height;
+	for (int32 i = 0; i < len; i++)
 	{
 		result[i] = values[i] + mat.values[i];
 	}
@@ -178,8 +178,8 @@ Matrix Matrix::operator-(const Matrix& mat)
 		return result;
 	}
 
-	int len = width * height;
-	for (int i = 0; i < len; i++)
+	int32 len = width * height;
+	for (int32 i = 0; i < len; i++)
 	{
 		result[i] = values[i] - mat[i];
 	}
@@ -197,12 +197,12 @@ Matrix Matrix::operator*(const Matrix& mat)
 	result.reset(height, mat.width);
 
 	float val = 0;
-	for (uint i = 0; i < height; i++)
+	for (uint32 i = 0; i < height; i++)
 	{
-		for (uint j = 0; j < mat.width; j++)
+		for (uint32 j = 0; j < mat.width; j++)
 		{
 			val = 0;
-			for (uint k = 0; k < width; k++)
+			for (uint32 k = 0; k < width; k++)
 			{
 				val += getValue(i, k) * mat.getValue(k, j);
 			}
@@ -220,8 +220,8 @@ Matrix& Matrix::operator+=(const Matrix& mat)
 		return *this;
 	}
 
-	int len = width * height;
-	for (int i = 0; i < len; i++)
+	int32 len = width * height;
+	for (int32 i = 0; i < len; i++)
 	{
 		values[i] += mat[i];
 	}
@@ -236,8 +236,8 @@ Matrix& Matrix::operator-=(const Matrix& mat)
 		return *this;
 	}
 
-	int len = width * height;
-	for (int i = 0; i < len; i++)
+	int32 len = width * height;
+	for (int32 i = 0; i < len; i++)
 	{
 		values[i] -= mat[i];
 	}
@@ -253,12 +253,12 @@ Matrix& Matrix::operator*=(const Matrix& mat)
 	}
 
 	float val = 0;
-	for (uint i = 0; i < height; i++)
+	for (uint32 i = 0; i < height; i++)
 	{
-		for (uint j = 0; j < mat.width; j++)
+		for (uint32 j = 0; j < mat.width; j++)
 		{
 			val = 0;
-			for (uint k = 0; k < width; k++)
+			for (uint32 k = 0; k < width; k++)
 			{
 				val += getValue(i, k) * mat.getValue(k, j);
 			}
@@ -271,9 +271,9 @@ Matrix& Matrix::operator*=(const Matrix& mat)
 
 Matrix& Matrix::operator*=(float k)
 {
-	for (uint i = 0; i < height; i++)
+	for (uint32 i = 0; i < height; i++)
 	{
-		for (uint j = 0; j < width; j++)
+		for (uint32 j = 0; j < width; j++)
 		{
 			values[i * width + j] *= k;
 		}

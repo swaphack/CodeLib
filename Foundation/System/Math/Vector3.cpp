@@ -237,12 +237,12 @@ Vector3 Vector3::cross(const Vector3& vector0, const Vector3& vector1)
 	return newVector;
 }
 
-float Vector3::distance(const Vector3& point0, const Vector3& point1)
+float Vector3::distance(const Vector3& point320, const Vector3& point321)
 {
-	return sqrt(pow(point0.x - point1.x, 2) + pow(point0.y - point1.y, 2) + pow(point0.z - point1.z, 2));
+	return sqrt(pow(point320.x - point321.x, 2) + pow(point320.y - point321.y, 2) + pow(point320.z - point321.z, 2));
 }
 
-int Vector3::direction(const Vector3& vector0, const Vector3& vector1)
+int32 Vector3::direction(const Vector3& vector0, const Vector3& vector1)
 {
 	float value = dot(vector0, vector1);
 	if (value > 0)

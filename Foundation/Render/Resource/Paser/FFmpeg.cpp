@@ -9,21 +9,21 @@ using namespace render;
 //////////////////////////////////////////////////////////////////////////
 bool FFmpeg::s_bInitFFmpeg = false;
 
-void createVideoImage(const AVFrame* frame, VideoFrameImage* image)
+void createVideoImage(const AVFrame* frame, AVCodecContext* pCodecContext, VideoFrameImage* image)
 {
 	if (frame == nullptr || image == nullptr)
 	{
 		return;
 	}
 
-	uint width = frame->width;
-	uint height = frame->height;
+	uint32 width = frame->width;
+	uint32 height = frame->height;
 
 	int glFormat = GL_RGB;
 	int glInternalFormat = 3;
 
 	int destSize = av_image_get_buffer_size(AV_PIX_FMT_RGB24, width, height, 1);
-	uchar* destPixels = (uchar *)malloc(sizeof (uchar)* destSize);
+	uint8* destPixels = (uint8 *)malloc(sizeof (uint8)* destSize);
 	memset(destPixels, 0, destSize);
 	
 	AVFrame* destFrame = av_frame_alloc();
@@ -45,22 +45,14 @@ void createVideoImage(const AVFrame* frame, VideoFrameImage* image)
 	image->init(glFormat, glInternalFormat, destPixels, width, height);
 }
 
-void createVideoAudio(const AVFrame* frame, VideoAudioClip* audio)
+void createVideoAudio(const AVFrame* frame, AVCodecContext* pCodecContext, VideoAudioClip* audio)
 {
-	if (frame == nullptr || audio == nullptr)
+	if (frame == nullptr || pCodecContext == nullptr || audio == nullptr)
 	{
 		return;
 	}
 
-	int dataSize = 0;
-	int resampledDataSize = 0;
-	int64_t decChannelLayout;
-	int channels = 0;
-	int nbChannels = 0;
-	int linesize = 0;
-
-	channels = av_frame_get_channels(frame);
-	dataSize = av_samples_get_buffer_size(&linesize, channels, frame->nb_samples, (AVSampleFormat)frame->format, 1);
+	int dataSize = av_get_bytes_per_sample(pCodecContext->sample_fmt);
 
 	if (dataSize <= 0)
 	{
@@ -68,76 +60,43 @@ void createVideoAudio(const AVFrame* frame, VideoAudioClip* audio)
 		return;
 	}
 
-	nbChannels = av_get_channel_layout_nb_channels(frame->channel_layout);
-
-	if (frame->channel_layout && channels == nbChannels)
+	FMOD_SOUND_FORMAT format = FMOD_SOUND_FORMAT_NONE;
+	if (frame->format == AV_SAMPLE_FMT_U8 || frame->format == AV_SAMPLE_FMT_U8P)
 	{
-		decChannelLayout = frame->channel_layout;
+		format = FMOD_SOUND_FORMAT_PCM8;
+	}
+	else if (frame->format == AV_SAMPLE_FMT_S16 || frame->format == AV_SAMPLE_FMT_S16P)
+	{
+		format = FMOD_SOUND_FORMAT_PCM16;
+	}
+	else if (frame->format == AV_SAMPLE_FMT_S32 || frame->format == AV_SAMPLE_FMT_S32P)
+	{
+		format = FMOD_SOUND_FORMAT_PCM32;
+	}
+	else if (frame->format == AV_SAMPLE_FMT_FLT || frame->format == AV_SAMPLE_FMT_FLTP)
+	{
+		format = FMOD_SOUND_FORMAT_PCMFLOAT;
 	}
 	else
 	{
-		decChannelLayout = av_get_default_channel_layout(channels);
+		format = FMOD_SOUND_FORMAT_BITSTREAM;
 	}
 
-	/*
-	AVSampleFormat destFormat = AV_SAMPLE_FMT_U8;
-	int destChannel = 1;
+	int frameBufSize = frame->nb_samples * dataSize * pCodecContext->channels;
+	uint8_t* frameBuf = new uint8_t[frameBufSize];
 
-	AVFrame* destFrame = av_frame_alloc();
-	av_samples_alloc(destFrame->data, destFrame->linesize, nbChannels, frame->nb_samples, destFormat, 1);
-	struct SwrContext* pContext = swr_alloc_set_opts(NULL,
-		decChannelLayout, destFormat, frame->sample_rate,
-		decChannelLayout, (AVSampleFormat)frame->format, frame->sample_rate,
-		0, NULL);
-
-	int outCount = frame->nb_samples + 256;
-	int outSize = av_samples_get_buffer_size(nullptr, destChannel, outCount, destFormat, 0);
-	if (outSize == 0)
+	for (int i = 0; i < frame->nb_samples; i++)
 	{
-		swr_free(&pContext);
-		return;
-	}
-	const uint8_t **in = (const uint8_t **)frame->extended_data;
-	uchar* destData = (uchar*)malloc(outCount);	
-	memset(destData, 0, outCount);
-	uint destDataSize = outSize;
-	uint8_t **out = &destData;
-	//av_fast_malloc(destData, &destDataSize, outSize);
-	if (!destData)
-	{
-		swr_free(&pContext);
-		return;
-	}
-	int cvtLen = swr_convert(pContext, out, outCount, in, frame->nb_samples);
-	if (cvtLen < 0)
-	{
-		swr_free(&pContext);
-		return;
-	}
-
-	swr_free(&pContext);
-	int totalSize = cvtLen * destChannel * av_get_bytes_per_sample(destFormat);
-	*/
-
-	uchar* destData = (uchar*)malloc(dataSize);
-	memset(destData, 0, dataSize);
-	//memcpy(destData, frame->extended_data, totalSize);
-
-	for (int i = 0; i < frame->linesize[0]; i++)
-	{
-		for (int j = 0; j < nbChannels; j++)
+		for (int ch = 0; ch < pCodecContext->channels; ch++)
 		{
-			if (frame->extended_data[j][i])
-			{
-				destData[nbChannels * i + j] = frame->extended_data[j][i];
-			}
+			memcpy(frameBuf + i * dataSize * (ch + 1), frame->data[ch] + dataSize * i, dataSize);
 		}
 	}
 
-	audio->init(destData, dataSize, nbChannels, decChannelLayout, frame->format, frame->sample_rate, frame->nb_samples);
+	audio->init(frameBuf, frameBufSize, pCodecContext->channels, 1, format, frame->sample_rate, frame->nb_samples);
 }
 
-void createVideoTitle(const AVSubtitle* subTitle, std::string* title)
+void createVideoTitle(const AVSubtitle* subTitle, AVCodecContext* pCodecContext, std::string* title)
 {
 
 }
@@ -153,7 +112,7 @@ VideoFrameImage::~VideoFrameImage()
 
 }
 
-void VideoFrameImage::init(int format, int internalFormat, uchar* pixels, uint width, uint height)
+void VideoFrameImage::init(int format, int internalFormat, uint8* pixels, uint32 width, uint32 height)
 {
 	this->setFormat(format);
 	this->setInternalFormat(internalFormat);
@@ -173,7 +132,7 @@ VideoAudioClip::~VideoAudioClip()
 
 }
 
-void VideoAudioClip::init(uchar* data, int frameSize, int channels, int64_t channelLayout, int format, int frequency, int samples)
+void VideoAudioClip::init(uint8* data, int frameSize, int channels, int64_t channelLayout, int format, int frequency, int samples)
 {
 	this->setData(data);
 	this->setSize(frameSize);
@@ -184,7 +143,7 @@ void VideoAudioClip::init(uchar* data, int frameSize, int channels, int64_t chan
 	this->setSamples(samples);
 }
 
-void VideoAudioClip::init(uchar* data, int frameSize)
+void VideoAudioClip::init(uint8* data, int frameSize)
 {
 	this->setData(data);
 	this->setSize(frameSize);
@@ -274,7 +233,7 @@ void FFmpeg::autoNextFrame()
 			error = avcodec_decode_video2(pCodecContext, videoFrame, &got_picture, packet);
 			if (error >= 0 && got_picture)
 			{
-				createVideoImage(videoFrame, &_image);
+				createVideoImage(videoFrame, pCodecContext, &_image);
 			}
 		}
 		got_audio = 0;
@@ -284,7 +243,7 @@ void FFmpeg::autoNextFrame()
 			error = avcodec_decode_audio4(pCodecContext, audioFrame, &got_audio, packet);
 			if (error >= 0 && got_audio)
 			{
-				createVideoAudio(audioFrame, &_audio);
+				createVideoAudio(audioFrame, pCodecContext, &_audio);
 			}
 		}
 		got_title = 0;
@@ -294,7 +253,7 @@ void FFmpeg::autoNextFrame()
 			error = avcodec_decode_subtitle2(pCodecContext, &subTitle, &got_title, packet);
 			if (error >= 0 && got_title)
 			{
-				createVideoTitle(&subTitle, &_text);
+				createVideoTitle(&subTitle, pCodecContext, &_text);
 			}
 		}
 	}
@@ -364,7 +323,7 @@ void FFmpeg::getStreamIndex(int type, int& streamIndex)
 	{
 		return;
 	}
-	for (uint i = 0; i < _formatContext->nb_streams; i++)
+	for (uint32 i = 0; i < _formatContext->nb_streams; i++)
 	{
 		if ((_formatContext->streams[i])->codec->codec_type == type)
 		{

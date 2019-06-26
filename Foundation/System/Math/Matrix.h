@@ -13,25 +13,25 @@ namespace sys
 		// 单元值
 		float* values;
 		// 列数
-		uint width;
+		uint32 width;
 		// 行数
-		uint height;
+		uint32 height;
 	public:
 		Matrix();
-		Matrix(uint w, uint h);
+		Matrix(uint32 w, uint32 h);
 		~Matrix();
 		/**
 		*	列数
 		*/
-		uint getWidth();
+		uint32 getWidth();
 		/**
 		*	行数
 		*/
-		uint getHeight();
+		uint32 getHeight();
 		/**
 		*	重置
 		*/
-		void reset(uint w, uint h);
+		void reset(uint32 w, uint32 h);
 		/**
 		*	重置
 		*/
@@ -39,19 +39,19 @@ namespace sys
 		/**
 		*	获取指定位置的数据
 		*/
-		float getValue(uint index) const;
+		float getValue(uint32 index) const;
 		/**
 		*	获取h行，w列的数据
 		*/
-		float getValue(uint w, uint h) const;
+		float getValue(uint32 w, uint32 h) const;
 		/**
 		*	设置h行，w列的数据
 		*/
-		void setValue(uint w, uint h, float value);
+		void setValue(uint32 w, uint32 h, float value);
 		/**
 		*	设置指定位置的数据
 		*/
-		void setValue(uint index, float value);
+		void setValue(uint32 index, float value);
 
 		/**
 		*	获取转置矩阵
@@ -69,11 +69,11 @@ namespace sys
 		/**
 		*	获取指定位置的数据
 		*/
-		float& operator[](uint index);
+		float& operator[](uint32 index);
 		/**
 		*	获取指定位置的数据
 		*/
-		float operator[](uint index) const;
+		float operator[](uint32 index) const;
 		
 		/**
 		*	矩阵相加

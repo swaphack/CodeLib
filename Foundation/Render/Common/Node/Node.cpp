@@ -25,10 +25,10 @@ Node::Node()
 
 Node::~Node()
 {
+	this->removeAllChildren();
 	SAFE_DELETE(_actionProxy);
 	SAFE_DELETE(_touchProxy);
 	SAFE_DELETE(_notify);
-	this->removeAllChildren();
 }
 
 bool Node::init()

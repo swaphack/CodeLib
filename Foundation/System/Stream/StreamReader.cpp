@@ -20,44 +20,44 @@ StreamReader::~StreamReader()
 	SAFE_DELETE(_baseStream);
 }
 
-char StreamReader::readChar()
+char StreamReader::readInt8()
 {
 	return this->read<char>();
 }
 
-uchar StreamReader::readUChar()
+uint8 StreamReader::readUInt8()
 {
-	return this->read<uchar>();
+	return this->read<uint8>();
 }
 
-short StreamReader::readShort()
+short StreamReader::readInt16()
 {
 	return this->read<short>();
 }
 
-ushort StreamReader::readUShort()
+uint16 StreamReader::readUInt16()
 {
-	return this->read<ushort>();
+	return this->read<uint16>();
 }
 
-int StreamReader::readInt()
+int32 StreamReader::readInt32()
 {
-	return this->read<int>();
+	return this->read<int32>();
 }
 
-uint StreamReader::readUInt()
+uint32 StreamReader::readUInt32()
 {
-	return this->read<uint>();
+	return this->read<uint32>();
 }
 
-long StreamReader::readLong()
+int64 StreamReader::readInt64()
 {
-	return this->read<long>();
+	return this->read<int64>();
 }
 
-ulong StreamReader::readULong()
+uint64 StreamReader::readUInt64()
 {
-	return this->read<ulong>();
+	return this->read<uint64>();
 }
 
 float StreamReader::readFloat()
@@ -70,7 +70,7 @@ double StreamReader::readDouble()
 	return this->read<double>();
 }
 
-char* StreamReader::readString( int size )
+char* StreamReader::readString( int32 size )
 {
 	if (getCursor() + size > this->getLength())
 	{
@@ -84,7 +84,7 @@ char* StreamReader::readString( int size )
 	return ptr;
 }
 
-char* StreamReader::readRemain( int& size )
+char* StreamReader::readRemain( int32& size )
 {
 	size = this->getLength() - this->getCursor();
 

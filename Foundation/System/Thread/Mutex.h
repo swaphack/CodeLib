@@ -1,7 +1,7 @@
 #pragma once
 
 #include <mutex>
-#include <string>
+#include "Base/Types.h"
 
 namespace sys
 {
@@ -45,6 +45,6 @@ namespace sys
 		// 守护锁
 		std::unique_lock<std::recursive_mutex> m_pLock;
 		// 互斥锁的个数
-		int m_nLockCount;
+		int32 m_nLockCount;
 	};
 }

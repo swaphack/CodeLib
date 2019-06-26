@@ -19,6 +19,6 @@ namespace render
 	public:
 		virtual void draw();
 	public:
-		static DCMask* create(const RectVertex* rectVertex, const sys::Color4B& color, uchar opacity, const BlendParam& blend);
+		static DCMask* create(const RectVertex* rectVertex, const sys::Color4B& color, uint8 opacity, const BlendParam& blend);
 	};
 }

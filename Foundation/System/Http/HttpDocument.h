@@ -2,9 +2,7 @@
 
 #include "Stream/import.h"
 
-#include <string>
-#include <vector>
-#include <map>
+#include "Base/Types.h"
 
 namespace sys
 {
@@ -26,7 +24,7 @@ namespace sys
 	401 Unauthorized //请求未经授权，这个状态代码必须和WWW-Authenticate报头域一起使用
 	403 Forbidden  //服务器收到请求，但是拒绝提供服务
 	404 Not Found  //请求资源不存在，eg：输入了错误的URL
-	500 Internal Server Error //服务器发生不可预期的错误
+	500 int32ernal Server Error //服务器发生不可预期的错误
 	503 Server Unavailable  //服务器当前不能处理客户端的请求，一段时间后可能恢复正常
 	eg：HTTP/1.1 200 OK （CRLF）
 
@@ -52,19 +50,19 @@ namespace sys
 		virtual ~HttpDocument();
 	public:
 		// 解析字符串，是否是http文档
-		bool parse(const char* msg, int size);
+		bool parse(const char* msg, int32 size);
 		// 生成http字符串
 		bool save(std::string& msg);
 
 		// 获取状态参数
-		const char* getStatus(int index);
+		const char* getStatus(int32 index);
 		// 设置状态参数
-		void setStatus(int index, const char* value);
+		void setStatus(int32 index, const char* value);
 
 		// 获取报头参数
 		const char* getHeader(const char* key);
 		// 整形格式报头参数
-		bool getIntegerHeader(const char* key, int& value);
+		bool getint32egerHeader(const char* key, int32& value);
 
 		// 移除报头参数
 		void removeHeader(const char* key);
@@ -73,16 +71,16 @@ namespace sys
 		// 时间格式报头参数
 		void setDateHeader(const char* key, Time* value);
 		// 整形格式报头参数
-		void setIntegerHeader(const char* key, int value);
+		void setint32egerHeader(const char* key, int32 value);
 
 		// 可选的消息体
-		void setBody(const char* value, int size);
+		void setBody(const char* value, int32 size);
 		// 可选的消息体
 		const char* getBody();
 		// 可选消息体长度
-		int getBodySize();
+		int32 getBodySize();
 		// 获取流长度
-		int getStreamSize();
+		int32 getStreamSize();
 	protected:
 		// 解析状态行
 		bool readStatusSection();

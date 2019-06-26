@@ -13,9 +13,9 @@ namespace sys
 		// 数据
 		char* data;
 		// 大小
-		int size;
+		int32 size;
 		// 游标
-		int pos;
+		int32 pos;
 	public:
 		NetData()
 		{
@@ -28,7 +28,7 @@ namespace sys
 		{
 			this->init(value, strlen(value));
 		}
-		NetData(const char* value, int size)
+		NetData(const char* value, int32 size)
 			:NetData()
 		{
 			this->init(value, size);
@@ -41,11 +41,11 @@ namespace sys
 		{
 			return data + pos;
 		}
-		int getRemainSize()
+		int32 getRemainSize()
 		{
 			return size - pos;
 		}
-		void init(const char* value, int len)
+		void init(const char* value, int32 len)
 		{// 重置
 			StreamHelper::freeStream(this->data);
 
@@ -54,7 +54,7 @@ namespace sys
 			this->pos = 0;
 		}
 		// 插入头
-		void insert(const char* data, int len)
+		void insert(const char* data, int32 len)
 		{
 			char* newData = StreamHelper::mallocStream(len + size, (char*)data, len);
 			memcpy(newData + len, this->data, this->size);

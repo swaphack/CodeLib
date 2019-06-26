@@ -16,9 +16,9 @@ Vector2::Vector2(float x, float y)
 
 }
 
-Vector2::Vector2(const Vector2& point) 
-: x(point.x)
-, y(point.y)
+Vector2::Vector2(const Vector2& point32) 
+: x(point32.x)
+, y(point32.y)
 {
 
 }
@@ -28,22 +28,22 @@ float Vector2::getLength() const
 	return sqrt(pow(x, 2) + pow(y, 2));
 }
 
-void Vector2::add(const Vector2& point)
+void Vector2::add(const Vector2& point32)
 {
-	x += point.x;
-	y += point.y;
+	x += point32.x;
+	y += point32.y;
 }
 
-void Vector2::sub(const Vector2& point)
+void Vector2::sub(const Vector2& point32)
 {
-	x -= point.x;
-	y -= point.y;
+	x -= point32.x;
+	y -= point32.y;
 }
 
-void Vector2::mult(const Vector2& point)
+void Vector2::mult(const Vector2& point32)
 {
-	x *= point.x;
-	y *= point.y;
+	x *= point32.x;
+	y *= point32.y;
 }
 
 void Vector2::mult(const float ratio)
@@ -52,10 +52,10 @@ void Vector2::mult(const float ratio)
 	y *= ratio;
 }
 
-void Vector2::div(const Vector2& point)
+void Vector2::div(const Vector2& point32)
 {
-	x /= point.x;
-	y /= point.y;
+	x /= point32.x;
+	y /= point32.y;
 }
 
 void Vector2::div(const float ratio)
@@ -69,10 +69,10 @@ void Vector2::div(const float ratio)
 	y /= ratio;
 }
 
-Vector2& Vector2::operator=(const Vector2& point)
+Vector2& Vector2::operator=(const Vector2& point32)
 {
-	x = point.x;
-	y = point.y;
+	x = point32.x;
+	y = point32.y;
 
 	return *this;
 }
@@ -209,12 +209,12 @@ Vector2 Vector2::cross(const Vector2& vector0, const Vector2& vector1)
 	return newVector;
 }
 
-float Vector2::distance(const Vector2& point0, const Vector2& point1)
+float Vector2::distance(const Vector2& point320, const Vector2& point321)
 {
-	return sqrt(pow(point0.x - point1.x, 2) + pow(point0.y - point1.y, 2));
+	return sqrt(pow(point320.x - point321.x, 2) + pow(point320.y - point321.y, 2));
 }
 
-int Vector2::direction(const Vector2& vector0, const Vector2& vector1)
+int32 Vector2::direction(const Vector2& vector0, const Vector2& vector1)
 {
 	float value = dot(vector0, vector1);
 	if (value > 0)

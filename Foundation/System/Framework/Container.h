@@ -4,6 +4,7 @@
 
 #include <map>
 #include <vector>
+#include <cstdint>
 
 namespace sys
 {
@@ -17,13 +18,19 @@ namespace sys
 
 		virtual void removeObject(Object* object) = 0;
 
-		virtual void removeObject(long id) = 0;
+		virtual void removeObject(uint64 id) = 0;
 
-		virtual Object* getObject(long id) = 0;
+		virtual Object* getObject(uint64 id) = 0;
+
+		virtual bool contains(Object* object) = 0;
+
+		virtual bool contains(uint64 id) = 0;
 
 		virtual void clear() = 0; 
 
-		virtual int count() = 0;
+		virtual int32 count() = 0;
+
+		virtual bool empty() = 0;
 	};
 
 	// ×Öµä
@@ -37,19 +44,33 @@ namespace sys
 
 		virtual void removeObject(Object* object);
 
-		virtual void removeObject(long id);
+		virtual void removeObject(uint64 id);
 
-		virtual Object* getObject(long id);
+		virtual Object* getObject(uint64 id);
 
 		virtual void clear();
 
-		virtual int count();
+		virtual int32 count();
 
-		std::map<long, Object*>::iterator begin();
-		std::map<long, Object*>::iterator end();
+		virtual bool empty();
 
+		virtual bool contains(Object* object);
+
+		virtual bool contains(uint64 id);
+
+		std::map<uint64, Object*>::iterator begin();
+		std::map<uint64, Object*>::iterator end();
+	protected:
+		struct Node
+		{
+			Object* value = nullptr;
+			Node* parent = nullptr;
+			Node* left = nullptr;
+			Node* right = nullptr;
+		};
 	private:
-		std::map<long, Object*> _objects;
+		Node* _root;
+		std::map<uint64, Object*> _objects;
 	};
 
 	// Êý×é
@@ -63,13 +84,19 @@ namespace sys
 
 		virtual void removeObject(Object* object);
 
-		virtual void removeObject(long id);
+		virtual void removeObject(uint64 id);
 
-		virtual Object* getObject(long id);
+		virtual Object* getObject(uint64 id);
 
 		virtual void clear();
 
-		virtual int count();
+		virtual int32 count();
+
+		virtual bool empty();
+
+		virtual bool contains(Object* object);
+
+		virtual bool contains(uint64 id);
 
 		std::vector<Object*>::iterator begin();
 		std::vector<Object*>::iterator end();

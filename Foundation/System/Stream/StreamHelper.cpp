@@ -6,7 +6,7 @@
 
 using namespace sys;
 
-int allocCount = 0;
+int32 allocCount = 0;
 
 void addAlloc()
 {

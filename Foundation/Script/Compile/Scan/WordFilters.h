@@ -6,19 +6,6 @@
 
 namespace script
 {
-	// 文本过滤
-	class TextFilter : public ITextFilter
-	{
-	public:
-		TextFilter(){}
-		virtual ~TextFilter(){}
-	public:
-		virtual bool match(const char* text, int& size)
-		{
-			return WordSet::getInstance()->pickWord(text, size);
-		}
-	};
-
 	// 单词过滤器
 	class WordFilters
 	{

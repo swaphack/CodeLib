@@ -5,5 +5,5 @@
 namespace sys
 {
 	// 定义流数据大小类型
-	typedef long ss_t;
+	typedef int64 ss_t;
 }

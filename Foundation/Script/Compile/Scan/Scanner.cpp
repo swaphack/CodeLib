@@ -42,6 +42,10 @@ void Scanner::clear()
 }
 bool Scanner::parse()
 {
+	if (m_pWordSet == nullptr)
+	{
+		return;
+	}
 	do 
 	{
 		if (strcmp(getPtr(), "\0") == 0 || m_nOffset >= m_nSize)
@@ -58,6 +62,11 @@ bool Scanner::parse()
 
 void Scanner::readWord()
 {
+	if (m_pWordSet == nullptr)
+	{
+		return;
+	}
+
 	std::string key;
 	int offset = 0;
 	do 
@@ -75,7 +84,7 @@ void Scanner::readWord()
 			break;
 		}
 
-		if (WordSet::getInstance()->pickWord(getPtr(), offset))
+		if (m_pWordSet->pickWord(getPtr(), offset))
 		{
 			appendWord(key);
 
@@ -104,4 +113,9 @@ void Scanner::appendWord(std::string& word)
 		m_pTokenTable->addToken(word.c_str());
 		word.clear();
 	}
+}
+
+void Scanner::setWordSet(WordSet* wordSet)
+{
+	m_pWordSet = wordSet;
 }

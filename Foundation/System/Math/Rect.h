@@ -28,9 +28,9 @@ namespace sys
 				&& (_y >= getMinY() && _y <= getMaxY());
 		}
 
-		bool contains(const Vector2& point)
+		bool contains(const Vector2& point32)
 		{
-			return contains(point.x, point.y);
+			return contains(point32.x, point32.y);
 		}
 
 		bool intersect(float _x, float _y, float _w, float _h)

@@ -27,6 +27,17 @@ namespace sys
 		}
 	};
 
+	template<class _Fn>
+	struct AsynchronousHandler : public AsynchronousResult
+	{
+		_Fn handler;
+
+		AsynchronousHandler()
+			:handler(nullptr)
+		{
+		}
+	};
+
 	// Òì²½
 	class Asynchronous
 	{
@@ -61,19 +72,21 @@ namespace sys
 		{
 			return nullptr;
 		}
-		AsynchronousResult* pResult = new AsynchronousResult();
+		AsynchronousHandler* pResult = new AsynchronousHandler();
 		pResult->callback = callback;
+		pResult->handler = handler;
 		Thread thread;
-		thread.startWithParams([&](AsynchronousResult* asynResult) {
+		thread.startWithParams([&](AsynchronousHandler* asynResult) {
 			if (asynResult == nullptr) return;
 			if (!asynResult->completed)
 			{
 				asynResult->completed = true;
-				handler();
+				if (asynResult->handler)
+					asynResult->handler();
 				if (asynResult->callback)
 					asynResult->callback(asynResult);
+				delete asynResult;
 			}
-			delete asynResult;
 		}, pResult);
 		thread.detach();
 
@@ -87,19 +100,22 @@ namespace sys
 		{
 			return nullptr;
 		}
-		AsynchronousResult* pResult = new AsynchronousResult();
+		AsynchronousHandler* pResult = new AsynchronousHandler();
 		pResult->callback = callback;
+		pResult->handler = handler;
+
 		Thread thread;
-		thread.startWithParams([&](AsynchronousResult* asynResult) {
+		thread.startWithParams([&](AsynchronousHandler* asynResult) {
 			if (asynResult == nullptr) return;
 			if (!asynResult->completed)
 			{
 				asynResult->completed = true;
-				handler(_Ax...);
+				if (asynResult->handler)
+					asynResult->handler(_Ax...);
 				if (asynResult->callback)
 					asynResult->callback(asynResult);
+				delete asynResult;
 			}
-			delete asynResult;
 		}, pResult);
 		thread.detach();
 

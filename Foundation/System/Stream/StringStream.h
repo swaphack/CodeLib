@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Stream.h"
-#include <string>
+#include "Base/Types.h"
 
 namespace sys
 {
@@ -16,23 +16,23 @@ namespace sys
 	public:
 		StringStream();
 		StringStream(const char* text);
-		StringStream(const char* text, int size);
+		StringStream(const char* text, int32 size);
 		virtual ~StringStream();
 	public:
 		// 字符串初始化
 		void initWithText(const char* text);
 		// 字符串初始化
-		void initWithText(const char* text, int size);
+		void initWithText(const char* text, int32 size);
 		// 读取一行
 		void readLine(std::string& text);
 		// 读取剩余
 		void readRemain(std::string& text);
 		// 写入字符串
-		void writeString(const char* line, int size);
+		void writeString(const char* line, int32 size);
 		// 写入字符串
 		void writeString(const std::string& text);
 		// 写入一行字符串
-		void writeLine(const char* line, int size);
+		void writeLine(const char* line, int32 size);
 		// 写入一行字符串
 		void writeLine(const std::string& text);
 		// 写入空行

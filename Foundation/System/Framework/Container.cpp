@@ -34,7 +34,7 @@ void Dictionary::removeObject(Object* object)
 		return;
 	}
 
-	std::map<long, Object*>::iterator it = _objects.begin();
+	std::map<uint64, Object*>::iterator it = _objects.begin();
 
 	while (it != _objects.end())
 	{
@@ -48,7 +48,7 @@ void Dictionary::removeObject(Object* object)
 	}
 }
 
-void Dictionary::removeObject( long id )
+void Dictionary::removeObject(uint64 id)
 {
 	if (_objects.find(id) == _objects.end())
 	{
@@ -60,7 +60,7 @@ void Dictionary::removeObject( long id )
 	_objects.erase(id);
 }
 
-Object* Dictionary::getObject( long id )
+Object* Dictionary::getObject(uint64 id)
 {
 	if (_objects.find(id) == _objects.end())
 	{
@@ -72,7 +72,7 @@ Object* Dictionary::getObject( long id )
 
 void Dictionary::clear()
 {
-	std::map<long, Object*>::iterator it = _objects.begin();
+	std::map<uint64, Object*>::iterator it = _objects.begin();
 
 	while (it != _objects.end())
 	{
@@ -83,19 +83,39 @@ void Dictionary::clear()
 	_objects.clear();
 }
 
-int Dictionary::count()
+int32 Dictionary::count()
 {
 	return _objects.size();
 }
 
-std::map<long, Object*>::iterator Dictionary::begin()
+std::map<uint64, Object*>::iterator Dictionary::begin()
 {
 	return _objects.begin();
 }
 
-std::map<long, Object*>::iterator Dictionary::end()
+std::map<uint64, Object*>::iterator Dictionary::end()
 {
 	return _objects.end();
+}
+
+bool Dictionary::contains(Object* object)
+{
+	if (object == nullptr)
+	{
+		return false;
+	}
+
+	return getObject(object->getID());
+}
+
+bool Dictionary::contains(uint64 id)
+{
+	return getObject(id) != nullptr;
+}
+
+bool Dictionary::empty()
+{
+	return count() == 0;
 }
 
 
@@ -145,7 +165,7 @@ void List::removeObject(Object* object)
 	}
 }
 
-void List::removeObject( long id )
+void List::removeObject(uint64 id)
 {
 	std::vector<Object*>::iterator it = _objects.begin();
 
@@ -163,7 +183,7 @@ void List::removeObject( long id )
 	}
 }
 
-Object* List::getObject( long id )
+Object* List::getObject(uint64 id)
 {
 	std::vector<Object*>::iterator it = _objects.begin();
 
@@ -193,7 +213,7 @@ void List::clear()
 	_objects.clear();
 }
 
-int List::count()
+int32 List::count()
 {
 	return _objects.size();
 }
@@ -206,4 +226,24 @@ std::vector<Object*>::iterator List::begin()
 std::vector<Object*>::iterator List::end()
 {
 	return _objects.end();
+}
+
+bool List::contains(Object* object)
+{
+	if (object == nullptr)
+	{
+		return false;
+	}
+
+	return contains(object->getID());
+}
+
+bool List::contains(uint64 id)
+{
+	return getObject(id) != nullptr;
+}
+
+bool List::empty()
+{
+	return count() == 0;
 }

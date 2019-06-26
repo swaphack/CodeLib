@@ -4,102 +4,102 @@
 
 using namespace sys;
 
-Polygon::Polygon(Vector2* points, int count) 
+Polygon::Polygon(Vector2* point32s, int32 count) 
 :Polygon()
 {
-	if (points == nullptr || count < 3)
+	if (point32s == nullptr || count < 3)
 	{
 		return;
 	}
 
-	this->points = new Vector2[count];
+	this->point32s = new Vector2[count];
 	this->count = count;
-	for (int i = 0; i < count; i++)
+	for (int32 i = 0; i < count; i++)
 	{
-		this->points[i] = points[i];
+		this->point32s[i] = point32s[i];
 	}
 }
 
 Polygon::Polygon()
-:points(nullptr)
+:point32s(nullptr)
 ,count(0)
 {
 
 }
 
 Polygon::Polygon(const Polygon & polygon)
-:Polygon(polygon.points, polygon.count)
+:Polygon(polygon.point32s, polygon.count)
 {
 
 }
 
 Polygon::~Polygon()
 {
-	if (points != nullptr)
+	if (point32s != nullptr)
 	{
-		delete points;
+		delete point32s;
 	}
 }
 
 AABB Polygon::getBounds()
 {
-	Vector2 minPoint = points[0];
-	Vector2 maxPoint = points[0];
+	Vector2 minPoint32 = point32s[0];
+	Vector2 maxPoint32 = point32s[0];
 
-	for (int i = 0; i < count; i++)
+	for (int32 i = 0; i < count; i++)
 	{
-		if (minPoint.x > points[i].x) minPoint.x = points[i].x;
-		if (minPoint.y > points[i].y) minPoint.y = points[i].y;
-		if (maxPoint.x < points[i].x) maxPoint.x = points[i].x;
-		if (maxPoint.y < points[i].x) maxPoint.y = points[i].x;
+		if (minPoint32.x > point32s[i].x) minPoint32.x = point32s[i].x;
+		if (minPoint32.y > point32s[i].y) minPoint32.y = point32s[i].y;
+		if (maxPoint32.x < point32s[i].x) maxPoint32.x = point32s[i].x;
+		if (maxPoint32.y < point32s[i].x) maxPoint32.y = point32s[i].x;
 	}
 
-	Vector2 center = (minPoint + maxPoint) * 0.5f;
-	Vector2 size = (maxPoint - minPoint);
+	Vector2 center = (minPoint32 + maxPoint32) * 0.5f;
+	Vector2 size = (maxPoint32 - minPoint32);
 
 	return AABB(center, size);
 }
 
 AABB Polygon::getBounds() const
 {
-	Vector2 minPoint = points[0];
-	Vector2 maxPoint = points[0];
+	Vector2 minPoint32 = point32s[0];
+	Vector2 maxPoint32 = point32s[0];
 
-	for (int i = 0; i < count; i++)
+	for (int32 i = 0; i < count; i++)
 	{
-		if (minPoint.x > points[i].x) minPoint.x = points[i].x;
-		if (minPoint.y > points[i].y) minPoint.y = points[i].y;
-		if (maxPoint.x < points[i].x) maxPoint.x = points[i].x;
-		if (maxPoint.y < points[i].x) maxPoint.y = points[i].x;
+		if (minPoint32.x > point32s[i].x) minPoint32.x = point32s[i].x;
+		if (minPoint32.y > point32s[i].y) minPoint32.y = point32s[i].y;
+		if (maxPoint32.x < point32s[i].x) maxPoint32.x = point32s[i].x;
+		if (maxPoint32.y < point32s[i].x) maxPoint32.y = point32s[i].x;
 	}
 
-	Vector2 center = (minPoint + maxPoint) * 0.5f;
-	Vector2 size = (maxPoint - minPoint);
+	Vector2 center = (minPoint32 + maxPoint32) * 0.5f;
+	Vector2 size = (maxPoint32 - minPoint32);
 
 	return AABB(center, size);
 }
 
-bool Polygon::contains(const Vector2& point)
+bool Polygon::contains(const Vector2& point32)
 {
-	int sum = 0;
+	int32 sum = 0;
 	Vector2 p0;
 	Vector2 p1;
 
-	for (int i = 0; i < count; i++)
+	for (int32 i = 0; i < count; i++)
 	{		
-		p0 = points[i];
-		p1 = points[(i + 1) % count];
+		p0 = point32s[i];
+		p1 = point32s[(i + 1) % count];
 
 		// 水平
 		if (p0.y == p1.y) continue;
 
 		// 在其延长线上
-		if (point.y < MIN(p0.y, p1.y)) continue;
-		if (point.y >= MAX(p0.y, p1.y)) continue;
+		if (point32.y < MIN(p0.y, p1.y)) continue;
+		if (point32.y >= MAX(p0.y, p1.y)) continue;
 
-		// 求解 y=point.y 与 p0p1 的交点
-		float x = (point.y - p0.y) * (p1.x - p0.x) / (p1.y - p0.y) + p0.x;
-		if (x > point.x) sum++;
+		// 求解 y=point32.y 与 p0p1 的交点
+		float x = (point32.y - p0.y) * (p1.x - p0.x) / (p1.y - p0.y) + p0.x;
+		if (x > point32.x) sum++;
 	}
 
 	return sum % 2 == 1;
@@ -114,12 +114,12 @@ bool Polygon::contains(const Line2& line)
 	Vector2 p0;
 	Vector2 p1;
 	Line2 segment;
-	for (int i = 0; i < count; i++)
+	for (int32 i = 0; i < count; i++)
 	{
-		segment.src = points[i];
-		segment.dest = points[(i + 1) % count];
+		segment.src = point32s[i];
+		segment.dest = point32s[(i + 1) % count];
 
-		if (segment.intersects(line))
+		if (segment.int32ersects(line))
 		{
 			return false;
 		}
@@ -128,17 +128,17 @@ bool Polygon::contains(const Line2& line)
 	return true;
 }
 
-bool Polygon::intersects(const Line2& line)
+bool Polygon::int32ersects(const Line2& line)
 {
 	Vector2 p0;
 	Vector2 p1;
 	Line2 segment;
-	for (int i = 0; i < count; i++)
+	for (int32 i = 0; i < count; i++)
 	{
-		segment.src = points[i];
-		segment.dest = points[(i + 1) % count];
+		segment.src = point32s[i];
+		segment.dest = point32s[(i + 1) % count];
 
-		if (segment.intersects(line))
+		if (segment.int32ersects(line))
 		{
 			return true;
 		}
@@ -147,12 +147,12 @@ bool Polygon::intersects(const Line2& line)
 	return false;
 }
 
-bool Polygon::intersects(const Polygon& polygon)
+bool Polygon::int32ersects(const Polygon& polygon)
 {
-	for (int i = 0; i < polygon.count; i++)
+	for (int32 i = 0; i < polygon.count; i++)
 	{
-		Line2 line(polygon.points[i], polygon.points[(i + 1) % polygon.count]);
-		if (this->intersects(line) || this->contains(line))
+		Line2 line(polygon.point32s[i], polygon.point32s[(i + 1) % polygon.count]);
+		if (this->int32ersects(line) || this->contains(line))
 		{
 			return true;
 		}
@@ -163,21 +163,21 @@ bool Polygon::intersects(const Polygon& polygon)
 
 Polygon& Polygon::operator=(const Polygon& polygon)
 {
-	if (polygon.points == nullptr || polygon.count < 3)
+	if (polygon.point32s == nullptr || polygon.count < 3)
 	{
 		return *this;
 	}
 
-	if (this->points != nullptr)
+	if (this->point32s != nullptr)
 	{
-		delete[] this->points;
+		delete[] this->point32s;
 	}
 
-	this->points = new Vector2[count];
+	this->point32s = new Vector2[count];
 	this->count = count;
-	for (int i = 0; i < count; i++)
+	for (int32 i = 0; i < count; i++)
 	{
-		this->points[i] = points[i];
+		this->point32s[i] = point32s[i];
 	}
 
 	return *this;
@@ -185,19 +185,19 @@ Polygon& Polygon::operator=(const Polygon& polygon)
 
 bool Polygon::isStandard(const Polygon& polygon)
 {
-	if (polygon.points == nullptr || polygon.count < 3)
+	if (polygon.point32s == nullptr || polygon.count < 3)
 	{
 		return false;
 	}
 
-	int lineCount = polygon.count;
-	int lastDirection = -1;
-	for (int i = 0; i < lineCount; i++)
+	int32 lineCount = polygon.count;
+	int32 lastDirection = -1;
+	for (int32 i = 0; i < lineCount; i++)
 	{
-		Vector2 l0 = polygon.points[(i + 1) % lineCount] - polygon.points[i % lineCount];
-		Vector2 l1 = polygon.points[(i + 2) % lineCount] - polygon.points[(i + 1) % lineCount];
+		Vector2 l0 = polygon.point32s[(i + 1) % lineCount] - polygon.point32s[i % lineCount];
+		Vector2 l1 = polygon.point32s[(i + 2) % lineCount] - polygon.point32s[(i + 1) % lineCount];
 
-		int direction = Vector2::direction(l1, l0);
+		int32 direction = Vector2::direction(l1, l0);
 		if (direction == 0)
 		{
 			return false;
@@ -214,14 +214,14 @@ bool Polygon::isConvex(const Polygon& polygon)
 		return false;
 	}
 
-	int lineCount = polygon.count;
-	int lastDirection = -1;
-	for (int i = 0; i < lineCount; i++)
+	int32 lineCount = polygon.count;
+	int32 lastDirection = -1;
+	for (int32 i = 0; i < lineCount; i++)
 	{
-		Vector2 l0 = polygon.points[(i + 1) % lineCount] - polygon.points[i % lineCount];
-		Vector2 l1 = polygon.points[(i + 2) % lineCount] - polygon.points[(i + 1) % lineCount];
+		Vector2 l0 = polygon.point32s[(i + 1) % lineCount] - polygon.point32s[i % lineCount];
+		Vector2 l1 = polygon.point32s[(i + 2) % lineCount] - polygon.point32s[(i + 1) % lineCount];
 
-		int direction = Vector2::direction(l1, l0);
+		int32 direction = Vector2::direction(l1, l0);
 		if (lastDirection == -1)
 		{
 			lastDirection = direction;

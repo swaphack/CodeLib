@@ -5,7 +5,7 @@
 namespace sys
 {
 	// 无符号8位
-	static const uchar COLOR_UCHAR_VALUE = 255;
+	static const uint8 COLOR_UCHAR_VALUE = 255;
 	// 单精度8位
 	static const float COLOR_FLOAT_VALUE = 255.0f;
 

@@ -1,6 +1,6 @@
 #pragma once
 
-#include <string>
+#include "Base/Types.h"
 
 #include "CacheIdentity.h"
 #include "CacheMgr.h"
@@ -54,7 +54,7 @@ namespace sys
 		{
 			return;
 		}
-		int size = sizeof(value);
+		int32 size = sizeof(value);
 		char* data = (char*)malloc(size);
 		memcpy(data, &value, size);
 		this->set(name, data);

@@ -37,14 +37,14 @@ ColorProtocol::~ColorProtocol()
 
 }
 
-void ColorProtocol::setColor(uchar r, uchar g, uchar b)
+void ColorProtocol::setColor(uint8 r, uint8 g, uint8 b)
 {
 	_color.red = r;
 	_color.green = g;
 	_color.blue = b;
 }
 
-void ColorProtocol::setColor(uchar r, uchar g, uchar b, uchar a)
+void ColorProtocol::setColor(uint8 r, uint8 g, uint8 b, uint8 a)
 {
 	_color.red = r;
 	_color.green = g;
@@ -81,12 +81,12 @@ OpacityProtocol::~OpacityProtocol()
 
 }
 
-void OpacityProtocol::setOpacity(uchar opacity)
+void OpacityProtocol::setOpacity(uint8 opacity)
 {
 	_opacity = opacity;
 }
 
-uchar OpacityProtocol::getOpacity()
+uint8 OpacityProtocol::getOpacity()
 {
 	return _opacity;
 }

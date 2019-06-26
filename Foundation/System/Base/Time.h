@@ -1,6 +1,7 @@
 #pragma once
 
 #include <ctime>
+#include "Base/Types.h"
 
 namespace sys
 {
@@ -14,9 +15,9 @@ namespace sys
 		~Time();
 	public:
 		// 起始计算年份
-		static const int StartYear = 1900;
+		static const int32 StartYear = 1900;
 		// 实际月份索引
-		static const int IndexOfMonth = 1;
+		static const int32 IndexOfMonth = 1;
 		// 获取本地当前时间,不用释放
 		static Time* getNow();
 		// 获取格林时间,不用释放
@@ -26,31 +27,31 @@ namespace sys
 		// 获取本地当前时间戳
 		static time_t getGMTimeStamp();
 		// 获取年份
-		inline int getYear() const { return _tm.tm_year + StartYear; }
+		inline int32 getYear() const { return _tm.tm_year + StartYear; }
 		// 获取该年的第几天
-		inline int getYearDay() const { return _tm.tm_yday; }
+		inline int32 getYearDay() const { return _tm.tm_yday; }
 		// 获取月份
-		inline int getMonth() const { return _tm.tm_mon + IndexOfMonth; }
+		inline int32 getMonth() const { return _tm.tm_mon + IndexOfMonth; }
 		// 获取该月的第几天
-		inline int getMonthDay() const { return _tm.tm_mday; }
+		inline int32 getMonthDay() const { return _tm.tm_mday; }
 		// 获取星期几
-		inline int getWeekday() const { return _tm.tm_wday; }
+		inline int32 getWeekday() const { return _tm.tm_wday; }
 		// 获取小时数
-		inline int getHour() const { return _tm.tm_hour; }
+		inline int32 getHour() const { return _tm.tm_hour; }
 		// 获取分钟数
-		inline int getMinute() const { return _tm.tm_min; }
+		inline int32 getMinute() const { return _tm.tm_min; }
 		// 获取秒数
-		inline int getSecond() const { return _tm.tm_sec; }
+		inline int32 getSecond() const { return _tm.tm_sec; }
 		// 改变秒数
-		void addSecond(int val);
+		void addSecond(int32 val);
 		// 改变分钟
-		void addMinute(int val);
+		void addMinute(int32 val);
 		// 改变小时数
-		void addHour(int val);
+		void addHour(int32 val);
 		// 改变天数
-		void addDay(int val);
+		void addDay(int32 val);
 		// 改变年份
-		void addYear(int val);
+		void addYear(int32 val);
 		// 由时间戳设置
 		void setTime(time_t tt);
 		// 由时间格式设置

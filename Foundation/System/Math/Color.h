@@ -7,12 +7,12 @@ namespace sys
 	// color
 	struct Color3B
 	{
-		uchar red;
-		uchar green;
-		uchar blue;
+		uint8 red;
+		uint8 green;
+		uint8 blue;
 
 		Color3B();
-		Color3B(uchar r, uchar g, uchar b);
+		Color3B(uint8 r, uint8 g, uint8 b);
 		/**
 		*	是否相等
 		*/
@@ -86,13 +86,13 @@ namespace sys
 
 	struct Color4B
 	{
-		uchar red;
-		uchar green;
-		uchar blue;
-		uchar alpha;
+		uint8 red;
+		uint8 green;
+		uint8 blue;
+		uint8 alpha;
 
 		Color4B();
-		Color4B(uchar r, uchar g, uchar b, uchar a);
+		Color4B(uint8 r, uint8 g, uint8 b, uint8 a);
 		/**
 		*	是否相等
 		*/

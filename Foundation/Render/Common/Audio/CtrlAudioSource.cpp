@@ -107,16 +107,16 @@ bool CtrlAudioSource::loadDataFromClip(Audio* audioClip)
 	FMOD_CREATESOUNDEXINFO exinfo;
 	memset(&exinfo, 0, sizeof(FMOD_CREATESOUNDEXINFO));
 	exinfo.cbsize = sizeof(FMOD_CREATESOUNDEXINFO);
-	exinfo.defaultfrequency = audioClip->getFrequency();
-	exinfo.numchannels = audioClip->getChannels();
+	//exinfo.defaultfrequency = audioClip->getFrequency();
+	//exinfo.numchannels = audioClip->getChannels();
 	//exinfo.length = audioClip->getFrameSize();
 	exinfo.length = audioClip->getSize();
-	exinfo.format = FMOD_SOUND_FORMAT_PCM16;
-	exinfo.pcmreadcallback = pcmreadcallback;
+	exinfo.format = (FMOD_SOUND_FORMAT)audioClip->getFormat();
+	//exinfo.pcmreadcallback = pcmreadcallback;
 	//exinfo.pcmsetposcallback = pcmsetposcallback;
 
 
-	FMOD_RESULT result = system->createStream((char*)audioClip->getData(), FMOD_OPENRAW, &exinfo, &_sound);
+	FMOD_RESULT result = system->createSound((char*)audioClip->getData(), FMOD_OPENMEMORY, &exinfo, &_sound);
 	if (result != FMOD_OK)
 	{
 		return false;
@@ -207,7 +207,6 @@ bool CtrlAudioSource::getMute()
 {
 	AUDIO_GET_FUNC(_channel, getMute, bool);
 }
-
 
 void CtrlAudioSource::setMode(int mode)
 {

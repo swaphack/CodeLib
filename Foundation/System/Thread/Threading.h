@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Base/Types.h"
+
 namespace sys
 {
 	// 当前线程
@@ -7,8 +9,8 @@ namespace sys
 	{
 	public:
 		// 睡一段时间
-		static void sleep(int milliseconds);
+		static void sleep(int32 milliseconds);
 		// 睡到指定时间
-		static void sleepUntil(int seconds);
+		static void sleepUntil(int32 seconds);
 	};
 }

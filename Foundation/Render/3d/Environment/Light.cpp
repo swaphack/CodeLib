@@ -52,7 +52,7 @@ void Light::draw()
 	glEnable(getLightIndex());
 }
 
-void Light::setAmbient(uchar red, uchar green, uchar blue, uchar alpha)
+void Light::setAmbient(uint8 red, uint8 green, uint8 blue, uint8 alpha)
 {
 	_lightAmbient[0] = red / sys::COLOR_FLOAT_VALUE;
 	_lightAmbient[1] = green / sys::COLOR_FLOAT_VALUE;
@@ -65,7 +65,7 @@ const float* Light::getAmbient()
 	return _lightAmbient;
 }
 
-void Light::setDiffuse(uchar red, uchar green, uchar blue, uchar alpha)
+void Light::setDiffuse(uint8 red, uint8 green, uint8 blue, uint8 alpha)
 {
 	_lightDiffuse[0] = red / sys::COLOR_FLOAT_VALUE;
 	_lightDiffuse[1] = green / sys::COLOR_FLOAT_VALUE;
@@ -78,7 +78,7 @@ const float* Light::getDiffuse()
 	return _lightDiffuse;
 }
 
-void Light::setSpecular(uchar red, uchar green, uchar blue, uchar alpha)
+void Light::setSpecular(uint8 red, uint8 green, uint8 blue, uint8 alpha)
 {
 	_lightSpecular[0] = red / sys::COLOR_FLOAT_VALUE;
 	_lightSpecular[1] = green / sys::COLOR_FLOAT_VALUE;

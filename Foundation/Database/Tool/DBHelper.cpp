@@ -55,22 +55,22 @@ int DBHelper::getTypeSize( FieldType type, int defaultSize )
 		return 0;
 		break;
 	case EFT_CHAR:
-		return sizeof(char);
+		return sizeof(int8);
 		break;
 	case EFT_UCHAR:
-		return sizeof(uchar);
+		return sizeof(uint8);
 		break;
 	case EFT_SHORT:
-		return sizeof(short);
+		return sizeof(int16);
 		break;
 	case EFT_USHORT:
-		return sizeof(ushort);
+		return sizeof(uint16);
 		break;
 	case EFT_INT:
-		return sizeof(int);
+		return sizeof(int32);
 		break;
 	case EFT_UINT:
-		return sizeof(uint);
+		return sizeof(uint32);
 		break;
 	case EFT_LONG:
 		return sizeof(long);
@@ -104,18 +104,18 @@ void DBHelper::getFieldValue(const char* ptr, FieldType type, long& offset, long
 		sys::BitConvert::getNumberString(ct, value);
 		break;
 	case EFT_UCHAR:
-		uchar uct;
-		getValueFromPtr<uchar>(uct, ptr, offset);
+		uint8 uct;
+		getValueFromPtr<uint8>(uct, ptr, offset);
 		sys::BitConvert::getNumberString(uct, value);
 		break;
 	case EFT_SHORT:
-		short st;
-		getValueFromPtr<short>(st, ptr, offset);
+		int16 st;
+		getValueFromPtr<int16>(st, ptr, offset);
 		sys::BitConvert::getNumberString(st, value);
 		break;
 	case EFT_USHORT:
-		ushort ust;
-		getValueFromPtr<ushort>(ust, ptr, offset);
+		uint16 ust;
+		getValueFromPtr<uint16>(ust, ptr, offset);
 		sys::BitConvert::getNumberString(ust, value);
 		break;
 	case EFT_INT:
@@ -124,8 +124,8 @@ void DBHelper::getFieldValue(const char* ptr, FieldType type, long& offset, long
 		sys::BitConvert::getNumberString(it, value);
 		break;
 	case EFT_UINT:
-		uint uit;
-		getValueFromPtr<uint>(uit, ptr, offset);
+		uint32 uit;
+		getValueFromPtr<uint32>(uit, ptr, offset);
 		sys::BitConvert::getNumberString((int)uit, value);
 		break;
 	case EFT_LONG:

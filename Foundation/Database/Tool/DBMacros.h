@@ -4,11 +4,11 @@ namespace db
 {
 	//  Ù–‘¿‡–Õ
 #define PROPERTY_TYPE_CHAR_TEXT "char"
-#define PROPERTY_TYPE_UCHAR_TEXT "uchar"
-#define PROPERTY_TYPE_SHORT_TEXT "short"
-#define PROPERTY_TYPE_USHORT_TEXT "ushort"
+#define PROPERTY_TYPE_UCHAR_TEXT "uint8"
+#define PROPERTY_TYPE_SHORT_TEXT "int16"
+#define PROPERTY_TYPE_USHORT_TEXT "uint16"
 #define PROPERTY_TYPE_INT_TEXT "int"
-#define PROPERTY_TYPE_UINT_TEXT "uint"
+#define PROPERTY_TYPE_UINT_TEXT "uint32"
 #define PROPERTY_TYPE_LONG_TEXT "long"
 #define PROPERTY_TYPE_ULONG_TEXT "ulong"
 #define PROPERTY_TYPE_FLOAT_TEXT "float"

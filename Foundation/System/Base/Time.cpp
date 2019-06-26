@@ -82,31 +82,31 @@ time_t Time::getGMTimeStamp()
 	return now;
 }
 
-void Time::addSecond(int val)
+void Time::addSecond(int32 val)
 {
 	_tm.tm_sec += val;
 	this->resetTime();
 }
 
-void Time::addMinute(int val)
+void Time::addMinute(int32 val)
 {
 	_tm.tm_min += val;
 	this->resetTime();
 }
 
-void Time::addHour(int val)
+void Time::addHour(int32 val)
 {
 	_tm.tm_hour += val;
 	this->resetTime();
 }
 
-void Time::addDay(int val)
+void Time::addDay(int32 val)
 {
 	_tm.tm_yday += val;
 	this->resetTime();
 }
 
-void Time::addYear(int val)
+void Time::addYear(int32 val)
 {
 	_tm.tm_year += val;
 	this->resetTime();

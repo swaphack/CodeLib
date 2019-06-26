@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Author.h"
-#include <string>
+#include "Base/Types.h"
 
 namespace sys
 {
@@ -13,7 +13,7 @@ namespace sys
 	{
 	public:
 		// 远程是否可行
-		bool isRemoteEnable(const std::string& url, int port);
+		bool isRemoteEnable(const std::string& url, int32 port);
 		// 验证权限
 		bool isPermissionEnable(const Author& info);
 	protected:

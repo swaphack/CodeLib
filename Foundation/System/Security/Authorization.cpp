@@ -8,7 +8,7 @@
 
 using namespace sys;
 
-bool Authorization::isRemoteEnable(const std::string& url, int port)
+bool Authorization::isRemoteEnable(const std::string& url, int32 port)
 {
 	if (!url.empty() || port < 0)
 	{

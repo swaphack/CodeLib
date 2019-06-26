@@ -43,7 +43,7 @@ namespace sys
 		/**
 		*	是否包含点
 		*/
-		bool contains(const Vector2& point);
+		bool contains(const Vector2& point32);
 		/**
 		*	是否包含线段
 		*/
@@ -51,11 +51,11 @@ namespace sys
 		/**
 		*	线段是否相交
 		*/
-		bool intersects(const Line2& line);
+		bool int32ersects(const Line2& line);
 		/**
 		*	到线段的最近点
 		*/
-		Vector2 closestPoint(const Vector2& point);
+		Vector2 closestPoint32(const Vector2& point32);
 	public:
 		/**
 		*	点到直线的距离
@@ -63,6 +63,6 @@ namespace sys
 		*	直线方程 a * x + b * y + c = 0
 		*	向量积和面积关系
 		*/
-		static float distance(const Line2& line, const Vector2& point);
+		static float distance(const Line2& line, const Vector2& point32);
 	};
 }

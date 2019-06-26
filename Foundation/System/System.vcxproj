@@ -68,7 +68,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Base\BitConvert.h" />
-    <ClInclude Include="Base\BitHelper.h" />
+    <ClInclude Include="Base\CharsetHelper.h" />
     <ClInclude Include="Base\Directory.h" />
     <ClInclude Include="Base\File.h" />
     <ClInclude Include="Base\FuncHandler.h" />
@@ -175,6 +175,7 @@
     <ClInclude Include="Platform\macros.h" />
     <ClInclude Include="Platform\Windows\import.h" />
     <ClInclude Include="Platform\Windows\Window.h" />
+    <ClInclude Include="Process\Pipe.h" />
     <ClInclude Include="Resource\import.h" />
     <ClInclude Include="Resource\IResource.h" />
     <ClInclude Include="Resource\LocalResource.h" />
@@ -207,13 +208,14 @@
     <ClInclude Include="Thread\Thread.h" />
     <ClInclude Include="Thread\Threading.h" />
     <ClInclude Include="Thread\ThreadPool.h" />
+    <ClInclude Include="Type\Bit.h" />
     <ClInclude Include="Type\import.h" />
     <ClInclude Include="Type\Number.h" />
     <ClInclude Include="Type\String.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Base\BitConvert.cpp" />
-    <ClCompile Include="Base\BitHelper.cpp" />
+    <ClCompile Include="Base\CharsetHelper.cpp" />
     <ClCompile Include="Base\Directory.cpp" />
     <ClCompile Include="Base\File.cpp" />
     <ClCompile Include="Base\Hash.cpp" />

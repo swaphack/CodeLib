@@ -16,6 +16,7 @@ namespace script
 		Scanner();
 		~Scanner();
 	public:
+		void setWordSet(WordSet* wordSet);
 		// 浏览文本
 		bool scan(Document* document);
 		// 清空扫描信息
@@ -41,5 +42,7 @@ namespace script
 		int m_nSize;
 		// 符号表
 		TokenTable* m_pTokenTable;
+		// 词组表
+		WordSet* m_pWordSet;
 	};
 }

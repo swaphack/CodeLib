@@ -14,7 +14,7 @@ HttpReqDocument::~HttpReqDocument()
 
 }
 
-bool HttpReqDocument::parseRequest(const char* msg, int size)
+bool HttpReqDocument::parseRequest(const char* msg, int32 size)
 {
 	if (msg == nullptr || size <= 0)
 	{

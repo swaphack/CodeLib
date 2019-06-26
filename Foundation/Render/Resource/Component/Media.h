@@ -22,7 +22,7 @@ namespace render
 		// 获取下一帧视频图片
 		virtual Image* getNextPicture();
 
-		// 获取下一帧音频图片
+		// 获取下一帧音频
 		virtual Audio* getNextAudio();
 
 		// 获取下一帧标题
@@ -32,18 +32,18 @@ namespace render
 		virtual void setVideoFrame(mf_s frame);
 
 		// 获取媒体宽度
-		uint getWidth() const;
+		uint32 getWidth() const;
 		// 获取媒体高度
-		uint getHeight() const;
+		uint32 getHeight() const;
 		// 获取媒体帧率
 		float getFrameRate() const;
 		// 获取时长
 		float getTime() const;
 	protected:
 		// 设置媒体宽度
-		void setWidth(uint val);
+		void setWidth(uint32 val);
 		// 设置媒体高度
-		void setHeight(uint val);
+		void setHeight(uint32 val);
 		// 设置媒体帧率
 		void setFrameRate(float val);
 		// 设置时长
@@ -56,9 +56,9 @@ namespace render
 		// 帧率
 		float _frameRate;
 		// 媒体宽度
-		uint _width;
+		uint32 _width;
 		// 媒体高度
-		uint _height;
+		uint32 _height;
 		// 时长
 		float _time;
 	};

@@ -7,7 +7,7 @@
 
 using namespace sys;
 
-bool File::write(const char* url, const char* data, long size)
+bool File::write(const char* url, const char* data, int64 size, int64& writtenSize)
 {
 	if (url == nullptr || data == nullptr)
 	{
@@ -21,13 +21,18 @@ bool File::write(const char* url, const char* data, long size)
 		return false;
 	}
 
-	fwrite(data, sizeof(char), size, fptr);
-	fclose(fptr);
+	writtenSize = fwrite(data, sizeof(char), size, fptr);
+	if (writtenSize != size)
+	{
+		fclose(fptr);
+		return false;
+	}
 
+	fclose(fptr);
 	return true;
 }
 
-char* File::read( const char* url, long& size )
+char* File::read(const char* url, int64& readSize)
 {
 	if (url == nullptr)
 	{
@@ -43,16 +48,14 @@ char* File::read( const char* url, long& size )
 
 	fseek(fptr, 0, SEEK_SET);
 	fseek(fptr, 0, SEEK_END);
-	long count = ftell(fptr);
+	int64 count = ftell(fptr);
 	fseek(fptr, 0, SEEK_SET);
 
 	char* str = StreamHelper::mallocStream(count * sizeof(char));
 
-	fread(str, sizeof(char), count, fptr);
+	readSize = fread(str, sizeof(char), count, fptr);
 
 	fclose(fptr);
-
-	size = count;
 
 	return str;
 }
@@ -65,7 +68,7 @@ bool File::read(const char* url, std::string& data)
 		return false;
 	}
 
-	long size = 0;
+	int64 size = 0;
 
 	char* temp = read(url, size);
 	if (temp == nullptr)
@@ -75,12 +78,12 @@ bool File::read(const char* url, std::string& data)
 
 	data = std::string(temp, size);
 
-	free(temp);
+	StreamHelper::freeStream(temp);
 
 	return true;
 }
 
-bool File::append(const char* url, const char* data, long size)
+bool File::append(const char* url, const char* data, int64 size, int64& appendSize)
 {
 	if (url == nullptr || data == nullptr)
 	{
@@ -94,13 +97,18 @@ bool File::append(const char* url, const char* data, long size)
 		return false;
 	}
 
-	fwrite(data, sizeof(char), size, fptr);
-	fclose(fptr);
+	appendSize = fwrite(data, sizeof(char), size, fptr);
+	if (appendSize != size)
+	{
+		fclose(fptr);
+		return false;
+	}
 
+	fclose(fptr);
 	return true;
 }
 
-bool File::isFileExists(const char* url)
+bool File::exists(const char* url)
 {
 	if (url == nullptr)
 	{
@@ -117,4 +125,140 @@ bool File::isFileExists(const char* url)
 	fclose(fptr);
 
 	return true;
+}
+
+File::File(const char* url)
+	:File(url, 0)
+{
+	
+}
+
+File::File(const char* url, int32 mode)
+	: m_pFile(nullptr)
+	, m_strUrl(url)
+	, m_nModel(mode)
+{
+	
+}
+
+File::~File()
+{
+	this->close();
+}
+
+bool File::write(const char* data, int64 size, int64& writtenSize)
+{
+	if (m_pFile == nullptr)
+	{
+		return false;
+	}
+
+	if (m_nModel & eFM_WRITE)
+	{
+		return false;
+	}
+
+	writtenSize = fwrite(data, sizeof(char), size, m_pFile);
+	return writtenSize == size;
+}
+
+char* File::read(int64& size)
+{
+	if (m_pFile == nullptr)
+	{
+		return nullptr;
+	}
+
+	if (m_nModel & eFM_READ)
+	{
+		return nullptr;
+	}
+
+	fseek(m_pFile, 0, SEEK_SET);
+	fseek(m_pFile, 0, SEEK_END);
+	int64 count = ftell(m_pFile);
+	fseek(m_pFile, 0, SEEK_SET);
+
+	char* str = StreamHelper::mallocStream(count * sizeof(char));
+
+	size = fread(str, sizeof(char), count, m_pFile);
+
+	return str;
+}
+
+bool File::read(std::string& data)
+{
+	int64 size = 0;
+
+	if (m_nModel & eFM_READ)
+	{
+		return false;
+	}
+
+	char* temp = read(size);
+	if (temp == nullptr)
+	{
+		return false;
+	}
+
+	data = std::string(temp, size);
+
+	StreamHelper::freeStream(temp);
+
+	return true;
+}
+
+bool File::append(const char* data, int64 size)
+{
+	if (m_pFile == nullptr || data == nullptr)
+	{
+		return false;
+	}
+
+	if (m_nModel & eFM_APPEND)
+	{
+		return false;
+	}
+
+	int64 writtenSize = fwrite(data, sizeof(char), size, m_pFile);
+
+	return writtenSize != size;
+}
+
+bool File::exists()
+{
+	return m_pFile != nullptr;
+}
+
+bool File::close()
+{
+	if (m_pFile == nullptr)
+	{
+		return false;
+	}
+
+	fclose(m_pFile);
+	m_pFile = nullptr;
+
+	return true;
+}
+
+bool File::open()
+{
+	if (m_pFile != nullptr)
+	{
+		return false;
+	}
+
+	std::string strMode;
+
+	if (m_nModel & eFM_READ) strMode.append("r");
+	if (m_nModel & eFM_WRITE) strMode.append("w");
+	if (m_nModel & eFM_APPEND) strMode.append("a");
+	if (m_nModel & eFM_BINARY) strMode.append("+");
+
+	m_pFile = fopen(m_strUrl.c_str(), strMode.c_str());
+
+
+	return m_pFile != nullptr;
 }

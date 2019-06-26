@@ -56,7 +56,7 @@ void DCTextureBatch::draw()
 }
 
 DCTextureBatch* DCTextureBatch::create(int textureID,
-	const sys::Color4B& color, uchar opacity, const BlendParam& blend,
+	const sys::Color4B& color, uint8 opacity, const BlendParam& blend,
 	const T_Vertex* vertexes, const T_Vertex* normals, const T_Vertex* colors, const T_Vertex* coords,
 	const T_Indice* indices)
 {

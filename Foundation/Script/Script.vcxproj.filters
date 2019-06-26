@@ -95,9 +95,6 @@
     <ClInclude Include="Compile\Common\macros.h">
       <Filter>Compile\Common</Filter>
     </ClInclude>
-    <ClInclude Include="Compile\Common\WordSet.h">
-      <Filter>Compile\Common</Filter>
-    </ClInclude>
     <ClInclude Include="Compile\Scan\Scanner.h">
       <Filter>Compile\Scan</Filter>
     </ClInclude>
@@ -227,6 +224,9 @@
     <ClInclude Include="Core\Base\macros.h">
       <Filter>Core\Base</Filter>
     </ClInclude>
+    <ClInclude Include="Document\WordSet.h">
+      <Filter>Document</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Env\Environment.cpp">
@@ -259,9 +259,6 @@
       <Filter>Compile\Parse</Filter>
     </ClCompile>
     <ClCompile Include="Compile\Common\Error.cpp">
-      <Filter>Compile\Common</Filter>
-    </ClCompile>
-    <ClCompile Include="Compile\Common\WordSet.cpp">
       <Filter>Compile\Common</Filter>
     </ClCompile>
     <ClCompile Include="Compile\Scan\Scanner.cpp">
@@ -320,6 +317,9 @@
     </ClCompile>
     <ClCompile Include="Core\Instance\None.cpp">
       <Filter>Core\Instance</Filter>
+    </ClCompile>
+    <ClCompile Include="Document\WordSet.cpp">
+      <Filter>Document</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -18,7 +18,7 @@ Image::~Image()
 	SAFE_FREE(_pixels);
 }
 
-void Image::setPixels(uchar * val)
+void Image::setPixels(uint8 * val)
 {
 	SAFE_FREE(_pixels);
 	_pixels = val;
@@ -34,17 +34,17 @@ void Image::setFormat(int val)
 	_format = val;
 }
 
-void Image::setHeight(uint val)
+void Image::setHeight(uint32 val)
 {
 	_height = val;
 }
 
-void Image::setWidth(uint val)
+void Image::setWidth(uint32 val)
 {
 	_width = val;
 }
 
-uchar * Image::getPixels() const
+uint8 * Image::getPixels() const
 {
 	return _pixels;
 }
@@ -59,12 +59,12 @@ int Image::getFormat() const
 	return _format;
 }
 
-uint Image::getHeight() const
+uint32 Image::getHeight() const
 {
 	return _height;
 }
 
-uint Image::getWidth() const
+uint32 Image::getWidth() const
 {
 	return _width;
 }

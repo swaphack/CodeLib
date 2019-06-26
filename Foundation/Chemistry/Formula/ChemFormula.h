@@ -8,7 +8,7 @@
 namespace chem
 {
 	// 分子->数
-	typedef std::vector<std::pair<Molecule, uint>> Molecules;
+	typedef std::vector<std::pair<Molecule, uint32>> Molecules;
 	/** 
 	*	化学公式
 	*	电荷守恒：反应前后各离子电荷总数相等

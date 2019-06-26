@@ -17,7 +17,7 @@ void DBStorage::readDataConfig(const char* filename, std::map<std::string, std::
 	}
 
 	dbConfigs.clear();
-	int count = reader.readUInt();
+	uint32 count = reader.readUInt32();
 	for (int i = 0; i < count; i++)
 	{
 		std::string key = reader.readDBString();
@@ -30,7 +30,7 @@ void DBStorage::readDataConfig(const char* filename, std::map<std::string, std::
 void DBStorage::writeDataConfig(const char* filename, std::map<std::string, std::string>& dbConfigs)
 {
 	DBFileWriter writer;
-	writer.writeInt(dbConfigs.size());
+	writer.writeUInt32(dbConfigs.size());
 
 	std::map<std::string, std::string>::const_iterator iter = dbConfigs.begin();
 	while (iter != dbConfigs.end())
@@ -43,7 +43,8 @@ void DBStorage::writeDataConfig(const char* filename, std::map<std::string, std:
 		iter++;
 	}
 
-	File::write(filename, writer.getData(), writer.getLength());
+	int64 writtenSize = 0;
+	File::write(filename, writer.getData(), writer.getLength(), writtenSize);
 }
 //////////////////////////////////////////////////////////////////////////
 
@@ -54,7 +55,7 @@ void DBStorage::loadSheetFromFile(const char* filename, const DBTable* table, DB
 		return;
 	}
 
-	long size = 0;
+	int64 size = 0;
 	char* data = File::read(filename, size);
 	if (data == nullptr)
 	{
@@ -94,8 +95,8 @@ void DBStorage::saveSheetToFile(const char* filename, const DBTable* table, cons
 		record->makeText(table, data);
 		writer.writeString((char*)data.c_str(), (int)data.size());
 	}
-
-	File::write(filename, writer.getData(), writer.getLength());
+	int64 writtenSize = 0;
+	File::write(filename, writer.getData(), writer.getLength(), writtenSize);
 	
 }
 

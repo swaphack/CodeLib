@@ -50,12 +50,31 @@ bool Document::loadFile(const char* filepath)
 	_buffer = text;
 	_size = size + 1;
 
-	return true;
+	return convertToDocumentStruct();
 }
 
-bool Document::parse()
+bool Document::saveFile(const char* filepath)
 {
-	return false;
+	if (filepath == nullptr)
+	{
+		return false;
+	}
+
+	if (!convertToTextStruct()) 
+	{ 
+		return false;
+	}
+
+	FILE* fptr = fopen(filepath, "wb");
+	if (fptr == NULL)
+	{
+		return false;
+	}
+
+	fwrite(_buffer, sizeof(char), _size, fptr);
+	fclose(fptr);
+
+	return true;
 }
 
 char* Document::getPtr()
@@ -67,3 +86,5 @@ int Document::getSize()
 {
 	return _size;
 }
+
+

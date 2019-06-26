@@ -18,13 +18,13 @@ namespace sys
 		// 创建一条带主键的记录
 		virtual IDataRecord* create();
 		// 索引记录
-		virtual const IDataRecord* operator[](int index);
+		virtual const IDataRecord* operator[](int32 index);
 		// 按照主键设置记录
 		virtual void setRecord(const std::string& key, const IDataRecord* record);
 		// 按照主键查找
 		virtual const IDataRecord* getRecord(const std::string& key);
 		// 记录个数
-		virtual int count();
+		virtual int32 count();
 		// 清除所有记录
 		virtual void clear();
 	private:

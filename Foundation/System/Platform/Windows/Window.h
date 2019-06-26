@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Platform/macros.h"
-#include <string>
+#include "Base/Types.h"
 #include <windows.h>
 
 namespace sys
@@ -13,7 +13,7 @@ namespace sys
 		Window();
 		virtual ~Window();
 	public:
-		virtual void initWindow(const char* title, int width, int height);
+		virtual void initWindow(const char* title, int32 width, int32 height);
 	public:
 		// ´°¿Ú¾ä±ú
 		inline HWND getWnd() { return _wnd; }

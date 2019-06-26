@@ -1,5 +1,4 @@
 #include "Resource.h"
-#include <string>
 
 using namespace sys;
 

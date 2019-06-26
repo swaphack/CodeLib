@@ -7,14 +7,38 @@ using namespace script;
 
 Script* Script::s_script = nullptr;
 
+// ÎÄ±¾¹ýÂË
+class TextFilter : public ITextFilter
+{
+public:
+	TextFilter(WordSet* pWordSet) :m_pWordSet(pWordSet) {}
+	virtual ~TextFilter(){}
+private:
+	WordSet* m_pWordSet = nullptr;
+public:
+	virtual bool match(const char* text, int& size)
+	{
+		if (m_pWordSet == nullptr)
+		{
+			return false;
+		}
+		return m_pWordSet->pickWord(text, size);
+	}
+};
+
 Script::Script()
 :_mainDocument(nullptr)
 {
+	_wordDocument = new WordDocument();
 }
 
 Script::~Script()
 {
 	removeAllDocuments();
+	if (_wordDocument)
+	{
+		delete _wordDocument;
+	}
 }
 
 Script* Script::getInstance()
@@ -34,24 +58,17 @@ bool Script::initWordSet(const char* filepath)
 		return false;
 	}
 
-	Document* pDoc = new WordDocument();
-	if (!pDoc->loadFile(filepath))
+	_wordDocument->getWordSet()->clear();
+	if (!_wordDocument->loadFile(filepath))
 	{
-		delete pDoc;
 		return false;
 	}
-	if (!pDoc->parse())
-	{
-		delete pDoc;
-		return false;
-	}
-	delete pDoc;
 	return true;
 }
 
 bool Script::initWordFilter()
 {
-	WordFilters::getInstance()->addFilter(new TextFilter());
+	WordFilters::getInstance()->addFilter(new TextFilter(_wordDocument->getWordSet()));
 
 	return true;
 }
@@ -161,12 +178,5 @@ Document* Script::complieFile(const char* filepath)
 		delete pDoc;
 		return nullptr;
 	}
-
-	if (!pDoc->parse())
-	{
-		delete pDoc;
-		return nullptr;
-	}
-
 	return pDoc;
 }

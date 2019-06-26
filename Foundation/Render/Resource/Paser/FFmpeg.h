@@ -13,7 +13,7 @@ namespace render
 		VideoFrameImage();
 		virtual ~VideoFrameImage();
 	public:
-		void init(int format, int internalFormat, uchar* pixels, uint width, uint height);
+		void init(int format, int internalFormat, uint8* pixels, uint32 width, uint32 height);
 	protected:
 	private:
 	};
@@ -25,8 +25,8 @@ namespace render
 		VideoAudioClip();
 		virtual ~VideoAudioClip();
 	public:
-		void init(uchar* data, int frameSize);
-		void init(uchar* data, int frameSize, int channels, int64_t channelLayout, int format, int frequency, int samples);
+		void init(uint8* data, int frameSize);
+		void init(uint8* data, int frameSize, int channels, int64_t channelLayout, int format, int frequency, int samples);
 	};
 
 	// ffmpeg ½âÎö

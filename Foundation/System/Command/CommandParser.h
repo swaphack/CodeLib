@@ -1,9 +1,6 @@
 #pragma once
 
-#include <string>
-#include <map>
-#include <vector>
-#include <functional>
+#include "Base/Types.h"
 
 namespace sys
 {
@@ -23,8 +20,8 @@ namespace sys
 		void removeParam(const std::string& param);
 		void removeAllParams();
 
-		int getParamsCount();
-		std::string item(int index);
+		int32 getParamsCount();
+		std::string item(int32 index);
 	private:
 		// ¹Ø¼ü×Ö
 		std::string _key;

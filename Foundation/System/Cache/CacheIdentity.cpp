@@ -18,7 +18,7 @@ CacheIdentity::~CacheIdentity()
 	}
 }
 
-int CacheIdentity::getID()
+int32 CacheIdentity::getID()
 {
 	return _id;
 }

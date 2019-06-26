@@ -91,7 +91,7 @@ void WidgetProperty::setAttribute(const char* name, long value)
 	setAttribute(name, getCString("%ld", value));
 }
 
-void WidgetProperty::setAttribute(const char* name, uchar value)
+void WidgetProperty::setAttribute(const char* name, uint8 value)
 {
 	if (name == nullptr)
 	{
@@ -101,7 +101,7 @@ void WidgetProperty::setAttribute(const char* name, uchar value)
 	setAttribute(name, getCString("%u", value));
 }
 
-void WidgetProperty::setAttribute(const char* name, ushort value)
+void WidgetProperty::setAttribute(const char* name, uint16 value)
 {
 	if (name == nullptr)
 	{
@@ -111,7 +111,7 @@ void WidgetProperty::setAttribute(const char* name, ushort value)
 	setAttribute(name, getCString("%u", value));
 }
 
-void WidgetProperty::setAttribute(const char* name, uint value)
+void WidgetProperty::setAttribute(const char* name, uint32 value)
 {
 	if (name == nullptr)
 	{
@@ -315,7 +315,7 @@ bool WidgetProperty::getAttribute(const char* name, long& defaultValue)
 	return true;
 }
 
-bool WidgetProperty::getAttribute(const char* name, uchar& defaultValue)
+bool WidgetProperty::getAttribute(const char* name, uint8& defaultValue)
 {
 	const char* value = getAttribute(name);
 	if (value == nullptr)
@@ -323,12 +323,12 @@ bool WidgetProperty::getAttribute(const char* name, uchar& defaultValue)
 		return false;
 	}
 
-	defaultValue = (uchar)atoi(value);
+	defaultValue = (uint8)atoi(value);
 
 	return true;
 }
 
-bool WidgetProperty::getAttribute(const char* name, ushort& defaultValue)
+bool WidgetProperty::getAttribute(const char* name, uint16& defaultValue)
 {
 	const char* value = getAttribute(name);
 	if (value == nullptr)
@@ -336,12 +336,12 @@ bool WidgetProperty::getAttribute(const char* name, ushort& defaultValue)
 		return false;
 	}
 
-	defaultValue = (ushort)atoi(value);
+	defaultValue = (uint16)atoi(value);
 
 	return true;
 }
 
-bool WidgetProperty::getAttribute(const char* name, uint& defaultValue)
+bool WidgetProperty::getAttribute(const char* name, uint32& defaultValue)
 {
 	const char* value = getAttribute(name);
 	if (value == nullptr)
@@ -349,7 +349,7 @@ bool WidgetProperty::getAttribute(const char* name, uint& defaultValue)
 		return false;
 	}
 
-	defaultValue = (uint)atoi(value);
+	defaultValue = (uint32)atoi(value);
 
 	return true;
 }

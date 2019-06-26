@@ -27,8 +27,8 @@ namespace chem
 		// 静态实例
 		static PeriodicTable* s_pPeriodicTable;
 		// 元素信息(id键)
-		std::map<int, Element> _elementIDInfos;
+		std::map<int, Element> _elementInfos;
 		// 元素信息（符号键）
-		std::map<std::string, Element> _elementSymbolInfos;
+		std::map<std::string, int> _elementSymbols;
 	};
 }

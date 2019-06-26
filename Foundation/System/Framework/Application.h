@@ -3,9 +3,6 @@
 #include "Object.h"
 #include "Base/import.h"
 
-#include <map>
-#include <string>
-
 namespace sys
 {
 	// app ½Ó¿Ú

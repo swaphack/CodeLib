@@ -11,7 +11,7 @@ CompilerDocument::~CompilerDocument()
 {
 }
 
-bool CompilerDocument::parse()
+bool CompilerDocument::convertToDocumentStruct()
 {
 	if (getPtr() == nullptr)
 	{
@@ -25,4 +25,9 @@ bool CompilerDocument::parse()
 	}
 
 	return true;
+}
+
+bool CompilerDocument::convertToTextStruct()
+{
+
 }

@@ -40,11 +40,11 @@ namespace sys
 		/**
 		*	是否包含点
 		*/
-		bool contains(const Vector2& point);
+		bool contains(const Vector2& point32);
 		/**
 		*	是否包含点
 		*/
-		bool contains(const Vector3& point);
+		bool contains(const Vector3& point32);
 		/**
 		*	是否包含线段
 		*/
@@ -56,11 +56,11 @@ namespace sys
 		/**
 		*	是否与线段相交
 		*/
-		bool intersects(const Line2& line);
+		bool int32ersects(const Line2& line);
 		/**
 		*	是否与线段相交
 		*/
-		bool intersects(const Line3& line);
+		bool int32ersects(const Line3& line);
 		/**
 		*	是否包含盒子
 		*/
@@ -72,7 +72,7 @@ namespace sys
 		*
 		*	两个多边形在所有轴上的投影都发生重叠，则判定为碰撞；否则，没有发生碰撞
 		*/
-		bool intersects(const OBB& bounds);
+		bool int32ersects(const OBB& bounds);
 		/**
 		*	重载=
 		*/

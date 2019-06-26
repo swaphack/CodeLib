@@ -22,7 +22,7 @@ EndPoint::EndPoint()
 
 }
 
-EndPoint::EndPoint(const char* addr, int port, bool ipv6)
+EndPoint::EndPoint(const char* addr, int32 port, bool ipv6)
 :addr(addr)
 , port(port)
 , ipv6(ipv6)

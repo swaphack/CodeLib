@@ -12,13 +12,13 @@ namespace sys
 	struct Polygon
 	{
 		// 顶点
-		Vector2* points;
+		Vector2* point32s;
 		// 顶点数
-		int count;
+		int32 count;
 
 		Polygon();
 		Polygon(const Polygon & polygon);
-		Polygon(Vector2* points, int count);
+		Polygon(Vector2* point32s, int32 count);
 
 		~Polygon();
 		/**
@@ -32,7 +32,7 @@ namespace sys
 		/**
 		*	是否包含点
 		*/
-		bool contains(const Vector2& point);
+		bool contains(const Vector2& point32);
 		/**
 		*	是否包含线段
 		*/
@@ -40,11 +40,11 @@ namespace sys
 		/**
 		*	是否与线段相交
 		*/
-		bool intersects(const Line2& line);
+		bool int32ersects(const Line2& line);
 		/**
 		*	是否与多边形相交
 		*/
-		bool intersects(const Polygon& polygon);
+		bool int32ersects(const Polygon& polygon);
 		/**
 		*	重载=
 		*/

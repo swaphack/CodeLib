@@ -128,6 +128,8 @@ Texture2D* TextureCache::getTexture2D(const TextDefine& textDefine)
 	texture2D->load(image);
 	AUTO_RELEASE_OBJECT(texture2D);
 
+	SAFE_DELETE(image);
+
 	return texture2D;
 }
 

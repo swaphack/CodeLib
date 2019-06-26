@@ -58,15 +58,15 @@ void DBRecord::makeText(const DBTable* table, std::string& data)
 		valueIter = _fieldValues.find((*iter)->getName());
 		if (valueIter != _fieldValues.end())
 		{
-			int len = valueIter->second->getLength();
-			writer.writeInt(len);
+			int32 len = valueIter->second->getLength();
+			writer.writeInt32(len);
 			writer.writeString((char*)valueIter->second->getData(), len);
 		}
 		else
 		{
 			int len = 1;
 			std::string value = std::string(len, 0);
-			writer.writeInt(value.size());
+			writer.writeInt32(value.size());
 			writer.writeString((char*)value.c_str(), len);
 		}
 		iter++;
@@ -92,25 +92,25 @@ bool DBRecord::getFieldValue(const char* key, char& value)
 {
 	return this->getFieldValue<char>(key, value);
 }
-bool DBRecord::getFieldValue(const char* key, uchar& value)
+bool DBRecord::getFieldValue(const char* key, uint8& value)
 {
-	return this->getFieldValue<uchar>(key, value);
+	return this->getFieldValue<uint8>(key, value);
 }
-bool DBRecord::getFieldValue(const char* key, short& value)
+bool DBRecord::getFieldValue(const char* key, int16& value)
 {
-	return this->getFieldValue<short>(key, value);
+	return this->getFieldValue<int16>(key, value);
 }
-bool DBRecord::getFieldValue(const char* key, ushort& value)
+bool DBRecord::getFieldValue(const char* key, uint16& value)
 {
-	return this->getFieldValue<ushort>(key, value);
+	return this->getFieldValue<uint16>(key, value);
 }
 bool DBRecord::getFieldValue(const char* key, int& value)
 {
 	return this->getFieldValue<int>(key, value);
 }
-bool DBRecord::getFieldValue(const char* key, uint& value)
+bool DBRecord::getFieldValue(const char* key, uint32& value)
 {
-	return this->getFieldValue<uint>(key, value);
+	return this->getFieldValue<uint32>(key, value);
 }
 bool DBRecord::getFieldValue(const char* key, long& value)
 {
@@ -143,25 +143,25 @@ void DBRecord::setFieldValue(const char* key, char value)
 {
 	this->setFieldValue<char>(key, value);
 }
-void DBRecord::setFieldValue(const char* key, uchar value)
+void DBRecord::setFieldValue(const char* key, uint8 value)
 {
-	this->setFieldValue<uchar>(key, value);
+	this->setFieldValue<uint8>(key, value);
 }
-void DBRecord::setFieldValue(const char* key, short value)
+void DBRecord::setFieldValue(const char* key, int16 value)
 {
-	this->setFieldValue<short>(key, value);
+	this->setFieldValue<int16>(key, value);
 }
-void DBRecord::setFieldValue(const char* key, ushort value)
+void DBRecord::setFieldValue(const char* key, uint16 value)
 {
-	this->setFieldValue<ushort>(key, value);
+	this->setFieldValue<uint16>(key, value);
 }
 void DBRecord::setFieldValue(const char* key, int value)
 {
 	this->setFieldValue<int>(key, value);
 }
-void DBRecord::setFieldValue(const char* key, uint value)
+void DBRecord::setFieldValue(const char* key, uint32 value)
 {
-	this->setFieldValue<uint>(key, value);
+	this->setFieldValue<uint32>(key, value);
 }
 void DBRecord::setFieldValue(const char* key, long value)
 {

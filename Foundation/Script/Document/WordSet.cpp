@@ -2,8 +2,6 @@
 
 using namespace script;
 
-static WordSet* s_KeyWord = nullptr;
-
 WordSet::WordSet()
 {
 
@@ -12,16 +10,6 @@ WordSet::WordSet()
 WordSet::~WordSet()
 {
 
-}
-
-WordSet* WordSet::getInstance()
-{
-	if (s_KeyWord == nullptr)
-	{
-		s_KeyWord = new WordSet();
-	}
-
-	return s_KeyWord;
 }
 
 void WordSet::appendWord(const char* name)

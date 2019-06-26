@@ -13,7 +13,7 @@ BitConvert::~BitConvert()
 
 }
 
-void BitConvert::getNumberString(int number, std::string& value)
+void BitConvert::getNumberString(int32 number, std::string& value)
 {
 	char str[255];
 	itoa(number, str, 10);

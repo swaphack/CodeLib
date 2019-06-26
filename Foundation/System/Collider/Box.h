@@ -39,19 +39,19 @@ namespace sys
 		/**
 		*	顶点数
 		*/
-		static const int VERTICE_COUNT;
+		static const int32 VERTICE_COUNT;
 		/**
 		*	面数
 		*/
-		static const int SURFACE_COUNT;
+		static const int32 SURFACE_COUNT;
 		/**
 		*	边数
 		*/
-		static const int EDGE_COUNT;
+		static const int32 EDGE_COUNT;
 		/**
 		*	顶点索引
 		*/
-		static const int VERTICE_INDEX[8];
+		static const int32 VERTICE_INDEX[8];
 	public:
 		Vector3 Vertices[8];
 	public:

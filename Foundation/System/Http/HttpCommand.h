@@ -1,7 +1,6 @@
 #pragma once
 
-#include <map>
-#include <string>
+#include "Base/Types.h"
 
 namespace sys
 {
@@ -17,13 +16,13 @@ namespace sys
 		// 获取session id
 		const char* getSessionID();
 		// 设置消息
-		virtual void setMessage(const char* msg, int size);
+		virtual void setMessage(const char* msg, int32 size);
 		// 生成消息
 		virtual void makeMessage();
 		// 获取消息
 		const char* getMessage();
 		// 消息大小
-		int getMessageSize();
+		int32 getMessageSize();
 		// 是否有值
 		virtual bool isMessageEmpty();
 	private:

@@ -11,7 +11,7 @@ namespace render
 		Texture();
 		virtual ~Texture();
 	public:
-		uint getTextureID() const
+		uint32 getTextureID() const
 		{ 
 			return _textureID; 
 		}
@@ -20,23 +20,23 @@ namespace render
 		{
 			return _width;
 		}
-		inline void setWidth(uint val)
+		inline void setWidth(uint32 val)
 		{
 			_width = val;
 		}
-		inline uint getHeight() const
+		inline uint32 getHeight() const
 		{
 			return _height;
 		}
-		inline void setHeight(uint val)
+		inline void setHeight(uint32 val)
 		{
 			_height = val;
 		}
-		inline uint getDeep() const
+		inline uint32 getDeep() const
 		{
 			return _deep;
 		}
-		inline void setDeep(uint val)
+		inline void setDeep(uint32 val)
 		{
 			_deep = val;
 		}
@@ -50,10 +50,10 @@ namespace render
 			return true;
 		}
 	protected:
-		uint _textureID;
-		uint _width;
-		uint _height;
-		uint _deep;
+		uint32 _textureID;
+		uint32 _width;
+		uint32 _height;
+		uint32 _deep;
 	};
 
 	//////////////////////////////////////////////////////////////////////////

@@ -1,4 +1,4 @@
-#include "BitHelper.h"
+#include "CharsetHelper.h"
 
 #if (defined WIN32) ||  (defined _WIN32)  
 #include<Windows.h>  
@@ -13,10 +13,11 @@
 #include <stdlib.h>
 #include <wchar.h>
 #include <locale.h>
+#include <stdint.h>
 
 using namespace sys;
 
-int BitHelper::getUTF8WordCount(const char* data)
+int32 CharsetHelper::getUTF8WordCount(const char* data)
 {
 	if (data == nullptr)
 	{
@@ -24,7 +25,7 @@ int BitHelper::getUTF8WordCount(const char* data)
 	}
 
 	char* ptr = (char*)(data);
-	int count = 0;
+	int32 count = 0;
 
 	while (*ptr)
 	{
@@ -82,17 +83,17 @@ int BitHelper::getUTF8WordCount(const char* data)
 	return count;
 }
 
-char* BitHelper::convertToUTF8(wchar_t* src)
+char* CharsetHelper::convertToUTF8(wchar_t* src)
 {
-	int mbs_size;
+	int32 mbs_size;
 #if (defined WIN32) ||  (defined _WIN32)  
 	setlocale(LC_ALL, "chs");
 #else  
 	setlocale(LC_ALL, "zh_CN.gbk");
 #endif  
-	int wc_size = wcslen(src);
+	int32 wc_size = wcslen(src);
 	if (wc_size == 0)
-		wc_size = UINT_MAX;
+		wc_size = UINT32_MAX;
 
 	mbs_size = wcstombs(0, src, wc_size);
 
@@ -103,7 +104,7 @@ char* BitHelper::convertToUTF8(wchar_t* src)
 	return mbs;
 }
 
-wchar_t* BitHelper::convertToWideChar(const char* src, int& length)
+wchar_t* CharsetHelper::convertToWideChar(const char* src, int32& length)
 {
 	if (src == NULL) {
 		return nullptr;
@@ -115,11 +116,11 @@ wchar_t* BitHelper::convertToWideChar(const char* src, int& length)
 #else  
 	setlocale(LC_ALL, "zh_CN.gbk");
 #endif  
-	int wc_size;
-	int mbs_size = strlen(src);
+	int32 wc_size;
+	int32 mbs_size = strlen(src);
 
 	if (mbs_size == 0)
-		mbs_size = UINT_MAX;
+		mbs_size = UINT32_MAX;
 
 	wc_size = mbstowcs(0, src, mbs_size);
 
@@ -133,9 +134,9 @@ wchar_t* BitHelper::convertToWideChar(const char* src, int& length)
 	return wc;
 }
 
-wchar_t* BitHelper::convertToWideCharWnd(const char *str)
+wchar_t* CharsetHelper::convertToWideCharWnd(const char *str)
 {
-	int length = strlen(str) + 1;
+	int32 length = strlen(str) + 1;
 	wchar_t *t = (wchar_t*)malloc(sizeof(wchar_t)*length);
 	memset(t, 0, length*sizeof(wchar_t));
 	MultiByteToWideChar(CP_ACP, 0, str, strlen(str), t, length);

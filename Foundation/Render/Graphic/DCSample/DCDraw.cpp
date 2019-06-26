@@ -42,7 +42,7 @@ void DCDraw::draw()
 	glDisable(GL_BLEND);
 }
 
-DCDraw* DCDraw::create(int type, const std::vector<sys::Vector3>& points, float width, const sys::Color4B& color, uchar opacity, const BlendParam& blend)
+DCDraw* DCDraw::create(int type, const std::vector<sys::Vector3>& points, float width, const sys::Color4B& color, uint8 opacity, const BlendParam& blend)
 {
 	DCDraw* pDraw = sys::Instance<DCDraw>::getInstance();
 	pDraw->Type = type;

@@ -36,7 +36,7 @@ void DCTexture::draw()
 	glDisable(GL_BLEND);
 }
 
-DCTexture* DCTexture::create(int textureID, const TextureRect* texRect, const sys::Color4B& color, uchar opacity, const BlendParam& blend, const sys::Vector3& normal /*= sys::Vector::Zero*/)
+DCTexture* DCTexture::create(int textureID, const TextureRect* texRect, const sys::Color4B& color, uint8 opacity, const BlendParam& blend, const sys::Vector3& normal /*= sys::Vector::Zero*/)
 {
 	if (textureID <= 0 || texRect == nullptr)
 	{

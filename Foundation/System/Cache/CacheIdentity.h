@@ -1,7 +1,6 @@
 #pragma once
 
 #include "Base/import.h"
-#include <string>
 
 namespace sys
 {
@@ -13,7 +12,7 @@ namespace sys
 		virtual ~CacheIdentity();
 	public:
 		// 标识id
-		int getID();
+		int32 getID();
 		// 缓存管理
 		void setInControl(bool status);
 		bool isInControl();
@@ -22,7 +21,7 @@ namespace sys
 		void makeID();
 	private:
 		// 标识id
-		int _id;
+		int32 _id;
 		// 是否在缓存管理中
 		bool _bInCacheControl;
 	};

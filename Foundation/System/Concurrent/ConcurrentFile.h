@@ -2,7 +2,7 @@
 
 #include "Concurrent.h"
 
-#include <string>
+#include "Base/Types.h"
 #include <cstdio>
 
 namespace sys

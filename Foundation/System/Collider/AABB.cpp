@@ -17,22 +17,22 @@ AABB::AABB(const Vector2& center, const Vector2& size)
 {
 }
 
-bool AABB::contains(const Vector2& point)
+bool AABB::contains(const Vector2& point32)
 {
-	return point.x >= minPos.x
-		&& point.x <= maxPos.x
-		&& point.y >= minPos.y
-		&& point.y <= maxPos.y;
+	return point32.x >= minPos.x
+		&& point32.x <= maxPos.x
+		&& point32.y >= minPos.y
+		&& point32.y <= maxPos.y;
 }
 
-bool AABB::contains(const Vector3& point)
+bool AABB::contains(const Vector3& point32)
 {
-	return point.x >= minPos.x
-		&& point.x <= maxPos.x
-		&& point.y >= minPos.y
-		&& point.y <= maxPos.y
-		&& point.z >= minPos.z
-		&& point.z <= maxPos.z;
+	return point32.x >= minPos.x
+		&& point32.x <= maxPos.x
+		&& point32.y >= minPos.y
+		&& point32.y <= maxPos.y
+		&& point32.z >= minPos.z
+		&& point32.z <= maxPos.z;
 }
 
 bool AABB::contains(const Line2& line)
@@ -45,7 +45,7 @@ bool AABB::contains(const Line3& line)
 	return contains(line.src) && contains(line.dest);
 }
 
-bool AABB::intersects(const Line2& line)
+bool AABB::int32ersects(const Line2& line)
 {
 	if (!contains(line.src) && !contains(line.dest))
 	{
@@ -55,7 +55,7 @@ bool AABB::intersects(const Line2& line)
 	return true;
 }
 
-bool AABB::intersects(const Line3& line)
+bool AABB::int32ersects(const Line3& line)
 {
 	if (!contains(line.src) && !contains(line.dest))
 	{
@@ -75,7 +75,7 @@ bool AABB::contains(const AABB& bounds)
 		&& bounds.Max().z <= Max().z;
 }
 
-bool AABB::intersects(const AABB& bounds)
+bool AABB::int32ersects(const AABB& bounds)
 {
 	float x0 = bounds.Min().x;
 	float x1 = bounds.Max().x;

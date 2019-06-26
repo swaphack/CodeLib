@@ -2,9 +2,9 @@
 
 using namespace sys;
 
-uint Hash::getSDBMHash(char *str)
+uint32 Hash::getSDBMHash(char *str)
 {
-	uint hash = 0;
+	uint32 hash = 0;
 
 	while (*str)
 	{
@@ -16,11 +16,11 @@ uint Hash::getSDBMHash(char *str)
 }
 
 // RS Hash Function
-uint Hash::getRSHash(char *str)
+uint32 Hash::getRSHash(char *str)
 {
-	uint b = 378551;
-	uint a = 63689;
-	uint hash = 0;
+	uint32 b = 378551;
+	uint32 a = 63689;
+	uint32 hash = 0;
 
 	while (*str)
 	{
@@ -32,9 +32,9 @@ uint Hash::getRSHash(char *str)
 }
 
 // JS Hash Function
-uint Hash::getJSHash(char *str)
+uint32 Hash::getJSHash(char *str)
 {
-	uint hash = 1315423911;
+	uint32 hash = 1315423911;
 
 	while (*str)
 	{
@@ -45,14 +45,14 @@ uint Hash::getJSHash(char *str)
 }
 
 // P. J. Weinberger Hash Function
-uint Hash::getPJWHash(char *str)
+uint32 Hash::getPJWHash(char *str)
 {
-	uint BitsInUnignedInt = (uint)(sizeof(uint) * 8);
-	uint ThreeQuarters    = (uint)((BitsInUnignedInt  * 3) / 4);
-	uint OneEighth        = (uint)(BitsInUnignedInt / 8);
-	uint HighBits         = (uint)(0xFFFFFFFF) << (BitsInUnignedInt - OneEighth);
-	uint hash             = 0;
-	uint test             = 0;
+	uint32 BitsInUnignedint32 = (uint32)(sizeof(uint32) * 8);
+	uint32 ThreeQuarters    = (uint32)((BitsInUnignedint32  * 3) / 4);
+	uint32 OneEighth        = (uint32)(BitsInUnignedint32 / 8);
+	uint32 HighBits         = (uint32)(0xFFFFFFFF) << (BitsInUnignedint32 - OneEighth);
+	uint32 hash             = 0;
+	uint32 test             = 0;
 
 	while (*str)
 	{
@@ -67,10 +67,10 @@ uint Hash::getPJWHash(char *str)
 }
 
 // ELF Hash Function
-uint Hash::getELFHash(char *str)
+uint32 Hash::getELFHash(char *str)
 {
-	uint hash = 0;
-	uint x    = 0;
+	uint32 hash = 0;
+	uint32 x    = 0;
 
 	while (*str)
 	{
@@ -86,10 +86,10 @@ uint Hash::getELFHash(char *str)
 }
 
 // BKDR Hash Function
-uint Hash::getBKDRHash(char *str)
+uint32 Hash::getBKDRHash(char *str)
 {
-	uint seed = 131; // 31 131 1313 13131 131313 etc..
-	uint hash = 0;
+	uint32 seed = 131; // 31 131 1313 13131 131313 etc..
+	uint32 hash = 0;
 
 	while (*str)
 	{
@@ -100,9 +100,9 @@ uint Hash::getBKDRHash(char *str)
 }
 
 // DJB Hash Function
-uint Hash::getDJBHash(char *str)
+uint32 Hash::getDJBHash(char *str)
 {
-	uint hash = 5381;
+	uint32 hash = 5381;
 
 	while (*str)
 	{
@@ -113,10 +113,10 @@ uint Hash::getDJBHash(char *str)
 }
 
 // AP Hash Function
-uint Hash::getAPHash(char *str)
+uint32 Hash::getAPHash(char *str)
 {
-	uint hash = 0;
-	int i;
+	uint32 hash = 0;
+	int32 i;
 
 	for (i=0; *str; i++)
 	{

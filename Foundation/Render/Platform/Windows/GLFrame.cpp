@@ -94,7 +94,7 @@ bool GLFrame::init()
 		return false;
 	}
 
-	uint PixelFormat = 0;
+	uint32 PixelFormat = 0;
 	static PIXELFORMATDESCRIPTOR pfd =	// /pfd 告诉窗使用的像素格式
 	{
 		sizeof(PIXELFORMATDESCRIPTOR),				// 上述格式描述符的大小

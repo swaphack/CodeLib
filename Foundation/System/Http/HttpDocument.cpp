@@ -20,7 +20,7 @@ HttpDocument::~HttpDocument()
 	SAFE_DELETE(_stream);
 }
 
-bool HttpDocument::parse(const char* msg, int size)
+bool HttpDocument::parse(const char* msg, int32 size)
 {
 	_stream->initWithText(msg, size);
 	_stream->setCursor(0);
@@ -79,7 +79,7 @@ bool HttpDocument::save(std::string& msg)
 	return true;
 }
 
-const char* HttpDocument::getStatus(int index)
+const char* HttpDocument::getStatus(int32 index)
 {
 	if (index < 0 || index >= _headerSection.size())
 	{
@@ -89,7 +89,7 @@ const char* HttpDocument::getStatus(int index)
 	return _statusSection[index].c_str();
 }
 
-void HttpDocument::setStatus(int index, const char* value)
+void HttpDocument::setStatus(int32 index, const char* value)
 {
 	if (index < 0 || index >= _statusSection.size() || value == nullptr)
 	{
@@ -115,7 +115,7 @@ const char* HttpDocument::getHeader(const char* key)
 	return nullptr;
 }
 
-bool HttpDocument::getIntegerHeader(const char* key, int& value)
+bool HttpDocument::getint32egerHeader(const char* key, int32& value)
 {
 	const char* data = getHeader(key);
 	if (data == nullptr)
@@ -160,12 +160,12 @@ void HttpDocument::setDateHeader(const char* key, Time* value)
 	this->setHeader(key, strTime.getString());
 }
 
-void HttpDocument::setIntegerHeader(const char* key, int value)
+void HttpDocument::setint32egerHeader(const char* key, int32 value)
 {
 	this->setHeader(key, getCString("%d", value));
 }
 
-void HttpDocument::setBody(const char* value, int size)
+void HttpDocument::setBody(const char* value, int32 size)
 {
 	_bodySection = std::string(value, size);
 }
@@ -175,12 +175,12 @@ const char* HttpDocument::getBody()
 	return _bodySection.c_str();
 }
 
-int HttpDocument::getBodySize()
+int32 HttpDocument::getBodySize()
 {
 	return _bodySection.size();
 }
 
-int HttpDocument::getStreamSize()
+int32 HttpDocument::getStreamSize()
 {
 	return _stream->getCursor();
 }
@@ -217,7 +217,7 @@ bool HttpDocument::readStatusSection()
 		return false;
 	}
 
-	int offset = dest[0].getSize() + dest[1].getSize() + 2;
+	int32 offset = dest[0].getSize() + dest[1].getSize() + 2;
 	_statusSection[0] = dest[0].getString();
 	_statusSection[1] = dest[1].getString();
 	_statusSection[2] = line.subString(offset, line.getSize() - offset).getString();
@@ -235,7 +235,7 @@ bool HttpDocument::readHeaderSection()
 
 	std::string text;
 	String line;
-	int offset;
+	int32 offset;
 	std::string key;
 	std::string value;
 	do 

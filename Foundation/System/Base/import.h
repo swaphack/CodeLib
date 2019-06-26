@@ -8,7 +8,7 @@
 #include "Instance.h"
 #include "macros.h"
 #include "Types.h"
-#include "BitHelper.h"
+#include "CharsetHelper.h"
 #include "Random.h"
 #include "FuncHandler.h"
 #include "Tuple.h"

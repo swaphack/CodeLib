@@ -43,9 +43,9 @@ AABB Line3::getBounds() const
 	return AABB(center, size);
 }
 
-bool Line3::contains(const Vector3& point)
+bool Line3::contains(const Vector3& point32)
 {
-	Vector3 v0 = point - src;
+	Vector3 v0 = point32 - src;
 	Vector3 v1 = dest - src;
 
 	if (Vector3::dot(v0, v1) != 0)
@@ -54,7 +54,7 @@ bool Line3::contains(const Vector3& point)
 	}
 
 	AABB bounds = getBounds();
-	return bounds.contains(point);
+	return bounds.contains(point32);
 }
 
 bool Line3::contains(const Line3& line)
@@ -74,12 +74,12 @@ bool Line3::contains(const Line3& line)
 	return this->contains(line.src) && this->contains(line.dest);
 }
 
-bool Line3::intersects(const Line3& line)
+bool Line3::int32ersects(const Line3& line)
 {
 	AABB bounds0 = getBounds();
 	AABB bounds1 = line.getBounds();
 	// 先简单判断包围盒是否相交
-	if (!bounds0.intersects(bounds1))
+	if (!bounds0.int32ersects(bounds1))
 	{
 		return false;
 	}
@@ -94,7 +94,7 @@ bool Line3::intersects(const Line3& line)
 	return d0 * d1 >= 0;
 }
 
-Vector3 Line3::closestPoint(const Vector3& point)
+Vector3 Line3::closestPoint32(const Vector3& point32)
 {
 	Vector3 result;
 
@@ -107,7 +107,7 @@ Vector3 Line3::closestPoint(const Vector3& point)
 		return src;
 	}
 
-	float k = -((src.x - point.x) * x0 + (src.y - point.y) * y0 + (src.z - point.z) * z0)
+	float k = -((src.x - point32.x) * x0 + (src.y - point32.y) * y0 + (src.z - point32.z) * z0)
 		/ (pow(x0, 2) + pow(y0, 2) + pow(z0, 2));
 
 	result.x = k * x0 + src.x;
@@ -128,10 +128,10 @@ Vector3 Line3::closestPoint(const Vector3& point)
 	return result;
 }
 
-float Line3::distance(const Line3& line, const Vector3& point)
+float Line3::distance(const Line3& line, const Vector3& point32)
 {
 	Vector3 v0 = line.dest - line.src;
-	Vector3 v1 = point - line.src;
+	Vector3 v1 = point32 - line.src;
 
 	float top = Vector3::dot(v0, v1);
 	float bottom = v0.getLength();

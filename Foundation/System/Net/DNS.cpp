@@ -33,15 +33,15 @@ void DNS::getFirstIPAddress(const char* url, std::string& ip)
 
 	struct addrinfo *result = NULL;
 	struct addrinfo *ptr = NULL;
-	struct addrinfo hints;
-	int dwRetval;
+	struct addrinfo hint32s;
+	int32 dwRetval;
 
-	ZeroMemory(&hints, sizeof(hints));
-	hints.ai_family = AF_UNSPEC;
-	hints.ai_socktype = SOCK_STREAM;
-	hints.ai_protocol = IPPROTO_TCP;
+	ZeroMemory(&hint32s, sizeof(hint32s));
+	hint32s.ai_family = AF_UNSPEC;
+	hint32s.ai_socktype = SOCK_STREAM;
+	hint32s.ai_protocol = IPPROTO_TCP;
 
-	dwRetval = getaddrinfo(url, 0, &hints, &result);
+	dwRetval = getaddrinfo(url, 0, &hint32s, &result);
 	if (dwRetval != 0) 
 	{
 		return;
@@ -70,7 +70,7 @@ void DNS::getFirstIPAddress(const char* url, std::string& ip)
 	Socket::ReleaseSockModule();
 }
 
-void DNS::getAllIPAddress(const char* url, std::map<std::string, int>& ipAddresses)
+void DNS::getAllIPAddress(const char* url, std::map<std::string, int32>& ipAddresses)
 {
 	Socket::InitSockModule();
 
@@ -82,17 +82,17 @@ void DNS::getAllIPAddress(const char* url, std::map<std::string, int>& ipAddress
 
 	struct addrinfo *result = NULL;
 	struct addrinfo *ptr = NULL;
-	struct addrinfo hints;
-	int dwRetval;
+	struct addrinfo hint32s;
+	int32 dwRetval;
 	std::string ip;
-	int port;
+	int32 port;
 
-	ZeroMemory(&hints, sizeof(hints));
-	hints.ai_family = AF_UNSPEC;
-	hints.ai_socktype = SOCK_STREAM;
-	hints.ai_protocol = IPPROTO_TCP;
+	ZeroMemory(&hint32s, sizeof(hint32s));
+	hint32s.ai_family = AF_UNSPEC;
+	hint32s.ai_socktype = SOCK_STREAM;
+	hint32s.ai_protocol = IPPROTO_TCP;
 
-	dwRetval = getaddrinfo(url, 0, &hints, &result);
+	dwRetval = getaddrinfo(url, 0, &hint32s, &result);
 	if (dwRetval != 0)
 	{
 		return;
@@ -127,7 +127,7 @@ void DNS::getAllIPAddress(const char* url, std::map<std::string, int>& ipAddress
 	Socket::ReleaseSockModule();
 }
 
-void DNS::getIPAddress(struct addrinfo* addr_info, std::string& ip, int& port)
+void DNS::getIPAddress(struct addrinfo* addr_info, std::string& ip, int32& port)
 {
 	ip.clear();
 	port = 0;
@@ -160,7 +160,7 @@ void DNS::getIPAddress(struct addrinfo* addr_info, std::string& ip, int& port)
 	}
 }
 
-void DNS::getIPAddress(struct sockaddr_in* addr_in, std::string& ip, int& port)
+void DNS::getIPAddress(struct sockaddr_in* addr_in, std::string& ip, int32& port)
 {
 	ip.clear();
 	port = 0;

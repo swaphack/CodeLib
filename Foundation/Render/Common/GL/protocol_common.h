@@ -31,9 +31,9 @@ namespace render
 		virtual ~ColorProtocol();
 	public:
 		// 设置颜色
-		void setColor(uchar r, uchar g, uchar b);
+		void setColor(uint8 r, uint8 g, uint8 b);
 		// 设置颜色
-		void setColor(uchar r, uchar g, uchar b, uchar a);
+		void setColor(uint8 r, uint8 g, uint8 b, uint8 a);
 		// 设置颜色
 		void setColor(const sys::Color4B& color);
 		// 设置颜色
@@ -53,12 +53,12 @@ namespace render
 		virtual ~OpacityProtocol();
 	public:
 		// 设置不透明度
-		void setOpacity(uchar opacity);
+		void setOpacity(uint8 opacity);
 		// 设置不透明度
-		uchar getOpacity();
+		uint8 getOpacity();
 	protected:
 		// 不透明度
-		uchar _opacity;
+		uint8 _opacity;
 	};
 
 	// 混合
