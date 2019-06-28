@@ -1,68 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="interface">
-      <UniqueIdentifier>{00603919-cdd9-4718-9433-f9e2a662fddd}</UniqueIdentifier>
-    </Filter>
     <Filter Include="struct">
       <UniqueIdentifier>{b7a955af-fa13-431a-92dd-d2afa7056362}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="interface\match">
-      <UniqueIdentifier>{5dcc03e4-b67e-4eb4-b2f0-0d5c7456ca98}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="instance">
-      <UniqueIdentifier>{69b92aad-3c76-4cb4-90cc-ae7ced321540}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="instance\match">
-      <UniqueIdentifier>{8d414c15-c807-4ad7-974a-264bccc19ff3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="interface\world">
-      <UniqueIdentifier>{e79ce5b4-0220-4ee3-81c4-fcd8c6707bb5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="instance\world">
-      <UniqueIdentifier>{fa1476ff-a460-48dd-9241-dc48fe9d72dd}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="interface\system">
-      <UniqueIdentifier>{3a825297-120d-4045-93f0-a99a673e7144}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="interface\match\formation">
-      <UniqueIdentifier>{d4ed35d9-c13c-4e57-8648-87c6e721ffdc}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="interface\match\field">
-      <UniqueIdentifier>{a7f49756-ecc3-4fc4-9457-45f461242701}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="interface\match\honour">
-      <UniqueIdentifier>{1b254aeb-b055-4830-800a-8f0faac13a8a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="interface\match\rule">
-      <UniqueIdentifier>{1b76b0cd-f87b-4dbf-a402-31a765f4d074}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="interface\match\team">
-      <UniqueIdentifier>{c9536d9c-4787-40d6-9748-40ad530a2191}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="interface\base">
-      <UniqueIdentifier>{49014dc4-d3c0-479b-8964-d00d424ad544}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="interface\match\scene">
-      <UniqueIdentifier>{5507352c-708d-4fca-a226-ac12060380bd}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="interface\organization">
-      <UniqueIdentifier>{faa1ae44-3b26-46aa-b488-56aeaa6b17fb}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="interface\organization\club">
-      <UniqueIdentifier>{51f15f3d-2c43-4b67-8c9f-9567b0081549}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="interface\organization\country">
-      <UniqueIdentifier>{38f8855b-1f8b-4980-97f4-3affd136712c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="interface\organization\transfer">
-      <UniqueIdentifier>{d8301763-f329-44c2-9217-ead6160c8616}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="interface\match\action">
-      <UniqueIdentifier>{fd6ba001-e9d8-40f8-8b4e-192b934f4bfb}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="interface\match\tactics">
-      <UniqueIdentifier>{bd5daba4-60be-41d7-a8c0-1875b6be4e37}</UniqueIdentifier>
     </Filter>
     <Filter Include="enum">
       <UniqueIdentifier>{a22041cc-826d-4059-b3c4-3ebd5df42f16}</UniqueIdentifier>
@@ -70,53 +10,71 @@
     <Filter Include="constant">
       <UniqueIdentifier>{e5f54f0e-bdd0-4876-9b43-849d6940ded3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="interface\finance">
-      <UniqueIdentifier>{1696d935-8763-40c8-be03-6054f1fd586f}</UniqueIdentifier>
+    <Filter Include="base">
+      <UniqueIdentifier>{0ff1c331-d7a3-41ec-900a-b8d0c681ca70}</UniqueIdentifier>
     </Filter>
-    <Filter Include="interface\match\result">
-      <UniqueIdentifier>{b3683fd4-e074-419c-beea-6d39d774be32}</UniqueIdentifier>
+    <Filter Include="match">
+      <UniqueIdentifier>{51884f31-f9cc-49f1-8d5c-3650823bfc95}</UniqueIdentifier>
     </Filter>
-    <Filter Include="instance\match\action">
-      <UniqueIdentifier>{be964fdd-07bb-4307-88a6-a088c8fe3cf6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="instance\match\field">
-      <UniqueIdentifier>{f11a849c-fb91-473d-bea0-d372f0758215}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="instance\match\scene">
+    <Filter Include="match\scene">
       <UniqueIdentifier>{387c03c0-e0ef-4b43-aa47-307b2c6ca8ae}</UniqueIdentifier>
     </Filter>
-    <Filter Include="instance\system">
-      <UniqueIdentifier>{edcfad63-3b98-4d7a-990e-737cf8f9654b}</UniqueIdentifier>
+    <Filter Include="match\field">
+      <UniqueIdentifier>{f11a849c-fb91-473d-bea0-d372f0758215}</UniqueIdentifier>
     </Filter>
-    <Filter Include="instance\base">
-      <UniqueIdentifier>{f9f662cc-63f7-4f24-9c35-ee7987146caa}</UniqueIdentifier>
+    <Filter Include="match\action">
+      <UniqueIdentifier>{be964fdd-07bb-4307-88a6-a088c8fe3cf6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="instance\organization">
+    <Filter Include="mind">
+      <UniqueIdentifier>{4fea6061-75e8-424a-9df9-6bd59112c6af}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="organization">
       <UniqueIdentifier>{912f2e3f-424d-4eb0-9368-a4e7e81f3c0b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="instance\organization\club">
-      <UniqueIdentifier>{a4c8392f-59b2-4002-9508-48d4f87a0e50}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="instance\organization\country">
-      <UniqueIdentifier>{3dd3df9c-7055-4cbd-8b34-1d8bcc738aa6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="instance\organization\transfer">
-      <UniqueIdentifier>{1e92ed51-2a30-4428-8b75-1070e2dffc8b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="interface\organization\league">
-      <UniqueIdentifier>{8792f3ab-2dde-4b74-8c16-47932dd847bc}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="interface\people">
-      <UniqueIdentifier>{19c6a45a-36a7-4fb7-9941-73e5d4592ac0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="instance\people">
+    <Filter Include="people">
       <UniqueIdentifier>{82918123-a88c-44fa-ac48-e6c43a7584e6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="interface\mind">
-      <UniqueIdentifier>{9d95d91c-f84d-498b-94a6-be7ce2e27c91}</UniqueIdentifier>
+    <Filter Include="system">
+      <UniqueIdentifier>{edcfad63-3b98-4d7a-990e-737cf8f9654b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="instance\mind">
-      <UniqueIdentifier>{4fea6061-75e8-424a-9df9-6bd59112c6af}</UniqueIdentifier>
+    <Filter Include="world">
+      <UniqueIdentifier>{fa1476ff-a460-48dd-9241-dc48fe9d72dd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="data">
+      <UniqueIdentifier>{0b37b5aa-a9ae-45e4-a129-196e627ee53c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="finance">
+      <UniqueIdentifier>{1696d935-8763-40c8-be03-6054f1fd586f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="match\tactics">
+      <UniqueIdentifier>{bd5daba4-60be-41d7-a8c0-1875b6be4e37}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="match\team">
+      <UniqueIdentifier>{c9536d9c-4787-40d6-9748-40ad530a2191}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="match\formation">
+      <UniqueIdentifier>{d4ed35d9-c13c-4e57-8648-87c6e721ffdc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="club">
+      <UniqueIdentifier>{2fcca008-55f6-4062-84e0-7f6ef9601719}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="league">
+      <UniqueIdentifier>{e56d23ea-5c76-432b-82c8-02b2413ce5b9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cup">
+      <UniqueIdentifier>{8fda9291-df3f-47a5-b49e-0cc19ead7223}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="country">
+      <UniqueIdentifier>{419fba27-04b8-4c75-9ae9-931e7c0220fc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="market">
+      <UniqueIdentifier>{409cda0e-18ad-4972-a4c4-16eef12101bc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="contract">
+      <UniqueIdentifier>{c8be931c-ddfa-49cb-9985-9d0eb604dd92}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="team">
+      <UniqueIdentifier>{dc211417-b6d0-47d6-ac70-e195840e6cf5}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -129,95 +87,14 @@
     <ClInclude Include="struct\Parabola.h">
       <Filter>struct</Filter>
     </ClInclude>
-    <ClInclude Include="interface\IClub.h">
-      <Filter>interface\organization\club</Filter>
-    </ClInclude>
-    <ClInclude Include="interface\IStadium.h">
-      <Filter>interface\organization\club</Filter>
-    </ClInclude>
-    <ClInclude Include="interface\ILeague.h">
-      <Filter>interface\organization\league</Filter>
-    </ClInclude>
-    <ClInclude Include="interface\ICup.h">
-      <Filter>interface\organization\league</Filter>
-    </ClInclude>
-    <ClInclude Include="interface\IWorld.h">
-      <Filter>interface\world</Filter>
-    </ClInclude>
-    <ClInclude Include="interface\ICountry.h">
-      <Filter>interface\organization\country</Filter>
-    </ClInclude>
-    <ClInclude Include="interface\IRank.h">
-      <Filter>interface\world</Filter>
-    </ClInclude>
-    <ClInclude Include="interface\ITeam.h">
-      <Filter>interface\match\team</Filter>
-    </ClInclude>
-    <ClInclude Include="interface\ISet.h">
-      <Filter>interface\world</Filter>
-    </ClInclude>
-    <ClInclude Include="interface\ITransferMarket.h">
-      <Filter>interface\organization\transfer</Filter>
-    </ClInclude>
-    <ClInclude Include="interface\IContract.h">
-      <Filter>interface\organization\club</Filter>
-    </ClInclude>
-    <ClInclude Include="interface\IAction.h">
-      <Filter>interface\match\action</Filter>
-    </ClInclude>
-    <ClInclude Include="interface\ISchedule.h">
-      <Filter>interface\organization\league</Filter>
-    </ClInclude>
-    <ClInclude Include="interface\IMatchDetailedList.h">
-      <Filter>interface\organization\league</Filter>
-    </ClInclude>
     <ClInclude Include="struct\Line.h">
       <Filter>struct</Filter>
     </ClInclude>
     <ClInclude Include="struct\Rectangle.h">
       <Filter>struct</Filter>
     </ClInclude>
-    <ClInclude Include="interface\IField.h">
-      <Filter>interface\match\field</Filter>
-    </ClInclude>
-    <ClInclude Include="interface\IRule.h">
-      <Filter>interface\match\rule</Filter>
-    </ClInclude>
-    <ClInclude Include="interface\IScene.h">
-      <Filter>interface\match\scene</Filter>
-    </ClInclude>
     <ClInclude Include="struct\Circle.h">
       <Filter>struct</Filter>
-    </ClInclude>
-    <ClInclude Include="interface\IFormation.h">
-      <Filter>interface\match\formation</Filter>
-    </ClInclude>
-    <ClInclude Include="instance\Person.h">
-      <Filter>instance\people</Filter>
-    </ClInclude>
-    <ClInclude Include="instance\World.h">
-      <Filter>instance\world</Filter>
-    </ClInclude>
-    <ClInclude Include="instance\TransferMarket.h">
-      <Filter>instance\organization\transfer</Filter>
-    </ClInclude>
-    <ClInclude Include="interface\ISystem.h">
-      <Filter>interface\system</Filter>
-    </ClInclude>
-    <ClInclude Include="interface\ISystemController.h">
-      <Filter>interface\system</Filter>
-    </ClInclude>
-    <ClInclude Include="interface\IRuleItem.h">
-      <Filter>interface\match\rule</Filter>
-    </ClInclude>
-    <ClInclude Include="interface\IMind.h">
-      <Filter>interface\mind</Filter>
-    </ClInclude>
-    <ClInclude Include="interface\ITimer.h">
-      <Filter>interface\base</Filter>
-    </ClInclude>
-    <ClInclude Include="interface\ITactics.h">
-      <Filter>interface\match\tactics</Filter>
     </ClInclude>
     <ClInclude Include="enum\eSystem.h">
       <Filter>enum</Filter>
@@ -228,12 +105,6 @@
     <ClInclude Include="enum\eOperator.h">
       <Filter>enum</Filter>
     </ClInclude>
-    <ClInclude Include="instance\ILevel.h">
-      <Filter>interface\base</Filter>
-    </ClInclude>
-    <ClInclude Include="interface\IRuleAction.h">
-      <Filter>interface\match\rule</Filter>
-    </ClInclude>
     <ClInclude Include="constant\Constants.h">
       <Filter>constant</Filter>
     </ClInclude>
@@ -243,107 +114,17 @@
     <ClInclude Include="struct\Size.h">
       <Filter>struct</Filter>
     </ClInclude>
-    <ClInclude Include="interface\ILineUp.h">
-      <Filter>interface\match\team</Filter>
-    </ClInclude>
     <ClInclude Include="enum\ePosition.h">
       <Filter>enum</Filter>
     </ClInclude>
     <ClInclude Include="enum\ePlayStyle.h">
       <Filter>enum</Filter>
     </ClInclude>
-    <ClInclude Include="interface\IFinance.h">
-      <Filter>interface\finance</Filter>
-    </ClInclude>
-    <ClInclude Include="interface\IBill.h">
-      <Filter>interface\finance</Filter>
-    </ClInclude>
     <ClInclude Include="interface\eSearchCondition.h">
       <Filter>enum</Filter>
     </ClInclude>
-    <ClInclude Include="interface\IPartMatch.h">
-      <Filter>interface\match\scene</Filter>
-    </ClInclude>
-    <ClInclude Include="interface\IFullMatch.h">
-      <Filter>interface\match\scene</Filter>
-    </ClInclude>
-    <ClInclude Include="interface\IFieldSide.h">
-      <Filter>interface\match\scene</Filter>
-    </ClInclude>
-    <ClInclude Include="interface\IBall.h">
-      <Filter>interface\match\scene</Filter>
-    </ClInclude>
-    <ClInclude Include="interface\ICommand.h">
-      <Filter>interface\mind</Filter>
-    </ClInclude>
-    <ClInclude Include="interface\IResult.h">
-      <Filter>interface\match\result</Filter>
-    </ClInclude>
-    <ClInclude Include="interface\IActionManager.h">
-      <Filter>interface\match\action</Filter>
-    </ClInclude>
-    <ClInclude Include="instance\Field.h">
-      <Filter>instance\match\field</Filter>
-    </ClInclude>
-    <ClInclude Include="instance\Match.h">
-      <Filter>instance\match\scene</Filter>
-    </ClInclude>
-    <ClInclude Include="instance\ActionWithBall.h">
-      <Filter>instance\match\action</Filter>
-    </ClInclude>
-    <ClInclude Include="instance\System.h">
-      <Filter>instance\system</Filter>
-    </ClInclude>
-    <ClInclude Include="instance\SystemController.h">
-      <Filter>instance\system</Filter>
-    </ClInclude>
-    <ClInclude Include="instance\Identity.h">
-      <Filter>instance\base</Filter>
-    </ClInclude>
-    <ClInclude Include="instance\ConditionSheet.h">
-      <Filter>instance\base</Filter>
-    </ClInclude>
-    <ClInclude Include="instance\Condition.h">
-      <Filter>instance\base</Filter>
-    </ClInclude>
     <ClInclude Include="enum\eInterval.h">
       <Filter>enum</Filter>
-    </ClInclude>
-    <ClInclude Include="instance\Property.h">
-      <Filter>instance\base</Filter>
-    </ClInclude>
-    <ClInclude Include="instance\PropertySheet.h">
-      <Filter>instance\base</Filter>
-    </ClInclude>
-    <ClInclude Include="instance\Notification.h">
-      <Filter>instance\base</Filter>
-    </ClInclude>
-    <ClInclude Include="interface\IBody.h">
-      <Filter>interface\people</Filter>
-    </ClInclude>
-    <ClInclude Include="interface\IMark.h">
-      <Filter>interface\people</Filter>
-    </ClInclude>
-    <ClInclude Include="instance\ComponentSheet.h">
-      <Filter>instance\base</Filter>
-    </ClInclude>
-    <ClInclude Include="instance\Component.h">
-      <Filter>instance\base</Filter>
-    </ClInclude>
-    <ClInclude Include="instance\Body.h">
-      <Filter>instance\people</Filter>
-    </ClInclude>
-    <ClInclude Include="instance\ActionManager.h">
-      <Filter>instance\match\action</Filter>
-    </ClInclude>
-    <ClInclude Include="instance\Player.h">
-      <Filter>instance\people</Filter>
-    </ClInclude>
-    <ClInclude Include="instance\Coach.h">
-      <Filter>instance\people</Filter>
-    </ClInclude>
-    <ClInclude Include="instance\Referee.h">
-      <Filter>instance\people</Filter>
     </ClInclude>
     <ClInclude Include="enum\eJob.h">
       <Filter>enum</Filter>
@@ -357,89 +138,218 @@
     <ClInclude Include="enum\eProperty.h">
       <Filter>enum</Filter>
     </ClInclude>
-    <ClInclude Include="interface\IActionCommand.h">
-      <Filter>interface\mind</Filter>
+    <ClInclude Include="world\World.h">
+      <Filter>world</Filter>
     </ClInclude>
-    <ClInclude Include="instance\Mind.h">
-      <Filter>instance\mind</Filter>
+    <ClInclude Include="system\System.h">
+      <Filter>system</Filter>
     </ClInclude>
-    <ClInclude Include="interface\IPerson.h">
-      <Filter>interface\people</Filter>
+    <ClInclude Include="system\SystemController.h">
+      <Filter>system</Filter>
     </ClInclude>
-    <ClInclude Include="interface\IPlayer.h">
-      <Filter>interface\people</Filter>
+    <ClInclude Include="people\Body.h">
+      <Filter>people</Filter>
     </ClInclude>
-    <ClInclude Include="instance\Club.h">
-      <Filter>instance\organization\club</Filter>
+    <ClInclude Include="people\Coach.h">
+      <Filter>people</Filter>
     </ClInclude>
-    <ClInclude Include="instance\PropertyComponent.h">
-      <Filter>instance\base</Filter>
+    <ClInclude Include="people\Person.h">
+      <Filter>people</Filter>
     </ClInclude>
-    <ClInclude Include="instance\ActionWithoutBall.h">
-      <Filter>instance\match\action</Filter>
+    <ClInclude Include="people\Player.h">
+      <Filter>people</Filter>
+    </ClInclude>
+    <ClInclude Include="people\Referee.h">
+      <Filter>people</Filter>
+    </ClInclude>
+    <ClInclude Include="data\ILevel.h">
+      <Filter>data</Filter>
+    </ClInclude>
+    <ClInclude Include="mind\Mind.h">
+      <Filter>mind</Filter>
+    </ClInclude>
+    <ClInclude Include="match\action\ActionManager.h">
+      <Filter>match\action</Filter>
+    </ClInclude>
+    <ClInclude Include="match\action\ActionWithBall.h">
+      <Filter>match\action</Filter>
+    </ClInclude>
+    <ClInclude Include="match\action\ActionWithoutBall.h">
+      <Filter>match\action</Filter>
+    </ClInclude>
+    <ClInclude Include="match\field\Field.h">
+      <Filter>match\field</Filter>
+    </ClInclude>
+    <ClInclude Include="match\scene\Match.h">
+      <Filter>match\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="base\Component.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="base\ComponentSheet.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="base\Condition.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="base\ConditionSheet.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="base\Identity.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="base\ITimer.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="base\Notification.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="base\Property.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="mind\IActionCommand.h">
+      <Filter>mind</Filter>
+    </ClInclude>
+    <ClInclude Include="mind\ICommand.h">
+      <Filter>mind</Filter>
+    </ClInclude>
+    <ClInclude Include="organization\IMatchDetailedList.h">
+      <Filter>organization</Filter>
+    </ClInclude>
+    <ClInclude Include="organization\ISchedule.h">
+      <Filter>organization</Filter>
+    </ClInclude>
+    <ClInclude Include="organization\IStadium.h">
+      <Filter>organization</Filter>
+    </ClInclude>
+    <ClInclude Include="world\IRank.h">
+      <Filter>world</Filter>
+    </ClInclude>
+    <ClInclude Include="enum\eLineUp.h">
+      <Filter>enum</Filter>
+    </ClInclude>
+    <ClInclude Include="enum\eSearchCondition.h">
+      <Filter>enum</Filter>
+    </ClInclude>
+    <ClInclude Include="match\formation\IFormation.h">
+      <Filter>match\formation</Filter>
+    </ClInclude>
+    <ClInclude Include="match\tactics\ITactics.h">
+      <Filter>match\tactics</Filter>
+    </ClInclude>
+    <ClInclude Include="match\team\ILineUp.h">
+      <Filter>match\team</Filter>
+    </ClInclude>
+    <ClInclude Include="club\Club.h">
+      <Filter>club</Filter>
+    </ClInclude>
+    <ClInclude Include="cup\ICup.h">
+      <Filter>cup</Filter>
+    </ClInclude>
+    <ClInclude Include="finance\Finance.h">
+      <Filter>finance</Filter>
+    </ClInclude>
+    <ClInclude Include="finance\Bill.h">
+      <Filter>finance</Filter>
+    </ClInclude>
+    <ClInclude Include="world\Creator.h">
+      <Filter>world</Filter>
+    </ClInclude>
+    <ClInclude Include="world\HumanSheet.h">
+      <Filter>world</Filter>
+    </ClInclude>
+    <ClInclude Include="world\CountrySheet.h">
+      <Filter>world</Filter>
+    </ClInclude>
+    <ClInclude Include="country\Country.h">
+      <Filter>country</Filter>
+    </ClInclude>
+    <ClInclude Include="league\League.h">
+      <Filter>league</Filter>
+    </ClInclude>
+    <ClInclude Include="market\TransferMarket.h">
+      <Filter>market</Filter>
+    </ClInclude>
+    <ClInclude Include="contract\Contract.h">
+      <Filter>contract</Filter>
+    </ClInclude>
+    <ClInclude Include="team\Team.h">
+      <Filter>team</Filter>
+    </ClInclude>
+    <ClInclude Include="base\IdentityContainer.h">
+      <Filter>base</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="instance\Person.cpp">
-      <Filter>instance\people</Filter>
-    </ClCompile>
-    <ClCompile Include="instance\World.cpp">
-      <Filter>instance\world</Filter>
-    </ClCompile>
     <ClCompile Include="constant\Constants.cpp">
       <Filter>constant</Filter>
     </ClCompile>
-    <ClCompile Include="instance\TransferMarket.cpp">
-      <Filter>instance\organization\transfer</Filter>
-    </ClCompile>
-    <ClCompile Include="instance\Field.cpp">
-      <Filter>instance\match\field</Filter>
-    </ClCompile>
-    <ClCompile Include="instance\Identity.cpp">
-      <Filter>instance\base</Filter>
-    </ClCompile>
-    <ClCompile Include="instance\ConditionSheet.cpp">
-      <Filter>instance\base</Filter>
-    </ClCompile>
-    <ClCompile Include="instance\Condition.cpp">
-      <Filter>instance\base</Filter>
-    </ClCompile>
-    <ClCompile Include="instance\Property.cpp">
-      <Filter>instance\base</Filter>
-    </ClCompile>
-    <ClCompile Include="instance\PropertySheet.cpp">
-      <Filter>instance\base</Filter>
-    </ClCompile>
-    <ClCompile Include="instance\ComponentSheet.cpp">
-      <Filter>instance\base</Filter>
-    </ClCompile>
-    <ClCompile Include="instance\Component.cpp">
-      <Filter>instance\base</Filter>
-    </ClCompile>
-    <ClCompile Include="instance\Body.cpp">
-      <Filter>instance\people</Filter>
-    </ClCompile>
-    <ClCompile Include="instance\ActionWithBall.cpp">
-      <Filter>instance\match\action</Filter>
-    </ClCompile>
-    <ClCompile Include="instance\ActionManager.cpp">
-      <Filter>instance\match\action</Filter>
-    </ClCompile>
-    <ClCompile Include="instance\Player.cpp">
-      <Filter>instance\people</Filter>
-    </ClCompile>
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="instance\Mind.cpp">
-      <Filter>instance\mind</Filter>
+    <ClCompile Include="world\World.cpp">
+      <Filter>world</Filter>
     </ClCompile>
-    <ClCompile Include="instance\Club.cpp">
-      <Filter>instance\organization\club</Filter>
+    <ClCompile Include="people\Body.cpp">
+      <Filter>people</Filter>
     </ClCompile>
-    <ClCompile Include="instance\PropertyComponent.cpp">
-      <Filter>instance\base</Filter>
+    <ClCompile Include="people\Person.cpp">
+      <Filter>people</Filter>
     </ClCompile>
-    <ClCompile Include="instance\ActionWithoutBall.cpp">
-      <Filter>instance\match\action</Filter>
+    <ClCompile Include="people\Player.cpp">
+      <Filter>people</Filter>
+    </ClCompile>
+    <ClCompile Include="mind\Mind.cpp">
+      <Filter>mind</Filter>
+    </ClCompile>
+    <ClCompile Include="match\action\ActionManager.cpp">
+      <Filter>match\action</Filter>
+    </ClCompile>
+    <ClCompile Include="match\action\ActionWithBall.cpp">
+      <Filter>match\action</Filter>
+    </ClCompile>
+    <ClCompile Include="match\action\ActionWithoutBall.cpp">
+      <Filter>match\action</Filter>
+    </ClCompile>
+    <ClCompile Include="match\field\Field.cpp">
+      <Filter>match\field</Filter>
+    </ClCompile>
+    <ClCompile Include="base\Component.cpp">
+      <Filter>base</Filter>
+    </ClCompile>
+    <ClCompile Include="base\ComponentSheet.cpp">
+      <Filter>base</Filter>
+    </ClCompile>
+    <ClCompile Include="base\Condition.cpp">
+      <Filter>base</Filter>
+    </ClCompile>
+    <ClCompile Include="base\ConditionSheet.cpp">
+      <Filter>base</Filter>
+    </ClCompile>
+    <ClCompile Include="base\Identity.cpp">
+      <Filter>base</Filter>
+    </ClCompile>
+    <ClCompile Include="base\Property.cpp">
+      <Filter>base</Filter>
+    </ClCompile>
+    <ClCompile Include="club\Club.cpp">
+      <Filter>club</Filter>
+    </ClCompile>
+    <ClCompile Include="system\System.cpp">
+      <Filter>system</Filter>
+    </ClCompile>
+    <ClCompile Include="market\TransferMarket.cpp">
+      <Filter>market</Filter>
+    </ClCompile>
+    <ClCompile Include="base\IdentityContainer.cpp">
+      <Filter>base</Filter>
+    </ClCompile>
+    <ClCompile Include="finance\Finance.cpp">
+      <Filter>finance</Filter>
+    </ClCompile>
+    <ClCompile Include="world\HumanSheet.cpp">
+      <Filter>world</Filter>
+    </ClCompile>
+    <ClCompile Include="world\CountrySheet.cpp">
+      <Filter>world</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

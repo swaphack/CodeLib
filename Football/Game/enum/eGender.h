@@ -1,11 +1,13 @@
 #pragma once
 
+#include <cstdint>
+
 namespace game
 {
 	/**
 	*	ÐÔ±ð
 	*/
-	enum eGender
+	enum eGender : int8_t
 	{
 		/**
 		*	ÄÐ
