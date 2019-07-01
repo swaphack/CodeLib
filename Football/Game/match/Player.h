@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Person.h"
+#include "../people/Person.h"
 
 namespace game
 {

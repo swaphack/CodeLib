@@ -1,22 +1,25 @@
 #pragma once
 
+#include "../base/Component.h"
+
 namespace game
 {
 	/**
 	*	账单
 	*/
-	class Bill
+	class Bill : public Component
 	{
 	public:
+		Bill();
 		virtual ~Bill();
 	public:
 		/**
 		*	添加项
 		*/
-		virtual void addItem(int nType, int money);
+		void addItem(int nType, int money);
 		/**
 		*	结余
 		*/
-		virtual int getBlance() const;
+		int getBlance() const;
 	};
 }

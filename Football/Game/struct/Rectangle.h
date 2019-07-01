@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Point.h"
+#include "Size.h"
 
 namespace game
 {
@@ -9,9 +10,7 @@ namespace game
 	*/
 	struct Rectangle
 	{
-		Point LeftDown;
-		Point RightDown;
-		Point RightUp;
-		Point LeftUp;
+		Point SourcePoint;
+		Size Size;
 	};
 }

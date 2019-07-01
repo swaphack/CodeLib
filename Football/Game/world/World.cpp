@@ -1,4 +1,6 @@
 #include "World.h"
+#include "HumanSheet.h"
+#include "CountrySheet.h"
 
 using namespace game;
 

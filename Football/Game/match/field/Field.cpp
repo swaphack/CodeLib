@@ -1,25 +1,16 @@
 #include "Field.h"
 
-#include "../struct/Point.h"
-
 using namespace game;
 
+Field::Field()
 
-Field::Field(float width, float height)
-:m_width(width),
-m_height(height)
 {
 
 }
 
-float Field::getWidth() const
+Field::~Field()
 {
-	return m_width;
-}
 
-float Field::getHeight() const
-{
-	return m_height;
 }
 
 bool Field::contains(const Point& point)

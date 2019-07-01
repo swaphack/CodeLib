@@ -21,7 +21,9 @@ bool Component::addComponent(Component* pComponent)
 		return false;
 	}
 
-	return this->getComponentSheet()->addComponent(pComponent);
+	pComponent->getComponentSheet()->setParent(this);
+	
+	return this->getComponentSheet()->addChild(pComponent);
 }
 
 void Component::removeComponent(Component* pComponent)
@@ -31,7 +33,9 @@ void Component::removeComponent(Component* pComponent)
 		return;
 	}
 
-	this->getComponentSheet()->removeComponent(pComponent->getType());
+	pComponent->getComponentSheet()->setParent(nullptr);
+
+	this->getComponentSheet()->removeChild(pComponent->getType());
 }
 
 Component* Component::getComponent(const char* name)
@@ -41,12 +45,21 @@ Component* Component::getComponent(const char* name)
 		return false;
 	}
 
-	return this->getComponentSheet()->getComponent(name);
+	if (this->getComponentSheet()->getParent() != nullptr)
+	{
+		auto item = this->getComponentSheet()->getParent()->getComponent(name);
+		if (item)
+		{
+			return item;
+		}
+	}
+
+	return this->getComponentSheet()->getChild(name);
 }
 
 void Component::removeAllComponents()
 {
-	this->getComponentSheet()->removeAllComponents();
+	this->getComponentSheet()->removeAllChildren();
 }
 
 bool Component::copyTo(Component* pComponent)
@@ -58,11 +71,11 @@ bool Component::copyTo(Component* pComponent)
 	pComponent->getProperty()->setValues(getProperty()->getValues());
 
 	getComponentSheet()->foreach([&](Component* target){
-		Component* pChild = pComponent->getComponentSheet()->getComponent(target->getType());
+		Component* pChild = pComponent->getComponent(target->getType());
 		if (pChild == nullptr)
 		{
 			pChild = target->clone();
-			pComponent->getComponentSheet()->addComponent(pChild);
+			pComponent->addComponent(pChild);
 		}
 		// 复制属性值和子组件
 		target->copyTo(pChild);

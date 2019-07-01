@@ -1,14 +1,14 @@
 #pragma once
 
-#include "../interface/IAction.h"
-#include "../interface/ITimer.h"
+#include "../macros.h"
+#include "../Player.h"
 
 namespace game
 {
 	/**
 	*	无球动作
 	*/
-	class ActionWithoutBall : public IAction, public ITimer
+	class ActionWithoutBall : public Identity, public ITimer
 	{
 	public:
 		ActionWithoutBall();
@@ -17,11 +17,11 @@ namespace game
 		/**
 		*	发起者
 		*/
-		virtual IPerson* getInitiator();
+		virtual Player* getInitiator();
 		/**
 		*	发起者
 		*/
-		void setInitiator(IPerson* pPerson);
+		void setInitiator(Player* pPerson);
 		/**
 		*	执行动作
 		*/
@@ -35,8 +35,8 @@ namespace game
 		*/
 		virtual bool isFinish();
 	private:
-		bool m_bFinish;
-		IPerson* m_pPerson;
+		bool m_bFinish = false;
+		Player* m_pPerson = nullptr;
 	};
 
 	/**

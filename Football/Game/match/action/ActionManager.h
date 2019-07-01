@@ -1,13 +1,12 @@
 #pragma once
 
-#include "../interface/IActionManager.h"
-#include "../interface/ITimer.h"
+#include "../../base/ITimer.h"
 
 #include <set>
 
 namespace game
 {
-	class ActionManager : public IActionManager, public ITimer
+	class ActionManager : public ITimer
 	{
 	public:
 		ActionManager();

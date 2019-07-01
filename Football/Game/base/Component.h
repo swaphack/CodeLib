@@ -26,11 +26,11 @@ namespace game
 #define CREATE_COMPONENT_CLONE(T) \
 	public:\
 	virtual Component* clone() \
-						{\
-	Component* pComponent = new T(); \
-	copyTo(pComponent); \
-	return pComponent; \
-						}
+	{\
+		Component* pComponent = new T(); \
+		copyTo(pComponent); \
+		return pComponent; \
+	}
 		/**
 		*	创建组件获取方法，不存在时，创建一个新的
 		*	@param Type 组件类型
@@ -43,8 +43,7 @@ namespace game
 		Type* value = getComponent<Type>(); \
 		if (!value) \
 		{ \
-			addComponent<Type>(); \
-			value = getComponent<Type>(); \
+			value = addComponent<Type>(); \
 		} \
 		return value; \
 	}
@@ -90,17 +89,17 @@ namespace game
 #define CREATE_COMPONENT_PROPERTY_ENUM(Type, FunName) \
 	public:\
 	void set##FunName(const Type& value)\
-		{ \
+	{ \
 		std::string key = TO_STRING(FunName); \
-		getProperty()->setValue(key, (uint16_t)value);\
-		} \
+		getProperty()->setValue(key, (int16_t)value);\
+	} \
 	Type get##FunName() \
-		{ \
-		uint16_t value;\
+	{ \
+		int16_t value;\
 		std::string key = TO_STRING(FunName); \
 		getProperty()->getValue(key, value); \
 		return (Type)value; \
-		}
+	}
 	public:
 		Component();
 		virtual ~Component();
@@ -113,11 +112,6 @@ namespace game
 		*	创建：获取组件复制体
 		*/
 		CREATE_COMPONENT_CLONE(Component);
-		/**
-		*	获取组件
-		*/
-		template<typename T>
-		T* getComponent();
 		/**
 		*	添加新的组件
 		*/
@@ -145,10 +139,15 @@ namespace game
 		bool copy(Component* pComponent);
 
 		/**
+		*	获取组件
+		*/
+		template<typename T>
+		T* getComponent();
+		/**
 		*	添加组件
 		*/
 		template<typename T>
-		bool addComponent();
+		T* addComponent();
 	protected:
 		/**
 		*	获取组件列表
@@ -160,9 +159,9 @@ namespace game
 		Property* getProperty();
 	private:
 		// 组件列表
-		ComponentSheet* m_pComponentSheet;
+		ComponentSheet* m_pComponentSheet = nullptr;
 		// 属性
-		Property* m_pProperty;
+		Property* m_pProperty = nullptr;
 	};
 
 	template<typename T>
@@ -174,7 +173,7 @@ namespace game
 			return nullptr;
 		}
 
-		Component* pComponent = getComponentSheet()->getComponent(name);
+		Component* pComponent = getComponent(name);
 		if (pComponent == nullptr)
 		{
 			return nullptr;
@@ -185,14 +184,19 @@ namespace game
 
 
 	template<typename T>
-	bool Component::addComponent()
+	T* Component::addComponent()
 	{
-		T* ptr = new T();
-		if (getComponentSheet()->addComponent(ptr))
+		T* ptr = getComponent<T>();
+		if (ptr != nullptr)
 		{
-			return true;
+			return ptr;
+		}
+		ptr = new T();
+		if (addComponent(ptr))
+		{
+			return ptr;
 		}
 		delete ptr;
-		return false;
+		return nullptr;
 	}
 }

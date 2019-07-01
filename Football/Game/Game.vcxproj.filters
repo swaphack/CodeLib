@@ -76,6 +76,9 @@
     <Filter Include="team">
       <UniqueIdentifier>{dc211417-b6d0-47d6-ac70-e195840e6cf5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="object">
+      <UniqueIdentifier>{e570ffb8-a960-4e2b-801c-dbf9f2dd78e8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="struct\Point.h">
@@ -147,23 +150,14 @@
     <ClInclude Include="system\SystemController.h">
       <Filter>system</Filter>
     </ClInclude>
-    <ClInclude Include="people\Body.h">
-      <Filter>people</Filter>
-    </ClInclude>
     <ClInclude Include="people\Coach.h">
       <Filter>people</Filter>
     </ClInclude>
     <ClInclude Include="people\Person.h">
       <Filter>people</Filter>
     </ClInclude>
-    <ClInclude Include="people\Player.h">
-      <Filter>people</Filter>
-    </ClInclude>
     <ClInclude Include="people\Referee.h">
       <Filter>people</Filter>
-    </ClInclude>
-    <ClInclude Include="data\ILevel.h">
-      <Filter>data</Filter>
     </ClInclude>
     <ClInclude Include="mind\Mind.h">
       <Filter>mind</Filter>
@@ -231,14 +225,8 @@
     <ClInclude Include="enum\eSearchCondition.h">
       <Filter>enum</Filter>
     </ClInclude>
-    <ClInclude Include="match\formation\IFormation.h">
-      <Filter>match\formation</Filter>
-    </ClInclude>
     <ClInclude Include="match\tactics\ITactics.h">
       <Filter>match\tactics</Filter>
-    </ClInclude>
-    <ClInclude Include="match\team\ILineUp.h">
-      <Filter>match\team</Filter>
     </ClInclude>
     <ClInclude Include="club\Club.h">
       <Filter>club</Filter>
@@ -279,6 +267,42 @@
     <ClInclude Include="base\IdentityContainer.h">
       <Filter>base</Filter>
     </ClInclude>
+    <ClInclude Include="base\DataTable.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="world\ClubSheet.h">
+      <Filter>world</Filter>
+    </ClInclude>
+    <ClInclude Include="world\LeagueSheet.h">
+      <Filter>world</Filter>
+    </ClInclude>
+    <ClInclude Include="data\Level.h">
+      <Filter>data</Filter>
+    </ClInclude>
+    <ClInclude Include="match\macros.h">
+      <Filter>match</Filter>
+    </ClInclude>
+    <ClInclude Include="match\team\LineUp.h">
+      <Filter>match\team</Filter>
+    </ClInclude>
+    <ClInclude Include="match\formation\Formation.h">
+      <Filter>match\formation</Filter>
+    </ClInclude>
+    <ClInclude Include="match\Ball.h">
+      <Filter>match</Filter>
+    </ClInclude>
+    <ClInclude Include="match\Player.h">
+      <Filter>match</Filter>
+    </ClInclude>
+    <ClInclude Include="object\Object.h">
+      <Filter>object</Filter>
+    </ClInclude>
+    <ClInclude Include="object\Sphere.h">
+      <Filter>object</Filter>
+    </ClInclude>
+    <ClInclude Include="object\Cube.h">
+      <Filter>object</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="constant\Constants.cpp">
@@ -288,13 +312,7 @@
     <ClCompile Include="world\World.cpp">
       <Filter>world</Filter>
     </ClCompile>
-    <ClCompile Include="people\Body.cpp">
-      <Filter>people</Filter>
-    </ClCompile>
     <ClCompile Include="people\Person.cpp">
-      <Filter>people</Filter>
-    </ClCompile>
-    <ClCompile Include="people\Player.cpp">
       <Filter>people</Filter>
     </ClCompile>
     <ClCompile Include="mind\Mind.cpp">
@@ -350,6 +368,39 @@
     </ClCompile>
     <ClCompile Include="world\CountrySheet.cpp">
       <Filter>world</Filter>
+    </ClCompile>
+    <ClCompile Include="base\DataTable.cpp">
+      <Filter>base</Filter>
+    </ClCompile>
+    <ClCompile Include="country\Country.cpp">
+      <Filter>country</Filter>
+    </ClCompile>
+    <ClCompile Include="league\League.cpp">
+      <Filter>league</Filter>
+    </ClCompile>
+    <ClCompile Include="world\ClubSheet.cpp">
+      <Filter>world</Filter>
+    </ClCompile>
+    <ClCompile Include="world\LeagueSheet.cpp">
+      <Filter>world</Filter>
+    </ClCompile>
+    <ClCompile Include="data\Level.cpp">
+      <Filter>data</Filter>
+    </ClCompile>
+    <ClCompile Include="match\Player.cpp">
+      <Filter>match</Filter>
+    </ClCompile>
+    <ClCompile Include="match\Ball.cpp">
+      <Filter>match</Filter>
+    </ClCompile>
+    <ClCompile Include="object\Object.cpp">
+      <Filter>object</Filter>
+    </ClCompile>
+    <ClCompile Include="object\Sphere.cpp">
+      <Filter>object</Filter>
+    </ClCompile>
+    <ClCompile Include="struct\Vector.cpp">
+      <Filter>struct</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

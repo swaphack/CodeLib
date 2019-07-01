@@ -1,7 +1,8 @@
 #pragma once
 
-#include "../interface/IAction.h"
-#include "../interface/ITimer.h"
+#include "../macros.h"
+#include "../Ball.h"
+#include "../Player.h"
 
 namespace game
 {
@@ -11,7 +12,7 @@ namespace game
 	/**
 	*	有球动作
 	*/
-	class ActionWithBall : public IAction, public ITimer
+	class ActionWithBall : public Identity, public ITimer
 	{
 	public:
 		ActionWithBall();
@@ -20,19 +21,19 @@ namespace game
 		/**
 		*	球
 		*/
-		virtual IBall* getBall();
+		virtual Ball* getBall();
 		/**
 		*	球
 		*/
-		void setBall(IBall* pBall);
+		void setBall(Ball* pBall);
 		/**
 		*	发起者
 		*/
-		virtual IPerson* getInitiator();
+		virtual Player* getInitiator();
 		/**
 		*	发起者
 		*/
-		void setInitiator(IPerson* pPerson);
+		void setInitiator(Player* pPerson);
 		/**
 		*	执行动作
 		*/
@@ -47,8 +48,8 @@ namespace game
 		virtual bool isFinish();
 	private:
 		bool m_bFinish;
-		IBall* m_pBall;
-		IPerson* m_pPerson;
+		Ball* m_pBall = nullptr;
+		Player* m_pPerson = nullptr;
 	};
 
 	/**

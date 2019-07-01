@@ -7,7 +7,7 @@ namespace game
 	/**
 	*	ÐÔ±ð
 	*/
-	enum eGender : int8_t
+	enum eGender
 	{
 		/**
 		*	ÄÐ

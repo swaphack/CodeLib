@@ -70,4 +70,10 @@ namespace game
 	{
 
 	}
+
+	template<typename T>
+	Creator<T>::~Creator()
+	{
+
+	}
 }

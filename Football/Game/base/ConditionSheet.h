@@ -1,12 +1,12 @@
 #pragma once
 
-#include "PropertySheet.h"
-#include "Condition.h"
 #include <map>
 #include <vector>
 
 namespace game
 {
+	class DataTable;
+	class ICondition;
 	/**
 	*	条件栏
 	*/
@@ -41,7 +41,7 @@ namespace game
 		*	@param pSearchSheet 查找条件表
 		*	@param pNotMatchSheet 不匹配表
 		*/
-		bool match(const PropertySheet* pSearchSheet, std::vector<ICondition*>& pNotMatchSheet) const;
+		bool match(const DataTable* pSearchSheet, std::vector<ICondition*>& pNotMatchSheet) const;
 	private:
 		std::map<int, ICondition*> m_mConditions;
 	};

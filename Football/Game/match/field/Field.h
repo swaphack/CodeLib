@@ -1,20 +1,31 @@
 #pragma once
-#include "../interface/IField.h"
+
+#include "../macros.h"
 
 namespace game
 {
-	class Field : public IField
+	class Field : public Component
 	{
 	public:
-		Field(float width, float height);
+		Field();
+		virtual ~Field();
 	public:
-		virtual float getWidth() const;
-
-		virtual float getHeight() const;
-
-		virtual bool contains(const Point& point);
+		CREATE_COMPONENT_TYPE();
+		CREATE_COMPONENT_CLONE(Field);
+		/**
+		*	宽度
+		*/
+		CREATE_COMPONENT_PROPERTY(float, Width);
+		/**
+		*	高度
+		*/
+		CREATE_COMPONENT_PROPERTY(float,Height);
+		/**
+		* 是否包含
+		*/
+		bool contains(const Point& point);
 	private:
-		float m_width;
-		float m_height;
+		float m_width = 0;
+		float m_height = 0;
 	};
 }

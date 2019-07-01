@@ -12,7 +12,7 @@ namespace game
 	private:
 		World();
 	public:
-		virtual  ~World();
+		virtual ~World();
 	public:
 		static World* getInstance();
 		/**

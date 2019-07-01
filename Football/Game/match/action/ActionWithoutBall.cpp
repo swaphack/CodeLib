@@ -15,12 +15,12 @@ ActionWithoutBall::~ActionWithoutBall()
 
 }
 
-IPerson* ActionWithoutBall::getInitiator()
+Player* ActionWithoutBall::getInitiator()
 {
 	return m_pPerson;
 }
 
-void ActionWithoutBall::setInitiator(IPerson* pPerson)
+void ActionWithoutBall::setInitiator(Player* pPerson)
 {
 	m_pPerson = pPerson;
 }

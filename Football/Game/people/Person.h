@@ -33,14 +33,14 @@ namespace game
 		/**
 		*	国籍
 		*/
-		CREATE_COMPONENT_PROPERTY(int64_t, Country);
+		CREATE_COMPONENT_PROPERTY(uint64_t, Country);
 		/**
 		*	所属俱乐部
 		*/
-		CREATE_COMPONENT_PROPERTY(int64_t, Club);
+		CREATE_COMPONENT_PROPERTY(uint64_t, Club);
 		/**
 		*	所属队伍
 		*/
-		CREATE_COMPONENT_PROPERTY(int64_t, Team);
+		CREATE_COMPONENT_PROPERTY(uint64_t, Team);
 	};
 }

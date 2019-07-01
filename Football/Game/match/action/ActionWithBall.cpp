@@ -16,22 +16,22 @@ ActionWithBall::~ActionWithBall()
 
 }
 
-IBall* ActionWithBall::getBall()
+Ball* ActionWithBall::getBall()
 {
 	return m_pBall;
 }
 
-void ActionWithBall::setBall(IBall* pBall)
+void ActionWithBall::setBall(Ball* pBall)
 {
 	m_pBall = pBall;
 }
 
-IPerson* ActionWithBall::getInitiator()
+Player* ActionWithBall::getInitiator()
 {
 	return m_pPerson;
 }
 
-void ActionWithBall::setInitiator(IPerson* pPerson)
+void ActionWithBall::setInitiator(Player* pPerson)
 {
 	m_pPerson = pPerson;
 }

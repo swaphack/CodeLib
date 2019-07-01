@@ -84,7 +84,8 @@ namespace game
 		template<typename T>
 		bool getValue(const std::string& nType, T& value)
 		{
-			this->getValue(nType, &value, sizeof(T));
+			uint32_t size = sizeof(T);
+			return this->getValue(nType, &value, size);
 		}
 		/**
 		*	¿ËÂ¡

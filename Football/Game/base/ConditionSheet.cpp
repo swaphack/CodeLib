@@ -1,7 +1,7 @@
 #include "ConditionSheet.h"
 
 #include "Condition.h"
-#include "PropertySheet.h"
+#include "DataTable.h"
 
 using namespace game;
 
@@ -63,7 +63,7 @@ void ConditionSheet::removeAllConditions()
 	m_mConditions.clear();
 }
 
-bool ConditionSheet::match(const PropertySheet* pSearchSheet, std::vector<ICondition*>& pNotMatchSheet) const
+bool ConditionSheet::match(const DataTable* pSearchSheet, std::vector<ICondition*>& pNotMatchSheet) const
 {
 	if (pSearchSheet == nullptr)
 	{
@@ -72,12 +72,12 @@ bool ConditionSheet::match(const PropertySheet* pSearchSheet, std::vector<ICondi
 
 	pNotMatchSheet.clear();
 
-	Property* pCondition;
+	DataRecord* pCondition;
 	bool bRet = true;
 	std::map<int, ICondition*>::const_iterator iter = m_mConditions.begin();
 	while (iter != m_mConditions.end())
 	{
-		pCondition = ((PropertySheet*)pSearchSheet)->getProperty(iter->first);
+		pCondition = ((DataTable*)pSearchSheet)->getRecord(iter->first);
 		if (pCondition)
 		{
 			if (!iter->second->match(pCondition->getValue()))

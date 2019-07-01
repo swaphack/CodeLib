@@ -1,10 +1,23 @@
 #include "TransferMarket.h"
 
-#include "PropertySheet.h"
-#include "ConditionSheet.h"
+#include "../base/DataTable.h"
+#include "../base/ConditionSheet.h"
 
 using namespace game;
 
+TransferMarket::SaleItem::SaleItem()
+{
+
+}
+
+TransferMarket::SaleItem::~SaleItem()
+{
+	if (Condition)
+	{
+		delete Condition;
+	}
+}
+//////////////////////////////////////////////////////////////////////////
 TransferMarket::TransferMarket()
 {
 
@@ -15,7 +28,7 @@ TransferMarket::~TransferMarket()
 	this->clear();
 }
 
-bool TransferMarket::onSale(int nPersonID, ConditionSheet* pCondition, int nClubID)
+bool TransferMarket::onSale(uint64_t nPersonID, ConditionSheet* pCondition, uint64_t nClubID)
 {
 	if (pCondition == nullptr)
 	{
@@ -27,7 +40,7 @@ bool TransferMarket::onSale(int nPersonID, ConditionSheet* pCondition, int nClub
 		return false;
 	}
 
-	PersonSale* pSale = new PersonSale();
+	SaleItem* pSale = new SaleItem();
 	pSale->PersonID = nPersonID;
 	pSale->Condition = pCondition;
 	pSale->ClubID = nClubID;
@@ -37,28 +50,28 @@ bool TransferMarket::onSale(int nPersonID, ConditionSheet* pCondition, int nClub
 	return true;
 }
 
-bool TransferMarket::offShelf(int nPersonID)
+bool TransferMarket::offShelf(uint64_t nPersonID)
 {
 	if (m_mOnSalePerson.find(nPersonID) == m_mOnSalePerson.end())
 	{
 		return false;
 	}
 
-	PersonSale* pSale = m_mOnSalePerson[nPersonID];
+	SaleItem* pSale = m_mOnSalePerson[nPersonID];
 	delete pSale;
 	m_mOnSalePerson.erase(nPersonID);
 
 	return true;
 }
 
-bool TransferMarket::findPerson(const PropertySheet* pCondition, std::vector<int>& targets) const
+bool TransferMarket::findPerson(const DataTable* pCondition, std::vector<uint64_t>& targets) const
 {
 	if (pCondition == nullptr)
 	{
 		return false;
 	}
 
-	std::map<int, PersonSale*>::const_iterator iter = m_mOnSalePerson.begin();
+	auto iter = m_mOnSalePerson.begin();
 	std::vector<ICondition*> pNotMatchSheet;
 	while (iter != m_mOnSalePerson.end())
 	{
@@ -69,12 +82,12 @@ bool TransferMarket::findPerson(const PropertySheet* pCondition, std::vector<int
 		iter++;
 	}
 
-	return true;
+	return !targets.empty();
 }
 
 void TransferMarket::clear()
 {
-	std::map<int, PersonSale*>::iterator iter = m_mOnSalePerson.begin();
+	auto iter = m_mOnSalePerson.begin();
 
 	while (iter != m_mOnSalePerson.end())
 	{

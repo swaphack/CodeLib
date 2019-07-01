@@ -14,12 +14,12 @@ Identity::~Identity()
 
 }
 
-int Identity::getID()
+uint64_t Identity::getID()
 {
 	return _id;
 }
 
-void Identity::setID(int nID)
+void Identity::setID(uint64_t nID)
 {
 	_id = nID;
 }
