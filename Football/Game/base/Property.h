@@ -12,33 +12,27 @@ namespace game
 	*/
 	class Property
 	{
+	#define GET_VALUE(name, Type, value) \
+	{ \
+		void* src = nullptr; \
+		size_t size = 0; \
+		if (!getValue(name, src, size)) \
+		{ \
+			return false; \
+		} \
+		value = *((Type*)src); \
+		return true; \
+	}
 	public:
 		struct ValueItem
 		{
 			void* ptr = nullptr;
 			size_t size = 0;
-			ValueItem()
-			{}
-			ValueItem(void* ptr, size_t size)
-				:ptr(ptr), size(size)
-			{
-			}
-			~ValueItem()
-			{
-				if (ptr)
-				{
-					free(ptr);
-				}
-			}
+			ValueItem();
+			ValueItem(void* ptr, size_t size);
+			~ValueItem();
 
-			ValueItem clone()
-			{
-				ValueItem item;
-				item.size = size;
-				item.ptr = malloc(size);
-				memcpy(item.ptr, this->ptr, this->size);
-				return item;
-			}
+			ValueItem clone();
 		};
 	public:
 		Property();
@@ -70,11 +64,11 @@ namespace game
 		bool getValue(const std::string& nType, float& value);
 		bool getValue(const std::string& nType, double& value);
 		bool getValue(const std::string& nType, std::string& value);
-		bool getValue(const std::string& nType, void* src, size_t& size);
+		bool getValue(const std::string& nType, void* &src, size_t& size);
 
 		void setValue(const std::string& nType, const ValueItem& item);
-		void setValues(const std::map<std::string, ValueItem>& values);
-		const std::map<std::string, ValueItem>& getValues();
+		void setValues(const std::map<std::string, ValueItem*>& values);
+		const std::map<std::string, ValueItem*>& getValues();
 
 		template<typename T>
 		void setValue(const std::string& nType, T value)
@@ -84,14 +78,18 @@ namespace game
 		template<typename T>
 		bool getValue(const std::string& nType, T& value)
 		{
-			uint32_t size = sizeof(T);
-			return this->getValue(nType, &value, size);
+			GET_VALUE(nType, T, value);
 		}
 		/**
 		*	克隆
 		*/
 		Property* clone();
+		/**
+		*	清空
+		*/
+		void clear();
 	private:
-		std::map<std::string, ValueItem> m_mapValues;
+		// 对应的值
+		std::map<std::string, ValueItem*> m_mapValues;
 	};
 }

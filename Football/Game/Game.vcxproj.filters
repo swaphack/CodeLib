@@ -264,9 +264,6 @@
     <ClInclude Include="team\Team.h">
       <Filter>team</Filter>
     </ClInclude>
-    <ClInclude Include="base\IdentityContainer.h">
-      <Filter>base</Filter>
-    </ClInclude>
     <ClInclude Include="base\DataTable.h">
       <Filter>base</Filter>
     </ClInclude>
@@ -302,6 +299,15 @@
     </ClInclude>
     <ClInclude Include="object\Cube.h">
       <Filter>object</Filter>
+    </ClInclude>
+    <ClInclude Include="base\Dictionary.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="base\Hash.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="base\List.h">
+      <Filter>base</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -357,9 +363,6 @@
     <ClCompile Include="market\TransferMarket.cpp">
       <Filter>market</Filter>
     </ClCompile>
-    <ClCompile Include="base\IdentityContainer.cpp">
-      <Filter>base</Filter>
-    </ClCompile>
     <ClCompile Include="finance\Finance.cpp">
       <Filter>finance</Filter>
     </ClCompile>
@@ -401,6 +404,12 @@
     </ClCompile>
     <ClCompile Include="struct\Vector.cpp">
       <Filter>struct</Filter>
+    </ClCompile>
+    <ClCompile Include="object\Cube.cpp">
+      <Filter>object</Filter>
+    </ClCompile>
+    <ClCompile Include="base\List.cpp">
+      <Filter>base</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

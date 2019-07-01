@@ -25,9 +25,9 @@ namespace game
 		// 创建克隆方法,每个继承类都必须调用
 #define CREATE_COMPONENT_CLONE(T) \
 	public:\
-	virtual Component* clone() \
+	virtual T* clone() \
 	{\
-		Component* pComponent = new T(); \
+		T* pComponent = new T(); \
 		copyTo(pComponent); \
 		return pComponent; \
 	}

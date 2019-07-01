@@ -73,9 +73,11 @@
     <ClInclude Include="base\Condition.h" />
     <ClInclude Include="base\ConditionSheet.h" />
     <ClInclude Include="base\DataTable.h" />
+    <ClInclude Include="base\Hash.h" />
     <ClInclude Include="base\Identity.h" />
-    <ClInclude Include="base\IdentityContainer.h" />
+    <ClInclude Include="base\Dictionary.h" />
     <ClInclude Include="base\ITimer.h" />
+    <ClInclude Include="base\List.h" />
     <ClInclude Include="base\Notification.h" />
     <ClInclude Include="base\Property.h" />
     <ClInclude Include="club\Club.h" />
@@ -150,7 +152,7 @@
     <ClCompile Include="base\ConditionSheet.cpp" />
     <ClCompile Include="base\DataTable.cpp" />
     <ClCompile Include="base\Identity.cpp" />
-    <ClCompile Include="base\IdentityContainer.cpp" />
+    <ClCompile Include="base\List.cpp" />
     <ClCompile Include="base\Property.cpp" />
     <ClCompile Include="club\Club.cpp" />
     <ClCompile Include="constant\Constants.cpp" />
@@ -167,6 +169,7 @@
     <ClCompile Include="match\field\Field.cpp" />
     <ClCompile Include="match\Player.cpp" />
     <ClCompile Include="mind\Mind.cpp" />
+    <ClCompile Include="object\Cube.cpp" />
     <ClCompile Include="object\Object.cpp" />
     <ClCompile Include="object\Sphere.cpp" />
     <ClCompile Include="people\Person.cpp" />

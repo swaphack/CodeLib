@@ -4,7 +4,7 @@
 #include <cstdint>
 #include <functional>
 
-#include "../base/IdentityContainer.h"
+#include "../base/Dictionary.h"
 
 namespace game
 {
@@ -12,8 +12,10 @@ namespace game
 	*	创造者
 	*/
 	template<typename T>
-	class Creator : public IdentityContainer
+	class Creator : public Dictionary<uint64_t, T*>
 	{
+	protected:
+
 	public:
 		typedef std::function<void(const T* t)> CallFunc;
 	public:
@@ -24,21 +26,33 @@ namespace game
 		T* generate();
 		// 销毁一个单位
 		bool purge(T* t);
-
-		void foreach(CallFunc func);
+		// 遍历
+		void foreach(const CallFunc& func);
+	protected:
+		virtual void destoryValue(T* value);
 	private:
 		uint64_t _id = 0;
 	};
 
 	template<typename T>
-	void Creator<T>::foreach(CallFunc func)
+	void Creator<T>::destoryValue(T* value)
+	{
+		if (value)
+		{
+			delete value;
+			value = nullptr;
+		}
+	}
+
+	template<typename T>
+	void Creator<T>::foreach(const CallFunc& func)
 	{
 		if (func == nullptr)
 		{
 			return;
 		}
-		this->foreach([](Identity* pID){
-			func(static_cast<T*>(pID));
+		this->foreach([](const T* &pID){
+			func(pID);
 		});
 	}
 
@@ -50,8 +64,12 @@ namespace game
 			return false; 
 		}
 
-		this->remove(t->getID());
-
+		T** value = find(t->getID());
+		if ((value != nullptr) && (*value != nullptr))
+		{
+			this->remove(t->getID());
+			return true;
+		}
 		return false;
 	}
 
@@ -60,7 +78,7 @@ namespace game
 	{
 		T* t = new T();
 		t->setID(++_id);
-		this->add(t);
+		this->add(t->getID(), t);
 		return t;
 	}
 
