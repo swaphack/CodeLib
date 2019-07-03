@@ -2,7 +2,9 @@
 #include "object/Cube.h"
 #include "base/Identity.h"
 #include "base/Dictionary.h"
+#include "base/List.h"
 #include "world/HumanSheet.h"
+#include "base/DataTable.h"
 
 using namespace game;
 
@@ -30,7 +32,7 @@ void testComponent()
 	delete p2;
 }
 
-void testIDContainer()
+void testCollect()
 {
 	int32_t ary[10] = { 1212, 323, 22, 3123, 232, 3623, 2323, 33, 112, 3333 };
 	Dictionary<int32_t, int32_t>* pContainer = new Dictionary<int32_t, int32_t>();
@@ -41,10 +43,22 @@ void testIDContainer()
 
 	pContainer->remove(3623);
 
-	pContainer->foreach([](const int32_t& id){
-		printf("%ld\n", id);
-	});
+	delete pContainer;
 
+	
+	List<uint32_t>* pList = new List<uint32_t>();
+	pList->add(1212);
+	pList->add(121);
+	pList->add(321);
+
+	pList->remove(123);
+	pList->removeAt(1);
+
+	delete pList;
+}
+
+void testContainer()
+{
 	HumanSheet* pHumanSheet = new HumanSheet();
 	Person* pPerson = pHumanSheet->generate();
 	pHumanSheet->purge(pPerson);
@@ -52,8 +66,31 @@ void testIDContainer()
 	delete pHumanSheet;
 }
 
+void testData()
+{
+	RecordHandler func = [](int type, float newValue, float lastValue){
+		printf("%d, %f, %f", type, newValue, lastValue);
+	};
+	DataRecord* pRecord = new DataRecord();
+	pRecord->setType(1233);
+	pRecord->setValue(121322);
+	pRecord->setValueChangedHand(func);
+	pRecord->addValue(12);
+
+	delete pRecord;
+}
+
+void testMemory()
+{
+	class A { int a = 1; };
+	struct B { int b = 1; };
+
+	printf("%d", sizeof(A));
+	printf("%d", sizeof(B));
+}
+
 int main(int argc, char** argv)
 {
-	testIDContainer();
+	testMemory();
 	return 0;
 }

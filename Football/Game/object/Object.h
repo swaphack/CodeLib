@@ -7,7 +7,6 @@ namespace game
 {
 	/**
 	*	物体
-	*	以脚底为中心
 	*/
 	class Object : public Component
 	{
@@ -21,14 +20,14 @@ namespace game
 		/**
 		*	位置
 		*/
-		CREATE_COMPONENT_PROPERTY(Vector, Position);
+		CREATE_COMPONENT_PROPERTY_CLASS(Vector, Position);
 		/**
 		*	缩放
 		*/
-		CREATE_COMPONENT_PROPERTY(Vector, Scale);
+		CREATE_COMPONENT_PROPERTY_CLASS(Vector, Scale);
 		/**
 		*	体积
 		*/
-		CREATE_COMPONENT_PROPERTY(Vector, Volume);
+		CREATE_COMPONENT_PROPERTY_CLASS(Vector, Volume);
 	};
 }

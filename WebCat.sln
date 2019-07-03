@@ -80,6 +80,9 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Football", "Football", "{F9FF5C4B-BD5C-41E5-A42F-85FE9EC75D52}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Game", "Football\Game\Game.vcxproj", "{3C23CE89-68C9-4776-AD03-1F48CE28C322}"
+	ProjectSection(ProjectDependencies) = postProject
+		{BEAC5C99-0F40-47AE-8093-1B5F8C5FF6BA} = {BEAC5C99-0F40-47AE-8093-1B5F8C5FF6BA}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SimpleGame", "Football\SimpleGame\SimpleGame.vcxproj", "{5527631C-693F-47A6-B080-CA13E227CB28}"
 EndProject

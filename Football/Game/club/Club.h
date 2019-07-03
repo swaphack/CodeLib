@@ -5,9 +5,12 @@
 #include "../base/Component.h"
 #include "../enum/eProperty.h"
 #include "../finance/Finance.h"
+#include "../base/Dictionary.h"
+#include "../people/Person.h"
 
 namespace game
 {
+	class Person;
 	/**
 	*	æ„¿÷≤ø
 	*/

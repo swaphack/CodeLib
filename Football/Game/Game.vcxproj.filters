@@ -231,9 +231,6 @@
     <ClInclude Include="club\Club.h">
       <Filter>club</Filter>
     </ClInclude>
-    <ClInclude Include="cup\ICup.h">
-      <Filter>cup</Filter>
-    </ClInclude>
     <ClInclude Include="finance\Finance.h">
       <Filter>finance</Filter>
     </ClInclude>
@@ -308,6 +305,12 @@
     </ClInclude>
     <ClInclude Include="base\List.h">
       <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="market\SaleItem.h">
+      <Filter>market</Filter>
+    </ClInclude>
+    <ClInclude Include="cup\Cup.h">
+      <Filter>cup</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -408,8 +411,8 @@
     <ClCompile Include="object\Cube.cpp">
       <Filter>object</Filter>
     </ClCompile>
-    <ClCompile Include="base\List.cpp">
-      <Filter>base</Filter>
+    <ClCompile Include="market\SaleItem.cpp">
+      <Filter>market</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

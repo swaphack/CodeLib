@@ -47,18 +47,17 @@ void createVideoImage(const AVFrame* frame, AVCodecContext* pCodecContext, Video
 
 void createVideoAudio(const AVFrame* frame, AVCodecContext* pCodecContext, VideoAudioClip* audio)
 {
-	if (frame == nullptr || pCodecContext == nullptr || audio == nullptr)
+	int frameBufSize = av_samples_get_buffer_size(NULL, pCodecContext->channels, frame->nb_samples, pCodecContext->sample_fmt, 1);
+	int eachChannelSize = frame->linesize[0];
+	uint8_t* frameBuf = new uint8_t[frameBufSize];
+	for (int ch = 0; ch < pCodecContext->channels; ch++)
 	{
-		return;
+		for (int i = 0; i < frame->nb_samples; i++)
+		{
+			frameBuf[i * 2 + ch] = frame->data[ch][i];
+		}
 	}
-
-	int dataSize = av_get_bytes_per_sample(pCodecContext->sample_fmt);
-
-	if (dataSize <= 0)
-	{
-		audio->init(nullptr, 0);
-		return;
-	}
+	
 
 	FMOD_SOUND_FORMAT format = FMOD_SOUND_FORMAT_NONE;
 	if (frame->format == AV_SAMPLE_FMT_U8 || frame->format == AV_SAMPLE_FMT_U8P)
@@ -80,17 +79,6 @@ void createVideoAudio(const AVFrame* frame, AVCodecContext* pCodecContext, Video
 	else
 	{
 		format = FMOD_SOUND_FORMAT_BITSTREAM;
-	}
-
-	int frameBufSize = frame->nb_samples * dataSize * pCodecContext->channels;
-	uint8_t* frameBuf = new uint8_t[frameBufSize];
-
-	for (int i = 0; i < frame->nb_samples; i++)
-	{
-		for (int ch = 0; ch < pCodecContext->channels; ch++)
-		{
-			memcpy(frameBuf + i * dataSize * (ch + 1), frame->data[ch] + dataSize * i, dataSize);
-		}
 	}
 
 	audio->init(frameBuf, frameBufSize, pCodecContext->channels, 1, format, frame->sample_rate, frame->nb_samples);
@@ -303,12 +291,15 @@ void FFmpeg::initFFmpeg(const char* path)
 	if (!s_bInitFFmpeg)
 	{
 		av_register_all();
-		s_bInitFFmpeg = true;
+		s_bInitFFmpeg = true; 
 	}
 
 	disposeFFM();
 
-	avformat_open_input(&_formatContext, path, 0, nullptr);
+	if (avformat_open_input(&_formatContext, path, 0, nullptr) < 0)
+	{
+		return;
+	}
 
 	if (avformat_find_stream_info(_formatContext, nullptr) < 0)
 	{
@@ -323,6 +314,7 @@ void FFmpeg::getStreamIndex(int type, int& streamIndex)
 	{
 		return;
 	}
+	/*
 	for (uint32 i = 0; i < _formatContext->nb_streams; i++)
 	{
 		if ((_formatContext->streams[i])->codec->codec_type == type)
@@ -331,20 +323,29 @@ void FFmpeg::getStreamIndex(int type, int& streamIndex)
 			break;
 		}
 	}
-
-	if (streamIndex == -1)
+	if (streamIndex < 0)
 	{
 		return;
 	}
-
 	AVCodecContext* codecContext = _formatContext->streams[streamIndex]->codec;
 	AVCodec* codec = avcodec_find_decoder(codecContext->codec_id);
 	if (codec == nullptr)
 	{
 		return;
 	}
+	*/
+	AVCodec* codec = nullptr;
+	streamIndex = av_find_best_stream(_formatContext, (AVMediaType)type, -1, -1, &codec, 0);
+	if (streamIndex < 0)
+	{
+		return;
+	}
 
-	avcodec_open2(codecContext, codec, nullptr);
+	AVCodecContext* codecContext = _formatContext->streams[streamIndex]->codec;
+	if (avcodec_open2(codecContext, codec, nullptr) < 0)
+	{
+		return;
+	}
 }
 
 

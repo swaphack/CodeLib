@@ -595,9 +595,9 @@ my_bool my_thread_init(void);
 void my_thread_end(void);
 
 #ifdef MY_GLOBAL_INCLUDED
-ulong STDCALL net_field_length(uchar **packet);
-my_ulonglong net_field_length_ll(uchar **packet);
-uchar *net_store_length(uchar *pkg, ulonglong length);
+ulong STDCALL net_field_length(uint8 **packet);
+my_ulonglong net_field_length_ll(uint8 **packet);
+uint8 *net_store_length(uint8 *pkg, ulonglong length);
 unsigned int net_length_size(ulonglong num);
 #endif
 

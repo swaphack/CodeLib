@@ -55,7 +55,7 @@ namespace render
 		void initFFmpeg(const char* path);
 		// 卸载ffm
 		void disposeFFM();
-
+		// 获取文件中不同资源所在的位置
 		void getStreamIndex(int type, int& streamIndex);
 	private:
 		// 视频流位置
@@ -70,6 +70,7 @@ namespace render
 		VideoAudioClip _audio;
 		// 文本
 		std::string _text;
+		/// 格式上下文
 		AVFormatContext* _formatContext;
 		// 是否初始化ffm
 		static bool s_bInitFFmpeg;

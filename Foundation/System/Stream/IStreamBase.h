@@ -20,8 +20,9 @@ namespace sys
 		virtual uint64 readUInt64() = 0;
 		virtual float readFloat() = 0;
 		virtual double readDouble() = 0;
-		virtual char* readString(int32 size) = 0;
-		virtual char* readRemain(int32& size) = 0;
+		virtual char* readString(ss_t size) = 0;
+		virtual char* readRemain(ss_t& size) = 0;
+		virtual std::string readString() = 0;
 	};
 
 	// 流数据写入接口
@@ -41,7 +42,8 @@ namespace sys
 		virtual void writeFloat(float data) = 0;
 		virtual void writeDouble(double data) = 0;
 		virtual void writeString(const char* data) = 0;
-		virtual void writeString(char* data, int32 size) = 0;
+		virtual void writeString(char* data, ss_t size) = 0;
+		virtual void writeString(const std::string& data) = 0;
 	};
 
 	// 流数据接口

@@ -5,13 +5,13 @@
 
 using namespace sys;
 
-StreamWriter::StreamWriter(int32 size)
+StreamWriter::StreamWriter(ss_t size)
 :Stream(new StreamBaseRef())
 {
 	this->realloct(size);
 }
 
-StreamWriter::StreamWriter(const char* data, int32 size)
+StreamWriter::StreamWriter(const char* data, ss_t size)
 : Stream(new StreamBaseRef())
 {
 	this->setData(data, size);
@@ -81,7 +81,7 @@ void StreamWriter::writeString(const char* data )
 	this->writeString((char*)data, size);
 }
 
-void StreamWriter::writeString( char* data, int32 size )
+void StreamWriter::writeString(char* data, ss_t size)
 {
 	while (getCursor() + size > this->getCapacity())
 	{
@@ -91,6 +91,12 @@ void StreamWriter::writeString( char* data, int32 size )
 	memcpy(getPtr(), data, size);
 
 	setCursorAndLength(getCursor() + size);
+}
+
+void StreamWriter::writeString(const std::string& data)
+{
+	this->writeInt32(data.size());
+	this->writeString((char*)data.c_str(), data.size());
 }
 
 void StreamWriter::setCursorAndLength(ss_t pos)

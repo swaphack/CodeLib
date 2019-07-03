@@ -27,7 +27,7 @@ void WndRender::show()
 	//testSphereModel();
 	//testText();
 	//testMask();
-	//testMedia();
+	testMedia();
 	
 	//testAnimation();
 	//testParticle();
@@ -36,8 +36,8 @@ void WndRender::show()
 	//testEditBox();
 	//testImages();
 	//testString();
-	testPixelImage();
-	testSequenceFrame();
+	//testPixelImage();
+	//testSequenceFrame();
 
 	//testFog();
 	//addLight();
@@ -226,7 +226,7 @@ void WndRender::testText()
 
 void WndRender::testMask()
 {
-	uchar opacity = 255;
+	uint8_t opacity = 255;
 
 	CtrlMask* pMask = CREATE_NODE(CtrlMask);
 	pMask->setOpacity(opacity);

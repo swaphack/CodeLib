@@ -6,6 +6,7 @@
 namespace script
 {
 	class Document;
+	class WordDocument;
 	// Ω≈±æ¥¶¿Ì
 	class Script
 	{

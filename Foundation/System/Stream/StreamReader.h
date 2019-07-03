@@ -22,8 +22,9 @@ namespace sys
 		virtual uint64 readUInt64();
 		virtual float readFloat();
 		virtual double readDouble();
-		virtual char* readString(int32 size);
-		virtual char* readRemain(int32& size);
+		virtual char* readString(ss_t size);
+		virtual char* readRemain(ss_t& size);
+		virtual std::string readString();
 	public:
 		template<typename T>
 		T read();

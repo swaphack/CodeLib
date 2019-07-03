@@ -45,9 +45,12 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <BrowseInformation>true</BrowseInformation>
+      <AdditionalIncludeDirectories>$(ProjectDir)/../../Foundation/System/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(OutDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>System.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <Bscmake>
       <PreserveSbr>true</PreserveSbr>
@@ -84,7 +87,7 @@
     <ClInclude Include="constant\Constants.h" />
     <ClInclude Include="contract\Contract.h" />
     <ClInclude Include="country\Country.h" />
-    <ClInclude Include="cup\ICup.h" />
+    <ClInclude Include="cup\Cup.h" />
     <ClInclude Include="data\Level.h" />
     <ClInclude Include="enum\eInterval.h" />
     <ClInclude Include="enum\eJob.h" />
@@ -102,6 +105,7 @@
     <ClInclude Include="finance\Finance.h" />
     <ClInclude Include="interface\eSearchCondition.h" />
     <ClInclude Include="league\League.h" />
+    <ClInclude Include="market\SaleItem.h" />
     <ClInclude Include="market\TransferMarket.h" />
     <ClInclude Include="match\action\ActionManager.h" />
     <ClInclude Include="match\action\ActionWithBall.h" />
@@ -152,7 +156,6 @@
     <ClCompile Include="base\ConditionSheet.cpp" />
     <ClCompile Include="base\DataTable.cpp" />
     <ClCompile Include="base\Identity.cpp" />
-    <ClCompile Include="base\List.cpp" />
     <ClCompile Include="base\Property.cpp" />
     <ClCompile Include="club\Club.cpp" />
     <ClCompile Include="constant\Constants.cpp" />
@@ -161,6 +164,7 @@
     <ClCompile Include="finance\Finance.cpp" />
     <ClCompile Include="league\League.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="market\SaleItem.cpp" />
     <ClCompile Include="market\TransferMarket.cpp" />
     <ClCompile Include="match\action\ActionManager.cpp" />
     <ClCompile Include="match\action\ActionWithBall.cpp" />

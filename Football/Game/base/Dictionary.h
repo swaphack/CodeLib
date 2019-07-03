@@ -9,7 +9,6 @@ namespace game
 {
 	/**
 	*	字典
-	*	管理的释放
 	*/
 	template<typename Key, typename Value>
 	class Dictionary
@@ -51,33 +50,33 @@ namespace game
 		Dictionary();
 		virtual ~Dictionary();
 	public:
-		/*
+		/**
 		*	添加项
 		*/
 		void add(const Key& id, const Value& value);
 
-		/*
+		/**
 		*	移除项
 		*/
 		void remove(const Key& id);
-		/*
+		/**
 		*	查找项
 		*/
 		Value* find(const Key& id);
-		/*
+		/**
 		*	清空
 		*/
 		void clear();
-		/*
+		/**
 		*	数量
 		*/
 		uint64_t count();
-		/*
+		/**
 		*	遍历
 		*/
-		void foreach(const std::function<void(const Value&)>& func);
+		void foreach(const std::function<void(Key, Value)>& func);
 	protected:
-		/*
+		/**
 		*	遍历
 		*/
 		void foreach(Node* pNode, const std::function<void(Node*)>& func);
@@ -138,14 +137,14 @@ namespace game
 	}
 
 	template<typename Key, typename Value>
-	void Dictionary<Key, Value>::foreach(const std::function<void(const Value&)>& func)
+	void Dictionary<Key, Value>::foreach(const std::function<void(Key, Value)>& func)
 	{
 		if (func == nullptr)
 		{
 			return;
 		}
 		foreach(m_pRoot, [func](Node* pNode){
-			func(pNode->value);
+			func(pNode->key, pNode->value);
 		});
 	}
 
@@ -174,6 +173,7 @@ namespace game
 		}
 
 		m_pRoot = nullptr;
+		m_nCount = 0;
 	}
 
 	template<typename Key, typename Value>

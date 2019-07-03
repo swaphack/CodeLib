@@ -5,7 +5,7 @@
 #include "ComponentSheet.h"
 
 #include <typeinfo>
-
+#include <type_traits>
 namespace game
 {
 	/**
@@ -26,11 +26,11 @@ namespace game
 #define CREATE_COMPONENT_CLONE(T) \
 	public:\
 	virtual T* clone() \
-	{\
+			{\
 		T* pComponent = new T(); \
 		copyTo(pComponent); \
 		return pComponent; \
-	}
+			}
 		/**
 		*	创建组件获取方法，不存在时，创建一个新的
 		*	@param Type 组件类型
@@ -39,14 +39,14 @@ namespace game
 #define CREATE_COMPONENT_FUNCTION(Type, FunName) \
 	public:\
 	Type* get##FunName() \
-	{ \
+			{ \
 		Type* value = getComponent<Type>(); \
 		if (!value) \
-		{ \
+						{ \
 			value = addComponent<Type>(); \
-		} \
+						} \
 		return value; \
-	}
+			}
 		/**
 		*	创建组件获取方法
 		*	@param Type 组件类型
@@ -55,10 +55,10 @@ namespace game
 #define GET_COMPONENT_FUNCTION(Type, FunName) \
 	public:\
 	Type* get##FunName() \
-	{ \
+			{ \
 	Type* value = getComponent<Type>(); \
 	return value; \
-	}
+			}
 
 		// 将x变成字符串（如果x是宏也不展开）
 #define TO_STRING(x)   #x
@@ -72,17 +72,16 @@ namespace game
 	void set##FunName(const Type& value)\
 	{ \
 		std::string key = TO_STRING(FunName); \
-		getProperty()->setValue(key, value);\
+		getProperty()->setValue<Type>(key, value);\
 	} \
 	Type get##FunName() \
 	{ \
-		Type value;\
+		Type value = 0;\
 		std::string key = TO_STRING(FunName); \
-		getProperty()->getValue(key, value); \
-		return value; \
+		return getProperty()->getValue(key, value); \
 	}
 		/**
-		*	创建组件获取属性和设置属性方法, 保存为实数类型
+		*	创建组件获取属性和设置属性方法, 枚举
 		*	@param FunName 函数名称
 		*	@param Type 类型
 		*/
@@ -95,11 +94,45 @@ namespace game
 	} \
 	Type get##FunName() \
 	{ \
-		int16_t value;\
+		int16_t value = 0;\
 		std::string key = TO_STRING(FunName); \
-		getProperty()->getValue(key, value); \
-		return (Type)value; \
+		return (Type)getProperty()->getValue(key, value); \
 	}
+		/**
+		*	创建组件获取属性和设置属性方法, 指针
+		*	@param FunName 函数名称
+		*	@param Type 类型
+		*/
+#define CREATE_COMPONENT_PROPERTY_POINT(Type, FunName) \
+	public:\
+	void set##FunName(const Type& value)\
+		{ \
+		std::string key = TO_STRING(FunName); \
+		getProperty()->setValue(key, (void*)&value);\
+		} \
+	Type get##FunName() \
+		{ \
+		std::string key = TO_STRING(FunName); \
+		return getProperty()->getClass<Type>(key); \
+		}
+		/**
+		*	创建组件获取属性和设置属性方法, 指针
+		*	@param FunName 函数名称
+		*	@param Type 类型
+		*/
+#define CREATE_COMPONENT_PROPERTY_CLASS(Type, FunName) \
+	public:\
+	void set##FunName(const Type& value)\
+			{ \
+		std::string key = TO_STRING(FunName); \
+		getProperty()->setValue<Type>(key, value);\
+			} \
+	Type& get##FunName() \
+			{ \
+		Type value;\
+		std::string key = TO_STRING(FunName); \
+		return getProperty()->getClass<Type>(key); \
+			}
 	public:
 		Component();
 		virtual ~Component();
@@ -148,15 +181,16 @@ namespace game
 		*/
 		template<typename T>
 		T* addComponent();
+
+		/**
+		*	获取属性
+		*/
+		Property* getProperty();
 	protected:
 		/**
 		*	获取组件列表
 		*/
 		ComponentSheet* getComponentSheet();
-		/**
-		*	获取属性
-		*/
-		Property* getProperty();
 	private:
 		// 组件列表
 		ComponentSheet* m_pComponentSheet = nullptr;

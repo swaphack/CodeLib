@@ -70,7 +70,7 @@ double StreamReader::readDouble()
 	return this->read<double>();
 }
 
-char* StreamReader::readString( int32 size )
+char* StreamReader::readString(ss_t size)
 {
 	if (getCursor() + size > this->getLength())
 	{
@@ -84,7 +84,14 @@ char* StreamReader::readString( int32 size )
 	return ptr;
 }
 
-char* StreamReader::readRemain( int32& size )
+std::string StreamReader::readString()
+{
+	ss_t size = readInt32();
+	char* pszText = readString(size);
+	return std::string(pszText, size);
+}
+
+char* StreamReader::readRemain(ss_t& size)
 {
 	size = this->getLength() - this->getCursor();
 
