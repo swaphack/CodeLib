@@ -47,13 +47,8 @@ void Scope::addChild(Scope* pChild)
 	m_pChildren[pChild->getName()] = pChild;
 }
 
-void Scope::removeChild(const char* name)
+void Scope::removeChild(const std::string& name)
 {
-	if (name == nullptr)
-	{
-		return;
-	}
-
 	Scope* pScope = getChild(name);
 	if (pScope == nullptr)
 	{
@@ -77,13 +72,8 @@ void Scope::removeAllChildren()
 	m_pChildren.clear();
 }
 
-Scope* Scope::getChild(const char* name)
+Scope* Scope::getChild(const std::string& name)
 {
-	if (name == nullptr)
-	{
-		return nullptr;
-	}
-
 	Scopes::iterator iter = m_pChildren.find(name);
 	if (iter == m_pChildren.end())
 	{
@@ -103,13 +93,8 @@ void Scope::setParent(Scope* pParent)
 	m_pParent = pParent;
 }
 
-Variable* Scope::getMember(const char* name)
+Variable* Scope::getMember(const std::string& name)
 {
-	if (name == nullptr)
-	{
-		return nullptr;
-	}
-
 	Variable* pVar = m_pMembers->getMember(name);
 	if (pVar)
 	{
@@ -124,7 +109,7 @@ Variable* Scope::getMember(const char* name)
 	return nullptr;
 }
 
-void Scope::setHandler(ScopeHandler handler)
+void Scope::setHandler(const ScopeHandler& handler)
 {
 	m_pHandler = handler;
 }

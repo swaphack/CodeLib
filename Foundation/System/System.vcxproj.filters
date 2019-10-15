@@ -759,5 +759,8 @@
     <ClCompile Include="Base\CharsetHelper.cpp">
       <Filter>Base</Filter>
     </ClCompile>
+    <ClCompile Include="Type\Bit.cpp">
+      <Filter>Type</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

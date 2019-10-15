@@ -26,13 +26,8 @@ Struct* Struct::getParent()
 	return this->m_pParent;
 }
 
-Variable* Struct::getVariable(const char* name)
+Variable* Struct::getVariable(const std::string& name)
 {
-	if (name == nullptr)
-	{
-		return nullptr;
-	}
-
 	Variable* pVar = m_pMembers->getMember(name);
 	if (pVar)
 	{
@@ -52,13 +47,8 @@ Members* Struct::getMembers()
 	return m_pMembers;
 }
 
-bool Struct::callFunction(const char* pFuncName, std::vector<Variable*>& inputs, std::vector<Variable*>& outputs)
+bool Struct::callFunction(const std::string& pFuncName, std::vector<Variable*>& inputs, std::vector<Variable*>& outputs)
 {
-	if (pFuncName == nullptr)
-	{
-		return false;
-	}
-
 	if (Variable::callFunction(pFuncName, inputs, outputs))
 	{
 		return true;

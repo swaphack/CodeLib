@@ -11,11 +11,10 @@ namespace script
 	// 操作符处理
 	class SymbolHandler
 	{
-	private:
-		SymbolHandler();
-		~SymbolHandler();
 	public:
-		static SymbolHandler* getInstance();
+		SymbolHandler();
+		virtual ~SymbolHandler();
+	public:
 		// 添加解析
 		void addSymbolDelegate(SymbolDelegate* opeartor);
 		// 移除解析
@@ -26,7 +25,7 @@ namespace script
 		SymbolDelegate* getSymbolDelegate(const char* name);
 		SymbolDelegate* getSymbolDelegate(const std::string& name);
 		// 加载配置文件
-		bool load(const char* filepath);
+		bool load(const std::string& filepath);
 	private:
 		typedef std::map<std::string, SymbolDelegate*> SymbolDelegates;
 		// 符号处理委托

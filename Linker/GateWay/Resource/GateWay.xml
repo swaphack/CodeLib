@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
     <server>
-        <local ip="10.0.22.63" port="9547" />
-        <gameserver ip="10.0.22.63" port="9548" />
-        <httpserver ip="10.0.22.63" port="9549" />
+        <local ip="10.15.122.63" port="9547" />
+        <gameserver ip="10.15.122.63" port="9548" />
+        <httpserver ip="10.15.122.63" port="9549" />
     </server>
     <resource>
         <websit path="E:/website" />

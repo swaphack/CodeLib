@@ -22,21 +22,21 @@ namespace script
 		// 获取子域
 		void addChild(Scope* pChild);
 		// 移除子域
-		void removeChild(const char* name);
+		void removeChild(const std::string& name);
 		// 移除所有子域
 		void removeAllChildren();
 		// 获取子域
-		Scope* getChild(const char* name);
+		Scope* getChild(const std::string& name);
 
 		// 父域
 		Scope* getParent();
 		void setParent(Scope* pParent);
 
 		// 获取局部变量
-		Variable* getMember(const char* name);
+		Variable* getMember(const std::string& name);
 
 		// 设置块执行逻辑
-		void setHandler(ScopeHandler handler);
+		void setHandler(const ScopeHandler& handler);
 
 		// 调用
 		virtual bool call(std::vector<Variable*>& inputs, std::vector<Variable*>& outputs);
@@ -48,9 +48,9 @@ namespace script
 		// 子域
 		Scopes m_pChildren;
 		// 局部变量
-		Members* m_pMembers;
+		Members* m_pMembers = nullptr;
 		// 父类
-		Scope* m_pParent;
+		Scope* m_pParent = nullptr;
 		// 块执行逻辑
 		ScopeHandler m_pHandler;
 	};

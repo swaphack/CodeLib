@@ -30,6 +30,10 @@ Script::Script()
 :_mainDocument(nullptr)
 {
 	_wordDocument = new WordDocument();
+	_worldFilter = new WordFilter();
+	_symbolHandler = new SymbolHandler();
+
+	_worldFilter->addFilter(new TextFilter(_wordDocument->getWordSet()));
 }
 
 Script::~Script()
@@ -38,6 +42,16 @@ Script::~Script()
 	if (_wordDocument)
 	{
 		delete _wordDocument;
+	}
+
+	if (_worldFilter)
+	{
+		delete _worldFilter;
+	}
+
+	if (_symbolHandler)
+	{
+		delete _symbolHandler;
 	}
 }
 
@@ -51,13 +65,8 @@ Script* Script::getInstance()
 	return s_script;
 }
 
-bool Script::initWordSet(const char* filepath)
+bool Script::initWordSet(const std::string& filepath)
 {
-	if (filepath == nullptr)
-	{
-		return false;
-	}
-
 	_wordDocument->getWordSet()->clear();
 	if (!_wordDocument->loadFile(filepath))
 	{
@@ -66,30 +75,18 @@ bool Script::initWordSet(const char* filepath)
 	return true;
 }
 
-bool Script::initWordFilter()
-{
-	WordFilters::getInstance()->addFilter(new TextFilter(_wordDocument->getWordSet()));
-
-	return true;
-}
-
-bool Script::initSysmbolRule(const char* filepath)
+bool Script::initSysmbolRule(const std::string& filepath)
 {
 	if (filepath == nullptr)
 	{
 		return false;
 	}
 
-	return SymbolHandler::getInstance()->load(filepath);
+	return _symbolHandler->load(filepath);
 }
 
-bool Script::load(const char* filepath)
+bool Script::load(const std::string& filepath)
 {
-	if (filepath == nullptr)
-	{
-		return false;
-	}
-
 	Document* pDoc = complieFile(filepath);
 	if (pDoc == nullptr)
 	{
@@ -103,13 +100,8 @@ bool Script::load(const char* filepath)
 	return true;
 }
 
-bool Script::import(const char* filepath)
+bool Script::import(const std::string& filepath)
 {
-	if (filepath == nullptr)
-	{
-		return false;
-	}
-
 	Document* pDoc = complieFile(filepath);
 	if (pDoc == nullptr)
 	{
@@ -126,9 +118,9 @@ void Script::run()
 
 }
 
-void Script::addDocument(const char* name, Document* document)
+void Script::addDocument(const std::string& name, Document* document)
 {
-	if (name == nullptr || document == nullptr)
+	if (document == nullptr)
 	{
 		return;
 	}
@@ -138,13 +130,8 @@ void Script::addDocument(const char* name, Document* document)
 	_documents[name] = document;
 }
 
-void Script::removeDocument(const char* name)
+void Script::removeDocument(const std::string& name)
 {
-	if (name == nullptr)
-	{
-		return;
-	}
-
 	std::map<std::string, Document*>::iterator iter = _documents.find(name);
 	
 	if (iter == _documents.end())
@@ -170,7 +157,7 @@ void Script::removeAllDocuments()
 	_documents.clear();
 }
 
-Document* Script::complieFile(const char* filepath)
+Document* Script::complieFile(const std::string& filepath)
 {
 	Document* pDoc = new CompilerDocument();
 	if (!pDoc->loadFile(filepath))

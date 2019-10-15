@@ -49,7 +49,7 @@ namespace script
 		// 全局函数
 		Functions m_pFunctions;
 		// 主域
-		Scope* m_pRoot;
+		Scope* m_pRoot = nullptr;
 	};
 
 	// 获取环境

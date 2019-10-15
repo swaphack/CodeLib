@@ -25,13 +25,8 @@ void Members::addMember(Variable* pVariable)
 	m_varMembers[pVariable->getName()] = pVariable;
 }
 
-void Members::removeMember(const char* name)
+void Members::removeMember(const std::string& name)
 {
-	if (name == nullptr)
-	{
-		return;
-	}
-
 	VarMembers::iterator iter = m_varMembers.find(name);
 	if (iter == m_varMembers.end())
 	{
@@ -40,11 +35,6 @@ void Members::removeMember(const char* name)
 
 	iter->second->dispose();
 	m_varMembers.erase(iter);
-}
-
-void Members::removeMember(const std::string& name)
-{
-	removeMember(name.c_str());
 }
 
 void Members::removeAllMembers()
@@ -59,7 +49,7 @@ void Members::removeAllMembers()
 	m_varMembers.clear();
 }
 
-Variable* Members::getMember(const char* name)
+Variable* Members::getMember(const std::string& name)
 {
 	if (name == nullptr)
 	{
@@ -73,11 +63,6 @@ Variable* Members::getMember(const char* name)
 	}
 
 	return nullptr;
-}
-
-Variable* Members::getMember(const std::string& name)
-{
-	return getMember(name.c_str());
 }
 
 std::vector<std::string> Members::keys()

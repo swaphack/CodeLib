@@ -14,7 +14,7 @@ namespace script
 		// 无类型
 		E_DATATYPE_NONE,
 		// 变量
-		E_DATATYPE_Variable,
+		E_DATATYPE_VARIABLE,
 		// 实数
 		E_DATATYPE_REAL,
 		// 字符串
@@ -45,13 +45,13 @@ namespace script
 		// 添加函数,重名移除
 		void addFunction(Function* pFunction);
 		// 移除函数
-		void removeFunction(const char* name);
+		void removeFunction(const std::string& name);
 		// 移除所有函数
 		void removeAllFunctions();
 		// 获取函数
-		Function* getFunction(const char* name);
+		Function* getFunction(const std::string& name);
 		// 调用函数
-		virtual bool callFunction(const char* pFuncName, std::vector<Variable*>& inputs, std::vector<Variable*>& outputs);
+		virtual bool callFunction(const std::string& pFuncName, std::vector<Variable*>& inputs, std::vector<Variable*>& outputs);
 		// 销毁
 		virtual void dispose();
 	public: // 重写

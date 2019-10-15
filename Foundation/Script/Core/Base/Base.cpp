@@ -24,17 +24,14 @@ void Base::setAccessType(int nType)
 	m_nAccessType = nType;
 }
 
-const char* Base::getName()
+const std::string& Base::getName()
 {
-	return m_strName.c_str();
+	return m_strName;
 }
 
-void Base::setName(const char* name)
+void Base::setName(const std::string& name)
 {
-	if (name)
-	{
-		m_strName = name;
-	}
+	m_strName = name;
 }
 
 void Base::dispose()

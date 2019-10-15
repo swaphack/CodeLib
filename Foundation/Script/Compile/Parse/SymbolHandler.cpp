@@ -126,15 +126,10 @@ SymbolDelegate* SymbolHandler::getSymbolDelegate(const std::string& name)
 	return getSymbolDelegate(name.c_str());
 }
 
-bool SymbolHandler::load(const char* filepath)
+bool SymbolHandler::load(const std::string& filepath)
 {
-	if (filepath == nullptr)
-	{
-		return false;
-	}
-
 	tinyxml2::XMLDocument document;
-	tinyxml2::XMLError error = document.LoadFile(filepath);
+	tinyxml2::XMLError error = document.LoadFile(filepath.c_str());
 	if (error != tinyxml2::XML_SUCCESS)
 	{
 		return false;

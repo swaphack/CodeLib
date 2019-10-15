@@ -14,7 +14,7 @@ namespace script
 	{
 	public:
 		Scanner();
-		~Scanner();
+		virtual ~Scanner();
 	public:
 		void setWordSet(WordSet* wordSet);
 		// ä¯ÀÀÎÄ±¾

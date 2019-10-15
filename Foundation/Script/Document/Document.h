@@ -1,5 +1,7 @@
 #pragma once
 
+#include <string>
+
 namespace script
 {
 	// 脚本文档解析
@@ -10,9 +12,9 @@ namespace script
 		virtual ~Document();
 	public:
 		// 加载文件
-		bool loadFile(const char* filepath);
+		bool loadFile(const std::string& filepath);
 		// 保存文件
-		bool saveFile(const char* filepath);
+		bool saveFile(const std::string& filepath);
 		// 文本指针
 		char* getPtr();
 		// 文本大小

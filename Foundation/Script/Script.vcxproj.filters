@@ -101,9 +101,6 @@
     <ClInclude Include="Compile\Scan\TokenTable.h">
       <Filter>Compile\Scan</Filter>
     </ClInclude>
-    <ClInclude Include="Compile\Scan\WordFilters.h">
-      <Filter>Compile\Scan</Filter>
-    </ClInclude>
     <ClInclude Include="Compile\SemanticAnalyze\SANode.h">
       <Filter>Compile\SemanticAnalyze</Filter>
     </ClInclude>
@@ -227,6 +224,9 @@
     <ClInclude Include="Document\WordSet.h">
       <Filter>Document</Filter>
     </ClInclude>
+    <ClInclude Include="Compile\Scan\WordFilter.h">
+      <Filter>Compile\Scan</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Env\Environment.cpp">
@@ -265,9 +265,6 @@
       <Filter>Compile\Scan</Filter>
     </ClCompile>
     <ClCompile Include="Compile\Scan\TokenTable.cpp">
-      <Filter>Compile\Scan</Filter>
-    </ClCompile>
-    <ClCompile Include="Compile\Scan\WordFilters.cpp">
       <Filter>Compile\Scan</Filter>
     </ClCompile>
     <ClCompile Include="Compile\SemanticAnalyze\SANode.cpp">
@@ -320,6 +317,9 @@
     </ClCompile>
     <ClCompile Include="Document\WordSet.cpp">
       <Filter>Document</Filter>
+    </ClCompile>
+    <ClCompile Include="Compile\Scan\WordFilter.cpp">
+      <Filter>Compile\Scan</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

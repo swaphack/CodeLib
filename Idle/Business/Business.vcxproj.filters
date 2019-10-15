@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Core">
+      <UniqueIdentifier>{6dadaf65-87fe-4536-b213-4089f90de861}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Form">
+      <UniqueIdentifier>{6775bab2-40d6-46d0-9ab9-59b55ef3f59c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Finance">
+      <UniqueIdentifier>{2801a143-b889-4281-a861-7d064f9445ef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="People">
+      <UniqueIdentifier>{bf7a15a6-03d4-47df-83af-0ea75cfeaf8f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Company">
+      <UniqueIdentifier>{708f965b-b6fa-4a51-b3a8-e849dc8c4ba4}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Core\Project.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Form\Form.h">
+      <Filter>Form</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Object.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Period.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Workflow.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Finance\Finance.h">
+      <Filter>Finance</Filter>
+    </ClInclude>
+    <ClInclude Include="People\Human.h">
+      <Filter>People</Filter>
+    </ClInclude>
+    <ClInclude Include="People\Staff.h">
+      <Filter>People</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\import.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\ObjectFactory.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="People\Employee.h">
+      <Filter>People</Filter>
+    </ClInclude>
+    <ClInclude Include="People\HumanRelation.h">
+      <Filter>People</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Relation.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\RelationNet.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Company\Building.h">
+      <Filter>Company</Filter>
+    </ClInclude>
+    <ClInclude Include="Company\Corporation.h">
+      <Filter>Company</Filter>
+    </ClInclude>
+    <ClInclude Include="Company\Department.h">
+      <Filter>Company</Filter>
+    </ClInclude>
+    <ClInclude Include="Finance\FinanceRecord.h">
+      <Filter>Finance</Filter>
+    </ClInclude>
+    <ClInclude Include="Finance\ExpenseItem.h">
+      <Filter>Finance</Filter>
+    </ClInclude>
+    <ClInclude Include="Finance\IncomeItem.h">
+      <Filter>Finance</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\RelationFactory.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Core\Object.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Period.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

@@ -28,11 +28,10 @@ namespace script
 		int getAccessType();
 		// 设置访问域类型
 		void setAccessType(int nType);
-
 		// 获取名称
-		const char* getName();
+		const std::string& getName();
 		// 设置名称
-		void setName(const char* name);
+		void setName(const std::string& name);
 		// 销毁
 		virtual void dispose();
 	private:

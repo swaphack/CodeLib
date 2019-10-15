@@ -13,17 +13,14 @@ namespace script
 	{
 	public:
 		Members();
-		~Members();
+		virtual ~Members();
 	public:
 		// 添加成员变量,重名移除
 		void addMember(Variable* pVariable);
 		// 移除成员变量
-		void removeMember(const char* name);
 		void removeMember(const std::string& name);
 		// 移除所有成员变量
 		void removeAllMembers();
-		// 获取成员变量
-		Variable* getMember(const char* name);
 		// 获取成员变量
 		Variable* getMember(const std::string& name);
 		// 关键字

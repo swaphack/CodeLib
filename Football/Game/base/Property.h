@@ -72,13 +72,13 @@ namespace game
 		bool getPtr(const std::string& nType, void* &src, size_t& size);
 
 		template<typename T, 
-			typename = std::enable_if < std::is_class<T>::value || std::is_arithmetic<T>::value, T >::type >
+			typename = std::enable_if <(std::is_class<T>::value && !std::is_pointer<T>::value) || std::is_arithmetic<T>::value, T >::type >
 		void setValue(const std::string& nType, T value)
 		{
 			this->setValue(nType, &value, sizeof(T));
 		}
 		template<typename T, 
-			typename = std::enable_if < std::is_class<T>::value, T >::type >
+			typename = std::enable_if <(std::is_class<T>::value && !std::is_pointer<T>::value), T >::type >
 		T& getClass(const std::string& nType)
 		{
 			void* ptr = getPtr(nType, nullptr);

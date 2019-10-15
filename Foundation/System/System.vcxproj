@@ -296,6 +296,7 @@
     <ClCompile Include="Thread\Thread.cpp" />
     <ClCompile Include="Thread\Threading.cpp" />
     <ClCompile Include="Thread\ThreadPool.cpp" />
+    <ClCompile Include="Type\Bit.cpp" />
     <ClCompile Include="Type\String.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

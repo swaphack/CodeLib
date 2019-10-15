@@ -31,7 +31,7 @@
     <ClInclude Include="Compile\Scan\macros.h" />
     <ClInclude Include="Compile\Scan\Scanner.h" />
     <ClInclude Include="Compile\Scan\TokenTable.h" />
-    <ClInclude Include="Compile\Scan\WordFilters.h" />
+    <ClInclude Include="Compile\Scan\WordFilter.h" />
     <ClInclude Include="Compile\SemanticAnalyze\import.h" />
     <ClInclude Include="Compile\SemanticAnalyze\macros.h" />
     <ClInclude Include="Compile\SemanticAnalyze\SANode.h" />
@@ -81,7 +81,7 @@
     <ClCompile Include="Compile\Parse\SymbolHandler.cpp" />
     <ClCompile Include="Compile\Scan\Scanner.cpp" />
     <ClCompile Include="Compile\Scan\TokenTable.cpp" />
-    <ClCompile Include="Compile\Scan\WordFilters.cpp" />
+    <ClCompile Include="Compile\Scan\WordFilter.cpp" />
     <ClCompile Include="Compile\SemanticAnalyze\SANode.cpp" />
     <ClCompile Include="Compile\SemanticAnalyze\SemanticAnalyzer.cpp" />
     <ClCompile Include="Compile\SemanticAnalyze\VariableFilter.cpp" />

@@ -1,5 +1,5 @@
 #pragma once
 
 #include "TokenTable.h"
-#include "WordFilters.h"
+#include "WordFilter.h"
 #include "Scanner.h"

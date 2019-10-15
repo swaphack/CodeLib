@@ -1,5 +1,4 @@
 #include "GateWay.h"
-
 #include "TextActivityListener.h"
 
 using namespace web;

@@ -106,15 +106,15 @@ namespace game
 #define CREATE_COMPONENT_PROPERTY_POINT(Type, FunName) \
 	public:\
 	void set##FunName(const Type& value)\
-		{ \
+	{ \
 		std::string key = TO_STRING(FunName); \
 		getProperty()->setValue(key, (void*)&value);\
-		} \
+	} \
 	Type get##FunName() \
-		{ \
+	{ \
 		std::string key = TO_STRING(FunName); \
 		return getProperty()->getClass<Type>(key); \
-		}
+	}
 		/**
 		*	创建组件获取属性和设置属性方法, 指针
 		*	@param FunName 函数名称
@@ -123,16 +123,16 @@ namespace game
 #define CREATE_COMPONENT_PROPERTY_CLASS(Type, FunName) \
 	public:\
 	void set##FunName(const Type& value)\
-			{ \
+	{ \
 		std::string key = TO_STRING(FunName); \
 		getProperty()->setValue<Type>(key, value);\
-			} \
+	} \
 	Type& get##FunName() \
-			{ \
+	{ \
 		Type value;\
 		std::string key = TO_STRING(FunName); \
 		return getProperty()->getClass<Type>(key); \
-			}
+	}
 	public:
 		Component();
 		virtual ~Component();

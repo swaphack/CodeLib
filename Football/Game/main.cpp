@@ -72,7 +72,6 @@ void testData()
 		printf("%d, %f, %f", type, newValue, lastValue);
 	};
 	DataRecord* pRecord = new DataRecord();
-	pRecord->setType(1233);
 	pRecord->setValue(121322);
 	pRecord->setValueChangedHand(func);
 	pRecord->addValue(12);

@@ -24,6 +24,10 @@ namespace game
 		/**
 		*	设置属性值
 		*/
+		CREATE_COMPONENT_PROPERTY(int, Type);
+		/**
+		*	设置属性值
+		*/
 		CREATE_COMPONENT_PROPERTY(float, Value);
 		/**
 		*	设置属性值改变时的处理

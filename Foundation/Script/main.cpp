@@ -5,9 +5,6 @@ using namespace script;
 
 int main(int argc, char** argv)
 {
-	// 初始化过滤器
-	Script::getInstance()->initWordFilter();
-
 	// 初始化单词库
 	const char* wordFile = "Resource/word.txt";
 	Script::getInstance()->initWordSet(wordFile);

@@ -39,13 +39,8 @@ void Variable::addFunction(Function* pFunction)
 	m_pFunctions[pFunction->getName()] = pFunction;
 }
 
-void Variable::removeFunction(const char* name)
+void Variable::removeFunction(const std::string& name)
 {
-	if (name == nullptr)
-	{
-		return;
-	}
-
 	Functions::iterator iter = m_pFunctions.find(name);
 	if (iter == m_pFunctions.end())
 	{
@@ -68,13 +63,8 @@ void Variable::removeAllFunctions()
 	m_pFunctions.clear();
 }
 
-Function* Variable::getFunction(const char* name)
+Function* Variable::getFunction(const std::string& name)
 {
-	if (name == nullptr)
-	{
-		return nullptr;
-	}
-
 	Functions::iterator iter = m_pFunctions.find(name);
 	if (iter == m_pFunctions.end())
 	{
@@ -84,13 +74,8 @@ Function* Variable::getFunction(const char* name)
 	return iter->second;
 }
 
-bool Variable::callFunction(const char* pFuncName, std::vector<Variable*>& inputs, std::vector<Variable*>& outputs)
+bool Variable::callFunction(const std::string& pFuncName, std::vector<Variable*>& inputs, std::vector<Variable*>& outputs)
 {
-	if (pFuncName == nullptr)
-	{
-		return false;
-	}
-
 	Function* pFunc = getFunction(pFuncName);
 	if (pFunc == nullptr)
 	{

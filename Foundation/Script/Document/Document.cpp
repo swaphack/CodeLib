@@ -20,14 +20,9 @@ Document::~Document()
 	}
 }
 
-bool Document::loadFile(const char* filepath)
+bool Document::loadFile(const std::string& filepath)
 {
-	if (filepath == nullptr)
-	{
-		return false;
-	}
-
-	FILE* fptr = fopen(filepath, "rb");
+	FILE* fptr = fopen(filepath.c_str(), "rb");
 	if (fptr == NULL)
 	{
 		return false;
@@ -53,19 +48,14 @@ bool Document::loadFile(const char* filepath)
 	return convertToDocumentStruct();
 }
 
-bool Document::saveFile(const char* filepath)
+bool Document::saveFile(const std::string& filepath)
 {
-	if (filepath == nullptr)
-	{
-		return false;
-	}
-
 	if (!convertToTextStruct()) 
 	{ 
 		return false;
 	}
 
-	FILE* fptr = fopen(filepath, "wb");
+	FILE* fptr = fopen(filepath.c_str(), "wb");
 	if (fptr == NULL)
 	{
 		return false;
