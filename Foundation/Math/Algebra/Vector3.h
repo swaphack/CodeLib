@@ -1,43 +1,24 @@
 #pragma once
 
 #include <cmath>
-#include "Base/Types.h"
+#include <cstdint>
 
-namespace sys
+namespace math
 {
 	struct Vector2;
 
 	// 3d
 	struct Vector3
 	{
-		float x;
-		float y;
-		float z;
-
+	public:
+		float x = 0;
+		float y = 0;
+		float z = 0;
+	public:
 		Vector3();
 		Vector3(float x, float y, float z = 0);
 		Vector3(const Vector2& vector);
 		Vector3(const Vector3& vector);
-		/**
-		*	两向量和
-		*/
-		void add(const Vector3& vector);
-		/**
-		*	两向量差
-		*/
-		void sub(const Vector3& vector);
-		/**
-		*	乘以
-		*/
-		void mult(const Vector3& vector);
-		/**
-		*	除以
-		*/
-		void div(const float ratio);
-		/**
-		*	乘以
-		*/
-		void mult(const float ratio);
 		/**
 		*	是否为0向量
 		*/
@@ -45,7 +26,11 @@ namespace sys
 		/**
 		*	长度
 		*/
-		float getLength() const;
+		float getLength();
+		/**
+		*	单位化
+		*/
+		Vector3 normalize();
 		/**
 		*	重载=
 		*/
@@ -72,23 +57,6 @@ namespace sys
 		Vector3 operator/(const float k);
 
 		/**
-		*	重载+
-		*/
-		Vector3 operator+(const Vector3& vector) const;
-		/**
-		*	重载-
-		*/
-		Vector3 operator-(const Vector3& vector) const;
-		/**
-		*	重载*
-		*/
-		Vector3 operator*(const float k) const;
-		/**
-		*	重载/
-		*/
-		Vector3 operator/(const float k) const;
-
-		/**
 		*	重载+=
 		*/
 		Vector3& operator+=(const Vector3& vector);
@@ -111,7 +79,24 @@ namespace sys
 		/**
 		*	判断两向量是否不等
 		*/
-		bool operator!=(const Vector3& vector);		
+		bool operator!=(const Vector3& vector);	
+	public:
+		/**
+		*	平移
+		*/
+		Vector3 tranlate(const Vector3& vector);
+		/**
+		*	缩放
+		*/
+		Vector3 scale(const Vector3& vector);
+		/**
+		*	绕轴旋转
+		*/
+		Vector3 rotationByAxis(const Vector3& vector, float radian);
+		/**
+		*	绕轴线段旋转度数
+		*/
+		Vector3 rotationByLine(const Vector3& src, const Vector3& dest, float radian);
 	public:
 		/**
 		*	向量点积
@@ -131,7 +116,7 @@ namespace sys
 		*	1 在左边
 		*	2 右边
 		*/
-		static int32 direction(const Vector3& vector0, const Vector3& vector1);
+		static int32_t direction(const Vector3& vector0, const Vector3& vector1);
 		/**
 		*	vector1和vector0的夹角余弦值
 		*/

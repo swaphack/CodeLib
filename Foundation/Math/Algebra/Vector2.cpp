@@ -1,6 +1,8 @@
 #include "Vector2.h"
 #include <cmath>
-using namespace sys;
+#include <cassert>
+
+using namespace math;
 
 Vector2::Vector2() 
 :x(0)
@@ -23,50 +25,9 @@ Vector2::Vector2(const Vector2& point32)
 
 }
 
-float Vector2::getLength() const
+float Vector2::getLength()
 {
 	return sqrt(pow(x, 2) + pow(y, 2));
-}
-
-void Vector2::add(const Vector2& point32)
-{
-	x += point32.x;
-	y += point32.y;
-}
-
-void Vector2::sub(const Vector2& point32)
-{
-	x -= point32.x;
-	y -= point32.y;
-}
-
-void Vector2::mult(const Vector2& point32)
-{
-	x *= point32.x;
-	y *= point32.y;
-}
-
-void Vector2::mult(const float ratio)
-{
-	x *= ratio;
-	y *= ratio;
-}
-
-void Vector2::div(const Vector2& point32)
-{
-	x /= point32.x;
-	y /= point32.y;
-}
-
-void Vector2::div(const float ratio)
-{
-	if (ratio == 0)
-	{
-		return;
-	}
-
-	x /= ratio;
-	y /= ratio;
 }
 
 Vector2& Vector2::operator=(const Vector2& point32)
@@ -79,74 +40,24 @@ Vector2& Vector2::operator=(const Vector2& point32)
 
 Vector2 Vector2::operator+(const Vector2& vector)
 {
-	Vector2 newVector;
-	newVector.add(*this);
-	newVector.add(vector);
-	return newVector;
+	return Vector2(x + vector.x, y + vector.y);
 }
 
 Vector2 Vector2::operator-(const Vector2& vector)
 {
-	Vector2 newVector;
-	newVector.add(*this);
-	newVector.sub(vector);
-	return newVector;
+	return Vector2(x - vector.x, y - vector.y);
 }
 
 Vector2 Vector2::operator/(const float k)
 {
-	if (k == 0)
-	{
-		return *this;
-	}
+	assert(k != 0);
 
-	Vector2 newVector = *this;
-	newVector.div(k);
-	return newVector;
+	return Vector2(x / k, y / k);
 }
 
 Vector2 Vector2::operator*(const float k)
 {
-	Vector2 newVector = *this;
-	newVector *= k;
-
-	return newVector;
-}
-
-Vector2 Vector2::operator+(const Vector2& vector) const
-{
-	Vector2 newVector;
-	newVector.add(*this);
-	newVector.add(vector);
-	return newVector;
-}
-
-Vector2 Vector2::operator-(const Vector2& vector) const
-{
-	Vector2 newVector;
-	newVector.add(*this);
-	newVector.sub(vector);
-	return newVector;
-}
-
-Vector2 Vector2::operator/(const float k) const
-{
-	if (k == 0)
-	{
-		return *this;
-	}
-
-	Vector2 newVector = *this;
-	newVector.div(k);
-	return newVector;
-}
-
-Vector2 Vector2::operator*(const float k) const
-{
-	Vector2 newVector = *this;
-	newVector *= k;
-
-	return newVector;
+	return Vector2(k * x, k * y);
 }
 
 Vector2& Vector2::operator+=(const Vector2& vector)
@@ -214,7 +125,7 @@ float Vector2::distance(const Vector2& point320, const Vector2& point321)
 	return sqrt(pow(point320.x - point321.x, 2) + pow(point320.y - point321.y, 2));
 }
 
-int32 Vector2::direction(const Vector2& vector0, const Vector2& vector1)
+int32_t Vector2::direction(const Vector2& vector0, const Vector2& vector1)
 {
 	float value = dot(vector0, vector1);
 	if (value > 0)
@@ -235,8 +146,8 @@ int32 Vector2::direction(const Vector2& vector0, const Vector2& vector1)
 
 float Vector2::cosAngle(const Vector2& vector0, const Vector2& vector1)
 {
-	float l0 = vector0.getLength();
-	float l1 = vector1.getLength();
+	float l0 = ((Vector2&)vector0).getLength();
+	float l1 = ((Vector2&)vector1).getLength();
 
 	if (l0 == 0 || l1 == 0)
 	{
@@ -248,8 +159,8 @@ float Vector2::cosAngle(const Vector2& vector0, const Vector2& vector1)
 
 float Vector2::sinAngle(const Vector2& vector0, const Vector2& vector1)
 {
-	float l0 = vector0.getLength();
-	float l1 = vector1.getLength();
+	float l0 = ((Vector2&)vector0).getLength();
+	float l1 = ((Vector2&)vector1).getLength();
 
 	if (l0 == 0 || l1 == 0)
 	{
@@ -263,7 +174,7 @@ float Vector2::sinAngle(const Vector2& vector0, const Vector2& vector1)
 
 float Vector2::project(const Vector2& vector0, const Vector2& vector1)
 {
-	float l0 = vector0.getLength();
+	float l0 = ((Vector2&)vector0).getLength();
 	if (l0 == 0)
 	{
 		return 0;
@@ -278,8 +189,8 @@ float Vector2::getRotateAngle(const Vector2& vector0, const Vector2& vector1)
 
 	float distVal, dotVal, degreeVal, angleVal;
 
-	float l0 = vector0.getLength();
-	float l1 = vector1.getLength();
+	float l0 = ((Vector2&)vector0).getLength();
+	float l1 = ((Vector2&)vector1).getLength();
 
 	float x1 = vector0.x / l0;
 	float y1 = vector0.y / l0;
@@ -307,7 +218,7 @@ float Vector2::getRotateAngle(const Vector2& vector0, const Vector2& vector1)
 		}
 	}
 
-	degreeVal = angleVal* 180.0 / nyPI;
+	degreeVal = angleVal* 180.0f / nyPI;
 
 	return degreeVal;
 }

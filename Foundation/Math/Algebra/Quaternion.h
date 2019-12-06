@@ -1,7 +1,6 @@
 #pragma once
-#include "macros.h"
 
-namespace sys
+namespace math
 {
 	struct Matrix44;
 	struct Vector3;
@@ -21,7 +20,8 @@ namespace sys
 	*	-sinθ, cosθ) 结果是( xcosθ - ysinθ, xsinθ + ycosθ)结果是一样的。
 	*	但是三维中的虚数却要用四元数来表示，且四元数实现旋转不是p*q,而是p*q*p-1形式实现和矩阵旋转等同的变换。
 	*************************************************************
-	*	四元数表示三维空间中的虚数，由william hamilton于1843年在去皇家爱尔兰学院路上时意识到将复数从2D空间拓展到3D空间不是用一个实部和两个虚部，而是一个实部和三个虚部，于是他将四元数的定义刻在Broome桥上。
+	*	四元数表示三维空间中的虚数，由william hamilton于1843年在去皇家爱尔兰学院路上时意识到
+	*	将复数从2D空间拓展到3D空间不是用一个实部和两个虚部，而是一个实部和三个虚部，于是他将四元数的定义刻在Broome桥上。
 	*	四元数的定义：
 	*	(w,x,y,z) = w + xi + yj + zk;
 	*	i*i = j*j = k*k = -1;
@@ -31,11 +31,12 @@ namespace sys
 	*/
 	struct Quaternion
 	{
-		float w;
-		float x;
-		float y;
-		float z;
-
+	public:
+		float w = 0;
+		float x = 0;
+		float y = 0;
+		float z = 0;
+	public:
 		Quaternion();
 		Quaternion(const Quaternion& quaternion);
 		Quaternion(float w, float x, float y, float z);
@@ -68,25 +69,7 @@ namespace sys
 		/**
 		*	单位化
 		*/
-		void normalize();
-		/**
-		*	负四元数
-		*/
-		Quaternion negative() const;
-		/**
-		*	共轭
-		*	q*= (w, -x, -y, -z)相反的轴旋转相同的量，也可以为q*= (-w, x, y, z)相同的轴旋转相反的量
-		*	一般用(w, -x, -y, -z)表示为单位四元数
-		*/
-		Quaternion conjugate() const;
-		/**
-		*	四元数的逆
-		*/
-		Quaternion inverse() const;
-		/**
-		*	模
-		*/
-		float getLength() const;
+		Quaternion normalize();
 		/**
 		*	重载*
 		*/
@@ -106,7 +89,7 @@ namespace sys
 		/**
 		*	重载*
 		*/
-		float operator*(const Quaternion& quaternion);
+		Quaternion operator*(const Quaternion& quaternion);
 		/**
 		*	重载=
 		*/

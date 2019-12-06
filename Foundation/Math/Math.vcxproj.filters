@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Algebra">
+      <UniqueIdentifier>{c3d4a556-8e75-4b00-ae5a-341edefb3882}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Geometry">
+      <UniqueIdentifier>{3d818369-a59c-462c-9ce7-c23fe33e7388}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Algebra\Complex.h">
+      <Filter>Algebra</Filter>
+    </ClInclude>
+    <ClInclude Include="Algebra\Polynomial.h">
+      <Filter>Algebra</Filter>
+    </ClInclude>
+    <ClInclude Include="Algebra\Matrix.h">
+      <Filter>Algebra</Filter>
+    </ClInclude>
+    <ClInclude Include="Algebra\Matrix33.h">
+      <Filter>Algebra</Filter>
+    </ClInclude>
+    <ClInclude Include="Algebra\Matrix44.h">
+      <Filter>Algebra</Filter>
+    </ClInclude>
+    <ClInclude Include="Algebra\Quaternion.h">
+      <Filter>Algebra</Filter>
+    </ClInclude>
+    <ClInclude Include="Algebra\Vector2.h">
+      <Filter>Algebra</Filter>
+    </ClInclude>
+    <ClInclude Include="Algebra\Vector3.h">
+      <Filter>Algebra</Filter>
+    </ClInclude>
+    <ClInclude Include="macros.h" />
+    <ClInclude Include="Algebra\Matrix41.h">
+      <Filter>Algebra</Filter>
+    </ClInclude>
+    <ClInclude Include="Algebra\Determinant.h">
+      <Filter>Algebra</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Algebra\Complex.cpp">
+      <Filter>Algebra</Filter>
+    </ClCompile>
+    <ClCompile Include="Algebra\Polynomial.cpp">
+      <Filter>Algebra</Filter>
+    </ClCompile>
+    <ClCompile Include="Algebra\Matrix.cpp">
+      <Filter>Algebra</Filter>
+    </ClCompile>
+    <ClCompile Include="Algebra\Matrix33.cpp">
+      <Filter>Algebra</Filter>
+    </ClCompile>
+    <ClCompile Include="Algebra\Matrix44.cpp">
+      <Filter>Algebra</Filter>
+    </ClCompile>
+    <ClCompile Include="Algebra\Quaternion.cpp">
+      <Filter>Algebra</Filter>
+    </ClCompile>
+    <ClCompile Include="Algebra\Vector2.cpp">
+      <Filter>Algebra</Filter>
+    </ClCompile>
+    <ClCompile Include="Algebra\Vector3.cpp">
+      <Filter>Algebra</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="Algebra\Matrix41.cpp">
+      <Filter>Algebra</Filter>
+    </ClCompile>
+    <ClCompile Include="Algebra\Determinant.cpp">
+      <Filter>Algebra</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

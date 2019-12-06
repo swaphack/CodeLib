@@ -1,8 +1,10 @@
 #include "Quaternion.h"
 #include "Vector3.h"
 #include "Matrix44.h"
+#include "../macros.h"
+#include <cassert>
 
-using namespace sys;
+using namespace math;
 
 Quaternion::Quaternion()
 :w(0)
@@ -65,40 +67,18 @@ Quaternion Quaternion::inverse()
 
 float Quaternion::getLength()
 {
-	return pow(w, 2) + pow(x, 2) + pow(y, 2) + pow(z, 2);
+	return pow(x, 2) + pow(y, 2) + pow(z, 2);
 }
 
-void Quaternion::normalize()
+Quaternion Quaternion::normalize()
 {
 	float len = getLength();
 	if (len == 0)
 	{
-		return;
+		return *this;
 	}
 
-	*this /= len;
-}
-
-Quaternion Quaternion::negative() const
-{
-	return Quaternion(-w, -x, -y, -z);
-}
-
-Quaternion Quaternion::conjugate() const
-{
-	return Quaternion(w, -x, -y, -z);
-}
-
-Quaternion Quaternion::inverse() const
-{
-	return Quaternion(w, -x, -y, -z);
-	
-}
-
-float Quaternion::getLength() const
-{
-	return pow(w, 2) + pow(x, 2) + pow(y, 2) + pow(z, 2);
-	
+	return Quaternion(w, x / len, y / len, z / len);
 }
 
 Quaternion Quaternion::operator*(float k)
@@ -106,9 +86,14 @@ Quaternion Quaternion::operator*(float k)
 	return Quaternion(w * k, x * k, y * k, z * k);
 }
 
-float Quaternion::operator*(const Quaternion& quaternion)
+Quaternion Quaternion::operator*(const Quaternion& quaternion)
 {
-	return w * quaternion.w + x * quaternion.x + y * quaternion.y + z * quaternion.z;
+	float qw = w*quaternion.w - x*quaternion.x - y*quaternion.y - z*quaternion.z;
+	float qx = w*quaternion.x + x*quaternion.w + y*quaternion.z - z*quaternion.y;
+	float qy = w*quaternion.y + y*quaternion.w + z*quaternion.x - x*quaternion.z;
+	float qz = w*quaternion.z + z*quaternion.w + x*quaternion.y - y*quaternion.x;
+
+	return Quaternion(qw, qx, qy, qz);
 }
 
 Quaternion& Quaternion::operator*=(float k)
@@ -123,20 +108,14 @@ Quaternion& Quaternion::operator*=(float k)
 
 Quaternion Quaternion::operator/(float k)
 {
-	if (k == 0)
-	{
-		return *this;
-	}
+	assert(k != 0);
 
 	return Quaternion(w / k, x / k, y / k, z / k);
 }
 
 Quaternion& Quaternion::operator/=(float k)
 {
-	if (k == 0)
-	{
-		return *this;
-	}
+	assert(k != 0);
 
 	w /= k;
 	x /= k;
@@ -192,7 +171,8 @@ Vector3 Quaternion::rotate(const Vector3& vector, const Quaternion& quaternion)
 	Quaternion q0(0, vector);
 
 	Quaternion q = rotateBy(quaternion, q0);
-	q = rotateBy(q, quaternion.inverse());
+	Quaternion i = ((Quaternion)quaternion).inverse();
+	q = rotateBy(q, i);
 
 	return Vector3(q.x, q.y, q.z);
 }
@@ -218,12 +198,12 @@ Vector3 Quaternion::euler(const Quaternion& quaternion)
 	double test = quaternion.x * quaternion.y + quaternion.z * quaternion.w;
 	if (test > 0.499f) { // singularity at north pole
 		x = 2 * atan2(quaternion.x, quaternion.w);
-		y = PI * 0.5f;
+		y = M_PI * 0.5f;
 		z = 0;
 	}
 	else if (test < -0.499f) { // singularity at south pole
 		x = -2 * atan2(quaternion.x, quaternion.w);
-		y = -PI * 0.5f;
+		y = -M_PI * 0.5f;
 		z = 0;
 	}
 	else

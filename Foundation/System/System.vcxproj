@@ -99,6 +99,7 @@
     <ClInclude Include="Concurrent\Concurrent.h" />
     <ClInclude Include="Concurrent\Concurrents.h" />
     <ClInclude Include="Concurrent\import.h" />
+    <ClInclude Include="CSS\Margin.h" />
     <ClInclude Include="DataBase\DataRecord.h" />
     <ClInclude Include="DataBase\DataSheet.h" />
     <ClInclude Include="DataBase\IDataBase.h" />
@@ -147,16 +148,9 @@
     <ClInclude Include="Math\Equation.h" />
     <ClInclude Include="Math\import.h" />
     <ClInclude Include="Math\macros.h" />
-    <ClInclude Include="Math\Margin.h" />
-    <ClInclude Include="Math\Matrix.h" />
-    <ClInclude Include="Math\Matrix33.h" />
-    <ClInclude Include="Math\Matrix44.h" />
-    <ClInclude Include="Math\Quaternion.h" />
     <ClInclude Include="Math\Range.h" />
-    <ClInclude Include="Math\Vector2.h" />
     <ClInclude Include="Math\Rect.h" />
     <ClInclude Include="Math\Size.h" />
-    <ClInclude Include="Math\Vector3.h" />
     <ClInclude Include="Math\Volume.h" />
     <ClInclude Include="Memory\PtrCache.h" />
     <ClInclude Include="Memory\Memory.h" />
@@ -260,12 +254,6 @@
     <ClCompile Include="Http\HttpResponse.cpp" />
     <ClCompile Include="Http\HttpTime.cpp" />
     <ClCompile Include="Math\Color.cpp" />
-    <ClCompile Include="Math\Matrix.cpp" />
-    <ClCompile Include="Math\Matrix33.cpp" />
-    <ClCompile Include="Math\Matrix44.cpp" />
-    <ClCompile Include="Math\Quaternion.cpp" />
-    <ClCompile Include="Math\Vector2.cpp" />
-    <ClCompile Include="Math\Vector3.cpp" />
     <ClCompile Include="Memory\PtrCache.cpp" />
     <ClCompile Include="Memory\Memory.cpp" />
     <ClCompile Include="Net\Client.cpp" />

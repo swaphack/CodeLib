@@ -70,6 +70,9 @@
     <Filter Include="Concurrent">
       <UniqueIdentifier>{2a07eeb9-88bb-4785-95c1-9e07167b7085}</UniqueIdentifier>
     </Filter>
+    <Filter Include="CSS">
+      <UniqueIdentifier>{9295c754-b3a8-4f70-b9c4-303ddfde4ee9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Base\File.h">
@@ -373,24 +376,6 @@
     <ClInclude Include="DataBase\IDBString.h">
       <Filter>DataBase</Filter>
     </ClInclude>
-    <ClInclude Include="Math\Margin.h">
-      <Filter>Math</Filter>
-    </ClInclude>
-    <ClInclude Include="Math\Vector3.h">
-      <Filter>Math</Filter>
-    </ClInclude>
-    <ClInclude Include="Math\Vector2.h">
-      <Filter>Math</Filter>
-    </ClInclude>
-    <ClInclude Include="Math\Matrix44.h">
-      <Filter>Math</Filter>
-    </ClInclude>
-    <ClInclude Include="Math\Matrix33.h">
-      <Filter>Math</Filter>
-    </ClInclude>
-    <ClInclude Include="Math\Matrix.h">
-      <Filter>Math</Filter>
-    </ClInclude>
     <ClInclude Include="Geometry\macros.h">
       <Filter>Geometry</Filter>
     </ClInclude>
@@ -429,9 +414,6 @@
     </ClInclude>
     <ClInclude Include="Geometry\Polyhedron.h">
       <Filter>Geometry</Filter>
-    </ClInclude>
-    <ClInclude Include="Math\Quaternion.h">
-      <Filter>Math</Filter>
     </ClInclude>
     <ClInclude Include="Geometry\Polygon.h">
       <Filter>Geometry</Filter>
@@ -507,6 +489,9 @@
     </ClInclude>
     <ClInclude Include="Base\CharsetHelper.h">
       <Filter>Base</Filter>
+    </ClInclude>
+    <ClInclude Include="CSS\Margin.h">
+      <Filter>CSS</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -678,22 +663,7 @@
     <ClCompile Include="DataBase\DataRecord.cpp">
       <Filter>DataBase</Filter>
     </ClCompile>
-    <ClCompile Include="Math\Vector3.cpp">
-      <Filter>Math</Filter>
-    </ClCompile>
-    <ClCompile Include="Math\Vector2.cpp">
-      <Filter>Math</Filter>
-    </ClCompile>
     <ClCompile Include="Math\Color.cpp">
-      <Filter>Math</Filter>
-    </ClCompile>
-    <ClCompile Include="Math\Matrix.cpp">
-      <Filter>Math</Filter>
-    </ClCompile>
-    <ClCompile Include="Math\Matrix33.cpp">
-      <Filter>Math</Filter>
-    </ClCompile>
-    <ClCompile Include="Math\Matrix44.cpp">
       <Filter>Math</Filter>
     </ClCompile>
     <ClCompile Include="Collider\AABB.cpp">
@@ -713,9 +683,6 @@
     </ClCompile>
     <ClCompile Include="Geometry\Line2.cpp">
       <Filter>Geometry</Filter>
-    </ClCompile>
-    <ClCompile Include="Math\Quaternion.cpp">
-      <Filter>Math</Filter>
     </ClCompile>
     <ClCompile Include="Geometry\Polygon.cpp">
       <Filter>Geometry</Filter>

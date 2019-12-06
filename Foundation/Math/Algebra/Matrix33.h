@@ -3,14 +3,16 @@
 #include "Matrix.h"
 #include "Vector2.h"
 
-namespace sys
+namespace math
 {
 	/**
 	*	三阶方阵
 	*/
 	struct Matrix33 : Matrix
 	{
+	public:
 		Matrix33();
+	public:
 		/**
 		*	标准化,单位矩阵
 		*/
@@ -18,16 +20,16 @@ namespace sys
 		/**
 		*	平移
 		*/
-		void translate(const Vector2& vector);
+		void setTranslate(const Vector2& vector);
 
 		/**
 		*	缩放
 		*/
-		void scale(const Vector2& vector);
+		void setScale(const Vector2& vector);
 
 		/**
 		*	旋转
 		*/
-		void rotate(float rotation);
+		void setRotate(float rotation);
 	};
 }

@@ -1,8 +1,8 @@
 #pragma once
 
-#include "Base/Types.h"
+#include <cstdint>
 
-namespace sys
+namespace math
 {
 	// 2d
 	struct Vector2
@@ -16,32 +16,7 @@ namespace sys
 		/**
 		*	长度
 		*/
-		float getLength() const;
-		/**
-		*	两向量和
-		*/
-		void add(const Vector2& point32);
-		/**
-		*	两向量差
-		*/
-		void sub(const Vector2& point32);
-		/**
-		*	乘以
-		*/
-		void mult(const Vector2& point32);
-		/**
-		*	除以
-		*/
-		void div(const Vector2& point32);
-
-		/**
-		*	乘以
-		*/
-		void mult(const float ratio);
-		/**
-		*	除以
-		*/
-		void div(const float ratio);
+		float getLength();
 		/**
 		*	重载=
 		*/
@@ -62,22 +37,6 @@ namespace sys
 		*	重载/
 		*/
 		Vector2 operator/(const float k);
-		/**
-		*	重载+
-		*/
-		Vector2 operator+(const Vector2& vector) const;
-		/**
-		*	重载-
-		*/
-		Vector2 operator-(const Vector2& vector) const;
-		/**
-		*	重载*
-		*/
-		Vector2 operator*(const float k) const;
-		/**
-		*	重载/
-		*/
-		Vector2 operator/(const float k) const;
 		/**
 		*	重载+=
 		*/
@@ -123,7 +82,7 @@ namespace sys
 		*	1 在左边
 		*	2 在右边
 		*/
-		static int32 direction(const Vector2& vector0, const Vector2& vector1);
+		static int32_t direction(const Vector2& vector0, const Vector2& vector1);
 		/**
 		*	vector1和vector0的夹角余弦值
 		*/
@@ -136,7 +95,6 @@ namespace sys
 		*	获得vector1在vector0的投影长度
 		*/
 		static float project(const Vector2& vector0, const Vector2& vector1);
-
 		/**
 		*	vector1相对vector0的旋转角度(0,360)
 		*/

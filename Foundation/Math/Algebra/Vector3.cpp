@@ -1,7 +1,10 @@
 #include "Vector3.h"
 #include "Vector2.h"
+#include <cassert>
+#include "Matrix44.h"
+#include "Matrix41.h"
 
-using namespace sys;
+using namespace math;
 
 
 Vector3::Vector3() 
@@ -33,55 +36,25 @@ Vector3::Vector3(const Vector3& vector) : x(vector.x), y(vector.y), z(vector.z)
 
 }
 
-
-
-void Vector3::add(const Vector3& vector)
-{
-	x += vector.x;
-	y += vector.y;
-	z += vector.z;
-}
-
-void Vector3::sub(const Vector3& vector)
-{
-	x -= vector.x;
-	y -= vector.y;
-	z -= vector.z;
-}
-
-void Vector3::mult(const float ratio)
-{
-	x *= ratio;
-	y *= ratio;
-	z *= ratio;
-}
-
-void Vector3::mult(const Vector3& vector)
-{
-	x *= vector.x;
-	y *= vector.y;
-	z *= vector.z;
-}
-
-void Vector3::div(const float ratio)
-{
-	if (ratio == 0)
-	{
-		return;
-	}
-	x /= ratio;
-	y /= ratio;
-	z /= ratio;
-}
-
 bool Vector3::isZero()
 {
 	return x == 0.0f && y == 0.0f && z == 0.0f;
 }
 
-float Vector3::getLength() const
+float Vector3::getLength()
 {
 	return sqrt(pow(x, 2) + pow(y, 2) + pow(z, 2));
+}
+
+Vector3 Vector3::normalize()
+{
+	float length = getLength();
+	if (length == 0)
+	{
+		return Vector3::Zero;
+	}
+
+	return Vector3(x / length, y / length, z / length);
 }
 
 Vector3& Vector3::operator=(const Vector2& vector)
@@ -102,74 +75,28 @@ Vector3& Vector3::operator=(const Vector3& vector)
 
 Vector3 Vector3::operator+(const Vector3& vector)
 {
-	Vector3 newVector;
-	newVector.add(*this);
-	newVector.add(vector);
-	return newVector;
+	return Vector3(x + vector.x, y + vector.y, z + vector.z);
 }
 
 Vector3 Vector3::operator-(const Vector3& vector)
 {
-	Vector3 newVector;
-	newVector.add(*this);
-	newVector.sub(vector);
-	return newVector;
+	return Vector3(x - vector.x, y - vector.y, z - vector.z);
 }
 
 Vector3 Vector3::operator/(const float k)
 {
+	assert(k != 0);
 	if (k == 0)
 	{
 		return *this;
 	}
 
-	Vector3 newVector = *this;
-	newVector.div(k);
-	return newVector;
+	return Vector3(x / k, y / k, z / k);
 }
 
 Vector3 Vector3::operator*(const float k)
 {
-	Vector3 newVector = *this;
-	newVector *= k;
-
-	return newVector;
-}
-
-Vector3 Vector3::operator+(const Vector3& vector) const
-{
-	Vector3 newVector;
-	newVector.add(*this);
-	newVector.add(vector);
-	return newVector;
-}
-
-Vector3 Vector3::operator-(const Vector3& vector) const
-{
-	Vector3 newVector;
-	newVector.add(*this);
-	newVector.sub(vector);
-	return newVector;
-}
-
-Vector3 Vector3::operator/(const float k) const
-{
-	if (k == 0)
-	{
-		return *this;
-	}
-
-	Vector3 newVector = *this;
-	newVector.div(k);
-	return newVector;
-}
-
-Vector3 Vector3::operator*(const float k) const
-{
-	Vector3 newVector = *this;
-	newVector *= k;
-
-	return newVector;
+	return Vector3(x * k, y * k, z * k);;
 }
 
 Vector3& Vector3::operator+=(const Vector3& vector)
@@ -242,7 +169,7 @@ float Vector3::distance(const Vector3& point320, const Vector3& point321)
 	return sqrt(pow(point320.x - point321.x, 2) + pow(point320.y - point321.y, 2) + pow(point320.z - point321.z, 2));
 }
 
-int32 Vector3::direction(const Vector3& vector0, const Vector3& vector1)
+int32_t Vector3::direction(const Vector3& vector0, const Vector3& vector1)
 {
 	float value = dot(vector0, vector1);
 	if (value > 0)
@@ -263,8 +190,8 @@ int32 Vector3::direction(const Vector3& vector0, const Vector3& vector1)
 
 float Vector3::cosAngle(const Vector3& vector0, const Vector3& vector1)
 {
-	float l0 = vector0.getLength();
-	float l1 = vector1.getLength();
+	float l0 = ((Vector3&)vector0).getLength();
+	float l1 = ((Vector3&)vector1).getLength();
 
 	if (l0 == 0 || l1 == 0)
 	{
@@ -276,12 +203,56 @@ float Vector3::cosAngle(const Vector3& vector0, const Vector3& vector1)
 
 float Vector3::project(const Vector3& vector0, const Vector3& vector1)
 {
-	float l0 = vector0.getLength();
+	float l0 = ((Vector3&)vector0).getLength();
 	if (l0 == 0)
 	{
 		return 0;
 	}
 	return Vector3::dot(vector1, vector0) / l0;
+}
+
+Vector3 Vector3::tranlate(const Vector3& vector)
+{
+	Matrix44 mat;
+	mat.setTranslate(vector);
+
+	Matrix41 mat41(*this);
+	Matrix ret = mat * mat41; 
+	float w = ret[3];
+	return Vector3(ret[0] / w, ret[1] / w, ret[2] / w);
+}
+
+Vector3 Vector3::scale(const Vector3& vector)
+{
+	Matrix44 mat;
+	mat.setScale(vector);
+
+	Matrix41 mat41(*this);
+	Matrix ret = mat * mat41;
+	float w = ret[3];
+	return Vector3(ret[0] / w, ret[1] / w, ret[2] / w);
+}
+
+Vector3 Vector3::rotationByAxis(const Vector3& vector, float radian)
+{
+	Matrix44 mat;
+	mat.setRotationByAxis(vector, radian);
+
+	Matrix41 mat41(*this);
+	Matrix ret = mat * mat41;
+	float w = ret[3];
+	return Vector3(ret[0] / w, ret[1] / w, ret[2] / w);
+}
+
+Vector3 Vector3::rotationByLine(const Vector3& src, const Vector3& dest, float radian)
+{
+	Matrix44 mat;
+	mat.setRotationByLine(src, dest, radian);
+
+	Matrix41 mat41(*this);
+	Matrix ret = mat * mat41;
+	float w = ret[3];
+	return Vector3(ret[0] / w, ret[1] / w, ret[2] / w);
 }
 
 
