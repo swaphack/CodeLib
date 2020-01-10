@@ -16,7 +16,7 @@
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v120</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
@@ -96,7 +96,6 @@
     <ClInclude Include="Basic\Collection\NodeCache.h" />
     <ClInclude Include="Basic\Collection\Tree.h" />
     <ClInclude Include="Basic\Collection\TreeNode.h" />
-    <ClInclude Include="Basic\List.h" />
     <ClInclude Include="Basic\EndPoint.h" />
     <ClInclude Include="Basic\import.h" />
     <ClInclude Include="Basic\Interval.h" />

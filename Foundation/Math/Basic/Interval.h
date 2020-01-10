@@ -9,15 +9,6 @@ namespace math
 	*/
 	struct Interval
 	{
-	private:
-		/**
-		*	最小值
-		*/
-		EndPoint _minEndPoint;
-		/**
-		*	最大值
-		*/
-		EndPoint _maxEndPoint;
 	public:
 		Interval();
 		/**
@@ -27,7 +18,7 @@ namespace math
 		/**
 		*	上下界设置
 		*/
-		Interval(const EndPoint& minEndPoint, const const EndPoint& maxEndPoint);
+		Interval(const EndPoint& minEndPoint, const EndPoint& maxEndPoint);
 	public:
 		/**
 		*	下界
@@ -48,7 +39,7 @@ namespace math
 		/**
 		*	下界类型
 		*/
-		EndPointType getMinType();
+		EndPointType getMinType() const;
 		/**
 		*	设置下界类型
 		*/
@@ -56,7 +47,7 @@ namespace math
 		/**
 		*	上界类型
 		*/
-		EndPointType getMaxType();
+		EndPointType getMaxType() const;
 		/**
 		*	设置上界类型
 		*/
@@ -65,7 +56,7 @@ namespace math
 		/**
 		*	下界值
 		*/
-		float getMinValue();
+		float getMinValue() const;
 		/**
 		*	设置下界值
 		*/
@@ -74,7 +65,7 @@ namespace math
 		/**
 		*	上界值
 		*/
-		float getMaxValue();
+		float getMaxValue() const;
 		/**
 		*	设置上界值
 		*/
@@ -84,5 +75,14 @@ namespace math
 		*	是否包含
 		*/
 		bool contains(float value);
+	private:
+		/**
+		*	最小值
+		*/
+		EndPoint _minEndPoint;
+		/**
+		*	最大值
+		*/
+		EndPoint _maxEndPoint;
 	};
 }

@@ -24,6 +24,7 @@ namespace math
 	public:
 		Array2D()
 		{
+			this->reset(1, 1);
 		}
 		Array2D(int32_t h, int32_t w)
 		{

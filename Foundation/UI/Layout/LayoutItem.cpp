@@ -33,22 +33,22 @@ void LayoutItem::setGeometry(const math::Rect& rect)
 
 void LayoutItem::setOrgin(float x, float y)
 {
-	m_rGeometry.orgin.set(x, y);
+	m_rGeometry.setOrigin(x, y);
 }
 
 math::Vector2 LayoutItem::getOrgin()
 {
-	return m_rGeometry.orgin;
+	return m_rGeometry.getOrigin();
 }
 
 void LayoutItem::setSize(float width, float height)
 {
-	m_rGeometry.size.set(width, height);
+	m_rGeometry.setSize(width, height);
 }
 
 math::Size LayoutItem::getSize()
 {
-	return m_rGeometry.size;
+	return m_rGeometry.getSize();
 }
 
 void LayoutItem::setWidget(Widget* widget)
@@ -130,7 +130,7 @@ void LayoutItem::setWidgetGeomerty(const math::Rect& geometry, const math::Vecto
 		return;
 	}
 
-	m_pWidget->setPosition(geometry.orgin);
+	m_pWidget->setPosition(geometry.getOrigin());
 	m_pWidget->setVolume(geometry.getWidth(), geometry.getHeight());
 	m_pWidget->setAnchorPoint(anchorPoint);
 }

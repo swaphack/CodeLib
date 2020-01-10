@@ -18,11 +18,11 @@ void DCSpace::draw()
 		glLoadIdentity();
 	}
 
-	glScalef(Scale.getX(), Scale.getY(), Scale.getZ());
+	glTranslatef(Position.getX(), Position.getY(), Position.getZ());
 	glRotatef(Rotation.getX(), 1, 0, 0);
 	glRotatef(Rotation.getY(), 0, 1, 0);
 	glRotatef(Rotation.getZ(), 0, 0, 1);
-	glTranslatef(Position.getX(), Position.getY(), Position.getZ());
+	glScalef(Scale.getX(), Scale.getY(), Scale.getZ());	
 }
 
 DCSpace* DCSpace::create(const math::Vector3& position, const math::Vector3& scale, const math::Vector3& rotation, bool relative)
@@ -49,9 +49,7 @@ DCSpaceMatrix::~DCSpaceMatrix()
 
 void DCSpaceMatrix::draw()
 {
-	glLoadIdentity();
-
-	glMultMatrixf(Matrix.value());
+	glLoadMatrixf(Matrix.value());
 }
 
 DCSpaceMatrix* DCSpaceMatrix::create(const math::Matrix& matrix)

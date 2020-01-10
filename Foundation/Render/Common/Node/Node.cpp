@@ -442,11 +442,11 @@ void Node::calRealSpaceByValue()
 
 void Node::calRealSpaceByMatrix()
 {
-	Matrix44 matScale;
+	math::Matrix44 matScale;
 	matScale.setScale(getScale());
-	Matrix44 matRotate;
+	math::Matrix44 matRotate;
 	matRotate.setRotate(_obRotation);
-	Matrix44 matTranslate;
+	math::Matrix44 matTranslate;
 	matTranslate.setTranslate(_obPosition);
 
 	printf("matScale\n%s\n", matScale.toString().c_str());
@@ -458,7 +458,7 @@ void Node::calRealSpaceByMatrix()
 	printf("mat\n%s\n", _mat44.toString().c_str());
 
 	Node* temp = this;
-	std::vector<Matrix44> vecMat;
+	std::vector<math::Matrix44> vecMat;
 	do
 	{
 		vecMat.insert(vecMat.begin(), temp->getMatrix());
@@ -472,7 +472,7 @@ void Node::calRealSpaceByMatrix()
 		}
 	} while (temp != NULL);
 
-	Matrix44 ret;
+	math::Matrix44 ret;
 	for (auto &item : vecMat)
 	{
 		ret = item * ret;

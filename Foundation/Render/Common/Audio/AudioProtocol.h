@@ -1,6 +1,7 @@
 #pragma once
 
 #include "system.h"
+#include "mathlib.h"
 
 namespace render
 {

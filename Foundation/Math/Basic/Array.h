@@ -156,9 +156,9 @@ namespace math
 		std::string toString()
 		{
 			std::ostringstream stream;
-			for (int j = 0; j < _height; j++)
+			for (int i = 0; i < _length; i++)
 			{
-				T fValue = getValue(i, j);
+				T fValue = getValue(i);
 				stream << fValue;
 				stream << ",";
 			}

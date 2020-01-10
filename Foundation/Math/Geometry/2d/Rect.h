@@ -30,12 +30,15 @@ namespace math
 		float getMaxY() const;
 
 		const Vector2& getOrigin() const;
+		
 		const Size& getSize() const;
 	public:
 		/**
 		*	设置参数
 		*/
 		void set(float x, float y, float w, float h);
+		void setOrigin(float x, float y);
+		void setSize(float x, float y);
 		/**
 		*	设置参数
 		*/

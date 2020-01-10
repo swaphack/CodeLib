@@ -14,6 +14,12 @@ Matrix::Matrix(int h, int w)
 
 }
 
+Matrix::Matrix()
+	: Array2D()
+{
+
+}
+
 Matrix Matrix::operator+(const Matrix& mat)
 {
 	assert(mat._width == _width && mat._height == _height);
@@ -106,5 +112,33 @@ Matrix& Matrix::operator*=(float k)
 	}
 
 	return *this;
+}
+
+Matrix& Matrix::operator=(const Matrix& mat)
+{
+	this->reset(mat._width, mat._height);
+	int32_t len = mat._width * mat._height;
+	for (int32_t i = 0; i < len; i++)
+	{
+		_values[i] = mat[i];
+	}
+
+	return *this;
+}
+
+Matrix Matrix::transpose() const
+{
+	Matrix mat;
+	mat.reset(_height, _width);
+
+	for (int32_t i = 0; i < _height; i++)
+	{
+		for (int32_t j = 0; j < _width; j++)
+		{
+			mat.setValue(i * _height + j, _values[i * _width + j]);
+		}
+	}
+
+	return mat;
 }
 

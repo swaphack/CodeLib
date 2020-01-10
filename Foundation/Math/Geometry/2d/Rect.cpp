@@ -144,7 +144,17 @@ const Size& Rect::getSize() const
 	return _size;
 }
 
-math::Rect::~Rect()
+Rect::~Rect()
 {
 
+}
+
+void Rect::setOrigin(float x, float y)
+{
+	this->_origin.set(x, y);
+}
+
+void Rect::setSize(float x, float y)
+{
+	this->_size.set(x, y);
 }

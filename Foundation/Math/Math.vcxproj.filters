@@ -355,9 +355,6 @@
     <ClInclude Include="Discrete\PropositionLogic\BooleanProposition.h">
       <Filter>Discrete\PropositionLogic</Filter>
     </ClInclude>
-    <ClInclude Include="Basic\List.h">
-      <Filter>Basic</Filter>
-    </ClInclude>
     <ClInclude Include="Basic\Collection\Graph.h">
       <Filter>Basic\Collection</Filter>
     </ClInclude>

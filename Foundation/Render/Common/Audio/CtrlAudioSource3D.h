@@ -18,8 +18,8 @@ namespace render
 
 		void set3DAttributes(const Attribute3DSettings& setting);
 		Attribute3DSettings get3DAttributes();
-		void set3DMinMaxDistance(const math::Range& distance);
-		math::Range get3DMinMaxDistance();
+		void set3DMinMaxDistance(const math::Interval& distance);
+		math::Interval get3DMinMaxDistance();
 		void set3DConeSettings(const Cone3DSettings& setting);
 		Cone3DSettings get3DConeSettings();
 		void set3DConeOrientation(const math::Vector3& orientation);

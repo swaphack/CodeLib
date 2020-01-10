@@ -1,6 +1,7 @@
 #pragma once
 
 #include "system.h"
+#include "mathlib.h"
 
 // ÐÎ×´
 namespace render

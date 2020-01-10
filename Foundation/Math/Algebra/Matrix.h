@@ -13,6 +13,7 @@ namespace math
 	struct Matrix : public Array2D<float>
 	{
 	public:
+		Matrix();
 		Matrix(int h, int w);
 	public:
 		/**
@@ -39,5 +40,14 @@ namespace math
 		*	矩阵扩展系数
 		*/
 		Matrix& operator*=(float k);
+	public:
+		/**
+		*	复制矩阵元素
+		*/
+		Matrix& operator=(const Matrix& mat);
+		/**
+		*	获取转置矩阵
+		*/
+		Matrix transpose() const;
 	};
 }
