@@ -44,7 +44,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <BrowseInformation>true</BrowseInformation>
-      <AdditionalIncludeDirectories>$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)/../Math/;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -87,11 +87,6 @@
     <ClInclude Include="Cache\CacheIdentity.h" />
     <ClInclude Include="Cache\CacheMgr.h" />
     <ClInclude Include="Cache\import.h" />
-    <ClInclude Include="Collider\AABB.h" />
-    <ClInclude Include="Collider\Box.h" />
-    <ClInclude Include="Collider\import.h" />
-    <ClInclude Include="Collider\macros.h" />
-    <ClInclude Include="Collider\OBB.h" />
     <ClInclude Include="Command\CommandLine.h" />
     <ClInclude Include="Command\CommandParser.h" />
     <ClInclude Include="Command\import.h" />
@@ -126,16 +121,6 @@
     <ClInclude Include="Framework\import.h" />
     <ClInclude Include="Framework\ITimer.h" />
     <ClInclude Include="Framework\Object.h" />
-    <ClInclude Include="Geometry\Circle.h" />
-    <ClInclude Include="Geometry\Line2.h" />
-    <ClInclude Include="Geometry\Polyhedron.h" />
-    <ClInclude Include="Geometry\Surface.h" />
-    <ClInclude Include="Geometry\import.h" />
-    <ClInclude Include="Geometry\Line3.h" />
-    <ClInclude Include="Geometry\macros.h" />
-    <ClInclude Include="Geometry\Polygon.h" />
-    <ClInclude Include="Geometry\Sphere.h" />
-    <ClInclude Include="Geometry\Triangle.h" />
     <ClInclude Include="Http\HttpCommand.h" />
     <ClInclude Include="Http\HttpConstant.h" />
     <ClInclude Include="Http\HttpDocument.h" />
@@ -144,14 +129,8 @@
     <ClInclude Include="Http\HttpResponse.h" />
     <ClInclude Include="Http\HttpTime.h" />
     <ClInclude Include="Http\import.h" />
-    <ClInclude Include="Math\Color.h" />
-    <ClInclude Include="Math\Equation.h" />
-    <ClInclude Include="Math\import.h" />
-    <ClInclude Include="Math\macros.h" />
-    <ClInclude Include="Math\Range.h" />
-    <ClInclude Include="Math\Rect.h" />
-    <ClInclude Include="Math\Size.h" />
-    <ClInclude Include="Math\Volume.h" />
+    <ClInclude Include="Image\Color.h" />
+    <ClInclude Include="Image\import.h" />
     <ClInclude Include="Memory\PtrCache.h" />
     <ClInclude Include="Memory\Memory.h" />
     <ClInclude Include="Memory\PtrInfo.h" />
@@ -204,7 +183,6 @@
     <ClInclude Include="Thread\ThreadPool.h" />
     <ClInclude Include="Type\Bit.h" />
     <ClInclude Include="Type\import.h" />
-    <ClInclude Include="Type\Number.h" />
     <ClInclude Include="Type\String.h" />
   </ItemGroup>
   <ItemGroup>
@@ -219,13 +197,11 @@
     <ClCompile Include="Cache\CacheGroup.cpp" />
     <ClCompile Include="Cache\CacheIdentity.cpp" />
     <ClCompile Include="Cache\CacheMgr.cpp" />
-    <ClCompile Include="Collider\AABB.cpp" />
-    <ClCompile Include="Collider\Box.cpp" />
-    <ClCompile Include="Collider\OBB.cpp" />
     <ClCompile Include="Command\CommandLine.cpp" />
     <ClCompile Include="Command\CommandParser.cpp" />
     <ClCompile Include="Concurrent\ConcurrentFile.cpp" />
     <ClCompile Include="Concurrent\Concurrent.cpp" />
+    <ClCompile Include="CSS\Margin.cpp" />
     <ClCompile Include="DataBase\DataRecord.cpp" />
     <ClCompile Include="DataBase\DataSheet.cpp" />
     <ClCompile Include="Device\Console.cpp" />
@@ -239,11 +215,6 @@
     <ClCompile Include="Framework\Dispatcher.cpp" />
     <ClCompile Include="Framework\FilePath.cpp" />
     <ClCompile Include="Framework\Object.cpp" />
-    <ClCompile Include="Geometry\Line2.cpp" />
-    <ClCompile Include="Geometry\Surface.cpp" />
-    <ClCompile Include="Geometry\Line3.cpp" />
-    <ClCompile Include="Geometry\Polygon.cpp" />
-    <ClCompile Include="Geometry\Polyhedron.cpp" />
     <ClCompile Include="Http\HttpCommand.cpp" />
     <ClCompile Include="Http\HttpConstant.cpp" />
     <ClCompile Include="Http\HttpDocument.cpp" />
@@ -253,7 +224,7 @@
     <ClCompile Include="Http\HttpRespDocument.cpp" />
     <ClCompile Include="Http\HttpResponse.cpp" />
     <ClCompile Include="Http\HttpTime.cpp" />
-    <ClCompile Include="Math\Color.cpp" />
+    <ClCompile Include="Image\Color.cpp" />
     <ClCompile Include="Memory\PtrCache.cpp" />
     <ClCompile Include="Memory\Memory.cpp" />
     <ClCompile Include="Net\Client.cpp" />

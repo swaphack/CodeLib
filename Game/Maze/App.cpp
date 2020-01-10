@@ -22,7 +22,7 @@ void App::show()
 	pMaze->autoGenerate(12122, 20, 10);
 
 	MazeMap* pMazeMap = CREATE_NODE(MazeMap);
-	pMazeMap->setVolume(sys::Size(1024, 768));
+	pMazeMap->setVolume(math::Size(1024, 768));
 	pMazeMap->flush(pMaze);
 
 	this->getCanvas()->getRoot()->addChild(pMazeMap);
@@ -57,9 +57,9 @@ void App::onKeyBoardListener(sys::Object* object, sys::BoardKey key, sys::Button
 		return;
 	}
 
-	sys::Vector3 lastPos;
-	sys::Vector3 vel;
-	sys::Vector3 curPos;
+	math::Vector3 lastPos;
+	math::Vector3 vel;
+	math::Vector3 curPos;
 
 	bool bMatch = true;
 	float speed = 5;

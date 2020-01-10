@@ -34,7 +34,7 @@ void DNS::getFirstIPAddress(const char* url, std::string& ip)
 	struct addrinfo *result = NULL;
 	struct addrinfo *ptr = NULL;
 	struct addrinfo hint32s;
-	int32 dwRetval;
+	int32_t dwRetval;
 
 	ZeroMemory(&hint32s, sizeof(hint32s));
 	hint32s.ai_family = AF_UNSPEC;
@@ -70,7 +70,7 @@ void DNS::getFirstIPAddress(const char* url, std::string& ip)
 	Socket::ReleaseSockModule();
 }
 
-void DNS::getAllIPAddress(const char* url, std::map<std::string, int32>& ipAddresses)
+void DNS::getAllIPAddress(const char* url, std::map<std::string, int32_t>& ipAddresses)
 {
 	Socket::InitSockModule();
 
@@ -83,9 +83,9 @@ void DNS::getAllIPAddress(const char* url, std::map<std::string, int32>& ipAddre
 	struct addrinfo *result = NULL;
 	struct addrinfo *ptr = NULL;
 	struct addrinfo hint32s;
-	int32 dwRetval;
+	int32_t dwRetval;
 	std::string ip;
-	int32 port;
+	int32_t port;
 
 	ZeroMemory(&hint32s, sizeof(hint32s));
 	hint32s.ai_family = AF_UNSPEC;
@@ -127,7 +127,7 @@ void DNS::getAllIPAddress(const char* url, std::map<std::string, int32>& ipAddre
 	Socket::ReleaseSockModule();
 }
 
-void DNS::getIPAddress(struct addrinfo* addr_info, std::string& ip, int32& port)
+void DNS::getIPAddress(struct addrinfo* addr_info, std::string& ip, int32_t& port)
 {
 	ip.clear();
 	port = 0;
@@ -160,7 +160,7 @@ void DNS::getIPAddress(struct addrinfo* addr_info, std::string& ip, int32& port)
 	}
 }
 
-void DNS::getIPAddress(struct sockaddr_in* addr_in, std::string& ip, int32& port)
+void DNS::getIPAddress(struct sockaddr_in* addr_in, std::string& ip, int32_t& port)
 {
 	ip.clear();
 	port = 0;

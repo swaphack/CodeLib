@@ -43,7 +43,7 @@ String::String(const char* value)
 	*this = value;
 }
 
-String::String(const char* value, int32 count)
+String::String(const char* value, int32_t count)
 :_value(nullptr)
 , _size(0)
 {
@@ -110,7 +110,7 @@ String String::operator+(const char* value)
 	return temp;
 }
 
-char String::operator[](int32 index)
+char String::operator[](int32_t index)
 {
 	if (index >= _size || index < 0)
 	{
@@ -120,7 +120,7 @@ char String::operator[](int32 index)
 	return _value[index];
 }
 
-char& String::at(int32 index)
+char& String::at(int32_t index)
 {
 	if (index >= _size || index < 0)
 	{
@@ -131,23 +131,23 @@ char& String::at(int32 index)
 }
 
 // Î²²¿×·¼Ó×Ö·û
-void String::append(int32 count, char value)
+void String::append(int32_t count, char value)
 {
 	char str[2] = { "A" };
-	for (int32 i = 0; i < count; i++)
+	for (int32_t i = 0; i < count; i++)
 	{
 		str[0] = value;
 		this->concat(str);
 	}
 }
-void String::append(int32 count, char* value)
+void String::append(int32_t count, char* value)
 {
 	if (value == nullptr)
 	{
 		return;
 	}
 
-	for (int32 i = 0; i < count; i++)
+	for (int32_t i = 0; i < count; i++)
 	{
 		this->concat(value);
 	}
@@ -177,7 +177,7 @@ String String::replace(char spot, char* value)
 String String::replace(char* spot, char* value)
 {
 	String str;
-	int32 len = strlen(spot);
+	int32_t len = strlen(spot);
 	char* ptr = _value;
 	while (*ptr != 0)
 	{
@@ -203,20 +203,20 @@ String& String::concat(const char* value)
 		return *this;
 	}
 
-	int32 count = strlen(value);
+	int32_t count = strlen(value);
 
-	int32 len = _size + count;
+	int32_t len = _size + count;
 
 	char* temp = StreamHelper::mallocStream(len, _value, _size);
 	StreamHelper::freeStream(_value);
 	_value = temp;
 
-	int32 offset = _size - 1;
+	int32_t offset = _size - 1;
 	if (offset < 0)
 	{
 		offset = 0;
 	}
-	for (int32 i = 0; i < count; i++)
+	for (int32_t i = 0; i < count; i++)
 	{
 		*(_value + offset + i) = *(value + i);
 	}
@@ -239,27 +239,27 @@ String& String::concat(const char* value1, const char* value2)
 		return this->concat(value1);
 	}
 
-	int32 count1 = strlen(value1);
-	int32 count2 = strlen(value2);
+	int32_t count1 = strlen(value1);
+	int32_t count2 = strlen(value2);
 
-	int32 len = _size + count1 + count2;
+	int32_t len = _size + count1 + count2;
 
 	char* temp = StreamHelper::mallocStream(len, _value, _size);
 	StreamHelper::freeStream(_value);
 	_value = temp;
 
-	int32 offset = _size - 1;
+	int32_t offset = _size - 1;
 	if (offset < 0)
 	{
 		offset = 0;
 	}
-	for (int32 i = 0; i < count1; i++)
+	for (int32_t i = 0; i < count1; i++)
 	{
 		*(_value + offset + i) = *(value1 + i);
 	}
 
 	offset += count1;
-	for (int32 i = 0; i < count2; i++)
+	for (int32_t i = 0; i < count2; i++)
 	{
 		*(_value + offset + i) = *(value2 + i);
 	}
@@ -287,34 +287,34 @@ String& String::concat(const char* value1, const char* value2, const char* value
 		return this->concat(value1, value2);
 	}
 
-	int32 count1 = strlen(value1);
-	int32 count2 = strlen(value2);
-	int32 count3 = strlen(value3);
+	int32_t count1 = strlen(value1);
+	int32_t count2 = strlen(value2);
+	int32_t count3 = strlen(value3);
 
-	int32 len = _size + count1 + count2 + count3;
+	int32_t len = _size + count1 + count2 + count3;
 
 	char* temp = StreamHelper::mallocStream(len, _value, _size);
 	StreamHelper::freeStream(_value);
 	_value = temp;
 
-	int32 offset = _size - 1;
+	int32_t offset = _size - 1;
 	if (offset < 0)
 	{
 		offset = 0;
 	}
-	for (int32 i = 0; i < count1; i++)
+	for (int32_t i = 0; i < count1; i++)
 	{
 		*(_value + offset + i) = *(value1 + i);
 	}
 
 	offset += count1;
-	for (int32 i = 0; i < count2; i++)
+	for (int32_t i = 0; i < count2; i++)
 	{
 		*(_value + offset + i) = *(value2 + i);
 	}
 
 	offset += count2;
-	for (int32 i = 0; i < count3; i++)
+	for (int32_t i = 0; i < count3; i++)
 	{
 		*(_value + offset + i) = *(value3 + i);
 	}
@@ -330,11 +330,11 @@ bool String::contains(const char* value)
 		return false;
 	}
 
-	int32 len = strlen(value);
-	int32 i = 0;
-	int32 index = 0;
+	int32_t len = strlen(value);
+	int32_t i = 0;
+	int32_t index = 0;
 	char tempChar = 0;
-	int32 offset = -1;
+	int32_t offset = -1;
 
 	while (index < _size)
 	{
@@ -377,7 +377,7 @@ bool String::compare(const char* value)
 	return this->compare(0, value);
 }
 
-bool String::compare(int32 offset, const char* value)
+bool String::compare(int32_t offset, const char* value)
 {
 	if (value == nullptr && _value != nullptr)
 	{
@@ -390,9 +390,9 @@ bool String::compare(int32 offset, const char* value)
 	return this->compare(0, value, strlen(value));
 }
 
-bool String::compare(int32 offset, const char* value, int32 count)
+bool String::compare(int32_t offset, const char* value, int32_t count)
 {
-	for (int32 i = 0; i < count; i++)
+	for (int32_t i = 0; i < count; i++)
 	{
 		if (*(_value + offset + i) != *(value + i))
 		{
@@ -415,13 +415,13 @@ bool String::endWith(const char* value)
 		return false;
 	}
 
-	int32 len = strlen(value) + 1;
+	int32_t len = strlen(value) + 1;
 	if (len	 > _size)
 	{
 		return false;
 	}
 
-	for (int32 i = 0; i < len; i ++)
+	for (int32_t i = 0; i < len; i ++)
 	{
 		if (*(_value + _size - 1  - i) != *(value + len - 1 - i))
 		{
@@ -444,13 +444,13 @@ bool String::startWith(const char* value)
 		return false;
 	}
 
-	int32 len = strlen(value);
+	int32_t len = strlen(value);
 	if (len > _size)
 	{
 		return false;
 	}
 
-	for (int32 i = 0; i < len; i++)
+	for (int32_t i = 0; i < len; i++)
 	{
 		if (*(_value +  i) != *(value +  i))
 		{
@@ -461,14 +461,14 @@ bool String::startWith(const char* value)
 	return true;
 }
 
-String& String::remove(int32 offset, int32 count)
+String& String::remove(int32_t offset, int32_t count)
 {
 	if (offset >= _size || offset < 0)
 	{
 		return *this;
 	}
 
-	int32 i = 0;
+	int32_t i = 0;
 	while (offset + i < _size)
 	{
 		if (offset + count + i >= _size)
@@ -487,20 +487,20 @@ String& String::remove(int32 offset, int32 count)
 	return *this;
 }
 
-String& String::insert(int32 offset, const char* value)
+String& String::insert(int32_t offset, const char* value)
 {
 	if (offset >= _size || offset < 0)
 	{
 		return *this;
 	}
-	int32 len = strlen(value);
-	int32 totalLen = len + _size;
+	int32_t len = strlen(value);
+	int32_t totalLen = len + _size;
 	char* temp = nullptr;
 	temp = StreamHelper::mallocStream(totalLen, _value, _size);
 	StreamHelper::freeStream(_value);
 	_value = temp;
 
-	int32 i = 0;
+	int32_t i = 0;
 
 	while (i < _size - offset)
 	{
@@ -516,7 +516,7 @@ String& String::insert(int32 offset, const char* value)
 	return *this;
 }
 
-String String::subString(int32 offset, int32 count)
+String String::subString(int32_t offset, int32_t count)
 {
 	if (offset >= _size)
 	{
@@ -531,9 +531,9 @@ String String::subString(int32 offset, int32 count)
 }
 
 
-int32 String::findFirstOf(char value)
+int32_t String::findFirstOf(char value)
 {
-	int32 offset = 0;
+	int32_t offset = 0;
 
 	for (; offset < getSize(); offset++)
 	{
@@ -551,12 +551,12 @@ int32 String::findFirstOf(char value)
 	return offset;
 }
 
-int32 String::findFirstOf(const char* value)
+int32_t String::findFirstOf(const char* value)
 {
-	int32 offset = 0;
-	int32 index = 0;
-	int32 len = strlen(value);
-	int32 i = 0;
+	int32_t offset = 0;
+	int32_t index = 0;
+	int32_t len = strlen(value);
+	int32_t i = 0;
 
 	while (offset < getSize())
 	{
@@ -593,9 +593,9 @@ int32 String::findFirstOf(const char* value)
 	return offset;
 }
 
-int32 String::findLastOf(char value)
+int32_t String::findLastOf(char value)
 {
-	int32 offset = getSize() - 1;
+	int32_t offset = getSize() - 1;
 
 	for (; offset >= 0; offset--)
 	{
@@ -613,12 +613,12 @@ int32 String::findLastOf(char value)
 	return offset;
 }
 
-int32 String::findLastOf(const char* value)
+int32_t String::findLastOf(const char* value)
 {
-	int32 offset = getSize() - 1;
-	int32 index = 0;
-	int32 len = strlen(value);
-	int32 i = 0;
+	int32_t offset = getSize() - 1;
+	int32_t index = 0;
+	int32_t len = strlen(value);
+	int32_t i = 0;
 
 	while (offset >= 0)
 	{
@@ -708,7 +708,7 @@ String String::trimRight()
 String String::toLower()
 {
 	String text = getString();
-	for (int32 i = 0; i < _size; i++)
+	for (int32_t i = 0; i < _size; i++)
 	{
 		text.at(i) = tolower(text.at(i));
 	}
@@ -718,7 +718,7 @@ String String::toLower()
 String String::toUpper()
 {
 	String text = getString();
-	for (int32 i = 0; i < _size; i++)
+	for (int32_t i = 0; i < _size; i++)
 	{
 		text.at(i) = toupper(text.at(i));
 	}
@@ -742,8 +742,8 @@ String& String::make(const char* format, ...)
 void String::split(char spot, std::vector<String>& dest)
 {
 	char* ptr = _value;
-	int32 offset = 0;
-	int32 count = 0;
+	int32_t offset = 0;
+	int32_t count = 0;
 	dest.clear();
 	while (offset + count <= _size)
 	{
@@ -764,11 +764,11 @@ void String::split(char spot, std::vector<String>& dest)
 void String::split(const char* spot, std::vector<String>& dest)
 {
 	char* ptr = _value;
-	int32 len = strlen(spot);
-	int32 offset = 0;
-	int32 count = 0;
-	int32 i = 0;
-	int32 beginIndex = -1;
+	int32_t len = strlen(spot);
+	int32_t offset = 0;
+	int32_t count = 0;
+	int32_t i = 0;
+	int32_t beginIndex = -1;
 	char tempChar = 0;
 	dest.clear();
 	while (offset + count <= _size)
@@ -817,8 +817,8 @@ void String::split(const char* spot, std::vector<String>& dest)
 void String::split(char spot, std::vector<std::string>& dest)
 {
 	char* ptr = _value;
-	int32 offset = 0;
-	int32 count = 0;
+	int32_t offset = 0;
+	int32_t count = 0;
 	dest.clear();
 	while (offset + count <= _size)
 	{
@@ -839,11 +839,11 @@ void String::split(char spot, std::vector<std::string>& dest)
 void String::split(const char* spot, std::vector<std::string>& dest)
 {
 	char* ptr = _value;
-	int32 len = strlen(spot);
-	int32 offset = 0;
-	int32 count = 0;
-	int32 i = 0;
-	int32 beginIndex = -1;
+	int32_t len = strlen(spot);
+	int32_t offset = 0;
+	int32_t count = 0;
+	int32_t i = 0;
+	int32_t beginIndex = -1;
 	char tempChar = 0;
 	dest.clear();
 	while (offset + count <= _size)
@@ -898,9 +898,9 @@ String String::reverse()
 {
 	String value = *this;
 
-	int32 half = _size / 2;
+	int32_t half = _size / 2;
 	char temp;
-	for (int32 i = 0; i < half; i++)
+	for (int32_t i = 0; i < half; i++)
 	{
 		temp = value[i];
 		value.at(i) = value[_size - i];
@@ -915,7 +915,7 @@ const char* String::getString() const
 	return _value;
 }
 
-int32 String::getSize() const
+int32_t String::getSize() const
 {
 	if (_size == 0)
 	{

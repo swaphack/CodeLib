@@ -7,7 +7,7 @@ using namespace render;
 View::View()
 :_camera(nullptr)
 {
-	_scale = sys::Vector3::One;
+	_scale = math::Vector3(1,1,1);
 }
 
 View::~View()
@@ -22,22 +22,21 @@ const ViewConfig* View::getConfig()
 
 void View::setPosition(float x, float y)
 {
-	_position.x = x;
-	_position.y = y;
+	_position.set(x, y);
 }
 
-const sys::Vector2& View::getPosition()
+const math::Vector2& View::getPosition()
 {
 	return _position;
 }
 
 void View::setFrameSize(float width, float height)
 {
-	_size.width = width;
-	_size.height = height;
+	_size.setWidth(width);
+	_size.setHeight(height);
 }
 
-const sys::Size& View::getFrameSize()
+const math::Size& View::getFrameSize()
 {
 	return _size;
 }
@@ -56,14 +55,14 @@ Camera* View::getCamera()
 
 void View::setScale(float x, float y, float z)
 {
-	_scale.x = x;
-	_scale.y = y;
-	_scale.z = z;
+	_scale.setX(x);
+	_scale.setY(y);
+	_scale.setZ(z);
 
 	_camera->setScale(_scale);
 }
 
-sys::Vector3 View::getScale()
+math::Vector3 View::getScale()
 {
 	return _scale;
 }
@@ -73,7 +72,7 @@ void View::initView()
 	if (isDirty())
 	{
 		// 定义视窗位置
-		glViewport((int)_position.x, (int)_position.y, (int)_size.width, (int)_size.height);
+		glViewport((int)_position.getX(), (int)_position.getY(), (int)_size.getWidth(), (int)_size.getHeight());
 		glMatrixMode(GL_PROJECTION);
 		glLoadIdentity();
 		setDirty(false);

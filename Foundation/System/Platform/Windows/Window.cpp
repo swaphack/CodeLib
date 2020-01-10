@@ -109,7 +109,7 @@ Window::~Window()
 	this->dispose();
 }
 
-void Window::initWindow(const char* title, int32 width, int32 height)
+void Window::initWindow(const char* title, int32_t width, int32_t height)
 {
 	_title = title;
 	_width = static_cast<float>(width);
@@ -155,8 +155,8 @@ bool Window::init()
 	DWORD dwExStyle;			// 扩展窗口风格
 	DWORD dwStyle;				// 窗口风格
 
-	int64 left = (GetSystemMetrics(SM_CXSCREEN) - _width)* 0.5f;
-	int64 top = (GetSystemMetrics(SM_CYSCREEN) - _height)* 0.5f;
+	int64_t left = (GetSystemMetrics(SM_CXSCREEN) - _width)* 0.5f;
+	int64_t top = (GetSystemMetrics(SM_CYSCREEN) - _height)* 0.5f;
 
 	_instance = GetModuleHandle(NULL);          // 取得我们窗口的实例
 

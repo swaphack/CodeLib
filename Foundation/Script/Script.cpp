@@ -77,12 +77,12 @@ bool Script::initWordSet(const std::string& filepath)
 
 bool Script::initSysmbolRule(const std::string& filepath)
 {
-	if (filepath == nullptr)
+	if (filepath.empty())
 	{
 		return false;
 	}
 
-	return _symbolHandler->load(filepath);
+	return _symbolHandler->loadFromFile(filepath);
 }
 
 bool Script::load(const std::string& filepath)

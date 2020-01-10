@@ -18,14 +18,14 @@ namespace render
 
 		void set3DAttributes(const Attribute3DSettings& setting);
 		Attribute3DSettings get3DAttributes();
-		void set3DMinMaxDistance(const sys::Range& distance);
-		sys::Range get3DMinMaxDistance();
+		void set3DMinMaxDistance(const math::Range& distance);
+		math::Range get3DMinMaxDistance();
 		void set3DConeSettings(const Cone3DSettings& setting);
 		Cone3DSettings get3DConeSettings();
-		void set3DConeOrientation(const sys::Vector3& orientation);
-		sys::Vector3 get3DConeOrientation();
-		void set3DCustomRolloff(const std::vector<sys::Vector3>& points);
-		std::vector<sys::Vector3> get3DCustomRolloff();
+		void set3DConeOrientation(const math::Vector3& orientation);
+		math::Vector3 get3DConeOrientation();
+		void set3DCustomRolloff(const std::vector<math::Vector3>& points);
+		std::vector<math::Vector3> get3DCustomRolloff();
 		void set3DOcclusion(const Occlusion3DSettings& setting);
 		Occlusion3DSettings get3DOcclusion();
 		void set3DSpread(float angle);
@@ -37,8 +37,8 @@ namespace render
 		void set3DDistanceFilter(const Distance3DFilterSettings& setting);
 		Distance3DFilterSettings get3DDistanceFilter();
 
-		void setVelocity(const sys::Vector3& velocity);
-		const sys::Vector3& getVelocity();
+		void setVelocity(const math::Vector3& velocity);
+		const math::Vector3& getVelocity();
 	protected:
 		// ≥ı ºªØƒ¨»œ≈‰÷√
 		virtual int getInitMode();

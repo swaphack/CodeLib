@@ -33,9 +33,9 @@ namespace render
 	public:
 		virtual bool init();
 		// 设置粒子个数
-		void setCount(uint32 count);
+		void setCount(uint32_t count);
 		// 获取粒子个数
-		uint32 getCount();
+		uint32_t getCount();
 		// 粒子播放结束后处理 override
 		virtual void onParticleEndHandler();
 		// 创建粒子 override
@@ -43,6 +43,6 @@ namespace render
 	protected:
 		virtual void updateSelf(float interval);
 	private:
-		uint32 _particleCount;
+		uint32_t _particleCount;
 	};
 }

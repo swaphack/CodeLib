@@ -28,7 +28,7 @@ void ClipPlane::setClipNormal(float x, float y, float z)
 	_clipNormal[2] = z;
 }
 
-sys::Vector3 ClipPlane::getClipNormal()
+math::Vector3 ClipPlane::getClipNormal()
 {
-	return sys::Vector3(static_cast<float>(_clipNormal[0]), static_cast<float>(_clipNormal[1]), static_cast<float>(_clipNormal[2]));
+	return math::Vector3(static_cast<float>(_clipNormal[0]), static_cast<float>(_clipNormal[1]), static_cast<float>(_clipNormal[2]));
 }

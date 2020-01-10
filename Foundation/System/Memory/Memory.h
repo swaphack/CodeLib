@@ -14,7 +14,7 @@ namespace sys
 	public:
 		static Memory* getInstance();
 		// 分配一个缓存
-		PtrCache* alloct(const char* name, uint32 size);
+		PtrCache* alloct(const char* name, uint32_t size);
 		// 销毁一个缓存
 		void destory(const char* name);
 		// 清空

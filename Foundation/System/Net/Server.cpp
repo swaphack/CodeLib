@@ -10,7 +10,7 @@ Server::Server()
 	_socket->listen(1);
 }
 
-Server::Server( const char* ip, int32 port, int32 backlog )
+Server::Server( const char* ip, int32_t port, int32_t backlog )
 {
 	_socket = new Socket();
 	_socket-> bind(ip, port);
@@ -37,7 +37,7 @@ void Server::update()
 	}
 
 	// disabled socket
-	std::vector<int32> removedSocks;
+	std::vector<int32_t> removedSocks;
 
 	// recv data
 	this->_recvData(removedSocks);
@@ -71,7 +71,7 @@ void Server::setCloseHandler(Object* target, CLIENT_CLOSE_HANDLER handler)
 	_closeHandler.second = handler;
 }
 
-void Server::sendMessage( int32 id, NetData* data )
+void Server::sendMessage( int32_t id, NetData* data )
 {
 	this->addSendBuffer(id, data);
 }
@@ -82,7 +82,7 @@ void Server::sendBroadcast(NetData* data)
 	{
 		return;
 	}
-	std::map<int32, DataQueue*>::iterator it = _sendDatas.begin();
+	std::map<int32_t, DataQueue*>::iterator it = _sendDatas.begin();
 	while (it != _sendDatas.end())
 	{
 		NetData* temp = new NetData(data->data, data->size);
@@ -100,7 +100,7 @@ void Server::addClient( Socket* sock )
 		return;
 	}
 
-	int32 sockId = sock->getID();
+	int32_t sockId = sock->getID();
 
 	_clients[sockId] = sock;
 
@@ -116,7 +116,7 @@ void Server::addClient( Socket* sock )
 	}
 }
 
-void Server::removeClient( int32 sockId )
+void Server::removeClient( int32_t sockId )
 {
 	_clients.erase(sockId);
 	if (_recvDatas.find(sockId) != _recvDatas.end())
@@ -139,7 +139,7 @@ void Server::removeClient( int32 sockId )
 
 void Server::removeAllClients()
 {
-	std::map<int32, Socket*>::iterator it = _clients.begin();
+	std::map<int32_t, Socket*>::iterator it = _clients.begin();
 
 	while (it != _clients.end())
 	{
@@ -152,7 +152,7 @@ void Server::removeAllClients()
 	_sendDatas.clear();
 }
 
-void Server::addRecvBuffer( int32 id, NetData* data )
+void Server::addRecvBuffer( int32_t id, NetData* data )
 {
 	if (data == nullptr)
 	{
@@ -168,7 +168,7 @@ void Server::addRecvBuffer( int32 id, NetData* data )
 	}
 }
 
-void Server::addSendBuffer( int32 id, NetData* data )
+void Server::addSendBuffer( int32_t id, NetData* data )
 {
 	if (data == nullptr)
 	{
@@ -185,7 +185,7 @@ void Server::addSendBuffer( int32 id, NetData* data )
 	}
 }
 
-void Server::onRecvHandler( int32 id, NetData* data )
+void Server::onRecvHandler( int32_t id, NetData* data )
 {
 	if (data == nullptr)
 	{
@@ -194,11 +194,11 @@ void Server::onRecvHandler( int32 id, NetData* data )
 	this->addRecvBuffer(id, data);
 }
 
-void Server::_recvData( std::vector<int32>& removedSocks )
+void Server::_recvData( std::vector<int32_t>& removedSocks )
 {
-	int32 size;
+	int32_t size;
 
-	for (std::map<int32, Socket*>::iterator it = _clients.begin();
+	for (std::map<int32_t, Socket*>::iterator it = _clients.begin();
 		it != _clients.end();
 		it++)
 	{
@@ -209,13 +209,13 @@ void Server::_recvData( std::vector<int32>& removedSocks )
 		{// 等待
 			if (socket->hasError() == true)
 			{
-				int32 sockId = socket->getID();
+				int32_t sockId = socket->getID();
 				removedSocks.push_back(sockId);
 			}
 		}
 		else if (size == 0)
 		{// 断开连接
-			int32 sockId = socket->getID();
+			int32_t sockId = socket->getID();
 			removedSocks.push_back(sockId);
 		}
 		else if (size > 0)
@@ -225,13 +225,13 @@ void Server::_recvData( std::vector<int32>& removedSocks )
 	}
 }
 
-void Server::_removeSockets( std::vector<int32>& removedSocks )
+void Server::_removeSockets( std::vector<int32_t>& removedSocks )
 {
-	for (std::vector<int32>::iterator it = removedSocks.begin();
+	for (std::vector<int32_t>::iterator it = removedSocks.begin();
 		it != removedSocks.end();
 		it++)
 	{
-		int32 sockId = (*it);
+		int32_t sockId = (*it);
 		Socket* socket = _clients[sockId];
 		this->removeClient(sockId);
 		if (socket)
@@ -250,15 +250,15 @@ void Server::_flushData()
 
 void Server::_flushSendData()
 {
-	int32 size;
+	int32_t size;
 
-	for (std::map<int32, Socket*>::iterator it = _clients.begin();
+	for (std::map<int32_t, Socket*>::iterator it = _clients.begin();
 		it != _clients.end();
 		it++)
 	{
 		size = 0;
 
-		int32 sockId = it->first;
+		int32_t sockId = it->first;
 
 		NetData* data = _sendDatas[sockId]->topData();
 		if (data)
@@ -280,9 +280,9 @@ void Server::_flushSendData()
 
 void Server::_flushRecvData()
 {
-	int32 id;
+	int32_t id;
 
-	for (std::map<int32, Socket*>::iterator it = _clients.begin();
+	for (std::map<int32_t, Socket*>::iterator it = _clients.begin();
 		it != _clients.end();
 		it++)
 	{

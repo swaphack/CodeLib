@@ -19,11 +19,11 @@ namespace ui
 		/**
 		*	几何信息
 		*/
-		const sys::Rect& getGeometry();
+		const math::Rect& getGeometry();
 		/**
 		*	设置几何信息
 		*/
-		void setGeometry(const sys::Rect& rect);
+		void setGeometry(const math::Rect& rect);
 		/**
 		*	设置几何信息
 		*/
@@ -35,11 +35,11 @@ namespace ui
 		/**
 		*	设置几何位置
 		*/
-		void setOrgin(const sys::Vector2& position);
+		void setOrgin(const math::Vector2& position);
 		/**
 		*	获取几何位置
 		*/
-		sys::Vector2 getOrgin();
+		math::Vector2 getOrgin();
 		/**
 		*	设置几何面积
 		*/
@@ -47,11 +47,11 @@ namespace ui
 		/**
 		*	设置几何面积
 		*/
-		void setSize(const sys::Size& size);
+		void setSize(const math::Size& size);
 		/**
 		*	获取几何面积
 		*/
-		sys::Size getSize();
+		math::Size getSize();
 		/**
 		*	设置元件
 		*/
@@ -76,7 +76,7 @@ namespace ui
 		/**
 		*	当窗口位置和大小发生改变时
 		*/
-		virtual void resize(const sys::Rect& rect);
+		virtual void resize(const math::Rect& rect);
 	public: // 其他辅助方法
 		/**
 		*	设置矩形框是否可见
@@ -97,12 +97,12 @@ namespace ui
 		/**
 		*	设置元件的集合信息
 		*/
-		void setWidgetGeomerty(const sys::Rect& geometry, const sys::Vector2& anchorPoint);
+		void setWidgetGeomerty(const math::Rect& geometry, const math::Vector2& anchorPoint);
 	protected:
 		void calAnchorPoint(float& x, float& y);
 	protected:
 		// 几何信息
-		sys::Rect m_rGeometry;
+		math::Rect m_rGeometry;
 		// 锚点位置
 		AnchorPosition m_eAnchorPosition;
 		// 矩形框颜色

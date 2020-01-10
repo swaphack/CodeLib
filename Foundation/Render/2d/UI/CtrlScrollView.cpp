@@ -1,4 +1,5 @@
 #include "CtrlScrollView.h"
+#include <cassert>
 using namespace render;
 
 ScrollItem::ScrollItem()
@@ -11,18 +12,18 @@ ScrollItem::~ScrollItem()
 
 }
 
-void ScrollItem::addItem(Node* node, const sys::Size& size)
+void ScrollItem::addItem(Node* node, const math::Size& size)
 {
 	if (node == nullptr)
 	{
 		return;
 	}
-	node->setPosition(size.width * 0.5f, size.height * 0.5f);
+	node->setPosition(size.getWidth() * 0.5f, size.getHeight() * 0.5f);
 	this->addChild(node);
-	this->setVolume(size.width, size.height);
+	this->setVolume(size.getWidth(), size.getHeight());
 }
 
-ScrollItem* ScrollItem::create(Node* node, const sys::Size& size)
+ScrollItem* ScrollItem::create(Node* node, const math::Size& size)
 {
 	ScrollItem* item = new ScrollItem();
 	AUTO_RELEASE_OBJECT(item);
@@ -74,14 +75,14 @@ void CtrlScrollView::append(Node* item)
 	this->append(item, _itemSize);
 }
 
-void CtrlScrollView::append(Node* item, const sys::Size& size)
+void CtrlScrollView::append(Node* item, const math::Size& size)
 {
 	if (item == nullptr)
 	{
 		return;
 	}
 
-	ASSERT(size.width != 0 && size.height != 0);
+	assert(size.getWidth() != 0 && size.getHeight() != 0);
 	
 	ScrollItem* pScrollItem = ScrollItem::create(item, size);
 	pScrollItem->init();
@@ -129,18 +130,17 @@ void CtrlScrollView::removeAllItems()
 }
 
 
-void CtrlScrollView::setItemSize(const sys::Size& size)
+void CtrlScrollView::setItemSize(const math::Size& size)
 {
 	_itemSize = size;
 }
 
 void CtrlScrollView::setItemSize(float width, float height)
 {
-	_itemSize.width = width;
-	_itemSize.height = height;
+	_itemSize.set(width, height);
 }
 
-const sys::Size& CtrlScrollView::getItemSize()
+const math::Size& CtrlScrollView::getItemSize()
 {
 	return _itemSize;
 }
@@ -178,21 +178,20 @@ void CtrlScrollView::onEndTouch(sys::Object* object, float x, float y)
 
 bool CtrlScrollView::onTouchBegan(float x, float y)
 {
-	_touchPosition.x = x;
-	_touchPosition.y = y;
+	_touchPosition.set(x, y);
 
 	return true;
 }
 
 void CtrlScrollView::onTouchMoved(float x, float y)
 {
-	sys::Vector2 delta = sys::Vector2(x, y);
-	delta.sub(_touchPosition);
+	math::Vector2 delta = math::Vector2(x, y);
+	delta-=_touchPosition;
 
-	float offX = -getAnchorPoint().x * getWidth();
-	float offY = -getAnchorPoint().y * getHeight();
+	float offX = -getAnchorPoint().getX() * getWidth();
+	float offY = -getAnchorPoint().getY() * getHeight();
 
-	sys::Vector3 pos = _content->getPosition();
+	math::Vector3 pos = _content->getPosition();
 
 	float min = 0;
 	float max = 0;
@@ -201,38 +200,38 @@ void CtrlScrollView::onTouchMoved(float x, float y)
 	{
 	case ESD_HORIZONTAL_LEFT:
 	{
-		pos.x += delta.x;
+		pos.setX(pos.getX() + delta.getX());
 		min = getWidth() - _content->getWidth() + offX;
 		max = 0 + offX;
-		if (pos.x < min) pos.x = min;
-		if (pos.x > max) pos.x = max;
+		if (pos.getX() < min) pos.setX(min);
+		if (pos.getX() > max) pos.setX(max);
 		break;
 	}
 	case ESD_HORIZONTAL_RIGHT:
 	{
-		pos.x += delta.x;
+		pos.setX(pos.getX() + delta.getX());
 		min = getWidth() - _content->getWidth() + offX;
 		max = 0 + offX;
-		if (pos.x < min) pos.x = min;
-		if (pos.x > max) pos.x = max;
+		if (pos.getX() < min) pos.setX(min);
+		if (pos.getX() > max) pos.setX(max);
 		break;
 	}
 	case ESD_VERTICAL_TOP:
 	{
-		pos.y += delta.y;
+		pos.setY(pos.getY() + delta.getY());
 		min = getHeight() - _content->getHeight() + offY;
 		max = 0 + offY;
-		if (pos.y < min) pos.y = min;
-		if (pos.y > max) pos.y = max;
+		if (pos.getY() < min) pos.setY(min);
+		if (pos.getY() > max) pos.setY(max);
 		break;
 	}
 	case ESD_VERTICAL_BOTTOM:
 	{
-		pos.y += delta.y;
+		pos.setY(pos.getY() + delta.getY());
 		min = getHeight() - _content->getHeight() + offY;
 		max = 0 + offY;
-		if (pos.y < min) pos.y = min;
-		if (pos.y > max) pos.y = max;
+		if (pos.getY() < min) pos.setY(min);
+		if (pos.getY() > max) pos.setY(max);
 		break;
 	}
 	default:
@@ -241,7 +240,7 @@ void CtrlScrollView::onTouchMoved(float x, float y)
 
 	_content->setPosition(pos);
 
-	_touchPosition = sys::Vector2(x, y);
+	_touchPosition = math::Vector2(x, y);
 }
 
 void CtrlScrollView::onTouchEnded(float x, float y)
@@ -328,8 +327,8 @@ void CtrlScrollView::initItems()
 
 void CtrlScrollView::initContent()
 {
-	float offX = -getAnchorPoint().x * getWidth();
-	float offY = -getAnchorPoint().y * getHeight();
+	float offX = -getAnchorPoint().getX() * getWidth();
+	float offY = -getAnchorPoint().getY() * getHeight();
 
 	switch (_scrollDirection)
 	{

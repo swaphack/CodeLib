@@ -18,7 +18,7 @@ HttpDownload::~HttpDownload()
 	this->clear();
 }
 
-bool HttpDownload::download(const char* url, int32 port, const char* filepath, OnHttpDownloadCallback callback, int32 tag)
+bool HttpDownload::download(const char* url, int32_t port, const char* filepath, OnHttpDownloadCallback callback, int32_t tag)
 {
 	if (url == NULL)
 	{
@@ -51,15 +51,15 @@ bool HttpDownload::download(const char* url, int32 port, const char* filepath, O
 	return true;
 }
 
-void HttpDownload::flushListenData(int32 id)
+void HttpDownload::flushListenData(int32_t id)
 {// 推送监听到的数据
-	std::map<int32, StreamWriter*>::iterator iter1 = _downloadDatas.find(id);
+	std::map<int32_t, StreamWriter*>::iterator iter1 = _downloadDatas.find(id);
 	if (iter1 == _downloadDatas.end())
 	{// 无缓存数据
 		return;
 	}
 
-	std::map<int32, DownloadSlot >::iterator iter2 = _downloadSlots.find(id);
+	std::map<int32_t, DownloadSlot >::iterator iter2 = _downloadSlots.find(id);
 	if (iter2 == _downloadSlots.end())
 	{// 无下载监听
 		SAFE_DELETE(iter1->second);
@@ -85,7 +85,7 @@ void HttpDownload::flushListenData(int32 id)
 	_downloadDatas.erase(iter1);
 }
 
-void HttpDownload::onRecvHandle(int32 id, DataQueue& data)
+void HttpDownload::onRecvHandle(int32_t id, DataQueue& data)
 {// 接收数据回调
 	if (data.empty())
 	{
@@ -96,7 +96,7 @@ void HttpDownload::onRecvHandle(int32 id, DataQueue& data)
 
 	NetData* netData = data.popData();
 
-	std::map<int32, StreamWriter*>::iterator iter = _downloadDatas.find(id);
+	std::map<int32_t, StreamWriter*>::iterator iter = _downloadDatas.find(id);
 	if (iter == _downloadDatas.end())
 	{// 创建新的接收池
 		pWriter = new StreamWriter(netData->data, netData->size);
@@ -112,7 +112,7 @@ void HttpDownload::onRecvHandle(int32 id, DataQueue& data)
 	HttpRespDocument* pDoc = new HttpRespDocument();
 	if (pDoc->parseResponse(pWriter->getData(), pWriter->getLength()))
 	{
-		int32 len = 0;
+		int32_t len = 0;
 		if (pDoc->getint32egerHeader(HttpResponeField::CONTENT_LENGTH, len))
 		{
 			if (len == pDoc->getBodySize())
@@ -129,7 +129,7 @@ void HttpDownload::onRecvHandle(int32 id, DataQueue& data)
 	delete pDoc;
 }
 
-void HttpDownload::addListen(Client* client, OnHttpDownloadCallback callback, int32 tag)
+void HttpDownload::addListen(Client* client, OnHttpDownloadCallback callback, int32_t tag)
 {// 添加一个下载监听
 	if (client == nullptr)
 	{
@@ -147,7 +147,7 @@ void HttpDownload::addListen(Client* client, OnHttpDownloadCallback callback, in
 
 void HttpDownload::clear()
 {
-	std::map<int32, DownloadSlot >::iterator iter2 = _downloadSlots.begin();
+	std::map<int32_t, DownloadSlot >::iterator iter2 = _downloadSlots.begin();
 	while (iter2 != _downloadSlots.end())
 	{// 关闭线程，注销客户端
 		iter2->second.client->disconnect();
@@ -155,7 +155,7 @@ void HttpDownload::clear()
 		iter2++;
 	}
 
-	std::map<int32, StreamWriter*>::iterator iter1 = _downloadDatas.begin();
+	std::map<int32_t, StreamWriter*>::iterator iter1 = _downloadDatas.begin();
 	while (iter1 != _downloadDatas.end())
 	{// 关闭接收数据
 		SAFE_DELETE(iter1->second);

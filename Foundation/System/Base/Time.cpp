@@ -1,5 +1,4 @@
 #include "Time.h"
-#include "Math/import.h"
 
 using namespace sys;
 
@@ -82,31 +81,31 @@ time_t Time::getGMTimeStamp()
 	return now;
 }
 
-void Time::addSecond(int32 val)
+void Time::addSecond(int32_t val)
 {
 	_tm.tm_sec += val;
 	this->resetTime();
 }
 
-void Time::addMinute(int32 val)
+void Time::addMinute(int32_t val)
 {
 	_tm.tm_min += val;
 	this->resetTime();
 }
 
-void Time::addHour(int32 val)
+void Time::addHour(int32_t val)
 {
 	_tm.tm_hour += val;
 	this->resetTime();
 }
 
-void Time::addDay(int32 val)
+void Time::addDay(int32_t val)
 {
 	_tm.tm_yday += val;
 	this->resetTime();
 }
 
-void Time::addYear(int32 val)
+void Time::addYear(int32_t val)
 {
 	_tm.tm_year += val;
 	this->resetTime();

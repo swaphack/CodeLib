@@ -29,5 +29,5 @@ bool CompilerDocument::convertToDocumentStruct()
 
 bool CompilerDocument::convertToTextStruct()
 {
-
+	return false;
 }

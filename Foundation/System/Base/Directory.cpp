@@ -27,7 +27,7 @@ void Directory::getDirectory(const char* fullpath, std::string& dir)
 }
 
 
-int32 Directory::createFile(const char* filename)
+int32_t Directory::createFile(const char* filename)
 {
 	FILE* fptr = nullptr;
 	fptr = fopen(filename, "wb");
@@ -39,7 +39,7 @@ int32 Directory::createFile(const char* filename)
 	return -1;
 }
 
-int32 Directory::deleteFile(const char* filename)
+int32_t Directory::deleteFile(const char* filename)
 {
 	if (filename == nullptr)
 	{
@@ -49,7 +49,7 @@ int32 Directory::deleteFile(const char* filename)
 	return unlink(filename);
 }
 
-int32 Directory::renameFile(const char* oldFilename, const char* newFilename)
+int32_t Directory::renameFile(const char* oldFilename, const char* newFilename)
 {
 	if (oldFilename == nullptr || newFilename == nullptr)
 	{
@@ -59,7 +59,7 @@ int32 Directory::renameFile(const char* oldFilename, const char* newFilename)
 	return rename(oldFilename, newFilename);
 }
 
-int32 Directory::createDirectory(const char* dirname)
+int32_t Directory::createDirectory(const char* dirname)
 {
 	if (dirname == nullptr)
 	{
@@ -69,7 +69,7 @@ int32 Directory::createDirectory(const char* dirname)
 	return mkdir(dirname);
 }
 
-int32 Directory::deleteDirectory(const char* dirname)
+int32_t Directory::deleteDirectory(const char* dirname)
 {
 	if (dirname == nullptr)
 	{
@@ -79,7 +79,7 @@ int32 Directory::deleteDirectory(const char* dirname)
 	return rmdir(dirname);
 }
 
-int32 Directory::renameDirectory(const char* oldDirname, const char* newDirname)
+int32_t Directory::renameDirectory(const char* oldDirname, const char* newDirname)
 {
 	if (oldDirname == nullptr || newDirname == nullptr)
 	{
@@ -97,7 +97,7 @@ void Directory::getCurrentDirectory(std::string& dir)
 	dir = dirname;
 }
 
-int32 Directory::setCurrentDirectory(const char* name)
+int32_t Directory::setCurrentDirectory(const char* name)
 {
 	if (name == nullptr)
 	{

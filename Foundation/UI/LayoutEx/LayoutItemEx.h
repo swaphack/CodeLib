@@ -25,7 +25,7 @@ namespace ui
 		/**
 		*	获取最小长宽的信息
 		*/
-		const sys::Size& getMinSize();
+		const math::Size& getMinSize();
 		/**
 		*	设置最小长宽的信息
 		*/
@@ -33,11 +33,11 @@ namespace ui
 		/**
 		*	设置最小长宽的信息
 		*/
-		void setMinSize(const sys::Size& size);
+		void setMinSize(const math::Size& size);
 		/**
 		*	获取最大长宽的信息
 		*/
-		const sys::Size& getMaxSize();
+		const math::Size& getMaxSize();
 		/**
 		*	设置最大长宽的信息
 		*/
@@ -45,7 +45,7 @@ namespace ui
 		/**
 		*	设置最大长宽的信息
 		*/
-		void setMaxSize(const sys::Size& size);
+		void setMaxSize(const math::Size& size);
 		/**
 		*	获取在窗体大小改变时的自我调整策略
 		*/
@@ -58,20 +58,20 @@ namespace ui
 		/**
 		*	获取布局的最小面积
 		*/
-		virtual sys::Size getLayoutMinSize();
+		virtual math::Size getLayoutMinSize();
 		/**
 		*	获取布局的最大面积
 		*/
-		virtual sys::Size getLayoutMaxSize();
+		virtual math::Size getLayoutMaxSize();
 		/**
 		*	复制对象
 		*/
 		virtual bool copy(LayoutItemEx* item);
 	protected:
 		// 最小面积
-		sys::Size m_sMinSize;
+		math::Size m_sMinSize;
 		// 最大面积
-		sys::Size m_sMaxSize;
+		math::Size m_sMaxSize;
 		// 大小调整策略
 		SizePolicy m_spAdjust;
 	};

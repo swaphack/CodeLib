@@ -52,13 +52,13 @@ namespace render
 		*	@param count 三角形顶点数
 		*	@param indices 顶点索引
 		*/
-		void setIndices(int count, uint16* indices);
+		void setIndices(int count, uint16_t* indices);
 		/**
 		*	绘制
 		*	@param textureID 纹理id
 		*	@param color 颜色
 		*/
-		void apply(int textureID, const sys::Color4B& color, uint8 opacity, const BlendParam& blend);
+		void apply(int textureID, const sys::Color4B& color, uint8_t opacity, const BlendParam& blend);
 	protected:
 		// 顶点坐标 (x,y,z)
 		T_Vertex _vertexes;

@@ -25,7 +25,7 @@ namespace script
 		SymbolDelegate* getSymbolDelegate(const char* name);
 		SymbolDelegate* getSymbolDelegate(const std::string& name);
 		// 加载配置文件
-		bool load(const std::string& filepath);
+		bool loadFromFile(const std::string& filepath);
 	private:
 		typedef std::map<std::string, SymbolDelegate*> SymbolDelegates;
 		// 符号处理委托

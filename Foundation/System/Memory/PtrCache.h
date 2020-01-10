@@ -10,7 +10,7 @@ namespace sys
 	{
 		friend class Memory; 
 	private:
-		PtrCache(char* ptr, uint32 size);
+		PtrCache(char* ptr, uint32_t size);
 		virtual ~PtrCache();
 	public:
 		// 获取用户自定义类型的缓存指针
@@ -23,27 +23,27 @@ namespace sys
 		void reset();
 	protected:
 		// 分配空间
-		char* alloctPtr(uint32 size);
+		char* alloctPtr(uint32_t size);
 	private:
 		// PtrCache信息{指针， 大小}
-		Tuple2<char*, uint32> _cacheInfo;
+		Tuple2<char*, uint32_t> _cacheInfo;
 		// 当前游标位置
-		uint32 _cursor;
+		uint32_t _cursor;
 		// 已分配的内存块
-		std::map<uint32, PtrInfo> _alloctedPtrs;
+		std::map<uint32_t, PtrInfo> _alloctedPtrs;
 	};
 
 	template<typename T>
 	T* PtrCache::getPtr()
 	{
-		uint32 size = sizeof(T);
+		uint32_t size = sizeof(T);
 		return (T*)alloctPtr(size);
 	}
 
 	template<typename T>
 	T PtrCache::getValue()
 	{
-		uint32 size = sizeof(T);
+		uint32_t size = sizeof(T);
 		return *((T*)alloctPtr(size));
 	}
 }

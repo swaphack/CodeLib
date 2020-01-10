@@ -14,20 +14,17 @@ LayoutItem::~LayoutItem()
 {
 }
 
-const sys::Rect& LayoutItem::getGeometry()
+const math::Rect& LayoutItem::getGeometry()
 {
 	return m_rGeometry;
 }
 
 void LayoutItem::setGeometry(float x, float y, float width, float height)
 {
-	m_rGeometry.x = x;
-	m_rGeometry.y = y;
-	m_rGeometry.width = width;
-	m_rGeometry.height = height;
+	m_rGeometry.set(x,y, width, height);
 }
 
-void LayoutItem::setGeometry(const sys::Rect& rect)
+void LayoutItem::setGeometry(const math::Rect& rect)
 {
 	m_rGeometry = rect;
 
@@ -36,24 +33,22 @@ void LayoutItem::setGeometry(const sys::Rect& rect)
 
 void LayoutItem::setOrgin(float x, float y)
 {
-	m_rGeometry.x = x;
-	m_rGeometry.y = y;
+	m_rGeometry.orgin.set(x, y);
 }
 
-sys::Vector2 LayoutItem::getOrgin()
+math::Vector2 LayoutItem::getOrgin()
 {
-	return sys::Vector2(m_rGeometry.x, m_rGeometry.y);
+	return m_rGeometry.orgin;
 }
 
 void LayoutItem::setSize(float width, float height)
 {
-	m_rGeometry.width = width;
-	m_rGeometry.height = height;
+	m_rGeometry.size.set(width, height);
 }
 
-sys::Size LayoutItem::getSize()
+math::Size LayoutItem::getSize()
 {
-	return sys::Size(m_rGeometry.width, m_rGeometry.height);
+	return m_rGeometry.size;
 }
 
 void LayoutItem::setWidget(Widget* widget)
@@ -100,11 +95,12 @@ bool LayoutItem::copy(LayoutItem* item)
 	return true;
 }
 
-void LayoutItem::resize(const sys::Rect& rect)
+void LayoutItem::resize(const math::Rect& rect)
 {
-	sys::Vector2 anchorPoint;
-	calAnchorPoint(anchorPoint.x, anchorPoint.y);
-	this->setWidgetGeomerty(rect, anchorPoint);
+	float x = 0;
+	float y = 0;
+	calAnchorPoint(x, y);
+	this->setWidgetGeomerty(rect, math::Vector2(x, y));
 }
 
 void LayoutItem::setBoxVisible(bool status)
@@ -127,16 +123,16 @@ const sys::Color4B& LayoutItem::getBoxColor()
 	return m_cBoxColor;
 }
 
-void LayoutItem::setWidgetGeomerty(const sys::Rect& geometry, const sys::Vector2& anchorPoint)
+void LayoutItem::setWidgetGeomerty(const math::Rect& geometry, const math::Vector2& anchorPoint)
 {
 	if (m_pWidget == nullptr)
 	{
 		return;
 	}
 
-	m_pWidget->setPosition(geometry.x, geometry.y);
-	m_pWidget->setVolume(geometry.width, geometry.height);
-	m_pWidget->setAnchorPoint(anchorPoint.x, anchorPoint.y);
+	m_pWidget->setPosition(geometry.orgin);
+	m_pWidget->setVolume(geometry.getWidth(), geometry.getHeight());
+	m_pWidget->setAnchorPoint(anchorPoint);
 }
 
 void LayoutItem::calAnchorPoint(float& x, float& y)

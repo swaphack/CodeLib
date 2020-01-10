@@ -11,6 +11,15 @@
     <ClInclude Include="Path\Voronoi.h">
       <Filter>Path</Filter>
     </ClInclude>
+    <ClInclude Include="Path\Map.h">
+      <Filter>Path</Filter>
+    </ClInclude>
+    <ClInclude Include="Path\Node.h">
+      <Filter>Path</Filter>
+    </ClInclude>
+    <ClInclude Include="Path\MapNode.h">
+      <Filter>Path</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Sort">

@@ -96,7 +96,7 @@ Layout* UIProxy::loadFile(const char* filepath)
 	return pLayout;
 }
 
-bool UIProxy::saveFile(Layout* layout, const char* filepath, const sys::Size& designSize)
+bool UIProxy::saveFile(Layout* layout, const char* filepath, const math::Size& designSize)
 {
 	if (layout == nullptr || filepath == nullptr)
 	{
@@ -161,7 +161,7 @@ void UIProxy::removeAllElementParsers()
 	_elementParsers.clear();
 }
 
-const sys::Size& UIProxy::getDesignSize()
+const math::Size& UIProxy::getDesignSize()
 {
 	return _designSize;
 }
@@ -245,8 +245,8 @@ Layout* UIProxy::loadRoot(tinyxml2::XMLElement* xmlNode)
 		return nullptr;
 	}
 
-	_designSize.width = xmlNode->IntAttribute(LAYOUT_SIZE_WIDTH);
-	_designSize.height = xmlNode->IntAttribute(LAYOUT_SIZE_HEIGHT);
+	_designSize.setWidth(xmlNode->IntAttribute(LAYOUT_SIZE_WIDTH));
+	_designSize.setHeight(xmlNode->IntAttribute(LAYOUT_SIZE_HEIGHT));
 	_designDirection = (LayoutDirection)xmlNode->IntAttribute(LAYOUT_DIRECTION);
 
 	tinyxml2::XMLElement* firstChild = xmlNode->FirstChildElement();
@@ -333,8 +333,8 @@ bool UIProxy::saveRoot(Layout* layout, tinyxml2::XMLDocument* document)
 	}
 
 	tinyxml2::XMLElement* pRootNode = document->NewElement(LAYOUT_ROOT_NAME);
-	pRootNode->SetAttribute(LAYOUT_SIZE_WIDTH, _designSize.width);
-	pRootNode->SetAttribute(LAYOUT_SIZE_HEIGHT, _designSize.height);
+	pRootNode->SetAttribute(LAYOUT_SIZE_WIDTH, _designSize.getWidth());
+	pRootNode->SetAttribute(LAYOUT_SIZE_HEIGHT, _designSize.getHeight());
 	pRootNode->SetAttribute(LAYOUT_DIRECTION, _designDirection);
 	document->InsertEndChild(pRootNode);
 

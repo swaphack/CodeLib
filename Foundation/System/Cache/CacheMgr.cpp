@@ -4,7 +4,7 @@ using namespace sys;
 
 CacheMgr* CacheMgr::s_CacheMgr = nullptr;
 
-int32 CacheMgr::s_ID = 0;
+int32_t CacheMgr::s_ID = 0;
 
 CacheMgr::CacheMgr()
 {
@@ -16,7 +16,7 @@ CacheMgr::~CacheMgr()
 
 }
 
-int32 CacheMgr::getStaticID()
+int32_t CacheMgr::getStaticID()
 {
 	return ++s_ID;
 }
@@ -30,9 +30,9 @@ CacheMgr* CacheMgr::getInstance()
 	return s_CacheMgr;
 }
 
-CacheIdentity* CacheMgr::getCache(int32 nID)
+CacheIdentity* CacheMgr::getCache(int32_t nID)
 {
-	std::map<int32, CacheIdentity*>::iterator iter = _idCaches.find(nID);
+	std::map<int32_t, CacheIdentity*>::iterator iter = _idCaches.find(nID);
 	if (iter == _idCaches.end())
 	{
 		return nullptr;

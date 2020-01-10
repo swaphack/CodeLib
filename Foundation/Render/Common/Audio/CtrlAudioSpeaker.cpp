@@ -22,8 +22,7 @@ bool CtrlAudioSpeaker::init()
 	}
 
 	_notify->addListen(ENP_SPACE, [this](){
-		_speekSettings.pos.x = this->getPositionX();
-		_speekSettings.pos.y = this->getPositionY();
+		_speekSettings.pos = this->getPosition();
 		updateSpeaker();
 	});
 
@@ -58,5 +57,5 @@ bool CtrlAudioSpeaker::isActive()
 
 void CtrlAudioSpeaker::updateSpeaker()
 {
-	AUDIO_SET_FUNC(G_AUDIO->getSystem(), setSpeakerPosition, _speekSettings.speaker, _speekSettings.pos.x, _speekSettings.pos.y, _speekSettings.active);
+	AUDIO_SET_FUNC(G_AUDIO->getSystem(), setSpeakerPosition, _speekSettings.speaker, _speekSettings.pos.getX(), _speekSettings.pos.getY(), _speekSettings.active);
 }

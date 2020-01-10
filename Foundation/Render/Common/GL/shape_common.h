@@ -9,20 +9,20 @@ namespace render
 	struct RectVertex
 	{
 		// 左下角
-		sys::Vector3 leftDown;
+		math::Vector3 leftDown;
 		// 右下角
-		sys::Vector3 rightDown;
+		math::Vector3 rightDown;
 		// 右上角
-		sys::Vector3 rightUp;
+		math::Vector3 rightUp;
 		// 左上角
-		sys::Vector3 leftUp;
+		math::Vector3 leftUp;
 
 		RectVertex();
 
 		// 判断
 		bool containPoint(float x, float y);
 		//  获取点坐在的锚点位置
-		sys::Vector3 getAnchorByPoint(float x, float y);
+		math::Vector3 getAnchorByPoint(float x, float y);
 	};
 
 	// 立方体顶点集

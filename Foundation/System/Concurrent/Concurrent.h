@@ -13,8 +13,8 @@ namespace sys
 	protected:
 		struct Data
 		{
-			int32 type;
-			Data(int32 type)
+			int32_t type;
+			Data(int32_t type)
 			{
 				this->type = type;
 			}
@@ -28,17 +28,17 @@ namespace sys
 		};
 
 		// 读取数据回调
-		typedef std::function<void(const char* data, int32 size)> ReadDataCallback;
+		typedef std::function<void(const char* data, int32_t size)> ReadDataCallback;
 
 		struct ReadData : public Data
 		{
 			char* data;
-			int32 offset;
-			int32 size;
+			int32_t offset;
+			int32_t size;
 			ReadDataCallback callback;
 
-			ReadData(char* data, int32 offset, int32 size, ReadDataCallback callback)
-				:Data((int32)EET_READ)
+			ReadData(char* data, int32_t offset, int32_t size, ReadDataCallback callback)
+				:Data((int32_t)EET_READ)
 			{
 				this->data = data;
 				this->offset = offset;
@@ -50,10 +50,10 @@ namespace sys
 		struct WriteData : public Data
 		{
 			const char* data;
-			int32 size;
+			int32_t size;
 
-			WriteData(const char* data, int32 size)
-				:Data((int32)EET_WRITE)
+			WriteData(const char* data, int32_t size)
+				:Data((int32_t)EET_WRITE)
 			{
 				this->data = data;
 				this->size = size;
@@ -63,7 +63,7 @@ namespace sys
 		struct FinishData : public Data
 		{
 			FinishData()
-				:Data((int32)EET_FINISH)
+				:Data((int32_t)EET_FINISH)
 			{}
 		};
 
@@ -77,9 +77,9 @@ namespace sys
 		virtual ~Concurrent();
 	public:
 		// 读取数据
-		bool read(char* data, int32 offset, int32 size, ReadDataCallback callback);
+		bool read(char* data, int32_t offset, int32_t size, ReadDataCallback callback);
 		// 写入数据
-		bool write(const char* data, int32 size);
+		bool write(const char* data, int32_t size);
 		// 结束操作
 		void finish();
 		// 设置读取函数

@@ -23,7 +23,7 @@ namespace render
 		// 设置窗体大小
 		void setFrameSize(int width, int height);
 		// 获取
-		sys::Size& getFrameSize();
+		math::Size& getFrameSize();
 		// 设置刷新间隔
 		void setRefreshInterval(float interval);
 		// 获取刷新间隔
@@ -43,7 +43,7 @@ namespace render
 		// 最后一次定时刷新的周期
 		long _lastClock;
 		// 窗体大小
-		sys::Size _frameSize;
+		math::Size _frameSize;
 		// 刷新间隔
 		float _refreshInterval;
 	};

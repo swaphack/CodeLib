@@ -43,12 +43,12 @@ void CommandParams::removeAllParams()
 	_params.clear();
 }
 
-int32 CommandParams::getParamsCount()
+int32_t CommandParams::getParamsCount()
 {
 	return _params.size();
 }
 
-std::string CommandParams::item(int32 index)
+std::string CommandParams::item(int32_t index)
 {
 	if (index < 0 || index >= _params.size())
 	{
@@ -114,7 +114,7 @@ void CommandParser::parseLine(const std::string& line)
 		return;
 	}
 
-	int32 index = 0;
+	int32_t index = 0;
 	while (index < words.size())
 	{
 		value = words[index];

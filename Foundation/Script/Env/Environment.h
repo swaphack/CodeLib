@@ -18,20 +18,20 @@ namespace script
 		// 添加变量
 		void addVariable(Variable* pVariable);
 		// 移除变量
-		void removeVariable(const char* name);
+		void removeVariable(const std::string& name);
 		// 移除所有变量
 		void removeAllVariables();
 		// 获取变量
-		Variable* getVariable(const char* name);		 
+		Variable* getVariable(const std::string& name);
 
 		// 添加函数
 		void addFunction(Function* pFunction);
 		// 移除函数
-		void removeFunction(const char* name);
+		void removeFunction(const std::string& name);
 		// 移除所有函数
 		void removeAllFunctions();
 		// 获取函数
-		Function* getFunction(const char* name);
+		Function* getFunction(const std::string& name);
 
 		// 主作用域
 		Scope* getRoot();

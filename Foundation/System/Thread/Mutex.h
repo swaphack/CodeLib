@@ -45,6 +45,6 @@ namespace sys
 		// 守护锁
 		std::unique_lock<std::recursive_mutex> m_pLock;
 		// 互斥锁的个数
-		int32 m_nLockCount;
+		int32_t m_nLockCount;
 	};
 }

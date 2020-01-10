@@ -70,12 +70,12 @@ Canvas* RenderApplication::getCanvas()
 
 void RenderApplication::setFrameSize( int width, int height )
 {
-	_frameSize.width = static_cast<float>(width);
-	_frameSize.height = static_cast<float>(height);
-	_canvas->setViewPort(0, 0, _frameSize.width, _frameSize.height);
+	_frameSize.setWidth(width);
+	_frameSize.setHeight(height);
+	_canvas->setViewPort(0, 0, width, height);
 }
 
-sys::Size& RenderApplication::getFrameSize()
+math::Size& RenderApplication::getFrameSize()
 {
 	return _frameSize;
 }

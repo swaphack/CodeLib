@@ -3,7 +3,7 @@
 using namespace sys;
 
 
-Client::Client( const char* ip, int32 port )
+Client::Client( const char* ip, int32_t port )
 :_bConnected(false)
 {
 	_socket = new Socket();
@@ -16,12 +16,12 @@ Client::~Client()
 	SAFE_DELETE(_socket);
 }
 
-int32 Client::getID()
+int32_t Client::getID()
 {
 	return _ID;
 }
 
-void Client::setRemote(const char* ip, int32 port)
+void Client::setRemote(const char* ip, int32_t port)
 {
 	_remote.first = ip;
 	_remote.second = port;
@@ -126,7 +126,7 @@ void Client::onRecvHandler( NetData* data )
 
 void Client::_recvData()
 {
-	int32 size;
+	int32_t size;
 	char* buff = _socket->read(size);
 	if (size == -1)
 	{// 等待
@@ -148,7 +148,7 @@ void Client::_recvData()
 void Client::_flushData()
 {
 	// 发送数据
-	int32 size;
+	int32_t size;
 	NetData* data = _sendDatas.topData();
 	if (data)
 	{

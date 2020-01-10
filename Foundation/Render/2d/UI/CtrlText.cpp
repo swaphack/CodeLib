@@ -23,24 +23,24 @@ bool CtrlText::init()
 			return;
 		}
 
-		sys::Size size = sys::Size(static_cast<float>(texture->getWidth()), static_cast<float>(texture->getHeight()));
+		math::Size size = math::Size(static_cast<float>(texture->getWidth()), static_cast<float>(texture->getHeight()));
 
 		if (isCounter())TextureTool::setTexture2DCounterCoords(&_texRect, size, _texFrame->getRect());
 		else TextureTool::setTexture2DCoords(&_texRect, size, _texFrame->getRect());
 
-		sys::Vector3 orgin = sys::Vector3::Zero;
-		sys::Volume volume = sys::Volume(static_cast<float>(texture->getWidth()), static_cast<float>(texture->getHeight()));
-		sys::Vector3 anchor = sys::Vector3(0.5f, 0.5f, 0.5f);
+		math::Vector3 orgin = math::Vector3();
+		math::Volume volume = math::Volume(static_cast<float>(texture->getWidth()), static_cast<float>(texture->getHeight()));
+		math::Vector3 anchor = math::Vector3(0.5f, 0.5f, 0.5f);
 		if (_textDefine.verticalAlignment == EVA_BOTTOM)
 		{
 		}
 		else if (_textDefine.verticalAlignment == EVA_CENTER)
 		{
-			orgin.y = (_volume.height - volume.height) * 0.5f;
+			orgin.setY((_volume.getHeight() - volume.getHeight()) * 0.5f);
 		}
 		else if (_textDefine.verticalAlignment == EVA_TOP)
 		{
-			orgin.y = _volume.height - volume.height;
+			orgin.setY(_volume.getHeight() - volume.getHeight());
 		}
 
 		if (_textDefine.horizontalAlignment == EHA_LEFT)
@@ -48,11 +48,11 @@ bool CtrlText::init()
 		}
 		else if (_textDefine.verticalAlignment == EHA_CENTER)
 		{
-			orgin.x = (_volume.width - volume.width) * 0.5f;
+			orgin.setX((_volume.getWidth() - volume.getWidth()) * 0.5f);
 		}
 		else if (_textDefine.verticalAlignment == EHA_RIGHT)
 		{
-			orgin.x = _volume.width - volume.width;
+			orgin.setX(_volume.getWidth() - volume.getWidth());
 		}
 
 		TextureTool::setTexture2DVertexts(&_texRect, orgin, volume, anchor);
@@ -150,14 +150,14 @@ void CtrlText::setDimensions(float width, float height)
 	setDirty(true);
 }
 
-void CtrlText::setDimensions(const sys::Size& size)
+void CtrlText::setDimensions(const math::Size& size)
 {
-	this->setDimensions(size.width, size.height);
+	this->setDimensions(size.getWidth(), size.getHeight());
 }
 
-sys::Size CtrlText::getDimensions()
+math::Size CtrlText::getDimensions()
 {
-	return sys::Size(_textDefine.width, _textDefine.height);
+	return math::Size(_textDefine.width, _textDefine.height);
 }
 
 void CtrlText::setColor(const sys::Color4B& color)

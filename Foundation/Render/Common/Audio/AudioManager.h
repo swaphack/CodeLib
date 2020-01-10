@@ -11,7 +11,7 @@ namespace FMOD
 	class System;
 }
 
-namespace sys
+namespace math
 {
 	struct Vector3;
 }

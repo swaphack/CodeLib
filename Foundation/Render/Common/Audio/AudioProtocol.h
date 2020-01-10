@@ -9,15 +9,15 @@ namespace render
 	{
 	public:
 		// 位置
-		sys::Vector3 position;
+		math::Vector3 position;
 		// 移动速度
-		sys::Vector3 velocity;
+		math::Vector3 velocity;
 		// 脸朝向
-		sys::Vector3 forward;
+		math::Vector3 forward;
 		// 头顶方向
-		sys::Vector3 up;
+		math::Vector3 up;
 		// 缩放
-		sys::Vector3 scale;
+		math::Vector3 scale;
 	public:
 		AudioSpace()
 		{
@@ -25,7 +25,7 @@ namespace render
 			up = { 0, 1, 0 };
 			scale = { 1, 1, 1 };
 		}
-		AudioSpace(const sys::Vector3& position, const sys::Vector3& velocity, const sys::Vector3& forward, const sys::Vector3& up)
+		AudioSpace(const math::Vector3& position, const math::Vector3& velocity, const math::Vector3& forward, const math::Vector3& up)
 		{
 			this->position = position;
 			this->velocity = velocity;
@@ -76,12 +76,12 @@ namespace render
 	{
 	public:
 		// 位置
-		sys::Vector3 position;
+		math::Vector3 position;
 		// 速度
-		sys::Vector3 velocity;
+		math::Vector3 velocity;
 	public:
 		Attribute3DSettings() {}
-		Attribute3DSettings(const sys::Vector3& pos, const sys::Vector3& vel)
+		Attribute3DSettings(const math::Vector3& pos, const math::Vector3& vel)
 		{
 			this->position = pos;
 			this->velocity = vel;

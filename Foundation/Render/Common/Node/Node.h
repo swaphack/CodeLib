@@ -29,6 +29,20 @@ namespace render
 		return temp;
 	}
 
+	/**
+	glLoadIdentity();
+	glMultMatrixf(M);           //glScale*();
+	glMultMatrixf(N);           //glRotate*()
+	glMultMatrixf(L);           //glTranslate*();
+
+	1.在OpenGL中所有的视图变换，模型变换 都是4×4矩阵，
+	每个后续的glMultiMatrix*(N),或者变换函数,glTranslate*(),glRotate*(),等都是把一个新的4×4矩阵与当前的矩阵M相乘，
+	不同的是：变换函数glTranslate*(),glRotate*()等会根据函数参数构造一个4×4矩阵，也设为N，两种情况产生相同的结果：M×N。
+	注意这里的顺序，后续的矩阵是右乘当前矩阵。
+
+	2.因为在opengl中坐标表示形式是：[x,y,z]T(表示转置)，或者齐次坐标下：[x,y,z,w]T标准化后[x/w,y/w,z/w,1.0]T 这就决定了矩阵也是列优先表示的。
+	将上面的两个矩阵作用于点V,则表示为:M×N×V；满足矩阵相乘的条件：[4×4] * [4×1].
+	*/
 	// 绘制节点
 	class Node : 
 		public sys::Object, 
@@ -103,8 +117,12 @@ namespace render
 		virtual bool containTouchPoint(float x, float y);
 		// 获取触摸代理
 		TouchProxy* getTouchProxy();
-
+		// 矩形定点
 		const RectVertex& getRectVertex();
+		// 矩阵
+		const math::Matrix44& getRealMatrix();
+		// 矩阵
+		const math::Matrix44& getMatrix();
 	protected:
 		// 更新空间位置
 		virtual void updateTranform();
@@ -122,9 +140,14 @@ namespace render
 		virtual void onBodyChange();
 		// 子节点发生改变
 		virtual void onChildrenChange();
+	private:
+		void calRealSpaceByMatrix();
+		void calRealSpaceByValue();
 	protected:
 		// opengl 位置
-		sys::Vector3 _obPosition;
+		math::Vector3 _obPosition;
+		// 旋转角度
+		math::Vector3 _obRotation;
 		// 标签
 		int _tag;
 		// 名称
@@ -155,5 +178,11 @@ namespace render
 		BodySpace _realBodySpace;
 		// 通知
 		Notify* _notify;
+		// 使用矩阵运算
+		bool _bUseMatrix = true;
+		// 矩阵
+		math::Matrix44 _mat44;
+		// 实际
+		math::Matrix44 _realMat44;
 	};
 }

@@ -4,17 +4,17 @@ using namespace render;
 
 Cube::Cube()
 {
-	_normal[EMF_FRONT] = sys::Vector3(0.0f, 0.0f, 1.0f);
-	_normal[EMF_BACK] = sys::Vector3(0.0f, 0.0f, -1.0f);
-	_normal[EMF_TOP] = sys::Vector3(0.0f, 1.0f, 0.0f);
-	_normal[EMF_BOTTOM] = sys::Vector3(0.0f, -1.0f, 0.0f);
-	_normal[EMF_LEFT] = sys::Vector3(0.0f, 1.0f, 0.0f);
-	_normal[EMF_RIGHT] = sys::Vector3(0.0f, -1.0f, 0.0f);
+	_normal[EMF_FRONT] = math::Vector3(0.0f, 0.0f, 1.0f);
+	_normal[EMF_BACK] = math::Vector3(0.0f, 0.0f, -1.0f);
+	_normal[EMF_TOP] = math::Vector3(0.0f, 1.0f, 0.0f);
+	_normal[EMF_BOTTOM] = math::Vector3(0.0f, -1.0f, 0.0f);
+	_normal[EMF_LEFT] = math::Vector3(0.0f, 1.0f, 0.0f);
+	_normal[EMF_RIGHT] = math::Vector3(0.0f, -1.0f, 0.0f);
 
 	for (int i = 0; i < 6; i++)
 	{
 		_faceFrames[i] = nullptr;
-		_normal[i] = sys::Vector3(0.0f, 0.0f, 1.0f);
+		_normal[i] = math::Vector3(0.0f, 0.0f, 1.0f);
 	}
 }
 
@@ -136,7 +136,7 @@ void Cube::onCubeChange()
 		TexFrame* frame = _faceFrames[i];
 		if (frame && frame->getTexture())
 		{
-			sys::Size size = sys::Size((float)frame->getTexture()->getWidth(), (float)frame->getTexture()->getHeight());
+			math::Size size = math::Size((float)frame->getTexture()->getWidth(), (float)frame->getTexture()->getHeight());
 			TextureTool::setTexture2DCoords(getTextureRect(static_cast<ModelFace>(i)), size, frame->getRect());
 		}
 	}

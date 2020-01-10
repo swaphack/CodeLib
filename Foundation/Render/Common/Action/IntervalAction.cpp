@@ -84,12 +84,10 @@ MoveToAction::~MoveToAction()
 
 void MoveToAction::setPosition(float x, float y, float z)
 {
-	_destination.x = x;
-	_destination.y = y;
-	_destination.z = z;
+	_destination.set(x, y, z);
 }
 
-sys::Vector3 MoveToAction::getPosition()
+math::Vector3 MoveToAction::getPosition()
 {
 	return _destination;
 }
@@ -100,15 +98,15 @@ void MoveToAction::updateInterval(float percent)
 	if (node && _currentTime == 0)
 	{
 		_offset = _destination;
-		_offset.sub(node->getPosition());
+		_offset-=node->getPosition();
 	}
 	if (node)
 	{
-		const sys::Vector3& current = node->getPosition();
+		const math::Vector3& current = node->getPosition();
 		node->setPosition(
-			current.x + _offset.x * percent,
-			current.y + _offset.y * percent,
-			current.z + _offset.z * percent);
+			current.getX() + _offset.getX() * percent,
+			current.getY() + _offset.getY() * percent,
+			current.getZ() + _offset.getZ() * percent);
 	}
 }
 
@@ -130,12 +128,10 @@ MoveByAction::~MoveByAction()
 
 void MoveByAction::setPosition(float x, float y, float z /*= 0*/)
 {
-	_offset.x = x;
-	_offset.y = y;
-	_offset.z = z;
+	_offset.set(x, y, z);
 }
 
-sys::Vector3 MoveByAction::getPosition()
+math::Vector3 MoveByAction::getPosition()
 {
 	return _offset;
 }
@@ -145,11 +141,11 @@ void MoveByAction::updateInterval(float percent)
 	Node* node = dynamic_cast<Node*>(_target);
 	if (node)
 	{
-		const sys::Vector3& current = node->getPosition();
+		const math::Vector3& current = node->getPosition();
 		node->setPosition(
-			current.x + _offset.x * percent,
-			current.y + _offset.y * percent,
-			current.z + _offset.z * percent);
+			current.getX() + _offset.getX() * percent,
+			current.getY() + _offset.getY() * percent,
+			current.getZ() + _offset.getZ() * percent);
 	}
 }
 
@@ -171,12 +167,10 @@ RotateToAction::~RotateToAction()
 
 void RotateToAction::setRotation(float x, float y, float z /*= 0*/)
 {
-	_rotation.x = x;
-	_rotation.y = y;
-	_rotation.z = z;
+	_rotation.set(x, y, z);
 }
 
-sys::Vector3 RotateToAction::getRotation()
+math::Vector3 RotateToAction::getRotation()
 {
 	return _rotation;
 }
@@ -187,15 +181,15 @@ void RotateToAction::updateInterval(float percent)
 	if (node && _currentTime == _totalTime)
 	{
 		_offset = _rotation;
-		_offset.sub(node->getRotation());
+		_offset-=node->getRotation();
 	}
 	if (node)
 	{
-		const sys::Vector3& current = node->getRotation();
+		const math::Vector3& current = node->getRotation();
 		node->setRotation(
-			current.x + _offset.x * percent,
-			current.y + _offset.y * percent,
-			current.z + _offset.z * percent);
+			current.getX() + _offset.getX() * percent,
+			current.getY() + _offset.getY() * percent,
+			current.getZ() + _offset.getZ() * percent);
 	}
 }
 
@@ -217,12 +211,10 @@ RotateByAction::~RotateByAction()
 
 void RotateByAction::setRotation(float x, float y, float z /*= 0*/)
 {
-	_offset.x = x;
-	_offset.y = y;
-	_offset.z = z;
+	_offset.set(x, y, z);
 }
 
-sys::Vector3 RotateByAction::getRotation()
+math::Vector3 RotateByAction::getRotation()
 {
 	return _offset;
 }
@@ -232,11 +224,11 @@ void RotateByAction::updateInterval(float percent)
 	Node* node = dynamic_cast<Node*>(_target);
 	if (node)
 	{
-		const sys::Vector3& current = node->getRotation();
+		const math::Vector3& current = node->getRotation();
 		node->setRotation(
-			current.x + _offset.x * percent,
-			current.y + _offset.y * percent,
-			current.z + _offset.z * percent);
+			current.getX() + _offset.getX() * percent,
+			current.getY() + _offset.getY() * percent,
+			current.getZ() + _offset.getZ() * percent);
 	}
 }
 
@@ -258,12 +250,10 @@ ScaleToAction::~ScaleToAction()
 
 void ScaleToAction::setScale(float x, float y, float z /*= 0*/)
 {
-	_scale.x = x;
-	_scale.y = y;
-	_scale.z = z;
+	_scale.set(x, y, z);
 }
 
-sys::Vector3 ScaleToAction::getScale()
+math::Vector3 ScaleToAction::getScale()
 {
 	return _scale;
 }
@@ -274,16 +264,16 @@ void ScaleToAction::updateInterval(float percent)
 	if (node && _currentTime == _totalTime)
 	{
 		_offset = _scale;
-		_offset.sub(node->getScale());
+		_offset-=node->getScale();
 		_src = node->getScale();
 	}
 	if (node)
 	{
-		const sys::Vector3& current = node->getScale();
+		const math::Vector3& current = node->getScale();
 		node->setScale(
-			current.x + _offset.x * percent,
-			current.y + _offset.y * percent,
-			current.z + _offset.z * percent);
+			current.getX() + _offset.getX() * percent,
+			current.getY() + _offset.getY() * percent,
+			current.getZ() + _offset.getZ() * percent);
 	}
 }
 
@@ -305,12 +295,10 @@ ScaleByAction::~ScaleByAction()
 
 void ScaleByAction::setScale(float x, float y, float z /*= 0*/)
 {
-	_offset.x = x;
-	_offset.y = y;
-	_offset.z = z;
+	_offset.set(x, y, z);
 }
 
-sys::Vector3 ScaleByAction::getScale()
+math::Vector3 ScaleByAction::getScale()
 {
 	return _offset;
 }
@@ -320,11 +308,11 @@ void ScaleByAction::updateInterval(float percent)
 	Node* node = dynamic_cast<Node*>(_target);
 	if (node)
 	{
-		const sys::Vector3& current = node->getScale();
+		const math::Vector3& current = node->getScale();
 		node->setScale(
-			current.x + _offset.x * percent,
-			current.y + _offset.y * percent,
-			current.z + _offset.z * percent);
+			current.getX() + _offset.getX() * percent,
+			current.getY() + _offset.getY() * percent,
+			current.getZ() + _offset.getZ() * percent);
 	}
 }
 

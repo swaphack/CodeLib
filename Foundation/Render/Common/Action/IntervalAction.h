@@ -46,16 +46,16 @@ namespace render
 	public:
 		// 目标位置
 		void setPosition(float x, float y, float z = 0);
-		sys::Vector3 getPosition();
+		math::Vector3 getPosition();
 		// 反转
 		virtual void reverse();
 	protected:
 		virtual void updateInterval(float percent);
 	protected:
 		// 目标位置
-		sys::Vector3 _destination;
+		math::Vector3 _destination;
 		// 偏移总量
-		sys::Vector3 _offset;
+		math::Vector3 _offset;
 	};
 
 	class MoveByAction : public IntervalAction
@@ -66,14 +66,14 @@ namespace render
 	public:
 		// 偏移
 		void setPosition(float x, float y, float z = 0);
-		sys::Vector3 getPosition();
+		math::Vector3 getPosition();
 		// 反转
 		virtual void reverse();
 	protected:
 		virtual void updateInterval(float percent);
 	protected:
 		// 偏移总量
-		sys::Vector3 _offset;
+		math::Vector3 _offset;
 	};
 
 	// 旋转
@@ -85,16 +85,16 @@ namespace render
 	public:
 		// 最终旋转角度
 		void setRotation(float x, float y, float z = 0);
-		sys::Vector3 getRotation();
+		math::Vector3 getRotation();
 		// 反转
 		virtual void reverse();
 	protected:
 		virtual void updateInterval(float percent);
 	protected:
 		// 最终旋转角度
-		sys::Vector3 _rotation;
+		math::Vector3 _rotation;
 		// 总改变量
-		sys::Vector3 _offset;
+		math::Vector3 _offset;
 	};
 
 	class RotateByAction : public IntervalAction
@@ -105,14 +105,14 @@ namespace render
 	public:
 		// 偏移
 		void setRotation(float x, float y, float z = 0);
-		sys::Vector3 getRotation();
+		math::Vector3 getRotation();
 		// 反转
 		virtual void reverse();
 	protected:
 		virtual void updateInterval(float percent);
 	protected:
 		// 偏移总量
-		sys::Vector3 _offset;
+		math::Vector3 _offset;
 	};
 
 	// 缩放
@@ -123,18 +123,18 @@ namespace render
 		virtual ~ScaleToAction();
 	public:
 		void setScale(float x, float y, float z = 0);
-		sys::Vector3 getScale();
+		math::Vector3 getScale();
 		// 反转
 		virtual void reverse();
 	protected:
 		virtual void updateInterval(float percent);
 	protected:
 		// 初始缩放比例
-		sys::Vector3 _src;
+		math::Vector3 _src;
 		// 最终缩放比例
-		sys::Vector3 _scale;
+		math::Vector3 _scale;
 		// 总改变量
-		sys::Vector3 _offset;
+		math::Vector3 _offset;
 	};
 
 	class ScaleByAction : public IntervalAction
@@ -144,13 +144,13 @@ namespace render
 		virtual ~ScaleByAction();
 	public:
 		void setScale(float x, float y, float z = 0);
-		sys::Vector3 getScale();
+		math::Vector3 getScale();
 		// 反转
 		virtual void reverse();
 	protected:
 		virtual void updateInterval(float percent);
 	protected:
 		// 偏移总量
-		sys::Vector3 _offset;
+		math::Vector3 _offset;
 	};
 }

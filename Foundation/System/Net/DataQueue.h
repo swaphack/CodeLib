@@ -20,7 +20,7 @@ namespace sys
 		// 队列头元素
 		NetData* topData();
 		// 队列中元素个数
-		int32 count();
+		int32_t count();
 		// 队列是否为空
 		bool empty();
 		// 释放队列元素

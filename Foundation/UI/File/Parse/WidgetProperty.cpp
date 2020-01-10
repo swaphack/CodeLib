@@ -91,7 +91,7 @@ void WidgetProperty::setAttribute(const char* name, long value)
 	setAttribute(name, getCString("%ld", value));
 }
 
-void WidgetProperty::setAttribute(const char* name, uint8 value)
+void WidgetProperty::setAttribute(const char* name, uint8_t value)
 {
 	if (name == nullptr)
 	{
@@ -101,7 +101,7 @@ void WidgetProperty::setAttribute(const char* name, uint8 value)
 	setAttribute(name, getCString("%u", value));
 }
 
-void WidgetProperty::setAttribute(const char* name, uint16 value)
+void WidgetProperty::setAttribute(const char* name, uint16_t value)
 {
 	if (name == nullptr)
 	{
@@ -111,7 +111,7 @@ void WidgetProperty::setAttribute(const char* name, uint16 value)
 	setAttribute(name, getCString("%u", value));
 }
 
-void WidgetProperty::setAttribute(const char* name, uint32 value)
+void WidgetProperty::setAttribute(const char* name, uint32_t value)
 {
 	if (name == nullptr)
 	{
@@ -121,7 +121,7 @@ void WidgetProperty::setAttribute(const char* name, uint32 value)
 	setAttribute(name, getCString("%u", value));
 }
 
-void WidgetProperty::setAttribute(const char* name, ulong value)
+void WidgetProperty::setAttribute(const char* name, uint64_t value)
 {
 	if (name == nullptr)
 	{
@@ -131,24 +131,24 @@ void WidgetProperty::setAttribute(const char* name, ulong value)
 	setAttribute(name, getCString("%lu", value));
 }
 
-void WidgetProperty::setAttribute(const char* name, const sys::Vector3& value)
+void WidgetProperty::setAttribute(const char* name, const math::Vector3& value)
 {
 	if (name == nullptr)
 	{
 		return;
 	}
 
-	setAttribute(name, getCString("%f,%f,%f", value.x, value.y, value.z));
+	setAttribute(name, getCString("%f,%f,%f", value.getX(), value.getY(), value.getZ()));
 }
 
-void WidgetProperty::setAttribute(const char* name, const sys::Vector2& value)
+void WidgetProperty::setAttribute(const char* name, const math::Vector2& value)
 {
 	if (name == nullptr)
 	{
 		return;
 	}
 
-	setAttribute(name, getCString("%f,%f", value.x, value.y));
+	setAttribute(name, getCString("%f,%f", value.getX(), value.getY()));
 }
 
 void WidgetProperty::setAttribute(const char* name, const sys::Color4B& value)
@@ -161,24 +161,24 @@ void WidgetProperty::setAttribute(const char* name, const sys::Color4B& value)
 	setAttribute(name, getCString("%d,%d,%d,%d", value.red, value.green, value.blue, value.alpha));
 }
 
-void WidgetProperty::setAttribute(const char* name, const sys::Size& value)
+void WidgetProperty::setAttribute(const char* name, const math::Size& value)
 {
 	if (name == nullptr)
 	{
 		return;
 	}
 
-	setAttribute(name, getCString("%f,%f", value.width, value.height));
+	setAttribute(name, getCString("%f,%f", value.getWidth(), value.getHeight()));
 }
 
-void WidgetProperty::setAttribute(const char* name, const sys::Rect& value)
+void WidgetProperty::setAttribute(const char* name, const math::Rect& value)
 {
 	if (name == nullptr)
 	{
 		return;
 	}
 
-	setAttribute(name, getCString("%f,%f,%f,%f", value.x, value.y, value.width, value.height));
+	setAttribute(name, getCString("%f,%f,%f,%f", value.getX(), value.getY(), value.getWidth(), value.getHeight()));
 }
 
 void WidgetProperty::setAttribute(const char* name, const render::BlendParam& value)
@@ -315,7 +315,7 @@ bool WidgetProperty::getAttribute(const char* name, long& defaultValue)
 	return true;
 }
 
-bool WidgetProperty::getAttribute(const char* name, uint8& defaultValue)
+bool WidgetProperty::getAttribute(const char* name, uint8_t& defaultValue)
 {
 	const char* value = getAttribute(name);
 	if (value == nullptr)
@@ -323,12 +323,12 @@ bool WidgetProperty::getAttribute(const char* name, uint8& defaultValue)
 		return false;
 	}
 
-	defaultValue = (uint8)atoi(value);
+	defaultValue = (uint8_t)atoi(value);
 
 	return true;
 }
 
-bool WidgetProperty::getAttribute(const char* name, uint16& defaultValue)
+bool WidgetProperty::getAttribute(const char* name, uint16_t& defaultValue)
 {
 	const char* value = getAttribute(name);
 	if (value == nullptr)
@@ -336,12 +336,12 @@ bool WidgetProperty::getAttribute(const char* name, uint16& defaultValue)
 		return false;
 	}
 
-	defaultValue = (uint16)atoi(value);
+	defaultValue = (uint16_t)atoi(value);
 
 	return true;
 }
 
-bool WidgetProperty::getAttribute(const char* name, uint32& defaultValue)
+bool WidgetProperty::getAttribute(const char* name, uint32_t& defaultValue)
 {
 	const char* value = getAttribute(name);
 	if (value == nullptr)
@@ -349,12 +349,12 @@ bool WidgetProperty::getAttribute(const char* name, uint32& defaultValue)
 		return false;
 	}
 
-	defaultValue = (uint32)atoi(value);
+	defaultValue = (uint32_t)atoi(value);
 
 	return true;
 }
 
-bool WidgetProperty::getAttribute(const char* name, ulong& defaultValue)
+bool WidgetProperty::getAttribute(const char* name, uint64_t& defaultValue)
 {
 	const char* value = getAttribute(name);
 	if (value == nullptr)
@@ -362,12 +362,12 @@ bool WidgetProperty::getAttribute(const char* name, ulong& defaultValue)
 		return false;
 	}
 
-	defaultValue = (ulong)atol(value);
+	defaultValue = (uint64_t)atol(value);
 
 	return true;
 }
 
-bool WidgetProperty::getAttribute(const char* name, sys::Vector3& defaultValue)
+bool WidgetProperty::getAttribute(const char* name, math::Vector3& defaultValue)
 {
 	const char* value = getAttribute(name);
 	if (value == nullptr)
@@ -385,12 +385,12 @@ bool WidgetProperty::getAttribute(const char* name, sys::Vector3& defaultValue)
 		return false;
 	}
 
-	defaultValue = sys::Vector3(atof(params[0].getString()), atof(params[1].getString()), atof(params[2].getString()));
+	defaultValue = math::Vector3(atof(params[0].getString()), atof(params[1].getString()), atof(params[2].getString()));
 
 	return true;
 }
 
-bool WidgetProperty::getAttribute(const char* name, sys::Vector2& defaultValue)
+bool WidgetProperty::getAttribute(const char* name, math::Vector2& defaultValue)
 {
 	const char* value = getAttribute(name);
 	if (value == nullptr)
@@ -408,7 +408,7 @@ bool WidgetProperty::getAttribute(const char* name, sys::Vector2& defaultValue)
 		return false;
 	}
 
-	defaultValue = sys::Vector2(atof(params[0].getString()), atof(params[1].getString()));
+	defaultValue = math::Vector2(atof(params[0].getString()), atof(params[1].getString()));
 
 	return true;
 }
@@ -436,7 +436,7 @@ bool WidgetProperty::getAttribute(const char* name, sys::Color4B& defaultValue)
 	return true;
 }
 
-bool WidgetProperty::getAttribute(const char* name, sys::Size& defaultValue)
+bool WidgetProperty::getAttribute(const char* name, math::Size& defaultValue)
 {
 	const char* value = getAttribute(name);
 	if (value == nullptr)
@@ -454,12 +454,12 @@ bool WidgetProperty::getAttribute(const char* name, sys::Size& defaultValue)
 		return false;
 	}
 
-	defaultValue = sys::Size(atof(params[0].getString()), atof(params[1].getString()));
+	defaultValue = math::Size(atof(params[0].getString()), atof(params[1].getString()));
 
 	return true;
 }
 
-bool WidgetProperty::getAttribute(const char* name, sys::Rect& defaultValue)
+bool WidgetProperty::getAttribute(const char* name, math::Rect& defaultValue)
 {
 	const char* value = getAttribute(name);
 	if (value == nullptr)
@@ -477,7 +477,7 @@ bool WidgetProperty::getAttribute(const char* name, sys::Rect& defaultValue)
 		return false;
 	}
 
-	defaultValue = sys::Rect(atof(params[0].getString()), atof(params[1].getString()), atof(params[2].getString()), atof(params[3].getString()));
+	defaultValue = math::Rect(atof(params[0].getString()), atof(params[1].getString()), atof(params[2].getString()), atof(params[3].getString()));
 
 	return true;
 }

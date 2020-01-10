@@ -11,7 +11,7 @@ namespace sys
 		// 地址
 		std::string host;
 		// 端口
-		int32 port = 0;
+		int32_t port = 0;
 		// 用户名称
 		std::string username;
 		// 密码
@@ -20,7 +20,7 @@ namespace sys
 		Author()
 			:host(""), port(0), username(""), password("")
 		{}
-		Author(const std::string& host, int32 port)
+		Author(const std::string& host, int32_t port)
 			:host(host), port(port), username(""), password("")
 		{}
 	};

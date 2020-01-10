@@ -3,7 +3,7 @@
 using namespace render;
 
 int render::CtrlScissor::s_nScissorCount = 0;
-sys::Rect CtrlScissor::s_rect = sys::Rect::Zero;
+math::Rect CtrlScissor::s_rect = math::Rect();
 
 CtrlScissor::CtrlScissor()
 {
@@ -29,7 +29,7 @@ void CtrlScissor::visit()
 
 	if (Tool::getDimensions() == ED_2D)
 	{
-		sys::Rect rect = makeRect();
+		math::Rect rect = makeRect();
 
 		if (s_nScissorCount == 0)
 		{
@@ -40,7 +40,7 @@ void CtrlScissor::visit()
 			s_rect = s_rect.intersectRect(rect);
 		}
 
-		glScissor((int)s_rect.x, (int)s_rect.y, (int)s_rect.width, (int)s_rect.height);
+		glScissor((int)s_rect.getX(), (int)s_rect.getY(), (int)s_rect.getWidth(), (int)s_rect.getHeight());
 
 		s_nScissorCount++;
 
@@ -57,19 +57,18 @@ void CtrlScissor::visit()
 
 		if (s_nScissorCount == 0)
 		{
-			s_rect = sys::Rect::Zero;
+			s_rect = math::Rect();
 			glDisable(GL_SCISSOR_TEST);
 		}
 	}
 }
 
-sys::Rect CtrlScissor::makeRect()
+math::Rect CtrlScissor::makeRect()
 {
-	sys::Rect rect;
-	rect.x = _realSpaceVertex.leftDown.x;
-	rect.y = _realSpaceVertex.leftDown.y;
-	rect.width = _realSpaceVertex.rightDown.x - _realSpaceVertex.leftDown.x;
-	rect.height = _realSpaceVertex.leftUp.y - _realSpaceVertex.leftDown.y;
+	float x = _realSpaceVertex.leftDown.getX();
+	float y = _realSpaceVertex.leftDown.getY();
+	float w = _realSpaceVertex.rightDown.getX() - _realSpaceVertex.leftDown.getX();
+	float h = _realSpaceVertex.leftUp.getY() - _realSpaceVertex.leftDown.getY();
 
-	return rect;
+	return math::Rect(x, y, w, h);
 }

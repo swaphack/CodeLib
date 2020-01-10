@@ -4,28 +4,22 @@
 using namespace math;
 
 Determinant::Determinant()
-	:_values(nullptr)
-	, _width(0)
 {
 
 }
 
-Determinant::Determinant(uint32_t w)
+Determinant::Determinant(int32_t order)
 {
-	_width = w;
-	float size = w * w * sizeof(float);
-	_values = (float*)malloc(size);
-	memset(_values, 0, size);
+	assert(order > 0);
+
+	this->reset(order);
 }
 
-Determinant::Determinant(float* val, uint32_t w)
+Determinant::Determinant(float* val, int32_t order)
 {
-	assert(val != nullptr && w > 0);
-	_width = w;
-	float size = w * w * sizeof(float);
-	_values = (float*)malloc(size);
-	memset(_values, 0, size);
-	memcpy(_values, val, size);
+	assert(val != nullptr && order > 0);
+
+	this->set(val, order);
 }
 
 Determinant::Determinant(const Determinant& det)
@@ -38,144 +32,164 @@ Determinant::~Determinant()
 	this->dispose();
 }
 
-uint32_t Determinant::getWidth()
+int32_t Determinant::getOrder() const
 {
 	return _width;
 }
 
-void Determinant::reset(uint32_t w)
+void Determinant::reset(int32_t order)
 {
-	assert(w != 0);
+	assert(order != 0);
 
 	this->dispose();
 
-	_width = w;
-	float size = w * w * sizeof(float);
+	_width = _height = order;
+
+	int size = order * order * sizeof(float);
 	_values = (float*)malloc(size);
 	memset(_values, 0, size);
 }
 
-void Determinant::reset()
+void Determinant::set(float* val, int32_t order)
 {
-	if (_values != nullptr && _width != 0)
+	assert(val != nullptr && order > 0);
+
+	_width = _height = order;
+	int size = order * order * sizeof(float);
+	_values = (float*)malloc(size);
+	memset(_values, 0, size);
+	memcpy(_values, val, size);
+}
+
+float Determinant::getMagnitude() const
+{
+	assert(_width > 0);
+	if (_width == 1)
 	{
-		float size = _width * _width * sizeof(float);
-		memset(_values, 0, size);
+		return _values[0];
 	}
-}
-
-float Determinant::getValue(uint32_t index) const
-{
-	assert(index < _width * _width);
-
-	return _values[index];
-}
-
-float Determinant::getValue(uint32_t w, uint32_t h) const
-{
-	assert(w < _width && h < _width);
-
-	return _values[h * _width + w];
-}
-
-float Determinant::getValue()
-{
+	if (_width == 2)
+	{
+		return _values[0] * _values[3] - _values[1] * _values[2];
+	}
 	float value = 0;
+	float* sequence1 = new float[_width] {0};
+	float* sequence2 = new float[_width] {0};
+	
 	for (int i = 0; i < _width; i++)
 	{
-		float val1 = 0;
-		float val2 = 0;
-		for (int j = 0; j < _width; j++)
+		int len = _width - 1;
+		int x = 0;
+		Determinant det(len);
+		for (int j = 1; j < _width; j++)
 		{
-			int a = i + j;
-			int b = i - j;
-			a = a % _width;
-			b = (b + _width) % _width;
-			val1 += getValue(j, i + j);
-			val2 -= getValue(j, i - j);
+			for (int k = 0; k < _width; k++)
+			{
+				if (k != i)
+				{
+					det.setValue(j - 1, x, getValue(j, k));
+					x++;
+				}
+			}
 		}
-		value += val1 + val2;
+		
+		float k = getValue(0, i) * det.getMagnitude() * pow(-1.0f, i);
+		value += k;
 	}
+
+	delete sequence1;
+	delete sequence2;
+
 	return value;
 }
 
-void Determinant::setValue(uint32_t w, uint32_t h, float value)
+int Determinant::getInverseNumber(float* data, int len)
 {
-	assert(w < _width && h < _width);
-
-	_values[h * _width + w] = value;
-}
-
-void Determinant::setValue(uint32_t index, float value)
-{
-	assert(index < _width * _width);
-
-	_values[index] = value;
-}
-
-Determinant& Determinant::operator=(const Determinant& mat)
-{
-	this->reset(mat._width);
-	uint32_t len = mat._width * mat._width;
-	for (uint32_t i = 0; i < len; i++)
+	if (data == nullptr)
 	{
-		_values[i] = mat[i];
+		return 0;
+	}
+	int count = 0;
+	for (int i = 0; i < len; i++)
+	{
+		int num = 0;
+		float val = data[i];
+		for (int j = i + 1; j < len; j++)
+		{
+			if (val > data[j])
+			{
+				num++;
+			}
+		}
+		count += num;
 	}
 
-	return *this;
+	return count;
 }
 
-float& Determinant::operator[](uint32_t index)
+Determinant Determinant::mul(float k, int32_t row)
 {
-	assert(index < _width * _width);
+	assert(row < _width);
 
-	return _values[index];
+	Determinant det;
+	
+	for (int i = 0; i < _width; i++)
+	{
+		det[row * _width + i] = k;
+	}
+
+	return det;
 }
 
-float Determinant::operator[](uint32_t index) const
+Determinant Determinant::add(const Determinant& det, int32_t row)
 {
-	assert(index < _width * _width);
+	assert(det.getOrder() != this->getOrder());
+	int32_t order = getOrder();
+	Determinant target(order);
 
-	return _values[index];
+	for (int i = 0; i < order; i++)
+	{
+		if (i == row)
+		{
+			for (int j = 0; j < order; j++)
+			{
+				target.setValue(i, j, this->getValue(i, j) + det.getValue(i, j));
+			}
+		}
+		else if (i != row)
+		{
+			for (int j = 0; j < order; j++)
+			{
+				assert(det.getValue(i, j) == this->getValue(i, j));
+				target.setValue(i, j, this->getValue(i, j));
+			}
+		}
+	}
+
+	return target;
 }
 
-Determinant Determinant::operator+(const Determinant& mat)
+Determinant Determinant::operator*(const Determinant& det)
 {
+	assert(_width == det._width);
 
+	Determinant result(_width);
+
+	float val = 0;
+	for (int32_t bh = 0; bh < _width; bh++)
+	{
+		for (int32_t mw = 0; mw < _width; mw++)
+		{
+			val = 0;
+			for (int32_t mh = 0; mh < _width; mh++)
+			{
+				float a = getValue(bh, mh);
+				float b = det.getValue(mh, mw);
+				val += a * b;
+			}
+			result.setValue(bh, mw, val);
+		}
+	}
+
+	return result;
 }
-
-Determinant Determinant::operator-(const Determinant& mat)
-{
-
-}
-
-Determinant Determinant::operator*(const Determinant& mat)
-{
-
-}
-
-Determinant& Determinant::operator+=(const Determinant& mat)
-{
-
-}
-
-Determinant& Determinant::operator-=(const Determinant& mat)
-{
-
-}
-
-Determinant& Determinant::operator*=(float k)
-{
-
-}
-
-std::string Determinant::toString()
-{
-
-}
-
-void Determinant::dispose()
-{
-
-}
-

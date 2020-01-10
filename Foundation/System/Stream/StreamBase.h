@@ -19,9 +19,9 @@ namespace sys
 		// 获取数据内容
 		const char* getData() const;
 		// 获取数据长度
-		int32 getLength() const;
+		int32_t getLength() const;
 		// 设置数据长度
-		void setLength(int32 length);
+		void setLength(int32_t length);
 		// 释放流数据
 		void freeStream();
 	protected:
@@ -43,9 +43,9 @@ namespace sys
 		// 获取数据内容
 		const char* getData() const;
 		// 获取数据长度
-		int32 getLength() const;
+		int32_t getLength() const;
 		// 设置数据长度
-		void setLength(int32 length);
+		void setLength(int32_t length);
 		// 释放流数据
 		void freeStream();
 	protected:

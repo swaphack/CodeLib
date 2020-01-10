@@ -75,15 +75,15 @@ namespace ui
 		/**
 		*	当窗口大小发生改变时
 		*/
-		virtual void resize(const sys::Size& size);
+		virtual void resize(const math::Size& size);
 		/**
 		*	当窗口位置和大小发生改变时
 		*/
-		virtual void resize(const sys::Vector2& position, const sys::Size& size);
+		virtual void resize(const math::Vector2& position, const math::Size& size);
 		/**
 		*	当窗口位置和大小发生改变时
 		*/
-		virtual void resize(const sys::Rect& rect);
+		virtual void resize(const math::Rect& rect);
 		/**
 		*	复制对象
 		*/
@@ -92,19 +92,19 @@ namespace ui
 		*	布局内部大小改变
 		*	计算位置
 		*/
-		static void calLayoutPosition(LayoutItem* child, const sys::Size& srcSize, const sys::Size& newSize, float& x, float& y);
+		static void calLayoutPosition(LayoutItem* child, const math::Size& srcSize, const math::Size& newSize, float& x, float& y);
 		/**
 		*	布局内部大小改变
 		*	计算大小
 		*/
-		static void calLayoutSize(LayoutItem* child, const sys::Size& srcSize, const sys::Size& newSize, float& w, float& h);
+		static void calLayoutSize(LayoutItem* child, const math::Size& srcSize, const math::Size& newSize, float& w, float& h);
 	protected:
 		/**
 		*	布局内部大小改变
 		*	包含固定大小和百分比两种情况
 		*	先计算固定大小的值，再计算百分比的值
 		*/
-		virtual void onLayoutSizeChanged(const sys::Size& innerSize);		
+		virtual void onLayoutSizeChanged(const math::Size& innerSize);		
 	protected:
 		// 边缘距离
 		sys::Margin m_fMargin;

@@ -172,7 +172,7 @@
  *    1.0.6 (+ 3 patches)           10006 (still binary incompatible)
  *    1.0.6d-f                      10007 (still binary incompatible)
  *    1.0.6g                        10007
- *    1.0.6h                        10007  10.6h (testing xy.z so-numbering)
+ *    1.0.6h                        10007  10.6h (testing xy.getZ() so-numbering)
  *    1.0.6i                        10007  10.6i
  *    1.0.6j                        10007  2.1.0.6j (incompatible with 1.0.0)
  *    1.0.7beta11-14        DLLNUM  10007  2.1.0.7beta11-14 (binary compatible)
@@ -193,7 +193,7 @@
  *    used for changes in backward compatibility, as it is intended.  The
  *    PNG_LIBPNG_VER macro, which is not used within libpng but is available
  *    for applications, is an unsigned integer of the form xyyzz corresponding
- *    to the source version x.y.z (leading zeros in y and z).  Beta versions
+ *    to the source version x.getY().getZ() (leading zeros in y and z).  Beta versions
  *    were given the previous public release number plus a letter, until
  *    version 1.0.6j; from then on they were given the upcoming public
  *    release number plus "betaNN" or "rcNN".

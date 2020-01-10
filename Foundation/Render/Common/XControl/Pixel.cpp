@@ -17,7 +17,7 @@ Pixel::~Pixel()
 
 sys::Color4B Pixel::getPixel(float x, float y)
 {
-	uint8 data[4] = { 0 };
+	uint8_t data[4] = { 0 };
 	glReadPixels((int)x, (int)y, 1, 1, GL_RGBA, GL_UNSIGNED_BYTE, data);
 
 	return sys::Color4B(data[0], data[1], data[2], data[3]);

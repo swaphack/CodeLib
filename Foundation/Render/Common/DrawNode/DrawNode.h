@@ -20,15 +20,15 @@ namespace render
 		void setDrawMode(BeginMode mode);
 		int getDrawMode();
 		// 设置点坐标
-		void setPoints(const std::vector<sys::Vector3>& points);
+		void setPoints(const std::vector<math::Vector3>& points);
 		// 添加一个点坐标
-		void appendPoint(const sys::Vector3& point);
+		void appendPoint(const math::Vector3& point);
 		// 添加一个点坐标
-		void appendPoint(const sys::Vector2& point);
+		void appendPoint(const math::Vector2& point);
 		// 移除一个点坐标
-		void removePoint(const sys::Vector3& point);
+		void removePoint(const math::Vector3& point);
 		// 移除一个点坐标
-		void removePoint(const sys::Vector2& point);
+		void removePoint(const math::Vector2& point);
 		// 移除所有点坐标
 		void removeAllPoints();
 	protected:
@@ -40,6 +40,6 @@ namespace render
 		// 模式
 		BeginMode _drawMode;
 		// 点坐标
-		std::vector<sys::Vector3> _points;
+		std::vector<math::Vector3> _points;
 	};
 }

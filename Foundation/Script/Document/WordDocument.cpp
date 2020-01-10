@@ -70,5 +70,5 @@ bool WordDocument::convertToDocumentStruct()
 
 bool WordDocument::convertToTextStruct()
 {
-
+	return false;
 }

@@ -34,7 +34,7 @@ void Dictionary::removeObject(Object* object)
 		return;
 	}
 
-	std::map<uint64, Object*>::iterator it = _objects.begin();
+	std::map<uint64_t, Object*>::iterator it = _objects.begin();
 
 	while (it != _objects.end())
 	{
@@ -48,7 +48,7 @@ void Dictionary::removeObject(Object* object)
 	}
 }
 
-void Dictionary::removeObject(uint64 id)
+void Dictionary::removeObject(uint64_t id)
 {
 	if (_objects.find(id) == _objects.end())
 	{
@@ -60,7 +60,7 @@ void Dictionary::removeObject(uint64 id)
 	_objects.erase(id);
 }
 
-Object* Dictionary::getObject(uint64 id)
+Object* Dictionary::getObject(uint64_t id)
 {
 	if (_objects.find(id) == _objects.end())
 	{
@@ -72,7 +72,7 @@ Object* Dictionary::getObject(uint64 id)
 
 void Dictionary::clear()
 {
-	std::map<uint64, Object*>::iterator it = _objects.begin();
+	std::map<uint64_t, Object*>::iterator it = _objects.begin();
 
 	while (it != _objects.end())
 	{
@@ -83,17 +83,17 @@ void Dictionary::clear()
 	_objects.clear();
 }
 
-int32 Dictionary::count()
+int32_t Dictionary::count()
 {
 	return _objects.size();
 }
 
-std::map<uint64, Object*>::iterator Dictionary::begin()
+std::map<uint64_t, Object*>::iterator Dictionary::begin()
 {
 	return _objects.begin();
 }
 
-std::map<uint64, Object*>::iterator Dictionary::end()
+std::map<uint64_t, Object*>::iterator Dictionary::end()
 {
 	return _objects.end();
 }
@@ -108,7 +108,7 @@ bool Dictionary::contains(Object* object)
 	return getObject(object->getID());
 }
 
-bool Dictionary::contains(uint64 id)
+bool Dictionary::contains(uint64_t id)
 {
 	return getObject(id) != nullptr;
 }
@@ -165,7 +165,7 @@ void List::removeObject(Object* object)
 	}
 }
 
-void List::removeObject(uint64 id)
+void List::removeObject(uint64_t id)
 {
 	std::vector<Object*>::iterator it = _objects.begin();
 
@@ -183,7 +183,7 @@ void List::removeObject(uint64 id)
 	}
 }
 
-Object* List::getObject(uint64 id)
+Object* List::getObject(uint64_t id)
 {
 	std::vector<Object*>::iterator it = _objects.begin();
 
@@ -213,7 +213,7 @@ void List::clear()
 	_objects.clear();
 }
 
-int32 List::count()
+int32_t List::count()
 {
 	return _objects.size();
 }
@@ -238,7 +238,7 @@ bool List::contains(Object* object)
 	return contains(object->getID());
 }
 
-bool List::contains(uint64 id)
+bool List::contains(uint64_t id)
 {
 	return getObject(id) != nullptr;
 }

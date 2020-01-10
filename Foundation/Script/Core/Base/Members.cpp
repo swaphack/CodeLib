@@ -51,7 +51,7 @@ void Members::removeAllMembers()
 
 Variable* Members::getMember(const std::string& name)
 {
-	if (name == nullptr)
+	if (name.empty())
 	{
 		return nullptr;
 	}

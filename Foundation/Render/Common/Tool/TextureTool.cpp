@@ -3,73 +3,65 @@
 
 using namespace render;
 
-void TextureTool::setTexture2DCounterCoords(TextureRect* texRect, const sys::Size& size, const sys::Rect& rect)
+void TextureTool::setTexture2DCounterCoords(TextureRect* texRect, const math::Size& size, const math::Rect& rect)
 {
 	// left down
-	texRect->leftUp.coords.x = rect.x / size.width;
-	texRect->leftUp.coords.y = rect.y / size.height;
+	texRect->leftUp.coords.set(rect.getX() / size.getWidth(), rect.getY() / size.getHeight());
 
 	// right down
-	texRect->rightUp.coords.x = (rect.x + rect.width) / size.width;
-	texRect->rightUp.coords.y = rect.y / size.height;
+	texRect->rightUp.coords.set(rect.getMaxX()/ size.getWidth(), rect.getY() / size.getHeight());
 
 	// right up
-	texRect->rightDown.coords.x = (rect.x + rect.width) / size.width;
-	texRect->rightDown.coords.y = (rect.y + rect.height) / size.height;
+	texRect->rightDown.coords.set(rect.getX() + rect.getMaxX() / size.getWidth(), rect.getMaxY() / size.getHeight());
 
 	// left up
-	texRect->leftDown.coords.x = rect.x / size.width;
-	texRect->leftDown.coords.y = (rect.y + rect.height) / size.height;
+	texRect->leftDown.coords.set(rect.getX() / size.getWidth(), rect.getMaxY() / size.getHeight());
 }
 
 
-void TextureTool::setTexture2DCoords(TextureRect* texRect, const sys::Size& size, const sys::Rect& rect)
+void TextureTool::setTexture2DCoords(TextureRect* texRect, const math::Size& size, const math::Rect& rect)
 {
 	// left down
-	texRect->leftDown.coords.x = rect.x / size.width;
-	texRect->leftDown.coords.y = rect.y / size.height;
+	texRect->leftDown.coords.set(rect.getX() / size.getWidth(), rect.getY() / size.getHeight());
 
 	// right down
-	texRect->rightDown.coords.x = (rect.x + rect.width) / size.width;
-	texRect->rightDown.coords.y = rect.y / size.height;
+	texRect->rightDown.coords.set(rect.getMaxX() / size.getWidth(), rect.getY() / size.getHeight());
 
 	// right up
-	texRect->rightUp.coords.x = (rect.x + rect.width) / size.width;
-	texRect->rightUp.coords.y = (rect.y + rect.height) / size.height;
+	texRect->rightUp.coords.set(rect.getX() + rect.getMaxX() / size.getWidth(), rect.getMaxY() / size.getHeight());
 
 	// left up
-	texRect->leftUp.coords.x = rect.x / size.width;
-	texRect->leftUp.coords.y = (rect.y + rect.height) / size.height;
+	texRect->leftUp.coords.set(rect.getX() / size.getWidth(), rect.getMaxY() / size.getHeight());
 }
 
-void TextureTool::setTexture2DVertexts(TextureRect* texRect, const sys::Vector3& position, const sys::Volume& volume, const sys::Vector3& anchor)
+void TextureTool::setTexture2DVertexts(TextureRect* texRect, const math::Vector3& position, const math::Volume& volume, const math::Vector3& anchor)
 {
 	float x = 0;
 	float y = 0;
 
 	// left down
-	x = position.x - volume.width * anchor.x;
-	y = position.y - volume.height * anchor.y;
-	texRect->leftDown.point = Tool::convertToOGLPoisition(x, y, position.z);
+	x = position.getX() - volume.getWidth() * anchor.getX();
+	y = position.getY() - volume.getHeight() * anchor.getY();
+	texRect->leftDown.point = Tool::convertToOGLPoisition(x, y, position.getZ());
 
 	// right down
-	x = position.x + volume.width * (1 - anchor.x);
-	y = position.y - volume.height * anchor.y;
-	texRect->rightDown.point = Tool::convertToOGLPoisition(x, y, position.z);
+	x = position.getX() + volume.getWidth() * (1 - anchor.getX());
+	y = position.getY() - volume.getHeight() * anchor.getY();
+	texRect->rightDown.point = Tool::convertToOGLPoisition(x, y, position.getZ());
 
 	// right up
-	x = position.x + volume.width * (1 - anchor.x);
-	y = position.y + volume.height * (1 - anchor.y);
-	texRect->rightUp.point = Tool::convertToOGLPoisition(x, y, position.z);
+	x = position.getX() + volume.getWidth() * (1 - anchor.getX());
+	y = position.getY() + volume.getHeight() * (1 - anchor.getY());
+	texRect->rightUp.point = Tool::convertToOGLPoisition(x, y, position.getZ());
 
 	// left up
-	x = position.x - volume.width * anchor.x;
-	y = position.y + volume.height * (1 - anchor.y);
-	texRect->leftUp.point = Tool::convertToOGLPoisition(x, y, position.z);
+	x = position.getX() - volume.getWidth() * anchor.getX();
+	y = position.getY() + volume.getHeight() * (1 - anchor.getY());
+	texRect->leftUp.point = Tool::convertToOGLPoisition(x, y, position.getZ());
 }
 
 /*
-void TextureTool::setTexture3DCoords(TextureCube* texcube, const sys::Size& size, const sys::Rect& rect)
+void TextureTool::setTexture3DCoords(TextureCube* texcube, const math::Size& size, const math::Rect& rect)
 {
 	TextureTool::setTexture2DCoords(&texcube->front, size, rect);
 	TextureTool::setTexture2DCoords(&texcube->back, size, rect);
@@ -80,19 +72,19 @@ void TextureTool::setTexture3DCoords(TextureCube* texcube, const sys::Size& size
 }
 */
 
-void TextureTool::setTexture3DVertexts(TextureCube* texcube, const sys::Vector3& position, const sys::Volume& volume, const sys::Vector3& anchor)
+void TextureTool::setTexture3DVertexts(TextureCube* texcube, const math::Vector3& position, const math::Volume& volume, const math::Vector3& anchor)
 {
 	float x;
 	float y;
 	float z;
-	sys::Vector3 point;
+	math::Vector3 point;
 
 	//------ front ------
 
 	// left down
-	x = position.x - volume.width * anchor.x;
-	y = position.y - volume.height * anchor.y;
-	z = position.z - volume.deep * anchor.z;
+	x = position.getX() - volume.getWidth() * anchor.getX();
+	y = position.getY() - volume.getHeight() * anchor.getY();
+	z = position.getZ() - volume.getDeep() * anchor.getZ();
 
 	point = Tool::convertToOGLPoisition(x, y, z);
 	texcube->front.leftDown.point = point;
@@ -100,9 +92,9 @@ void TextureTool::setTexture3DVertexts(TextureCube* texcube, const sys::Vector3&
 	texcube->bottom.leftUp.point = point;
 
 	// right down
-	x = position.x + volume.width * (1 - anchor.x);
-	y = position.y - volume.height * anchor.y;
-	z = position.z - volume.deep * anchor.z;
+	x = position.getX() + volume.getWidth() * (1 - anchor.getX());
+	y = position.getY() - volume.getHeight() * anchor.getY();
+	z = position.getZ() - volume.getDeep() * anchor.getZ();
 
 	point = Tool::convertToOGLPoisition(x, y, z);
 	texcube->front.rightDown.point = point;
@@ -110,9 +102,9 @@ void TextureTool::setTexture3DVertexts(TextureCube* texcube, const sys::Vector3&
 	texcube->bottom.rightUp.point = point;
 
 	// right up
-	x = position.x + volume.width * (1 - anchor.x);
-	y = position.y + volume.height * (1 - anchor.y);
-	z = position.z - volume.deep * anchor.z;
+	x = position.getX() + volume.getWidth() * (1 - anchor.getX());
+	y = position.getY() + volume.getHeight() * (1 - anchor.getY());
+	z = position.getZ() - volume.getDeep() * anchor.getZ();
 
 	point = Tool::convertToOGLPoisition(x, y, z);
 	texcube->front.rightUp.point = point;
@@ -120,9 +112,9 @@ void TextureTool::setTexture3DVertexts(TextureCube* texcube, const sys::Vector3&
 	texcube->top.rightDown.point = point;
 
 	// left up
-	x = position.x - volume.width * anchor.x;
-	y = position.y + volume.height * (1 - anchor.y);
-	z = position.z - volume.deep * anchor.z;
+	x = position.getX() - volume.getWidth() * anchor.getX();
+	y = position.getY() + volume.getHeight() * (1 - anchor.getY());
+	z = position.getZ() - volume.getDeep() * anchor.getZ();
 
 	point = Tool::convertToOGLPoisition(x, y, z);
 	texcube->front.leftUp.point = point;
@@ -132,9 +124,9 @@ void TextureTool::setTexture3DVertexts(TextureCube* texcube, const sys::Vector3&
 	//------ back ------
 
 	// left down
-	x = position.x - volume.width * anchor.x;
-	y = position.y - volume.height * anchor.y;
-	z = position.z + volume.deep * (1 - anchor.z);
+	x = position.getX() - volume.getWidth() * anchor.getX();
+	y = position.getY() - volume.getHeight() * anchor.getY();
+	z = position.getZ() + volume.getDeep() * (1 - anchor.getZ());
 
 	point = Tool::convertToOGLPoisition(x, y, z);
 	texcube->back.rightDown.point = point;
@@ -142,9 +134,9 @@ void TextureTool::setTexture3DVertexts(TextureCube* texcube, const sys::Vector3&
 	texcube->bottom.leftDown.point = point;
 
 	// right down
-	x = position.x + volume.width * (1 - anchor.x);
-	y = position.y - volume.height * anchor.y;
-	z = position.z + volume.deep * (1 - anchor.z);
+	x = position.getX() + volume.getWidth() * (1 - anchor.getX());
+	y = position.getY() - volume.getHeight() * anchor.getY();
+	z = position.getZ() + volume.getDeep() * (1 - anchor.getZ());
 
 	point = Tool::convertToOGLPoisition(x, y, z);
 	texcube->back.leftDown.point = point;
@@ -152,9 +144,9 @@ void TextureTool::setTexture3DVertexts(TextureCube* texcube, const sys::Vector3&
 	texcube->bottom.rightDown.point = point;
 
 	// right up
-	x = position.x + volume.width * (1 - anchor.x);
-	y = position.y + volume.height * (1 - anchor.y);
-	z = position.z + volume.deep * (1 - anchor.z);
+	x = position.getX() + volume.getWidth() * (1 - anchor.getX());
+	y = position.getY() + volume.getHeight() * (1 - anchor.getY());
+	z = position.getZ() + volume.getDeep() * (1 - anchor.getZ());
 
 	point = Tool::convertToOGLPoisition(x, y, z);
 	texcube->back.leftUp.point = point;
@@ -162,9 +154,9 @@ void TextureTool::setTexture3DVertexts(TextureCube* texcube, const sys::Vector3&
 	texcube->right.rightUp.point = point;
 
 	// left up
-	x = position.x - volume.width * anchor.x;
-	y = position.y + volume.height * (1 - anchor.y);
-	z = position.z + volume.deep * (1 - anchor.z);
+	x = position.getX() - volume.getWidth() * anchor.getX();
+	y = position.getY() + volume.getHeight() * (1 - anchor.getY());
+	z = position.getZ() + volume.getDeep() * (1 - anchor.getZ());
 
 	point = Tool::convertToOGLPoisition(x, y, z);
 	texcube->back.rightUp.point = point;
@@ -174,7 +166,7 @@ void TextureTool::setTexture3DVertexts(TextureCube* texcube, const sys::Vector3&
 
 void TextureTool::setTexture2DFlip(TextureRect* texRect, bool bFlipX, bool bFlipY)
 {
-	sys::Vector3 temp;
+	math::Vector3 temp;
 
 	if (bFlipX)
 	{

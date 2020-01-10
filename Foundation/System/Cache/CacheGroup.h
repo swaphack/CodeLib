@@ -54,7 +54,7 @@ namespace sys
 		{
 			return;
 		}
-		int32 size = sizeof(value);
+		int32_t size = sizeof(value);
 		char* data = (char*)malloc(size);
 		memcpy(data, &value, size);
 		this->set(name, data);

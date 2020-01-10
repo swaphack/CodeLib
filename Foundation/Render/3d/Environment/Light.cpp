@@ -52,12 +52,12 @@ void Light::draw()
 	glEnable(getLightIndex());
 }
 
-void Light::setAmbient(uint8 red, uint8 green, uint8 blue, uint8 alpha)
+void Light::setAmbient(uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha)
 {
-	_lightAmbient[0] = red / sys::COLOR_FLOAT_VALUE;
-	_lightAmbient[1] = green / sys::COLOR_FLOAT_VALUE;
-	_lightAmbient[2] = blue / sys::COLOR_FLOAT_VALUE;
-	_lightAmbient[3] = alpha / sys::COLOR_FLOAT_VALUE;
+	_lightAmbient[0] = red / COLOR_FLOAT_VALUE;
+	_lightAmbient[1] = green / COLOR_FLOAT_VALUE;
+	_lightAmbient[2] = blue / COLOR_FLOAT_VALUE;
+	_lightAmbient[3] = alpha / COLOR_FLOAT_VALUE;
 }
 
 const float* Light::getAmbient()
@@ -65,12 +65,12 @@ const float* Light::getAmbient()
 	return _lightAmbient;
 }
 
-void Light::setDiffuse(uint8 red, uint8 green, uint8 blue, uint8 alpha)
+void Light::setDiffuse(uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha)
 {
-	_lightDiffuse[0] = red / sys::COLOR_FLOAT_VALUE;
-	_lightDiffuse[1] = green / sys::COLOR_FLOAT_VALUE;
-	_lightDiffuse[2] = blue / sys::COLOR_FLOAT_VALUE;
-	_lightDiffuse[3] = alpha / sys::COLOR_FLOAT_VALUE;
+	_lightDiffuse[0] = red / COLOR_FLOAT_VALUE;
+	_lightDiffuse[1] = green / COLOR_FLOAT_VALUE;
+	_lightDiffuse[2] = blue / COLOR_FLOAT_VALUE;
+	_lightDiffuse[3] = alpha / COLOR_FLOAT_VALUE;
 }
 
 const float* Light::getDiffuse()
@@ -78,12 +78,12 @@ const float* Light::getDiffuse()
 	return _lightDiffuse;
 }
 
-void Light::setSpecular(uint8 red, uint8 green, uint8 blue, uint8 alpha)
+void Light::setSpecular(uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha)
 {
-	_lightSpecular[0] = red / sys::COLOR_FLOAT_VALUE;
-	_lightSpecular[1] = green / sys::COLOR_FLOAT_VALUE;
-	_lightSpecular[2] = blue / sys::COLOR_FLOAT_VALUE;
-	_lightSpecular[3] = alpha / sys::COLOR_FLOAT_VALUE;
+	_lightSpecular[0] = red / COLOR_FLOAT_VALUE;
+	_lightSpecular[1] = green / COLOR_FLOAT_VALUE;
+	_lightSpecular[2] = blue / COLOR_FLOAT_VALUE;
+	_lightSpecular[3] = alpha / COLOR_FLOAT_VALUE;
 }
 
 const float* Light::getSpecular()
@@ -95,7 +95,7 @@ void Light::initSelf()
 {
 	Node::initSelf();
 
-	_lightPosition[0] = _obPosition.x;
-	_lightPosition[1] = _obPosition.y;
-	_lightPosition[2] = _obPosition.z;
+	_lightPosition[0] = _obPosition.getX();
+	_lightPosition[1] = _obPosition.getY();
+	_lightPosition[2] = _obPosition.getZ();
 }

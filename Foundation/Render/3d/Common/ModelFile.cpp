@@ -173,21 +173,21 @@ float* ModelFile::getFloatAry(const char* text, int count)
 	return data;
 }
 
-uint16* ModelFile::getUShortAry(const char* text, int count)
+uint16_t* ModelFile::getUShortAry(const char* text, int count)
 {
 	sys::String value = text;
 	value = value.trim();
 	std::vector<sys::String> strAry;
 	value.split(',', strAry);
 
-	uint16* data = (uint16*)malloc(count * sizeof(uint16));
-	memset(data, 0, count * sizeof(uint16));
+	uint16_t* data = (uint16_t*)malloc(count * sizeof(uint16_t));
+	memset(data, 0, count * sizeof(uint16_t));
 	int len = strAry.size();
 	for (int i = 0; i < len; i++)
 	{
 		if (i < count)
 		{
-			data[i] = (uint16)atoi(strAry[i].getString());
+			data[i] = (uint16_t)atoi(strAry[i].getString());
 		}
 	}
 

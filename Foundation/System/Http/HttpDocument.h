@@ -50,19 +50,19 @@ namespace sys
 		virtual ~HttpDocument();
 	public:
 		// 解析字符串，是否是http文档
-		bool parse(const char* msg, int32 size);
+		bool parse(const char* msg, int32_t size);
 		// 生成http字符串
 		bool save(std::string& msg);
 
 		// 获取状态参数
-		const char* getStatus(int32 index);
+		const char* getStatus(int32_t index);
 		// 设置状态参数
-		void setStatus(int32 index, const char* value);
+		void setStatus(int32_t index, const char* value);
 
 		// 获取报头参数
 		const char* getHeader(const char* key);
 		// 整形格式报头参数
-		bool getint32egerHeader(const char* key, int32& value);
+		bool getint32egerHeader(const char* key, int32_t& value);
 
 		// 移除报头参数
 		void removeHeader(const char* key);
@@ -71,16 +71,16 @@ namespace sys
 		// 时间格式报头参数
 		void setDateHeader(const char* key, Time* value);
 		// 整形格式报头参数
-		void setint32egerHeader(const char* key, int32 value);
+		void setint32egerHeader(const char* key, int32_t value);
 
 		// 可选的消息体
-		void setBody(const char* value, int32 size);
+		void setBody(const char* value, int32_t size);
 		// 可选的消息体
 		const char* getBody();
 		// 可选消息体长度
-		int32 getBodySize();
+		int32_t getBodySize();
 		// 获取流长度
-		int32 getStreamSize();
+		int32_t getStreamSize();
 	protected:
 		// 解析状态行
 		bool readStatusSection();

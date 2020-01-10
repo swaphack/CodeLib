@@ -58,12 +58,12 @@ void Material::apply()
 	glMaterialfv(GL_FRONT, GL_EMISSION, _matrialEmission);
 }
 
-void Material::setAmbient(uint8 red, uint8 green, uint8 blue, uint8 alpha)
+void Material::setAmbient(uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha)
 {
-	_matrialAmbient[0] = red / sys::COLOR_FLOAT_VALUE;
-	_matrialAmbient[1] = green / sys::COLOR_FLOAT_VALUE;
-	_matrialAmbient[2] = blue / sys::COLOR_FLOAT_VALUE;
-	_matrialAmbient[3] = alpha / sys::COLOR_FLOAT_VALUE;
+	_matrialAmbient[0] = red / COLOR_FLOAT_VALUE;
+	_matrialAmbient[1] = green / COLOR_FLOAT_VALUE;
+	_matrialAmbient[2] = blue / COLOR_FLOAT_VALUE;
+	_matrialAmbient[3] = alpha / COLOR_FLOAT_VALUE;
 }
 
 const float* Material::getAmbient() const
@@ -71,12 +71,12 @@ const float* Material::getAmbient() const
 	return _matrialAmbient;
 }
 
-void Material::setDiffuse(uint8 red, uint8 green, uint8 blue, uint8 alpha)
+void Material::setDiffuse(uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha)
 {
-	_matrialDiffuse[0] = red / sys::COLOR_FLOAT_VALUE;
-	_matrialDiffuse[1] = green / sys::COLOR_FLOAT_VALUE;
-	_matrialDiffuse[2] = blue / sys::COLOR_FLOAT_VALUE;
-	_matrialDiffuse[3] = alpha / sys::COLOR_FLOAT_VALUE;
+	_matrialDiffuse[0] = red / COLOR_FLOAT_VALUE;
+	_matrialDiffuse[1] = green / COLOR_FLOAT_VALUE;
+	_matrialDiffuse[2] = blue / COLOR_FLOAT_VALUE;
+	_matrialDiffuse[3] = alpha / COLOR_FLOAT_VALUE;
 }
 
 const float* Material::getDiffuse() const
@@ -84,12 +84,12 @@ const float* Material::getDiffuse() const
 	return _matrialDiffuse;
 }
 
-void Material::setSpecular(uint8 red, uint8 green, uint8 blue, uint8 alpha)
+void Material::setSpecular(uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha)
 {
-	_matrialSpecular[0] = red / sys::COLOR_FLOAT_VALUE;
-	_matrialSpecular[1] = green / sys::COLOR_FLOAT_VALUE;
-	_matrialSpecular[2] = blue / sys::COLOR_FLOAT_VALUE;
-	_matrialSpecular[3] = alpha / sys::COLOR_FLOAT_VALUE;
+	_matrialSpecular[0] = red / COLOR_FLOAT_VALUE;
+	_matrialSpecular[1] = green / COLOR_FLOAT_VALUE;
+	_matrialSpecular[2] = blue / COLOR_FLOAT_VALUE;
+	_matrialSpecular[3] = alpha / COLOR_FLOAT_VALUE;
 }
 
 const float* Material::getSpecular() const
@@ -107,12 +107,12 @@ float Material::getShiness() const
 	return _matrialShiness;
 }
 
-void Material::setEmisiion(uint8 red, uint8 green, uint8 blue, uint8 alpha)
+void Material::setEmisiion(uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha)
 {
-	_matrialEmission[0] = red / sys::COLOR_FLOAT_VALUE;
-	_matrialEmission[1] = green / sys::COLOR_FLOAT_VALUE;
-	_matrialEmission[2] = blue / sys::COLOR_FLOAT_VALUE;
-	_matrialEmission[3] = alpha / sys::COLOR_FLOAT_VALUE;
+	_matrialEmission[0] = red / COLOR_FLOAT_VALUE;
+	_matrialEmission[1] = green / COLOR_FLOAT_VALUE;
+	_matrialEmission[2] = blue / COLOR_FLOAT_VALUE;
+	_matrialEmission[3] = alpha / COLOR_FLOAT_VALUE;
 }
 
 const float* Material::getEmisiion() const

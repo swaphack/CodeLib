@@ -22,11 +22,11 @@ void DCTexture::draw()
 	glBindTexture(GL_TEXTURE_2D, TextureID);
 	glBegin(GL_QUADS);
 	{
-		glNormal3f(Normal.x, Normal.y, Normal.z);
+		glNormal3f(Normal.getX(), Normal.getY(), Normal.getZ());
 		for (int i = 0; i < 4; i++)
 		{
-			glTexCoord3f(Coord[i].x, Coord[i].y, Coord[i].z);
-			glVertex3f(Position[i].x, Position[i].y, Position[i].z);
+			glTexCoord3f(Coord[i].getX(), Coord[i].getY(), Coord[i].getZ());
+			glVertex3f(Position[i].getX(), Position[i].getY(), Position[i].getZ());
 		}
 	}
 	glEnd();
@@ -36,7 +36,7 @@ void DCTexture::draw()
 	glDisable(GL_BLEND);
 }
 
-DCTexture* DCTexture::create(int textureID, const TextureRect* texRect, const sys::Color4B& color, uint8 opacity, const BlendParam& blend, const sys::Vector3& normal /*= sys::Vector::Zero*/)
+DCTexture* DCTexture::create(int textureID, const TextureRect* texRect, const sys::Color4B& color, uint8_t opacity, const BlendParam& blend, const math::Vector3& normal /*= sys::Vector::Zero*/)
 {
 	if (textureID <= 0 || texRect == nullptr)
 	{
@@ -61,10 +61,10 @@ DCTexture* DCTexture::create(int textureID, const TextureRect* texRect, const sy
 	pTexture->Coord[3] = texRect->leftUp.coords;
 
 	convertColor4BTo4F(color, pTexture->Color);
-	pTexture->Color.red *= opacity / sys::COLOR_FLOAT_VALUE;
-	pTexture->Color.green *= opacity / sys::COLOR_FLOAT_VALUE;
-	pTexture->Color.blue *= opacity / sys::COLOR_FLOAT_VALUE;
-	pTexture->Color.alpha *= opacity / sys::COLOR_FLOAT_VALUE;
+	pTexture->Color.red *= opacity / COLOR_FLOAT_VALUE;
+	pTexture->Color.green *= opacity / COLOR_FLOAT_VALUE;
+	pTexture->Color.blue *= opacity / COLOR_FLOAT_VALUE;
+	pTexture->Color.alpha *= opacity / COLOR_FLOAT_VALUE;
 
 	return pTexture;
 }

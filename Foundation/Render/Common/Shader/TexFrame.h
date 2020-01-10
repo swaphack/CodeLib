@@ -17,11 +17,11 @@ namespace render
 		// 获取纹理对象
 		const Texture* getTexture() const;
 		// 设置纹理显示区域
-		void setRect(const sys::Rect& rect);
+		void setRect(const math::Rect& rect);
 		// 获取纹理显示区域
-		const sys::Rect& getRect() const;
+		const math::Rect& getRect() const;
 		// 设置纹理和显示区域
-		void setTextureWithRect(const Texture* texture, const sys::Rect& rect);
+		void setTextureWithRect(const Texture* texture, const math::Rect& rect);
 		// 设置纹理和显示区域,默认显示区域为全部
 		void setTextureWithRect(const Texture* texture);
 
@@ -30,6 +30,6 @@ namespace render
 		// 纹理对象
 		Texture* _texture;
 		// 显示区域
-		sys::Rect _rect;
+		math::Rect _rect;
 	};
 }

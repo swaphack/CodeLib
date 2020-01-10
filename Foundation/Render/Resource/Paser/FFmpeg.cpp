@@ -16,14 +16,14 @@ void createVideoImage(const AVFrame* frame, AVCodecContext* pCodecContext, Video
 		return;
 	}
 
-	uint32 width = frame->width;
-	uint32 height = frame->height;
+	uint32_t width = frame->width;
+	uint32_t height = frame->height;
 
 	int glFormat = GL_RGB;
 	int glInternalFormat = 3;
 
 	int destSize = av_image_get_buffer_size(AV_PIX_FMT_RGB24, width, height, 1);
-	uint8* destPixels = (uint8 *)malloc(sizeof (uint8)* destSize);
+	uint8_t* destPixels = (uint8_t *)malloc(sizeof (uint8_t)* destSize);
 	memset(destPixels, 0, destSize);
 	
 	AVFrame* destFrame = av_frame_alloc();
@@ -100,7 +100,7 @@ VideoFrameImage::~VideoFrameImage()
 
 }
 
-void VideoFrameImage::init(int format, int internalFormat, uint8* pixels, uint32 width, uint32 height)
+void VideoFrameImage::init(int format, int internalFormat, uint8_t* pixels, uint32_t width, uint32_t height)
 {
 	this->setFormat(format);
 	this->setInternalFormat(internalFormat);
@@ -120,7 +120,7 @@ VideoAudioClip::~VideoAudioClip()
 
 }
 
-void VideoAudioClip::init(uint8* data, int frameSize, int channels, int64_t channelLayout, int format, int frequency, int samples)
+void VideoAudioClip::init(uint8_t* data, int frameSize, int channels, int64_t channelLayout, int format, int frequency, int samples)
 {
 	this->setData(data);
 	this->setSize(frameSize);
@@ -131,7 +131,7 @@ void VideoAudioClip::init(uint8* data, int frameSize, int channels, int64_t chan
 	this->setSamples(samples);
 }
 
-void VideoAudioClip::init(uint8* data, int frameSize)
+void VideoAudioClip::init(uint8_t* data, int frameSize)
 {
 	this->setData(data);
 	this->setSize(frameSize);
@@ -260,8 +260,8 @@ void FFmpeg::setVideoFrame(mf_s frame)
 
 	AVRational timeBase = _formatContext->streams[_videoStream]->time_base;
 
-	ulong timestamp = (ulong)(frame * 1000);
-	timestamp = (ulong)(av_rescale_q(timestamp, bqTimebase, timeBase));
+	uint64_t timestamp = (uint64_t)(frame * 1000);
+	timestamp = (uint64_t)(av_rescale_q(timestamp, bqTimebase, timeBase));
 
 	av_seek_frame(_formatContext, _videoStream, timestamp, AVSEEK_FLAG_BACKWARD);
 }
@@ -315,7 +315,7 @@ void FFmpeg::getStreamIndex(int type, int& streamIndex)
 		return;
 	}
 	/*
-	for (uint32 i = 0; i < _formatContext->nb_streams; i++)
+	for (uint32_t i = 0; i < _formatContext->nb_streams; i++)
 	{
 		if ((_formatContext->streams[i])->codec->codec_type == type)
 		{

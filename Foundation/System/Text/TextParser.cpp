@@ -26,7 +26,7 @@ void TextParser::removeParser(IBlockParser* parser)
 		return;
 	}
 
-	for (int32 i = 0; i < _textParsers.size(); i++)
+	for (int32_t i = 0; i < _textParsers.size(); i++)
 	{
 		if (_textParsers[i] == parser)
 		{
@@ -39,7 +39,7 @@ void TextParser::removeParser(IBlockParser* parser)
 
 void TextParser::removeAllParsers()
 {
-	for (int32 i = 0; i < _textParsers.size(); i++)
+	for (int32_t i = 0; i < _textParsers.size(); i++)
 	{
 		delete _textParsers[i];
 	}
@@ -51,7 +51,7 @@ bool TextParser::readBlock(char* inPtr, std::vector<std::string>& outData)
 {
 	outData.clear();
 
-	for (int32 i = 0; i < _textParsers.size(); i++)
+	for (int32_t i = 0; i < _textParsers.size(); i++)
 	{
 		std::string block;
 		if (_textParsers[i]->readBlock(inPtr, block))

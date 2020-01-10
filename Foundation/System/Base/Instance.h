@@ -17,7 +17,7 @@ namespace sys
 	};
 
 	template<class T>
-	T* Instance<T>::_staticT = 0;
+	T* Instance<T>::_staticT = nullptr;
 
 	template<class T>
 	Instance<T>::Instance()
@@ -34,7 +34,7 @@ namespace sys
 	template<class T>
 	T* Instance<T>::getInstance()
 	{
-		if (_staticT == 0)
+		if (_staticT == nullptr)
 		{
 			_staticT = new T();
 		}
@@ -48,7 +48,7 @@ namespace sys
 		if (_staticT)
 		{
 			delete _staticT;
-			_staticT = 0;
+			_staticT = nullptr;
 		}
 	}
 }

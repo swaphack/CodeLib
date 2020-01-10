@@ -25,9 +25,9 @@ char StreamReader::readInt8()
 	return this->read<char>();
 }
 
-uint8 StreamReader::readUInt8()
+uint8_t StreamReader::readUInt8()
 {
-	return this->read<uint8>();
+	return this->read<uint8_t>();
 }
 
 short StreamReader::readInt16()
@@ -35,29 +35,29 @@ short StreamReader::readInt16()
 	return this->read<short>();
 }
 
-uint16 StreamReader::readUInt16()
+uint16_t StreamReader::readUInt16()
 {
-	return this->read<uint16>();
+	return this->read<uint16_t>();
 }
 
-int32 StreamReader::readInt32()
+int32_t StreamReader::readInt32()
 {
-	return this->read<int32>();
+	return this->read<int32_t>();
 }
 
-uint32 StreamReader::readUInt32()
+uint32_t StreamReader::readUInt32()
 {
-	return this->read<uint32>();
+	return this->read<uint32_t>();
 }
 
-int64 StreamReader::readInt64()
+int64_t StreamReader::readInt64()
 {
-	return this->read<int64>();
+	return this->read<int64_t>();
 }
 
-uint64 StreamReader::readUInt64()
+uint64_t StreamReader::readUInt64()
 {
-	return this->read<uint64>();
+	return this->read<uint64_t>();
 }
 
 float StreamReader::readFloat()

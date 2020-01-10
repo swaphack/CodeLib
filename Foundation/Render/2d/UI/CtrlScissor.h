@@ -16,9 +16,9 @@ namespace render
 		virtual void draw();
 		virtual void visit();
 	private:
-		sys::Rect makeRect();
+		math::Rect makeRect();
 	private:
 		static int s_nScissorCount;
-		static sys::Rect s_rect;
+		static math::Rect s_rect;
 	};
 }

@@ -8,17 +8,11 @@ using namespace render;
 
 Camera::Camera()
 {
-	_position.x = 0.0f;
-	_position.y = 0.0f;
-	_position.z = 0.0f;
+	_position.set(0,0,0);
 
-	_rotation.x = 0.0f;
-	_rotation.y = 0.0f;
-	_rotation.z = 0.0f;
+	_rotation.set(0, 0, 0);
 
-	_scale.x = 1.0f;
-	_scale.y = 1.0f;
-	_scale.z = 1.0f;
+	_scale.set(1.0f, 1.0f, 1.0f);
 }
 
 Camera::~Camera()
@@ -31,10 +25,10 @@ void Camera::updateCamera()
 	
 }
 
-void Camera::lookAt(const sys::Vector3& position)
+void Camera::lookAt(const math::Vector3& position)
 {
 	_position = position;
-	_position.mult(-1);
+	_position *= -1;
 
 	onSpaceChange();
 }
@@ -61,11 +55,11 @@ void Camera2D::updateCamera()
  	glLoadIdentity();
 	glOrtho(0, 1, 0, 1, 0, 1);
 
-	glTranslatef(_obPosition.x, _obPosition.y, _obPosition.z);
-	glRotatef(_rotation.x, 1, 0, 0);
-	glRotatef(_rotation.y, 0, 1, 0);
-	glRotatef(_rotation.z, 0, 0, 1);
-	glScalef(_scale.x, _scale.y, _scale.z);
+	glTranslatef(_obPosition.getX(), _obPosition.getY(), _obPosition.getZ());
+	glRotatef(_rotation.getX(), 1, 0, 0);
+	glRotatef(_rotation.getY(), 0, 1, 0);
+	glRotatef(_rotation.getZ(), 0, 0, 1);
+	glScalef(_scale.getX(), _scale.getY(), _scale.getZ());
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -86,11 +80,11 @@ void Camera3D::updateCamera()
 
 	glFrustum(0, 1, 0, 1, 0, 1);
 
-	glTranslatef(_obPosition.x, _obPosition.y, _obPosition.z);
-	glRotatef(_rotation.x, 1, 0, 0);
-	glRotatef(_rotation.y, 0, 1, 0);
-	glRotatef(_rotation.z, 0, 0, 1);
-	glScalef(_scale.x, _scale.y, _scale.z);
+	glTranslatef(_obPosition.getX(), _obPosition.getY(), _obPosition.getZ());
+	glRotatef(_rotation.getX(), 1, 0, 0);
+	glRotatef(_rotation.getY(), 0, 1, 0);
+	glRotatef(_rotation.getZ(), 0, 0, 1);
+	glScalef(_scale.getX(), _scale.getY(), _scale.getZ());
 }
 
 

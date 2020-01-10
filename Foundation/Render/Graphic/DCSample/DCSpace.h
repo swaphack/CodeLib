@@ -11,15 +11,28 @@ namespace render
 	{
 	public:
 		bool Relative;
-		sys::Vector3 Position;
-		sys::Vector3 Scale;
-		sys::Vector3 Rotation;
+		math::Vector3 Position;
+		math::Vector3 Scale;
+		math::Vector3 Rotation;
 	public:
 		DCSpace();
 		virtual ~DCSpace();
 	public:
 		virtual void draw();
 	public:
-		static DCSpace* create(const sys::Vector3& position, const sys::Vector3& scale, const sys::Vector3& rotation, bool relative);
+		static DCSpace* create(const math::Vector3& position, const math::Vector3& scale, const math::Vector3& rotation, bool relative);
+	};
+
+	class DCSpaceMatrix : public DrawCommand
+	{
+	public:
+		math::Matrix Matrix;
+	public:
+		DCSpaceMatrix();
+		virtual ~DCSpaceMatrix();
+	public:
+		virtual void draw();
+	public:
+		static DCSpaceMatrix* create(const math::Matrix& matrix);
 	};
 }

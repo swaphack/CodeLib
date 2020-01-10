@@ -17,9 +17,9 @@ namespace sys
 		~Dispatcher();
 	public:
 		// 添加派发事件
-		void addDispatcher(int64 commandID, T* handler);
+		void addDispatcher(int64_t commandID, T* handler);
 		// 移除派发事件
-		void removeDispatcher(int64 commanID);
+		void removeDispatcher(int64_t commanID);
 		// 接收到消息，派发
 		bool dispatch(Object* command);
 		// 接收到消息，广播
@@ -27,7 +27,7 @@ namespace sys
 		// 清空所有派发处理
 		void clear();
 	private:
-		std::map<int64, T*> _handlers;
+		std::map<int64_t, T*> _handlers;
 	};
 
 	template<typename T>
@@ -43,7 +43,7 @@ namespace sys
 	}
 
 	template<typename T>
-	void Dispatcher<T>::addDispatcher( int64 commandID, T* handler )
+	void Dispatcher<T>::addDispatcher( int64_t commandID, T* handler )
 	{
 		if (_handlers[commandID] != nullptr)
 		{
@@ -54,7 +54,7 @@ namespace sys
 	}
 
 	template<typename T>
-	void Dispatcher<T>::removeDispatcher( int64 commanID )
+	void Dispatcher<T>::removeDispatcher( int64_t commanID )
 	{
 		if (_handlers.find(commanID) == _handlers.end())
 		{
@@ -76,7 +76,7 @@ namespace sys
 
 		command->retain();
 
-		std::map<int64, T*>::iterator it = _handlers.find(command->getID());
+		std::map<int64_t, T*>::iterator it = _handlers.find(command->getID());
 		if (it != _handlers.end())
 		{
 			it->second->hand(command);
@@ -98,7 +98,7 @@ namespace sys
 
 		command->retain();
 
-		for (std::map<int64, T*>::iterator it = _handlers.begin();
+		for (std::map<int64_t, T*>::iterator it = _handlers.begin();
 			it != _handlers.end();
 			it++)
 		{
@@ -111,7 +111,7 @@ namespace sys
 	template<typename T>
 	void Dispatcher<T>::clear()
 	{
-		std::map<int64, T*>::iterator it = _handlers.begin();
+		std::map<int64_t, T*>::iterator it = _handlers.begin();
 
 		while (it != _handlers.end())
 		{

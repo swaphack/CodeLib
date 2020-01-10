@@ -6,6 +6,7 @@
 namespace script
 {
 	class ASTNode;
+	class SymbolHandler;
 	/**
 	*	语法分析
 	*	a * (1 + a) / (c[3] - 2)
@@ -17,6 +18,7 @@ namespace script
 		Parser();
 		~Parser();
 	public:
+		bool init(const std::string& filepath);
 		// 单行和嵌套
 		bool parse(Token::const_iterator begin, Token::const_iterator end);
 		// 语法树组
@@ -40,5 +42,7 @@ namespace script
 	private:
 		// 语法树组
 		ASTNodeVec m_pASTNodeList;
+		// 解析器
+		SymbolHandler* m_pSymbolHandler = nullptr;
 	};
 }

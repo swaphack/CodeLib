@@ -29,9 +29,9 @@ void StreamWriter::writeInt8( char data )
 	this->write<char>(data);
 }
 
-void StreamWriter::writeUInt8( uint8 data )
+void StreamWriter::writeUInt8( uint8_t data )
 {
-	this->write<uint8>(data);
+	this->write<uint8_t>(data);
 }
 
 void StreamWriter::writeInt16( short data )
@@ -39,29 +39,29 @@ void StreamWriter::writeInt16( short data )
 	this->write<short>(data);
 }
 
-void StreamWriter::writeUInt16( uint16 data )
+void StreamWriter::writeUInt16( uint16_t data )
 {
-	this->write<uint16>(data);
+	this->write<uint16_t>(data);
 }
 
-void StreamWriter::writeInt32( int32 data )
+void StreamWriter::writeInt32( int32_t data )
 {
-	this->write<int32>(data);
+	this->write<int32_t>(data);
 }
 
-void StreamWriter::writeUInt32( uint32 data )
+void StreamWriter::writeUInt32( uint32_t data )
 {
-	this->write<int32>(data);
+	this->write<int32_t>(data);
 }
 
-void StreamWriter::writeInt64( int64 data )
+void StreamWriter::writeInt64( int64_t data )
 {
-	this->write<int64>(data);
+	this->write<int64_t>(data);
 }
 
-void StreamWriter::writeUInt64( uint64 data )
+void StreamWriter::writeUInt64( uint64_t data )
 {
-	this->write<uint64>(data);
+	this->write<uint64_t>(data);
 }
 
 void StreamWriter::writeFloat( float data )
@@ -76,7 +76,7 @@ void StreamWriter::writeDouble( double data )
 
 void StreamWriter::writeString(const char* data )
 {
-	int32 size = strlen(data);
+	int32_t size = strlen(data);
 
 	this->writeString((char*)data, size);
 }

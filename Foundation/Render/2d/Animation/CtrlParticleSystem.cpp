@@ -29,12 +29,12 @@ void ParticleNode::update(float interval)
 	_liftTime -= interval;
 
 	_colorInit.add(_colorAcceleration);
-	_position.add(_speedAcceleration);
-	_scale.add(_scaleAcceleration);
-	_rotation.add(_angleAcceleration);
+	_position += _speedAcceleration;
+	_scale += _scaleAcceleration;
+	_rotation += _angleAcceleration;
 
 	convertColor4FTo4B(_colorInit, _color);
-	TextureTool::setTexture2DVertexts(&_texRect, sys::Vector3::Zero, _volume, _anchor);
+	TextureTool::setTexture2DVertexts(&_texRect, math::Vector3(), _volume, _anchor);
 
 	Tool::convertToOGLPoisition(_position, _obPosition);
 }
@@ -45,11 +45,11 @@ void ParticleNode::initSelf()
 
 	convertColor4BTo4F(_color, _colorInit);
 
-	sys::Size size = sys::Size(_volume.width, _volume.height);
-	sys::Rect rect = sys::Rect(0, 0, _volume.width, _volume.height);
+	math::Size size = math::Size(_volume.getWidth(), _volume.getHeight());
+	math::Rect rect = math::Rect(0, 0, _volume.getWidth(), _volume.getHeight());
 
 	TextureTool::setTexture2DCoords(&_texRect, size, rect);
-	TextureTool::setTexture2DVertexts(&_texRect, sys::Vector3::Zero, _volume, _anchor);
+	TextureTool::setTexture2DVertexts(&_texRect, math::Vector3(), _volume, _anchor);
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -75,7 +75,7 @@ bool CtrlParticleSystem::init()
 	return true;
 }
 
-void CtrlParticleSystem::setCount(uint32 count)
+void CtrlParticleSystem::setCount(uint32_t count)
 {
 	if (_particleCount == count) 
 	{
@@ -86,7 +86,7 @@ void CtrlParticleSystem::setCount(uint32 count)
 	_particleCount = count;
 
 	// for test
-	for (uint32 i = 0; i < count; i++)
+	for (uint32_t i = 0; i < count; i++)
 	{
 		ParticleNode* node = createParticle();
 		if (node)
@@ -96,7 +96,7 @@ void CtrlParticleSystem::setCount(uint32 count)
 	}
 }
 
-uint32 CtrlParticleSystem::getCount()
+uint32_t CtrlParticleSystem::getCount()
 {
 	return _particleCount;
 }

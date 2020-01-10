@@ -30,7 +30,7 @@ Random* Random::getInstance()
 	return s_Random;
 }
 
-void Random::setSeed(uint32 seed)
+void Random::setSeed(uint32_t seed)
 {
 	srand(seed);
 }
@@ -52,10 +52,10 @@ float Random::getNextNumber()
 	return value;
 }
 
-int32 Random::getNextint32eger()
+int32_t Random::getNextint32eger()
 {
-	int32 value = rand();
-	value = value % (int32)(_max - _min) + _min;
+	int32_t value = rand();
+	value = value % (int32_t)(_max - _min) + _min;
 	return value;
 }
 

@@ -12,12 +12,12 @@ namespace sys
 	class Client
 	{
 	public:
-		Client(const char* ip, int32 port);
+		Client(const char* ip, int32_t port);
 		~Client();
 	public:
-		int32 getID();
+		int32_t getID();
 		// 设置远程信息
-		void setRemote(const char* ip, int32 port);
+		void setRemote(const char* ip, int32_t port);
 		// 连接服务器
 		bool connect();
 		// 断开连接
@@ -51,9 +51,9 @@ namespace sys
 		// 发送消息
 		void _flushData();
 	protected:
-		int32 _ID;
+		int32_t _ID;
 		// 远程信息{地址，端口}
-		std::pair<const char*, int32> _remote;
+		std::pair<const char*, int32_t> _remote;
 		// 是否连接服务器
 		bool _bConnected;
 		// socket

@@ -29,7 +29,7 @@ void FileStream::load(const char* filepath)
 		return;
 	}
 
-	int64 size = 0;
+	int64_t size = 0;
 	char* data = File::read(filepath, size);
 	if (data == nullptr)
 	{
@@ -45,7 +45,7 @@ void FileStream::save(const char* filepath)
 	{
 		return;
 	}
-	int64 writtenSize = 0;
+	int64_t writtenSize = 0;
 	File::write(filepath, this->getData(), this->getLength(), writtenSize);
 }
 

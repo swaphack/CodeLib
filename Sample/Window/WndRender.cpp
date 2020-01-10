@@ -27,14 +27,14 @@ void WndRender::show()
 	//testSphereModel();
 	//testText();
 	//testMask();
-	testMedia();
+	//testMedia();
 	
 	//testAnimation();
 	//testParticle();
 	//testStencil();
 	//testCamera();
 	//testEditBox();
-	//testImages();
+	testImages();
 	//testString();
 	//testPixelImage();
 	//testSequenceFrame();
@@ -83,10 +83,10 @@ void WndRender::testClock()
 	pDrawNode->setDrawMode(EBM_QUAD_STRIP);
 	pDrawNode->setWidth(20);
 	pDrawNode->setPosition(125, 125, 0);
-	pDrawNode->appendPoint(sys::Vector3(0, 200));
-	pDrawNode->appendPoint(sys::Vector3(150, 300));
-	pDrawNode->appendPoint(sys::Vector3(200, 200));
-	pDrawNode->appendPoint(sys::Vector3(150, 100));
+	pDrawNode->appendPoint(math::Vector3(0, 200));
+	pDrawNode->appendPoint(math::Vector3(150, 300));
+	pDrawNode->appendPoint(math::Vector3(200, 200));
+	pDrawNode->appendPoint(math::Vector3(150, 100));
 	pDrawNode->setColor(sys::Color3B(0, 255, 0));
 
 	//pDrawNode->setRotationZ(20);
@@ -164,7 +164,7 @@ void WndRender::testSphereModel()
 	AUTO_RELEASE_OBJECT(frame);
 	frame->setTextureWithRect(texture2D);
 
-	render::Sphere* pSphere = CREATE_NODE(render::Sphere);
+	render::SphereModel* pSphere = CREATE_NODE(render::SphereModel);
 	pSphere->setRadius(512);
 	pSphere->setTexFrame(frame);
 	this->getCanvas()->getRoot()->addChild(pSphere);
@@ -349,16 +349,20 @@ void WndRender::testImages()
 {
 	CtrlImage* pImage = CREATE_NODE(CtrlImage);
 	pImage->setImagePath("Resource/Image/NeHe.png");
-	pImage->setPosition(0, 0, 0);
+	pImage->setPosition(512, 400, 0);
+	pImage->setScale(2, 2, 2);
+	pImage->setRotation(0, 0, 30);
 	this->getCanvas()->getRoot()->addChild(pImage);
 
-	int count = 100;
+	int count = 0;
 	CtrlImage* pChild = nullptr;
 	while (count-- > 0)
 	{
 		pChild = CREATE_NODE(CtrlImage);
 		pChild->setImagePath("Resource/Image/NeHe.png");
 		pChild->setPosition(4, 4, 0);
+		pChild->setScale(2, 2, 2);
+		pChild->setRotation(0, 0, 30);
 		pImage->addChild(pChild);
 		pImage = pChild;
 		pChild = nullptr;
@@ -445,12 +449,9 @@ void WndRender::onTouchBegin(sys::Object* object, float x, float y)
 		return;
 	}
 
-	std::vector<sys::Vector3>* pAry = new std::vector<sys::Vector3>(2);
-	(*pAry)[0].x = pNode->getPositionX();
-	(*pAry)[0].y = pNode->getPositionY();
-
-	(*pAry)[1].x = x;
-	(*pAry)[1].y = y;
+	std::vector<math::Vector3>* pAry = new std::vector<math::Vector3>(2);
+	(*pAry)[0].set(pNode->getPositionX(), pNode->getPositionY());
+	(*pAry)[1].set(x, y);
 
 	pNode->setUserData(pAry);
 }
@@ -463,8 +464,8 @@ void WndRender::onTouchMove(sys::Object* object, float x, float y)
 		return;
 	}
 
-	std::vector<sys::Vector3>* pAry = static_cast<std::vector<sys::Vector3>*>(pNode->getUserData());
-	pNode->setPosition((*pAry)[0].x + x - (*pAry)[1].x, (*pAry)[0].y + y - (*pAry)[1].y, 0);
+	std::vector<math::Vector3>* pAry = static_cast<std::vector<math::Vector3>*>(pNode->getUserData());
+	pNode->setPosition((*pAry)[0].getX() + x - (*pAry)[1].getX(), (*pAry)[0].getY() + y - (*pAry)[1].getY(), 0);
 }
 
 void WndRender::onTouchEnd(sys::Object* object, float x, float y)
@@ -475,7 +476,7 @@ void WndRender::onTouchEnd(sys::Object* object, float x, float y)
 		return;
 	}
 
-	std::vector<sys::Vector3>* pAry = static_cast<std::vector<sys::Vector3>*>(pNode->getUserData());
+	std::vector<math::Vector3>* pAry = static_cast<std::vector<math::Vector3>*>(pNode->getUserData());
 	SAFE_DELETE(pAry);
 }
 
@@ -726,7 +727,7 @@ void WndRender::testDrawNode()
 	pDrawNode->setColor(sys::Color3B(0, 255, 0));
 	for (int i = 0; i < COUNT; i++)
 	{
-		pDrawNode->appendPoint(Vector3(points[i]));
+		pDrawNode->appendPoint(math::Vector3(points[i]));
 	}
 	this->getCanvas()->getRoot()->addChild(pDrawNode);
 }
@@ -762,7 +763,7 @@ void WndRender::testAudio3D()
 	pListenerDrawNode->setColor(Color3B(0, 255, 0));
 	pListenerDrawNode->setWidth(100);
 	pListenerDrawNode->setDrawMode(EBM_POINTS);
-	pListenerDrawNode->appendPoint(Vector3::Zero);
+	pListenerDrawNode->appendPoint(math::Vector3());
 	pListener->addChild(pListenerDrawNode);
 
 	G_KEYBOARDMANAGER->addDispatcher(pListener, this, KEYBOARD_DELEGATTE_SELECTOR(WndRender::onKeyBoardListener));
@@ -780,7 +781,7 @@ void WndRender::testAudio3D()
 	pSrcDrawNode->setColor(Color3B(255, 0, 0));
 	pSrcDrawNode->setWidth(100);
 	pSrcDrawNode->setDrawMode(EBM_POINTS);
-	pSrcDrawNode->appendPoint(Vector3::Zero);
+	pSrcDrawNode->appendPoint(math::Vector3());
 	pSrcAudio->addChild(pSrcDrawNode);
 
 
@@ -797,7 +798,7 @@ void WndRender::testAudio3D()
 	pSrcDrawNode->setColor(Color3B(255, 0, 0));
 	pSrcDrawNode->setWidth(100);
 	pSrcDrawNode->setDrawMode(EBM_POINTS);
-	pSrcDrawNode->appendPoint(Vector3::Zero);
+	pSrcDrawNode->appendPoint(math::Vector3());
 	pSrcAudio->addChild(pSrcDrawNode);
 
 	float maxSize = G_AUDIO->getGeometrySettings();
@@ -825,9 +826,9 @@ void WndRender::onKeyBoardListener(sys::Object* object, sys::BoardKey key, sys::
 		return;
 	}
 
-	sys::Vector3 lastPos;
-	sys::Vector3 vel;
-	sys::Vector3 curPos;
+	math::Vector3 lastPos;
+	math::Vector3 vel;
+	math::Vector3 curPos;
 
 	bool bMatch = true;
 	float speed = 5;

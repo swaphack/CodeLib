@@ -7,71 +7,602 @@
     <Filter Include="Geometry">
       <UniqueIdentifier>{3d818369-a59c-462c-9ce7-c23fe33e7388}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Geometry\2d">
+      <UniqueIdentifier>{6e403996-be22-40f7-9420-95e98391b029}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Geometry\3d">
+      <UniqueIdentifier>{6db43053-3010-468f-a100-6154ee66ccfd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Geometry\base">
+      <UniqueIdentifier>{a056c327-605b-46b8-a3e9-a3e1ae56e6be}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Basic">
+      <UniqueIdentifier>{37654356-3e23-40ef-a8ca-4b75c8bf6925}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Analysis">
+      <UniqueIdentifier>{11f091a3-46af-443b-85e9-963ae45a9dd7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Function">
+      <UniqueIdentifier>{e1d9a638-5242-49ce-8f6f-5d8bfa49f2ed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Number">
+      <UniqueIdentifier>{8d333a44-0a72-463a-8cd0-59c907ee3a4d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Set">
+      <UniqueIdentifier>{ce2921e4-d184-4ed5-a099-023be7e674f8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Discrete">
+      <UniqueIdentifier>{281824c2-bac4-43af-8f8a-63e99111d510}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Algebra\Coordinate">
+      <UniqueIdentifier>{cdb05a03-2ff3-4186-bcbe-f919eb58eb97}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Algebra\Equation">
+      <UniqueIdentifier>{e9ff10d6-4236-4ff3-8cb4-d0c5996561b1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Algebra\Theory">
+      <UniqueIdentifier>{aa699719-532c-44ab-b6f0-65910e4def95}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Function\Elementary">
+      <UniqueIdentifier>{b1ceede0-0994-49e8-8591-326a0ae3ea43}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Geometry\Collider">
+      <UniqueIdentifier>{8b7c9fd4-8d17-4418-900e-f25884aaa23c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Discrete\PropositionLogic">
+      <UniqueIdentifier>{dec4b8f7-3808-4422-a565-280656977229}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Discrete\ManyValuedLogic">
+      <UniqueIdentifier>{84bf2ed5-1b93-4bf8-96fa-d26bf500a8b8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Basic\Collection">
+      <UniqueIdentifier>{9809d955-e9ec-48ca-8e7c-55b83802c125}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Algebra\Complex.h">
-      <Filter>Algebra</Filter>
-    </ClInclude>
     <ClInclude Include="Algebra\Polynomial.h">
       <Filter>Algebra</Filter>
     </ClInclude>
     <ClInclude Include="Algebra\Matrix.h">
       <Filter>Algebra</Filter>
     </ClInclude>
-    <ClInclude Include="Algebra\Matrix33.h">
-      <Filter>Algebra</Filter>
-    </ClInclude>
-    <ClInclude Include="Algebra\Matrix44.h">
-      <Filter>Algebra</Filter>
-    </ClInclude>
-    <ClInclude Include="Algebra\Quaternion.h">
-      <Filter>Algebra</Filter>
-    </ClInclude>
-    <ClInclude Include="Algebra\Vector2.h">
-      <Filter>Algebra</Filter>
-    </ClInclude>
-    <ClInclude Include="Algebra\Vector3.h">
-      <Filter>Algebra</Filter>
-    </ClInclude>
-    <ClInclude Include="macros.h" />
-    <ClInclude Include="Algebra\Matrix41.h">
-      <Filter>Algebra</Filter>
-    </ClInclude>
     <ClInclude Include="Algebra\Determinant.h">
       <Filter>Algebra</Filter>
     </ClInclude>
+    <ClInclude Include="Algebra\Vector.h">
+      <Filter>Algebra</Filter>
+    </ClInclude>
+    <ClInclude Include="Geometry\2d\Circle.h">
+      <Filter>Geometry\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="Geometry\2d\Polygon.h">
+      <Filter>Geometry\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="Geometry\2d\Rect.h">
+      <Filter>Geometry\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="Geometry\2d\Triangle.h">
+      <Filter>Geometry\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="Geometry\3d\Polyhedron.h">
+      <Filter>Geometry\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="Geometry\3d\Sphere.h">
+      <Filter>Geometry\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="Geometry\3d\Surface.h">
+      <Filter>Geometry\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="Algebra\import.h">
+      <Filter>Algebra</Filter>
+    </ClInclude>
+    <ClInclude Include="Geometry\import.h">
+      <Filter>Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="mathlib.h" />
+    <ClInclude Include="Geometry\base\Matrix33.h">
+      <Filter>Geometry\base</Filter>
+    </ClInclude>
+    <ClInclude Include="Geometry\base\Matrix41.h">
+      <Filter>Geometry\base</Filter>
+    </ClInclude>
+    <ClInclude Include="Geometry\base\Matrix44.h">
+      <Filter>Geometry\base</Filter>
+    </ClInclude>
+    <ClInclude Include="Geometry\base\Quaternion.h">
+      <Filter>Geometry\base</Filter>
+    </ClInclude>
+    <ClInclude Include="Geometry\base\Vector2.h">
+      <Filter>Geometry\base</Filter>
+    </ClInclude>
+    <ClInclude Include="Geometry\base\Vector3.h">
+      <Filter>Geometry\base</Filter>
+    </ClInclude>
+    <ClInclude Include="Geometry\3d\Cuboids.h">
+      <Filter>Geometry\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="Geometry\base\Size.h">
+      <Filter>Geometry\base</Filter>
+    </ClInclude>
+    <ClInclude Include="Geometry\base\Volume.h">
+      <Filter>Geometry\base</Filter>
+    </ClInclude>
+    <ClInclude Include="Geometry\2d\LineSegment2.h">
+      <Filter>Geometry\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="Geometry\3d\LineSegment.h">
+      <Filter>Geometry\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="Geometry\base\Line2.h">
+      <Filter>Geometry\base</Filter>
+    </ClInclude>
+    <ClInclude Include="Geometry\base\Line3.h">
+      <Filter>Geometry\base</Filter>
+    </ClInclude>
+    <ClInclude Include="Geometry\base\macros.h">
+      <Filter>Geometry\base</Filter>
+    </ClInclude>
+    <ClInclude Include="Geometry\base\Plane.h">
+      <Filter>Geometry\base</Filter>
+    </ClInclude>
+    <ClInclude Include="Geometry\base\Matrix22.h">
+      <Filter>Geometry\base</Filter>
+    </ClInclude>
+    <ClInclude Include="Geometry\base\Polar2.h">
+      <Filter>Geometry\base</Filter>
+    </ClInclude>
+    <ClInclude Include="Geometry\base\Polar3.h">
+      <Filter>Geometry\base</Filter>
+    </ClInclude>
+    <ClInclude Include="Algebra\Matrixi.h">
+      <Filter>Algebra</Filter>
+    </ClInclude>
+    <ClInclude Include="Basic\Array.h">
+      <Filter>Basic</Filter>
+    </ClInclude>
+    <ClInclude Include="Basic\Array2D.h">
+      <Filter>Basic</Filter>
+    </ClInclude>
+    <ClInclude Include="Basic\base.h">
+      <Filter>Basic</Filter>
+    </ClInclude>
+    <ClInclude Include="Basic\import.h">
+      <Filter>Basic</Filter>
+    </ClInclude>
+    <ClInclude Include="Analysis\import.h">
+      <Filter>Analysis</Filter>
+    </ClInclude>
+    <ClInclude Include="Geometry\common.h">
+      <Filter>Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="Function\Function.h">
+      <Filter>Function</Filter>
+    </ClInclude>
+    <ClInclude Include="Number\Integer.h">
+      <Filter>Number</Filter>
+    </ClInclude>
+    <ClInclude Include="Number\None.h">
+      <Filter>Number</Filter>
+    </ClInclude>
+    <ClInclude Include="Number\Number.h">
+      <Filter>Number</Filter>
+    </ClInclude>
+    <ClInclude Include="Number\Complex.h">
+      <Filter>Number</Filter>
+    </ClInclude>
+    <ClInclude Include="Number\Decimal.h">
+      <Filter>Number</Filter>
+    </ClInclude>
+    <ClInclude Include="Number\Fraction.h">
+      <Filter>Number</Filter>
+    </ClInclude>
+    <ClInclude Include="Number\Nature.h">
+      <Filter>Number</Filter>
+    </ClInclude>
+    <ClInclude Include="Geometry\2d\import.h">
+      <Filter>Geometry\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="Geometry\3d\import.h">
+      <Filter>Geometry\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="Geometry\base\import.h">
+      <Filter>Geometry\base</Filter>
+    </ClInclude>
+    <ClInclude Include="Set\Set.h">
+      <Filter>Set</Filter>
+    </ClInclude>
+    <ClInclude Include="Set\Element.h">
+      <Filter>Set</Filter>
+    </ClInclude>
+    <ClInclude Include="Function\Domain.h">
+      <Filter>Function</Filter>
+    </ClInclude>
+    <ClInclude Include="Function\Range.h">
+      <Filter>Function</Filter>
+    </ClInclude>
+    <ClInclude Include="Set\FiniteSet.h">
+      <Filter>Set</Filter>
+    </ClInclude>
+    <ClInclude Include="Set\InfiniteSet.h">
+      <Filter>Set</Filter>
+    </ClInclude>
+    <ClInclude Include="Basic\Interval.h">
+      <Filter>Basic</Filter>
+    </ClInclude>
+    <ClInclude Include="Basic\EndPoint.h">
+      <Filter>Basic</Filter>
+    </ClInclude>
+    <ClInclude Include="Number\Real.h">
+      <Filter>Number</Filter>
+    </ClInclude>
+    <ClInclude Include="Number\Rational.h">
+      <Filter>Number</Filter>
+    </ClInclude>
+    <ClInclude Include="Number\Irrational.h">
+      <Filter>Number</Filter>
+    </ClInclude>
+    <ClInclude Include="Number\Infinitely.h">
+      <Filter>Number</Filter>
+    </ClInclude>
+    <ClInclude Include="Basic\Boundary.h">
+      <Filter>Basic</Filter>
+    </ClInclude>
+    <ClInclude Include="Algebra\Coordinate\CartesianCoordinatesSystem.h">
+      <Filter>Algebra\Coordinate</Filter>
+    </ClInclude>
+    <ClInclude Include="Algebra\Coordinate\CoordinateSystem.h">
+      <Filter>Algebra\Coordinate</Filter>
+    </ClInclude>
+    <ClInclude Include="Algebra\Coordinate\CurvilinearCoordinatesSystem.h">
+      <Filter>Algebra\Coordinate</Filter>
+    </ClInclude>
+    <ClInclude Include="Algebra\Coordinate\PolarCoordinateSystem.h">
+      <Filter>Algebra\Coordinate</Filter>
+    </ClInclude>
+    <ClInclude Include="Algebra\Equation\Equation.h">
+      <Filter>Algebra\Equation</Filter>
+    </ClInclude>
+    <ClInclude Include="Algebra\Equation\Equations.h">
+      <Filter>Algebra\Equation</Filter>
+    </ClInclude>
+    <ClInclude Include="Algebra\Equation\GeneralEquation.h">
+      <Filter>Algebra\Equation</Filter>
+    </ClInclude>
+    <ClInclude Include="Algebra\Equation\ParametricEquation.h">
+      <Filter>Algebra\Equation</Filter>
+    </ClInclude>
+    <ClInclude Include="Algebra\Theory\Field.h">
+      <Filter>Algebra\Theory</Filter>
+    </ClInclude>
+    <ClInclude Include="Algebra\Theory\Group.h">
+      <Filter>Algebra\Theory</Filter>
+    </ClInclude>
+    <ClInclude Include="Algebra\Theory\Ring.h">
+      <Filter>Algebra\Theory</Filter>
+    </ClInclude>
+    <ClInclude Include="Function\Elementary\ConstantFunction.h">
+      <Filter>Function\Elementary</Filter>
+    </ClInclude>
+    <ClInclude Include="Function\Elementary\ElementaryFunction.h">
+      <Filter>Function\Elementary</Filter>
+    </ClInclude>
+    <ClInclude Include="Function\Elementary\ExponentialFunction.h">
+      <Filter>Function\Elementary</Filter>
+    </ClInclude>
+    <ClInclude Include="Function\Elementary\HyperbolicFunction.h">
+      <Filter>Function\Elementary</Filter>
+    </ClInclude>
+    <ClInclude Include="Function\Elementary\InverseTrigonometricFunction.h">
+      <Filter>Function\Elementary</Filter>
+    </ClInclude>
+    <ClInclude Include="Function\Elementary\LogarithmicFunction.h">
+      <Filter>Function\Elementary</Filter>
+    </ClInclude>
+    <ClInclude Include="Function\Elementary\PowerFunction.h">
+      <Filter>Function\Elementary</Filter>
+    </ClInclude>
+    <ClInclude Include="Function\Elementary\TrigonometricFunction.h">
+      <Filter>Function\Elementary</Filter>
+    </ClInclude>
+    <ClInclude Include="Geometry\Collider\AABB.h">
+      <Filter>Geometry\Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="Geometry\Collider\Box.h">
+      <Filter>Geometry\Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="Geometry\Collider\import.h">
+      <Filter>Geometry\Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="Geometry\Collider\OBB.h">
+      <Filter>Geometry\Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="Discrete\PropositionLogic\CompoundProposition.h">
+      <Filter>Discrete\PropositionLogic</Filter>
+    </ClInclude>
+    <ClInclude Include="Discrete\PropositionLogic\ImplicateProposition.h">
+      <Filter>Discrete\PropositionLogic</Filter>
+    </ClInclude>
+    <ClInclude Include="Discrete\PropositionLogic\Inference.h">
+      <Filter>Discrete\PropositionLogic</Filter>
+    </ClInclude>
+    <ClInclude Include="Discrete\PropositionLogic\PrimaryProposition.h">
+      <Filter>Discrete\PropositionLogic</Filter>
+    </ClInclude>
+    <ClInclude Include="Discrete\PropositionLogic\Proposition.h">
+      <Filter>Discrete\PropositionLogic</Filter>
+    </ClInclude>
+    <ClInclude Include="Discrete\ManyValuedLogic\ManyValuedProposition.h">
+      <Filter>Discrete\ManyValuedLogic</Filter>
+    </ClInclude>
+    <ClInclude Include="Discrete\ManyValuedLogic\FuzzyProposition.h">
+      <Filter>Discrete\ManyValuedLogic</Filter>
+    </ClInclude>
+    <ClInclude Include="Discrete\PropositionLogic\import.h">
+      <Filter>Discrete\PropositionLogic</Filter>
+    </ClInclude>
+    <ClInclude Include="Set\import.h">
+      <Filter>Set</Filter>
+    </ClInclude>
+    <ClInclude Include="Number\import.h">
+      <Filter>Number</Filter>
+    </ClInclude>
+    <ClInclude Include="Function\Elementary\import.h">
+      <Filter>Function\Elementary</Filter>
+    </ClInclude>
+    <ClInclude Include="Discrete\PropositionLogic\InferenceRule.h">
+      <Filter>Discrete\PropositionLogic</Filter>
+    </ClInclude>
+    <ClInclude Include="Discrete\PropositionLogic\BooleanProposition.h">
+      <Filter>Discrete\PropositionLogic</Filter>
+    </ClInclude>
+    <ClInclude Include="Basic\List.h">
+      <Filter>Basic</Filter>
+    </ClInclude>
+    <ClInclude Include="Basic\Collection\Graph.h">
+      <Filter>Basic\Collection</Filter>
+    </ClInclude>
+    <ClInclude Include="Basic\Collection\GraphNode.h">
+      <Filter>Basic\Collection</Filter>
+    </ClInclude>
+    <ClInclude Include="Basic\Collection\List.h">
+      <Filter>Basic\Collection</Filter>
+    </ClInclude>
+    <ClInclude Include="Basic\Collection\Node.h">
+      <Filter>Basic\Collection</Filter>
+    </ClInclude>
+    <ClInclude Include="Basic\Collection\NodeCache.h">
+      <Filter>Basic\Collection</Filter>
+    </ClInclude>
+    <ClInclude Include="Basic\Collection\Tree.h">
+      <Filter>Basic\Collection</Filter>
+    </ClInclude>
+    <ClInclude Include="Basic\Collection\TreeNode.h">
+      <Filter>Basic\Collection</Filter>
+    </ClInclude>
+    <ClInclude Include="Basic\Collection\ListNode.h">
+      <Filter>Basic\Collection</Filter>
+    </ClInclude>
+    <ClInclude Include="Basic\Collection\BinaryNode.h">
+      <Filter>Basic\Collection</Filter>
+    </ClInclude>
+    <ClInclude Include="Discrete\PropositionLogic\TruthTable.h">
+      <Filter>Discrete\PropositionLogic</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Algebra\Complex.cpp">
-      <Filter>Algebra</Filter>
-    </ClCompile>
     <ClCompile Include="Algebra\Polynomial.cpp">
       <Filter>Algebra</Filter>
     </ClCompile>
     <ClCompile Include="Algebra\Matrix.cpp">
       <Filter>Algebra</Filter>
     </ClCompile>
-    <ClCompile Include="Algebra\Matrix33.cpp">
-      <Filter>Algebra</Filter>
-    </ClCompile>
-    <ClCompile Include="Algebra\Matrix44.cpp">
-      <Filter>Algebra</Filter>
-    </ClCompile>
-    <ClCompile Include="Algebra\Quaternion.cpp">
-      <Filter>Algebra</Filter>
-    </ClCompile>
-    <ClCompile Include="Algebra\Vector2.cpp">
-      <Filter>Algebra</Filter>
-    </ClCompile>
-    <ClCompile Include="Algebra\Vector3.cpp">
-      <Filter>Algebra</Filter>
-    </ClCompile>
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Algebra\Matrix41.cpp">
-      <Filter>Algebra</Filter>
-    </ClCompile>
     <ClCompile Include="Algebra\Determinant.cpp">
       <Filter>Algebra</Filter>
+    </ClCompile>
+    <ClCompile Include="Algebra\Vector.cpp">
+      <Filter>Algebra</Filter>
+    </ClCompile>
+    <ClCompile Include="Geometry\2d\Polygon.cpp">
+      <Filter>Geometry\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="Geometry\3d\Polyhedron.cpp">
+      <Filter>Geometry\3d</Filter>
+    </ClCompile>
+    <ClCompile Include="Geometry\3d\Surface.cpp">
+      <Filter>Geometry\3d</Filter>
+    </ClCompile>
+    <ClCompile Include="Geometry\2d\Rect.cpp">
+      <Filter>Geometry\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="Geometry\base\Matrix33.cpp">
+      <Filter>Geometry\base</Filter>
+    </ClCompile>
+    <ClCompile Include="Geometry\base\Matrix41.cpp">
+      <Filter>Geometry\base</Filter>
+    </ClCompile>
+    <ClCompile Include="Geometry\base\Matrix44.cpp">
+      <Filter>Geometry\base</Filter>
+    </ClCompile>
+    <ClCompile Include="Geometry\base\Quaternion.cpp">
+      <Filter>Geometry\base</Filter>
+    </ClCompile>
+    <ClCompile Include="Geometry\base\Vector2.cpp">
+      <Filter>Geometry\base</Filter>
+    </ClCompile>
+    <ClCompile Include="Geometry\base\Vector3.cpp">
+      <Filter>Geometry\base</Filter>
+    </ClCompile>
+    <ClCompile Include="Geometry\base\Size.cpp">
+      <Filter>Geometry\base</Filter>
+    </ClCompile>
+    <ClCompile Include="Geometry\base\Volume.cpp">
+      <Filter>Geometry\base</Filter>
+    </ClCompile>
+    <ClCompile Include="Geometry\3d\Cuboids.cpp">
+      <Filter>Geometry\3d</Filter>
+    </ClCompile>
+    <ClCompile Include="Geometry\3d\LineSegment.cpp">
+      <Filter>Geometry\3d</Filter>
+    </ClCompile>
+    <ClCompile Include="Geometry\base\Line2.cpp">
+      <Filter>Geometry\base</Filter>
+    </ClCompile>
+    <ClCompile Include="Geometry\base\Plane.cpp">
+      <Filter>Geometry\base</Filter>
+    </ClCompile>
+    <ClCompile Include="Geometry\base\Line3.cpp">
+      <Filter>Geometry\base</Filter>
+    </ClCompile>
+    <ClCompile Include="Geometry\2d\Circle.cpp">
+      <Filter>Geometry\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="Geometry\base\Matrix22.cpp">
+      <Filter>Geometry\base</Filter>
+    </ClCompile>
+    <ClCompile Include="Geometry\base\Polar2.cpp">
+      <Filter>Geometry\base</Filter>
+    </ClCompile>
+    <ClCompile Include="Geometry\base\Polar3.cpp">
+      <Filter>Geometry\base</Filter>
+    </ClCompile>
+    <ClCompile Include="Algebra\Matrixi.cpp">
+      <Filter>Algebra</Filter>
+    </ClCompile>
+    <ClCompile Include="Number\None.cpp">
+      <Filter>Number</Filter>
+    </ClCompile>
+    <ClCompile Include="Number\Number.cpp">
+      <Filter>Number</Filter>
+    </ClCompile>
+    <ClCompile Include="Number\Complex.cpp">
+      <Filter>Number</Filter>
+    </ClCompile>
+    <ClCompile Include="Number\Integer.cpp">
+      <Filter>Number</Filter>
+    </ClCompile>
+    <ClCompile Include="Number\Decimal.cpp">
+      <Filter>Number</Filter>
+    </ClCompile>
+    <ClCompile Include="Number\Fraction.cpp">
+      <Filter>Number</Filter>
+    </ClCompile>
+    <ClCompile Include="Number\Nature.cpp">
+      <Filter>Number</Filter>
+    </ClCompile>
+    <ClCompile Include="Geometry\2d\LineSegment2.cpp">
+      <Filter>Geometry\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="Set\Set.cpp">
+      <Filter>Set</Filter>
+    </ClCompile>
+    <ClCompile Include="Set\Element.cpp">
+      <Filter>Set</Filter>
+    </ClCompile>
+    <ClCompile Include="Set\FiniteSet.cpp">
+      <Filter>Set</Filter>
+    </ClCompile>
+    <ClCompile Include="Basic\Interval.cpp">
+      <Filter>Basic</Filter>
+    </ClCompile>
+    <ClCompile Include="Basic\EndPoint.cpp">
+      <Filter>Basic</Filter>
+    </ClCompile>
+    <ClCompile Include="Number\Real.cpp">
+      <Filter>Number</Filter>
+    </ClCompile>
+    <ClCompile Include="Number\Infinitely.cpp">
+      <Filter>Number</Filter>
+    </ClCompile>
+    <ClCompile Include="Basic\Boundary.cpp">
+      <Filter>Basic</Filter>
+    </ClCompile>
+    <ClCompile Include="Algebra\Coordinate\CoordinateSystem.cpp">
+      <Filter>Algebra\Coordinate</Filter>
+    </ClCompile>
+    <ClCompile Include="Algebra\Equation\Equation.cpp">
+      <Filter>Algebra\Equation</Filter>
+    </ClCompile>
+    <ClCompile Include="Function\Elementary\ConstantFunction.cpp">
+      <Filter>Function\Elementary</Filter>
+    </ClCompile>
+    <ClCompile Include="Function\Elementary\ElementaryFunction.cpp">
+      <Filter>Function\Elementary</Filter>
+    </ClCompile>
+    <ClCompile Include="Function\Elementary\ExponentialFunction.cpp">
+      <Filter>Function\Elementary</Filter>
+    </ClCompile>
+    <ClCompile Include="Function\Elementary\LogarithmicFunction.cpp">
+      <Filter>Function\Elementary</Filter>
+    </ClCompile>
+    <ClCompile Include="Function\Elementary\PowerFunction.cpp">
+      <Filter>Function\Elementary</Filter>
+    </ClCompile>
+    <ClCompile Include="Function\Elementary\TrigonometricFunction.cpp">
+      <Filter>Function\Elementary</Filter>
+    </ClCompile>
+    <ClCompile Include="Geometry\Collider\AABB.cpp">
+      <Filter>Geometry\Collider</Filter>
+    </ClCompile>
+    <ClCompile Include="Geometry\Collider\Box.cpp">
+      <Filter>Geometry\Collider</Filter>
+    </ClCompile>
+    <ClCompile Include="Geometry\Collider\OBB.cpp">
+      <Filter>Geometry\Collider</Filter>
+    </ClCompile>
+    <ClCompile Include="Discrete\PropositionLogic\CompoundProposition.cpp">
+      <Filter>Discrete\PropositionLogic</Filter>
+    </ClCompile>
+    <ClCompile Include="Discrete\PropositionLogic\ImplicateProposition.cpp">
+      <Filter>Discrete\PropositionLogic</Filter>
+    </ClCompile>
+    <ClCompile Include="Discrete\PropositionLogic\Inference.cpp">
+      <Filter>Discrete\PropositionLogic</Filter>
+    </ClCompile>
+    <ClCompile Include="Discrete\PropositionLogic\PrimaryProposition.cpp">
+      <Filter>Discrete\PropositionLogic</Filter>
+    </ClCompile>
+    <ClCompile Include="Discrete\PropositionLogic\Proposition.cpp">
+      <Filter>Discrete\PropositionLogic</Filter>
+    </ClCompile>
+    <ClCompile Include="Discrete\ManyValuedLogic\FuzzyProposition.cpp">
+      <Filter>Discrete\ManyValuedLogic</Filter>
+    </ClCompile>
+    <ClCompile Include="Discrete\ManyValuedLogic\ManyValuedProposition.cpp">
+      <Filter>Discrete\ManyValuedLogic</Filter>
+    </ClCompile>
+    <ClCompile Include="Discrete\PropositionLogic\InferenceRule.cpp">
+      <Filter>Discrete\PropositionLogic</Filter>
+    </ClCompile>
+    <ClCompile Include="Discrete\PropositionLogic\BooleanProposition.cpp">
+      <Filter>Discrete\PropositionLogic</Filter>
+    </ClCompile>
+    <ClCompile Include="Basic\Collection\Graph.cpp">
+      <Filter>Basic\Collection</Filter>
+    </ClCompile>
+    <ClCompile Include="Basic\Collection\GraphNode.cpp">
+      <Filter>Basic\Collection</Filter>
+    </ClCompile>
+    <ClCompile Include="Basic\Collection\NodeCache.cpp">
+      <Filter>Basic\Collection</Filter>
+    </ClCompile>
+    <ClCompile Include="Basic\Collection\Tree.cpp">
+      <Filter>Basic\Collection</Filter>
+    </ClCompile>
+    <ClCompile Include="Basic\Collection\TreeNode.cpp">
+      <Filter>Basic\Collection</Filter>
+    </ClCompile>
+    <ClCompile Include="Basic\Collection\ListNode.cpp">
+      <Filter>Basic\Collection</Filter>
+    </ClCompile>
+    <ClCompile Include="Basic\Collection\BinaryNode.cpp">
+      <Filter>Basic\Collection</Filter>
+    </ClCompile>
+    <ClCompile Include="Discrete\PropositionLogic\TruthTable.cpp">
+      <Filter>Discrete\PropositionLogic</Filter>
+    </ClCompile>
+    <ClCompile Include="Basic\Collection\Node.cpp">
+      <Filter>Basic\Collection</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

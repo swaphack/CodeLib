@@ -37,9 +37,9 @@ void Environment::addVariable(Variable* pVariable)
 	m_pVariables[pVariable->getName()] = pVariable;
 }
 
-void Environment::removeVariable(const char* name)
+void Environment::removeVariable(const std::string& name)
 {
-	if (name == nullptr)
+	if (name.empty())
 	{
 		return;
 	}
@@ -66,9 +66,9 @@ void Environment::removeAllVariables()
 	m_pVariables.clear();
 }
 
-Variable* Environment::getVariable(const char* name)
+Variable* Environment::getVariable(const std::string& name)
 {
-	if (name == nullptr)
+	if (name.empty())
 	{
 		return nullptr;
 	}
@@ -151,9 +151,9 @@ void Environment::addFunction(Function* pFunction)
 	m_pFunctions[pFunction->getName()] = pFunction;
 }
 
-void Environment::removeFunction(const char* name)
+void Environment::removeFunction(const std::string& name)
 {
-	if (name == nullptr)
+	if (name.empty())
 	{
 		return;
 	}
@@ -180,9 +180,9 @@ void Environment::removeAllFunctions()
 	m_pFunctions.clear();
 }
 
-Function* Environment::getFunction(const char* name)
+Function* Environment::getFunction(const std::string& name)
 {
-	if (name == nullptr)
+	if (name.empty())
 	{
 		return nullptr;
 	}

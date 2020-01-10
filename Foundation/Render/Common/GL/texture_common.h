@@ -9,9 +9,9 @@ namespace render
 	struct TextureVertex
 	{
 		// 顶点坐标
-		sys::Vector3 point;
+		math::Vector3 point;
 		// 顶点纹理坐标
-		sys::Vector3 coords;
+		math::Vector3 coords;
 		// 顶点颜色
 		sys::Color4B blend;
 
@@ -35,10 +35,10 @@ namespace render
 
 		TextureRect()
 		{
-			leftDown.coords = sys::Vector3(0.0f, 0.0f, 0.0f);
-			rightDown.coords = sys::Vector3(1.0f, 0.0f, 0.0f);
-			rightUp.coords = sys::Vector3(1.0f, 1.0f, 0.0f);
-			leftUp.coords = sys::Vector3(0.0f, 1.0f, 0.0f);
+			leftDown.coords = math::Vector3(0.0f, 0.0f, 0.0f);
+			rightDown.coords = math::Vector3(1.0f, 0.0f, 0.0f);
+			rightUp.coords = math::Vector3(1.0f, 1.0f, 0.0f);
+			leftUp.coords = math::Vector3(0.0f, 1.0f, 0.0f);
 		}
 	};
 

@@ -24,26 +24,26 @@ namespace db
 		// 获取字段的值
 		bool getFieldValue(const char* key, std::string& value);
 		bool getFieldValue(const char* key, char& value);
-		bool getFieldValue(const char* key, uint8& value);
-		bool getFieldValue(const char* key, int16& value);
-		bool getFieldValue(const char* key, uint16& value);
+		bool getFieldValue(const char* key, uint8_t& value);
+		bool getFieldValue(const char* key, int16_t& value);
+		bool getFieldValue(const char* key, uint16_t& value);
 		bool getFieldValue(const char* key, int& value);
-		bool getFieldValue(const char* key, uint32& value);
+		bool getFieldValue(const char* key, uint32_t& value);
 		bool getFieldValue(const char* key, long& value);
-		bool getFieldValue(const char* key, ulong& value);
+		bool getFieldValue(const char* key, uint64_t& value);
 		bool getFieldValue(const char* key, float& value);
 		bool getFieldValue(const char* key, double& value);
 
 		// 设置字段的值
 		void setFieldValue(const char* key, const char* value);
 		void setFieldValue(const char* key, char value);
-		void setFieldValue(const char* key, uint8 value);
-		void setFieldValue(const char* key, int16 value);
-		void setFieldValue(const char* key, uint16 value);
+		void setFieldValue(const char* key, uint8_t value);
+		void setFieldValue(const char* key, int16_t value);
+		void setFieldValue(const char* key, uint16_t value);
 		void setFieldValue(const char* key, int value);
-		void setFieldValue(const char* key, uint32 value);
+		void setFieldValue(const char* key, uint32_t value);
 		void setFieldValue(const char* key, long value);
-		void setFieldValue(const char* key, ulong value);
+		void setFieldValue(const char* key, uint64_t value);
 		void setFieldValue(const char* key, float value);
 		void setFieldValue(const char* key, double value);
 

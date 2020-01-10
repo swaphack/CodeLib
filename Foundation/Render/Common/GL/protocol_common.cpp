@@ -37,14 +37,14 @@ ColorProtocol::~ColorProtocol()
 
 }
 
-void ColorProtocol::setColor(uint8 r, uint8 g, uint8 b)
+void ColorProtocol::setColor(uint8_t r, uint8_t g, uint8_t b)
 {
 	_color.red = r;
 	_color.green = g;
 	_color.blue = b;
 }
 
-void ColorProtocol::setColor(uint8 r, uint8 g, uint8 b, uint8 a)
+void ColorProtocol::setColor(uint8_t r, uint8_t g, uint8_t b, uint8_t a)
 {
 	_color.red = r;
 	_color.green = g;
@@ -81,12 +81,12 @@ OpacityProtocol::~OpacityProtocol()
 
 }
 
-void OpacityProtocol::setOpacity(uint8 opacity)
+void OpacityProtocol::setOpacity(uint8_t opacity)
 {
 	_opacity = opacity;
 }
 
-uint8 OpacityProtocol::getOpacity()
+uint8_t OpacityProtocol::getOpacity()
 {
 	return _opacity;
 }
@@ -176,46 +176,41 @@ SpaceProtocol::~SpaceProtocol()
 
 void SpaceProtocol::setPosition(float x, float y)
 {
-	_position.x = x;
-	_position.y = y; 
+	_position.set(x, y);
 	onSpaceChange();
 }
 
 void SpaceProtocol::setPosition(float x, float y, float z)
 {
-	_position.x = x;
-	_position.y = y;
-	_position.z = z;
+	_position.set(x, y, z);
 	onSpaceChange();
 }
 
-void SpaceProtocol::setPosition(const sys::Vector3& position)
+void SpaceProtocol::setPosition(const math::Vector3& position)
 {
 	_position = position;
 	onSpaceChange();
 }
 
-void SpaceProtocol::setPosition(const sys::Vector2& position)
+void SpaceProtocol::setPosition(const math::Vector2& position)
 {
-	_position.x = position.x;
-	_position.y = position.y;
+	_position = position;
+
 	onSpaceChange();
 }
 
-const sys::Vector3& SpaceProtocol::getPosition()
+const math::Vector3& SpaceProtocol::getPosition()
 {
 	return _position;
 }
 
 void SpaceProtocol::setScale(float x, float y, float z)
 {
-	_scale.x = x;
-	_scale.y = y;
-	_scale.z = z;
+	_scale.set(x, y, z);
 	onSpaceChange();
 }
 
-void SpaceProtocol::setScale(const sys::Vector3& scale)
+void SpaceProtocol::setScale(const math::Vector3& scale)
 {
 	_scale = scale;
 	onSpaceChange();
@@ -223,133 +218,129 @@ void SpaceProtocol::setScale(const sys::Vector3& scale)
 
 void SpaceProtocol::setScale(float scale)
 {
-	_scale.x = scale;
-	_scale.y = scale;
-	_scale.z = scale;
+	_scale.set(scale, scale, scale);
 	onSpaceChange();
 }
 
-const sys::Vector3& SpaceProtocol::getScale()
+const math::Vector3& SpaceProtocol::getScale()
 {
 	return _scale;
 }
 
 void SpaceProtocol::setRotation(float x, float y, float z)
 {
-	_rotation.x = x;
-	_rotation.y = y;
-	_rotation.z = z;
+	_rotation.set(x, y, z);
 	onSpaceChange();
 }
 
-void SpaceProtocol::setRotation(const sys::Vector3& rotation)
+void SpaceProtocol::setRotation(const math::Vector3& rotation)
 {
 	_rotation = rotation;
 	onSpaceChange();
 }
 
-const sys::Vector3& SpaceProtocol::getRotation()
+const math::Vector3& SpaceProtocol::getRotation()
 {
 	return _rotation;
 }
 
 void SpaceProtocol::setPositionX(float x)
 {
-	_position.x = x;
+	_position.setX(x);
 	onSpaceChange();
 }
 
 void SpaceProtocol::setPositionY(float y)
 {
-	_position.y = y;
+	_position.setY(y);
 	onSpaceChange();
 }
 
 void SpaceProtocol::setPositionZ(float z)
 {
-	_position.z = z;
+	_position.setZ(z);
 	onSpaceChange();
 }
 
 float SpaceProtocol::getPositionX()
 {
-	return _position.x;
+	return _position.getX();
 }
 
 float SpaceProtocol::getPositionY()
 {
-	return _position.y;
+	return _position.getY();
 }
 
 float SpaceProtocol::getPositionZ()
 {
-	return _position.z;
+	return _position.getZ();
 }
 
 void SpaceProtocol::setScaleX(float x)
 {
-	_scale.x = x;
+	_scale.setX(x);
 	onSpaceChange();
 }
 
 void SpaceProtocol::setScaleY(float y)
 {
-	_scale.y = y;
+	_scale.setY(y);
 	onSpaceChange();
 }
 
 void SpaceProtocol::setScaleZ(float z)
 {
-	_scale.z = z;
+	_scale.setZ(z);
 	onSpaceChange();
 }
 
 float SpaceProtocol::getScaleX()
 {
-	return _scale.x;
+	return _scale.getX();
 }
 
 float SpaceProtocol::getScaleY()
 {
-	return _scale.y;
+	return _scale.getY();
 }
 
 float SpaceProtocol::getScaleZ()
 {
-	return _scale.z;
+	return _scale.getZ();
 }
 
 void SpaceProtocol::setRotationX(float x)
 {
-	_rotation.x = x;
+	_rotation.setX(x);
 	onSpaceChange();
 }
 
 void SpaceProtocol::setRotationY(float y)
 {
-	_rotation.y = y;
+	_rotation.setY(y);
 	onSpaceChange();
 }
 
 void SpaceProtocol::setRotationZ(float z)
 {
-	_rotation.z = z;
+	_rotation.setZ(z);
 	onSpaceChange();
 }
 
 float SpaceProtocol::getRotationX()
 {
-	return _rotation.x;
+	return _rotation.getX();
 }
 
 float SpaceProtocol::getRotationY()
 {
-	return _rotation.y;
+	return _rotation.getY();
 }
 
 float SpaceProtocol::getRotationZ()
 {
-	return _rotation.z;
+	return _rotation.getZ();
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -366,109 +357,99 @@ BodyProtocol::~BodyProtocol()
 
 void BodyProtocol::setAnchorPoint(float x, float y, float z)
 {
-	_anchor.x = x;
-	_anchor.y = y;
-	_anchor.z = z;
+	_anchor.set(x, y, z);
 	onBodyChange();
 }
 
 void BodyProtocol::setAnchorPoint(float x, float y)
 {
-	_anchor.x = x;
-	_anchor.y = y;
+	_anchor.set(x, y);
 	onBodyChange();
 }
 
-void BodyProtocol::setAnchorPoint(const sys::Vector3& anchor)
+void BodyProtocol::setAnchorPoint(const math::Vector3& anchor)
 {
 	_anchor = anchor;
 	onBodyChange();
 }
 
-void BodyProtocol::setAnchorPoint(const sys::Vector2& anchor)
+void BodyProtocol::setAnchorPoint(const math::Vector2& anchor)
 {
-	_anchor.x = anchor.x;
-	_anchor.y = anchor.y;
+	_anchor = anchor;
 	onBodyChange();
 
 }
 
-const sys::Vector3& BodyProtocol::getAnchorPoint()
+const math::Vector3& BodyProtocol::getAnchorPoint()
 {
 	return _anchor;
 }
 
 void BodyProtocol::setVolume(float w, float h, float d)
 {
-	_volume.width = w;
-	_volume.height = h;
-	_volume.deep = d;
+	_volume.set(w, h, d);
 	onBodyChange();
 }
 
 void BodyProtocol::setVolume(float w, float h)
 {
-	_volume.width = w;
-	_volume.height = h;
+	_volume.set(w, h);
 	onBodyChange();
 }
 
-void BodyProtocol::setVolume(const sys::Volume& volume)
+void BodyProtocol::setVolume(const math::Volume& volume)
 {
 	_volume = volume;
 	onBodyChange();
 }
 
-void BodyProtocol::setVolume(const sys::Size& size)
+void BodyProtocol::setVolume(const math::Size& size)
 {
-	_volume.width = size.width;
-	_volume.height = size.height;
-	_volume.deep = 0;
-
+	_volume.set(size.getWidth(), size.getHeight());
 	onBodyChange();
 }
 
-const sys::Volume& BodyProtocol::getVolume()
+const math::Volume& BodyProtocol::getVolume()
 {
 	return _volume;
 }
 
 void BodyProtocol::setWidth(float w)
 {
-	_volume.width = w;
+	_volume.setWidth(w);
 	onBodyChange();
 }
 
 void BodyProtocol::setHeight(float h)
 {
-	_volume.height = h;
+	_volume.setHeight(h);
 	onBodyChange();
 }
 
 void BodyProtocol::setDeep(float d)
 {
-	_volume.deep = d;
+	_volume.setDeep(d);
 	onBodyChange();
 }
 
 float BodyProtocol::getWidth()
 {
-	return _volume.width;
+	return _volume.getWidth();
 }
 
 float BodyProtocol::getHeight()
 {
-	return _volume.height;
+	return _volume.getHeight();
 }
 
 float BodyProtocol::getDeep()
 {
-	return _volume.deep;
+	return _volume.getDeep();
 }
 
-sys::Size BodyProtocol::getSize()
+math::Size BodyProtocol::getSize()
 {
-	return sys::Size(_volume.width, _volume.height);
+	return math::Size(_volume.getWidth(), _volume.getWidth());
 }
 
 //////////////////////////////////////////////////////////////////////////

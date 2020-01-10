@@ -44,7 +44,7 @@ bool Scanner::parse()
 {
 	if (m_pWordSet == nullptr)
 	{
-		return;
+		return false;
 	}
 	do 
 	{

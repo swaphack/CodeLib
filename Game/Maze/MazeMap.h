@@ -29,7 +29,7 @@ public:
 	// 务必调用，包含属性修改时通知
 	virtual bool init();
 
-	void setData(MazeNode* data, const sys::Size& cellSize);
+	void setData(MazeNode* data, const math::Size& cellSize);
 private:
 	MazeNode* _data;
 };

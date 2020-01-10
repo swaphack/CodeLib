@@ -1,15 +1,15 @@
 #include "macros.h"
 
-void ConvertToFMODVector(const sys::Vector3& src, FMOD_VECTOR& dest)
+void ConvertToFMODVector(const math::Vector3& src, FMOD_VECTOR& dest)
 {
-	dest.x = src.x;
-	dest.y = src.y;
-	dest.z = src.z;
+	dest.x = src.getX();
+	dest.y = src.getY();
+	dest.z = src.getZ();
 }
 
-void ConvertToSysVector(const FMOD_VECTOR& src, sys::Vector3& dest)
+void ConvertToSysVector(const FMOD_VECTOR& src, math::Vector3& dest)
 {
-	dest.x = src.x;
-	dest.y = src.y;
-	dest.z = src.z;
+	dest.setX(src.x);
+	dest.setY(src.y);
+	dest.setZ(src.z);
 }

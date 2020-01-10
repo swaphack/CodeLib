@@ -43,7 +43,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>../System/;../../Lib/include/;../../Lib/include/freetype/;../Text/;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../System/;../../Lib/include/;../../Lib/include/freetype/;../Text/;../Math/;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <BrowseInformation>true</BrowseInformation>
     </ClCompile>
     <Link>
@@ -91,7 +91,7 @@
     <ClCompile Include="3d\Environment\Light.cpp" />
     <ClCompile Include="3d\Environment\SpotLight.cpp" />
     <ClCompile Include="3d\Shape\Cube.cpp" />
-    <ClCompile Include="3d\Shape\Sphere.cpp" />
+    <ClCompile Include="3d\Shape\SphereModel.cpp" />
     <ClCompile Include="Canvas.cpp" />
     <ClCompile Include="Common\Action\Action.cpp" />
     <ClCompile Include="Common\Action\ActionManager.cpp" />
@@ -186,7 +186,7 @@
     <ClInclude Include="3d\Map\Terrian.h" />
     <ClInclude Include="3d\Shape\Cube.h" />
     <ClInclude Include="3d\Shape\import.h" />
-    <ClInclude Include="3d\Shape\Sphere.h" />
+    <ClInclude Include="3d\Shape\SphereModel.h" />
     <ClInclude Include="Canvas.h" />
     <ClInclude Include="Common\Action\Action.h" />
     <ClInclude Include="Common\Action\ActionManager.h" />

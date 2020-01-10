@@ -27,11 +27,11 @@ namespace render
 		void setActive(bool active);
 		bool getActive();
 
-		void setForward(const sys::Vector3& forward);
-		const sys::Vector3& getForward();
+		void setForward(const math::Vector3& forward);
+		const math::Vector3& getForward();
 
-		void setUp(const sys::Vector3& up);
-		const sys::Vector3& getUp();
+		void setUp(const math::Vector3& up);
+		const math::Vector3& getUp();
 
 		int getMaxPolygons();
 		int getMaxVertices();
@@ -41,7 +41,7 @@ namespace render
 
 		CtrlAudioGeometryPolygon* getPolygon(ModelFace face);
 	protected:
-		CtrlAudioGeometryPolygon* addPolygon(const std::vector<sys::Vector3>& vertexes);
+		CtrlAudioGeometryPolygon* addPolygon(const std::vector<math::Vector3>& vertexes);
 		CtrlAudioGeometryPolygon* addPolygon(const RectVertex& vertexes);
 		const RectVertex& getRectVertex(int i);
 		void onGeometryChange();
@@ -85,11 +85,11 @@ namespace render
 		bool isDoubleSided();
 
 		// 设置顶点
-		bool setVertexes(const sys::Vector3* vertexes, int numvertices);
-		bool setVertexes(const std::vector<sys::Vector3>& vertexes);
+		bool setVertexes(const math::Vector3* vertexes, int numvertices);
+		bool setVertexes(const std::vector<math::Vector3>& vertexes);
 		bool setVertexes(const RectVertex& vertexes);
 		// 添加顶点
-		bool updateVertex(int index, const sys::Vector3& vertex);
+		bool updateVertex(int index, const math::Vector3& vertex);
 	protected:
 		void onPolygonChange();
 		void onAttributeChange();
@@ -100,7 +100,7 @@ namespace render
 		// 配置
 		GeometrySettings _geometrySettings;
 		// 顶点
-		std::vector<sys::Vector3> _vertexes;
+		std::vector<math::Vector3> _vertexes;
 		// 实际顶点坐标
 		FMOD_VECTOR* _realVertexes;
 		// 实际顶点坐标数

@@ -14,7 +14,7 @@ namespace render
 		* @param size 纹理大小
 		* @param rect 显示区域
 		*/ 
-		static void setTexture2DCounterCoords(TextureRect* texRect, const sys::Size& size, const sys::Rect& rect);
+		static void setTexture2DCounterCoords(TextureRect* texRect, const math::Size& size, const math::Rect& rect);
 
 		/**
 		*
@@ -23,7 +23,7 @@ namespace render
 		* @param size 纹理大小
 		* @param rect 显示区域
 		*/
-		static void setTexture2DCoords(TextureRect* texRect, const sys::Size& size, const sys::Rect& rect);
+		static void setTexture2DCoords(TextureRect* texRect, const math::Size& size, const math::Rect& rect);
 
 		/**
 		*
@@ -33,7 +33,7 @@ namespace render
 		* @param volume 体积
 		* @param anchor 锚点
 		*/
-		static void setTexture2DVertexts(TextureRect* texRect, const sys::Vector3& position, const sys::Volume& volume, const sys::Vector3& anchor);
+		static void setTexture2DVertexts(TextureRect* texRect, const math::Vector3& position, const math::Volume& volume, const math::Vector3& anchor);
 
 		/**
 		* 设置3d纹理坐标
@@ -41,7 +41,7 @@ namespace render
 		* @param size 纹理大小
 		* @param rect 显示区域
 		*/
-		/*static void setTexture3DCoords(TextureCube* texcube, const sys::Size& size, const sys::Rect& rect);*/
+		/*static void setTexture3DCoords(TextureCube* texcube, const math::Size& size, const math::Rect& rect);*/
 
 		/**
 		*
@@ -51,7 +51,7 @@ namespace render
 		* @param volume 体积
 		* @param anchor 锚点
 		*/
-		static void setTexture3DVertexts(TextureCube* texcube, const sys::Vector3& position, const sys::Volume& volume, const sys::Vector3& anchor);
+		static void setTexture3DVertexts(TextureCube* texcube, const math::Vector3& position, const math::Volume& volume, const math::Vector3& anchor);
 		/**
 		*
 		* 设置2d纹理顶点翻转

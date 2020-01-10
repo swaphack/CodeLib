@@ -1,19 +1,37 @@
 #include "Algebra/Matrix.h"
-#include "Algebra/Vector3.h"
+#include "Geometry/base/Matrix22.h"
+#include "Discrete/PropositionLogic/import.h"
 
 #include <iostream>
 
 using namespace math;
 
+void testMatrix()
+{
+	Matrix22 mat = Matrix22(
+		1, 5,
+		6, 7);
+	printf("%s", mat.toString().c_str());
+}
+
+void testInference()
+{
+	PrimaryProposition a(PropositionResult::TRUE);
+	a.setIdentify(1);
+
+	PrimaryProposition b(PropositionResult::FALSE);
+	b.setIdentify(2);
+
+	DisjunctiveProposition c(&a, &b);
+	c.setIdentify(3);
+
+	int dfd = 1;
+}
+
+
 int main(int argc, char** argv)
 {
-	Vector3 src(1, 1, 1);
-
-	Vector3 offsetPosition(0, 1, 0);
-	Vector3 offsetScale(0.5f, 1.0f, 0.0f);
-
-	Vector3 dest0 = src.tranlate(offsetPosition);
-	Vector3 dest1 = src.scale(offsetScale);
+	testInference();
 
 	return 0;
 }

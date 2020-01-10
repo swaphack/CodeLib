@@ -3,7 +3,7 @@
 using namespace slg;
 
 VolumeProtocol::VolumeProtocol()
-:_volume(sys::Volume::One)
+:_volume(math::Volume::One)
 {
 
 }

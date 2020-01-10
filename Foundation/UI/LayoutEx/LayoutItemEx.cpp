@@ -12,34 +12,32 @@ LayoutItemEx::~LayoutItemEx()
 {
 }
 
-const sys::Size& LayoutItemEx::getMinSize()
+const math::Size& LayoutItemEx::getMinSize()
 {
 	return m_sMinSize;
 }
 
 void LayoutItemEx::setMinSize(float width, float height)
 {
-	m_sMinSize.width = width;
-	m_sMinSize.height = height;
+	m_sMinSize.set(width, height);
 }
 
-void LayoutItemEx::setMinSize(const sys::Size& size)
+void LayoutItemEx::setMinSize(const math::Size& size)
 {
 	m_sMinSize = size;
 }
 
-const sys::Size& LayoutItemEx::getMaxSize()
+const math::Size& LayoutItemEx::getMaxSize()
 {
 	return m_sMaxSize;
 }
 
 void LayoutItemEx::setMaxSize(float width, float height)
 {
-	m_sMaxSize.width = width;
-	m_sMaxSize.height = height;
+	m_sMaxSize.set(width, height);
 }
 
-void LayoutItemEx::setMaxSize(const sys::Size& size)
+void LayoutItemEx::setMaxSize(const math::Size& size)
 {
 	m_sMaxSize = size;	
 }
@@ -54,23 +52,23 @@ void LayoutItemEx::setSizePolicy(const SizePolicy& policy)
 	m_spAdjust = policy;
 }
 
-sys::Size LayoutItemEx::getLayoutMinSize()
+math::Size LayoutItemEx::getLayoutMinSize()
 {
-	sys::Size size;
+	float w = 0, h = 0;
 	SizeType st = getSizePolicy().width;
 	switch (st)
 	{
 	case ui::EST_Fixed:
-		size.width = getGeometry().width;
+		w = getGeometry().getWidth();
 		break;
 	case ui::EST_Minimum:
-		size.width = getMinSize().width;
+		w = getMinSize().getWidth();
 		break;
 	case ui::EST_Maximum:
-		size.width = 0;
+		w = 0;
 		break;
 	case ui::EST_Expanding:
-		size.width = 0;
+		w = 0;
 		break;
 	default:
 		break;
@@ -79,40 +77,40 @@ sys::Size LayoutItemEx::getLayoutMinSize()
 	switch (st)
 	{
 	case ui::EST_Fixed:
-		size.height = getGeometry().height;
+		h = getGeometry().getHeight();
 		break;
 	case ui::EST_Minimum:
-		size.height = getMinSize().height;
+		h = getMinSize().getHeight();
 		break;
 	case ui::EST_Maximum:
-		size.height = 0;
+		h = 0;
 		break;
 	case ui::EST_Expanding:
-		size.height = 0;
+		h = 0;
 		break;
 	default:
 		break;
 	}
-	return size;
+	return math::Size(w, h);
 }
 
-sys::Size LayoutItemEx::getLayoutMaxSize()
+math::Size LayoutItemEx::getLayoutMaxSize()
 {
-	sys::Size size;
+	float w = 0, h = 0;
 	SizeType st = getSizePolicy().width;
 	switch (st)
 	{
 	case ui::EST_Fixed:
-		size.width = getGeometry().width;
+		w = getGeometry().getWidth();
 		break;
 	case ui::EST_Minimum:
-		size.width = 0;
+		w = 0;
 		break;
 	case ui::EST_Maximum:
-		size.width = getMaxSize().width;
+		w = getMaxSize().getWidth();
 		break;
 	case ui::EST_Expanding:
-		size.width = 0;
+		w = 0;
 		break;
 	default:
 		break;
@@ -121,21 +119,21 @@ sys::Size LayoutItemEx::getLayoutMaxSize()
 	switch (st)
 	{
 	case ui::EST_Fixed:
-		size.height = getGeometry().height;
+		h = getGeometry().getHeight();
 		break;
 	case ui::EST_Minimum:
-		size.height = 0;
+		h = 0;
 		break;
 	case ui::EST_Maximum:
-		size.height = getMaxSize().height;
+		h = getMaxSize().getHeight();
 		break;
 	case ui::EST_Expanding:
-		size.height = 0;
+		h = 0;
 		break;
 	default:
 		break;
 	}
-	return size;
+	return math::Size(w, h);
 }
 
 bool LayoutItemEx::copy(LayoutItemEx* item)

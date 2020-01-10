@@ -13,13 +13,13 @@ namespace sys
 		virtual ~StreamWriter();
 	public:
 		void writeInt8(char data);
-		void writeUInt8(uint8 data);
-		void writeInt16(int16 data);
-		void writeUInt16(uint16 data);
-		void writeInt32(int32 data);
-		void writeUInt32(uint32 data);
-		void writeInt64(int64 data);
-		void writeUInt64(uint64 data);
+		void writeUInt8(uint8_t data);
+		void writeInt16(int16_t data);
+		void writeUInt16(uint16_t data);
+		void writeInt32(int32_t data);
+		void writeUInt32(uint32_t data);
+		void writeInt64(int64_t data);
+		void writeUInt64(uint64_t data);
 		void writeFloat(float data);
 		void writeDouble(double data);
 		void writeString(const char* data);
@@ -37,7 +37,7 @@ namespace sys
 	template<typename T>
 	void StreamWriter::write( T data )
 	{
-		while ((int32)(getCursor() + sizeof(data)) > this->getCapacity())
+		while ((int32_t)(getCursor() + sizeof(data)) > this->getCapacity())
 		{
 			this->realloct(2 * this->getCapacity());
 		}

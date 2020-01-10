@@ -37,15 +37,15 @@ namespace sys
 		Identify() :_id(0) {}
 		virtual ~Identify() {}
 	public:
-		void setID(int32 id)
+		void setID(int32_t id)
 		{
 			_id = id;
 		}
-		int32 getID()
+		int32_t getID()
 		{
 			return _id;
 		}
 	private:
-		int32 _id;
+		int32_t _id;
 	};
 }

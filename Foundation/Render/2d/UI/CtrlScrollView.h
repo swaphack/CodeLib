@@ -25,10 +25,10 @@ namespace render
 		virtual ~ScrollItem();
 	public:
 		// 添加项
-		void addItem(Node* node, const sys::Size& size);
+		void addItem(Node* node, const math::Size& size);
 
 	public:
-		static ScrollItem* create(Node* node, const sys::Size& size);
+		static ScrollItem* create(Node* node, const math::Size& size);
 	};
 
 	// 滑动
@@ -44,16 +44,16 @@ namespace render
 		ScrollDirection getScrollDirection();
 		// 添加一个项
 		void append(Node* item);
-		void append(Node* item, const sys::Size& size);
+		void append(Node* item, const math::Size& size);
 		// 移除一个项
 		void remove(Node* item);
 		// 移除所有项
 		void removeAllItems();
 		// 设置每个项的大小
-		void setItemSize(const sys::Size& size);
+		void setItemSize(const math::Size& size);
 		void setItemSize(float width, float height);
 		// 获取每个项的大小
-		const sys::Size& getItemSize();
+		const math::Size& getItemSize();
 	protected:
 		// 点击处理
 		void onBeginTouch(sys::Object* object, float x, float y);
@@ -78,8 +78,8 @@ namespace render
 		// 项
 		std::vector<Node*> _nodes;
 		// 点击位置
-		sys::Vector2 _touchPosition;
+		math::Vector2 _touchPosition;
 		// 项的大小
-		sys::Size _itemSize;
+		math::Size _itemSize;
 	};
 }

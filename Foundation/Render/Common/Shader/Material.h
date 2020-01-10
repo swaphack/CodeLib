@@ -16,15 +16,15 @@ namespace render
 		// 应用
 		void apply();
 		// 环境光
-		void setAmbient(uint8 red, uint8 green, uint8 blue, uint8 alpha);
+		void setAmbient(uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha);
 		const float* getAmbient() const;
 
 		// 漫射光
-		void setDiffuse(uint8 red, uint8 green, uint8 blue, uint8 alpha);
+		void setDiffuse(uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha);
 		const float* getDiffuse() const;
 
 		// 反射光
-		void setSpecular(uint8 red, uint8 green, uint8 blue, uint8 alpha);
+		void setSpecular(uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha);
 		const float* getSpecular() const;
 
 		// 镜面指数
@@ -32,7 +32,7 @@ namespace render
 		float getShiness() const;
 
 		// 辐射光颜色
-		void setEmisiion(uint8 red, uint8 green, uint8 blue, uint8 alpha);
+		void setEmisiion(uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha);
 		const float* getEmisiion() const;
 
 		Material& operator = (const Material& value);

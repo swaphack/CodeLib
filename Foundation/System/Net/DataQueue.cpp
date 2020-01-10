@@ -45,7 +45,7 @@ NetData* DataQueue::topData()
 	return _datas.front();
 }
 
-int32 DataQueue::count()
+int32_t DataQueue::count()
 {
 	return _datas.size();
 }

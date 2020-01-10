@@ -13,11 +13,11 @@ namespace sys
 		CacheMgr();
 		virtual ~CacheMgr();
 	public:
-		static int32 getStaticID();
+		static int32_t getStaticID();
 		static CacheMgr* getInstance();
 	public:
 		// 按id获取cache
-		CacheIdentity* getCache(int32 nID);
+		CacheIdentity* getCache(int32_t nID);
 		// 按名称获取cache
 		CacheIdentity* getCache(const char* name);
 		// 添加cache
@@ -28,9 +28,9 @@ namespace sys
 		// 名称缓存
 		std::map<std::string, CacheIdentity*> _nameCaches;
 		// id缓存
-		std::map<int32, CacheIdentity*> _idCaches;
+		std::map<int32_t, CacheIdentity*> _idCaches;
 	private:
-		static int32 s_ID;
+		static int32_t s_ID;
 		static CacheMgr* s_CacheMgr;
 	};
 }

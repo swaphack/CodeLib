@@ -13,7 +13,7 @@ namespace sys
 		Window();
 		virtual ~Window();
 	public:
-		virtual void initWindow(const char* title, int32 width, int32 height);
+		virtual void initWindow(const char* title, int32_t width, int32_t height);
 	public:
 		// ´°¿Ú¾ä±ú
 		inline HWND getWnd() { return _wnd; }

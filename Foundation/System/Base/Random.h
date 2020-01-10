@@ -14,13 +14,13 @@ namespace sys
 	public:
 		static Random* getInstance();
 		// 设置种子
-		void setSeed(uint32 seed);
+		void setSeed(uint32_t seed);
 		// 设置区间
 		void setRange(float minValue, float maxValue);
 		// 获取下一个数值
 		float getNextNumber();
 		// 获取下一个整形
-		int32 getNextint32eger();
+		int32_t getNextint32eger();
 	protected:
 	private:
 		// 最小值

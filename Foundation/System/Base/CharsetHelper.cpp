@@ -17,7 +17,7 @@
 
 using namespace sys;
 
-int32 CharsetHelper::getUTF8WordCount(const char* data)
+int32_t CharsetHelper::getUTF8WordCount(const char* data)
 {
 	if (data == nullptr)
 	{
@@ -25,7 +25,7 @@ int32 CharsetHelper::getUTF8WordCount(const char* data)
 	}
 
 	char* ptr = (char*)(data);
-	int32 count = 0;
+	int32_t count = 0;
 
 	while (*ptr)
 	{
@@ -85,13 +85,13 @@ int32 CharsetHelper::getUTF8WordCount(const char* data)
 
 char* CharsetHelper::convertToUTF8(wchar_t* src)
 {
-	int32 mbs_size;
+	int32_t mbs_size;
 #if (defined WIN32) ||  (defined _WIN32)  
 	setlocale(LC_ALL, "chs");
 #else  
 	setlocale(LC_ALL, "zh_CN.gbk");
 #endif  
-	int32 wc_size = wcslen(src);
+	int32_t wc_size = wcslen(src);
 	if (wc_size == 0)
 		wc_size = UINT32_MAX;
 
@@ -104,7 +104,7 @@ char* CharsetHelper::convertToUTF8(wchar_t* src)
 	return mbs;
 }
 
-wchar_t* CharsetHelper::convertToWideChar(const char* src, int32& length)
+wchar_t* CharsetHelper::convertToWideChar(const char* src, int32_t& length)
 {
 	if (src == NULL) {
 		return nullptr;
@@ -116,8 +116,8 @@ wchar_t* CharsetHelper::convertToWideChar(const char* src, int32& length)
 #else  
 	setlocale(LC_ALL, "zh_CN.gbk");
 #endif  
-	int32 wc_size;
-	int32 mbs_size = strlen(src);
+	int32_t wc_size;
+	int32_t mbs_size = strlen(src);
 
 	if (mbs_size == 0)
 		mbs_size = UINT32_MAX;
@@ -136,7 +136,7 @@ wchar_t* CharsetHelper::convertToWideChar(const char* src, int32& length)
 
 wchar_t* CharsetHelper::convertToWideCharWnd(const char *str)
 {
-	int32 length = strlen(str) + 1;
+	int32_t length = strlen(str) + 1;
 	wchar_t *t = (wchar_t*)malloc(sizeof(wchar_t)*length);
 	memset(t, 0, length*sizeof(wchar_t));
 	MultiByteToWideChar(CP_ACP, 0, str, strlen(str), t, length);

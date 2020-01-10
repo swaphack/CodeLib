@@ -13,7 +13,7 @@ BitConvert::~BitConvert()
 
 }
 
-void BitConvert::getNumberString(int32 number, std::string& value)
+void BitConvert::getNumberString(int32_t number, std::string& value)
 {
 	char str[255];
 	itoa(number, str, 10);
@@ -27,7 +27,7 @@ void BitConvert::getNumberString(long number, std::string& value)
 	value = str;
 }
 
-void BitConvert::getNumberString(ulong number, std::string& value)
+void BitConvert::getNumberString(uint64_t number, std::string& value)
 {
 	char str[255];
 	ultoa(number, str, 10);

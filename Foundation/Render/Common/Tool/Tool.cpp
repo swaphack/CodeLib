@@ -1,35 +1,31 @@
 #include "Tool.h"
+#include "mathlib.h"
 #include <cmath>
-
-#define HALF_CIRCLE_ANGEL 180.0f
 
 using namespace render;
 
-sys::Volume Tool::GL_VIEW_SIZE = sys::Volume();
+math::Volume Tool::GL_VIEW_SIZE = math::Volume();
 
 Dimensions Tool::E_DIMENSIONS = ED_NONE;
 
 void Tool::setGLViewSize(float width, float height)
 {
-	GL_VIEW_SIZE.width = width;
-	GL_VIEW_SIZE.height = height;
-
-	GL_VIEW_SIZE.deep = width > height ? width : height;
+	GL_VIEW_SIZE.set(width, height, width > height ? width : height);
 }
 
-const sys::Volume& Tool::getGLViewSize()
+const math::Volume& Tool::getGLViewSize()
 {
 	return GL_VIEW_SIZE;
 }
 
 float Tool::getGLViewWidth()
 {
-	return GL_VIEW_SIZE.width;
+	return GL_VIEW_SIZE.getWidth();
 }
 
 float Tool::getGLViewHeight()
 {
-	return GL_VIEW_SIZE.height;
+	return GL_VIEW_SIZE.getHeight();
 }
 
 Dimensions Tool::getDimensions()
@@ -42,64 +38,93 @@ void Tool::setDimensions(Dimensions d)
 	E_DIMENSIONS = d;
 }
 
-sys::Vector3 Tool::convertToRadian(const sys::Vector3& src)
+math::Vector3 Tool::convertToRadian(const math::Vector3& src)
 {
-	return sys::Vector3(src.x / HALF_CIRCLE_ANGEL * PI, src.y / HALF_CIRCLE_ANGEL * PI, src.z / HALF_CIRCLE_ANGEL * PI);
+	float x = ANGLE_TO_RADIAN(src.getX());
+	float y = ANGLE_TO_RADIAN(src.getY());
+	float z = ANGLE_TO_RADIAN(src.getZ());
+	return math::Vector3(x, y, z);
 }
 
-sys::Vector3 Tool::convertToAngle(const sys::Vector3& src)
+void Tool::convertToRadian(const math::Vector3& src, math::Vector3& dest)
 {
-	return sys::Vector3(src.x / PI * HALF_CIRCLE_ANGEL, src.y / PI * HALF_CIRCLE_ANGEL, src.z / PI * HALF_CIRCLE_ANGEL);
+	float x = ANGLE_TO_RADIAN(src.getX());
+	float y = ANGLE_TO_RADIAN(src.getY());
+	float z = ANGLE_TO_RADIAN(src.getZ());
+
+	dest.set(x, y, z);
 }
 
-void Tool::convertToOGLPoisition(float x, float y, float z, sys::Vector3& dest)
+math::Vector3 Tool::convertToAngle(const math::Vector3& src)
 {
-	dest.x = x / Tool::getGLViewSize().width;
-	dest.y = y / Tool::getGLViewSize().height;
-	dest.z = z / Tool::getGLViewSize().deep;
+	float x = RADIAN_TO_ANGLE(src.getX());
+	float y = RADIAN_TO_ANGLE(src.getY());
+	float z = RADIAN_TO_ANGLE(src.getZ());
+
+	return math::Vector3(x,y,z);
 }
 
-sys::Vector3 Tool::convertToOGLPoisition(float x, float y, float z)
+void Tool::convertToAngle(const math::Vector3& src, math::Vector3& dest)
 {
-	return sys::Vector3(x / Tool::getGLViewSize().width, y / Tool::getGLViewSize().height, z / Tool::getGLViewSize().deep);
+	float x = RADIAN_TO_ANGLE(src.getX());
+	float y = RADIAN_TO_ANGLE(src.getY());
+	float z = RADIAN_TO_ANGLE(src.getZ());
+
+	dest.set(x, y, z);
 }
 
-sys::Vector3 Tool::convertToOGLPoisition(const sys::Vector3& src)
+void Tool::convertToOGLPoisition(float x, float y, float z, math::Vector3& dest)
 {
-	return sys::Vector3(src.x / Tool::getGLViewSize().width, src.y / Tool::getGLViewSize().height, src.z / Tool::getGLViewSize().deep);
+	math::Volume volume = Tool::getGLViewSize();
+
+	dest.set(x / volume.getWidth(), y / volume.getHeight(), z / volume.getDeep());
 }
 
-void Tool::convertToOGLPoisition(const sys::Vector3& src, sys::Vector3& dest)
+math::Vector3 Tool::convertToOGLPoisition(float x, float y, float z)
 {
-	dest.x = src.x / Tool::getGLViewSize().width;
-	dest.y = src.y / Tool::getGLViewSize().height;
-	dest.z = src.z / Tool::getGLViewSize().deep;
+	math::Volume volume = Tool::getGLViewSize();
+
+	return math::Vector3(x / volume.getWidth(), y / volume.getHeight(), z / volume.getDeep());
 }
 
-sys::Vector3 Tool::convertToWindowPosition(float x, float y, float z)
+math::Vector3 Tool::convertToOGLPoisition(const math::Vector3& src)
 {
-	return sys::Vector3(x * Tool::getGLViewSize().width, y * Tool::getGLViewSize().height, z * Tool::getGLViewSize().deep);
+	return convertToOGLPoisition(src.getX(), src.getY(), src.getZ());
 }
 
-sys::Vector3 Tool::convertToWindowPosition(const sys::Vector3& src)
+void Tool::convertToOGLPoisition(const math::Vector3& src, math::Vector3& dest)
 {
-	return sys::Vector3(src.x * Tool::getGLViewSize().width, src.y * Tool::getGLViewSize().height, src.z * Tool::getGLViewSize().deep);
+	convertToOGLPoisition(src.getX(), src.getY(), src.getZ(), dest);
 }
 
-sys::Volume Tool::convertToOGLVolume(const sys::Volume& src)
+math::Vector3 Tool::convertToWindowPosition(float x, float y, float z)
 {
-	return sys::Volume(src.width / Tool::getGLViewSize().width * 2 - 1, src.height / Tool::getGLViewSize().height * 2 - 1, src.deep);
+	math::Volume volume = Tool::getGLViewSize();
+
+	return math::Vector3(x * volume.getWidth(), y * volume.getHeight(), z * volume.getDeep());
 }
 
-sys::Vector3 Tool::getRotationPosition(const sys::Vector3& vector, const sys::Vector3& rotation)
+math::Vector3 Tool::convertToWindowPosition(const math::Vector3& src)
+{
+	return convertToWindowPosition(src.getX(), src.getY(), src.getZ());
+}
+
+math::Volume Tool::convertToOGLVolume(const math::Volume& src)
+{
+	math::Volume volume = Tool::getGLViewSize();
+
+	return math::Volume(src.getWidth() / volume.getWidth() * 2 - 1, src.getHeight() / volume.getHeight() * 2 - 1, src.getDeep());
+}
+
+math::Vector3 Tool::getRotationPosition(const math::Vector3& vector, const math::Vector3& rotation)
 {
 	float sinx, siny, sinz;
 	float cosx, cosy, cosz;
 	float ax, ay, az;
 
-	ax = rotation.x * PI / HALF_CIRCLE_ANGEL;
-	ay = rotation.y * PI / HALF_CIRCLE_ANGEL;
-	az = rotation.z * PI / HALF_CIRCLE_ANGEL;
+	ax = ANGLE_TO_RADIAN(rotation.getX());
+	ay = ANGLE_TO_RADIAN(rotation.getY());
+	az = ANGLE_TO_RADIAN(rotation.getZ());
 
 	sinx = sin(ax);
 	siny = sin(ay);
@@ -109,138 +134,146 @@ sys::Vector3 Tool::getRotationPosition(const sys::Vector3& vector, const sys::Ve
 	cosy = cos(ay);
 	cosz = cos(az);
 
-	sys::Vector3 dest;
+	float x = vector.getX() * (cosy * cosz - sinx * siny * sinz)
+		- vector.getY() * cosx * sinz
+		+ vector.getZ() * (siny * cosz + sinx * cosy * sinz);
 
-	dest.x = vector.x * (cosy * cosz - sinx * siny * sinz)
-		- vector.y * cosx * sinz
-		+ vector.z * (siny * cosz + sinx * cosy * sinz);
+	float y = vector.getX() * (cosy * sinz + sinx * siny * cosz)
+		+ vector.getY() * cosx * cosz
+		+ vector.getZ() * (siny * sinz - sinx * cosy * cosz);
 
-	dest.y = vector.x * (cosy * sinz + sinx * siny * cosz)
-		+ vector.y * cosx * cosz
-		+ vector.z * (siny * sinz - sinx * cosy * cosz);
+	float z = vector.getX() * (-cosx* siny)
+		+ vector.getY() * sinx
+		+ vector.getZ() * cosx * cosy;
 
-	dest.z = vector.x * (-cosx* siny)
-		+ vector.y * sinx
-		+ vector.z * cosx * cosy;
-
-	return dest;
+	return math::Vector3(x,y,z);
 }
 
-void Tool::calNormal(const sys::Vector3& p1, const sys::Vector3& p2, const sys::Vector3& p3, sys::Vector3& normal)
+void Tool::calNormal(const math::Vector3& p1, const math::Vector3& p2, const math::Vector3& p3, math::Vector3& normal)
 {
-	sys::Vector3 vc1, vc2;
 	float a, b, c;
 	float r;
 
-	vc1.x = p2.x - p1.x; vc1.y = p2.y - p1.y; vc1.z = p2.z - p1.z;
-	vc2.x = p3.x - p1.x; vc2.y = p3.y - p1.y; vc2.z = p3.z - p1.z;
+	float x1 = p2.getX() - p1.getX(); 
+	float y1 = p2.getY() - p1.getY(); 
+	float z1 = p2.getZ() - p1.getZ();
 
-	a = vc1.y * vc2.z - vc2.y * vc1.z;
-	b = vc2.x * vc1.z - vc1.x * vc2.z;
-	c = vc1.x * vc2.y - vc2.x * vc1.y;
+	float x2 = p3.getX() - p1.getX(); 
+	float y2 = p3.getY() - p1.getY(); 
+	float z2 = p3.getZ() - p1.getZ();
+
+	a = y1 * z2 - y2 * z1;
+	b = x2 * z1 - x1 * z2;
+	c = x1 * y2 - x2 * y1;
 	r = sqrt(a * a + b* b + c * c);
 
-	normal.x = a / r;
-	normal.y = b / r;
-	normal.z = c / r;
+	assert(r != 0);
+
+	normal.set(a / r, b / r, c / r);
 }
 
-void Tool::calRect(const sys::Vector3& position, const sys::Volume& volume, const sys::Vector3& anchor, RectVertex& rectVertex)
+void Tool::calRect(const math::Vector3& position, const math::Volume& volume, const math::Vector3& anchor, RectVertex& rectVertex)
 {
 	float x = 0;
 	float y = 0;
 
 	// left down
-	x = position.x - volume.width * anchor.x;
-	y = position.y - volume.height * anchor.y;
-	rectVertex.leftDown = Tool::convertToOGLPoisition(x, y, position.z);
+	x = position.getX() - volume.getWidth() * anchor.getX();
+	y = position.getY() - volume.getHeight() * anchor.getY();
+	rectVertex.leftDown = Tool::convertToOGLPoisition(x, y, position.getZ());
 
 	// right down
-	x = position.x + volume.width * (1 - anchor.x);
-	y = position.y - volume.height * anchor.y;
-	rectVertex.rightDown = Tool::convertToOGLPoisition(x, y, position.z);
+	x = position.getX() + volume.getWidth() * (1 - anchor.getX());
+	y = position.getY() - volume.getHeight() * anchor.getY();
+	rectVertex.rightDown = Tool::convertToOGLPoisition(x, y, position.getZ());
 
 	// right up
-	x = position.x + volume.width * (1 - anchor.x);
-	y = position.y + volume.height * (1 - anchor.y);
-	rectVertex.rightUp = Tool::convertToOGLPoisition(x, y, position.z);
+	x = position.getX() + volume.getWidth() * (1 - anchor.getX());
+	y = position.getY() + volume.getHeight() * (1 - anchor.getY());
+	rectVertex.rightUp = Tool::convertToOGLPoisition(x, y, position.getZ());
 
 	// left up
-	x = position.x - volume.width * anchor.x;
-	y = position.y + volume.height * (1 - anchor.y);
-	rectVertex.leftUp = Tool::convertToOGLPoisition(x, y, position.z);
+	x = position.getX() - volume.getWidth() * anchor.getX();
+	y = position.getY() + volume.getHeight() * (1 - anchor.getY());
+	rectVertex.leftUp = Tool::convertToOGLPoisition(x, y, position.getZ());
 }
 
-void Tool::calRealRect(const sys::Vector3& position, const sys::Volume& volume, const sys::Vector3& anchor, RectVertex& rectVertex)
+void Tool::calRealRect(const math::Vector3& position, const math::Volume& volume, const math::Vector3& anchor, RectVertex& rectVertex)
 {
 	float x = 0;
 	float y = 0;
 
 	// left down
-	x = position.x - volume.width * anchor.x;
-	y = position.y - volume.height * anchor.y;
-	rectVertex.leftDown.x = x;
-	rectVertex.leftDown.y = y;
-	rectVertex.leftDown.z = position.z;
+	x = position.getX() - volume.getWidth() * anchor.getX();
+	y = position.getY() - volume.getHeight() * anchor.getY();
+	rectVertex.leftDown.setX(x);
+	rectVertex.leftDown.setY(y);
+	rectVertex.leftDown.setZ(position.getZ());
 
 	// right down
-	x = position.x + volume.width * (1 - anchor.x);
-	y = position.y - volume.height * anchor.y;
-	rectVertex.rightDown.x = x;
-	rectVertex.rightDown.y = y;
-	rectVertex.rightDown.z = position.z;
+	x = position.getX() + volume.getWidth() * (1 - anchor.getX());
+	y = position.getY() - volume.getHeight() * anchor.getY();
+	rectVertex.rightDown.setX(x);
+	rectVertex.rightDown.setY(y);
+	rectVertex.rightDown.setZ(position.getZ());
 
 	// right up
-	x = position.x + volume.width * (1 - anchor.x);
-	y = position.y + volume.height * (1 - anchor.y);
-	rectVertex.rightUp.x = x;
-	rectVertex.rightUp.y = y;
-	rectVertex.rightUp.z = position.z;
+	x = position.getX() + volume.getWidth() * (1 - anchor.getX());
+	y = position.getY() + volume.getHeight() * (1 - anchor.getY());
+	rectVertex.rightUp.setX(x);
+	rectVertex.rightUp.setY(y);
+	rectVertex.rightUp.setZ(position.getZ());
 
 	// left up
-	x = position.x - volume.width * anchor.x;
-	y = position.y + volume.height * (1 - anchor.y);
-	rectVertex.leftUp.x = x;
-	rectVertex.leftUp.y = y;
-	rectVertex.leftUp.z = position.z;
+	x = position.getX() - volume.getWidth() * anchor.getX();
+	y = position.getY() + volume.getHeight() * (1 - anchor.getY());
+	rectVertex.leftUp.setX(x);
+	rectVertex.leftUp.setY(y);
+	rectVertex.leftUp.setZ(position.getZ());
 }
 
-void Tool::calRealCube(const sys::Vector3& position, const sys::Volume& volume, const sys::Vector3& anchor, CubeVertex& cube)
+void Tool::calRealCube(const math::Vector3& position, const math::Volume& volume, const math::Vector3& anchor, CubeVertex& cube)
 {
-	sys::Vector3 point;
+	math::Vector3 point;
 
 	//------ front ------
 
 	// left down
-	point.x = position.x - volume.width * anchor.x;
-	point.y = position.y - volume.height * anchor.y;
-	point.z = position.z - volume.deep * anchor.z;
+	float x = position.getX() - volume.getWidth() * anchor.getX();
+	float y = position.getY() - volume.getHeight() * anchor.getY();
+	float z = position.getZ() - volume.getDeep() * anchor.getZ();
 
+	point = math::Vector3(x, y, z);
 	cube.front.leftDown = point;
 	cube.left.rightDown = point;
 	cube.bottom.leftUp = point;
 
 	// right down
-	point.x = position.x + volume.width * (1 - anchor.x);
-	point.y = position.y - volume.height * anchor.y;
-	point.z = position.z - volume.deep * anchor.z;
+	x = position.getX() + volume.getWidth() * (1 - anchor.getX());
+	y = position.getY() - volume.getHeight() * anchor.getY();
+	z = position.getZ() - volume.getDeep() * anchor.getZ();
 
+	point = math::Vector3(x, y, z);
 	cube.front.rightDown = point;
 	cube.right.leftDown = point;
 	cube.bottom.rightUp = point;
 
 	// right up
-	point.x = position.x + volume.width * (1 - anchor.x);
-	point.y = position.y + volume.height * (1 - anchor.y);
-	point.z = position.z - volume.deep * anchor.z;
+	x = position.getX() + volume.getWidth() * (1 - anchor.getX());
+	y = position.getY() + volume.getHeight() * (1 - anchor.getY());
+	z = position.getZ() - volume.getDeep() * anchor.getZ();
+
+	point = math::Vector3(x, y, z);
 	cube.front.rightUp = point;
 	cube.right.leftUp = point;
 	cube.top.rightDown = point;
 
 	// left up
-	point.x = position.x - volume.width * anchor.x;
-	point.y = position.y + volume.height * (1 - anchor.y);
-	point.z = position.z - volume.deep * anchor.z;
+	x = position.getX() - volume.getWidth() * anchor.getX();
+	y = position.getY() + volume.getHeight() * (1 - anchor.getY());
+	z = position.getZ() - volume.getDeep() * anchor.getZ();
+
+	point = math::Vector3(x, y, z);
 	cube.front.leftUp = point;
 	cube.left.rightUp = point;
 	cube.top.leftDown = point;
@@ -248,37 +281,41 @@ void Tool::calRealCube(const sys::Vector3& position, const sys::Volume& volume, 
 	//------ back ------
 
 	// left down
-	point.x = position.x - volume.width * anchor.x;
-	point.y = position.y - volume.height * anchor.y;
-	point.z = position.z + volume.deep * (1 - anchor.z);
+	x = position.getX() - volume.getWidth() * anchor.getX();
+	y = position.getY() - volume.getHeight() * anchor.getY();
+	z = position.getZ() + volume.getDeep() * (1 - anchor.getZ());
 
+	point = math::Vector3(x, y, z);
 	cube.back.rightDown = point;
 	cube.left.leftDown = point;
 	cube.bottom.leftDown = point;
 
 	// right down
-	point.x = position.x + volume.width * (1 - anchor.x);
-	point.y = position.y - volume.height * anchor.y;
-	point.z = position.z + volume.deep * (1 - anchor.z);
+	x = position.getX() + volume.getWidth() * (1 - anchor.getX());
+	y = position.getY() - volume.getHeight() * anchor.getY();
+	z = position.getZ() + volume.getDeep() * (1 - anchor.getZ());
 
+	point = math::Vector3(x, y, z);
 	cube.back.leftDown = point;
 	cube.right.rightDown = point;
 	cube.bottom.rightDown = point;
 
 	// right up
-	point.x = position.x + volume.width * (1 - anchor.x);
-	point.y = position.y + volume.height * (1 - anchor.y);
-	point.z = position.z + volume.deep * (1 - anchor.z);
+	x = position.getX() + volume.getWidth() * (1 - anchor.getX());
+	y = position.getY() + volume.getHeight() * (1 - anchor.getY());
+	z = position.getZ() + volume.getDeep() * (1 - anchor.getZ());
 
+	point = math::Vector3(x, y, z);
 	cube.back.leftUp = point;
 	cube.top.rightUp = point;
 	cube.right.rightUp = point;
 
 	// left up
-	point.x = position.x - volume.width * anchor.x;
-	point.y = position.y + volume.height * (1 - anchor.y);
-	point.z = position.z + volume.deep * (1 - anchor.z);
+	x = position.getX() - volume.getWidth() * anchor.getX();
+	y = position.getY() + volume.getHeight() * (1 - anchor.getY());
+	z = position.getZ() + volume.getDeep() * (1 - anchor.getZ());
 
+	point = math::Vector3(x, y, z);
 	cube.back.rightUp = point;
 	cube.left.leftUp = point;
 	cube.top.leftUp = point;

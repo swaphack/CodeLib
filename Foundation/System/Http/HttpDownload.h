@@ -7,7 +7,7 @@
 namespace sys
 {
 	// http下载回调
-	typedef void (Object::*downloadCallback)(int32 tag, const char* data, int32 size);
+	typedef void (Object::*downloadCallback)(int32_t tag, const char* data, int32_t size);
 
 	// http下载处理
 	typedef std::pair<Object*, downloadCallback> OnHttpDownloadCallback;
@@ -17,8 +17,8 @@ namespace sys
 	{
 		struct DownloadSlot
 		{
-			int32 id = 0;
-			int32 tag = 0;
+			int32_t id = 0;
+			int32_t tag = 0;
 			OnHttpDownloadCallback handler;
 			Client* client = nullptr;
 		};
@@ -34,22 +34,22 @@ namespace sys
 		@param callback 下载完成回调
 		@param tag 标示
 		*/
-		bool download(const char* url, int32 port, const char* filepath, OnHttpDownloadCallback callback, int32 tag);
+		bool download(const char* url, int32_t port, const char* filepath, OnHttpDownloadCallback callback, int32_t tag);
 
 		// 推送监听到的数据
-		void flushListenData(int32 id);
+		void flushListenData(int32_t id);
 	protected:
 		// 接收数据回调
-		void onRecvHandle(int32 id, DataQueue& data);
+		void onRecvHandle(int32_t id, DataQueue& data);
 		// 添加一个下载监听
-		void addListen(Client* client, OnHttpDownloadCallback callback, int32 tag);
+		void addListen(Client* client, OnHttpDownloadCallback callback, int32_t tag);
 		// 清空数据
 		void clear();
 	private:
 		// 下载数据
-		std::map<int32, StreamWriter*> _downloadDatas;
+		std::map<int32_t, StreamWriter*> _downloadDatas;
 
 		// 下载回调
-		std::map<int32, DownloadSlot > _downloadSlots;
+		std::map<int32_t, DownloadSlot > _downloadSlots;
 	};
 }

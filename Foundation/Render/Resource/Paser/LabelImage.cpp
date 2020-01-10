@@ -64,27 +64,27 @@ public:
 	void clear();
 protected:
 	// 获取字符数据
-	FT_CHAR_DATA* getCharData(ulong ch);
+	FT_CHAR_DATA* getCharData(uint64_t ch);
 	// 加载字符数据
-	FT_CHAR_DATA* loadChar(ulong ch, int fontSize);
+	FT_CHAR_DATA* loadChar(uint64_t ch, int fontSize);
 	// 初始化FT模块
 	void initFT(const char* filepath, int size);
 	// 是否FT模块
 	void disposeFT();
 private:
 	// 将数据写入流中
-	void writeStream(ulong ch, LabelStream* stream);
+	void writeStream(uint64_t ch, LabelStream* stream);
 private:
 	FT_Library    _library;
 	FT_Face       _face;
 	FT_Error      _error;
 	int			  _lowY;
 	int			  _fontSize;
-	static std::map<ulong, FT_CHAR_DATA> _datas;
+	static std::map<uint64_t, FT_CHAR_DATA> _datas;
 };
 
 //////////////////////////////////////////////////////////////////////////
-std::map<ulong, FT_CHAR_DATA> FT_LABEL::_datas = std::map<ulong, FT_CHAR_DATA>();
+std::map<uint64_t, FT_CHAR_DATA> FT_LABEL::_datas = std::map<uint64_t, FT_CHAR_DATA>();
 
 FT_LABEL::FT_LABEL()
 : _library(nullptr)
@@ -154,9 +154,9 @@ void FT_LABEL::clear()
 {
 }
 
-FT_CHAR_DATA* FT_LABEL::getCharData(ulong ch)
+FT_CHAR_DATA* FT_LABEL::getCharData(uint64_t ch)
 {
-	std::map<ulong, FT_CHAR_DATA>::iterator it = _datas.find(ch);
+	std::map<uint64_t, FT_CHAR_DATA>::iterator it = _datas.find(ch);
 	if (it == _datas.end())
 	{
 		return nullptr;
@@ -165,7 +165,7 @@ FT_CHAR_DATA* FT_LABEL::getCharData(ulong ch)
 	return &it->second;
 }
 
-FT_CHAR_DATA* FT_LABEL::loadChar(ulong ch, int fontSize)
+FT_CHAR_DATA* FT_LABEL::loadChar(uint64_t ch, int fontSize)
 {
 	FT_CHAR_DATA* data = getCharData(ch);
 	if (data != nullptr)
@@ -270,7 +270,7 @@ void FT_LABEL::disposeFT()
 	}
 }
 
-void FT_LABEL::writeStream(ulong ch, LabelStream* stream)
+void FT_LABEL::writeStream(uint64_t ch, LabelStream* stream)
 {
 	if (ch == '\n')
 	{
@@ -291,7 +291,7 @@ void FT_LABEL::writeStream(ulong ch, LabelStream* stream)
 	}
 
 	// 获取rgba数据
-	uint8* pBuf = (uint8*)sys::StreamHelper::mallocStream(width * RGBA_PIXEL_UNIT * height);
+	uint8_t* pBuf = (uint8_t*)sys::StreamHelper::mallocStream(width * RGBA_PIXEL_UNIT * height);
 	if (pBuf == nullptr)
 	{
 		return;
@@ -300,24 +300,24 @@ void FT_LABEL::writeStream(ulong ch, LabelStream* stream)
 	{
 		for (int i = 0; i < width; i++)
 		{
-			uint8 _vl = 0;
+			uint8_t _vl = 0;
 			if (data)
 			{
 				_vl = data->data[i + width*j];
 			}
 			if (_vl == 0)
 			{
-				pBuf[(4 * i + (height - j - 1) * width * RGBA_PIXEL_UNIT)] = (uint8)0;
-				pBuf[(4 * i + (height - j - 1) * width * RGBA_PIXEL_UNIT) + 1] = (uint8)0;
-				pBuf[(4 * i + (height - j - 1) * width * RGBA_PIXEL_UNIT) + 2] = (uint8)0;
-				pBuf[(4 * i + (height - j - 1) * width * RGBA_PIXEL_UNIT) + 3] = (uint8)0;
+				pBuf[(4 * i + (height - j - 1) * width * RGBA_PIXEL_UNIT)] = (uint8_t)0;
+				pBuf[(4 * i + (height - j - 1) * width * RGBA_PIXEL_UNIT) + 1] = (uint8_t)0;
+				pBuf[(4 * i + (height - j - 1) * width * RGBA_PIXEL_UNIT) + 2] = (uint8_t)0;
+				pBuf[(4 * i + (height - j - 1) * width * RGBA_PIXEL_UNIT) + 3] = (uint8_t)0;
 			}
 			else
 			{
-				pBuf[(4 * i + (height - j - 1) * width * RGBA_PIXEL_UNIT)] = (uint8)255;
-				pBuf[(4 * i + (height - j - 1) * width * RGBA_PIXEL_UNIT) + 1] = (uint8)255;
-				pBuf[(4 * i + (height - j - 1) * width * RGBA_PIXEL_UNIT) + 2] = (uint8)255;
-				pBuf[(4 * i + (height - j - 1) * width * RGBA_PIXEL_UNIT) + 3] = (uint8)_vl;
+				pBuf[(4 * i + (height - j - 1) * width * RGBA_PIXEL_UNIT)] = (uint8_t)255;
+				pBuf[(4 * i + (height - j - 1) * width * RGBA_PIXEL_UNIT) + 1] = (uint8_t)255;
+				pBuf[(4 * i + (height - j - 1) * width * RGBA_PIXEL_UNIT) + 2] = (uint8_t)255;
+				pBuf[(4 * i + (height - j - 1) * width * RGBA_PIXEL_UNIT) + 3] = (uint8_t)_vl;
 			}
 		}
 	}
@@ -519,8 +519,8 @@ void LabelImage::load(const TextDefine& textDefine)
 	}
 
 	int count = _stream->getWidth() * _stream->getHeigth();
-	uint8* destPixels = (uint8 *)malloc(sizeof(uint8)* count);
-	memcpy(destPixels, _stream->getData(), sizeof(uint8)* count);
+	uint8_t* destPixels = (uint8_t *)malloc(sizeof(uint8_t)* count);
+	memcpy(destPixels, _stream->getData(), sizeof(uint8_t)* count);
 
 	this->setPixels(destPixels);
 	this->setWidth(_stream->getWidth() / RGBA_PIXEL_UNIT);

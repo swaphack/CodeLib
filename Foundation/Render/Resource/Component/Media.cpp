@@ -40,12 +40,12 @@ void Media::setVideoFrame(mf_s frame)
 
 }
 
-uint32 Media::getHeight() const
+uint32_t Media::getHeight() const
 {
 	return _height;
 }
 
-uint32 Media::getWidth() const
+uint32_t Media::getWidth() const
 {
 	return _width;
 }
@@ -60,12 +60,12 @@ float Media::getTime() const
 	return _time;
 }
 
-void Media::setHeight(uint32 val)
+void Media::setHeight(uint32_t val)
 {
 	_height = val;
 }
 
-void Media::setWidth(uint32 val)
+void Media::setWidth(uint32_t val)
 {
 	_width = val;
 }

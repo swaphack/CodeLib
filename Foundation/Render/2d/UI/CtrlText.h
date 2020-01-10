@@ -51,9 +51,9 @@ namespace render
 		// 设置显示区域
 		void setDimensions(float width, float height);
 		// 设置显示区域
-		void setDimensions(const sys::Size& size);
+		void setDimensions(const math::Size& size);
 		// 获取显示区域
-		sys::Size getDimensions();
+		math::Size getDimensions();
 		// 设置颜色
 		void setColor(const sys::Color4B& color);
 	protected:

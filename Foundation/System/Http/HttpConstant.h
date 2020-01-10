@@ -222,7 +222,7 @@ namespace sys
 		//	通用网关接口 协议头字段，用来说明当前这个超文本传输协议回应的 状态 。普通的超文本传输协议回应，会使用单独的“状态行”（"Status-Line"）作为替代，这一点是在 RFC 7230 中定义的。
 		static const char* STATUS/* = "Status"*/;
 
-		//	A HSTS Policy informing the HTTP client how int64 to cache the HTTPS only policy and whether this applies to subdomains.
+		//	A HSTS Policy informing the HTTP client how int64_t to cache the HTTPS only policy and whether this applies to subdomains.
 		static const char* STRICT_TRANSPORT_SECURITY/* = "Strict-Transport-Security"*/;
 
 		//	The Trailer general field value indicates that the given set of header fields is present in the trailer of a message encoded with chunked transfer coding.

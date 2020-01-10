@@ -32,9 +32,9 @@ void TextLoader::parseAttributes()
 	std::string str;
 	float floatVal;
 	int intVal;
-	uint8 ucVal;
+	uint8_t ucVal;
 	BlendParam blend;
-	sys::Size size;
+	math::Size size;
 
 	LOAD_WDIGET_ATTRIBUTE(PROPERTY_COLOR, setColor, color);
 	LOAD_WDIGET_ATTRIBUTE(PROPERTY_OPACITY, setOpacity, ucVal);

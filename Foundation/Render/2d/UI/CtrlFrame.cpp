@@ -64,7 +64,7 @@ void CtrlFrame::setTextureWithRect(const Texture* texture)
 	_notify->addMark(ENP_TEXTURE_FRAME);
 }
 
-void CtrlFrame::setTexRect(const sys::Rect& rect)
+void CtrlFrame::setTexRect(const math::Rect& rect)
 {
 	_texFrame->setRect(rect);
 	setDirty(true);
@@ -135,11 +135,11 @@ void CtrlFrame::onTextureChange()
 		return;
 	}
 
-	sys::Size size = sys::Size(static_cast<float>(texture->getWidth()), static_cast<float>(texture->getHeight()));
+	math::Size size = math::Size(static_cast<float>(texture->getWidth()), static_cast<float>(texture->getHeight()));
 
 	if (isCounter())TextureTool::setTexture2DCounterCoords(&_texRect, size, _texFrame->getRect());
 	else TextureTool::setTexture2DCoords(&_texRect, size, _texFrame->getRect());
 
-	TextureTool::setTexture2DVertexts(&_texRect, sys::Vector3::Zero, _volume, _anchor);
+	TextureTool::setTexture2DVertexts(&_texRect, math::Vector3(), _volume, _anchor);
 	TextureTool::setTexture2DFlip(&_texRect, _bFlipX, _bFlipY);
 }

@@ -7,7 +7,7 @@ namespace render
 	struct SpeakerSettings
 	{
 		FMOD_SPEAKER speaker = FMOD_SPEAKER_FRONT_CENTER;
-		sys::Vector2 pos;
+		math::Vector2 pos;
 		bool active = false;
 
 	};

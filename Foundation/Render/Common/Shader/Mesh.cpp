@@ -19,13 +19,13 @@ void Mesh::setVertexes(int count, float* vertexes)
 	float* vertors = (float*)malloc(count * sizeof(float));
 
 	int size = 3;
-	const sys::Volume& volume = Tool::getGLViewSize();
+	const math::Volume& volume = Tool::getGLViewSize();
 
 	for (int i = 0; i < count / size; i++)
 	{
-		vertors[size * i] = vertexes[size * i] / volume.width;
-		vertors[size * i + 1] = vertexes[size * i + 1] / volume.height;
-		vertors[size * i + 2] = vertexes[size * i + 2] / volume.deep;
+		vertors[size * i] = vertexes[size * i] / volume.getWidth();
+		vertors[size * i + 1] = vertexes[size * i + 1] / volume.getHeight();
+		vertors[size * i + 2] = vertexes[size * i + 2] / volume.getDeep();
 	}
 
 	_vertexes.init(count, vertors, size);
@@ -46,7 +46,7 @@ void Mesh::setColors(int count, float* colors, int size)
 
 	for (int i = 0; i < count; i++)
 	{
-		vertors[i] = colors[i] / sys::COLOR_FLOAT_VALUE;
+		vertors[i] = colors[i] / COLOR_FLOAT_VALUE;
 	}
 
 	_colors.init(count, vertors, size);
@@ -59,7 +59,7 @@ void Mesh::setUV(int count, float* texCoords, int size)
 	_uvs.init(count, texCoords, size);
 }
 
-void Mesh::setIndices(int count, uint16* indices)
+void Mesh::setIndices(int count, uint16_t* indices)
 {
 	_indices.init(count, indices);
 }
@@ -74,7 +74,7 @@ int Mesh::getTriangleCount()
 	return _indices.count / 3;
 }
 
-void Mesh::apply(int textureID, const sys::Color4B& color, uint8 opacity, const BlendParam& blend)
+void Mesh::apply(int textureID, const sys::Color4B& color, uint8_t opacity, const BlendParam& blend)
 {
 	if (_vertexes.value == nullptr 
 		|| _normals.value == nullptr

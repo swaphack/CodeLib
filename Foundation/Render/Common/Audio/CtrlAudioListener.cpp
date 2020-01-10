@@ -8,8 +8,8 @@ int CtrlAudioListener::s_ListenerCount = 0;
 CtrlAudioListener::CtrlAudioListener()
 :_listenerID(0)
 {
-	_listenerBody.forward = sys::Vector3(0, 0, 1);
-	_listenerBody.up = sys::Vector3(0, 1, 0);
+	_listenerBody.forward = math::Vector3(0, 0, 1);
+	_listenerBody.up = math::Vector3(0, 1, 0);
 }
 
 CtrlAudioListener::~CtrlAudioListener()
@@ -49,35 +49,35 @@ int CtrlAudioListener::getListenerID()
 	return _listenerID;
 }
 
-void CtrlAudioListener::setVelocity(const sys::Vector3& velocity)
+void CtrlAudioListener::setVelocity(const math::Vector3& velocity)
 {
 	_listenerBody.velocity = velocity;
 	onListenerChange();
 }
 
-const sys::Vector3& CtrlAudioListener::getVelocity()
+const math::Vector3& CtrlAudioListener::getVelocity()
 {
 	return _listenerBody.velocity;
 }
 
-void CtrlAudioListener::setForward(const sys::Vector3& forward)
+void CtrlAudioListener::setForward(const math::Vector3& forward)
 {
 	_listenerBody.forward = forward;
 	onListenerChange();
 }
 
-const sys::Vector3& CtrlAudioListener::getForward()
+const math::Vector3& CtrlAudioListener::getForward()
 {
 	return _listenerBody.forward;
 }
 
-void CtrlAudioListener::setUp(const sys::Vector3& up)
+void CtrlAudioListener::setUp(const math::Vector3& up)
 {
 	_listenerBody.up = up;
 	onListenerChange();
 }
 
-const sys::Vector3& CtrlAudioListener::getUp()
+const math::Vector3& CtrlAudioListener::getUp()
 {
 	return _listenerBody.up;
 }

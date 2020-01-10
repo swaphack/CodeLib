@@ -20,8 +20,8 @@ namespace sys
 		void removeParam(const std::string& param);
 		void removeAllParams();
 
-		int32 getParamsCount();
-		std::string item(int32 index);
+		int32_t getParamsCount();
+		std::string item(int32_t index);
 	private:
 		// ¹Ø¼ü×Ö
 		std::string _key;

@@ -96,18 +96,18 @@ Layout* Display::getLayout()
 	return m_pLayout;
 }
 
-void Display::onViewSizeChanged(const sys::Size& inputSize)
+void Display::onViewSizeChanged(const math::Size& inputSize)
 {
 	if (m_pLayout == nullptr)
 	{
 		return;
 	}
 
-	sys::Rect innerItem;
-	Layout::calLayoutPosition(m_pLayout, m_sViewSize, inputSize, innerItem.x, innerItem.y);
-	Layout::calLayoutSize(m_pLayout, m_sViewSize, inputSize, innerItem.width, innerItem.height);
+	float x, y, w, h;
+	Layout::calLayoutPosition(m_pLayout, m_sViewSize, inputSize, x, y);
+	Layout::calLayoutSize(m_pLayout, m_sViewSize, inputSize, w, h);
 
-	m_pLayout->resize(innerItem);
+	m_pLayout->resize(math::Rect(x,y,w,h));
 }
 
 bool Display::loadFile()
@@ -154,7 +154,7 @@ void Display::initText()
 
 void Display::autoResize()
 {
-	sys::Size viewSize(render::Tool::getGLViewWidth(), render::Tool::getGLViewHeight());
+	math::Size viewSize(render::Tool::getGLViewWidth(), render::Tool::getGLViewHeight());
 
 	this->onViewSizeChanged(viewSize);
 }

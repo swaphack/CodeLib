@@ -2,102 +2,61 @@
 #include <cstdint>
 #include <string>
 
+#include "Basic/Array2D.h"
+#include "Vector.h"
+
 namespace math
 {
 	/**
 	*	行列式
 	*/
-	struct Determinant
+	struct Determinant : public Array2D<float>
 	{
-	protected:
-		// 单元值
-		float* _values = nullptr;
-		// 列数
-		uint32_t _width = 0;
 	public:
 		Determinant();
-		Determinant(uint32_t w);
-		Determinant(float* val, uint32_t w);
+		Determinant(int32_t order);
+		Determinant(float* val, int32_t order);
 		Determinant(const Determinant& det);
-		~Determinant();
+		virtual ~Determinant();
 	public:
 		/**
-		*	列数
+		*	阶数
 		*/
-		uint32_t getWidth();
+		int32_t getOrder() const;
 		/**
 		*	重置
 		*/
-		void reset(uint32_t w);
+		void reset(int32_t order);
 		/**
-		*	重置
+		*	设置
 		*/
-		void reset();
+		void set(float* val, int32_t order);
+	public:
 		/**
-		*	获取指定位置的数据
+		*	行列式相乘
 		*/
-		float getValue(uint32_t index) const;
+		Determinant operator*(const Determinant& det);
+	public:
 		/**
-		*	获取h行，w列的数据
+		*	获取转置
 		*/
-		float getValue(uint32_t w, uint32_t h) const;
+		Determinant transpose();
 		/**
-		*	设置h行，w列的数据
+		*	相乘
 		*/
-		void setValue(uint32_t w, uint32_t h, float value);
+		Determinant mul(float k, int32_t row);
 		/**
-		*	设置指定位置的数据
+		*	相加
 		*/
-		void setValue(uint32_t index, float value);
-		/**
-		*	复制矩阵元素
-		*/
-		Determinant& operator=(const Determinant& mat);
-		/**
-		*	获取指定位置的数据
-		*/
-		float& operator[](uint32_t index);
-		/**
-		*	获取指定位置的数据
-		*/
-		float operator[](uint32_t index) const;
-
-		/**
-		*	矩阵相加
-		*/
-		virtual Determinant operator+(const Determinant& mat);
-		/**
-		*	矩阵相减
-		*/
-		virtual Determinant operator-(const Determinant& mat);
-		/**
-		*	矩阵相乘
-		*/
-		virtual Determinant operator*(const Determinant& mat);
-		/**
-		*	矩阵相加
-		*/
-		virtual Determinant& operator+=(const Determinant& mat);
-		/**
-		*	矩阵相减
-		*/
-		virtual Determinant& operator-=(const Determinant& mat);
-		/**
-		*	矩阵扩展系数
-		*/
-		virtual Determinant& operator*=(float k);
-		/**
-		* 转成字符串
-		*/
-		std::string toString();
+		Determinant add(const Determinant& det, int32_t row);
 		/**
 		*	值
 		*/
-		float getValue();
-	private:
+		float getMagnitude() const;
+	public:
 		/**
-		*	清除
+		*	获取逆序数
 		*/
-		void dispose();
+		static int getInverseNumber(float* data, int len);
 	};
 }

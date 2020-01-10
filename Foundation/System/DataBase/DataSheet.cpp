@@ -33,7 +33,7 @@ IDataRecord* DataSheet::create()
 	return record;
 }
 
-const IDataRecord* DataSheet::operator[](int32 index)
+const IDataRecord* DataSheet::operator[](int32_t index)
 {
 	if (index < 0 || index >= count())
 	{
@@ -59,7 +59,7 @@ const IDataRecord* DataSheet::getRecord(const std::string& key)
 }
 
 
-int32 DataSheet::count()
+int32_t DataSheet::count()
 {
 	return _records.size();
 }

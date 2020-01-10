@@ -75,23 +75,23 @@ namespace ui
 		/**
 		*	当窗口大小发生改变时
 		*/
-		virtual void resize(const sys::Size& size);
+		virtual void resize(const math::Size& size);
 		/**
 		*	当窗口位置和大小发生改变时
 		*/
-		virtual void resize(const sys::Vector2& position, const sys::Size& size);
+		virtual void resize(const math::Vector2& position, const math::Size& size);
 		/**
 		*	当窗口位置和大小发生改变时
 		*/
-		virtual void resize(const sys::Rect& rect);
+		virtual void resize(const math::Rect& rect);
 		/**
 		*	获取布局的最小面积
 		*/
-		virtual sys::Size getLayoutMinSize();
+		virtual math::Size getLayoutMinSize();
 		/**
 		*	获取布局的最大面积
 		*/
-		virtual sys::Size getLayoutMaxSize();
+		virtual math::Size getLayoutMaxSize();
 		/**
 		*	复制对象
 		*/
@@ -100,17 +100,17 @@ namespace ui
 		/**
 		*	获取布局内部的最小面积
 		*/
-		virtual sys::Size getLayoutInnerMinSize();
+		virtual math::Size getLayoutInnerMinSize();
 		/**
 		*	获取布局内部的最大面积
 		*/
-		virtual sys::Size getLayoutInnerMaxSize();
+		virtual math::Size getLayoutInnerMaxSize();
 		/**
 		*	布局内部大小改变
 		*	包含固定大小和百分比两种情况
 		*	先计算固定大小的值，再计算百分比的值
 		*/
-		virtual void onLayoutSizeChanged(const sys::Size& innerSize);
+		virtual void onLayoutSizeChanged(const math::Size& innerSize);
 		/**
 		*	计算布局项宽度
 		*/
@@ -138,11 +138,11 @@ namespace ui
 		/**
 		*	获取布局内部的最小面积
 		*/
-		virtual sys::Size getLayoutInnerMinSize();
+		virtual math::Size getLayoutInnerMinSize();
 		/**
 		*	获取布局内部的最大面积
 		*/
-		virtual sys::Size getLayoutInnerMaxSize();
+		virtual math::Size getLayoutInnerMaxSize();
 	};
 
 	/** 
@@ -157,11 +157,11 @@ namespace ui
 		/**
 		*	获取布局的最小面积
 		*/
-		virtual sys::Size getLayoutInnerMinSize();
+		virtual math::Size getLayoutInnerMinSize();
 		/**
 		*	获取布局的最大面积
 		*/
-		virtual sys::Size getLayoutInnerMaxSize();
+		virtual math::Size getLayoutInnerMaxSize();
 	};
 
 	// 格子布局
@@ -174,10 +174,10 @@ namespace ui
 		/**
 		*	获取布局的最小面积
 		*/
-		virtual sys::Size getLayoutInnerMinSize();
+		virtual math::Size getLayoutInnerMinSize();
 		/**
 		*	获取布局的最大面积
 		*/
-		virtual sys::Size getLayoutInnerMaxSize();
+		virtual math::Size getLayoutInnerMaxSize();
 	};
 }

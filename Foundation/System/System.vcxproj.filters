@@ -28,9 +28,6 @@
     <Filter Include="Platform\Windows">
       <UniqueIdentifier>{b42468cb-6164-46c2-aae3-706b8cb9a770}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Math">
-      <UniqueIdentifier>{ff9f9eca-de1e-4109-a1d9-7bba7962d911}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Type">
       <UniqueIdentifier>{6a833bb5-08b6-4839-a92c-20e9177ca8ba}</UniqueIdentifier>
     </Filter>
@@ -55,12 +52,6 @@
     <Filter Include="Process">
       <UniqueIdentifier>{c2c30974-8279-4d1b-aeab-67a2028489f7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Geometry">
-      <UniqueIdentifier>{65982d65-f080-4799-92c1-6af8eb3206d1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Collider">
-      <UniqueIdentifier>{e71cf1cf-f2c8-47b0-9fb4-30b22c1ccbfe}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Text">
       <UniqueIdentifier>{0249e361-7a0f-46ab-84bf-a679cb642ff6}</UniqueIdentifier>
     </Filter>
@@ -72,6 +63,9 @@
     </Filter>
     <Filter Include="CSS">
       <UniqueIdentifier>{9295c754-b3a8-4f70-b9c4-303ddfde4ee9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Image">
+      <UniqueIdentifier>{baaf037b-f34b-4a72-a6db-b4382e0311a7}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -214,31 +208,10 @@
     <ClInclude Include="Base\Platform.h">
       <Filter>Base</Filter>
     </ClInclude>
-    <ClInclude Include="Math\macros.h">
-      <Filter>Math</Filter>
-    </ClInclude>
-    <ClInclude Include="Math\import.h">
-      <Filter>Math</Filter>
-    </ClInclude>
-    <ClInclude Include="Math\Volume.h">
-      <Filter>Math</Filter>
-    </ClInclude>
-    <ClInclude Include="Math\Color.h">
-      <Filter>Math</Filter>
-    </ClInclude>
-    <ClInclude Include="Math\Rect.h">
-      <Filter>Math</Filter>
-    </ClInclude>
-    <ClInclude Include="Math\Size.h">
-      <Filter>Math</Filter>
-    </ClInclude>
     <ClInclude Include="Base\Time.h">
       <Filter>Base</Filter>
     </ClInclude>
     <ClInclude Include="Type\String.h">
-      <Filter>Type</Filter>
-    </ClInclude>
-    <ClInclude Include="Type\Number.h">
       <Filter>Type</Filter>
     </ClInclude>
     <ClInclude Include="Device\KeyBoard.h">
@@ -249,9 +222,6 @@
     </ClInclude>
     <ClInclude Include="Stream\StringStream.h">
       <Filter>Stream</Filter>
-    </ClInclude>
-    <ClInclude Include="Math\Equation.h">
-      <Filter>Math</Filter>
     </ClInclude>
     <ClInclude Include="Net\DNS.h">
       <Filter>Net</Filter>
@@ -376,51 +346,6 @@
     <ClInclude Include="DataBase\IDBString.h">
       <Filter>DataBase</Filter>
     </ClInclude>
-    <ClInclude Include="Geometry\macros.h">
-      <Filter>Geometry</Filter>
-    </ClInclude>
-    <ClInclude Include="Geometry\import.h">
-      <Filter>Geometry</Filter>
-    </ClInclude>
-    <ClInclude Include="Collider\macros.h">
-      <Filter>Collider</Filter>
-    </ClInclude>
-    <ClInclude Include="Collider\import.h">
-      <Filter>Collider</Filter>
-    </ClInclude>
-    <ClInclude Include="Collider\AABB.h">
-      <Filter>Collider</Filter>
-    </ClInclude>
-    <ClInclude Include="Collider\OBB.h">
-      <Filter>Collider</Filter>
-    </ClInclude>
-    <ClInclude Include="Geometry\Sphere.h">
-      <Filter>Geometry</Filter>
-    </ClInclude>
-    <ClInclude Include="Geometry\Circle.h">
-      <Filter>Geometry</Filter>
-    </ClInclude>
-    <ClInclude Include="Geometry\Triangle.h">
-      <Filter>Geometry</Filter>
-    </ClInclude>
-    <ClInclude Include="Geometry\Surface.h">
-      <Filter>Geometry</Filter>
-    </ClInclude>
-    <ClInclude Include="Geometry\Line3.h">
-      <Filter>Geometry</Filter>
-    </ClInclude>
-    <ClInclude Include="Geometry\Line2.h">
-      <Filter>Geometry</Filter>
-    </ClInclude>
-    <ClInclude Include="Geometry\Polyhedron.h">
-      <Filter>Geometry</Filter>
-    </ClInclude>
-    <ClInclude Include="Geometry\Polygon.h">
-      <Filter>Geometry</Filter>
-    </ClInclude>
-    <ClInclude Include="Collider\Box.h">
-      <Filter>Collider</Filter>
-    </ClInclude>
     <ClInclude Include="Text\IBlockParser.h">
       <Filter>Text</Filter>
     </ClInclude>
@@ -457,9 +382,6 @@
     <ClInclude Include="Device\IConsoleImpl.h">
       <Filter>Device</Filter>
     </ClInclude>
-    <ClInclude Include="Math\Range.h">
-      <Filter>Math</Filter>
-    </ClInclude>
     <ClInclude Include="Command\import.h">
       <Filter>Command</Filter>
     </ClInclude>
@@ -492,6 +414,12 @@
     </ClInclude>
     <ClInclude Include="CSS\Margin.h">
       <Filter>CSS</Filter>
+    </ClInclude>
+    <ClInclude Include="Image\Color.h">
+      <Filter>Image</Filter>
+    </ClInclude>
+    <ClInclude Include="Image\import.h">
+      <Filter>Image</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -663,33 +591,6 @@
     <ClCompile Include="DataBase\DataRecord.cpp">
       <Filter>DataBase</Filter>
     </ClCompile>
-    <ClCompile Include="Math\Color.cpp">
-      <Filter>Math</Filter>
-    </ClCompile>
-    <ClCompile Include="Collider\AABB.cpp">
-      <Filter>Collider</Filter>
-    </ClCompile>
-    <ClCompile Include="Collider\OBB.cpp">
-      <Filter>Collider</Filter>
-    </ClCompile>
-    <ClCompile Include="Geometry\Polyhedron.cpp">
-      <Filter>Geometry</Filter>
-    </ClCompile>
-    <ClCompile Include="Geometry\Surface.cpp">
-      <Filter>Geometry</Filter>
-    </ClCompile>
-    <ClCompile Include="Geometry\Line3.cpp">
-      <Filter>Geometry</Filter>
-    </ClCompile>
-    <ClCompile Include="Geometry\Line2.cpp">
-      <Filter>Geometry</Filter>
-    </ClCompile>
-    <ClCompile Include="Geometry\Polygon.cpp">
-      <Filter>Geometry</Filter>
-    </ClCompile>
-    <ClCompile Include="Collider\Box.cpp">
-      <Filter>Collider</Filter>
-    </ClCompile>
     <ClCompile Include="Text\IBlockParser.cpp">
       <Filter>Text</Filter>
     </ClCompile>
@@ -728,6 +629,12 @@
     </ClCompile>
     <ClCompile Include="Type\Bit.cpp">
       <Filter>Type</Filter>
+    </ClCompile>
+    <ClCompile Include="Image\Color.cpp">
+      <Filter>Image</Filter>
+    </ClCompile>
+    <ClCompile Include="CSS\Margin.cpp">
+      <Filter>CSS</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

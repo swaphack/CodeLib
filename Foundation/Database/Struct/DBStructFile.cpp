@@ -56,7 +56,7 @@ void DBStructFile::createStructCPPFile( const char* filename, const std::map<std
 		createStructStream(&iter->second, writer);
 		iter++;
 	}
-	int64 writtenSize = 0;
+	int64_t writtenSize = 0;
 	File::write(filename, writer.getData(), writer.getLength(), writtenSize);
 }
 
@@ -71,13 +71,13 @@ void DBStructFile::readTableStruct( const char* filename, std::map<std::string, 
 	DBFileReader reader;
 	reader.load(filename);
 	
-	uint32 count = reader.readUInt32();
+	uint32_t count = reader.readUInt32();
 	for (int i = 0; i < count; i++)
 	{
 		DBTable dbTable;
 		dbTable.setName(reader.readDBString().c_str());
 
-		uint32 size = reader.readInt32();
+		uint32_t size = reader.readInt32();
 		for (int j = 0; j < size; j++)
 		{
 			std::string key = reader.readDBString();
@@ -132,7 +132,7 @@ void DBStructFile::writeTableStruct( const char* filename, const std::map<std::s
 		iter++;
 	}
 
-	int64 writtenSize = 0;
+	int64_t writtenSize = 0;
 	File::write(filename, writer.getData(), writer.getLength(), writtenSize);
 }
 //////////////////////////////////////////////////////////////////////////

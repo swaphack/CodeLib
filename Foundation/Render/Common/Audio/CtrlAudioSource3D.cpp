@@ -46,19 +46,19 @@ Attribute3DSettings CtrlAudioSource3D::get3DAttributes()
 	return _3dSettings;
 }
 
-void CtrlAudioSource3D::set3DMinMaxDistance(const sys::Range& distance)
+void CtrlAudioSource3D::set3DMinMaxDistance(const math::Range& distance)
 {
 	AUDIO_SET_FUNC(_channel, set3DMinMaxDistance, distance.min, distance.max);
 }
 
-sys::Range CtrlAudioSource3D::get3DMinMaxDistance()
+math::Range CtrlAudioSource3D::get3DMinMaxDistance()
 {
 	float min;
 	float max;
 
 	AUDIO_DO_FUNC(_channel, get3DMinMaxDistance, &min, &max);
 
-	sys::Range range;
+	math::Range range;
 	range.min = min;
 	range.max = max;
 
@@ -82,25 +82,25 @@ Cone3DSettings CtrlAudioSource3D::get3DConeSettings()
 	return setting;
 }
 
-void CtrlAudioSource3D::set3DConeOrientation(const sys::Vector3& orientation)
+void CtrlAudioSource3D::set3DConeOrientation(const math::Vector3& orientation)
 {
 	FMOD_VECTOR vector;
 	ConvertToFMODVector(orientation, vector);
 	AUDIO_SET_FUNC(_channel, set3DConeOrientation, &vector);
 }
 
-sys::Vector3 CtrlAudioSource3D::get3DConeOrientation()
+math::Vector3 CtrlAudioSource3D::get3DConeOrientation()
 {
 	FMOD_VECTOR vector;
 	AUDIO_DO_FUNC(_channel, get3DConeOrientation, &vector);
 
-	sys::Vector3 dest;
+	math::Vector3 dest;
 	ConvertToSysVector(vector, dest);
 
 	return dest;
 }
 
-void CtrlAudioSource3D::set3DCustomRolloff(const std::vector<sys::Vector3>& points)
+void CtrlAudioSource3D::set3DCustomRolloff(const std::vector<math::Vector3>& points)
 {
 	int count = points.size();
 	if (count <= 0)
@@ -119,17 +119,17 @@ void CtrlAudioSource3D::set3DCustomRolloff(const std::vector<sys::Vector3>& poin
 	delete pVector;
 }
 
-std::vector<sys::Vector3> CtrlAudioSource3D::get3DCustomRolloff()
+std::vector<math::Vector3> CtrlAudioSource3D::get3DCustomRolloff()
 {
 	FMOD_VECTOR* pVector;
 	int count;
 
 	AUDIO_DO_FUNC(_channel, get3DCustomRolloff, &pVector, &count);
 
-	std::vector<sys::Vector3> data;
+	std::vector<math::Vector3> data;
 	for (int i = 0; i < count; i++)
 	{
-		sys::Vector3 dest;
+		math::Vector3 dest;
 		ConvertToSysVector(pVector[i], dest);
 		data.push_back(dest);
 	}
@@ -192,12 +192,12 @@ Distance3DFilterSettings CtrlAudioSource3D::get3DDistanceFilter()
 	return setting;
 }
 
-void CtrlAudioSource3D::setVelocity(const sys::Vector3& velocity)
+void CtrlAudioSource3D::setVelocity(const math::Vector3& velocity)
 {
 	_3dSettings.velocity = velocity;
 }
 
-const sys::Vector3& CtrlAudioSource3D::getVelocity()
+const math::Vector3& CtrlAudioSource3D::getVelocity()
 {
 	return _3dSettings.velocity;
 }

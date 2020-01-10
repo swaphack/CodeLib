@@ -21,6 +21,6 @@ namespace slg
 		int getDeep();
 	protected:
 	private:
-		sys::Volume _volume;
+		math::Volume _volume;
 	};
 }

@@ -25,7 +25,7 @@ void ImageLoader::parseAttributes()
 	sys::Color4B color;
 	std::string str;
 	bool boolVal;
-	uint8 ucVal;
+	uint8_t ucVal;
 	BlendParam blend;
 
 	LOAD_WDIGET_ATTRIBUTE(PROPERTY_COLOR, setColor, color);

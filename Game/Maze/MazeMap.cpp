@@ -25,7 +25,7 @@ void MazeMap::flush(Maze* maze)
 
 	this->removeAllChildren();
 
-	sys::Size cellSize;
+	math::Size cellSize;
 	cellSize.width = this->getVolume().width / (maze->getSize().width - 1);
 	cellSize.height = this->getVolume().height / (maze->getSize().height - 1);
 
@@ -55,14 +55,14 @@ bool MazeDrawNode::init()
 	return render::Node::init();
 }
 
-void MazeDrawNode::setData(MazeNode* data, const sys::Size& cellSize)
+void MazeDrawNode::setData(MazeNode* data, const math::Size& cellSize)
 {
 	if (data == nullptr)
 	{
 		return;
 	}
 
-	sys::Vector2 pos;
+	math::Vector2 pos;
 	pos.x = data->pos.x * cellSize.width;
 	pos.y = data->pos.y * cellSize.height;
 
@@ -91,7 +91,7 @@ void MazeDrawNode::setData(MazeNode* data, const sys::Size& cellSize)
 			pDrawNode->setWidth(cellSize.width);
 			pDrawNode->setColor(sys::Color3B(0, 255, 255));
 
-			sys::Vector2 point;
+			math::Vector2 point;
 			pDrawNode->appendPoint(point);
 
 			point.x = ((*cit)->pos.x - data->pos.x) * cellSize.width;

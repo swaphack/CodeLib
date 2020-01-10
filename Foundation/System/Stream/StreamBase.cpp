@@ -30,7 +30,7 @@ const char* StreamBase::getData() const
 	return _data;
 }
 
-int32 StreamBase::getLength() const
+int32_t StreamBase::getLength() const
 {
 	return _length;
 }
@@ -42,7 +42,7 @@ void StreamBase::freeStream()
 	_length = 0;
 }
 
-void StreamBase::setLength( int32 length )
+void StreamBase::setLength( int32_t length )
 {
 	_length = length;
 }
@@ -75,7 +75,7 @@ const char* StreamBaseRef::getData() const
 	return _data;
 }
 
-int32 StreamBaseRef::getLength() const
+int32_t StreamBaseRef::getLength() const
 {
 	return _length;
 }
@@ -87,7 +87,7 @@ void StreamBaseRef::freeStream()
 	_length = 0;
 }
 
-void StreamBaseRef::setLength(int32 length)
+void StreamBaseRef::setLength(int32_t length)
 {
 	_length = length;
 }

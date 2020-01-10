@@ -29,14 +29,14 @@ void DeviceProxy::onMouseButtonHandler(MouseKey key, ButtonStatus type, float x,
 		return;
 	}
 
-	sys::Volume size = Tool::getGLViewSize();
+	math::Volume size = Tool::getGLViewSize();
 	if (type == EBS_BUTTON_DOWN)
 	{
-		_touchManager->onTouchBegan(x, size.height - y);
+		_touchManager->onTouchBegan(x, size.getHeight() - y);
 	}
 	else if (type == EBS_BUTTON_UP)
 	{
-		_touchManager->onTouchEnded(x, size.height - y);
+		_touchManager->onTouchEnded(x, size.getHeight() - y);
 	}
 }
 
@@ -47,8 +47,8 @@ void DeviceProxy::onMouseMoveHandler(float x, float y)
 		return;
 	}
 
-	sys::Volume size = Tool::getGLViewSize();
-	_touchManager->onTouchMoved(x, size.height - y);
+	math::Volume size = Tool::getGLViewSize();
+	_touchManager->onTouchMoved(x, size.getHeight() - y);
 }
 
 void DeviceProxy::onKeyBoardButtonHandler(sys::BoardKey key, sys::ButtonStatus type)
@@ -94,7 +94,7 @@ bool GLFrame::init()
 		return false;
 	}
 
-	uint32 PixelFormat = 0;
+	uint32_t PixelFormat = 0;
 	static PIXELFORMATDESCRIPTOR pfd =	// /pfd 告诉窗使用的像素格式
 	{
 		sizeof(PIXELFORMATDESCRIPTOR),				// 上述格式描述符的大小

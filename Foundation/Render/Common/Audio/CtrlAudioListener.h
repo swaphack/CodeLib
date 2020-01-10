@@ -15,14 +15,14 @@ namespace render
 		virtual bool init();
 		int getListenerID();
 
-		void setVelocity(const sys::Vector3& velocity);
-		const sys::Vector3& getVelocity();
+		void setVelocity(const math::Vector3& velocity);
+		const math::Vector3& getVelocity();
 
-		void setForward(const sys::Vector3& forward);
-		const sys::Vector3& getForward();
+		void setForward(const math::Vector3& forward);
+		const math::Vector3& getForward();
 
-		void setUp(const sys::Vector3& up);
-		const sys::Vector3& getUp();
+		void setUp(const math::Vector3& up);
+		const math::Vector3& getUp();
 	protected:
 		void onListenerChange();
 	private:

@@ -7,27 +7,27 @@ namespace sys
 	class Hash
 	{
 	public:
-		static uint32 getSDBMHash(char *str);
+		static uint32_t getSDBMHash(char *str);
 
 		// RS Hash Function
-		static uint32 getRSHash(char *str);
+		static uint32_t getRSHash(char *str);
 
 		// JS Hash Function
-		static uint32 getJSHash(char *str);
+		static uint32_t getJSHash(char *str);
 
 		// P. J. Weinberger Hash Function
-		static uint32 getPJWHash(char *str);
+		static uint32_t getPJWHash(char *str);
 
 		// ELF Hash Function
-		static uint32 getELFHash(char *str);
+		static uint32_t getELFHash(char *str);
 
 		// BKDR Hash Function
-		static uint32 getBKDRHash(char *str);
+		static uint32_t getBKDRHash(char *str);
 
 		// DJB Hash Function
-		static uint32 getDJBHash(char *str);
+		static uint32_t getDJBHash(char *str);
 
 		// AP Hash Function
-		static uint32 getAPHash(char *str);
+		static uint32_t getAPHash(char *str);
 	};
 }

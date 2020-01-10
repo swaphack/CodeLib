@@ -26,7 +26,7 @@ NodeLoader::~NodeLoader()
 void NodeLoader::parseAttributes()
 {
 	std::string name;
-	sys::Rect rect;
+	math::Rect rect;
 	sys::Color4B color;
 	bool visible;
 	int anchor;

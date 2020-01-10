@@ -45,27 +45,25 @@ void DrawNode::initSelf()
 	Node::initSelf();
 }
 
-void DrawNode::appendPoint(const sys::Vector3& point)
+void DrawNode::appendPoint(const math::Vector3& point)
 {
-	sys::Vector3 pos;
+	math::Vector3 pos;
 	Tool::convertToOGLPoisition(point, pos);
 	_points.push_back(pos);
 }
 
-void DrawNode::appendPoint(const sys::Vector2& point)
+void DrawNode::appendPoint(const math::Vector2& point)
 {
-	sys::Vector3 temp;
-	temp.x = point.x;
-	temp.y = point.y;
+	math::Vector3 temp = point;
 	this->appendPoint(temp);
 }
 
-void DrawNode::removePoint(const sys::Vector3& point)
+void DrawNode::removePoint(const math::Vector3& point)
 {
-	sys::Vector3 pos;
+	math::Vector3 pos;
 	Tool::convertToOGLPoisition(point, pos);
 
-	std::vector<sys::Vector3>::iterator it = _points.begin();
+	std::vector<math::Vector3>::iterator it = _points.begin();
 	while (it != _points.end())
 	{
 		if ((*it) == pos)
@@ -77,11 +75,9 @@ void DrawNode::removePoint(const sys::Vector3& point)
 	}
 }
 
-void DrawNode::removePoint(const sys::Vector2& point)
+void DrawNode::removePoint(const math::Vector2& point)
 {
-	sys::Vector3 temp;
-	temp.x = point.x;
-	temp.y = point.y;
+	math::Vector3 temp = point;
 	this->removePoint(temp);
 }
 
@@ -90,14 +86,14 @@ void DrawNode::removeAllPoints()
 	_points.clear();
 }
 
-void DrawNode::setPoints(const std::vector<sys::Vector3>& points)
+void DrawNode::setPoints(const std::vector<math::Vector3>& points)
 {
 	_points.clear();
 
-	std::vector<sys::Vector3>::const_iterator it = points.begin();
+	std::vector<math::Vector3>::const_iterator it = points.begin();
 	while (it != points.end())
 	{
-		sys::Vector3 pos;
+		math::Vector3 pos;
 		Tool::convertToOGLPoisition(*it, pos);
 		_points.push_back(pos);
 		it++;

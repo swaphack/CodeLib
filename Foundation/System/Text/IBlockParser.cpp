@@ -12,7 +12,7 @@ bool LineParser::readBlock(char* inPtr, std::string& outData)
 	}
 
 	char* ptr = inPtr;
-	int32 ext = strlen(LINE_MARK);
+	int32_t ext = strlen(LINE_MARK);
 
 	while (*ptr != NULL)
 	{
@@ -28,7 +28,7 @@ bool LineParser::readBlock(char* inPtr, std::string& outData)
 		ptr++;
 	}
 
-	int32 size = ptr - inPtr;
+	int32_t size = ptr - inPtr;
 	outData = std::string(inPtr, size);
 	inPtr += size;
 	return true;

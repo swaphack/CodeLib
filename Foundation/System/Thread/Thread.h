@@ -13,7 +13,7 @@ namespace sys
 	public:
 		friend class ThreadPool;
 		// 无效的线程id
-		static const int32 INVALID_THREAD_ID = -1;
+		static const int32_t INVALID_THREAD_ID = -1;
 	public:
 		Thread();
 		~Thread();
@@ -30,7 +30,7 @@ namespace sys
 		// 停止
 		bool isFinish();
 		// 获取线程id
-		int32 getID();
+		int32_t getID();
 	private:
 		// 控制线程
 		std::thread m_pThread;

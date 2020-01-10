@@ -1,7 +1,7 @@
 #pragma once
 
 #include "system.h"
-
+#include "mathlib.h"
 #include "enum_common.h"
 #include "texture_common.h"
 
@@ -31,9 +31,9 @@ namespace render
 		virtual ~ColorProtocol();
 	public:
 		// 设置颜色
-		void setColor(uint8 r, uint8 g, uint8 b);
+		void setColor(uint8_t r, uint8_t g, uint8_t b);
 		// 设置颜色
-		void setColor(uint8 r, uint8 g, uint8 b, uint8 a);
+		void setColor(uint8_t r, uint8_t g, uint8_t b, uint8_t a);
 		// 设置颜色
 		void setColor(const sys::Color4B& color);
 		// 设置颜色
@@ -53,12 +53,12 @@ namespace render
 		virtual ~OpacityProtocol();
 	public:
 		// 设置不透明度
-		void setOpacity(uint8 opacity);
+		void setOpacity(uint8_t opacity);
 		// 设置不透明度
-		uint8 getOpacity();
+		uint8_t getOpacity();
 	protected:
 		// 不透明度
-		uint8 _opacity;
+		uint8_t _opacity;
 	};
 
 	// 混合
@@ -97,9 +97,9 @@ namespace render
 		
 		void setPosition(float x, float y, float z);
 
-		void setPosition(const sys::Vector3& position);
+		void setPosition(const math::Vector3& position);
 
-		void setPosition(const sys::Vector2& position);
+		void setPosition(const math::Vector2& position);
 		// 获取坐标
 		float getPositionX();
 
@@ -107,7 +107,7 @@ namespace render
 
 		float getPositionZ();
 		
-		const sys::Vector3& getPosition();
+		const math::Vector3& getPosition();
 		// 设置缩放比
 		void setScaleX(float x);
 
@@ -117,7 +117,7 @@ namespace render
 
 		void setScale(float x, float y, float z);
 
-		void setScale(const sys::Vector3& scale);
+		void setScale(const math::Vector3& scale);
 
 		void setScale(float scale);
 		// 获取缩放比
@@ -127,7 +127,7 @@ namespace render
 
 		float getScaleZ();
 
-		const sys::Vector3& getScale();
+		const math::Vector3& getScale();
 		// 设置旋转系数
 		void setRotationX(float x);
 
@@ -137,7 +137,7 @@ namespace render
 
 		void setRotation(float x, float y, float z);
 
-		void setRotation(const sys::Vector3& rotation);
+		void setRotation(const math::Vector3& rotation);
 		// 获取旋转系数
 		float getRotationX();
 
@@ -145,16 +145,16 @@ namespace render
 
 		float getRotationZ();
 
-		const sys::Vector3& getRotation();
+		const math::Vector3& getRotation();
 	public:
 		virtual void onSpaceChange() {}
 	protected:
 		// 位置坐标
-		sys::Vector3 _position;
+		math::Vector3 _position;
 		// 缩放比
-		sys::Vector3 _scale;
+		math::Vector3 _scale;
 		// 旋转
-		sys::Vector3 _rotation;
+		math::Vector3 _rotation;
 	private:
 	};
 
@@ -171,11 +171,11 @@ namespace render
 		// 设置锚点
 		void setAnchorPoint(float x, float y);
 		// 设置锚点
-		void setAnchorPoint(const sys::Vector3& anchor);
+		void setAnchorPoint(const math::Vector3& anchor);
 		// 设置锚点
-		void setAnchorPoint(const sys::Vector2& anchor);
+		void setAnchorPoint(const math::Vector2& anchor);
 		// 获取锚点
-		const sys::Vector3& getAnchorPoint();
+		const math::Vector3& getAnchorPoint();
 		// 设置宽度
 		void setWidth(float w);
 		// 设置高度
@@ -187,9 +187,9 @@ namespace render
 		// 设置体积
 		void setVolume(float w, float h);
 		// 设置体积
-		void setVolume(const sys::Volume& volume);
+		void setVolume(const math::Volume& volume);
 		// 设置面积，默认深度
-		void setVolume(const sys::Size& size);
+		void setVolume(const math::Size& size);
 		// 获取宽度
 		float getWidth();
 		// 获取高度
@@ -197,16 +197,16 @@ namespace render
 		// 获取深度
 		float getDeep();
 		// 获取体积
-		const sys::Volume& getVolume();
+		const math::Volume& getVolume();
 		// 获取面积
-		sys::Size getSize();
+		math::Size getSize();
 	public:
 		virtual void onBodyChange() {}
 	protected:
 		// 锚点
-		sys::Vector3 _anchor;
+		math::Vector3 _anchor;
 		// 体积
-		sys::Volume _volume;
+		math::Volume _volume;
 	private:
 	};
 
@@ -267,9 +267,9 @@ namespace render
 	struct BodySpace
 	{
 		// 空间位置（实际）
-		sys::Vector3 position;
+		math::Vector3 position;
 		// 空间大小
-		sys::Volume volume;
+		math::Volume volume;
 	};
 
 }

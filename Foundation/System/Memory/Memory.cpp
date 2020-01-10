@@ -28,7 +28,7 @@ Memory* Memory::getInstance()
 	return s_pMemory;
 }
 
-PtrCache* Memory::alloct(const char* name, uint32 size)
+PtrCache* Memory::alloct(const char* name, uint32_t size)
 {
 	ASSERT(name != nullptr && size > 0);
 	ASSERT(_caches.find(name) != _caches.end());

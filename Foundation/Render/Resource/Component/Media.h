@@ -32,18 +32,18 @@ namespace render
 		virtual void setVideoFrame(mf_s frame);
 
 		// 获取媒体宽度
-		uint32 getWidth() const;
+		uint32_t getWidth() const;
 		// 获取媒体高度
-		uint32 getHeight() const;
+		uint32_t getHeight() const;
 		// 获取媒体帧率
 		float getFrameRate() const;
 		// 获取时长
 		float getTime() const;
 	protected:
 		// 设置媒体宽度
-		void setWidth(uint32 val);
+		void setWidth(uint32_t val);
 		// 设置媒体高度
-		void setHeight(uint32 val);
+		void setHeight(uint32_t val);
 		// 设置媒体帧率
 		void setFrameRate(float val);
 		// 设置时长
@@ -56,9 +56,9 @@ namespace render
 		// 帧率
 		float _frameRate;
 		// 媒体宽度
-		uint32 _width;
+		uint32_t _width;
 		// 媒体高度
-		uint32 _height;
+		uint32_t _height;
 		// 时长
 		float _time;
 	};

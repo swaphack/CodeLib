@@ -22,9 +22,9 @@ void Fog::draw()
 	ColorNode::draw();
 
 	sys::Color4B c = getColor();
-	float color[4] = { c.red / sys::COLOR_FLOAT_VALUE, c.green / sys::COLOR_FLOAT_VALUE, c.blue / sys::COLOR_FLOAT_VALUE, c.alpha / sys::COLOR_FLOAT_VALUE };
-	float nearValue = _near / Tool::getGLViewSize().deep;
-	float farValue = _far / Tool::getGLViewSize().deep;
+	float color[4] = { c.red / COLOR_FLOAT_VALUE, c.green / COLOR_FLOAT_VALUE, c.blue / COLOR_FLOAT_VALUE, c.alpha / COLOR_FLOAT_VALUE };
+	float nearValue = _near / Tool::getGLViewSize().getDeep();
+	float farValue = _far / Tool::getGLViewSize().getDeep();
 
 	glEnable(GL_FOG);
 	glFogi(GL_FOG_MODE, _fogMode);	

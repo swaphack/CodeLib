@@ -46,7 +46,7 @@ namespace ui
 		/**
 		*	窗口界面大小
 		*/
-		const sys::Size& getViewSize();
+		const math::Size& getViewSize();
 		/**
 		*	获取布局方向
 		*/
@@ -59,7 +59,7 @@ namespace ui
 		/**
 		*	当窗口大小发生改变时
 		*/
-		void onViewSizeChanged(const sys::Size& inputSize);
+		void onViewSizeChanged(const math::Size& inputSize);
 		/**
 		*	加载界面文件
 		*/
@@ -90,6 +90,6 @@ namespace ui
 		// 布局方向
 		LayoutDirection m_eLayoutDirection;
 		// 窗口界面大小
-		sys::Size m_sViewSize;
+		math::Size m_sViewSize;
 	};
 }

@@ -15,17 +15,6 @@ SymbolHandler::~SymbolHandler()
 	this->removeAllSymbolDelegates();
 }
 
-SymbolHandler* SymbolHandler::getInstance()
-{
-	static SymbolHandler* s_OperatorHandler = nullptr;
-	if (s_OperatorHandler == nullptr)
-	{
-		s_OperatorHandler = new SymbolHandler();
-	}
-
-	return s_OperatorHandler;
-}
-
 void SymbolHandler::addSymbolDelegate(SymbolDelegate* pDelegate)
 {
 	if (pDelegate == nullptr)
@@ -126,7 +115,7 @@ SymbolDelegate* SymbolHandler::getSymbolDelegate(const std::string& name)
 	return getSymbolDelegate(name.c_str());
 }
 
-bool SymbolHandler::load(const std::string& filepath)
+bool SymbolHandler::loadFromFile(const std::string& filepath)
 {
 	tinyxml2::XMLDocument document;
 	tinyxml2::XMLError error = document.LoadFile(filepath.c_str());

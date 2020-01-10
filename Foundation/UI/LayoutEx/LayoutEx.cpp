@@ -117,41 +117,46 @@ const std::vector<LayoutItemEx*>& LayoutEx::getChildren()
 	return m_vChildren;
 }
 
-void LayoutEx::resize(const sys::Size& inputSize)
+void LayoutEx::resize(const math::Size& inputSize)
 {
 	this->resize(getOrgin(), inputSize);
 }
 
-void LayoutEx::resize(const sys::Vector2& position, const sys::Size& size)
+void LayoutEx::resize(const math::Vector2& position, const math::Size& size)
 {
-	this->resize(sys::Rect(position.x, position.y, size.width, size.height));
+	this->resize(math::Rect(position, size));
 }
 
-void LayoutEx::resize(const sys::Rect& rect)
+void LayoutEx::resize(const math::Rect& rect)
 {
 	this->resize(rect);
 
-	sys::Size innerSize;
-	innerSize.width = rect.width - m_fMargin.left - m_fMargin.right;
-	innerSize.height = rect.height - m_fMargin.bottom - m_fMargin.top;
+	float w = rect.getWidth() - m_fMargin.left - m_fMargin.right;
+	float h = rect.getHeight() - m_fMargin.bottom - m_fMargin.top;
 
-	this->onLayoutSizeChanged(innerSize);
+	this->onLayoutSizeChanged(math::Size(w, h));
 }
 
-sys::Size LayoutEx::getLayoutMinSize()
+math::Size LayoutEx::getLayoutMinSize()
 {
-	sys::Size size = getLayoutInnerMinSize();
-	size.width += m_fMargin.left + m_fMargin.right;
-	size.height += m_fMargin.bottom + m_fMargin.top;
+	math::Size size = getLayoutInnerMinSize();
+	float w = m_fMargin.left + m_fMargin.right;
+	float h = m_fMargin.bottom + m_fMargin.top;
+
+	size.setWidth(w + size.getWidth());
+	size.setHeight(h + size.getHeight());
 
 	return size;
 }
 
-sys::Size LayoutEx::getLayoutMaxSize()
+math::Size LayoutEx::getLayoutMaxSize()
 {
-	sys::Size size = getLayoutInnerMaxSize();
-	size.width += m_fMargin.left + m_fMargin.right;
-	size.height += m_fMargin.bottom + m_fMargin.top;
+	math::Size size = getLayoutInnerMaxSize();
+	float w = m_fMargin.left + m_fMargin.right;
+	float h = m_fMargin.bottom + m_fMargin.top;
+
+	size.setWidth(w + size.getWidth());
+	size.setHeight(h + size.getHeight());
 
 	return size;
 }
@@ -175,21 +180,21 @@ bool LayoutEx::copy(LayoutEx* item)
 	return LayoutItemEx::copy(item);
 }
 
-sys::Size LayoutEx::getLayoutInnerMinSize()
+math::Size LayoutEx::getLayoutInnerMinSize()
 {
-	return sys::Size(
-		m_sMinSize.width - m_fMargin.left - m_fMargin.right,
-		m_sMinSize.height - m_fMargin.bottom - m_fMargin.top);
+	return math::Size(
+		m_sMinSize.getWidth() - m_fMargin.left - m_fMargin.right,
+		m_sMinSize.getHeight() - m_fMargin.bottom - m_fMargin.top);
 }
 
-sys::Size LayoutEx::getLayoutInnerMaxSize()
+math::Size LayoutEx::getLayoutInnerMaxSize()
 {
-	return sys::Size(
-		m_sMaxSize.width - m_fMargin.left - m_fMargin.right,
-		m_sMaxSize.height - m_fMargin.bottom - m_fMargin.top);
+	return math::Size(
+		m_sMaxSize.getWidth() - m_fMargin.left - m_fMargin.right,
+		m_sMaxSize.getHeight() - m_fMargin.bottom - m_fMargin.top);
 }
 
-void LayoutEx::onLayoutSizeChanged(const sys::Size& innerSize)
+void LayoutEx::onLayoutSizeChanged(const math::Size& innerSize)
 {
 	LayoutItemEx* pItem;
 
@@ -199,29 +204,29 @@ void LayoutEx::onLayoutSizeChanged(const sys::Size& innerSize)
 	float realW = 0;
 	float realH = 0;
 
-	std::vector<sys::Rect> innerItems;
+	std::vector<math::Rect> innerItems;
 
 	std::vector<LayoutItemEx*>::iterator iter = m_vChildren.begin();
 	while (iter != m_vChildren.end())
 	{
 		pItem = *iter;
 		// 内部大小
-		sys::Rect innerItem;
+		math::Rect innerItem;
 
-		const sys::Rect& itemRect = pItem->getGeometry();
+		const math::Rect& itemRect = pItem->getGeometry();
 
-		innerItem.x = itemRect.x / this->getGeometry().width * innerSize.width;
-		innerItem.y = itemRect.x / this->getGeometry().height * innerSize.height;
-		innerItem.width = itemRect.width / this->getGeometry().width * innerSize.width;
-		innerItem.height = itemRect.height / this->getGeometry().height * innerSize.height;
-		innerItems.push_back(innerItem);
+		float x = itemRect.getX() / this->getGeometry().getWidth() * innerSize.getWidth();
+		float y = itemRect.getY() / this->getGeometry().getHeight() * innerSize.getHeight();
+		float w = itemRect.getWidth() / this->getGeometry().getWidth() * innerSize.getWidth();
+		float h = itemRect.getHeight() / this->getGeometry().getHeight() * innerSize.getHeight();
+		innerItems.push_back(math::Rect(x, y, w, h));
 		iter++;
 	}
 
 	// 内部计算时，需要补差原点坐标的偏移量
 	for (int i = 0; i < innerItems.size(); i++)
 	{
-		sys::Rect allocRect = innerItems[i];
+		math::Rect allocRect = innerItems[i];
 		//m_vChildren[i]->setLayoutGeometry(allocRect);
 	}
 }
@@ -231,13 +236,13 @@ float LayoutEx::calItemWidth(LayoutItemEx* item, float width)
 	SizeType st = item->getSizePolicy().width;
 	float w = 0;
 	
-	if (item->getLayoutMinSize().width > 0 && item->getLayoutMinSize().width > width)
+	if (item->getLayoutMinSize().getWidth() > 0 && item->getLayoutMinSize().getWidth() > width)
 	{
-		w = item->getLayoutMinSize().width;
+		w = item->getLayoutMinSize().getWidth();
 	}
-	if (item->getLayoutMaxSize().width > 0 && item->getLayoutMaxSize().width < width)
+	if (item->getLayoutMaxSize().getWidth() > 0 && item->getLayoutMaxSize().getWidth() < width)
 	{
-		w = item->getLayoutMaxSize().width;
+		w = item->getLayoutMaxSize().getWidth();
 	}
 
 	return w;
@@ -248,14 +253,14 @@ float LayoutEx::calItemHeight(LayoutItemEx* item, float height)
 	SizeType st = item->getSizePolicy().height;
 	float h = 0;
 
-	if (item->getLayoutMinSize().height > 0 && item->getLayoutMinSize().height > height)
+	if (item->getLayoutMinSize().getHeight() > 0 && item->getLayoutMinSize().getHeight() > height)
 	{
-		h = item->getLayoutMinSize().height;
+		h = item->getLayoutMinSize().getHeight();
 	}
 
-	if (item->getLayoutMaxSize().height > 0 && item->getLayoutMaxSize().height < height)
+	if (item->getLayoutMaxSize().getHeight() > 0 && item->getLayoutMaxSize().getHeight() < height)
 	{
-		h = item->getLayoutMaxSize().height;
+		h = item->getLayoutMaxSize().getHeight();
 	}
 	return h;
 }
@@ -272,66 +277,66 @@ HorizontalLayout::~HorizontalLayout()
 
 }
 
-sys::Size HorizontalLayout::getLayoutInnerMinSize()
+math::Size HorizontalLayout::getLayoutInnerMinSize()
 {
-	sys::Size size;
 	LayoutItemEx* pItem;
+	float w = 0, h = 0;
 
 	std::vector<LayoutItemEx*>::iterator iter = m_vChildren.begin();
 	while (iter != m_vChildren.end())
 	{
 		pItem = *iter;
 		// 宽度拼接
-		size.width += pItem->getLayoutMinSize().width;
+		w += pItem->getLayoutMinSize().getWidth();
 		// 高度判断
-		if (pItem->getLayoutMinSize().height > size.height)
-			size.height = pItem->getLayoutMinSize().height;
+		if (pItem->getLayoutMinSize().getHeight() > h)
+			h = pItem->getLayoutMinSize().getHeight();
 		iter++;
 	}
 
-	sys::Size defaultSize = LayoutEx::getLayoutInnerMinSize();
-	if (size.width < defaultSize.width)
+	math::Size defaultSize = LayoutEx::getLayoutInnerMinSize();
+	if (w < defaultSize.getWidth())
 	{
-		size.width = defaultSize.width;
+		w = defaultSize.getWidth();
 	}
 
-	if (size.height < defaultSize.height)
+	if (h < defaultSize.getHeight())
 	{
-		size.height = defaultSize.height;
+		h = defaultSize.getHeight();
 	}
 
-	return size;
+	return math::Size(w, h);
 }
 
-sys::Size HorizontalLayout::getLayoutInnerMaxSize()
+math::Size HorizontalLayout::getLayoutInnerMaxSize()
 {
-	sys::Size size;
 	LayoutItemEx* pItem;
+	float w = 0, h = 0;
 
 	std::vector<LayoutItemEx*>::iterator iter = m_vChildren.begin();
 	while (iter != m_vChildren.end())
 	{
 		pItem = *iter;
 		// 宽度拼接
-		size.width += pItem->getLayoutMaxSize().width;
+		w += pItem->getLayoutMaxSize().getWidth();
 		// 高度判断
-		if (pItem->getLayoutMaxSize().height > size.height)
-			size.height = pItem->getLayoutMaxSize().height;
+		if (pItem->getLayoutMaxSize().getHeight() > h)
+			h = pItem->getLayoutMaxSize().getHeight();
 		iter++;
 	}
 
-	sys::Size defaultSize = LayoutEx::getLayoutInnerMaxSize();
-	if (size.width < defaultSize.width)
+	math::Size defaultSize = LayoutEx::getLayoutInnerMaxSize();
+	if (w < defaultSize.getWidth())
 	{
-		size.width = defaultSize.width;
+		w = defaultSize.getWidth();
 	}
 
-	if (size.height < defaultSize.height)
+	if (h < defaultSize.getHeight())
 	{
-		size.height = defaultSize.height;
+		h = defaultSize.getHeight();
 	}
 
-	return size;
+	return math::Size(w, h);
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -346,66 +351,67 @@ VerticalLayout::~VerticalLayout()
 
 }
 
-sys::Size VerticalLayout::getLayoutInnerMinSize()
+math::Size VerticalLayout::getLayoutInnerMinSize()
 {
-	sys::Size size;
 	LayoutItemEx* pItem;
+	float w = 0, h = 0;
 
 	std::vector<LayoutItemEx*>::iterator iter = m_vChildren.begin();
 	while (iter != m_vChildren.end())
 	{
 		pItem = *iter;
 		// 高度拼接
-		size.height += pItem->getLayoutMinSize().height;
+		h += pItem->getLayoutMinSize().getHeight();
 		// 宽度判断
-		if (pItem->getLayoutMinSize().width > size.width)
-			size.width = pItem->getLayoutMinSize().width;
+		if (pItem->getLayoutMinSize().getWidth() > w)
+			w = pItem->getLayoutMinSize().getWidth();
 		iter++;
 	}
 
-	sys::Size defaultSize = LayoutEx::getLayoutInnerMinSize();
-	if (size.width < defaultSize.width)
+	math::Size defaultSize = LayoutEx::getLayoutInnerMinSize();
+	if (w < defaultSize.getWidth())
 	{
-		size.width = defaultSize.width;
+		w = defaultSize.getWidth();
 	}
 
-	if (size.height < defaultSize.height)
+	if (h < defaultSize.getHeight())
 	{
-		size.height = defaultSize.height;
+		h = defaultSize.getHeight();
 	}
 
-	return size;
+	return math::Size(w, h);
 }
 
-sys::Size VerticalLayout::getLayoutInnerMaxSize()
+math::Size VerticalLayout::getLayoutInnerMaxSize()
 {
-	sys::Size size;
 	LayoutItemEx* pItem;
+
+	float w = 0, h = 0;
 
 	std::vector<LayoutItemEx*>::iterator iter = m_vChildren.begin();
 	while (iter != m_vChildren.end())
 	{
 		pItem = *iter;
 		// 高度拼接
-		size.height += pItem->getLayoutMaxSize().height;
+		h += pItem->getLayoutMaxSize().getHeight();
 		// 宽度判断
-		if (pItem->getLayoutMaxSize().width > size.width)
-			size.width = pItem->getLayoutMaxSize().width;
+		if (pItem->getLayoutMaxSize().getWidth() > w)
+			w = pItem->getLayoutMaxSize().getWidth();
 		iter++;
 	}
 
-	sys::Size defaultSize = LayoutEx::getLayoutInnerMaxSize();
-	if (size.width < defaultSize.width)
+	math::Size defaultSize = LayoutEx::getLayoutInnerMaxSize();
+	if (w < defaultSize.getWidth())
 	{
-		size.width = defaultSize.width;
+		w = defaultSize.getWidth();
 	}
 
-	if (size.height < defaultSize.height)
+	if (h < defaultSize.getHeight())
 	{
-		size.height = defaultSize.height;
+		h = defaultSize.getHeight();
 	}
 
-	return size;
+	return math::Size(w,h);
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -421,12 +427,12 @@ GridLayout::~GridLayout()
 
 }
 
-sys::Size GridLayout::getLayoutInnerMinSize()
+math::Size GridLayout::getLayoutInnerMinSize()
 {
 	return getMinSize();
 }
 
-sys::Size GridLayout::getLayoutInnerMaxSize()
+math::Size GridLayout::getLayoutInnerMaxSize()
 {
 	return getMaxSize();
 }

@@ -14,10 +14,12 @@ using namespace script;
 
 Parser::Parser()
 {
+	m_pSymbolHandler = new SymbolHandler();
 }
 
 Parser::~Parser()
 {
+	delete m_pSymbolHandler;
 }
 
 bool Parser::parse(Token::const_iterator begin, Token::const_iterator end)
@@ -88,7 +90,7 @@ ASTNode* Parser::parseSingleASTNode(Token::const_iterator begin, Token::const_it
 			SAFE_BREAK(pCurrentNode);
 		}
 
-		pDelegate = SymbolHandler::getInstance()->getSymbolDelegate(pCurrentNode->value);
+		pDelegate = m_pSymbolHandler->getSymbolDelegate(pCurrentNode->value);
 		SAFE_BREAK(pDelegate);
 
 		pTempNode = pDelegate->getASTTemplate();
@@ -133,7 +135,7 @@ ASTNode* Parser::parseSequenceASTNode(Token::const_iterator begin, Token::const_
 	const SymbolInformation* pInfo = nullptr;
 	ASTNode* pCurrentNode = nullptr;
 
-	pDelegate = SymbolHandler::getInstance()->getSymbolDelegate(iter->c_str());
+	pDelegate = m_pSymbolHandler->getSymbolDelegate(iter->c_str());
 	if (pDelegate)
 	{ // ÊÇ·ûºÅ
 		pInfo = pDelegate->getSymbolInformation();
@@ -190,7 +192,7 @@ ASTNode* Parser::parseEmbedASTNode(Token::const_iterator begin, Token::const_ite
 	const SymbolInformation* pInfo = nullptr;
 	ASTNode* pCurrentNode = nullptr;
 
-	pDelegate = SymbolHandler::getInstance()->getSymbolDelegate(iter->c_str());
+	pDelegate = m_pSymbolHandler->getSymbolDelegate(iter->c_str());
 	pInfo = pDelegate->getSymbolInformation();
 
 	while (iter != end)
@@ -217,4 +219,9 @@ ASTNode* Parser::parseEmbedASTNode(Token::const_iterator begin, Token::const_ite
 	offset = iter;
 
 	return pCurrentNode;
+}
+
+bool Parser::init(const std::string& filepath)
+{
+	return m_pSymbolHandler->loadFromFile(filepath);
 }

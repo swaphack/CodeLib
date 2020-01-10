@@ -21,7 +21,7 @@ public:
 	void clear();
 
 
-	const sys::Size& getSize();
+	const math::Size& getSize();
 	std::list<MazeNode*>::const_iterator beginNode();
 	std::list<MazeNode*>::const_iterator endNode();
 	
@@ -29,14 +29,14 @@ public:
 private:
 	std::list<MazeNode*> _lstNode;
 	MazeNode*** _nodes;
-	sys::Size _size;
+	math::Size _size;
 };
 
 //////////////////////////////////////////////////////////////////////////
 class MazeNode
 {
 public:
-	sys::Vector2 pos;
+	math::Vector2 pos;
 	// 0，不可行走，1可行走
 	int value;
 	std::set<MazeNode*> adjacents;

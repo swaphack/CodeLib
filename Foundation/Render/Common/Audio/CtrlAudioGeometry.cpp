@@ -126,26 +126,26 @@ bool CtrlAudioGeometry::getActive()
 	AUDIO_GET_FUNC(_geometry, getActive, bool);
 }
 
-void CtrlAudioGeometry::setForward(const sys::Vector3& forward)
+void CtrlAudioGeometry::setForward(const math::Vector3& forward)
 {
 	_geometryBody.forward = forward;
 	_notify->addMark(ENP_AUDIO);
 	setDirty(true);
 }
 
-const sys::Vector3& CtrlAudioGeometry::getForward()
+const math::Vector3& CtrlAudioGeometry::getForward()
 {
 	return _geometryBody.forward;
 }
 
-void CtrlAudioGeometry::setUp(const sys::Vector3& up)
+void CtrlAudioGeometry::setUp(const math::Vector3& up)
 {
 	_geometryBody.up = up;
 	_notify->addMark(ENP_AUDIO);
 	setDirty(true);
 }
 
-const sys::Vector3& CtrlAudioGeometry::getUp()
+const math::Vector3& CtrlAudioGeometry::getUp()
 {
 	return _geometryBody.up;
 }
@@ -179,7 +179,7 @@ int CtrlAudioGeometry::getVerticesCount()
 	return totalvertice;
 }
 
-CtrlAudioGeometryPolygon* CtrlAudioGeometry::addPolygon(const std::vector<sys::Vector3>& vertexes)
+CtrlAudioGeometryPolygon* CtrlAudioGeometry::addPolygon(const std::vector<math::Vector3>& vertexes)
 {
 	if (vertexes.size() == 0)
 	{
@@ -397,7 +397,7 @@ bool CtrlAudioGeometryPolygon::isDoubleSided()
 	return _geometrySettings.doublesided;
 }
 
-bool CtrlAudioGeometryPolygon::setVertexes(const sys::Vector3* vertexes, int numvertices)
+bool CtrlAudioGeometryPolygon::setVertexes(const math::Vector3* vertexes, int numvertices)
 {
 	if (vertexes == nullptr || numvertices <= 0)
 	{
@@ -420,7 +420,7 @@ bool CtrlAudioGeometryPolygon::setVertexes(const sys::Vector3* vertexes, int num
 	return true;
 }
 
-bool CtrlAudioGeometryPolygon::setVertexes(const std::vector<sys::Vector3>& vertexes)
+bool CtrlAudioGeometryPolygon::setVertexes(const std::vector<math::Vector3>& vertexes)
 {
 	int count = vertexes.size();
 
@@ -457,7 +457,7 @@ bool CtrlAudioGeometryPolygon::setVertexes(const RectVertex& vertexes)
 	return true;
 }
 
-bool CtrlAudioGeometryPolygon::updateVertex(int index, const sys::Vector3& vertex)
+bool CtrlAudioGeometryPolygon::updateVertex(int index, const math::Vector3& vertex)
 {
 	int count = _vertexes.size();
 	if (count == 0)

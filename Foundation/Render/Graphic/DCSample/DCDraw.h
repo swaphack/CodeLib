@@ -12,7 +12,7 @@ namespace render
 	class DCDraw : public DrawCommand
 	{
 	public:
-		std::vector<sys::Vector3> Points;
+		std::vector<math::Vector3> Points;
 		sys::Color4F Color;
 		float Width;
 		int Type;
@@ -23,6 +23,6 @@ namespace render
 	public:
 		virtual void draw();
 	public:
-		static DCDraw* create(int type, const std::vector<sys::Vector3>& points, float width, const sys::Color4B& color, uint8 opacity, const BlendParam& blend);
+		static DCDraw* create(int type, const std::vector<math::Vector3>& points, float width, const sys::Color4B& color, uint8_t opacity, const BlendParam& blend);
 	};
 }

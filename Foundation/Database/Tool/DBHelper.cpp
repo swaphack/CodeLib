@@ -55,28 +55,28 @@ int DBHelper::getTypeSize( FieldType type, int defaultSize )
 		return 0;
 		break;
 	case EFT_CHAR:
-		return sizeof(int8);
+		return sizeof(int8_t);
 		break;
 	case EFT_UCHAR:
-		return sizeof(uint8);
+		return sizeof(uint8_t);
 		break;
 	case EFT_SHORT:
-		return sizeof(int16);
+		return sizeof(int16_t);
 		break;
 	case EFT_USHORT:
-		return sizeof(uint16);
+		return sizeof(uint16_t);
 		break;
 	case EFT_INT:
-		return sizeof(int32);
+		return sizeof(int32_t);
 		break;
 	case EFT_UINT:
-		return sizeof(uint32);
+		return sizeof(uint32_t);
 		break;
 	case EFT_LONG:
 		return sizeof(long);
 		break;
 	case EFT_ULONG:
-		return sizeof(ulong);
+		return sizeof(uint64_t);
 		break;
 	case EFT_FLOAT:
 		return sizeof(float);
@@ -104,18 +104,18 @@ void DBHelper::getFieldValue(const char* ptr, FieldType type, long& offset, long
 		sys::BitConvert::getNumberString(ct, value);
 		break;
 	case EFT_UCHAR:
-		uint8 uct;
-		getValueFromPtr<uint8>(uct, ptr, offset);
+		uint8_t uct;
+		getValueFromPtr<uint8_t>(uct, ptr, offset);
 		sys::BitConvert::getNumberString(uct, value);
 		break;
 	case EFT_SHORT:
-		int16 st;
-		getValueFromPtr<int16>(st, ptr, offset);
+		int16_t st;
+		getValueFromPtr<int16_t>(st, ptr, offset);
 		sys::BitConvert::getNumberString(st, value);
 		break;
 	case EFT_USHORT:
-		uint16 ust;
-		getValueFromPtr<uint16>(ust, ptr, offset);
+		uint16_t ust;
+		getValueFromPtr<uint16_t>(ust, ptr, offset);
 		sys::BitConvert::getNumberString(ust, value);
 		break;
 	case EFT_INT:
@@ -124,8 +124,8 @@ void DBHelper::getFieldValue(const char* ptr, FieldType type, long& offset, long
 		sys::BitConvert::getNumberString(it, value);
 		break;
 	case EFT_UINT:
-		uint32 uit;
-		getValueFromPtr<uint32>(uit, ptr, offset);
+		uint32_t uit;
+		getValueFromPtr<uint32_t>(uit, ptr, offset);
 		sys::BitConvert::getNumberString((int)uit, value);
 		break;
 	case EFT_LONG:
@@ -134,8 +134,8 @@ void DBHelper::getFieldValue(const char* ptr, FieldType type, long& offset, long
 		sys::BitConvert::getNumberString(lt, value);
 		break;
 	case EFT_ULONG:
-		ulong ult;
-		getValueFromPtr<ulong>(ult, ptr, offset);
+		uint64_t ult;
+		getValueFromPtr<uint64_t>(ult, ptr, offset);
 		sys::BitConvert::getNumberString(ult, value);
 		break;
 	case EFT_FLOAT:

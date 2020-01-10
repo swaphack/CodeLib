@@ -18,17 +18,17 @@ namespace sys
 
 		virtual void removeObject(Object* object) = 0;
 
-		virtual void removeObject(uint64 id) = 0;
+		virtual void removeObject(uint64_t id) = 0;
 
-		virtual Object* getObject(uint64 id) = 0;
+		virtual Object* getObject(uint64_t id) = 0;
 
 		virtual bool contains(Object* object) = 0;
 
-		virtual bool contains(uint64 id) = 0;
+		virtual bool contains(uint64_t id) = 0;
 
 		virtual void clear() = 0; 
 
-		virtual int32 count() = 0;
+		virtual int32_t count() = 0;
 
 		virtual bool empty() = 0;
 	};
@@ -44,22 +44,22 @@ namespace sys
 
 		virtual void removeObject(Object* object);
 
-		virtual void removeObject(uint64 id);
+		virtual void removeObject(uint64_t id);
 
-		virtual Object* getObject(uint64 id);
+		virtual Object* getObject(uint64_t id);
 
 		virtual void clear();
 
-		virtual int32 count();
+		virtual int32_t count();
 
 		virtual bool empty();
 
 		virtual bool contains(Object* object);
 
-		virtual bool contains(uint64 id);
+		virtual bool contains(uint64_t id);
 
-		std::map<uint64, Object*>::iterator begin();
-		std::map<uint64, Object*>::iterator end();
+		std::map<uint64_t, Object*>::iterator begin();
+		std::map<uint64_t, Object*>::iterator end();
 	protected:
 		struct Node
 		{
@@ -70,7 +70,7 @@ namespace sys
 		};
 	private:
 		Node* _root;
-		std::map<uint64, Object*> _objects;
+		std::map<uint64_t, Object*> _objects;
 	};
 
 	// สýื้
@@ -84,19 +84,19 @@ namespace sys
 
 		virtual void removeObject(Object* object);
 
-		virtual void removeObject(uint64 id);
+		virtual void removeObject(uint64_t id);
 
-		virtual Object* getObject(uint64 id);
+		virtual Object* getObject(uint64_t id);
 
 		virtual void clear();
 
-		virtual int32 count();
+		virtual int32_t count();
 
 		virtual bool empty();
 
 		virtual bool contains(Object* object);
 
-		virtual bool contains(uint64 id);
+		virtual bool contains(uint64_t id);
 
 		std::vector<Object*>::iterator begin();
 		std::vector<Object*>::iterator end();

@@ -56,7 +56,7 @@ void DCTextureBatch::draw()
 }
 
 DCTextureBatch* DCTextureBatch::create(int textureID,
-	const sys::Color4B& color, uint8 opacity, const BlendParam& blend,
+	const sys::Color4B& color, uint8_t opacity, const BlendParam& blend,
 	const T_Vertex* vertexes, const T_Vertex* normals, const T_Vertex* colors, const T_Vertex* coords,
 	const T_Indice* indices)
 {
@@ -66,10 +66,10 @@ DCTextureBatch* DCTextureBatch::create(int textureID,
 	pTextureBatch->Blend = blend;
 
 	convertColor4BTo4F(color, pTextureBatch->Color);
-	pTextureBatch->Color.red *= opacity / sys::COLOR_FLOAT_VALUE;
-	pTextureBatch->Color.green *= opacity / sys::COLOR_FLOAT_VALUE;
-	pTextureBatch->Color.blue *= opacity / sys::COLOR_FLOAT_VALUE;
-	pTextureBatch->Color.alpha *= opacity / sys::COLOR_FLOAT_VALUE;
+	pTextureBatch->Color.red *= opacity / COLOR_FLOAT_VALUE;
+	pTextureBatch->Color.green *= opacity / COLOR_FLOAT_VALUE;
+	pTextureBatch->Color.blue *= opacity / COLOR_FLOAT_VALUE;
+	pTextureBatch->Color.alpha *= opacity / COLOR_FLOAT_VALUE;
 
 	pTextureBatch->Vertexes = (T_Vertex*)vertexes;
 	pTextureBatch->Normals = (T_Vertex*)normals;

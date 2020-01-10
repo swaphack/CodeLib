@@ -2,9 +2,9 @@
 
 using namespace render;
 
-static float getArea(const sys::Vector3& p1, const sys::Vector3& p2, const sys::Vector3& p3)
+static float getArea(const math::Vector3& p1, const math::Vector3& p2, const math::Vector3& p3)
 {
-	float s = 0.5f * (p1.x*p2.y + p2.x*p3.y + p3.x*p1.y - p1.x*p3.y - p2.x*p1.y - p3.x*p2.y);
+	float s = 0.5f * (p1.getX()*p2.getY() + p2.getX()*p3.getY() + p3.getX()*p1.getY() - p1.getX()*p3.getY() - p2.getX()*p1.getY() - p3.getX()*p2.getY());
 	return abs(s);
 }
 
@@ -18,7 +18,7 @@ bool RectVertex::containPoint(float x, float y)
 {
 	bool bRet = false;
 	
-	sys::Vector3 p = sys::Vector3(x, y);
+	math::Vector3 p = math::Vector3(x, y);
 
 	float s1 = getArea(p, leftUp, leftDown);
 	float s2 = getArea(p, leftUp, rightUp);
@@ -35,12 +35,10 @@ bool RectVertex::containPoint(float x, float y)
 	return bRet;
 }
 
-sys::Vector3 RectVertex::getAnchorByPoint(float x, float y)
+math::Vector3 RectVertex::getAnchorByPoint(float x, float y)
 {
-	sys::Vector3 p;
+	float xx = (x - leftUp.getX()) / (rightUp.getX() - leftUp.getX());
+	float yy = (y - leftUp.getY()) / (leftUp.getY() - leftDown.getY());
 
-	p.x = (x - leftUp.x) / (rightUp.x - leftUp.x);
-	p.y = (y - leftUp.y) / (leftUp.y - leftDown.y);
-
-	return p;
+	return math::Vector3(xx, yy);
 }

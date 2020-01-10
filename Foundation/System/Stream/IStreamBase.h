@@ -11,13 +11,13 @@ namespace sys
 		virtual ~IStreamReader() {}
 	public:
 		virtual char readInt8() = 0;
-		virtual uint8 readUInt8() = 0;
-		virtual int16 readInt16() = 0;
-		virtual uint16 readUInt16() = 0;
-		virtual int32 readInt32() = 0;
-		virtual uint32 readUInt32() = 0;
-		virtual int64 readInt64() = 0;
-		virtual uint64 readUInt64() = 0;
+		virtual uint8_t readUInt8() = 0;
+		virtual int16_t readInt16() = 0;
+		virtual uint16_t readUInt16() = 0;
+		virtual int32_t readInt32() = 0;
+		virtual uint32_t readUInt32() = 0;
+		virtual int64_t readInt64() = 0;
+		virtual uint64_t readUInt64() = 0;
 		virtual float readFloat() = 0;
 		virtual double readDouble() = 0;
 		virtual char* readString(ss_t size) = 0;
@@ -32,13 +32,13 @@ namespace sys
 		virtual ~IStreamWriter() {}
 	public:
 		virtual void writeInt8(char data) = 0;
-		virtual void writeUInt8(uint8 data) = 0;
-		virtual void writeInt16(int16 data) = 0;
-		virtual void writeUInt16(uint16 data) = 0;
-		virtual void writeInt32(int32 data) = 0;
-		virtual void writeUInt32(uint32 data) = 0;
-		virtual void writeInt64(int64 data) = 0;
-		virtual void writeUInt64(uint64 data) = 0;
+		virtual void writeUInt8(uint8_t data) = 0;
+		virtual void writeInt16(int16_t data) = 0;
+		virtual void writeUInt16(uint16_t data) = 0;
+		virtual void writeInt32(int32_t data) = 0;
+		virtual void writeUInt32(uint32_t data) = 0;
+		virtual void writeInt64(int64_t data) = 0;
+		virtual void writeUInt64(uint64_t data) = 0;
 		virtual void writeFloat(float data) = 0;
 		virtual void writeDouble(double data) = 0;
 		virtual void writeString(const char* data) = 0;
@@ -57,9 +57,9 @@ namespace sys
 		// 获取数据内容
 		virtual const char* getData() const = 0;
 		// 获取数据长度
-		virtual int32 getLength() const = 0;
+		virtual int32_t getLength() const = 0;
 		// 设置数据长度
-		virtual void setLength(int32 length) = 0;
+		virtual void setLength(int32_t length) = 0;
 		// 释放流数据
 		virtual void freeStream() = 0;
 	};

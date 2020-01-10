@@ -44,7 +44,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>../System/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../System/;../Math/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -67,6 +67,9 @@
   <ItemGroup>
     <ClInclude Include="algorithm.h" />
     <ClInclude Include="Path\AStar.h" />
+    <ClInclude Include="Path\Map.h" />
+    <ClInclude Include="Path\Node.h" />
+    <ClInclude Include="Path\MapNode.h" />
     <ClInclude Include="Path\Voronoi.h" />
     <ClInclude Include="Sort\Sort.h" />
   </ItemGroup>

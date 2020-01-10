@@ -7,7 +7,7 @@
 
 using namespace sys;
 
-bool File::write(const char* url, const char* data, int64 size, int64& writtenSize)
+bool File::write(const char* url, const char* data, int64_t size, int64_t& writtenSize)
 {
 	if (url == nullptr || data == nullptr)
 	{
@@ -32,7 +32,7 @@ bool File::write(const char* url, const char* data, int64 size, int64& writtenSi
 	return true;
 }
 
-char* File::read(const char* url, int64& readSize)
+char* File::read(const char* url, int64_t& readSize)
 {
 	if (url == nullptr)
 	{
@@ -48,7 +48,7 @@ char* File::read(const char* url, int64& readSize)
 
 	fseek(fptr, 0, SEEK_SET);
 	fseek(fptr, 0, SEEK_END);
-	int64 count = ftell(fptr);
+	int64_t count = ftell(fptr);
 	fseek(fptr, 0, SEEK_SET);
 
 	char* str = StreamHelper::mallocStream(count * sizeof(char));
@@ -68,7 +68,7 @@ bool File::read(const char* url, std::string& data)
 		return false;
 	}
 
-	int64 size = 0;
+	int64_t size = 0;
 
 	char* temp = read(url, size);
 	if (temp == nullptr)
@@ -83,7 +83,7 @@ bool File::read(const char* url, std::string& data)
 	return true;
 }
 
-bool File::append(const char* url, const char* data, int64 size, int64& appendSize)
+bool File::append(const char* url, const char* data, int64_t size, int64_t& appendSize)
 {
 	if (url == nullptr || data == nullptr)
 	{
@@ -133,7 +133,7 @@ File::File(const char* url)
 	
 }
 
-File::File(const char* url, int32 mode)
+File::File(const char* url, int32_t mode)
 	: m_pFile(nullptr)
 	, m_strUrl(url)
 	, m_nModel(mode)
@@ -146,7 +146,7 @@ File::~File()
 	this->close();
 }
 
-bool File::write(const char* data, int64 size, int64& writtenSize)
+bool File::write(const char* data, int64_t size, int64_t& writtenSize)
 {
 	if (m_pFile == nullptr)
 	{
@@ -162,7 +162,7 @@ bool File::write(const char* data, int64 size, int64& writtenSize)
 	return writtenSize == size;
 }
 
-char* File::read(int64& size)
+char* File::read(int64_t& size)
 {
 	if (m_pFile == nullptr)
 	{
@@ -176,7 +176,7 @@ char* File::read(int64& size)
 
 	fseek(m_pFile, 0, SEEK_SET);
 	fseek(m_pFile, 0, SEEK_END);
-	int64 count = ftell(m_pFile);
+	int64_t count = ftell(m_pFile);
 	fseek(m_pFile, 0, SEEK_SET);
 
 	char* str = StreamHelper::mallocStream(count * sizeof(char));
@@ -188,7 +188,7 @@ char* File::read(int64& size)
 
 bool File::read(std::string& data)
 {
-	int64 size = 0;
+	int64_t size = 0;
 
 	if (m_nModel & eFM_READ)
 	{
@@ -208,7 +208,7 @@ bool File::read(std::string& data)
 	return true;
 }
 
-bool File::append(const char* data, int64 size)
+bool File::append(const char* data, int64_t size)
 {
 	if (m_pFile == nullptr || data == nullptr)
 	{
@@ -220,7 +220,7 @@ bool File::append(const char* data, int64 size)
 		return false;
 	}
 
-	int64 writtenSize = fwrite(data, sizeof(char), size, m_pFile);
+	int64_t writtenSize = fwrite(data, sizeof(char), size, m_pFile);
 
 	return writtenSize != size;
 }

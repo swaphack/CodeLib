@@ -30,17 +30,17 @@ const Texture* TexFrame::getTexture() const
 	return _texture;
 }
 
-void TexFrame::setRect(const sys::Rect& rect)
+void TexFrame::setRect(const math::Rect& rect)
 {
 	_rect = rect;
 }
 
-const sys::Rect& TexFrame::getRect() const
+const math::Rect& TexFrame::getRect() const
 {
 	return _rect;
 }
 
-void TexFrame::setTextureWithRect(const Texture* texture, const sys::Rect& rect)
+void TexFrame::setTextureWithRect(const Texture* texture, const math::Rect& rect)
 {
 	if (texture == nullptr)
 	{
@@ -53,7 +53,7 @@ void TexFrame::setTextureWithRect(const Texture* texture, const sys::Rect& rect)
 
 void TexFrame::setTextureWithRect(const Texture* texture)
 {
-	this->setTextureWithRect(texture, sys::Rect(0.0f, 0.0f, 1.0f * texture->getWidth(), 1.0f * texture->getHeight()));
+	this->setTextureWithRect(texture, math::Rect(0.0f, 0.0f, 1.0f * texture->getWidth(), 1.0f * texture->getHeight()));
 }
 
 TexFrame& TexFrame::operator=(const TexFrame& value)

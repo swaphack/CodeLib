@@ -30,10 +30,10 @@ void DCDraw::draw()
 
 	glBegin(Type);
 
-	std::vector<sys::Vector3>::const_iterator iter = Points.begin();
+	std::vector<math::Vector3>::const_iterator iter = Points.begin();
 	while (iter != Points.end())
 	{
-		glVertex3f((*iter).x, (*iter).y, (*iter).z);
+		glVertex3f((*iter).getX(), (*iter).getY(), (*iter).getZ());
 		iter++;
 	}
 
@@ -42,7 +42,7 @@ void DCDraw::draw()
 	glDisable(GL_BLEND);
 }
 
-DCDraw* DCDraw::create(int type, const std::vector<sys::Vector3>& points, float width, const sys::Color4B& color, uint8 opacity, const BlendParam& blend)
+DCDraw* DCDraw::create(int type, const std::vector<math::Vector3>& points, float width, const sys::Color4B& color, uint8_t opacity, const BlendParam& blend)
 {
 	DCDraw* pDraw = sys::Instance<DCDraw>::getInstance();
 	pDraw->Type = type;
@@ -50,10 +50,10 @@ DCDraw* DCDraw::create(int type, const std::vector<sys::Vector3>& points, float 
 	pDraw->Blend = blend;
 
 	convertColor4BTo4F(color, pDraw->Color);
-	pDraw->Color.red *= opacity / sys::COLOR_FLOAT_VALUE;
-	pDraw->Color.green *= opacity / sys::COLOR_FLOAT_VALUE;
-	pDraw->Color.blue *= opacity / sys::COLOR_FLOAT_VALUE;
-	pDraw->Color.alpha *= opacity / sys::COLOR_FLOAT_VALUE;
+	pDraw->Color.red *= opacity / COLOR_FLOAT_VALUE;
+	pDraw->Color.green *= opacity / COLOR_FLOAT_VALUE;
+	pDraw->Color.blue *= opacity / COLOR_FLOAT_VALUE;
+	pDraw->Color.alpha *= opacity / COLOR_FLOAT_VALUE;
 
 	pDraw->Points.assign(points.begin(), points.end());
 

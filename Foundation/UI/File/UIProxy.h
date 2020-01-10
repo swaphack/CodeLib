@@ -22,7 +22,7 @@ namespace ui
 		/**
 		*	保存ui配置文件
 		*/
-		bool saveFile(Layout* layout, const char* filepath, const sys::Size& designSize);
+		bool saveFile(Layout* layout, const char* filepath, const math::Size& designSize);
 		/**
 		*	注册节点解析
 		*/
@@ -38,7 +38,7 @@ namespace ui
 		/**
 		*	设计大小
 		*/
-		const sys::Size& getDesignSize();
+		const math::Size& getDesignSize();
 		/**
 		*	获取布局方向
 		*/
@@ -72,7 +72,7 @@ namespace ui
 		// 节点解析集合
 		ElementParsers _elementParsers;
 		// 设计大小
-		sys::Size _designSize;
+		math::Size _designSize;
 		// 布局方向
 		LayoutDirection _designDirection;
 	}; 

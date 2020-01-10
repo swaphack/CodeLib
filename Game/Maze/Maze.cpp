@@ -25,7 +25,7 @@ bool Maze::autoGenerate(int seed, int width, int height)
 
 	this->clear();
 
-	_size = sys::Size(width, height);
+	_size = math::Size(width, height);
 	_nodes = new MazeNode**[height];
 
 	for (int i = 0; i < height; i++)
@@ -38,7 +38,7 @@ bool Maze::autoGenerate(int seed, int width, int height)
 
 			node->value = sys::Random::getInstance()->getNextInteger() == MIN_VALUE ? 0 : 1;
 
-			node->pos = sys::Vector2(j, i);
+			node->pos = math::Vector2(j, i);
 
 			node->append(this->get(i - 1, j));
 			node->append(this->get(i, j - 1));
@@ -80,7 +80,7 @@ MazeNode* Maze::get(int i, int j)
 	return _nodes[i][j];
 }
 
-const sys::Size& Maze::getSize()
+const math::Size& Maze::getSize()
 {
 	return _size;
 }
@@ -129,5 +129,5 @@ void MazeNode::clear()
 {
 	adjacents.clear();
 	value = 0;
-	pos = sys::Vector2::Zero;
+	pos = math::Vector2::Zero;
 }

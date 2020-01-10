@@ -17,7 +17,7 @@ HttpRespDocument::~HttpRespDocument()
 
 }
 
-bool HttpRespDocument::parseResponse(const char* msg, int32 size)
+bool HttpRespDocument::parseResponse(const char* msg, int32_t size)
 {
 	if (msg == nullptr || size <= 0)
 	{
@@ -54,7 +54,7 @@ void HttpRespDocument::setResponseCode(const char* code)
 	setStatus(1, code);
 }
 
-void HttpRespDocument::setResponseCode(int32 code)
+void HttpRespDocument::setResponseCode(int32_t code)
 {
 	setResponseCode(getCString("%d", code));
 }
@@ -74,7 +74,7 @@ void HttpRespDocument::setContentType(const char* value)
 	this->setHeader(HttpResponeField::CONTENT_TYPE, value);
 }
 
-void HttpRespDocument::setContentLength(int32 value)
+void HttpRespDocument::setContentLength(int32_t value)
 {
 	this->setint32egerHeader(HttpResponeField::CONTENT_LENGTH, value);
 }

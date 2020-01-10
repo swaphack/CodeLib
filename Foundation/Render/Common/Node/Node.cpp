@@ -7,6 +7,8 @@ using namespace render;
 
 //////////////////////////////////////////////////////////////////////////
 
+#define USE_MATRIX false
+
 Node::Node()
 :_tag(0)
 ,_userData(nullptr)
@@ -18,6 +20,8 @@ Node::Node()
 , _zOrder(0.0f)
 , _touchProxy(nullptr)
 {
+	_bUseMatrix = USE_MATRIX;
+
 	this->setVisible(true);
 
 	_notify = new Notify();
@@ -36,7 +40,9 @@ bool Node::init()
 	// 添加属性改变监听
 	_notify->addListen(ENP_SPACE, [&](){
 		Tool::convertToOGLPoisition(_position, _obPosition);
-		Tool::calRect(sys::Vector3::Zero, _volume, _anchor, _rectVertex);
+		Tool::convertToRadian(_rotation, _obRotation);
+		Tool::calRect(math::Vector3(), _volume, _anchor, _rectVertex);
+		
 		calRealSpaceInfo(); 
 	});
 
@@ -249,7 +255,11 @@ void Node::visit()
 	}
 
 	// 图形命令
-	G_DRAWCOMMANDER->addCommand(DCMatrix::create(true));
+	if (!_bUseMatrix)
+	{
+		G_DRAWCOMMANDER->addCommand(DCMatrix::create(true));
+	}
+	
 
 	this->updateSelf();
 
@@ -273,8 +283,10 @@ void Node::visit()
 			iter++;
 		}
 	}
-
-	G_DRAWCOMMANDER->addCommand(DCMatrix::create(false));
+	if (!_bUseMatrix)
+	{
+		G_DRAWCOMMANDER->addCommand(DCMatrix::create(false));
+	}
 }
 
 ActionProxy* Node::getActionProxy()
@@ -322,7 +334,15 @@ void Node::draw()
 
 void Node::updateTranform()
 {
-	G_DRAWCOMMANDER->addCommand(DCSpace::create(_obPosition, _scale, _rotation, _bRelative));
+	if (_bUseMatrix)
+	{
+		G_DRAWCOMMANDER->addCommand(DCSpaceMatrix::create(_realMat44));
+	}
+	else
+	{
+		G_DRAWCOMMANDER->addCommand(DCSpace::create(_obPosition, _scale, _rotation, _bRelative));
+	}
+	
 }
 
 void Node::updateSelf()
@@ -378,17 +398,30 @@ void Node::sortChildren()
 	}
 }
 
+
 // 还未对旋转后坐标进行计算
 void Node::calRealSpaceInfo()
 {
-	Node* temp = this;
-	sys::Vector3 position;
-	sys::Vector3 scale = sys::Vector3::One;
-	sys::Volume volume = _volume;
-	do 
+	if (_bUseMatrix)
 	{
-		position.add(temp->getPosition());
-		scale.mult(temp->getScale());
+		calRealSpaceByMatrix();
+	}
+	else
+	{
+		calRealSpaceByValue();
+	}
+}
+
+void Node::calRealSpaceByValue()
+{
+	Node* temp = this;
+	math::Vector3 position;
+	math::Vector3 scale = math::Vector3(1, 1, 1);
+	math::Volume volume = _volume;
+	do
+	{
+		position += temp->getPosition();
+		scale *= temp->getScale();
 
 		if (!temp->isRelativeWithParent())
 		{
@@ -399,12 +432,53 @@ void Node::calRealSpaceInfo()
 			temp = temp->getParent();
 		}
 	} while (temp != NULL);
-	volume.mult(scale);
+	volume *= scale;
 
 	Tool::calRealRect(position, volume, _anchor, _realSpaceVertex);
 
 	_realBodySpace.position = position;
 	_realBodySpace.volume = volume;
+}
+
+void Node::calRealSpaceByMatrix()
+{
+	Matrix44 matScale;
+	matScale.setScale(getScale());
+	Matrix44 matRotate;
+	matRotate.setRotate(_obRotation);
+	Matrix44 matTranslate;
+	matTranslate.setTranslate(_obPosition);
+
+	printf("matScale\n%s\n", matScale.toString().c_str());
+	printf("matRotate\n%s\n", matRotate.toString().c_str());
+	printf("matTranslate\n%s\n", matTranslate.toString().c_str());
+
+	_mat44 = matTranslate * matRotate * matScale;
+
+	printf("mat\n%s\n", _mat44.toString().c_str());
+
+	Node* temp = this;
+	std::vector<Matrix44> vecMat;
+	do
+	{
+		vecMat.insert(vecMat.begin(), temp->getMatrix());
+		if (!temp->isRelativeWithParent())
+		{
+			break;
+		}
+		else
+		{
+			temp = temp->getParent();
+		}
+	} while (temp != NULL);
+
+	Matrix44 ret;
+	for (auto &item : vecMat)
+	{
+		ret = item * ret;
+	}
+
+	_realMat44 = ret;
 }
 
 void Node::onSpaceChange()
@@ -423,4 +497,14 @@ void Node::onChildrenChange()
 {
 	setDirty(true);
 	_notify->addMark(ENP_NODE);
+}
+
+const math::Matrix44& Node::getRealMatrix()
+{
+	return _realMat44;
+}
+
+const math::Matrix44& Node::getMatrix()
+{
+	return _mat44;
 }

@@ -18,14 +18,14 @@ void DCSpace::draw()
 		glLoadIdentity();
 	}
 
-	glTranslatef(Position.x, Position.y, Position.z);
-	glRotatef(Rotation.x, 1, 0, 0);
-	glRotatef(Rotation.y, 0, 1, 0);
-	glRotatef(Rotation.z, 0, 0, 1);
-	glScalef(Scale.x, Scale.y, Scale.z);
+	glScalef(Scale.getX(), Scale.getY(), Scale.getZ());
+	glRotatef(Rotation.getX(), 1, 0, 0);
+	glRotatef(Rotation.getY(), 0, 1, 0);
+	glRotatef(Rotation.getZ(), 0, 0, 1);
+	glTranslatef(Position.getX(), Position.getY(), Position.getZ());
 }
 
-DCSpace* DCSpace::create(const sys::Vector3& position, const sys::Vector3& scale, const sys::Vector3& rotation, bool relative)
+DCSpace* DCSpace::create(const math::Vector3& position, const math::Vector3& scale, const math::Vector3& rotation, bool relative)
 {
 	DCSpace* pSpace = sys::Instance<DCSpace>::getInstance();
 	pSpace->Position = position;
@@ -33,5 +33,30 @@ DCSpace* DCSpace::create(const sys::Vector3& position, const sys::Vector3& scale
 	pSpace->Rotation = rotation;
 	pSpace->Relative = relative;
 
+	return pSpace;
+}
+
+//////////////////////////////////////////////////////////////////////////
+DCSpaceMatrix::DCSpaceMatrix()
+{
+
+}
+
+DCSpaceMatrix::~DCSpaceMatrix()
+{
+
+}
+
+void DCSpaceMatrix::draw()
+{
+	glLoadIdentity();
+
+	glMultMatrixf(Matrix.value());
+}
+
+DCSpaceMatrix* DCSpaceMatrix::create(const math::Matrix& matrix)
+{
+	DCSpaceMatrix* pSpace = sys::Instance<DCSpaceMatrix>::getInstance();
+	pSpace->Matrix = matrix.transpose();
 	return pSpace;
 }

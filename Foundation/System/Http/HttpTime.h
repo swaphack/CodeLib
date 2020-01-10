@@ -13,7 +13,7 @@ namespace sys
 	{
 	public:
 		// 时间长度
-		static const int32 TIME_COUNT = 255;
+		static const int32_t TIME_COUNT = 255;
 		// 星期
 		static const char* TIME_WKDAY[7];
 		// 星期

@@ -5,7 +5,7 @@
 
 using namespace sys;
 
-int32 sys::RemoteResource::s_Tag = 0;
+int32_t sys::RemoteResource::s_Tag = 0;
 
 RemoteResource::RemoteResource()
 {
@@ -60,7 +60,7 @@ bool RemoteResource::loadFileData(const char* filename, GetDataCallback handler)
 	temp.split(':', params);
 
 	std::string ip;
-	int32 port = 80;
+	int32_t port = 80;
 	if (params.size() >= 1)
 	{
 		ip = params[0].getString();
@@ -111,7 +111,7 @@ bool RemoteResource::getCacheData(const char* fullpath, std::string& data)
 	return true;
 }
 
-void RemoteResource::onDownloadCallback(int32 tag, const char* data, int32 size)
+void RemoteResource::onDownloadCallback(int32_t tag, const char* data, int32_t size)
 {
 	if (_downloadTasks.find(tag) == _downloadTasks.end()) {
 		return;

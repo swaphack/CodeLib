@@ -22,29 +22,29 @@ namespace sys
 	{
 	public:
 		File(const char* url);
-		File(const char* url, int32 mode);
+		File(const char* url, int32_t mode);
 		~File();
 	public:
 		// 将数据写到本地
-		static bool write(const char* url, const char* data, int64 size, int64& writtenSize);
+		static bool write(const char* url, const char* data, int64_t size, int64_t& writtenSize);
 		// 从本地读取数据
-		static char* read(const char* url, int64& readSize);
+		static char* read(const char* url, int64_t& readSize);
 		// 从本地读取数据
 		static bool read(const char* url, std::string& data);
 		// 追加数据到本地
-		static bool append(const char* url, const char* data, int64 size, int64& appendSize);
+		static bool append(const char* url, const char* data, int64_t size, int64_t& appendSize);
 		// 判断文件是否存在
 		static bool exists(const char* url);
 	public:
 		bool open();
 		// 将数据写到本地
-		bool write(const char* data, int64 size, int64& writtenSize);
+		bool write(const char* data, int64_t size, int64_t& writtenSize);
 		// 从本地读取数据
-		char* read(int64& size);
+		char* read(int64_t& size);
 		// 从本地读取数据
 		bool read(std::string& data);
 		// 追加数据到本地
-		bool append(const char* data, int64 size);
+		bool append(const char* data, int64_t size);
 		// 判断文件是否存在
 		bool exists();
 		// 关闭
@@ -55,6 +55,6 @@ namespace sys
 		// 句柄id
 		FILE* m_pFile;
 		// 模式
-		int32 m_nModel;
+		int32_t m_nModel;
 	};
 }

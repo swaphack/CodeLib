@@ -12,13 +12,13 @@ namespace render
 	public:
 		sys::Color4F Color;
 		BlendParam Blend;
-		sys::Vector3 Position[4];
+		math::Vector3 Position[4];
 	public:
 		DCMask();
 		virtual ~DCMask();
 	public:
 		virtual void draw();
 	public:
-		static DCMask* create(const RectVertex* rectVertex, const sys::Color4B& color, uint8 opacity, const BlendParam& blend);
+		static DCMask* create(const RectVertex* rectVertex, const sys::Color4B& color, uint8_t opacity, const BlendParam& blend);
 	};
 }

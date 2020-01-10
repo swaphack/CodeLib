@@ -12,7 +12,7 @@ namespace sys
 		String(const String& value);
 		String(const std::string& value);
 		String(const char* value);
-		String(const char* value, int32 count);
+		String(const char* value, int32_t count);
 		~String();
 	public:
 		// 赋值
@@ -25,13 +25,13 @@ namespace sys
 		String operator+(const char* value);
 
 		// 获取索引的字符
-		char operator[](int32 index);
-		char& at(int32 index);
+		char operator[](int32_t index);
+		char& at(int32_t index);
 
 		// 尾部追加字符
-		void append(int32 count, char value);
+		void append(int32_t count, char value);
 		// 尾部追加字符串
-		void append(int32 count, char* value);
+		void append(int32_t count, char* value);
 		// 替换指定的字符
 		String replace(char spot, char* value);
 		// 替换指定的字符串
@@ -47,27 +47,27 @@ namespace sys
 
 		// 比较两字符串是否相同
 		bool compare(const char* value);
-		bool compare(int32 offset, const char* value);
-		bool compare(int32 offset, const char* value, int32 count);
+		bool compare(int32_t offset, const char* value);
+		bool compare(int32_t offset, const char* value, int32_t count);
 		// 以指定字符串结尾
 		bool endWith(const char* value);
 		// 以指定字符串开头
 		bool startWith(const char* value);
 		// 移除从指定位置开始的一段字符串
-		String& remove(int32 offset, int32 count);
+		String& remove(int32_t offset, int32_t count);
 		// 插入字符串
-		String& insert(int32 offset, const char* value);
+		String& insert(int32_t offset, const char* value);
 		// 移除从指定位置开始的一段字符串
-		String subString(int32 offset, int32 count);
+		String subString(int32_t offset, int32_t count);
 
 		// 开始位置查找匹配字符的索引位置
-		int32 findFirstOf(char value);
+		int32_t findFirstOf(char value);
 		// 开始位置查找匹配字符串的索引位置
-		int32 findFirstOf(const char* value);
+		int32_t findFirstOf(const char* value);
 		// 结束位置查找匹配字符的索引位置
-		int32 findLastOf(char value);
+		int32_t findLastOf(char value);
 		// 结束位置查找匹配字符的索引位置
-		int32 findLastOf(const char* value);
+		int32_t findLastOf(const char* value);
 		// 是否是句子
 		bool isLine();
 
@@ -101,11 +101,11 @@ namespace sys
 		// 获取字符串数据
 		const char* getString() const;
 		// 获取字符串长度
-		int32 getSize() const;
+		int32_t getSize() const;
 	private:
 		// 数据
 		char* _value;
 		// 长度
-		int32 _size;
+		int32_t _size;
 	};
 }

@@ -15,12 +15,10 @@ ParticleProtocol::~ParticleProtocol()
 
 void ParticleProtocol::setSpeedAcceleration(float x, float y, float z)
 {
-	_speedAcceleration.x = x;
-	_speedAcceleration.y = y;
-	_speedAcceleration.z = z;
+	_speedAcceleration.set(x,y,z);
 }
 
-sys::Vector3 ParticleProtocol::getSpeedAccelertaion()
+math::Vector3 ParticleProtocol::getSpeedAccelertaion()
 {
 	return _speedAcceleration;
 }
@@ -35,24 +33,20 @@ void ParticleProtocol::setColorAcceleration(float red, float green, float blue, 
 
 void ParticleProtocol::setAngleAcceleration(float x, float y, float z)
 {
-	_angleAcceleration.x = x;
-	_angleAcceleration.y = y;
-	_angleAcceleration.z = z;
+	_angleAcceleration.set(x, y, z);
 }
 
-sys::Vector3 ParticleProtocol::getAngleAcceleration()
+math::Vector3 ParticleProtocol::getAngleAcceleration()
 {
 	return _angleAcceleration;
 }
 
 void ParticleProtocol::setScaleAcceleration(float x, float y, float z)
 {
-	_scaleAcceleration.x = x;
-	_scaleAcceleration.y = y;
-	_scaleAcceleration.z = z;
+	_scaleAcceleration.set(x,y,z);
 }
 
-sys::Vector3 ParticleProtocol::getScaleAcceleration()
+math::Vector3 ParticleProtocol::getScaleAcceleration()
 {
 	return _scaleAcceleration;
 }
