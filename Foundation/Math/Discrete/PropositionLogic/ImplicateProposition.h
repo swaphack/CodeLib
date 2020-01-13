@@ -12,6 +12,7 @@ namespace math
 	public:
 		ImplicateProposition();
 		ImplicateProposition(Proposition* a, Proposition* b);
+		virtual ~ImplicateProposition();
 	public:
 		/**
 		*	√¸Ã‚A
@@ -36,6 +37,7 @@ namespace math
 	public:
 		DoubleImplicateProposition();
 		DoubleImplicateProposition(Proposition* a, Proposition* b);
+		virtual ~DoubleImplicateProposition();
 	public:
 		/**
 		*	√¸Ã‚A

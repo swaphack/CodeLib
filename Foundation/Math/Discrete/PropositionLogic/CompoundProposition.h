@@ -8,39 +8,33 @@
 namespace math
 {
 	/**
-	*	复合类型
-	*/
-	enum class CompoundPropositionType
-	{
-		NONE,
-		AND,
-		OR,
-		NOT,
-		// 蕴含
-		Implicate,
-		// 双重蕴含
-		DoubleImplicate,
-	};
-	/**
 	*	复合命题
 	*	叶子节点是基础命题，其他节点为逻辑符号
 	*/
 	class CompoundProposition : public Proposition
 	{
 	public:
+		// 与
+		const uint64_t COMPOUND_PROPOSITION_SIGNAL_AND = 1000001;
+		// 或
+		const uint64_t COMPOUND_PROPOSITION_SIGNAL_OR = 1000001;
+		// 非
+		const uint64_t COMPOUND_PROPOSITION_SIGNAL_NOT = 1000001;
+		// 异或
+		const uint64_t COMPOUND_PROPOSITION_SIGNAL_XOR = 1000001;
+		// 蕴含
+		const uint64_t COMPOUND_PROPOSITION_SIGNAL_IMPLICATE = 1000001;
+		// 双重蕴含
+		const uint64_t COMPOUND_PROPOSITION_SIGNAL_DOUBLEIMPLICATE = 1000001;
+	public:
 		CompoundProposition();
 		CompoundProposition(const CompoundProposition& value);
 		virtual ~CompoundProposition();
 	public:
 		/**
-		*	复合类型
-		*/
-		CREATE_CLASS_MEMBER_WITH_DEFAULT(CompoundPropositionType, CompoundType, CompoundPropositionType::NONE);
-	public:
-		/**
 		*	是否相同
 		*/
-		virtual bool isSameTo(Proposition* proposition);
+		virtual bool hasSameLogic(Proposition* proposition);
 		/**
 		*	获取所有唯一id节点
 		*/

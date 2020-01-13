@@ -71,7 +71,7 @@ Widget* LayoutItem::getWidget()
 
 void LayoutItem::setAnchorPosition(AnchorPosition anchorPos)
 {
-	m_eAnchorPosition = (AnchorPosition)anchorPos;
+	m_eAnchorPosition = anchorPos;
 }
 
 AnchorPosition LayoutItem::getAnchorPosition()

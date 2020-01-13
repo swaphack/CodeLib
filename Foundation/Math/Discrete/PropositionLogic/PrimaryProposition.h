@@ -35,15 +35,19 @@ namespace math
 		*	命题结果
 		*/
 		CREATE_CLASS_MEMBER_WITH_DEFAULT(PropositionResult, Result, PropositionResult::TRUE);
+		/**
+		*	命题编号
+		*/
+		CREATE_CLASS_MEMBER_WITH_DEFAULT(uint64_t, Identify, 0);
 	public:
 		/**
 		*	是否为真
 		*/
 		virtual bool isTrue();
 		/**
-		*	是否相同
+		*	逻辑是否相同
 		*/
-		virtual bool isSameTo(Proposition* proposition);
+		virtual bool hasSameLogic(Proposition* proposition);
 	public:
 		/**
 		*	复制

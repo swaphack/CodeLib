@@ -19,23 +19,14 @@ CompoundProposition::~CompoundProposition()
 
 }
 
-bool CompoundProposition::isSameTo(Proposition* proposition)
+bool CompoundProposition::hasSameLogic(Proposition* proposition)
 {
 	if (proposition == nullptr)
 	{
 		return false;
 	}
-	if (proposition->getType() != PropositionType::Compound)
-	{
-		return false;
-	}
 
-	if (proposition->get<CompoundProposition>()->getCompoundType() != this->getCompoundType())
-	{
-		return false;
-	}
-
-	if (!Proposition::isSameTo(proposition))
+	if (!Proposition::hasSameLogic(proposition))
 	{
 		return false;
 	}
@@ -55,8 +46,8 @@ std::set<TreeNode*> CompoundProposition::getAllUniqueIdentifyChildren()
 
 	for (auto item : vecLeaf)
 	{
-		auto proposition = item->get<Proposition>();
-		if (proposition && proposition->getIdentify() != 0)
+		auto proposition = item->as<Proposition>();
+		if (proposition && proposition->getLogicID() != 0)
 		{
 			result.insert(item);
 		}
@@ -73,13 +64,13 @@ bool CompoundProposition::matchChildren(const std::vector<TreeNode*>& children)
 	}
 	for (auto i = 0; i < children.size(); i++)
 	{
-		Proposition* p0 = getChildAt(i)->get<Proposition>();
-		Proposition* p1 = children[i]->get<Proposition>();
+		Proposition* p0 = getChildAt(i)->as<Proposition>();
+		Proposition* p1 = children[i]->as<Proposition>();
 		if (p0 == nullptr || p1 == nullptr)
 		{
 			return false;
 		}
-		if (!p0->isSameTo(p1))
+		if (!p0->hasSameLogic(p1))
 		{
 			return false;
 		}
@@ -91,7 +82,7 @@ CompoundProposition& CompoundProposition::operator=(const CompoundProposition& v
 {
 	Proposition::operator=(value);
 
-	this->setCompoundType(value.getCompoundType());
+	this->setLogicID(value.getLogicID());
 	this->removeAllChildren();
 	for (auto item : value.getChildren())
 	{

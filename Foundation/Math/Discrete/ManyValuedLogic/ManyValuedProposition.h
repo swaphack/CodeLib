@@ -23,6 +23,6 @@ namespace math
 		/**
 		*	 «∑Òœ‡Õ¨
 		*/
-		virtual bool isSameTo(Proposition* proposition);
+		virtual bool hasSameLogic(Proposition* proposition);
 	};
 }

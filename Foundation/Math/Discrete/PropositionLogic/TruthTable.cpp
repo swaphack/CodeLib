@@ -2,18 +2,19 @@
 #include "CompoundProposition.h"
 #include "PrimaryProposition.h"
 #include <cassert>
+#include <functional>
 
 using namespace math;
 
 
-bool TruthTable::getResult(CompoundProposition* proposition, const std::map<uint64_t, bool>& idValue)
+bool TruthTable::testResult(CompoundProposition* proposition, const std::map<uint64_t, bool>& idValue)
 {
 	assert(proposition != nullptr);
 
 	auto selfIdentify = proposition->getAllUniqueIdentifyChildren();
 	for (auto item : selfIdentify)
 	{
-		auto pp = item->get<PrimaryProposition>();
+		auto pp = item->as<PrimaryProposition>();
 		auto it = idValue.find(pp->getIdentify());
 		assert(it != idValue.end());
 		pp->setResult(it->second ? PropositionResult::TRUE : PropositionResult::FALSE);
@@ -22,7 +23,7 @@ bool TruthTable::getResult(CompoundProposition* proposition, const std::map<uint
 	return proposition->isTrue();
 }
 
-bool TruthTable::isTowPropositionEqual(CompoundProposition* a, CompoundProposition* b)
+bool TruthTable::isTwoPropositionsEqual(CompoundProposition* a, CompoundProposition* b)
 {
 	auto selfIdentify = a->getAllUniqueIdentifyChildren();
 	auto otherIdentify = b->getAllUniqueIdentifyChildren();
@@ -45,22 +46,125 @@ bool TruthTable::isTowPropositionEqual(CompoundProposition* a, CompoundPropositi
 	std::vector<uint64_t> vecId;
 	for (auto item : selfIdentify)
 	{
-		uint64_t id = item->get<Proposition>()->getIdentify();
+		uint64_t id = item->as<Proposition>()->getLogicID();
 		vecId.push_back(id);
 		mapTest[id] = false;
 	}
-	for (int i = 0; i < selfIdentify.size(); i++)
-	{
-		if (getResult(a, mapTest) != getResult(b, mapTest))
-		{
-			return false;
-		}
-		mapTest[vecId[i]] = true;
-		if (getResult(a, mapTest) != getResult(b, mapTest))
-		{
-			return false;
-		}
-	}
 
+	int32_t count = selfIdentify.size();
+	int32_t index = 0;
+	bool ret = true;
+	std::function<void(int32_t)> func;
+	func = [&](int32_t j){
+		if (!ret)
+		{
+			return;
+		}
+		if (j == count - 1)
+		{
+			// 假值
+			if (testResult(a, mapTest) != testResult(b, mapTest))
+			{
+				ret = false;
+				return;
+			}
+			return;
+		}
+		for (int i = 0; i < 2; i++)
+		{
+			mapTest[vecId[j]] = i == 0 ? false : true;
+			func(j++);
+		}
+	};
+
+	func(0);
+
+	return ret;
+}
+
+bool TruthTable::isTautologyProposition(CompoundProposition* a)
+{
+	auto selfIdentify = a->getAllUniqueIdentifyChildren();
+
+	// 真值比较
+	std::map<uint64_t, bool> mapTest;
+	std::vector<uint64_t> vecId;
+	for (auto item : selfIdentify)
+	{
+		uint64_t id = item->as<Proposition>()->getLogicID();
+		vecId.push_back(id);
+		mapTest[id] = false;
+	}
+	int32_t count = selfIdentify.size();
+	int32_t index = 0;
+	bool ret = true;
+	std::function<void(int32_t)> func;
+	func = [&](int32_t j){
+		if (!ret)
+		{
+			return;
+		}
+		if (j == count - 1)
+		{
+			// 假值
+			if (!testResult(a, mapTest))
+			{
+				ret = false;
+				return;
+			}
+			return;
+		}
+		for (int i = 0; i < 2; i++)
+		{
+			mapTest[vecId[j]] = i == 0 ? false : true;
+			func(j++);
+		}
+	};
+
+	func(0);
+
+	return ret;
+}
+
+bool TruthTable::isContradictoryProposition(CompoundProposition* a)
+{
+	auto selfIdentify = a->getAllUniqueIdentifyChildren();
+
+	// 真值比较
+	std::map<uint64_t, bool> mapTest;
+	std::vector<uint64_t> vecId;
+	for (auto item : selfIdentify)
+	{
+		uint64_t id = item->as<Proposition>()->getLogicID();
+		vecId.push_back(id);
+		mapTest[id] = false;
+	}
+	int32_t count = selfIdentify.size();
+	int32_t index = 0;
+	bool ret = true;
+	std::function<void(int32_t)> func;
+	func = [&](int32_t j){
+		if (!ret)
+		{
+			return;
+		}
+		if (j == count - 1)
+		{
+			// 真值
+			if (testResult(a, mapTest))
+			{
+				ret = false;
+				return;
+			}
+			return;
+		}
+		for (int i = 0; i < 2; i++)
+		{
+			mapTest[vecId[j]] = i == 0 ? false : true;
+			func(j++);
+		}
+	};
+
+	func(0);
 	return true;
 }

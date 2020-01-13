@@ -7,9 +7,9 @@ bool ManyValuedProposition::isTrue() const
 	return getPercent() > 0;
 }
 
-bool ManyValuedProposition::isSameTo(Proposition* proposition)
+bool ManyValuedProposition::hasSameLogic(Proposition* proposition)
 {
-	if (!Proposition::isSameTo(proposition))
+	if (!Proposition::hasSameLogic(proposition))
 	{
 		return false;
 	}

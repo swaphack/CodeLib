@@ -11,7 +11,12 @@ ImplicateProposition::ImplicateProposition(Proposition* a, Proposition* b)
 
 ImplicateProposition::ImplicateProposition()
 {
-	this->setCompoundType(CompoundPropositionType::Implicate);
+	this->setLogicID(COMPOUND_PROPOSITION_SIGNAL_IMPLICATE);
+}
+
+ImplicateProposition::~ImplicateProposition()
+{
+
 }
 
 bool ImplicateProposition::isTrue()
@@ -24,6 +29,8 @@ bool ImplicateProposition::isTrue()
 	return true;
 }
 
+
+
 //////////////////////////////////////////////////////////////////////////
 DoubleImplicateProposition::DoubleImplicateProposition(Proposition* a, Proposition* b)
 	:DoubleImplicateProposition()
@@ -34,7 +41,12 @@ DoubleImplicateProposition::DoubleImplicateProposition(Proposition* a, Propositi
 
 DoubleImplicateProposition::DoubleImplicateProposition()
 {
-	this->setCompoundType(CompoundPropositionType::DoubleImplicate);
+	this->setLogicID(COMPOUND_PROPOSITION_SIGNAL_DOUBLEIMPLICATE);
+}
+
+DoubleImplicateProposition::~DoubleImplicateProposition()
+{
+
 }
 
 bool DoubleImplicateProposition::isTrue()

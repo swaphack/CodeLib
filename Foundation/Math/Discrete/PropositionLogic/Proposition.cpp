@@ -2,6 +2,8 @@
 
 using namespace math;
 
+PropositionCache Proposition::_propositionCache;
+
 Proposition::Proposition(const Proposition& proposition)
 {
 	*this = proposition;
@@ -22,66 +24,62 @@ bool Proposition::isTrue()
 	return false;
 }
 
-bool Proposition::hasSameIdentify(Proposition* proposition)
-{
-	return proposition->getIdentify() == getIdentify();
-}
-
-bool Proposition::isSameTo(Proposition* proposition)
+bool Proposition::hasSameLogic(Proposition* proposition)
 {
 	if (proposition == nullptr)
 	{
 		return false;
 	}
 
-	if (getType() != proposition->getType())
+	if (proposition->getType() != this->getType())
 	{
 		return false;
 	}
 
-	if (proposition->getIdentify() != this->getIdentify())
-	{
-		return false;
-	}
-
-	return proposition->isTrue() == this->isTrue();
+	return proposition->getLogicID() == this->getLogicID();
 }
 
 bool Proposition::operator==(const Proposition& value) const
 {
-	return getIdentify() == value.getIdentify();
+	return getInstanceID() == value.getInstanceID();
 }
 
 Proposition& Proposition::operator=(const Proposition& value)
 {
-	this->setIdentify(value.getIdentify());
-	this->setUserData(value.getUserData());
+	Node::operator=(value);
+
+	this->setLogicID(value.getLogicID());
 
 	return *this;
 }
 
 bool Proposition::operator!=(const Proposition& value) const
 {
-	return getIdentify() != value.getIdentify();
+	return getInstanceID() != value.getInstanceID();
 }
 
 bool Proposition::operator>=(const Proposition& value) const
 {
-	return getIdentify() >= value.getIdentify();
+	return getInstanceID() >= value.getInstanceID();
 }
 
 bool Proposition::operator>(const Proposition& value) const
 {
-	return getIdentify() > value.getIdentify();
+	return getInstanceID() > value.getInstanceID();
 }
 
 bool Proposition::operator<(const Proposition& value) const
 {
-	return getIdentify() < value.getIdentify();
+	return getInstanceID() < value.getInstanceID();
 }
 
 bool Proposition::operator<=(const Proposition& value) const
 {
-	return getIdentify() <= value.getIdentify();
+	return getInstanceID() <= value.getInstanceID();
+}
+
+void Proposition::cleanCache()
+{
+	_propositionCache.clear();
 }
 

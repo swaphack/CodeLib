@@ -17,13 +17,13 @@ void testMatrix()
 void testInference()
 {
 	PrimaryProposition a(PropositionResult::TRUE);
-	a.setIdentify(1);
+	a.setLogicID(1);
 
 	PrimaryProposition b(PropositionResult::FALSE);
-	b.setIdentify(2);
+	b.setLogicID(2);
 
 	DisjunctiveProposition c(&a, &b);
-	c.setIdentify(3);
+	c.setLogicID(3);
 
 	int dfd = 1;
 }

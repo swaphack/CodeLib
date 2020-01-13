@@ -28,26 +28,26 @@ bool PrimaryProposition::isTrue()
 	return getResult() == PropositionResult::TRUE;
 }
 
-bool PrimaryProposition::isSameTo(Proposition* proposition)
+PrimaryProposition& PrimaryProposition::operator=(const PrimaryProposition& value)
+{
+	Proposition::operator=(value);
+	this->setResult(value.getResult());
+	return *this;
+}
+
+bool PrimaryProposition::hasSameLogic(Proposition* proposition)
 {
 	if (proposition == nullptr)
 	{
 		return false;
 	}
 
-	if (proposition->getType() != PropositionType::Primary)
+	if (!Proposition::hasSameLogic(proposition))
 	{
 		return false;
 	}
 
-	return Proposition::isSameTo(proposition);
-}
-
-PrimaryProposition& PrimaryProposition::operator=(const PrimaryProposition& value)
-{
-	Proposition::operator=(value);
-	this->setResult(value.getResult());
-	return *this;
+	return this->getResult() == proposition->get<PrimaryProposition>()->getResult();
 }
 
 

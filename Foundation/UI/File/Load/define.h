@@ -15,8 +15,8 @@ namespace ui
 #define INIT_LOADER_WIDGET(TL,TW, NAME) \
 public:\
 	virtual const char* getName() { return NAME; }\
-	TW* getCastWidget() { return static_cast<TW*>(getWidget()); }\
-	TL* getCastLayoutItem() { return static_cast<TL*>(getLayoutItem()); } \
+	TW* getCastWidget() { return dynamic_cast<TW*>(getWidget()); }\
+	TL* getCastLayoutItem() { return dynamic_cast<TL*>(getLayoutItem()); } \
 	virtual void initLayoutItem() { _layoutItem = new TL();} \
 	virtual void initWidget() {_node = CREATE_NODE(TW);}
 

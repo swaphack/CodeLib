@@ -12,6 +12,7 @@ DisjunctiveProposition::DisjunctiveProposition(Proposition* a, Proposition* b)
 
 DisjunctiveProposition::DisjunctiveProposition()
 {
+	this->setLogicID(COMPOUND_PROPOSITION_SIGNAL_OR);
 }
 
 DisjunctiveProposition::DisjunctiveProposition(const DisjunctiveProposition& value)
@@ -49,6 +50,7 @@ CombinedProposition::CombinedProposition(Proposition* a, Proposition* b)
 
 CombinedProposition::CombinedProposition()
 {
+	this->setLogicID(COMPOUND_PROPOSITION_SIGNAL_AND);
 }
 
 CombinedProposition::CombinedProposition(const CombinedProposition& value)
@@ -84,6 +86,7 @@ NegativeProposition::NegativeProposition(Proposition* a)
 NegativeProposition::NegativeProposition()
 {
 	_children.resize(1);
+	this->setLogicID(COMPOUND_PROPOSITION_SIGNAL_NOT);
 }
 
 NegativeProposition::NegativeProposition(const NegativeProposition& value)
@@ -114,6 +117,7 @@ NegativeProposition& NegativeProposition::operator=(const NegativeProposition& v
 //////////////////////////////////////////////////////////////////////////
 ExclusiveORProposition::ExclusiveORProposition()
 {
+	this->setLogicID(COMPOUND_PROPOSITION_SIGNAL_XOR);
 }
 
 ExclusiveORProposition::ExclusiveORProposition(Proposition* a, Proposition* b)

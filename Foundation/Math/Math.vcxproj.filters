@@ -385,6 +385,12 @@
     <ClInclude Include="Discrete\PropositionLogic\TruthTable.h">
       <Filter>Discrete\PropositionLogic</Filter>
     </ClInclude>
+    <ClInclude Include="Discrete\PropositionLogic\EquivalenceRule.h">
+      <Filter>Discrete\PropositionLogic</Filter>
+    </ClInclude>
+    <ClInclude Include="Discrete\PropositionLogic\PropositionCache.h">
+      <Filter>Discrete\PropositionLogic</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Algebra\Polynomial.cpp">
@@ -600,6 +606,12 @@
     </ClCompile>
     <ClCompile Include="Basic\Collection\Node.cpp">
       <Filter>Basic\Collection</Filter>
+    </ClCompile>
+    <ClCompile Include="Discrete\PropositionLogic\EquivalenceRule.cpp">
+      <Filter>Discrete\PropositionLogic</Filter>
+    </ClCompile>
+    <ClCompile Include="Discrete\PropositionLogic\PropositionCache.cpp">
+      <Filter>Discrete\PropositionLogic</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
