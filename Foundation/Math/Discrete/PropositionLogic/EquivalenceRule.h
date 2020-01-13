@@ -1,12 +1,13 @@
 #pragma once
 
-#include "Basic/Collection/NodeCache.h"
-#include "Proposition.h"
-#include "PrimaryProposition.h"
-#include "BooleanProposition.h"
+#include <set>
+#include <vector>
 
 namespace math
 {
+	class CompoundProposition;
+	class Proposition;
+	class EquivalenceSample;
 	/**
 	*	等价规则
 	*/
@@ -16,57 +17,34 @@ namespace math
 		EquivalenceRule();
 		virtual ~EquivalenceRule();
 	public:
+		void init();
 		/**
 		*	获取等价式
 		*/
-		virtual CompoundProposition* GetEquivalenceProposition(CompoundProposition* proposition);
-	};
-
-	//////////////////////////////////////////////////////////////////////////
-	/**
-	*	!(a&b) = (!a) | (!b);
-	*/
-	class EquivalenceRule1 : public EquivalenceRule
-	{
-	public:
-		EquivalenceRule1();
-		virtual ~EquivalenceRule1();
+		std::vector<Proposition*> getEquivalenceProposition(CompoundProposition* proposition);
 	public:
 		/**
-		*	获取等价式
+		*	创建节点
 		*/
-		virtual CompoundProposition* GetEquivalenceProposition(CompoundProposition* proposition);
-	};
-
-	//////////////////////////////////////////////////////////////////////////
-	/**
-	*	!(a|b) = (!a) & (!b);
-	*/
-	class EquivalenceRule2 : public EquivalenceRule
-	{
-	public:
-		EquivalenceRule2();
-		virtual ~EquivalenceRule2();
-	public:
+		template<typename T, typename = typename std::enable_if<std::is_base_of<EquivalenceSample, T>::value, T>::type>
+		void addEquivalenceSample()
+		{
+			T* t = new T();
+			this->addEquivalenceSample(t);
+		}
 		/**
-		*	获取等价式
+		*	添加等价实例
 		*/
-		virtual CompoundProposition* GetEquivalenceProposition(CompoundProposition* proposition);
-	};
-
-	//////////////////////////////////////////////////////////////////////////
-	/**
-	*	a | (b&c) = (a|b) & (a|c);
-	*/
-	class EquivalenceRule3 : public EquivalenceRule
-	{
-	public:
-		EquivalenceRule3();
-		virtual ~EquivalenceRule3();
-	public:
+		void addEquivalenceSample(EquivalenceSample* sample);
 		/**
-		*	获取等价式
+		*	移除等价实例
 		*/
-		virtual CompoundProposition* GetEquivalenceProposition(CompoundProposition* proposition);
+		void removeEquivalenceSample(EquivalenceSample* sample);
+		/**
+		*	移除所有等价实例
+		*/
+		void removeAllEquivalenceSamples();
+	private:
+		std::set<EquivalenceSample*> _equivalenceSamples;
 	};
 }

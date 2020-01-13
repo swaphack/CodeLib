@@ -1,7 +1,11 @@
 #include "Proposition.h"
+#include "TruthTable.h"
+#include "CompoundProposition.h"
 
 using namespace math;
 
+ContradictoryProposition* Proposition::_contradictoryProposition = nullptr;
+TautologyProposition* Proposition::_tautologyProposition = nullptr;
 PropositionCache Proposition::_propositionCache;
 
 Proposition::Proposition(const Proposition& proposition)
@@ -81,5 +85,76 @@ bool Proposition::operator<=(const Proposition& value) const
 void Proposition::cleanCache()
 {
 	_propositionCache.clear();
+	_tautologyProposition = nullptr;
+	_contradictoryProposition = nullptr;
 }
 
+TautologyProposition* Proposition::getTautologyProposition()
+{
+	if (_tautologyProposition = nullptr)
+	{
+		_tautologyProposition = Proposition::createProposition<TautologyProposition>();
+	}
+
+	return _tautologyProposition;
+}
+
+ContradictoryProposition* Proposition::getContradictoryProposition()
+{
+	if (_contradictoryProposition = nullptr)
+	{
+		_contradictoryProposition = Proposition::createProposition<ContradictoryProposition>();
+	}
+
+	return _contradictoryProposition;
+}
+
+//////////////////////////////////////////////////////////////////////////
+TautologyProposition::TautologyProposition()
+{
+
+}
+
+TautologyProposition::~TautologyProposition()
+{
+
+}
+
+bool TautologyProposition::isTrue()
+{
+	return true;
+}
+
+bool TautologyProposition::hasSameLogic(Proposition* proposition)
+{
+	if (proposition->getType() != PropositionType::Compound)
+	{
+		return false;
+	}
+	return TruthTable::isTautologyProposition(proposition->as<CompoundProposition>());
+}
+
+//////////////////////////////////////////////////////////////////////////
+ContradictoryProposition::ContradictoryProposition()
+{
+
+}
+
+ContradictoryProposition::~ContradictoryProposition()
+{
+
+}
+
+bool ContradictoryProposition::isTrue()
+{
+	return false;
+}
+
+bool ContradictoryProposition::hasSameLogic(Proposition* proposition)
+{
+	if (proposition->getType() != PropositionType::Compound)
+	{
+		return false;
+	}
+	return TruthTable::isContradictoryProposition(proposition->as<CompoundProposition>());
+}

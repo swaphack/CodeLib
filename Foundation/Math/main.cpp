@@ -1,7 +1,6 @@
 #include "Algebra/Matrix.h"
 #include "Geometry/base/Matrix22.h"
 #include "Discrete/PropositionLogic/import.h"
-
 #include <iostream>
 
 using namespace math;
@@ -16,16 +15,28 @@ void testMatrix()
 
 void testInference()
 {
-	PrimaryProposition a(PropositionResult::TRUE);
-	a.setLogicID(1);
+	PrimaryProposition* a = Proposition::createProposition<PrimaryProposition>();
+	a->setResult(PropositionResult::TRUE);
+	a->setLogicID(1);
 
-	PrimaryProposition b(PropositionResult::FALSE);
-	b.setLogicID(2);
+	PrimaryProposition* b = Proposition::createProposition<PrimaryProposition>();
+	b->setResult(PropositionResult::FALSE);
+	b->setLogicID(2);
 
-	DisjunctiveProposition c(&a, &b);
-	c.setLogicID(3);
+	DisjunctiveProposition* c = Proposition::createProposition<DisjunctiveProposition>();
+	c->setA(a);
+	c->setB(b);
 
-	int dfd = 1;
+	NegativeProposition* d = Proposition::createProposition<NegativeProposition>();
+	d->setA(c);
+
+
+	EquivalenceRule* rule = new EquivalenceRule();
+	rule->init();
+
+	auto result = rule->getEquivalenceProposition(d);
+
+	int sdfs = 0;
 }
 
 

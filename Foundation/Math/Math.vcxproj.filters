@@ -385,10 +385,13 @@
     <ClInclude Include="Discrete\PropositionLogic\TruthTable.h">
       <Filter>Discrete\PropositionLogic</Filter>
     </ClInclude>
-    <ClInclude Include="Discrete\PropositionLogic\EquivalenceRule.h">
+    <ClInclude Include="Discrete\PropositionLogic\PropositionCache.h">
       <Filter>Discrete\PropositionLogic</Filter>
     </ClInclude>
-    <ClInclude Include="Discrete\PropositionLogic\PropositionCache.h">
+    <ClInclude Include="Discrete\PropositionLogic\EquivalenceSample.h">
+      <Filter>Discrete\PropositionLogic</Filter>
+    </ClInclude>
+    <ClInclude Include="Discrete\PropositionLogic\EquivalenceRule.h">
       <Filter>Discrete\PropositionLogic</Filter>
     </ClInclude>
   </ItemGroup>
@@ -607,10 +610,13 @@
     <ClCompile Include="Basic\Collection\Node.cpp">
       <Filter>Basic\Collection</Filter>
     </ClCompile>
-    <ClCompile Include="Discrete\PropositionLogic\EquivalenceRule.cpp">
+    <ClCompile Include="Discrete\PropositionLogic\PropositionCache.cpp">
       <Filter>Discrete\PropositionLogic</Filter>
     </ClCompile>
-    <ClCompile Include="Discrete\PropositionLogic\PropositionCache.cpp">
+    <ClCompile Include="Discrete\PropositionLogic\EquivalenceSample.cpp">
+      <Filter>Discrete\PropositionLogic</Filter>
+    </ClCompile>
+    <ClCompile Include="Discrete\PropositionLogic\EquivalenceRule.cpp">
       <Filter>Discrete\PropositionLogic</Filter>
     </ClCompile>
   </ItemGroup>

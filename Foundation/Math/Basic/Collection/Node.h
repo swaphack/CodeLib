@@ -22,7 +22,7 @@ namespace math
 		template<typename T, typename = typename std::enable_if<std::is_base_of<Node, T>::value, T>::type>
 		bool is()
 		{
-			return dynamic_cast<T*>(this) == nullptr;
+			return dynamic_cast<T*>(this) != nullptr;
 		}
 	public:
 		/**

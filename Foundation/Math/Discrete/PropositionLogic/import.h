@@ -6,3 +6,5 @@
 #include "ImplicateProposition.h"
 #include "BooleanProposition.h"
 #include "Inference.h"
+#include "EquivalenceSample.h"
+#include "EquivalenceRule.h"

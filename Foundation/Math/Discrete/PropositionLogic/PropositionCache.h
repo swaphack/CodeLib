@@ -1,10 +1,10 @@
 #pragma once
 
 #include "Basic/Collection/NodeCache.h"
-#include "Proposition.h"
 
 namespace math
 {
+	class Proposition;
 	/**
 	*	√¸Ã‚ª∫¥Ê
 	*/

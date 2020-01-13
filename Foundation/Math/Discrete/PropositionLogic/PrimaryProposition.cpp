@@ -47,7 +47,7 @@ bool PrimaryProposition::hasSameLogic(Proposition* proposition)
 		return false;
 	}
 
-	return this->getResult() == proposition->get<PrimaryProposition>()->getResult();
+	return this->getResult() == proposition->as<PrimaryProposition>()->getResult();
 }
 
 

@@ -25,6 +25,10 @@ namespace math
 		*/
 		Compound,
 	};
+
+	class TautologyProposition;
+	class ContradictoryProposition;
+
 	/**
 	*	命题
 	*/
@@ -77,11 +81,70 @@ namespace math
 		{
 			return _propositionCache.createProposition<T>();
 		}
+		/**
+		*	清空缓存
+		*/
 		static void cleanCache();
+		/**
+		*	永真命题
+		*/
+		static TautologyProposition* getTautologyProposition();
+		/**
+		*	矛盾命题
+		*/
+		static ContradictoryProposition* getContradictoryProposition();
 	private:
+		/**
+		*	永真命题
+		*/
+		static TautologyProposition* _tautologyProposition;
+		/**
+		*	矛盾命题
+		*/
+		static ContradictoryProposition* _contradictoryProposition;
 		/**
 		*	节点缓存池
 		*/
 		static PropositionCache _propositionCache;
+	};
+
+	//////////////////////////////////////////////////////////////////////////
+	/**
+	*	永真命题
+	*/
+	class TautologyProposition : public Proposition
+	{
+	public:
+		TautologyProposition();
+		virtual ~TautologyProposition();
+	public:
+		/**
+		*	是否为真
+		*/
+		virtual bool isTrue();
+		/**
+		*	逻辑是否相同
+		*/
+		virtual bool hasSameLogic(Proposition* proposition);
+	};
+
+	//////////////////////////////////////////////////////////////////////////
+	/**
+	*	矛盾命题
+	*/
+	class ContradictoryProposition : public Proposition
+	{
+	public:
+		ContradictoryProposition();
+		virtual ~ContradictoryProposition();
+	public:
+		/**
+		*	是否为真
+		*/
+		virtual bool isTrue();
+		/**
+		*	逻辑是否相同
+		*/
+		virtual bool hasSameLogic(Proposition* proposition);
 	};
 }

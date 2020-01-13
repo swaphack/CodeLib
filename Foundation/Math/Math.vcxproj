@@ -16,7 +16,7 @@
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v120</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
@@ -105,6 +105,7 @@
     <ClInclude Include="Discrete\PropositionLogic\BooleanProposition.h" />
     <ClInclude Include="Discrete\PropositionLogic\CompoundProposition.h" />
     <ClInclude Include="Discrete\PropositionLogic\EquivalenceRule.h" />
+    <ClInclude Include="Discrete\PropositionLogic\EquivalenceSample.h" />
     <ClInclude Include="Discrete\PropositionLogic\ImplicateProposition.h" />
     <ClInclude Include="Discrete\PropositionLogic\import.h" />
     <ClInclude Include="Discrete\PropositionLogic\Inference.h" />
@@ -202,6 +203,7 @@
     <ClCompile Include="Discrete\PropositionLogic\BooleanProposition.cpp" />
     <ClCompile Include="Discrete\PropositionLogic\CompoundProposition.cpp" />
     <ClCompile Include="Discrete\PropositionLogic\EquivalenceRule.cpp" />
+    <ClCompile Include="Discrete\PropositionLogic\EquivalenceSample.cpp" />
     <ClCompile Include="Discrete\PropositionLogic\ImplicateProposition.cpp" />
     <ClCompile Include="Discrete\PropositionLogic\Inference.cpp" />
     <ClCompile Include="Discrete\PropositionLogic\InferenceRule.cpp" />
