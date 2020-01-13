@@ -93,7 +93,7 @@ TautologyProposition* Proposition::getTautologyProposition()
 {
 	if (_tautologyProposition = nullptr)
 	{
-		_tautologyProposition = Proposition::createProposition<TautologyProposition>();
+		_tautologyProposition = Proposition::create<TautologyProposition>();
 	}
 
 	return _tautologyProposition;
@@ -103,7 +103,7 @@ ContradictoryProposition* Proposition::getContradictoryProposition()
 {
 	if (_contradictoryProposition = nullptr)
 	{
-		_contradictoryProposition = Proposition::createProposition<ContradictoryProposition>();
+		_contradictoryProposition = Proposition::create<ContradictoryProposition>();
 	}
 
 	return _contradictoryProposition;

@@ -369,7 +369,7 @@ Proposition* EquivalenceRule7::GetEquivalenceProposition(CompoundProposition* pr
 
 	DisjunctiveProposition* pTemp = proposition->as<DisjunctiveProposition>();
 
-	DisjunctiveProposition* p = Proposition::createProposition<DisjunctiveProposition>();
+	DisjunctiveProposition* p = Proposition::create<DisjunctiveProposition>();
 	p->setA(pTemp->getB());
 	p->setB(pTemp->getA());
 
@@ -402,7 +402,7 @@ Proposition* EquivalenceRule8::GetEquivalenceProposition(CompoundProposition* pr
 
 	CombinedProposition* pTemp = proposition->as<CombinedProposition>();
 
-	CombinedProposition* p = Proposition::createProposition<CombinedProposition>();
+	CombinedProposition* p = Proposition::create<CombinedProposition>();
 	p->setA(pTemp->getB());
 	p->setB(pTemp->getA());
 
@@ -456,11 +456,11 @@ Proposition* EquivalenceRule9::GetEquivalenceProposition(CompoundProposition* pr
 	auto pLeftChild = pDisjunctiveChild->getA();
 	auto pRightChild = pDisjunctiveChild->getB();
 
-	DisjunctiveProposition* p1 = Proposition::createProposition<DisjunctiveProposition>();
+	DisjunctiveProposition* p1 = Proposition::create<DisjunctiveProposition>();
 	p1->setA(pLeftChild);
 	p1->setB(pPrimaryChild);
 
-	DisjunctiveProposition* p0 = Proposition::createProposition<DisjunctiveProposition>();
+	DisjunctiveProposition* p0 = Proposition::create<DisjunctiveProposition>();
 	p0->setA(p1);
 	p0->setB(pRightChild);
 
@@ -515,11 +515,11 @@ Proposition* EquivalenceRule33::GetEquivalenceProposition(CompoundProposition* p
 	auto pLeftChild = pDisjunctiveChild->getA();
 	auto pRightChild = pDisjunctiveChild->getB();
 
-	DisjunctiveProposition* p1 = Proposition::createProposition<DisjunctiveProposition>();
+	DisjunctiveProposition* p1 = Proposition::create<DisjunctiveProposition>();
 	p1->setA(pRightChild);
 	p1->setB(pPrimaryChild);
 
-	DisjunctiveProposition* p0 = Proposition::createProposition<DisjunctiveProposition>();
+	DisjunctiveProposition* p0 = Proposition::create<DisjunctiveProposition>();
 	p0->setA(p1);
 	p0->setB(pLeftChild);
 
@@ -572,11 +572,11 @@ Proposition* EquivalenceRule10::GetEquivalenceProposition(CompoundProposition* p
 	auto pLeftChild = pDisjunctiveChild->getA();
 	auto pRightChild = pDisjunctiveChild->getB();
 
-	CombinedProposition* p1 = Proposition::createProposition<CombinedProposition>();
+	CombinedProposition* p1 = Proposition::create<CombinedProposition>();
 	p1->setA(pLeftChild);
 	p1->setB(pPrimaryChild);
 
-	CombinedProposition* p0 = Proposition::createProposition<CombinedProposition>();
+	CombinedProposition* p0 = Proposition::create<CombinedProposition>();
 	p0->setA(p1);
 	p0->setB(pRightChild);
 
@@ -630,11 +630,11 @@ Proposition* EquivalenceRule34::GetEquivalenceProposition(CompoundProposition* p
 	auto pLeftChild = pDisjunctiveChild->getA();
 	auto pRightChild = pDisjunctiveChild->getB();
 
-	CombinedProposition* p1 = Proposition::createProposition<CombinedProposition>();
+	CombinedProposition* p1 = Proposition::create<CombinedProposition>();
 	p1->setA(pRightChild);
 	p1->setB(pPrimaryChild);
 
-	CombinedProposition* p0 = Proposition::createProposition<CombinedProposition>();
+	CombinedProposition* p0 = Proposition::create<CombinedProposition>();
 	p0->setA(p1);
 	p0->setB(pLeftChild);
 
@@ -688,15 +688,15 @@ Proposition* EquivalenceRule11::GetEquivalenceProposition(CompoundProposition* p
 	auto pLeftChild = pDisjunctiveChild->getA();
 	auto pRightChild = pDisjunctiveChild->getB();
 
-	DisjunctiveProposition* p1 = Proposition::createProposition<DisjunctiveProposition>();
+	DisjunctiveProposition* p1 = Proposition::create<DisjunctiveProposition>();
 	p1->setA(pLeftChild);
 	p1->setB(pPrimaryChild);
 
-	DisjunctiveProposition* p2 = Proposition::createProposition<DisjunctiveProposition>();
+	DisjunctiveProposition* p2 = Proposition::create<DisjunctiveProposition>();
 	p2->setA(pRightChild);
 	p2->setB(pPrimaryChild);
 
-	CombinedProposition* p0 = Proposition::createProposition<CombinedProposition>();
+	CombinedProposition* p0 = Proposition::create<CombinedProposition>();
 	p0->setA(p1);
 	p0->setB(p2);
 
@@ -751,15 +751,15 @@ Proposition* EquivalenceRule12::GetEquivalenceProposition(CompoundProposition* p
 	auto pLeftChild = pDisjunctiveChild->getA();
 	auto pRightChild = pDisjunctiveChild->getB();
 
-	CombinedProposition* p1 = Proposition::createProposition<CombinedProposition>();
+	CombinedProposition* p1 = Proposition::create<CombinedProposition>();
 	p1->setA(pLeftChild);
 	p1->setB(pPrimaryChild);
 
-	CombinedProposition* p2 = Proposition::createProposition<CombinedProposition>();
+	CombinedProposition* p2 = Proposition::create<CombinedProposition>();
 	p2->setA(pRightChild);
 	p2->setB(pPrimaryChild);
 
-	DisjunctiveProposition* p0 = Proposition::createProposition<DisjunctiveProposition>();
+	DisjunctiveProposition* p0 = Proposition::create<DisjunctiveProposition>();
 	p0->setA(p1);
 	p0->setB(p2);
 
@@ -796,14 +796,14 @@ Proposition* EquivalenceRule13::GetEquivalenceProposition(CompoundProposition* p
 
 	CombinedProposition* pTempChild = pTemp->getA()->as<CombinedProposition>();
 
-	NegativeProposition* a = Proposition::createProposition<NegativeProposition>();
+	NegativeProposition* a = Proposition::create<NegativeProposition>();
 	a->setA(pTempChild->getA());
 
-	NegativeProposition* b = Proposition::createProposition<NegativeProposition>();
+	NegativeProposition* b = Proposition::create<NegativeProposition>();
 	b->setA(pTempChild->getB());
 
 
-	DisjunctiveProposition* p0 = Proposition::createProposition<DisjunctiveProposition>();
+	DisjunctiveProposition* p0 = Proposition::create<DisjunctiveProposition>();
 	p0->setA(a);
 	p0->setB(b);
 
@@ -841,14 +841,14 @@ Proposition* EquivalenceRule14::GetEquivalenceProposition(CompoundProposition* p
 
 	DisjunctiveProposition* pTempChild = pTemp->getA()->as<DisjunctiveProposition>();
 
-	NegativeProposition* a = Proposition::createProposition<NegativeProposition>();
+	NegativeProposition* a = Proposition::create<NegativeProposition>();
 	a->setA(pTempChild->getA());
 
-	NegativeProposition* b = Proposition::createProposition<NegativeProposition>();
+	NegativeProposition* b = Proposition::create<NegativeProposition>();
 	b->setA(pTempChild->getB());
 
 
-	CombinedProposition* p0 = Proposition::createProposition<CombinedProposition>();
+	CombinedProposition* p0 = Proposition::create<CombinedProposition>();
 	p0->setA(a);
 	p0->setB(b);
 
@@ -1025,7 +1025,7 @@ Proposition* EquivalenceRule17::GetEquivalenceProposition(CompoundProposition* p
 
 	if (pPrimaryChild->hasSameLogic(pNegativeChild->getA()))
 	{
-		return Proposition::createProposition<ContradictoryProposition>();
+		return Proposition::create<ContradictoryProposition>();
 	}
 
 	return nullptr;
@@ -1081,7 +1081,7 @@ Proposition* EquivalenceRule18::GetEquivalenceProposition(CompoundProposition* p
 
 	if (pPrimaryChild->hasSameLogic(pNegativeChild->getA()))
 	{
-		return Proposition::createProposition<TautologyProposition>();
+		return Proposition::create<TautologyProposition>();
 	}
 
 	return nullptr;
@@ -1115,10 +1115,10 @@ Proposition* EquivalenceRule19::GetEquivalenceProposition(CompoundProposition* p
 		return nullptr;
 	}
 
-	NegativeProposition* p1 = Proposition::createProposition<NegativeProposition>();
+	NegativeProposition* p1 = Proposition::create<NegativeProposition>();
 	p1->setA(pTemp->getA());
 
-	DisjunctiveProposition* p0 = Proposition::createProposition<DisjunctiveProposition>();
+	DisjunctiveProposition* p0 = Proposition::create<DisjunctiveProposition>();
 	p0->setA(p1);
 	p0->setB(pTemp->getB());
 	return p0;
@@ -1152,13 +1152,13 @@ Proposition* EquivalenceRule20::GetEquivalenceProposition(CompoundProposition* p
 		return nullptr;
 	}
 
-	NegativeProposition* p1 = Proposition::createProposition<NegativeProposition>();
+	NegativeProposition* p1 = Proposition::create<NegativeProposition>();
 	p1->setA(pTemp->getB());
 
-	NegativeProposition* p2 = Proposition::createProposition<NegativeProposition>();
+	NegativeProposition* p2 = Proposition::create<NegativeProposition>();
 	p2->setA(pTemp->getA());
 
-	ImplicateProposition* p0 = Proposition::createProposition<ImplicateProposition>();
+	ImplicateProposition* p0 = Proposition::create<ImplicateProposition>();
 	p0->setA(p1);
 	p0->setB(p2);
 
@@ -1194,10 +1194,10 @@ Proposition* EquivalenceRule21::GetEquivalenceProposition(CompoundProposition* p
 		return nullptr;
 	}
 
-	NegativeProposition* p1 = Proposition::createProposition<NegativeProposition>();
+	NegativeProposition* p1 = Proposition::create<NegativeProposition>();
 	p1->setA(pTemp->getA());
 
-	ImplicateProposition* p0 = Proposition::createProposition<ImplicateProposition>();
+	ImplicateProposition* p0 = Proposition::create<ImplicateProposition>();
 	p0->setA(p1);
 	p0->setB(pTemp->getB());
 
@@ -1232,14 +1232,14 @@ Proposition* EquivalenceRule22::GetEquivalenceProposition(CompoundProposition* p
 		return nullptr;
 	}
 
-	NegativeProposition* p1 = Proposition::createProposition<NegativeProposition>();
+	NegativeProposition* p1 = Proposition::create<NegativeProposition>();
 	p1->setA(pTemp->getB());
 
-	ImplicateProposition* p2 = Proposition::createProposition<ImplicateProposition>();
+	ImplicateProposition* p2 = Proposition::create<ImplicateProposition>();
 	p2->setA(pTemp->getA());
 	p2->setB(p1);
 
-	NegativeProposition* p0 = Proposition::createProposition<NegativeProposition>();
+	NegativeProposition* p0 = Proposition::create<NegativeProposition>();
 	p0->setA(p2);
 
 	return p0;
@@ -1284,10 +1284,10 @@ Proposition* EquivalenceRule23::GetEquivalenceProposition(CompoundProposition* p
 		return nullptr;
 	}
 
-	NegativeProposition* p1 = Proposition::createProposition<NegativeProposition>();
+	NegativeProposition* p1 = Proposition::create<NegativeProposition>();
 	p1->setA(pChildTemp->getB());
 
-	CombinedProposition* p0 = Proposition::createProposition<CombinedProposition>();
+	CombinedProposition* p0 = Proposition::create<CombinedProposition>();
 	p0->setA(pChildTemp->getA());
 	p0->setA(p1);
 
@@ -1335,11 +1335,11 @@ Proposition* EquivalenceRule24::GetEquivalenceProposition(CompoundProposition* p
 		return nullptr;
 	}
 
-	CombinedProposition* p1 = Proposition::createProposition<CombinedProposition>();
+	CombinedProposition* p1 = Proposition::create<CombinedProposition>();
 	p1->setA(pLeftChild->getB());
 	p1->setB(pRightChild->getB());
 
-	ImplicateProposition* p0 = Proposition::createProposition<ImplicateProposition>();
+	ImplicateProposition* p0 = Proposition::create<ImplicateProposition>();
 	p0->setA(pLeftChild->getA());
 	p0->setB(p1);
 
@@ -1387,11 +1387,11 @@ Proposition* EquivalenceRule25::GetEquivalenceProposition(CompoundProposition* p
 		return nullptr;
 	}
 
-	DisjunctiveProposition* p1 = Proposition::createProposition<DisjunctiveProposition>();
+	DisjunctiveProposition* p1 = Proposition::create<DisjunctiveProposition>();
 	p1->setA(pLeftChild->getA());
 	p1->setB(pRightChild->getA());
 
-	ImplicateProposition* p0 = Proposition::createProposition<ImplicateProposition>();
+	ImplicateProposition* p0 = Proposition::create<ImplicateProposition>();
 	p0->setA(p1);
 	p0->setB(pLeftChild->getB());
 
@@ -1440,11 +1440,11 @@ Proposition* EquivalenceRule26::GetEquivalenceProposition(CompoundProposition* p
 		return nullptr;
 	}
 
-	DisjunctiveProposition* p1 = Proposition::createProposition<DisjunctiveProposition>();
+	DisjunctiveProposition* p1 = Proposition::create<DisjunctiveProposition>();
 	p1->setA(pLeftChild->getB());
 	p1->setB(pRightChild->getB());
 
-	ImplicateProposition* p0 = Proposition::createProposition<ImplicateProposition>();
+	ImplicateProposition* p0 = Proposition::create<ImplicateProposition>();
 	p0->setA(pLeftChild->getA());
 	p0->setB(p1);
 
@@ -1493,11 +1493,11 @@ Proposition* EquivalenceRule27::GetEquivalenceProposition(CompoundProposition* p
 		return nullptr;
 	}
 
-	CombinedProposition* p1 = Proposition::createProposition<CombinedProposition>();
+	CombinedProposition* p1 = Proposition::create<CombinedProposition>();
 	p1->setA(pLeftChild->getA());
 	p1->setB(pRightChild->getA());
 
-	ImplicateProposition* p0 = Proposition::createProposition<ImplicateProposition>();
+	ImplicateProposition* p0 = Proposition::create<ImplicateProposition>();
 	p0->setA(p1);
 	p0->setB(pLeftChild->getB());
 
@@ -1532,15 +1532,15 @@ Proposition* EquivalenceRule28::GetEquivalenceProposition(CompoundProposition* p
 		return nullptr;
 	}
 
-	ImplicateProposition* p1 = Proposition::createProposition<ImplicateProposition>();
+	ImplicateProposition* p1 = Proposition::create<ImplicateProposition>();
 	p1->setA(pTemp->getA());
 	p1->setB(pTemp->getB());
 
-	ImplicateProposition* p2 = Proposition::createProposition<ImplicateProposition>();
+	ImplicateProposition* p2 = Proposition::create<ImplicateProposition>();
 	p2->setA(pTemp->getB());
 	p2->setB(pTemp->getA());
 
-	CombinedProposition* p0 = Proposition::createProposition<CombinedProposition>();
+	CombinedProposition* p0 = Proposition::create<CombinedProposition>();
 	p0->setA(p1);
 	p0->setB(p2);
 
@@ -1576,13 +1576,13 @@ Proposition* EquivalenceRule29::GetEquivalenceProposition(CompoundProposition* p
 		return nullptr;
 	}
 
-	NegativeProposition* p1 = Proposition::createProposition<NegativeProposition>();
+	NegativeProposition* p1 = Proposition::create<NegativeProposition>();
 	p1->setA(pTemp->getA());
 
-	NegativeProposition* p2 = Proposition::createProposition<NegativeProposition>();
+	NegativeProposition* p2 = Proposition::create<NegativeProposition>();
 	p2->setA(pTemp->getB());
 
-	DoubleImplicateProposition* p0 = Proposition::createProposition<DoubleImplicateProposition>();
+	DoubleImplicateProposition* p0 = Proposition::create<DoubleImplicateProposition>();
 	p0->setA(p1);
 	p0->setB(p2);
 
@@ -1617,20 +1617,20 @@ Proposition* EquivalenceRule30::GetEquivalenceProposition(CompoundProposition* p
 		return nullptr;
 	}
 
-	CombinedProposition* p1 = Proposition::createProposition<CombinedProposition>();
+	CombinedProposition* p1 = Proposition::create<CombinedProposition>();
 	p1->setA(pTemp->getA());
 	p1->setA(pTemp->getB());
 
-	NegativeProposition* p3 = Proposition::createProposition<NegativeProposition>();
+	NegativeProposition* p3 = Proposition::create<NegativeProposition>();
 	p3->setA(pTemp->getA());
-	NegativeProposition* p4 = Proposition::createProposition<NegativeProposition>();
+	NegativeProposition* p4 = Proposition::create<NegativeProposition>();
 	p3->setA(pTemp->getB());
 
-	CombinedProposition* p2 = Proposition::createProposition<CombinedProposition>();
+	CombinedProposition* p2 = Proposition::create<CombinedProposition>();
 	p2->setA(p3);
 	p2->setB(p4);
 
-	DisjunctiveProposition* p0 = Proposition::createProposition<DisjunctiveProposition>();
+	DisjunctiveProposition* p0 = Proposition::create<DisjunctiveProposition>();
 	p0->setA(p1);
 	p0->setB(p2);
 
@@ -1677,10 +1677,10 @@ Proposition* EquivalenceRule31::GetEquivalenceProposition(CompoundProposition* p
 		return nullptr;
 	}
 
-	NegativeProposition* p1 = Proposition::createProposition<NegativeProposition>();
+	NegativeProposition* p1 = Proposition::create<NegativeProposition>();
 	p1->setA(pChildTemp->getB());
 
-	DoubleImplicateProposition* p0 = Proposition::createProposition<DoubleImplicateProposition>();
+	DoubleImplicateProposition* p0 = Proposition::create<DoubleImplicateProposition>();
 	p0->setA(pChildTemp->getA());
 	p0->setB(p1);
 
@@ -1716,7 +1716,7 @@ Proposition* EquivalenceRule32::GetEquivalenceProposition(CompoundProposition* p
 		return nullptr;
 	}
 
-	DoubleImplicateProposition* p0 = Proposition::createProposition<DoubleImplicateProposition>();
+	DoubleImplicateProposition* p0 = Proposition::create<DoubleImplicateProposition>();
 	p0->setA(pTemp->getB());
 	p0->setB(pTemp->getA());
 

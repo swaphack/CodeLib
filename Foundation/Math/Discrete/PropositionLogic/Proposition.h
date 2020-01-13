@@ -77,9 +77,42 @@ namespace math
 		*	创建节点
 		*/
 		template<typename T, typename = typename std::enable_if<std::is_base_of<Proposition, T>::value, T>::type>
-		static T* createProposition()
+		static T* create()
 		{
-			return _propositionCache.createProposition<T>();
+			T* t = _propositionCache.createProposition<T>();
+			return t;
+		}
+		/**
+		*	创建节点
+		*/
+		template<typename T, typename = typename std::enable_if<std::is_base_of<Proposition, T>::value, T>::type>
+		static T* create(uint64_t id, PropositionResult result)
+		{
+			T* t = _propositionCache.createProposition<T>();
+			t->setLogicID(id);
+			t->setResult(result);
+			return t;
+		}
+		/**
+		*	创建节点
+		*/
+		template<typename T, typename = typename std::enable_if<std::is_base_of<Proposition, T>::value, T>::type>
+		static T* create(Proposition* a)
+		{
+			T* t = _propositionCache.createProposition<T>();
+			t->setA(a);
+			return t;
+		}
+		/**
+		*	创建节点
+		*/
+		template<typename T, typename = typename std::enable_if<std::is_base_of<Proposition, T>::value, T>::type>
+		static T* create(Proposition* a, Proposition* b)
+		{
+			T* t = _propositionCache.createProposition<T>();
+			t->setA(a);
+			t->setB(b);
+			return t;
 		}
 		/**
 		*	清空缓存

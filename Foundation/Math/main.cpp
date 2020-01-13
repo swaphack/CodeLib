@@ -15,23 +15,12 @@ void testMatrix()
 
 void testInference()
 {
-	PrimaryProposition* a = Proposition::createProposition<PrimaryProposition>();
-	a->setResult(PropositionResult::TRUE);
-	a->setLogicID(1);
+	auto a = Proposition::create<PrimaryProposition>(1, PropositionResult::TRUE);
+	auto b = Proposition::create<PrimaryProposition>(2, PropositionResult::FALSE);
+	auto c = Proposition::create<DisjunctiveProposition>(a, b);
+	auto d = Proposition::create<NegativeProposition>(c);
 
-	PrimaryProposition* b = Proposition::createProposition<PrimaryProposition>();
-	b->setResult(PropositionResult::FALSE);
-	b->setLogicID(2);
-
-	DisjunctiveProposition* c = Proposition::createProposition<DisjunctiveProposition>();
-	c->setA(a);
-	c->setB(b);
-
-	NegativeProposition* d = Proposition::createProposition<NegativeProposition>();
-	d->setA(c);
-
-
-	EquivalenceRule* rule = new EquivalenceRule();
+	auto rule = new EquivalenceRule();
 	rule->init();
 
 	auto result = rule->getEquivalenceProposition(d);
