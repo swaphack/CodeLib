@@ -31,7 +31,7 @@ bool CompoundProposition::hasSameLogic(Proposition* proposition)
 		return false;
 	}
 
-	return matchChildren(proposition->getChildren());
+	return matchChildren(proposition->getAllChildren());
 }
 
 std::set<TreeNode*> CompoundProposition::getAllUniqueIdentifyChildren()
@@ -84,7 +84,7 @@ CompoundProposition& CompoundProposition::operator=(const CompoundProposition& v
 
 	this->setLogicID(value.getLogicID());
 	this->removeAllChildren();
-	for (auto item : value.getChildren())
+	for (auto item : value.getAllChildren())
 	{
 		this->addChild(item);
 	}

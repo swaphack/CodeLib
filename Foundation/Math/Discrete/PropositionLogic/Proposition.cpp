@@ -20,7 +20,7 @@ Proposition::Proposition()
 
 Proposition::~Proposition()
 {
-
+	_propositionCache.removeNode(this);
 }
 
 bool Proposition::isTrue()
@@ -91,7 +91,7 @@ void Proposition::cleanCache()
 
 TautologyProposition* Proposition::getTautologyProposition()
 {
-	if (_tautologyProposition = nullptr)
+	if (_tautologyProposition == nullptr)
 	{
 		_tautologyProposition = Proposition::create<TautologyProposition>();
 	}
@@ -101,7 +101,7 @@ TautologyProposition* Proposition::getTautologyProposition()
 
 ContradictoryProposition* Proposition::getContradictoryProposition()
 {
-	if (_contradictoryProposition = nullptr)
+	if (_contradictoryProposition == nullptr)
 	{
 		_contradictoryProposition = Proposition::create<ContradictoryProposition>();
 	}

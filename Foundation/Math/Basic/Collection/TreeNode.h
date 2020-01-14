@@ -47,7 +47,7 @@ namespace math
 		/**
 		*	获取所有子节点
 		*/
-		const std::vector<TreeNode*>& getChildren() const;
+		const std::vector<TreeNode*>& getAllChildren() const;
 		/**
 		*	节点所在的顺序
 		*/

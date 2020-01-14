@@ -18,7 +18,51 @@ EquivalenceRule::~EquivalenceRule()
 	this->removeAllEquivalenceSamples();
 }
 
-std::vector<Proposition*> EquivalenceRule::getEquivalenceProposition(CompoundProposition* proposition)
+Proposition* EquivalenceRule::getEquivalenceProposition(CompoundProposition* proposition)
+{
+	if (proposition == nullptr)
+	{
+		return nullptr;
+	}
+
+	auto vecChildren = proposition->getAllChildren();
+	if (vecChildren.size() == 0)
+	{
+		return proposition;
+	}
+
+	// 优先递归子节点
+	for (auto i = 0; i < vecChildren.size(); i++)
+	{
+		auto child = vecChildren[i];
+		if (child->is<CompoundProposition>())
+		{
+			Proposition* ret = getEquivalenceProposition(child->as<CompoundProposition>());
+			if (ret != nullptr)
+			{
+				vecChildren[i] = ret;
+			}
+		}
+	}
+
+	// 计算等价式
+	std::vector<Proposition*> vecResult = getEquivalence(proposition);
+	if (vecResult.size() == 0)
+	{
+		return proposition;
+	}
+
+	// 取第一个，如果可以转换的话，继续转换，否者返回第一个值
+	auto firstResult = vecResult[0];
+	if (firstResult->is<CompoundProposition>())
+	{
+		return getEquivalenceProposition(firstResult->as<CompoundProposition>());
+	}
+
+	return firstResult->as<Proposition>();
+}
+
+std::vector<Proposition*> EquivalenceRule::getEquivalence(CompoundProposition* proposition)
 {
 	std::vector<Proposition*> vecProposition;
 
@@ -29,7 +73,7 @@ std::vector<Proposition*> EquivalenceRule::getEquivalenceProposition(CompoundPro
 
 	for (auto item : _equivalenceSamples)
 	{
-		auto result = item->GetEquivalenceProposition(proposition);
+		auto result = item->getEquivalenceProposition(proposition);
 		if (result != nullptr)
 		{
 			vecProposition.push_back(result);
@@ -83,40 +127,40 @@ void EquivalenceRule::removeAllEquivalenceSamples()
 
 void EquivalenceRule::init()
 {
-	this->addEquivalenceSample<EquivalenceRule0>();
-	this->addEquivalenceSample<EquivalenceRule1>();
-	this->addEquivalenceSample<EquivalenceRule2>();
-	this->addEquivalenceSample<EquivalenceRule3>();
-	this->addEquivalenceSample<EquivalenceRule4>();
-	this->addEquivalenceSample<EquivalenceRule5>();
-	this->addEquivalenceSample<EquivalenceRule6>();
-	this->addEquivalenceSample<EquivalenceRule7>();
-	this->addEquivalenceSample<EquivalenceRule8>();
-	this->addEquivalenceSample<EquivalenceRule9>();
-	this->addEquivalenceSample<EquivalenceRule10>();
-	this->addEquivalenceSample<EquivalenceRule11>();
-	this->addEquivalenceSample<EquivalenceRule12>();
-	this->addEquivalenceSample<EquivalenceRule13>();
-	this->addEquivalenceSample<EquivalenceRule14>();
-	this->addEquivalenceSample<EquivalenceRule15>();
-	this->addEquivalenceSample<EquivalenceRule16>();
-	this->addEquivalenceSample<EquivalenceRule17>();
-	this->addEquivalenceSample<EquivalenceRule18>();
-	this->addEquivalenceSample<EquivalenceRule19>();
-	this->addEquivalenceSample<EquivalenceRule20>();
-	this->addEquivalenceSample<EquivalenceRule21>();
-	this->addEquivalenceSample<EquivalenceRule22>();
-	this->addEquivalenceSample<EquivalenceRule23>();
-	this->addEquivalenceSample<EquivalenceRule24>();
-	this->addEquivalenceSample<EquivalenceRule25>();
-	this->addEquivalenceSample<EquivalenceRule26>();
-	this->addEquivalenceSample<EquivalenceRule27>();
-	this->addEquivalenceSample<EquivalenceRule28>();
-	this->addEquivalenceSample<EquivalenceRule29>();
-	this->addEquivalenceSample<EquivalenceRule30>();
-	this->addEquivalenceSample<EquivalenceRule31>();
-	this->addEquivalenceSample<EquivalenceRule32>();
-	this->addEquivalenceSample<EquivalenceRule33>();
-	this->addEquivalenceSample<EquivalenceRule34>();
+	this->addEquivalenceSample<EquivalenceSample0>();
+	this->addEquivalenceSample<EquivalenceSample1>();
+	this->addEquivalenceSample<EquivalenceSample2>();
+	this->addEquivalenceSample<EquivalenceSample3>();
+	this->addEquivalenceSample<EquivalenceSample4>();
+	this->addEquivalenceSample<EquivalenceSample5>();
+	this->addEquivalenceSample<EquivalenceSample6>();
+	this->addEquivalenceSample<EquivalenceSample7>();
+	this->addEquivalenceSample<EquivalenceSample8>();
+	this->addEquivalenceSample<EquivalenceSample9>();
+	this->addEquivalenceSample<EquivalenceSample10>();
+	this->addEquivalenceSample<EquivalenceSample11>();
+	this->addEquivalenceSample<EquivalenceSample12>();
+	this->addEquivalenceSample<EquivalenceSample13>();
+	this->addEquivalenceSample<EquivalenceSample14>();
+	this->addEquivalenceSample<EquivalenceSample15>();
+	this->addEquivalenceSample<EquivalenceSample16>();
+	this->addEquivalenceSample<EquivalenceSample17>();
+	this->addEquivalenceSample<EquivalenceSample18>();
+	this->addEquivalenceSample<EquivalenceSample19>();
+	this->addEquivalenceSample<EquivalenceSample20>();
+	this->addEquivalenceSample<EquivalenceSample21>();
+	this->addEquivalenceSample<EquivalenceSample22>();
+	this->addEquivalenceSample<EquivalenceSample23>();
+	this->addEquivalenceSample<EquivalenceSample24>();
+	this->addEquivalenceSample<EquivalenceSample25>();
+	this->addEquivalenceSample<EquivalenceSample26>();
+	this->addEquivalenceSample<EquivalenceSample27>();
+	this->addEquivalenceSample<EquivalenceSample28>();
+	this->addEquivalenceSample<EquivalenceSample29>();
+	this->addEquivalenceSample<EquivalenceSample30>();
+	this->addEquivalenceSample<EquivalenceSample31>();
+	this->addEquivalenceSample<EquivalenceSample32>();
+	this->addEquivalenceSample<EquivalenceSample33>();
+	this->addEquivalenceSample<EquivalenceSample34>();
 
 }

@@ -8,6 +8,7 @@ namespace math
 	class CompoundProposition;
 	class Proposition;
 	class EquivalenceSample;
+
 	/**
 	*	等价规则
 	*/
@@ -19,9 +20,15 @@ namespace math
 	public:
 		void init();
 		/**
-		*	获取等价式
+		*	获取等价命题
+		*	优先从子节点开始处理
 		*/
-		std::vector<Proposition*> getEquivalenceProposition(CompoundProposition* proposition);
+		Proposition* getEquivalenceProposition(CompoundProposition* proposition);
+	protected:
+		/**
+		*	获取等价命题
+		*/
+		std::vector<Proposition*> getEquivalence(CompoundProposition* proposition);
 	public:
 		/**
 		*	创建节点

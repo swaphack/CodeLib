@@ -15,7 +15,7 @@ EquivalenceSample::~EquivalenceSample()
 
 }
 
-Proposition* EquivalenceSample::GetEquivalenceProposition(CompoundProposition* proposition)
+Proposition* EquivalenceSample::getEquivalenceProposition(CompoundProposition* proposition)
 {
 	return nullptr;
 }
@@ -39,17 +39,17 @@ bool EquivalenceSample::isContradictoryProposition(CompoundProposition* proposit
 }
 
 //////////////////////////////////////////////////////////////////////////
-EquivalenceRule0::EquivalenceRule0()
+EquivalenceSample0::EquivalenceSample0()
 {
 
 }
 
-EquivalenceRule0::~EquivalenceRule0()
+EquivalenceSample0::~EquivalenceSample0()
 {
 
 }
 
-Proposition* EquivalenceRule0::GetEquivalenceProposition(CompoundProposition* proposition)
+Proposition* EquivalenceSample0::getEquivalenceProposition(CompoundProposition* proposition)
 {
 	if (proposition == nullptr)
 	{
@@ -87,17 +87,17 @@ Proposition* EquivalenceRule0::GetEquivalenceProposition(CompoundProposition* pr
 }
 
 //////////////////////////////////////////////////////////////////////////
-EquivalenceRule1::EquivalenceRule1()
+EquivalenceSample1::EquivalenceSample1()
 {
 
 }
 
-EquivalenceRule1::~EquivalenceRule1()
+EquivalenceSample1::~EquivalenceSample1()
 {
 
 }
 
-Proposition* EquivalenceRule1::GetEquivalenceProposition(CompoundProposition* proposition)
+Proposition* EquivalenceSample1::getEquivalenceProposition(CompoundProposition* proposition)
 {
 	if (proposition == nullptr)
 	{
@@ -136,17 +136,17 @@ Proposition* EquivalenceRule1::GetEquivalenceProposition(CompoundProposition* pr
 
 //////////////////////////////////////////////////////////////////////////
 
-EquivalenceRule2::EquivalenceRule2()
+EquivalenceSample2::EquivalenceSample2()
 {
 
 }
 
-EquivalenceRule2::~EquivalenceRule2()
+EquivalenceSample2::~EquivalenceSample2()
 {
 
 }
 
-Proposition* EquivalenceRule2::GetEquivalenceProposition(CompoundProposition* proposition)
+Proposition* EquivalenceSample2::getEquivalenceProposition(CompoundProposition* proposition)
 {
 	if (proposition == nullptr)
 	{
@@ -182,18 +182,19 @@ Proposition* EquivalenceRule2::GetEquivalenceProposition(CompoundProposition* pr
 
 	return nullptr;
 }
+
 //////////////////////////////////////////////////////////////////////////
-EquivalenceRule3::EquivalenceRule3()
+EquivalenceSample3::EquivalenceSample3()
 {
 
 }
 
-EquivalenceRule3::~EquivalenceRule3()
+EquivalenceSample3::~EquivalenceSample3()
 {
 
 }
 
-Proposition* EquivalenceRule3::GetEquivalenceProposition(CompoundProposition* proposition)
+Proposition* EquivalenceSample3::getEquivalenceProposition(CompoundProposition* proposition)
 {
 	if (proposition == nullptr)
 	{
@@ -231,17 +232,17 @@ Proposition* EquivalenceRule3::GetEquivalenceProposition(CompoundProposition* pr
 }
 
 //////////////////////////////////////////////////////////////////////////
-EquivalenceRule4::EquivalenceRule4()
+EquivalenceSample4::EquivalenceSample4()
 {
 
 }
 
-EquivalenceRule4::~EquivalenceRule4()
+EquivalenceSample4::~EquivalenceSample4()
 {
 
 }
 
-Proposition* EquivalenceRule4::GetEquivalenceProposition(CompoundProposition* proposition)
+Proposition* EquivalenceSample4::getEquivalenceProposition(CompoundProposition* proposition)
 {
 	if (proposition == nullptr)
 	{
@@ -266,19 +267,20 @@ Proposition* EquivalenceRule4::GetEquivalenceProposition(CompoundProposition* pr
 
 	return nullptr;
 }
+
 //////////////////////////////////////////////////////////////////////////
 
-EquivalenceRule5::EquivalenceRule5()
+EquivalenceSample5::EquivalenceSample5()
 {
 
 }
 
-EquivalenceRule5::~EquivalenceRule5()
+EquivalenceSample5::~EquivalenceSample5()
 {
 
 }
 
-Proposition* EquivalenceRule5::GetEquivalenceProposition(CompoundProposition* proposition)
+Proposition* EquivalenceSample5::getEquivalenceProposition(CompoundProposition* proposition)
 {
 	if (proposition == nullptr)
 	{
@@ -303,19 +305,20 @@ Proposition* EquivalenceRule5::GetEquivalenceProposition(CompoundProposition* pr
 
 	return nullptr;
 }
+
 //////////////////////////////////////////////////////////////////////////
 
-EquivalenceRule6::EquivalenceRule6()
+EquivalenceSample6::EquivalenceSample6()
 {
 
 }
 
-EquivalenceRule6::~EquivalenceRule6()
+EquivalenceSample6::~EquivalenceSample6()
 {
 
 }
 
-Proposition* EquivalenceRule6::GetEquivalenceProposition(CompoundProposition* proposition)
+Proposition* EquivalenceSample6::getEquivalenceProposition(CompoundProposition* proposition)
 {
 	if (proposition == nullptr)
 	{
@@ -345,17 +348,17 @@ Proposition* EquivalenceRule6::GetEquivalenceProposition(CompoundProposition* pr
 //////////////////////////////////////////////////////////////////////////
 
 
-EquivalenceRule7::EquivalenceRule7()
+EquivalenceSample7::EquivalenceSample7()
 {
 
 }
 
-EquivalenceRule7::~EquivalenceRule7()
+EquivalenceSample7::~EquivalenceSample7()
 {
 
 }
 
-Proposition* EquivalenceRule7::GetEquivalenceProposition(CompoundProposition* proposition)
+Proposition* EquivalenceSample7::getEquivalenceProposition(CompoundProposition* proposition)
 {
 	if (proposition == nullptr)
 	{
@@ -378,17 +381,17 @@ Proposition* EquivalenceRule7::GetEquivalenceProposition(CompoundProposition* pr
 //////////////////////////////////////////////////////////////////////////
 
 
-EquivalenceRule8::EquivalenceRule8()
+EquivalenceSample8::EquivalenceSample8()
 {
 
 }
 
-EquivalenceRule8::~EquivalenceRule8()
+EquivalenceSample8::~EquivalenceSample8()
 {
 
 }
 
-Proposition* EquivalenceRule8::GetEquivalenceProposition(CompoundProposition* proposition)
+Proposition* EquivalenceSample8::getEquivalenceProposition(CompoundProposition* proposition)
 {
 	if (proposition == nullptr)
 	{
@@ -410,17 +413,17 @@ Proposition* EquivalenceRule8::GetEquivalenceProposition(CompoundProposition* pr
 }
 //////////////////////////////////////////////////////////////////////////
 
-EquivalenceRule9::EquivalenceRule9()
+EquivalenceSample9::EquivalenceSample9()
 {
 
 }
 
-EquivalenceRule9::~EquivalenceRule9()
+EquivalenceSample9::~EquivalenceSample9()
 {
 
 }
 
-Proposition* EquivalenceRule9::GetEquivalenceProposition(CompoundProposition* proposition)
+Proposition* EquivalenceSample9::getEquivalenceProposition(CompoundProposition* proposition)
 {
 	if (proposition == nullptr)
 	{
@@ -469,17 +472,17 @@ Proposition* EquivalenceRule9::GetEquivalenceProposition(CompoundProposition* pr
 
 //////////////////////////////////////////////////////////////////////////
 
-EquivalenceRule33::EquivalenceRule33()
+EquivalenceSample33::EquivalenceSample33()
 {
 
 }
 
-EquivalenceRule33::~EquivalenceRule33()
+EquivalenceSample33::~EquivalenceSample33()
 {
 
 }
 
-Proposition* EquivalenceRule33::GetEquivalenceProposition(CompoundProposition* proposition)
+Proposition* EquivalenceSample33::getEquivalenceProposition(CompoundProposition* proposition)
 {
 	if (proposition == nullptr)
 	{
@@ -526,17 +529,17 @@ Proposition* EquivalenceRule33::GetEquivalenceProposition(CompoundProposition* p
 	return p0;
 }
 //////////////////////////////////////////////////////////////////////////
-EquivalenceRule10::EquivalenceRule10()
+EquivalenceSample10::EquivalenceSample10()
 {
 
 }
 
-EquivalenceRule10::~EquivalenceRule10()
+EquivalenceSample10::~EquivalenceSample10()
 {
 
 }
 
-Proposition* EquivalenceRule10::GetEquivalenceProposition(CompoundProposition* proposition)
+Proposition* EquivalenceSample10::getEquivalenceProposition(CompoundProposition* proposition)
 {
 	if (proposition == nullptr)
 	{
@@ -584,17 +587,17 @@ Proposition* EquivalenceRule10::GetEquivalenceProposition(CompoundProposition* p
 }
 
 //////////////////////////////////////////////////////////////////////////
-EquivalenceRule34::EquivalenceRule34()
+EquivalenceSample34::EquivalenceSample34()
 {
 
 }
 
-EquivalenceRule34::~EquivalenceRule34()
+EquivalenceSample34::~EquivalenceSample34()
 {
 
 }
 
-Proposition* EquivalenceRule34::GetEquivalenceProposition(CompoundProposition* proposition)
+Proposition* EquivalenceSample34::getEquivalenceProposition(CompoundProposition* proposition)
 {
 	if (proposition == nullptr)
 	{
@@ -642,17 +645,17 @@ Proposition* EquivalenceRule34::GetEquivalenceProposition(CompoundProposition* p
 }
 
 //////////////////////////////////////////////////////////////////////////
-EquivalenceRule11::EquivalenceRule11()
+EquivalenceSample11::EquivalenceSample11()
 {
 
 }
 
-EquivalenceRule11::~EquivalenceRule11()
+EquivalenceSample11::~EquivalenceSample11()
 {
 
 }
 
-Proposition* EquivalenceRule11::GetEquivalenceProposition(CompoundProposition* proposition)
+Proposition* EquivalenceSample11::getEquivalenceProposition(CompoundProposition* proposition)
 {
 	if (proposition == nullptr)
 	{
@@ -705,17 +708,17 @@ Proposition* EquivalenceRule11::GetEquivalenceProposition(CompoundProposition* p
 //////////////////////////////////////////////////////////////////////////
 
 
-EquivalenceRule12::EquivalenceRule12()
+EquivalenceSample12::EquivalenceSample12()
 {
 
 }
 
-EquivalenceRule12::~EquivalenceRule12()
+EquivalenceSample12::~EquivalenceSample12()
 {
 
 }
 
-Proposition* EquivalenceRule12::GetEquivalenceProposition(CompoundProposition* proposition)
+Proposition* EquivalenceSample12::getEquivalenceProposition(CompoundProposition* proposition)
 {
 	if (proposition == nullptr)
 	{
@@ -766,17 +769,17 @@ Proposition* EquivalenceRule12::GetEquivalenceProposition(CompoundProposition* p
 	return p0;
 }
 //////////////////////////////////////////////////////////////////////////
-EquivalenceRule13::EquivalenceRule13()
+EquivalenceSample13::EquivalenceSample13()
 {
 
 }
 
-EquivalenceRule13::~EquivalenceRule13()
+EquivalenceSample13::~EquivalenceSample13()
 {
 
 }
 
-Proposition* EquivalenceRule13::GetEquivalenceProposition(CompoundProposition* proposition)
+Proposition* EquivalenceSample13::getEquivalenceProposition(CompoundProposition* proposition)
 {
 	if (proposition == nullptr)
 	{
@@ -811,17 +814,17 @@ Proposition* EquivalenceRule13::GetEquivalenceProposition(CompoundProposition* p
 }
 
 //////////////////////////////////////////////////////////////////////////
-EquivalenceRule14::EquivalenceRule14()
+EquivalenceSample14::EquivalenceSample14()
 {
 
 }
 
-EquivalenceRule14::~EquivalenceRule14()
+EquivalenceSample14::~EquivalenceSample14()
 {
 
 }
 
-Proposition* EquivalenceRule14::GetEquivalenceProposition(CompoundProposition* proposition)
+Proposition* EquivalenceSample14::getEquivalenceProposition(CompoundProposition* proposition)
 {
 	if (proposition == nullptr)
 	{
@@ -856,17 +859,17 @@ Proposition* EquivalenceRule14::GetEquivalenceProposition(CompoundProposition* p
 }
 
 //////////////////////////////////////////////////////////////////////////
-EquivalenceRule15::EquivalenceRule15()
+EquivalenceSample15::EquivalenceSample15()
 {
 
 }
 
-EquivalenceRule15::~EquivalenceRule15()
+EquivalenceSample15::~EquivalenceSample15()
 {
 
 }
 
-Proposition* EquivalenceRule15::GetEquivalenceProposition(CompoundProposition* proposition)
+Proposition* EquivalenceSample15::getEquivalenceProposition(CompoundProposition* proposition)
 {
 	if (proposition == nullptr)
 	{
@@ -916,17 +919,17 @@ Proposition* EquivalenceRule15::GetEquivalenceProposition(CompoundProposition* p
 }
 
 //////////////////////////////////////////////////////////////////////////
-EquivalenceRule16::EquivalenceRule16()
+EquivalenceSample16::EquivalenceSample16()
 {
 
 }
 
-EquivalenceRule16::~EquivalenceRule16()
+EquivalenceSample16::~EquivalenceSample16()
 {
 
 }
 
-Proposition* EquivalenceRule16::GetEquivalenceProposition(CompoundProposition* proposition)
+Proposition* EquivalenceSample16::getEquivalenceProposition(CompoundProposition* proposition)
 {
 	if (proposition == nullptr)
 	{
@@ -977,17 +980,17 @@ Proposition* EquivalenceRule16::GetEquivalenceProposition(CompoundProposition* p
 //////////////////////////////////////////////////////////////////////////
 
 
-EquivalenceRule17::EquivalenceRule17()
+EquivalenceSample17::EquivalenceSample17()
 {
 
 }
 
-EquivalenceRule17::~EquivalenceRule17()
+EquivalenceSample17::~EquivalenceSample17()
 {
 
 }
 
-Proposition* EquivalenceRule17::GetEquivalenceProposition(CompoundProposition* proposition)
+Proposition* EquivalenceSample17::getEquivalenceProposition(CompoundProposition* proposition)
 {
 	if (proposition == nullptr)
 	{
@@ -1033,17 +1036,17 @@ Proposition* EquivalenceRule17::GetEquivalenceProposition(CompoundProposition* p
 //////////////////////////////////////////////////////////////////////////
 
 
-EquivalenceRule18::EquivalenceRule18()
+EquivalenceSample18::EquivalenceSample18()
 {
 
 }
 
-EquivalenceRule18::~EquivalenceRule18()
+EquivalenceSample18::~EquivalenceSample18()
 {
 
 }
 
-Proposition* EquivalenceRule18::GetEquivalenceProposition(CompoundProposition* proposition)
+Proposition* EquivalenceSample18::getEquivalenceProposition(CompoundProposition* proposition)
 {
 	if (proposition == nullptr)
 	{
@@ -1087,17 +1090,17 @@ Proposition* EquivalenceRule18::GetEquivalenceProposition(CompoundProposition* p
 	return nullptr;
 }
 //////////////////////////////////////////////////////////////////////////
-EquivalenceRule19::EquivalenceRule19()
+EquivalenceSample19::EquivalenceSample19()
 {
 
 }
 
-EquivalenceRule19::~EquivalenceRule19()
+EquivalenceSample19::~EquivalenceSample19()
 {
 
 }
 
-Proposition* EquivalenceRule19::GetEquivalenceProposition(CompoundProposition* proposition)
+Proposition* EquivalenceSample19::getEquivalenceProposition(CompoundProposition* proposition)
 {
 	if (proposition == nullptr)
 	{
@@ -1124,17 +1127,17 @@ Proposition* EquivalenceRule19::GetEquivalenceProposition(CompoundProposition* p
 	return p0;
 }
 //////////////////////////////////////////////////////////////////////////
-EquivalenceRule20::EquivalenceRule20()
+EquivalenceSample20::EquivalenceSample20()
 {
 
 }
 
-EquivalenceRule20::~EquivalenceRule20()
+EquivalenceSample20::~EquivalenceSample20()
 {
 
 }
 
-Proposition* EquivalenceRule20::GetEquivalenceProposition(CompoundProposition* proposition)
+Proposition* EquivalenceSample20::getEquivalenceProposition(CompoundProposition* proposition)
 {
 	if (proposition == nullptr)
 	{
@@ -1166,17 +1169,17 @@ Proposition* EquivalenceRule20::GetEquivalenceProposition(CompoundProposition* p
 }
 //////////////////////////////////////////////////////////////////////////
 
-EquivalenceRule21::EquivalenceRule21()
+EquivalenceSample21::EquivalenceSample21()
 {
 
 }
 
-EquivalenceRule21::~EquivalenceRule21()
+EquivalenceSample21::~EquivalenceSample21()
 {
 
 }
 
-Proposition* EquivalenceRule21::GetEquivalenceProposition(CompoundProposition* proposition)
+Proposition* EquivalenceSample21::getEquivalenceProposition(CompoundProposition* proposition)
 {
 	if (proposition == nullptr)
 	{
@@ -1204,17 +1207,17 @@ Proposition* EquivalenceRule21::GetEquivalenceProposition(CompoundProposition* p
 	return p0;
 }
 //////////////////////////////////////////////////////////////////////////
-EquivalenceRule22::EquivalenceRule22()
+EquivalenceSample22::EquivalenceSample22()
 {
 
 }
 
-EquivalenceRule22::~EquivalenceRule22()
+EquivalenceSample22::~EquivalenceSample22()
 {
 
 }
 
-Proposition* EquivalenceRule22::GetEquivalenceProposition(CompoundProposition* proposition)
+Proposition* EquivalenceSample22::getEquivalenceProposition(CompoundProposition* proposition)
 {
 	if (proposition == nullptr)
 	{
@@ -1245,17 +1248,17 @@ Proposition* EquivalenceRule22::GetEquivalenceProposition(CompoundProposition* p
 	return p0;
 }
 //////////////////////////////////////////////////////////////////////////
-EquivalenceRule23::EquivalenceRule23()
+EquivalenceSample23::EquivalenceSample23()
 {
 
 }
 
-EquivalenceRule23::~EquivalenceRule23()
+EquivalenceSample23::~EquivalenceSample23()
 {
 
 }
 
-Proposition* EquivalenceRule23::GetEquivalenceProposition(CompoundProposition* proposition)
+Proposition* EquivalenceSample23::getEquivalenceProposition(CompoundProposition* proposition)
 {
 	if (proposition == nullptr)
 	{
@@ -1295,17 +1298,17 @@ Proposition* EquivalenceRule23::GetEquivalenceProposition(CompoundProposition* p
 }
 
 //////////////////////////////////////////////////////////////////////////
-EquivalenceRule24::EquivalenceRule24()
+EquivalenceSample24::EquivalenceSample24()
 {
 
 }
 
-EquivalenceRule24::~EquivalenceRule24()
+EquivalenceSample24::~EquivalenceSample24()
 {
 
 }
 
-Proposition* EquivalenceRule24::GetEquivalenceProposition(CompoundProposition* proposition)
+Proposition* EquivalenceSample24::getEquivalenceProposition(CompoundProposition* proposition)
 {
 	if (proposition == nullptr)
 	{
@@ -1347,17 +1350,17 @@ Proposition* EquivalenceRule24::GetEquivalenceProposition(CompoundProposition* p
 }
 
 //////////////////////////////////////////////////////////////////////////
-EquivalenceRule25::EquivalenceRule25()
+EquivalenceSample25::EquivalenceSample25()
 {
 
 }
 
-EquivalenceRule25::~EquivalenceRule25()
+EquivalenceSample25::~EquivalenceSample25()
 {
 
 }
 
-Proposition* EquivalenceRule25::GetEquivalenceProposition(CompoundProposition* proposition)
+Proposition* EquivalenceSample25::getEquivalenceProposition(CompoundProposition* proposition)
 {
 	if (proposition == nullptr)
 	{
@@ -1400,17 +1403,17 @@ Proposition* EquivalenceRule25::GetEquivalenceProposition(CompoundProposition* p
 
 //////////////////////////////////////////////////////////////////////////
 
-EquivalenceRule26::EquivalenceRule26()
+EquivalenceSample26::EquivalenceSample26()
 {
 
 }
 
-EquivalenceRule26::~EquivalenceRule26()
+EquivalenceSample26::~EquivalenceSample26()
 {
 
 }
 
-Proposition* EquivalenceRule26::GetEquivalenceProposition(CompoundProposition* proposition)
+Proposition* EquivalenceSample26::getEquivalenceProposition(CompoundProposition* proposition)
 {
 	if (proposition == nullptr)
 	{
@@ -1453,17 +1456,17 @@ Proposition* EquivalenceRule26::GetEquivalenceProposition(CompoundProposition* p
 
 //////////////////////////////////////////////////////////////////////////
 
-EquivalenceRule27::EquivalenceRule27()
+EquivalenceSample27::EquivalenceSample27()
 {
 
 }
 
-EquivalenceRule27::~EquivalenceRule27()
+EquivalenceSample27::~EquivalenceSample27()
 {
 
 }
 
-Proposition* EquivalenceRule27::GetEquivalenceProposition(CompoundProposition* proposition)
+Proposition* EquivalenceSample27::getEquivalenceProposition(CompoundProposition* proposition)
 {
 	if (proposition == nullptr)
 	{
@@ -1504,17 +1507,17 @@ Proposition* EquivalenceRule27::GetEquivalenceProposition(CompoundProposition* p
 	return p0;
 }
 //////////////////////////////////////////////////////////////////////////
-EquivalenceRule28::EquivalenceRule28()
+EquivalenceSample28::EquivalenceSample28()
 {
 
 }
 
-EquivalenceRule28::~EquivalenceRule28()
+EquivalenceSample28::~EquivalenceSample28()
 {
 
 }
 
-Proposition* EquivalenceRule28::GetEquivalenceProposition(CompoundProposition* proposition)
+Proposition* EquivalenceSample28::getEquivalenceProposition(CompoundProposition* proposition)
 {
 	if (proposition == nullptr)
 	{
@@ -1548,17 +1551,17 @@ Proposition* EquivalenceRule28::GetEquivalenceProposition(CompoundProposition* p
 }
 
 //////////////////////////////////////////////////////////////////////////
-EquivalenceRule29::EquivalenceRule29()
+EquivalenceSample29::EquivalenceSample29()
 {
 
 }
 
-EquivalenceRule29::~EquivalenceRule29()
+EquivalenceSample29::~EquivalenceSample29()
 {
 
 }
 
-Proposition* EquivalenceRule29::GetEquivalenceProposition(CompoundProposition* proposition)
+Proposition* EquivalenceSample29::getEquivalenceProposition(CompoundProposition* proposition)
 {
 	if (proposition == nullptr)
 	{
@@ -1589,17 +1592,17 @@ Proposition* EquivalenceRule29::GetEquivalenceProposition(CompoundProposition* p
 	return p0;
 }
 //////////////////////////////////////////////////////////////////////////
-EquivalenceRule30::EquivalenceRule30()
+EquivalenceSample30::EquivalenceSample30()
 {
 
 }
 
-EquivalenceRule30::~EquivalenceRule30()
+EquivalenceSample30::~EquivalenceSample30()
 {
 
 }
 
-Proposition* EquivalenceRule30::GetEquivalenceProposition(CompoundProposition* proposition)
+Proposition* EquivalenceSample30::getEquivalenceProposition(CompoundProposition* proposition)
 {
 	if (proposition == nullptr)
 	{
@@ -1638,17 +1641,17 @@ Proposition* EquivalenceRule30::GetEquivalenceProposition(CompoundProposition* p
 }
 //////////////////////////////////////////////////////////////////////////
 
-EquivalenceRule31::EquivalenceRule31()
+EquivalenceSample31::EquivalenceSample31()
 {
 
 }
 
-EquivalenceRule31::~EquivalenceRule31()
+EquivalenceSample31::~EquivalenceSample31()
 {
 
 }
 
-Proposition* EquivalenceRule31::GetEquivalenceProposition(CompoundProposition* proposition)
+Proposition* EquivalenceSample31::getEquivalenceProposition(CompoundProposition* proposition)
 {
 	if (proposition == nullptr)
 	{
@@ -1688,17 +1691,17 @@ Proposition* EquivalenceRule31::GetEquivalenceProposition(CompoundProposition* p
 }
 
 //////////////////////////////////////////////////////////////////////////
-EquivalenceRule32::EquivalenceRule32()
+EquivalenceSample32::EquivalenceSample32()
 {
 
 }
 
-EquivalenceRule32::~EquivalenceRule32()
+EquivalenceSample32::~EquivalenceSample32()
 {
 
 }
 
-Proposition* EquivalenceRule32::GetEquivalenceProposition(CompoundProposition* proposition)
+Proposition* EquivalenceSample32::getEquivalenceProposition(CompoundProposition* proposition)
 {
 	if (proposition == nullptr)
 	{

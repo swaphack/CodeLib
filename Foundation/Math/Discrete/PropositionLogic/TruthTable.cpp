@@ -15,9 +15,15 @@ bool TruthTable::testResult(CompoundProposition* proposition, const std::map<uin
 	for (auto item : selfIdentify)
 	{
 		auto pp = item->as<PrimaryProposition>();
-		auto it = idValue.find(pp->getIdentify());
-		assert(it != idValue.end());
-		pp->setResult(it->second ? PropositionResult::TRUE : PropositionResult::FALSE);
+		auto it = idValue.find(pp->getLogicID());
+		if (it != idValue.end())
+		{
+			pp->setResult(it->second ? PropositionResult::TRUE : PropositionResult::FALSE);
+		}
+		else
+		{
+			return false;
+		}
 	}
 
 	return proposition->isTrue();
@@ -36,6 +42,14 @@ bool TruthTable::isTwoPropositionsEqual(CompoundProposition* a, CompoundProposit
 	for (auto item : selfIdentify)
 	{
 		if (otherIdentify.find(item) == otherIdentify.end())
+		{
+			return false;
+		}
+	}
+
+	for (auto item : otherIdentify)
+	{
+		if (selfIdentify.find(item) == selfIdentify.end())
 		{
 			return false;
 		}
@@ -166,5 +180,5 @@ bool TruthTable::isContradictoryProposition(CompoundProposition* a)
 	};
 
 	func(0);
-	return true;
+	return ret;
 }

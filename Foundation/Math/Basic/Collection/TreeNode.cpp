@@ -67,7 +67,7 @@ int TreeNode::getChildrenCount() const
 	return _children.size();
 }
 
-const std::vector<TreeNode*>& TreeNode::getChildren() const
+const std::vector<TreeNode*>& TreeNode::getAllChildren() const
 {
 	return _children;
 }

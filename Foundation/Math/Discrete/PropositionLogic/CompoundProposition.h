@@ -15,17 +15,17 @@ namespace math
 	{
 	public:
 		// 与
-		const uint64_t COMPOUND_PROPOSITION_SIGNAL_AND = 1000001;
+		static const uint64_t COMPOUND_PROPOSITION_SIGNAL_AND = 1000001;
 		// 或
-		const uint64_t COMPOUND_PROPOSITION_SIGNAL_OR = 1000001;
+		static const uint64_t COMPOUND_PROPOSITION_SIGNAL_OR = 1000001;
 		// 非
-		const uint64_t COMPOUND_PROPOSITION_SIGNAL_NOT = 1000001;
+		static const uint64_t COMPOUND_PROPOSITION_SIGNAL_NOT = 1000001;
 		// 异或
-		const uint64_t COMPOUND_PROPOSITION_SIGNAL_XOR = 1000001;
+		static const uint64_t COMPOUND_PROPOSITION_SIGNAL_XOR = 1000001;
 		// 蕴含
-		const uint64_t COMPOUND_PROPOSITION_SIGNAL_IMPLICATE = 1000001;
+		static const uint64_t COMPOUND_PROPOSITION_SIGNAL_IMPLICATE = 1000001;
 		// 双重蕴含
-		const uint64_t COMPOUND_PROPOSITION_SIGNAL_DOUBLEIMPLICATE = 1000001;
+		static const uint64_t COMPOUND_PROPOSITION_SIGNAL_DOUBLEIMPLICATE = 1000001;
 	public:
 		CompoundProposition();
 		CompoundProposition(const CompoundProposition& value);

@@ -5,6 +5,8 @@
 #include "PrimaryProposition.h"
 #include "BooleanProposition.h"
 
+#include <string>
+
 namespace math
 {
 	/**
@@ -28,547 +30,547 @@ namespace math
 		/**
 		*	获取等价式
 		*/
-		virtual Proposition* GetEquivalenceProposition(CompoundProposition* proposition);
+		virtual Proposition* getEquivalenceProposition(CompoundProposition* proposition);
 	};
 
 	//////////////////////////////////////////////////////////////////////////
 	/**
 	*	p&T = p;
 	*/
-	class EquivalenceRule0 : public EquivalenceSample
+	class EquivalenceSample0 : public EquivalenceSample
 	{
 	public:
-		EquivalenceRule0();
-		virtual ~EquivalenceRule0();
+		EquivalenceSample0();
+		virtual ~EquivalenceSample0();
 	public:
 		/**
 		*	获取等价式
 		*/
-		virtual Proposition* GetEquivalenceProposition(CompoundProposition* proposition);
+		virtual Proposition* getEquivalenceProposition(CompoundProposition* proposition);
 	};
 
 	//////////////////////////////////////////////////////////////////////////
 	/**
 	*	p|F = p;
 	*/
-	class EquivalenceRule1 : public EquivalenceSample
+	class EquivalenceSample1 : public EquivalenceSample
 	{
 	public:
-		EquivalenceRule1();
-		virtual ~EquivalenceRule1();
+		EquivalenceSample1();
+		virtual ~EquivalenceSample1();
 	public:
 		/**
 		*	获取等价式
 		*/
-		virtual Proposition* GetEquivalenceProposition(CompoundProposition* proposition);
+		virtual Proposition* getEquivalenceProposition(CompoundProposition* proposition);
 	};
 
 	//////////////////////////////////////////////////////////////////////////
 	/**
 	*	p|T = T;
 	*/
-	class EquivalenceRule2 : public EquivalenceSample
+	class EquivalenceSample2 : public EquivalenceSample
 	{
 	public:
-		EquivalenceRule2();
-		virtual ~EquivalenceRule2();
+		EquivalenceSample2();
+		virtual ~EquivalenceSample2();
 	public:
 		/**
 		*	获取等价式
 		*/
-		virtual Proposition* GetEquivalenceProposition(CompoundProposition* proposition);
+		virtual Proposition* getEquivalenceProposition(CompoundProposition* proposition);
 	};
 
 	//////////////////////////////////////////////////////////////////////////
 	/**
 	*	p&F = F;
 	*/
-	class EquivalenceRule3 : public EquivalenceSample
+	class EquivalenceSample3 : public EquivalenceSample
 	{
 	public:
-		EquivalenceRule3();
-		virtual ~EquivalenceRule3();
+		EquivalenceSample3();
+		virtual ~EquivalenceSample3();
 	public:
 		/**
 		*	获取等价式
 		*/
-		virtual Proposition* GetEquivalenceProposition(CompoundProposition* proposition);
+		virtual Proposition* getEquivalenceProposition(CompoundProposition* proposition);
 	};
 
 	//////////////////////////////////////////////////////////////////////////
 	/**
 	*	p|p = p;
 	*/
-	class EquivalenceRule4 : public EquivalenceSample
+	class EquivalenceSample4 : public EquivalenceSample
 	{
 	public:
-		EquivalenceRule4();
-		virtual ~EquivalenceRule4();
+		EquivalenceSample4();
+		virtual ~EquivalenceSample4();
 	public:
 		/**
 		*	获取等价式
 		*/
-		virtual Proposition* GetEquivalenceProposition(CompoundProposition* proposition);
+		virtual Proposition* getEquivalenceProposition(CompoundProposition* proposition);
 	};
 	//////////////////////////////////////////////////////////////////////////
 	/**
 	*	p&p = p;
 	*/
-	class EquivalenceRule5 : public EquivalenceSample
+	class EquivalenceSample5 : public EquivalenceSample
 	{
 	public:
-		EquivalenceRule5();
-		virtual ~EquivalenceRule5();
+		EquivalenceSample5();
+		virtual ~EquivalenceSample5();
 	public:
 		/**
 		*	获取等价式
 		*/
-		virtual Proposition* GetEquivalenceProposition(CompoundProposition* proposition);
+		virtual Proposition* getEquivalenceProposition(CompoundProposition* proposition);
 	};
 	//////////////////////////////////////////////////////////////////////////
 	/**
 	*	!!p = p;
 	*/
-	class EquivalenceRule6 : public EquivalenceSample
+	class EquivalenceSample6 : public EquivalenceSample
 	{
 	public:
-		EquivalenceRule6();
-		virtual ~EquivalenceRule6();
+		EquivalenceSample6();
+		virtual ~EquivalenceSample6();
 	public:
 		/**
 		*	获取等价式
 		*/
-		virtual Proposition* GetEquivalenceProposition(CompoundProposition* proposition);
+		virtual Proposition* getEquivalenceProposition(CompoundProposition* proposition);
 	};
 	//////////////////////////////////////////////////////////////////////////
 	/**
 	*	p|q = q|p;
 	*/
-	class EquivalenceRule7 : public EquivalenceSample
+	class EquivalenceSample7 : public EquivalenceSample
 	{
 	public:
-		EquivalenceRule7();
-		virtual ~EquivalenceRule7();
+		EquivalenceSample7();
+		virtual ~EquivalenceSample7();
 	public:
 		/**
 		*	获取等价式
 		*/
-		virtual Proposition* GetEquivalenceProposition(CompoundProposition* proposition);
+		virtual Proposition* getEquivalenceProposition(CompoundProposition* proposition);
 	};
 	//////////////////////////////////////////////////////////////////////////
 	/**
 	*	p&q = q&p;
 	*/
-	class EquivalenceRule8 : public EquivalenceSample
+	class EquivalenceSample8 : public EquivalenceSample
 	{
 	public:
-		EquivalenceRule8();
-		virtual ~EquivalenceRule8();
+		EquivalenceSample8();
+		virtual ~EquivalenceSample8();
 	public:
 		/**
 		*	获取等价式
 		*/
-		virtual Proposition* GetEquivalenceProposition(CompoundProposition* proposition);
+		virtual Proposition* getEquivalenceProposition(CompoundProposition* proposition);
 	};
 
 	//////////////////////////////////////////////////////////////////////////
 	/**
 	*	(p|q)|r = p|(q|r);
 	*/
-	class EquivalenceRule9 : public EquivalenceSample
+	class EquivalenceSample9 : public EquivalenceSample
 	{
 	public:
-		EquivalenceRule9();
-		virtual ~EquivalenceRule9();
+		EquivalenceSample9();
+		virtual ~EquivalenceSample9();
 	public:
 		/**
 		*	获取等价式
 		*/
-		virtual Proposition* GetEquivalenceProposition(CompoundProposition* proposition);
+		virtual Proposition* getEquivalenceProposition(CompoundProposition* proposition);
 	};
 	
 	//////////////////////////////////////////////////////////////////////////
 	/**
 	*	(p&q)&r = p&(q&r);
 	*/
-	class EquivalenceRule10 : public EquivalenceSample
+	class EquivalenceSample10 : public EquivalenceSample
 	{
 	public:
-		EquivalenceRule10();
-		virtual ~EquivalenceRule10();
+		EquivalenceSample10();
+		virtual ~EquivalenceSample10();
 	public:
 		/**
 		*	获取等价式
 		*/
-		virtual Proposition* GetEquivalenceProposition(CompoundProposition* proposition);
+		virtual Proposition* getEquivalenceProposition(CompoundProposition* proposition);
 	};
 
 	//////////////////////////////////////////////////////////////////////////
 	/**
 	*	p | (q&r) = (p|q) & (p|r);
 	*/
-	class EquivalenceRule11 : public EquivalenceSample
+	class EquivalenceSample11 : public EquivalenceSample
 	{
 	public:
-		EquivalenceRule11();
-		virtual ~EquivalenceRule11();
+		EquivalenceSample11();
+		virtual ~EquivalenceSample11();
 	public:
 		/**
 		*	获取等价式
 		*/
-		virtual Proposition* GetEquivalenceProposition(CompoundProposition* proposition);
+		virtual Proposition* getEquivalenceProposition(CompoundProposition* proposition);
 	};
 
 	//////////////////////////////////////////////////////////////////////////
 	/**
 	*	p & (q|r) = (p&q) | (p&r);
 	*/
-	class EquivalenceRule12 : public EquivalenceSample
+	class EquivalenceSample12 : public EquivalenceSample
 	{
 	public:
-		EquivalenceRule12();
-		virtual ~EquivalenceRule12();
+		EquivalenceSample12();
+		virtual ~EquivalenceSample12();
 	public:
 		/**
 		*	获取等价式
 		*/
-		virtual Proposition* GetEquivalenceProposition(CompoundProposition* proposition);
+		virtual Proposition* getEquivalenceProposition(CompoundProposition* proposition);
 	};
 
 	//////////////////////////////////////////////////////////////////////////
 	/**
 	*	!(p&q) = (!p) | (!q);
 	*/
-	class EquivalenceRule13 : public EquivalenceSample
+	class EquivalenceSample13 : public EquivalenceSample
 	{
 	public:
-		EquivalenceRule13();
-		virtual ~EquivalenceRule13();
+		EquivalenceSample13();
+		virtual ~EquivalenceSample13();
 	public:
 		/**
 		*	获取等价式
 		*/
-		virtual Proposition* GetEquivalenceProposition(CompoundProposition* proposition);
+		virtual Proposition* getEquivalenceProposition(CompoundProposition* proposition);
 	};
 
 	//////////////////////////////////////////////////////////////////////////
 	/**
 	*	!(p|q) = (!p) & (!q);
 	*/
-	class EquivalenceRule14 : public EquivalenceSample
+	class EquivalenceSample14 : public EquivalenceSample
 	{
 	public:
-		EquivalenceRule14();
-		virtual ~EquivalenceRule14();
+		EquivalenceSample14();
+		virtual ~EquivalenceSample14();
 	public:
 		/**
 		*	获取等价式
 		*/
-		virtual Proposition* GetEquivalenceProposition(CompoundProposition* proposition);
+		virtual Proposition* getEquivalenceProposition(CompoundProposition* proposition);
 	};
 
 	//////////////////////////////////////////////////////////////////////////
 	/**
 	*	p|(p&q) = q;
 	*/
-	class EquivalenceRule15 : public EquivalenceSample
+	class EquivalenceSample15 : public EquivalenceSample
 	{
 	public:
-		EquivalenceRule15();
-		virtual ~EquivalenceRule15();
+		EquivalenceSample15();
+		virtual ~EquivalenceSample15();
 	public:
 		/**
 		*	获取等价式
 		*/
-		virtual Proposition* GetEquivalenceProposition(CompoundProposition* proposition);
+		virtual Proposition* getEquivalenceProposition(CompoundProposition* proposition);
 	};
 	//////////////////////////////////////////////////////////////////////////
 	/**
 	*	p&(p|q) = q;
 	*/
-	class EquivalenceRule16 : public EquivalenceSample
+	class EquivalenceSample16 : public EquivalenceSample
 	{
 	public:
-		EquivalenceRule16();
-		virtual ~EquivalenceRule16();
+		EquivalenceSample16();
+		virtual ~EquivalenceSample16();
 	public:
 		/**
 		*	获取等价式
 		*/
-		virtual Proposition* GetEquivalenceProposition(CompoundProposition* proposition);
+		virtual Proposition* getEquivalenceProposition(CompoundProposition* proposition);
 	};
 	//////////////////////////////////////////////////////////////////////////
 	/**
 	*	p&(!p) = F;
 	*/
-	class EquivalenceRule17 : public EquivalenceSample
+	class EquivalenceSample17 : public EquivalenceSample
 	{
 	public:
-		EquivalenceRule17();
-		virtual ~EquivalenceRule17();
+		EquivalenceSample17();
+		virtual ~EquivalenceSample17();
 	public:
 		/**
 		*	获取等价式
 		*/
-		virtual Proposition* GetEquivalenceProposition(CompoundProposition* proposition);
+		virtual Proposition* getEquivalenceProposition(CompoundProposition* proposition);
 	};
 	//////////////////////////////////////////////////////////////////////////
 	/**
 	*	p|(!p) = T;
 	*/
-	class EquivalenceRule18 : public EquivalenceSample
+	class EquivalenceSample18 : public EquivalenceSample
 	{
 	public:
-		EquivalenceRule18();
-		virtual ~EquivalenceRule18();
+		EquivalenceSample18();
+		virtual ~EquivalenceSample18();
 	public:
 		/**
 		*	获取等价式
 		*/
-		virtual Proposition* GetEquivalenceProposition(CompoundProposition* proposition);
+		virtual Proposition* getEquivalenceProposition(CompoundProposition* proposition);
 	};
 
 	//////////////////////////////////////////////////////////////////////////
 	/**
 	*	p->q = !p | q;
 	*/
-	class EquivalenceRule19 : public EquivalenceSample
+	class EquivalenceSample19 : public EquivalenceSample
 	{
 	public:
-		EquivalenceRule19();
-		virtual ~EquivalenceRule19();
+		EquivalenceSample19();
+		virtual ~EquivalenceSample19();
 	public:
 		/**
 		*	获取等价式
 		*/
-		virtual Proposition* GetEquivalenceProposition(CompoundProposition* proposition);
+		virtual Proposition* getEquivalenceProposition(CompoundProposition* proposition);
 	};
 	//////////////////////////////////////////////////////////////////////////
 	/**
 	*	p->q = !q -> !p;
 	*/
-	class EquivalenceRule20 : public EquivalenceSample
+	class EquivalenceSample20 : public EquivalenceSample
 	{
 	public:
-		EquivalenceRule20();
-		virtual ~EquivalenceRule20();
+		EquivalenceSample20();
+		virtual ~EquivalenceSample20();
 	public:
 		/**
 		*	获取等价式
 		*/
-		virtual Proposition* GetEquivalenceProposition(CompoundProposition* proposition);
+		virtual Proposition* getEquivalenceProposition(CompoundProposition* proposition);
 	};
 	//////////////////////////////////////////////////////////////////////////
 	/**
 	*	p | q = !p -> q;
 	*/
-	class EquivalenceRule21 : public EquivalenceSample
+	class EquivalenceSample21 : public EquivalenceSample
 	{
 	public:
-		EquivalenceRule21();
-		virtual ~EquivalenceRule21();
+		EquivalenceSample21();
+		virtual ~EquivalenceSample21();
 	public:
 		/**
 		*	获取等价式
 		*/
-		virtual Proposition* GetEquivalenceProposition(CompoundProposition* proposition);
+		virtual Proposition* getEquivalenceProposition(CompoundProposition* proposition);
 	};
 	//////////////////////////////////////////////////////////////////////////
 	/**
 	*	p & q = !(p -> !q);
 	*/
-	class EquivalenceRule22 : public EquivalenceSample
+	class EquivalenceSample22 : public EquivalenceSample
 	{
 	public:
-		EquivalenceRule22();
-		virtual ~EquivalenceRule22();
+		EquivalenceSample22();
+		virtual ~EquivalenceSample22();
 	public:
 		/**
 		*	获取等价式
 		*/
-		virtual Proposition* GetEquivalenceProposition(CompoundProposition* proposition);
+		virtual Proposition* getEquivalenceProposition(CompoundProposition* proposition);
 	};
 	//////////////////////////////////////////////////////////////////////////
 	/**
 	*	!(p -> q) = p & !q;
 	*/
-	class EquivalenceRule23 : public EquivalenceSample
+	class EquivalenceSample23 : public EquivalenceSample
 	{
 	public:
-		EquivalenceRule23();
-		virtual ~EquivalenceRule23();
+		EquivalenceSample23();
+		virtual ~EquivalenceSample23();
 	public:
 		/**
 		*	获取等价式
 		*/
-		virtual Proposition* GetEquivalenceProposition(CompoundProposition* proposition);
+		virtual Proposition* getEquivalenceProposition(CompoundProposition* proposition);
 	};
 	//////////////////////////////////////////////////////////////////////////
 	/**
 	*	(p->q) & (p->r) = p->(q & r)
 	*/
-	class EquivalenceRule24 : public EquivalenceSample
+	class EquivalenceSample24 : public EquivalenceSample
 	{
 	public:
-		EquivalenceRule24();
-		virtual ~EquivalenceRule24();
+		EquivalenceSample24();
+		virtual ~EquivalenceSample24();
 	public:
 		/**
 		*	获取等价式
 		*/
-		virtual Proposition* GetEquivalenceProposition(CompoundProposition* proposition);
+		virtual Proposition* getEquivalenceProposition(CompoundProposition* proposition);
 	};
 	//////////////////////////////////////////////////////////////////////////
 	/**
 	*	(p->r) & (p->r) = (p | q)->r
 	*/
-	class EquivalenceRule25 : public EquivalenceSample
+	class EquivalenceSample25 : public EquivalenceSample
 	{
 	public:
-		EquivalenceRule25();
-		virtual ~EquivalenceRule25();
+		EquivalenceSample25();
+		virtual ~EquivalenceSample25();
 	public:
 		/**
 		*	获取等价式
 		*/
-		virtual Proposition* GetEquivalenceProposition(CompoundProposition* proposition);
+		virtual Proposition* getEquivalenceProposition(CompoundProposition* proposition);
 	};
 
 	//////////////////////////////////////////////////////////////////////////
 	/**
 	*	(p->q) | (p->r) = p->(q | r)
 	*/
-	class EquivalenceRule26 : public EquivalenceSample
+	class EquivalenceSample26 : public EquivalenceSample
 	{
 	public:
-		EquivalenceRule26();
-		virtual ~EquivalenceRule26();
+		EquivalenceSample26();
+		virtual ~EquivalenceSample26();
 	public:
 		/**
 		*	获取等价式
 		*/
-		virtual Proposition* GetEquivalenceProposition(CompoundProposition* proposition);
+		virtual Proposition* getEquivalenceProposition(CompoundProposition* proposition);
 	};
 	//////////////////////////////////////////////////////////////////////////
 	/**
 	*	(p->r) | (p->r) = (p & q)->r
 	*/
-	class EquivalenceRule27 : public EquivalenceSample
+	class EquivalenceSample27 : public EquivalenceSample
 	{
 	public:
-		EquivalenceRule27();
-		virtual ~EquivalenceRule27();
+		EquivalenceSample27();
+		virtual ~EquivalenceSample27();
 	public:
 		/**
 		*	获取等价式
 		*/
-		virtual Proposition* GetEquivalenceProposition(CompoundProposition* proposition);
+		virtual Proposition* getEquivalenceProposition(CompoundProposition* proposition);
 	};
 	//////////////////////////////////////////////////////////////////////////
 	/**
 	*	p<->q = (p->q) & (q->p)
 	*/
-	class EquivalenceRule28 : public EquivalenceSample
+	class EquivalenceSample28 : public EquivalenceSample
 	{
 	public:
-		EquivalenceRule28();
-		virtual ~EquivalenceRule28();
+		EquivalenceSample28();
+		virtual ~EquivalenceSample28();
 	public:
 		/**
 		*	获取等价式
 		*/
-		virtual Proposition* GetEquivalenceProposition(CompoundProposition* proposition);
+		virtual Proposition* getEquivalenceProposition(CompoundProposition* proposition);
 	};
 	//////////////////////////////////////////////////////////////////////////
 	/**
 	*	p<->q = !p<->!q
 	*/
-	class EquivalenceRule29 : public EquivalenceSample
+	class EquivalenceSample29 : public EquivalenceSample
 	{
 	public:
-		EquivalenceRule29();
-		virtual ~EquivalenceRule29();
+		EquivalenceSample29();
+		virtual ~EquivalenceSample29();
 	public:
 		/**
 		*	获取等价式
 		*/
-		virtual Proposition* GetEquivalenceProposition(CompoundProposition* proposition);
+		virtual Proposition* getEquivalenceProposition(CompoundProposition* proposition);
 	};
 
 	//////////////////////////////////////////////////////////////////////////
 	/**
 	*	p<->q = (p & q) | (!p & !q)
 	*/
-	class EquivalenceRule30 : public EquivalenceSample
+	class EquivalenceSample30 : public EquivalenceSample
 	{
 	public:
-		EquivalenceRule30();
-		virtual ~EquivalenceRule30();
+		EquivalenceSample30();
+		virtual ~EquivalenceSample30();
 	public:
 		/**
 		*	获取等价式
 		*/
-		virtual Proposition* GetEquivalenceProposition(CompoundProposition* proposition);
+		virtual Proposition* getEquivalenceProposition(CompoundProposition* proposition);
 	};
 
 	//////////////////////////////////////////////////////////////////////////
 	/**
 	*	!(p<->q) = p<->!q
 	*/
-	class EquivalenceRule31 : public EquivalenceSample
+	class EquivalenceSample31 : public EquivalenceSample
 	{
 	public:
-		EquivalenceRule31();
-		virtual ~EquivalenceRule31();
+		EquivalenceSample31();
+		virtual ~EquivalenceSample31();
 	public:
 		/**
 		*	获取等价式
 		*/
-		virtual Proposition* GetEquivalenceProposition(CompoundProposition* proposition);
+		virtual Proposition* getEquivalenceProposition(CompoundProposition* proposition);
 	};
 	//////////////////////////////////////////////////////////////////////////
 	/**
 	*	(p<->q) = q<->p
 	*/
-	class EquivalenceRule32 : public EquivalenceSample
+	class EquivalenceSample32 : public EquivalenceSample
 	{
 	public:
-		EquivalenceRule32();
-		virtual ~EquivalenceRule32();
+		EquivalenceSample32();
+		virtual ~EquivalenceSample32();
 	public:
 		/**
 		*	获取等价式
 		*/
-		virtual Proposition* GetEquivalenceProposition(CompoundProposition* proposition);
+		virtual Proposition* getEquivalenceProposition(CompoundProposition* proposition);
 	};
 	//////////////////////////////////////////////////////////////////////////
 	/**
 	*	(p|q)|r = q|(p|r);
 	*/
-	class EquivalenceRule33 : public EquivalenceSample
+	class EquivalenceSample33 : public EquivalenceSample
 	{
 	public:
-		EquivalenceRule33();
-		virtual ~EquivalenceRule33();
+		EquivalenceSample33();
+		virtual ~EquivalenceSample33();
 	public:
 		/**
 		*	获取等价式
 		*/
-		virtual Proposition* GetEquivalenceProposition(CompoundProposition* proposition);
+		virtual Proposition* getEquivalenceProposition(CompoundProposition* proposition);
 	};
 	//////////////////////////////////////////////////////////////////////////
 	/**
 	*	(p&q)&r = q&(p&r);
 	*/
-	class EquivalenceRule34 : public EquivalenceSample
+	class EquivalenceSample34 : public EquivalenceSample
 	{
 	public:
-		EquivalenceRule34();
-		virtual ~EquivalenceRule34();
+		EquivalenceSample34();
+		virtual ~EquivalenceSample34();
 	public:
 		/**
 		*	获取等价式
 		*/
-		virtual Proposition* GetEquivalenceProposition(CompoundProposition* proposition);
+		virtual Proposition* getEquivalenceProposition(CompoundProposition* proposition);
 	};
 }

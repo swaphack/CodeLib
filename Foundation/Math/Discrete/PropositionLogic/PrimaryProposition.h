@@ -35,10 +35,6 @@ namespace math
 		*	命题结果
 		*/
 		CREATE_CLASS_MEMBER_WITH_DEFAULT(PropositionResult, Result, PropositionResult::TRUE);
-		/**
-		*	命题编号
-		*/
-		CREATE_CLASS_MEMBER_WITH_DEFAULT(uint64_t, Identify, 0);
 	public:
 		/**
 		*	是否为真

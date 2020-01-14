@@ -28,6 +28,7 @@ namespace math
 
 	class TautologyProposition;
 	class ContradictoryProposition;
+	enum class PropositionResult;
 
 	/**
 	*	√¸Ã‚

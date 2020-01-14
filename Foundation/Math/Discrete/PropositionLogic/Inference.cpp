@@ -1,4 +1,5 @@
 #include "Inference.h"
+#include "Proposition.h"
 
 using namespace math;
 
@@ -12,25 +13,49 @@ Inference::~Inference()
 
 }
 
-CompoundProposition* Inference::createNegativeProposition(Proposition* a)
+void Inference::addCondition(Proposition* condition)
 {
-	NegativeProposition* np = this->createNode<NegativeProposition>();
-	np->setA(a);
-	return np;
+	if (condition == nullptr)
+	{
+		return;
+	}
+
+	_condtions.insert(condition);
 }
 
-CompoundProposition* Inference::createDisjunctiveProposition(Proposition* a, Proposition* b)
+void Inference::removeCondtion(Proposition* condition)
 {
-	DisjunctiveProposition* np = this->createNode<DisjunctiveProposition>();
-	np->setA(a);
-	np->setB(b);
-	return np;
+	if (condition == nullptr)
+	{
+		return;
+	}
+
+	_condtions.erase(condition);
 }
 
-CompoundProposition* Inference::createCombinedProposition(Proposition* a, Proposition* b)
+void Inference::removeAllCondtions()
 {
-	CombinedProposition* np = this->createNode<CombinedProposition>();
-	np->setA(a);
-	np->setB(b);
-	return np;
+	_condtions.clear();
+}
+
+std::set<Proposition*> Inference::getResult()
+{
+	std::set<Proposition*> result;
+	std::set<Proposition*> condtions = _condtions;
+	for (auto item : _condtions)
+	{
+		if (item->getType() == PropositionType::Primary)
+		{
+			result.insert(item);
+		}
+		else
+		{
+			condtions.insert(item);
+		}
+	}
+
+	do 
+	{
+		
+	} while (true);
 }

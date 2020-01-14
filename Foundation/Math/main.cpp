@@ -15,9 +15,11 @@ void testMatrix()
 
 void testInference()
 {
+	// !(a->b)
 	auto a = Proposition::create<PrimaryProposition>(1, PropositionResult::TRUE);
-	auto b = Proposition::create<PrimaryProposition>(2, PropositionResult::FALSE);
-	auto c = Proposition::create<DisjunctiveProposition>(a, b);
+	auto b = Proposition::create<PrimaryProposition>(2, PropositionResult::TRUE);
+
+	auto c = Proposition::create<ImplicateProposition>(a, b);
 	auto d = Proposition::create<NegativeProposition>(c);
 
 	auto rule = new EquivalenceRule();
