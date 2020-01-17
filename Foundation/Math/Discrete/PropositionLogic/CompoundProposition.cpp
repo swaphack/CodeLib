@@ -1,4 +1,5 @@
 #include "CompoundProposition.h"
+#include "PrimaryProposition.h"
 
 using namespace math;
 
@@ -81,7 +82,6 @@ bool CompoundProposition::matchChildren(const std::vector<TreeNode*>& children)
 CompoundProposition& CompoundProposition::operator=(const CompoundProposition& value)
 {
 	Proposition::operator=(value);
-
 	this->setLogicID(value.getLogicID());
 	this->removeAllChildren();
 	for (auto item : value.getAllChildren())
@@ -91,9 +91,39 @@ CompoundProposition& CompoundProposition::operator=(const CompoundProposition& v
 	return *this;
 }
 
+bool CompoundProposition::isPrimaryPropositionOfAllChildren()
+{
+	for (auto item : _children)
+	{
+		if (!item->is<PrimaryProposition>())
+		{
+			return false;
+		}
+	}
+	return true;
+}
 
+Proposition* CompoundProposition::clone()
+{
+	return create<CompoundProposition>();
+}
 
+Proposition* CompoundProposition::deepClone()
+{
+	CompoundProposition* proposition = create<CompoundProposition>();
+	proposition->addChildren(this->deepCloneChildren());
+	return proposition;
+}
 
+std::vector<TreeNode*> math::CompoundProposition::deepCloneChildren()
+{
+	std::vector<TreeNode*> vecNode;
+	for (auto item : _children)
+	{
+		vecNode.push_back(item->as<Proposition>()->deepClone());
+	}
 
+	return vecNode;
+}
 
 

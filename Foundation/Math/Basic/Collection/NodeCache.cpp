@@ -33,9 +33,11 @@ void NodeCache::removeNode(Node* node)
 
 void NodeCache::clear()
 {
-	for (auto item : _nodes)
+	for (auto it = _nodes.begin(); it != _nodes.end(); )
 	{
-		delete item;
+		auto pItem = *it;
+		it++;
+		delete pItem;
 	}
 	_nodes.clear();
 }

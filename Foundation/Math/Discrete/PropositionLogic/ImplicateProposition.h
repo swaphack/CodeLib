@@ -12,6 +12,7 @@ namespace math
 	public:
 		ImplicateProposition();
 		ImplicateProposition(Proposition* a, Proposition* b);
+		ImplicateProposition(const ImplicateProposition& value);
 		virtual ~ImplicateProposition();
 	public:
 		/**
@@ -27,6 +28,19 @@ namespace math
 		*	是否为真
 		*/
 		virtual bool isTrue();
+		/**
+		*	克隆节点，不包含子节点
+		*/
+		virtual Proposition* clone();
+		/**
+		*	克隆节点，包含子节点
+		*/
+		virtual Proposition* deepClone();
+	public:
+		/**
+		*	赋值
+		*/
+		ImplicateProposition& operator=(const ImplicateProposition& value);
 	};
 
 	/**
@@ -37,6 +51,7 @@ namespace math
 	public:
 		DoubleImplicateProposition();
 		DoubleImplicateProposition(Proposition* a, Proposition* b);
+		DoubleImplicateProposition(const DoubleImplicateProposition& value);
 		virtual ~DoubleImplicateProposition();
 	public:
 		/**
@@ -52,5 +67,18 @@ namespace math
 		*	是否为真
 		*/
 		virtual bool isTrue();
+		/**
+		*	克隆节点，不包含子节点
+		*/
+		virtual Proposition* clone();
+		/**
+		*	克隆节点，包含子节点
+		*/
+		virtual Proposition* deepClone();
+	public:
+		/**
+		*	赋值
+		*/
+		DoubleImplicateProposition& operator=(const DoubleImplicateProposition& value);
 	};
 }

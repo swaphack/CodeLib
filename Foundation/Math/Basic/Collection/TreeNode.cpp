@@ -21,10 +21,18 @@ void TreeNode::addChild(TreeNode* child)
 	}
 
 	assert(child->getParent() == nullptr);
-	assert(this->indexOf(child) != -1);
+	assert(this->indexOf(child) == -1);
 
 	child->setParent(this);
 	_children.push_back(child);
+}
+
+void TreeNode::addChildren(const std::vector<TreeNode*>& children)
+{
+	for (auto item : children)
+	{
+		this->addChild(item);
+	}
 }
 
 void TreeNode::removeChild(TreeNode* child)

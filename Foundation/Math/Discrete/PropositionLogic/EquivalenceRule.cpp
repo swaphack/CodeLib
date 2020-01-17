@@ -4,6 +4,7 @@
 #include "EquivalenceSample.h"
 
 #include <cassert>
+#include <functional>
 
 using namespace math;
 
@@ -18,48 +19,125 @@ EquivalenceRule::~EquivalenceRule()
 	this->removeAllEquivalenceSamples();
 }
 
-Proposition* EquivalenceRule::getEquivalenceProposition(CompoundProposition* proposition)
+std::vector<Proposition*> EquivalenceRule::getEquivalenceProposition(Proposition* proposition)
 {
+	return getEquivalenceProposition(proposition, std::vector<Proposition*>());
+}
+
+std::vector<Proposition*> EquivalenceRule::getEquivalenceProposition(Proposition* proposition, const std::vector<Proposition*>& preEquivalencePropositions)
+{
+	std::vector<Proposition*> result;
 	if (proposition == nullptr)
 	{
-		return nullptr;
+		return result;
 	}
 
 	auto vecChildren = proposition->getAllChildren();
 	if (vecChildren.size() == 0)
 	{
-		return proposition;
+		result.push_back(proposition);
+		return result;
 	}
 
+	// 基础命题
+	if (proposition->is<PrimaryProposition>())
+	{
+		result.push_back(proposition);
+		return result;
+	}
+
+	// 非复合命题
+	if (!proposition->is<CompoundProposition>())
+	{
+		return result;
+	}
+
+	CompoundProposition* compound = proposition->as<CompoundProposition>();
+	// 如果子节点都是基础命题 
+	if (compound->isPrimaryPropositionOfAllChildren())
+	{
+		result.push_back(compound);
+		auto temp = getEquivalence(compound);
+		if (temp.size() > 0)
+		{
+			for (auto item : temp)
+			{
+				bool exits = false;
+				for (auto item2 : preEquivalencePropositions)
+				{
+					if (item2->hasSameLogic(item))
+					{
+						exits = true;
+					}
+				}
+				if (!exits)
+				{
+					result.push_back(item);
+				}
+			}
+		}
+		return result;
+	}
+
+	// 所有子节点的可能性
+	std::vector<std::vector<Proposition*> > eachChildProposition;
 	// 优先递归子节点
 	for (auto i = 0; i < vecChildren.size(); i++)
 	{
 		auto child = vecChildren[i];
+		std::vector<Proposition*> branch;
 		if (child->is<CompoundProposition>())
 		{
-			Proposition* ret = getEquivalenceProposition(child->as<CompoundProposition>());
-			if (ret != nullptr)
+			auto coumpoundProposition = child->as<CompoundProposition>();
+			branch.push_back(coumpoundProposition);
+
+			auto temp = getEquivalenceProposition(coumpoundProposition, branch);
+			if (temp.size() != 0)
 			{
-				vecChildren[i] = ret;
+				branch.insert(branch.end(), temp.begin(), temp.end());
 			}
 		}
+		else if (child->is<PrimaryProposition>())
+		{
+			branch.push_back(child->as<PrimaryProposition>());
+		}
+		eachChildProposition.push_back(branch);
 	}
 
-	// 计算等价式
-	std::vector<Proposition*> vecResult = getEquivalence(proposition);
-	if (vecResult.size() == 0)
-	{
-		return proposition;
-	}
+	std::function<void(int32_t)> func;
+	int nCount = eachChildProposition.size();
+	std::vector<int> vecIndex;
+	vecIndex.resize(nCount);
 
-	// 取第一个，如果可以转换的话，继续转换，否者返回第一个值
-	auto firstResult = vecResult[0];
-	if (firstResult->is<CompoundProposition>())
-	{
-		return getEquivalenceProposition(firstResult->as<CompoundProposition>());
-	}
+	func = [&](int index){
+		if (index = eachChildProposition.size())
+		{
+			std::vector<TreeNode*> vecChildren;
+			int i = 0;
+			for (auto item : vecIndex)
+			{
+				vecChildren.push_back(eachChildProposition[i][item]);
+				i++;
+			}
+			CompoundProposition* temp = compound->clone()->as<CompoundProposition>();
+			temp->addChildren(vecChildren);	
+			result.push_back(temp);
+			return;
+		}
+		for (int i = 0; i < eachChildProposition[index].size(); i++)
+		{
+			if (index == 0)
+			{
+				vecIndex.clear();				
+			}
+			vecIndex.push_back(i);
+			func(index++);
+		}
+	};
 
-	return firstResult->as<Proposition>();
+	func(0);
+
+	return result;
 }
 
 std::vector<Proposition*> EquivalenceRule::getEquivalence(CompoundProposition* proposition)
@@ -71,11 +149,14 @@ std::vector<Proposition*> EquivalenceRule::getEquivalence(CompoundProposition* p
 		return vecProposition;
 	}
 
+	vecProposition.push_back(proposition);
+
 	for (auto item : _equivalenceSamples)
 	{
 		auto result = item->getEquivalenceProposition(proposition);
 		if (result != nullptr)
 		{
+			printf("%s\n", item->toString().c_str());
 			vecProposition.push_back(result);
 		}
 	}
@@ -162,5 +243,4 @@ void EquivalenceRule::init()
 	this->addEquivalenceSample<EquivalenceSample32>();
 	this->addEquivalenceSample<EquivalenceSample33>();
 	this->addEquivalenceSample<EquivalenceSample34>();
-
 }

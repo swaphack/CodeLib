@@ -38,6 +38,18 @@ DisjunctiveProposition& DisjunctiveProposition::operator=(const DisjunctivePropo
 	return *this;
 }
 
+Proposition* DisjunctiveProposition::clone()
+{
+	return create<DisjunctiveProposition>();
+}
+
+Proposition* DisjunctiveProposition::deepClone()
+{
+	DisjunctiveProposition* proposition = create<DisjunctiveProposition>();
+	proposition->addChildren(this->deepCloneChildren());
+	return proposition;
+}
+
 
 
 //////////////////////////////////////////////////////////////////////////
@@ -76,6 +88,18 @@ CombinedProposition& CombinedProposition::operator=(const CombinedProposition& v
 	return *this;
 }
 
+Proposition* CombinedProposition::clone()
+{
+	return create<CombinedProposition>();
+}
+
+Proposition* CombinedProposition::deepClone()
+{
+	CombinedProposition* proposition = create<CombinedProposition>();
+	proposition->addChildren(this->deepCloneChildren());
+	return proposition;
+}
+
 //////////////////////////////////////////////////////////////////////////
 NegativeProposition::NegativeProposition(Proposition* a)
 	:NegativeProposition()
@@ -110,6 +134,18 @@ NegativeProposition& NegativeProposition::operator=(const NegativeProposition& v
 	CompoundProposition::operator=(value);
 
 	return *this;
+}
+
+Proposition* NegativeProposition::clone()
+{
+	return create<NegativeProposition>();
+}
+
+Proposition* NegativeProposition::deepClone()
+{
+	NegativeProposition* proposition = create<NegativeProposition>();
+	proposition->addChildren(this->deepCloneChildren());
+	return proposition;
 }
 
 
@@ -148,4 +184,16 @@ ExclusiveORProposition& ExclusiveORProposition::operator=(const ExclusiveORPropo
 	CompoundProposition::operator=(value);
 
 	return *this;
+}
+
+Proposition* ExclusiveORProposition::clone()
+{
+	return create<ExclusiveORProposition>();
+}
+
+Proposition* ExclusiveORProposition::deepClone()
+{
+	ExclusiveORProposition* proposition = create<ExclusiveORProposition>();
+	proposition->addChildren(this->deepCloneChildren());
+	return proposition;
 }

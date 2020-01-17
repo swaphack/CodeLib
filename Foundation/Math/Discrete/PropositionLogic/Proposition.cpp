@@ -109,6 +109,21 @@ ContradictoryProposition* Proposition::getContradictoryProposition()
 	return _contradictoryProposition;
 }
 
+std::string Proposition::toString()
+{
+	return typeid(*this).name();
+}
+
+Proposition* Proposition::clone()
+{
+	return create<Proposition>();
+}
+
+Proposition* Proposition::deepClone()
+{
+	return create<Proposition>();
+}
+
 //////////////////////////////////////////////////////////////////////////
 TautologyProposition::TautologyProposition()
 {

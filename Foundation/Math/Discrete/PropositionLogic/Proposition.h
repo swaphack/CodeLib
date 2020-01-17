@@ -61,6 +61,18 @@ namespace math
 		*	逻辑是否相同
 		*/
 		virtual bool hasSameLogic(Proposition* proposition);
+		/**
+		*	描述
+		*/
+		virtual std::string toString();
+		/**
+		*	克隆节点，不包含子节点
+		*/
+		virtual Proposition* clone();
+		/**
+		*	克隆节点，包含子节点
+		*/
+		virtual Proposition* deepClone();
 	public:
 		/**
 		*	复制

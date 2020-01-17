@@ -31,6 +31,10 @@ namespace math
 		*	获取等价式
 		*/
 		virtual Proposition* getEquivalenceProposition(CompoundProposition* proposition);
+		/**
+		*	描述
+		*/
+		virtual std::string toString() { return "";  }
 	};
 
 	//////////////////////////////////////////////////////////////////////////
@@ -47,6 +51,10 @@ namespace math
 		*	获取等价式
 		*/
 		virtual Proposition* getEquivalenceProposition(CompoundProposition* proposition);
+		/**
+		*	描述
+		*/
+		virtual std::string toString() { return "p & T = p"; }
 	};
 
 	//////////////////////////////////////////////////////////////////////////
@@ -63,6 +71,10 @@ namespace math
 		*	获取等价式
 		*/
 		virtual Proposition* getEquivalenceProposition(CompoundProposition* proposition);
+		/**
+		*	描述
+		*/
+		virtual std::string toString() { return "p | F = p"; }
 	};
 
 	//////////////////////////////////////////////////////////////////////////
@@ -79,6 +91,10 @@ namespace math
 		*	获取等价式
 		*/
 		virtual Proposition* getEquivalenceProposition(CompoundProposition* proposition);
+		/**
+		*	描述
+		*/
+		virtual std::string toString() { return "p | T = T"; }
 	};
 
 	//////////////////////////////////////////////////////////////////////////
@@ -95,6 +111,10 @@ namespace math
 		*	获取等价式
 		*/
 		virtual Proposition* getEquivalenceProposition(CompoundProposition* proposition);
+		/**
+		*	描述
+		*/
+		virtual std::string toString() { return "p & F = F"; }
 	};
 
 	//////////////////////////////////////////////////////////////////////////
@@ -111,6 +131,10 @@ namespace math
 		*	获取等价式
 		*/
 		virtual Proposition* getEquivalenceProposition(CompoundProposition* proposition);
+		/**
+		*	描述
+		*/
+		virtual std::string toString() { return "p | p = p"; }
 	};
 	//////////////////////////////////////////////////////////////////////////
 	/**
@@ -126,6 +150,10 @@ namespace math
 		*	获取等价式
 		*/
 		virtual Proposition* getEquivalenceProposition(CompoundProposition* proposition);
+		/**
+		*	描述
+		*/
+		virtual std::string toString() { return "p & p = p"; }
 	};
 	//////////////////////////////////////////////////////////////////////////
 	/**
@@ -141,6 +169,10 @@ namespace math
 		*	获取等价式
 		*/
 		virtual Proposition* getEquivalenceProposition(CompoundProposition* proposition);
+		/**
+		*	描述
+		*/
+		virtual std::string toString() { return "!!p = p"; }
 	};
 	//////////////////////////////////////////////////////////////////////////
 	/**
@@ -156,6 +188,10 @@ namespace math
 		*	获取等价式
 		*/
 		virtual Proposition* getEquivalenceProposition(CompoundProposition* proposition);
+		/**
+		*	描述
+		*/
+		virtual std::string toString() { return "p | q = q | p"; }
 	};
 	//////////////////////////////////////////////////////////////////////////
 	/**
@@ -171,6 +207,10 @@ namespace math
 		*	获取等价式
 		*/
 		virtual Proposition* getEquivalenceProposition(CompoundProposition* proposition);
+		/**
+		*	描述
+		*/
+		virtual std::string toString() { return "p & q = q & p"; }
 	};
 
 	//////////////////////////////////////////////////////////////////////////
@@ -187,6 +227,10 @@ namespace math
 		*	获取等价式
 		*/
 		virtual Proposition* getEquivalenceProposition(CompoundProposition* proposition);
+		/**
+		*	描述
+		*/
+		virtual std::string toString() { return "(p | q) | r = p | (q | r)"; }
 	};
 	
 	//////////////////////////////////////////////////////////////////////////
@@ -203,6 +247,10 @@ namespace math
 		*	获取等价式
 		*/
 		virtual Proposition* getEquivalenceProposition(CompoundProposition* proposition);
+		/**
+		*	描述
+		*/
+		virtual std::string toString() { return "(p & q) & r = p & (q & r)"; }
 	};
 
 	//////////////////////////////////////////////////////////////////////////
@@ -219,6 +267,10 @@ namespace math
 		*	获取等价式
 		*/
 		virtual Proposition* getEquivalenceProposition(CompoundProposition* proposition);
+		/**
+		*	描述
+		*/
+		virtual std::string toString() { return "p | (q & r) = (p | q) & (p | r)"; }
 	};
 
 	//////////////////////////////////////////////////////////////////////////
@@ -235,6 +287,10 @@ namespace math
 		*	获取等价式
 		*/
 		virtual Proposition* getEquivalenceProposition(CompoundProposition* proposition);
+		/**
+		*	描述
+		*/
+		virtual std::string toString() { return "p & (q | r) = (p & q) | (p & r)"; }
 	};
 
 	//////////////////////////////////////////////////////////////////////////
@@ -251,6 +307,10 @@ namespace math
 		*	获取等价式
 		*/
 		virtual Proposition* getEquivalenceProposition(CompoundProposition* proposition);
+		/**
+		*	描述
+		*/
+		virtual std::string toString() { return "!(p & q) = (!p) | (!q)"; }
 	};
 
 	//////////////////////////////////////////////////////////////////////////
@@ -267,6 +327,10 @@ namespace math
 		*	获取等价式
 		*/
 		virtual Proposition* getEquivalenceProposition(CompoundProposition* proposition);
+		/**
+		*	描述
+		*/
+		virtual std::string toString() { return "!(p | q) = (!p) & (!q)"; }
 	};
 
 	//////////////////////////////////////////////////////////////////////////
@@ -283,6 +347,10 @@ namespace math
 		*	获取等价式
 		*/
 		virtual Proposition* getEquivalenceProposition(CompoundProposition* proposition);
+		/**
+		*	描述
+		*/
+		virtual std::string toString() { return "p | (p & q) = q"; }
 	};
 	//////////////////////////////////////////////////////////////////////////
 	/**
@@ -298,6 +366,10 @@ namespace math
 		*	获取等价式
 		*/
 		virtual Proposition* getEquivalenceProposition(CompoundProposition* proposition);
+		/**
+		*	描述
+		*/
+		virtual std::string toString() { return "p & (p | q) = q"; }
 	};
 	//////////////////////////////////////////////////////////////////////////
 	/**
@@ -313,6 +385,10 @@ namespace math
 		*	获取等价式
 		*/
 		virtual Proposition* getEquivalenceProposition(CompoundProposition* proposition);
+		/**
+		*	描述
+		*/
+		virtual std::string toString() { return "p & (!p) = F"; }
 	};
 	//////////////////////////////////////////////////////////////////////////
 	/**
@@ -328,6 +404,10 @@ namespace math
 		*	获取等价式
 		*/
 		virtual Proposition* getEquivalenceProposition(CompoundProposition* proposition);
+		/**
+		*	描述
+		*/
+		virtual std::string toString() { return "p | (!p) = T"; }
 	};
 
 	//////////////////////////////////////////////////////////////////////////
@@ -344,6 +424,10 @@ namespace math
 		*	获取等价式
 		*/
 		virtual Proposition* getEquivalenceProposition(CompoundProposition* proposition);
+		/**
+		*	描述
+		*/
+		virtual std::string toString() { return "p -> q = !p | q"; }
 	};
 	//////////////////////////////////////////////////////////////////////////
 	/**
@@ -359,6 +443,10 @@ namespace math
 		*	获取等价式
 		*/
 		virtual Proposition* getEquivalenceProposition(CompoundProposition* proposition);
+		/**
+		*	描述
+		*/
+		virtual std::string toString() { return "p -> q = !q -> !p"; }
 	};
 	//////////////////////////////////////////////////////////////////////////
 	/**
@@ -374,10 +462,14 @@ namespace math
 		*	获取等价式
 		*/
 		virtual Proposition* getEquivalenceProposition(CompoundProposition* proposition);
+		/**
+		*	描述
+		*/
+		virtual std::string toString() { return "p | q = !p -> q"; }
 	};
 	//////////////////////////////////////////////////////////////////////////
 	/**
-	*	p & q = !(p -> !q);
+	*	p & q = !(p ->(!q));
 	*/
 	class EquivalenceSample22 : public EquivalenceSample
 	{
@@ -389,10 +481,14 @@ namespace math
 		*	获取等价式
 		*/
 		virtual Proposition* getEquivalenceProposition(CompoundProposition* proposition);
+		/**
+		*	描述
+		*/
+		virtual std::string toString() { return "p & q = !(p -> (!q))"; }
 	};
 	//////////////////////////////////////////////////////////////////////////
 	/**
-	*	!(p -> q) = p & !q;
+	*	!(p->q) = p & (!q);
 	*/
 	class EquivalenceSample23 : public EquivalenceSample
 	{
@@ -404,10 +500,14 @@ namespace math
 		*	获取等价式
 		*/
 		virtual Proposition* getEquivalenceProposition(CompoundProposition* proposition);
+		/**
+		*	描述
+		*/
+		virtual std::string toString() { return "!(p -> q) = p & (!q)"; }
 	};
 	//////////////////////////////////////////////////////////////////////////
 	/**
-	*	(p->q) & (p->r) = p->(q & r)
+	*	(p->q) & (p->r) = p->(q&r)
 	*/
 	class EquivalenceSample24 : public EquivalenceSample
 	{
@@ -419,10 +519,14 @@ namespace math
 		*	获取等价式
 		*/
 		virtual Proposition* getEquivalenceProposition(CompoundProposition* proposition);
+		/**
+		*	描述
+		*/
+		virtual std::string toString() { return "(p -> q) & (p -> r) = p -> (q & r)"; }
 	};
 	//////////////////////////////////////////////////////////////////////////
 	/**
-	*	(p->r) & (p->r) = (p | q)->r
+	*	(p->r) & (p->r) = (p|q)->r
 	*/
 	class EquivalenceSample25 : public EquivalenceSample
 	{
@@ -434,11 +538,15 @@ namespace math
 		*	获取等价式
 		*/
 		virtual Proposition* getEquivalenceProposition(CompoundProposition* proposition);
+		/**
+		*	描述
+		*/
+		virtual std::string toString() { return "(p -> r) & (p -> r) = (p | q) -> r"; }
 	};
 
 	//////////////////////////////////////////////////////////////////////////
 	/**
-	*	(p->q) | (p->r) = p->(q | r)
+	*	(p->q) | (p->r) = p->(q|r)
 	*/
 	class EquivalenceSample26 : public EquivalenceSample
 	{
@@ -450,10 +558,14 @@ namespace math
 		*	获取等价式
 		*/
 		virtual Proposition* getEquivalenceProposition(CompoundProposition* proposition);
+		/**
+		*	描述
+		*/
+		virtual std::string toString() { return "(p -> q) | (p -> r) = p -> (q | r)"; }
 	};
 	//////////////////////////////////////////////////////////////////////////
 	/**
-	*	(p->r) | (p->r) = (p & q)->r
+	*	(p->r) | (p->r) = (p&q)->r
 	*/
 	class EquivalenceSample27 : public EquivalenceSample
 	{
@@ -465,6 +577,10 @@ namespace math
 		*	获取等价式
 		*/
 		virtual Proposition* getEquivalenceProposition(CompoundProposition* proposition);
+		/**
+		*	描述
+		*/
+		virtual std::string toString() { return "(p -> r) | (p -> r) = (p & q) -> r"; }
 	};
 	//////////////////////////////////////////////////////////////////////////
 	/**
@@ -480,10 +596,14 @@ namespace math
 		*	获取等价式
 		*/
 		virtual Proposition* getEquivalenceProposition(CompoundProposition* proposition);
+		/**
+		*	描述
+		*/
+		virtual std::string toString() { return "p <-> q = (p -> q) & (q -> p)"; }
 	};
 	//////////////////////////////////////////////////////////////////////////
 	/**
-	*	p<->q = !p<->!q
+	*	p<->q = (!p)<->(!q)
 	*/
 	class EquivalenceSample29 : public EquivalenceSample
 	{
@@ -495,11 +615,15 @@ namespace math
 		*	获取等价式
 		*/
 		virtual Proposition* getEquivalenceProposition(CompoundProposition* proposition);
+		/**
+		*	描述
+		*/
+		virtual std::string toString() { return "p <-> q = (!p) <-> (!q)"; }
 	};
 
 	//////////////////////////////////////////////////////////////////////////
 	/**
-	*	p<->q = (p & q) | (!p & !q)
+	*	p<->q = (p&q) | ((!p) & (!q))
 	*/
 	class EquivalenceSample30 : public EquivalenceSample
 	{
@@ -511,11 +635,15 @@ namespace math
 		*	获取等价式
 		*/
 		virtual Proposition* getEquivalenceProposition(CompoundProposition* proposition);
+		/**
+		*	描述
+		*/
+		virtual std::string toString() { return "p <-> q = (p & q) | ((!p) & (!q))"; }
 	};
 
 	//////////////////////////////////////////////////////////////////////////
 	/**
-	*	!(p<->q) = p<->!q
+	*	!(p<->q) = p<->(!q)
 	*/
 	class EquivalenceSample31 : public EquivalenceSample
 	{
@@ -527,10 +655,14 @@ namespace math
 		*	获取等价式
 		*/
 		virtual Proposition* getEquivalenceProposition(CompoundProposition* proposition);
+		/**
+		*	描述
+		*/
+		virtual std::string toString() { return "!(p <-> q) = p <-> (!q)"; }
 	};
 	//////////////////////////////////////////////////////////////////////////
 	/**
-	*	(p<->q) = q<->p
+	*	p<->q = q<->p
 	*/
 	class EquivalenceSample32 : public EquivalenceSample
 	{
@@ -542,6 +674,10 @@ namespace math
 		*	获取等价式
 		*/
 		virtual Proposition* getEquivalenceProposition(CompoundProposition* proposition);
+		/**
+		*	描述
+		*/
+		virtual std::string toString() { return "p <-> q = q <-> p"; }
 	};
 	//////////////////////////////////////////////////////////////////////////
 	/**
@@ -557,6 +693,10 @@ namespace math
 		*	获取等价式
 		*/
 		virtual Proposition* getEquivalenceProposition(CompoundProposition* proposition);
+		/**
+		*	描述
+		*/
+		virtual std::string toString() { return "(p | q) | r = q | (p | r)"; }
 	};
 	//////////////////////////////////////////////////////////////////////////
 	/**
@@ -572,5 +712,9 @@ namespace math
 		*	获取等价式
 		*/
 		virtual Proposition* getEquivalenceProposition(CompoundProposition* proposition);
+		/**
+		*	描述
+		*/
+		virtual std::string toString() { return "(p & q) & r = q & (p & r)"; }
 	};
 }

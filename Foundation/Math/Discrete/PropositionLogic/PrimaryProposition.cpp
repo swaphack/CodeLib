@@ -18,9 +18,18 @@ PrimaryProposition::PrimaryProposition(const PrimaryProposition& value)
 	*this = value;
 }
 
+Proposition* PrimaryProposition::clone()
+{
+	return create<PrimaryProposition>();
+}
+
+Proposition* PrimaryProposition::deepClone()
+{
+	return create<PrimaryProposition>();
+}
+
 PrimaryProposition::~PrimaryProposition()
 {
-
 }
 
 bool PrimaryProposition::isTrue()

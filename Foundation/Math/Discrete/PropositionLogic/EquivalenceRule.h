@@ -23,8 +23,13 @@ namespace math
 		*	获取等价命题
 		*	优先从子节点开始处理
 		*/
-		Proposition* getEquivalenceProposition(CompoundProposition* proposition);
+		std::vector<Proposition*> getEquivalenceProposition(Proposition* proposition);
 	protected:
+		/**
+		*	获取等价命题
+		*	优先从子节点开始处理
+		*/
+		std::vector<Proposition*> getEquivalenceProposition(Proposition* proposition, const std::vector<Proposition*>& preEquivalencePropositions);
 		/**
 		*	获取等价命题
 		*/

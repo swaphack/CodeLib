@@ -372,10 +372,7 @@ Proposition* EquivalenceSample7::getEquivalenceProposition(CompoundProposition* 
 
 	DisjunctiveProposition* pTemp = proposition->as<DisjunctiveProposition>();
 
-	DisjunctiveProposition* p = Proposition::create<DisjunctiveProposition>();
-	p->setA(pTemp->getB());
-	p->setB(pTemp->getA());
-
+	DisjunctiveProposition* p = Proposition::create<DisjunctiveProposition>(pTemp->getB(), pTemp->getA());
 	return p;
 }
 //////////////////////////////////////////////////////////////////////////
@@ -405,9 +402,7 @@ Proposition* EquivalenceSample8::getEquivalenceProposition(CompoundProposition* 
 
 	CombinedProposition* pTemp = proposition->as<CombinedProposition>();
 
-	CombinedProposition* p = Proposition::create<CombinedProposition>();
-	p->setA(pTemp->getB());
-	p->setB(pTemp->getA());
+	CombinedProposition* p = Proposition::create<CombinedProposition>(pTemp->getB(), pTemp->getA());
 
 	return p;
 }
@@ -459,13 +454,9 @@ Proposition* EquivalenceSample9::getEquivalenceProposition(CompoundProposition* 
 	auto pLeftChild = pDisjunctiveChild->getA();
 	auto pRightChild = pDisjunctiveChild->getB();
 
-	DisjunctiveProposition* p1 = Proposition::create<DisjunctiveProposition>();
-	p1->setA(pLeftChild);
-	p1->setB(pPrimaryChild);
+	DisjunctiveProposition* p1 = Proposition::create<DisjunctiveProposition>(pLeftChild, pPrimaryChild);
 
-	DisjunctiveProposition* p0 = Proposition::create<DisjunctiveProposition>();
-	p0->setA(p1);
-	p0->setB(pRightChild);
+	DisjunctiveProposition* p0 = Proposition::create<DisjunctiveProposition>(p1, pRightChild);
 
 	return p0;
 }
@@ -518,13 +509,9 @@ Proposition* EquivalenceSample33::getEquivalenceProposition(CompoundProposition*
 	auto pLeftChild = pDisjunctiveChild->getA();
 	auto pRightChild = pDisjunctiveChild->getB();
 
-	DisjunctiveProposition* p1 = Proposition::create<DisjunctiveProposition>();
-	p1->setA(pRightChild);
-	p1->setB(pPrimaryChild);
+	DisjunctiveProposition* p1 = Proposition::create<DisjunctiveProposition>(pRightChild, pPrimaryChild);
 
-	DisjunctiveProposition* p0 = Proposition::create<DisjunctiveProposition>();
-	p0->setA(p1);
-	p0->setB(pLeftChild);
+	DisjunctiveProposition* p0 = Proposition::create<DisjunctiveProposition>(p1, pLeftChild);
 
 	return p0;
 }
@@ -575,13 +562,9 @@ Proposition* EquivalenceSample10::getEquivalenceProposition(CompoundProposition*
 	auto pLeftChild = pDisjunctiveChild->getA();
 	auto pRightChild = pDisjunctiveChild->getB();
 
-	CombinedProposition* p1 = Proposition::create<CombinedProposition>();
-	p1->setA(pLeftChild);
-	p1->setB(pPrimaryChild);
+	CombinedProposition* p1 = Proposition::create<CombinedProposition>(pLeftChild, pPrimaryChild);
 
-	CombinedProposition* p0 = Proposition::create<CombinedProposition>();
-	p0->setA(p1);
-	p0->setB(pRightChild);
+	CombinedProposition* p0 = Proposition::create<CombinedProposition>(p1, pRightChild);
 
 	return p0;
 }
@@ -633,13 +616,9 @@ Proposition* EquivalenceSample34::getEquivalenceProposition(CompoundProposition*
 	auto pLeftChild = pDisjunctiveChild->getA();
 	auto pRightChild = pDisjunctiveChild->getB();
 
-	CombinedProposition* p1 = Proposition::create<CombinedProposition>();
-	p1->setA(pRightChild);
-	p1->setB(pPrimaryChild);
+	CombinedProposition* p1 = Proposition::create<CombinedProposition>(pRightChild, pPrimaryChild);
 
-	CombinedProposition* p0 = Proposition::create<CombinedProposition>();
-	p0->setA(p1);
-	p0->setB(pLeftChild);
+	CombinedProposition* p0 = Proposition::create<CombinedProposition>(p1, pLeftChild);
 
 	return p0;
 }
@@ -691,17 +670,11 @@ Proposition* EquivalenceSample11::getEquivalenceProposition(CompoundProposition*
 	auto pLeftChild = pDisjunctiveChild->getA();
 	auto pRightChild = pDisjunctiveChild->getB();
 
-	DisjunctiveProposition* p1 = Proposition::create<DisjunctiveProposition>();
-	p1->setA(pLeftChild);
-	p1->setB(pPrimaryChild);
+	DisjunctiveProposition* p1 = Proposition::create<DisjunctiveProposition>(pLeftChild, pPrimaryChild);
 
-	DisjunctiveProposition* p2 = Proposition::create<DisjunctiveProposition>();
-	p2->setA(pRightChild);
-	p2->setB(pPrimaryChild);
+	DisjunctiveProposition* p2 = Proposition::create<DisjunctiveProposition>(pRightChild, pPrimaryChild);
 
-	CombinedProposition* p0 = Proposition::create<CombinedProposition>();
-	p0->setA(p1);
-	p0->setB(p2);
+	CombinedProposition* p0 = Proposition::create<CombinedProposition>(p1, p2);
 
 	return p0;
 }
@@ -754,17 +727,11 @@ Proposition* EquivalenceSample12::getEquivalenceProposition(CompoundProposition*
 	auto pLeftChild = pDisjunctiveChild->getA();
 	auto pRightChild = pDisjunctiveChild->getB();
 
-	CombinedProposition* p1 = Proposition::create<CombinedProposition>();
-	p1->setA(pLeftChild);
-	p1->setB(pPrimaryChild);
+	CombinedProposition* p1 = Proposition::create<CombinedProposition>(pLeftChild, pPrimaryChild);
 
-	CombinedProposition* p2 = Proposition::create<CombinedProposition>();
-	p2->setA(pRightChild);
-	p2->setB(pPrimaryChild);
+	CombinedProposition* p2 = Proposition::create<CombinedProposition>(pRightChild, pPrimaryChild);
 
-	DisjunctiveProposition* p0 = Proposition::create<DisjunctiveProposition>();
-	p0->setA(p1);
-	p0->setB(p2);
+	DisjunctiveProposition* p0 = Proposition::create<DisjunctiveProposition>(p1, p2);
 
 	return p0;
 }
@@ -799,16 +766,9 @@ Proposition* EquivalenceSample13::getEquivalenceProposition(CompoundProposition*
 
 	CombinedProposition* pTempChild = pTemp->getA()->as<CombinedProposition>();
 
-	NegativeProposition* a = Proposition::create<NegativeProposition>();
-	a->setA(pTempChild->getA());
-
-	NegativeProposition* b = Proposition::create<NegativeProposition>();
-	b->setA(pTempChild->getB());
-
-
-	DisjunctiveProposition* p0 = Proposition::create<DisjunctiveProposition>();
-	p0->setA(a);
-	p0->setB(b);
+	NegativeProposition* a = Proposition::create<NegativeProposition>(pTempChild->getA());
+	NegativeProposition* b = Proposition::create<NegativeProposition>(pTempChild->getB());
+	DisjunctiveProposition* p0 = Proposition::create<DisjunctiveProposition>(a, b);
 
 	return p0;
 }
@@ -844,16 +804,9 @@ Proposition* EquivalenceSample14::getEquivalenceProposition(CompoundProposition*
 
 	DisjunctiveProposition* pTempChild = pTemp->getA()->as<DisjunctiveProposition>();
 
-	NegativeProposition* a = Proposition::create<NegativeProposition>();
-	a->setA(pTempChild->getA());
-
-	NegativeProposition* b = Proposition::create<NegativeProposition>();
-	b->setA(pTempChild->getB());
-
-
-	CombinedProposition* p0 = Proposition::create<CombinedProposition>();
-	p0->setA(a);
-	p0->setB(b);
+	NegativeProposition* a = Proposition::create<NegativeProposition>(pTempChild->getA());
+	NegativeProposition* b = Proposition::create<NegativeProposition>(pTempChild->getB());
+	CombinedProposition* p0 = Proposition::create<CombinedProposition>(a, b);
 
 	return p0;
 }

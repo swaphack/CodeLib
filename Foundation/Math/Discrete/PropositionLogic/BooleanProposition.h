@@ -28,6 +28,14 @@ namespace math
 		*	是否为真
 		*/
 		virtual bool isTrue();
+		/**
+		*	克隆节点，不包含子节点
+		*/
+		virtual Proposition* clone();
+		/**
+		*	克隆节点，含子节点
+		*/
+		virtual Proposition* deepClone();
 	public:
 		/**
 		*	赋值
@@ -59,6 +67,14 @@ namespace math
 		*	是否为真
 		*/
 		virtual bool isTrue();
+		/**
+		*	克隆节点，不包含子节点
+		*/
+		virtual Proposition* clone();
+		/**
+		*	克隆节点，含子节点
+		*/
+		virtual Proposition* deepClone();
 	public:
 		/**
 		*	赋值
@@ -87,6 +103,14 @@ namespace math
 		*	是否为真
 		*/
 		virtual bool isTrue();
+		/**
+		*	克隆节点，不包含子节点
+		*/
+		virtual Proposition* clone();
+		/**
+		*	克隆节点，含子节点
+		*/
+		virtual Proposition* deepClone();
 	public:
 		/**
 		*	赋值
@@ -118,6 +142,14 @@ namespace math
 		*	是否为真
 		*/
 		virtual bool isTrue();
+		/**
+		*	克隆节点，不包含子节点
+		*/
+		virtual Proposition* clone();
+		/**
+		*	克隆节点，含子节点
+		*/
+		virtual Proposition* deepClone();
 	public:
 		/**
 		*	赋值

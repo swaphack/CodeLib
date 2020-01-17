@@ -39,11 +39,27 @@ namespace math
 		*	获取所有唯一id节点
 		*/
 		std::set<TreeNode*> getAllUniqueIdentifyChildren();
+		/**
+		*	子节点是否都是基础命题
+		*/
+		bool isPrimaryPropositionOfAllChildren();
+		/**
+		*	克隆节点，不包含子节点
+		*/
+		virtual Proposition* clone();
+		/**
+		*	克隆节点，包含子节点
+		*/
+		virtual Proposition* deepClone();
 	protected:
 		/**
 		*	变量匹配
 		*/
 		bool matchChildren(const std::vector<TreeNode*>& children);
+		/**
+		*	深度复制子节点
+		*/
+		std::vector<TreeNode*> deepCloneChildren();
 	public:
 		/**
 		*	赋值
