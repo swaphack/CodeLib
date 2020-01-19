@@ -96,7 +96,21 @@ std::vector<Proposition*> EquivalenceRule::getEquivalenceProposition(Proposition
 			auto temp = getEquivalenceProposition(coumpoundProposition, branch);
 			if (temp.size() != 0)
 			{
-				branch.insert(branch.end(), temp.begin(), temp.end());
+				for (auto item0 : temp)
+				{
+					bool bExist = false;
+					for (auto item1 : branch)
+					{
+						if (item0->hasSameLogic(item1))
+						{
+							bExist = true;
+						}
+					}
+					if (!bExist)
+					{
+						branch.push_back(item0);
+					}
+				}
 			}
 		}
 		else if (child->is<PrimaryProposition>())

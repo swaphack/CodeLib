@@ -4,6 +4,9 @@
 
 namespace math
 {
+	/**
+	*	Ä£ºıÃüÌâ
+	*/
 	class FuzzyProposition : public ManyValuedProposition
 	{
 	public:
