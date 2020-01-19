@@ -7,7 +7,7 @@ using namespace render;
 
 //////////////////////////////////////////////////////////////////////////
 
-#define USE_MATRIX false
+#define USE_MATRIX true
 
 Node::Node()
 :_tag(0)
@@ -254,11 +254,7 @@ void Node::visit()
 		setDirty(false);
 	}
 
-	// Í¼ÐÎÃüÁî
-	if (!_bUseMatrix)
-	{
-		G_DRAWCOMMANDER->addCommand(DCMatrix::create(true));
-	}
+	G_DRAWCOMMANDER->addCommand(DCMatrix::create(true));
 	
 
 	this->updateSelf();
@@ -283,10 +279,8 @@ void Node::visit()
 			iter++;
 		}
 	}
-	if (!_bUseMatrix)
-	{
-		G_DRAWCOMMANDER->addCommand(DCMatrix::create(false));
-	}
+
+	G_DRAWCOMMANDER->addCommand(DCMatrix::create(false));
 }
 
 ActionProxy* Node::getActionProxy()
@@ -336,7 +330,7 @@ void Node::updateTranform()
 {
 	if (_bUseMatrix)
 	{
-		G_DRAWCOMMANDER->addCommand(DCSpaceMatrix::create(_realMat44));
+		G_DRAWCOMMANDER->addCommand(DCSpaceMatrix::create(_mat44, _bRelative));
 	}
 	else
 	{
@@ -449,13 +443,13 @@ void Node::calRealSpaceByMatrix()
 	math::Matrix44 matTranslate;
 	matTranslate.setTranslate(_obPosition);
 
-	printf("matScale\n%s\n", matScale.toString().c_str());
-	printf("matRotate\n%s\n", matRotate.toString().c_str());
-	printf("matTranslate\n%s\n", matTranslate.toString().c_str());
+	//printf("Scale\n%s\n", matScale.toString().c_str());
+	//printf("Rotate\n%s\n", matRotate.toString().c_str());
+	//printf("Translate\n%s\n", matTranslate.toString().c_str());
 
 	_mat44 = matTranslate * matRotate * matScale;
 
-	printf("mat\n%s\n", _mat44.toString().c_str());
+	//printf("mat\n%s\n", _mat44.toString().c_str());
 
 	Node* temp = this;
 	std::vector<math::Matrix44> vecMat;

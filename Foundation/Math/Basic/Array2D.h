@@ -46,9 +46,18 @@ namespace math
 		/**
 		*	单元值
 		*/
-		const T* value() const
+		const T* getValue() const
 		{
 			return _values;
+		}
+		/**
+		*	单元值
+		*/
+		void getValue(T* array, int32_t len) const
+		{
+			int32_t length = _width * _height;
+			assert(len >= length);
+			memcpy(array, _values, length * sizeof(T));
 		}
 		/**
 		*	列数
@@ -229,7 +238,7 @@ namespace math
 		*/
 		Array2D& operator=(const Array2D& mat)
 		{
-			this->reset(mat._width, mat._height);
+			this->reset(mat._height, mat._width);
 			int32_t len = mat._width * mat._height;
 			for (int32_t i = 0; i < len; i++)
 			{
@@ -259,9 +268,9 @@ namespace math
 		std::string toString()
 		{
 			std::ostringstream stream;
-			for (int j = 0; j < _height; j++)
+			for (int i = 0; i < _height; i++)
 			{
-				for (int i = 0; i < _width; i++)
+				for (int j = 0; j < _width; j++)
 				{
 					T fValue = getValue(i, j);
 					stream << fValue;

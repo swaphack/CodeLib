@@ -49,9 +49,17 @@ namespace math
 		/**
 		*	单元值
 		*/
-		const T* value() const
+		const T* getValue() const
 		{
 			return _values;
+		}
+		/**
+		*	单元值
+		*/
+		void getValue(T* array, int32_t len) const
+		{
+			assert(len >= _length);
+			memcpy(array, _values, _length * sizeof(T));
 		}
 		/**
 		*	向量长度

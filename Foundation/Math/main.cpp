@@ -7,10 +7,24 @@ using namespace math;
 
 void testMatrix()
 {
-	Matrix22 mat = Matrix22(
-		1, 5,
-		6, 7);
-	printf("%s", mat.toString().c_str());
+	float value32[6] = {
+		1, 2,
+		3, 4,
+		5, 6
+	};
+	Matrix mat32(value32, 3, 2);
+
+	float value23[6] = {
+		1, 2, 3, 
+		4, 5, 6
+	};
+	Matrix mat23(value32, 2, 3);
+
+	Matrix mat33 = mat32 * mat23;
+	float value33[9] = { 0 };
+	mat33.getValue(value33, 9);
+
+	int a = 1;
 }
 
 void testInference()
@@ -33,7 +47,7 @@ void testInference()
 
 int main(int argc, char** argv)
 {
-	testInference();
+	testMatrix();
 
 	return 0;
 }

@@ -15,6 +15,7 @@ namespace math
 	public:
 		Matrix();
 		Matrix(int h, int w);
+		Matrix(float* value, int h, int w);
 	public:
 		/**
 		*	¾ØÕóÏà¼Ó

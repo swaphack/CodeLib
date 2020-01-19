@@ -20,6 +20,11 @@ Matrix::Matrix()
 
 }
 
+Matrix::Matrix(float* value, int h, int w)
+{
+	this->set(value, h, w);
+}
+
 Matrix Matrix::operator+(const Matrix& mat)
 {
 	assert(mat._width == _width && mat._height == _height);
@@ -116,7 +121,7 @@ Matrix& Matrix::operator*=(float k)
 
 Matrix& Matrix::operator=(const Matrix& mat)
 {
-	this->reset(mat._width, mat._height);
+	this->reset(mat._height, mat._width);
 	int32_t len = mat._width * mat._height;
 	for (int32_t i = 0; i < len; i++)
 	{
@@ -135,7 +140,7 @@ Matrix Matrix::transpose() const
 	{
 		for (int32_t j = 0; j < _width; j++)
 		{
-			mat.setValue(i * _height + j, _values[i * _width + j]);
+			mat.setValue(j, i, _values[i * _width + j]);
 		}
 	}
 

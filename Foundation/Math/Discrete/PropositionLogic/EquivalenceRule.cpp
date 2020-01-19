@@ -88,7 +88,7 @@ std::vector<Proposition*> EquivalenceRule::getEquivalenceProposition(Proposition
 		std::vector<Proposition*> branch;
 		if (child->is<CompoundProposition>())
 		{
-			auto coumpoundProposition = child->as<CompoundProposition>();
+			auto coumpoundProposition = child->as<CompoundProposition>()->clone();
 			branch.push_back(coumpoundProposition);
 
 			auto temp = getEquivalenceProposition(coumpoundProposition, branch);
@@ -99,7 +99,7 @@ std::vector<Proposition*> EquivalenceRule::getEquivalenceProposition(Proposition
 		}
 		else if (child->is<PrimaryProposition>())
 		{
-			branch.push_back(child->as<PrimaryProposition>());
+			branch.push_back(child->as<PrimaryProposition>()->clone());
 		}
 		eachChildProposition.push_back(branch);
 	}
@@ -110,7 +110,7 @@ std::vector<Proposition*> EquivalenceRule::getEquivalenceProposition(Proposition
 	vecIndex.resize(nCount);
 
 	func = [&](int index){
-		if (index = eachChildProposition.size())
+		if (index == eachChildProposition.size())
 		{
 			std::vector<TreeNode*> vecChildren;
 			int i = 0;
@@ -131,7 +131,8 @@ std::vector<Proposition*> EquivalenceRule::getEquivalenceProposition(Proposition
 				vecIndex.clear();				
 			}
 			vecIndex.push_back(i);
-			func(index++);
+			int j = index + 1;
+			func(j);
 		}
 	};
 

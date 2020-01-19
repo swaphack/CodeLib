@@ -21,7 +21,7 @@ void WndRender::show()
 // 	Texture2D* pTexture = G_TEXTURE_CACHE->getTexture2D(imageDefine);
 // 	pTexture->retain();
 	
-	//testMoveImage();
+	testMoveImage();
 	//testClock();
 	//testCubeModel();
 	//testSphereModel();
@@ -350,18 +350,18 @@ void WndRender::testImages()
 	CtrlImage* pImage = CREATE_NODE(CtrlImage);
 	pImage->setImagePath("Resource/Image/NeHe.png");
 	pImage->setPosition(512, 400, 0);
-	pImage->setScale(2, 2, 2);
+	pImage->setScale(1, 1, 1);
 	pImage->setRotation(0, 0, 30);
 	this->getCanvas()->getRoot()->addChild(pImage);
 
-	int count = 0;
+	int count = 100;
 	CtrlImage* pChild = nullptr;
 	while (count-- > 0)
 	{
 		pChild = CREATE_NODE(CtrlImage);
 		pChild->setImagePath("Resource/Image/NeHe.png");
 		pChild->setPosition(4, 4, 0);
-		pChild->setScale(2, 2, 2);
+		pChild->setScale(1, 1, 1);
 		pChild->setRotation(0, 0, 30);
 		pImage->addChild(pChild);
 		pImage = pChild;
@@ -711,7 +711,7 @@ void WndRender::testUI()
 
 void WndRender::testDrawNode()
 {
-	Vector2 points[] = {
+	math::Vector2 points[] = {
 		{ 100, 100 },
 		{ 50, 50 },
 		{ 75, 60 },
@@ -720,7 +720,7 @@ void WndRender::testDrawNode()
 		{ 120, 110 },
 	};
 
-	int COUNT = (sizeof(points) / sizeof(Vector2));
+	int COUNT = (sizeof(points) / sizeof(math::Vector2));
 
 	DrawNode* pDrawNode = CREATE_NODE(DrawNode);
 	pDrawNode->setDrawMode(EBM_POLYGON);

@@ -26,6 +26,7 @@ namespace render
 	class DCSpaceMatrix : public DrawCommand
 	{
 	public:
+		bool Relative;
 		math::Matrix Matrix;
 	public:
 		DCSpaceMatrix();
@@ -33,6 +34,6 @@ namespace render
 	public:
 		virtual void draw();
 	public:
-		static DCSpaceMatrix* create(const math::Matrix& matrix);
+		static DCSpaceMatrix* create(const math::Matrix& matrix, bool relative);
 	};
 }
