@@ -47,7 +47,7 @@ void testInference()
 
 int main(int argc, char** argv)
 {
-	testMatrix();
+	testInference();
 
 	return 0;
 }

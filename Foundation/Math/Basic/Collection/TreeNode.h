@@ -29,6 +29,10 @@ namespace math
 		*/
 		void addChildren(const std::vector<TreeNode*>& children);
 		/**
+		*	设置子节点
+		*/
+		void setChildren(const std::vector<TreeNode*>& children);
+		/**
 		*	移除子节点
 		*/
 		void removeChild(TreeNode* child);

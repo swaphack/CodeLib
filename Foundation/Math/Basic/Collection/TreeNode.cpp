@@ -20,6 +20,11 @@ void TreeNode::addChild(TreeNode* child)
 		return;
 	}
 
+	if (child->getParent() != nullptr)
+	{
+		int a = 1;
+	}
+
 	assert(child->getParent() == nullptr);
 	assert(this->indexOf(child) == -1);
 
@@ -29,6 +34,15 @@ void TreeNode::addChild(TreeNode* child)
 
 void TreeNode::addChildren(const std::vector<TreeNode*>& children)
 {
+	for (auto item : children)
+	{
+		this->addChild(item);
+	}
+}
+
+void TreeNode::setChildren(const std::vector<TreeNode*>& children)
+{
+	this->removeAllChildren();
 	for (auto item : children)
 	{
 		this->addChild(item);
@@ -114,10 +128,13 @@ void TreeNode::removeChildAt(int index, bool cleanup)
 	if (index >= 0 && index < getChildrenCount())
 	{
 		auto child = _children[index];
-		child->setParent(nullptr);
-		if (cleanup)
+		if (child)
 		{
-			child->removeAllChildren();
+			child->setParent(nullptr);
+			if (cleanup)
+			{
+				child->removeAllChildren();
+			}
 		}
 		_children.erase(_children.begin() + index);
 	}

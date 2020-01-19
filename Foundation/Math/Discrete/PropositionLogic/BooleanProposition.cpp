@@ -46,7 +46,7 @@ Proposition* DisjunctiveProposition::clone()
 Proposition* DisjunctiveProposition::deepClone()
 {
 	DisjunctiveProposition* proposition = create<DisjunctiveProposition>();
-	proposition->addChildren(this->deepCloneChildren());
+	proposition->setChildren(this->deepCloneChildren());
 	return proposition;
 }
 
@@ -96,7 +96,7 @@ Proposition* CombinedProposition::clone()
 Proposition* CombinedProposition::deepClone()
 {
 	CombinedProposition* proposition = create<CombinedProposition>();
-	proposition->addChildren(this->deepCloneChildren());
+	proposition->setChildren(this->deepCloneChildren());
 	return proposition;
 }
 
@@ -144,7 +144,7 @@ Proposition* NegativeProposition::clone()
 Proposition* NegativeProposition::deepClone()
 {
 	NegativeProposition* proposition = create<NegativeProposition>();
-	proposition->addChildren(this->deepCloneChildren());
+	proposition->setChildren(this->deepCloneChildren());
 	return proposition;
 }
 
@@ -194,6 +194,6 @@ Proposition* ExclusiveORProposition::clone()
 Proposition* ExclusiveORProposition::deepClone()
 {
 	ExclusiveORProposition* proposition = create<ExclusiveORProposition>();
-	proposition->addChildren(this->deepCloneChildren());
+	proposition->setChildren(this->deepCloneChildren());
 	return proposition;
 }

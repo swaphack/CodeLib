@@ -88,7 +88,7 @@ std::vector<Proposition*> EquivalenceRule::getEquivalenceProposition(Proposition
 		std::vector<Proposition*> branch;
 		if (child->is<CompoundProposition>())
 		{
-			auto coumpoundProposition = child->as<CompoundProposition>()->clone();
+			auto coumpoundProposition = child->as<CompoundProposition>()->deepClone();
 			branch.push_back(coumpoundProposition);
 
 			auto temp = getEquivalenceProposition(coumpoundProposition, branch);
@@ -99,7 +99,7 @@ std::vector<Proposition*> EquivalenceRule::getEquivalenceProposition(Proposition
 		}
 		else if (child->is<PrimaryProposition>())
 		{
-			branch.push_back(child->as<PrimaryProposition>()->clone());
+			branch.push_back(child->as<PrimaryProposition>()->deepClone());
 		}
 		eachChildProposition.push_back(branch);
 	}
@@ -116,7 +116,7 @@ std::vector<Proposition*> EquivalenceRule::getEquivalenceProposition(Proposition
 			int i = 0;
 			for (auto item : vecIndex)
 			{
-				vecChildren.push_back(eachChildProposition[i][item]);
+				vecChildren.push_back(eachChildProposition[i][item]->deepClone());
 				i++;
 			}
 			CompoundProposition* temp = compound->clone()->as<CompoundProposition>();

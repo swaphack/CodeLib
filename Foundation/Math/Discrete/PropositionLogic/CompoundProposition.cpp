@@ -111,7 +111,7 @@ Proposition* CompoundProposition::clone()
 Proposition* CompoundProposition::deepClone()
 {
 	CompoundProposition* proposition = create<CompoundProposition>();
-	proposition->addChildren(this->deepCloneChildren());
+	proposition->setChildren(this->deepCloneChildren());
 	return proposition;
 }
 

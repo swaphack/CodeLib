@@ -33,7 +33,7 @@ Proposition* ImplicateProposition::clone()
 Proposition* ImplicateProposition::deepClone()
 {
 	ImplicateProposition* proposition = create<ImplicateProposition>();
-	proposition->addChildren(this->deepCloneChildren());
+	proposition->setChildren(this->deepCloneChildren());
 	return proposition;
 }
 
@@ -93,7 +93,7 @@ Proposition* DoubleImplicateProposition::clone()
 Proposition* DoubleImplicateProposition::deepClone()
 {
 	DoubleImplicateProposition* proposition = create<DoubleImplicateProposition>();
-	proposition->addChildren(this->deepCloneChildren());
+	proposition->setChildren(this->deepCloneChildren());
 	return proposition;
 }
 
