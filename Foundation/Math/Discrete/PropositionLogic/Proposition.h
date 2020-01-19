@@ -62,10 +62,6 @@ namespace math
 		*/
 		virtual bool hasSameLogic(Proposition* proposition);
 		/**
-		*	描述
-		*/
-		virtual std::string toString();
-		/**
 		*	克隆节点，不包含子节点
 		*/
 		virtual Proposition* clone();

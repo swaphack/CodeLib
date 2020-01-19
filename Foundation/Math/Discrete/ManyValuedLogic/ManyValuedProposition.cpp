@@ -2,28 +2,65 @@
 
 using namespace math;
 
-bool ManyValuedProposition::isTrue() const
+ManyValuedProposition::ManyValuedProposition()
+{
+	this->setType(PropositionType::Primary);
+}
+
+ManyValuedProposition::ManyValuedProposition(float percent)
+	:ManyValuedProposition()
+{
+	this->setPercent(percent);
+}
+
+ManyValuedProposition::ManyValuedProposition(const ManyValuedProposition& proposition)
+	: ManyValuedProposition()
+{
+	*this = proposition;
+}
+
+ManyValuedProposition::~ManyValuedProposition()
+{
+
+}
+
+bool ManyValuedProposition::isTrue()
 {
 	return getPercent() > 0;
 }
 
 bool ManyValuedProposition::hasSameLogic(Proposition* proposition)
 {
-	if (!Proposition::hasSameLogic(proposition))
+	if (proposition == nullptr)
 	{
 		return false;
 	}
 
-	ManyValuedProposition* pValue = dynamic_cast<ManyValuedProposition*>((Proposition*)proposition);
-	if (pValue == nullptr)
+	if (!proposition->is<ManyValuedProposition>())
 	{
 		return false;
 	}
 
-	return this->getPercent() == pValue->getValue();
+	return Proposition::hasSameLogic(proposition);
 }
 
-float ManyValuedProposition::getValue() const
+Proposition* ManyValuedProposition::clone()
 {
-	return getPercent();
+	ManyValuedProposition* proposition = create<ManyValuedProposition>();
+	proposition->setLogicID(this->getLogicID());
+	return proposition;
+}
+
+Proposition* ManyValuedProposition::deepClone()
+{
+	ManyValuedProposition* proposition = create<ManyValuedProposition>();
+	proposition->setLogicID(this->getLogicID());
+	return proposition;
+}
+
+ManyValuedProposition& ManyValuedProposition::operator=(const ManyValuedProposition& value)
+{
+	Proposition::operator=(value);
+	this->setPercent(value.getPercent());
+	return *this;
 }

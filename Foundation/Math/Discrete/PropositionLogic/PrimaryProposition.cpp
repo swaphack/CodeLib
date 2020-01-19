@@ -14,22 +14,27 @@ PrimaryProposition::PrimaryProposition(PropositionResult result)
 }
 
 PrimaryProposition::PrimaryProposition(const PrimaryProposition& value)
+	: PrimaryProposition()
 {
 	*this = value;
 }
 
+PrimaryProposition::~PrimaryProposition()
+{
+}
+
 Proposition* PrimaryProposition::clone()
 {
-	return create<PrimaryProposition>();
+	PrimaryProposition* proposition = create<PrimaryProposition>();
+	proposition->setLogicID(this->getLogicID());
+	return proposition;
 }
 
 Proposition* PrimaryProposition::deepClone()
 {
-	return create<PrimaryProposition>();
-}
-
-PrimaryProposition::~PrimaryProposition()
-{
+	PrimaryProposition* proposition = create<PrimaryProposition>();
+	proposition->setLogicID(this->getLogicID());
+	return proposition;
 }
 
 bool PrimaryProposition::isTrue()
@@ -51,12 +56,12 @@ bool PrimaryProposition::hasSameLogic(Proposition* proposition)
 		return false;
 	}
 
-	if (!Proposition::hasSameLogic(proposition))
+	if (!proposition->is<PrimaryProposition>())
 	{
 		return false;
 	}
 
-	return this->getResult() == proposition->as<PrimaryProposition>()->getResult();
+	return Proposition::hasSameLogic(proposition);
 }
 
 

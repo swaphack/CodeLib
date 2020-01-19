@@ -27,6 +27,11 @@ bool CompoundProposition::hasSameLogic(Proposition* proposition)
 		return false;
 	}
 
+	if (!proposition->is<CompoundProposition>())
+	{
+		return false;
+	}
+
 	if (!Proposition::hasSameLogic(proposition))
 	{
 		return false;

@@ -21,7 +21,9 @@ EquivalenceRule::~EquivalenceRule()
 
 std::vector<Proposition*> EquivalenceRule::getEquivalenceProposition(Proposition* proposition)
 {
-	return getEquivalenceProposition(proposition, std::vector<Proposition*>());
+	auto result = getEquivalenceProposition(proposition, std::vector<Proposition*>());
+
+	return result;
 }
 
 std::vector<Proposition*> EquivalenceRule::getEquivalenceProposition(Proposition* proposition, const std::vector<Proposition*>& preEquivalencePropositions)
@@ -104,10 +106,10 @@ std::vector<Proposition*> EquivalenceRule::getEquivalenceProposition(Proposition
 		eachChildProposition.push_back(branch);
 	}
 
+	// 对所有结果进行组合
 	std::function<void(int32_t)> func;
 	int nCount = eachChildProposition.size();
 	std::vector<int> vecIndex;
-	vecIndex.resize(nCount);
 
 	func = [&](int index){
 		if (index == eachChildProposition.size())
