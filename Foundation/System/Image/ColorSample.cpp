@@ -1,7 +1,6 @@
 #include "ColorSample.h"
 #include "mathlib.h"
 
-
 using namespace sys;
 
 Color3B::Color3B() :red(COLOR_UCHAR_VALUE), green(COLOR_UCHAR_VALUE), blue(COLOR_UCHAR_VALUE)
@@ -290,21 +289,21 @@ void Color4F::adjust()
 	ADJUST_DURATION_VALUE_RANGE(alpha, 0, 1, 1);
 }
 //////////////////////////////////////////////////////////////////////////
-void convertColor3BTo3F(const Color3B & b3, Color3F & f3)
+void sys::convertColor3BTo3F(const Color3B & b3, Color3F & f3)
 {
 	f3.red = b3.red / COLOR_FLOAT_VALUE;
 	f3.green = b3.green / COLOR_FLOAT_VALUE;
 	f3.blue = b3.blue / COLOR_FLOAT_VALUE;
 }
 
-void convertColor3FTo3B(const Color3F & f3, Color3B & b3)
+void sys::convertColor3FTo3B(const Color3F & f3, Color3B & b3)
 {
 	b3.red = (uint8_t)(f3.red * COLOR_FLOAT_VALUE);
 	b3.green = (uint8_t)(f3.green * COLOR_FLOAT_VALUE);
 	b3.blue = (uint8_t)(f3.blue * COLOR_FLOAT_VALUE);
 }
 
-void convertColor4BTo4F(const Color4B & b4, Color4F & f4)
+void sys::convertColor4BTo4F(const Color4B & b4, Color4F & f4)
 {
 	f4.red = b4.red / COLOR_FLOAT_VALUE;
 	f4.green = b4.green / COLOR_FLOAT_VALUE;
@@ -312,7 +311,7 @@ void convertColor4BTo4F(const Color4B & b4, Color4F & f4)
 	f4.alpha = b4.alpha / COLOR_FLOAT_VALUE;
 }
 
-void convertColor4FTo4B(const Color4F & f4, Color4B & b4)
+void sys::convertColor4FTo4B(const Color4F & f4, Color4B & b4)
 {
 	b4.red = (uint8_t)(f4.red * COLOR_FLOAT_VALUE);
 	b4.green = (uint8_t)(f4.green * COLOR_FLOAT_VALUE);
