@@ -51,7 +51,7 @@ namespace ui
 		/**
 		*	获取节点
 		*/
-		IElement* getElement(const char* name);
+		IElement* getElement(const std::string& name);
 	protected:
 		//////////////////////////////////////////////////////////////////////////
 		// 加载单一节点

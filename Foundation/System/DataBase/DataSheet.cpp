@@ -17,7 +17,7 @@ void DataSheet::setKey(const std::string& key)
 	_key = key;
 }
 
-const char* DataSheet::getKey()
+const std::string& DataSheet::getKey()
 {
 	return _key.c_str();
 }

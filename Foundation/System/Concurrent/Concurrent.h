@@ -1,6 +1,10 @@
 #pragma once
 
-#include "Base/Types.h"
+#include <cstdint>
+#include <functional>
+#include <queue>
+#include <string>
+
 #include "Thread/Mutex.h"
 #include "Framework/Object.h"
 
@@ -28,7 +32,7 @@ namespace sys
 		};
 
 		// 读取数据回调
-		typedef std::function<void(const char* data, int32_t size)> ReadDataCallback;
+		typedef std::function<void(const std::string& data, int32_t size)> ReadDataCallback;
 
 		struct ReadData : public Data
 		{

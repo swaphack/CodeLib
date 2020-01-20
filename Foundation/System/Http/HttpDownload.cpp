@@ -18,9 +18,9 @@ HttpDownload::~HttpDownload()
 	this->clear();
 }
 
-bool HttpDownload::download(const char* url, int32_t port, const char* filepath, OnHttpDownloadCallback callback, int32_t tag)
+bool HttpDownload::download(const std::string& url, int32_t port, const std::string& filepath, OnHttpDownloadCallback callback, int32_t tag)
 {
-	if (url == NULL)
+	if (url.empty() == NULL)
 	{
 		return false;
 	}
@@ -32,7 +32,7 @@ bool HttpDownload::download(const char* url, int32_t port, const char* filepath,
 		return false;
 	}
 
-	const char* request = getCString("GET /%s HTTP/1.1\r\n\r\n", filepath);
+	const std::string& request = getCString("GET /%s HTTP/1.1\r\n\r\n", filepath);
 	client->sendString(request);
 	
 	std::thread th([&](){
@@ -72,7 +72,7 @@ void HttpDownload::flushListenData(int32_t id)
 	if (pDoc->parseResponse(iter1->second->getData(), iter1->second->getLength()))
 	{
 		// ÍêÕûµÄhttp
-		(iter2->second.handler.first->*iter2->second.handler.second)(iter2->second.tag, pDoc->getBody(), pDoc->getBodySize());
+		(iter2->second.handler.first->*iter2->second.handler.second)(iter2->second.tag, pDoc->getBody());
 	}
 	delete pDoc;
 
@@ -113,7 +113,7 @@ void HttpDownload::onRecvHandle(int32_t id, DataQueue& data)
 	if (pDoc->parseResponse(pWriter->getData(), pWriter->getLength()))
 	{
 		int32_t len = 0;
-		if (pDoc->getint32egerHeader(HttpResponeField::CONTENT_LENGTH, len))
+		if (pDoc->getIntegerHeader(HttpResponeField::CONTENT_LENGTH, len))
 		{
 			if (len == pDoc->getBodySize())
 			{

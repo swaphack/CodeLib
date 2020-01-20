@@ -11,7 +11,7 @@ using namespace web;
 
 static WebApplication* s_pWebApplication = nullptr;
 //////////////////////////////////////////////////////////////////////////
-WebApplication::WebApplication( const char* ip, int port, int maxWaitCount )
+WebApplication::WebApplication( const std::string& ip, int port, int maxWaitCount )
 :_ip(ip)
 ,_port(port)
 ,_maxWaitCount(maxWaitCount)
@@ -65,9 +65,9 @@ PacketActivityListener* WebApplication::getPacketListener()
 	return static_cast<PacketActivityListener*>(_listenerPool->getListener(_packetListenerID));
 }
 
-void WebApplication::postResponse(const char* sessionID, sys::NetData* data)
+void WebApplication::postResponse(const std::string& sessionID, sys::NetData* data)
 {
-	if (sessionID == nullptr || data == nullptr)
+	if (sessionID.empty() || data == nullptr)
 	{
 		return;
 	}
@@ -125,9 +125,9 @@ void WebApplication::postBroadcast(sys::NetData* data)
 	_server->postBroadcast(data);
 }
 
-int WebApplication::getSocketID(const char* sessionID)
+int WebApplication::getSocketID(const std::string& sessionID)
 {
-	if (sessionID == nullptr)
+	if (sessionID.empty())
 	{
 		return -1;
 	}

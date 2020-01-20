@@ -1,7 +1,8 @@
 #pragma once
 
-#include "Base/import.h"
+#include "Base/macros.h"
 #include "PtrCache.h"
+#include <map>
 
 namespace sys
 {
@@ -14,9 +15,9 @@ namespace sys
 	public:
 		static Memory* getInstance();
 		// 分配一个缓存
-		PtrCache* alloct(const char* name, uint32_t size);
+		PtrCache* alloct(const std::string& name, uint32_t size);
 		// 销毁一个缓存
-		void destory(const char* name);
+		void destory(const std::string& name);
 		// 清空
 		void clear();
 	private:

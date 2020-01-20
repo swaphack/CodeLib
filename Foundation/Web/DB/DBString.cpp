@@ -14,9 +14,9 @@ DBString::~DBString()
 
 }
 
-bool DBString::excuteSQL(const char* sqlExpression, sys::IDataSheet* pDataSheet /*= nullptr*/)
+bool DBString::excuteSQL(const std::string& sqlExpression, sys::IDataSheet* pDataSheet /*= nullptr*/)
 {
-	if (_db	 == nullptr || sqlExpression == nullptr)
+	if (_db == nullptr || sqlExpression.empty())
 	{
 		return false;
 	}

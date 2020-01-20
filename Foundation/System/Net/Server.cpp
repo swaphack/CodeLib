@@ -10,7 +10,7 @@ Server::Server()
 	_socket->listen(1);
 }
 
-Server::Server( const char* ip, int32_t port, int32_t backlog )
+Server::Server( const std::string& ip, int32_t port, int32_t backlog )
 {
 	_socket = new Socket();
 	_socket-> bind(ip, port);

@@ -1,6 +1,6 @@
 #include "FilePath.h"
 
-#include "Base/File.h"
+#include "IO/File.h"
 
 using namespace sys;
 
@@ -16,13 +16,12 @@ FilePath::~FilePath()
 }
 
 
-const char* FilePath::getFilePath(const char* filename)
+const std::string& FilePath::getFilePath(const std::string& filename)
 {
-	if (filename == nullptr)
+	if (filename.empty())
 	{
 		return "";
 	}
-
 	
 	std::map<std::string, std::string>::iterator it = _filePathCache.find(filename);
 
@@ -38,10 +37,10 @@ const char* FilePath::getFilePath(const char* filename)
 		fullpath = (*it2);
 		fullpath += "/";
 		fullpath += filename;
-		if (File::exists(fullpath.c_str()))
+		if (File::exists(fullpath))
 		{
 			_filePathCache[filename] = fullpath;
-			return _filePathCache[filename].c_str();
+			return _filePathCache[filename];
 		}
 		it2++;
 	}
@@ -49,16 +48,16 @@ const char* FilePath::getFilePath(const char* filename)
 	return "";
 }
 
-bool FilePath::getFileData(const char* filename, std::string& data)
+bool FilePath::getFileData(const std::string& filename, std::string& data)
 {
 	data = "";
-	if (filename == nullptr)
+	if (filename.empty())
 	{
 		return false;
 	}
 
-	const char* fullpath = getFilePath(filename);
-	if (fullpath == nullptr)
+	const std::string& fullpath = getFilePath(filename);
+	if (fullpath.empty())
 	{
 		return false;
 	}

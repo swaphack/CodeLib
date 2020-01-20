@@ -67,22 +67,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Base\BitConvert.h" />
-    <ClInclude Include="Base\CharsetHelper.h" />
-    <ClInclude Include="Base\Directory.h" />
-    <ClInclude Include="Base\File.h" />
     <ClInclude Include="Base\FuncHandler.h" />
-    <ClInclude Include="Base\str.h" />
-    <ClInclude Include="Base\Hash.h" />
     <ClInclude Include="Base\import.h" />
     <ClInclude Include="Base\Instance.h" />
     <ClInclude Include="Base\macros.h" />
     <ClInclude Include="Base\Platform.h" />
     <ClInclude Include="Base\Random.h" />
     <ClInclude Include="Base\Protocol.h" />
-    <ClInclude Include="Base\Time.h" />
     <ClInclude Include="Base\Tuple.h" />
-    <ClInclude Include="Base\Types.h" />
     <ClInclude Include="Cache\CacheGroup.h" />
     <ClInclude Include="Cache\CacheIdentity.h" />
     <ClInclude Include="Cache\CacheMgr.h" />
@@ -102,6 +94,8 @@
     <ClInclude Include="DataBase\IDataSheet.h" />
     <ClInclude Include="DataBase\IDBString.h" />
     <ClInclude Include="DataBase\import.h" />
+    <ClInclude Include="DateTime\import.h" />
+    <ClInclude Include="DateTime\Time.h" />
     <ClInclude Include="Device\Console.h" />
     <ClInclude Include="Device\IConsoleImpl.h" />
     <ClInclude Include="Device\ConsoleListener.h" />
@@ -130,7 +124,11 @@
     <ClInclude Include="Http\HttpTime.h" />
     <ClInclude Include="Http\import.h" />
     <ClInclude Include="Image\Color.h" />
+    <ClInclude Include="Image\ColorSample.h" />
     <ClInclude Include="Image\import.h" />
+    <ClInclude Include="IO\Directory.h" />
+    <ClInclude Include="IO\File.h" />
+    <ClInclude Include="IO\import.h" />
     <ClInclude Include="Memory\PtrCache.h" />
     <ClInclude Include="Memory\Memory.h" />
     <ClInclude Include="Memory\PtrInfo.h" />
@@ -171,7 +169,10 @@
     <ClInclude Include="Stream\StreamWriter.h" />
     <ClInclude Include="Stream\StringStream.h" />
     <ClInclude Include="system.h" />
+    <ClInclude Include="Text\BitConvert.h" />
+    <ClInclude Include="Text\CharsetHelper.h" />
     <ClInclude Include="Text\Encoding.h" />
+    <ClInclude Include="Text\Hash.h" />
     <ClInclude Include="Text\import.h" />
     <ClInclude Include="Text\TextParser.h" />
     <ClInclude Include="Text\IBlockParser.h" />
@@ -183,17 +184,12 @@
     <ClInclude Include="Thread\ThreadPool.h" />
     <ClInclude Include="Type\Bit.h" />
     <ClInclude Include="Type\import.h" />
+    <ClInclude Include="Type\macros.h" />
     <ClInclude Include="Type\String.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Base\BitConvert.cpp" />
-    <ClCompile Include="Base\CharsetHelper.cpp" />
-    <ClCompile Include="Base\Directory.cpp" />
-    <ClCompile Include="Base\File.cpp" />
-    <ClCompile Include="Base\Hash.cpp" />
     <ClCompile Include="Base\macros.cpp" />
     <ClCompile Include="Base\Random.cpp" />
-    <ClCompile Include="Base\Time.cpp" />
     <ClCompile Include="Cache\CacheGroup.cpp" />
     <ClCompile Include="Cache\CacheIdentity.cpp" />
     <ClCompile Include="Cache\CacheMgr.cpp" />
@@ -204,6 +200,7 @@
     <ClCompile Include="CSS\Margin.cpp" />
     <ClCompile Include="DataBase\DataRecord.cpp" />
     <ClCompile Include="DataBase\DataSheet.cpp" />
+    <ClCompile Include="DateTime\Time.cpp" />
     <ClCompile Include="Device\Console.cpp" />
     <ClCompile Include="Device\ConsoleListener.cpp" />
     <ClCompile Include="Device\Keyboard.cpp" />
@@ -225,11 +222,15 @@
     <ClCompile Include="Http\HttpResponse.cpp" />
     <ClCompile Include="Http\HttpTime.cpp" />
     <ClCompile Include="Image\Color.cpp" />
+    <ClCompile Include="Image\ColorSample.cpp" />
+    <ClCompile Include="IO\Directory.cpp" />
+    <ClCompile Include="IO\File.cpp" />
     <ClCompile Include="Memory\PtrCache.cpp" />
     <ClCompile Include="Memory\Memory.cpp" />
     <ClCompile Include="Net\Client.cpp" />
     <ClCompile Include="Net\DataQueue.cpp" />
     <ClCompile Include="Net\DNS.cpp" />
+    <ClCompile Include="Net\NetData.cpp" />
     <ClCompile Include="Net\Server.cpp" />
     <ClCompile Include="Net\Socket.cpp" />
     <ClCompile Include="Net\EndPoint.cpp" />
@@ -248,7 +249,10 @@
     <ClCompile Include="Stream\StreamBase.cpp" />
     <ClCompile Include="Stream\StreamWriter.cpp" />
     <ClCompile Include="Stream\StringStream.cpp" />
+    <ClCompile Include="Text\BitConvert.cpp" />
+    <ClCompile Include="Text\CharsetHelper.cpp" />
     <ClCompile Include="Text\Encoding.cpp" />
+    <ClCompile Include="Text\Hash.cpp" />
     <ClCompile Include="Text\TextParser.cpp" />
     <ClCompile Include="Text\IBlockParser.cpp" />
     <ClCompile Include="Thread\Mutex.cpp" />

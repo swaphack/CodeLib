@@ -1,4 +1,5 @@
 #include "StringStream.h"
+#include "Base/macros.h"
 
 using namespace sys;
 
@@ -9,7 +10,7 @@ StringStream::StringStream()
 
 }
 
-StringStream::StringStream(const char* text)
+StringStream::StringStream(const std::string& text)
 : Stream(new StreamBaseRef())
 {
 	this->initWithText(text);
@@ -26,9 +27,9 @@ StringStream::~StringStream()
 	SAFE_DELETE(_baseStream);
 }
 
-void StringStream::initWithText(const char* text)
+void StringStream::initWithText(const std::string& text)
 {
-	this->initWithText(text, strlen(text));
+	this->initWithText(text.c_str(), text.size());
 }
 
 void StringStream::initWithText(const char* text, int32_t size)

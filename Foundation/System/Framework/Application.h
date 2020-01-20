@@ -1,7 +1,9 @@
 #pragma once
 
 #include "Object.h"
-#include "Base/import.h"
+
+#include <map>
+#include <string>
 
 namespace sys
 {
@@ -28,16 +30,16 @@ namespace sys
 		void checkAutoRealsePool();
 
 		// 添加一个协议管理
-		void addProtocolManager(const char* protocolName, Object* protocolManager);
+		void addProtocolManager(const std::string& protocolName, Object* protocolManager);
 		// 移除一个协议管理
-		void removeProtocolManager(const char* protocolName);
+		void removeProtocolManager(const std::string& protocolName);
 		// 获取一个协议管理
-		Object* getProtocolManager(const char* protocolName);
+		Object* getProtocolManager(const std::string& protocolName);
 		// 清除所有协议管理
 		void clearProtocolManagers();
 		// 获取一个协议管理
 		template<typename T>
-		T* getProtocolManager(const char* protocolName);
+		T* getProtocolManager(const std::string& protocolName);
 		// 获取一个协议管理
 		template<typename T>
 		T* getProtocolManager();
@@ -46,7 +48,7 @@ namespace sys
 	};
 
 	template<typename T>
-	T* Application::getProtocolManager( const char* protocolName )
+	T* Application::getProtocolManager( const std::string& protocolName )
 	{
 		Object* manager = this->getProtocolManager(protocolName);
 		if (manager == nullptr)

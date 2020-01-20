@@ -150,26 +150,20 @@ ParticleNode* CtrlParticleSystem::createParticle()
 	float ry = 0;
 	float rz = 0;
 
-	sys::Random* rand = sys::Random::getInstance();
-
-	rand->setRange(0, 2);
-	x = rand->getNextNumber();
-	y = rand->getNextNumber();
+	x = sys::Random::getNumber(0,2);
+	y = sys::Random::getNumber(0, 2);
 	z = 0;
 
-	rand->setRange(0, 100);
-	life = rand->getNextNumber();
+	life = sys::Random::getNumber(0, 100);
 
-	rand->setRange(0, 25.0f / 255);
-	r = rand->getNextNumber();
-	g = rand->getNextNumber();
-	b = rand->getNextNumber();
-	a = rand->getNextNumber();
+	r = sys::Random::getNumber(0.0f, 25.0f / 255);
+	g = sys::Random::getNumber(0.0f, 25.0f / 255);
+	b = sys::Random::getNumber(0.0f, 25.0f / 255);
+	a = sys::Random::getNumber(0.0f, 25.0f / 255);
 
-	rand->setRange(20.0f / 360, 120.0f / 360);
-	rx = rand->getNextNumber();
-	ry = rand->getNextNumber();
-	rz = rand->getNextNumber();
+	rx = sys::Random::getNumber(20.0f / 360, 120.0f / 360);
+	ry = sys::Random::getNumber(20.0f / 360, 120.0f / 360);
+	rz = sys::Random::getNumber(20.0f / 360, 120.0f / 360);
 
 	ParticleNode* node = new ParticleNode();
 	AUTO_RELEASE_OBJECT(node);

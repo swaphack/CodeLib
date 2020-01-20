@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Base/Types.h"
+
 
 #include "Framework/Object.h"
 
@@ -21,16 +21,16 @@ namespace sys
 		// 销毁
 		virtual void dispose();
 		// 名称
-		virtual const char* getName() { return ""; }
+		virtual std::string getName() { return ""; }
 		// 缓存
 		virtual CacheGroup* getCache();
 		// 加载文件数据
-		virtual bool loadFileData(const char* filename, GetDataCallback handler);
+		virtual bool loadFileData(const std::string& filename, GetDataCallback handler);
 	public:
 		// 设置资源位置
-		void setUrl(const char* url);
+		void setUrl(const std::string& url);
 		// 获取资源位置
-		const char* getUrl();
+		std::string getUrl();
 
 		// 设置是否使用缓存
 		void setCacheEnable(bool status);

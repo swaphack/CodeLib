@@ -35,19 +35,19 @@ CacheGroup* Resource::getCache()
 	return _cache;
 }
 
-bool Resource::loadFileData(const char* filename, GetDataCallback handler)
+bool Resource::loadFileData(const std::string& filename, GetDataCallback handler)
 {
 	return false;
 }
 
-void Resource::setUrl(const char* url)
+void Resource::setUrl(const std::string& url)
 {
 	_url = url;
 }
 
-const char* Resource::getUrl()
+std::string Resource::getUrl()
 {
-	return	_url.c_str();
+	return	_url;
 }
 
 void Resource::setCacheEnable(bool status)
@@ -59,7 +59,7 @@ void Resource::setCacheEnable(bool status)
 
 	_bCacheEnabled = status;
 
-	if (strcmp(getName(), "") == 0)
+	if (getName().empty())
 	{
 		return;
 	}

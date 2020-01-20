@@ -13,9 +13,9 @@ DataRecord::~DataRecord()
 }
 
 
-void DataRecord::setValue(const char* key, const char* value)
+void DataRecord::setValue(const std::string& key, const std::string& value)
 {
-	if (key == nullptr || value == nullptr)
+	if (key.empty() || value.empty())
 	{
 		return;
 	}
@@ -23,9 +23,9 @@ void DataRecord::setValue(const char* key, const char* value)
 	_values[key] = value;
 }
 
-const char* DataRecord::getValue(const char* key)
+std::string DataRecord::getValue(const std::string& key)
 {
-	if (key == nullptr)
+	if (key.empty())
 	{
 		return "";
 	}
@@ -33,7 +33,7 @@ const char* DataRecord::getValue(const char* key)
 	std::map<std::string, std::string>::const_iterator iter = _values.find(key);
 	if (iter != _values.end())
 	{
-		return iter->second.c_str();
+		return iter->second;
 	}
 
 	return "";

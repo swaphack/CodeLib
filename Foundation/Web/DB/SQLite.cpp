@@ -84,16 +84,16 @@ int onExecCallback(void* inParams, int argc, char** argv, char** colName)
 	return 0;
 }
 
-bool SQLite::executeSQL(const char* sqlExpression, sys::IDataSheet* pDataSheet)
+bool SQLite::executeSQL(const std::string& sqlExpression, sys::IDataSheet* pDataSheet)
 {
 	int result;
 	if (pDataSheet)
 	{
-		result = sqlite3_exec(_instance, sqlExpression, onExecCallback, pDataSheet, nullptr);
+		result = sqlite3_exec(_instance, sqlExpression.c_str(), onExecCallback, pDataSheet, nullptr);
 	}
 	else
 	{
-		result = sqlite3_exec(_instance, sqlExpression, nullptr, nullptr, nullptr);
+		result = sqlite3_exec(_instance, sqlExpression.c_str(), nullptr, nullptr, nullptr);
 	}
 
 	return result == SQLITE_OK;

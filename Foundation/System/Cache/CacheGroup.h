@@ -1,7 +1,5 @@
 #pragma once
 
-#include "Base/Types.h"
-
 #include "CacheIdentity.h"
 #include "CacheMgr.h"
 
@@ -17,7 +15,7 @@ namespace sys
 		virtual ~CacheGroup();
 	public:
 		// 创建一个缓存组
-		static CacheGroup* create(const char* name);
+		static CacheGroup* create(const std::string& name);
 	public:
 		// 添加键值对数据
 		void set(const std::string& name, const std::string& value);
@@ -27,16 +25,16 @@ namespace sys
 		void clear();
 
 		template<typename T>
-		void setT(const char* name, T value);
+		void setT(const std::string& name, T value);
 
 		template<typename T>
-		const T& getT(const char* name);
+		const T& getT(const std::string& name);
 	private:
 		std::map<std::string, StreamBase> _values;
 	};
 
 	template<typename T>
-	const T& CacheGroup::getT(const char* name)
+	const T& CacheGroup::getT(const std::string& name)
 	{
 		char* temp = get(name);
 		if (temp == nullptr)
@@ -48,7 +46,7 @@ namespace sys
 	}
 
 	template<typename T>
-	void CacheGroup::setT(const char* name, T value)
+	void CacheGroup::setT(const std::string& name, T value)
 	{
 		if (name == nullptr)
 		{

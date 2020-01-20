@@ -1,6 +1,7 @@
 #pragma once
-#include "Base/Types.h"
+
 #include "IConsoleImpl.h"
+#include <string>
 
 namespace sys
 {
@@ -11,11 +12,11 @@ namespace sys
 		virtual ~Console();
 	public:
 		// 读取一行
-		virtual const char* readLine();
+		virtual const std::string& readLine();
 		// 读取一个字符
 		virtual char readChar();
 		// 写入一行
-		virtual void writeLine(const char* words);
+		virtual void writeLine(const std::string& words);
 		// 写入一个字符
 		virtual void writeChar(char word);
 	};

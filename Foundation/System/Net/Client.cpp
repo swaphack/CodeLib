@@ -3,7 +3,7 @@
 using namespace sys;
 
 
-Client::Client( const char* ip, int32_t port )
+Client::Client( const std::string& ip, int32_t port )
 :_bConnected(false)
 {
 	_socket = new Socket();
@@ -21,7 +21,7 @@ int32_t Client::getID()
 	return _ID;
 }
 
-void Client::setRemote(const char* ip, int32_t port)
+void Client::setRemote(const std::string& ip, int32_t port)
 {
 	_remote.first = ip;
 	_remote.second = port;
@@ -87,14 +87,14 @@ void Client::sendMessage(NetData* data )
 	this->addSendBuffer(data);
 }
 
-void Client::sendString(const char* data)
+void Client::sendString(const std::string& data)
 {
-	if (data == nullptr)
+	if (data.empty())
 	{
 		return;
 	}
 
-	this->sendMessage(new NetData(data, strlen(data)));
+	this->sendMessage(new NetData(data));
 }
 
 void Client::addRecvBuffer( NetData* data )

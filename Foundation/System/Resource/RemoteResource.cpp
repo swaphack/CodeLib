@@ -17,9 +17,9 @@ RemoteResource::~RemoteResource()
 
 }
 
-bool RemoteResource::loadFileData(const char* filename, GetDataCallback handler)
+bool RemoteResource::loadFileData(const std::string& filename, GetDataCallback handler)
 {
-	if (filename == nullptr)
+	if (filename.empty())
 	{
 		return false;
 	}
@@ -88,14 +88,14 @@ bool RemoteResource::loadFileData(const char* filename, GetDataCallback handler)
 	return true;
 }
 
-std::string RemoteResource::getFullPath(const char* filename)
+std::string RemoteResource::getFullPath(const std::string& filename)
 {
 	std::string fullpath = _url + filename;
 
 	return fullpath;
 }
 
-bool RemoteResource::getCacheData(const char* fullpath, std::string& data)
+bool RemoteResource::getCacheData(const std::string& fullpath, std::string& data)
 {
 	data = "";
 	if (getCache() == nullptr)
@@ -111,19 +111,17 @@ bool RemoteResource::getCacheData(const char* fullpath, std::string& data)
 	return true;
 }
 
-void RemoteResource::onDownloadCallback(int32_t tag, const char* data, int32_t size)
+void RemoteResource::onDownloadCallback(int32_t tag, const std::string& data)
 {
 	if (_downloadTasks.find(tag) == _downloadTasks.end()) {
 		return;
 	}
 	DownloadTask task = _downloadTasks[tag];
 
-	std::string downloadData = std::string(data, size);
-
-	getCache()->set(task.path.c_str(), downloadData);
+	getCache()->set(task.path, data);
 
 	if (task.handler)
 	{
-		task.handler(downloadData);
+		task.handler(data);
 	}
 }

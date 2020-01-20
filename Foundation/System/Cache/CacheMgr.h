@@ -19,7 +19,7 @@ namespace sys
 		// 按id获取cache
 		CacheIdentity* getCache(int32_t nID);
 		// 按名称获取cache
-		CacheIdentity* getCache(const char* name);
+		CacheIdentity* getCache(const std::string& name);
 		// 添加cache
 		void addCache(CacheIdentity* pCache);
 		// 移除cache

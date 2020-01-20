@@ -1,7 +1,9 @@
 #pragma once
 
 #include "Author.h"
-#include "Base/Types.h"
+
+#include <string>
+#include <cstdint>
 
 namespace sys
 {

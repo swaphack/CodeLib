@@ -19,22 +19,22 @@ void UIProxy::init()
 }
 
 // 获取控件名称
-const char* getWidgetName(LayoutItem* item)
+std::string getWidgetName(LayoutItem* item)
 {
 	if (item == nullptr)
 	{
-		return nullptr;
+		return "";
 	}
 
 	return item->getName();
 }
 
 // 获取布局名称
-const char* getLayoutName(Layout* layout)
+std::string getLayoutName(Layout* layout)
 {
 	if (layout == nullptr)
 	{
-		return nullptr;
+		return "";
 	}
 
 // 	if (dynamic_cast<HorizontalLayout*>(layout))
@@ -171,7 +171,7 @@ LayoutDirection UIProxy::getDesignDirection()
 	return _designDirection;
 }
 
-IElement* UIProxy::getElement(const char* name)
+IElement* UIProxy::getElement(const std::string& name)
 {
 	if (_elementParsers.find(name) == _elementParsers.end())
 	{
@@ -279,8 +279,8 @@ bool UIProxy::saveLayoutItem(LayoutItem* item, tinyxml2::XMLElement* xmlNode)
 		return false;
 	}
 
-	const char* name = getWidgetName(item);
-	if (name == nullptr)
+	const std::string& name = getWidgetName(item);
+	if (name.empty())
 	{
 		return false;
 	}
@@ -310,12 +310,12 @@ bool UIProxy::saveLayoutItem(LayoutItem* item, tinyxml2::XMLElement* xmlNode)
 	{
 		tinyxml2::XMLElement* pChildNode = nullptr;
 
-		name = getWidgetName(*iter);
-		if (name == nullptr)
+		std::string wName = getWidgetName(*iter);
+		if (wName.empty())
 		{
 			continue;
 		}
-		pChildNode = xmlNode->GetDocument()->NewElement(name);
+		pChildNode = xmlNode->GetDocument()->NewElement(wName.c_str());
 		this->saveLayoutItem(*iter, pChildNode);
 
 		xmlNode->InsertEndChild(pChildNode);

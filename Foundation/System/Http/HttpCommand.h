@@ -1,6 +1,7 @@
 #pragma once
 
-#include "Base/Types.h"
+#include <string>
+#include <cstdint>
 
 namespace sys
 {
@@ -12,15 +13,15 @@ namespace sys
 		virtual ~HttpCommand();
 	public:
 		// 设置session id
-		void setSessionID(const char* id);
+		void setSessionID(const std::string& id);
 		// 获取session id
-		const char* getSessionID();
+		const std::string& getSessionID();
 		// 设置消息
-		virtual void setMessage(const char* msg, int32_t size);
+		virtual void setMessage(const std::string& msg, int32_t size);
 		// 生成消息
 		virtual void makeMessage();
 		// 获取消息
-		const char* getMessage();
+		const std::string& getMessage();
 		// 消息大小
 		int32_t getMessageSize();
 		// 是否有值

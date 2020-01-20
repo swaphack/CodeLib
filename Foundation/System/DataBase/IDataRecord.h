@@ -1,5 +1,7 @@
 #pragma once
 
+#include <string>
+
 namespace sys
 {
 	class IDataRecord
@@ -8,8 +10,8 @@ namespace sys
 		virtual ~IDataRecord() {}
 	public:
 		// 查找值
-		virtual const char* getValue(const char* key) = 0;
+		virtual std::string getValue(const std::string& key) = 0;
 		// 添加值
-		virtual void setValue(const char* key, const char* value) = 0;
+		virtual void setValue(const std::string& key, const std::string& value) = 0;
 	};
 }

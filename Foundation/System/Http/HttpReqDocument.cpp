@@ -21,7 +21,7 @@ bool HttpReqDocument::parseRequest(const char* msg, int32_t size)
 		return false;
 	}
 
-	String line = msg;
+	String line(msg, size);
 
 	if (!(line.startWith(HttpRequestConstant::HTTP_REQ_GET)
 		|| line.startWith(HttpRequestConstant::HTTP_REQ_POST)
@@ -35,35 +35,35 @@ bool HttpReqDocument::parseRequest(const char* msg, int32_t size)
 		return false;
 	}
 
-	return parse(msg, size);
+	return parse(std::string(msg, size));
 }
 
-const char* HttpReqDocument::getMethod()
+std::string HttpReqDocument::getMethod()
 {
 	return getStatus(0);
 }
 
-void HttpReqDocument::setMethod(const char* method)
+void HttpReqDocument::setMethod(const std::string& method)
 {
 	setStatus(0, method);
 }
 
-const char* HttpReqDocument::getUrl()
+std::string HttpReqDocument::getUrl()
 {
 	return getStatus(1);
 }
 
-void HttpReqDocument::setUrl(const char* url)
+void HttpReqDocument::setUrl(const std::string& url)
 {
 	setStatus(1, url);
 }
 
-const char* HttpReqDocument::getHttpVersion()
+std::string HttpReqDocument::getHttpVersion()
 {
 	return getStatus(2);
 }
 
-void HttpReqDocument::setHttpVersion(const char* version)
+void HttpReqDocument::setHttpVersion(const std::string& version)
 {
 	setStatus(2, version);
 }

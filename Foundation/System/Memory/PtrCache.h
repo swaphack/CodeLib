@@ -1,7 +1,10 @@
 #pragma once
 
-#include "Base/import.h"
+#include "Base/macros.h"
 #include "PtrInfo.h"
+
+#include <map>
+#include <cstdint>
 
 namespace sys
 {

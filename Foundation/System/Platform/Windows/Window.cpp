@@ -78,9 +78,10 @@ LRESULT CALLBACK WndProc(
 }
 
 
+WCHAR wszClassName[256];
+
 LPCWCHAR getWCHAR(const char* szStr)
 {
-	WCHAR wszClassName[256];
 	memset(wszClassName, 0, sizeof(wszClassName));
 	MultiByteToWideChar(CP_ACP, 0, szStr, strlen(szStr) + 1, wszClassName,
 		sizeof(wszClassName) / sizeof(wszClassName[0]));
@@ -109,7 +110,7 @@ Window::~Window()
 	this->dispose();
 }
 
-void Window::initWindow(const char* title, int32_t width, int32_t height)
+void Window::initWindow(const std::string& title, int32_t width, int32_t height)
 {
 	_title = title;
 	_width = static_cast<float>(width);

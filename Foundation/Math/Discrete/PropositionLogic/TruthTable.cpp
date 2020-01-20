@@ -31,6 +31,8 @@ bool TruthTable::testResult(CompoundProposition* proposition, const std::map<uin
 
 bool TruthTable::isTwoPropositionsEqual(CompoundProposition* a, CompoundProposition* b)
 {
+	assert(a != nullptr && b != nullptr);
+
 	auto selfIdentify = a->getAllUniqueIdentifyChildren();
 	auto otherIdentify = b->getAllUniqueIdentifyChildren();
 
@@ -98,6 +100,8 @@ bool TruthTable::isTwoPropositionsEqual(CompoundProposition* a, CompoundProposit
 
 bool TruthTable::isTautologyProposition(CompoundProposition* a)
 {
+	assert(a != nullptr);
+
 	auto selfIdentify = a->getAllUniqueIdentifyChildren();
 
 	// 真值比较
@@ -142,6 +146,8 @@ bool TruthTable::isTautologyProposition(CompoundProposition* a)
 
 bool TruthTable::isContradictoryProposition(CompoundProposition* a)
 {
+	assert(a != nullptr);
+
 	auto selfIdentify = a->getAllUniqueIdentifyChildren();
 
 	// 真值比较

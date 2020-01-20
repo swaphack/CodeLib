@@ -2,7 +2,11 @@
 
 #include "Stream/import.h"
 
-#include "Base/Types.h"
+#include <string>
+#include <cstdint>
+#include <vector>
+#include <map>
+#include "DateTime/Time.h"
 
 namespace sys
 {
@@ -50,33 +54,33 @@ namespace sys
 		virtual ~HttpDocument();
 	public:
 		// 解析字符串，是否是http文档
-		bool parse(const char* msg, int32_t size);
+		bool parse(const std::string& msg);
 		// 生成http字符串
 		bool save(std::string& msg);
 
 		// 获取状态参数
-		const char* getStatus(int32_t index);
+		std::string getStatus(int32_t index);
 		// 设置状态参数
-		void setStatus(int32_t index, const char* value);
+		void setStatus(int32_t index, const std::string& value);
 
 		// 获取报头参数
-		const char* getHeader(const char* key);
+		std::string getHeader(const std::string& key);
 		// 整形格式报头参数
-		bool getint32egerHeader(const char* key, int32_t& value);
+		bool getIntegerHeader(const std::string& key, int32_t& value);
 
 		// 移除报头参数
-		void removeHeader(const char* key);
+		void removeHeader(const std::string& key);
 		// 设置报头参数
-		void setHeader(const char* key, const char* value);
+		void setHeader(const std::string& key, const std::string& value);
 		// 时间格式报头参数
-		void setDateHeader(const char* key, Time* value);
+		void setDateHeader(const std::string& key, Time* value);
 		// 整形格式报头参数
-		void setint32egerHeader(const char* key, int32_t value);
+		void setIntegerHeader(const std::string& key, int32_t value);
 
 		// 可选的消息体
-		void setBody(const char* value, int32_t size);
+		void setBody(const std::string& value);
 		// 可选的消息体
-		const char* getBody();
+		const std::string& getBody();
 		// 可选消息体长度
 		int32_t getBodySize();
 		// 获取流长度

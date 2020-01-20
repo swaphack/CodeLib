@@ -1,6 +1,8 @@
 #pragma once
 
-#include "Base/import.h"
+#include <string>
+#include <vector>
+#include <cstdint>
 
 namespace sys
 {
@@ -11,18 +13,15 @@ namespace sys
 		String();
 		String(const String& value);
 		String(const std::string& value);
-		String(const char* value);
 		String(const char* value, int32_t count);
 		~String();
 	public:
 		// 赋值
 		String& operator=(const String& value);
 		String& operator=(const std::string& value);
-		String& operator=(const char* value);
 
 		String operator+(const String& value);
 		String operator+(const std::string& value);
-		String operator+(const char* value);
 
 		// 获取索引的字符
 		char operator[](int32_t index);
@@ -31,43 +30,43 @@ namespace sys
 		// 尾部追加字符
 		void append(int32_t count, char value);
 		// 尾部追加字符串
-		void append(int32_t count, char* value);
+		void append(int32_t count, const std::string& value);
 		// 替换指定的字符
-		String replace(char spot, char* value);
+		String replace(char spot, const std::string& value);
 		// 替换指定的字符串
-		String replace(char* spot, char* value);
+		String replace(const std::string& spot, const std::string& value);
 
 		// 拼接
-		String& concat(const char* value);
-		String& concat(const char* value1, const char* value2);
-		String& concat(const char* value1, const char* value2, const char* value3);
+		String& concat(const std::string& value);
+		String& concat(const std::string& value1, const std::string& value2);
+		String& concat(const std::string& value1, const std::string& value2, const std::string& value3);
 
 		// 是否包含
-		bool contains(const char* value);
+		bool contains(const std::string& value);
 
 		// 比较两字符串是否相同
-		bool compare(const char* value);
-		bool compare(int32_t offset, const char* value);
-		bool compare(int32_t offset, const char* value, int32_t count);
+		bool compare(const std::string& value);
+		bool compare(int32_t offset, const std::string& value);
+		bool compare(int32_t offset, const std::string& value, int32_t count);
 		// 以指定字符串结尾
-		bool endWith(const char* value);
+		bool endWith(const std::string& value);
 		// 以指定字符串开头
-		bool startWith(const char* value);
+		bool startWith(const std::string& value);
 		// 移除从指定位置开始的一段字符串
 		String& remove(int32_t offset, int32_t count);
 		// 插入字符串
-		String& insert(int32_t offset, const char* value);
+		String& insert(int32_t offset, const std::string& value);
 		// 移除从指定位置开始的一段字符串
 		String subString(int32_t offset, int32_t count);
 
 		// 开始位置查找匹配字符的索引位置
 		int32_t findFirstOf(char value);
 		// 开始位置查找匹配字符串的索引位置
-		int32_t findFirstOf(const char* value);
+		int32_t findFirstOf(const std::string& value);
 		// 结束位置查找匹配字符的索引位置
 		int32_t findLastOf(char value);
 		// 结束位置查找匹配字符的索引位置
-		int32_t findLastOf(const char* value);
+		int32_t findLastOf(const std::string& value);
 		// 是否是句子
 		bool isLine();
 
@@ -88,11 +87,11 @@ namespace sys
 		// 分割
 		void split(char spot, std::vector<String>& dest);
 		// 分割
-		void split(const char* spot, std::vector<String>& dest);
+		void split(const std::string& spot, std::vector<String>& dest);
 		// 分割
 		void split(char spot, std::vector<std::string>& dest);
 		// 分割
-		void split(const char* spot, std::vector<std::string>& dest);
+		void split(const std::string& spot, std::vector<std::string>& dest);
 		// 是否数据为空
 		bool empty();
 		// 反转

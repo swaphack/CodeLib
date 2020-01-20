@@ -2,6 +2,8 @@
 
 #include "Stream.h"
 
+#include <string>
+
 namespace sys
 {
 	// Ð´Èë°ü
@@ -22,7 +24,6 @@ namespace sys
 		void writeUInt64(uint64_t data);
 		void writeFloat(float data);
 		void writeDouble(double data);
-		void writeString(const char* data);
 		void writeString(char* data, ss_t size);
 		void writeString(const std::string& data);
 	public:

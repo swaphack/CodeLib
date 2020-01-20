@@ -2,6 +2,9 @@
 
 #include "IDataSheet.h"
 #include <vector>
+#include <cstdint>
+#include <map>
+#include <string>
 
 namespace sys
 {
@@ -14,7 +17,7 @@ namespace sys
 		// 设置关键字
 		virtual void setKey(const std::string& key);
 		// 查找关键字
-		virtual const char* getKey();
+		virtual const std::string& getKey();
 		// 创建一条带主键的记录
 		virtual IDataRecord* create();
 		// 索引记录

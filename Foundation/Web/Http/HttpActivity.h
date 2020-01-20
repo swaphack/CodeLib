@@ -10,8 +10,8 @@ namespace web
 		HttpActivity();
 		virtual ~HttpActivity();
 	protected:
-		void onReceiveRequest(const char* sessionID, sys::HttpRequest* request);
-		void onReceiveResponse(const char* sessionID, sys::HttpResponse* response);
+		void onReceiveRequest(const std::string& sessionID, sys::HttpRequest* request);
+		void onReceiveResponse(const std::string& sessionID, sys::HttpResponse* response);
 	protected:
 		// 收到http请求
 		virtual void doGetRequest(sys::HttpRequest* request);
@@ -27,9 +27,9 @@ namespace web
 		// 发送给指定目标
 		void doPostRequest(int destID, sys::HttpRequest* request);
 		// 发送给指定目标
-		void doPostResponse(const char* sessionID, sys::HttpResponse* response);
+		void doPostResponse(const std::string& sessionID, sys::HttpResponse* response);
 		// 发送给指定目标
-		void doPostRequest(const char* sessionID, sys::HttpRequest* request);
+		void doPostRequest(const std::string& sessionID, sys::HttpRequest* request);
 		// 广播
 		void doBroadCast(sys::HttpResponse* response);
 		// 广播

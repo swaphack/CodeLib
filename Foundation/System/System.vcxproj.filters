@@ -67,14 +67,14 @@
     <Filter Include="Image">
       <UniqueIdentifier>{baaf037b-f34b-4a72-a6db-b4382e0311a7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="IO">
+      <UniqueIdentifier>{a8e455b0-2257-4e94-8aae-2821f255f81b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DateTime">
+      <UniqueIdentifier>{2a110e07-2796-4c92-95c6-ae98387bf92b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Base\File.h">
-      <Filter>Base</Filter>
-    </ClInclude>
-    <ClInclude Include="Base\Hash.h">
-      <Filter>Base</Filter>
-    </ClInclude>
     <ClInclude Include="Base\import.h">
       <Filter>Base</Filter>
     </ClInclude>
@@ -82,9 +82,6 @@
       <Filter>Base</Filter>
     </ClInclude>
     <ClInclude Include="Base\macros.h">
-      <Filter>Base</Filter>
-    </ClInclude>
-    <ClInclude Include="Base\Types.h">
       <Filter>Base</Filter>
     </ClInclude>
     <ClInclude Include="Framework\Application.h">
@@ -160,9 +157,6 @@
     <ClInclude Include="Stream\StreamBase.h">
       <Filter>Stream</Filter>
     </ClInclude>
-    <ClInclude Include="Base\Directory.h">
-      <Filter>Base</Filter>
-    </ClInclude>
     <ClInclude Include="Stream\MultiStream.h">
       <Filter>Stream</Filter>
     </ClInclude>
@@ -208,9 +202,6 @@
     <ClInclude Include="Base\Platform.h">
       <Filter>Base</Filter>
     </ClInclude>
-    <ClInclude Include="Base\Time.h">
-      <Filter>Base</Filter>
-    </ClInclude>
     <ClInclude Include="Type\String.h">
       <Filter>Type</Filter>
     </ClInclude>
@@ -243,9 +234,6 @@
     </ClInclude>
     <ClInclude Include="Stream\macros.h">
       <Filter>Stream</Filter>
-    </ClInclude>
-    <ClInclude Include="Base\BitConvert.h">
-      <Filter>Base</Filter>
     </ClInclude>
     <ClInclude Include="Cache\CacheGroup.h">
       <Filter>Cache</Filter>
@@ -400,17 +388,11 @@
     <ClInclude Include="Resource\ResourceBundle.h">
       <Filter>Resource</Filter>
     </ClInclude>
-    <ClInclude Include="Base\str.h">
-      <Filter>Base</Filter>
-    </ClInclude>
     <ClInclude Include="Process\Pipe.h">
       <Filter>Process</Filter>
     </ClInclude>
     <ClInclude Include="Type\Bit.h">
       <Filter>Type</Filter>
-    </ClInclude>
-    <ClInclude Include="Base\CharsetHelper.h">
-      <Filter>Base</Filter>
     </ClInclude>
     <ClInclude Include="CSS\Margin.h">
       <Filter>CSS</Filter>
@@ -421,14 +403,38 @@
     <ClInclude Include="Image\import.h">
       <Filter>Image</Filter>
     </ClInclude>
+    <ClInclude Include="Image\ColorSample.h">
+      <Filter>Image</Filter>
+    </ClInclude>
+    <ClInclude Include="IO\Directory.h">
+      <Filter>IO</Filter>
+    </ClInclude>
+    <ClInclude Include="IO\File.h">
+      <Filter>IO</Filter>
+    </ClInclude>
+    <ClInclude Include="IO\import.h">
+      <Filter>IO</Filter>
+    </ClInclude>
+    <ClInclude Include="DateTime\Time.h">
+      <Filter>DateTime</Filter>
+    </ClInclude>
+    <ClInclude Include="DateTime\import.h">
+      <Filter>DateTime</Filter>
+    </ClInclude>
+    <ClInclude Include="Text\CharsetHelper.h">
+      <Filter>Text</Filter>
+    </ClInclude>
+    <ClInclude Include="Text\Hash.h">
+      <Filter>Text</Filter>
+    </ClInclude>
+    <ClInclude Include="Text\BitConvert.h">
+      <Filter>Text</Filter>
+    </ClInclude>
+    <ClInclude Include="Type\macros.h">
+      <Filter>Type</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Base\File.cpp">
-      <Filter>Base</Filter>
-    </ClCompile>
-    <ClCompile Include="Base\Hash.cpp">
-      <Filter>Base</Filter>
-    </ClCompile>
     <ClCompile Include="Framework\Application.cpp">
       <Filter>Framework</Filter>
     </ClCompile>
@@ -471,9 +477,6 @@
     <ClCompile Include="Stream\FileStream.cpp">
       <Filter>Stream</Filter>
     </ClCompile>
-    <ClCompile Include="Base\Directory.cpp">
-      <Filter>Base</Filter>
-    </ClCompile>
     <ClCompile Include="Stream\MultiStream.cpp">
       <Filter>Stream</Filter>
     </ClCompile>
@@ -488,9 +491,6 @@
     </ClCompile>
     <ClCompile Include="Platform\Windows\Window.cpp">
       <Filter>Platform\Windows</Filter>
-    </ClCompile>
-    <ClCompile Include="Base\Time.cpp">
-      <Filter>Base</Filter>
     </ClCompile>
     <ClCompile Include="Device\Keyboard.cpp">
       <Filter>Device</Filter>
@@ -515,9 +515,6 @@
     </ClCompile>
     <ClCompile Include="Stream\StreamHelper.cpp">
       <Filter>Stream</Filter>
-    </ClCompile>
-    <ClCompile Include="Base\BitConvert.cpp">
-      <Filter>Base</Filter>
     </ClCompile>
     <ClCompile Include="Cache\CacheGroup.cpp">
       <Filter>Cache</Filter>
@@ -624,9 +621,6 @@
     <ClCompile Include="Resource\ResourceBundle.cpp">
       <Filter>Resource</Filter>
     </ClCompile>
-    <ClCompile Include="Base\CharsetHelper.cpp">
-      <Filter>Base</Filter>
-    </ClCompile>
     <ClCompile Include="Type\Bit.cpp">
       <Filter>Type</Filter>
     </ClCompile>
@@ -635,6 +629,30 @@
     </ClCompile>
     <ClCompile Include="CSS\Margin.cpp">
       <Filter>CSS</Filter>
+    </ClCompile>
+    <ClCompile Include="Net\NetData.cpp">
+      <Filter>Net</Filter>
+    </ClCompile>
+    <ClCompile Include="Image\ColorSample.cpp">
+      <Filter>Image</Filter>
+    </ClCompile>
+    <ClCompile Include="IO\Directory.cpp">
+      <Filter>IO</Filter>
+    </ClCompile>
+    <ClCompile Include="IO\File.cpp">
+      <Filter>IO</Filter>
+    </ClCompile>
+    <ClCompile Include="DateTime\Time.cpp">
+      <Filter>DateTime</Filter>
+    </ClCompile>
+    <ClCompile Include="Text\CharsetHelper.cpp">
+      <Filter>Text</Filter>
+    </ClCompile>
+    <ClCompile Include="Text\Hash.cpp">
+      <Filter>Text</Filter>
+    </ClCompile>
+    <ClCompile Include="Text\BitConvert.cpp">
+      <Filter>Text</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

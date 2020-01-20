@@ -46,10 +46,10 @@ namespace render
 	public:
 		static ModelFile* getInstance();
 		// 从配置加载模型
-		Model* load(const char* filepath);
+		Model* load(const std::string& filepath);
 	protected:
 		// 加载数据
-		T_ModelData* loadData(const char* filepath);
+		T_ModelData* loadData(const std::string& filepath);
 		// 加载模型
 		Model* loadModel(T_ModelData* pData);
 	private:

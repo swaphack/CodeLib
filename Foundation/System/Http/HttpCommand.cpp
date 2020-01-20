@@ -15,9 +15,9 @@ HttpCommand::~HttpCommand()
 
 }
 
-void HttpCommand::setSessionID(const char* id)
+void HttpCommand::setSessionID(const std::string& id)
 {
-	if (id == nullptr)
+	if (id.empty())
 	{
 		return;
 	}
@@ -25,12 +25,12 @@ void HttpCommand::setSessionID(const char* id)
 	_sessionID = id;
 }
 
-const char* HttpCommand::getSessionID()
+const std::string& HttpCommand::getSessionID()
 {
-	return _sessionID.c_str();
+	return _sessionID;
 }
 
-void HttpCommand::setMessage(const char* msg, int32_t size)
+void HttpCommand::setMessage(const std::string& msg, int32_t size)
 {
 	_msg = std::string(msg, size);
 }
@@ -40,9 +40,9 @@ void HttpCommand::makeMessage()
 
 }
 
-const char* HttpCommand::getMessage()
+const std::string& HttpCommand::getMessage()
 {
-	return _msg.c_str();
+	return _msg;
 }
 
 int32_t HttpCommand::getMessageSize()

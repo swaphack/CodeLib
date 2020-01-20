@@ -6,13 +6,13 @@ namespace sys
 	class Encoding
 	{
 	public:
-		virtual bool Is(const char* text) = 0;
+		virtual bool Is(const std::string& text) = 0;
 	};
 
 	class UTF8
 	{
 	public:
-		virtual bool Is(const char* text);
+		virtual bool Is(const std::string& text);
 	protected:
 	private:
 	};

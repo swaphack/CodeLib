@@ -17,9 +17,9 @@ namespace db
 		// 添加表结构
 		void addTable(const DBTable& dbTable);
 		// 移除表结构
-		void removeTable(const char* tableName);
+		void removeTable(const std::string& tableName);
 		// 获取表结构
-		const DBTable* getTable(const char* tableName);
+		const DBTable* getTable(const std::string& tableName);
 		// 移除所有表结构
 		void removeAllTables();
 		// 获取所有表

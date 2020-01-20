@@ -17,7 +17,7 @@ namespace sys
 		// 断开数据库连接
 		virtual bool disconnect() = 0;
 		// 执行sql语句
-		virtual bool executeSQL(const char* sqlExpression, IDataSheet* pDataSheet = nullptr) = 0;
+		virtual bool executeSQL(const std::string& sqlExpression, IDataSheet* pDataSheet = nullptr) = 0;
 		// 获取db操纵语句
 		virtual IDBString* getDBString() = 0;
 	};

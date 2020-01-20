@@ -58,10 +58,14 @@ void PNGImage::load(const char* filename)
 	png_byte* texels;
 	png_uint_32 rowbytes;
 
-	const char* fullpaht = G_FILEPATH->getFilePath(filename);
+	const std::string& fullpath = G_FILEPATH->getFilePath(filename);
+	if (fullpath.empty())
+	{
+		return;
+	}
 
 	/* Open image file */
-	int result = fopen_s(&fp, filename, "rb");
+	int result = fopen_s(&fp, fullpath.c_str(), "rb");
 	if (result != 0)
 	{
 		return;

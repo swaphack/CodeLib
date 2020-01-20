@@ -25,9 +25,9 @@ ModelFile* ModelFile::getInstance()
 	return s_ModelFile;
 }
 
-Model* ModelFile::load(const char* filepath)
+Model* ModelFile::load(const std::string& filepath)
 {
-	if (filepath == nullptr)
+	if (filepath.empty())
 	{
 		return nullptr;
 	}
@@ -47,10 +47,10 @@ Model* ModelFile::load(const char* filepath)
 	return pModel;
 }
 
-T_ModelData* ModelFile::loadData(const char* filepath)
+T_ModelData* ModelFile::loadData(const std::string& filepath)
 {
-	const char* fullpath = G_FILEPATH->getFilePath(filepath);
-	if (fullpath == nullptr)
+	const std::string& fullpath = G_FILEPATH->getFilePath(filepath);
+	if (fullpath.empty())
 	{
 		return nullptr;
 	}
@@ -61,7 +61,7 @@ T_ModelData* ModelFile::loadData(const char* filepath)
 	}
 
 	tinyxml2::XMLDocument* pDoccument = new tinyxml2::XMLDocument();
-	tinyxml2::XMLError error = pDoccument->LoadFile(fullpath);
+	tinyxml2::XMLError error = pDoccument->LoadFile(fullpath.c_str());
 	if (error != tinyxml2::XML_SUCCESS)
 	{
 		delete pDoccument;

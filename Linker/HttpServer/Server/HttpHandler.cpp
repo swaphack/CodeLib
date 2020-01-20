@@ -134,7 +134,7 @@ bool HttpHandler::handRequest(sys::HttpReqDocument* pDocument, sys::HttpResponse
 		response.getDocument()->setHttpVersion("HTTP/1.1");
 		response.getDocument()->setResponseCode("200");
 		response.getDocument()->setDescribe("OK");
-		response.getDocument()->writeContentFile(url.c_str());
+		response.getDocument()->writeContentFile(url);
 
 		return true;
 	}

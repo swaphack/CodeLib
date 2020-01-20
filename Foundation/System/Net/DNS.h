@@ -1,6 +1,8 @@
 #pragma once
 
-#include "Base/Types.h"
+#include <string>
+#include <cstdint>
+#include <map>
 
 struct addrinfo;
 struct sockaddr_in;

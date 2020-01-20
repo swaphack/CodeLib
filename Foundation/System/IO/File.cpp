@@ -7,15 +7,15 @@
 
 using namespace sys;
 
-bool File::write(const char* url, const char* data, int64_t size, int64_t& writtenSize)
+bool File::write(const std::string& url, const char* data, int64_t size, int64_t& writtenSize)
 {
-	if (url == nullptr || data == nullptr)
+	if (url.empty() || data == nullptr)
 	{
 		return false;
 	}
 
 	FILE* fptr = nullptr;
-	fptr = fopen(url, "wb+");
+	fptr = fopen(url.c_str(), "wb+");
 	if (fptr == nullptr)
 	{
 		return false;
@@ -32,15 +32,15 @@ bool File::write(const char* url, const char* data, int64_t size, int64_t& writt
 	return true;
 }
 
-char* File::read(const char* url, int64_t& readSize)
+char* File::read(const std::string& url, int64_t& readSize)
 {
-	if (url == nullptr)
+	if (url.empty())
 	{
 		return nullptr;
 	}
 
 	FILE* fptr = nullptr;
-	fptr = fopen(url, "rb+");
+	fptr = fopen(url.c_str(), "rb+");
 	if (fptr == nullptr)
 	{
 		return nullptr;
@@ -60,10 +60,10 @@ char* File::read(const char* url, int64_t& readSize)
 	return str;
 }
 
-bool File::read(const char* url, std::string& data)
+bool File::read(const std::string& url, std::string& data)
 {
 	data = "";
-	if (url == nullptr)
+	if (url.empty())
 	{
 		return false;
 	}
@@ -83,15 +83,15 @@ bool File::read(const char* url, std::string& data)
 	return true;
 }
 
-bool File::append(const char* url, const char* data, int64_t size, int64_t& appendSize)
+bool File::append(const std::string& url, const char* data, int64_t size, int64_t& appendSize)
 {
-	if (url == nullptr || data == nullptr)
+	if (url.empty() || data == nullptr)
 	{
 		return false;
 	}
 
 	FILE* fptr = nullptr;
-	fptr = fopen(url, "ab+");
+	fptr = fopen(url.c_str(), "ab+");
 	if (fptr == nullptr)
 	{
 		return false;
@@ -108,15 +108,15 @@ bool File::append(const char* url, const char* data, int64_t size, int64_t& appe
 	return true;
 }
 
-bool File::exists(const char* url)
+bool File::exists(const std::string& url)
 {
-	if (url == nullptr)
+	if (url.empty())
 	{
 		return false;
 	}
 
 	FILE* fptr = nullptr;
-	fptr = fopen(url, "rb");
+	fptr = fopen(url.c_str(), "rb");
 	if (fptr == nullptr)
 	{
 		return false;
@@ -127,13 +127,13 @@ bool File::exists(const char* url)
 	return true;
 }
 
-File::File(const char* url)
+File::File(const std::string& url)
 	:File(url, 0)
 {
 	
 }
 
-File::File(const char* url, int32_t mode)
+File::File(const std::string& url, int32_t mode)
 	: m_pFile(nullptr)
 	, m_strUrl(url)
 	, m_nModel(mode)

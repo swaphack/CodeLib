@@ -40,12 +40,10 @@ CacheIdentity* CacheMgr::getCache(int32_t nID)
 	return iter->second;
 }
 
-CacheIdentity* CacheMgr::getCache(const char* name)
+CacheIdentity* CacheMgr::getCache(const std::string& name)
 {
-	if (name == nullptr)
-	{
-		return nullptr;
-	}
+	ASSERT(!name.empty());
+
 	std::map<std::string, CacheIdentity*>::iterator iter = _nameCaches.find(name);
 	if (iter == _nameCaches.end())
 	{
@@ -61,7 +59,7 @@ void CacheMgr::addCache(CacheIdentity* pCache)
 		return;
 	}
 
-	ASSERT(strcmp(pCache->getName(), "") != 0);
+	ASSERT(!pCache->getName().empty());
 	ASSERT(pCache->getID() != 0);
 
 	std::map<std::string, CacheIdentity*>::iterator iter = _nameCaches.find(pCache->getName());
@@ -80,7 +78,7 @@ void CacheMgr::removeCache(CacheIdentity* pCache)
 		return;
 	}
 
-	ASSERT(strcmp(pCache->getName(), "") != 0);
+	ASSERT(!pCache->getName().empty());
 
 	std::map<std::string, CacheIdentity*>::iterator iter = _nameCaches.find(pCache->getName());
 

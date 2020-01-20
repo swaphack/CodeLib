@@ -7,11 +7,11 @@
 
 using namespace sys;
 
+uint32_t Random::_seed = 0;
+
 Random::Random()
-:_min(0)
-, _max(1)
 {
-	srand(time(nullptr));
+	
 }
 
 Random::~Random()
@@ -19,43 +19,43 @@ Random::~Random()
 
 }
 
-
-Random* Random::getInstance()
-{
-	static Random* s_Random = nullptr;
-	if (s_Random == nullptr)
-	{
-		s_Random = new Random();
-	}
-	return s_Random;
-}
-
 void Random::setSeed(uint32_t seed)
 {
+	_seed = seed;
+
 	srand(seed);
 }
 
-void Random::setRange(float minValue, float maxValue)
+uint32_t Random::getSeed()
 {
-	ASSERT(minValue < maxValue);
-
-	_min = minValue;
-	_max = maxValue;
+	return _seed;
 }
 
-float Random::getNextNumber()
+float Random::getNumber(float minValue, float maxValue)
 {
-	float value = rand() *1.0f;
+	float min = minValue < maxValue ? minValue : maxValue;
+	float max = maxValue > minValue ? maxValue : minValue;
 
-	value = value / RAND_MAX * (_max - _min) + _min;
-
-	return value;
+	return getNumber0_1() * (max - min) + min;
 }
 
-int32_t Random::getNextint32eger()
+uint32_t Random::getNumber(uint32_t maxValue)
 {
-	int32_t value = rand();
-	value = value % (int32_t)(_max - _min) + _min;
-	return value;
+	return (uint32_t)getNumber0_1() * maxValue;
+}
+
+int32_t Random::getNumber(int32_t minValue, int32_t maxValue)
+{
+	return (int32_t)getNumber((float)minValue, (float)maxValue);
+}
+
+float Random::getNumber0_1()
+{
+	return rand() * 1.0f / RAND_MAX;
+}
+
+int32_t Random::getNumber0_max()
+{
+	return rand();
 }
 

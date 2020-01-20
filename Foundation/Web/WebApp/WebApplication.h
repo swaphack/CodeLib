@@ -24,7 +24,7 @@ namespace web
 			EST_CLIENT,
 		};
 	public:
-		WebApplication(const char* ip, int port, int maxWaitCount = WAIT_LISTEN_COUNT);
+		WebApplication(const std::string& ip, int port, int maxWaitCount = WAIT_LISTEN_COUNT);
 		virtual ~WebApplication();
 	public:
 		// 获取应用实例
@@ -42,13 +42,13 @@ namespace web
 		PacketActivityListener* getPacketListener();
 
 		// 反馈给目标
-		void postResponse(const char* sessionID, sys::NetData* data);
+		void postResponse(const std::string& sessionID, sys::NetData* data);
 		// 目标id
 		void postResponse(int clientID, sys::NetData* data);
 		// 广播
 		void postBroadcast(sys::NetData* data);
 		// 获取socket ID
-		int getSocketID(const char* sessionID);
+		int getSocketID(const std::string& sessionID);
 	public:
 		virtual void init();
 		virtual void update();

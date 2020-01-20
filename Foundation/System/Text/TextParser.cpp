@@ -1,6 +1,8 @@
 #include "TextParser.h"
 #include "IBlockParser.h"
 
+#include <cstdint>
+
 using namespace sys;
 
 

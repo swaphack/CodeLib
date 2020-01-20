@@ -1,5 +1,9 @@
 #include "macros.h"
 
+#include <cstring>
+#include <cstdarg>
+#include <cstdio>
+
 const char* getCString(const char* format, ...)
 {
 	static char g_StringValue[255] = { 0 };

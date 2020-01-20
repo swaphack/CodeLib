@@ -1,12 +1,6 @@
 #pragma once
 
 #include <cassert>
-#include <cstdlib>
-#include <cstdarg>
-#include <cstdio>
-#include <cstdlib>
-#include <cstring>
-#include <cstddef>
 
 #define SAFE_DELETE_ARRAY(x) { if(x) { delete[] (x); (x) = 0;} }
 #define SAFE_DELETE(x) { if(x) { delete(x); (x) = 0;} }
@@ -45,6 +39,21 @@
 #define RIGHT_PARENTHESIS ')'
 
 /* Miscellaneous useful macros */
+
+
+#include <cstring>
+
+#if PLATFORM_TARGET == EPT_WINDOWS
+#define LINE_MARK "\r\n"
+#elif PLATFORM_TARGET == EPT_MAC
+#define LINE_MARK "\r"
+#elif PLATFORM_TARGET == EPT_LINUX
+#define LINE_MARK "\n"
+#else
+#define LINE_MARK "\r\n"
+#endif
+
+#define LINE_EQUAL(ptr) (memcmp(ptr, LINE_MARK, strlen(LINE_MARK)) == 0)
 
 // 获取格式化的字符串，无需删除
 extern const char* getCString(const char* format, ...);

@@ -12,9 +12,9 @@ Sessions::~Sessions()
 	this->removeAllSessions();
 }
 
-void Sessions::addSession(const char* sessionID, const ClientSession& client)
+void Sessions::addSession(const std::string& sessionID, const ClientSession& client)
 {
-	if (sessionID == nullptr)
+	if (sessionID.empty())
 	{
 		return;
 	}
@@ -22,9 +22,9 @@ void Sessions::addSession(const char* sessionID, const ClientSession& client)
 	_clientSessions[sessionID] = client;
 }
 
-ClientSession* Sessions::getSession(const char* sessionID)
+ClientSession* Sessions::getSession(const std::string& sessionID)
 {
-	if (sessionID == nullptr)
+	if (sessionID.empty())
 	{
 		return nullptr;
 	}
@@ -53,9 +53,9 @@ ClientSession* Sessions::getSession(int clientID)
 	return nullptr;
 }
 
-void Sessions::removeSession(const char* sessionID)
+void Sessions::removeSession(const std::string& sessionID)
 {
-	if (sessionID == nullptr)
+	if (sessionID.empty())
 	{
 		return;
 	}

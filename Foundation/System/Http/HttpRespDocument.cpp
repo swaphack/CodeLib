@@ -31,25 +31,25 @@ bool HttpRespDocument::parseResponse(const char* msg, int32_t size)
 		return false;
 	}
 
-	return parse(msg, size);
+	return parse(std::string(msg, size));
 }
 
-const char* HttpRespDocument::getHttpVersion()
+std::string HttpRespDocument::getHttpVersion()
 {
 	return getStatus(0);
 }
 
-void HttpRespDocument::setHttpVersion(const char* version)
+void HttpRespDocument::setHttpVersion(const std::string& version)
 {
 	setStatus(0, version);
 }
 
-const char* HttpRespDocument::getResponseCode()
+std::string HttpRespDocument::getResponseCode()
 {
 	return getStatus(1);
 }
 
-void HttpRespDocument::setResponseCode(const char* code)
+void HttpRespDocument::setResponseCode(const std::string& code)
 {
 	setStatus(1, code);
 }
@@ -59,43 +59,43 @@ void HttpRespDocument::setResponseCode(int32_t code)
 	setResponseCode(getCString("%d", code));
 }
 
-const char* HttpRespDocument::getDescribe()
+std::string HttpRespDocument::getDescribe()
 {
 	return getStatus(2);
 }
 
-void HttpRespDocument::setDescribe(const char* desc)
+void HttpRespDocument::setDescribe(const std::string& desc)
 {
 	setStatus(2, desc);
 }
 
-void HttpRespDocument::setContentType(const char* value)
+void HttpRespDocument::setContentType(const std::string& value)
 {
 	this->setHeader(HttpResponeField::CONTENT_TYPE, value);
 }
 
 void HttpRespDocument::setContentLength(int32_t value)
 {
-	this->setint32egerHeader(HttpResponeField::CONTENT_LENGTH, value);
+	this->setIntegerHeader(HttpResponeField::CONTENT_LENGTH, value);
 }
 
 void HttpRespDocument::writeContentString(const std::string& value)
 {
-	this->setBody(value.c_str(), value.size());
+	this->setBody(value);
 
 	this->setContentLength(value.size());
 }
 
-void HttpRespDocument::writeContentFile(const char* filename)
+void HttpRespDocument::writeContentFile(const std::string& filename)
 {
-	if (filename == nullptr)
+	if (filename.empty())
 	{
 		return;
 	}
 
 	if (getResource())
 	{
-		getResource()->loadFileData(filename, [this](std::string& data)
+		getResource()->loadFileData(filename, [this](const std::string& data)
 		{
 			this->writeContentString(data);
 		});

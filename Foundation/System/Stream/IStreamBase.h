@@ -2,6 +2,8 @@
 
 #include "macros.h"
 
+#include <string>
+
 namespace sys
 {
 	// 流数据读取接口
@@ -41,7 +43,6 @@ namespace sys
 		virtual void writeUInt64(uint64_t data) = 0;
 		virtual void writeFloat(float data) = 0;
 		virtual void writeDouble(double data) = 0;
-		virtual void writeString(const char* data) = 0;
 		virtual void writeString(char* data, ss_t size) = 0;
 		virtual void writeString(const std::string& data) = 0;
 	};

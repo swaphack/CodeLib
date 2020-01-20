@@ -7,7 +7,7 @@
 namespace sys
 {
 	// http下载回调
-	typedef void (Object::*downloadCallback)(int32_t tag, const char* data, int32_t size);
+	typedef void (Object::*downloadCallback)(int32_t tag, const std::string& content);
 
 	// http下载处理
 	typedef std::pair<Object*, downloadCallback> OnHttpDownloadCallback;
@@ -34,7 +34,7 @@ namespace sys
 		@param callback 下载完成回调
 		@param tag 标示
 		*/
-		bool download(const char* url, int32_t port, const char* filepath, OnHttpDownloadCallback callback, int32_t tag);
+		bool download(const std::string& url, int32_t port, const std::string& filepath, OnHttpDownloadCallback callback, int32_t tag);
 
 		// 推送监听到的数据
 		void flushListenData(int32_t id);

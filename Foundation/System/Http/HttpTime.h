@@ -1,6 +1,9 @@
 #pragma once
 
-#include "Base/import.h"
+#include <string>
+#include <cstdint>
+
+#include "DateTime/Time.h"
 
 namespace sys
 {
@@ -16,18 +19,18 @@ namespace sys
 		static const int32_t TIME_COUNT = 255;
 		// 星期
 		static const char* TIME_WKDAY[7];
-		// 星期
+		// 星期	   c  har*
 		static const char* TIME_WEEKDAY[7];
-		// 月份
+		// 月份	   c  har*
 		static const char*	TIME_MONTH[12];
 	public:
 		// 获取 RFC 822 时间格式
-		static const char* getRFC822Time(Time* time);
+		static const std::string& getRFC822Time(Time* time);
 
 		// 获取 RFC 822 时间格式
-		static const char* getRFC850Time(Time* time);
+		static const std::string& getRFC850Time(Time* time);
 
 		// 获取 RFC 822 时间格式
-		static const char* getANSITime(Time* time);
+		static const std::string& getANSITime(Time* time);
 	};
 }

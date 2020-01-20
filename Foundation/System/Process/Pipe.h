@@ -1,11 +1,11 @@
-#include "Base/Types.h"
+
 
 namespace sys
 {
 	class Pipe
 	{
 	public:
-		Pipe(const char* name);
+		Pipe(const std::string& name);
 		~Pipe();
 	public:
 		void listen();

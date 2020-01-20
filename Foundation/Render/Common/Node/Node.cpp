@@ -163,7 +163,7 @@ Node* Node::getChildByName(const char* name)
 	while (iter != _children.end())
 	{
 		node = dynamic_cast<Node*>(*iter);
-		if (node && strcmp(node->getName(), name) == 0)
+		if (node && node->getName().compare(name) == 0)
 		{
 			return node;
 		}

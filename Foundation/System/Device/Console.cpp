@@ -16,7 +16,7 @@ Console::~Console()
 
 }
 
-const char* Console::readLine()
+const std::string& Console::readLine()
 {
 	char ch;
 	std::string line = "";
@@ -34,7 +34,7 @@ char Console::readChar()
 	return ch;
 }
 
-void Console::writeLine(const char* words)
+void Console::writeLine(const std::string& words)
 {
 	PRINT("%s", words);
 }

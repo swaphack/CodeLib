@@ -1,6 +1,7 @@
 #include "LocalResource.h"
 
-#include "Base/import.h"
+#include "Base/macros.h"
+#include "IO/File.h"
 
 using namespace sys;
 
@@ -14,9 +15,9 @@ LocalResource::~LocalResource()
 
 }
 
-bool LocalResource::loadFileData(const char* filename, GetDataCallback handler)
+bool LocalResource::loadFileData(const std::string& filename, GetDataCallback handler)
 {
-	if (filename == nullptr)
+	if (filename.empty())
 	{
 		return false;
 	}
@@ -28,7 +29,7 @@ bool LocalResource::loadFileData(const char* filename, GetDataCallback handler)
 	}
 
 	std::string data;
-	if (getCacheData(fullpath.c_str(), data))
+	if (getCacheData(fullpath, data))
 	{
 		if (handler)
 		{
@@ -37,7 +38,7 @@ bool LocalResource::loadFileData(const char* filename, GetDataCallback handler)
 		return true;
 	}
 
-	if (!File::read(fullpath.c_str(), data))
+	if (!File::read(fullpath, data))
 	{
 		return false;
 	}
@@ -51,7 +52,7 @@ bool LocalResource::loadFileData(const char* filename, GetDataCallback handler)
 	return true;
 }
 
-std::string LocalResource::getFullPath(const char* filename)
+std::string LocalResource::getFullPath(const std::string& filename)
 {
 	std::string fullpath;
 	if (File::exists(filename))
@@ -72,7 +73,7 @@ std::string LocalResource::getFullPath(const char* filename)
 	return fullpath;
 }
 
-bool LocalResource::getCacheData(const char* fullpath, std::string& data)
+bool LocalResource::getCacheData(const std::string& fullpath, std::string& data)
 {
 	data = "";
 	if (getCache() == nullptr)

@@ -1,6 +1,7 @@
 #pragma once
 
-#include "Types.h"
+#include <string>
+#include "mathlib.h"
 
 namespace sys
 {
@@ -10,42 +11,15 @@ namespace sys
 		Name() {}
 		virtual ~Name() {}
 	public:
-		void setName(const char* name)
-		{
-			if (name)
-			{
-				_name = name;
-			}
-		}
-
-		void setName(const std::string& name)
-		{
-			_name = name;
-		}
-
-		const char* getName() const
-		{
-			return _name.c_str();
-		}
-	private:
-		std::string _name;
+		CREATE_CLASS_MEMBER(std::string, Name);
 	};
 
 	class Identify
 	{
 	public:
-		Identify() :_id(0) {}
+		Identify() {}
 		virtual ~Identify() {}
 	public:
-		void setID(int32_t id)
-		{
-			_id = id;
-		}
-		int32_t getID()
-		{
-			return _id;
-		}
-	private:
-		int32_t _id;
+		CREATE_CLASS_MEMBER_WITH_DEFAULT(int32_t, ID, 0);
 	};
 }

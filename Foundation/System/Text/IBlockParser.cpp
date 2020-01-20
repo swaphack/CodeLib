@@ -1,5 +1,7 @@
 #include "IBlockParser.h"
-#include "Base/str.h"
+#include "Base/macros.h"
+#include <cstdint>
+
 using namespace sys;
 
 bool LineParser::readBlock(char* inPtr, std::string& outData)

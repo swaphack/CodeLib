@@ -11,12 +11,12 @@ namespace sys
 	{
 	public:
 		FileStream();
-		FileStream(const char* filepath);
+		FileStream(const std::string& filepath);
 		virtual ~FileStream();
 	public:
 		// 加载文件
-		void load(const char* filepath);
+		void load(const std::string& filepath);
 		// 保存文件
-		void save(const char* filepath);
+		void save(const std::string& filepath);
 	};
 }

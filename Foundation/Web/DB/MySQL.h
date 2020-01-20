@@ -18,7 +18,7 @@ namespace web
 		// 断开数据库连接
 		virtual bool disconnect();
 		// 执行sql语句
-		virtual bool executeSQL(const char* sqlExpression, sys::IDataSheet* pDataSheet = nullptr);
+		virtual bool executeSQL(const std::string& sqlExpression, sys::IDataSheet* pDataSheet = nullptr);
 		// 获取db操纵
 		virtual sys::IDBString* getDBString();
 	private:

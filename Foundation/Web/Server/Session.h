@@ -30,13 +30,13 @@ namespace web
 		virtual ~Sessions();
 	public:
 		// 添加http客户端信息
-		void addSession(const char* sessionID, const ClientSession& client);
+		void addSession(const std::string& sessionID, const ClientSession& client);
 		// 获取http客户端信息
-		ClientSession* getSession(const char* sessionID);
+		ClientSession* getSession(const std::string& sessionID);
 		// 获取http客户端信息
 		ClientSession* getSession(int clientID);
 		// 移除客户端信息
-		void removeSession(const char* sessionID);
+		void removeSession(const std::string& sessionID);
 		// 移除客户端信息
 		void removeClient(int clientID);
 		// 移除所有客户端信息

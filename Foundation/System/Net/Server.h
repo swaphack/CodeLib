@@ -16,7 +16,7 @@ namespace sys
 	{
 	public:
 		Server();
-		Server(const char* ip, int32_t port, int32_t backlog);
+		Server(const std::string& ip, int32_t port, int32_t backlog);
 		~Server();
 	public:
 		/*

@@ -2,7 +2,8 @@
 
 #include "IDataRecord.h"
 
-#include "Base/Types.h"
+#include <cstdint>
+#include <string>
 
 namespace sys
 {
@@ -14,7 +15,7 @@ namespace sys
 		// 设置关键字
 		virtual void setKey(const std::string& key) = 0;
 		// 查找关键字
-		virtual const char* getKey() = 0;
+		virtual const std::string& getKey() = 0;
 		// 创建一条带主键的记录
 		virtual IDataRecord* create() = 0;
 		// 索引记录

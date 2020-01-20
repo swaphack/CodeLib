@@ -20,7 +20,7 @@ namespace sys
 		// 窗口高度
 		virtual float getHeight() = 0;
 		// 标题
-		virtual const char* getTitle() = 0;
+		virtual std::string getTitle() = 0;
 		// 接受信号的处理
 		virtual bool onRecvSignal(Signal* signal) = 0;
 	public:// 外设

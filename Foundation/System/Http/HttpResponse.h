@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Base/Types.h"
+
 #include "HttpCommand.h"
 #include "HttpDocument.h"
 #include "Resource/import.h"
@@ -14,27 +14,27 @@ namespace sys
 		virtual ~HttpRespDocument();
 	public:
 		// 解析字符串，是否是http请求文档
-		bool parseResponse(const char* msg, int32_t size);
+		bool parseResponse(const char* msg, int32_t len);
 		// 版本
-		const char* getHttpVersion();
-		void setHttpVersion(const char* version);
+		std::string getHttpVersion();
+		void setHttpVersion(const std::string& version);
 		// 状态码
-		const char* getResponseCode();
-		void setResponseCode(const char* code);
+		std::string getResponseCode();
+		void setResponseCode(const std::string& code);
 		void setResponseCode(int32_t code);
 		// 说明
-		const char* getDescribe();
-		void setDescribe(const char* desc);
+		std::string getDescribe();
+		void setDescribe(const std::string& desc);
 
 		// 消息体文本格式
-		void setContentType(const char* value);
+		void setContentType(const std::string& value);
 		// 消息体文本长度
 		void setContentLength(int32_t value);
 
 		// 写入字符串
 		void writeContentString(const std::string& value);
 		// 写入文件
-		void writeContentFile(const char* filename);
+		void writeContentFile(const std::string& filename);
 
 		// 设置资源管理
 		void setResource(IResource* pResource);

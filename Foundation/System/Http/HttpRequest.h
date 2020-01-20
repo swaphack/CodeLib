@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Base/Types.h"
+
 #include "HttpCommand.h"
 #include "HttpDocument.h"
 
@@ -52,14 +52,14 @@ namespace sys
 		// 解析字符串，是否是http请求文档
 		bool parseRequest(const char* msg, int32_t size);
 		// 请求方式
-		const char* getMethod();
-		void setMethod(const char* method);
+		std::string getMethod();
+		void setMethod(const std::string& method);
 		// 请求地址
-		const char* getUrl();
-		void setUrl(const char* url);
+		std::string getUrl();
+		void setUrl(const std::string& url);
 		// 版本
-		const char* getHttpVersion();
-		void setHttpVersion(const char* version);
+		std::string getHttpVersion();
+		void setHttpVersion(const std::string& version);
 	};
 
 

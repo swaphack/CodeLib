@@ -12,9 +12,9 @@ Application::~Application()
 	this->clearProtocolManagers();
 }
 
-void Application::addProtocolManager( const char* protocolName, Object* protocolManager )
+void Application::addProtocolManager( const std::string& protocolName, Object* protocolManager )
 {
-	if (protocolName == nullptr || protocolManager == nullptr)
+	if (protocolName.empty() || protocolManager == nullptr)
 	{
 		return;
 	}
@@ -24,9 +24,9 @@ void Application::addProtocolManager( const char* protocolName, Object* protocol
 	_protocolManagers[protocolName] = protocolManager;
 }
 
-void Application::removeProtocolManager( const char* protocolName )
+void Application::removeProtocolManager( const std::string& protocolName )
 {
-	if (protocolName == nullptr)
+	if (protocolName.empty())
 	{
 		return;
 	}
@@ -43,9 +43,9 @@ void Application::removeProtocolManager( const char* protocolName )
 	_protocolManagers.erase(iter);
 }
 
-Object* Application::getProtocolManager( const char* protocolName )
+Object* Application::getProtocolManager( const std::string& protocolName )
 {
-	if (protocolName == nullptr)
+	if (protocolName.empty())
 	{
 		return nullptr;
 	}

@@ -15,25 +15,25 @@ DBContent::~DBContent()
 
 void DBContent::addTable( const DBTable& dbTable )
 {
-	if (dbTable.getName() == nullptr)
+	if (dbTable.getName().empty())
 	{
 		return;
 	}
 	_dbTables[dbTable.getName()] = dbTable;
 }
 
-void DBContent::removeTable( const char* tableName )
+void DBContent::removeTable( const std::string& tableName )
 {
-	if (tableName == nullptr)
+	if (tableName.empty())
 	{
 		return;
 	}
 	_dbTables.erase(tableName);
 }
 
-const DBTable* DBContent::getTable( const char* tableName )
+const DBTable* DBContent::getTable( const std::string& tableName )
 {
-	if (tableName == nullptr)
+	if (tableName.empty())
 	{
 		return nullptr;
 	}

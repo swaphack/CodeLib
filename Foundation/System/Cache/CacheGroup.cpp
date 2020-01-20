@@ -15,13 +15,8 @@ CacheGroup::~CacheGroup()
 
 }
 
-CacheGroup* CacheGroup::create(const char* name)
+CacheGroup* CacheGroup::create(const std::string& name)
 {
-	if (name == nullptr)
-	{
-		return nullptr;
-	}
-
 	CacheGroup* pCacheGroup = new CacheGroup();
 	pCacheGroup->setName(name);
 	pCacheGroup->setInControl(true);

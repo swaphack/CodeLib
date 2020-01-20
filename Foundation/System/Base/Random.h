@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Types.h"
+#include <cstdint>
 
 namespace sys
 {
@@ -9,23 +9,39 @@ namespace sys
 	{
 	private:
 		Random();
-	public:
 		~Random();
 	public:
-		static Random* getInstance();
-		// 设置种子
-		void setSeed(uint32_t seed);
-		// 设置区间
-		void setRange(float minValue, float maxValue);
-		// 获取下一个数值
-		float getNextNumber();
-		// 获取下一个整形
-		int32_t getNextint32eger();
-	protected:
+		/** 
+		*	设置种子
+		*/
+		static void setSeed(uint32_t seed);
+		/**
+		*	设置种子
+		*/
+		static uint32_t getSeed();
+	public:
+		/**
+		*	设置区间的浮点数
+		*/ 
+		static float getNumber(float minValue, float maxValue);
+		/**
+		*	获取下一个数值
+		*/  
+		static uint32_t getNumber(uint32_t maxValue);
+		/**
+		*	获取区间内的整形
+		*/   
+		static int32_t getNumber(int32_t minValue, int32_t maxValue);
+	public:
+		/**
+		*	设置区间的浮点数
+		*/
+		static float getNumber0_1();
+		/**
+		*	设置区间的浮点数
+		*/
+		static int32_t getNumber0_max();
 	private:
-		// 最小值
-		float _min;
-		// 最大值
-		float _max;
+		static uint32_t _seed;
 	};
 }

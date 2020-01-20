@@ -1,6 +1,7 @@
 #pragma once
 
-#include "Base/Types.h"
+#include <queue>
+#include <string>
 
 namespace sys
 {

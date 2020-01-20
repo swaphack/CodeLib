@@ -99,7 +99,7 @@ Socket::~Socket()
 	close();
 }
 
-void Socket:: bind(const char* addr, int32_t port, bool ipv6)
+void Socket:: bind(const std::string& addr, int32_t port, bool ipv6)
 {
 	struct sockaddr_in addrSrv;  
 	EndPoint point32(addr, port, ipv6);
@@ -132,7 +132,7 @@ Socket* Socket::accept()
 	return new Socket(sock);
 }
 
-bool Socket::connect(const char* addr, int32_t port, bool ipv6)
+bool Socket::connect(const std::string& addr, int32_t port, bool ipv6)
 {
 	struct sockaddr_in addrSrv;
 	EndPoint point32(addr, port, ipv6);
@@ -147,7 +147,7 @@ bool Socket::connect(const char* addr, int32_t port, bool ipv6)
 	return result;
 }
 
-int32_t Socket::write( const char* data, int32_t size )
+int32_t Socket::write(const char* data, int32_t size)
 {
 	return ::send(_sock, data, size, 0);
 }
@@ -209,9 +209,9 @@ int32_t Socket::getID()
 	return _sock;
 }
 
-const char* Socket::getLocalIP()
+const std::string& Socket::getLocalIP()
 {
-	return _localEP.addr.c_str();
+	return _localEP.addr;
 }
 
 int32_t Socket::getLocalPort()
@@ -219,9 +219,9 @@ int32_t Socket::getLocalPort()
 	return _localEP.port;
 }
 
-const char* Socket::getRemoteIP()
+const std::string& Socket::getRemoteIP()
 {
-	return _remoteEP.addr.c_str();
+	return _remoteEP.addr;
 }
 
 int32_t Socket::getRemotePort()

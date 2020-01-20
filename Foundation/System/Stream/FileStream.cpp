@@ -1,7 +1,8 @@
 #include "FileStream.h"
 #include "StreamBase.h"
 
-#include "Base/import.h"
+#include "IO/File.h"
+#include "Base/macros.h"
 
 using namespace sys;
 
@@ -10,7 +11,7 @@ FileStream::FileStream()
 {
 }
 
-FileStream::FileStream(const char* filepath)
+FileStream::FileStream(const std::string& filepath)
 :Stream(new StreamBaseRef())
 {
 	this->load(filepath);
@@ -22,9 +23,9 @@ FileStream::~FileStream()
 	SAFE_DELETE(_baseStream);
 }
 
-void FileStream::load(const char* filepath)
+void FileStream::load(const std::string& filepath)
 {
-	if (filepath == nullptr)
+	if (filepath.empty())
 	{
 		return;
 	}
@@ -39,9 +40,9 @@ void FileStream::load(const char* filepath)
 	this->setData(data, size);
 }
 
-void FileStream::save(const char* filepath)
+void FileStream::save(const std::string& filepath)
 {
-	if (filepath == nullptr)
+	if (filepath.empty())
 	{
 		return;
 	}

@@ -19,9 +19,9 @@ HttpActivity::~HttpActivity()
 	G_HTTPAPPLICATION->getHttpListener()->removeRecvHandler(this, static_cast<HTTP_RECV_RESPONE_HANDLER>(&HttpActivity::onReceiveResponse));
 }
 
-void HttpActivity::onReceiveRequest(const char* sessionID, sys::HttpRequest* request)
+void HttpActivity::onReceiveRequest(const std::string& sessionID, sys::HttpRequest* request)
 {
-	if (sessionID == nullptr || request == nullptr)
+	if (sessionID.empty() || request == nullptr)
 	{
 		return;
 	}
@@ -30,9 +30,9 @@ void HttpActivity::onReceiveRequest(const char* sessionID, sys::HttpRequest* req
 	this->doGetRequest(request);
 }
 
-void HttpActivity::onReceiveResponse(const char* sessionID, sys::HttpResponse* response)
+void HttpActivity::onReceiveResponse(const std::string& sessionID, sys::HttpResponse* response)
 {
-	if (sessionID == nullptr || response == nullptr)
+	if (sessionID.empty() || response == nullptr)
 	{
 		return;
 	}
@@ -62,7 +62,7 @@ void HttpActivity::doPostResponse(sys::HttpResponse* response)
 	response->makeMessage();
 	//response->setSessionID(_sessionID.c_str());
 
-	G_HTTPAPPLICATION->postResponse(_sessionID.c_str(), new sys::NetData(response->getMessage(), response->getMessageSize()));
+	G_HTTPAPPLICATION->postResponse(_sessionID, new sys::NetData(response->getMessage()));
 }
 
 void HttpActivity::doPostResponse(sys::HttpRequest* request)
@@ -75,7 +75,7 @@ void HttpActivity::doPostResponse(sys::HttpRequest* request)
 	request->makeMessage();
 	//request->setSessionID(_sessionID.c_str());
 
-	G_HTTPAPPLICATION->postResponse(_sessionID.c_str(), new sys::NetData(request->getMessage(), request->getMessageSize()));
+	G_HTTPAPPLICATION->postResponse(_sessionID, new sys::NetData(request->getMessage()));
 }
 
 void HttpActivity::doPostResponse(int destID, sys::HttpResponse* response)
@@ -88,7 +88,7 @@ void HttpActivity::doPostResponse(int destID, sys::HttpResponse* response)
 	response->makeMessage();
 	//response->setSessionID(_sessionID.c_str());
 
-	G_HTTPAPPLICATION->postResponse(destID, new sys::NetData(response->getMessage(), response->getMessageSize()));
+	G_HTTPAPPLICATION->postResponse(destID, new sys::NetData(response->getMessage()));
 }
 
 void HttpActivity::doPostRequest(int destID, sys::HttpRequest* request)
@@ -101,12 +101,12 @@ void HttpActivity::doPostRequest(int destID, sys::HttpRequest* request)
 	request->makeMessage();
 	//request->setSessionID(_sessionID.c_str());
 
-	G_HTTPAPPLICATION->postResponse(destID, new sys::NetData(request->getMessage(), request->getMessageSize()));
+	G_HTTPAPPLICATION->postResponse(destID, new sys::NetData(request->getMessage()));
 }
 
-void HttpActivity::doPostResponse(const char* sessionID, sys::HttpResponse* response)
+void HttpActivity::doPostResponse(const std::string& sessionID, sys::HttpResponse* response)
 {
-	if (sessionID == nullptr || response == nullptr)
+	if (sessionID.empty() || response == nullptr)
 	{
 		return;
 	}
@@ -114,12 +114,12 @@ void HttpActivity::doPostResponse(const char* sessionID, sys::HttpResponse* resp
 	response->makeMessage();
 	//response->setSessionID(_sessionID.c_str());
 
-	G_HTTPAPPLICATION->postResponse(sessionID, new sys::NetData(response->getMessage(), response->getMessageSize()));
+	G_HTTPAPPLICATION->postResponse(sessionID, new sys::NetData(response->getMessage()));
 }
 
-void HttpActivity::doPostRequest(const char* sessionID, sys::HttpRequest* request)
+void HttpActivity::doPostRequest(const std::string& sessionID, sys::HttpRequest* request)
 {
-	if (sessionID == nullptr || request == nullptr)
+	if (sessionID.empty() || request == nullptr)
 	{
 		return;
 	}
@@ -127,7 +127,7 @@ void HttpActivity::doPostRequest(const char* sessionID, sys::HttpRequest* reques
 	request->makeMessage();
 	//request->setSessionID(_sessionID.c_str());
 
-	G_HTTPAPPLICATION->postResponse(sessionID, new sys::NetData(request->getMessage(), request->getMessageSize()));
+	G_HTTPAPPLICATION->postResponse(sessionID, new sys::NetData(request->getMessage()));
 }
 
 void HttpActivity::doBroadCast(sys::HttpResponse* response)
@@ -140,7 +140,7 @@ void HttpActivity::doBroadCast(sys::HttpResponse* response)
 	response->makeMessage();
 	//response->setSessionID(_sessionID.c_str());
 
-	G_HTTPAPPLICATION->postBroadcast(new sys::NetData(response->getMessage(), response->getMessageSize()));
+	G_HTTPAPPLICATION->postBroadcast(new sys::NetData(response->getMessage()));
 }
 
 void HttpActivity::doBroadCast(sys::HttpRequest* request)
@@ -153,7 +153,7 @@ void HttpActivity::doBroadCast(sys::HttpRequest* request)
 	request->makeMessage();
 	//request->setSessionID(_sessionID.c_str());
 
-	G_HTTPAPPLICATION->postBroadcast(new sys::NetData(request->getMessage(), request->getMessageSize()));
+	G_HTTPAPPLICATION->postBroadcast(new sys::NetData(request->getMessage()));
 }
 
 

@@ -58,13 +58,13 @@ bool MySQL::disconnect()
 	return true;
 }
 
-bool MySQL::executeSQL(const char* sqlExpression, sys::IDataSheet* pDataSheet /*= nullptr*/)
+bool MySQL::executeSQL(const std::string& sqlExpression, sys::IDataSheet* pDataSheet /*= nullptr*/)
 {
-	if (sqlExpression == nullptr)
+	if (sqlExpression.empty())
 	{
 		return false;
 	}
-	int result = mysql_real_query(_instance, sqlExpression, strlen(sqlExpression));
+	int result = mysql_real_query(_instance, sqlExpression.c_str(), strlen(sqlExpression.c_str()));
 	if (result != 0)
 	{
 		return false;

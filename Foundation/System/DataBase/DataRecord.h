@@ -14,11 +14,11 @@ namespace sys
 		/**
 		*	获取指定参数的值
 		*/
-		virtual const char* getValue(const char* key);
+		virtual std::string getValue(const std::string& key);
 		/**
 		*	设置键值对
 		*/
-		virtual void setValue(const char* key, const char* value);
+		virtual void setValue(const std::string& key, const std::string& value);
 	private:
 		// 键值对数据
 		std::map<std::string, std::string> _values;

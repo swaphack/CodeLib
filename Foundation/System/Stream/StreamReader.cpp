@@ -1,4 +1,5 @@
 #include "StreamReader.h"
+#include "Base/macros.h"
 
 using namespace sys;
 

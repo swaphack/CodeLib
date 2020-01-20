@@ -1,7 +1,7 @@
 #pragma once
 
 #include <ctime>
-#include "Base/Types.h"
+#include <cstdint>
 
 namespace sys
 {

@@ -1,6 +1,7 @@
 #include "HttpDocument.h"
-#include "Type/import.h"
+#include "Base/macros.h"
 #include "HttpTime.h"
+#include "Type/String.h"
 
 #define STATUS_KEY_VALUE_SIGN " "
 #define HEADER_KEY_VALUE_SIGN ": "
@@ -20,9 +21,9 @@ HttpDocument::~HttpDocument()
 	SAFE_DELETE(_stream);
 }
 
-bool HttpDocument::parse(const char* msg, int32_t size)
+bool HttpDocument::parse(const std::string& msg)
 {
-	_stream->initWithText(msg, size);
+	_stream->initWithText(msg);
 	_stream->setCursor(0);
 	do 
 	{
@@ -50,7 +51,7 @@ bool HttpDocument::save(std::string& msg)
 	std::vector<std::string>::const_iterator iter = _statusSection.begin();
 	while (true)
 	{
-		ss.writeString((*iter).c_str(), (*iter).size());
+		ss.writeString(*iter);
 
 		iter++;
 
@@ -79,19 +80,19 @@ bool HttpDocument::save(std::string& msg)
 	return true;
 }
 
-const char* HttpDocument::getStatus(int32_t index)
+std::string HttpDocument::getStatus(int32_t index)
 {
 	if (index < 0 || index >= _headerSection.size())
 	{
-		return nullptr;
+		return "";
 	}
 
-	return _statusSection[index].c_str();
+	return _statusSection[index];
 }
 
-void HttpDocument::setStatus(int32_t index, const char* value)
+void HttpDocument::setStatus(int32_t index, const std::string& value)
 {
-	if (index < 0 || index >= _statusSection.size() || value == nullptr)
+	if (index < 0 || index >= _statusSection.size() || value.empty())
 	{
 		return;
 	}
@@ -99,38 +100,38 @@ void HttpDocument::setStatus(int32_t index, const char* value)
 	_statusSection[index] = value;
 }
 
-const char* HttpDocument::getHeader(const char* key)
+std::string HttpDocument::getHeader(const std::string& key)
 {
-	if (key == nullptr)
+	if (key.empty())
 	{
-		return nullptr;
+		return "";
 	}
 
 	std::map<std::string, std::string>::const_iterator it = _headerSection.find(key);
 	if (it != _headerSection.end())
 	{
-		return it->second.c_str();
+		return it->second;
 	}
 
-	return nullptr;
+	return "";
 }
 
-bool HttpDocument::getint32egerHeader(const char* key, int32_t& value)
+bool HttpDocument::getIntegerHeader(const std::string& key, int32_t& value)
 {
-	const char* data = getHeader(key);
-	if (data == nullptr)
+	const std::string& data = getHeader(key);
+	if (data.empty())
 	{
 		return false;
 	}
 
-	value = atoi(data);
+	value = atoi(data.c_str());
 
 	return true;
 }
 
-void HttpDocument::removeHeader(const char* key)
+void HttpDocument::removeHeader(const std::string& key)
 {
-	if (key == nullptr )
+	if (key.empty())
 	{
 		return;
 	}
@@ -143,9 +144,9 @@ void HttpDocument::removeHeader(const char* key)
 	_headerSection.erase(key);
 }
 
-void HttpDocument::setHeader(const char* key, const char* value)
+void HttpDocument::setHeader(const std::string& key, const std::string& value)
 {
-	if (key == nullptr || value == nullptr)
+	if (key.empty())
 	{
 		return;
 	}
@@ -153,26 +154,26 @@ void HttpDocument::setHeader(const char* key, const char* value)
 	_headerSection[key] = value;
 }
 
-void HttpDocument::setDateHeader(const char* key, Time* value)
+void HttpDocument::setDateHeader(const std::string& key, Time* value)
 {
-	String strTime = HttpTime::getRFC822Time(value);
+	std::string strTime = HttpTime::getRFC822Time(value);
 
-	this->setHeader(key, strTime.getString());
+	this->setHeader(key, strTime);
 }
 
-void HttpDocument::setint32egerHeader(const char* key, int32_t value)
+void HttpDocument::setIntegerHeader(const std::string& key, int32_t value)
 {
 	this->setHeader(key, getCString("%d", value));
 }
 
-void HttpDocument::setBody(const char* value, int32_t size)
+void HttpDocument::setBody(const std::string& value)
 {
-	_bodySection = std::string(value, size);
+	_bodySection = value;
 }
 
-const char* HttpDocument::getBody()
+const std::string& HttpDocument::getBody()
 {
-	return _bodySection.c_str();
+	return _bodySection;
 }
 
 int32_t HttpDocument::getBodySize()

@@ -1,4 +1,5 @@
 #include "HttpTime.h"
+#include "Base/macros.h"
 
 using namespace sys;
 
@@ -10,7 +11,7 @@ const char* HttpTime::TIME_MONTH[12] = { "Jan", "Feb", "Mar", "Apr", "May", "Jun
 
 //////////////////////////////////////////////////////////////////////////
 /* Sun, 06 Nov 1994 08:49:37 GMT */
-const char* HttpTime::getRFC822Time(Time* time)
+const std::string& HttpTime::getRFC822Time(Time* time)
 {
 	if (time == nullptr)
 	{
@@ -27,7 +28,7 @@ const char* HttpTime::getRFC822Time(Time* time)
 }
 
 /* Sunday, 06-Nov-94 08:49:37 GMT */
-const char* HttpTime::getRFC850Time(Time* time)
+const std::string& HttpTime::getRFC850Time(Time* time)
 {
 	if (time == nullptr)
 	{
@@ -44,7 +45,7 @@ const char* HttpTime::getRFC850Time(Time* time)
 }
 
 /* Sun Nov  6 08:49:37 1994 */
-const char* HttpTime::getANSITime(Time* time)
+const std::string& HttpTime::getANSITime(Time* time)
 {
 	if (time == nullptr)
 	{

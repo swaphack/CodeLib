@@ -198,7 +198,7 @@ bool DBManager::updateMemory(const char* tableName, const std::map<std::string, 
 
 	sys::IDataRecord* pDataRecord = nullptr;
 	bool bFind = true;
-	const char* keyValue = nullptr;
+	std::string keyValue;
 	int count = pDataSheet->count();
 	for (int i = 0; i < count; i++)
 	{
@@ -206,9 +206,9 @@ bool DBManager::updateMemory(const char* tableName, const std::map<std::string, 
 		pDataRecord = (sys::IDataRecord*)(*pDataSheet)[i];
 		while (iter != keys.end())
 		{
-			keyValue = pDataRecord->getValue(iter->first.c_str());
-			if ((keyValue == nullptr)
-				|| (strcmp(keyValue, iter->second.c_str()) != 0))
+			keyValue = pDataRecord->getValue(iter->first);
+			if ((keyValue.empty())
+				|| (keyValue != iter->second))
 			{
 				bFind = false;
 				break;
@@ -221,7 +221,7 @@ bool DBManager::updateMemory(const char* tableName, const std::map<std::string, 
 			iter = values.begin();
 			while (iter != values.end())
 			{
-				pDataRecord->setValue(iter->first.c_str(), iter->second.c_str());
+				pDataRecord->setValue(iter->first, iter->second);
 				iter++;
 			}
 		}

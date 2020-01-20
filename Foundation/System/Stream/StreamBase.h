@@ -1,8 +1,10 @@
 #pragma once
 
-#include "Base/Types.h"
+
 #include "IStreamBase.h"
 #include "StreamHelper.h"
+
+#include <cstring>
 
 namespace sys
 {

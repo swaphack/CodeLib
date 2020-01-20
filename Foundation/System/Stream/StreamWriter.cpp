@@ -1,5 +1,5 @@
 #include "StreamWriter.h"
-
+#include "Base/macros.h"
 #include <cstring>
 #include <cstdlib>
 
@@ -72,13 +72,6 @@ void StreamWriter::writeFloat( float data )
 void StreamWriter::writeDouble( double data )
 {
 	this->write<double>(data);
-}
-
-void StreamWriter::writeString(const char* data )
-{
-	int32_t size = strlen(data);
-
-	this->writeString((char*)data, size);
 }
 
 void StreamWriter::writeString(char* data, ss_t size)

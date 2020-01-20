@@ -1,7 +1,6 @@
 #pragma once
 
-#include "Base/import.h"
-#include <stdint.h>
+#include <cstdint>
 
 namespace sys
 {

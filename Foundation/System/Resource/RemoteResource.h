@@ -24,16 +24,16 @@ namespace sys
 		virtual ~RemoteResource();
 	public:
 		// 名称
-		virtual const char* getName() { return "REMOTE"; }
+		virtual std::string getName() { return "REMOTE"; }
 		// 加载文件
-		bool loadFileData(const char* filename, GetDataCallback handler);
+		bool loadFileData(const std::string& filename, GetDataCallback handler);
 	protected:
 		// 获取完整路径
-		std::string getFullPath(const char* filename);
+		std::string getFullPath(const std::string& filename);
 		// 获取数据
-		bool getCacheData(const char* fullpath, std::string& data);
+		bool getCacheData(const std::string& fullpath, std::string& data);
 		// 下载数据
-		void onDownloadCallback(int32_t tag, const char* data, int32_t size);
+		void onDownloadCallback(int32_t tag, const std::string& data);
 	private:
 		// 递增标识
 		static int32_t s_Tag;

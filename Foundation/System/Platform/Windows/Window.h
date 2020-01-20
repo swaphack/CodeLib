@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Platform/macros.h"
-#include "Base/Types.h"
+
 #include <windows.h>
 
 namespace sys
@@ -13,7 +13,7 @@ namespace sys
 		Window();
 		virtual ~Window();
 	public:
-		virtual void initWindow(const char* title, int32_t width, int32_t height);
+		virtual void initWindow(const std::string& title, int32_t width, int32_t height);
 	public:
 		// 窗口句柄
 		inline HWND getWnd() { return _wnd; }
@@ -26,7 +26,7 @@ namespace sys
 		// 窗口高度
 		virtual float getHeight() { return _height;  }
 		// 标题
-		virtual const char* getTitle() { return _title.c_str(); }
+		virtual std::string getTitle() { return _title.c_str(); }
 		// 接受信号的处理
 		virtual bool onRecvSignal(Signal* signal);
 	public:// 外设

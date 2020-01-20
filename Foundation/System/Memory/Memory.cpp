@@ -28,9 +28,9 @@ Memory* Memory::getInstance()
 	return s_pMemory;
 }
 
-PtrCache* Memory::alloct(const char* name, uint32_t size)
+PtrCache* Memory::alloct(const std::string& name, uint32_t size)
 {
-	ASSERT(name != nullptr && size > 0);
+	ASSERT(name.empty() && size > 0);
 	ASSERT(_caches.find(name) != _caches.end());
 
 	char* ptr = (char*)malloc(size);
@@ -43,9 +43,9 @@ PtrCache* Memory::alloct(const char* name, uint32_t size)
 	return ptrCache;
 }
 
-void Memory::destory(const char* name)
+void Memory::destory(const std::string& name)
 {
-	if (name == nullptr) return;
+	if (name.empty()) return;
 
 	std::map<std::string, PtrCache*>::iterator iter = _caches.find(name);
 	if (iter == _caches.end())
