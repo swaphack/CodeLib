@@ -6,8 +6,6 @@ using namespace render;
 
 math::Volume Tool::GL_VIEW_SIZE = math::Volume();
 
-Dimensions Tool::E_DIMENSIONS = ED_NONE;
-
 void Tool::setGLViewSize(float width, float height)
 {
 	GL_VIEW_SIZE.set(width, height, width > height ? width : height);
@@ -26,16 +24,6 @@ float Tool::getGLViewWidth()
 float Tool::getGLViewHeight()
 {
 	return GL_VIEW_SIZE.getHeight();
-}
-
-Dimensions Tool::getDimensions()
-{
-	return E_DIMENSIONS;
-}
-
-void Tool::setDimensions(Dimensions d)
-{
-	E_DIMENSIONS = d;
 }
 
 math::Vector3 Tool::convertToRadian(const math::Vector3& src)

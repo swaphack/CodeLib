@@ -16,10 +16,10 @@ Scene::~Scene()
 
 bool Scene::init()
 {
-	// Ä£ÐÍ¾ØÕó
-	glMatrixMode(GL_MODELVIEW);
-	//glLoadIdentity();
-
+	if (!Node::init())
+	{
+		return false;
+	}
 	return true;
 }
 
@@ -31,14 +31,4 @@ View* Scene::getView()
 void Scene::setView(View* view)
 {
 	_view = view;
-}
-
-Camera* Scene::getCamera()
-{
-	if (_view == nullptr)
-	{
-		return nullptr;
-	}
-
-	return _view->getCamera();
 }

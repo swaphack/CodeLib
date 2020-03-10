@@ -1,44 +1,68 @@
 #pragma once
 
-#include "system.h"
+#include "Common/Node/Node.h"
 #include "../GL/import.h"
 
 namespace render
 {
+	// 维度模式
+	enum CameraDimensions
+	{
+		ED_NONE,
+		ED_2D,
+		ED_3D
+	};
+
+	// 视窗参数
+	struct CameraParams
+	{
+		float xLeft = 0;
+		float xRight = 0;
+		float yBottom = 0;
+		float yTop = 0;
+		float zNear = 0;
+		float zFar = 0;
+	};
+
 	// 摄像机
-	class Camera : public sys::Object,
-		public DirtyProtocol,
-		public SpaceProtocol,
-		public BodyProtocol
+	class Camera : public Node
 	{
 	public:
 		Camera();
 		virtual ~Camera();
 	public:
-		virtual void updateCamera();
-		// 相机对准指定位置
-		virtual void lookAt(const math::Vector3& position);
+		static Camera* getMainCamera();
+		static void setMainCamera(CameraDimensions d);
+	public:
+		virtual bool init();
+	public:
+		// 获取维度
+		CameraDimensions getDimensions();
+	public:
+		// 设置视窗参数
+		void setParams(float left, float right, float bottom, float top, float zNear, float zFar);
+		// 获取视窗参数
+		const CameraParams& getParams();
 	protected:
-		virtual void onSpaceChange();
-	protected:
-		// 摄像机位置
-		//sys::Vector _position;
-		// 摄像机旋转角度
-		//sys::Vector _rotation;
-		// 摄像机焦距
-		//sys::Vector _scale;
-		// opengl 位置
-		math::Vector3 _obPosition;
+		// 更新空间位置
+		virtual void updateTranform();
+		// 设置维度
+		void setDimensions(CameraDimensions d);
+	private:
+		// 主摄像头
+		static Camera* _mainCamera;
+		// 维度
+		CameraDimensions _dimensions;
+		// 参数
+		CameraParams _cameraParams;
 	};
+
 	// 2d 摄像头
 	class Camera2D : public Camera
 	{
 	public:
 		Camera2D();
 		virtual ~Camera2D();
-	public:
-		// 绘制视图
-		virtual void updateCamera();
 	};
 	// 3d 摄像头
 	class Camera3D : public Camera
@@ -47,7 +71,7 @@ namespace render
 		Camera3D();
 		virtual ~Camera3D();
 	public:
-		// 绘制视图
-		virtual void updateCamera();
+		// 相机对准指定位置
+		virtual void lookAt(const math::Vector3& position);
 	};
 }

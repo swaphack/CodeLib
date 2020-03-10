@@ -133,6 +133,7 @@
     <ClCompile Include="Graphic\Command\DrawCommander.cpp" />
     <ClCompile Include="Graphic\Command\DrawCommandList.cpp" />
     <ClCompile Include="Graphic\Command\GUID.cpp" />
+    <ClCompile Include="Graphic\DCSample\DCCamera.cpp" />
     <ClCompile Include="Graphic\DCSample\DCDraw.cpp" />
     <ClCompile Include="Graphic\DCSample\DCMask.cpp" />
     <ClCompile Include="Graphic\DCSample\DCMatrix.cpp" />
@@ -251,6 +252,7 @@
     <ClInclude Include="Graphic\Command\DrawCommander.h" />
     <ClInclude Include="Graphic\Command\import.h" />
     <ClInclude Include="Graphic\Command\macros.h" />
+    <ClInclude Include="Graphic\DCSample\DCCamera.h" />
     <ClInclude Include="Graphic\DCSample\DCDraw.h" />
     <ClInclude Include="Graphic\DCSample\DCMask.h" />
     <ClInclude Include="Graphic\DCSample\DCMatrix.h" />

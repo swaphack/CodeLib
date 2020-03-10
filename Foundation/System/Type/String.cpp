@@ -53,7 +53,9 @@ String& String::operator=(const String& value)
 
 String& String::operator=(const std::string& value)
 {
-	*this = value.c_str();
+	char* temp = StreamHelper::mallocStream(value.capacity(), (void*)value.c_str(), value.size());
+	StreamHelper::freeStream(_value);
+	_value = temp;
 	return *this;
 }
 

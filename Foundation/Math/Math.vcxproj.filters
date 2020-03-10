@@ -58,20 +58,23 @@
     <Filter Include="Basic\Collection">
       <UniqueIdentifier>{9809d955-e9ec-48ca-8e7c-55b83802c125}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Algebra\Polynomial">
+      <UniqueIdentifier>{ad49d5d5-d5f0-44d3-94b8-4614c4766456}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Algebra\Vector">
+      <UniqueIdentifier>{0a5c7e14-9484-4a7e-9c98-1e0b9e8f7d3d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Algebra\Matrix">
+      <UniqueIdentifier>{7d0e7bd1-1ee4-4955-b749-2cc9fc5579d4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Algebra\Determinant">
+      <UniqueIdentifier>{35c0a8d7-0d8b-4bc5-8a24-879fca9fbd35}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Algebra\Quaternion">
+      <UniqueIdentifier>{7d7b407e-ac3b-49a9-8eff-c4dc936c0449}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Algebra\Polynomial.h">
-      <Filter>Algebra</Filter>
-    </ClInclude>
-    <ClInclude Include="Algebra\Matrix.h">
-      <Filter>Algebra</Filter>
-    </ClInclude>
-    <ClInclude Include="Algebra\Determinant.h">
-      <Filter>Algebra</Filter>
-    </ClInclude>
-    <ClInclude Include="Algebra\Vector.h">
-      <Filter>Algebra</Filter>
-    </ClInclude>
     <ClInclude Include="Geometry\2d\Circle.h">
       <Filter>Geometry\2d</Filter>
     </ClInclude>
@@ -100,24 +103,6 @@
       <Filter>Geometry</Filter>
     </ClInclude>
     <ClInclude Include="mathlib.h" />
-    <ClInclude Include="Geometry\base\Matrix33.h">
-      <Filter>Geometry\base</Filter>
-    </ClInclude>
-    <ClInclude Include="Geometry\base\Matrix41.h">
-      <Filter>Geometry\base</Filter>
-    </ClInclude>
-    <ClInclude Include="Geometry\base\Matrix44.h">
-      <Filter>Geometry\base</Filter>
-    </ClInclude>
-    <ClInclude Include="Geometry\base\Quaternion.h">
-      <Filter>Geometry\base</Filter>
-    </ClInclude>
-    <ClInclude Include="Geometry\base\Vector2.h">
-      <Filter>Geometry\base</Filter>
-    </ClInclude>
-    <ClInclude Include="Geometry\base\Vector3.h">
-      <Filter>Geometry\base</Filter>
-    </ClInclude>
     <ClInclude Include="Geometry\3d\Cuboids.h">
       <Filter>Geometry\3d</Filter>
     </ClInclude>
@@ -145,17 +130,11 @@
     <ClInclude Include="Geometry\base\Plane.h">
       <Filter>Geometry\base</Filter>
     </ClInclude>
-    <ClInclude Include="Geometry\base\Matrix22.h">
-      <Filter>Geometry\base</Filter>
-    </ClInclude>
     <ClInclude Include="Geometry\base\Polar2.h">
       <Filter>Geometry\base</Filter>
     </ClInclude>
     <ClInclude Include="Geometry\base\Polar3.h">
       <Filter>Geometry\base</Filter>
-    </ClInclude>
-    <ClInclude Include="Algebra\Matrixi.h">
-      <Filter>Algebra</Filter>
     </ClInclude>
     <ClInclude Include="Basic\Array.h">
       <Filter>Basic</Filter>
@@ -394,21 +373,63 @@
     <ClInclude Include="Discrete\PropositionLogic\EquivalenceRule.h">
       <Filter>Discrete\PropositionLogic</Filter>
     </ClInclude>
+    <ClInclude Include="Algebra\Matrix\Matrix.h">
+      <Filter>Algebra\Matrix</Filter>
+    </ClInclude>
+    <ClInclude Include="Algebra\Matrix\Matrixi.h">
+      <Filter>Algebra\Matrix</Filter>
+    </ClInclude>
+    <ClInclude Include="Algebra\Determinant\Determinant.h">
+      <Filter>Algebra\Determinant</Filter>
+    </ClInclude>
+    <ClInclude Include="Algebra\Vector\Vector.h">
+      <Filter>Algebra\Vector</Filter>
+    </ClInclude>
+    <ClInclude Include="Algebra\Polynomial\Polynomial.h">
+      <Filter>Algebra\Polynomial</Filter>
+    </ClInclude>
+    <ClInclude Include="Algebra\Polynomial\UnaryPolynomial.h">
+      <Filter>Algebra\Polynomial</Filter>
+    </ClInclude>
+    <ClInclude Include="Algebra\Quaternion\Quaternion.h">
+      <Filter>Algebra\Quaternion</Filter>
+    </ClInclude>
+    <ClInclude Include="Algebra\Matrix\Matrix22.h">
+      <Filter>Algebra\Matrix</Filter>
+    </ClInclude>
+    <ClInclude Include="Algebra\Matrix\Matrix33.h">
+      <Filter>Algebra\Matrix</Filter>
+    </ClInclude>
+    <ClInclude Include="Algebra\Matrix\Matrix41.h">
+      <Filter>Algebra\Matrix</Filter>
+    </ClInclude>
+    <ClInclude Include="Algebra\Matrix\Matrix44.h">
+      <Filter>Algebra\Matrix</Filter>
+    </ClInclude>
+    <ClInclude Include="Algebra\Vector\Vector2.h">
+      <Filter>Algebra\Vector</Filter>
+    </ClInclude>
+    <ClInclude Include="Algebra\Vector\Vector3.h">
+      <Filter>Algebra\Vector</Filter>
+    </ClInclude>
+    <ClInclude Include="Algebra\Matrix\import.h">
+      <Filter>Algebra\Matrix</Filter>
+    </ClInclude>
+    <ClInclude Include="Algebra\Determinant\import.h">
+      <Filter>Algebra\Determinant</Filter>
+    </ClInclude>
+    <ClInclude Include="Algebra\Quaternion\import.h">
+      <Filter>Algebra\Quaternion</Filter>
+    </ClInclude>
+    <ClInclude Include="Algebra\Vector\import.h">
+      <Filter>Algebra\Vector</Filter>
+    </ClInclude>
+    <ClInclude Include="Algebra\Polynomial\import.h">
+      <Filter>Algebra\Polynomial</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Algebra\Polynomial.cpp">
-      <Filter>Algebra</Filter>
-    </ClCompile>
-    <ClCompile Include="Algebra\Matrix.cpp">
-      <Filter>Algebra</Filter>
-    </ClCompile>
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Algebra\Determinant.cpp">
-      <Filter>Algebra</Filter>
-    </ClCompile>
-    <ClCompile Include="Algebra\Vector.cpp">
-      <Filter>Algebra</Filter>
-    </ClCompile>
     <ClCompile Include="Geometry\2d\Polygon.cpp">
       <Filter>Geometry\2d</Filter>
     </ClCompile>
@@ -420,24 +441,6 @@
     </ClCompile>
     <ClCompile Include="Geometry\2d\Rect.cpp">
       <Filter>Geometry\2d</Filter>
-    </ClCompile>
-    <ClCompile Include="Geometry\base\Matrix33.cpp">
-      <Filter>Geometry\base</Filter>
-    </ClCompile>
-    <ClCompile Include="Geometry\base\Matrix41.cpp">
-      <Filter>Geometry\base</Filter>
-    </ClCompile>
-    <ClCompile Include="Geometry\base\Matrix44.cpp">
-      <Filter>Geometry\base</Filter>
-    </ClCompile>
-    <ClCompile Include="Geometry\base\Quaternion.cpp">
-      <Filter>Geometry\base</Filter>
-    </ClCompile>
-    <ClCompile Include="Geometry\base\Vector2.cpp">
-      <Filter>Geometry\base</Filter>
-    </ClCompile>
-    <ClCompile Include="Geometry\base\Vector3.cpp">
-      <Filter>Geometry\base</Filter>
     </ClCompile>
     <ClCompile Include="Geometry\base\Size.cpp">
       <Filter>Geometry\base</Filter>
@@ -463,17 +466,11 @@
     <ClCompile Include="Geometry\2d\Circle.cpp">
       <Filter>Geometry\2d</Filter>
     </ClCompile>
-    <ClCompile Include="Geometry\base\Matrix22.cpp">
-      <Filter>Geometry\base</Filter>
-    </ClCompile>
     <ClCompile Include="Geometry\base\Polar2.cpp">
       <Filter>Geometry\base</Filter>
     </ClCompile>
     <ClCompile Include="Geometry\base\Polar3.cpp">
       <Filter>Geometry\base</Filter>
-    </ClCompile>
-    <ClCompile Include="Algebra\Matrixi.cpp">
-      <Filter>Algebra</Filter>
     </ClCompile>
     <ClCompile Include="Number\None.cpp">
       <Filter>Number</Filter>
@@ -618,6 +615,45 @@
     </ClCompile>
     <ClCompile Include="Discrete\PropositionLogic\EquivalenceRule.cpp">
       <Filter>Discrete\PropositionLogic</Filter>
+    </ClCompile>
+    <ClCompile Include="Algebra\Matrix\Matrix.cpp">
+      <Filter>Algebra\Matrix</Filter>
+    </ClCompile>
+    <ClCompile Include="Algebra\Matrix\Matrixi.cpp">
+      <Filter>Algebra\Matrix</Filter>
+    </ClCompile>
+    <ClCompile Include="Algebra\Determinant\Determinant.cpp">
+      <Filter>Algebra\Determinant</Filter>
+    </ClCompile>
+    <ClCompile Include="Algebra\Vector\Vector.cpp">
+      <Filter>Algebra\Vector</Filter>
+    </ClCompile>
+    <ClCompile Include="Algebra\Polynomial\Polynomial.cpp">
+      <Filter>Algebra\Polynomial</Filter>
+    </ClCompile>
+    <ClCompile Include="Algebra\Polynomial\UnaryPolynomial.cpp">
+      <Filter>Algebra\Polynomial</Filter>
+    </ClCompile>
+    <ClCompile Include="Algebra\Quaternion\Quaternion.cpp">
+      <Filter>Algebra\Quaternion</Filter>
+    </ClCompile>
+    <ClCompile Include="Algebra\Matrix\Matrix22.cpp">
+      <Filter>Algebra\Matrix</Filter>
+    </ClCompile>
+    <ClCompile Include="Algebra\Matrix\Matrix33.cpp">
+      <Filter>Algebra\Matrix</Filter>
+    </ClCompile>
+    <ClCompile Include="Algebra\Matrix\Matrix41.cpp">
+      <Filter>Algebra\Matrix</Filter>
+    </ClCompile>
+    <ClCompile Include="Algebra\Matrix\Matrix44.cpp">
+      <Filter>Algebra\Matrix</Filter>
+    </ClCompile>
+    <ClCompile Include="Algebra\Vector\Vector2.cpp">
+      <Filter>Algebra\Vector</Filter>
+    </ClCompile>
+    <ClCompile Include="Algebra\Vector\Vector3.cpp">
+      <Filter>Algebra\Vector</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -16,9 +16,9 @@ namespace render
 		// 更新动作
 		void update(float interval);
 		// 设置维度
-		void setDimensions(Dimensions d);
+		void setDimensions(CameraDimensions d);
 		// 获取维度
-		Dimensions getDimensions();
+		CameraDimensions getDimensions();
 		// 设置视窗
 		void setViewPort(float x, float y, float width, float height);
 		// 获取场景
@@ -29,15 +29,13 @@ namespace render
 		inline const TouchManager* getTouchManager() { return _touchManager; }
 		// 绘制管理
 		inline const DrawCommander* getDrawCommander() { return _drawCommander; }
-		// 获取摄像机
-		Camera* getCamera();
 	private:
 		// 场景
 		Scene* _root;
 		// 视图
 		View* _view;
 		// 维度
-		Dimensions _dimensions;
+		CameraDimensions _dimensions;
 		// 动作管理
 		ActionManager* _actionManager;
 		// 触摸管理

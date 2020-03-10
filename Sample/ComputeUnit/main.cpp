@@ -26,7 +26,7 @@ int main(int argc, char** argv)
 
 
 	const char* filename = "main.cl";
-	const char* doorname = "main";
+	const char* doorname = "main_func";
 	size_t filesize = 0;
 	const char* content = read_file(filename, filesize);
 	if (content == NULL)

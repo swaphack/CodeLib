@@ -397,9 +397,6 @@
     <ClInclude Include="CSS\Margin.h">
       <Filter>CSS</Filter>
     </ClInclude>
-    <ClInclude Include="Image\Color.h">
-      <Filter>Image</Filter>
-    </ClInclude>
     <ClInclude Include="Image\import.h">
       <Filter>Image</Filter>
     </ClInclude>
@@ -623,9 +620,6 @@
     </ClCompile>
     <ClCompile Include="Type\Bit.cpp">
       <Filter>Type</Filter>
-    </ClCompile>
-    <ClCompile Include="Image\Color.cpp">
-      <Filter>Image</Filter>
     </ClCompile>
     <ClCompile Include="CSS\Margin.cpp">
       <Filter>CSS</Filter>

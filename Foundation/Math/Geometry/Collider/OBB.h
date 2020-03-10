@@ -1,7 +1,6 @@
 #pragma once
 
-#include "Geometry/base/Vector2.h"
-#include "Geometry/base/Vector3.h"
+#include "Algebra/import.h"
 #include "Geometry/2d/LineSegment2.h"
 #include "Geometry/3d/LineSegment.h"
 

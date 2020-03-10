@@ -336,7 +336,6 @@ void Node::updateTranform()
 	{
 		G_DRAWCOMMANDER->addCommand(DCSpace::create(_obPosition, _scale, _rotation, _bRelative));
 	}
-	
 }
 
 void Node::updateSelf()

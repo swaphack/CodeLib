@@ -1,6 +1,6 @@
 #include "Line3.h"
 #include "Plane.h"
-#include "Matrix22.h"
+#include "Algebra/import.h"
 
 #include <cassert>
 

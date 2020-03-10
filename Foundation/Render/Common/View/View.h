@@ -2,7 +2,6 @@
 
 #include "system.h"
 #include "ViewConfig.h"
-#include "Camera.h"
 #include "../GL/import.h"
 
 namespace render
@@ -23,18 +22,13 @@ namespace render
 		void setFrameSize(float width, float height);
 		// 获取视窗大小
 		const math::Size& getFrameSize();
-		// 设置摄像机
-		void setCamera(Camera* camera);
-		// 获取摄像机
-		Camera* getCamera();
-		// 设置缩放比
-		void setScale(float x, float y, float z);
-		// 获取缩放比
-		math::Vector3 getScale();
 		// 重置视图
 		void initView();
 		// 更新视图
 		virtual void updateView();
+	protected:
+		// 应用设置
+		void applyConfig();
 	protected:
 		// 视窗位置
 		math::Vector2 _position;
@@ -42,9 +36,5 @@ namespace render
 		math::Size _size;
 		// 视图配置
 		ViewConfig _viewConfig;
-		// 摄像机
-		Camera* _camera;
-		// 设置缩放比
-		math::Vector3 _scale;
 	};
 }

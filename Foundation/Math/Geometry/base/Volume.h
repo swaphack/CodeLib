@@ -1,14 +1,13 @@
 #pragma once
 
-#include "Algebra/Vector.h"
-#include "Vector3.h"
+#include "Algebra/import.h"
 
 namespace math
 {
 	/**
 	*	Με»ύ
 	*/
-	struct Volume : protected Vector
+	struct Volume : public Vector
 	{
 	public:
 		Volume();

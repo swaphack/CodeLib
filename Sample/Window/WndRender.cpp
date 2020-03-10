@@ -6,13 +6,13 @@ using namespace ui;
 
 WndRender::WndRender()
 {
-	this->init();
 	this->getCanvas()->setDimensions(render::ED_2D);
+
+	//this->getCanvas()->setDimensions(render::ED_3D);
 }
 
 WndRender::~WndRender()
 {
-	this->dispose();
 }
 
 void WndRender::show()
@@ -21,10 +21,8 @@ void WndRender::show()
 // 	Texture2D* pTexture = G_TEXTURE_CACHE->getTexture2D(imageDefine);
 // 	pTexture->retain();
 	
-	testMoveImage();
+	//testMoveImage();
 	//testClock();
-	//testCubeModel();
-	//testSphereModel();
 	//testText();
 	//testMask();
 	//testMedia();
@@ -34,16 +32,15 @@ void WndRender::show()
 	//testStencil();
 	//testCamera();
 	//testEditBox();
-	testImages();
+
+	// have bug
+	//testImages();
+
 	//testString();
+	//
 	//testPixelImage();
 	//testSequenceFrame();
-
-	//testFog();
-	//addLight();
-	
 	//
-	//testModel();
 	//testClipPlane();
 	//testScissor();
 	//
@@ -58,6 +55,12 @@ void WndRender::show()
 	//testAudio();
 	//testAudio3D();
 	//testLayout();
+	//
+	//addLight();
+	//testFog();
+	testCubeModel();
+	//testSphereModel();
+	testModel();
 }
 
 void WndRender::testMoveImage()
@@ -107,9 +110,9 @@ void WndRender::testCubeModel()
 		frame->setTextureWithRect(texture2D);
 
 		Cube* pModel = CREATE_NODE(Cube);
-		pModel->setPosition(i * 150, i * 150, i * 150);
+		pModel->setPosition(0, 0, 100);
 		pModel->setTexFrame(frame);
-		pModel->setVolume(100, 100, 100);
+		pModel->setVolume(200, 200, 200);
 		pModel->setRotation(45, 45, 0);
 		pModel->getMatrial()->setShiness(1.0f);
 		pModel->getMatrial()->setAmbient(255, 255, 255, 255);
@@ -251,7 +254,7 @@ void WndRender::testFog()
 	Fog* pFog = CREATE_NODE(Fog);
 	pFog->setDensity(0.015);
 	pFog->setNear(0);
-	pFog->setFar(100);
+	pFog->setFar(1000);
 	pFog->setColor(125, 125, 125, 125);
 	this->getCanvas()->getRoot()->addChild(pFog);
 } 
@@ -307,7 +310,7 @@ void WndRender::testStencil()
 
 void WndRender::testCamera()
 {
-	Camera* camera = this->getCanvas()->getCamera();
+	Camera* camera = Camera::getMainCamera();
 	G_KEYBOARDMANAGER->addDispatcher(camera, this, KEYBOARD_DELEGATTE_SELECTOR(WndRender::onKeyBoardCamera));
 }
 
@@ -365,7 +368,6 @@ void WndRender::testImages()
 		pChild->setRotation(0, 0, 30);
 		pImage->addChild(pChild);
 		pImage = pChild;
-		pChild = nullptr;
 	}
 }
 
@@ -396,7 +398,7 @@ void WndRender::testString()
 void WndRender::addLight()
 {
 	Light0* pSpotLight = CREATE_NODE(Light0);
-	pSpotLight->setPosition(0, 0, 200);
+	pSpotLight->setPosition(0, 0, 50);
 	pSpotLight->setAmbient(255, 255, 255, 255);
 	pSpotLight->setDiffuse(255, 255, 255, 255);
 	pSpotLight->setSpecular(255, 255, 255, 255);
@@ -621,17 +623,18 @@ void WndRender::onKeyBoardRole(sys::Object* object, sys::BoardKey key, sys::Butt
 void WndRender::testModel()
 {
 	Model* pModel = ModelFile::getInstance()->load("Resource/3DModel/Test.xml");
-
 	this->getCanvas()->getRoot()->addChild(pModel);
 
-	pModel->setPosition(512, 384);
+	pModel->setPosition(100, 100, 100);
 	pModel->setColor(0, 255, 0);
+	//pModel->setVolume(100, 100, 100);
 	pModel->getMatrial()->setAmbient(255, 255, 255, 255);
 	pModel->getMatrial()->setDiffuse(255, 255, 255, 255);
 	pModel->getMatrial()->setSpecular(255, 0, 0, 255);
 	pModel->getMatrial()->setEmisiion(255, 0, 0, 255);
 	pModel->getMatrial()->setShiness(0.5f);
 
+	/*
 	int count = 1024;
 	float interval = 5;
 	float rx = 360;
@@ -641,7 +644,7 @@ void WndRender::testModel()
 	pRotateToAction->setRotation(rx * count, ry * count, rz * count);
 	pRotateToAction->setDuration(interval * count);
 	pModel->getActionProxy()->runAction(pRotateToAction);
-
+	*/
 	//this->getCanvas()->getCamera()->lookAt(pModel->getPosition());
 }
 

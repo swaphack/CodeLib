@@ -17,10 +17,6 @@ namespace render
 		static float getGLViewWidth();
 		static float getGLViewHeight();
 
-		// 获取当前维度模式，2d还是3d
-		static Dimensions getDimensions();
-		static void setDimensions(Dimensions d);
-
 		// 角度转弧度
 		static math::Vector3 convertToRadian(const math::Vector3& src);
 		// 角度转弧度
@@ -84,7 +80,5 @@ namespace render
 	private:
 		// 视窗大小
 		static math::Volume GL_VIEW_SIZE;
-		// 维度模式
-		static Dimensions E_DIMENSIONS;
 	};
 }

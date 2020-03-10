@@ -47,6 +47,8 @@ void Material::applyDefault()
 	glMaterialfv(GL_FRONT, GL_SPECULAR, matrialSpecular);
 	glMaterialfv(GL_FRONT, GL_SHININESS, &matrialShiness);
 	glMaterialfv(GL_FRONT, GL_EMISSION, matrialEmission);
+
+	SHOW_OPENGL_ERROR_MESSAGE();
 }
 
 void Material::apply()
@@ -56,6 +58,8 @@ void Material::apply()
 	glMaterialfv(GL_FRONT, GL_SPECULAR, _matrialSpecular);
 	glMaterialfv(GL_FRONT, GL_SHININESS, &_matrialShiness);
 	glMaterialfv(GL_FRONT, GL_EMISSION, _matrialEmission);
+
+	SHOW_OPENGL_ERROR_MESSAGE();
 }
 
 void Material::setAmbient(uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha)

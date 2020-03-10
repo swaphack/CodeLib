@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Geometry/base/Vector3.h"
+#include "Algebra/import.h"
 #include "Geometry/base/Volume.h"
 
 namespace math

@@ -27,7 +27,7 @@ void CtrlScissor::visit()
 		return;
 	}
 
-	if (Tool::getDimensions() == ED_2D)
+	if (Camera::getMainCamera()->getDimensions() == ED_2D)
 	{
 		math::Rect rect = makeRect();
 
@@ -51,7 +51,7 @@ void CtrlScissor::visit()
 	}	
 
 	Node::visit();
-	if (Tool::getDimensions() == ED_2D)
+	if (Camera::getMainCamera()->getDimensions() == ED_2D)
 	{
 		s_nScissorCount--;
 

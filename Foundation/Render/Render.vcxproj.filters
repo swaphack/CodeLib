@@ -231,6 +231,9 @@
     <ClCompile Include="3d\Shape\SphereModel.cpp">
       <Filter>3d\Shape</Filter>
     </ClCompile>
+    <ClCompile Include="Graphic\DCSample\DCCamera.cpp">
+      <Filter>Graphic\DCSample</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Common\GL\import.h">
@@ -635,6 +638,9 @@
     </ClInclude>
     <ClInclude Include="3d\Shape\SphereModel.h">
       <Filter>3d\Shape</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphic\DCSample\DCCamera.h">
+      <Filter>Graphic\DCSample</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

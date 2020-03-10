@@ -1,7 +1,6 @@
 #pragma once
 
-#include "Algebra/Vector.h"
-#include "Vector2.h"
+#include "Algebra/import.h"
 
 namespace math
 {

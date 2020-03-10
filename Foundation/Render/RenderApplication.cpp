@@ -15,11 +15,13 @@ RenderApplication::RenderApplication()
 	,_refreshInterval(REFRESH_INTERVAL)
 {
 	s_application = this;
+
+	this->init();
 }
 
 RenderApplication::~RenderApplication()
 {
-	
+	this->dispose();
 }
 
 void RenderApplication::init()

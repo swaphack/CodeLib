@@ -1,5 +1,5 @@
-#include "Algebra/Matrix.h"
-#include "Geometry/base/Matrix22.h"
+#include "Algebra/import.h"
+#include "Geometry/import.h"
 #include "Discrete/PropositionLogic/import.h"
 #include <iostream>
 

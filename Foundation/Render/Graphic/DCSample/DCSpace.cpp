@@ -13,6 +13,9 @@ DCSpace::~DCSpace()
 
 void DCSpace::draw()
 {
+	// 模型矩阵
+	glMatrixMode(GL_MODELVIEW);
+
 	if (!this->Relative)
 	{
 		glLoadIdentity();
@@ -24,8 +27,7 @@ void DCSpace::draw()
 	glRotatef(Rotation.getZ(), 0, 0, 1);
 	glScalef(Scale.getX(), Scale.getY(), Scale.getZ());	
 
-	GLfloat value0[16] = { 0 };
-	glGetFloatv(GL_MODELVIEW_MATRIX, value0);
+	SHOW_OPENGL_ERROR_MESSAGE();
 }
 
 DCSpace* DCSpace::create(const math::Vector3& position, const math::Vector3& scale, const math::Vector3& rotation, bool relative)
@@ -52,6 +54,9 @@ DCSpaceMatrix::~DCSpaceMatrix()
 
 void DCSpaceMatrix::draw()
 {
+	// 模型矩阵
+	glMatrixMode(GL_MODELVIEW);
+
 	if (!this->Relative)
 	{
 		glLoadIdentity();
@@ -60,6 +65,8 @@ void DCSpaceMatrix::draw()
 	GLfloat value[16] = { 0 };
 	Matrix.getValue(value, 16);
 	glMultMatrixf(value);
+
+	SHOW_OPENGL_ERROR_MESSAGE();
 }
 
 DCSpaceMatrix* DCSpaceMatrix::create(const math::Matrix& matrix, bool relative)

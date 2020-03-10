@@ -55,5 +55,45 @@
 
 #define LINE_EQUAL(ptr) (memcmp(ptr, LINE_MARK, strlen(LINE_MARK)) == 0)
 
+/**
+*	创建类成员
+*/
+#ifndef CREATE_CLASS_MEMBER_WITH_DEFAULT
+#define CREATE_CLASS_MEMBER_WITH_DEFAULT(Type, Name, DefaultValue) \
+public:\
+	Type get##Name() const { return _##Name; }\
+	void set##Name(Type val) { _##Name = val; } \
+private: Type _##Name = DefaultValue;
+#endif
+
+/**
+*	创建类成员
+*/
+#ifndef CREATE_CLASS_MEMBER
+#define CREATE_CLASS_MEMBER(Type, Name) \
+public:\
+	Type get##Name() const { return _##Name; }\
+	void set##Name(Type val) { _##Name = val; } \
+private: Type _##Name;
+#endif
+
+/**
+*	创建类成员
+*/
+#ifndef CREATE_CLASS_VECTOR_MEMBER
+#define CREATE_CLASS_VECTOR_MEMBER(Type, Name, VectorName, Index) \
+public:\
+	Type get##Name() const { return (Type)VectorName[Index]; }\
+	void set##Name(Type val) { VectorName[Index] = val; }
+#endif
+
+/**
+*	将目标值转化到指定区间内
+*/
+#ifndef ADJUST_DURATION_VALUE_RANGE
+#define ADJUST_DURATION_VALUE_RANGE(a, min, max, range)\
+			while (a < min) a+= range; while (a > max) a-=range;
+#endif
+
 // 获取格式化的字符串，无需删除
 extern const char* getCString(const char* format, ...);

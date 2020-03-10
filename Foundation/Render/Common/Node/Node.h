@@ -141,7 +141,9 @@ namespace render
 		// 子节点发生改变
 		virtual void onChildrenChange();
 	private:
+		// 使用矩阵计算空间变化属性
 		void calRealSpaceByMatrix();
+		// 使用常量计算空间变化属性
 		void calRealSpaceByValue();
 	protected:
 		// opengl 位置

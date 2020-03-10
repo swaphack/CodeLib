@@ -14,9 +14,9 @@ Model::Model()
 
 Model::~Model()
 {
-	SAFE_FREE(_material);
-	SAFE_FREE(_texFrame);
-	SAFE_FREE(_mesh);
+	SAFE_DELETE(_material);
+	SAFE_DELETE(_texFrame);
+	SAFE_DELETE(_mesh);
 }
 
 void Model::draw()
@@ -25,6 +25,10 @@ void Model::draw()
 	if (_material)
 	{
 		_material->apply();
+	}
+	else
+	{
+		Material::applyDefault();
 	}
 
 	if (_mesh)
@@ -36,8 +40,6 @@ void Model::draw()
 		}
 		_mesh->apply(textureID, _color, _opacity, _blend);
 	}
-	
-	Material::applyDefault();
 }
 
 void Model::setMatrial(const Material* material)

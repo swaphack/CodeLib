@@ -5,7 +5,9 @@ using namespace render;
 Canvas::Canvas()
 :_dimensions(ED_NONE)
 {
-	_root = new Scene();
+	_root = CREATE_NODE(Scene);
+	_root->retain();
+
 	_view = new View();
 	_root->setView(_view);
 
@@ -27,7 +29,10 @@ void Canvas::draw()
 	_view->initView();
 	_view->updateView();
 
-	_root->init();
+	Camera* mainCamera = Camera::getMainCamera();
+	ASSERT(mainCamera != nullptr);
+	mainCamera->visit();
+
 	_root->visit();
 
 	_drawCommander->flush();
@@ -43,31 +48,17 @@ void Canvas::update(float interval)
 	G_AUDIO->update();
 }
 
-void Canvas::setDimensions(Dimensions d)
+void Canvas::setDimensions(CameraDimensions d)
 {
 	if (_dimensions == d)
 	{
 		return;
 	}
 	_dimensions = d;
-	Tool::setDimensions(d);
-
-	if (_dimensions == ED_2D)
-	{
-		_view->setCamera(new Camera2D());
-	}
-	else if (_dimensions == ED_3D)
-	{
-		_view->setCamera(new Camera3D());
-	}
-	else
-	{
-		_view->setCamera(nullptr);
-	}
-	_view->setDirty(true);
+	Camera::setMainCamera(d);
 }
 
-Dimensions Canvas::getDimensions()
+CameraDimensions Canvas::getDimensions()
 {
 	return _dimensions;
 }
@@ -83,14 +74,4 @@ void Canvas::setViewPort(float x, float y, float width, float height)
 Scene* Canvas::getRoot()
 {
 	return _root;
-}
-
-Camera* Canvas::getCamera()
-{
-	if (_view == nullptr)
-	{
-		return nullptr;
-	}
-
-	return _view->getCamera();
 }

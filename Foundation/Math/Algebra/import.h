@@ -1,9 +1,11 @@
 #pragma once
 
-#include "Polynomial.h"
+#include "Polynomial/import.h"
 
-#include "Vector.h"
+#include "Vector/import.h"
 
-#include "Determinant.h"
+#include "Determinant/import.h"
 
-#include "Matrix.h"
+#include "Matrix/import.h"
+
+#include "Polynomial/import.h"

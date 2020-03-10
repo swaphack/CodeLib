@@ -27,7 +27,8 @@ Vector3 LineSegment::getVector() const
 
 bool LineSegment::contains(const Vector3& point)
 {
-	Cuboids cuboids(src, dest - src);
+	Vector3 p = dest - src;
+	Cuboids cuboids(src, p);
 	if (!cuboids.contains(point))
 	{
 		return false;

@@ -44,7 +44,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <BrowseInformation>true</BrowseInformation>
-      <AdditionalIncludeDirectories>$(ProjectDir)/../Math/;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -123,7 +123,6 @@
     <ClInclude Include="Http\HttpResponse.h" />
     <ClInclude Include="Http\HttpTime.h" />
     <ClInclude Include="Http\import.h" />
-    <ClInclude Include="Image\Color.h" />
     <ClInclude Include="Image\ColorSample.h" />
     <ClInclude Include="Image\import.h" />
     <ClInclude Include="IO\Directory.h" />
@@ -221,7 +220,6 @@
     <ClCompile Include="Http\HttpRespDocument.cpp" />
     <ClCompile Include="Http\HttpResponse.cpp" />
     <ClCompile Include="Http\HttpTime.cpp" />
-    <ClCompile Include="Image\Color.cpp" />
     <ClCompile Include="Image\ColorSample.cpp" />
     <ClCompile Include="IO\Directory.cpp" />
     <ClCompile Include="IO\File.cpp" />

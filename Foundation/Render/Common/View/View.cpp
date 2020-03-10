@@ -5,14 +5,11 @@ using namespace render;
 
 
 View::View()
-:_camera(nullptr)
 {
-	_scale = math::Vector3(1,1,1);
 }
 
 View::~View()
 {
-	SAFE_DELETE(_camera);
 }
 
 const ViewConfig* View::getConfig()
@@ -41,43 +38,19 @@ const math::Size& View::getFrameSize()
 	return _size;
 }
 
-void View::setCamera(Camera* camera)
-{
-	SAFE_DELETE(_camera);
-
-	_camera = camera;
-}
-
-Camera* View::getCamera()
-{
-	return _camera;
-}
-
-void View::setScale(float x, float y, float z)
-{
-	_scale.setX(x);
-	_scale.setY(y);
-	_scale.setZ(z);
-
-	_camera->setScale(_scale);
-}
-
-math::Vector3 View::getScale()
-{
-	return _scale;
-}
-
 void View::initView()
 {
 	if (isDirty())
 	{
 		// 定义视窗位置
 		glViewport((int)_position.getX(), (int)_position.getY(), (int)_size.getWidth(), (int)_size.getHeight());
-		glMatrixMode(GL_PROJECTION);
-		glLoadIdentity();
+
 		setDirty(false);
 	}
-	_viewConfig.apply();
+
+	this->applyConfig();
+
+	SHOW_OPENGL_ERROR_MESSAGE();
 }
 
 void View::updateView()
@@ -86,8 +59,45 @@ void View::updateView()
 	glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
 	glClearDepth(1.0f);
 	glClearStencil(0);
-	if (_camera)
-	{
-		_camera->updateCamera();
-	}
+
+	SHOW_OPENGL_ERROR_MESSAGE();
+}
+
+void View::applyConfig()
+{
+	SHOW_OPENGL_ERROR_MESSAGE();
+
+	glShadeModel(GL_SMOOTH);
+	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+	glClearDepth(1.0f);
+	glClearStencil(0);
+	glEnable(GL_DEPTH_TEST);
+	glDepthFunc(GL_LEQUAL);
+	glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
+
+	SHOW_OPENGL_ERROR_MESSAGE();
+
+	/*
+	glEnable(GL_POINT_SMOOTH);
+	glHint(GL_POINT_SMOOTH, GL_DONT_CARE);
+
+	SHOW_OPENGL_ERROR_MESSAGE();
+
+	glEnable(GL_LINE_SMOOTH);
+	glHint(GL_LINE_SMOOTH, GL_DONT_CARE);
+
+	SHOW_OPENGL_ERROR_MESSAGE();
+
+	glEnable(GL_POLYGON_SMOOTH);
+	glHint(GL_POLYGON_SMOOTH, GL_DONT_CARE);
+
+	SHOW_OPENGL_ERROR_MESSAGE();
+	*/
+
+	glEnableClientState(GL_VERTEX_ARRAY);
+	glEnableClientState(GL_NORMAL_ARRAY);
+	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+	glEnableClientState(GL_COLOR_ARRAY);
+
+	SHOW_OPENGL_ERROR_MESSAGE();
 }

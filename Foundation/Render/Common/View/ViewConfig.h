@@ -18,9 +18,7 @@ namespace render
 	public:
 		// 重置
 		void reset();
-		// 应用
-		void apply();
-
+		// 添加配置参数
 		void addSetting(ViewSetting vs, int mark);
 	private:
 		// 设置

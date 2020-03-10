@@ -20,11 +20,18 @@ void DCTextureBatch::draw()
 {
 	//glEnable(GL_DEPTH_TEST);
 	glEnable(GL_BLEND);
+
+	SHOW_OPENGL_ERROR_MESSAGE();
+
 	glBlendFunc(Blend.src, Blend.dest);
 	glColor4f(Color.red, Color.green, Color.blue, Color.alpha);
 
+	SHOW_OPENGL_ERROR_MESSAGE();
+
 	glEnable(GL_TEXTURE_2D);
 	glBindTexture(GL_TEXTURE_2D, TextureID);
+
+	SHOW_OPENGL_ERROR_MESSAGE();
 	{
 		//glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 		glTexCoordPointer(TexCoords->size, GL_FLOAT, 0, TexCoords->value);
@@ -46,9 +53,9 @@ void DCTextureBatch::draw()
 
 		glDrawElements(GL_TRIANGLES, Indices->count, GL_UNSIGNED_SHORT, Indices->value);
 
-		//SHOW_OPENGL_ERROR_MESSAGE();
+		SHOW_OPENGL_ERROR_MESSAGE();
 	}
-	glDisable(GL_TEXTURE_2D);
+	glDisable(GL_TEXTURE_2D); 
 
 	glDisable(GL_BLEND);
 

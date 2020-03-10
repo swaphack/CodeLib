@@ -1,6 +1,6 @@
 
 
-__kernel void main(__global int* argc, __global char* argv, __global int* out)
+__kernel void main_func(__global int* argc, __global char* argv, __global int* out)
 { 
 	int i = get_global_id(0);
 	printf("argc %d\n", *argc);

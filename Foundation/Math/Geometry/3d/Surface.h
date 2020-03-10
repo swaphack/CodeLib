@@ -1,7 +1,7 @@
 #pragma once
 
 #include <cstdlib>
-#include "Geometry/base/Vector3.h"
+#include "Algebra/import.h"
 
 namespace math
 {

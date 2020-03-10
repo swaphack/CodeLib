@@ -20,7 +20,8 @@ void subAlloc()
 
 char* StreamHelper::mallocStream(void* data, ss_t size)
 {
-	ASSERT(data != nullptr && size > 0);
+	ASSERT(data != nullptr);
+	ASSERT(size > 0);
 
 	char* newData = mallocStream(size);
 

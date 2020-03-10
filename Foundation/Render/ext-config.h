@@ -24,9 +24,21 @@
 #define USE_FMOD
 #endif
 
+#include "system.h"
 #include "third_party.h"
 
-#define SHOW_OPENGL_ERROR_MESSAGE() {int error = glGetError(); PRINT("OpenGL error %d\n", error);}
+#define SHOW_ERROR_CODE(EID, CODE, MSG) if (EID == CODE) PRINT("OpenGL error id %d, message: %s.\n", CODE, #MSG);
+
+#define SHOW_OPENGL_ERROR_MESSAGE() { \
+	int EID = glGetError(); \
+	SHOW_ERROR_CODE(EID, GL_INVALID_ENUM, GL_INVALID_ENUM); \
+	SHOW_ERROR_CODE(EID, GL_INVALID_VALUE, GL_INVALID_VALUE); \
+	SHOW_ERROR_CODE(EID, GL_INVALID_OPERATION, GL_INVALID_OPERATION); \
+	SHOW_ERROR_CODE(EID, GL_STACK_OVERFLOW, GL_STACK_OVERFLOW); \
+	SHOW_ERROR_CODE(EID, GL_STACK_UNDERFLOW, GL_STACK_UNDERFLOW); \
+	SHOW_ERROR_CODE(EID, GL_OUT_OF_MEMORY, GL_OUT_OF_MEMORY); \
+	ASSERT(EID == 0); \
+}
 
 // ŒÌµƒ¿‡–Õ
 enum FogMode
