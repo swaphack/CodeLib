@@ -69,6 +69,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\Lib\include\3ds\lib3ds.h" />
+    <ClInclude Include="..\..\Lib\include\3ds\lib3ds_impl.h" />
     <ClInclude Include="..\..\Lib\include\cg\Cg\cg.h" />
     <ClInclude Include="..\..\Lib\include\cg\Cg\cgD3D10.h" />
     <ClInclude Include="..\..\Lib\include\cg\Cg\cgD3D11.h" />
@@ -339,6 +341,25 @@
     <ClInclude Include="..\..\Lib\include\third_party.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\Lib\include\3ds\lib3ds_atmosphere.c" />
+    <ClCompile Include="..\..\Lib\include\3ds\lib3ds_background.c" />
+    <ClCompile Include="..\..\Lib\include\3ds\lib3ds_camera.c" />
+    <ClCompile Include="..\..\Lib\include\3ds\lib3ds_chunk.c" />
+    <ClCompile Include="..\..\Lib\include\3ds\lib3ds_chunktable.c" />
+    <ClCompile Include="..\..\Lib\include\3ds\lib3ds_file.c" />
+    <ClCompile Include="..\..\Lib\include\3ds\lib3ds_io.c" />
+    <ClCompile Include="..\..\Lib\include\3ds\lib3ds_light.c" />
+    <ClCompile Include="..\..\Lib\include\3ds\lib3ds_material.c" />
+    <ClCompile Include="..\..\Lib\include\3ds\lib3ds_math.c" />
+    <ClCompile Include="..\..\Lib\include\3ds\lib3ds_matrix.c" />
+    <ClCompile Include="..\..\Lib\include\3ds\lib3ds_mesh.c" />
+    <ClCompile Include="..\..\Lib\include\3ds\lib3ds_node.c" />
+    <ClCompile Include="..\..\Lib\include\3ds\lib3ds_quat.c" />
+    <ClCompile Include="..\..\Lib\include\3ds\lib3ds_shadow.c" />
+    <ClCompile Include="..\..\Lib\include\3ds\lib3ds_track.c" />
+    <ClCompile Include="..\..\Lib\include\3ds\lib3ds_util.c" />
+    <ClCompile Include="..\..\Lib\include\3ds\lib3ds_vector.c" />
+    <ClCompile Include="..\..\Lib\include\3ds\lib3ds_viewport.c" />
     <ClCompile Include="..\..\Lib\include\sqlite\shell.c" />
     <ClCompile Include="..\..\Lib\include\sqlite\sqlite3.c" />
   </ItemGroup>

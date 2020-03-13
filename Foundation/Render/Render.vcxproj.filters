@@ -67,9 +67,6 @@
     <ClCompile Include="Common\Touch\TouchProxy.cpp">
       <Filter>Common\Touch</Filter>
     </ClCompile>
-    <ClCompile Include="3d\Shape\Cube.cpp">
-      <Filter>3d\Shape</Filter>
-    </ClCompile>
     <ClCompile Include="Common\Keyboard\KeyboardManager.cpp">
       <Filter>Common\Keyboard</Filter>
     </ClCompile>
@@ -99,12 +96,6 @@
     </ClCompile>
     <ClCompile Include="Graphic\Command\DrawCommand.cpp">
       <Filter>Graphic\Command</Filter>
-    </ClCompile>
-    <ClCompile Include="Resource\Component\Image.cpp">
-      <Filter>Resource\Component</Filter>
-    </ClCompile>
-    <ClCompile Include="Resource\Component\Media.cpp">
-      <Filter>Resource\Component</Filter>
     </ClCompile>
     <ClCompile Include="Canvas.cpp" />
     <ClCompile Include="RenderApplication.cpp" />
@@ -143,9 +134,6 @@
     </ClCompile>
     <ClCompile Include="Common\Audio\CtrlAudioSource3D.cpp">
       <Filter>Common\Audio</Filter>
-    </ClCompile>
-    <ClCompile Include="Resource\Component\Audio.cpp">
-      <Filter>Resource\Component</Filter>
     </ClCompile>
     <ClCompile Include="Common\Audio\macros.cpp">
       <Filter>Common\Audio</Filter>
@@ -233,6 +221,30 @@
     </ClCompile>
     <ClCompile Include="Graphic\DCSample\DCCamera.cpp">
       <Filter>Graphic\DCSample</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource\Detail\MediaDetail.cpp">
+      <Filter>Resource\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource\Detail\ModelDetail.cpp">
+      <Filter>Resource\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource\Detail\AudioDetail.cpp">
+      <Filter>Resource\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource\Detail\ImageDetail.cpp">
+      <Filter>Resource\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource\Paser\File3DS.cpp">
+      <Filter>Resource\Parser</Filter>
+    </ClCompile>
+    <ClCompile Include="3d\Common\Model3DS.cpp">
+      <Filter>3d\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="3d\Shape\MultiFaceCube.cpp">
+      <Filter>3d\Shape</Filter>
+    </ClCompile>
+    <ClCompile Include="3d\Shape\CubeModel.cpp">
+      <Filter>3d\Shape</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -357,9 +369,6 @@
     <ClInclude Include="Common\Touch\TouchProxy.h">
       <Filter>Common\Touch</Filter>
     </ClInclude>
-    <ClInclude Include="3d\Shape\Cube.h">
-      <Filter>3d\Shape</Filter>
-    </ClInclude>
     <ClInclude Include="3d\Shape\import.h">
       <Filter>3d\Shape</Filter>
     </ClInclude>
@@ -410,18 +419,6 @@
     </ClInclude>
     <ClInclude Include="Graphic\import.h">
       <Filter>Graphic</Filter>
-    </ClInclude>
-    <ClInclude Include="Resource\Component\Image.h">
-      <Filter>Resource\Component</Filter>
-    </ClInclude>
-    <ClInclude Include="Resource\Component\import.h">
-      <Filter>Resource\Component</Filter>
-    </ClInclude>
-    <ClInclude Include="Resource\Component\Media.h">
-      <Filter>Resource\Component</Filter>
-    </ClInclude>
-    <ClInclude Include="Resource\Component\Model.h">
-      <Filter>Resource\Component</Filter>
     </ClInclude>
     <ClInclude Include="Resource\Loader\IResourceLoader.h">
       <Filter>Resource\Loader</Filter>
@@ -539,9 +536,6 @@
     <ClInclude Include="Common\Audio\CtrlAudioSource3D.h">
       <Filter>Common\Audio</Filter>
     </ClInclude>
-    <ClInclude Include="Resource\Component\Audio.h">
-      <Filter>Resource\Component</Filter>
-    </ClInclude>
     <ClInclude Include="Common\DrawNode\DrawNode.h">
       <Filter>Common\DrawNode</Filter>
     </ClInclude>
@@ -642,6 +636,31 @@
     <ClInclude Include="Graphic\DCSample\DCCamera.h">
       <Filter>Graphic\DCSample</Filter>
     </ClInclude>
+    <ClInclude Include="Resource\Detail\import.h" />
+    <ClInclude Include="Resource\Detail\MediaDetail.h">
+      <Filter>Resource\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\Detail\ModelDetail.h">
+      <Filter>Resource\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\Detail\AudioDetail.h">
+      <Filter>Resource\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\Detail\ImageDetail.h">
+      <Filter>Resource\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\Paser\File3DS.h">
+      <Filter>Resource\Parser</Filter>
+    </ClInclude>
+    <ClInclude Include="3d\Common\Model3DS.h">
+      <Filter>3d\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="3d\Shape\MultiFaceCube.h">
+      <Filter>3d\Shape</Filter>
+    </ClInclude>
+    <ClInclude Include="3d\Shape\CubeModel.h">
+      <Filter>3d\Shape</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Common">
@@ -704,9 +723,6 @@
     <Filter Include="Graphic\DCSample">
       <UniqueIdentifier>{6f7278bf-4cab-49ed-bb7b-57b0acf4fe0d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Resource\Component">
-      <UniqueIdentifier>{9df81cfb-9846-4989-81c1-b7ad6ba47ba6}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Resource\Loader">
       <UniqueIdentifier>{10a041a0-5d1b-46d1-ae1b-5831c145bfc0}</UniqueIdentifier>
     </Filter>
@@ -742,6 +758,9 @@
     </Filter>
     <Filter Include="2d\Animation">
       <UniqueIdentifier>{91b9cdf2-865f-40ac-ae8f-a0605a0fa54e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource\Detail">
+      <UniqueIdentifier>{9df81cfb-9846-4989-81c1-b7ad6ba47ba6}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

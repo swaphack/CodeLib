@@ -7,7 +7,7 @@ struct AVFormatContext;
 namespace render
 {
 	// 视频图片帧
-	class VideoFrameImage : public Image
+	class VideoFrameImage : public ImageDetail
 	{
 	public:
 		VideoFrameImage();
@@ -19,7 +19,7 @@ namespace render
 	};
 
 	// 音频片段
-	class VideoAudioClip : public Audio
+	class VideoAudioClip : public AudioDetail
 	{
 	public:
 		VideoAudioClip();
@@ -30,7 +30,7 @@ namespace render
 	};
 
 	// ffmpeg 解析
-	class FFmpeg : public Media, public IMediaLoader
+	class FFmpeg : public MediaDetail, public IMediaLoader
 	{
 	public:
 		FFmpeg();
@@ -39,9 +39,9 @@ namespace render
 		// 加载视频
 		virtual void load(const MediaDefine& mediaDefine);
 		// 获取下一帧视频
-		virtual Image* getNextPicture();
+		virtual ImageDetail* getNextPicture();
 		// 获取下一帧音频图片
-		virtual Audio* getNextAudio();
+		virtual AudioDetail* getNextAudio();
 		// 获取下一帧标题
 		virtual std::string getNextTitle();
 		// 自动跳转到下一帧

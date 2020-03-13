@@ -14,22 +14,13 @@ Mesh::~Mesh()
 {
 }
 
-void Mesh::setVertexes(int count, float* vertexes)
+void Mesh::setVertices(int count, float* vertexes)
 {
 	float* vertors = (float*)malloc(count * sizeof(float));
+	memcpy(vertors, vertexes, count * sizeof(float));
 
 	int size = 3;
-	const math::Volume& volume = Tool::getGLViewSize();
-
-	for (int i = 0; i < count / size; i++)
-	{
-		vertors[size * i] = vertexes[size * i] / volume.getWidth();
-		vertors[size * i + 1] = vertexes[size * i + 1] / volume.getHeight();
-		vertors[size * i + 2] = vertexes[size * i + 2] / volume.getDeep();
-	}
-
 	_vertexes.init(count, vertors, size);
-
 	free(vertors);
 }
 
@@ -59,35 +50,47 @@ void Mesh::setUV(int count, float* texCoords, int size)
 	_uvs.init(count, texCoords, size);
 }
 
-void Mesh::setIndices(int count, uint16_t* indices)
+void Mesh::setIndices(int size, uint16_t* indices)
 {
-	_indices.init(count, indices);
+	_indices.init(size, indices);
 }
 
 int Mesh::getVertexCount()
 {
-	return _vertexes.count / _vertexes.size;
+	return _vertexes.size / _vertexes.unit;
 }
 
 int Mesh::getTriangleCount()
 {
-	return _indices.count / 3;
+	return _indices.size / 3;
 }
 
 void Mesh::apply(int textureID, const sys::Color4B& color, uint8_t opacity, const BlendParam& blend)
 {
-	if (_vertexes.value == nullptr 
-		|| _normals.value == nullptr
-		|| _colors.value == nullptr
-		|| _uvs.value == nullptr
-		|| _indices.value == nullptr)
-	{
-		return;
-	}
-
 	G_DRAWCOMMANDER->addCommand(
 		DCTextureBatch::create(textureID,
 		color, opacity, blend,
 		&_vertexes, &_normals, &_colors, &_uvs,
 		&_indices));
 }
+
+void Mesh::apply(const sys::Color4B& color /*= sys::Color4B()*/, uint8_t opacity /*= 255*/, const BlendParam& blend /*= BlendParam()*/)
+{
+	G_DRAWCOMMANDER->addCommand(
+		DCTextureBatch::create(0,
+		color, opacity, blend,
+		&_vertexes, &_normals, &_colors, &_uvs,
+		&_indices));
+}
+
+void Mesh::setMaterial(int matID)
+{
+	_material = matID;
+}
+
+int Mesh::getMaterial()
+{
+	return _material;
+}
+
+

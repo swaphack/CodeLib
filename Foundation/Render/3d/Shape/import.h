@@ -1,5 +1,5 @@
 #pragma once
 
-#include "Cube.h"
+#include "MultiFaceCube.h"
 
 #include "SphereModel.h"

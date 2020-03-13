@@ -176,7 +176,7 @@ void CtrlText::initSelf()
 
 void CtrlText::onTextChange()
 {
-	Texture2D* texture = G_TEXTURE_CACHE->getTexture2D(_textDefine);
+	Texture2D* texture = G_TEXTURE_CACHE->createTexture2D(_textDefine);
 	if (texture == nullptr)
 	{
 		return;

@@ -32,7 +32,7 @@ namespace sys
 		};
 
 		// 读取数据回调
-		typedef std::function<void(const std::string& data, int32_t size)> ReadDataCallback;
+		typedef std::function<void(const char* data, int32_t size)> ReadDataCallback;
 
 		struct ReadData : public Data
 		{

@@ -22,17 +22,22 @@ namespace render
 		~TextureCache();
 	public:
 		// 添加纹理
-		void addTexture(const char* path, Texture* texture);
+		void addTexture(const std::string& path, Texture* texture);
 		// 移除纹理
 		void removeTexture(Texture* texture);
+		// 移除纹理
+		void removeTexture(const std::string& path);
 		// 移除所有纹理
 		void removeAllTextures();
 		// 获取纹理
-		Texture* getTexture(const char* path);
+		Texture* getTexture(const std::string& path);
+	public:
 		// 添加一个2d纹理
-		Texture2D* getTexture2D(const ImageDefine& imageDefine);
+		Texture2D* createTexture2D(const ImageDefine& imageDefine);
+		// 添加一个2d纹理
+		Texture2D* createTexture2D(const std::string& path);
 		// 添加一个文本纹理
-		Texture2D* getTexture2D(const TextDefine& textDefine);
+		Texture2D* createTexture2D(const TextDefine& textDefine);
 	private:
 		std::map<std::string, Texture*> _textures;
 	};

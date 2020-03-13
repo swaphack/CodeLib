@@ -15,7 +15,6 @@ void DCTexture::draw()
 {
 	glEnable(GL_BLEND);
 	glBlendFunc(Blend.src, Blend.dest);
-
 	glColor4f(Color.red, Color.green, Color.blue, Color.alpha);
 
 	glEnable(GL_TEXTURE_2D);

@@ -38,7 +38,6 @@ void showStencilInformation()
 
 void Stencil::draw()
 {
-	Node::draw();
 }
 
 void Stencil::visit()

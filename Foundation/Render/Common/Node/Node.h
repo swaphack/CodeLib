@@ -18,6 +18,10 @@ namespace render
 	T* createNode()
 	{
 		T* temp = new T();
+		if (temp == nullptr)
+		{
+			return nullptr;
+		}
 		if (temp && temp->init() == false)
 		{
 			delete temp;

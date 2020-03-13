@@ -76,6 +76,9 @@
     <Filter Include="mysql\mysql\psi">
       <UniqueIdentifier>{e47661ec-e993-4447-9c7d-122fc30f12f5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="3ds">
+      <UniqueIdentifier>{77bff7d6-fbf0-4e9f-af84-563464eed214}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Lib\include\png\png.h">
@@ -878,6 +881,12 @@
     <ClInclude Include="..\..\Lib\include\fmod\studio\fmod_studio.hpp">
       <Filter>fmod\studio</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Lib\include\3ds\lib3ds.h">
+      <Filter>3ds</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Lib\include\3ds\lib3ds_impl.h">
+      <Filter>3ds</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Lib\include\sqlite\shell.c">
@@ -885,6 +894,63 @@
     </ClCompile>
     <ClCompile Include="..\..\Lib\include\sqlite\sqlite3.c">
       <Filter>sqlite</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Lib\include\3ds\lib3ds_atmosphere.c">
+      <Filter>3ds</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Lib\include\3ds\lib3ds_background.c">
+      <Filter>3ds</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Lib\include\3ds\lib3ds_camera.c">
+      <Filter>3ds</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Lib\include\3ds\lib3ds_chunk.c">
+      <Filter>3ds</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Lib\include\3ds\lib3ds_chunktable.c">
+      <Filter>3ds</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Lib\include\3ds\lib3ds_file.c">
+      <Filter>3ds</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Lib\include\3ds\lib3ds_io.c">
+      <Filter>3ds</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Lib\include\3ds\lib3ds_light.c">
+      <Filter>3ds</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Lib\include\3ds\lib3ds_material.c">
+      <Filter>3ds</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Lib\include\3ds\lib3ds_math.c">
+      <Filter>3ds</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Lib\include\3ds\lib3ds_matrix.c">
+      <Filter>3ds</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Lib\include\3ds\lib3ds_mesh.c">
+      <Filter>3ds</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Lib\include\3ds\lib3ds_node.c">
+      <Filter>3ds</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Lib\include\3ds\lib3ds_quat.c">
+      <Filter>3ds</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Lib\include\3ds\lib3ds_shadow.c">
+      <Filter>3ds</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Lib\include\3ds\lib3ds_track.c">
+      <Filter>3ds</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Lib\include\3ds\lib3ds_util.c">
+      <Filter>3ds</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Lib\include\3ds\lib3ds_vector.c">
+      <Filter>3ds</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Lib\include\3ds\lib3ds_viewport.c">
+      <Filter>3ds</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

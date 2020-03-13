@@ -182,12 +182,12 @@ void FFmpeg::load(const MediaDefine& mediaDefine)
 }
 
 
-Image* FFmpeg::getNextPicture()
+ImageDetail* FFmpeg::getNextPicture()
 {
 	return &_image;
 }
 
-Audio* FFmpeg::getNextAudio()
+AudioDetail* FFmpeg::getNextAudio()
 {
 	return &_audio;
 }

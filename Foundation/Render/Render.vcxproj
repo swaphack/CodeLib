@@ -84,13 +84,15 @@
     <ClCompile Include="2d\UI\CtrlScrollView.cpp" />
     <ClCompile Include="2d\UI\CtrlText.cpp" />
     <ClCompile Include="3d\Common\Model.cpp" />
+    <ClCompile Include="3d\Common\Model3DS.cpp" />
     <ClCompile Include="3d\Common\ModelFile.cpp" />
     <ClCompile Include="3d\Environment\ClipPlane.cpp" />
     <ClCompile Include="3d\Environment\Stencil.cpp" />
     <ClCompile Include="3d\Environment\Fog.cpp" />
     <ClCompile Include="3d\Environment\Light.cpp" />
     <ClCompile Include="3d\Environment\SpotLight.cpp" />
-    <ClCompile Include="3d\Shape\Cube.cpp" />
+    <ClCompile Include="3d\Shape\CubeModel.cpp" />
+    <ClCompile Include="3d\Shape\MultiFaceCube.cpp" />
     <ClCompile Include="3d\Shape\SphereModel.cpp" />
     <ClCompile Include="Canvas.cpp" />
     <ClCompile Include="Common\Action\Action.cpp" />
@@ -142,13 +144,15 @@
     <ClCompile Include="Graphic\DCSample\DCTextureBatch.cpp" />
     <ClCompile Include="Platform\Windows\GLFrame.cpp" />
     <ClCompile Include="RenderApplication.cpp" />
-    <ClCompile Include="Resource\Component\Audio.cpp" />
-    <ClCompile Include="Resource\Component\Image.cpp" />
-    <ClCompile Include="Resource\Component\Media.cpp" />
+    <ClCompile Include="Resource\Detail\AudioDetail.cpp" />
+    <ClCompile Include="Resource\Detail\ImageDetail.cpp" />
+    <ClCompile Include="Resource\Detail\MediaDetail.cpp" />
+    <ClCompile Include="Resource\Detail\ModelDetail.cpp" />
     <ClCompile Include="Resource\Paser\FFmpeg.cpp" />
     <ClCompile Include="Resource\Paser\JPEGImage.cpp" />
     <ClCompile Include="Resource\Paser\LabelImage.cpp" />
     <ClCompile Include="Resource\Paser\PNGImage.cpp" />
+    <ClCompile Include="Resource\Paser\File3DS.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="2d\Animation\CtrlAnimation.h" />
@@ -171,6 +175,7 @@
     <ClInclude Include="2d\UI\CtrlText.h" />
     <ClInclude Include="2d\UI\import.h" />
     <ClInclude Include="2d\UI\macros.h" />
+    <ClInclude Include="3d\Common\Model3DS.h" />
     <ClInclude Include="3d\Common\Ray.h" />
     <ClInclude Include="3d\Common\Model.h" />
     <ClInclude Include="3d\Common\import.h" />
@@ -185,7 +190,8 @@
     <ClInclude Include="3d\macros.h" />
     <ClInclude Include="3d\Map\macros.h" />
     <ClInclude Include="3d\Map\Terrian.h" />
-    <ClInclude Include="3d\Shape\Cube.h" />
+    <ClInclude Include="3d\Shape\CubeModel.h" />
+    <ClInclude Include="3d\Shape\MultiFaceCube.h" />
     <ClInclude Include="3d\Shape\import.h" />
     <ClInclude Include="3d\Shape\SphereModel.h" />
     <ClInclude Include="Canvas.h" />
@@ -267,15 +273,15 @@
     <ClInclude Include="Platform\Windows\import.h" />
     <ClInclude Include="render.h" />
     <ClInclude Include="RenderApplication.h" />
-    <ClInclude Include="Resource\Component\Audio.h" />
-    <ClInclude Include="Resource\Component\Image.h" />
-    <ClInclude Include="Resource\Component\import.h" />
-    <ClInclude Include="Resource\Component\Media.h" />
-    <ClInclude Include="Resource\Component\Model.h" />
     <ClInclude Include="Resource\Config\ImageDefine.h" />
     <ClInclude Include="Resource\Config\import.h" />
     <ClInclude Include="Resource\Config\MediaDefine.h" />
     <ClInclude Include="Resource\Config\TextDefine.h" />
+    <ClInclude Include="Resource\Detail\AudioDetail.h" />
+    <ClInclude Include="Resource\Detail\ImageDetail.h" />
+    <ClInclude Include="Resource\Detail\import.h" />
+    <ClInclude Include="Resource\Detail\MediaDetail.h" />
+    <ClInclude Include="Resource\Detail\ModelDetail.h" />
     <ClInclude Include="Resource\import.h" />
     <ClInclude Include="Resource\Loader\ILabelLoader.h" />
     <ClInclude Include="Resource\Loader\IMediaLoader.h" />
@@ -289,6 +295,7 @@
     <ClInclude Include="Resource\Paser\LabelImage.h" />
     <ClInclude Include="Resource\Paser\macros.h" />
     <ClInclude Include="Resource\Paser\PNGImage.h" />
+    <ClInclude Include="Resource\Paser\File3DS.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

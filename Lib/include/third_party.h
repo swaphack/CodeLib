@@ -13,9 +13,11 @@
 #ifdef USE_GLUT
 #define GLUT_DISABLE_ATEXIT_HACK
 #include "opengl/GLUT.H"
+#include "opengl/GLAUX.H"
 #else
 #include "opengl/GL.H"
 #include "opengl/GLU.H"
+#include "opengl/GLAUX.H"
 #endif // USE_GLUT
 #endif
 
@@ -83,6 +85,13 @@
 
 #if defined(USE_MYSQL)
 #include "mysql/mysql.h"
+#endif
+
+//////////////////////////////////////////////////////////////////////////
+// 3ds
+
+#if defined(USE_3DS)
+#include "3ds/lib3ds.h"
 #endif
 
 

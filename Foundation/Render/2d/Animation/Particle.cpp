@@ -3,7 +3,7 @@
 using namespace render;
 
 ParticleProtocol::ParticleProtocol()
-:_liftTime(0)
+:_lifeTime(0)
 {
 
 }
@@ -58,10 +58,10 @@ sys::Color4F ParticleProtocol::getColorAcceleration()
 
 void ParticleProtocol::setLifeTime(float time)
 {
-	_liftTime = time;
+	_lifeTime = time;
 }
 
 float ParticleProtocol::getLifeTime()
 {
-	return _liftTime;
+	return _lifeTime;
 }

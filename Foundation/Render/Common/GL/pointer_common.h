@@ -8,45 +8,55 @@ namespace render
 	// ¶¥µã
 	struct T_Vertex
 	{
-		int count;
-		float* value;
 		int size;
+		float* value;
+		int unit;
 
 		T_Vertex()
 		{
-			count = 0;
-			value = nullptr;
 			size = 0;
+			value = nullptr;
+			unit = 0;
 		}
 		~T_Vertex()
 		{
 			SAFE_FREE(value);
 		}
 
-		void init(int _count, float* _value, int _size)
+		void init(int _size, float* _value, int _unitSize)
 		{
 			if (_value == nullptr)
 			{
 				return;
 			}
 			SAFE_FREE(value);
-			count = _count;
 			size = _size;
+			unit = _unitSize;
 
-			value = (float*)malloc(count * sizeof(float));
-			memcpy(value, _value, count * sizeof(float));
+			value = (float*)malloc(size * sizeof(float));
+			memcpy(value, _value, size * sizeof(float));
+		}
+
+		void show()
+		{
+			for (int i = 0; i < size; i++)
+			{
+				PRINT("%f,", value[i]);
+			}
+
+			PRINT("\n");
 		}
 	};
 
 	// Ë÷Òý
 	struct T_Indice
 	{
-		int count;
+		int size;
 		uint16_t* value;
 
 		T_Indice()
 		{
-			count = 0;
+			size = 0;
 			value = nullptr;
 		}
 
@@ -55,17 +65,17 @@ namespace render
 			SAFE_FREE(value);
 		}
 
-		void init(int _count, uint16_t* _value)
+		void init(int _size, uint16_t* _value)
 		{
 			if (_value == nullptr)
 			{
 				return;
 			}
 			SAFE_FREE(value);
-			count = _count;
+			size = _size;
 
-			value = (uint16_t*)malloc(count * sizeof(uint16_t));
-			memcpy(value, _value, count * sizeof(uint16_t));
+			value = (uint16_t*)malloc(size * sizeof(uint16_t));
+			memcpy(value, _value, size * sizeof(uint16_t));
 		}
 	};
 }

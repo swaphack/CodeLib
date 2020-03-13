@@ -15,5 +15,4 @@ ColorNode::~ColorNode()
 
 void ColorNode::draw()
 {
-	Node::draw();
 }

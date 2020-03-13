@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include <algorithm>
 
 namespace render
 {
@@ -21,9 +22,31 @@ namespace render
 		// Í¼Æ¬¸ñÊ½
 		ImageFormat format;
 
-		ImageDefine(const char* filename = "", ImageFormat format = EIF_PNG)
-			:filepath(filename)
-			, format(format)
-		{}
+		ImageDefine(const ImageDefine& value)
+			:filepath(value.filepath), format(value.format)
+		{
+		}
+
+		ImageDefine(const std::string& _filename = "", ImageFormat _format = EIF_NONE)
+			:filepath(_filename)
+		{
+			this->format = _format;
+			if (filepath.empty())
+			{
+				return;
+			}
+			if (format != EIF_NONE)
+			{
+				return;
+			}
+
+			int idx = filepath.find_last_of('.') + 1;
+			std::string strFormat = filepath.substr(idx, filepath.size() - idx);
+			std::transform(strFormat.begin(), strFormat.end(), strFormat.begin(), ::tolower);
+
+			if (strFormat == "png") this->format = EIF_PNG;
+			else if (strFormat == "jpg") this->format = EIF_JPEG;
+			else this->format = EIF_NONE;
+		}
 	};
 }

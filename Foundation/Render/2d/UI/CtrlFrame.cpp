@@ -33,8 +33,6 @@ bool CtrlFrame::init()
 
 void CtrlFrame::draw()
 {
-	ColorNode::draw();
-
 	if (_texFrame->getTexture() == nullptr)
 	{
 		return;

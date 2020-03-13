@@ -1,7 +1,7 @@
 #include "Texture.h"
 #include <exception>
 #include "ext-config.h"
-#include "Resource/Component/Image.h"
+#include "Resource/Detail/ImageDetail.h"
 using namespace render;
 
 
@@ -20,7 +20,7 @@ Texture::~Texture()
 }
 
 //////////////////////////////////////////////////////////////////////////
-void Texture2D::load(const Image* image)
+void Texture2D::load(const ImageDetail* image)
 {
 	if (image == nullptr || image->getPixels() == nullptr)
 	{

@@ -58,13 +58,13 @@ namespace render
 
 	//////////////////////////////////////////////////////////////////////////
 
-	class Image;
+	class ImageDetail;
 
 	// 2dŒ∆¿Ì
 	class Texture2D : public Texture
 	{
 	public:
-		virtual void load(const Image* image);
+		virtual void load(const ImageDetail* image);
 	protected:
 	private:
 	};

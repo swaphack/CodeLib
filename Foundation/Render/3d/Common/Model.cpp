@@ -4,79 +4,158 @@ using namespace render;
 
 
 Model::Model()
-:_material(nullptr)
-, _texFrame(nullptr)
 {
-	_material = new Material();
-	_texFrame = new TexFrame();
-	_mesh = new Mesh();
 }
 
 Model::~Model()
 {
-	SAFE_DELETE(_material);
-	SAFE_DELETE(_texFrame);
-	SAFE_DELETE(_mesh);
+	this->removeAllMaterials();
+	this->removeAllMeshes();
+	this->removeAllTextures();
 }
 
 void Model::draw()
 {
-	ColorNode::draw();
-	if (_material)
+	for (auto mesh : _meshes)
 	{
-		_material->apply();
-	}
-	else
-	{
-		Material::applyDefault();
-	}
-
-	if (_mesh)
-	{
-		int textureID = 0;
-		if (_texFrame->getTexture())
+		mesh.second->apply(0, getColor(), getOpacity(), getBlend());
+		int matID = mesh.second->getMaterial();
+		auto pMat = this->getMatrial(matID);
+		if (pMat)
 		{
-			textureID = _texFrame->getTexture()->getTextureID();
+			pMat->apply();
 		}
-		_mesh->apply(textureID, _color, _opacity, _blend);
 	}
 }
 
-void Model::setMatrial(const Material* material)
+void Model::addMaterial(int id, Material* material)
 {
 	if (material == nullptr)
 	{
 		return;
 	}
-	*_material = *material;
+
+	this->removeMaterial(id);
+
+	SAFE_RETAIN(material);
+
+	_materials[id] = material;
 }
 
-const Material* Model::getMatrial() const
+void Model::removeMaterial(int id)
 {
-	return _material;
-}
-
-Material* Model::getMatrial()
-{
-	return _material;
-}
-
-const Mesh* Model::getMesh() const
-{
-	return _mesh;
-}
-
-Mesh* Model::getMesh()
-{
-	return _mesh;
-}
-
-void Model::setTexFrame(const TexFrame* frame)
-{
-	if (frame == nullptr)
+	auto it = _materials.find(id);
+	if (it == _materials.end())
 	{
 		return;
 	}
 
-	*_texFrame = *frame;
+	SAFE_RELEASE(it->second);
+	_materials.erase(it);
+}
+
+void Model::removeAllMaterials()
+{
+	for (auto it : _materials)
+	{
+		SAFE_RELEASE(it.second);
+	}
+	_materials.clear();
+}
+
+Material* Model::getMatrial(int id)
+{
+	auto it = _materials.find(id);
+	if (it == _materials.end())
+	{
+		return nullptr;
+	}
+
+	return it->second;
+}
+
+void Model::addMesh(int id, Mesh* mesh)
+{
+	if (mesh == nullptr)
+	{
+		return;
+	}
+
+	this->removeMesh(id);
+
+	SAFE_RETAIN(mesh);
+
+	_meshes[id] = mesh;
+}
+
+void Model::removeMesh(int id)
+{
+	auto it = _meshes.find(id);
+	if (it == _meshes.end())
+	{
+		return;
+	}
+
+	SAFE_RELEASE(it->second);
+	_meshes.erase(it);
+}
+
+void Model::removeAllMeshes()
+{
+	for (auto it : _meshes)
+	{
+		SAFE_RELEASE(it.second);
+	}
+	_meshes.clear();
+}
+
+Mesh* Model::getMesh(int id)
+{
+	auto it = _meshes.find(id);
+	if (it == _meshes.end())
+	{
+		return nullptr;
+	}
+
+	return it->second;
+}
+
+void Model::addTexture(const std::string& name, int id)
+{
+	this->removeTexture(name);
+
+	_textures[name] = id;
+}
+
+void Model::removeTexture(const std::string& name)
+{
+	auto it = _textures.find(name);
+	if (it == _textures.end())
+	{
+		return;
+	}
+
+	G_TEXTURE_CACHE->removeTexture(name.c_str());
+
+	_textures.erase(it);
+}
+
+void Model::removeAllTextures()
+{
+	for (auto item : _textures)
+	{
+		G_TEXTURE_CACHE->removeTexture(item.first);
+	}
+	_textures.clear();
+}
+
+int Model::getTexture(const std::string& name)
+{
+	auto it = _textures.find(name);
+	if (it == _textures.end())
+	{
+		return 0;
+	}
+
+	return it->second;
 }

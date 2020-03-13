@@ -15,8 +15,6 @@ ClipPlane::~ClipPlane()
 
 void ClipPlane::draw()
 {
-	Node::draw();
-
 	glClipPlane(getClipPlaneIndex(), _clipNormal);
 	glEnable(getClipPlaneIndex());
 }

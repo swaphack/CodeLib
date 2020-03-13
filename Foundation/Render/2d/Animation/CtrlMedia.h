@@ -5,7 +5,7 @@
 
 namespace render
 {
-	class Media;
+	class MediaDetail;
 	// 媒体（包含图像和声音）
 	class CtrlMedia : public CtrlAnimation
 	{
@@ -37,6 +37,6 @@ namespace render
 		// 媒体数据结构
 		MediaDefine _mediaDefine;
 		// 媒体数据
-		Media* _media;
+		MediaDetail* _media;
 	};
 }

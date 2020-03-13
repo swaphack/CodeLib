@@ -8,7 +8,7 @@ WndRender::WndRender()
 {
 	this->getCanvas()->setDimensions(render::ED_2D);
 
-	//this->getCanvas()->setDimensions(render::ED_3D);
+	this->getCanvas()->setDimensions(render::ED_3D);
 }
 
 WndRender::~WndRender()
@@ -56,11 +56,13 @@ void WndRender::show()
 	//testAudio3D();
 	//testLayout();
 	//
-	//addLight();
+	addLight();
 	//testFog();
-	testCubeModel();
+	//testCubeModel();
 	//testSphereModel();
-	testModel();
+	//testModel();
+
+	test3ds();
 }
 
 void WndRender::testMoveImage()
@@ -103,22 +105,26 @@ void WndRender::testCubeModel()
 	for (int i = 0; i < nCount; i++)
 	{
 		ImageDefine imageDefine = { "Resource/Image/NeHe.png", EIF_PNG };
-		Texture2D* texture2D = G_TEXTURE_CACHE->getTexture2D(imageDefine);
+		Texture2D* texture2D = G_TEXTURE_CACHE->createTexture2D(imageDefine);
 
 		TexFrame* frame = new TexFrame();
 		AUTO_RELEASE_OBJECT(frame);
 		frame->setTextureWithRect(texture2D);
 
-		Cube* pModel = CREATE_NODE(Cube);
-		pModel->setPosition(0, 0, 100);
-		pModel->setTexFrame(frame);
+		MultiFaceCube* pModel = CREATE_NODE(MultiFaceCube);
+		pModel->setPosition(i * 100, i * 100, i * 100);
+		pModel->setAllFaceFrame(frame);
 		pModel->setVolume(200, 200, 200);
 		pModel->setRotation(45, 45, 0);
-		pModel->getMatrial()->setShiness(1.0f);
-		pModel->getMatrial()->setAmbient(255, 255, 255, 255);
-		pModel->getMatrial()->setDiffuse(255, 255, 255, 255);
-		pModel->getMatrial()->setSpecular(0, 0, 0, 255);
-		pModel->getMatrial()->setEmisiion(255, 255, 255, 255);
+
+		Material* mat = CREATE_OBJECT(Material);
+		mat->setShiness(1.0f);
+		mat->setAmbient(255, 255, 255, 255);
+		mat->setDiffuse(255, 255, 255, 255);
+		mat->setSpecular(0, 0, 0, 255);
+		mat->setEmisiion(255, 255, 255, 255);
+		pModel->setAllFaceMaterial(mat);
+
 		this->getCanvas()->getRoot()->addChild(pModel);
 
 		float interval = 2;
@@ -161,7 +167,7 @@ void WndRender::testCubeModel()
 void WndRender::testSphereModel()
 {
 	ImageDefine imageDefine = { "Resource/Image/NeHe.png", EIF_PNG };
-	Texture2D* texture2D = G_TEXTURE_CACHE->getTexture2D(imageDefine);
+	Texture2D* texture2D = G_TEXTURE_CACHE->createTexture2D(imageDefine);
 
 	TexFrame* frame = new TexFrame();
 	AUTO_RELEASE_OBJECT(frame);
@@ -276,7 +282,7 @@ void WndRender::testParticle()
 
 void WndRender::testStencil()
 {
-	Texture2D* texture2D = G_TEXTURE_CACHE->getTexture2D({ "Resource/Image/NeHe.png", EIF_PNG });
+	Texture2D* texture2D = G_TEXTURE_CACHE->createTexture2D("Resource/Image/NeHe.png");
 
 	TexFrame* frame = new TexFrame();
 	AUTO_RELEASE_OBJECT(frame);
@@ -287,23 +293,23 @@ void WndRender::testStencil()
 
 	this->getCanvas()->getRoot()->addChild(pStencil);	
 
-	Cube* pCube = CREATE_NODE(Cube);
+	MultiFaceCube* pCube = CREATE_NODE(MultiFaceCube);
 	pCube->setVolume(400, 400, 200);
 	pCube->setColor(sys::Color3B(255, 255, 255));
-	pCube->setTexFrame(frame);
+	pCube->setAllFaceFrame(frame);
 	pCube->setRotation(45, 45, 0);
 	pStencil->setStencilNode(pCube);
 
-	texture2D = G_TEXTURE_CACHE->getTexture2D({ "Resource/Image/sqi.png", EIF_PNG });
+	texture2D = G_TEXTURE_CACHE->createTexture2D("Resource/Image/sqi.png");
 
 	frame = new TexFrame();
 	AUTO_RELEASE_OBJECT(frame);
 	frame->setTextureWithRect(texture2D);
 
-	pCube = CREATE_NODE(Cube);
+	pCube = CREATE_NODE(MultiFaceCube);
 	pCube->setVolume(100, 100, 100);
 	pCube->setRotation(-45, -45, 0);
-	pCube->setTexFrame(frame);
+	pCube->setAllFaceFrame(frame);
 
 	pStencil->addChild(pCube);
 }
@@ -628,12 +634,13 @@ void WndRender::testModel()
 	pModel->setPosition(100, 100, 100);
 	pModel->setColor(0, 255, 0);
 	//pModel->setVolume(100, 100, 100);
+	/*
 	pModel->getMatrial()->setAmbient(255, 255, 255, 255);
 	pModel->getMatrial()->setDiffuse(255, 255, 255, 255);
 	pModel->getMatrial()->setSpecular(255, 0, 0, 255);
 	pModel->getMatrial()->setEmisiion(255, 0, 0, 255);
 	pModel->getMatrial()->setShiness(0.5f);
-
+	*/
 	/*
 	int count = 1024;
 	float interval = 5;
@@ -874,4 +881,31 @@ void WndRender::testLayout()
 	pDisplay->setUIRoot(this->getCanvas()->getRoot());
 	pDisplay->setFilePath("Resource/Layout/test.xml");
 	pDisplay->show();
+}
+
+void WndRender::test3ds()
+{
+	Model3DS* model = CREATE_NODE(Model3DS);
+	model->load("Resource/3DS/Glass House.3DS");
+	model->setPosition(100, 100, 0);
+	model->setVolume(400, 400, 400);
+	this->getCanvas()->getRoot()->addChild(model);
+
+
+	auto pTexture = G_TEXTURE_CACHE->createTexture2D("Resource/Image/NeHe.png");
+	CubeModel* pModel = CREATE_NODE(CubeModel);
+	pModel->setTexture(pTexture);
+	pModel->setAnchorPoint(math::Vector3(0.5f, 0.5f, 0.5f));
+	pModel->setPosition(100, 100, 0);
+	pModel->setVolume(200, 200, 200);
+	this->getCanvas()->getRoot()->addChild(pModel);
+	
+	RotateByAction* pRotateByAction = CREATE_ACTION(RotateByAction);
+	pRotateByAction->setRotation(180, 180, 0);
+	pRotateByAction->setDuration(10);
+
+	RepeateForeverAction* pRepeateAction = CREATE_ACTION(RepeateForeverAction);
+	pRepeateAction->setAction(pRotateByAction);
+
+	pModel->getActionProxy()->runAction(pRepeateAction);
 }

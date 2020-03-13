@@ -87,32 +87,32 @@ T_ModelData* ModelFile::loadData(const std::string& filepath)
 		}
 		else if (strcmp(pElement->Value(), "TexCoords") == 0)
 		{
-			modelData.TexCoords.count = pElement->IntAttribute("count");
-			modelData.TexCoords.size = pElement->IntAttribute("size");
-			modelData.TexCoords.value = getFloatAry(pElement->GetText(), modelData.TexCoords.count);
+			modelData.TexCoords.size = pElement->IntAttribute("count");
+			modelData.TexCoords.unit = pElement->IntAttribute("size");
+			modelData.TexCoords.value = getFloatAry(pElement->GetText(), modelData.TexCoords.size);
 		}
 		else if (strcmp(pElement->Value(), "Vertexes") == 0)
 		{
-			modelData.Vertexes.count = pElement->IntAttribute("count");
-			modelData.Vertexes.size = pElement->IntAttribute("size");
-			modelData.Vertexes.value = getFloatAry(pElement->GetText(), modelData.Vertexes.count);
+			modelData.Vertexes.size = pElement->IntAttribute("count");
+			modelData.Vertexes.unit = pElement->IntAttribute("size");
+			modelData.Vertexes.value = getFloatAry(pElement->GetText(), modelData.Vertexes.size);
 		}
 		else if (strcmp(pElement->Value(), "Normals") == 0)
 		{
-			modelData.Normals.count = pElement->IntAttribute("count");
-			modelData.Normals.size = pElement->IntAttribute("size");
-			modelData.Normals.value = getFloatAry(pElement->GetText(), modelData.Normals.count);
+			modelData.Normals.size = pElement->IntAttribute("count");
+			modelData.Normals.unit = pElement->IntAttribute("size");
+			modelData.Normals.value = getFloatAry(pElement->GetText(), modelData.Normals.size);
 		}
 		else if (strcmp(pElement->Value(), "Colors") == 0)
 		{
-			modelData.Colors.count = pElement->IntAttribute("count");
-			modelData.Colors.size = pElement->IntAttribute("size");
-			modelData.Colors.value = getFloatAry(pElement->GetText(), modelData.Colors.count);
+			modelData.Colors.size = pElement->IntAttribute("count");
+			modelData.Colors.unit = pElement->IntAttribute("size");
+			modelData.Colors.value = getFloatAry(pElement->GetText(), modelData.Colors.size);
 		}
 		else if (strcmp(pElement->Value(), "Indices") == 0)
 		{
-			modelData.Indices.count = pElement->IntAttribute("count");
-			modelData.Indices.value = getUShortAry(pElement->GetText(), modelData.Indices.count);
+			modelData.Indices.size = pElement->IntAttribute("count");
+			modelData.Indices.value = getUShortAry(pElement->GetText(), modelData.Indices.size);
 		}
 		
 		pRoot = pRoot->NextSibling();
@@ -134,21 +134,22 @@ Model* ModelFile::loadModel(T_ModelData* pData)
 	if (!pData->ImagePath.empty())
 	{
 		ImageDefine imageDefine = { pData->ImagePath.c_str(), pData->Format };
-		Texture2D* texture2D = G_TEXTURE_CACHE->getTexture2D(imageDefine);
+		Texture2D* texture2D = G_TEXTURE_CACHE->createTexture2D(imageDefine);
 		if (texture2D)
 		{
 			TexFrame* frame = new TexFrame();
 			AUTO_RELEASE_OBJECT(frame);
 			frame->setTextureWithRect(texture2D);
-			pModel->setTexFrame(frame);
+			//pModel->setTexFrame(frame);
 		}
 	}
+	/*
 	pModel->getMesh()->setVertexes(pData->Vertexes.count, pData->Vertexes.value);
 	pModel->getMesh()->setNormals(pData->Normals.count, pData->Normals.value);
 	pModel->getMesh()->setColors(pData->Colors.count, pData->Colors.value, pData->Colors.size);
 	pModel->getMesh()->setUV(pData->TexCoords.count, pData->TexCoords.value, pData->TexCoords.size);
 	pModel->getMesh()->setIndices(pData->Indices.count, pData->Indices.value);
-
+	*/
 	return pModel;
 }
 

@@ -102,7 +102,7 @@ SphereModel::SphereModel()
 
 SphereModel::~SphereModel()
 {
-
+	SAFE_RELEASE(_frame);
 }
 
 void SphereModel::draw()
@@ -142,4 +142,11 @@ void SphereModel::initSelf()
 	Model::initSelf();
 
 	_obRadius = _radius / Tool::getGLViewSize().getWidth();
+}
+
+void SphereModel::setTexFrame(TexFrame* frame)
+{
+	SAFE_RELEASE(_frame);
+	SAFE_RETAIN(frame);
+	_frame = frame;
 }

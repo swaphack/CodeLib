@@ -14,7 +14,7 @@ namespace render
 		// 顶点纹理坐标
 		math::Vector3 coords;
 		// 顶点颜色
-		sys::Color4B blend;
+		sys::Color4B color;
 
 		TextureVertex()
 		{

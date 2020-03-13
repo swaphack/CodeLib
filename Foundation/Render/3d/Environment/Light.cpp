@@ -33,7 +33,6 @@ Light::~Light()
 
 void Light::draw()
 {
-	Node::draw();
 	if (getLightIndex() == ELI_NONE)
 	{
 		return;

@@ -1,6 +1,6 @@
 #include "CtrlAudioSource.h"
 #include "AudioManager.h"
-#include "Resource/Component/Audio.h"
+#include "Resource/Detail/AudioDetail.h"
 #include <map>
 
 using namespace render;
@@ -87,7 +87,7 @@ bool CtrlAudioSource::loadDataFromFile(const std::string& filepath)
 	return result == FMOD_OK;
 }
 
-bool CtrlAudioSource::loadDataFromClip(Audio* audioClip)
+bool CtrlAudioSource::loadDataFromClip(AudioDetail* audioClip)
 {
 	if (audioClip == nullptr || audioClip->getData() == nullptr)
 	{

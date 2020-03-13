@@ -41,6 +41,6 @@ namespace render
 		// 色变速度
 		sys::Color4F _colorAcceleration;
 		// 寿命
-		float _liftTime;
+		float _lifeTime;
 	};
 }

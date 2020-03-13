@@ -40,8 +40,8 @@ int main(int argc, char** argv)
 		{
 			std::this_thread::sleep_for(std::chrono::milliseconds(10));
 
-			const char* line = G_CONSOLE->readLine();
-			if (strcmp(line, "exit"))
+			std::string line = G_CONSOLE->readLine();
+			if (line == "exit")
 			{
 				break;
 			}

@@ -24,6 +24,10 @@
 #define USE_FMOD
 #endif
 
+#ifndef USE_3DS
+#define USE_3DS
+#endif
+
 #include "system.h"
 #include "third_party.h"
 

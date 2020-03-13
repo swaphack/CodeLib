@@ -18,48 +18,62 @@ DCTextureBatch::~DCTextureBatch()
 
 void DCTextureBatch::draw()
 {
-	//glEnable(GL_DEPTH_TEST);
 	glEnable(GL_BLEND);
-
-	SHOW_OPENGL_ERROR_MESSAGE();
-
 	glBlendFunc(Blend.src, Blend.dest);
 	glColor4f(Color.red, Color.green, Color.blue, Color.alpha);
 
-	SHOW_OPENGL_ERROR_MESSAGE();
-
-	glEnable(GL_TEXTURE_2D);
-	glBindTexture(GL_TEXTURE_2D, TextureID);
-
-	SHOW_OPENGL_ERROR_MESSAGE();
+	if (Normals->size > 0)
 	{
-		//glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-		glTexCoordPointer(TexCoords->size, GL_FLOAT, 0, TexCoords->value);
-
-		//glEnableClientState(GL_VERTEX_ARRAY);
-		glVertexPointer(Vertexes->size, GL_FLOAT, 0, Vertexes->value);
-
-		//glEnableClientState(GL_NORMAL_ARRAY);
 		glNormalPointer(GL_FLOAT, 0, Normals->value);
-
-		//glEnableClientState(GL_COLOR_ARRAY);
-		glColorPointer(Colors->size, GL_FLOAT, 0, Colors->value);
-
-		// for debug
-		//glDisableClientState(GL_TEXTURE_COORD_ARRAY);
-		//glDisableClientState(GL_VERTEX_ARRAY);
-		//glDisableClientState(GL_NORMAL_ARRAY);
-		//glDisableClientState(GL_COLOR_ARRAY);
-
-		glDrawElements(GL_TRIANGLES, Indices->count, GL_UNSIGNED_SHORT, Indices->value);
-
 		SHOW_OPENGL_ERROR_MESSAGE();
 	}
-	glDisable(GL_TEXTURE_2D); 
 
-	glDisable(GL_BLEND);
+	if (Vertexes->size > 0)
+	{
+		glEnableClientState(GL_VERTEX_ARRAY);
+		glVertexPointer(Vertexes->unit, GL_FLOAT, 0, Vertexes->value);
+		SHOW_OPENGL_ERROR_MESSAGE();
+	}
 
-	//glDisable(GL_DEPTH_TEST);
+	if (TextureID > 0)
+	{
+		glEnable(GL_TEXTURE_2D);
+		glBindTexture(GL_TEXTURE_2D, TextureID);
+		if (TexCoords->size > 0)
+		{
+			glTexCoordPointer(TexCoords->unit, GL_FLOAT, 0, TexCoords->value);
+			SHOW_OPENGL_ERROR_MESSAGE();
+		}
+	}
+	else
+	{
+		if (Colors->size > 0)
+		{
+			glColorPointer(Colors->unit, GL_FLOAT, 0, Colors->value);
+			SHOW_OPENGL_ERROR_MESSAGE();
+		}
+	}
+	if (Indices->size > 0)
+	{
+		glDrawElements(GL_TRIANGLES, Indices->size, GL_UNSIGNED_SHORT, Indices->value);
+		/*
+		glColor3f(0, 1, 1);
+
+		glLineWidth(0.1f);
+		glBegin(GL_LINE_STRIP);
+		for (int i = 0; i < Indices->size; i++)
+		{
+			uint16_t idx = Indices->value[i];
+			float x = *(Vertexes->value + idx * 3 + 0);
+			float y = *(Vertexes->value + idx * 3 + 1);
+			float z = *(Vertexes->value + idx * 3 + 2);
+			glVertex3f(x, y, z);
+		}
+		glEnd();
+		*/
+		SHOW_OPENGL_ERROR_MESSAGE();
+	}
+	glDisable(GL_TEXTURE_2D);
 }
 
 DCTextureBatch* DCTextureBatch::create(int textureID,

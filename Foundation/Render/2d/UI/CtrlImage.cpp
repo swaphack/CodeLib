@@ -23,7 +23,7 @@ void CtrlImage::setImagePath(const char* path, ImageFormat format /*= EIF_PNG*/)
 	_imageDefine.filepath = path;
 	_imageDefine.format = format;
 
-	Texture2D* texture = G_TEXTURE_CACHE->getTexture2D(_imageDefine);
+	Texture2D* texture = G_TEXTURE_CACHE->createTexture2D(_imageDefine);
 	if (texture == nullptr)
 	{
 		return;

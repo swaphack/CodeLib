@@ -17,7 +17,6 @@ CtrlScissor::~CtrlScissor()
 
 void CtrlScissor::draw()
 {
-	Node::draw();
 }
 
 void CtrlScissor::visit()

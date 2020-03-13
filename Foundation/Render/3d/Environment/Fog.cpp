@@ -19,8 +19,6 @@ Fog::~Fog()
 
 void Fog::draw()
 {
-	ColorNode::draw();
-
 	sys::Color4B c = getColor();
 	float color[4] = { c.red / COLOR_FLOAT_VALUE, c.green / COLOR_FLOAT_VALUE, c.blue / COLOR_FLOAT_VALUE, c.alpha / COLOR_FLOAT_VALUE };
 	float nearValue = _near / Tool::getGLViewSize().getDeep();

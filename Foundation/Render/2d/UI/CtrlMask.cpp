@@ -14,7 +14,5 @@ CtrlMask::~CtrlMask()
 
 void CtrlMask::draw()
 {
-	ColorNode::draw();
-
 	G_DRAWCOMMANDER->addCommand(DCMask::create(&_rectVertex, getColor(), _opacity, _blend));
 }

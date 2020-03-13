@@ -49,11 +49,14 @@ namespace render
 		void setRadius(float radius);
 		// ªÒ»°«Ú∞Îæ∂
 		float getRadius();
+		// …Ë÷√Œ∆¿Ì÷°
+		void setTexFrame(TexFrame* frame);
 	protected:
 		virtual void initSelf();
 	private:
 		// «Ú∞Îæ∂
 		float _radius;
 		float _obRadius;
+		TexFrame* _frame;
 	};
 }

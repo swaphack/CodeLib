@@ -21,12 +21,12 @@ void ParticleNode::draw()
 
 void ParticleNode::update(float interval)
 {
-	if (_liftTime <= 0)
+	if (_lifeTime <= 0)
 	{
 		return;
 	}
 
-	_liftTime -= interval;
+	_lifeTime -= interval;
 
 	_colorInit.add(_colorAcceleration);
 	_position += _speedAcceleration;

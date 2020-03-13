@@ -5,7 +5,7 @@
 namespace render
 {
 	// png ͼƬ
-	class PNGImage : public Image, public IResourceLoader
+	class PNGImage : public ImageDetail, public IResourceLoader
 	{
 	public:
 		PNGImage();

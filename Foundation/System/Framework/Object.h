@@ -32,4 +32,21 @@ namespace sys
 		// 是否自动释放
 		bool _bAutoRelease;
 	};
+
+#define CREATE_OBJECT(OBJECT_TYPE) sys::createObject<OBJECT_TYPE>()
+
+	template<typename T>
+	T* createObject()
+	{
+		T* temp = new T();
+		if (!temp)
+		{
+			delete temp;
+			return nullptr;
+		}
+
+		AUTO_RELEASE_OBJECT(temp);
+
+		return temp;
+	}
 }

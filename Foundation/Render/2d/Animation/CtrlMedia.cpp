@@ -1,6 +1,6 @@
 #include "CtrlMedia.h"
 #include "../UI/CtrlFrame.h"
-#include "Resource/Component/Media.h"
+#include "Resource/Detail/MediaDetail.h"
 #include "Resource/Loader/Loader.h"
 #include "Resource/Paser/FFmpeg.h"
 
@@ -40,7 +40,7 @@ bool CtrlMedia::init()
 			}
 		}		
 
-		Audio* audio = _media->getNextAudio();
+		AudioDetail* audio = _media->getNextAudio();
 		if (audio && audio->getData())
 		{
 			_ctrlAudio->loadDataFromClip(audio);
@@ -129,7 +129,7 @@ Texture2D* CtrlMedia::getNextTexture()
 		return nullptr;
 	}
 
-	const Image* image = _media->getNextPicture();
+	const ImageDetail* image = _media->getNextPicture();
 	if (image == nullptr)
 	{
 		return nullptr;

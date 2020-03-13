@@ -16,15 +16,23 @@ namespace render
 		// 应用
 		void apply();
 		// 环境光
-		void setAmbient(uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha);
+		void setAmbientByte(uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha);
+		// 环境光
+		void setAmbient(float red, float green, float blue, float alpha = 1);
+
 		const float* getAmbient() const;
 
 		// 漫射光
-		void setDiffuse(uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha);
+		void setDiffuseByte(uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha);
+		// 漫射光
+		void setDiffuse(float red, float green, float blue, float alpha = 1);
+
 		const float* getDiffuse() const;
 
 		// 反射光
-		void setSpecular(uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha);
+		void setSpecularByte(uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha);
+		// 反射光
+		void setSpecular(float red, float green, float blue, float alpha = 1);
 		const float* getSpecular() const;
 
 		// 镜面指数
@@ -32,7 +40,9 @@ namespace render
 		float getShiness() const;
 
 		// 辐射光颜色
-		void setEmisiion(uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha);
+		void setEmisiionByte(uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha);
+		// 反射光
+		void setEmisiion(float red, float green, float blue, float alpha = 1);
 		const float* getEmisiion() const;
 
 		Material& operator = (const Material& value);

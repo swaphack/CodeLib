@@ -4,7 +4,7 @@
 
 namespace render
 {
-	class JPEGImage : public Image, public IResourceLoader
+	class JPEGImage : public ImageDetail, public IResourceLoader
 	{
 	public:
 		JPEGImage();

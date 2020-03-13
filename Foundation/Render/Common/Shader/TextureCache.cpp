@@ -17,9 +17,9 @@ TextureCache::~TextureCache()
 	this->removeAllTextures();
 }
 
-void TextureCache::addTexture(const char* path, Texture* texture)
+void TextureCache::addTexture(const std::string& path, Texture* texture)
 {
-	if (path == nullptr || texture == nullptr)
+	if (path.empty() || texture == nullptr)
 	{
 		return;
 	}
@@ -47,6 +47,22 @@ void TextureCache::removeTexture(Texture* texture)
 	}
 }
 
+void TextureCache::removeTexture(const std::string& path)
+{
+	if (path.empty())
+	{
+		return;
+	}
+
+	auto it = _textures.find(path);
+	if (it == _textures.end())
+	{
+		return;
+	}
+	it->second->release();
+	_textures.erase(it);
+}
+
 void TextureCache::removeAllTextures()
 {
 	std::map<std::string, Texture*>::iterator iter = _textures.begin();
@@ -60,9 +76,9 @@ void TextureCache::removeAllTextures()
 	_textures.clear();
 }
 
-Texture* TextureCache::getTexture(const char* path)
+Texture* TextureCache::getTexture(const std::string& path)
 {
-	if (path == nullptr)
+	if (path.empty())
 	{
 		return nullptr;
 	}
@@ -76,7 +92,7 @@ Texture* TextureCache::getTexture(const char* path)
 	return it->second;
 }
 
-Texture2D* TextureCache::getTexture2D(const ImageDefine& imageDefine)
+Texture2D* TextureCache::createTexture2D(const ImageDefine& imageDefine)
 {
 	Texture* texture = getTexture(imageDefine.filepath.c_str());
 	if (texture)
@@ -84,7 +100,7 @@ Texture2D* TextureCache::getTexture2D(const ImageDefine& imageDefine)
 		return dynamic_cast<Texture2D*>(texture);
 	}
 
-	Image* image = nullptr;
+	ImageDetail* image = nullptr;
 	// png
 	if (imageDefine.format == EIF_PNG)
 	{
@@ -116,7 +132,7 @@ Texture2D* TextureCache::getTexture2D(const ImageDefine& imageDefine)
 	return texture2D;
 }
 
-Texture2D* TextureCache::getTexture2D(const TextDefine& textDefine)
+Texture2D* TextureCache::createTexture2D(const TextDefine& textDefine)
 {
 	LabelImage* image = Loader::load<LabelImage>(textDefine);
 	if (image == nullptr)
@@ -131,6 +147,12 @@ Texture2D* TextureCache::getTexture2D(const TextDefine& textDefine)
 	SAFE_DELETE(image);
 
 	return texture2D;
+}
+
+Texture2D* TextureCache::createTexture2D(const std::string& path)
+{
+	auto data = ImageDefine(path);
+	return createTexture2D(data);
 }
 
 
