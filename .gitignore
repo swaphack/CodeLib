@@ -15,5 +15,7 @@ Debug/Render.lib
 WebCat.sdf
 *.sdf
 WebCat.sdf
-/Debug
+/Debug/Window.bsc
+/Debug/Window.exe
+/Debug/Window.pdb
 /Sample/CGHSLS/Debug/
