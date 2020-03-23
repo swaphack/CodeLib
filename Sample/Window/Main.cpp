@@ -4,7 +4,7 @@
 #include "resource.h"
 #include "WndRender.h"
 
-//using namespace sys;
+using namespace sys;
 
 int  WINAPI WinMain(HINSTANCE	hInstance,                 // 当前窗口实例
 	HINSTANCE	hPrevInstance,             // 前一个窗口实例
@@ -25,11 +25,10 @@ int  WINAPI WinMain(HINSTANCE	hInstance,                 // 当前窗口实例
 
 	int width = 1024;
 	int height = 768;
-	int bits = 32;
+	int millis = 17;
 
-	render::GLFrame* frame = new render::GLFrame();
-	frame->initWindow("OpenGL", width, height, bits, new WndRender());
+	render::GLWindow* pWindow = new render::GLWindow();
+	pWindow->createWindow("OpenGL", width, height, millis, new WndRender());
 
-	// 销毁窗口
-	return 0;                                                                                                                           // 退出程序
+	return 0;                                                                                                                          
 }

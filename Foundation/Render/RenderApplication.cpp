@@ -15,7 +15,6 @@ RenderApplication::RenderApplication()
 	,_refreshInterval(REFRESH_INTERVAL)
 {
 	s_application = this;
-
 	this->init();
 }
 
@@ -97,6 +96,7 @@ void RenderApplication::initFilePath()
 	std::string path;
 	sys::Directory::getCurrentDirectory(path);
 	std::vector<std::string> allPaths = G_FILEPATH->getSearchPath();
+	allPaths.push_back("");
 	allPaths.push_back(path);
 	G_FILEPATH->setSearchPath(allPaths);
 }

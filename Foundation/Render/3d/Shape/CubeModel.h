@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../Common/import.h"
+#include "../Common/Model.h"
 
 namespace render
 {
@@ -17,7 +17,7 @@ namespace render
 		virtual void draw();
 	public:
 		// 设置纹理
-		void setTexture(Texture* texture);
+		void setTexture(const std::string& name, Texture* texture);
 	protected:
 		void onCubeChange();
 		// 获取面的纹理

@@ -1,3 +1,4 @@
 #pragma once
 
-#include "GLFrame.h"
+#include "GLWindow.h"
+#include "GlutWindow.h"

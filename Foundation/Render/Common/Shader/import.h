@@ -1,8 +1,7 @@
 #pragma once
 
-#include "Texture.h"
-#include "TexFrame.h"
-#include "TextureCache.h"
-
-#include "Material.h"
-#include "Mesh.h"
+#include "ShaderVariable.h"
+#include "ShaderUniform.h"
+#include "ShaderAttrib.h"
+#include "Shader.h"
+#include "ShaderProgram.h"

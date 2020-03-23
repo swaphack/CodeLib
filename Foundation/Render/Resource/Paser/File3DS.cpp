@@ -1,121 +1,185 @@
 #include "File3DS.h"
 #include "ext-config.h"
+#include "mathlib.h"
+#include "3d/Common/import.h"
 
 using namespace render;
-
-static int log_level = LIB3DS_LOG_INFO;
-
-static long
-fileio_seek_func(void *self, long offset, Lib3dsIoSeek origin) {
-	FILE *f = (FILE*)self;
-	int o;
-	switch (origin) {
-	case LIB3DS_SEEK_SET:
-		o = SEEK_SET;
-		break;
-
-	case LIB3DS_SEEK_CUR:
-		o = SEEK_CUR;
-		break;
-
-	case LIB3DS_SEEK_END:
-		o = SEEK_END;
-		break;
-	}
-	return (fseek(f, offset, o));
-}
-
-
-static long
-fileio_tell_func(void *self) {
-	FILE *f = (FILE*)self;
-	return(ftell(f));
-}
-
-
-static size_t
-fileio_read_func(void *self, void *buffer, size_t size) {
-	FILE *f = (FILE*)self;
-	return (fread(buffer, 1, size, f));
-}
-
-
-static size_t
-fileio_write_func(void *self, const void *buffer, size_t size) {
-	FILE *f = (FILE*)self;
-	return (fwrite(buffer, 1, size, f));
-}
-
-
-static void
-fileio_log_func(void *self, Lib3dsLogLevel level, int indent, const char *msg)
-{
-	static const char * level_str[] = {
-		"ERROR", "WARN", "INFO", "DEBUG"
-	};
-	if (log_level >= level) {
-		int i;
-		printf("%5s : ", level_str[level]);
-		for (i = 1; i < indent; ++i) printf("\t");
-		printf("%s\n", msg);
-	}
-}
 
 //////////////////////////////////////////////////////////////////////////
 File3DS::File3DS()
 {
-
+	this->setModelFormat(EMRF_3DS);
 }
 
 File3DS::~File3DS()
 {
-	this->cleanup();
 }
 
-void File3DS::load(const char* filename)
+void File3DS::load(const std::string& filename)
 {
-	this->cleanup();
+	std::string strFilepath = G_FILEPATH->getFilePath(filename);
 
-	FILE *file;
-	Lib3dsIo io;
-	int result;
+	Lib3dsFile* pFile = lib3ds_file_open(strFilepath.c_str());
 
-	file = fopen(filename, "rb");
-	if (!file) {
-		PRINT("***ERROR***\nFile not found: %s\n", filename);
+	if (!pFile)
+	{
+		PRINT("***ERROR***\nLoading file failed: %s\n", filename.c_str());
 		return;
 	}
+	/*
+	int include_meshes = 1;
+	int include_cameras = 0;
+	int include_lights = 0;
+	float bmin[3];
+	float bmax[3];
+	float matrix[4][4];
+	lib3ds_file_bounding_box_of_nodes(pFile, include_meshes, include_cameras, include_lights, bmin, bmax, matrix);
+	math::Volume size(bmax[0] - bmin[0], bmax[1] - bmin[1], bmax[2] - bmin[2]);
+	math::Vector3 center(bmax[0] + bmin[0], bmax[1] + bmin[1], bmax[2] + bmin[2]);
+	center *= 0.5f;
+	*/
 
-	_fileInfo = lib3ds_file_new();
-
-	memset(&io, 0, sizeof(io));
-	io.self = file;
-	io.seek_func = fileio_seek_func;
-	io.tell_func = fileio_tell_func;
-	io.read_func = fileio_read_func;
-	io.write_func = fileio_write_func;
-	//io.log_func = fileio_log_func;
-
-	result = lib3ds_file_read(_fileInfo, &io);
-
-	fclose(file);
-
-	if (!result) {
-		PRINT("***ERROR***\nLoading file failed: %s\n", filename);
-		this->cleanup();
-	}
-}
-
-const Lib3dsFile* File3DS::get3dsFile()
-{
-	return _fileInfo;
-}
-
-void File3DS::cleanup()
-{
-	if (_fileInfo != nullptr)
+	std::string dir;
+	sys::Directory::getDirectory(filename, dir);
+	for (int i = 0; i < pFile->nmaterials; i++)
 	{
-		lib3ds_file_free(_fileInfo);
-		_fileInfo = nullptr;
+		auto pMatData = pFile->materials[i];
+		if (pMatData)
+		{
+			int id = lib3ds_file_material_by_name(pFile, pMatData->name);
+
+			if (pMatData->texture1_map.name[0])
+			{
+				int textureID = createTexture(pMatData->texture1_map.name, dir);
+				if (textureID)
+				{
+					this->addTexture(pMatData->texture1_map.name, textureID);
+				}
+			}
+			if (pMatData->texture1_mask.name[0])
+			{
+				int textureID = createTexture(pMatData->texture1_mask.name, dir);
+				if (textureID)
+				{
+					this->addTexture(pMatData->texture1_mask.name, textureID);
+				}
+
+			}
+			if (pMatData->texture2_map.name[0])
+			{
+				int textureID = createTexture(pMatData->texture2_map.name, dir);
+				if (textureID)
+				{
+					this->addTexture(pMatData->texture2_map.name, textureID);
+				}
+			}
+			if (pMatData->texture2_mask.name[0])
+			{
+				int textureID = createTexture(pMatData->texture2_mask.name, dir);
+				if (textureID)
+				{
+					this->addTexture(pMatData->texture2_mask.name, textureID);
+				}
+			}
+
+			auto pMat = CREATE_OBJECT(Material);
+			pMat->setName(pMatData->name);
+			pMat->setTexture1(pMatData->texture1_map.name);
+			pMat->setTexture2(pMatData->texture2_map.name);
+			pMat->setAmbient(pMatData->ambient[0], pMatData->ambient[1], pMatData->ambient[2]);
+			pMat->setDiffuse(pMatData->diffuse[0], pMatData->diffuse[1], pMatData->diffuse[2]);
+			pMat->setSpecular(pMatData->specular[0], pMatData->specular[1], pMatData->specular[2]);
+			pMat->setShiness(pMatData->shininess);
+			this->addMaterial(id, pMat);
+		}
 	}
+
+	for (int i = 0; i < pFile->nmeshes; i++)
+	{
+		auto pMeshData = pFile->meshes[i];
+		if (pMeshData)
+		{
+			int id = lib3ds_file_mesh_by_name(pFile, pMeshData->name);
+
+			auto pMesh = CREATE_OBJECT(Mesh);
+
+			if (pMeshData->nvertices)
+			{
+				if (pMeshData->vertices)
+				{
+					int nVerticeCount = 3 * pMeshData->nvertices;
+					float* verticeData = new float[nVerticeCount];
+
+					for (int j = 0; j < pMeshData->nvertices; j++)
+					{
+						float pos[3] = { 0 };
+						pos[0] = pMeshData->vertices[j][0];
+						pos[1] = pMeshData->vertices[j][1];
+						pos[2] = pMeshData->vertices[j][2];
+						Tool::convertToOGLPoisition(pos, pos);
+						memcpy(verticeData + 3 * j, pos, 3 * sizeof(float));
+					}
+
+					pMesh->setVertices(nVerticeCount, verticeData);
+					delete verticeData;
+				}
+
+				if (pMeshData->texcos)
+				{
+					int nTexCoordCount = 2 * pMeshData->nvertices;
+					float* texCoordData = new float[nTexCoordCount];
+					for (int j = 0; j < pMeshData->nvertices; j++)
+					{
+						memcpy(texCoordData + 2 * j, pMeshData->texcos[j], 2 * sizeof(float));
+					}
+					pMesh->setUVs(nTexCoordCount, texCoordData, 2);
+					delete texCoordData;
+				}
+			}
+
+			if (pMeshData->nfaces)
+			{			
+
+				std::map<int, std::vector<int>> mapMat;
+				for (int j = 0; j < pMeshData->nfaces; j++)
+				{
+					int nMatID = pMeshData->faces[j].material;
+					auto it = mapMat.find(nMatID);
+					if (it == mapMat.end())
+					{
+						mapMat[nMatID] = std::vector<int>();
+					}
+					mapMat[nMatID].push_back(j);
+				}
+
+				for (auto item0 : mapMat)
+				{
+					int nFaceCount = 3 * item0.second.size();
+					if (nFaceCount > 0)
+					{
+						uint16_t* indices = new uint16_t[nFaceCount];
+						int j = 0;
+						for (auto item1 : item0.second)
+						{
+							*(indices + j * 3) = pMeshData->faces[item1].index[0];
+							*(indices + j * 3 + 1) = pMeshData->faces[item1].index[1];
+							*(indices + j * 3 + 2) = pMeshData->faces[item1].index[2];
+							j++;
+						}
+
+						Face* pFace = CREATE_OBJECT(Face);
+						pFace->setMaterial(item0.first);
+						pFace->setIndices(nFaceCount, indices);
+						pMesh->addFace(item0.first, pFace);
+
+						delete indices;
+					}
+				}
+			}
+
+			this->addMesh(id, pMesh);
+		}
+	}
+
+	lib3ds_file_free(pFile);
 }

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "system.h"
+#include <cstdint>
 
 namespace render
 {
@@ -26,9 +26,9 @@ namespace render
 		void setWidth(uint32_t val);
 		// 设置图片高度
 		void setHeight(uint32_t val);
-		// 设置图片格式
+		// 设置图片格式 一个像素所有的rgba类型
 		void setFormat(int val);
-		// 设置图片内部存储格式
+		// 设置图片内部存储格式 一个像素所用的位数
 		void setInternalFormat(int val);
 		// 设置图片像素数据
 		void setPixels(uint8_t * val);

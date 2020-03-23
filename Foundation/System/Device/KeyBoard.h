@@ -8,8 +8,6 @@ namespace sys
 	// ¼üÅÌ
 	class Keyboard
 	{
-	private:
-		
 	public:
 		Keyboard();
 		virtual ~Keyboard();

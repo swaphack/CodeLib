@@ -95,13 +95,7 @@ LPCWCHAR getWCHAR(const char* szStr)
 
 Window::Window()
 :_wnd(NULL),
-_instance(NULL),
-_width(0),
-_height(0),
-_posX(-1),
-_posY(-1),
-_keyboard(nullptr),
-_mouse(nullptr)
+_instance(NULL)
 {
 }
 
@@ -112,9 +106,10 @@ Window::~Window()
 
 void Window::initWindow(const std::string& title, int32_t width, int32_t height)
 {
-	_title = title;
-	_width = static_cast<float>(width);
-	_height = static_cast<float>(height);
+	int left = (GetSystemMetrics(SM_CXSCREEN) - width)* 0.5f;
+	int top = (GetSystemMetrics(SM_CYSCREEN) - height)* 0.5f;
+
+	WindowImpl::initWindow(title, width, height, left, top);
 
 	if (!this->init())
 	{
@@ -137,16 +132,6 @@ bool Window::onRecvSignal(Signal* signal)
 	}
 
 	return false;
-}
-
-Keyboard* Window::getKeyboard()
-{
-	return _keyboard;
-}
-
-Mouse* Window::getMouse()
-{
-	return _mouse;
 }
 
 bool Window::init()

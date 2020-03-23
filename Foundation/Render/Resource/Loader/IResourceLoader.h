@@ -8,6 +8,6 @@ namespace render
 	public:
 		virtual ~IResourceLoader(){}
 	public:
-		virtual void load(const char* filename) = 0;
+		virtual void load(const std::string& filename) = 0;
 	};
 }

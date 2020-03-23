@@ -41,7 +41,6 @@ namespace sys
 		T* temp = new T();
 		if (!temp)
 		{
-			delete temp;
 			return nullptr;
 		}
 

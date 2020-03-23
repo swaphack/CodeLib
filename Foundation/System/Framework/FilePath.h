@@ -14,11 +14,11 @@ namespace sys
 		virtual ~FilePath();
 	public:
 		// 获取文件路径
-		const std::string& getFilePath(const std::string& filename);
+		std::string getFilePath(const std::string& filename);
 		// 获取文件数据
 		bool getFileData(const std::string& filename, std::string& data);
 		// 设置搜索路径
-		void setSearchPath(std::vector<std::string> paths);
+		void setSearchPath(const std::vector<std::string>& paths);
 		// 获取搜索路径
 		const std::vector<std::string>& getSearchPath();
 		// 清空所有已缓存的路径

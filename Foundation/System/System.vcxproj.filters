@@ -430,6 +430,9 @@
     <ClInclude Include="Type\macros.h">
       <Filter>Type</Filter>
     </ClInclude>
+    <ClInclude Include="Device\DeviceImpl.h">
+      <Filter>Device</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Framework\Application.cpp">
@@ -647,6 +650,12 @@
     </ClCompile>
     <ClCompile Include="Text\BitConvert.cpp">
       <Filter>Text</Filter>
+    </ClCompile>
+    <ClCompile Include="Device\WindowImpl.cpp">
+      <Filter>Device</Filter>
+    </ClCompile>
+    <ClCompile Include="Device\DeviceImpl.cpp">
+      <Filter>Device</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

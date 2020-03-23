@@ -85,6 +85,15 @@ void Tool::convertToOGLPoisition(const math::Vector3& src, math::Vector3& dest)
 	convertToOGLPoisition(src.getX(), src.getY(), src.getZ(), dest);
 }
 
+void Tool::convertToOGLPoisition(float* inPos, float* outPos)
+{
+	math::Volume volume = Tool::getGLViewSize();
+
+	outPos[0] = inPos[0] / volume.getWidth();
+	outPos[1] = inPos[1] / volume.getHeight();
+	outPos[2] = inPos[2] / volume.getDeep();
+}
+
 math::Vector3 Tool::convertToWindowPosition(float x, float y, float z)
 {
 	math::Volume volume = Tool::getGLViewSize();

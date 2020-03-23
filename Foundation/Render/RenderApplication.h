@@ -17,6 +17,7 @@ namespace render
 		virtual void dispose(); 
 		// –Ë÷ÿ–¥
 		virtual void show() {}
+	public:
 		// ª≠≤º
 		Canvas* getCanvas();
 

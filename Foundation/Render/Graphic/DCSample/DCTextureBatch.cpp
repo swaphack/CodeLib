@@ -16,14 +16,11 @@ DCTextureBatch::~DCTextureBatch()
 {
 }
 
-void DCTextureBatch::draw()
+void DCTextureBatch::drawDC()
 {
-	glEnable(GL_BLEND);
-	glBlendFunc(Blend.src, Blend.dest);
-	glColor4f(Color.red, Color.green, Color.blue, Color.alpha);
-
 	if (Normals->size > 0)
 	{
+		glEnableClientState(GL_NORMAL_ARRAY);
 		glNormalPointer(GL_FLOAT, 0, Normals->value);
 		SHOW_OPENGL_ERROR_MESSAGE();
 	}
@@ -35,31 +32,33 @@ void DCTextureBatch::draw()
 		SHOW_OPENGL_ERROR_MESSAGE();
 	}
 
+	if (TexCoords->size > 0)
+	{
+		glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+		glTexCoordPointer(TexCoords->unit, GL_FLOAT, 0, TexCoords->value);
+		SHOW_OPENGL_ERROR_MESSAGE();
+	}
+
 	if (TextureID > 0)
 	{
 		glEnable(GL_TEXTURE_2D);
 		glBindTexture(GL_TEXTURE_2D, TextureID);
-		if (TexCoords->size > 0)
-		{
-			glTexCoordPointer(TexCoords->unit, GL_FLOAT, 0, TexCoords->value);
-			SHOW_OPENGL_ERROR_MESSAGE();
-		}
 	}
 	else
 	{
 		if (Colors->size > 0)
 		{
+			glEnableClientState(GL_COLOR_ARRAY);
 			glColorPointer(Colors->unit, GL_FLOAT, 0, Colors->value);
 			SHOW_OPENGL_ERROR_MESSAGE();
 		}
 	}
+
 	if (Indices->size > 0)
 	{
-		glDrawElements(GL_TRIANGLES, Indices->size, GL_UNSIGNED_SHORT, Indices->value);
+		glDrawElements(GL_TRIANGLES, Indices->size, GL_INT, Indices->value);
 		/*
-		glColor3f(0, 1, 1);
-
-		glLineWidth(0.1f);
+		glLineWidth(5.0f);
 		glBegin(GL_LINE_STRIP);
 		for (int i = 0; i < Indices->size; i++)
 		{
@@ -74,6 +73,11 @@ void DCTextureBatch::draw()
 		SHOW_OPENGL_ERROR_MESSAGE();
 	}
 	glDisable(GL_TEXTURE_2D);
+
+	glDisableClientState(GL_VERTEX_ARRAY);
+	glDisableClientState(GL_NORMAL_ARRAY);
+	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+	glDisableClientState(GL_COLOR_ARRAY);
 }
 
 DCTextureBatch* DCTextureBatch::create(int textureID,

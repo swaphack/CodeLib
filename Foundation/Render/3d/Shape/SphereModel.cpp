@@ -1,5 +1,7 @@
 #include "SphereModel.h"
 
+#include "mathlib.h"
+
 using namespace render;
 
 #define SPHERE_HORIZONTAL_COUNT 100
@@ -123,7 +125,7 @@ void SphereModel::draw()
 
 	glDisable(GL_TEXTURE_2D);
 
-	Material::applyDefault();
+	//Material::applyDefault();
 }
 
 void SphereModel::setRadius(float radius)

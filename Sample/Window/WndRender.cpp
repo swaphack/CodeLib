@@ -7,12 +7,11 @@ using namespace ui;
 WndRender::WndRender()
 {
 	this->getCanvas()->setDimensions(render::ED_2D);
-
-	this->getCanvas()->setDimensions(render::ED_3D);
 }
 
 WndRender::~WndRender()
 {
+	
 }
 
 void WndRender::show()
@@ -24,7 +23,7 @@ void WndRender::show()
 	//testMoveImage();
 	//testClock();
 	//testText();
-	//testMask();
+	testMask();
 	//testMedia();
 	
 	//testAnimation();
@@ -62,7 +61,16 @@ void WndRender::show()
 	//testSphereModel();
 	//testModel();
 
-	test3ds();
+	//test3ds();
+
+	//testObj();
+
+	testFbx();
+
+	//this->testCubeModel();
+	//this->testMultiFaceCube();
+
+	testProgram();
 }
 
 void WndRender::testMoveImage()
@@ -101,67 +109,22 @@ void WndRender::testClock()
 
 void WndRender::testCubeModel()
 {
-	int nCount = 2;
-	for (int i = 0; i < nCount; i++)
-	{
-		ImageDefine imageDefine = { "Resource/Image/NeHe.png", EIF_PNG };
-		Texture2D* texture2D = G_TEXTURE_CACHE->createTexture2D(imageDefine);
+	auto pTexture = G_TEXTURE_CACHE->createTexture2D("Resource/Image/NeHe.png");
+	CubeModel* pModel = CREATE_NODE(CubeModel);
+	pModel->setTexture("face", pTexture);
+	pModel->setAnchorPoint(math::Vector3(0.5f, 0.5f, 0.5f));
+	pModel->setPosition(100, 100, 0);
+	pModel->setVolume(200, 200, 200);
+	this->getCanvas()->getRoot()->addChild(pModel);
 
-		TexFrame* frame = new TexFrame();
-		AUTO_RELEASE_OBJECT(frame);
-		frame->setTextureWithRect(texture2D);
+	RotateByAction* pRotateByAction = CREATE_ACTION(RotateByAction);
+	pRotateByAction->setRotation(180, 180, 0);
+	pRotateByAction->setDuration(10);
 
-		MultiFaceCube* pModel = CREATE_NODE(MultiFaceCube);
-		pModel->setPosition(i * 100, i * 100, i * 100);
-		pModel->setAllFaceFrame(frame);
-		pModel->setVolume(200, 200, 200);
-		pModel->setRotation(45, 45, 0);
+	RepeateForeverAction* pRepeateAction = CREATE_ACTION(RepeateForeverAction);
+	pRepeateAction->setAction(pRotateByAction);
 
-		Material* mat = CREATE_OBJECT(Material);
-		mat->setShiness(1.0f);
-		mat->setAmbient(255, 255, 255, 255);
-		mat->setDiffuse(255, 255, 255, 255);
-		mat->setSpecular(0, 0, 0, 255);
-		mat->setEmisiion(255, 255, 255, 255);
-		pModel->setAllFaceMaterial(mat);
-
-		this->getCanvas()->getRoot()->addChild(pModel);
-
-		float interval = 2;
-		float rx = 180;
-		float ry = 180;
-		float rz = 45;
-		RotateByAction* pRotateByAction = CREATE_ACTION(RotateByAction);
-		pRotateByAction->setRotation(rx, ry, rz);
-		pRotateByAction->setDuration(interval);
-
-		MoveToAction* pMoveToAction = CREATE_ACTION(MoveToAction);
-		pMoveToAction->setDuration(interval);
-		pMoveToAction->setPosition(200, 200, 20);
-
-		ScaleByAction* pScaleByAction = CREATE_ACTION(ScaleByAction);
-		pScaleByAction->setDuration(interval);
-		pScaleByAction->setScale(1.5f, 1.5f, 1.5f);
-
-		ScaleByAction* pScaleByAction2 = CREATE_ACTION(ScaleByAction);
-		pScaleByAction2->setDuration(interval);
-		pScaleByAction2->setScale(-1.5f, -1.5f, -1.5f);
-
-		SequenceAction* pSequenece = CREATE_ACTION(SequenceAction);
-		pSequenece->addAction(pRotateByAction);
-		pSequenece->addAction(pScaleByAction);
-		pSequenece->addAction(pScaleByAction2);
-
-		RepeateForeverAction* pRepeateAction = CREATE_ACTION(RepeateForeverAction);
-		pRepeateAction->setAction(pSequenece);
-
-		SpawnAction* pSpawnAction = CREATE_ACTION(SpawnAction);
-		pSpawnAction->addAction(pRepeateAction);
-		pSpawnAction->addAction(pMoveToAction);
-
-		pModel->getActionProxy()->runAction(pRepeateAction);
-	}
-
+	pModel->getActionProxy()->runAction(pRepeateAction);
 }
 
 void WndRender::testSphereModel()
@@ -239,9 +202,9 @@ void WndRender::testMask()
 
 	CtrlMask* pMask = CREATE_NODE(CtrlMask);
 	pMask->setOpacity(opacity);
-	pMask->setPosition(512, 384, 0.0f);
-	pMask->setVolume(200, 300, 0);
-	pMask->setColor(Color3B(0.299f * 255, 0.587f * 255, 0.114f * 255));
+	pMask->setPosition(0, 0, 0.0f);
+	pMask->setVolume(1024, 768, 0);
+	pMask->setColor(Color3B(255, 255, 255));
 	this->getCanvas()->getRoot()->addChild(pMask);
 }
 
@@ -886,20 +849,12 @@ void WndRender::testLayout()
 void WndRender::test3ds()
 {
 	Model3DS* model = CREATE_NODE(Model3DS);
-	model->load("Resource/3DS/Glass House.3DS");
+	model->load("Resource/3DS/Bld_38.3ds");
+	model->setScale(100);
 	model->setPosition(100, 100, 0);
 	model->setVolume(400, 400, 400);
 	this->getCanvas()->getRoot()->addChild(model);
 
-
-	auto pTexture = G_TEXTURE_CACHE->createTexture2D("Resource/Image/NeHe.png");
-	CubeModel* pModel = CREATE_NODE(CubeModel);
-	pModel->setTexture(pTexture);
-	pModel->setAnchorPoint(math::Vector3(0.5f, 0.5f, 0.5f));
-	pModel->setPosition(100, 100, 0);
-	pModel->setVolume(200, 200, 200);
-	this->getCanvas()->getRoot()->addChild(pModel);
-	
 	RotateByAction* pRotateByAction = CREATE_ACTION(RotateByAction);
 	pRotateByAction->setRotation(180, 180, 0);
 	pRotateByAction->setDuration(10);
@@ -907,5 +862,129 @@ void WndRender::test3ds()
 	RepeateForeverAction* pRepeateAction = CREATE_ACTION(RepeateForeverAction);
 	pRepeateAction->setAction(pRotateByAction);
 
-	pModel->getActionProxy()->runAction(pRepeateAction);
+	model->getActionProxy()->runAction(pRepeateAction);
+}
+
+void WndRender::testObj()
+{
+
+	std::string filename = "Resource/Obj/Skull_v3_L2/12140_Skull_v3_L2.obj";
+
+	FileObj* pFile = new FileObj();
+	pFile->load(filename);
+
+	ModelObj* model = CREATE_NODE(ModelObj);
+	model->load("Resource/Obj/Skull_v3_L2/12140_Skull_v3_L2.obj");
+	model->setScale(50);
+	model->setPosition(100, 100, 0);
+	model->setVolume(400, 400, 400);
+	this->getCanvas()->getRoot()->addChild(model);
+
+	RotateByAction* pRotateByAction = CREATE_ACTION(RotateByAction);
+	pRotateByAction->setRotation(180, 180, 0);
+	pRotateByAction->setDuration(10);
+
+	RepeateForeverAction* pRepeateAction = CREATE_ACTION(RepeateForeverAction);
+	pRepeateAction->setAction(pRotateByAction);
+
+	model->getActionProxy()->runAction(pRepeateAction);
+}
+
+void WndRender::testMultiFaceCube()
+{
+	int nCount = 2;
+	for (int i = 0; i < nCount; i++)
+	{
+		ImageDefine imageDefine = { "Resource/Image/NeHe.png", EIF_PNG };
+		Texture2D* texture2D = G_TEXTURE_CACHE->createTexture2D(imageDefine);
+
+		TexFrame* frame = new TexFrame();
+		AUTO_RELEASE_OBJECT(frame);
+		frame->setTextureWithRect(texture2D);
+
+		MultiFaceCube* pModel = CREATE_NODE(MultiFaceCube);
+		pModel->setPosition(i * 100, i * 100, i * 100);
+		pModel->setAllFaceFrame(frame);
+		pModel->setVolume(200, 200, 200);
+		pModel->setRotation(45, 45, 0);
+
+		Material* mat = CREATE_OBJECT(Material);
+		mat->setShiness(1.0f);
+		mat->setAmbient(255, 255, 255, 255);
+		mat->setDiffuse(255, 255, 255, 255);
+		mat->setSpecular(0, 0, 0, 255);
+		mat->setEmisiion(255, 255, 255, 255);
+		pModel->setAllFaceMaterial(mat);
+
+		this->getCanvas()->getRoot()->addChild(pModel);
+
+		float interval = 2;
+		float rx = 180;
+		float ry = 180;
+		float rz = 45;
+		RotateByAction* pRotateByAction = CREATE_ACTION(RotateByAction);
+		pRotateByAction->setRotation(rx, ry, rz);
+		pRotateByAction->setDuration(interval);
+
+		MoveToAction* pMoveToAction = CREATE_ACTION(MoveToAction);
+		pMoveToAction->setDuration(interval);
+		pMoveToAction->setPosition(200, 200, 20);
+
+		ScaleByAction* pScaleByAction = CREATE_ACTION(ScaleByAction);
+		pScaleByAction->setDuration(interval);
+		pScaleByAction->setScale(1.5f, 1.5f, 1.5f);
+
+		ScaleByAction* pScaleByAction2 = CREATE_ACTION(ScaleByAction);
+		pScaleByAction2->setDuration(interval);
+		pScaleByAction2->setScale(-1.5f, -1.5f, -1.5f);
+
+		SequenceAction* pSequenece = CREATE_ACTION(SequenceAction);
+		pSequenece->addAction(pRotateByAction);
+		pSequenece->addAction(pScaleByAction);
+		pSequenece->addAction(pScaleByAction2);
+
+		RepeateForeverAction* pRepeateAction = CREATE_ACTION(RepeateForeverAction);
+		pRepeateAction->setAction(pSequenece);
+
+		SpawnAction* pSpawnAction = CREATE_ACTION(SpawnAction);
+		pSpawnAction->addAction(pRepeateAction);
+		pSpawnAction->addAction(pMoveToAction);
+
+		pModel->getActionProxy()->runAction(pRepeateAction);
+	}
+}
+
+void WndRender::testFbx()
+{
+	ModelFbx* model = CREATE_NODE(ModelFbx);
+	model->load("Resource/fbx/LANCER_EVOLUTION/LANCEREVOX.FBX");
+	model->setScale(300);
+	model->setPosition(100, 100, 0);
+	model->setVolume(400, 400, 400);
+	model->setRotationX(-90);
+	this->getCanvas()->getRoot()->addChild(model);
+
+	RotateByAction* pRotateByAction = CREATE_ACTION(RotateByAction);
+	pRotateByAction->setRotation(0, 180, 0);
+	pRotateByAction->setDuration(10);
+
+	RepeateForeverAction* pRepeateAction = CREATE_ACTION(RepeateForeverAction);
+	pRepeateAction->setAction(pRotateByAction);
+
+	model->getActionProxy()->runAction(pRepeateAction);
+}
+
+void WndRender::testProgram()
+{
+	CtrlImage* pImage = CREATE_NODE(CtrlImage);
+	pImage->setImagePath("Resource/Image/NeHe.png");
+	pImage->setPosition(512, 400, 0);
+	pImage->setScale(1, 1, 1);
+	pImage->setRotation(0, 0, 30);
+	this->getCanvas()->getRoot()->addChild(pImage);
+
+	ShaderProgram* pProgram = CREATE_OBJECT(ShaderProgram);
+	pProgram->load("Resource/shader/gray.vsh", "Resource/shader/gray.fsh");
+	pProgram->link();
+	pImage->setProgram(pProgram);
 }

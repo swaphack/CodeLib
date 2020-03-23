@@ -1,4 +1,5 @@
 #include "CubeModel.h"
+#include "Resource/Detail/ModelDetail.h"
 
 using namespace render;
 
@@ -27,18 +28,26 @@ bool CubeModel::init()
 		onCubeChange();
 	});
 
+	_modelDetail = new ModelDetail();
+
 	auto pMesh = CREATE_OBJECT(Mesh);
 	auto pMat = CREATE_OBJECT(Material);
-	this->addMesh(0, pMesh);
-	this->addMaterial(0, pMat);
+	_modelDetail->addMesh(0, pMesh);
+	_modelDetail->addMaterial(0, pMat);
 
-	pMesh->setMaterial(0);
-
+	for (int i = 0; i < CUBE_FACE_COUNT; i++)
+	{
+		auto pFace = CREATE_OBJECT(Face);
+		pFace->setMaterial(0);
+		pMesh->addFace(i, pFace);
+	}
 	return true;
 }
 
 void CubeModel::draw()
 {
+	Model::draw();
+	/*
 	for (auto mesh : _meshes)
 	{
 		int textureID = 0;
@@ -56,11 +65,12 @@ void CubeModel::draw()
 			pMat->apply();
 		}
 	}
+	*/
 }
 
 void CubeModel::onCubeChange()
 {
-	auto pMesh = getMesh(0);
+	auto pMesh = _modelDetail->getMesh(0);
 	if (!pMesh)
 	{
 		return;
@@ -129,9 +139,16 @@ void CubeModel::onCubeChange()
 	};
 	
 	pMesh->setVertices(24, vertexes);
-	pMesh->setIndices(36, indexes);
-	pMesh->setUV(16, uv, 2);
+	pMesh->setUVs(16, uv, 2);
 	pMesh->setNormals(24, normal);
+	for (int i = 0; i < CUBE_FACE_COUNT; i++)
+	{
+		auto pFace = pMesh->getFace(i);
+		if (pFace)
+		{
+			pFace->setIndices(6, indexes + i * CUBE_FACE_COUNT);
+		}
+	}
 }
 
 TextureRect* CubeModel::getTextureRect(ModelFace face)
@@ -163,10 +180,18 @@ TextureRect* CubeModel::getTextureRect(ModelFace face)
 	return nullptr;
 }
 
-void CubeModel::setTexture(Texture* texture)
+void CubeModel::setTexture(const std::string& name, Texture* texture)
 {
 	SAFE_RELEASE(_texture);
 	SAFE_RETAIN(texture);
 	_texture = texture;
+
+	_modelDetail->addTexture(name, texture->getTextureID());
+
+	auto pMat = _modelDetail->getMaterial(0);
+	if (pMat)
+	{
+		pMat->setTexture1(name);
+	}
 }
 

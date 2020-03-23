@@ -19,7 +19,7 @@ void DataSheet::setKey(const std::string& key)
 
 const std::string& DataSheet::getKey()
 {
-	return _key.c_str();
+	return _key;
 }
 
 IDataRecord* DataSheet::create()

@@ -36,7 +36,7 @@
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v120</PlatformToolset>
-    <CharacterSet>Unicode</CharacterSet>
+    <CharacterSet>MultiByte</CharacterSet>
     <CLRSupport>false</CLRSupport>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'" Label="Configuration">
@@ -100,14 +100,14 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>../../Foundation/System/;../../Foundation/Web/;../../Foundation/Render/;../../Foundation/UI/;../../Foundation/Algorithm;../../Foundation/Text/;../../Foundation/Math/;../../Lib/include/;../../Lib/include/freetype/;../../Lib/include/ffmpeg/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../Foundation/System/;../../Foundation/Web/;../../Foundation/Render/;../../Foundation/UI/;../../Foundation/Algorithm;../../Foundation/Text/;../../Foundation/Math/;../../Lib/include/;../../Lib/include/freetype/;../../Lib/include/ffmpeg/;../../Lib/include/3ds/;../../Lib/include/obj/;../../Lib/include/fbx/;../../Lib/include/tga/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <BrowseInformation>true</BrowseInformation>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>../../Lib/lib/freetype;../../Lib/lib/jpeg;../../Lib/lib/opengl;../../Lib/lib/png;../../Lib/lib/zlib;../../Lib/lib/fmod;../../Lib/lib/3ds;../../Lib/lib/ffmpeg;$(OutDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>opengl.lib;glu.lib;glut.lib;zlib.lib;libpng16.lib;freetype263.lib;avutil.lib;avcodec.lib;avdevice.lib;avfilter.lib;avformat.lib;swscale.lib;swresample.lib;postproc.lib;jpeg.lib;fmod_vc.lib;System.lib;Text.lib;Render.lib;UI.lib;Web.lib;Math.lib;lib3ds.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>../../Lib/lib/freetype;../../Lib/lib/jpeg;../../Lib/lib/opengl;../../Lib/lib/gl;../../Lib/lib/png;../../Lib/lib/zlib;../../Lib/lib/fmod;../../Lib/lib/3ds;../../Lib/lib/obj;../../Lib/lib/fbx;../../Lib/lib/tga;../../Lib/lib/ffmpeg;$(OutDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>OpenGL32.Lib;GLU32.LIB;GLUT32.LIB;glew32.lib;zlib.lib;libpng16.lib;freetype263.lib;avutil.lib;avcodec.lib;avdevice.lib;avfilter.lib;avformat.lib;swscale.lib;swresample.lib;postproc.lib;jpeg.lib;fmod_vc.lib;System.lib;Text.lib;Render.lib;UI.lib;Web.lib;Math.lib;libobj.lib;lib3ds.lib;libfbxsdk-md.lib;wininet.lib;libxml2-md.lib;zlib-md.lib;libtga.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <Bscmake>
       <PreserveSbr>true</PreserveSbr>
@@ -172,7 +172,6 @@
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Main2.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="WndRender.cpp" />
     <ClCompile Include="WndWeb.cpp" />
@@ -196,6 +195,8 @@
     <Image Include="toolbar1.bmp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resource\shader\gray.fsh" />
+    <None Include="Resource\shader\gray.vsh" />
     <None Include="ribbon1.mfcribbon-ms" />
   </ItemGroup>
   <ItemGroup>

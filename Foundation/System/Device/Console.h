@@ -12,7 +12,7 @@ namespace sys
 		virtual ~Console();
 	public:
 		// 读取一行
-		virtual const std::string& readLine();
+		virtual std::string readLine();
 		// 读取一个字符
 		virtual char readChar();
 		// 写入一行

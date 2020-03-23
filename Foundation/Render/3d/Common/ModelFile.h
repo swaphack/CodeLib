@@ -4,7 +4,7 @@
 #include <map>
 
 #include "Resource/Config/import.h"
-#include "Common/GL/pointer_common.h"
+#include "Common/struct/pointer_common.h"
 
 namespace render
 {

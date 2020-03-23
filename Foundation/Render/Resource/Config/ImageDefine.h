@@ -10,7 +10,8 @@ namespace render
 	{
 		EIF_NONE = 0,
 		EIF_PNG,	// png
-		EIF_JPEG,	// jpeg;
+		EIF_JPEG,	// jpg
+		EIF_TARGA,	// tga
 	};
 
 	// 图片数据描述结构
@@ -46,6 +47,7 @@ namespace render
 
 			if (strFormat == "png") this->format = EIF_PNG;
 			else if (strFormat == "jpg") this->format = EIF_JPEG;
+			else if (strFormat == "tga") this->format = EIF_TARGA;
 			else this->format = EIF_NONE;
 		}
 	};

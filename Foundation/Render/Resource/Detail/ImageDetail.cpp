@@ -1,4 +1,5 @@
 #include "ImageDetail.h"
+#include "system.h"
 
 using namespace render;
 

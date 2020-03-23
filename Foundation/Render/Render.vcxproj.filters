@@ -31,23 +31,8 @@
     <ClCompile Include="Common\Tool\TextureTool.cpp">
       <Filter>Common\Tool</Filter>
     </ClCompile>
-    <ClCompile Include="Common\Shader\Material.cpp">
-      <Filter>Common\Shader</Filter>
-    </ClCompile>
-    <ClCompile Include="Common\GL\protocol_common.cpp">
-      <Filter>Common\GL</Filter>
-    </ClCompile>
     <ClCompile Include="Common\Action\Scheduler.cpp">
       <Filter>Common\Action</Filter>
-    </ClCompile>
-    <ClCompile Include="Resource\Paser\FFmpeg.cpp">
-      <Filter>Resource\Parser</Filter>
-    </ClCompile>
-    <ClCompile Include="Resource\Paser\LabelImage.cpp">
-      <Filter>Resource\Parser</Filter>
-    </ClCompile>
-    <ClCompile Include="Resource\Paser\PNGImage.cpp">
-      <Filter>Resource\Parser</Filter>
     </ClCompile>
     <ClCompile Include="Common\Node\ColorNode.cpp">
       <Filter>Common\Node</Filter>
@@ -58,9 +43,6 @@
     <ClCompile Include="Common\Action\ActionProxy.cpp">
       <Filter>Common\Action</Filter>
     </ClCompile>
-    <ClCompile Include="Platform\Windows\GLFrame.cpp">
-      <Filter>Platform\Windows</Filter>
-    </ClCompile>
     <ClCompile Include="Common\Touch\TouchManager.cpp">
       <Filter>Common\Touch</Filter>
     </ClCompile>
@@ -70,20 +52,8 @@
     <ClCompile Include="Common\Keyboard\KeyboardManager.cpp">
       <Filter>Common\Keyboard</Filter>
     </ClCompile>
-    <ClCompile Include="Resource\Paser\JPEGImage.cpp">
-      <Filter>Resource\Parser</Filter>
-    </ClCompile>
     <ClCompile Include="Common\XControl\Pixel.cpp">
       <Filter>Common\XControl</Filter>
-    </ClCompile>
-    <ClCompile Include="Common\Shader\TexFrame.cpp">
-      <Filter>Common\Shader</Filter>
-    </ClCompile>
-    <ClCompile Include="Common\Shader\Texture.cpp">
-      <Filter>Common\Shader</Filter>
-    </ClCompile>
-    <ClCompile Include="Common\Shader\TextureCache.cpp">
-      <Filter>Common\Shader</Filter>
     </ClCompile>
     <ClCompile Include="Graphic\Command\DrawCommander.cpp">
       <Filter>Graphic\Command</Filter>
@@ -119,9 +89,6 @@
     </ClCompile>
     <ClCompile Include="Common\Node\Notify.cpp">
       <Filter>Common\Node</Filter>
-    </ClCompile>
-    <ClCompile Include="Common\Shader\Mesh.cpp">
-      <Filter>Common\Shader</Filter>
     </ClCompile>
     <ClCompile Include="Common\Audio\AudioManager.cpp">
       <Filter>Common\Audio</Filter>
@@ -186,9 +153,6 @@
     <ClCompile Include="3d\Common\Model.cpp">
       <Filter>3d\Common</Filter>
     </ClCompile>
-    <ClCompile Include="Common\GL\shape_common.cpp">
-      <Filter>Common\GL</Filter>
-    </ClCompile>
     <ClCompile Include="Graphic\DCSample\DCDraw.cpp">
       <Filter>Graphic\DCSample</Filter>
     </ClCompile>
@@ -246,11 +210,98 @@
     <ClCompile Include="3d\Shape\CubeModel.cpp">
       <Filter>3d\Shape</Filter>
     </ClCompile>
+    <ClCompile Include="Graphic\DCSample\DCColor.cpp">
+      <Filter>Graphic\DCSample</Filter>
+    </ClCompile>
+    <ClCompile Include="3d\Common\ModelObj.cpp">
+      <Filter>3d\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource\Paser\FileObj.cpp">
+      <Filter>Resource\Parser</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource\Detail\Face.cpp">
+      <Filter>Resource\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource\Detail\Material.cpp">
+      <Filter>Resource\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource\Detail\Mesh.cpp">
+      <Filter>Resource\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphic\DCSample\DCMaterial.cpp">
+      <Filter>Graphic\DCSample</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphic\DCSample\DCModel.cpp">
+      <Filter>Graphic\DCSample</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource\Paser\FileFbx.cpp">
+      <Filter>Resource\Parser</Filter>
+    </ClCompile>
+    <ClCompile Include="3d\Common\ModelFbx.cpp">
+      <Filter>3d\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource\Paser\ImageJPEG.cpp">
+      <Filter>Resource\Parser</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource\Paser\ImageLabel.cpp">
+      <Filter>Resource\Parser</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource\Paser\ImagePNG.cpp">
+      <Filter>Resource\Parser</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource\Paser\MediaFFmpeg.cpp">
+      <Filter>Resource\Parser</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource\Paser\ImageTarga.cpp">
+      <Filter>Resource\Parser</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Texture\TexFrame.cpp">
+      <Filter>Common\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Texture\Texture.cpp">
+      <Filter>Common\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Texture\TextureCache.cpp">
+      <Filter>Common\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\struct\pointer_common.cpp">
+      <Filter>Common\struct</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\struct\protocol_common.cpp">
+      <Filter>Common\struct</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\struct\shape_common.cpp">
+      <Filter>Common\struct</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Shader\Shader.cpp">
+      <Filter>Common\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource\Detail\TextureMap.cpp">
+      <Filter>Resource\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Shader\ShaderProgram.cpp">
+      <Filter>Common\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Shader\ShaderVariable.cpp">
+      <Filter>Common\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Shader\ShaderAttrib.cpp">
+      <Filter>Common\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Shader\ShaderUniform.cpp">
+      <Filter>Common\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="Platform\DeviceProxy.cpp">
+      <Filter>Platform</Filter>
+    </ClCompile>
+    <ClCompile Include="Platform\Windows\GlutWindow.cpp">
+      <Filter>Platform\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="Platform\Windows\GLWindow.cpp">
+      <Filter>Platform\Windows</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Common\GL\import.h">
-      <Filter>Common\GL</Filter>
-    </ClInclude>
     <ClInclude Include="Common\Node\import.h">
       <Filter>Common\Node</Filter>
     </ClInclude>
@@ -275,9 +326,6 @@
     <ClInclude Include="Common\Action\IntervalAction.h">
       <Filter>Common\Action</Filter>
     </ClInclude>
-    <ClInclude Include="Common\Shader\import.h">
-      <Filter>Common\Shader</Filter>
-    </ClInclude>
     <ClInclude Include="Common\View\View.h">
       <Filter>Common\View</Filter>
     </ClInclude>
@@ -299,17 +347,8 @@
     <ClInclude Include="Common\Tool\TextureTool.h">
       <Filter>Common\Tool</Filter>
     </ClInclude>
-    <ClInclude Include="Common\Shader\Material.h">
-      <Filter>Common\Shader</Filter>
-    </ClInclude>
     <ClInclude Include="Common\XControl\import.h">
       <Filter>Common\XControl</Filter>
-    </ClInclude>
-    <ClInclude Include="Common\GL\protocol_common.h">
-      <Filter>Common\GL</Filter>
-    </ClInclude>
-    <ClInclude Include="Common\GL\enum_common.h">
-      <Filter>Common\GL</Filter>
     </ClInclude>
     <ClInclude Include="Common\Action\Scheduler.h">
       <Filter>Common\Action</Filter>
@@ -319,15 +358,6 @@
     </ClInclude>
     <ClInclude Include="Resource\macros.h">
       <Filter>Resource</Filter>
-    </ClInclude>
-    <ClInclude Include="Resource\Paser\PNGImage.h">
-      <Filter>Resource\Parser</Filter>
-    </ClInclude>
-    <ClInclude Include="Resource\Paser\FFmpeg.h">
-      <Filter>Resource\Parser</Filter>
-    </ClInclude>
-    <ClInclude Include="Resource\Paser\LabelImage.h">
-      <Filter>Resource\Parser</Filter>
     </ClInclude>
     <ClInclude Include="Resource\Paser\import.h">
       <Filter>Resource\Parser</Filter>
@@ -346,9 +376,6 @@
     </ClInclude>
     <ClInclude Include="Platform\import.h">
       <Filter>Platform</Filter>
-    </ClInclude>
-    <ClInclude Include="Platform\Windows\GLFrame.h">
-      <Filter>Platform\Windows</Filter>
     </ClInclude>
     <ClInclude Include="Platform\Windows\import.h">
       <Filter>Platform\Windows</Filter>
@@ -384,23 +411,11 @@
     <ClInclude Include="Common\Keyboard\import.h">
       <Filter>Common\Keyboard</Filter>
     </ClInclude>
-    <ClInclude Include="Resource\Paser\JPEGImage.h">
-      <Filter>Resource\Parser</Filter>
-    </ClInclude>
     <ClInclude Include="Common\XControl\Pixel.h">
       <Filter>Common\XControl</Filter>
     </ClInclude>
     <ClInclude Include="Graphic\Command\macros.h">
       <Filter>Graphic\Command</Filter>
-    </ClInclude>
-    <ClInclude Include="Common\Shader\TexFrame.h">
-      <Filter>Common\Shader</Filter>
-    </ClInclude>
-    <ClInclude Include="Common\Shader\Texture.h">
-      <Filter>Common\Shader</Filter>
-    </ClInclude>
-    <ClInclude Include="Common\Shader\TextureCache.h">
-      <Filter>Common\Shader</Filter>
     </ClInclude>
     <ClInclude Include="Graphic\Command\DrawCommander.h">
       <Filter>Graphic\Command</Filter>
@@ -506,9 +521,6 @@
     <ClInclude Include="Common\Node\Notify.h">
       <Filter>Common\Node</Filter>
     </ClInclude>
-    <ClInclude Include="Common\Shader\Mesh.h">
-      <Filter>Common\Shader</Filter>
-    </ClInclude>
     <ClInclude Include="3d\Map\macros.h">
       <Filter>3d\Map</Filter>
     </ClInclude>
@@ -608,15 +620,6 @@
     <ClInclude Include="2d\ctrl_common.h">
       <Filter>2d</Filter>
     </ClInclude>
-    <ClInclude Include="Common\GL\pointer_common.h">
-      <Filter>Common\GL</Filter>
-    </ClInclude>
-    <ClInclude Include="Common\GL\shape_common.h">
-      <Filter>Common\GL</Filter>
-    </ClInclude>
-    <ClInclude Include="Common\GL\texture_common.h">
-      <Filter>Common\GL</Filter>
-    </ClInclude>
     <ClInclude Include="ext-config.h" />
     <ClInclude Include="2d\import.h">
       <Filter>2d</Filter>
@@ -636,7 +639,6 @@
     <ClInclude Include="Graphic\DCSample\DCCamera.h">
       <Filter>Graphic\DCSample</Filter>
     </ClInclude>
-    <ClInclude Include="Resource\Detail\import.h" />
     <ClInclude Include="Resource\Detail\MediaDetail.h">
       <Filter>Resource\Detail</Filter>
     </ClInclude>
@@ -661,13 +663,118 @@
     <ClInclude Include="3d\Shape\CubeModel.h">
       <Filter>3d\Shape</Filter>
     </ClInclude>
+    <ClInclude Include="Graphic\DCSample\DCColor.h">
+      <Filter>Graphic\DCSample</Filter>
+    </ClInclude>
+    <ClInclude Include="3d\Common\ModelObj.h">
+      <Filter>3d\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\Paser\FileObj.h">
+      <Filter>Resource\Parser</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\Detail\Face.h">
+      <Filter>Resource\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\Detail\Material.h">
+      <Filter>Resource\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\Detail\Mesh.h">
+      <Filter>Resource\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphic\DCSample\DCMaterial.h">
+      <Filter>Graphic\DCSample</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\Detail\import.h">
+      <Filter>Resource\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphic\DCSample\DCModel.h">
+      <Filter>Graphic\DCSample</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\Paser\FileFbx.h">
+      <Filter>Resource\Parser</Filter>
+    </ClInclude>
+    <ClInclude Include="3d\Common\ModelFbx.h">
+      <Filter>3d\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\Paser\ImageJPEG.h">
+      <Filter>Resource\Parser</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\Paser\ImageLabel.h">
+      <Filter>Resource\Parser</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\Paser\ImagePNG.h">
+      <Filter>Resource\Parser</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\Paser\MediaFFmpeg.h">
+      <Filter>Resource\Parser</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\Paser\ImageTarga.h">
+      <Filter>Resource\Parser</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Texture\import.h">
+      <Filter>Common\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Texture\TexFrame.h">
+      <Filter>Common\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Texture\Texture.h">
+      <Filter>Common\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Texture\TextureCache.h">
+      <Filter>Common\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\struct\enum_common.h">
+      <Filter>Common\struct</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\struct\import.h">
+      <Filter>Common\struct</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\struct\pointer_common.h">
+      <Filter>Common\struct</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\struct\protocol_common.h">
+      <Filter>Common\struct</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\struct\shape_common.h">
+      <Filter>Common\struct</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\struct\texture_common.h">
+      <Filter>Common\struct</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Shader\import.h">
+      <Filter>Common\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Shader\Shader.h">
+      <Filter>Common\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\Detail\TextureMap.h">
+      <Filter>Resource\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Shader\ShaderProgram.h">
+      <Filter>Common\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Shader\ShaderVariable.h">
+      <Filter>Common\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Shader\ShaderAttrib.h">
+      <Filter>Common\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Shader\ShaderUniform.h">
+      <Filter>Common\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="Platform\Windows\GlutWindow.h">
+      <Filter>Platform\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="Platform\DeviceProxy.h">
+      <Filter>Platform</Filter>
+    </ClInclude>
+    <ClInclude Include="Platform\Windows\GLWindow.h">
+      <Filter>Platform\Windows</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Common">
       <UniqueIdentifier>{9cdc0d0a-4f1c-4121-938c-d25fc9b1103f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Common\GL">
-      <UniqueIdentifier>{a4c06e44-b038-4733-b6e2-09cec111de75}</UniqueIdentifier>
     </Filter>
     <Filter Include="Common\Node">
       <UniqueIdentifier>{a34218fa-86f1-404a-9737-b2c387dfce15}</UniqueIdentifier>
@@ -683,9 +790,6 @@
     </Filter>
     <Filter Include="Common\Action">
       <UniqueIdentifier>{1c8ab4ae-8924-4c39-8889-09946c2fdfe0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Common\Shader">
-      <UniqueIdentifier>{af282e8f-c075-4311-a9d5-b6128b397090}</UniqueIdentifier>
     </Filter>
     <Filter Include="3d">
       <UniqueIdentifier>{8ffa7b3f-1dfd-407f-8836-58bac15fd524}</UniqueIdentifier>
@@ -761,6 +865,15 @@
     </Filter>
     <Filter Include="Resource\Detail">
       <UniqueIdentifier>{9df81cfb-9846-4989-81c1-b7ad6ba47ba6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common\Texture">
+      <UniqueIdentifier>{af282e8f-c075-4311-a9d5-b6128b397090}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common\struct">
+      <UniqueIdentifier>{a4c06e44-b038-4733-b6e2-09cec111de75}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common\Shader">
+      <UniqueIdentifier>{15d27c74-8b8d-47a0-a04e-4370a04709e1}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

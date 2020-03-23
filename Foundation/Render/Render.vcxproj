@@ -43,8 +43,9 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>../System/;../../Lib/include/;../../Lib/include/freetype/;../Text/;../Math/;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../System/;../../Lib/include/;../../Lib/include/fbx/;../../Lib/include/freetype/;../Text/;../Math/;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <BrowseInformation>true</BrowseInformation>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -85,7 +86,9 @@
     <ClCompile Include="2d\UI\CtrlText.cpp" />
     <ClCompile Include="3d\Common\Model.cpp" />
     <ClCompile Include="3d\Common\Model3DS.cpp" />
+    <ClCompile Include="3d\Common\ModelFbx.cpp" />
     <ClCompile Include="3d\Common\ModelFile.cpp" />
+    <ClCompile Include="3d\Common\ModelObj.cpp" />
     <ClCompile Include="3d\Environment\ClipPlane.cpp" />
     <ClCompile Include="3d\Environment\Stencil.cpp" />
     <ClCompile Include="3d\Environment\Fog.cpp" />
@@ -110,19 +113,23 @@
     <ClCompile Include="Common\Audio\CtrlAudioSpeaker.cpp" />
     <ClCompile Include="Common\Audio\macros.cpp" />
     <ClCompile Include="Common\DrawNode\DrawNode.cpp" />
-    <ClCompile Include="Common\GL\protocol_common.cpp" />
-    <ClCompile Include="Common\GL\shape_common.cpp" />
     <ClCompile Include="Common\Keyboard\KeyboardManager.cpp" />
     <ClCompile Include="Common\Node\Animation.cpp" />
     <ClCompile Include="Common\Node\ColorNode.cpp" />
     <ClCompile Include="Common\Node\Node.cpp" />
     <ClCompile Include="Common\Node\Notify.cpp" />
     <ClCompile Include="Common\Scene\Scene.cpp" />
-    <ClCompile Include="Common\Shader\Material.cpp" />
-    <ClCompile Include="Common\Shader\Mesh.cpp" />
-    <ClCompile Include="Common\Shader\TexFrame.cpp" />
-    <ClCompile Include="Common\Shader\Texture.cpp" />
-    <ClCompile Include="Common\Shader\TextureCache.cpp" />
+    <ClCompile Include="Common\Shader\ShaderAttrib.cpp" />
+    <ClCompile Include="Common\Shader\ShaderProgram.cpp" />
+    <ClCompile Include="Common\Shader\Shader.cpp" />
+    <ClCompile Include="Common\Shader\ShaderUniform.cpp" />
+    <ClCompile Include="Common\Shader\ShaderVariable.cpp" />
+    <ClCompile Include="Common\struct\pointer_common.cpp" />
+    <ClCompile Include="Common\struct\protocol_common.cpp" />
+    <ClCompile Include="Common\struct\shape_common.cpp" />
+    <ClCompile Include="Common\Texture\TexFrame.cpp" />
+    <ClCompile Include="Common\Texture\Texture.cpp" />
+    <ClCompile Include="Common\Texture\TextureCache.cpp" />
     <ClCompile Include="Common\Tool\TextureTool.cpp" />
     <ClCompile Include="Common\Tool\Tool.cpp" />
     <ClCompile Include="Common\Touch\TouchManager.cpp" />
@@ -136,22 +143,34 @@
     <ClCompile Include="Graphic\Command\DrawCommandList.cpp" />
     <ClCompile Include="Graphic\Command\GUID.cpp" />
     <ClCompile Include="Graphic\DCSample\DCCamera.cpp" />
+    <ClCompile Include="Graphic\DCSample\DCColor.cpp" />
     <ClCompile Include="Graphic\DCSample\DCDraw.cpp" />
     <ClCompile Include="Graphic\DCSample\DCMask.cpp" />
+    <ClCompile Include="Graphic\DCSample\DCMaterial.cpp" />
     <ClCompile Include="Graphic\DCSample\DCMatrix.cpp" />
+    <ClCompile Include="Graphic\DCSample\DCModel.cpp" />
     <ClCompile Include="Graphic\DCSample\DCSpace.cpp" />
     <ClCompile Include="Graphic\DCSample\DCTexture.cpp" />
     <ClCompile Include="Graphic\DCSample\DCTextureBatch.cpp" />
-    <ClCompile Include="Platform\Windows\GLFrame.cpp" />
+    <ClCompile Include="Platform\DeviceProxy.cpp" />
+    <ClCompile Include="Platform\Windows\GlutWindow.cpp" />
+    <ClCompile Include="Platform\Windows\GLWindow.cpp" />
     <ClCompile Include="RenderApplication.cpp" />
     <ClCompile Include="Resource\Detail\AudioDetail.cpp" />
+    <ClCompile Include="Resource\Detail\Face.cpp" />
     <ClCompile Include="Resource\Detail\ImageDetail.cpp" />
+    <ClCompile Include="Resource\Detail\Material.cpp" />
     <ClCompile Include="Resource\Detail\MediaDetail.cpp" />
+    <ClCompile Include="Resource\Detail\Mesh.cpp" />
     <ClCompile Include="Resource\Detail\ModelDetail.cpp" />
-    <ClCompile Include="Resource\Paser\FFmpeg.cpp" />
-    <ClCompile Include="Resource\Paser\JPEGImage.cpp" />
-    <ClCompile Include="Resource\Paser\LabelImage.cpp" />
-    <ClCompile Include="Resource\Paser\PNGImage.cpp" />
+    <ClCompile Include="Resource\Detail\TextureMap.cpp" />
+    <ClCompile Include="Resource\Paser\ImageTarga.cpp" />
+    <ClCompile Include="Resource\Paser\MediaFFmpeg.cpp" />
+    <ClCompile Include="Resource\Paser\FileFbx.cpp" />
+    <ClCompile Include="Resource\Paser\FileObj.cpp" />
+    <ClCompile Include="Resource\Paser\ImageJPEG.cpp" />
+    <ClCompile Include="Resource\Paser\ImageLabel.cpp" />
+    <ClCompile Include="Resource\Paser\ImagePNG.cpp" />
     <ClCompile Include="Resource\Paser\File3DS.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -176,6 +195,8 @@
     <ClInclude Include="2d\UI\import.h" />
     <ClInclude Include="2d\UI\macros.h" />
     <ClInclude Include="3d\Common\Model3DS.h" />
+    <ClInclude Include="3d\Common\ModelFbx.h" />
+    <ClInclude Include="3d\Common\ModelObj.h" />
     <ClInclude Include="3d\Common\Ray.h" />
     <ClInclude Include="3d\Common\Model.h" />
     <ClInclude Include="3d\Common\import.h" />
@@ -214,14 +235,8 @@
     <ClInclude Include="Common\Audio\macros.h" />
     <ClInclude Include="Common\DrawNode\DrawNode.h" />
     <ClInclude Include="Common\DrawNode\import.h" />
-    <ClInclude Include="Common\GL\pointer_common.h" />
-    <ClInclude Include="Common\GL\shape_common.h" />
-    <ClInclude Include="Common\GL\texture_common.h" />
     <ClInclude Include="Common\import.h" />
     <ClInclude Include="Common\macros.h" />
-    <ClInclude Include="Common\GL\import.h" />
-    <ClInclude Include="Common\GL\enum_common.h" />
-    <ClInclude Include="Common\GL\protocol_common.h" />
     <ClInclude Include="Common\Keyboard\import.h" />
     <ClInclude Include="Common\Keyboard\KeyboardManager.h" />
     <ClInclude Include="Common\Node\Animation.h" />
@@ -231,12 +246,22 @@
     <ClInclude Include="Common\Node\Notify.h" />
     <ClInclude Include="Common\Scene\import.h" />
     <ClInclude Include="Common\Scene\Scene.h" />
+    <ClInclude Include="Common\Shader\ShaderAttrib.h" />
     <ClInclude Include="Common\Shader\import.h" />
-    <ClInclude Include="Common\Shader\Material.h" />
-    <ClInclude Include="Common\Shader\Mesh.h" />
-    <ClInclude Include="Common\Shader\TexFrame.h" />
-    <ClInclude Include="Common\Shader\Texture.h" />
-    <ClInclude Include="Common\Shader\TextureCache.h" />
+    <ClInclude Include="Common\Shader\Shader.h" />
+    <ClInclude Include="Common\Shader\ShaderProgram.h" />
+    <ClInclude Include="Common\Shader\ShaderUniform.h" />
+    <ClInclude Include="Common\Shader\ShaderVariable.h" />
+    <ClInclude Include="Common\struct\enum_common.h" />
+    <ClInclude Include="Common\struct\import.h" />
+    <ClInclude Include="Common\struct\pointer_common.h" />
+    <ClInclude Include="Common\struct\protocol_common.h" />
+    <ClInclude Include="Common\struct\shape_common.h" />
+    <ClInclude Include="Common\struct\texture_common.h" />
+    <ClInclude Include="Common\Texture\import.h" />
+    <ClInclude Include="Common\Texture\TexFrame.h" />
+    <ClInclude Include="Common\Texture\Texture.h" />
+    <ClInclude Include="Common\Texture\TextureCache.h" />
     <ClInclude Include="Common\Tool\import.h" />
     <ClInclude Include="Common\Tool\TextureTool.h" />
     <ClInclude Include="Common\Tool\Tool.h" />
@@ -259,17 +284,22 @@
     <ClInclude Include="Graphic\Command\import.h" />
     <ClInclude Include="Graphic\Command\macros.h" />
     <ClInclude Include="Graphic\DCSample\DCCamera.h" />
+    <ClInclude Include="Graphic\DCSample\DCColor.h" />
     <ClInclude Include="Graphic\DCSample\DCDraw.h" />
     <ClInclude Include="Graphic\DCSample\DCMask.h" />
+    <ClInclude Include="Graphic\DCSample\DCMaterial.h" />
     <ClInclude Include="Graphic\DCSample\DCMatrix.h" />
+    <ClInclude Include="Graphic\DCSample\DCModel.h" />
     <ClInclude Include="Graphic\DCSample\DCSpace.h" />
     <ClInclude Include="Graphic\DCSample\DCTexture.h" />
     <ClInclude Include="Graphic\DCSample\DCTextureBatch.h" />
     <ClInclude Include="Graphic\DCSample\import.h" />
     <ClInclude Include="Graphic\DCSample\macros.h" />
     <ClInclude Include="Graphic\import.h" />
+    <ClInclude Include="Platform\DeviceProxy.h" />
     <ClInclude Include="Platform\import.h" />
-    <ClInclude Include="Platform\Windows\GLFrame.h" />
+    <ClInclude Include="Platform\Windows\GlutWindow.h" />
+    <ClInclude Include="Platform\Windows\GLWindow.h" />
     <ClInclude Include="Platform\Windows\import.h" />
     <ClInclude Include="render.h" />
     <ClInclude Include="RenderApplication.h" />
@@ -278,10 +308,14 @@
     <ClInclude Include="Resource\Config\MediaDefine.h" />
     <ClInclude Include="Resource\Config\TextDefine.h" />
     <ClInclude Include="Resource\Detail\AudioDetail.h" />
+    <ClInclude Include="Resource\Detail\Face.h" />
     <ClInclude Include="Resource\Detail\ImageDetail.h" />
     <ClInclude Include="Resource\Detail\import.h" />
+    <ClInclude Include="Resource\Detail\Material.h" />
     <ClInclude Include="Resource\Detail\MediaDetail.h" />
+    <ClInclude Include="Resource\Detail\Mesh.h" />
     <ClInclude Include="Resource\Detail\ModelDetail.h" />
+    <ClInclude Include="Resource\Detail\TextureMap.h" />
     <ClInclude Include="Resource\import.h" />
     <ClInclude Include="Resource\Loader\ILabelLoader.h" />
     <ClInclude Include="Resource\Loader\IMediaLoader.h" />
@@ -289,12 +323,15 @@
     <ClInclude Include="Resource\Loader\IResourceLoader.h" />
     <ClInclude Include="Resource\Loader\Loader.h" />
     <ClInclude Include="Resource\macros.h" />
-    <ClInclude Include="Resource\Paser\FFmpeg.h" />
+    <ClInclude Include="Resource\Paser\ImageTarga.h" />
+    <ClInclude Include="Resource\Paser\MediaFFmpeg.h" />
+    <ClInclude Include="Resource\Paser\FileFbx.h" />
+    <ClInclude Include="Resource\Paser\FileObj.h" />
     <ClInclude Include="Resource\Paser\import.h" />
-    <ClInclude Include="Resource\Paser\JPEGImage.h" />
-    <ClInclude Include="Resource\Paser\LabelImage.h" />
+    <ClInclude Include="Resource\Paser\ImageJPEG.h" />
+    <ClInclude Include="Resource\Paser\ImageLabel.h" />
     <ClInclude Include="Resource\Paser\macros.h" />
-    <ClInclude Include="Resource\Paser\PNGImage.h" />
+    <ClInclude Include="Resource\Paser\ImagePNG.h" />
     <ClInclude Include="Resource\Paser\File3DS.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

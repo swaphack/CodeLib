@@ -3,6 +3,7 @@
 #include "render.h"
 #include "ui.h"
 #include "algorithm.h"
+#include "render.h"
 
 class WndRender : public render::RenderApplication
 {
@@ -11,9 +12,11 @@ public:
 	virtual ~WndRender();
 public:
 	virtual void show();
+protected:
 	void testMoveImage();
 	void testClock();
 	void testCubeModel();
+	void testMultiFaceCube();
 	void testSphereModel();
 	void testText();
 	void testMask();
@@ -47,6 +50,10 @@ public:
 	void testLayout();
 
 	void test3ds();
+	void testObj();
+	void testFbx();
+
+	void testProgram();
 protected:
 	void onTouchBegin(sys::Object* object, float x, float y);
 	void onTouchMove(sys::Object* object, float x, float y);

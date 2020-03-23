@@ -1,7 +1,7 @@
 #pragma once
 
 #include "system.h"
-#include "../GL/import.h"
+#include "../struct/import.h"
 
 namespace render
 {
@@ -26,6 +26,8 @@ namespace render
 		// 弧度转角度
 		static void convertToAngle(const math::Vector3& src, math::Vector3& dest);
 		
+		// 将屏幕坐标转为opengl坐标
+		static void convertToOGLPoisition(float* inPos, float* outPos);
 		// 将屏幕坐标转为opengl坐标
 		static void convertToOGLPoisition(float x, float y, float z, math::Vector3& dest);
 		// 将屏幕坐标转为opengl坐标

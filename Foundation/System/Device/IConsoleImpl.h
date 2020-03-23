@@ -10,7 +10,7 @@ namespace sys
 		virtual ~IConsoleImpl() {}
 	public:
 		// 读取一行
-		virtual const std::string& readLine() = 0;
+		virtual std::string readLine() = 0;
 		// 读取一个字符
 		virtual char readChar() = 0;
 		// 写入一行

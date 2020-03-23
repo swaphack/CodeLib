@@ -1,5 +1,4 @@
 #pragma once
 
-#include "system.h"
-
+#include "DeviceProxy.h"
 #include "Windows/import.h"

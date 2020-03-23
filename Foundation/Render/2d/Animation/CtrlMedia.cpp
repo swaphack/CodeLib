@@ -2,7 +2,7 @@
 #include "../UI/CtrlFrame.h"
 #include "Resource/Detail/MediaDetail.h"
 #include "Resource/Loader/Loader.h"
-#include "Resource/Paser/FFmpeg.h"
+#include "Resource/Paser/MediaFFmpeg.h"
 
 using namespace render;
 
@@ -106,7 +106,7 @@ void CtrlMedia::setMediaPath(const char* path, bool defaultSize)
 	SAFE_DELETE(_media);
 	this->stop();
 
-	_media = Loader::load<FFmpeg>(_mediaDefine);
+	_media = Loader::load<MediaFFmpeg>(_mediaDefine);
 	this->setFrameRate(1.0f / _media->getFrameRate());
 
 	// œ‘ æ¥Û–°

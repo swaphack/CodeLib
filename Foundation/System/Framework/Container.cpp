@@ -105,7 +105,7 @@ bool Dictionary::contains(Object* object)
 		return false;
 	}
 
-	return getObject(object->getID());
+	return getObject(object->getID()) != nullptr;
 }
 
 bool Dictionary::contains(uint64_t id)

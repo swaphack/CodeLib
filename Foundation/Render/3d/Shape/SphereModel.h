@@ -1,6 +1,8 @@
 #pragma once
 
-#include "../Common/import.h"
+#include "Common/import.h"
+
+#include "../Common/Model.h"
 
 namespace render
 {

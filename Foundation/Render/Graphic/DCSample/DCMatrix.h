@@ -5,7 +5,7 @@
 namespace render
 {
 	/**
-	*	¾ØÕóÊôĞÔ
+	*	¾ØÕó
 	*/
 	class DCMatrix : public DrawCommand
 	{

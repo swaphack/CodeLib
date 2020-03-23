@@ -2,10 +2,11 @@
 
 #include "system.h"
 #include "Notify.h"
-#include "../GL/import.h"
-#include "../Tool/import.h"
-#include "../Action/import.h"
-#include "../Shader/import.h"
+#include "Common/struct/import.h"
+#include "Common/Tool/import.h"
+#include "Common/Action/import.h"
+#include "Common/Texture/import.h"
+#include "Common/Shader/import.h"
 
 namespace render
 {
@@ -61,12 +62,14 @@ namespace render
 	public:
 		// 务必调用，包含属性修改时通知
 		virtual bool init();
+	public:
 		// 设置父节点
 		void setParent(Node* node);
 		// 获取父节点
 		Node* getParent();
 		// 从父节点移除
 		void removeFromParent();
+	public:
 		// 添加子节点
 		void addChild(Node* node);
 		// 移除子节点
@@ -75,58 +78,71 @@ namespace render
 		void removeAllChildren();
 		// 根据id获取字节点
 		Node* getChildByID(long id);
-
+	public:
 		// 设置标签
 		void setTag(int tag);
 		// 获取标签
 		int getTag();
 		// 根据标签获取字节点
 		Node* getChildByTag(int tag);
-
+	public:
 		// 根据名称获取字节点
 		Node* getChildByName(const char* name); 
+	public:
 		// 获取第一个子节点
 		Node* getFirstChild();
-
 		std::vector<sys::Object*>::iterator beginChild();
 		std::vector<sys::Object*>::iterator endChild();
-
+	public:
 		// 设置数据
 		void setUserData(void* data);
 		// 获取数据
 		void* getUserData();
-
+	public:
 		// 设置z轴坐标
 		void setZOrder(float z);
 		// 获取z轴坐标
 		float getZOrder();
-
+	public:
 		// 设置可见性
 		void setVisible(bool status);
 		// 是否可见
 		bool isVisible();
+	public:
 		// 绘制,重写
 		virtual void draw();
 		// 遍历所有节点
 		virtual void visit();
+	protected:
+		// 绘制节点
+		void drawNode();
+		// shader处理
+		void handShaderProgram();
+	public:
 		// 获取动作代理
 		ActionProxy* getActionProxy();
-
+	public:
 		// 是否和父节点关联
 		bool isRelativeWithParent();
 		// 设置是否和父节点关联
 		void setRelativeWithParent(bool status);
-
+	public:
 		// 点击是否命中
 		virtual bool containTouchPoint(float x, float y);
 		// 获取触摸代理
 		TouchProxy* getTouchProxy();
 		// 矩形定点
 		const RectVertex& getRectVertex();
+	public:
 		// 矩阵
 		const math::Matrix44& getRealMatrix();
 		// 矩阵
 		const math::Matrix44& getMatrix();
+	public:
+		// 着色器程序
+		void setProgram(ShaderProgram* program);
+		// 着色器程序
+		ShaderProgram* getProgram();
 	protected:
 		// 更新空间位置
 		virtual void updateTranform();
@@ -186,9 +202,11 @@ namespace render
 		Notify* _notify;
 		// 使用矩阵运算
 		bool _bUseMatrix = true;
-		// 矩阵
+		// 相对于父节点的矩阵
 		math::Matrix44 _mat44;
-		// 实际
+		// 实际在世界坐标系中的矩阵
 		math::Matrix44 _realMat44;
+		// 着色器
+		ShaderProgram* _program = nullptr;
 	};
 }

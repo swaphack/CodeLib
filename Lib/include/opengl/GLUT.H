@@ -53,7 +53,7 @@ typedef unsigned short wchar_t;
 # endif
 
 /* To disable automatic library usage for GLUT, define GLUT_NO_LIB_PRAGMA
-   in your compile preprocessor options. Download by http://www.codefans.net*/
+   in your compile preprocessor options. */
 # if !defined(GLUT_BUILDING_LIB) && !defined(GLUT_NO_LIB_PRAGMA)
 #  pragma comment (lib, "winmm.lib")      /* link with Windows MultiMedia lib */
 /* To enable automatic SGI OpenGL for Windows library usage for GLUT,
@@ -133,10 +133,10 @@ typedef unsigned short wchar_t;
 # define GLUTCALLBACK __cdecl
 
 #endif  /* _WIN32 */
-
-//#include <GL/gl.h>
-//#include <GL/glu.h>
-
+/*
+#include <GL/gl.h>
+#include <GL/glu.h>
+*/
 #include "gl.h"
 #include "glu.h"
 

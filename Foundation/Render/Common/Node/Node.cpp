@@ -33,6 +33,7 @@ Node::~Node()
 	SAFE_DELETE(_actionProxy);
 	SAFE_DELETE(_touchProxy);
 	SAFE_DELETE(_notify);
+	SAFE_RELEASE(_program);
 }
 
 bool Node::init()
@@ -261,7 +262,7 @@ void Node::visit()
 
 	if (_children.count() == 0)
 	{
-		this->draw();
+		this->drawNode();
 	}
 	else
 	{
@@ -272,7 +273,7 @@ void Node::visit()
 			Node* node = dynamic_cast<Node*>(*iter);
 			if (show == false && node->getZOrder() >= 0)
 			{
-				this->draw();
+				this->drawNode();
 				show = true;
 			}
 			node->visit();
@@ -500,4 +501,35 @@ const math::Matrix44& Node::getRealMatrix()
 const math::Matrix44& Node::getMatrix()
 {
 	return _mat44;
+}
+
+void Node::setProgram(ShaderProgram* program)
+{
+	SAFE_RETAIN(program);
+	SAFE_RELEASE(_program);
+
+	_program = program;
+}
+
+ShaderProgram* Node::getProgram()
+{
+	return _program;
+}
+
+void Node::handShaderProgram()
+{
+	if (_program != nullptr)
+	{
+		_program->use();
+	}
+	else
+	{
+		ShaderProgram::useNone();
+	}
+}
+
+void Node::drawNode()
+{
+	this->draw();
+	this->handShaderProgram();
 }

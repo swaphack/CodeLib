@@ -11,13 +11,8 @@ DCMask::~DCMask()
 
 }
 
-void DCMask::draw()
+void DCMask::drawDC()
 {
-	glEnable(GL_BLEND);
-	glBlendFunc(Blend.src, Blend.dest);
-
-	glColor4f(Color.red, Color.green, Color.blue, Color.alpha);
-
 	glBegin(GL_QUADS);
 
 	for (int i = 0; i < 4; i++)
@@ -26,20 +21,12 @@ void DCMask::draw()
 	}
 
 	glEnd();
-
-	glDisable(GL_BLEND);
 }
 
 DCMask* DCMask::create(const RectVertex* rectVertex, const sys::Color4B& color, uint8_t opacity, const BlendParam& blend)
 {
 	DCMask* pMask = sys::Instance<DCMask>::getInstance();
-	pMask->Blend = blend;
-
-	convertColor4BTo4F(color, pMask->Color);
-	pMask->Color.red *= opacity / COLOR_FLOAT_VALUE;
-	pMask->Color.green *= opacity / COLOR_FLOAT_VALUE;
-	pMask->Color.blue *= opacity / COLOR_FLOAT_VALUE;
-	pMask->Color.alpha *= opacity / COLOR_FLOAT_VALUE;
+	pMask->initColor(color, opacity, blend);
 
 	pMask->Position[0] = rectVertex->leftDown;
 	pMask->Position[1] = rectVertex->rightDown;

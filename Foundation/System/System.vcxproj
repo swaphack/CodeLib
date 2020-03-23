@@ -97,6 +97,7 @@
     <ClInclude Include="DateTime\import.h" />
     <ClInclude Include="DateTime\Time.h" />
     <ClInclude Include="Device\Console.h" />
+    <ClInclude Include="Device\DeviceImpl.h" />
     <ClInclude Include="Device\IConsoleImpl.h" />
     <ClInclude Include="Device\ConsoleListener.h" />
     <ClInclude Include="Device\DeviceEventHandler.h" />
@@ -202,9 +203,11 @@
     <ClCompile Include="DateTime\Time.cpp" />
     <ClCompile Include="Device\Console.cpp" />
     <ClCompile Include="Device\ConsoleListener.cpp" />
+    <ClCompile Include="Device\DeviceImpl.cpp" />
     <ClCompile Include="Device\Keyboard.cpp" />
     <ClCompile Include="Device\Mouse.cpp" />
     <ClCompile Include="Device\Signal.cpp" />
+    <ClCompile Include="Device\WindowImpl.cpp" />
     <ClCompile Include="Framework\Application.cpp" />
     <ClCompile Include="Framework\AutoReleasePool.cpp" />
     <ClCompile Include="Framework\Container.cpp" />

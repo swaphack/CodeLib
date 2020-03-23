@@ -4,6 +4,9 @@
 
 namespace render
 {
+	class TexFrame;
+	class Material;
+
 	// 3d模型基础，空间立方体,多面
 	class MultiFaceCube : public CubeModel
 	{

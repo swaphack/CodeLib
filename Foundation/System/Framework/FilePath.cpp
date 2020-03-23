@@ -16,7 +16,7 @@ FilePath::~FilePath()
 }
 
 
-const std::string& FilePath::getFilePath(const std::string& filename)
+std::string FilePath::getFilePath(const std::string& filename)
 {
 	if (filename.empty())
 	{
@@ -35,7 +35,10 @@ const std::string& FilePath::getFilePath(const std::string& filename)
 	while (it2 != _searchPaths.end())
 	{
 		fullpath = (*it2);
-		fullpath += "/";
+		if (!fullpath.empty())
+		{
+			fullpath += "/";
+		}
 		fullpath += filename;
 		if (File::exists(fullpath))
 		{
@@ -65,11 +68,11 @@ bool FilePath::getFileData(const std::string& filename, std::string& data)
 	return File::read(fullpath, data);
 }
 
-void FilePath::setSearchPath(std::vector<std::string> paths)
+void FilePath::setSearchPath(const std::vector<std::string>& paths)
 {
 	_searchPaths.clear();
 
-	std::vector<std::string>::iterator it = paths.begin();
+	auto it = paths.begin();
 
 	while (it != paths.end())
 	{

@@ -1,5 +1,7 @@
 #include "MultiFaceCube.h"
 #include "Graphic/import.h"
+#include "Resource/Detail/ModelDetail.h"
+
 using namespace render;
 
 MultiFaceCube::MultiFaceCube()
@@ -88,7 +90,7 @@ void MultiFaceCube::setAllFaceMaterial(Material* mat)
 
 	for (int i = 0; i < CUBE_FACE_COUNT; i++)
 	{
-		this->addMaterial(i, mat);
+		_modelDetail->addMaterial(i, mat);
 	}
 }
 

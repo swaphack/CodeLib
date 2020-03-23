@@ -1,7 +1,7 @@
 #pragma once
 
 #include "system.h"
-#include "../GL/import.h"
+#include "../struct/import.h"
 
 namespace render
 {

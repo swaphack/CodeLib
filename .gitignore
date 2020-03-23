@@ -19,3 +19,7 @@ WebCat.sdf
 /Debug/Window.exe
 /Debug/Window.pdb
 /Sample/CGHSLS/Debug/
+/Lib/lib/fbx/libfbxsdk-mt.lib
+/Lib/lib/fbx/libfbxsdk-md.lib
+/Debug
+/ipch/console.windows-d9921d25

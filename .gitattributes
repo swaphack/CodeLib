@@ -1,2 +1,0 @@
-libfbxsdk-mt.lib filter=lfs diff=lfs merge=lfs -text
-libfbxsdk-md.lib filter=lfs diff=lfs merge=lfs -text

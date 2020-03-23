@@ -2,7 +2,7 @@
 
 #include "system.h"
 #include "ViewConfig.h"
-#include "../GL/import.h"
+#include "../struct/import.h"
 
 namespace render
 {

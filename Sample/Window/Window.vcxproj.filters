@@ -25,6 +25,9 @@
     <Filter Include="Resource\Image">
       <UniqueIdentifier>{2349ce8e-2a21-4d17-a990-06a6993909c5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource\shader">
+      <UniqueIdentifier>{5c66f86c-a73f-491a-9ce0-cbdab5584074}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WndWeb.cpp">
@@ -34,9 +37,6 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="Main.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="Main2.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
@@ -85,6 +85,12 @@
   <ItemGroup>
     <None Include="ribbon1.mfcribbon-ms">
       <Filter>资源文件</Filter>
+    </None>
+    <None Include="Resource\shader\gray.vsh">
+      <Filter>Resource\shader</Filter>
+    </None>
+    <None Include="Resource\shader\gray.fsh">
+      <Filter>Resource\shader</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

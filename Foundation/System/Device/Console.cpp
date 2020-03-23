@@ -16,7 +16,7 @@ Console::~Console()
 
 }
 
-const std::string& Console::readLine()
+std::string Console::readLine()
 {
 	char ch;
 	std::string line = "";

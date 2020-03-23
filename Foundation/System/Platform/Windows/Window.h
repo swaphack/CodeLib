@@ -7,33 +7,18 @@
 namespace sys
 {
 	// windows 窗口
-	class Window : public WindowImpl
+	class Window : public WindowImpl, public DeviceImpl
 	{
 	public:
 		Window();
 		virtual ~Window();
 	public:
-		virtual void initWindow(const std::string& title, int32_t width, int32_t height);
+		void initWindow(const std::string& title, int32_t width, int32_t height);
 	public:
 		// 窗口句柄
 		inline HWND getWnd() { return _wnd; }
-		// 窗口位置x
-		virtual float getPositionX() { return _posX; }
-		// 窗口位置y
-		virtual float getPositionY() { return _posY; }
-		// 窗口宽度
-		virtual float getWidth() { return _width; }
-		// 窗口高度
-		virtual float getHeight() { return _height;  }
-		// 标题
-		virtual std::string getTitle() { return _title.c_str(); }
 		// 接受信号的处理
 		virtual bool onRecvSignal(Signal* signal);
-	public:// 外设
-		// 键盘
-		virtual Keyboard* getKeyboard();
-		// 鼠标
-		virtual Mouse* getMouse();
 	protected:
 		// 初始化窗口
 		virtual bool init();
@@ -48,19 +33,7 @@ namespace sys
 		HWND _wnd;
 		// 程序实例
 		HINSTANCE _instance;
-		// 窗口宽度
-		float _width;
-		// 窗口高度
-		float _height;
-		// 窗口x轴位置
-		float _posX;
-		// 窗口y轴位置
-		float _posY;
-		// 窗口标题
-		std::string _title;
-	protected:
-		Keyboard* _keyboard;
-		Mouse* _mouse;
+	
 	};
 
 }

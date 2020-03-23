@@ -10,15 +10,24 @@
 // opengl
 
 #if defined(USE_OPENGL)
-#ifdef USE_GLUT
-#define GLUT_DISABLE_ATEXIT_HACK
-#include "opengl/GLUT.H"
-#include "opengl/GLAUX.H"
-#else
 #include "opengl/GL.H"
 #include "opengl/GLU.H"
 #include "opengl/GLAUX.H"
-#endif // USE_GLUT
+#endif
+
+//////////////////////////////////////////////////////////////////////////
+// gl
+
+#if defined(USE_GLEW)
+#include "gl/glew.h"
+#endif
+
+//////////////////////////////////////////////////////////////////////////
+// GLUT
+
+#if defined(USE_GLUT)
+#define GLUT_DISABLE_ATEXIT_HACK
+#include "opengl/GLUT.H"
 #endif
 
 //////////////////////////////////////////////////////////////////////////
@@ -33,6 +42,13 @@
 
 #if defined(USE_JPEG)
 #include "jpeg/jpeglib.h"
+#endif
+
+//////////////////////////////////////////////////////////////////////////
+// tga
+
+#if defined(USE_TGA)
+#include "tga/targa.h"
 #endif
 
 //////////////////////////////////////////////////////////////////////////
@@ -92,6 +108,20 @@
 
 #if defined(USE_3DS)
 #include "3ds/lib3ds.h"
+#endif
+
+//////////////////////////////////////////////////////////////////////////
+// obj
+
+#if defined(USE_OBJ)
+#include "obj/objfile.h"
+#endif
+
+//////////////////////////////////////////////////////////////////////////
+// fbx
+
+#if defined(USE_FBX)
+#include "fbx/fbxsdk.h"
 #endif
 
 

@@ -1,22 +1,17 @@
 #pragma once
 
-#include "macros.h"
+#include "DCColor.h"
 
 namespace render
 {
 	/**
 	*	三角形纹理
 	*/
-	class DCTextureBatch : public DrawCommand
+	class DCTextureBatch : public DCColor
 	{
 	public:
 		// 纹理id
 		int TextureID;
-		// 颜色
-		sys::Color4F Color;
-		// 混色参数
-		BlendParam Blend;
-
 		// 顶点坐标 (x,y,z)
 		T_Vertex* Vertexes;
 		// 法线 (x,y,z)
@@ -30,9 +25,9 @@ namespace render
 	public:
 		DCTextureBatch();
 		virtual ~DCTextureBatch();
+	protected:
+		virtual void drawDC();
 	public:
-		virtual void draw();
-
 		static DCTextureBatch* create(int textureID,
 			const sys::Color4B& color, uint8_t opacity, const BlendParam& blend,
 			const T_Vertex* vertexes, const T_Vertex* normals, const T_Vertex* colors, const T_Vertex* coords,

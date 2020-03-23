@@ -16,8 +16,18 @@
 #define USE_FREETYPE
 #endif
 
+#ifndef USE_GLEW
+#define USE_GLEW
+#endif
+
+/*
 #ifndef USE_OPENGL
 #define USE_OPENGL
+#endif
+*/
+
+#ifndef USE_GLUT
+#define USE_GLUT
 #endif
 
 #ifndef USE_FMOD
@@ -26,6 +36,18 @@
 
 #ifndef USE_3DS
 #define USE_3DS
+#endif
+
+#ifndef USE_OBJ
+#define USE_OBJ
+#endif
+
+#ifndef USE_FBX
+#define USE_FBX
+#endif
+
+#ifndef USE_TGA
+#define USE_TGA
 #endif
 
 #include "system.h"

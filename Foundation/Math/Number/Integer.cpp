@@ -164,7 +164,7 @@ Integer& Integer::operator=(uint64_t value)
 	return *this;
 }
 
-Integer& Integer::operator=(Integer value)
+Integer& Integer::operator=(const Integer& value)
 {
 	_value = value.value(); 
 	return *this;

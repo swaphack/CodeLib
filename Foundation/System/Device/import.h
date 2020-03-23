@@ -9,3 +9,5 @@
 #include "IConsoleImpl.h"
 #include "Console.h"
 #include "ConsoleListener.h"
+#include "DeviceImpl.h"
+#include "DeviceEventHandler.h"

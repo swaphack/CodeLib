@@ -45,7 +45,7 @@ namespace math
 		Integer& operator=(uint16_t value);
 		Integer& operator=(uint32_t value);
 		Integer& operator=(uint64_t value);
-		Integer& operator=(Integer value);
+		Integer& operator=(const Integer& value);
 	public:
 		int64_t value() const;
 		operator int8_t() const;

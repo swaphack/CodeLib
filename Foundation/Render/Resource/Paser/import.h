@@ -1,7 +1,12 @@
 #pragma once
 
-#include "PNGImage.h"
-#include "JPEGImage.h"
+#include "File3DS.h"
+#include "FileObj.h"
+#include "FileFbx.h"
 
-#include "LabelImage.h"
-#include "FFmpeg.h"
+#include "ImagePNG.h"
+#include "ImageJPEG.h"
+#include "ImageTarga.h"
+
+#include "ImageLabel.h"
+#include "MediaFFmpeg.h"
