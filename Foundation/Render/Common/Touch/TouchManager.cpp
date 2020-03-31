@@ -1,5 +1,5 @@
 #include "TouchManager.h"
-
+#include "TouchProxy.h"
 using namespace render;
 
 TouchManager::TouchManager()

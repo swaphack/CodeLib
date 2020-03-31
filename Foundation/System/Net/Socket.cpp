@@ -1,6 +1,7 @@
 #include "Socket.h"
 #include "EndPoint.h"
 #include "DNS.h"
+#include "Base/macros.h"
 #include <cstdio>
 
 #if (defined(_WIN32) || defined(WIN32))

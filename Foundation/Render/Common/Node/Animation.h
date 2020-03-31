@@ -1,11 +1,13 @@
 #pragma once
 
 #include "Node.h"
+#include "Common/struct/protocol_common.h"
 
 namespace render
 {
+	class Scheduler;
 	// 动画
-	class Animation : public Node, ControlProtocol
+	class Animation : public Node, public ControlProtocol
 	{
 	public:
 		Animation();
@@ -21,7 +23,7 @@ namespace render
 		virtual void stop();
 
 		// 定时更新事件,不要修改
-		virtual void update(float interval);
+		virtual void updateAnimation(float interval);
 	protected:
 		// 添加定时器
 		void registerScheduler();

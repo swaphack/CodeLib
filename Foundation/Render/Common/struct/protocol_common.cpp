@@ -1,5 +1,6 @@
 #include "protocol_common.h"
-#include "ext-config.h"
+#include "Common/struct/shape_common.h"
+#include "Graphic/GLAPI/macros.h"
 
 using namespace render;
 
@@ -94,7 +95,6 @@ uint8_t OpacityProtocol::getOpacity()
 //////////////////////////////////////////////////////////////////////////
 BlendProtocol::BlendProtocol()
 {
-	_blend = { EBFD_SRC_ALPHA, EBFS_ONE_MINUS_SRC_ALPHA };
 }
 
 BlendProtocol::~BlendProtocol()
@@ -102,7 +102,7 @@ BlendProtocol::~BlendProtocol()
 
 }
 
-void BlendProtocol::setBlend(int src, int dest)
+void BlendProtocol::setBlend(BlendingFactorSrc src, BlendingFactorDest dest)
 {
 	_blend.src = src;
 	_blend.dest = dest;

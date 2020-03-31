@@ -1,7 +1,6 @@
 #pragma once
 
 #include "Common/Node/Node.h"
-#include "../struct/import.h"
 
 namespace render
 {
@@ -43,12 +42,15 @@ namespace render
 		void setParams(float left, float right, float bottom, float top, float zNear, float zFar);
 		// 获取视窗参数
 		const CameraParams& getParams();
-	protected:
+	public:
 		// 更新空间位置
-		virtual void updateTranform();
+		virtual void visit();
+	protected:
+		virtual void updateView();
+	protected:
 		// 设置维度
 		void setDimensions(CameraDimensions d);
-	private:
+	protected:
 		// 主摄像头
 		static Camera* _mainCamera;
 		// 维度
@@ -63,6 +65,8 @@ namespace render
 	public:
 		Camera2D();
 		virtual ~Camera2D();
+	public:
+		virtual void updateView();
 	};
 	// 3d 摄像头
 	class Camera3D : public Camera
@@ -70,6 +74,8 @@ namespace render
 	public:
 		Camera3D();
 		virtual ~Camera3D();
+	public:
+		virtual void updateView();
 	public:
 		// 相机对准指定位置
 		virtual void lookAt(const math::Vector3& position);

@@ -6,7 +6,7 @@ using namespace ui;
 
 WndRender::WndRender()
 {
-	this->getCanvas()->setDimensions(render::ED_2D);
+	
 }
 
 WndRender::~WndRender()
@@ -16,6 +16,22 @@ WndRender::~WndRender()
 
 void WndRender::show()
 {
+	CameraDimensions d = ED_3D;
+	this->getCanvas()->setDimensions(d);
+	if (d == ED_2D)
+	{
+		math::Size size = this->getCanvas()->getView()->getFrameSize();
+		this->getCanvas()->getRoot()->setAnchorPoint(0, 0, 0);
+		this->getCanvas()->getRoot()->setVolume(size);
+		//this->getCanvas()->getRoot()->setPosition(-size.getWidth(), -size.getHeight());
+	}
+	else
+	{
+		math::Size size = this->getCanvas()->getView()->getFrameSize();
+		this->getCanvas()->getRoot()->setAnchorPoint(0.5f, 0.5f, 0);
+		this->getCanvas()->getRoot()->setVolume(size);
+	}
+	
 // 	ImageDefine imageDefine = {"Resource/Image/world.jpg", EIF_JPEG};
 // 	Texture2D* pTexture = G_TEXTURE_CACHE->getTexture2D(imageDefine);
 // 	pTexture->retain();
@@ -23,7 +39,7 @@ void WndRender::show()
 	//testMoveImage();
 	//testClock();
 	//testText();
-	testMask();
+	//testMask();
 	//testMedia();
 	
 	//testAnimation();
@@ -55,7 +71,7 @@ void WndRender::show()
 	//testAudio3D();
 	//testLayout();
 	//
-	addLight();
+	//addLight();
 	//testFog();
 	//testCubeModel();
 	//testSphereModel();
@@ -65,12 +81,12 @@ void WndRender::show()
 
 	//testObj();
 
-	testFbx();
+	//testFbx();
 
-	//this->testCubeModel();
+	this->testCubeModel();
 	//this->testMultiFaceCube();
 
-	testProgram();
+	//testProgram();
 }
 
 void WndRender::testMoveImage()
@@ -93,7 +109,7 @@ void WndRender::testClock()
 {
 	DrawNode* pDrawNode = CREATE_NODE(DrawNode);
 
-	pDrawNode->setDrawMode(EBM_QUAD_STRIP);
+	pDrawNode->setDrawMode(ShapeMode::QUAD_STRIP);
 	pDrawNode->setWidth(20);
 	pDrawNode->setPosition(125, 125, 0);
 	pDrawNode->appendPoint(math::Vector3(0, 200));
@@ -202,9 +218,10 @@ void WndRender::testMask()
 
 	CtrlMask* pMask = CREATE_NODE(CtrlMask);
 	pMask->setOpacity(opacity);
+	pMask->setAnchorPoint(0, 0, 0);
 	pMask->setPosition(0, 0, 0.0f);
 	pMask->setVolume(1024, 768, 0);
-	pMask->setColor(Color3B(255, 255, 255));
+	pMask->setColor(Color4B(120, 120, 120, 125));
 	this->getCanvas()->getRoot()->addChild(pMask);
 }
 
@@ -591,11 +608,6 @@ void WndRender::onKeyBoardRole(sys::Object* object, sys::BoardKey key, sys::Butt
 
 void WndRender::testModel()
 {
-	Model* pModel = ModelFile::getInstance()->load("Resource/3DModel/Test.xml");
-	this->getCanvas()->getRoot()->addChild(pModel);
-
-	pModel->setPosition(100, 100, 100);
-	pModel->setColor(0, 255, 0);
 	//pModel->setVolume(100, 100, 100);
 	/*
 	pModel->getMatrial()->setAmbient(255, 255, 255, 255);
@@ -696,7 +708,7 @@ void WndRender::testDrawNode()
 	int COUNT = (sizeof(points) / sizeof(math::Vector2));
 
 	DrawNode* pDrawNode = CREATE_NODE(DrawNode);
-	pDrawNode->setDrawMode(EBM_POLYGON);
+	pDrawNode->setDrawMode(ShapeMode::POLYGON);
 	pDrawNode->setColor(sys::Color3B(0, 255, 0));
 	for (int i = 0; i < COUNT; i++)
 	{
@@ -735,7 +747,7 @@ void WndRender::testAudio3D()
 	DrawNode* pListenerDrawNode = CREATE_NODE(DrawNode);
 	pListenerDrawNode->setColor(Color3B(0, 255, 0));
 	pListenerDrawNode->setWidth(100);
-	pListenerDrawNode->setDrawMode(EBM_POINTS);
+	pListenerDrawNode->setDrawMode(ShapeMode::POINTS);
 	pListenerDrawNode->appendPoint(math::Vector3());
 	pListener->addChild(pListenerDrawNode);
 
@@ -753,7 +765,7 @@ void WndRender::testAudio3D()
 	DrawNode* pSrcDrawNode = CREATE_NODE(DrawNode);
 	pSrcDrawNode->setColor(Color3B(255, 0, 0));
 	pSrcDrawNode->setWidth(100);
-	pSrcDrawNode->setDrawMode(EBM_POINTS);
+	pSrcDrawNode->setDrawMode(ShapeMode::POINTS);
 	pSrcDrawNode->appendPoint(math::Vector3());
 	pSrcAudio->addChild(pSrcDrawNode);
 
@@ -770,7 +782,7 @@ void WndRender::testAudio3D()
 	pSrcDrawNode = CREATE_NODE(DrawNode);
 	pSrcDrawNode->setColor(Color3B(255, 0, 0));
 	pSrcDrawNode->setWidth(100);
-	pSrcDrawNode->setDrawMode(EBM_POINTS);
+	pSrcDrawNode->setDrawMode(ShapeMode::POINTS);
 	pSrcDrawNode->appendPoint(math::Vector3());
 	pSrcAudio->addChild(pSrcDrawNode);
 
@@ -908,7 +920,7 @@ void WndRender::testMultiFaceCube()
 		pModel->setVolume(200, 200, 200);
 		pModel->setRotation(45, 45, 0);
 
-		Material* mat = CREATE_OBJECT(Material);
+		MaterialDetail* mat = CREATE_OBJECT(MaterialDetail);
 		mat->setShiness(1.0f);
 		mat->setAmbient(255, 255, 255, 255);
 		mat->setDiffuse(255, 255, 255, 255);
@@ -958,9 +970,8 @@ void WndRender::testFbx()
 {
 	ModelFbx* model = CREATE_NODE(ModelFbx);
 	model->load("Resource/fbx/LANCER_EVOLUTION/LANCEREVOX.FBX");
+	model->setPosition(512, 384);
 	model->setScale(300);
-	model->setPosition(100, 100, 0);
-	model->setVolume(400, 400, 400);
 	model->setRotationX(-90);
 	this->getCanvas()->getRoot()->addChild(model);
 

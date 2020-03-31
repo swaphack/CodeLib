@@ -2,6 +2,7 @@
 
 #include "Stream.h"
 
+#include <string>
 
 namespace sys
 {

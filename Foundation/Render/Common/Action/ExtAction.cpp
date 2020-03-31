@@ -423,7 +423,7 @@ CallFunc::~CallFunc()
 
 }
 
-void CallFunc::setFunc(std::function<void()> func)
+void CallFunc::setFunc(const std::function<void()>& func)
 {
 	_func = func;
 }
@@ -456,7 +456,7 @@ CallFuncN::~CallFuncN()
 
 }
 
-void CallFuncN::setFunc(std::function<void(sys::Object*)> func)
+void CallFuncN::setFunc(const std::function<void(sys::Object*)>& func)
 {
 	_func = func;
 }

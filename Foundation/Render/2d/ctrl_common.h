@@ -1,8 +1,7 @@
 #pragma once
 
-#include "Common/import.h"
-#include "Resource/import.h"
-#include "Graphic/import.h"
+#include "Resource/Config/ImageDefine.h"
+#include "Resource/Config/TextDefine.h"
 
 namespace render
 {

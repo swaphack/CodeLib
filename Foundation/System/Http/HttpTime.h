@@ -3,10 +3,10 @@
 #include <string>
 #include <cstdint>
 
-#include "DateTime/Time.h"
-
 namespace sys
 {
+	class Time;
+
 	/*
 	Sun, 06 Nov 1994 08:49:37 GMT  ; RFC 822, updated by RFC 1123
 	Sunday, 06-Nov-94 08:49:37 GMT ; RFC 850, obsoleted by RFC 1036

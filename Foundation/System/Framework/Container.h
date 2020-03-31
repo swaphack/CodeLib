@@ -1,13 +1,13 @@
 #pragma once
 
-#include "Object.h"
-
 #include <map>
 #include <vector>
 #include <cstdint>
 
 namespace sys
 {
+	class Object;
+
 	// ÈÝÆ÷½Ó¿Ú
 	class IContainer
 	{

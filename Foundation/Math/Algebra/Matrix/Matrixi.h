@@ -3,7 +3,6 @@
 #include <cstdint>
 
 #include "Complex.h"
-#include "../Vector/Vector.h"
 #include "Basic/Array2D.h"
 #include "Number/Complex.h"
 

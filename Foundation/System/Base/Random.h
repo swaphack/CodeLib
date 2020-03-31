@@ -38,7 +38,7 @@ namespace sys
 		*/
 		static float getNumber0_1();
 		/**
-		*	设置区间的浮点数
+		*	获取int区间的值
 		*/
 		static int32_t getNumber0_max();
 	private:

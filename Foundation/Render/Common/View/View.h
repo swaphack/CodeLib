@@ -1,8 +1,8 @@
 #pragma once
 
 #include "system.h"
+#include "Common/struct/import.h"
 #include "ViewConfig.h"
-#include "../struct/import.h"
 
 namespace render
 {

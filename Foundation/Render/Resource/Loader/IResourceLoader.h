@@ -1,5 +1,7 @@
 #pragma once
 
+#include <string>
+
 namespace render
 {
 	// 资源加载接口

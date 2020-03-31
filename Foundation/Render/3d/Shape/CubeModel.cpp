@@ -1,5 +1,11 @@
 #include "CubeModel.h"
 #include "Resource/Detail/ModelDetail.h"
+#include "Common/Texture/Texture.h"
+#include "Resource/Detail/MaterialDetail.h"
+#include "Resource/Detail/MeshDetail.h"
+#include "Resource/Detail/FaceDetail.h"
+
+#include "Common/Tool/TextureTool.h"
 
 using namespace render;
 
@@ -30,42 +36,23 @@ bool CubeModel::init()
 
 	_modelDetail = new ModelDetail();
 
-	auto pMesh = CREATE_OBJECT(Mesh);
-	auto pMat = CREATE_OBJECT(Material);
+	auto pMesh = CREATE_OBJECT(MeshDetail);
+	auto pMat = CREATE_OBJECT(MaterialDetail);
 	_modelDetail->addMesh(0, pMesh);
 	_modelDetail->addMaterial(0, pMat);
 
 	for (int i = 0; i < CUBE_FACE_COUNT; i++)
 	{
-		auto pFace = CREATE_OBJECT(Face);
+		auto pFace = CREATE_OBJECT(FaceDetail);
 		pFace->setMaterial(0);
 		pMesh->addFace(i, pFace);
 	}
 	return true;
 }
 
-void CubeModel::draw()
+void CubeModel::drawSample()
 {
-	Model::draw();
-	/*
-	for (auto mesh : _meshes)
-	{
-		int textureID = 0;
-		if (_texture)
-		{
-			textureID = _texture->getTextureID();
-		}
-		
-		mesh.second->apply(textureID, getColor(), getOpacity(), getBlend());
-
-		int matID = mesh.second->getMaterial();
-		auto pMat = this->getMatrial(matID);
-		if (pMat)
-		{
-			pMat->apply();
-		}
-	}
-	*/
+	Model::drawSample();
 }
 
 void CubeModel::onCubeChange()

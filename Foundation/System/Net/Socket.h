@@ -1,6 +1,5 @@
 #pragma once
 
-#include "macros.h"
 #include "EndPoint.h"
 
 #include <string>

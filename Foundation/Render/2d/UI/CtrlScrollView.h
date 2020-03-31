@@ -1,6 +1,7 @@
 #pragma once
 
 #include "CtrlScissor.h"
+#include "Common/Touch/TouchDelegate.h"
 
 namespace render
 {
@@ -65,7 +66,6 @@ namespace render
 		virtual void onTouchMoved(float x, float y);
 		virtual void onTouchEnded(float x, float y);
 
-		virtual void initSelf();
 		// 初始化滑动项
 		virtual void initItems();
 		// 初始化管理项

@@ -14,7 +14,7 @@ namespace render
 	public:
 		Model();
 		virtual ~Model();
-	public:
+	protected:
 		virtual void draw();
 	public:
 		const ModelDetail* getModelData();

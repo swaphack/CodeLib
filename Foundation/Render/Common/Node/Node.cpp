@@ -1,5 +1,8 @@
 #include "Node.h"
-#include "../Touch/TouchProxy.h"
+#include "Common/Touch/TouchProxy.h"
+#include "Common/Action/ActionProxy.h"
+#include "Common/Shader/ShaderProgram.h"
+#include "Common/Tool/Tool.h"
 #include <algorithm>
 #include "Graphic/import.h"
 
@@ -24,7 +27,7 @@ Node::Node()
 
 	this->setVisible(true);
 
-	_notify = new Notify();
+	_notify = new Notify<int>();
 }
 
 Node::~Node()
@@ -247,18 +250,14 @@ void Node::visit()
 		return;
 	}
 
-	// 数值计算
-	if (isDirty())
-	{
-		this->initSelf();
+	this->notifyEvents();	
 
-		setDirty(false);
-	}
+	// 模型矩阵
+	GLMatrix::applyModelView();
 
-	G_DRAWCOMMANDER->addCommand(DCMatrix::create(true));
+	GLMatrix::pushMatrix();
 	
-
-	this->updateSelf();
+	this->updateTranform();
 
 	if (_children.count() == 0)
 	{
@@ -281,7 +280,7 @@ void Node::visit()
 		}
 	}
 
-	G_DRAWCOMMANDER->addCommand(DCMatrix::create(false));
+	GLMatrix::popMatrix();
 }
 
 ActionProxy* Node::getActionProxy()
@@ -329,24 +328,36 @@ void Node::draw()
 
 void Node::updateTranform()
 {
+
+	if (!this->isRelativeWithParent())
+	{
+		GLMatrix::loadIdentity();
+	}
+
 	if (_bUseMatrix)
 	{
-		G_DRAWCOMMANDER->addCommand(DCSpaceMatrix::create(_mat44, _bRelative));
+		PRINT("Matrix:\n%s\n", _mat44.toString().c_str());
+		GLMatrix::multMatrix(_mat44.transpose());
 	}
 	else
 	{
-		G_DRAWCOMMANDER->addCommand(DCSpace::create(_obPosition, _scale, _rotation, _bRelative));
+		GLMatrix::translate(_obPosition);
+		GLMatrix::scale(_scale);
+		GLMatrix::rotate(_rotation);
 	}
+
+	GLDebug::showError();
 }
 
-void Node::updateSelf()
+void Node::notifyEvents()
 {
-	this->updateTranform();
-}
+	// 数值计算
+	if (isDirty())
+	{
+		_notify->run();
 
-void Node::initSelf()
-{
-	_notify->notify();
+		setDirty(false);
+	}
 }
 
 void Node::sortChildren()
@@ -443,13 +454,13 @@ void Node::calRealSpaceByMatrix()
 	math::Matrix44 matTranslate;
 	matTranslate.setTranslate(_obPosition);
 
-	//printf("Scale\n%s\n", matScale.toString().c_str());
-	//printf("Rotate\n%s\n", matRotate.toString().c_str());
-	//printf("Translate\n%s\n", matTranslate.toString().c_str());
+	printf("Scale\n%s\n", matScale.toString().c_str());
+	printf("Rotate\n%s\n", matRotate.toString().c_str());
+	printf("Translate\n%s\n", matTranslate.toString().c_str());
 
 	_mat44 = matTranslate * matRotate * matScale;
 
-	//printf("mat\n%s\n", _mat44.toString().c_str());
+	printf("mat\n%s\n", _mat44.toString().c_str());
 
 	Node* temp = this;
 	std::vector<math::Matrix44> vecMat;
@@ -477,20 +488,17 @@ void Node::calRealSpaceByMatrix()
 
 void Node::onSpaceChange()
 {
-	setDirty(true);
-	_notify->addMark(ENP_SPACE);
+	this->notify(ENP_SPACE);
 }
 
 void Node::onBodyChange()
 {
-	setDirty(true);
-	_notify->addMark(ENP_SPACE);
+	this->notify(ENP_SPACE);
 }
 
 void Node::onChildrenChange()
 {
-	setDirty(true);
-	_notify->addMark(ENP_NODE);
+	this->notify(ENP_NODE);
 }
 
 const math::Matrix44& Node::getRealMatrix()
@@ -530,6 +538,15 @@ void Node::handShaderProgram()
 
 void Node::drawNode()
 {
-	this->draw();
 	this->handShaderProgram();
+
+	this->draw();
+
+	GLDebug::showError();
+}
+
+void Node::notify(int id)
+{
+	_notify->addMark(id);
+	setDirty(true);
 }

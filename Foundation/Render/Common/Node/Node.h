@@ -3,15 +3,12 @@
 #include "system.h"
 #include "Notify.h"
 #include "Common/struct/import.h"
-#include "Common/Tool/import.h"
-#include "Common/Action/import.h"
-#include "Common/Texture/import.h"
-#include "Common/Shader/import.h"
 
 namespace render
 {
-	//struct PSR;
+	class ActionProxy;
 	class TouchProxy;
+	class ShaderProgram;
 
 #define CREATE_NODE(NODE_TYPE) render::createNode<NODE_TYPE>()
 
@@ -146,10 +143,10 @@ namespace render
 	protected:
 		// 更新空间位置
 		virtual void updateTranform();
-		// 更新自己
-		virtual void updateSelf();
-		// 重新初始化自己
-		virtual void initSelf();
+	protected:
+		void notifyEvents();
+		void notify(int id);
+	protected:
 		// 对子节点进行排序
 		virtual void sortChildren();
 		// 空间物理坐标
@@ -172,8 +169,6 @@ namespace render
 		math::Vector3 _obRotation;
 		// 标签
 		int _tag;
-		// 名称
-		std::string _name;
 		// 数据
 		void* _userData;
 		// z轴坐标
@@ -199,7 +194,7 @@ namespace render
 		// 实际躯体空间信息
 		BodySpace _realBodySpace;
 		// 通知
-		Notify* _notify;
+		Notify<int>* _notify;
 		// 使用矩阵运算
 		bool _bUseMatrix = true;
 		// 相对于父节点的矩阵

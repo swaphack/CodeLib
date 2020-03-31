@@ -1,6 +1,7 @@
 #include "GLWindow.h"
 #include "Platform/DeviceProxy.h"
-#include "../../RenderApplication.h"
+#include "RenderApplication.h"
+#include "Graphic/GLAPI/GLVersion.h"
 
 using namespace render;
 
@@ -35,6 +36,24 @@ void GLWindow::createWindow(const char* title, int width, int height, int millis
 	_render->setRefreshInterval(millis / 1000.0f);
 
 	Window::initWindow(title, width, height);
+
+	int err = glewInit();
+	if (GLEW_OK != err)
+	{
+		PRINT("Error [main]: glewInit failed: %s\n", glewGetErrorString(err));
+		return;
+	}
+
+	GLVersion::showDetail();
+
+	if (_render)
+	{
+		_render->setFrameSize((int)getWidth(), (int)getHeight());
+		_render->show();
+	}
+
+	this->initDevice();
+	this->listen();
 }
 
 bool GLWindow::init()
@@ -130,13 +149,6 @@ void GLWindow::listen()
 {
 	MSG msg;
 	bool done = false;
-
-	if (_render)
-	{
-		_render->setFrameSize((int)getWidth(), (int)getHeight());
-		_render->show();
-		this->initDevice();
-	}
 
 	while (!done)
 	{

@@ -1,6 +1,7 @@
-#include "system.h"
-#include "../Node/import.h"
+#pragma once
 
+
+#include "system.h"
 #include <functional>
 
 namespace render

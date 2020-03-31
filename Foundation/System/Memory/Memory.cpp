@@ -1,4 +1,5 @@
 #include "Memory.h"
+#include "PtrCache.h"
 #include <cstdlib>
 
 using namespace sys;

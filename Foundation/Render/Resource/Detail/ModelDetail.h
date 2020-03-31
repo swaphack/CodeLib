@@ -1,12 +1,12 @@
 #pragma once
 
 #include "system.h"
-#include "Material.h"
-#include "Mesh.h"
-#include "Face.h"
 
 namespace render
 {
+	class MaterialDetail;
+	class MeshDetail;
+
 	// 模型资源格式
 	enum ModelResourceFormat
 	{
@@ -26,7 +26,7 @@ namespace render
 		/**
 		*	设置模型材质
 		*/
-		void addMaterial(int id, Material* material);
+		void addMaterial(int id, MaterialDetail* material);
 		/**
 		*	移除模型材质
 		*/
@@ -38,15 +38,15 @@ namespace render
 		/**
 		*	获取模型材质
 		*/
-		Material* getMaterial(int id);
+		MaterialDetail* getMaterial(int id);
 		/**
 		*	获取模型材质
 		*/
-		const std::map<int, Material*>& geMaterials();
+		const std::map<int, MaterialDetail*>& geMaterials();
 		/**
 		*	设置模型网格
 		*/
-		void addMesh(int id, Mesh* mesh);
+		void addMesh(int id, MeshDetail* mesh);
 		/**
 		*	移除模型网格
 		*/
@@ -58,11 +58,11 @@ namespace render
 		/**
 		*	获取模型网格
 		*/
-		Mesh* getMesh(int id);
+		MeshDetail* getMesh(int id);
 		/**
 		*	获取模型网格
 		*/
-		const std::map<int, Mesh*>& getMeshes();
+		const std::map<int, MeshDetail*>& getMeshes();
 		/**
 		*	设置模型网格
 		*/
@@ -89,9 +89,9 @@ namespace render
 		uint32_t createTexture(const std::string& strFullpath);
 	protected:
 		// 模型材质
-		std::map<int, Material*> _materials;
+		std::map<int, MaterialDetail*> _materials;
 		// 纹理网格
-		std::map<int, Mesh*> _meshes;
+		std::map<int, MeshDetail*> _meshes;
 		// 图片纹理
 		std::map<std::string, int> _textures;
 	private:

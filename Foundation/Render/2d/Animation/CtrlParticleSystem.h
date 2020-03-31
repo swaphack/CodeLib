@@ -1,7 +1,9 @@
 #pragma once
 
-#include "macros.h"
+#include "system.h"
+#include "Common/Node/ColorNode.h"
 #include "Particle.h"
+#include "Common/Node/Animation.h"
 
 namespace render
 {
@@ -11,12 +13,12 @@ namespace render
 	public:
 		ParticleNode();
 		virtual ~ParticleNode();
+	protected:
+		virtual void drawSample();
 	public:
-		virtual void draw();
 		// 更新
 		virtual void update(float interval);
 	protected:
-		virtual void initSelf();
 	private:
 		// 初始颜色
 		sys::Color4F _colorInit;

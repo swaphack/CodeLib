@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Stencil.h"
+#include "Graphic/import.h"
 
 using namespace render;
 
@@ -21,17 +22,17 @@ Stencil::~Stencil()
 void showStencilInformation()
 {
 	int value = 0;
-	glGetIntegerv(GL_STENCIL_FUNC, &value);
+	GLState::getInt(GetTarget::STENCIL_FUNC, &value);
 	PRINT("GL_STENCIL_FUNC %d\n", value);
-	glGetIntegerv(GL_STENCIL_REF, &value);
+	GLState::getInt(GetTarget::STENCIL_REF, &value);
 	PRINT("GL_STENCIL_REF %d\n", value);
-	glGetIntegerv(GL_STENCIL_VALUE_MASK, &value);
+	GLState::getInt(GetTarget::STENCIL_VALUE_MASK, &value);
 	PRINT("GL_STENCIL_VALUE_MASK %d\n", value);
-	glGetIntegerv(GL_STENCIL_FAIL, &value);
+	GLState::getInt(GetTarget::STENCIL_FAIL, &value);
 	PRINT("GL_STENCIL_FAIL %d\n", value);
-	glGetIntegerv(GL_STENCIL_PASS_DEPTH_FAIL, &value);
+	GLState::getInt(GetTarget::STENCIL_PASS_DEPTH_FAIL, &value);
 	PRINT("GL_STENCIL_PASS_DEPTH_FAIL %d\n", value);
-	glGetIntegerv(GL_STENCIL_PASS_DEPTH_PASS, &value);
+	GLState::getInt(GetTarget::STENCIL_PASS_DEPTH_PASS, &value);
 	PRINT("GL_STENCIL_PASS_DEPTH_PASS %d\n", value);
 	PRINT("==============================================\n\n");
 }
@@ -56,45 +57,48 @@ void Stencil::visit()
 	int nStencilPassDepthFail = 0;
 	int nStencilPassDepthPass = 0;
 
-	isEnableDepthTest = glIsEnabled(GL_DEPTH_TEST);
-	glGetIntegerv(GL_STENCIL_FUNC, &nStencilFun);
-	glGetIntegerv(GL_STENCIL_REF, &nStencilRef);
-	glGetIntegerv(GL_STENCIL_VALUE_MASK, &nStencilValueMask);
-	glGetIntegerv(GL_STENCIL_FAIL, &nStencilFail);
-	glGetIntegerv(GL_STENCIL_PASS_DEPTH_FAIL, &nStencilPassDepthFail);
-	glGetIntegerv(GL_STENCIL_PASS_DEPTH_PASS, &nStencilPassDepthPass);
+	isEnableDepthTest = GLState::isEnabled(EnableModel::DEPTH_TEST);
+	GLState::getInt(GetTarget::STENCIL_FUNC, &nStencilFun);
+	GLState::getInt(GetTarget::STENCIL_REF, &nStencilRef);
+	GLState::getInt(GetTarget::STENCIL_VALUE_MASK, &nStencilValueMask);
+	GLState::getInt(GetTarget::STENCIL_FAIL, &nStencilFail);
+	GLState::getInt(GetTarget::STENCIL_PASS_DEPTH_FAIL, &nStencilPassDepthFail);
+	GLState::getInt(GetTarget::STENCIL_PASS_DEPTH_PASS, &nStencilPassDepthPass);
 
-	
-	glStencilFunc(GL_ALWAYS, 1, 0xFF);
-	glStencilOp(GL_KEEP, GL_KEEP, GL_INCR);
+
+	GLState::enable(EnableModel::DEPTH_TEST);
+
+	GLFragment::setStencilOp(StencilOp::KEEP, StencilOp::KEEP, StencilOp::REPLACE);
+	GLFragment::testStencil(StencilFunction::ALWAYS, 1, 0xff);
+
+	GLPixels::setStencilMask(0xff);
 
 	//showStencilInformation();
 
-	glEnable(GL_STENCIL_TEST);
-
-	glDepthMask(GL_FALSE);
+	GLPixels::setDepthMask(false);
 	if (_stencilNode)
 	{
 		_stencilNode->visit();
 	}
 
-	glDepthMask(GL_TRUE);
+	GLPixels::setDepthMask(true);
 
-	glStencilFunc(GL_EQUAL, 0x1, 0xff);
-	glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
+	GLFragment::setStencilOp(StencilOp::KEEP, StencilOp::KEEP, StencilOp::KEEP);
+	GLFragment::testStencil(StencilFunction::EQUAL, 0x1, 0xff);
 
 	//showStencilInformation();
 
 	Node::visit();
-	/*
-	glStencilFunc(nStencilFun, nStencilRef, nStencilValueMask);
-	glStencilOp(nStencilFail, nStencilPassDepthFail, nStencilPassDepthPass);
+	
+	GLFragment::setStencilOp((StencilOp)nStencilFail, (StencilOp)nStencilPassDepthFail, (StencilOp)nStencilPassDepthPass);
+	GLFragment::testStencil((StencilFunction)nStencilFun, nStencilRef, nStencilValueMask);
+	
 	if (isEnableDepthTest == GL_FALSE)
 	{
 		glDisable(GL_DEPTH_TEST);
 	}
-	*/
-	glDisable(GL_STENCIL_TEST);
+
+	GLState::disable(EnableModel::DEPTH_TEST);
 }
 
 void Stencil::setStencilNode(Node* node)

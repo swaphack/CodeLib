@@ -2,6 +2,7 @@
 #include "Http/import.h"
 #include "Net/import.h"
 #include "Type/import.h"
+#include "Cache/CacheGroup.h"
 
 using namespace sys;
 
@@ -80,7 +81,7 @@ bool RemoteResource::loadFileData(const std::string& filename, GetDataCallback h
 
 	_downloadTasks.insert(std::make_pair(s_Tag, task));
 
-	OnHttpDownloadCallback downloadHandler = std::make_pair(this, (downloadCallback)&RemoteResource::onDownloadCallback);
+	HttpDownloadCallback downloadHandler = std::make_pair(this, (downloadCallback)&RemoteResource::onDownloadCallback);
 
 	HttpDownload download;
 	download.download(ip.c_str(), port, filename, downloadHandler, 1);

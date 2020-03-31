@@ -9,13 +9,12 @@ Canvas::Canvas()
 	_root->retain();
 
 	_view = new View();
-	_root->setView(_view);
 
 	_actionManager = G_ACTIONMANAGER;
 
 	_touchManager = G_TOUCHMANAGER;
 
-	_drawCommander = G_DRAWCOMMANDER;
+	//_drawCommander = G_DRAWCOMMANDER;
 }
 
 Canvas::~Canvas()
@@ -35,7 +34,7 @@ void Canvas::draw()
 
 	_root->visit();
 
-	_drawCommander->flush();
+	//_drawCommander->flush();
 }
 
 void Canvas::update(float interval)
@@ -67,11 +66,18 @@ void Canvas::setViewPort(float x, float y, float width, float height)
 {
 	_view->setPosition(x, y);
 	_view->setFrameSize(width, height);
-	_view->setDirty(true);
+
+	_root->setVolume(width, height);
+
 	Tool::setGLViewSize(width, height);
 }
 
 Scene* Canvas::getRoot()
 {
 	return _root;
+}
+
+View* Canvas::getView()
+{
+	return _view;
 }

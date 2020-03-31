@@ -1,10 +1,9 @@
 #include "CtrlMask.h"
-
+#include "Graphic/import.h"
 using namespace render;
 
 CtrlMask::CtrlMask()
 {
-	_blend = { EBFS_DST_COLOR, EBFD_ZERO };
 }
 
 CtrlMask::~CtrlMask()
@@ -12,7 +11,7 @@ CtrlMask::~CtrlMask()
 
 }
 
-void CtrlMask::draw()
+void CtrlMask::drawSample()
 {
-	G_DRAWCOMMANDER->addCommand(DCMask::create(&_rectVertex, getColor(), _opacity, _blend));
+	GLVertex::drawRect(_rectVertex);
 }

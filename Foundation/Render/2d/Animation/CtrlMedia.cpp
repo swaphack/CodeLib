@@ -3,6 +3,8 @@
 #include "Resource/Detail/MediaDetail.h"
 #include "Resource/Loader/Loader.h"
 #include "Resource/Paser/MediaFFmpeg.h"
+#include "Common/Texture/Texture.h"
+#include "Common/Audio/CtrlAudioSource.h"
 
 using namespace render;
 
@@ -116,11 +118,6 @@ void CtrlMedia::setMediaPath(const char* path, bool defaultSize)
 		_ctrlFrame->setVolume(this->getWidth(), this->getHeight());
 	}
 }	
-
-void CtrlMedia::initSelf()
-{
-	CtrlAnimation::initSelf();
-}
 
 Texture2D* CtrlMedia::getNextTexture()
 {

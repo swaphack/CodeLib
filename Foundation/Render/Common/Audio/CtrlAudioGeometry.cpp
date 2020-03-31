@@ -1,6 +1,7 @@
 #include "CtrlAudioGeometry.h"
 #include "AudioManager.h"
 #include "Common/DrawNode/DrawNode.h"
+#include "Common/Tool/Tool.h"
 
 #define MAX_POLYGON_COUNT 1
 #define POLYGON_INDEX 0
@@ -129,8 +130,7 @@ bool CtrlAudioGeometry::getActive()
 void CtrlAudioGeometry::setForward(const math::Vector3& forward)
 {
 	_geometryBody.forward = forward;
-	_notify->addMark(ENP_AUDIO);
-	setDirty(true);
+	this->notify(ENP_AUDIO);
 }
 
 const math::Vector3& CtrlAudioGeometry::getForward()
@@ -141,8 +141,7 @@ const math::Vector3& CtrlAudioGeometry::getForward()
 void CtrlAudioGeometry::setUp(const math::Vector3& up)
 {
 	_geometryBody.up = up;
-	_notify->addMark(ENP_AUDIO);
-	setDirty(true);
+	this->notify(ENP_AUDIO);
 }
 
 const math::Vector3& CtrlAudioGeometry::getUp()
@@ -364,8 +363,7 @@ int CtrlAudioGeometryPolygon::getIndex()
 void CtrlAudioGeometryPolygon::setDirectOcclusion(float value)
 {
 	_geometrySettings.directocclusion = value;
-	_notify->addMark(ENP_AUDIO);
-	this->setDirty(true);
+	this->notify(ENP_AUDIO);
 }
 
 float CtrlAudioGeometryPolygon::getDirectOcclusion()
@@ -376,8 +374,7 @@ float CtrlAudioGeometryPolygon::getDirectOcclusion()
 void CtrlAudioGeometryPolygon::setReverbOcclusion(float value)
 {
 	_geometrySettings.reverbocclusion = value;
-	_notify->addMark(ENP_AUDIO);
-	this->setDirty(true);
+	this->notify(ENP_AUDIO);
 }
 
 float CtrlAudioGeometryPolygon::getReverbOcclusion()
@@ -388,8 +385,7 @@ float CtrlAudioGeometryPolygon::getReverbOcclusion()
 void CtrlAudioGeometryPolygon::setDoubleSided(bool value)
 {
 	_geometrySettings.doublesided = value;
-	_notify->addMark(ENP_AUDIO);
-	this->setDirty(true);
+	this->notify(ENP_AUDIO);
 }
 
 bool CtrlAudioGeometryPolygon::isDoubleSided()
@@ -440,8 +436,7 @@ bool CtrlAudioGeometryPolygon::setVertexes(const std::vector<math::Vector3>& ver
 		_vertexes.push_back(vertexes[i]);
 	}
 
-	_notify->addMark(ENP_GEOMETRY);
-	this->setDirty(true);
+	this->notify(ENP_GEOMETRY);
 	return true;
 }
 
@@ -452,8 +447,7 @@ bool CtrlAudioGeometryPolygon::setVertexes(const RectVertex& vertexes)
 	_vertexes.push_back(vertexes.rightDown);
 	_vertexes.push_back(vertexes.rightUp);
 	_vertexes.push_back(vertexes.leftUp);
-	_notify->addMark(ENP_GEOMETRY);
-	this->setDirty(true);
+	this->notify(ENP_GEOMETRY);
 	return true;
 }
 
@@ -471,8 +465,7 @@ bool CtrlAudioGeometryPolygon::updateVertex(int index, const math::Vector3& vert
 
 	_vertexes[index] = vertex;
 
-	_notify->addMark(ENP_GEOMETRY);
-	this->setDirty(true);
+	this->notify(ENP_GEOMETRY);
 	return true;
 }
 

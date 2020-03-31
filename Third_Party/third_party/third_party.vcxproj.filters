@@ -133,11 +133,14 @@
     <Filter Include="tga">
       <UniqueIdentifier>{6fdd2306-51ba-4fee-8b28-2aab09d51ade}</UniqueIdentifier>
     </Filter>
-    <Filter Include="gl">
-      <UniqueIdentifier>{bac4799d-9338-41e7-b280-e86f693dc1ab}</UniqueIdentifier>
-    </Filter>
     <Filter Include="opengl">
       <UniqueIdentifier>{f82d0230-81b2-49e5-83be-5bad875a627e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="freeglut">
+      <UniqueIdentifier>{de21fddc-176d-4c80-85f0-29e15c60173c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="glew">
+      <UniqueIdentifier>{bac4799d-9338-41e7-b280-e86f693dc1ab}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -1782,7 +1785,7 @@
       <Filter>tga</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Lib\include\gl\glew.h">
-      <Filter>gl</Filter>
+      <Filter>glew</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Lib\include\opengl\GL.H">
       <Filter>opengl</Filter>
@@ -1801,6 +1804,30 @@
     </ClInclude>
     <ClInclude Include="..\..\Lib\include\opengl\WGLEXT.H">
       <Filter>opengl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Lib\include\freeglut\freeglut.h">
+      <Filter>freeglut</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Lib\include\freeglut\freeglut_ext.h">
+      <Filter>freeglut</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Lib\include\freeglut\freeglut_std.h">
+      <Filter>freeglut</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Lib\include\freeglut\glut.h">
+      <Filter>freeglut</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Lib\include\glew\eglew.h">
+      <Filter>glew</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Lib\include\glew\glew.h">
+      <Filter>glew</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Lib\include\glew\glxew.h">
+      <Filter>glew</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Lib\include\glew\wglew.h">
+      <Filter>glew</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

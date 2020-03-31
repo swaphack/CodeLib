@@ -1,6 +1,7 @@
 #pragma once
 
-#include "macros.h"
+#include "system.h"
+#include "Common/Node/Node.h"
 
 namespace render
 {
@@ -40,8 +41,8 @@ namespace render
 		void onTouchUp(sys::Object* object, float x, float y);
 		void onKeyBoardInput(sys::Object* object, sys::BoardKey key, sys::ButtonStatus type);
 	private:
-		// 是否相应键盘
-		bool _keyboardEnabled;
+		// 键盘是否可用
+		bool _keyboardEnabled = false;
 		// 编辑输入空间监听
 		EDITINPUT_DELEGATE_HANDLER _editInputHandler;
 	};

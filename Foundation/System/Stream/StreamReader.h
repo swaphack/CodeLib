@@ -1,6 +1,10 @@
 #pragma once
 
 #include "Stream.h"
+#include "IStreamBase.h"
+
+#include <cstdint>
+#include <string>
 
 namespace sys
 {

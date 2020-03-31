@@ -1,5 +1,5 @@
 #include "LocalResource.h"
-
+#include "Cache/CacheGroup.h"
 #include "Base/macros.h"
 #include "IO/File.h"
 

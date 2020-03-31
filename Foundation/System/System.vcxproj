@@ -136,7 +136,6 @@
     <ClInclude Include="Net\DataQueue.h" />
     <ClInclude Include="Net\DNS.h" />
     <ClInclude Include="Net\import.h" />
-    <ClInclude Include="Net\macros.h" />
     <ClInclude Include="Net\NetData.h" />
     <ClInclude Include="Net\Server.h" />
     <ClInclude Include="Net\Socket.h" />
@@ -184,7 +183,6 @@
     <ClInclude Include="Thread\ThreadPool.h" />
     <ClInclude Include="Type\Bit.h" />
     <ClInclude Include="Type\import.h" />
-    <ClInclude Include="Type\macros.h" />
     <ClInclude Include="Type\String.h" />
   </ItemGroup>
   <ItemGroup>
@@ -197,6 +195,7 @@
     <ClCompile Include="Command\CommandParser.cpp" />
     <ClCompile Include="Concurrent\ConcurrentFile.cpp" />
     <ClCompile Include="Concurrent\Concurrent.cpp" />
+    <ClCompile Include="Concurrent\Concurrents.cpp" />
     <ClCompile Include="CSS\Margin.cpp" />
     <ClCompile Include="DataBase\DataRecord.cpp" />
     <ClCompile Include="DataBase\DataSheet.cpp" />
@@ -211,7 +210,6 @@
     <ClCompile Include="Framework\Application.cpp" />
     <ClCompile Include="Framework\AutoReleasePool.cpp" />
     <ClCompile Include="Framework\Container.cpp" />
-    <ClCompile Include="Framework\Dispatcher.cpp" />
     <ClCompile Include="Framework\FilePath.cpp" />
     <ClCompile Include="Framework\Object.cpp" />
     <ClCompile Include="Http\HttpCommand.cpp" />

@@ -1,5 +1,7 @@
 #include "StringStream.h"
 #include "Base/macros.h"
+#include "StreamBase.h"
+#include "StreamHelper.h"
 
 using namespace sys;
 

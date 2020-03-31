@@ -41,7 +41,7 @@ void Animation::stop()
 	this->unregisterScheduler();
 }
 
-void Animation::update(float interval)
+void Animation::updateAnimation(float interval)
 {
 	this->updateSelf(interval);
 }
@@ -53,7 +53,7 @@ void Animation::registerScheduler()
 	if (_scheduler == nullptr)
 	{
 		_scheduler = new Scheduler();
-		_scheduler->setHandler(SEL_ACTION_UPDATE(Animation::update));
+		_scheduler->setHandler(SEL_ACTION_UPDATE(Animation::updateAnimation));
 	}
 	this->getActionProxy()->runAction(_scheduler);
 }

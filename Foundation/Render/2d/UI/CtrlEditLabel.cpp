@@ -1,4 +1,5 @@
 #include "CtrlEditLabel.h"
+#include "CtrlText.h"
 #include <map>
 using namespace render;
 

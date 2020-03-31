@@ -54,18 +54,21 @@ void ImageTarga::load(const std::string& filename)
 
 void ImageTarga::setTextureInfo(int pixel_depth)
 {
-	this->setInternalFormat(pixel_depth);
+	
 
 	switch (pixel_depth)
 	{
 	case 3:     // Most likely case
-		this->setFormat(GL_BGR_EXT);
+		this->setFormat(PixelFormat::BGR_EXT);
+		this->setInternalFormat(TextureParameter::THREE);
 		break;
 	case 4:
-		this->setFormat(GL_BGRA_EXT);
+		this->setFormat(PixelFormat::BGRA_EXT);
+		this->setInternalFormat(TextureParameter::FOUR);
 		break;
 	case 1:
-		this->setFormat(GL_LUMINANCE);
+		this->setFormat(PixelFormat::LUMINANCE);
+		this->setInternalFormat(TextureParameter::ONE);
 		break;
 	};
 }

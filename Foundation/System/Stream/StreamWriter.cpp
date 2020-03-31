@@ -1,5 +1,7 @@
 #include "StreamWriter.h"
 #include "Base/macros.h"
+#include "StreamHelper.h"
+#include "StreamBase.h"
 #include <cstring>
 #include <cstdlib>
 

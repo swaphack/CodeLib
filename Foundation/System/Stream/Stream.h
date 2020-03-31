@@ -1,11 +1,11 @@
 #pragma once
-
-
-#include "StreamBase.h"
+#include "macros.h"
 
 namespace sys
 {
 #define STREAM_DEFAULT_SIZE 2
+
+	class IStreamBase;
 
 	class Stream
 	{

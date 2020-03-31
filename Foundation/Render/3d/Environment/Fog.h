@@ -1,6 +1,7 @@
 #pragma once
 
-#include "../macros.h"
+#include "Common/Node/ColorNode.h"
+#include "Graphic/GLAPI/macros.h"
 
 namespace render
 {
@@ -10,23 +11,24 @@ namespace render
 	public:
 		Fog();
 		virtual ~Fog();
+	protected:
+		virtual void drawSample();
 	public:
-		virtual void draw();
 		// 近距离
-		float getNear() const { return _near; }
-		void setNear(float val) { _near = val; }
+		float getNear() const;
+		void setNear(float val);
 		// 远距离
-		float getFar() const { return _far; }
-		void setFar(float val) { _far = val; }
+		float getFar() const;
+		void setFar(float val);
 		// 雾的类型
-		FogMode getFogMode() const { return _fogMode; }
-		void setFogMode(FogMode val) { _fogMode = val; }
+		FogMode getFogMode() const;
+		void setFogMode(FogMode val);
 		// 雾的效果
-		FogEffect getFogEffect() const { return _fogEffect; }
-		void setFogEffect(FogEffect val) { _fogEffect = val; }
+		HintMode getFogEffect() const;
+		void setFogEffect(HintMode val);
 		// 密度
-		float getDensity() const { return _density; }
-		void setDensity(float val) { _density = val; }
+		float getDensity() const;
+		void setDensity(float val);
 	protected:
 		// 近距离
 		float _near;
@@ -35,7 +37,7 @@ namespace render
 		// 雾的类型
 		FogMode _fogMode;
 		// 雾的效果
-		FogEffect _fogEffect;
+		HintMode _fogEffect;
 		// 密度
 		float _density;
 	};

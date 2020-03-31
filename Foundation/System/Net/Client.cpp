@@ -1,4 +1,8 @@
 #include "Client.h"
+#include "Socket.h"
+#include "Framework/Object.h"
+#include "NetData.h"
+#include "Base/macros.h"
 
 using namespace sys;
 

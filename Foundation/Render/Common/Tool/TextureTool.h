@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../struct/import.h"
+#include "Common/struct/import.h"
 
 namespace render
 {

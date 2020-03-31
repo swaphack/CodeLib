@@ -2,6 +2,7 @@
 
 #include "system.h"
 #include "mathlib.h"
+#include "Graphic/GLAPI/macros.h"
 
 // 纹理
 namespace render
@@ -15,10 +16,12 @@ namespace render
 		math::Vector3 coords;
 		// 顶点颜色
 		sys::Color4B color;
+		// 法线
+		math::Vector3 normal;
 
 		TextureVertex()
 		{
-
+			normal = math::Vector3(0, 0, 1);
 		}
 	};
 
@@ -40,6 +43,15 @@ namespace render
 			rightDown.coords = math::Vector3(1.0f, 0.0f, 0.0f);
 			rightUp.coords = math::Vector3(1.0f, 1.0f, 0.0f);
 			leftUp.coords = math::Vector3(0.0f, 1.0f, 0.0f);
+		}
+
+	public:
+		void setNormal(const math::Vector3& normal)
+		{
+			leftDown.normal = normal;
+			rightDown.normal = normal;
+			rightUp.normal = normal;
+			leftUp.normal = normal;
 		}
 	};
 
@@ -67,13 +79,13 @@ namespace render
 	// 混合参数
 	struct BlendParam
 	{
-		int src;
-		int dest;
+		BlendingFactorSrc src = BlendingFactorSrc::SRC_ALPHA;
+		BlendingFactorDest dest = BlendingFactorDest::ONE_MINUS_SRC_ALPHA;
 
-		BlendParam() :src(0), dest(0)
+		BlendParam()
 		{}
 
-		BlendParam(int src, int dest) :src(src), dest(dest)
+		BlendParam(BlendingFactorSrc src, BlendingFactorDest dest) :src(src), dest(dest)
 		{}
 
 		BlendParam& operator=(const BlendParam& blend)

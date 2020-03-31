@@ -18,3 +18,4 @@
 #include "CSS/Margin.h"
 #include "IO/import.h"
 #include "DateTime/import.h"
+#include "Resource/import.h"

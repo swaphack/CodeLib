@@ -1,11 +1,11 @@
 #pragma once
 
-#include "CacheIdentity.h"
-
+#include <cstdint>
 #include <map>
 
 namespace sys
 {
+	class CacheIdentity;
 	// ª∫¥Êπ‹¿Ì
 	class CacheMgr
 	{

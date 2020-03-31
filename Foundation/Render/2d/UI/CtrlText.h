@@ -1,6 +1,9 @@
 #pragma once
 
 #include "CtrlFrame.h"
+#include "Common/struct/protocol_common.h"
+#include "Resource/Config/TextDefine.h"
+#include "2d/ctrl_common.h"
 
 namespace render
 {
@@ -19,8 +22,6 @@ namespace render
 		virtual ~CtrlText();
 	public:
 		virtual bool init();
-
-		virtual void draw();
 		// 设置字库路径
 		void setFontPath(const char* fonturl);
 		// 获取字库路径
@@ -57,8 +58,6 @@ namespace render
 		// 设置颜色
 		void setColor(const sys::Color4B& color);
 	protected:
-		virtual void initSelf();
-
 		virtual void onTextChange();
 	private:
 		// 文本结构

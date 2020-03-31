@@ -1,5 +1,8 @@
 #include "MediaDetail.h"
 
+#include "ImageDetail.h"
+#include "AudioDetail.h"
+
 using namespace render;
 
 MediaDetail::MediaDetail()

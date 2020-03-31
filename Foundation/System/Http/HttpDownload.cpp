@@ -1,7 +1,10 @@
 #include "HttpDownload.h"
-
 #include "Http/import.h"
-
+#include "Framework/Object.h"
+#include "Net/Client.h"
+#include "Net/NetData.h"
+#include "Stream/StreamWriter.h"
+#include "Base/macros.h"
 #include <thread>
 
 #define SLEEP_MILLISECOND 200
@@ -18,7 +21,7 @@ HttpDownload::~HttpDownload()
 	this->clear();
 }
 
-bool HttpDownload::download(const std::string& url, int32_t port, const std::string& filepath, OnHttpDownloadCallback callback, int32_t tag)
+bool HttpDownload::download(const std::string& url, int32_t port, const std::string& filepath, HttpDownloadCallback callback, int32_t tag)
 {
 	if (url.empty() == NULL)
 	{
@@ -129,7 +132,7 @@ void HttpDownload::onRecvHandle(int32_t id, DataQueue& data)
 	delete pDoc;
 }
 
-void HttpDownload::addListen(Client* client, OnHttpDownloadCallback callback, int32_t tag)
+void HttpDownload::addListen(Client* client, HttpDownloadCallback callback, int32_t tag)
 {// 添加一个下载监听
 	if (client == nullptr)
 	{

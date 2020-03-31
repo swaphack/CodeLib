@@ -1,4 +1,8 @@
 #include "Server.h"
+#include "Framework/Object.h"
+#include "Socket.h"
+#include "NetData.h"
+#include "Base/macros.h"
 
 using namespace sys;
 

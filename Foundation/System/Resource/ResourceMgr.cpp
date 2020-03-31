@@ -1,7 +1,7 @@
 #include "ResourceMgr.h"
-
 #include "LocalResource.h"
 #include "RemoteResource.h"
+#include "Base/macros.h"
 
 using namespace sys;
 

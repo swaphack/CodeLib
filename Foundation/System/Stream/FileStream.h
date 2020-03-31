@@ -1,8 +1,8 @@
 #pragma once
 
 #include "Stream.h"
-#include "StreamReader.h"
-#include "StreamWriter.h"
+
+#include <string>
 
 namespace sys
 {

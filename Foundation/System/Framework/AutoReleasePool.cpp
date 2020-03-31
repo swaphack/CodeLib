@@ -1,5 +1,5 @@
 #include "AutoReleasePool.h"
-
+#include "Object.h"
 #include <vector>
 
 using namespace sys;

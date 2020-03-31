@@ -23,6 +23,8 @@ namespace render
 		void setViewPort(float x, float y, float width, float height);
 		// 获取场景
 		Scene* getRoot();
+		// 获取视图
+		View* getView();
 		// 动作管理
 		inline const ActionManager* getActionManager() { return _actionManager; }
 		// 触摸管理

@@ -2,7 +2,7 @@
 
 #include "Common/import.h"
 
-#include "../Common/Model.h"
+#include "3d/Common/Model.h"
 
 namespace render
 {
@@ -53,8 +53,6 @@ namespace render
 		float getRadius();
 		// …Ë÷√Œ∆¿Ì÷°
 		void setTexFrame(TexFrame* frame);
-	protected:
-		virtual void initSelf();
 	private:
 		// «Ú∞Îæ∂
 		float _radius;

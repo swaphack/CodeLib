@@ -1,12 +1,10 @@
 #include "Scene.h"
-#include "ext-config.h"
+#include "Common/View/View.h"
 using namespace render;
 
-
-Scene::Scene()
-:_view(nullptr)
+Scene::Scene() 
 {
-
+	this->setRelativeWithParent(false);
 }
 
 Scene::~Scene()
@@ -20,15 +18,6 @@ bool Scene::init()
 	{
 		return false;
 	}
+
 	return true;
-}
-
-View* Scene::getView()
-{
-	return _view;
-}
-
-void Scene::setView(View* view)
-{
-	_view = view;
 }

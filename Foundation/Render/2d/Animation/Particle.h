@@ -1,6 +1,7 @@
 #pragma once
 
-#include "macros.h"
+#include "system.h"
+#include "mathlib.h"
 
 namespace render
 {
@@ -41,6 +42,6 @@ namespace render
 		// 色变速度
 		sys::Color4F _colorAcceleration;
 		// 寿命
-		float _lifeTime;
+		float _lifeTime = 0;
 	};
 }

@@ -1,5 +1,12 @@
 #include "CtrlFrame.h"
 
+#include "Common/Texture/Texture.h"
+#include "Common/Texture/TexFrame.h"
+#include "Common/Tool/TextureTool.h"
+#include "Common/Tool/Tool.h"
+
+#include "Graphic/import.h"
+
 using namespace render;
 
 CtrlFrame::CtrlFrame()
@@ -31,7 +38,7 @@ bool CtrlFrame::init()
 	return true;
 }
 
-void CtrlFrame::draw()
+void CtrlFrame::drawSample()
 {
 	if (_texFrame->getTexture() == nullptr)
 	{
@@ -39,8 +46,17 @@ void CtrlFrame::draw()
 	}
 
 	int textID = _texFrame->getTexture()->getTextureID();
+	if (textID == 0)
+	{
+		return;
+	}
 
-	G_DRAWCOMMANDER->addCommand(DCTexture::create(textID, &_texRect, _color, _opacity, _blend));
+	GLState::enable(EnableModel::TEXTURE_2D);
+	GLTexture::bindTexture2D(textID);
+
+	GLVertex::drawTextureRect(_texRect);
+
+	GLState::disable(EnableModel::TEXTURE_2D);
 }
 
 void CtrlFrame::setTexture(const Texture* texture)
@@ -51,22 +67,19 @@ void CtrlFrame::setTexture(const Texture* texture)
 	}
 
 	_texFrame->setTexture(texture);
-	setDirty(true);
-	_notify->addMark(ENP_TEXTURE_FRAME);
+	this->notify(ENP_TEXTURE_FRAME);
 }
 
 void CtrlFrame::setTextureWithRect(const Texture* texture)
 {
 	_texFrame->setTextureWithRect(texture);
-	setDirty(true);
-	_notify->addMark(ENP_TEXTURE_FRAME);
+	this->notify(ENP_TEXTURE_FRAME);
 }
 
 void CtrlFrame::setTexRect(const math::Rect& rect)
 {
 	_texFrame->setRect(rect);
-	setDirty(true);
-	_notify->addMark(ENP_TEXTURE_FRAME);
+	this->notify(ENP_TEXTURE_FRAME);
 } 
 
 void CtrlFrame::setTexFrame(const TexFrame* texFrame)
@@ -77,8 +90,7 @@ void CtrlFrame::setTexFrame(const TexFrame* texFrame)
 	}
 
 	*_texFrame = *texFrame;
-	setDirty(true);
-	_notify->addMark(ENP_TEXTURE_FRAME);
+	this->notify(ENP_TEXTURE_FRAME);
 }
 
 const TexFrame* CtrlFrame::getTexFrame()
@@ -89,8 +101,7 @@ const TexFrame* CtrlFrame::getTexFrame()
 void CtrlFrame::setFlipX(bool status)
 {
 	_bFlipX = status;
-	setDirty(true);
-	_notify->addMark(ENP_TEXTURE_FRAME);
+	this->notify(ENP_TEXTURE_FRAME);
 }
 
 bool CtrlFrame::isFlipX()
@@ -101,8 +112,7 @@ bool CtrlFrame::isFlipX()
 void CtrlFrame::setFlipY(bool status)
 {
 	_bFlipY = status;
-	setDirty(true);
-	_notify->addMark(ENP_TEXTURE_FRAME);
+	this->notify(ENP_TEXTURE_FRAME);
 }
 
 bool CtrlFrame::isFlipY()
@@ -118,11 +128,6 @@ bool CtrlFrame::isCounter()
 void CtrlFrame::setCounter(bool status)
 {
 	_bCounter = status;
-}
-
-void CtrlFrame::initSelf()
-{
-	ColorNode::initSelf();
 }
 
 void CtrlFrame::onTextureChange()

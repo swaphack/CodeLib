@@ -1,6 +1,6 @@
 #pragma once
 
-#include "macros.h"
+#include "Common/Node/ColorNode.h"
 
 namespace render
 {
@@ -10,8 +10,8 @@ namespace render
 	public:
 		CtrlMask();
 		virtual ~CtrlMask();
-	public:
-		virtual void draw();
+	protected:
+		virtual void drawSample();
 	protected:
 	};
 }

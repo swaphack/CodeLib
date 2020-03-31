@@ -523,7 +523,10 @@ bool WidgetProperty::getAttribute(const char* name, render::BlendParam& defaultV
 		return false;
 	}
 
-	defaultValue = render::BlendParam(atoi(params[0].getString()), atoi(params[1].getString()));
+	int src = atoi(params[0].getString());
+	int dest = atoi(params[1].getString());
+
+	defaultValue = render::BlendParam((BlendingFactorSrc)src, (BlendingFactorDest)dest);
 
 	return true;
 }

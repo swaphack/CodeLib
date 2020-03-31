@@ -1,7 +1,7 @@
 #include "Pixel.h"
 #include "ext-config.h"
-#include "../Tool/import.h"
-
+#include "Common/Tool/import.h"
+#include "Graphic/GLAPI/macros.h"
 using namespace render;
 
 

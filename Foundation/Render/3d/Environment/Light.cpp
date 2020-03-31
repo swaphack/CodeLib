@@ -1,4 +1,5 @@
 #include "Light.h"
+#include "Graphic/GLAPI/import.h"
 
 using namespace render;
 
@@ -33,22 +34,16 @@ Light::~Light()
 
 void Light::draw()
 {
-	if (getLightIndex() == ELI_NONE)
-	{
-		return;
-	}
+	GLLight::setLightAmbient(getLightName(), _lightAmbient);
 
-	glLightfv(getLightIndex(), GL_AMBIENT, _lightAmbient);
+	GLLight::setLightDiffuse(getLightName(), _lightDiffuse);
 
-	glLightfv(getLightIndex(), GL_DIFFUSE, _lightDiffuse);
+	GLLight::setLightSpecular(getLightName(), _lightSpecular);
 
-	glLightfv(getLightIndex(), GL_SPECULAR, _lightSpecular);
+	GLLight::setLightPosition(getLightName(), _lightPosition);
 
-	glLightfv(getLightIndex(), GL_POSITION, _lightPosition);
-
-	glEnable(GL_LIGHTING);
-
-	glEnable(getLightIndex());
+	GLState::enable(EnableModel::LIGHTING);
+	GLState::enable((EnableModel)getLightName());
 }
 
 void Light::setAmbient(uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha)
@@ -90,11 +85,23 @@ const float* Light::getSpecular()
 	return _lightSpecular;
 }
 
-void Light::initSelf()
+void Light::onLightPositionChange()
 {
-	Node::initSelf();
-
 	_lightPosition[0] = _obPosition.getX();
 	_lightPosition[1] = _obPosition.getY();
 	_lightPosition[2] = _obPosition.getZ();
+}
+
+bool Light::init()
+{
+	if (!Node::init())
+	{
+		return false;
+	}
+
+	_notify->addListen(ENP_SPACE, [&](){
+		this->onLightPositionChange();
+	});
+
+	return true;
 }

@@ -86,10 +86,6 @@ namespace render
 		*	调用
 		*/
 		void use();
-		/**
-		*	显示日志
-		*/
-		void showLog();
 	public:
 		/**
 		*	添加文件 v 顶点， f片元

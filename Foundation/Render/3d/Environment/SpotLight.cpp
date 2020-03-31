@@ -1,4 +1,5 @@
 #include "SpotLight.h"
+#include "Graphic/import.h"
 
 using namespace render;
 
@@ -25,12 +26,12 @@ void SpotLight::draw()
 {
 	Light::draw();
 
-	glLightfv(getLightIndex(), GL_SPOT_DIRECTION, _spotDirection);
-	glLightfv(getLightIndex(), GL_SPOT_EXPONENT, &_spotExponent);
-	glLightfv(getLightIndex(), GL_SPOT_CUTOFF, &_spotCutOff);
-	glLightfv(getLightIndex(), GL_CONSTANT_ATTENUATION, &_constantAttenuation);
-	glLightfv(getLightIndex(), GL_LINEAR_ATTENUATION, &_linearAttenuation);
-	glLightfv(getLightIndex(), GL_QUADRATIC_ATTENUATION, &_quadraticAttenuation);
+	GLLight::setLightSpotDirection(getLightName(), _spotDirection);
+	GLLight::setLightSpotExponent(getLightName(), _spotExponent);
+	GLLight::setLightSpotCutOff(getLightName(), _spotCutOff);
+	GLLight::setLightConstantAttenuation(getLightName(), _constantAttenuation);
+	GLLight::setLightLinearAttenuation(getLightName(), _linearAttenuation);
+	GLLight::setLightQuadraticAttenuation(getLightName(), _quadraticAttenuation);
 }
 
 void SpotLight::setExponent(float value)

@@ -1,5 +1,6 @@
+#include "system.h"
+#include "Action.h"
 #include "ActionProxy.h"
-
 #include "ActionManager.h"
 
 using namespace render;

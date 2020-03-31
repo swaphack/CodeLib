@@ -61,7 +61,7 @@ namespace sys
 		// 获取时间戳
 		time_t getTimeStamp();
 	protected:
-		// 更新事件
+		// 重置时间
 		void resetTime();
 	protected:
 		tm _tm;

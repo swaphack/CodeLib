@@ -1,4 +1,6 @@
 #include "CtrlImage.h"
+#include "Common/Texture/Texture.h"
+#include "Common/Texture/TextureCache.h"
 
 using namespace render;
 
@@ -36,9 +38,4 @@ void CtrlImage::setImagePath(const char* path, ImageFormat format /*= EIF_PNG*/)
 const char* CtrlImage::getImagePath()
 {
 	return _imageDefine.filepath.c_str();
-}
-
-void CtrlImage::initSelf()
-{
-	CtrlFrame::initSelf();
 }

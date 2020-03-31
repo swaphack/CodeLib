@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../Node/ColorNode.h"
-#include "ext-config.h"
+#include "Common/Node/ColorNode.h"
+#include "Graphic/GLAPI/macros.h"
 
 namespace render
 {
@@ -11,14 +11,15 @@ namespace render
 	public:
 		DrawNode();
 		virtual ~DrawNode();
+	protected:
+		virtual void drawSample();
 	public:
-		virtual void draw();
 		// 设置宽度
 		void setWidth(float width);
 		float getWidth();
 		// 模式
-		void setDrawMode(BeginMode mode);
-		int getDrawMode();
+		void setDrawMode(ShapeMode mode);
+		ShapeMode getDrawMode();
 		// 设置点坐标
 		void setPoints(const std::vector<math::Vector3>& points);
 		// 添加一个点坐标
@@ -31,14 +32,11 @@ namespace render
 		void removePoint(const math::Vector2& point);
 		// 移除所有点坐标
 		void removeAllPoints();
-	protected:
-		// 重新计算参数
-		virtual void initSelf();
 	private:
 		// 宽度
-		float _width;
+		float _width = 1;
 		// 模式
-		BeginMode _drawMode;
+		ShapeMode _drawMode = ShapeMode::POINTS;
 		// 点坐标
 		std::vector<math::Vector3> _points;
 	};

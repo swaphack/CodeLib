@@ -4,9 +4,6 @@
 #include <map>
 #include <string>
 
-#include "Resource/Config/ImageDefine.h"
-#include "Resource/Config/TextDefine.h"
-
 namespace render
 {
 	struct ImageDefine;

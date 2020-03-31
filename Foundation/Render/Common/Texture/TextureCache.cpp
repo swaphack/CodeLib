@@ -1,6 +1,8 @@
 #include "TextureCache.h"
 #include "Texture.h"
 
+#include "Resource/Config/ImageDefine.h"
+#include "Resource/Config/TextDefine.h"
 #include "Resource/Loader/Loader.h"
 #include "Resource/Paser/import.h"
 

@@ -55,7 +55,7 @@ namespace render
 	class SpotLight##index : public SpotLight \
 	{ \
 	public: \
-	virtual LightIndex getLightIndex() { return ELI_LIGHT##index; } \
+	virtual LightName getLightName() { return LightName::LIGHT##index; } \
 	};
 
 #define CTREATE_SPOT_LIGHT_CLASS_1(index) \
@@ -73,7 +73,7 @@ namespace render
 	_lightSpecular[2] = 0.0f; \
 	_lightSpecular[3] = 1.0f; \
 	} \
-	virtual LightIndex getLightIndex() { return ELI_LIGHT##index; } \
+	virtual LightName getLightName() { return LightName::LIGHT##index; } \
 	};
 
 	CTREATE_SPOT_LIGHT_CLASS_0(0);

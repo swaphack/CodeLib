@@ -1,10 +1,12 @@
 #pragma once
 
 #include "CtrlEditBox.h"
-#include "CtrlText.h"
+#include "Common/struct/protocol_common.h"
 
 namespace render
 {
+	class CtrlText;
+
 	// ¿É±à¼­ÎÄ±¾
 	class CtrlEditLabel : public CtrlEditBox, public TextProtocol
 	{

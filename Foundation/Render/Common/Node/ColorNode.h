@@ -16,5 +16,7 @@ namespace render
 		virtual ~ColorNode();
 	public:
 		virtual void draw();
+	protected:
+		virtual void drawSample();
 	};
 }

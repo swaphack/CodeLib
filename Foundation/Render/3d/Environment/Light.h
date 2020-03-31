@@ -1,6 +1,7 @@
 #pragma once
 
-#include "../macros.h"
+#include "Common/Node/Node.h"
+#include "Graphic/GLAPI/macros.h"
 
 namespace render
 {
@@ -11,9 +12,12 @@ namespace render
 		Light();
 		virtual ~Light();
 	public:
-		virtual LightIndex getLightIndex() { return ELI_NONE; }
+		virtual LightName getLightName() { return LightName::LIGHT0; }
 
+	public:
 		virtual void draw();
+		virtual bool init();
+	public:
 		// 环境光
 		void setAmbient(uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha);
 		const float* getAmbient();
@@ -26,7 +30,7 @@ namespace render
 		void setSpecular(uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha);
 		const float* getSpecular();
 	protected:
-		virtual void initSelf();
+		virtual void onLightPositionChange();
 	protected:
 		// 环境光
 		float _lightAmbient[4];
@@ -41,7 +45,7 @@ namespace render
 	class Light##index : public Light \
 	{ \
 	public: \
-	virtual LightIndex getLightIndex() { return ELI_LIGHT##index; } \
+	virtual LightName getLightName() { return LightName::LIGHT##index; } \
 	};
 
 #define CTREATE_LIGHT_CLASS_1(index) \
@@ -59,7 +63,7 @@ namespace render
 	_lightSpecular[2] = 0.0f; \
 	_lightSpecular[3] = 1.0f; \
 	} \
-	virtual LightIndex getLightIndex() { return ELI_LIGHT##index; } \
+	virtual LightName getLightName() { return LightName::LIGHT##index; } \
 	};
 
 	CTREATE_LIGHT_CLASS_0(0);

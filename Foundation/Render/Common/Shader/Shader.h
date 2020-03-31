@@ -1,6 +1,7 @@
 #pragma once
 
 #include "system.h"
+#include "Graphic/GLAPI/macros.h"
 
 namespace render
 {
@@ -21,11 +22,11 @@ namespace render
 		/**
 		*	着色器类型
 		*/
-		int getShaderType();
+		ShaderType getShaderType();
 		/**
 		*	设置着色器类型
 		*/
-		void setShaderType(int shaderType);
+		void setShaderType(ShaderType shaderType);
 		/**
 		*	加载程序代码
 		*/
@@ -51,10 +52,6 @@ namespace render
 		*	取消关联
 		*/
 		void detachProgram();
-		/** 
-		*	显示日志
-		*/
-		void showLog();
 	protected:
 	private:
 		/**
@@ -64,7 +61,7 @@ namespace render
 		/**
 		*	着色器类型
 		*/
-		int _shaderType = 0;
+		ShaderType _shaderType = ShaderType::VERTEX_SHADER;
 		/**
 		*	程序
 		*/

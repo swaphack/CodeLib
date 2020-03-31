@@ -3,6 +3,9 @@
 #include "HttpTime.h"
 #include "Type/String.h"
 
+#include "DateTime/Time.h"
+#include "Stream/StringStream.h"
+
 #define STATUS_KEY_VALUE_SIGN " "
 #define HEADER_KEY_VALUE_SIGN ": "
 

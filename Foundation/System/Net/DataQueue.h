@@ -1,11 +1,10 @@
 #pragma once
-
-#include "Net/NetData.h"
-
 #include <queue>
-
+#include <cstdint>
 namespace sys
 {
+	struct NetData;
+
 	// 数据队列
 	class DataQueue
 	{

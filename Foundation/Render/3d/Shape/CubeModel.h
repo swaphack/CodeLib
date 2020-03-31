@@ -1,10 +1,12 @@
 #pragma once
 
-#include "../Common/Model.h"
+#include "3d/Common/Model.h"
 
 namespace render
 {
 #define CUBE_FACE_COUNT 6
+
+	class Texture;
 
 	class CubeModel : public Model
 	{
@@ -13,8 +15,8 @@ namespace render
 		virtual ~CubeModel();
 	public:
 		virtual bool init();
-
-		virtual void draw();
+	protected:
+		virtual void drawSample();
 	public:
 		// …Ë÷√Œ∆¿Ì
 		void setTexture(const std::string& name, Texture* texture);

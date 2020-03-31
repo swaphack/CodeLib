@@ -1,7 +1,7 @@
 #pragma once
 
 
-#include "StreamBase.h"
+#include "macros.h"
 
 namespace sys
 {

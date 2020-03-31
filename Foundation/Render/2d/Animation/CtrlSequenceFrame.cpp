@@ -1,5 +1,9 @@
 #include "CtrlSequenceFrame.h"
-#include "../UI/CtrlFrame.h"
+#include "2d/UI/CtrlFrame.h"
+#include "2d/ctrl_common.h"
+#include "Common/Texture/TextureCache.h"
+#include "Common/Texture/Texture.h"
+
 using namespace render;
 
 
@@ -49,25 +53,20 @@ void CtrlSequenceFrame::draw()
 	CtrlAnimation::draw();
 }
 
-void CtrlSequenceFrame::setFrameImagePath(const char* urlFormat, int count)
+void CtrlSequenceFrame::setFrameImagePath(const std::string& urlFormat, int count)
 {
 	_frameImageUrl = urlFormat;
 	_frameImageCount = count;
 }
 
-const char* CtrlSequenceFrame::getFrameImagePath()
+const std::string& CtrlSequenceFrame::getFrameImagePath()
 {
-	return _frameImageUrl.c_str();
+	return _frameImageUrl;
 }
 
 int CtrlSequenceFrame::getFrameImageCount()
 {
 	return _frameImageCount;
-}
-
-void CtrlSequenceFrame::initSelf()
-{
-	CtrlAnimation::initSelf();
 }
 
 Texture2D* CtrlSequenceFrame::getNextTexture()

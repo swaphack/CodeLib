@@ -1,11 +1,10 @@
 #include "DrawNode.h"
 #include "Graphic/import.h"
+#include "Common/Tool/Tool.h"
 using namespace render;
 
 
 DrawNode::DrawNode()
-:_width(1.0)
-, _drawMode(EBM_POINTS)
 {
 }
 
@@ -13,11 +12,24 @@ DrawNode::~DrawNode()
 {
 }
 
-void DrawNode::draw()
+void DrawNode::drawSample()
 {
-	ColorNode::draw();	
+	if (_drawMode == ShapeMode::POINTS)
+	{
+		GLPrimitive::setPointSize(_width);
+	}
+	else
+	{
+		GLPrimitive::setPointSize(_width);
+	}
 
-	G_DRAWCOMMANDER->addCommand(DCDraw::create(_drawMode, _points, _width, _color, _opacity, _blend));
+	GLVertex::beginMode(_drawMode);
+	for (auto item : _points)
+	{
+		GLVertex::setVertex((item));
+	}
+
+	GLVertex::endMode();
 }
 
 void DrawNode::setWidth( float width )
@@ -30,19 +42,14 @@ float DrawNode::getWidth()
 	return _width;
 }
 
-void DrawNode::setDrawMode(BeginMode mode)
+void DrawNode::setDrawMode(ShapeMode mode)
 {
 	_drawMode = mode;
 }
 
-int DrawNode::getDrawMode()
+ShapeMode DrawNode::getDrawMode()
 {
 	return _drawMode;
-}
-
-void DrawNode::initSelf()
-{
-	Node::initSelf();
 }
 
 void DrawNode::appendPoint(const math::Vector3& point)

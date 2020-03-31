@@ -1,7 +1,6 @@
 #pragma once
 
 #include "Base/Instance.h"
-#include "IConsoleImpl.h"
 
 #include <functional>
 #include <string>

@@ -1,6 +1,11 @@
 #pragma once
 
-#include "macros.h"
+#include "Resource/Loader/IMediaLoader.h"
+#include "Resource/Detail/ImageDetail.h"
+#include "Resource/Detail/AudioDetail.h"
+#include "Resource/Detail/MediaDetail.h"
+
+#include "Resource/Config/MediaDefine.h"
 
 struct AVFormatContext;
 
@@ -13,7 +18,7 @@ namespace render
 		VideoFrameImage();
 		virtual ~VideoFrameImage();
 	public:
-		void init(int format, int internalFormat, uint8_t* pixels, uint32_t width, uint32_t height);
+		void init(PixelFormat format, TextureParameter internalFormat, uint8_t* pixels, uint32_t width, uint32_t height);
 	protected:
 	private:
 	};

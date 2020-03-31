@@ -5,7 +5,9 @@
 
 namespace render
 {
+	class Texture2D;
 	class MediaDetail;
+
 	// 媒体（包含图像和声音）
 	class CtrlMedia : public CtrlAnimation
 	{
@@ -29,8 +31,6 @@ namespace render
 		// 设置媒体文件
 		void setMediaPath(const char* path, bool defaultSize = true);
 	protected:
-		// 重新计算参数
-		virtual void initSelf();
 		// 获取下一阵的纹理帧
 		Texture2D* getNextTexture();
 	private:

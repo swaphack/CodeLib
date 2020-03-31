@@ -2,6 +2,8 @@
 #include "ext-config.h"
 #include <string>
 
+#include "Graphic/GLAPI/macros.h"
+
 using namespace render;
 
 #pragma warning(disable:4996)
@@ -19,8 +21,8 @@ void createVideoImage(const AVFrame* frame, AVCodecContext* pCodecContext, Video
 	uint32_t width = frame->width;
 	uint32_t height = frame->height;
 
-	int glFormat = GL_RGB;
-	int glInternalFormat = 3;
+	PixelFormat glFormat = PixelFormat::RGB;
+	TextureParameter glInternalFormat = TextureParameter::THREE;
 
 	int destSize = av_image_get_buffer_size(AV_PIX_FMT_RGB24, width, height, 1);
 	uint8_t* destPixels = (uint8_t *)malloc(sizeof (uint8_t)* destSize);
@@ -100,7 +102,7 @@ VideoFrameImage::~VideoFrameImage()
 
 }
 
-void VideoFrameImage::init(int format, int internalFormat, uint8_t* pixels, uint32_t width, uint32_t height)
+void VideoFrameImage::init(PixelFormat format, TextureParameter internalFormat, uint8_t* pixels, uint32_t width, uint32_t height)
 {
 	this->setFormat(format);
 	this->setInternalFormat(internalFormat);

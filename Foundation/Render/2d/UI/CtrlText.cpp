@@ -1,4 +1,8 @@
 #include "CtrlText.h"
+#include "Common/Texture/TextureCache.h"
+#include "Common/Texture/Texture.h"
+#include "Common/Texture/TexFrame.h"
+#include "Common/Tool/TextureTool.h"
 
 using namespace render;
 
@@ -15,6 +19,10 @@ bool CtrlText::init()
 	CtrlFrame::init();
 
 	_notify->removeListens(ENP_TEXTURE_FRAME);
+
+	_notify->addListen(ENP_TEXT_FRAME, [&](){
+		this->onTextChange();
+	});
 
 	_notify->addListen(ENP_TEXTURE_FRAME, [&](){
 		const Texture* texture = _texFrame->getTexture();
@@ -63,15 +71,11 @@ bool CtrlText::init()
 	return true;
 }
 
-void CtrlText::draw()
-{
-	CtrlFrame::draw();
-}
-
 void CtrlText::setFontPath(const char* fonturl)
 {
 	_textDefine.filepath = fonturl;
-	setDirty(true);
+
+	this->notify(ENP_TEXT_FRAME);
 }
 
 const char* CtrlText::getFontPath()
@@ -82,7 +86,8 @@ const char* CtrlText::getFontPath()
 void CtrlText::setFontSize(float size)
 {
 	_textDefine.fontSize = size;
-	setDirty(true);
+
+	this->notify(ENP_TEXT_FRAME);
 }
 
 float CtrlText::getFontSize()
@@ -93,7 +98,8 @@ float CtrlText::getFontSize()
 void CtrlText::setHorizontalDistance(float distance)
 {
 	_textDefine.horizontalDistance = distance;
-	setDirty(true);
+
+	this->notify(ENP_TEXT_FRAME);
 }
 
 float CtrlText::getHorizontalDistance()
@@ -104,7 +110,8 @@ float CtrlText::getHorizontalDistance()
 void CtrlText::setVerticalDistance(float distance)
 {
 	_textDefine.verticalDistance = distance;
-	setDirty(true);
+
+	this->notify(ENP_TEXT_FRAME);
 }
 
 float CtrlText::getVerticalDistance()
@@ -116,13 +123,15 @@ void CtrlText::setString(const char* text)
 {
 	TextProtocol::setString(text);
 	_textDefine.text = text;
-	setDirty(true);
+
+	this->notify(ENP_TEXT_FRAME);
 }
 
 void CtrlText::setHorizontalAlignment(HorizontalAlignment alignment)
 {
 	_textDefine.horizontalAlignment = alignment;
-	setDirty(true);
+
+	this->notify(ENP_TEXT_FRAME);
 }
 
 HorizontalAlignment CtrlText::getHorizontalAlignment()
@@ -133,7 +142,8 @@ HorizontalAlignment CtrlText::getHorizontalAlignment()
 void CtrlText::setVerticalAlignment(VerticalAlignment alignment)
 {
 	_textDefine.verticalAlignment = alignment;
-	setDirty(true);
+
+	this->notify(ENP_TEXT_FRAME);
 }
 
 VerticalAlignment CtrlText::getVerticalAlignment()
@@ -147,7 +157,7 @@ void CtrlText::setDimensions(float width, float height)
 	_textDefine.height = height;
 	this->setVolume(width, height);
 
-	setDirty(true);
+	this->notify(ENP_TEXT_FRAME);
 }
 
 void CtrlText::setDimensions(const math::Size& size)
@@ -164,14 +174,7 @@ void CtrlText::setColor(const sys::Color4B& color)
 {
 	ColorProtocol::setColor(color);
 	_textDefine.color = color;
-	setDirty(true);
-}
-
-void CtrlText::initSelf()
-{
-	onTextChange();
-
-	CtrlFrame::initSelf();
+	this->notify(ENP_TEXT_FRAME);
 }
 
 void CtrlText::onTextChange()

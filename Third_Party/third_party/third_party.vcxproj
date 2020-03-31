@@ -431,6 +431,14 @@
     <ClInclude Include="..\..\Lib\include\fmod\studio\fmod_studio.h" />
     <ClInclude Include="..\..\Lib\include\fmod\studio\fmod_studio.hpp" />
     <ClInclude Include="..\..\Lib\include\fmod\studio\fmod_studio_common.h" />
+    <ClInclude Include="..\..\Lib\include\freeglut\freeglut.h" />
+    <ClInclude Include="..\..\Lib\include\freeglut\freeglut_ext.h" />
+    <ClInclude Include="..\..\Lib\include\freeglut\freeglut_std.h" />
+    <ClInclude Include="..\..\Lib\include\freeglut\glut.h" />
+    <ClInclude Include="..\..\Lib\include\glew\eglew.h" />
+    <ClInclude Include="..\..\Lib\include\glew\glew.h" />
+    <ClInclude Include="..\..\Lib\include\glew\glxew.h" />
+    <ClInclude Include="..\..\Lib\include\glew\wglew.h" />
     <ClInclude Include="..\..\Lib\include\gl\glew.h" />
     <ClInclude Include="..\..\Lib\include\jpeg\jconfig.h" />
     <ClInclude Include="..\..\Lib\include\jpeg\jdct.h" />

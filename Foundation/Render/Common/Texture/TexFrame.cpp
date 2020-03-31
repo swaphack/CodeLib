@@ -1,4 +1,5 @@
 #include "TexFrame.h"
+#include "Texture.h"
 
 using namespace render;
 

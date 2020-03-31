@@ -1,6 +1,7 @@
 #pragma once
 
-#include "../macros.h"
+#include "Common/Node/Node.h"
+#include "Graphic/GLAPI/macros.h"
 
 namespace render
 {
@@ -22,7 +23,7 @@ namespace render
 	public:
 		virtual void draw();
 		// 获取裁剪平面索引
-		virtual ClipPlaneIndex getClipPlaneIndex() { return ECPI_NONE; }
+		virtual ClipPlaneName getClipPlaneName() { return ClipPlaneName::CLIP_PLANE0; }
 
 		// 设置显示面法线方向
 		void setClipNormal(float x, float y, float z);
@@ -37,7 +38,7 @@ namespace render
 	class ClipPlane##index : public ClipPlane \
 	{ \
 	public: \
-	virtual ClipPlaneIndex getClipPlaneIndex() { return ECPI_CLIPPLANE##index; } \
+	virtual ClipPlaneName getClipPlaneName() { return ClipPlaneName::CLIP_PLANE##index; } \
 	};
 
 	CTREATE_CLIPPLANE_CLASS_0(0);

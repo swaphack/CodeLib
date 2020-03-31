@@ -2,7 +2,6 @@
 
 #include <cstdint>
 
-#include "../Vector/Vector.h"
 #include "Basic/Array2D.h"
 
 namespace math

@@ -69,7 +69,7 @@ namespace render
 		virtual ~BlendProtocol();
 	public:
 		// 设置混合条件
-		void setBlend(int src, int dest);
+		void setBlend(BlendingFactorSrc src, BlendingFactorDest dest);
 		// 设置混合条件
 		void setBlend(const BlendParam& blend);
 		// 获取混合参数

@@ -1,11 +1,13 @@
 #pragma once
 
-#include "Base/macros.h"
-#include "PtrCache.h"
+#include <string>
+#include <cstdint>
 #include <map>
 
 namespace sys
 {
+	class PtrCache;
+
 	// ÄÚ´æ·ÖÅä
 	class Memory
 	{

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../Node/Node.h"
+#include "Common/Node/Node.h"
 #include "ext-config.h"
 
 #define AUDIO_DEBUG true

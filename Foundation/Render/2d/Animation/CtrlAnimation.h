@@ -1,10 +1,11 @@
 #pragma once
 
-#include "macros.h"
+#include "Common/Node/Animation.h"
 
 namespace render
 {
 	class CtrlFrame;
+	class CtrlAudioSource;
 
 	// ¶¯»­¿Ø¼þ
 	class CtrlAnimation : public Animation

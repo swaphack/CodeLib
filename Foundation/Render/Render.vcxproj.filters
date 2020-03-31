@@ -69,9 +69,6 @@
     </ClCompile>
     <ClCompile Include="Canvas.cpp" />
     <ClCompile Include="RenderApplication.cpp" />
-    <ClCompile Include="3d\Common\ModelFile.cpp">
-      <Filter>3d\Common</Filter>
-    </ClCompile>
     <ClCompile Include="3d\Environment\Light.cpp">
       <Filter>3d\Environment</Filter>
     </ClCompile>
@@ -86,9 +83,6 @@
     </ClCompile>
     <ClCompile Include="3d\Environment\Stencil.cpp">
       <Filter>3d\Environment</Filter>
-    </ClCompile>
-    <ClCompile Include="Common\Node\Notify.cpp">
-      <Filter>Common\Node</Filter>
     </ClCompile>
     <ClCompile Include="Common\Audio\AudioManager.cpp">
       <Filter>Common\Audio</Filter>
@@ -153,24 +147,6 @@
     <ClCompile Include="3d\Common\Model.cpp">
       <Filter>3d\Common</Filter>
     </ClCompile>
-    <ClCompile Include="Graphic\DCSample\DCDraw.cpp">
-      <Filter>Graphic\DCSample</Filter>
-    </ClCompile>
-    <ClCompile Include="Graphic\DCSample\DCMask.cpp">
-      <Filter>Graphic\DCSample</Filter>
-    </ClCompile>
-    <ClCompile Include="Graphic\DCSample\DCMatrix.cpp">
-      <Filter>Graphic\DCSample</Filter>
-    </ClCompile>
-    <ClCompile Include="Graphic\DCSample\DCSpace.cpp">
-      <Filter>Graphic\DCSample</Filter>
-    </ClCompile>
-    <ClCompile Include="Graphic\DCSample\DCTexture.cpp">
-      <Filter>Graphic\DCSample</Filter>
-    </ClCompile>
-    <ClCompile Include="Graphic\DCSample\DCTextureBatch.cpp">
-      <Filter>Graphic\DCSample</Filter>
-    </ClCompile>
     <ClCompile Include="Common\Audio\CtrlAudioGeometry.cpp">
       <Filter>Common\Audio</Filter>
     </ClCompile>
@@ -182,9 +158,6 @@
     </ClCompile>
     <ClCompile Include="3d\Shape\SphereModel.cpp">
       <Filter>3d\Shape</Filter>
-    </ClCompile>
-    <ClCompile Include="Graphic\DCSample\DCCamera.cpp">
-      <Filter>Graphic\DCSample</Filter>
     </ClCompile>
     <ClCompile Include="Resource\Detail\MediaDetail.cpp">
       <Filter>Resource\Detail</Filter>
@@ -210,29 +183,11 @@
     <ClCompile Include="3d\Shape\CubeModel.cpp">
       <Filter>3d\Shape</Filter>
     </ClCompile>
-    <ClCompile Include="Graphic\DCSample\DCColor.cpp">
-      <Filter>Graphic\DCSample</Filter>
-    </ClCompile>
     <ClCompile Include="3d\Common\ModelObj.cpp">
       <Filter>3d\Common</Filter>
     </ClCompile>
     <ClCompile Include="Resource\Paser\FileObj.cpp">
       <Filter>Resource\Parser</Filter>
-    </ClCompile>
-    <ClCompile Include="Resource\Detail\Face.cpp">
-      <Filter>Resource\Detail</Filter>
-    </ClCompile>
-    <ClCompile Include="Resource\Detail\Material.cpp">
-      <Filter>Resource\Detail</Filter>
-    </ClCompile>
-    <ClCompile Include="Resource\Detail\Mesh.cpp">
-      <Filter>Resource\Detail</Filter>
-    </ClCompile>
-    <ClCompile Include="Graphic\DCSample\DCMaterial.cpp">
-      <Filter>Graphic\DCSample</Filter>
-    </ClCompile>
-    <ClCompile Include="Graphic\DCSample\DCModel.cpp">
-      <Filter>Graphic\DCSample</Filter>
     </ClCompile>
     <ClCompile Include="Resource\Paser\FileFbx.cpp">
       <Filter>Resource\Parser</Filter>
@@ -299,6 +254,66 @@
     </ClCompile>
     <ClCompile Include="Platform\Windows\GLWindow.cpp">
       <Filter>Platform\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource\Detail\FaceDetail.cpp">
+      <Filter>Resource\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource\Detail\MaterialDetail.cpp">
+      <Filter>Resource\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource\Detail\MeshDetail.cpp">
+      <Filter>Resource\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphic\GLAPI\GLVersion.cpp">
+      <Filter>Graphic\GLAPI</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphic\GLAPI\GLDebug.cpp">
+      <Filter>Graphic\GLAPI</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphic\GLAPI\GLSetting.cpp">
+      <Filter>Graphic\GLAPI</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphic\GLAPI\GLShader.cpp">
+      <Filter>Graphic\GLAPI</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphic\GLAPI\GLState.cpp">
+      <Filter>Graphic\GLAPI</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphic\GLAPI\GLTexture.cpp">
+      <Filter>Graphic\GLAPI</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphic\GLAPI\GLVertex.cpp">
+      <Filter>Graphic\GLAPI</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphic\GLAPI\GLMatrix.cpp">
+      <Filter>Graphic\GLAPI</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphic\GLAPI\GLLight.cpp">
+      <Filter>Graphic\GLAPI</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphic\GLAPI\GLMaterial.cpp">
+      <Filter>Graphic\GLAPI</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphic\GLAPI\GLPrimitive.cpp">
+      <Filter>Graphic\GLAPI</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphic\GLAPI\GLFog.cpp">
+      <Filter>Graphic\GLAPI</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphic\GLAPI\GLFragment.cpp">
+      <Filter>Graphic\GLAPI</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphic\GLAPI\GLPixels.cpp">
+      <Filter>Graphic\GLAPI</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphic\GLAPI\GLEvaluator.cpp">
+      <Filter>Graphic\GLAPI</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphic\GLAPI\GLRender.cpp">
+      <Filter>Graphic\GLAPI</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphic\GLAPI\GLDisplayList.cpp">
+      <Filter>Graphic\GLAPI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -429,9 +444,6 @@
     <ClInclude Include="Graphic\Command\DrawCommand.h">
       <Filter>Graphic\Command</Filter>
     </ClInclude>
-    <ClInclude Include="Graphic\DCSample\macros.h">
-      <Filter>Graphic\DCSample</Filter>
-    </ClInclude>
     <ClInclude Include="Graphic\import.h">
       <Filter>Graphic</Filter>
     </ClInclude>
@@ -462,42 +474,18 @@
     <ClInclude Include="Resource\Config\TextDefine.h">
       <Filter>Resource\Config</Filter>
     </ClInclude>
-    <ClInclude Include="Graphic\DCSample\DCTexture.h">
-      <Filter>Graphic\DCSample</Filter>
-    </ClInclude>
     <ClInclude Include="Graphic\Command\import.h">
       <Filter>Graphic\Command</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphic\DCSample\import.h">
-      <Filter>Graphic\DCSample</Filter>
     </ClInclude>
     <ClInclude Include="Canvas.h" />
     <ClInclude Include="RenderApplication.h" />
     <ClInclude Include="Common\macros.h">
       <Filter>Common</Filter>
     </ClInclude>
-    <ClInclude Include="Graphic\DCSample\DCMask.h">
-      <Filter>Graphic\DCSample</Filter>
-    </ClInclude>
     <ClInclude Include="Common\import.h">
       <Filter>Common</Filter>
     </ClInclude>
-    <ClInclude Include="Graphic\DCSample\DCSpace.h">
-      <Filter>Graphic\DCSample</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphic\DCSample\DCMatrix.h">
-      <Filter>Graphic\DCSample</Filter>
-    </ClInclude>
     <ClInclude Include="3d\Common\import.h">
-      <Filter>3d\Common</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphic\DCSample\DCDraw.h">
-      <Filter>Graphic\DCSample</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphic\DCSample\DCTextureBatch.h">
-      <Filter>Graphic\DCSample</Filter>
-    </ClInclude>
-    <ClInclude Include="3d\Common\ModelFile.h">
       <Filter>3d\Common</Filter>
     </ClInclude>
     <ClInclude Include="3d\Environment\import.h">
@@ -517,9 +505,6 @@
     </ClInclude>
     <ClInclude Include="3d\Environment\Stencil.h">
       <Filter>3d\Environment</Filter>
-    </ClInclude>
-    <ClInclude Include="Common\Node\Notify.h">
-      <Filter>Common\Node</Filter>
     </ClInclude>
     <ClInclude Include="3d\Map\macros.h">
       <Filter>3d\Map</Filter>
@@ -636,9 +621,6 @@
     <ClInclude Include="3d\Shape\SphereModel.h">
       <Filter>3d\Shape</Filter>
     </ClInclude>
-    <ClInclude Include="Graphic\DCSample\DCCamera.h">
-      <Filter>Graphic\DCSample</Filter>
-    </ClInclude>
     <ClInclude Include="Resource\Detail\MediaDetail.h">
       <Filter>Resource\Detail</Filter>
     </ClInclude>
@@ -663,32 +645,14 @@
     <ClInclude Include="3d\Shape\CubeModel.h">
       <Filter>3d\Shape</Filter>
     </ClInclude>
-    <ClInclude Include="Graphic\DCSample\DCColor.h">
-      <Filter>Graphic\DCSample</Filter>
-    </ClInclude>
     <ClInclude Include="3d\Common\ModelObj.h">
       <Filter>3d\Common</Filter>
     </ClInclude>
     <ClInclude Include="Resource\Paser\FileObj.h">
       <Filter>Resource\Parser</Filter>
     </ClInclude>
-    <ClInclude Include="Resource\Detail\Face.h">
-      <Filter>Resource\Detail</Filter>
-    </ClInclude>
-    <ClInclude Include="Resource\Detail\Material.h">
-      <Filter>Resource\Detail</Filter>
-    </ClInclude>
-    <ClInclude Include="Resource\Detail\Mesh.h">
-      <Filter>Resource\Detail</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphic\DCSample\DCMaterial.h">
-      <Filter>Graphic\DCSample</Filter>
-    </ClInclude>
     <ClInclude Include="Resource\Detail\import.h">
       <Filter>Resource\Detail</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphic\DCSample\DCModel.h">
-      <Filter>Graphic\DCSample</Filter>
     </ClInclude>
     <ClInclude Include="Resource\Paser\FileFbx.h">
       <Filter>Resource\Parser</Filter>
@@ -771,6 +735,75 @@
     <ClInclude Include="Platform\Windows\GLWindow.h">
       <Filter>Platform\Windows</Filter>
     </ClInclude>
+    <ClInclude Include="Graphic\GLAPI\import.h">
+      <Filter>Graphic\GLAPI</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphic\GLApi\macros.h">
+      <Filter>Graphic\GLAPI</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Node\Notify.h">
+      <Filter>Common\Node</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\Detail\FaceDetail.h">
+      <Filter>Resource\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\Detail\MaterialDetail.h">
+      <Filter>Resource\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\Detail\MeshDetail.h">
+      <Filter>Resource\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphic\GLAPI\GLVersion.h">
+      <Filter>Graphic\GLAPI</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphic\GLAPI\GLDebug.h">
+      <Filter>Graphic\GLAPI</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphic\GLAPI\GLSetting.h">
+      <Filter>Graphic\GLAPI</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphic\GLAPI\GLShader.h">
+      <Filter>Graphic\GLAPI</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphic\GLAPI\GLState.h">
+      <Filter>Graphic\GLAPI</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphic\GLAPI\GLTexture.h">
+      <Filter>Graphic\GLAPI</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphic\GLAPI\GLVertex.h">
+      <Filter>Graphic\GLAPI</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphic\GLAPI\GLMatrix.h">
+      <Filter>Graphic\GLAPI</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphic\GLAPI\GLLight.h">
+      <Filter>Graphic\GLAPI</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphic\GLAPI\GLMaterial.h">
+      <Filter>Graphic\GLAPI</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphic\GLAPI\GLPrimitive.h">
+      <Filter>Graphic\GLAPI</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphic\GLAPI\GLFog.h">
+      <Filter>Graphic\GLAPI</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphic\GLAPI\GLFragment.h">
+      <Filter>Graphic\GLAPI</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphic\GLAPI\GLPixels.h">
+      <Filter>Graphic\GLAPI</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphic\GLAPI\GLEvaluator.h">
+      <Filter>Graphic\GLAPI</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphic\GLAPI\GLRender.h">
+      <Filter>Graphic\GLAPI</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphic\GLAPI\GLDisplayList.h">
+      <Filter>Graphic\GLAPI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Common">
@@ -824,9 +857,6 @@
     <Filter Include="Graphic\Command">
       <UniqueIdentifier>{78dae838-a77b-404b-8dcf-4fcc748483fe}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Graphic\DCSample">
-      <UniqueIdentifier>{6f7278bf-4cab-49ed-bb7b-57b0acf4fe0d}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Resource\Loader">
       <UniqueIdentifier>{10a041a0-5d1b-46d1-ae1b-5831c145bfc0}</UniqueIdentifier>
     </Filter>
@@ -874,6 +904,9 @@
     </Filter>
     <Filter Include="Common\Shader">
       <UniqueIdentifier>{15d27c74-8b8d-47a0-a04e-4370a04709e1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphic\GLAPI">
+      <UniqueIdentifier>{eff1c3cb-6f6b-4af7-81eb-680141cf5ff6}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

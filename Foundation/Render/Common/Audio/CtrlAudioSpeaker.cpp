@@ -36,7 +36,7 @@ bool CtrlAudioSpeaker::init()
 void CtrlAudioSpeaker::setMode(FMOD_SPEAKER speek)
 {
 	_speekSettings.speaker = speek;
-	_notify->addMark(ENP_AUDIO);
+	this->notify(ENP_AUDIO);
 }
 
 FMOD_SPEAKER CtrlAudioSpeaker::getMode()
@@ -47,7 +47,7 @@ FMOD_SPEAKER CtrlAudioSpeaker::getMode()
 void CtrlAudioSpeaker::setActive(bool active)
 {
 	_speekSettings.active = active;
-	_notify->addMark(ENP_AUDIO);
+	this->notify(ENP_AUDIO);
 }
 
 bool CtrlAudioSpeaker::isActive()

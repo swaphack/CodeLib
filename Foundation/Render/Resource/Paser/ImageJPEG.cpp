@@ -1,5 +1,5 @@
 #include "ImageJPEG.h"
-#include "ext-config.h"
+#include "Graphic/GLAPI/import.h"
 
 using namespace render;
 
@@ -42,8 +42,8 @@ void ImageJPEG::load(const std::string& filename)
 	int internalFormat = jds.output_components;
 	this->setWidth(jds.output_width);
 	this->setHeight(jds.output_height);
-	this->setInternalFormat(internalFormat);
-	this->setFormat(EPF_RGB);
+	this->setInternalFormat((TextureParameter)internalFormat);
+	this->setFormat(PixelFormat::RGB);
 
 	uint32_t lineSize = jds.output_width * internalFormat;
 	uint32_t totoalSize = this->getWidth()* this->getHeight() * internalFormat;

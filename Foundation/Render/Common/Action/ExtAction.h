@@ -106,7 +106,7 @@ namespace render
 		CallFunc();
 		virtual ~CallFunc();
 	public:
-		void setFunc(std::function<void()> func);
+		void setFunc(const std::function<void()>& func);
 	protected:
 		virtual void update(float duration);
 	private:
@@ -120,7 +120,7 @@ namespace render
 		CallFuncN();
 		virtual ~CallFuncN();
 	public:
-		void setFunc(std::function<void(sys::Object*)> func);
+		void setFunc(const std::function<void(sys::Object*)>& func);
 	protected:
 		virtual void update(float duration);
 	private:

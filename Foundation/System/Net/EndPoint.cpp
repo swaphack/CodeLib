@@ -1,5 +1,4 @@
 #include "EndPoint.h"
-#include "macros.h"
 
 #if (defined(_WIN32) || defined(WIN32))
 #include <WinSock2.h>

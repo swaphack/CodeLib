@@ -1,5 +1,7 @@
 #pragma once
 
+#include <set>
+
 namespace sys
 {
 	class Concurrent;
@@ -11,10 +13,10 @@ namespace sys
 		Concurrents();
 		virtual ~Concurrents();
 	public:
-		static Concurrents* getInstance();
-	public:
-		void addConcurrent(Concurrent* io);
-		void removeConcurrent(Concurrent* io);
+		void addConcurrent(Concurrent* task);
+		void removeConcurrent(Concurrent* task);
+		void removeAllConcurrents();
 	private:
+		std::set<Concurrent*> _set;
 	};
 }

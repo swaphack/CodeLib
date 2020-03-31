@@ -1,11 +1,16 @@
 #pragma once
 
-#include "Action.h"
-
 #include <vector>
+
+namespace sys
+{
+	class Object;
+}
 
 namespace render
 {
+	class Action;
+
 	class ActionProxy
 	{
 	public:

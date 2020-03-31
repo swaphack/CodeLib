@@ -1,8 +1,5 @@
 #pragma once
 
-#include "Framework/Object.h"
-#include "Socket.h"
-#include "NetData.h"
 #include "DataQueue.h"
 #include "SocketRecvHandler.h"
 #include <map>
@@ -11,6 +8,10 @@ namespace sys
 {
 #define DEFAULT_IP "127.0.0.1"
 #define DEFAULT_PORT 9547
+
+	class Socket;
+	struct NetData;
+	class Object;
 
 	class Server
 	{

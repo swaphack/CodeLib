@@ -1,7 +1,6 @@
 #pragma once
 
 #include "macros.h"
-#include "IStreamBase.h"
 
 namespace sys
 {

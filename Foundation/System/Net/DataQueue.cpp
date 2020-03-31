@@ -1,4 +1,6 @@
 #include "DataQueue.h"
+#include "NetData.h"
+#include "Base/macros.h"
 
 using namespace sys;
 

@@ -106,8 +106,8 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>../../Lib/lib/freetype;../../Lib/lib/jpeg;../../Lib/lib/opengl;../../Lib/lib/gl;../../Lib/lib/png;../../Lib/lib/zlib;../../Lib/lib/fmod;../../Lib/lib/3ds;../../Lib/lib/obj;../../Lib/lib/fbx;../../Lib/lib/tga;../../Lib/lib/ffmpeg;$(OutDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>OpenGL32.Lib;GLU32.LIB;GLUT32.LIB;glew32.lib;zlib.lib;libpng16.lib;freetype263.lib;avutil.lib;avcodec.lib;avdevice.lib;avfilter.lib;avformat.lib;swscale.lib;swresample.lib;postproc.lib;jpeg.lib;fmod_vc.lib;System.lib;Text.lib;Render.lib;UI.lib;Web.lib;Math.lib;libobj.lib;lib3ds.lib;libfbxsdk-md.lib;wininet.lib;libxml2-md.lib;zlib-md.lib;libtga.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>../../Lib/lib/freetype;../../Lib/lib/jpeg;../../Lib/lib/png;../../Lib/lib/zlib;../../Lib/lib/fmod;../../Lib/lib/3ds;../../Lib/lib/obj;../../Lib/lib/fbx;../../Lib/lib/tga;../../Lib/lib/freeglut;../../Lib/lib/glew;../../Lib/lib/ffmpeg;$(OutDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>freeglut.lib;glew32d.lib;opengl32.lib;zlib.lib;libpng16.lib;freetype263.lib;avutil.lib;avcodec.lib;avdevice.lib;avfilter.lib;avformat.lib;swscale.lib;swresample.lib;postproc.lib;jpeg.lib;fmod_vc.lib;System.lib;Text.lib;Render.lib;UI.lib;Web.lib;Math.lib;libobj.lib;lib3ds.lib;libfbxsdk-md.lib;wininet.lib;libxml2-md.lib;zlib-md.lib;libtga.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <Bscmake>
       <PreserveSbr>true</PreserveSbr>

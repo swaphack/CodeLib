@@ -5,7 +5,7 @@
 namespace render
 {
 	class TexFrame;
-	class Material;
+	class MaterialDetail;
 
 	// 3d模型基础，空间立方体,多面
 	class MultiFaceCube : public CubeModel
@@ -15,15 +15,15 @@ namespace render
 		virtual ~MultiFaceCube();
 	public:
 		virtual bool init();
-
-		virtual void draw();
+	protected:
+		virtual void drawSample();
 	public:
 		// 设置单面的纹理帧
 		void setFaceFrame(ModelFace face, TexFrame* frame);
 		// 设置所有面的纹理帧
 		void setAllFaceFrame(TexFrame* frame);
 		// 设置所有面的材质
-		void setAllFaceMaterial(Material* mat);
+		void setAllFaceMaterial(MaterialDetail* mat);
 	protected:
 		virtual void onCubeChange();
 	private:

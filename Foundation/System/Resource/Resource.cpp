@@ -1,7 +1,7 @@
 #include "Resource.h"
+#include "Cache/CacheGroup.h"
 
 using namespace sys;
-
 
 Resource::Resource()
 {

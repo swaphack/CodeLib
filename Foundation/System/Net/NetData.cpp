@@ -1,4 +1,5 @@
 #include "NetData.h"
+#include "Stream/StreamHelper.h"
 
 using namespace sys;
 

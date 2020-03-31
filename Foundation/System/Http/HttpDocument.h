@@ -1,15 +1,14 @@
 #pragma once
 
-#include "Stream/import.h"
-
 #include <string>
 #include <cstdint>
 #include <vector>
 #include <map>
-#include "DateTime/Time.h"
 
 namespace sys
 {
+	class StringStream;
+	class Time;
 	/*
 	HTTP响应由三个部分组成，分别是：状态行、消息报头、响应正文
 

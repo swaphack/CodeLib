@@ -2,10 +2,10 @@
 
 #include "system.h"
 #include "mathlib.h"
-#include "Texture.h"
 
 namespace render
 {
+	class Texture;
 	// 帧纹理，显示区域从左下角开始
 	class TexFrame : public sys::Object
 	{

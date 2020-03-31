@@ -1,8 +1,6 @@
 #pragma once
 
-
 #include "IStreamBase.h"
-#include "StreamHelper.h"
 
 #include <cstring>
 

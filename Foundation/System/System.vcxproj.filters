@@ -117,9 +117,6 @@
     <ClInclude Include="Net\import.h">
       <Filter>Net</Filter>
     </ClInclude>
-    <ClInclude Include="Net\macros.h">
-      <Filter>Net</Filter>
-    </ClInclude>
     <ClInclude Include="Net\NetData.h">
       <Filter>Net</Filter>
     </ClInclude>
@@ -427,9 +424,6 @@
     <ClInclude Include="Text\BitConvert.h">
       <Filter>Text</Filter>
     </ClInclude>
-    <ClInclude Include="Type\macros.h">
-      <Filter>Type</Filter>
-    </ClInclude>
     <ClInclude Include="Device\DeviceImpl.h">
       <Filter>Device</Filter>
     </ClInclude>
@@ -442,9 +436,6 @@
       <Filter>Framework</Filter>
     </ClCompile>
     <ClCompile Include="Framework\Container.cpp">
-      <Filter>Framework</Filter>
-    </ClCompile>
-    <ClCompile Include="Framework\Dispatcher.cpp">
       <Filter>Framework</Filter>
     </ClCompile>
     <ClCompile Include="Framework\Object.cpp">
@@ -656,6 +647,9 @@
     </ClCompile>
     <ClCompile Include="Device\DeviceImpl.cpp">
       <Filter>Device</Filter>
+    </ClCompile>
+    <ClCompile Include="Concurrent\Concurrents.cpp">
+      <Filter>Concurrent</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

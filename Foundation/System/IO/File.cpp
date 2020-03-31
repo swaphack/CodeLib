@@ -1,6 +1,6 @@
 #include "File.h"
 #include "Stream/StreamBase.h"
-
+#include "Stream/StreamHelper.h"
 #include <cstdio>
 #include <cstdlib>
 #include <cstring>

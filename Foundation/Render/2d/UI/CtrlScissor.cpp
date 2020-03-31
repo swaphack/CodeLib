@@ -1,4 +1,6 @@
 #include "CtrlScissor.h"
+#include "Graphic/import.h"
+#include "Common/View/Camera.h"
 
 using namespace render;
 
@@ -39,13 +41,13 @@ void CtrlScissor::visit()
 			s_rect = s_rect.intersectRect(rect);
 		}
 
-		glScissor((int)s_rect.getX(), (int)s_rect.getY(), (int)s_rect.getWidth(), (int)s_rect.getHeight());
+		GLFragment::testScissor(s_rect.getX(), s_rect.getY(), s_rect.getWidth(), s_rect.getHeight());
 
 		s_nScissorCount++;
 
 		if (s_nScissorCount == 1)
 		{
-			glEnable(GL_SCISSOR_TEST);
+			GLState::enable(EnableModel::SCISSOR_TEST);
 		}
 	}	
 
@@ -57,7 +59,7 @@ void CtrlScissor::visit()
 		if (s_nScissorCount == 0)
 		{
 			s_rect = math::Rect();
-			glDisable(GL_SCISSOR_TEST);
+			GLState::disable(EnableModel::SCISSOR_TEST);
 		}
 	}
 }

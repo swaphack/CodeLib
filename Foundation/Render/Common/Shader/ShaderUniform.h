@@ -15,8 +15,6 @@ namespace render
 		ShaderUniform();
 		virtual ~ShaderUniform();
 	public:
-		void showUniforms();
-	public:
 		void setValue(int type, int len, float* v);
 		void setValue(int type, int len, int32_t* v);
 

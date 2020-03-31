@@ -5,7 +5,6 @@
 
 namespace render
 {
-	class DrawNode;
 	class CtrlAudioGeometryPolygon;
 
 	// 音频几何特性

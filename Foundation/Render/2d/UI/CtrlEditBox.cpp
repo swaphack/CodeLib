@@ -1,4 +1,8 @@
 #include "CtrlEditBox.h"
+#include "Common/Touch/TouchProxy.h"
+#include "Common/Touch/TouchDelegate.h"
+#include "Common/Touch/TouchManager.h"
+#include "Common/Keyboard/KeyboardManager.h"
 
 using namespace render;
 

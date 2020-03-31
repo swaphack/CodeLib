@@ -1,10 +1,11 @@
 #include "ModelDetail.h"
 #include "system.h"
-#include "Resource/Detail/Face.h"
-#include "Resource/Detail/Material.h"
-#include "Resource/Detail/Face.h"
 #include "Common/Texture/TextureCache.h"
 #include "Common/Texture/Texture.h"
+
+#include "MaterialDetail.h"
+#include "MeshDetail.h"
+#include "FaceDetail.h"
 
 using namespace render;
 
@@ -53,7 +54,7 @@ uint32_t ModelDetail::createTexture(const std::string& strFullpath)
 	return pTexture->getTextureID();
 }
 
-void ModelDetail::addMaterial(int id, Material* material)
+void ModelDetail::addMaterial(int id, MaterialDetail* material)
 {
 	if (material == nullptr)
 	{
@@ -88,7 +89,7 @@ void ModelDetail::removeAllMaterials()
 	_materials.clear();
 }
 
-Material* ModelDetail::getMaterial(int id)
+MaterialDetail* ModelDetail::getMaterial(int id)
 {
 	auto it = _materials.find(id);
 	if (it == _materials.end())
@@ -99,7 +100,7 @@ Material* ModelDetail::getMaterial(int id)
 	return it->second;
 }
 
-void ModelDetail::addMesh(int id, Mesh* mesh)
+void ModelDetail::addMesh(int id, MeshDetail* mesh)
 {
 	if (mesh == nullptr)
 	{
@@ -134,7 +135,7 @@ void ModelDetail::removeAllMeshes()
 	_meshes.clear();
 }
 
-Mesh* ModelDetail::getMesh(int id)
+MeshDetail* ModelDetail::getMesh(int id)
 {
 	auto it = _meshes.find(id);
 	if (it == _meshes.end())
@@ -185,12 +186,12 @@ int ModelDetail::getTexture(const std::string& name)
 	return it->second;
 }
 
-const std::map<int, Material*>& ModelDetail::geMaterials()
+const std::map<int, MaterialDetail*>& ModelDetail::geMaterials()
 {
 	return _materials;
 }
 
-const std::map<int, Mesh*>& ModelDetail::getMeshes()
+const std::map<int, MeshDetail*>& ModelDetail::getMeshes()
 {
 	return _meshes;
 }

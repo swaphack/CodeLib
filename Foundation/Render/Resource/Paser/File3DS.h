@@ -1,7 +1,8 @@
 #pragma once
 
 #include <math.h>
-#include "macros.h"
+#include "Resource/Loader/IResourceLoader.h"
+#include "Resource/Detail/ModelDetail.h"
 
 namespace render
 {

@@ -1,9 +1,15 @@
 #pragma once
 
-#include "macros.h"
+#include "Common/Node/ColorNode.h"
+#include "Common/struct/texture_common.h"
+
+#include "mathlib.h"
 
 namespace render
 {
+	class Texture;
+	class TexFrame;
+
 	// ÷°Õº∆¨£¨ƒ¨»œƒÊ ±’ÎªÊ÷∆
 	class CtrlFrame : public ColorNode
 	{
@@ -12,8 +18,9 @@ namespace render
 		virtual ~CtrlFrame();
 	public:
 		virtual bool init();
-
-		virtual void draw();
+	protected:
+		virtual void drawSample();
+	public:
 
 		// …Ë÷√Õº∆¨Œ∆¿Ì
 		void setTexture(const Texture* texture);
@@ -38,7 +45,6 @@ namespace render
 		// …Ë÷√ «∑ÒÀ≥ ±’Î
 		void setCounter(bool status);
 	protected:
-		virtual void initSelf();
 		void onTextureChange();
 	protected:
 		// Œ∆¿Ì÷°

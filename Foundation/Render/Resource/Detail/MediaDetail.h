@@ -1,14 +1,15 @@
 #pragma once
 
 #include "system.h"
-#include "ImageDetail.h"
-#include "AudioDetail.h"
 #include <map>
 
 namespace render
 {
 	// 媒体帧长度类型
 	typedef float mf_s;
+
+	class ImageDetail;
+	class AudioDetail;
 
 	// 媒体库
 	class MediaDetail

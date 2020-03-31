@@ -1,6 +1,8 @@
 #include "DeviceProxy.h"
 #include "common/Keyboard/KeyboardManager.h"
 #include "common/Touch/TouchManager.h"
+#include "mathlib.h"
+#include "Common/Tool/Tool.h"
 
 using namespace render;
 

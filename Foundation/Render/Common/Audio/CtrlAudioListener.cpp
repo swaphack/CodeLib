@@ -84,8 +84,7 @@ const math::Vector3& CtrlAudioListener::getUp()
 
 void CtrlAudioListener::onListenerChange()
 {
-	setDirty(true);
-	_notify->addMark(ENP_AUDIO);
+	this->notify(ENP_AUDIO);
 }
 
 void CtrlAudioListener::updateListener()

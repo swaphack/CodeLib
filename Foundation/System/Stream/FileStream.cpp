@@ -1,6 +1,5 @@
 #include "FileStream.h"
 #include "StreamBase.h"
-
 #include "IO/File.h"
 #include "Base/macros.h"
 

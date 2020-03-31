@@ -2,6 +2,11 @@
 #include "ext-config.h"
 #include "mathlib.h"
 #include "3d/Common/import.h"
+#include "Common/Tool/Tool.h"
+
+#include "Resource/Detail/MaterialDetail.h"
+#include "Resource/Detail/FaceDetail.h"
+#include "Resource/Detail/MeshDetail.h"
 
 using namespace render;
 
@@ -82,7 +87,7 @@ void File3DS::load(const std::string& filename)
 				}
 			}
 
-			auto pMat = CREATE_OBJECT(Material);
+			auto pMat = CREATE_OBJECT(MaterialDetail);
 			pMat->setName(pMatData->name);
 			pMat->setTexture1(pMatData->texture1_map.name);
 			pMat->setTexture2(pMatData->texture2_map.name);
@@ -101,7 +106,7 @@ void File3DS::load(const std::string& filename)
 		{
 			int id = lib3ds_file_mesh_by_name(pFile, pMeshData->name);
 
-			auto pMesh = CREATE_OBJECT(Mesh);
+			auto pMesh = CREATE_OBJECT(MeshDetail);
 
 			if (pMeshData->nvertices)
 			{
@@ -167,7 +172,7 @@ void File3DS::load(const std::string& filename)
 							j++;
 						}
 
-						Face* pFace = CREATE_OBJECT(Face);
+						FaceDetail* pFace = CREATE_OBJECT(FaceDetail);
 						pFace->setMaterial(item0.first);
 						pFace->setIndices(nFaceCount, indices);
 						pMesh->addFace(item0.first, pFace);

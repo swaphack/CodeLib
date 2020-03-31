@@ -1,4 +1,6 @@
 #include "CtrlScrollView.h"
+#include "Common/Touch/TouchProxy.h"
+#include "Common/Touch/TouchManager.h"
 #include <cassert>
 using namespace render;
 
@@ -246,11 +248,6 @@ void CtrlScrollView::onTouchMoved(float x, float y)
 void CtrlScrollView::onTouchEnded(float x, float y)
 {
 
-}
-
-void CtrlScrollView::initSelf()
-{
-	CtrlScissor::initSelf();
 }
 
 void CtrlScrollView::initItems()

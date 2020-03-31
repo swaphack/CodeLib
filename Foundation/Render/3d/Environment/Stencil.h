@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../macros.h"
+#include "Common/Node/Node.h"
 
 namespace render
 {

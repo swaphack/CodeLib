@@ -69,6 +69,8 @@ Camera::Camera()
 	_scale.set(1.0f, 1.0f, 1.0f);
 
 	_dimensions = ED_NONE;
+
+	this->setRelativeWithParent(false);
 }
 
 Camera::~Camera()
@@ -117,16 +119,37 @@ void Camera::setDimensions(CameraDimensions d)
 	_dimensions = d;
 }
 
-void Camera::updateTranform()
+void Camera::visit()
 {
+	ASSERT(_mainCamera != nullptr);
+
+	GLMatrix::applyProjection();
+
+	//GLMatrix::pushMatrix();
+	GLMatrix::loadIdentity();
+	/*
+	if (!this->isRelativeWithParent())
+	{
+		GLMatrix::loadIdentity();
+	}	
+	*/
+	
+
 	if (_bUseMatrix)
 	{
-		G_DRAWCOMMANDER->addCommand(DCCameraMatrix::create(_cameraParams, _dimensions, _mat44, _bRelative));
+		PRINT("Matrix:\n%s\n", _mat44.toString().c_str());
+		GLMatrix::multMatrix(_mat44.transpose());
 	}
 	else
 	{
-		G_DRAWCOMMANDER->addCommand(DCCamera::create(_cameraParams, _dimensions, _obPosition, _scale, _rotation, _bRelative));
+		GLMatrix::translate(_obPosition);
+		GLMatrix::scale(_scale);
+		GLMatrix::rotate(_rotation);
 	}
+
+	this->updateView();
+
+	//GLMatrix::popMatrix();
 }
 
 void Camera::setMainCamera(CameraDimensions d)
@@ -141,14 +164,12 @@ void Camera::setMainCamera(CameraDimensions d)
 	{
 		_mainCamera = new Camera3D;
 	}
-
-	if (_mainCamera)
-	{
-		_mainCamera->setRelativeWithParent(false);
-		_mainCamera->init();
-	}
 }
 
+void Camera::updateView()
+{
+
+}
 
 //////////////////////////////////////////////////////////////////////////
 
@@ -161,6 +182,16 @@ Camera2D::Camera2D()
 Camera2D::~Camera2D()
 {
 
+}
+
+void Camera2D::updateView()
+{
+	GLPrimitive::loadOrtho(_cameraParams.xLeft,
+		_cameraParams.xRight,
+		_cameraParams.yBottom,
+		_cameraParams.yTop,
+		_cameraParams.zNear,
+		_cameraParams.zFar);
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -181,4 +212,13 @@ void Camera3D::lookAt(const math::Vector3& position)
 
 }
 
+void Camera3D::updateView()
+{
+	GLPrimitive::loadFrustum(_cameraParams.xLeft,
+		_cameraParams.xRight,
+		_cameraParams.yBottom,
+		_cameraParams.yTop,
+		_cameraParams.zNear,
+		_cameraParams.zFar);
+}
 

@@ -3,6 +3,12 @@
 #include "3d/Common/import.h"
 #include "ext-config.h"
 
+#include "Common/Tool/Tool.h"
+
+#include "Resource/Detail/MaterialDetail.h"
+#include "Resource/Detail/FaceDetail.h"
+#include "Resource/Detail/MeshDetail.h"
+
 using namespace render;
 
 FileObj::FileObj()
@@ -55,7 +61,7 @@ void FileObj::load(const std::string& filename)
 				}
 			}
 
-			auto pMat = CREATE_OBJECT(Material);
+			auto pMat = CREATE_OBJECT(MaterialDetail);
 			pMat->setTexture1(pMatData->m_TextureMap1);
 			pMat->setTexture2(pMatData->m_TextureMap2);
 			pMat->setName(pMatData->m_MaterialName);
@@ -68,7 +74,7 @@ void FileObj::load(const std::string& filename)
 	}
 
 
-	auto pMesh = CREATE_OBJECT(Mesh);
+	auto pMesh = CREATE_OBJECT(MeshDetail);
 
 	if (pObj->vertices)
 	{
@@ -149,7 +155,7 @@ void FileObj::load(const std::string& filename)
 					j++;
 				}
 
-				Face* pFace = CREATE_OBJECT(Face);
+				FaceDetail* pFace = CREATE_OBJECT(FaceDetail);
 				pFace->setMaterial(item0.first);
 				pFace->setIndices(nFaceCount, indices);
 				pMesh->addFace(item0.first, pFace);

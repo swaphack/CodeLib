@@ -2,7 +2,7 @@
 #include "Shader.h"
 #include "ShaderAttrib.h"
 #include "ShaderUniform.h"
-#include "ext-config.h"
+#include "Graphic/GLAPI/GLShader.h"
 
 using namespace render;
 
@@ -56,7 +56,7 @@ void ShaderProgram::detachAllShaders()
 {
 	for (auto item : _shaders)
 	{
-		glDetachShader(_programID, item.first);
+		item.second->detachProgram();
 		SAFE_RELEASE(item.second);
 	}
 
@@ -65,17 +65,22 @@ void ShaderProgram::detachAllShaders()
 
 void ShaderProgram::initProgram()
 {
-	_programID = glCreateProgram();
+	_programID = GLShader::createProgram();
 }
 
 void ShaderProgram::link()
 {
-	glLinkProgram(_programID);
+	GLShader::linkProgram(_programID);
 }
 
 void ShaderProgram::use()
 {
-	glUseProgram(_programID);
+	GLShader::useProgram(_programID);
+}
+
+void ShaderProgram::useNone()
+{
+	//GLShader::useProgram(0);
 }
 
 void ShaderProgram::releaseProgram()
@@ -86,7 +91,7 @@ void ShaderProgram::releaseProgram()
 
 	if (_programID != 0)
 	{
-		glDeleteProgram(_programID);
+		GLShader::deleteProgram(_programID);
 		_programID = 0;
 	}
 }
@@ -99,7 +104,7 @@ ShaderAttrib* ShaderProgram::getAttriubte(const std::string& name)
 		return it->second;
 	}
 
-	GLint id = glGetAttribLocation(_programID, name.c_str());
+	GLint id = GLShader::getAttrib(_programID, name.c_str());
 	if (id <= 0)
 	{
 		return nullptr;
@@ -133,25 +138,6 @@ void ShaderProgram::addAttriubte(const std::string& name, ShaderAttrib* attrib)
 	_attributes[name] = attrib;
 }
 
-void ShaderProgram::showLog()
-{
-	GLint state;
-	glGetProgramiv(_programID, GL_LINK_STATUS, &state);
-	if (state == GL_TRUE)
-	{
-		return;
-	}
-	GLsizei bufferSize = 0;
-	glGetProgramiv(_programID, GL_INFO_LOG_LENGTH, &bufferSize);
-	if (bufferSize > 0)
-	{
-		GLchar* buffer = new char[bufferSize];
-		glGetProgramInfoLog(_programID, bufferSize, NULL, buffer);
-		PRINT("%s", buffer);
-		delete[] buffer;
-	}
-}
-
 ShaderUniform* ShaderProgram::getUniform(const std::string& name)
 {
 	auto it = _uniforms.find(name);
@@ -160,7 +146,7 @@ ShaderUniform* ShaderProgram::getUniform(const std::string& name)
 		return it->second;
 	}
 
-	GLint id = glGetUniformLocation(_programID, name.c_str());
+	GLint id = GLShader::getUniform(_programID, name.c_str());
 	if (id <= 0)
 	{
 		return nullptr;
@@ -203,9 +189,5 @@ void ShaderProgram::load(const std::string& vpath, const std::string& fpath)
 	FragmentShader* pFragment = CREATE_OBJECT(FragmentShader);
 	pFragment->loadFromFile(fpath);
 	this->attachShader(pFragment);
-}
-
-void ShaderProgram::useNone()
-{
-	//glUseProgram(0);
+	this->link();
 }

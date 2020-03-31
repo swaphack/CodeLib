@@ -1,6 +1,8 @@
 #pragma once
 
+#include "macros.h"
 #include "Stream.h"
+#include "IStreamBase.h"
 #include "Base/macros.h"
 
 using namespace sys;

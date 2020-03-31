@@ -1,5 +1,6 @@
 #include "CtrlAnimation.h"
-#include "../UI/CtrlFrame.h"
+#include "2d/UI/CtrlFrame.h"
+#include "Common/Audio/CtrlAudioSource.h"
 
 using namespace render;
 

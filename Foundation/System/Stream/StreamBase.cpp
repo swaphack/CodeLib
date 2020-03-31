@@ -1,5 +1,6 @@
 #include "StreamBase.h"
 #include "Base/import.h"
+#include "StreamHelper.h"
 
 using namespace sys;
 

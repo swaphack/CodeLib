@@ -3,10 +3,11 @@
 
 #include "HttpCommand.h"
 #include "HttpDocument.h"
-#include "Resource/import.h"
 
 namespace sys
 {
+	class IResource;
+
 	class HttpRespDocument : public HttpDocument
 	{
 	public:

@@ -2,6 +2,10 @@
 #include "ext-config.h"
 #include "Common/Tool/Tool.h"
 
+#include "Resource/Detail/MaterialDetail.h"
+#include "Resource/Detail/FaceDetail.h"
+#include "Resource/Detail/MeshDetail.h"
+
 using namespace render;
 
 void handNode(FileFbx* file, FbxNode* node);
@@ -36,7 +40,7 @@ void handNodeMesh(FileFbx* file, FbxNode* node)
 		return;
 	}
 
-	auto pMesh = CREATE_OBJECT(Mesh);
+	auto pMesh = CREATE_OBJECT(MeshDetail);
 	int meshCount = file->getMeshes().size();
 	file->addMesh(meshCount, pMesh);
 
@@ -135,7 +139,7 @@ void handNodeMesh(FileFbx* file, FbxNode* node)
 		delete colorData;
 	}
 
-	auto pFace = CREATE_OBJECT(Face);
+	auto pFace = CREATE_OBJECT(FaceDetail);
 	pMesh->addFace(0, pFace);
 
 	uint16_t* indices = new uint16_t[pMeshData->GetPolygonVertexCount()];
@@ -326,7 +330,7 @@ void handMaterial(FileFbx* file, FbxSurfaceMaterial* mat, int i)
 	else if (mat->GetClassId().Is(FbxSurfacePhong::ClassId))
 	{
 		FbxSurfacePhong* phong = (FbxSurfacePhong *)mat;
-		auto pMat = CREATE_OBJECT(Material);
+		auto pMat = CREATE_OBJECT(MaterialDetail);
 		pMat->setName(phong->GetName());
 		pMat->setAmbient(phong->Ambient.Get()[0], phong->Ambient.Get()[1], phong->Ambient.Get()[2]);
 		pMat->setDiffuse(phong->Diffuse.Get()[0], phong->Diffuse.Get()[1], phong->Diffuse.Get()[2]);
@@ -338,7 +342,7 @@ void handMaterial(FileFbx* file, FbxSurfaceMaterial* mat, int i)
 	else if (mat->GetClassId().Is(FbxSurfaceLambert::ClassId))
 	{
 		FbxSurfaceLambert* lambert = (FbxSurfaceLambert *)mat;
-		auto pMat = CREATE_OBJECT(Material);
+		auto pMat = CREATE_OBJECT(MaterialDetail);
 		pMat->setName(lambert->GetName());
 		pMat->setAmbient(lambert->Ambient.Get()[0], lambert->Ambient.Get()[1], lambert->Ambient.Get()[2]);
 		pMat->setDiffuse(lambert->Diffuse.Get()[0], lambert->Diffuse.Get()[1], lambert->Diffuse.Get()[2]);

@@ -1,9 +1,12 @@
 #pragma once
 
-#include "Resource.h"
+#include <map>
 
 namespace sys
 {
+	class IResource;
+	class Resource;
+
 	enum ResourceType
 	{
 		ERT_LOCAL,	// ±¾µØ

@@ -1,7 +1,8 @@
 #include "HttpResponse.h"
-
+#include "Base/macros.h"
 #include "HttpConstant.h"
 #include "Type/import.h"
+#include "Resource/IResource.h"
 
 #define DEFAULT_HTTP_HEADER "HTTP"
 

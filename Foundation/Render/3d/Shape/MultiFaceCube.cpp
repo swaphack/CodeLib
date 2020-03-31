@@ -1,6 +1,9 @@
 #include "MultiFaceCube.h"
 #include "Graphic/import.h"
 #include "Resource/Detail/ModelDetail.h"
+#include "Common/Texture/TexFrame.h"
+#include "Common/Texture/Texture.h"
+#include "Common/Tool/TextureTool.h"
 
 using namespace render;
 
@@ -35,7 +38,7 @@ bool MultiFaceCube::init()
 	return true;
 }
 
-void MultiFaceCube::draw()
+void MultiFaceCube::drawSample()
 {
 	for (int i = 0; i < CUBE_FACE_COUNT; i++)
 	{
@@ -48,7 +51,15 @@ void MultiFaceCube::draw()
 				textID = _faceFrames[i]->getTexture()->getTextureID();
 			}
 
-			G_DRAWCOMMANDER->addCommand(DCTexture::create(textID, texRect, getColor(), _opacity, _blend, _normal[i]));
+			if (textID)
+			{
+				GLState::enable(EnableModel::TEXTURE_2D);
+				GLTexture::bindTexture2D(textID);
+			}
+			texRect->setNormal(_normal[i]);
+			GLVertex::drawTextureRect(*texRect);
+
+			GLState::disable(EnableModel::TEXTURE_2D);
 		}
 	}
 }
@@ -66,7 +77,7 @@ void MultiFaceCube::setFaceFrame(ModelFace face, TexFrame* frame)
 
 	_faceFrames[face] = frame;
 
-	_notify->addMark(ENP_MODEL_FRAME);
+	this->notify(ENP_MODEL_FRAME);
 }
 
 void MultiFaceCube::setAllFaceFrame(TexFrame* frame)
@@ -81,7 +92,7 @@ void MultiFaceCube::setAllFaceFrame(TexFrame* frame)
 	}
 }
 
-void MultiFaceCube::setAllFaceMaterial(Material* mat)
+void MultiFaceCube::setAllFaceMaterial(MaterialDetail* mat)
 {
 	if (mat == nullptr)
 	{

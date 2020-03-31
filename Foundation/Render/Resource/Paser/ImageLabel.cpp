@@ -525,8 +525,8 @@ void ImageLabel::load(const TextDefine& textDefine)
 	this->setPixels(destPixels);
 	this->setWidth(_stream->getWidth() / RGBA_PIXEL_UNIT);
 	this->setHeight(_stream->getHeigth());
-	this->setFormat(GL_RGBA);
-	this->setInternalFormat(RGBA_PIXEL_UNIT);
+	this->setFormat(PixelFormat::RGBA);
+	this->setInternalFormat(TextureParameter::FOUR);
 
 	_stream->clear();
 }

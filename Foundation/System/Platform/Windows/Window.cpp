@@ -116,7 +116,7 @@ void Window::initWindow(const std::string& title, int32_t width, int32_t height)
 		return;
 	}
 	
-	this->listen();
+	
 }
 
 bool Window::onRecvSignal(Signal* signal)

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../Node/Node.h"
+#include "Common/Node/Node.h"
 #include "TouchDelegate.h"
 #include <map>
 #include <vector>
@@ -38,8 +38,8 @@ namespace render
 		// ÅÉ·¢´¥ÃþÊÂ¼þ
 		void dispatchTouchEvent(TouchType type, float x, float y);
 	private:
-		Node* _target;
-		bool _bTouchEnabled;
+		Node* _target = nullptr;
+		bool _bTouchEnabled = false;
 		std::map<TouchType, std::vector<TouchDelegate>> _touchEvent;
 	};
 }

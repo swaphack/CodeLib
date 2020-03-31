@@ -39,6 +39,8 @@ void ConsoleListener::run()
 
 			_receiveLineHandler(line);
 		}
+
+		delete this;
 	});
 
 	th.detach();

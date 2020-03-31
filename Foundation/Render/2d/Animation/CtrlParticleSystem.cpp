@@ -1,5 +1,8 @@
 #include "CtrlParticleSystem.h"
 #include "system.h"
+#include "Graphic/import.h"
+#include "Common/Tool/Tool.h"
+#include "Common/Tool/TextureTool.h"
 using namespace render;
 
 ParticleNode::ParticleNode()
@@ -12,11 +15,14 @@ ParticleNode::~ParticleNode()
 
 }
 
-void ParticleNode::draw()
+void ParticleNode::drawSample()
 {
-	ColorNode::draw();
+	GLState::enable(EnableModel::TEXTURE_2D);
+	GLTexture::bindTexture2D(0);
 
-	G_DRAWCOMMANDER->addCommand(DCTexture::create(0, &_texRect, _color, _opacity, _blend));
+	GLVertex::drawTextureRect(_texRect);
+
+	GLState::disable(EnableModel::TEXTURE_2D);
 }
 
 void ParticleNode::update(float interval)
@@ -38,10 +44,10 @@ void ParticleNode::update(float interval)
 
 	Tool::convertToOGLPoisition(_position, _obPosition);
 }
-
-void ParticleNode::initSelf()
+/*
+void ParticleNode::notifyEvents()
 {
-	ColorNode::initSelf();
+	ColorNode::notifyEvents();
 
 	convertColor4BTo4F(_color, _colorInit);
 
@@ -51,7 +57,7 @@ void ParticleNode::initSelf()
 	TextureTool::setTexture2DCoords(&_texRect, size, rect);
 	TextureTool::setTexture2DVertexts(&_texRect, math::Vector3(), _volume, _anchor);
 }
-
+*/
 //////////////////////////////////////////////////////////////////////////
 
 CtrlParticleSystem::CtrlParticleSystem()

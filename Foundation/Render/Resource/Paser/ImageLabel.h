@@ -1,7 +1,9 @@
 #pragma once
 
 #include "system.h"
-#include "macros.h"
+#include "Resource/Loader/ILabelLoader.h"
+#include "Resource/Detail/ImageDetail.h"
+#include "Resource/Config/TextDefine.h"
 
 #include <stack>
 

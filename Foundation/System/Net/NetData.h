@@ -1,8 +1,7 @@
 #pragma once
 
-#include "macros.h"
-#include "Stream/StreamBase.h"
-
+#include <string>
+#include <cstdint>
 #include <queue>
 
 namespace sys

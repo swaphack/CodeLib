@@ -1,6 +1,7 @@
 #pragma once
 
-
+#include <string>
+#include <cstdint>
 
 #include "Framework/Object.h"
 
@@ -8,6 +9,8 @@
 
 namespace sys
 {
+	class CacheGroup;
+
 	// 站点资源管理
 	class Resource : public Object, public IResource
 	{

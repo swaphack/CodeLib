@@ -3,6 +3,7 @@
 #include "RenderApplication.h"
 #include "Platform/DeviceProxy.h"
 #include "system.h"
+#include "Graphic/GLAPI/GLVersion.h"
 
 using namespace render;
 using namespace sys;
@@ -22,8 +23,6 @@ GlutWindow::~GlutWindow()
 
 void display()
 {
-	glClear(GL_COLOR_BUFFER_BIT);
-
 	sWindow->onUpdate();
 
 	glutSwapBuffers();
@@ -31,11 +30,11 @@ void display()
 
 void update(int value)
 {
-	sWindow->onUpdate();	
+	//sWindow->onUpdate();	
 
 	glutPostRedisplay();
 
-	glutTimerFunc(sWindow->getRefreshInterval() * 1000, ::update, value);
+	//glutTimerFunc(sWindow->getRefreshInterval() * 1000, ::update, value);
 };
 
 void keyboardDown(unsigned char key, int x, int y)
@@ -80,17 +79,19 @@ void GlutWindow::createWindow(const std::string& title, int width, int height, i
 	
 	this->initWindow(title, width, height, left, top);
 
-	if (_render)
-	{
-		_render->setFrameSize((int)getWidth(), (int)getHeight());
-		_render->show();
-		this->initDevice();
-	}
-
 	glutInitDisplayMode(mode);
 	glutInitWindowPosition(left, top);
 	glutInitWindowSize(width, height);
 	glutCreateWindow(title.c_str());
+
+	int err = glewInit();
+	if (GLEW_OK != err)
+	{
+		PRINT("Error [main]: glewInit failed: %s\n", glewGetErrorString(err));
+		return;
+	}
+
+	GLVersion::showDetail();
 
 	glutKeyboardFunc(::keyboardDown);
 	glutKeyboardUpFunc(::keyboardUp);
@@ -98,13 +99,15 @@ void GlutWindow::createWindow(const std::string& title, int width, int height, i
 	glutMotionFunc(::mouseMove);
 	glutReshapeFunc(::sizeChange);
 
-	glutTimerFunc(millis, ::update, 1);
-	glutDisplayFunc(::display);
+	if (_render)
+	{
+		_render->setFrameSize((int)getWidth(), (int)getHeight());
+		_render->show();
+	}
+	this->initDevice();
 
-	GLenum err = glewInit();
-	PRINT("glewInit error id %d", glewGetErrorString(err));
-	PRINT("OpenGL Version %s", glewGetString(GL_VERSION));
-	//PRINT("OpenGL Version %s", glGetString(GL_VERSION));
+	glutDisplayFunc(::display);
+	glutTimerFunc(millis, ::update, 1);
 
 	glutMainLoop();
 }

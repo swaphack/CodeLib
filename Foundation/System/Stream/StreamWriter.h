@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Stream.h"
+#include "IStreamBase.h"
 
 #include <string>
 

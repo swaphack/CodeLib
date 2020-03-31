@@ -1,14 +1,16 @@
 #pragma once
 
-#include "Framework/Object.h"
-#include "Socket.h"
-#include "NetData.h"
 #include "DataQueue.h"
 #include "SocketRecvHandler.h"
+#include <cstdint>
+#include <string>
 #include <map>
 
 namespace sys
 {
+	class Object;
+	class Socket;
+
 	class Client
 	{
 	public:

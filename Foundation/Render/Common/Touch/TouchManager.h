@@ -1,9 +1,8 @@
 #pragma once
 
 #include "system.h"
-#include "TouchProxy.h"
-
-#include <set>
+#include "Common/Touch/TouchDelegate.h"
+#include <vector>
 
 namespace render
 {

@@ -1,6 +1,6 @@
 #include "Texture.h"
 #include <exception>
-#include "ext-config.h"
+#include "Graphic/GLAPI/GLTexture.h"
 #include "Resource/Detail/ImageDetail.h"
 using namespace render;
 
@@ -15,7 +15,7 @@ Texture::Texture()
 
 Texture::~Texture()
 {
-	glDeleteTextures(1, &_textureID);
+	GLTexture::deleteTexture(_textureID);
 	_textureID = 0;
 }
 
@@ -27,22 +27,20 @@ void Texture2D::load(const ImageDetail* image)
 		return;
 	}
 
-	GLuint tex_id = 0;
+	GLuint tex_id = GLTexture::genTexture();
 
 	/* Generate texture */
-	glGenTextures(1, &tex_id);
-	glBindTexture(GL_TEXTURE_2D, tex_id);
+	GLTexture::bindTexture2D(tex_id);
 
 	/* Setup some parameters for texture filters and mipmapping */
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
+	GLTexture::setTexParameterMinFilter2D(TextureMinFilter::LINEAR);
+	GLTexture::setTexParameterMagFilter2D(TextureMagFilter::LINEAR);
+	GLTexture::setTexParameterWrapS2D(TextureWrapMode::CLAMP);
+	GLTexture::setTexParameterWrapT2D(TextureWrapMode::CLAMP);
 
-	
-	glTexImage2D(GL_TEXTURE_2D, 0, image->getInternalFormat(),
+	GLTexture::setTexImage2D(0, image->getInternalFormat(),
 		image->getWidth(), image->getHeight(), 0, image->getFormat(),
-		GL_UNSIGNED_BYTE, image->getPixels());
+		PixelType::UNSIGNED_BYTE, image->getPixels());
 	
 	_textureID = tex_id;
 	_width = image->getWidth();

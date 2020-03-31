@@ -1,4 +1,7 @@
 #include "MultiStream.h"
+#include "StreamHelper.h"
+#include <cstdlib>
+#include <cstring>
 
 using namespace sys;
 

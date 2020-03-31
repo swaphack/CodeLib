@@ -2,6 +2,8 @@
 
 #include "Model.h"
 
+#include <string>
+
 namespace render
 {
 	/**

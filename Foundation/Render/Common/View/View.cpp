@@ -1,5 +1,6 @@
 #include "View.h"
-#include "ext-config.h"
+#include "Graphic/import.h"
+#include "Camera.h"
 
 using namespace render;
 
@@ -20,6 +21,7 @@ const ViewConfig* View::getConfig()
 void View::setPosition(float x, float y)
 {
 	_position.set(x, y);
+	this->setDirty(true);
 }
 
 const math::Vector2& View::getPosition()
@@ -31,6 +33,7 @@ void View::setFrameSize(float width, float height)
 {
 	_size.setWidth(width);
 	_size.setHeight(height);
+	this->setDirty(true);
 }
 
 const math::Size& View::getFrameSize()
@@ -43,61 +46,31 @@ void View::initView()
 	if (isDirty())
 	{
 		// 定义视窗位置
-		glViewport((int)_position.getX(), (int)_position.getY(), (int)_size.getWidth(), (int)_size.getHeight());
+		GLPrimitive::setViewport(_position.getX(), _position.getY(), _size.getWidth(), _size.getHeight());
+
+		this->applyConfig();
 
 		setDirty(false);
 	}
-
-	this->applyConfig();
-
-	SHOW_OPENGL_ERROR_MESSAGE();
 }
 
 void View::updateView()
 {
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
-	glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
-	glClearDepth(1.0f);
-	glClearStencil(0);
+	GLPixels::clearBuffer(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+	GLPixels::clearColor(0, 0, 0, 1.0f);
+	GLPixels::clearDepth(1.0f);
+	GLPixels::clearStencil(0);
 
-	SHOW_OPENGL_ERROR_MESSAGE();
+	GLDebug::showError();
 }
 
 void View::applyConfig()
 {
-	SHOW_OPENGL_ERROR_MESSAGE();
+	GLSetting::setShadeModel(ShadingModel::SMOOTH);
+	GLSetting::setPerspectiveCorrectionHint(HintMode::NICEST);
 
-	glShadeModel(GL_SMOOTH);
-	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
-	glClearDepth(1.0f);
-	glClearStencil(0);
-	glEnable(GL_DEPTH_TEST);
-	glDepthFunc(GL_LEQUAL);
-	glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
+	GLState::enable(EnableModel::DEPTH_TEST);
+	GLFragment::testDepth(DepthFunction::LEQUAL);
 
-	SHOW_OPENGL_ERROR_MESSAGE();
-
-	/*
-	glEnable(GL_POINT_SMOOTH);
-	glHint(GL_POINT_SMOOTH, GL_DONT_CARE);
-
-	SHOW_OPENGL_ERROR_MESSAGE();
-
-	glEnable(GL_LINE_SMOOTH);
-	glHint(GL_LINE_SMOOTH, GL_DONT_CARE);
-
-	SHOW_OPENGL_ERROR_MESSAGE();
-
-	glEnable(GL_POLYGON_SMOOTH);
-	glHint(GL_POLYGON_SMOOTH, GL_DONT_CARE);
-
-	SHOW_OPENGL_ERROR_MESSAGE();
-	*/
-
-	glEnableClientState(GL_VERTEX_ARRAY);
-	glEnableClientState(GL_NORMAL_ARRAY);
-	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-	glEnableClientState(GL_COLOR_ARRAY);
-
-	SHOW_OPENGL_ERROR_MESSAGE();
+	GLDebug::showError();
 }

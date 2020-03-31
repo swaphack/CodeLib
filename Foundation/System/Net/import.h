@@ -1,7 +1,5 @@
 #pragma once
 
-#include "macros.h"
-
 #include "NetData.h"
 
 #include "DNS.h"

@@ -427,6 +427,9 @@
     <ClInclude Include="Algebra\Polynomial\import.h">
       <Filter>Algebra\Polynomial</Filter>
     </ClInclude>
+    <ClInclude Include="Algebra\Vector\Vector4.h">
+      <Filter>Algebra\Vector</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
@@ -653,6 +656,9 @@
       <Filter>Algebra\Vector</Filter>
     </ClCompile>
     <ClCompile Include="Algebra\Vector\Vector3.cpp">
+      <Filter>Algebra\Vector</Filter>
+    </ClCompile>
+    <ClCompile Include="Algebra\Vector\Vector4.cpp">
       <Filter>Algebra\Vector</Filter>
     </ClCompile>
   </ItemGroup>

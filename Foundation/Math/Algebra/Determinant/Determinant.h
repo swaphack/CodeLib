@@ -3,7 +3,6 @@
 #include <string>
 
 #include "Basic/Array2D.h"
-#include "../Vector/Vector.h"
 
 namespace math
 {

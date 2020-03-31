@@ -131,19 +131,12 @@ void SphereModel::draw()
 void SphereModel::setRadius(float radius)
 {
 	_radius = radius;
-	setDirty(true);
+	_obRadius = _radius / Tool::getGLViewSize().getWidth();
 }
 
 float SphereModel::getRadius()
 {
 	return _radius;
-}
-
-void SphereModel::initSelf()
-{
-	Model::initSelf();
-
-	_obRadius = _radius / Tool::getGLViewSize().getWidth();
 }
 
 void SphereModel::setTexFrame(TexFrame* frame)

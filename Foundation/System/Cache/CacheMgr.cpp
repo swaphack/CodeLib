@@ -1,5 +1,7 @@
 #include "CacheMgr.h"
 
+#include "CacheIdentity.h"
+
 using namespace sys;
 
 CacheMgr* CacheMgr::s_CacheMgr = nullptr;

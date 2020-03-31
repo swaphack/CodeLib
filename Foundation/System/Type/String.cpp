@@ -1,6 +1,5 @@
 #include "String.h"
 #include "Stream/import.h"
-#include "macros.h"
 #include "Base/macros.h"
 #include <cstdarg>
 

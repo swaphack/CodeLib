@@ -39,5 +39,8 @@ namespace render
 		void setValue(uint16_t v0, uint16_t v1);
 		void setValue(uint16_t v0, uint16_t v1, uint16_t v2);
 		void setValue(uint16_t v0, uint16_t v1, uint16_t v2, uint16_t v3);
+
+		void setValue(float* value);
+		void setValue(uint16_t* value);
 	};
 }

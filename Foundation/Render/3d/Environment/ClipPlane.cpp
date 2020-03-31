@@ -1,5 +1,5 @@
 #include "ClipPlane.h"
-
+#include "Graphic/import.h"
 using namespace render;
 
 
@@ -15,8 +15,8 @@ ClipPlane::~ClipPlane()
 
 void ClipPlane::draw()
 {
-	glClipPlane(getClipPlaneIndex(), _clipNormal);
-	glEnable(getClipPlaneIndex());
+	GLPrimitive::setClipPlane(getClipPlaneName(), _clipNormal);
+	GLState::enable((EnableModel)getClipPlaneName());
 }
 
 void ClipPlane::setClipNormal(float x, float y, float z)

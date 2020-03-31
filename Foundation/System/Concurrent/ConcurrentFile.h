@@ -1,8 +1,6 @@
 #pragma once
 
 #include "Concurrent.h"
-
-
 #include <cstdio>
 
 namespace sys
