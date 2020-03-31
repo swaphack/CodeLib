@@ -34,6 +34,8 @@ Light::~Light()
 
 void Light::draw()
 {
+	GLState::enable(EnableModel::LIGHTING);
+
 	GLLight::setLightAmbient(getLightName(), _lightAmbient);
 
 	GLLight::setLightDiffuse(getLightName(), _lightDiffuse);
@@ -42,7 +44,6 @@ void Light::draw()
 
 	GLLight::setLightPosition(getLightName(), _lightPosition);
 
-	GLState::enable(EnableModel::LIGHTING);
 	GLState::enable((EnableModel)getLightName());
 }
 

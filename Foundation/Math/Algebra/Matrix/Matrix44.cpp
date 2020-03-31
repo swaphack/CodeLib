@@ -30,6 +30,12 @@ Matrix44::Matrix44(const Matrix& mat)
 	}
 }
 
+Matrix44::Matrix44(float* value)
+	: Matrix44()
+{
+	this->set(value, 4, 4);
+}
+
 void Matrix44::normalize()
 {
 	_values[0] = 1;  _values[1] = 0;  _values[2] = 0;  _values[3] = 0; // x

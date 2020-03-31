@@ -73,6 +73,7 @@ void View::applyConfig()
 	GLFragment::testDepth(DepthFunction::LEQUAL);
 	GLPrimitive::setCullFace(CullFaceMode::BACK);
 	GLPrimitive::setFrontFace(FrontFaceDirection::CCW);
+	GLPrimitive::setPixelStore(PixelStore::UNPACK_ALIGNMENT, 1);
 
 	GLDebug::showError();
 }

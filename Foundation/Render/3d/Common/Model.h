@@ -15,7 +15,7 @@ namespace render
 		Model();
 		virtual ~Model();
 	protected:
-		virtual void draw();
+		virtual void drawSample();
 	public:
 		const ModelDetail* getModelData();
 		void setModelData(const ModelDetail* detail);

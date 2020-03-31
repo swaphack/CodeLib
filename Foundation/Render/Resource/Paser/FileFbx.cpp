@@ -22,10 +22,14 @@ void handNode(FileFbx* file, FbxNode* node)
 		return;
 	}
 
+	PRINT("Node Name:%s Type:%s\n", node->GetName(), node->GetTypeName());
+
 	handNodeMesh(file, node);
 	handNodeMaterial(file, node);
 	
 	int nCount = node->GetChildCount();
+
+	PRINT("Node Child Count:%d\n", nCount);
 	for (int i = 0; i < nCount; i++)
 	{
 		handNode(file, node->GetChild(i));
@@ -43,6 +47,9 @@ void handNodeMesh(FileFbx* file, FbxNode* node)
 	auto pMesh = CREATE_OBJECT(MeshDetail);
 	int meshCount = file->getMeshes().size();
 	file->addMesh(meshCount, pMesh);
+
+	int nPolygonCount = pMeshData->GetPolygonCount();
+	//ASSERT(nPolygonCount <= 1);
 
 	int nPointCount = pMeshData->GetControlPointsCount();
 	if (nPointCount > 0)
@@ -159,6 +166,17 @@ void handNodeMesh(FileFbx* file, FbxNode* node)
 		FbxSurfaceMaterial* lMaterial = node->GetMaterial(pMaterialElement->GetIndexArray().GetAt(0));
 		pFace->setMaterial(lMaterial->GetUniqueID());
 	}
+
+	FbxAMatrix mat = node->EvaluateGlobalTransform();
+	double* value = (double*)mat;
+
+	float v[16] = { 0 };
+	for (int i = 0; i < 16; i++)
+	{
+		v[i] = value[i];
+	}
+	math::Matrix44 m(v);
+	pFace->setMatrix(m);
 }
 
 void handNodeMaterial(FileFbx* file, FbxNode* node)
@@ -170,8 +188,8 @@ void handNodeMaterial(FileFbx* file, FbxNode* node)
 		if (mat)
 		{
 			handMaterial(file, mat, mat->GetUniqueID());
-			int lTextureIndex;
-			FBXSDK_FOR_EACH_TEXTURE(lTextureIndex)
+			int lTextureIndex = 0;
+			//FBXSDK_FOR_EACH_TEXTURE(lTextureIndex)
 			{
 				handMaterialTexture(file, mat, mat->GetUniqueID(), lTextureIndex);
 			}
@@ -195,7 +213,7 @@ void handMaterial(FileFbx* file, FbxSurfaceMaterial* mat, int i)
 	if (lImplementation)
 	{
 		//Now we have a hardware shader, let's read it
-		FBXSDK_printf("            Hardware Shader Type: %s\n", lImplemenationType.Buffer());
+		PRINT("            Hardware Shader Type: %s\n", lImplemenationType.Buffer());
 		const FbxBindingTable* lRootTable = lImplementation->GetRootTable();
 		FbxString lFileName = lRootTable->DescAbsoluteURL.Get();
 		FbxString lTechniqueName = lRootTable->DescTAG.Get();
@@ -212,7 +230,7 @@ void handMaterial(FileFbx* file, FbxSurfaceMaterial* mat, int i)
 
 
 			FbxString lTest = lEntry.GetSource();
-			FBXSDK_printf("            Entry: %s\n", lTest.Buffer());
+			PRINT("            Entry: %s\n", lTest.Buffer());
 
 
 			if (strcmp(FbxPropertyEntryView::sEntryType, lEntrySrcType) == 0)
@@ -354,68 +372,73 @@ void handMaterial(FileFbx* file, FbxSurfaceMaterial* mat, int i)
 void handMaterialTexture(FileFbx* file, FbxSurfaceMaterial* mat, int i, int textureIndex)
 {
 	auto pProperty = mat->FindProperty(FbxLayerElement::sTextureChannelNames[textureIndex]);
-	if (pProperty.IsValid())
+	if (!pProperty.IsValid())
 	{
-		int lTextureCount = pProperty.GetSrcObjectCount<FbxTexture>();
+		return;
+	}
 
-		auto pMat = file->getMaterial(i);
+	int lTextureCount = pProperty.GetSrcObjectCount<FbxTexture>();
+	if (lTextureCount == 0)
+	{
+		return;
+	}
+	auto pMat = file->getMaterial(i);
 
-		for (int j = 0; j < lTextureCount; ++j)
+	for (int j = 0; j < lTextureCount; ++j)
+	{
+		//Here we have to check if it's layeredtextures, or just textures:
+		FbxLayeredTexture *lLayeredTexture = pProperty.GetSrcObject<FbxLayeredTexture>(j);
+		if (lLayeredTexture)
 		{
-			//Here we have to check if it's layeredtextures, or just textures:
-			FbxLayeredTexture *lLayeredTexture = pProperty.GetSrcObject<FbxLayeredTexture>(j);
-			if (lLayeredTexture)
+			int lNbTextures = lLayeredTexture->GetSrcObjectCount<FbxTexture>();
+			for (int k = 0; k < lNbTextures; ++k)
 			{
-				int lNbTextures = lLayeredTexture->GetSrcObjectCount<FbxTexture>();
-				for (int k = 0; k < lNbTextures; ++k)
-				{
-					FbxTexture* lTexture = lLayeredTexture->GetSrcObject<FbxTexture>(k);
-					if (lTexture)
-					{
-						FbxFileTexture *lFileTexture = FbxCast<FbxFileTexture>(lTexture);
-						if (lFileTexture)
-						{
-							//PRINT("Fbx LayeredTexture Path :%s\n", lFileTexture->GetFileName());
-						}
-					}
-
-				}
-			}
-			else
-			{
-				FbxTexture* lTexture = pProperty.GetSrcObject<FbxTexture>(j);
+				FbxTexture* lTexture = lLayeredTexture->GetSrcObject<FbxTexture>(k);
 				if (lTexture)
 				{
 					FbxFileTexture *lFileTexture = FbxCast<FbxFileTexture>(lTexture);
 					if (lFileTexture)
 					{
-						if (lFileTexture->GetFileName() == nullptr || strlen(lFileTexture->GetFileName()) == 0)
-						{
-							continue;
-						}
-						std::string fullpath = lFileTexture->GetFileName();
-						std::string name = lFileTexture->GetRelativeFileName();
-						if (fullpath.empty())
-						{
-							continue;
-						}
-						//PRINT("Fbx FbxTexture Path :%s\n", lFileTexture->GetFileName());
-						int textureID = file->createTexture(fullpath);
-						if (textureID == 0)
-						{
-							continue;
-						}
+						//PRINT("Fbx LayeredTexture Path :%s\n", lFileTexture->GetFileName());
+					}
+				}
 
-						file->addTexture(name, textureID);
+			}
+		}
+		else
+		{
+			FbxTexture* lTexture = pProperty.GetSrcObject<FbxTexture>(j);
+			if (lTexture)
+			{
+				FbxFileTexture *lFileTexture = FbxCast<FbxFileTexture>(lTexture);
+				if (lFileTexture)
+				{
+					if (lFileTexture->GetFileName() == nullptr || strlen(lFileTexture->GetFileName()) == 0)
+					{
+						continue;
+					}
+					std::string fullpath = lFileTexture->GetFileName();
+					std::string name = lFileTexture->GetRelativeFileName();
+					if (fullpath.empty())
+					{
+						continue;
+					}
+					//PRINT("Fbx FbxTexture Path :%s\n", lFileTexture->GetFileName());
+					int textureID = file->createTexture(fullpath);
+					if (textureID == 0)
+					{
+						continue;
+					}
 
-						if (j == 0)
-						{
-							pMat->setTexture1(name);
-						}
-						else if (j == 1)
-						{
-							pMat->setTexture2(name);
-						}
+					file->addTexture(name, textureID);
+
+					if (j == 0)
+					{
+						pMat->setTexture1(name);
+					}
+					else if (j == 1)
+					{
+						pMat->setTexture2(name);
 					}
 				}
 			}
@@ -426,7 +449,7 @@ void handMaterialTexture(FileFbx* file, FbxSurfaceMaterial* mat, int i, int text
 
 FileFbx::FileFbx()
 {
-
+	this->setModelFormat(EMRF_FBX);
 }
 
 FileFbx::~FileFbx()
@@ -462,12 +485,14 @@ void FileFbx::load(const std::string& filename)
 	// Import the contents of the file into the scene.
 	lImporter->Import(lScene);
 
-	// The file is imported; so get rid of the importer.
-	lImporter->Destroy();
-
 	FbxNode* lRootNode = lScene->GetRootNode();
-	if (lRootNode) 
+	if (lRootNode)
 	{
 		handNode(this, lRootNode);
 	}
+
+	// The file is imported; so get rid of the importer.
+	lImporter->Destroy();
+
+	//lSdkManager->Destroy();
 }

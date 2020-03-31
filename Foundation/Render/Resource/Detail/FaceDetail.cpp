@@ -32,3 +32,13 @@ int FaceDetail::getMaterial()
 {
 	return _material;
 }
+
+void FaceDetail::setMatrix(const math::Matrix44& mat)
+{
+	_matrix = mat;
+}
+
+const math::Matrix44& render::FaceDetail::getMatrix()
+{
+	return _matrix;
+}

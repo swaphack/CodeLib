@@ -2,6 +2,7 @@
 
 #include "system.h"
 #include "Common/struct/pointer_common.h"
+#include "mathlib.h"
 
 namespace render
 {
@@ -30,10 +31,20 @@ namespace render
 		*	获取三角形索引
 		*/
 		const T_Indice& getIndices();
+		/**
+		*	变化矩阵
+		*/
+		void setMatrix(const math::Matrix44& mat);
+		/**
+		*	变化矩阵
+		*/
+		const math::Matrix44& getMatrix();
 	protected:
 		// 材质
 		int _material = 0;
 		// 顶点索引
 		T_Indice _indices;
+		// 变化信息
+		math::Matrix44 _matrix;
 	};
 }

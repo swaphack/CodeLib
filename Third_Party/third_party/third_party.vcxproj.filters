@@ -1784,9 +1784,6 @@
     <ClInclude Include="..\..\Lib\include\tga\targa.h">
       <Filter>tga</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Lib\include\gl\glew.h">
-      <Filter>glew</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Lib\include\opengl\GL.H">
       <Filter>opengl</Filter>
     </ClInclude>

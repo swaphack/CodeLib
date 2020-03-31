@@ -72,15 +72,15 @@ void WndRender::show()
 	//testAudio3D();
 	//testLayout();
 	//
-	//addLight();
+	addLight();
 	//testFog();
 	//testCubeModel();
 	//testSphereModel();
 	//testModel();
 
-	test3ds();
+	//test3ds();
 
-	testObj();
+	//testObj();
 
 	testFbx();
 
@@ -972,9 +972,8 @@ void WndRender::testFbx()
 {
 	ModelFbx* model = CREATE_NODE(ModelFbx);
 	model->load("Resource/fbx/LANCER_EVOLUTION/LANCEREVOX.FBX");
-	model->setPosition(200, -200);
 	model->setScale(200);
-	model->setRotationX(-90);
+	model->setRotationX(0);
 	this->getCanvas()->getRoot()->addChild(model);
 
 	RotateByAction* pRotateByAction = CREATE_ACTION(RotateByAction);

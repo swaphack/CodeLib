@@ -439,7 +439,6 @@
     <ClInclude Include="..\..\Lib\include\glew\glew.h" />
     <ClInclude Include="..\..\Lib\include\glew\glxew.h" />
     <ClInclude Include="..\..\Lib\include\glew\wglew.h" />
-    <ClInclude Include="..\..\Lib\include\gl\glew.h" />
     <ClInclude Include="..\..\Lib\include\jpeg\jconfig.h" />
     <ClInclude Include="..\..\Lib\include\jpeg\jdct.h" />
     <ClInclude Include="..\..\Lib\include\jpeg\jerror.h" />

@@ -13,6 +13,7 @@ namespace render
 		EMRF_NONE,
 		EMRF_3DS,	// 3ds
 		EMRF_OBJ,	// obj
+		EMRF_FBX,	// fbx
 	};
 	// 3dÄ£ÐÍ
 	class ModelDetail

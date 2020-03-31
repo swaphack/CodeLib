@@ -18,7 +18,7 @@ Model::~Model()
 	SAFE_DELETE(_modelDetail);
 }
 
-void Model::draw()
+void Model::drawSample()
 {
 	if (_modelDetail == nullptr)
 	{
@@ -62,6 +62,9 @@ void Model::draw()
 		auto faces = pMesh->getFaces();
 		for (auto item1 : faces)
 		{
+			GLMatrix::pushMatrix();
+			GLMatrix::multMatrix(item1.second->getMatrix().transpose());
+
 			auto pFace = item1.second;
 			auto nMatID = pFace->getMaterial();
 			auto pMat = _modelDetail->getMaterial(nMatID);
@@ -85,6 +88,8 @@ void Model::draw()
 				GLVertex::drawElements(ShapeMode::TRIANGLES, indices.size, IndexDataType::UNSIGNED_SHORT, indices.value);
 			}
 			GLState::disable(EnableModel::TEXTURE_2D);
+
+			GLMatrix::popMatrix();
 		}
 
 		GLState::disableClientState(ClientArrayType::VERTEX_ARRAY);
