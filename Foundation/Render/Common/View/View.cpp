@@ -71,6 +71,8 @@ void View::applyConfig()
 
 	GLState::enable(EnableModel::DEPTH_TEST);
 	GLFragment::testDepth(DepthFunction::LEQUAL);
+	GLPrimitive::setCullFace(CullFaceMode::BACK);
+	GLPrimitive::setFrontFace(FrontFaceDirection::CCW);
 
 	GLDebug::showError();
 }

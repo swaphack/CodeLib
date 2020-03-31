@@ -15,8 +15,8 @@ namespace render
 		virtual ~MultiFaceCube();
 	public:
 		virtual bool init();
-	protected:
-		virtual void drawSample();
+
+		virtual void draw();
 	public:
 		// 设置单面的纹理帧
 		void setFaceFrame(ModelFace face, TexFrame* frame);

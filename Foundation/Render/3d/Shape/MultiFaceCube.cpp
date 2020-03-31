@@ -38,7 +38,7 @@ bool MultiFaceCube::init()
 	return true;
 }
 
-void MultiFaceCube::drawSample()
+void MultiFaceCube::draw()
 {
 	for (int i = 0; i < CUBE_FACE_COUNT; i++)
 	{

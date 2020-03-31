@@ -123,47 +123,30 @@ void Camera::visit()
 {
 	ASSERT(_mainCamera != nullptr);
 
+	this->notifyEvents();
+
 	GLMatrix::applyProjection();
 
-	//GLMatrix::pushMatrix();
-	GLMatrix::loadIdentity();
-	/*
-	if (!this->isRelativeWithParent())
-	{
-		GLMatrix::loadIdentity();
-	}	
-	*/
-	
-
-	if (_bUseMatrix)
-	{
-		PRINT("Matrix:\n%s\n", _mat44.toString().c_str());
-		GLMatrix::multMatrix(_mat44.transpose());
-	}
-	else
-	{
-		GLMatrix::translate(_obPosition);
-		GLMatrix::scale(_scale);
-		GLMatrix::rotate(_rotation);
-	}
-
 	this->updateView();
+	
+	this->updateTranform();
 
 	//GLMatrix::popMatrix();
 }
 
 void Camera::setMainCamera(CameraDimensions d)
 {
-	SAFE_DELETE(_mainCamera);
+	SAFE_RELEASE(_mainCamera);
 
 	if (d == ED_2D)
 	{
-		_mainCamera = new Camera2D;
+		_mainCamera = CREATE_NODE(Camera2D);
 	}
 	else if (d == ED_3D)
 	{
-		_mainCamera = new Camera3D;
+		_mainCamera = CREATE_NODE(Camera3D);
 	}
+	SAFE_RETAIN(_mainCamera);
 }
 
 void Camera::updateView()
@@ -200,6 +183,8 @@ Camera3D::Camera3D()
 {
 	this->setDimensions(ED_3D);
 	this->setParams(0, 1, 0, 1, 0.1f, 100);
+
+	//this->setParams(-0.5f, 0.5f, -0.5f, 0.5f, 0.1f, 100);
 }
 
 Camera3D::~Camera3D()

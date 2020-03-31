@@ -336,7 +336,7 @@ void Node::updateTranform()
 
 	if (_bUseMatrix)
 	{
-		PRINT("Matrix:\n%s\n", _mat44.toString().c_str());
+		//PRINT("Node Matrix:\n%s\n", _mat44.toString().c_str());
 		GLMatrix::multMatrix(_mat44.transpose());
 	}
 	else
@@ -454,13 +454,13 @@ void Node::calRealSpaceByMatrix()
 	math::Matrix44 matTranslate;
 	matTranslate.setTranslate(_obPosition);
 
-	printf("Scale\n%s\n", matScale.toString().c_str());
-	printf("Rotate\n%s\n", matRotate.toString().c_str());
-	printf("Translate\n%s\n", matTranslate.toString().c_str());
+	//PRINT("Scale\n%s\n", matScale.toString().c_str());
+	//PRINT("Rotate\n%s\n", matRotate.toString().c_str());
+	//PRINT("Translate\n%s\n", matTranslate.toString().c_str());
 
 	_mat44 = matTranslate * matRotate * matScale;
 
-	printf("mat\n%s\n", _mat44.toString().c_str());
+	//PRINT("mat\n%s\n", _mat44.toString().c_str());
 
 	Node* temp = this;
 	std::vector<math::Matrix44> vecMat;

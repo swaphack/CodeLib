@@ -50,11 +50,6 @@ bool CubeModel::init()
 	return true;
 }
 
-void CubeModel::drawSample()
-{
-	Model::drawSample();
-}
-
 void CubeModel::onCubeChange()
 {
 	auto pMesh = _modelDetail->getMesh(0);

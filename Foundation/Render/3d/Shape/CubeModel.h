@@ -15,8 +15,6 @@ namespace render
 		virtual ~CubeModel();
 	public:
 		virtual bool init();
-	protected:
-		virtual void drawSample();
 	public:
 		// …Ë÷√Œ∆¿Ì
 		void setTexture(const std::string& name, Texture* texture);

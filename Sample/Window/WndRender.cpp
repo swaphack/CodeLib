@@ -30,6 +30,7 @@ void WndRender::show()
 		math::Size size = this->getCanvas()->getView()->getFrameSize();
 		this->getCanvas()->getRoot()->setAnchorPoint(0.5f, 0.5f, 0);
 		this->getCanvas()->getRoot()->setVolume(size);
+		Camera::getMainCamera()->setPosition(size.getWidth() * 0.5f, size.getHeight() * 0.5f);
 	}
 	
 // 	ImageDefine imageDefine = {"Resource/Image/world.jpg", EIF_JPEG};
@@ -77,13 +78,13 @@ void WndRender::show()
 	//testSphereModel();
 	//testModel();
 
-	//test3ds();
+	test3ds();
 
-	//testObj();
+	testObj();
 
-	//testFbx();
+	testFbx();
 
-	this->testCubeModel();
+	//this->testCubeModel();
 	//this->testMultiFaceCube();
 
 	//testProgram();
@@ -129,18 +130,19 @@ void WndRender::testCubeModel()
 	CubeModel* pModel = CREATE_NODE(CubeModel);
 	pModel->setTexture("face", pTexture);
 	pModel->setAnchorPoint(math::Vector3(0.5f, 0.5f, 0.5f));
-	pModel->setPosition(100, 100, 0);
+	pModel->setPosition(100, 100, 15);
 	pModel->setVolume(200, 200, 200);
 	this->getCanvas()->getRoot()->addChild(pModel);
-
+	/*
 	RotateByAction* pRotateByAction = CREATE_ACTION(RotateByAction);
-	pRotateByAction->setRotation(180, 180, 0);
+	pRotateByAction->setRotation(0, 180, 0);
 	pRotateByAction->setDuration(10);
 
 	RepeateForeverAction* pRepeateAction = CREATE_ACTION(RepeateForeverAction);
 	pRepeateAction->setAction(pRotateByAction);
 
 	pModel->getActionProxy()->runAction(pRepeateAction);
+	*/
 }
 
 void WndRender::testSphereModel()
@@ -863,7 +865,7 @@ void WndRender::test3ds()
 	Model3DS* model = CREATE_NODE(Model3DS);
 	model->load("Resource/3DS/Bld_38.3ds");
 	model->setScale(100);
-	model->setPosition(100, 100, 0);
+	model->setPosition(-100, -100, 0);
 	model->setVolume(400, 400, 400);
 	this->getCanvas()->getRoot()->addChild(model);
 
@@ -888,7 +890,7 @@ void WndRender::testObj()
 	ModelObj* model = CREATE_NODE(ModelObj);
 	model->load("Resource/Obj/Skull_v3_L2/12140_Skull_v3_L2.obj");
 	model->setScale(50);
-	model->setPosition(100, 100, 0);
+	model->setPosition(-200, 200, 0);
 	model->setVolume(400, 400, 400);
 	this->getCanvas()->getRoot()->addChild(model);
 
@@ -970,8 +972,8 @@ void WndRender::testFbx()
 {
 	ModelFbx* model = CREATE_NODE(ModelFbx);
 	model->load("Resource/fbx/LANCER_EVOLUTION/LANCEREVOX.FBX");
-	model->setPosition(512, 384);
-	model->setScale(300);
+	model->setPosition(200, -200);
+	model->setScale(200);
 	model->setRotationX(-90);
 	this->getCanvas()->getRoot()->addChild(model);
 
