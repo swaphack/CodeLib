@@ -1,5 +1,7 @@
 #include "Scene.h"
 #include "Common/View/View.h"
+#include "Graphic/import.h"
+
 using namespace render;
 
 Scene::Scene() 
@@ -20,4 +22,12 @@ bool Scene::init()
 	}
 
 	return true;
+}
+
+void Scene::visit()
+{
+	// Ä£ÐÍ¾ØÕó
+	GLMatrix::applyModelView();
+
+	Node::visit();
 }

@@ -251,12 +251,7 @@ void Node::visit()
 	}
 
 	this->notifyEvents();	
-
-	// Ä£ĞÍ¾ØÕó
-	GLMatrix::applyModelView();
-
-	GLMatrix::pushMatrix();
-	
+		
 	this->updateTranform();
 
 	if (_children.count() == 0)
@@ -280,7 +275,7 @@ void Node::visit()
 		}
 	}
 
-	GLMatrix::popMatrix();
+	this->inverseTranform();
 }
 
 ActionProxy* Node::getActionProxy()
@@ -328,15 +323,14 @@ void Node::draw()
 
 void Node::updateTranform()
 {
-
 	if (!this->isRelativeWithParent())
 	{
+		GLMatrix::pushMatrix();
 		GLMatrix::loadIdentity();
 	}
 
 	if (_bUseMatrix)
 	{
-		//PRINT("Node Matrix:\n%s\n", _mat44.toString().c_str());
 		GLMatrix::multMatrix(_mat44.transpose());
 	}
 	else
@@ -347,6 +341,37 @@ void Node::updateTranform()
 	}
 
 	GLDebug::showError();
+}
+
+void Node::inverseTranform()
+{
+	math::Vector3 pos = _obPosition * -1;
+	math::Vector3 rotate = _rotation * -1;
+	math::Vector3 scale(1 / _scale.getX(), 1 / _scale.getY(), 1 / _scale.getZ());
+
+	if (_bUseMatrix)
+	{
+		math::Matrix44 matScale;
+		matScale.setScale(scale);
+		math::Matrix44 matRotate;
+		matRotate.setRotate(rotate);
+		math::Matrix44 matTranslate;
+		matTranslate.setTranslate(pos);
+
+		math::Matrix44 mat44 = matTranslate * matRotate * matScale;
+		GLMatrix::multMatrix(mat44.transpose());
+	}
+	else
+	{
+		GLMatrix::translate(pos);
+		GLMatrix::scale(scale);
+		GLMatrix::rotate(rotate);
+	}
+
+	if (!this->isRelativeWithParent())
+	{
+		GLMatrix::popMatrix();
+	}
 }
 
 void Node::notifyEvents()
@@ -550,3 +575,5 @@ void Node::notify(int id)
 	_notify->addMark(id);
 	setDirty(true);
 }
+
+

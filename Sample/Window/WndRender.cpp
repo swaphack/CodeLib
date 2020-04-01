@@ -16,14 +16,13 @@ WndRender::~WndRender()
 
 void WndRender::show()
 {
-	CameraDimensions d = ED_3D;
+	CameraDimensions d = ED_2D;
 	this->getCanvas()->setDimensions(d);
 	if (d == ED_2D)
 	{
 		math::Size size = this->getCanvas()->getView()->getFrameSize();
 		this->getCanvas()->getRoot()->setAnchorPoint(0, 0, 0);
 		this->getCanvas()->getRoot()->setVolume(size);
-		//this->getCanvas()->getRoot()->setPosition(-size.getWidth(), -size.getHeight());
 	}
 	else
 	{
@@ -49,8 +48,8 @@ void WndRender::show()
 	//testCamera();
 	//testEditBox();
 
-	// have bug
-	//testImages();
+	// bug fixed
+	testImages();
 
 	//testString();
 	//
@@ -340,7 +339,7 @@ void WndRender::testImages()
 {
 	CtrlImage* pImage = CREATE_NODE(CtrlImage);
 	pImage->setImagePath("Resource/Image/NeHe.png");
-	pImage->setPosition(512, 400, 0);
+	pImage->setPosition(512, 384, 0);
 	pImage->setScale(1, 1, 1);
 	pImage->setRotation(0, 0, 30);
 	this->getCanvas()->getRoot()->addChild(pImage);

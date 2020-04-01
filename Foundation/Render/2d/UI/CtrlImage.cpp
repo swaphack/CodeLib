@@ -15,11 +15,6 @@ CtrlImage::~CtrlImage()
 
 }
 
-void CtrlImage::draw()
-{
-	CtrlFrame::draw();
-}
-
 void CtrlImage::setImagePath(const char* path, ImageFormat format /*= EIF_PNG*/)
 {
 	_imageDefine.filepath = path;

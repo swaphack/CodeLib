@@ -11,7 +11,6 @@ namespace render
 		CtrlImage();
 		virtual ~CtrlImage();
 	public:
-		virtual void draw();
 		// 设置图片路径
 		void setImagePath(const char* path, ImageFormat format = EIF_PNG);
 		// 获取图片路径

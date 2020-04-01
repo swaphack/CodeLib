@@ -1,7 +1,6 @@
 #include "Camera.h"
 
-#include "ext-config.h"
-#include "../Tool/import.h"
+#include "Common/Tool/import.h"
 #include "Graphic/import.h"
 
 using namespace render;
@@ -69,8 +68,6 @@ Camera::Camera()
 	_scale.set(1.0f, 1.0f, 1.0f);
 
 	_dimensions = ED_NONE;
-
-	this->setRelativeWithParent(false);
 }
 
 Camera::~Camera()
@@ -121,8 +118,6 @@ void Camera::setDimensions(CameraDimensions d)
 
 void Camera::visit()
 {
-	ASSERT(_mainCamera != nullptr);
-
 	this->notifyEvents();
 
 	GLMatrix::applyProjection();
@@ -132,6 +127,8 @@ void Camera::visit()
 	this->updateTranform();
 
 	//GLMatrix::popMatrix();
+
+	this->inverseTranform();
 }
 
 void Camera::setMainCamera(CameraDimensions d)
@@ -150,6 +147,29 @@ void Camera::setMainCamera(CameraDimensions d)
 }
 
 void Camera::updateView()
+{
+
+}
+
+void Camera::updateTranform()
+{
+	GLMatrix::loadIdentity();
+
+	if (_bUseMatrix)
+	{
+		GLMatrix::multMatrix(_mat44.transpose());
+	}
+	else
+	{
+		GLMatrix::translate(_obPosition);
+		GLMatrix::scale(_scale);
+		GLMatrix::rotate(_rotation);
+	}
+
+	GLDebug::showError();
+}
+
+void Camera::inverseTranform()
 {
 
 }

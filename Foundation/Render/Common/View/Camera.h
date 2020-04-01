@@ -47,6 +47,10 @@ namespace render
 		virtual void visit();
 	protected:
 		virtual void updateView();
+		// 更新空间矩阵
+		virtual void updateTranform();
+		// 翻转空间矩阵
+		virtual void inverseTranform();
 	protected:
 		// 设置维度
 		void setDimensions(CameraDimensions d);

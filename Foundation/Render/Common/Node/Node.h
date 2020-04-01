@@ -141,8 +141,10 @@ namespace render
 		// 着色器程序
 		ShaderProgram* getProgram();
 	protected:
-		// 更新空间位置
+		// 更新空间矩阵
 		virtual void updateTranform();
+		// 翻转空间矩阵
+		virtual void inverseTranform();
 	protected:
 		void notifyEvents();
 		void notify(int id);

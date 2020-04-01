@@ -13,5 +13,7 @@ namespace render
 		virtual ~Scene();
 	public:
 		virtual bool init();
+
+		virtual void visit();
 	};
 }
