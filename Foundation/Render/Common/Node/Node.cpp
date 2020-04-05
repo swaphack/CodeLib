@@ -331,7 +331,7 @@ void Node::updateTranform()
 
 	if (_bUseMatrix)
 	{
-		GLMatrix::multMatrix(_mat44.transpose());
+		GLMatrix::multMatrix(_mat44);
 	}
 	else
 	{
@@ -345,24 +345,16 @@ void Node::updateTranform()
 
 void Node::inverseTranform()
 {
-	math::Vector3 pos = _obPosition * -1;
-	math::Vector3 rotate = _rotation * -1;
-	math::Vector3 scale(1 / _scale.getX(), 1 / _scale.getY(), 1 / _scale.getZ());
-
 	if (_bUseMatrix)
 	{
-		math::Matrix44 matScale;
-		matScale.setScale(scale);
-		math::Matrix44 matRotate;
-		matRotate.setRotate(rotate);
-		math::Matrix44 matTranslate;
-		matTranslate.setTranslate(pos);
-
-		math::Matrix44 mat44 = matTranslate * matRotate * matScale;
-		GLMatrix::multMatrix(mat44.transpose());
+		GLMatrix::multMatrix(_matInverse44);
 	}
 	else
 	{
+		math::Vector3 pos = _obPosition * -1;
+		math::Vector3 rotate = _rotation * -1;
+		math::Vector3 scale(1 / _scale.getX(), 1 / _scale.getY(), 1 / _scale.getZ());
+
 		GLMatrix::translate(pos);
 		GLMatrix::scale(scale);
 		GLMatrix::rotate(rotate);
@@ -483,7 +475,9 @@ void Node::calRealSpaceByMatrix()
 	//PRINT("Rotate\n%s\n", matRotate.toString().c_str());
 	//PRINT("Translate\n%s\n", matTranslate.toString().c_str());
 
-	_mat44 = matTranslate * matRotate * matScale;
+	math::Matrix44 mat44 = matTranslate * matRotate * matScale;
+	_mat44 = mat44.getTranspose();
+	_matInverse44 = _mat44.getInverse();
 
 	//PRINT("mat\n%s\n", _mat44.toString().c_str());
 

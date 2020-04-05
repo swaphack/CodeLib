@@ -40,6 +40,14 @@ namespace math
 		*	矩阵扩展系数
 		*/
 		Matrix& operator*=(float k);
+		/**
+		*	矩阵扩展系数
+		*/
+		Matrix operator*(float k);
+		/**
+		*	矩阵扩展系数
+		*/
+		Matrix operator/(float k);
 	public:
 		/**
 		*	复制矩阵元素
@@ -48,6 +56,22 @@ namespace math
 		/**
 		*	获取转置矩阵
 		*/
-		Matrix transpose() const;
+		Matrix getTranspose() const;
+		/**
+		*	行列式的值
+		*/
+		float getDetValue() const;
+		/**
+		*	余子式
+		*/
+		Matrix getMinor(int32_t i, int32_t j) const;
+		/**
+		*	伴随矩阵
+		*/
+		Matrix getAdjoint() const;
+		/**
+		*	逆矩阵
+		*/
+		Matrix getInverse() const;
 	};
 }

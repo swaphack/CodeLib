@@ -22,14 +22,14 @@ void handNode(FileFbx* file, FbxNode* node)
 		return;
 	}
 
-	PRINT("Node Name:%s Type:%s\n", node->GetName(), node->GetTypeName());
+	//PRINT("Node Name:%s Type:%s\n", node->GetName(), node->GetTypeName());
 
 	handNodeMesh(file, node);
 	handNodeMaterial(file, node);
 	
 	int nCount = node->GetChildCount();
 
-	PRINT("Node Child Count:%d\n", nCount);
+	//PRINT("Node Child Count:%d\n", nCount);
 	for (int i = 0; i < nCount; i++)
 	{
 		handNode(file, node->GetChild(i));
@@ -446,6 +446,8 @@ void handMaterialTexture(FileFbx* file, FbxSurfaceMaterial* mat, int i, int text
 	}
 }
 
+static FbxManager* lSdkManager = nullptr;
+
 
 FileFbx::FileFbx()
 {
@@ -463,7 +465,11 @@ void FileFbx::load(const std::string& filename)
 	std::string strFilepath = G_FILEPATH->getFilePath(filename);
 
 	// Initialize the SDK manager. This object handles all our memory management.
-	FbxManager* lSdkManager = FbxManager::Create();
+	if (lSdkManager == nullptr)
+	{
+		lSdkManager = FbxManager::Create();
+	}
+	
 
 	// Create the IO settings object.
 	FbxIOSettings *ios = FbxIOSettings::Create(lSdkManager, IOSROOT);

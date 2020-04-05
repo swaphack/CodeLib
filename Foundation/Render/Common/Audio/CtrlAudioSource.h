@@ -56,8 +56,8 @@ namespace render
 		virtual int getInitMode();
 	protected:
 		// ÉùÒô
-		FMOD::Sound* _sound;
+		FMOD::Sound* _sound = nullptr;
 		// ÆµµÀµ÷Õû
-		FMOD::Channel* _channel;
+		FMOD::Channel* _channel = nullptr;
 	};
 }

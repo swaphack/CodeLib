@@ -23,13 +23,14 @@ void WndRender::show()
 		math::Size size = this->getCanvas()->getView()->getFrameSize();
 		this->getCanvas()->getRoot()->setAnchorPoint(0, 0, 0);
 		this->getCanvas()->getRoot()->setVolume(size);
+		Camera::getMainCamera()->setPosition(-size.getWidth() * 0.5f, -size.getHeight() * 0.5f);
 	}
 	else
 	{
 		math::Size size = this->getCanvas()->getView()->getFrameSize();
 		this->getCanvas()->getRoot()->setAnchorPoint(0.5f, 0.5f, 0);
 		this->getCanvas()->getRoot()->setVolume(size);
-		Camera::getMainCamera()->setPosition(size.getWidth() * 0.5f, size.getHeight() * 0.5f);
+		//Camera::getMainCamera()->setPosition(size.getWidth() * 0.5f, size.getHeight() * 0.5f);
 	}
 	
 // 	ImageDefine imageDefine = {"Resource/Image/world.jpg", EIF_JPEG};
@@ -39,8 +40,8 @@ void WndRender::show()
 	//testMoveImage();
 	//testClock();
 	//testText();
-	//testMask();
-	//testMedia();
+	testMask();
+	testMedia();
 	
 	//testAnimation();
 	//testParticle();
@@ -49,7 +50,7 @@ void WndRender::show()
 	//testEditBox();
 
 	// bug fixed
-	testImages();
+	//testImages();
 
 	//testString();
 	//
@@ -71,7 +72,7 @@ void WndRender::show()
 	//testAudio3D();
 	//testLayout();
 	//
-	addLight();
+	//addLight();
 	//testFog();
 	//testCubeModel();
 	//testSphereModel();
@@ -81,12 +82,17 @@ void WndRender::show()
 
 	//testObj();
 
-	testFbx();
+	//testFbx();
 
 	//this->testCubeModel();
 	//this->testMultiFaceCube();
 
 	//testProgram();
+
+	//testMedia();
+	testImages();
+
+	//testMatrix();
 }
 
 void WndRender::testMoveImage()
@@ -764,7 +770,7 @@ void WndRender::testAudio3D()
 	this->getCanvas()->getRoot()->addChild(pSrcAudio);
 
 	DrawNode* pSrcDrawNode = CREATE_NODE(DrawNode);
-	pSrcDrawNode->setColor(Color3B(255, 0, 0));
+	pSrcDrawNode->setColor(Color3B(255, 255, 0));
 	pSrcDrawNode->setWidth(100);
 	pSrcDrawNode->setDrawMode(ShapeMode::POINTS);
 	pSrcDrawNode->appendPoint(math::Vector3());
@@ -998,4 +1004,35 @@ void WndRender::testProgram()
 	pProgram->load("Resource/shader/gray.vsh", "Resource/shader/gray.fsh");
 	pProgram->link();
 	pImage->setProgram(pProgram);
+}
+
+void WndRender::testMatrix()
+{
+	float data2x2[4] = {
+		1, 2,
+		-1, -3
+	};
+
+
+	math::Matrix mat22(data2x2, 2, 2);
+	PRINT("src:\n%s\n", mat22.toString().c_str());
+	math::Matrix inverse22 = mat22.getInverse();
+	PRINT("transpose:\n%s\n", inverse22.toString().c_str());
+	math::Matrix mul22 = mat22 * inverse22;
+	PRINT("mul:\n%s\n", mul22.toString().c_str());
+
+	float data3x3[9] = {
+		1, 2, 3,
+		3, 2, 1,
+		1, 4, 5
+	};
+
+
+	math::Matrix mat33(data3x3, 3, 3);
+	PRINT("src:\n%s\n", mat33.toString().c_str());
+	math::Matrix inverse33 = mat33.getInverse();
+	PRINT("transpose:\n%s\n", inverse33.toString().c_str());
+
+	math::Matrix mul33 = mat33 * inverse33;
+	PRINT("mul:\n%s\n", mul33.toString().c_str());
 }

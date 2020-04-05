@@ -59,107 +59,18 @@ void CubeModel::onCubeChange()
 	}
 
 	TextureTool::setTexture3DVertexts(&_texCube, _position, _volume, _anchor);
-
-	math::Vector3 coords[8];
-	coords[0] = _texCube.front.leftDown.point;
-	coords[1] = _texCube.front.rightDown.point;
-	coords[2] = _texCube.front.rightUp.point;
-	coords[3] = _texCube.front.leftUp.point;
-
-	coords[4] = _texCube.back.rightDown.point;
-	coords[5] = _texCube.back.leftDown.point;
-	coords[6] = _texCube.back.leftUp.point;
-	coords[7] = _texCube.back.rightUp.point;
-
-	float vertexes[24] = { 0 };
-	for (int i = 0; i < 8; i++)
-	{
-		memcpy(vertexes + i * 3, coords[i].getValue(), 3 * sizeof(float));
-	}
-
-	uint16_t indexes[36] = {
-		//前面
-		0,1,2,
-		0,2,3,
-		// 后面
-		4,6,5,
-		4,7,6,
-		//左面
-		0,3,4,
-		4,3,7,
-		// 右面
-		1,5,2,
-		5,6,2,
-		// 顶面
-		3,2,7,
-		2,6,7,
-		// 底面
-		4, 5, 0,
-		0, 5, 1,
-	};
-
-	float uv[16] = {
-		0, 0,
-		1, 0,
-		1, 1,
-		0, 1,
-		1, 0,
-		0, 0,
-		0, 1,
-		1, 1
-	};
-
-	float normal[24] = {
-		0, 0, 1,
-		0, 0, 1,
-		0, 0, 1,
-		0, 0, 1,
-		0, 0, 1,
-		0, 0, 1,
-		0, 0, 1,
-		0, 0, 1,
-	};
 	
-	pMesh->setVertices(24, vertexes);
-	pMesh->setUVs(16, uv, 2);
-	pMesh->setNormals(24, normal);
+	pMesh->setVertices(24, _texCube.vertices);
+	pMesh->setUVs(16, _texCube.uvs, 2);
+	pMesh->setNormals(24, _texCube.normals);
 	for (int i = 0; i < CUBE_FACE_COUNT; i++)
 	{
 		auto pFace = pMesh->getFace(i);
 		if (pFace)
 		{
-			pFace->setIndices(6, indexes + i * CUBE_FACE_COUNT);
+			pFace->setIndices(6, _texCube.indices + i * CUBE_FACE_COUNT);
 		}
 	}
-}
-
-TextureRect* CubeModel::getTextureRect(ModelFace face)
-{
-	switch (face)
-	{
-	case EMF_FRONT:
-		return &_texCube.front;
-		break;
-	case EMF_BACK:
-		return &_texCube.back;
-		break;
-	case EMF_LEFT:
-		return &_texCube.left;
-		break;
-	case EMF_RIGHT:
-		return &_texCube.right;
-		break;
-	case EMF_TOP:
-		return &_texCube.top;
-		break;
-	case EMF_BOTTOM:
-		return &_texCube.bottom;
-		break;
-	default:
-		break;
-	}
-
-	return nullptr;
 }
 
 void CubeModel::setTexture(const std::string& name, Texture* texture)

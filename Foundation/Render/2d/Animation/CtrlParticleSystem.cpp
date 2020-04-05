@@ -156,11 +156,11 @@ ParticleNode* CtrlParticleSystem::createParticle()
 	float ry = 0;
 	float rz = 0;
 
-	x = sys::Random::getNumber(0,2);
-	y = sys::Random::getNumber(0, 2);
+	x = sys::Random::getNumber(0.0f, 2.0f);
+	y = sys::Random::getNumber(0.0f, 2.0f);
 	z = 0;
 
-	life = sys::Random::getNumber(0, 100);
+	life = sys::Random::getNumber(0.0f, 100.0f);
 
 	r = sys::Random::getNumber(0.0f, 25.0f / 255);
 	g = sys::Random::getNumber(0.0f, 25.0f / 255);

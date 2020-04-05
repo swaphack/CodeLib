@@ -78,7 +78,5 @@ void CtrlAnimation::updateSelf(float interval)
 
 void CtrlAnimation::onFrameChange()
 {
-	setDirty(true);
-
-	_notify->addMark(ENP_ANIMATION_FRAME);
+	this->notify(ENP_ANIMATION_FRAME);
 }

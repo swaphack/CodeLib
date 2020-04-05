@@ -20,7 +20,7 @@ namespace render
 		// 是否肮脏
 		bool isDirty();
 	private:
-		bool _bDirty;
+		bool _bDirty = false;
 	};
 
 	// 用于颜色设置
@@ -58,7 +58,7 @@ namespace render
 		uint8_t getOpacity();
 	protected:
 		// 不透明度
-		uint8_t _opacity;
+		uint8_t _opacity = 255;
 	};
 
 	// 混合

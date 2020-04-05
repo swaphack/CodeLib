@@ -22,8 +22,3 @@ Matrix22::~Matrix22()
 {
 
 }
-
-float Matrix22::getValue()
-{
-	return _values[0] * _values[3] - _values[1] * _values[2];
-}

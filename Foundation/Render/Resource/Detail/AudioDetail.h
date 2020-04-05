@@ -28,18 +28,18 @@ namespace render
 		void setSamples(int samples);
 	private:
 		// 数据
-		uint8_t* _data;
+		uint8_t* _data = nullptr;
 		// 大小
-		int _size;
+		int _size = 0;
 		// 通道数
-		int _channels;
+		int _channels = 0;
 		// 通道布局
-		int64_t _channelLayout;
+		int64_t _channelLayout = 0;
 		// 格式
-		int _format;
+		int _format = 0;
 		// 采样频率
-		int _frequency;
+		int _frequency = 0;
 		// 采样数
-		int _samples;
+		int _samples = 0;
 	};
 }

@@ -315,6 +315,9 @@
     <ClCompile Include="Graphic\GLAPI\GLDisplayList.cpp">
       <Filter>Graphic\GLAPI</Filter>
     </ClCompile>
+    <ClCompile Include="Common\struct\texture_common.cpp">
+      <Filter>Common\struct</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Common\Node\import.h">

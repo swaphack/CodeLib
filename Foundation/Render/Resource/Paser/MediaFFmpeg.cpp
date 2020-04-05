@@ -44,14 +44,24 @@ void createVideoImage(const AVFrame* frame, AVCodecContext* pCodecContext, Video
 
 	av_frame_free(&destFrame);
 
+	int mid = destSize / 2;
+	for (int i = 0; i < mid; i++)
+	{
+		uint8_t c = destPixels[i];
+		destPixels[i] = destPixels[destSize - i - 1];
+		destPixels[destSize - i - 1] = c;
+	}
+
 	image->init(glFormat, glInternalFormat, destPixels, width, height);
 }
 
 void createVideoAudio(const AVFrame* frame, AVCodecContext* pCodecContext, VideoAudioClip* audio)
 {
 	int frameBufSize = av_samples_get_buffer_size(NULL, pCodecContext->channels, frame->nb_samples, pCodecContext->sample_fmt, 1);
+
 	int eachChannelSize = frame->linesize[0];
 	uint8_t* frameBuf = new uint8_t[frameBufSize];
+	
 	for (int ch = 0; ch < pCodecContext->channels; ch++)
 	{
 		for (int i = 0; i < frame->nb_samples; i++)
@@ -60,6 +70,7 @@ void createVideoAudio(const AVFrame* frame, AVCodecContext* pCodecContext, Video
 		}
 	}
 	
+	//memcpy(frameBuf, frame->data[0], frameBufSize* sizeof(char));
 
 	FMOD_SOUND_FORMAT format = FMOD_SOUND_FORMAT_NONE;
 	if (frame->format == AV_SAMPLE_FMT_U8 || frame->format == AV_SAMPLE_FMT_U8P)
@@ -83,7 +94,7 @@ void createVideoAudio(const AVFrame* frame, AVCodecContext* pCodecContext, Video
 		format = FMOD_SOUND_FORMAT_BITSTREAM;
 	}
 
-	audio->init(frameBuf, frameBufSize, pCodecContext->channels, 1, format, frame->sample_rate, frame->nb_samples);
+	audio->init(frameBuf, frameBufSize, pCodecContext->channels, pCodecContext->channel_layout, format, frame->sample_rate, frame->nb_samples);
 }
 
 void createVideoTitle(const AVSubtitle* subTitle, AVCodecContext* pCodecContext, std::string* title)

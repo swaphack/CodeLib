@@ -201,6 +201,8 @@ namespace render
 		bool _bUseMatrix = true;
 		// 相对于父节点的矩阵
 		math::Matrix44 _mat44;
+		// 逆矩阵
+		math::Matrix44 _matInverse44;
 		// 实际在世界坐标系中的矩阵
 		math::Matrix44 _realMat44;
 		// 着色器

@@ -13,10 +13,8 @@ namespace render
 	public:
 		MultiFaceCube();
 		virtual ~MultiFaceCube();
-	public:
-		virtual bool init();
-
-		virtual void draw();
+	protected:
+		virtual void drawSample();
 	public:
 		// 设置单面的纹理帧
 		void setFaceFrame(ModelFace face, TexFrame* frame);
@@ -32,6 +30,6 @@ namespace render
 		// 法线
 		math::Vector3 _normal[6];
 		// 纹理坐标
-		TextureCube _texCube;
+		TextureCubeVertex _texCube;
 	};
 }

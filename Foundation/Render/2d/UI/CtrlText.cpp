@@ -33,8 +33,7 @@ bool CtrlText::init()
 
 		math::Size size = math::Size(static_cast<float>(texture->getWidth()), static_cast<float>(texture->getHeight()));
 
-		if (isCounter())TextureTool::setTexture2DCounterCoords(&_texRect, size, _texFrame->getRect());
-		else TextureTool::setTexture2DCoords(&_texRect, size, _texFrame->getRect());
+		TextureTool::setTexture2DCoords(&_texRect, size, _texFrame->getRect());
 
 		math::Vector3 orgin = math::Vector3();
 		math::Volume volume = math::Volume(static_cast<float>(texture->getWidth()), static_cast<float>(texture->getHeight()));

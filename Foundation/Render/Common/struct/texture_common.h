@@ -19,61 +19,7 @@ namespace render
 		// 法线
 		math::Vector3 normal;
 
-		TextureVertex()
-		{
-			normal = math::Vector3(0, 0, 1);
-		}
-	};
-
-	// 矩形纹理 逆时针方向
-	struct TextureRect
-	{
-		// 左下角
-		TextureVertex leftDown;
-		// 右下角
-		TextureVertex rightDown;
-		// 右上角
-		TextureVertex rightUp;
-		// 左上角
-		TextureVertex leftUp;
-
-		TextureRect()
-		{
-			leftDown.coords = math::Vector3(0.0f, 0.0f, 0.0f);
-			rightDown.coords = math::Vector3(1.0f, 0.0f, 0.0f);
-			rightUp.coords = math::Vector3(1.0f, 1.0f, 0.0f);
-			leftUp.coords = math::Vector3(0.0f, 1.0f, 0.0f);
-		}
-
-	public:
-		void setNormal(const math::Vector3& normal)
-		{
-			leftDown.normal = normal;
-			rightDown.normal = normal;
-			rightUp.normal = normal;
-			leftUp.normal = normal;
-		}
-	};
-
-	// 立方体纹理
-	struct TextureCube
-	{
-		// 前面
-		TextureRect front;
-		// 背面
-		TextureRect back;
-		// 左面
-		TextureRect left;
-		// 右面
-		TextureRect right;
-		// 顶部
-		TextureRect top;
-		// 底部
-		TextureRect bottom;
-
-		TextureCube()
-		{
-		}
+		TextureVertex();
 	};
 
 	// 混合参数
@@ -82,18 +28,71 @@ namespace render
 		BlendingFactorSrc src = BlendingFactorSrc::SRC_ALPHA;
 		BlendingFactorDest dest = BlendingFactorDest::ONE_MINUS_SRC_ALPHA;
 
-		BlendParam()
-		{}
+		BlendParam();
 
-		BlendParam(BlendingFactorSrc src, BlendingFactorDest dest) :src(src), dest(dest)
-		{}
+		BlendParam(BlendingFactorSrc src, BlendingFactorDest dest);
 
-		BlendParam& operator=(const BlendParam& blend)
-		{
-			src = blend.src;
-			dest = blend.dest;
+		BlendParam& operator=(const BlendParam& blend);
+	};
 
-			return *this;
-		}
+	struct TextureRectVertex
+	{
+		float vertices[12] ;
+		float colors[16];
+		float uvs[8];
+		uint16_t indices[6];
+	public:
+		TextureRectVertex();
+	public:
+		void setLeftDownPoint(const math::Vector3& point);
+		void setRightDownPoint(const math::Vector3& point);
+		void setRightUpPoint(const math::Vector3& point);
+		void setLeftUpPoint(const math::Vector3& point);
+
+		void setLeftDownColor(const sys::Color4F& color);
+		void setRightDownColor(const sys::Color4F& color);
+		void setRightUpColor(const sys::Color4F& color);
+		void setLeftUpColor(const sys::Color4F& color);
+
+		void setLeftDownUV(const math::Vector2& point);
+		void setRightDownUV(const math::Vector2& point);
+		void setRightUpUV(const math::Vector2& point);
+		void setLeftUpUV(const math::Vector2& point);
+
+		void flipX();
+		void flipY();
+
+	};
+
+	// 立方体纹理
+	struct TextureCubeVertex
+	{
+		float vertices[24];
+		float colors[32];
+		float uvs[16];
+		uint16_t indices[36];
+		float normals[24];
+	public:
+		TextureCubeVertex();
+	public:
+		void setFrontLeftDownPoint(const math::Vector3& point);
+		void setFrontRightDownPoint(const math::Vector3& point);
+		void setFrontRightUpPoint(const math::Vector3& point);
+		void setFrontLeftUpPoint(const math::Vector3& point);
+
+		void setBackLeftDownPoint(const math::Vector3& point);
+		void setBackRightDownPoint(const math::Vector3& point);
+		void setBackRightUpPoint(const math::Vector3& point);
+		void setBackLeftUpPoint(const math::Vector3& point);
+
+		void setFrontLeftDownColor(const sys::Color4B& color);
+		void setFrontRightDownColor(const sys::Color4B& color);
+		void setFrontRightUpColor(const sys::Color4B& color);
+		void setFrontLeftUpColor(const sys::Color4B& color);
+
+		void setBackLeftDownColor(const sys::Color4B& color);
+		void setBackRightDownColor(const sys::Color4B& color);
+		void setBackRightUpColor(const sys::Color4B& color);
+		void setBackLeftUpColor(const sys::Color4B& color);
 	};
 }

@@ -31,15 +31,9 @@ MultiFaceCube::~MultiFaceCube()
 	}
 }
 
-bool MultiFaceCube::init()
+void MultiFaceCube::drawSample()
 {
-	CubeModel::init();
-
-	return true;
-}
-
-void MultiFaceCube::draw()
-{
+	/*
 	for (int i = 0; i < CUBE_FACE_COUNT; i++)
 	{
 		TextureRect* texRect = getTextureRect(static_cast<ModelFace>(i));
@@ -62,6 +56,8 @@ void MultiFaceCube::draw()
 			GLState::disable(EnableModel::TEXTURE_2D);
 		}
 	}
+
+	*/
 }
 
 
@@ -107,6 +103,7 @@ void MultiFaceCube::setAllFaceMaterial(MaterialDetail* mat)
 
 void MultiFaceCube::onCubeChange()
 {
+	/*
 	for (int i = 0; i < CUBE_FACE_COUNT; i++)
 	{
 		TexFrame* frame = _faceFrames[i];
@@ -118,4 +115,5 @@ void MultiFaceCube::onCubeChange()
 	}
 
 	TextureTool::setTexture3DVertexts(&_texCube, _position, _volume, _anchor);
+	*/
 }

@@ -411,7 +411,7 @@ bool CtrlAudioGeometryPolygon::setVertexes(const math::Vector3* vertexes, int nu
 		_vertexes.push_back(vertexes[i]);
 	}
 
-	_notify->addMark(ENP_GEOMETRY);
+	this->notify(ENP_GEOMETRY);
 
 	return true;
 }

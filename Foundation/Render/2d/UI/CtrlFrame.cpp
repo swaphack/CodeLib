@@ -12,7 +12,6 @@ using namespace render;
 CtrlFrame::CtrlFrame()
 :_bFlipX(false)
 , _bFlipY(false)
-, _bCounter(false)
 {
 	_texFrame = new TexFrame();
 }
@@ -120,16 +119,6 @@ bool CtrlFrame::isFlipY()
 	return _bFlipY;
 }
 
-bool CtrlFrame::isCounter()
-{
-	return _bCounter;
-}
-
-void CtrlFrame::setCounter(bool status)
-{
-	_bCounter = status;
-}
-
 void CtrlFrame::onTextureChange()
 {
 	const Texture* texture = _texFrame->getTexture();
@@ -140,8 +129,7 @@ void CtrlFrame::onTextureChange()
 
 	math::Size size = math::Size(static_cast<float>(texture->getWidth()), static_cast<float>(texture->getHeight()));
 
-	if (isCounter())TextureTool::setTexture2DCounterCoords(&_texRect, size, _texFrame->getRect());
-	else TextureTool::setTexture2DCoords(&_texRect, size, _texFrame->getRect());
+	TextureTool::setTexture2DCoords(&_texRect, size, _texFrame->getRect());
 
 	TextureTool::setTexture2DVertexts(&_texRect, math::Vector3(), _volume, _anchor);
 	TextureTool::setTexture2DFlip(&_texRect, _bFlipX, _bFlipY);

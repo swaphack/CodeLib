@@ -52,6 +52,10 @@ namespace math
 		*	值
 		*/
 		float getMagnitude() const;
+		/**
+		*	余子式
+		*/
+		Determinant getMinor(int32_t i, int32_t j) const;
 	public:
 		/**
 		*	获取逆序数
