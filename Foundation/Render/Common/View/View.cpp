@@ -56,10 +56,11 @@ void View::initView()
 
 void View::updateView()
 {
-	GLPixels::clearBuffer(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
-	GLPixels::clearColor(0, 0, 0, 1.0f);
+	GLPixels::clearColor(0, 0, 0, 0);
 	GLPixels::clearDepth(1.0f);
 	GLPixels::clearStencil(0);
+
+	GLPixels::clearBuffer(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 
 	GLDebug::showError();
 }

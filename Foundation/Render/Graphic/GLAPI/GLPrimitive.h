@@ -1,5 +1,8 @@
 #pragma once
+
 #include "macros.h"
+#include "mathlib.h"
+
 namespace render
 {
 	/**
@@ -29,7 +32,9 @@ namespace render
 		static void setPixelMap(PixelMap name, int size, const float* value);
 	public:
 		static void setRasterPos(float x, float y, float z = 0);
-		static void setRect(float x, float y, float w, float h);
+		static void setRect(float x1, float y1, float x2, float y2);
+		static void setRect(const math::Vector2& src, const math::Vector2& dest);
+		static void setRect(const math::Vector2& src, const math::Size& size);
 	public:
 		static void setPixelZoom(float x, float y);
 		static void drawPixels(float width, float heith, PixelFormat format, PixelType type, const void* value);

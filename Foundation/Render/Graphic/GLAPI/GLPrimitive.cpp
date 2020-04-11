@@ -67,9 +67,19 @@ void GLPrimitive::setRasterPos(float x, float y, float z /*= 0*/)
 	glRasterPos3f(x, y, z);
 }
 
-void GLPrimitive::setRect(float x, float y, float w, float h)
+void GLPrimitive::setRect(float x1, float y1, float x2, float y2)
 {
-	glRectf(x, y, w, h);
+	glRectf(x1, y1, x2, y2);
+}
+
+void GLPrimitive::setRect(const math::Vector2& src, const math::Vector2& dest)
+{
+	setRect(src.getX(), src.getY(), dest.getX(), dest.getY());
+}
+
+void GLPrimitive::setRect(const math::Vector2& src, const math::Size& size)
+{
+	setRect(src.getX(), src.getY(), src.getX() + size.getWidth(), src.getY() + size.getHeight());
 }
 
 void GLPrimitive::setPixelZoom(float x, float y)

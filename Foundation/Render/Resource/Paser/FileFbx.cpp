@@ -22,14 +22,14 @@ void handNode(FileFbx* file, FbxNode* node)
 		return;
 	}
 
-	PRINT("Node Name:%s Type:%s\n", node->GetName(), node->GetTypeName());
+	//PRINT("Node Name:%s Type:%s\n", node->GetName(), node->GetTypeName());
 
 	handNodeMesh(file, node);
 	handNodeMaterial(file, node);
 	
 	int nCount = node->GetChildCount();
 
-	PRINT("Node Child Count:%d\n", nCount);
+	//PRINT("Node Child Count:%d\n", nCount);
 	for (int i = 0; i < nCount; i++)
 	{
 		handNode(file, node->GetChild(i));

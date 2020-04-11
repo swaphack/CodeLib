@@ -53,8 +53,6 @@ void GLVertex::setColor(const sys::Color4F& value, float opacity)
 	float a = value.alpha * opacity;
 
 	setColor(r, g, b, a);
-
-	setColor(value.red * opacity, value.green* opacity, value.blue* opacity, value.alpha* opacity);
 }
 
 void GLVertex::setColor(const sys::Color3B& value, uint8_t opacity)
