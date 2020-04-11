@@ -55,8 +55,8 @@ namespace render
 		void setTexFrame(TexFrame* frame);
 	private:
 		// Çò°ë¾¶
-		float _radius;
-		float _obRadius;
-		TexFrame* _frame;
+		float _radius = 1;
+		float _obRadius = 1;
+		TexFrame* _frame = nullptr;
 	};
 }

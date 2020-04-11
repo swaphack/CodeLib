@@ -27,8 +27,6 @@ BlendParam::BlendParam()
 //////////////////////////////////////////////////////////////////////////
 TextureRectVertex::TextureRectVertex()
 {
-	memset(colors, 1, 16 * sizeof(float));
-
 	uvs[0] = 0; uvs[1] = 0;
 	uvs[2] = 1; uvs[3] = 0;
 	uvs[4] = 1; uvs[5] = 1;
@@ -36,6 +34,11 @@ TextureRectVertex::TextureRectVertex()
 
 	indices[0] = 0; indices[1] = 1; indices[2] = 2;
 	indices[3] = 0; indices[4] = 2; indices[5] = 3;
+
+	for (int i = 0; i < 16; i++)
+	{
+		colors[i] = 1;
+	}
 }
 
 void TextureRectVertex::setLeftDownPoint(const math::Vector3& point)
@@ -154,8 +157,6 @@ void TextureRectVertex::flipY()
 
 TextureCubeVertex::TextureCubeVertex()
 {
-	memset(colors, 1, 32 * sizeof(float));
-
 	uvs[0] = 0; uvs[1] = 0;
 	uvs[2] = 1; uvs[3] = 0;
 	uvs[4] = 1; uvs[5] = 1;
@@ -192,6 +193,11 @@ TextureCubeVertex::TextureCubeVertex()
 	normals[15] = 0; normals[16] = 0; normals[17] = 1;
 	normals[18] = 0; normals[19] = 0; normals[20] = 1;
 	normals[21] = 0; normals[22] = 0; normals[23] = 1;
+
+	for (int i = 0; i < 32; i++)
+	{
+		colors[i] = 1;
+	}
 }
 
 void TextureCubeVertex::setFrontLeftDownPoint(const math::Vector3& point)
