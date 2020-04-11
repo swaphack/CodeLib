@@ -93,6 +93,7 @@ bool CtrlAudioSource::loadDataFromClip(AudioDetail* audioClip)
 	{
 		return false;
 	}
+
 	if (_sound)
 	{
 		_sound->release();

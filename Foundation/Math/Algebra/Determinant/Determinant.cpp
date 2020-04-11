@@ -73,32 +73,15 @@ float Determinant::getMagnitude() const
 		return _values[0] * _values[3] - _values[1] * _values[2];
 	}
 	float value = 0;
-	float* sequence1 = new float[_width] {0};
-	float* sequence2 = new float[_width] {0};
 	
 	for (int i = 0; i < _width; i++)
 	{
 		int len = _width - 1;
 		int x = 0;
-		Determinant det(len);
-		for (int j = 1; j < _width; j++)
-		{
-			for (int k = 0; k < _width; k++)
-			{
-				if (k != i)
-				{
-					det.setValue(j - 1, x, getValue(j, k));
-					x++;
-				}
-			}
-		}
-		
+		Determinant det = this->getMinor(0, i);
 		float k = getValue(0, i) * det.getMagnitude() * pow(-1.0f, i);
 		value += k;
 	}
-
-	delete sequence1;
-	delete sequence2;
 
 	return value;
 }
@@ -192,4 +175,34 @@ Determinant Determinant::operator*(const Determinant& det)
 	}
 
 	return result;
+}
+
+Determinant Determinant::getMinor(int32_t i, int32_t j) const
+{
+	assert(i >= 0 && j >= 0 && i < _height && j < _width);
+
+	Determinant mat(_height - 1);
+	int dn = 0;
+	int dm = 0;
+
+	for (int h = 0; h < _height; h++)
+	{
+		if (h == i)
+		{
+			dn++;
+			continue;
+		}
+		dm = 0;
+		for (int w = 0; w < _width; w++)
+		{
+			if (w == j)
+			{
+				dm++;
+				continue;
+			}
+			mat.setValue(h - dn, w - dm, getValue(h, w));
+		}
+	}
+
+	return mat;
 }

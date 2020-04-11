@@ -1,4 +1,5 @@
 #include "GLVertex.h"
+#include "GLState.h"
 
 using namespace render;
 
@@ -218,30 +219,21 @@ void GLVertex::drawRect(const RectVertex& value)
 	endMode();
 }
 
-void GLVertex::drawTextureRect(const TextureRect& value)
+void GLVertex::drawTextureRect(const TextureRectVertex& value)
 {
-	beginMode(ShapeMode::QUADS);
+	GLState::enableClientState(ClientArrayType::VERTEX_ARRAY);
+	GLVertex::setVertexPointer(3, DataType::FLOAT, 0, value.vertices);
 
-	setNormal(value.leftDown.normal);
-	setColor(value.leftDown.color);
-	setTexCoord3D(value.leftDown.coords);
-	setVertex(value.leftDown.point);
+	GLState::enableClientState(ClientArrayType::TEXTURE_COORD_ARRAY);
+	GLVertex::setTexCoordPointer(2, DataType::FLOAT, 0, value.uvs);
 
-	setNormal(value.rightDown.normal);
-	setColor(value.rightDown.color);
-	setTexCoord3D(value.rightDown.coords);
-	setVertex(value.rightDown.point);
+	GLState::enableClientState(ClientArrayType::COLOR_ARRAY);
+	GLVertex::setColorPointer(4, DataType::FLOAT, 0, value.colors);
 
-	setNormal(value.rightUp.normal);
-	setColor(value.rightUp.color);
-	setTexCoord3D(value.rightUp.coords);
-	setVertex(value.rightUp.point);
+	GLVertex::drawElements(ShapeMode::TRIANGLES, 6, IndexDataType::UNSIGNED_SHORT, value.indices);
 
-	setNormal(value.leftUp.normal);
-	setColor(value.leftUp.color);
-	setTexCoord3D(value.leftUp.coords);
-	setVertex(value.leftUp.point);
-
-	endMode();
+	GLState::disableClientState(ClientArrayType::VERTEX_ARRAY);
+	GLState::disableClientState(ClientArrayType::TEXTURE_COORD_ARRAY);
+	GLState::disableClientState(ClientArrayType::COLOR_ARRAY);
 }
 

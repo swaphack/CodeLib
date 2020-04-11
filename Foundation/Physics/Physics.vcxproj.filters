@@ -4,5 +4,8 @@
     <Filter Include="Definition">
       <UniqueIdentifier>{d401d161-96da-48df-b61c-d3025da2ed69}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Light">
+      <UniqueIdentifier>{8486bce6-86a0-43a2-b8ba-47eabdedf613}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>

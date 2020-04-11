@@ -11,7 +11,6 @@ using namespace render;
 CtrlMedia::CtrlMedia()
 :_media(nullptr)
 {
-	_ctrlFrame->setCounter(true);
 }
 
 CtrlMedia::~CtrlMedia()

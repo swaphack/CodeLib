@@ -54,6 +54,8 @@ protected:
 	void testFbx();
 
 	void testProgram();
+
+	void testMatrix();
 protected:
 	void onTouchBegin(sys::Object* object, float x, float y);
 	void onTouchMove(sys::Object* object, float x, float y);

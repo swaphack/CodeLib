@@ -120,9 +120,9 @@ void Camera::visit()
 {
 	this->notifyEvents();
 
-	GLMatrix::applyProjection();
-
 	this->updateView();
+
+	GLMatrix::applyProjection();
 	
 	this->updateTranform();
 
@@ -157,7 +157,7 @@ void Camera::updateTranform()
 
 	if (_bUseMatrix)
 	{
-		GLMatrix::multMatrix(_mat44.transpose());
+		GLMatrix::multMatrix(_mat44);
 	}
 	else
 	{
@@ -180,6 +180,7 @@ Camera2D::Camera2D()
 {
 	this->setDimensions(ED_2D);
 	this->setParams(0, 1, 0, 1, 0, 1);
+	//this->setParams(-0.5f, 0.5f, -0.5f, 0.5f, -0.5f, 0.5f);
 }
 
 Camera2D::~Camera2D()

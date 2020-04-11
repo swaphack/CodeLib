@@ -21,7 +21,6 @@ namespace render
 	protected:
 		virtual void drawSample();
 	public:
-
 		// 设置图片纹理
 		void setTexture(const Texture* texture);
 		// 设置图片纹理
@@ -50,12 +49,10 @@ namespace render
 		// 纹理帧
 		TexFrame* _texFrame;
 		// 纹理坐标
-		TextureRect _texRect;
+		TextureRectVertex _texRect;
 		// 是否水平翻转
 		bool _bFlipX;
 		// 是否垂直翻转
 		bool _bFlipY;
-		// 纹理坐标是否顺时针
-		bool _bCounter;
 	};
 }

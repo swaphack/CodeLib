@@ -446,6 +446,8 @@ void handMaterialTexture(FileFbx* file, FbxSurfaceMaterial* mat, int i, int text
 	}
 }
 
+static FbxManager* lSdkManager = nullptr;
+
 
 FileFbx::FileFbx()
 {
@@ -463,7 +465,11 @@ void FileFbx::load(const std::string& filename)
 	std::string strFilepath = G_FILEPATH->getFilePath(filename);
 
 	// Initialize the SDK manager. This object handles all our memory management.
-	FbxManager* lSdkManager = FbxManager::Create();
+	if (lSdkManager == nullptr)
+	{
+		lSdkManager = FbxManager::Create();
+	}
+	
 
 	// Create the IO settings object.
 	FbxIOSettings *ios = FbxIOSettings::Create(lSdkManager, IOSROOT);

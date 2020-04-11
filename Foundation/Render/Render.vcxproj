@@ -125,6 +125,7 @@
     <ClCompile Include="Common\struct\pointer_common.cpp" />
     <ClCompile Include="Common\struct\protocol_common.cpp" />
     <ClCompile Include="Common\struct\shape_common.cpp" />
+    <ClCompile Include="Common\struct\texture_common.cpp" />
     <ClCompile Include="Common\Texture\TexFrame.cpp" />
     <ClCompile Include="Common\Texture\Texture.cpp" />
     <ClCompile Include="Common\Texture\TextureCache.cpp" />
