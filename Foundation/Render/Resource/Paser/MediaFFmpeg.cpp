@@ -31,27 +31,42 @@ void createVideoImage(const AVFrame* frame, AVCodecContext* pCodecContext, Video
 	AVFrame* destFrame = av_frame_alloc();
 	av_image_fill_arrays(destFrame->data, destFrame->linesize, destPixels, AV_PIX_FMT_RGB24, width, height, 1);
 
+	
 	struct SwsContext* pContext = sws_getContext(width, height, (AVPixelFormat)frame->format,
 		width, height, AV_PIX_FMT_RGB24,
 		SWS_BICUBIC, nullptr, nullptr, nullptr);
-
+	
 	sws_scale(pContext,
 		frame->data, frame->linesize, 
 		0, height,
 		destFrame->data, destFrame->linesize);
-
+	
 	sws_freeContext(pContext);
 
 	av_frame_free(&destFrame);
 
-	int mid = destSize / 2;
-	for (int i = 0; i < mid; i++)
+	
+	int nWidth = width * 3;
+	for (int i = 0; i < (height / 2); i++)
 	{
-		uint8_t c = destPixels[i];
-		destPixels[i] = destPixels[destSize - i - 1];
-		destPixels[destSize - i - 1] = c;
-	}
+		for (int j = 0; j < width; j++)
+		{
+			int nSrc = j * 3 + i * nWidth;
+			int nDest = j * 3 + (height - i - 1) * nWidth;
 
+			uint8_t r = destPixels[nSrc + 0];
+			uint8_t g = destPixels[nSrc + 1];
+			uint8_t b = destPixels[nSrc + 2];
+
+			destPixels[nSrc + 0] = destPixels[nDest + 0];
+			destPixels[nSrc + 1] = destPixels[nDest + 1];
+			destPixels[nSrc + 2] = destPixels[nDest + 2];
+
+			destPixels[nDest + 0] = r;
+			destPixels[nDest + 1] = g;
+			destPixels[nDest + 2] = b;
+		}
+	}
 	image->init(glFormat, glInternalFormat, destPixels, width, height);
 }
 
@@ -64,7 +79,7 @@ void createVideoAudio(const AVFrame* frame, AVCodecContext* pCodecContext, Video
 	
 	for (int ch = 0; ch < pCodecContext->channels; ch++)
 	{
-		for (int i = 0; i < frame->nb_samples; i++)
+		for (int i = 0; i < eachChannelSize; i++)
 		{
 			frameBuf[i * 2 + ch] = frame->data[ch][i];
 		}
