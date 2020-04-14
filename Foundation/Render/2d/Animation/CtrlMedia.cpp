@@ -44,6 +44,7 @@ bool CtrlMedia::init()
 		if (audio && audio->getData())
 		{
 			_ctrlAudio->loadDataFromClip(audio);
+			_ctrlAudio->play();
 		}
 	});
 

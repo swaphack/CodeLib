@@ -138,8 +138,6 @@ bool CtrlAudioSource::loadDataFromClip(AudioDetail* audioClip)
 		return false;
 	}
 
-	this->play();
-
 	return true;
 }
 
