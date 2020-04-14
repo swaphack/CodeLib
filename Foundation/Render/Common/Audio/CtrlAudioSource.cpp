@@ -5,25 +5,27 @@
 
 using namespace render;
 
-FMOD_RESULT F_CALLBACK pcmreadcallback(FMOD_SOUND* /*sound*/, void *data, unsigned int datalen)
+class CtrlAudioSourceMgr
 {
-	static float  t1 = 0, t2 = 0;        // time
-	static float  v1 = 0, v2 = 0;        // velocity
-	signed short *stereo16bitbuffer = (signed short *)data;
+public:
+	static void addSound(FMOD::Sound* sound, CtrlAudioSource* src);
+	static void removeSound(FMOD_SOUND* sound);
+	static CtrlAudioSource* getSound(FMOD_SOUND* sound);
+private:
+};
 
-	for (unsigned int count = 0; count < (datalen >> 2); count++)     // >>2 = 16bit stereo (4 bytes per sample)
+static AudioDetail* _sAudioDetail = nullptr;
+
+FMOD_RESULT F_CALLBACK pcmreadcallback(FMOD_SOUND *sound, void *data, unsigned int datalen)
+{
+	if (_sAudioDetail == nullptr)
 	{
-		*stereo16bitbuffer++ = (signed short)(sin(t1) * 32767.0f);    // left channel
-		*stereo16bitbuffer++ = (signed short)(sin(t2) * 32767.0f);    // right channel
-
-		t1 += 0.01f + v1;
-		t2 += 0.0142f + v2;
-		v1 += (float)(sin(t1) * 0.002f);
-		v2 += (float)(sin(t2) * 0.002f);
+		return FMOD_ERR_MEMORY;
 	}
+	memcpy(data, _sAudioDetail->getData(), datalen);
 
 	return FMOD_OK;
-}
+};
 
 FMOD_RESULT F_CALLBACK pcmsetposcallback(FMOD_SOUND* /*sound*/, int /*subsound*/, unsigned int /*position*/, FMOD_TIMEUNIT /*postype*/)
 {
@@ -82,7 +84,7 @@ bool CtrlAudioSource::loadDataFromFile(const std::string& filepath)
 		return false;
 	}
 
-	result = _channel->setMode(FMOD_LOOP_NORMAL);
+	result = _channel->setMode(FMOD_DEFAULT);
 
 	return result == FMOD_OK;
 }
@@ -93,6 +95,8 @@ bool CtrlAudioSource::loadDataFromClip(AudioDetail* audioClip)
 	{
 		return false;
 	}
+
+	_sAudioDetail = audioClip;
 
 	if (_sound)
 	{
@@ -105,6 +109,7 @@ bool CtrlAudioSource::loadDataFromClip(AudioDetail* audioClip)
 	{
 		return false;
 	}
+
 	FMOD_CREATESOUNDEXINFO exinfo;
 	memset(&exinfo, 0, sizeof(FMOD_CREATESOUNDEXINFO));
 	exinfo.cbsize = sizeof(FMOD_CREATESOUNDEXINFO);
@@ -112,10 +117,10 @@ bool CtrlAudioSource::loadDataFromClip(AudioDetail* audioClip)
 	exinfo.numchannels = audioClip->getChannels();
 	exinfo.length = audioClip->getSize();
 	exinfo.format = (FMOD_SOUND_FORMAT)audioClip->getFormat();
-	//exinfo.pcmreadcallback = pcmreadcallback;
-	//exinfo.pcmsetposcallback = pcmsetposcallback;
+	exinfo.pcmreadcallback = pcmreadcallback;
 
-	FMOD_RESULT result = system->createStream((char*)audioClip->getData(), FMOD_OPENMEMORY, &exinfo, &_sound);
+	FMOD_RESULT result = system->createStream(0, FMOD_2D | FMOD_OPENUSER | FMOD_LOOP_OFF, &exinfo, &_sound);
+
 	if (result != FMOD_OK)
 	{
 		return false;
@@ -127,9 +132,15 @@ bool CtrlAudioSource::loadDataFromClip(AudioDetail* audioClip)
 		return false;
 	}
 
-	result = _channel->setMode(FMOD_LOOP_NORMAL);
+	result = _channel->setMode(FMOD_DEFAULT);
+	if (result != FMOD_OK)
+	{
+		return false;
+	}
 
-	return result == FMOD_OK;
+	this->play();
+
+	return true;
 }
 
 void CtrlAudioSource::setMusicSpeed(float speed)

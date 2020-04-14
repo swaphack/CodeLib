@@ -72,44 +72,35 @@ void createVideoImage(const AVFrame* frame, AVCodecContext* pCodecContext, Video
 
 void createVideoAudio(const AVFrame* frame, AVCodecContext* pCodecContext, VideoAudioClip* audio)
 {
-	int frameBufSize = av_samples_get_buffer_size(NULL, pCodecContext->channels, frame->nb_samples, pCodecContext->sample_fmt, 1);
+	AVSampleFormat destFmt = AV_SAMPLE_FMT_S16;
+	FMOD_SOUND_FORMAT format = FMOD_SOUND_FORMAT_PCM16;
 
-	int eachChannelSize = frame->linesize[0];
-	uint8_t* frameBuf = new uint8_t[frameBufSize];
-	
-	for (int ch = 0; ch < pCodecContext->channels; ch++)
+	int nPerSize = av_get_bytes_per_sample(destFmt);
+
+	struct SwrContext* swr_covert_ctx = swr_alloc_set_opts(NULL,
+		av_get_default_channel_layout(pCodecContext->channels), destFmt, pCodecContext->sample_rate,
+		av_get_default_channel_layout(pCodecContext->channels), pCodecContext->sample_fmt, pCodecContext->sample_rate,
+		0, NULL);//转换上下文
+
+	swr_init(swr_covert_ctx);//初始化上下文
+
+	int frameSize = av_samples_get_buffer_size(NULL, frame->channels, frame->nb_samples, destFmt, 1);
+	uint8_t* frameBuf = (uint8_t*)malloc(frameSize);
+	int samplenums = swr_convert(swr_covert_ctx, &frameBuf, frameSize, (const uint8_t **)frame->data, frame->nb_samples);
+
+	uint8_t* orderBuf = (uint8_t*)malloc(frameSize);
+	for (int i = 0; i < frame->nb_samples; i++)
 	{
-		for (int i = 0; i < eachChannelSize; i++)
+		for (int j = 0; j < frame->channels; j++)
 		{
-			frameBuf[i * 2 + ch] = frame->data[ch][i];
+			memcpy(orderBuf + i * nPerSize + j * nPerSize, frameBuf + j * nPerSize * frame->nb_samples + i * nPerSize, nPerSize);
 		}
 	}
 	
-	//memcpy(frameBuf, frame->data[0], frameBufSize* sizeof(char));
+	free(frameBuf);
+	swr_free(&swr_covert_ctx);
 
-	FMOD_SOUND_FORMAT format = FMOD_SOUND_FORMAT_NONE;
-	if (frame->format == AV_SAMPLE_FMT_U8 || frame->format == AV_SAMPLE_FMT_U8P)
-	{
-		format = FMOD_SOUND_FORMAT_PCM8;
-	}
-	else if (frame->format == AV_SAMPLE_FMT_S16 || frame->format == AV_SAMPLE_FMT_S16P)
-	{
-		format = FMOD_SOUND_FORMAT_PCM16;
-	}
-	else if (frame->format == AV_SAMPLE_FMT_S32 || frame->format == AV_SAMPLE_FMT_S32P)
-	{
-		format = FMOD_SOUND_FORMAT_PCM32;
-	}
-	else if (frame->format == AV_SAMPLE_FMT_FLT || frame->format == AV_SAMPLE_FMT_FLTP)
-	{
-		format = FMOD_SOUND_FORMAT_PCMFLOAT;
-	}
-	else
-	{
-		format = FMOD_SOUND_FORMAT_BITSTREAM;
-	}
-
-	audio->init(frameBuf, frameBufSize, pCodecContext->channels, pCodecContext->channel_layout, format, frame->sample_rate, frame->nb_samples);
+	audio->init(orderBuf, frameSize, pCodecContext->channels, pCodecContext->channel_layout, format, frame->sample_rate, frame->nb_samples);
 }
 
 void createVideoTitle(const AVSubtitle* subTitle, AVCodecContext* pCodecContext, std::string* title)

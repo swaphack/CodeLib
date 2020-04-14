@@ -39,8 +39,7 @@ bool CtrlMedia::init()
 			{
 				_ctrlFrame->setTextureWithRect(texture);
 			}
-		}		
-
+		}
 		AudioDetail* audio = _media->getNextAudio();
 		if (audio && audio->getData())
 		{
@@ -110,7 +109,7 @@ void CtrlMedia::setMediaPath(const char* path, bool defaultSize)
 	_media = Loader::load<MediaFFmpeg>(_mediaDefine);
 	this->setFrameRate(1.0f / _media->getFrameRate());
 
-	// 显示大小
+	// 默认大小
 	if (defaultSize)
 	{
 		this->setVolume(static_cast<float>(_media->getWidth()), static_cast<float>(_media->getHeight()));
