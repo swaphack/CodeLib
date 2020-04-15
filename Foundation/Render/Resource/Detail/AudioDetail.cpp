@@ -14,23 +14,35 @@ AudioDetail::AudioDetail()
 	SAFE_FREE(_data);
 }
 
+AudioDetail::AudioDetail(const AudioDetail& detail)
+{
+	this->setData(detail.getData(), detail.getSize());
+	this->setChannels(detail.getChannels());
+	this->setChannelLayout(detail.getChannelLayout());
+	this->setFormat(detail.getFormat());
+	this->setFrequency(detail.getFrequency());
+	this->setSamples(detail.getSamples());
+}
+
 AudioDetail::~AudioDetail()
 {
 	SAFE_FREE(_data);
 }
 
-uint8_t* AudioDetail::getData()
+uint8_t* AudioDetail::getData() const
 {
 	return _data;
 }
 
-void AudioDetail::setData(uint8_t* data)
+void AudioDetail::setData(uint8_t* data, int size)
 {
 	SAFE_FREE(_data);
-	_data = data;
+	_data = (uint8_t*)malloc(size);
+	memcpy(_data, data, size);
+	_size = size;
 }
 
-int AudioDetail::getChannels()
+int AudioDetail::getChannels() const
 {
 	return _channels;
 }
@@ -40,7 +52,7 @@ void AudioDetail::setChannels(int channels)
 	_channels = channels;
 }
 
-int64_t AudioDetail::getChannelLayout()
+int64_t AudioDetail::getChannelLayout() const
 {
 	return _channelLayout;
 }
@@ -50,7 +62,7 @@ void AudioDetail::setChannelLayout(int64_t channelLayout)
 	_channelLayout = channelLayout;
 }
 
-int AudioDetail::getFormat()
+int AudioDetail::getFormat() const
 {
 	return _format;
 }
@@ -60,7 +72,7 @@ void AudioDetail::setFormat(int format)
 	_format = format;
 }
 
-int AudioDetail::getFrequency()
+int AudioDetail::getFrequency() const
 {
 	return _frequency;
 }
@@ -70,17 +82,12 @@ void AudioDetail::setFrequency(int frequency)
 	_frequency = frequency;
 }
 
-int AudioDetail::getSize()
+int AudioDetail::getSize() const
 {
 	return _size;
 }
 
-void AudioDetail::setSize(int size)
-{
-	_size = size;
-}
-
-int AudioDetail::getSamples()
+int AudioDetail::getSamples() const
 {
 	return _samples;
 }
@@ -88,4 +95,16 @@ int AudioDetail::getSamples()
 void AudioDetail::setSamples(int samples)
 {
 	_samples = samples;
+}
+
+AudioDetail& render::AudioDetail::operator=(const AudioDetail& detail)
+{
+	this->setData(detail.getData(), detail.getSize());
+	this->setChannels(detail.getChannels());
+	this->setChannelLayout(detail.getChannelLayout());
+	this->setFormat(detail.getFormat());
+	this->setFrequency(detail.getFrequency());
+	this->setSamples(detail.getSamples());
+
+	return *this;
 }

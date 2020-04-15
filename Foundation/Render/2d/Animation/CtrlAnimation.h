@@ -14,7 +14,10 @@ namespace render
 		CtrlAnimation();
 		virtual ~CtrlAnimation();
 	public:
+		virtual bool init();
+
 		virtual void draw();
+	public:
 		// 设置速度系数
 		void setSpeedRatio(float ratio);
 		// 获取速度系数
@@ -37,8 +40,6 @@ namespace render
 	protected:
 		// 图片帧
 		CtrlFrame* _ctrlFrame;
-		// 音效
-		CtrlAudioSource* _ctrlAudio;
 	private:
 		// 速度系数
 		float _speedRatio;

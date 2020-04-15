@@ -45,14 +45,14 @@ void createVideoImage(const AVFrame* frame, AVCodecContext* pCodecContext, Video
 
 	av_frame_free(&destFrame);
 
-	
-	int nWidth = width * 3;
+	int nUnitSize = 3;
+	int nWidth = width * nUnitSize;
 	for (int i = 0; i < (height / 2); i++)
 	{
 		for (int j = 0; j < width; j++)
 		{
-			int nSrc = j * 3 + i * nWidth;
-			int nDest = j * 3 + (height - i - 1) * nWidth;
+			int nSrc = j * nUnitSize + i * nWidth;
+			int nDest = j * nUnitSize + (height - i - 1) * nWidth;
 
 			uint8_t r = destPixels[nSrc + 0];
 			uint8_t g = destPixels[nSrc + 1];
@@ -67,7 +67,9 @@ void createVideoImage(const AVFrame* frame, AVCodecContext* pCodecContext, Video
 			destPixels[nDest + 2] = b;
 		}
 	}
-	image->init(glFormat, glInternalFormat, destPixels, width, height);
+	image->init(glFormat, glInternalFormat, destPixels, width, height, nUnitSize);
+
+	free(destPixels);
 }
 
 void createVideoAudio(const AVFrame* frame, AVCodecContext* pCodecContext, VideoAudioClip* audio)
@@ -88,6 +90,7 @@ void createVideoAudio(const AVFrame* frame, AVCodecContext* pCodecContext, Video
 	uint8_t* frameBuf = (uint8_t*)malloc(frameSize);
 	int samplenums = swr_convert(swr_covert_ctx, &frameBuf, frameSize, (const uint8_t **)frame->data, frame->nb_samples);
 
+	/*
 	uint8_t* orderBuf = (uint8_t*)malloc(frameSize);
 	for (int i = 0; i < frame->nb_samples; i++)
 	{
@@ -96,11 +99,14 @@ void createVideoAudio(const AVFrame* frame, AVCodecContext* pCodecContext, Video
 			memcpy(orderBuf + i * nPerSize + j * nPerSize, frameBuf + j * nPerSize * frame->nb_samples + i * nPerSize, nPerSize);
 		}
 	}
+	*/
 	
-	free(frameBuf);
 	swr_free(&swr_covert_ctx);
 
-	audio->init(orderBuf, frameSize, pCodecContext->channels, pCodecContext->channel_layout, format, frame->sample_rate, frame->nb_samples);
+	audio->init(frameBuf, frameSize, pCodecContext->channels, pCodecContext->channel_layout, format, frame->sample_rate, frame->nb_samples);
+
+	free(frameBuf);
+	//free(orderBuf);
 }
 
 void createVideoTitle(const AVSubtitle* subTitle, AVCodecContext* pCodecContext, std::string* title)
@@ -119,19 +125,27 @@ VideoFrameImage::~VideoFrameImage()
 
 }
 
-void VideoFrameImage::init(PixelFormat format, TextureParameter internalFormat, uint8_t* pixels, uint32_t width, uint32_t height)
+void VideoFrameImage::init(PixelFormat format, TextureParameter internalFormat, uint8_t* pixels, uint32_t width, uint32_t height, int nUnitSize)
 {
 	this->setFormat(format);
 	this->setInternalFormat(internalFormat);
-	this->setPixels(pixels);
-	this->setWidth(width);
-	this->setHeight(height);
+	this->setPixels(pixels, width, height, nUnitSize);
 }
 //////////////////////////////////////////////////////////////////////////
 
 VideoAudioClip::VideoAudioClip()
 {
 
+}
+
+VideoAudioClip::VideoAudioClip(const VideoAudioClip& detail)
+{
+	this->setData(detail.getData(), detail.getSize());
+	this->setChannels(detail.getChannels());
+	this->setChannelLayout(detail.getChannelLayout());
+	this->setFormat(detail.getFormat());
+	this->setFrequency(detail.getFrequency());
+	this->setSamples(detail.getSamples());
 }
 
 VideoAudioClip::~VideoAudioClip()
@@ -141,8 +155,7 @@ VideoAudioClip::~VideoAudioClip()
 
 void VideoAudioClip::init(uint8_t* data, int frameSize, int channels, int64_t channelLayout, int format, int frequency, int samples)
 {
-	this->setData(data);
-	this->setSize(frameSize);
+	this->setData(data, frameSize);
 	this->setChannelLayout(channelLayout);
 	this->setChannels(channels);
 	this->setFormat(format);
@@ -152,8 +165,7 @@ void VideoAudioClip::init(uint8_t* data, int frameSize, int channels, int64_t ch
 
 void VideoAudioClip::init(uint8_t* data, int frameSize)
 {
-	this->setData(data);
-	this->setSize(frameSize);
+	this->setData(data, frameSize);
 }
 
 

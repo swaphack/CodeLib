@@ -44,12 +44,12 @@ void ImageTarga::load(const std::string& filename)
 	uint8_t * val = (uint8_t*)malloc(nSize);
 	memcpy(val, image.image_data, nSize);
 
-	this->setWidth(image.width);
-	this->setHeight(image.height);
-	this->setPixels(val);
+	this->setPixels(val, image.width, image.height, sDepth);
 	this->setTextureInfo(sDepth);
 
 	tga_free_buffers(&image);
+
+	free(val);
 }
 
 void ImageTarga::setTextureInfo(int pixel_depth)

@@ -16,7 +16,7 @@ namespace render
 		EMRF_FBX,	// fbx
 	};
 	// 3dÄ£ÐÍ
-	class ModelDetail
+	class ModelDetail : public sys::Object
 	{
 	public:
 		ModelDetail();

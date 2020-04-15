@@ -522,12 +522,11 @@ void ImageLabel::load(const TextDefine& textDefine)
 	uint8_t* destPixels = (uint8_t *)malloc(sizeof(uint8_t)* count);
 	memcpy(destPixels, _stream->getData(), sizeof(uint8_t)* count);
 
-	this->setPixels(destPixels);
-	this->setWidth(_stream->getWidth() / RGBA_PIXEL_UNIT);
-	this->setHeight(_stream->getHeigth());
+	this->setPixels(destPixels, _stream->getWidth() / RGBA_PIXEL_UNIT, _stream->getHeigth(), 3);
 	this->setFormat(PixelFormat::RGBA);
 	this->setInternalFormat(TextureParameter::FOUR);
 
+	free(destPixels);
 	_stream->clear();
 }
 

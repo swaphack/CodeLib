@@ -20,8 +20,6 @@ namespace render
 	public:
 		// 加载文件数据
 		bool loadDataFromFile(const std::string& filepath);
-		// 加载音效块数据
-		bool loadDataFromClip(AudioDetail* audioClip);
 
 		void setMusicSpeed(float speed);
 		float getMusicSpeed();

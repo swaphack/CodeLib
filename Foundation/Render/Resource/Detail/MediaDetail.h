@@ -12,7 +12,7 @@ namespace render
 	class AudioDetail;
 
 	// Γ½ΜεΏβ
-	class MediaDetail
+	class MediaDetail : public sys::Object
 	{
 	public:
 		MediaDetail();

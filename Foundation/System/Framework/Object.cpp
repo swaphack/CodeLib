@@ -51,7 +51,7 @@ void Object::autoRelease()
 	this->_bAutoRelease = true;
 }
 
-void Object::setID(int32_t id)
+void Object::setID(int64_t id)
 {
 	_id = id;
 }

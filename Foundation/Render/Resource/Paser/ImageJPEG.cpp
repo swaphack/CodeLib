@@ -40,8 +40,6 @@ void ImageJPEG::load(const std::string& filename)
 
 	
 	int internalFormat = jds.output_components;
-	this->setWidth(jds.output_width);
-	this->setHeight(jds.output_height);
 	this->setInternalFormat((TextureParameter)internalFormat);
 	this->setFormat(PixelFormat::RGB);
 
@@ -66,5 +64,7 @@ void ImageJPEG::load(const std::string& filename)
 	jpeg_destroy_decompress(&jds);
 	fclose(fptr);
 
-	this->setPixels(buffer);
+	this->setPixels(buffer, jds.output_width, jds.output_height, 3);
+
+	free(buffer);
 }

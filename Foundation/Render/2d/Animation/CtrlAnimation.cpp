@@ -11,11 +11,7 @@ CtrlAnimation::CtrlAnimation()
 , _frame(0)
 , _duration(0)
 {
-	_ctrlFrame = CREATE_NODE(CtrlFrame);
-	this->addChild(_ctrlFrame);
-
-	_ctrlAudio = CREATE_NODE(CtrlAudioSource);
-	this->addChild(_ctrlAudio);
+	
 }
 
 CtrlAnimation::~CtrlAnimation()
@@ -79,4 +75,16 @@ void CtrlAnimation::updateSelf(float interval)
 void CtrlAnimation::onFrameChange()
 {
 	this->notify(ENP_ANIMATION_FRAME);
+}
+
+bool CtrlAnimation::init()
+{
+	if (!Animation::init())
+	{
+		return false;
+	}
+	_ctrlFrame = CREATE_NODE(CtrlFrame);
+	this->addChild(_ctrlFrame);
+
+	return true;
 }

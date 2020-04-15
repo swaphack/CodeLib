@@ -23,9 +23,8 @@ namespace sys
 	public:
 		// 引用次数
 		int32_t RetainCount;
-	protected:
 		// 设置编号
-		void setID(int32_t id);
+		void setID(int64_t id);
 	private:
 		// 编号
 		int64_t _id;

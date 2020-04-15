@@ -5,36 +5,6 @@
 
 using namespace render;
 
-class CtrlAudioSourceMgr
-{
-public:
-	static void addSound(FMOD::Sound* sound, CtrlAudioSource* src);
-	static void removeSound(FMOD_SOUND* sound);
-	static CtrlAudioSource* getSound(FMOD_SOUND* sound);
-private:
-};
-
-static AudioDetail* _sAudioDetail = nullptr;
-
-FMOD_RESULT F_CALLBACK pcmreadcallback(FMOD_SOUND *sound, void *data, unsigned int datalen)
-{
-	if (_sAudioDetail == nullptr)
-	{
-		return FMOD_ERR_MEMORY;
-	}
-	memcpy(data, _sAudioDetail->getData(), datalen);
-
-	return FMOD_OK;
-};
-
-FMOD_RESULT F_CALLBACK pcmsetposcallback(FMOD_SOUND* /*sound*/, int /*subsound*/, unsigned int /*position*/, FMOD_TIMEUNIT /*postype*/)
-{
-	/*
-	This is useful if the user calls Channel::setPosition and you want to seek your data accordingly.
-	*/
-	return FMOD_OK;
-}
-
 CtrlAudioSource::CtrlAudioSource()
 {
 	_channel = nullptr;
@@ -87,58 +57,6 @@ bool CtrlAudioSource::loadDataFromFile(const std::string& filepath)
 	result = _channel->setMode(FMOD_DEFAULT);
 
 	return result == FMOD_OK;
-}
-
-bool CtrlAudioSource::loadDataFromClip(AudioDetail* audioClip)
-{
-	if (audioClip == nullptr || audioClip->getData() == nullptr)
-	{
-		return false;
-	}
-
-	_sAudioDetail = audioClip;
-
-	if (_sound)
-	{
-		_sound->release();
-		_sound = nullptr;
-	}
-
-	FMOD::System* system = G_AUDIO->getSystem();
-	if (system == nullptr)
-	{
-		return false;
-	}
-
-	FMOD_CREATESOUNDEXINFO exinfo;
-	memset(&exinfo, 0, sizeof(FMOD_CREATESOUNDEXINFO));
-	exinfo.cbsize = sizeof(FMOD_CREATESOUNDEXINFO);
-	exinfo.defaultfrequency = audioClip->getFrequency();
-	exinfo.numchannels = audioClip->getChannels();
-	exinfo.length = audioClip->getSize();
-	exinfo.format = (FMOD_SOUND_FORMAT)audioClip->getFormat();
-	exinfo.pcmreadcallback = pcmreadcallback;
-
-	FMOD_RESULT result = system->createStream(0, FMOD_2D | FMOD_OPENUSER | FMOD_LOOP_OFF, &exinfo, &_sound);
-
-	if (result != FMOD_OK)
-	{
-		return false;
-	}
-
-	result = system->playSound(_sound, nullptr, true, &_channel);
-	if (result != FMOD_OK)
-	{
-		return false;
-	}
-
-	result = _channel->setMode(FMOD_DEFAULT);
-	if (result != FMOD_OK)
-	{
-		return false;
-	}
-
-	return true;
 }
 
 void CtrlAudioSource::setMusicSpeed(float speed)
@@ -263,7 +181,7 @@ int CtrlAudioSource::getLoopCount()
 
 int CtrlAudioSource::getInitMode()
 {
-	return FMOD_2D;
+	return FMOD_DEFAULT;
 }
 
 

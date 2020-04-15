@@ -40,7 +40,7 @@ void WndRender::show()
 	//testMoveImage();
 	//testClock();
 	//testText();
-	testMask();
+	//testMask();
 	testMedia();
 	
 	//testAnimation();
@@ -90,7 +90,7 @@ void WndRender::show()
 	//testProgram();
 
 	//testMedia();
-	testImages();
+	//testImages();
 
 	//testMatrix();
 }
@@ -235,9 +235,9 @@ void WndRender::testMask()
 void WndRender::testMedia()
 {
 	CtrlMedia* pMedia = CREATE_NODE(CtrlMedia);
-	pMedia->setVolume(Tool::getGLViewWidth() * 0.5, Tool::getGLViewHeight() * 0.5);
+	pMedia->setVolume(512, 384);
 	pMedia->setMediaPath("Resource/Video/1.flv", false);
-	pMedia->setAnchorPoint(0, 0);
+	pMedia->setAnchorPoint(0.5f, 0.5f);
 	pMedia->start();
 	this->getCanvas()->getRoot()->addChild(pMedia);
 }

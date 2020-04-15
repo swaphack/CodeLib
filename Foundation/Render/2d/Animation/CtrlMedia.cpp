@@ -4,13 +4,14 @@
 #include "Resource/Loader/Loader.h"
 #include "Resource/Paser/MediaFFmpeg.h"
 #include "Common/Texture/Texture.h"
-#include "Common/Audio/CtrlAudioSource.h"
+#include "Common/Audio/CtrlAudioSourceClip.h"
 
 using namespace render;
 
 CtrlMedia::CtrlMedia()
 :_media(nullptr)
 {
+
 }
 
 CtrlMedia::~CtrlMedia()
@@ -20,7 +21,13 @@ CtrlMedia::~CtrlMedia()
 
 bool CtrlMedia::init()
 {
-	CtrlAnimation::init();
+	if (!CtrlAnimation::init())
+	{
+		return false;
+	}
+
+	_ctrlAudio = CREATE_NODE(CtrlAudioSourceClip);
+	this->addChild(_ctrlAudio);
 
 	_notify->addListen(ENP_ANIMATION_FRAME, [&](){
 		if (_media == nullptr)
@@ -43,8 +50,7 @@ bool CtrlMedia::init()
 		AudioDetail* audio = _media->getNextAudio();
 		if (audio && audio->getData())
 		{
-			_ctrlAudio->loadDataFromClip(audio);
-			_ctrlAudio->play();
+			_ctrlAudio->loadAudioClip(audio);
 		}
 	});
 

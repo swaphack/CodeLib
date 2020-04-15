@@ -109,6 +109,7 @@
     <ClCompile Include="Common\Audio\CtrlAudioSource3D.cpp" />
     <ClCompile Include="Common\Audio\CtrlAudioListener.cpp" />
     <ClCompile Include="Common\Audio\CtrlAudioSource.cpp" />
+    <ClCompile Include="Common\Audio\CtrlAudioSourceClip.cpp" />
     <ClCompile Include="Common\Audio\CtrlAudioSpeaker.cpp" />
     <ClCompile Include="Common\Audio\macros.cpp" />
     <ClCompile Include="Common\DrawNode\DrawNode.cpp" />
@@ -230,6 +231,7 @@
     <ClInclude Include="Common\Action\Scheduler.h" />
     <ClInclude Include="Common\Audio\AudioProtocol.h" />
     <ClInclude Include="Common\Audio\AudioManager.h" />
+    <ClInclude Include="Common\Audio\CtrlAudioSourceClip.h" />
     <ClInclude Include="Common\Audio\CtrlAudioGeometry.h" />
     <ClInclude Include="Common\Audio\CtrlAudioReverb3D.h" />
     <ClInclude Include="Common\Audio\CtrlAudioSource3D.h" />

@@ -18,11 +18,14 @@ ImageDetail::~ImageDetail()
 {
 	SAFE_FREE(_pixels);
 }
-
-void ImageDetail::setPixels(uint8_t * val)
+void ImageDetail::setPixels(uint8_t * val, uint32_t width, uint32_t height, int nUnitSize)
 {
+	int len = width * height * nUnitSize;
 	SAFE_FREE(_pixels);
-	_pixels = val;
+	_pixels = (uint8_t *)malloc(len);
+	memcpy(_pixels, val, len);
+	_width = width;
+	_height = height;
 }
 
 void ImageDetail::setInternalFormat(TextureParameter val)
@@ -34,17 +37,6 @@ void ImageDetail::setFormat(PixelFormat val)
 {
 	_format = val;
 }
-
-void ImageDetail::setHeight(uint32_t val)
-{
-	_height = val;
-}
-
-void ImageDetail::setWidth(uint32_t val)
-{
-	_width = val;
-}
-
 uint8_t * ImageDetail::getPixels() const
 {
 	return _pixels;

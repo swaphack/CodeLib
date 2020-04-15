@@ -18,7 +18,7 @@ namespace render
 		VideoFrameImage();
 		virtual ~VideoFrameImage();
 	public:
-		void init(PixelFormat format, TextureParameter internalFormat, uint8_t* pixels, uint32_t width, uint32_t height);
+		void init(PixelFormat format, TextureParameter internalFormat, uint8_t* pixels, uint32_t width, uint32_t height, int nUnitSize);
 	protected:
 	private:
 	};
@@ -28,6 +28,7 @@ namespace render
 	{
 	public:
 		VideoAudioClip();
+		VideoAudioClip(const VideoAudioClip& detail);
 		virtual ~VideoAudioClip();
 	public:
 		void init(uint8_t* data, int frameSize);

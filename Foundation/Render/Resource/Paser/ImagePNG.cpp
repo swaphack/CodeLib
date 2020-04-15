@@ -123,8 +123,6 @@ void ImagePNG::load(const std::string& filename)
 	png_read_update_info(png_ptr, info_ptr);
 	/* Retrieve updated information */
 	png_get_IHDR(png_ptr, info_ptr, &w, &h, &bit_depth, &color_type, NULL, NULL, NULL);
-	this->setWidth(w);
-	this->setHeight(h);
 	/* Get image format and components per pixel */
 	setTextureInfo(color_type);
 
@@ -149,7 +147,9 @@ void ImagePNG::load(const std::string& filename)
 	free(row_pointers);
 	fclose(fp);
 
-	this->setPixels(texels);
+	this->setPixels(texels, w, h, bit_depth / 8);
+
+	free(texels);
 }
 
 

@@ -5,27 +5,29 @@
 namespace render
 {
 	// ÒôÆµ
-	class AudioDetail
+	class AudioDetail : public sys::Object
 	{
 	public:
 		AudioDetail();
+		AudioDetail(const AudioDetail& detail);
 		virtual ~AudioDetail();
 	public:
-		uint8_t* getData();
-		int getChannels();
-		int64_t getChannelLayout();
-		int getFormat();
-		int getFrequency();
-		int getSize();
-		int getSamples();
+		uint8_t* getData() const;
+		int getChannels() const;
+		int64_t getChannelLayout() const;
+		int getFormat() const;
+		int getFrequency() const;
+		int getSize() const;
+		int getSamples() const;
 	protected:
-		void setData(uint8_t* data);
+		void setData(uint8_t* data, int size);
 		void setChannels(int channels);
 		void setChannelLayout(int64_t channelLayout);
 		void setFormat(int format);
 		void setFrequency(int frequency);
-		void setSize(int size);
-		void setSamples(int samples);
+		void setSamples(int samples); 
+	public:
+		AudioDetail& operator=(const AudioDetail& detail);
 	private:
 		// Êý¾Ý
 		uint8_t* _data = nullptr;
