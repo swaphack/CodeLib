@@ -30,7 +30,7 @@ namespace render
 		virtual void stop();
 	public:
 		// 设置媒体文件
-		void setMediaPath(const char* path, bool defaultSize = true);
+		void setMediaURL(const std::string& url, bool defaultSize = true);
 	protected:
 		// 获取下一阵的纹理帧
 		Texture2D* getNextTexture();

@@ -1,6 +1,7 @@
 #include "DNS.h"
 #include "Socket.h"
 #include "Base/import.h"
+#include "Type/String.h"
 
 #if PLATFORM_TARGET == EPT_WINDOWS
 #include <WS2tcpip.h>
@@ -20,13 +21,13 @@ static char s_common[DNS_IP_MAX] = {0};
 
 using namespace sys;
 
-void DNS::getFirstIPAddress(const char* url, std::string& ip)
+void DNS::getFirstIPAddress(const std::string& url, std::string& ip, int32_t& port)
 {
 	Socket::InitSockModule();
 
 	ip.clear();
 
-	if (url == nullptr)
+	if (url.empty())
 	{
 		return;
 	}
@@ -41,7 +42,7 @@ void DNS::getFirstIPAddress(const char* url, std::string& ip)
 	hint32s.ai_socktype = SOCK_STREAM;
 	hint32s.ai_protocol = IPPROTO_TCP;
 
-	dwRetval = getaddrinfo(url, 0, &hint32s, &result);
+	dwRetval = getaddrinfo(url.c_str(), 0, &hint32s, &result);
 	if (dwRetval != 0) 
 	{
 		return;
@@ -54,6 +55,7 @@ void DNS::getFirstIPAddress(const char* url, std::string& ip)
 					memset(s_common, 0, DNS_IP_MAX);
 					struct sockaddr_in *sockaddr_ipv4 = (struct sockaddr_in *) ptr->ai_addr;
 					ip = inet_ntop(ptr->ai_family, &sockaddr_ipv4->sin_addr, s_common, DNS_IP_MAX);
+					port = ntohs(sockaddr_ipv4->sin_port);
 					break;
 	}
 	case AF_INET6:
@@ -61,6 +63,7 @@ void DNS::getFirstIPAddress(const char* url, std::string& ip)
 					 memset(s_common, 0, DNS_IP_MAX);
 					 struct sockaddr_in6 *sockaddr_ipv6 = (struct sockaddr_in6 *) ptr->ai_addr;
 					 ip = inet_ntop(ptr->ai_family, &sockaddr_ipv6->sin6_addr, s_common, DNS_IP_MAX);
+					 port = ntohs(sockaddr_ipv6->sin6_port);
 					 break;
 	}
 	default:
@@ -70,12 +73,12 @@ void DNS::getFirstIPAddress(const char* url, std::string& ip)
 	Socket::ReleaseSockModule();
 }
 
-void DNS::getAllIPAddress(const char* url, std::map<std::string, int32_t>& ipAddresses)
+void DNS::getAllIPAddress(const std::string& url, std::vector<std::pair<std::string, int32_t>>& ipAddresses)
 {
 	Socket::InitSockModule();
 
 	ipAddresses.clear();
-	if (url == nullptr)
+	if (url.empty())
 	{
 		return;
 	}
@@ -92,7 +95,7 @@ void DNS::getAllIPAddress(const char* url, std::map<std::string, int32_t>& ipAdd
 	hint32s.ai_socktype = SOCK_STREAM;
 	hint32s.ai_protocol = IPPROTO_TCP;
 
-	dwRetval = getaddrinfo(url, 0, &hint32s, &result);
+	dwRetval = getaddrinfo(url.c_str(), 0, &hint32s, &result);
 	if (dwRetval != 0)
 	{
 		return;
@@ -107,7 +110,7 @@ void DNS::getAllIPAddress(const char* url, std::map<std::string, int32_t>& ipAdd
 						struct sockaddr_in *sockaddr_ipv4 = (struct sockaddr_in *) ptr->ai_addr;
 						ip = inet_ntop(ptr->ai_family, &sockaddr_ipv4->sin_addr, s_common, DNS_IP_MAX);
 						port = ntohs(sockaddr_ipv4->sin_port);
-						ipAddresses[ip] = port;
+						ipAddresses.push_back(std::make_pair(ip, port));
 						break;
 		}
 		case AF_INET6:
@@ -116,7 +119,7 @@ void DNS::getAllIPAddress(const char* url, std::map<std::string, int32_t>& ipAdd
 						 struct sockaddr_in6 *sockaddr_ipv6 = (struct sockaddr_in6 *) ptr->ai_addr;
 						 ip = inet_ntop(ptr->ai_family, &sockaddr_ipv6->sin6_addr, s_common, DNS_IP_MAX);
 						 port = ntohs(sockaddr_ipv6->sin6_port);
-						 ipAddresses[ip] = port;
+						 ipAddresses.push_back(std::make_pair(ip, port));
 						 break;
 		}
 		default:
@@ -191,6 +194,5 @@ void DNS::getIPAddress(struct sockaddr_in* addr_in, std::string& ip, int32_t& po
 		break;
 	}
 }
-
 
 

@@ -75,6 +75,6 @@ namespace sys
 		// 生成消息
 		virtual void makeMessage();
 	private:
-		HttpReqDocument* _document;
+		HttpReqDocument* _document = nullptr;
 	};
 }

@@ -43,7 +43,7 @@ namespace sys
 		IResource* getResource();
 	private:
 		// 资源
-		IResource* _resource;
+		IResource* _resource = nullptr;
 	};
 
 
@@ -64,7 +64,7 @@ namespace sys
 		// 生成消息
 		virtual void makeMessage();
 	private:
-		HttpRespDocument* _document;
-		int32_t _chunkedSize;
+		HttpRespDocument* _document = nullptr;
+		int32_t _chunkedSize = 0;
 	};
 }

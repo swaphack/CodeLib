@@ -6,7 +6,7 @@ namespace alg
 	{
 	public:
 		Voronoi();
-		~Voronoi();
+		virtual ~Voronoi();
 	public:
 
 	protected:

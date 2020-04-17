@@ -3,14 +3,30 @@
 #include "Framework/Object.h"
 #include "Net/Client.h"
 #include "Net/NetData.h"
+#include "Net/DNS.h"
 #include "Stream/StreamWriter.h"
 #include "Base/macros.h"
+#include "Type/String.h"
+
 #include <thread>
 
 #define SLEEP_MILLISECOND 200
 
 using namespace sys;
 
+void HttpDownload::DownloadSlot::hand(const std::string& body)
+{
+	if (handler.first && handler.second)
+	{
+		(handler.first->*handler.second)(tag, body);
+	}
+
+	if (func)
+	{
+		func(tag, body);
+	}
+}
+//////////////////////////////////////////////////////////////////////////
 HttpDownload::HttpDownload()
 {
 
@@ -21,40 +37,33 @@ HttpDownload::~HttpDownload()
 	this->clear();
 }
 
-bool HttpDownload::download(const std::string& url, int32_t port, const std::string& filepath, HttpDownloadCallback callback, int32_t tag)
+bool HttpDownload::startTask(const std::string& url, const std::string& filepath, HttpDownloadedCallback callback, int32_t tag)
 {
-	if (url.empty() == NULL)
+	auto pClient = initClient(url);
+	if (pClient == nullptr)
 	{
 		return false;
 	}
-	Client* client = new Client(url, port);
-	client->setRecvHandler(this, static_cast<CLIENT_RECV_HANDLER>(&HttpDownload::onRecvHandle));
-	if (!client->connect())
-	{
-		delete client;
-		return false;
-	}
 
-	const std::string& request = getCString("GET /%s HTTP/1.1\r\n\r\n", filepath);
-	client->sendString(request);
-	
-	std::thread th([&](){
-		while (client->isConnected())
-		{
-			std::this_thread::sleep_for(std::chrono::milliseconds(SLEEP_MILLISECOND));
-			client->update();
-		}
-		this->flushListenData(client->getID());
-		delete client;
-	});
-	th.detach();
-
-	this->addListen(client, callback, tag);
+	this->addListen(pClient, filepath, callback, nullptr, tag);
 
 	return true;
 }
 
-void HttpDownload::flushListenData(int32_t id)
+bool HttpDownload::startTask(const std::string& url, const std::string& filepath, HttpDownloadedFunc func, int32_t tag)
+{
+	auto pClient = initClient(url);
+	if (pClient == nullptr)
+	{
+		return false;
+	}
+
+	this->addListen(pClient, filepath, HttpDownloadedCallback(), func, tag);
+
+	return true;
+}
+
+void HttpDownload::flushData(int32_t id)
 {// 推送监听到的数据
 	std::map<int32_t, StreamWriter*>::iterator iter1 = _downloadDatas.find(id);
 	if (iter1 == _downloadDatas.end())
@@ -75,7 +84,7 @@ void HttpDownload::flushListenData(int32_t id)
 	if (pDoc->parseResponse(iter1->second->getData(), iter1->second->getLength()))
 	{
 		// 完整的http
-		(iter2->second.handler.first->*iter2->second.handler.second)(iter2->second.tag, pDoc->getBody());
+		iter2->second.hand(pDoc->getBody());
 	}
 	delete pDoc;
 
@@ -98,6 +107,11 @@ void HttpDownload::onRecvHandle(int32_t id, DataQueue& data)
 	StreamWriter* pWriter;
 
 	NetData* netData = data.popData();
+
+	if (_downloadingFunc)
+	{
+		_downloadingFunc(id, netData->data, netData->size);
+	}
 
 	std::map<int32_t, StreamWriter*>::iterator iter = _downloadDatas.find(id);
 	if (iter == _downloadDatas.end())
@@ -132,7 +146,7 @@ void HttpDownload::onRecvHandle(int32_t id, DataQueue& data)
 	delete pDoc;
 }
 
-void HttpDownload::addListen(Client* client, HttpDownloadCallback callback, int32_t tag)
+void HttpDownload::addListen(Client* client, const std::string& localpath, HttpDownloadedCallback callback, HttpDownloadedFunc func, int32_t tag)
 {// 添加一个下载监听
 	if (client == nullptr)
 	{
@@ -144,6 +158,8 @@ void HttpDownload::addListen(Client* client, HttpDownloadCallback callback, int3
 	slot.tag = tag;
 	slot.client = client;
 	slot.handler = callback;
+	slot.func = func;
+	slot.localpath = localpath;
 
 	_downloadSlots[client->getID()] = slot;
 }
@@ -166,4 +182,95 @@ void HttpDownload::clear()
 	}
 
 	_downloadDatas.clear();
+}
+
+void HttpDownload::setDownloadingFunc(HttpDownloadingFunc func)
+{
+	_downloadingFunc = func;
+}
+
+Client* HttpDownload::initClient(const std::string& url)
+{
+	if (url.empty())
+	{
+		return nullptr;
+	}
+
+	std::string ip; 
+	int32_t port; 
+	std::string filepath; 
+	std::string values;
+
+	this->parseHttpURL(url, ip, port, filepath, values);
+
+	Client* client = new Client(ip, port);
+	if (!client->connect())
+	{
+		delete client;
+		return nullptr;
+	}
+
+	client->setRecvHandler(this, static_cast<CLIENT_RECV_HANDLER>(&HttpDownload::onRecvHandle));
+
+	std::thread th([&](){
+		while (client->isConnected())
+		{
+			std::this_thread::sleep_for(std::chrono::milliseconds(SLEEP_MILLISECOND));
+			client->update();
+		}
+		this->flushData(client->getID());
+	});
+	th.detach();
+
+	const std::string& request = getCString("GET /%s HTTP/1.1\r\n\r\n", filepath);
+	client->sendString(request);
+
+	return client;
+}
+
+void sys::HttpDownload::parseHttpURL(const std::string& url, std::string& ip, int32_t& port, std::string& filepath, std::string& values)
+{
+	String content = url.c_str();
+	String low = content.toLower();
+	if (!low.startWith(HttpConstant::HTTP_HTTP) && !low.startWith(HttpConstant::HTTP_HTTPS))
+	{
+		return;
+	}
+
+	int len = 0;
+	std::vector<String> params;
+	if (low.startWith(HttpConstant::HTTP_HTTP))
+	{
+		len = strlen(HttpConstant::HTTP_HTTP);
+		len = len + 3;
+		content = content.subString(len, content.getSize() - len);
+
+		port = 80;
+	}
+	else if (low.startWith(HttpConstant::HTTP_HTTPS))
+	{
+		len = strlen(HttpConstant::HTTP_HTTPS);
+		len = len + 3;
+		content = content.subString(len, content.getSize() - len);
+		port = 443;
+	}
+	else
+	{
+		return;
+	}
+
+	int idx = content.findFirstOf('/');
+	if (idx == -1) return;
+	String value = content.subString(0, idx);
+	int nPort = 0;
+	sys::DNS::getFirstIPAddress(value.getString(), ip, nPort);
+
+	content = content.subString(idx + 1, content.getSize() - (idx + 1));
+	idx = content.findFirstOf('?');
+	if (idx == -1) return;
+	value = content.subString(0, idx);
+	filepath = value.getString();
+
+	content = content.subString(idx + 1, content.getSize() - (idx + 1));
+	values = content.getString();
 }

@@ -55,6 +55,7 @@ String& String::operator=(const std::string& value)
 	char* temp = StreamHelper::mallocStream(value.capacity(), (void*)value.c_str(), value.size());
 	StreamHelper::freeStream(_value);
 	_value = temp;
+	_size = value.size();
 	return *this;
 }
 

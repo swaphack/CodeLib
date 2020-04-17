@@ -56,6 +56,8 @@ protected:
 	void testProgram();
 
 	void testMatrix();
+
+	void testHttpDownload();
 protected:
 	void onTouchBegin(sys::Object* object, float x, float y);
 	void onTouchMove(sys::Object* object, float x, float y);
@@ -67,4 +69,6 @@ protected:
 	void onKeyBoardRole(sys::Object* object, sys::BoardKey key, sys::ButtonStatus type);
 	void onKeyBoardListener(sys::Object* object, sys::BoardKey key, sys::ButtonStatus type);
 private:
+	sys::ConcurrentFile* _concurFile = nullptr;
+	sys::HttpDownload* _httpDownload = nullptr;
 };

@@ -2,6 +2,12 @@
 
 using namespace sys;
 
+const char* HttpConstant::HTTP_HTTP = "http";
+
+const char* HttpConstant::HTTP_HTTPS = "https";
+
+//////////////////////////////////////////////////////////////////////////
+
 const char* HttpRequestConstant::HTTP_REQ_GET = "GET";
 
 const char* HttpRequestConstant::HTTP_REQ_POST = "POST";

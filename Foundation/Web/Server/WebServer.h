@@ -17,7 +17,7 @@ namespace web
 		virtual ~WebServer();
 	public:
 		// 创建一个服务器
-		sys::Server* createServer(const char* ip, int port, int maxWaitCount);
+		sys::Server* createServer(const std::string& ip, int port, int maxWaitCount);
 		// 反馈给客户端
 		void postResponse(int id, sys::NetData* data);
 		// 广播

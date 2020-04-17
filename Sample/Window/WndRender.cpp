@@ -11,7 +11,8 @@ WndRender::WndRender()
 
 WndRender::~WndRender()
 {
-	
+	SAFE_DELETE(_concurFile);
+	SAFE_DELETE(_httpDownload);
 }
 
 void WndRender::show()
@@ -41,7 +42,7 @@ void WndRender::show()
 	//testClock();
 	//testText();
 	//testMask();
-	testMedia();
+	//testMedia();
 	
 	//testAnimation();
 	//testParticle();
@@ -93,6 +94,8 @@ void WndRender::show()
 	//testImages();
 
 	//testMatrix();
+
+	testHttpDownload();
 }
 
 void WndRender::testMoveImage()
@@ -234,10 +237,11 @@ void WndRender::testMask()
 
 void WndRender::testMedia()
 {
+	//std::string url1 = "https://ugcbsy.qq.com/uwMROfz2r5zIIaQXGdGnC2dfJ7wFnocHIQhYHck9TxbRMoti/y0647bdq0hl.p712.1.mp4?sdtfrom=v1010&guid=7a345dbc709c2cb45a0e756b1151771e&vkey=980A0DC3EEACFCD09C8F79C1B88447C42F046F272C6C2773A84844BB42FF9D640A7EA43D424046A119996CB0E9592558ADE4A7ED81F95E8C0B274F2210C1F2BDB414AB798BE622D7AB2D086181205CD0FDE5A2CDFC066DAF097A07F5729811EED0E8D3D535FD93898207F1A4FC0639148128BF7DDC5CEE920E1B02B6B2B07247";
+	std::string url2 = "Resource/Video/1.flv";
 	CtrlMedia* pMedia = CREATE_NODE(CtrlMedia);
-	pMedia->setVolume(512, 384);
-	pMedia->setMediaPath("Resource/Video/1.flv", false);
-	pMedia->setAnchorPoint(0.5f, 0.5f);
+	pMedia->setMediaURL(url2);
+	pMedia->setAnchorPoint(0.0f, 0.0f);
 	pMedia->start();
 	this->getCanvas()->getRoot()->addChild(pMedia);
 }
@@ -1035,4 +1039,30 @@ void WndRender::testMatrix()
 
 	math::Matrix mul33 = mat33 * inverse33;
 	PRINT("mul:\n%s\n", mul33.toString().c_str());
+}
+
+void WndRender::testHttpDownload()
+{
+	std::string url = "http://pgcvideo.cdn.xiaodutv.com/3655477038_3129027130_20200415121806.mp4?Cache-Control%3Dmax-age%3A8640000%26responseExpires%3DFri%2C_24_Jul_2020_12%3A18%3A16_GMT=&xcode=829315dc4b5218e61407710580f6c8325009948d0a4a4c20&time=1587101501&_=1587017616119";
+
+	std::string localFilePath = "temp.mp4";
+	sys::Directory::createFile(localFilePath);
+
+	if (_concurFile == nullptr)
+	{
+		_concurFile = new sys::ConcurrentFile(localFilePath);
+	}
+
+	if (_httpDownload == nullptr)
+	{
+		_httpDownload = new sys::HttpDownload();
+	}
+
+	_httpDownload->setDownloadingFunc([this](int32_t tag, const char* data, int32_t len){
+		_concurFile->write(data, len);
+	});
+	_httpDownload->startTask(url, localFilePath, [this](int32_t tag, const std::string& content){
+		_concurFile->finish();
+		SAFE_DELETE(_concurFile);
+	});
 }

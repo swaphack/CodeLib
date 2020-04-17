@@ -42,36 +42,6 @@ bool RemoteResource::loadFileData(const std::string& filename, GetDataCallback h
 		return true;
 	}
 
-	String temp = _url.c_str();
-	String low = temp.toLower();
-	if (!low.startWith("http://") || !low.startWith("https://"))
-	{
-		return false;
-	}
-	std::vector<String> params;
-	if (low.startWith("http://"))
-	{
-		temp = temp.subString(7, temp.getSize() - 7);
-	}
-	else if (low.startWith("https://"))
-	{
-		temp = temp.subString(8, temp.getSize() - 8);
-	}
-	
-	temp.split(':', params);
-
-	std::string ip;
-	int32_t port = 80;
-	if (params.size() >= 1)
-	{
-		ip = params[0].getString();
-	}
-
-	if (params.size() >= 2)
-	{
-		port = atoi(params[1].getString());
-	}
-
 	s_Tag++;
 
 	DownloadTask task;
@@ -81,10 +51,10 @@ bool RemoteResource::loadFileData(const std::string& filename, GetDataCallback h
 
 	_downloadTasks.insert(std::make_pair(s_Tag, task));
 
-	HttpDownloadCallback downloadHandler = std::make_pair(this, (downloadCallback)&RemoteResource::onDownloadCallback);
+	HttpDownloadedCallback downloadHandler = std::make_pair(this, (downloadedCallback)&RemoteResource::onDownloadCallback);
 
 	HttpDownload download;
-	download.download(ip.c_str(), port, filename, downloadHandler, 1);
+	download.startTask(_url, filename, downloadHandler, 1);
 
 	return true;
 }

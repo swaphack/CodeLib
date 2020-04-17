@@ -1,5 +1,6 @@
 #include "MediaFFmpeg.h"
 #include "ext-config.h"
+#include "system.h"
 #include <string>
 
 #include "Graphic/GLAPI/macros.h"
@@ -181,7 +182,7 @@ MediaFFmpeg::MediaFFmpeg()
 
 MediaFFmpeg::~MediaFFmpeg()
 {
-	disposeFFM();
+	disposeFormatContext();
 }
 
 void MediaFFmpeg::load(const MediaDefine& mediaDefine)
@@ -299,8 +300,27 @@ void MediaFFmpeg::setVideoFrame(mf_s frame)
 
 void MediaFFmpeg::loadFFM(const MediaDefine& mediaDefine)
 {
-	std::string fullpath = G_FILEPATH->getFilePath(mediaDefine.filepath);
-	initFFmpeg(fullpath);
+	if (!s_bInitFFmpeg)
+	{
+		av_register_all();
+		s_bInitFFmpeg = true;
+	}
+
+	disposeFormatContext();
+
+	do
+	{
+		if (loadFromLocalFile(mediaDefine.filepath))
+		{
+			break;
+		}
+		if (loadFromRemoteUrl(mediaDefine.filepath))
+		{
+			break;
+		}
+
+		return;
+	} while (true);
 
 	getStreamIndex(AVMEDIA_TYPE_VIDEO, _videoStream);
 
@@ -309,7 +329,7 @@ void MediaFFmpeg::loadFFM(const MediaDefine& mediaDefine)
 	getStreamIndex(AVMEDIA_TYPE_SUBTITLE, _subTitleStream);
 }
 
-void MediaFFmpeg::disposeFFM()
+void MediaFFmpeg::disposeFormatContext()
 {
 	if (_formatContext)
 	{
@@ -317,27 +337,41 @@ void MediaFFmpeg::disposeFFM()
 	}
 }
 
-void MediaFFmpeg::initFFmpeg(const std::string& path)
+bool MediaFFmpeg::loadFromLocalFile(const std::string& path)
 {
-	if (!s_bInitFFmpeg)
+	std::string fullpath = G_FILEPATH->getFilePath(path);
+	if (fullpath.empty())
 	{
-		av_register_all();
-		s_bInitFFmpeg = true; 
+		return false;
 	}
-
-	disposeFFM();
 
 	if (avformat_open_input(&_formatContext, path.c_str(), 0, nullptr) < 0)
 	{
-		return;
+		return false;
 	}
 
 	if (avformat_find_stream_info(_formatContext, nullptr) < 0)
 	{
-		return;
+		return false;
 	}
+
+	return true;
 }
 
+bool MediaFFmpeg::loadFromRemoteUrl(const std::string& path)
+{
+	std::string localFilePath = "temp.txt";
+	sys::Directory::createFile(localFilePath);
+
+	sys::ConcurrentFile file(localFilePath);
+
+	sys::HttpDownload download;
+	download.startTask(path, "", [&](int32_t tag, const std::string& content){
+		file.write(content.c_str(), content.size());
+	});
+
+	return true;
+}
 
 void MediaFFmpeg::getStreamIndex(int type, int& streamIndex)
 {
@@ -345,26 +379,7 @@ void MediaFFmpeg::getStreamIndex(int type, int& streamIndex)
 	{
 		return;
 	}
-	/*
-	for (uint32_t i = 0; i < _formatContext->nb_streams; i++)
-	{
-		if ((_formatContext->streams[i])->codec->codec_type == type)
-		{
-			streamIndex = i;
-			break;
-		}
-	}
-	if (streamIndex < 0)
-	{
-		return;
-	}
-	AVCodecContext* codecContext = _formatContext->streams[streamIndex]->codec;
-	AVCodec* codec = avcodec_find_decoder(codecContext->codec_id);
-	if (codec == nullptr)
-	{
-		return;
-	}
-	*/
+
 	AVCodec* codec = nullptr;
 	streamIndex = av_find_best_stream(_formatContext, (AVMediaType)type, -1, -1, &codec, 0);
 	if (streamIndex < 0)
@@ -378,5 +393,4 @@ void MediaFFmpeg::getStreamIndex(int type, int& streamIndex)
 		return;
 	}
 }
-
 

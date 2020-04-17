@@ -106,9 +106,9 @@ void CtrlMedia::stop()
 	}
 }
 
-void CtrlMedia::setMediaPath(const char* path, bool defaultSize)
+void CtrlMedia::setMediaURL(const std::string& url, bool defaultSize)
 {
-	_mediaDefine.filepath = path;
+	_mediaDefine.filepath = url;
 
 	SAFE_DELETE(_media);
 	this->stop();

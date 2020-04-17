@@ -12,9 +12,9 @@ WebServer::~WebServer()
 	SAFE_DELETE(_server);
 }
 
-sys::Server* WebServer::createServer(const char* ip, int port, int maxWaitCount)
+sys::Server* WebServer::createServer(const std::string& ip, int port, int maxWaitCount)
 {
-	if (ip == nullptr)
+	if (ip.empty())
 	{
 		return nullptr;
 	}

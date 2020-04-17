@@ -44,7 +44,7 @@ namespace sys
 	doc.setHeader(HttpResponeField::SERVER, "Windows");
 	doc.setHeader(HttpResponeField::CONNECTION, "close");
 	doc.setContentLength(respData.size());
-	doc.setBody(respData.c_str());
+	doc.setBody(respData);
 	*/
 	class HttpDocument
 	{
@@ -94,7 +94,7 @@ namespace sys
 		// 重置状态行
 		void resetStatusSection();
 	private:
-		StringStream* _stream;
+		StringStream* _stream = nullptr;
 		// 状态段
 		std::vector<std::string> _statusSection;
 		// 报头段

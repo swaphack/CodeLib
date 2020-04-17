@@ -15,7 +15,7 @@ namespace sys
 	{
 	public:
 		Client(const std::string& ip, int32_t port);
-		~Client();
+		virtual ~Client();
 	public:
 		int32_t getID();
 		// 设置远程信息
@@ -34,8 +34,10 @@ namespace sys
 		void update();
 		// 设置接收导数据时的处理
 		void setRecvHandler(Object* target, CLIENT_RECV_HANDLER handler);
+		void setRecvFunc(ClientRecvFunc func);
 		// 设置客户端断开时的处理
 		void setCloseHandler(Object* target, CLIENT_CLOSE_HANDLER handler);
+		void setCloseFunc(ClientCloseFunc func);
 		// 发送消息, 使用new，发送完毕后会自动释放
 		void sendMessage(NetData* data);
 		// 发送消息
@@ -52,21 +54,25 @@ namespace sys
 		void _recvData();
 		// 发送消息
 		void _flushData();
+		// 处理接收数据
+		void processRecvData();
 	protected:
 		int32_t _ID;
 		// 远程信息{地址，端口}
 		std::pair<std::string, int32_t> _remote;
 		// 是否连接服务器
-		bool _bConnected;
+		bool _bConnected = false;
 		// socket
-		Socket* _socket;
+		Socket* _socket = nullptr;
 		// 接收到的数据
 		DataQueue _recvDatas;
 		// 待发送的数据
 		DataQueue _sendDatas;
 		// 接收数据时的处理
 		ClientRecvHandler _recvHandler;
+		ClientRecvFunc _recvFunc = nullptr;
 		// 客户端断开时的处理
 		ClientCloseHandler _closeHandler;
+		ClientCloseFunc _closeFunc = nullptr;
 	};
 }

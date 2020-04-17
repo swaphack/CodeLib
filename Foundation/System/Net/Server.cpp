@@ -139,6 +139,11 @@ void Server::removeClient( int32_t sockId )
 	{
 		(this->_closeHandler.first->*this->_closeHandler.second)(sockId);
 	}
+
+	if (this->_closeFunc)
+	{
+		this->_closeFunc(sockId);
+	}
 }
 
 void Server::removeAllClients()
@@ -291,12 +296,32 @@ void Server::_flushRecvData()
 		it++)
 	{
 		id = it->first;
-		if (this->_recvHandler.first && this->_recvHandler.second)
+		if (this->_recvDatas.find(id) != this->_recvDatas.end() && !this->_recvDatas[id]->empty())
 		{
-			if (this->_recvDatas.find(id) != this->_recvDatas.end() && !this->_recvDatas[id]->empty())
-			{
-				(this->_recvHandler.first->*this->_recvHandler.second)(id, *this->_recvDatas[id]);
-			}
+			this->processRecvData(id);
 		}
+	}
+}
+
+void Server::setRecvFunc(ServerRecvFunc func)
+{
+	_recvFunc = func;
+}
+
+void Server::setCloseFunc(ClientCloseFunc func)
+{
+	_closeFunc = func;
+}
+
+void Server::processRecvData(int32_t id)
+{
+	if (this->_recvHandler.first && this->_recvHandler.second)
+	{
+		(this->_recvHandler.first->*this->_recvHandler.second)(id, *this->_recvDatas[id]);
+	}
+
+	if (this->_recvFunc)
+	{
+		this->_recvFunc(id, *this->_recvDatas[id]);
 	}
 }

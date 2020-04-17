@@ -29,8 +29,10 @@ namespace sys
 		void update();
 		// 设置接收数据时的处理
 		void setRecvHandler(Object* target, SERVER_RECV_HANDLER handler);
+		void setRecvFunc(ServerRecvFunc func);
 		// 设置客户端断开时的处理
 		void setCloseHandler(Object* target, CLIENT_CLOSE_HANDLER handler);
+		void setCloseFunc(ClientCloseFunc func);
 		// 发送消息, 使用new，发送完毕后会自动释放
 		void sendMessage(int32_t id, NetData* data);
 		// 广播
@@ -59,6 +61,9 @@ namespace sys
 		void _flushSendData();
 		// 接受消息
 		void _flushRecvData();
+
+		// 处理接收数据
+		void processRecvData(int32_t id);
 	protected:
 		Socket* _socket;
 		// 客户端
@@ -69,7 +74,10 @@ namespace sys
 		std::map<int32_t, DataQueue*> _sendDatas;
 		// 接收数据时的处理
 		ServerRecvHandler _recvHandler;
+		// 接收数据时的处理
+		ServerRecvFunc _recvFunc;
 		// 客户端断开时的处理
 		ClientCloseHandler _closeHandler;
+		ClientCloseFunc _closeFunc = nullptr;
 	};
 }

@@ -154,7 +154,7 @@ void WebApplication::init()
 	_server->setRecvHandler(this, static_cast<sys::SERVER_RECV_HANDLER>(&WebApplication::parseReceiveServerData));
 	_server->setCloseHandler(this, static_cast<sys::CLIENT_CLOSE_HANDLER>(&WebApplication::closeClient));
 
-	_server->createServer(_ip.c_str(), _port, _maxWaitCount);
+	_server->createServer(_ip, _port, _maxWaitCount);
 
 	_client = new WebClient();
 	_client->setRecvHandler(this, static_cast<sys::CLIENT_RECV_HANDLER>(&WebApplication::parseReceiveClientData));

@@ -2,6 +2,13 @@
 
 namespace sys
 {
+	class HttpConstant
+	{
+	public:
+		static const char* HTTP_HTTP/* = "http"*/;
+
+		static const char* HTTP_HTTPS/* = "https"*/;
+	};
 	// «Î«Û≥£¡ø
 	class HttpRequestConstant
 	{

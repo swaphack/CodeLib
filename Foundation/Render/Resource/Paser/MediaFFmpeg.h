@@ -57,19 +57,21 @@ namespace render
 	protected:
 		// 加载ffm
 		void loadFFM(const MediaDefine& mediaDefine);
-		// 初始化
-		void initFFmpeg(const std::string& path);
+		// 从本地加载
+		bool loadFromLocalFile(const std::string& path);
+		// 从网络上下载
+		bool loadFromRemoteUrl(const std::string& path);
 		// 卸载ffm
-		void disposeFFM();
+		void disposeFormatContext();
 		// 获取文件中不同资源所在的位置
 		void getStreamIndex(int type, int& streamIndex);
 	private:
 		// 视频流位置
-		int _videoStream;
+		int _videoStream = -1;
 		// 音频流位置
-		int _audioStream;
+		int _audioStream = -1;
 		// 标题流位置
-		int _subTitleStream;
+		int _subTitleStream = -1;
 		// 图片
 		VideoFrameImage _image;
 		// 音频
@@ -77,7 +79,7 @@ namespace render
 		// 文本
 		std::string _text;
 		/// 格式上下文
-		AVFormatContext* _formatContext;
+		AVFormatContext* _formatContext = nullptr;
 		// 是否初始化ffm
 		static bool s_bInitFFmpeg;
 	};

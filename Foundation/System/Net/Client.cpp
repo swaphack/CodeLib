@@ -33,7 +33,7 @@ void Client::setRemote(const std::string& ip, int32_t port)
 bool Client::connect()
 {
 	bool result = _socket->connect(_remote.first, _remote.second);
-	_bConnected = true;
+	_bConnected = result;
 	return _bConnected;
 }
 
@@ -42,6 +42,10 @@ bool Client::disconnect()
 	if (this->_closeHandler.first && this->_closeHandler.second)
 	{
 		(this->_closeHandler.first->*this->_closeHandler.second)(getID());
+	}
+	if (this->_closeFunc)
+	{
+		this->_closeFunc(getID());
 	}
 	_socket->close();
 	_bConnected = false;
@@ -168,12 +172,34 @@ void Client::_flushData()
 		}
 	}
 
-	// 处理接收的数据
-	if (!this->_recvDatas.empty())
+	processRecvData();
+	
+}
+
+void Client::setRecvFunc(ClientRecvFunc func)
+{
+	_recvFunc = func;
+}
+
+void Client::setCloseFunc(ClientCloseFunc func)
+{
+	_closeFunc = func;
+}
+
+void Client::processRecvData()
+{
+	if (this->_recvDatas.empty())
 	{
-		if (this->_recvHandler.first && this->_recvHandler.second)
-		{
-			(this->_recvHandler.first->*this->_recvHandler.second)(_socket->getID(), this->_recvDatas);
-		}
+		return;
+	}
+
+	if (this->_recvHandler.first && this->_recvHandler.second)
+	{
+		(this->_recvHandler.first->*this->_recvHandler.second)(_socket->getID(), this->_recvDatas);
+	}
+
+	if (this->_recvFunc)
+	{
+		this->_recvFunc(_socket->getID(), this->_recvDatas);
 	}
 }

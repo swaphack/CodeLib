@@ -66,15 +66,17 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="algorithm.h" />
-    <ClInclude Include="Path\AStar.h" />
-    <ClInclude Include="Path\Map.h" />
-    <ClInclude Include="Path\Node.h" />
+    <ClInclude Include="Path\MapPath.h" />
+    <ClInclude Include="Path\PathNode.h" />
     <ClInclude Include="Path\MapNode.h" />
     <ClInclude Include="Path\Voronoi.h" />
     <ClInclude Include="Sort\Sort.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Path\MapNode.cpp" />
+    <ClCompile Include="Path\MapPath.cpp" />
+    <ClCompile Include="Path\PathNode.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
