@@ -5,7 +5,6 @@
 #include "Common/Tool/Tool.h"
 
 #include "Resource/Detail/MaterialDetail.h"
-#include "Resource/Detail/FaceDetail.h"
 #include "Resource/Detail/MeshDetail.h"
 
 using namespace render;
@@ -107,6 +106,7 @@ void File3DS::load(const std::string& filename)
 			int id = lib3ds_file_mesh_by_name(pFile, pMeshData->name);
 
 			auto pMesh = CREATE_OBJECT(MeshDetail);
+			this->addMesh(id, pMesh);
 
 			if (pMeshData->nvertices)
 			{
@@ -144,7 +144,6 @@ void File3DS::load(const std::string& filename)
 
 			if (pMeshData->nfaces)
 			{			
-
 				std::map<int, std::vector<int>> mapMat;
 				for (int j = 0; j < pMeshData->nfaces; j++)
 				{
@@ -172,17 +171,13 @@ void File3DS::load(const std::string& filename)
 							j++;
 						}
 
-						FaceDetail* pFace = CREATE_OBJECT(FaceDetail);
-						pFace->setMaterial(item0.first);
-						pFace->setIndices(nFaceCount, indices);
-						pMesh->addFace(item0.first, pFace);
+						pMesh->setMaterial(item0.first);
+						pMesh->setIndices(nFaceCount, indices);
 
 						delete indices;
 					}
 				}
 			}
-
-			this->addMesh(id, pMesh);
 		}
 	}
 

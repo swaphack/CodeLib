@@ -1,6 +1,5 @@
 #pragma once
 
-#include "FaceDetail.h"
 #include "MeshDetail.h"
 #include "MaterialDetail.h"
 #include "ImageDetail.h"

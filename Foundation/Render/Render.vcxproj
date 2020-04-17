@@ -164,7 +164,6 @@
     <ClCompile Include="Platform\Windows\GLWindow.cpp" />
     <ClCompile Include="RenderApplication.cpp" />
     <ClCompile Include="Resource\Detail\AudioDetail.cpp" />
-    <ClCompile Include="Resource\Detail\FaceDetail.cpp" />
     <ClCompile Include="Resource\Detail\ImageDetail.cpp" />
     <ClCompile Include="Resource\Detail\MaterialDetail.cpp" />
     <ClCompile Include="Resource\Detail\MediaDetail.cpp" />
@@ -322,7 +321,6 @@
     <ClInclude Include="Resource\Config\MediaDefine.h" />
     <ClInclude Include="Resource\Config\TextDefine.h" />
     <ClInclude Include="Resource\Detail\AudioDetail.h" />
-    <ClInclude Include="Resource\Detail\FaceDetail.h" />
     <ClInclude Include="Resource\Detail\ImageDetail.h" />
     <ClInclude Include="Resource\Detail\import.h" />
     <ClInclude Include="Resource\Detail\MaterialDetail.h" />

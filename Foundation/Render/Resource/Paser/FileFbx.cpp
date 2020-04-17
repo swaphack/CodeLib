@@ -3,7 +3,6 @@
 #include "Common/Tool/Tool.h"
 
 #include "Resource/Detail/MaterialDetail.h"
-#include "Resource/Detail/FaceDetail.h"
 #include "Resource/Detail/MeshDetail.h"
 
 using namespace render;
@@ -146,16 +145,13 @@ void handNodeMesh(FileFbx* file, FbxNode* node)
 		delete colorData;
 	}
 
-	auto pFace = CREATE_OBJECT(FaceDetail);
-	pMesh->addFace(0, pFace);
-
 	uint16_t* indices = new uint16_t[pMeshData->GetPolygonVertexCount()];
 	for (int i = 0; i < pMeshData->GetPolygonVertexCount(); i++)
 	{
 		indices[i] = pMeshData->GetPolygonVertices()[i];
 	}
 
-	pFace->setIndices(pMeshData->GetPolygonVertexCount(), indices);
+	pMesh->setIndices(pMeshData->GetPolygonVertexCount(), indices);
 	delete indices;
 
 	int nMatCount = pMeshData->GetElementMaterialCount();
@@ -164,9 +160,10 @@ void handNodeMesh(FileFbx* file, FbxNode* node)
 		ASSERT(nMatCount == 1);
 		FbxGeometryElementMaterial* pMaterialElement = pMeshData->GetElementMaterial(0);
 		FbxSurfaceMaterial* lMaterial = node->GetMaterial(pMaterialElement->GetIndexArray().GetAt(0));
-		pFace->setMaterial(lMaterial->GetUniqueID());
+		pMesh->setMaterial(lMaterial->GetUniqueID());
 	}
 
+	/*
 	FbxAMatrix mat = node->EvaluateGlobalTransform();
 	double* value = (double*)mat;
 
@@ -176,7 +173,7 @@ void handNodeMesh(FileFbx* file, FbxNode* node)
 		v[i] = value[i];
 	}
 	math::Matrix44 m(v);
-	pFace->setMatrix(m);
+	*/
 }
 
 void handNodeMaterial(FileFbx* file, FbxNode* node)

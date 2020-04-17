@@ -1,6 +1,4 @@
 #include "MeshDetail.h"
-#include "FaceDetail.h"
-
 #include "ext-config.h"
 
 using namespace render;
@@ -12,7 +10,6 @@ MeshDetail::MeshDetail()
 
 MeshDetail::~MeshDetail()
 {
-	this->removeAllFaces();
 }
 
 void MeshDetail::setVertices(int count, float* vertexes, int unitSize)
@@ -53,44 +50,6 @@ int MeshDetail::getVerticesCount()
 	return _vertices.size / _vertices.unit;
 }
 
-void MeshDetail::addFace(int id, FaceDetail* face)
-{
-	if (!face)
-	{
-		return;
-	}
-
-	this->removeFace(id);
-
-	SAFE_RETAIN(face);
-	_faces[id] = face;
-}
-
-void MeshDetail::removeFace(int id)
-{
-	auto it = _faces.find(id);
-	if (it != _faces.end())
-	{
-		SAFE_RELEASE(it->second);
-		_faces.erase(it);
-	}
-}
-
-void MeshDetail::removeAllFaces()
-{
-	for (auto item : _faces)
-	{
-		SAFE_RELEASE(item.second);
-	}
-
-	_faces.clear();
-}
-
-const std::map<int, FaceDetail*>& MeshDetail::getFaces()
-{
-	return _faces;
-}
-
 const T_Vertex& MeshDetail::getVertices()
 {
 	return _vertices;
@@ -111,13 +70,22 @@ const T_Vertex& MeshDetail::getUVs()
 	return _uvs;
 }
 
-FaceDetail* MeshDetail::getFace(int id)
+void MeshDetail::setMaterial(int mat)
 {
-	auto it = _faces.find(id);
-	if (it == _faces.end())
-	{
-		return nullptr;
-	}
+	_material = mat;
+}
 
-	return it->second;
+int MeshDetail::getMaterial()
+{
+	return _material;
+}
+
+void MeshDetail::setIndices(int size, uint16_t* indices)
+{
+	_indices.init(size, indices);
+}
+
+const T_Indice& MeshDetail::getIndices()
+{
+	return _indices;
 }

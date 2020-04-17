@@ -255,9 +255,6 @@
     <ClCompile Include="Platform\Windows\GLWindow.cpp">
       <Filter>Platform\Windows</Filter>
     </ClCompile>
-    <ClCompile Include="Resource\Detail\FaceDetail.cpp">
-      <Filter>Resource\Detail</Filter>
-    </ClCompile>
     <ClCompile Include="Resource\Detail\MaterialDetail.cpp">
       <Filter>Resource\Detail</Filter>
     </ClCompile>
@@ -749,9 +746,6 @@
     </ClInclude>
     <ClInclude Include="Common\Node\Notify.h">
       <Filter>Common\Node</Filter>
-    </ClInclude>
-    <ClInclude Include="Resource\Detail\FaceDetail.h">
-      <Filter>Resource\Detail</Filter>
     </ClInclude>
     <ClInclude Include="Resource\Detail\MaterialDetail.h">
       <Filter>Resource\Detail</Filter>

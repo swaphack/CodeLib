@@ -115,7 +115,7 @@
 // obj
 
 #if defined(USE_OBJ)
-#include "obj/objfile.h"
+#include "obj/OBJ_Loader.h"
 #endif
 
 //////////////////////////////////////////////////////////////////////////

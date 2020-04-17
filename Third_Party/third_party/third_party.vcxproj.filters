@@ -929,9 +929,6 @@
     <ClInclude Include="..\..\Lib\include\3ds\lib3ds_impl.h">
       <Filter>3ds</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Lib\include\obj\objfile.h">
-      <Filter>obj</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Lib\include\3ds\lib3ds.h">
       <Filter>3ds</Filter>
     </ClInclude>
@@ -1825,6 +1822,9 @@
     </ClInclude>
     <ClInclude Include="..\..\Lib\include\glew\wglew.h">
       <Filter>glew</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Lib\include\obj\OBJ_Loader.h">
+      <Filter>obj</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

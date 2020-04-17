@@ -97,10 +97,12 @@ namespace render
 		*	辐射光颜色
 		*/
 		const float* getEmisiion() const;
-
+		/**
+		*	赋值
+		*/
 		MaterialDetail& operator = (const MaterialDetail& value);
 	public:
-		// 恢复默认
+		// 应用默认
 		static void applyDefault();
 		// 应用
 		void apply();
@@ -122,6 +124,5 @@ namespace render
 		std::string _texture1;
 		// 纹理名称
 		std::string _texture2;
-
 	};
 }

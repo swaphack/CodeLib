@@ -2,7 +2,6 @@
 #include "Resource/Detail/ModelDetail.h"
 #include "Resource/Detail/MaterialDetail.h"
 #include "Resource/Detail/MeshDetail.h"
-#include "Resource/Detail/FaceDetail.h"
 #include "Graphic/import.h"
 
 
@@ -59,35 +58,28 @@ void Model::drawSample()
 
 		}
 
-		auto faces = pMesh->getFaces();
-		for (auto item1 : faces)
+		auto nMatID = pMesh->getMaterial();
+		auto pMat = _modelDetail->getMaterial(nMatID);
+		if (pMat)
 		{
-			//GLMatrix::multMatrix(item1.second->getMatrix().transpose());
+			pMat->apply();
 
-			auto pFace = item1.second;
-			auto nMatID = pFace->getMaterial();
-			auto pMat = _modelDetail->getMaterial(nMatID);
-			if (pMat)
+			auto nTextureID1 = _modelDetail->getTexture(pMat->getTexture1());
+			auto nTextureID2 = _modelDetail->getTexture(pMat->getTexture2());
+			if (nTextureID1 || nTextureID1)
 			{
-				pMat->apply();
-
-				auto nTextureID1 = _modelDetail->getTexture(pMat->getTexture1());
-				auto nTextureID2 = _modelDetail->getTexture(pMat->getTexture2());
-				if (nTextureID1 || nTextureID1)
-				{
-					GLState::enable(EnableModel::TEXTURE_2D);
-					if (nTextureID1) GLTexture::bindTexture2D(nTextureID1);
-					//if (nTextureID2) GLTexture::bindTexture2D(nTextureID2);
-				}
+				GLState::enable(EnableModel::TEXTURE_2D);
+				if (nTextureID1) GLTexture::bindTexture2D(nTextureID1);
+				//if (nTextureID2) GLTexture::bindTexture2D(nTextureID2);
 			}
-
-			auto indices = pFace->getIndices();
-			if (indices.size > 0)
-			{
-				GLVertex::drawElements(ShapeMode::TRIANGLES, indices.size, IndexDataType::UNSIGNED_SHORT, indices.value);
-			}
-			GLState::disable(EnableModel::TEXTURE_2D);
 		}
+
+		auto indices = pMesh->getIndices();
+		if (indices.size > 0)
+		{
+			GLVertex::drawElements(ShapeMode::TRIANGLES, indices.size, IndexDataType::UNSIGNED_SHORT, indices.value);
+		}
+		GLState::disable(EnableModel::TEXTURE_2D);
 
 		GLState::disableClientState(ClientArrayType::VERTEX_ARRAY);
 		GLState::disableClientState(ClientArrayType::NORMAL_ARRAY);

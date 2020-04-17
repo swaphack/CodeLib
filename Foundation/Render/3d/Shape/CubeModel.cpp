@@ -3,7 +3,6 @@
 #include "Common/Texture/Texture.h"
 #include "Resource/Detail/MaterialDetail.h"
 #include "Resource/Detail/MeshDetail.h"
-#include "Resource/Detail/FaceDetail.h"
 
 #include "Common/Tool/TextureTool.h"
 
@@ -36,40 +35,34 @@ bool CubeModel::init()
 
 	_modelDetail = new ModelDetail();
 
-	auto pMesh = CREATE_OBJECT(MeshDetail);
 	auto pMat = CREATE_OBJECT(MaterialDetail);
-	_modelDetail->addMesh(0, pMesh);
 	_modelDetail->addMaterial(0, pMat);
 
 	for (int i = 0; i < CUBE_FACE_COUNT; i++)
 	{
-		auto pFace = CREATE_OBJECT(FaceDetail);
-		pFace->setMaterial(0);
-		pMesh->addFace(i, pFace);
+		auto pMesh = CREATE_OBJECT(MeshDetail);
+		pMesh->setMaterial(0);
+		_modelDetail->addMesh(0, pMesh);
 	}
 	return true;
 }
 
 void CubeModel::onCubeChange()
 {
-	auto pMesh = _modelDetail->getMesh(0);
-	if (!pMesh)
-	{
-		return;
-	}
-
 	TextureTool::setTexture3DVertexts(&_texCube, _position, _volume, _anchor);
 	
-	pMesh->setVertices(24, _texCube.vertices);
-	pMesh->setUVs(16, _texCube.uvs, 2);
-	pMesh->setNormals(24, _texCube.normals);
 	for (int i = 0; i < CUBE_FACE_COUNT; i++)
 	{
-		auto pFace = pMesh->getFace(i);
-		if (pFace)
+		auto pMesh = _modelDetail->getMesh(0);
+		if (!pMesh)
 		{
-			pFace->setIndices(6, _texCube.indices + i * CUBE_FACE_COUNT);
+			return;
 		}
+
+		pMesh->setVertices(24, _texCube.vertices);
+		pMesh->setUVs(16, _texCube.uvs, 2);
+		pMesh->setNormals(24, _texCube.normals);
+		pMesh->setIndices(6, _texCube.indices + i * CUBE_FACE_COUNT);
 	}
 }
 

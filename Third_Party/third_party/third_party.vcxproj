@@ -597,7 +597,7 @@
     <ClInclude Include="..\..\Lib\include\mysql\thr_mutex.h" />
     <ClInclude Include="..\..\Lib\include\mysql\thr_rwlock.h" />
     <ClInclude Include="..\..\Lib\include\mysql\typelib.h" />
-    <ClInclude Include="..\..\Lib\include\obj\objfile.h" />
+    <ClInclude Include="..\..\Lib\include\obj\OBJ_Loader.h" />
     <ClInclude Include="..\..\Lib\include\opencl\CL\cl.h" />
     <ClInclude Include="..\..\Lib\include\opencl\CL\cl.hpp" />
     <ClInclude Include="..\..\Lib\include\opencl\CL\cl2.hpp" />

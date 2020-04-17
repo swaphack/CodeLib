@@ -7,8 +7,6 @@
 
 namespace render
 {
-	class FaceDetail; 
-
 	class MeshDetail : public sys::Object
 	{
 	public:
@@ -52,28 +50,26 @@ namespace render
 		*/
 		void setUVs(int size, float* texCoords, int unitSize = 2);
 		/**
-		*	添加面
+		*	设置材质
 		*/
-		void addFace(int id, FaceDetail* face);
+		void setMaterial(int mat);
 		/**
-		*	移除面
+		*	获取材质
 		*/
-		void removeFace(int id);
+		int getMaterial();
 		/**
-		*	获取面
+		*	设置三角形索引
 		*/
-		FaceDetail* getFace(int id);
+		void setIndices(int size, uint16_t* indices);
 		/**
-		*	移除所有面
+		*	获取三角形索引
 		*/
-		void removeAllFaces();
-		/**
-		*	获取所有面
-		*/
-		const std::map<int, FaceDetail*>& getFaces();
+		const T_Indice& getIndices();
 	private:
-		// 面
-		std::map<int, FaceDetail*> _faces;
+		// 材质
+		int _material = 0;
+		// 顶点索引
+		T_Indice _indices;
 		// 顶点坐标 (x,y,z)
 		T_Vertex _vertices;
 		// 法线坐标 (x,y,z)

@@ -53,7 +53,7 @@ protected:
 	void testObj();
 	void testFbx();
 
-	void testProgram();
+	void testShaderProgram();
 
 	void testMatrix();
 

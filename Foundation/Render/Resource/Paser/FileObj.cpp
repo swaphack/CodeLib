@@ -6,7 +6,6 @@
 #include "Common/Tool/Tool.h"
 
 #include "Resource/Detail/MaterialDetail.h"
-#include "Resource/Detail/FaceDetail.h"
 #include "Resource/Detail/MeshDetail.h"
 
 using namespace render;
@@ -24,9 +23,12 @@ void FileObj::load(const std::string& filename)
 {
 	std::string strFilepath = G_FILEPATH->getFilePath(filename);
 
-	OBJECT* pObj = nullptr;
-	int ret = LoadObj(pObj, (char*)strFilepath.c_str());
-	if (ret)
+	// Initialize Loader
+	objl::Loader loader;
+
+	// Load .obj File
+	bool loadout = loader.LoadFile(strFilepath);
+	if (!loadout)
 	{
 		return;
 	}
@@ -34,137 +36,171 @@ void FileObj::load(const std::string& filename)
 	std::string dir;
 	sys::Directory::getDirectory(filename, dir);
 
-	for (int i = 0; i < pObj->nummat; i++)
+	std::map<std::string, int> mapMatID;
+
+	for (int i = 0; i < loader.LoadedMaterials.size(); i++)
 	{
-		auto pMatData = &pObj->materials[i];
+		auto pMatData = &loader.LoadedMaterials[i];
 		if (pMatData)
 		{
 			int id = i;
 
-			if (pMatData->m_TextureMap1[0])
+			if (!pMatData->map_Ka.empty())
 			{
-				PRINT("m_TextureMap1 %s\n", pMatData->m_TextureMap1);
-				int textureID = createTexture(pMatData->m_TextureMap1, dir);
+				PRINT("m_TextureMap1 %s\n", pMatData->map_Ka.c_str());
+				int textureID = createTexture(pMatData->map_Ka, dir);
 				if (textureID)
 				{
-					this->addTexture(pMatData->m_TextureMap1, textureID);
+					this->addTexture(pMatData->map_Ka, textureID);
 				}
 			}
 
-			if (pMatData->m_TextureMap2[0])
+			if (!pMatData->map_Kd.empty())
 			{
-				PRINT("m_TextureMap2 %s\n", pMatData->m_TextureMap2);
-				int textureID = createTexture(pMatData->m_TextureMap2, dir);
+				PRINT("m_TextureMap2 %s\n", pMatData->map_Kd.c_str());
+				int textureID = createTexture(pMatData->map_Kd, dir);
 				if (textureID)
 				{
-					this->addTexture(pMatData->m_TextureMap2, textureID);
+					this->addTexture(pMatData->map_Kd, textureID);
 				}
 			}
 
 			auto pMat = CREATE_OBJECT(MaterialDetail);
-			pMat->setTexture1(pMatData->m_TextureMap1);
-			pMat->setTexture2(pMatData->m_TextureMap2);
-			pMat->setName(pMatData->m_MaterialName);
-			pMat->setAmbient(pMatData->m_AmbientColor[0], pMatData->m_AmbientColor[1], pMatData->m_AmbientColor[2]);
-			pMat->setDiffuse(pMatData->m_DiffuseColor[0], pMatData->m_DiffuseColor[1], pMatData->m_DiffuseColor[2]);
-			pMat->setSpecular(pMatData->m_SpecularColor[0], pMatData->m_SpecularColor[1], pMatData->m_SpecularColor[2]);
-			pMat->setShiness(pMatData->m_Shininess);
+			pMat->setTexture1(pMatData->map_Ka);
+			pMat->setTexture2(pMatData->map_Kd);
+			pMat->setName(pMatData->name);
+			pMat->setAmbient(pMatData->Ka.X, pMatData->Ka.Y, pMatData->Ka.Z);
+			pMat->setDiffuse(pMatData->Kd.X, pMatData->Kd.Y, pMatData->Kd.Z);
+			pMat->setSpecular(pMatData->Ks.X, pMatData->Ks.Y, pMatData->Ks.Z);
+			pMat->setShiness(pMatData->Ns);
 			this->addMaterial(id, pMat);
+
+			mapMatID[pMatData->name] = id;
 		}
 	}
 
-
-	auto pMesh = CREATE_OBJECT(MeshDetail);
-
-	if (pObj->vertices)
+	
+	/*
+	if (loader.LoadedVertices.size() > 0)
 	{
-		int nVerticeCount = 3 * pObj->numverts;
+		int nCount = loader.LoadedVertices.size();
+
+		int nVerticeCount = 3 * nCount;
 		float* verticeData = new float[nVerticeCount];
 
-		for (int j = 0; j < pObj->numverts; j++)
+		int nNormalCount = 3 * nCount;
+		float* normalData = new float[nNormalCount];
+
+		int nTexCoordCount = 2 * nCount;
+		float* texCoordData = new float[nTexCoordCount];
+
+		for (int j = 0; j < nCount; j++)
 		{
+			auto pVertex = &loader.LoadedVertices[j];
+
 			float pos[3] = { 0 };
-			pos[0] = pObj->vertices[j].x;
-			pos[1] = pObj->vertices[j].y;
-			pos[2] = pObj->vertices[j].z;
+			pos[0] = pVertex->Position.X;
+			pos[1] = pVertex->Position.Y;
+			pos[2] = pVertex->Position.Z;
 			Tool::convertToOGLPoisition(pos, pos);
 			memcpy(verticeData + 3 * j, pos, 3 * sizeof(float));
+
+			float normal[3] = { 0 };
+			normal[0] = pVertex->Normal.X;
+			normal[1] = pVertex->Normal.Y;
+			normal[2] = pVertex->Normal.Z;
+			memcpy(normalData + 3 * j, normal, 3 * sizeof(float));
+
+			*(texCoordData + 2 * j) = pVertex->TextureCoordinate.X;
+			*(texCoordData + 2 * j + 1) = pVertex->TextureCoordinate.Y;
 		}
 
 		pMesh->setVertices(nVerticeCount, verticeData);
 		delete verticeData;
-	}
-
-	if (pObj->normals)
-	{
-		int nNormalCount = 3 * pObj->numnorm;
-		float* normalData = new float[nNormalCount];
-
-		for (int j = 0; j < pObj->numverts; j++)
-		{
-			float pos[3] = { 0 };
-			pos[0] = pObj->vertices[j].x;
-			pos[1] = pObj->vertices[j].y;
-			pos[2] = pObj->vertices[j].z;
-			memcpy(normalData + 3 * j, pos, 3 * sizeof(float));
-		}
 
 		pMesh->setNormals(nNormalCount, normalData);
 		delete normalData;
-	}
 
-	if (pObj->numtex)
-	{
-		int nTexCoordCount = 2 * pObj->numtex;
-		float* texCoordData = new float[nTexCoordCount];
-		for (int j = 0; j < pObj->numtex; j++)
-		{
-			*(texCoordData + 2 * j) = pObj->texturecoords[j].u;
-			*(texCoordData + 2 * j + 1) = pObj->texturecoords[j].v;
-		}
 		pMesh->setUVs(nTexCoordCount, texCoordData, 2);
 		delete texCoordData;
 	}
-
-	if (pObj->faces)
+	*/
+	if (loader.LoadedMeshes.size() > 0)
 	{
-		std::map<int, std::vector<int>> mapMat;
-		for (int j = 0; j < pObj->numfaces; j++)
-		{
-			int nMatID = pObj->faces[j].matindex;
-			auto it = mapMat.find(nMatID);
-			if (it == mapMat.end())
-			{
-				mapMat[nMatID] = std::vector<int>();
-			}
-			mapMat[nMatID].push_back(j);
-		}
+		int nCount = loader.LoadedMeshes.size();
 
-		for (auto item0 : mapMat)
+		for (int j = 0; j < nCount; j++)
 		{
-			int nFaceCount = 3 * item0.second.size();
-			if (nFaceCount > 0)
+			auto pMesh = CREATE_OBJECT(MeshDetail);
+			this->addMesh(j, pMesh);
+
+			auto pData = &loader.LoadedMeshes[j];
+
+			int nMatID = 0;
+			auto it = mapMatID.find(pData->MeshMaterial.name);
+			if (it != mapMatID.end())
 			{
-				uint16_t* indices = new uint16_t[nFaceCount];
-				int j = 0;
-				for (auto item1 : item0.second)
+				nMatID = it->second;
+			}
+
+			pMesh->setMaterial(nMatID);
+
+			int nVertCount = pData->Vertices.size();
+			if (nVertCount > 0)
+			{
+				int nVerticeCount = 3 * nVertCount;
+				float* verticeData = new float[nVerticeCount];
+
+				int nNormalCount = 3 * nVertCount;
+				float* normalData = new float[nNormalCount];
+
+				int nTexCoordCount = 2 * nVertCount;
+				float* texCoordData = new float[nTexCoordCount];
+
+				for (int i = 0; i < nVertCount; i++)
 				{
-					*(indices + j * 3) = pObj->faces[item1].vert[0];
-					*(indices + j * 3 + 1) = pObj->faces[item1].vert[1];
-					*(indices + j * 3 + 2) = pObj->faces[item1].vert[2];
-					j++;
+					auto pVertex = &pData->Vertices[i];
+
+					float pos[3] = { 0 };
+					pos[0] = pVertex->Position.X;
+					pos[1] = pVertex->Position.Y;
+					pos[2] = pVertex->Position.Z;
+					Tool::convertToOGLPoisition(pos, pos);
+					memcpy(verticeData + 3 * i, pos, 3 * sizeof(float));
+
+					float normal[3] = { 0 };
+					normal[0] = pVertex->Normal.X;
+					normal[1] = pVertex->Normal.Y;
+					normal[2] = pVertex->Normal.Z;
+					memcpy(normalData + 3 * i, normal, 3 * sizeof(float));
+
+					*(texCoordData + 2 * i) = pVertex->TextureCoordinate.X;
+					*(texCoordData + 2 * i + 1) = pVertex->TextureCoordinate.Y;
 				}
 
-				FaceDetail* pFace = CREATE_OBJECT(FaceDetail);
-				pFace->setMaterial(item0.first);
-				pFace->setIndices(nFaceCount, indices);
-				pMesh->addFace(item0.first, pFace);
+				pMesh->setVertices(nVerticeCount, verticeData);
+				delete verticeData;
 
+				pMesh->setNormals(nNormalCount, normalData);
+				delete normalData;
+
+				pMesh->setUVs(nTexCoordCount, texCoordData, 2);
+				delete texCoordData;
+			}
+			
+			int nIdxCount = pData->Indices.size();
+			if (nIdxCount> 0)
+			{
+				uint16_t* indices = new uint16_t[nIdxCount];
+				for (int i = 0; i < nIdxCount; i++)
+				{
+					indices[i] = pData->Indices[i];
+				}
+				pMesh->setIndices(nIdxCount, indices);
 				delete indices;
 			}
 		}
 	}
-	this->addMesh(0, pMesh);
-	ReleaseObj(pObj);
+	
 }
 

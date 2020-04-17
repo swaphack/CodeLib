@@ -5,7 +5,6 @@
 
 #include "MaterialDetail.h"
 #include "MeshDetail.h"
-#include "FaceDetail.h"
 
 using namespace render;
 

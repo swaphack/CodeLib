@@ -83,19 +83,19 @@ void WndRender::show()
 
 	//testObj();
 
-	//testFbx();
+	testFbx();
 
 	//this->testCubeModel();
 	//this->testMultiFaceCube();
 
-	//testProgram();
+	//testShaderProgram();
 
 	//testMedia();
 	//testImages();
 
 	//testMatrix();
 
-	testHttpDownload();
+	//testHttpDownload();
 }
 
 void WndRender::testMoveImage()
@@ -890,16 +890,12 @@ void WndRender::test3ds()
 
 void WndRender::testObj()
 {
-
 	std::string filename = "Resource/Obj/Skull_v3_L2/12140_Skull_v3_L2.obj";
-
-	FileObj* pFile = new FileObj();
-	pFile->load(filename);
 
 	ModelObj* model = CREATE_NODE(ModelObj);
 	model->load("Resource/Obj/Skull_v3_L2/12140_Skull_v3_L2.obj");
-	model->setScale(50);
-	model->setPosition(-200, 200, 0);
+	model->setScale(10);
+	model->setPosition(200, 200, 0);
 	model->setVolume(400, 400, 400);
 	this->getCanvas()->getRoot()->addChild(model);
 
@@ -995,7 +991,7 @@ void WndRender::testFbx()
 	model->getActionProxy()->runAction(pRepeateAction);
 }
 
-void WndRender::testProgram()
+void WndRender::testShaderProgram()
 {
 	CtrlImage* pImage = CREATE_NODE(CtrlImage);
 	pImage->setImagePath("Resource/Image/NeHe.png");
