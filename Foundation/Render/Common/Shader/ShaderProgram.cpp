@@ -189,5 +189,4 @@ void ShaderProgram::load(const std::string& vpath, const std::string& fpath)
 	FragmentShader* pFragment = CREATE_OBJECT(FragmentShader);
 	pFragment->loadFromFile(fpath);
 	this->attachShader(pFragment);
-	this->link();
 }

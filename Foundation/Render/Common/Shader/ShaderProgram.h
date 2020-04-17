@@ -11,6 +11,18 @@ namespace render
 	class ShaderUniform;
 	/**
 	*	着色器控制程序
+	*	glCreateProgram
+	*	{
+	*		glAttachShader=>{
+    *						 glCreateShader
+	*						 glShaderSource
+	*						 glShaderCompile
+	*						}
+	*		glAttachShader
+	*		...
+	*	}
+	*	glLinkProgram
+	*	glUseProgram
 	*/
 	class ShaderProgram : public sys::Object
 	{

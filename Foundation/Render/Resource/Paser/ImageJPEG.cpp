@@ -44,9 +44,9 @@ void ImageJPEG::load(const std::string& filename)
 	this->setFormat(PixelFormat::RGB);
 
 	uint32_t lineSize = jds.output_width * internalFormat;
-	uint32_t totoalSize = this->getWidth()* this->getHeight() * internalFormat;
+	uint32_t totoalSize = lineSize * internalFormat;
 
-	uint8_t* buffer = new uint8_t[totoalSize];
+	uint8_t* buffer = (uint8_t*)malloc(totoalSize);
 	memset(buffer, 0, totoalSize);
 
 	JSAMPARRAY tmp = (*jds.mem->alloc_sarray)((j_common_ptr)&jds, JPOOL_IMAGE, lineSize, 1);
@@ -64,7 +64,7 @@ void ImageJPEG::load(const std::string& filename)
 	jpeg_destroy_decompress(&jds);
 	fclose(fptr);
 
-	this->setPixels(buffer, jds.output_width, jds.output_height, 3);
+	this->setPixels(buffer, jds.output_width, jds.output_height, internalFormat);
 
 	free(buffer);
 }

@@ -557,7 +557,6 @@ void Node::handShaderProgram()
 
 void Node::drawNode()
 {
-	this->handShaderProgram();
 
 	this->draw();
 

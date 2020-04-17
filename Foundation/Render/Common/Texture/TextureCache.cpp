@@ -26,7 +26,8 @@ void TextureCache::addTexture(const std::string& path, Texture* texture)
 		return;
 	}
 
-	texture->retain();
+	SAFE_RETAIN(texture);
+
 	_textures[path] = texture;
 }
 
