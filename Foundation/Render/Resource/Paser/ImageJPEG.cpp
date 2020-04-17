@@ -44,7 +44,7 @@ void ImageJPEG::load(const std::string& filename)
 	this->setFormat(PixelFormat::RGB);
 
 	uint32_t lineSize = jds.output_width * internalFormat;
-	uint32_t totoalSize = lineSize * internalFormat;
+	uint32_t totoalSize = jds.output_width * jds.output_height * internalFormat;
 
 	uint8_t* buffer = (uint8_t*)malloc(totoalSize);
 	memset(buffer, 0, totoalSize);
