@@ -25,12 +25,12 @@ namespace sys
 		static const char*	TIME_MONTH[12];
 	public:
 		// 获取 RFC 822 时间格式
-		static const std::string& getRFC822Time(Time* time);
+		static std::string getRFC822Time(Time* time);
 
 		// 获取 RFC 822 时间格式
-		static const std::string& getRFC850Time(Time* time);
+		static std::string getRFC850Time(Time* time);
 
 		// 获取 RFC 822 时间格式
-		static const std::string& getANSITime(Time* time);
+		static std::string getANSITime(Time* time);
 	};
 }

@@ -12,11 +12,11 @@ const char* HttpTime::TIME_MONTH[12] = { "Jan", "Feb", "Mar", "Apr", "May", "Jun
 
 //////////////////////////////////////////////////////////////////////////
 /* Sun, 06 Nov 1994 08:49:37 GMT */
-const std::string& HttpTime::getRFC822Time(Time* time)
+std::string HttpTime::getRFC822Time(Time* time)
 {
 	if (time == nullptr)
 	{
-		return nullptr;
+		return "";
 	}
 	return getCString("%s, %02d %s %d %02d:%02d%02d GMT",
 		TIME_WKDAY[time->getWeekday()],
@@ -29,11 +29,11 @@ const std::string& HttpTime::getRFC822Time(Time* time)
 }
 
 /* Sunday, 06-Nov-94 08:49:37 GMT */
-const std::string& HttpTime::getRFC850Time(Time* time)
+std::string HttpTime::getRFC850Time(Time* time)
 {
 	if (time == nullptr)
 	{
-		return nullptr;
+		return "";
 	}
 	return getCString("%s, %02d-%s-%d %02d:%02d%02d GMT",
 		TIME_WEEKDAY[time->getWeekday()],
@@ -46,11 +46,11 @@ const std::string& HttpTime::getRFC850Time(Time* time)
 }
 
 /* Sun Nov  6 08:49:37 1994 */
-const std::string& HttpTime::getANSITime(Time* time)
+std::string HttpTime::getANSITime(Time* time)
 {
 	if (time == nullptr)
 	{
-		return nullptr;
+		return "";
 	}
 	return getCString("%s %s %d %02d:%02d%02d GMT",
 		TIME_WKDAY[time->getWeekday()],
