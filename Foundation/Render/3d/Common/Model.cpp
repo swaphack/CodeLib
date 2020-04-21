@@ -27,6 +27,11 @@ void Model::drawSample()
 	auto meshes = _modelDetail->getMeshes();
 	for (auto item0 : meshes)
 	{
+		//auto mat = item0.second->getMatrix();
+		//auto inverse = mat.getInverse();
+
+		//GLMatrix::multMatrix(mat);
+
 		auto pMesh = item0.second;
 
 		auto normals = pMesh->getNormals();
@@ -85,6 +90,8 @@ void Model::drawSample()
 		GLState::disableClientState(ClientArrayType::NORMAL_ARRAY);
 		GLState::disableClientState(ClientArrayType::TEXTURE_COORD_ARRAY);
 		GLState::disableClientState(ClientArrayType::COLOR_ARRAY);
+
+		//GLMatrix::multMatrix(inverse);
 	}
 }
 

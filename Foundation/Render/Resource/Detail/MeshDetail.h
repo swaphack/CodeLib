@@ -1,8 +1,9 @@
 #pragma once
 
 #include "system.h"
-
+#include "mathlib.h"
 #include "Common/struct/pointer_common.h"
+
 #include <map>
 
 namespace render
@@ -65,6 +66,14 @@ namespace render
 		*	获取三角形索引
 		*/
 		const T_Indice& getIndices();
+		/**
+		*	获取变换矩阵
+		*/
+		const math::Matrix44& getMatrix();
+		/**
+		*	设置变换矩阵
+		*/
+		void setMatrix(const math::Matrix44& mat);
 	private:
 		// 材质
 		int _material = 0;
@@ -78,5 +87,7 @@ namespace render
 		T_Vertex _colors;
 		// 纹理坐标 (x,y,z)
 		T_Vertex _uvs;
+		// 变换矩阵
+		math::Matrix44 _matrix;
 	};
 }

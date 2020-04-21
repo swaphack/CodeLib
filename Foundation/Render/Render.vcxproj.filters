@@ -231,9 +231,6 @@
     <ClCompile Include="Common\Shader\Shader.cpp">
       <Filter>Common\Shader</Filter>
     </ClCompile>
-    <ClCompile Include="Resource\Detail\TextureMap.cpp">
-      <Filter>Resource\Detail</Filter>
-    </ClCompile>
     <ClCompile Include="Common\Shader\ShaderProgram.cpp">
       <Filter>Common\Shader</Filter>
     </ClCompile>
@@ -713,9 +710,6 @@
     </ClInclude>
     <ClInclude Include="Common\Shader\Shader.h">
       <Filter>Common\Shader</Filter>
-    </ClInclude>
-    <ClInclude Include="Resource\Detail\TextureMap.h">
-      <Filter>Resource\Detail</Filter>
     </ClInclude>
     <ClInclude Include="Common\Shader\ShaderProgram.h">
       <Filter>Common\Shader</Filter>

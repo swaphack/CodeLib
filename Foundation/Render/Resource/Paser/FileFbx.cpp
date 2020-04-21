@@ -11,8 +11,8 @@ void handNode(FileFbx* file, FbxNode* node);
 void handNodeMesh(FileFbx* file, FbxNode* node);
 void handNodeMaterial(FileFbx* file, FbxNode* node);
 
-void handMaterial(FileFbx* file, FbxSurfaceMaterial* mat, int i);
-void handMaterialTexture(FileFbx* file, FbxSurfaceMaterial* mat, int i, int textureIndex);
+void handMaterial(FileFbx* file, FbxSurfaceMaterial* mat, int id);
+void handMaterialTexture(FileFbx* file, FbxSurfaceMaterial* mat, int id, int textureIndex);
 
 void handNode(FileFbx* file, FbxNode* node)
 {
@@ -120,6 +120,7 @@ void handNodeMesh(FileFbx* file, FbxNode* node)
 		delete uvData;
 	}
 
+	
 	int nColorCount = pMeshData->GetElementVertexColorCount();
 	if (nColorCount > 0)
 	{
@@ -145,13 +146,14 @@ void handNodeMesh(FileFbx* file, FbxNode* node)
 		delete colorData;
 	}
 
-	uint16_t* indices = new uint16_t[pMeshData->GetPolygonVertexCount()];
-	for (int i = 0; i < pMeshData->GetPolygonVertexCount(); i++)
+	int nIndexCount = pMeshData->GetPolygonVertexCount();
+	uint16_t* indices = new uint16_t[nIndexCount];
+	for (int i = 0; i < nIndexCount; i++)
 	{
 		indices[i] = pMeshData->GetPolygonVertices()[i];
 	}
 
-	pMesh->setIndices(pMeshData->GetPolygonVertexCount(), indices);
+	pMesh->setIndices(nIndexCount, indices);
 	delete indices;
 
 	int nMatCount = pMeshData->GetElementMaterialCount();
@@ -163,17 +165,29 @@ void handNodeMesh(FileFbx* file, FbxNode* node)
 		pMesh->setMaterial(lMaterial->GetUniqueID());
 	}
 
-	/*
-	FbxAMatrix mat = node->EvaluateGlobalTransform();
-	double* value = (double*)mat;
-
-	float v[16] = { 0 };
-	for (int i = 0; i < 16; i++)
 	{
-		v[i] = value[i];
+		FbxAMatrix mat = node->EvaluateGlobalTransform();
+		math::Volume volume = Tool::getGLViewSize();
+
+		const FbxVector4& pT = mat.GetT();
+		const FbxVector4& pR = mat.GetR();
+
+		FbxVector4 pS(1 / volume.getWidth(), 1 / volume.getHeight(), 1 / volume.getDeep());
+		pS = mat.MultS(pS);
+
+		FbxAMatrix nmat(pT, pR, pS);
+
+
+		double* value = (double*)nmat;
+
+		float v[16] = { 0 };
+		for (int i = 0; i < 16; i++)
+		{
+			v[i] = value[i];
+		}
+		math::Matrix44 m(v);
+		pMesh->setMatrix(m);
 	}
-	math::Matrix44 m(v);
-	*/
 }
 
 void handNodeMaterial(FileFbx* file, FbxNode* node)
@@ -194,7 +208,7 @@ void handNodeMaterial(FileFbx* file, FbxNode* node)
 	}
 }
 
-void handMaterial(FileFbx* file, FbxSurfaceMaterial* mat, int i)
+void handMaterial(FileFbx* file, FbxSurfaceMaterial* mat, int id)
 {
 	FbxPropertyT<FbxDouble3> lKFbxDouble3;
 	FbxPropertyT<FbxDouble> lKFbxDouble1;
@@ -352,7 +366,7 @@ void handMaterial(FileFbx* file, FbxSurfaceMaterial* mat, int i)
 		pMat->setSpecular(phong->Specular.Get()[0], phong->Specular.Get()[1], phong->Specular.Get()[2]);
 		pMat->setEmisiion(phong->Emissive.Get()[0], phong->Emissive.Get()[1], phong->Emissive.Get()[2]);
 		pMat->setShiness(phong->Shininess.Get());
-		file->addMaterial(i, pMat);
+		file->addMaterial(id, pMat);
 	}
 	else if (mat->GetClassId().Is(FbxSurfaceLambert::ClassId))
 	{
@@ -362,11 +376,11 @@ void handMaterial(FileFbx* file, FbxSurfaceMaterial* mat, int i)
 		pMat->setAmbient(lambert->Ambient.Get()[0], lambert->Ambient.Get()[1], lambert->Ambient.Get()[2]);
 		pMat->setDiffuse(lambert->Diffuse.Get()[0], lambert->Diffuse.Get()[1], lambert->Diffuse.Get()[2]);
 		pMat->setEmisiion(lambert->Emissive.Get()[0], lambert->Emissive.Get()[1], lambert->Emissive.Get()[2]);
-		file->addMaterial(i, pMat);
+		file->addMaterial(id, pMat);
 	}
 }
 
-void handMaterialTexture(FileFbx* file, FbxSurfaceMaterial* mat, int i, int textureIndex)
+void handMaterialTexture(FileFbx* file, FbxSurfaceMaterial* mat, int id, int textureIndex)
 {
 	auto pProperty = mat->FindProperty(FbxLayerElement::sTextureChannelNames[textureIndex]);
 	if (!pProperty.IsValid())
@@ -379,7 +393,7 @@ void handMaterialTexture(FileFbx* file, FbxSurfaceMaterial* mat, int i, int text
 	{
 		return;
 	}
-	auto pMat = file->getMaterial(i);
+	auto pMat = file->getMaterial(id);
 
 	for (int j = 0; j < lTextureCount; ++j)
 	{

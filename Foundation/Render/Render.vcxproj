@@ -169,7 +169,6 @@
     <ClCompile Include="Resource\Detail\MediaDetail.cpp" />
     <ClCompile Include="Resource\Detail\MeshDetail.cpp" />
     <ClCompile Include="Resource\Detail\ModelDetail.cpp" />
-    <ClCompile Include="Resource\Detail\TextureMap.cpp" />
     <ClCompile Include="Resource\Paser\ImageTarga.cpp" />
     <ClCompile Include="Resource\Paser\MediaFFmpeg.cpp" />
     <ClCompile Include="Resource\Paser\FileFbx.cpp" />
@@ -327,7 +326,6 @@
     <ClInclude Include="Resource\Detail\MediaDetail.h" />
     <ClInclude Include="Resource\Detail\MeshDetail.h" />
     <ClInclude Include="Resource\Detail\ModelDetail.h" />
-    <ClInclude Include="Resource\Detail\TextureMap.h" />
     <ClInclude Include="Resource\import.h" />
     <ClInclude Include="Resource\Loader\ILabelLoader.h" />
     <ClInclude Include="Resource\Loader\IMediaLoader.h" />

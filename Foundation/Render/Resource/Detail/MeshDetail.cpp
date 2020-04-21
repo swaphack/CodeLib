@@ -89,3 +89,13 @@ const T_Indice& MeshDetail::getIndices()
 {
 	return _indices;
 }
+
+const math::Matrix44& MeshDetail::getMatrix()
+{
+	return _matrix;
+}
+
+void MeshDetail::setMatrix(const math::Matrix44& mat)
+{
+	_matrix = mat;
+}
