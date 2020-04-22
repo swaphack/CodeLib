@@ -27,8 +27,6 @@ bool CtrlSequenceFrame::init()
 
 		if (texture == nullptr) return;
 
-		AUTO_RELEASE_OBJECT(texture);
-
 		if (_ctrlFrame)
 		{
 			_ctrlFrame->setTextureWithRect(texture);
@@ -78,7 +76,7 @@ Texture2D* CtrlSequenceFrame::getNextTexture()
 
 	const char* imageUrl = getCString(_frameImageUrl.c_str(), getFrame());
 
-	Ctrl_ImageDefine imageDefine;
+	ImageDefine imageDefine;
 	imageDefine.filepath = imageUrl;
 	imageDefine.format = EIF_PNG;
 

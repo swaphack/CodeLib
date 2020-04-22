@@ -73,7 +73,7 @@ void WndRender::show()
 	//testAudio3D();
 	//testLayout();
 	//
-	//addLight();
+	addLight();
 	//testFog();
 	//testCubeModel();
 	//testSphereModel();
@@ -81,9 +81,9 @@ void WndRender::show()
 
 	//test3ds();
 
-	//testObj();
+	testObj();
 
-	testFbx();
+	//testFbx();
 
 	//this->testCubeModel();
 	//this->testMultiFaceCube();
@@ -101,7 +101,7 @@ void WndRender::show()
 void WndRender::testMoveImage()
 {
 	CtrlImage* pImage = CREATE_NODE(CtrlImage);
-	pImage->setImagePath("Resource/Image/world.jpg", EIF_JPEG);
+	pImage->setImagePath("Resource/Image/world.jpg");
 	pImage->setPosition(512, 384, 0);
 	this->getCanvas()->getRoot()->addChild(pImage);
 
@@ -158,8 +158,7 @@ void WndRender::testSphereModel()
 	ImageDefine imageDefine = { "Resource/Image/NeHe.png", EIF_PNG };
 	Texture2D* texture2D = G_TEXTURE_CACHE->createTexture2D(imageDefine);
 
-	TexFrame* frame = new TexFrame();
-	AUTO_RELEASE_OBJECT(frame);
+	TexFrame* frame = CREATE_OBJECT(TexFrame);
 	frame->setTextureWithRect(texture2D);
 
 	render::SphereModel* pSphere = CREATE_NODE(render::SphereModel);
@@ -275,8 +274,7 @@ void WndRender::testStencil()
 {
 	Texture2D* texture2D = G_TEXTURE_CACHE->createTexture2D("Resource/Image/NeHe.png");
 
-	TexFrame* frame = new TexFrame();
-	AUTO_RELEASE_OBJECT(frame);
+	TexFrame* frame = CREATE_OBJECT(TexFrame);
 	frame->setTextureWithRect(texture2D);
 
 	Stencil* pStencil = CREATE_NODE(Stencil);
@@ -293,8 +291,7 @@ void WndRender::testStencil()
 
 	texture2D = G_TEXTURE_CACHE->createTexture2D("Resource/Image/sqi.png");
 
-	frame = new TexFrame();
-	AUTO_RELEASE_OBJECT(frame);
+	frame = CREATE_OBJECT(TexFrame);
 	frame->setTextureWithRect(texture2D);
 
 	pCube = CREATE_NODE(MultiFaceCube);
@@ -348,12 +345,14 @@ void WndRender::testEditBox()
 void WndRender::testImages()
 {
 	CtrlImage* pImage = CREATE_NODE(CtrlImage);
-	pImage->setImagePath("Resource/Image/NeHe.png");
+	pImage->setImagePath("Resource/Obj/SCI_FRS_13_HD/lights_lod0.bmp");
 	pImage->setPosition(512, 384, 0);
 	pImage->setScale(1, 1, 1);
-	pImage->setRotation(0, 0, 30);
+	pImage->setVolume(1024, 1024);
+	//pImage->setRotation(0, 0, 30);
 	this->getCanvas()->getRoot()->addChild(pImage);
 
+	/*
 	int count = 100;
 	CtrlImage* pChild = nullptr;
 	while (count-- > 0)
@@ -366,6 +365,7 @@ void WndRender::testImages()
 		pImage->addChild(pChild);
 		pImage = pChild;
 	}
+	*/
 }
 
 void WndRender::testString()
@@ -396,9 +396,9 @@ void WndRender::addLight()
 {
 	Light0* pSpotLight = CREATE_NODE(Light0);
 	pSpotLight->setPosition(0, 0, 50);
-	pSpotLight->setAmbient(255, 255, 255, 255);
-	pSpotLight->setDiffuse(255, 255, 255, 255);
-	pSpotLight->setSpecular(255, 255, 255, 255);
+	pSpotLight->setAmbient(100, 100, 100, 255);
+	pSpotLight->setDiffuse(100, 100, 100, 255);
+	pSpotLight->setSpecular(100, 100, 100, 255);
 
 	this->getCanvas()->getRoot()->addChild(pSpotLight);
 }
@@ -406,7 +406,7 @@ void WndRender::addLight()
 void WndRender::testPixelImage()
 {
 	CtrlImage* pImage = CREATE_NODE(CtrlImage);
-	pImage->setImagePath("Resource/Image/sqi.png", EIF_PNG);
+	pImage->setImagePath("Resource/Image/sqi.png");
 	pImage->setPosition(512, 384, 0);
 	this->getCanvas()->getRoot()->addChild(pImage);
 
@@ -890,12 +890,13 @@ void WndRender::test3ds()
 
 void WndRender::testObj()
 {
-	std::string filename = "Resource/Obj/Skull_v3_L2/12140_Skull_v3_L2.obj";
+	std::string filename = "Resource/Obj/SCI_FRS_13_HD/SCI_FRS_13_HD.obj";
+	//std::string filename = "Resource/Obj/Skull_v3_L2/12140_Skull_v3_L2.obj";
 
 	ModelObj* model = CREATE_NODE(ModelObj);
-	model->load("Resource/Obj/Skull_v3_L2/12140_Skull_v3_L2.obj");
-	model->setScale(10);
-	model->setPosition(200, 200, 0);
+	model->load(filename);
+	model->setScale(200);
+	model->setPosition(512, 384, 0);
 	model->setVolume(400, 400, 400);
 	this->getCanvas()->getRoot()->addChild(model);
 
@@ -917,8 +918,7 @@ void WndRender::testMultiFaceCube()
 		ImageDefine imageDefine = { "Resource/Image/NeHe.png", EIF_PNG };
 		Texture2D* texture2D = G_TEXTURE_CACHE->createTexture2D(imageDefine);
 
-		TexFrame* frame = new TexFrame();
-		AUTO_RELEASE_OBJECT(frame);
+		TexFrame* frame = CREATE_OBJECT(TexFrame);
 		frame->setTextureWithRect(texture2D);
 
 		MultiFaceCube* pModel = CREATE_NODE(MultiFaceCube);

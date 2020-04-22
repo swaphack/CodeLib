@@ -65,8 +65,5 @@ namespace render
 		// …Ë÷√±ﬂ‘µ±‡º≠
 		static void setEdgeFlag(bool flag);
 		static void setEdgeFlagPointer(int stride, const void* flag);
-	public:
-		static void drawRect(const RectVertex& value);
-		static void drawTextureRect(const TextureRectVertex& value);
 	};
 }

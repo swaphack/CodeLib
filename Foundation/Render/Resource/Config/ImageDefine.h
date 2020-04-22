@@ -12,6 +12,7 @@ namespace render
 		EIF_PNG,	// png
 		EIF_JPEG,	// jpg
 		EIF_TARGA,	// tga
+		EIF_BMP,	// bmp
 	};
 
 	// 图片数据描述结构
@@ -29,9 +30,15 @@ namespace render
 		}
 
 		ImageDefine(const std::string& _filename = "", ImageFormat _format = EIF_NONE)
-			:filepath(_filename)
 		{
 			this->format = _format;
+			this->setFilePath(_filename);
+		}
+
+		void setFilePath(const std::string& _filename)
+		{
+			filepath = _filename;
+
 			if (filepath.empty())
 			{
 				return;
@@ -48,6 +55,7 @@ namespace render
 			if (strFormat == "png") this->format = EIF_PNG;
 			else if (strFormat == "jpg") this->format = EIF_JPEG;
 			else if (strFormat == "tga") this->format = EIF_TARGA;
+			else if (strFormat == "bmp") this->format = EIF_BMP;
 			else this->format = EIF_NONE;
 		}
 	};

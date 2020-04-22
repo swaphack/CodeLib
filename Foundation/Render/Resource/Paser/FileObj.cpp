@@ -2,7 +2,7 @@
 #include "mathlib.h"
 #include "3d/Common/import.h"
 #include "ext-config.h"
-
+#include "Common/Texture/Texture.h"
 #include "Common/Tool/Tool.h"
 
 #include "Resource/Detail/MaterialDetail.h"
@@ -43,12 +43,12 @@ void FileObj::load(const std::string& filename)
 		auto pMatData = &loader.LoadedMaterials[i];
 		if (pMatData)
 		{
-			int id = i;
+			int id = i + 1;
 
 			if (!pMatData->map_Ka.empty())
 			{
 				PRINT("m_TextureMap1 %s\n", pMatData->map_Ka.c_str());
-				int textureID = createTexture(pMatData->map_Ka, dir);
+				Texture2D* textureID = createTexture(pMatData->map_Ka, dir);
 				if (textureID)
 				{
 					this->addTexture(pMatData->map_Ka, textureID);
@@ -58,7 +58,7 @@ void FileObj::load(const std::string& filename)
 			if (!pMatData->map_Kd.empty())
 			{
 				PRINT("m_TextureMap2 %s\n", pMatData->map_Kd.c_str());
-				int textureID = createTexture(pMatData->map_Kd, dir);
+				Texture2D* textureID = createTexture(pMatData->map_Kd, dir);
 				if (textureID)
 				{
 					this->addTexture(pMatData->map_Kd, textureID);
@@ -66,8 +66,8 @@ void FileObj::load(const std::string& filename)
 			}
 
 			auto pMat = CREATE_OBJECT(MaterialDetail);
-			pMat->setTexture1(pMatData->map_Ka);
-			pMat->setTexture2(pMatData->map_Kd);
+			pMat->setAmbientTextureMap(pMatData->map_Ka);
+			pMat->setDiffuseTextureMap(pMatData->map_Kd);
 			pMat->setName(pMatData->name);
 			pMat->setAmbient(pMatData->Ka.X, pMatData->Ka.Y, pMatData->Ka.Z);
 			pMat->setDiffuse(pMatData->Kd.X, pMatData->Kd.Y, pMatData->Kd.Z);
@@ -79,52 +79,6 @@ void FileObj::load(const std::string& filename)
 		}
 	}
 
-	
-	/*
-	if (loader.LoadedVertices.size() > 0)
-	{
-		int nCount = loader.LoadedVertices.size();
-
-		int nVerticeCount = 3 * nCount;
-		float* verticeData = new float[nVerticeCount];
-
-		int nNormalCount = 3 * nCount;
-		float* normalData = new float[nNormalCount];
-
-		int nTexCoordCount = 2 * nCount;
-		float* texCoordData = new float[nTexCoordCount];
-
-		for (int j = 0; j < nCount; j++)
-		{
-			auto pVertex = &loader.LoadedVertices[j];
-
-			float pos[3] = { 0 };
-			pos[0] = pVertex->Position.X;
-			pos[1] = pVertex->Position.Y;
-			pos[2] = pVertex->Position.Z;
-			Tool::convertToOGLPoisition(pos, pos);
-			memcpy(verticeData + 3 * j, pos, 3 * sizeof(float));
-
-			float normal[3] = { 0 };
-			normal[0] = pVertex->Normal.X;
-			normal[1] = pVertex->Normal.Y;
-			normal[2] = pVertex->Normal.Z;
-			memcpy(normalData + 3 * j, normal, 3 * sizeof(float));
-
-			*(texCoordData + 2 * j) = pVertex->TextureCoordinate.X;
-			*(texCoordData + 2 * j + 1) = pVertex->TextureCoordinate.Y;
-		}
-
-		pMesh->setVertices(nVerticeCount, verticeData);
-		delete verticeData;
-
-		pMesh->setNormals(nNormalCount, normalData);
-		delete normalData;
-
-		pMesh->setUVs(nTexCoordCount, texCoordData, 2);
-		delete texCoordData;
-	}
-	*/
 	if (loader.LoadedMeshes.size() > 0)
 	{
 		int nCount = loader.LoadedMeshes.size();
@@ -132,15 +86,21 @@ void FileObj::load(const std::string& filename)
 		for (int j = 0; j < nCount; j++)
 		{
 			auto pMesh = CREATE_OBJECT(MeshDetail);
+			
 			this->addMesh(j, pMesh);
 
 			auto pData = &loader.LoadedMeshes[j];
+			pMesh->setMeshName(pData->MeshName);
 
 			int nMatID = 0;
 			auto it = mapMatID.find(pData->MeshMaterial.name);
 			if (it != mapMatID.end())
 			{
 				nMatID = it->second;
+				if (nMatID == 0)
+				{
+					int a = 1;
+				}
 			}
 
 			pMesh->setMaterial(nMatID);
@@ -191,7 +151,7 @@ void FileObj::load(const std::string& filename)
 			int nIdxCount = pData->Indices.size();
 			if (nIdxCount> 0)
 			{
-				uint16_t* indices = new uint16_t[nIdxCount];
+				uint32_t* indices = new uint32_t[nIdxCount];
 				for (int i = 0; i < nIdxCount; i++)
 				{
 					indices[i] = pData->Indices[i];

@@ -24,17 +24,17 @@ MaterialDetail::MaterialDetail()
 	_matrialDiffuse[2] = 0.8f;
 	_matrialDiffuse[3] = 1.0f;
 
-	_matrialSpecular[0] = 1.0f;
-	_matrialSpecular[1] = 1.0f;
-	_matrialSpecular[2] = 1.0f;
-	_matrialSpecular[3] = 1.0f;
+	_matrialSpecular[0] = 0.0f;
+	_matrialSpecular[1] = 0.0f;
+	_matrialSpecular[2] = 0.0f;
+	_matrialSpecular[3] = 0.0f;
 
 
-	_matrialShiness = 1.0f;
+	_matrialShiness = 0.0f;
 
-	_matrialEmission[0] = 1.0f;
-	_matrialEmission[1] = 1.0f;
-	_matrialEmission[2] = 1.0f;
+	_matrialEmission[0] = 0.0f;
+	_matrialEmission[1] = 0.0f;
+	_matrialEmission[2] = 0.0f;
 	_matrialEmission[3] = 1.0f;
 }
 
@@ -186,22 +186,61 @@ const std::string& MaterialDetail::getName()
 	return _name;
 }
 
-const std::string& MaterialDetail::getTexture1()
+const std::string& MaterialDetail::getAmbientTextureMap()
 {
-	return _texture1;
+	return _mapTextureAmbient;
 }
 
-void MaterialDetail::setTexture1(const std::string& name)
+void MaterialDetail::setAmbientTextureMap(const std::string& name)
 {
-	_texture1 = name;
+	_mapTextureAmbient = name;
 }
 
-const std::string& MaterialDetail::getTexture2()
+const std::string& MaterialDetail::getDiffuseTextureMap()
 {
-	return _texture2;
+	return _mapTextureDiffuse;
 }
 
-void MaterialDetail::setTexture2(const std::string& name)
+void MaterialDetail::setDiffuseTextureMap(const std::string& name)
 {
-	_texture2 = name;
+	_mapTextureDiffuse = name;
+}
+
+void MaterialDetail::setSpecularTextureMap(const std::string& name)
+{
+	_mapTextureSpecular = name;
+}
+
+const std::string& MaterialDetail::getSpecularTextureMap()
+{
+	return _mapTextureSpecular;
+}
+void MaterialDetail::setSpecularHightlightMap(const std::string& name)
+{
+	_mapSpecularHightlight = name;
+}
+
+const std::string& MaterialDetail::getSpecularHightlightMap()
+{
+	return _mapSpecularHightlight;
+}
+
+void MaterialDetail::setAlphaTextureMap(const std::string& name)
+{
+	_mapTextureAlpha = name;
+}
+
+const std::string& MaterialDetail::getAlphaTextureMap()
+{
+	return _mapTextureAlpha;
+}
+
+void MaterialDetail::setBumpMap(const std::string& name)
+{
+	_mapBump = name;
+}
+
+const std::string& MaterialDetail::getBumpMap()
+{
+	return _mapBump;
 }

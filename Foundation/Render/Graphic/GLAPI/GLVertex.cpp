@@ -207,33 +207,3 @@ void GLVertex::setTexCoord3D(const math::Vector2& value)
 	setTexCoord3D(value.getX(), value.getY(), value.getSize());
 }
 
-void GLVertex::drawRect(const RectVertex& value)
-{
-	beginMode(ShapeMode::QUADS);
-
-	setVertex(value.leftDown);
-	setVertex(value.rightDown);
-	setVertex(value.rightUp);
-	setVertex(value.leftUp);
-
-	endMode();
-}
-
-void GLVertex::drawTextureRect(const TextureRectVertex& value)
-{
-	GLState::enableClientState(ClientArrayType::VERTEX_ARRAY);
-	GLVertex::setVertexPointer(3, DataType::FLOAT, 0, value.vertices);
-
-	GLState::enableClientState(ClientArrayType::TEXTURE_COORD_ARRAY);
-	GLVertex::setTexCoordPointer(2, DataType::FLOAT, 0, value.uvs);
-
-	GLState::enableClientState(ClientArrayType::COLOR_ARRAY);
-	GLVertex::setColorPointer(4, DataType::FLOAT, 0, value.colors);
-
-	GLVertex::drawElements(ShapeMode::TRIANGLES, 6, IndexDataType::UNSIGNED_SHORT, value.indices);
-
-	GLState::disableClientState(ClientArrayType::VERTEX_ARRAY);
-	GLState::disableClientState(ClientArrayType::TEXTURE_COORD_ARRAY);
-	GLState::disableClientState(ClientArrayType::COLOR_ARRAY);
-}
-

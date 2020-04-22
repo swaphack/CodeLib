@@ -39,8 +39,6 @@ namespace render
 		PixelFormat _format;
 		// 图片内部存储格式
 		TextureParameter _internalFormat;
-		// 每个像素的单位
-		int _unitSize = 0;
 		// 图片像素数据
 		uint8_t *_pixels;
 	};

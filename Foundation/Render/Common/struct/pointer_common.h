@@ -28,12 +28,12 @@ namespace render
 	{
 	public:
 		int size = 0;
-		uint16_t* value = nullptr;
+		uint32_t* value = nullptr;
 	public:
 		T_Indice();
 		T_Indice(const T_Indice& value);
 		~T_Indice();
 	public:
-		void init(int _size, uint16_t* _value);
+		void init(int _size, uint32_t* _value);
 	};
 }

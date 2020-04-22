@@ -169,6 +169,7 @@
     <ClCompile Include="Resource\Detail\MediaDetail.cpp" />
     <ClCompile Include="Resource\Detail\MeshDetail.cpp" />
     <ClCompile Include="Resource\Detail\ModelDetail.cpp" />
+    <ClCompile Include="Resource\Paser\ImageBMP.cpp" />
     <ClCompile Include="Resource\Paser\ImageTarga.cpp" />
     <ClCompile Include="Resource\Paser\MediaFFmpeg.cpp" />
     <ClCompile Include="Resource\Paser\FileFbx.cpp" />
@@ -333,6 +334,7 @@
     <ClInclude Include="Resource\Loader\IResourceLoader.h" />
     <ClInclude Include="Resource\Loader\Loader.h" />
     <ClInclude Include="Resource\macros.h" />
+    <ClInclude Include="Resource\Paser\ImageBMP.h" />
     <ClInclude Include="Resource\Paser\ImageTarga.h" />
     <ClInclude Include="Resource\Paser\MediaFFmpeg.h" />
     <ClInclude Include="Resource\Paser\FileFbx.h" />

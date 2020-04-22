@@ -40,8 +40,6 @@ bool CtrlMedia::init()
 		Texture2D* texture = getNextTexture();
 		if (texture)
 		{
-			AUTO_RELEASE_OBJECT(texture);
-
 			if (_ctrlFrame)
 			{
 				_ctrlFrame->setTextureWithRect(texture);
@@ -137,7 +135,7 @@ Texture2D* CtrlMedia::getNextTexture()
 		return nullptr;
 	}
 
-	Texture2D* texture2D = new Texture2D();
+	Texture2D* texture2D = CREATE_OBJECT(Texture2D);
 	texture2D->load(image);
 
 	if (!texture2D->isEnable())

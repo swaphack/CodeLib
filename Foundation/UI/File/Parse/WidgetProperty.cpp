@@ -25,7 +25,15 @@ void WidgetProperty::setAttribute(const char* name, bool value)
 
 void WidgetProperty::setAttribute(const char* name, const char* value)
 {
-	if (name && value)
+	if (name && value != nullptr)
+	{
+		_attributes[name] = value;
+	}
+}
+
+void WidgetProperty::setAttribute(const char* name, const std::string& value)
+{
+	if (name && !value.empty())
 	{
 		_attributes[name] = value;
 	}

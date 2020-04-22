@@ -53,7 +53,20 @@ void CtrlFrame::drawSample()
 	GLState::enable(EnableModel::TEXTURE_2D);
 	GLTexture::bindTexture2D(textID);
 
-	GLVertex::drawTextureRect(_texRect);
+	GLState::enableClientState(ClientArrayType::VERTEX_ARRAY);
+	GLVertex::setVertexPointer(3, DataType::FLOAT, 0, _texRect.vertices);
+
+	GLState::enableClientState(ClientArrayType::TEXTURE_COORD_ARRAY);
+	GLVertex::setTexCoordPointer(2, DataType::FLOAT, 0, _texRect.uvs);
+
+	GLState::enableClientState(ClientArrayType::COLOR_ARRAY);
+	GLVertex::setColorPointer(4, DataType::FLOAT, 0, _texRect.colors);
+
+	GLVertex::drawElements(ShapeMode::TRIANGLES, 6, IndexDataType::UNSIGNED_SHORT, _texRect.indices);
+
+	GLState::disableClientState(ClientArrayType::VERTEX_ARRAY);
+	GLState::disableClientState(ClientArrayType::TEXTURE_COORD_ARRAY);
+	GLState::disableClientState(ClientArrayType::COLOR_ARRAY);
 
 	GLState::disable(EnableModel::TEXTURE_2D);
 }

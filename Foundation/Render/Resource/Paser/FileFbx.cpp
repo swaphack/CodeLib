@@ -44,6 +44,7 @@ void handNodeMesh(FileFbx* file, FbxNode* node)
 	}
 
 	auto pMesh = CREATE_OBJECT(MeshDetail);
+	pMesh->setMeshName(node->GetName());
 	int meshCount = file->getMeshes().size();
 	file->addMesh(meshCount, pMesh);
 
@@ -147,7 +148,7 @@ void handNodeMesh(FileFbx* file, FbxNode* node)
 	}
 
 	int nIndexCount = pMeshData->GetPolygonVertexCount();
-	uint16_t* indices = new uint16_t[nIndexCount];
+	uint32_t* indices = new uint32_t[nIndexCount];
 	for (int i = 0; i < nIndexCount; i++)
 	{
 		indices[i] = pMeshData->GetPolygonVertices()[i];
@@ -435,8 +436,8 @@ void handMaterialTexture(FileFbx* file, FbxSurfaceMaterial* mat, int id, int tex
 						continue;
 					}
 					//PRINT("Fbx FbxTexture Path :%s\n", lFileTexture->GetFileName());
-					int textureID = file->createTexture(fullpath);
-					if (textureID == 0)
+					Texture2D* textureID = file->createTexture(fullpath);
+					if (textureID == nullptr)
 					{
 						continue;
 					}
@@ -445,11 +446,11 @@ void handMaterialTexture(FileFbx* file, FbxSurfaceMaterial* mat, int id, int tex
 
 					if (j == 0)
 					{
-						pMat->setTexture1(name);
+						pMat->setAmbientTextureMap(name);
 					}
 					else if (j == 1)
 					{
-						pMat->setTexture2(name);
+						pMat->setDiffuseTextureMap(name);
 					}
 				}
 			}

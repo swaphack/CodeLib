@@ -1,6 +1,7 @@
 #include "Texture.h"
 #include <exception>
 #include "Graphic/GLAPI/GLTexture.h"
+#include "TextureCache.h"
 #include "Resource/Detail/ImageDetail.h"
 using namespace render;
 
@@ -15,6 +16,7 @@ Texture::Texture()
 
 Texture::~Texture()
 {
+	G_TEXTURE_CACHE->removeTexture(this);
 	GLTexture::deleteTexture(_textureID);
 	_textureID = 0;
 }

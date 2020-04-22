@@ -24,6 +24,8 @@ void Model::drawSample()
 		return;
 	}
 
+	//PRINT("=============begin=============\n");
+
 	auto meshes = _modelDetail->getMeshes();
 	for (auto item0 : meshes)
 	{
@@ -33,6 +35,7 @@ void Model::drawSample()
 		//GLMatrix::multMatrix(mat);
 
 		auto pMesh = item0.second;
+		
 
 		auto normals = pMesh->getNormals();
 		if (normals.size > 0)
@@ -69,20 +72,20 @@ void Model::drawSample()
 		{
 			pMat->apply();
 
-			auto nTextureID1 = _modelDetail->getTexture(pMat->getTexture1());
-			auto nTextureID2 = _modelDetail->getTexture(pMat->getTexture2());
-			if (nTextureID1 || nTextureID1)
+			auto nTextureID1 = _modelDetail->getTexture(pMat->getAmbientTextureMap());
+			auto nTextureID2 = _modelDetail->getTexture(pMat->getDiffuseTextureMap());
+			if (nTextureID1 || nTextureID2)
 			{
 				GLState::enable(EnableModel::TEXTURE_2D);
 				if (nTextureID1) GLTexture::bindTexture2D(nTextureID1);
-				//if (nTextureID2) GLTexture::bindTexture2D(nTextureID2);
+				else if (nTextureID2) GLTexture::bindTexture2D(nTextureID2);
 			}
 		}
 
 		auto indices = pMesh->getIndices();
 		if (indices.size > 0)
 		{
-			GLVertex::drawElements(ShapeMode::TRIANGLES, indices.size, IndexDataType::UNSIGNED_SHORT, indices.value);
+			GLVertex::drawElements(ShapeMode::TRIANGLES, indices.size, IndexDataType::UNSIGNED_INT, indices.value);
 		}
 		GLState::disable(EnableModel::TEXTURE_2D);
 
@@ -93,6 +96,8 @@ void Model::drawSample()
 
 		//GLMatrix::multMatrix(inverse);
 	}
+
+	//PRINT("=============end=============\n");
 }
 
 void Model::setModelData(const ModelDetail* detail)

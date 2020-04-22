@@ -54,8 +54,6 @@ void ImageTarga::load(const std::string& filename)
 
 void ImageTarga::setTextureInfo(int pixel_depth)
 {
-	
-
 	switch (pixel_depth)
 	{
 	case 3:     // Most likely case

@@ -24,6 +24,7 @@ namespace ui
 		// ÉèÖÃÊôÐÔÖµ
 		void setAttribute(const char* name, bool value);
 		void setAttribute(const char* name, const char* value);
+		void setAttribute(const char* name, const std::string& value);
 		void setAttribute(const char* name, char value);
 		void setAttribute(const char* name, short value);
 		void setAttribute(const char* name, int value);
@@ -100,8 +101,8 @@ namespace ui
 	{
 		int size = sizeof(T);
 		char* dest = (char*)malloc(size);
-		memcpy(dest, &defaultValue, size);
-		this->setAttribute(name, dest);
+		memcpy(dest, &value, size);
+		this->setAttribute(name, std::string(dest, size));
 		free(dest);
 	}
 }

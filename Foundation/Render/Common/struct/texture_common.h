@@ -70,7 +70,7 @@ namespace render
 		float vertices[24];
 		float colors[32];
 		float uvs[16];
-		uint16_t indices[36];
+		uint32_t indices[36];
 		float normals[24];
 	public:
 		TextureCubeVertex();

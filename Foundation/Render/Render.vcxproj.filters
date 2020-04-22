@@ -315,6 +315,9 @@
     <ClCompile Include="Common\Audio\CtrlAudioSourceClip.cpp">
       <Filter>Common\Audio</Filter>
     </ClCompile>
+    <ClCompile Include="Resource\Paser\ImageBMP.cpp">
+      <Filter>Resource\Parser</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Common\Node\import.h">
@@ -800,6 +803,9 @@
     </ClInclude>
     <ClInclude Include="Common\Audio\CtrlAudioSourceClip.h">
       <Filter>Common\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\Paser\ImageBMP.h">
+      <Filter>Resource\Parser</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -7,6 +7,7 @@
 #include "ImagePNG.h"
 #include "ImageJPEG.h"
 #include "ImageTarga.h"
+#include "ImageBMP.h"
 
 #include "ImageLabel.h"
 #include "MediaFFmpeg.h"

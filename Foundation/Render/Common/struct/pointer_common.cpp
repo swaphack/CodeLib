@@ -44,7 +44,7 @@ void T_Vertex::show()
 	PRINT("\n");
 }
 
-void T_Indice::init(int _size, uint16_t* _value)
+void T_Indice::init(int _size, uint32_t* _value)
 {
 	if (_value == nullptr)
 	{
@@ -53,8 +53,8 @@ void T_Indice::init(int _size, uint16_t* _value)
 	SAFE_FREE(value);
 	size = _size;
 
-	value = (uint16_t*)malloc(size * sizeof(uint16_t));
-	memcpy(value, _value, size * sizeof(uint16_t));
+	value = (uint32_t*)malloc(size * sizeof(uint32_t));
+	memcpy(value, _value, size * sizeof(uint32_t));
 }
 
 T_Indice::~T_Indice()

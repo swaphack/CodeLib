@@ -166,8 +166,7 @@ private:
 //////////////////////////////////////////////////////////////////////////
 CtrlEditLabel::CtrlEditLabel()
 {
-	_ctrlText = new CtrlText();
-	AUTO_RELEASE_OBJECT(_ctrlText);
+	_ctrlText = CREATE_OBJECT(CtrlText);
 	this->addChild(_ctrlText);
 }
 

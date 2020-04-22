@@ -14,6 +14,9 @@ namespace render
 		MeshDetail();
 		virtual ~MeshDetail();
 	public:
+		const std::string& getMeshName();
+
+		void setMeshName(const std::string& name);
 		/**
 		*	顶点数
 		*/
@@ -61,7 +64,7 @@ namespace render
 		/**
 		*	设置三角形索引
 		*/
-		void setIndices(int size, uint16_t* indices);
+		void setIndices(int size, uint32_t* indices);
 		/**
 		*	获取三角形索引
 		*/
@@ -75,6 +78,7 @@ namespace render
 		*/
 		void setMatrix(const math::Matrix44& mat);
 	private:
+		std::string _meshName;
 		// 材质
 		int _material = 0;
 		// 顶点索引

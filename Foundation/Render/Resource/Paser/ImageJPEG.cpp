@@ -1,5 +1,4 @@
 #include "ImageJPEG.h"
-#include "Graphic/GLAPI/import.h"
 
 using namespace render;
 
@@ -37,7 +36,6 @@ void ImageJPEG::load(const std::string& filename)
 	jpeg_stdio_src(&jds, fptr);
 	jpeg_read_header(&jds, true);
 	jpeg_start_decompress(&jds);
-
 	
 	int internalFormat = jds.output_components;
 	this->setInternalFormat((TextureParameter)internalFormat);
