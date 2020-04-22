@@ -72,7 +72,7 @@ void FileObj::load(const std::string& filename)
 			pMat->setAmbient(pMatData->Ka.X, pMatData->Ka.Y, pMatData->Ka.Z);
 			pMat->setDiffuse(pMatData->Kd.X, pMatData->Kd.Y, pMatData->Kd.Z);
 			pMat->setSpecular(pMatData->Ks.X, pMatData->Ks.Y, pMatData->Ks.Z);
-			pMat->setShiness(pMatData->Ns);
+			//pMat->setShiness(pMatData->Ns);
 			this->addMaterial(id, pMat);
 
 			mapMatID[pMatData->name] = id;
