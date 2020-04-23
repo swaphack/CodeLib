@@ -17,7 +17,7 @@ ShaderProgram::~ShaderProgram()
 	this->releaseProgram();
 }
 
-int ShaderProgram::getProgramID()
+uint32_t ShaderProgram::getProgramID()
 {
 	return _programID;
 }

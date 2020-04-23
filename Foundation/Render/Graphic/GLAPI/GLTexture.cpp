@@ -139,3 +139,46 @@ void GLTexture::setTexSubImage2D(int nLevel, int xOffset, int yOffset, int width
 {
 	glTexSubImage2D((GLenum)TextureTarget::TEXTURE_2D, nLevel, xOffset, yOffset, width, height, (GLenum)pixelFormat, (GLenum)pixelType, data);
 }
+
+bool GLTexture::isTexturesResident(int n, const uint32_t* textures, bool* residences)
+{
+	uint8_t* data = (uint8_t*)malloc(n);
+	memset(data, 0, n);
+	int ret = glAreTexturesResident(n, textures, data);
+	for (int i = 0; i < n; i++)
+	{
+		residences[i] = data[i] == 1;
+	}
+
+	free(data);
+
+	return ret == 1;
+}
+
+bool GLTexture::isTextureResident(uint32_t texture)
+{
+	uint8_t data = 0;
+
+	int ret = glAreTexturesResident(1, &texture, &data);
+	return ret == 1;
+}
+
+void GLTexture::activeClientTexture(ActiveTextureName texture)
+{
+	glClientActiveTexture((GLenum)texture);
+}
+
+void GLTexture::activeTexture(ActiveTextureName texture)
+{
+	glActiveTexture((GLenum)texture);
+}
+
+void GLTexture::setPixelTransfer(PixelTransfer name, float value)
+{
+	glPixelTransferf((GLenum)name, value);
+}
+
+void GLTexture::setPixelMap(PixelMap name, int size, const float* value)
+{
+	glPixelMapfv((GLenum)name, size, value);
+}

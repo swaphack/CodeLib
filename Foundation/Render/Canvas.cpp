@@ -35,7 +35,7 @@ void Canvas::draw()
 	_root->visit();
 
 	//_drawCommander->flush();
-	GLState::flush();
+	GLRender::flush();
 }
 
 void Canvas::update(float interval)

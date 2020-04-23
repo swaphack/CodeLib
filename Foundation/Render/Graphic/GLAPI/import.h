@@ -1,7 +1,7 @@
 #pragma once
 
 #include "macros.h"
-#include "GLDisplayList.h"
+#include "GLCallList.h"
 #include "GLEvaluator.h"
 #include "GLFog.h"
 #include "GLState.h"
@@ -12,9 +12,11 @@
 #include "GLMatrix.h"
 #include "GLRender.h"
 #include "GLPixels.h"
-#include "GLPrimitive.h"
-#include "GLSetting.h"
 #include "GLShader.h"
-#include "GLFragment.h"
+#include "GLClientArrays.h"
 #include "GLTexture.h"
 #include "GLVertex.h"
+#include "GLFixedFunction.h"
+#include "GLVertexArrays.h"
+#include "GLSampler.h"
+#include "GLRasterization.h"

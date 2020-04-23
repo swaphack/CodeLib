@@ -33,7 +33,7 @@ namespace render
 		/**
 		*	程序编号
 		*/
-		int getProgramID();
+		uint32_t getProgramID();
 	public:
 		/**
 		*	关联着色器
@@ -107,7 +107,7 @@ namespace render
 		/**
 		*	程序编号
 		*/
-		int _programID = 0;
+		uint32_t _programID = 0;
 		/**
 		*	着色器
 		*/

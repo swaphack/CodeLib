@@ -7,7 +7,7 @@ namespace render
 	/**
 	*	œ‘ æ¡–±Ì
 	*/
-	class GLDisplayList
+	class GLCallList
 	{
 	public:
 		static void newList(uint32_t list, InterleavedArrays type);

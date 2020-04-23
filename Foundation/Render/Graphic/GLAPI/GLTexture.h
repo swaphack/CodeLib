@@ -77,7 +77,16 @@ namespace render
 		*	设置2d副图片
 		*/
 		static void setTexSubImage2D(int nLevel, int xOffset, int yOffset, int width, int height, PixelFormat pixelFormat, PixelType pixelType, const void* data);
+	public: // 纹理驻留
+		static bool isTexturesResident(int n, const uint32_t* textures, bool* residences);
+		static bool isTextureResident(uint32_t texture);
+	public: // 激活纹理
+		static void activeClientTexture(ActiveTextureName texture);
 	public:
-		
+		static void activeTexture(ActiveTextureName texture);
+
+		static void setPixelTransfer(PixelTransfer name, float value);
+
+		static void setPixelMap(PixelMap name, int size, const float* value);
 	};
 }

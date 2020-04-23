@@ -109,3 +109,23 @@ void GLMatrix::getTextureMatrix(float* value)
 {
 	GLState::getFloat(GetTarget::TEXTURE_MATRIX, value);
 }
+
+void GLMatrix::loadFrustum(float left, float right, float bottom, float top, float zNear, float zFar)
+{
+	glFrustum(left, right, bottom, top, zNear, zFar);
+}
+
+void GLMatrix::loadOrtho(float left, float right, float bottom, float top, float zNear, float zFar)
+{
+	glOrtho(left, right, bottom, top, zNear, zFar);
+}
+
+void GLMatrix::loadTransposeMatrix(float* value)
+{
+	glLoadTransposeMatrixf(value);
+}
+
+void GLMatrix::multTransposeMatrix(float* value)
+{
+	glMultTransposeMatrixf(value);
+}

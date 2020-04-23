@@ -27,7 +27,7 @@ void Fog::drawSample()
 	float farValue = _far / Tool::getGLViewSize().getDeep();
 
 	GLState::enable(EnableModel::FOG);
-	GLSetting::setFogHint(_fogEffect);
+	GLState::setFogHint(_fogEffect);
 	GLFog::setFogMode(_fogMode);
 	GLFog::setFogColor(c);
 	GLFog::setFogDensity(_density);

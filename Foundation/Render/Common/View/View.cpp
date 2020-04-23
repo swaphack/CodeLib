@@ -46,7 +46,7 @@ void View::initView()
 	if (isDirty())
 	{
 		// 定义视窗位置
-		GLPrimitive::setViewport(_position.getX(), _position.getY(), _size.getWidth(), _size.getHeight());
+		GLState::setViewport(_position.getX(), _position.getY(), _size.getWidth(), _size.getHeight());
 
 		this->applyConfig();
 
@@ -56,25 +56,25 @@ void View::initView()
 
 void View::updateView()
 {
-	GLPixels::clearColor(0, 0, 0, 0);
-	GLPixels::clearDepth(1.0f);
-	GLPixels::clearStencil(0);
+	GLRender::clearColor(0, 0, 0, 0);
+	GLRender::clearDepth(1.0f);
+	GLRender::clearStencil(0);
 
-	GLPixels::clearBuffer(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+	GLRender::clearBuffer(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 
 	GLDebug::showError();
 }
 
 void View::applyConfig()
 {
-	GLSetting::setShadeModel(ShadingModel::SMOOTH);
-	GLSetting::setPerspectiveCorrectionHint(HintMode::NICEST);
+	GLFixedFunction::setShadeModel(ShadingModel::SMOOTH);
+	GLState::setPerspectiveCorrectionHint(HintMode::NICEST);
 
 	GLState::enable(EnableModel::DEPTH_TEST);
-	GLFragment::testDepth(DepthFunction::LEQUAL);
-	GLPrimitive::setCullFace(CullFaceMode::BACK);
-	GLPrimitive::setFrontFace(FrontFaceDirection::CCW);
-	GLPrimitive::setPixelStore(PixelStore::UNPACK_ALIGNMENT, 1);
+	GLState::testDepth(DepthFunction::LEQUAL);
+	GLState::setCullFace(FaceType::BACK);
+	GLState::setFrontFace(FrontFaceDirection::CCW);
+	GLState::setPixelStore(PixelStore::UNPACK_ALIGNMENT, 1);
 
 	GLDebug::showError();
 }

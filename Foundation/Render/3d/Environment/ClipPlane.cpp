@@ -15,7 +15,7 @@ ClipPlane::~ClipPlane()
 
 void ClipPlane::draw()
 {
-	GLPrimitive::setClipPlane(getClipPlaneName(), _clipNormal);
+	GLRasterization::setClipPlane(getClipPlaneName(), _clipNormal);
 	GLState::enable((EnableModel)getClipPlaneName());
 }
 

@@ -68,30 +68,30 @@ void Stencil::visit()
 
 	GLState::enable(EnableModel::DEPTH_TEST);
 
-	GLFragment::setStencilOp(StencilOp::KEEP, StencilOp::KEEP, StencilOp::REPLACE);
-	GLFragment::testStencil(StencilFunction::ALWAYS, 1, 0xff);
+	GLState::setStencilOp(StencilOp::KEEP, StencilOp::KEEP, StencilOp::REPLACE);
+	GLState::setStencil(StencilFunction::ALWAYS, 1, 0xff);
 
-	GLPixels::setStencilMask(0xff);
+	GLState::setStencilMask(0xff);
 
 	//showStencilInformation();
 
-	GLPixels::setDepthMask(false);
+	GLState::setDepthMask(false);
 	if (_stencilNode)
 	{
 		_stencilNode->visit();
 	}
 
-	GLPixels::setDepthMask(true);
+	GLState::setDepthMask(true);
 
-	GLFragment::setStencilOp(StencilOp::KEEP, StencilOp::KEEP, StencilOp::KEEP);
-	GLFragment::testStencil(StencilFunction::EQUAL, 0x1, 0xff);
+	GLState::setStencilOp(StencilOp::KEEP, StencilOp::KEEP, StencilOp::KEEP);
+	GLState::setStencil(StencilFunction::EQUAL, 0x1, 0xff);
 
 	//showStencilInformation();
 
 	Node::visit();
 	
-	GLFragment::setStencilOp((StencilOp)nStencilFail, (StencilOp)nStencilPassDepthFail, (StencilOp)nStencilPassDepthPass);
-	GLFragment::testStencil((StencilFunction)nStencilFun, nStencilRef, nStencilValueMask);
+	GLState::setStencilOp((StencilOp)nStencilFail, (StencilOp)nStencilPassDepthFail, (StencilOp)nStencilPassDepthPass);
+	GLState::setStencil((StencilFunction)nStencilFun, nStencilRef, nStencilValueMask);
 	
 	if (isEnableDepthTest == GL_FALSE)
 	{

@@ -18,7 +18,7 @@ namespace render
 		/**
 		*	着色器编号
 		*/
-		int getShaderID();
+		uint32_t getShaderID();
 		/**
 		*	着色器类型
 		*/
@@ -57,7 +57,7 @@ namespace render
 		/**
 		*	着色器编号
 		*/
-		int _shaderID = 0;
+		uint32_t _shaderID = 0;
 		/**
 		*	着色器类型
 		*/

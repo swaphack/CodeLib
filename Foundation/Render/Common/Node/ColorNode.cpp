@@ -18,7 +18,7 @@ void ColorNode::draw()
 	//GLState::pushAttrib(AttribMask::COLOR_BUFFER_BIT);
 
 	GLState::enable(EnableModel::BLEND);
-	GLFragment::setBlend(getBlend().src, getBlend().dest);
+	GLState::setBlendFunc(getBlend().src, getBlend().dest);
 	GLVertex::setColor(getColor());
 
 	this->drawSample();

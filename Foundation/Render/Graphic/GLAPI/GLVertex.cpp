@@ -92,76 +92,6 @@ void GLVertex::setTexCoord2D(const math::Vector2& value)
 	setTexCoord2D(value.getX(), value.getY());
 }
 
-void GLVertex::setVertexPointer(int size, DataType type, int stride, const void* value)
-{
-	glVertexPointer(size, (GLenum)type, stride, value);
-}
-
-void GLVertex::setColorPointer(int size, DataType type, int stride, const void* value)
-{
-	glColorPointer(size, (GLenum)type, stride, value);
-}
-
-void GLVertex::setNormalPointer(DataType type, int stride, const void* value)
-{
-	glNormalPointer((GLenum)type, stride, value);
-}
-
-void GLVertex::setTexCoordPointer(int size, DataType type, int stride, const void* value)
-{
-	glTexCoordPointer(size, (GLenum)type, stride, value);
-}
-
-void GLVertex::setIndexPointer(IndexPointerType type, int stride, const void* value)
-{
-	glIndexPointer((GLenum)type, stride, value);
-}
-
-void GLVertex::setVertexPointer2(DataType type, int stride, const void* value)
-{
-	setVertexPointer(2, type, stride, value);
-}
-
-void GLVertex::setVertexPointer3(DataType type, int stride, const void* value)
-{
-	setVertexPointer(3, type, stride, value);
-}
-
-void GLVertex::setVertexPointer4(DataType type, int stride, const void* value)
-{
-	setVertexPointer(4, type, stride, value);
-}
-
-void GLVertex::setColorPointer3(DataType type, int stride, const void* value)
-{
-	setColorPointer(3, type, stride, value);
-}
-
-void GLVertex::setColorPointer4(DataType type, int stride, const void* value)
-{
-	setColorPointer(4, type, stride, value);
-}
-
-void GLVertex::setTexCoordPointer1(DataType type, int stride, const void* value)
-{
-	setTexCoordPointer(1, type, stride, value);
-}
-
-void GLVertex::setTexCoordPointer2(DataType type, int stride, const void* value)
-{
-	setTexCoordPointer(2, type, stride, value);
-}
-
-void GLVertex::setTexCoordPointer3(DataType type, int stride, const void* value)
-{
-	setTexCoordPointer(3, type, stride, value);
-}
-
-void GLVertex::setTexCoordPointer4(DataType type, int stride, const void* value)
-{
-	setTexCoordPointer(4, type, stride, value);
-}
-
 void GLVertex::drawArrayElement(int index)
 {
 	glArrayElement(index);
@@ -182,19 +112,9 @@ void GLVertex::setEdgeFlag(bool flag)
 	glEdgeFlag(flag);
 }
 
-void GLVertex::setEdgeFlagPointer(int stride, const void* flag)
-{
-	glEdgeFlagPointer(stride, flag);
-}
-
 void GLVertex::setIndex(int index)
 {
 	glIndexi(index);
-}
-
-void GLVertex::setInterleavedArrays(InterleavedArraysMode mode, int stride, const void* value)
-{
-	glInterleavedArrays((GLenum)mode, stride, value);
 }
 
 void GLVertex::setTexCoord3D(float s, float t, float r)

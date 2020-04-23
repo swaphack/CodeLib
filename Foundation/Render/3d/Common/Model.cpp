@@ -40,29 +40,29 @@ void Model::drawSample()
 		auto normals = pMesh->getNormals();
 		if (normals.size > 0)
 		{
-			GLState::enableClientState(ClientArrayType::NORMAL_ARRAY);
-			GLVertex::setNormalPointer(DataType::FLOAT, 0, normals.value);
+			GLClientArrays::enableClientState(ClientArrayType::NORMAL_ARRAY);
+			GLClientArrays::setNormalPointer(DataType::FLOAT, 0, normals.value);
 
 		}
 		auto vertices = pMesh->getVertices();
 		if (vertices.size > 0)
 		{
-			GLState::enableClientState(ClientArrayType::VERTEX_ARRAY);
-			GLVertex::setVertexPointer(vertices.unit, DataType::FLOAT, 0, vertices.value);
+			GLClientArrays::enableClientState(ClientArrayType::VERTEX_ARRAY);
+			GLClientArrays::setVertexPointer(vertices.unit, DataType::FLOAT, 0, vertices.value);
 
 		}
 		auto texcoords = pMesh->getUVs();
 		if (texcoords.size > 0)
 		{
-			GLState::enableClientState(ClientArrayType::TEXTURE_COORD_ARRAY);
-			GLVertex::setTexCoordPointer(texcoords.unit, DataType::FLOAT, 0, texcoords.value);
+			GLClientArrays::enableClientState(ClientArrayType::TEXTURE_COORD_ARRAY);
+			GLClientArrays::setTexCoordPointer(texcoords.unit, DataType::FLOAT, 0, texcoords.value);
 		}
 
 		auto colors = pMesh->getColors();
 		if (colors.size > 0)
 		{
-			GLState::enableClientState(ClientArrayType::COLOR_ARRAY);
-			GLVertex::setColorPointer(colors.unit, DataType::FLOAT, 0, colors.value);
+			GLClientArrays::enableClientState(ClientArrayType::COLOR_ARRAY);
+			GLClientArrays::setColorPointer(colors.unit, DataType::FLOAT, 0, colors.value);
 
 		}
 
@@ -89,10 +89,10 @@ void Model::drawSample()
 		}
 		GLState::disable(EnableModel::TEXTURE_2D);
 
-		GLState::disableClientState(ClientArrayType::VERTEX_ARRAY);
-		GLState::disableClientState(ClientArrayType::NORMAL_ARRAY);
-		GLState::disableClientState(ClientArrayType::TEXTURE_COORD_ARRAY);
-		GLState::disableClientState(ClientArrayType::COLOR_ARRAY);
+		GLClientArrays::disableClientState(ClientArrayType::VERTEX_ARRAY);
+		GLClientArrays::disableClientState(ClientArrayType::NORMAL_ARRAY);
+		GLClientArrays::disableClientState(ClientArrayType::TEXTURE_COORD_ARRAY);
+		GLClientArrays::disableClientState(ClientArrayType::COLOR_ARRAY);
 
 		//GLMatrix::multMatrix(inverse);
 	}

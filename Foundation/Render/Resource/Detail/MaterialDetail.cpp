@@ -54,20 +54,20 @@ void MaterialDetail::applyDefault()
 	static float matrialShiness = 0.0f;
 	static float matrialEmission[] = { 0.0f, 0.0f, 0.0f, 1.0f };
 
-	GLMaterial::setMaterialAmbient(MaterialFace::FRONT, matrialAmbient);
-	GLMaterial::setMaterialDiffuse(MaterialFace::FRONT, matrialDiffuse);
-	GLMaterial::setMaterialSpecular(MaterialFace::FRONT, matrialSpecular);
-	GLMaterial::setMaterialShininess(MaterialFace::FRONT, matrialShiness);
-	GLMaterial::setMaterialEmission(MaterialFace::FRONT, matrialEmission);
+	GLMaterial::setMaterialAmbient(FaceType::FRONT, matrialAmbient);
+	GLMaterial::setMaterialDiffuse(FaceType::FRONT, matrialDiffuse);
+	GLMaterial::setMaterialSpecular(FaceType::FRONT, matrialSpecular);
+	GLMaterial::setMaterialShininess(FaceType::FRONT, matrialShiness);
+	GLMaterial::setMaterialEmission(FaceType::FRONT, matrialEmission);
 }
 
 void MaterialDetail::apply()
 {
-	GLMaterial::setMaterialAmbient(MaterialFace::FRONT, _matrialAmbient);
-	GLMaterial::setMaterialDiffuse(MaterialFace::FRONT, _matrialDiffuse);
-	GLMaterial::setMaterialSpecular(MaterialFace::FRONT, _matrialSpecular);
-	GLMaterial::setMaterialShininess(MaterialFace::FRONT, _matrialShiness);
-	GLMaterial::setMaterialEmission(MaterialFace::FRONT, _matrialEmission);
+	GLMaterial::setMaterialAmbient(FaceType::FRONT, _matrialAmbient);
+	GLMaterial::setMaterialDiffuse(FaceType::FRONT, _matrialDiffuse);
+	GLMaterial::setMaterialSpecular(FaceType::FRONT, _matrialSpecular);
+	GLMaterial::setMaterialShininess(FaceType::FRONT, _matrialShiness);
+	GLMaterial::setMaterialEmission(FaceType::FRONT, _matrialEmission);
 }
 
 void MaterialDetail::setAmbientByte(uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha)

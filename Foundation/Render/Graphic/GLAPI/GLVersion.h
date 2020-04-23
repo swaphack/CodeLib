@@ -27,10 +27,16 @@ namespace render
 		*/
 		static std::string getVendorDetail();
 		/**
+		*	着色器语言 版本
+		*/
+		static std::string getShadingLanguageVersion();
+		/**
+		*	扩展
+		*/
+		static std::string getExtensions();
+		/**
 		*	显示版本信息
 		*/
 		static void showDetail();
-	protected:
-	private:
 	};
 }

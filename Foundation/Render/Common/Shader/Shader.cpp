@@ -15,7 +15,7 @@ Shader::~Shader()
 	this->releaseShader();
 }
 
-int Shader::getShaderID()
+uint32_t Shader::getShaderID()
 {
 	return _shaderID;
 }
