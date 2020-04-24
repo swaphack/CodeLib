@@ -7,42 +7,42 @@ uint32_t GLShader::createShader(ShaderType type)
 	return glCreateShader((GLenum)type);
 }
 
-void GLShader::deleteShader(uint32_t shaderID)
+void GLShader::deleteShader(uint32_t shader)
 {
-	glDeleteShader(shaderID);
+	glDeleteShader(shader);
 }
 
-void GLShader::loadShader(uint32_t shaderID, const char* data)
+void GLShader::loadShader(uint32_t shader, const char* data)
 {
-	glShaderSource(shaderID, 1, &data, nullptr);
-	glCompileShader(shaderID);
+	glShaderSource(shader, 1, &data, nullptr);
+	compileShader(shader);
 
 	int compiled = 0;
-	glGetProgramiv(shaderID, GL_COMPILE_STATUS, &compiled);
+	glGetProgramiv(shader, GL_COMPILE_STATUS, &compiled);
 	if (compiled != GL_TRUE)
 	{
-		showShaderStatus(shaderID);
+		showShaderStatus(shader);
 	}
 }
 
-void GLShader::attachShader(uint32_t programID, uint32_t shaderID)
+void GLShader::attachShader(uint32_t program, uint32_t shader)
 {
-	glAttachShader(programID, shaderID);
+	glAttachShader(program, shader);
 }
 
-void GLShader::detachShader(uint32_t programID, uint32_t shaderID)
+void GLShader::detachShader(uint32_t program, uint32_t shader)
 {
-	glDetachShader(programID, shaderID);
+	glDetachShader(program, shader);
 }
 
-void GLShader::showShaderStatus(uint32_t shaderID)
+void GLShader::showShaderStatus(uint32_t shader)
 {
 	GLsizei bufferSize = 0;
-	glGetShaderiv(shaderID, GL_INFO_LOG_LENGTH, &bufferSize);
+	glGetShaderiv(shader, GL_INFO_LOG_LENGTH, &bufferSize);
 	if (bufferSize > 0)
 	{
 		GLchar* buffer = new char[bufferSize];
-		glGetShaderInfoLog(shaderID, bufferSize, NULL, buffer);
+		glGetShaderInfoLog(shader, bufferSize, NULL, buffer);
 		PRINT("%s", buffer);
 		delete[] buffer;
 	}
@@ -53,44 +53,44 @@ uint32_t GLShader::createProgram()
 	return glCreateProgram();
 }
 
-void GLShader::deleteProgram(uint32_t programID)
+void GLShader::deleteProgram(uint32_t program)
 {
-	glDeleteProgram(programID);
+	glDeleteProgram(program);
 }
 
-void GLShader::linkProgram(uint32_t programID)
+void GLShader::linkProgram(uint32_t program)
 {
-	glLinkProgram(programID);
+	glLinkProgram(program);
 
 	int linkStatus = 0;
-	glGetProgramiv(programID, GL_LINK_STATUS, &linkStatus);
+	glGetProgramiv(program, GL_LINK_STATUS, &linkStatus);
 	if (linkStatus != GL_TRUE)
 	{
-		showProgramStatus(programID);
+		showProgramStatus(program);
 	}
 }
 
-void GLShader::useProgram(uint32_t programID)
+void GLShader::useProgram(uint32_t program)
 {
-	glUseProgram(programID);
+	glUseProgram(program);
 }
 
-void GLShader::showProgramStatus(uint32_t programID)
+void GLShader::showProgramStatus(uint32_t program)
 {
 	GLsizei bufferSize = 0;
-	glGetProgramiv(programID, GL_INFO_LOG_LENGTH, &bufferSize);
+	glGetProgramiv(program, GL_INFO_LOG_LENGTH, &bufferSize);
 	if (bufferSize > 0)
 	{
 		GLchar* buffer = new char[bufferSize];
-		glGetProgramInfoLog(programID, bufferSize, NULL, buffer);
+		glGetProgramInfoLog(program, bufferSize, NULL, buffer);
 		PRINT("%s", buffer);
 		delete[] buffer;
 	}
 }
 
-int GLShader::getAttrib(uint32_t programID, const char* attribName)
+int GLShader::getAttrib(uint32_t program, const char* attribName)
 {
-	return glGetAttribLocation(programID, attribName);
+	return glGetAttribLocation(program, attribName);
 }
 
 void GLShader::setAttribValue(uint32_t attribID, int len, const double* v)
@@ -232,9 +232,9 @@ void GLShader::setAttribValue(uint32_t attribID, uint16_t* value)
 	glVertexAttribPointer(attribID, 1, GL_UNSIGNED_SHORT, GL_FALSE, 0, value);
 }
 
-int GLShader::getUniform(int32_t programID, const char* uniformName)
+int GLShader::getUniform(int32_t program, const char* uniformName)
 {
-	return glGetUniformLocation(programID, uniformName);
+	return glGetUniformLocation(program, uniformName);
 }
 
 void GLShader::setUniformValue(int32_t uniformID, int type, int len, float* v)
@@ -348,6 +348,33 @@ void render::GLShader::bindFragDataLocation(uint32_t program, uint32_t colorNumb
 void render::GLShader::bindFragDataLocationIndexed(uint32_t program, uint32_t colorNumber, uint32_t index, const char* name)
 {
 	glBindFragDataLocationIndexed(program, colorNumber, index, name);
+}
+
+void render::GLShader::compileShader(uint32_t shader)
+{
+	glCompileShader(shader);
+}
+
+void render::GLShader::getActiveAtomicCounterBuffer(uint32_t program, uint32_t bufferIndex, AtomicCounterBufferName name, int* params)
+{
+	glGetActiveAtomicCounterBufferiv(program, bufferIndex, (GLenum)name, params);
+}
+
+void render::GLShader::getActiveAttrib(uint32_t program, uint32_t index, int bufSize, int *length, int *size, AttribType *type, char *name)
+{
+	uint32_t* data = new uint32_t[*size];
+	for (int i = 0; i < (*size); i++)
+	{
+		data[i] = (GLenum)type[i];
+	}
+	glGetActiveAttrib(program, index, bufSize, length, size, data, name);
+
+	delete data;
+}
+
+void render::GLShader::getActiveSubroutineName(uint32_t program, ShaderType shaderType, uint32_t index, int bufSize, int *length, char *name)
+{
+	glGetActiveSubroutineName(program, (GLenum)shaderType, index, bufSize, length, name);
 }
 
 void GLShader::createShaderProgram(ShaderType type, int size, const char** strings)

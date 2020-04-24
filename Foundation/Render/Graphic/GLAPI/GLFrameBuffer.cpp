@@ -78,12 +78,12 @@ void render::GLFrameBuffer::setNamedFramebufferDrawBuffers(uint32_t framebuffer,
 	delete data;
 }
 
-void render::GLFrameBuffer::setFramebufferParameter(FrameBufferTarget target, FramebufferParameterName name, int value)
+void render::GLFrameBuffer::setFramebufferParameter(FrameBufferTarget target, FramebufferParameter name, int value)
 {
 	glFramebufferParameteri((GLenum)target, (GLenum)name, value);
 }
 
-void render::GLFrameBuffer::setNamedFramebufferParameter(uint32_t framebuffer, FramebufferParameterName name, int value)
+void render::GLFrameBuffer::setNamedFramebufferParameter(uint32_t framebuffer, FramebufferParameter name, int value)
 {
 	glNamedFramebufferParameteri(framebuffer, (GLenum)name, value);
 }
@@ -163,22 +163,22 @@ void render::GLFrameBuffer::getNamedFramebufferAttachmentParameter(uint32_t fram
 	glGetNamedFramebufferAttachmentParameteriv(framebuffer, (GLenum)attachment, (GLenum)name, params);
 }
 
-void render::GLFrameBuffer::getFramebufferParameter(FrameBufferTarget target, AllFramebufferParameterName name, int *params)
+void render::GLFrameBuffer::getFramebufferParameter(FrameBufferTarget target, AllFramebufferParameter name, int *params)
 {
 	glGetFramebufferParameteriv((GLenum)target, (GLenum)name, params);
 }
 
-void render::GLFrameBuffer::getNamedFramebufferParameter(uint32_t framebuffer, FramebufferParameterName name, int *params)
+void render::GLFrameBuffer::getNamedFramebufferParameter(uint32_t framebuffer, FramebufferParameter name, int *params)
 {
 	glGetNamedFramebufferParameteriv(framebuffer, (GLenum)name, params);
 }
 
-void render::GLFrameBuffer::getRenderbufferParameter(RenderBufferTarget target, RenderbufferParameterName name, int *params)
+void render::GLFrameBuffer::getRenderbufferParameter(RenderBufferTarget target, RenderbufferParameter name, int *params)
 {
 	glGetRenderbufferParameteriv((GLenum)target, (GLenum)name, params);
 }
 
-void render::GLFrameBuffer::getNamedRenderbufferParameter(uint32_t renderbuffer, RenderbufferParameterName name, int *params)
+void render::GLFrameBuffer::getNamedRenderbufferParameter(uint32_t renderbuffer, RenderbufferParameter name, int *params)
 {
 	glGetNamedRenderbufferParameteriv(renderbuffer, (GLenum)name, params);
 }

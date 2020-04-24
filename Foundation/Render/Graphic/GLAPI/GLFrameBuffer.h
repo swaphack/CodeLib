@@ -24,8 +24,8 @@ namespace render
 		static void 	deleteRenderbuffers(int n, uint32_t *renderBuffers);
 		static void 	setDrawBuffers(int n, const DrawBufferType* bufs);
 		static void 	setNamedFramebufferDrawBuffers(uint32_t framebuffer, int n, const DrawBufferType* bufs);
-		static void 	setFramebufferParameter(FrameBufferTarget target, FramebufferParameterName name, int value);
-		static void 	setNamedFramebufferParameter(uint32_t framebuffer, FramebufferParameterName name, int value);
+		static void 	setFramebufferParameter(FrameBufferTarget target, FramebufferParameter name, int value);
+		static void 	setNamedFramebufferParameter(uint32_t framebuffer, FramebufferParameter name, int value);
 		static void 	setFramebufferRenderbuffer(FrameBufferTarget target, FramebufferAttachment attachment, RenderBufferTarget rbTarget, uint32_t renderBuffer);
 		static void 	setNamedFramebufferRenderbuffer(uint32_t framebuffer, FramebufferAttachment attachment, RenderBufferTarget rbTarget, uint32_t renderBuffer);
 		static void 	setFramebufferTexture(FrameBufferTarget target, FramebufferAttachment attachment, uint32_t texture, int level);
@@ -44,10 +44,10 @@ namespace render
 		static void 	getFramebufferAttachmentParameter(FrameBufferTarget target, FramebufferAttachment attachment, FramebufferAttachmentParameter name, int* params);
 		static void 	getNamedFramebufferAttachmentParameter(uint32_t framebuffer, FramebufferAttachment attachment, FramebufferAttachmentParameter name, int* params);
 
-		static void 	getFramebufferParameter(FrameBufferTarget target, AllFramebufferParameterName name, int *params);
-		static void 	getNamedFramebufferParameter(uint32_t framebuffer, FramebufferParameterName name, int *params);
-		static void 	getRenderbufferParameter(RenderBufferTarget target, RenderbufferParameterName name, int *params);
-		static void 	getNamedRenderbufferParameter(uint32_t renderbuffer, RenderbufferParameterName name, int *params);
+		static void 	getFramebufferParameter(FrameBufferTarget target, AllFramebufferParameter name, int *params);
+		static void 	getNamedFramebufferParameter(uint32_t framebuffer, FramebufferParameter name, int *params);
+		static void 	getRenderbufferParameter(RenderBufferTarget target, RenderbufferParameter name, int *params);
+		static void 	getNamedRenderbufferParameter(uint32_t renderbuffer, RenderbufferParameter name, int *params);
 		static void 	invalidateFramebuffer(FrameBufferTarget target, int num, const FramebufferAttachment* attachments);
 		static void 	invalidateNamesFramebuffer(uint32_t framebuffer, int num, const FramebufferAttachment* attachments);
 		static void 	invalidateSubFramebuffer(FrameBufferTarget target, int num, const FramebufferAttachment* attachments, int x, int y, int width, int height);

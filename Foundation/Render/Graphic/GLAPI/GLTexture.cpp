@@ -58,29 +58,29 @@ void GLTexture::deleteTextures(int count, uint32_t* textures)
 	glDeleteTextures(count, textures);
 }
 
-void GLTexture::setTexParameter(TextureTarget target, TextureParameterName paramType, int paramValue)
+void GLTexture::setTexParameter(TextureTarget target, TextureParameter paramType, int paramValue)
 {
 	glTexParameteri((GLenum)target, (GLenum)paramType, paramValue);
 }
 
 void GLTexture::setTexParameterMinFilter2D(TextureMinFilter paramValue)
 {
-	setTexParameter(TextureTarget::TEXTURE_2D, TextureParameterName::TEXTURE_MIN_FILTER, (int)paramValue);
+	setTexParameter(TextureTarget::TEXTURE_2D, TextureParameter::TEXTURE_MIN_FILTER, (int)paramValue);
 }
 
 void GLTexture::setTexParameterMagFilter2D(TextureMagFilter paramValue)
 {
-	setTexParameter(TextureTarget::TEXTURE_2D, TextureParameterName::TEXTURE_MAG_FILTER, (int)paramValue);
+	setTexParameter(TextureTarget::TEXTURE_2D, TextureParameter::TEXTURE_MAG_FILTER, (int)paramValue);
 }
 
 void GLTexture::setTexParameterWrapS2D(TextureWrapMode paramValue)
 {
-	setTexParameter(TextureTarget::TEXTURE_2D, TextureParameterName::TEXTURE_WRAP_S, (int)paramValue);
+	setTexParameter(TextureTarget::TEXTURE_2D, TextureParameter::TEXTURE_WRAP_S, (int)paramValue);
 }
 
 void GLTexture::setTexParameterWrapT2D(TextureWrapMode paramValue)
 {
-	setTexParameter(TextureTarget::TEXTURE_2D, TextureParameterName::TEXTURE_WRAP_T, (int)paramValue);
+	setTexParameter(TextureTarget::TEXTURE_2D, TextureParameter::TEXTURE_WRAP_T, (int)paramValue);
 }
 
 void GLTexture::setTexGenMode(TextureCoordName name, TextureGenParameter paramType)
@@ -301,22 +301,22 @@ void GLTexture::getTextureImage(uint32_t texture, int level, TexImageDataFormat 
 	glGetTextureImage(texture, level, (GLenum)format, (GLenum)type, bufSize, pixels);
 }
 
-void GLTexture::getTexLevelParameter(GetTexLevelTarget target, int level, GetTexLevelParameterName name, float* params)
+void GLTexture::getTexLevelParameter(GetTexLevelTarget target, int level, GetTexLevelParameter name, float* params)
 {
 	glGetTexLevelParameterfv((GLenum)target, level, (GLenum)level, params);
 }
 
-void GLTexture::getTexureLevelParameter(uint32_t texture, int level, GetTexLevelParameterName name, float* params)
+void GLTexture::getTexureLevelParameter(uint32_t texture, int level, GetTexLevelParameter name, float* params)
 {
 	glGetTextureLevelParameterfv(texture, level, (GLenum)level, params);
 }
 
-void GLTexture::getTexParameter(TextureTarget target, GetTexParameterName name, float* params)
+void GLTexture::getTexParameter(TextureTarget target, GetTexParameter name, float* params)
 {
 	glGetTexParameterfv((GLenum)target, (GLenum)name, params);
 }
 
-void GLTexture::getTexureParameter(uint32_t texture, GetTexParameterName name, float* params)
+void GLTexture::getTexureParameter(uint32_t texture, GetTexParameter name, float* params)
 {
 	glGetTextureParameterfv(texture, (GLenum)name, params);
 }
@@ -431,7 +431,7 @@ void GLTexture::setTextureView(uint32_t texture, TextureViewCompatibleNewTarget 
 	glTextureView(texture, (GLenum)target, origtexture, (GLenum)internalFormat, minlevel, numlevels, minlayer, numlayers);
 }
 
-void GLTexture::setTexParameter(TextureTarget target, TextureParameterName paramType, const float* paramValue)
+void GLTexture::setTexParameter(TextureTarget target, TextureParameter paramType, const float* paramValue)
 {
 	glTexParameterfv((GLenum)target, (GLenum)paramType, paramValue);
 }

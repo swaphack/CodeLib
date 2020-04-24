@@ -69,11 +69,11 @@ namespace render
 		static void getTexImage(TextureTarget target, int level, TexImageDataFormat format, TexImageDataType type, int bufSize, void* pixels);
 		static void getTextureImage(uint32_t texture, int level, TexImageDataFormat format, TexImageDataType type, int bufSize, void* pixels);
 	public:
-		static void getTexLevelParameter(GetTexLevelTarget target, int level, GetTexLevelParameterName name, float* params);
-		static void getTexureLevelParameter(uint32_t texture, int level, GetTexLevelParameterName name, float* params);
+		static void getTexLevelParameter(GetTexLevelTarget target, int level, GetTexLevelParameter name, float* params);
+		static void getTexureLevelParameter(uint32_t texture, int level, GetTexLevelParameter name, float* params);
 	public:
-		static void getTexParameter(TextureTarget target, GetTexParameterName name, float* params);
-		static void getTexureParameter(uint32_t texture, GetTexParameterName name, float* params);
+		static void getTexParameter(TextureTarget target, GetTexParameter name, float* params);
+		static void getTexureParameter(uint32_t texture, GetTexParameter name, float* params);
 	public:
 		static void getTextureSubImage(uint32_t texture, int level, int xoffset, int yoffset, int zoffset, int width, int height, int depth, TextureSubImageFormat format, TexImageDataType type, int bufSize, void* pixels);
 	public:
@@ -95,8 +95,8 @@ namespace render
 		static void setTexImage2DMultisample(TexImage2DMultisampleTarget target, int samples, GLenum internalformat, int width, int heigth, bool fixedsamplelocations);
 		static void setTexImage3DMultisample(TexImage3DMultisampleTarget target, int samples, GLenum internalformat, int width, int heigth, int depth, bool fixedsamplelocations);
 	public:
-		static void setTexParameter(TextureTarget target, TextureParameterName paramType, int paramValue);
-		static void setTexParameter(TextureTarget target, TextureParameterName paramType, const float* paramValue);
+		static void setTexParameter(TextureTarget target, TextureParameter paramType, int paramValue);
+		static void setTexParameter(TextureTarget target, TextureParameter paramType, const float* paramValue);
 
 		static void setTexParameterMinFilter2D(TextureMinFilter paramValue);
 		static void setTexParameterMagFilter2D(TextureMagFilter paramValue);
