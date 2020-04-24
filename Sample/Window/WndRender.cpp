@@ -81,9 +81,9 @@ void WndRender::show()
 
 	//test3ds();
 
-	//testObj();
+	testObj();
 
-	testFbx();
+	//testFbx();
 
 	//this->testCubeModel();
 	//this->testMultiFaceCube();
