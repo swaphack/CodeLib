@@ -27,8 +27,7 @@ void ScrollItem::addItem(Node* node, const math::Size& size)
 
 ScrollItem* ScrollItem::create(Node* node, const math::Size& size)
 {
-	ScrollItem* item = new ScrollItem();
-	AUTO_RELEASE_OBJECT(item);
+	ScrollItem* item = CREATE_NODE(ScrollItem);
 	item->addItem(node, size);
 
 	return item;
@@ -87,9 +86,6 @@ void CtrlScrollView::append(Node* item, const math::Size& size)
 	assert(size.getWidth() != 0 && size.getHeight() != 0);
 	
 	ScrollItem* pScrollItem = ScrollItem::create(item, size);
-	pScrollItem->init();
-	AUTO_RELEASE_OBJECT(pScrollItem);
-
 	_content->addChild(pScrollItem);
 	_nodes.push_back(pScrollItem);
 

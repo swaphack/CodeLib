@@ -36,7 +36,11 @@ namespace render
 		static void getProjectionMatrix(float* value);
 		static void getModelViewMatrix(float* value);
 		static void getTextureMatrix(float* value);
-	protected:
-	private:
+	public:
+		static void loadFrustum(float left, float right, float bottom, float top, float zNear, float zFar);
+		static void loadOrtho(float left, float right, float bottom, float top, float zNear, float zFar);
+	public:
+		static void loadTransposeMatrix(float* value);
+		static void multTransposeMatrix(float* value);
 	};
 }

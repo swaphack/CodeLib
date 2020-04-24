@@ -4,6 +4,7 @@
 
 namespace render
 {
+	class Texture2D;
 	class MaterialDetail;
 	class MeshDetail;
 
@@ -67,7 +68,7 @@ namespace render
 		/**
 		*	设置模型网格
 		*/
-		void addTexture(const std::string& name, int id);
+		void addTexture(const std::string& name, Texture2D* id);
 		/**
 		*	移除模型网格
 		*/
@@ -85,16 +86,16 @@ namespace render
 		void setModelFormat(ModelResourceFormat format);
 	public:
 		// 创建纹理
-		uint32_t createTexture(const std::string& strFileName, const std::string& dir);
+		Texture2D* createTexture(const std::string& strFileName, const std::string& dir);
 		// 创建纹理
-		uint32_t createTexture(const std::string& strFullpath);
+		Texture2D* createTexture(const std::string& strFullpath);
 	protected:
 		// 模型材质
 		std::map<int, MaterialDetail*> _materials;
 		// 纹理网格
 		std::map<int, MeshDetail*> _meshes;
 		// 图片纹理
-		std::map<std::string, int> _textures;
+		std::map<std::string, Texture2D*> _textures;
 	private:
 		// 模型资源格式
 		ModelResourceFormat _format = EMRF_NONE;

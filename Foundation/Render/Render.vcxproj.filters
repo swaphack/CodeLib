@@ -264,9 +264,6 @@
     <ClCompile Include="Graphic\GLAPI\GLDebug.cpp">
       <Filter>Graphic\GLAPI</Filter>
     </ClCompile>
-    <ClCompile Include="Graphic\GLAPI\GLSetting.cpp">
-      <Filter>Graphic\GLAPI</Filter>
-    </ClCompile>
     <ClCompile Include="Graphic\GLAPI\GLShader.cpp">
       <Filter>Graphic\GLAPI</Filter>
     </ClCompile>
@@ -288,16 +285,7 @@
     <ClCompile Include="Graphic\GLAPI\GLMaterial.cpp">
       <Filter>Graphic\GLAPI</Filter>
     </ClCompile>
-    <ClCompile Include="Graphic\GLAPI\GLPrimitive.cpp">
-      <Filter>Graphic\GLAPI</Filter>
-    </ClCompile>
     <ClCompile Include="Graphic\GLAPI\GLFog.cpp">
-      <Filter>Graphic\GLAPI</Filter>
-    </ClCompile>
-    <ClCompile Include="Graphic\GLAPI\GLFragment.cpp">
-      <Filter>Graphic\GLAPI</Filter>
-    </ClCompile>
-    <ClCompile Include="Graphic\GLAPI\GLPixels.cpp">
       <Filter>Graphic\GLAPI</Filter>
     </ClCompile>
     <ClCompile Include="Graphic\GLAPI\GLEvaluator.cpp">
@@ -306,14 +294,53 @@
     <ClCompile Include="Graphic\GLAPI\GLRender.cpp">
       <Filter>Graphic\GLAPI</Filter>
     </ClCompile>
-    <ClCompile Include="Graphic\GLAPI\GLDisplayList.cpp">
-      <Filter>Graphic\GLAPI</Filter>
-    </ClCompile>
     <ClCompile Include="Common\struct\texture_common.cpp">
       <Filter>Common\struct</Filter>
     </ClCompile>
     <ClCompile Include="Common\Audio\CtrlAudioSourceClip.cpp">
       <Filter>Common\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource\Paser\ImageBMP.cpp">
+      <Filter>Resource\Parser</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphic\GLAPI\GLCallList.cpp">
+      <Filter>Graphic\GLAPI</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphic\GLAPI\GLClientArrays.cpp">
+      <Filter>Graphic\GLAPI</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphic\GLAPI\GLRasterization.cpp">
+      <Filter>Graphic\GLAPI</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphic\GLAPI\GLVertexArrays.cpp">
+      <Filter>Graphic\GLAPI</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphic\GLAPI\GLQuery.cpp">
+      <Filter>Graphic\GLAPI</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphic\GLAPI\GLProgramPipelines.cpp">
+      <Filter>Graphic\GLAPI</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphic\GLAPI\GLSampler.cpp">
+      <Filter>Graphic\GLAPI</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphic\GLAPI\GLSync.cpp">
+      <Filter>Graphic\GLAPI</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphic\GLAPI\GLUtility.cpp">
+      <Filter>Graphic\GLAPI</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphic\GLAPI\GLTransformFeedback.cpp">
+      <Filter>Graphic\GLAPI</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphic\GLAPI\GLFixedFunction.cpp">
+      <Filter>Graphic\GLAPI</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphic\GLAPI\GLBufferObjects.cpp">
+      <Filter>Graphic\GLAPI</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphic\GLAPI\GLFrameBuffer.cpp">
+      <Filter>Graphic\GLAPI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -753,9 +780,6 @@
     <ClInclude Include="Graphic\GLAPI\GLDebug.h">
       <Filter>Graphic\GLAPI</Filter>
     </ClInclude>
-    <ClInclude Include="Graphic\GLAPI\GLSetting.h">
-      <Filter>Graphic\GLAPI</Filter>
-    </ClInclude>
     <ClInclude Include="Graphic\GLAPI\GLShader.h">
       <Filter>Graphic\GLAPI</Filter>
     </ClInclude>
@@ -777,16 +801,7 @@
     <ClInclude Include="Graphic\GLAPI\GLMaterial.h">
       <Filter>Graphic\GLAPI</Filter>
     </ClInclude>
-    <ClInclude Include="Graphic\GLAPI\GLPrimitive.h">
-      <Filter>Graphic\GLAPI</Filter>
-    </ClInclude>
     <ClInclude Include="Graphic\GLAPI\GLFog.h">
-      <Filter>Graphic\GLAPI</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphic\GLAPI\GLFragment.h">
-      <Filter>Graphic\GLAPI</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphic\GLAPI\GLPixels.h">
       <Filter>Graphic\GLAPI</Filter>
     </ClInclude>
     <ClInclude Include="Graphic\GLAPI\GLEvaluator.h">
@@ -795,11 +810,50 @@
     <ClInclude Include="Graphic\GLAPI\GLRender.h">
       <Filter>Graphic\GLAPI</Filter>
     </ClInclude>
-    <ClInclude Include="Graphic\GLAPI\GLDisplayList.h">
-      <Filter>Graphic\GLAPI</Filter>
-    </ClInclude>
     <ClInclude Include="Common\Audio\CtrlAudioSourceClip.h">
       <Filter>Common\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\Paser\ImageBMP.h">
+      <Filter>Resource\Parser</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphic\GLAPI\GLCallList.h">
+      <Filter>Graphic\GLAPI</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphic\GLAPI\GLClientArrays.h">
+      <Filter>Graphic\GLAPI</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphic\GLAPI\GLRasterization.h">
+      <Filter>Graphic\GLAPI</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphic\GLAPI\GLVertexArrays.h">
+      <Filter>Graphic\GLAPI</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphic\GLAPI\GLQuery.h">
+      <Filter>Graphic\GLAPI</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphic\GLAPI\GLProgramPipelines.h">
+      <Filter>Graphic\GLAPI</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphic\GLAPI\GLSampler.h">
+      <Filter>Graphic\GLAPI</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphic\GLAPI\GLSync.h">
+      <Filter>Graphic\GLAPI</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphic\GLAPI\GLUtility.h">
+      <Filter>Graphic\GLAPI</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphic\GLAPI\GLTransformFeedback.h">
+      <Filter>Graphic\GLAPI</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphic\GLAPI\GLFixedFunction.h">
+      <Filter>Graphic\GLAPI</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphic\GLAPI\GLBufferObjects.h">
+      <Filter>Graphic\GLAPI</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphic\GLAPI\GLFrameBuffer.h">
+      <Filter>Graphic\GLAPI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

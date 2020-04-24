@@ -15,10 +15,9 @@ CtrlImage::~CtrlImage()
 
 }
 
-void CtrlImage::setImagePath(const char* path, ImageFormat format /*= EIF_PNG*/)
+void CtrlImage::setImagePath(const std::string& path)
 {
-	_imageDefine.filepath = path;
-	_imageDefine.format = format;
+	_imageDefine.setFilePath(path);
 
 	Texture2D* texture = G_TEXTURE_CACHE->createTexture2D(_imageDefine);
 	if (texture == nullptr)
@@ -30,7 +29,7 @@ void CtrlImage::setImagePath(const char* path, ImageFormat format /*= EIF_PNG*/)
 	this->setVolume(static_cast<float>(texture->getWidth()), static_cast<float>(texture->getHeight()), static_cast<float>(texture->getDeep()));
 }
 
-const char* CtrlImage::getImagePath()
+const std::string& CtrlImage::getImagePath()
 {
-	return _imageDefine.filepath.c_str();
+	return _imageDefine.filepath;
 }

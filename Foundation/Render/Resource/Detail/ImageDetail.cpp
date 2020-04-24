@@ -7,8 +7,8 @@ using namespace render;
 ImageDetail::ImageDetail()
 :_width(0)
 ,_height(0)
-,_format(PixelFormat::RGBA)
-, _internalFormat(TextureParameter::THREE)
+,_format(TexImageDataFormat::RGB)
+, _internalFormat(TexImageInternalFormat::RGB)
 ,_pixels(nullptr)
 {
 
@@ -28,12 +28,12 @@ void ImageDetail::setPixels(uint8_t * val, uint32_t width, uint32_t height, int 
 	_height = height;
 }
 
-void ImageDetail::setInternalFormat(TextureParameter val)
+void ImageDetail::setInternalFormat(TexImageInternalFormat val)
 {
 	_internalFormat = val;
 }
 
-void ImageDetail::setFormat(PixelFormat val)
+void ImageDetail::setFormat(TexImageDataFormat val)
 {
 	_format = val;
 }
@@ -42,12 +42,12 @@ uint8_t * ImageDetail::getPixels() const
 	return _pixels;
 }
 
-TextureParameter ImageDetail::getInternalFormat() const
+TexImageInternalFormat ImageDetail::getInternalFormat() const
 {
 	return _internalFormat;
 }
 
-PixelFormat ImageDetail::getFormat() const
+TexImageDataFormat ImageDetail::getFormat() const
 {
 	return _format;
 }

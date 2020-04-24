@@ -31,26 +31,21 @@ void ModelDetail::setModelFormat(ModelResourceFormat format)
 	_format = format;
 }
 
-uint32_t ModelDetail::createTexture(const std::string& strFileName, const std::string& dir)
+Texture2D* ModelDetail::createTexture(const std::string& strFileName, const std::string& dir)
 {
 	std::string fullpath = dir + "/" + strFileName;
 
 	return createTexture(fullpath);
 }
 
-uint32_t ModelDetail::createTexture(const std::string& strFullpath)
+Texture2D* ModelDetail::createTexture(const std::string& strFullpath)
 {
 	if (strFullpath.empty())
 	{
-		return 0;
+		return nullptr;
 	}
 	Texture2D* pTexture = G_TEXTURE_CACHE->createTexture2D(strFullpath);
-	if (pTexture == nullptr)
-	{
-		return 0;
-	}
-
-	return pTexture->getTextureID();
+	return pTexture;
 }
 
 void ModelDetail::addMaterial(int id, MaterialDetail* material)
@@ -145,9 +140,15 @@ MeshDetail* ModelDetail::getMesh(int id)
 	return it->second;
 }
 
-void ModelDetail::addTexture(const std::string& name, int id)
+void ModelDetail::addTexture(const std::string& name, Texture2D* id)
 {
+	if (id == nullptr)
+	{
+		return;
+	}
 	this->removeTexture(name);
+
+	SAFE_RETAIN(id);
 
 	_textures[name] = id;
 }
@@ -160,7 +161,7 @@ void ModelDetail::removeTexture(const std::string& name)
 		return;
 	}
 
-	G_TEXTURE_CACHE->removeTexture(name.c_str());
+	SAFE_RELEASE(it->second);
 
 	_textures.erase(it);
 }
@@ -169,7 +170,7 @@ void ModelDetail::removeAllTextures()
 {
 	for (auto item : _textures)
 	{
-		G_TEXTURE_CACHE->removeTexture(item.first);
+		SAFE_RELEASE(item.second);
 	}
 	_textures.clear();
 }
@@ -182,7 +183,7 @@ int ModelDetail::getTexture(const std::string& name)
 		return 0;
 	}
 
-	return it->second;
+	return it->second->getTextureID();
 }
 
 const std::map<int, MaterialDetail*>& ModelDetail::geMaterials()

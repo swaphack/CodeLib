@@ -12,11 +12,11 @@ namespace render
 		virtual ~CtrlImage();
 	public:
 		// 设置图片路径
-		void setImagePath(const char* path, ImageFormat format = EIF_PNG);
+		void setImagePath(const std::string& path);
 		// 获取图片路径
-		const char* getImagePath();
+		const std::string& getImagePath();
 	private:
 		// 图片结构
-		Ctrl_ImageDefine _imageDefine;
+		ImageDefine _imageDefine;
 	};
 }

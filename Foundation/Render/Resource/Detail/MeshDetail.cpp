@@ -80,7 +80,7 @@ int MeshDetail::getMaterial()
 	return _material;
 }
 
-void MeshDetail::setIndices(int size, uint16_t* indices)
+void MeshDetail::setIndices(int size, uint32_t* indices)
 {
 	_indices.init(size, indices);
 }
@@ -98,4 +98,14 @@ const math::Matrix44& MeshDetail::getMatrix()
 void MeshDetail::setMatrix(const math::Matrix44& mat)
 {
 	_matrix = mat;
+}
+
+const std::string& MeshDetail::getMeshName()
+{
+	return _meshName;
+}
+
+void MeshDetail::setMeshName(const std::string& name)
+{
+	_meshName = name;
 }

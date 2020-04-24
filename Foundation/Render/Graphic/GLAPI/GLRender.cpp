@@ -2,56 +2,65 @@
 
 using namespace render;
 
-void GLRender::setRenderMode(RenderingMode mode)
+void GLRender::clearBuffer(int mask)
 {
-	glRenderMode((GLenum)mode);
-}
-void GLRender::setRenderMode()
-{
-	setRenderMode(RenderingMode::RENDER);
+	glClear(mask);
 }
 
-void GLRender::setSelectMode()
+void GLRender::clearBuffer(ClearBufferMask mask)
 {
-	setRenderMode(RenderingMode::SELECT);
+	glClear((GLbitfield)mask);
 }
 
-void GLRender::getSelectBuffer(int size, uint32_t* buffer)
+void GLRender::clearColor(float red, float green, float blue, float alpha)
 {
-	glSelectBuffer(size, buffer);
+	glClearColor(red, green, blue, alpha);
 }
 
-void GLRender::initNames()
+void GLRender::clearDepth(float depth)
 {
-	glInitNames();
+	glClearDepth(depth);
 }
 
-void GLRender::loadName(int name)
+void GLRender::clearStencil(int mask)
 {
-	glLoadName(name);
+	glClearStencil(mask);
 }
 
-void GLRender::pushName(int name)
+
+void GLRender::setDrawBuffMode(DrawBufferMode mode)
 {
-	glPushName(name);
+	glDrawBuffer((GLenum)mode);
 }
 
-void GLRender::popName()
+void GLRender::setNamedFramebufferDrawBuffer(GLuint framebuffer, DrawBufferMode mode)
 {
-	glPopName();
+	glNamedFramebufferDrawBuffer(framebuffer, (GLenum)mode);
 }
 
-void GLRender::setFeedbackMode()
+
+void GLRender::finish()
 {
-	setRenderMode(RenderingMode::FEEDBACK);
+	glFinish();
 }
 
-void GLRender::getFeedBackBuffer(int size, FeedBackMode mode, float* buffer)
+void GLRender::flush()
 {
-	glFeedbackBuffer(size, (GLenum)mode, buffer);
+	glFlush();
 }
 
-void GLRender::setPassThrough(float value)
+void GLRender::setReadBufferMode(ReadBufferMode mode)
 {
-	glPassThrough(value);
+	glReadBuffer((GLenum)mode);
+}
+
+void GLRender::setNamedFramebufferReadBuffer(GLuint framebuffer, DrawBufferMode mode)
+{
+	glNamedFramebufferReadBuffer(framebuffer, (GLenum)mode);
+}
+
+
+void GLRender::readPixels(float x, float y, float width, float height, TexImageDataFormat pixelFormat, TexImageDataType pixelType, void* data)
+{
+	glReadPixels(x, y, width, height, (GLenum)pixelFormat, (GLenum)pixelType, data);
 }

@@ -9,26 +9,23 @@ namespace render
 	class GLRender
 	{
 	public:
-		/**
-		*	设置渲染样式
-		*/
-		static void setRenderMode(RenderingMode mode);
+		static void clearBuffer(int mask);
+		static void clearBuffer(ClearBufferMask mask);
+		static void clearColor(float red, float green, float blue, float alpha);
+
+		static void clearDepth(float depth);
+		static void clearStencil(int mask);
 	public:
-		/**
-		*	设置成渲染， 默认
-		*/
-		static void setRenderMode();
+
+		static void setDrawBuffMode(DrawBufferMode mode);
+		static void setNamedFramebufferDrawBuffer(GLuint framebuffer, DrawBufferMode mode);
 	public:
-		static void setSelectMode();
-		static void getSelectBuffer(int size, uint32_t* buffer);
-	public:// name stack
-		static void initNames();
-		static void loadName(int name);
-		static void pushName(int name);
-		static void popName();
+		static void finish();
+		static void flush();
 	public:
-		static void setFeedbackMode();
-		static void getFeedBackBuffer(int size, FeedBackMode mode, float* buffer);
-		static void setPassThrough(float value);
+		static void setReadBufferMode(ReadBufferMode mode);
+		static void setNamedFramebufferReadBuffer(GLuint framebuffer, DrawBufferMode mode);
+
+		static void readPixels(float x, float y, float width, float height, TexImageDataFormat pixelFormat, TexImageDataType pixelType, void* data);
 	};
 }

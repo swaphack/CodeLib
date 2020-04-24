@@ -16,11 +16,11 @@ void DrawNode::drawSample()
 {
 	if (_drawMode == ShapeMode::POINTS)
 	{
-		GLPrimitive::setPointSize(_width);
+		GLState::setPointSize(_width);
 	}
 	else
 	{
-		GLPrimitive::setPointSize(_width);
+		GLState::setLineWidth(_width);
 	}
 
 	GLVertex::beginMode(_drawMode);

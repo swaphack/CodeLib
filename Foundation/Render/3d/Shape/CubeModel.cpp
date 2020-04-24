@@ -66,18 +66,18 @@ void CubeModel::onCubeChange()
 	}
 }
 
-void CubeModel::setTexture(const std::string& name, Texture* texture)
+void CubeModel::setTexture(const std::string& name, Texture2D* texture)
 {
 	SAFE_RELEASE(_texture);
 	SAFE_RETAIN(texture);
 	_texture = texture;
 
-	_modelDetail->addTexture(name, texture->getTextureID());
+	_modelDetail->addTexture(name, texture);
 
 	auto pMat = _modelDetail->getMaterial(0);
 	if (pMat)
 	{
-		pMat->setTexture1(name);
+		pMat->setAmbientTextureMap(name);
 	}
 }
 

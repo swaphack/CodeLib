@@ -2,110 +2,98 @@
 #include "macros.h"
 using namespace render;
 
-int GLShader::createShader(ShaderType type)
+uint32_t GLShader::createShader(ShaderType type)
 {
 	return glCreateShader((GLenum)type);
 }
 
-void GLShader::deleteShader(int shaderID)
+void GLShader::deleteShader(uint32_t shader)
 {
-	glDeleteShader(shaderID);
+	glDeleteShader(shader);
 }
 
-void GLShader::loadShader(int shaderID, const char* data)
+void GLShader::loadShader(uint32_t shader, const char* data)
 {
-	glShaderSource(shaderID, 1, &data, nullptr);
-	glCompileShader(shaderID);
+	glShaderSource(shader, 1, &data, nullptr);
+	compileShader(shader);
 
 	int compiled = 0;
-	glGetProgramiv(shaderID, GL_COMPILE_STATUS, &compiled);
+	glGetProgramiv(shader, GL_COMPILE_STATUS, &compiled);
 	if (compiled != GL_TRUE)
 	{
-		showShaderStatus(shaderID);
+		showShaderStatus(shader);
 	}
 }
 
-void GLShader::attachShader(int programID, int shaderID)
+void GLShader::attachShader(uint32_t program, uint32_t shader)
 {
-	glAttachShader(programID, shaderID);
+	glAttachShader(program, shader);
 }
 
-void GLShader::detachShader(int programID, int shaderID)
+void GLShader::detachShader(uint32_t program, uint32_t shader)
 {
-	glDetachShader(programID, shaderID);
+	glDetachShader(program, shader);
 }
 
-void GLShader::showShaderStatus(int shaderID)
+void GLShader::showShaderStatus(uint32_t shader)
 {
-	GLint state;
-	glGetShaderiv(shaderID, GL_COMPILE_STATUS, &state);
-	if (state == GL_TRUE)
-	{
-		return;
-	}
 	GLsizei bufferSize = 0;
-	glGetShaderiv(shaderID, GL_INFO_LOG_LENGTH, &bufferSize);
+	glGetShaderiv(shader, GL_INFO_LOG_LENGTH, &bufferSize);
 	if (bufferSize > 0)
 	{
 		GLchar* buffer = new char[bufferSize];
-		glGetShaderInfoLog(shaderID, bufferSize, NULL, buffer);
+		glGetShaderInfoLog(shader, bufferSize, NULL, buffer);
 		PRINT("%s", buffer);
 		delete[] buffer;
 	}
 }
 
-int GLShader::createProgram()
+uint32_t GLShader::createProgram()
 {
 	return glCreateProgram();
 }
 
-void GLShader::deleteProgram(int programID)
+void GLShader::deleteProgram(uint32_t program)
 {
-	glDeleteProgram(programID);
+	glDeleteProgram(program);
 }
 
-void GLShader::linkProgram(int programID)
+void GLShader::linkProgram(uint32_t program)
 {
-	glLinkProgram(programID);
+	glLinkProgram(program);
 
 	int linkStatus = 0;
-	glGetProgramiv(programID, GL_LINK_STATUS, &linkStatus);
+	glGetProgramiv(program, GL_LINK_STATUS, &linkStatus);
 	if (linkStatus != GL_TRUE)
 	{
-		showProgramStatus(programID);
+		showProgramStatus(program);
 	}
 }
 
-void GLShader::useProgram(int programID)
+void GLShader::useProgram(uint32_t program)
 {
-	glUseProgram(programID);
+	glUseProgram(program);
 }
 
-void GLShader::showProgramStatus(int programID)
+void GLShader::showProgramStatus(uint32_t program)
 {
-	GLint state;
-	glGetProgramiv(programID, GL_LINK_STATUS, &state);
-	if (state == GL_TRUE)
-	{
-		return;
-	}
 	GLsizei bufferSize = 0;
-	glGetProgramiv(programID, GL_INFO_LOG_LENGTH, &bufferSize);
+	glGetProgramiv(program, GL_INFO_LOG_LENGTH, &bufferSize);
 	if (bufferSize > 0)
 	{
 		GLchar* buffer = new char[bufferSize];
-		glGetProgramInfoLog(programID, bufferSize, NULL, buffer);
+		glGetProgramInfoLog(program, bufferSize, NULL, buffer);
 		PRINT("%s", buffer);
 		delete[] buffer;
 	}
 }
 
-int GLShader::getAttrib(int programID, const char* attribName)
+int GLShader::getAttrib(uint32_t program, const char* attribName)
 {
-	return glGetAttribLocation(programID, attribName);
+	return glGetAttribLocation(program, attribName);
 }
 
-void GLShader::setAttribValue(int attribID, int len, const double* v)
+void GLShader::setAttribValue(uint32_t attribID, int len, const double* v)
 {
 	ASSERT(len != 0 && v != nullptr);
 
@@ -115,7 +103,7 @@ void GLShader::setAttribValue(int attribID, int len, const double* v)
 	if (len == 4) glVertexAttrib4dv(attribID, v);
 }
 
-void GLShader::setAttribValue(int attribID, int len, const float* v)
+void GLShader::setAttribValue(uint32_t attribID, int len, const float* v)
 {
 	ASSERT(len != 0 && v != nullptr);
 
@@ -125,28 +113,28 @@ void GLShader::setAttribValue(int attribID, int len, const float* v)
 	if (len == 4) glVertexAttrib4fv(attribID, v);
 }
 
-void GLShader::setAttribValue(int attribID, int len, const uint32_t* v)
+void GLShader::setAttribValue(uint32_t attribID, int len, const uint32_t* v)
 {
 	ASSERT(len == 4 && v != nullptr);
 
 	glVertexAttrib4uiv(attribID, v);
 }
 
-void GLShader::setAttribValue(int attribID, int len, const int32_t* v)
+void GLShader::setAttribValue(uint32_t attribID, int len, const int32_t* v)
 {
 	ASSERT(len == 4 && v != nullptr);
 
 	glVertexAttrib4Niv(attribID, v);
 }
 
-void GLShader::setAttribValue(int attribID, int len, const uint16_t* v)
+void GLShader::setAttribValue(uint32_t attribID, int len, const uint16_t* v)
 {
 	ASSERT(len == 4 && v != nullptr);
 
 	glVertexAttrib4usv(attribID, v);
 }
 
-void GLShader::setAttribValue(int attribID, int len, const int16_t* v)
+void GLShader::setAttribValue(uint32_t attribID, int len, const int16_t* v)
 {
 	ASSERT(len != 0 && v != nullptr);
 
@@ -156,100 +144,100 @@ void GLShader::setAttribValue(int attribID, int len, const int16_t* v)
 	if (len == 4) glVertexAttrib4sv(attribID, v);
 }
 
-void GLShader::setAttribValue(int attribID, int len, const uint8_t* v)
+void GLShader::setAttribValue(uint32_t attribID, int len, const uint8_t* v)
 {
 	ASSERT(len == 4 && v != nullptr);
 
 	glVertexAttrib4ubv(attribID, v);
 }
 
-void GLShader::setAttribValue(int attribID, int len, const int8_t* v)
+void GLShader::setAttribValue(uint32_t attribID, int len, const int8_t* v)
 {
 	ASSERT(len == 4 && v != nullptr);
 
 	glVertexAttrib4Nbv(attribID, v);
 }
 
-void GLShader::setAttribValue(int attribID, double v0)
+void GLShader::setAttribValue(uint32_t attribID, double v0)
 {
 	glVertexAttrib1d(attribID, v0);
 }
 
-void GLShader::setAttribValue(int attribID, double v0, double v1)
+void GLShader::setAttribValue(uint32_t attribID, double v0, double v1)
 {
 	glVertexAttrib2d(attribID, v0, v1);
 }
 
-void GLShader::setAttribValue(int attribID, double v0, double v1, double v2)
+void GLShader::setAttribValue(uint32_t attribID, double v0, double v1, double v2)
 {
 	glVertexAttrib3d(attribID, v0, v1, v2);
 }
 
-void GLShader::setAttribValue(int attribID, double v0, double v1, double v2, double v3)
+void GLShader::setAttribValue(uint32_t attribID, double v0, double v1, double v2, double v3)
 {
 	glVertexAttrib4d(attribID, v0, v1, v2, v3);
 }
 
-void GLShader::setAttribValue(int attribID, float v0)
+void GLShader::setAttribValue(uint32_t attribID, float v0)
 {
 	glVertexAttrib1f(attribID, v0);
 }
 
-void GLShader::setAttribValue(int attribID, float v0, float v1)
+void GLShader::setAttribValue(uint32_t attribID, float v0, float v1)
 {
 	glVertexAttrib2f(attribID, v0, v1);
 }
 
-void GLShader::setAttribValue(int attribID, float v0, float v1, float v2)
+void GLShader::setAttribValue(uint32_t attribID, float v0, float v1, float v2)
 {
 	glVertexAttrib3f(attribID, v0, v1, v2);
 }
 
-void GLShader::setAttribValue(int attribID, float v0, float v1, float v2, float v3)
+void GLShader::setAttribValue(uint32_t attribID, float v0, float v1, float v2, float v3)
 {
 	glVertexAttrib4f(attribID, v0, v1, v2, v3);
 }
 
-void GLShader::setAttribValue(int attribID, uint16_t v0)
+void GLShader::setAttribValue(uint32_t attribID, uint16_t v0)
 {
 	glVertexAttrib1s(attribID, v0);
 }
 
-void GLShader::setAttribValue(int attribID, uint16_t v0, uint16_t v1)
+void GLShader::setAttribValue(uint32_t attribID, uint16_t v0, uint16_t v1)
 {
 	glVertexAttrib2s(attribID, v0, v1);
 }
 
-void GLShader::setAttribValue(int attribID, uint16_t v0, uint16_t v1, uint16_t v2)
+void GLShader::setAttribValue(uint32_t attribID, uint16_t v0, uint16_t v1, uint16_t v2)
 {
 	glVertexAttrib3s(attribID, v0, v1, v2);
 }
 
-void GLShader::setAttribValue(int attribID, uint16_t v0, uint16_t v1, uint16_t v2, uint16_t v3)
+void GLShader::setAttribValue(uint32_t attribID, uint16_t v0, uint16_t v1, uint16_t v2, uint16_t v3)
 {
 	glVertexAttrib4s(attribID, v0, v1, v2, v3);
 }
 
-void GLShader::setAttribValue(int attribID, float* value)
+void GLShader::setAttribValue(uint32_t attribID, float* value)
 {
 	ASSERT(value != nullptr);
 
 	glVertexAttribPointer(attribID, 1, GL_FLOAT, GL_FALSE, 0, value);
 }
 
-void GLShader::setAttribValue(int attribID, uint16_t* value)
+void GLShader::setAttribValue(uint32_t attribID, uint16_t* value)
 {
 	ASSERT(value != nullptr);
 
 	glVertexAttribPointer(attribID, 1, GL_UNSIGNED_SHORT, GL_FALSE, 0, value);
 }
 
-int GLShader::getUniform(int programID, const char* uniformName)
+int GLShader::getUniform(int32_t program, const char* uniformName)
 {
-	return glGetUniformLocation(programID, uniformName);
+	return glGetUniformLocation(program, uniformName);
 }
 
-void GLShader::setUniformValue(int uniformID, int type, int len, float* v)
+void GLShader::setUniformValue(int32_t uniformID, int type, int len, float* v)
 {
 	ASSERT(type != 0 && len > 0 && v != nullptr);
 
@@ -259,7 +247,7 @@ void GLShader::setUniformValue(int uniformID, int type, int len, float* v)
 	if (type == 4) glUniform4fv(uniformID, len, v);
 }
 
-void GLShader::setUniformValue(int uniformID, int type, int len, int32_t* v)
+void GLShader::setUniformValue(int32_t uniformID, int type, int len, int32_t* v)
 {
 	ASSERT(type != 0 && len > 0 && v != nullptr);
 
@@ -269,62 +257,62 @@ void GLShader::setUniformValue(int uniformID, int type, int len, int32_t* v)
 	if (type == 4) glUniform1iv(uniformID, len, v);
 }
 
-void GLShader::setUniformValue(int uniformID, float v0)
+void GLShader::setUniformValue(int32_t uniformID, float v0)
 {
 	glUniform1f(uniformID, v0);
 }
 
-void GLShader::setUniformValue(int uniformID, float v0, float v1)
+void GLShader::setUniformValue(int32_t uniformID, float v0, float v1)
 {
 	glUniform2f(uniformID, v0, v1);
 }
 
-void GLShader::setUniformValue(int uniformID, float v0, float v1, float v2)
+void GLShader::setUniformValue(int32_t uniformID, float v0, float v1, float v2)
 {
 	glUniform3f(uniformID, v0, v1, v2);
 }
 
-void GLShader::setUniformValue(int uniformID, float v0, float v1, float v2, float v3)
+void GLShader::setUniformValue(int32_t uniformID, float v0, float v1, float v2, float v3)
 {
 	glUniform4f(uniformID, v0, v1, v2, v3);
 }
 
-void GLShader::setUniformValue(int uniformID, int32_t v0)
+void GLShader::setUniformValue(int32_t uniformID, int32_t v0)
 {
 	glUniform1i(uniformID, v0);
 }
 
-void GLShader::setUniformValue(int uniformID, int32_t v0, int32_t v1)
+void GLShader::setUniformValue(int32_t uniformID, int32_t v0, int32_t v1)
 {
 	glUniform2i(uniformID, v0, v1);
 }
 
-void GLShader::setUniformValue(int uniformID, int32_t v0, int32_t v1, int32_t v2)
+void GLShader::setUniformValue(int32_t uniformID, int32_t v0, int32_t v1, int32_t v2)
 {
 	glUniform3i(uniformID, v0, v1, v2);
 }
 
-void GLShader::setUniformValue(int uniformID, int32_t v0, int32_t v1, int32_t v2, int32_t v3)
+void GLShader::setUniformValue(int32_t uniformID, int32_t v0, int32_t v1, int32_t v2, int32_t v3)
 {
 	glUniform4i(uniformID, v0, v1, v2, v3);
 }
 
-void GLShader::setUniformMatrix2(int uniformID, int count, bool transpose, const float* value)
+void GLShader::setUniformMatrix2(int32_t uniformID, int count, bool transpose, const float* value)
 {
 	glUniformMatrix2fv(uniformID, count, transpose, value);
 }
 
-void GLShader::setUniformMatrix3(int uniformID, int count, bool transpose, const float* value)
+void GLShader::setUniformMatrix3(int32_t uniformID, int count, bool transpose, const float* value)
 {
 	glUniformMatrix2fv(uniformID, count, transpose, value);
 }
 
-void GLShader::setUniformMatrix4(int uniformID, int count, bool transpose, const float* value)
+void GLShader::setUniformMatrix4(int32_t uniformID, int count, bool transpose, const float* value)
 {
 	glUniformMatrix2fv(uniformID, count, transpose, value);
 }
 
-void GLShader::showAttribStatus(int attribID)
+void GLShader::showAttribStatus(uint32_t attribID)
 {
 	int value = 0;
 
@@ -345,5 +333,52 @@ void GLShader::showAttribStatus(int attribID)
 
 	glGetVertexAttribiv(attribID, GL_VERTEX_ATTRIB_ARRAY_NORMALIZED, &value);
 	PRINT("GL_VERTEX_ATTRIB_ARRAY_NORMALIZED : %d", value);
+}
+
+void render::GLShader::bindAttributeLocation(uint32_t program, uint32_t index, const char* name)
+{
+	glBindAttribLocation(program, index, name);
+}
+
+void render::GLShader::bindFragDataLocation(uint32_t program, uint32_t colorNumber, const char* name)
+{
+	glBindFragDataLocation(program, colorNumber, name);
+}
+
+void render::GLShader::bindFragDataLocationIndexed(uint32_t program, uint32_t colorNumber, uint32_t index, const char* name)
+{
+	glBindFragDataLocationIndexed(program, colorNumber, index, name);
+}
+
+void render::GLShader::compileShader(uint32_t shader)
+{
+	glCompileShader(shader);
+}
+
+void render::GLShader::getActiveAtomicCounterBuffer(uint32_t program, uint32_t bufferIndex, AtomicCounterBufferName name, int* params)
+{
+	glGetActiveAtomicCounterBufferiv(program, bufferIndex, (GLenum)name, params);
+}
+
+void render::GLShader::getActiveAttrib(uint32_t program, uint32_t index, int bufSize, int *length, int *size, AttribType *type, char *name)
+{
+	uint32_t* data = new uint32_t[*size];
+	for (int i = 0; i < (*size); i++)
+	{
+		data[i] = (GLenum)type[i];
+	}
+	glGetActiveAttrib(program, index, bufSize, length, size, data, name);
+
+	delete data;
+}
+
+void render::GLShader::getActiveSubroutineName(uint32_t program, ShaderType shaderType, uint32_t index, int bufSize, int *length, char *name)
+{
+	glGetActiveSubroutineName(program, (GLenum)shaderType, index, bufSize, length, name);
+}
+
+void GLShader::createShaderProgram(ShaderType type, int size, const char** strings)
+{
+	glCreateShaderProgramv((GLenum)type, size, strings);
 }
 

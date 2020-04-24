@@ -18,7 +18,7 @@ namespace render
 		VideoFrameImage();
 		virtual ~VideoFrameImage();
 	public:
-		void init(PixelFormat format, TextureParameter internalFormat, uint8_t* pixels, uint32_t width, uint32_t height, int nUnitSize);
+		void init(TexImageDataFormat format, TexImageInternalFormat internalFormat, uint8_t* pixels, uint32_t width, uint32_t height, int nUnitSize);
 	protected:
 	private:
 	};

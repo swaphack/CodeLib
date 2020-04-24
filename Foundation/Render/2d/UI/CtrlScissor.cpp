@@ -41,7 +41,7 @@ void CtrlScissor::visit()
 			s_rect = s_rect.intersectRect(rect);
 		}
 
-		GLFragment::testScissor(s_rect.getX(), s_rect.getY(), s_rect.getWidth(), s_rect.getHeight());
+		GLState::setScissor(s_rect.getX(), s_rect.getY(), s_rect.getWidth(), s_rect.getHeight());
 
 		s_nScissorCount++;
 

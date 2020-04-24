@@ -15,34 +15,25 @@ ImagePNG::~ImagePNG()
 {
 
 }
-void ImagePNG::setTextureInfo(int color_type)
+int ImagePNG::setTextureInfo(int color_type)
 {
 	switch (color_type)
 	{
-	case PNG_COLOR_TYPE_GRAY:
-		setFormat(PixelFormat::LUMINANCE);
-		this->setInternalFormat(TextureParameter::ONE);
-		break;
-
-	case PNG_COLOR_TYPE_GRAY_ALPHA:
-		setFormat(PixelFormat::LUMINANCE_ALPHA);
-		this->setInternalFormat(TextureParameter::TWO);
-		break;
-
 	case PNG_COLOR_TYPE_RGB:
-		setFormat(PixelFormat::RGB);
-		this->setInternalFormat(TextureParameter::THREE);
-		break;
+		setFormat(TexImageDataFormat::RGB);
+		this->setInternalFormat(TexImageInternalFormat::RGB);
+		return 3;
 
 	case PNG_COLOR_TYPE_RGB_ALPHA:
-		setFormat(PixelFormat::RGBA);
-		this->setInternalFormat(TextureParameter::FOUR);
-		break;
+		setFormat(TexImageDataFormat::RGBA);
+		this->setInternalFormat(TexImageInternalFormat::RGBA);
+		return 4;
 
 	default:
 		/* Badness */
 		break;
 	}
+	return 0;
 }
 
 void ImagePNG::load(const std::string& filename)
@@ -124,8 +115,6 @@ void ImagePNG::load(const std::string& filename)
 	/* Retrieve updated information */
 	png_get_IHDR(png_ptr, info_ptr, &w, &h, &bit_depth, &color_type, NULL, NULL, NULL);
 	/* Get image format and components per pixel */
-	setTextureInfo(color_type);
-
 	rowbytes = png_get_rowbytes(png_ptr, info_ptr);
 
 	/* We can now allocate memory for storing pixel data */
@@ -147,7 +136,8 @@ void ImagePNG::load(const std::string& filename)
 	free(row_pointers);
 	fclose(fp);
 
-	this->setPixels(texels, w, h, bit_depth / 8);
+	int unitSize = this->setTextureInfo(color_type);
+	this->setPixels(texels, w, h, unitSize);
 
 	free(texels);
 }

@@ -117,6 +117,10 @@ Texture2D* TextureCache::createTexture2D(const ImageDefine& imageDefine)
 	{
 		image = Loader::load<ImageTarga>(imageDefine.filepath);
 	}
+	else if (imageDefine.format == EIF_BMP)
+	{
+		image = Loader::load<ImageBMP>(imageDefine.filepath);
+	}
 
 	if (image == nullptr)
 	{
@@ -129,9 +133,8 @@ Texture2D* TextureCache::createTexture2D(const ImageDefine& imageDefine)
 		return nullptr;
 	}
 
-	Texture2D* texture2D = new Texture2D();
+	Texture2D* texture2D = CREATE_OBJECT(Texture2D);
 	texture2D->load(image);
-	AUTO_RELEASE_OBJECT(texture2D);
 	addTexture(imageDefine.filepath.c_str(), texture2D);
 
 	SAFE_DELETE(image);
@@ -147,9 +150,8 @@ Texture2D* TextureCache::createTexture2D(const TextDefine& textDefine)
 		return nullptr;
 	}
 
-	Texture2D* texture2D = new Texture2D();
+	Texture2D* texture2D = CREATE_OBJECT(Texture2D);
 	texture2D->load(image);
-	AUTO_RELEASE_OBJECT(texture2D);
 
 	SAFE_DELETE(image);
 

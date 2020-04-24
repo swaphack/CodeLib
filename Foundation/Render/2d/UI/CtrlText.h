@@ -61,6 +61,6 @@ namespace render
 		virtual void onTextChange();
 	private:
 		// 文本结构
-		Ctrl_TextDefine _textDefine;
+		TextDefine _textDefine;
 	};
 }

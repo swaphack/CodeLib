@@ -10,7 +10,11 @@ namespace render
 	class GLLight
 	{
 	public:
-		static void setLightModel(int type, const float* value);
+		static void getLight(LightName name, LightParameter mode, float* value);
+
+
+		static void setLightModel(LightModel type, float value);
+		static void setLightModel(LightModelParameter type, const float* value);
 		/**
 			The params parameter contains four floating-point values that specify the ambient RGBA intensity of the entire scene. 
 			Integer values are mapped linearly such that the most positive representable value maps to 1.0, and the most negative representable value maps to -1.0.
@@ -38,7 +42,7 @@ namespace render
 		*/
 		static void setLightModelTwoSide(const float* value);
 	public:
-		static void setLight(LightName  name, int type, const float* value);
+		static void setLight(LightName  name, LightParameter type, const float* value);
 
 		static void setLightAmbient(LightName  name, const float* value);
 		static void setLightAmbient(LightName  name, const math::Vector4& value);

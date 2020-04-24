@@ -22,8 +22,8 @@ void createVideoImage(const AVFrame* frame, AVCodecContext* pCodecContext, Video
 	uint32_t width = frame->width;
 	uint32_t height = frame->height;
 
-	PixelFormat glFormat = PixelFormat::RGB;
-	TextureParameter glInternalFormat = TextureParameter::THREE;
+	TexImageDataFormat glFormat = TexImageDataFormat::RGB;
+	TexImageInternalFormat glInternalFormat = TexImageInternalFormat::RGB;
 
 	int destSize = av_image_get_buffer_size(AV_PIX_FMT_RGB24, width, height, 1);
 	uint8_t* destPixels = (uint8_t *)malloc(sizeof (uint8_t)* destSize);
@@ -126,7 +126,7 @@ VideoFrameImage::~VideoFrameImage()
 
 }
 
-void VideoFrameImage::init(PixelFormat format, TextureParameter internalFormat, uint8_t* pixels, uint32_t width, uint32_t height, int nUnitSize)
+void VideoFrameImage::init(TexImageDataFormat format, TexImageInternalFormat internalFormat, uint8_t* pixels, uint32_t width, uint32_t height, int nUnitSize)
 {
 	this->setFormat(format);
 	this->setInternalFormat(internalFormat);

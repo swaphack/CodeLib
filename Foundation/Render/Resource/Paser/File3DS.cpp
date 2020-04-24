@@ -54,7 +54,7 @@ void File3DS::load(const std::string& filename)
 
 			if (pMatData->texture1_map.name[0])
 			{
-				int textureID = createTexture(pMatData->texture1_map.name, dir);
+				Texture2D* textureID = createTexture(pMatData->texture1_map.name, dir);
 				if (textureID)
 				{
 					this->addTexture(pMatData->texture1_map.name, textureID);
@@ -62,7 +62,7 @@ void File3DS::load(const std::string& filename)
 			}
 			if (pMatData->texture1_mask.name[0])
 			{
-				int textureID = createTexture(pMatData->texture1_mask.name, dir);
+				Texture2D* textureID = createTexture(pMatData->texture1_mask.name, dir);
 				if (textureID)
 				{
 					this->addTexture(pMatData->texture1_mask.name, textureID);
@@ -71,7 +71,7 @@ void File3DS::load(const std::string& filename)
 			}
 			if (pMatData->texture2_map.name[0])
 			{
-				int textureID = createTexture(pMatData->texture2_map.name, dir);
+				Texture2D* textureID = createTexture(pMatData->texture2_map.name, dir);
 				if (textureID)
 				{
 					this->addTexture(pMatData->texture2_map.name, textureID);
@@ -79,7 +79,7 @@ void File3DS::load(const std::string& filename)
 			}
 			if (pMatData->texture2_mask.name[0])
 			{
-				int textureID = createTexture(pMatData->texture2_mask.name, dir);
+				Texture2D* textureID = createTexture(pMatData->texture2_mask.name, dir);
 				if (textureID)
 				{
 					this->addTexture(pMatData->texture2_mask.name, textureID);
@@ -88,8 +88,8 @@ void File3DS::load(const std::string& filename)
 
 			auto pMat = CREATE_OBJECT(MaterialDetail);
 			pMat->setName(pMatData->name);
-			pMat->setTexture1(pMatData->texture1_map.name);
-			pMat->setTexture2(pMatData->texture2_map.name);
+			pMat->setAmbientTextureMap(pMatData->texture1_map.name);
+			pMat->setDiffuseTextureMap(pMatData->texture2_map.name);
 			pMat->setAmbient(pMatData->ambient[0], pMatData->ambient[1], pMatData->ambient[2]);
 			pMat->setDiffuse(pMatData->diffuse[0], pMatData->diffuse[1], pMatData->diffuse[2]);
 			pMat->setSpecular(pMatData->specular[0], pMatData->specular[1], pMatData->specular[2]);
@@ -106,6 +106,7 @@ void File3DS::load(const std::string& filename)
 			int id = lib3ds_file_mesh_by_name(pFile, pMeshData->name);
 
 			auto pMesh = CREATE_OBJECT(MeshDetail);
+			pMesh->setMeshName(pMeshData->name);
 			this->addMesh(id, pMesh);
 
 			if (pMeshData->nvertices)
@@ -161,7 +162,7 @@ void File3DS::load(const std::string& filename)
 					int nFaceCount = 3 * item0.second.size();
 					if (nFaceCount > 0)
 					{
-						uint16_t* indices = new uint16_t[nFaceCount];
+						uint32_t* indices = new uint32_t[nFaceCount];
 						int j = 0;
 						for (auto item1 : item0.second)
 						{

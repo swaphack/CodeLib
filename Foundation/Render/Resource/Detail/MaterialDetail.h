@@ -22,21 +22,53 @@ namespace render
 		*/
 		const std::string& getName();
 		/**
-		*	设置纹理1名称
+		*	设置Ambient纹理
 		*/
-		void setTexture1(const std::string& name);
+		void setAmbientTextureMap(const std::string& name);
 		/**
-		*	获取纹理1名称
+		*	获取Ambient纹理
 		*/
-		const std::string& getTexture1();
+		const std::string& getAmbientTextureMap();
 		/**
-		*	设置纹理2名称
+		*	设置Diffuse纹理
 		*/
-		void setTexture2(const std::string& name);
+		void setDiffuseTextureMap(const std::string& name);
 		/**
-		*	获取纹理2名称
+		*	获取Diffuse纹理
 		*/
-		const std::string& getTexture2();
+		const std::string& getDiffuseTextureMap();
+		/**
+		*	设置Specular纹理
+		*/
+		void setSpecularTextureMap(const std::string& name);
+		/**
+		*	获取Specular纹理
+		*/
+		const std::string& getSpecularTextureMap();
+		/**
+		*	设置Specular Hightlight
+		*/
+		void setSpecularHightlightMap(const std::string& name);
+		/**
+		*	获取Specular Hightlight
+		*/
+		const std::string& getSpecularHightlightMap();
+		/**
+		*	设置Alpha纹理
+		*/
+		void setAlphaTextureMap(const std::string& name);
+		/**
+		*	获取Alpha纹理
+		*/
+		const std::string& getAlphaTextureMap();
+		/**
+		*	设置Bump 纹理
+		*/
+		void setBumpMap(const std::string& name);
+		/**
+		*	获取Bump纹理
+		*/
+		const std::string& getBumpMap();
 		/**
 		*	环境光
 		*/
@@ -121,8 +153,16 @@ namespace render
 		float* _matrialEmission = nullptr;
 
 		// 纹理名称
-		std::string _texture1;
+		std::string _mapTextureAmbient;
 		// 纹理名称
-		std::string _texture2;
+		std::string _mapTextureDiffuse;
+		// 纹理名称
+		std::string _mapTextureSpecular;
+		// 纹理名称
+		std::string _mapSpecularHightlight;
+		// 纹理名称
+		std::string _mapTextureAlpha;
+		// 纹理名称
+		std::string _mapBump;
 	};
 }

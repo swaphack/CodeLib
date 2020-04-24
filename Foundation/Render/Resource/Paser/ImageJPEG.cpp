@@ -1,5 +1,4 @@
 #include "ImageJPEG.h"
-#include "Graphic/GLAPI/import.h"
 
 using namespace render;
 
@@ -37,11 +36,10 @@ void ImageJPEG::load(const std::string& filename)
 	jpeg_stdio_src(&jds, fptr);
 	jpeg_read_header(&jds, true);
 	jpeg_start_decompress(&jds);
-
 	
 	int internalFormat = jds.output_components;
-	this->setInternalFormat((TextureParameter)internalFormat);
-	this->setFormat(PixelFormat::RGB);
+	this->setInternalFormat((TexImageInternalFormat)internalFormat);
+	this->setFormat(TexImageDataFormat::RGB);
 
 	uint32_t lineSize = jds.output_width * internalFormat;
 	uint32_t totoalSize = jds.output_width * jds.output_height * internalFormat;

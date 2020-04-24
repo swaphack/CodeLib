@@ -190,7 +190,7 @@ Camera2D::~Camera2D()
 
 void Camera2D::updateView()
 {
-	GLPrimitive::loadOrtho(_cameraParams.xLeft,
+	GLMatrix::loadOrtho(_cameraParams.xLeft,
 		_cameraParams.xRight,
 		_cameraParams.yBottom,
 		_cameraParams.yTop,
@@ -220,7 +220,7 @@ void Camera3D::lookAt(const math::Vector3& position)
 
 void Camera3D::updateView()
 {
-	GLPrimitive::loadFrustum(_cameraParams.xLeft,
+	GLMatrix::loadFrustum(_cameraParams.xLeft,
 		_cameraParams.xRight,
 		_cameraParams.yBottom,
 		_cameraParams.yTop,
