@@ -50,8 +50,8 @@ void WndRender::show()
 	//testCamera();
 	//testEditBox();
 
-	// bug fixed
-	//testImages();
+	
+	testImages();
 
 	//testString();
 	//
@@ -73,7 +73,7 @@ void WndRender::show()
 	//testAudio3D();
 	//testLayout();
 	//
-	addLight();
+	//addLight();
 	//testFog();
 	//testCubeModel();
 	//testSphereModel();
@@ -81,7 +81,7 @@ void WndRender::show()
 
 	//test3ds();
 
-	testObj();
+	//testObj();
 
 	//testFbx();
 

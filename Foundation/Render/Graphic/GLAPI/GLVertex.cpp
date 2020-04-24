@@ -92,21 +92,6 @@ void GLVertex::setTexCoord2D(const math::Vector2& value)
 	setTexCoord2D(value.getX(), value.getY());
 }
 
-void GLVertex::drawArrayElement(int index)
-{
-	glArrayElement(index);
-}
-
-void GLVertex::drawArrays(ShapeMode mode, int first, int count)
-{
-	glDrawArrays((GLenum)mode, first, count);
-}
-
-void GLVertex::drawElements(ShapeMode mode, int count, IndexDataType type, const void* data)
-{
-	glDrawElements((GLenum)mode, count, (GLenum)type, data);
-}
-
 void GLVertex::setEdgeFlag(bool flag)
 {
 	glEdgeFlag(flag);

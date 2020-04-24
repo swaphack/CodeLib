@@ -70,5 +70,11 @@ namespace render
 		static void setUniformMatrix2(int32_t uniformID, int count, bool transpose, const float* value);
 		static void setUniformMatrix3(int32_t uniformID, int count, bool transpose, const float* value);
 		static void setUniformMatrix4(int32_t uniformID, int count, bool transpose, const float* value);
+	public:
+		static void bindAttributeLocation(uint32_t program, uint32_t index, const char* name);
+		static void bindFragDataLocation(uint32_t program, uint32_t colorNumber, const char* name);
+		static void bindFragDataLocationIndexed(uint32_t program, uint32_t colorNumber, uint32_t index, const char* name);
+	public:
+		static void createShaderProgram(ShaderType type, int size, const char** strings);
 	};
 }

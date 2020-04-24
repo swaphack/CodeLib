@@ -116,3 +116,18 @@ void GLClientArrays::setEdgeFlagPointer(int stride, const void* flag)
 {
 	glEdgeFlagPointer(stride, flag);
 }
+
+void GLClientArrays::drawArrayElement(int index)
+{
+	glArrayElement(index);
+}
+
+void GLClientArrays::drawArrays(ShapeMode mode, int first, int count)
+{
+	glDrawArrays((GLenum)mode, first, count);
+}
+
+void GLClientArrays::drawElements(ShapeMode mode, int count, IndexDataType type, const void* data)
+{
+	glDrawElements((GLenum)mode, count, (GLenum)type, data);
+}

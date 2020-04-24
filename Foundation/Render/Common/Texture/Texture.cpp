@@ -40,9 +40,9 @@ void Texture2D::load(const ImageDetail* image)
 	GLTexture::setTexParameterWrapS2D(TextureWrapMode::CLAMP);
 	GLTexture::setTexParameterWrapT2D(TextureWrapMode::CLAMP);
 
-	GLTexture::setTexImage2D(0, image->getInternalFormat(),
+	GLTexture::setTexImage2D(TexImageTarget2D::TEXTURE_2D,  0, image->getInternalFormat(),
 		image->getWidth(), image->getHeight(), 0, image->getFormat(),
-		PixelType::UNSIGNED_BYTE, image->getPixels());
+		TexImageDataType::UNSIGNED_BYTE, image->getPixels());
 	
 	_textureID = tex_id;
 	_width = image->getWidth();

@@ -18,16 +18,16 @@ namespace render
 		// 获取图片高度
 		uint32_t getHeight() const;
 		// 获取图片格式
-		PixelFormat getFormat() const;
+		TexImageDataFormat getFormat() const;
 		// 获取图片内部存储格式
-		TextureParameter getInternalFormat() const;
+		TexImageInternalFormat getInternalFormat() const;
 		// 获取图片像素数据
 		uint8_t * getPixels() const;
 	protected:
 		// 设置图片格式 一个像素所有的rgba类型
-		void setFormat(PixelFormat val);
+		void setFormat(TexImageDataFormat val);
 		// 设置图片内部存储格式 一个像素所用的位数
-		void setInternalFormat(TextureParameter val);
+		void setInternalFormat(TexImageInternalFormat val);
 		// 设置图片像素数据
 		void setPixels(uint8_t * val, uint32_t width, uint32_t height, int nUnitSize);
 	protected:
@@ -36,9 +36,9 @@ namespace render
 		// 图片高度
 		uint32_t _height;
 		// 图片格式
-		PixelFormat _format;
+		TexImageDataFormat _format;
 		// 图片内部存储格式
-		TextureParameter _internalFormat;
+		TexImageInternalFormat _internalFormat;
 		// 图片像素数据
 		uint8_t *_pixels;
 	};

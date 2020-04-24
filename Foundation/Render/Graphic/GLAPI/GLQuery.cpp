@@ -44,6 +44,6 @@ void GLQuery::getQuery(QueryTarget target, QueryParameter name, int32_t* params)
 
 bool GLQuery::isQuery(uint32_t id)
 {
-	return glIsQuery(id) == 1;
+	return glIsQuery(id) == GL_TRUE;
 }
 

@@ -42,7 +42,7 @@ void GLProgramPipelines::showProgramPipelineStatus(uint32_t pipeline)
 
 bool GLProgramPipelines::isProgramPipeline(uint32_t pipeline)
 {
-	return glIsProgramPipeline(pipeline) == 1;
+	return glIsProgramPipeline(pipeline) == GL_TRUE;
 }
 
 void GLProgramPipelines::validateProgramPipeline(uint32_t pipeline)

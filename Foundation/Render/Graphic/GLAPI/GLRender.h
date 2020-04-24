@@ -26,6 +26,6 @@ namespace render
 		static void setReadBufferMode(ReadBufferMode mode);
 		static void setNamedFramebufferReadBuffer(GLuint framebuffer, DrawBufferMode mode);
 
-		static void readPixels(float x, float y, float width, float height, PixelFormat pixelFormat, PixelType pixelType, void* data);
+		static void readPixels(float x, float y, float width, float height, TexImageDataFormat pixelFormat, TexImageDataType pixelType, void* data);
 	};
 }

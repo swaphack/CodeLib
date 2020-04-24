@@ -62,7 +62,7 @@ void CtrlFrame::drawSample()
 	GLClientArrays::enableClientState(ClientArrayType::COLOR_ARRAY);
 	GLClientArrays::setColorPointer(4, DataType::FLOAT, 0, _texRect.colors);
 
-	GLVertex::drawElements(ShapeMode::TRIANGLES, 6, IndexDataType::UNSIGNED_SHORT, _texRect.indices);
+	GLClientArrays::drawElements(ShapeMode::TRIANGLES, 6, IndexDataType::UNSIGNED_SHORT, _texRect.indices);
 
 	GLClientArrays::disableClientState(ClientArrayType::VERTEX_ARRAY);
 	GLClientArrays::disableClientState(ClientArrayType::TEXTURE_COORD_ARRAY);

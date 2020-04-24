@@ -24,7 +24,7 @@ void GLSync::getSync(GLsync sync, SyncParameter pname, GLsizei bufSize, GLsizei 
 
 bool GLSync::isSync(GLsync sync)
 {
-	return glIsSync(sync) == 1;
+	return glIsSync(sync) == GL_TRUE;
 }
 
 void GLSync::setTextureBarrier()

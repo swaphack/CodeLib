@@ -42,7 +42,7 @@ void GLState::getInt(GetTarget pname, int* value)
 
 
 
-void GLState::getTexImage(TextureTarget target, int level, TextureParameter internalFormat, PixelType pixelType, void* data)
+void GLState::getTexImage(TextureTarget target, int level, TexImageInternalFormat internalFormat, TexImageDataType pixelType, void* data)
 {
 	glGetTexImage((GLenum)target, level, (GLenum)internalFormat, (GLenum)pixelType, data);
 }

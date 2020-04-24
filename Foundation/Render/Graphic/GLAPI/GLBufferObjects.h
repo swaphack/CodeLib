@@ -4,7 +4,7 @@
 
 namespace render
 {
-	class GLBuffer
+	class GLBufferObjects
 	{
 	public:
 		static void bindBuffer(BufferTarget target, uint32_t buffer);

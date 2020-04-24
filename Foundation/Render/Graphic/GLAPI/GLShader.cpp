@@ -335,3 +335,23 @@ void GLShader::showAttribStatus(uint32_t attribID)
 	PRINT("GL_VERTEX_ATTRIB_ARRAY_NORMALIZED : %d", value);
 }
 
+void render::GLShader::bindAttributeLocation(uint32_t program, uint32_t index, const char* name)
+{
+	glBindAttribLocation(program, index, name);
+}
+
+void render::GLShader::bindFragDataLocation(uint32_t program, uint32_t colorNumber, const char* name)
+{
+	glBindFragDataLocation(program, colorNumber, name);
+}
+
+void render::GLShader::bindFragDataLocationIndexed(uint32_t program, uint32_t colorNumber, uint32_t index, const char* name)
+{
+	glBindFragDataLocationIndexed(program, colorNumber, index, name);
+}
+
+void GLShader::createShaderProgram(ShaderType type, int size, const char** strings)
+{
+	glCreateShaderProgramv((GLenum)type, size, strings);
+}
+

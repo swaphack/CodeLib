@@ -11,7 +11,6 @@
 #include "GLMaterial.h"
 #include "GLMatrix.h"
 #include "GLRender.h"
-#include "GLPixels.h"
 #include "GLShader.h"
 #include "GLClientArrays.h"
 #include "GLTexture.h"

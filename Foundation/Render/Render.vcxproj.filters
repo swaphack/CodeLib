@@ -288,9 +288,6 @@
     <ClCompile Include="Graphic\GLAPI\GLFog.cpp">
       <Filter>Graphic\GLAPI</Filter>
     </ClCompile>
-    <ClCompile Include="Graphic\GLAPI\GLPixels.cpp">
-      <Filter>Graphic\GLAPI</Filter>
-    </ClCompile>
     <ClCompile Include="Graphic\GLAPI\GLEvaluator.cpp">
       <Filter>Graphic\GLAPI</Filter>
     </ClCompile>
@@ -336,10 +333,13 @@
     <ClCompile Include="Graphic\GLAPI\GLTransformFeedback.cpp">
       <Filter>Graphic\GLAPI</Filter>
     </ClCompile>
-    <ClCompile Include="Graphic\GLAPI\GLBuffer.cpp">
+    <ClCompile Include="Graphic\GLAPI\GLFixedFunction.cpp">
       <Filter>Graphic\GLAPI</Filter>
     </ClCompile>
-    <ClCompile Include="Graphic\GLAPI\GLFixedFunction.cpp">
+    <ClCompile Include="Graphic\GLAPI\GLBufferObjects.cpp">
+      <Filter>Graphic\GLAPI</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphic\GLAPI\GLFrameBuffer.cpp">
       <Filter>Graphic\GLAPI</Filter>
     </ClCompile>
   </ItemGroup>
@@ -804,9 +804,6 @@
     <ClInclude Include="Graphic\GLAPI\GLFog.h">
       <Filter>Graphic\GLAPI</Filter>
     </ClInclude>
-    <ClInclude Include="Graphic\GLAPI\GLPixels.h">
-      <Filter>Graphic\GLAPI</Filter>
-    </ClInclude>
     <ClInclude Include="Graphic\GLAPI\GLEvaluator.h">
       <Filter>Graphic\GLAPI</Filter>
     </ClInclude>
@@ -849,10 +846,13 @@
     <ClInclude Include="Graphic\GLAPI\GLTransformFeedback.h">
       <Filter>Graphic\GLAPI</Filter>
     </ClInclude>
-    <ClInclude Include="Graphic\GLAPI\GLBuffer.h">
+    <ClInclude Include="Graphic\GLAPI\GLFixedFunction.h">
       <Filter>Graphic\GLAPI</Filter>
     </ClInclude>
-    <ClInclude Include="Graphic\GLAPI\GLFixedFunction.h">
+    <ClInclude Include="Graphic\GLAPI\GLBufferObjects.h">
+      <Filter>Graphic\GLAPI</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphic\GLAPI\GLFrameBuffer.h">
       <Filter>Graphic\GLAPI</Filter>
     </ClInclude>
   </ItemGroup>

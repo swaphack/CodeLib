@@ -104,12 +104,12 @@ void ImageBMP::setTextureInfo(int pixel_depth)
 	switch (pixel_depth)
 	{
 	case 3:
-		setFormat(PixelFormat::BGR_EXT);
-		this->setInternalFormat(TextureParameter::THREE);
+		setFormat(TexImageDataFormat::BGR);
+		this->setInternalFormat(TexImageInternalFormat::RGB);
 		break;
 	case 4:
-		setFormat(PixelFormat::BGRA_EXT);
-		this->setInternalFormat(TextureParameter::FOUR);
+		setFormat(TexImageDataFormat::BGRA);
+		this->setInternalFormat(TexImageInternalFormat::RGBA);
 		break;
 	default:
 		break;

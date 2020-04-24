@@ -35,11 +35,7 @@ namespace render
 		static void setTexCoord2D(const math::Vector2& value);
 		static void setTexCoord3D(float s, float t, float r);
 		static void setTexCoord3D(const math::Vector2& value);
-	public:// 用于begin end之间
-		static void drawArrayElement(int index);
-		static void drawArrays(ShapeMode mode, int first, int count);
-	public:
-		static void drawElements(ShapeMode mode, int count, IndexDataType type, const void* data);
+	
 	public:// 设置边缘编辑
 		static void setEdgeFlag(bool flag);
 		

@@ -57,16 +57,12 @@ void ImageTarga::setTextureInfo(int pixel_depth)
 	switch (pixel_depth)
 	{
 	case 3:     // Most likely case
-		this->setFormat(PixelFormat::BGR_EXT);
-		this->setInternalFormat(TextureParameter::THREE);
+		this->setFormat(TexImageDataFormat::BGR);
+		this->setInternalFormat(TexImageInternalFormat::RGB);
 		break;
 	case 4:
-		this->setFormat(PixelFormat::BGRA_EXT);
-		this->setInternalFormat(TextureParameter::FOUR);
-		break;
-	case 1:
-		this->setFormat(PixelFormat::LUMINANCE);
-		this->setInternalFormat(TextureParameter::ONE);
+		this->setFormat(TexImageDataFormat::BGRA);
+		this->setInternalFormat(TexImageInternalFormat::RGBA);
 		break;
 	};
 }

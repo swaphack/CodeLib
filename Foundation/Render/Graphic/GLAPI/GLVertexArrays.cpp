@@ -19,7 +19,7 @@ void GLVertexArrays::deleteVertexArrays(int size, const uint32_t* ary)
 
 bool GLVertexArrays::isVertexArrays(uint32_t ary)
 {
-	return glIsVertexArray(ary) == 1;
+	return glIsVertexArray(ary) == GL_TRUE;
 }
 
 uint32_t GLVertexArrays::genVertexArray()

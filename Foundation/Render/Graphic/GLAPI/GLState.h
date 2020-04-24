@@ -36,7 +36,7 @@ namespace render
 	
 	
 	public:		
-		static void getTexImage(TextureTarget target, int level, TextureParameter internalFormat, PixelType pixelType, void* data);
+		static void getTexImage(TextureTarget target, int level, TexImageInternalFormat internalFormat, TexImageDataType pixelType, void* data);
 		
 		
 		static void getTexLevelParameter(TextureTarget target, int level, GetTextureParameter parameter, float* value);
