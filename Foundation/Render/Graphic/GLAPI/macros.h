@@ -2321,8 +2321,6 @@ enum class SubroutineUniformParameter
 	UNIFORM_NAME_LENGTH = GL_UNIFORM_NAME_LENGTH,
 };
 
-};
-
 enum class BufferDataUsage
 {
 	STREAM_DRAW = GL_STREAM_DRAW,
@@ -2344,6 +2342,8 @@ enum class BufferStorageFlag
 	MAP_PERSISTENT_BIT = GL_MAP_PERSISTENT_BIT,
 	MAP_COHERENT_BIT = GL_MAP_COHERENT_BIT,
 	CLIENT_STORAGE_BIT = GL_CLIENT_STORAGE_BIT,
+};
+
 enum class UniformBlockParameter
 {
 	UNIFORM_BLOCK_BINDING = GL_UNIFORM_BLOCK_BINDING,
