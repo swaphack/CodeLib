@@ -26,3 +26,18 @@ void GLBufferObjects::bindBuffersRange(BufferTarget target, uint32_t first, int 
 {
 	glBindBuffersRange((GLenum)target, first, count, buffers, offset, size);
 }
+
+void render::GLBufferObjects::bindVertexBuffer(uint32_t bindingindex, uint32_t buffer, GLintptr offset, GLsizei stride)
+{
+	glBindVertexBuffer(bindingindex, buffer, offset, stride);
+}
+
+void render::GLBufferObjects::bindVertexBuffers(uint32_t first, int count, const uint32_t* buffers, const GLintptr *offsets, const int *strides)
+{
+	glBindVertexBuffers(first, count, buffers, offsets, strides);
+}
+
+void render::GLBufferObjects::bufferData(BufferTarget target, GLsizeiptr size, const void* data, BufferDataUsage usage)
+{
+	glBufferData((GLenum)target, size, data, (GLenum)usage);
+}

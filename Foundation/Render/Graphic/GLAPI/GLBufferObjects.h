@@ -12,11 +12,13 @@ namespace render
 		static void bindBufferRange(BufferTarget target, uint32_t index, uint32_t buffer, GLintptr offset, GLsizeiptr size);
 		static void bindBuffersBase(BufferTarget target, uint32_t first, int count,  const uint32_t* buffers);
 		static void bindBuffersRange(BufferTarget target, uint32_t first, int count, const uint32_t* buffers, const GLintptr* offset, const GLsizeiptr* size);
+
+		static void bindVertexBuffer(uint32_t bindingindex, uint32_t buffer, GLintptr offset, int stride);
+		static void bindVertexBuffers(uint32_t first, int count, const uint32_t* buffers, const GLintptr *offsets, const int *strides);
+		static void bufferData(BufferTarget target, GLsizeiptr size, const void* data, BufferDataUsage usage);
+		// @see BufferStorageFlag
+		static void bufferStorage(BufferTarget target, GLsizeiptr size, const void* data, GLbitfield flags);
 		/*
-			static void bindVertexBuffer
-			static void bindVertexBuffers
-			static void bufferData
-			static void bufferStorage
 			static void bufferSubData
 			static void glClearBufferData
 			static void glClearBufferSubData

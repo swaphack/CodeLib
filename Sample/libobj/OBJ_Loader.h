@@ -202,6 +202,11 @@ namespace objl
 			std::vector<std::string> &out,
 			const std::string& token);
 
+		// Split a String into a string array at a given token
+		void split(const std::string &in,
+			std::vector<std::string> &out,
+			char token);
+
 		// Get tail of string after first token and possibly following spaces
 		inline std::string tail(const std::string &in)
 		{

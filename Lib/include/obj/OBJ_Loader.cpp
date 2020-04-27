@@ -218,6 +218,28 @@ void objl::algorithm::split(const std::string &in, std::vector<std::string> &out
 	}
 }
 
+void objl::algorithm::split(const std::string &in, std::vector<std::string> &out, char token)
+{
+	const char* ptr = in.c_str();
+	int size = in.size();
+	int offset = 0;
+	int count = 0;
+	while (offset + count <= size)
+	{
+		if (*(ptr + offset + count) == token || offset + count == size)
+		{
+			std::string str(ptr + offset, count);
+			out.push_back(str);
+			offset = count + offset + 1;
+			count = 0;
+		}
+		else
+		{
+			count++;
+		}
+	}
+}
+
 std::string objl::algorithm::firstToken(const std::string &in)
 {
 	if (!in.empty())
@@ -302,6 +324,10 @@ bool objl::Loader::LoadFile(std::string Path)
 
 		// Generate a Mesh Object or Prepare for an object to be created
 		auto firstToken = algorithm::firstToken(curline);
+		if (firstToken == "#")
+		{
+			continue;
+		}
 		auto tailLine = algorithm::tail(curline);
 		if (firstToken == "o" || firstToken == "g" || curline[0] == 'g')
 		{
@@ -409,16 +435,17 @@ bool objl::Loader::LoadFile(std::string Path)
 				//LoadedVertices.push_back(vVerts[i]);
 			}
 			*/
+			unsigned int nLastIndex = Vertices.size();
 			Vertices.insert(Vertices.end(), vVerts.begin(), vVerts.end());
 
 			std::vector<unsigned int> iIndices;
 
-			VertexTriangluation(iIndices, vVerts);
+			SimpleVertexTriangluation(iIndices, vVerts);
 
 			// Add Indices
 			for (int i = 0; i < int(iIndices.size()); i++)
 			{
-				unsigned int indnum = (unsigned int)((Vertices.size()) - vVerts.size()) + iIndices[i];
+				unsigned int indnum = nLastIndex + iIndices[i];
 				Indices.push_back(indnum);
 
 				//indnum = (unsigned int)((LoadedVertices.size()) - vVerts.size()) + iIndices[i];
@@ -464,19 +491,13 @@ bool objl::Loader::LoadFile(std::string Path)
 			// Generate LoadedMaterial
 
 			// Generate a path to the material file
-			std::vector<std::string> temp;
-			algorithm::split(Path, temp, "/");
+			std::string pathtomat;
 
-			std::string pathtomat = "";
-
-			if (temp.size() != 1)
+			int idx = Path.find_last_of('/');
+			if (idx != -1)
 			{
-				for (int i = 0; i < temp.size() - 1; i++)
-				{
-					pathtomat += temp[i] + "/";
-				}
+				pathtomat = Path.substr(0, idx + 1);
 			}
-
 
 			pathtomat += tailLine;
 
@@ -538,7 +559,7 @@ void objl::Loader::GenVerticesFromRawOBJ(std::vector<Vertex>& oVerts, const std:
 {
 	std::vector<std::string> sface, svert;
 	Vertex vVert;
-	algorithm::split(icurline, sface, " ");
+	algorithm::split(icurline, sface, ' ');
 
 	bool noNormal = false;
 
@@ -548,7 +569,9 @@ void objl::Loader::GenVerticesFromRawOBJ(std::vector<Vertex>& oVerts, const std:
 		// See What type the vertex is.
 		int vtype;
 
-		algorithm::split(sface[i], svert, "/");
+		svert.clear();
+
+		algorithm::split(sface[i], svert, '/');
 
 		// Check for just position - v1
 		if (svert.size() == 1)
@@ -625,7 +648,7 @@ void objl::Loader::GenVerticesFromRawOBJ(std::vector<Vertex>& oVerts, const std:
 	// take care of missing normals
 	// these may not be truly acurate but it is the 
 	// best they get for not compiling a mesh with normals	
-	if (noNormal)
+	if (noNormal && oVerts.size() >= 3)
 	{
 		Vector3 A = oVerts[0].Position - oVerts[1].Position;
 		Vector3 B = oVerts[2].Position - oVerts[1].Position;
@@ -805,6 +828,32 @@ void objl::Loader::VertexTriangluation(std::vector<unsigned int>& oIndices, cons
 	}
 }
 
+void objl::Loader::SimpleVertexTriangluation(std::vector<unsigned int>& oIndices, const std::vector<Vertex>& iVerts)
+{
+	// If there are 2 or less verts,
+	// no triangle can be created,
+	// so exit
+	if (iVerts.size() < 3)
+	{
+	}
+	// If it is a triangle no need to calculate it
+	else if (iVerts.size() == 3)
+	{
+		oIndices.push_back(0);
+		oIndices.push_back(1);
+		oIndices.push_back(2);
+	}
+	else if (iVerts.size() == 4)
+	{
+		oIndices.push_back(0);
+		oIndices.push_back(1);
+		oIndices.push_back(2);
+		oIndices.push_back(0);
+		oIndices.push_back(2);
+		oIndices.push_back(3);
+	}
+}
+
 //////////////////////////////////////////////////////////////////////////
 
 
@@ -871,7 +920,7 @@ bool objl::Loader::LoadMaterials(const std::string& path)
 		else if (firstToken == "Ka")
 		{
 			std::vector<std::string> temp;
-			algorithm::split(tailLine, temp, " ");
+			algorithm::split(tailLine, temp, ' ');
 
 			if (temp.size() != 3)
 				continue;
@@ -884,7 +933,7 @@ bool objl::Loader::LoadMaterials(const std::string& path)
 		else if (firstToken == "Kd")
 		{
 			std::vector<std::string> temp;
-			algorithm::split(tailLine, temp, " ");
+			algorithm::split(tailLine, temp, ' ');
 
 			if (temp.size() != 3)
 				continue;
@@ -897,7 +946,7 @@ bool objl::Loader::LoadMaterials(const std::string& path)
 		else if (firstToken == "Ks")
 		{
 			std::vector<std::string> temp;
-			algorithm::split(tailLine, temp, " ");
+			algorithm::split(tailLine, temp, ' ');
 
 			if (temp.size() != 3)
 				continue;

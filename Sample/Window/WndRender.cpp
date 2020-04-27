@@ -24,7 +24,7 @@ void WndRender::show()
 		math::Size size = this->getCanvas()->getView()->getFrameSize();
 		this->getCanvas()->getRoot()->setAnchorPoint(0, 0, 0);
 		this->getCanvas()->getRoot()->setVolume(size);
-		Camera::getMainCamera()->setPosition(-size.getWidth() * 0.5f, -size.getHeight() * 0.5f);
+		Camera::getMainCamera()->setPosition(-size.getWidth() * 1.0f, -size.getHeight() * 1.0f);
 	}
 	else
 	{
@@ -40,7 +40,7 @@ void WndRender::show()
 	
 	//testMoveImage();
 	//testClock();
-	//testText();
+	testText();
 	//testMask();
 	//testMedia();
 	
@@ -73,7 +73,7 @@ void WndRender::show()
 	//testAudio3D();
 	//testLayout();
 	//
-	//addLight();
+	addLight();
 	//testFog();
 	//testCubeModel();
 	//testSphereModel();
@@ -183,9 +183,10 @@ void WndRender::testText()
 	pCtrlText = CREATE_NODE(CtrlText);
 	pCtrlText->setFontPath("Resource/Font/font_3.ttf");
 	pCtrlText->setFontSize(58);
-	pCtrlText->setPosition(512, 450, 0);
+	pCtrlText->setScale(5);
+	pCtrlText->setPosition(0, 450, 0);
 	pCtrlText->setVerticalAlignment(EVA_CENTER);
-	pCtrlText->setColor(sys::Color4B(125, 80, 255, 255));
+	pCtrlText->setColor(sys::Color4B(255, 255, 255, 255));
 	this->getCanvas()->getRoot()->addChild(pCtrlText);
 
 
@@ -214,8 +215,9 @@ void WndRender::testText()
 	pCtrlText->setVerticalAlignment(EVA_CENTER);
 	pCtrlText->setFontPath("Resource/Font/font_2.ttf");
 	pCtrlText->setFontSize(58);
+	pCtrlText->setScale(5);
 	pCtrlText->setString("中华 fdsaf545放大发人民共和国");
-	pCtrlText->setPosition(512, 384, 0);
+	pCtrlText->setPosition(0, 384, 0);
 	pCtrlText->setDimensions(300, 600);
 	pCtrlText->setColor(sys::Color4B(125, 255, 255, 255));
 	this->getCanvas()->getRoot()->addChild(pCtrlText);
@@ -346,9 +348,33 @@ void WndRender::testImages()
 {
 	CtrlImage* pImage = CREATE_NODE(CtrlImage);
 	pImage->setImagePath("Resource/Obj/SCI_FRS_13_HD/lights_lod0.bmp");
-	pImage->setPosition(512, 384, 0);
+	pImage->setPosition(0, 0, 0);
 	pImage->setScale(1, 1, 1);
-	pImage->setVolume(1024, 1024);
+	pImage->setVolume(100, 100);
+	//pImage->setRotation(0, 0, 30);
+	this->getCanvas()->getRoot()->addChild(pImage);
+
+	pImage = CREATE_NODE(CtrlImage);
+	pImage->setImagePath("Resource/Obj/SCI_FRS_13_HD/BRAKES.png");
+	pImage->setPosition(200, 200, 0);
+	pImage->setScale(1, 1, 1);
+	pImage->setVolume(100, 100);
+	//pImage->setRotation(0, 0, 30);
+	this->getCanvas()->getRoot()->addChild(pImage);
+
+	pImage = CREATE_NODE(CtrlImage);
+	pImage->setImagePath("Resource/Obj/SCI_FRS_13_HD/grille2.tga");
+	pImage->setPosition(400, 400, 0);
+	pImage->setScale(1, 1, 1);
+	pImage->setVolume(100, 100);
+	//pImage->setRotation(0, 0, 30);
+	this->getCanvas()->getRoot()->addChild(pImage);
+
+	pImage = CREATE_NODE(CtrlImage);
+	pImage->setImagePath("Resource/Image/1.jpg");
+	pImage->setPosition(600, 600, 0);
+	pImage->setScale(1, 1, 1);
+	pImage->setVolume(100, 100);
 	//pImage->setRotation(0, 0, 30);
 	this->getCanvas()->getRoot()->addChild(pImage);
 
@@ -895,8 +921,8 @@ void WndRender::testObj()
 
 	ModelObj* model = CREATE_NODE(ModelObj);
 	model->load(filename);
-	model->setScale(200);
-	model->setPosition(512, 384, 0);
+	model->setScale(100);
+	model->setPosition(0, 0, 0);
 	model->setVolume(400, 400, 400);
 	this->getCanvas()->getRoot()->addChild(model);
 

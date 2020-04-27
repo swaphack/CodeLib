@@ -16,7 +16,11 @@ ModelObj::~ModelObj()
 
 void ModelObj::load(const std::string& filepath)
 {
-	FileObj* pFile = Loader::load<FileObj>(filepath.c_str());
-	this->setModelData(pFile);
+	auto task = std::thread([this, filepath](){
+		FileObj* pFile = Loader::load<FileObj>(filepath.c_str());
+		this->setModelData(pFile);
+	});
+
+	task.detach();
 }
 

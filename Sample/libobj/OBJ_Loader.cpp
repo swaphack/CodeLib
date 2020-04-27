@@ -218,6 +218,28 @@ void objl::algorithm::split(const std::string &in, std::vector<std::string> &out
 	}
 }
 
+void objl::algorithm::split(const std::string &in, std::vector<std::string> &out, char token)
+{
+	const char* ptr = in.c_str();
+	int size = in.size();
+	int offset = 0;
+	int count = 0;
+	while (offset + count <= size)
+	{
+		if (*(ptr + offset + count) == token || offset + count == size)
+		{
+			std::string str(ptr + offset, count);
+			out.push_back(str);
+			offset = count + offset + 1;
+			count = 0;
+		}
+		else
+		{
+			count++;
+		}
+	}
+}
+
 std::string objl::algorithm::firstToken(const std::string &in)
 {
 	if (!in.empty())
@@ -469,19 +491,13 @@ bool objl::Loader::LoadFile(std::string Path)
 			// Generate LoadedMaterial
 
 			// Generate a path to the material file
-			std::vector<std::string> temp;
-			algorithm::split(Path, temp, "/");
+			std::string pathtomat;
 
-			std::string pathtomat = "";
-
-			if (temp.size() != 1)
+			int idx = Path.find_last_of('/');
+			if (idx != -1)
 			{
-				for (int i = 0; i < temp.size() - 1; i++)
-				{
-					pathtomat += temp[i] + "/";
-				}
+				pathtomat = Path.substr(0, idx + 1);
 			}
-
 
 			pathtomat += tailLine;
 
@@ -543,7 +559,7 @@ void objl::Loader::GenVerticesFromRawOBJ(std::vector<Vertex>& oVerts, const std:
 {
 	std::vector<std::string> sface, svert;
 	Vertex vVert;
-	algorithm::split(icurline, sface, " ");
+	algorithm::split(icurline, sface, ' ');
 
 	bool noNormal = false;
 
@@ -553,7 +569,9 @@ void objl::Loader::GenVerticesFromRawOBJ(std::vector<Vertex>& oVerts, const std:
 		// See What type the vertex is.
 		int vtype;
 
-		algorithm::split(sface[i], svert, "/");
+		svert.clear();
+
+		algorithm::split(sface[i], svert, '/');
 
 		// Check for just position - v1
 		if (svert.size() == 1)
@@ -902,7 +920,7 @@ bool objl::Loader::LoadMaterials(const std::string& path)
 		else if (firstToken == "Ka")
 		{
 			std::vector<std::string> temp;
-			algorithm::split(tailLine, temp, " ");
+			algorithm::split(tailLine, temp, ' ');
 
 			if (temp.size() != 3)
 				continue;
@@ -915,7 +933,7 @@ bool objl::Loader::LoadMaterials(const std::string& path)
 		else if (firstToken == "Kd")
 		{
 			std::vector<std::string> temp;
-			algorithm::split(tailLine, temp, " ");
+			algorithm::split(tailLine, temp, ' ');
 
 			if (temp.size() != 3)
 				continue;
@@ -928,7 +946,7 @@ bool objl::Loader::LoadMaterials(const std::string& path)
 		else if (firstToken == "Ks")
 		{
 			std::vector<std::string> temp;
-			algorithm::split(tailLine, temp, " ");
+			algorithm::split(tailLine, temp, ' ');
 
 			if (temp.size() != 3)
 				continue;
