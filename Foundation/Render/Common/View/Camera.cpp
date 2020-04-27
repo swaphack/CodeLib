@@ -85,7 +85,7 @@ bool Camera::init()
 	return true;
 }
 
-void Camera::setParams(float left, float right, float bottom, float top, float zNear, float zFar)
+void Camera::setViewPortParams(float left, float right, float bottom, float top, float zNear, float zFar)
 {
 	_cameraParams.xLeft = left;
 	_cameraParams.xRight = right;
@@ -95,7 +95,7 @@ void Camera::setParams(float left, float right, float bottom, float top, float z
 	_cameraParams.zFar = zFar;
 }
 
-const CameraParams& Camera::getParams()
+const CameraParams& Camera::getViewPortParams()
 {
 	return _cameraParams;
 }
@@ -104,7 +104,6 @@ Camera* Camera::getMainCamera()
 {
 	return _mainCamera;
 }
-
 
 CameraDimensions Camera::getDimensions()
 {
@@ -120,11 +119,11 @@ void Camera::visit()
 {
 	this->notifyEvents();
 
-	this->updateView();
-
 	GLMatrix::applyProjection();
 	
 	this->updateTranform();
+
+	this->updateView();
 
 	//GLMatrix::popMatrix();
 
@@ -157,6 +156,7 @@ void Camera::updateTranform()
 
 	if (_bUseMatrix)
 	{
+		//PRINT("%s\n", _mat44.toString().c_str());
 		GLMatrix::multMatrix(_mat44);
 	}
 	else
@@ -179,7 +179,7 @@ void Camera::inverseTranform()
 Camera2D::Camera2D()
 {
 	this->setDimensions(ED_2D);
-	this->setParams(0, 1, 0, 1, -1, 1);
+	this->setViewPortParams(0, 1, 0, 1, -1, 1);
 }
 
 Camera2D::~Camera2D()
@@ -202,9 +202,7 @@ void Camera2D::updateView()
 Camera3D::Camera3D()
 {
 	this->setDimensions(ED_3D);
-	this->setParams(0, 1, 0, 1, 0.1f, 100);
-
-	//this->setParams(-0.5f, 0.5f, -0.5f, 0.5f, 0.1f, 100);
+	this->setViewPortParams(-0.5f, 0.5f, -0.5f, 0.5f, 0.1f, 100);
 }
 
 Camera3D::~Camera3D()

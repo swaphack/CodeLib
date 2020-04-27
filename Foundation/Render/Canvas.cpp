@@ -2,11 +2,11 @@
 
 using namespace render;
 
+Canvas* render::Canvas::_sCanvas = nullptr;
+
 Canvas::Canvas()
-:_dimensions(ED_NONE)
 {
-	_root = CREATE_NODE(Scene);
-	_root->retain();
+	ASSERT(_sCanvas == nullptr);
 
 	_view = new View();
 
@@ -14,13 +14,14 @@ Canvas::Canvas()
 
 	_touchManager = G_TOUCHMANAGER;
 
-	//_drawCommander = G_DRAWCOMMANDER;
+	_sCanvas = this;
 }
 
 Canvas::~Canvas()
 {
-	SAFE_DELETE(_root);
 	SAFE_DELETE(_view);
+
+	this->removeAllScenes();
 }
 
 void Canvas::draw()
@@ -29,12 +30,17 @@ void Canvas::draw()
 	_view->updateView();
 
 	Camera* mainCamera = Camera::getMainCamera();
-	ASSERT(mainCamera != nullptr);
-	mainCamera->visit();
+	if (mainCamera)
+	{
+		mainCamera->visit();
+	}
 
-	_root->visit();
+	auto pTop = getCurScene();
+	if (pTop)
+	{
+		pTop->visit();
+	}
 
-	//_drawCommander->flush();
 	GLRender::flush();
 }
 
@@ -48,37 +54,93 @@ void Canvas::update(float interval)
 	G_AUDIO->update();
 }
 
-void Canvas::setDimensions(CameraDimensions d)
-{
-	if (_dimensions == d)
-	{
-		return;
-	}
-	_dimensions = d;
-	Camera::setMainCamera(d);
-}
-
-CameraDimensions Canvas::getDimensions()
-{
-	return _dimensions;
-}
-
 void Canvas::setViewPort(float x, float y, float width, float height)
 {
 	_view->setPosition(x, y);
 	_view->setFrameSize(width, height);
 
-	_root->setVolume(width, height);
-
 	Tool::setGLViewSize(width, height);
 }
 
-Scene* Canvas::getRoot()
+Scene* Canvas::getCurScene()
 {
-	return _root;
+	if (_scenes.empty())
+	{
+		return nullptr;
+	}
+	return _scenes.top();
 }
 
 View* Canvas::getView()
 {
 	return _view;
 }
+
+const TouchManager* render::Canvas::getTouchManager()
+{
+	return _touchManager;
+}
+
+const ActionManager* render::Canvas::getActionManager()
+{
+	return _actionManager;
+}
+
+void render::Canvas::pushScene(Scene* scene)
+{
+	if (scene == nullptr)
+	{
+		return;
+	}
+
+	SAFE_RETAIN(scene);
+
+	_scenes.push(scene);
+}
+
+Scene* render::Canvas::popScene()
+{
+	if (_scenes.empty())
+	{
+		return nullptr;
+	}
+
+	auto pScene = _scenes.top();
+	SAFE_RELEASE(pScene);
+	_scenes.pop();
+
+	return pScene;
+}
+
+void render::Canvas::replaceScene(Scene* scene)
+{
+	if (scene == nullptr)
+	{
+		return;
+	}
+
+	this->popScene();
+	this->pushScene(scene);
+}
+
+void render::Canvas::removeAllScenes()
+{
+	while (!_scenes.empty())
+	{
+		auto pScene = _scenes.top();
+		SAFE_RELEASE(pScene);
+		_scenes.pop();
+	}
+}
+
+bool render::Canvas::hasScene()
+{
+	return !_scenes.empty();
+}
+
+Canvas* render::Canvas::getInstance()
+{
+	return _sCanvas;
+}
+
+

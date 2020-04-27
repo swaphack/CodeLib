@@ -172,11 +172,13 @@
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="MainScene.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="WndRender.cpp" />
     <ClCompile Include="WndWeb.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="MainScene.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="WndRender.h" />
     <ClInclude Include="WndWeb.h" />

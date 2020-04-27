@@ -39,9 +39,9 @@ namespace render
 		CameraDimensions getDimensions();
 	public:
 		// 设置视窗参数
-		void setParams(float left, float right, float bottom, float top, float zNear, float zFar);
+		void setViewPortParams(float left, float right, float bottom, float top, float zNear, float zFar);
 		// 获取视窗参数
-		const CameraParams& getParams();
+		const CameraParams& getViewPortParams();
 	public:
 		// 更新空间位置
 		virtual void visit();
