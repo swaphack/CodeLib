@@ -104,7 +104,7 @@ ShaderAttrib* ShaderProgram::getAttriubte(const std::string& name)
 		return it->second;
 	}
 
-	GLint id = GLShader::getAttrib(_programID, name.c_str());
+	GLint id = GLShader::getAttribLocation(_programID, name.c_str());
 	if (id <= 0)
 	{
 		return nullptr;
@@ -146,7 +146,7 @@ ShaderUniform* ShaderProgram::getUniform(const std::string& name)
 		return it->second;
 	}
 
-	GLint id = GLShader::getUniform(_programID, name.c_str());
+	GLint id = GLShader::getUniformLocation(_programID, name.c_str());
 	if (id <= 0)
 	{
 		return nullptr;
