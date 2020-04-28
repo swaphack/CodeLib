@@ -14,7 +14,7 @@ Debug/Render.lib
 WebCat.sdf
 *.sdf
 WebCat.sdf
-/Debug/*.obj
+*.obj
 /Debug/Window.bsc
 /Debug/Window.exe
 /Debug/Window.pdb
