@@ -39,6 +39,8 @@ namespace render
 		static void createBuffers(int n, uint32_t* buffers);
 
 		static void createVertexArrays(int n, uint32_t* arrays);
+	public:
+		static void deleteBuffer(uint32_t buffer);
 		static void deleteBuffers(int n, uint32_t* buffers);
 		static void disableVertexAttribArray(uint32_t index);
 		static void disableVertexArrayAttrib(uint32_t vaobj, uint32_t index);
@@ -64,6 +66,7 @@ namespace render
 		static void flushMappedBufferRange(BufferTarget target, GLintptr offset, GLsizeiptr length);
 		static void flushMappedNamedBufferRange(uint32_t buffer, GLintptr offset, GLsizeiptr length);
 	public:
+		static uint32_t genBuffer();
 		static void genBuffers(int n, uint32_t* buffers);
 	public:
 		static void getBufferParameter(BufferTarget target, BufferParameter pname, int* params);

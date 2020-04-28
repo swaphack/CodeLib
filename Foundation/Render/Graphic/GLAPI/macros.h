@@ -2841,3 +2841,21 @@ enum class VertexAttribPackType
 
 	UNSIGNED_INT_10F_11F_11F_REV = GL_UNSIGNED_INT_10F_11F_11F_REV,
 };
+
+enum class VertexAttribSize
+{
+	ONE,
+	TWO,
+	THREE,
+	FOUR,
+};
+
+enum class VertexAttribPointerDataType
+{
+	BYTE = GL_BYTE,
+	UNSIGNED_BYTE = GL_UNSIGNED_BYTE,
+	SHORT = GL_SHORT,
+	UNSIGNED_SHORT = GL_UNSIGNED_SHORT,
+	FIXED = GL_FIXED,
+	FLOAT = GL_FLOAT
+};

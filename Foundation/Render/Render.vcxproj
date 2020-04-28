@@ -112,6 +112,7 @@
     <ClCompile Include="Common\Audio\CtrlAudioSourceClip.cpp" />
     <ClCompile Include="Common\Audio\CtrlAudioSpeaker.cpp" />
     <ClCompile Include="Common\Audio\macros.cpp" />
+    <ClCompile Include="Common\Buffer\BufferObject.cpp" />
     <ClCompile Include="Common\DrawNode\DrawNode.cpp" />
     <ClCompile Include="Common\Keyboard\KeyboardManager.cpp" />
     <ClCompile Include="Common\Node\Animation.cpp" />
@@ -248,6 +249,7 @@
     <ClInclude Include="Common\Audio\CtrlAudioSpeaker.h" />
     <ClInclude Include="Common\Audio\import.h" />
     <ClInclude Include="Common\Audio\macros.h" />
+    <ClInclude Include="Common\Buffer\BufferObject.h" />
     <ClInclude Include="Common\DrawNode\DrawNode.h" />
     <ClInclude Include="Common\DrawNode\import.h" />
     <ClInclude Include="Common\import.h" />

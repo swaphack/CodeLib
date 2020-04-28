@@ -19,33 +19,33 @@ namespace render
 		static void useProgram(uint32_t program);
 		static void showProgramStatus(uint32_t program);
 	public:
-		static void setAttribValue(uint32_t attribID, int len, const double* v);
-		static void setAttribValue(uint32_t attribID, int len, const float* v);
-		static void setAttribValue(uint32_t attribID, int len, const uint32_t* v);
-		static void setAttribValue(uint32_t attribID, int len, const int32_t* v);
-		static void setAttribValue(uint32_t attribID, int len, const uint16_t* v);
-		static void setAttribValue(uint32_t attribID, int len, const int16_t* v);
-		static void setAttribValue(uint32_t attribID, int len, const uint8_t* v);
-		static void setAttribValue(uint32_t attribID, int len, const int8_t* v);
+		static void setVertexAttribValue(uint32_t attribID, VertexAttribSize len, const double* v);
+		static void setVertexAttribValue(uint32_t attribID, VertexAttribSize len, const float* v);
+		static void setVertexAttribValue4(uint32_t attribID, const uint32_t* v);
+		static void setVertexAttribValue4(uint32_t attribID, const int32_t* v);
+		static void setVertexAttribValue4(uint32_t attribID, const uint16_t* v);
+		static void setVertexAttribValue(uint32_t attribID, VertexAttribSize len, const int16_t* v);
+		static void setVertexAttribValue4(uint32_t attribID, const uint8_t* v);
+		static void setVertexAttribValue4(uint32_t attribID, const int8_t* v);
 
-		static void setAttribValue(uint32_t attribID, double v0);
-		static void setAttribValue(uint32_t attribID, double v0, double v1);
-		static void setAttribValue(uint32_t attribID, double v0, double v1, double v2);
-		static void setAttribValue(uint32_t attribID, double v0, double v1, double v2, double v3);
+		static void setVertexAttribValue(uint32_t attribID, double v0);
+		static void setVertexAttribValue(uint32_t attribID, double v0, double v1);
+		static void setVertexAttribValue(uint32_t attribID, double v0, double v1, double v2);
+		static void setVertexAttribValue(uint32_t attribID, double v0, double v1, double v2, double v3);
 
-		static void setAttribValue(uint32_t attribID, float v0);
-		static void setAttribValue(uint32_t attribID, float v0, float v1);
-		static void setAttribValue(uint32_t attribID, float v0, float v1, float v2);
-		static void setAttribValue(uint32_t attribID, float v0, float v1, float v2, float v3);
+		static void setVertexAttribValue(uint32_t attribID, float v0);
+		static void setVertexAttribValue(uint32_t attribID, float v0, float v1);
+		static void setVertexAttribValue(uint32_t attribID, float v0, float v1, float v2);
+		static void setVertexAttribValue(uint32_t attribID, float v0, float v1, float v2, float v3);
 
-		static void setAttribValue(uint32_t attribID, uint16_t v0);
-		static void setAttribValue(uint32_t attribID, uint16_t v0, uint16_t v1);
-		static void setAttribValue(uint32_t attribID, uint16_t v0, uint16_t v1, uint16_t v2);
-		static void setAttribValue(uint32_t attribID, uint16_t v0, uint16_t v1, uint16_t v2, uint16_t v3);
+		static void setVertexAttribValue(uint32_t attribID, uint16_t v0);
+		static void setVertexAttribValue(uint32_t attribID, uint16_t v0, uint16_t v1);
+		static void setVertexAttribValue(uint32_t attribID, uint16_t v0, uint16_t v1, uint16_t v2);
+		static void setVertexAttribValue(uint32_t attribID, uint16_t v0, uint16_t v1, uint16_t v2, uint16_t v3);
 
-		static void setAttribValue(uint32_t attribID, float* value);
-		static void setAttribValue(uint32_t attribID, uint16_t* value);
-
+		static void setVertexAttribValue(uint32_t attribID, float* value);
+		static void setVertexAttribValue(uint32_t attribID, uint16_t* value);
+		static void setAttribPointer(uint32_t index, int size, VertexAttribPointerDataType type, bool normalized, int stride, const void *pointer);
 		static void showAttribStatus(uint32_t attribID);
 	public:
 		static int getUniformLocation(int32_t program, const char* uniformName);
@@ -182,6 +182,6 @@ namespace render
 		static void useProgramStages(uint32_t pipeline, GLbitfield stages, uint32_t program);
 		static void validateProgram(uint32_t program);
 	public:
-		size_t getTypeSize(AttribType type);
+		static size_t getTypeSize(AttribType type);
 	};
 }

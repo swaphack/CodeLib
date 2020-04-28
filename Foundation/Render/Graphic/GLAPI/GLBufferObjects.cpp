@@ -816,3 +816,15 @@ void render::GLBufferObjects::setVertexAttrib(uint32_t index, int16_t v0)
 {
 	glVertexAttrib1s(index, v0);
 }
+
+uint32_t render::GLBufferObjects::genBuffer()
+{
+	uint32_t id;
+	genBuffers(1, &id);
+	return id;
+}
+
+void render::GLBufferObjects::deleteBuffer(uint32_t buffer)
+{
+	deleteBuffers(1, &buffer);
+}

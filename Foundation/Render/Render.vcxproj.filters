@@ -345,6 +345,9 @@
     <ClCompile Include="Common\Shader\ShaderUniformBlock.cpp">
       <Filter>Common\Shader</Filter>
     </ClCompile>
+    <ClCompile Include="Common\Buffer\BufferObject.cpp">
+      <Filter>Common\Buffer</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Common\Node\import.h">
@@ -861,6 +864,9 @@
     <ClInclude Include="Common\Shader\ShaderUniformBlock.h">
       <Filter>Common\Shader</Filter>
     </ClInclude>
+    <ClInclude Include="Common\Buffer\BufferObject.h">
+      <Filter>Common\Buffer</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Common">
@@ -964,6 +970,9 @@
     </Filter>
     <Filter Include="Graphic\GLAPI">
       <UniqueIdentifier>{eff1c3cb-6f6b-4af7-81eb-680141cf5ff6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common\Buffer">
+      <UniqueIdentifier>{60f3aac1-f887-4af4-b135-62c2dba7c8c9}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

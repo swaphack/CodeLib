@@ -2,6 +2,8 @@
 
 #include "ShaderVariable.h"
 
+#include "Graphic/GLAPI/macros.h"
+
 namespace render
 {
 	/**
@@ -16,14 +18,14 @@ namespace render
 	public:
 		void showAttribs();
 	public:
-		void setValue(int len, const double* v);
-		void setValue(int len, const float* v);
-		void setValue(int len, const uint32_t* v);
-		void setValue(int len, const int32_t* v);
-		void setValue(int len, const uint16_t* v);
-		void setValue(int len, const int16_t* v);
-		void setValue(int len, const uint8_t* v);
-		void setValue(int len, const int8_t* v);
+		void setValue(VertexAttribSize len, const double* v);
+		void setValue(VertexAttribSize len, const float* v);
+		void setValue4(const uint32_t* v);
+		void setValue4(const int32_t* v);
+		void setValue4(const uint16_t* v);
+		void setValue(VertexAttribSize len, const int16_t* v);
+		void setValue4(const uint8_t* v);
+		void setValue4(const int8_t* v);
 
 		void setValue(double v0);
 		void setValue(double v0, double v1);

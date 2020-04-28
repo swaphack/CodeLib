@@ -19,3 +19,5 @@
 #include "GLVertexArrays.h"
 #include "GLSampler.h"
 #include "GLRasterization.h"
+#include "GLBufferObjects.h"
+#include "GLFrameBuffer.h"
