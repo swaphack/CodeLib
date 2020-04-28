@@ -97,9 +97,9 @@ namespace render
 		static void setProgramUniformValue3(uint32_t program, int location, int count, const uint32_t* value);
 		static void setProgramUniformValue4(uint32_t program, int location, int count, const uint32_t* value);
 
-		static void setProgramUniformMatrix2(uint32_t program, int location, int count, bool transpose, const float* value);
-		static void setProgramUniformMatrix3(uint32_t program, int location, int count, bool transpose, const float* value);
-		static void setProgramUniformMatrix4(uint32_t program, int location, int count, bool transpose, const float* value);
+		static void setProgramUniformMatrix2(uint32_t program, int location, int count, const float* value);
+		static void setProgramUniformMatrix3(uint32_t program, int location, int count, const float* value);
+		static void setProgramUniformMatrix4(uint32_t program, int location, int count, const float* value);
 		static void setProgramUniformMatrix2x3(uint32_t program, int location, int count, bool transpose, const float* value);
 		static void setProgramUniformMatrix3x2(uint32_t program, int location, int count, bool transpose, const float* value);
 		static void setProgramUniformMatrix2x4(uint32_t program, int location, int count, bool transpose, const float* value);
@@ -139,7 +139,7 @@ namespace render
 		static void getActiveUniformBlock(uint32_t program, uint32_t uniformBlockIndex, UniformBlockParameter pname, int* params);
 		static void getActiveUniformBlockName(uint32_t program, uint32_t uniformBlockIndex, int bufSize, int* length, char *name);
 		static void getActiveUniformName(uint32_t program, uint32_t uniformIndex, int bufSize, int* length, char *name);
-		static void getActiveUniformsiv(uint32_t program, int uniformCount, const uint32_t* uniformIndices, UniformParameter pname, int* params);
+		static void getActiveUniforms(uint32_t program, int uniformCount, const uint32_t* uniformIndices, UniformParameter pname, int* params);
 		static void getAttachedShaders(uint32_t program, int maxCount, int* count, uint32_t* shaders);
 		static int getAttribLocation(uint32_t program, const char* name);
 		static int getFragDataIndex(uint32_t program, const char* name);
@@ -160,7 +160,7 @@ namespace render
 		static void getShaderSource(uint32_t shader, int bufSize, int* length, char* source);
 		static void getSubroutineIndex(uint32_t program, ShaderType type, const char* name);
 		static void getSubroutineUniformLocation(uint32_t program, ShaderType type, const char* name);
-		static void getUniformBlockIndex(uint32_t program, const char* uniformBlockName);
+		static uint32_t getUniformBlockIndex(uint32_t program, const char* uniformBlockName);
 		static void getUniformIndices(uint32_t program, int uniformCount, const char** uniformNames, uint32_t* uniformIndices);
 		static void getUniformSubroutine(ShaderType type, int location, uint32_t* values);
 		static bool isProgram(uint32_t program);
@@ -175,12 +175,13 @@ namespace render
 
 			
 		static void setShaderStorageBlockBinding(uint32_t program, uint32_t storageBlockIndex, uint32_t storageBlockBinding);
-		static void getUniformLocation();
 		static void setUniformBlockBinding(uint32_t program, uint32_t uniformBlockIndex, uint32_t uniformBlockBinding);
 		static void setUniformSubroutines(ShaderType type, int count, const uint32_t* indices);
 
 		//@see ProgramStage
 		static void useProgramStages(uint32_t pipeline, GLbitfield stages, uint32_t program);
 		static void validateProgram(uint32_t program);
+	public:
+		size_t getTypeSize(AttribType type);
 	};
 }

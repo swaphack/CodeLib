@@ -44,8 +44,8 @@ namespace render
 		static void setEdgeFlagPointer(int stride, const void* flag);
 	public:// 用于begin end之间
 		static void drawArrayElement(int index);
-		static void drawArrays(ShapeMode mode, int first, int count);
+		static void drawArrays(DrawMode mode, int first, int count);
 	public:
-		static void drawElements(ShapeMode mode, int count, IndexDataType type, const void* data);
+		static void drawElements(DrawMode mode, int count, IndexDataType type, const void* data);
 	};
 }

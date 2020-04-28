@@ -85,7 +85,7 @@ void Model::drawSample()
 		auto indices = pMesh->getIndices();
 		if (indices.size > 0)
 		{
-			GLClientArrays::drawElements(ShapeMode::TRIANGLES, indices.size, IndexDataType::UNSIGNED_INT, indices.value);
+			GLClientArrays::drawElements(DrawMode::TRIANGLES, indices.size, IndexDataType::UNSIGNED_INT, indices.value);
 		}
 		GLState::disable(EnableModel::TEXTURE_2D);
 

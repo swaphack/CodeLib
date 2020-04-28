@@ -342,6 +342,9 @@
     <ClCompile Include="Graphic\GLAPI\GLFrameBuffer.cpp">
       <Filter>Graphic\GLAPI</Filter>
     </ClCompile>
+    <ClCompile Include="Common\Shader\ShaderUniformBlock.cpp">
+      <Filter>Common\Shader</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Common\Node\import.h">
@@ -854,6 +857,9 @@
     </ClInclude>
     <ClInclude Include="Graphic\GLAPI\GLFrameBuffer.h">
       <Filter>Graphic\GLAPI</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Shader\ShaderUniformBlock.h">
+      <Filter>Common\Shader</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

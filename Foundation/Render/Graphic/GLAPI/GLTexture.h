@@ -26,9 +26,9 @@ namespace render
 		static void clearTexImage(uint32_t texture, int level, TexImageDataFormat format, TexImageDataType type, const void* data);
 		static void clearTexSubImage(uint32_t texture, int level, int xoffset, int yoffset, int zoffset, int width, int height, int depth, TexImageDataFormat format, TexImageDataType type, const void* data);
 	public:
-		static void compressedTexImage1D(CompressedTexImageTarget1D target, int level, CompressedInternalFormat internalFormat, int width, int imageSize, const void* data);
-		static void compressedTexImage2D(CompressedTexImageTarget2D target, int level, CompressedInternalFormat internalFormat, int width, int height, int imageSize, const void* data);
-		static void compressedTexImage3D(CompressedTexImageTarget3D target, int level, CompressedInternalFormat internalFormat, int width, int height, int depth, int imageSize, const void* data);
+		static void compressedTexImage1D(CompressedTexImageTarget1D target, int level, TexCompressedInternalFormat internalFormat, int width, int imageSize, const void* data);
+		static void compressedTexImage2D(CompressedTexImageTarget2D target, int level, TexCompressedInternalFormat internalFormat, int width, int height, int imageSize, const void* data);
+		static void compressedTexImage3D(CompressedTexImageTarget3D target, int level, TexCompressedInternalFormat internalFormat, int width, int height, int depth, int imageSize, const void* data);
 
 		static void compressedTexSubImage1D(TextureSubImageTarget1D target, int level, int xoffset, int width, int imageSize, const void* data);
 		static void compressedTextureSubImage1D(uint32_t texture, int level, int xoffset, int width, int imageSize, const void* data);
@@ -82,11 +82,11 @@ namespace render
 	public:
 		static bool isTexture(uint32_t texture);
 	public:
-		static void setTexBuffer(SizedInternalFormat format, uint32_t buff);
-		static void setTextureBuffer(uint32_t texture, SizedInternalFormat format, uint32_t buff);
+		static void setTexBuffer(TexSizedInternalFormat format, uint32_t buff);
+		static void setTextureBuffer(uint32_t texture, TexSizedInternalFormat format, uint32_t buff);
 
-		static void setTexBufferRange(SizedInternalFormat format, uint32_t buff, GLintptr offset, GLsizeiptr size);
-		static void setTextureBufferRange(uint32_t texture, SizedInternalFormat format, uint32_t buff, GLintptr offset, GLsizeiptr size);
+		static void setTexBufferRange(TexSizedInternalFormat format, uint32_t buff, GLintptr offset, GLsizeiptr size);
+		static void setTextureBufferRange(uint32_t texture, TexSizedInternalFormat format, uint32_t buff, GLintptr offset, GLsizeiptr size);
 	public:
 		static void setTexImage1D(TexImageTarget1D target, int level, TexImageInternalFormat internalFormat, int width, int border, TexImageDataFormat format, TexImageDataType type, const void* data);
 		static void setTexImage2D(TexImageTarget2D target, int level, TexImageInternalFormat internalFormat, int width, int heigth, int border, TexImageDataFormat format, TexImageDataType type, const void* data);

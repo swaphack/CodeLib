@@ -14,12 +14,12 @@ ShaderVariable::~ShaderVariable()
 
 }
 
-void ShaderVariable::setVarID(int id)
+void ShaderVariable::setVarID(uint32_t id)
 {
 	_varID = id;
 }
 
-int ShaderVariable::getVarID()
+uint32_t ShaderVariable::getVarID()
 {
 	return _varID;
 }

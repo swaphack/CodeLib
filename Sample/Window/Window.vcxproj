@@ -172,14 +172,14 @@
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="MainScene.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="ShaderScene.cpp" />
     <ClCompile Include="WndRender.cpp" />
     <ClCompile Include="WndWeb.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="MainScene.h" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="ShaderScene.h" />
     <ClInclude Include="WndRender.h" />
     <ClInclude Include="WndWeb.h" />
   </ItemGroup>
@@ -199,6 +199,7 @@
   <ItemGroup>
     <None Include="Resource\shader\gray.fsh" />
     <None Include="Resource\shader\gray.vsh" />
+    <None Include="Resource\shader\shader_1.glsl" />
     <None Include="ribbon1.mfcribbon-ms" />
   </ItemGroup>
   <ItemGroup>

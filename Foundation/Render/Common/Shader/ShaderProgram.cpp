@@ -2,7 +2,8 @@
 #include "Shader.h"
 #include "ShaderAttrib.h"
 #include "ShaderUniform.h"
-#include "Graphic/GLAPI/GLShader.h"
+#include "ShaderUniformBlock.h"
+#include "Graphic/import.h"
 
 using namespace render;
 
@@ -88,6 +89,7 @@ void ShaderProgram::releaseProgram()
 	detachAllShaders();
 	removeAllAttributes();
 	removeAllUniforms();
+	removeAllUniformBlocks();
 
 	if (_programID != 0)
 	{
@@ -104,7 +106,7 @@ ShaderAttrib* ShaderProgram::getAttriubte(const std::string& name)
 		return it->second;
 	}
 
-	GLint id = GLShader::getAttribLocation(_programID, name.c_str());
+	int32_t id = GLShader::getAttribLocation(_programID, name.c_str());
 	if (id <= 0)
 	{
 		return nullptr;
@@ -146,7 +148,7 @@ ShaderUniform* ShaderProgram::getUniform(const std::string& name)
 		return it->second;
 	}
 
-	GLint id = GLShader::getUniformLocation(_programID, name.c_str());
+	int id = GLShader::getUniformLocation(_programID, name.c_str());
 	if (id <= 0)
 	{
 		return nullptr;
@@ -189,4 +191,42 @@ void ShaderProgram::load(const std::string& vpath, const std::string& fpath)
 	FragmentShader* pFragment = CREATE_OBJECT(FragmentShader);
 	pFragment->loadFromFile(fpath);
 	this->attachShader(pFragment);
+}
+
+render::ShaderUniformBlock* render::ShaderProgram::getUniformBlock(const std::string& name)
+{
+	auto it = _uniformBlocks.find(name);
+	if (it != _uniformBlocks.end())
+	{
+		return it->second;
+	}
+
+	uint32_t id = GLShader::getUniformBlockIndex(_programID, name.c_str());
+
+	auto pUniformBlock = CREATE_OBJECT(ShaderUniformBlock);
+	pUniformBlock->setVarID(id);
+	pUniformBlock->setName(name);
+	pUniformBlock->setProgram(this);
+	this->addUniformBlock(name, pUniformBlock);
+
+	return pUniformBlock;
+}
+
+void render::ShaderProgram::addUniformBlock(const std::string& name, ShaderUniformBlock* uniform)
+{
+	if (name.empty() || uniform == nullptr)
+	{
+		return;
+	}
+	SAFE_RETAIN(uniform);
+	_uniformBlocks[name] = uniform;
+}
+
+void render::ShaderProgram::removeAllUniformBlocks()
+{
+	for (auto item : _uniformBlocks)
+	{
+		SAFE_RELEASE(item.second);
+	}
+	_uniformBlocks.clear();
 }

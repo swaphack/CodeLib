@@ -39,7 +39,7 @@
     <ClCompile Include="Main.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="MainScene.cpp">
+    <ClCompile Include="ShaderScene.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
@@ -53,7 +53,7 @@
     <ClInclude Include="WndRender.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="MainScene.h">
+    <ClInclude Include="ShaderScene.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
@@ -96,6 +96,9 @@
       <Filter>Resource\shader</Filter>
     </None>
     <None Include="Resource\shader\gray.fsh">
+      <Filter>Resource\shader</Filter>
+    </None>
+    <None Include="Resource\shader\shader_1.glsl">
       <Filter>Resource\shader</Filter>
     </None>
   </ItemGroup>

@@ -43,13 +43,13 @@ void GLShader::detachShader(uint32_t program, uint32_t shader)
 void GLShader::showShaderStatus(uint32_t shader)
 {
 	GLsizei bufferSize = 0;
-	glGetShaderiv(shader, GL_INFO_LOG_LENGTH, &bufferSize);
+	getShader(shader, ShaderParameter::INFO_LOG_LENGTH, &bufferSize);
 	if (bufferSize > 0)
 	{
 		GLchar* buffer = new char[bufferSize];
 		getShaderInfoLog(shader, bufferSize, NULL, buffer);
 		PRINT("%s", buffer);
-		delete[] buffer;
+		delete buffer;
 	}
 }
 
@@ -82,7 +82,7 @@ void GLShader::showProgramStatus(uint32_t program)
 		GLchar* buffer = new char[bufferSize];
 		getProgramInfoLog(program, bufferSize, NULL, buffer);
 		PRINT("%s", buffer);
-		delete[] buffer;
+		delete buffer;
 	}
 }
 
@@ -292,17 +292,17 @@ void GLShader::setUniformValue(int32_t uniformID, int32_t v0, int32_t v1, int32_
 
 void GLShader::setUniformMatrix2(int32_t uniformID, int count, bool transpose, const float* value)
 {
-	glUniformMatrix2fv(uniformID, count, transpose, value);
+	glUniformMatrix2fv(uniformID, count, transpose ? GL_TRUE : GL_FALSE, value);
 }
 
 void GLShader::setUniformMatrix3(int32_t uniformID, int count, bool transpose, const float* value)
 {
-	glUniformMatrix2fv(uniformID, count, transpose, value);
+	glUniformMatrix2fv(uniformID, count, transpose ? GL_TRUE : GL_FALSE, value);
 }
 
 void GLShader::setUniformMatrix4(int32_t uniformID, int count, bool transpose, const float* value)
 {
-	glUniformMatrix2fv(uniformID, count, transpose, value);
+	glUniformMatrix2fv(uniformID, count, transpose ? GL_TRUE : GL_FALSE, value);
 }
 
 void GLShader::showAttribStatus(uint32_t attribID)
@@ -328,227 +328,227 @@ void GLShader::showAttribStatus(uint32_t attribID)
 	PRINT("GL_VERTEX_ATTRIB_ARRAY_NORMALIZED : %d", value);
 }
 
-void render::GLShader::setProgramUniformValue(uint32_t program, int location, float v0)
+void GLShader::setProgramUniformValue(uint32_t program, int location, float v0)
 {
 	glProgramUniform1f(program, location, v0);
 }
 
-void render::GLShader::setProgramUniformValue1(uint32_t program, int location, int count, const float* value)
+void GLShader::setProgramUniformValue1(uint32_t program, int location, int count, const float* value)
 {
 	glProgramUniform1fv(program, location, count, value);
 }
 
-void render::GLShader::setProgramUniformValue2(uint32_t program, int location, int count, const uint32_t* value)
+void GLShader::setProgramUniformValue2(uint32_t program, int location, int count, const uint32_t* value)
 {
 	glProgramUniform2uiv(program, location, count, value);
 }
 
-void render::GLShader::setProgramUniformValue3(uint32_t program, int location, int count, const uint32_t* value)
+void GLShader::setProgramUniformValue3(uint32_t program, int location, int count, const uint32_t* value)
 {
 	glProgramUniform3uiv(program, location, count, value);
 }
 
-void render::GLShader::setProgramUniformValue4(uint32_t program, int location, int count, const uint32_t* value)
+void GLShader::setProgramUniformValue4(uint32_t program, int location, int count, const uint32_t* value)
 {
 	glProgramUniform4uiv(program, location, count, value);
 }
 
-void render::GLShader::setProgramUniformMatrix2(uint32_t program, int location, int count, bool transpose, const float* value)
+void GLShader::setProgramUniformMatrix2(uint32_t program, int location, int count, const float* value)
 {
 	glProgramUniform2fv(program, location, count, value);
 }
 
-void render::GLShader::setProgramUniformMatrix3(uint32_t program, int location, int count, bool transpose, const float* value)
+void GLShader::setProgramUniformMatrix3(uint32_t program, int location, int count, const float* value)
 {
 	glProgramUniform3fv(program, location, count, value);
 }
 
-void render::GLShader::setProgramUniformMatrix4(uint32_t program, int location, int count, bool transpose, const float* value)
+void GLShader::setProgramUniformMatrix4(uint32_t program, int location, int count, const float* value)
 {
 	glProgramUniform4fv(program, location, count, value);
 }
 
-void render::GLShader::setProgramUniformMatrix2x3(uint32_t program, int location, int count, bool transpose, const float* value)
+void GLShader::setProgramUniformMatrix2x3(uint32_t program, int location, int count, bool transpose, const float* value)
 {
-	glProgramUniformMatrix2x3fv(program, location, count, transpose, value);
+	glProgramUniformMatrix2x3fv(program, location, count, transpose ? GL_TRUE : GL_FALSE, value);
 }
 
-void render::GLShader::setProgramUniformMatrix3x2(uint32_t program, int location, int count, bool transpose, const float* value)
+void GLShader::setProgramUniformMatrix3x2(uint32_t program, int location, int count, bool transpose, const float* value)
 {
-	glProgramUniformMatrix3x2fv(program, location, count, transpose, value);
+	glProgramUniformMatrix3x2fv(program, location, count, transpose ? GL_TRUE : GL_FALSE, value);
 }
 
-void render::GLShader::setProgramUniformMatrix2x4(uint32_t program, int location, int count, bool transpose, const float* value)
+void GLShader::setProgramUniformMatrix2x4(uint32_t program, int location, int count, bool transpose, const float* value)
 {
-	glProgramUniformMatrix2x4fv(program, location, count, transpose, value);
+	glProgramUniformMatrix2x4fv(program, location, count, transpose ? GL_TRUE : GL_FALSE, value);
 }
 
-void render::GLShader::setProgramUniformMatrix4x2(uint32_t program, int location, int count, bool transpose, const float* value)
+void GLShader::setProgramUniformMatrix4x2(uint32_t program, int location, int count, bool transpose, const float* value)
 {
-	glProgramUniformMatrix4x2fv(program, location, count, transpose, value);
+	glProgramUniformMatrix4x2fv(program, location, count, transpose ? GL_TRUE : GL_FALSE, value);
 }
 
-void render::GLShader::setProgramUniformMatrix3x4(uint32_t program, int location, int count, bool transpose, const float* value)
+void GLShader::setProgramUniformMatrix3x4(uint32_t program, int location, int count, bool transpose, const float* value)
 {
-	glProgramUniformMatrix3x4fv(program, location, count, transpose, value);
+	glProgramUniformMatrix3x4fv(program, location, count, transpose ? GL_TRUE : GL_FALSE, value);
 }
 
-void render::GLShader::setProgramUniformMatrix4x3(uint32_t program, int location, int count, bool transpose, const float* value)
+void GLShader::setProgramUniformMatrix4x3(uint32_t program, int location, int count, bool transpose, const float* value)
 {
-	glProgramUniformMatrix4x3fv(program, location, count, transpose, value);
+	glProgramUniformMatrix4x3fv(program, location, count, transpose ? GL_TRUE : GL_FALSE, value);
 }
 
-void render::GLShader::setProgramUniformValue2(uint32_t program, int location, int count, const int32_t* value)
+void GLShader::setProgramUniformValue2(uint32_t program, int location, int count, const int32_t* value)
 {
 	glProgramUniform2iv(program, location, count, value);
 }
 
-void render::GLShader::setProgramUniformValue3(uint32_t program, int location, int count, const int32_t* value)
+void GLShader::setProgramUniformValue3(uint32_t program, int location, int count, const int32_t* value)
 {
 	glProgramUniform3iv(program, location, count, value);
 }
 
-void render::GLShader::setProgramUniformValue4(uint32_t program, int location, int count, const int32_t* value)
+void GLShader::setProgramUniformValue4(uint32_t program, int location, int count, const int32_t* value)
 {
 	glProgramUniform4iv(program, location, count, value);
 }
 
-void render::GLShader::setProgramUniformValue1(uint32_t program, int location, int count, const uint32_t* value)
+void GLShader::setProgramUniformValue1(uint32_t program, int location, int count, const uint32_t* value)
 {
 	glProgramUniform1uiv(program, location, count, value);
 }
 
-void render::GLShader::setProgramUniformValue2(uint32_t program, int location, int count, const float* value)
+void GLShader::setProgramUniformValue2(uint32_t program, int location, int count, const float* value)
 {
 	glProgramUniform2fv(program, location, count, value);
 }
 
-void render::GLShader::setProgramUniformValue3(uint32_t program, int location, int count, const float* value)
+void GLShader::setProgramUniformValue3(uint32_t program, int location, int count, const float* value)
 {
 	glProgramUniform3fv(program, location, count, value);
 }
 
-void render::GLShader::setProgramUniformValue4(uint32_t program, int location, int count, const float* value)
+void GLShader::setProgramUniformValue4(uint32_t program, int location, int count, const float* value)
 {
 	glProgramUniform4fv(program, location, count, value);
 }
 
-void render::GLShader::setProgramUniformValue1(uint32_t program, int location, int count, const int32_t* value)
+void GLShader::setProgramUniformValue1(uint32_t program, int location, int count, const int32_t* value)
 {
 	glProgramUniform1iv(program, location, count, value);
 }
 
-void render::GLShader::setProgramUniformValue(uint32_t program, int location, uint32_t v0, uint32_t v1, uint32_t v2, uint32_t v3)
+void GLShader::setProgramUniformValue(uint32_t program, int location, uint32_t v0, uint32_t v1, uint32_t v2, uint32_t v3)
 {
 	glProgramUniform4ui(program, location, v0, v1, v2, v3);
 }
 
-void render::GLShader::setProgramUniformValue(uint32_t program, int location, uint32_t v0, uint32_t v1, uint32_t v2)
+void GLShader::setProgramUniformValue(uint32_t program, int location, uint32_t v0, uint32_t v1, uint32_t v2)
 {
 	glProgramUniform3ui(program, location, v0, v1, v2);
 }
 
-void render::GLShader::setProgramUniformValue(uint32_t program, int location, uint32_t v0, uint32_t v1)
+void GLShader::setProgramUniformValue(uint32_t program, int location, uint32_t v0, uint32_t v1)
 {
 	glProgramUniform2ui(program, location, v0, v1);
 }
 
-void render::GLShader::setProgramUniformValue(uint32_t program, int location, uint32_t v0)
+void GLShader::setProgramUniformValue(uint32_t program, int location, uint32_t v0)
 {
 	glProgramUniform1ui(program, location, v0);
 }
 
-void render::GLShader::setProgramUniformValue(uint32_t program, int location, int32_t v0, int32_t v1, int32_t v2, int32_t v3)
+void GLShader::setProgramUniformValue(uint32_t program, int location, int32_t v0, int32_t v1, int32_t v2, int32_t v3)
 {
 	glProgramUniform4i(program, location, v0, v1, v2, v3);
 }
 
-void render::GLShader::setProgramUniformValue(uint32_t program, int location, int32_t v0, int32_t v1, int32_t v2)
+void GLShader::setProgramUniformValue(uint32_t program, int location, int32_t v0, int32_t v1, int32_t v2)
 {
 	glProgramUniform3i(program, location, v0, v1, v2);
 }
 
-void render::GLShader::setProgramUniformValue(uint32_t program, int location, int32_t v0, int32_t v1)
+void GLShader::setProgramUniformValue(uint32_t program, int location, int32_t v0, int32_t v1)
 {
 	glProgramUniform2i(program, location, v0, v1);
 }
 
-void render::GLShader::setProgramUniformValue(uint32_t program, int location, int32_t v0)
+void GLShader::setProgramUniformValue(uint32_t program, int location, int32_t v0)
 {
 	glProgramUniform1i(program, location, v0);
 }
 
-void render::GLShader::setProgramUniformValue(uint32_t program, int location, float v0, float v1, float v2, float v3)
+void GLShader::setProgramUniformValue(uint32_t program, int location, float v0, float v1, float v2, float v3)
 {
 	glProgramUniform4f(program, location, v0, v1, v2, v3);
 }
 
-void render::GLShader::setProgramUniformValue(uint32_t program, int location, float v0, float v1, float v2)
+void GLShader::setProgramUniformValue(uint32_t program, int location, float v0, float v1, float v2)
 {
 	glProgramUniform3f(program, location, v0, v1, v2);
 }
 
-void render::GLShader::setProgramUniformValue(uint32_t program, int location, float v0, float v1)
+void GLShader::setProgramUniformValue(uint32_t program, int location, float v0, float v1)
 {
 	glProgramUniform2f(program, location, v0, v1);
 }
 
-void render::GLShader::getUniformValue(uint32_t program, int location, int* params)
+void GLShader::getUniformValue(uint32_t program, int location, int* params)
 {
 	glGetUniformiv(program, location, params);
 }
 
-void render::GLShader::getUniformValue(uint32_t program, int location, int bufSize, float* params)
+void GLShader::getUniformValue(uint32_t program, int location, int bufSize, float* params)
 {
 	glGetnUniformfv(program, location, bufSize, params);
 }
 
-void render::GLShader::getUniformValue(uint32_t program, int location, int bufSize, uint32_t* params)
+void GLShader::getUniformValue(uint32_t program, int location, int bufSize, uint32_t* params)
 {
 	glGetnUniformuiv(program, location, bufSize, params);
 }
 
-void render::GLShader::getUniformValue(uint32_t program, int location, int bufSize, int* params)
+void GLShader::getUniformValue(uint32_t program, int location, int bufSize, int* params)
 {
 	glGetnUniformiv(program, location, bufSize, params);
 }
 
-void render::GLShader::getUniformValue(uint32_t program, int location, float* params)
+void GLShader::getUniformValue(uint32_t program, int location, float* params)
 {
 	glGetUniformfv(program, location, params);
 }
 
-void render::GLShader::getUniformValue(uint32_t program, int location, uint32_t* params)
+void GLShader::getUniformValue(uint32_t program, int location, uint32_t* params)
 {
 	glGetUniformuiv(program, location, params);
 }
 
-void render::GLShader::bindAttributeLocation(uint32_t program, uint32_t index, const char* name)
+void GLShader::bindAttributeLocation(uint32_t program, uint32_t index, const char* name)
 {
 	glBindAttribLocation(program, index, name);
 }
 
-void render::GLShader::bindFragDataLocation(uint32_t program, uint32_t colorNumber, const char* name)
+void GLShader::bindFragDataLocation(uint32_t program, uint32_t colorNumber, const char* name)
 {
 	glBindFragDataLocation(program, colorNumber, name);
 }
 
-void render::GLShader::bindFragDataLocationIndexed(uint32_t program, uint32_t colorNumber, uint32_t index, const char* name)
+void GLShader::bindFragDataLocationIndexed(uint32_t program, uint32_t colorNumber, uint32_t index, const char* name)
 {
 	glBindFragDataLocationIndexed(program, colorNumber, index, name);
 }
 
-void render::GLShader::compileShader(uint32_t shader)
+void GLShader::compileShader(uint32_t shader)
 {
 	glCompileShader(shader);
 }
 
-void render::GLShader::getActiveAtomicCounterBuffer(uint32_t program, uint32_t bufferIndex, AtomicCounterBufferName name, int* params)
+void GLShader::getActiveAtomicCounterBuffer(uint32_t program, uint32_t bufferIndex, AtomicCounterBufferName name, int* params)
 {
 	glGetActiveAtomicCounterBufferiv(program, bufferIndex, (GLenum)name, params);
 }
 
-void render::GLShader::getActiveAttrib(uint32_t program, uint32_t index, int bufSize, int *length, int *size, AttribType *type, char *name)
+void GLShader::getActiveAttrib(uint32_t program, uint32_t index, int bufSize, int *length, int *size, AttribType *type, char *name)
 {
 	uint32_t* data = new uint32_t[*size];
 	for (int i = 0; i < (*size); i++)
@@ -560,223 +560,268 @@ void render::GLShader::getActiveAttrib(uint32_t program, uint32_t index, int buf
 	delete data;
 }
 
-void render::GLShader::getActiveSubroutineName(uint32_t program, ShaderType shaderType, uint32_t index, int bufSize, int *length, char *name)
+void GLShader::getActiveSubroutineName(uint32_t program, ShaderType shaderType, uint32_t index, int bufSize, int *length, char *name)
 {
 	glGetActiveSubroutineName(program, (GLenum)shaderType, index, bufSize, length, name);
 }
 
-void render::GLShader::getActiveSubroutineUniform(uint32_t program, ShaderType shaderType, uint32_t index, SubroutineUniformParameter pname, int *values)
+void GLShader::getActiveSubroutineUniform(uint32_t program, ShaderType shaderType, uint32_t index, SubroutineUniformParameter pname, int *values)
 {
 	glGetActiveSubroutineUniformiv(program, (GLenum)shaderType, index, (GLenum)pname, values);
 }
 
-void render::GLShader::getActiveSubroutineUniformName(uint32_t program, ShaderType shaderType, uint32_t index, int bufSize, int* length, char *name)
+void GLShader::getActiveSubroutineUniformName(uint32_t program, ShaderType shaderType, uint32_t index, int bufSize, int* length, char *name)
 {
 	glGetActiveSubroutineUniformName(program, (GLenum)shaderType, index, bufSize, length, name);
 }
 
-void render::GLShader::getActiveUniform(uint32_t program, ShaderType shaderType, uint32_t index, int bufSize, int* length, int* size, uint32_t* type, char *name)
+void GLShader::getActiveUniform(uint32_t program, ShaderType shaderType, uint32_t index, int bufSize, int* length, int* size, uint32_t* type, char *name)
 {
 	glGetActiveUniform(program, index, bufSize, length, size, type, name);
 }
 
-void render::GLShader::getActiveUniformBlock(uint32_t program, uint32_t uniformBlockIndex, UniformBlockParameter pname, int* params)
+void GLShader::getActiveUniformBlock(uint32_t program, uint32_t uniformBlockIndex, UniformBlockParameter pname, int* params)
 {
 	glGetActiveUniformBlockiv(program, uniformBlockIndex, (GLenum)pname, params);
 }
 
-void render::GLShader::getActiveUniformBlockName(uint32_t program, uint32_t uniformBlockIndex, int bufSize, int* length, char *name)
+void GLShader::getActiveUniformBlockName(uint32_t program, uint32_t uniformBlockIndex, int bufSize, int* length, char *name)
 {
 	glGetActiveUniformBlockName(program, uniformBlockIndex, bufSize, length, name);
 }
 
-void render::GLShader::getActiveUniformName(uint32_t program, uint32_t uniformIndex, int bufSize, int* length, char *name)
+void GLShader::getActiveUniformName(uint32_t program, uint32_t uniformIndex, int bufSize, int* length, char *name)
 {
 	glGetActiveUniformName(program, uniformIndex, bufSize, length, name);
 }
 
-void render::GLShader::getActiveUniformsiv(uint32_t program, int uniformCount, const uint32_t* uniformIndices, UniformParameter pname, int* params)
+void GLShader::getActiveUniforms(uint32_t program, int uniformCount, const uint32_t* uniformIndices, UniformParameter pname, int* params)
 {
 	glGetActiveUniformsiv(program, uniformCount, uniformIndices, (GLenum)pname, params);
 }
 
-void render::GLShader::getAttachedShaders(uint32_t program, int maxCount, int* count, uint32_t* shaders)
+void GLShader::getAttachedShaders(uint32_t program, int maxCount, int* count, uint32_t* shaders)
 {
 	glGetAttachedShaders(program, maxCount, count, shaders);
 }
 
-int render::GLShader::getAttribLocation(uint32_t program, const char* name)
+int GLShader::getAttribLocation(uint32_t program, const char* name)
 {
 	return glGetAttribLocation(program, name);
 }
 
-int render::GLShader::getFragDataIndex(uint32_t program, const char* name)
+int GLShader::getFragDataIndex(uint32_t program, const char* name)
 {
 	return glGetFragDataIndex(program, name);
 }
 
-int render::GLShader::getFragDataLocation(uint32_t program, const char* name)
+int GLShader::getFragDataLocation(uint32_t program, const char* name)
 {
 	return glGetFragDataLocation(program, name);
 }
 
-void render::GLShader::getProgram(uint32_t program, GetProgramParameter pname, int* params)
+void GLShader::getProgram(uint32_t program, GetProgramParameter pname, int* params)
 {
 	glGetProgramiv(program, (GLenum)pname, params);
 }
 
-void render::GLShader::getProgramBinary(uint32_t program, int bufSize, int* length, uint32_t* binaryFormat, void* binary)
+void GLShader::getProgramBinary(uint32_t program, int bufSize, int* length, uint32_t* binaryFormat, void* binary)
 {
 	glGetProgramBinary(program, bufSize, length, binaryFormat, binary);
 }
 
-void render::GLShader::getProgramInfoLog(uint32_t program, int maxLength, int* length, char* infoLog)
+void GLShader::getProgramInfoLog(uint32_t program, int maxLength, int* length, char* infoLog)
 {
 	glGetProgramInfoLog(program, maxLength, length, infoLog);
 }
 
-void render::GLShader::getProgramResource(uint32_t program, ProgramResourceInterface programInterface, uint32_t index, int proCount, const uint32_t* props, int bufSize, int* length, int* params)
+void GLShader::getProgramResource(uint32_t program, ProgramResourceInterface programInterface, uint32_t index, int proCount, const uint32_t* props, int bufSize, int* length, int* params)
 {
 	glGetProgramResourceiv(program, (GLenum)programInterface, index, proCount, props, bufSize, length, params);
 }
 
-void render::GLShader::getProgramResourceIndex(uint32_t program, ProgramResourceIndexInterface programInterface, const char* name)
+void GLShader::getProgramResourceIndex(uint32_t program, ProgramResourceIndexInterface programInterface, const char* name)
 {
 	glGetProgramResourceIndex(program, (GLenum)programInterface, name);
 }
 
-void render::GLShader::getProgramResourceLocation(uint32_t program, ProgramResourceLocationInterface programInterface, const char* name)
+void GLShader::getProgramResourceLocation(uint32_t program, ProgramResourceLocationInterface programInterface, const char* name)
 {
 	glGetProgramResourceLocation(program, (GLenum)programInterface, name);
 }
 
-void render::GLShader::getProgramResourceLocationIndex(uint32_t program, ProgramResourceLocationIndexInterface programInterface, const char* name)
+void GLShader::getProgramResourceLocationIndex(uint32_t program, ProgramResourceLocationIndexInterface programInterface, const char* name)
 {
 	glGetProgramResourceLocationIndex(program, (GLenum)programInterface, name);
 }
 
-void render::GLShader::getProgramResourceName(uint32_t program, ProgramResourceNameInterface programInterface, uint32_t index, int bufSize, int* length, char* name)
+void GLShader::getProgramResourceName(uint32_t program, ProgramResourceNameInterface programInterface, uint32_t index, int bufSize, int* length, char* name)
 {
 	glGetProgramResourceName(program, (GLenum)programInterface, index, bufSize, length, name);
 }
 
-void render::GLShader::getProgramStage(uint32_t program, ShaderType type, ProgramStageParameter pname, int* values)
+void GLShader::getProgramStage(uint32_t program, ShaderType type, ProgramStageParameter pname, int* values)
 {
 	glGetProgramStageiv(program, (GLenum)type, (GLenum)pname, values);
 }
 
-void render::GLShader::getShader(uint32_t shader, ShaderParameter parameter, int* params)
+void GLShader::getShader(uint32_t shader, ShaderParameter parameter, int* params)
 {
 	glGetShaderiv(shader, (GLenum)parameter, params);
 }
 
-void render::GLShader::getShaderInfoLog(uint32_t shader, int maxLength, int* length, char* infoLog)
+void GLShader::getShaderInfoLog(uint32_t shader, int maxLength, int* length, char* infoLog)
 {
 	glGetShaderInfoLog(shader, maxLength, length, infoLog);
 }
 
-void render::GLShader::getShaderPrecisionFormat(ShaderType type, ShaderPrecisionType precisionType, int* range, int* precision)
+void GLShader::getShaderPrecisionFormat(ShaderType type, ShaderPrecisionType precisionType, int* range, int* precision)
 {
 	glGetShaderPrecisionFormat((GLenum)type, (GLenum)precisionType, range, precision);
 }
 
-void render::GLShader::getShaderSource(uint32_t shader, int bufSize, int* length, char* source)
+void GLShader::getShaderSource(uint32_t shader, int bufSize, int* length, char* source)
 {
 	glGetShaderSource(shader, bufSize, length, source);
 }
 
-void render::GLShader::getSubroutineIndex(uint32_t program, ShaderType type, const char* name)
+void GLShader::getSubroutineIndex(uint32_t program, ShaderType type, const char* name)
 {
 	glGetSubroutineIndex(program, (GLenum)type, name);
 }
 
-void render::GLShader::getSubroutineUniformLocation(uint32_t program, ShaderType type, const char* name)
+void GLShader::getSubroutineUniformLocation(uint32_t program, ShaderType type, const char* name)
 {
 	glGetSubroutineUniformLocation(program, (GLenum)type,  name);
 }
 
-void render::GLShader::getUniformBlockIndex(uint32_t program, const char* uniformBlockName)
+uint32_t GLShader::getUniformBlockIndex(uint32_t program, const char* uniformBlockName)
 {
-	glGetUniformBlockIndex(program, uniformBlockName);
+	return glGetUniformBlockIndex(program, uniformBlockName);
 }
 
-void render::GLShader::getUniformIndices(uint32_t program, int uniformCount, const char** uniformNames, uint32_t* uniformIndices)
+void GLShader::getUniformIndices(uint32_t program, int uniformCount, const char** uniformNames, uint32_t* uniformIndices)
 {
 	glGetUniformIndices(program, uniformCount, uniformNames, uniformIndices);
 }
 
-void render::GLShader::getUniformSubroutine(ShaderType type, int location, uint32_t* values)
+void GLShader::getUniformSubroutine(ShaderType type, int location, uint32_t* values)
 {
 	glGetUniformSubroutineuiv((GLenum)type, location, values);
 }
 
-bool render::GLShader::isProgram(uint32_t program)
+bool GLShader::isProgram(uint32_t program)
 {
 	return glIsProgram(program) == GL_TRUE;
 }
 
-bool render::GLShader::isShader(uint32_t shader)
+bool GLShader::isShader(uint32_t shader)
 {
 	return glIsShader(shader) == GL_TRUE;
 }
 
-void render::GLShader::setMinSampleShading(float value)
+void GLShader::setMinSampleShading(float value)
 {
 	glMinSampleShading(value);
 }
 
-void render::GLShader::setProgramBinary(uint32_t program, GLenum binaryFormat, const void* binary, int length)
+void GLShader::setProgramBinary(uint32_t program, GLenum binaryFormat, const void* binary, int length)
 {
 	glProgramBinary(program, binaryFormat, binary, length);
 }
 
-void render::GLShader::setProgramParameter(uint32_t program, ModifyProgramParameter pname, int value)
+void GLShader::setProgramParameter(uint32_t program, ModifyProgramParameter pname, int value)
 {
 	glProgramParameteri(program, (GLenum)pname, value);
 }
 
-void render::GLShader::releaseShaderCompiler()
+void GLShader::releaseShaderCompiler()
 {
 	glReleaseShaderCompiler();
 }
 
-void render::GLShader::setShaderBinary(int count, const uint32_t* shaders, GLenum binaryFormat, const void* binary, int length)
+void GLShader::setShaderBinary(int count, const uint32_t* shaders, GLenum binaryFormat, const void* binary, int length)
 {
 	glShaderBinary(count, shaders, binaryFormat, binary, length);
 }
 
-void render::GLShader::setShaderSource(uint32_t shader, int count, const char** string, const int* length)
+void GLShader::setShaderSource(uint32_t shader, int count, const char** string, const int* length)
 {
 	glShaderSource(shader, count, string, length);
 }
 
-void render::GLShader::setShaderStorageBlockBinding(uint32_t program, uint32_t storageBlockIndex, uint32_t storageBlockBinding)
+void GLShader::setShaderStorageBlockBinding(uint32_t program, uint32_t storageBlockIndex, uint32_t storageBlockBinding)
 {
 	glShaderStorageBlockBinding(program, storageBlockIndex, storageBlockBinding);
 }
 
-void render::GLShader::getUniformLocation()
-{
-
-}
-
-void render::GLShader::setUniformBlockBinding(uint32_t program, uint32_t uniformBlockIndex, uint32_t uniformBlockBinding)
+void GLShader::setUniformBlockBinding(uint32_t program, uint32_t uniformBlockIndex, uint32_t uniformBlockBinding)
 {
 	glUniformBlockBinding(program, uniformBlockIndex, uniformBlockBinding);
 }
 
-void render::GLShader::setUniformSubroutines(ShaderType type, int count, const uint32_t* indices)
+void GLShader::setUniformSubroutines(ShaderType type, int count, const uint32_t* indices)
 {
 	glUniformSubroutinesuiv((GLenum)type, count, indices);
 }
 
-void render::GLShader::useProgramStages(uint32_t pipeline, GLbitfield stages, uint32_t program)
+void GLShader::useProgramStages(uint32_t pipeline, GLbitfield stages, uint32_t program)
 {
 	glUseProgramStages(pipeline, stages, program);
 }
 
-void render::GLShader::validateProgram(uint32_t program)
+void GLShader::validateProgram(uint32_t program)
 {
 	glValidateProgram(program);
+}
+
+size_t render::GLShader::getTypeSize(AttribType type)
+{
+	size_t size;
+
+#define CASE(Enum, Count, Type)\
+	case Enum: size = Count * sizeof(Type); break;
+
+	switch (type)
+	{
+		CASE(AttribType::FLOAT, 1, GLfloat); 
+			CASE(AttribType::FLOAT_VEC2, 2, GLfloat); 
+			CASE(AttribType::FLOAT_VEC3, 3, GLfloat); 
+			CASE(AttribType::FLOAT_VEC4, 4, GLfloat); 
+			CASE(AttribType::FLOAT_MAT2, 2 * 2, GLfloat);
+			CASE(AttribType::FLOAT_MAT3, 3 * 3, GLfloat);
+			CASE(AttribType::FLOAT_MAT4, 4 * 4, GLfloat);
+			CASE(AttribType::FLOAT_MAT2x3, 2 * 3, GLfloat);
+			CASE(AttribType::FLOAT_MAT2x4, 2 * 4, GLfloat);
+			CASE(AttribType::FLOAT_MAT3x2, 3 * 2, GLfloat);
+			CASE(AttribType::FLOAT_MAT3x4, 3 * 4, GLfloat);
+			CASE(AttribType::FLOAT_MAT4x2, 4 * 2, GLfloat);
+			CASE(AttribType::FLOAT_MAT4x3, 4 * 3, GLfloat);
+			CASE(AttribType::INT, 1, GLint);
+			CASE(AttribType::INT_VEC2, 2, GLint);
+			CASE(AttribType::INT_VEC3, 3, GLint);
+			CASE(AttribType::INT_VEC4, 4, GLint);
+			CASE(AttribType::UNSIGNED_INT, 1, GLuint);
+			CASE(AttribType::UNSIGNED_INT_VEC2, 2, GLuint);
+			CASE(AttribType::UNSIGNED_INT_VEC3, 3, GLuint);
+			CASE(AttribType::UNSIGNED_INT_VEC4, 4, GLuint);
+			CASE(AttribType::DOUBLE, 1, GLdouble);
+			CASE(AttribType::DOUBLE_VEC2, 2, GLdouble);
+			CASE(AttribType::DOUBLE_VEC3, 3, GLdouble);
+			CASE(AttribType::DOUBLE_VEC4, 4, GLdouble);
+			CASE(AttribType::DOUBLE_MAT2, 2 * 2, GLdouble);
+			CASE(AttribType::DOUBLE_MAT3, 3 * 3, GLdouble);
+			CASE(AttribType::DOUBLE_MAT4, 4 * 4, GLdouble);
+			CASE(AttribType::DOUBLE_MAT2x3, 2 * 3, GLdouble);
+			CASE(AttribType::DOUBLE_MAT2x4, 2 * 4, GLdouble);
+			CASE(AttribType::DOUBLE_MAT3x2, 3 * 2, GLdouble);
+			CASE(AttribType::DOUBLE_MAT3x4, 3 * 4, GLdouble);
+			CASE(AttribType::DOUBLE_MAT4x2, 4 * 2, GLdouble);
+			CASE(AttribType::DOUBLE_MAT4x3, 4 * 3, GLdouble);
+	default:
+		break;
+	}
+
+	return size;
 }
 

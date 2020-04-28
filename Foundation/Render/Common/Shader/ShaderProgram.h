@@ -9,6 +9,7 @@ namespace render
 	class Shader;
 	class ShaderAttrib;
 	class ShaderUniform;
+	class ShaderUniformBlock;
 	/**
 	*	着色器控制程序
 	*	glCreateProgram
@@ -23,6 +24,7 @@ namespace render
 	*	}
 	*	glLinkProgram
 	*	glUseProgram
+	*	
 	*/
 	class ShaderProgram : public sys::Object
 	{
@@ -76,6 +78,17 @@ namespace render
 		*/
 		void removeAllUniforms();
 	public:
+		ShaderUniformBlock* getUniformBlock(const std::string& name);
+	protected:
+		/**
+		*	添加固定属性
+		*/
+		void addUniformBlock(const std::string& name, ShaderUniformBlock* uniform);
+		/**
+		*	移除所有固定属性
+		*/
+		void removeAllUniformBlocks();
+	public:
 		/**
 		*	调用无
 		*/
@@ -120,5 +133,9 @@ namespace render
 		*	属性
 		*/
 		std::map<std::string, ShaderUniform*> _uniforms;
+		/**
+		*	属性块
+		*/
+		std::map<std::string, ShaderUniformBlock*> _uniformBlocks;
 	};
 }

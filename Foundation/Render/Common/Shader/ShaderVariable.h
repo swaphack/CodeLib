@@ -18,11 +18,11 @@ namespace render
 		/**
 		*	设置变量编号
 		*/
-		void setVarID(int id);
+		void setVarID(uint32_t id);
 		/**
 		*	属性编号
 		*/
-		int getVarID();
+		uint32_t getVarID();
 		/**
 		*	设置属性名称
 		*/
@@ -43,7 +43,7 @@ namespace render
 		/**
 		*	编号
 		*/
-		int _varID = 0;
+		uint32_t _varID = 0;
 		/**
 		*	名称
 		*/
