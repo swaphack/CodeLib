@@ -139,13 +139,13 @@ void FileObj::load(const std::string& filename)
 				}
 
 				pMesh->setVertices(nVerticeCount, verticeData);
-				delete verticeData;
+				delete[] verticeData;
 
 				pMesh->setNormals(nNormalCount, normalData);
-				delete normalData;
+				delete[] normalData;
 
 				pMesh->setUVs(nTexCoordCount, texCoordData, 2);
-				delete texCoordData;
+				delete[] texCoordData;
 			}
 			
 			int nIdxCount = pData->Indices.size();
@@ -157,7 +157,7 @@ void FileObj::load(const std::string& filename)
 					indices[i] = pData->Indices[i];
 				}
 				pMesh->setIndices(nIdxCount, indices);
-				delete indices;
+				delete[] indices;
 			}
 		}
 	}

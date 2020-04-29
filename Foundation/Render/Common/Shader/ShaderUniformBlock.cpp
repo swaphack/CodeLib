@@ -126,12 +126,12 @@ bool render::ShaderUniformBlock::getBlockData(ShaderUniformBlockData& data)
 
 	GLDebug::showError();
 
-	delete indexes;
-	delete indices;
-	delete buffer;
-	delete offsets;
-	delete sizes;
-	delete types;
+	delete[] indexes;
+	delete[] indices;
+	delete[] buffer;
+	delete[] offsets;
+	delete[] sizes;
+	delete[] types;
 
 	return true;
 }

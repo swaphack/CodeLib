@@ -345,6 +345,9 @@
     <ClCompile Include="Common\Shader\ShaderUniformBlock.cpp">
       <Filter>Common\Shader</Filter>
     </ClCompile>
+    <ClCompile Include="Common\Shader\ShaderSubroutineUniform.cpp">
+      <Filter>Common\Shader</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Common\Node\import.h">
@@ -863,6 +866,9 @@
     </ClInclude>
     <ClInclude Include="Common\Buffer\import.h">
       <Filter>Common\Buffer</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Shader\ShaderSubroutineUniform.h">
+      <Filter>Common\Shader</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

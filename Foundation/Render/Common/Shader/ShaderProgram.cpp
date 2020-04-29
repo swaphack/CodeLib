@@ -3,6 +3,7 @@
 #include "ShaderAttrib.h"
 #include "ShaderUniform.h"
 #include "ShaderUniformBlock.h"
+#include "ShaderSubroutineUniform.h"
 #include "Graphic/import.h"
 
 using namespace render;
@@ -90,6 +91,7 @@ void ShaderProgram::releaseProgram()
 	removeAllAttributes();
 	removeAllUniforms();
 	removeAllUniformBlocks();
+	removeAllSubroutineUniforms();
 
 	if (_programID != 0)
 	{
@@ -107,6 +109,7 @@ ShaderAttrib* ShaderProgram::getAttriubte(const std::string& name)
 	}
 
 	int32_t id = GLShader::getAttribLocation(_programID, name.c_str());
+	GLDebug::showError();
 	if (id <= 0)
 	{
 		return nullptr;
@@ -149,6 +152,7 @@ ShaderUniform* ShaderProgram::getUniform(const std::string& name)
 	}
 
 	int id = GLShader::getUniformLocation(_programID, name.c_str());
+	GLDebug::showError();
 	if (id <= 0)
 	{
 		return nullptr;
@@ -182,15 +186,17 @@ void ShaderProgram::removeAllUniforms()
 	_attributes.clear();
 }
 
-void ShaderProgram::load(const std::string& vpath, const std::string& fpath)
+void ShaderProgram::loadVertexAndFragmentShader(const std::string& vpath, const std::string& fpath)
 {
-	VertexShader* pVertex = CREATE_OBJECT(VertexShader);
-	pVertex->loadFromFile(vpath);
-	this->attachShader(pVertex);
+	this->loadFromFile<VertexShader>(vpath);
+	this->loadFromFile<FragmentShader>(fpath);
+}
 
-	FragmentShader* pFragment = CREATE_OBJECT(FragmentShader);
-	pFragment->loadFromFile(fpath);
-	this->attachShader(pFragment);
+void render::ShaderProgram::loadFromFile(ShaderType type, const std::string& path)
+{
+	Shader* pVertex = Shader::create(type);
+	pVertex->loadFromFile(path);
+	this->attachShader(pVertex);
 }
 
 render::ShaderUniformBlock* render::ShaderProgram::getUniformBlock(const std::string& name)
@@ -202,7 +208,7 @@ render::ShaderUniformBlock* render::ShaderProgram::getUniformBlock(const std::st
 	}
 
 	uint32_t id = GLShader::getUniformBlockIndex(_programID, name.c_str());
-
+	GLDebug::showError();
 	auto pUniformBlock = CREATE_OBJECT(ShaderUniformBlock);
 	pUniformBlock->setVarID(id);
 	pUniformBlock->setName(name);
@@ -230,3 +236,44 @@ void render::ShaderProgram::removeAllUniformBlocks()
 	}
 	_uniformBlocks.clear();
 }
+
+ShaderSubroutineUniform* render::ShaderProgram::getSubroutineUniform(ShaderType shaderType, const std::string& name)
+{
+	auto it = _subroutineUniforms.find(name);
+	if (it != _subroutineUniforms.end())
+	{
+		return it->second;
+	}
+
+	uint32_t id = GLShader::getSubroutineUniformLocation(_programID, shaderType, name.c_str());
+	GLDebug::showError();
+	auto pSubroutineUniform = CREATE_OBJECT(ShaderSubroutineUniform);
+	pSubroutineUniform->setVarID(id);
+	pSubroutineUniform->setName(name);
+	pSubroutineUniform->setShaderType(shaderType);
+	pSubroutineUniform->setProgram(this);
+	this->addSubroutineUniform(name, pSubroutineUniform);
+
+	return pSubroutineUniform;
+}
+
+void render::ShaderProgram::addSubroutineUniform(const std::string& name, ShaderSubroutineUniform* uniform)
+{
+	if (name.empty() || uniform == nullptr)
+	{
+		return;
+	}
+	SAFE_RETAIN(uniform);
+	_subroutineUniforms[name] = uniform;
+}
+
+void render::ShaderProgram::removeAllSubroutineUniforms()
+{
+	for (auto item : _subroutineUniforms)
+	{
+		SAFE_RELEASE(item.second);
+	}
+	_subroutineUniforms.clear();
+}
+
+

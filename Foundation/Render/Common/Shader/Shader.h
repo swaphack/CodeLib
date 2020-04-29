@@ -15,6 +15,8 @@ namespace render
 		Shader();
 		virtual ~Shader();
 	public:
+		static Shader* create(ShaderType type);
+	public:
 		/**
 		*	×ÅÉ«Æ÷±àºÅ
 		*/
@@ -76,8 +78,6 @@ namespace render
 	public:
 		VertexShader();
 		virtual ~VertexShader();
-	protected:
-	private:
 	};
 	//////////////////////////////////////////////////////////////////////////
 	/**
@@ -88,8 +88,6 @@ namespace render
 	public:
 		FragmentShader();
 		virtual ~FragmentShader();
-	protected:
-	private:
 	};
 	//////////////////////////////////////////////////////////////////////////
 	/**
@@ -100,8 +98,34 @@ namespace render
 	public:
 		GeometryShader();
 		virtual ~GeometryShader();
-	protected:
-	private:
 	};
-	
+	//////////////////////////////////////////////////////////////////////////
+	/**
+	*/
+	class TessControlShader : public Shader
+	{
+	public:
+		TessControlShader();
+		virtual ~TessControlShader();
+	};
+
+	//////////////////////////////////////////////////////////////////////////
+	/**
+	*/
+	class TessEvaluationShader : public Shader
+	{
+	public:
+		TessEvaluationShader();
+		virtual ~TessEvaluationShader();
+	};
+
+	//////////////////////////////////////////////////////////////////////////
+	/**
+	*/
+	class ComputeShader : public Shader
+	{
+	public:
+		ComputeShader();
+		virtual ~ComputeShader();
+	};
 }

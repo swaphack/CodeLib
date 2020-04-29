@@ -104,7 +104,13 @@
     <None Include="Resource\shader\gray.fsh">
       <Filter>Resource\shader</Filter>
     </None>
-    <None Include="Resource\shader\shader_1.glsl">
+    <None Include="Resource\shader\shader_f_1.glsl">
+      <Filter>Resource\shader</Filter>
+    </None>
+    <None Include="Resource\shader\shader_v_1.glsl">
+      <Filter>Resource\shader</Filter>
+    </None>
+    <None Include="Resource\shader\lighting.glsl">
       <Filter>Resource\shader</Filter>
     </None>
   </ItemGroup>

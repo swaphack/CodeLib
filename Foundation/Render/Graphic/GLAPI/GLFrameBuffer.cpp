@@ -62,7 +62,7 @@ void GLFrameBuffer::setDrawBuffers(int n, const DrawBufferType* bufs)
 
 	glDrawBuffers(n, data);
 
-	delete data;
+	delete[] data;
 }
 
 void GLFrameBuffer::setNamedFramebufferDrawBuffers(uint32_t framebuffer, int n, const DrawBufferType* bufs)
@@ -75,7 +75,7 @@ void GLFrameBuffer::setNamedFramebufferDrawBuffers(uint32_t framebuffer, int n, 
 
 	glNamedFramebufferDrawBuffers(framebuffer, n, data);
 
-	delete data;
+	delete[] data;
 }
 
 void GLFrameBuffer::setFramebufferParameter(FrameBufferTarget target, FramebufferParameter name, int value)
@@ -192,7 +192,7 @@ void GLFrameBuffer::invalidateFramebuffer(FrameBufferTarget target, int num, con
 	}
 	glInvalidateFramebuffer((GLenum)target, num, data);
 
-	delete data;
+	delete[] data;
 }
 
 void GLFrameBuffer::invalidateNamesFramebuffer(uint32_t framebuffer, int num, const FramebufferAttachment* attachments)
@@ -204,7 +204,7 @@ void GLFrameBuffer::invalidateNamesFramebuffer(uint32_t framebuffer, int num, co
 	}
 	glInvalidateNamedFramebufferData(framebuffer, num, data);
 
-	delete data;
+	delete[] data;
 }
 
 void GLFrameBuffer::invalidateSubFramebuffer(FrameBufferTarget target, int num, const FramebufferAttachment* attachments, int x, int y, int width, int height)
@@ -216,7 +216,7 @@ void GLFrameBuffer::invalidateSubFramebuffer(FrameBufferTarget target, int num, 
 	}
 	glInvalidateSubFramebuffer((GLenum)target, num, data, x, y, width, height);
 
-	delete data;
+	delete[] data;
 }
 
 void GLFrameBuffer::invalidateNamedFramebufferSubData(uint32_t framebuffer, int num, const FramebufferAttachment* attachments, int x, int y, int width, int height)
@@ -228,7 +228,7 @@ void GLFrameBuffer::invalidateNamedFramebufferSubData(uint32_t framebuffer, int 
 	}
 	glInvalidateNamedFramebufferSubData(framebuffer, num, data, x, y, width, height);
 
-	delete data;
+	delete[] data;
 }
 
 bool GLFrameBuffer::isFramebuffer(uint32_t framebuffer)

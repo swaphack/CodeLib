@@ -88,6 +88,34 @@ void Shader::detachProgram()
 	_program = nullptr;
 }
 
+Shader* render::Shader::create(ShaderType type)
+{
+	switch (type)
+	{
+	case ShaderType::VERTEX_SHADER:
+		return CREATE_OBJECT(VertexShader);
+		break;
+	case ShaderType::TESS_CONTROL_SHADER:
+		return CREATE_OBJECT(TessControlShader);
+		break;
+	case ShaderType::TESS_EVALUATION_SHADER:
+		return CREATE_OBJECT(TessEvaluationShader);
+		break;
+	case ShaderType::GEOMETRY_SHADER:
+		return CREATE_OBJECT(GeometryShader);
+		break;
+	case ShaderType::FRAGMENT_SHADER:
+		return CREATE_OBJECT(FragmentShader);
+		break;
+	case ShaderType::COMPUTE_SHADER:
+		return CREATE_OBJECT(ComputeShader);
+		break;
+	default:
+		return nullptr;
+		break;
+	}	
+}
+
 //////////////////////////////////////////////////////////////////////////
 
 VertexShader::VertexShader()
@@ -120,6 +148,41 @@ render::GeometryShader::GeometryShader()
 }
 
 render::GeometryShader::~GeometryShader()
+{
+
+}
+//////////////////////////////////////////////////////////////////////////
+render::TessControlShader::TessControlShader()
+{
+	this->setShaderType(ShaderType::TESS_CONTROL_SHADER);
+	this->initShader();
+}
+
+render::TessControlShader::~TessControlShader()
+{
+
+}
+
+//////////////////////////////////////////////////////////////////////////
+render::TessEvaluationShader::TessEvaluationShader()
+{
+	this->setShaderType(ShaderType::TESS_EVALUATION_SHADER);
+	this->initShader();
+}
+
+render::TessEvaluationShader::~TessEvaluationShader()
+{
+
+}
+
+//////////////////////////////////////////////////////////////////////////
+render::ComputeShader::ComputeShader()
+{
+	this->setShaderType(ShaderType::COMPUTE_SHADER);
+	this->initShader();
+}
+
+render::ComputeShader::~ComputeShader()
 {
 
 }

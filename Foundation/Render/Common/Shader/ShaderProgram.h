@@ -1,7 +1,7 @@
 #pragma once
 
 #include "system.h"
-
+#include "Graphic/GLAPI/macros.h"
 #include <map>
 
 namespace render
@@ -10,6 +10,7 @@ namespace render
 	class ShaderAttrib;
 	class ShaderUniform;
 	class ShaderUniformBlock;
+	class ShaderSubroutineUniform;
 	/**
 	*	着色器控制程序
 	*	glCreateProgram
@@ -89,6 +90,17 @@ namespace render
 		*/
 		void removeAllUniformBlocks();
 	public:
+		ShaderSubroutineUniform* getSubroutineUniform(ShaderType shaderType, const std::string& name);
+	protected:
+		/**
+		*	添加固定属性
+		*/
+		void addSubroutineUniform(const std::string& name, ShaderSubroutineUniform* uniform);
+		/**
+		*	移除所有固定属性
+		*/
+		void removeAllSubroutineUniforms();
+	public:
 		/**
 		*	调用无
 		*/
@@ -115,7 +127,21 @@ namespace render
 		/**
 		*	添加文件 v 顶点， f片元
 		*/
-		void load(const std::string& vpath, const std::string& fpath);
+		void loadVertexAndFragmentShader(const std::string& vpath, const std::string& fpath);
+		/**
+		*	加载文件
+		*/
+		void loadFromFile(ShaderType type, const std::string& path);
+		/**
+		*	加载文件
+		*/
+		template<typename T, typename = std::enable_if<std::is_base_of<Shader, T>::value, T>::type>
+		void loadFromFile(const std::string& path)
+		{
+			T* pShader = CREATE_OBJECT(T);
+			pShader->loadFromFile(path);
+			this->attachShader(pShader);
+		}
 	private:
 		/**
 		*	程序编号
@@ -137,5 +163,10 @@ namespace render
 		*	属性块
 		*/
 		std::map<std::string, ShaderUniformBlock*> _uniformBlocks;
+		/**
+		*	子程序
+		*/
+		std::map<std::string, ShaderSubroutineUniform*> _subroutineUniforms;
 	};
+
 }

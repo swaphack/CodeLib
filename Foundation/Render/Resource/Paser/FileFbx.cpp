@@ -70,7 +70,7 @@ void handNodeMesh(FileFbx* file, FbxNode* node)
 		}
 
 		pMesh->setVertices(nVerticeCount, verticeData);
-		delete verticeData;
+		delete[] verticeData;
 	}
 
 
@@ -95,7 +95,7 @@ void handNodeMesh(FileFbx* file, FbxNode* node)
 		}
 
 		pMesh->setNormals(nVerticeCount, normalData);
-		delete normalData;
+		delete[] normalData;
 	}
 
 	int nUVCount = pMeshData->GetElementUVCount();
@@ -118,7 +118,7 @@ void handNodeMesh(FileFbx* file, FbxNode* node)
 		}
 
 		pMesh->setUVs(nVerticeCount, uvData);
-		delete uvData;
+		delete[] uvData;
 	}
 
 	
@@ -144,7 +144,7 @@ void handNodeMesh(FileFbx* file, FbxNode* node)
 		}
 
 		pMesh->setColors(nVerticeCount, colorData, 4);
-		delete colorData;
+		delete[] colorData;
 	}
 
 	int nIndexCount = pMeshData->GetPolygonVertexCount();
@@ -155,7 +155,7 @@ void handNodeMesh(FileFbx* file, FbxNode* node)
 	}
 
 	pMesh->setIndices(nIndexCount, indices);
-	delete indices;
+	delete[] indices;
 
 	int nMatCount = pMeshData->GetElementMaterialCount();
 	if (nMatCount > 0)

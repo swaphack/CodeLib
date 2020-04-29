@@ -49,7 +49,7 @@ void GLShader::showShaderStatus(uint32_t shader)
 		GLchar* buffer = new char[bufferSize];
 		getShaderInfoLog(shader, bufferSize, NULL, buffer);
 		PRINT("%s", buffer);
-		delete buffer;
+		delete[] buffer;
 	}
 }
 
@@ -82,7 +82,7 @@ void GLShader::showProgramStatus(uint32_t program)
 		GLchar* buffer = new char[bufferSize];
 		getProgramInfoLog(program, bufferSize, NULL, buffer);
 		PRINT("%s", buffer);
-		delete buffer;
+		delete[] buffer;
 	}
 }
 
@@ -541,7 +541,7 @@ void GLShader::getActiveAttrib(uint32_t program, uint32_t index, int bufSize, in
 	}
 	glGetActiveAttrib(program, index, bufSize, length, size, data, name);
 
-	delete data;
+	delete[] data;
 }
 
 void GLShader::getActiveSubroutineName(uint32_t program, ShaderType shaderType, uint32_t index, int bufSize, int *length, char *name)
@@ -669,14 +669,14 @@ void GLShader::getShaderSource(uint32_t shader, int bufSize, int* length, char* 
 	glGetShaderSource(shader, bufSize, length, source);
 }
 
-void GLShader::getSubroutineIndex(uint32_t program, ShaderType type, const char* name)
+uint32_t GLShader::getSubroutineIndex(uint32_t program, ShaderType type, const char* name)
 {
-	glGetSubroutineIndex(program, (GLenum)type, name);
+	return glGetSubroutineIndex(program, (GLenum)type, name);
 }
 
-void GLShader::getSubroutineUniformLocation(uint32_t program, ShaderType type, const char* name)
+int32_t GLShader::getSubroutineUniformLocation(uint32_t program, ShaderType type, const char* name)
 {
-	glGetSubroutineUniformLocation(program, (GLenum)type,  name);
+	return glGetSubroutineUniformLocation(program, (GLenum)type,  name);
 }
 
 uint32_t GLShader::getUniformBlockIndex(uint32_t program, const char* uniformBlockName)

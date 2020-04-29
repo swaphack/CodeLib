@@ -1021,7 +1021,7 @@ void MainScene::testShaderProgram()
 	this->addChild(pImage);
 
 	ShaderProgram* pProgram = CREATE_OBJECT(ShaderProgram);
-	pProgram->load("Resource/shader/gray.vsh", "Resource/shader/gray.fsh");
+	pProgram->loadVertexAndFragmentShader("Resource/shader/gray.vsh", "Resource/shader/gray.fsh");
 	pProgram->link();
 	pImage->setProgram(pProgram);
 }

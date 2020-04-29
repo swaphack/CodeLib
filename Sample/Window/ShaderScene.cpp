@@ -43,38 +43,48 @@ void ShaderScene::testShader1()
 	std::string fPath = "Resource/shader/shader_f_1.glsl";
 
 	ShaderProgram* pProgram = CREATE_OBJECT(ShaderProgram);
-	pProgram->load(vPath, fPath);
-
-	GLDebug::showError();
+	pProgram->loadVertexAndFragmentShader(vPath, fPath);
 	pProgram->link();
 
-
 	GLDebug::showError();
-
 	auto pUniformBlock = pProgram->getUniformBlock("Uniforms");
-	if (pUniformBlock == nullptr)
+	if (pUniformBlock)
 	{
-		return;
-	}
+		ShaderUniformBlockData blockData;
+		if (pUniformBlock->getBlockData(blockData))
+		{
+			float scale = 0.5;
+			float translation[] = { 0.1f, 0.1f, 0.0f };
+			float rotation[] = { 90, 0.0f, 0.0f, 1.0f };
+			uint8_t enabled = GL_TRUE;
 
-	ShaderUniformBlockData blockData;
-	if (pUniformBlock->getBlockData(blockData))
-	{
-		float scale = 0.5;
-		float translation[] = { 0.1f, 0.1f, 0.0f };
-		float rotation[] = { 90, 0.0f, 0.0f, 1.0f };
-		uint8_t enabled = GL_TRUE;
+			blockData.setValue("scale", &scale);
+			blockData.setValue("translation", &translation);
+			blockData.setValue("rotation", &rotation);
+			blockData.setValue("enabled", &enabled);
 
-		blockData.setValue("scale", &scale);
-		blockData.setValue("translation", &translation);
-		blockData.setValue("rotation", &rotation);
-		blockData.setValue("enabled", &enabled);
+			BufferObject* pObject = CREATE_OBJECT(BufferObject);
+			pObject->setBufferTarget(BufferTarget::UNIFORM_BUFFER);
+			pObject->setBufferData(blockData.getBlockData().getSize(), blockData.getBlockData().getValue(), BufferDataUsage::STATIC_DRAW);
 
-		BufferObject* pObject = CREATE_OBJECT(BufferObject);
-		pObject->setBufferTarget(BufferTarget::UNIFORM_BUFFER);
-		pObject->setBufferData(blockData.getBlockData().getSize(), blockData.getBlockData().getValue(), BufferDataUsage::STATIC_DRAW);
-
+			GLDebug::showError();
+		}
 		GLDebug::showError();
 	}
+
+	pProgram = CREATE_OBJECT(ShaderProgram);
+	std::string vlPath = "Resource/shader/lighting.glsl";
+	pProgram->loadFromFile(ShaderType::VERTEX_SHADER, vlPath);
+	pProgram->link();
+	GLDebug::showError();
+	auto pSubroutineUniform = pProgram->getSubroutineUniform(ShaderType::VERTEX_SHADER, "materialShader");
+	GLDebug::showError();
+	if (pSubroutineUniform)
+	{
+		uint32_t index = pSubroutineUniform->getSubroutineIndex("ambient");
+		pSubroutineUniform->setSubroutineIndex(index);
+	}
+
+	
 }
 

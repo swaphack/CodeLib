@@ -21,30 +21,27 @@ namespace render
 		*	获取bool类型的状态值
 		*/
 		static void getBoolean(GetTarget pname, uint8_t* value);
+		static void getBoolean(uint32_t pname, uint8_t* value);
 		/**
 		*	获取double类型的状态值
 		*/
 		static void getDouble(GetTarget pname, double* value);
+		static void getDouble(uint32_t pname, double* value);
 		/**
 		*	获取float类型的状态值
 		*/
 		static void getFloat(GetTarget pname, float* value);
+		static void getFloat(uint32_t pname, float* value);
 		/**
 		*	获取int类型的状态值
 		*/
-		static void getInt(GetTarget pname, int* value);
-	
-	
+		static void getInt(GetTarget pname, int* value);	
+		static void getInt(uint32_t pname, int* value);
 	public:		
 		static void getTexImage(TextureTarget target, int level, TexImageInternalFormat internalFormat, TexImageDataType pixelType, void* data);
-		
-		
 		static void getTexLevelParameter(TextureTarget target, int level, GetTextureParameter parameter, float* value);
-		
-		
 		static void getTexParameter(TextureTarget target, GetTextureParameter parameter, int* value);
 		static void getTexParameter(TextureTarget target, GetTextureParameter parameter, float* value);
-		
 		static void getPointer(GetPointerTarget target, void** value);
 	public:
 		static void setBlendColor(const sys::Color4F& color);

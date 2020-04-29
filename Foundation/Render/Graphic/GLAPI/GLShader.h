@@ -158,8 +158,8 @@ namespace render
 		static void getShaderInfoLog(uint32_t shader, int maxLength, int* length, char* infoLog);
 		static void getShaderPrecisionFormat(ShaderType type, ShaderPrecisionType precisionType, int* range, int* precision);
 		static void getShaderSource(uint32_t shader, int bufSize, int* length, char* source);
-		static void getSubroutineIndex(uint32_t program, ShaderType type, const char* name);
-		static void getSubroutineUniformLocation(uint32_t program, ShaderType type, const char* name);
+		static uint32_t getSubroutineIndex(uint32_t program, ShaderType type, const char* name);
+		static int32_t getSubroutineUniformLocation(uint32_t program, ShaderType type, const char* name);
 		static uint32_t getUniformBlockIndex(uint32_t program, const char* uniformBlockName);
 		static void getUniformIndices(uint32_t program, int uniformCount, const char** uniformNames, uint32_t* uniformIndices);
 		static void getUniformSubroutine(ShaderType type, int location, uint32_t* values);

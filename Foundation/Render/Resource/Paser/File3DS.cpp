@@ -127,7 +127,7 @@ void File3DS::load(const std::string& filename)
 					}
 
 					pMesh->setVertices(nVerticeCount, verticeData);
-					delete verticeData;
+					delete[] verticeData;
 				}
 
 				if (pMeshData->texcos)
@@ -139,7 +139,7 @@ void File3DS::load(const std::string& filename)
 						memcpy(texCoordData + 2 * j, pMeshData->texcos[j], 2 * sizeof(float));
 					}
 					pMesh->setUVs(nTexCoordCount, texCoordData, 2);
-					delete texCoordData;
+					delete[] texCoordData;
 				}
 			}
 
@@ -175,7 +175,7 @@ void File3DS::load(const std::string& filename)
 						pMesh->setMaterial(item0.first);
 						pMesh->setIndices(nFaceCount, indices);
 
-						delete indices;
+						delete[] indices;
 					}
 				}
 			}
