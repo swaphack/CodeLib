@@ -2278,6 +2278,7 @@ enum class RenderbufferParameter
 
 enum class AttribType
 {
+	BOOL = GL_BOOL,
 	FLOAT = GL_FLOAT,
 	FLOAT_VEC2 = GL_FLOAT_VEC2,
 	FLOAT_VEC3 = GL_FLOAT_VEC3,

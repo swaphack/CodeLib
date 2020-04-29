@@ -1,5 +1,6 @@
 #include "Memory.h"
-#include "PtrCache.h"
+#include "MemoryData.h"
+#include "Base/macros.h"
 #include <cstdlib>
 
 using namespace sys;
@@ -29,16 +30,12 @@ Memory* Memory::getInstance()
 	return s_pMemory;
 }
 
-PtrCache* Memory::alloct(const std::string& name, uint32_t size)
+MemoryData* Memory::alloct(const std::string& name, uint32_t size)
 {
 	ASSERT(name.empty() && size > 0);
 	ASSERT(_caches.find(name) != _caches.end());
 
-	char* ptr = (char*)malloc(size);
-	ASSERT(ptr != nullptr);
-
-	PtrCache* ptrCache = new PtrCache(ptr, size);
-	ptrCache->setName(name);
+	MemoryData* ptrCache = new MemoryData(size);
 	_caches[name] = ptrCache;
 
 	return ptrCache;
@@ -48,23 +45,21 @@ void Memory::destory(const std::string& name)
 {
 	if (name.empty()) return;
 
-	std::map<std::string, PtrCache*>::iterator iter = _caches.find(name);
+	auto iter = _caches.find(name);
 	if (iter == _caches.end())
 	{
 		return;
 	}
-	PtrCache* pCache = iter->second;
+	MemoryData* pCache = iter->second;
 	_caches.erase(iter);
-
 	SAFE_DELETE(pCache);
 }
 
 void Memory::clear()
 {
-	std::map<std::string, PtrCache*>::iterator iter = _caches.begin();
-	while (iter != _caches.end())
+	for (auto item : _caches)
 	{
-		SAFE_DELETE(iter->second);
-		iter++;
+		SAFE_DELETE(item.second);
 	}
+	_caches.clear();
 }

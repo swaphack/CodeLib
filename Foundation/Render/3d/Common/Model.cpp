@@ -38,31 +38,31 @@ void Model::drawSample()
 		
 
 		auto normals = pMesh->getNormals();
-		if (normals.size > 0)
+		if (normals.getLength() > 0)
 		{
 			GLClientArrays::enableClientState(ClientArrayType::NORMAL_ARRAY);
-			GLClientArrays::setNormalPointer(DataType::FLOAT, 0, normals.value);
+			GLClientArrays::setNormalPointer(DataType::FLOAT, 0, normals.getValue());
 
 		}
 		auto vertices = pMesh->getVertices();
-		if (vertices.size > 0)
+		if (vertices.getLength() > 0)
 		{
 			GLClientArrays::enableClientState(ClientArrayType::VERTEX_ARRAY);
-			GLClientArrays::setVertexPointer(vertices.unit, DataType::FLOAT, 0, vertices.value);
+			GLClientArrays::setVertexPointer(vertices.getTypeSize(), DataType::FLOAT, 0, vertices.getValue());
 
 		}
 		auto texcoords = pMesh->getUVs();
-		if (texcoords.size > 0)
+		if (texcoords.getLength() > 0)
 		{
 			GLClientArrays::enableClientState(ClientArrayType::TEXTURE_COORD_ARRAY);
-			GLClientArrays::setTexCoordPointer(texcoords.unit, DataType::FLOAT, 0, texcoords.value);
+			GLClientArrays::setTexCoordPointer(texcoords.getTypeSize(), DataType::FLOAT, 0, texcoords.getValue());
 		}
 
 		auto colors = pMesh->getColors();
-		if (colors.size > 0)
+		if (colors.getLength() > 0)
 		{
 			GLClientArrays::enableClientState(ClientArrayType::COLOR_ARRAY);
-			GLClientArrays::setColorPointer(colors.unit, DataType::FLOAT, 0, colors.value);
+			GLClientArrays::setColorPointer(colors.getTypeSize(), DataType::FLOAT, 0, colors.getValue());
 
 		}
 
@@ -83,9 +83,9 @@ void Model::drawSample()
 		}
 
 		auto indices = pMesh->getIndices();
-		if (indices.size > 0)
+		if (indices.getLength() > 0)
 		{
-			GLClientArrays::drawElements(DrawMode::TRIANGLES, indices.size, IndexDataType::UNSIGNED_INT, indices.value);
+			GLClientArrays::drawElements(DrawMode::TRIANGLES, indices.getLength(), IndexDataType::UNSIGNED_INT, indices.getValue());
 		}
 		GLState::disable(EnableModel::TEXTURE_2D);
 

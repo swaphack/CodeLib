@@ -10,6 +10,6 @@ public:
 public:
 	virtual bool init();
 protected:
-	void testColorShader();
+	void testShader1();
 private:
 };

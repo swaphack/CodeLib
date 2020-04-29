@@ -129,9 +129,10 @@
     <ClInclude Include="IO\Directory.h" />
     <ClInclude Include="IO\File.h" />
     <ClInclude Include="IO\import.h" />
-    <ClInclude Include="Memory\PtrCache.h" />
+    <ClInclude Include="Memory\import.h" />
+    <ClInclude Include="Memory\MemoryData.h" />
+    <ClInclude Include="Memory\MemoryPointer.h" />
     <ClInclude Include="Memory\Memory.h" />
-    <ClInclude Include="Memory\PtrInfo.h" />
     <ClInclude Include="Net\Client.h" />
     <ClInclude Include="Net\DataQueue.h" />
     <ClInclude Include="Net\DNS.h" />
@@ -224,7 +225,8 @@
     <ClCompile Include="Image\ColorSample.cpp" />
     <ClCompile Include="IO\Directory.cpp" />
     <ClCompile Include="IO\File.cpp" />
-    <ClCompile Include="Memory\PtrCache.cpp" />
+    <ClCompile Include="Memory\MemoryData.cpp" />
+    <ClCompile Include="Memory\MemoryPointer.cpp" />
     <ClCompile Include="Memory\Memory.cpp" />
     <ClCompile Include="Net\Client.cpp" />
     <ClCompile Include="Net\DataQueue.cpp" />

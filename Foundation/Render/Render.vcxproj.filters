@@ -219,9 +219,6 @@
     <ClCompile Include="Common\Texture\TextureCache.cpp">
       <Filter>Common\Texture</Filter>
     </ClCompile>
-    <ClCompile Include="Common\struct\pointer_common.cpp">
-      <Filter>Common\struct</Filter>
-    </ClCompile>
     <ClCompile Include="Common\struct\protocol_common.cpp">
       <Filter>Common\struct</Filter>
     </ClCompile>
@@ -342,11 +339,11 @@
     <ClCompile Include="Graphic\GLAPI\GLFrameBuffer.cpp">
       <Filter>Graphic\GLAPI</Filter>
     </ClCompile>
-    <ClCompile Include="Common\Shader\ShaderUniformBlock.cpp">
-      <Filter>Common\Shader</Filter>
-    </ClCompile>
     <ClCompile Include="Common\Buffer\BufferObject.cpp">
       <Filter>Common\Buffer</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Shader\ShaderUniformBlock.cpp">
+      <Filter>Common\Shader</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -726,9 +723,6 @@
     <ClInclude Include="Common\struct\import.h">
       <Filter>Common\struct</Filter>
     </ClInclude>
-    <ClInclude Include="Common\struct\pointer_common.h">
-      <Filter>Common\struct</Filter>
-    </ClInclude>
     <ClInclude Include="Common\struct\protocol_common.h">
       <Filter>Common\struct</Filter>
     </ClInclude>
@@ -861,10 +855,13 @@
     <ClInclude Include="Graphic\GLAPI\GLFrameBuffer.h">
       <Filter>Graphic\GLAPI</Filter>
     </ClInclude>
+    <ClInclude Include="Common\Buffer\BufferObject.h">
+      <Filter>Common\Buffer</Filter>
+    </ClInclude>
     <ClInclude Include="Common\Shader\ShaderUniformBlock.h">
       <Filter>Common\Shader</Filter>
     </ClInclude>
-    <ClInclude Include="Common\Buffer\BufferObject.h">
+    <ClInclude Include="Common\Buffer\import.h">
       <Filter>Common\Buffer</Filter>
     </ClInclude>
   </ItemGroup>

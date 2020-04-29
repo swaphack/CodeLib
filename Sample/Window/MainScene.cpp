@@ -916,7 +916,7 @@ void MainScene::testObj()
 	ModelObj* model = CREATE_NODE(ModelObj);
 	model->load(filename);
 	model->setScale(50);
-	model->setPosition(0, 0, 0);
+	model->setPosition(512, 384, 0);
 	model->setVolume(400, 400, 400);
 	this->addChild(model);
 

@@ -125,7 +125,6 @@
     <ClCompile Include="Common\Shader\ShaderUniform.cpp" />
     <ClCompile Include="Common\Shader\ShaderUniformBlock.cpp" />
     <ClCompile Include="Common\Shader\ShaderVariable.cpp" />
-    <ClCompile Include="Common\struct\pointer_common.cpp" />
     <ClCompile Include="Common\struct\protocol_common.cpp" />
     <ClCompile Include="Common\struct\shape_common.cpp" />
     <ClCompile Include="Common\struct\texture_common.cpp" />
@@ -250,6 +249,7 @@
     <ClInclude Include="Common\Audio\import.h" />
     <ClInclude Include="Common\Audio\macros.h" />
     <ClInclude Include="Common\Buffer\BufferObject.h" />
+    <ClInclude Include="Common\Buffer\import.h" />
     <ClInclude Include="Common\DrawNode\DrawNode.h" />
     <ClInclude Include="Common\DrawNode\import.h" />
     <ClInclude Include="Common\import.h" />
@@ -272,7 +272,6 @@
     <ClInclude Include="Common\Shader\ShaderVariable.h" />
     <ClInclude Include="Common\struct\enum_common.h" />
     <ClInclude Include="Common\struct\import.h" />
-    <ClInclude Include="Common\struct\pointer_common.h" />
     <ClInclude Include="Common\struct\protocol_common.h" />
     <ClInclude Include="Common\struct\shape_common.h" />
     <ClInclude Include="Common\struct\texture_common.h" />

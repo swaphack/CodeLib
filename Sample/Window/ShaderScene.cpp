@@ -21,12 +21,12 @@ bool ShaderScene::init()
 		return false;
 	}
 
-	this->testColorShader();
+	this->testShader1();
 
 	return true;
 }
 
-void ShaderScene::testColorShader()
+void ShaderScene::testShader1()
 {
 	auto frameSize = Canvas::getInstance()->getView()->getFrameSize();
 
@@ -45,17 +45,36 @@ void ShaderScene::testColorShader()
 	ShaderProgram* pProgram = CREATE_OBJECT(ShaderProgram);
 	pProgram->load(vPath, fPath);
 
-
 	GLDebug::showError();
 	pProgram->link();
 
 
 	GLDebug::showError();
 
-	auto pBlock = pProgram->getUniformBlock("Uniforms");
-	if (pBlock)
+	auto pUniformBlock = pProgram->getUniformBlock("Uniforms");
+	if (pUniformBlock == nullptr)
 	{
-		pBlock->initUniformBlock();
+		return;
+	}
+
+	ShaderUniformBlockData blockData;
+	if (pUniformBlock->getBlockData(blockData))
+	{
+		float scale = 0.5;
+		float translation[] = { 0.1f, 0.1f, 0.0f };
+		float rotation[] = { 90, 0.0f, 0.0f, 1.0f };
+		uint8_t enabled = GL_TRUE;
+
+		blockData.setValue("scale", &scale);
+		blockData.setValue("translation", &translation);
+		blockData.setValue("rotation", &rotation);
+		blockData.setValue("enabled", &enabled);
+
+		BufferObject* pObject = CREATE_OBJECT(BufferObject);
+		pObject->setBufferTarget(BufferTarget::UNIFORM_BUFFER);
+		pObject->setBufferData(blockData.getBlockData().getSize(), blockData.getBlockData().getValue(), BufferDataUsage::STATIC_DRAW);
+
+		GLDebug::showError();
 	}
 }
 

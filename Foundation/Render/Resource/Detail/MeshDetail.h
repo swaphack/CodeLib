@@ -2,12 +2,20 @@
 
 #include "system.h"
 #include "mathlib.h"
-#include "Common/struct/pointer_common.h"
 
 #include <map>
 
 namespace render
 {
+	class MeshMemoryData : public sys::MemoryData
+	{
+	public:
+		void setTypeSize(uint32_t size) { _typeSize = size; }
+		uint32_t getTypeSize() { return _typeSize; }
+	protected:
+	private:
+		uint32_t _typeSize = 0;
+	};
 	class MeshDetail : public sys::Object
 	{
 	public:
@@ -18,13 +26,9 @@ namespace render
 
 		void setMeshName(const std::string& name);
 		/**
-		*	顶点数
-		*/
-		int getVerticesCount();
-		/**
 		*	顶点坐标信息
 		*/
-		const T_Vertex& getVertices();
+		const MeshMemoryData& getVertices();
 		/**
 		*	设置顶点坐标信息
 		*/
@@ -32,7 +36,7 @@ namespace render
 		/**
 		*	法线坐标信息
 		*/
-		const T_Vertex& getNormals();
+		const MeshMemoryData& getNormals();
 		/**
 		*	设置法线坐标信息
 		*/
@@ -40,7 +44,7 @@ namespace render
 		/**
 		*	颜色坐标信息
 		*/
-		const T_Vertex& getColors();
+		const MeshMemoryData& getColors();
 		/**
 		*	设置颜色坐标信息
 		*/
@@ -48,7 +52,7 @@ namespace render
 		/**
 		*	纹理坐标信息
 		*/
-		const T_Vertex& getUVs();
+		const MeshMemoryData& getUVs();
 		/**
 		*	设置纹理坐标信息
 		*/
@@ -68,7 +72,7 @@ namespace render
 		/**
 		*	获取三角形索引
 		*/
-		const T_Indice& getIndices();
+		const MeshMemoryData& getIndices();
 		/**
 		*	获取变换矩阵
 		*/
@@ -81,16 +85,19 @@ namespace render
 		std::string _meshName;
 		// 材质
 		int _material = 0;
+		
 		// 顶点索引
-		T_Indice _indices;
+		MeshMemoryData _indices;
+		// 顶点坐标位数
+		uint8_t _verticeSize = 0;
 		// 顶点坐标 (x,y,z)
-		T_Vertex _vertices;
+		MeshMemoryData _vertices;
 		// 法线坐标 (x,y,z)
-		T_Vertex _normals;
+		MeshMemoryData _normals;
 		// 颜色 (r,g,b,a)
-		T_Vertex _colors;
+		MeshMemoryData _colors;
 		// 纹理坐标 (x,y,z)
-		T_Vertex _uvs;
+		MeshMemoryData _uvs;
 		// 变换矩阵
 		math::Matrix44 _matrix;
 	};

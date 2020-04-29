@@ -14,16 +14,14 @@ MeshDetail::~MeshDetail()
 
 void MeshDetail::setVertices(int count, float* vertexes, int unitSize)
 {
-	float* vertors = (float*)malloc(count * sizeof(float));
-	memcpy(vertors, vertexes, count * sizeof(float));
-
-	_vertices.init(count, vertors, unitSize);
-	free(vertors);
+	_vertices.init(count, vertexes, sizeof(float));
+	_vertices.setTypeSize(unitSize);
 }
 
 void MeshDetail::setNormals(int count, float* normals, int unitSize)
 {
-	_normals.init(count, normals, unitSize);
+	_normals.init(count, normals, sizeof(float));
+	_normals.setTypeSize(unitSize);
 }
 
 void MeshDetail::setColors(int count, float* colors, int unitSize)
@@ -32,40 +30,37 @@ void MeshDetail::setColors(int count, float* colors, int unitSize)
 
 	for (int i = 0; i < count; i++)
 	{
-		vertors[i] = colors[i] / COLOR_FLOAT_VALUE;
+		vertors[i] = colors[i];
 	}
 
-	_colors.init(count, vertors, unitSize);
+	_colors.init(count, vertors, sizeof(float));
+	_colors.setTypeSize(unitSize);
 
 	free(vertors);
 }
 
 void MeshDetail::setUVs(int count, float* texCoords, int unitSize)
 {
-	_uvs.init(count, texCoords, unitSize);
+	_uvs.init(count, texCoords, sizeof(float));
+	_uvs.setTypeSize(unitSize);
 }
 
-int MeshDetail::getVerticesCount()
-{
-	return _vertices.size / _vertices.unit;
-}
-
-const T_Vertex& MeshDetail::getVertices()
+const MeshMemoryData& MeshDetail::getVertices()
 {
 	return _vertices;
 }
 
-const T_Vertex& MeshDetail::getNormals()
+const MeshMemoryData& MeshDetail::getNormals()
 {
 	return _normals;
 }
 
-const T_Vertex& MeshDetail::getColors()
+const MeshMemoryData& MeshDetail::getColors()
 {
 	return _colors;
 }
 
-const T_Vertex& MeshDetail::getUVs()
+const MeshMemoryData& MeshDetail::getUVs()
 {
 	return _uvs;
 }
@@ -85,7 +80,7 @@ void MeshDetail::setIndices(int size, uint32_t* indices)
 	_indices.init(size, indices);
 }
 
-const T_Indice& MeshDetail::getIndices()
+const MeshMemoryData& MeshDetail::getIndices()
 {
 	return _indices;
 }

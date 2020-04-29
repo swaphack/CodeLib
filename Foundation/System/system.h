@@ -19,3 +19,4 @@
 #include "IO/import.h"
 #include "DateTime/import.h"
 #include "Resource/import.h"
+#include "Memory/import.h"
