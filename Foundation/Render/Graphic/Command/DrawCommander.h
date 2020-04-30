@@ -20,6 +20,7 @@ namespace render
 		void addCommand(DrawCommand* pCommand);
 		// Ö´ĞĞËùÓĞÃüÁî
 		void flush();
+		void removeAllCommands();
 	private:
 		std::vector<DrawCommand*> _commands;
 	};

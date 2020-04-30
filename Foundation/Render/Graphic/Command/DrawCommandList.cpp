@@ -9,7 +9,7 @@ DrawCommandList::DrawCommandList()
 
 DrawCommandList::~DrawCommandList()
 {
-
+	this->removeAllCommands();
 }
 
 void DrawCommandList::appendCommand(DrawCommand* pCommand)
@@ -19,18 +19,30 @@ void DrawCommandList::appendCommand(DrawCommand* pCommand)
 		return;
 	}
 
-	_commandList.push_back(pCommand);
+	_commands.push_back(pCommand);
 }
 
 void DrawCommandList::draw()
 {
-	std::vector<DrawCommand*>::iterator iter = _commandList.begin();
+	std::vector<DrawCommand*>::iterator iter = _commands.begin();
 
-	while (iter != _commandList.end())
+	while (iter != _commands.end())
 	{
 		(*iter)->draw();
 		iter++;
 	}
 
-	_commandList.clear();
+	_commands.clear();
+}
+
+void DrawCommandList::removeAllCommands()
+{
+	std::vector<DrawCommand*>::iterator iter = _commands.begin();
+
+	while (iter != _commands.end())
+	{
+		SAFE_RELEASE(*iter);
+		iter++;
+	}
+	_commands.clear();
 }

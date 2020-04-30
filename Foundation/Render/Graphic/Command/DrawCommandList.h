@@ -17,7 +17,9 @@ namespace render
 		void appendCommand(DrawCommand* pCommand);
 		// »æÖÆ
 		virtual void draw();
+
+		void removeAllCommands();
 	private:
-		std::vector<DrawCommand*> _commandList;
+		std::vector<DrawCommand*> _commands;
 	};
 }
