@@ -1,8 +1,9 @@
 # CodeLib
 code library, for upgrade and development
 
-System:Net,Base Type, Stream,Framework
-Render:opengl application
-Web:http application
+System:Base class and utility
 
-other
+Render:opengl window
+
+Web:http
+
