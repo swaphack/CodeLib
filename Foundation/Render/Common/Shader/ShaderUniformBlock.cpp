@@ -36,16 +36,9 @@ void render::ShaderUniformBlockData::setBlockIndicesData(int count, const uint32
 
 void render::ShaderUniformBlockData::setValue(const std::string& name, void* data)
 {
-	if (getProgram() == nullptr)
-	{
-		return;
-	}
-
-	uint32_t nProgramID = getProgram()->getProgramID();
-
 	const char* names[1] = { name.c_str() };
 	uint32_t indice = 0;
-	GLShader::getUniformIndices(nProgramID, 1, names, &indice);
+	GLShader::getUniformIndices(getProgramID(), 1, names, &indice);
 
 	int32_t type = *((int32_t*)_types.getPtr(indice));
 	int32_t offset = *((int32_t*)_offsets.getPtr(indice));
@@ -82,14 +75,9 @@ ShaderUniformBlock::~ShaderUniformBlock()
 
 bool render::ShaderUniformBlock::getBlockData(ShaderUniformBlockData& data)
 {
-	if (getProgram() == nullptr)
-	{
-		return false;
-	}
-
 	data.setProgram(getProgram());
 
-	uint32_t nProgramID = getProgram()->getProgramID();
+	uint32_t nProgramID = getProgramID();
 	uint32_t nUniformBlockID = getVarID();
 
 	int nBlockSize = 0;

@@ -10,6 +10,8 @@ public:
 public:
 	virtual bool init();
 protected:
-	void testShader1();
+	void testImage();
+	void testShaderUniformBlock();
+	void testSubroutineUniform();
 private:
 };

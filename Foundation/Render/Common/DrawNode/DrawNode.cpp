@@ -28,7 +28,6 @@ void DrawNode::drawSample()
 	{
 		GLVertex::setVertex((item));
 	}
-
 	GLVertex::endMode();
 }
 

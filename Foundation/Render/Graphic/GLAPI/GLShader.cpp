@@ -17,7 +17,7 @@ void GLShader::createShaderProgram(ShaderType type, int size, const char** strin
 	glCreateShaderProgramv((GLenum)type, size, strings);
 }
 
-void GLShader::loadShader(uint32_t shader, const char* data)
+bool GLShader::loadShader(uint32_t shader, const char* data)
 {
 	setShaderSource(shader, 1, &data, nullptr);
 	compileShader(shader);
@@ -27,7 +27,10 @@ void GLShader::loadShader(uint32_t shader, const char* data)
 	if (compiled != GL_TRUE)
 	{
 		showShaderStatus(shader);
+		return false;
 	}
+
+	return true;
 }
 
 void GLShader::attachShader(uint32_t program, uint32_t shader)
@@ -86,20 +89,20 @@ void GLShader::showProgramStatus(uint32_t program)
 	}
 }
 
-void GLShader::setVertexAttribValue(uint32_t attribID, VertexAttribSize len, const double* v)
+void GLShader::setVertexAttribValue(uint32_t attribID, VertexAttribSize type, const double* v)
 {
-	if (len == VertexAttribSize::ONE) glVertexAttrib1dv(attribID, v);
-	if (len == VertexAttribSize::TWO) glVertexAttrib2dv(attribID, v);
-	if (len == VertexAttribSize::THREE) glVertexAttrib3dv(attribID, v);
-	if (len == VertexAttribSize::FOUR) glVertexAttrib4dv(attribID, v);
+	if (type == VertexAttribSize::ONE) glVertexAttrib1dv(attribID, v);
+	if (type == VertexAttribSize::TWO) glVertexAttrib2dv(attribID, v);
+	if (type == VertexAttribSize::THREE) glVertexAttrib3dv(attribID, v);
+	if (type == VertexAttribSize::FOUR) glVertexAttrib4dv(attribID, v);
 }
 
-void GLShader::setVertexAttribValue(uint32_t attribID, VertexAttribSize len, const float* v)
+void GLShader::setVertexAttribValue(uint32_t attribID, VertexAttribSize type, const float* v)
 {
-	if (len == VertexAttribSize::ONE) glVertexAttrib1fv(attribID, v);
-	if (len == VertexAttribSize::TWO) glVertexAttrib2fv(attribID, v);
-	if (len == VertexAttribSize::THREE) glVertexAttrib3fv(attribID, v);
-	if (len == VertexAttribSize::FOUR)  glVertexAttrib4fv(attribID, v);
+	if (type == VertexAttribSize::ONE) glVertexAttrib1fv(attribID, v);
+	if (type == VertexAttribSize::TWO) glVertexAttrib2fv(attribID, v);
+	if (type == VertexAttribSize::THREE) glVertexAttrib3fv(attribID, v);
+	if (type == VertexAttribSize::FOUR)  glVertexAttrib4fv(attribID, v);
 }
 
 void GLShader::setVertexAttribValue4(uint32_t attribID, const uint32_t* v)
@@ -117,12 +120,12 @@ void GLShader::setVertexAttribValue4(uint32_t attribID, const uint16_t* v)
 	glVertexAttrib4usv(attribID, v);
 }
 
-void GLShader::setVertexAttribValue(uint32_t attribID, VertexAttribSize len, const int16_t* v)
+void GLShader::setVertexAttribValue(uint32_t attribID, VertexAttribSize type, const int16_t* v)
 {
-	if (len == VertexAttribSize::ONE) glVertexAttrib1sv(attribID, v);
-	if (len == VertexAttribSize::TWO)  glVertexAttrib2sv(attribID, v);
-	if (len == VertexAttribSize::THREE) glVertexAttrib3sv(attribID, v);
-	if (len == VertexAttribSize::FOUR)  glVertexAttrib4sv(attribID, v);
+	if (type == VertexAttribSize::ONE) glVertexAttrib1sv(attribID, v);
+	if (type == VertexAttribSize::TWO)  glVertexAttrib2sv(attribID, v);
+	if (type == VertexAttribSize::THREE) glVertexAttrib3sv(attribID, v);
+	if (type == VertexAttribSize::FOUR)  glVertexAttrib4sv(attribID, v);
 }
 
 void GLShader::setVertexAttribValue4(uint32_t attribID, const uint8_t* v)
@@ -214,24 +217,20 @@ int GLShader::getUniformLocation(int32_t program, const char* uniformName)
 	return glGetUniformLocation(program, uniformName);
 }
 
-void GLShader::setUniformValue(int32_t uniformID, int type, int len, float* v)
+void GLShader::setUniformValue(int32_t uniformID, VertexAttribSize type, int len, float* v)
 {
-	ASSERT(type != 0 && len > 0 && v != nullptr);
-
-	if (type == 1) glUniform1fv(uniformID, len, v);
-	if (type == 2) glUniform2fv(uniformID, len, v);
-	if (type == 3) glUniform3fv(uniformID, len, v);
-	if (type == 4) glUniform4fv(uniformID, len, v);
+	if (type == VertexAttribSize::ONE) glUniform1fv(uniformID, len, v);
+	if (type == VertexAttribSize::TWO) glUniform2fv(uniformID, len, v);
+	if (type == VertexAttribSize::THREE) glUniform3fv(uniformID, len, v);
+	if (type == VertexAttribSize::FOUR) glUniform4fv(uniformID, len, v);
 }
 
-void GLShader::setUniformValue(int32_t uniformID, int type, int len, int32_t* v)
+void GLShader::setUniformValue(int32_t uniformID, VertexAttribSize type, int len, int32_t* v)
 {
-	ASSERT(type != 0 && len > 0 && v != nullptr);
-
-	if (type == 1) glUniform1iv(uniformID, len, v);
-	if (type == 2) glUniform2iv(uniformID, len, v);
-	if (type == 3) glUniform3iv(uniformID, len, v);
-	if (type == 4) glUniform4iv(uniformID, len, v);
+	if (type == VertexAttribSize::ONE) glUniform1iv(uniformID, len, v);
+	if (type == VertexAttribSize::TWO) glUniform2iv(uniformID, len, v);
+	if (type == VertexAttribSize::THREE) glUniform3iv(uniformID, len, v);
+	if (type == VertexAttribSize::FOUR) glUniform4iv(uniformID, len, v);
 }
 
 void GLShader::setUniformValue(int32_t uniformID, float v0)
@@ -317,24 +316,12 @@ void GLShader::setProgramUniformValue(uint32_t program, int location, float v0)
 	glProgramUniform1f(program, location, v0);
 }
 
-void GLShader::setProgramUniformValue1(uint32_t program, int location, int count, const float* value)
+void GLShader::setProgramUniformValue(uint32_t program, int location, VertexAttribSize type, int count, const float* value)
 {
-	glProgramUniform1fv(program, location, count, value);
-}
-
-void GLShader::setProgramUniformValue2(uint32_t program, int location, int count, const uint32_t* value)
-{
-	glProgramUniform2uiv(program, location, count, value);
-}
-
-void GLShader::setProgramUniformValue3(uint32_t program, int location, int count, const uint32_t* value)
-{
-	glProgramUniform3uiv(program, location, count, value);
-}
-
-void GLShader::setProgramUniformValue4(uint32_t program, int location, int count, const uint32_t* value)
-{
-	glProgramUniform4uiv(program, location, count, value);
+	if (type == VertexAttribSize::ONE) glProgramUniform1fv(program, location, count, value);
+	if (type == VertexAttribSize::TWO) glProgramUniform2fv(program, location, count, value);
+	if (type == VertexAttribSize::THREE) glProgramUniform3fv(program, location, count, value);
+	if (type == VertexAttribSize::FOUR) glProgramUniform4fv(program, location, count, value);
 }
 
 void GLShader::setProgramUniformMatrix2(uint32_t program, int location, int count, const float* value)
@@ -382,44 +369,20 @@ void GLShader::setProgramUniformMatrix4x3(uint32_t program, int location, int co
 	glProgramUniformMatrix4x3fv(program, location, count, transpose ? GL_TRUE : GL_FALSE, value);
 }
 
-void GLShader::setProgramUniformValue2(uint32_t program, int location, int count, const int32_t* value)
+void GLShader::setProgramUniformValue(uint32_t program, int location, VertexAttribSize type, int count, const uint32_t* value)
 {
-	glProgramUniform2iv(program, location, count, value);
+	if (type == VertexAttribSize::ONE) glProgramUniform1uiv(program, location, count, value);
+	if (type == VertexAttribSize::TWO) glProgramUniform2uiv(program, location, count, value);
+	if (type == VertexAttribSize::THREE) glProgramUniform3uiv(program, location, count, value);
+	if (type == VertexAttribSize::FOUR) glProgramUniform4uiv(program, location, count, value);
 }
 
-void GLShader::setProgramUniformValue3(uint32_t program, int location, int count, const int32_t* value)
+void GLShader::setProgramUniformValue(uint32_t program, int location, VertexAttribSize type, int count, const int32_t* value)
 {
-	glProgramUniform3iv(program, location, count, value);
-}
-
-void GLShader::setProgramUniformValue4(uint32_t program, int location, int count, const int32_t* value)
-{
-	glProgramUniform4iv(program, location, count, value);
-}
-
-void GLShader::setProgramUniformValue1(uint32_t program, int location, int count, const uint32_t* value)
-{
-	glProgramUniform1uiv(program, location, count, value);
-}
-
-void GLShader::setProgramUniformValue2(uint32_t program, int location, int count, const float* value)
-{
-	glProgramUniform2fv(program, location, count, value);
-}
-
-void GLShader::setProgramUniformValue3(uint32_t program, int location, int count, const float* value)
-{
-	glProgramUniform3fv(program, location, count, value);
-}
-
-void GLShader::setProgramUniformValue4(uint32_t program, int location, int count, const float* value)
-{
-	glProgramUniform4fv(program, location, count, value);
-}
-
-void GLShader::setProgramUniformValue1(uint32_t program, int location, int count, const int32_t* value)
-{
-	glProgramUniform1iv(program, location, count, value);
+	if(type == VertexAttribSize::ONE) glProgramUniform1iv(program, location, count, value);
+	if (type == VertexAttribSize::TWO) glProgramUniform2iv(program, location, count, value);
+	if (type == VertexAttribSize::THREE) glProgramUniform3iv(program, location, count, value);
+	if (type == VertexAttribSize::FOUR) glProgramUniform4iv(program, location, count, value);
 }
 
 void GLShader::setProgramUniformValue(uint32_t program, int location, uint32_t v0, uint32_t v1, uint32_t v2, uint32_t v3)

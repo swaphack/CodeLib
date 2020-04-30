@@ -2,10 +2,12 @@
 
 #include "ShaderVariable.h"
 
+#include "Graphic/GLAPI/macros.h"
+
 namespace render
 {
 	/**
-	*	固定属性
+	*	属性
 	*	uniform变量就像是C语言里面的常量（const ），它不能被shader程序修改。（shader只能用，不能改）
 	*	如果uniform变量在vertex和fragment两者之间声明方式完全一样，则它可以在vertex和fragment共享使用。（相当于一个被vertex和fragment shader共享的全局变量）
 	*/
@@ -15,8 +17,8 @@ namespace render
 		ShaderUniform();
 		virtual ~ShaderUniform();
 	public:
-		void setValue(int type, int len, float* v);
-		void setValue(int type, int len, int32_t* v);
+		void setValue(VertexAttribSize type, int len, float* v);
+		void setValue(VertexAttribSize type, int len, int32_t* v);
 
 		void setValue(float v0);
 		void setValue(float v0, float v1);

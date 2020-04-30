@@ -21,12 +21,12 @@ bool ShaderScene::init()
 		return false;
 	}
 
-	this->testShader1();
+	this->testSubroutineUniform();
 
 	return true;
 }
 
-void ShaderScene::testShader1()
+void ShaderScene::testImage()
 {
 	auto frameSize = Canvas::getInstance()->getView()->getFrameSize();
 
@@ -37,8 +37,10 @@ void ShaderScene::testShader1()
 	pImage->setAnchorPoint(Vector2());
 	pImage->setVolume(frameSize);
 	this->addChild(pImage);
+}
 
-
+void ShaderScene::testShaderUniformBlock()
+{
 	std::string vPath = "Resource/shader/shader_v_1.glsl";
 	std::string fPath = "Resource/shader/shader_f_1.glsl";
 
@@ -71,10 +73,16 @@ void ShaderScene::testShader1()
 		}
 		GLDebug::showError();
 	}
+}
 
-	pProgram = CREATE_OBJECT(ShaderProgram);
+void ShaderScene::testSubroutineUniform()
+{
+	ShaderProgram* pProgram = CREATE_OBJECT(ShaderProgram);
 	std::string vlPath = "Resource/shader/lighting.glsl";
-	pProgram->loadFromFile(ShaderType::VERTEX_SHADER, vlPath);
+	if (!pProgram->loadFromFile(ShaderType::VERTEX_SHADER, vlPath))
+	{
+		return;
+	}
 	pProgram->link();
 	GLDebug::showError();
 	auto pSubroutineUniform = pProgram->getSubroutineUniform(ShaderType::VERTEX_SHADER, "materialShader");
@@ -82,9 +90,9 @@ void ShaderScene::testShader1()
 	if (pSubroutineUniform)
 	{
 		uint32_t index = pSubroutineUniform->getSubroutineIndex("ambient");
+		GLDebug::showError();
 		pSubroutineUniform->setSubroutineIndex(index);
+		GLDebug::showError();
 	}
-
-	
 }
 

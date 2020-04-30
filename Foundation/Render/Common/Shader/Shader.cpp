@@ -46,25 +46,25 @@ void Shader::releaseShader()
 	_shaderID = 0;
 }
 
-void Shader::loadData(const char* data)
+bool Shader::loadData(const char* data)
 {
 	if (data == nullptr)
 	{
-		return;
+		return false;
 	}
 
-	GLShader::loadShader(_shaderID, data);
+	return GLShader::loadShader(_shaderID, data);
 }
 
-void Shader::loadFromFile(const std::string& filepath)
+bool Shader::loadFromFile(const std::string& filepath)
 {
 	std::string data;
 	if (!G_FILEPATH->getFileData(filepath, data))
 	{
-		return;
+		return false;
 	}
 
-	this->loadData(data.c_str());
+	return this->loadData(data.c_str());
 }
 
 void Shader::attachProgram(ShaderProgram* program)
@@ -114,6 +114,28 @@ Shader* render::Shader::create(ShaderType type)
 		return nullptr;
 		break;
 	}	
+}
+
+render::Shader* render::Shader::create(ShaderType type, const std::string& filepath)
+{
+	auto pShader = Shader::create(type);
+	if (pShader == nullptr)
+	{
+		return nullptr;
+	}
+
+	if (!pShader->loadFromFile(filepath))
+	{
+		SAFE_DELETE(pShader);
+	}
+
+	return pShader;
+}
+
+bool render::Shader::loadFromBindary(const void* binary, int length)
+{
+	return false; 
+	//GLShader::setShaderBinary(1, &_shaderID, GL_SHADER_BINARY_FORMAT_SPIR_V, binary, length);
 }
 
 //////////////////////////////////////////////////////////////////////////

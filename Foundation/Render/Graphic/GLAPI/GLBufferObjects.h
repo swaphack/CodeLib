@@ -37,6 +37,7 @@ namespace render
 		static void copyNamedBufferSubData(uint32_t readBuffer, uint32_t writeBuffer, GLintptr readOffset, GLintptr writeOffset, GLintptr size);
 	public:
 		static void createBuffers(int n, uint32_t* buffers);
+		static uint32_t createBuffer();
 
 		static void createVertexArrays(int n, uint32_t* arrays);
 	public:
@@ -69,12 +70,11 @@ namespace render
 		static uint32_t genBuffer();
 		static void genBuffers(int n, uint32_t* buffers);
 	public:
-		static void getBufferParameter(BufferTarget target, BufferParameter pname, int* params);
-		static void getBufferParameter(BufferTarget target, BufferParameter pname, int64_t* params);
-		static void getNamedBufferParameter(uint32_t buffer, BufferParameter pname, int* params);
-		static void getNamedBufferParameter(uint32_t buffer, BufferParameter pname, int64_t* params);
-
 		static void getBufferParameter(GetBufferTarget target, GetBufferParameter pname, int* params);
+		static void getBufferParameter(GetBufferTarget target, GetBufferParameter pname, int64_t* params);
+		static void getNamedBufferParameter(uint32_t buffer, GetBufferParameter pname, int* params);
+		static void getNamedBufferParameter(uint32_t buffer, GetBufferParameter pname, int64_t* params);
+
 		static void getBufferPointer(BufferTarget target, BufferPointerParameter pname, void ** params);
 		static void getBufferSubData(BufferTarget target, GLintptr offset, GLsizeiptr size, void * data);
 		static void getNamedBufferSubData(uint32_t buffer, GLintptr offset, GLsizeiptr size, void * data);

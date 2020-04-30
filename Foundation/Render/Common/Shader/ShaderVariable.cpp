@@ -43,3 +43,13 @@ ShaderProgram* ShaderVariable::getProgram()
 {
 	return _program;
 }
+
+uint32_t render::ShaderVariable::getProgramID()
+{
+	if (_program == nullptr)
+	{
+		return 0;
+	}
+
+	return _program->getProgramID();
+}

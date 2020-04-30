@@ -5,42 +5,51 @@ using namespace render;
 
 render::BufferObject::BufferObject()
 {
-	this->initBufferObject();
 }
 
 render::BufferObject::~BufferObject()
 {
-	this->relaseBufferObject();
-}
 
-void render::BufferObject::setBufferTarget(BufferTarget target)
-{
-	_target = target;
-	GLBufferObjects::bindBuffer(_target, _bufferID);
 }
 
 void render::BufferObject::setBufferData(int size, const void* data, BufferDataUsage usage)
 {
-	GLBufferObjects::setBufferData(_target, size, data, usage);
+	GLBufferObjects::setBufferData(getBufferTarget(), size, data, usage);
 }
 
-void render::BufferObject::setBufferBase(int index)
+void render::BufferObject::setBufferStorage(GLsizeiptr size, const void* data, GLbitfield flags)
 {
-	GLBufferObjects::bindBufferBase(_target, index, _bufferID);
+	GLBufferObjects::setBufferStorage(getBufferTarget(), size, data, flags);
 }
 
-void render::BufferObject::setBufferRange(int index, int offset, int size)
+void render::BufferObject::setBufferSubData(GLintptr offset, GLsizeiptr size, const void* data)
 {
-	GLBufferObjects::bindBufferRange(_target, index, _bufferID, offset, size);
+	GLBufferObjects::setBufferSubData(getBufferTarget(), offset, size, data);
 }
 
-void render::BufferObject::initBufferObject()
+void render::BufferObject::clearBufferData(BufferSizedInternalFormat internalformat, BufferImageInternalFormat format, BufferImageDataType type, const void* data)
 {
-	_bufferID = GLBufferObjects::genBuffer();
+	GLBufferObjects::clearBufferData(getBufferTarget(), internalformat, format, type, data);
 }
 
-void render::BufferObject::relaseBufferObject()
+void render::BufferObject::clearBufferSubData(BufferSizedInternalFormat internalformat, GLintptr offset, GLsizeiptr size, BufferImageInternalFormat format, BufferImageDataType type, const void* data)
 {
-	GLBufferObjects::deleteBuffer(_bufferID);
-	_bufferID = 0;
+	GLBufferObjects::clearBufferSubData(getBufferTarget(), internalformat, offset, size, format, type, data);
 }
+
+void render::BufferObject::copyBufferSubData(GLintptr readOffset, BufferTarget writeTarget, GLintptr writeOffset, GLintptr size)
+{
+	GLBufferObjects::copyBufferSubData(getBufferTarget(), writeTarget, readOffset, writeOffset, size);
+}
+
+void render::BufferObject::getBufferParameter(GetBufferTarget target, GetBufferParameter pname, int* params)
+{
+	GLBufferObjects::getBufferParameter(target, pname, params);
+}
+
+void render::BufferObject::getBufferParameter(GetBufferTarget target, GetBufferParameter pname, int64_t* params)
+{
+	GLBufferObjects::getBufferParameter(target, pname, params);
+}
+
+

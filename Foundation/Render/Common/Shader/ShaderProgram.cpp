@@ -5,6 +5,8 @@
 #include "ShaderUniformBlock.h"
 #include "ShaderSubroutineUniform.h"
 #include "Graphic/import.h"
+#include "ShaderProgramPipeline.h"
+#include "ShaderProgramUniform.h"
 
 using namespace render;
 
@@ -92,6 +94,8 @@ void ShaderProgram::releaseProgram()
 	removeAllUniforms();
 	removeAllUniformBlocks();
 	removeAllSubroutineUniforms();
+	removeAllProgramPipelines();
+	removeAllProgramUniforms();
 
 	if (_programID != 0)
 	{
@@ -186,17 +190,115 @@ void ShaderProgram::removeAllUniforms()
 	_attributes.clear();
 }
 
-void ShaderProgram::loadVertexAndFragmentShader(const std::string& vpath, const std::string& fpath)
+bool ShaderProgram::loadVertexAndFragmentShader(const std::string& vpath, const std::string& fpath)
 {
-	this->loadFromFile<VertexShader>(vpath);
-	this->loadFromFile<FragmentShader>(fpath);
+	if (!this->loadFromFile(ShaderType::VERTEX_SHADER, vpath))
+	{
+		return false;
+	}
+	if (!this->loadFromFile(ShaderType::FRAGMENT_SHADER, fpath))
+	{
+		return false;
+	}
+
+	return true;
 }
 
-void render::ShaderProgram::loadFromFile(ShaderType type, const std::string& path)
+bool render::ShaderProgram::loadFromFile(ShaderType type, const std::string& path)
 {
-	Shader* pVertex = Shader::create(type);
-	pVertex->loadFromFile(path);
-	this->attachShader(pVertex);
+	Shader* pShader = Shader::create(type, path);
+	if (pShader == nullptr)
+	{
+		return false;
+	}
+	this->attachShader(pShader);
+	return true;
+}
+
+void render::ShaderProgram::setSeparable(bool value)
+{
+	GLShader::setProgramParameter(_programID, ModifyProgramParameter::PROGRAM_SEPARABLE, value ? GL_TRUE : GL_FALSE);
+}
+
+render::ShaderProgramPipeline* render::ShaderProgram::getShaderProgramPipeline(GLbitfield tags, const std::string& name)
+{
+	auto it = _programPipelines.find(name);
+	if (it != _programPipelines.end())
+	{
+		return it->second;
+	}
+	auto pProgramPipeline = CREATE_OBJECT(ShaderProgramPipeline);
+	pProgramPipeline->setName(name);
+	pProgramPipeline->setProgram(this);
+	pProgramPipeline->bind();
+	this->addShaderProgramPipeline(name, pProgramPipeline);
+
+	GLShader::useProgramStages(pProgramPipeline->getVarID(), tags, _programID);
+
+	return pProgramPipeline;
+}
+
+void render::ShaderProgram::addShaderProgramPipeline(const std::string& name, ShaderProgramPipeline* pipeline)
+{
+	if (name.empty() || pipeline == nullptr)
+	{
+		return;
+	}
+	SAFE_RETAIN(pipeline);
+	_programPipelines[name] = pipeline;
+}
+
+void render::ShaderProgram::removeAllProgramPipelines()
+{
+	for (auto item : _subroutineUniforms)
+	{
+		SAFE_RELEASE(item.second);
+	}
+	_subroutineUniforms.clear();
+}
+
+render::ShaderProgramUniform* render::ShaderProgram::getProgramUniform(const std::string& name)
+{
+	auto it = _programUniforms.find(name);
+	if (it != _programUniforms.end())
+	{
+		return it->second;
+	}
+
+	int id = GLShader::getUniformLocation(_programID, name.c_str());
+	GLDebug::showError();
+	if (id <= 0)
+	{
+		return nullptr;
+	}
+
+	auto pUniform = CREATE_OBJECT(ShaderProgramUniform);
+	pUniform->setVarID(id);
+	pUniform->setName(name);
+	pUniform->setProgram(this);
+	this->addProgramUniform(name, pUniform);
+
+	return pUniform;
+}
+
+void render::ShaderProgram::addProgramUniform(const std::string& name, ShaderProgramUniform* uniform)
+{
+	if (name.empty() || uniform == nullptr)
+	{
+		return;
+	}
+	SAFE_RETAIN(uniform);
+	_programUniforms[name] = uniform;
+}
+
+void render::ShaderProgram::removeAllProgramUniforms()
+{
+	for (auto item : _programUniforms)
+	{
+		SAFE_RELEASE(item.second);
+	}
+	_programUniforms.clear();
+
 }
 
 render::ShaderUniformBlock* render::ShaderProgram::getUniformBlock(const std::string& name)
@@ -245,8 +347,13 @@ ShaderSubroutineUniform* render::ShaderProgram::getSubroutineUniform(ShaderType 
 		return it->second;
 	}
 
-	uint32_t id = GLShader::getSubroutineUniformLocation(_programID, shaderType, name.c_str());
+	int32_t id = GLShader::getSubroutineUniformLocation(_programID, shaderType, name.c_str());
 	GLDebug::showError();
+	if (id <= 0)
+	{
+		return nullptr;
+	}
+	
 	auto pSubroutineUniform = CREATE_OBJECT(ShaderSubroutineUniform);
 	pSubroutineUniform->setVarID(id);
 	pSubroutineUniform->setName(name);

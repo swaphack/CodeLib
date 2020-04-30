@@ -13,12 +13,12 @@ ShaderUniform::~ShaderUniform()
 {
 
 }
-void ShaderUniform::setValue(int type, int len, float* v)
+void ShaderUniform::setValue(VertexAttribSize type, int len, float* v)
 {
 	GLShader::setUniformValue(getVarID(), type, len, v);
 }
 
-void ShaderUniform::setValue(int type, int len, int32_t* v)
+void ShaderUniform::setValue(VertexAttribSize type, int len, int32_t* v)
 {
 	GLShader::setUniformValue(getVarID(), type, len, v);
 }

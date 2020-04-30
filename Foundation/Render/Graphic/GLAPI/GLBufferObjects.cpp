@@ -222,11 +222,6 @@ void GLBufferObjects::genBuffers(int n, uint32_t* buffers)
 	glGenBuffers(n, buffers);
 }
 
-void GLBufferObjects::getBufferParameter(BufferTarget target, BufferParameter pname, int* params)
-{
-	glGetBufferParameteriv((GLenum)target, (GLenum)pname, params);
-}
-
 void GLBufferObjects::getBufferPointer(BufferTarget target, BufferPointerParameter pname, void ** params)
 {
 	glGetBufferPointerv((GLenum)target, (GLenum)pname, params);
@@ -457,7 +452,7 @@ void GLBufferObjects::getVertexArrayIndexed(uint32_t vaobj, uint32_t index, GetV
 	glGetVertexArrayIndexed64iv(vaobj, index, (GLenum)pname, param);
 }
 
-void GLBufferObjects::getNamedBufferParameter(uint32_t buffer, BufferParameter pname, int* params)
+void GLBufferObjects::getNamedBufferParameter(uint32_t buffer, GetBufferParameter pname, int* params)
 {
 	glGetNamedBufferParameteriv(buffer, (GLenum)pname, params);
 }
@@ -467,12 +462,12 @@ void GLBufferObjects::getBufferParameter(GetBufferTarget target, GetBufferParame
 	glGetBufferParameteriv((GLenum)target, (GLenum)pname, params);
 }
 
-void GLBufferObjects::getNamedBufferParameter(uint32_t buffer, BufferParameter pname, int64_t* params)
+void GLBufferObjects::getNamedBufferParameter(uint32_t buffer, GetBufferParameter pname, int64_t* params)
 {
 	glGetNamedBufferParameteri64v(buffer, (GLenum)pname, params);
 }
 
-void GLBufferObjects::getBufferParameter(BufferTarget target, BufferParameter pname, int64_t* params)
+void GLBufferObjects::getBufferParameter(GetBufferTarget target, GetBufferParameter pname, int64_t* params)
 {
 	glGetBufferParameteri64v((GLenum)target, (GLenum)pname, params);
 }
@@ -821,6 +816,13 @@ uint32_t render::GLBufferObjects::genBuffer()
 {
 	uint32_t id;
 	genBuffers(1, &id);
+	return id;
+}
+
+uint32_t render::GLBufferObjects::createBuffer()
+{
+	uint32_t id;
+	createBuffers(1, &id);
 	return id;
 }
 

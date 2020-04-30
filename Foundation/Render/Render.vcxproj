@@ -113,6 +113,8 @@
     <ClCompile Include="Common\Audio\CtrlAudioSpeaker.cpp" />
     <ClCompile Include="Common\Audio\macros.cpp" />
     <ClCompile Include="Common\Buffer\BufferObject.cpp" />
+    <ClCompile Include="Common\Buffer\BufferObjectBase.cpp" />
+    <ClCompile Include="Common\Buffer\NamedBufferObject.cpp" />
     <ClCompile Include="Common\DrawNode\DrawNode.cpp" />
     <ClCompile Include="Common\Keyboard\KeyboardManager.cpp" />
     <ClCompile Include="Common\Node\Animation.cpp" />
@@ -122,6 +124,8 @@
     <ClCompile Include="Common\Shader\ShaderAttrib.cpp" />
     <ClCompile Include="Common\Shader\ShaderProgram.cpp" />
     <ClCompile Include="Common\Shader\Shader.cpp" />
+    <ClCompile Include="Common\Shader\ShaderProgramPipeline.cpp" />
+    <ClCompile Include="Common\Shader\ShaderProgramUniform.cpp" />
     <ClCompile Include="Common\Shader\ShaderSubroutineUniform.cpp" />
     <ClCompile Include="Common\Shader\ShaderUniform.cpp" />
     <ClCompile Include="Common\Shader\ShaderUniformBlock.cpp" />
@@ -250,7 +254,9 @@
     <ClInclude Include="Common\Audio\import.h" />
     <ClInclude Include="Common\Audio\macros.h" />
     <ClInclude Include="Common\Buffer\BufferObject.h" />
+    <ClInclude Include="Common\Buffer\BufferObjectBase.h" />
     <ClInclude Include="Common\Buffer\import.h" />
+    <ClInclude Include="Common\Buffer\NamedBufferObject.h" />
     <ClInclude Include="Common\DrawNode\DrawNode.h" />
     <ClInclude Include="Common\DrawNode\import.h" />
     <ClInclude Include="Common\import.h" />
@@ -268,6 +274,8 @@
     <ClInclude Include="Common\Shader\import.h" />
     <ClInclude Include="Common\Shader\Shader.h" />
     <ClInclude Include="Common\Shader\ShaderProgram.h" />
+    <ClInclude Include="Common\Shader\ShaderProgramPipeline.h" />
+    <ClInclude Include="Common\Shader\ShaderProgramUniform.h" />
     <ClInclude Include="Common\Shader\ShaderSubroutineUniform.h" />
     <ClInclude Include="Common\Shader\ShaderUniform.h" />
     <ClInclude Include="Common\Shader\ShaderUniformBlock.h" />

@@ -11,6 +11,8 @@ namespace render
 	class ShaderUniform;
 	class ShaderUniformBlock;
 	class ShaderSubroutineUniform;
+	class ShaderProgramPipeline;
+	class ShaderProgramUniform;
 	/**
 	*	着色器控制程序
 	*	glCreateProgram
@@ -52,54 +54,102 @@ namespace render
 		void detachAllShaders();
 	public:
 		/**
+		*	链接
+		*/
+		void link();
+		/**
+		*	调用
+		*/
+		void use();
+	public:
+		/**
+		*	添加文件 v 顶点， f片元
+		*/
+		bool loadVertexAndFragmentShader(const std::string& vpath, const std::string& fpath);
+		/**
+		*	加载文件
+		*/
+		bool loadFromFile(ShaderType type, const std::string& path);
+	public:
+		/**
+		*	设置成可分离
+		*/
+		void setSeparable(bool value);
+	public:
+		/**
 		*	获取属性
 		*/
 		ShaderAttrib* getAttriubte(const std::string& name);
+		/**
+		*	获取固定属性
+		*/
+		ShaderUniform* getUniform(const std::string& name);
+		/**
+		*	获取属性块
+		*/
+		ShaderUniformBlock* getUniformBlock(const std::string& name);
+		/**
+		*	子程序
+		*/
+		ShaderSubroutineUniform* getSubroutineUniform(ShaderType shaderType, const std::string& name);
+		/**
+		*	管线
+		*/
+		ShaderProgramPipeline* getShaderProgramPipeline(GLbitfield tags, const std::string& name);
+		/**
+		*	获取可编程属性
+		*/
+		ShaderProgramUniform* getProgramUniform(const std::string& name);
 	protected:
 		/**
 		*	添加属性
 		*/
 		void addAttriubte(const std::string& name, ShaderAttrib* attrib);
 		/**
-		*	移除所有属性
-		*/
-		void removeAllAttributes();
-	public:
-		/**
-		*	获取固定属性
-		*/
-		ShaderUniform* getUniform(const std::string& name);
-	protected:
-		/**
 		*	添加固定属性
 		*/
 		void addUniform(const std::string& name, ShaderUniform* uniform);
-		/**
-		*	移除所有固定属性
-		*/
-		void removeAllUniforms();
-	public:
-		ShaderUniformBlock* getUniformBlock(const std::string& name);
-	protected:
 		/**
 		*	添加固定属性
 		*/
 		void addUniformBlock(const std::string& name, ShaderUniformBlock* uniform);
 		/**
-		*	移除所有固定属性
-		*/
-		void removeAllUniformBlocks();
-	public:
-		ShaderSubroutineUniform* getSubroutineUniform(ShaderType shaderType, const std::string& name);
-	protected:
-		/**
 		*	添加固定属性
 		*/
 		void addSubroutineUniform(const std::string& name, ShaderSubroutineUniform* uniform);
 		/**
+		*	添加管线
+		*/
+		void addShaderProgramPipeline(const std::string& name, ShaderProgramPipeline* pipeline);
+		/**
+		*	添加可编程属性
+		*/
+		void addProgramUniform(const std::string& name, ShaderProgramUniform* uniform);
+	protected:
+		/**
+		*	移除所有属性
+		*/
+		void removeAllAttributes();
+		/**
 		*	移除所有固定属性
 		*/
-		void removeAllSubroutineUniforms();
+		void removeAllUniforms();
+		/**
+		*	移除所有固定属性
+		*/
+		void removeAllUniformBlocks();
+		/**
+		*	移除所有固定属性
+		*/
+		void removeAllSubroutineUniforms();		
+		/**
+		*	移除所有管线
+		*/
+		void removeAllProgramPipelines();
+		/**
+		*	移除所有可编程属性
+		*/
+		void removeAllProgramUniforms();
 	public:
 		/**
 		*	调用无
@@ -114,34 +164,6 @@ namespace render
 		*	释放
 		*/
 		void releaseProgram();
-	public:
-		/**
-		*	链接
-		*/
-		void link();
-		/**
-		*	调用
-		*/
-		void use();
-	public:
-		/**
-		*	添加文件 v 顶点， f片元
-		*/
-		void loadVertexAndFragmentShader(const std::string& vpath, const std::string& fpath);
-		/**
-		*	加载文件
-		*/
-		void loadFromFile(ShaderType type, const std::string& path);
-		/**
-		*	加载文件
-		*/
-		template<typename T, typename = std::enable_if<std::is_base_of<Shader, T>::value, T>::type>
-		void loadFromFile(const std::string& path)
-		{
-			T* pShader = CREATE_OBJECT(T);
-			pShader->loadFromFile(path);
-			this->attachShader(pShader);
-		}
 	private:
 		/**
 		*	程序编号
@@ -160,6 +182,10 @@ namespace render
 		*/
 		std::map<std::string, ShaderUniform*> _uniforms;
 		/**
+		*	可编程属性
+		*/
+		std::map<std::string, ShaderProgramUniform*> _programUniforms;
+		/**
 		*	属性块
 		*/
 		std::map<std::string, ShaderUniformBlock*> _uniformBlocks;
@@ -167,6 +193,10 @@ namespace render
 		*	子程序
 		*/
 		std::map<std::string, ShaderSubroutineUniform*> _subroutineUniforms;
+		/**
+		*	管线
+		*/
+		std::map<std::string, ShaderProgramPipeline*> _programPipelines;
 	};
 
 }

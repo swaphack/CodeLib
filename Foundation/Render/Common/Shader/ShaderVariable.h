@@ -39,7 +39,11 @@ namespace render
 		*	关联程序
 		*/
 		ShaderProgram* getProgram();
-	private:
+		/**
+		*	关联程序id
+		*/
+		uint32_t getProgramID();
+	protected:
 		/**
 		*	编号
 		*/

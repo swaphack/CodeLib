@@ -348,6 +348,18 @@
     <ClCompile Include="Common\Shader\ShaderSubroutineUniform.cpp">
       <Filter>Common\Shader</Filter>
     </ClCompile>
+    <ClCompile Include="Common\Shader\ShaderProgramPipeline.cpp">
+      <Filter>Common\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Shader\ShaderProgramUniform.cpp">
+      <Filter>Common\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Buffer\NamedBufferObject.cpp">
+      <Filter>Common\Buffer</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Buffer\BufferObjectBase.cpp">
+      <Filter>Common\Buffer</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Common\Node\import.h">
@@ -869,6 +881,18 @@
     </ClInclude>
     <ClInclude Include="Common\Shader\ShaderSubroutineUniform.h">
       <Filter>Common\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Shader\ShaderProgramPipeline.h">
+      <Filter>Common\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Shader\ShaderProgramUniform.h">
+      <Filter>Common\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Buffer\NamedBufferObject.h">
+      <Filter>Common\Buffer</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Buffer\BufferObjectBase.h">
+      <Filter>Common\Buffer</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

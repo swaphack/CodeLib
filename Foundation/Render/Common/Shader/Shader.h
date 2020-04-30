@@ -16,6 +16,7 @@ namespace render
 		virtual ~Shader();
 	public:
 		static Shader* create(ShaderType type);
+		static Shader* create(ShaderType type, const std::string& filepath);
 	public:
 		/**
 		*	着色器编号
@@ -32,11 +33,18 @@ namespace render
 		/**
 		*	加载程序代码
 		*/
-		void loadData(const char* data);
+		bool loadData(const char* data);
 		/**
 		*	从文件加载程序
 		*/
-		void loadFromFile(const std::string& filepath);
+		bool loadFromFile(const std::string& filepath);
+		/**
+		*	从预处理的二进制数据加载程序 spir-v
+		*/
+		bool loadFromBindary(const void* binary, int length);
+		/**
+		*	spir-v
+		*/
 	public:
 		/**
 		*	初始化
@@ -54,7 +62,6 @@ namespace render
 		*	取消关联
 		*/
 		void detachProgram();
-	protected:
 	private:
 		/**
 		*	着色器编号
