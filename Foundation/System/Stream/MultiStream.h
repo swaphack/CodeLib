@@ -57,7 +57,7 @@ namespace sys
 		// 获取高度
 		inline ss_t getHeigth() const { return _heigth; }
 		// 获取深度
-		inline ss_t getDeep() const { return _deep; }
+		inline ss_t getDepth() const { return _deep; }
 		// 获取数据
 		inline const char* getData() const { return _data; }
 

@@ -1,45 +1,25 @@
-#include "ShaderScene.h"
+#include "TestShaderNode.h"
 #include "mathlib.h"
 
 using namespace render;
 using namespace math;
 
-ShaderScene::ShaderScene()
+TestShaderNode::TestShaderNode()
 {
 
 }
 
-ShaderScene::~ShaderScene()
+TestShaderNode::~TestShaderNode()
 {
 
 }
 
-bool ShaderScene::init()
+void TestShaderNode::testFunc()
 {
-	if (!Scene::init())
-	{
-		return false;
-	}
-
 	this->testSubroutineUniform();
-
-	return true;
 }
 
-void ShaderScene::testImage()
-{
-	auto frameSize = Canvas::getInstance()->getView()->getFrameSize();
-
-	std::string filepath = "Resource/Image/world.jpg";
-
-	CtrlImage* pImage = CREATE_NODE(CtrlImage);
-	pImage->setImagePath(filepath);
-	pImage->setAnchorPoint(Vector2());
-	pImage->setVolume(frameSize);
-	this->addChild(pImage);
-}
-
-void ShaderScene::testShaderUniformBlock()
+void TestShaderNode::testShaderUniformBlock()
 {
 	std::string vPath = "Resource/shader/shader_v_1.glsl";
 	std::string fPath = "Resource/shader/shader_f_1.glsl";
@@ -75,7 +55,7 @@ void ShaderScene::testShaderUniformBlock()
 	}
 }
 
-void ShaderScene::testSubroutineUniform()
+void TestShaderNode::testSubroutineUniform()
 {
 	ShaderProgram* pProgram = CREATE_OBJECT(ShaderProgram);
 	std::string vlPath = "Resource/shader/lighting.glsl";

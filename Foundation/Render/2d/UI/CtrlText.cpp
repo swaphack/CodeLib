@@ -16,56 +16,16 @@ CtrlText::~CtrlText()
 
 bool CtrlText::init()
 {
-	CtrlFrame::init();
+	if (!CtrlFrame::init())
+	{
+		return false;
+	}
 
 	_notify->removeListens(ENP_TEXTURE_FRAME);
 
 	_notify->addListen(ENP_TEXT_FRAME, [&](){
 		this->onTextChange();
-	});
-
-	_notify->addListen(ENP_TEXTURE_FRAME, [&](){
-		const Texture* texture = _texFrame->getTexture();
-		if (texture == nullptr)
-		{
-			return;
-		}
-
-		math::Size size = math::Size(static_cast<float>(texture->getWidth()), static_cast<float>(texture->getHeight()));
-
-		TextureTool::setTexture2DCoords(&_texRect, size, _texFrame->getRect());
-
-		math::Vector3 orgin = math::Vector3();
-		math::Volume volume = math::Volume(static_cast<float>(texture->getWidth()), static_cast<float>(texture->getHeight()));
-		math::Vector3 anchor = math::Vector3(0.5f, 0.5f, 0.5f);
-		if (_textDefine.verticalAlignment == EVA_BOTTOM)
-		{
-		}
-		else if (_textDefine.verticalAlignment == EVA_CENTER)
-		{
-			orgin.setY((_volume.getHeight() - volume.getHeight()) * 0.5f);
-		}
-		else if (_textDefine.verticalAlignment == EVA_TOP)
-		{
-			orgin.setY(_volume.getHeight() - volume.getHeight());
-		}
-
-		if (_textDefine.horizontalAlignment == EHA_LEFT)
-		{
-		}
-		else if (_textDefine.verticalAlignment == EHA_CENTER)
-		{
-			orgin.setX((_volume.getWidth() - volume.getWidth()) * 0.5f);
-		}
-		else if (_textDefine.verticalAlignment == EHA_RIGHT)
-		{
-			orgin.setX(_volume.getWidth() - volume.getWidth());
-		}
-
-		TextureTool::setTexture2DVertexts(&_texRect, orgin, volume, anchor);
-		TextureTool::setTexture2DFlip(&_texRect, _bFlipX, _bFlipY);
-	});
-	
+	});	
 
 	return true;
 }
@@ -169,11 +129,15 @@ math::Size CtrlText::getDimensions()
 	return math::Size(_textDefine.width, _textDefine.height);
 }
 
-void CtrlText::setColor(const sys::Color4B& color)
+void CtrlText::setTextColor(const sys::Color3B& color)
 {
-	ColorProtocol::setColor(color);
 	_textDefine.color = color;
 	this->notify(ENP_TEXT_FRAME);
+}
+
+const sys::Color3B& render::CtrlText::getTextColor()
+{
+	return _textDefine.color;
 }
 
 void CtrlText::onTextChange()
@@ -184,12 +148,63 @@ void CtrlText::onTextChange()
 		return;
 	}
 
+	this->setTextureWithRect(texture);
+
 	if (_textDefine.width == 0 || _textDefine.height == 0)
 	{
 		this->setWidth(static_cast<float>(texture->getWidth()));
 		this->setHeight(static_cast<float>(texture->getHeight()));
 	}
-	this->setTextureWithRect(texture);
+
+	math::Size size = math::Size(static_cast<float>(texture->getWidth()), static_cast<float>(texture->getHeight()));
+	TextureTool::setTexture2DCoords(&_texRect, size, _texFrame->getRect());
+
+
+	math::Vector3 anchor = math::Vector3(0.5f, 0.5f, 0.5f);
+	math::Vector3 orgin = getOrgin();
+	math::Volume volume = math::Volume(static_cast<float>(texture->getWidth()), static_cast<float>(texture->getHeight()));
+
+	TextureTool::setTexture2DVertexts(&_texRect, orgin, volume, anchor);
+	TextureTool::setTexture2DFlip(&_texRect, _bFlipX, _bFlipY);
 }
+
+math::Vector3 render::CtrlText::getOrgin()
+{
+	math::Vector3 orgin = math::Vector3();
+	if (_texFrame == nullptr || _texFrame->getTexture() == nullptr)
+	{
+		return orgin;
+	}
+	
+	math::Volume volume = math::Volume(static_cast<float>(_texFrame->getTexture()->getWidth()), static_cast<float>(_texFrame->getTexture()->getHeight()));
+	
+	if (_textDefine.verticalAlignment == EVA_BOTTOM)
+	{
+	}
+	else if (_textDefine.verticalAlignment == EVA_CENTER)
+	{
+		orgin.setY((_volume.getHeight() - volume.getHeight()) * 0.5f);
+	}
+	else if (_textDefine.verticalAlignment == EVA_TOP)
+	{
+		orgin.setY(_volume.getHeight() - volume.getHeight());
+	}
+
+	if (_textDefine.horizontalAlignment == EHA_LEFT)
+	{
+	}
+	else if (_textDefine.verticalAlignment == EHA_CENTER)
+	{
+		orgin.setX((_volume.getWidth() - volume.getWidth()) * 0.5f);
+	}
+	else if (_textDefine.verticalAlignment == EHA_RIGHT)
+	{
+		orgin.setX(_volume.getWidth() - volume.getWidth());
+	}
+
+	return orgin;
+}
+
+
 
 

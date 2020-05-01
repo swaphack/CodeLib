@@ -59,7 +59,7 @@ public:
 	~FT_LABEL();
 public:
 	// 加载文本
-	void load(const TextDefine& textDefine, LabelStream* stream);
+	bool load(const TextDefine& textDefine, LabelStream* stream);
 	// 清空缓存
 	void clear();
 protected:
@@ -68,12 +68,12 @@ protected:
 	// 加载字符数据
 	FT_CHAR_DATA* loadChar(uint64_t ch, int fontSize);
 	// 初始化FT模块
-	void initFT(const char* filepath, int size);
+	bool initFT(const char* filepath, int size);
 	// 是否FT模块
 	void disposeFT();
 private:
 	// 将数据写入流中
-	void writeStream(uint64_t ch, LabelStream* stream);
+	void writeStream(uint64_t ch, LabelStream* stream, const sys::Color3B& color);
 private:
 	FT_Library    _library;
 	FT_Face       _face;
@@ -101,28 +101,31 @@ FT_LABEL::~FT_LABEL()
 	this->clear();
 }
 
-void FT_LABEL::load(const TextDefine& textDefine, LabelStream* stream)
+bool FT_LABEL::load(const TextDefine& textDefine, LabelStream* stream)
 {
-	this->initFT(textDefine.filepath.c_str(), (int)textDefine.fontSize);
+	if (!this->initFT(textDefine.filepath.c_str(), (int)textDefine.fontSize))
+	{
+		return false;
+	}
 
 	FT_CHAR_DATA* gData = loadChar(char('g'), (int)textDefine.fontSize);
 	if (gData == nullptr)
 	{
-		return;
+		return false;
 	}
 	_lowY = gData->deltaY;
 	_fontSize = (int)textDefine.fontSize;
 	stream->setLineHeight(gData->advY);
 	if (textDefine.text.empty())
 	{
-		return;
+		return false;
 	}
 	char* text = (char*)textDefine.text.c_str();
 	int length = -1;
 	wchar_t* dest = sys::CharsetHelper::convertToWideChar(text, length);
 	if (dest == nullptr || length == -1)
 	{
-		return;
+		return false;
 	}
  	wchar_t* ptr = dest;
 	int offset = 0;
@@ -138,7 +141,7 @@ void FT_LABEL::load(const TextDefine& textDefine, LabelStream* stream)
 	offset = 0;
 	while (*ptr != 0 && offset < length)
 	{
-		this->writeStream(*ptr, stream);
+		this->writeStream(*ptr, stream, textDefine.color);
 		ptr++;
 		offset++;
 	}
@@ -148,6 +151,8 @@ void FT_LABEL::load(const TextDefine& textDefine, LabelStream* stream)
 	free (dest);
 	this->disposeFT();
 	_datas.clear();
+
+	return true;
 }
 
 void FT_LABEL::clear()
@@ -228,31 +233,33 @@ FT_CHAR_DATA* FT_LABEL::loadChar(uint64_t ch, int fontSize)
 	return data;
 }
 
-void FT_LABEL::initFT(const char* filepath, int size)
+bool FT_LABEL::initFT(const char* filepath, int size)
 {
 	_error = FT_Init_FreeType(&_library);
 	if (_error != 0)
 	{
-		return;
+		return false;
 	}
 
 	_error = FT_New_Face(_library, filepath, 0, &_face);
 	if (_error != 0)
 	{
-		return;
+		return false;
 	}
 
 	_error = FT_Select_Charmap(_face, FT_ENCODING_UNICODE);
 	if (_error != 0)
 	{
-		return;
+		return false;
 	}
 
 	_error = FT_Set_Pixel_Sizes(_face, size, size);
 	if (_error != 0)
 	{
-		return;
+		return false;
 	}
+
+	return true;
 }
 
 void FT_LABEL::disposeFT()
@@ -270,7 +277,7 @@ void FT_LABEL::disposeFT()
 	}
 }
 
-void FT_LABEL::writeStream(uint64_t ch, LabelStream* stream)
+void FT_LABEL::writeStream(uint64_t ch, LabelStream* stream, const sys::Color3B& color)
 {
 	if (ch == '\n')
 	{
@@ -305,19 +312,18 @@ void FT_LABEL::writeStream(uint64_t ch, LabelStream* stream)
 			{
 				_vl = data->data[i + width*j];
 			}
-			if (_vl == 0)
+
+			uint8_t bit = _vl == 0 ? 0 : 255;
+			if (bit == 0)
 			{
-				pBuf[(4 * i + (height - j - 1) * width * RGBA_PIXEL_UNIT)] = (uint8_t)0;
-				pBuf[(4 * i + (height - j - 1) * width * RGBA_PIXEL_UNIT) + 1] = (uint8_t)0;
-				pBuf[(4 * i + (height - j - 1) * width * RGBA_PIXEL_UNIT) + 2] = (uint8_t)0;
-				pBuf[(4 * i + (height - j - 1) * width * RGBA_PIXEL_UNIT) + 3] = (uint8_t)0;
+				memset(pBuf + RGBA_PIXEL_UNIT * i + (height - j - 1) * width * RGBA_PIXEL_UNIT,
+					0, RGBA_PIXEL_UNIT);
 			}
 			else
 			{
-				pBuf[(4 * i + (height - j - 1) * width * RGBA_PIXEL_UNIT)] = (uint8_t)255;
-				pBuf[(4 * i + (height - j - 1) * width * RGBA_PIXEL_UNIT) + 1] = (uint8_t)255;
-				pBuf[(4 * i + (height - j - 1) * width * RGBA_PIXEL_UNIT) + 2] = (uint8_t)255;
-				pBuf[(4 * i + (height - j - 1) * width * RGBA_PIXEL_UNIT) + 3] = (uint8_t)_vl;
+				uint8_t ary[RGBA_PIXEL_UNIT] = { color.red, color.green, color.blue, bit };
+				memcpy(pBuf + RGBA_PIXEL_UNIT * i + (height - j - 1) * width * RGBA_PIXEL_UNIT,
+					ary, RGBA_PIXEL_UNIT);
 			}
 		}
 	}
@@ -492,6 +498,31 @@ void LabelStream::format(HorizontalAlignment ha)
 	}
 }
 
+void render::LabelStream::setLineHeight(sys::ss_t val)
+{
+	_lineHeight = val;
+}
+
+sys::ss_t render::LabelStream::getLineHeight() const
+{
+	return _lineHeight;
+}
+
+bool render::LabelStream::isFixWidth()
+{
+	return _fixWidth != 0;
+}
+
+sys::ss_t render::LabelStream::getFixWidth()
+{
+	return _fixWidth;
+}
+
+void render::LabelStream::setFixWidth(sys::ss_t width)
+{
+	_fixWidth = width;
+}
+
 
 
 //////////////////////////////////////////////////////////////////////////
@@ -510,7 +541,11 @@ void ImageLabel::load(const TextDefine& textDefine)
 	_stream->setFixWidth((sys::ss_t)textDefine.width * RGBA_PIXEL_UNIT);
 
 	FT_LABEL* label = new FT_LABEL();
-	label->load(textDefine, _stream);
+	if (!label->load(textDefine, _stream))
+	{
+		SAFE_DELETE(label);
+		return;
+	}
 	SAFE_DELETE(label);
 
 	if (_stream->isFixWidth())
@@ -522,9 +557,9 @@ void ImageLabel::load(const TextDefine& textDefine)
 	uint8_t* destPixels = (uint8_t *)malloc(sizeof(uint8_t)* count);
 	memcpy(destPixels, _stream->getData(), sizeof(uint8_t)* count);
 
-	this->setPixels(destPixels, _stream->getWidth() / RGBA_PIXEL_UNIT, _stream->getHeigth(), 3);
-	this->setFormat(TexImageDataFormat::RGB);
-	this->setInternalFormat(TexImageInternalFormat::RGB);
+	this->setPixels(destPixels, _stream->getWidth() / RGBA_PIXEL_UNIT, _stream->getHeigth(), RGBA_PIXEL_UNIT);
+	this->setFormat(TexImageDataFormat::RGBA);
+	this->setInternalFormat(TexImageInternalFormat::RGBA);
 
 	free(destPixels);
 	_stream->clear();

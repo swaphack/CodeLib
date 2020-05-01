@@ -27,14 +27,14 @@ namespace render
 		// 重置游标
 		void resetOffset();
 
-		void setFixWidth(sys::ss_t width) { _fixWidth = width; }
-		sys::ss_t getFixWidth() { return _fixWidth; }
+		void setFixWidth(sys::ss_t width);
+		sys::ss_t getFixWidth();
 		// 固定宽度
-		bool isFixWidth() { return _fixWidth != 0; }
+		bool isFixWidth();
 
 		// 行高
-		sys::ss_t getLineHeight() const { return _lineHeight; }
-		void setLineHeight(sys::ss_t val) { _lineHeight = val; }
+		sys::ss_t getLineHeight() const;
+		void setLineHeight(sys::ss_t val);
 
 		// 写入当行文本
 		void writeOneLineBlock(int width, int height, const char* buffer, int deltaY);

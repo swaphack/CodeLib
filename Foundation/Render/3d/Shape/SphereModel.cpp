@@ -115,7 +115,7 @@ void SphereModel::draw()
 	const math::Vector3& scale = getScale();
 	float scaleX = scale.getX() * _radius / volume.getWidth();
 	float scaleY = scale.getY() * _radius / volume.getHeight();
-	float scaleZ = scale.getZ() * _radius / volume.getDeep();
+	float scaleZ = scale.getZ() * _radius / volume.getDepth();
 	glScalef(scaleX, scaleY, scaleZ);
 
 	glEnable(GL_TEXTURE_2D);

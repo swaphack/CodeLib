@@ -10,7 +10,7 @@ Texture::Texture()
 :_textureID(0)
 ,_width(0)
 ,_height(0)
-,_deep(0)
+,_depth(0)
 {
 }
 
@@ -19,6 +19,50 @@ Texture::~Texture()
 	G_TEXTURE_CACHE->removeTexture(this);
 	GLTexture::deleteTexture(_textureID);
 	_textureID = 0;
+}
+
+bool render::Texture::isEnable()
+{
+	if (_textureID == 0)
+		return false;
+	if (_width == 0 || _height == 0)
+		return false;
+	return true;
+}
+
+void render::Texture::setDepth(uint32_t val)
+{
+	_depth = val;
+}
+
+uint32_t render::Texture::getDepth() const
+{
+	return _depth;
+}
+
+void render::Texture::setHeight(uint32_t val)
+{
+	_height = val;
+}
+
+uint32_t render::Texture::getHeight() const
+{
+	return _height;
+}
+
+void render::Texture::setWidth(uint32_t val)
+{
+	_width = val;
+}
+
+int render::Texture::getWidth() const
+{
+	return _width;
+}
+
+uint32_t render::Texture::getTextureID() const
+{
+	return _textureID;
 }
 
 //////////////////////////////////////////////////////////////////////////

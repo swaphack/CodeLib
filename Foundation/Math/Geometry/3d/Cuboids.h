@@ -30,7 +30,7 @@ namespace math
 		float getZ() const;
 		float getWidth() const;
 		float getHeight() const;
-		float getDeep() const;
+		float getDepth() const;
 		float getMinX() const;
 		float getMaxX() const;
 		float getMinY() const;

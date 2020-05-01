@@ -41,7 +41,7 @@ namespace render
 		float height;
 
 		// 颜色
-		sys::Color4B color;
+		sys::Color3B color;
 
 		// 水平对齐方式
 		HorizontalAlignment horizontalAlignment;

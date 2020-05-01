@@ -13,11 +13,11 @@ Volume::Volume(float w, float h, float d)
 {
 	this->setWidth(w);
 	this->setHeight(h);
-	this->setDeep(d);
+	this->setDepth(d);
 }
 
 Volume::Volume(const Volume& volumn)
-	: Volume(volumn.getWidth(), volumn.getHeight(), volumn.getDeep())
+	: Volume(volumn.getWidth(), volumn.getHeight(), volumn.getDepth())
 {
 }
 
@@ -30,7 +30,7 @@ void Volume::set(float w, float h, float d)
 {
 	this->setWidth(w);
 	this->setHeight(h);
-	this->setDeep(h);
+	this->setDepth(h);
 }
 
 void Volume::set(float w, float h)
@@ -41,14 +41,14 @@ void Volume::set(float w, float h)
 
 Volume Volume::operator*(const Vector3& vec) const
 {
-	return Volume(getWidth() * vec.getX(), getHeight() * vec.getY(), getDeep() * vec.getZ());
+	return Volume(getWidth() * vec.getX(), getHeight() * vec.getY(), getDepth() * vec.getZ());
 }
 
 Volume& Volume::operator*=(const Vector3& vec)
 {
 	setWidth(getWidth() * vec.getX());
 	setHeight(getHeight() * vec.getY());
-	setDeep(getDeep() * vec.getZ());
+	setDepth(getDepth() * vec.getZ());
 
 	return *this;
 }

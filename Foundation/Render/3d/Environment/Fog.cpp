@@ -23,8 +23,8 @@ void Fog::drawSample()
 	sys::Color4F c;
 	convertColor4BTo4F(getColor(), c);
 
-	float nearValue = _near / Tool::getGLViewSize().getDeep();
-	float farValue = _far / Tool::getGLViewSize().getDeep();
+	float nearValue = _near / Tool::getGLViewSize().getDepth();
+	float farValue = _far / Tool::getGLViewSize().getDepth();
 
 	GLState::enable(EnableModel::FOG);
 	GLState::setFogHint(_fogEffect);

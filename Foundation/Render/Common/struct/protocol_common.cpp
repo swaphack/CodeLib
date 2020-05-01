@@ -426,9 +426,9 @@ void BodyProtocol::setHeight(float h)
 	onBodyChange();
 }
 
-void BodyProtocol::setDeep(float d)
+void BodyProtocol::setDepth(float d)
 {
-	_volume.setDeep(d);
+	_volume.setDepth(d);
 	onBodyChange();
 }
 
@@ -442,9 +442,9 @@ float BodyProtocol::getHeight()
 	return _volume.getHeight();
 }
 
-float BodyProtocol::getDeep()
+float BodyProtocol::getDepth()
 {
-	return _volume.getDeep();
+	return _volume.getDepth();
 }
 
 math::Size BodyProtocol::getSize()

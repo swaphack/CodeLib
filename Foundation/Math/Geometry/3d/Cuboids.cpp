@@ -50,9 +50,9 @@ float Cuboids::getHeight() const
 	return this->_size.getHeight();
 }
 
-float Cuboids::getDeep() const
+float Cuboids::getDepth() const
 {
-	return this->_size.getDeep();
+	return this->_size.getDepth();
 }
 
 float Cuboids::getMinX() const
@@ -82,7 +82,7 @@ float Cuboids::getMinZ() const
 
 float Cuboids::getMaxZ() const
 {
-	return getZ() + getDeep();
+	return getZ() + getDepth();
 }
 
 const Vector3& Cuboids::getOrigin() const
@@ -121,10 +121,10 @@ bool Cuboids::intersect(const Cuboids& cuboids)
 	points[1] = points[0] + Vector3(cuboids.getWidth(), 0, 0);
 	points[2] = points[0] + Vector3(cuboids.getWidth(), cuboids.getHeight(), 0);
 	points[3] = points[0] + Vector3(0, cuboids.getHeight(), 0);
-	points[4] = points[0] + Vector3(cuboids.getWidth(), 0, cuboids.getDeep());
-	points[5] = points[0] + Vector3(cuboids.getWidth(), cuboids.getHeight(), cuboids.getDeep());
-	points[6] = points[0] + Vector3(0, cuboids.getHeight(), cuboids.getDeep());
-	points[7] = points[0] + Vector3(cuboids.getWidth(), cuboids.getHeight(), cuboids.getDeep());
+	points[4] = points[0] + Vector3(cuboids.getWidth(), 0, cuboids.getDepth());
+	points[5] = points[0] + Vector3(cuboids.getWidth(), cuboids.getHeight(), cuboids.getDepth());
+	points[6] = points[0] + Vector3(0, cuboids.getHeight(), cuboids.getDepth());
+	points[7] = points[0] + Vector3(cuboids.getWidth(), cuboids.getHeight(), cuboids.getDepth());
 
 	for (int i = 0; i < 8; i++)
 	{

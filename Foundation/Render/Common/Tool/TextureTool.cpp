@@ -56,7 +56,7 @@ void TextureTool::setTexture3DVertexts(TextureCubeVertex* texcube, const math::V
 	// left down
 	x = position.getX() - volume.getWidth() * anchor.getX();
 	y = position.getY() - volume.getHeight() * anchor.getY();
-	z = position.getZ() - volume.getDeep() * anchor.getZ();
+	z = position.getZ() - volume.getDepth() * anchor.getZ();
 
 	point = Tool::convertToOGLPoisition(x, y, z);
 	texcube->setFrontLeftDownPoint(point);
@@ -64,7 +64,7 @@ void TextureTool::setTexture3DVertexts(TextureCubeVertex* texcube, const math::V
 	// right down
 	x = position.getX() + volume.getWidth() * (1 - anchor.getX());
 	y = position.getY() - volume.getHeight() * anchor.getY();
-	z = position.getZ() - volume.getDeep() * anchor.getZ();
+	z = position.getZ() - volume.getDepth() * anchor.getZ();
 
 	point = Tool::convertToOGLPoisition(x, y, z);
 	texcube->setFrontRightDownPoint(point);
@@ -72,7 +72,7 @@ void TextureTool::setTexture3DVertexts(TextureCubeVertex* texcube, const math::V
 	// right up
 	x = position.getX() + volume.getWidth() * (1 - anchor.getX());
 	y = position.getY() + volume.getHeight() * (1 - anchor.getY());
-	z = position.getZ() - volume.getDeep() * anchor.getZ();
+	z = position.getZ() - volume.getDepth() * anchor.getZ();
 
 	point = Tool::convertToOGLPoisition(x, y, z);
 	texcube->setFrontRightUpPoint(point);
@@ -80,7 +80,7 @@ void TextureTool::setTexture3DVertexts(TextureCubeVertex* texcube, const math::V
 	// left up
 	x = position.getX() - volume.getWidth() * anchor.getX();
 	y = position.getY() + volume.getHeight() * (1 - anchor.getY());
-	z = position.getZ() - volume.getDeep() * anchor.getZ();
+	z = position.getZ() - volume.getDepth() * anchor.getZ();
 
 	point = Tool::convertToOGLPoisition(x, y, z);
 	texcube->setFrontLeftUpPoint(point);
@@ -90,7 +90,7 @@ void TextureTool::setTexture3DVertexts(TextureCubeVertex* texcube, const math::V
 	// left down
 	x = position.getX() - volume.getWidth() * anchor.getX();
 	y = position.getY() - volume.getHeight() * anchor.getY();
-	z = position.getZ() + volume.getDeep() * (1 - anchor.getZ());
+	z = position.getZ() + volume.getDepth() * (1 - anchor.getZ());
 
 	point = Tool::convertToOGLPoisition(x, y, z);
 	texcube->setBackLeftDownPoint(point);
@@ -98,7 +98,7 @@ void TextureTool::setTexture3DVertexts(TextureCubeVertex* texcube, const math::V
 	// right down
 	x = position.getX() + volume.getWidth() * (1 - anchor.getX());
 	y = position.getY() - volume.getHeight() * anchor.getY();
-	z = position.getZ() + volume.getDeep() * (1 - anchor.getZ());
+	z = position.getZ() + volume.getDepth() * (1 - anchor.getZ());
 
 	point = Tool::convertToOGLPoisition(x, y, z);
 	texcube->setBackRightDownPoint(point);
@@ -106,7 +106,7 @@ void TextureTool::setTexture3DVertexts(TextureCubeVertex* texcube, const math::V
 	// right up
 	x = position.getX() + volume.getWidth() * (1 - anchor.getX());
 	y = position.getY() + volume.getHeight() * (1 - anchor.getY());
-	z = position.getZ() + volume.getDeep() * (1 - anchor.getZ());
+	z = position.getZ() + volume.getDepth() * (1 - anchor.getZ());
 
 	point = Tool::convertToOGLPoisition(x, y, z);
 	texcube->setBackRightUpPoint(point);
@@ -114,7 +114,7 @@ void TextureTool::setTexture3DVertexts(TextureCubeVertex* texcube, const math::V
 	// left up
 	x = position.getX() - volume.getWidth() * anchor.getX();
 	y = position.getY() + volume.getHeight() * (1 - anchor.getY());
-	z = position.getZ() + volume.getDeep() * (1 - anchor.getZ());
+	z = position.getZ() + volume.getDepth() * (1 - anchor.getZ());
 
 	point = Tool::convertToOGLPoisition(x, y, z);
 	texcube->setBackLeftUpPoint(point);

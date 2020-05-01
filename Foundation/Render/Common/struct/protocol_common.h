@@ -181,7 +181,7 @@ namespace render
 		// 设置高度
 		void setHeight(float h);
 		// 设置深度
-		void setDeep(float d);
+		void setDepth(float d);
 		// 设置体积
 		void setVolume(float w, float h, float d);
 		// 设置体积
@@ -195,7 +195,7 @@ namespace render
 		// 获取高度
 		float getHeight();
 		// 获取深度
-		float getDeep();
+		float getDepth();
 		// 获取体积
 		const math::Volume& getVolume();
 		// 获取面积

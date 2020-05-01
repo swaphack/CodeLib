@@ -173,7 +173,7 @@ void handNodeMesh(FileFbx* file, FbxNode* node)
 		const FbxVector4& pT = mat.GetT();
 		const FbxVector4& pR = mat.GetR();
 
-		FbxVector4 pS(1 / volume.getWidth(), 1 / volume.getHeight(), 1 / volume.getDeep());
+		FbxVector4 pS(1 / volume.getWidth(), 1 / volume.getHeight(), 1 / volume.getDepth());
 		pS = mat.MultS(pS);
 
 		FbxAMatrix nmat(pT, pR, pS);

@@ -100,7 +100,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>../../Foundation/System/;../../Foundation/Web/;../../Foundation/Render/;../../Foundation/UI/;../../Foundation/Algorithm;../../Foundation/Text/;../../Foundation/Math/;../../Lib/include/;../../Lib/include/freetype/;../../Lib/include/ffmpeg/;../../Lib/include/3ds/;../../Lib/include/obj/;../../Lib/include/fbx/;../../Lib/include/tga/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../Foundation/System/;../../Foundation/Web/;../../Foundation/Render/;../../Foundation/UI/;../../Foundation/Algorithm;../../Foundation/Text/;../../Foundation/Math/;../../Lib/include/;../../Lib/include/freetype/;../../Lib/include/ffmpeg/;../../Lib/include/3ds/;../../Lib/include/obj/;../../Lib/include/fbx/;../../Lib/include/tga/;/Class/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <BrowseInformation>true</BrowseInformation>
     </ClCompile>
     <Link>
@@ -172,20 +172,6 @@
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Main.cpp" />
-    <ClCompile Include="MainScene.cpp" />
-    <ClCompile Include="ShaderScene.cpp" />
-    <ClCompile Include="WndRender.cpp" />
-    <ClCompile Include="WndWeb.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="MainScene.h" />
-    <ClInclude Include="resource.h" />
-    <ClInclude Include="ShaderScene.h" />
-    <ClInclude Include="WndRender.h" />
-    <ClInclude Include="WndWeb.h" />
-  </ItemGroup>
-  <ItemGroup>
     <ResourceCompile Include="Resource.rc" />
   </ItemGroup>
   <ItemGroup>
@@ -213,6 +199,42 @@
     <Xml Include="Resource\Layout\Test.xml">
       <SubType>Designer</SubType>
     </Xml>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Class\GLRenderApplication.cpp" />
+    <ClCompile Include="Class\Main.cpp" />
+    <ClCompile Include="Class\Node\TestAudioNode.cpp" />
+    <ClCompile Include="Class\Node\TestDrawNode.cpp" />
+    <ClCompile Include="Class\Node\TestFuncNode.cpp" />
+    <ClCompile Include="Class\Node\TestImageNode.cpp" />
+    <ClCompile Include="Class\Node\TestLayoutNode.cpp" />
+    <ClCompile Include="Class\Node\TestMediaNode.cpp" />
+    <ClCompile Include="Class\Node\TestModelNode.cpp" />
+    <ClCompile Include="Class\Node\TestParticleNode.cpp" />
+    <ClCompile Include="Class\Node\TestShaderNode.cpp" />
+    <ClCompile Include="Class\Node\TestTextNode.cpp" />
+    <ClCompile Include="Class\Node\TestUINode.cpp" />
+    <ClCompile Include="Class\Node\TestUtilityNode.cpp" />
+    <ClCompile Include="Class\Scene\TestMainScene.cpp" />
+    <ClCompile Include="Class\WndWeb.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Class\GLRenderApplication.h" />
+    <ClInclude Include="Class\Node\import.h" />
+    <ClInclude Include="Class\Node\TestAudioNode.h" />
+    <ClInclude Include="Class\Node\TestDrawNode.h" />
+    <ClInclude Include="Class\Node\TestFuncNode.h" />
+    <ClInclude Include="Class\Node\TestImageNode.h" />
+    <ClInclude Include="Class\Node\TestLayoutNode.h" />
+    <ClInclude Include="Class\Node\TestMediaNode.h" />
+    <ClInclude Include="Class\Node\TestModelNode.h" />
+    <ClInclude Include="Class\Node\TestParticleNode.h" />
+    <ClInclude Include="Class\Node\TestShaderNode.h" />
+    <ClInclude Include="Class\Node\TestTextNode.h" />
+    <ClInclude Include="Class\Node\TestUINode.h" />
+    <ClInclude Include="Class\Node\TestUtilityNode.h" />
+    <ClInclude Include="Class\Scene\TestMainScene.h" />
+    <ClInclude Include="Class\WndWeb.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

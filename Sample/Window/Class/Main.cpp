@@ -1,8 +1,10 @@
 #include <windows.h>
-#include <stdio.h>
+#include <cstdio>
+#include <string>
 
-#include "resource.h"
-#include "WndRender.h"
+#include "system.h"
+#include "render.h"
+#include "GLRenderApplication.h"
 
 using namespace sys;
 
@@ -28,7 +30,7 @@ int  WINAPI WinMain(HINSTANCE	hInstance,                 // 当前窗口实例
 	int millis = 17;
 
 	render::GLWindow* pWindow = new render::GLWindow();
-	pWindow->createWindow("OpenGL", width, height, millis, new WndRender());
+	pWindow->createWindow("OpenGL", width, height, millis, new GLRenderApplication());
 
 	return 0;                                                                                                                          
 }

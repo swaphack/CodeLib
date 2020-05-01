@@ -17,7 +17,7 @@ namespace math
 	public:
 		CREATE_AXIS(Width, 0);
 		CREATE_AXIS(Height, 1);
-		CREATE_AXIS(Deep, 2);
+		CREATE_AXIS(Depth, 2);
 
 		void set(float w, float h, float d);
 		void set(float w, float h);

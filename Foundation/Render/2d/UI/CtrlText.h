@@ -56,8 +56,11 @@ namespace render
 		// 获取显示区域
 		math::Size getDimensions();
 		// 设置颜色
-		void setColor(const sys::Color4B& color);
+		void setTextColor(const sys::Color3B& color);
+		// 颜色
+		const sys::Color3B& getTextColor();
 	protected:
+		math::Vector3 getOrgin();
 		virtual void onTextChange();
 	private:
 		// 文本结构
