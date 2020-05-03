@@ -44,25 +44,25 @@ TextureRectVertex::TextureRectVertex()
 void TextureRectVertex::setLeftDownPoint(const math::Vector3& point)
 {
 	int index = 0;
-	memcpy(vertices + index, point.getValue(), point.getSize() * sizeof(float));
+	memcpy(vertices + index, point.getValue(), point.getSize());
 }
 
 void TextureRectVertex::setRightDownPoint(const math::Vector3& point)
 {
 	int index = 3;
-	memcpy(vertices + index, point.getValue(), point.getSize() * sizeof(float));
+	memcpy(vertices + index, point.getValue(), point.getSize());
 }
 
 void TextureRectVertex::setRightUpPoint(const math::Vector3& point)
 {
 	int index = 6;
-	memcpy(vertices + index, point.getValue(), point.getSize() * sizeof(float));
+	memcpy(vertices + index, point.getValue(), point.getSize());
 }
 
 void TextureRectVertex::setLeftUpPoint(const math::Vector3& point)
 {
 	int index = 9;
-	memcpy(vertices + index, point.getValue(), point.getSize() * sizeof(float));
+	memcpy(vertices + index, point.getValue(), point.getSize());
 }
 
 void TextureRectVertex::setLeftDownColor(const sys::Color4F& color)
@@ -104,25 +104,25 @@ void TextureRectVertex::setLeftUpColor(const sys::Color4F& color)
 void TextureRectVertex::setLeftDownUV(const math::Vector2& point)
 {
 	int index = 0;
-	memcpy(uvs + index, point.getValue(), point.getSize() * sizeof(float));
+	memcpy(uvs + index, point.getValue(), point.getSize());
 }
 
 void TextureRectVertex::setRightDownUV(const math::Vector2& point)
 {
 	int index = 2;
-	memcpy(uvs + index, point.getValue(), point.getSize() * sizeof(float));
+	memcpy(uvs + index, point.getValue(), point.getSize());
 }
 
 void TextureRectVertex::setRightUpUV(const math::Vector2& point)
 {
 	int index = 4;
-	memcpy(uvs + index, point.getValue(), point.getSize() * sizeof(float));
+	memcpy(uvs + index, point.getValue(), point.getSize());
 }
 
 void TextureRectVertex::setLeftUpUV(const math::Vector2& point)
 {
 	int index = 6;
-	memcpy(uvs + index, point.getValue(), point.getSize() * sizeof(float));
+	memcpy(uvs + index, point.getValue(), point.getSize());
 }
 
 void TextureRectVertex::flipX()
