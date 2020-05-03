@@ -17,7 +17,7 @@ namespace sys
 	public:
 		static Memory* getInstance();
 		// 分配一个缓存
-		MemoryData* alloct(const std::string& name, uint32_t size);
+		MemoryData* alloct(const std::string& name, size_t size);
 		// 销毁一个缓存
 		void destory(const std::string& name);
 		// 清空

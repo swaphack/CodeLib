@@ -10,14 +10,15 @@ namespace math
 	*/
 	struct Vector : public Array<float>
 	{
-// 创建轴
+		// 创建轴
 #define CREATE_AXIS(Name, Index)\
-public: \
-	float get##Name() const { return _values[Index]; }\
-	void set##Name(float val) { _values[Index] = val; }
+	public: \
+	float get##Name() const { return getValue(Index); }\
+	void set##Name(float val) { setValue(Index, val); }
 	public:
 		Vector();
 		Vector(int32_t len);
+		virtual ~Vector();
 	public:
 		/**
 		*	向量的模
@@ -81,7 +82,7 @@ public: \
 		{
 			T t;
 			Vector* p = &t;
-			p->set(this->_values, this->_length);
+			p->set(getValue(), this->getLength());
 			return t;
 		}
 	public:

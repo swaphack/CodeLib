@@ -103,7 +103,7 @@ const char* PacketActivityListener::createRequest(const char* sessionID, sys::Da
 
 	int parseLen = header->Length;
 	int cursor = netData->pos + parseLen;
-	if (cursor > netData->size)
+	if (cursor > netData->getSize())
 	{
 		return nullptr;
 	}

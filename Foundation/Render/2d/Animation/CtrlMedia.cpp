@@ -104,7 +104,7 @@ void CtrlMedia::stop()
 	}
 }
 
-void CtrlMedia::setMediaURL(const std::string& url, bool defaultSize)
+void CtrlMedia::loadFromURL(const std::string& url, bool defaultSize)
 {
 	_mediaDefine.filepath = url;
 

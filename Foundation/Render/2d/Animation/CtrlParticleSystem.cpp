@@ -124,8 +124,7 @@ void CtrlParticleSystem::updateSelf(float interval)
 {
 	std::vector<ParticleNode*> removeNodes;
 
-	std::vector<sys::Object*>::iterator it;
-	it = _children.begin();
+	auto it = _children.begin();
 	while (it != _children.end())
 	{
 		ParticleNode* node = dynamic_cast<ParticleNode*>(*it);

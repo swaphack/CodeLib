@@ -204,6 +204,7 @@
     <ClCompile Include="Class\GLRenderApplication.cpp" />
     <ClCompile Include="Class\Main.cpp" />
     <ClCompile Include="Class\Node\TestAudioNode.cpp" />
+    <ClCompile Include="Class\Node\TestBufferNode.cpp" />
     <ClCompile Include="Class\Node\TestDrawNode.cpp" />
     <ClCompile Include="Class\Node\TestFuncNode.cpp" />
     <ClCompile Include="Class\Node\TestImageNode.cpp" />
@@ -222,6 +223,7 @@
     <ClInclude Include="Class\GLRenderApplication.h" />
     <ClInclude Include="Class\Node\import.h" />
     <ClInclude Include="Class\Node\TestAudioNode.h" />
+    <ClInclude Include="Class\Node\TestBufferNode.h" />
     <ClInclude Include="Class\Node\TestDrawNode.h" />
     <ClInclude Include="Class\Node\TestFuncNode.h" />
     <ClInclude Include="Class\Node\TestImageNode.h" />

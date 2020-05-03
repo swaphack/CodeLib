@@ -14,23 +14,16 @@ namespace math
 	template<typename T>
 	struct Array2D
 	{
-	protected:
-		// 单元值
-		T* _values = nullptr;
-		// 列数
-		int32_t _width = 0;
-		// 行数
-		int32_t _height = 0;
 	public:
 		Array2D()
 		{
 			this->reset(1, 1);
 		}
-		Array2D(int32_t h, int32_t w)
+		Array2D(size_t h, size_t w)
 		{
 			this->reset(h, w);
 		}
-		Array2D(T* val, int32_t h, int32_t w)
+		Array2D(T* val, size_t h, size_t w)
 		{
 			this->set(val, h, w);
 		}
@@ -48,39 +41,39 @@ namespace math
 		*/
 		const T* getValue() const
 		{
-			return _values;
+			return (T*)_values;
 		}
 		/**
 		*	单元值
 		*/
-		void getValue(T* array, int32_t len) const
+		void getValue(T* array, size_t len) const
 		{
-			int32_t length = _width * _height;
-			assert(len >= length);
-			memcpy(array, _values, length * sizeof(T));
+			size_t length = _width * _height;
+			assert(len <= length);
+			memcpy(array, _values, len * sizeof(T));
 		}
 		/**
 		*	列数
 		*/
-		int32_t getWidth() const
+		size_t getWidth() const
 		{
 			return _width;
 		}
 		/**
 		*	行数
 		*/
-		int32_t getHeight() const
+		size_t getHeight() const
 		{
 			return _height;
 		}
 		/**
 		*	大小
 		*/
-		int32_t getSize() const
+		size_t getSize() const
 		{
 			return _width * _height;
 		}
-		void set(T* val, int32_t h, int32_t w)
+		void set(const T* val, int32_t h, int32_t w)
 		{
 			assert(val != nullptr && w > 0 && h > 0);
 
@@ -89,14 +82,14 @@ namespace math
 			_height = h;
 			_width = w;
 			int size = _width * _height * sizeof(T);
-			_values = (T*)malloc(size);
-			memset(_values, 0, size);
-			memcpy(_values, val, size);
+			uint8_t* values = (uint8_t*)malloc(size);
+			memcpy(values, (uint8_t*)val, size);
+			_values = values;
 		}
 		/**
 		*	重置
 		*/
-		void reset(int32_t h, int32_t w)
+		void reset(size_t h, size_t w)
 		{
 			assert(w != 0 && h != 0);
 
@@ -105,8 +98,9 @@ namespace math
 			_height = h;
 			_width = w;
 			int size = _width * _height * sizeof(T);
-			_values = (T*)malloc(size);
-			memset(_values, 0, size);
+			uint8_t* values = (uint8_t*)malloc(size);
+			memset(values, 0, size);
+			_values = values;
 		}
 		/**
 		*	重置
@@ -122,95 +116,96 @@ namespace math
 		/**
 		*	获取指定位置的数据
 		*/
-		const T& getValue(int32_t index) const
+		const T& getValue(size_t index) const
 		{
 			assert(index >= 0 && index < _width * _height);
 
-			return _values[index];
+			return *(T*)(_values + index * sizeof(T));
 		}
 
 		/**
 		*	获取h行，w列的数据
 		*/
-		const T& getValue(int32_t i, int32_t j) const
+		const T& getValue(size_t i, size_t j) const
 		{
 			assert(i >= 0 && j >= 0 && i < _height && j < _width);
 
-			return _values[i * _width + j];
+			int index = i * _width + j;
+			return getValue(index);
 		}
 		/**
 		*	设置h行，w列的数据
 		*/
-		void setValue(int32_t i, int32_t j, const T& value)
+		void setValue(size_t i, size_t j, const T& value)
 		{
-			assert(i >= 0 && j >= 0 && i < _height && j < _width);
-
-			_values[i * _width + j] = value;
+			int index = i * _width + j;
+			memcpy(_values + index * sizeof(T), &value, sizeof(T));
 		}
 		/**
 		*	设置指定位置的数据
 		*/
-		void setValue(int32_t index, const T& value)
+		void setValue(size_t index, const T& value)
 		{
 			assert(index >= 0 && index < _width * _height);
 
-			_values[index] = value;
+			memcpy(_values + index * sizeof(T), &value, sizeof(T));
 		}
 	public:
 		/**
 		*	设置指定行的值
 		*/
-		void setRow(int32_t row, const Array<T>& value)
+		void setRow(size_t row, const Array<T>& value)
 		{
 			assert(row >= 0 && row < _height);
 
-			assert(value.getSize() == _width);
+			assert(value.getLength() == _width);
 
-			for (int32_t i = 0; i < _width; i++)
+			for (size_t i = 0; i < _width; i++)
 			{
-				_values[row * _width + i] = value.getValue(i);
+				int index = row * _width + i;
+				setValue(index, value.getValue(i));
 			}
 		}
 		/**
 		*	获取指定行的值
 		*/
-		Array<T> getRow(int32_t row)
+		Array<T> getRow(size_t row)
 		{
 			assert(row >= 0 && row < _height);
 
 			Array<T> vector(_width);
 
-			for (int32_t i = 0; i < _width; i++)
+			for (size_t i = 0; i < _width; i++)
 			{
-				vector.setValue(i, _values[row * _width + i]);
+				vector.setValue(i, getValue(row * _width + i));
 			}
 		}
 		/**
 		*	设置指定列的值
 		*/
-		void setColumn(int32_t column, const Array<T>& value)
+		void setColumn(size_t column, const Array<T>& value)
 		{
 			assert(column >= 0 && column < _width);
 
-			assert(value.getSize() == _height);
+			assert(value.getLength() == _height);
 
-			for (int32_t i = 0; i < _height; i++)
+			for (size_t i = 0; i < _height; i++)
 			{
-				_values[i * _height + column] = value.getValue(i);
+				setValue(i * _height + column, value.getValue(i));
 			}
 		}
 		/**
 		*	获取指定列的值
 		*/
-		Array<T> getColumn(int32_t column)
+		Array<T> getColumn(size_t column)
 		{
 			assert(column >= 0 && column < _width);
 
 			Array<T> vector(_height);
 
-			for (int32_t i = 0; i < _height; i++)
+			for (size_t i = 0; i < _height; i++)
 			{
-				vector.setValue(i, _values[i * _height + column]);
+				vector.setValue(i, getValue(i * _height + column));
 			}
 		}
 	public:
@@ -222,11 +217,11 @@ namespace math
 			Array2D mat;
 			mat.reset(_height, _width);
 
-			for (int32_t i = 0; i < _height; i++)
+			for (size_t i = 0; i < _height; i++)
 			{
-				for (int32_t j = 0; j < _width; j++)
+				for (size_t j = 0; j < _width; j++)
 				{
-					mat.setValue(i * _height + j, _values[i * _width + j]);
+					mat.setValue(i * _height + j, getValue(i * _width + j));
 				}
 			}
 
@@ -239,10 +234,10 @@ namespace math
 		Array2D& operator=(const Array2D& mat)
 		{
 			this->reset(mat._height, mat._width);
-			int32_t len = mat._width * mat._height;
-			for (int32_t i = 0; i < len; i++)
+			size_t len = mat._width * mat._height;
+			for (size_t i = 0; i < len; i++)
 			{
-				_values[i] = mat[i];
+				setValue(i, mat.getValue(i));
 			}
 
 			return *this;
@@ -250,27 +245,27 @@ namespace math
 		/**
 		*	获取指定位置的数据
 		*/
-		T& operator[](int32_t index)
+		T& operator[](size_t index)
 		{
 			assert(index >= 0 && index < _width * _height);
 
-			return _values[index];
+			return *((T*)(_values + index * sizeof(T)));
 		}
 		/**
 		*	获取指定位置的数据
 		*/
-		const T& operator[](int32_t index) const
+		const T& operator[](size_t index) const
 		{
 			assert(index >= 0 && index < _width * _height);
-			return _values[index];
+			return *((T*)(_values + index * sizeof(T)));
 		}
 	public:
 		std::string toString()
 		{
 			std::ostringstream stream;
-			for (int i = 0; i < _height; i++)
+			for (size_t i = 0; i < _height; i++)
 			{
-				for (int j = 0; j < _width; j++)
+				for (size_t j = 0; j < _width; j++)
 				{
 					T fValue = getValue(i, j);
 					stream << fValue;
@@ -292,6 +287,20 @@ namespace math
 				free(_values);
 				_values = nullptr;
 			}
+			_width = 0;
+			_height = 0;
 		}
+	protected:
+		T* getPtr()
+		{
+			return (T*)_values;
+		}
+	private:
+		// 单元值
+		uint8_t* _values = nullptr;
+		// 列数
+		size_t _width = 0;
+		// 行数
+		size_t _height = 0;
 	};
 }

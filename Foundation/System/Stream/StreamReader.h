@@ -13,7 +13,7 @@ namespace sys
 	{
 	public:
 		StreamReader();
-		StreamReader(const char* data, ss_t size);
+		StreamReader(const char* data, size_t size);
 		virtual ~StreamReader();
 	public:
 		virtual char readInt8();
@@ -26,8 +26,8 @@ namespace sys
 		virtual uint64_t readUInt64();
 		virtual float readFloat();
 		virtual double readDouble();
-		virtual char* readString(ss_t size);
-		virtual char* readRemain(ss_t& size);
+		virtual char* readString(size_t size);
+		virtual char* readRemain(size_t& size);
 		virtual std::string readString();
 	public:
 		template<typename T>
@@ -37,7 +37,7 @@ namespace sys
 	template<typename T>
 	T StreamReader::read()
 	{
-		if ((int32_t)(getCursor() + sizeof(T)) > this->getLength())
+		if ((size_t)(getCursor() + sizeof(T)) > this->getLength())
 		{
 			return 0;
 		}

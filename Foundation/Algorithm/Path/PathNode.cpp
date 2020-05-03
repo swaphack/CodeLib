@@ -17,7 +17,7 @@ void PathNode::setTag(int tag)
 	_tag = tag;
 }
 
-int PathNode::getTag()
+int PathNode::getTag() const
 {
 	return _tag;
 }

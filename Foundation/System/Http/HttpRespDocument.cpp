@@ -25,7 +25,7 @@ bool HttpRespDocument::parseResponse(const char* msg, int32_t size)
 		return false;
 	}
 
-	String line = msg;
+	String line(msg, size);
 
 	if (!(line.startWith(DEFAULT_HTTP_HEADER)))
 	{

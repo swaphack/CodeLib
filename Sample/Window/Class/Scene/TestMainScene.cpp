@@ -18,7 +18,8 @@ bool TestMainScene::init()
 		return false;
 	}
 
-	this->addChild(CREATE_NODE(TestTextNode));
+	this->addChild(CREATE_NODE(TestModelNode));
+	//this->addChild(CREATE_NODE(TestShaderNode));
 
 	return true;
 }

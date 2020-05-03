@@ -22,12 +22,33 @@ void TestModelNode::testFunc()
 void TestModelNode::testCubeModel()
 {
 	auto pTexture = G_TEXTURE_CACHE->createTexture2D("Resource/Image/NeHe.png");
+	auto pTexture1 = G_TEXTURE_CACHE->createTexture2D("Resource/Image/1.jpg");
+	std::string textureName = "face";
+	std::string textureName1 = "face1";
+
 	CubeModel* pModel = CREATE_NODE(CubeModel);
-	pModel->setTexture("face", pTexture);
+	pModel->addTexture(textureName, pTexture);
+	pModel->addTexture(textureName1, pTexture1);
+
+	pModel->setAllFacesTexture(textureName);
+	pModel->setFaceTexture(EMF_FRONT, textureName1);
+	pModel->setFaceTexture(EMF_LEFT, textureName1);
+	pModel->setFaceTexture(EMF_TOP, textureName1);
+
 	pModel->setAnchorPoint(math::Vector3(0.5f, 0.5f, 0.5f));
-	pModel->setPosition(100, 100, 15);
+	pModel->setPosition(300, 300, 15);
 	pModel->setVolume(200, 200, 200);
 	this->addChild(pModel);
+
+	// has bug
+	RotateByAction* pRotateByAction = CREATE_ACTION(RotateByAction);
+	pRotateByAction->setRotation(0, 45, 0);
+	pRotateByAction->setDuration(5);
+
+	RepeateForeverAction* pRepeateAction = CREATE_ACTION(RepeateForeverAction);
+	pRepeateAction->setAction(pRotateByAction);
+
+	pModel->getActionProxy()->runAction(pRepeateAction);
 }
 
 void TestModelNode::testSphereModel()
@@ -57,65 +78,7 @@ void TestModelNode::addLight()
 
 void TestModelNode::testMultiFaceCube()
 {
-	int nCount = 2;
-	for (int i = 0; i < nCount; i++)
-	{
-		ImageDefine imageDefine = { "Resource/Image/NeHe.png", EIF_PNG };
-		Texture2D* texture2D = G_TEXTURE_CACHE->createTexture2D(imageDefine);
-
-		TexFrame* frame = CREATE_OBJECT(TexFrame);
-		frame->setTextureWithRect(texture2D);
-
-		MultiFaceCube* pModel = CREATE_NODE(MultiFaceCube);
-		pModel->setPosition(i * 100, i * 100, i * 100);
-		pModel->setAllFaceFrame(frame);
-		pModel->setVolume(200, 200, 200);
-		pModel->setRotation(45, 45, 0);
-
-		MaterialDetail* mat = CREATE_OBJECT(MaterialDetail);
-		mat->setShiness(1.0f);
-		mat->setAmbient(255, 255, 255, 255);
-		mat->setDiffuse(255, 255, 255, 255);
-		mat->setSpecular(0, 0, 0, 255);
-		mat->setEmisiion(255, 255, 255, 255);
-		pModel->setAllFaceMaterial(mat);
-
-		this->addChild(pModel);
-
-		float interval = 2;
-		float rx = 180;
-		float ry = 180;
-		float rz = 45;
-		RotateByAction* pRotateByAction = CREATE_ACTION(RotateByAction);
-		pRotateByAction->setRotation(rx, ry, rz);
-		pRotateByAction->setDuration(interval);
-
-		MoveToAction* pMoveToAction = CREATE_ACTION(MoveToAction);
-		pMoveToAction->setDuration(interval);
-		pMoveToAction->setPosition(200, 200, 20);
-
-		ScaleByAction* pScaleByAction = CREATE_ACTION(ScaleByAction);
-		pScaleByAction->setDuration(interval);
-		pScaleByAction->setScale(1.5f, 1.5f, 1.5f);
-
-		ScaleByAction* pScaleByAction2 = CREATE_ACTION(ScaleByAction);
-		pScaleByAction2->setDuration(interval);
-		pScaleByAction2->setScale(-1.5f, -1.5f, -1.5f);
-
-		SequenceAction* pSequenece = CREATE_ACTION(SequenceAction);
-		pSequenece->addAction(pRotateByAction);
-		pSequenece->addAction(pScaleByAction);
-		pSequenece->addAction(pScaleByAction2);
-
-		RepeateForeverAction* pRepeateAction = CREATE_ACTION(RepeateForeverAction);
-		pRepeateAction->setAction(pSequenece);
-
-		SpawnAction* pSpawnAction = CREATE_ACTION(SpawnAction);
-		pSpawnAction->addAction(pRepeateAction);
-		pSpawnAction->addAction(pMoveToAction);
-
-		pModel->getActionProxy()->runAction(pRepeateAction);
-	}
+	
 }
 
 void TestModelNode::testFog()
@@ -189,34 +152,28 @@ void TestModelNode::testFbx()
 
 void TestModelNode::testStencil()
 {
-	Texture2D* texture2D = G_TEXTURE_CACHE->createTexture2D("Resource/Image/NeHe.png");
-
-	TexFrame* frame = CREATE_OBJECT(TexFrame);
-	frame->setTextureWithRect(texture2D);
-
-	Stencil* pStencil = CREATE_NODE(Stencil);
-	pStencil->setVolume(400, 400, 400);
-
-	this->addChild(pStencil);
-
-	MultiFaceCube* pCube = CREATE_NODE(MultiFaceCube);
-	pCube->setVolume(400, 400, 200);
-	pCube->setColor(sys::Color3B(255, 255, 255));
-	pCube->setAllFaceFrame(frame);
-	pCube->setRotation(45, 45, 0);
-	pStencil->setStencilNode(pCube);
-
-	texture2D = G_TEXTURE_CACHE->createTexture2D("Resource/Image/sqi.png");
-
-	frame = CREATE_OBJECT(TexFrame);
-	frame->setTextureWithRect(texture2D);
-
-	pCube = CREATE_NODE(MultiFaceCube);
-	pCube->setVolume(100, 100, 100);
-	pCube->setRotation(-45, -45, 0);
-	pCube->setAllFaceFrame(frame);
-
-	pStencil->addChild(pCube);
+// 	Texture2D* texture2D = G_TEXTURE_CACHE->createTexture2D("Resource/Image/NeHe.png");
+// 
+// 	Stencil* pStencil = CREATE_NODE(Stencil);
+// 	pStencil->setVolume(400, 400, 400);
+// 
+// 	this->addChild(pStencil);
+// 
+// 	CubeModel* pCube = CREATE_NODE(CubeModel);
+// 	pCube->setVolume(400, 400, 200);
+// 	pCube->setColor(sys::Color3B(255, 255, 255));
+// 	pCube->setAllFacesTexture(texture2D);
+// 	pCube->setRotation(45, 45, 0);
+// 	pStencil->setStencilNode(pCube);
+// 
+// 	texture2D = G_TEXTURE_CACHE->createTexture2D("Resource/Image/sqi.png");
+// 
+// 	pCube = CREATE_NODE(CubeModel);
+// 	pCube->setVolume(100, 100, 100);
+// 	pCube->setRotation(-45, -45, 0);
+// 	pCube->setAllFaceFrame(frame);
+// 
+// 	pStencil->addChild(pCube);
 }
 
 void TestModelNode::testCamera()

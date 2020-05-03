@@ -13,23 +13,23 @@ namespace math
 	{
 	public:
 		Determinant();
-		Determinant(int32_t order);
-		Determinant(float* val, int32_t order);
+		Determinant(size_t order);
+		Determinant(const float* val, size_t order);
 		Determinant(const Determinant& det);
 		virtual ~Determinant();
 	public:
 		/**
 		*	阶数
 		*/
-		int32_t getOrder() const;
+		size_t getOrder() const;
 		/**
 		*	重置
 		*/
-		void reset(int32_t order);
+		void reset(size_t order);
 		/**
 		*	设置
 		*/
-		void set(float* val, int32_t order);
+		void set(const float* val, size_t order);
 	public:
 		/**
 		*	行列式相乘
@@ -43,11 +43,11 @@ namespace math
 		/**
 		*	相乘
 		*/
-		Determinant mul(float k, int32_t row);
+		Determinant mul(float k, size_t row);
 		/**
 		*	相加
 		*/
-		Determinant add(const Determinant& det, int32_t row);
+		Determinant add(const Determinant& det, size_t row);
 		/**
 		*	值
 		*/
@@ -55,7 +55,7 @@ namespace math
 		/**
 		*	余子式
 		*/
-		Determinant getMinor(int32_t i, int32_t j) const;
+		Determinant getMinor(size_t i, size_t j) const;
 	public:
 		/**
 		*	获取逆序数

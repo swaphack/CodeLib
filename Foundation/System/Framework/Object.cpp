@@ -5,7 +5,7 @@
 using namespace sys;
 
 
-Object::Object( int64_t id /*= 0*/ )
+Object::Object(uint64_t id /*= 0*/)
 :_id(id)
 ,RetainCount(1)
 ,_bAutoRelease(false)
@@ -21,7 +21,7 @@ Object::~Object()
 	}
 }
 
-int64_t Object::getID() const
+uint64_t Object::getID() const
 {
 	return _id;
 }
@@ -51,7 +51,7 @@ void Object::autoRelease()
 	this->_bAutoRelease = true;
 }
 
-void Object::setID(int64_t id)
+void Object::setID(uint64_t id)
 {
 	_id = id;
 }

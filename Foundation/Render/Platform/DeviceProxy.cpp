@@ -57,3 +57,8 @@ void DeviceProxy::onKeyBoardButtonHandler(sys::BoardKey key, sys::ButtonStatus t
 {
 	_keyboardManager->onDispatcher(key, type);
 }
+
+void render::DeviceProxy::setTouchMananger(const TouchManager* touchManager)
+{
+	_touchManager = (TouchManager*)touchManager;
+}

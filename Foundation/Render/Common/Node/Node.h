@@ -3,6 +3,7 @@
 #include "system.h"
 #include "Notify.h"
 #include "Common/struct/import.h"
+#include <vector>
 
 namespace render
 {
@@ -84,12 +85,10 @@ namespace render
 		Node* getChildByTag(int tag);
 	public:
 		// 根据名称获取字节点
-		Node* getChildByName(const char* name); 
+		Node* getChildByName(const std::string& name); 
 	public:
 		// 获取第一个子节点
 		Node* getFirstChild();
-		std::vector<sys::Object*>::iterator beginChild();
-		std::vector<sys::Object*>::iterator endChild();
 	public:
 		// 设置数据
 		void setUserData(void* data);
@@ -145,9 +144,12 @@ namespace render
 		virtual void updateTranform();
 		// 翻转空间矩阵
 		virtual void inverseTranform();
+	public:
+		void notifyToAll(int id);
+
+		void notify(int id);
 	protected:
 		void notifyEvents();
-		void notify(int id);
 	protected:
 		// 对子节点进行排序
 		virtual void sortChildren();
@@ -178,7 +180,7 @@ namespace render
 		// 父节点
 		Node* _parent;
 		// 子节点
-		sys::List _children;
+		std::vector<Node*> _children;
 		// 是否可见
 		bool _bVisibled;
 		// 是否可点击

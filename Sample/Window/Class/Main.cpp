@@ -2,6 +2,8 @@
 #include <cstdio>
 #include <string>
 
+//#include <vld.h>
+
 #include "system.h"
 #include "render.h"
 #include "GLRenderApplication.h"

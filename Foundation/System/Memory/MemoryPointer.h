@@ -12,7 +12,7 @@ namespace sys
 	class MemoryPointer
 	{
 	public:
-		MemoryPointer(int8_t* ptr, uint32_t size);
+		MemoryPointer(int8_t* ptr, size_t size);
 		MemoryPointer(const MemoryData& data);
 		virtual ~MemoryPointer();
 	public:
@@ -23,7 +23,7 @@ namespace sys
 		/**
 		*	大小
 		*/
-		uint32_t getSize();
+		size_t getSize();
 		/**
 		*	重置
 		*/
@@ -31,22 +31,22 @@ namespace sys
 		/**
 		*	分配空间
 		*/ 
-		MemoryPointer* alloctPtr(uint32_t size);
+		MemoryPointer* alloctPtr(size_t size);
 	protected:
 		void clear();
 	private:
 		/**
 		*	大小
 		*/
-		uint32_t _size = 0;
+		size_t _size = 0;
 		/**
 		*	数据
 		*/
 		int8_t* _value = nullptr;
 
 		// 当前游标位置
-		uint32_t _cursor;
+		size_t _cursor;
 		// 已分配的内存块
-		std::map<uint32_t, MemoryPointer*> _alloctedPtrs;
+		std::map<size_t, MemoryPointer*> _alloctedPtrs;
 	};
 }

@@ -29,8 +29,8 @@ namespace render
 		// 结束
 		virtual void stop();
 	public:
-		// 设置媒体文件
-		void setMediaURL(const std::string& url, bool defaultSize = true);
+		// 加载媒体文件
+		void loadFromURL(const std::string& url, bool defaultSize = true);
 	protected:
 		// 获取下一阵的纹理帧
 		Texture2D* getNextTexture();

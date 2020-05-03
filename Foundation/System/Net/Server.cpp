@@ -89,7 +89,7 @@ void Server::sendBroadcast(NetData* data)
 	std::map<int32_t, DataQueue*>::iterator it = _sendDatas.begin();
 	while (it != _sendDatas.end())
 	{
-		NetData* temp = new NetData(data->data, data->size);
+		NetData* temp = new NetData(*data);
 		it->second->pushData(temp);
 		it++;
 	}
@@ -273,11 +273,11 @@ void Server::_flushSendData()
 		if (data)
 		{
 			Socket* socket = _clients[sockId];
-			size = socket->write(data->data + data->pos, data->size - data->pos);
+			size = socket->write(data->getCursorPtr(), data->getRemainSize());
 			if (size > 0)
 			{
 				data->pos = data->pos + size;
-				if (data->pos >= data->size)
+				if (data->pos >= data->getSize())
 				{
 					SAFE_DELETE(data);
 					_sendDatas[sockId]->popData();

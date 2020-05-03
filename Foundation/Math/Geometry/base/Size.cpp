@@ -25,3 +25,8 @@ void Size::set(float w, float h)
 	this->setWidth(w);
 	this->setHeight(h);
 }
+
+math::Size::~Size()
+{
+
+}

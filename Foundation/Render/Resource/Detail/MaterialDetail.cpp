@@ -6,7 +6,7 @@ using namespace	render;
 
 MaterialDetail::MaterialDetail()
 {
-	float size = 4 * sizeof(float);
+	size_t size = 4 * sizeof(float);
 	_matrialAmbient = (float*)malloc(size);
 	_matrialDiffuse = (float*)malloc(size);
 	_matrialSpecular = (float*)malloc(size);

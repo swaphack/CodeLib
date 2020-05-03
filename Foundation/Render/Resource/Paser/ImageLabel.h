@@ -27,14 +27,14 @@ namespace render
 		// 重置游标
 		void resetOffset();
 
-		void setFixWidth(sys::ss_t width);
-		sys::ss_t getFixWidth();
+		void setFixWidth(uint32_t width);
+		uint32_t getFixWidth();
 		// 固定宽度
 		bool isFixWidth();
 
 		// 行高
-		sys::ss_t getLineHeight() const;
-		void setLineHeight(sys::ss_t val);
+		uint32_t getLineHeight() const;
+		void setLineHeight(uint32_t val);
 
 		// 写入当行文本
 		void writeOneLineBlock(int width, int height, const char* buffer, int deltaY);
@@ -50,13 +50,13 @@ namespace render
 		void format(HorizontalAlignment ha);
 	private:
 		// 写入开始的位置x
-		sys::ss_t _offsetX;
+		uint32_t _offsetX;
 		// 写入开始的位置y
-		sys::ss_t _offsetY;
+		uint32_t _offsetY;
 		// 行高
-		sys::ss_t _lineHeight;
+		uint32_t _lineHeight;
 		// 固定宽度
-		sys::ss_t _fixWidth;
+		uint32_t _fixWidth;
 
 		std::stack<int> _lineWidthStack;
 	};

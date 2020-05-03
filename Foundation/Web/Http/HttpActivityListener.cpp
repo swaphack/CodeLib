@@ -147,7 +147,7 @@ sys::HttpRequest* HttpActivityListener::createRequest(const char* sessionID, sys
 	int parseLen = pDoc->getStreamSize();
 	int cursor = parseLen + netData->pos;
 
-	if (cursor > netData->size)
+	if (cursor > netData->getSize())
 	{
 		delete pDoc;
 		return nullptr;
@@ -186,7 +186,7 @@ sys::HttpResponse* HttpActivityListener::createResponse(const char* sessionID, s
 	int parseLen = pDoc->getStreamSize();
 	int cursor = parseLen + netData->pos;
 
-	if (cursor > netData->size)
+	if (cursor > netData->getSize())
 	{
 		delete pDoc;
 		return nullptr;

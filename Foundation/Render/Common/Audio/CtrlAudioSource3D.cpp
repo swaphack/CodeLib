@@ -117,7 +117,7 @@ void CtrlAudioSource3D::set3DCustomRolloff(const std::vector<math::Vector3>& poi
 
 	AUDIO_SET_FUNC(_channel, set3DCustomRolloff, pVector, count);
 
-	delete pVector;
+	delete[] pVector;
 }
 
 std::vector<math::Vector3> CtrlAudioSource3D::get3DCustomRolloff()

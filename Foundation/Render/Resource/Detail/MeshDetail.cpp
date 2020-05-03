@@ -26,17 +26,8 @@ void MeshDetail::setNormals(int count, float* normals, int unitSize)
 
 void MeshDetail::setColors(int count, float* colors, int unitSize)
 {
-	float* vertors = (float*)malloc(count * sizeof(float));
-
-	for (int i = 0; i < count; i++)
-	{
-		vertors[i] = colors[i];
-	}
-
-	_colors.init(count, vertors, sizeof(float));
+	_colors.init(count, colors, sizeof(float));
 	_colors.setTypeSize(unitSize);
-
-	free(vertors);
 }
 
 void MeshDetail::setUVs(int count, float* texCoords, int unitSize)
@@ -44,6 +35,8 @@ void MeshDetail::setUVs(int count, float* texCoords, int unitSize)
 	_uvs.init(count, texCoords, sizeof(float));
 	_uvs.setTypeSize(unitSize);
 }
+
+
 
 const MeshMemoryData& MeshDetail::getVertices()
 {
@@ -104,3 +97,5 @@ void MeshDetail::setMeshName(const std::string& name)
 {
 	_meshName = name;
 }
+
+

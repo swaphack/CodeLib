@@ -30,7 +30,7 @@ Memory* Memory::getInstance()
 	return s_pMemory;
 }
 
-MemoryData* Memory::alloct(const std::string& name, uint32_t size)
+MemoryData* Memory::alloct(const std::string& name, size_t size)
 {
 	ASSERT(name.empty() && size > 0);
 	ASSERT(_caches.find(name) != _caches.end());

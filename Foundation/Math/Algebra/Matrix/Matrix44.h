@@ -16,6 +16,7 @@ namespace math
 		Matrix44(const Matrix44& mat);
 		Matrix44(const Matrix& mat);
 		Matrix44(float* value);
+		virtual ~Matrix44();
 	public:
 		/**
 		*	标准化,单位矩阵

@@ -4,23 +4,33 @@
 #include <cstdint>
 #include <queue>
 
+#include "Memory/MemoryData.h"
+
 namespace sys
 {
 	struct NetData
 	{
 	public:
 		// 数据
-		char* data;
-		// 大小
-		int32_t size;
+		MemoryData data;
 		// 游标
 		int32_t pos;
 	public:
 		NetData();
 		NetData(const std::string& value);
 		NetData(const char* value, int32_t size);
+		NetData(const NetData& value);
+		NetData(const MemoryData& value);
 		~NetData();
 	public:
+		/**
+		*	当前指针位置
+		*/
+		const char* getPtr();
+		/**
+		*	大小
+		*/
+		uint32_t getSize();
 		/**
 		*	当前指针位置
 		*/
@@ -36,6 +46,6 @@ namespace sys
 		/**
 		*	在头部插入
 		*/
-		void insert(const char* data, int32_t len);
+		void insert(const char* value, int32_t len);
 	};
 }

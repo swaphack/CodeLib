@@ -19,6 +19,7 @@ namespace math
 		Vector4(const Vector2& vector);
 		Vector4(const Vector3& vector);
 		Vector4(const Vector4& vector);
+		virtual ~Vector4();
 	public:
 		CREATE_AXIS(X, 0);
 		CREATE_AXIS(Y, 1);

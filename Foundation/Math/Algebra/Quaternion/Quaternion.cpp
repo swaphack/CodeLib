@@ -81,10 +81,10 @@ Quaternion Quaternion::operator*(const Quaternion& quaternion)
 
 Quaternion::operator Matrix44()
 {
-	float a = _values[0];
-	float b = _values[1];
-	float c = _values[2];
-	float d = _values[3];
+	float a = (*this)[0];
+	float b = (*this)[1];
+	float c = (*this)[2];
+	float d = (*this)[3];
 
 	Matrix44 mat;
 	mat.setValue(0, a); mat.setValue(1, -b); mat.setValue(2, d); mat.setValue(3, -c);
@@ -202,6 +202,11 @@ Matrix44 Quaternion::mat(const Quaternion& quaternion)
 	mat44[15] = 1.0f;
 
 	return mat44;
+
+}
+
+math::Quaternion::~Quaternion()
+{
 
 }
 

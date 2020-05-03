@@ -160,11 +160,11 @@ void Client::_flushData()
 	NetData* data = _sendDatas.topData();
 	if (data)
 	{
-		size = _socket->write(data->data + data->pos, data->size - data->pos);
+		size = _socket->write(data->getCursorPtr(), data->getRemainSize());
 		if (size > 0)
 		{
 			data->pos = data->pos + size;
-			if (data->pos >= data->size)
+			if (data->pos >= data->getSize())
 			{
 				SAFE_DELETE(data);
 				_sendDatas.popData();

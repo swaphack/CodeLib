@@ -227,3 +227,8 @@ bool Vector2::isThreePointsOnSameLine(const Vector2& point0, const Vector2& poin
 
 	return det.getMagnitude() == 0;
 }
+
+math::Vector2::~Vector2()
+{
+
+}

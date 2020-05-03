@@ -498,12 +498,12 @@ void LabelStream::format(HorizontalAlignment ha)
 	}
 }
 
-void render::LabelStream::setLineHeight(sys::ss_t val)
+void render::LabelStream::setLineHeight(uint32_t val)
 {
 	_lineHeight = val;
 }
 
-sys::ss_t render::LabelStream::getLineHeight() const
+uint32_t render::LabelStream::getLineHeight() const
 {
 	return _lineHeight;
 }
@@ -513,12 +513,12 @@ bool render::LabelStream::isFixWidth()
 	return _fixWidth != 0;
 }
 
-sys::ss_t render::LabelStream::getFixWidth()
+uint32_t render::LabelStream::getFixWidth()
 {
 	return _fixWidth;
 }
 
-void render::LabelStream::setFixWidth(sys::ss_t width)
+void render::LabelStream::setFixWidth(uint32_t width)
 {
 	_fixWidth = width;
 }
@@ -538,7 +538,7 @@ ImageLabel::~ImageLabel()
 
 void ImageLabel::load(const TextDefine& textDefine)
 {
-	_stream->setFixWidth((sys::ss_t)textDefine.width * RGBA_PIXEL_UNIT);
+	_stream->setFixWidth((uint32_t)textDefine.width * RGBA_PIXEL_UNIT);
 
 	FT_LABEL* label = new FT_LABEL();
 	if (!label->load(textDefine, _stream))

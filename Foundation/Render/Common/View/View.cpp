@@ -56,11 +56,10 @@ void View::initView()
 
 void View::updateView()
 {
+	uint32_t bitfield = (uint32_t)ClearBufferMask::COLOR_BUFFER_BIT | (uint32_t)ClearBufferMask::DEPTH_BUFFER_BIT | (uint32_t)ClearBufferMask::STENCIL_BUFFER_BIT;
 	GLRender::clearColor(0, 0, 0, 0);
 	GLRender::clearDepth(1.0f);
-	GLRender::clearStencil(0);
-
-	GLRender::clearBuffer(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+	GLRender::clearBuffer(bitfield);
 
 	GLDebug::showError();
 }

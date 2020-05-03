@@ -26,7 +26,7 @@ void Model::drawSample()
 
 	//PRINT("=============begin=============\n");
 
-	auto meshes = _modelDetail->getMeshes();
+	const std::map<int, MeshDetail*>& meshes = _modelDetail->getMeshes();
 	for (auto item0 : meshes)
 	{
 		//auto mat = item0.second->getMatrix();
@@ -37,28 +37,28 @@ void Model::drawSample()
 		auto pMesh = item0.second;
 		
 
-		auto normals = pMesh->getNormals();
+		const MeshMemoryData& normals = pMesh->getNormals();
 		if (normals.getLength() > 0)
 		{
 			GLClientArrays::enableClientState(ClientArrayType::NORMAL_ARRAY);
 			GLClientArrays::setNormalPointer(DataType::FLOAT, 0, normals.getValue());
 
 		}
-		auto vertices = pMesh->getVertices();
+		const MeshMemoryData& vertices = pMesh->getVertices();
 		if (vertices.getLength() > 0)
 		{
 			GLClientArrays::enableClientState(ClientArrayType::VERTEX_ARRAY);
 			GLClientArrays::setVertexPointer(vertices.getTypeSize(), DataType::FLOAT, 0, vertices.getValue());
 
 		}
-		auto texcoords = pMesh->getUVs();
+		const MeshMemoryData& texcoords = pMesh->getUVs();
 		if (texcoords.getLength() > 0)
 		{
 			GLClientArrays::enableClientState(ClientArrayType::TEXTURE_COORD_ARRAY);
 			GLClientArrays::setTexCoordPointer(texcoords.getTypeSize(), DataType::FLOAT, 0, texcoords.getValue());
 		}
 
-		auto colors = pMesh->getColors();
+		const MeshMemoryData& colors = pMesh->getColors();
 		if (colors.getLength() > 0)
 		{
 			GLClientArrays::enableClientState(ClientArrayType::COLOR_ARRAY);
@@ -82,7 +82,7 @@ void Model::drawSample()
 			}
 		}
 
-		auto indices = pMesh->getIndices();
+		const MeshMemoryData& indices = pMesh->getIndices();
 		if (indices.getLength() > 0)
 		{
 			GLClientArrays::drawElements(DrawMode::TRIANGLES, indices.getLength(), IndexDataType::UNSIGNED_INT, indices.getValue());

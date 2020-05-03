@@ -7,13 +7,13 @@
 
 using namespace sys;
 
-StreamWriter::StreamWriter(ss_t size)
+StreamWriter::StreamWriter(size_t size)
 :Stream(new StreamBaseRef())
 {
 	this->realloct(size);
 }
 
-StreamWriter::StreamWriter(const char* data, ss_t size)
+StreamWriter::StreamWriter(const char* data, size_t size)
 : Stream(new StreamBaseRef())
 {
 	this->setData(data, size);
@@ -76,7 +76,7 @@ void StreamWriter::writeDouble( double data )
 	this->write<double>(data);
 }
 
-void StreamWriter::writeString(char* data, ss_t size)
+void StreamWriter::writeString(char* data, size_t size)
 {
 	while (getCursor() + size > this->getCapacity())
 	{
@@ -94,7 +94,7 @@ void StreamWriter::writeString(const std::string& data)
 	this->writeString((char*)data.c_str(), data.size());
 }
 
-void StreamWriter::setCursorAndLength(ss_t pos)
+void StreamWriter::setCursorAndLength(size_t pos)
 {
 	this->setCursor(pos);
 
@@ -104,14 +104,14 @@ void StreamWriter::setCursorAndLength(ss_t pos)
 	}
 }
 
-void StreamWriter::realloct(ss_t size)
+void StreamWriter::realloct(size_t size)
 {
 	if (this->getStream() == nullptr)
 	{
 		return;
 	}
 
-	ss_t len = getStream()->getLength();
+	size_t len = getStream()->getLength();
 	char* newData = StreamHelper::mallocStream(size, (void*)getStream()->getData(), len);
 
 	getStream()->setData(newData, size);

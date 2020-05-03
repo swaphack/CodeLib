@@ -9,21 +9,17 @@ ImageDetail::ImageDetail()
 ,_height(0)
 ,_format(TexImageDataFormat::RGB)
 , _internalFormat(TexImageInternalFormat::RGB)
-,_pixels(nullptr)
 {
 
 }
 
 ImageDetail::~ImageDetail()
 {
-	SAFE_FREE(_pixels);
 }
 void ImageDetail::setPixels(uint8_t * val, uint32_t width, uint32_t height, int nUnitSize)
 {
 	int len = width * height * nUnitSize;
-	SAFE_FREE(_pixels);
-	_pixels = (uint8_t *)malloc(len);
-	memcpy(_pixels, val, len);
+	_data.init(len, val);
 	_width = width;
 	_height = height;
 }
@@ -37,9 +33,9 @@ void ImageDetail::setFormat(TexImageDataFormat val)
 {
 	_format = val;
 }
-uint8_t * ImageDetail::getPixels() const
+uint8_t* ImageDetail::getPixels() const
 {
-	return _pixels;
+	return (uint8_t*)_data.getPtr();
 }
 
 TexImageInternalFormat ImageDetail::getInternalFormat() const

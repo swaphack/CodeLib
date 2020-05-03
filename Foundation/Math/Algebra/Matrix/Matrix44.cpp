@@ -38,24 +38,24 @@ Matrix44::Matrix44(float* value)
 
 void Matrix44::normalize()
 {
-	_values[0] = 1;  _values[1] = 0;  _values[2] = 0;  _values[3] = 0; // x
-	_values[4] = 0;  _values[5] = 1;  _values[6] = 0;  _values[7] = 0; // y
-	_values[8] = 0;  _values[9] = 0;  _values[10] = 1; _values[11] = 0; // z
-	_values[12] = 0; _values[13] = 0; _values[14] = 0; _values[15] = 1; // translate
+	(*this)[0] = 1;  (*this)[1] = 0;  (*this)[2] = 0;  (*this)[3] = 0; // x
+	(*this)[4] = 0;  (*this)[5] = 1;  (*this)[6] = 0;  (*this)[7] = 0; // y
+	(*this)[8] = 0;  (*this)[9] = 0;  (*this)[10] = 1; (*this)[11] = 0; // z
+	(*this)[12] = 0; (*this)[13] = 0; (*this)[14] = 0; (*this)[15] = 1; // translate
 }
 
 void Matrix44::setTranslate(const Vector3& vector)
 {
-	_values[3] = vector.getX(); 
-	_values[7] = vector.getY(); 
-	_values[11] = vector.getZ();
+	(*this)[3] = vector.getX(); 
+	(*this)[7] = vector.getY(); 
+	(*this)[11] = vector.getZ();
 }
 
 void Matrix44::setScale(const Vector3& vector)
 {
-	_values[0] = vector.getX();
-	_values[5] = vector.getY();
-	_values[10] = vector.getZ();
+	(*this)[0] = vector.getX();
+	(*this)[5] = vector.getY();
+	(*this)[10] = vector.getZ();
 }
 
 void Matrix44::setRotate(const Vector3& rotation)
@@ -67,44 +67,44 @@ void Matrix44::setRotate(const Vector3& rotation)
 	float sinY = sin(rotation.getY());
 	float sinZ = sin(rotation.getZ());
 
-	_values[0] = cosY * cosZ;
-	_values[1] = -cosX * sinZ + sinX * sinY* cosZ;
-	_values[2] = sinX * sinZ + cosX * sinY * cosZ;
-	_values[3] = 0;
+	(*this)[0] = cosY * cosZ;
+	(*this)[1] = -cosX * sinZ + sinX * sinY* cosZ;
+	(*this)[2] = sinX * sinZ + cosX * sinY * cosZ;
+	(*this)[3] = 0;
 
-	_values[4] = cosY * sinZ;
-	_values[5] = cosX * cosZ + sinX * sinY * sinZ;
-	_values[6] = -sinX * cosZ + cosX * sinY * sinZ;
-	_values[7] = 0;
+	(*this)[4] = cosY * sinZ;
+	(*this)[5] = cosX * cosZ + sinX * sinY * sinZ;
+	(*this)[6] = -sinX * cosZ + cosX * sinY * sinZ;
+	(*this)[7] = 0;
 
-	_values[8] = - sinY;
-	_values[9] = sinX * cosY;
-	_values[10] = cosX * cosY;
-	_values[11] = 0;
+	(*this)[8] = - sinY;
+	(*this)[9] = sinX * cosY;
+	(*this)[10] = cosX * cosY;
+	(*this)[11] = 0;
 
-	_values[12] = 0;
-	_values[13] = 0;
-	_values[14] = 0;
-	_values[15] = 1;
+	(*this)[12] = 0;
+	(*this)[13] = 0;
+	(*this)[14] = 0;
+	(*this)[15] = 1;
 }
 
 void Matrix44::setRotateX(float x)
 {
-	_values[5] = cos(x); _values[6] = -sin(x);
-	_values[9] = sin(x); _values[10] = cos(x);
+	(*this)[5] = cos(x); (*this)[6] = -sin(x);
+	(*this)[9] = sin(x); (*this)[10] = cos(x);
 }
 
 void Matrix44::setRotateY(float y)
 {
-	_values[0] = cos(y); _values[2] = sin(y);
-	_values[8] = -sin(y); _values[10] = cos(y);
+	(*this)[0] = cos(y); (*this)[2] = sin(y);
+	(*this)[8] = -sin(y); (*this)[10] = cos(y);
 }
 
 void Matrix44::setRotateZ(float z)
 {
 	Matrix44 mat;
-	_values[0] = cos(z); _values[1] = -sin(z);
-	_values[4] = sin(z); _values[5] = cos(z);
+	(*this)[0] = cos(z); (*this)[1] = -sin(z);
+	(*this)[4] = sin(z); (*this)[5] = cos(z);
 }
 
 void Matrix44::setRotationByAxis(const Vector3& axis, float radian)
@@ -116,25 +116,25 @@ void Matrix44::setRotationByAxis(const Vector3& axis, float radian)
 	float v = axis.getY();
 	float w = axis.getZ();
 
-	_values[0] = cosR + (u * u) * (1 - cosR);
-	_values[1] = u * v * (1 - cosR) + w * sinR;
-	_values[2] = u * w * (1 - cosR) - v * sinR;
-	_values[3] = 0;
+	(*this)[0] = cosR + (u * u) * (1 - cosR);
+	(*this)[1] = u * v * (1 - cosR) + w * sinR;
+	(*this)[2] = u * w * (1 - cosR) - v * sinR;
+	(*this)[3] = 0;
 
-	_values[4] = u * v * (1 - cosR) - w * sinR;
-	_values[5] = cosR + v * v * (1 - cosR);
-	_values[6] = w * v * (1 - cosR) + u * sinR;
-	_values[7] = 0;
+	(*this)[4] = u * v * (1 - cosR) - w * sinR;
+	(*this)[5] = cosR + v * v * (1 - cosR);
+	(*this)[6] = w * v * (1 - cosR) + u * sinR;
+	(*this)[7] = 0;
 
-	_values[8] = u * w * (1 - cosR) + v * sinR;
-	_values[9] = v * w * (1 - cosR) - u * sinR;
-	_values[10] = cosR + w * w * (1 - cosR);
-	_values[11] = 0;
+	(*this)[8] = u * w * (1 - cosR) + v * sinR;
+	(*this)[9] = v * w * (1 - cosR) - u * sinR;
+	(*this)[10] = cosR + w * w * (1 - cosR);
+	(*this)[11] = 0;
 
-	_values[12] = 0;
-	_values[13] = 0;
-	_values[14] = 0;
-	_values[15] = 1;
+	(*this)[12] = 0;
+	(*this)[13] = 0;
+	(*this)[14] = 0;
+	(*this)[15] = 1;
 }
 
 void Matrix44::setRotationByLine(const Vector3& src, const Vector3& dest, float radian)
@@ -169,25 +169,25 @@ void Matrix44::setRotationByLine(const Vector3& src, const Vector3& dest, float 
 	float costheta = cos(radian);
 	float sintheta = sin(radian);
 
-	_values[0] = uu + (vv + ww) * costheta;
-	_values[1] = uv * (1 - costheta) + w * sintheta;
-	_values[2] = uw * (1 - costheta) - v * sintheta;
-	_values[3] = 0;
+	(*this)[0] = uu + (vv + ww) * costheta;
+	(*this)[1] = uv * (1 - costheta) + w * sintheta;
+	(*this)[2] = uw * (1 - costheta) - v * sintheta;
+	(*this)[3] = 0;
 
-	_values[4] = uv * (1 - costheta) - w * sintheta;
-	_values[5] = vv + (uu + ww) * costheta;
-	_values[6] = vw * (1 - costheta) + u * sintheta;
-	_values[7] = 0;
+	(*this)[4] = uv * (1 - costheta) - w * sintheta;
+	(*this)[5] = vv + (uu + ww) * costheta;
+	(*this)[6] = vw * (1 - costheta) + u * sintheta;
+	(*this)[7] = 0;
 
-	_values[8] = uw * (1 - costheta) + v * sintheta;
-	_values[9] = vw * (1 - costheta) - u * sintheta;
-	_values[10] = ww + (uu + vv) * costheta;
-	_values[11] = 0;
+	(*this)[8] = uw * (1 - costheta) + v * sintheta;
+	(*this)[9] = vw * (1 - costheta) - u * sintheta;
+	(*this)[10] = ww + (uu + vv) * costheta;
+	(*this)[11] = 0;
 
-	_values[12] = (a * (vv + ww) - u * (bv + cw)) * (1 - costheta) + (bw - cv) * sintheta;
-	_values[13] = (b * (uu + ww) - v * (au + cw)) * (1 - costheta) + (cu - aw) * sintheta;
-	_values[14] = (c * (uu + vv) - w * (au + bv)) * (1 - costheta) + (av - bu) * sintheta;
-	_values[15] = 1;
+	(*this)[12] = (a * (vv + ww) - u * (bv + cw)) * (1 - costheta) + (bw - cv) * sintheta;
+	(*this)[13] = (b * (uu + ww) - v * (au + cw)) * (1 - costheta) + (cu - aw) * sintheta;
+	(*this)[14] = (c * (uu + vv) - w * (au + bv)) * (1 - costheta) + (av - bu) * sintheta;
+	(*this)[15] = 1;
 }
 
 Matrix41 Matrix44::operator*(const Matrix41& mat)
@@ -206,17 +206,22 @@ Matrix44 Matrix44::operator*(const Matrix44& mat)
 
 Vector3 Matrix44::getEularAngle()
 {
-	float r32 = getValue(1, 2);
-	float r33 = getValue(2, 2);
-	float r31 = getValue(0, 2);
-	float r21 = getValue(0, 1);
-	float r11 = getValue(0, 0);
+	float r32 = getValue((size_t)1, (size_t)2);
+	float r33 = getValue((size_t)2, (size_t)2);
+	float r31 = getValue((size_t)0, (size_t)2);
+	float r21 = getValue((size_t)0, (size_t)1);
+	float r11 = getValue((size_t)0, (size_t)0);
 
 	float x = atan2(r32, r33);
 	float y = atan2(-r31, sqrt(pow(r32, 2)+ pow(r33, 2)));
 	float z = atan2(r21, r11);
 
 	return Vector3(x, y, z);
+}
+
+math::Matrix44::~Matrix44()
+{
+
 }
 
 

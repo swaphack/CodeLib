@@ -5,8 +5,6 @@
 using namespace sys;
 
 StreamBase::StreamBase()
-:_data(nullptr)
-,_length(0)
 {
 
 }
@@ -16,42 +14,33 @@ StreamBase::~StreamBase()
 	this->freeStream();
 }
 
-void StreamBase::setData(const char* data, ss_t size)
+void StreamBase::setData(const char* data, size_t size)
 {
-	ASSERT(data != nullptr && size > 0);
-
-	this->freeStream();
-
-	_data = StreamHelper::mallocStream((void*)data, size);
-	_length = size;
+	_memoryData.init(size, data);
 }
 
 const char* StreamBase::getData() const
 {
-	return _data;
+	return (const char*)_memoryData.getValue();
 }
 
-int32_t StreamBase::getLength() const
+size_t StreamBase::getLength() const
 {
-	return _length;
+	return _memoryData.getLength();
 }
 
 void StreamBase::freeStream()
 {
-	StreamHelper::freeStream(_data);
-	_data = nullptr;
-	_length = 0;
+	_memoryData.clear();
 }
 
-void StreamBase::setLength( int32_t length )
+void StreamBase::setLength(size_t length)
 {
-	_length = length;
+	_memoryData.resize(length);
 }
 
 //////////////////////////////////////////////////////////////////////////
 StreamBaseRef::StreamBaseRef()
-:_data(nullptr)
-, _length(0)
 {
 
 }
@@ -61,7 +50,7 @@ StreamBaseRef::~StreamBaseRef()
 	this->freeStream();
 }
 
-void StreamBaseRef::setData(const char* data, ss_t size)
+void StreamBaseRef::setData(const char* data, size_t size)
 {
 	ASSERT(data != nullptr && size > 0);
 
@@ -73,10 +62,10 @@ void StreamBaseRef::setData(const char* data, ss_t size)
 
 const char* StreamBaseRef::getData() const
 {
-	return _data;
+	return (const char*)_data;
 }
 
-int32_t StreamBaseRef::getLength() const
+size_t StreamBaseRef::getLength() const
 {
 	return _length;
 }
@@ -88,7 +77,7 @@ void StreamBaseRef::freeStream()
 	_length = 0;
 }
 
-void StreamBaseRef::setLength(int32_t length)
+void StreamBaseRef::setLength(size_t length)
 {
 	_length = length;
 }

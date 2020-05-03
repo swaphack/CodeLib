@@ -14,19 +14,19 @@ namespace sys
 		virtual ~Stream();
 	public:
 		// 设置数据内容
-		virtual void setData(const char* data, ss_t size);
+		virtual void setData(const char* data, size_t size);
 		// 分配的内存长度
-		ss_t getCapacity() const;
+		size_t getCapacity() const;
 		// 获取数据长度
-		ss_t getLength() const;
+		size_t getLength() const;
 		// 获取游标位置
-		ss_t getCursor() const;
+		size_t getCursor() const;
 		// 获取数据指针
 		const char* getData() const;
 		// 设置基础流,并标明是否释放旧的流数据
 		void setStream(IStreamBase* baseStream, bool disponable = false);
 		// 设置游标位置
-		void setCursor(ss_t pos);
+		void setCursor(size_t pos);
 	protected:
 		// 获取数据流
 		IStreamBase* getStream() const;
@@ -37,14 +37,14 @@ namespace sys
 		// 获取当前指针
 		char* getPtr();
 		// 设置分配的数据流内存长度
-		void setCapacity(ss_t capacity);
+		void setCapacity(size_t capacity);
 		// 设置数据流长度
-		void setLength(ss_t length);
+		void setLength(size_t length);
 	protected:
 		// 游标
-		ss_t _cursor;
+		size_t _cursor;
 		// 分配的内存长度
-		ss_t _capacity;
+		size_t _capacity;
 		// 基础数据流
 		IStreamBase* _baseStream;
 	};

@@ -1,6 +1,8 @@
 #pragma once
 
 #include "IStreamBase.h"
+#include "Memory/MemoryPointer.h"
+#include "Memory/MemoryData.h"
 
 #include <cstring>
 
@@ -12,23 +14,19 @@ namespace sys
 	public:
 		StreamBase();
 		virtual ~StreamBase();
-	
 	public:
 		// 设置数据内容
-		virtual void setData(const char* data, ss_t size);
+		virtual void setData(const char* data, size_t size);
 		// 获取数据内容
 		const char* getData() const;
 		// 获取数据长度
-		int32_t getLength() const;
+		size_t getLength() const;
 		// 设置数据长度
-		void setLength(int32_t length);
+		void setLength(size_t length);
 		// 释放流数据
 		void freeStream();
 	protected:
-		// 数据长度
-		ss_t _length;
-		// 数据内容
-		char* _data;
+		MemoryData _memoryData;
 	};
 
 	// 流数据引用基础，浅拷贝
@@ -39,20 +37,24 @@ namespace sys
 		virtual ~StreamBaseRef();
 	public:
 		// 设置数据内容
-		virtual void setData(const char* data, ss_t size);
+		virtual void setData(const char* data, size_t size);
 		// 获取数据内容
 		const char* getData() const;
 		// 获取数据长度
-		int32_t getLength() const;
+		size_t getLength() const;
 		// 设置数据长度
-		void setLength(int32_t length);
+		void setLength(size_t length);
 		// 释放流数据
 		void freeStream();
 	protected:
-		// 数据长度
-		ss_t _length;
-		// 数据内容
-		char* _data;
+		/**
+		*	长度
+		*/
+		size_t _length = 0;
+		/**
+		*	数据
+		*/
+		char* _data = nullptr;
 	};
 
 }

@@ -34,7 +34,7 @@ namespace render
 		static void setTexCoord2D(float s, float t);
 		static void setTexCoord2D(const math::Vector2& value);
 		static void setTexCoord3D(float s, float t, float r);
-		static void setTexCoord3D(const math::Vector2& value);
+		static void setTexCoord3D(const math::Vector3& value);
 	
 	public:// …Ë÷√±ﬂ‘µ±‡º≠
 		static void setEdgeFlag(bool flag);

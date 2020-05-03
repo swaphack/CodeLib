@@ -94,7 +94,6 @@
     <ClCompile Include="3d\Environment\Light.cpp" />
     <ClCompile Include="3d\Environment\SpotLight.cpp" />
     <ClCompile Include="3d\Shape\CubeModel.cpp" />
-    <ClCompile Include="3d\Shape\MultiFaceCube.cpp" />
     <ClCompile Include="3d\Shape\SphereModel.cpp" />
     <ClCompile Include="Canvas.cpp" />
     <ClCompile Include="Common\Action\Action.cpp" />
@@ -231,7 +230,6 @@
     <ClInclude Include="3d\Map\macros.h" />
     <ClInclude Include="3d\Map\Terrian.h" />
     <ClInclude Include="3d\Shape\CubeModel.h" />
-    <ClInclude Include="3d\Shape\MultiFaceCube.h" />
     <ClInclude Include="3d\Shape\import.h" />
     <ClInclude Include="3d\Shape\SphereModel.h" />
     <ClInclude Include="Canvas.h" />

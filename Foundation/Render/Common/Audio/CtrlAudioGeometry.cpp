@@ -325,7 +325,10 @@ CtrlAudioGeometryPolygon::CtrlAudioGeometryPolygon()
 
 CtrlAudioGeometryPolygon::~CtrlAudioGeometryPolygon()
 {
-
+	if (_realVertexes)
+	{
+		delete[] _realVertexes;
+	}
 }
 
 bool CtrlAudioGeometryPolygon::init()
@@ -484,8 +487,6 @@ void CtrlAudioGeometryPolygon::onPolygonChange()
 
 	if (_realVertexes == nullptr)
 	{
-		SAFE_DELETE(_realVertexes);
-
 		_realVertexes = new FMOD_VECTOR[count];
 		_realVerticeCount = count;
 		for (int i = 0; i < count; i++)

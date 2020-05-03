@@ -38,6 +38,7 @@ namespace math
 		Quaternion(const Quaternion& quaternion);
 		Quaternion(float w, float x, float y, float z);
 		Quaternion(float w, const Vector3& vector);
+		virtual ~Quaternion();
 	public:
 		CREATE_AXIS(W, 0);
 		CREATE_AXIS(X, 1);

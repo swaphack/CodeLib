@@ -52,11 +52,8 @@ namespace sys
 		{
 			return;
 		}
-		int32_t size = sizeof(value);
-		char* data = (char*)malloc(size);
-		memcpy(data, &value, size);
-		this->set(name, data);
-		free(data);
+		MemoryData data(size, &value);
+		this->set(name, data.getValue());
 	}
 
 }

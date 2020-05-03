@@ -10,8 +10,16 @@ namespace render
 	class MeshMemoryData : public sys::MemoryData
 	{
 	public:
+		MeshMemoryData() {}
+		MeshMemoryData(const MeshMemoryData& data)
+			:MemoryData(data.getLength(), data.getValue(), data.getUnitSize())
+		{
+			this->setTypeSize(data.getTypeSize());
+		}
+		virtual ~MeshMemoryData(){}
+	public:
 		void setTypeSize(uint32_t size) { _typeSize = size; }
-		uint32_t getTypeSize() { return _typeSize; }
+		uint32_t getTypeSize() const { return _typeSize; }
 	protected:
 	private:
 		uint32_t _typeSize = 0;

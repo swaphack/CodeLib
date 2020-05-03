@@ -11,7 +11,7 @@ namespace render
 	class GLRasterization
 	{
 	public:
-		static void drawBitMap(float width, float heith, float xorig, float yorig, float xmove, float ymove, const uint8_t* value);
+		static void drawBitMap(int width, int heith, float xorig, float yorig, float xmove, float ymove, const uint8_t* value);
 	public:
 		static void clearIndex(int mask);
 	public:
@@ -19,8 +19,8 @@ namespace render
 		static void getClipPlane(ClipPlaneName name, double* equation);
 	public:
 		// 复制数据到缓存区
-		static void copyPixels(float x, float y, float width, float height, PixelCopyType copyType);
-		static void drawPixels(float width, float heith, TexImageDataFormat format, TexImageDataType type, const void* value);
+		static void copyPixels(float x, float y, int width, int height, PixelCopyType copyType);
+		static void drawPixels(int width, int heith, TexImageDataFormat format, TexImageDataType type, const void* value);
 	public:
 		static void getFeedBackBuffer(int size, FeedBackMode mode, float* buffer);
 	public:

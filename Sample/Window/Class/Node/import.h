@@ -11,3 +11,4 @@
 #include "TestTextNode.h"
 #include "TestUINode.h"
 #include "TestUtilityNode.h"
+#include "TestBufferNode.h"

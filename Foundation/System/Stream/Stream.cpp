@@ -20,7 +20,7 @@ Stream::~Stream()
 
 }
 
-void Stream::setData(const char* data, ss_t size)
+void Stream::setData(const char* data, size_t size)
 {
 	ASSERT(data != nullptr && getStream() != nullptr && size > 0);
 
@@ -31,12 +31,12 @@ void Stream::setData(const char* data, ss_t size)
 	_capacity = size;
 }
 
-ss_t Stream::getCapacity() const
+size_t Stream::getCapacity() const
 {
 	return _capacity;
 }
 
-ss_t Stream::getLength() const
+size_t Stream::getLength() const
 {
 	if (_baseStream == nullptr)
 	{
@@ -46,7 +46,7 @@ ss_t Stream::getLength() const
 	return _baseStream->getLength();
 }
 
-ss_t Stream::getCursor() const
+size_t Stream::getCursor() const
 {
 	return _cursor;
 }
@@ -71,7 +71,7 @@ void Stream::setStream(IStreamBase* baseStream, bool disponable)
 	_baseStream = baseStream;
 }
 
-void Stream::setCursor( ss_t pos )
+void Stream::setCursor( size_t pos )
 {
 	_cursor = pos;
 }
@@ -101,12 +101,12 @@ char* Stream::getPtr()
 	return (char*)getStream()->getData() + _cursor;
 }
 
-void Stream::setCapacity( ss_t capacity )
+void Stream::setCapacity( size_t capacity )
 {
 	_capacity = capacity;
 }
 
-void Stream::setLength(ss_t length)
+void Stream::setLength(size_t length)
 {
 	if (getStream() == nullptr)
 	{

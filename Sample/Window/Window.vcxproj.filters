@@ -138,6 +138,9 @@
     <ClCompile Include="Class\Scene\TestMainScene.cpp">
       <Filter>Class\Scene</Filter>
     </ClCompile>
+    <ClCompile Include="Class\Node\TestBufferNode.cpp">
+      <Filter>Class\Node</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Class\GLRenderApplication.h">
@@ -186,6 +189,9 @@
       <Filter>Class\Scene</Filter>
     </ClInclude>
     <ClInclude Include="Class\Node\import.h">
+      <Filter>Class\Node</Filter>
+    </ClInclude>
+    <ClInclude Include="Class\Node\TestBufferNode.h">
       <Filter>Class\Node</Filter>
     </ClInclude>
   </ItemGroup>

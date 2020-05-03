@@ -18,7 +18,7 @@ StringStream::StringStream(const std::string& text)
 	this->initWithText(text);
 }
 
-StringStream::StringStream(const char* text, int32_t size)
+StringStream::StringStream(const char* text, size_t size)
 : Stream(new StreamBaseRef())
 {
 	this->initWithText(text, size);
@@ -34,7 +34,7 @@ void StringStream::initWithText(const std::string& text)
 	this->initWithText(text.c_str(), text.size());
 }
 
-void StringStream::initWithText(const char* text, int32_t size)
+void StringStream::initWithText(const char* text, size_t size)
 {
 	int32_t len = size;
 
@@ -70,7 +70,7 @@ void StringStream::readLine(std::string& text)
 		ptr++;
 	}
 
-	ss_t size = ptr - cursor;
+	size_t size = ptr - cursor;
 
 	this->setCursor(getCursor() + size);
 
@@ -84,7 +84,7 @@ void StringStream::readRemain(std::string& text)
 	this->setCursor(this->getCapacity());
 }
 
-void StringStream::writeString(const char* line, int32_t size)
+void StringStream::writeString(const char* line, size_t size)
 {
 	if (line == nullptr)
 	{
@@ -109,7 +109,7 @@ void StringStream::writeString(const std::string& text)
 	writeString(text.c_str(), text.size());
 }
 
-void StringStream::writeLine(const char* line, int32_t size)
+void StringStream::writeLine(const char* line, size_t size)
 {
 	this->writeString(line, size);
 	this->writeLine();

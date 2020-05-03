@@ -52,3 +52,8 @@ Volume& Volume::operator*=(const Vector3& vec)
 
 	return *this;
 }
+
+math::Volume::~Volume()
+{
+
+}

@@ -30,9 +30,7 @@ namespace render
 		AudioDetail& operator=(const AudioDetail& detail);
 	private:
 		// 数据
-		uint8_t* _data = nullptr;
-		// 大小
-		int _size = 0;
+		sys::MemoryData _data;
 		// 通道数
 		int _channels = 0;
 		// 通道布局

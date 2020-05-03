@@ -3,15 +3,12 @@
 using namespace render;
 
 AudioDetail::AudioDetail()
-:_data(nullptr)
-, _channels(0)
+:_channels(0)
 , _channelLayout(0)
 , _format(0)
 , _frequency(0)
-, _size(0)
 , _samples(0)
 {
-	SAFE_FREE(_data);
 }
 
 AudioDetail::AudioDetail(const AudioDetail& detail)
@@ -26,20 +23,16 @@ AudioDetail::AudioDetail(const AudioDetail& detail)
 
 AudioDetail::~AudioDetail()
 {
-	SAFE_FREE(_data);
 }
 
 uint8_t* AudioDetail::getData() const
 {
-	return _data;
+	return (uint8_t*)_data.getPtr();
 }
 
 void AudioDetail::setData(uint8_t* data, int size)
 {
-	SAFE_FREE(_data);
-	_data = (uint8_t*)malloc(size);
-	memcpy(_data, data, size);
-	_size = size;
+	_data.init(size, data);
 }
 
 int AudioDetail::getChannels() const
@@ -84,7 +77,7 @@ void AudioDetail::setFrequency(int frequency)
 
 int AudioDetail::getSize() const
 {
-	return _size;
+	return _data.getLength();
 }
 
 int AudioDetail::getSamples() const

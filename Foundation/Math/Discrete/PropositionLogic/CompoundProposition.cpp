@@ -68,7 +68,7 @@ bool CompoundProposition::matchChildren(const std::vector<TreeNode*>& children)
 	{
 		return false;
 	}
-	for (auto i = 0; i < children.size(); i++)
+	for (size_t i = 0; i < children.size(); i++)
 	{
 		Proposition* p0 = getChildAt(i)->as<Proposition>();
 		Proposition* p1 = children[i]->as<Proposition>();

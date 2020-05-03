@@ -17,23 +17,23 @@ namespace sys
 	public:
 		StringStream();
 		StringStream(const std::string& text);
-		StringStream(const char* text, int32_t size);
+		StringStream(const char* text, size_t size);
 		virtual ~StringStream();
 	public:
 		// 字符串初始化
 		void initWithText(const std::string& text);
 		// 字符串初始化
-		void initWithText(const char* text, int32_t size);
+		void initWithText(const char* text, size_t size);
 		// 读取一行
 		void readLine(std::string& text);
 		// 读取剩余
 		void readRemain(std::string& text);
 		// 写入字符串
-		void writeString(const char* line, int32_t size);
+		void writeString(const char* line, size_t size);
 		// 写入字符串
 		void writeString(const std::string& text);
 		// 写入一行字符串
-		void writeLine(const char* line, int32_t size);
+		void writeLine(const char* line, size_t size);
 		// 写入一行字符串
 		void writeLine(const std::string& text);
 		// 写入空行

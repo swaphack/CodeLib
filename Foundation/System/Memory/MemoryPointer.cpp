@@ -3,7 +3,7 @@
 
 using namespace sys;
 
-MemoryPointer::MemoryPointer(int8_t* ptr, uint32_t size)
+MemoryPointer::MemoryPointer(int8_t* ptr, size_t size)
 {
 	_value = ptr;
 	_size = size;
@@ -20,7 +20,7 @@ void MemoryPointer::resetCursor()
 	this->clear();
 }
 
-MemoryPointer* MemoryPointer::alloctPtr(uint32_t size)
+MemoryPointer* MemoryPointer::alloctPtr(size_t size)
 {
 	if (size + _cursor >= _size)
 	{
@@ -47,7 +47,7 @@ int8_t* sys::MemoryPointer::getPtr()
 	return _value;
 }
 
-uint32_t sys::MemoryPointer::getSize()
+size_t sys::MemoryPointer::getSize()
 {
 	return _size;
 }

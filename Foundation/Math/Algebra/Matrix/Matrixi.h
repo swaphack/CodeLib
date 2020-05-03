@@ -15,6 +15,7 @@ namespace math
 	{
 	public:
 		Matrixi(int h, int w);
+		virtual ~Matrixi();
 	public:
 		/**
 		*	¾ØÕóÏà¼Ó

@@ -84,7 +84,7 @@ std::vector<Proposition*> EquivalenceRule::getEquivalenceProposition(Proposition
 	// 所有子节点的可能性
 	std::vector<std::vector<Proposition*> > eachChildProposition;
 	// 优先递归子节点
-	for (auto i = 0; i < vecChildren.size(); i++)
+	for (size_t i = 0; i < vecChildren.size(); i++)
 	{
 		auto child = vecChildren[i];
 		std::vector<Proposition*> branch;
@@ -140,7 +140,7 @@ std::vector<Proposition*> EquivalenceRule::getEquivalenceProposition(Proposition
 			result.push_back(temp);
 			return;
 		}
-		for (int i = 0; i < eachChildProposition[index].size(); i++)
+		for (size_t i = 0; i < eachChildProposition[index].size(); i++)
 		{
 			if (index == 0)
 			{

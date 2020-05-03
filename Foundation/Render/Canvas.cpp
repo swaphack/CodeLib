@@ -59,6 +59,12 @@ void Canvas::setViewPort(float x, float y, float width, float height)
 	_view->setPosition(x, y);
 	_view->setFrameSize(width, height);
 
+	auto pTop = getCurScene();
+	if (pTop)
+	{
+		pTop->notifyToAll(ENP_SPACE);
+	}
+
 	Tool::setGLViewSize(width, height);
 }
 

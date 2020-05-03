@@ -16,14 +16,18 @@ namespace render
 	public:
 		virtual bool init();
 	public:
+		// 添加纹理
+		void addTexture(const std::string& name, Texture2D* texture);
 		// 设置纹理
-		void setTexture(const std::string& name, Texture2D* texture);
+		void setAllFacesTexture(const std::string& name);
+		// 设置纹理
+		void setFaceTexture(ModelFace face, const std::string& name);
 	protected:
-		void onCubeChange();
+		virtual void onCubeChange();
 	private:
-		// 纹理
-		Texture2D* _texture = nullptr;
-		// 纹理坐标
-		TextureCubeVertex _texCube;
+		// 坐标
+		TextureCubeVertex _cubePosition;
+
+		TextureRectVertex _faces[CUBE_FACE_COUNT];
 	};
 }

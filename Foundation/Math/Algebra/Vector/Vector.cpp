@@ -20,9 +20,9 @@ Vector::Vector()
 float Vector::getMagnitude() const
 {
 	float len = 0;
-	for (int i = 0; i < _length; i++)
+	for (int i = 0; i < getLength(); i++)
 	{
-		len += pow(_values[i], 2);
+		len += pow(getValue(i), 2);
 	}
 
 	return sqrt(len);
@@ -31,9 +31,9 @@ float Vector::getMagnitude() const
 float Vector::getMagnitudeSqr() const
 {
 	float len = 0;
-	for (int i = 0; i < _length; i++)
+	for (int i = 0; i < getLength(); i++)
 	{
-		len += pow(_values[i], 2);
+		len += pow(getValue(i), 2);
 	}
 
 	return len;
@@ -41,7 +41,7 @@ float Vector::getMagnitudeSqr() const
 
 Vector Vector::operator+(const Vector& vec) const
 {
-	assert(_length != vec.getSize());
+	assert(getLength() != vec.getSize());
 
 	Vector target = *this;
 	for (int i = 0; i < target.getSize(); i++)
@@ -53,7 +53,7 @@ Vector Vector::operator+(const Vector& vec) const
 
 Vector Vector::operator-(const Vector& vec) const
 {
-	assert(_length != vec.getSize());
+	assert(getLength() != vec.getSize());
 
 	Vector target = *this;
 	for (int i = 0; i < target.getSize(); i++)
@@ -87,22 +87,22 @@ Vector Vector::operator/(float k) const
 
 Vector& Vector::operator+=(const Vector& vec)
 {
-	assert(_length != vec.getSize());
+	assert(getLength() != vec.getSize());
 
 	for (int i = 0; i < vec.getSize(); i++)
 	{
-		_values[i] += vec[i];
+		setValue(i, getValue(i) + vec.getValue(i));
 	}
 	return *this;
 }
 
 Vector& Vector::operator-=(const Vector& vec)
 {
-	assert(_length != vec.getSize());
+	assert(getLength() != vec.getSize());
 
 	for (int i = 0; i < vec.getSize(); i++)
 	{
-		_values[i] -= vec[i];
+		setValue(i, getValue(i) - vec.getValue(i));
 	}
 	return *this;
 }
@@ -111,7 +111,7 @@ Vector& Vector::operator*=(float k)
 {
 	for (int i = 0; i < this->getSize(); i++)
 	{
-		_values[i] *= k;
+		setValue(i, getValue(i) * k);
 	}
 	return *this;
 }
@@ -122,18 +122,18 @@ Vector& Vector::operator/=(float k)
 
 	for (int i = 0; i < this->getSize(); i++)
 	{
-		_values[i] /= k;
+		setValue(i, getValue(i) / k);
 	}
 	return *this;
 }
 
 bool Vector::operator==(const Vector& vec)
 {
-	assert(_length == vec._length);
+	assert(getLength() == vec.getLength());
 
-	for (int i = 0; i < _length; i++)
+	for (int i = 0; i < getLength(); i++)
 	{
-		if (_values[i] != vec.getValue(i))
+		if (getValue(i) != vec.getValue(i))
 		{
 			return false;
 		}
@@ -144,11 +144,11 @@ bool Vector::operator==(const Vector& vec)
 
 bool Vector::operator!=(const Vector& vec)
 {
-	assert(_length == vec._length);
+	assert(getLength() == vec.getLength());
 
-	for (int i = 0; i < _length; i++)
+	for (int i = 0; i < getLength(); i++)
 	{
-		if (_values[i] != vec.getValue(i))
+		if (getValue(i) != vec.getValue(i))
 		{
 			return true;
 		}
@@ -163,10 +163,10 @@ Vector Vector::normalize() const
 	assert(magn > 0);
 
 	Vector vec;
-	vec.reset(_length);
-	for (int i = 0; i < _length; i++)
+	vec.reset(getLength());
+	for (int i = 0; i < getLength(); i++)
 	{
-		vec.setValue(i, _values[i] / magn);
+		vec.setValue(i, getValue(i) / magn);
 	}
 
 	return vec;
@@ -193,5 +193,10 @@ float Vector::cosAngle(const Vector& vector0, const Vector& vector1)
 	assert(a != 0 && b != 0);
 
 	return Vector::dot(vector0, vector1) / (a * b);
+}
+
+Vector::~Vector()
+{
+
 }
 

@@ -28,14 +28,14 @@ Matrix::Matrix(float* value, int h, int w)
 
 Matrix Matrix::operator+(const Matrix& mat)
 {
-	assert(mat._width == _width && mat._height == _height);
+	assert(mat.getWidth() == getWidth() && mat.getHeight() == getHeight());
 
-	Matrix result(_height, mat._width);
+	Matrix result(getHeight(), mat.getWidth());
 
-	int32_t len = _width * _height;
+	int32_t len = getWidth() * getHeight();
 	for (int32_t i = 0; i < len; i++)
 	{
-		result[i] = _values[i] + mat._values[i];
+		result.setValue(i, getValue(i) + mat.getValue(i));
 	}
 
 	return result;
@@ -43,14 +43,14 @@ Matrix Matrix::operator+(const Matrix& mat)
 
 Matrix Matrix::operator-(const Matrix& mat)
 {
-	assert(mat._width == _width && mat._height == _height);
+	assert(mat.getWidth() == getWidth() && mat.getHeight() == getHeight());
 
-	Matrix result(_height, mat._width);
+	Matrix result(getHeight(), mat.getWidth());
 
-	int32_t len = _width * _height;
+	int32_t len = getWidth() * getHeight();
 	for (int32_t i = 0; i < len; i++)
 	{
-		result[i] = _values[i] - mat[i];
+		result.setValue(i, getValue(i) - mat.getValue(i));
 	}
 
 	return result;
@@ -58,17 +58,17 @@ Matrix Matrix::operator-(const Matrix& mat)
 
 Matrix Matrix::operator*(const Matrix& mat)
 {
-	assert(_width == mat._height);
+	assert(getWidth() == mat.getHeight());
 
-	Matrix result(_height, mat._width);
+	Matrix result(getHeight(), mat.getWidth());
 
 	float val = 0;
-	for (int32_t bh = 0; bh < _height; bh++)
+	for (int32_t bh = 0; bh < getHeight(); bh++)
 	{
-		for (int32_t mw = 0; mw < mat._width; mw++)
+		for (int32_t mw = 0; mw < mat.getWidth(); mw++)
 		{
 			val = 0;
-			for (int32_t mh = 0; mh < mat._height; mh++)
+			for (int32_t mh = 0; mh < mat.getHeight(); mh++)
 			{
 				float a = getValue(bh, mh);
 				float b = mat.getValue(mh, mw);
@@ -83,12 +83,12 @@ Matrix Matrix::operator*(const Matrix& mat)
 
 Matrix& Matrix::operator+=(const Matrix& mat)
 {
-	assert(mat._width == _width && mat._height == _height);
+	assert(mat.getWidth() == getWidth() && mat.getHeight() == getHeight());
 
-	int32_t len = _width * _height;
+	int32_t len = getWidth() * getHeight();
 	for (int32_t i = 0; i < len; i++)
 	{
-		_values[i] += mat[i];
+		setValue(i, getValue(i) + mat.getValue(i));
 	}
 
 	return *this;
@@ -96,12 +96,12 @@ Matrix& Matrix::operator+=(const Matrix& mat)
 
 Matrix& Matrix::operator-=(const Matrix& mat)
 {
-	assert(mat._width == _width && mat._height == _height);
+	assert(mat.getWidth() == getWidth() && mat.getHeight() == getHeight());
 
-	int32_t len = _width * _height;
+	int32_t len = getWidth() * getHeight();
 	for (int32_t i = 0; i < len; i++)
 	{
-		_values[i] -= mat[i];
+		setValue(i, getValue(i) - mat.getValue(i));
 	}
 
 	return *this;
@@ -109,11 +109,13 @@ Matrix& Matrix::operator-=(const Matrix& mat)
 
 Matrix& Matrix::operator*=(float k)
 {
-	for (int32_t i = 0; i < _height; i++)
+	for (int32_t i = 0; i < getHeight(); i++)
 	{
-		for (int32_t j = 0; j < _width; j++)
+		for (int32_t j = 0; j < getWidth(); j++)
 		{
-			_values[i * _width + j] *= k;
+			int32_t index = i * getWidth() + j;
+			float value = getValue(index) * k;
+			setValue(index, value);
 		}
 	}
 
@@ -122,13 +124,13 @@ Matrix& Matrix::operator*=(float k)
 
 Matrix Matrix::operator*(float k)
 {
-	Matrix mat(_height, _width);
+	Matrix mat(getHeight(), getWidth());
 
-	for (int32_t i = 0; i < _height; i++)
+	for (int32_t i = 0; i < getHeight(); i++)
 	{
-		for (int32_t j = 0; j < _width; j++)
+		for (int32_t j = 0; j < getWidth(); j++)
 		{
-			float value = _values[i * _width + j] * k;
+			float value = getValue(i * getWidth() + j) * k;
 			mat.setValue(i, j, value);
 		}
 	}
@@ -138,13 +140,13 @@ Matrix Matrix::operator*(float k)
 
 Matrix Matrix::operator/(float k)
 {
-	Matrix mat(_height, _width);
+	Matrix mat(getHeight(), getWidth());
 
-	for (int32_t i = 0; i < _height; i++)
+	for (int32_t i = 0; i < getHeight(); i++)
 	{
-		for (int32_t j = 0; j < _width; j++)
+		for (int32_t j = 0; j < getWidth(); j++)
 		{
-			float value = _values[i * _width + j] / k;
+			float value = getValue(i * getWidth() + j) / k;
 			mat.setValue(i, j, value);
 		}
 	}
@@ -154,11 +156,11 @@ Matrix Matrix::operator/(float k)
 
 Matrix& Matrix::operator=(const Matrix& mat)
 {
-	this->reset(mat._height, mat._width);
-	int32_t len = mat._width * mat._height;
+	this->reset(mat.getHeight(), mat.getWidth());
+	int32_t len = mat.getWidth() * mat.getHeight();
 	for (int32_t i = 0; i < len; i++)
 	{
-		_values[i] = mat[i];
+		setValue(i, mat.getValue(i));
 	}
 
 	return *this;
@@ -167,13 +169,13 @@ Matrix& Matrix::operator=(const Matrix& mat)
 Matrix Matrix::getTranspose() const
 {
 	Matrix mat;
-	mat.reset(_height, _width);
+	mat.reset(getHeight(), getWidth());
 
-	for (int32_t i = 0; i < _height; i++)
+	for (int32_t i = 0; i < getHeight(); i++)
 	{
-		for (int32_t j = 0; j < _width; j++)
+		for (int32_t j = 0; j < getWidth(); j++)
 		{
-			mat.setValue(j, i, _values[i * _width + j]);
+			mat.setValue(j, i, getValue(i * getWidth() + j));
 		}
 	}
 
@@ -182,20 +184,20 @@ Matrix Matrix::getTranspose() const
 
 float Matrix::getDetValue() const
 {
-	assert(_width == _height);
+	assert(getWidth() == getHeight());
 
-	return Determinant(_values, _width).getMagnitude();
+	return Determinant(getValue(), getWidth()).getMagnitude();
 }
 
 Matrix Matrix::getMinor(int32_t i, int32_t j) const
 {
-	assert(i >= 0 && j >= 0 && i < _height && j < _width);
+	assert(i >= 0 && j >= 0 && i < getHeight() && j < getWidth());
 
-	Matrix mat(_height - 1, _width - 1);
+	Matrix mat(getHeight() - 1, getWidth() - 1);
 	int dn = 0;
 	int dm = 0;
 
-	for (int h = 0; h < _height; h++)
+	for (int h = 0; h < getHeight(); h++)
 	{
 		if (h == i)
 		{
@@ -203,7 +205,7 @@ Matrix Matrix::getMinor(int32_t i, int32_t j) const
 			continue;
 		}
 		dm = 0;
-		for (int w = 0; w < _width; w++)
+		for (int w = 0; w < getWidth(); w++)
 		{
 			if (w == j) 
 			{
@@ -219,23 +221,23 @@ Matrix Matrix::getMinor(int32_t i, int32_t j) const
 
 Matrix Matrix::getAdjoint() const
 {
-	assert(_width == _height);
+	assert(getWidth() == getHeight());
 
 	float det = this->getDetValue();
 
 	assert(det != 0);
 
-	Matrix mat = Matrix(_width, _height);
+	Matrix mat = Matrix(getWidth(), getHeight());
 
-	if (_width == 1)
+	if (getWidth() == 1)
 	{
-		mat.setValue(0, 0, 1 / this->getValue(0, 0));
+		mat.setValue(0, 0, 1 / this->getValue((size_t)0, (size_t)0));
 		return mat;
 	}
 
-	for (int i = 0; i < _height; i++)
+	for (int i = 0; i < getHeight(); i++)
 	{
-		for (int j = 0; j < _width; j++)
+		for (int j = 0; j < getWidth(); j++)
 		{
 			Matrix minor = this->getMinor(i, j);
 			float k = 1;
@@ -252,7 +254,7 @@ Matrix Matrix::getAdjoint() const
 
 Matrix Matrix::getInverse() const
 {
-	assert(_width == _height);
+	assert(getWidth() == getHeight());
 
 	float det = this->getDetValue();
 
@@ -261,6 +263,11 @@ Matrix Matrix::getInverse() const
 	Matrix adjoint = this->getAdjoint();
 	Matrix transpose = adjoint.getTranspose();
 	return transpose / det;
+}
+
+math::Matrix::~Matrix()
+{
+
 }
 
 

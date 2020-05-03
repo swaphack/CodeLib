@@ -10,10 +10,13 @@ Action::Action()
 
 Action::~Action()
 {
+	SAFE_RELEASE(_target);
 }
 
 void Action::setTarget(sys::Object* target)
 {
+	SAFE_RELEASE(_target);
+	SAFE_RETAIN(target);
 	_target = target;
 }
 

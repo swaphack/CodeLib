@@ -2,7 +2,7 @@
 
 using namespace render;
 
-void GLRasterization::drawBitMap(float width, float heith, float xorig, float yorig, float xmove, float ymove, const uint8_t* value)
+void GLRasterization::drawBitMap(int width, int heith, float xorig, float yorig, float xmove, float ymove, const uint8_t* value)
 {
 	glBitmap(width, heith, xorig, yorig, xmove, ymove, value);
 }
@@ -17,12 +17,12 @@ void GLRasterization::setClipPlane(ClipPlaneName name, const double* equation)
 	glClipPlane((GLenum)name, equation);
 }
 
-void GLRasterization::copyPixels(float x, float y, float width, float height, PixelCopyType copyType)
+void GLRasterization::copyPixels(float x, float y, int width, int height, PixelCopyType copyType)
 {
 	glCopyPixels(x, y, width, height, (GLenum)copyType);
 }
 
-void GLRasterization::drawPixels(float width, float heith, TexImageDataFormat format, TexImageDataType type, const void* value)
+void GLRasterization::drawPixels(int width, int heith, TexImageDataFormat format, TexImageDataType type, const void* value)
 {
 	glDrawPixels(width, heith, (GLenum)format, (GLenum)type, value);
 }

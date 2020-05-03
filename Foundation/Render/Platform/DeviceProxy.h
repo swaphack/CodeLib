@@ -17,6 +17,8 @@ namespace render
 		void onMouseMoveHandler(float x, float y);
 
 		void onKeyBoardButtonHandler(sys::BoardKey key, sys::ButtonStatus type);
+
+		void setTouchMananger(const TouchManager* touchManager);
 	protected:
 	private:
 		// ´¥ÃşÊÂ¼ş

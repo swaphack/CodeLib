@@ -37,10 +37,10 @@ namespace render
 
 	struct TextureRectVertex
 	{
-		float vertices[12] ;
+		float vertices[12];
 		float colors[16];
 		float uvs[8];
-		uint16_t indices[6];
+		uint32_t indices[6];
 	public:
 		TextureRectVertex();
 	public:
@@ -68,10 +68,7 @@ namespace render
 	struct TextureCubeVertex
 	{
 		float vertices[24];
-		float colors[32];
-		float uvs[16];
 		uint32_t indices[36];
-		float normals[24];
 	public:
 		TextureCubeVertex();
 	public:
@@ -84,15 +81,5 @@ namespace render
 		void setBackRightDownPoint(const math::Vector3& point);
 		void setBackRightUpPoint(const math::Vector3& point);
 		void setBackLeftUpPoint(const math::Vector3& point);
-
-		void setFrontLeftDownColor(const sys::Color4B& color);
-		void setFrontRightDownColor(const sys::Color4B& color);
-		void setFrontRightUpColor(const sys::Color4B& color);
-		void setFrontLeftUpColor(const sys::Color4B& color);
-
-		void setBackLeftDownColor(const sys::Color4B& color);
-		void setBackRightDownColor(const sys::Color4B& color);
-		void setBackRightUpColor(const sys::Color4B& color);
-		void setBackLeftUpColor(const sys::Color4B& color);
 	};
 }

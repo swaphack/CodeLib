@@ -13,6 +13,7 @@ namespace math
 		Size();
 		Size(float w, float h);
 		Size(const Size& size);
+		virtual ~Size();
 	public:
 		CREATE_AXIS(Width, 0);
 		CREATE_AXIS(Height, 1);

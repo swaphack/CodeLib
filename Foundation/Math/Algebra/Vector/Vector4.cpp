@@ -108,3 +108,8 @@ void Vector4::set(float x, float y, float z)
 	this->setY(y);
 	this->setZ(z);
 }
+
+math::Vector4::~Vector4()
+{
+
+}

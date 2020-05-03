@@ -100,9 +100,7 @@ namespace ui
 	void WidgetProperty::setAttribute(const char* name, const T& value)
 	{
 		int size = sizeof(T);
-		char* dest = (char*)malloc(size);
-		memcpy(dest, &value, size);
-		this->setAttribute(name, std::string(dest, size));
-		free(dest);
+		sys::MemoryData data(size, &value);
+		this->setAttribute(name, std::string(data.getValue(), size));
 	}
 }

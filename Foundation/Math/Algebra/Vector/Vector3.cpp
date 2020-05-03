@@ -296,3 +296,8 @@ float Vector3::calTripleProduct(const Vector3& vector0, const Vector3& vector1, 
 
 	return Vector3::dot(v0, vector2);
 }
+
+math::Vector3::~Vector3()
+{
+
+}

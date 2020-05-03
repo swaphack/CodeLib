@@ -177,9 +177,6 @@
     <ClCompile Include="3d\Common\Model3DS.cpp">
       <Filter>3d\Common</Filter>
     </ClCompile>
-    <ClCompile Include="3d\Shape\MultiFaceCube.cpp">
-      <Filter>3d\Shape</Filter>
-    </ClCompile>
     <ClCompile Include="3d\Shape\CubeModel.cpp">
       <Filter>3d\Shape</Filter>
     </ClCompile>
@@ -683,9 +680,6 @@
     </ClInclude>
     <ClInclude Include="3d\Common\Model3DS.h">
       <Filter>3d\Common</Filter>
-    </ClInclude>
-    <ClInclude Include="3d\Shape\MultiFaceCube.h">
-      <Filter>3d\Shape</Filter>
     </ClInclude>
     <ClInclude Include="3d\Shape\CubeModel.h">
       <Filter>3d\Shape</Filter>

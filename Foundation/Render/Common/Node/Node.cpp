@@ -46,7 +46,6 @@ bool Node::init()
 		Tool::convertToOGLPoisition(_position, _obPosition);
 		Tool::convertToRadian(_rotation, _obRotation);
 		Tool::calRect(math::Vector3(), _volume, _anchor, _rectVertex);
-		
 		calRealSpaceInfo(); 
 	});
 
@@ -85,7 +84,8 @@ void Node::addChild( Node* node )
 
 	node->setParent(this);
 
-	_children.addObject(node);
+	SAFE_RETAIN(node);
+	_children.push_back(node);
 
 	onChildrenChange();
 }
@@ -101,14 +101,19 @@ void Node::removeChild( Node* node )
 
 	node->setParent(nullptr);
 
-	_children.removeObject(node);
+	SAFE_RELEASE(node);
+	auto it = std::find(_children.begin(), _children.end(), node);
+	if (it != _children.end())
+	{
+		_children.erase(it);
+	}
 
 	onChildrenChange();
 }
 
 void Node::removeAllChildren()
 {
-	std::vector<Object*>::iterator begin = _children.begin();
+	auto begin = _children.begin();
 
 	while (begin != _children.end())
 	{
@@ -124,7 +129,14 @@ void Node::removeAllChildren()
 
 Node* Node::getChildByID( long id )
 {
-	return dynamic_cast<Node*>(_children.getObject(id));
+	for (auto item : _children)
+	{
+		if (item->getID() == id)
+		{
+			return item;
+		}
+	}
+	return nullptr;
 }
 
 void Node::setTag( int tag )
@@ -139,62 +151,36 @@ int Node::getTag()
 
 Node* Node::getChildByTag(int tag)
 {
-	std::vector<Object*>::iterator iter = _children.begin();
-
-	Node* node;
-	while (iter != _children.end())
+	for (auto item : _children)
 	{
-		node = dynamic_cast<Node*>(*iter);
-		if (node && node->getTag() == tag)
+		if (item->getTag() == tag)
 		{
-			return node;
+			return item;
 		}
-		iter++;
 	}
-
 	return nullptr;
 }
 
-Node* Node::getChildByName(const char* name)
+Node* Node::getChildByName(const std::string& name)
 {
-	if (name == nullptr)
+	for (auto item : _children)
 	{
-		return nullptr;
-	}
-	std::vector<Object*>::iterator iter = _children.begin();
-
-	Node* node;
-	while (iter != _children.end())
-	{
-		node = dynamic_cast<Node*>(*iter);
-		if (node && node->getName().compare(name) == 0)
+		if (item->getName() == name)
 		{
-			return node;
+			return item;
 		}
-		iter++;
 	}
-
 	return nullptr;
 }
 
 Node* Node::getFirstChild()
 {
-	if (_children.count() == 0)
+	if (_children.size() == 0)
 	{
 		return nullptr;
 	}
 
-	return static_cast<Node*>(*_children.begin());
-}
-
-std::vector<sys::Object*>::iterator Node::beginChild()
-{
-	return _children.begin();
-}
-
-std::vector<sys::Object*>::iterator Node::endChild()
-{
-	return _children.end();
+	return _children.front();
 }
 
 // void Node::foreachChild(std::function<void(Node*)> handler)
@@ -254,24 +240,24 @@ void Node::visit()
 		
 	this->updateTranform();
 
-	if (_children.count() == 0)
+	if (_children.size() == 0)
 	{
 		this->drawNode();
 	}
 	else
 	{
 		bool show = false;
-		std::vector<Object*>::iterator iter = _children.begin();
-		while (iter != _children.end())
+		auto it = _children.begin();
+		while (it != _children.end())
 		{
-			Node* node = dynamic_cast<Node*>(*iter);
+			Node* node = *it;
 			if (show == false && node->getZOrder() >= 0)
 			{
 				this->drawNode();
 				show = true;
 			}
 			node->visit();
-			iter++;
+			it++;
 		}
 	}
 
@@ -383,10 +369,10 @@ void Node::sortChildren()
 	bool bInsert;
 	std::vector<Node*>::iterator oIt;
 
-	std::vector<Object*>::iterator it = _children.begin();
+	auto it = _children.begin();
 	while (it != _children.end())
 	{
-		Node* node = dynamic_cast<Node*>(*it);
+		Node* node = *it;
 		if (node)
 		{
 			node->retain();
@@ -414,8 +400,8 @@ void Node::sortChildren()
 	oIt = orderNodes.begin();
 	while (oIt != orderNodes.end())
 	{
-		(*oIt)->release();
-		_children.addObject((*oIt));
+		SAFE_RELEASE(*oIt);
+		_children.push_back((*oIt));
 		oIt++;
 	}
 }
@@ -567,6 +553,16 @@ void Node::notify(int id)
 {
 	_notify->addMark(id);
 	setDirty(true);
+}
+
+void render::Node::notifyToAll(int id)
+{
+	this->notify(id);
+
+	for (auto it = _children.begin(); it != _children.end(); it++)
+	{
+		(*it)->notifyToAll(id);
+	}
 }
 
 

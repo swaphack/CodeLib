@@ -40,6 +40,6 @@ namespace render
 		// 图片内部存储格式
 		TexImageInternalFormat _internalFormat;
 		// 图片像素数据
-		uint8_t *_pixels;
+		sys::MemoryData _data;
 	};
 }

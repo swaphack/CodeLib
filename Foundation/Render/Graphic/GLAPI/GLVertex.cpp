@@ -107,7 +107,7 @@ void GLVertex::setTexCoord3D(float s, float t, float r)
 	glTexCoord3f(s, t, r);
 }
 
-void GLVertex::setTexCoord3D(const math::Vector2& value)
+void GLVertex::setTexCoord3D(const math::Vector3& value)
 {
 	setTexCoord3D(value.getX(), value.getY(), value.getSize());
 }

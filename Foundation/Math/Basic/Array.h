@@ -16,24 +16,15 @@ namespace math
 	template<typename T>
 	struct Array
 	{
-	protected:
-		/**
-		*	单元值
-		*/
-		T* _values = nullptr;
-		/**
-		*	向量长度
-		*/
-		int32_t _length = 0;
 	public:
 		Array()
 		{
 		}
-		Array(int32_t len)
+		Array(size_t len)
 		{
 			this->reset(len);
 		}
-		Array(T* val, int32_t len)
+		Array(T* val, size_t len)
 		{
 			this->set(val, len);
 		}
@@ -51,52 +42,62 @@ namespace math
 		*/
 		const T* getValue() const
 		{
-			return _values;
+			return (T*)_values;
 		}
 		/**
 		*	单元值
 		*/
-		void getValue(T* array, int32_t len) const
+		void getValue(T* array, size_t len) const
 		{
-			assert(len >= _length);
-			memcpy(array, _values, _length * sizeof(T));
+			assert(len <= _length);
+			memcpy(array, _values, len * sizeof(T));
 		}
 		/**
 		*	向量长度
 		*/
-		int32_t getSize() const
+		size_t getLength() const
 		{
 			return _length;
+		}
+		/**
+		*	向量大小
+		*/
+		size_t getSize() const
+		{
+			return getLength() * sizeof(T);
 		}
 	public:
 		/**
 		*	重置
 		*/
-		void reset(int32_t len)
+		void reset(size_t len)
 		{
 			this->dispose();
 
 			_length = len;
-			int32_t size = _length * sizeof(T);
-			_values = (T*)malloc(size);
-			memset(_values, 0, size);
+			size_t size = _length * sizeof(T);
+			uint8_t* values = (uint8_t*)malloc(size);
+			memset(values, 0, size);
+			_values = values;
 		}
 		/**
 		*	设置值
 		*/
-		void set(T* val, int32_t len)
+		void set(const T* val, size_t len)
 		{
 			if (val == nullptr)
 			{
 				return;
 			}
 			this->dispose();
-			this->reset(len);
 
-			for (int i = 0; i < len; i++)
-			{
-				_values[i] = val[i];
-			}
+			_length = len;
+			size_t size = _length * sizeof(T);
+			uint8_t* values = (uint8_t*)malloc(size);
+			memset(values, 0, size);
+			memcpy(values, (uint8_t*)val, size);
+			_values = values;
+			_values = values;
 		}
 		/**
 		*	重置
@@ -110,38 +111,38 @@ namespace math
 		/**
 		*	获取指定位置的数据
 		*/
-		T getValue(int32_t index) const
+		const T& getValue(size_t index) const
 		{
 			assert(index >= 0 && index < _length);
 
-			return _values[index];
+			return *(T*)(_values + index * sizeof(T));
 		}
 		/**
 		*	设置指定位置的数据
 		*/
-		void setValue(int32_t index, T value)
+		void setValue(size_t index, const T& value)
 		{
 			assert(index >= 0 && index < _length);
 
-			_values[index] = value;
+			memcpy(_values + index * sizeof(T), &value, sizeof(T));
 		}
 		/**
 		*	获取指定位置的数据
 		*/
-		T& operator[](int32_t index)
+		T& operator[](size_t index)
 		{
 			assert(index >= 0 && index < _length);
 
-			return _values[index];
+			return *((T*)(_values + index * sizeof(T)));
 		}
 		/**
 		*	获取指定位置的数据
 		*/
-		const T& operator[](int32_t index) const
+		const T& operator[](size_t index) const
 		{
 			assert(index >= 0 && index < _length);
 
-			return _values[index];
+			return *((T*)(_values + index * sizeof(T)));
 		}
 	public:
 		/**
@@ -149,13 +150,13 @@ namespace math
 		*/
 		Array& operator=(const Array& vec)
 		{
-			int count = vec.getSize();
+			int count = vec.getLength();
 			this->dispose();
 			this->reset(count);
 
 			for (int i = 0; i < count; i++)
 			{
-				_values[i] = vec[i];
+				 setValue(i, vec.getValue(i));
 			}
 
 			return *this;
@@ -166,7 +167,7 @@ namespace math
 			std::ostringstream stream;
 			for (int i = 0; i < _length; i++)
 			{
-				T fValue = getValue(i);
+				const T& fValue = getValue(i);
 				stream << fValue;
 				stream << ",";
 			}
@@ -186,5 +187,19 @@ namespace math
 			}
 			_length = 0;
 		}
+	protected:
+		T* getPtr()
+		{
+			return (T*)_values;
+		}
+	private:
+		/**
+		*	单元值
+		*/
+		uint8_t* _values = nullptr;
+		/**
+		*	向量长度
+		*/
+		size_t _length = 0;
 	};
 }

@@ -223,6 +223,10 @@ void GLWindow::initDevice()
 	{
 		_deviceProxy = new DeviceProxy(_render->getCanvas()->getTouchManager());
 	}
+	else
+	{
+		_deviceProxy->setTouchMananger(_render->getCanvas()->getTouchManager());
+	}
 	if (getMouse())
 	{
 		getMouse()->setButtonHandler(_deviceProxy, MOUSE_BUTTON_SELECTOR(DeviceProxy::onMouseButtonHandler));

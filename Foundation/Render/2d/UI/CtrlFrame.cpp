@@ -13,12 +13,13 @@ CtrlFrame::CtrlFrame()
 :_bFlipX(false)
 , _bFlipY(false)
 {
-	_texFrame = new TexFrame();
+	_texFrame = CREATE_OBJECT(TexFrame);
+	SAFE_RETAIN(_texFrame);
 }
 
 CtrlFrame::~CtrlFrame()
 {
-	SAFE_DELETE(_texFrame);
+	SAFE_RELEASE(_texFrame);
 }
 
 bool CtrlFrame::init()

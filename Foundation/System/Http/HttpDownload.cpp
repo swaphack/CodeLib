@@ -110,19 +110,19 @@ void HttpDownload::onRecvHandle(int32_t id, DataQueue& data)
 
 	if (_downloadingFunc)
 	{
-		_downloadingFunc(id, netData->data, netData->size);
+		_downloadingFunc(id, netData->getPtr(), netData->getSize());
 	}
 
 	std::map<int32_t, StreamWriter*>::iterator iter = _downloadDatas.find(id);
 	if (iter == _downloadDatas.end())
 	{// 创建新的接收池
-		pWriter = new StreamWriter(netData->data, netData->size);
+		pWriter = new StreamWriter(netData->getPtr(), netData->getSize());
 		_downloadDatas[id] = pWriter;
 	}
 	else
 	{// 追加到已有的接收池中
 		pWriter = iter->second;
-		pWriter->writeString(netData->data, netData->size);
+		pWriter->writeString((char*)netData->getPtr(), netData->getSize());
 	}
 	SAFE_DELETE(netData);
 

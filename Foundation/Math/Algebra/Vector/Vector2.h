@@ -15,6 +15,7 @@ namespace math
 		Vector2(float x, float y);
 		Vector2(const Vector& vector);
 		Vector2(const Vector2& point);
+		virtual ~Vector2();
 	public:
 		CREATE_AXIS(X, 0);
 		CREATE_AXIS(Y, 1);

@@ -71,7 +71,15 @@ void GlutWindow::createWindow(const std::string& title, int width, int height, i
 
 	_render = render;
 	_render->setRefreshInterval(millis / 1000.0f);
-	_deviceProxy = new DeviceProxy(_render->getCanvas()->getTouchManager());
+	if (_deviceProxy == nullptr)
+	{
+		_deviceProxy = new DeviceProxy(_render->getCanvas()->getTouchManager());
+	}
+	else
+	{
+		_deviceProxy->setTouchMananger(_render->getCanvas()->getTouchManager());
+	}
+	
 
 	int mode = GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGBA;
 	int left = (GetSystemMetrics(SM_CXSCREEN) - width)* 0.5f;

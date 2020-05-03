@@ -7,11 +7,11 @@ namespace sys
 	class Object
 	{
 	public:
-		Object(int64_t id = 0);
+		Object(uint64_t id = 0);
 		virtual ~Object();
 	public:
 		// 获得编号
-		virtual int64_t getID() const;
+		virtual uint64_t getID() const;
 		// 增加引用次数
 		void retain();
 		// 减少引用次数
@@ -21,13 +21,25 @@ namespace sys
 		// 自动释放，需要调用G_AUTORELEASEPOOL的管理
 		void autoRelease();
 	public:
+		template<typename T, typename = std::enable_if<std::is_base_of<Object, T>::type, T>::value>
+		bool is()
+		{
+			return dynamic_cast<T*>(this) != nullptr;
+		}
+
+		template<typename T, typename = std::enable_if<std::is_base_of<Object, T>::type, T>::value>
+		bool as()
+		{
+			return dynamic_cast<T*>(this);
+		}
+	public:
 		// 引用次数
 		int32_t RetainCount;
 		// 设置编号
-		void setID(int64_t id);
+		void setID(uint64_t id);
 	private:
 		// 编号
-		int64_t _id;
+		uint64_t _id;
 		// 是否自动释放
 		bool _bAutoRelease;
 	};

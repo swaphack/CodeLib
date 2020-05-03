@@ -6,14 +6,16 @@
 using namespace render;
 
 ActionProxy::ActionProxy(sys::Object* target)
-:_target(target)
 {
-
+	SAFE_RETAIN(target);
+	_target = target;
 }
 
 ActionProxy::~ActionProxy()
 {
 	this->stopAllActions();
+
+	SAFE_RELEASE(_target);
 }
 
 Action* ActionProxy::runAction(Action* handler)

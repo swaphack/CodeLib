@@ -14,6 +14,7 @@ namespace math
 		Volume(float w, float h);
 		Volume(float w, float h, float d);
 		Volume(const Volume& volumn);
+		virtual ~Volume();
 	public:
 		CREATE_AXIS(Width, 0);
 		CREATE_AXIS(Height, 1);

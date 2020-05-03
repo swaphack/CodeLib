@@ -18,7 +18,7 @@ void subAlloc()
 	allocCount--;
 }
 
-char* StreamHelper::mallocStream(void* data, ss_t size)
+char* StreamHelper::mallocStream(void* data, size_t size)
 {
 	ASSERT(data != nullptr);
 	ASSERT(size > 0);
@@ -33,7 +33,7 @@ char* StreamHelper::mallocStream(void* data, ss_t size)
 	return newData;
 }
 
-char* StreamHelper::mallocStream(ss_t capacity, void* data, ss_t size)
+char* StreamHelper::mallocStream(size_t capacity, void* data, size_t size)
 {
 	ASSERT(capacity > 0);
 
@@ -47,7 +47,7 @@ char* StreamHelper::mallocStream(ss_t capacity, void* data, ss_t size)
 	return newData;
 }
 
-char* StreamHelper::mallocStream(ss_t size)
+char* StreamHelper::mallocStream(size_t size)
 {
 	ASSERT(size > 0);
 
