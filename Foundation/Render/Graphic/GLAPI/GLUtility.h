@@ -10,7 +10,7 @@ namespace render
 		static const uint8_t* getString(StringName name);
 
 		static void dispatchCompute(uint32_t numX, uint32_t numY, uint32_t numZ);
-		static void dispatchComputeIndirect(GLintptr indirect);
+		static void dispatchComputeIndirect(ptrdiff_t indirect);
 
 		static GraphicsResetStatus getGraphicsResetStatus();
 
@@ -29,8 +29,8 @@ namespace render
 			GLfloat *val);
 
 		// @see MemoryBarrierBit
-		static void setMemoryBarrier(GLbitfield barriers);
+		static void setMemoryBarrier(uint32_t barriers);
 		// @see MemoryBarrierRegionBit
-		static void setMemoryBarrierByRegion(GLbitfield barriers);
+		static void setMemoryBarrierByRegion(uint32_t barriers);
 	};
 }

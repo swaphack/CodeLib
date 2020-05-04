@@ -168,7 +168,7 @@ namespace render
 		static void setUniformSubroutines(ShaderType type, int count, const uint32_t* indices);
 
 		//@see ProgramStage
-		static void useProgramStages(uint32_t pipeline, GLbitfield stages, uint32_t program);
+		static void useProgramStages(uint32_t pipeline, uint32_t stages, uint32_t program);
 		static void validateProgram(uint32_t program);
 	public:
 		static size_t getTypeSize(AttribType type);

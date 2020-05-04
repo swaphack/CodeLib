@@ -99,7 +99,7 @@ void GLClientArrays::setSecondaryColorPointer(DataType type, int stride, const v
 
 void GLClientArrays::pushClientAttrib(ClientAttribMask value)
 {
-	glPushClientAttrib((GLbitfield)value);
+	glPushClientAttrib((uint32_t)value);
 }
 
 void GLClientArrays::popClientAttrib()

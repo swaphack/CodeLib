@@ -11,11 +11,11 @@ namespace render
 		static void		bindRenderbuffer(RenderBufferTarget target, uint32_t renderBuffer);
 		static void 	blitFramebuffer(uint32_t srcX0, uint32_t srcY0, uint32_t srcX1, uint32_t srcY1,
 			uint32_t dstX0, uint32_t dstY0, uint32_t dstX1, uint32_t dstY1,
-			GLbitfield mask, BlitFrameBufferFilter filter);
+			uint32_t mask, BlitFrameBufferFilter filter);
 		static void 	blitNamedFramebuffer(uint32_t readFramebuffer, uint32_t drawFramebuffer,
 			uint32_t srcX0, uint32_t srcY0, uint32_t srcX1, uint32_t srcY1,
 			uint32_t dstX0, uint32_t dstY0, uint32_t dstX1, uint32_t dstY1,
-			GLbitfield mask, BlitFrameBufferFilter filter);
+			uint32_t mask, BlitFrameBufferFilter filter);
 		static void 	checkFramebufferStatus(FrameBufferTarget target);
 		static void 	checkNamedFramebufferStatus(uint32_t framebuffer, FrameBufferTarget target);
 		static void 	createFramebuffers(int n, uint32_t *ids);
@@ -59,6 +59,6 @@ namespace render
 		static void 	setRenderbufferStorageMultisample(RenderBufferTarget target, int samples, InternalImageFormat format, int width, int height);
 		static void 	setNamedRenderbufferStorageMultisample(uint32_t renderbuffer, int samples, InternalImageFormat format, int width, int height);
 
-		static void 	setSampleMask(uint32_t maskNumber, GLbitfield mask);
+		static void 	setSampleMask(uint32_t maskNumber, uint32_t mask);
 	};
 }

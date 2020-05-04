@@ -23,7 +23,7 @@ namespace render
 		static void pauseTransformFeedback();
 		static void resumeTransformFeedback();
 		static void setTransformFeedbackBufferBase(uint32_t xfb, uint32_t index, uint32_t buffer);
-		static void setTransformFeedbackBufferRange(uint32_t xfb, uint32_t index, uint32_t buffer, GLintptr offset, int size);
+		static void setTransformFeedbackBufferRange(uint32_t xfb, uint32_t index, uint32_t buffer, ptrdiff_t offset, int size);
 		static void setTransformFeedbackVaryings(uint32_t program, int count, const char** varyings, TransformFeedbackBufferMode mode);
 	};
 }

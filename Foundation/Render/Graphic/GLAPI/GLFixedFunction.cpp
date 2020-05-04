@@ -35,7 +35,7 @@ void GLFixedFunction::setIndexMask(uint32_t mask)
 
 void GLFixedFunction::pushAttrib(AttribMask value)
 {
-	glPushAttrib((GLbitfield)value);
+	glPushAttrib((uint32_t)value);
 }
 
 void GLFixedFunction::popAttrib()

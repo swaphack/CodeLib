@@ -12,7 +12,7 @@ void GLBufferObjects::bindBufferBase(BufferTarget target, uint32_t index, uint32
 	glBindBufferBase((GLenum)target, index, buffer);
 }
 
-void GLBufferObjects::bindBufferRange(BufferTarget target, uint32_t index, uint32_t buffer, GLintptr offset, GLsizeiptr size)
+void GLBufferObjects::bindBufferRange(BufferTarget target, uint32_t index, uint32_t buffer, ptrdiff_t offset, ptrdiff_t size)
 {
 	glBindBufferRange((GLenum)target, index, buffer, offset, size);
 }
@@ -22,57 +22,57 @@ void GLBufferObjects::bindBuffersBase(BufferTarget target, uint32_t first, int c
 	glBindBuffersBase((GLenum)target, first, count, buffers);
 }
 
-void GLBufferObjects::bindBuffersRange(BufferTarget target, uint32_t first, int count, const uint32_t* buffers, const GLintptr* offset, const GLsizeiptr* size)
+void GLBufferObjects::bindBuffersRange(BufferTarget target, uint32_t first, int count, const uint32_t* buffers, const ptrdiff_t* offset, const ptrdiff_t* size)
 {
 	glBindBuffersRange((GLenum)target, first, count, buffers, offset, size);
 }
 
-void GLBufferObjects::bindVertexBuffer(uint32_t bindingindex, uint32_t buffer, GLintptr offset, int stride)
+void GLBufferObjects::bindVertexBuffer(uint32_t bindingindex, uint32_t buffer, ptrdiff_t offset, int stride)
 {
 	glBindVertexBuffer(bindingindex, buffer, offset, stride);
 }
 
-void GLBufferObjects::bindVertexArrayVertexBuffer(uint32_t vaojb, uint32_t bindingindex, uint32_t buffer, GLintptr offset, int stride)
+void GLBufferObjects::bindVertexArrayVertexBuffer(uint32_t vaojb, uint32_t bindingindex, uint32_t buffer, ptrdiff_t offset, int stride)
 {
 	glVertexArrayVertexBuffer(vaojb, bindingindex, buffer, offset, stride);
 }
 
-void GLBufferObjects::bindVertexBuffers(uint32_t first, int count, const uint32_t* buffers, const GLintptr *offsets, const int *strides)
+void GLBufferObjects::bindVertexBuffers(uint32_t first, int count, const uint32_t* buffers, const ptrdiff_t *offsets, const int *strides)
 {
 	glBindVertexBuffers(first, count, buffers, offsets, strides);
 }
 
-void GLBufferObjects::bindVertexArrayVertexBuffers(uint32_t vaojb, uint32_t first, int count, const uint32_t* buffers, const GLintptr *offsets, const int *strides)
+void GLBufferObjects::bindVertexArrayVertexBuffers(uint32_t vaojb, uint32_t first, int count, const uint32_t* buffers, const ptrdiff_t *offsets, const int *strides)
 {
 	glVertexArrayVertexBuffers(vaojb, first, count, buffers, offsets, strides);
 }
 
-void GLBufferObjects::setBufferData(BufferTarget target, GLsizeiptr size, const void* data, BufferDataUsage usage)
+void GLBufferObjects::setBufferData(BufferTarget target, ptrdiff_t size, const void* data, BufferDataUsage usage)
 {
 	glBufferData((GLenum)target, size, data, (GLenum)usage);
 }
 
-void GLBufferObjects::setNamedBufferData(uint32_t buffer, GLsizeiptr size, const void* data, BufferDataUsage usage)
+void GLBufferObjects::setNamedBufferData(uint32_t buffer, ptrdiff_t size, const void* data, BufferDataUsage usage)
 {
 	glNamedBufferData(buffer, size, data, (GLenum)usage);
 }
 
-void GLBufferObjects::setBufferStorage(BufferTarget target, GLsizeiptr size, const void* data, GLbitfield flags)
+void GLBufferObjects::setBufferStorage(BufferTarget target, ptrdiff_t size, const void* data, uint32_t flags)
 {
 	glBufferStorage((GLenum)target, size, data, flags);
 }
 
-void GLBufferObjects::setNamedBufferStorage(uint32_t buffer, GLsizeiptr size, const void* data, GLbitfield flags)
+void GLBufferObjects::setNamedBufferStorage(uint32_t buffer, ptrdiff_t size, const void* data, uint32_t flags)
 {
 	glNamedBufferStorage(buffer, size, data, flags);
 }
 
-void GLBufferObjects::setBufferSubData(BufferTarget target, GLintptr offset, GLsizeiptr size, const void* data)
+void GLBufferObjects::setBufferSubData(BufferTarget target, ptrdiff_t offset, ptrdiff_t size, const void* data)
 {
 	glBufferSubData((GLenum)target, offset, size, data);
 }
 
-void GLBufferObjects::setNamedBufferSubData(uint32_t buffer, GLintptr offset, GLsizeiptr size, const void* data)
+void GLBufferObjects::setNamedBufferSubData(uint32_t buffer, ptrdiff_t offset, ptrdiff_t size, const void* data)
 {
 	glNamedBufferSubData(buffer, offset, size, data);
 }
@@ -87,22 +87,22 @@ void GLBufferObjects::clearNamedBufferData(uint32_t buffer, BufferSizedInternalF
 	glClearNamedBufferData(buffer, (GLenum)internalformat, (GLenum)format, (GLenum)type, data);
 }
 
-void GLBufferObjects::clearBufferSubData(BufferTarget target, BufferSizedInternalFormat internalformat, GLintptr offset, GLsizeiptr size, BufferImageInternalFormat format, BufferImageDataType type, const void* data)
+void GLBufferObjects::clearBufferSubData(BufferTarget target, BufferSizedInternalFormat internalformat, ptrdiff_t offset, ptrdiff_t size, BufferImageInternalFormat format, BufferImageDataType type, const void* data)
 {
 	glClearBufferSubData((GLenum)target, (GLenum)internalformat, offset, size, (GLenum)format, (GLenum)type, data);
 }
 
-void GLBufferObjects::clearNamedBufferSubData(uint32_t buffer, BufferSizedInternalFormat internalformat, GLintptr offset, GLsizeiptr size, BufferImageInternalFormat format, BufferImageDataType type, const void* data)
+void GLBufferObjects::clearNamedBufferSubData(uint32_t buffer, BufferSizedInternalFormat internalformat, ptrdiff_t offset, ptrdiff_t size, BufferImageInternalFormat format, BufferImageDataType type, const void* data)
 {
 	glClearNamedBufferSubData(buffer, (GLenum)internalformat, offset, size, (GLenum)format, (GLenum)type, data);
 }
 
-void GLBufferObjects::copyBufferSubData(BufferTarget readTarget, BufferTarget writeTarget, GLintptr readOffset, GLintptr writeOffset, GLintptr size)
+void GLBufferObjects::copyBufferSubData(BufferTarget readTarget, BufferTarget writeTarget, ptrdiff_t readOffset, ptrdiff_t writeOffset, ptrdiff_t size)
 {
 	glCopyBufferSubData((GLenum)readTarget, (GLenum)writeTarget, readOffset, writeOffset, size);
 }
 
-void GLBufferObjects::copyNamedBufferSubData(uint32_t readBuffer, uint32_t writeBuffer, GLintptr readOffset, GLintptr writeOffset, GLintptr size)
+void GLBufferObjects::copyNamedBufferSubData(uint32_t readBuffer, uint32_t writeBuffer, ptrdiff_t readOffset, ptrdiff_t writeOffset, ptrdiff_t size)
 {
 	glCopyNamedBufferSubData(readBuffer, writeBuffer, readOffset, writeOffset, size);
 }
@@ -207,12 +207,12 @@ void GLBufferObjects::enableVertexArrayAttrib(uint32_t vaobj, uint32_t index)
 	glEnableVertexArrayAttrib(vaobj, index);
 }
 
-void GLBufferObjects::flushMappedBufferRange(BufferTarget target, GLintptr offset, GLsizeiptr length)
+void GLBufferObjects::flushMappedBufferRange(BufferTarget target, ptrdiff_t offset, ptrdiff_t length)
 {
 	glFlushMappedBufferRange((GLenum)target, offset, length);
 }
 
-void GLBufferObjects::flushMappedNamedBufferRange(uint32_t buffer, GLintptr offset, GLsizeiptr length)
+void GLBufferObjects::flushMappedNamedBufferRange(uint32_t buffer, ptrdiff_t offset, ptrdiff_t length)
 {
 	glFlushMappedNamedBufferRange(buffer, offset, length);
 }
@@ -227,12 +227,12 @@ void GLBufferObjects::getBufferPointer(BufferTarget target, BufferPointerParamet
 	glGetBufferPointerv((GLenum)target, (GLenum)pname, params);
 }
 
-void GLBufferObjects::getBufferSubData(BufferTarget target, GLintptr offset, GLsizeiptr size, void * data)
+void GLBufferObjects::getBufferSubData(BufferTarget target, ptrdiff_t offset, ptrdiff_t size, void * data)
 {
 	glGetBufferSubData((GLenum)target, offset, size, data);
 }
 
-void GLBufferObjects::getNamedBufferSubData(uint32_t buffer, GLintptr offset, GLsizeiptr size, void * data)
+void GLBufferObjects::getNamedBufferSubData(uint32_t buffer, ptrdiff_t offset, ptrdiff_t size, void * data)
 {
 	glGetNamedBufferSubData(buffer, offset, size, data);
 }
@@ -282,7 +282,7 @@ void GLBufferObjects::invalidateBufferData(uint32_t buffer)
 	glInvalidateBufferData(buffer);
 }
 
-void GLBufferObjects::invalidateBufferSubData(uint32_t buffer, GLintptr offset, GLsizeiptr length)
+void GLBufferObjects::invalidateBufferSubData(uint32_t buffer, ptrdiff_t offset, ptrdiff_t length)
 {
 	glInvalidateBufferSubData(buffer, offset, length);
 }
@@ -292,24 +292,24 @@ bool GLBufferObjects::isBuffer(uint32_t buffer)
 	return glIsBuffer(buffer) == GL_TRUE;
 }
 
-void GLBufferObjects::setMapBuffer(BufferTarget target, AccessType access)
+void* GLBufferObjects::getMapBuffer(BufferTarget target, AccessType access)
 {
-	glMapBuffer((GLenum)target, (GLenum)access);
+	return glMapBuffer((GLenum)target, (GLenum)access);
 }
 
-void GLBufferObjects::setMapNamedBuffer(GLuint buffer, AccessType access)
+void* GLBufferObjects::setMapNamedBuffer(GLuint buffer, AccessType access)
 {
-	glMapNamedBuffer(buffer, (GLenum)access);
+	return glMapNamedBuffer(buffer, (GLenum)access);
 }
 
-void GLBufferObjects::setMapBufferRange(BufferTarget target, GLintptr offset, GLsizeiptr length, GLbitfield access)
+void* GLBufferObjects::setMapBufferRange(BufferTarget target, ptrdiff_t offset, ptrdiff_t length, uint32_t access)
 {
-	glMapBufferRange((GLenum)target, offset, length, access);
+	return glMapBufferRange((GLenum)target, offset, length, access);
 }
 
-void GLBufferObjects::setMapNamedBufferRange(uint32_t buffer, GLintptr offset, GLsizeiptr length, GLbitfield access)
+void* GLBufferObjects::setMapNamedBufferRange(uint32_t buffer, ptrdiff_t offset, ptrdiff_t length, uint32_t access)
 {
-	glMapNamedBufferRange(buffer, offset, length, access);
+	return glMapNamedBufferRange(buffer, offset, length, access);
 }
 
 void GLBufferObjects::multiDrawArrays(DrawMode mode, const int* first, const int* count, int drawcount)
@@ -352,14 +352,14 @@ void GLBufferObjects::setProvokingVertex(ProvokeMode mode)
 	glProvokingVertex((GLenum)mode);
 }
 
-void GLBufferObjects::unmapBuffer(BufferTarget target)
+bool GLBufferObjects::unmapBuffer(BufferTarget target)
 {
-	glUnmapBuffer((GLenum)target);
+	return glUnmapBuffer((GLenum)target) == GL_TRUE;
 }
 
-void GLBufferObjects::unmapNamedBuffer(uint32_t buffer)
+bool GLBufferObjects::unmapNamedBuffer(uint32_t buffer)
 {
-	glUnmapNamedBuffer(buffer);
+	return glUnmapNamedBuffer(buffer) == GL_TRUE;
 }
 
 void GLBufferObjects::setVertexArrayElementBuffer(uint32_t vaobj, uint32_t buffer)

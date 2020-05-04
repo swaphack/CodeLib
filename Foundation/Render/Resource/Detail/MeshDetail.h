@@ -7,6 +7,9 @@
 
 namespace render
 {
+	/**
+	*	网格内存数据
+	*/
 	class MeshMemoryData : public sys::MemoryData
 	{
 	public:
@@ -24,19 +27,23 @@ namespace render
 	private:
 		uint32_t _typeSize = 0;
 	};
+
+	/**
+	*	网格数据
+	*/
 	class MeshDetail : public sys::Object
 	{
 	public:
 		MeshDetail();
 		virtual ~MeshDetail();
 	public:
-		const std::string& getMeshName();
+		const std::string& getMeshName() const;
 
 		void setMeshName(const std::string& name);
 		/**
 		*	顶点坐标信息
 		*/
-		const MeshMemoryData& getVertices();
+		const MeshMemoryData& getVertices() const;
 		/**
 		*	设置顶点坐标信息
 		*/
@@ -44,7 +51,7 @@ namespace render
 		/**
 		*	法线坐标信息
 		*/
-		const MeshMemoryData& getNormals();
+		const MeshMemoryData& getNormals() const;
 		/**
 		*	设置法线坐标信息
 		*/
@@ -52,7 +59,7 @@ namespace render
 		/**
 		*	颜色坐标信息
 		*/
-		const MeshMemoryData& getColors();
+		const MeshMemoryData& getColors() const;
 		/**
 		*	设置颜色坐标信息
 		*/
@@ -60,7 +67,7 @@ namespace render
 		/**
 		*	纹理坐标信息
 		*/
-		const MeshMemoryData& getUVs();
+		const MeshMemoryData& getUVs() const;
 		/**
 		*	设置纹理坐标信息
 		*/
@@ -72,7 +79,7 @@ namespace render
 		/**
 		*	获取材质
 		*/
-		int getMaterial();
+		int getMaterial() const;
 		/**
 		*	设置三角形索引
 		*/
@@ -80,11 +87,11 @@ namespace render
 		/**
 		*	获取三角形索引
 		*/
-		const MeshMemoryData& getIndices();
+		const MeshMemoryData& getIndices() const;
 		/**
 		*	获取变换矩阵
 		*/
-		const math::Matrix44& getMatrix();
+		const math::Matrix44& getMatrix() const;
 		/**
 		*	设置变换矩阵
 		*/

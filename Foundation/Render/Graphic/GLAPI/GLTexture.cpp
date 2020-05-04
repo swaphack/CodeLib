@@ -351,12 +351,12 @@ void GLTexture::setTextureBuffer(uint32_t texture, TexSizedInternalFormat format
 	glTextureBuffer(texture, (GLenum)format, buff);
 }
 
-void GLTexture::setTexBufferRange(TexSizedInternalFormat format, uint32_t buff, GLintptr offset, GLsizeiptr size)
+void GLTexture::setTexBufferRange(TexSizedInternalFormat format, uint32_t buff, ptrdiff_t offset, ptrdiff_t size)
 {
 	glTexBufferRange(GL_TEXTURE_BUFFER, (GLenum)format, buff, offset, size);
 }
 
-void GLTexture::setTextureBufferRange(uint32_t texture, TexSizedInternalFormat format, uint32_t buff, GLintptr offset, GLsizeiptr size)
+void GLTexture::setTextureBufferRange(uint32_t texture, TexSizedInternalFormat format, uint32_t buff, ptrdiff_t offset, ptrdiff_t size)
 {
 	glTextureBufferRange(texture, (GLenum)format, buff, offset, size);
 }

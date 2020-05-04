@@ -12,12 +12,12 @@ void GLFrameBuffer::bindRenderbuffer(RenderBufferTarget target, uint32_t renderB
 	glBindRenderbuffer((GLenum)target, renderBuffer);
 }
 
-void GLFrameBuffer::blitFramebuffer(uint32_t srcX0, uint32_t srcY0, uint32_t srcX1, uint32_t srcY1, uint32_t dstX0, uint32_t dstY0, uint32_t dstX1, uint32_t dstY1, GLbitfield mask, BlitFrameBufferFilter filter)
+void GLFrameBuffer::blitFramebuffer(uint32_t srcX0, uint32_t srcY0, uint32_t srcX1, uint32_t srcY1, uint32_t dstX0, uint32_t dstY0, uint32_t dstX1, uint32_t dstY1, uint32_t mask, BlitFrameBufferFilter filter)
 {
 	glBlitFramebuffer(srcX0, srcY0, srcX1, srcY1, dstX0, dstY0, dstX1, dstY1, mask, (GLenum)filter);
 }
 
-void GLFrameBuffer::blitNamedFramebuffer(uint32_t readFramebuffer, uint32_t drawFramebuffer, uint32_t srcX0, uint32_t srcY0, uint32_t srcX1, uint32_t srcY1, uint32_t dstX0, uint32_t dstY0, uint32_t dstX1, uint32_t dstY1, GLbitfield mask, BlitFrameBufferFilter filter)
+void GLFrameBuffer::blitNamedFramebuffer(uint32_t readFramebuffer, uint32_t drawFramebuffer, uint32_t srcX0, uint32_t srcY0, uint32_t srcX1, uint32_t srcY1, uint32_t dstX0, uint32_t dstY0, uint32_t dstX1, uint32_t dstY1, uint32_t mask, BlitFrameBufferFilter filter)
 {
 	glBlitNamedFramebuffer(readFramebuffer, drawFramebuffer, srcX0, srcY0, srcX1, srcY1, dstX0, dstY0, dstX1, dstY1, mask, (GLenum)filter);
 }
@@ -261,7 +261,7 @@ void GLFrameBuffer::setNamedRenderbufferStorageMultisample(uint32_t renderbuffer
 	glNamedRenderbufferStorageMultisample(renderbuffer, samples, (GLenum)format, width, height);
 }
 
-void GLFrameBuffer::setSampleMask(uint32_t maskNumber, GLbitfield mask)
+void GLFrameBuffer::setSampleMask(uint32_t maskNumber, uint32_t mask)
 {
 	glSampleMaski(maskNumber, mask);
 }

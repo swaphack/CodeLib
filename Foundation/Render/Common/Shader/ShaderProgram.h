@@ -95,7 +95,7 @@ namespace render
 		/**
 		*	管线
 		*/
-		ShaderProgramPipeline* getShaderProgramPipeline(GLbitfield tags, const std::string& name);
+		ShaderProgramPipeline* getShaderProgramPipeline(uint32_t tags, const std::string& name);
 		/**
 		*	获取可编程属性
 		*/

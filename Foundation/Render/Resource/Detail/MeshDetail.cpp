@@ -36,24 +36,22 @@ void MeshDetail::setUVs(int count, float* texCoords, int unitSize)
 	_uvs.setTypeSize(unitSize);
 }
 
-
-
-const MeshMemoryData& MeshDetail::getVertices()
+const MeshMemoryData& MeshDetail::getVertices() const
 {
 	return _vertices;
 }
 
-const MeshMemoryData& MeshDetail::getNormals()
+const MeshMemoryData& MeshDetail::getNormals() const
 {
 	return _normals;
 }
 
-const MeshMemoryData& MeshDetail::getColors()
+const MeshMemoryData& MeshDetail::getColors() const
 {
 	return _colors;
 }
 
-const MeshMemoryData& MeshDetail::getUVs()
+const MeshMemoryData& MeshDetail::getUVs() const
 {
 	return _uvs;
 }
@@ -63,7 +61,7 @@ void MeshDetail::setMaterial(int mat)
 	_material = mat;
 }
 
-int MeshDetail::getMaterial()
+int MeshDetail::getMaterial() const
 {
 	return _material;
 }
@@ -73,12 +71,12 @@ void MeshDetail::setIndices(int size, uint32_t* indices)
 	_indices.init(size, indices);
 }
 
-const MeshMemoryData& MeshDetail::getIndices()
+const MeshMemoryData& MeshDetail::getIndices() const
 {
 	return _indices;
 }
 
-const math::Matrix44& MeshDetail::getMatrix()
+const math::Matrix44& MeshDetail::getMatrix() const
 {
 	return _matrix;
 }
@@ -88,7 +86,7 @@ void MeshDetail::setMatrix(const math::Matrix44& mat)
 	_matrix = mat;
 }
 
-const std::string& MeshDetail::getMeshName()
+const std::string& MeshDetail::getMeshName() const
 {
 	return _meshName;
 }

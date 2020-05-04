@@ -220,7 +220,7 @@ void render::ShaderProgram::setSeparable(bool value)
 	GLShader::setProgramParameter(_programID, ModifyProgramParameter::PROGRAM_SEPARABLE, value ? GL_TRUE : GL_FALSE);
 }
 
-render::ShaderProgramPipeline* render::ShaderProgram::getShaderProgramPipeline(GLbitfield tags, const std::string& name)
+render::ShaderProgramPipeline* render::ShaderProgram::getShaderProgramPipeline(uint32_t tags, const std::string& name)
 {
 	auto it = _programPipelines.find(name);
 	if (it != _programPipelines.end())

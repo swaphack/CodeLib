@@ -9,7 +9,7 @@ void GLRender::clearBuffer(int mask)
 
 void GLRender::clearBuffer(ClearBufferMask mask)
 {
-	glClear((GLbitfield)mask);
+	glClear((uint32_t)mask);
 }
 
 void GLRender::clearColor(float red, float green, float blue, float alpha)

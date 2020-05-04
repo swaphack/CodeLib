@@ -712,7 +712,7 @@ void GLShader::setUniformSubroutines(ShaderType type, int count, const uint32_t*
 	glUniformSubroutinesuiv((GLenum)type, count, indices);
 }
 
-void GLShader::useProgramStages(uint32_t pipeline, GLbitfield stages, uint32_t program)
+void GLShader::useProgramStages(uint32_t pipeline, uint32_t stages, uint32_t program)
 {
 	glUseProgramStages(pipeline, stages, program);
 }

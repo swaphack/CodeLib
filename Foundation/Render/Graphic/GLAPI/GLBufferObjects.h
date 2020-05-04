@@ -9,32 +9,32 @@ namespace render
 	public:
 		static void bindBuffer(BufferTarget target, uint32_t buffer);
 		static void bindBufferBase(BufferTarget target, uint32_t index, uint32_t buffer);
-		static void bindBufferRange(BufferTarget target, uint32_t index, uint32_t buffer, GLintptr offset, GLsizeiptr size);
+		static void bindBufferRange(BufferTarget target, uint32_t index, uint32_t buffer, ptrdiff_t offset, ptrdiff_t size);
 		static void bindBuffersBase(BufferTarget target, uint32_t first, int count, const uint32_t* buffers);
-		static void bindBuffersRange(BufferTarget target, uint32_t first, int count, const uint32_t* buffers, const GLintptr* offset, const GLsizeiptr* size);
+		static void bindBuffersRange(BufferTarget target, uint32_t first, int count, const uint32_t* buffers, const ptrdiff_t* offset, const ptrdiff_t* size);
 	public:
-		static void bindVertexBuffer(uint32_t bindingindex, uint32_t buffer, GLintptr offset, int stride);
-		static void bindVertexArrayVertexBuffer(uint32_t vaojb, uint32_t bindingindex, uint32_t buffer, GLintptr offset, int stride);
-		static void bindVertexBuffers(uint32_t first, int count, const uint32_t* buffers, const GLintptr *offsets, const int *strides);
-		static void bindVertexArrayVertexBuffers(uint32_t vaojb, uint32_t first, int count, const uint32_t* buffers, const GLintptr *offsets, const int *strides);
+		static void bindVertexBuffer(uint32_t bindingindex, uint32_t buffer, ptrdiff_t offset, int stride);
+		static void bindVertexArrayVertexBuffer(uint32_t vaojb, uint32_t bindingindex, uint32_t buffer, ptrdiff_t offset, int stride);
+		static void bindVertexBuffers(uint32_t first, int count, const uint32_t* buffers, const ptrdiff_t *offsets, const int *strides);
+		static void bindVertexArrayVertexBuffers(uint32_t vaojb, uint32_t first, int count, const uint32_t* buffers, const ptrdiff_t *offsets, const int *strides);
 	public:
-		static void setBufferData(BufferTarget target, GLsizeiptr size, const void* data, BufferDataUsage usage);
-		static void setNamedBufferData(uint32_t buffer, GLsizeiptr size, const void* data, BufferDataUsage usage);
+		static void setBufferData(BufferTarget target, ptrdiff_t size, const void* data, BufferDataUsage usage);
+		static void setNamedBufferData(uint32_t buffer, ptrdiff_t size, const void* data, BufferDataUsage usage);
 		// @see BufferStorageFlag
-		static void setBufferStorage(BufferTarget target, GLsizeiptr size, const void* data, GLbitfield flags);
-		static void setNamedBufferStorage(uint32_t buffer, GLsizeiptr size, const void* data, GLbitfield flags);
+		static void setBufferStorage(BufferTarget target, ptrdiff_t size, const void* data, uint32_t flags);
+		static void setNamedBufferStorage(uint32_t buffer, ptrdiff_t size, const void* data, uint32_t flags);
 
-		static void setBufferSubData(BufferTarget target, GLintptr offset, GLsizeiptr size, const void* data);
-		static void setNamedBufferSubData(uint32_t buffer, GLintptr offset, GLsizeiptr size, const void* data);
+		static void setBufferSubData(BufferTarget target, ptrdiff_t offset, ptrdiff_t size, const void* data);
+		static void setNamedBufferSubData(uint32_t buffer, ptrdiff_t offset, ptrdiff_t size, const void* data);
 	public:
 		static void clearBufferData(BufferTarget target, BufferSizedInternalFormat internalformat, BufferImageInternalFormat format, BufferImageDataType type, const void* data);
 		static void clearNamedBufferData(uint32_t buffer, BufferSizedInternalFormat internalformat, BufferImageInternalFormat format, BufferImageDataType type, const void* data);
 
-		static void clearBufferSubData(BufferTarget target, BufferSizedInternalFormat internalformat, GLintptr offset, GLsizeiptr size, BufferImageInternalFormat format, BufferImageDataType type, const void* data);
-		static void clearNamedBufferSubData(uint32_t buffer, BufferSizedInternalFormat internalformat, GLintptr offset, GLsizeiptr size, BufferImageInternalFormat format, BufferImageDataType type, const void* data);
+		static void clearBufferSubData(BufferTarget target, BufferSizedInternalFormat internalformat, ptrdiff_t offset, ptrdiff_t size, BufferImageInternalFormat format, BufferImageDataType type, const void* data);
+		static void clearNamedBufferSubData(uint32_t buffer, BufferSizedInternalFormat internalformat, ptrdiff_t offset, ptrdiff_t size, BufferImageInternalFormat format, BufferImageDataType type, const void* data);
 	public:
-		static void copyBufferSubData(BufferTarget readTarget, BufferTarget writeTarget, GLintptr readOffset, GLintptr writeOffset, GLintptr size);
-		static void copyNamedBufferSubData(uint32_t readBuffer, uint32_t writeBuffer, GLintptr readOffset, GLintptr writeOffset, GLintptr size);
+		static void copyBufferSubData(BufferTarget readTarget, BufferTarget writeTarget, ptrdiff_t readOffset, ptrdiff_t writeOffset, ptrdiff_t size);
+		static void copyNamedBufferSubData(uint32_t readBuffer, uint32_t writeBuffer, ptrdiff_t readOffset, ptrdiff_t writeOffset, ptrdiff_t size);
 	public:
 		static void createBuffers(int n, uint32_t* buffers);
 		static uint32_t createBuffer();
@@ -64,8 +64,8 @@ namespace render
 		static void enableVertexAttribArray(uint32_t index);
 		static void enableVertexArrayAttrib(uint32_t vaobj, uint32_t index);
 	public:
-		static void flushMappedBufferRange(BufferTarget target, GLintptr offset, GLsizeiptr length);
-		static void flushMappedNamedBufferRange(uint32_t buffer, GLintptr offset, GLsizeiptr length);
+		static void flushMappedBufferRange(BufferTarget target, ptrdiff_t offset, ptrdiff_t length);
+		static void flushMappedNamedBufferRange(uint32_t buffer, ptrdiff_t offset, ptrdiff_t length);
 	public:
 		static uint32_t genBuffer();
 		static void genBuffers(int n, uint32_t* buffers);
@@ -76,8 +76,8 @@ namespace render
 		static void getNamedBufferParameter(uint32_t buffer, GetBufferParameter pname, int64_t* params);
 
 		static void getBufferPointer(BufferTarget target, BufferPointerParameter pname, void ** params);
-		static void getBufferSubData(BufferTarget target, GLintptr offset, GLsizeiptr size, void * data);
-		static void getNamedBufferSubData(uint32_t buffer, GLintptr offset, GLsizeiptr size, void * data);
+		static void getBufferSubData(BufferTarget target, ptrdiff_t offset, ptrdiff_t size, void * data);
+		static void getNamedBufferSubData(uint32_t buffer, ptrdiff_t offset, ptrdiff_t size, void * data);
 	public:
 		static void getVertexArrayIndexed(uint32_t vaobj, uint32_t index, GetVertexArrayIndexedParameter pname, int* param);
 		static void getVertexArrayIndexed(uint32_t vaobj, uint32_t index, GetVertexArrayIndexedParameter64 pname, int64_t* param);
@@ -93,14 +93,14 @@ namespace render
 	public:
 		static void getVertexAttribPointer(uint32_t index, GetVertexAttribPointerParameter pname, void** pointer);
 		static void invalidateBufferData(uint32_t buffer);
-		static void invalidateBufferSubData(uint32_t buffer, GLintptr offset, GLsizeiptr length);
+		static void invalidateBufferSubData(uint32_t buffer, ptrdiff_t offset, ptrdiff_t length);
 		static bool isBuffer(uint32_t buffer);
 	public:
-		static void setMapBuffer(BufferTarget target, AccessType access);
-		static void setMapNamedBuffer(GLuint buffer, AccessType access);
+		static void* getMapBuffer(BufferTarget target, AccessType access);
+		static void* setMapNamedBuffer(GLuint buffer, AccessType access);
 		//@see MapBufferRangeAccess
-		static void setMapBufferRange(BufferTarget target, GLintptr offset, GLsizeiptr length, GLbitfield access);
-		static void setMapNamedBufferRange(uint32_t buffer, GLintptr offset, GLsizeiptr length, GLbitfield access);
+		static void* setMapBufferRange(BufferTarget target, ptrdiff_t offset, ptrdiff_t length, uint32_t access);
+		static void* setMapNamedBufferRange(uint32_t buffer, ptrdiff_t offset, ptrdiff_t length, uint32_t access);
 	public:
 		static void multiDrawArrays(DrawMode mode, const int* first, const int* count, int drawcount);
 		static void multiDrawArraysIndirect(DrawMode mode, const int* indirect, int primcount, int stride);
@@ -114,8 +114,8 @@ namespace render
 		static void setPrimitiveRestartIndex(uint32_t index);
 		static void setProvokingVertex(ProvokeMode mode);
 	public:
-		static void unmapBuffer(BufferTarget target);
-		static void unmapNamedBuffer(uint32_t buffer);
+		static bool unmapBuffer(BufferTarget target);
+		static bool unmapNamedBuffer(uint32_t buffer);
 	public:
 		static void setVertexArrayElementBuffer(uint32_t vaobj, uint32_t buffer);
 	public:

@@ -2,7 +2,7 @@
 
 using namespace render;
 
-void GLSync::setClientWaitSync(GLsync sync, GLbitfield flags, GLuint64 timeout)
+void GLSync::setClientWaitSync(GLsync sync, uint32_t flags, GLuint64 timeout)
 {
 	glClientWaitSync(sync, flags, timeout);
 }
@@ -12,7 +12,7 @@ void GLSync::deleteSync(GLsync sync)
 	glDeleteSync(sync);
 }
 
-void GLSync::fenceSync(GLbitfield flags)
+void GLSync::fenceSync(uint32_t flags)
 {
 	glFenceSync(GL_SYNC_GPU_COMMANDS_COMPLETE, flags);
 }
@@ -32,7 +32,7 @@ void GLSync::setTextureBarrier()
 	glTextureBarrier();
 }
 
-void GLSync::waitSync(GLsync sync, GLbitfield flags, GLuint64 timeout)
+void GLSync::waitSync(GLsync sync, uint32_t flags, GLuint64 timeout)
 {
 	glWaitSync(sync, flags, timeout);
 }

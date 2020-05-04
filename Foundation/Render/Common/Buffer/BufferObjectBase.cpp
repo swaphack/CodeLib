@@ -49,3 +49,8 @@ void render::BufferObjectBase::relaseBufferObject()
 	GLBufferObjects::deleteBuffer(_bufferID);
 	_bufferID = 0;
 }
+
+void* render::BufferObjectBase::getMapBuffer(AccessType type)
+{
+	return GLBufferObjects::getMapBuffer(_target, type);
+}

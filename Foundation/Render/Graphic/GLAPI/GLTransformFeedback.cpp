@@ -82,7 +82,7 @@ void GLTransformFeedback::setTransformFeedbackBufferBase(uint32_t xfb, uint32_t 
 	glTransformFeedbackBufferBase(xfb, index, buffer);
 }
 
-void GLTransformFeedback::setTransformFeedbackBufferRange(uint32_t xfb, uint32_t index, uint32_t buffer, GLintptr offset, int size)
+void GLTransformFeedback::setTransformFeedbackBufferRange(uint32_t xfb, uint32_t index, uint32_t buffer, ptrdiff_t offset, int size)
 {
 	glTransformFeedbackBufferRange(xfb, index, buffer, offset, size);
 }

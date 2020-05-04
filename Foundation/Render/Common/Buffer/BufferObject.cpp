@@ -17,12 +17,12 @@ void render::BufferObject::setBufferData(int size, const void* data, BufferDataU
 	GLBufferObjects::setBufferData(getBufferTarget(), size, data, usage);
 }
 
-void render::BufferObject::setBufferStorage(GLsizeiptr size, const void* data, GLbitfield flags)
+void render::BufferObject::setBufferStorage(ptrdiff_t size, const void* data, uint32_t flags)
 {
 	GLBufferObjects::setBufferStorage(getBufferTarget(), size, data, flags);
 }
 
-void render::BufferObject::setBufferSubData(GLintptr offset, GLsizeiptr size, const void* data)
+void render::BufferObject::setBufferSubData(ptrdiff_t offset, ptrdiff_t size, const void* data)
 {
 	GLBufferObjects::setBufferSubData(getBufferTarget(), offset, size, data);
 }
@@ -32,12 +32,12 @@ void render::BufferObject::clearBufferData(BufferSizedInternalFormat internalfor
 	GLBufferObjects::clearBufferData(getBufferTarget(), internalformat, format, type, data);
 }
 
-void render::BufferObject::clearBufferSubData(BufferSizedInternalFormat internalformat, GLintptr offset, GLsizeiptr size, BufferImageInternalFormat format, BufferImageDataType type, const void* data)
+void render::BufferObject::clearBufferSubData(BufferSizedInternalFormat internalformat, ptrdiff_t offset, ptrdiff_t size, BufferImageInternalFormat format, BufferImageDataType type, const void* data)
 {
 	GLBufferObjects::clearBufferSubData(getBufferTarget(), internalformat, offset, size, format, type, data);
 }
 
-void render::BufferObject::copyBufferSubData(GLintptr readOffset, BufferTarget writeTarget, GLintptr writeOffset, GLintptr size)
+void render::BufferObject::copyBufferSubData(ptrdiff_t readOffset, BufferTarget writeTarget, ptrdiff_t writeOffset, ptrdiff_t size)
 {
 	GLBufferObjects::copyBufferSubData(getBufferTarget(), writeTarget, readOffset, writeOffset, size);
 }
@@ -50,6 +50,21 @@ void render::BufferObject::getBufferParameter(GetBufferTarget target, GetBufferP
 void render::BufferObject::getBufferParameter(GetBufferTarget target, GetBufferParameter pname, int64_t* params)
 {
 	GLBufferObjects::getBufferParameter(target, pname, params);
+}
+
+void render::BufferObject::unmapBuffer()
+{
+	GLBufferObjects::unmapBuffer(getBufferTarget());
+}
+
+void* render::BufferObject::setBufferRange(ptrdiff_t offset, ptrdiff_t length, uint32_t type)
+{
+	return GLBufferObjects::setMapBufferRange(getBufferTarget(), offset, length, type);
+}
+
+void render::BufferObject::flushMappedBufferRange(ptrdiff_t offset, ptrdiff_t length)
+{
+	GLBufferObjects::flushMappedBufferRange(getBufferTarget(), offset, length);
 }
 
 

@@ -36,6 +36,10 @@ namespace render
 		*	设置数据范围
 		*/
 		void setBufferRange(int index, int offset, int size);
+		/**
+		*	获取关联数据
+		*/
+		void* getMapBuffer(AccessType type);
 	protected:
 		/**
 		*	初始化

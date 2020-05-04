@@ -85,8 +85,8 @@ namespace render
 		static void setTexBuffer(TexSizedInternalFormat format, uint32_t buff);
 		static void setTextureBuffer(uint32_t texture, TexSizedInternalFormat format, uint32_t buff);
 
-		static void setTexBufferRange(TexSizedInternalFormat format, uint32_t buff, GLintptr offset, GLsizeiptr size);
-		static void setTextureBufferRange(uint32_t texture, TexSizedInternalFormat format, uint32_t buff, GLintptr offset, GLsizeiptr size);
+		static void setTexBufferRange(TexSizedInternalFormat format, uint32_t buff, ptrdiff_t offset, ptrdiff_t size);
+		static void setTextureBufferRange(uint32_t texture, TexSizedInternalFormat format, uint32_t buff, ptrdiff_t offset, ptrdiff_t size);
 	public:
 		static void setTexImage1D(TexImageTarget1D target, int level, TexImageInternalFormat internalFormat, int width, int border, TexImageDataFormat format, TexImageDataType type, const void* data);
 		static void setTexImage2D(TexImageTarget2D target, int level, TexImageInternalFormat internalFormat, int width, int heigth, int border, TexImageDataFormat format, TexImageDataType type, const void* data);
