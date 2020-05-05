@@ -18,6 +18,11 @@ bool TestFuncNode::init()
 		return false;
 	}
 
+	auto size = Tool::getGLViewSize();
+	this->setAnchorPoint(math::Vector2(0, 0));
+	this->setPosition(math::Vector2(0, 0));
+	this->setVolume(size);
+
 	this->testFunc();
 
 	return true;

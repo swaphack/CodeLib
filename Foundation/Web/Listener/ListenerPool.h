@@ -20,7 +20,7 @@ namespace web
 		// 清除所有监听
 		void clear();
 		// 派发
-		virtual bool onDispatch(const char* sessionID, sys::DataQueue& dataQueue);
+		virtual bool onDispatch(const std::string& sessionID, sys::DataQueue& dataQueue);
 	private:
 		// 监听器
 		std::map<int, IActivityListener*> _listeners;

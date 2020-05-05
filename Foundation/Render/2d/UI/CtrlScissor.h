@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Common/Node/Node.h"
+#include "CtrlWidget.h"
 #include "mathlib.h"
 
 namespace render
@@ -8,7 +8,7 @@ namespace render
 	/**
 	*	∆¨∂Œ≤‚ ‘ 2d π”√
 	*/
-	class CtrlScissor : public Node
+	class CtrlScissor : public CtrlWidget
 	{
 	public:
 		CtrlScissor();

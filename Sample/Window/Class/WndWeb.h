@@ -5,7 +5,7 @@
 class WndWeb : public web::WebApplication
 {
 public:
-	WndWeb(const char* ip, int port);
+	WndWeb(const std::string& ip, int port);
 protected:
 private:
 };

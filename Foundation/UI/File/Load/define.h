@@ -14,11 +14,11 @@ namespace ui
 	*/
 #define INIT_LOADER_WIDGET(TL,TW, NAME) \
 public:\
-	virtual const char* getName() { return NAME; }\
+	virtual std::string getName() { return NAME; }\
 	TW* getCastWidget() { return dynamic_cast<TW*>(getWidget()); }\
 	TL* getCastLayoutItem() { return dynamic_cast<TL*>(getLayoutItem()); } \
-	virtual void initLayoutItem() { _layoutItem = new TL();} \
-	virtual void initWidget() {_node = CREATE_NODE(TW);}
+	virtual void initLayoutItem() { _layoutItem = CREATE_OBJECT(TL);  } \
+	virtual void initWidget() { _node = CREATE_NODE(TW);  }
 
 	// 获取当前节点：子类会隐藏父类同名函数
 #define GET_WIDGET getCastWidget()
@@ -40,7 +40,7 @@ public:\
 	*	设置属性类型为字符串
 	*/
 #define LOAD_STRING_ATTRIBUTE(T, NAME, FUNC, TEMP) \
-	if (getNodeProperty()->getAttribute(NAME, TEMP)) T->FUNC(TEMP.c_str());
+	if (getNodeProperty()->getAttribute(NAME, TEMP)) T->FUNC(TEMP);
 	/**
 	*	设置属性类型为指定类型
 	*/
@@ -68,17 +68,17 @@ public:\
 #define ADD_ATTRIBUTE(T, NAME, FUNC) \
 	SAVE_ATTRIBUTE(T, NAME, FUNC) \
 //////////////////////////////////////////////////////////////////////////
-	// widget
-#define LOAD_WDIGET_NAME() LOAD_NAME(GET_WIDGET)
-#define LOAD_WDIGET_ATTRIBUTE(NAME, FUNC, TEMP) LOAD_ATTRIBUTE(GET_WIDGET, NAME, FUNC, TEMP)
-#define LOAD_WDIGET_STRING_ATTRIBUTE(NAME, FUNC, TEMP) LOAD_STRING_ATTRIBUTE(GET_WIDGET, NAME, FUNC, TEMP)
-#define LOAD_WDIGET_CAST_ATTRIBUTE(NAME, FUNC, TEMP, TYPE) LOAD_CAST_ATTRIBUTE(GET_WIDGET, NAME, FUNC, TEMP, TYPE)
+	// CtrlWidget
+#define LOAD_WIDGET_NAME() LOAD_NAME(GET_WIDGET)
+#define LOAD_WIDGET_ATTRIBUTE(NAME, FUNC, TEMP) LOAD_ATTRIBUTE(GET_WIDGET, NAME, FUNC, TEMP)
+#define LOAD_WIDGET_STRING_ATTRIBUTE(NAME, FUNC, TEMP) LOAD_STRING_ATTRIBUTE(GET_WIDGET, NAME, FUNC, TEMP)
+#define LOAD_WIDGET_CAST_ATTRIBUTE(NAME, FUNC, TEMP, TYPE) LOAD_CAST_ATTRIBUTE(GET_WIDGET, NAME, FUNC, TEMP, TYPE)
 
-#define SAVE_WDIGET_NAME() SAVE_NAME()
-#define SAVE_WDIGET_ATTRIBUTE(NAME, FUNC) SAVE_ATTRIBUTE(GET_WIDGET, NAME, FUNC)
-#define SAVE_WDIGET_CAST_ATTRIBUTE(NAME, FUNC, TYPE) SAVE_CAST_ATTRIBUTE(GET_WIDGET, NAME, FUNC, TYPE)
+#define SAVE_WIDGET_NAME() SAVE_NAME()
+#define SAVE_WIDGET_ATTRIBUTE(NAME, FUNC) SAVE_ATTRIBUTE(GET_WIDGET, NAME, FUNC)
+#define SAVE_WIDGET_CAST_ATTRIBUTE(NAME, FUNC, TYPE) SAVE_CAST_ATTRIBUTE(GET_WIDGET, NAME, FUNC, TYPE)
 
-#define ADD_WDIGET_ATTRIBUTE(NAME, FUNC) ADD_ATTRIBUTE(GET_WIDGET, NAME, FUNC)
+#define ADD_WIDGET_ATTRIBUTE(NAME, FUNC) ADD_ATTRIBUTE(GET_WIDGET, NAME, FUNC)
 
 	// layoutitem
 #define LOAD_LAYOUTITEM_NAME() LOAD_NAME(GET_LAYOUTITEM)
@@ -93,6 +93,7 @@ public:\
 #define ADD_LAYOUTITEM_ATTRIBUTE(NAME, FUNC) ADD_ATTRIBUTE(GET_LAYOUTITEM, NAME, FUNC)
 
 //////////////////////////////////////////////////////////////////////////
+#define ELEMENT_NAME_WIDGET			"Widget"
 #define ELEMENT_NAME_LAYOUT			"Layout"
 #define ELEMENT_NAME_NODE			"Node"
 #define ELEMENT_NAME_IMAGE			"Image"

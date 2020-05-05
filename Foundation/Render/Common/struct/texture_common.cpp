@@ -39,6 +39,11 @@ TextureRectVertex::TextureRectVertex()
 	{
 		colors[i] = 1;
 	}
+
+	for (int i = 0; i < 12; i++)
+	{
+		vertices[i] = 0;
+	}
 }
 
 void TextureRectVertex::setLeftDownPoint(const math::Vector3& point)
@@ -178,6 +183,11 @@ TextureCubeVertex::TextureCubeVertex()
 	// µ×²¿
 	indices[30] = 0; indices[31] = 4; indices[32] = 5;
 	indices[33] = 0; indices[34] = 5; indices[35] = 1;
+
+	for (int i = 0; i < 24; i++)
+	{
+		vertices[i] = 0;
+	}
 }
 
 void TextureCubeVertex::setFrontLeftDownPoint(const math::Vector3& point)

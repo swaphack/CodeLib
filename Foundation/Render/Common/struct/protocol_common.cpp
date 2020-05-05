@@ -452,6 +452,21 @@ math::Size BodyProtocol::getSize()
 	return math::Size(_volume.getWidth(), _volume.getWidth());
 }
 
+float render::BodyProtocol::getAnchorPointX()
+{
+	return _anchor.getX();
+}
+
+float render::BodyProtocol::getAnchorPointY()
+{
+	return _anchor.getY();
+}
+
+float render::BodyProtocol::getAnchorPointZ()
+{
+	return _anchor.getZ();
+}
+
 //////////////////////////////////////////////////////////////////////////
 TextProtocol::TextProtocol()
 :_textBody("")
@@ -464,15 +479,12 @@ TextProtocol::~TextProtocol()
 
 }
 
-void TextProtocol::setString(const char* text)
+void TextProtocol::setString(const std::string& text)
 {
-	if (text)
-	{
-		_textBody = text;
-	}
+	_textBody = text;
 }
 
-const char* TextProtocol::getString()
+const std::string& TextProtocol::getString()
 {
-	return _textBody.c_str();
+	return _textBody;
 }

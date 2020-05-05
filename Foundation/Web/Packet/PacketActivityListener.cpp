@@ -45,9 +45,9 @@ void PacketActivityListener::removeRecvHandler(sys::Object* target, PACKET_RECV_
 	}
 }
 
-bool PacketActivityListener::onDispatch(const char* sessionID, sys::DataQueue& dataQueue, int& packetSize)
+bool PacketActivityListener::onDispatch(const std::string& sessionID, sys::DataQueue& dataQueue, int& packetSize)
 {
-	if (sessionID == nullptr)
+	if (sessionID.empty())
 	{
 		return false;
 	}
@@ -63,9 +63,9 @@ bool PacketActivityListener::onDispatch(const char* sessionID, sys::DataQueue& d
 	return true;
 }
 
-void PacketActivityListener::onRecvHander(const char* sessionID, const char* buffer, int size)
+void PacketActivityListener::onRecvHander(const std::string& sessionID, const char* buffer, int size)
 {
-	if (sessionID == nullptr || buffer == nullptr || size == 0)
+	if (sessionID.empty() || buffer == nullptr || size == 0)
 	{
 		return;
 	}
@@ -78,11 +78,11 @@ void PacketActivityListener::onRecvHander(const char* sessionID, const char* buf
 	}
 }
 
-const char* PacketActivityListener::createRequest(const char* sessionID, sys::DataQueue& dataQueue, int& packetSize)
+const char* PacketActivityListener::createRequest(const std::string& sessionID, sys::DataQueue& dataQueue, int& packetSize)
 {
 	packetSize = 0;
 
-	if (sessionID == nullptr)
+	if (sessionID.empty())
 	{
 		return nullptr;
 	}

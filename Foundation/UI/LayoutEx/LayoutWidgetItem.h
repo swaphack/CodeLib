@@ -10,7 +10,7 @@ namespace ui
 	class LayoutWidgetItem : public LayoutItemEx
 	{
 	public:
-		LayoutWidgetItem(Widget* widget);
+		LayoutWidgetItem(render::CtrlWidget* widget);
 		virtual ~LayoutWidgetItem();
 	public:
 	};

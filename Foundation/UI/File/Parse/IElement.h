@@ -20,15 +20,15 @@ namespace ui
 		// 保存节点
 		bool save(tinyxml2::XMLElement* pXmlNode, bool clean = true);
 		// 解析节点的名称
-		virtual const char* getName() = 0;
+		virtual std::string getName() = 0;
 		// 设置布局节点
 		void setLayoutItem(LayoutItem* item);
 		// 设置ui节点
-		void setWidget(Widget* node);
+		void setWidget(render::CtrlWidget* node);
 		// 获取布局
 		LayoutItem* getLayoutItem();
 		// 获取控件
-		Widget* getWidget();
+		render::CtrlWidget* getWidget();
 	protected:
 		// 属性
 		WidgetProperty* getNodeProperty();
@@ -44,7 +44,7 @@ namespace ui
 		// 节点属性
 		WidgetProperty* _nodeProperty;
 	protected:
-		Widget* _node = nullptr;
+		render::CtrlWidget* _node = nullptr;
 		LayoutItem* _layoutItem = nullptr;
 	};
 }

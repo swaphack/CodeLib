@@ -1,11 +1,11 @@
 #pragma once
 
-#include "Common/Node/ColorNode.h"
+#include "CtrlWidget.h"
 
 namespace render
 {
 	// узуж
-	class CtrlMask : public ColorNode
+	class CtrlMask : public CtrlWidget
 	{
 	public:
 		CtrlMask();

@@ -68,7 +68,7 @@ protected:
 	// 加载字符数据
 	FT_CHAR_DATA* loadChar(uint64_t ch, int fontSize);
 	// 初始化FT模块
-	bool initFT(const char* filepath, int size);
+	bool initFT(const std::string& filepath, int size);
 	// 是否FT模块
 	void disposeFT();
 private:
@@ -233,7 +233,7 @@ FT_CHAR_DATA* FT_LABEL::loadChar(uint64_t ch, int fontSize)
 	return data;
 }
 
-bool FT_LABEL::initFT(const char* filepath, int size)
+bool FT_LABEL::initFT(const std::string& filepath, int size)
 {
 	_error = FT_Init_FreeType(&_library);
 	if (_error != 0)
@@ -241,7 +241,7 @@ bool FT_LABEL::initFT(const char* filepath, int size)
 		return false;
 	}
 
-	_error = FT_New_Face(_library, filepath, 0, &_face);
+	_error = FT_New_Face(_library, filepath.c_str(), 0, &_face);
 	if (_error != 0)
 	{
 		return false;

@@ -30,16 +30,16 @@ bool CtrlText::init()
 	return true;
 }
 
-void CtrlText::setFontPath(const char* fonturl)
+void CtrlText::setFontPath(const std::string& fonturl)
 {
 	_textDefine.filepath = fonturl;
 
 	this->notify(ENP_TEXT_FRAME);
 }
 
-const char* CtrlText::getFontPath()
+const std::string& CtrlText::getFontPath()
 {
-	return _textDefine.filepath.c_str();
+	return _textDefine.filepath;
 }
 
 void CtrlText::setFontSize(float size)
@@ -78,7 +78,7 @@ float CtrlText::getVerticalDistance()
 	return _textDefine.verticalDistance;
 }
 
-void CtrlText::setString(const char* text)
+void CtrlText::setString(const std::string&text)
 {
 	TextProtocol::setString(text);
 	_textDefine.text = text;

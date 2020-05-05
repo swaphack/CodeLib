@@ -18,7 +18,7 @@ namespace ui
 		/**
 		*	设置ui根节点
 		*/
-		void setUIRoot(Widget* root);
+		void setUIRoot(render::Node* root);
 		/**
 		*	显示
 		*/
@@ -38,11 +38,11 @@ namespace ui
 		/**
 		*	设置文件路径
 		*/
-		void setFilePath(const char* filepath);
+		void setFilePath(const std::string& filepath);
 		/**
 		*	文件路径
 		*/
-		const char* getFilePath();
+		const std::string& getFilePath();
 		/**
 		*	窗口界面大小
 		*/
@@ -84,7 +84,7 @@ namespace ui
 		// 文件路径
 		std::string m_strFilePath;
 		// ui根节点
-		Widget* m_pRoot;
+		render::Node* m_pRoot;
 		// 布局
 		Layout* m_pLayout;
 		// 布局方向

@@ -80,10 +80,12 @@
     <ClCompile Include="2d\UI\CtrlEditLabel.cpp" />
     <ClCompile Include="2d\UI\CtrlFrame.cpp" />
     <ClCompile Include="2d\UI\CtrlImage.cpp" />
+    <ClCompile Include="2d\UI\CtrlLayout.cpp" />
     <ClCompile Include="2d\UI\CtrlMask.cpp" />
     <ClCompile Include="2d\UI\CtrlScissor.cpp" />
     <ClCompile Include="2d\UI\CtrlScrollView.cpp" />
     <ClCompile Include="2d\UI\CtrlText.cpp" />
+    <ClCompile Include="2d\UI\CtrlWidget.cpp" />
     <ClCompile Include="3d\Common\Model.cpp" />
     <ClCompile Include="3d\Common\Model3DS.cpp" />
     <ClCompile Include="3d\Common\ModelFbx.cpp" />
@@ -207,12 +209,14 @@
     <ClInclude Include="2d\UI\CtrlEditLabel.h" />
     <ClInclude Include="2d\UI\CtrlFrame.h" />
     <ClInclude Include="2d\UI\CtrlImage.h" />
+    <ClInclude Include="2d\UI\CtrlLayout.h" />
     <ClInclude Include="2d\UI\CtrlMask.h" />
     <ClInclude Include="2d\UI\CtrlScissor.h" />
     <ClInclude Include="2d\UI\CtrlScrollView.h" />
     <ClInclude Include="2d\UI\CtrlText.h" />
     <ClInclude Include="2d\UI\import.h" />
     <ClInclude Include="2d\UI\macros.h" />
+    <ClInclude Include="2d\UI\CtrlWidget.h" />
     <ClInclude Include="3d\Common\Model3DS.h" />
     <ClInclude Include="3d\Common\ModelFbx.h" />
     <ClInclude Include="3d\Common\ModelObj.h" />

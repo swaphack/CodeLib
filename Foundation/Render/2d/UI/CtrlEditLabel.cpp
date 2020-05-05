@@ -175,7 +175,7 @@ CtrlEditLabel::~CtrlEditLabel()
 	_ctrlText->release();
 }
 
-void CtrlEditLabel::setString(const char* text)
+void CtrlEditLabel::setString(const std::string& text)
 {
 	TextProtocol::setString(text);
 	if (_ctrlText)

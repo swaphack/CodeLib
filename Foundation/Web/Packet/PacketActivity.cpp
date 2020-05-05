@@ -20,9 +20,9 @@ PacketActivity::~PacketActivity()
 	G_HTTPAPPLICATION->getPacketListener()->removeRecvHandler(this, static_cast<PACKET_RECV_HANDLER>(&PacketActivity::onReceiveRequest));
 }
 
-void PacketActivity::onReceiveRequest(const char* sessionID, const char* buffer, int size)
+void PacketActivity::onReceiveRequest(const std::string& sessionID, const char* buffer, int size)
 {
-	if (sessionID == nullptr || buffer == nullptr || size == 0)
+	if (sessionID.empty() || buffer == nullptr || size == 0)
 	{
 		return;
 	}

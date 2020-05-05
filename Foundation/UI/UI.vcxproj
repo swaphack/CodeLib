@@ -74,7 +74,7 @@
     <ClInclude Include="File\import.h" />
     <ClInclude Include="File\Load\ImageLoader.h" />
     <ClInclude Include="File\Load\import.h" />
-    <ClInclude Include="File\Load\NodeLoader.h" />
+    <ClInclude Include="File\Load\WidgetLoader.h" />
     <ClInclude Include="File\Load\LayoutLoader.h" />
     <ClInclude Include="File\Load\define.h" />
     <ClInclude Include="File\Load\TextLoader.h" />
@@ -97,7 +97,7 @@
   <ItemGroup>
     <ClCompile Include="Display\Display.cpp" />
     <ClCompile Include="File\Load\ImageLoader.cpp" />
-    <ClCompile Include="File\Load\NodeLoader.cpp" />
+    <ClCompile Include="File\Load\WidgetLoader.cpp" />
     <ClCompile Include="File\Load\LayoutLoader.cpp" />
     <ClCompile Include="File\Load\TextLoader.cpp" />
     <ClCompile Include="File\Parse\IElement.cpp" />
@@ -111,7 +111,9 @@
     <ClCompile Include="Layout\LayoutItem.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <Xml Include="Resource\SampleLayout.xml" />
+    <Xml Include="Resource\SampleLayout.xml">
+      <SubType>Designer</SubType>
+    </Xml>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

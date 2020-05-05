@@ -24,7 +24,10 @@ CtrlFrame::~CtrlFrame()
 
 bool CtrlFrame::init()
 {
-	ColorNode::init();
+	if (!CtrlWidget::init())
+	{
+		return false;
+	}
 
 	_notify->addListen(ENP_SPACE, [this](){
 		onTextureChange();
@@ -63,7 +66,7 @@ void CtrlFrame::drawSample()
 	GLClientArrays::enableClientState(ClientArrayType::COLOR_ARRAY);
 	GLClientArrays::setColorPointer(4, DataType::FLOAT, 0, _texRect.colors);
 
-	GLClientArrays::drawElements(DrawMode::TRIANGLES, 6, IndexDataType::UNSIGNED_SHORT, _texRect.indices);
+	GLClientArrays::drawElements(DrawMode::TRIANGLES, 6, IndexDataType::UNSIGNED_INT, _texRect.indices);
 
 	GLClientArrays::disableClientState(ClientArrayType::VERTEX_ARRAY);
 	GLClientArrays::disableClientState(ClientArrayType::TEXTURE_COORD_ARRAY);

@@ -113,14 +113,15 @@ void Node::removeChild( Node* node )
 
 void Node::removeAllChildren()
 {
-	auto begin = _children.begin();
+	std::vector<Node*> children = _children;
+	auto it = children.begin();
 
-	while (begin != _children.end())
+	while (it != children.end())
 	{
-		Node* node = dynamic_cast<Node*>((*begin));
+		Node* node = dynamic_cast<Node*>((*it));
 		ASSERT(node != nullptr);
 		node->removeFromParent();
-		begin++;
+		it++;
 	}
 
 	_children.clear();

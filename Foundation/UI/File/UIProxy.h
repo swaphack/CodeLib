@@ -18,19 +18,19 @@ namespace ui
 		/**
 		*	加载ui配置文件
 		*/
-		Layout* loadFile(const char* filepath);
+		Layout* loadFile(const std::string& filepath);
 		/**
 		*	保存ui配置文件
 		*/
-		bool saveFile(Layout* layout, const char* filepath, const math::Size& designSize);
+		bool saveFile(Layout* layout, const std::string& filepath, const math::Size& designSize);
 		/**
 		*	注册节点解析
 		*/
-		void registerElementParser(const char* name, IElement* parser);
+		void registerElementParser(const std::string& name, IElement* parser);
 		/**
 		*	注销节点解析
 		*/
-		void unregisterElementParser(const char* name);
+		void unregisterElementParser(const std::string& name);
 		/**
 		*	移除所有节点解析
 		*/
@@ -55,14 +55,14 @@ namespace ui
 	protected:
 		//////////////////////////////////////////////////////////////////////////
 		// 加载单一节点
-		LayoutItem* initLoadItem(tinyxml2::XMLElement* xmlNode);
+		LayoutItem* initLayoutItem(tinyxml2::XMLElement* xmlNode);
 		// 加载布局
-		bool loadLayout(Layout* loader, tinyxml2::XMLElement* xmlNode);
+		bool loadLayout(Layout* pLayout, tinyxml2::XMLElement* xmlNode);
 		// 加载根元素
 		Layout* loadRoot(tinyxml2::XMLElement* xmlNode);
 		//////////////////////////////////////////////////////////////////////////
 		// 保存节点
-		bool saveWidget(Widget* widget, tinyxml2::XMLElement* xmlNode);
+		bool saveWidget(render::CtrlWidget* CtrlWidget, tinyxml2::XMLElement* xmlNode);
 		// 保存布局
 		bool saveLayoutItem(LayoutItem* item, tinyxml2::XMLElement* xmlNode);
 		// 保存根元素

@@ -5,17 +5,17 @@
 namespace ui
 {
 	// 布局节点
-	class NodeLoader : public IElement
+	class WidgetLoader : public IElement
 	{
 	public:
-		NodeLoader();
-		virtual ~NodeLoader();
+		WidgetLoader();
+		virtual ~WidgetLoader();
 	protected:
 		// 解析属性
 		virtual void parseAttributes();
 		// 保存属性
 		virtual void saveAttributes();
 	public:
-		INIT_LOADER_WIDGET(LayoutItem, Widget, ELEMENT_NAME_LAYOUT);
+		INIT_LOADER_WIDGET(LayoutItem, render::CtrlWidget, ELEMENT_NAME_WIDGET);
 	};
 }

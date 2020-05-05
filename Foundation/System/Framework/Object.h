@@ -21,14 +21,14 @@ namespace sys
 		// 自动释放，需要调用G_AUTORELEASEPOOL的管理
 		void autoRelease();
 	public:
-		template<typename T, typename = std::enable_if<std::is_base_of<Object, T>::type, T>::value>
+		template<typename T>
 		bool is()
 		{
 			return dynamic_cast<T*>(this) != nullptr;
 		}
 
-		template<typename T, typename = std::enable_if<std::is_base_of<Object, T>::type, T>::value>
-		bool as()
+		template<typename T>
+		T* as()
 		{
 			return dynamic_cast<T*>(this);
 		}
@@ -39,9 +39,9 @@ namespace sys
 		void setID(uint64_t id);
 	private:
 		// 编号
-		uint64_t _id;
+		uint64_t _id = 0;
 		// 是否自动释放
-		bool _bAutoRelease;
+		bool _bAutoRelease = false;
 	};
 
 #define CREATE_OBJECT(OBJECT_TYPE) sys::createObject<OBJECT_TYPE>()

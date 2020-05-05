@@ -2,7 +2,7 @@
 
 using namespace ui;
 
-LayoutWidgetItem::LayoutWidgetItem(Widget* widget)
+LayoutWidgetItem::LayoutWidgetItem(render::CtrlWidget* widget)
 {
 	ASSERT(widget != nullptr);
 

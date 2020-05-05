@@ -176,6 +176,12 @@ namespace render
 		void setAnchorPoint(const math::Vector2& anchor);
 		// 获取锚点
 		const math::Vector3& getAnchorPoint();
+		// 获取宽度
+		float getAnchorPointX();
+		// 获取高度
+		float getAnchorPointY();
+		// 获取深度
+		float getAnchorPointZ();
 		// 设置宽度
 		void setWidth(float w);
 		// 设置高度
@@ -217,8 +223,8 @@ namespace render
 		TextProtocol();
 		virtual ~TextProtocol();
 	public:
-		void setString(const char* text);
-		const char* getString();
+		void setString(const std::string& text);
+		const std::string& getString();
 	private:
 		std::string _textBody;
 	};

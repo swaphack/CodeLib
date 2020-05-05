@@ -19,7 +19,7 @@ namespace render
 		ESD_VERTICAL_BOTTOM,
 	};
 
-	class ScrollItem : public Node
+	class ScrollItem : public CtrlWidget
 	{
 	public:
 		ScrollItem();

@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Common/Node/ColorNode.h"
-#include "Common/struct/texture_common.h"
+
+#include "CtrlWidget.h"
 
 #include "mathlib.h"
 
@@ -11,7 +11,7 @@ namespace render
 	class TexFrame;
 
 	// ÷°Õº∆¨£¨ƒ¨»œƒÊ ±’ÎªÊ÷∆
-	class CtrlFrame : public ColorNode
+	class CtrlFrame : public CtrlWidget
 	{
 	public:
 		CtrlFrame();

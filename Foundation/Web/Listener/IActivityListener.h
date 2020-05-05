@@ -11,6 +11,6 @@ namespace web
 	public:
 		// 派发
 		// 返回true,派发成功
-		virtual bool onDispatch(const char* sessionID, sys::DataQueue& dataQueue, int& packetSize) = 0;
+		virtual bool onDispatch(const std::string& sessionID, sys::DataQueue& dataQueue, int& packetSize) = 0;
 	};
 }

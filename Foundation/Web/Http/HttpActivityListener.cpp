@@ -80,7 +80,7 @@ void HttpActivityListener::removeRecvHandler(sys::Object* target, HTTP_RECV_RESP
 	}
 }
 
-bool HttpActivityListener::onDispatch(const char* sessionID, sys::DataQueue& dataQueue, int& packetSize)
+bool HttpActivityListener::onDispatch(const std::string& sessionID, sys::DataQueue& dataQueue, int& packetSize)
 {
 	sys::HttpRequest* request = createRequest(sessionID, dataQueue, packetSize);
 	if (request 
@@ -123,11 +123,11 @@ void HttpActivityListener::onRecvHander(sys::HttpResponse* data)
 	}
 }
 
-sys::HttpRequest* HttpActivityListener::createRequest(const char* sessionID, sys::DataQueue& dataQueue, int& packetSize)
+sys::HttpRequest* HttpActivityListener::createRequest(const std::string& sessionID, sys::DataQueue& dataQueue, int& packetSize)
 {
 	packetSize = 0;
 
-	if (sessionID == nullptr)
+	if (sessionID.empty())
 	{
 		return nullptr;
 	}
@@ -162,11 +162,11 @@ sys::HttpRequest* HttpActivityListener::createRequest(const char* sessionID, sys
 	return pReq;
 }
 
-sys::HttpResponse* HttpActivityListener::createResponse(const char* sessionID, sys::DataQueue& dataQueue, int& packetSize)
+sys::HttpResponse* HttpActivityListener::createResponse(const std::string& sessionID, sys::DataQueue& dataQueue, int& packetSize)
 {
 	packetSize = 0;
 
-	if (sessionID == nullptr)
+	if (sessionID.empty())
 	{
 		return nullptr;
 	}

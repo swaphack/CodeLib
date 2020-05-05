@@ -6,7 +6,6 @@ using namespace ui;
 LayoutItem::LayoutItem()
 :m_pWidget(nullptr)
 , m_bBoxVisible(false)
-, m_eAnchorPosition(EAP_NONE)
 {
 }
 
@@ -51,32 +50,28 @@ math::Size LayoutItem::getSize()
 	return m_rGeometry.getSize();
 }
 
-void LayoutItem::setWidget(Widget* widget)
+void LayoutItem::setWidget(render::CtrlWidget* widget)
 {
 	if (widget == nullptr)
 	{
 		return;
 	}
-
-	SAFE_RELEASE(m_pWidget);
-	SAFE_RETAIN(widget);
-
 	m_pWidget = widget;
 }
 
-Widget* LayoutItem::getWidget()
+render::CtrlWidget* LayoutItem::getWidget()
 {
 	return m_pWidget;
 }
 
-void LayoutItem::setAnchorPosition(AnchorPosition anchorPos)
+void LayoutItem::setAnchorPoint(const math::Vector2& anchorPoint)
 {
-	m_eAnchorPosition = anchorPos;
+	m_vAnchorPoint = anchorPoint;
 }
 
-AnchorPosition LayoutItem::getAnchorPosition()
+const math::Vector2& LayoutItem::getAnchorPoint() const
 {
-	return m_eAnchorPosition;
+	return m_vAnchorPoint;
 }
 
 bool LayoutItem::copy(LayoutItem* item)
@@ -86,11 +81,11 @@ bool LayoutItem::copy(LayoutItem* item)
 		return false;
 	}
 
+	setWidget(item->getWidget());
 	setGeometry(item->getGeometry());
 	setBoxColor(item->getBoxColor());
 	setBoxVisible(item->isBoxVisible());
-	setWidget(item->getWidget());
-	setAnchorPosition(item->getAnchorPosition());
+	setAnchorPoint(item->getAnchorPoint());
 
 	return true;
 }
@@ -137,6 +132,9 @@ void LayoutItem::setWidgetGeomerty(const math::Rect& geometry, const math::Vecto
 
 void LayoutItem::calAnchorPoint(float& x, float& y)
 {
+	x = m_vAnchorPoint.getX();
+	y = m_vAnchorPoint.getY();
+	/*
 	switch (m_eAnchorPosition)
 	{
 	case ui::EAP_NONE:
@@ -182,5 +180,17 @@ void LayoutItem::calAnchorPoint(float& x, float& y)
 	default:
 		break;
 	}
+	*/
+}
+
+void ui::LayoutItem::showWidgetInfo()
+{
+	if (m_pWidget == nullptr)
+	{
+		return;
+	}
+	PRINT("Position: (%f,%f)\n", m_pWidget->getPositionX(), m_pWidget->getPositionY());
+	PRINT("Size: (%f,%f)\n", m_pWidget->getWidth(), m_pWidget->getHeight());
+	PRINT("AnchorPoint: (%f,%f)\n", m_pWidget->getAnchorPointX(), m_pWidget->getAnchorPointY());
 }
 

@@ -4,8 +4,8 @@ using namespace ui;
 
 LayoutSpacerItem::LayoutSpacerItem()
 {
-	Widget* pWidget = render::createNode<Widget>();
-	this->setWidget(pWidget);
+	render::CtrlWidget* pCtrlWidget = render::createNode<render::CtrlWidget>();
+	this->setWidget(pCtrlWidget);
 	this->setGeometry(0, 0, 20, 20);
 	this->setOrientation(ESO_Horizontal);
 }

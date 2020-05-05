@@ -23,9 +23,9 @@ namespace render
 	public:
 		virtual bool init();
 		// 设置字库路径
-		void setFontPath(const char* fonturl);
+		void setFontPath(const std::string& fonturl);
 		// 获取字库路径
-		const char* getFontPath();
+		const std::string& getFontPath();
 		// 设置字体大小
 		void setFontSize(float size);
 		// 获取字体大小
@@ -39,7 +39,7 @@ namespace render
 		// 获取垂直间距
 		float getVerticalDistance();
 		// 设置显示的文本
-		void setString(const char* text);
+		void setString(const std::string& text);
 
 		// 设置文本水平对齐方式
 		void setHorizontalAlignment(HorizontalAlignment alignment);

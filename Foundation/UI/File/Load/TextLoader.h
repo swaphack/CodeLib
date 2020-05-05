@@ -1,12 +1,12 @@
 #pragma once
 
-#include "NodeLoader.h"
+#include "WidgetLoader.h"
 
 using namespace render;
 
 namespace ui
 {
-	class TextLoader : public NodeLoader
+	class TextLoader : public WidgetLoader
 	{
 	public:
 		TextLoader();

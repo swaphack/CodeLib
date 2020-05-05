@@ -18,7 +18,7 @@ Display::~Display()
 	this->close();
 }
 
-void Display::setUIRoot(Widget* root)
+void Display::setUIRoot(render::Node* root)
 {
 	m_pRoot = root;
 }
@@ -73,17 +73,14 @@ void Display::reload()
 	initEvent();
 }
 
-void Display::setFilePath(const char* filepath)
+void Display::setFilePath(const std::string& filepath)
 {
-	if (filepath)
-	{
-		m_strFilePath = filepath;
-	}
+	m_strFilePath = filepath;
 }
 
-const char* Display::getFilePath()
+const std::string& Display::getFilePath()
 {
-	return m_strFilePath.c_str();
+	return m_strFilePath;
 }
 
 LayoutDirection Display::getLayoutDirection()
@@ -128,7 +125,7 @@ bool Display::loadFile()
 	m_sViewSize = UIProxy::getInstance()->getDesignSize();
 	m_eLayoutDirection = UIProxy::getInstance()->getDesignDirection();
 
-	this->autoResize();
+	//this->autoResize();
 
 	if (m_pRoot && m_pLayout->getWidget())
 	{

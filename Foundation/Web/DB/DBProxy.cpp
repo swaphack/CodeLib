@@ -29,7 +29,7 @@ bool DBProxy::load(const std::map<std::string, std::string>& readTableNames, std
 	std::map<std::string, std::string>::const_iterator iter = readTableNames.begin();
 	while (iter != readTableNames.end())
 	{
-		const char* pSqlString = getCString("select * from %s", iter->first.c_str());
+		const std::string& pSqlString = getCString("select * from %s", iter->first.c_str());
 		sys::DataSheet* pDataSheet = new sys::DataSheet();
 		pDataSheet->setKey(iter->second);
 		if (!pDBString->excuteSQL(pSqlString, pDataSheet))
@@ -46,9 +46,9 @@ bool DBProxy::load(const std::map<std::string, std::string>& readTableNames, std
 	return true;
 }
 
-bool DBProxy::insert(const char* tableName, const std::map<std::string, std::string>& values)
+bool DBProxy::insert(const std::string& tableName, const std::map<std::string, std::string>& values)
 {
-	if (_db == nullptr || tableName == nullptr || values.size() == 0)
+	if (_db == nullptr || tableName.empty() || values.size() == 0)
 	{
 		return false;
 	}
@@ -75,9 +75,9 @@ bool DBProxy::insert(const char* tableName, const std::map<std::string, std::str
 	return exec(pSqlString.c_str());
 }
 
-bool DBProxy::del(const char* tableName, const std::map<std::string, std::string>& conditions)
+bool DBProxy::del(const std::string& tableName, const std::map<std::string, std::string>& conditions)
 {
-	if (_db == nullptr || tableName == nullptr || conditions.size() == 0)
+	if (_db == nullptr || tableName.empty() || conditions.size() == 0)
 	{
 		return false;
 	}
@@ -111,9 +111,9 @@ bool DBProxy::del(const char* tableName, const std::map<std::string, std::string
 	return exec(pSqlString.c_str());
 }
 
-bool DBProxy::update(const char* tableName, const std::map<std::string, std::string>& conditions, const std::map<std::string, std::string>& values)
+bool DBProxy::update(const std::string& tableName, const std::map<std::string, std::string>& conditions, const std::map<std::string, std::string>& values)
 {
-	if (_db == nullptr || tableName == nullptr || values.size() == 0)
+	if (_db == nullptr || tableName.empty() || values.size() == 0)
 	{
 		return false;
 	}
@@ -162,9 +162,9 @@ bool DBProxy::update(const char* tableName, const std::map<std::string, std::str
 	return exec(pSqlString.c_str());
 }
 
-bool DBProxy::exec(const char* strSQL, sys::IDataSheet* pDataSheet)
+bool DBProxy::exec(const std::string& strSQL, sys::IDataSheet* pDataSheet)
 {
-	if (_db == nullptr || strSQL == nullptr)
+	if (_db == nullptr || strSQL.empty())
 	{
 		return false;
 	}

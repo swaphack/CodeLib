@@ -17,209 +17,201 @@ void WidgetProperty::Clear()
 	_attributes.clear();
 }
 
-void WidgetProperty::setAttribute(const char* name, bool value)
+void WidgetProperty::setAttribute(const std::string& name, bool value)
 {
 	int val = value ? 1 : 0;
 	this->setAttribute(name, val);
 }
 
-void WidgetProperty::setAttribute(const char* name, const char* value)
+void WidgetProperty::setAttribute(const std::string& name, const std::string& value)
 {
-	if (name && value != nullptr)
+	if (!name.empty() && !value.empty())
 	{
 		_attributes[name] = value;
 	}
 }
 
-void WidgetProperty::setAttribute(const char* name, const std::string& value)
+void WidgetProperty::setAttribute(const std::string& name, char value)
 {
-	if (name && !value.empty())
-	{
-		_attributes[name] = value;
-	}
-}
-
-void WidgetProperty::setAttribute(const char* name, char value)
-{
-	if (name == nullptr)
+	if (name.empty())
 	{
 		return;
 	}
-
-	setAttribute(name, getCString("%d", value));
+	std::string str = getCString("%d", value);
+	setAttribute(name, str);
 }
 
-void WidgetProperty::setAttribute(const char* name, short value)
+void WidgetProperty::setAttribute(const std::string& name, short value)
 {
-	if (name == nullptr)
+	if (name.empty())
 	{
 		return;
 	}
-
-	setAttribute(name, getCString("%d", value));
+	std::string str = getCString("%d", value);
+	setAttribute(name, str);
 }
 
-void WidgetProperty::setAttribute(const char* name, int value)
+void WidgetProperty::setAttribute(const std::string& name, int value)
 {
-	if (name == nullptr)
+	if (name.empty())
 	{
 		return;
 	}
-
-	setAttribute(name, getCString("%d", value));
+	std::string str = getCString("%d", value);
+	setAttribute(name, str);
 }
 
-void WidgetProperty::setAttribute(const char* name, float value)
+void WidgetProperty::setAttribute(const std::string& name, float value)
 {
-	if (name == nullptr)
+	if (name.empty())
 	{
 		return;
 	}
-
-	setAttribute(name, getCString("%f", value));
+	std::string str = getCString("%d", value);
+	setAttribute(name, str);
 }
 
-void WidgetProperty::setAttribute(const char* name, double value)
+void WidgetProperty::setAttribute(const std::string& name, double value)
 {
-	if (name == nullptr)
+	if (name.empty())
 	{
 		return;
 	}
-
-	setAttribute(name, getCString("%lf", value));
+	std::string str = getCString("%lf", value);
+	setAttribute(name, str);
 }
 
-void WidgetProperty::setAttribute(const char* name, long value)
+void WidgetProperty::setAttribute(const std::string& name, long value)
 {
-	if (name == nullptr)
+	if (name.empty())
 	{
 		return;
 	}
-
-	setAttribute(name, getCString("%ld", value));
+	std::string str = getCString("%ld", value);
+	setAttribute(name, str);
 }
 
-void WidgetProperty::setAttribute(const char* name, uint8_t value)
+void WidgetProperty::setAttribute(const std::string& name, uint8_t value)
 {
-	if (name == nullptr)
+	if (name.empty())
 	{
 		return;
 	}
-
-	setAttribute(name, getCString("%u", value));
+	std::string str = getCString("%u", value);
+	setAttribute(name, str);
 }
 
-void WidgetProperty::setAttribute(const char* name, uint16_t value)
+void WidgetProperty::setAttribute(const std::string& name, uint16_t value)
 {
-	if (name == nullptr)
+	if (name.empty())
 	{
 		return;
 	}
-
-	setAttribute(name, getCString("%u", value));
+	std::string str = getCString("%u", value);
+	setAttribute(name, str);
 }
 
-void WidgetProperty::setAttribute(const char* name, uint32_t value)
+void WidgetProperty::setAttribute(const std::string& name, uint32_t value)
 {
-	if (name == nullptr)
+	if (name.empty())
 	{
 		return;
 	}
-
-	setAttribute(name, getCString("%u", value));
+	std::string str = getCString("%u", value);
+	setAttribute(name, str);
 }
 
-void WidgetProperty::setAttribute(const char* name, uint64_t value)
+void WidgetProperty::setAttribute(const std::string& name, uint64_t value)
 {
-	if (name == nullptr)
+	if (name.empty())
 	{
 		return;
 	}
-
-	setAttribute(name, getCString("%lu", value));
+	std::string str = getCString("%lu", value);
+	setAttribute(name, str);
 }
 
-void WidgetProperty::setAttribute(const char* name, const math::Vector3& value)
+void WidgetProperty::setAttribute(const std::string& name, const math::Vector3& value)
 {
-	if (name == nullptr)
+	if (name.empty())
 	{
 		return;
 	}
-
-	setAttribute(name, getCString("%f,%f,%f", value.getX(), value.getY(), value.getZ()));
+	std::string str = getCString("%f,%f,%f", value.getX(), value.getY(), value.getZ());
+	setAttribute(name, str);
 }
 
-void WidgetProperty::setAttribute(const char* name, const math::Vector2& value)
+void WidgetProperty::setAttribute(const std::string& name, const math::Vector2& value)
 {
-	if (name == nullptr)
+	if (name.empty())
 	{
 		return;
 	}
-
-	setAttribute(name, getCString("%f,%f", value.getX(), value.getY()));
+	std::string str = getCString("%f,%f", value.getX(), value.getY());
+	setAttribute(name, str);
 }
 
-void WidgetProperty::setAttribute(const char* name, const sys::Color4B& value)
+void WidgetProperty::setAttribute(const std::string& name, const sys::Color4B& value)
 {
-	if (name == nullptr)
+	if (name.empty())
 	{
 		return;
 	}
-
-	setAttribute(name, getCString("%d,%d,%d,%d", value.red, value.green, value.blue, value.alpha));
+	std::string str = getCString("%d,%d,%d,%d", value.red, value.green, value.blue, value.alpha);
+	setAttribute(name, str);
 }
 
-void WidgetProperty::setAttribute(const char* name, const math::Size& value)
+void WidgetProperty::setAttribute(const std::string& name, const math::Size& value)
 {
-	if (name == nullptr)
+	if (name.empty())
 	{
 		return;
 	}
-
-	setAttribute(name, getCString("%f,%f", value.getWidth(), value.getHeight()));
+	std::string str = getCString("%f,%f", value.getWidth(), value.getHeight());
+	setAttribute(name, str);
 }
 
-void WidgetProperty::setAttribute(const char* name, const math::Rect& value)
+void WidgetProperty::setAttribute(const std::string& name, const math::Rect& value)
 {
-	if (name == nullptr)
+	if (name.empty())
 	{
 		return;
 	}
-
-	setAttribute(name, getCString("%f,%f,%f,%f", value.getX(), value.getY(), value.getWidth(), value.getHeight()));
+	std::string str = getCString("%f,%f,%f,%f", value.getX(), value.getY(), value.getWidth(), value.getHeight());
+	setAttribute(name, str);
 }
 
-void WidgetProperty::setAttribute(const char* name, const render::BlendParam& value)
+void WidgetProperty::setAttribute(const std::string& name, const render::BlendParam& value)
 {
-	if (name == nullptr)
+	if (name.empty())
 	{
 		return;
 	}
-
-	setAttribute(name, getCString("%d,%d", value.src, value.dest));
+	std::string str = getCString("%d,%d", value.src, value.dest);
+	setAttribute(name, str);
 }
 
-void WidgetProperty::setAttribute(const char* name, const sys::Margin& value)
+void WidgetProperty::setAttribute(const std::string& name, const sys::Margin& value)
 {
-	if (name == nullptr)
+	if (name.empty())
 	{
 		return;
 	}
-
-	setAttribute(name, getCString("%f,%f,%f,%f", value.left, value.right, value.bottom, value.top));
+	std::string str = getCString("%f,%f,%f,%f", value.left, value.right, value.bottom, value.top);
+	setAttribute(name, str);
 }
 
-void WidgetProperty::setAttribute(const char* name, const SizePolicy& value)
+void WidgetProperty::setAttribute(const std::string& name, const SizePolicy& value)
 {
-	if (name == nullptr)
+	if (name.empty())
 	{
 		return;
 	}
-
-	setAttribute(name, getCString("%d,%d", value.width, value.height));
+	std::string str = getCString("%d,%d", value.width, value.height);
+	setAttribute(name, str);
 }
 
-bool WidgetProperty::getAttribute(const char* name, bool& defaultValue)
+bool WidgetProperty::getAttribute(const std::string& name, bool& defaultValue)
 {
 	int value = 0;
 	if (!getAttribute(name, value))
@@ -232,10 +224,10 @@ bool WidgetProperty::getAttribute(const char* name, bool& defaultValue)
 	return true;
 }
 
-bool WidgetProperty::getAttribute(const char* name, std::string& defaultValue)
+bool WidgetProperty::getAttribute(const std::string& name, std::string& defaultValue)
 {
-	const char* value = getAttribute(name);
-	if (value == nullptr)
+	const std::string& value = getAttribute(name);
+	if (value.empty())
 	{
 		return false;
 	}
@@ -245,140 +237,140 @@ bool WidgetProperty::getAttribute(const char* name, std::string& defaultValue)
 	return true;
 }
 
-bool WidgetProperty::getAttribute(const char* name, char& defaultValue)
+bool WidgetProperty::getAttribute(const std::string& name, char& defaultValue)
 {
-	const char* value = getAttribute(name);
-	if (value == nullptr)
+	const std::string& value = getAttribute(name);
+	if (value.empty())
 	{
 		return false;
 	}
 	
-	defaultValue = (char)atoi(value);
+	defaultValue = (char)atoi(value.c_str());
 
 	return true;
 }
 
-bool WidgetProperty::getAttribute(const char* name, short& defaultValue)
+bool WidgetProperty::getAttribute(const std::string& name, short& defaultValue)
 {
-	const char* value = getAttribute(name);
-	if (value == nullptr)
+	const std::string& value = getAttribute(name);
+	if (value.empty())
 	{
 		return false;
 	}
 
-	defaultValue = (short)atoi(value);
+	defaultValue = (short)atoi(value.c_str());
 
 	return true;
 }
 
-bool WidgetProperty::getAttribute(const char* name, int& defaultValue)
+bool WidgetProperty::getAttribute(const std::string& name, int& defaultValue)
 {
-	const char* value = getAttribute(name);
-	if (value == nullptr)
+	const std::string& value = getAttribute(name);
+	if (value.empty())
 	{
 		return false;
 	}
 
-	defaultValue = (int)atoi(value);
+	defaultValue = (int)atoi(value.c_str());
 
 	return true;
 }
 
-bool WidgetProperty::getAttribute(const char* name, float& defaultValue)
+bool WidgetProperty::getAttribute(const std::string& name, float& defaultValue)
 {
-	const char* value = getAttribute(name);
-	if (value == nullptr)
+	const std::string& value = getAttribute(name);
+	if (value.empty())
 	{
 		return false;
 	}
 
-	defaultValue = (float)atof(value);
+	defaultValue = (float)atof(value.c_str());
 
 	return true;
 }
 
-bool WidgetProperty::getAttribute(const char* name, double& defaultValue)
+bool WidgetProperty::getAttribute(const std::string& name, double& defaultValue)
 {
-	const char* value = getAttribute(name);
-	if (value == nullptr)
+	const std::string& value = getAttribute(name);
+	if (value.empty())
 	{
 		return false;
 	}
 
-	defaultValue = atof(value);
+	defaultValue = atof(value.c_str());
 
 	return true;
 }
 
-bool WidgetProperty::getAttribute(const char* name, long& defaultValue)
+bool WidgetProperty::getAttribute(const std::string& name, long& defaultValue)
 {
-	const char* value = getAttribute(name);
-	if (value == nullptr)
+	const std::string& value = getAttribute(name);
+	if (value.empty())
 	{
 		return false;
 	}
 
-	defaultValue = atol(value);
+	defaultValue = atol(value.c_str());
 
 	return true;
 }
 
-bool WidgetProperty::getAttribute(const char* name, uint8_t& defaultValue)
+bool WidgetProperty::getAttribute(const std::string& name, uint8_t& defaultValue)
 {
-	const char* value = getAttribute(name);
-	if (value == nullptr)
+	const std::string& value = getAttribute(name);
+	if (value.empty())
 	{
 		return false;
 	}
 
-	defaultValue = (uint8_t)atoi(value);
+	defaultValue = (uint8_t)atoi(value.c_str());
 
 	return true;
 }
 
-bool WidgetProperty::getAttribute(const char* name, uint16_t& defaultValue)
+bool WidgetProperty::getAttribute(const std::string& name, uint16_t& defaultValue)
 {
-	const char* value = getAttribute(name);
-	if (value == nullptr)
+	const std::string& value = getAttribute(name);
+	if (value.empty())
 	{
 		return false;
 	}
 
-	defaultValue = (uint16_t)atoi(value);
+	defaultValue = (uint16_t)atoi(value.c_str());
 
 	return true;
 }
 
-bool WidgetProperty::getAttribute(const char* name, uint32_t& defaultValue)
+bool WidgetProperty::getAttribute(const std::string& name, uint32_t& defaultValue)
 {
-	const char* value = getAttribute(name);
-	if (value == nullptr)
+	const std::string& value = getAttribute(name);
+	if (value.empty())
 	{
 		return false;
 	}
 
-	defaultValue = (uint32_t)atoi(value);
+	defaultValue = (uint32_t)atoi(value.c_str());
 
 	return true;
 }
 
-bool WidgetProperty::getAttribute(const char* name, uint64_t& defaultValue)
+bool WidgetProperty::getAttribute(const std::string& name, uint64_t& defaultValue)
 {
-	const char* value = getAttribute(name);
-	if (value == nullptr)
+	const std::string& value = getAttribute(name);
+	if (value.empty())
 	{
 		return false;
 	}
 
-	defaultValue = (uint64_t)atol(value);
+	defaultValue = (uint64_t)atol(value.c_str());
 
 	return true;
 }
 
-bool WidgetProperty::getAttribute(const char* name, math::Vector3& defaultValue)
+bool WidgetProperty::getAttribute(const std::string& name, math::Vector3& defaultValue)
 {
-	const char* value = getAttribute(name);
-	if (value == nullptr)
+	const std::string& value = getAttribute(name);
+	if (value.empty())
 	{
 		return false;
 	}
@@ -398,10 +390,10 @@ bool WidgetProperty::getAttribute(const char* name, math::Vector3& defaultValue)
 	return true;
 }
 
-bool WidgetProperty::getAttribute(const char* name, math::Vector2& defaultValue)
+bool WidgetProperty::getAttribute(const std::string& name, math::Vector2& defaultValue)
 {
-	const char* value = getAttribute(name);
-	if (value == nullptr)
+	const std::string& value = getAttribute(name);
+	if (value.empty())
 	{
 		return false;
 	}
@@ -421,10 +413,10 @@ bool WidgetProperty::getAttribute(const char* name, math::Vector2& defaultValue)
 	return true;
 }
 
-bool WidgetProperty::getAttribute(const char* name, sys::Color4B& defaultValue)
+bool WidgetProperty::getAttribute(const std::string& name, sys::Color4B& defaultValue)
 {
-	const char* value = getAttribute(name);
-	if (value == nullptr)
+	const std::string& value = getAttribute(name);
+	if (value.empty())
 	{
 		return false;
 	}
@@ -444,10 +436,10 @@ bool WidgetProperty::getAttribute(const char* name, sys::Color4B& defaultValue)
 	return true;
 }
 
-bool WidgetProperty::getAttribute(const char* name, math::Size& defaultValue)
+bool WidgetProperty::getAttribute(const std::string& name, math::Size& defaultValue)
 {
-	const char* value = getAttribute(name);
-	if (value == nullptr)
+	const std::string& value = getAttribute(name);
+	if (value.empty())
 	{
 		return false;
 	}
@@ -467,10 +459,10 @@ bool WidgetProperty::getAttribute(const char* name, math::Size& defaultValue)
 	return true;
 }
 
-bool WidgetProperty::getAttribute(const char* name, math::Rect& defaultValue)
+bool WidgetProperty::getAttribute(const std::string& name, math::Rect& defaultValue)
 {
-	const char* value = getAttribute(name);
-	if (value == nullptr)
+	const std::string& value = getAttribute(name);
+	if (value.empty())
 	{
 		return false;
 	}
@@ -490,10 +482,10 @@ bool WidgetProperty::getAttribute(const char* name, math::Rect& defaultValue)
 	return true;
 }
 
-bool WidgetProperty::getAttribute(const char* name, sys::Margin& defaultValue)
+bool WidgetProperty::getAttribute(const std::string& name, sys::Margin& defaultValue)
 {
-	const char* value = getAttribute(name);
-	if (value == nullptr)
+	const std::string& value = getAttribute(name);
+	if (value.empty())
 	{
 		return false;
 	}
@@ -513,10 +505,10 @@ bool WidgetProperty::getAttribute(const char* name, sys::Margin& defaultValue)
 	return true;
 }
 
-bool WidgetProperty::getAttribute(const char* name, render::BlendParam& defaultValue)
+bool WidgetProperty::getAttribute(const std::string& name, render::BlendParam& defaultValue)
 {
-	const char* value = getAttribute(name);
-	if (value == nullptr)
+	const std::string& value = getAttribute(name);
+	if (value.empty())
 	{
 		return false;
 	}
@@ -539,10 +531,10 @@ bool WidgetProperty::getAttribute(const char* name, render::BlendParam& defaultV
 	return true;
 }
 
-bool WidgetProperty::getAttribute(const char* name, SizePolicy& defaultValue)
+bool WidgetProperty::getAttribute(const std::string& name, SizePolicy& defaultValue)
 {
-	const char* value = getAttribute(name);
-	if (value == nullptr)
+	const std::string& value = getAttribute(name);
+	if (value.empty())
 	{
 		return false;
 	}
@@ -572,18 +564,50 @@ Attributes::const_iterator WidgetProperty::getAttributeEnd()
 	return _attributes.end();
 }
 
-const char* WidgetProperty::getAttribute(const char* name)
+std::string WidgetProperty::getAttribute(const std::string& name)
 {
-
-	if (name == nullptr)
+	if (name.empty())
 	{
-		return nullptr;
+		return "";
 	}
 
 	if (_attributes.find(name) == _attributes.end())
 	{
-		return nullptr;
+		return "";
 	}
 
-	return _attributes[name].c_str();
+	return _attributes[name];
+}
+
+bool ui::WidgetProperty::getAttribute(const std::string& name, sys::Color3B& defaultValue)
+{
+	const std::string& value = getAttribute(name);
+	if (value.empty())
+	{
+		return false;
+	}
+
+	sys::String val = value;
+	std::vector<sys::String> params;
+
+	val.split(",", params);
+
+	if (params.size() != 3)
+	{
+		return false;
+	}
+
+	defaultValue = sys::Color3B(atof(params[0].getString()), atof(params[1].getString()), atof(params[2].getString()));
+
+	return true;
+}
+
+void ui::WidgetProperty::setAttribute(const std::string& name, const sys::Color3B& value)
+{
+	if (name.empty())
+	{
+		return;
+	}
+	std::string str = getCString("%d,%d,%d", value.red, value.green, value.blue);
+	setAttribute(name, str);
 }

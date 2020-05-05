@@ -52,7 +52,7 @@ void ListenerPool::clear()
 	_listeners.clear();
 }
 
-bool ListenerPool::onDispatch(const char* sessionID, sys::DataQueue& dataQueue)
+bool ListenerPool::onDispatch(const std::string& sessionID, sys::DataQueue& dataQueue)
 {
 	std::map<int, IActivityListener*>::iterator iter = _listeners.begin();
 

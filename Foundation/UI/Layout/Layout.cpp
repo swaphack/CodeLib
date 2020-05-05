@@ -9,10 +9,6 @@ Layout::Layout()
 Layout::~Layout()
 {
 	this->removeAllItems();
-	if (this->getWidget())
-	{
-		this->getWidget()->removeFromParent();
-	}
 }
 
 void Layout::setLeftMargin(float margin)
@@ -68,13 +64,14 @@ const sys::Margin& Layout::getMargin()
 void Layout::addItem(LayoutItem* item)
 {
 	ASSERT(item != nullptr);
-
+	
+	SAFE_RETAIN(item);
 	m_vChildren.push_back(item);
 	
-	if (item->getWidget() && this->getWidget())
-	{
-		this->getWidget()->addChild(item->getWidget());
-	}
+// 	if (item->getWidget() && this->getWidget())
+// 	{
+// 		this->getWidget()->addChild(item->getWidget());
+// 	}
 }
 
 void Layout::removeItem(LayoutItem* item)
@@ -86,15 +83,15 @@ void Layout::removeItem(LayoutItem* item)
 		if (m_vChildren[i] == item)
 		{
 			m_vChildren.erase(m_vChildren.begin() + i);
-			delete item;
+			SAFE_RELEASE(item);
 			break;
 		}
 	}
 
-	if (item->getWidget() && this->getWidget())
-	{
-		this->getWidget()->removeChild(item->getWidget());
-	}
+// 	if (item->getWidget() && this->getWidget())
+// 	{
+// 		this->getWidget()->removeChild(item->getWidget());
+// 	}
 }
 
 void Layout::removeAllItems()
@@ -103,15 +100,12 @@ void Layout::removeAllItems()
 
 	while (iter != m_vChildren.end())
 	{
-		delete *iter;
+		SAFE_RELEASE((*iter));
 		iter++;
 	}
 
 	m_vChildren.clear();
-	if (this->getWidget())
-	{
-		this->getWidget()->removeAllChildren();
-	}
+	
 }
 
 const std::vector<LayoutItem*>& Layout::getChildren()
@@ -205,7 +199,12 @@ void Layout::calLayoutPosition(LayoutItem* child, const math::Size& srcSize, con
 	}
 
 	const math::Rect& itemRect = child->getGeometry();
-	AnchorPosition anchorPos = (AnchorPosition)child->getAnchorPosition();
+
+	const math::Vector2 anchorPoint = child->getAnchorPoint();
+
+	x = anchorPoint.getX();
+	y = anchorPoint.getY();
+	/*
 	switch (anchorPos)
 	{
 	case ui::EAP_NONE:
@@ -251,6 +250,7 @@ void Layout::calLayoutPosition(LayoutItem* child, const math::Size& srcSize, con
 	default:
 		break;
 	}
+	*/
 }
 
 void Layout::calLayoutSize(LayoutItem* child, const math::Size& srcSize, const math::Size& newSize, float& w, float& h)

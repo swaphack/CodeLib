@@ -29,7 +29,7 @@ bool IElement::load(tinyxml2::XMLElement* pXmlNode, bool clean/* = true*/)
 
 	while (pAttribute)
 	{
-		getNodeProperty()->setAttribute(pAttribute->Name(), pAttribute->Value());
+		getNodeProperty()->setAttribute(std::string(pAttribute->Name()), std::string(pAttribute->Value()));
 
 		pAttribute = (tinyxml2::XMLAttribute*)pAttribute->Next();
 	}
@@ -81,7 +81,7 @@ WidgetProperty* IElement::getNodeProperty()
 	return _nodeProperty;
 }
 
-void IElement::setWidget(Widget* node)
+void IElement::setWidget(render::CtrlWidget* node)
 {
 	_node = node;
 }
@@ -96,7 +96,7 @@ LayoutItem* ui::IElement::getLayoutItem()
 	return _layoutItem;
 }
 
-Widget* ui::IElement::getWidget()
+render::CtrlWidget* ui::IElement::getWidget()
 {
 	return _node;
 }

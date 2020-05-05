@@ -15,7 +15,7 @@ namespace render
 		virtual ~CtrlEditLabel();
 	public:
 		// 设置文本
-		void setString(const char* text);
+		void setString(const std::string& text);
 		// 获取显示文本控件
 		CtrlText* getCtrlText();
 		// 输出操作处理

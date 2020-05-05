@@ -1,7 +1,7 @@
 #pragma once
 
 #include "system.h"
-#include "Common/Node/Node.h"
+#include "CtrlWidget.h"
 
 namespace render
 {
@@ -16,7 +16,7 @@ namespace render
 	#define EDITINPUT_DELEGATTE_SELECTOR(HANDLER_SEL) static_cast<EDITINPUT_DELEGATE_HANDLER>(&HANDLER_SEL)
 
 	// ±à¼­¿ò
-	class CtrlEditBox : public Node
+	class CtrlEditBox : public CtrlWidget
 	{
 	public:
 		CtrlEditBox();

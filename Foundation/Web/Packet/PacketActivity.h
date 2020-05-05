@@ -12,7 +12,7 @@ namespace web
 		PacketActivity();
 		virtual ~PacketActivity();
 	public:
-		void onReceiveRequest(const char* sessionID, const char* buffer, int size);
+		void onReceiveRequest(const std::string& sessionID, const char* buffer, int size);
 	protected:
 		// 收到报文请求
 		virtual void doGet(const char* buffer, int size);

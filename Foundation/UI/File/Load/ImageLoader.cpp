@@ -23,29 +23,30 @@ ImageLoader::~ImageLoader()
 void ImageLoader::parseAttributes()
 {
 	sys::Color4B color;
-	std::string str;
-	bool boolVal;
-	uint8_t ucVal;
+	std::string filepath;
+	bool bFlipX = false;
+	bool bFlipY = false;
+	uint8_t opacity = 255;
 	BlendParam blend;
 
-	LOAD_WDIGET_ATTRIBUTE(PROPERTY_COLOR, setColor, color);
-	LOAD_WDIGET_ATTRIBUTE(PROPERTY_OPACITY, setOpacity, ucVal);
-	LOAD_WDIGET_ATTRIBUTE(PROPERTY_BLEND, setBlend, blend);
-	LOAD_WDIGET_STRING_ATTRIBUTE(PROPERTY_PATH, setImagePath, str);
-	LOAD_WDIGET_ATTRIBUTE(PROPERTY_FLIPX, setFlipX, boolVal);
-	LOAD_WDIGET_ATTRIBUTE(PROPERTY_FLIPY, setFlipY, boolVal);
+	LOAD_WIDGET_ATTRIBUTE(PROPERTY_COLOR, setColor, color);
+	LOAD_WIDGET_ATTRIBUTE(PROPERTY_OPACITY, setOpacity, opacity);
+	LOAD_WIDGET_ATTRIBUTE(PROPERTY_BLEND, setBlend, blend);
+	LOAD_WIDGET_STRING_ATTRIBUTE(PROPERTY_PATH, setImagePath, filepath);
+	LOAD_WIDGET_ATTRIBUTE(PROPERTY_FLIPX, setFlipX, bFlipX);
+	LOAD_WIDGET_ATTRIBUTE(PROPERTY_FLIPY, setFlipY, bFlipY);
 
-	NodeLoader::parseAttributes();
+	WidgetLoader::parseAttributes();
 }
 
 void ImageLoader::saveAttributes()
 {
-	NodeLoader::saveAttributes();
+	WidgetLoader::saveAttributes();
 
-	SAVE_WDIGET_ATTRIBUTE(PROPERTY_COLOR, getColor);
-	SAVE_WDIGET_ATTRIBUTE(PROPERTY_OPACITY, getOpacity);
-	SAVE_WDIGET_ATTRIBUTE(PROPERTY_BLEND, getBlend);
-	SAVE_WDIGET_ATTRIBUTE(PROPERTY_PATH, getImagePath);
-	SAVE_WDIGET_ATTRIBUTE(PROPERTY_FLIPX, isFlipX);
-	SAVE_WDIGET_ATTRIBUTE(PROPERTY_FLIPY, isFlipY);
+	SAVE_WIDGET_ATTRIBUTE(PROPERTY_COLOR, getColor);
+	SAVE_WIDGET_ATTRIBUTE(PROPERTY_OPACITY, getOpacity);
+	SAVE_WIDGET_ATTRIBUTE(PROPERTY_BLEND, getBlend);
+	SAVE_WIDGET_ATTRIBUTE(PROPERTY_PATH, getImagePath);
+	SAVE_WIDGET_ATTRIBUTE(PROPERTY_FLIPX, isFlipX);
+	SAVE_WIDGET_ATTRIBUTE(PROPERTY_FLIPY, isFlipY);
 }

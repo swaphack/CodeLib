@@ -15,7 +15,7 @@ namespace render
 		GLWindow();
 		virtual ~GLWindow();
 	public:
-		void createWindow(const char* title, int width, int height, int millis, RenderApplication* render);
+		void createWindow(const std::string& title, int width, int height, int millis, RenderApplication* render);
 	protected:
 		// ³õÊ¼»¯´°¿Ú
 		virtual bool init();

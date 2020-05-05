@@ -68,26 +68,26 @@ UIProxy* UIProxy::getInstance()
 	return s_UIProxy;
 }
 
-Layout* UIProxy::loadFile(const char* filepath)
+Layout* UIProxy::loadFile(const std::string& filepath)
 {
-	if (filepath == nullptr)
+	if (filepath.empty())
 	{
 		return nullptr;
 	}
 
 	tinyxml2::XMLDocument doc;
-	if (doc.LoadFile(filepath) != tinyxml2::XML_SUCCESS)
+	if (doc.LoadFile(filepath.c_str()) != tinyxml2::XML_SUCCESS)
 	{
 		return nullptr;
 	}
 
-	tinyxml2::XMLElement* pRoot = doc.RootElement();
-	if (pRoot == nullptr)
+	tinyxml2::XMLElement* root = doc.RootElement();
+	if (root == nullptr)
 	{
 		return nullptr;
 	}
 
-	Layout* pLayout = loadRoot(pRoot);
+	Layout* pLayout = loadRoot(root);
 	if (pLayout == nullptr)
 	{
 		return nullptr;
@@ -96,9 +96,9 @@ Layout* UIProxy::loadFile(const char* filepath)
 	return pLayout;
 }
 
-bool UIProxy::saveFile(Layout* layout, const char* filepath, const math::Size& designSize)
+bool UIProxy::saveFile(Layout* layout, const std::string& filepath, const math::Size& designSize)
 {
-	if (layout == nullptr || filepath == nullptr)
+	if (layout == nullptr || filepath.empty())
 	{
 		return false;
 	}
@@ -115,14 +115,14 @@ bool UIProxy::saveFile(Layout* layout, const char* filepath, const math::Size& d
 		return false;
 	}
 
-	bool result = tinyxml2::XML_SUCCESS == doc.SaveFile(filepath);
+	bool result = tinyxml2::XML_SUCCESS == doc.SaveFile(filepath.c_str());
 
 	return result;
 }
 
-void UIProxy::registerElementParser(const char* name, IElement* parser)
+void UIProxy::registerElementParser(const std::string& name, IElement* parser)
 {
-	if (name == nullptr || parser == NULL)
+	if (name.empty() || parser == NULL)
 	{
 		return;
 	}
@@ -132,9 +132,9 @@ void UIProxy::registerElementParser(const char* name, IElement* parser)
 	_elementParsers[name] = parser;
 }
 
-void UIProxy::unregisterElementParser(const char* name)
+void UIProxy::unregisterElementParser(const std::string& name)
 {
-	if (name == nullptr)
+	if (name.empty())
 	{
 		return;
 	}
@@ -181,7 +181,7 @@ IElement* UIProxy::getElement(const std::string& name)
 	return _elementParsers[name];
 }
 
-LayoutItem* UIProxy::initLoadItem(tinyxml2::XMLElement* xmlNode)
+LayoutItem* UIProxy::initLayoutItem(tinyxml2::XMLElement* xmlNode)
 {
 	if (xmlNode == nullptr)
 	{
@@ -195,7 +195,7 @@ LayoutItem* UIProxy::initLoadItem(tinyxml2::XMLElement* xmlNode)
 	}
 	IElement* element = iter->second;
 
-	NodeLoader* loader = dynamic_cast<NodeLoader*>(element);
+	WidgetLoader* loader = dynamic_cast<WidgetLoader*>(element);
 	if (loader == nullptr)
 	{
 		return nullptr;
@@ -208,12 +208,13 @@ LayoutItem* UIProxy::initLoadItem(tinyxml2::XMLElement* xmlNode)
 	{
 		return nullptr;
 	}
+	loader->getLayoutItem()->showWidgetInfo();
 	return loader->getLayoutItem();
 }
 
-bool UIProxy::loadLayout(Layout* loader, tinyxml2::XMLElement* xmlNode)
+bool UIProxy::loadLayout(Layout* pLayout, tinyxml2::XMLElement* xmlNode)
 {
-	if (loader == nullptr || xmlNode == nullptr)
+	if (pLayout == nullptr || xmlNode == nullptr)
 	{
 		return false;
 	}
@@ -222,10 +223,15 @@ bool UIProxy::loadLayout(Layout* loader, tinyxml2::XMLElement* xmlNode)
 	tinyxml2::XMLElement* childNode = xmlNode;
 	while (childNode)
 	{
-		childItem = initLoadItem(childNode);
+		childItem = initLayoutItem(childNode);
 		if (childItem)
 		{
-			loader->addItem(childItem);
+			pLayout->addItem(childItem);
+			if (pLayout->getWidget() && childItem->getWidget())
+			{
+				pLayout->getWidget()->addChild(childItem->getWidget());
+			}
+
 			Layout* childLayout = dynamic_cast<Layout*>(childItem);
 			if (childNode->FirstChild() && childLayout)
 			{
@@ -245,8 +251,15 @@ Layout* UIProxy::loadRoot(tinyxml2::XMLElement* xmlNode)
 		return nullptr;
 	}
 
-	_designSize.setWidth(xmlNode->IntAttribute(LAYOUT_SIZE_WIDTH));
-	_designSize.setHeight(xmlNode->IntAttribute(LAYOUT_SIZE_HEIGHT));
+	int width = xmlNode->IntAttribute(LAYOUT_SIZE_WIDTH);
+	int height = xmlNode->IntAttribute(LAYOUT_SIZE_HEIGHT);
+
+	_designSize.setWidth(width);
+	_designSize.setHeight(height);
+
+	width = _designSize.getWidth();
+	height = _designSize.getHeight();
+
 	_designDirection = (LayoutDirection)xmlNode->IntAttribute(LAYOUT_DIRECTION);
 
 	tinyxml2::XMLElement* firstChild = xmlNode->FirstChildElement();
@@ -255,7 +268,7 @@ Layout* UIProxy::loadRoot(tinyxml2::XMLElement* xmlNode)
 		return nullptr;
 	}
 
-	LayoutItem* pRootItem = initLoadItem(firstChild);
+	LayoutItem* pRootItem = initLayoutItem(firstChild);
 	if (pRootItem == nullptr)
 	{// ¿Õ½Úµã
 		return nullptr;

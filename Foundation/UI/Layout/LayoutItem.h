@@ -8,7 +8,7 @@ namespace ui
 	class Layout;
 	/**
 	*	布局项, 抽象类
-	*	布局项的集合信息在界面调整中不做改变，改变的只有widget的集合信息
+	*	布局项的集合信息在界面调整中不做改变，改变的只有CtrlWidget的集合信息
 	*/
 	class LayoutItem : public sys::Object, public sys::Name
 	{
@@ -55,19 +55,19 @@ namespace ui
 		/**
 		*	设置元件
 		*/
-		void setWidget(Widget* widget);
+		void setWidget(render::CtrlWidget* widget);
 		/**
 		*	获取元件
 		*/
-		Widget* getWidget();
+		render::CtrlWidget* getWidget();
 		/**
 		*	设置锚点位置
 		*/
-		void setAnchorPosition(AnchorPosition anchorPos);
+		void setAnchorPoint(const math::Vector2& anchorPoint);
 		/**
 		*	获取锚点位置
 		*/
-		AnchorPosition getAnchorPosition();
+		const math::Vector2& getAnchorPoint() const;
 	public: // 可能需重载的方法
 		/**
 		*	复制对象
@@ -98,18 +98,20 @@ namespace ui
 		*	设置元件的集合信息
 		*/
 		void setWidgetGeomerty(const math::Rect& geometry, const math::Vector2& anchorPoint);
+	public:
+		void showWidgetInfo();
 	protected:
 		void calAnchorPoint(float& x, float& y);
 	protected:
 		// 几何信息
 		math::Rect m_rGeometry;
 		// 锚点位置
-		AnchorPosition m_eAnchorPosition;
+		math::Vector2 m_vAnchorPoint;
 		// 矩形框颜色
 		sys::Color4B m_cBoxColor;
 		// 是否显示矩形框
-		bool m_bBoxVisible;
+		bool m_bBoxVisible = false;
 		// 空置项
-		Widget* m_pWidget;
+		render::CtrlWidget* m_pWidget = nullptr;
 	};
 }

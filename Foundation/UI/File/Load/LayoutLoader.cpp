@@ -15,16 +15,16 @@ LayoutLoader::~LayoutLoader()
 
 void LayoutLoader::parseAttributes()
 {
-	NodeLoader::parseAttributes();
-
 	sys::Margin margin;
 
 	LOAD_LAYOUTITEM_ATTRIBUTE(PROPERTY_MARGIN, setMargin, margin);
+
+	WidgetLoader::parseAttributes();
 }
 
 void LayoutLoader::saveAttributes()
 {
-	NodeLoader::saveAttributes();
+	WidgetLoader::saveAttributes();
 
 	SAVE_LAYOUTITEM_ATTRIBUTE(PROPERTY_MARGIN, getMargin);
 }

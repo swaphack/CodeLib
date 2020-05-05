@@ -14,7 +14,7 @@ namespace ui
 
 	/**
 	*	布局项, 抽象类
-	*	布局项的集合信息在界面调整中不做改变，改变的只有widget的集合信息
+	*	布局项的集合信息在界面调整中不做改变，改变的只有Widget的集合信息
 	*/
 	class LayoutItemEx : public LayoutItem
 	{

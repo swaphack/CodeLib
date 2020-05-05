@@ -25,16 +25,16 @@ namespace web
 		// 移除接受数据处理
 		void removeRecvHandler(sys::Object* target, HTTP_RECV_RESPONE_HANDLER handler);
 
-		virtual bool onDispatch(const char* sessionID, sys::DataQueue& dataQueue, int& packetSize);
+		virtual bool onDispatch(const std::string& sessionID, sys::DataQueue& dataQueue, int& packetSize);
 	protected:
 		// 接受请求处理
 		void onRecvHander(sys::HttpRequest* data);
 		// 接受请求处理
 		void onRecvHander(sys::HttpResponse* data);
 		// 从接收的数据中创建http请求，并且删除已完成的数据
-		sys::HttpRequest* createRequest(const char* sessionID, sys::DataQueue& dataQueue, int& packetSize);
+		sys::HttpRequest* createRequest(const std::string& sessionID, sys::DataQueue& dataQueue, int& packetSize);
 		// 从接收的数据中创建http请求，并且删除已完成的数据
-		sys::HttpResponse* createResponse(const char* sessionID, sys::DataQueue& dataQueue, int& packetSize);
+		sys::HttpResponse* createResponse(const std::string& sessionID, sys::DataQueue& dataQueue, int& packetSize);
 	private:
 		// 接受http请求处理
 		std::vector<HttpRecvRequestHandler> _recvRequestHandlers;

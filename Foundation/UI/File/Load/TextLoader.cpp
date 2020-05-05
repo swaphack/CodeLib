@@ -26,48 +26,44 @@ TextLoader::~TextLoader()
 
 void TextLoader::parseAttributes()
 {
-	NodeLoader::parseAttributes();
-
-	sys::Color4B color;
-	std::string str;
-	float floatVal;
-	int intVal;
-	uint8_t ucVal;
+	sys::Color3B color;
+	std::string fontpath;
+	std::string text;
+	float fontSize = 0;
+	int horizontal = 1;
+	int vertical = 1;
+	uint8_t opacity = 255;
 	BlendParam blend;
 	math::Size size;
 
-	LOAD_WDIGET_ATTRIBUTE(PROPERTY_COLOR, setColor, color);
-	LOAD_WDIGET_ATTRIBUTE(PROPERTY_OPACITY, setOpacity, ucVal);
-	LOAD_WDIGET_ATTRIBUTE(PROPERTY_BLEND, setBlend, blend);
+	LOAD_WIDGET_ATTRIBUTE(PROPERTY_COLOR, setTextColor, color);
+	LOAD_WIDGET_ATTRIBUTE(PROPERTY_OPACITY, setOpacity, opacity);
+	LOAD_WIDGET_ATTRIBUTE(PROPERTY_BLEND, setBlend, blend);
 
-	LOAD_WDIGET_STRING_ATTRIBUTE(PROPERTY_PATH, setFontPath, str);
-	LOAD_WDIGET_ATTRIBUTE(PROPERTY_FONTSIZE, setFontSize, floatVal);
-	LOAD_WDIGET_STRING_ATTRIBUTE(PROPERTY_TEXT, setString, str);
+	LOAD_WIDGET_STRING_ATTRIBUTE(PROPERTY_PATH, setFontPath, fontpath);
+	LOAD_WIDGET_ATTRIBUTE(PROPERTY_FONTSIZE, setFontSize, fontSize);
+	LOAD_WIDGET_STRING_ATTRIBUTE(PROPERTY_TEXT, setString, text);
 
-	LOAD_WDIGET_CAST_ATTRIBUTE(PROPERTY_HORIZONTAL, setHorizontalAlignment, intVal, render::HorizontalAlignment);
-	LOAD_WDIGET_CAST_ATTRIBUTE(PROPERTY_VERTICAL, setVerticalAlignment, intVal, render::VerticalAlignment);
-	LOAD_WDIGET_ATTRIBUTE(PROPERTY_DIMENSIONS, setDimensions, size);
+	LOAD_WIDGET_CAST_ATTRIBUTE(PROPERTY_HORIZONTAL, setHorizontalAlignment, horizontal, render::HorizontalAlignment);
+	LOAD_WIDGET_CAST_ATTRIBUTE(PROPERTY_VERTICAL, setVerticalAlignment, vertical, render::VerticalAlignment);
+	LOAD_WIDGET_ATTRIBUTE(PROPERTY_DIMENSIONS, setDimensions, size);
 
-// 	int anchorPos = getLayoutItem()->getAnchorPosition();
-// 	anchorPos -= 1;
-// 	getCastWidget()->setHorizontalAlignment((render::HorizontalAlignment)(anchorPos % 3));
-// 	getCastWidget()->setVerticalAlignment((render::VerticalAlignment)(anchorPos / 3));
-// 	getCastWidget()->setDimensions(getLayoutItem()->getSize());
+	WidgetLoader::parseAttributes();
 }
 
 void TextLoader::saveAttributes()
 {
-	NodeLoader::saveAttributes();
+	WidgetLoader::saveAttributes();
 
-	SAVE_WDIGET_ATTRIBUTE(PROPERTY_COLOR, getColor);
-	SAVE_WDIGET_ATTRIBUTE(PROPERTY_OPACITY, getOpacity);
-	SAVE_WDIGET_ATTRIBUTE(PROPERTY_BLEND, getBlend);
+	SAVE_WIDGET_ATTRIBUTE(PROPERTY_COLOR, getColor);
+	SAVE_WIDGET_ATTRIBUTE(PROPERTY_OPACITY, getOpacity);
+	SAVE_WIDGET_ATTRIBUTE(PROPERTY_BLEND, getBlend);
 
-	SAVE_WDIGET_ATTRIBUTE(PROPERTY_PATH, getFontPath);
-	SAVE_WDIGET_ATTRIBUTE(PROPERTY_FONTSIZE, getFontSize);
-	SAVE_WDIGET_ATTRIBUTE(PROPERTY_TEXT, getString);
+	SAVE_WIDGET_ATTRIBUTE(PROPERTY_PATH, getFontPath);
+	SAVE_WIDGET_ATTRIBUTE(PROPERTY_FONTSIZE, getFontSize);
+	SAVE_WIDGET_ATTRIBUTE(PROPERTY_TEXT, getString);
 
-	SAVE_WDIGET_CAST_ATTRIBUTE(PROPERTY_HORIZONTAL, getHorizontalAlignment, int);
-	SAVE_WDIGET_CAST_ATTRIBUTE(PROPERTY_VERTICAL, getVerticalAlignment, int);
-	SAVE_WDIGET_ATTRIBUTE(PROPERTY_DIMENSIONS, getDimensions);
+	SAVE_WIDGET_CAST_ATTRIBUTE(PROPERTY_HORIZONTAL, getHorizontalAlignment, int);
+	SAVE_WIDGET_CAST_ATTRIBUTE(PROPERTY_VERTICAL, getVerticalAlignment, int);
+	SAVE_WIDGET_ATTRIBUTE(PROPERTY_DIMENSIONS, getDimensions);
 }

@@ -4,7 +4,7 @@ using namespace ui;
 
 LayoutEx::LayoutEx()
 {
-	this->setWidget(CREATE_NODE(Widget));
+	this->setWidget(CREATE_NODE(render::CtrlWidget));
 }
 
 LayoutEx::~LayoutEx()

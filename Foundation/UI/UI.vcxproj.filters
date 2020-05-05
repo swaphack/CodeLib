@@ -64,7 +64,7 @@
       <Filter>LayoutEx</Filter>
     </ClInclude>
     <ClInclude Include="ui_common.h" />
-    <ClInclude Include="File\Load\NodeLoader.h">
+    <ClInclude Include="File\Load\WidgetLoader.h">
       <Filter>File\Load</Filter>
     </ClInclude>
   </ItemGroup>
@@ -131,7 +131,7 @@
     <ClCompile Include="LayoutEx\LayoutEx.cpp">
       <Filter>LayoutEx</Filter>
     </ClCompile>
-    <ClCompile Include="File\Load\NodeLoader.cpp">
+    <ClCompile Include="File\Load\WidgetLoader.cpp">
       <Filter>File\Load</Filter>
     </ClCompile>
   </ItemGroup>

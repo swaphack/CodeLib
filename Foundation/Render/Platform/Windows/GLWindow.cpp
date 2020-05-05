@@ -25,7 +25,7 @@ GLWindow::~GLWindow()
 	SAFE_DELETE(_mouse);
 }
 
-void GLWindow::createWindow(const char* title, int width, int height, int millis, RenderApplication* render)
+void GLWindow::createWindow(const std::string& title, int width, int height, int millis, RenderApplication* render)
 {
 	ASSERT(render != nullptr);
 

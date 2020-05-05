@@ -1,6 +1,6 @@
 #pragma once
 
-#include "NodeLoader.h"
+#include "WidgetLoader.h"
 #include "LayoutLoader.h"
 
 #include "ImageLoader.h"
