@@ -826,6 +826,13 @@ uint32_t render::GLBufferObjects::createBuffer()
 	return id;
 }
 
+uint32_t render::GLBufferObjects::createVertexArray()
+{
+	uint32_t id;
+	createVertexArrays(1, &id);
+	return id;
+}
+
 void render::GLBufferObjects::deleteBuffer(uint32_t buffer)
 {
 	deleteBuffers(1, &buffer);

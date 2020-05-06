@@ -40,12 +40,14 @@ namespace render
 		static uint32_t createBuffer();
 
 		static void createVertexArrays(int n, uint32_t* arrays);
+		static uint32_t createVertexArray();
 	public:
 		static void deleteBuffer(uint32_t buffer);
 		static void deleteBuffers(int n, uint32_t* buffers);
 		static void disableVertexAttribArray(uint32_t index);
 		static void disableVertexArrayAttrib(uint32_t vaobj, uint32_t index);
 	public:
+		// 按顺序绘制，不需要 indices
 		static void drawArrays(DrawMode mode, int first, int count);
 		static void drawArraysIndirect(DrawMode mode, const void* indirect);
 		static void drawArraysInstanced(DrawMode mode, int first, int count, int primcount);
@@ -219,6 +221,7 @@ namespace render
 		static void setVertexArrayAttribIFormat(uint32_t vaobj, uint32_t attribindex, int size, VertexAttribFormatType type, uint32_t relativeoffset);
 		static void setVertexArrayAttribLFormat(uint32_t vaobj, uint32_t attribindex, int size, VertexAttribFormatType type, uint32_t relativeoffset);
 
+		// size 1,2,3,4 GL_BGRA
 		static void setVertexAttribPointer(uint32_t index, int size, VertexAttribPointerType type, bool normalized, int stride, const void* pointer);
 		static void setVertexAttribIPointer(uint32_t index, int size, VertexAttribIPointerType type, int stride, const void* pointer);
 		static void setVertexAttribLPointer(uint32_t index, int size, VertexAttribLPointerType type, int stride, const void* pointer);

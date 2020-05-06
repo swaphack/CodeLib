@@ -16,6 +16,15 @@ namespace render
 		ShaderAttrib();
 		virtual ~ShaderAttrib();
 	public:
+		/**
+		*	…Ë÷√±‰¡ø±‡∫≈
+		*/
+		void setAttribID(uint32_t id);
+		/**
+		*	 Ù–‘±‡∫≈
+		*/
+		uint32_t getAttribID();
+	public:
 		void showAttribs();
 	public:
 		void setValue(VertexAttribSize len, const double* v);
@@ -44,5 +53,10 @@ namespace render
 
 		void setValue(float* value);
 		void setValue(uint16_t* value);
+	private:
+		/**
+		*	±‡∫≈
+		*/
+		uint32_t _attribID = 0;
 	};
 }

@@ -138,6 +138,11 @@ bool render::Shader::loadFromBindary(const void* binary, int length)
 	//GLShader::setShaderBinary(1, &_shaderID, GL_SHADER_BINARY_FORMAT_SPIR_V, binary, length);
 }
 
+bool render::Shader::isValid()
+{
+	return GLShader::isShader(_shaderID);
+}
+
 //////////////////////////////////////////////////////////////////////////
 
 VertexShader::VertexShader()

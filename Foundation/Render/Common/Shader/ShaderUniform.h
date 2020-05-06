@@ -17,6 +17,15 @@ namespace render
 		ShaderUniform();
 		virtual ~ShaderUniform();
 	public:
+		/**
+		*	设置变量编号
+		*/
+		void setUniformID(uint32_t id);
+		/**
+		*	属性编号
+		*/
+		uint32_t getUniformID();
+	public:
 		void setValue(VertexAttribSize type, int len, float* v);
 		void setValue(VertexAttribSize type, int len, int32_t* v);
 
@@ -33,5 +42,7 @@ namespace render
 		void setMatrix2(int count, bool transpose, const float* value);
 		void setMatrix3(int count, bool transpose, const float* value);
 		void setMatrix4(int count, bool transpose, const float* value);
+	private:
+		uint32_t _uniformID = 0;
 	};
 }

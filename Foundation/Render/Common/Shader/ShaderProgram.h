@@ -61,6 +61,10 @@ namespace render
 		*	调用
 		*/
 		void use();
+		/**
+		*	是否有效
+		*/
+		bool isValid();
 	public:
 		/**
 		*	添加文件 v 顶点， f片元

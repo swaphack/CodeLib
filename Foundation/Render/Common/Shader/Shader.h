@@ -62,6 +62,11 @@ namespace render
 		*	取消关联
 		*/
 		void detachProgram();
+
+		/**
+		*	是否有效
+		*/
+		bool isValid();
 	private:
 		/**
 		*	着色器编号

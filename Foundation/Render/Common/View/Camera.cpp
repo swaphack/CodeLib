@@ -179,7 +179,7 @@ void Camera::inverseTranform()
 Camera2D::Camera2D()
 {
 	this->setDimensions(ED_2D);
-	this->setViewPortParams(0, 1, 0, 1, -1, 1);
+	this->setViewPortParams(0, 1, 0, 1, -50, 50);
 }
 
 Camera2D::~Camera2D()

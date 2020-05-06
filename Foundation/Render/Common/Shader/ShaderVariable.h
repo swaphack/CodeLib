@@ -16,14 +16,6 @@ namespace render
 		virtual ~ShaderVariable();
 	public:
 		/**
-		*	设置变量编号
-		*/
-		void setVarID(uint32_t id);
-		/**
-		*	属性编号
-		*/
-		uint32_t getVarID();
-		/**
 		*	设置属性名称
 		*/
 		void setName(const std::string& name);
@@ -44,10 +36,6 @@ namespace render
 		*/
 		uint32_t getProgramID();
 	protected:
-		/**
-		*	编号
-		*/
-		uint32_t _varID = 0;
 		/**
 		*	名称
 		*/

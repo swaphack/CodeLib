@@ -4,7 +4,8 @@
 #include "Resource/Detail/MeshDetail.h"
 #include "Graphic/import.h"
 
-#include "Common/Buffer/NamedBufferObject.h"
+#include "Common/Buffer/NoNamedBufferObject.h"
+#include "Common/Buffer/VertexArrayObject.h"
 
 using namespace render;
 
@@ -22,6 +23,7 @@ Model::~Model()
 void Model::drawSample()
 {
 	this->drawSampleWithClientArray();
+	//this->drawSampleWithBufferObject();
 }
 
 void Model::setModelData(const ModelDetail* detail)
@@ -110,15 +112,61 @@ void render::Model::drawSampleWithBufferObject()
 		return;
 	}
 
-	//PRINT("=============begin=============\n");
+	if (_vertexArrayObject == nullptr)
+	{
+		_vertexArrayObject = CREATE_OBJECT(VertexArrayObject);
+		SAFE_RETAIN(_vertexArrayObject);
+	}
+
+	if (_vertexArrayObject == nullptr)
+	{
+		return;
+	}
 
 	const std::map<int, MeshDetail*>& meshes = _modelDetail->getMeshes();
 	for (auto item : meshes)
 	{
 		auto pMesh = item.second;
 
-		NamedBufferObject bufferObject;
-		NamedBufferObject* pObject = &bufferObject;
+		auto it1 = _indiceObjects.find(item.first);
+		if (it1 == _indiceObjects.end())
+		{
+			NoNamedBufferObject* obj = CREATE_OBJECT(NoNamedBufferObject);
+			SAFE_RETAIN(obj);
+			obj->setBufferTarget(BufferTarget::ELEMENT_ARRAY_BUFFER);
+			_indiceObjects[item.first] = obj;
+		}
+
+		NoNamedBufferObject* pIndiceObject = _indiceObjects[item.first];
+		if (pIndiceObject == nullptr)
+		{
+			continue;
+		}
+
+		pIndiceObject->bindBuffer();
+
+		uint32_t nIndiceSize = pMesh->getIndices().getSize();
+		uint32_t nIndiceLength = pMesh->getIndices().getLength();
+		pIndiceObject->setBufferData(nIndiceSize, pMesh->getIndices().getValue(), BufferDataUsage::STATIC_DRAW);
+
+		auto it0 = _vertexObjects.find(item.first);
+		if (it0 == _vertexObjects.end())
+		{
+			NoNamedBufferObject* obj = CREATE_OBJECT(NoNamedBufferObject);
+			SAFE_RETAIN(obj);
+			obj->setBufferTarget(BufferTarget::ARRAY_BUFFER);
+			_vertexObjects[item.first] = obj;
+		}
+
+		NoNamedBufferObject* pVertexObject = _vertexObjects[item.first];
+		if (pVertexObject == nullptr)
+		{
+			continue;
+		}
+
+		_vertexArrayObject->bindVertexArray();
+		_vertexArrayObject->setBufferObject(pVertexObject);
+		_vertexArrayObject->bindBuffer();
 
 		uint32_t nVerticeSize = pMesh->getVertices().getSize();
 		uint32_t nNormalSize = pMesh->getNormals().getSize();
@@ -127,45 +175,48 @@ void render::Model::drawSampleWithBufferObject()
 
 		uint32_t nTotalSize = nVerticeSize + nNormalSize + nColorSize + nUVSize;
 
-		pObject->setBufferStorage(nTotalSize, nullptr, (uint32_t)BufferStorageFlag::DYNAMIC_STORAGE_BIT);
+		pVertexObject->setBufferData(nTotalSize, nullptr, BufferDataUsage::STATIC_DRAW);
 		if (nVerticeSize > 0)
 		{
-			pObject->setBufferSubData(0, nVerticeSize, pMesh->getVertices().getPtr());
+			pVertexObject->setBufferSubData(0, nVerticeSize, pMesh->getVertices().getPtr());
 		}
 		if (nNormalSize > 0)
 		{
-			pObject->setBufferSubData(0, nNormalSize, pMesh->getNormals().getPtr());
+			pVertexObject->setBufferSubData(nVerticeSize, nNormalSize, pMesh->getNormals().getPtr());
 		}
 		if (nColorSize > 0)
 		{
-			pObject->setBufferSubData(0, nColorSize, pMesh->getColors().getPtr());
+			pVertexObject->setBufferSubData(nVerticeSize + nNormalSize, nColorSize, pMesh->getColors().getPtr());
 		}
 		if (nUVSize > 0)
 		{
-			pObject->setBufferSubData(0, nUVSize, pMesh->getUVs().getPtr());
+			pVertexObject->setBufferSubData(nVerticeSize + nNormalSize + nColorSize, nUVSize, pMesh->getUVs().getPtr());
 		}
-
 
 		auto nMatID = pMesh->getMaterial();
 		this->applyMatToMesh(nMatID);
 
-		const MeshMemoryData& indices = pMesh->getIndices();
-		if (indices.getLength() > 0)
-		{
-			GLClientArrays::drawElements(DrawMode::TRIANGLES, indices.getLength(), IndexDataType::UNSIGNED_INT, indices.getValue());
-		}
+		GLBufferObjects::drawElements(DrawMode::TRIANGLES, nIndiceLength, IndexDataType::UNSIGNED_INT, nullptr);
+
 		GLState::disable(EnableModel::TEXTURE_2D);
 	}
 }
 
 void render::Model::removeAllBufferObjects()
 {
-	for (auto item : _bufferObjects)
+	for (auto item : _indiceObjects)
 	{
 		SAFE_RELEASE(item.second);
 	}
 
-	_bufferObjects.clear();
+	for (auto item : _vertexObjects)
+	{
+		SAFE_RELEASE(item.second);
+	}
+
+	_indiceObjects.clear();
+	_vertexObjects.clear();
+	SAFE_RELEASE(_vertexArrayObject);
 }
 
 void render::Model::applyMatToMesh(uint32_t nMatID)

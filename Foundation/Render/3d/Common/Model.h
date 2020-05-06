@@ -8,7 +8,8 @@
 namespace render
 {
 	class ModelDetail;
-	class NamedBufferObject;
+	class NoNamedBufferObject;
+	class VertexArrayObject;
 
 	// Ä£ÐÍ
 	class Model : public ColorNode
@@ -31,6 +32,8 @@ namespace render
 	protected:
 		ModelDetail* _modelDetail = nullptr;
 
-		std::map<int, NamedBufferObject*> _bufferObjects;
+		VertexArrayObject* _vertexArrayObject = nullptr;
+		std::map<int, NoNamedBufferObject*> _indiceObjects;
+		std::map<int, NoNamedBufferObject*> _vertexObjects;
 	};
 }

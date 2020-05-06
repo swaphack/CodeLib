@@ -336,9 +336,6 @@
     <ClCompile Include="Graphic\GLAPI\GLFrameBuffer.cpp">
       <Filter>Graphic\GLAPI</Filter>
     </ClCompile>
-    <ClCompile Include="Common\Buffer\BufferObject.cpp">
-      <Filter>Common\Buffer</Filter>
-    </ClCompile>
     <ClCompile Include="Common\Shader\ShaderUniformBlock.cpp">
       <Filter>Common\Shader</Filter>
     </ClCompile>
@@ -354,14 +351,35 @@
     <ClCompile Include="Common\Buffer\NamedBufferObject.cpp">
       <Filter>Common\Buffer</Filter>
     </ClCompile>
-    <ClCompile Include="Common\Buffer\BufferObjectBase.cpp">
-      <Filter>Common\Buffer</Filter>
-    </ClCompile>
     <ClCompile Include="2d\UI\CtrlLayout.cpp">
       <Filter>2d\UI</Filter>
     </ClCompile>
     <ClCompile Include="2d\UI\CtrlWidget.cpp">
       <Filter>2d\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Buffer\VertexArrayObject.cpp">
+      <Filter>Common\Buffer</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Buffer\NoNamedBufferObject.cpp">
+      <Filter>Common\Buffer</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Buffer\BufferObject.cpp">
+      <Filter>Common\Buffer</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Buffer\VertexAttribPointer.cpp">
+      <Filter>Common\Buffer</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Buffer\VertexAttrib.cpp">
+      <Filter>Common\Buffer</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Buffer\VAOAttrib.cpp">
+      <Filter>Common\Buffer</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Buffer\NoNamedBufferObjects.cpp">
+      <Filter>Common\Buffer</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Buffer\NamedBufferObjects.cpp">
+      <Filter>Common\Buffer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -870,9 +888,6 @@
     <ClInclude Include="Graphic\GLAPI\GLFrameBuffer.h">
       <Filter>Graphic\GLAPI</Filter>
     </ClInclude>
-    <ClInclude Include="Common\Buffer\BufferObject.h">
-      <Filter>Common\Buffer</Filter>
-    </ClInclude>
     <ClInclude Include="Common\Shader\ShaderUniformBlock.h">
       <Filter>Common\Shader</Filter>
     </ClInclude>
@@ -891,14 +906,38 @@
     <ClInclude Include="Common\Buffer\NamedBufferObject.h">
       <Filter>Common\Buffer</Filter>
     </ClInclude>
-    <ClInclude Include="Common\Buffer\BufferObjectBase.h">
-      <Filter>Common\Buffer</Filter>
-    </ClInclude>
     <ClInclude Include="2d\UI\CtrlLayout.h">
       <Filter>2d\UI</Filter>
     </ClInclude>
     <ClInclude Include="2d\UI\CtrlWidget.h">
       <Filter>2d\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Buffer\VertexArrayObject.h">
+      <Filter>Common\Buffer</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Buffer\NoNamedBufferObject.h">
+      <Filter>Common\Buffer</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Buffer\BufferObject.h">
+      <Filter>Common\Buffer</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Buffer\VertexAttribPointer.h">
+      <Filter>Common\Buffer</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Buffer\VertexAttrib.h">
+      <Filter>Common\Buffer</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Buffer\VAOAttrib.h">
+      <Filter>Common\Buffer</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Buffer\UniformBuffer.h">
+      <Filter>Common\Buffer</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Buffer\NoNamedBufferObjects.h">
+      <Filter>Common\Buffer</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Buffer\NamedBufferObjects.h">
+      <Filter>Common\Buffer</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

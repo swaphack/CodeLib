@@ -14,6 +14,16 @@ render::ShaderSubroutineUniform::~ShaderSubroutineUniform()
 
 }
 
+void render::ShaderSubroutineUniform::setSubUniformID(uint32_t id)
+{
+	_subUniformID = id;
+}
+
+uint32_t render::ShaderSubroutineUniform::getSubUniformID()
+{
+	return _subUniformID;
+}
+
 void render::ShaderSubroutineUniform::setShaderType(ShaderType shaderType)
 {
 	_shaderType = shaderType;
@@ -37,7 +47,7 @@ void render::ShaderSubroutineUniform::setSubroutineIndex(uint32_t index)
 	uint32_t* indices = new uint32_t[n];
 	GLShader::getUniformSubroutine(_shaderType, n, indices);
 
-	indices[getVarID()] = index;
+	indices[getSubUniformID()] = index;
 	GLShader::setUniformSubroutines(_shaderType, n, indices);
 	delete[] indices;
 }

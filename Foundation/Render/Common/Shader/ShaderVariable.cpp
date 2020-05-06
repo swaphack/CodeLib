@@ -14,16 +14,6 @@ ShaderVariable::~ShaderVariable()
 
 }
 
-void ShaderVariable::setVarID(uint32_t id)
-{
-	_varID = id;
-}
-
-uint32_t ShaderVariable::getVarID()
-{
-	return _varID;
-}
-
 void ShaderVariable::setName(const std::string& name)
 {
 	_name = name;

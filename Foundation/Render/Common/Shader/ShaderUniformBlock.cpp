@@ -14,6 +14,16 @@ render::ShaderUniformBlockData::~ShaderUniformBlockData()
 	clearBlockIndicesData();
 }
 
+void render::ShaderUniformBlockData::setUniformBlock(ShaderUniformBlock* block)
+{
+	_uniformBlock = block;
+}
+
+const render::ShaderUniformBlock* render::ShaderUniformBlockData::getUniformBlock() const
+{
+	return _uniformBlock;
+}
+
 void render::ShaderUniformBlockData::setBlockData(int size, const char* data)
 {
 	this->clearBlockData();
@@ -34,7 +44,7 @@ void render::ShaderUniformBlockData::setBlockIndicesData(int count, const uint32
 	_types.init(count, types);
 }
 
-void render::ShaderUniformBlockData::setValue(const std::string& name, void* data)
+void render::ShaderUniformBlockData::setValue(const std::string& name, const void* data)
 {
 	const char* names[1] = { name.c_str() };
 	uint32_t indice = 0;
@@ -73,12 +83,23 @@ ShaderUniformBlock::~ShaderUniformBlock()
 
 }
 
+void render::ShaderUniformBlock::setUniformBlockID(uint32_t id)
+{
+	_uniformBlockID = id;
+}
+
+uint32_t render::ShaderUniformBlock::getUniformBlockID() const
+{
+	return _uniformBlockID;
+}
+
 bool render::ShaderUniformBlock::getBlockData(ShaderUniformBlockData& data)
 {
 	data.setProgram(getProgram());
+	data.setUniformBlock(this);
 
 	uint32_t nProgramID = getProgramID();
-	uint32_t nUniformBlockID = getVarID();
+	uint32_t nUniformBlockID = getUniformBlockID();
 
 	int nBlockSize = 0;
 	GLShader::getActiveUniformBlock(nProgramID, nUniformBlockID, UniformBlockParameter::UNIFORM_BLOCK_DATA_SIZE, &nBlockSize);

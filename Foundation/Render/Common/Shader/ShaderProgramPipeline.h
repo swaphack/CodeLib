@@ -16,13 +16,22 @@ namespace render
 		virtual ~ShaderProgramPipeline();
 	public:
 		/**
+		*	设置变量编号
+		*/
+		void setProgramPipelineID(uint32_t id);
+		/**
+		*	属性编号
+		*/
+		uint32_t getProgramPipelineID();
+	public:
+		/**
 		*	绑定
 		*/
 		void bind();
 		/**
 		*	是否可用
 		*/
-		bool isValidate();
+		bool isValid();
 		/**
 		*	验证是否可用
 		*/
@@ -36,7 +45,9 @@ namespace render
 		*/
 		void active();
 	protected:
-		void initPipeline();
-		void releasePopeline();
+		void initProgramPipeline();
+		void releaseProgramPopeline();
+	private:
+		uint32_t _programPipelineID = 0;
 	};
 }

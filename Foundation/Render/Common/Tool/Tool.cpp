@@ -8,7 +8,7 @@ math::Volume Tool::GL_VIEW_SIZE = math::Volume();
 
 void Tool::setGLViewSize(float width, float height)
 {
-	GL_VIEW_SIZE.set(width, height, width > height ? width : height);
+	GL_VIEW_SIZE.set(width, height, width <= height ? width : height);
 }
 
 const math::Volume& Tool::getGLViewSize()
@@ -63,14 +63,14 @@ void Tool::convertToAngle(const math::Vector3& src, math::Vector3& dest)
 
 void Tool::convertToOGLPoisition(float x, float y, float z, math::Vector3& dest)
 {
-	math::Volume volume = Tool::getGLViewSize();
+	const math::Volume& volume = Tool::getGLViewSize();
 
 	dest.set(x / volume.getWidth(), y / volume.getHeight(), z / volume.getDepth());
 }
 
 math::Vector3 Tool::convertToOGLPoisition(float x, float y, float z)
 {
-	math::Volume volume = Tool::getGLViewSize();
+	const math::Volume& volume = Tool::getGLViewSize();
 
 	return math::Vector3(x / volume.getWidth(), y / volume.getHeight(), z / volume.getDepth());
 }
@@ -87,7 +87,7 @@ void Tool::convertToOGLPoisition(const math::Vector3& src, math::Vector3& dest)
 
 void Tool::convertToOGLPoisition(float* inPos, float* outPos)
 {
-	math::Volume volume = Tool::getGLViewSize();
+	const math::Volume& volume = Tool::getGLViewSize();
 
 	outPos[0] = inPos[0] / volume.getWidth();
 	outPos[1] = inPos[1] / volume.getHeight();
@@ -96,7 +96,7 @@ void Tool::convertToOGLPoisition(float* inPos, float* outPos)
 
 math::Vector3 Tool::convertToWindowPosition(float x, float y, float z)
 {
-	math::Volume volume = Tool::getGLViewSize();
+	const math::Volume& volume = Tool::getGLViewSize();
 
 	return math::Vector3(x * volume.getWidth(), y * volume.getHeight(), z * volume.getDepth());
 }
@@ -108,7 +108,7 @@ math::Vector3 Tool::convertToWindowPosition(const math::Vector3& src)
 
 math::Volume Tool::convertToOGLVolume(const math::Volume& src)
 {
-	math::Volume volume = Tool::getGLViewSize();
+	const math::Volume& volume = Tool::getGLViewSize();
 
 	return math::Volume(src.getWidth() / volume.getWidth() * 2 - 1, src.getHeight() / volume.getHeight() * 2 - 1, src.getDepth());
 }

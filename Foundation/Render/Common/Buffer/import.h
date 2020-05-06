@@ -1,5 +1,5 @@
 #pragma once
 
-#include "BufferObjectBase.h"
 #include "BufferObject.h"
+#include "NoNamedBufferObject.h"
 #include "NamedBufferObject.h"

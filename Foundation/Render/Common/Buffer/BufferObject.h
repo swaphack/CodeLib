@@ -1,39 +1,78 @@
 #pragma once
 
-#include "BufferObjectBase.h"
+#include "Graphic/GLAPI/macros.h"
+#include "system.h"
+#include <cstdint>
 
 namespace render
 {
 	/**
-	*	缓存对象
+	*	缓存对象基础
 	*/
-	class BufferObject : public BufferObjectBase
+	class BufferObject : public sys::Object
 	{
 	public:
 		BufferObject();
 		virtual ~BufferObject();
 	public:
 		/**
-		*	绑定数据
+		*	缓存编号
 		*/
-		void setBufferData(int size, const void* data, BufferDataUsage usage);
+		uint32_t getBufferID() const;
 		/**
-		*	设置存储
+		*	设置类型
 		*/
-		void setBufferStorage(ptrdiff_t size, const void* data, uint32_t flags);
-
-		void setBufferSubData(ptrdiff_t offset, ptrdiff_t size, const void* data);
-		void clearBufferData(BufferSizedInternalFormat internalformat, BufferImageInternalFormat format, BufferImageDataType type, const void* data);
-		void clearBufferSubData(BufferSizedInternalFormat internalformat, ptrdiff_t offset, ptrdiff_t size, BufferImageInternalFormat format, BufferImageDataType type, const void* data);
-		void copyBufferSubData(ptrdiff_t readOffset, BufferTarget writeTarget, ptrdiff_t writeOffset, ptrdiff_t size);
+		void setBufferTarget(BufferTarget target);
+		/**
+		*	获取类型
+		*/
+		BufferTarget getBufferTarget() const;
+		/**
+		*	绑定类型
+		*/
+		void bindBuffer();
+		/**
+		*	是否有效
+		*/
+		bool isBuffer();
 	public:
-		void getBufferParameter(GetBufferTarget target, GetBufferParameter pname, int* params);
-		void getBufferParameter(GetBufferTarget target, GetBufferParameter pname, int64_t* params);
-	public:
-		void* setBufferRange(ptrdiff_t offset, ptrdiff_t length, uint32_t access);
-		// 通知指定位置的缓存发生改变
-		void flushMappedBufferRange(ptrdiff_t offset, ptrdiff_t length);
-
-		void unmapBuffer();
+		/**
+		*	设置数据索引
+		*/
+		void setBufferBase(uint32_t index);
+		/**
+		*	设置数据范围
+		*/
+		void setBufferRange(uint32_t index, int offset, int size);
+		/**
+		*	获取关联数据
+		*/
+		void* getMapBuffer(AccessType type);
+		/**
+		*	抛弃
+		*/
+		void invalidateBuffer();
+		/**
+		*	抛弃
+		*/
+		void invalidateBufferSubData(ptrdiff_t offset, ptrdiff_t length);
+	protected:
+		/**
+		*	初始化
+		*/
+		void initBufferObject();
+		/**
+		*	释放
+		*/
+		void relaseBufferObject();
+	private:
+		/**
+		*	缓存编号
+		*/
+		uint32_t _bufferID = 0;
+		/**
+		*	缓存类型
+		*/
+		BufferTarget _target;
 	};
 }

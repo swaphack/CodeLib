@@ -17,6 +17,15 @@ namespace render
 		ShaderProgramUniform();
 		virtual ~ShaderProgramUniform();
 	public:
+		/**
+		*	设置变量编号
+		*/
+		void setProgramUniformID(uint32_t id);
+		/**
+		*	属性编号
+		*/
+		uint32_t getProgramUniformID();
+	public:
 		void setValue(float v0);
 		void setValue(float v0, float v1);
 		void setValue(float v0, float v1, float v2);
@@ -46,5 +55,7 @@ namespace render
 		void setMatrix4x2(int count, bool transpose, const float* value);
 		void setMatrix3x4(int count, bool transpose, const float* value);
 		void setMatrix4x3(int count, bool transpose, const float* value);
+	private:
+		uint32_t _programUniformID = 0;
 	};
 }

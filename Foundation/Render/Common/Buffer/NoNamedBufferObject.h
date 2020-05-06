@@ -5,24 +5,24 @@
 namespace render
 {
 	/**
-	*	命名缓存对象
+	*	缓存对象
 	*/
-	class NamedBufferObject : public BufferObject
+	class NoNamedBufferObject : public BufferObject
 	{
 	public:
-		NamedBufferObject();
-		virtual ~NamedBufferObject();
+		NoNamedBufferObject();
+		virtual ~NoNamedBufferObject();
 	public:
 		/**
 		*	绑定数据
 		*/
 		void setBufferData(int size, const void* data, BufferDataUsage usage);
 		/**
-		*	设置存储
+		*	设置存储数据
 		*/
 		void setBufferStorage(ptrdiff_t size, const void* data, uint32_t flags);
 		/**
-		*	设置部分缓存，必须先调用setBufferStorage， flags 包含GL_CLIENT_STORAGE_BIT
+		*	设置部分存储数据
 		*/
 		void setBufferSubData(ptrdiff_t offset, ptrdiff_t size, const void* data);
 		/**
@@ -36,22 +36,22 @@ namespace render
 		/**
 		*	复制部分存储数据
 		*/
-		void copyBufferSubData(ptrdiff_t readOffset, uint32_t writeBuffer, ptrdiff_t writeOffset, ptrdiff_t size);
+		void copyBufferSubData(ptrdiff_t readOffset, BufferTarget writeTarget, ptrdiff_t writeOffset, ptrdiff_t size);
 		/**
 		*	获取参数
 		*/
-		void getBufferParameter(GetBufferParameter pname, int* params);
+		void getBufferParameter(GetBufferTarget target, GetBufferParameter pname, int* params);
 		/**
 		*	获取参数
 		*/
-		void getBufferParameter(GetBufferParameter pname, int64_t* params);
+		void getBufferParameter(GetBufferTarget target, GetBufferParameter pname, int64_t* params);
 		/**
 		*	获取指定位置的数据指针
 		*/
 		void* setBufferRange(ptrdiff_t offset, ptrdiff_t length, uint32_t access);
 		/**
 		*	通知指定位置的数据发生改变
-		*/
+		*/ 
 		void flushMappedBufferRange(ptrdiff_t offset, ptrdiff_t length);
 		/**
 		*	取消关联buffer

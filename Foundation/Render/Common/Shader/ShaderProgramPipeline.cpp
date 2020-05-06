@@ -6,45 +6,55 @@ using namespace render;
 
 render::ShaderProgramPipeline::ShaderProgramPipeline()
 {
-	this->initPipeline();
+	this->initProgramPipeline();
 }
 
 render::ShaderProgramPipeline::~ShaderProgramPipeline()
 {
-	this->releasePopeline();
+	this->releaseProgramPopeline();
+}
+
+void render::ShaderProgramPipeline::setProgramPipelineID(uint32_t id)
+{
+	_programPipelineID = id;
+}
+
+uint32_t render::ShaderProgramPipeline::getProgramPipelineID()
+{
+	return _programPipelineID;
 }
 
 void render::ShaderProgramPipeline::bind()
 {
-	GLProgramPipelines::bindProgramPipeline(_varID);
+	GLProgramPipelines::bindProgramPipeline(getProgramPipelineID());
 }
 
-bool render::ShaderProgramPipeline::isValidate()
+bool render::ShaderProgramPipeline::isValid()
 {
-	return GLProgramPipelines::isProgramPipeline(_varID);
+	return GLProgramPipelines::isProgramPipeline(getProgramPipelineID());
 }
 
 void render::ShaderProgramPipeline::validate()
 {
-	GLProgramPipelines::validateProgramPipeline(_varID);
+	GLProgramPipelines::validateProgramPipeline(getProgramPipelineID());
 }
 
 void render::ShaderProgramPipeline::getValue(ProgramPipelineParameter pname, int* value)
 {
-	GLProgramPipelines::getProgramPipeline(_varID, pname, value);
+	GLProgramPipelines::getProgramPipeline(getProgramPipelineID(), pname, value);
 }
 
 void render::ShaderProgramPipeline::active()
 {
-	GLProgramPipelines::activeShaderProgram(_varID, getProgramID());
+	GLProgramPipelines::activeShaderProgram(getProgramPipelineID(), getProgramID());
 }
 
-void render::ShaderProgramPipeline::initPipeline()
+void render::ShaderProgramPipeline::initProgramPipeline()
 {
-	GLProgramPipelines::createProgramPipelines(1, &_varID);
+	GLProgramPipelines::createProgramPipelines(1, &_programPipelineID);
 }
 
-void render::ShaderProgramPipeline::releasePopeline()
+void render::ShaderProgramPipeline::releaseProgramPopeline()
 {
-	GLProgramPipelines::deleteProgramPipeline(1, &_varID);
+	GLProgramPipelines::deleteProgramPipeline(1, &_programPipelineID);
 }

@@ -120,7 +120,7 @@ ShaderAttrib* ShaderProgram::getAttriubte(const std::string& name)
 	}
 
 	auto pAtt = CREATE_OBJECT(ShaderAttrib);
-	pAtt->setVarID(id);
+	pAtt->setAttribID(id);
 	pAtt->setName(name);
 	pAtt->setProgram(this);
 	this->addAttriubte(name, pAtt);
@@ -163,7 +163,7 @@ ShaderUniform* ShaderProgram::getUniform(const std::string& name)
 	}
 
 	auto pUniform = CREATE_OBJECT(ShaderUniform);
-	pUniform->setVarID(id);
+	pUniform->setUniformID(id);
 	pUniform->setName(name);
 	pUniform->setProgram(this);
 	this->addUniform(name, pUniform);
@@ -204,6 +204,11 @@ bool ShaderProgram::loadVertexAndFragmentShader(const std::string& vpath, const 
 	return true;
 }
 
+bool render::ShaderProgram::isValid()
+{
+	return GLShader::isProgram(_programID);
+}
+
 bool render::ShaderProgram::loadFromFile(ShaderType type, const std::string& path)
 {
 	Shader* pShader = Shader::create(type, path);
@@ -233,7 +238,7 @@ render::ShaderProgramPipeline* render::ShaderProgram::getShaderProgramPipeline(u
 	pProgramPipeline->bind();
 	this->addShaderProgramPipeline(name, pProgramPipeline);
 
-	GLShader::useProgramStages(pProgramPipeline->getVarID(), tags, _programID);
+	GLShader::useProgramStages(pProgramPipeline->getProgramPipelineID(), tags, _programID);
 
 	return pProgramPipeline;
 }
@@ -273,7 +278,7 @@ render::ShaderProgramUniform* render::ShaderProgram::getProgramUniform(const std
 	}
 
 	auto pUniform = CREATE_OBJECT(ShaderProgramUniform);
-	pUniform->setVarID(id);
+	pUniform->setProgramUniformID(id);
 	pUniform->setName(name);
 	pUniform->setProgram(this);
 	this->addProgramUniform(name, pUniform);
@@ -312,7 +317,7 @@ render::ShaderUniformBlock* render::ShaderProgram::getUniformBlock(const std::st
 	uint32_t id = GLShader::getUniformBlockIndex(_programID, name.c_str());
 	GLDebug::showError();
 	auto pUniformBlock = CREATE_OBJECT(ShaderUniformBlock);
-	pUniformBlock->setVarID(id);
+	pUniformBlock->setUniformBlockID(id);
 	pUniformBlock->setName(name);
 	pUniformBlock->setProgram(this);
 	this->addUniformBlock(name, pUniformBlock);
@@ -355,7 +360,7 @@ ShaderSubroutineUniform* render::ShaderProgram::getSubroutineUniform(ShaderType 
 	}
 	
 	auto pSubroutineUniform = CREATE_OBJECT(ShaderSubroutineUniform);
-	pSubroutineUniform->setVarID(id);
+	pSubroutineUniform->setSubUniformID(id);
 	pSubroutineUniform->setName(name);
 	pSubroutineUniform->setShaderType(shaderType);
 	pSubroutineUniform->setProgram(this);

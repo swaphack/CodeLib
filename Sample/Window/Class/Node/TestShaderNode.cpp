@@ -45,8 +45,9 @@ void TestShaderNode::testShaderUniformBlock()
 			blockData.setValue("rotation", &rotation);
 			blockData.setValue("enabled", &enabled);
 
-			BufferObject* pObject = CREATE_OBJECT(BufferObject);
+			NoNamedBufferObject* pObject = CREATE_OBJECT(NoNamedBufferObject);
 			pObject->setBufferTarget(BufferTarget::UNIFORM_BUFFER);
+			pObject->bindBuffer();
 			pObject->setBufferData(blockData.getBlockData().getSize(), blockData.getBlockData().getValue(), BufferDataUsage::STATIC_DRAW);
 
 			GLDebug::showError();

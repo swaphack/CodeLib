@@ -15,6 +15,15 @@ namespace render
 		ShaderSubroutineUniform();
 		virtual ~ShaderSubroutineUniform();
 	public:
+		/**
+		*	设置变量编号
+		*/
+		void setSubUniformID(uint32_t id);
+		/**
+		*	属性编号
+		*/
+		uint32_t getSubUniformID();
+	public:
 		void setShaderType(ShaderType shaderType);
 		ShaderType getShaderType();
 
@@ -22,5 +31,6 @@ namespace render
 		void setSubroutineIndex(uint32_t index);
 	private:
 		ShaderType _shaderType;
+		uint32_t _subUniformID = 0;
 	};
 }
