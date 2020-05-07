@@ -54,36 +54,47 @@ void File3DS::load(const std::string& filename)
 
 			if (pMatData->texture1_map.name[0])
 			{
-				Texture2D* textureID = createTexture(pMatData->texture1_map.name, dir);
-				if (textureID)
-				{
-					this->addTexture(pMatData->texture1_map.name, textureID);
-				}
+				std::string fullpath = getTextureFullPath(pMatData->texture1_map.name, dir);
+				this->addTexturePath(pMatData->texture1_map.name, fullpath);
+// 				Texture2D* textureID = createTexture(pMatData->texture1_map.name, dir);
+// 				if (textureID)
+// 				{
+// 					this->addTexture(pMatData->texture1_map.name, textureID);
+// 				}
 			}
 			if (pMatData->texture1_mask.name[0])
 			{
-				Texture2D* textureID = createTexture(pMatData->texture1_mask.name, dir);
-				if (textureID)
-				{
-					this->addTexture(pMatData->texture1_mask.name, textureID);
-				}
+				std::string fullpath = getTextureFullPath(pMatData->texture1_mask.name, dir);
+				this->addTexturePath(pMatData->texture1_mask.name, fullpath);
+
+// 				Texture2D* textureID = createTexture(pMatData->texture1_mask.name, dir);
+// 				if (textureID)
+// 				{
+// 					this->addTexture(pMatData->texture1_mask.name, textureID);
+// 				}
 
 			}
 			if (pMatData->texture2_map.name[0])
 			{
-				Texture2D* textureID = createTexture(pMatData->texture2_map.name, dir);
-				if (textureID)
-				{
-					this->addTexture(pMatData->texture2_map.name, textureID);
-				}
+				std::string fullpath = getTextureFullPath(pMatData->texture2_map.name, dir);
+				this->addTexturePath(pMatData->texture2_map.name, fullpath);
+
+// 				Texture2D* textureID = createTexture(pMatData->texture2_map.name, dir);
+// 				if (textureID)
+// 				{
+// 					this->addTexture(pMatData->texture2_map.name, textureID);
+// 				}
 			}
 			if (pMatData->texture2_mask.name[0])
 			{
-				Texture2D* textureID = createTexture(pMatData->texture2_mask.name, dir);
-				if (textureID)
-				{
-					this->addTexture(pMatData->texture2_mask.name, textureID);
-				}
+				std::string fullpath = getTextureFullPath(pMatData->texture2_mask.name, dir);
+				this->addTexturePath(pMatData->texture2_mask.name, fullpath);
+
+// 				Texture2D* textureID = createTexture(pMatData->texture2_mask.name, dir);
+// 				if (textureID)
+// 				{
+// 					this->addTexture(pMatData->texture2_mask.name, textureID);
+// 				}
 			}
 
 			auto pMat = CREATE_OBJECT(MaterialDetail);

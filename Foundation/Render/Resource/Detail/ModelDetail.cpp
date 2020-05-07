@@ -19,6 +19,7 @@ ModelDetail::~ModelDetail()
 	this->removeAllMaterials();
 	this->removeAllMeshes();
 	this->removeAllTextures();
+	this->removeAllTexturePaths();
 }
 
 ModelResourceFormat ModelDetail::getModelFormat()
@@ -33,7 +34,7 @@ void ModelDetail::setModelFormat(ModelResourceFormat format)
 
 Texture2D* ModelDetail::createTexture(const std::string& strFileName, const std::string& dir)
 {
-	std::string fullpath = dir + "/" + strFileName;
+	std::string fullpath = getTextureFullPath(strFileName, dir);
 
 	return createTexture(fullpath);
 }
@@ -194,5 +195,38 @@ const std::map<int, MaterialDetail*>& ModelDetail::geMaterials()
 const std::map<int, MeshDetail*>& ModelDetail::getMeshes()
 {
 	return _meshes;
+}
+
+void render::ModelDetail::addTexturePath(const std::string& name, const std::string& path)
+{
+	_texturePaths[name] = path;
+}
+
+void render::ModelDetail::removeAllTexturePaths()
+{
+	_texturePaths.clear();
+}
+
+std::string render::ModelDetail::getTexturePath(const std::string& name)
+{
+	auto it = _texturePaths.find(name);
+	if (it == _texturePaths.end())
+	{
+		return "";
+	}
+
+	return it->second;
+}
+
+const std::map<std::string, std::string>& render::ModelDetail::getTexturePaths()
+{
+	return _texturePaths;
+}
+
+std::string render::ModelDetail::getTextureFullPath(const std::string& strFileName, const std::string& dir)
+{
+	std::string fullpath = dir + "/" + strFileName;
+
+	return fullpath;
 }
 

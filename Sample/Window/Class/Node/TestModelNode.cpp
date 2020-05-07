@@ -17,8 +17,8 @@ TestModelNode::~TestModelNode()
 void TestModelNode::testFunc()
 {
 	this->testCubeModel();
-	this->test3ds();
-	this->testFbx();
+	//this->test3ds();
+	//this->testFbx();
 	this->testObj();
 }
 
@@ -115,8 +115,8 @@ void TestModelNode::test3ds()
 
 void TestModelNode::testObj()
 {
-	std::string filename = "Resource/Obj/SCI_FRS_13_HD/SCI_FRS_13_HD.obj";
-	//std::string filename = "Resource/Obj/Skull_v3_L2/12140_Skull_v3_L2.obj";
+	//std::string filename = "Resource/Obj/SCI_FRS_13_HD/SCI_FRS_13_HD.obj";
+	std::string filename = "Resource/Obj/Skull_v3_L2/12140_Skull_v3_L2.obj";
 
 	ModelObj* model = CREATE_NODE(ModelObj);
 	model->load(filename);

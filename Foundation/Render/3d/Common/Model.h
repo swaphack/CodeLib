@@ -23,6 +23,7 @@ namespace render
 	protected:
 		virtual void drawSample();
 
+		void updateMatTexture();
 		void initBufferObject();
 		void updateBufferData();
 	public:

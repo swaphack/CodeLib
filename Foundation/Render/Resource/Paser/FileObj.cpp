@@ -47,22 +47,25 @@ void FileObj::load(const std::string& filename)
 
 			if (!pMatData->map_Ka.empty())
 			{
-				PRINT("m_TextureMap1 %s\n", pMatData->map_Ka.c_str());
-				Texture2D* textureID = createTexture(pMatData->map_Ka, dir);
-				if (textureID)
-				{
-					this->addTexture(pMatData->map_Ka, textureID);
-				}
+				std::string fullpath = getTextureFullPath(pMatData->map_Ka, dir);
+				this->addTexturePath(pMatData->map_Ka, fullpath);
+// 				Texture2D* textureID = createTexture(pMatData->map_Ka, dir);
+// 				if (textureID)
+// 				{
+// 					this->addTexture(pMatData->map_Ka, textureID);
+// 				}
 			}
 
 			if (!pMatData->map_Kd.empty())
 			{
-				PRINT("m_TextureMap2 %s\n", pMatData->map_Kd.c_str());
-				Texture2D* textureID = createTexture(pMatData->map_Kd, dir);
-				if (textureID)
-				{
-					this->addTexture(pMatData->map_Kd, textureID);
-				}
+				std::string fullpath = getTextureFullPath(pMatData->map_Kd, dir);
+				this->addTexturePath(pMatData->map_Kd, fullpath);
+
+// 				Texture2D* textureID = createTexture(pMatData->map_Kd, dir);
+// 				if (textureID)
+// 				{
+// 					this->addTexture(pMatData->map_Kd, textureID);
+// 				}
 			}
 
 			auto pMat = CREATE_OBJECT(MaterialDetail);

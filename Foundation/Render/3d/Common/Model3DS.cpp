@@ -14,8 +14,11 @@ Model3DS::~Model3DS()
 
 void Model3DS::load(const std::string& filepath)
 {
-	File3DS* pFile = Loader::load<File3DS>(filepath.c_str());
-	this->setModelData(pFile);
+	auto task = std::thread([this, filepath](){
+		File3DS* pFile = Loader::load<File3DS>(filepath.c_str());
+		this->setModelData(pFile);
+	});
+	task.detach();
 }
 /*
 void Model3DS::draw()

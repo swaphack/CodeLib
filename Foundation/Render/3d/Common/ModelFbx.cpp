@@ -17,7 +17,10 @@ ModelFbx::~ModelFbx()
 
 void ModelFbx::load(const std::string& filepath)
 {
-	FileFbx* pFile = Loader::load<FileFbx>(filepath.c_str());
-	this->setModelData(pFile);
+	auto task = std::thread([this, filepath](){
+		FileFbx* pFile = Loader::load<FileFbx>(filepath.c_str());
+		this->setModelData(pFile);
+	});
+	task.detach();
 }
 

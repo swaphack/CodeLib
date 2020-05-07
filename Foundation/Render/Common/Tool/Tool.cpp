@@ -88,7 +88,7 @@ void Tool::convertToOGLPoisition(const math::Vector3& src, math::Vector3& dest)
 
 void Tool::convertToOGLPoisition(float* inPos, float* outPos)
 {
-	const math::Volume& volume = GL_VIEW_SIZE;
+ 	const math::Volume& volume = GL_VIEW_SIZE;
 
 	outPos[0] = inPos[0] / volume.getDepth();
 	outPos[1] = inPos[1] / volume.getDepth();

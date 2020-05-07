@@ -8,7 +8,7 @@
 
 using namespace render;
 
-#define USE_BUFFER_OBJECT 1
+#define USE_BUFFER_OBJECT 0
 
 
 Model::Model()
@@ -29,10 +29,14 @@ bool render::Model::init()
 	{
 		return false;
 	}
-#if USE_BUFFER_OBJECT
+
 	_notify->addListen(ENP_MODEL_FRAME, [this](){
+		this->updateMatTexture();
+#if USE_BUFFER_OBJECT
 		this->updateBufferData();
+#endif
 	});
+#if USE_BUFFER_OBJECT
 	initBufferObject();
 #endif
 	return true;
@@ -344,4 +348,22 @@ void render::Model::applyMatToMesh(uint32_t nMatID)
 			else if (nTextureID2) GLTexture::bindTexture2D(nTextureID2);
 		}
 	}
+}
+
+void render::Model::updateMatTexture()
+{
+	if (_modelDetail == nullptr)
+	{
+		return;
+	}
+	for (auto item : _modelDetail->getTexturePaths())
+	{
+		Texture2D* pTexture = _modelDetail->createTexture(item.second);
+		if (pTexture)
+		{
+			_modelDetail->addTexture(item.first, pTexture);
+		}
+	}
+
+	_modelDetail->removeAllTexturePaths();
 }

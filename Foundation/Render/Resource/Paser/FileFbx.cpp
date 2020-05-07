@@ -435,14 +435,14 @@ void handMaterialTexture(FileFbx* file, FbxSurfaceMaterial* mat, int id, int tex
 					{
 						continue;
 					}
-					//PRINT("Fbx FbxTexture Path :%s\n", lFileTexture->GetFileName());
-					Texture2D* textureID = file->createTexture(fullpath);
-					if (textureID == nullptr)
-					{
-						continue;
-					}
-
-					file->addTexture(name, textureID);
+					file->addTexturePath(name, fullpath);
+// 					Texture2D* textureID = file->createTexture(fullpath);
+// 					if (textureID == nullptr)
+// 					{
+// 						continue;
+// 					}
+// 
+// 					file->addTexture(name, textureID);
 
 					if (j == 0)
 					{
