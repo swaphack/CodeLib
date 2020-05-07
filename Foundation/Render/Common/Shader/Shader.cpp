@@ -53,7 +53,18 @@ bool Shader::loadData(const char* data)
 		return false;
 	}
 
-	return GLShader::loadShader(_shaderID, data);
+	GLShader::setShaderSource(_shaderID, 1, &data, nullptr);
+	GLShader::compileShader(_shaderID);
+
+	int compiled = 0;
+	GLShader::getShader(_shaderID, ShaderParameter::COMPILE_STATUS, &compiled);
+	if (compiled != GL_TRUE)
+	{
+		GLShader::showShaderError(_shaderID);
+		return false;
+	}
+
+	return true;
 }
 
 bool Shader::loadFromFile(const std::string& filepath)

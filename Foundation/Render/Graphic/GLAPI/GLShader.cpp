@@ -17,22 +17,6 @@ void GLShader::createShaderProgram(ShaderType type, int size, const char** strin
 	glCreateShaderProgramv((GLenum)type, size, strings);
 }
 
-bool GLShader::loadShader(uint32_t shader, const char* data)
-{
-	setShaderSource(shader, 1, &data, nullptr);
-	compileShader(shader);
-
-	int compiled = 0;
-	getShader(shader, ShaderParameter::COMPILE_STATUS, &compiled);
-	if (compiled != GL_TRUE)
-	{
-		showShaderStatus(shader);
-		return false;
-	}
-
-	return true;
-}
-
 void GLShader::attachShader(uint32_t program, uint32_t shader)
 {
 	glAttachShader(program, shader);
@@ -43,14 +27,14 @@ void GLShader::detachShader(uint32_t program, uint32_t shader)
 	glDetachShader(program, shader);
 }
 
-void GLShader::showShaderStatus(uint32_t shader)
+void GLShader::showShaderError(uint32_t shader)
 {
 	GLsizei bufferSize = 0;
 	getShader(shader, ShaderParameter::INFO_LOG_LENGTH, &bufferSize);
 	if (bufferSize > 0)
 	{
 		GLchar* buffer = new char[bufferSize];
-		getShaderInfoLog(shader, bufferSize, NULL, buffer);
+		getShaderInfoLog(shader, bufferSize, nullptr, buffer);
 		PRINT("%s", buffer);
 		delete[] buffer;
 	}
@@ -76,7 +60,7 @@ void GLShader::useProgram(uint32_t program)
 	glUseProgram(program);
 }
 
-void GLShader::showProgramStatus(uint32_t program)
+void GLShader::showProgramError(uint32_t program)
 {
 	GLsizei bufferSize = 0;
 	getProgram(program, GetProgramParameter::INFO_LOG_LENGTH, &bufferSize);

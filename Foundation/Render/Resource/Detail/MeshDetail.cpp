@@ -69,6 +69,7 @@ int MeshDetail::getMaterial() const
 void MeshDetail::setIndices(int size, uint32_t* indices)
 {
 	_indices.init(size, indices);
+	_indices.setTypeSize(1);
 }
 
 const MeshMemoryData& MeshDetail::getIndices() const

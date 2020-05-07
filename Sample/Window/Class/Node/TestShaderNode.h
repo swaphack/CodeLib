@@ -12,5 +12,8 @@ protected:
 private:
 	void testShaderUniformBlock();
 	void testSubroutineUniform();
+	void testImageShader();
+	void testColorShader();
+	void testModelShader();
 private:
 };

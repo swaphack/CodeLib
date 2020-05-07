@@ -8,7 +8,7 @@ namespace render
 	{
 	public:
 		VertexAttribPointer(uint32_t index, VertexArrayObject* obj);
-		virtual~VertexAttribPointer();
+		virtual ~VertexAttribPointer();
 	public:
 		/**
 		*	设置顶点属性指针 双精度

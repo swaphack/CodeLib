@@ -10,14 +10,13 @@ namespace render
 	class GLShader
 	{
 	public:
-		static bool loadShader(uint32_t shader, const char* data);
 		static void attachShader(uint32_t program, uint32_t shader);
 		
-		static void showShaderStatus(uint32_t shader);
+		static void showShaderError(uint32_t shader);
 	public:		
 		static void linkProgram(uint32_t program);
 		static void useProgram(uint32_t program);
-		static void showProgramStatus(uint32_t program);
+		static void showProgramError(uint32_t program);
 	public:
 		static void setVertexAttribValue(uint32_t attribID, VertexAttribSize type, const double* v);
 		static void setVertexAttribValue(uint32_t attribID, VertexAttribSize type, const float* v);

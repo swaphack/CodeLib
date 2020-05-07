@@ -30,7 +30,7 @@ void TestImageNode::testImage()
 	CtrlImage* pImage = CREATE_NODE(CtrlImage);
 	pImage->setImagePath(filepath);
 	pImage->setAnchorPoint(Vector2());
-	//pImage->setVolume(frameSize);
+	pImage->setVolume(frameSize);
 	this->addChild(pImage);
 }
 

@@ -80,6 +80,18 @@
     <None Include="Resource\shader\lighting.glsl">
       <Filter>Resource\shader</Filter>
     </None>
+    <None Include="Resource\shader\color.fsh">
+      <Filter>Resource\shader</Filter>
+    </None>
+    <None Include="Resource\shader\color.vsh">
+      <Filter>Resource\shader</Filter>
+    </None>
+    <None Include="Resource\shader\texture.vsh">
+      <Filter>Resource\shader</Filter>
+    </None>
+    <None Include="Resource\shader\texture.fsh">
+      <Filter>Resource\shader</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Xml Include="Resource\3DModel\Test.xml">

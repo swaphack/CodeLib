@@ -17,8 +17,14 @@ namespace render
 	public:
 		Model();
 		virtual ~Model();
+	public:
+		// 务必调用，包含属性修改时通知
+		virtual bool init();
 	protected:
 		virtual void drawSample();
+
+		void initBufferObject();
+		void updateBufferData();
 	public:
 		const ModelDetail* getModelData();
 		void setModelData(const ModelDetail* detail);
@@ -32,8 +38,8 @@ namespace render
 	protected:
 		ModelDetail* _modelDetail = nullptr;
 
-		VertexArrayObject* _vertexArrayObject = nullptr;
-		std::map<int, NoNamedBufferObject*> _indiceObjects;
-		std::map<int, NoNamedBufferObject*> _vertexObjects;
+		std::map<uint32_t, VertexArrayObject*> _vertexArrayObjects;
+		std::map<uint32_t, NoNamedBufferObject*> _indiceObjects;
+		std::map<uint32_t, NoNamedBufferObject*> _vertexObjects;
 	};
 }

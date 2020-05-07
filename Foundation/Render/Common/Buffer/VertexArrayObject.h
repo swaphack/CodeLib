@@ -45,7 +45,7 @@ namespace render
 		/**
 		*	生成顶点属性指针
 		*/
-		template<typename T, typename = std::enable_if<std::is_base_of<render::VAOAttrib, T>::type, T>::value>
+		template<class T, class = std::enable_if<std::is_base_of<VAOAttrib, T>::value, T>::type>
 		T* getVertexAttrib(uint32_t index)
 		{
 			auto it = _mapVertexAttrib.find(index);
@@ -55,7 +55,7 @@ namespace render
 			}
 
 			T* t = new T(index, this);
-			_mapVertexAttrib[Index] = t;
+			_mapVertexAttrib[index] = t;
 			return t;
 		}
 		

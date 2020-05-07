@@ -3,11 +3,12 @@
 #include "Resource/Detail/MaterialDetail.h"
 #include "Resource/Detail/MeshDetail.h"
 #include "Graphic/import.h"
-
-#include "Common/Buffer/NoNamedBufferObject.h"
-#include "Common/Buffer/VertexArrayObject.h"
+#include "Common/Shader/ShaderProgram.h"
+#include "Common/Buffer/import.h"
 
 using namespace render;
+
+#define USE_BUFFER_OBJECT 1
 
 
 Model::Model()
@@ -16,20 +17,135 @@ Model::Model()
 
 Model::~Model()
 {
+#if USE_BUFFER_OBJECT
 	removeAllBufferObjects();
+#endif
 	SAFE_DELETE(_modelDetail);
+}
+
+bool render::Model::init()
+{
+	if (!ColorNode::init())
+	{
+		return false;
+	}
+#if USE_BUFFER_OBJECT
+	_notify->addListen(ENP_MODEL_FRAME, [this](){
+		this->updateBufferData();
+	});
+	initBufferObject();
+#endif
+	return true;
+}
+
+void render::Model::initBufferObject()
+{
+}
+
+void render::Model::updateBufferData()
+{
+	const std::map<int, MeshDetail*>& meshes = _modelDetail->getMeshes();
+	for (auto item : meshes)
+	{
+		auto pMesh = item.second;
+
+		uint32_t id = id;
+
+		auto it0 = _vertexArrayObjects.find(id);
+		if (it0 == _vertexArrayObjects.end())
+		{
+			VertexArrayObject* obj = CREATE_OBJECT(VertexArrayObject);
+			SAFE_RETAIN(obj);
+			_vertexArrayObjects[id] = obj;
+		}
+
+		auto pVertexArrayObject = _vertexArrayObjects[id];
+
+		auto it1 = _indiceObjects.find(id);
+		if (it1 == _indiceObjects.end())
+		{
+			NoNamedBufferObject* obj = CREATE_OBJECT(NoNamedBufferObject);
+			SAFE_RETAIN(obj);
+			obj->setBufferTarget(BufferTarget::ELEMENT_ARRAY_BUFFER);
+			_indiceObjects[id] = obj;
+		}
+
+		NoNamedBufferObject* pIndiceObject = _indiceObjects[id];
+		if (pIndiceObject)
+		{
+			pIndiceObject->bindBuffer();
+
+			uint32_t nIndiceSize = pMesh->getIndices().getSize();
+			uint32_t nIndiceLength = pMesh->getIndices().getLength();
+			pIndiceObject->setBufferData(nIndiceSize, pMesh->getIndices().getValue(), BufferDataUsage::STATIC_DRAW);
+		}
+
+		auto it2 = _vertexObjects.find(id);
+		if (it2 == _vertexObjects.end())
+		{
+			NoNamedBufferObject* obj = CREATE_OBJECT(NoNamedBufferObject);
+			SAFE_RETAIN(obj);
+			obj->setBufferTarget(BufferTarget::ARRAY_BUFFER);
+			_vertexObjects[id] = obj;
+		}
+
+		NoNamedBufferObject* pVertexObject = _vertexObjects[id];
+		if (pVertexObject)
+		{
+			pVertexArrayObject->setBufferObject(pVertexObject);
+
+			uint32_t nVerticeSize = pMesh->getVertices().getSize();
+			uint32_t nNormalSize = pMesh->getNormals().getSize();
+			uint32_t nColorSize = pMesh->getColors().getSize();
+			uint32_t nUVSize = pMesh->getUVs().getSize();
+
+			uint32_t nTotalSize = nVerticeSize + nNormalSize + nColorSize + nUVSize;
+			pVertexObject->bindBuffer();
+			pVertexObject->setBufferData(nTotalSize, nullptr, BufferDataUsage::STATIC_DRAW);
+			if (nVerticeSize > 0)
+			{
+				pVertexObject->setBufferSubData(0, nVerticeSize, pMesh->getVertices().getPtr());
+			}
+			GLDebug::showError();
+			if (nColorSize > 0)
+			{
+				pVertexObject->setBufferSubData(nVerticeSize, nColorSize, pMesh->getColors().getPtr());
+			}
+			GLDebug::showError();
+			if (nUVSize > 0)
+			{
+				pVertexObject->setBufferSubData(nVerticeSize + nColorSize, nUVSize, pMesh->getUVs().getPtr());
+			}
+			GLDebug::showError();
+			if (nNormalSize > 0)
+			{
+				pVertexObject->setBufferSubData(nVerticeSize + nColorSize + nUVSize, nNormalSize, pMesh->getNormals().getPtr());
+			}
+			GLDebug::showError();
+		}
+
+		GLDebug::showError();
+	}
+	GLDebug::showError();
 }
 
 void Model::drawSample()
 {
+
+#if USE_BUFFER_OBJECT
+	this->drawSampleWithBufferObject();
+#else
+	
 	this->drawSampleWithClientArray();
-	//this->drawSampleWithBufferObject();
+#endif
 }
 
 void Model::setModelData(const ModelDetail* detail)
 {
 	SAFE_DELETE(_modelDetail);
 	_modelDetail = (ModelDetail*)detail;
+
+	this->notify(ENP_MODEL_FRAME);
 }
 
 const ModelDetail* Model::getModelData()
@@ -112,93 +228,81 @@ void render::Model::drawSampleWithBufferObject()
 		return;
 	}
 
-	if (_vertexArrayObject == nullptr)
-	{
-		_vertexArrayObject = CREATE_OBJECT(VertexArrayObject);
-		SAFE_RETAIN(_vertexArrayObject);
-	}
-
-	if (_vertexArrayObject == nullptr)
-	{
-		return;
-	}
-
 	const std::map<int, MeshDetail*>& meshes = _modelDetail->getMeshes();
 	for (auto item : meshes)
 	{
 		auto pMesh = item.second;
 
-		auto it1 = _indiceObjects.find(item.first);
-		if (it1 == _indiceObjects.end())
+		uint32_t id = item.first;
+
+		VertexArrayObject* pVertexArrayObject = _vertexArrayObjects[id];
+		if (pVertexArrayObject == nullptr)
 		{
-			NoNamedBufferObject* obj = CREATE_OBJECT(NoNamedBufferObject);
-			SAFE_RETAIN(obj);
-			obj->setBufferTarget(BufferTarget::ELEMENT_ARRAY_BUFFER);
-			_indiceObjects[item.first] = obj;
+			continue;
 		}
 
-		NoNamedBufferObject* pIndiceObject = _indiceObjects[item.first];
+		NoNamedBufferObject* pIndiceObject = _indiceObjects[id];
 		if (pIndiceObject == nullptr)
 		{
 			continue;
 		}
 
-		pIndiceObject->bindBuffer();
-
-		uint32_t nIndiceSize = pMesh->getIndices().getSize();
-		uint32_t nIndiceLength = pMesh->getIndices().getLength();
-		pIndiceObject->setBufferData(nIndiceSize, pMesh->getIndices().getValue(), BufferDataUsage::STATIC_DRAW);
-
-		auto it0 = _vertexObjects.find(item.first);
-		if (it0 == _vertexObjects.end())
-		{
-			NoNamedBufferObject* obj = CREATE_OBJECT(NoNamedBufferObject);
-			SAFE_RETAIN(obj);
-			obj->setBufferTarget(BufferTarget::ARRAY_BUFFER);
-			_vertexObjects[item.first] = obj;
-		}
-
-		NoNamedBufferObject* pVertexObject = _vertexObjects[item.first];
+		NoNamedBufferObject* pVertexObject = _vertexObjects[id];
 		if (pVertexObject == nullptr)
 		{
 			continue;
 		}
 
-		_vertexArrayObject->bindVertexArray();
-		_vertexArrayObject->setBufferObject(pVertexObject);
-		_vertexArrayObject->bindBuffer();
+		pVertexArrayObject->bindVertexArray();
+		pVertexArrayObject->bindBuffer();
 
 		uint32_t nVerticeSize = pMesh->getVertices().getSize();
-		uint32_t nNormalSize = pMesh->getNormals().getSize();
 		uint32_t nColorSize = pMesh->getColors().getSize();
 		uint32_t nUVSize = pMesh->getUVs().getSize();
 
-		uint32_t nTotalSize = nVerticeSize + nNormalSize + nColorSize + nUVSize;
+		uint32_t nNormalSize = pMesh->getNormals().getSize();
 
-		pVertexObject->setBufferData(nTotalSize, nullptr, BufferDataUsage::STATIC_DRAW);
-		if (nVerticeSize > 0)
-		{
-			pVertexObject->setBufferSubData(0, nVerticeSize, pMesh->getVertices().getPtr());
-		}
-		if (nNormalSize > 0)
-		{
-			pVertexObject->setBufferSubData(nVerticeSize, nNormalSize, pMesh->getNormals().getPtr());
-		}
-		if (nColorSize > 0)
-		{
-			pVertexObject->setBufferSubData(nVerticeSize + nNormalSize, nColorSize, pMesh->getColors().getPtr());
-		}
-		if (nUVSize > 0)
-		{
-			pVertexObject->setBufferSubData(nVerticeSize + nNormalSize + nColorSize, nUVSize, pMesh->getUVs().getPtr());
-		}
+		VertexAttribPointer* pointer0 = pVertexArrayObject->getVertexAttrib<VertexAttribPointer>((uint32_t)VertexAttribType::POSITION);
+		VertexAttribPointer* pointer1 = pVertexArrayObject->getVertexAttrib<VertexAttribPointer>((uint32_t)VertexAttribType::COLOR);
+		VertexAttribPointer* pointer2 = pVertexArrayObject->getVertexAttrib<VertexAttribPointer>((uint32_t)VertexAttribType::UV);
+
+		pointer0->setVertexAttribPointer(3, VertexAttribPointerType::FLOAT, 0);
+		GLDebug::showError();
+
+		pointer1->setVertexAttribPointer(4, VertexAttribPointerType::FLOAT, nVerticeSize);
+		GLDebug::showError();
+
+		pointer2->setVertexAttribPointer(2, VertexAttribPointerType::FLOAT, nVerticeSize + nColorSize);
+		GLDebug::showError();
 
 		auto nMatID = pMesh->getMaterial();
 		this->applyMatToMesh(nMatID);
 
-		GLBufferObjects::drawElements(DrawMode::TRIANGLES, nIndiceLength, IndexDataType::UNSIGNED_INT, nullptr);
+
+		if (getProgram())
+		{
+			getProgram()->use();
+		}
+		else
+		{
+			ShaderProgram::useNone();
+		}
+
+		GLDebug::showError();
+		const MeshMemoryData& indices = pMesh->getIndices();
+		uint32_t nIndiceLength = indices.getLength();
+
+		pIndiceObject->bindBuffer();
+		GLBufferObjects::drawElements(DrawMode::TRIANGLES, nIndiceLength, IndexDataType::UNSIGNED_INT, (void*)0);
+
+		GLDebug::showError();
+		pointer0->disableVertexArrayAttrib();
+		pointer1->disableVertexArrayAttrib();
+		pointer2->disableVertexArrayAttrib();
 
 		GLState::disable(EnableModel::TEXTURE_2D);
+
+		GLDebug::showError();
 	}
 }
 
@@ -214,9 +318,14 @@ void render::Model::removeAllBufferObjects()
 		SAFE_RELEASE(item.second);
 	}
 
+	for (auto item : _vertexArrayObjects)
+	{
+		SAFE_RELEASE(item.second);
+	}
+
 	_indiceObjects.clear();
 	_vertexObjects.clear();
-	SAFE_RELEASE(_vertexArrayObject);
+	_vertexArrayObjects.clear();
 }
 
 void render::Model::applyMatToMesh(uint32_t nMatID)

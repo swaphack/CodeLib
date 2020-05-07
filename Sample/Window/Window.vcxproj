@@ -185,11 +185,15 @@
     <Image Include="toolbar1.bmp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resource\shader\color.fsh" />
+    <None Include="Resource\shader\color.vsh" />
     <None Include="Resource\shader\gray.fsh" />
     <None Include="Resource\shader\gray.vsh" />
     <None Include="Resource\shader\lighting.glsl" />
     <None Include="Resource\shader\shader_f_1.glsl" />
     <None Include="Resource\shader\shader_v_1.glsl" />
+    <None Include="Resource\shader\texture.fsh" />
+    <None Include="Resource\shader\texture.vsh" />
     <None Include="ribbon1.mfcribbon-ms" />
   </ItemGroup>
   <ItemGroup>

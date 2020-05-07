@@ -75,6 +75,15 @@ void ShaderProgram::initProgram()
 void ShaderProgram::link()
 {
 	GLShader::linkProgram(_programID);
+
+	int nStatus = 0;
+	GLShader::getProgram(_programID, GetProgramParameter::LINK_STATUS, &nStatus);
+	if (nStatus != GL_TRUE)
+	{
+		GLShader::showProgramError(_programID);
+	}
+
+	detachAllShaders();
 }
 
 void ShaderProgram::use()
