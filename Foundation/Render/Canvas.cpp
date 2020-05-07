@@ -65,6 +65,12 @@ void Canvas::setViewPort(float x, float y, float width, float height)
 		pTop->notifyToAll(ENP_SPACE);
 	}
 
+	auto pCamera = Camera::getMainCamera();
+	if (pCamera)
+	{
+		pCamera->notify(ENP_VIEWSIZE);
+	}
+
 	Tool::setGLViewSize(width, height);
 }
 

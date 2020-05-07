@@ -51,6 +51,8 @@ namespace render
 		virtual void updateTranform();
 		// 翻转空间矩阵
 		virtual void inverseTranform();
+		//视窗大小发生改变
+		virtual void updateViewPort();
 	protected:
 		// 设置维度
 		void setDimensions(CameraDimensions d);
@@ -71,6 +73,9 @@ namespace render
 		virtual ~Camera2D();
 	public:
 		virtual void updateView();
+	protected:
+		//视窗大小发生改变
+		virtual void updateViewPort();
 	};
 	// 3d 摄像头
 	class Camera3D : public Camera
@@ -83,5 +88,8 @@ namespace render
 	public:
 		// 相机对准指定位置
 		virtual void lookAt(const math::Vector3& position);
+	protected:
+		//视窗大小发生改变
+		virtual void updateViewPort();
 	};
 }

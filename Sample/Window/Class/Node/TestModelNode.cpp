@@ -36,7 +36,7 @@ void TestModelNode::testCubeModel()
 	pModel->setFaceTexture(EMF_TOP, textureName1);
 
 	pModel->setAnchorPoint(math::Vector3(0.5f, 0.5f, 0.5f));
-	pModel->setPosition(300, 300, 15);
+	pModel->setPosition(0, 0, -50);
 	pModel->setVolume(200, 200, 200);
 	this->addChild(pModel);
 

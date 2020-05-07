@@ -8,7 +8,8 @@ math::Volume Tool::GL_VIEW_SIZE = math::Volume();
 
 void Tool::setGLViewSize(float width, float height)
 {
-	GL_VIEW_SIZE.set(width, height, width <= height ? width : height);
+	float max = width <= height ? width : height;
+	GL_VIEW_SIZE.set(width, height, max);
 }
 
 const math::Volume& Tool::getGLViewSize()
@@ -63,16 +64,16 @@ void Tool::convertToAngle(const math::Vector3& src, math::Vector3& dest)
 
 void Tool::convertToOGLPoisition(float x, float y, float z, math::Vector3& dest)
 {
-	const math::Volume& volume = Tool::getGLViewSize();
+	const math::Volume& volume = GL_VIEW_SIZE;
 
-	dest.set(x / volume.getWidth(), y / volume.getHeight(), z / volume.getDepth());
+	dest.set(x / volume.getDepth(), y / volume.getDepth(), z / volume.getDepth());
 }
 
 math::Vector3 Tool::convertToOGLPoisition(float x, float y, float z)
 {
-	const math::Volume& volume = Tool::getGLViewSize();
+	const math::Volume& volume = GL_VIEW_SIZE;
 
-	return math::Vector3(x / volume.getWidth(), y / volume.getHeight(), z / volume.getDepth());
+	return math::Vector3(x / volume.getDepth(), y / volume.getDepth(), z / volume.getDepth());
 }
 
 math::Vector3 Tool::convertToOGLPoisition(const math::Vector3& src)
@@ -87,18 +88,18 @@ void Tool::convertToOGLPoisition(const math::Vector3& src, math::Vector3& dest)
 
 void Tool::convertToOGLPoisition(float* inPos, float* outPos)
 {
-	const math::Volume& volume = Tool::getGLViewSize();
+	const math::Volume& volume = GL_VIEW_SIZE;
 
-	outPos[0] = inPos[0] / volume.getWidth();
-	outPos[1] = inPos[1] / volume.getHeight();
+	outPos[0] = inPos[0] / volume.getDepth();
+	outPos[1] = inPos[1] / volume.getDepth();
 	outPos[2] = inPos[2] / volume.getDepth();
 }
 
 math::Vector3 Tool::convertToWindowPosition(float x, float y, float z)
 {
-	const math::Volume& volume = Tool::getGLViewSize();
+	const math::Volume& volume = GL_VIEW_SIZE;
 
-	return math::Vector3(x * volume.getWidth(), y * volume.getHeight(), z * volume.getDepth());
+	return math::Vector3(x * volume.getDepth(), y * volume.getDepth(), z * volume.getDepth());
 }
 
 math::Vector3 Tool::convertToWindowPosition(const math::Vector3& src)
@@ -108,9 +109,9 @@ math::Vector3 Tool::convertToWindowPosition(const math::Vector3& src)
 
 math::Volume Tool::convertToOGLVolume(const math::Volume& src)
 {
-	const math::Volume& volume = Tool::getGLViewSize();
+	const math::Volume& volume = GL_VIEW_SIZE;
 
-	return math::Volume(src.getWidth() / volume.getWidth() * 2 - 1, src.getHeight() / volume.getHeight() * 2 - 1, src.getDepth());
+	return math::Volume(src.getWidth() / volume.getDepth() * 2 - 1, src.getHeight() / volume.getDepth() * 2 - 1, src.getDepth());
 }
 
 math::Vector3 Tool::getRotationPosition(const math::Vector3& vector, const math::Vector3& rotation)

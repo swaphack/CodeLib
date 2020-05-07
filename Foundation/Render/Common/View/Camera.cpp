@@ -82,6 +82,10 @@ bool Camera::init()
 		return false;
 	}
 
+	_notify->addListen(ENP_VIEWSIZE, [this](){
+		this->updateViewPort();
+	});
+
 	return true;
 }
 
@@ -174,12 +178,17 @@ void Camera::inverseTranform()
 
 }
 
+void render::Camera::updateViewPort()
+{
+
+}
+
 //////////////////////////////////////////////////////////////////////////
 
 Camera2D::Camera2D()
 {
 	this->setDimensions(ED_2D);
-	this->setViewPortParams(0, 1, 0, 1, -50, 50);
+	updateViewPort();
 }
 
 Camera2D::~Camera2D()
@@ -189,6 +198,8 @@ Camera2D::~Camera2D()
 
 void Camera2D::updateView()
 {
+	
+
 	GLMatrix::loadOrtho(_cameraParams.xLeft,
 		_cameraParams.xRight,
 		_cameraParams.yBottom,
@@ -197,12 +208,22 @@ void Camera2D::updateView()
 		_cameraParams.zFar);
 }
 
+void render::Camera2D::updateViewPort()
+{
+	const math::Volume& size = Tool::getGLViewSize();
+	float x = size.getWidth() / size.getDepth();
+	float y = size.getHeight() / size.getDepth();
+	float z = size.getDepth() / size.getDepth();
+	float zh = z * 0.5f;
+	this->setViewPortParams(0, x, 0, y, -zh, zh);
+}
+
 //////////////////////////////////////////////////////////////////////////
 
 Camera3D::Camera3D()
 {
 	this->setDimensions(ED_3D);
-	this->setViewPortParams(-0.5f, 0.5f, -0.5f, 0.5f, 0.1f, 100);
+	updateViewPort();
 }
 
 Camera3D::~Camera3D()
@@ -223,5 +244,17 @@ void Camera3D::updateView()
 		_cameraParams.yTop,
 		_cameraParams.zNear,
 		_cameraParams.zFar);
+}
+
+void render::Camera3D::updateViewPort()
+{
+	const math::Volume& size = Tool::getGLViewSize();
+	float x = size.getWidth() / size.getDepth();
+	float y = size.getHeight() / size.getDepth();
+	float z = size.getDepth() / size.getDepth();
+	float xh = x * 0.5f;
+	float yh = y * 0.5f;
+	float zh = z * 0.5f;
+	this->setViewPortParams(-xh, xh, -yh, yh, 0.1f, 1.1f);
 }
 

@@ -28,6 +28,8 @@ namespace render
 		ENP_GEOMETRY,
 		// 文本纹理
 		ENP_TEXT_FRAME,
+		// 视窗改变
+		ENP_VIEWSIZE,
 	};
 
 	// 推送委托
