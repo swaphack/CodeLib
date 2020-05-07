@@ -49,7 +49,7 @@ void render::Model::updateBufferData()
 	{
 		auto pMesh = item.second;
 
-		uint32_t id = id;
+		uint32_t id = item.first;
 
 		auto it0 = _vertexArrayObjects.find(id);
 		if (it0 == _vertexArrayObjects.end())
