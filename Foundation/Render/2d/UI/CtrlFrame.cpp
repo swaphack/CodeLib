@@ -256,6 +256,11 @@ void render::CtrlFrame::drawSampleWithBufferObject()
 		return;
 	}
 
+	if (getProgram() == nullptr)
+	{
+		return;
+	}
+
 	GLState::enable(EnableModel::TEXTURE_2D);
 	GLTexture::bindTexture2D(textID);
 	GLDebug::showError();
@@ -264,9 +269,9 @@ void render::CtrlFrame::drawSampleWithBufferObject()
 	_vertexArrayObject->bindBuffer();
 	GLDebug::showError();
 	
-	VertexAttribPointer* pointer0 = _vertexArrayObject->getVertexAttrib<VertexAttribPointer>((uint32_t)VertexAttribType::POSITION);
-	VertexAttribPointer* pointer1 = _vertexArrayObject->getVertexAttrib<VertexAttribPointer>((uint32_t)VertexAttribType::COLOR);
-	VertexAttribPointer* pointer2 = _vertexArrayObject->getVertexAttrib<VertexAttribPointer>((uint32_t)VertexAttribType::UV);
+	VertexAttribPointer* pointer0 = _vertexArrayObject->getVertexAttrib<VertexAttribPointer>(getProgram()->getVertexAttribIndex(VertexAttribType::POSITION));
+	VertexAttribPointer* pointer1 = _vertexArrayObject->getVertexAttrib<VertexAttribPointer>(getProgram()->getVertexAttribIndex(VertexAttribType::COLOR));
+	VertexAttribPointer* pointer2 = _vertexArrayObject->getVertexAttrib<VertexAttribPointer>(getProgram()->getVertexAttribIndex(VertexAttribType::UV));
 
 	pointer0->enableVertexArrayAttrib();
 	pointer1->enableVertexArrayAttrib();
@@ -311,3 +316,5 @@ void render::CtrlFrame::drawSampleWithBufferObject()
 
 	GLDebug::showError();
 }
+
+

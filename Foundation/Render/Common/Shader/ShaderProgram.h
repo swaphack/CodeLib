@@ -83,7 +83,7 @@ namespace render
 		/**
 		*	获取属性
 		*/
-		ShaderAttrib* getAttriubte(const std::string& name);
+		ShaderAttrib* getAttrib(const std::string& name);
 		/**
 		*	获取固定属性
 		*/
@@ -104,11 +104,17 @@ namespace render
 		*	获取可编程属性
 		*/
 		ShaderProgramUniform* getProgramUniform(const std::string& name);
+	public:
+		void addVertexAttrib(VertexAttribType vat, uint32_t index);
+
+		uint32_t getVertexAttribIndex(VertexAttribType vat);
+
+		void removeVertexAttribIndices();
 	protected:
 		/**
 		*	添加属性
 		*/
-		void addAttriubte(const std::string& name, ShaderAttrib* attrib);
+		void addAttrib(const std::string& name, ShaderAttrib* attrib);
 		/**
 		*	添加固定属性
 		*/
@@ -133,7 +139,7 @@ namespace render
 		/**
 		*	移除所有属性
 		*/
-		void removeAllAttributes();
+		void removeAllAttribs();
 		/**
 		*	移除所有固定属性
 		*/
@@ -201,6 +207,10 @@ namespace render
 		*	管线
 		*/
 		std::map<std::string, ShaderProgramPipeline*> _programPipelines;
+		/**
+		*	固定属性
+		*/
+		std::map<VertexAttribType, uint32_t> _vertexAttribIndices;
 	};
 
 }

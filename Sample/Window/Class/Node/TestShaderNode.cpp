@@ -17,8 +17,8 @@ TestShaderNode::~TestShaderNode()
 void TestShaderNode::testFunc()
 {
 	//this->testColorShader();
-
-	this->testModelShader();
+	this->testImageShader();
+	//this->testModelShader();
 }
 
 void TestShaderNode::testShaderUniformBlock()
@@ -98,6 +98,25 @@ void TestShaderNode::testImageShader()
 	ShaderProgram* pProgram = CREATE_OBJECT(ShaderProgram);
 	pProgram->loadVertexAndFragmentShader(vPath, fPath);
 	pProgram->link();
+
+	ShaderAttrib* pAttrib = pProgram->getAttrib("vertexPosition");
+	if (pAttrib)
+	{
+		pProgram->addVertexAttrib(VertexAttribType::POSITION, pAttrib->getAttribID());
+	}
+
+	pAttrib = pProgram->getAttrib("vertexColor");
+	if (pAttrib)
+	{
+		pProgram->addVertexAttrib(VertexAttribType::COLOR, pAttrib->getAttribID());
+	}
+
+	pAttrib = pProgram->getAttrib("vertexUV");
+	if (pAttrib)
+	{
+		pProgram->addVertexAttrib(VertexAttribType::UV, pAttrib->getAttribID());
+	}
+	
 
 	pImage->setProgram(pProgram);
 }

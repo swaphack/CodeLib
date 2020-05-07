@@ -99,12 +99,14 @@ void ShaderProgram::useNone()
 void ShaderProgram::releaseProgram()
 {
 	detachAllShaders();
-	removeAllAttributes();
+	removeAllAttribs();
 	removeAllUniforms();
 	removeAllUniformBlocks();
 	removeAllSubroutineUniforms();
 	removeAllProgramPipelines();
 	removeAllProgramUniforms();
+
+	removeVertexAttribIndices(); 
 
 	if (_programID != 0)
 	{
@@ -113,7 +115,7 @@ void ShaderProgram::releaseProgram()
 	}
 }
 
-ShaderAttrib* ShaderProgram::getAttriubte(const std::string& name)
+ShaderAttrib* ShaderProgram::getAttrib(const std::string& name)
 {
 	auto it = _attributes.find(name);
 	if (it != _attributes.end())
@@ -123,7 +125,7 @@ ShaderAttrib* ShaderProgram::getAttriubte(const std::string& name)
 
 	int32_t id = GLShader::getAttribLocation(_programID, name.c_str());
 	GLDebug::showError();
-	if (id <= 0)
+	if (id < 0)
 	{
 		return nullptr;
 	}
@@ -132,12 +134,12 @@ ShaderAttrib* ShaderProgram::getAttriubte(const std::string& name)
 	pAtt->setAttribID(id);
 	pAtt->setName(name);
 	pAtt->setProgram(this);
-	this->addAttriubte(name, pAtt);
+	this->addAttrib(name, pAtt);
 
 	return pAtt;
 }
 
-void ShaderProgram::removeAllAttributes()
+void ShaderProgram::removeAllAttribs()
 {
 	for (auto item : _attributes)
 	{
@@ -146,7 +148,7 @@ void ShaderProgram::removeAllAttributes()
 	_attributes.clear();
 }
 
-void ShaderProgram::addAttriubte(const std::string& name, ShaderAttrib* attrib)
+void ShaderProgram::addAttrib(const std::string& name, ShaderAttrib* attrib)
 {
 	if (name.empty() || attrib == nullptr)
 	{
@@ -295,6 +297,22 @@ render::ShaderProgramUniform* render::ShaderProgram::getProgramUniform(const std
 	return pUniform;
 }
 
+void render::ShaderProgram::addVertexAttrib(VertexAttribType vat, uint32_t index)
+{
+	_vertexAttribIndices[vat] = index;
+}
+
+uint32_t render::ShaderProgram::getVertexAttribIndex(VertexAttribType vat)
+{
+	auto it = _vertexAttribIndices.find(vat);
+	if (it == _vertexAttribIndices.end())
+	{
+		return 0;
+	}
+
+	return it->second;
+}
+
 void render::ShaderProgram::addProgramUniform(const std::string& name, ShaderProgramUniform* uniform)
 {
 	if (name.empty() || uniform == nullptr)
@@ -395,6 +413,11 @@ void render::ShaderProgram::removeAllSubroutineUniforms()
 		SAFE_RELEASE(item.second);
 	}
 	_subroutineUniforms.clear();
+}
+
+void render::ShaderProgram::removeVertexAttribIndices()
+{
+	_vertexAttribIndices.clear();
 }
 
 
