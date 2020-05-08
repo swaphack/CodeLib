@@ -33,7 +33,8 @@ bool CtrlAudioListener::init()
 	_listenerID = s_ListenerCount++;
 
 	_notify->addListen(ENP_SPACE, [this](){
-		_listenerBody.position = _realBodySpace.position;
+		math::Matrix44 mat = this->getWorldMatrix();
+		_listenerBody.position = mat.getPosition();
 		updateListener();
 	});
 

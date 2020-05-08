@@ -3,20 +3,17 @@
 #include "Common/Texture/Texture.h"
 #include "Resource/Detail/MaterialDetail.h"
 #include "Resource/Detail/MeshDetail.h"
-#include "Common/Material/Material.h"
 #include "Common/Tool/TextureTool.h"
+#include "Common/Node/import.h"
 
 using namespace render;
 
 CubeModel::CubeModel()
 {
-	_material = CREATE_OBJECT(Material);
-	SAFE_RETAIN(_material);
 }
 
 CubeModel::~CubeModel()
 {
-	SAFE_RETAIN(_material);
 }
 
 bool CubeModel::init()
@@ -28,18 +25,15 @@ bool CubeModel::init()
 
 	_notify->addListen(ENP_SPACE, [this](){
 		this->onCubeChange();
-#if USE_BUFFER_OBJECT
-		this->updateBufferData();
-#endif
 	});
 
 	for (int i = 0; i < CUBE_FACE_COUNT; i++)
 	{
 		auto pMat = CREATE_OBJECT(MaterialDetail);
-		_modelDetail->addMaterial(i, pMat);
+		_material->addMaterial(i, pMat);
 
 		auto pMesh = CREATE_OBJECT(MeshDetail);
-		_modelDetail->addMesh(i, pMesh);
+		_mesh->addMesh(i, pMesh);
 
 		pMesh->setMaterial(i);
 
@@ -47,6 +41,7 @@ bool CubeModel::init()
 		pMesh->setIndices(6, _faces[i].indices);
 		pMesh->setColors(16, _faces[i].colors);
 	}
+	this->notify(ENP_MODEL_FRAME);
 	return true;
 }
 
@@ -56,7 +51,7 @@ void CubeModel::onCubeChange()
 	
 	for (int i = 0; i < CUBE_FACE_COUNT; i++)
 	{
-		auto pMesh = _modelDetail->getMesh(i);
+		auto pMesh = _mesh->getMesh(i);
 		if (!pMesh)
 		{
 			return;
@@ -79,18 +74,20 @@ void CubeModel::onCubeChange()
 
 		pMesh->setVertices(12, vertices);
 	}
+
+	this->notify(ENP_MODEL_FRAME);
 }
 
 void render::CubeModel::addTexture(const std::string& name, Texture2D* texture)
 {
-	_modelDetail->addTexture(name, texture);
+	_material->addTexture(name, texture);
 }
 
 void render::CubeModel::setAllFacesTexture(const std::string& name)
 {
 	for (int i = 0; i < CUBE_FACE_COUNT; i++)
 	{
-		auto pMat = _modelDetail->getMaterial(i);
+		auto pMat = _material->getMaterial(i);
 		if (pMat)
 		{
 			pMat->setAmbientTextureMap(name);
@@ -100,7 +97,7 @@ void render::CubeModel::setAllFacesTexture(const std::string& name)
 
 void render::CubeModel::setFaceTexture(ModelFace face, const std::string& name)
 {
-	auto pMat = _modelDetail->getMaterial((int)face);
+	auto pMat = _material->getMaterial((int)face);
 	if (pMat)
 	{
 		pMat->setAmbientTextureMap(name);

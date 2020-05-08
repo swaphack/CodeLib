@@ -463,7 +463,6 @@ static FbxManager* lSdkManager = nullptr;
 
 FileFbx::FileFbx()
 {
-	this->setModelFormat(EMRF_FBX);
 }
 
 FileFbx::~FileFbx()

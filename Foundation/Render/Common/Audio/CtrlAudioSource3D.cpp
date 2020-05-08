@@ -21,11 +21,12 @@ bool CtrlAudioSource3D::init()
 		return false;
 	}
 
-	_notify->addListen(ENP_SPACE, [&](){
+	_notify->addListen(ENP_SPACE, [this](){
 		FMOD_VECTOR pos;
 		FMOD_VECTOR vel;
 
-		_3dSettings.position = _realBodySpace.position;
+		math::Matrix44 mat = this->getWorldMatrix();
+		_3dSettings.position = mat.getPosition();
 
 		ConvertToFMODVector(_3dSettings.position, pos);
 		ConvertToFMODVector(_3dSettings.velocity, vel);

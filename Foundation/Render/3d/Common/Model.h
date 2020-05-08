@@ -8,10 +8,8 @@
 namespace render
 {
 	class ModelDetail;
-	class ShaderProgram;
 	class Material;
-	class NoNamedBufferObject;
-	class VertexArrayObject;
+	class Mesh;
 
 	// Ä£ÐÍ
 	class Model : public ColorNode
@@ -26,10 +24,13 @@ namespace render
 		virtual void drawSample();
 	public:
 		void setModelData(ModelDetail* detail);
+		Material* getMaterial();
+		Mesh* getMesh();
 	protected:
 		void drawSampleWithClientArray();
 		void drawSampleWithBufferObject();
 	protected:
 		Material* _material = nullptr;
+		Mesh * _mesh = nullptr;
 	};
 }

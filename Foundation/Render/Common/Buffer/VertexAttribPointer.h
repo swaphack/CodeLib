@@ -34,7 +34,6 @@ namespace render
 		*	设置顶点属性指针
 		*/
 		void setVertexAttribPointer(int size, VertexAttribPointerType type, uint32_t offset);
-	protected:
 	private:
 	};
 }

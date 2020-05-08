@@ -300,3 +300,13 @@ math::Matrix44 math::Matrix44::lookAt(const Vector3& target, const Vector3& eye,
 	return m;
 }
 
+math::Vector3 math::Matrix44::getPosition()
+{
+	return Vector3((*this)[12], (*this)[13], (*this)[14]);
+}
+
+math::Vector3 math::Matrix44::getScale()
+{
+	return Vector3((*this)[0], (*this)[5], (*this)[10]);
+}
+

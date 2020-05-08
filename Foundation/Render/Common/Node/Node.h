@@ -128,9 +128,9 @@ namespace render
 		const RectVertex& getRectVertex();
 	public:
 		// 世界矩阵
-		const math::Matrix44& getWorldMatrix();
+		const math::Matrix44& getWorldMatrix() const;
 		// 相对父节点的矩阵
-		const math::Matrix44& getLocalMatrix();
+		const math::Matrix44& getLocalMatrix() const;
 	protected:
 		// 更新空间矩阵
 		virtual void updateTranform();

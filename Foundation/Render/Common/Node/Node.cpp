@@ -437,12 +437,12 @@ void Node::onChildrenChange()
 	this->notify(ENP_NODE);
 }
 
-const math::Matrix44& Node::getWorldMatrix()
+const math::Matrix44& Node::getWorldMatrix() const
 {
 	return _worldMat;
 }
 
-const math::Matrix44& Node::getLocalMatrix()
+const math::Matrix44& Node::getLocalMatrix() const
 {
 	return _localMat;
 }

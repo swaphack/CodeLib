@@ -12,7 +12,6 @@ using namespace render;
 
 FileObj::FileObj()
 {
-	this->setModelFormat(EMRF_OBJ);
 }
 
 FileObj::~FileObj()

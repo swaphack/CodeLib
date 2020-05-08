@@ -6,7 +6,7 @@
 #include "Common/Shader/import.h"
 #include "Common/Buffer/import.h"
 #include "Common/View/import.h"
-#include "Common/Material/import.h"
+#include "Common/Node/import.h"
 
 using namespace render;
 
@@ -14,11 +14,13 @@ using namespace render;
 Model::Model()
 {
 	_material = new Material;
+	_mesh = new Mesh;
 }
 
 Model::~Model()
 {
 	SAFE_DELETE(_material);
+	SAFE_DELETE(_mesh);
 }
 
 bool render::Model::init()
@@ -30,14 +32,13 @@ bool render::Model::init()
 
 	_notify->addListen(ENP_MODEL_FRAME, [this](){
 		_material->updateMatTexture();
-		_material->updateBufferData();
+		_mesh->updateBufferData();
 	});
 	return true;
 }
 
 void Model::drawSample()
 {
-
 #if USE_BUFFER_OBJECT
 	this->drawSampleWithBufferObject();
 #else
@@ -48,20 +49,17 @@ void Model::drawSample()
 void render::Model::setModelData(ModelDetail* detail)
 {
 	_material->setModelDetail(detail);
+	_mesh->setModelDetail(detail);
 	this->notify(ENP_MODEL_FRAME);
 }
 
 void render::Model::drawSampleWithClientArray()
 {
-	auto modelDetail = _material->getModelDetail();
-	if (modelDetail == nullptr)
+	if (_mesh == nullptr)
 	{
 		return;
 	}
-
-	//PRINT("=============begin=============\n");
-
-	const std::map<int, MeshDetail*>& meshes = modelDetail->getMeshes();
+	const std::map<int, MeshDetail*>& meshes = _mesh->getMeshes();
 	for (auto item : meshes)
 	{
 		auto pMesh = item.second;
@@ -96,7 +94,7 @@ void render::Model::drawSampleWithClientArray()
 
 		auto nMatID = pMesh->getMaterial();
 
-		_material->applyMatToMesh(nMatID);
+		_material->applyMat(nMatID);
 
 		const MeshMemoryData& indices = pMesh->getIndices();
 		if (indices.getLength() > 0)
@@ -122,5 +120,17 @@ void render::Model::drawSampleWithBufferObject()
 	math::Matrix44 viewMat = Camera::getMainCamera()->getViewMatrix();
 	math::Matrix44 modelMat = this->getWorldMatrix();
 
-	_material->draw(projMat, viewMat, modelMat);
+	_material->startUpdateShaderUniformValue(projMat, viewMat, modelMat);
+	_mesh->draw(_material);
+	_material->endUpdateShaderUniformValue();
+}
+
+Material* render::Model::getMaterial()
+{
+	return _material;
+}
+
+Mesh* render::Model::getMesh()
+{
+	return _mesh;
 }

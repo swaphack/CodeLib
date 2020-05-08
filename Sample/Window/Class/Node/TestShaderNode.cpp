@@ -100,26 +100,12 @@ void TestShaderNode::testImageShader()
 	pProgram->loadVertexAndFragmentShader(vPath, fPath);
 	pProgram->link();
 
-	ShaderAttrib* pAttrib = pProgram->getAttrib("vertexPosition");
-	if (pAttrib)
-	{
-		pProgram->addVertexAttrib(VertexAttribType::POSITION, pAttrib->getAttribID());
-	}
-
-	pAttrib = pProgram->getAttrib("vertexColor");
-	if (pAttrib)
-	{
-		pProgram->addVertexAttrib(VertexAttribType::COLOR, pAttrib->getAttribID());
-	}
-
-	pAttrib = pProgram->getAttrib("vertexUV");
-	if (pAttrib)
-	{
-		pProgram->addVertexAttrib(VertexAttribType::UV, pAttrib->getAttribID());
-	}
-	
-
-	pImage->setProgram(pProgram);
+	/*
+	pModel->getMaterial()->setShaderProgram(pProgram);
+	pModel->getMaterial()->addAttrib(VertexAttribType::POSITION, "vertexPosition");
+	pModel->getMaterial()->addAttrib(VertexAttribType::COLOR, "vertexColor");
+	pModel->getMaterial()->addAttrib(VertexAttribType::UV, "vertexUV");
+	*/
 
 	RotateByAction* pRotateByAction = CREATE_ACTION(RotateByAction);
 	pRotateByAction->setRotation(180, 180, 180);
@@ -150,10 +136,6 @@ void TestShaderNode::testColorShader()
 	ShaderProgram* pProgram = CREATE_OBJECT(ShaderProgram);
 	pProgram->loadVertexAndFragmentShader(vPath, fPath);
 	pProgram->link();
-
-	pImage->getma(pProgram);
-
-
 }
 
 void TestShaderNode::testModelShader()
@@ -185,25 +167,15 @@ void TestShaderNode::testModelShader()
 	pProgram->loadVertexAndFragmentShader(vPath, fPath);
 	pProgram->link();
 
-	ShaderAttrib* pAttrib = pProgram->getAttrib("vertexPosition");
-	if (pAttrib)
-	{
-		pProgram->addVertexAttrib(VertexAttribType::POSITION, pAttrib->getAttribID());
-	}
+	pModel->getMaterial()->setShaderProgram(pProgram);
 
-	pAttrib = pProgram->getAttrib("vertexColor");
-	if (pAttrib)
-	{
-		pProgram->addVertexAttrib(VertexAttribType::COLOR, pAttrib->getAttribID());
-	}
+	pModel->getMaterial()->addUniform(VertexUniformType::PROJECT_MATRIX, "projMat");
+	pModel->getMaterial()->addUniform(VertexUniformType::VIEW_MATRIX, "viewMat");
+	pModel->getMaterial()->addUniform(VertexUniformType::MODEL_VIEW, "modelMat");
 
-	pAttrib = pProgram->getAttrib("vertexUV");
-	if (pAttrib)
-	{
-		pProgram->addVertexAttrib(VertexAttribType::UV, pAttrib->getAttribID());
-	}
-
-	pModel->setProgram(pProgram);
+	pModel->getMaterial()->addAttrib(VertexAttribType::POSITION, "vertexPosition");
+	pModel->getMaterial()->addAttrib(VertexAttribType::COLOR, "vertexColor");
+	pModel->getMaterial()->addAttrib(VertexAttribType::UV, "vertexUV");
 
 	RotateByAction* pRotateByAction = CREATE_ACTION(RotateByAction);
 	pRotateByAction->setRotation(0, 180, 0);
@@ -224,32 +196,22 @@ void TestShaderNode::test3dsModelShader()
 	pModel->setVolume(400, 400, 400);
 	this->addChild(pModel);
 
-	std::string vPath = "Resource/shader/texture2d.vsh";
-	std::string fPath = "Resource/shader/texture2d.fsh";
+	std::string vPath = "Resource/shader/texture3d.vsh";
+	std::string fPath = "Resource/shader/texture3d.fsh";
 
 	ShaderProgram* pProgram = CREATE_OBJECT(ShaderProgram);
 	pProgram->loadVertexAndFragmentShader(vPath, fPath);
 	pProgram->link();
 
-	ShaderAttrib* pAttrib = pProgram->getAttrib("vertexPosition");
-	if (pAttrib)
-	{
-		pProgram->addVertexAttrib(VertexAttribType::POSITION, pAttrib->getAttribID());
-	}
+	pModel->getMaterial()->setShaderProgram(pProgram);
 
-	pAttrib = pProgram->getAttrib("vertexColor");
-	if (pAttrib)
-	{
-		pProgram->addVertexAttrib(VertexAttribType::COLOR, pAttrib->getAttribID());
-	}
+	pModel->getMaterial()->addUniform(VertexUniformType::PROJECT_MATRIX, "projMat");
+	pModel->getMaterial()->addUniform(VertexUniformType::VIEW_MATRIX, "viewMat");
+	pModel->getMaterial()->addUniform(VertexUniformType::MODEL_VIEW, "modelMat");
 
-	pAttrib = pProgram->getAttrib("vertexUV");
-	if (pAttrib)
-	{
-		pProgram->addVertexAttrib(VertexAttribType::UV, pAttrib->getAttribID());
-	}
-
-	pModel->setProgram(pProgram);
+	pModel->getMaterial()->addAttrib(VertexAttribType::POSITION, "vertexPosition");
+	pModel->getMaterial()->addAttrib(VertexAttribType::COLOR, "vertexColor");
+	pModel->getMaterial()->addAttrib(VertexAttribType::UV, "vertexUV");
 
 	RotateByAction* pRotateByAction = CREATE_ACTION(RotateByAction);
 	pRotateByAction->setRotation(180, 180, 0);

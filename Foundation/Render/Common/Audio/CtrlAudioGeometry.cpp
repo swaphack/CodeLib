@@ -261,7 +261,10 @@ void CtrlAudioGeometry::onGeometryChange()
 
 void CtrlAudioGeometry::onPolygonsChange()
 {
-	Tool::calRealCube(_realBodySpace.position, _realBodySpace.volume, getAnchorPoint(), _cubeVertex);
+	math::Matrix44 mat = this->getWorldMatrix();
+	math::Vector3 position = mat.getPosition();
+	math::Volume volume = this->getVolume();
+	Tool::calRealCube(position, volume, getAnchorPoint(), _cubeVertex);
 	for (int i = 0; i < EMF_MAX; i++)
 	{
 		CtrlAudioGeometryPolygon* polygon = getPolygon((ModelFace)i);
@@ -487,11 +490,15 @@ void CtrlAudioGeometryPolygon::onPolygonChange()
 
 	if (_realVertexes == nullptr)
 	{
+
+		math::Matrix44 mat = this->getWorldMatrix();
+		math::Vector3 position = mat.getPosition();
+
 		_realVertexes = new FMOD_VECTOR[count];
 		_realVerticeCount = count;
 		for (int i = 0; i < count; i++)
 		{
-			ConvertToFMODVector(_vertexes[i] + _realBodySpace.position, _realVertexes[i]);
+			ConvertToFMODVector(_vertexes[i] + position, _realVertexes[i]);
 		}
 
 		FMOD_RESULT result = _geometry->addPolygon(_geometrySettings.directocclusion, _geometrySettings.reverbocclusion, _geometrySettings.doublesided,
@@ -503,10 +510,12 @@ void CtrlAudioGeometryPolygon::onPolygonChange()
 	}
 	else
 	{
+		math::Matrix44 mat = this->getWorldMatrix();
+		math::Vector3 position = mat.getPosition();
 		for (int i = 0; i < count; i++)
 		{
 			FMOD_VECTOR pos;
-			ConvertToFMODVector(_vertexes[i] + _realBodySpace.position, pos);
+			ConvertToFMODVector(_vertexes[i] + position, pos);
 			_geometry->setPolygonVertex(_index, i, &pos);
 		}
 	}

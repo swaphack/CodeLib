@@ -15,10 +15,10 @@ void CtrlMask::drawSample()
 {
 	GLVertex::beginMode(ShapeMode::QUADS);
 
-	GLVertex::setVertex(_rectVertex.leftDown);
-	GLVertex::setVertex(_rectVertex.rightDown);
-	GLVertex::setVertex(_rectVertex.rightUp);
-	GLVertex::setVertex(_rectVertex.leftUp);
+// 	GLVertex::setVertex(_rectVertex.leftDown);
+// 	GLVertex::setVertex(_rectVertex.rightDown);
+// 	GLVertex::setVertex(_rectVertex.rightUp);
+// 	GLVertex::setVertex(_rectVertex.leftUp);
 
-	GLVertex::endMode();;
+	GLVertex::endMode();
 }

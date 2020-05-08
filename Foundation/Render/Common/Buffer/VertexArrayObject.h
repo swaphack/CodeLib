@@ -41,7 +41,7 @@ namespace render
 		*	绑定
 		*/
 		void bindBuffer();
-	public:
+	public:		
 		/**
 		*	生成顶点属性指针
 		*/

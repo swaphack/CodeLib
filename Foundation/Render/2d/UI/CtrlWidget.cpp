@@ -7,7 +7,6 @@
 #include "Common/Shader/import.h"
 #include "Common/Buffer/import.h"
 #include "Common/View/import.h"
-#include "Common/Material/import.h"
 
 using namespace render;
 

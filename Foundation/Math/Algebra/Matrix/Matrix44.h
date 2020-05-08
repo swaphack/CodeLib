@@ -73,6 +73,17 @@ namespace math
 		*	欧拉角
 		*/
 		Vector3 getEularAngle();
+		/**
+		*	未知
+		*/
+		Vector3 getPosition();
+		/**
+		*	缩放比例
+		*/
+		Vector3 getScale();
+	public:
+		virtual Matrix41 operator*(const Matrix41& mat);
+		virtual Matrix44 operator*(const Matrix44& mat);
 	public:
 		//--------------------------------------------------------------------------------
 		// set a ortho (right hand)
@@ -96,8 +107,5 @@ namespace math
 		static Matrix44 horizontalPerspective(float fov, float aspect, float front, float back);
 
 		static Matrix44 lookAt(const Vector3& target, const Vector3& eye, const Vector3& up);
-	public:
-		virtual Matrix41 operator*(const Matrix41& mat);
-		virtual Matrix44 operator*(const Matrix44& mat);
 	};
 }

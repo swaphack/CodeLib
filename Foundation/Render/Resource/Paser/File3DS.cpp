@@ -12,7 +12,6 @@ using namespace render;
 //////////////////////////////////////////////////////////////////////////
 File3DS::File3DS()
 {
-	this->setModelFormat(EMRF_3DS);
 }
 
 File3DS::~File3DS()

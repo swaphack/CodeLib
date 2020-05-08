@@ -10,6 +10,7 @@ namespace render
 	class Texture;
 	class TexFrame;
 	class Material;
+	class Mesh;
 
 	// 帧图片，默认逆时针绘制
 	class CtrlFrame : public CtrlWidget
@@ -63,5 +64,7 @@ namespace render
 		bool _bFlipY;
 		// 材质
 		Material* _material = nullptr;
+		// 
+		Mesh* _mesh = nullptr;
 	};
 }

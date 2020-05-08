@@ -203,7 +203,6 @@ namespace render
 		*	π‹œﬂ
 		*/
 		std::map<std::string, ShaderProgramPipeline*> _programPipelines;
-		
 	};
 
 }

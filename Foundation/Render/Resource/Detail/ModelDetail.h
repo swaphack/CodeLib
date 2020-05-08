@@ -23,9 +23,6 @@ namespace render
 		ModelDetail();
 		virtual ~ModelDetail();
 	public:
-		// 模型资源格式
-		ModelResourceFormat getModelFormat();
-	public:
 		/**
 		*	设置模型材质
 		*/
@@ -45,7 +42,7 @@ namespace render
 		/**
 		*	获取模型材质
 		*/
-		const std::map<int, MaterialDetail*>& geMaterials();
+		const std::map<int, MaterialDetail*>& getMaterials() const;
 	public:
 		/**
 		*	设置模型网格
@@ -66,24 +63,7 @@ namespace render
 		/**
 		*	获取模型网格
 		*/
-		const std::map<int, MeshDetail*>& getMeshes();
-	public:
-		/**
-		*	设置模型网格
-		*/
-		void addTexture(const std::string& name, Texture2D* id);
-		/**
-		*	移除模型网格
-		*/
-		void removeTexture(const std::string& name);
-		/**
-		*	移除所有模型网格
-		*/
-		void removeAllTextures();
-		/**
-		*	获取模型网格
-		*/
-		int getTexture(const std::string& name);
+		const std::map<int, MeshDetail*>& getMeshes() const;
 	public:
 		/**
 		*	设置纹理路径
@@ -100,28 +80,16 @@ namespace render
 		/**
 		*	获取纹理路径
 		*/
-		const std::map<std::string, std::string>& getTexturePaths();
-	protected:
-		// 设置模型格式
-		void setModelFormat(ModelResourceFormat format);
+		const std::map<std::string, std::string>& getTexturePaths() const;
 	public:
-		// 创建纹理
-		Texture2D* createTexture(const std::string& strFileName, const std::string& dir);
-		// 创建纹理
-		Texture2D* createTexture(const std::string& strFullpath);
 		// 获取纹理完整路径
 		std::string getTextureFullPath(const std::string& strFileName, const std::string& dir);
 	protected:
-		// 模型材质
-		std::map<int, MaterialDetail*> _materials;
 		// 纹理网格
 		std::map<int, MeshDetail*> _meshes;
-		// 图片纹理
-		std::map<std::string, Texture2D*> _textures;
+		// 模型材质
+		std::map<int, MaterialDetail*> _materials;
 		// 纹理路径
 		std::map<std::string, std::string> _texturePaths;
-	private:
-		// 模型资源格式
-		ModelResourceFormat _format = EMRF_NONE;
 	};
 }

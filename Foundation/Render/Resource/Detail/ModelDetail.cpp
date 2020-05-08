@@ -1,7 +1,6 @@
 #include "ModelDetail.h"
 #include "system.h"
-#include "Common/Texture/TextureCache.h"
-#include "Common/Texture/Texture.h"
+
 
 #include "MaterialDetail.h"
 #include "MeshDetail.h"
@@ -18,35 +17,7 @@ ModelDetail::~ModelDetail()
 {
 	this->removeAllMaterials();
 	this->removeAllMeshes();
-	this->removeAllTextures();
 	this->removeAllTexturePaths();
-}
-
-ModelResourceFormat ModelDetail::getModelFormat()
-{
-	return _format;
-}
-
-void ModelDetail::setModelFormat(ModelResourceFormat format)
-{
-	_format = format;
-}
-
-Texture2D* ModelDetail::createTexture(const std::string& strFileName, const std::string& dir)
-{
-	std::string fullpath = getTextureFullPath(strFileName, dir);
-
-	return createTexture(fullpath);
-}
-
-Texture2D* ModelDetail::createTexture(const std::string& strFullpath)
-{
-	if (strFullpath.empty())
-	{
-		return nullptr;
-	}
-	Texture2D* pTexture = G_TEXTURE_CACHE->createTexture2D(strFullpath);
-	return pTexture;
 }
 
 void ModelDetail::addMaterial(int id, MaterialDetail* material)
@@ -141,58 +112,12 @@ MeshDetail* ModelDetail::getMesh(int id)
 	return it->second;
 }
 
-void ModelDetail::addTexture(const std::string& name, Texture2D* id)
-{
-	if (id == nullptr)
-	{
-		return;
-	}
-	this->removeTexture(name);
-
-	SAFE_RETAIN(id);
-
-	_textures[name] = id;
-}
-
-void ModelDetail::removeTexture(const std::string& name)
-{
-	auto it = _textures.find(name);
-	if (it == _textures.end())
-	{
-		return;
-	}
-
-	SAFE_RELEASE(it->second);
-
-	_textures.erase(it);
-}
-
-void ModelDetail::removeAllTextures()
-{
-	for (auto item : _textures)
-	{
-		SAFE_RELEASE(item.second);
-	}
-	_textures.clear();
-}
-
-int ModelDetail::getTexture(const std::string& name)
-{
-	auto it = _textures.find(name);
-	if (it == _textures.end())
-	{
-		return 0;
-	}
-
-	return it->second->getTextureID();
-}
-
-const std::map<int, MaterialDetail*>& ModelDetail::geMaterials()
+const std::map<int, MaterialDetail*>& ModelDetail::getMaterials() const
 {
 	return _materials;
 }
 
-const std::map<int, MeshDetail*>& ModelDetail::getMeshes()
+const std::map<int, MeshDetail*>& ModelDetail::getMeshes() const
 {
 	return _meshes;
 }
@@ -218,7 +143,7 @@ std::string render::ModelDetail::getTexturePath(const std::string& name)
 	return it->second;
 }
 
-const std::map<std::string, std::string>& render::ModelDetail::getTexturePaths()
+const std::map<std::string, std::string>& render::ModelDetail::getTexturePaths() const
 {
 	return _texturePaths;
 }

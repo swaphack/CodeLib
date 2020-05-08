@@ -6,10 +6,10 @@
 #include "Common/Tool/Tool.h"
 #include "Common/Shader/ShaderProgram.h"
 #include "Common/View/import.h"
-#include "Common/Material/import.h"
 #include "Common/Buffer/import.h"
 #include "Resource/Detail/import.h"
 #include "Graphic/import.h"
+#include "Common/Node/import.h"
 
 #define MAT_TEXTURE_NAEM "MAT_TEXTURE_NAEM"
 
@@ -22,15 +22,18 @@ CtrlFrame::CtrlFrame()
 	_texFrame = CREATE_OBJECT(TexFrame);
 	SAFE_RETAIN(_texFrame);
 
-
 	_material = CREATE_OBJECT(Material);
 	SAFE_RETAIN(_material);
+
+	_mesh = CREATE_OBJECT(Mesh);
+	SAFE_RETAIN(_mesh);
 }
 
 CtrlFrame::~CtrlFrame()
 {
 	SAFE_RELEASE(_texFrame);
-	SAFE_DELETE(_material);
+	SAFE_RELEASE(_material);
+	SAFE_RELEASE(_mesh);
 }
 
 bool CtrlFrame::init()
@@ -69,7 +72,7 @@ void CtrlFrame::setTexture(const Texture* texture)
 		return;
 	}
 
-	_material->getModelDetail()->addTexture(MAT_TEXTURE_NAEM, (Texture2D*)texture);
+	_material->addTexture(MAT_TEXTURE_NAEM, (Texture2D*)texture);
 
 	_texFrame->setTexture(texture);
 	this->notify(ENP_TEXTURE_FRAME);
@@ -77,7 +80,7 @@ void CtrlFrame::setTexture(const Texture* texture)
 
 void CtrlFrame::setTextureWithRect(const Texture* texture)
 {
-	_material->getModelDetail()->addTexture(MAT_TEXTURE_NAEM, (Texture2D*)texture);
+	_material->addTexture(MAT_TEXTURE_NAEM, (Texture2D*)texture);
 
 	_texFrame->setTextureWithRect(texture);
 	this->notify(ENP_TEXTURE_FRAME);
@@ -95,7 +98,7 @@ void CtrlFrame::setTexFrame(const TexFrame* texFrame)
 	{
 		return;
 	}
-	_material->getModelDetail()->addTexture(MAT_TEXTURE_NAEM, (Texture2D*)texFrame->getTexture());
+	_material->addTexture(MAT_TEXTURE_NAEM, (Texture2D*)texFrame->getTexture());
 	*_texFrame = *texFrame;
 	this->notify(ENP_TEXTURE_FRAME);
 }
@@ -182,13 +185,14 @@ void render::CtrlFrame::drawSampleWithBufferObject()
 	math::Matrix44 viewMat = Camera::getMainCamera()->getViewMatrix();
 	math::Matrix44 modelMat = this->getWorldMatrix();
 
-	_material->draw(projMat, viewMat, modelMat);
+	_material->startUpdateShaderUniformValue(projMat, viewMat, modelMat);
+	_mesh->draw(_material);
+	_material->endUpdateShaderUniformValue();
 }
 
 void render::CtrlFrame::initBufferObject()
 {
 	ModelDetail* pModelDetail = CREATE_OBJECT(ModelDetail);
-	_material->setModelDetail(pModelDetail);
 
 	auto pMat = CREATE_OBJECT(MaterialDetail);	
 	pMat->setAmbientTextureMap(MAT_TEXTURE_NAEM);
@@ -209,4 +213,5 @@ void render::CtrlFrame::initBufferObject()
 	pMesh->setIndices(nIndiceSize, _texRect.indices);
 
 	_material->setModelDetail(pModelDetail);
+	_mesh->setModelDetail(pModelDetail);
 }
