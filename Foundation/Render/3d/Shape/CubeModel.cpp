@@ -3,20 +3,20 @@
 #include "Common/Texture/Texture.h"
 #include "Resource/Detail/MaterialDetail.h"
 #include "Resource/Detail/MeshDetail.h"
-
+#include "Common/Material/Material.h"
 #include "Common/Tool/TextureTool.h"
 
 using namespace render;
 
 CubeModel::CubeModel()
 {
-	_modelDetail = CREATE_OBJECT(ModelDetail);
-	SAFE_RETAIN(_modelDetail);
+	_material = CREATE_OBJECT(Material);
+	SAFE_RETAIN(_material);
 }
 
 CubeModel::~CubeModel()
 {
-	SAFE_RETAIN(_modelDetail);
+	SAFE_RETAIN(_material);
 }
 
 bool CubeModel::init()
@@ -27,10 +27,11 @@ bool CubeModel::init()
 	}
 
 	_notify->addListen(ENP_SPACE, [this](){
-		onCubeChange();
+		this->onCubeChange();
+#if USE_BUFFER_OBJECT
+		this->updateBufferData();
+#endif
 	});
-
-	
 
 	for (int i = 0; i < CUBE_FACE_COUNT; i++)
 	{
@@ -77,7 +78,6 @@ void CubeModel::onCubeChange()
 		}
 
 		pMesh->setVertices(12, vertices);
-		
 	}
 }
 

@@ -18,6 +18,7 @@ namespace math
 	public:
 		Vector();
 		Vector(int32_t len);
+		Vector(int32_t len, const Vector& value);
 		virtual ~Vector();
 	public:
 		/**

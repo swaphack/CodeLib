@@ -381,6 +381,9 @@
     <ClCompile Include="Common\Buffer\VertexAttribPointer.cpp">
       <Filter>Common\Buffer</Filter>
     </ClCompile>
+    <ClCompile Include="Common\Material\Material.cpp">
+      <Filter>Common\Material</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Common\Node\import.h">
@@ -936,6 +939,12 @@
     <ClInclude Include="Common\Buffer\VertexAttribPointer.h">
       <Filter>Common\Buffer</Filter>
     </ClInclude>
+    <ClInclude Include="Common\Material\Material.h">
+      <Filter>Common\Material</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Material\import.h">
+      <Filter>Common\Material</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Common">
@@ -1042,6 +1051,9 @@
     </Filter>
     <Filter Include="Common\Buffer">
       <UniqueIdentifier>{60f3aac1-f887-4af4-b135-62c2dba7c8c9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common\Material">
+      <UniqueIdentifier>{3750a6c0-0349-405b-8547-7d5eba0be4f9}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

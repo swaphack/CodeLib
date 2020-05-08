@@ -1,4 +1,5 @@
 #include "Matrix44.h"
+#include "Basic/base.h"
 #include <cassert>
 
 using namespace math;
@@ -46,9 +47,9 @@ void Matrix44::normalize()
 
 void Matrix44::setTranslate(const Vector3& vector)
 {
-	(*this)[3] = vector.getX(); 
-	(*this)[7] = vector.getY(); 
-	(*this)[11] = vector.getZ();
+	(*this)[12] = vector.getX(); 
+	(*this)[13] = vector.getY(); 
+	(*this)[14] = vector.getZ();
 }
 
 void Matrix44::setScale(const Vector3& vector)
@@ -224,4 +225,78 @@ math::Matrix44::~Matrix44()
 
 }
 
+math::Matrix44 math::Matrix44::ortho(float l, float r, float b, float t, float n, float f)
+{
+	math::Matrix44 mat;
+
+	mat[0] = 2 / (r - l);
+	mat[5] = 2 / (t - b);
+	mat[10] = -2 / (f - n);
+	
+	mat[12] = -(r + l) / (r - l);
+	mat[13] = -(t + b) / (t - b);
+	mat[14] = -(f + n) / (f - n);
+
+	return mat;
+}
+
+math::Matrix44 math::Matrix44::perspective(float l, float r, float b, float t, float n, float f)
+{
+	math::Matrix44 mat;
+
+	mat[0] = 2.0f * n / (r - l);
+	mat[2] = (r + l) / (r - l);
+	mat[5] = 2.0f * n / (t - b);
+	mat[6] = (t + b) / (t - b);
+	mat[10] = -(f + n) / (f - n);
+	mat[11] = -(2.0f * f * n) / (f - n);
+	mat[14] = -1.0f;
+	mat[15] = 0.0f;
+
+	return mat;
+}
+
+math::Matrix44 math::Matrix44::verticalPerspective(float fov, float aspect, float front, float back)
+{
+	fov = ANGLE_TO_RADIAN(fov);                      // transform fov from degrees to radians
+
+	float tangent = tanf(fov / 2.0f);               // tangent of half vertical fov
+	float height = front * tangent;                 // half height of near plane
+	float width = height * aspect;                  // half width of near plane
+
+	return perspective(-width, width, -height, height, front, back);
+}
+
+math::Matrix44 math::Matrix44::horizontalPerspective(float fov, float aspect, float front, float back)
+{
+	fov = ANGLE_TO_RADIAN(fov);                      // transform fov from degrees to radians
+	fov = 2.0f * atanf(tanf(fov * 0.5f) / aspect);  // transform from horizontal fov to vertical fov
+
+	float tangent = tanf(fov / 2.0f);               // tangent of half vertical fov
+	float height = front * tangent;                 // half height of near plane
+	float width = height * aspect;                  // half width of near plane
+
+	return perspective(-width, width, -height, height, front, back);
+}
+
+math::Matrix44 math::Matrix44::lookAt(const Vector3& target, const Vector3& eye, const Vector3& up)
+{
+	Vector3 dir = target - eye;
+	Vector3 z(dir);
+	z = z.normalize();
+	Vector3 x(up * z); // x = up cross z 
+	z = x.normalize();
+	Vector3 y(z * x); // y = z cross x 
+
+	Vector cx(4, x);
+	Vector cy(4, y);
+	Vector cz(4, z);
+
+	Matrix44 m;
+	m.setColumn(0, cx);
+	m.setColumn(1, cz);
+	m.setColumn(2, cz);
+
+	return m;
+}
 

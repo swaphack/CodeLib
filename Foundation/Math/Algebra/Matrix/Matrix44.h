@@ -8,6 +8,21 @@ namespace math
 {
 	/**
 	*	四阶方阵
+	*	00 01 02 03
+	*	10 11 12 13
+	*	20 21 22 23
+	*	30 31 32 33
+
+	*	00 01 02 03
+	*	04 05 06 07
+	*	08 09 10 11
+	*	12 13 14 15
+
+	*	缩放 00,05,10
+	*	位移 12,13,14
+	*	旋转x 05 06 09 10
+	*	旋转y 00 02 08 10
+	*	旋转z 00 01 04 05
 	*/
 	struct Matrix44 : public Matrix
 	{
@@ -58,6 +73,29 @@ namespace math
 		*	欧拉角
 		*/
 		Vector3 getEularAngle();
+	public:
+		//--------------------------------------------------------------------------------
+		// set a ortho (right hand)
+		// (left, right, bottom, top, near, far)
+		//--------------------------------------------------------------------------------
+		static Matrix44 ortho(float l, float r, float b, float t, float n, float f);
+		//--------------------------------------------------------------------------------
+		// set a perspective frustum (right hand)
+		// (left, right, bottom, top, near, far)
+		//--------------------------------------------------------------------------------
+		static Matrix44 perspective(float l, float r, float b, float t, float n, float f);
+		//--------------------------------------------------------------------------------
+		// set a symmetric perspective frustum
+		// ((vertical, degrees) field of view, (width/height) aspect ratio, near, far)
+		//--------------------------------------------------------------------------------
+		static Matrix44 verticalPerspective(float fov, float aspect, float front, float back);
+		//--------------------------------------------------------------------------------
+		// set a symmetric perspective frustum
+		// ((horizontal, degrees) field of view, (width/height) aspect ratio, near, far)
+		//--------------------------------------------------------------------------------
+		static Matrix44 horizontalPerspective(float fov, float aspect, float front, float back);
+
+		static Matrix44 lookAt(const Vector3& target, const Vector3& eye, const Vector3& up);
 	public:
 		virtual Matrix41 operator*(const Matrix41& mat);
 		virtual Matrix44 operator*(const Matrix44& mat);

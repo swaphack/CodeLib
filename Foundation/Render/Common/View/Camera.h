@@ -42,6 +42,10 @@ namespace render
 		void setViewPortParams(float left, float right, float bottom, float top, float zNear, float zFar);
 		// 获取视窗参数
 		const CameraParams& getViewPortParams();
+		// 投影矩阵
+		const math::Matrix44& getProjectMatrix();
+		// 视图矩阵
+		const math::Matrix44 getViewMatrix();
 	public:
 		// 更新空间位置
 		virtual void visit();
@@ -63,6 +67,8 @@ namespace render
 		CameraDimensions _dimensions;
 		// 参数
 		CameraParams _cameraParams;
+		// 投影矩阵
+		math::Matrix44 _projectMat;
 	};
 
 	// 2d 摄像头

@@ -264,12 +264,12 @@ void GLShader::setUniformMatrix2(int32_t uniformID, int count, bool transpose, c
 
 void GLShader::setUniformMatrix3(int32_t uniformID, int count, bool transpose, const float* value)
 {
-	glUniformMatrix2fv(uniformID, count, transpose ? GL_TRUE : GL_FALSE, value);
+	glUniformMatrix3fv(uniformID, count, transpose ? GL_TRUE : GL_FALSE, value);
 }
 
 void GLShader::setUniformMatrix4(int32_t uniformID, int count, bool transpose, const float* value)
 {
-	glUniformMatrix2fv(uniformID, count, transpose ? GL_TRUE : GL_FALSE, value);
+	glUniformMatrix4fv(uniformID, count, transpose ? GL_TRUE : GL_FALSE, value);
 }
 
 void GLShader::showAttribStatus(uint32_t attribID)

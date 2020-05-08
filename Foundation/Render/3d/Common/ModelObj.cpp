@@ -1,6 +1,7 @@
 #include "ModelObj.h"
 #include "Resource/Paser/FileObj.h"
 #include "Resource/Loader/Loader.h"
+#include "Common/Material/import.h"
 
 using namespace render;
 

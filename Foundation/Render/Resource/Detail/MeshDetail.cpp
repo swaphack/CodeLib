@@ -12,27 +12,27 @@ MeshDetail::~MeshDetail()
 {
 }
 
-void MeshDetail::setVertices(int count, float* vertexes, int unitSize)
+void MeshDetail::setVertices(int size, float* vertexes, int unitSize)
 {
-	_vertices.init(count, vertexes, sizeof(float));
+	_vertices.init(size, vertexes, sizeof(float));
 	_vertices.setTypeSize(unitSize);
 }
 
-void MeshDetail::setNormals(int count, float* normals, int unitSize)
+void MeshDetail::setNormals(int size, float* normals, int unitSize)
 {
-	_normals.init(count, normals, sizeof(float));
+	_normals.init(size, normals, sizeof(float));
 	_normals.setTypeSize(unitSize);
 }
 
-void MeshDetail::setColors(int count, float* colors, int unitSize)
+void MeshDetail::setColors(int size, float* colors, int unitSize)
 {
-	_colors.init(count, colors, sizeof(float));
+	_colors.init(size, colors, sizeof(float));
 	_colors.setTypeSize(unitSize);
 }
 
-void MeshDetail::setUVs(int count, float* texCoords, int unitSize)
+void MeshDetail::setUVs(int size, float* texCoords, int unitSize)
 {
-	_uvs.init(count, texCoords, sizeof(float));
+	_uvs.init(size, texCoords, sizeof(float));
 	_uvs.setTypeSize(unitSize);
 }
 

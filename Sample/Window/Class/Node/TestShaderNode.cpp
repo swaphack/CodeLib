@@ -17,8 +17,9 @@ TestShaderNode::~TestShaderNode()
 void TestShaderNode::testFunc()
 {
 	//this->testColorShader();
-	this->testImageShader();
-	//this->testModelShader();
+	//this->testImageShader();
+	//this->test3dsModelShader();
+	this->testModelShader();
 }
 
 void TestShaderNode::testShaderUniformBlock()
@@ -92,8 +93,8 @@ void TestShaderNode::testImageShader()
 	pImage->setPosition(Vector2());
 	this->addChild(pImage);
 
-	std::string vPath = "Resource/shader/texture.vsh";
-	std::string fPath = "Resource/shader/texture.fsh";
+	std::string vPath = "Resource/shader/texture2d.vsh";
+	std::string fPath = "Resource/shader/texture2d.fsh";
 
 	ShaderProgram* pProgram = CREATE_OBJECT(ShaderProgram);
 	pProgram->loadVertexAndFragmentShader(vPath, fPath);
@@ -119,6 +120,15 @@ void TestShaderNode::testImageShader()
 	
 
 	pImage->setProgram(pProgram);
+
+	RotateByAction* pRotateByAction = CREATE_ACTION(RotateByAction);
+	pRotateByAction->setRotation(180, 180, 180);
+	pRotateByAction->setDuration(10);
+
+	RepeateForeverAction* pRepeateAction = CREATE_ACTION(RepeateForeverAction);
+	pRepeateAction->setAction(pRotateByAction);
+
+	pImage->getActionProxy()->runAction(pRepeateAction);
 }
 
 void TestShaderNode::testColorShader()
@@ -141,27 +151,106 @@ void TestShaderNode::testColorShader()
 	pProgram->loadVertexAndFragmentShader(vPath, fPath);
 	pProgram->link();
 
-	pImage->setProgram(pProgram);
+	pImage->getma(pProgram);
+
+
 }
 
 void TestShaderNode::testModelShader()
 {
-	Model3DS* model = CREATE_NODE(Model3DS);
-	model->load("Resource/3DS/Bld_38.3ds");
-	model->setScale(100);
-	model->setPosition(200, 200, -50);
-	//model->setVolume(400, 400, 400);
-	this->addChild(model);
-	/*
-	std::string vPath = "Resource/shader/color.vsh";
-	std::string fPath = "Resource/shader/color.fsh";
+	auto pTexture = G_TEXTURE_CACHE->createTexture2D("Resource/Image/NeHe.png");
+	auto pTexture1 = G_TEXTURE_CACHE->createTexture2D("Resource/Image/1.jpg");
+	std::string textureName = "face";
+	std::string textureName1 = "face1";
+
+	CubeModel* pModel = CREATE_NODE(CubeModel);
+	pModel->addTexture(textureName, pTexture);
+	pModel->addTexture(textureName1, pTexture1);
+
+	pModel->setAllFacesTexture(textureName);
+	pModel->setFaceTexture(EMF_FRONT, textureName1);
+	pModel->setFaceTexture(EMF_LEFT, textureName1);
+	pModel->setFaceTexture(EMF_TOP, textureName1);
+
+	pModel->setAnchorPoint(math::Vector3(0.5f, 0.5f, 0.5f));
+	pModel->setPosition(400, 400, 0);
+	pModel->setVolume(200, 200, 200);
+	pModel->setAnchorPoint(0.5f, 0.5f, 0.5f);
+	this->addChild(pModel);
+
+	std::string vPath = "Resource/shader/texture3d.vsh";
+	std::string fPath = "Resource/shader/texture3d.fsh";
 
 	ShaderProgram* pProgram = CREATE_OBJECT(ShaderProgram);
 	pProgram->loadVertexAndFragmentShader(vPath, fPath);
 	pProgram->link();
 
-	model->setProgram(pProgram);
-	*/
+	ShaderAttrib* pAttrib = pProgram->getAttrib("vertexPosition");
+	if (pAttrib)
+	{
+		pProgram->addVertexAttrib(VertexAttribType::POSITION, pAttrib->getAttribID());
+	}
+
+	pAttrib = pProgram->getAttrib("vertexColor");
+	if (pAttrib)
+	{
+		pProgram->addVertexAttrib(VertexAttribType::COLOR, pAttrib->getAttribID());
+	}
+
+	pAttrib = pProgram->getAttrib("vertexUV");
+	if (pAttrib)
+	{
+		pProgram->addVertexAttrib(VertexAttribType::UV, pAttrib->getAttribID());
+	}
+
+	pModel->setProgram(pProgram);
+
+	RotateByAction* pRotateByAction = CREATE_ACTION(RotateByAction);
+	pRotateByAction->setRotation(0, 180, 0);
+	pRotateByAction->setDuration(10);
+
+	RepeateForeverAction* pRepeateAction = CREATE_ACTION(RepeateForeverAction);
+	pRepeateAction->setAction(pRotateByAction);
+
+	pModel->getActionProxy()->runAction(pRepeateAction);
+}
+
+void TestShaderNode::test3dsModelShader()
+{
+	Model3DS* pModel = CREATE_NODE(Model3DS);
+	pModel->load("Resource/3DS/Bld_38.3ds");
+	pModel->setScale(20);
+	pModel->setPosition(500, 500, 0);
+	pModel->setVolume(400, 400, 400);
+	this->addChild(pModel);
+
+	std::string vPath = "Resource/shader/texture2d.vsh";
+	std::string fPath = "Resource/shader/texture2d.fsh";
+
+	ShaderProgram* pProgram = CREATE_OBJECT(ShaderProgram);
+	pProgram->loadVertexAndFragmentShader(vPath, fPath);
+	pProgram->link();
+
+	ShaderAttrib* pAttrib = pProgram->getAttrib("vertexPosition");
+	if (pAttrib)
+	{
+		pProgram->addVertexAttrib(VertexAttribType::POSITION, pAttrib->getAttribID());
+	}
+
+	pAttrib = pProgram->getAttrib("vertexColor");
+	if (pAttrib)
+	{
+		pProgram->addVertexAttrib(VertexAttribType::COLOR, pAttrib->getAttribID());
+	}
+
+	pAttrib = pProgram->getAttrib("vertexUV");
+	if (pAttrib)
+	{
+		pProgram->addVertexAttrib(VertexAttribType::UV, pAttrib->getAttribID());
+	}
+
+	pModel->setProgram(pProgram);
+
 	RotateByAction* pRotateByAction = CREATE_ACTION(RotateByAction);
 	pRotateByAction->setRotation(180, 180, 0);
 	pRotateByAction->setDuration(10);
@@ -169,6 +258,6 @@ void TestShaderNode::testModelShader()
 	RepeateForeverAction* pRepeateAction = CREATE_ACTION(RepeateForeverAction);
 	pRepeateAction->setAction(pRotateByAction);
 
-	model->getActionProxy()->runAction(pRepeateAction);
+	pModel->getActionProxy()->runAction(pRepeateAction);
 }
 

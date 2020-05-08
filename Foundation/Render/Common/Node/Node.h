@@ -9,7 +9,6 @@ namespace render
 {
 	class ActionProxy;
 	class TouchProxy;
-	class ShaderProgram;
 
 #define CREATE_NODE(NODE_TYPE) render::createNode<NODE_TYPE>()
 
@@ -112,8 +111,6 @@ namespace render
 	protected:
 		// 绘制节点
 		void drawNode();
-		// shader处理
-		void handShaderProgram();
 	public:
 		// 获取动作代理
 		ActionProxy* getActionProxy();
@@ -130,15 +127,10 @@ namespace render
 		// 矩形定点
 		const RectVertex& getRectVertex();
 	public:
-		// 矩阵
-		const math::Matrix44& getRealMatrix();
-		// 矩阵
-		const math::Matrix44& getMatrix();
-	public:
-		// 着色器程序
-		void setProgram(ShaderProgram* program);
-		// 着色器程序
-		ShaderProgram* getProgram();
+		// 世界矩阵
+		const math::Matrix44& getWorldMatrix();
+		// 相对父节点的矩阵
+		const math::Matrix44& getLocalMatrix();
 	protected:
 		// 更新空间矩阵
 		virtual void updateTranform();
@@ -164,50 +156,38 @@ namespace render
 	private:
 		// 使用矩阵计算空间变化属性
 		void calRealSpaceByMatrix();
-		// 使用常量计算空间变化属性
-		void calRealSpaceByValue();
 	protected:
 		// opengl 位置
 		math::Vector3 _obPosition;
-		// 旋转角度
+		// opengl 旋转角度
 		math::Vector3 _obRotation;
 		// 标签
-		int _tag;
+		int _tag = 0;
 		// 数据
-		void* _userData;
+		void* _userData = nullptr;
 		// z轴坐标
-		float _zOrder;
+		float _zOrder = 0;
 		// 父节点
-		Node* _parent;
+		Node* _parent = nullptr;
 		// 子节点
 		std::vector<Node*> _children;
 		// 是否可见
-		bool _bVisibled;
+		bool _bVisibled = false;
 		// 是否可点击
-		bool _bTouchEnabled;
+		bool _bTouchEnabled = false;
 		// 是否和父节点关联
-		bool _bRelative;
+		bool _bRelative = false;
 		// 动作代理
 		ActionProxy* _actionProxy;
 		// 触摸代理
 		TouchProxy* _touchProxy;
-		// 矩形框
-		RectVertex _rectVertex;
-		// 空间坐标（实际）
-		RectVertex _realSpaceVertex;
-		// 实际躯体空间信息
-		BodySpace _realBodySpace;
 		// 通知
 		Notify<int>* _notify;
-		// 使用矩阵运算
-		bool _bUseMatrix = true;
 		// 相对于父节点的矩阵
-		math::Matrix44 _mat44;
+		math::Matrix44 _localMat;
 		// 逆矩阵
-		math::Matrix44 _matInverse44;
+		math::Matrix44 _localInverseMat;
 		// 实际在世界坐标系中的矩阵
-		math::Matrix44 _realMat44;
-		// 着色器
-		ShaderProgram* _program = nullptr;
+		math::Matrix44 _worldMat;
 	};
 }

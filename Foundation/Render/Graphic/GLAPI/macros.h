@@ -2860,19 +2860,3 @@ enum class VertexAttribPointerDataType
 	FIXED = GL_FIXED,
 	FLOAT = GL_FLOAT
 };
-
-enum class VertexAttribType
-{
-	POSITION,
-	COLOR,
-	UV,
-	UV1,
-	UV2,
-	UV3,
-	UV4,
-	NORMAL,
-	BLEND_WEIGHT,
-	BLEND_INDEX,
-	MAX,
-	UVS = UV,
-};

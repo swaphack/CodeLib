@@ -106,8 +106,6 @@ void ShaderProgram::releaseProgram()
 	removeAllProgramPipelines();
 	removeAllProgramUniforms();
 
-	removeVertexAttribIndices(); 
-
 	if (_programID != 0)
 	{
 		GLShader::deleteProgram(_programID);
@@ -168,7 +166,7 @@ ShaderUniform* ShaderProgram::getUniform(const std::string& name)
 
 	int id = GLShader::getUniformLocation(_programID, name.c_str());
 	GLDebug::showError();
-	if (id <= 0)
+	if (id < 0)
 	{
 		return nullptr;
 	}
@@ -283,7 +281,7 @@ render::ShaderProgramUniform* render::ShaderProgram::getProgramUniform(const std
 
 	int id = GLShader::getUniformLocation(_programID, name.c_str());
 	GLDebug::showError();
-	if (id <= 0)
+	if (id < 0)
 	{
 		return nullptr;
 	}
@@ -297,21 +295,7 @@ render::ShaderProgramUniform* render::ShaderProgram::getProgramUniform(const std
 	return pUniform;
 }
 
-void render::ShaderProgram::addVertexAttrib(VertexAttribType vat, uint32_t index)
-{
-	_vertexAttribIndices[vat] = index;
-}
 
-uint32_t render::ShaderProgram::getVertexAttribIndex(VertexAttribType vat)
-{
-	auto it = _vertexAttribIndices.find(vat);
-	if (it == _vertexAttribIndices.end())
-	{
-		return 0;
-	}
-
-	return it->second;
-}
 
 void render::ShaderProgram::addProgramUniform(const std::string& name, ShaderProgramUniform* uniform)
 {
@@ -414,10 +398,3 @@ void render::ShaderProgram::removeAllSubroutineUniforms()
 	}
 	_subroutineUniforms.clear();
 }
-
-void render::ShaderProgram::removeVertexAttribIndices()
-{
-	_vertexAttribIndices.clear();
-}
-
-

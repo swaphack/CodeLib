@@ -47,3 +47,7 @@
 
 #include "system.h"
 #include "third_party.h"
+
+
+//  π”√ buffer ªÊ÷∆Õº∆¨
+#define USE_BUFFER_OBJECT 1

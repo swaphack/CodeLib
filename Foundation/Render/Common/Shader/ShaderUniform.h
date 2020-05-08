@@ -42,6 +42,14 @@ namespace render
 		void setMatrix2(int count, bool transpose, const float* value);
 		void setMatrix3(int count, bool transpose, const float* value);
 		void setMatrix4(int count, bool transpose, const float* value);
+
+		void setMatrix2(bool transpose, const float* value);
+		void setMatrix3(bool transpose, const float* value);
+		void setMatrix4(bool transpose, const float* value);
+
+		void setMatrix2(const float* value);
+		void setMatrix3(const float* value);
+		void setMatrix4(const float* value);
 	private:
 		uint32_t _uniformID = 0;
 	};

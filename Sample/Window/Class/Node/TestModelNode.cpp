@@ -96,12 +96,12 @@ void TestModelNode::testFog()
 
 void TestModelNode::test3ds()
 {
-	Model3DS* model = CREATE_NODE(Model3DS);
-	model->load("Resource/3DS/Bld_38.3ds");
-	model->setScale(100);
-	model->setPosition(500, 500, 0);
-	model->setVolume(400, 400, 400);
-	this->addChild(model);
+	Model3DS* pModel = CREATE_NODE(Model3DS);
+	pModel->load("Resource/3DS/Bld_38.3ds");
+	pModel->setScale(100);
+	pModel->setPosition(500, 500, 0);
+	pModel->setVolume(400, 400, 400);
+	this->addChild(pModel);
 
 	RotateByAction* pRotateByAction = CREATE_ACTION(RotateByAction);
 	pRotateByAction->setRotation(180, 180, 0);
@@ -110,7 +110,7 @@ void TestModelNode::test3ds()
 	RepeateForeverAction* pRepeateAction = CREATE_ACTION(RepeateForeverAction);
 	pRepeateAction->setAction(pRotateByAction);
 
-	model->getActionProxy()->runAction(pRepeateAction);
+	pModel->getActionProxy()->runAction(pRepeateAction);
 }
 
 void TestModelNode::testObj()
@@ -118,12 +118,12 @@ void TestModelNode::testObj()
 	//std::string filename = "Resource/Obj/SCI_FRS_13_HD/SCI_FRS_13_HD.obj";
 	std::string filename = "Resource/Obj/Skull_v3_L2/12140_Skull_v3_L2.obj";
 
-	ModelObj* model = CREATE_NODE(ModelObj);
-	model->load(filename);
-	model->setScale(50);
-	model->setPosition(512, 384, 0);
-	model->setVolume(400, 400, 400);
-	this->addChild(model);
+	ModelObj* pModel = CREATE_NODE(ModelObj);
+	pModel->load(filename);
+	pModel->setScale(50);
+	pModel->setPosition(512, 384, 0);
+	pModel->setVolume(400, 400, 400);
+	this->addChild(pModel);
 
 	RotateByAction* pRotateByAction = CREATE_ACTION(RotateByAction);
 	pRotateByAction->setRotation(180, 180, 0);
@@ -132,16 +132,16 @@ void TestModelNode::testObj()
 	RepeateForeverAction* pRepeateAction = CREATE_ACTION(RepeateForeverAction);
 	pRepeateAction->setAction(pRotateByAction);
 
-	model->getActionProxy()->runAction(pRepeateAction);
+	pModel->getActionProxy()->runAction(pRepeateAction);
 }
 
 void TestModelNode::testFbx()
 {
-	ModelFbx* model = CREATE_NODE(ModelFbx);
-	model->load("Resource/fbx/LANCER_EVOLUTION/LANCEREVOX.FBX");
-	model->setScale(200);
-	model->setRotationX(0);
-	this->addChild(model);
+	ModelFbx* pModel = CREATE_NODE(ModelFbx);
+	pModel->load("Resource/fbx/LANCER_EVOLUTION/LANCEREVOX.FBX");
+	pModel->setScale(200);
+	pModel->setRotationX(0);
+	this->addChild(pModel);
 
 	RotateByAction* pRotateByAction = CREATE_ACTION(RotateByAction);
 	pRotateByAction->setRotation(0, 180, 0);
@@ -150,7 +150,7 @@ void TestModelNode::testFbx()
 	RepeateForeverAction* pRepeateAction = CREATE_ACTION(RepeateForeverAction);
 	pRepeateAction->setAction(pRotateByAction);
 
-	model->getActionProxy()->runAction(pRepeateAction);
+	pModel->getActionProxy()->runAction(pRepeateAction);
 }
 
 void TestModelNode::testStencil()

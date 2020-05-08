@@ -5,57 +5,6 @@
 
 using namespace render;
 
-//--------------------------------------------------------------------------------
-// set a perspective frustum (right hand)
-// (left, right, bottom, top, near, far)
-//--------------------------------------------------------------------------------
-math::Matrix44 perspective(float l, float r, float b, float t, float n, float f)
-{
-	math::Matrix44 mat;
-
-	mat[0] = 2.0f * n / (r - l);
-	mat[2] = (r + l) / (r - l);
-	mat[5] = 2.0f * n / (t - b);
-	mat[6] = (t + b) / (t - b);
-	mat[10] = -(f + n) / (f - n);
-	mat[11] = -(2.0f * f * n) / (f - n);
-	mat[14] = -1.0f;
-	mat[15] = 0.0f;
-
-	return mat;
-}
-
-//--------------------------------------------------------------------------------
-// set a symmetric perspective frustum
-// ((vertical, degrees) field of view, (width/height) aspect ratio, near, far)
-//--------------------------------------------------------------------------------
-math::Matrix44 perspective_vertical(float fov, float aspect, float front, float back)
-{
-	fov = ANGLE_TO_RADIAN(fov);                      // transform fov from degrees to radians
-
-	float tangent = tanf(fov / 2.0f);               // tangent of half vertical fov
-	float height = front * tangent;                 // half height of near plane
-	float width = height * aspect;                  // half width of near plane
-
-	return perspective(-width, width, -height, height, front, back);
-}
-
-//--------------------------------------------------------------------------------
-// set a symmetric perspective frustum
-// ((horizontal, degrees) field of view, (width/height) aspect ratio, near, far)
-//--------------------------------------------------------------------------------
-math::Matrix44 perspective_horizontal(float fov, float aspect, float front, float back)
-{
-	fov = ANGLE_TO_RADIAN(fov);                      // transform fov from degrees to radians
-	fov = 2.0f * atanf(tanf(fov * 0.5f) / aspect);  // transform from horizontal fov to vertical fov
-
-	float tangent = tanf(fov / 2.0f);               // tangent of half vertical fov
-	float height = front * tangent;                 // half height of near plane
-	float width = height * aspect;                  // half width of near plane
-
-	return perspective(-width, width, -height, height, front, back);
-}
-
 //////////////////////////////////////////////////////////////////////////
 Camera* Camera::_mainCamera = nullptr;
 
@@ -158,17 +107,7 @@ void Camera::updateTranform()
 {
 	GLMatrix::loadIdentity();
 
-	if (_bUseMatrix)
-	{
-		//PRINT("%s\n", _mat44.toString().c_str());
-		GLMatrix::multMatrix(_mat44);
-	}
-	else
-	{
-		GLMatrix::translate(_obPosition);
-		GLMatrix::scale(_scale);
-		GLMatrix::rotate(_rotation);
-	}
+	GLMatrix::multMatrix(_localMat);
 
 	GLDebug::showError();
 }
@@ -176,6 +115,16 @@ void Camera::updateTranform()
 void Camera::inverseTranform()
 {
 
+}
+
+const math::Matrix44& render::Camera::getProjectMatrix()
+{
+	return _projectMat;
+}
+
+const math::Matrix44 render::Camera::getViewMatrix()
+{
+	return _localMat;
 }
 
 void render::Camera::updateViewPort()
@@ -216,6 +165,9 @@ void render::Camera2D::updateViewPort()
 	float z = size.getDepth() / size.getDepth();
 	float zh = z * 0.5f;
 	this->setViewPortParams(0, x, 0, y, -zh, zh);
+
+	const CameraParams& params = getViewPortParams();
+	_projectMat = math::Matrix44::ortho(params.xLeft, params.xRight, params.yBottom, params.yTop, params.zNear, params.zFar);
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -256,5 +208,8 @@ void render::Camera3D::updateViewPort()
 	float yh = y * 0.5f;
 	float zh = z * 0.5f;
 	this->setViewPortParams(-xh, xh, -yh, yh, 0.1f, 1.1f);
+
+	const CameraParams& params = getViewPortParams();
+	_projectMat = math::Matrix44::perspective(params.xLeft, params.xRight, params.yBottom, params.yTop, params.zNear, params.zFar);
 }
 

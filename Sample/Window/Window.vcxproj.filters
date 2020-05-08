@@ -86,10 +86,16 @@
     <None Include="Resource\shader\color.vsh">
       <Filter>Resource\shader</Filter>
     </None>
-    <None Include="Resource\shader\texture.vsh">
+    <None Include="Resource\shader\texture2d.vsh">
       <Filter>Resource\shader</Filter>
     </None>
-    <None Include="Resource\shader\texture.fsh">
+    <None Include="Resource\shader\texture2d.fsh">
+      <Filter>Resource\shader</Filter>
+    </None>
+    <None Include="Resource\shader\texture3d.vsh">
+      <Filter>Resource\shader</Filter>
+    </None>
+    <None Include="Resource\shader\texture3d.fsh">
       <Filter>Resource\shader</Filter>
     </None>
   </ItemGroup>

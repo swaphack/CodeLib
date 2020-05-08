@@ -9,8 +9,7 @@ namespace render
 {
 	class Texture;
 	class TexFrame;
-	class VertexArrayObject;
-	class NoNamedBufferObject;
+	class Material;
 
 	// 帧图片，默认逆时针绘制
 	class CtrlFrame : public CtrlWidget
@@ -22,11 +21,6 @@ namespace render
 		virtual bool init();
 	protected:
 		virtual void drawSample();
-
-		void initBufferObject();
-		void updateBufferData();
-		void drawSampleWithClientArray();
-		void drawSampleWithBufferObject();
 	public:
 		// 设置图片纹理
 		void setTexture(const Texture* texture);
@@ -52,6 +46,12 @@ namespace render
 		void setCounter(bool status);
 	protected:
 		void onTextureChange();
+
+		void drawSampleWithClientArray();
+		void drawSampleWithBufferObject();
+
+		void initBufferObject();
+		void updateBufferData();
 	protected:
 		// 纹理帧
 		TexFrame* _texFrame;
@@ -61,9 +61,7 @@ namespace render
 		bool _bFlipX;
 		// 是否垂直翻转
 		bool _bFlipY;
-
-		VertexArrayObject* _vertexArrayObject = nullptr;
-		NoNamedBufferObject* _indiceObject = nullptr;
-		NoNamedBufferObject* _vertexObject = nullptr;
+		// 材质
+		Material* _material = nullptr;
 	};
 }

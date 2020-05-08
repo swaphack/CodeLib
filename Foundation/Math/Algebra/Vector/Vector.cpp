@@ -17,6 +17,15 @@ Vector::Vector()
 
 }
 
+math::Vector::Vector(int32_t len, const Vector& value)
+	:Array(len)
+{
+	for (size_t i = 0; i < value.getLength(); i++)
+	{
+		this->setValue(i, value.getValue(i));
+	}
+}
+
 float Vector::getMagnitude() const
 {
 	float len = 0;
@@ -160,7 +169,10 @@ bool Vector::operator!=(const Vector& vec)
 Vector Vector::normalize() const
 {
 	float magn = this->getMagnitude();
-	assert(magn > 0);
+	if (magn == 0)
+	{
+		return *this;
+	}
 
 	Vector vec;
 	vec.reset(getLength());

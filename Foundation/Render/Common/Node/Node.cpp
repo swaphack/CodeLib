@@ -1,7 +1,6 @@
 #include "Node.h"
 #include "Common/Touch/TouchProxy.h"
 #include "Common/Action/ActionProxy.h"
-#include "Common/Shader/ShaderProgram.h"
 #include "Common/Tool/Tool.h"
 #include <algorithm>
 #include "Graphic/import.h"
@@ -9,8 +8,6 @@
 using namespace render;
 
 //////////////////////////////////////////////////////////////////////////
-
-#define USE_MATRIX true
 
 Node::Node()
 :_tag(0)
@@ -23,8 +20,6 @@ Node::Node()
 , _zOrder(0.0f)
 , _touchProxy(nullptr)
 {
-	_bUseMatrix = USE_MATRIX;
-
 	this->setVisible(true);
 
 	_notify = new Notify<int>();
@@ -36,7 +31,6 @@ Node::~Node()
 	SAFE_DELETE(_actionProxy);
 	SAFE_DELETE(_touchProxy);
 	SAFE_DELETE(_notify);
-	SAFE_RELEASE(_program);
 }
 
 bool Node::init()
@@ -45,7 +39,6 @@ bool Node::init()
 	_notify->addListen(ENP_SPACE, [&](){
 		Tool::convertToOGLPoisition(_position, _obPosition);
 		Tool::convertToRadian(_rotation, _obRotation);
-		Tool::calRect(math::Vector3(), _volume, _anchor, _rectVertex);
 		calRealSpaceInfo(); 
 	});
 
@@ -286,7 +279,7 @@ void Node::setRelativeWithParent(bool status)
 
 bool Node::containTouchPoint(float x, float y)
 {
-	return _realSpaceVertex.containPoint(x, y);
+	return false;
 }
 
 TouchProxy* Node::getTouchProxy()
@@ -296,11 +289,6 @@ TouchProxy* Node::getTouchProxy()
 		_touchProxy = new TouchProxy(this);
 	}
 	return _touchProxy;
-}
-
-const RectVertex& Node::getRectVertex()
-{
-	return _rectVertex;
 }
 
 void Node::draw()
@@ -316,36 +304,14 @@ void Node::updateTranform()
 		GLMatrix::loadIdentity();
 	}
 
-	if (_bUseMatrix)
-	{
-		GLMatrix::multMatrix(_mat44);
-	}
-	else
-	{
-		GLMatrix::translate(_obPosition);
-		GLMatrix::scale(_scale);
-		GLMatrix::rotate(_rotation);
-	}
+	GLMatrix::multMatrix(_localMat);
 
 	GLDebug::showError();
 }
 
 void Node::inverseTranform()
 {
-	if (_bUseMatrix)
-	{
-		GLMatrix::multMatrix(_matInverse44);
-	}
-	else
-	{
-		math::Vector3 pos = _obPosition * -1;
-		math::Vector3 rotate = _rotation * -1;
-		math::Vector3 scale(1 / _scale.getX(), 1 / _scale.getY(), 1 / _scale.getZ());
-
-		GLMatrix::translate(pos);
-		GLMatrix::scale(scale);
-		GLMatrix::rotate(rotate);
-	}
+	GLMatrix::multMatrix(_localInverseMat);
 
 	if (!this->isRelativeWithParent())
 	{
@@ -411,42 +377,7 @@ void Node::sortChildren()
 // 还未对旋转后坐标进行计算
 void Node::calRealSpaceInfo()
 {
-	if (_bUseMatrix)
-	{
-		calRealSpaceByMatrix();
-	}
-	else
-	{
-		calRealSpaceByValue();
-	}
-}
-
-void Node::calRealSpaceByValue()
-{
-	Node* temp = this;
-	math::Vector3 position;
-	math::Vector3 scale = math::Vector3(1, 1, 1);
-	math::Volume volume = _volume;
-	do
-	{
-		position += temp->getPosition();
-		scale *= temp->getScale();
-
-		if (!temp->isRelativeWithParent())
-		{
-			break;
-		}
-		else
-		{
-			temp = temp->getParent();
-		}
-	} while (temp != NULL);
-	volume *= scale;
-
-	Tool::calRealRect(position, volume, _anchor, _realSpaceVertex);
-
-	_realBodySpace.position = position;
-	_realBodySpace.volume = volume;
+	calRealSpaceByMatrix();
 }
 
 void Node::calRealSpaceByMatrix()
@@ -462,9 +393,8 @@ void Node::calRealSpaceByMatrix()
 	//PRINT("Rotate\n%s\n", matRotate.toString().c_str());
 	//PRINT("Translate\n%s\n", matTranslate.toString().c_str());
 
-	math::Matrix44 mat44 = matTranslate * matRotate * matScale;
-	_mat44 = mat44.getTranspose();
-	_matInverse44 = _mat44.getInverse();
+	_localMat = matTranslate * matRotate * matScale;
+	_localInverseMat = _localMat.getInverse();
 
 	//PRINT("mat\n%s\n", _mat44.toString().c_str());
 
@@ -472,7 +402,7 @@ void Node::calRealSpaceByMatrix()
 	std::vector<math::Matrix44> vecMat;
 	do
 	{
-		vecMat.insert(vecMat.begin(), temp->getMatrix());
+		vecMat.insert(vecMat.begin(), temp->getLocalMatrix());
 		if (!temp->isRelativeWithParent())
 		{
 			break;
@@ -489,7 +419,7 @@ void Node::calRealSpaceByMatrix()
 		ret = item * ret;
 	}
 
-	_realMat44 = ret;
+	_worldMat = ret;
 }
 
 void Node::onSpaceChange()
@@ -507,44 +437,18 @@ void Node::onChildrenChange()
 	this->notify(ENP_NODE);
 }
 
-const math::Matrix44& Node::getRealMatrix()
+const math::Matrix44& Node::getWorldMatrix()
 {
-	return _realMat44;
+	return _worldMat;
 }
 
-const math::Matrix44& Node::getMatrix()
+const math::Matrix44& Node::getLocalMatrix()
 {
-	return _mat44;
-}
-
-void Node::setProgram(ShaderProgram* program)
-{
-	SAFE_RETAIN(program);
-	SAFE_RELEASE(_program);
-
-	_program = program;
-}
-
-ShaderProgram* Node::getProgram()
-{
-	return _program;
-}
-
-void Node::handShaderProgram()
-{
-	if (_program != nullptr)
-	{
-		_program->use();
-	}
-	else
-	{
-		ShaderProgram::useNone();
-	}
+	return _localMat;
 }
 
 void Node::drawNode()
 {
-
 	this->draw();
 
 	GLDebug::showError();
@@ -565,5 +469,3 @@ void render::Node::notifyToAll(int id)
 		(*it)->notifyToAll(id);
 	}
 }
-
-

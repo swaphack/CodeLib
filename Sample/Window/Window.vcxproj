@@ -192,8 +192,10 @@
     <None Include="Resource\shader\lighting.glsl" />
     <None Include="Resource\shader\shader_f_1.glsl" />
     <None Include="Resource\shader\shader_v_1.glsl" />
-    <None Include="Resource\shader\texture.fsh" />
-    <None Include="Resource\shader\texture.vsh" />
+    <None Include="Resource\shader\texture2d.fsh" />
+    <None Include="Resource\shader\texture2d.vsh" />
+    <None Include="Resource\shader\texture3d.fsh" />
+    <None Include="Resource\shader\texture3d.vsh" />
     <None Include="ribbon1.mfcribbon-ms" />
   </ItemGroup>
   <ItemGroup>

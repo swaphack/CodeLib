@@ -8,6 +8,8 @@
 namespace render
 {
 	class ModelDetail;
+	class ShaderProgram;
+	class Material;
 	class NoNamedBufferObject;
 	class VertexArrayObject;
 
@@ -22,25 +24,12 @@ namespace render
 		virtual bool init();
 	protected:
 		virtual void drawSample();
-
-		void updateMatTexture();
-		void initBufferObject();
-		void updateBufferData();
 	public:
-		const ModelDetail* getModelData();
-		void setModelData(const ModelDetail* detail);
+		void setModelData(ModelDetail* detail);
 	protected:
-		void applyMatToMesh(uint32_t nMatID);
-
 		void drawSampleWithClientArray();
 		void drawSampleWithBufferObject();
-
-		void removeAllBufferObjects();
 	protected:
-		ModelDetail* _modelDetail = nullptr;
-
-		std::map<uint32_t, VertexArrayObject*> _vertexArrayObjects;
-		std::map<uint32_t, NoNamedBufferObject*> _indiceObjects;
-		std::map<uint32_t, NoNamedBufferObject*> _vertexObjects;
+		Material* _material = nullptr;
 	};
 }

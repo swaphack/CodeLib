@@ -15,5 +15,7 @@ private:
 	void testImageShader();
 	void testColorShader();
 	void testModelShader();
+	
+	void test3dsModelShader();
 private:
 };

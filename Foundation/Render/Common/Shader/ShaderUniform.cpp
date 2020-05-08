@@ -88,3 +88,33 @@ uint32_t render::ShaderUniform::getUniformID()
 	return _uniformID;
 }
 
+void render::ShaderUniform::setMatrix2(bool transpose, const float* value)
+{
+	this->setMatrix2(1, transpose, value);
+}
+
+void render::ShaderUniform::setMatrix3(const float* value)
+{
+	this->setMatrix3(false, value);
+}
+
+void render::ShaderUniform::setMatrix4(const float* value)
+{
+	this->setMatrix4(false, value);
+}
+
+void render::ShaderUniform::setMatrix3(bool transpose, const float* value)
+{
+	this->setMatrix3(1, transpose, value);
+}
+
+void render::ShaderUniform::setMatrix4(bool transpose, const float* value)
+{
+	this->setMatrix4(1, transpose, value);
+}
+
+void render::ShaderUniform::setMatrix2(const float* value)
+{
+	this->setMatrix2(false, value);
+}
+
