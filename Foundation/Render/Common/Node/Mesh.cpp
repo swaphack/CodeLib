@@ -1,9 +1,11 @@
 #include "Mesh.h"
 #include "Common/Buffer/import.h"
+#include "Common/Shader/import.h"
 #include "Resource/Detail/ModelDetail.h"
 #include "Resource/Detail/MeshDetail.h"
 #include "Graphic/import.h"
 #include "Material.h"
+#include "Node.h"
 
 using namespace render;
 
@@ -14,6 +16,7 @@ render::Mesh::Mesh()
 
 render::Mesh::~Mesh()
 {
+	this->removeAllMeshes();
 	this->removeAllBufferObjects();
 }
 
@@ -24,7 +27,13 @@ void render::Mesh::setModelDetail(const ModelDetail* modelDetail)
 		return;
 	}
 
-	this->_meshes = modelDetail->getMeshes();
+	this->removeAllMeshes();
+	this->removeAllBufferObjects();
+
+	for (auto item : modelDetail->getMeshes())
+	{
+		this->addMesh(item.first, item.second);
+	}
 }
 
 void Mesh::addMesh(int id, MeshDetail* mesh)
@@ -91,18 +100,12 @@ void render::Mesh::removeAllBufferObjects()
 		SAFE_RELEASE(item.second);
 	}
 
-	for (auto item : _meshes)
-	{
-		SAFE_RELEASE(item.second);
-	}
-
 	_indiceObjects.clear();
 	_vertexObjects.clear();
 	_vertexArrayObjects.clear();
-	_meshes.clear();
 }
 
-void render::Mesh::draw(Material* mat)
+void render::Mesh::draw(Node* node, Material* mat)
 {
 	for (auto item : _meshes)
 	{
@@ -124,24 +127,22 @@ void render::Mesh::draw(Material* mat)
 
 		GLDebug::showError();
 
-		pVertexArrayObject->bindVertexArray();
-		pVertexArrayObject->bindBuffer();
-
-		mat->startUpdateShaderVertexValue(pVertexArrayObject);
+		mat->startUpdateShaderUniformValue(node);
+		mat->startUpdateShaderVertexValue(pVertexArrayObject, pMesh);
 
 		auto nMatID = pMesh->getMaterial();
 		mat->applyMat(nMatID);
 
 		GLDebug::showError();
-		const MeshMemoryData& indices = pMesh->getIndices();
-		uint32_t nIndiceLength = indices.getLength();
 
 		pIndiceObject->bindBuffer();
+		uint32_t nIndiceLength = pMesh->getIndices().getLength();
 		GLBufferObjects::drawElements(DrawMode::TRIANGLES, nIndiceLength, IndexDataType::UNSIGNED_INT, (void*)0);
 
 		GLDebug::showError();
 		
 		mat->endUpdateShaderVertexValue(pVertexArrayObject);
+		mat->endUpdateShaderUniformValue();
 
 		GLState::disable(EnableModel::TEXTURE_2D);
 
@@ -180,7 +181,6 @@ void render::Mesh::updateBufferData()
 			pIndiceObject->bindBuffer();
 
 			uint32_t nIndiceSize = pMesh->getIndices().getSize();
-			uint32_t nIndiceLength = pMesh->getIndices().getLength();
 			pIndiceObject->setBufferData(nIndiceSize, pMesh->getIndices().getValue(), BufferDataUsage::STATIC_DRAW);
 		}
 
@@ -201,11 +201,11 @@ void render::Mesh::updateBufferData()
 		if (pVertexObject)
 		{
 			uint32_t nVerticeSize = pMesh->getVertices().getSize();
-			uint32_t nNormalSize = pMesh->getNormals().getSize();
 			uint32_t nColorSize = pMesh->getColors().getSize();
 			uint32_t nUVSize = pMesh->getUVs().getSize();
+			uint32_t nNormalSize = pMesh->getNormals().getSize();
 
-			uint32_t nTotalSize = nVerticeSize + nNormalSize + nColorSize + nUVSize;
+			uint32_t nTotalSize = nVerticeSize + nColorSize + nUVSize;
 			pVertexObject->bindBuffer();
 			pVertexObject->setBufferData(nTotalSize, nullptr, BufferDataUsage::STATIC_DRAW);
 			if (nVerticeSize > 0)

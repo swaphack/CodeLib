@@ -24,6 +24,7 @@ namespace render
 		virtual void drawSample();
 	public:
 		void setModelData(ModelDetail* detail);
+	public:
 		Material* getMaterial();
 		Mesh* getMesh();
 	protected:

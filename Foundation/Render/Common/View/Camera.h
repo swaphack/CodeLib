@@ -41,11 +41,11 @@ namespace render
 		// 设置视窗参数
 		void setViewPortParams(float left, float right, float bottom, float top, float zNear, float zFar);
 		// 获取视窗参数
-		const CameraParams& getViewPortParams();
+		const CameraParams& getViewPortParams() const;
 		// 投影矩阵
-		const math::Matrix44& getProjectMatrix();
+		const math::Matrix44& getProjectMatrix() const;
 		// 视图矩阵
-		const math::Matrix44 getViewMatrix();
+		const math::Matrix44& getViewMatrix() const;
 	public:
 		// 更新空间位置
 		virtual void visit();

@@ -21,19 +21,31 @@ namespace render
 		UVS = UV,
 	};
 
+	// 统一变量
 	enum class VertexUniformType
 	{
+		// 投影矩阵
 		PROJECT_MATRIX,
+		// 视图矩阵
 		VIEW_MATRIX,
+		// 模型矩阵
 		MODEL_VIEW,
+		// 环境纹理
+		AMBIENT_TEXTURE,
+		// 漫射纹理
+		DIFFUSE_TEXTURE,
+		// 高光纹理
+		SPECULAR_TEXTURE,
 	};
 
+	class MeshDetail;
 	class ModelDetail;
 	class ShaderProgram;
 	class VertexArrayObject;
 	class NoNamedBufferObject;
 	class Texture2D;
 	class MaterialDetail;
+	class Node;
 	/**
 	*	材质
 	*/
@@ -106,7 +118,7 @@ namespace render
 		/**
 		*	设置模型网格
 		*/
-		void addTexture(const std::string& name, Texture2D* id);
+		void addTexture(const std::string& name, const Texture2D* id);
 		/**
 		*	移除模型网格
 		*/
@@ -124,11 +136,11 @@ namespace render
 		Texture2D* createTexture(const std::string& strFullpath);
 	public:
 		// 更新着色器uniform值
-		void startUpdateShaderUniformValue(const math::Matrix44& projMat, const math::Matrix44& viewMat, const math::Matrix44& modelMat);
+		void startUpdateShaderUniformValue(Node* node);
 		void endUpdateShaderUniformValue();
 
 		// 更新着色器in值
-		void startUpdateShaderVertexValue(VertexArrayObject* data);
+		void startUpdateShaderVertexValue(VertexArrayObject* data, MeshDetail* pMesh);
 		void endUpdateShaderVertexValue(VertexArrayObject* data);
 
 		// 应用材质

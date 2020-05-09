@@ -26,7 +26,6 @@ void CtrlImage::setImagePath(const std::string& path)
 	}
 
 	this->setTextureWithRect(texture);
-	this->setVolume(static_cast<float>(texture->getWidth()), static_cast<float>(texture->getHeight()), static_cast<float>(texture->getDepth()));
 }
 
 const std::string& CtrlImage::getImagePath()

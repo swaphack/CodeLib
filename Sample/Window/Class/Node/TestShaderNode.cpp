@@ -17,7 +17,7 @@ TestShaderNode::~TestShaderNode()
 void TestShaderNode::testFunc()
 {
 	//this->testColorShader();
-	//this->testImageShader();
+	this->testImageShader();
 	//this->test3dsModelShader();
 	this->testModelShader();
 }
@@ -88,27 +88,29 @@ void TestShaderNode::testImageShader()
 
 	CtrlImage* pImage = CREATE_NODE(CtrlImage);
 	pImage->setImagePath(filepath);
-	pImage->setAnchorPoint(Vector2());
+	//pImage->setAnchorPoint(Vector2(0.5f, 0.5f));
 	pImage->setVolume(500, 500);
-	pImage->setPosition(Vector2());
+	pImage->setPosition(Vector2(500, 500));
 	this->addChild(pImage);
 
-	std::string vPath = "Resource/shader/texture2d.vsh";
-	std::string fPath = "Resource/shader/texture2d.fsh";
+	std::string vPath = "Resource/shader/texture3d.vsh";
+	std::string fPath = "Resource/shader/texture3d.fsh";
 
 	ShaderProgram* pProgram = CREATE_OBJECT(ShaderProgram);
 	pProgram->loadVertexAndFragmentShader(vPath, fPath);
 	pProgram->link();
 
-	/*
-	pModel->getMaterial()->setShaderProgram(pProgram);
-	pModel->getMaterial()->addAttrib(VertexAttribType::POSITION, "vertexPosition");
-	pModel->getMaterial()->addAttrib(VertexAttribType::COLOR, "vertexColor");
-	pModel->getMaterial()->addAttrib(VertexAttribType::UV, "vertexUV");
-	*/
+	pImage->getMaterial()->setShaderProgram(pProgram);
+	pImage->getMaterial()->addUniform(VertexUniformType::PROJECT_MATRIX, "projMat");
+	pImage->getMaterial()->addUniform(VertexUniformType::VIEW_MATRIX, "viewMat");
+	pImage->getMaterial()->addUniform(VertexUniformType::MODEL_VIEW, "modelMat");
+	pImage->getMaterial()->addUniform(VertexUniformType::AMBIENT_TEXTURE, "texSampler");
+	pImage->getMaterial()->addAttrib(VertexAttribType::POSITION, "vertexPosition");
+	pImage->getMaterial()->addAttrib(VertexAttribType::COLOR, "vertexColor");
+	pImage->getMaterial()->addAttrib(VertexAttribType::UV, "vertexUV");
 
 	RotateByAction* pRotateByAction = CREATE_ACTION(RotateByAction);
-	pRotateByAction->setRotation(180, 180, 180);
+	pRotateByAction->setRotation(0, 15, 0);
 	pRotateByAction->setDuration(10);
 
 	RepeateForeverAction* pRepeateAction = CREATE_ACTION(RepeateForeverAction);
@@ -172,6 +174,8 @@ void TestShaderNode::testModelShader()
 	pModel->getMaterial()->addUniform(VertexUniformType::PROJECT_MATRIX, "projMat");
 	pModel->getMaterial()->addUniform(VertexUniformType::VIEW_MATRIX, "viewMat");
 	pModel->getMaterial()->addUniform(VertexUniformType::MODEL_VIEW, "modelMat");
+
+	pModel->getMaterial()->addUniform(VertexUniformType::AMBIENT_TEXTURE, "texSampler");
 
 	pModel->getMaterial()->addAttrib(VertexAttribType::POSITION, "vertexPosition");
 	pModel->getMaterial()->addAttrib(VertexAttribType::COLOR, "vertexColor");

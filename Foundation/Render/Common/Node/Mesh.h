@@ -9,6 +9,7 @@ namespace render
 	class NoNamedBufferObject;
 	class MeshDetail;
 	class Material;
+	class Node;
 
 	class Mesh : public sys::Object
 	{
@@ -42,7 +43,7 @@ namespace render
 		*/
 		MeshDetail* getMesh(int id);
 	public:
-		void draw(Material* mat);
+		void draw(Node* node, Material* mat);
 
 		void updateBufferData();
 

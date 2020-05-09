@@ -116,13 +116,7 @@ void render::Model::drawSampleWithClientArray()
 
 void render::Model::drawSampleWithBufferObject()
 {
-	math::Matrix44 projMat = Camera::getMainCamera()->getProjectMatrix();
-	math::Matrix44 viewMat = Camera::getMainCamera()->getViewMatrix();
-	math::Matrix44 modelMat = this->getWorldMatrix();
-
-	_material->startUpdateShaderUniformValue(projMat, viewMat, modelMat);
-	_mesh->draw(_material);
-	_material->endUpdateShaderUniformValue();
+	_mesh->draw(this, _material);
 }
 
 Material* render::Model::getMaterial()

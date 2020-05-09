@@ -1,6 +1,5 @@
 #include "Material.h"
-#include "Resource/Detail/ModelDetail.h"
-#include "Resource/Detail/MaterialDetail.h"
+#include "Resource/Detail/import.h"
 #include "Graphic/import.h"
 #include "Common/Shader/import.h"
 #include "Common/Buffer/import.h"
@@ -28,8 +27,13 @@ void render::Material::setModelDetail(const ModelDetail* modelDetail)
 		return;
 	}
 
+	this->removeAllMaterials();
+
 	this->_texturePaths = modelDetail->getTexturePaths();
-	this->_materials = modelDetail->getMaterials();
+	for (auto item : modelDetail->getMaterials())
+	{
+		this->addMaterial(item.first, item.second);
+	}
 }
 void render::Material::setShaderProgram(ShaderProgram* shaderProgram)
 {
@@ -132,7 +136,7 @@ void render::Material::removeUniformIndices()
 	_vertexUniformIndices.clear();
 }
 
-void render::Material::startUpdateShaderUniformValue(const math::Matrix44& projMat, const math::Matrix44& viewMat, const math::Matrix44& modelMat)
+void render::Material::startUpdateShaderUniformValue(Node* node)
 {
 	if (_shaderProgram == nullptr)
 	{
@@ -141,31 +145,39 @@ void render::Material::startUpdateShaderUniformValue(const math::Matrix44& projM
 
 	_shaderProgram->use();
 
+	math::Matrix44 projMat = Camera::getMainCamera()->getProjectMatrix();
+	math::Matrix44 viewMat = Camera::getMainCamera()->getViewMatrix();
+	math::Matrix44 modelMat = node->getWorldMatrix();
+
 	for (auto item : _vertexUniformIndices)
 	{
+		auto pUniform = _shaderProgram->getUniform(item.second);
+		if (!pUniform)
+		{
+			continue;
+		}
 		if (item.first == VertexUniformType::PROJECT_MATRIX)
 		{
-			auto pUniform = _shaderProgram->getUniform(item.second);
-			if (pUniform) pUniform->setMatrix4(1, false, projMat.getValue());
+			pUniform->setMatrix4(1, false, projMat.getValue());
 		}
 		else if (item.first == VertexUniformType::VIEW_MATRIX)
 		{
-			auto pUniform = _shaderProgram->getUniform(item.second);
-			if (pUniform) pUniform->setMatrix4(1, false, viewMat.getValue());
+			pUniform->setMatrix4(1, false, viewMat.getValue());
 		}
 		else if (item.first == VertexUniformType::MODEL_VIEW)
 		{
-			auto pUniform = _shaderProgram->getUniform(item.second);
-			if (pUniform) pUniform->setMatrix4(1, false, modelMat.getValue());
+			pUniform->setMatrix4(1, false, modelMat.getValue());
 		}
 
 		GLDebug::showError();
 	}
+
+	GLDebug::showError();
 }
 
-void render::Material::startUpdateShaderVertexValue(VertexArrayObject* data)
+void render::Material::startUpdateShaderVertexValue(VertexArrayObject* data, MeshDetail* pMesh)
 {
-	if (data == nullptr)
+	if (data == nullptr || pMesh == nullptr)
 	{
 		return;
 	}
@@ -175,7 +187,13 @@ void render::Material::startUpdateShaderVertexValue(VertexArrayObject* data)
 		return;
 	}
 
-	_shaderProgram->use();
+	data->bindVertexArray();
+	data->bindBuffer();
+
+	uint32_t nVerticeSize = pMesh->getVertices().getSize();
+	uint32_t nColorSize = pMesh->getColors().getSize();
+	uint32_t nUVSize = pMesh->getUVs().getSize();
+	uint32_t nNormalSize = pMesh->getNormals().getSize();
 
 	for (auto item : _vertexAttribIndices)
 	{
@@ -190,13 +208,12 @@ void render::Material::startUpdateShaderVertexValue(VertexArrayObject* data)
 		}
 		else if (item.first == VertexAttribType::COLOR)
 		{
-			pointer->setVertexAttribPointer(4, VertexAttribPointerType::FLOAT, 0);
+			pointer->setVertexAttribPointer(4, VertexAttribPointerType::FLOAT, nVerticeSize);
 		}
 		else if (item.first == VertexAttribType::UV)
 		{
-			pointer->setVertexAttribPointer(2, VertexAttribPointerType::FLOAT, 0);
+			pointer->setVertexAttribPointer(2, VertexAttribPointerType::FLOAT, nVerticeSize + nColorSize);
 		}
-
 		GLDebug::showError();
 	}
 
@@ -210,22 +227,76 @@ void render::Material::applyMat(uint32_t nMatID) const
 	{
 		return;
 	}
+
 	auto pMat = it->second;
 
 	pMat->apply();
 
-	auto nTextureID1 = this->getTexture(pMat->getAmbientTextureMap());
-	auto nTextureID2 = this->getTexture(pMat->getDiffuseTextureMap());
-	if (nTextureID1 || nTextureID2)
+	GLState::enable(EnableModel::TEXTURE_2D);
+
+	for (auto item : _vertexUniformIndices)
 	{
-		GLState::enable(EnableModel::TEXTURE_2D);
-		if (nTextureID1) GLTexture::bindTexture2D(nTextureID1);
-		else if (nTextureID2) GLTexture::bindTexture2D(nTextureID2);
+		if (item.first == VertexUniformType::AMBIENT_TEXTURE)
+		{
+			auto nTextureID = this->getTexture(pMat->getAmbientTextureMap());
+			if (nTextureID >= 0)
+			{
+				GLTexture::activeTexture(ActiveTextureName::TEXTURE0);
+				GLTexture::bindTexture2D(nTextureID);
+				auto pUniform = _shaderProgram->getUniform(item.second);
+				if (!pUniform)
+				{
+					continue;
+				}
+				pUniform->setValue(0);
+
+				GLDebug::showError();
+			}
+		}
+		else if (item.first == VertexUniformType::DIFFUSE_TEXTURE)
+		{
+			auto nTextureID = this->getTexture(pMat->getDiffuseTextureMap());
+			if (nTextureID >= 0)
+			{
+				GLTexture::activeTexture(ActiveTextureName::TEXTURE1);
+				GLTexture::bindTexture2D(nTextureID);
+				auto pUniform = _shaderProgram->getUniform(item.second);
+				if (!pUniform)
+				{
+					continue;
+				}
+				pUniform->setValue(1);
+
+				GLDebug::showError();
+			}
+		}
+		else if (item.first == VertexUniformType::SPECULAR_TEXTURE)
+		{
+			auto nTextureID = this->getTexture(pMat->getSpecularTextureMap());
+			if (nTextureID >= 0)
+			{
+				GLTexture::activeTexture(ActiveTextureName::TEXTURE2);
+				GLTexture::bindTexture2D(nTextureID);
+				auto pUniform = _shaderProgram->getUniform(item.second);
+				if (!pUniform)
+				{
+					continue;
+				}
+				pUniform->setValue(2);
+
+				GLDebug::showError();
+			}
+		}
+		GLDebug::showError();
 	}
 }
 
 void render::Material::updateMatTexture()
 {
+	if (_texturePaths.empty())
+	{
+		return;
+	}
 	for (auto item : _texturePaths)
 	{
 		Texture2D* pTexture = this->createTexture(item.second);
@@ -255,7 +326,7 @@ void render::Material::endUpdateShaderUniformValue()
 	GLDebug::showError();
 }
 
-void Material::addTexture(const std::string& name, Texture2D* id)
+void Material::addTexture(const std::string& name, const Texture2D* id)
 {
 	if (id == nullptr)
 	{
@@ -263,9 +334,10 @@ void Material::addTexture(const std::string& name, Texture2D* id)
 	}
 	this->removeTexture(name);
 
-	SAFE_RETAIN(id);
+	Texture2D* pid = (Texture2D*)id;
+	SAFE_RETAIN(pid);
 
-	_textures[name] = id;
+	_textures[name] = pid;
 }
 
 void Material::removeTexture(const std::string& name)

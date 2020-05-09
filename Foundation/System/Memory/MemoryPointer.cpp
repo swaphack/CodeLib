@@ -39,7 +39,7 @@ MemoryPointer* MemoryPointer::alloctPtr(size_t size)
 sys::MemoryPointer::MemoryPointer(const MemoryData& data)
 {
 	_value = data.getPtr(0);
-	_size = data.getLength() * data.getUnitSize();
+	_size = data.getLength() * data.getTypeSize();
 }
 
 int8_t* sys::MemoryPointer::getPtr()

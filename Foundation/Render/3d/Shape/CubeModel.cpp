@@ -37,7 +37,7 @@ bool CubeModel::init()
 
 		pMesh->setMaterial(i);
 
-		pMesh->setUVs(8, _faces[i].uvs, 2);
+		pMesh->setUVs(8, _faces[i].uvs);
 		pMesh->setIndices(6, _faces[i].indices);
 		pMesh->setColors(16, _faces[i].colors);
 	}

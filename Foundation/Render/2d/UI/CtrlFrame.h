@@ -7,8 +7,7 @@
 
 namespace render
 {
-	class Texture;
-	class TexFrame;
+	class Texture2D;
 	class Material;
 	class Mesh;
 
@@ -20,19 +19,13 @@ namespace render
 		virtual ~CtrlFrame();
 	public:
 		virtual bool init();
-	protected:
-		virtual void drawSample();
 	public:
 		// 设置图片纹理
-		void setTexture(const Texture* texture);
+		void setTexture(const Texture2D* texture);
 		// 设置图片纹理
-		void setTextureWithRect(const Texture* texture);
+		void setTextureWithRect(const Texture2D* texture);
 		// 设置要显示的纹理区域
 		void setTexRect(const math::Rect& rect);
-		// 设置图片纹理帧
-		void setTexFrame(const TexFrame* texFrame);
-		// 获取纹理帧
-		const TexFrame* getTexFrame();
 		// 设置水平翻转
 		void setFlipX(bool status);
 		// 是否水平翻转
@@ -45,6 +38,11 @@ namespace render
 		bool isCounter();
 		// 设置是否顺时针
 		void setCounter(bool status);
+	public:
+		Material* getMaterial();
+		Mesh* getMesh();
+	protected:
+		virtual void drawSample();
 	protected:
 		void onTextureChange();
 
@@ -54,8 +52,6 @@ namespace render
 		void initBufferObject();
 		void updateBufferData();
 	protected:
-		// 纹理帧
-		TexFrame* _texFrame;
 		// 纹理坐标
 		TextureRectVertex _texRect;
 		// 是否水平翻转
@@ -64,7 +60,7 @@ namespace render
 		bool _bFlipY;
 		// 材质
 		Material* _material = nullptr;
-		// 
+		// 网格
 		Mesh* _mesh = nullptr;
 	};
 }

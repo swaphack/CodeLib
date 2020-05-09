@@ -60,7 +60,7 @@ namespace render
 		// 颜色
 		const sys::Color3B& getTextColor();
 	protected:
-		math::Vector3 getOrgin();
+		math::Vector3 getOrgin(const math::Size& size);
 		virtual void onTextChange();
 	private:
 		// 文本结构

@@ -15,7 +15,7 @@ namespace sys
 		MemoryData(size_t length, const int8_t* value);
 		MemoryData(size_t length, const char* value);
 		MemoryData(size_t length, const uint8_t* value);
-		MemoryData(size_t length, const int8_t* value, uint32_t unitSize);
+		MemoryData(size_t length, const int8_t* value, uint32_t typeSize);
 		MemoryData(const MemoryData& value);
 		virtual ~MemoryData();
 	public:
@@ -38,7 +38,7 @@ namespace sys
 		/**
 		*	单位大小
 		*/
-		uint32_t getUnitSize() const;
+		uint32_t getTypeSize() const;
 		/**
 		*	偏移指针
 		*/
@@ -56,7 +56,7 @@ namespace sys
 		/**
 		*	初始化
 		*/
-		void init(size_t len, const void* value, uint32_t unitSize);
+		void init(size_t len, const void* value, uint32_t typeSize);
 		/**
 		*	初始化
 		*/
@@ -89,6 +89,6 @@ namespace sys
 		/**
 		*	单位
 		*/
-		uint32_t _uintSize = 1;
+		uint32_t _typeSize = 1;
 	};
 }

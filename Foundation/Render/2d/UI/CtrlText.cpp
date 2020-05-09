@@ -156,27 +156,24 @@ void CtrlText::onTextChange()
 		this->setHeight(static_cast<float>(texture->getHeight()));
 	}
 
-	math::Size size = math::Size(static_cast<float>(texture->getWidth()), static_cast<float>(texture->getHeight()));
-	TextureTool::setTexture2DCoords(&_texRect, size, _texFrame->getRect());
+	math::Size size = math::Size(texture->getWidth(), texture->getHeight());
+	math::Rect rect(math::Vector2(), size);
+	TextureTool::setTexture2DCoords(&_texRect, size, rect);
 
 
 	math::Vector3 anchor = math::Vector3(0.5f, 0.5f, 0.5f);
-	math::Vector3 orgin = getOrgin();
-	math::Volume volume = math::Volume(static_cast<float>(texture->getWidth()), static_cast<float>(texture->getHeight()));
+	math::Vector3 orgin = getOrgin(size);
+	math::Volume volume = math::Volume(texture->getWidth(), texture->getHeight());
 
 	TextureTool::setTexture2DVertexts(&_texRect, orgin, volume, anchor);
 	TextureTool::setTexture2DFlip(&_texRect, _bFlipX, _bFlipY);
 }
 
-math::Vector3 render::CtrlText::getOrgin()
+math::Vector3 render::CtrlText::getOrgin(const math::Size& size)
 {
 	math::Vector3 orgin = math::Vector3();
-	if (_texFrame == nullptr || _texFrame->getTexture() == nullptr)
-	{
-		return orgin;
-	}
 	
-	math::Volume volume = math::Volume(static_cast<float>(_texFrame->getTexture()->getWidth()), static_cast<float>(_texFrame->getTexture()->getHeight()));
+	math::Volume volume = math::Volume(size.getWidth(), size.getHeight());
 	
 	if (_textDefine.verticalAlignment == EVA_BOTTOM)
 	{

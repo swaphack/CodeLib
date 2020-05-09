@@ -48,7 +48,7 @@ void Camera::setViewPortParams(float left, float right, float bottom, float top,
 	_cameraParams.zFar = zFar;
 }
 
-const CameraParams& Camera::getViewPortParams()
+const CameraParams& Camera::getViewPortParams()const
 {
 	return _cameraParams;
 }
@@ -117,12 +117,12 @@ void Camera::inverseTranform()
 
 }
 
-const math::Matrix44& render::Camera::getProjectMatrix()
+const math::Matrix44& render::Camera::getProjectMatrix() const
 {
 	return _projectMat;
 }
 
-const math::Matrix44 render::Camera::getViewMatrix()
+const math::Matrix44& render::Camera::getViewMatrix() const
 {
 	return _localMat;
 }

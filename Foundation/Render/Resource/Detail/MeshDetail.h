@@ -15,17 +15,17 @@ namespace render
 	public:
 		MeshMemoryData() {}
 		MeshMemoryData(const MeshMemoryData& data)
-			:MemoryData(data.getLength(), data.getValue(), data.getUnitSize())
+			:MemoryData(data.getLength(), data.getValue(), data.getTypeSize())
 		{
-			this->setTypeSize(data.getTypeSize());
+			this->setUnitSize(data.getTypeSize());
 		}
 		virtual ~MeshMemoryData(){}
 	public:
-		void setTypeSize(uint32_t size) { _typeSize = size; }
-		uint32_t getTypeSize() const { return _typeSize; }
+		void setUnitSize(uint32_t size) { _unitSize = size; }
+		uint32_t getUnitize() const { return _unitSize; }
 	protected:
 	private:
-		uint32_t _typeSize = 0;
+		uint32_t _unitSize = 0;
 	};
 
 	/**

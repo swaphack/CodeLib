@@ -12,6 +12,8 @@
 #include "Common/Node/import.h"
 
 #define MAT_TEXTURE_NAEM "MAT_TEXTURE_NAEM"
+#define MATERIAL_INDEX 0
+#define MESH_INDEX 0
 
 using namespace render;
 
@@ -19,9 +21,6 @@ CtrlFrame::CtrlFrame()
 :_bFlipX(false)
 , _bFlipY(false)
 {
-	_texFrame = CREATE_OBJECT(TexFrame);
-	SAFE_RETAIN(_texFrame);
-
 	_material = CREATE_OBJECT(Material);
 	SAFE_RETAIN(_material);
 
@@ -31,7 +30,6 @@ CtrlFrame::CtrlFrame()
 
 CtrlFrame::~CtrlFrame()
 {
-	SAFE_RELEASE(_texFrame);
 	SAFE_RELEASE(_material);
 	SAFE_RELEASE(_mesh);
 }
@@ -48,6 +46,7 @@ bool CtrlFrame::init()
 	});
 
 	_notify->addListen(ENP_TEXTURE_FRAME, [this](){
+		_material->updateMatTexture();
 		onTextureChange();
 	});
 
@@ -65,48 +64,33 @@ void CtrlFrame::drawSample()
 #endif
 }
 
-void CtrlFrame::setTexture(const Texture* texture)
+void CtrlFrame::setTexture(const Texture2D* texture)
 {
 	if (texture == nullptr)
 	{
 		return;
 	}
 
-	_material->addTexture(MAT_TEXTURE_NAEM, (Texture2D*)texture);
+	_material->addTexture(MAT_TEXTURE_NAEM, texture);
 
-	_texFrame->setTexture(texture);
 	this->notify(ENP_TEXTURE_FRAME);
 }
 
-void CtrlFrame::setTextureWithRect(const Texture* texture)
+void CtrlFrame::setTextureWithRect(const Texture2D* texture)
 {
-	_material->addTexture(MAT_TEXTURE_NAEM, (Texture2D*)texture);
+	_material->addTexture(MAT_TEXTURE_NAEM, texture);
+	this->setVolume(texture->getWidth(), texture->getHeight(), texture->getDepth());
 
-	_texFrame->setTextureWithRect(texture);
 	this->notify(ENP_TEXTURE_FRAME);
 }
 
 void CtrlFrame::setTexRect(const math::Rect& rect)
 {
-	_texFrame->setRect(rect);
+	const auto& size = rect.getSize();
+	this->setVolume(size.getWidth(), size.getHeight());
+
 	this->notify(ENP_TEXTURE_FRAME);
 } 
-
-void CtrlFrame::setTexFrame(const TexFrame* texFrame)
-{
-	if (texFrame == nullptr)
-	{
-		return;
-	}
-	_material->addTexture(MAT_TEXTURE_NAEM, (Texture2D*)texFrame->getTexture());
-	*_texFrame = *texFrame;
-	this->notify(ENP_TEXTURE_FRAME);
-}
-
-const TexFrame* CtrlFrame::getTexFrame()
-{
-	return _texFrame;
-}
 
 void CtrlFrame::setFlipX(bool status)
 {
@@ -132,27 +116,31 @@ bool CtrlFrame::isFlipY()
 
 void CtrlFrame::onTextureChange()
 {
-	const Texture* texture = _texFrame->getTexture();
-	if (texture == nullptr)
-	{
-		return;
-	}
+	auto pTexture = _material->getTexture(MAT_TEXTURE_NAEM);
 
-	math::Size size = math::Size(static_cast<float>(texture->getWidth()), static_cast<float>(texture->getHeight()));
-
-	TextureTool::setTexture2DCoords(&_texRect, size, _texFrame->getRect());
+	math::Size size = math::Size(this->getWidth(), this->getHeight());
+	math::Rect rect(math::Vector2(), size);
+	TextureTool::setTexture2DCoords(&_texRect, size, rect);
 	TextureTool::setTexture2DVertexts(&_texRect, math::Vector3(), _volume, _anchor);
 	TextureTool::setTexture2DFlip(&_texRect, _bFlipX, _bFlipY);
+
+	updateBufferData();
+}
+
+render::Material* render::CtrlFrame::getMaterial()
+{
+	return _material;
+}
+
+render::Mesh* render::CtrlFrame::getMesh()
+{
+	return _mesh;
 }
 
 void render::CtrlFrame::drawSampleWithClientArray()
 {
-	if (_texFrame->getTexture() == nullptr)
-	{
-		return;
-	}
 
-	int textID = _texFrame->getTexture()->getTextureID();
+	int textID = _material->getTexture(MAT_TEXTURE_NAEM);
 	if (textID == 0)
 	{
 		return;
@@ -181,13 +169,7 @@ void render::CtrlFrame::drawSampleWithClientArray()
 
 void render::CtrlFrame::drawSampleWithBufferObject()
 {
-	math::Matrix44 projMat = Camera::getMainCamera()->getProjectMatrix();
-	math::Matrix44 viewMat = Camera::getMainCamera()->getViewMatrix();
-	math::Matrix44 modelMat = this->getWorldMatrix();
-
-	_material->startUpdateShaderUniformValue(projMat, viewMat, modelMat);
-	_mesh->draw(_material);
-	_material->endUpdateShaderUniformValue();
+	_mesh->draw(this, _material);
 }
 
 void render::CtrlFrame::initBufferObject()
@@ -196,22 +178,26 @@ void render::CtrlFrame::initBufferObject()
 
 	auto pMat = CREATE_OBJECT(MaterialDetail);	
 	pMat->setAmbientTextureMap(MAT_TEXTURE_NAEM);
-	pModelDetail->addMaterial(0, pMat);
+	pModelDetail->addMaterial(MATERIAL_INDEX, pMat);
 
 	auto pMesh = CREATE_OBJECT(MeshDetail);
-	pMesh->setMaterial(0);
-	pModelDetail->addMesh(0, pMesh);
-
-	uint32_t nVerticeSize = sizeof(_texRect.vertices);
-	uint32_t nColorSize = sizeof(_texRect.colors);
-	uint32_t nUVSize = sizeof(_texRect.uvs);
-	uint32_t nIndiceSize = sizeof(_texRect.indices);
-
-	pMesh->setVertices(nVerticeSize, _texRect.vertices);
-	pMesh->setColors(nColorSize, _texRect.colors);
-	pMesh->setUVs(nUVSize, _texRect.uvs);
-	pMesh->setIndices(nIndiceSize, _texRect.indices);
+	pMesh->setMaterial(MATERIAL_INDEX);
+	pModelDetail->addMesh(MESH_INDEX, pMesh);
 
 	_material->setModelDetail(pModelDetail);
 	_mesh->setModelDetail(pModelDetail);
+}
+
+void render::CtrlFrame::updateBufferData()
+{
+	auto pMesh = _mesh->getMesh(MESH_INDEX);
+	if (pMesh)
+	{
+		pMesh->setVertices(12, _texRect.vertices);
+		pMesh->setColors(16, _texRect.colors);
+		pMesh->setUVs(8, _texRect.uvs);
+		pMesh->setIndices(6, _texRect.indices);
+	}
+
+	_mesh->updateBufferData();
 }

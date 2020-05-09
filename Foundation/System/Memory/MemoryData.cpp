@@ -8,9 +8,9 @@ sys::MemoryData::MemoryData()
 
 }
 
-sys::MemoryData::MemoryData(size_t length, const int8_t* value, uint32_t unitSize)
+sys::MemoryData::MemoryData(size_t length, const int8_t* value, uint32_t typeSize)
 {
-	this->init(length, value, unitSize);
+	this->init(length, value, typeSize);
 }
 
 sys::MemoryData::MemoryData(size_t length, const int8_t* value)
@@ -32,12 +32,12 @@ void sys::MemoryData::clear()
 {
 	SAFE_FREE(_value);
 	_length = 0;
-	_uintSize = 0;
+	_typeSize = 0;
 }
 
 size_t sys::MemoryData::getSize() const
 {
-	return _length * _uintSize;
+	return _length * _typeSize;
 }
 
 size_t sys::MemoryData::getLength() const
@@ -64,9 +64,9 @@ int8_t& sys::MemoryData::getValue(size_t index)
 	return _value[index];
 }
 
-uint32_t sys::MemoryData::getUnitSize() const
+uint32_t sys::MemoryData::getTypeSize() const
 {
-	return _uintSize;
+	return _typeSize;
 }
 
 int8_t* sys::MemoryData::getPtr(size_t offset /*= 0*/) const
@@ -76,12 +76,12 @@ int8_t* sys::MemoryData::getPtr(size_t offset /*= 0*/) const
 		return nullptr;
 	}
 
-	return _value + offset * _uintSize;
+	return _value + offset * _typeSize;
 }
 
 sys::MemoryData::MemoryData(const MemoryData& value)
 {
-	this->init(value.getLength(), value.getValue(), value.getUnitSize());
+	this->init(value.getLength(), value.getValue(), value.getTypeSize());
 }
 
 sys::MemoryData::MemoryData(size_t length, const char* value)
@@ -94,11 +94,11 @@ sys::MemoryData::MemoryData(size_t length, const uint8_t* value)
 	this->init(length, value);
 }
 
-void sys::MemoryData::init(size_t len, const void* value, uint32_t unitSize)
+void sys::MemoryData::init(size_t len, const void* value, uint32_t typeSize)
 {
 	this->clear();
-	uint32_t size = unitSize * len;
-	_uintSize = unitSize;
+	uint32_t size = typeSize * len;
+	_typeSize = typeSize;
 	_length = len;
 	_value = (int8_t*)malloc(size);
 	if (value)
@@ -185,7 +185,7 @@ void sys::MemoryData::insert(size_t offset, int size, const int8_t* value)
 
 	_value = val;
 	_length = length;
-	_uintSize = 1;
+	_typeSize = 1;
 }
 
 void sys::MemoryData::insert(size_t offset, int size, const char* value)
@@ -206,7 +206,7 @@ void sys::MemoryData::insert(size_t offset, int size, const char* value)
 
 	_value = val;
 	_length = length;
-	_uintSize = 1;
+	_typeSize = 1;
 }
 
 void sys::MemoryData::remove(size_t offset, int size)
@@ -224,7 +224,7 @@ void sys::MemoryData::remove(size_t offset, int size)
 
 	_value = val;
 	_length = length;
-	_uintSize = 1;
+	_typeSize = 1;
 }
 
 void sys::MemoryData::resize(size_t len)
@@ -236,6 +236,6 @@ void sys::MemoryData::resize(size_t len)
 
 	_value = val;
 	_length = len;
-	_uintSize = 1;
+	_typeSize = 1;
 }
 
