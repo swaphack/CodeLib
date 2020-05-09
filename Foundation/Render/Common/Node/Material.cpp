@@ -236,18 +236,18 @@ void render::Material::applyMat(uint32_t nMatID) const
 
 	for (auto item : _vertexUniformIndices)
 	{
+		auto pUniform = _shaderProgram->getUniform(item.second);
+		if (!pUniform)
+		{
+			continue;
+		}
 		if (item.first == VertexUniformType::AMBIENT_TEXTURE)
 		{
 			auto nTextureID = this->getTexture(pMat->getAmbientTextureMap());
-			if (nTextureID >= 0)
+			if (nTextureID > 0)
 			{
 				GLTexture::activeTexture(ActiveTextureName::TEXTURE0);
 				GLTexture::bindTexture2D(nTextureID);
-				auto pUniform = _shaderProgram->getUniform(item.second);
-				if (!pUniform)
-				{
-					continue;
-				}
 				pUniform->setValue(0);
 
 				GLDebug::showError();
@@ -256,15 +256,10 @@ void render::Material::applyMat(uint32_t nMatID) const
 		else if (item.first == VertexUniformType::DIFFUSE_TEXTURE)
 		{
 			auto nTextureID = this->getTexture(pMat->getDiffuseTextureMap());
-			if (nTextureID >= 0)
+			if (nTextureID > 0)
 			{
 				GLTexture::activeTexture(ActiveTextureName::TEXTURE1);
 				GLTexture::bindTexture2D(nTextureID);
-				auto pUniform = _shaderProgram->getUniform(item.second);
-				if (!pUniform)
-				{
-					continue;
-				}
 				pUniform->setValue(1);
 
 				GLDebug::showError();
@@ -273,15 +268,10 @@ void render::Material::applyMat(uint32_t nMatID) const
 		else if (item.first == VertexUniformType::SPECULAR_TEXTURE)
 		{
 			auto nTextureID = this->getTexture(pMat->getSpecularTextureMap());
-			if (nTextureID >= 0)
+			if (nTextureID > 0)
 			{
 				GLTexture::activeTexture(ActiveTextureName::TEXTURE2);
 				GLTexture::bindTexture2D(nTextureID);
-				auto pUniform = _shaderProgram->getUniform(item.second);
-				if (!pUniform)
-				{
-					continue;
-				}
 				pUniform->setValue(2);
 
 				GLDebug::showError();

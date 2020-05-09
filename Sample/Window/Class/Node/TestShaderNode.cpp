@@ -88,13 +88,13 @@ void TestShaderNode::testImageShader()
 
 	CtrlImage* pImage = CREATE_NODE(CtrlImage);
 	pImage->setImagePath(filepath);
-	//pImage->setAnchorPoint(Vector2(0.5f, 0.5f));
+	pImage->setAnchorPoint(Vector2(0.5f, 0.5f));
 	pImage->setVolume(500, 500);
 	pImage->setPosition(Vector2(500, 500));
 	this->addChild(pImage);
 
-	std::string vPath = "Resource/shader/texture3d.vsh";
-	std::string fPath = "Resource/shader/texture3d.fsh";
+	std::string vPath = "Resource/shader/texture2d.vsh";
+	std::string fPath = "Resource/shader/texture2d.fsh";
 
 	ShaderProgram* pProgram = CREATE_OBJECT(ShaderProgram);
 	pProgram->loadVertexAndFragmentShader(vPath, fPath);
@@ -110,7 +110,7 @@ void TestShaderNode::testImageShader()
 	pImage->getMaterial()->addAttrib(VertexAttribType::UV, "vertexUV");
 
 	RotateByAction* pRotateByAction = CREATE_ACTION(RotateByAction);
-	pRotateByAction->setRotation(0, 15, 0);
+	pRotateByAction->setRotation(0, 180, 0);
 	pRotateByAction->setDuration(10);
 
 	RepeateForeverAction* pRepeateAction = CREATE_ACTION(RepeateForeverAction);
@@ -175,7 +175,8 @@ void TestShaderNode::testModelShader()
 	pModel->getMaterial()->addUniform(VertexUniformType::VIEW_MATRIX, "viewMat");
 	pModel->getMaterial()->addUniform(VertexUniformType::MODEL_VIEW, "modelMat");
 
-	pModel->getMaterial()->addUniform(VertexUniformType::AMBIENT_TEXTURE, "texSampler");
+	pModel->getMaterial()->addUniform(VertexUniformType::AMBIENT_TEXTURE, "texSampler0");
+	pModel->getMaterial()->addUniform(VertexUniformType::DIFFUSE_TEXTURE, "texSampler1");
 
 	pModel->getMaterial()->addAttrib(VertexAttribType::POSITION, "vertexPosition");
 	pModel->getMaterial()->addAttrib(VertexAttribType::COLOR, "vertexColor");

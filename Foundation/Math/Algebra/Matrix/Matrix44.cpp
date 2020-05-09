@@ -300,6 +300,30 @@ math::Matrix44 math::Matrix44::lookAt(const Vector3& target, const Vector3& eye,
 	return m;
 }
 
+math::Matrix44 math::Matrix44::getRST(const Vector3& rotate, const Vector3& scale, const Vector3& translate)
+{
+	math::Matrix44 matScale;
+	matScale.setScale(scale);
+	math::Matrix44 matRotate;
+	matRotate.setRotate(rotate);
+	math::Matrix44 matTranslate;
+	matTranslate.setTranslate(translate);
+
+	return matRotate * matScale * matTranslate;
+}
+
+math::Matrix44 math::Matrix44::getTSR(const Vector3& translate, const Vector3& scale, const Vector3& rotate)
+{
+	math::Matrix44 matScale;
+	matScale.setScale(scale);
+	math::Matrix44 matRotate;
+	matRotate.setRotate(rotate);
+	math::Matrix44 matTranslate;
+	matTranslate.setTranslate(translate);
+
+	return matTranslate * matScale * matRotate;
+}
+
 math::Vector3 math::Matrix44::getPosition()
 {
 	return Vector3((*this)[12], (*this)[13], (*this)[14]);

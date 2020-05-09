@@ -107,5 +107,8 @@ namespace math
 		static Matrix44 horizontalPerspective(float fov, float aspect, float front, float back);
 
 		static Matrix44 lookAt(const Vector3& target, const Vector3& eye, const Vector3& up);
+
+		static Matrix44 getRST(const Vector3& rotate, const Vector3& scale, const Vector3& translate);
+		static Matrix44 getTSR(const Vector3& translate, const Vector3& scale, const Vector3& rotate);
 	};
 }

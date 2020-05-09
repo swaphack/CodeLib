@@ -116,8 +116,6 @@ bool CtrlFrame::isFlipY()
 
 void CtrlFrame::onTextureChange()
 {
-	auto pTexture = _material->getTexture(MAT_TEXTURE_NAEM);
-
 	math::Size size = math::Size(this->getWidth(), this->getHeight());
 	math::Rect rect(math::Vector2(), size);
 	TextureTool::setTexture2DCoords(&_texRect, size, rect);

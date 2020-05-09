@@ -382,18 +382,8 @@ void Node::calRealSpaceInfo()
 
 void Node::calRealSpaceByMatrix()
 {
-	math::Matrix44 matScale;
-	matScale.setScale(getScale());
-	math::Matrix44 matRotate;
-	matRotate.setRotate(_obRotation);
-	math::Matrix44 matTranslate;
-	matTranslate.setTranslate(_obPosition);
+	_localMat = math::Matrix44::getRST(_obRotation, getScale(), _obPosition);
 
-	//PRINT("Scale\n%s\n", matScale.toString().c_str());
-	//PRINT("Rotate\n%s\n", matRotate.toString().c_str());
-	//PRINT("Translate\n%s\n", matTranslate.toString().c_str());
-
-	_localMat = matTranslate * matRotate * matScale;
 	_localInverseMat = _localMat.getInverse();
 
 	//PRINT("mat\n%s\n", _mat44.toString().c_str());
@@ -411,7 +401,7 @@ void Node::calRealSpaceByMatrix()
 		{
 			temp = temp->getParent();
 		}
-	} while (temp != NULL);
+	} while (temp != nullptr);
 
 	math::Matrix44 ret;
 	for (auto &item : vecMat)
