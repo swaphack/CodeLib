@@ -2,14 +2,34 @@
 
 using namespace render;
 
-void GLRender::clearBuffer(int mask)
+void GLRender::clear(int mask)
 {
 	glClear(mask);
 }
 
-void GLRender::clearBuffer(ClearBufferMask mask)
+void GLRender::clear(ClearBufferBitType mask)
 {
 	glClear((uint32_t)mask);
+}
+
+void render::GLRender::clearBuffer(ClearBufferType mask, int drawbuffer, const float* value)
+{
+	glClearBufferfv((GLenum)mask, drawbuffer, value);
+}
+
+void render::GLRender::clearBuffer(float depth, float stencil)
+{
+	glClearBufferfi(GL_DEPTH_STENCIL, 0, depth, stencil);
+}
+
+void render::GLRender::clearBuffer(ClearBufferType mask, int drawbuffer, const uint32_t* value)
+{
+	glClearBufferuiv((GLenum)mask, drawbuffer, value);
+}
+
+void render::GLRender::clearBuffer(ClearBufferType mask, int drawbuffer, const int* value)
+{
+	glClearBufferiv((GLenum)mask, drawbuffer, value);
 }
 
 void GLRender::clearColor(float red, float green, float blue, float alpha)

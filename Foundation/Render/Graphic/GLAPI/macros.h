@@ -104,7 +104,7 @@ enum class Boolean
 	BFALSE = GL_FALSE,
 };
 
-enum class ClearBufferMask
+enum class ClearBufferBitType
 {
 	COLOR_BUFFER_BIT = GL_COLOR_BUFFER_BIT,
 	ACCUM_BUFFER_BIT = GL_ACCUM_BUFFER_BIT,
@@ -2859,4 +2859,11 @@ enum class VertexAttribPointerDataType
 	UNSIGNED_SHORT = GL_UNSIGNED_SHORT,
 	FIXED = GL_FIXED,
 	FLOAT = GL_FLOAT
+};
+
+enum class ClearBufferType
+{
+	COLOR = GL_COLOR,
+	DEPTH = GL_DEPTH,
+	STENCIL = GL_STENCIL,
 };

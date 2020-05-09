@@ -61,6 +61,7 @@ namespace render
 		static void setClipControl(ClipControlOrigin origin, ClipControlDepth depth);
 	public:
 		static void setColorMask(bool red, bool green, bool blue, bool alpha);
+		static void setColorMask(uint32_t buffer, bool red, bool green, bool blue, bool alpha);
 		/**
 		*	剔除面 看不见
 		*	glEnable(GL_CULL_FACE)， glDisable
@@ -70,7 +71,9 @@ namespace render
 		*	深度测试
 		*/
 		static void testDepth(DepthFunction func);
-
+		/**
+		*	深度是否可写
+		*/
 		static void setDepthMask(bool flag);
 		static void setDepthRange(float zNear, float zFar);
 		static void setDepthRangeArray(uint32_t first, int count, const double* v);

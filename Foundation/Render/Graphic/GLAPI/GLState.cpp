@@ -43,6 +43,15 @@ void render::GLState::getInt(uint32_t pname, int* value)
 	return glGetIntegerv(pname, value);
 }
 
+void render::GLState::setColorMask(uint32_t buffer, bool red, bool green, bool blue, bool alpha)
+{
+	glColorMaski(buffer, 
+		red ? GL_TRUE : GL_FALSE, 
+		green ? GL_TRUE : GL_FALSE,
+		blue ? GL_TRUE : GL_FALSE,
+		alpha ? GL_TRUE : GL_FALSE);
+}
+
 void render::GLState::getBoolean(uint32_t pname, uint8_t* value)
 {
 	return glGetBooleanv(pname, value);
@@ -146,7 +155,11 @@ void GLState::setClipControl(ClipControlOrigin origin, ClipControlDepth depth)
 
 void GLState::setColorMask(bool red, bool green, bool blue, bool alpha)
 {
-	glColorMask(red, green, blue, alpha);
+	glColorMask(
+		red ? GL_TRUE : GL_FALSE,
+		green ? GL_TRUE : GL_FALSE,
+		blue ? GL_TRUE : GL_FALSE,
+		alpha ? GL_TRUE : GL_FALSE);
 }
 
 void GLState::setCullFace(FaceType mode)
@@ -161,7 +174,7 @@ void GLState::testDepth(DepthFunction func)
 
 void GLState::setDepthMask(bool flag)
 {
-	glDepthMask(flag);
+	glDepthMask(flag ? GL_TRUE : GL_FALSE);
 }
 
 void GLState::setDepthRange(float zNear, float zFar)

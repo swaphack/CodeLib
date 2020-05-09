@@ -9,8 +9,17 @@ namespace render
 	class GLRender
 	{
 	public:
-		static void clearBuffer(int mask);
-		static void clearBuffer(ClearBufferMask mask);
+		static void clear(int mask);
+		static void clear(ClearBufferBitType mask);
+		/**
+		*	drawbuffer:mask为GL_COLOR时为GL_DRAW_BUFFER[n]，否则为0
+		*	value  buffer为GL_COLOR时为rgba四元素指针
+		*/
+		static void clearBuffer(ClearBufferType mask, int drawbuffer, const float* value);
+		static void clearBuffer(ClearBufferType mask, int drawbuffer, const int* value);
+		static void clearBuffer(ClearBufferType mask, int drawbuffer, const uint32_t* value);
+		static void clearBuffer(float depth, float stencil);
+
 		static void clearColor(float red, float green, float blue, float alpha);
 
 		static void clearDepth(float depth);
