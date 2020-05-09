@@ -5,9 +5,9 @@ in vec4 Color;
 
 out vec4 color;
 
-uniform sampler2D texSampler;
+uniform sampler2D texSampler0;
 
 void main()
 {
-	color = Color * texture(texSampler, UV);
+	color = Color * texture(texSampler0, UV);
 }

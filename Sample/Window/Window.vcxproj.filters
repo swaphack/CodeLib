@@ -98,6 +98,12 @@
     <None Include="Resource\shader\texture3d.fsh">
       <Filter>Resource\shader</Filter>
     </None>
+    <None Include="Resource\shader\SHADER_VERTEX.vsh">
+      <Filter>Resource\shader</Filter>
+    </None>
+    <None Include="Resource\shader\SHADER_FRAGMENT.vsh">
+      <Filter>Resource\shader</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Xml Include="Resource\3DModel\Test.xml">

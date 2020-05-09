@@ -15,8 +15,10 @@ namespace render
 
 		int getWidth() const;
 		void setWidth(uint32_t val);
+
 		uint32_t getHeight() const;
 		void setHeight(uint32_t val);
+
 		uint32_t getDepth() const;
 		void setDepth(uint32_t val);
 

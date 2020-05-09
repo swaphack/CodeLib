@@ -202,15 +202,18 @@ void render::Material::startUpdateShaderVertexValue(VertexArrayObject* data, Mes
 		VertexAttribPointer* pointer = data->getVertexAttrib<VertexAttribPointer>(pAttrib->getAttribID());
 		pointer->enableVertexArrayAttrib();
 
-		if (item.first == VertexAttribType::POSITION)
+		if (item.first == VertexAttribType::POSITION 
+			&& nVerticeSize > 0)
 		{
 			pointer->setVertexAttribPointer(3, VertexAttribPointerType::FLOAT, 0);
 		}
-		else if (item.first == VertexAttribType::COLOR)
+		else if (item.first == VertexAttribType::COLOR
+			&& nColorSize > 0)
 		{
 			pointer->setVertexAttribPointer(4, VertexAttribPointerType::FLOAT, nVerticeSize);
 		}
-		else if (item.first == VertexAttribType::UV)
+		else if (item.first == VertexAttribType::UV
+			&& nUVSize > 0)
 		{
 			pointer->setVertexAttribPointer(2, VertexAttribPointerType::FLOAT, nVerticeSize + nColorSize);
 		}

@@ -387,6 +387,9 @@
     <ClCompile Include="Common\Node\Mesh.cpp">
       <Filter>Common\Node</Filter>
     </ClCompile>
+    <ClCompile Include="Common\Buffer\TextureBufferObject.cpp">
+      <Filter>Common\Buffer</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Common\Node\import.h">
@@ -947,6 +950,9 @@
     </ClInclude>
     <ClInclude Include="Common\Node\Mesh.h">
       <Filter>Common\Node</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Buffer\TextureBufferObject.h">
+      <Filter>Common\Buffer</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

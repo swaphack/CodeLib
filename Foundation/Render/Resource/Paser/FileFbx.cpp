@@ -201,7 +201,7 @@ void handNodeMaterial(FileFbx* file, FbxNode* node)
 		{
 			handMaterial(file, mat, mat->GetUniqueID());
 			int lTextureIndex = 0;
-			//FBXSDK_FOR_EACH_TEXTURE(lTextureIndex)
+			FBXSDK_FOR_EACH_TEXTURE(lTextureIndex)
 			{
 				handMaterialTexture(file, mat, mat->GetUniqueID(), lTextureIndex);
 			}
@@ -359,6 +359,11 @@ void handMaterial(FileFbx* file, FbxSurfaceMaterial* mat, int id)
 	}
 	else if (mat->GetClassId().Is(FbxSurfacePhong::ClassId))
 	{
+		auto it = file->getMaterial(id);
+		if (it != nullptr)
+		{
+			return;
+		}
 		FbxSurfacePhong* phong = (FbxSurfacePhong *)mat;
 		auto pMat = CREATE_OBJECT(MaterialDetail);
 		pMat->setName(phong->GetName());
@@ -371,6 +376,12 @@ void handMaterial(FileFbx* file, FbxSurfaceMaterial* mat, int id)
 	}
 	else if (mat->GetClassId().Is(FbxSurfaceLambert::ClassId))
 	{
+		auto it = file->getMaterial(id);
+		if (it != nullptr)
+		{
+			return;
+		}
+
 		FbxSurfaceLambert* lambert = (FbxSurfaceLambert *)mat;
 		auto pMat = CREATE_OBJECT(MaterialDetail);
 		pMat->setName(lambert->GetName());

@@ -118,6 +118,7 @@
     <ClCompile Include="Common\Buffer\NoNamedBufferObject.cpp" />
     <ClCompile Include="Common\Buffer\BufferObject.cpp" />
     <ClCompile Include="Common\Buffer\NamedBufferObject.cpp" />
+    <ClCompile Include="Common\Buffer\TextureBufferObject.cpp" />
     <ClCompile Include="Common\Buffer\VertexArrayObject.cpp" />
     <ClCompile Include="Common\Buffer\VAOAttrib.cpp" />
     <ClCompile Include="Common\Buffer\VertexAttrib.cpp" />
@@ -269,6 +270,7 @@
     <ClInclude Include="Common\Buffer\BufferObject.h" />
     <ClInclude Include="Common\Buffer\import.h" />
     <ClInclude Include="Common\Buffer\NamedBufferObject.h" />
+    <ClInclude Include="Common\Buffer\TextureBufferObject.h" />
     <ClInclude Include="Common\Buffer\VertexArrayObject.h" />
     <ClInclude Include="Common\Buffer\VAOAttrib.h" />
     <ClInclude Include="Common\Buffer\VertexAttrib.h" />

@@ -205,7 +205,7 @@ void render::Mesh::updateBufferData()
 			uint32_t nUVSize = pMesh->getUVs().getSize();
 			uint32_t nNormalSize = pMesh->getNormals().getSize();
 
-			uint32_t nTotalSize = nVerticeSize + nColorSize + nUVSize;
+			uint32_t nTotalSize = nVerticeSize + nColorSize + nUVSize + nNormalSize;
 			pVertexObject->bindBuffer();
 			pVertexObject->setBufferData(nTotalSize, nullptr, BufferDataUsage::STATIC_DRAW);
 			if (nVerticeSize > 0)

@@ -190,7 +190,9 @@
     <None Include="Resource\shader\gray.fsh" />
     <None Include="Resource\shader\gray.vsh" />
     <None Include="Resource\shader\lighting.glsl" />
+    <None Include="Resource\shader\SHADER_FRAGMENT.vsh" />
     <None Include="Resource\shader\shader_f_1.glsl" />
+    <None Include="Resource\shader\SHADER_VERTEX.vsh" />
     <None Include="Resource\shader\shader_v_1.glsl" />
     <None Include="Resource\shader\texture2d.fsh" />
     <None Include="Resource\shader\texture2d.vsh" />

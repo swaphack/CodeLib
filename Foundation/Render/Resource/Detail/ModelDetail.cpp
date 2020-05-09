@@ -27,9 +27,9 @@ void ModelDetail::addMaterial(int id, MaterialDetail* material)
 		return;
 	}
 
-	this->removeMaterial(id);
-
 	SAFE_RETAIN(material);
+
+	this->removeMaterial(id);
 
 	_materials[id] = material;
 }
@@ -73,9 +73,9 @@ void ModelDetail::addMesh(int id, MeshDetail* mesh)
 		return;
 	}
 
-	this->removeMesh(id);
-
 	SAFE_RETAIN(mesh);
+
+	this->removeMesh(id);
 
 	_meshes[id] = mesh;
 }
