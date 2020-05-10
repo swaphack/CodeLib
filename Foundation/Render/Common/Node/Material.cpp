@@ -217,6 +217,11 @@ void render::Material::startUpdateShaderVertexValue(VertexArrayObject* data, Mes
 		{
 			pointer->setVertexAttribPointer(2, VertexAttribPointerType::FLOAT, nVerticeSize + nColorSize);
 		}
+		else if (item.first == VertexAttribType::NORMAL
+			&& nNormalSize > 0)
+		{
+			pointer->setVertexAttribPointer(3, VertexAttribPointerType::FLOAT, nVerticeSize + nColorSize + nUVSize);
+		}
 		GLDebug::showError();
 	}
 

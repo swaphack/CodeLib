@@ -33,5 +33,7 @@ namespace render
 	protected:
 		Material* _material = nullptr;
 		Mesh * _mesh = nullptr;
+	private:
+		bool _loadModel = false;
 	};
 }

@@ -4,6 +4,11 @@
 using namespace render;
 using namespace math;
 
+
+
+static std::string texture3dVertexPath = "Shader/texture3d_vertex.glsl";
+static std::string texture3dFragmentPath = "Shader/texture3d_fragment.glsl";
+
 TestShaderNode::TestShaderNode()
 {
 
@@ -16,19 +21,17 @@ TestShaderNode::~TestShaderNode()
 
 void TestShaderNode::testFunc()
 {
-	//this->testColorShader();
 	//this->testImageShader();
-	//this->test3dsModelShader();
-	this->testModelShader();
-	//this->test3dsModelShader();
+	//this->testModelShader();
+	this->test3dsModelShader();
 	//this->testFbxModelShader();
 	//this->testObjModelShader();
 }
 
 void TestShaderNode::testShaderUniformBlock()
 {
-	std::string vPath = "Resource/shader/shader_v_1.glsl";
-	std::string fPath = "Resource/shader/shader_f_1.glsl";
+	std::string vPath = "Shader/shader_v_1.glsl";
+	std::string fPath = "Shader/shader_f_1.glsl";
 
 	ShaderProgram* pProgram = CREATE_OBJECT(ShaderProgram);
 	pProgram->loadVertexAndFragmentShader(vPath, fPath);
@@ -65,7 +68,7 @@ void TestShaderNode::testShaderUniformBlock()
 void TestShaderNode::testSubroutineUniform()
 {
 	ShaderProgram* pProgram = CREATE_OBJECT(ShaderProgram);
-	std::string vlPath = "Resource/shader/lighting.glsl";
+	std::string vlPath = "Shader/lighting.glsl";
 	if (!pProgram->loadFromFile(ShaderType::VERTEX_SHADER, vlPath))
 	{
 		return;
@@ -96,10 +99,7 @@ void TestShaderNode::testImageShader()
 	pImage->setPosition(Vector2(500, 500));
 	this->addChild(pImage);
 
-	std::string vPath = "Resource/shader/texture2d.vsh";
-	std::string fPath = "Resource/shader/texture2d.fsh";
-
-	loadShader(pImage->getMaterial(), vPath, fPath);
+	loadShader(pImage->getMaterial(), texture3dVertexPath, texture3dFragmentPath);
 	initShaderAttrib(pImage->getMaterial());
 	runRotateAction(pImage);
 }
@@ -126,10 +126,7 @@ void TestShaderNode::testModelShader()
 	pModel->setAnchorPoint(0.5f, 0.5f, 0.5f);
 	this->addChild(pModel);
 
-	std::string vPath = "Resource/shader/texture3d.vsh";
-	std::string fPath = "Resource/shader/texture3d.fsh";
-
-	loadShader(pModel->getMaterial(), vPath, fPath);
+	loadShader(pModel->getMaterial(), texture3dVertexPath, texture3dFragmentPath);
 	initShaderAttrib(pModel->getMaterial());
 	runRotateAction(pModel);
 }
@@ -143,10 +140,7 @@ void TestShaderNode::test3dsModelShader()
 	pModel->setVolume(400, 400, 400);
 	this->addChild(pModel);
 
-	std::string vPath = "Resource/shader/texture3d.vsh";
-	std::string fPath = "Resource/shader/texture3d.fsh";
-
-	loadShader(pModel->getMaterial(), vPath, fPath);
+	loadShader(pModel->getMaterial(), texture3dVertexPath, texture3dFragmentPath);
 	initShaderAttrib(pModel->getMaterial());
 	runRotateAction(pModel);
 }
@@ -162,10 +156,7 @@ void TestShaderNode::testObjModelShader()
 	pModel->setVolume(400, 400, 400);
 	this->addChild(pModel);
 
-	std::string vPath = "Resource/shader/texture3d.vsh";
-	std::string fPath = "Resource/shader/texture3d.fsh";
-
-	loadShader(pModel->getMaterial(), vPath, fPath);
+	loadShader(pModel->getMaterial(), texture3dVertexPath, texture3dFragmentPath);
 	initShaderAttrib(pModel->getMaterial());
 	runRotateAction(pModel);
 }
@@ -180,10 +171,7 @@ void TestShaderNode::testFbxModelShader()
 	pModel->setRotationX(0);
 	this->addChild(pModel);
 
-	std::string vPath = "Resource/shader/texture3d.vsh";
-	std::string fPath = "Resource/shader/texture3d.fsh";
-
-	loadShader(pModel->getMaterial(), vPath, fPath);
+	loadShader(pModel->getMaterial(), texture3dVertexPath, texture3dFragmentPath);
 	initShaderAttrib(pModel->getMaterial());
 	runRotateAction(pModel);
 }
@@ -208,16 +196,16 @@ void TestShaderNode::initShaderAttrib(render::Material* mat)
 		return;
 	}
 
-	mat->addUniform(VertexUniformType::PROJECT_MATRIX, "projMat");
-	mat->addUniform(VertexUniformType::VIEW_MATRIX, "viewMat");
-	mat->addUniform(VertexUniformType::MODEL_VIEW, "modelMat");
+	mat->addUniform(VertexUniformType::PROJECT_MATRIX, "projectMatrix");
+	mat->addUniform(VertexUniformType::VIEW_MATRIX, "viewMatrix");
+	mat->addUniform(VertexUniformType::MODEL_VIEW, "modelMatrix");
 	
 	mat->addUniform(VertexUniformType::AMBIENT_TEXTURE, "texSampler0");
 	mat->addUniform(VertexUniformType::DIFFUSE_TEXTURE, "texSampler1");
 	
-	mat->addAttrib(VertexAttribType::POSITION, "vertexPosition");
-	mat->addAttrib(VertexAttribType::COLOR, "vertexColor");
-	mat->addAttrib(VertexAttribType::UV, "vertexUV");
+	mat->addAttrib(VertexAttribType::POSITION, "vPosition");
+	mat->addAttrib(VertexAttribType::COLOR, "vColor");
+	mat->addAttrib(VertexAttribType::UV, "vUV");
 }
 
 void TestShaderNode::runRotateAction(render::Node* node)

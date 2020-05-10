@@ -31,14 +31,25 @@ bool render::Model::init()
 	}
 
 	_notify->addListen(ENP_MODEL_FRAME, [this](){
-		_material->updateMatTexture();
-		_mesh->updateBufferData();
+		_loadModel = true;
+		if (_material)
+		{
+			_material->updateMatTexture();
+		}
+		if (_mesh)
+		{
+			_mesh->updateBufferData();
+		}
 	});
 	return true;
 }
 
 void Model::drawSample()
 {
+	if (!_loadModel)
+	{
+		return;
+	}
 #if USE_BUFFER_OBJECT
 	this->drawSampleWithBufferObject();
 #else
@@ -48,6 +59,10 @@ void Model::drawSample()
 
 void render::Model::setModelData(ModelDetail* detail)
 {
+	if (detail== nullptr)
+	{
+		return;
+	}
 	_material->setModelDetail(detail);
 	_mesh->setModelDetail(detail);
 	this->notify(ENP_MODEL_FRAME);
@@ -93,8 +108,10 @@ void render::Model::drawSampleWithClientArray()
 		}
 
 		auto nMatID = pMesh->getMaterial();
-
-		_material->applyMat(nMatID);
+		if (_material)
+		{
+			_material->applyMat(nMatID);
+		}
 
 		const MeshMemoryData& indices = pMesh->getIndices();
 		if (indices.getLength() > 0)
@@ -116,6 +133,10 @@ void render::Model::drawSampleWithClientArray()
 
 void render::Model::drawSampleWithBufferObject()
 {
+	if (_mesh == nullptr || _material == nullptr)
+	{
+		return;
+	}
 	_mesh->draw(this, _material);
 }
 
