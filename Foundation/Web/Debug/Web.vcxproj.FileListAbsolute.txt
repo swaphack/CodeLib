@@ -1,0 +1,2 @@
+F:\github\CodeLib\Debug\Web.pdb
+F:\github\CodeLib\Foundation\Web\Debug\Web.pdb
