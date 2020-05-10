@@ -1,0 +1,132 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Classes">
+      <UniqueIdentifier>{1a02b428-2389-4a96-bfbb-77c69b6d9c5a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Node">
+      <UniqueIdentifier>{d478cc1d-01b1-4fa2-8cd0-f8efa1320f4f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Scene">
+      <UniqueIdentifier>{3974a37b-a7f7-4b52-bb11-0acbf990da41}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Classes\GLRenderApplication.cpp">
+      <Filter>Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Main.cpp">
+      <Filter>Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\WndWeb.cpp">
+      <Filter>Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Scene\TestMainScene.cpp">
+      <Filter>Classes\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Node\TestAudioNode.cpp">
+      <Filter>Classes\Node</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Node\TestBufferNode.cpp">
+      <Filter>Classes\Node</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Node\TestDrawNode.cpp">
+      <Filter>Classes\Node</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Node\TestFuncNode.cpp">
+      <Filter>Classes\Node</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Node\TestImageNode.cpp">
+      <Filter>Classes\Node</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Node\TestLayoutNode.cpp">
+      <Filter>Classes\Node</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Node\TestMediaNode.cpp">
+      <Filter>Classes\Node</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Node\TestModelNode.cpp">
+      <Filter>Classes\Node</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Node\TestParticleNode.cpp">
+      <Filter>Classes\Node</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Node\TestShaderNode.cpp">
+      <Filter>Classes\Node</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Node\TestTextNode.cpp">
+      <Filter>Classes\Node</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Node\TestUINode.cpp">
+      <Filter>Classes\Node</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Node\TestUtilityNode.cpp">
+      <Filter>Classes\Node</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Classes\GLRenderApplication.h">
+      <Filter>Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\WndWeb.h">
+      <Filter>Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Scene\TestMainScene.h">
+      <Filter>Classes\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Node\import.h">
+      <Filter>Classes\Node</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Node\TestAudioNode.h">
+      <Filter>Classes\Node</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Node\TestBufferNode.h">
+      <Filter>Classes\Node</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Node\TestDrawNode.h">
+      <Filter>Classes\Node</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Node\TestFuncNode.h">
+      <Filter>Classes\Node</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Node\TestImageNode.h">
+      <Filter>Classes\Node</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Node\TestLayoutNode.h">
+      <Filter>Classes\Node</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Node\TestMediaNode.h">
+      <Filter>Classes\Node</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Node\TestModelNode.h">
+      <Filter>Classes\Node</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Node\TestParticleNode.h">
+      <Filter>Classes\Node</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Node\TestShaderNode.h">
+      <Filter>Classes\Node</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Node\TestTextNode.h">
+      <Filter>Classes\Node</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Node\TestUINode.h">
+      <Filter>Classes\Node</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Node\TestUtilityNode.h">
+      <Filter>Classes\Node</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

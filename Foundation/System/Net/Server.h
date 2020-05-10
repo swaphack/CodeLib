@@ -3,6 +3,7 @@
 #include "DataQueue.h"
 #include "SocketRecvHandler.h"
 #include <map>
+#include <string>
 
 namespace sys
 {

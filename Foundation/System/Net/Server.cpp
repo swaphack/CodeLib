@@ -37,7 +37,7 @@ void Server::update()
 	if (socket)
 	{
 		this->addClient(socket);
-		PRINT("client %s:%d connect\n", socket->getRemoteIP(), socket->getRemotePort());
+		PRINT("client %s:%d connect\n", socket->getRemoteIP().c_str(), socket->getRemotePort());
 	}
 
 	// disabled socket
@@ -245,7 +245,7 @@ void Server::_removeSockets( std::vector<int32_t>& removedSocks )
 		this->removeClient(sockId);
 		if (socket)
 		{
-			PRINT("client %s:%d disconnect\n", socket->getRemoteIP(), socket->getRemotePort());
+			PRINT("client %s:%d disconnect\n", socket->getRemoteIP().c_str(), socket->getRemotePort());
 			delete socket;
 		}
 	}

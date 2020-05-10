@@ -76,7 +76,7 @@ namespace sys
 
 		command->retain();
 
-		std::map<uint64_t, T*>::iterator it = _handlers.find(command->getID());
+		auto it = _handlers.find(command->getID());
 		if (it != _handlers.end())
 		{
 			it->second->hand(command);
@@ -98,7 +98,7 @@ namespace sys
 
 		command->retain();
 
-		for (std::map<uint64_t, T*>::iterator it = _handlers.begin();
+		for (auto it = _handlers.begin();
 			it != _handlers.end();
 			it++)
 		{
@@ -111,7 +111,7 @@ namespace sys
 	template<typename T>
 	void Dispatcher<T>::clear()
 	{
-		std::map<uint64_t, T*>::iterator it = _handlers.begin();
+		auto it = _handlers.begin();
 
 		while (it != _handlers.end())
 		{

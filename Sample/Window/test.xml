@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<root width="1024" height="768">
-    <Layout boxcolor="255,255,255,255" boxvisible="0" margin="0.000000,0.000000,0.000000,0.000000" maxsize="100.000000,100.000000" minsize="20.000000,20.000000" rect="0.000000,0.000000,20.000000,20.000000" sizepolicy="0,0">
-        <LayoutItem boxcolor="255,255,255,255" boxvisible="0" maxsize="100.000000,100.000000" minsize="20.000000,20.000000" rect="0.000000,0.000000,20.000000,20.000000" sizepolicy="0,0">
-            <Image blend="770,771" color="255,255,255,255" flipX="0" flipY="0" opacity="255" path="Resource/Image/NeHe.png" position="0.000000,0.000000,0.000000" size="256.000000,256.000000"/>
-        </LayoutItem>
-    </Layout>
-</root>

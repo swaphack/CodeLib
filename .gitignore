@@ -24,3 +24,7 @@ WebCat.sdf
 /Debug
 /ipch/console.windows-d9921d25
 /.vs
+/Lib/jpeg-9d
+/Lib/libobj
+/Lib/lpng1637
+/Lib/zlib

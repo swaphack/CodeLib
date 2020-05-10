@@ -36,7 +36,7 @@ char Console::readChar()
 
 void Console::writeLine(const std::string& words)
 {
-	PRINT("%s", words);
+	PRINT("%s", words.c_str());
 }
 
 void Console::writeChar(char word)

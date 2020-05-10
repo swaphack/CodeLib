@@ -48,12 +48,13 @@ namespace sys
 	template<typename T>
 	void CacheGroup::setT(const std::string& name, T value)
 	{
-		if (name == nullptr)
+		if (name.empty())
 		{
 			return;
 		}
-		MemoryData data(size, &value);
-		this->set(name, data.getValue());
+		uint32_t size = sizeof(value);
+		std::string data(size, &value);
+		this->set(name, data);
 	}
 
 }

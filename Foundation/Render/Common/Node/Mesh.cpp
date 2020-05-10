@@ -127,6 +127,8 @@ void render::Mesh::draw(Node* node, Material* mat)
 
 		GLDebug::showError();
 
+		pIndiceObject->bindBuffer();
+
 		mat->startUpdateShaderUniformValue(node);
 		mat->startUpdateShaderVertexValue(pVertexArrayObject, pMesh);
 
@@ -135,9 +137,8 @@ void render::Mesh::draw(Node* node, Material* mat)
 
 		GLDebug::showError();
 
-		pIndiceObject->bindBuffer();
 		uint32_t nIndiceLength = pMesh->getIndices().getLength();
-		GLBufferObjects::drawElements(DrawMode::TRIANGLES, nIndiceLength, IndexDataType::UNSIGNED_INT, (void*)0);
+		GLBufferObjects::drawElements(DrawMode::TRIANGLES, nIndiceLength, IndexDataType::UNSIGNED_INT, nullptr);
 
 		GLDebug::showError();
 		
@@ -158,14 +159,6 @@ void render::Mesh::updateBufferData()
 
 		uint32_t id = item.first;
 
-		auto it0 = _vertexArrayObjects.find(id);
-		if (it0 == _vertexArrayObjects.end())
-		{
-			VertexArrayObject* obj = CREATE_OBJECT(VertexArrayObject);
-			SAFE_RETAIN(obj);
-			_vertexArrayObjects[id] = obj;
-		}
-
 		auto it1 = _indiceObjects.find(id);
 		if (it1 == _indiceObjects.end())
 		{
@@ -184,6 +177,16 @@ void render::Mesh::updateBufferData()
 			pIndiceObject->setBufferData(nIndiceSize, pMesh->getIndices().getValue(), BufferDataUsage::STATIC_DRAW);
 		}
 
+		auto it0 = _vertexArrayObjects.find(id);
+		if (it0 == _vertexArrayObjects.end())
+		{
+			VertexArrayObject* obj = CREATE_OBJECT(VertexArrayObject);
+			SAFE_RETAIN(obj);
+			_vertexArrayObjects[id] = obj;
+		}
+
+		auto pVertexArrayObject = _vertexArrayObjects[id];
+
 		auto it2 = _vertexObjects.find(id);
 		if (it2 == _vertexObjects.end())
 		{
@@ -191,7 +194,6 @@ void render::Mesh::updateBufferData()
 			SAFE_RETAIN(obj);
 			obj->setBufferTarget(BufferTarget::ARRAY_BUFFER);
 
-			auto pVertexArrayObject = _vertexArrayObjects[id];
 			pVertexArrayObject->setBufferObject(obj);
 
 			_vertexObjects[id] = obj;
@@ -206,7 +208,8 @@ void render::Mesh::updateBufferData()
 			uint32_t nNormalSize = pMesh->getNormals().getSize();
 
 			uint32_t nTotalSize = nVerticeSize + nColorSize + nUVSize + nNormalSize;
-			pVertexObject->bindBuffer();
+			pVertexArrayObject->bindVertexArray();
+			pVertexArrayObject->bindBuffer();
 			pVertexObject->setBufferData(nTotalSize, nullptr, BufferDataUsage::STATIC_DRAW);
 			if (nVerticeSize > 0)
 			{

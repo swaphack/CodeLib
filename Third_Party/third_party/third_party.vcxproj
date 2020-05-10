@@ -18,7 +18,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v120</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
@@ -440,14 +440,8 @@
     <ClInclude Include="..\..\Lib\include\glew\glxew.h" />
     <ClInclude Include="..\..\Lib\include\glew\wglew.h" />
     <ClInclude Include="..\..\Lib\include\jpeg\jconfig.h" />
-    <ClInclude Include="..\..\Lib\include\jpeg\jdct.h" />
-    <ClInclude Include="..\..\Lib\include\jpeg\jerror.h" />
-    <ClInclude Include="..\..\Lib\include\jpeg\jinclude.h" />
-    <ClInclude Include="..\..\Lib\include\jpeg\jmemsys.h" />
     <ClInclude Include="..\..\Lib\include\jpeg\jmorecfg.h" />
-    <ClInclude Include="..\..\Lib\include\jpeg\jpegint.h" />
     <ClInclude Include="..\..\Lib\include\jpeg\jpeglib.h" />
-    <ClInclude Include="..\..\Lib\include\jpeg\jversion.h" />
     <ClInclude Include="..\..\Lib\include\libxml\c14n.h" />
     <ClInclude Include="..\..\Lib\include\libxml\catalog.h" />
     <ClInclude Include="..\..\Lib\include\libxml\chvalid.h" />

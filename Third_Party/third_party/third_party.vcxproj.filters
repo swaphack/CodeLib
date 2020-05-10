@@ -165,33 +165,6 @@
     <ClInclude Include="..\..\Lib\include\png\pngstruct.h">
       <Filter>png</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Lib\include\jpeg\jconfig.h">
-      <Filter>jpeg</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Lib\include\jpeg\jdct.h">
-      <Filter>jpeg</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Lib\include\jpeg\jerror.h">
-      <Filter>jpeg</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Lib\include\jpeg\jinclude.h">
-      <Filter>jpeg</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Lib\include\jpeg\jmemsys.h">
-      <Filter>jpeg</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Lib\include\jpeg\jmorecfg.h">
-      <Filter>jpeg</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Lib\include\jpeg\jpegint.h">
-      <Filter>jpeg</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Lib\include\jpeg\jpeglib.h">
-      <Filter>jpeg</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Lib\include\jpeg\jversion.h">
-      <Filter>jpeg</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Lib\include\ffmpeg\libavcodec\avcodec.h">
       <Filter>ffmpeg\libavcodec</Filter>
     </ClInclude>
@@ -1825,6 +1798,15 @@
     </ClInclude>
     <ClInclude Include="..\..\Lib\include\obj\OBJ_Loader.h">
       <Filter>obj</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Lib\include\jpeg\jconfig.h">
+      <Filter>jpeg</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Lib\include\jpeg\jmorecfg.h">
+      <Filter>jpeg</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Lib\include\jpeg\jpeglib.h">
+      <Filter>jpeg</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

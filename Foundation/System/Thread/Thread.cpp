@@ -1,6 +1,6 @@
 #include "Thread.h"
 #include "ThreadPool.h"
-
+#include <sstream>
 using namespace sys;
 
 Thread::Thread()
@@ -23,7 +23,10 @@ void Thread::start(std::function<void()> handler)
 			m_bFinish = true;
 		} while (0);
 	});
-	m_nID = m_pThread.get_id().hash();
+	std::stringstream sin;
+	sin << m_pThread.get_id();
+
+	m_nID = std::atoi(sin.str().c_str());
 	m_bFinish = false;
 }
 
