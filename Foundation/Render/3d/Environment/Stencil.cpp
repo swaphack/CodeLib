@@ -66,7 +66,7 @@ void render::Stencil::updateTranform()
 	GLState::setStencilFunc(StencilFunction::EQUAL, 1, 0xFF);
 	GLState::setStencilOp(StencilOpResult::KEEP, StencilOpResult::KEEP, StencilOpResult::KEEP);
 
-	//showStencilInformation();
+	showStencilInformation();
 
 	if (_stencilNode)
 	{
