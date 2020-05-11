@@ -30,6 +30,19 @@ namespace render
 	*	glLinkProgram
 	*	glUseProgram
 	*	
+	*	管线处理：
+	*	1.顶点着色器
+	*	2.细分和几何着色器
+	*	3.将几何体装配为图元送入光栅化
+	*	4.片源经过处理，作为像素进入帧缓存中
+	*
+	*	片元源处理
+	*	1.剪切测试
+	*	2.多重采样的片元操作
+	*	3.模板测试
+	*	4.深度测试
+	*	5.融混
+	*	6.逻辑操作
 	*/
 	class ShaderProgram : public sys::Object
 	{

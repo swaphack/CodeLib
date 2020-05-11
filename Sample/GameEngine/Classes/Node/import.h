@@ -12,3 +12,4 @@
 #include "TestUINode.h"
 #include "TestUtilityNode.h"
 #include "TestBufferNode.h"
+#include "TestFragmentNode.h"

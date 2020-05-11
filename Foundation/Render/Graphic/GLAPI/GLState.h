@@ -147,7 +147,7 @@ namespace render
 		/**
 		*	裁剪测试
 		*/
-		static void setScissor(float x, float y, float width, float height);
+		static void setScissor(int x, int y, int width, int height);
 		/**
 		*	裁剪测试
 		*/
@@ -159,9 +159,16 @@ namespace render
 	public:
 		/**
 		*	模板测试
+		*	比较函数 func
+		*	参考值	ref
+		*	掩码 mask
+		*	ref与模板缓存中已有的值进行比较， 但在此之前需要与mask进行“与”操作，丢弃结果为0的平面
+		*	如果包含s个平面，那么mask中较低的s个数据分别与模板缓存中的值，以及参考值进行“与”操作，再执行比较
+		*	
+		*	默认值，func = GL_ALWAYS, ref =0, mask = 1
 		*/
-		static void setStencil(StencilFunction func, int ref, uint32_t mask);
-		static void setStencilSeparate(FaceType type, StencilFunction func, int ref, uint32_t mask);
+		static void setStencilFunc(StencilFunction func, int ref, uint32_t mask);
+		static void setStencilFuncSeparate(FaceType type, StencilFunction func, int ref, uint32_t mask);
 	public:
 		/**
 		*	0xFF == 0b11111111
@@ -177,9 +184,10 @@ namespace render
 		*	stencilFail 当蒙板测试失败时所执行的操作
 		*	depthFail 当蒙板测试通过，深度测试失败时所执行的操作
 		*	pass 当蒙板测试通过，深度测试通过时所执行的操作
+		*	默认值GL_KEEP
 		*/
-		static void setStencilOp(StencilOp stencilFail, StencilOp depthFail, StencilOp pass);
-		static void setStencilOpSeparate(FaceType type, StencilOp stencilFail, StencilOp depthFail, StencilOp pass);
+		static void setStencilOp(StencilOpResult stencilFail, StencilOpResult depthFail, StencilOpResult depthPass);
+		static void setStencilOpSeparate(FaceType type, StencilOpResult stencilFail, StencilOpResult depthFail, StencilOpResult depthPass);
 	public:
 		static void setViewport(float x, float y, float width, float height);
 		static void setViewportArray(uint32_t first, int count, const float* v);

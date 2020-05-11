@@ -126,7 +126,7 @@ namespace render
 		// 对子节点进行排序
 		virtual void sortChildren();
 		// 空间物理坐标
-		virtual void calRealSpaceInfo();
+		virtual void calSpaceData();
 		// 空间属性发生改变
 		virtual void onSpaceChange();
 		// 物体属性发生改变

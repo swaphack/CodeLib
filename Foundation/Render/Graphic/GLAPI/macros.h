@@ -266,6 +266,10 @@ enum class EnableModel
 	POLYGON_OFFSET_POINT = GL_POLYGON_OFFSET_POINT,
 	POLYGON_OFFSET_LINE = GL_POLYGON_OFFSET_LINE,
 	POLYGON_OFFSET_FILL = GL_POLYGON_OFFSET_FILL,
+
+	SAMPLE_ALPHA_TO_COVERAGE = GL_SAMPLE_ALPHA_TO_COVERAGE,
+	SAMPLE_ALPHA_TO_ONE = GL_SAMPLE_ALPHA_TO_ONE,
+	SAMPLE_COVERAGE = GL_SAMPLE_COVERAGE,
 };
 
 
@@ -964,13 +968,23 @@ enum class StencilFunction
 	ALWAYS = GL_ALWAYS,
 };
 
-enum class StencilOp
+enum class StencilOpResult
 {
-	ZERO = GL_ZERO,
+	// 保持当前值
 	KEEP = GL_KEEP,
+	// 替换为0
+	ZERO = GL_ZERO,
+	// 替换为参考值
 	REPLACE = GL_REPLACE,
+	// 增加1，使用饱和运算
 	INCR = GL_INCR,
+	// 增加1，不使饱和和运算
+	INCR_WRAP = GL_INCR_WRAP,
+	// 减少1，使用饱和运算
 	DECR = GL_DECR,
+	// 减少1，不使用饱和运算
+	DECR_WRAP = GL_DECR_WRAP,
+	// 按位反转
 	INVERT = GL_INVERT,
 };
 

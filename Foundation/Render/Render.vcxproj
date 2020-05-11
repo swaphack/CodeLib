@@ -124,6 +124,9 @@
     <ClCompile Include="Common\Buffer\VertexAttrib.cpp" />
     <ClCompile Include="Common\Buffer\VertexAttribPointer.cpp" />
     <ClCompile Include="Common\DrawNode\DrawNode.cpp" />
+    <ClCompile Include="Common\Fragment\MultiSampling.cpp" />
+    <ClCompile Include="Common\Fragment\ScissorTest.cpp" />
+    <ClCompile Include="Common\Fragment\StencilTest.cpp" />
     <ClCompile Include="Common\Keyboard\KeyboardManager.cpp" />
     <ClCompile Include="Common\Node\ColorNode.cpp" />
     <ClCompile Include="Common\Node\Material.cpp" />
@@ -276,6 +279,10 @@
     <ClInclude Include="Common\Buffer\VertexAttribPointer.h" />
     <ClInclude Include="Common\DrawNode\DrawNode.h" />
     <ClInclude Include="Common\DrawNode\import.h" />
+    <ClInclude Include="Common\Fragment\import.h" />
+    <ClInclude Include="Common\Fragment\MultiSampling.h" />
+    <ClInclude Include="Common\Fragment\ScissorTest.h" />
+    <ClInclude Include="Common\Fragment\StencilTest.h" />
     <ClInclude Include="Common\import.h" />
     <ClInclude Include="Common\macros.h" />
     <ClInclude Include="Common\Keyboard\import.h" />

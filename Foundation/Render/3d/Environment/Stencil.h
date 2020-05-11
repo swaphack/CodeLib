@@ -31,21 +31,39 @@ namespace render
 	*/
 	class Stencil : public Node
 	{
+	private:
+		struct StencilData
+		{
+			bool isEnableDepthTest = false;
+			int nStencilFun = 0;
+			int nStencilRef = 0;
+			int nStencilValueMask = 0;
+			int nStencilFail = 0;
+			int nStencilPassDepthFail = 0;
+			int nStencilPassDepthPass = 0;
+		};
 	public:
 		Stencil();
 		virtual ~Stencil();
 	public:
-		virtual void draw();
-
-		virtual void visit();
 		// 设置模板节点
 		void setStencilNode(Node* node);
 		// 获取模板节点
 		Node* getStencilNode();
 	protected:
+		// 更新空间矩阵
+		virtual void updateTranform();
+		// 翻转空间矩阵
+		virtual void inverseTranform();
+	protected:
+		void saveStencilData();
+		void resetStencilData();
+	protected:
 		// 引用计数器
 		int _ref;
 		// 模板节点
 		Node* _stencilNode;
+	private:
+		StencilData _stencilData;
 	};
 }

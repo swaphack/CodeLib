@@ -37,70 +37,6 @@ void showStencilInformation()
 	PRINT("==============================================\n\n");
 }
 
-void Stencil::draw()
-{
-}
-
-void Stencil::visit()
-{
-	if (this->isVisible() == false)
-	{
-		return;
-	}
-
-	GLboolean isEnableDepthTest = GL_FALSE;
-
-	int nStencilFun = 0;
-	int nStencilRef = 0;
-	int nStencilValueMask = 0;
-	int nStencilFail = 0;
-	int nStencilPassDepthFail = 0;
-	int nStencilPassDepthPass = 0;
-
-	isEnableDepthTest = GLState::isEnabled(EnableModel::DEPTH_TEST);
-	GLState::getInt(GetTarget::STENCIL_FUNC, &nStencilFun);
-	GLState::getInt(GetTarget::STENCIL_REF, &nStencilRef);
-	GLState::getInt(GetTarget::STENCIL_VALUE_MASK, &nStencilValueMask);
-	GLState::getInt(GetTarget::STENCIL_FAIL, &nStencilFail);
-	GLState::getInt(GetTarget::STENCIL_PASS_DEPTH_FAIL, &nStencilPassDepthFail);
-	GLState::getInt(GetTarget::STENCIL_PASS_DEPTH_PASS, &nStencilPassDepthPass);
-
-
-	GLState::enable(EnableModel::DEPTH_TEST);
-
-	GLState::setStencilOp(StencilOp::KEEP, StencilOp::KEEP, StencilOp::REPLACE);
-	GLState::setStencil(StencilFunction::ALWAYS, 1, 0xff);
-
-	GLState::setStencilMask(0xff);
-
-	//showStencilInformation();
-
-	GLState::setDepthMask(false);
-	if (_stencilNode)
-	{
-		_stencilNode->visit();
-	}
-
-	GLState::setDepthMask(true);
-
-	GLState::setStencilOp(StencilOp::KEEP, StencilOp::KEEP, StencilOp::KEEP);
-	GLState::setStencil(StencilFunction::EQUAL, 0x1, 0xff);
-
-	//showStencilInformation();
-
-	Node::visit();
-	
-	GLState::setStencilOp((StencilOp)nStencilFail, (StencilOp)nStencilPassDepthFail, (StencilOp)nStencilPassDepthPass);
-	GLState::setStencil((StencilFunction)nStencilFun, nStencilRef, nStencilValueMask);
-	
-	if (isEnableDepthTest == GL_FALSE)
-	{
-		glDisable(GL_DEPTH_TEST);
-	}
-
-	GLState::disable(EnableModel::DEPTH_TEST);
-}
-
 void Stencil::setStencilNode(Node* node)
 {
 	if (node == nullptr)
@@ -115,4 +51,63 @@ void Stencil::setStencilNode(Node* node)
 Node* Stencil::getStencilNode()
 {
 	return _stencilNode;
+}
+
+void render::Stencil::updateTranform()
+{
+	Node::updateTranform();
+
+	this->saveStencilData();
+
+	//GLState::setDepthMask(false);
+	//GLState::setColorMask(false, false, false, false);
+	//GLState::setStencilMask(0xFF);
+
+	GLState::setStencilFunc(StencilFunction::EQUAL, 1, 0xFF);
+	GLState::setStencilOp(StencilOpResult::KEEP, StencilOpResult::KEEP, StencilOpResult::KEEP);
+
+	//showStencilInformation();
+
+	if (_stencilNode)
+	{
+		_stencilNode->visit();
+	}
+
+	//GLState::setDepthMask(true);
+	//GLState::setColorMask(true, true, true, true);
+	//GLState::setStencilMask(0x0);
+
+	GLState::setStencilFunc(StencilFunction::NOTEQUAL, 0x1, 0xFF);
+	//GLState::setStencilOp(StencilOpResult::KEEP, StencilOpResult::KEEP, StencilOpResult::KEEP);
+}
+
+void render::Stencil::inverseTranform()
+{
+	this->resetStencilData();
+
+	if (_stencilData.isEnableDepthTest == false)
+	{
+		GLState::disable(EnableModel::DEPTH_TEST);
+	}
+
+	GLDebug::showError();
+
+	Node::inverseTranform();
+}
+
+void render::Stencil::saveStencilData()
+{
+	_stencilData.isEnableDepthTest = GLState::isEnabled(EnableModel::DEPTH_TEST);
+	GLState::getInt(GetTarget::STENCIL_FUNC, &_stencilData.nStencilFun);
+	GLState::getInt(GetTarget::STENCIL_REF, &_stencilData.nStencilRef);
+	GLState::getInt(GetTarget::STENCIL_VALUE_MASK, &_stencilData.nStencilValueMask);
+	GLState::getInt(GetTarget::STENCIL_FAIL, &_stencilData.nStencilFail);
+	GLState::getInt(GetTarget::STENCIL_PASS_DEPTH_FAIL, &_stencilData.nStencilPassDepthFail);
+	GLState::getInt(GetTarget::STENCIL_PASS_DEPTH_PASS, &_stencilData.nStencilPassDepthPass);
+}
+
+void render::Stencil::resetStencilData()
+{
+	GLState::setStencilFunc((StencilFunction)_stencilData.nStencilFun, _stencilData.nStencilRef, _stencilData.nStencilValueMask);
+	GLState::setStencilOp((StencilOpResult)_stencilData.nStencilFail, (StencilOpResult)_stencilData.nStencilPassDepthFail, (StencilOpResult)_stencilData.nStencilPassDepthPass);
 }

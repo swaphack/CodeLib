@@ -276,7 +276,7 @@ void GLState::setSampleCoverage(float value, bool invert)
 	glSampleCoverage(value, invert ? GL_TRUE : GL_FALSE);
 }
 
-void GLState::setScissor(float x, float y, float width, float height)
+void GLState::setScissor(int x, int y, int width, int height)
 {
 	glScissor(x, y, width, height);
 }
@@ -291,12 +291,12 @@ void GLState::setScissorIndexed(uint32_t index, float x, float y, float width, f
 	glScissorIndexed(index, x, y, width, height);
 }
 
-void GLState::setStencil(StencilFunction func, int ref, uint32_t mask)
+void GLState::setStencilFunc(StencilFunction func, int ref, uint32_t mask)
 {
 	glStencilFunc((GLenum)func, ref, mask);
 }
 
-void GLState::setStencilSeparate(FaceType type, StencilFunction func, int ref, uint32_t mask)
+void GLState::setStencilFuncSeparate(FaceType type, StencilFunction func, int ref, uint32_t mask)
 {
 	glStencilFuncSeparate((GLenum)type,(GLenum)func, ref, mask);
 }
@@ -311,14 +311,14 @@ void GLState::setStencilMaskSeparate(FaceType type, uint32_t mask)
 	glStencilMaskSeparate((GLenum)type, mask);
 }
 
-void GLState::setStencilOp(StencilOp stencilFail, StencilOp depthFail, StencilOp pass)
+void GLState::setStencilOp(StencilOpResult stencilFail, StencilOpResult depthFail, StencilOpResult depthPass)
 {
-	glStencilOp((GLenum)stencilFail, (GLenum)depthFail, (GLenum)pass);
+	glStencilOp((GLenum)stencilFail, (GLenum)depthFail, (GLenum)depthPass);
 }
 
-void GLState::setStencilOpSeparate(FaceType type, StencilOp stencilFail, StencilOp depthFail, StencilOp pass)
+void GLState::setStencilOpSeparate(FaceType type, StencilOpResult stencilFail, StencilOpResult depthFail, StencilOpResult depthPass)
 {
-	glStencilOpSeparate((GLenum)type, (GLenum)stencilFail, (GLenum)depthFail, (GLenum)pass);
+	glStencilOpSeparate((GLenum)type, (GLenum)stencilFail, (GLenum)depthFail, (GLenum)depthPass);
 }
 
 void GLState::setViewport(float x, float y, float width, float height)

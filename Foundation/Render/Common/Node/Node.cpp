@@ -37,9 +37,7 @@ bool Node::init()
 {
 	// 添加属性改变监听
 	_notify->addListen(ENP_SPACE, [&](){
-		Tool::convertToOGLPoisition(_position, _obPosition);
-		Tool::convertToRadian(_rotation, _obRotation);
-		calRealSpaceInfo(); 
+		calSpaceData(); 
 	});
 
 	_notify->addListen(ENP_NODE, [&](){ this->sortChildren(); });
@@ -370,8 +368,11 @@ void Node::sortChildren()
 
 
 // 还未对旋转后坐标进行计算
-void Node::calRealSpaceInfo()
+void Node::calSpaceData()
 {
+	Tool::convertToOGLPoisition(_position, _obPosition);
+	Tool::convertToRadian(_rotation, _obRotation);
+
 	calRealSpaceByMatrix();
 }
 
@@ -434,20 +435,14 @@ const math::Matrix44& Node::getLocalMatrix() const
 
 math::Vector3 render::Node::convertWorldPostitionToLocal(const math::Vector3& point)
 {
-	math::Vector3 vec = point;
-	vec -= _worldMatrix.getPosition();
-	vec /= _worldMatrix.getScale();
+	math::Matrix44 mat = _worldMatrix.getInverse();
 
-	return vec;
+	return math::Matrix44::transpose(point, mat);
 }
 
 math::Vector3 render::Node::convertLocalPostitionToWorld(const math::Vector3& point)
 {
-	math::Vector3 vec = point;
-	vec += _worldMatrix.getPosition();
-	vec *= _worldMatrix.getScale();
-
-	return vec;
+	return math::Matrix44::transpose(point, _worldMatrix);
 }
 
 void Node::drawNode()

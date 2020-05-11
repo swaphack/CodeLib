@@ -25,8 +25,8 @@ bool render::CtrlWidget::init()
 		return false;
 	}
 	// 添加属性改变监听
-	_notify->addListen(ENP_SPACE, [&](){
-		Tool::calRect(math::Vector3(), _volume, _anchor, _rectVertex);
+	_notify->addListen(ENP_SPACE, [this](){
+		calRectData();
 	});
 
 	return true; 
@@ -40,5 +40,15 @@ const render::RectVertex& render::CtrlWidget::getRectVertex()
 bool render::CtrlWidget::containTouchPoint(float x, float y)
 {
 	return _rectVertex.containPoint(x, y);
+}
+
+void render::CtrlWidget::calRectData()
+{
+	Tool::calRect(math::Vector3(), _volume, _anchor, _rectVertex);
+
+	_realRectVertex.leftDown = this->convertLocalPostitionToWorld(_rectVertex.leftDown);
+	_realRectVertex.rightDown = this->convertLocalPostitionToWorld(_rectVertex.rightDown);
+	_realRectVertex.rightUp = this->convertLocalPostitionToWorld(_rectVertex.rightUp);
+	_realRectVertex.leftUp = this->convertLocalPostitionToWorld(_rectVertex.leftUp);
 }
 

@@ -66,6 +66,12 @@
     <ClCompile Include="Classes\Node\TestUtilityNode.cpp">
       <Filter>Classes\Node</Filter>
     </ClCompile>
+    <ClCompile Include="Classes\Node\TestFragmentNode.cpp">
+      <Filter>Classes\Node</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Node\ShaderUtility.cpp">
+      <Filter>Classes\Node</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Classes\GLRenderApplication.h">
@@ -117,6 +123,12 @@
       <Filter>Classes\Node</Filter>
     </ClInclude>
     <ClInclude Include="Classes\Node\TestUtilityNode.h">
+      <Filter>Classes\Node</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Node\TestFragmentNode.h">
+      <Filter>Classes\Node</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Node\ShaderUtility.h">
       <Filter>Classes\Node</Filter>
     </ClInclude>
   </ItemGroup>

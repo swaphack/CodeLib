@@ -143,9 +143,11 @@
   <ItemGroup>
     <ClCompile Include="Classes\GLRenderApplication.cpp" />
     <ClCompile Include="Classes\Main.cpp" />
+    <ClCompile Include="Classes\Node\ShaderUtility.cpp" />
     <ClCompile Include="Classes\Node\TestAudioNode.cpp" />
     <ClCompile Include="Classes\Node\TestBufferNode.cpp" />
     <ClCompile Include="Classes\Node\TestDrawNode.cpp" />
+    <ClCompile Include="Classes\Node\TestFragmentNode.cpp" />
     <ClCompile Include="Classes\Node\TestFuncNode.cpp" />
     <ClCompile Include="Classes\Node\TestImageNode.cpp" />
     <ClCompile Include="Classes\Node\TestLayoutNode.cpp" />
@@ -162,9 +164,11 @@
   <ItemGroup>
     <ClInclude Include="Classes\GLRenderApplication.h" />
     <ClInclude Include="Classes\Node\import.h" />
+    <ClInclude Include="Classes\Node\ShaderUtility.h" />
     <ClInclude Include="Classes\Node\TestAudioNode.h" />
     <ClInclude Include="Classes\Node\TestBufferNode.h" />
     <ClInclude Include="Classes\Node\TestDrawNode.h" />
+    <ClInclude Include="Classes\Node\TestFragmentNode.h" />
     <ClInclude Include="Classes\Node\TestFuncNode.h" />
     <ClInclude Include="Classes\Node\TestImageNode.h" />
     <ClInclude Include="Classes\Node\TestLayoutNode.h" />

@@ -153,31 +153,7 @@ void TestModelNode::testFbx()
 	pModel->getActionProxy()->runAction(pRepeateAction);
 }
 
-void TestModelNode::testStencil()
-{
-// 	Texture2D* texture2D = G_TEXTURE_CACHE->createTexture2D("Resource/Image/NeHe.png");
-// 
-// 	Stencil* pStencil = CREATE_NODE(Stencil);
-// 	pStencil->setVolume(400, 400, 400);
-// 
-// 	this->addChild(pStencil);
-// 
-// 	CubeModel* pCube = CREATE_NODE(CubeModel);
-// 	pCube->setVolume(400, 400, 200);
-// 	pCube->setColor(sys::Color3B(255, 255, 255));
-// 	pCube->setAllFacesTexture(texture2D);
-// 	pCube->setRotation(45, 45, 0);
-// 	pStencil->setStencilNode(pCube);
-// 
-// 	texture2D = G_TEXTURE_CACHE->createTexture2D("Resource/Image/sqi.png");
-// 
-// 	pCube = CREATE_NODE(CubeModel);
-// 	pCube->setVolume(100, 100, 100);
-// 	pCube->setRotation(-45, -45, 0);
-// 	pCube->setAllFaceFrame(frame);
-// 
-// 	pStencil->addChild(pCube);
-}
+
 
 void TestModelNode::testCamera()
 {

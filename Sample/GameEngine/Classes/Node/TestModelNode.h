@@ -22,7 +22,6 @@ private:
 	void testMultiFaceCube();
 
 	void testFog();
-	void testStencil();
 	void testCamera();
 
 	void testClipPlane();

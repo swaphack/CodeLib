@@ -387,6 +387,15 @@
     <ClCompile Include="Common\Buffer\TextureBufferObject.cpp">
       <Filter>Common\Buffer</Filter>
     </ClCompile>
+    <ClCompile Include="Common\Fragment\ScissorTest.cpp">
+      <Filter>Common\Fragment</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Fragment\MultiSampling.cpp">
+      <Filter>Common\Fragment</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Fragment\StencilTest.cpp">
+      <Filter>Common\Fragment</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Common\Node\import.h">
@@ -948,6 +957,18 @@
     <ClInclude Include="Common\Buffer\TextureBufferObject.h">
       <Filter>Common\Buffer</Filter>
     </ClInclude>
+    <ClInclude Include="Common\Fragment\ScissorTest.h">
+      <Filter>Common\Fragment</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Fragment\import.h">
+      <Filter>Common\Fragment</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Fragment\MultiSampling.h">
+      <Filter>Common\Fragment</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Fragment\StencilTest.h">
+      <Filter>Common\Fragment</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Common">
@@ -1054,6 +1075,9 @@
     </Filter>
     <Filter Include="Common\Buffer">
       <UniqueIdentifier>{60f3aac1-f887-4af4-b135-62c2dba7c8c9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common\Fragment">
+      <UniqueIdentifier>{a151f663-4d92-4f1a-9500-6f02da457184}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

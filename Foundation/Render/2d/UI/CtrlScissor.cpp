@@ -66,15 +66,10 @@ void CtrlScissor::visit()
 
 math::Rect CtrlScissor::makeRect()
 {
-	// 	float x = _realSpaceVertex.leftDown.getX();
-	// 	float y = _realSpaceVertex.leftDown.getY();
-	// 	float w = _realSpaceVertex.rightDown.getX() - _realSpaceVertex.leftDown.getX();
-	// 	float h = _realSpaceVertex.leftUp.getY() - _realSpaceVertex.leftDown.getY();
-
-	float x = 0;
-	float y = 0;
-	float w = 0;
-	float h = 0;
+	float x = _realRectVertex.leftDown.getX();
+	float y = _realRectVertex.leftDown.getY();
+	float w = _realRectVertex.rightDown.getX() - _realRectVertex.leftDown.getX();
+	float h = _realRectVertex.leftUp.getY() - _realRectVertex.leftDown.getY();
 
 	return math::Rect(x, y, w, h);
 }
