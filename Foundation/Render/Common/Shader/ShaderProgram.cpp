@@ -165,7 +165,6 @@ ShaderUniform* ShaderProgram::getUniform(const std::string& name)
 	}
 
 	int id = GLShader::getUniformLocation(_programID, name.c_str());
-	GLDebug::showError();
 	if (id < 0)
 	{
 		return nullptr;

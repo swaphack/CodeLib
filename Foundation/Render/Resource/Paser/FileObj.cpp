@@ -21,7 +21,10 @@ FileObj::~FileObj()
 void FileObj::load(const std::string& filename)
 {
 	std::string strFilepath = G_FILEPATH->getFilePath(filename);
-
+	if (strFilepath.empty())
+	{
+		return;
+	}
 	// Initialize Loader
 	objl::Loader loader;
 

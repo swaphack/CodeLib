@@ -114,20 +114,46 @@ void render::Mesh::draw(Node* node, Material* mat)
 		uint32_t id = item.first;
 
 		VertexArrayObject* pVertexArrayObject = _vertexArrayObjects[id];
-		if (pVertexArrayObject == nullptr)
+		if (pVertexArrayObject)
 		{
-			continue;
-		}
+			NoNamedBufferObject* pVertexObject = _vertexObjects[id];
+			if (pVertexObject)
+			{
+				pVertexArrayObject->bindVertexArray();
+				pVertexArrayObject->bindBuffer();
 
-		NoNamedBufferObject* pIndiceObject = _indiceObjects[id];
-		if (pIndiceObject == nullptr)
-		{
-			continue;
+				uint32_t nVerticeSize = pMesh->getVertices().getSize();
+				uint32_t nColorSize = pMesh->getColors().getSize();
+				uint32_t nUVSize = pMesh->getUVs().getSize();
+				uint32_t nNormalSize = pMesh->getNormals().getSize();
+
+				uint32_t nTotalSize = nVerticeSize + nColorSize + nUVSize + nNormalSize;
+				pVertexObject->bindBuffer();
+				pVertexObject->setBufferData(nTotalSize, nullptr, BufferDataUsage::STATIC_DRAW);
+				if (nVerticeSize > 0)
+				{
+					pVertexObject->setBufferSubData(0, nVerticeSize, pMesh->getVertices().getPtr());
+				}
+				GLDebug::showError();
+				if (nColorSize > 0)
+				{
+					pVertexObject->setBufferSubData(nVerticeSize, nColorSize, pMesh->getColors().getPtr());
+				}
+				GLDebug::showError();
+				if (nUVSize > 0)
+				{
+					pVertexObject->setBufferSubData(nVerticeSize + nColorSize, nUVSize, pMesh->getUVs().getPtr());
+				}
+				GLDebug::showError();
+				if (nNormalSize > 0)
+				{
+					pVertexObject->setBufferSubData(nVerticeSize + nColorSize + nUVSize, nNormalSize, pMesh->getNormals().getPtr());
+				}
+				GLDebug::showError();
+			}
 		}
 
 		GLDebug::showError();
-
-		pIndiceObject->bindBuffer();
 
 		mat->startUpdateShaderUniformValue(node);
 		mat->startUpdateShaderVertexValue(pVertexArrayObject, pMesh);
@@ -136,6 +162,15 @@ void render::Mesh::draw(Node* node, Material* mat)
 		mat->applyMat(nMatID);
 
 		GLDebug::showError();
+
+		NoNamedBufferObject* pIndiceObject = _indiceObjects[id];
+		if (pIndiceObject)
+		{
+			pIndiceObject->bindBuffer();
+
+			uint32_t nIndiceSize = pMesh->getIndices().getSize();
+			pIndiceObject->setBufferData(nIndiceSize, pMesh->getIndices().getValue(), BufferDataUsage::STATIC_DRAW);
+		}
 
 		uint32_t nIndiceLength = pMesh->getIndices().getLength();
 		GLBufferObjects::drawElements(DrawMode::TRIANGLES, nIndiceLength, IndexDataType::UNSIGNED_INT, nullptr);
@@ -168,15 +203,6 @@ void render::Mesh::updateBufferData()
 			_indiceObjects[id] = obj;
 		}
 
-		NoNamedBufferObject* pIndiceObject = _indiceObjects[id];
-		if (pIndiceObject)
-		{
-			pIndiceObject->bindBuffer();
-
-			uint32_t nIndiceSize = pMesh->getIndices().getSize();
-			pIndiceObject->setBufferData(nIndiceSize, pMesh->getIndices().getValue(), BufferDataUsage::STATIC_DRAW);
-		}
-
 		auto it0 = _vertexArrayObjects.find(id);
 		if (it0 == _vertexArrayObjects.end())
 		{
@@ -185,8 +211,6 @@ void render::Mesh::updateBufferData()
 			_vertexArrayObjects[id] = obj;
 		}
 
-		auto pVertexArrayObject = _vertexArrayObjects[id];
-
 		auto it2 = _vertexObjects.find(id);
 		if (it2 == _vertexObjects.end())
 		{
@@ -194,9 +218,19 @@ void render::Mesh::updateBufferData()
 			SAFE_RETAIN(obj);
 			obj->setBufferTarget(BufferTarget::ARRAY_BUFFER);
 
+			auto pVertexArrayObject = _vertexArrayObjects[id];
 			pVertexArrayObject->setBufferObject(obj);
 
 			_vertexObjects[id] = obj;
+		}
+		/*
+		NoNamedBufferObject* pIndiceObject = _indiceObjects[id];
+		if (pIndiceObject)
+		{
+			pIndiceObject->bindBuffer();
+
+			uint32_t nIndiceSize = pMesh->getIndices().getSize();
+			pIndiceObject->setBufferData(nIndiceSize, pMesh->getIndices().getValue(), BufferDataUsage::STATIC_DRAW);
 		}
 
 		NoNamedBufferObject* pVertexObject = _vertexObjects[id];
@@ -208,8 +242,7 @@ void render::Mesh::updateBufferData()
 			uint32_t nNormalSize = pMesh->getNormals().getSize();
 
 			uint32_t nTotalSize = nVerticeSize + nColorSize + nUVSize + nNormalSize;
-			pVertexArrayObject->bindVertexArray();
-			pVertexArrayObject->bindBuffer();
+			pVertexObject->bindBuffer();
 			pVertexObject->setBufferData(nTotalSize, nullptr, BufferDataUsage::STATIC_DRAW);
 			if (nVerticeSize > 0)
 			{
@@ -232,7 +265,7 @@ void render::Mesh::updateBufferData()
 			}
 			GLDebug::showError();
 		}
-
+		*/
 		GLDebug::showError();
 	}
 	GLDebug::showError();

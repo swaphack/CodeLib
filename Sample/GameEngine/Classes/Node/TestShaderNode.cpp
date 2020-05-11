@@ -24,8 +24,8 @@ void TestShaderNode::testFunc()
 	//this->testImageShader();
 	//this->testModelShader();
 	this->test3dsModelShader();
-	//this->testFbxModelShader();
-	//this->testObjModelShader();
+	this->testFbxModelShader();
+	this->testObjModelShader();
 }
 
 void TestShaderNode::testShaderUniformBlock()
