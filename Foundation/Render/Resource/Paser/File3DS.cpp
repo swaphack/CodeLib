@@ -18,7 +18,7 @@ File3DS::~File3DS()
 {
 }
 
-void File3DS::load(const std::string& filename)
+bool File3DS::load(const std::string& filename)
 {
 	std::string strFilepath = G_FILEPATH->getFilePath(filename);
 
@@ -27,7 +27,7 @@ void File3DS::load(const std::string& filename)
 	if (!pFile)
 	{
 		PRINT("***ERROR***\nLoading file failed: %s\n", filename.c_str());
-		return;
+		return false;
 	}
 	/*
 	int include_meshes = 1;
@@ -193,4 +193,6 @@ void File3DS::load(const std::string& filename)
 	}
 
 	lib3ds_file_free(pFile);
+
+	return true;
 }

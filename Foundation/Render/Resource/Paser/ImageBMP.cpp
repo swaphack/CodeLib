@@ -48,18 +48,18 @@ ImageBMP::~ImageBMP()
 
 }
 
-void ImageBMP::load(const std::string& filename)
+bool ImageBMP::load(const std::string& filename)
 {
 	const std::string& fullpath = G_FILEPATH->getFilePath(filename);
 	if (fullpath.empty())
 	{
-		return;
+		return false;
 	}
 
 	FILE* fp;
 	fp = fopen(fullpath.c_str(), "rb");
 	if (fp == NULL){
-		return;
+		return false;
 	}
 
 	BITMAPFILEHEADER fileHeader;
@@ -71,7 +71,8 @@ void ImageBMP::load(const std::string& filename)
 
 	//解析头信息
 	if (fileHeader.bfType != 19778){
-		return;
+		fclose(fp);
+		return false;
 	}
 
 	int bit_depth = infoHeader.biBitCount;
@@ -97,6 +98,8 @@ void ImageBMP::load(const std::string& filename)
 
 	//释放内存
 	free(texels);
+
+	return true;
 }
 
 void ImageBMP::setTextureInfo(int pixel_depth)

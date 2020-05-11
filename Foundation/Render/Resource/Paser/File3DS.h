@@ -12,6 +12,6 @@ namespace render
 		File3DS();								// 初始化数据成员
 		virtual ~File3DS();
 	public:
-		virtual void load(const std::string& filename);
+		virtual bool load(const std::string& filename);
 	};
 }

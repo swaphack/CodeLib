@@ -10,6 +10,6 @@ namespace render
 	public:
 		virtual ~IMediaLoader() {}
 	public:
-		virtual void load(const MediaDefine& mediaDefine) = 0;
+		virtual bool load(const MediaDefine& mediaDefine) = 0;
 	};
 }

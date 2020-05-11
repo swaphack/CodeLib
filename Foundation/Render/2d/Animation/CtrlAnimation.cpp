@@ -1,9 +1,9 @@
 #include "CtrlAnimation.h"
 #include "2d/UI/CtrlFrame.h"
 #include "Common/Audio/CtrlAudioSource.h"
+#include "Common/Action/import.h"
 
 using namespace render;
-
 
 CtrlAnimation::CtrlAnimation()
 :_speedRatio(1.0f)
@@ -16,12 +16,45 @@ CtrlAnimation::CtrlAnimation()
 
 CtrlAnimation::~CtrlAnimation()
 {
-
+	this->unregisterScheduler();
+	SAFE_DELETE(_scheduler);
 }
 
 void CtrlAnimation::draw()
 {
-	Animation::draw();
+	CtrlWidget::draw();
+}
+
+void render::CtrlAnimation::start()
+{
+	this->registerScheduler();
+}
+
+void render::CtrlAnimation::pause()
+{
+	if (_scheduler)
+	{
+		_scheduler->pause();
+	}
+}
+
+void render::CtrlAnimation::resume()
+{
+	if (_scheduler)
+	{
+		_scheduler->resume();
+	}
+}
+
+void render::CtrlAnimation::stop()
+{
+
+	this->unregisterScheduler();
+}
+
+void render::CtrlAnimation::updateAnimation(float interval)
+{
+	this->updateSelf(interval);
 }
 
 void CtrlAnimation::setSpeedRatio(float ratio)
@@ -61,6 +94,26 @@ CtrlFrame* CtrlAnimation::getMovie()
 	return _ctrlFrame;
 }
 
+void render::CtrlAnimation::registerScheduler()
+{
+	this->unregisterScheduler();
+
+	if (_scheduler == nullptr)
+	{
+		_scheduler = new Scheduler();
+		_scheduler->setHandler(SEL_ACTION_UPDATE(CtrlAnimation::updateAnimation));
+	}
+	this->getActionProxy()->runAction(_scheduler);
+}
+
+void render::CtrlAnimation::unregisterScheduler()
+{
+	if (_scheduler)
+	{
+		this->getActionProxy()->stopAction(_scheduler);
+	}
+}
+
 void CtrlAnimation::updateSelf(float interval)
 {
 	_duration += interval * getSpeedRatio();
@@ -79,7 +132,7 @@ void CtrlAnimation::onFrameChange()
 
 bool CtrlAnimation::init()
 {
-	if (!Animation::init())
+	if (!CtrlWidget::init())
 	{
 		return false;
 	}

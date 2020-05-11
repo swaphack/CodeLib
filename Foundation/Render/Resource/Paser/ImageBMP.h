@@ -14,7 +14,7 @@ namespace render
 		ImageBMP();
 		virtual ~ImageBMP();
 	public:
-		virtual void load(const std::string& filename);
+		virtual bool load(const std::string& filename);
 	protected:
 		void setTextureInfo(int pixel_depth);
 	};

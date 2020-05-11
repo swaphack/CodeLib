@@ -37,9 +37,6 @@
     <ClCompile Include="Common\Node\ColorNode.cpp">
       <Filter>Common\Node</Filter>
     </ClCompile>
-    <ClCompile Include="Common\Node\Animation.cpp">
-      <Filter>Common\Node</Filter>
-    </ClCompile>
     <ClCompile Include="Common\Action\ActionProxy.cpp">
       <Filter>Common\Action</Filter>
     </ClCompile>
@@ -456,9 +453,6 @@
       <Filter>Resource\Parser</Filter>
     </ClInclude>
     <ClInclude Include="Common\Node\ColorNode.h">
-      <Filter>Common\Node</Filter>
-    </ClInclude>
-    <ClInclude Include="Common\Node\Animation.h">
       <Filter>Common\Node</Filter>
     </ClInclude>
     <ClInclude Include="Common\Action\ActionProxy.h">

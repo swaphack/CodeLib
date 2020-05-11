@@ -185,13 +185,13 @@ MediaFFmpeg::~MediaFFmpeg()
 	disposeFormatContext();
 }
 
-void MediaFFmpeg::load(const MediaDefine& mediaDefine)
+bool MediaFFmpeg::load(const MediaDefine& mediaDefine)
 {
 	this->loadFFM(mediaDefine);
 
 	if (_formatContext == nullptr)
 	{
-		return;
+		return false;
 	}
 	
 	AVStream* stream = _formatContext->streams[_videoStream];
@@ -211,6 +211,8 @@ void MediaFFmpeg::load(const MediaDefine& mediaDefine)
 // 	}
 
 	this->setFrameRate(fps);
+
+	return true;
 }
 
 

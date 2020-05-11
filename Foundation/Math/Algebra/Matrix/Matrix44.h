@@ -36,7 +36,7 @@ namespace math
 		/**
 		*	标准化,单位矩阵
 		*/
-		void normalize();
+		void loadIdentity();
 		/**
 		*	平移
 		*/
@@ -72,15 +72,15 @@ namespace math
 		/**
 		*	欧拉角
 		*/
-		Vector3 getEularAngle();
+		Vector3 getEularAngle() const;
 		/**
 		*	未知
 		*/
-		Vector3 getPosition();
+		Vector3 getPosition() const;
 		/**
 		*	缩放比例
 		*/
-		Vector3 getScale();
+		Vector3 getScale() const;
 	public:
 		virtual Matrix41 operator*(const Matrix41& mat);
 		virtual Matrix44 operator*(const Matrix44& mat);

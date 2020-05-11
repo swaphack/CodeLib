@@ -14,6 +14,6 @@ namespace render
 		ImageJPEG();
 		virtual ~ImageJPEG();
 	public:
-		virtual void load(const std::string& filename);
+		virtual bool load(const std::string& filename);
 	};
 }

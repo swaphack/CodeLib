@@ -42,7 +42,6 @@ void handNodeMesh(FileFbx* file, FbxNode* node)
 	{
 		return;
 	}
-
 	auto pMesh = CREATE_OBJECT(MeshDetail);
 	pMesh->setMeshName(node->GetName());
 	int meshCount = file->getMeshes().size();
@@ -482,10 +481,13 @@ FileFbx::~FileFbx()
 }
 
 
-void FileFbx::load(const std::string& filename)
+bool FileFbx::load(const std::string& filename)
 {
 	std::string strFilepath = G_FILEPATH->getFilePath(filename);
-
+	if (strFilepath.empty())
+	{
+		return false;
+	}
 	// Initialize the SDK manager. This object handles all our memory management.
 	if (lSdkManager == nullptr)
 	{
@@ -504,7 +506,7 @@ void FileFbx::load(const std::string& filename)
 	if (!lImporter->Initialize(strFilepath.c_str(), -1, lSdkManager->GetIOSettings())) {
 		PRINT("Call to FbxImporter::Initialize() failed.\n");
 		PRINT("Error returned: %s\n\n", lImporter->GetStatus().GetErrorString());
-		return;
+		return false;
 	}
 
 	// Create a new scene so that it can be populated by the imported file.
@@ -523,4 +525,6 @@ void FileFbx::load(const std::string& filename)
 	lImporter->Destroy();
 
 	//lSdkManager->Destroy();
+
+	return true;
 }

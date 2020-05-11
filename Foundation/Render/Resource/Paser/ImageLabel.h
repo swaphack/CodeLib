@@ -70,7 +70,7 @@ namespace render
 		virtual ~ImageLabel();
 	public:
 		// ╪стьнд╠╬
-		virtual void load(const TextDefine& textDefine);
+		virtual bool load(const TextDefine& textDefine);
 	private:
 		LabelStream* _stream;
 	};

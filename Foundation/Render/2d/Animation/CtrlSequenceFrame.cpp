@@ -81,9 +81,13 @@ Texture2D* CtrlSequenceFrame::getNextTexture()
 	imageDefine.format = EIF_PNG;
 
 	Texture2D* texture2D = G_TEXTURE_CACHE->createTexture2D(imageDefine);
+	if (texture2D == nullptr)
+	{
+		return nullptr;
+	}
 	if (!texture2D->isEnable())
 	{
-		delete texture2D;
+		SAFE_DELETE(texture2D);
 		return nullptr;
 	}
 	return texture2D;

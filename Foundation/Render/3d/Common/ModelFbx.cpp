@@ -17,11 +17,14 @@ ModelFbx::~ModelFbx()
 
 void ModelFbx::load(const std::string& filepath)
 {
-	auto task = std::thread([this, filepath](){
+	this->startThread([this, filepath](){
 		FileFbx* pFile = Loader::load<FileFbx>(filepath);
+		if (!pFile)
+		{
+			return;
+		}
 		this->setModelData(pFile);
 		SAFE_DELETE(pFile);
 	});
-	task.detach();
 }
 

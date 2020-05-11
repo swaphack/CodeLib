@@ -51,7 +51,7 @@ namespace math
 		*	几何上(1,0,0,0)和(-1,0,0,0)都可以作为单位四元数因为角位移都一样，
 		*	一般用(1,0,0,0)表示为单位四元数
 		*/
-		static Quaternion unit();
+		static Quaternion identity();
 		/**
 		*	负四元数
 		*/

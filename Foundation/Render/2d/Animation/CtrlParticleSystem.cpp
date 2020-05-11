@@ -86,7 +86,7 @@ CtrlParticleSystem::~CtrlParticleSystem()
 
 bool CtrlParticleSystem::init()
 {
-	if (!Animation::init())
+	if (!CtrlAnimation::init())
 	{
 		return false;
 	}

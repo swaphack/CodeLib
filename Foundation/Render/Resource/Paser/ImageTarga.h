@@ -14,7 +14,7 @@ namespace render
 		ImageTarga();
 		virtual ~ImageTarga();
 	public:
-		virtual void load(const std::string& filename);
+		virtual bool load(const std::string& filename);
 	protected:
 		// 获取纹理信息
 		void setTextureInfo(int pixel_depth);

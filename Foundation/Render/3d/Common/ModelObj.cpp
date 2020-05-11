@@ -16,12 +16,14 @@ ModelObj::~ModelObj()
 
 void ModelObj::load(const std::string& filepath)
 {
-	auto task = std::thread([this, filepath](){
+	this->startThread([this, filepath](){
 		FileObj* pFile = Loader::load<FileObj>(filepath);
+		if (!pFile)
+		{
+			return;
+		}
 		this->setModelData(pFile);
 		SAFE_DELETE(pFile);
 	});
-
-	task.detach();
 }
 

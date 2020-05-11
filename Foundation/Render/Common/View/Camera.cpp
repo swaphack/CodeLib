@@ -107,7 +107,7 @@ void Camera::updateTranform()
 {
 	GLMatrix::loadIdentity();
 
-	GLMatrix::multMatrix(_localMat);
+	GLMatrix::multMatrix(_localMatrix);
 
 	GLDebug::showError();
 }
@@ -124,7 +124,7 @@ const math::Matrix44& render::Camera::getProjectMatrix() const
 
 const math::Matrix44& render::Camera::getViewMatrix() const
 {
-	return _localMat;
+	return _localMatrix;
 }
 
 void render::Camera::updateViewPort()

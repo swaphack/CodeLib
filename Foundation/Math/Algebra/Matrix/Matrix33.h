@@ -19,7 +19,7 @@ namespace math
 		/**
 		*	标准化,单位矩阵
 		*/
-		void normalize();
+		void loadIdentity();
 		/**
 		*	平移
 		*/

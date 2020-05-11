@@ -12,6 +12,6 @@ namespace render
 		FileFbx();
 		virtual ~FileFbx();
 	public:
-		virtual void load(const std::string& filename);
+		virtual bool load(const std::string& filename);
 	};
 }

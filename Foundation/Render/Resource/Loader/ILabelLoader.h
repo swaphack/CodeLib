@@ -10,6 +10,6 @@ namespace render
 	public:
 		virtual ~ILabelLoader() {}
 	public:
-		virtual void load(const TextDefine& textDefine) = 0;
+		virtual bool load(const TextDefine& textDefine) = 0;
 	};
 }

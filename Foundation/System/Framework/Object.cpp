@@ -55,3 +55,8 @@ void Object::setID(uint64_t id)
 {
 	_id = id;
 }
+
+void Object::startThread(const std::function<void()>& func)
+{
+	G_AUTORELEASEPOOL->startThread(func);
+}

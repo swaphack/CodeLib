@@ -18,12 +18,12 @@ FileObj::~FileObj()
 {
 }
 
-void FileObj::load(const std::string& filename)
+bool FileObj::load(const std::string& filename)
 {
 	std::string strFilepath = G_FILEPATH->getFilePath(filename);
 	if (strFilepath.empty())
 	{
-		return;
+		return false;
 	}
 	// Initialize Loader
 	objl::Loader loader;
@@ -32,7 +32,7 @@ void FileObj::load(const std::string& filename)
 	bool loadout = loader.LoadFile(strFilepath);
 	if (!loadout)
 	{
-		return;
+		return false;
 	}
 
 	std::string dir;
@@ -167,5 +167,6 @@ void FileObj::load(const std::string& filename)
 		}
 	}
 	
+	return true;
 }
 

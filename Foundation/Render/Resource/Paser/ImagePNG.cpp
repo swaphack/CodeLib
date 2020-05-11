@@ -36,8 +36,14 @@ int ImagePNG::setTextureInfo(int color_type)
 	return 0;
 }
 
-void ImagePNG::load(const std::string& filename)
+bool ImagePNG::load(const std::string& filename)
 {
+	const std::string& fullpath = G_FILEPATH->getFilePath(filename);
+	if (fullpath.empty())
+	{
+		return false;
+	}
+
 	//gl_texture_t *texinfo;
 	png_byte magic[8];
 	png_structp png_ptr;
@@ -49,17 +55,11 @@ void ImagePNG::load(const std::string& filename)
 	png_byte* texels;
 	png_uint_32 rowbytes;
 
-	const std::string& fullpath = G_FILEPATH->getFilePath(filename);
-	if (fullpath.empty())
-	{
-		return;
-	}
-
 	/* Open image file */
 	int result = fopen_s(&fp, fullpath.c_str(), "rb");
 	if (result != 0)
 	{
-		return;
+		return false;
 	}
 	/* Read magic number */
 	fread(magic, 1, sizeof (magic), fp);
@@ -67,14 +67,14 @@ void ImagePNG::load(const std::string& filename)
 	if (!png_check_sig(magic, sizeof (magic)))
 	{
 		fclose(fp);
-		return;
+		return false;
 	}
 	/* Create a png read struct */
 	png_ptr = png_create_read_struct(PNG_LIBPNG_VER_STRING, NULL, NULL, NULL);
 	if (!png_ptr)
 	{
 		fclose(fp);
-		return;
+		return false;
 	}
 	/* Create a png info struct */
 	info_ptr = png_create_info_struct(png_ptr);
@@ -82,14 +82,14 @@ void ImagePNG::load(const std::string& filename)
 	{
 		fclose(fp);
 		png_destroy_read_struct(&png_ptr, NULL, NULL);
-		return;
+		return false;
 	}
 	/* Initialize the setjmp for returning properly after a libpng error occured */
 	if (setjmp(png_jmpbuf(png_ptr)))
 	{
 		fclose(fp);
 		png_destroy_read_struct(&png_ptr, &info_ptr, NULL);
-		return;
+		return false;
 	}
 	/* Setup libpng for using standard C fread() function with our FILE pointer */
 	png_init_io(png_ptr, fp);
@@ -140,6 +140,8 @@ void ImagePNG::load(const std::string& filename)
 	this->setPixels(texels, w, h, unitSize);
 
 	free(texels);
+
+	return true;
 }
 
 

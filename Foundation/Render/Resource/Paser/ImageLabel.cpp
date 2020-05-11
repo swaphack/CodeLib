@@ -536,7 +536,7 @@ ImageLabel::~ImageLabel()
 	SAFE_DELETE(_stream);
 }
 
-void ImageLabel::load(const TextDefine& textDefine)
+bool ImageLabel::load(const TextDefine& textDefine)
 {
 	_stream->setFixWidth((uint32_t)textDefine.width * RGBA_PIXEL_UNIT);
 
@@ -544,7 +544,7 @@ void ImageLabel::load(const TextDefine& textDefine)
 	if (!label->load(textDefine, _stream))
 	{
 		SAFE_DELETE(label);
-		return;
+		return false;
 	}
 	SAFE_DELETE(label);
 
@@ -563,6 +563,8 @@ void ImageLabel::load(const TextDefine& textDefine)
 
 	free(destPixels);
 	_stream->clear();
+
+	return true;
 }
 
 

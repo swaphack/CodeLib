@@ -1,6 +1,7 @@
 #include "AutoReleasePool.h"
 #include "Object.h"
 #include <vector>
+#include <thread>
 
 using namespace sys;
 
@@ -42,6 +43,10 @@ void AutoReleasePool::clear()
 
 void AutoReleasePool::checkAutoRelease()
 {
+	if (_threadCount != 0)
+	{
+		return;
+	}
 	std::vector<Object*> removeObjects;
 
 	std::set<Object*>::iterator it = _objects.begin();
@@ -62,4 +67,25 @@ void AutoReleasePool::checkAutoRelease()
 		(*roIter)->dispose();
 		roIter++;
 	}
+}
+
+void sys::AutoReleasePool::startThread(const std::function<void()>& func)
+{
+	if (func == nullptr)
+	{
+		return;
+	}
+
+	_threadCount++;
+	auto task = std::thread([func, this]() {
+		func();
+		endThread();
+	});
+
+	task.detach();
+}
+
+void sys::AutoReleasePool::endThread()
+{
+	_threadCount--;
 }

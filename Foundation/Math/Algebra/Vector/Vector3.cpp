@@ -71,6 +71,16 @@ Vector3 Vector3::operator*(const Vector3& vec) const
 	return Vector3(getX() * vec.getX(), getY() * vec.getY(), getZ() * vec.getZ());
 }
 
+Vector3 Vector3::operator/(const Vector3& vec) const
+{
+	if (vec.getX() == 0 || vec.getY() == 0 || vec.getZ() == 0)
+	{
+		return *this;
+	}
+
+	return Vector3(getX() / vec.getX(), getY() / vec.getY(), getZ() / vec.getZ());
+}
+
 Vector3 Vector3::operator*(float k) const
 {
 	return Vector3(getX() * k, getY() * k, getZ() * k);
@@ -115,6 +125,20 @@ Vector3& Vector3::operator*=(const Vector3& vec)
 	setX(getX() * vec.getX());
 	setY(getY() * vec.getY());
 	setZ(getZ() * vec.getZ());
+
+	return *this;
+}
+
+Vector3& Vector3::operator/=(const Vector3& vec)
+{
+	if (vec.getX() == 0 || vec.getY() == 0 || vec.getZ() == 0)
+	{
+		return *this;
+	}
+
+	setX(getX() / vec.getX());
+	setY(getY() / vec.getY());
+	setZ(getZ() / vec.getZ());
 
 	return *this;
 }

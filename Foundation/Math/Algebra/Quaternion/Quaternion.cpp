@@ -36,7 +36,7 @@ Quaternion::Quaternion(float w, const Vector3& vector)
 	this->setW(w);
 }
 
-Quaternion Quaternion::unit()
+Quaternion Quaternion::identity()
 {
 	return Quaternion(1, 0, 0, 0);
 }

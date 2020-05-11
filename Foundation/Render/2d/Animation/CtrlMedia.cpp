@@ -112,6 +112,10 @@ void CtrlMedia::loadFromURL(const std::string& url, bool defaultSize)
 	this->stop();
 
 	_media = Loader::load<MediaFFmpeg>(_mediaDefine);
+	if (!_media)
+	{
+		return;
+	}
 	this->setFrameRate(1.0f / _media->getFrameRate());
 
 	// Ä¬ÈÏ´óĞ¡

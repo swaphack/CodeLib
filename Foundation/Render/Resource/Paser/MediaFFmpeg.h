@@ -43,7 +43,7 @@ namespace render
 		virtual ~MediaFFmpeg();
 	public:
 		// 加载视频
-		virtual void load(const MediaDefine& mediaDefine);
+		virtual bool load(const MediaDefine& mediaDefine);
 		// 获取下一帧视频
 		virtual ImageDetail* getNextPicture();
 		// 获取下一帧音频图片

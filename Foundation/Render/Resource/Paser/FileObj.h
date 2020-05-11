@@ -12,6 +12,6 @@ namespace render
 		FileObj();								
 		virtual ~FileObj();
 	public:
-		virtual void load(const std::string& filename);
+		virtual bool load(const std::string& filename);
 	};
 }

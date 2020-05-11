@@ -8,7 +8,7 @@ using namespace math;
 Matrix44::Matrix44()
 :Matrix(4, 4)
 {
-	this->normalize();
+	this->loadIdentity();
 }
 
 Matrix44::Matrix44(const Matrix44& mat)
@@ -37,7 +37,7 @@ Matrix44::Matrix44(float* value)
 	this->set(value, 4, 4);
 }
 
-void Matrix44::normalize()
+void Matrix44::loadIdentity()
 {
 	(*this)[0] = 1;  (*this)[1] = 0;  (*this)[2] = 0;  (*this)[3] = 0; // x
 	(*this)[4] = 0;  (*this)[5] = 1;  (*this)[6] = 0;  (*this)[7] = 0; // y
@@ -205,7 +205,7 @@ Matrix44 Matrix44::operator*(const Matrix44& mat)
 	return Matrix44(mat1);
 }
 
-Vector3 Matrix44::getEularAngle()
+Vector3 Matrix44::getEularAngle() const
 {
 	float r32 = getValue((size_t)1, (size_t)2);
 	float r33 = getValue((size_t)2, (size_t)2);
@@ -324,12 +324,12 @@ math::Matrix44 math::Matrix44::getTSR(const Vector3& translate, const Vector3& s
 	return matTranslate * matScale * matRotate;
 }
 
-math::Vector3 math::Matrix44::getPosition()
+math::Vector3 math::Matrix44::getPosition() const
 {
 	return Vector3((*this)[12], (*this)[13], (*this)[14]);
 }
 
-math::Vector3 math::Matrix44::getScale()
+math::Vector3 math::Matrix44::getScale() const
 {
 	return Vector3((*this)[0], (*this)[5], (*this)[10]);
 }

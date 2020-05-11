@@ -1,6 +1,7 @@
 #pragma once
 
 #include <cstdint>
+#include <functional>
 
 namespace sys
 {
@@ -20,6 +21,8 @@ namespace sys
 		void dispose();
 		// 自动释放，需要调用G_AUTORELEASEPOOL的管理
 		void autoRelease();
+
+		void startThread(const std::function<void()>& func);
 	public:
 		template<typename T>
 		bool is()
@@ -46,7 +49,7 @@ namespace sys
 
 #define CREATE_OBJECT(OBJECT_TYPE) sys::createObject<OBJECT_TYPE>()
 
-	template<typename T>
+	template<typename T, typename=std::enable_if<std::is_base_of<Object, T>::value, T>::type>
 	T* createObject()
 	{
 		T* temp = new T();

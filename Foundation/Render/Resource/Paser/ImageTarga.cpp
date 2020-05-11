@@ -12,12 +12,12 @@ ImageTarga::~ImageTarga()
 
 }
 
-void ImageTarga::load(const std::string& filename)
+bool ImageTarga::load(const std::string& filename)
 {
 	const std::string& fullpath = G_FILEPATH->getFilePath(filename);
 	if (fullpath.empty())
 	{
-		return;
+		return false;
 	}
 
 	tga_image image;
@@ -25,7 +25,7 @@ void ImageTarga::load(const std::string& filename)
 	if (TGA_NOERR != result)
 	{
 		PRINT("READ TGA Error id : %d", result);
-		return;
+		return false;
 	}
 
 	// Make sure the image is left to right
@@ -50,6 +50,8 @@ void ImageTarga::load(const std::string& filename)
 	tga_free_buffers(&image);
 
 	free(val);
+
+	return true;
 }
 
 void ImageTarga::setTextureInfo(int pixel_depth)

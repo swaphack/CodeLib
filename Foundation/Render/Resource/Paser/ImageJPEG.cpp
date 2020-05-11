@@ -13,12 +13,12 @@ ImageJPEG::~ImageJPEG()
 
 }
 
-void ImageJPEG::load(const std::string& filename)
+bool ImageJPEG::load(const std::string& filename)
 {
 	const std::string& fullpath = G_FILEPATH->getFilePath(filename);
 	if (fullpath.empty())
 	{
-		return;
+		return false;
 	}
 
 	struct jpeg_decompress_struct jds;
@@ -28,7 +28,8 @@ void ImageJPEG::load(const std::string& filename)
 	int result = fopen_s(&fptr, fullpath.c_str(), "rb");
 	if (result != 0)
 	{
-		return;
+		fclose(fptr);
+		return false;
 	}
 
 	jds.err = jpeg_std_error(&jem);
@@ -65,4 +66,6 @@ void ImageJPEG::load(const std::string& filename)
 	this->setPixels(buffer, jds.output_width, jds.output_height, internalFormat);
 
 	free(buffer);
+
+	return true;
 }

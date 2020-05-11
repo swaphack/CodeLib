@@ -6,7 +6,7 @@ using namespace math;
 Matrix33::Matrix33() 
 :Matrix(3, 3)
 {
-	this->normalize();
+	this->loadIdentity();
 }
 
 Matrix33::Matrix33(const Vector3& row0, const Vector3& row1, const Vector3& row2)
@@ -22,7 +22,7 @@ Matrix33::~Matrix33()
 
 }
 
-void Matrix33::normalize()
+void Matrix33::loadIdentity()
 {
 	(*this)[0] = 1; (*this)[1] = 0; (*this)[2] = 0; // x
 	(*this)[3] = 0; (*this)[4] = 1; (*this)[5] = 0; // y

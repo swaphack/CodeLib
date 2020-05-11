@@ -16,7 +16,7 @@ Node::Node()
 ,_bVisibled(false)
 ,_bTouchEnabled(false)
 ,_actionProxy(nullptr)
-, _bRelative(true)
+, _bRelativeToParent(true)
 , _zOrder(0.0f)
 , _touchProxy(nullptr)
 {
@@ -269,17 +269,12 @@ ActionProxy* Node::getActionProxy()
 
 bool Node::isRelativeWithParent()
 {
-	return _bRelative;
+	return _bRelativeToParent;
 }
 
 void Node::setRelativeWithParent(bool status)
 {
-	_bRelative = status;
-}
-
-bool Node::containTouchPoint(float x, float y)
-{
-	return false;
+	_bRelativeToParent = status;
 }
 
 TouchProxy* Node::getTouchProxy()
@@ -304,14 +299,14 @@ void Node::updateTranform()
 		GLMatrix::loadIdentity();
 	}
 
-	GLMatrix::multMatrix(_localMat);
+	GLMatrix::multMatrix(_localMatrix);
 
 	GLDebug::showError();
 }
 
 void Node::inverseTranform()
 {
-	GLMatrix::multMatrix(_localInverseMat);
+	GLMatrix::multMatrix(_localInverseMatrix);
 
 	if (!this->isRelativeWithParent())
 	{
@@ -382,9 +377,9 @@ void Node::calRealSpaceInfo()
 
 void Node::calRealSpaceByMatrix()
 {
-	_localMat = math::Matrix44::getRST(_obRotation, getScale(), _obPosition);
+	_localMatrix = math::Matrix44::getRST(_obRotation, getScale(), _obPosition);
 
-	_localInverseMat = _localMat.getInverse();
+	_localInverseMatrix = _localMatrix.getInverse();
 
 	//PRINT("mat\n%s\n", _mat44.toString().c_str());
 
@@ -409,7 +404,7 @@ void Node::calRealSpaceByMatrix()
 		ret = item * ret;
 	}
 
-	_worldMat = ret;
+	_worldMatrix = ret;
 }
 
 void Node::onSpaceChange()
@@ -429,12 +424,30 @@ void Node::onChildrenChange()
 
 const math::Matrix44& Node::getWorldMatrix() const
 {
-	return _worldMat;
+	return _worldMatrix;
 }
 
 const math::Matrix44& Node::getLocalMatrix() const
 {
-	return _localMat;
+	return _localMatrix;
+}
+
+math::Vector3 render::Node::convertWorldPostitionToLocal(const math::Vector3& point)
+{
+	math::Vector3 vec = point;
+	vec -= _worldMatrix.getPosition();
+	vec /= _worldMatrix.getScale();
+
+	return vec;
+}
+
+math::Vector3 render::Node::convertLocalPostitionToWorld(const math::Vector3& point)
+{
+	math::Vector3 vec = point;
+	vec += _worldMatrix.getPosition();
+	vec *= _worldMatrix.getScale();
+
+	return vec;
 }
 
 void Node::drawNode()

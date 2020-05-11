@@ -3,7 +3,7 @@
 #include "system.h"
 #include "Common/Node/ColorNode.h"
 #include "Particle.h"
-#include "Common/Node/Animation.h"
+#include "CtrlAnimation.h"
 
 namespace render
 {
@@ -27,7 +27,7 @@ namespace render
 	};
 
 	// 粒子系统
-	class CtrlParticleSystem : public Animation // 还有问题
+	class CtrlParticleSystem : public CtrlAnimation // 还有问题
 	{
 	public:
 		CtrlParticleSystem();

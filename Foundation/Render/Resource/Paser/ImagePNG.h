@@ -14,7 +14,7 @@ namespace render
 		ImagePNG();
 		virtual ~ImagePNG();
 	public:
-		virtual void load(const std::string& filename);
+		virtual bool load(const std::string& filename);
 	private:
 		// 获取纹理信息
 		int setTextureInfo(int color_type);

@@ -10,27 +10,6 @@ namespace render
 	class ActionProxy;
 	class TouchProxy;
 
-#define CREATE_NODE(NODE_TYPE) render::createNode<NODE_TYPE>()
-
-	template<typename T>
-	T* createNode()
-	{
-		T* temp = new T();
-		if (temp == nullptr)
-		{
-			return nullptr;
-		}
-		if (temp && temp->init() == false)
-		{
-			delete temp;
-			return nullptr;
-		}
-
-		AUTO_RELEASE_OBJECT(temp);
-
-		return temp;
-	}
-
 	/**
 	glLoadIdentity();
 	glMultMatrixf(M);           //glScale*();
@@ -44,6 +23,7 @@ namespace render
 
 	2.因为在opengl中坐标表示形式是：[x,y,z]T(表示转置)，或者齐次坐标下：[x,y,z,w]T标准化后[x/w,y/w,z/w,1.0]T 这就决定了矩阵也是列优先表示的。
 	将上面的两个矩阵作用于点V,则表示为:M×N×V；满足矩阵相乘的条件：[4×4] * [4×1].
+
 	*/
 	// 绘制节点
 	class Node : 
@@ -120,17 +100,17 @@ namespace render
 		// 设置是否和父节点关联
 		void setRelativeWithParent(bool status);
 	public:
-		// 点击是否命中
-		virtual bool containTouchPoint(float x, float y);
 		// 获取触摸代理
 		TouchProxy* getTouchProxy();
-		// 矩形定点
-		const RectVertex& getRectVertex();
 	public:
 		// 世界矩阵
 		const math::Matrix44& getWorldMatrix() const;
 		// 相对父节点的矩阵
 		const math::Matrix44& getLocalMatrix() const;
+		// 将世界坐标转化为本地坐标
+		math::Vector3 convertWorldPostitionToLocal(const math::Vector3& point);
+		// 将本地坐标转化为世界坐标
+		math::Vector3 convertLocalPostitionToWorld(const math::Vector3& point);
 	protected:
 		// 更新空间矩阵
 		virtual void updateTranform();
@@ -176,7 +156,7 @@ namespace render
 		// 是否可点击
 		bool _bTouchEnabled = false;
 		// 是否和父节点关联
-		bool _bRelative = false;
+		bool _bRelativeToParent = false;
 		// 动作代理
 		ActionProxy* _actionProxy;
 		// 触摸代理
@@ -184,10 +164,32 @@ namespace render
 		// 通知
 		Notify<int>* _notify;
 		// 相对于父节点的矩阵
-		math::Matrix44 _localMat;
+		math::Matrix44 _localMatrix;
 		// 逆矩阵
-		math::Matrix44 _localInverseMat;
+		math::Matrix44 _localInverseMatrix;
 		// 实际在世界坐标系中的矩阵
-		math::Matrix44 _worldMat;
+		math::Matrix44 _worldMatrix;
 	};
+
+
+#define CREATE_NODE(NODE_TYPE) render::createNode<NODE_TYPE>()
+
+	template<typename T, typename = std::enable_if<std::is_base_of<Node, T>::value, T>::type>
+	T* createNode()
+	{
+		T* temp = new T();
+		if (temp == nullptr)
+		{
+			return nullptr;
+		}
+		if (temp && temp->init() == false)
+		{
+			delete temp;
+			return nullptr;
+		}
+
+		AUTO_RELEASE_OBJECT(temp);
+
+		return temp;
+	}
 }

@@ -65,6 +65,10 @@ namespace math
 		*/
 		virtual Vector3 operator*(const Vector3& vec) const;
 		/**
+		*	相除
+		*/
+		virtual Vector3 operator/(const Vector3& vec) const;
+		/**
 		*	相乘
 		*/
 		Vector3 operator*(float k) const;
@@ -84,6 +88,10 @@ namespace math
 		*	相乘
 		*/
 		virtual Vector3& operator*=(const Vector3& vec);
+		/**
+		*	相除
+		*/
+		virtual Vector3& operator/=(const Vector3& vec);
 		/**
 		*	相乘
 		*/

@@ -14,7 +14,11 @@ namespace render
 		static T* load(const std::string& filename)
 		{
 			T* t = new T();
-			t->load(filename);
+			if (!t->load(filename))
+			{
+				delete t;
+				return nullptr;
+			}
 			return t;
 		}
 		// 加载文字
@@ -22,7 +26,11 @@ namespace render
 		static T* load(const TextDefine& textDefine)
 		{
 			T* t = new T();
-			t->load(textDefine);
+			if (!t->load(textDefine))
+			{
+				delete t;
+				return nullptr;
+			}
 			return t;
 		}
 		// 加载媒体
@@ -30,7 +38,11 @@ namespace render
 		static T* load(const MediaDefine& mediaDefine)
 		{
 			T* t = new T();
-			t->load(mediaDefine);
+			if (!t->load(mediaDefine))
+			{
+				delete t;
+				return nullptr;
+			}
 			return t;
 		}
 	};	
