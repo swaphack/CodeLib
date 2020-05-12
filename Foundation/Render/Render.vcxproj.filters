@@ -396,6 +396,9 @@
     <ClCompile Include="Common\Fragment\StencilTest.cpp">
       <Filter>Common\Fragment</Filter>
     </ClCompile>
+    <ClCompile Include="Common\Fragment\DepthTest.cpp">
+      <Filter>Common\Fragment</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Common\Node\import.h">
@@ -967,6 +970,9 @@
       <Filter>Common\Fragment</Filter>
     </ClInclude>
     <ClInclude Include="Common\Fragment\StencilTest.h">
+      <Filter>Common\Fragment</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Fragment\DepthTest.h">
       <Filter>Common\Fragment</Filter>
     </ClInclude>
   </ItemGroup>

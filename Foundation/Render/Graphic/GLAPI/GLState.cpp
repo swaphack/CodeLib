@@ -167,7 +167,7 @@ void GLState::setCullFace(FaceType mode)
 	glCullFace((GLenum)mode);
 }
 
-void GLState::testDepth(DepthFunction func)
+void GLState::setDepthFunc(DepthFunction func)
 {
 	glDepthFunc((GLenum)func);
 }

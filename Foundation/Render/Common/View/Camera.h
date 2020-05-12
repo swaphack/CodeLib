@@ -52,9 +52,9 @@ namespace render
 	protected:
 		virtual void updateView();
 		// 更新空间矩阵
-		virtual void updateTranform();
+		virtual void startUpdateTranform();
 		// 翻转空间矩阵
-		virtual void inverseTranform();
+		virtual void endUpdateTranform();
 		//视窗大小发生改变
 		virtual void updateViewPort();
 	protected:

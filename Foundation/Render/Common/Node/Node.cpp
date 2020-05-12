@@ -230,7 +230,9 @@ void Node::visit()
 
 	this->notifyEvents();	
 		
-	this->updateTranform();
+	this->startUpdateTranform();
+
+	this->startFragmentTest();
 
 	if (_children.size() == 0)
 	{
@@ -252,8 +254,8 @@ void Node::visit()
 			it++;
 		}
 	}
-
-	this->inverseTranform();
+	this->endFragmentTest();
+	this->endUpdateTranform();
 }
 
 ActionProxy* Node::getActionProxy()
@@ -289,7 +291,7 @@ void Node::draw()
 
 }
 
-void Node::updateTranform()
+void Node::startUpdateTranform()
 {
 	if (!this->isRelativeWithParent())
 	{
@@ -302,7 +304,7 @@ void Node::updateTranform()
 	GLDebug::showError();
 }
 
-void Node::inverseTranform()
+void Node::endUpdateTranform()
 {
 	GLMatrix::multMatrix(_localInverseMatrix);
 
@@ -310,6 +312,14 @@ void Node::inverseTranform()
 	{
 		GLMatrix::popMatrix();
 	}
+}
+
+void render::Node::startFragmentTest()
+{
+}
+
+void render::Node::endFragmentTest()
+{
 }
 
 void Node::notifyEvents()

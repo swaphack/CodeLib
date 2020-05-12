@@ -74,13 +74,13 @@ void Camera::visit()
 
 	GLMatrix::applyProjection();
 	
-	this->updateTranform();
+	this->startUpdateTranform();
 
 	this->updateView();
 
 	//GLMatrix::popMatrix();
 
-	this->inverseTranform();
+	this->endUpdateTranform();
 }
 
 void Camera::setMainCamera(CameraDimensions d)
@@ -103,7 +103,7 @@ void Camera::updateView()
 
 }
 
-void Camera::updateTranform()
+void Camera::startUpdateTranform()
 {
 	GLMatrix::loadIdentity();
 
@@ -112,7 +112,7 @@ void Camera::updateTranform()
 	GLDebug::showError();
 }
 
-void Camera::inverseTranform()
+void Camera::endUpdateTranform()
 {
 
 }

@@ -51,10 +51,10 @@ namespace render
 		// 获取模板节点
 		Node* getStencilNode();
 	protected:
-		// 更新空间矩阵
-		virtual void updateTranform();
-		// 翻转空间矩阵
-		virtual void inverseTranform();
+		// 开启片元测试
+		virtual void startFragmentTest();
+		// 结束片元测试
+		virtual void endFragmentTest();
 	protected:
 		void saveStencilData();
 		void resetStencilData();

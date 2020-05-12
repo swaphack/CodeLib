@@ -22,6 +22,8 @@ Stencil::~Stencil()
 void showStencilInformation()
 {
 	int value = 0;
+	GLState::getInt(GetTarget::STENCIL_TEST, &value);
+	PRINT("STENCIL_TEST %d\n", value);
 	GLState::getInt(GetTarget::STENCIL_FUNC, &value);
 	PRINT("GL_STENCIL_FUNC %d\n", value);
 	GLState::getInt(GetTarget::STENCIL_REF, &value);
@@ -34,6 +36,8 @@ void showStencilInformation()
 	PRINT("GL_STENCIL_PASS_DEPTH_FAIL %d\n", value);
 	GLState::getInt(GetTarget::STENCIL_PASS_DEPTH_PASS, &value);
 	PRINT("GL_STENCIL_PASS_DEPTH_PASS %d\n", value);
+	GLState::getInt(GetTarget::STENCIL_WRITEMASK, &value);
+	PRINT("GL_STENCIL_WRITEMASK %d\n", value);
 	PRINT("==============================================\n\n");
 }
 
@@ -53,18 +57,18 @@ Node* Stencil::getStencilNode()
 	return _stencilNode;
 }
 
-void render::Stencil::updateTranform()
+void render::Stencil::startFragmentTest()
 {
-	Node::updateTranform();
 
 	this->saveStencilData();
 
-	//GLState::setDepthMask(false);
-	//GLState::setColorMask(false, false, false, false);
-	//GLState::setStencilMask(0xFF);
+	//
 
-	GLState::setStencilFunc(StencilFunction::EQUAL, 1, 0xFF);
-	GLState::setStencilOp(StencilOpResult::KEEP, StencilOpResult::KEEP, StencilOpResult::KEEP);
+	GLState::enable(EnableModel::STENCIL_TEST);
+	GLState::setStencilFunc(StencilFunction::ALWAYS, 0x01, 0xFF);
+	GLState::setStencilOp(StencilOpResult::KEEP, StencilOpResult::KEEP, StencilOpResult::REPLACE);
+	GLState::setStencilMask(0xff);
+	//GLState::setDepthMask(false);
 
 	showStencilInformation();
 
@@ -74,14 +78,16 @@ void render::Stencil::updateTranform()
 	}
 
 	//GLState::setDepthMask(true);
-	//GLState::setColorMask(true, true, true, true);
-	//GLState::setStencilMask(0x0);
 
-	GLState::setStencilFunc(StencilFunction::NOTEQUAL, 0x1, 0xFF);
-	//GLState::setStencilOp(StencilOpResult::KEEP, StencilOpResult::KEEP, StencilOpResult::KEEP);
+	GLState::setStencilFunc(StencilFunction::NOTEQUAL, 0x01, 0x0FF);
+	GLState::setStencilOp(StencilOpResult::KEEP, StencilOpResult::KEEP, StencilOpResult::REPLACE);
+	GLState::setStencilMask(0x00);
+	GLState::disable(EnableModel::STENCIL_TEST);
+
+	showStencilInformation();
 }
 
-void render::Stencil::inverseTranform()
+void render::Stencil::endFragmentTest()
 {
 	this->resetStencilData();
 
@@ -91,8 +97,6 @@ void render::Stencil::inverseTranform()
 	}
 
 	GLDebug::showError();
-
-	Node::inverseTranform();
 }
 
 void render::Stencil::saveStencilData()

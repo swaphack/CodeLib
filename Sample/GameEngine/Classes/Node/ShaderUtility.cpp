@@ -60,9 +60,12 @@ void ShaderUtility::updateNodeShader(render::CtrlFrame* node)
 	runRotateAction(node);
 }
 
-void ShaderUtility::updateNodeShader(render::Model* node)
+void ShaderUtility::updateNodeShader(render::Model* node, bool autoRotate)
 {
 	loadShader(node->getMaterial(), texture3dVertexPath, texture3dFragmentPath);
 	initShaderAttrib(node->getMaterial());
-	runRotateAction(node);
+	if (autoRotate)
+	{
+		runRotateAction(node);
+	}
 }

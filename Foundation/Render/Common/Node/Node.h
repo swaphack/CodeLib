@@ -111,11 +111,17 @@ namespace render
 		math::Vector3 convertWorldPostitionToLocal(const math::Vector3& point);
 		// 将本地坐标转化为世界坐标
 		math::Vector3 convertLocalPostitionToWorld(const math::Vector3& point);
+
+		virtual bool containTouchPoint(float x, float y) { return false; }
 	protected:
 		// 更新空间矩阵
-		virtual void updateTranform();
-		// 翻转空间矩阵
-		virtual void inverseTranform();
+		virtual void startUpdateTranform();
+		// 逆转空间矩阵
+		virtual void endUpdateTranform();
+		// 开启片元测试
+		virtual void startFragmentTest();
+		// 结束片元测试
+		virtual void endFragmentTest();
 	public:
 		void notifyToAll(int id);
 

@@ -70,7 +70,7 @@ namespace render
 		/**
 		*	深度测试
 		*/
-		static void testDepth(DepthFunction func);
+		static void setDepthFunc(DepthFunction func);
 		/**
 		*	深度是否可写
 		*/
