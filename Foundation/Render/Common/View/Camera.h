@@ -5,11 +5,11 @@
 namespace render
 {
 	// 维度模式
-	enum CameraDimensions
+	enum class CameraDimensions
 	{
-		ED_NONE,
-		ED_2D,
-		ED_3D
+		NONE,
+		D2,
+		D3
 	};
 
 	// 视窗参数

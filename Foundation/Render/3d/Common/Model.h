@@ -1,18 +1,22 @@
 #pragma once
 
-#include "Common/Node/ColorNode.h"
+#include "Common/DrawNode/DrawNode.h"
 
 #include <map>
 #include <string>
 
-namespace render
+namespace sys
 {
 	class ModelDetail;
-	class Material;
+}
+
+namespace render
+{
 	class Mesh;
+	class Material;
 
 	// 模型
-	class Model : public ColorNode
+	class Model : public DrawNode
 	{
 	public:
 		Model();
@@ -20,19 +24,11 @@ namespace render
 	public:
 		// 务必调用，包含属性修改时通知
 		virtual bool init();
-	protected:
-		virtual void drawSample();
 	public:
-		void setModelData(ModelDetail* detail);
-	public:
-		Material* getMaterial();
-		Mesh* getMesh();
+		void setModelData(sys::ModelDetail* detail);
 	protected:
-		void drawSampleWithClientArray();
-		void drawSampleWithBufferObject();
-	protected:
-		Material* _material = nullptr;
-		Mesh * _mesh = nullptr;
+		virtual void drawing();
+		virtual void drawSampleWithClientArray();
 	private:
 		bool _loadModel = false;
 	};

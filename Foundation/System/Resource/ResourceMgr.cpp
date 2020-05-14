@@ -53,8 +53,8 @@ void ResourceMgr::init()
 {
 	this->dispose();
 
-	_getResMethods[ERT_LOCAL] = new	LocalResource();
-	_getResMethods[ERT_REMOTE] = new RemoteResource();
+	_getResMethods[ResourceType::LOCAL] = new	LocalResource();
+	_getResMethods[ResourceType::REMOTE] = new RemoteResource();
 }
 
 void ResourceMgr::dispose()

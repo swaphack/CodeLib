@@ -22,7 +22,7 @@ Node::Node()
 {
 	this->setVisible(true);
 
-	_notify = new Notify<int>();
+	_notify = new Notify<NodeNotifyType>;
 }
 
 Node::~Node()
@@ -36,11 +36,11 @@ Node::~Node()
 bool Node::init()
 {
 	// 添加属性改变监听
-	_notify->addListen(ENP_SPACE, [&](){
+	_notify->addListen(NodeNotifyType::SPACE, [&](){
 		calSpaceData(); 
 	});
 
-	_notify->addListen(ENP_NODE, [&](){ this->sortChildren(); });
+	_notify->addListen(NodeNotifyType::NODE, [&](){ this->sortChildren(); });
 
 	return true;
 }
@@ -232,8 +232,6 @@ void Node::visit()
 		
 	this->startUpdateTranform();
 
-	this->startFragmentTest();
-
 	if (_children.size() == 0)
 	{
 		this->drawNode();
@@ -254,7 +252,7 @@ void Node::visit()
 			it++;
 		}
 	}
-	this->endFragmentTest();
+
 	this->endUpdateTranform();
 }
 
@@ -312,14 +310,6 @@ void Node::endUpdateTranform()
 	{
 		GLMatrix::popMatrix();
 	}
-}
-
-void render::Node::startFragmentTest()
-{
-}
-
-void render::Node::endFragmentTest()
-{
 }
 
 void Node::notifyEvents()
@@ -380,7 +370,8 @@ void Node::sortChildren()
 // 还未对旋转后坐标进行计算
 void Node::calSpaceData()
 {
-	Tool::convertToOGLPoisition(_position, _obPosition);
+	//Tool::convertToOGLPoisition(_position, _obPosition);
+
 	Tool::convertToRadian(_rotation, _obRotation);
 
 	calRealSpaceByMatrix();
@@ -388,7 +379,9 @@ void Node::calSpaceData()
 
 void Node::calRealSpaceByMatrix()
 {
-	_localMatrix = math::Matrix44::getRST(_obRotation, getScale(), _obPosition);
+	//_localMatrix = math::Matrix44::getRST(_obRotation, getScale(), _obPosition);
+
+	_localMatrix = math::Matrix44::getRST(_obRotation, getScale(), _position);
 
 	_localInverseMatrix = _localMatrix.getInverse();
 
@@ -420,17 +413,17 @@ void Node::calRealSpaceByMatrix()
 
 void Node::onSpaceChange()
 {
-	this->notify(ENP_SPACE);
+	this->notify(NodeNotifyType::SPACE);
 }
 
 void Node::onBodyChange()
 {
-	this->notify(ENP_SPACE);
+	this->notify(NodeNotifyType::SPACE);
 }
 
 void Node::onChildrenChange()
 {
-	this->notify(ENP_NODE);
+	this->notify(NodeNotifyType::NODE);
 }
 
 const math::Matrix44& Node::getWorldMatrix() const
@@ -462,13 +455,13 @@ void Node::drawNode()
 	GLDebug::showError();
 }
 
-void Node::notify(int id)
+void Node::notify(NodeNotifyType id)
 {
 	_notify->addMark(id);
 	setDirty(true);
 }
 
-void render::Node::notifyToAll(int id)
+void render::Node::notifyToAll(NodeNotifyType id)
 {
 	this->notify(id);
 

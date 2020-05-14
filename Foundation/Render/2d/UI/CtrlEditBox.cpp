@@ -11,7 +11,7 @@ CtrlEditBox::CtrlEditBox()
 :_keyboardEnabled(false)
 , _editInputHandler(nullptr)
 {
-	this->getTouchProxy()->addTouchDelegate(ETT_UP, this, TOUCH_DELEGATTE_SELECTOR(CtrlEditBox::onTouchUp));
+	this->getTouchProxy()->addTouchDelegate(render::TouchType::UP, this, TOUCH_DELEGATTE_SELECTOR(CtrlEditBox::onTouchUp));
 
 	this->addKeyboardDelegate();
 }
@@ -32,11 +32,11 @@ void CtrlEditBox::setKeyboardEnable(bool status)
 
 	if (_keyboardEnabled)
 	{
-		this->dispatchInputListen(EEIS_BEGIN);
+		this->dispatchInputListen(render::EditInputStatus::BEGIN);
 	}
 	else
 	{
-		this->dispatchInputListen(EEIS_END);
+		this->dispatchInputListen(render::EditInputStatus::END);
 	}
 }
 

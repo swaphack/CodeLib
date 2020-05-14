@@ -2,7 +2,6 @@
 #include <exception>
 #include "Graphic/GLAPI/GLTexture.h"
 #include "TextureCache.h"
-#include "Resource/Detail/ImageDetail.h"
 using namespace render;
 
 
@@ -66,7 +65,7 @@ uint32_t render::Texture::getTextureID() const
 }
 
 //////////////////////////////////////////////////////////////////////////
-void Texture2D::load(const ImageDetail* image)
+void Texture2D::load(const sys::ImageDetail* image)
 {
 	if (image == nullptr || image->getPixels() == nullptr)
 	{
@@ -84,8 +83,53 @@ void Texture2D::load(const ImageDetail* image)
 	GLTexture::setTexParameterWrapS2D(TextureWrapMode::CLAMP);
 	GLTexture::setTexParameterWrapT2D(TextureWrapMode::CLAMP);
 
-	GLTexture::setTexImage2D(TexImageTarget2D::TEXTURE_2D,  0, image->getInternalFormat(),
-		image->getWidth(), image->getHeight(), 0, image->getFormat(),
+	TexImageDataFormat format;
+	TexImageInternalFormat internalFormat;
+
+	switch (image->getDataFormat())
+	{
+	case sys::ImageDataFormat::RED:
+	{
+		format = TexImageDataFormat::RED;
+		internalFormat = TexImageInternalFormat::RED;
+	}
+		break;
+	case sys::ImageDataFormat::RG:
+	{
+		format = TexImageDataFormat::RG;
+		internalFormat = TexImageInternalFormat::RG;
+	}
+	break;
+	case sys::ImageDataFormat::RGB:
+	{
+		format = TexImageDataFormat::RGB;
+		internalFormat = TexImageInternalFormat::RGB;
+	}
+	break;
+	case sys::ImageDataFormat::RGBA:
+	{
+		format = TexImageDataFormat::RGBA;
+		internalFormat = TexImageInternalFormat::RGBA;
+	}
+	break;
+	case sys::ImageDataFormat::BGR:
+	{
+		format = TexImageDataFormat::BGR;
+		internalFormat = TexImageInternalFormat::RGB;
+	}
+	break;
+	case sys::ImageDataFormat::BGRA:
+	{
+		format = TexImageDataFormat::BGRA;
+		internalFormat = TexImageInternalFormat::RGBA;
+	}
+	break;
+	default:
+		break;
+	}
+
+	GLTexture::setTexImage2D(TexImageTarget2D::TEXTURE_2D,  0, internalFormat,
+		image->getWidth(), image->getHeight(), 0, format,
 		TexImageDataType::UNSIGNED_BYTE, image->getPixels());
 	
 	_textureID = tex_id;

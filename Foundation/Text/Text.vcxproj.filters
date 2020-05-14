@@ -1,73 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="XML">
-      <UniqueIdentifier>{6fbaa774-430b-4ae8-8d31-f0226f28c388}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="JSON">
-      <UniqueIdentifier>{18779e15-e857-4663-a088-15b2bc53579e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Config">
       <UniqueIdentifier>{a0b0b26b-b243-4252-bc77-f6907eb4f811}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="XML\tinyxml2.cpp">
-      <Filter>XML</Filter>
-    </ClCompile>
-    <ClCompile Include="JSON\json_reader.cpp">
-      <Filter>JSON</Filter>
-    </ClCompile>
-    <ClCompile Include="JSON\json_value.cpp">
-      <Filter>JSON</Filter>
-    </ClCompile>
-    <ClCompile Include="JSON\json_writer.cpp">
-      <Filter>JSON</Filter>
-    </ClCompile>
     <ClCompile Include="Config\XmlConfig.cpp">
       <Filter>Config</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="XML\tinyxml2.h">
-      <Filter>XML</Filter>
-    </ClInclude>
-    <ClInclude Include="JSON\allocator.h">
-      <Filter>JSON</Filter>
-    </ClInclude>
-    <ClInclude Include="JSON\assertions.h">
-      <Filter>JSON</Filter>
-    </ClInclude>
-    <ClInclude Include="JSON\autolink.h">
-      <Filter>JSON</Filter>
-    </ClInclude>
-    <ClInclude Include="JSON\config.h">
-      <Filter>JSON</Filter>
-    </ClInclude>
-    <ClInclude Include="JSON\features.h">
-      <Filter>JSON</Filter>
-    </ClInclude>
-    <ClInclude Include="JSON\forwards.h">
-      <Filter>JSON</Filter>
-    </ClInclude>
-    <ClInclude Include="JSON\json.h">
-      <Filter>JSON</Filter>
-    </ClInclude>
-    <ClInclude Include="JSON\json_tool.h">
-      <Filter>JSON</Filter>
-    </ClInclude>
-    <ClInclude Include="JSON\reader.h">
-      <Filter>JSON</Filter>
-    </ClInclude>
-    <ClInclude Include="JSON\value.h">
-      <Filter>JSON</Filter>
-    </ClInclude>
-    <ClInclude Include="JSON\version.h">
-      <Filter>JSON</Filter>
-    </ClInclude>
-    <ClInclude Include="JSON\writer.h">
-      <Filter>JSON</Filter>
-    </ClInclude>
     <ClInclude Include="text.h" />
     <ClInclude Include="Config\XmlConfig.h">
       <Filter>Config</Filter>

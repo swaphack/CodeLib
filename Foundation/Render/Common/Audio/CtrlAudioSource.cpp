@@ -1,6 +1,5 @@
 #include "CtrlAudioSource.h"
 #include "AudioManager.h"
-#include "Resource/Detail/AudioDetail.h"
 #include <map>
 
 using namespace render;

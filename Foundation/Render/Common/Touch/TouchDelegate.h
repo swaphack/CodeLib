@@ -7,12 +7,12 @@
 namespace render
 {
 	// 触摸类型
-	enum TouchType
+	enum class TouchType
 	{
-		ETT_NONE,	// 未触摸
-		ETT_DOWN,	// 按下	
-		ETT_ON,		// 按住不放
-		ETT_UP,		// 放手
+		NONE,	// 未触摸
+		DOWN,	// 按下	
+		ON,		// 按住不放
+		UP,		// 放手
 	};
 
 	typedef void (sys::Object::*TOUCH_DELEGATE_HANDLER)(sys::Object* object, float x, float y);

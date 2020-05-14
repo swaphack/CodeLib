@@ -90,7 +90,7 @@ void Concurrent::init()
 			}
 
 			Data* data = _eventQueue.front();
-			if (data->type == EET_READ)
+			if (data->type == EventType::READ)
 			{
 				if (_readFunc)
 				{
@@ -99,14 +99,14 @@ void Concurrent::init()
 					target->callback(target->data, target->size);
 				}
 			}
-			else if (data->type == EET_WRITE)
+			else if (data->type == EventType::WRITE)
 			{
 				if (_writeFunc)
 				{
 					_writeFunc((WriteData*)data);
 				}
 			}
-			else if (data->type == EET_FINISH)
+			else if (data->type == EventType::FINISH)
 			{
 				bRet = false;
 			}

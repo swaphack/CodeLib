@@ -7,10 +7,10 @@ namespace sys
 	class IResource;
 	class Resource;
 
-	enum ResourceType
+	enum class ResourceType
 	{
-		ERT_LOCAL,	// 本地
-		ERT_REMOTE, // 远程
+		LOCAL,	// 本地
+		REMOTE, // 远程
 	};
 
 	// 资源方式管理
@@ -18,7 +18,7 @@ namespace sys
 	{
 	public:
 		ResourceMgr();
-		~ResourceMgr();
+		virtual ~ResourceMgr();
 	public:
 		// 资源管理
 		Resource* getResource(ResourceType type);

@@ -6,7 +6,7 @@
 
 using namespace sys;
 
-int32_t sys::RemoteResource::s_Tag = 0;
+int32_t RemoteResource::s_Tag = 0;
 
 RemoteResource::RemoteResource()
 {

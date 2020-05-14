@@ -1,12 +1,13 @@
 #pragma once
 
-#include "Common/Node/ColorNode.h"
+#include "Common/DrawNode/DrawNode.h"
+#include "Common/struct/shape_common.h"
 
 namespace render
 {
 	class Material;
 
-	class CtrlWidget : public ColorNode
+	class CtrlWidget : public DrawNode
 	{
 	public:
 		CtrlWidget();

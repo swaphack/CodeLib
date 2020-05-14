@@ -18,7 +18,7 @@ Fog::~Fog()
 
 }
 
-void Fog::drawSample()
+void Fog::drawing()
 {
 	sys::Color4F c;
 	convertColor4BTo4F(getColor(), c);

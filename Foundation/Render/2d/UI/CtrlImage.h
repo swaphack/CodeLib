@@ -1,8 +1,6 @@
 #pragma once
 
 #include "CtrlFrame.h"
-#include "2d/ctrl_common.h"
-
 namespace render
 {
 	class CtrlImage : public CtrlFrame
@@ -17,6 +15,6 @@ namespace render
 		const std::string& getImagePath();
 	private:
 		// ͼƬ�ṹ
-		ImageDefine _imageDefine;
+		sys::ImageDefine _imageDefine;
 	};
 }

@@ -3,7 +3,7 @@
 
 using namespace sys;
 
-MemoryPointer::MemoryPointer(int8_t* ptr, size_t size)
+MemoryPointer::MemoryPointer(char* ptr, size_t size)
 {
 	_value = ptr;
 	_size = size;
@@ -26,7 +26,7 @@ MemoryPointer* MemoryPointer::alloctPtr(size_t size)
 	{
 		return nullptr;
 	}
-	int8_t* ptr = _value + _cursor;
+	char* ptr = _value + _cursor;
 	memset(ptr, 0, size);
 	_cursor += size;
 
@@ -36,23 +36,23 @@ MemoryPointer* MemoryPointer::alloctPtr(size_t size)
 	return mp;
 }
 
-sys::MemoryPointer::MemoryPointer(const MemoryData& data)
+MemoryPointer::MemoryPointer(const MemoryData& data)
 {
 	_value = data.getPtr(0);
 	_size = data.getLength() * data.getTypeSize();
 }
 
-int8_t* sys::MemoryPointer::getPtr()
+char* MemoryPointer::getPtr()
 {
 	return _value;
 }
 
-size_t sys::MemoryPointer::getSize()
+size_t MemoryPointer::getSize()
 {
 	return _size;
 }
 
-void sys::MemoryPointer::clear()
+void MemoryPointer::clear()
 {
 	for (auto item : _alloctedPtrs)
 	{

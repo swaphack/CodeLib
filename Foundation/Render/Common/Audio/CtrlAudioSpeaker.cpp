@@ -21,12 +21,12 @@ bool CtrlAudioSpeaker::init()
 		return false;
 	}
 
-	_notify->addListen(ENP_SPACE, [this](){
+	_notify->addListen(NodeNotifyType::SPACE, [this](){
 		_speekSettings.pos = this->getPosition();
 		updateSpeaker();
 	});
 
-	_notify->addListen(ENP_AUDIO, [this](){
+	_notify->addListen(NodeNotifyType::AUDIO, [this](){
 		updateSpeaker();
 	});
 
@@ -36,7 +36,7 @@ bool CtrlAudioSpeaker::init()
 void CtrlAudioSpeaker::setMode(FMOD_SPEAKER speek)
 {
 	_speekSettings.speaker = speek;
-	this->notify(ENP_AUDIO);
+	this->notify(NodeNotifyType::AUDIO);
 }
 
 FMOD_SPEAKER CtrlAudioSpeaker::getMode()
@@ -47,7 +47,7 @@ FMOD_SPEAKER CtrlAudioSpeaker::getMode()
 void CtrlAudioSpeaker::setActive(bool active)
 {
 	_speekSettings.active = active;
-	this->notify(ENP_AUDIO);
+	this->notify(NodeNotifyType::AUDIO);
 }
 
 bool CtrlAudioSpeaker::isActive()

@@ -2,6 +2,8 @@
 
 #include "macros.h"
 #include "AudioProtocol.h"
+#include "Common/struct/enum_common.h"
+#include "Common/struct/shape_common.h"
 
 namespace render
 {
@@ -55,7 +57,7 @@ namespace render
 		// 最大多边形顶点数
 		int _maxVerticesCount;
 		// 六面
-		CtrlAudioGeometryPolygon* _polygons[EMF_MAX];
+		CtrlAudioGeometryPolygon* _polygons[(uint8_t)ModelFace::MAX];
 		// 立方体顶点
 		CubeVertex _cubeVertex;
 	};

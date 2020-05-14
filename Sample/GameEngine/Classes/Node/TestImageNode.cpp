@@ -76,11 +76,11 @@ void TestImageNode::testMoveImage()
 	pImage->setPosition(512, 384, 0);
 	this->addChild(pImage);
 
-	pImage->getTouchProxy()->addTouchDelegate(ETT_DOWN, this, TOUCH_DELEGATTE_SELECTOR(TestImageNode::onTouchBegin));
+	pImage->getTouchProxy()->addTouchDelegate(TouchType::DOWN, this, TOUCH_DELEGATTE_SELECTOR(TestImageNode::onTouchBegin));
 
-	pImage->getTouchProxy()->addTouchDelegate(ETT_ON, this, TOUCH_DELEGATTE_SELECTOR(TestImageNode::onTouchMove));
+	pImage->getTouchProxy()->addTouchDelegate(TouchType::ON, this, TOUCH_DELEGATTE_SELECTOR(TestImageNode::onTouchMove));
 
-	pImage->getTouchProxy()->addTouchDelegate(ETT_UP, this, TOUCH_DELEGATTE_SELECTOR(TestImageNode::onTouchEnd));
+	pImage->getTouchProxy()->addTouchDelegate(TouchType::UP, this, TOUCH_DELEGATTE_SELECTOR(TestImageNode::onTouchEnd));
 
 	G_KEYBOARDMANAGER->addDispatcher(pImage, this, KEYBOARD_DELEGATTE_SELECTOR(TestImageNode::onKeyBoard));
 }
@@ -131,25 +131,25 @@ void TestImageNode::onKeyBoard(sys::Object* object, sys::BoardKey key, sys::Butt
 	{
 		return;
 	}
-	if (type == EBS_BUTTON_UP)
+	if (type == ButtonStatus::BUTTON_UP)
 	{
 		return;
 	}
 
 	float speed = 5;
-	if (key == EBK_W)
+	if (key == BoardKey::KW)
 	{
 		pNode->setPositionY(pNode->getPositionY() + speed);
 	}
-	else if (key == EBK_S)
+	else if (key == BoardKey::KS)
 	{
 		pNode->setPositionY(pNode->getPositionY() - speed);
 	}
-	else if (key == EBK_A)
+	else if (key == BoardKey::KA)
 	{
 		pNode->setPositionX(pNode->getPositionX() - speed);
 	}
-	else if (key == EBK_D)
+	else if (key == BoardKey::KD)
 	{
 		pNode->setPositionX(pNode->getPositionX() + speed);
 	}
@@ -172,7 +172,7 @@ void TestImageNode::testPixelImage()
 	this->addChild(pCtrlText);
 
 	//pImage->setUserData(pCtrlText);
-	pImage->getTouchProxy()->addTouchDelegate(ETT_ON, this, TOUCH_DELEGATTE_SELECTOR(TestImageNode::onTouchImage));
+	pImage->getTouchProxy()->addTouchDelegate(TouchType::ON, this, TOUCH_DELEGATTE_SELECTOR(TestImageNode::onTouchImage));
 }
 
 void TestImageNode::onTouchImage(sys::Object* object, float x, float y)

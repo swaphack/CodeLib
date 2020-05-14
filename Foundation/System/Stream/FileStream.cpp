@@ -30,13 +30,13 @@ void FileStream::load(const std::string& filepath)
 	}
 
 	size_t size = 0;
-	char* data = File::read(filepath, size);
-	if (data == nullptr)
+	MemoryData data = File::read(filepath, size);
+	if (size <= 0)
 	{
 		return;
 	}
 
-	this->setData(data, size);
+	this->setData(data.getValue(), data.getSize());
 }
 
 void FileStream::save(const std::string& filepath)

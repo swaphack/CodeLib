@@ -64,14 +64,29 @@
     <Filter Include="CSS">
       <UniqueIdentifier>{9295c754-b3a8-4f70-b9c4-303ddfde4ee9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Image">
-      <UniqueIdentifier>{baaf037b-f34b-4a72-a6db-b4382e0311a7}</UniqueIdentifier>
-    </Filter>
     <Filter Include="IO">
       <UniqueIdentifier>{a8e455b0-2257-4e94-8aae-2821f255f81b}</UniqueIdentifier>
     </Filter>
     <Filter Include="DateTime">
       <UniqueIdentifier>{2a110e07-2796-4c92-95c6-ae98387bf92b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\Workflow">
+      <UniqueIdentifier>{80bf64e0-e269-48d9-80a1-4284c28a7522}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource\Font">
+      <UniqueIdentifier>{fd12e771-541b-4afa-a582-929a8272433e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource\Image">
+      <UniqueIdentifier>{d2cbbd9a-df75-4eca-a98d-b7417437b92c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource\Model">
+      <UniqueIdentifier>{fa8def8b-8b1f-4e9e-b4d8-a819a7e4d24e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource\Media">
+      <UniqueIdentifier>{a8292f7b-ad1e-4f1b-841f-15fe4d6da00e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Light">
+      <UniqueIdentifier>{1b35fbbc-d200-4c3b-8c65-1ec1c48bc916}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -388,12 +403,6 @@
     <ClInclude Include="CSS\Margin.h">
       <Filter>CSS</Filter>
     </ClInclude>
-    <ClInclude Include="Image\import.h">
-      <Filter>Image</Filter>
-    </ClInclude>
-    <ClInclude Include="Image\ColorSample.h">
-      <Filter>Image</Filter>
-    </ClInclude>
     <ClInclude Include="IO\Directory.h">
       <Filter>IO</Filter>
     </ClInclude>
@@ -429,6 +438,114 @@
     </ClInclude>
     <ClInclude Include="Memory\MemoryPointer.h">
       <Filter>Memory</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Workflow\CountTask.h">
+      <Filter>Framework\Workflow</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Workflow\ForeverTask.h">
+      <Filter>Framework\Workflow</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Workflow\SequenseWorkFlow.h">
+      <Filter>Framework\Workflow</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Workflow\SpawnWorkFlow.h">
+      <Filter>Framework\Workflow</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Workflow\Task.h">
+      <Filter>Framework\Workflow</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Workflow\TimerTask.h">
+      <Filter>Framework\Workflow</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Workflow\WorkFlow.h">
+      <Filter>Framework\Workflow</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\Font\ImageLabel.h">
+      <Filter>Resource\Font</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\Font\TextDefine.h">
+      <Filter>Resource\Font</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\Image\IImageLoader.h">
+      <Filter>Resource\Image</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\Image\ImageBMP.h">
+      <Filter>Resource\Image</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\Image\ImageDefine.h">
+      <Filter>Resource\Image</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\Image\ImageDetail.h">
+      <Filter>Resource\Image</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\Image\ImageJPEG.h">
+      <Filter>Resource\Image</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\Image\ImagePNG.h">
+      <Filter>Resource\Image</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\Image\ImageTarga.h">
+      <Filter>Resource\Image</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\Model\IModelLoader.h">
+      <Filter>Resource\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\Model\MaterialDetail.h">
+      <Filter>Resource\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\Model\MeshDetail.h">
+      <Filter>Resource\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\Model\ModelDetail.h">
+      <Filter>Resource\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\Media\AudioDetail.h">
+      <Filter>Resource\Media</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\Media\IMediaLoader.h">
+      <Filter>Resource\Media</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\Media\MediaDetail.h">
+      <Filter>Resource\Media</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\Media\MediaFFmpeg.h">
+      <Filter>Resource\Media</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\Font\ILabelLoader.h">
+      <Filter>Resource\Font</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\Image\import.h">
+      <Filter>Resource\Image</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\Font\import.h">
+      <Filter>Resource\Font</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\Model\import.h">
+      <Filter>Resource\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\Media\import.h">
+      <Filter>Resource\Media</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\extensions.h">
+      <Filter>Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\Model\ModelDetail3DS.h">
+      <Filter>Resource\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\Model\ModelDetailFbx.h">
+      <Filter>Resource\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\Model\ModelDetailObj.h">
+      <Filter>Resource\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="Light\ColorSample.h">
+      <Filter>Light</Filter>
+    </ClInclude>
+    <ClInclude Include="Light\import.h">
+      <Filter>Light</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\Loader.h">
+      <Filter>Resource</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -621,9 +738,6 @@
     <ClCompile Include="Net\NetData.cpp">
       <Filter>Net</Filter>
     </ClCompile>
-    <ClCompile Include="Image\ColorSample.cpp">
-      <Filter>Image</Filter>
-    </ClCompile>
     <ClCompile Include="IO\Directory.cpp">
       <Filter>IO</Filter>
     </ClCompile>
@@ -656,6 +770,75 @@
     </ClCompile>
     <ClCompile Include="Memory\MemoryPointer.cpp">
       <Filter>Memory</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Workflow\CountTask.cpp">
+      <Filter>Framework\Workflow</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Workflow\ForeverTask.cpp">
+      <Filter>Framework\Workflow</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Workflow\SpawnWorkFlow.cpp">
+      <Filter>Framework\Workflow</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Workflow\Task.cpp">
+      <Filter>Framework\Workflow</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Workflow\TimerTask.cpp">
+      <Filter>Framework\Workflow</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Workflow\WorkFlow.cpp">
+      <Filter>Framework\Workflow</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource\Font\ImageLabel.cpp">
+      <Filter>Resource\Font</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource\Image\ImageBMP.cpp">
+      <Filter>Resource\Image</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource\Image\ImageDetail.cpp">
+      <Filter>Resource\Image</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource\Image\ImageJPEG.cpp">
+      <Filter>Resource\Image</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource\Image\ImagePNG.cpp">
+      <Filter>Resource\Image</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource\Image\ImageTarga.cpp">
+      <Filter>Resource\Image</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource\Model\MaterialDetail.cpp">
+      <Filter>Resource\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource\Model\MeshDetail.cpp">
+      <Filter>Resource\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource\Model\ModelDetail.cpp">
+      <Filter>Resource\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource\Media\AudioDetail.cpp">
+      <Filter>Resource\Media</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource\Media\MediaDetail.cpp">
+      <Filter>Resource\Media</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource\Media\MediaFFmpeg.cpp">
+      <Filter>Resource\Media</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource\Model\ModelDetail3DS.cpp">
+      <Filter>Resource\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource\Model\ModelDetailFbx.cpp">
+      <Filter>Resource\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource\Model\ModelDetailObj.cpp">
+      <Filter>Resource\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource\Image\ImageDefine.cpp">
+      <Filter>Resource\Image</Filter>
+    </ClCompile>
+    <ClCompile Include="Light\ColorSample.cpp">
+      <Filter>Light</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

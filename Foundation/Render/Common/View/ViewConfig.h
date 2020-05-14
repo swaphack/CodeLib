@@ -5,9 +5,9 @@
 namespace render
 {
 	// 视图设置枚举
-	enum ViewSetting
+	enum class ViewSetting
 	{
-		EVS_NONE,
+		NONE,
 	};
 	// 视图配置
 	class ViewConfig

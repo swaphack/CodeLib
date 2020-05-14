@@ -34,9 +34,9 @@ void TestModelNode::testCubeModel()
 	pModel->addTexture(textureName1, pTexture1);
 
 	pModel->setAllFacesTexture(textureName);
-	pModel->setFaceTexture(EMF_FRONT, textureName1);
-	pModel->setFaceTexture(EMF_LEFT, textureName1);
-	pModel->setFaceTexture(EMF_TOP, textureName1);
+	pModel->setFaceTexture(ModelFace::FRONT, textureName1);
+	pModel->setFaceTexture(ModelFace::LEFT, textureName1);
+	pModel->setFaceTexture(ModelFace::TOP, textureName1);
 
 	pModel->setAnchorPoint(math::Vector3(0.5f, 0.5f, 0.5f));
 	pModel->setPosition(200, 200, -50);
@@ -56,8 +56,8 @@ void TestModelNode::testCubeModel()
 
 void TestModelNode::testSphereModel()
 {
-	ImageDefine imageDefine = { "Resource/Image/NeHe.png", EIF_PNG };
-	Texture2D* texture2D = G_TEXTURE_CACHE->createTexture2D(imageDefine);
+	std::string filepath = "Resource/Image/NeHe.png";
+	Texture2D* texture2D = G_TEXTURE_CACHE->createTexture2D(filepath);
 
 	TexFrame* frame = CREATE_OBJECT(TexFrame);
 	frame->setTextureWithRect(texture2D);
@@ -168,25 +168,25 @@ void TestModelNode::onKeyBoardCamera(sys::Object* object, sys::BoardKey key, sys
 	{
 		return;
 	}
-	if (type != EBS_BUTTON_DOWN)
+	if (type != ButtonStatus::BUTTON_DOWN)
 	{
 		return;
 	}
 
 	float speed = 2;
-	if (key == EBK_UP)
+	if (key == BoardKey::KUP)
 	{
 		pNode->setPositionY(pNode->getPositionY() + speed);
 	}
-	else if (key == EBK_DOWN)
+	else if (key == BoardKey::KDOWN)
 	{
 		pNode->setPositionY(pNode->getPositionY() - speed);
 	}
-	else if (key == EBK_LEFT)
+	else if (key == BoardKey::KLEFT)
 	{
 		pNode->setPositionX(pNode->getPositionX() - speed);
 	}
-	else if (key == EBK_RIGHT)
+	else if (key == BoardKey::KRIGHT)
 	{
 		pNode->setPositionX(pNode->getPositionX() + speed);
 	}

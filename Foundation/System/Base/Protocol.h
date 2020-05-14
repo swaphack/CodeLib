@@ -23,4 +23,18 @@ namespace sys
 	public:
 		CREATE_CLASS_MEMBER_WITH_DEFAULT(int32_t, ID, 0);
 	};
+
+	class DirtyProtocol
+	{
+	public:
+		DirtyProtocol() {}
+		virtual ~DirtyProtocol() {}
+	public:
+		// …Ë÷√ «∑Ò∞π‘‡
+		void setDirty(bool status) { _bDirty = status; }
+		//  «∑Ò∞π‘‡
+		bool isDirty() { return _bDirty; }
+	private:
+		bool _bDirty = true;
+	};
 }

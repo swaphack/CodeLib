@@ -44,7 +44,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <BrowseInformation>true</BrowseInformation>
-      <AdditionalIncludeDirectories>$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../Math/;../../Lib/include/fbx;../../Lib/include/freetype;../../Lib/include/;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -116,6 +116,13 @@
     <ClInclude Include="Framework\import.h" />
     <ClInclude Include="Framework\ITimer.h" />
     <ClInclude Include="Framework\Object.h" />
+    <ClInclude Include="Framework\Workflow\CountTask.h" />
+    <ClInclude Include="Framework\Workflow\ForeverTask.h" />
+    <ClInclude Include="Framework\Workflow\SequenseWorkFlow.h" />
+    <ClInclude Include="Framework\Workflow\SpawnWorkFlow.h" />
+    <ClInclude Include="Framework\Workflow\Task.h" />
+    <ClInclude Include="Framework\Workflow\TimerTask.h" />
+    <ClInclude Include="Framework\Workflow\WorkFlow.h" />
     <ClInclude Include="Http\HttpCommand.h" />
     <ClInclude Include="Http\HttpConstant.h" />
     <ClInclude Include="Http\HttpDocument.h" />
@@ -124,11 +131,11 @@
     <ClInclude Include="Http\HttpResponse.h" />
     <ClInclude Include="Http\HttpTime.h" />
     <ClInclude Include="Http\import.h" />
-    <ClInclude Include="Image\ColorSample.h" />
-    <ClInclude Include="Image\import.h" />
     <ClInclude Include="IO\Directory.h" />
     <ClInclude Include="IO\File.h" />
     <ClInclude Include="IO\import.h" />
+    <ClInclude Include="Light\ColorSample.h" />
+    <ClInclude Include="Light\import.h" />
     <ClInclude Include="Memory\import.h" />
     <ClInclude Include="Memory\MemoryData.h" />
     <ClInclude Include="Memory\MemoryPointer.h" />
@@ -147,9 +154,36 @@
     <ClInclude Include="Platform\Windows\import.h" />
     <ClInclude Include="Platform\Windows\Window.h" />
     <ClInclude Include="Process\Pipe.h" />
+    <ClInclude Include="Resource\extensions.h" />
+    <ClInclude Include="Resource\Font\ILabelLoader.h" />
+    <ClInclude Include="Resource\Font\ImageLabel.h" />
+    <ClInclude Include="Resource\Font\import.h" />
+    <ClInclude Include="Resource\Font\TextDefine.h" />
+    <ClInclude Include="Resource\Image\IImageLoader.h" />
+    <ClInclude Include="Resource\Image\ImageBMP.h" />
+    <ClInclude Include="Resource\Image\ImageDefine.h" />
+    <ClInclude Include="Resource\Image\ImageDetail.h" />
+    <ClInclude Include="Resource\Image\ImageJPEG.h" />
+    <ClInclude Include="Resource\Image\ImagePNG.h" />
+    <ClInclude Include="Resource\Image\ImageTarga.h" />
+    <ClInclude Include="Resource\Image\import.h" />
     <ClInclude Include="Resource\import.h" />
     <ClInclude Include="Resource\IResource.h" />
+    <ClInclude Include="Resource\Loader.h" />
     <ClInclude Include="Resource\LocalResource.h" />
+    <ClInclude Include="Resource\Media\AudioDetail.h" />
+    <ClInclude Include="Resource\Media\IMediaLoader.h" />
+    <ClInclude Include="Resource\Media\import.h" />
+    <ClInclude Include="Resource\Media\MediaDetail.h" />
+    <ClInclude Include="Resource\Media\MediaFFmpeg.h" />
+    <ClInclude Include="Resource\Model\ModelDetail3DS.h" />
+    <ClInclude Include="Resource\Model\ModelDetailFbx.h" />
+    <ClInclude Include="Resource\Model\ModelDetailObj.h" />
+    <ClInclude Include="Resource\Model\IModelLoader.h" />
+    <ClInclude Include="Resource\Model\import.h" />
+    <ClInclude Include="Resource\Model\MaterialDetail.h" />
+    <ClInclude Include="Resource\Model\MeshDetail.h" />
+    <ClInclude Include="Resource\Model\ModelDetail.h" />
     <ClInclude Include="Resource\RemoteResource.h" />
     <ClInclude Include="Resource\Resource.h" />
     <ClInclude Include="Resource\ResourceBundle.h" />
@@ -213,6 +247,12 @@
     <ClCompile Include="Framework\Container.cpp" />
     <ClCompile Include="Framework\FilePath.cpp" />
     <ClCompile Include="Framework\Object.cpp" />
+    <ClCompile Include="Framework\Workflow\CountTask.cpp" />
+    <ClCompile Include="Framework\Workflow\ForeverTask.cpp" />
+    <ClCompile Include="Framework\Workflow\SpawnWorkFlow.cpp" />
+    <ClCompile Include="Framework\Workflow\Task.cpp" />
+    <ClCompile Include="Framework\Workflow\TimerTask.cpp" />
+    <ClCompile Include="Framework\Workflow\WorkFlow.cpp" />
     <ClCompile Include="Http\HttpCommand.cpp" />
     <ClCompile Include="Http\HttpConstant.cpp" />
     <ClCompile Include="Http\HttpDocument.cpp" />
@@ -222,9 +262,9 @@
     <ClCompile Include="Http\HttpRespDocument.cpp" />
     <ClCompile Include="Http\HttpResponse.cpp" />
     <ClCompile Include="Http\HttpTime.cpp" />
-    <ClCompile Include="Image\ColorSample.cpp" />
     <ClCompile Include="IO\Directory.cpp" />
     <ClCompile Include="IO\File.cpp" />
+    <ClCompile Include="Light\ColorSample.cpp" />
     <ClCompile Include="Memory\MemoryData.cpp" />
     <ClCompile Include="Memory\MemoryPointer.cpp" />
     <ClCompile Include="Memory\Memory.cpp" />
@@ -236,7 +276,23 @@
     <ClCompile Include="Net\Socket.cpp" />
     <ClCompile Include="Net\EndPoint.cpp" />
     <ClCompile Include="Platform\Windows\Window.cpp" />
+    <ClCompile Include="Resource\Font\ImageLabel.cpp" />
+    <ClCompile Include="Resource\Image\ImageBMP.cpp" />
+    <ClCompile Include="Resource\Image\ImageDefine.cpp" />
+    <ClCompile Include="Resource\Image\ImageDetail.cpp" />
+    <ClCompile Include="Resource\Image\ImageJPEG.cpp" />
+    <ClCompile Include="Resource\Image\ImagePNG.cpp" />
+    <ClCompile Include="Resource\Image\ImageTarga.cpp" />
     <ClCompile Include="Resource\LocalResource.cpp" />
+    <ClCompile Include="Resource\Media\AudioDetail.cpp" />
+    <ClCompile Include="Resource\Media\MediaDetail.cpp" />
+    <ClCompile Include="Resource\Media\MediaFFmpeg.cpp" />
+    <ClCompile Include="Resource\Model\ModelDetail3DS.cpp" />
+    <ClCompile Include="Resource\Model\ModelDetailFbx.cpp" />
+    <ClCompile Include="Resource\Model\ModelDetailObj.cpp" />
+    <ClCompile Include="Resource\Model\MaterialDetail.cpp" />
+    <ClCompile Include="Resource\Model\MeshDetail.cpp" />
+    <ClCompile Include="Resource\Model\ModelDetail.cpp" />
     <ClCompile Include="Resource\RemoteResource.cpp" />
     <ClCompile Include="Resource\Resource.cpp" />
     <ClCompile Include="Resource\ResourceBundle.cpp" />

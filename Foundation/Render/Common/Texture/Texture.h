@@ -2,6 +2,11 @@
 
 #include "system.h"
 
+namespace sys
+{
+	class ImageDetail;
+}
+
 namespace render
 {
 	// ÎÆÀí»ù´¡
@@ -32,13 +37,11 @@ namespace render
 
 	//////////////////////////////////////////////////////////////////////////
 
-	class ImageDetail;
-
 	// 2dÎÆÀí
 	class Texture2D : public Texture
 	{
 	public:
-		virtual void load(const ImageDetail* image);
+		virtual void load(const sys::ImageDetail* image);
 	protected:
 	private:
 	};

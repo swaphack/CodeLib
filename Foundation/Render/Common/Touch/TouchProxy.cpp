@@ -49,7 +49,7 @@ bool TouchProxy::onTouchBegan(float x, float y)
 		return false;
 	}
 
-	dispatchTouchEvent(ETT_DOWN, x, y);
+	dispatchTouchEvent(TouchType::DOWN, x, y);
 
 	return true;
 }
@@ -61,7 +61,7 @@ void TouchProxy::onTouchMoved(float x, float y)
 		return;
 	}
 
-	dispatchTouchEvent(ETT_ON, x, y);
+	dispatchTouchEvent(TouchType::ON, x, y);
 }
 
 void TouchProxy::onTouchEnded(float x, float y)
@@ -71,7 +71,7 @@ void TouchProxy::onTouchEnded(float x, float y)
 		return;
 	}
 
-	dispatchTouchEvent(ETT_UP, x, y);
+	dispatchTouchEvent(TouchType::UP, x, y);
 }
 
 void TouchProxy::addTouchDelegate(TouchType type, sys::Object* object, TOUCH_DELEGATE_HANDLER handler)

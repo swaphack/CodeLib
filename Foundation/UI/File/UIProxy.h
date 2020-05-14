@@ -2,7 +2,6 @@
 
 #include "Parse/import.h"
 #include "Load/import.h"
-#include "text.h"
 #include "ui_common.h"
 
 namespace ui

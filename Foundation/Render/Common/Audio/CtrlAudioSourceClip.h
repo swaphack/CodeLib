@@ -2,6 +2,11 @@
 #include "CtrlAudioSource.h"
 #include <vector>
 
+namespace sys
+{
+	class AudioDetail;
+}
+
 namespace render
 {
 	// “Ù∆µ∆¨∂Œ
@@ -12,10 +17,10 @@ namespace render
 		CtrlAudioSourceClip();
 		virtual ~CtrlAudioSourceClip();
 	public:
-		void loadAudioClip(const AudioDetail*audioClip);
+		void loadAudioClip(const sys::AudioDetail*audioClip);
 	protected:
-		void initSoundExInfo(const AudioDetail*audioClip);
+		void initSoundExInfo(const sys::AudioDetail*audioClip);
 	private:
-		FMOD_CREATESOUNDEXINFO* _soundExInfo = nullptr;
+		void* _soundExInfo = nullptr;
 	};
 }

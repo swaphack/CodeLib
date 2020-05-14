@@ -12,23 +12,25 @@ namespace sys
 {
 	// 并发处理
 	// 使用finish函数，来释放当前类
-	class Concurrent : public sys::Object
+	class Concurrent : public Object
 	{
 	protected:
+
+
+		enum class EventType
+		{
+			READ,
+			WRITE,
+			FINISH,
+		};
+
 		struct Data
 		{
-			int32_t type;
-			Data(int32_t type)
+			EventType type;
+			Data(EventType type)
 			{
 				this->type = type;
 			}
-		};
-
-		enum EventType
-		{
-			EET_READ,
-			EET_WRITE,
-			EET_FINISH,
 		};
 
 		// 读取数据回调
@@ -42,7 +44,7 @@ namespace sys
 			ReadDataCallback callback;
 
 			ReadData(char* data, int32_t offset, int32_t size, ReadDataCallback callback)
-				:Data((int32_t)EET_READ)
+				:Data(EventType::READ)
 			{
 				this->data = data;
 				this->offset = offset;
@@ -57,7 +59,7 @@ namespace sys
 			int32_t size;
 
 			WriteData(const char* data, int32_t size)
-				:Data((int32_t)EET_WRITE)
+				:Data(EventType::WRITE)
 			{
 				this->data = data;
 				this->size = size;
@@ -67,7 +69,7 @@ namespace sys
 		struct FinishData : public Data
 		{
 			FinishData()
-				:Data((int32_t)EET_FINISH)
+				:Data(EventType::FINISH)
 			{}
 		};
 

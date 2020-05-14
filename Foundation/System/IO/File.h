@@ -3,6 +3,8 @@
 #include <string>
 #include <cstdint>
 
+#include "Memory/MemoryData.h"
+
 namespace sys
 {
 	enum FileModel
@@ -23,13 +25,13 @@ namespace sys
 	{
 	public:
 		File(const std::string& url);
-		File(const std::string& url, int32_t mode);
+		File(const std::string& url, uint32_t mode);
 		~File();
 	public:
 		// 将数据写到本地
 		static bool write(const std::string& url, const char* data, size_t size, size_t& writtenSize);
 		// 从本地读取数据
-		static char* read(const std::string& url, size_t& readSize);
+		static MemoryData read(const std::string& url, size_t& readSize);
 		// 从本地读取数据
 		static bool read(const std::string& url, std::string& data);
 		// 追加数据到本地
@@ -41,7 +43,7 @@ namespace sys
 		// 将数据写到本地
 		bool write(const char* data, size_t size, size_t& writtenSize);
 		// 从本地读取数据
-		char* read(size_t& size);
+		MemoryData read(size_t& size);
 		// 从本地读取数据
 		bool read(std::string& data);
 		// 追加数据到本地
@@ -54,8 +56,8 @@ namespace sys
 		// 文件目录
 		std::string m_strUrl;
 		// 句柄id
-		FILE* m_pFile;
+		FILE* m_pFile = nullptr;
 		// 模式
-		int32_t m_nModel;
+		uint32_t m_nModel = 0;
 	};
 }

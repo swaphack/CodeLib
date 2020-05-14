@@ -69,7 +69,7 @@ void AutoReleasePool::checkAutoRelease()
 	}
 }
 
-void sys::AutoReleasePool::startThread(const std::function<void()>& func)
+void AutoReleasePool::startThread(const std::function<void()>& func)
 {
 	if (func == nullptr)
 	{
@@ -85,7 +85,7 @@ void sys::AutoReleasePool::startThread(const std::function<void()>& func)
 	task.detach();
 }
 
-void sys::AutoReleasePool::endThread()
+void AutoReleasePool::endThread()
 {
 	_threadCount--;
 }

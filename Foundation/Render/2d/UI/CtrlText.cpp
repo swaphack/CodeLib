@@ -21,9 +21,9 @@ bool CtrlText::init()
 		return false;
 	}
 
-	_notify->removeListens(ENP_TEXTURE_FRAME);
+	_notify->removeListens(NodeNotifyType::TEXTURE);
 
-	_notify->addListen(ENP_TEXT_FRAME, [&](){
+	_notify->addListen(NodeNotifyType::TEXT, [&](){
 		this->onTextChange();
 	});	
 
@@ -34,7 +34,7 @@ void CtrlText::setFontPath(const std::string& fonturl)
 {
 	_textDefine.filepath = fonturl;
 
-	this->notify(ENP_TEXT_FRAME);
+	this->notify(NodeNotifyType::TEXT);
 }
 
 const std::string& CtrlText::getFontPath()
@@ -46,7 +46,7 @@ void CtrlText::setFontSize(float size)
 {
 	_textDefine.fontSize = size;
 
-	this->notify(ENP_TEXT_FRAME);
+	this->notify(NodeNotifyType::TEXT);
 }
 
 float CtrlText::getFontSize()
@@ -58,7 +58,7 @@ void CtrlText::setHorizontalDistance(float distance)
 {
 	_textDefine.horizontalDistance = distance;
 
-	this->notify(ENP_TEXT_FRAME);
+	this->notify(NodeNotifyType::TEXT);
 }
 
 float CtrlText::getHorizontalDistance()
@@ -70,7 +70,7 @@ void CtrlText::setVerticalDistance(float distance)
 {
 	_textDefine.verticalDistance = distance;
 
-	this->notify(ENP_TEXT_FRAME);
+	this->notify(NodeNotifyType::TEXT);
 }
 
 float CtrlText::getVerticalDistance()
@@ -83,29 +83,29 @@ void CtrlText::setString(const std::string&text)
 	TextProtocol::setString(text);
 	_textDefine.text = text;
 
-	this->notify(ENP_TEXT_FRAME);
+	this->notify(NodeNotifyType::TEXT);
 }
 
-void CtrlText::setHorizontalAlignment(HorizontalAlignment alignment)
+void CtrlText::setHorizontalAlignment(sys::HorizontalAlignment alignment)
 {
 	_textDefine.horizontalAlignment = alignment;
 
-	this->notify(ENP_TEXT_FRAME);
+	this->notify(NodeNotifyType::TEXT);
 }
 
-HorizontalAlignment CtrlText::getHorizontalAlignment()
+sys::HorizontalAlignment CtrlText::getHorizontalAlignment()
 {
 	return _textDefine.horizontalAlignment;
 }
 
-void CtrlText::setVerticalAlignment(VerticalAlignment alignment)
+void CtrlText::setVerticalAlignment(sys::VerticalAlignment alignment)
 {
 	_textDefine.verticalAlignment = alignment;
 
-	this->notify(ENP_TEXT_FRAME);
+	this->notify(NodeNotifyType::TEXT);
 }
 
-VerticalAlignment CtrlText::getVerticalAlignment()
+sys::VerticalAlignment CtrlText::getVerticalAlignment()
 {
 	return _textDefine.verticalAlignment;
 }
@@ -116,7 +116,7 @@ void CtrlText::setDimensions(float width, float height)
 	_textDefine.height = height;
 	this->setVolume(width, height);
 
-	this->notify(ENP_TEXT_FRAME);
+	this->notify(NodeNotifyType::TEXT);
 }
 
 void CtrlText::setDimensions(const math::Size& size)
@@ -132,7 +132,7 @@ math::Size CtrlText::getDimensions()
 void CtrlText::setTextColor(const sys::Color3B& color)
 {
 	_textDefine.color = color;
-	this->notify(ENP_TEXT_FRAME);
+	this->notify(NodeNotifyType::TEXT);
 }
 
 const sys::Color3B& render::CtrlText::getTextColor()
@@ -175,26 +175,26 @@ math::Vector3 render::CtrlText::getOrgin(const math::Size& size)
 	
 	math::Volume volume = math::Volume(size.getWidth(), size.getHeight());
 	
-	if (_textDefine.verticalAlignment == EVA_BOTTOM)
+	if (_textDefine.verticalAlignment == sys::VerticalAlignment::BOTTOM)
 	{
 	}
-	else if (_textDefine.verticalAlignment == EVA_CENTER)
+	else if (_textDefine.verticalAlignment == sys::VerticalAlignment::MIDDLE)
 	{
 		orgin.setY((_volume.getHeight() - volume.getHeight()) * 0.5f);
 	}
-	else if (_textDefine.verticalAlignment == EVA_TOP)
+	else if (_textDefine.verticalAlignment == sys::VerticalAlignment::TOP)
 	{
 		orgin.setY(_volume.getHeight() - volume.getHeight());
 	}
 
-	if (_textDefine.horizontalAlignment == EHA_LEFT)
+	if (_textDefine.horizontalAlignment == sys::HorizontalAlignment::LEFT)
 	{
 	}
-	else if (_textDefine.verticalAlignment == EHA_CENTER)
+	else if (_textDefine.horizontalAlignment == sys::HorizontalAlignment::CENTER)
 	{
 		orgin.setX((_volume.getWidth() - volume.getWidth()) * 0.5f);
 	}
-	else if (_textDefine.verticalAlignment == EHA_RIGHT)
+	else if (_textDefine.horizontalAlignment == sys::HorizontalAlignment::RIGHT)
 	{
 		orgin.setX(_volume.getWidth() - volume.getWidth());
 	}

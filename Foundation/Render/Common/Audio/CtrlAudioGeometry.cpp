@@ -1,6 +1,6 @@
 #include "CtrlAudioGeometry.h"
 #include "AudioManager.h"
-#include "Common/DrawNode/DrawNode.h"
+#include "Common/DrawNode/PrimitiveNode.h"
 #include "Common/Tool/Tool.h"
 
 #define MAX_POLYGON_COUNT 1
@@ -13,7 +13,7 @@ CtrlAudioGeometry::CtrlAudioGeometry()
 	, _maxPolygonCount(0)
 	, _maxVerticesCount(0)
 {
-	for (int i = 0; i < EMF_MAX; i++)
+	for (int i = 0; i < (int)ModelFace::MAX; i++)
 	{
 		_polygons[i] = nullptr;
 	}
@@ -34,14 +34,14 @@ bool CtrlAudioGeometry::init()
 		return false;
 	}
 
-	_notify->addListen(ENP_SPACE, [this](){
+	_notify->addListen(NodeNotifyType::SPACE, [this](){
 		_geometryBody.position = this->getPosition();
 		_geometryBody.scale = this->getScale();
 		onGeometryChange();
 		onPolygonsChange();
 	});
 
-	_notify->addListen(ENP_AUDIO, [this](){
+	_notify->addListen(NodeNotifyType::AUDIO, [this](){
 		onGeometryChange();
 	});
 
@@ -130,7 +130,7 @@ bool CtrlAudioGeometry::getActive()
 void CtrlAudioGeometry::setForward(const math::Vector3& forward)
 {
 	_geometryBody.forward = forward;
-	this->notify(ENP_AUDIO);
+	this->notify(NodeNotifyType::AUDIO);
 }
 
 const math::Vector3& CtrlAudioGeometry::getForward()
@@ -141,7 +141,7 @@ const math::Vector3& CtrlAudioGeometry::getForward()
 void CtrlAudioGeometry::setUp(const math::Vector3& up)
 {
 	_geometryBody.up = up;
-	this->notify(ENP_AUDIO);
+	this->notify(NodeNotifyType::AUDIO);
 }
 
 const math::Vector3& CtrlAudioGeometry::getUp()
@@ -234,12 +234,7 @@ CtrlAudioGeometryPolygon* CtrlAudioGeometry::addPolygon(const RectVertex& vertex
 
 CtrlAudioGeometryPolygon* CtrlAudioGeometry::getPolygon(ModelFace index)
 {
-	if (index < 0 || index >= EMF_MAX)
-	{
-		return nullptr;
-	}
-
-	return _polygons[index];
+	return _polygons[(uint8_t)index];
 }
 
 void CtrlAudioGeometry::onGeometryChange()
@@ -249,10 +244,10 @@ void CtrlAudioGeometry::onGeometryChange()
 	FMOD_VECTOR pos;
 	FMOD_VECTOR scale;
 
-	ConvertToFMODVector(_geometryBody.forward, forward);
-	ConvertToFMODVector(_geometryBody.up, up);
-	ConvertToFMODVector(_geometryBody.position, pos);
-	ConvertToFMODVector(_geometryBody.scale, scale);
+	ConvertToFMODVector(_geometryBody.forward, &forward);
+	ConvertToFMODVector(_geometryBody.up, &up);
+	ConvertToFMODVector(_geometryBody.position, &pos);
+	ConvertToFMODVector(_geometryBody.scale, &scale);
 
 	AUDIO_SET_FUNC(_geometry, setRotation, &forward, &up);
 	AUDIO_SET_FUNC(_geometry, setPosition, &pos);
@@ -265,7 +260,7 @@ void CtrlAudioGeometry::onPolygonsChange()
 	math::Vector3 position = mat.getPosition();
 	math::Volume volume = this->getVolume();
 	Tool::calRealCube(position, volume, getAnchorPoint(), _cubeVertex);
-	for (int i = 0; i < EMF_MAX; i++)
+	for (int i = 0; i < (int)ModelFace::MAX; i++)
 	{
 		CtrlAudioGeometryPolygon* polygon = getPolygon((ModelFace)i);
 		RectVertex rectVertex = getRectVertex(i);
@@ -282,29 +277,29 @@ void CtrlAudioGeometry::onPolygonsChange()
 
 const RectVertex& CtrlAudioGeometry::getRectVertex(int i)
 {
-	if (i < 0 || i >= EMF_MAX)
+	if (i < 0 || i >= (int)ModelFace::MAX)
 	{
 		return _cubeVertex.front;
 	}
 	ModelFace face = (ModelFace)i;
 	switch (face)
 	{
-	case render::EMF_FRONT:
+	case render::ModelFace::FRONT:
 		return _cubeVertex.front;
 		break;
-	case render::EMF_BACK:
+	case render::ModelFace::BACK:
 		return _cubeVertex.back;
 		break;
-	case render::EMF_LEFT:
+	case render::ModelFace::LEFT:
 		return _cubeVertex.left;
 		break;
-	case render::EMF_RIGHT:
+	case render::ModelFace::RIGHT:
 		return _cubeVertex.right;
 		break;
-	case render::EMF_TOP:
+	case render::ModelFace::TOP:
 		return _cubeVertex.top;
 		break;
-	case render::EMF_BOTTOM:
+	case render::ModelFace::BOTTOM:
 		return _cubeVertex.bottom;
 		break;
 	default:
@@ -341,15 +336,15 @@ bool CtrlAudioGeometryPolygon::init()
 		return false;
 	}
 
-	_notify->addListen(ENP_SPACE, [this](){
+	_notify->addListen(NodeNotifyType::SPACE, [this](){
 		this->onPolygonChange();
 	});
 
-	_notify->addListen(ENP_AUDIO, [this](){
+	_notify->addListen(NodeNotifyType::AUDIO, [this](){
 		this->onAttributeChange();
 	});
 
-	_notify->addListen(ENP_GEOMETRY, [this](){
+	_notify->addListen(NodeNotifyType::GEOMETRY, [this](){
 		this->onPolygonChange();
 	});
 
@@ -369,7 +364,7 @@ int CtrlAudioGeometryPolygon::getIndex()
 void CtrlAudioGeometryPolygon::setDirectOcclusion(float value)
 {
 	_geometrySettings.directocclusion = value;
-	this->notify(ENP_AUDIO);
+	this->notify(NodeNotifyType::AUDIO);
 }
 
 float CtrlAudioGeometryPolygon::getDirectOcclusion()
@@ -380,7 +375,7 @@ float CtrlAudioGeometryPolygon::getDirectOcclusion()
 void CtrlAudioGeometryPolygon::setReverbOcclusion(float value)
 {
 	_geometrySettings.reverbocclusion = value;
-	this->notify(ENP_AUDIO);
+	this->notify(NodeNotifyType::AUDIO);
 }
 
 float CtrlAudioGeometryPolygon::getReverbOcclusion()
@@ -391,7 +386,7 @@ float CtrlAudioGeometryPolygon::getReverbOcclusion()
 void CtrlAudioGeometryPolygon::setDoubleSided(bool value)
 {
 	_geometrySettings.doublesided = value;
-	this->notify(ENP_AUDIO);
+	this->notify(NodeNotifyType::AUDIO);
 }
 
 bool CtrlAudioGeometryPolygon::isDoubleSided()
@@ -417,7 +412,7 @@ bool CtrlAudioGeometryPolygon::setVertexes(const math::Vector3* vertexes, int nu
 		_vertexes.push_back(vertexes[i]);
 	}
 
-	this->notify(ENP_GEOMETRY);
+	this->notify(NodeNotifyType::GEOMETRY);
 
 	return true;
 }
@@ -442,7 +437,7 @@ bool CtrlAudioGeometryPolygon::setVertexes(const std::vector<math::Vector3>& ver
 		_vertexes.push_back(vertexes[i]);
 	}
 
-	this->notify(ENP_GEOMETRY);
+	this->notify(NodeNotifyType::GEOMETRY);
 	return true;
 }
 
@@ -453,7 +448,7 @@ bool CtrlAudioGeometryPolygon::setVertexes(const RectVertex& vertexes)
 	_vertexes.push_back(vertexes.rightDown);
 	_vertexes.push_back(vertexes.rightUp);
 	_vertexes.push_back(vertexes.leftUp);
-	this->notify(ENP_GEOMETRY);
+	this->notify(NodeNotifyType::GEOMETRY);
 	return true;
 }
 
@@ -471,7 +466,7 @@ bool CtrlAudioGeometryPolygon::updateVertex(int index, const math::Vector3& vert
 
 	_vertexes[index] = vertex;
 
-	this->notify(ENP_GEOMETRY);
+	this->notify(NodeNotifyType::GEOMETRY);
 	return true;
 }
 
@@ -498,7 +493,7 @@ void CtrlAudioGeometryPolygon::onPolygonChange()
 		_realVerticeCount = count;
 		for (int i = 0; i < count; i++)
 		{
-			ConvertToFMODVector(_vertexes[i] + position, _realVertexes[i]);
+			ConvertToFMODVector(_vertexes[i] + position, &_realVertexes[i]);
 		}
 
 		FMOD_RESULT result = _geometry->addPolygon(_geometrySettings.directocclusion, _geometrySettings.reverbocclusion, _geometrySettings.doublesided,
@@ -515,7 +510,7 @@ void CtrlAudioGeometryPolygon::onPolygonChange()
 		for (int i = 0; i < count; i++)
 		{
 			FMOD_VECTOR pos;
-			ConvertToFMODVector(_vertexes[i] + position, pos);
+			ConvertToFMODVector(_vertexes[i] + position, &pos);
 			_geometry->setPolygonVertex(_index, i, &pos);
 		}
 	}

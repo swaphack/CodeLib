@@ -4,10 +4,14 @@
 #include <map>
 #include <string>
 
-namespace render
+namespace sys
 {
 	struct ImageDefine;
 	struct TextDefine;
+}
+
+namespace render
+{
 	class Texture;
 	class Texture2D;
 
@@ -30,11 +34,11 @@ namespace render
 		Texture* getTexture(const std::string& path);
 	public:
 		// 添加一个2d纹理
-		Texture2D* createTexture2D(const ImageDefine& imageDefine);
+		Texture2D* createTexture2D(const sys::ImageDefine& imageDefine);
 		// 添加一个2d纹理
 		Texture2D* createTexture2D(const std::string& path);
 		// 添加一个文本纹理
-		Texture2D* createTexture2D(const TextDefine& textDefine);
+		Texture2D* createTexture2D(const sys::TextDefine& textDefine);
 	private:
 		std::map<std::string, Texture*> _textures;
 	};

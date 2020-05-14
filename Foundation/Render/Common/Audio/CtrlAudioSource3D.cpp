@@ -21,15 +21,15 @@ bool CtrlAudioSource3D::init()
 		return false;
 	}
 
-	_notify->addListen(ENP_SPACE, [this](){
+	_notify->addListen(NodeNotifyType::SPACE, [this](){
 		FMOD_VECTOR pos;
 		FMOD_VECTOR vel;
 
 		math::Matrix44 mat = this->getWorldMatrix();
 		_3dSettings.position = mat.getPosition();
 
-		ConvertToFMODVector(_3dSettings.position, pos);
-		ConvertToFMODVector(_3dSettings.velocity, vel);
+		ConvertToFMODVector(_3dSettings.position, &pos);
+		ConvertToFMODVector(_3dSettings.velocity, &vel);
 
 		AUDIO_SET_FUNC(_channel, set3DAttributes, &pos, &vel);
 	});
@@ -87,7 +87,7 @@ Cone3DSettings CtrlAudioSource3D::get3DConeSettings()
 void CtrlAudioSource3D::set3DConeOrientation(const math::Vector3& orientation)
 {
 	FMOD_VECTOR vector;
-	ConvertToFMODVector(orientation, vector);
+	ConvertToFMODVector(orientation, &vector);
 	AUDIO_SET_FUNC(_channel, set3DConeOrientation, &vector);
 }
 
@@ -97,7 +97,7 @@ math::Vector3 CtrlAudioSource3D::get3DConeOrientation()
 	AUDIO_DO_FUNC(_channel, get3DConeOrientation, &vector);
 
 	math::Vector3 dest;
-	ConvertToSysVector(vector, dest);
+	ConvertToSysVector(&vector, dest);
 
 	return dest;
 }
@@ -113,7 +113,7 @@ void CtrlAudioSource3D::set3DCustomRolloff(const std::vector<math::Vector3>& poi
 	FMOD_VECTOR* pVector = new FMOD_VECTOR[count];
 	for (int i = 0; i < count; i++)
 	{
-		ConvertToFMODVector(points[i], pVector[i]);
+		ConvertToFMODVector(points[i], &pVector[i]);
 	}
 
 	AUDIO_SET_FUNC(_channel, set3DCustomRolloff, pVector, count);
@@ -132,7 +132,7 @@ std::vector<math::Vector3> CtrlAudioSource3D::get3DCustomRolloff()
 	for (int i = 0; i < count; i++)
 	{
 		math::Vector3 dest;
-		ConvertToSysVector(pVector[i], dest);
+		ConvertToSysVector(&pVector[i], dest);
 		data.push_back(dest);
 	}
 

@@ -30,38 +30,38 @@ public:
 	{
 		switch (key)
 		{
-		case sys::EBK_0: return '0';
-		case sys::EBK_1: return '1';
-		case sys::EBK_2: return '2';
-		case sys::EBK_3: return '3';
-		case sys::EBK_4: return '4';
-		case sys::EBK_5: return '5';
-		case sys::EBK_6: return '6';
-		case sys::EBK_7: return '7';
-		case sys::EBK_8: return '8';
-		case sys::EBK_9: return '9';
+		case sys::BoardKey::K0: return '0';
+		case sys::BoardKey::K1: return '1';
+		case sys::BoardKey::K2: return '2';
+		case sys::BoardKey::K3: return '3';
+		case sys::BoardKey::K4: return '4';
+		case sys::BoardKey::K5: return '5';
+		case sys::BoardKey::K6: return '6';
+		case sys::BoardKey::K7: return '7';
+		case sys::BoardKey::K8: return '8';
+		case sys::BoardKey::K9: return '9';
 		default: return 0;
 		}
 	}
 	// Êý×Ö°åÊý×Ö
 	char getPadNumber(sys::BoardKey key)
 	{
-		if (_controlkeys[sys::EBK_NUMLOCK] == false)
+		if (_controlkeys[sys::BoardKey::KNUMLOCK] == false)
 		{
 			return 0;
 		}
 		switch (key)
 		{
-			case sys::EBK_NUMPAD0: return '0';
-			case sys::EBK_NUMPAD1: return '1';
-			case sys::EBK_NUMPAD2: return '2';
-			case sys::EBK_NUMPAD3: return '3';
-			case sys::EBK_NUMPAD4: return '4';
-			case sys::EBK_NUMPAD5: return '5';
-			case sys::EBK_NUMPAD6: return '6';
-			case sys::EBK_NUMPAD7: return '7';
-			case sys::EBK_NUMPAD8: return '8';
-			case sys::EBK_NUMPAD9: return '9';
+			case sys::BoardKey::KNUMPAD0: return '0';
+			case sys::BoardKey::KNUMPAD1: return '1';
+			case sys::BoardKey::KNUMPAD2: return '2';
+			case sys::BoardKey::KNUMPAD3: return '3';
+			case sys::BoardKey::KNUMPAD4: return '4';
+			case sys::BoardKey::KNUMPAD5: return '5';
+			case sys::BoardKey::KNUMPAD6: return '6';
+			case sys::BoardKey::KNUMPAD7: return '7';
+			case sys::BoardKey::KNUMPAD8: return '8';
+			case sys::BoardKey::KNUMPAD9: return '9';
 			default: return 0;
 		}
 	}
@@ -69,36 +69,36 @@ public:
 	// ×Ö·û
 	char getLetter(sys::BoardKey key)
 	{
-		if (_controlkeys[sys::EBK_CAPITAL])
+		if (_controlkeys[sys::BoardKey::KCAPITAL])
 		{
 			switch (key)
 			{
-			case sys::EBK_A: return 'A';
-			case sys::EBK_B: return 'B';
-			case sys::EBK_C: return 'C';
-			case sys::EBK_D: return 'D';
-			case sys::EBK_E: return 'E';
-			case sys::EBK_F: return 'F';
-			case sys::EBK_G: return 'G';
-			case sys::EBK_H: return 'H';
-			case sys::EBK_I: return 'I';
-			case sys::EBK_J: return 'J';
-			case sys::EBK_K: return 'K';
-			case sys::EBK_L: return 'L';
-			case sys::EBK_M: return 'M';
-			case sys::EBK_N: return 'N';
-			case sys::EBK_O: return 'O';
-			case sys::EBK_P: return 'P';
-			case sys::EBK_Q: return 'Q';
-			case sys::EBK_R: return 'R';
-			case sys::EBK_S: return 'S';
-			case sys::EBK_T: return 'T';
-			case sys::EBK_U: return 'U';
-			case sys::EBK_V: return 'V';
-			case sys::EBK_W: return 'W';
-			case sys::EBK_X: return 'X';
-			case sys::EBK_Y: return 'Y';
-			case sys::EBK_Z: return 'Z';
+			case sys::BoardKey::KA: return 'A';
+			case sys::BoardKey::KB: return 'B';
+			case sys::BoardKey::KC: return 'C';
+			case sys::BoardKey::KD: return 'D';
+			case sys::BoardKey::KE: return 'E';
+			case sys::BoardKey::KF: return 'F';
+			case sys::BoardKey::KG: return 'G';
+			case sys::BoardKey::KH: return 'H';
+			case sys::BoardKey::KI: return 'I';
+			case sys::BoardKey::KJ: return 'J';
+			case sys::BoardKey::KK: return 'K';
+			case sys::BoardKey::KL: return 'L';
+			case sys::BoardKey::KM: return 'M';
+			case sys::BoardKey::KN: return 'N';
+			case sys::BoardKey::KO: return 'O';
+			case sys::BoardKey::KP: return 'P';
+			case sys::BoardKey::KQ: return 'Q';
+			case sys::BoardKey::KR: return 'R';
+			case sys::BoardKey::KS: return 'S';
+			case sys::BoardKey::KT: return 'T';
+			case sys::BoardKey::KU: return 'U';
+			case sys::BoardKey::KV: return 'V';
+			case sys::BoardKey::KW: return 'W';
+			case sys::BoardKey::KX: return 'X';
+			case sys::BoardKey::KY: return 'Y';
+			case sys::BoardKey::KZ: return 'Z';
 			default: return 0;
 			}
 		}
@@ -106,32 +106,32 @@ public:
 		{
 			switch (key)
 			{
-			case sys::EBK_A: return 'a';
-			case sys::EBK_B: return 'b';
-			case sys::EBK_C: return 'c';
-			case sys::EBK_D: return 'd';
-			case sys::EBK_E: return 'e';
-			case sys::EBK_F: return 'f';
-			case sys::EBK_G: return 'g';
-			case sys::EBK_H: return 'h';
-			case sys::EBK_I: return 'i';
-			case sys::EBK_J: return 'j';
-			case sys::EBK_K: return 'k';
-			case sys::EBK_L: return 'l';
-			case sys::EBK_M: return 'm';
-			case sys::EBK_N: return 'n';
-			case sys::EBK_O: return 'o';
-			case sys::EBK_P: return 'p';
-			case sys::EBK_Q: return 'q';
-			case sys::EBK_R: return 'r';
-			case sys::EBK_S: return 's';
-			case sys::EBK_T: return 't';
-			case sys::EBK_U: return 'u';
-			case sys::EBK_V: return 'v';
-			case sys::EBK_W: return 'w';
-			case sys::EBK_X: return 'x';
-			case sys::EBK_Y: return 'y';
-			case sys::EBK_Z: return 'z';
+			case sys::BoardKey::KA: return 'a';
+			case sys::BoardKey::KB: return 'b';
+			case sys::BoardKey::KC: return 'c';
+			case sys::BoardKey::KD: return 'd';
+			case sys::BoardKey::KE: return 'e';
+			case sys::BoardKey::KF: return 'f';
+			case sys::BoardKey::KG: return 'g';
+			case sys::BoardKey::KH: return 'h';
+			case sys::BoardKey::KI: return 'i';
+			case sys::BoardKey::KJ: return 'j';
+			case sys::BoardKey::KK: return 'k';
+			case sys::BoardKey::KL: return 'l';
+			case sys::BoardKey::KM: return 'm';
+			case sys::BoardKey::KN: return 'n';
+			case sys::BoardKey::KO: return 'o';
+			case sys::BoardKey::KP: return 'p';
+			case sys::BoardKey::KQ: return 'q';
+			case sys::BoardKey::KR: return 'r';
+			case sys::BoardKey::KS: return 's';
+			case sys::BoardKey::KT: return 't';
+			case sys::BoardKey::KU: return 'u';
+			case sys::BoardKey::KV: return 'v';
+			case sys::BoardKey::KW: return 'w';
+			case sys::BoardKey::KX: return 'x';
+			case sys::BoardKey::KY: return 'y';
+			case sys::BoardKey::KZ: return 'z';
 			default: return 0;
 			}
 		}
@@ -142,14 +142,14 @@ public:
 	{
 		switch (key)
 		{
-		case sys::EBK_SPACE: return ' ';
+		case sys::BoardKey::KSPACE: return ' ';
 		default: return 0;
 		}
 	}
 
 	void setControlKey(sys::BoardKey key)
 	{
-		if (key == sys::EBK_CAPITAL || key == sys::EBK_NUMLOCK)
+		if (key == sys::BoardKey::KCAPITAL || key == sys::BoardKey::KNUMLOCK)
 		{
 			_controlkeys[key] = !_controlkeys[key];
 		}
@@ -191,21 +191,21 @@ CtrlText* CtrlEditLabel::getCtrlText()
 
 void CtrlEditLabel::onInputHand(sys::BoardKey key, sys::ButtonStatus type)
 {
-	if (type != sys::EBS_BUTTON_DOWN)
+	if (type != sys::ButtonStatus::BUTTON_DOWN)
 	{
 		return;
 	}
 
 	G_KEYCHAR->setControlKey(key);
 
-	if (key == sys::EBK_RETURN)
+	if (key == sys::BoardKey::KRETURN)
 	{
 		onInputKeyReturnHandler();
 		return;
 	}
 
 	std::string text = this->getString();
-	if (key == sys::EBK_BACK)
+	if (key == sys::BoardKey::KBACK)
 	{
 		onInputKeyBackHandler();
 		return;

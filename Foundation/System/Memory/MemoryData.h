@@ -15,7 +15,7 @@ namespace sys
 		MemoryData(size_t length, const int8_t* value);
 		MemoryData(size_t length, const char* value);
 		MemoryData(size_t length, const uint8_t* value);
-		MemoryData(size_t length, const int8_t* value, uint32_t typeSize);
+		MemoryData(size_t length, const char* value, uint32_t typeSize);
 		MemoryData(const MemoryData& value);
 		virtual ~MemoryData();
 	public:
@@ -34,7 +34,7 @@ namespace sys
 		/**
 		*	数据
 		*/
-		const int8_t* getValue() const;
+		const char* getValue() const;
 		/**
 		*	单位大小
 		*/
@@ -42,15 +42,15 @@ namespace sys
 		/**
 		*	偏移指针
 		*/
-		int8_t* getPtr(size_t offset = 0) const;
+		char* getPtr(size_t offset = 0) const;
 		/**
 		*	指定位置的置
 		*/
-		int8_t getValue(size_t index) const;
+		char getValue(size_t index) const;
 		/**
 		*	指定位置的置
 		*/
-		int8_t& getValue(size_t index);
+		char& getValue(size_t index);
 	public:
 		void init(size_t len);
 		/**
@@ -70,9 +70,7 @@ namespace sys
 		void init(size_t len, const float* value);
 		void init(size_t len, const double* value);
 	public:
-		void set(size_t offset, int size, const int8_t* value);
 		void set(size_t offset, int size, const char* value);
-		void insert(size_t offset, int size, const int8_t* value);
 		void insert(size_t offset, int size, const char* value);
 		void remove(size_t offset, int size);
 
@@ -85,7 +83,7 @@ namespace sys
 		/**
 		*	数据
 		*/
-		int8_t* _value = nullptr;
+		char* _value = nullptr;
 		/**
 		*	单位
 		*/

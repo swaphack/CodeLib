@@ -1,13 +1,12 @@
 #pragma once
 
 #include "system.h"
-#include "Common/struct/import.h"
 #include "ViewConfig.h"
 
 namespace render
 {
 	// opengl йсм╪
-	class View : public DirtyProtocol
+	class View : public sys::DirtyProtocol
 	{
 	public:
 		View();

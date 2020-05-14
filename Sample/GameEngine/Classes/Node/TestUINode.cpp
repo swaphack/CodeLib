@@ -40,11 +40,11 @@ void TestUINode::testEditBox()
 			return;
 		}
 
-		if (status == EEIS_BEGIN)
+		if (status == EditInputStatus::BEGIN)
 		{
 			pNode->setString("");
 		}
-		else if (status == EEIS_END)
+		else if (status == EditInputStatus::END)
 		{
 			PRINT("Input Text %s\n", pNode->getString().c_str());
 		}
@@ -72,7 +72,7 @@ void TestUINode::testSequenceFrame()
 
 void TestUINode::onKeyBoardRole(sys::Object* object, sys::BoardKey key, sys::ButtonStatus type)
 {
-	if (type != EBS_BUTTON_DOWN)
+	if (type != ButtonStatus::BUTTON_DOWN)
 	{
 		return;
 	}
@@ -100,19 +100,19 @@ void TestUINode::onKeyBoardRole(sys::Object* object, sys::BoardKey key, sys::But
 
 	int index = 0;
 
-	if (key == EBK_UP)
+	if (key == BoardKey::KUP)
 	{
 		index = 0;
 	}
-	else if (key == EBK_DOWN)
+	else if (key == BoardKey::KDOWN)
 	{
 		index = 1;
 	}
-	else if (key == EBK_LEFT)
+	else if (key == BoardKey::KLEFT)
 	{
 		index = 2;
 	}
-	else if (key == EBK_RIGHT)
+	else if (key == BoardKey::KRIGHT)
 	{
 		index = 3;
 	}
@@ -170,7 +170,7 @@ void TestUINode::testScrollView()
 		pScrollView->append(pImage);
 	}
 
-	pScrollView->setScrollDirection(ESD_HORIZONTAL_LEFT);
+	pScrollView->setScrollDirection(ScrollDirection::HORIZONTAL_LEFT_TO_RIGHT);
 }
 
 void TestUINode::testMask()

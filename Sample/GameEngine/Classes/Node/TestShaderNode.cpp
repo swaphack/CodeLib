@@ -16,8 +16,8 @@ TestShaderNode::~TestShaderNode()
 
 void TestShaderNode::testFunc()
 {
-	//this->testImageShader();
-	//this->testModelShader();
+	this->testImageShader();
+	this->testModelShader();
 	this->test3dsModelShader();
 	this->testFbxModelShader();
 	this->testObjModelShader();
@@ -109,9 +109,9 @@ void TestShaderNode::testModelShader()
 	pModel->addTexture(textureName1, pTexture1);
 
 	pModel->setAllFacesTexture(textureName);
-	pModel->setFaceTexture(EMF_FRONT, textureName1);
-	pModel->setFaceTexture(EMF_LEFT, textureName1);
-	pModel->setFaceTexture(EMF_TOP, textureName1);
+	pModel->setFaceTexture(ModelFace::FRONT, textureName1);
+	pModel->setFaceTexture(ModelFace::LEFT, textureName1);
+	pModel->setFaceTexture(ModelFace::TOP, textureName1);
 
 	pModel->setAnchorPoint(math::Vector3(0.5f, 0.5f, 0.5f));
 	pModel->setPosition(400, 400, 0);

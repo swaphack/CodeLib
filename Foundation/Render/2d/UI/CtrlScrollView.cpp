@@ -36,14 +36,14 @@ ScrollItem* ScrollItem::create(Node* node, const math::Size& size)
 
 //////////////////////////////////////////////////////////////////////////
 CtrlScrollView::CtrlScrollView()
-:_scrollDirection(ESD_NONE)
+:_scrollDirection(ScrollDirection::NONE)
 {
 	_content = CREATE_NODE(Node);
 	this->addChild(_content);
 
-	this->getTouchProxy()->addTouchDelegate(ETT_DOWN, this, (TOUCH_DELEGATE_HANDLER)&CtrlScrollView::onBeginTouch);
-	this->getTouchProxy()->addTouchDelegate(ETT_ON, this, (TOUCH_DELEGATE_HANDLER)&CtrlScrollView::onMoveTouch);
-	this->getTouchProxy()->addTouchDelegate(ETT_UP, this, (TOUCH_DELEGATE_HANDLER)&CtrlScrollView::onEndTouch);
+	this->getTouchProxy()->addTouchDelegate(TouchType::DOWN, this, (TOUCH_DELEGATE_HANDLER)&CtrlScrollView::onBeginTouch);
+	this->getTouchProxy()->addTouchDelegate(TouchType::ON, this, (TOUCH_DELEGATE_HANDLER)&CtrlScrollView::onMoveTouch);
+	this->getTouchProxy()->addTouchDelegate(TouchType::UP, this, (TOUCH_DELEGATE_HANDLER)&CtrlScrollView::onEndTouch);
 }
 
 CtrlScrollView::~CtrlScrollView()
@@ -196,7 +196,7 @@ void CtrlScrollView::onTouchMoved(float x, float y)
 
 	switch (_scrollDirection)
 	{
-	case ESD_HORIZONTAL_LEFT:
+	case ScrollDirection::HORIZONTAL_LEFT_TO_RIGHT:
 	{
 		pos.setX(pos.getX() + delta.getX());
 		min = getWidth() - _content->getWidth() + offX;
@@ -205,7 +205,7 @@ void CtrlScrollView::onTouchMoved(float x, float y)
 		if (pos.getX() > max) pos.setX(max);
 		break;
 	}
-	case ESD_HORIZONTAL_RIGHT:
+	case ScrollDirection::HORIZONTAL_RIGHT_TO_LEFT:
 	{
 		pos.setX(pos.getX() + delta.getX());
 		min = getWidth() - _content->getWidth() + offX;
@@ -214,7 +214,7 @@ void CtrlScrollView::onTouchMoved(float x, float y)
 		if (pos.getX() > max) pos.setX(max);
 		break;
 	}
-	case ESD_VERTICAL_TOP:
+	case ScrollDirection::VERTICAL_TOP_TO_BOTTOM:
 	{
 		pos.setY(pos.getY() + delta.getY());
 		min = getHeight() - _content->getHeight() + offY;
@@ -223,7 +223,7 @@ void CtrlScrollView::onTouchMoved(float x, float y)
 		if (pos.getY() > max) pos.setY(max);
 		break;
 	}
-	case ESD_VERTICAL_BOTTOM:
+	case ScrollDirection::VERTICAL_BOTTOM_TO_TOP:
 	{
 		pos.setY(pos.getY() + delta.getY());
 		min = getHeight() - _content->getHeight() + offY;
@@ -248,7 +248,7 @@ void CtrlScrollView::onTouchEnded(float x, float y)
 
 void CtrlScrollView::initItems()
 {
-	if (_scrollDirection == ESD_NONE)
+	if (_scrollDirection == ScrollDirection::NONE)
 	{
 		return;
 	}
@@ -261,7 +261,7 @@ void CtrlScrollView::initItems()
 
 	switch (_scrollDirection)
 	{
-	case ESD_HORIZONTAL_LEFT:
+	case ScrollDirection::HORIZONTAL_LEFT_TO_RIGHT:
 	{
 		std::vector<Node*>::iterator iter = _nodes.begin();
 		while (iter != _nodes.end())
@@ -274,7 +274,7 @@ void CtrlScrollView::initItems()
 		_content->setVolume(abs(posX), getHeight());
 		break;
 	}
-	case ESD_HORIZONTAL_RIGHT:
+	case ScrollDirection::HORIZONTAL_RIGHT_TO_LEFT:
 	{
 		std::vector<Node*>::reverse_iterator iter = _nodes.rbegin();
 		while (iter != _nodes.rend())
@@ -287,7 +287,7 @@ void CtrlScrollView::initItems()
 		_content->setVolume(abs(posX), getHeight());
 		break;
 	}
-	case ESD_VERTICAL_TOP:
+	case ScrollDirection::VERTICAL_TOP_TO_BOTTOM:
 	{
 		std::vector<Node*>::iterator iter = _nodes.begin();
 		while (iter != _nodes.end())
@@ -300,7 +300,7 @@ void CtrlScrollView::initItems()
 		_content->setVolume(getWidth(), abs(posY));
 		break;
 	}
-	case ESD_VERTICAL_BOTTOM:
+	case ScrollDirection::VERTICAL_BOTTOM_TO_TOP:
 	{
 		std::vector<Node*>::reverse_iterator iter = _nodes.rbegin();
 		while (iter != _nodes.rend())
@@ -325,16 +325,16 @@ void CtrlScrollView::initContent()
 
 	switch (_scrollDirection)
 	{
-	case ESD_HORIZONTAL_LEFT:
+	case ScrollDirection::HORIZONTAL_LEFT_TO_RIGHT:
 		_content->setPosition(0 + offX, 0 + offY);
 		break;
-	case ESD_HORIZONTAL_RIGHT:
+	case ScrollDirection::HORIZONTAL_RIGHT_TO_LEFT:
 		_content->setPosition(getWidth() - _content->getWidth() + offX, 0 + offY);
 		break;
-	case ESD_VERTICAL_TOP:
+	case ScrollDirection::VERTICAL_TOP_TO_BOTTOM:
 		_content->setPosition(0 + offX, getHeight() - _content->getHeight() + offY);
 		break;
-	case ESD_VERTICAL_BOTTOM:
+	case ScrollDirection::VERTICAL_BOTTOM_TO_TOP:
 		_content->setPosition(0 + offX, 0 + offY);
 		break;
 	default:

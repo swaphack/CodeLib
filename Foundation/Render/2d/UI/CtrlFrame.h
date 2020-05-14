@@ -1,9 +1,8 @@
 #pragma once
 
-
 #include "CtrlWidget.h"
-
 #include "mathlib.h"
+#include "Common/struct/texture_common.h"
 
 namespace render
 {
@@ -34,33 +33,22 @@ namespace render
 		void setFlipY(bool status);
 		// 是否垂直翻转
 		bool isFlipY();
-		// 是否顺时针
-		bool isCounter();
-		// 设置是否顺时针
-		void setCounter(bool status);
 	public:
 		Material* getMaterial();
 		Mesh* getMesh();
 	protected:
-		virtual void drawSample();
-	protected:
 		void onTextureChange();
 
-		void drawSampleWithClientArray();
-		void drawSampleWithBufferObject();
-
-		void initBufferObject();
-		void updateBufferData();
+		virtual void drawSampleWithClientArray();
+		virtual void initBufferObject();
+		virtual void updateBufferData();
 	protected:
 		// 纹理坐标
 		TextureRectVertex _texRect;
 		// 是否水平翻转
-		bool _bFlipX;
+		bool _bFlipX = false;
 		// 是否垂直翻转
-		bool _bFlipY;
-		// 材质
-		Material* _material = nullptr;
-		// 网格
-		Mesh* _mesh = nullptr;
+		bool _bFlipY = false;
+		
 	};
 }

@@ -178,22 +178,22 @@ void Tool::calRect(const math::Vector3& position, const math::Volume& volume, co
 	// left down
 	x = position.getX() - volume.getWidth() * anchor.getX();
 	y = position.getY() - volume.getHeight() * anchor.getY();
-	rectVertex.leftDown = Tool::convertToOGLPoisition(x, y, position.getZ());
+	rectVertex.leftDown = math::Vector3(x, y, position.getZ());
 
 	// right down
 	x = position.getX() + volume.getWidth() * (1 - anchor.getX());
 	y = position.getY() - volume.getHeight() * anchor.getY();
-	rectVertex.rightDown = Tool::convertToOGLPoisition(x, y, position.getZ());
+	rectVertex.rightDown = math::Vector3(x, y, position.getZ());
 
 	// right up
 	x = position.getX() + volume.getWidth() * (1 - anchor.getX());
 	y = position.getY() + volume.getHeight() * (1 - anchor.getY());
-	rectVertex.rightUp = Tool::convertToOGLPoisition(x, y, position.getZ());
+	rectVertex.rightUp = math::Vector3(x, y, position.getZ());
 
 	// left up
 	x = position.getX() - volume.getWidth() * anchor.getX();
 	y = position.getY() + volume.getHeight() * (1 - anchor.getY());
-	rectVertex.leftUp = Tool::convertToOGLPoisition(x, y, position.getZ());
+	rectVertex.leftUp = math::Vector3(x, y, position.getZ());
 }
 
 void Tool::calRealRect(const math::Vector3& position, const math::Volume& volume, const math::Vector3& anchor, RectVertex& rectVertex)

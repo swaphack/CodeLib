@@ -11,7 +11,7 @@ CtrlMask::~CtrlMask()
 
 }
 
-void CtrlMask::drawSample()
+void CtrlMask::drawing()
 {
 	GLVertex::beginMode(ShapeMode::QUADS);
 

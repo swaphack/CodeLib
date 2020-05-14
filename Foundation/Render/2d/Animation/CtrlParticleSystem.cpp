@@ -15,7 +15,7 @@ ParticleNode::~ParticleNode()
 
 }
 
-void ParticleNode::drawSample()
+void ParticleNode::drawing()
 {
 	GLState::enable(EnableModel::TEXTURE_2D);
 	GLTexture::bindTexture2D(0);
@@ -53,9 +53,8 @@ void ParticleNode::update(float interval)
 	_rotation += _angleAcceleration;
 
 	convertColor4FTo4B(_colorInit, _color);
-	TextureTool::setTexture2DVertexts(&_texRect, math::Vector3(), _volume, _anchor);
 
-	Tool::convertToOGLPoisition(_position, _obPosition);
+	this->notify(NodeNotifyType::SPACE);
 }
 /*
 void ParticleNode::notifyEvents()

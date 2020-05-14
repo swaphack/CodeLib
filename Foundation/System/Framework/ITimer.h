@@ -7,6 +7,6 @@ namespace sys
 	public:
 		virtual ~ITimer() {}
 	public:
-		virtual void update(float int32erval) = 0;
+		virtual void update(float interval) = 0;
 	};
 }

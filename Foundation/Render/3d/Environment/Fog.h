@@ -1,18 +1,18 @@
 #pragma once
 
-#include "Common/Node/ColorNode.h"
+#include "Common/DrawNode/DrawNode.h"
 #include "Graphic/GLAPI/macros.h"
 
 namespace render
 {
 	// Он
-	class Fog : public ColorNode
+	class Fog : public DrawNode
 	{
 	public:
 		Fog();
 		virtual ~Fog();
 	protected:
-		virtual void drawSample();
+		virtual void drawing();
 	public:
 		// ЅьѕаАл
 		float getNear() const;

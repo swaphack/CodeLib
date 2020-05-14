@@ -127,7 +127,7 @@ void CtrlAnimation::updateSelf(float interval)
 
 void CtrlAnimation::onFrameChange()
 {
-	this->notify(ENP_ANIMATION_FRAME);
+	this->notify(NodeNotifyType::ANIMATION);
 }
 
 bool CtrlAnimation::init()

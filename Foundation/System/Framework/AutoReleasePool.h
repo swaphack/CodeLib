@@ -33,5 +33,5 @@ namespace sys
 		uint32_t _threadCount = 0;
 	};
 
-	#define G_AUTORELEASEPOOL sys::Instance<sys::AutoReleasePool>::getInstance()
+	#define G_AUTORELEASEPOOL Instance<AutoReleasePool>::getInstance()
 }

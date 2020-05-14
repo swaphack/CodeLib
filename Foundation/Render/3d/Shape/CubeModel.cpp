@@ -1,10 +1,7 @@
 #include "CubeModel.h"
-#include "Resource/Detail/ModelDetail.h"
 #include "Common/Texture/Texture.h"
-#include "Resource/Detail/MaterialDetail.h"
-#include "Resource/Detail/MeshDetail.h"
 #include "Common/Tool/TextureTool.h"
-#include "Common/Node/import.h"
+#include "Common/DrawNode/import.h"
 
 using namespace render;
 
@@ -23,16 +20,16 @@ bool CubeModel::init()
 		return false;
 	}
 
-	_notify->addListen(ENP_SPACE, [this](){
+	_notify->addListen(NodeNotifyType::SPACE, [this](){
 		this->onCubeChange();
 	});
 
 	for (int i = 0; i < CUBE_FACE_COUNT; i++)
 	{
-		auto pMat = CREATE_OBJECT(MaterialDetail);
+		auto pMat = CREATE_OBJECT(sys::MaterialDetail);
 		_material->addMaterial(i, pMat);
 
-		auto pMesh = CREATE_OBJECT(MeshDetail);
+		auto pMesh = CREATE_OBJECT(sys::MeshDetail);
 		_mesh->addMesh(i, pMesh);
 
 		pMesh->setMaterial(i);
@@ -41,7 +38,7 @@ bool CubeModel::init()
 		pMesh->setIndices(6, _faces[i].indices);
 		pMesh->setColors(16, _faces[i].colors);
 	}
-	this->notify(ENP_MODEL_FRAME);
+	this->notify(NodeNotifyType::MODEL);
 	return true;
 }
 
@@ -75,7 +72,7 @@ void CubeModel::onCubeChange()
 		pMesh->setVertices(12, vertices);
 	}
 
-	this->notify(ENP_MODEL_FRAME);
+	this->notify(NodeNotifyType::MODEL);
 }
 
 void render::CubeModel::addTexture(const std::string& name, Texture2D* texture)

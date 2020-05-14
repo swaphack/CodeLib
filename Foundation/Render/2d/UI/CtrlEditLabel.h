@@ -1,7 +1,7 @@
 #pragma once
 
 #include "CtrlEditBox.h"
-#include "Common/struct/protocol_common.h"
+#include "TextProtocol.h"
 
 namespace render
 {
@@ -28,6 +28,6 @@ namespace render
 		// ÊäÈë×Ö·ûÊÂ¼ş
 		virtual void onInputKeyCharHandler(char value);
 	private:
-		CtrlText* _ctrlText;
+		CtrlText* _ctrlText = nullptr;
 	};
 }

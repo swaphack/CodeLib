@@ -32,18 +32,20 @@ bool File::write(const std::string& url, const char* data, size_t size, size_t& 
 	return true;
 }
 
-char* File::read(const std::string& url, size_t& readSize)
+MemoryData File::read(const std::string& url, size_t& readSize)
 {
+	readSize = 0;
+	MemoryData data;
 	if (url.empty())
 	{
-		return nullptr;
+		return data;
 	}
 
 	FILE* fptr = nullptr;
 	fptr = fopen(url.c_str(), "rb+");
 	if (fptr == nullptr)
 	{
-		return nullptr;
+		return data;
 	}
 
 	fseek(fptr, 0, SEEK_SET);
@@ -51,13 +53,15 @@ char* File::read(const std::string& url, size_t& readSize)
 	size_t count = ftell(fptr);
 	fseek(fptr, 0, SEEK_SET);
 
-	char* str = (char*)malloc(count * sizeof(char));
+	data.resize(count);
+
+	char* str = data.getPtr();
 
 	readSize = fread(str, sizeof(char), count, fptr);
 
 	fclose(fptr);
 
-	return str;
+	return data;
 }
 
 bool File::read(const std::string& url, std::string& data)
@@ -70,15 +74,13 @@ bool File::read(const std::string& url, std::string& data)
 
 	size_t size = 0;
 
-	char* temp = read(url, size);
-	if (temp == nullptr)
+	MemoryData memData = read(url, size);
+	if (size <= 0)
 	{
 		return false;
 	}
 
-	data = std::string(temp, size);
-
-	StreamHelper::freeStream(temp);
+	data = std::string((char*)memData.getValue(), memData.getSize());
 
 	return true;
 }
@@ -133,7 +135,7 @@ File::File(const std::string& url)
 	
 }
 
-File::File(const std::string& url, int32_t mode)
+File::File(const std::string& url, uint32_t mode)
 	: m_pFile(nullptr)
 	, m_strUrl(url)
 	, m_nModel(mode)
@@ -162,16 +164,18 @@ bool File::write(const char* data, size_t size, size_t& writtenSize)
 	return writtenSize == size;
 }
 
-char* File::read(size_t& size)
+MemoryData File::read(size_t& size)
 {
+	MemoryData data;
+	size = 0;
 	if (m_pFile == nullptr)
 	{
-		return nullptr;
+		return data;
 	}
 
 	if (m_nModel & eFM_READ)
 	{
-		return nullptr;
+		return data;
 	}
 
 	fseek(m_pFile, 0, SEEK_SET);
@@ -183,7 +187,7 @@ char* File::read(size_t& size)
 
 	size = fread(str, sizeof(char), count, m_pFile);
 
-	return str;
+	return data;
 }
 
 bool File::read(std::string& data)
@@ -195,15 +199,13 @@ bool File::read(std::string& data)
 		return false;
 	}
 
-	char* temp = read(size);
-	if (temp == nullptr)
+	MemoryData memData = read(size);
+	if (size <= 0)
 	{
 		return false;
 	}
 
-	data = std::string(temp, size);
-
-	StreamHelper::freeStream(temp);
+	data = std::string((char*)memData.getValue(), memData.getSize());
 
 	return true;
 }

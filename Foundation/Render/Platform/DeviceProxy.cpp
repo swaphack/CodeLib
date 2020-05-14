@@ -21,7 +21,7 @@ DeviceProxy::~DeviceProxy()
 
 void DeviceProxy::onMouseButtonHandler(sys::MouseKey key, sys::ButtonStatus type, float x, float y)
 {
-	if (key != sys::EMK_LEFTBUTTON)
+	if (key != sys::MouseKey::LEFTBUTTON)
 	{
 		return;
 	}
@@ -32,11 +32,11 @@ void DeviceProxy::onMouseButtonHandler(sys::MouseKey key, sys::ButtonStatus type
 	}
 
 	math::Volume size = Tool::getGLViewSize();
-	if (type == sys::EBS_BUTTON_DOWN)
+	if (type == sys::ButtonStatus::BUTTON_DOWN)
 	{
 		_touchManager->onTouchBegan(x, size.getHeight() - y);
 	}
-	else if (type == sys::EBS_BUTTON_UP)
+	else if (type == sys::ButtonStatus::BUTTON_UP)
 	{
 		_touchManager->onTouchEnded(x, size.getHeight() - y);
 	}

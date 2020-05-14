@@ -18,25 +18,25 @@ NetData::NetData()
 	this->pos = 0;
 }
 
-sys::NetData::NetData(const NetData& value)
+NetData::NetData(const NetData& value)
 :NetData(value.data)
 {
 	
 }
 
-sys::NetData::NetData(const MemoryData& value)
+NetData::NetData(const MemoryData& value)
 {
 	this->init((const char*)data.getValue(), data.getLength());
 }
 
-uint32_t sys::NetData::getSize()
+uint32_t NetData::getSize()
 {
 	return data.getSize();
 }
 
-const char* sys::NetData::getPtr()
+const char* NetData::getPtr()
 {
-	return (const char*)data.getPtr();
+	return data.getPtr();
 }
 
 NetData::~NetData()
@@ -64,7 +64,7 @@ int32_t NetData::getRemainSize()
 
 const char* NetData::getCursorPtr()
 {
-	return (const char*)data.getPtr(pos);
+	return data.getPtr(pos);
 }
 
 

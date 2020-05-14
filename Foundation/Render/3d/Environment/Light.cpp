@@ -19,12 +19,6 @@ Light::Light()
 	_lightSpecular[1] = 1.0f;
 	_lightSpecular[2] = 1.0f;
 	_lightSpecular[3] = 1.0f;
-
-	_lightPosition[0] = 0.0f;
-	_lightPosition[1] = 0.0f;
-	_lightPosition[2] = 1.0f;
-	_lightPosition[3] = 0.0f;
-
 }
 
 Light::~Light()
@@ -42,7 +36,7 @@ void Light::draw()
 
 	GLLight::setLightSpecular(getLightName(), _lightSpecular);
 
-	GLLight::setLightPosition(getLightName(), _lightPosition);
+	GLLight::setLightPosition(getLightName(), _obPosition.getValue());
 
 	GLState::enable((EnableModel)getLightName());
 }
@@ -86,23 +80,12 @@ const float* Light::getSpecular()
 	return _lightSpecular;
 }
 
-void Light::onLightPositionChange()
-{
-	_lightPosition[0] = _obPosition.getX();
-	_lightPosition[1] = _obPosition.getY();
-	_lightPosition[2] = _obPosition.getZ();
-}
-
 bool Light::init()
 {
 	if (!Node::init())
 	{
 		return false;
 	}
-
-	_notify->addListen(ENP_SPACE, [&](){
-		this->onLightPositionChange();
-	});
 
 	return true;
 }

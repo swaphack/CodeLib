@@ -1,43 +1,40 @@
 #pragma once
 
-#include "Common/Node/ColorNode.h"
-#include "Graphic/GLAPI/macros.h"
+#include "../Node/Node.h"
+#include "DrawProtocol.h"
 
 namespace render
 {
-	// opengl基础绘图节点
-	class DrawNode : public ColorNode
+	class Material;
+	class Mesh;
+
+	/**
+	*	绘制节点
+	*/
+	class DrawNode :  
+		public Node, 
+		public ColorProtocol, 
+		public OpacityProtocol,
+		public BlendProtocol
 	{
 	public:
 		DrawNode();
 		virtual ~DrawNode();
-	protected:
-		virtual void drawSample();
 	public:
-		// 设置宽度
-		void setWidth(float width);
-		float getWidth();
-		// 模式
-		void setDrawMode(ShapeMode mode);
-		ShapeMode getDrawMode();
-		// 设置点坐标
-		void setPoints(const std::vector<math::Vector3>& points);
-		// 添加一个点坐标
-		void appendPoint(const math::Vector3& point);
-		// 添加一个点坐标
-		void appendPoint(const math::Vector2& point);
-		// 移除一个点坐标
-		void removePoint(const math::Vector3& point);
-		// 移除一个点坐标
-		void removePoint(const math::Vector2& point);
-		// 移除所有点坐标
-		void removeAllPoints();
-	private:
-		// 宽度
-		float _width = 1;
-		// 模式
-		ShapeMode _drawMode = ShapeMode::POINTS;
-		// 点坐标
-		std::vector<math::Vector3> _points;
+		virtual void draw();
+	public:
+		Material* getMaterial();
+		Mesh* getMesh();
+	protected:
+		virtual void drawing();
+	protected:
+		virtual void drawSampleWithClientArray();
+	protected:
+		void drawSampleWithBufferObject();
+	protected:
+		// 材质
+		Material* _material = nullptr;
+		// 网格
+		Mesh* _mesh = nullptr;
 	};
 }

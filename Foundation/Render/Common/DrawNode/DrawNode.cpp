@@ -1,107 +1,67 @@
 #include "DrawNode.h"
 #include "Graphic/import.h"
-#include "Common/Tool/Tool.h"
+#include "Material.h"
+#include "Mesh.h"
+
 using namespace render;
 
 
 DrawNode::DrawNode()
 {
+	_material = CREATE_OBJECT(Material);
+	SAFE_RETAIN(_material);
+
+	_mesh = CREATE_OBJECT(Mesh);
+	SAFE_RETAIN(_mesh);
 }
 
 DrawNode::~DrawNode()
 {
+
+	SAFE_RELEASE(_material);
+	SAFE_RELEASE(_mesh);
 }
 
-void DrawNode::drawSample()
+void DrawNode::draw()
 {
-	if (_drawMode == ShapeMode::POINTS)
-	{
-		GLState::setPointSize(_width);
-	}
-	else
-	{
-		GLState::setLineWidth(_width);
-	}
+	//GLState::pushAttrib(AttribMask::COLOR_BUFFER_BIT);
 
-	GLVertex::beginMode(_drawMode);
-	for (auto item : _points)
-	{
-		GLVertex::setVertex((item));
-	}
-	GLVertex::endMode();
+	GLState::enable(EnableModel::BLEND);
+	GLState::setBlendFunc(getBlend().src, getBlend().dest);
+	GLVertex::setColor(getColor());
+
+	this->drawing();
+
+	GLState::disable(EnableModel::BLEND);
+
+	//GLState::popAttrib();
 }
 
-void DrawNode::setWidth( float width )
+Material* render::DrawNode::getMaterial()
 {
-	_width = width;
+	return _material;
 }
 
-float DrawNode::getWidth()
+Mesh* render::DrawNode::getMesh()
 {
-	return _width;
+	return _mesh;
 }
 
-void DrawNode::setDrawMode(ShapeMode mode)
+void DrawNode::drawing()
 {
-	_drawMode = mode;
+#if USE_BUFFER_OBJECT
+	this->drawSampleWithBufferObject();
+#else
+	this->drawSampleWithClientArray();
+#endif
 }
 
-ShapeMode DrawNode::getDrawMode()
+void render::DrawNode::drawSampleWithClientArray()
 {
-	return _drawMode;
+
 }
 
-void DrawNode::appendPoint(const math::Vector3& point)
+void render::DrawNode::drawSampleWithBufferObject()
 {
-	math::Vector3 pos;
-	Tool::convertToOGLPoisition(point, pos);
-	_points.push_back(pos);
-}
-
-void DrawNode::appendPoint(const math::Vector2& point)
-{
-	math::Vector3 temp = point;
-	this->appendPoint(temp);
-}
-
-void DrawNode::removePoint(const math::Vector3& point)
-{
-	math::Vector3 pos;
-	Tool::convertToOGLPoisition(point, pos);
-
-	std::vector<math::Vector3>::iterator it = _points.begin();
-	while (it != _points.end())
-	{
-		if ((*it) == pos)
-		{
-			_points.erase(it);
-			return;
-		}
-		it++;
-	}
-}
-
-void DrawNode::removePoint(const math::Vector2& point)
-{
-	math::Vector3 temp = point;
-	this->removePoint(temp);
-}
-
-void DrawNode::removeAllPoints()
-{
-	_points.clear();
-}
-
-void DrawNode::setPoints(const std::vector<math::Vector3>& points)
-{
-	_points.clear();
-
-	std::vector<math::Vector3>::const_iterator it = points.begin();
-	while (it != points.end())
-	{
-		math::Vector3 pos;
-		Tool::convertToOGLPoisition(*it, pos);
-		_points.push_back(pos);
-		it++;
-	}
+	_mesh->draw(this, _material);
 }

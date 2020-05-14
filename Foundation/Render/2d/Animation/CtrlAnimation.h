@@ -1,7 +1,6 @@
 #pragma once
 
 #include "2d/UI/CtrlWidget.h"
-#include "Common/struct/protocol_common.h"
 
 namespace render
 {
@@ -11,8 +10,7 @@ namespace render
 
 	// ¶¯»­¿Ø¼þ
 	class CtrlAnimation : 
-		public CtrlWidget,
-		public ControlProtocol
+		public CtrlWidget
 	{
 	public:
 		CtrlAnimation();

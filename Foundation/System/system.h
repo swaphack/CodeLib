@@ -14,7 +14,7 @@
 #include "Text/import.h"
 #include "Security/import.h"
 #include "Concurrent/import.h"
-#include "Image/import.h"
+#include "Light/import.h"
 #include "CSS/Margin.h"
 #include "IO/import.h"
 #include "DateTime/import.h"

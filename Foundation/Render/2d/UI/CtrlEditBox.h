@@ -6,10 +6,10 @@
 namespace render
 {
 	// 编辑输入状态
-	enum EditInputStatus
+	enum class EditInputStatus
 	{
-		EEIS_BEGIN,	// 开始输入
-		EEIS_END,	// 输入结束
+		BEGIN,	// 开始输入
+		END,	// 输入结束
 	};
 	typedef void(*EDITINPUT_DELEGATE_HANDLER)(sys::Object* object, EditInputStatus status);
 

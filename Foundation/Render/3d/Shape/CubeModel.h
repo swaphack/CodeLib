@@ -1,6 +1,8 @@
 #pragma once
 
 #include "3d/Common/Model.h"
+#include "Common/struct/enum_common.h"
+#include "Common/struct/texture_common.h"
 
 namespace render
 {

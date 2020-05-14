@@ -22,19 +22,6 @@ namespace render
 		TextureVertex();
 	};
 
-	// »ìºÏ²ÎÊý
-	struct BlendParam
-	{
-		BlendingFactorSrc src = BlendingFactorSrc::ONE;
-		BlendingFactorDest dest = BlendingFactorDest::ONE_MINUS_SRC_ALPHA;
-
-		BlendParam();
-
-		BlendParam(BlendingFactorSrc src, BlendingFactorDest dest);
-
-		BlendParam& operator=(const BlendParam& blend);
-	};
-
 	struct TextureRectVertex
 	{
 		float vertices[12];

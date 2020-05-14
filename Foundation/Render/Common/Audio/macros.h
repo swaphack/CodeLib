@@ -29,7 +29,8 @@
 	}\
 	return value;\
 }
+	
 
-void ConvertToFMODVector(const math::Vector3& src, FMOD_VECTOR& dest);
+void ConvertToFMODVector(const math::Vector3& src, FMOD_VECTOR* dest);
 
-void ConvertToSysVector(const FMOD_VECTOR& src, math::Vector3& dest);
+void ConvertToSysVector(const FMOD_VECTOR* src, math::Vector3& dest);

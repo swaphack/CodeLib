@@ -1,7 +1,5 @@
 #include "Model3DS.h"
-#include "Resource/Paser/File3DS.h"
-#include "Resource/Loader/Loader.h"
-
+#include "ext-config.h"
 using namespace render;
 
 Model3DS::Model3DS()
@@ -14,8 +12,13 @@ Model3DS::~Model3DS()
 
 void Model3DS::load(const std::string& filepath)
 {
-	this->startThread([this, filepath](){
-		File3DS* pFile = Loader::load<File3DS>(filepath);
+	std::string fullpath = G_FILEPATH->getFilePath(filepath);
+	if (fullpath.empty())
+	{
+		return;
+	}
+	this->startThread([this, fullpath](){
+		sys::ModelDetail3DS* pFile = sys::Loader::loadModel<sys::ModelDetail3DS>(fullpath);
 		if (!pFile)
 		{
 			return;

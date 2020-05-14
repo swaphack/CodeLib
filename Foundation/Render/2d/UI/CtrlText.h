@@ -1,19 +1,19 @@
 #pragma once
 
 #include "CtrlFrame.h"
-#include "Common/struct/protocol_common.h"
-#include "Resource/Config/TextDefine.h"
-#include "2d/ctrl_common.h"
+#include "TextProtocol.h"
+#include "system.h"
 
 namespace render
 {
-	// 2d文本
-	/*
-		生成在指定区域的文字
-		水平对齐方式：左对齐，右对齐， 居中
-
-		在指定框内显示
-		垂直对齐方式：顶对齐，底对齐，居中
+	/**
+	*	2d文本
+	*
+	*	生成在指定区域的文字
+	*	水平对齐方式：左对齐，右对齐， 居中
+	*
+	*	在指定框内显示
+	*	垂直对齐方式：顶对齐，底对齐，居中
 	*/
 	class CtrlText : public CtrlFrame, public TextProtocol
 	{
@@ -42,13 +42,13 @@ namespace render
 		void setString(const std::string& text);
 
 		// 设置文本水平对齐方式
-		void setHorizontalAlignment(HorizontalAlignment alignment);
+		void setHorizontalAlignment(sys::HorizontalAlignment alignment);
 		// 获取文本水平对齐方式
-		HorizontalAlignment getHorizontalAlignment();
+		sys::HorizontalAlignment getHorizontalAlignment();
 		// 设置文本垂直对齐方式
-		void setVerticalAlignment(VerticalAlignment alignment);
+		void setVerticalAlignment(sys::VerticalAlignment alignment);
 		// 获取文本垂直对齐方式
-		VerticalAlignment getVerticalAlignment();
+		sys::VerticalAlignment getVerticalAlignment();
 		// 设置显示区域
 		void setDimensions(float width, float height);
 		// 设置显示区域
@@ -64,6 +64,6 @@ namespace render
 		virtual void onTextChange();
 	private:
 		// 文本结构
-		TextDefine _textDefine;
+		sys::TextDefine _textDefine;
 	};
 }

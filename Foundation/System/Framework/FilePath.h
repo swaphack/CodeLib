@@ -1,7 +1,5 @@
 #pragma once
 
-#include "Base/Instance.h"
-
 #include <vector>
 #include <map>
 #include <string>
@@ -30,6 +28,4 @@ namespace sys
 		// 缓存路径 文件名称->路径
 		std::map<std::string, std::string> _filePathCache;
 	};
-
-#define G_FILEPATH sys::Instance<sys::FilePath>::getInstance()
 }

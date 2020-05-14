@@ -32,13 +32,13 @@ bool CtrlAudioListener::init()
 
 	_listenerID = s_ListenerCount++;
 
-	_notify->addListen(ENP_SPACE, [this](){
+	_notify->addListen(NodeNotifyType::SPACE, [this](){
 		math::Matrix44 mat = this->getWorldMatrix();
 		_listenerBody.position = mat.getPosition();
 		updateListener();
 	});
 
-	_notify->addListen(ENP_AUDIO, [this](){
+	_notify->addListen(NodeNotifyType::AUDIO, [this](){
 		updateListener();
 	});
 
@@ -85,7 +85,7 @@ const math::Vector3& CtrlAudioListener::getUp()
 
 void CtrlAudioListener::onListenerChange()
 {
-	this->notify(ENP_AUDIO);
+	this->notify(NodeNotifyType::AUDIO);
 }
 
 void CtrlAudioListener::updateListener()
@@ -95,10 +95,10 @@ void CtrlAudioListener::updateListener()
 	FMOD_VECTOR forward;
 	FMOD_VECTOR up;
 
-	ConvertToFMODVector(_listenerBody.position, position);
-	ConvertToFMODVector(_listenerBody.velocity, velocity);
-	ConvertToFMODVector(_listenerBody.forward, forward);
-	ConvertToFMODVector(_listenerBody.up, up);
+	ConvertToFMODVector(_listenerBody.position, &position);
+	ConvertToFMODVector(_listenerBody.velocity, &velocity);
+	ConvertToFMODVector(_listenerBody.forward, &forward);
+	ConvertToFMODVector(_listenerBody.up, &up);
 
 	AUDIO_SET_FUNC(G_AUDIO->getSystem(), set3DListenerAttributes, _listenerID, &position, &velocity, &forward, &up);
 }

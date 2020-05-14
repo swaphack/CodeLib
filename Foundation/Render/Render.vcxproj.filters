@@ -34,9 +34,6 @@
     <ClCompile Include="Common\Action\Scheduler.cpp">
       <Filter>Common\Action</Filter>
     </ClCompile>
-    <ClCompile Include="Common\Node\ColorNode.cpp">
-      <Filter>Common\Node</Filter>
-    </ClCompile>
     <ClCompile Include="Common\Action\ActionProxy.cpp">
       <Filter>Common\Action</Filter>
     </ClCompile>
@@ -96,9 +93,6 @@
     <ClCompile Include="Common\Audio\macros.cpp">
       <Filter>Common\Audio</Filter>
     </ClCompile>
-    <ClCompile Include="Common\DrawNode\DrawNode.cpp">
-      <Filter>Common\DrawNode</Filter>
-    </ClCompile>
     <ClCompile Include="Common\Action\ExtAction.cpp">
       <Filter>Common\Action</Filter>
     </ClCompile>
@@ -156,21 +150,6 @@
     <ClCompile Include="3d\Shape\SphereModel.cpp">
       <Filter>3d\Shape</Filter>
     </ClCompile>
-    <ClCompile Include="Resource\Detail\MediaDetail.cpp">
-      <Filter>Resource\Detail</Filter>
-    </ClCompile>
-    <ClCompile Include="Resource\Detail\ModelDetail.cpp">
-      <Filter>Resource\Detail</Filter>
-    </ClCompile>
-    <ClCompile Include="Resource\Detail\AudioDetail.cpp">
-      <Filter>Resource\Detail</Filter>
-    </ClCompile>
-    <ClCompile Include="Resource\Detail\ImageDetail.cpp">
-      <Filter>Resource\Detail</Filter>
-    </ClCompile>
-    <ClCompile Include="Resource\Paser\File3DS.cpp">
-      <Filter>Resource\Parser</Filter>
-    </ClCompile>
     <ClCompile Include="3d\Common\Model3DS.cpp">
       <Filter>3d\Common</Filter>
     </ClCompile>
@@ -180,29 +159,8 @@
     <ClCompile Include="3d\Common\ModelObj.cpp">
       <Filter>3d\Common</Filter>
     </ClCompile>
-    <ClCompile Include="Resource\Paser\FileObj.cpp">
-      <Filter>Resource\Parser</Filter>
-    </ClCompile>
-    <ClCompile Include="Resource\Paser\FileFbx.cpp">
-      <Filter>Resource\Parser</Filter>
-    </ClCompile>
     <ClCompile Include="3d\Common\ModelFbx.cpp">
       <Filter>3d\Common</Filter>
-    </ClCompile>
-    <ClCompile Include="Resource\Paser\ImageJPEG.cpp">
-      <Filter>Resource\Parser</Filter>
-    </ClCompile>
-    <ClCompile Include="Resource\Paser\ImageLabel.cpp">
-      <Filter>Resource\Parser</Filter>
-    </ClCompile>
-    <ClCompile Include="Resource\Paser\ImagePNG.cpp">
-      <Filter>Resource\Parser</Filter>
-    </ClCompile>
-    <ClCompile Include="Resource\Paser\MediaFFmpeg.cpp">
-      <Filter>Resource\Parser</Filter>
-    </ClCompile>
-    <ClCompile Include="Resource\Paser\ImageTarga.cpp">
-      <Filter>Resource\Parser</Filter>
     </ClCompile>
     <ClCompile Include="Common\Texture\TexFrame.cpp">
       <Filter>Common\Texture</Filter>
@@ -212,9 +170,6 @@
     </ClCompile>
     <ClCompile Include="Common\Texture\TextureCache.cpp">
       <Filter>Common\Texture</Filter>
-    </ClCompile>
-    <ClCompile Include="Common\struct\protocol_common.cpp">
-      <Filter>Common\struct</Filter>
     </ClCompile>
     <ClCompile Include="Common\struct\shape_common.cpp">
       <Filter>Common\struct</Filter>
@@ -242,12 +197,6 @@
     </ClCompile>
     <ClCompile Include="Platform\Windows\GLWindow.cpp">
       <Filter>Platform\Windows</Filter>
-    </ClCompile>
-    <ClCompile Include="Resource\Detail\MaterialDetail.cpp">
-      <Filter>Resource\Detail</Filter>
-    </ClCompile>
-    <ClCompile Include="Resource\Detail\MeshDetail.cpp">
-      <Filter>Resource\Detail</Filter>
     </ClCompile>
     <ClCompile Include="Graphic\GLAPI\GLVersion.cpp">
       <Filter>Graphic\GLAPI</Filter>
@@ -290,9 +239,6 @@
     </ClCompile>
     <ClCompile Include="Common\Audio\CtrlAudioSourceClip.cpp">
       <Filter>Common\Audio</Filter>
-    </ClCompile>
-    <ClCompile Include="Resource\Paser\ImageBMP.cpp">
-      <Filter>Resource\Parser</Filter>
     </ClCompile>
     <ClCompile Include="Graphic\GLAPI\GLCallList.cpp">
       <Filter>Graphic\GLAPI</Filter>
@@ -378,12 +324,6 @@
     <ClCompile Include="Common\Buffer\VertexAttribPointer.cpp">
       <Filter>Common\Buffer</Filter>
     </ClCompile>
-    <ClCompile Include="Common\Node\Material.cpp">
-      <Filter>Common\Node</Filter>
-    </ClCompile>
-    <ClCompile Include="Common\Node\Mesh.cpp">
-      <Filter>Common\Node</Filter>
-    </ClCompile>
     <ClCompile Include="Common\Buffer\TextureBufferObject.cpp">
       <Filter>Common\Buffer</Filter>
     </ClCompile>
@@ -398,6 +338,30 @@
     </ClCompile>
     <ClCompile Include="Common\Fragment\DepthTest.cpp">
       <Filter>Common\Fragment</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\DrawNode\PrimitiveNode.cpp">
+      <Filter>Common\DrawNode</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\DrawNode\Material.cpp">
+      <Filter>Common\DrawNode</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\DrawNode\Mesh.cpp">
+      <Filter>Common\DrawNode</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\DrawNode\DrawNode.cpp">
+      <Filter>Common\DrawNode</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Node\NodeProtocol.cpp">
+      <Filter>Common\Node</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\DrawNode\DrawProtocol.cpp">
+      <Filter>Common\DrawNode</Filter>
+    </ClCompile>
+    <ClCompile Include="2d\UI\TextProtocol.cpp">
+      <Filter>2d\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Action\ActionProtocol.cpp">
+      <Filter>Common\Action</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -451,21 +415,6 @@
     </ClInclude>
     <ClInclude Include="Common\Action\Scheduler.h">
       <Filter>Common\Action</Filter>
-    </ClInclude>
-    <ClInclude Include="Resource\import.h">
-      <Filter>Resource</Filter>
-    </ClInclude>
-    <ClInclude Include="Resource\macros.h">
-      <Filter>Resource</Filter>
-    </ClInclude>
-    <ClInclude Include="Resource\Paser\import.h">
-      <Filter>Resource\Parser</Filter>
-    </ClInclude>
-    <ClInclude Include="Resource\Paser\macros.h">
-      <Filter>Resource\Parser</Filter>
-    </ClInclude>
-    <ClInclude Include="Common\Node\ColorNode.h">
-      <Filter>Common\Node</Filter>
     </ClInclude>
     <ClInclude Include="Common\Action\ActionProxy.h">
       <Filter>Common\Action</Filter>
@@ -528,33 +477,6 @@
     <ClInclude Include="Graphic\import.h">
       <Filter>Graphic</Filter>
     </ClInclude>
-    <ClInclude Include="Resource\Loader\IResourceLoader.h">
-      <Filter>Resource\Loader</Filter>
-    </ClInclude>
-    <ClInclude Include="Resource\Loader\ILabelLoader.h">
-      <Filter>Resource\Loader</Filter>
-    </ClInclude>
-    <ClInclude Include="Resource\Loader\IMediaLoader.h">
-      <Filter>Resource\Loader</Filter>
-    </ClInclude>
-    <ClInclude Include="Resource\Loader\import.h">
-      <Filter>Resource\Loader</Filter>
-    </ClInclude>
-    <ClInclude Include="Resource\Loader\Loader.h">
-      <Filter>Resource\Loader</Filter>
-    </ClInclude>
-    <ClInclude Include="Resource\Config\ImageDefine.h">
-      <Filter>Resource\Config</Filter>
-    </ClInclude>
-    <ClInclude Include="Resource\Config\import.h">
-      <Filter>Resource\Config</Filter>
-    </ClInclude>
-    <ClInclude Include="Resource\Config\MediaDefine.h">
-      <Filter>Resource\Config</Filter>
-    </ClInclude>
-    <ClInclude Include="Resource\Config\TextDefine.h">
-      <Filter>Resource\Config</Filter>
-    </ClInclude>
     <ClInclude Include="Graphic\Command\import.h">
       <Filter>Graphic\Command</Filter>
     </ClInclude>
@@ -613,9 +535,6 @@
     </ClInclude>
     <ClInclude Include="Common\Audio\CtrlAudioSource3D.h">
       <Filter>Common\Audio</Filter>
-    </ClInclude>
-    <ClInclude Include="Common\DrawNode\DrawNode.h">
-      <Filter>Common\DrawNode</Filter>
     </ClInclude>
     <ClInclude Include="Common\DrawNode\import.h">
       <Filter>Common\DrawNode</Filter>
@@ -683,9 +602,6 @@
     <ClInclude Include="3d\Common\Model.h">
       <Filter>3d\Common</Filter>
     </ClInclude>
-    <ClInclude Include="2d\ctrl_common.h">
-      <Filter>2d</Filter>
-    </ClInclude>
     <ClInclude Include="ext-config.h" />
     <ClInclude Include="2d\import.h">
       <Filter>2d</Filter>
@@ -702,21 +618,6 @@
     <ClInclude Include="3d\Shape\SphereModel.h">
       <Filter>3d\Shape</Filter>
     </ClInclude>
-    <ClInclude Include="Resource\Detail\MediaDetail.h">
-      <Filter>Resource\Detail</Filter>
-    </ClInclude>
-    <ClInclude Include="Resource\Detail\ModelDetail.h">
-      <Filter>Resource\Detail</Filter>
-    </ClInclude>
-    <ClInclude Include="Resource\Detail\AudioDetail.h">
-      <Filter>Resource\Detail</Filter>
-    </ClInclude>
-    <ClInclude Include="Resource\Detail\ImageDetail.h">
-      <Filter>Resource\Detail</Filter>
-    </ClInclude>
-    <ClInclude Include="Resource\Paser\File3DS.h">
-      <Filter>Resource\Parser</Filter>
-    </ClInclude>
     <ClInclude Include="3d\Common\Model3DS.h">
       <Filter>3d\Common</Filter>
     </ClInclude>
@@ -726,32 +627,8 @@
     <ClInclude Include="3d\Common\ModelObj.h">
       <Filter>3d\Common</Filter>
     </ClInclude>
-    <ClInclude Include="Resource\Paser\FileObj.h">
-      <Filter>Resource\Parser</Filter>
-    </ClInclude>
-    <ClInclude Include="Resource\Detail\import.h">
-      <Filter>Resource\Detail</Filter>
-    </ClInclude>
-    <ClInclude Include="Resource\Paser\FileFbx.h">
-      <Filter>Resource\Parser</Filter>
-    </ClInclude>
     <ClInclude Include="3d\Common\ModelFbx.h">
       <Filter>3d\Common</Filter>
-    </ClInclude>
-    <ClInclude Include="Resource\Paser\ImageJPEG.h">
-      <Filter>Resource\Parser</Filter>
-    </ClInclude>
-    <ClInclude Include="Resource\Paser\ImageLabel.h">
-      <Filter>Resource\Parser</Filter>
-    </ClInclude>
-    <ClInclude Include="Resource\Paser\ImagePNG.h">
-      <Filter>Resource\Parser</Filter>
-    </ClInclude>
-    <ClInclude Include="Resource\Paser\MediaFFmpeg.h">
-      <Filter>Resource\Parser</Filter>
-    </ClInclude>
-    <ClInclude Include="Resource\Paser\ImageTarga.h">
-      <Filter>Resource\Parser</Filter>
     </ClInclude>
     <ClInclude Include="Common\Texture\import.h">
       <Filter>Common\Texture</Filter>
@@ -769,9 +646,6 @@
       <Filter>Common\struct</Filter>
     </ClInclude>
     <ClInclude Include="Common\struct\import.h">
-      <Filter>Common\struct</Filter>
-    </ClInclude>
-    <ClInclude Include="Common\struct\protocol_common.h">
       <Filter>Common\struct</Filter>
     </ClInclude>
     <ClInclude Include="Common\struct\shape_common.h">
@@ -816,12 +690,6 @@
     <ClInclude Include="Common\Node\Notify.h">
       <Filter>Common\Node</Filter>
     </ClInclude>
-    <ClInclude Include="Resource\Detail\MaterialDetail.h">
-      <Filter>Resource\Detail</Filter>
-    </ClInclude>
-    <ClInclude Include="Resource\Detail\MeshDetail.h">
-      <Filter>Resource\Detail</Filter>
-    </ClInclude>
     <ClInclude Include="Graphic\GLAPI\GLVersion.h">
       <Filter>Graphic\GLAPI</Filter>
     </ClInclude>
@@ -860,9 +728,6 @@
     </ClInclude>
     <ClInclude Include="Common\Audio\CtrlAudioSourceClip.h">
       <Filter>Common\Audio</Filter>
-    </ClInclude>
-    <ClInclude Include="Resource\Paser\ImageBMP.h">
-      <Filter>Resource\Parser</Filter>
     </ClInclude>
     <ClInclude Include="Graphic\GLAPI\GLCallList.h">
       <Filter>Graphic\GLAPI</Filter>
@@ -951,12 +816,6 @@
     <ClInclude Include="Common\Buffer\VertexAttribPointer.h">
       <Filter>Common\Buffer</Filter>
     </ClInclude>
-    <ClInclude Include="Common\Node\Material.h">
-      <Filter>Common\Node</Filter>
-    </ClInclude>
-    <ClInclude Include="Common\Node\Mesh.h">
-      <Filter>Common\Node</Filter>
-    </ClInclude>
     <ClInclude Include="Common\Buffer\TextureBufferObject.h">
       <Filter>Common\Buffer</Filter>
     </ClInclude>
@@ -974,6 +833,30 @@
     </ClInclude>
     <ClInclude Include="Common\Fragment\DepthTest.h">
       <Filter>Common\Fragment</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\DrawNode\PrimitiveNode.h">
+      <Filter>Common\DrawNode</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\DrawNode\Mesh.h">
+      <Filter>Common\DrawNode</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\DrawNode\Material.h">
+      <Filter>Common\DrawNode</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\DrawNode\DrawNode.h">
+      <Filter>Common\DrawNode</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Node\NodeProtocol.h">
+      <Filter>Common\Node</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\DrawNode\DrawProtocol.h">
+      <Filter>Common\DrawNode</Filter>
+    </ClInclude>
+    <ClInclude Include="2d\UI\TextProtocol.h">
+      <Filter>2d\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Action\ActionProtocol.h">
+      <Filter>Common\Action</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1001,12 +884,6 @@
     <Filter Include="Common\XControl">
       <UniqueIdentifier>{e6030aa8-169f-48b1-87a5-8a74ffba7103}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Resource">
-      <UniqueIdentifier>{f2319a96-c99c-437a-98e9-9151cfb1b46d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Resource\Parser">
-      <UniqueIdentifier>{5000cb09-fb3c-4b63-963b-db40ce7a3db0}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Platform">
       <UniqueIdentifier>{bdcc9f5f-cc09-4649-ba7d-b20f2f85158e}</UniqueIdentifier>
     </Filter>
@@ -1027,12 +904,6 @@
     </Filter>
     <Filter Include="Graphic\Command">
       <UniqueIdentifier>{78dae838-a77b-404b-8dcf-4fcc748483fe}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Resource\Loader">
-      <UniqueIdentifier>{10a041a0-5d1b-46d1-ae1b-5831c145bfc0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Resource\Config">
-      <UniqueIdentifier>{b974c7be-0714-4881-99b6-65dbf35317a5}</UniqueIdentifier>
     </Filter>
     <Filter Include="Platform\Android">
       <UniqueIdentifier>{ff1aa617-6b14-4de9-8c23-29bf7d373bcd}</UniqueIdentifier>
@@ -1063,9 +934,6 @@
     </Filter>
     <Filter Include="2d\Animation">
       <UniqueIdentifier>{91b9cdf2-865f-40ac-ae8f-a0605a0fa54e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Resource\Detail">
-      <UniqueIdentifier>{9df81cfb-9846-4989-81c1-b7ad6ba47ba6}</UniqueIdentifier>
     </Filter>
     <Filter Include="Common\Texture">
       <UniqueIdentifier>{af282e8f-c075-4311-a9d5-b6128b397090}</UniqueIdentifier>

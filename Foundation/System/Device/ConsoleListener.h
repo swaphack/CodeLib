@@ -29,5 +29,5 @@ namespace sys
 	};
 
 
-#define G_CONSOLELISTENER sys::Instance<sys::ConsoleListener>::getInstance()
+#define G_CONSOLELISTENER Instance<ConsoleListener>::getInstance()
 }

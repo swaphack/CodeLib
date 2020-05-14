@@ -1,8 +1,5 @@
 #include "CtrlWidget.h"
 #include "Common/Tool/import.h"
-#include "Resource/Detail/ModelDetail.h"
-#include "Resource/Detail/MaterialDetail.h"
-#include "Resource/Detail/MeshDetail.h"
 #include "Graphic/import.h"
 #include "Common/Shader/import.h"
 #include "Common/Buffer/import.h"
@@ -20,12 +17,12 @@ render::CtrlWidget::~CtrlWidget()
 
 bool render::CtrlWidget::init()
 {
-	if (!ColorNode::init())
+	if (!DrawNode::init())
 	{
 		return false;
 	}
 	// 添加属性改变监听
-	_notify->addListen(ENP_SPACE, [this](){
+	_notify->addListen(NodeNotifyType::SPACE, [this](){
 		calRectData();
 	});
 
@@ -39,7 +36,7 @@ const render::RectVertex& render::CtrlWidget::getRectVertex()
 
 bool render::CtrlWidget::containTouchPoint(float x, float y)
 {
-	return _rectVertex.containPoint(x, y);
+	return _realRectVertex.containPoint(x, y);
 }
 
 void render::CtrlWidget::calRectData()

@@ -7,23 +7,7 @@ TextureVertex::TextureVertex()
 	normal = math::Vector3(0, 0, 1);
 }
 //////////////////////////////////////////////////////////////////////////
-BlendParam& BlendParam::operator=(const BlendParam& blend)
-{
-	src = blend.src;
-	dest = blend.dest;
 
-	return *this;
-}
-
-BlendParam::BlendParam(BlendingFactorSrc src, BlendingFactorDest dest) :src(src), dest(dest)
-{
-
-}
-
-BlendParam::BlendParam()
-{
-
-}
 //////////////////////////////////////////////////////////////////////////
 TextureRectVertex::TextureRectVertex()
 {

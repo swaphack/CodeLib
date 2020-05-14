@@ -1,8 +1,5 @@
 #include "ModelFbx.h"
 
-#include "Resource/Paser/FileFbx.h"
-#include "Resource/Loader/Loader.h"
-
 using namespace render;
 
 ModelFbx::ModelFbx()
@@ -17,8 +14,13 @@ ModelFbx::~ModelFbx()
 
 void ModelFbx::load(const std::string& filepath)
 {
-	this->startThread([this, filepath](){
-		FileFbx* pFile = Loader::load<FileFbx>(filepath);
+	std::string fullpath = G_FILEPATH->getFilePath(filepath);
+	if (fullpath.empty())
+	{
+		return;
+	}
+	this->startThread([this, fullpath](){
+		sys::ModelDetailFbx* pFile = sys::Loader::loadModel<sys::ModelDetailFbx>(fullpath);
 		if (!pFile)
 		{
 			return;

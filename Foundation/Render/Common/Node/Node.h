@@ -2,7 +2,7 @@
 
 #include "system.h"
 #include "Notify.h"
-#include "Common/struct/import.h"
+#include "NodeProtocol.h"
 #include <vector>
 
 namespace render
@@ -29,7 +29,7 @@ namespace render
 	class Node : 
 		public sys::Object, 
 		public sys::Name,
-		public DirtyProtocol, 
+		public sys::DirtyProtocol,
 		public SpaceProtocol,
 		public BodyProtocol
 	{
@@ -118,14 +118,10 @@ namespace render
 		virtual void startUpdateTranform();
 		// 逆转空间矩阵
 		virtual void endUpdateTranform();
-		// 开启片元测试
-		virtual void startFragmentTest();
-		// 结束片元测试
-		virtual void endFragmentTest();
 	public:
-		void notifyToAll(int id);
+		void notifyToAll(NodeNotifyType id);
 
-		void notify(int id);
+		void notify(NodeNotifyType id);
 	protected:
 		void notifyEvents();
 	protected:
@@ -168,7 +164,7 @@ namespace render
 		// 触摸代理
 		TouchProxy* _touchProxy;
 		// 通知
-		Notify<int>* _notify;
+		Notify<NodeNotifyType>* _notify;
 		// 相对于父节点的矩阵
 		math::Matrix44 _localMatrix;
 		// 逆矩阵

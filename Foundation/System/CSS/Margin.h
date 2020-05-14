@@ -9,13 +9,13 @@ namespace sys
 	{
 	public:
 		// ×ó±ßÁô°×
-		float left;
+		float left = 0;
 		// ÓÒ±ßÁô°×
-		float right;
+		float right = 0;
 		// ¶¥²¿Áô°×
-		float top;
+		float top = 0;
 		// µ×²¿Áô°×
-		float bottom;
+		float bottom = 0;
 	public:
 		Margin();
 		Margin(float left, float right, float bottom, float top);

@@ -16,7 +16,7 @@ Camera::Camera()
 
 	_scale.set(1.0f, 1.0f, 1.0f);
 
-	_dimensions = ED_NONE;
+	_dimensions = CameraDimensions::NONE;
 }
 
 Camera::~Camera()
@@ -31,7 +31,7 @@ bool Camera::init()
 		return false;
 	}
 
-	_notify->addListen(ENP_VIEWSIZE, [this](){
+	_notify->addListen(NodeNotifyType::VIEWSIZE, [this](){
 		this->updateViewPort();
 	});
 
@@ -87,11 +87,11 @@ void Camera::setMainCamera(CameraDimensions d)
 {
 	SAFE_RELEASE(_mainCamera);
 
-	if (d == ED_2D)
+	if (d == CameraDimensions::D2)
 	{
 		_mainCamera = CREATE_NODE(Camera2D);
 	}
-	else if (d == ED_3D)
+	else if (d == CameraDimensions::D3)
 	{
 		_mainCamera = CREATE_NODE(Camera3D);
 	}
@@ -136,7 +136,7 @@ void render::Camera::updateViewPort()
 
 Camera2D::Camera2D()
 {
-	this->setDimensions(ED_2D);
+	this->setDimensions(CameraDimensions::D2);
 	updateViewPort();
 }
 
@@ -160,9 +160,9 @@ void Camera2D::updateView()
 void render::Camera2D::updateViewPort()
 {
 	const math::Volume& size = Tool::getGLViewSize();
-	float x = size.getWidth() / size.getDepth();
-	float y = size.getHeight() / size.getDepth();
-	float z = size.getDepth() / size.getDepth();
+	float x = size.getWidth();
+	float y = size.getHeight();
+	float z = size.getDepth();
 	float zh = z * 0.5f;
 	this->setViewPortParams(0, x, 0, y, -zh, zh);
 
@@ -174,7 +174,7 @@ void render::Camera2D::updateViewPort()
 
 Camera3D::Camera3D()
 {
-	this->setDimensions(ED_3D);
+	this->setDimensions(CameraDimensions::D3);
 	updateViewPort();
 }
 
@@ -201,9 +201,9 @@ void Camera3D::updateView()
 void render::Camera3D::updateViewPort()
 {
 	const math::Volume& size = Tool::getGLViewSize();
-	float x = size.getWidth() / size.getDepth();
-	float y = size.getHeight() / size.getDepth();
-	float z = size.getDepth() / size.getDepth();
+	float x = size.getWidth() ;
+	float y = size.getHeight();
+	float z = size.getDepth() ;
 	float xh = x * 0.5f;
 	float yh = y * 0.5f;
 	float zh = z * 0.5f;

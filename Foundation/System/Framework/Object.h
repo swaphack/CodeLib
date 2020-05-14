@@ -47,9 +47,11 @@ namespace sys
 		bool _bAutoRelease = false;
 	};
 
-#define CREATE_OBJECT(OBJECT_TYPE) sys::createObject<OBJECT_TYPE>()
+#define AUTO_RELEASE_OBJECT(object) { if(object) { object->autoRelease(); } }
+#define SAFE_RETAIN(x) { if(x) { (x)->retain(); } }
+#define SAFE_RELEASE(x) { if(x) { (x)->release(); } }
 
-	template<typename T, typename=std::enable_if<std::is_base_of<Object, T>::value, T>::type>
+	template<typename T, typename = std::enable_if<std::is_base_of<sys::Object, T>::value, T>::type>
 	T* createObject()
 	{
 		T* temp = new T();
@@ -62,4 +64,6 @@ namespace sys
 
 		return temp;
 	}
+
+#define CREATE_OBJECT(OBJECT_TYPE) sys::createObject<OBJECT_TYPE>()
 }

@@ -6,17 +6,17 @@
 namespace render
 {
 	// 滑动方向
-	enum ScrollDirection
+	enum class ScrollDirection
 	{
-		ESD_NONE,
+		NONE,
 		// 水平从左往右
-		ESD_HORIZONTAL_LEFT,
+		HORIZONTAL_LEFT_TO_RIGHT,
 		// 水平从右往左
-		ESD_HORIZONTAL_RIGHT,
+		HORIZONTAL_RIGHT_TO_LEFT,
 		// 水平从上往下
-		ESD_VERTICAL_TOP,
+		VERTICAL_TOP_TO_BOTTOM,
 		// 水平从下往上
-		ESD_VERTICAL_BOTTOM,
+		VERTICAL_BOTTOM_TO_TOP,
 	};
 
 	class ScrollItem : public CtrlWidget

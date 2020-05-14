@@ -240,12 +240,20 @@ void GLWindow::initDevice()
 		// ´óÐ¡Ð´Ëø
 		if (GetKeyState(VK_CAPITAL) & 1)
 		{
-			getKeyboard()->onKeyEvent(sys::EBK_CAPITAL, sys::EBS_BUTTON_DOWN);
+			getKeyboard()->onKeyEvent(sys::BoardKey::KCAPITAL, sys::ButtonStatus::BUTTON_DOWN);
+		}
+		else
+		{
+			getKeyboard()->onKeyEvent(sys::BoardKey::KCAPITAL, sys::ButtonStatus::BUTTON_UP);
 		}
 		// Êý×ÖËø
 		if (GetKeyState(VK_NUMLOCK) & 1)
 		{
-			getKeyboard()->onKeyEvent(sys::EBK_NUMLOCK, sys::EBS_BUTTON_DOWN);
+			getKeyboard()->onKeyEvent(sys::BoardKey::KNUMLOCK, sys::ButtonStatus::BUTTON_DOWN);
+		}
+		else
+		{
+			getKeyboard()->onKeyEvent(sys::BoardKey::KCAPITAL, sys::ButtonStatus::BUTTON_UP);
 		}
 	}
 }

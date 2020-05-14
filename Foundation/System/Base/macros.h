@@ -10,12 +10,6 @@
 #define BREAK_IF(x) { if(x) { break; } }
 #define RETURN_IF(x) { if(x) { return; } }
 
-#define AUTO_RELEASE_OBJECT(object) { if(object) { object->autoRelease(); } }
-
-#define SAFE_RETAIN(x) { if(x) { (x)->retain(); } }
-
-#define SAFE_RELEASE(x) { if(x) { (x)->release(); } }
-
 #define ASSERT(x) assert(x)
 
 #ifdef REALSE

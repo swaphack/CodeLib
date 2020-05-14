@@ -1,7 +1,7 @@
 #pragma once
 
 #include "system.h"
-#include "Common/struct/import.h"
+#include "ActionProtocol.h"
 
 namespace render
 {
@@ -19,7 +19,7 @@ namespace render
 
 	//class ActionManager;
 	// 动作接口
-	class Action : public sys::Object, public SystemProtocol, public sys::ITimer
+	class Action : public sys::Object, public ActionProtocol, public sys::ITimer
 	{
 	public:
 		Action();

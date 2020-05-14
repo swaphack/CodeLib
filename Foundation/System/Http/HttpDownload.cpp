@@ -228,7 +228,7 @@ Client* HttpDownload::initClient(const std::string& url)
 	return client;
 }
 
-void sys::HttpDownload::parseHttpURL(const std::string& url, std::string& ip, int32_t& port, std::string& filepath, std::string& values)
+void HttpDownload::parseHttpURL(const std::string& url, std::string& ip, int32_t& port, std::string& filepath, std::string& values)
 {
 	String content = url.c_str();
 	String low = content.toLower();
@@ -263,7 +263,7 @@ void sys::HttpDownload::parseHttpURL(const std::string& url, std::string& ip, in
 	if (idx == -1) return;
 	String value = content.subString(0, idx);
 	int nPort = 0;
-	sys::DNS::getFirstIPAddress(value.getString(), ip, nPort);
+	DNS::getFirstIPAddress(value.getString(), ip, nPort);
 
 	content = content.subString(idx + 1, content.getSize() - (idx + 1));
 	idx = content.findFirstOf('?');

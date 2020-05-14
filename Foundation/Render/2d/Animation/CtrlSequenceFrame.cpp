@@ -1,6 +1,5 @@
 #include "CtrlSequenceFrame.h"
 #include "2d/UI/CtrlFrame.h"
-#include "2d/ctrl_common.h"
 #include "Common/Texture/TextureCache.h"
 #include "Common/Texture/Texture.h"
 
@@ -22,7 +21,7 @@ bool CtrlSequenceFrame::init()
 {
 	CtrlAnimation::init();
 
-	_notify->addListen(ENP_ANIMATION_FRAME, [&](){
+	_notify->addListen(NodeNotifyType::ANIMATION, [&](){
 		Texture2D* texture = getNextTexture();
 
 		if (texture == nullptr) return;
@@ -35,7 +34,7 @@ bool CtrlSequenceFrame::init()
 		}
 	});
 
-	_notify->addListen(ENP_SPACE, [&](){
+	_notify->addListen(NodeNotifyType::SPACE, [&](){
 		if (_ctrlFrame)
 		{
 			_ctrlFrame->setVolume(this->getWidth(), this->getHeight());
@@ -76,9 +75,9 @@ Texture2D* CtrlSequenceFrame::getNextTexture()
 
 	const char* imageUrl = getCString(_frameImageUrl.c_str(), getFrame());
 
-	ImageDefine imageDefine;
+	sys::ImageDefine imageDefine;
 	imageDefine.filepath = imageUrl;
-	imageDefine.format = EIF_PNG;
+	imageDefine.format = sys::ImageFormat::PNG;
 
 	Texture2D* texture2D = G_TEXTURE_CACHE->createTexture2D(imageDefine);
 	if (texture2D == nullptr)

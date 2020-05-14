@@ -135,12 +135,12 @@ void GlutWindow::initDevice()
 		// ´óÐ¡Ð´Ëø
 		if (GetKeyState(VK_CAPITAL) & 1)
 		{
-			getKeyboard()->onKeyEvent(sys::EBK_CAPITAL, sys::EBS_BUTTON_DOWN);
+			getKeyboard()->onKeyEvent(sys::BoardKey::KCAPITAL, sys::ButtonStatus::BUTTON_DOWN);
 		}
 		// Êý×ÖËø
 		if (GetKeyState(VK_NUMLOCK) & 1)
 		{
-			getKeyboard()->onKeyEvent(sys::EBK_NUMLOCK, sys::EBS_BUTTON_DOWN);
+			getKeyboard()->onKeyEvent(sys::BoardKey::KNUMLOCK, sys::ButtonStatus::BUTTON_DOWN);
 		}
 	}
 }
@@ -155,12 +155,12 @@ void GlutWindow::onUpdate()
 
 void GlutWindow::onKeyboardDown(unsigned char key, int x, int y)
 {
-	_deviceProxy->onKeyBoardButtonHandler((sys::BoardKey)key, sys::EBS_BUTTON_DOWN);
+	_deviceProxy->onKeyBoardButtonHandler((sys::BoardKey)key, sys::ButtonStatus::BUTTON_DOWN);
 }
 
 void GlutWindow::onKeyboardUp(unsigned char key, int x, int y)
 {
-	_deviceProxy->onKeyBoardButtonHandler((sys::BoardKey)key, sys::EBS_BUTTON_UP);
+	_deviceProxy->onKeyBoardButtonHandler((sys::BoardKey)key, sys::ButtonStatus::BUTTON_UP);
 }
 
 void GlutWindow::onMouseDown(int button, int state, int x, int y)

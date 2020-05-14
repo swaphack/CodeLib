@@ -1,10 +1,7 @@
 #include "TextureCache.h"
 #include "Texture.h"
 
-#include "Resource/Config/ImageDefine.h"
-#include "Resource/Config/TextDefine.h"
-#include "Resource/Loader/Loader.h"
-#include "Resource/Paser/import.h"
+#include "system.h"
 
 using namespace render;
 
@@ -95,31 +92,31 @@ Texture* TextureCache::getTexture(const std::string& path)
 	return it->second;
 }
 
-Texture2D* TextureCache::createTexture2D(const ImageDefine& imageDefine)
+Texture2D* TextureCache::createTexture2D(const sys::ImageDefine& imageDefine)
 {
-	Texture* texture = getTexture(imageDefine.filepath.c_str());
+	Texture* texture = getTexture(imageDefine.filepath);
 	if (texture)
 	{
 		return dynamic_cast<Texture2D*>(texture);
 	}
 
-	ImageDetail* image = nullptr;
+	sys::ImageDetail* image = nullptr;
 	// png
-	if (imageDefine.format == EIF_PNG)
+	if (imageDefine.format == sys::ImageFormat::PNG)
 	{
-		image = Loader::load<ImagePNG>(imageDefine.filepath);
+		image = sys::Loader::loadImage<sys::ImagePNG>(imageDefine.filepath);
 	}
-	else if (imageDefine.format == EIF_JPEG)
+	else if (imageDefine.format == sys::ImageFormat::JPEG)
 	{
-		image = Loader::load<ImageJPEG>(imageDefine.filepath);
+		image = sys::Loader::loadImage<sys::ImageJPEG>(imageDefine.filepath);
 	}
-	else if (imageDefine.format == EIF_TARGA)
+	else if (imageDefine.format == sys::ImageFormat::TARGA)
 	{
-		image = Loader::load<ImageTarga>(imageDefine.filepath);
+		image = sys::Loader::loadImage<sys::ImageTarga>(imageDefine.filepath);
 	}
-	else if (imageDefine.format == EIF_BMP)
+	else if (imageDefine.format == sys::ImageFormat::BMP)
 	{
-		image = Loader::load<ImageBMP>(imageDefine.filepath);
+		image = sys::Loader::loadImage<sys::ImageBMP>(imageDefine.filepath);
 	}
 
 	if (image == nullptr)
@@ -142,9 +139,9 @@ Texture2D* TextureCache::createTexture2D(const ImageDefine& imageDefine)
 	return texture2D;
 }
 
-Texture2D* TextureCache::createTexture2D(const TextDefine& textDefine)
+Texture2D* TextureCache::createTexture2D(const sys::TextDefine& textDefine)
 {
-	ImageLabel* image = Loader::load<ImageLabel>(textDefine);
+	sys::ImageLabel* image = sys::Loader::loadLabel<sys::ImageLabel>(textDefine);
 	if (image == nullptr)
 	{
 		return nullptr;
@@ -160,7 +157,7 @@ Texture2D* TextureCache::createTexture2D(const TextDefine& textDefine)
 
 Texture2D* TextureCache::createTexture2D(const std::string& path)
 {
-	auto data = ImageDefine(path);
+	auto data = sys::ImageDefine(path);
 	return createTexture2D(data);
 }
 

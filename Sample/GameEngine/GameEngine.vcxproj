@@ -87,7 +87,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>../../Foundation/System/;../../Foundation/Web/;../../Foundation/Render/;../../Foundation/UI/;../../Foundation/Algorithm;../../Foundation/Text/;../../Foundation/Math/;../../Lib/include/;../../Lib/include/freetype/;../../Lib/include/ffmpeg/;../../Lib/include/3ds/;../../Lib/include/obj/;../../Lib/include/fbx/;../../Lib/include/tga/;/Classes/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../Foundation/System/;../../Foundation/Render/;../../Foundation/UI/;../../Foundation/Math/;../../Lib/include/;../../Lib/include/fbx/;../../Lib/include/freetype/;/Classes/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -159,7 +159,6 @@
     <ClCompile Include="Classes\Node\TestUINode.cpp" />
     <ClCompile Include="Classes\Node\TestUtilityNode.cpp" />
     <ClCompile Include="Classes\Scene\TestMainScene.cpp" />
-    <ClCompile Include="Classes\WndWeb.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Classes\GLRenderApplication.h" />
@@ -180,7 +179,6 @@
     <ClInclude Include="Classes\Node\TestUINode.h" />
     <ClInclude Include="Classes\Node\TestUtilityNode.h" />
     <ClInclude Include="Classes\Scene\TestMainScene.h" />
-    <ClInclude Include="Classes\WndWeb.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -12,14 +12,14 @@ namespace sys
 	class MemoryPointer
 	{
 	public:
-		MemoryPointer(int8_t* ptr, size_t size);
+		MemoryPointer(char* ptr, size_t size);
 		MemoryPointer(const MemoryData& data);
 		virtual ~MemoryPointer();
 	public:
 		/**
 		*	数据
 		*/
-		int8_t* getPtr();
+		char* getPtr();
 		/**
 		*	大小
 		*/
@@ -42,7 +42,7 @@ namespace sys
 		/**
 		*	数据
 		*/
-		int8_t* _value = nullptr;
+		char* _value = nullptr;
 
 		// 当前游标位置
 		size_t _cursor;

@@ -21,5 +21,5 @@ namespace sys
 		virtual void writeChar(char word);
 	};
 
-#define G_CONSOLE sys::Instance<sys::Console>::getInstance()
+#define G_CONSOLE Instance<Console>::getInstance()
 }

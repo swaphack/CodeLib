@@ -8,28 +8,28 @@
 namespace render
 {
 	// 属性改变时的通知类型
-	enum NotifyProperty
+	enum class NodeNotifyType
 	{
-		// 空间属性
-		ENP_SPACE,
 		// 节点
-		ENP_NODE,
+		NODE,
+		// 空间属性
+		SPACE,
 		// 纹理
-		ENP_TEXTURE_FRAME,
-		// 模型纹理
-		ENP_MODEL_FRAME,
+		TEXTURE,
+		// 模型
+		MODEL,
 		// 动作帧数改变
-		ENP_ANIMATION_FRAME,
+		ANIMATION,
 		// 界面
-		ENP_USER_INTERFACE,
+		USER_INTERFACE,
 		// 音效
-		ENP_AUDIO,
+		AUDIO,
 		// 几何
-		ENP_GEOMETRY,
+		GEOMETRY,
 		// 文本纹理
-		ENP_TEXT_FRAME,
+		TEXT,
 		// 视窗改变
-		ENP_VIEWSIZE,
+		VIEWSIZE,
 	};
 
 	// 推送委托
@@ -82,7 +82,7 @@ namespace render
 				return;
 			}
 
-			std::set<int>::const_iterator citer = _notifyMark.begin();
+			auto citer = _notifyMark.begin();
 
 			while (citer != _notifyMark.end())
 			{

@@ -43,7 +43,7 @@ void TestAudioNode::testAudio3D()
 	pListener->setPosition(100, 25, 0);
 	this->addChild(pListener);
 
-	DrawNode* pListenerDrawNode = CREATE_NODE(DrawNode);
+	PrimitiveNode* pListenerDrawNode = CREATE_NODE(PrimitiveNode);
 	pListenerDrawNode->setColor(Color3B(0, 255, 0));
 	pListenerDrawNode->setWidth(100);
 	pListenerDrawNode->setDrawMode(ShapeMode::POINTS);
@@ -61,7 +61,7 @@ void TestAudioNode::testAudio3D()
 	pSrcAudio->play();
 	this->addChild(pSrcAudio);
 
-	DrawNode* pSrcDrawNode = CREATE_NODE(DrawNode);
+	PrimitiveNode* pSrcDrawNode = CREATE_NODE(PrimitiveNode);
 	pSrcDrawNode->setColor(Color3B(255, 255, 0));
 	pSrcDrawNode->setWidth(100);
 	pSrcDrawNode->setDrawMode(ShapeMode::POINTS);
@@ -78,7 +78,7 @@ void TestAudioNode::testAudio3D()
 	pSrcAudio->play();
 	this->addChild(pSrcAudio);
 
-	pSrcDrawNode = CREATE_NODE(DrawNode);
+	pSrcDrawNode = CREATE_NODE(PrimitiveNode);
 	pSrcDrawNode->setColor(Color3B(255, 0, 0));
 	pSrcDrawNode->setWidth(100);
 	pSrcDrawNode->setDrawMode(ShapeMode::POINTS);
@@ -105,7 +105,7 @@ void TestAudioNode::onKeyBoardListener(sys::Object* object, sys::BoardKey key, s
 	{
 		return;
 	}
-	if (type == EBS_BUTTON_UP)
+	if (type == ButtonStatus::BUTTON_UP)
 	{
 		return;
 	}
@@ -118,19 +118,19 @@ void TestAudioNode::onKeyBoardListener(sys::Object* object, sys::BoardKey key, s
 	float speed = 5;
 	lastPos = pNode->getPosition();
 
-	if (key == EBK_LEFT)
+	if (key == BoardKey::KLEFT)
 	{
 		pNode->setPositionX(pNode->getPositionX() - speed);
 	}
-	else if (key == EBK_RIGHT)
+	else if (key == BoardKey::KRIGHT)
 	{
 		pNode->setPositionX(pNode->getPositionX() + speed);
 	}
-	else if (key == EBK_UP)
+	else if (key == BoardKey::KUP)
 	{
 		pNode->setPositionY(pNode->getPositionY() + speed);
 	}
-	else if (key == EBK_DOWN)
+	else if (key == BoardKey::KDOWN)
 	{
 		pNode->setPositionY(pNode->getPositionY() - speed);
 	}

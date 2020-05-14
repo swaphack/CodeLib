@@ -1,11 +1,8 @@
 #include "CtrlMedia.h"
 #include "../UI/CtrlFrame.h"
-#include "Resource/Detail/MediaDetail.h"
-#include "Resource/Loader/Loader.h"
-#include "Resource/Paser/MediaFFmpeg.h"
 #include "Common/Texture/Texture.h"
 #include "Common/Audio/CtrlAudioSourceClip.h"
-
+#include "system.h"
 using namespace render;
 
 CtrlMedia::CtrlMedia()
@@ -29,7 +26,7 @@ bool CtrlMedia::init()
 	_ctrlAudio = CREATE_NODE(CtrlAudioSourceClip);
 	this->addChild(_ctrlAudio);
 
-	_notify->addListen(ENP_ANIMATION_FRAME, [&](){
+	_notify->addListen(NodeNotifyType::ANIMATION, [&](){
 		if (_media == nullptr)
 		{
 			return;
@@ -45,14 +42,14 @@ bool CtrlMedia::init()
 				_ctrlFrame->setTextureWithRect(texture);
 			}
 		}
-		AudioDetail* audio = _media->getNextAudio();
+		sys::AudioDetail* audio = _media->getNextAudio();
 		if (audio && audio->getData())
 		{
 			_ctrlAudio->loadAudioClip(audio);
 		}
 	});
 
-	_notify->addListen(ENP_SPACE, [&](){
+	_notify->addListen(NodeNotifyType::SPACE, [&](){
 		if (_ctrlFrame)
 		{
 			_ctrlFrame->setVolume(this->getWidth(), this->getHeight());
@@ -106,12 +103,12 @@ void CtrlMedia::stop()
 
 void CtrlMedia::loadFromURL(const std::string& url, bool defaultSize)
 {
-	_mediaDefine.filepath = url;
+	_filepath = url;
 
 	SAFE_DELETE(_media);
 	this->stop();
 
-	_media = Loader::load<MediaFFmpeg>(_mediaDefine);
+	_media = sys::Loader::loadMedia<sys::MediaFFmpeg>(_filepath);
 	if (!_media)
 	{
 		return;
@@ -133,7 +130,7 @@ Texture2D* CtrlMedia::getNextTexture()
 		return nullptr;
 	}
 
-	const ImageDetail* image = _media->getNextPicture();
+	const sys::ImageDetail* image = _media->getNextPicture();
 	if (image == nullptr)
 	{
 		return nullptr;

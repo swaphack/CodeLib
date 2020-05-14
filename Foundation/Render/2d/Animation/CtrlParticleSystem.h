@@ -1,20 +1,21 @@
 #pragma once
 
 #include "system.h"
-#include "Common/Node/ColorNode.h"
+#include "Common/DrawNode/DrawNode.h"
 #include "Particle.h"
 #include "CtrlAnimation.h"
+#include "Common/struct/texture_common.h"
 
 namespace render
 {
 	// Á£×Ó
-	class ParticleNode : public ColorNode, public ParticleProtocol
+	class ParticleNode : public DrawNode, public ParticleProtocol
 	{
 	public:
 		ParticleNode();
 		virtual ~ParticleNode();
 	protected:
-		virtual void drawSample();
+		virtual void drawing();
 	public:
 		// ¸üÐÂ
 		virtual void update(float interval);

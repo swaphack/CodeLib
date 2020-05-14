@@ -44,7 +44,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>../Math/;../System/</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../Lib/include/tinyxml2</AdditionalIncludeDirectories>
       <BrowseInformation>true</BrowseInformation>
     </ClCompile>
     <Link>
@@ -70,28 +70,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Config\XmlConfig.cpp" />
-    <ClCompile Include="JSON\json_reader.cpp" />
-    <ClCompile Include="JSON\json_value.cpp" />
-    <ClCompile Include="JSON\json_writer.cpp" />
-    <ClCompile Include="XML\tinyxml2.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Config\import.h" />
     <ClInclude Include="Config\XmlConfig.h" />
-    <ClInclude Include="JSON\allocator.h" />
-    <ClInclude Include="JSON\assertions.h" />
-    <ClInclude Include="JSON\autolink.h" />
-    <ClInclude Include="JSON\config.h" />
-    <ClInclude Include="JSON\features.h" />
-    <ClInclude Include="JSON\forwards.h" />
-    <ClInclude Include="JSON\json.h" />
-    <ClInclude Include="JSON\json_tool.h" />
-    <ClInclude Include="JSON\reader.h" />
-    <ClInclude Include="JSON\value.h" />
-    <ClInclude Include="JSON\version.h" />
-    <ClInclude Include="JSON\writer.h" />
     <ClInclude Include="text.h" />
-    <ClInclude Include="XML\tinyxml2.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -266,7 +266,7 @@ bool Window::onHandSignal(Signal* signal)
 	{
 		if (getKeyboard())
 		{
-			getKeyboard()->onKeyEvent((BoardKey)params->t2, EBS_BUTTON_DOWN);
+			getKeyboard()->onKeyEvent((BoardKey)params->t2, ButtonStatus::BUTTON_DOWN);
 		}
 		break;
 	}
@@ -274,7 +274,7 @@ bool Window::onHandSignal(Signal* signal)
 	{
 		if (getKeyboard())
 		{
-			getKeyboard()->onKeyEvent((BoardKey)params->t2, EBS_BUTTON_UP);
+			getKeyboard()->onKeyEvent((BoardKey)params->t2, ButtonStatus::BUTTON_UP);
 		}
 		break;
 	}
@@ -282,7 +282,7 @@ bool Window::onHandSignal(Signal* signal)
 	{
 		if (getMouse())
 		{
-			getMouse()->onButtonHandler(EMK_LEFTBUTTON, EBS_BUTTON_DOWN, LOWORD(params->t3), HIWORD(params->t3));
+			getMouse()->onButtonHandler(MouseKey::LEFTBUTTON, ButtonStatus::BUTTON_DOWN, LOWORD(params->t3), HIWORD(params->t3));
 		}
 		break;
 	}
@@ -290,7 +290,7 @@ bool Window::onHandSignal(Signal* signal)
 	{
 		if (getMouse())
 		{
-			getMouse()->onButtonHandler(EMK_LEFTBUTTON, EBS_BUTTON_UP, LOWORD(params->t3), HIWORD(params->t3));
+			getMouse()->onButtonHandler(MouseKey::LEFTBUTTON, ButtonStatus::BUTTON_UP, LOWORD(params->t3), HIWORD(params->t3));
 		}
 		break;
 	}
@@ -298,7 +298,7 @@ bool Window::onHandSignal(Signal* signal)
 	{
 		if (getMouse())
 		{
-			getMouse()->onButtonHandler(EMK_RIGHTBUTTON, EBS_BUTTON_DOWN, LOWORD(params->t3), HIWORD(params->t3));
+			getMouse()->onButtonHandler(MouseKey::RIGHTBUTTON, ButtonStatus::BUTTON_DOWN, LOWORD(params->t3), HIWORD(params->t3));
 		}
 		break;
 	}
@@ -306,7 +306,7 @@ bool Window::onHandSignal(Signal* signal)
 	{
 		if (getMouse())
 		{
-			getMouse()->onButtonHandler(EMK_RIGHTBUTTON, EBS_BUTTON_UP, LOWORD(params->t3), HIWORD(params->t3));
+			getMouse()->onButtonHandler(MouseKey::RIGHTBUTTON, ButtonStatus::BUTTON_UP, LOWORD(params->t3), HIWORD(params->t3));
 		}
 		break;
 	}

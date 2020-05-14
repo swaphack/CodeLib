@@ -30,16 +30,12 @@ namespace render
 		void setSpecular(uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha);
 		const float* getSpecular();
 	protected:
-		virtual void onLightPositionChange();
-	protected:
 		// 环境光
 		float _lightAmbient[4];
 		// 漫射光
 		float _lightDiffuse[4];
 		// 反射光
 		float _lightSpecular[4];
-		// 关照位置
-		float _lightPosition[4];
 	};
 #define CTREATE_LIGHT_CLASS_0(index) \
 	class Light##index : public Light \

@@ -1,12 +1,15 @@
 #pragma once
 
 #include "CtrlAnimation.h"
-#include "Resource/Config/MediaDefine.h"
+
+namespace sys
+{
+	class MediaDetail;
+}
 
 namespace render
 {
 	class Texture2D;
-	class MediaDetail;
 	class CtrlAudioSourceClip;
 
 	// 媒体（包含图像和声音）
@@ -36,9 +39,9 @@ namespace render
 		Texture2D* getNextTexture();
 	private:
 		// 媒体数据结构
-		MediaDefine _mediaDefine;
+		std::string _filepath;
 		// 媒体数据
-		MediaDetail* _media;
+		sys::MediaDetail* _media;
 		// 音效
 		CtrlAudioSourceClip* _ctrlAudio;
 	};
