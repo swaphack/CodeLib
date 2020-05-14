@@ -184,6 +184,8 @@ void render::Mesh::draw(Node* node, Material* mat)
 
 		GLDebug::showError();
 	}
+
+	GLDebug::showError();
 }
 
 void render::Mesh::initBufferData()

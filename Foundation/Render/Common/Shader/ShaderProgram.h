@@ -96,6 +96,10 @@ namespace render
 		void setSeparable(bool value);
 	public:
 		/**
+		*	绑定属性
+		*/
+		void bindAttrib(uint32_t index, const std::string& name);
+		/**
 		*	获取属性
 		*/
 		ShaderAttrib* getAttrib(const std::string& name);

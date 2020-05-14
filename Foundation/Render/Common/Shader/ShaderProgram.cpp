@@ -113,6 +113,11 @@ void ShaderProgram::releaseProgram()
 	}
 }
 
+void render::ShaderProgram::bindAttrib(uint32_t index, const std::string& name)
+{
+	GLShader::bindAttributeLocation(_programID, index, name.c_str());
+}
+
 ShaderAttrib* ShaderProgram::getAttrib(const std::string& name)
 {
 	auto it = _attributes.find(name);
@@ -122,7 +127,6 @@ ShaderAttrib* ShaderProgram::getAttrib(const std::string& name)
 	}
 
 	int32_t id = GLShader::getAttribLocation(_programID, name.c_str());
-	GLDebug::showError();
 	if (id < 0)
 	{
 		return nullptr;

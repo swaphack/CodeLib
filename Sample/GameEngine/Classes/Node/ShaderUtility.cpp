@@ -13,9 +13,13 @@ void ShaderUtility::loadShader(render::Material* mat, const std::string& vpath, 
 	}
 	ShaderProgram* pProgram = CREATE_OBJECT(ShaderProgram);
 	pProgram->loadVertexAndFragmentShader(vpath, fpath);
+	
+	//initProgramAttrib(pProgram);
+
 	pProgram->link();
 
 	mat->setShaderProgram(pProgram);
+
 }
 
 void ShaderUtility::initShaderAttrib(render::Material* mat)
@@ -37,6 +41,20 @@ void ShaderUtility::initShaderAttrib(render::Material* mat)
 	mat->addAttrib(VertexAttribType::UV, "vUV");
 }
 
+void ShaderUtility::initProgramAttrib(render::ShaderProgram* program)
+{
+	if (program == nullptr)
+	{
+		return;
+	}
+
+	program->bindAttrib((uint32_t)VertexAttribType::POSITION, "vPosition");
+	program->bindAttrib((uint32_t)VertexAttribType::COLOR, "vColor");
+	program->bindAttrib((uint32_t)VertexAttribType::UV, "vUV");
+
+	GLDebug::showError();
+}
+
 void ShaderUtility::runRotateAction(render::Node* node)
 {
 	if (node == nullptr)
@@ -56,7 +74,6 @@ void ShaderUtility::runRotateAction(render::Node* node)
 void ShaderUtility::updateNodeShader(render::CtrlFrame* node)
 {
 	loadShader(node->getMaterial(), texture3dVertexPath, texture3dFragmentPath);
-	initShaderAttrib(node->getMaterial());
 	runRotateAction(node);
 }
 

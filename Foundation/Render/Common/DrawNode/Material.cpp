@@ -201,25 +201,49 @@ void render::Material::startUpdateShaderVertexValue(VertexArrayObject* data, sys
 		VertexAttribPointer* pointer = data->getVertexAttrib<VertexAttribPointer>(pAttrib->getAttribID());
 		pointer->enableVertexArrayAttrib();
 
-		if (item.first == VertexAttribType::POSITION 
-			&& nVerticeSize > 0)
+		if (item.first == VertexAttribType::POSITION)
 		{
-			pointer->setVertexAttribPointer(3, VertexAttribPointerType::FLOAT, 0);
+			if (nVerticeSize > 0)
+			{
+				pointer->setVertexAttribPointer(3, VertexAttribPointerType::FLOAT, 0);
+			}
+			else
+			{
+				PRINT("NULL POSITION\n");
+			}
 		}
-		else if (item.first == VertexAttribType::COLOR
-			&& nColorSize > 0)
+		else if (item.first == VertexAttribType::COLOR)
 		{
-			pointer->setVertexAttribPointer(4, VertexAttribPointerType::FLOAT, nVerticeSize);
+			if (nColorSize > 0)
+			{
+				pointer->setVertexAttribPointer(4, VertexAttribPointerType::FLOAT, nVerticeSize);
+			}
+			else
+			{
+				PRINT("NULL COLOR\n");
+			}
 		}
-		else if (item.first == VertexAttribType::UV
-			&& nUVSize > 0)
+		else if (item.first == VertexAttribType::UV)
 		{
-			pointer->setVertexAttribPointer(2, VertexAttribPointerType::FLOAT, nVerticeSize + nColorSize);
+			if (nUVSize > 0)
+			{
+				pointer->setVertexAttribPointer(2, VertexAttribPointerType::FLOAT, nVerticeSize + nColorSize);
+			}
+			else
+			{
+				PRINT("NULL UV\n");
+			}
 		}
-		else if (item.first == VertexAttribType::NORMAL
-			&& nNormalSize > 0)
+		else if (item.first == VertexAttribType::NORMAL)
 		{
-			pointer->setVertexAttribPointer(3, VertexAttribPointerType::FLOAT, nVerticeSize + nColorSize + nUVSize);
+			if (nNormalSize > 0)
+			{
+				pointer->setVertexAttribPointer(3, VertexAttribPointerType::FLOAT, nVerticeSize + nColorSize + nUVSize);
+			}
+			else
+			{
+				PRINT("NULL NORMAL\n");
+			}
 		}
 		GLDebug::showError();
 	}

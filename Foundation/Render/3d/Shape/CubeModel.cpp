@@ -71,8 +71,6 @@ void CubeModel::onCubeChange()
 
 		pMesh->setVertices(12, vertices);
 	}
-
-	this->notify(NodeNotifyType::MODEL);
 }
 
 void render::CubeModel::addTexture(const std::string& name, Texture2D* texture)
