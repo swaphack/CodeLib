@@ -363,6 +363,15 @@
     <ClCompile Include="Common\Action\ActionProtocol.cpp">
       <Filter>Common\Action</Filter>
     </ClCompile>
+    <ClCompile Include="Common\Fragment\FragmentTestOp.cpp">
+      <Filter>Common\Fragment</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Fragment\PolygonOffsetOp.cpp">
+      <Filter>Common\Fragment</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Fragment\BlendOp.cpp">
+      <Filter>Common\Fragment</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Common\Node\import.h">
@@ -857,6 +866,15 @@
     </ClInclude>
     <ClInclude Include="Common\Action\ActionProtocol.h">
       <Filter>Common\Action</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Fragment\FragmentTestOp.h">
+      <Filter>Common\Fragment</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Fragment\PolygonOffsetOp.h">
+      <Filter>Common\Fragment</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Fragment\BlendOp.h">
+      <Filter>Common\Fragment</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

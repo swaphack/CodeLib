@@ -133,12 +133,12 @@ void GLState::setBlendFunc(uint32_t buf, BlendingFactorSrc src, BlendingFactorDe
 	glBlendFunci(buf,(GLenum)src, (GLenum)dest);
 }
 
-void GLState::setBlendFuncSeparate(BlendEquationMode srcRGB, BlendEquationMode destRGB, BlendEquationMode srcAlpha, BlendEquationMode destAlpha)
+void GLState::setBlendFuncSeparate(BlendingFactorSrc srcRGB, BlendingFactorDest destRGB, BlendingFactorSrc srcAlpha, BlendingFactorDest destAlpha)
 {
 	glBlendFuncSeparate((GLenum)srcRGB, (GLenum)destRGB, (GLenum)srcAlpha, (GLenum)destAlpha);
 }
 
-void GLState::setBlendFuncSeparate(uint32_t buf, BlendEquationMode srcRGB, BlendEquationMode destRGB, BlendEquationMode srcAlpha, BlendEquationMode destAlpha)
+void GLState::setBlendFuncSeparate(uint32_t buf, BlendingFactorSrc srcRGB, BlendingFactorDest destRGB, BlendingFactorSrc srcAlpha, BlendingFactorDest destAlpha)
 {
 	glBlendFuncSeparatei(buf, (GLenum)srcRGB, (GLenum)destRGB, (GLenum)srcAlpha, (GLenum)destAlpha);
 }
@@ -274,6 +274,11 @@ void GLState::setPointParameter(PointParameter pname, const float* value)
 void GLState::setSampleCoverage(float value, bool invert)
 {
 	glSampleCoverage(value, invert ? GL_TRUE : GL_FALSE);
+}
+
+void render::GLState::setSampleMask(uint32_t maskNumber, uint32_t mask)
+{
+	glSampleMaski(maskNumber, mask);
 }
 
 void GLState::setScissor(int x, int y, int width, int height)

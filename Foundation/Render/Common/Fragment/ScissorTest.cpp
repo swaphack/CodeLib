@@ -2,22 +2,34 @@
 
 #include "Graphic/import.h"
 
-void render::ScissorTest::enable()
+render::ScissorTest::ScissorTest()
+{
+
+}
+
+render::ScissorTest::~ScissorTest()
+{
+
+}
+
+void render::ScissorTest::setRect(int x, int y, int width, int height)
+{
+	_rect.setOrigin(x, y);
+	_rect.setSize(width, height);
+}
+
+void render::ScissorTest::startTest()
 {
 	GLState::enable(EnableModel::SCISSOR_TEST);
 }
 
-void render::ScissorTest::disable()
+void render::ScissorTest::test()
 {
+	GLState::setScissor(_rect.getX(), _rect.getY(), _rect.getWidth(), _rect.getHeight());
+}
+
+void render::ScissorTest::endTest()
+{
+
 	GLState::disable(EnableModel::SCISSOR_TEST);
-}
-
-bool render::ScissorTest::isEnabled()
-{
-	return GLState::isEnabled(EnableModel::SCISSOR_TEST);
-}
-
-void render::ScissorTest::setBox(int x, int y, int width, int height)
-{
-	GLState::setScissor(x, y, width, height);
 }

@@ -261,8 +261,3 @@ void GLFrameBuffer::setNamedRenderbufferStorageMultisample(uint32_t renderbuffer
 	glNamedRenderbufferStorageMultisample(renderbuffer, samples, (GLenum)format, width, height);
 }
 
-void GLFrameBuffer::setSampleMask(uint32_t maskNumber, uint32_t mask)
-{
-	glSampleMaski(maskNumber, mask);
-}
-

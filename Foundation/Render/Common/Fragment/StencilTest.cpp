@@ -1,47 +1,64 @@
 #include "StencilTest.h"
 #include "Graphic/import.h"
 
-void render::StencilTest::enable()
+render::StencilOp::StencilOp()
+{
+
+}
+
+render::StencilOp::~StencilOp()
+{
+
+}
+
+void render::StencilOp::setFunc(StencilFunction func, int ref, uint32_t mask)
+{
+	_func = func;
+	_ref = ref;
+	_mask = mask;
+}
+
+void render::StencilOp::setOperator(StencilOpResult stencilFail, StencilOpResult depthFail, StencilOpResult depthPass)
+{
+	_stencilFail = stencilFail;
+	_depthFail = depthFail;
+	_depthPass = depthPass;
+}
+
+void render::StencilOp::startTest()
 {
 	GLState::enable(EnableModel::STENCIL_TEST);
 }
 
-void render::StencilTest::disable()
+void render::StencilOp::test()
+{
+	GLState::setStencilFunc(_func, _ref, _mask);
+	GLState::setStencilOp(_stencilFail, _depthFail, _depthPass);
+}
+
+void render::StencilOp::endTest()
 {
 	GLState::disable(EnableModel::STENCIL_TEST);
 }
 
-bool render::StencilTest::isEnabled()
+//////////////////////////////////////////////////////////////////////////
+render::StencilFaceOp::StencilFaceOp()
 {
-	return GLState::isEnabled(EnableModel::STENCIL_TEST);
+
 }
 
-void render::StencilTest::setFunc(StencilFunction func, int ref, uint32_t mask)
+render::StencilFaceOp::~StencilFaceOp()
 {
-	GLState::setStencilFunc(func, ref, mask);
+
 }
 
-void render::StencilTest::setFuncSeparate(FaceType type, StencilFunction func, int ref, uint32_t mask)
+void render::StencilFaceOp::setFaceType(FaceType faceType)
 {
-	GLState::setStencilFuncSeparate(type, func, ref, mask);
+	_faceType = faceType;
 }
 
-void render::StencilTest::setOp(StencilOpResult stencilFail, StencilOpResult depthFail, StencilOpResult depthPass)
+void render::StencilFaceOp::test()
 {
-	GLState::setStencilOp(stencilFail, depthFail, depthPass);
-}
-
-void render::StencilTest::setOpSeparate(FaceType type, StencilOpResult stencilFail, StencilOpResult depthFail, StencilOpResult depthPass)
-{
-	GLState::setStencilOpSeparate(type, stencilFail, depthFail, depthPass);
-}
-
-void render::StencilTest::setMask(uint32_t mask)
-{
-	GLState::setStencilMask(mask);
-}
-
-void render::StencilTest::setMaskSeparate(FaceType type, uint32_t mask)
-{
-	GLState::setStencilMaskSeparate(type, mask);
+	GLState::setStencilFuncSeparate(_faceType, _func, _ref, _mask);
+	GLState::setStencilOpSeparate(_faceType, _stencilFail, _depthFail, _depthPass);
 }

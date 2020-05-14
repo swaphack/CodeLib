@@ -53,8 +53,8 @@ namespace render
 		static void setBlendFunc(BlendingFactorSrc src, BlendingFactorDest dest);
 		static void setBlendFunc(uint32_t buf, BlendingFactorSrc src, BlendingFactorDest dest);
 
-		static void setBlendFuncSeparate(BlendEquationMode srcRGB, BlendEquationMode destRGB, BlendEquationMode srcAlpha, BlendEquationMode destAlpha);
-		static void setBlendFuncSeparate(uint32_t buf, BlendEquationMode srcRGB, BlendEquationMode destRGB, BlendEquationMode srcAlpha, BlendEquationMode destAlpha);
+		static void setBlendFuncSeparate(BlendingFactorSrc srcRGB, BlendingFactorDest destRGB, BlendingFactorSrc srcAlpha, BlendingFactorDest destAlpha);
+		static void setBlendFuncSeparate(uint32_t buf, BlendingFactorSrc srcRGB, BlendingFactorDest destRGB, BlendingFactorSrc srcAlpha, BlendingFactorDest destAlpha);
 
 		static void setClampColor(bool clamp);
 
@@ -144,6 +144,8 @@ namespace render
 		static void setPolygonMode(FaceType mode, PolygonMode type);
 
 		static void setSampleCoverage(float value, bool invert);
+
+		static void setSampleMask(uint32_t maskNumber, uint32_t mask);
 		/**
 		*	≤√ºÙ≤‚ ‘
 		*/

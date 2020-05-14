@@ -1,42 +1,61 @@
 #include "MultiSampling.h"
 #include "Graphic/import.h"
 
-void render::MultiSampling::enableSampleAlphaToCoverage()
+render::MultiSampling::MultiSampling()
 {
-	GLState::enable(EnableModel::SAMPLE_ALPHA_TO_COVERAGE);
+	_sampleType = MultiSampleType::SAMPLE_MASK;
+	_sampleConverage.t1 = 0;
+	_sampleConverage.t2 = false;
 }
 
-void render::MultiSampling::enableSampleAlphaToOne()
+render::MultiSampling::~MultiSampling()
 {
-	GLState::enable(EnableModel::SAMPLE_ALPHA_TO_ONE);
+
 }
 
-void render::MultiSampling::enableSampleCoverage()
+void render::MultiSampling::setSampleType(MultiSampleType type)
 {
-	GLState::enable(EnableModel::SAMPLE_COVERAGE);
-}
-
-void render::MultiSampling::disableSampleAlphaToCoverage()
-{
-	GLState::disable(EnableModel::SAMPLE_ALPHA_TO_COVERAGE);
-}
-
-void render::MultiSampling::disableSampleAlphaToOne()
-{
-	GLState::disable(EnableModel::SAMPLE_ALPHA_TO_ONE);
-}
-
-void render::MultiSampling::disableSampleCoverage()
-{
-	GLState::disable(EnableModel::SAMPLE_COVERAGE);
+	_sampleType = type;
 }
 
 void render::MultiSampling::setSampleCoverage(float value, bool invert)
 {
-	GLState::setSampleCoverage(value, invert);
+	_sampleConverage.t1 = value;
+	_sampleConverage.t2 = invert;
 }
 
 void render::MultiSampling::setSampleMask(uint32_t index, uint32_t mask)
 {
-	GLFrameBuffer::setSampleMask(index, mask);
+	_sampleMask[index] = mask;
+}
+
+void render::MultiSampling::clearSampelMask()
+{
+	_sampleMask.clear();
+}
+
+void render::MultiSampling::startTest()
+{
+	GLState::enable((EnableModel)_sampleType);
+}
+
+void render::MultiSampling::test()
+{
+	if (_sampleType == MultiSampleType::SAMPLE_ALPHA_TO_COVERAGE
+		|| _sampleType == MultiSampleType::SAMPLE_COVERAGE)
+	{
+		GLState::setSampleCoverage(_sampleConverage.t1, _sampleConverage.t2);
+	}
+	else if (_sampleType == MultiSampleType::SAMPLE_MASK)
+	{
+		for (auto item : _sampleMask)
+		{
+			GLState::setSampleMask(item.first, item.second);
+		}
+	}
+}
+
+void render::MultiSampling::endTest()
+{
+	GLState::disable((EnableModel)_sampleType);
 }

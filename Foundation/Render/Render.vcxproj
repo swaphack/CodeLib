@@ -130,8 +130,11 @@
     <ClCompile Include="Common\DrawNode\Material.cpp" />
     <ClCompile Include="Common\DrawNode\Mesh.cpp" />
     <ClCompile Include="Common\DrawNode\PrimitiveNode.cpp" />
+    <ClCompile Include="Common\Fragment\BlendOp.cpp" />
     <ClCompile Include="Common\Fragment\DepthTest.cpp" />
+    <ClCompile Include="Common\Fragment\FragmentTestOp.cpp" />
     <ClCompile Include="Common\Fragment\MultiSampling.cpp" />
+    <ClCompile Include="Common\Fragment\PolygonOffsetOp.cpp" />
     <ClCompile Include="Common\Fragment\ScissorTest.cpp" />
     <ClCompile Include="Common\Fragment\StencilTest.cpp" />
     <ClCompile Include="Common\Keyboard\KeyboardManager.cpp" />
@@ -273,9 +276,12 @@
     <ClInclude Include="Common\DrawNode\Mesh.h" />
     <ClInclude Include="Common\DrawNode\PrimitiveNode.h" />
     <ClInclude Include="Common\DrawNode\import.h" />
+    <ClInclude Include="Common\Fragment\BlendOp.h" />
     <ClInclude Include="Common\Fragment\DepthTest.h" />
+    <ClInclude Include="Common\Fragment\FragmentTestOp.h" />
     <ClInclude Include="Common\Fragment\import.h" />
     <ClInclude Include="Common\Fragment\MultiSampling.h" />
+    <ClInclude Include="Common\Fragment\PolygonOffsetOp.h" />
     <ClInclude Include="Common\Fragment\ScissorTest.h" />
     <ClInclude Include="Common\Fragment\StencilTest.h" />
     <ClInclude Include="Common\import.h" />

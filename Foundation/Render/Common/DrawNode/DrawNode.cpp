@@ -24,8 +24,6 @@ DrawNode::~DrawNode()
 
 void DrawNode::draw()
 {
-	//GLState::pushAttrib(AttribMask::COLOR_BUFFER_BIT);
-
 	GLState::enable(EnableModel::BLEND);
 	GLState::setBlendFunc(getBlend().src, getBlend().dest);
 	GLVertex::setColor(getColor());
@@ -33,8 +31,6 @@ void DrawNode::draw()
 	this->drawing();
 
 	GLState::disable(EnableModel::BLEND);
-
-	//GLState::popAttrib();
 }
 
 Material* render::DrawNode::getMaterial()

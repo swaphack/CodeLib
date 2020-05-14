@@ -1,16 +1,25 @@
 #pragma once
 
 #include "Graphic/GLAPI/macros.h"
+#include "FragmentTestOp.h"
 
 namespace render
 {
 	/**
 	*	…Ó∂»≤‚ ‘
 	*/
-	class DepthTest
+	class DepthTest : public FragmentTestOp
 	{
 	public:
-		static void setFunc(DepthFunction func);
-
+		DepthTest();
+		virtual ~DepthTest();
+	public:
+		void setFunc(DepthFunction func);
+	public:
+		virtual void startTest();
+		virtual void test();
+		virtual void endTest();
+	protected:
+		DepthFunction _func;
 	};
 }
