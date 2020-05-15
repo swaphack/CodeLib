@@ -203,15 +203,16 @@ void MemoryData::remove(size_t offset, int size)
 	_typeSize = 1;
 }
 
-void MemoryData::resize(size_t len)
+void MemoryData::resize(size_t len, uint32_t typeSize)
 {
-	char* val = (char*)malloc(len);
-	memcpy(val, _value, _length);
+	uint32_t size = len * typeSize;
+	char* val = (char*)malloc(size);
+	memset(val, 0, size);
 
 	this->clear();
 
 	_value = val;
 	_length = len;
-	_typeSize = 1;
+	_typeSize = typeSize;
 }
 

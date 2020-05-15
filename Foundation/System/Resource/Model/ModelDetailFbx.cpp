@@ -55,19 +55,16 @@ void handNodeMesh(ModelDetailFbx* file, FbxNode* node)
 		FbxVector4* lControlPoints = pMeshData->GetControlPoints();
 
 		int nVerticeCount = 3 * nPointCount;
-		float* verticeData = new float[nVerticeCount];
+		float* verticeData = (float*)pMesh->createVertices(nVerticeCount, sizeof(float), 3);
 
 		for (int i = 0; i < nPointCount; i++)
 		{
 			float pos[3] = { 0 };
-			pos[0] = lControlPoints[i].mData[0];
-			pos[1] = lControlPoints[i].mData[1];
-			pos[2] = lControlPoints[i].mData[2];
+			pos[0] = (float)lControlPoints[i].mData[0];
+			pos[1] = (float)lControlPoints[i].mData[1];
+			pos[2] = (float)lControlPoints[i].mData[2];
 			memcpy(verticeData + 3 * i, pos, 3 * sizeof(float));
 		}
-
-		pMesh->setVertices(nVerticeCount, verticeData);
-		delete[] verticeData;
 	}
 
 
@@ -80,19 +77,16 @@ void handNodeMesh(ModelDetailFbx* file, FbxNode* node)
 		auto vector = leNormal->GetDirectArray();
 
 		int nVerticeCount = 3 * vector.GetCount();
-		float* normalData = new float[nVerticeCount];
+		float* normalData = (float*)pMesh->createNormals(nVerticeCount, sizeof(float), 3);
 
 		for (int i = 0; i < vector.GetCount(); i++)
 		{
 			float pos[3] = { 0 };
-			pos[0] = vector.GetAt(i).mData[0];
-			pos[1] = vector.GetAt(i).mData[1];
-			pos[2] = vector.GetAt(i).mData[2];
+			pos[0] = (float)vector.GetAt(i).mData[0];
+			pos[1] = (float)vector.GetAt(i).mData[1];
+			pos[2] = (float)vector.GetAt(i).mData[2];
 			memcpy(normalData + 3 * i, pos, 3 * sizeof(float));
 		}
-
-		pMesh->setNormals(nVerticeCount, normalData);
-		delete[] normalData;
 	}
 
 	int nUVCount = pMeshData->GetElementUVCount();
@@ -104,18 +98,15 @@ void handNodeMesh(ModelDetailFbx* file, FbxNode* node)
 		auto vector = leUV->GetDirectArray();
 
 		int nVerticeCount = 2 * vector.GetCount();
-		float* uvData = new float[nVerticeCount];
+		float* uvData = (float*)pMesh->createUVs(nVerticeCount, sizeof(float), 2);
 
 		for (int i = 0; i < vector.GetCount(); i++)
 		{
 			float pos[2] = { 0 };
-			pos[0] = vector.GetAt(i).mData[0];
-			pos[1] = vector.GetAt(i).mData[1];
+			pos[0] = (float)vector.GetAt(i).mData[0];
+			pos[1] = (float)vector.GetAt(i).mData[1];
 			memcpy(uvData + 2 * i, pos, 2 * sizeof(float));
 		}
-
-		pMesh->setUVs(nVerticeCount, uvData);
-		delete[] uvData;
 	}
 
 	
@@ -128,31 +119,40 @@ void handNodeMesh(ModelDetailFbx* file, FbxNode* node)
 		auto vector = leVtxc->GetDirectArray();
 
 		int nVerticeCount = 4 * vector.GetCount();
-		float* colorData = new float[nVerticeCount];
+		float* colorData = (float*)pMesh->createColors(nVerticeCount, sizeof(float), 4);
 
 		for (int i = 0; i < vector.GetCount(); i++)
 		{
 			float pos[4] = { 0 };
-			pos[0] = vector.GetAt(i).mRed;
-			pos[1] = vector.GetAt(i).mGreen;
-			pos[2] = vector.GetAt(i).mBlue;
-			pos[3] = vector.GetAt(i).mAlpha;
+			pos[0] = (float)vector.GetAt(i).mRed;
+			pos[1] = (float)vector.GetAt(i).mGreen;
+			pos[2] = (float)vector.GetAt(i).mBlue;
+			pos[3] = (float)vector.GetAt(i).mAlpha;
 			memcpy(colorData + 4 * i, pos, 4 * sizeof(float));
 		}
+	}
+	else
+	{
+		int nVerticeCount = 4 * nPointCount;
+		float* colorData = (float*)pMesh->createColors(nVerticeCount, sizeof(float), 4);
 
-		pMesh->setColors(nVerticeCount, colorData, 4);
-		delete[] colorData;
+		for (int i = 0; i < nPointCount; i++)
+		{
+			float pos[4] = { 0 };
+			pos[0] = 1.0f;
+			pos[1] = 1.0f;
+			pos[2] = 1.0f;
+			pos[3] = 1.0f;
+			memcpy(colorData + 4 * i, pos, 4 * sizeof(float));
+		}
 	}
 
 	int nIndexCount = pMeshData->GetPolygonVertexCount();
-	uint32_t* indices = new uint32_t[nIndexCount];
+	uint32_t* indices = (uint32_t*)pMesh->createIndices(nIndexCount, sizeof(uint32_t), 1);
 	for (int i = 0; i < nIndexCount; i++)
 	{
 		indices[i] = pMeshData->GetPolygonVertices()[i];
 	}
-
-	pMesh->setIndices(nIndexCount, indices);
-	delete[] indices;
 
 	int nMatCount = pMeshData->GetElementMaterialCount();
 	if (nMatCount > 0)
@@ -361,11 +361,11 @@ void handMaterial(ModelDetailFbx* file, FbxSurfaceMaterial* mat, int id)
 		FbxSurfacePhong* phong = (FbxSurfacePhong *)mat;
 		auto pMat = CREATE_OBJECT(MaterialDetail);
 		pMat->setName(phong->GetName());
-		pMat->setAmbient(phong->Ambient.Get()[0], phong->Ambient.Get()[1], phong->Ambient.Get()[2]);
-		pMat->setDiffuse(phong->Diffuse.Get()[0], phong->Diffuse.Get()[1], phong->Diffuse.Get()[2]);
-		pMat->setSpecular(phong->Specular.Get()[0], phong->Specular.Get()[1], phong->Specular.Get()[2]);
-		pMat->setEmission(phong->Emissive.Get()[0], phong->Emissive.Get()[1], phong->Emissive.Get()[2]);
-		pMat->setShiness(phong->Shininess.Get());
+		pMat->setAmbient((float)phong->Ambient.Get()[0], (float)phong->Ambient.Get()[1], (float)phong->Ambient.Get()[2]);
+		pMat->setDiffuse((float)phong->Diffuse.Get()[0], (float)phong->Diffuse.Get()[1], (float)phong->Diffuse.Get()[2]);
+		pMat->setSpecular((float)phong->Specular.Get()[0], (float)phong->Specular.Get()[1], (float)phong->Specular.Get()[2]);
+		pMat->setEmission((float)phong->Emissive.Get()[0], (float)phong->Emissive.Get()[1], (float)phong->Emissive.Get()[2]);
+		pMat->setShiness((float)phong->Shininess.Get());
 		file->addMaterial(id, pMat);
 	}
 	else if (mat->GetClassId().Is(FbxSurfaceLambert::ClassId))
@@ -379,9 +379,9 @@ void handMaterial(ModelDetailFbx* file, FbxSurfaceMaterial* mat, int id)
 		FbxSurfaceLambert* lambert = (FbxSurfaceLambert *)mat;
 		auto pMat = CREATE_OBJECT(MaterialDetail);
 		pMat->setName(lambert->GetName());
-		pMat->setAmbient(lambert->Ambient.Get()[0], lambert->Ambient.Get()[1], lambert->Ambient.Get()[2]);
-		pMat->setDiffuse(lambert->Diffuse.Get()[0], lambert->Diffuse.Get()[1], lambert->Diffuse.Get()[2]);
-		pMat->setEmission(lambert->Emissive.Get()[0], lambert->Emissive.Get()[1], lambert->Emissive.Get()[2]);
+		pMat->setAmbient((float)lambert->Ambient.Get()[0], (float)lambert->Ambient.Get()[1], (float)lambert->Ambient.Get()[2]);
+		pMat->setDiffuse((float)lambert->Diffuse.Get()[0], (float)lambert->Diffuse.Get()[1], (float)lambert->Diffuse.Get()[2]);
+		pMat->setEmission((float)lambert->Emissive.Get()[0], (float)lambert->Emissive.Get()[1], (float)lambert->Emissive.Get()[2]);
 		file->addMaterial(id, pMat);
 	}
 }

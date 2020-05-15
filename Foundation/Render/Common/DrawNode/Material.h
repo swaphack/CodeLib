@@ -149,7 +149,8 @@ namespace render
 		void endUpdateShaderVertexValue(VertexArrayObject* data);
 
 		// 应用材质
-		void applyMat(uint32_t nMatID) const;
+		void applyMaterial(uint32_t nMatID) const;
+		void applyMaterialWithShader(uint32_t nMatID) const;
 		// 更新纹理
 		void updateMatTexture();
 		// 移除所有缓存对象

@@ -21,30 +21,24 @@ bool CubeModel::init()
 	}
 
 	_notify->addListen(NodeNotifyType::SPACE, [this](){
+		TextureTool::setTexture3DVertexts(&_cubePosition, math::Vector3(), _volume, _anchor);
+
+		this->onCubeChange();
+	});
+	_notify->addListen(NodeNotifyType::MODEL, [this]() {
 		this->onCubeChange();
 	});
 
-	for (int i = 0; i < CUBE_FACE_COUNT; i++)
-	{
-		auto pMat = CREATE_OBJECT(sys::MaterialDetail);
-		_material->addMaterial(i, pMat);
-
-		auto pMesh = CREATE_OBJECT(sys::MeshDetail);
-		_mesh->addMesh(i, pMesh);
-
-		pMesh->setMaterial(i);
-
-		pMesh->setUVs(8, _faces[i].uvs);
-		pMesh->setIndices(6, _faces[i].indices);
-		pMesh->setColors(16, _faces[i].colors);
-	}
-	this->notify(NodeNotifyType::MODEL);
+	this->initModelDetail();
 	return true;
 }
 
 void CubeModel::onCubeChange()
 {
-	TextureTool::setTexture3DVertexts(&_cubePosition, math::Vector3(), _volume, _anchor);
+	if (!_loadModel)
+	{
+		return;
+	}
 	
 	for (int i = 0; i < CUBE_FACE_COUNT; i++)
 	{
@@ -63,13 +57,20 @@ void CubeModel::onCubeChange()
 		indices2[2] = indices1[2];
 		indices2[3] = indices1[5];
 
-		float vertices[12] = { 0 };
-		for (int j = 0; j < 4; j++)
+		float* ptr = nullptr;
+		if (pMesh->getVertices().getSize() == 0)
 		{
-			memcpy(vertices + j * 3, _cubePosition.vertices + indices2[j] * 3, 3 * sizeof(float));
+			ptr = (float*)pMesh->createVertices(12, sizeof(float), 3);
+		}
+		else
+		{
+			ptr = (float*)pMesh->getVertices().getPtr();
 		}
 
-		pMesh->setVertices(12, vertices);
+		for (int j = 0; j < 4; j++)
+		{
+			memcpy(ptr + j * 3, _cubePosition.vertices + indices2[j] * 3, 3 * sizeof(float));
+		}
 	}
 }
 
@@ -97,5 +98,27 @@ void render::CubeModel::setFaceTexture(ModelFace face, const std::string& name)
 	{
 		pMat->setAmbientTextureMap(name);
 	}
+}
+
+void render::CubeModel::initModelDetail()
+{
+	sys::ModelDetail* pModel = CREATE_OBJECT(sys::ModelDetail);
+
+	for (int i = 0; i < CUBE_FACE_COUNT; i++)
+	{
+		auto pMat = CREATE_OBJECT(sys::MaterialDetail);
+		pModel->addMaterial(i, pMat);
+
+		auto pMesh = CREATE_OBJECT(sys::MeshDetail);
+		pModel->addMesh(i, pMesh);
+
+		pMesh->setMaterial(i);
+
+		pMesh->setUVs(8, _faces[i].uvs);
+		pMesh->setIndices(6, _faces[i].indices);
+		pMesh->setColors(16, _faces[i].colors);
+	}
+	
+	this->setModelData(pModel);
 }
 

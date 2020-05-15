@@ -25,11 +25,13 @@ namespace render
 		// 设置纹理
 		void setFaceTexture(ModelFace face, const std::string& name);
 	protected:
-		virtual void onCubeChange();
+		void initModelDetail();
+
+		void onCubeChange();
 	private:
 		// 坐标
 		TextureCubeVertex _cubePosition;
-
+		// 六个面的顶点信息
 		TextureRectVertex _faces[CUBE_FACE_COUNT];
 	};
 }

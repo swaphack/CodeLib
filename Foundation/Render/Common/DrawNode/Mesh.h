@@ -47,7 +47,9 @@ namespace render
 		*/
 		sys::MeshDetail* getMesh(int id);
 	public:
-		void draw(Node* node, Material* mat);
+		void drawWithBufferObject(Node* node, Material* mat);
+
+		void drawWithClientArray(Node* node, Material* mat);
 
 		void initBufferData();
 

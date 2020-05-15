@@ -142,8 +142,6 @@ void render::Material::startUpdateShaderUniformValue(Node* node)
 		return; 
 	}
 
-	_shaderProgram->use();
-
 	math::Matrix44 projMat = Camera::getMainCamera()->getProjectMatrix();
 	math::Matrix44 viewMat = Camera::getMainCamera()->getViewMatrix();
 	math::Matrix44 modelMat = node->getWorldMatrix();
@@ -186,13 +184,15 @@ void render::Material::startUpdateShaderVertexValue(VertexArrayObject* data, sys
 		return;
 	}
 
-	data->bindVertexArray();
-	data->bindBuffer();
+	const sys::MeshMemoryData& vertices = pMesh->getVertices();
+	const sys::MeshMemoryData& colors = pMesh->getColors();
+	const sys::MeshMemoryData& texcoords = pMesh->getUVs();
+	const sys::MeshMemoryData& normals = pMesh->getNormals();
 
-	uint32_t nVerticeSize = pMesh->getVertices().getSize();
-	uint32_t nColorSize = pMesh->getColors().getSize();
-	uint32_t nUVSize = pMesh->getUVs().getSize();
-	uint32_t nNormalSize = pMesh->getNormals().getSize();
+	uint32_t nVerticeSize = vertices.getSize();
+	uint32_t nColorSize = colors.getSize();
+	uint32_t nUVSize = texcoords.getSize();
+	uint32_t nNormalSize = normals.getSize();
 
 	for (auto item : _vertexAttribIndices)
 	{
@@ -205,44 +205,28 @@ void render::Material::startUpdateShaderVertexValue(VertexArrayObject* data, sys
 		{
 			if (nVerticeSize > 0)
 			{
-				pointer->setVertexAttribPointer(3, VertexAttribPointerType::FLOAT, 0);
-			}
-			else
-			{
-				PRINT("NULL POSITION\n");
+				pointer->setVertexAttribPointer(vertices.getUnitSize(), VertexAttribPointerType::FLOAT, 0);
 			}
 		}
 		else if (item.first == VertexAttribType::COLOR)
 		{
 			if (nColorSize > 0)
 			{
-				pointer->setVertexAttribPointer(4, VertexAttribPointerType::FLOAT, nVerticeSize);
-			}
-			else
-			{
-				PRINT("NULL COLOR\n");
+				pointer->setVertexAttribPointer(colors.getUnitSize(), VertexAttribPointerType::FLOAT, nVerticeSize);
 			}
 		}
 		else if (item.first == VertexAttribType::UV)
 		{
 			if (nUVSize > 0)
 			{
-				pointer->setVertexAttribPointer(2, VertexAttribPointerType::FLOAT, nVerticeSize + nColorSize);
-			}
-			else
-			{
-				PRINT("NULL UV\n");
+				pointer->setVertexAttribPointer(texcoords.getUnitSize(), VertexAttribPointerType::FLOAT, nVerticeSize + nColorSize);
 			}
 		}
 		else if (item.first == VertexAttribType::NORMAL)
 		{
 			if (nNormalSize > 0)
 			{
-				pointer->setVertexAttribPointer(3, VertexAttribPointerType::FLOAT, nVerticeSize + nColorSize + nUVSize);
-			}
-			else
-			{
-				PRINT("NULL NORMAL\n");
+				pointer->setVertexAttribPointer(normals.getUnitSize(), VertexAttribPointerType::FLOAT, nVerticeSize + nColorSize + nUVSize);
 			}
 		}
 		GLDebug::showError();
@@ -251,7 +235,55 @@ void render::Material::startUpdateShaderVertexValue(VertexArrayObject* data, sys
 	GLDebug::showError();
 }
 
-void render::Material::applyMat(uint32_t nMatID) const
+void render::Material::applyMaterial(uint32_t nMatID) const
+{
+	auto it = _materials.find(nMatID);
+	if (it == _materials.end())
+	{
+		return;
+	}
+
+	auto pMat = it->second;
+	if (pMat)
+	{
+		GLMaterial::setMaterialAmbient(FaceType::FRONT, pMat->getAmbient());
+		GLMaterial::setMaterialDiffuse(FaceType::FRONT, pMat->getDiffuse());
+		GLMaterial::setMaterialSpecular(FaceType::FRONT, pMat->getSpecular());
+		GLMaterial::setMaterialShininess(FaceType::FRONT, pMat->getShiness());
+		GLMaterial::setMaterialEmission(FaceType::FRONT, pMat->getEmission());
+		GLDebug::showError();
+	}
+	else
+	{
+		static float matrialAmbient[] = { 0.2f, 0.2f, 0.2f, 1.0f };
+		static float matrialDiffuse[] = { 0.8f, 0.8f, 0.8f, 1.0f };
+		static float matrialSpecular[] = { 0.0f, 0.0f, 0.0f, 1.0f };
+		static float matrialShiness = 0.0f;
+		static float matrialEmission[] = { 0.0f, 0.0f, 0.0f, 1.0f };
+
+		GLMaterial::setMaterialAmbient(FaceType::FRONT, matrialAmbient);
+		GLMaterial::setMaterialDiffuse(FaceType::FRONT, matrialDiffuse);
+		GLMaterial::setMaterialSpecular(FaceType::FRONT, matrialSpecular);
+		GLMaterial::setMaterialShininess(FaceType::FRONT, matrialShiness);
+		GLMaterial::setMaterialEmission(FaceType::FRONT, matrialEmission);
+		GLDebug::showError();
+	}
+
+	auto nTextureID = this->getTexture(pMat->getAmbientTextureMap());
+	GLTexture::activeTexture(ActiveTextureName::TEXTURE0);
+	GLTexture::bindTexture2D(nTextureID);
+#if 0
+	nTextureID = this->getTexture(pMat->getDiffuseTextureMap());
+	GLTexture::activeTexture(ActiveTextureName::TEXTURE1);
+	GLTexture::bindTexture2D(nTextureID);
+
+	nTextureID = this->getTexture(pMat->getSpecularTextureMap());
+	GLTexture::activeTexture(ActiveTextureName::TEXTURE2);
+	GLTexture::bindTexture2D(nTextureID);
+#endif // 0
+}
+
+void render::Material::applyMaterialWithShader(uint32_t nMatID) const
 {
 	auto it = _materials.find(nMatID);
 	if (it == _materials.end())
@@ -295,38 +327,30 @@ void render::Material::applyMat(uint32_t nMatID) const
 		if (item.first == VertexUniformType::AMBIENT_TEXTURE)
 		{
 			auto nTextureID = this->getTexture(pMat->getAmbientTextureMap());
-			if (nTextureID > 0)
-			{
-				GLTexture::activeTexture(ActiveTextureName::TEXTURE0);
-				GLTexture::bindTexture2D(nTextureID);
-				pUniform->setValue(0);
+			GLTexture::activeTexture(ActiveTextureName::TEXTURE0);
+			GLTexture::bindTexture2D(nTextureID);
+			pUniform->setValue(0);
 
-				GLDebug::showError();
-			}
+			GLDebug::showError();
 		}
 		else if (item.first == VertexUniformType::DIFFUSE_TEXTURE)
 		{
 			auto nTextureID = this->getTexture(pMat->getDiffuseTextureMap());
-			if (nTextureID > 0)
-			{
-				GLTexture::activeTexture(ActiveTextureName::TEXTURE1);
-				GLTexture::bindTexture2D(nTextureID);
-				pUniform->setValue(1);
 
-				GLDebug::showError();
-			}
+			GLTexture::activeTexture(ActiveTextureName::TEXTURE1);
+			GLTexture::bindTexture2D(nTextureID);
+			pUniform->setValue(1);
+
+			GLDebug::showError();
 		}
 		else if (item.first == VertexUniformType::SPECULAR_TEXTURE)
 		{
 			auto nTextureID = this->getTexture(pMat->getSpecularTextureMap());
-			if (nTextureID > 0)
-			{
-				GLTexture::activeTexture(ActiveTextureName::TEXTURE2);
-				GLTexture::bindTexture2D(nTextureID);
-				pUniform->setValue(2);
+			GLTexture::activeTexture(ActiveTextureName::TEXTURE2);
+			GLTexture::bindTexture2D(nTextureID);
+			pUniform->setValue(2);
 
-				GLDebug::showError();
-			}
+			GLDebug::showError();
 		}
 		GLDebug::showError();
 	}

@@ -87,6 +87,41 @@ void MeshDetail::setMatrix(const math::Matrix44& mat)
 	_matrix = mat;
 }
 
+char* sys::MeshDetail::createVertices(size_t size, uint32_t typeSize, int unitSize)
+{
+	_vertices.resize(size, typeSize);
+	_vertices.setUnitSize(unitSize);
+	return _vertices.getPtr();
+}
+
+char* sys::MeshDetail::createNormals(size_t size, uint32_t typeSize, int unitSize)
+{
+	_normals.resize(size, typeSize);
+	_normals.setUnitSize(unitSize);
+	return _normals.getPtr();
+}
+
+char* sys::MeshDetail::createColors(size_t size, uint32_t typeSize, int unitSize)
+{
+	_colors.resize(size, typeSize);
+	_colors.setUnitSize(unitSize);
+	return _colors.getPtr();
+}
+
+char* sys::MeshDetail::createUVs(size_t size, uint32_t typeSize, int unitSize)
+{
+	_uvs.resize(size, typeSize);
+	_uvs.setUnitSize(unitSize);
+	return _uvs.getPtr();
+}
+
+char* sys::MeshDetail::createIndices(size_t size, uint32_t typeSize, int unitSize)
+{
+	_indices.resize(size, typeSize);
+	_indices.setUnitSize(unitSize);
+	return _indices.getPtr();
+}
+
 const std::string& MeshDetail::getMeshName() const
 {
 	return _meshName;

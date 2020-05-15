@@ -28,8 +28,7 @@ namespace render
 		void setModelData(sys::ModelDetail* detail);
 	protected:
 		virtual void drawing();
-		virtual void drawSampleWithClientArray();
-	private:
+	protected:
 		bool _loadModel = false;
 	};
 }

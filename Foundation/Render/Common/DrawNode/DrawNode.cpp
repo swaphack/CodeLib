@@ -45,19 +45,22 @@ Mesh* render::DrawNode::getMesh()
 
 void DrawNode::drawing()
 {
-#if USE_BUFFER_OBJECT
-	this->drawSampleWithBufferObject();
-#else
-	this->drawSampleWithClientArray();
-#endif
+	if (_material->getShaderProgram())
+	{
+		this->drawWithBufferObject();
+	}
+	else
+	{
+		this->drawWithClientArray();
+	}
 }
 
-void render::DrawNode::drawSampleWithClientArray()
+void render::DrawNode::drawWithClientArray()
 {
-
+	_mesh->drawWithClientArray(this, _material);
 }
 
-void render::DrawNode::drawSampleWithBufferObject()
+void render::DrawNode::drawWithBufferObject()
 {
-	_mesh->draw(this, _material);
+	_mesh->drawWithBufferObject(this, _material);
 }

@@ -110,13 +110,16 @@ bool ModelDetailObj::load(const std::string& fullpath)
 			if (nVertCount > 0)
 			{
 				int nVerticeCount = 3 * nVertCount;
-				float* verticeData = new float[nVerticeCount];
+				float* verticeData = (float*)pMesh->createVertices(nVerticeCount, sizeof(float), 3);
 
 				int nNormalCount = 3 * nVertCount;
-				float* normalData = new float[nNormalCount];
+				float* normalData = (float*)pMesh->createNormals(nNormalCount, sizeof(float), 3);
 
 				int nTexCoordCount = 2 * nVertCount;
-				float* texCoordData = new float[nTexCoordCount];
+				float* texCoordData = (float*)pMesh->createUVs(nTexCoordCount, sizeof(float), 2);
+
+				int nColorCount = 4 * nVertCount;
+				float* colorData = (float*)pMesh->createColors(nColorCount, sizeof(float), 4);
 
 				for (int i = 0; i < nVertCount; i++)
 				{
@@ -128,36 +131,32 @@ bool ModelDetailObj::load(const std::string& fullpath)
 					pos[2] = pVertex->Position.Z;
 					memcpy(verticeData + 3 * i, pos, 3 * sizeof(float));
 
+					float color[4] = { 0 };
+					color[0] = 1.0f;
+					color[1] = 1.0f;
+					color[2] = 1.0f;
+					color[3] = 1.0f;
+					memcpy(colorData + 4 * i, color, 4 * sizeof(float));
+
+					*(texCoordData + 2 * i) = pVertex->TextureCoordinate.X;
+					*(texCoordData + 2 * i + 1) = pVertex->TextureCoordinate.Y;
+
 					float normal[3] = { 0 };
 					normal[0] = pVertex->Normal.X;
 					normal[1] = pVertex->Normal.Y;
 					normal[2] = pVertex->Normal.Z;
 					memcpy(normalData + 3 * i, normal, 3 * sizeof(float));
-
-					*(texCoordData + 2 * i) = pVertex->TextureCoordinate.X;
-					*(texCoordData + 2 * i + 1) = pVertex->TextureCoordinate.Y;
 				}
-
-				pMesh->setVertices(nVerticeCount, verticeData);
-				delete[] verticeData;
-
-				pMesh->setNormals(nNormalCount, normalData);
-				delete[] normalData;
-
-				pMesh->setUVs(nTexCoordCount, texCoordData, 2);
-				delete[] texCoordData;
 			}
 			
 			int nIdxCount = pData->Indices.size();
 			if (nIdxCount> 0)
 			{
-				uint32_t* indices = new uint32_t[nIdxCount];
+				uint32_t* indices = (uint32_t*)pMesh->createIndices(nIdxCount, sizeof(uint32_t), 1);
 				for (int i = 0; i < nIdxCount; i++)
 				{
 					indices[i] = pData->Indices[i];
 				}
-				pMesh->setIndices(nIdxCount, indices);
-				delete[] indices;
 			}
 		}
 	}

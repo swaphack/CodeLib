@@ -15,5 +15,5 @@ void main()
 {
     gl_Position = projectMatrix * viewMatrix * modelMatrix * vec4(vPosition,1);
     fragmentUV = vUV;
-    fragmentColor = vColor;
+    fragmentColor = vColor;	
 }

@@ -49,7 +49,6 @@ void TextureTool::setTexture3DVertexts(TextureCubeVertex* texcube, const math::V
 	float x;
 	float y;
 	float z;
-	math::Vector3 point;
 
 	//------ front ------
 
@@ -58,28 +57,28 @@ void TextureTool::setTexture3DVertexts(TextureCubeVertex* texcube, const math::V
 	y = position.getY() - volume.getHeight() * anchor.getY();
 	z = position.getZ() - volume.getDepth() * anchor.getZ();
 
-	texcube->setFrontLeftDownPoint(point);
+	texcube->setFrontLeftDownPoint(math::Vector3(x, y, z));
 
 	// right down
 	x = position.getX() + volume.getWidth() * (1 - anchor.getX());
 	y = position.getY() - volume.getHeight() * anchor.getY();
 	z = position.getZ() - volume.getDepth() * anchor.getZ();
 
-	texcube->setFrontRightDownPoint(point);
+	texcube->setFrontRightDownPoint(math::Vector3(x, y, z));
 
 	// right up
 	x = position.getX() + volume.getWidth() * (1 - anchor.getX());
 	y = position.getY() + volume.getHeight() * (1 - anchor.getY());
 	z = position.getZ() - volume.getDepth() * anchor.getZ();
 
-	texcube->setFrontRightUpPoint(point);
+	texcube->setFrontRightUpPoint(math::Vector3(x, y, z));
 
 	// left up
 	x = position.getX() - volume.getWidth() * anchor.getX();
 	y = position.getY() + volume.getHeight() * (1 - anchor.getY());
 	z = position.getZ() - volume.getDepth() * anchor.getZ();
 
-	texcube->setFrontLeftUpPoint(point);
+	texcube->setFrontLeftUpPoint(math::Vector3(x, y, z));
 
 	//------ back ------
 
@@ -88,28 +87,28 @@ void TextureTool::setTexture3DVertexts(TextureCubeVertex* texcube, const math::V
 	y = position.getY() - volume.getHeight() * anchor.getY();
 	z = position.getZ() + volume.getDepth() * (1 - anchor.getZ());
 
-	texcube->setBackLeftDownPoint(point);
+	texcube->setBackLeftDownPoint(math::Vector3(x, y, z));
 
 	// right down
 	x = position.getX() + volume.getWidth() * (1 - anchor.getX());
 	y = position.getY() - volume.getHeight() * anchor.getY();
 	z = position.getZ() + volume.getDepth() * (1 - anchor.getZ());
 
-	texcube->setBackRightDownPoint(point);
+	texcube->setBackRightDownPoint(math::Vector3(x, y, z));
 
 	// right up
 	x = position.getX() + volume.getWidth() * (1 - anchor.getX());
 	y = position.getY() + volume.getHeight() * (1 - anchor.getY());
 	z = position.getZ() + volume.getDepth() * (1 - anchor.getZ());
 
-	texcube->setBackRightUpPoint(point);
+	texcube->setBackRightUpPoint(math::Vector3(x, y, z));
 
 	// left up
 	x = position.getX() - volume.getWidth() * anchor.getX();
 	y = position.getY() + volume.getHeight() * (1 - anchor.getY());
 	z = position.getZ() + volume.getDepth() * (1 - anchor.getZ());
 
-	texcube->setBackLeftUpPoint(point);
+	texcube->setBackLeftUpPoint(math::Vector3(x, y, z));
 }
 
 void TextureTool::setTexture2DFlip(TextureRectVertex* texRect, bool bFlipX, bool bFlipY)

@@ -103,8 +103,12 @@ void render::Mesh::removeAllBufferObjects()
 	_vertexArrayObjects.clear();
 }
 
-void render::Mesh::draw(Node* node, Material* mat)
+void render::Mesh::drawWithBufferObject(Node* node, Material* mat)
 {
+	if (mat == nullptr)
+	{
+		return;
+	}
 	for (auto item : _meshes)
 	{
 		auto pMesh = item.second;
@@ -118,39 +122,54 @@ void render::Mesh::draw(Node* node, Material* mat)
 		}
 
 		NoNamedBufferObject* pVertexObject = _vertexObjects[id];
-		if (pVertexObject)
+		if (!pVertexObject)
 		{
-			pVertexArrayObject->bindVertexArray();
-			pVertexArrayObject->bindBuffer();
+			continue;
+		}
 
-			uint32_t nVerticeSize = pMesh->getVertices().getSize();
-			uint32_t nColorSize = pMesh->getColors().getSize();
-			uint32_t nUVSize = pMesh->getUVs().getSize();
-			uint32_t nNormalSize = pMesh->getNormals().getSize();
+		uint32_t nVerticeSize = pMesh->getVertices().getSize();
+		uint32_t nColorSize = pMesh->getColors().getSize();
+		uint32_t nUVSize = pMesh->getUVs().getSize();
+		uint32_t nNormalSize = pMesh->getNormals().getSize();
 
-			uint32_t nTotalSize = nVerticeSize + nColorSize + nUVSize + nNormalSize;
-			pVertexObject->bindBuffer();
-			pVertexObject->setBufferData(nTotalSize, nullptr, BufferDataUsage::STATIC_DRAW);
-			if (nVerticeSize > 0)
-			{
-				pVertexObject->setBufferSubData(0, nVerticeSize, pMesh->getVertices().getPtr());
-			}
-			GLDebug::showError();
-			if (nColorSize > 0)
-			{
-				pVertexObject->setBufferSubData(nVerticeSize, nColorSize, pMesh->getColors().getPtr());
-			}
-			GLDebug::showError();
-			if (nUVSize > 0)
-			{
-				pVertexObject->setBufferSubData(nVerticeSize + nColorSize, nUVSize, pMesh->getUVs().getPtr());
-			}
-			GLDebug::showError();
-			if (nNormalSize > 0)
-			{
-				pVertexObject->setBufferSubData(nVerticeSize + nColorSize + nUVSize, nNormalSize, pMesh->getNormals().getPtr());
-			}
-			GLDebug::showError();
+		if (nVerticeSize == 0)
+		{
+			PRINT("Mesh Vertice is NULL\n");
+			continue;
+		}
+		if (nColorSize == 0 && nUVSize == 0)
+		{
+			PRINT("Mesh Color or UI is NULL\n");
+			continue;
+		}
+		if (mat->getShaderProgram())
+		{
+			mat->getShaderProgram()->use();
+		}
+
+		pVertexArrayObject->bindVertexArray();
+		pVertexArrayObject->bindBuffer();
+
+		uint32_t nTotalSize = nVerticeSize + nColorSize + nUVSize + nNormalSize;
+		pVertexObject->setBufferData(nTotalSize, nullptr, BufferDataUsage::STATIC_DRAW);
+		if (nVerticeSize > 0)
+		{
+			pVertexObject->setBufferSubData(0, nVerticeSize, pMesh->getVertices().getPtr());
+		}
+		GLDebug::showError();
+		if (nColorSize > 0)
+		{
+			pVertexObject->setBufferSubData(nVerticeSize, nColorSize, pMesh->getColors().getPtr());
+		}
+		GLDebug::showError();
+		if (nUVSize > 0)
+		{
+			pVertexObject->setBufferSubData(nVerticeSize + nColorSize, nUVSize, pMesh->getUVs().getPtr());
+		}
+		GLDebug::showError();
+		if (nNormalSize > 0)
+		{
+			pVertexObject->setBufferSubData(nVerticeSize + nColorSize + nUVSize, nNormalSize, pMesh->getNormals().getPtr());
 		}
 
 		GLDebug::showError();
@@ -158,8 +177,9 @@ void render::Mesh::draw(Node* node, Material* mat)
 		mat->startUpdateShaderUniformValue(node);
 		mat->startUpdateShaderVertexValue(pVertexArrayObject, pMesh);
 
+		GLState::enable(EnableModel::TEXTURE_2D);
 		auto nMatID = pMesh->getMaterial();
-		mat->applyMat(nMatID);
+		mat->applyMaterialWithShader(nMatID);
 
 		GLDebug::showError();
 
@@ -181,11 +201,84 @@ void render::Mesh::draw(Node* node, Material* mat)
 		mat->endUpdateShaderUniformValue();
 
 		GLState::disable(EnableModel::TEXTURE_2D);
-
+		GLShader::useProgram(0);
 		GLDebug::showError();
 	}
 
 	GLDebug::showError();
+}
+
+void render::Mesh::drawWithClientArray(Node* node, Material* mat)
+{
+	if (mat == nullptr)
+	{
+		return;
+	}
+	for (auto item : _meshes)
+	{
+		auto pMesh = item.second;
+		
+		const sys::MeshMemoryData& vertices = pMesh->getVertices();
+		const sys::MeshMemoryData& colors = pMesh->getColors();
+		const sys::MeshMemoryData& texcoords = pMesh->getUVs();
+		const sys::MeshMemoryData& normals = pMesh->getNormals();
+		if (vertices.getLength() == 0)
+		{
+			PRINT("Mesh Vertice is NULL\n");
+			continue;
+		}
+		if (colors.getLength() == 0 && texcoords.getLength() == 0)
+		{
+			PRINT("Mesh Color or UI is NULL\n");
+			continue;
+		}
+
+		if (vertices.getLength() > 0)
+		{
+			GLClientArrays::enableClientState(ClientArrayType::VERTEX_ARRAY);
+			GLClientArrays::setVertexPointer(vertices.getUnitSize(), DataType::FLOAT, 0, vertices.getValue());
+			GLDebug::showError();
+		}
+		if (colors.getLength() > 0)
+		{
+			GLClientArrays::enableClientState(ClientArrayType::COLOR_ARRAY);
+			GLClientArrays::setColorPointer(colors.getUnitSize(), DataType::FLOAT, 0, colors.getValue());
+			GLDebug::showError();
+		}
+		
+		if (texcoords.getLength() > 0)
+		{
+			GLClientArrays::enableClientState(ClientArrayType::TEXTURE_COORD_ARRAY);
+			GLClientArrays::setTexCoordPointer(texcoords.getUnitSize(), DataType::FLOAT, 0, texcoords.getValue());
+			GLDebug::showError();
+		}
+		
+		if (normals.getLength() > 0)
+		{
+			GLClientArrays::enableClientState(ClientArrayType::NORMAL_ARRAY);
+			GLClientArrays::setNormalPointer(DataType::FLOAT, 0, normals.getValue());
+			GLDebug::showError();
+		}
+
+		GLState::enable(EnableModel::TEXTURE_2D);
+		auto nMatID = pMesh->getMaterial();
+		mat->applyMaterial(nMatID);
+
+		const sys::MeshMemoryData& indices = pMesh->getIndices();
+		if (indices.getLength() > 0)
+		{
+			GLClientArrays::drawElements(DrawMode::TRIANGLES, indices.getLength(), IndexDataType::UNSIGNED_INT, indices.getValue());
+			GLDebug::showError();
+		}
+		GLState::disable(EnableModel::TEXTURE_2D);
+
+		GLClientArrays::disableClientState(ClientArrayType::VERTEX_ARRAY);
+		GLClientArrays::disableClientState(ClientArrayType::NORMAL_ARRAY);
+		GLClientArrays::disableClientState(ClientArrayType::TEXTURE_COORD_ARRAY);
+		GLClientArrays::disableClientState(ClientArrayType::COLOR_ARRAY);
+
+		//GLMatrix::multMatrix(inverse);
+	}
 }
 
 void render::Mesh::initBufferData()
@@ -280,7 +373,7 @@ void render::Mesh::updateVerticeData()
 		auto pMesh = item.second;
 
 		uint32_t nLength = pMesh->getVertices().getLength();
-		uint32_t nUnitSize = pMesh->getVertices().getUnitize();
+		uint32_t nUnitSize = pMesh->getVertices().getUnitSize();
 		uint32_t nTypeSize = pMesh->getVertices().getTypeSize();
 		if (nLength > 0)
 		{

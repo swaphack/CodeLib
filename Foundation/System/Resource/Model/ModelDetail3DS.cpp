@@ -121,7 +121,10 @@ bool ModelDetail3DS::load(const std::string& fullpath)
 				if (pMeshData->vertices)
 				{
 					int nVerticeCount = 3 * pMeshData->nvertices;
-					float* verticeData = new float[nVerticeCount];
+					float* verticeData = (float*)pMesh->createVertices(nVerticeCount, sizeof(float), 3);
+
+					int nColorCount = 4 * pMeshData->nvertices;
+					float* colorData = (float*)pMesh->createColors(nColorCount, sizeof(float), 4);
 
 					for (int j = 0; j < pMeshData->nvertices; j++)
 					{
@@ -130,22 +133,36 @@ bool ModelDetail3DS::load(const std::string& fullpath)
 						pos[1] = pMeshData->vertices[j][1];
 						pos[2] = pMeshData->vertices[j][2];
 						memcpy(verticeData + 3 * j, pos, 3 * sizeof(float));
-					}
 
-					pMesh->setVertices(nVerticeCount, verticeData);
-					delete[] verticeData;
+						float color[4] = { 0 };
+						color[0] = 1.0f;
+						color[1] = 1.0f;
+						color[2] = 1.0f;
+						color[3] = 1.0f;
+						memcpy(colorData + 4 * i, color, 4 * sizeof(float));
+					}
 				}
 
 				if (pMeshData->texcos)
 				{
 					int nTexCoordCount = 2 * pMeshData->nvertices;
-					float* texCoordData = new float[nTexCoordCount];
+					float* texCoordData = (float*)pMesh->createUVs(nTexCoordCount, sizeof(float), 2);
 					for (int j = 0; j < pMeshData->nvertices; j++)
 					{
 						memcpy(texCoordData + 2 * j, pMeshData->texcos[j], 2 * sizeof(float));
 					}
-					pMesh->setUVs(nTexCoordCount, texCoordData, 2);
-					delete[] texCoordData;
+				}
+				else
+				{
+					int nTexCoordCount = 2 * pMeshData->nvertices;
+					float* texCoordData = (float*)pMesh->createUVs(nTexCoordCount, sizeof(float), 2);
+					for (int j = 0; j < pMeshData->nvertices; j++)
+					{
+						float uv[3] = { 0 };
+						uv[0] = 0;
+						uv[1] = 0;
+						memcpy(texCoordData + 2 * j, uv, 2 * sizeof(float));
+					}
 				}
 			}
 
@@ -165,23 +182,19 @@ bool ModelDetail3DS::load(const std::string& fullpath)
 
 				for (auto item0 : mapMat)
 				{
+					pMesh->setMaterial(item0.first);
 					int nFaceCount = 3 * item0.second.size();
 					if (nFaceCount > 0)
 					{
-						uint32_t* indices = new uint32_t[nFaceCount];
+						uint32_t* indices = (uint32_t*)pMesh->createIndices(nFaceCount, sizeof(uint32_t), 1);
 						int j = 0;
-						for (auto item1 : item0.second)
+						for (auto idx : item0.second)
 						{
-							*(indices + j * 3) = pMeshData->faces[item1].index[0];
-							*(indices + j * 3 + 1) = pMeshData->faces[item1].index[1];
-							*(indices + j * 3 + 2) = pMeshData->faces[item1].index[2];
+							*(indices + j * 3) = pMeshData->faces[idx].index[0];
+							*(indices + j * 3 + 1) = pMeshData->faces[idx].index[1];
+							*(indices + j * 3 + 2) = pMeshData->faces[idx].index[2];
 							j++;
 						}
-
-						pMesh->setMaterial(item0.first);
-						pMesh->setIndices(nFaceCount, indices);
-
-						delete[] indices;
 					}
 				}
 			}

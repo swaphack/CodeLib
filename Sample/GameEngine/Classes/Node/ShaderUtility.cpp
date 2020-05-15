@@ -13,9 +13,6 @@ void ShaderUtility::loadShader(render::Material* mat, const std::string& vpath, 
 	}
 	ShaderProgram* pProgram = CREATE_OBJECT(ShaderProgram);
 	pProgram->loadVertexAndFragmentShader(vpath, fpath);
-	
-	//initProgramAttrib(pProgram);
-
 	pProgram->link();
 
 	mat->setShaderProgram(pProgram);
@@ -71,13 +68,7 @@ void ShaderUtility::runRotateAction(render::Node* node)
 	node->getActionProxy()->runAction(pRepeateAction);
 }
 
-void ShaderUtility::updateNodeShader(render::CtrlFrame* node)
-{
-	loadShader(node->getMaterial(), texture3dVertexPath, texture3dFragmentPath);
-	runRotateAction(node);
-}
-
-void ShaderUtility::updateNodeShader(render::Model* node, bool autoRotate)
+void ShaderUtility::updateNodeShader(render::DrawNode* node, bool autoRotate)
 {
 	loadShader(node->getMaterial(), texture3dVertexPath, texture3dFragmentPath);
 	initShaderAttrib(node->getMaterial());

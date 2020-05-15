@@ -30,7 +30,7 @@ void Volume::set(float w, float h, float d)
 {
 	this->setWidth(w);
 	this->setHeight(h);
-	this->setDepth(h);
+	this->setDepth(d);
 }
 
 void Volume::set(float w, float h)

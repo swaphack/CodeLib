@@ -16,9 +16,10 @@ TestShaderNode::~TestShaderNode()
 
 void TestShaderNode::testFunc()
 {
+	//this->addLight();
 	//this->testImageShader();
 	this->testModelShader();
-	this->test3dsModelShader();
+	//this->test3dsModelShader();
 	//this->testFbxModelShader();
 	//this->testObjModelShader();
 }
@@ -94,7 +95,7 @@ void TestShaderNode::testImageShader()
 	pImage->setPosition(Vector2(500, 500));
 	this->addChild(pImage);
 
-	ShaderUtility::updateNodeShader(pImage);
+	ShaderUtility::updateNodeShader(pImage, false);
 }
 
 void TestShaderNode::testModelShader()
@@ -158,6 +159,17 @@ void TestShaderNode::testFbxModelShader()
 	this->addChild(pModel);
 
 	ShaderUtility::updateNodeShader(pModel);
+}
+
+void TestShaderNode::addLight()
+{
+	Light0* pSpotLight = CREATE_NODE(Light0);
+	pSpotLight->setPosition(0, 0, 50);
+	pSpotLight->setAmbient(255, 255, 255, 255);
+	pSpotLight->setDiffuse(255, 255, 255, 255);
+	pSpotLight->setSpecular(255, 255, 255, 255);
+
+	this->addChild(pSpotLight);
 }
 
 

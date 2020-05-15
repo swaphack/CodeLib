@@ -23,4 +23,6 @@ private:
 	void test3dsModelShader();
 	void testObjModelShader();
 	void testFbxModelShader();
+
+	void addLight();
 };

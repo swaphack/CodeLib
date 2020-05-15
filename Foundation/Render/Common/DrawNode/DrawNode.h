@@ -28,9 +28,8 @@ namespace render
 	protected:
 		virtual void drawing();
 	protected:
-		virtual void drawSampleWithClientArray();
-	protected:
-		void drawSampleWithBufferObject();
+		void drawWithClientArray();
+		void drawWithBufferObject();
 	protected:
 		// ²ÄÖÊ
 		Material* _material = nullptr;

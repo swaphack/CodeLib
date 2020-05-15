@@ -120,35 +120,6 @@ render::Mesh* render::CtrlFrame::getMesh()
 	return _mesh;
 }
 
-void render::CtrlFrame::drawSampleWithClientArray()
-{
-	int textID = _material->getTexture(MAT_TEXTURE_NAEM);
-	if (textID == 0)
-	{
-		return;
-	}
-
-	GLState::enable(EnableModel::TEXTURE_2D);
-	GLTexture::bindTexture2D(textID);
-
-	GLClientArrays::enableClientState(ClientArrayType::VERTEX_ARRAY);
-	GLClientArrays::setVertexPointer(3, DataType::FLOAT, 0, _texRect.vertices);
-
-	GLClientArrays::enableClientState(ClientArrayType::TEXTURE_COORD_ARRAY);
-	GLClientArrays::setTexCoordPointer(2, DataType::FLOAT, 0, _texRect.uvs);
-
-	GLClientArrays::enableClientState(ClientArrayType::COLOR_ARRAY);
-	GLClientArrays::setColorPointer(4, DataType::FLOAT, 0, _texRect.colors);
-
-	GLClientArrays::drawElements(DrawMode::TRIANGLES, 6, IndexDataType::UNSIGNED_INT, _texRect.indices);
-
-	GLClientArrays::disableClientState(ClientArrayType::VERTEX_ARRAY);
-	GLClientArrays::disableClientState(ClientArrayType::TEXTURE_COORD_ARRAY);
-	GLClientArrays::disableClientState(ClientArrayType::COLOR_ARRAY);
-
-	GLState::disable(EnableModel::TEXTURE_2D);
-}
-
 void render::CtrlFrame::initBufferObject()
 {
 	sys::ModelDetail* pModelDetail = CREATE_OBJECT(sys::ModelDetail);

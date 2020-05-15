@@ -17,14 +17,15 @@ namespace sys
 		MeshMemoryData(const MeshMemoryData& data)
 			:MemoryData(data.getLength(), data.getValue(), data.getTypeSize())
 		{
-			this->setUnitSize(data.getUnitize());
+			this->setUnitSize(data.getUnitSize());
 		}
 		virtual ~MeshMemoryData(){}
 	public:
 		void setUnitSize(uint32_t size) { _unitSize = size; }
-		uint32_t getUnitize() const { return _unitSize; }
+		uint32_t getUnitSize() const { return _unitSize; }
 	protected:
 	private:
+		// 每个单位大小
 		uint32_t _unitSize = 0;
 	};
 
@@ -63,7 +64,7 @@ namespace sys
 		/**
 		*	设置颜色坐标信息
 		*/
-		void setColors(int size, float* colors, int unitSize = 3);
+		void setColors(int size, float* colors, int unitSize = 4);
 		/**
 		*	纹理坐标信息
 		*/
@@ -96,6 +97,27 @@ namespace sys
 		*	设置变换矩阵
 		*/
 		void setMatrix(const math::Matrix44& mat);
+	public:
+		/**
+		*	分配顶点
+		*/
+		char* createVertices(size_t size, uint32_t typeSize, int unitSize = 3);
+		/**
+		*	分配法线
+		*/
+		char* createNormals(size_t size, uint32_t typeSize, int unitSize = 3);
+		/**
+		*	分配颜色
+		*/
+		char* createColors(size_t size, uint32_t typeSize, int unitSize = 4);
+		/**
+		*	分配纹理坐标
+		*/
+		char* createUVs(size_t size, uint32_t typeSize, int unitSize = 2);
+		/**
+		*	分配顶点索引
+		*/
+		char* createIndices(size_t size, uint32_t typeSize, int unitSize = 1);
 	private:
 		std::string _meshName;
 		// 材质

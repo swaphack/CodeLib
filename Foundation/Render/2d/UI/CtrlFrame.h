@@ -39,7 +39,6 @@ namespace render
 	protected:
 		void onTextureChange();
 
-		virtual void drawSampleWithClientArray();
 		virtual void initBufferObject();
 		virtual void updateBufferData();
 	protected:

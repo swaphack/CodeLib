@@ -74,7 +74,7 @@ namespace sys
 		void insert(size_t offset, int size, const char* value);
 		void remove(size_t offset, int size);
 
-		void resize(size_t len);
+		void resize(size_t len, uint32_t typeSize = 1);
 	private:
 		/**
 		*	³¤¶È

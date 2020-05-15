@@ -36,7 +36,7 @@ void Light::draw()
 
 	GLLight::setLightSpecular(getLightName(), _lightSpecular);
 
-	GLLight::setLightPosition(getLightName(), _obPosition.getValue());
+	GLLight::setLightPosition(getLightName(), _position.getValue());
 
 	GLState::enable((EnableModel)getLightName());
 }
