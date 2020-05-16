@@ -1,42 +1,42 @@
-#include "StencilTest.h"
+#include "FragmentStencilTest.h"
 #include "Graphic/import.h"
 
-render::StencilOp::StencilOp()
+render::FragmentStencilOp::FragmentStencilOp()
 {
 
 }
 
-render::StencilOp::~StencilOp()
+render::FragmentStencilOp::~FragmentStencilOp()
 {
 
 }
 
-void render::StencilOp::setFunc(StencilFunction func, int ref, uint32_t mask)
+void render::FragmentStencilOp::setFunc(StencilFunction func, int ref, uint32_t mask)
 {
 	_func = func;
 	_ref = ref;
 	_mask = mask;
 }
 
-void render::StencilOp::setOperator(StencilOpResult stencilFail, StencilOpResult depthFail, StencilOpResult depthPass)
+void render::FragmentStencilOp::setOperator(StencilOpResult stencilFail, StencilOpResult depthFail, StencilOpResult depthPass)
 {
 	_stencilFail = stencilFail;
 	_depthFail = depthFail;
 	_depthPass = depthPass;
 }
 
-void render::StencilOp::startTest()
+void render::FragmentStencilOp::begin()
 {
 	GLState::enable(EnableModel::STENCIL_TEST);
 }
 
-void render::StencilOp::test()
+void render::FragmentStencilOp::update()
 {
 	GLState::setStencilFunc(_func, _ref, _mask);
 	GLState::setStencilOp(_stencilFail, _depthFail, _depthPass);
 }
 
-void render::StencilOp::endTest()
+void render::FragmentStencilOp::end()
 {
 	GLState::disable(EnableModel::STENCIL_TEST);
 }
@@ -57,7 +57,7 @@ void render::StencilFaceOp::setFaceType(FaceType faceType)
 	_faceType = faceType;
 }
 
-void render::StencilFaceOp::test()
+void render::StencilFaceOp::update()
 {
 	GLState::setStencilFuncSeparate(_faceType, _func, _ref, _mask);
 	GLState::setStencilOpSeparate(_faceType, _stencilFail, _depthFail, _depthPass);

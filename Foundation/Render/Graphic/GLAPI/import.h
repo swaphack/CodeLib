@@ -22,3 +22,4 @@
 #include "GLBufferObjects.h"
 #include "GLFrameBuffer.h"
 #include "GLProgramPipelines.h"
+#include "GLQuery.h"

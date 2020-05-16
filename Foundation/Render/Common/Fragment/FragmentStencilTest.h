@@ -8,18 +8,18 @@ namespace render
 	/**
 	*	Ä£°å²âÊÔ
 	*/
-	class StencilOp : public FragmentTestOp
+	class FragmentStencilOp : public FragmentTestOp
 	{
 	public:
-		StencilOp();
-		virtual ~StencilOp();
+		FragmentStencilOp();
+		virtual ~FragmentStencilOp();
 	public:
 		void setFunc(StencilFunction func, int ref, uint32_t mask);
 		void setOperator(StencilOpResult stencilFail, StencilOpResult depthFail, StencilOpResult depthPass);
 	public:
-		virtual void startTest();
-		virtual void test();
-		virtual void endTest();
+		virtual void begin();
+		virtual void update();
+		virtual void end();
 	protected:
 		StencilFunction _func;
 		int _ref = 0;
@@ -30,7 +30,7 @@ namespace render
 	};
 
 	//////////////////////////////////////////////////////////////////////////
-	class StencilFaceOp : public StencilOp
+	class StencilFaceOp : public FragmentStencilOp
 	{
 	public:
 		StencilFaceOp();
@@ -38,7 +38,7 @@ namespace render
 	public:
 		void setFaceType(FaceType faceType);
 	public:
-		virtual void test();
+		virtual void update();
 	protected:
 		FaceType _faceType = FaceType::FRONT;
 	};

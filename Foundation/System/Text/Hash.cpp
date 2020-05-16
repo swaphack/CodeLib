@@ -52,14 +52,14 @@ uint32_t Hash::getPJWHash(char *str)
 	uint32_t OneEighth        = (uint32_t)(BitsInUnignedint32 / 8);
 	uint32_t HighBits         = (uint32_t)(0xFFFFFFFF) << (BitsInUnignedint32 - OneEighth);
 	uint32_t hash             = 0;
-	uint32_t test             = 0;
+	uint32_t update             = 0;
 
 	while (*str)
 	{
 		hash = (hash << OneEighth) + (*str++);
-		if ((test = hash & HighBits) != 0)
+		if ((update = hash & HighBits) != 0)
 		{
-			hash = ((hash ^ (test >> ThreeQuarters)) & (~HighBits));
+			hash = ((hash ^ (update >> ThreeQuarters)) & (~HighBits));
 		}
 	}
 

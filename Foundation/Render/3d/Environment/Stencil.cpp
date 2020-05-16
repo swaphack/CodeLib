@@ -22,21 +22,21 @@ Stencil::~Stencil()
 void showStencilInformation()
 {
 	int value = 0;
-	GLState::getInt(GetTarget::STENCIL_TEST, &value);
+	GLState::getInteger(GetTarget::STENCIL_TEST, &value);
 	PRINT("STENCIL_TEST %d\n", value);
-	GLState::getInt(GetTarget::STENCIL_FUNC, &value);
+	GLState::getInteger(GetTarget::STENCIL_FUNC, &value);
 	PRINT("GL_STENCIL_FUNC %d\n", value);
-	GLState::getInt(GetTarget::STENCIL_REF, &value);
+	GLState::getInteger(GetTarget::STENCIL_REF, &value);
 	PRINT("GL_STENCIL_REF %d\n", value);
-	GLState::getInt(GetTarget::STENCIL_VALUE_MASK, &value);
+	GLState::getInteger(GetTarget::STENCIL_VALUE_MASK, &value);
 	PRINT("GL_STENCIL_VALUE_MASK %d\n", value);
-	GLState::getInt(GetTarget::STENCIL_FAIL, &value);
+	GLState::getInteger(GetTarget::STENCIL_FAIL, &value);
 	PRINT("GL_STENCIL_FAIL %d\n", value);
-	GLState::getInt(GetTarget::STENCIL_PASS_DEPTH_FAIL, &value);
+	GLState::getInteger(GetTarget::STENCIL_PASS_DEPTH_FAIL, &value);
 	PRINT("GL_STENCIL_PASS_DEPTH_FAIL %d\n", value);
-	GLState::getInt(GetTarget::STENCIL_PASS_DEPTH_PASS, &value);
+	GLState::getInteger(GetTarget::STENCIL_PASS_DEPTH_PASS, &value);
 	PRINT("GL_STENCIL_PASS_DEPTH_PASS %d\n", value);
-	GLState::getInt(GetTarget::STENCIL_WRITEMASK, &value);
+	GLState::getInteger(GetTarget::STENCIL_WRITEMASK, &value);
 	PRINT("GL_STENCIL_WRITEMASK %d\n", value);
 	PRINT("==============================================\n\n");
 }
@@ -102,12 +102,12 @@ void render::Stencil::endFragmentTest()
 void render::Stencil::saveStencilData()
 {
 	_stencilData.isEnableDepthTest = GLState::isEnabled(EnableModel::DEPTH_TEST);
-	GLState::getInt(GetTarget::STENCIL_FUNC, &_stencilData.nStencilFun);
-	GLState::getInt(GetTarget::STENCIL_REF, &_stencilData.nStencilRef);
-	GLState::getInt(GetTarget::STENCIL_VALUE_MASK, &_stencilData.nStencilValueMask);
-	GLState::getInt(GetTarget::STENCIL_FAIL, &_stencilData.nStencilFail);
-	GLState::getInt(GetTarget::STENCIL_PASS_DEPTH_FAIL, &_stencilData.nStencilPassDepthFail);
-	GLState::getInt(GetTarget::STENCIL_PASS_DEPTH_PASS, &_stencilData.nStencilPassDepthPass);
+	GLState::getInteger(GetTarget::STENCIL_FUNC, &_stencilData.nStencilFun);
+	GLState::getInteger(GetTarget::STENCIL_REF, &_stencilData.nStencilRef);
+	GLState::getInteger(GetTarget::STENCIL_VALUE_MASK, &_stencilData.nStencilValueMask);
+	GLState::getInteger(GetTarget::STENCIL_FAIL, &_stencilData.nStencilFail);
+	GLState::getInteger(GetTarget::STENCIL_PASS_DEPTH_FAIL, &_stencilData.nStencilPassDepthFail);
+	GLState::getInteger(GetTarget::STENCIL_PASS_DEPTH_PASS, &_stencilData.nStencilPassDepthPass);
 }
 
 void render::Stencil::resetStencilData()

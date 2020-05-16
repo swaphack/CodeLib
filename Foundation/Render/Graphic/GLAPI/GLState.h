@@ -35,8 +35,8 @@ namespace render
 		/**
 		*	获取int类型的状态值
 		*/
-		static void getInt(GetTarget pname, int* value);	
-		static void getInt(uint32_t pname, int* value);
+		static void getInteger(GetTarget pname, int* value);	
+		static void getInteger(uint32_t pname, int* value);
 	public:		
 		static void getTexImage(TextureTarget target, int level, TexImageInternalFormat internalFormat, TexImageDataType pixelType, void* data);
 		static void getTexLevelParameter(TextureTarget target, int level, GetTextureParameter parameter, float* value);
@@ -133,7 +133,7 @@ namespace render
 		/**
 		*	设置逻辑
 		*/
-		static void setLogicOp(LogicOp op);
+		static void setLogicOp(LogicOpCode op);
 
 		static void setPixelStore(PixelStore name, float value);
 		static void setPointParameter(PointParameter pname, const float* value);

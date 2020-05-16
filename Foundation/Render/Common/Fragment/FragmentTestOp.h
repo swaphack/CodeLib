@@ -21,9 +21,9 @@ namespace render
 		void setEnabled(bool enabled);
 		bool isEnabled();
 	public:
-		virtual void startTest();
-		virtual void test();
-		virtual void endTest();
+		virtual void begin();
+		virtual void update();
+		virtual void end();
 	protected:
 		bool _enabled = false;
 	};

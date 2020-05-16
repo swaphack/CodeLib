@@ -8,17 +8,17 @@ namespace render
 	/**
 	*	…Ó∂»≤‚ ‘
 	*/
-	class DepthTest : public FragmentTestOp
+	class FragmentDepthTest : public FragmentTestOp
 	{
 	public:
-		DepthTest();
-		virtual ~DepthTest();
+		FragmentDepthTest();
+		virtual ~FragmentDepthTest();
 	public:
 		void setFunc(DepthFunction func);
 	public:
-		virtual void startTest();
-		virtual void test();
-		virtual void endTest();
+		virtual void start();
+		virtual void update();
+		virtual void end();
 	protected:
 		DepthFunction _func;
 	};

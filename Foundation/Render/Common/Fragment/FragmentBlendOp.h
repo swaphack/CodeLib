@@ -5,33 +5,33 @@
 
 namespace render
 {
-	class BlendOpBase : public FragmentTestOp
+	class FragmentBlendOpBase : public FragmentTestOp
 	{
 	public:
-		BlendOpBase();
-		virtual ~BlendOpBase();
+		FragmentBlendOpBase();
+		virtual ~FragmentBlendOpBase();
 	public:
 		void setBlendColor(const sys::Color4F& color);
 	public:
-		virtual void startTest();
-		virtual void test();
-		virtual void endTest();
+		virtual void begin();
+		virtual void update();
+		virtual void end();
 	protected:
 		sys::Color4F _blendColor;
 	};
 	/**
 	*	»ìºÏ
 	*/
-	class BlendOp : public BlendOpBase
+	class FragmentBlendOp : public FragmentBlendOpBase
 	{
 	public:
-		BlendOp();
-		virtual ~BlendOp();
+		FragmentBlendOp();
+		virtual ~FragmentBlendOp();
 	public:
 		void setBlendFactor(BlendingFactorSrc src, BlendingFactorDest dst);
 		void setBlendEquation(BlendEquationMode mode);
 	public:
-		virtual void test();
+		virtual void update();
 	protected:
 		BlendingFactorSrc _src = BlendingFactorSrc::SRC_ALPHA;
 		BlendingFactorDest _dest = BlendingFactorDest::ONE_MINUS_SRC_ALPHA;
@@ -39,17 +39,17 @@ namespace render
 	};
 
 	//////////////////////////////////////////////////////////////////////////
-	class BlendSeparateOp : public BlendOpBase
+	class FragmentBlendSeparateOp : public FragmentBlendOpBase
 	{
 	public:
-		BlendSeparateOp();
-		virtual ~BlendSeparateOp();
+		FragmentBlendSeparateOp();
+		virtual ~FragmentBlendSeparateOp();
 	public:
 		void setBlendFactor(BlendingFactorSrc srcRGB, BlendingFactorDest dstRGB,
 			BlendingFactorSrc srcAlpha, BlendingFactorDest dstAlpha);
 		void setBlendEquation(BlendEquationMode rgbMode, BlendEquationMode alphaMode);
 	public:
-		virtual void test();
+		virtual void update();
 	protected:
 		BlendingFactorSrc _srcRGB = BlendingFactorSrc::SRC_COLOR;
 		BlendingFactorDest _destRGB = BlendingFactorDest::ONE_MINUS_SRC_COLOR;
@@ -60,29 +60,29 @@ namespace render
 	};
 
 	//////////////////////////////////////////////////////////////////////////
-	class BlendBufferOp : public BlendOp
+	class FragmentBlendBufferOp : public FragmentBlendOp
 	{
 	public:
-		BlendBufferOp();
-		virtual ~BlendBufferOp();
+		FragmentBlendBufferOp();
+		virtual ~FragmentBlendBufferOp();
 	public:
 		void setBufferID(uint32_t buffer);
 	public:
-		virtual void test();
+		virtual void update();
 	protected:
 		uint32_t _bufferID = 0;
 	};
 
 	//////////////////////////////////////////////////////////////////////////
-	class BlendSeparateBufferOp : public BlendSeparateOp
+	class FragmentBlendSeparateBufferOp : public FragmentBlendSeparateOp
 	{
 	public:
-		BlendSeparateBufferOp();
-		virtual ~BlendSeparateBufferOp();
+		FragmentBlendSeparateBufferOp();
+		virtual ~FragmentBlendSeparateBufferOp();
 	public:
 		void setBufferID(uint32_t buffer);
 	public:
-		virtual void test();
+		virtual void update();
 	protected:
 		uint32_t _bufferID = 0;
 	};

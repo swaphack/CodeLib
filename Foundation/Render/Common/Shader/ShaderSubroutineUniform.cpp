@@ -42,7 +42,7 @@ uint32_t render::ShaderSubroutineUniform::getSubroutineIndex(const std::string& 
 void render::ShaderSubroutineUniform::setSubroutineIndex(uint32_t index)
 {
 	int n = 0;
-	GLState::getInt(GL_MAX_SUBROUTINE_UNIFORM_LOCATIONS, &n);
+	GLState::getInteger(GL_MAX_SUBROUTINE_UNIFORM_LOCATIONS, &n);
 
 	uint32_t* indices = new uint32_t[n];
 	GLShader::getUniformSubroutine(_shaderType, n, indices);

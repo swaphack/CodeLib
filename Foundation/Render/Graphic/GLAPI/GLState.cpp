@@ -33,12 +33,12 @@ void GLState::getFloat(GetTarget pname, float* value)
 	return glGetFloatv((GLenum)pname, value);
 }
 
-void GLState::getInt(GetTarget pname, int* value)
+void GLState::getInteger(GetTarget pname, int* value)
 {
 	return glGetIntegerv((GLenum)pname, value);
 }
 
-void render::GLState::getInt(uint32_t pname, int* value)
+void render::GLState::getInteger(uint32_t pname, int* value)
 {
 	return glGetIntegerv(pname, value);
 }
@@ -256,7 +256,7 @@ void GLState::setPolygonMode(FaceType mode, PolygonMode type)
 	glPolygonMode((GLenum)mode, (GLenum)type);
 }
 
-void GLState::setLogicOp(LogicOp op)
+void GLState::setLogicOp(LogicOpCode op)
 {
 	glLogicOp((GLenum)op);
 }

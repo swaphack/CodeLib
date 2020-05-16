@@ -8,7 +8,7 @@
 namespace render
 {
 	// 采样类型
-	enum class MultiSampleType
+	enum class FragmentSampleType
 	{
 		// 使用片元的alpha值计算最后的采样覆盖率
 		SAMPLE_ALPHA_TO_COVERAGE = GL_SAMPLE_ALPHA_TO_COVERAGE,
@@ -20,17 +20,17 @@ namespace render
 		SAMPLE_MASK = GL_SAMPLE_MASK,
 	};
 	/**
-	*	多重采样 MSAA
+	*	图元的多重采样 MSAA
 	*	是一种抗锯齿的技术，它通过在一个像素上进行多次采样多次计算并最终汇总(Resolve to single-sample)，可使绘制的图像边缘更加平滑
 	*	将单个像素分割为多份 4， 8，16，32
 	*/
-	class MultiSampling : public FragmentTestOp
+	class FragmentSample : public FragmentTestOp
 	{
 	public:
-		MultiSampling();
-		virtual ~MultiSampling();
+		FragmentSample();
+		virtual ~FragmentSample();
 	public:
-		void setSampleType(MultiSampleType type);
+		void setSampleType(FragmentSampleType type);
 		void setSampleCoverage(float value, bool invert);
 		/**
 			设置一个32为的采样掩码mask，如果当前帧缓存包含多于32个采样数，采样掩码的长度可能是多个32位大小的字段组成
@@ -40,11 +40,11 @@ namespace render
 		void setSampleMask(uint32_t index, uint32_t mask);
 		void clearSampelMask();
 	public:
-		virtual void startTest();
-		virtual void test();
-		virtual void endTest();
+		virtual void begin();
+		virtual void update();
+		virtual void end();
 	protected:
-		MultiSampleType _sampleType;
+		FragmentSampleType _sampleType;
 		std::map<uint32_t, uint32_t> _sampleMask;
 		sys::Tuple2<float, bool> _sampleConverage;
 	};

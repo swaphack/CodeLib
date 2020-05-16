@@ -8,17 +8,17 @@ namespace render
 	*	剪切测试
 	*	限定显示区域
 	*/
-	class ScissorTest : public FragmentTestOp
+	class FragmentScissorTest : public FragmentTestOp
 	{
 	public:
-		ScissorTest();
-		virtual ~ScissorTest();
+		FragmentScissorTest();
+		virtual ~FragmentScissorTest();
 	public:
 		void setRect(int x, int y, int width, int height);
 	public:
-		virtual void startTest();
-		virtual void test();
-		virtual void endTest();
+		virtual void begin();
+		virtual void update();
+		virtual void end();
 	protected:
 		math::Rect _rect;
 	};

@@ -327,18 +327,6 @@
     <ClCompile Include="Common\Buffer\TextureBufferObject.cpp">
       <Filter>Common\Buffer</Filter>
     </ClCompile>
-    <ClCompile Include="Common\Fragment\ScissorTest.cpp">
-      <Filter>Common\Fragment</Filter>
-    </ClCompile>
-    <ClCompile Include="Common\Fragment\MultiSampling.cpp">
-      <Filter>Common\Fragment</Filter>
-    </ClCompile>
-    <ClCompile Include="Common\Fragment\StencilTest.cpp">
-      <Filter>Common\Fragment</Filter>
-    </ClCompile>
-    <ClCompile Include="Common\Fragment\DepthTest.cpp">
-      <Filter>Common\Fragment</Filter>
-    </ClCompile>
     <ClCompile Include="Common\DrawNode\PrimitiveNode.cpp">
       <Filter>Common\DrawNode</Filter>
     </ClCompile>
@@ -366,11 +354,32 @@
     <ClCompile Include="Common\Fragment\FragmentTestOp.cpp">
       <Filter>Common\Fragment</Filter>
     </ClCompile>
-    <ClCompile Include="Common\Fragment\PolygonOffsetOp.cpp">
+    <ClCompile Include="Common\Fragment\FragmentBlendOp.cpp">
       <Filter>Common\Fragment</Filter>
     </ClCompile>
-    <ClCompile Include="Common\Fragment\BlendOp.cpp">
+    <ClCompile Include="Common\Fragment\FragmentDepthTest.cpp">
       <Filter>Common\Fragment</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Fragment\FragmentLogicOp.cpp">
+      <Filter>Common\Fragment</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Fragment\FragmentSample.cpp">
+      <Filter>Common\Fragment</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Fragment\FragmentQuery.cpp">
+      <Filter>Common\Fragment</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Fragment\FragmentPolygonOffsetOp.cpp">
+      <Filter>Common\Fragment</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Fragment\FragmentScissorTest.cpp">
+      <Filter>Common\Fragment</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Fragment\FragmentStencilTest.cpp">
+      <Filter>Common\Fragment</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\View\MultiSampling.cpp">
+      <Filter>Common\View</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -828,19 +837,7 @@
     <ClInclude Include="Common\Buffer\TextureBufferObject.h">
       <Filter>Common\Buffer</Filter>
     </ClInclude>
-    <ClInclude Include="Common\Fragment\ScissorTest.h">
-      <Filter>Common\Fragment</Filter>
-    </ClInclude>
     <ClInclude Include="Common\Fragment\import.h">
-      <Filter>Common\Fragment</Filter>
-    </ClInclude>
-    <ClInclude Include="Common\Fragment\MultiSampling.h">
-      <Filter>Common\Fragment</Filter>
-    </ClInclude>
-    <ClInclude Include="Common\Fragment\StencilTest.h">
-      <Filter>Common\Fragment</Filter>
-    </ClInclude>
-    <ClInclude Include="Common\Fragment\DepthTest.h">
       <Filter>Common\Fragment</Filter>
     </ClInclude>
     <ClInclude Include="Common\DrawNode\PrimitiveNode.h">
@@ -870,11 +867,32 @@
     <ClInclude Include="Common\Fragment\FragmentTestOp.h">
       <Filter>Common\Fragment</Filter>
     </ClInclude>
-    <ClInclude Include="Common\Fragment\PolygonOffsetOp.h">
+    <ClInclude Include="Common\Fragment\FragmentBlendOp.h">
       <Filter>Common\Fragment</Filter>
     </ClInclude>
-    <ClInclude Include="Common\Fragment\BlendOp.h">
+    <ClInclude Include="Common\Fragment\FragmentDepthTest.h">
       <Filter>Common\Fragment</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Fragment\FragmentLogicOp.h">
+      <Filter>Common\Fragment</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Fragment\FragmentSample.h">
+      <Filter>Common\Fragment</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Fragment\FragmentQuery.h">
+      <Filter>Common\Fragment</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Fragment\FragmentPolygonOffsetOp.h">
+      <Filter>Common\Fragment</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Fragment\FragmentScissorTest.h">
+      <Filter>Common\Fragment</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Fragment\FragmentStencilTest.h">
+      <Filter>Common\Fragment</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\View\MultiSampling.h">
+      <Filter>Common\View</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

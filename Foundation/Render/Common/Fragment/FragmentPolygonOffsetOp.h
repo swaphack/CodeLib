@@ -14,19 +14,19 @@ namespace render
 	/**
 	*	¶à±ßÐÎ²Ù×÷
 	*/
-	class PolygonOffsetOp : public FragmentTestOp
+	class FragmentPolygonOffsetOp : public FragmentTestOp
 	{
 	public:
-		PolygonOffsetOp();
-		virtual ~PolygonOffsetOp();
+		FragmentPolygonOffsetOp();
+		virtual ~FragmentPolygonOffsetOp();
 	public:
 		void setOffsetType(PolygonOffsetType type);
 		// offset = m * factor + r * units;
 		void setOffset(float factor, float units);
 	public:
-		virtual void startTest();
-		virtual void test();
-		virtual void endTest();
+		virtual void begin();
+		virtual void update();
+		virtual void end();
 	protected:
 		PolygonOffsetType _offsetType;
 		sys::Tuple2<float, float> _offset;

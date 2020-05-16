@@ -609,6 +609,8 @@ enum class GetTarget
 	EDGE_FLAG_ARRAY_STRIDE = GL_EDGE_FLAG_ARRAY_STRIDE,
 	POLYGON_OFFSET_FACTOR = GL_POLYGON_OFFSET_FACTOR,
 	POLYGON_OFFSET_UNITS = GL_POLYGON_OFFSET_UNITS,
+
+	SAMPLE_BUFFERS = GL_SAMPLE_BUFFERS,
 };
 
 enum class GetTextureParameter
@@ -734,7 +736,7 @@ enum class ListNameType
 	BYTES4 = GL_4_BYTES,
 };
 
-enum class LogicOp
+enum class LogicOpCode
 {
 	CLEAR = GL_CLEAR,
 	AND = GL_AND,

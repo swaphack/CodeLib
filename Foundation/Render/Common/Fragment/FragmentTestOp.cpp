@@ -20,17 +20,17 @@ bool render::FragmentTestOp::isEnabled()
 	return _enabled;
 }
 
-void render::FragmentTestOp::startTest()
+void render::FragmentTestOp::begin()
 {
 
 }
 
-void render::FragmentTestOp::test()
+void render::FragmentTestOp::update()
 {
 
 }
 
-void render::FragmentTestOp::endTest()
+void render::FragmentTestOp::end()
 {
 
 }
