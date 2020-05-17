@@ -1,6 +1,11 @@
 #include "Directory.h"
 #include <cstdio>
 #include <direct.h>
+#include <cstdlib>
+#include <io.h>
+
+#include <sys/types.h>
+#include <stdio.h>
 
 using namespace sys;
 
@@ -24,6 +29,46 @@ void Directory::getDirectory(const std::string& fullpath, std::string& dir)
 	{
 		dir = strFullpath.substr(0, pos1 + 1);
 	}
+}
+
+void sys::Directory::getAllFiles(const std::string& dir, std::set<std::string> files)
+{
+	if (access(dir.c_str(), 0) == -1)
+	{
+		return;
+	}
+	std::string dirNew = dir;
+	dirNew += "/*.*";
+
+	intptr_t handle;
+	_finddata_t findData;
+
+	handle = _findfirst(dirNew.c_str(), &findData);
+	if (handle == -1)        // 检查是否成功
+		return;
+
+	do
+	{
+		if (findData.attrib & _A_SUBDIR)
+		{
+			if (strcmp(findData.name, ".") == 0 || strcmp(findData.name, "..") == 0)
+				continue;
+
+			// 在目录后面加上"\\"和搜索到的目录名进行下一次搜索
+			dirNew = dir;
+			dirNew += "/";
+			dirNew += findData.name;
+
+			getAllFiles(dirNew, files);
+		}
+		else
+		{
+			files.insert(findData.name);
+		}
+	} while (_findnext(handle, &findData) == 0);
+
+	_findclose(handle);    // 关闭搜索句柄
+
 }
 
 

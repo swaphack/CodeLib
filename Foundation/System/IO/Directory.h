@@ -2,6 +2,7 @@
 
 #include <string>
 #include <cstdint>
+#include <set>
 
 namespace sys
 {
@@ -10,6 +11,9 @@ namespace sys
 	{
 	public:
 		static void getDirectory(const std::string& fullpath, std::string& dir);
+
+
+		static void getAllFiles(const std::string& dir, std::set<std::string> files);
 
 		// 创建文件
 		static int32_t createFile(const std::string& filename);
