@@ -131,6 +131,8 @@ void TestUINode::onKeyBoardRole(sys::Object* object, sys::BoardKey key, sys::But
 void TestUINode::testScissor()
 {
 	CtrlLayout* pLayout = CREATE_NODE(CtrlLayout);
+	pLayout->setBackgroundColor(sys::Color4B(255, 0, 0, 125));
+	pLayout->setBackgroundImage("Resource/Image/1.jpg");
 	pLayout->setClip(true);
 	pLayout->setVolume(200, 200, 0);
 	pLayout->setPosition(200, 200);
@@ -140,7 +142,7 @@ void TestUINode::testScissor()
 	pImage->setImagePath("Resource/Image/sqi.png");
 	pImage->setVolume(300, 300, 0);
 	pImage->setScale(3, 3, 1);
-	this->addChild(pImage);
+	pLayout->addChild(pImage);
 }
 
 void TestUINode::testScrollView()

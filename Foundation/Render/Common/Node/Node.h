@@ -86,8 +86,11 @@ namespace render
 	public:
 		// 更新节点
 		virtual void updateNode();
+		virtual void beforeDrawNode();
 		// 绘制节点
 		virtual void drawNode();
+
+		virtual void afterDrawNode();
 	protected:
 		// 绘制,重写
 		virtual void draw();

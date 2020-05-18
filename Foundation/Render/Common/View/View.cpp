@@ -45,6 +45,8 @@ void View::initView()
 {
 	if (isDirty())
 	{
+		// 定义远近距离
+		GLState::setDepthRange(0, 1);
 		// 定义视窗位置
 		GLState::setViewport(_position.getX(), _position.getY(), _size.getWidth(), _size.getHeight());
 

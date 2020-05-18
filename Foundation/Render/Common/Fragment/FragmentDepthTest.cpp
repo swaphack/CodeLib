@@ -17,7 +17,7 @@ void render::FragmentDepthTest::setFunc(DepthFunction func)
 	_func = func;
 }
 
-void render::FragmentDepthTest::start()
+void render::FragmentDepthTest::begin()
 {
 	GLState::enable(EnableModel::DEPTH_TEST);
 }

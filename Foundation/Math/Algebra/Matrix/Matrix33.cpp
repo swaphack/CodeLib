@@ -31,7 +31,7 @@ void Matrix33::loadIdentity()
 
 void Matrix33::setTranslate(const Vector2& vector)
 {
-	(*this)[2] = vector.getX(); (*this)[5] = vector.getY();
+	(*this)[6] = vector.getX(); (*this)[7] = vector.getY();
 }
 
 void Matrix33::setScale(const Vector2& vector)

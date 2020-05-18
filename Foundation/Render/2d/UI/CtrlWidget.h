@@ -39,15 +39,9 @@ namespace render
 		void setClip(bool bClip);
 	protected:
 		virtual void updateNode();
-		virtual void drawNode();
-		/**
-		*	更新控件
-		*/
-		void updateWidget();
-		/**
-		*	绘制控件
-		*/
-		void drawWidget();
+
+		virtual void beforeDrawNode();
+		virtual void afterDrawNode();
 	public:
 		/**
 		*	坐标是否在当前对象内

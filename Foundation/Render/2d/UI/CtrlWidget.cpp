@@ -45,45 +45,40 @@ void render::CtrlWidget::setClip(bool bClip)
 
 void render::CtrlWidget::updateNode()
 {
-	this->updateWidget();
+	for (auto item : _widgets)
+	{
+		item->updateNode();
+	}
 
 	DrawNode::updateNode();
 }
 
-void render::CtrlWidget::drawNode()
+void render::CtrlWidget::beforeDrawNode()
 {
+	DrawNode::beforeDrawNode();
+
 	if (_bClip)
 	{
 		GLState::enable(EnableModel::SCISSOR_TEST);
 		GLState::setScissor(_clipRect.getX(), _clipRect.getY(), _clipRect.getWidth(), _clipRect.getHeight());
 	}
-
-	this->drawWidget();
-
-	DrawNode::drawNode();
-
-	if (_bClip)
-	{
-		GLState::disable(EnableModel::SCISSOR_TEST);
-	}
 }
 
-void render::CtrlWidget::updateWidget()
-{
-	for (auto item : _widgets)
-	{
-		item->updateNode();
-	}
-}
-
-void render::CtrlWidget::drawWidget()
+void render::CtrlWidget::afterDrawNode()
 {
 	for (auto item : _widgets)
 	{
 		item->drawNode();
 	}
-}
 
+	DrawNode::afterDrawNode();
+
+	if (_bClip)
+	{
+		GLState::disable(EnableModel::SCISSOR_TEST);
+	}
+
+}
 void render::CtrlWidget::addWidget(CtrlWidget* widget)
 {
 	if (widget == nullptr)
@@ -149,13 +144,6 @@ void render::CtrlWidget::calRectData()
 
 void render::CtrlWidget::onColorChange()
 {
-	FragmentBlend* pBlend = this->getFragOperator()->getHandle<FragmentBlend>();
-	if (pBlend)
-	{
-		sys::Color4F color;
-		convertColor4BTo4F(_color, color);
-		pBlend->setBlendColor(color);
-	}
 }
 
 void render::CtrlWidget::onBlendChange()
@@ -164,6 +152,8 @@ void render::CtrlWidget::onBlendChange()
 	if (pBlend)
 	{
 		pBlend->setBlendFactor(_blendParam.src, _blendParam.dest);
+
+		pBlend->setBlendColor(_blendColor);
 	}
 }
 

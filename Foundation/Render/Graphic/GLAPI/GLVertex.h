@@ -23,6 +23,7 @@ namespace render
 		static void setNormal(const math::Vector3& value);
 	public:// ÑÕÉ«
 		static void setColor(float r, float g, float b, float a = 1);
+		static void setColor(float* rgba);
 		static void setColor(const sys::Color3F& value, float opacity = 1);
 		static void setColor(const sys::Color4F& value, float opacity = 1);
 		static void setColor(const sys::Color3B& value, uint8_t opacity = 255);

@@ -183,7 +183,7 @@ ParticleNode* CtrlParticleSystem::createParticle()
 	rz = sys::Random::getNumber(20.0f / 360, 120.0f / 360);
 
 	ParticleNode* node = CREATE_NODE(ParticleNode);
-	node->setColor(0, 0, 0, 0);
+	node->setColor(0.0f, 0, 0, 0);
 	node->setVolume(200, 200);
 	node->setColorAcceleration(r, g, b, a);
 	node->setLifeTime(life);

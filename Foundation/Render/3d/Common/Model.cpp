@@ -4,6 +4,7 @@
 #include "Common/Buffer/import.h"
 #include "Common/View/import.h"
 #include "Common/DrawNode/import.h"
+#include "Common/Fragment/import.h"
 
 using namespace render;
 
@@ -34,6 +35,13 @@ bool render::Model::init()
 			_mesh->initBufferData();
 		}
 	});
+
+	FragmentDepthTest* pDepthTest = this->getFragOperator()->getHandle<FragmentDepthTest>();
+	if (pDepthTest)
+	{
+		pDepthTest->setEnabled(true);
+	}
+
 	return true;
 }
 

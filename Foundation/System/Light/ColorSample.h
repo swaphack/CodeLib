@@ -11,12 +11,14 @@ namespace sys
 	// color
 	struct Color3B
 	{
+	public:
 		uint8_t red;
 		uint8_t green;
 		uint8_t blue;
-
+	public:
 		Color3B();
 		Color3B(uint8_t r, uint8_t g, uint8_t b);
+	public:
 		/**
 		*	是否相等
 		*/
@@ -49,12 +51,14 @@ namespace sys
 
 	struct Color3F
 	{
+	public:
 		float red;
 		float green;
 		float blue;
-
+	public:
 		Color3F();
 		Color3F(float r, float g, float b);
+	public:
 		/**
 		*	是否相等
 		*/
@@ -90,13 +94,16 @@ namespace sys
 
 	struct Color4B
 	{
+	public:
 		uint8_t red;
 		uint8_t green;
 		uint8_t blue;
 		uint8_t alpha;
-
+	public:
 		Color4B();
 		Color4B(uint8_t r, uint8_t g, uint8_t b, uint8_t a);
+		Color4B(const Color3B& color, uint8_t a = 255);
+	public:
 		/**
 		*	是否相等
 		*/
@@ -105,6 +112,10 @@ namespace sys
 		*	重载=
 		*/
 		void operator=(const Color4B& color);
+		/**
+		*	重载=
+		*/
+		void operator=(const Color3B& color);
 		/**
 		*	和
 		*/
@@ -131,14 +142,17 @@ namespace sys
 
 	struct Color4F
 	{
+	public:
 		float red;
 		float green;
 		float blue;
 		float alpha;
-
+	public:
 		Color4F();
 		Color4F(float r, float g, float b, float a);
 		Color4F(float r, float g, float b);
+		Color4F(const Color3F& color, float a = 1);
+	public:
 		/**
 		*	是否相等
 		*/
@@ -147,6 +161,10 @@ namespace sys
 		*	重载=
 		*/
 		void operator=(const Color4F& color);
+		/**
+		*	重载=
+		*/
+		void operator=(const Color3F& color);
 		/**
 		*	和
 		*/

@@ -143,6 +143,13 @@ Color4B::Color4B(uint8_t r, uint8_t g, uint8_t b, uint8_t a) : red(r), green(g),
 
 }
 
+Color4B::Color4B(const Color3B& color, uint8_t a)
+	:Color4B(color.red, color.green, color.blue, a)
+{
+
+
+}
+
 bool Color4B::isEquals(const Color4B& color)
 {
 	return red == color.red	 && green == color.green && blue == color.blue && alpha == color.alpha;
@@ -209,6 +216,14 @@ void Color4B::operator=(const Color4B& color)
 	alpha = color.alpha;
 }
 
+void Color4B::operator=(const Color3B& color)
+{
+	red = color.red;
+	green = color.green;
+	blue = color.blue;
+	alpha = COLOR_UCHAR_VALUE;
+}
+
 
 //////////////////////////////////////////////////////////////////////////
 
@@ -227,6 +242,11 @@ Color4F::Color4F(float r, float g, float b) : red(r), green(g), blue(b), alpha(1
 
 }
 
+sys::Color4F::Color4F(const Color3F& color, float a)
+	: Color4F(color.red, color.green, color.blue, a)
+{
+}
+
 bool Color4F::isEquals(const Color4F& color)
 {
 	return red == color.red	 && green == color.green && blue == color.blue && alpha == color.alpha;
@@ -238,6 +258,14 @@ void Color4F::operator=(const Color4F& color)
 	green = color.green;
 	blue = color.blue;
 	alpha = color.alpha;
+}
+
+void Color4F::operator=(const Color3F& color)
+{
+	red = color.red;
+	green = color.green;
+	blue = color.blue;
+	alpha = 1;
 }
 
 void Color4F::add(const Color4F& color)

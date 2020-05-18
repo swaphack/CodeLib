@@ -20,11 +20,19 @@ namespace render
 		// 设置颜色
 		void setColor(uint8_t r, uint8_t g, uint8_t b, uint8_t a);
 		// 设置颜色
+		void setColor(float r, float g, float b);
+		// 设置颜色
+		void setColor(float r, float g, float b, float a);
+		// 设置颜色
 		void setColor(const sys::Color4B& color);
 		// 设置颜色
 		void setColor(const sys::Color3B& color);
+		// 设置颜色
+		void setColor(const sys::Color4F& color);
+		// 设置颜色
+		void setColor(const sys::Color3F& color);
 		// 获取颜色
-		const sys::Color4B& getColor();
+		const sys::Color4B& getColor() const;
 	protected:
 		virtual void onColorChange() {};
 	protected:
@@ -72,6 +80,14 @@ namespace render
 		void setBlend(BlendingFactorSrc src, BlendingFactorDest dest);
 		// 设置混合条件
 		void setBlend(const BlendParam& blend);
+		// 设置颜色
+		void setBlendColor(const sys::Color3B& color);
+		// 设置颜色
+		void setBlendColor(const sys::Color3F& color);
+		// 设置颜色
+		void setBlendColor(const sys::Color4B& color);
+		// 设置颜色
+		void setBlendColor(const sys::Color4F& color);
 		// 获取混合参数
 		const BlendParam& getBlend();
 	protected:
@@ -79,5 +95,7 @@ namespace render
 	protected:
 		// 混合参数
 		BlendParam _blendParam;
+		// 混合颜色
+		sys::Color4F _blendColor;
 	};
 }

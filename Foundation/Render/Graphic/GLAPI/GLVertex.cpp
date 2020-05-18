@@ -38,6 +38,15 @@ void GLVertex::setColor(float r, float g, float b, float a)
 	glColor4f(r, g, b, a);
 }
 
+void GLVertex::setColor(float* rgba)
+{
+	if (rgba == nullptr)
+	{
+		return;
+	}
+	glColor4f(rgba[0], rgba[1], rgba[2], rgba[3]);
+}
+
 void GLVertex::setColor(const sys::Color3F& value, float opacity)
 {
 	float r = value.red* opacity;

@@ -423,6 +423,11 @@ void render::Node::updateNode()
 	}
 }
 
+void render::Node::beforeDrawNode()
+{
+	this->startUpdateTranform();
+}
+
 void Node::drawNode()
 {
 	if (this->isVisible() == false)
@@ -430,18 +435,23 @@ void Node::drawNode()
 		return;
 	}
 
-	this->startUpdateTranform();
+	this->beforeDrawNode();
 
 	this->draw();
 
+	this->afterDrawNode();
+
+	GLDebug::showError();
+}
+
+void render::Node::afterDrawNode()
+{
 	for (auto item : _children)
 	{
 		item->drawNode();
 	}
 
 	this->endUpdateTranform();
-
-	GLDebug::showError();
 }
 
 void Node::notify(NodeNotifyType id)

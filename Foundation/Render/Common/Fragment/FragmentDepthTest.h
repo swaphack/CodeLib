@@ -16,7 +16,7 @@ namespace render
 	public:
 		void setFunc(DepthFunction func);
 	public:
-		virtual void start();
+		virtual void begin();
 		virtual void update();
 		virtual void end();
 	protected:

@@ -31,6 +31,24 @@ void ColorProtocol::setColor(uint8_t r, uint8_t g, uint8_t b, uint8_t a)
 	onColorChange();
 }
 
+void render::ColorProtocol::setColor(float r, float g, float b)
+{
+	_color.red = r * COLOR_FLOAT_VALUE;
+	_color.green = g * COLOR_FLOAT_VALUE;
+	_color.blue = b * COLOR_FLOAT_VALUE;
+
+	onColorChange();
+}
+
+void render::ColorProtocol::setColor(float r, float g, float b, float a)
+{
+	_color.red = r * COLOR_FLOAT_VALUE;
+	_color.green = g * COLOR_FLOAT_VALUE;
+	_color.blue = b * COLOR_FLOAT_VALUE;
+	_color.alpha = a * COLOR_FLOAT_VALUE;
+	onColorChange();
+}
+
 void ColorProtocol::setColor(const sys::Color4B& color)
 {
 	_color = color;
@@ -40,14 +58,26 @@ void ColorProtocol::setColor(const sys::Color4B& color)
 
 void ColorProtocol::setColor(const sys::Color3B& color)
 {
-	_color.red = color.red;
-	_color.green = color.green;
-	_color.blue = color.blue;
+	_color = color;
 
 	onColorChange();
 }
 
-const sys::Color4B& ColorProtocol::getColor()
+void render::ColorProtocol::setColor(const sys::Color4F& color)
+{
+	sys::Color4B c;
+	sys::convertColor4FTo4B(color, c);
+	this->setColor(c);
+}
+
+void render::ColorProtocol::setColor(const sys::Color3F& color)
+{
+	sys::Color3B c;
+	sys::convertColor3FTo3B(color, c);
+	this->setColor(c);
+}
+
+const sys::Color4B& ColorProtocol::getColor() const
 {
 	return _color;
 }
@@ -96,6 +126,28 @@ void BlendProtocol::setBlend(const BlendParam& blend)
 {
 	_blendParam.src = blend.src;
 	_blendParam.dest = blend.dest;
+	onBlendChange();
+}
+
+void render::BlendProtocol::setBlendColor(const sys::Color3B& color)
+{
+	this->setBlendColor(sys::Color4B(color));
+}
+
+void render::BlendProtocol::setBlendColor(const sys::Color3F& color)
+{
+	this->setBlendColor(sys::Color4F(color));
+}
+
+void render::BlendProtocol::setBlendColor(const sys::Color4B& color)
+{
+	sys::convertColor4BTo4F(color, _blendColor);
+	onBlendChange();
+}
+
+void render::BlendProtocol::setBlendColor(const sys::Color4F& color)
+{
+	_blendColor = color;
 	onBlendChange();
 }
 
