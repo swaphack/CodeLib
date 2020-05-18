@@ -1,14 +1,14 @@
 #pragma once
 
 #include "Graphic/GLAPI/macros.h"
-#include "FragmentTestOp.h"
+#include "FragmentHandle.h"
 
 namespace render
 {
 	/**
 	*	…Ó∂»≤‚ ‘
 	*/
-	class FragmentDepthTest : public FragmentTestOp
+	class FragmentDepthTest : public FragmentHandle
 	{
 	public:
 		FragmentDepthTest();

@@ -3,6 +3,8 @@
 
 render::FragmentSample::FragmentSample()
 {
+	_fragmentType = FragmentType::SAMPLE;
+
 	_sampleType = FragmentSampleType::SAMPLE_MASK;
 	_sampleConverage.t1 = 0;
 	_sampleConverage.t2 = false;

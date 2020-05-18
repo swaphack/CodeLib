@@ -84,13 +84,13 @@ namespace render
 		// 是否可见
 		bool isVisible();
 	public:
+		// 更新节点
+		virtual void updateNode();
+		// 绘制节点
+		virtual void drawNode();
+	protected:
 		// 绘制,重写
 		virtual void draw();
-		// 遍历所有节点
-		virtual void visit();
-	protected:
-		// 绘制节点
-		void drawNode();
 	public:
 		// 获取动作代理
 		ActionProxy* getActionProxy();

@@ -18,6 +18,8 @@ void ColorProtocol::setColor(uint8_t r, uint8_t g, uint8_t b)
 	_color.red = r;
 	_color.green = g;
 	_color.blue = b;
+
+	onColorChange();
 }
 
 void ColorProtocol::setColor(uint8_t r, uint8_t g, uint8_t b, uint8_t a)
@@ -26,11 +28,14 @@ void ColorProtocol::setColor(uint8_t r, uint8_t g, uint8_t b, uint8_t a)
 	_color.green = g;
 	_color.blue = b;
 	_color.alpha = a;
+	onColorChange();
 }
 
 void ColorProtocol::setColor(const sys::Color4B& color)
 {
 	_color = color;
+
+	onColorChange();
 }
 
 void ColorProtocol::setColor(const sys::Color3B& color)
@@ -38,6 +43,8 @@ void ColorProtocol::setColor(const sys::Color3B& color)
 	_color.red = color.red;
 	_color.green = color.green;
 	_color.blue = color.blue;
+
+	onColorChange();
 }
 
 const sys::Color4B& ColorProtocol::getColor()
@@ -79,19 +86,22 @@ BlendProtocol::~BlendProtocol()
 
 void BlendProtocol::setBlend(BlendingFactorSrc src, BlendingFactorDest dest)
 {
-	_blend.src = src;
-	_blend.dest = dest;
+	_blendParam.src = src;
+	_blendParam.dest = dest;
+
+	onBlendChange();
 }
 
 void BlendProtocol::setBlend(const BlendParam& blend)
 {
-	_blend.src = blend.src;
-	_blend.dest = blend.dest;
+	_blendParam.src = blend.src;
+	_blendParam.dest = blend.dest;
+	onBlendChange();
 }
 
 const BlendParam& BlendProtocol::getBlend()
 {
-	return _blend;
+	return _blendParam;
 }
 //////////////////////////////////////////////////////////////////////////
 BlendParam& BlendParam::operator=(const BlendParam& blend)

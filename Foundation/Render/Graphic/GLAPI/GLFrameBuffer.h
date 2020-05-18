@@ -58,7 +58,5 @@ namespace render
 		static void 	setNamedRenderbufferStorage(uint32_t renderbuffer, InternalImageFormat format, int width, int height);
 		static void 	setRenderbufferStorageMultisample(RenderBufferTarget target, int samples, InternalImageFormat format, int width, int height);
 		static void 	setNamedRenderbufferStorageMultisample(uint32_t renderbuffer, int samples, InternalImageFormat format, int width, int height);
-
-		
 	};
 }

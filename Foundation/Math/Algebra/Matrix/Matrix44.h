@@ -74,7 +74,7 @@ namespace math
 		*/
 		Vector3 getEularAngle() const;
 		/**
-		*	Î´Öª
+		*	Î»ÖÃ
 		*/
 		Vector3 getPosition() const;
 		/**

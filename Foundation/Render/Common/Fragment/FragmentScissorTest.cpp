@@ -4,7 +4,7 @@
 
 render::FragmentScissorTest::FragmentScissorTest()
 {
-
+	_fragmentType = FragmentType::SCISSOR_TEST;
 }
 
 render::FragmentScissorTest::~FragmentScissorTest()

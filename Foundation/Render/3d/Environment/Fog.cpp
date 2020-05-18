@@ -18,18 +18,15 @@ Fog::~Fog()
 
 }
 
-void Fog::drawing()
+void Fog::onDraw()
 {
-	sys::Color4F c;
-	convertColor4BTo4F(getColor(), c);
-
 	float nearValue = _near / Tool::getGLViewSize().getDepth();
 	float farValue = _far / Tool::getGLViewSize().getDepth();
 
 	GLState::enable(EnableModel::FOG);
 	GLState::setFogHint(_fogEffect);
 	GLFog::setFogMode(_fogMode);
-	GLFog::setFogColor(c);
+	GLFog::setFogColor(_fogColor);
 	GLFog::setFogDensity(_density);
 	GLFog::setFogStart(nearValue);
 	GLFog::setFogEnd(farValue);
@@ -83,4 +80,14 @@ float Fog::getDensity() const
 void Fog::setDensity(float val)
 {
 	_density = val;
+}
+
+void render::Fog::setFogColor(const sys::Color4F& color)
+{
+	_fogColor = color;
+}
+
+const sys::Color4F& render::Fog::getFogColor() const
+{
+	return _fogColor;
 }

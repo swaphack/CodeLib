@@ -33,7 +33,7 @@ namespace render
 		// OpenGL渲染描述表句柄
 		HDC	_dc;
 		// 深度
-		int _bits;
+		uint8_t _bits;
 		// 渲染
 		RenderApplication* _render;
 		// 设备代理

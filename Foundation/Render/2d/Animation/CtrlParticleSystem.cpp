@@ -15,7 +15,7 @@ ParticleNode::~ParticleNode()
 
 }
 
-void ParticleNode::drawing()
+void ParticleNode::onDraw()
 {
 	GLState::enable(EnableModel::TEXTURE_2D);
 	GLTexture::bindTexture2D(0);

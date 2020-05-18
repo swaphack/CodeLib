@@ -58,7 +58,6 @@ void GLRender::setNamedFramebufferDrawBuffer(GLuint framebuffer, DrawBufferMode 
 	glNamedFramebufferDrawBuffer(framebuffer, (GLenum)mode);
 }
 
-
 void GLRender::finish()
 {
 	glFinish();
@@ -80,7 +79,7 @@ void GLRender::setNamedFramebufferReadBuffer(GLuint framebuffer, DrawBufferMode 
 }
 
 
-void GLRender::readPixels(float x, float y, float width, float height, TexImageDataFormat pixelFormat, TexImageDataType pixelType, void* data)
+void GLRender::readPixels(float x, float y, float width, float height, ReadPixelDataFormat pixelFormat, ReadPixelDataType pixelType, void* data)
 {
 	glReadPixels(x, y, width, height, (GLenum)pixelFormat, (GLenum)pixelType, data);
 }

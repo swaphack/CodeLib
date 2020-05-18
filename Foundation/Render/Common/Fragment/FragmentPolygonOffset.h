@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Graphic/GLAPI/macros.h"
-#include "FragmentTestOp.h"
+#include "FragmentHandle.h"
 
 namespace render
 {
@@ -14,11 +14,11 @@ namespace render
 	/**
 	*	¶à±ßÐÎ²Ù×÷
 	*/
-	class FragmentPolygonOffsetOp : public FragmentTestOp
+	class FragmentPolygonOffset : public FragmentHandle
 	{
 	public:
-		FragmentPolygonOffsetOp();
-		virtual ~FragmentPolygonOffsetOp();
+		FragmentPolygonOffset();
+		virtual ~FragmentPolygonOffset();
 	public:
 		void setOffsetType(PolygonOffsetType type);
 		// offset = m * factor + r * units;

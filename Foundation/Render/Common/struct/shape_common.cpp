@@ -9,12 +9,12 @@ static float getArea(const math::Vector3& p1, const math::Vector3& p2, const mat
 }
 
 //////////////////////////////////////////////////////////////////////////
-RectVertex::RectVertex()
+RectVectices::RectVectices()
 {
 
 }
 
-bool RectVertex::containPoint(float x, float y)
+bool RectVectices::containPoint(float x, float y)
 {
 	bool bRet = false;
 	
@@ -35,7 +35,7 @@ bool RectVertex::containPoint(float x, float y)
 	return bRet;
 }
 
-math::Vector3 RectVertex::getAnchorByPoint(float x, float y)
+math::Vector3 RectVectices::getAnchorByPoint(float x, float y)
 {
 	float xx = (x - leftUp.getX()) / (rightUp.getX() - leftUp.getX());
 	float yy = (y - leftUp.getY()) / (leftUp.getY() - leftDown.getY());

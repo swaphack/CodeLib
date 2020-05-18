@@ -12,7 +12,7 @@ namespace render
 		Fog();
 		virtual ~Fog();
 	protected:
-		virtual void drawing();
+		virtual void onDraw();
 	public:
 		// 近距离
 		float getNear() const;
@@ -29,6 +29,9 @@ namespace render
 		// 密度
 		float getDensity() const;
 		void setDensity(float val);
+
+		void setFogColor(const sys::Color4F& color);
+		const sys::Color4F& getFogColor() const;
 	protected:
 		// 近距离
 		float _near;
@@ -40,5 +43,7 @@ namespace render
 		HintMode _fogEffect;
 		// 密度
 		float _density;
+
+		sys::Color4F _fogColor;
 	};
 }

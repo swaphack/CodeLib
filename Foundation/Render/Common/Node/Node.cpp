@@ -221,41 +221,6 @@ bool Node::isVisible()
 	return _bVisibled;
 }
 
-void Node::visit()
-{
-	if (this->isVisible() == false)
-	{
-		return;
-	}
-
-	this->notifyEvents();	
-		
-	this->startUpdateTranform();
-
-	if (_children.size() == 0)
-	{
-		this->drawNode();
-	}
-	else
-	{
-		bool show = false;
-		auto it = _children.begin();
-		while (it != _children.end())
-		{
-			Node* node = *it;
-			if (show == false && node->getZOrder() >= 0)
-			{
-				this->drawNode();
-				show = true;
-			}
-			node->visit();
-			it++;
-		}
-	}
-
-	this->endUpdateTranform();
-}
-
 ActionProxy* Node::getActionProxy()
 {
 	if (_actionProxy == nullptr)
@@ -448,9 +413,33 @@ math::Vector3 render::Node::convertLocalPostitionToWorld(const math::Vector3& po
 	return math::Matrix44::transpose(point, _worldMatrix);
 }
 
+void render::Node::updateNode()
+{
+	this->notifyEvents();
+
+	for (auto item : _children)
+	{
+		item->updateNode();
+	}
+}
+
 void Node::drawNode()
 {
+	if (this->isVisible() == false)
+	{
+		return;
+	}
+
+	this->startUpdateTranform();
+
 	this->draw();
+
+	for (auto item : _children)
+	{
+		item->drawNode();
+	}
+
+	this->endUpdateTranform();
 
 	GLDebug::showError();
 }

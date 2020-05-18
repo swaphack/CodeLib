@@ -4,10 +4,34 @@
 
 namespace render
 {
+	class CtrlImage;
+	class CtrlMask;
+
 	class CtrlLayout : public CtrlWidget
 	{
 	public:
-	protected:
+		CtrlLayout();
+		virtual ~CtrlLayout();
+	public:
+		virtual bool init();
+	public:
+		/**
+		*	…Ë÷√±≥æ∞—’…´
+		*/
+		void setBackgroundColor(const sys::Color4B& color);
+		/**
+		*	…Ë÷√±≥æ∞Õº∆¨
+		*/
+		void setBackgroundImage(const std::string& filepath);
 	private:
+		/**
+		*	±≥æ∞Õº∆¨
+		*/
+		CtrlImage* _backgroundImage = nullptr;
+		/**
+		*	±≥æ∞—’…´
+		*/
+		CtrlMask* _backgroundMask = nullptr;
+		
 	};
 }

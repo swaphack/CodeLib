@@ -9,13 +9,16 @@
 namespace render
 {
 	// Á£×Ó
-	class ParticleNode : public DrawNode, public ParticleProtocol
+	class ParticleNode : public DrawNode, 
+		public ColorProtocol,
+		public BlendProtocol,
+		public ParticleProtocol
 	{
 	public:
 		ParticleNode();
 		virtual ~ParticleNode();
 	protected:
-		virtual void drawing();
+		virtual void onDraw();
 	public:
 		// ¸üÐÂ
 		virtual void update(float interval);

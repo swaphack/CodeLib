@@ -37,14 +37,14 @@ bool render::Model::init()
 	return true;
 }
 
-void Model::drawing()
+void Model::onDraw()
 {
 	if (!_loadModel)
 	{
 		return;
 	}
 	
-	DrawNode::drawing();
+	DrawNode::onDraw();
 }
 
 void render::Model::setModelData(sys::ModelDetail* detail)

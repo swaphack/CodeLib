@@ -1,15 +1,15 @@
 #pragma once
 
-#include "FragmentTestOp.h"
+#include "FragmentHandle.h"
 #include "Graphic/GLAPI/macros.h"
 
 namespace render
 {
-	class FragmentLogicOp : public FragmentTestOp
+	class FragmentLogic : public FragmentHandle
 	{
 	public:
-		FragmentLogicOp();
-		virtual ~FragmentLogicOp();
+		FragmentLogic();
+		virtual ~FragmentLogic();
 	public:
 		void setOpCode(LogicOpCode code);
 	public:

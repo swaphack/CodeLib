@@ -27,7 +27,7 @@ namespace render
 	public:
 		void setModelData(sys::ModelDetail* detail);
 	protected:
-		virtual void drawing();
+		virtual void onDraw();
 	protected:
 		bool _loadModel = false;
 	};

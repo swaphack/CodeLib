@@ -1,7 +1,7 @@
 #pragma once
 
 #include <cstdint>
-#include "FragmentTestOp.h"
+#include "FragmentHandle.h"
 #include "Graphic/GLAPI/macros.h"
 #include <map>
 
@@ -24,7 +24,7 @@ namespace render
 	*	是一种抗锯齿的技术，它通过在一个像素上进行多次采样多次计算并最终汇总(Resolve to single-sample)，可使绘制的图像边缘更加平滑
 	*	将单个像素分割为多份 4， 8，16，32
 	*/
-	class FragmentSample : public FragmentTestOp
+	class FragmentSample : public FragmentHandle
 	{
 	public:
 		FragmentSample();

@@ -188,7 +188,7 @@ void TestImageNode::onTouchImage(sys::Object* object, float x, float y)
 		return;
 	}
 
-	sys::Color4B color = Pixel::getPixel(x, y);
+	sys::Color4B color = Pixel::readPixelColor(x, y);
 	pText->setString(getCString("##%02x%02x%02x%02x", color.red, color.green, color.blue, color.alpha));
 	pText->setColor(color);
 }

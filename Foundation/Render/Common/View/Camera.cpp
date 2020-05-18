@@ -63,6 +63,15 @@ CameraDimensions Camera::getDimensions()
 	return _dimensions;
 }
 
+void render::Camera::drawNode()
+{
+	this->startUpdateTranform();
+
+	this->updateView();
+
+	this->endUpdateTranform();
+}
+
 void Camera::setDimensions(CameraDimensions d)
 {
 	_dimensions = d;
@@ -70,17 +79,11 @@ void Camera::setDimensions(CameraDimensions d)
 
 void Camera::visit()
 {
-	this->notifyEvents();
+	this->updateNode();
 
 	GLMatrix::applyProjection();
 	
-	this->startUpdateTranform();
-
-	this->updateView();
-
-	//GLMatrix::popMatrix();
-
-	this->endUpdateTranform();
+	this->drawNode();
 }
 
 void Camera::setMainCamera(CameraDimensions d)

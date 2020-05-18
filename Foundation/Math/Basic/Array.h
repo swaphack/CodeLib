@@ -162,7 +162,7 @@ namespace math
 			return *this;
 		}
 
-		std::string toString()
+		std::string toString() const
 		{
 			std::ostringstream stream;
 			for (int i = 0; i < _length; i++)

@@ -26,6 +26,8 @@ namespace render
 		// 获取颜色
 		const sys::Color4B& getColor();
 	protected:
+		virtual void onColorChange() {};
+	protected:
 		// 混合
 		sys::Color4B _color;
 	};
@@ -73,7 +75,9 @@ namespace render
 		// 获取混合参数
 		const BlendParam& getBlend();
 	protected:
+		virtual void onBlendChange() {};
+	protected:
 		// 混合参数
-		BlendParam _blend;
+		BlendParam _blendParam;
 	};
 }

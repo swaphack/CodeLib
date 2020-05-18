@@ -170,7 +170,7 @@ void Tool::calNormal(const math::Vector3& p1, const math::Vector3& p2, const mat
 	normal.set(a / r, b / r, c / r);
 }
 
-void Tool::calRect(const math::Vector3& position, const math::Volume& volume, const math::Vector3& anchor, RectVertex& rectVertex)
+void Tool::calRect(const math::Vector3& position, const math::Volume& volume, const math::Vector3& anchor, RectVectices& rectVertex)
 {
 	float x = 0;
 	float y = 0;
@@ -196,7 +196,7 @@ void Tool::calRect(const math::Vector3& position, const math::Volume& volume, co
 	rectVertex.leftUp = math::Vector3(x, y, position.getZ());
 }
 
-void Tool::calRealRect(const math::Vector3& position, const math::Volume& volume, const math::Vector3& anchor, RectVertex& rectVertex)
+void Tool::calRealRect(const math::Vector3& position, const math::Volume& volume, const math::Vector3& anchor, RectVectices& rectVertex)
 {
 	float x = 0;
 	float y = 0;
@@ -230,7 +230,7 @@ void Tool::calRealRect(const math::Vector3& position, const math::Volume& volume
 	rectVertex.leftUp.setZ(position.getZ());
 }
 
-void Tool::calRealCube(const math::Vector3& position, const math::Volume& volume, const math::Vector3& anchor, CubeVertex& cube)
+void Tool::calRealCube(const math::Vector3& position, const math::Volume& volume, const math::Vector3& anchor, CubeVectices& cube)
 {
 	math::Vector3 point;
 

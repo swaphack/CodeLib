@@ -1,5 +1,5 @@
 #include "ModelObj.h"
-
+#include "ext-config.h"
 using namespace render;
 
 ModelObj::ModelObj()

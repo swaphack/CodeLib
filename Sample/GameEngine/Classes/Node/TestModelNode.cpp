@@ -90,7 +90,6 @@ void TestModelNode::testFog()
 	pFog->setDensity(0.015);
 	pFog->setNear(0);
 	pFog->setFar(1000);
-	pFog->setColor(125, 125, 125, 125);
 	this->addChild(pFog);
 }
 

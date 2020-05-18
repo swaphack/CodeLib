@@ -326,9 +326,12 @@ math::Matrix44 math::Matrix44::getTSR(const Vector3& translate, const Vector3& s
 
 Vector3 math::Matrix44::transpose(const Vector3& src, const Matrix44& mat)
 {
-	Matrix41 dst(src);
-	Matrix41 result = (Matrix44)mat * dst;
-	return (Vector3)result;
+
+	Matrix44 srcMatrix;
+	srcMatrix.setTranslate(src);
+	Matrix44 result = (Matrix44)mat * srcMatrix;
+	Vector3 pos = result.getPosition();
+	return pos;
 }
 
 math::Vector3 math::Matrix44::getPosition() const

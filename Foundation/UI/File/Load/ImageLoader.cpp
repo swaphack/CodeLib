@@ -3,7 +3,6 @@
 using namespace ui;
 
 #define PROPERTY_COLOR		"color"
-#define PROPERTY_OPACITY	"opacity"
 #define PROPERTY_BLEND		"blend"
 #define PROPERTY_PATH		"path"
 #define PROPERTY_FLIPX		"flipX"
@@ -30,7 +29,6 @@ void ImageLoader::parseAttributes()
 	BlendParam blend;
 
 	LOAD_WIDGET_ATTRIBUTE(PROPERTY_COLOR, setColor, color);
-	LOAD_WIDGET_ATTRIBUTE(PROPERTY_OPACITY, setOpacity, opacity);
 	LOAD_WIDGET_ATTRIBUTE(PROPERTY_BLEND, setBlend, blend);
 	LOAD_WIDGET_STRING_ATTRIBUTE(PROPERTY_PATH, setImagePath, filepath);
 	LOAD_WIDGET_ATTRIBUTE(PROPERTY_FLIPX, setFlipX, bFlipX);
@@ -44,7 +42,6 @@ void ImageLoader::saveAttributes()
 	WidgetLoader::saveAttributes();
 
 	SAVE_WIDGET_ATTRIBUTE(PROPERTY_COLOR, getColor);
-	SAVE_WIDGET_ATTRIBUTE(PROPERTY_OPACITY, getOpacity);
 	SAVE_WIDGET_ATTRIBUTE(PROPERTY_BLEND, getBlend);
 	SAVE_WIDGET_ATTRIBUTE(PROPERTY_PATH, getImagePath);
 	SAVE_WIDGET_ATTRIBUTE(PROPERTY_FLIPX, isFlipX);

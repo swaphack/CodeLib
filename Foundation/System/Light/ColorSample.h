@@ -138,6 +138,7 @@ namespace sys
 
 		Color4F();
 		Color4F(float r, float g, float b, float a);
+		Color4F(float r, float g, float b);
 		/**
 		*	 «∑Òœ‡µ»
 		*/

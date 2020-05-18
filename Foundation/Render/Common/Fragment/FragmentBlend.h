@@ -1,15 +1,15 @@
 #pragma once
 
-#include "FragmentTestOp.h"
+#include "FragmentHandle.h"
 #include "Graphic/GLAPI/macros.h"
 
 namespace render
 {
-	class FragmentBlendOpBase : public FragmentTestOp
+	class FragmentBlendBase : public FragmentHandle
 	{
 	public:
-		FragmentBlendOpBase();
-		virtual ~FragmentBlendOpBase();
+		FragmentBlendBase();
+		virtual ~FragmentBlendBase();
 	public:
 		void setBlendColor(const sys::Color4F& color);
 	public:
@@ -22,11 +22,11 @@ namespace render
 	/**
 	*	»ìºÏ
 	*/
-	class FragmentBlendOp : public FragmentBlendOpBase
+	class FragmentBlend : public FragmentBlendBase
 	{
 	public:
-		FragmentBlendOp();
-		virtual ~FragmentBlendOp();
+		FragmentBlend();
+		virtual ~FragmentBlend();
 	public:
 		void setBlendFactor(BlendingFactorSrc src, BlendingFactorDest dst);
 		void setBlendEquation(BlendEquationMode mode);
@@ -39,11 +39,11 @@ namespace render
 	};
 
 	//////////////////////////////////////////////////////////////////////////
-	class FragmentBlendSeparateOp : public FragmentBlendOpBase
+	class FragmentBlendSeparate : public FragmentBlendBase
 	{
 	public:
-		FragmentBlendSeparateOp();
-		virtual ~FragmentBlendSeparateOp();
+		FragmentBlendSeparate();
+		virtual ~FragmentBlendSeparate();
 	public:
 		void setBlendFactor(BlendingFactorSrc srcRGB, BlendingFactorDest dstRGB,
 			BlendingFactorSrc srcAlpha, BlendingFactorDest dstAlpha);
@@ -60,11 +60,11 @@ namespace render
 	};
 
 	//////////////////////////////////////////////////////////////////////////
-	class FragmentBlendBufferOp : public FragmentBlendOp
+	class FragmentBlendBuffer : public FragmentBlend
 	{
 	public:
-		FragmentBlendBufferOp();
-		virtual ~FragmentBlendBufferOp();
+		FragmentBlendBuffer();
+		virtual ~FragmentBlendBuffer();
 	public:
 		void setBufferID(uint32_t buffer);
 	public:
@@ -74,11 +74,11 @@ namespace render
 	};
 
 	//////////////////////////////////////////////////////////////////////////
-	class FragmentBlendSeparateBufferOp : public FragmentBlendSeparateOp
+	class FragmentBlendSeparateBuffer : public FragmentBlendSeparate
 	{
 	public:
-		FragmentBlendSeparateBufferOp();
-		virtual ~FragmentBlendSeparateBufferOp();
+		FragmentBlendSeparateBuffer();
+		virtual ~FragmentBlendSeparateBuffer();
 	public:
 		void setBufferID(uint32_t buffer);
 	public:

@@ -260,7 +260,7 @@ namespace math
 			return *((T*)(_values + index * sizeof(T)));
 		}
 	public:
-		std::string toString()
+		std::string toString() const
 		{
 			std::ostringstream stream;
 			for (size_t i = 0; i < _height; i++)

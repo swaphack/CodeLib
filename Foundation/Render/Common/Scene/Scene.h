@@ -14,6 +14,6 @@ namespace render
 	public:
 		virtual bool init();
 
-		virtual void visit();
+		void visit();
 	};
 }

@@ -66,7 +66,7 @@ void render::FragmentQuery::releaseQuery()
 /////////////////////////////////////////////////////////////
 render::FragmentOcclusionQuery::FragmentOcclusionQuery()
 {
-	
+	_fragmentType = FragmentType::OCCLUSION_QUERY;
 }
 
 render::FragmentOcclusionQuery::~FragmentOcclusionQuery()
@@ -97,6 +97,7 @@ void render::FragmentOcclusionQuery::end()
 
 render::FragmentConditionRender::FragmentConditionRender()
 {
+	_fragmentType = FragmentType::CONDITION_RENDER;
 }
 
 render::FragmentConditionRender::~FragmentConditionRender()

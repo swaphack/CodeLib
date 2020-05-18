@@ -1,7 +1,7 @@
 #include "PrimitiveNode.h"
 #include "Graphic/import.h"
 #include "Common/Tool/Tool.h"
-
+#include "Mesh.h"
 using namespace render;
 
 
@@ -13,7 +13,17 @@ PrimitiveNode::~PrimitiveNode()
 {
 }
 
-void PrimitiveNode::drawing()
+bool render::PrimitiveNode::init()
+{
+	if (!DrawNode::init())
+	{
+		return false;
+	}
+
+	return false;
+}
+
+void PrimitiveNode::onDraw()
 {
 	if (_drawMode == ShapeMode::POINTS)
 	{
@@ -25,6 +35,7 @@ void PrimitiveNode::drawing()
 	}
 
 	GLVertex::beginMode(_drawMode);
+	GLVertex::setColor(getColor());
 	for (auto item : _points)
 	{
 		GLVertex::setVertex(item);
@@ -86,6 +97,16 @@ void PrimitiveNode::removePoint(const math::Vector2& point)
 void PrimitiveNode::removeAllPoints()
 {
 	_points.clear();
+}
+
+void render::PrimitiveNode::setColor(const sys::Color4F& color)
+{
+	_color = color;
+}
+
+const sys::Color4F& render::PrimitiveNode::getColor() const
+{
+	return _color;
 }
 
 void PrimitiveNode::setPoints(const std::vector<math::Vector3>& points)

@@ -1,6 +1,7 @@
 #pragma once
 
-#include "CtrlScissor.h"
+#include "CtrlWidget.h"
+#include "CtrlLayout.h"
 #include "Common/Touch/TouchDelegate.h"
 
 namespace render
@@ -33,7 +34,7 @@ namespace render
 	};
 
 	// »¬¶¯
-	class CtrlScrollView : public CtrlScissor, public TouchProtocol
+	class CtrlScrollView : public CtrlLayout, public TouchProtocol
 	{
 	public:
 		CtrlScrollView();

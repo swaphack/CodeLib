@@ -11,7 +11,7 @@ namespace render
 		CtrlMask();
 		virtual ~CtrlMask();
 	protected:
-		virtual void drawing();
+		virtual void onDraw();
 	protected:
 	};
 }

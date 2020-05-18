@@ -37,6 +37,8 @@ namespace render
 	public:
 		// 获取维度
 		CameraDimensions getDimensions();
+		// 绘制节点
+		virtual void drawNode();
 	public:
 		// 设置视窗参数
 		void setViewPortParams(float left, float right, float bottom, float top, float zNear, float zFar);

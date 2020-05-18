@@ -44,7 +44,7 @@ void TestAudioNode::testAudio3D()
 	this->addChild(pListener);
 
 	PrimitiveNode* pListenerDrawNode = CREATE_NODE(PrimitiveNode);
-	pListenerDrawNode->setColor(Color3B(0, 255, 0));
+	pListenerDrawNode->setColor(Color4F(0, 1, 0));
 	pListenerDrawNode->setWidth(100);
 	pListenerDrawNode->setDrawMode(ShapeMode::POINTS);
 	pListenerDrawNode->appendPoint(math::Vector3());
@@ -62,7 +62,7 @@ void TestAudioNode::testAudio3D()
 	this->addChild(pSrcAudio);
 
 	PrimitiveNode* pSrcDrawNode = CREATE_NODE(PrimitiveNode);
-	pSrcDrawNode->setColor(Color3B(255, 255, 0));
+	pSrcDrawNode->setColor(Color4F(1, 1, 0));
 	pSrcDrawNode->setWidth(100);
 	pSrcDrawNode->setDrawMode(ShapeMode::POINTS);
 	pSrcDrawNode->appendPoint(math::Vector3());
@@ -79,7 +79,7 @@ void TestAudioNode::testAudio3D()
 	this->addChild(pSrcAudio);
 
 	pSrcDrawNode = CREATE_NODE(PrimitiveNode);
-	pSrcDrawNode->setColor(Color3B(255, 0, 0));
+	pSrcDrawNode->setColor(Color4F(1, 0, 0));
 	pSrcDrawNode->setWidth(100);
 	pSrcDrawNode->setDrawMode(ShapeMode::POINTS);
 	pSrcDrawNode->appendPoint(math::Vector3());

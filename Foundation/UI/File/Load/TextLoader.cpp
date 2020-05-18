@@ -7,7 +7,6 @@ using namespace ui;
 #define PROPERTY_PATH		"path"
 #define PROPERTY_FONTSIZE	"fontsize"
 #define PROPERTY_COLOR		"color"
-#define PROPERTY_OPACITY	"opacity"
 #define PROPERTY_BLEND		"blend"
 #define PROPERTY_HORIZONTAL	"horizontal"
 #define PROPERTY_VERTICAL	"vertical"
@@ -37,7 +36,6 @@ void TextLoader::parseAttributes()
 	math::Size size;
 
 	LOAD_WIDGET_ATTRIBUTE(PROPERTY_COLOR, setTextColor, color);
-	LOAD_WIDGET_ATTRIBUTE(PROPERTY_OPACITY, setOpacity, opacity);
 	LOAD_WIDGET_ATTRIBUTE(PROPERTY_BLEND, setBlend, blend);
 
 	LOAD_WIDGET_STRING_ATTRIBUTE(PROPERTY_PATH, setFontPath, fontpath);
@@ -56,7 +54,6 @@ void TextLoader::saveAttributes()
 	WidgetLoader::saveAttributes();
 
 	SAVE_WIDGET_ATTRIBUTE(PROPERTY_COLOR, getColor);
-	SAVE_WIDGET_ATTRIBUTE(PROPERTY_OPACITY, getOpacity);
 	SAVE_WIDGET_ATTRIBUTE(PROPERTY_BLEND, getBlend);
 
 	SAVE_WIDGET_ATTRIBUTE(PROPERTY_PATH, getFontPath);

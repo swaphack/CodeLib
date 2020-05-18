@@ -7,7 +7,7 @@
 namespace render
 {
 	// 矩形框顶点集
-	struct RectVertex
+	struct RectVectices
 	{
 		// 左下角
 		math::Vector3 leftDown;
@@ -18,7 +18,7 @@ namespace render
 		// 左上角
 		math::Vector3 leftUp;
 
-		RectVertex();
+		RectVectices();
 
 		// 判断
 		bool containPoint(float x, float y);
@@ -27,22 +27,22 @@ namespace render
 	};
 
 	// 立方体顶点集
-	struct CubeVertex
+	struct CubeVectices
 	{
 		// 前面
-		RectVertex front;
+		RectVectices front;
 		// 背面
-		RectVertex back;
+		RectVectices back;
 		// 左面
-		RectVertex left;
+		RectVectices left;
 		// 右面
-		RectVertex right;
+		RectVectices right;
 		// 顶部
-		RectVertex top;
+		RectVectices top;
 		// 底部
-		RectVertex bottom;
+		RectVectices bottom;
 
-		CubeVertex()
+		CubeVectices()
 		{ }
 	};
 }

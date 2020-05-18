@@ -3,6 +3,7 @@
 
 render::FragmentDepthTest::FragmentDepthTest()
 {
+	_fragmentType = FragmentType::DEPTH_TEST;
 	_func = DepthFunction::LESS;
 }
 

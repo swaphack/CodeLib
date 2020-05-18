@@ -11,8 +11,10 @@ namespace render
 	public:
 		PrimitiveNode();
 		virtual ~PrimitiveNode();
+	public:
+		virtual bool init();
 	protected:
-		virtual void drawing();
+		virtual void onDraw();
 	public:
 		// 设置宽度
 		void setWidth(float width);
@@ -32,6 +34,9 @@ namespace render
 		void removePoint(const math::Vector2& point);
 		// 移除所有点坐标
 		void removeAllPoints();
+
+		void setColor(const sys::Color4F& color);
+		const sys::Color4F& getColor() const;
 	private:
 		// 宽度
 		float _width = 1;
@@ -39,5 +44,7 @@ namespace render
 		ShapeMode _drawMode = ShapeMode::POINTS;
 		// 点坐标
 		std::vector<math::Vector3> _points;
+
+		sys::Color4F _color;
 	};
 }

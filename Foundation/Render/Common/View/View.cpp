@@ -56,9 +56,6 @@ void View::initView()
 
 void View::updateView()
 {
-	GLState::enable(EnableModel::DEPTH_TEST);
-	GLState::setStencilOp(StencilOpResult::KEEP, StencilOpResult::KEEP, StencilOpResult::REPLACE);
-
 	uint32_t bitfield = (uint32_t)ClearBufferBitType::COLOR_BUFFER_BIT | (uint32_t)ClearBufferBitType::DEPTH_BUFFER_BIT | (uint32_t)ClearBufferBitType::STENCIL_BUFFER_BIT;
 	GLRender::clearColor(0, 0, 0, 0);
 	GLRender::clearDepth(1.0f);
@@ -74,8 +71,6 @@ void View::applyConfig()
 	GLFixedFunction::setShadeModel(ShadingModel::SMOOTH);
 	GLState::setPerspectiveCorrectionHint(HintMode::NICEST);
 
-	GLState::enable(EnableModel::DEPTH_TEST);
-	GLState::setDepthFunc(DepthFunction::LEQUAL);
 	GLState::setCullFace(FaceType::BACK);
 	GLState::setFrontFace(FrontFaceDirection::CCW);
 	GLState::setPixelStore(PixelStore::UNPACK_ALIGNMENT, 1);

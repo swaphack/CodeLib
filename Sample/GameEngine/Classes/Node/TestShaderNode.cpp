@@ -116,7 +116,7 @@ void TestShaderNode::testModelShader()
 
 	pModel->setPosition(400, 400, 0);
 	pModel->setVolume(200, 200, 200);
-	pModel->setAnchorPoint(0.5f, 0.5f, 0.5f);
+	pModel->setAnchorPoint(0.0f, 0.5f, 0.5f);
 	this->addChild(pModel);
 
 	ShaderUtility::updateNodeShader(pModel);

@@ -26,8 +26,10 @@ bool Scene::init()
 
 void Scene::visit()
 {
+	this->updateNode();
+
 	// Ä£ÐÍ¾ØÕó
 	GLMatrix::applyModelView();
 
-	Node::visit();
+	this->drawNode();
 }

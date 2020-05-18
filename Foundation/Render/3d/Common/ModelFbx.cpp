@@ -1,5 +1,5 @@
 #include "ModelFbx.h"
-
+#include "ext-config.h"
 using namespace render;
 
 ModelFbx::ModelFbx()

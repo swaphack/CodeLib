@@ -1,5 +1,5 @@
 #pragma once
-#include "FragmentTestOp.h"
+#include "FragmentHandle.h"
 #include "mathlib.h"
 
 namespace render
@@ -8,7 +8,7 @@ namespace render
 	*	剪切测试
 	*	限定显示区域
 	*/
-	class FragmentScissorTest : public FragmentTestOp
+	class FragmentScissorTest : public FragmentHandle
 	{
 	public:
 		FragmentScissorTest();

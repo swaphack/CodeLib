@@ -222,6 +222,10 @@ Color4F::Color4F(float r, float g, float b, float a) : red(r), green(g), blue(b)
 {
 
 }
+Color4F::Color4F(float r, float g, float b) : red(r), green(g), blue(b), alpha(1)
+{
+
+}
 
 bool Color4F::isEquals(const Color4F& color)
 {

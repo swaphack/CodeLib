@@ -2,6 +2,7 @@
 #include "Graphic/import.h"
 #include "Material.h"
 #include "Mesh.h"
+#include "FragmentOperator.h"
 
 using namespace render;
 
@@ -13,24 +14,35 @@ DrawNode::DrawNode()
 
 	_mesh = CREATE_OBJECT(Mesh);
 	SAFE_RETAIN(_mesh);
+
+	_fragOperator = CREATE_OBJECT(FragmentOperator);
+	SAFE_RETAIN(_fragOperator);
 }
 
 DrawNode::~DrawNode()
 {
-
 	SAFE_RELEASE(_material);
 	SAFE_RELEASE(_mesh);
+	SAFE_RELEASE(_fragOperator);
+}
+
+bool render::DrawNode::init()
+{
+	if (!Node::init())
+	{
+		return false;
+	}
+
+	return true;
 }
 
 void DrawNode::draw()
 {
-	GLState::enable(EnableModel::BLEND);
-	GLState::setBlendFunc(getBlend().src, getBlend().dest);
-	GLVertex::setColor(getColor());
+	this->beforeDraw();
 
-	this->drawing();
+	this->onDraw();
 
-	GLState::disable(EnableModel::BLEND);
+	this->afterDraw();
 }
 
 Material* render::DrawNode::getMaterial()
@@ -43,7 +55,19 @@ Mesh* render::DrawNode::getMesh()
 	return _mesh;
 }
 
-void DrawNode::drawing()
+FragmentOperator* render::DrawNode::getFragOperator()
+{
+	return _fragOperator;
+}
+
+void render::DrawNode::beforeDraw()
+{
+	_fragOperator->begin();
+
+	_fragOperator->update();
+}
+
+void DrawNode::onDraw()
 {
 	if (_material->getShaderProgram())
 	{
@@ -53,6 +77,11 @@ void DrawNode::drawing()
 	{
 		this->drawWithClientArray();
 	}
+}
+
+void render::DrawNode::afterDraw()
+{
+	_fragOperator->end();
 }
 
 void render::DrawNode::drawWithClientArray()

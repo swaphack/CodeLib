@@ -16,7 +16,7 @@ TestUINode::~TestUINode()
 
 void TestUINode::testFunc()
 {
-
+	this->testScissor();
 }
 
 void TestUINode::testEditBox()
@@ -130,28 +130,17 @@ void TestUINode::onKeyBoardRole(sys::Object* object, sys::BoardKey key, sys::But
 
 void TestUINode::testScissor()
 {
-	CtrlScissor* pScissor1 = CREATE_NODE(CtrlScissor);
-	pScissor1->setVolume(100, 200, 0);
-	pScissor1->setPosition(512, 384);
-	this->addChild(pScissor1);
+	CtrlLayout* pLayout = CREATE_NODE(CtrlLayout);
+	pLayout->setClip(true);
+	pLayout->setVolume(200, 200, 0);
+	pLayout->setPosition(200, 200);
+	this->addChild(pLayout);
 
-	CtrlImage* pImage;
-	pImage = CREATE_NODE(CtrlImage);
+	CtrlImage* pImage = CREATE_NODE(CtrlImage);
 	pImage->setImagePath("Resource/Image/sqi.png");
-	pImage->setVolume(200, 200, 0);
-	pImage->setPosition(100, 100);
-	pScissor1->addChild(pImage);
-
-	CtrlScissor* pScissor2 = CREATE_NODE(CtrlScissor);
-	pScissor2->setVolume(100, 100, 0);
-	pScissor1->addChild(pScissor2);
-
-	pImage = CREATE_NODE(CtrlImage);
-	pImage->setImagePath("Resource/Image/sqi.png");
-	pImage->setVolume(200, 200, 0);
-	pImage->setPosition(100, 100);
+	pImage->setVolume(300, 300, 0);
 	pImage->setScale(3, 3, 1);
-	pScissor2->addChild(pImage);
+	this->addChild(pImage);
 }
 
 void TestUINode::testScrollView()
@@ -175,10 +164,7 @@ void TestUINode::testScrollView()
 
 void TestUINode::testMask()
 {
-	uint8_t opacity = 255;
-
 	CtrlMask* pMask = CREATE_NODE(CtrlMask);
-	pMask->setOpacity(opacity);
 	pMask->setAnchorPoint(0, 0, 0);
 	pMask->setPosition(0, 0, 0.0f);
 	pMask->setVolume(1024, 768, 0);

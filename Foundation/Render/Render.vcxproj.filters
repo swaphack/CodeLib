@@ -46,9 +46,6 @@
     <ClCompile Include="Common\Keyboard\KeyboardManager.cpp">
       <Filter>Common\Keyboard</Filter>
     </ClCompile>
-    <ClCompile Include="Common\XControl\Pixel.cpp">
-      <Filter>Common\XControl</Filter>
-    </ClCompile>
     <ClCompile Include="Graphic\Command\DrawCommander.cpp">
       <Filter>Graphic\Command</Filter>
     </ClCompile>
@@ -73,9 +70,6 @@
       <Filter>3d\Environment</Filter>
     </ClCompile>
     <ClCompile Include="3d\Environment\ClipPlane.cpp">
-      <Filter>3d\Environment</Filter>
-    </ClCompile>
-    <ClCompile Include="3d\Environment\Stencil.cpp">
       <Filter>3d\Environment</Filter>
     </ClCompile>
     <ClCompile Include="Common\Audio\AudioManager.cpp">
@@ -109,9 +103,6 @@
       <Filter>2d\UI</Filter>
     </ClCompile>
     <ClCompile Include="2d\UI\CtrlMask.cpp">
-      <Filter>2d\UI</Filter>
-    </ClCompile>
-    <ClCompile Include="2d\UI\CtrlScissor.cpp">
       <Filter>2d\UI</Filter>
     </ClCompile>
     <ClCompile Include="2d\UI\CtrlScrollView.cpp">
@@ -351,25 +342,13 @@
     <ClCompile Include="Common\Action\ActionProtocol.cpp">
       <Filter>Common\Action</Filter>
     </ClCompile>
-    <ClCompile Include="Common\Fragment\FragmentTestOp.cpp">
-      <Filter>Common\Fragment</Filter>
-    </ClCompile>
-    <ClCompile Include="Common\Fragment\FragmentBlendOp.cpp">
-      <Filter>Common\Fragment</Filter>
-    </ClCompile>
     <ClCompile Include="Common\Fragment\FragmentDepthTest.cpp">
-      <Filter>Common\Fragment</Filter>
-    </ClCompile>
-    <ClCompile Include="Common\Fragment\FragmentLogicOp.cpp">
       <Filter>Common\Fragment</Filter>
     </ClCompile>
     <ClCompile Include="Common\Fragment\FragmentSample.cpp">
       <Filter>Common\Fragment</Filter>
     </ClCompile>
     <ClCompile Include="Common\Fragment\FragmentQuery.cpp">
-      <Filter>Common\Fragment</Filter>
-    </ClCompile>
-    <ClCompile Include="Common\Fragment\FragmentPolygonOffsetOp.cpp">
       <Filter>Common\Fragment</Filter>
     </ClCompile>
     <ClCompile Include="Common\Fragment\FragmentScissorTest.cpp">
@@ -379,6 +358,24 @@
       <Filter>Common\Fragment</Filter>
     </ClCompile>
     <ClCompile Include="Common\View\MultiSampling.cpp">
+      <Filter>Common\View</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\DrawNode\FragmentOperator.cpp">
+      <Filter>Common\DrawNode</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Fragment\FragmentBlend.cpp">
+      <Filter>Common\Fragment</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Fragment\FragmentLogic.cpp">
+      <Filter>Common\Fragment</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Fragment\FragmentPolygonOffset.cpp">
+      <Filter>Common\Fragment</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Fragment\FragmentHandle.cpp">
+      <Filter>Common\Fragment</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\View\Pixel.cpp">
       <Filter>Common\View</Filter>
     </ClCompile>
   </ItemGroup>
@@ -428,9 +425,6 @@
     <ClInclude Include="Common\Tool\TextureTool.h">
       <Filter>Common\Tool</Filter>
     </ClInclude>
-    <ClInclude Include="Common\XControl\import.h">
-      <Filter>Common\XControl</Filter>
-    </ClInclude>
     <ClInclude Include="Common\Action\Scheduler.h">
       <Filter>Common\Action</Filter>
     </ClInclude>
@@ -473,9 +467,6 @@
     </ClInclude>
     <ClInclude Include="Common\Keyboard\import.h">
       <Filter>Common\Keyboard</Filter>
-    </ClInclude>
-    <ClInclude Include="Common\XControl\Pixel.h">
-      <Filter>Common\XControl</Filter>
     </ClInclude>
     <ClInclude Include="Graphic\Command\macros.h">
       <Filter>Graphic\Command</Filter>
@@ -522,9 +513,6 @@
       <Filter>3d\Environment</Filter>
     </ClInclude>
     <ClInclude Include="3d\Environment\ClipPlane.h">
-      <Filter>3d\Environment</Filter>
-    </ClInclude>
-    <ClInclude Include="3d\Environment\Stencil.h">
       <Filter>3d\Environment</Filter>
     </ClInclude>
     <ClInclude Include="3d\Map\macros.h">
@@ -576,9 +564,6 @@
       <Filter>2d\UI</Filter>
     </ClInclude>
     <ClInclude Include="2d\UI\CtrlMask.h">
-      <Filter>2d\UI</Filter>
-    </ClInclude>
-    <ClInclude Include="2d\UI\CtrlScissor.h">
       <Filter>2d\UI</Filter>
     </ClInclude>
     <ClInclude Include="2d\UI\CtrlScrollView.h">
@@ -864,25 +849,13 @@
     <ClInclude Include="Common\Action\ActionProtocol.h">
       <Filter>Common\Action</Filter>
     </ClInclude>
-    <ClInclude Include="Common\Fragment\FragmentTestOp.h">
-      <Filter>Common\Fragment</Filter>
-    </ClInclude>
-    <ClInclude Include="Common\Fragment\FragmentBlendOp.h">
-      <Filter>Common\Fragment</Filter>
-    </ClInclude>
     <ClInclude Include="Common\Fragment\FragmentDepthTest.h">
-      <Filter>Common\Fragment</Filter>
-    </ClInclude>
-    <ClInclude Include="Common\Fragment\FragmentLogicOp.h">
       <Filter>Common\Fragment</Filter>
     </ClInclude>
     <ClInclude Include="Common\Fragment\FragmentSample.h">
       <Filter>Common\Fragment</Filter>
     </ClInclude>
     <ClInclude Include="Common\Fragment\FragmentQuery.h">
-      <Filter>Common\Fragment</Filter>
-    </ClInclude>
-    <ClInclude Include="Common\Fragment\FragmentPolygonOffsetOp.h">
       <Filter>Common\Fragment</Filter>
     </ClInclude>
     <ClInclude Include="Common\Fragment\FragmentScissorTest.h">
@@ -892,6 +865,24 @@
       <Filter>Common\Fragment</Filter>
     </ClInclude>
     <ClInclude Include="Common\View\MultiSampling.h">
+      <Filter>Common\View</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\DrawNode\FragmentOperator.h">
+      <Filter>Common\DrawNode</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Fragment\FragmentBlend.h">
+      <Filter>Common\Fragment</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Fragment\FragmentLogic.h">
+      <Filter>Common\Fragment</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Fragment\FragmentPolygonOffset.h">
+      <Filter>Common\Fragment</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Fragment\FragmentHandle.h">
+      <Filter>Common\Fragment</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\View\Pixel.h">
       <Filter>Common\View</Filter>
     </ClInclude>
   </ItemGroup>
@@ -916,9 +907,6 @@
     </Filter>
     <Filter Include="3d">
       <UniqueIdentifier>{8ffa7b3f-1dfd-407f-8836-58bac15fd524}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Common\XControl">
-      <UniqueIdentifier>{e6030aa8-169f-48b1-87a5-8a74ffba7103}</UniqueIdentifier>
     </Filter>
     <Filter Include="Platform">
       <UniqueIdentifier>{bdcc9f5f-cc09-4649-ba7d-b20f2f85158e}</UniqueIdentifier>
