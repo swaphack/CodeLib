@@ -17,9 +17,21 @@ void GLTransformFeedback::createTransformFeedbacks(int n, uint32_t* ids)
 	glCreateTransformFeedbacks(n, ids);
 }
 
+uint32_t render::GLTransformFeedback::createTransformFeedback()
+{
+	uint32_t id;
+	createTransformFeedbacks(1, &id);
+	return id;
+}
+
 void GLTransformFeedback::deleteTransformFeedbacks(int n, const uint32_t* ids)
 {
 	glDeleteTransformFeedbacks(n, ids);
+}
+
+void render::GLTransformFeedback::deleteTransformFeedback(uint32_t id)
+{
+	deleteTransformFeedbacks(1, &id);
 }
 
 void GLTransformFeedback::drawTransformFeedback(DrawTransformFeedbackMode mode, uint32_t id)

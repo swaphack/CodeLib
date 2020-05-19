@@ -4,10 +4,7 @@
 #include "NoNamedBufferObject.h"
 #include "NamedBufferObject.h"
 
-#include "NoNamedBufferObjects.h"
-#include "NamedBufferObjects.h"
+#include "ArrayBufferObject.h"
+#include "ElementArrayBufferObject.h"
+#include "UniformBufferObject.h"
 
-#include "VertexAttrib.h"
-#include "VAOAttrib.h"
-#include "VertexAttribPointer.h"
-#include "VertexArrayObject.h"

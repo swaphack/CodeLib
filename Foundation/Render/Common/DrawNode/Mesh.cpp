@@ -5,6 +5,7 @@
 #include "Material.h"
 #include "Common/Node/Node.h"
 #include "Common/Tool/Tool.h"
+#include "Common/VAO/import.h"
 using namespace render;
 
 render::Mesh::Mesh()
@@ -121,7 +122,7 @@ void render::Mesh::drawWithBufferObject(Node* node, Material* mat)
 			continue;
 		}
 
-		NoNamedBufferObject* pVertexObject = _vertexObjects[id];
+		ArrayBufferObject* pVertexObject = _vertexObjects[id];
 		if (!pVertexObject)
 		{
 			continue;
@@ -183,13 +184,11 @@ void render::Mesh::drawWithBufferObject(Node* node, Material* mat)
 
 		GLDebug::showError();
 
-		NoNamedBufferObject* pIndiceObject = _indiceObjects[id];
+		ElementArrayBufferObject* pIndiceObject = _indiceObjects[id];
 		if (pIndiceObject)
 		{
 			pIndiceObject->bindBuffer();
-
-			uint32_t nIndiceSize = pMesh->getIndices().getSize();
-			pIndiceObject->setBufferData(nIndiceSize, pMesh->getIndices().getValue(), BufferDataUsage::STATIC_DRAW);
+			pIndiceObject->setElementData(pMesh->getIndices());
 		}
 
 		uint32_t nIndiceLength = pMesh->getIndices().getLength();
@@ -292,9 +291,8 @@ void render::Mesh::initBufferData()
 		auto it1 = _indiceObjects.find(id);
 		if (it1 == _indiceObjects.end())
 		{
-			NoNamedBufferObject* obj = CREATE_OBJECT(NoNamedBufferObject);
+			ElementArrayBufferObject* obj = CREATE_OBJECT(ElementArrayBufferObject);
 			SAFE_RETAIN(obj);
-			obj->setBufferTarget(BufferTarget::ELEMENT_ARRAY_BUFFER);
 			_indiceObjects[id] = obj;
 		}
 
@@ -309,58 +307,14 @@ void render::Mesh::initBufferData()
 		auto it2 = _vertexObjects.find(id);
 		if (it2 == _vertexObjects.end())
 		{
-			NoNamedBufferObject* obj = CREATE_OBJECT(NoNamedBufferObject);
+			ArrayBufferObject* obj = CREATE_OBJECT(ArrayBufferObject);
 			SAFE_RETAIN(obj);
-			obj->setBufferTarget(BufferTarget::ARRAY_BUFFER);
 
 			auto pVertexArrayObject = _vertexArrayObjects[id];
 			pVertexArrayObject->setBufferObject(obj);
 
 			_vertexObjects[id] = obj;
 		}
-		/*
-		NoNamedBufferObject* pIndiceObject = _indiceObjects[id];
-		if (pIndiceObject)
-		{
-			pIndiceObject->bindBuffer();
-
-			uint32_t nIndiceSize = pMesh->getIndices().getSize();
-			pIndiceObject->setBufferData(nIndiceSize, pMesh->getIndices().getValue(), BufferDataUsage::STATIC_DRAW);
-		}
-
-		NoNamedBufferObject* pVertexObject = _vertexObjects[id];
-		if (pVertexObject)
-		{
-			uint32_t nVerticeSize = pMesh->getVertices().getSize();
-			uint32_t nColorSize = pMesh->getColors().getSize();
-			uint32_t nUVSize = pMesh->getUVs().getSize();
-			uint32_t nNormalSize = pMesh->getNormals().getSize();
-
-			uint32_t nTotalSize = nVerticeSize + nColorSize + nUVSize + nNormalSize;
-			pVertexObject->bindBuffer();
-			pVertexObject->setBufferData(nTotalSize, nullptr, BufferDataUsage::STATIC_DRAW);
-			if (nVerticeSize > 0)
-			{
-				pVertexObject->setBufferSubData(0, nVerticeSize, pMesh->getVertices().getPtr());
-			}
-			GLDebug::showError();
-			if (nColorSize > 0)
-			{
-				pVertexObject->setBufferSubData(nVerticeSize, nColorSize, pMesh->getColors().getPtr());
-			}
-			GLDebug::showError();
-			if (nUVSize > 0)
-			{
-				pVertexObject->setBufferSubData(nVerticeSize + nColorSize, nUVSize, pMesh->getUVs().getPtr());
-			}
-			GLDebug::showError();
-			if (nNormalSize > 0)
-			{
-				pVertexObject->setBufferSubData(nVerticeSize + nColorSize + nUVSize, nNormalSize, pMesh->getNormals().getPtr());
-			}
-			GLDebug::showError();
-		}
-		*/
 		GLDebug::showError();
 	}
 	GLDebug::showError();

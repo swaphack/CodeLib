@@ -2359,6 +2359,7 @@ enum class SubroutineUniformParameter
 
 enum class BufferDataUsage
 {
+	NONE = 0,
 	STREAM_DRAW = GL_STREAM_DRAW,
 	STREAM_READ = GL_STREAM_READ,
 	STREAM_COPY = GL_STREAM_COPY,

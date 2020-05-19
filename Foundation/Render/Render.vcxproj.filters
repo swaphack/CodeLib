@@ -291,31 +291,10 @@
     <ClCompile Include="2d\UI\CtrlWidget.cpp">
       <Filter>2d\UI</Filter>
     </ClCompile>
-    <ClCompile Include="Common\Buffer\VertexArrayObject.cpp">
-      <Filter>Common\Buffer</Filter>
-    </ClCompile>
     <ClCompile Include="Common\Buffer\NoNamedBufferObject.cpp">
       <Filter>Common\Buffer</Filter>
     </ClCompile>
     <ClCompile Include="Common\Buffer\BufferObject.cpp">
-      <Filter>Common\Buffer</Filter>
-    </ClCompile>
-    <ClCompile Include="Common\Buffer\VertexAttrib.cpp">
-      <Filter>Common\Buffer</Filter>
-    </ClCompile>
-    <ClCompile Include="Common\Buffer\VAOAttrib.cpp">
-      <Filter>Common\Buffer</Filter>
-    </ClCompile>
-    <ClCompile Include="Common\Buffer\NoNamedBufferObjects.cpp">
-      <Filter>Common\Buffer</Filter>
-    </ClCompile>
-    <ClCompile Include="Common\Buffer\NamedBufferObjects.cpp">
-      <Filter>Common\Buffer</Filter>
-    </ClCompile>
-    <ClCompile Include="Common\Buffer\VertexAttribPointer.cpp">
-      <Filter>Common\Buffer</Filter>
-    </ClCompile>
-    <ClCompile Include="Common\Buffer\TextureBufferObject.cpp">
       <Filter>Common\Buffer</Filter>
     </ClCompile>
     <ClCompile Include="Common\DrawNode\PrimitiveNode.cpp">
@@ -380,6 +359,36 @@
     </ClCompile>
     <ClCompile Include="2d\UI\CtrlStencil.cpp">
       <Filter>2d\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\VAO\VAOAttrib.cpp">
+      <Filter>Common\VAO</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\VAO\VertexArrayObject.cpp">
+      <Filter>Common\VAO</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\VAO\VertexAttrib.cpp">
+      <Filter>Common\VAO</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\VAO\VertexAttribPointer.cpp">
+      <Filter>Common\VAO</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Buffer\ArrayBufferObject.cpp">
+      <Filter>Common\Buffer</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Buffer\UniformBufferObject.cpp">
+      <Filter>Common\Buffer</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Buffer\ElementArrayBufferObject.cpp">
+      <Filter>Common\Buffer</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Transform\Transform.cpp">
+      <Filter>Common\Transform</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Transform\TransformFeedbackObject.cpp">
+      <Filter>Common\Transform</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\TBO\TextureBufferObject.cpp">
+      <Filter>Common\TBO</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -798,31 +807,10 @@
     <ClInclude Include="2d\UI\CtrlWidget.h">
       <Filter>2d\UI</Filter>
     </ClInclude>
-    <ClInclude Include="Common\Buffer\VertexArrayObject.h">
-      <Filter>Common\Buffer</Filter>
-    </ClInclude>
     <ClInclude Include="Common\Buffer\NoNamedBufferObject.h">
       <Filter>Common\Buffer</Filter>
     </ClInclude>
     <ClInclude Include="Common\Buffer\BufferObject.h">
-      <Filter>Common\Buffer</Filter>
-    </ClInclude>
-    <ClInclude Include="Common\Buffer\VertexAttrib.h">
-      <Filter>Common\Buffer</Filter>
-    </ClInclude>
-    <ClInclude Include="Common\Buffer\VAOAttrib.h">
-      <Filter>Common\Buffer</Filter>
-    </ClInclude>
-    <ClInclude Include="Common\Buffer\NoNamedBufferObjects.h">
-      <Filter>Common\Buffer</Filter>
-    </ClInclude>
-    <ClInclude Include="Common\Buffer\NamedBufferObjects.h">
-      <Filter>Common\Buffer</Filter>
-    </ClInclude>
-    <ClInclude Include="Common\Buffer\VertexAttribPointer.h">
-      <Filter>Common\Buffer</Filter>
-    </ClInclude>
-    <ClInclude Include="Common\Buffer\TextureBufferObject.h">
       <Filter>Common\Buffer</Filter>
     </ClInclude>
     <ClInclude Include="Common\Fragment\import.h">
@@ -890,6 +878,42 @@
     </ClInclude>
     <ClInclude Include="2d\UI\CtrlStencil.h">
       <Filter>2d\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\VAO\VAOAttrib.h">
+      <Filter>Common\VAO</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\VAO\VertexArrayObject.h">
+      <Filter>Common\VAO</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\VAO\VertexAttrib.h">
+      <Filter>Common\VAO</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\VAO\VertexAttribPointer.h">
+      <Filter>Common\VAO</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\VAO\import.h">
+      <Filter>Common\VAO</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Buffer\ArrayBufferObject.h">
+      <Filter>Common\Buffer</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Buffer\UniformBufferObject.h">
+      <Filter>Common\Buffer</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Buffer\ElementArrayBufferObject.h">
+      <Filter>Common\Buffer</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Transform\Transform.h">
+      <Filter>Common\Transform</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Transform\TransformFeedbackObject.h">
+      <Filter>Common\Transform</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\TBO\TextureBufferObject.h">
+      <Filter>Common\TBO</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\TBO\import.h">
+      <Filter>Common\TBO</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -977,11 +1001,20 @@
     <Filter Include="Graphic\GLAPI">
       <UniqueIdentifier>{eff1c3cb-6f6b-4af7-81eb-680141cf5ff6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Common\Fragment">
+      <UniqueIdentifier>{a151f663-4d92-4f1a-9500-6f02da457184}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Common\Buffer">
       <UniqueIdentifier>{60f3aac1-f887-4af4-b135-62c2dba7c8c9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Common\Fragment">
-      <UniqueIdentifier>{a151f663-4d92-4f1a-9500-6f02da457184}</UniqueIdentifier>
+    <Filter Include="Common\VAO">
+      <UniqueIdentifier>{a97acb9d-a8c0-44e4-b9d1-4d38c167de6e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common\Transform">
+      <UniqueIdentifier>{aa9f6c13-684c-46e7-b0f7-8f5279aa88a5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common\TBO">
+      <UniqueIdentifier>{12b34f0f-378d-44be-a1c2-1c38f0b16dee}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

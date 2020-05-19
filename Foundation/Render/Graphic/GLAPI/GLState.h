@@ -57,7 +57,9 @@ namespace render
 		static void setBlendFuncSeparate(uint32_t buf, BlendingFactorSrc srcRGB, BlendingFactorDest destRGB, BlendingFactorSrc srcAlpha, BlendingFactorDest destAlpha);
 
 		static void setClampColor(bool clamp);
-
+		/**
+		*	裁剪起点位置，裁剪深度范围
+		*/
 		static void setClipControl(ClipControlOrigin origin, ClipControlDepth depth);
 	public:
 		static void setColorMask(bool red, bool green, bool blue, bool alpha);
@@ -75,6 +77,9 @@ namespace render
 		*	深度是否可写
 		*/
 		static void setDepthMask(bool flag);
+		/**
+		*	定义视图远近距离
+		*/
 		static void setDepthRange(float zNear, float zFar);
 		static void setDepthRangeArray(uint32_t first, int count, const double* v);
 		static void setDepthRangeIndexed(uint32_t index, float zNear, float zFar);

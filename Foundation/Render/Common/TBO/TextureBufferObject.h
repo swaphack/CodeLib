@@ -32,11 +32,11 @@ namespace render
 		/**
 		*	绑定
 		*/
-		void bindTextureBufferFormat(TexSizedInternalFormat format);
+		void setFormat(TexSizedInternalFormat format);
 		/**
 		*	绑定
 		*/
-		void bindTBO(int32_t index);
+		void bindTextureUnit(int32_t index);
 	protected:
 		/**
 		*	生成tbo
@@ -54,6 +54,6 @@ namespace render
 		/**
 		*	绑定buffer
 		*/
-		BufferObject* _bufferObj = nullptr;
+		BufferObject* _bufferObject = nullptr;
 	};
 }

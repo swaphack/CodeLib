@@ -80,7 +80,7 @@ namespace render
 		/**
 		*	绑定buffer
 		*/
-		BufferObject* _bufferObj = nullptr;
+		BufferObject* _bufferObject = nullptr;
 		/**
 		*	调用到的属性
 		*/

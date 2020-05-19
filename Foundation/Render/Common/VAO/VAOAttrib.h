@@ -40,7 +40,6 @@ namespace render
 		*	使顶点属性数组失效
 		*/
 		void disableVertexAttribArray();
-	public:
 	private:
 		uint32_t _index = 0;
 

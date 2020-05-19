@@ -4,6 +4,7 @@
 #include "Common/Buffer/import.h"
 #include "Common/View/import.h"
 #include "Common/Texture/import.h"
+#include "Common/VAO/import.h"
 
 using namespace render;
 

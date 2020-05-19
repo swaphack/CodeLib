@@ -11,7 +11,8 @@ namespace sys
 namespace render
 {
 	class VertexArrayObject;
-	class NoNamedBufferObject;
+	class ArrayBufferObject;
+	class ElementArrayBufferObject;
 	class Material;
 	class Node;
 
@@ -62,7 +63,7 @@ namespace render
 		std::map<int, sys::MeshDetail*> _meshes;
 
 		std::map<uint32_t, VertexArrayObject*> _vertexArrayObjects;
-		std::map<uint32_t, NoNamedBufferObject*> _indiceObjects;
-		std::map<uint32_t, NoNamedBufferObject*> _vertexObjects;
+		std::map<uint32_t, ElementArrayBufferObject*> _indiceObjects;
+		std::map<uint32_t, ArrayBufferObject*> _vertexObjects;
 	};
 }

@@ -1,6 +1,6 @@
 #include "VertexArrayObject.h"
 #include "Graphic/import.h"
-#include "BufferObject.h"
+#include "Common/Buffer/BufferObject.h"
 #include "VAOAttrib.h"
 
 using namespace render;
@@ -14,7 +14,7 @@ render::VertexArrayObject::~VertexArrayObject()
 {
 	this->relaseVAO();
 	this->removeAllVertexAttribs();
-	SAFE_RELEASE(_bufferObj);
+	SAFE_RELEASE(_bufferObject);
 }
 
 uint32_t render::VertexArrayObject::getVAOID() const
@@ -34,24 +34,24 @@ void render::VertexArrayObject::bindVertexArray()
 
 void render::VertexArrayObject::setBufferObject(BufferObject* buffer)
 {
-	SAFE_RELEASE(_bufferObj);
+	SAFE_RELEASE(_bufferObject);
 	SAFE_RETAIN(buffer);
-	_bufferObj = buffer;
+	_bufferObject = buffer;
 }
 
 render::BufferObject* render::VertexArrayObject::getBufferObject()
 {
-	return _bufferObj;
+	return _bufferObject;
 }
 
 void render::VertexArrayObject::bindBuffer()
 {
-	if (_bufferObj == nullptr || !_bufferObj->isBuffer())
+	if (_bufferObject == nullptr || !_bufferObject->isBuffer())
 	{
 		return;
 	}
 
-	_bufferObj->bindBuffer();
+	_bufferObject->bindBuffer();
 }
 
 void render::VertexArrayObject::removeAllVertexAttribs()

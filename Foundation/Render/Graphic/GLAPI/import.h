@@ -24,3 +24,4 @@
 #include "GLProgramPipelines.h"
 #include "GLQuery.h"
 #include "GLUtility.h"
+#include "GLTransformFeedback.h"
