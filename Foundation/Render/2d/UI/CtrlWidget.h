@@ -25,6 +25,10 @@ namespace render
 		*/
 		void addWidget(CtrlWidget* widget);
 		/**
+		*	Ìí¼Ó¿Ø¼þ
+		*/
+		void addWidget(CtrlWidget* widget, int zOrder);
+		/**
 		*	ÒÆ³ý¿Ø¼þ
 		*/
 		void removeWidget(CtrlWidget* widget);
@@ -38,8 +42,6 @@ namespace render
 		*/
 		void setClip(bool bClip);
 	protected:
-		virtual void updateNode();
-
 		virtual void beforeDrawNode();
 		virtual void afterDrawNode();
 	public:

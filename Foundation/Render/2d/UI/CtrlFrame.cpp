@@ -107,7 +107,6 @@ void CtrlFrame::onTextureChange()
 	math::Rect rect(math::Vector2(), size);
 	TextureTool::setTexture2DCoords(&_texRect, size, rect);
 	TextureTool::setTexture2DVertexts(&_texRect, math::Vector3(), _volume, _anchor);
-	TextureTool::setTexture2DFlip(&_texRect, _bFlipX, _bFlipY);
 }
 
 render::Material* render::CtrlFrame::getMaterial()
@@ -143,9 +142,12 @@ void render::CtrlFrame::updateBufferData()
 	auto pMesh = _mesh->getMesh(MESH_INDEX);
 	if (pMesh)
 	{
+		float uvs[8] = { 0 };
+		memcpy(uvs, _texRect.uvs, sizeof(uvs));
+		render::TextureTool::setTexture2DFlip(uvs, _bFlipX, _bFlipY);
 		pMesh->setVertices(12, _texRect.vertices);
 		pMesh->setColors(16, _texRect.colors);
-		pMesh->setUVs(8, _texRect.uvs);
+		pMesh->setUVs(8, uvs);
 		pMesh->setIndices(6, _texRect.indices);
 	}
 }

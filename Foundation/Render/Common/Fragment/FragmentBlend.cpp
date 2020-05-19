@@ -2,8 +2,8 @@
 #include "Graphic/import.h"
 
 render::FragmentBlendBase::FragmentBlendBase()
+	:FragmentHandle(FragmentType::BLEND, EnableMode::BLEND)
 {
-	_fragmentType = FragmentType::BLEND;
 }
 
 render::FragmentBlendBase::~FragmentBlendBase()
@@ -16,9 +16,9 @@ void render::FragmentBlendBase::setBlendColor(const sys::Color4F& color)
 	_blendColor = color;
 }
 
-void render::FragmentBlendBase::begin()
+void render::FragmentBlendBase::setBlendColor(const sys::Color4B& color)
 {
-	GLState::enable(EnableModel::BLEND);
+	sys::convertColor4BTo4F(color, _blendColor);
 }
 
 void render::FragmentBlendBase::update()
@@ -26,10 +26,6 @@ void render::FragmentBlendBase::update()
 	GLState::setBlendColor(_blendColor);
 }
 
-void render::FragmentBlendBase::end()
-{
-	GLState::disable(EnableModel::BLEND);
-}
 //////////////////////////////////////////////////////////////////////////
 
 render::FragmentBlend::FragmentBlend()

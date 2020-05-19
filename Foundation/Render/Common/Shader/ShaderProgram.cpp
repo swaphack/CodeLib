@@ -84,11 +84,14 @@ void ShaderProgram::link()
 	}
 
 	detachAllShaders();
+
+	GLDebug::showError();
 }
 
 void ShaderProgram::use()
 {
 	GLShader::useProgram(_programID);
+	GLDebug::showError();
 }
 
 void ShaderProgram::useNone()
@@ -229,6 +232,7 @@ bool render::ShaderProgram::loadFromFile(ShaderType type, const std::string& pat
 		return false;
 	}
 	this->attachShader(pShader);
+	GLDebug::showError();
 	return true;
 }
 

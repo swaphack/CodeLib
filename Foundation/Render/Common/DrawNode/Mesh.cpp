@@ -177,7 +177,7 @@ void render::Mesh::drawWithBufferObject(Node* node, Material* mat)
 		mat->startUpdateShaderUniformValue(node);
 		mat->startUpdateShaderVertexValue(pVertexArrayObject, pMesh);
 
-		GLState::enable(EnableModel::TEXTURE_2D);
+		GLState::enable(EnableMode::TEXTURE_2D);
 		auto nMatID = pMesh->getMaterial();
 		mat->applyMaterialWithShader(nMatID);
 
@@ -200,7 +200,7 @@ void render::Mesh::drawWithBufferObject(Node* node, Material* mat)
 		mat->endUpdateShaderVertexValue(pVertexArrayObject);
 		mat->endUpdateShaderUniformValue();
 
-		GLState::disable(EnableModel::TEXTURE_2D);
+		GLState::disable(EnableMode::TEXTURE_2D);
 		GLShader::useProgram(0);
 		GLDebug::showError();
 	}
@@ -260,7 +260,7 @@ void render::Mesh::drawWithClientArray(Node* node, Material* mat)
 			GLDebug::showError();
 		}
 
-		GLState::enable(EnableModel::TEXTURE_2D);
+		GLState::enable(EnableMode::TEXTURE_2D);
 		auto nMatID = pMesh->getMaterial();
 		mat->applyMaterial(nMatID);
 
@@ -270,7 +270,7 @@ void render::Mesh::drawWithClientArray(Node* node, Material* mat)
 			GLClientArrays::drawElements(DrawMode::TRIANGLES, indices.getLength(), IndexDataType::UNSIGNED_INT, indices.getValue());
 			GLDebug::showError();
 		}
-		GLState::disable(EnableModel::TEXTURE_2D);
+		GLState::disable(EnableMode::TEXTURE_2D);
 
 		GLClientArrays::disableClientState(ClientArrayType::VERTEX_ARRAY);
 		GLClientArrays::disableClientState(ClientArrayType::NORMAL_ARRAY);

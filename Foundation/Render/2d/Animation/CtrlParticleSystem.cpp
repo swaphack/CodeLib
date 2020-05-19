@@ -17,7 +17,7 @@ ParticleNode::~ParticleNode()
 
 void ParticleNode::onDraw()
 {
-	GLState::enable(EnableModel::TEXTURE_2D);
+	GLState::enable(EnableMode::TEXTURE_2D);
 	GLTexture::bindTexture2D(0);
 
 	GLClientArrays::enableClientState(ClientArrayType::VERTEX_ARRAY);
@@ -35,7 +35,7 @@ void ParticleNode::onDraw()
 	GLClientArrays::disableClientState(ClientArrayType::TEXTURE_COORD_ARRAY);
 	GLClientArrays::disableClientState(ClientArrayType::COLOR_ARRAY);
 
-	GLState::disable(EnableModel::TEXTURE_2D);
+	GLState::disable(EnableMode::TEXTURE_2D);
 }
 
 void ParticleNode::update(float interval)

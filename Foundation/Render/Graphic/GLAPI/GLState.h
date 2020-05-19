@@ -15,7 +15,7 @@ namespace render
 		/**
 		*	查询功能状态
 		*/
-		static bool isEnabled(EnableModel capability);
+		static bool isEnabled(EnableMode capability);
 	public:
 		/**
 		*	获取bool类型的状态值
@@ -81,11 +81,11 @@ namespace render
 		/**
 		*	开启功能
 		*/
-		static void enable(EnableModel capability);
+		static void enable(EnableMode capability);
 		/**
 		*	关闭功能
 		*/
-		static void disable(EnableModel capability);
+		static void disable(EnableMode capability);
 		/**
 		*	前方绕行方式
 		*/

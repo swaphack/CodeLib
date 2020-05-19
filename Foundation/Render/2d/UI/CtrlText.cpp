@@ -24,7 +24,11 @@ bool CtrlText::init()
 	_notify->removeListens(NodeNotifyType::TEXTURE);
 
 	_notify->addListen(NodeNotifyType::TEXT, [&](){
+		_material->updateMatTexture();
+
 		this->onTextChange();
+
+		this->updateBufferData();
 	});	
 
 	return true;
@@ -166,7 +170,6 @@ void CtrlText::onTextChange()
 	math::Volume volume = math::Volume(texture->getWidth(), texture->getHeight());
 
 	TextureTool::setTexture2DVertexts(&_texRect, orgin, volume, anchor);
-	TextureTool::setTexture2DFlip(&_texRect, _bFlipX, _bFlipY);
 }
 
 math::Vector3 render::CtrlText::getOrgin(const math::Size& size)

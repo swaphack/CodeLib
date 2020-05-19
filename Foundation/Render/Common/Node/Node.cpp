@@ -17,7 +17,7 @@ Node::Node()
 ,_bTouchEnabled(false)
 ,_actionProxy(nullptr)
 , _bRelativeToParent(true)
-, _zOrder(0.0f)
+, _zOrder(0)
 , _touchProxy(nullptr)
 {
 	this->setVisible(true);
@@ -66,13 +66,18 @@ void Node::removeFromParent()
 
 void Node::addChild( Node* node )
 {
+	this->addChild(node, 0);
+}
+
+void render::Node::addChild(Node* node, int zOrder)
+{
 	ASSERT(node != nullptr && node->getParent() == nullptr);
 
 	if (node->getParent() == this)
 	{
 		return;
 	}
-
+	node->setZOrder(zOrder);
 	node->setParent(this);
 
 	SAFE_RETAIN(node);
@@ -195,13 +200,13 @@ void* Node::getUserData()
 	return _userData;
 }
 
-void Node::setZOrder(float z)
+void Node::setZOrder(int z)
 {
 	_zOrder = z;
 	setDirty(true);
 }
 
-float Node::getZOrder()
+int Node::getZOrder()
 {
 	return _zOrder;
 }
@@ -305,7 +310,7 @@ void Node::sortChildren()
 			oIt = orderNodes.begin();
 			while (oIt != orderNodes.end())
 			{
-				if ((*oIt)->getZOrder() > node->getZOrder())
+				if ((*oIt)->getZOrder() < node->getZOrder())
 				{
 					orderNodes.insert(oIt, node);
 					bInsert = true;
@@ -425,7 +430,6 @@ void render::Node::updateNode()
 
 void render::Node::beforeDrawNode()
 {
-	this->startUpdateTranform();
 }
 
 void Node::drawNode()
@@ -435,23 +439,30 @@ void Node::drawNode()
 		return;
 	}
 
+	this->startUpdateTranform();
+
 	this->beforeDrawNode();
 
 	this->draw();
 
 	this->afterDrawNode();
 
+	this->endUpdateTranform();
+
 	GLDebug::showError();
 }
 
 void render::Node::afterDrawNode()
 {
+	this->drawAllChildren();
+}
+
+void render::Node::drawAllChildren()
+{
 	for (auto item : _children)
 	{
 		item->drawNode();
 	}
-
-	this->endUpdateTranform();
 }
 
 void Node::notify(NodeNotifyType id)

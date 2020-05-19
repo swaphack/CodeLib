@@ -16,11 +16,13 @@ namespace render
 	public:
 		void setRect(int x, int y, int width, int height);
 	public:
-		virtual void begin();
 		virtual void update();
-		virtual void end();
+	protected:
+		virtual void saveData();
+		virtual void reloadData();
 	protected:
 		math::Rect _rect;
+		math::Rect _lastRect;
 	};
 }
 

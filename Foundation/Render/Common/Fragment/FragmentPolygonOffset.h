@@ -24,11 +24,8 @@ namespace render
 		// offset = m * factor + r * units;
 		void setOffset(float factor, float units);
 	public:
-		virtual void begin();
 		virtual void update();
-		virtual void end();
 	protected:
-		PolygonOffsetType _offsetType;
 		sys::Tuple2<float, float> _offset;
 	};
 }

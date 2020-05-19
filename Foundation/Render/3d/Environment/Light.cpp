@@ -28,7 +28,7 @@ Light::~Light()
 
 void Light::draw()
 {
-	GLState::enable(EnableModel::LIGHTING);
+	GLState::enable(EnableMode::LIGHTING);
 
 	GLLight::setLightAmbient(getLightName(), _lightAmbient);
 
@@ -38,7 +38,7 @@ void Light::draw()
 
 	GLLight::setLightPosition(getLightName(), _position.getValue());
 
-	GLState::enable((EnableModel)getLightName());
+	GLState::enable((EnableMode)getLightName());
 }
 
 void Light::setAmbient(uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha)

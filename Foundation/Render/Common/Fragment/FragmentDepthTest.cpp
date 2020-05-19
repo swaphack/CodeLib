@@ -2,9 +2,8 @@
 #include "Graphic/import.h"
 
 render::FragmentDepthTest::FragmentDepthTest()
+	:FragmentHandle(FragmentType::DEPTH_TEST, EnableMode::DEPTH_TEST)
 {
-	_fragmentType = FragmentType::DEPTH_TEST;
-	_func = DepthFunction::LESS;
 }
 
 render::FragmentDepthTest::~FragmentDepthTest()
@@ -17,17 +16,19 @@ void render::FragmentDepthTest::setFunc(DepthFunction func)
 	_func = func;
 }
 
-void render::FragmentDepthTest::begin()
-{
-	GLState::enable(EnableModel::DEPTH_TEST);
-}
-
 void render::FragmentDepthTest::update()
 {
 	GLState::setDepthFunc(_func);
 }
 
-void render::FragmentDepthTest::end()
+void render::FragmentDepthTest::saveData()
 {
-	GLState::disable(EnableModel::DEPTH_TEST);
+	int func;
+	GLState::getInteger(GetTarget::DEPTH_FUNC, &func);
+	_lastFunc = (DepthFunction)func;
+}
+
+void render::FragmentDepthTest::reloadData()
+{
+	GLState::setDepthFunc(_lastFunc);
 }

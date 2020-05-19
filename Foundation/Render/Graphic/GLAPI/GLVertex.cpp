@@ -20,7 +20,7 @@ void GLVertex::setVertex(float x, float y, float z)
 
 void GLVertex::setVertex(const math::Vector3& value)
 {
-	glVertex3f(value.getX(), value.getY(), value.getZ());
+	setVertex(value.getX(), value.getY(), value.getZ());
 }
 
 void GLVertex::setNormal(const math::Vector3& value)
@@ -44,7 +44,7 @@ void GLVertex::setColor(float* rgba)
 	{
 		return;
 	}
-	glColor4f(rgba[0], rgba[1], rgba[2], rgba[3]);
+	setColor(rgba[0], rgba[1], rgba[2], rgba[3]);
 }
 
 void GLVertex::setColor(const sys::Color3F& value, float opacity)

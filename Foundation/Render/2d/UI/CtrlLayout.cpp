@@ -6,10 +6,10 @@
 render::CtrlLayout::CtrlLayout()
 {
 	_backgroundImage = CREATE_NODE(CtrlImage);
-	this->addWidget(_backgroundImage);
+	this->addWidget(_backgroundImage, -1);
 
 	_backgroundMask = CREATE_NODE(CtrlMask);
-	this->addWidget(_backgroundMask);
+	this->addWidget(_backgroundMask, -1);
 }
 
 render::CtrlLayout::~CtrlLayout()
@@ -40,4 +40,14 @@ void render::CtrlLayout::setBackgroundColor(const sys::Color4B& color)
 void render::CtrlLayout::setBackgroundImage(const std::string& filepath)
 {
 	_backgroundImage->setImagePath(filepath);
+}
+
+render::CtrlImage* render::CtrlLayout::getBackgroundImage() const
+{
+	return _backgroundImage;
+}
+
+render::CtrlMask* render::CtrlLayout::getBackgroundMask() const
+{
+	return _backgroundMask;
 }

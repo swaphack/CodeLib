@@ -44,7 +44,6 @@ namespace render
 		virtual void update();
 		virtual void end();
 	protected:
-		FragmentSampleType _sampleType;
 		std::map<uint32_t, uint32_t> _sampleMask;
 		sys::Tuple2<float, bool> _sampleConverage;
 	};

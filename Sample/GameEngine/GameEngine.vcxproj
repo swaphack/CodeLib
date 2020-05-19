@@ -143,7 +143,7 @@
   <ItemGroup>
     <ClCompile Include="Classes\GLRenderApplication.cpp" />
     <ClCompile Include="Classes\Main.cpp" />
-    <ClCompile Include="Classes\Node\ShaderUtility.cpp" />
+    <ClCompile Include="Classes\Node\Utility.cpp" />
     <ClCompile Include="Classes\Node\TestAudioNode.cpp" />
     <ClCompile Include="Classes\Node\TestBufferNode.cpp" />
     <ClCompile Include="Classes\Node\TestDrawNode.cpp" />
@@ -163,7 +163,7 @@
   <ItemGroup>
     <ClInclude Include="Classes\GLRenderApplication.h" />
     <ClInclude Include="Classes\Node\import.h" />
-    <ClInclude Include="Classes\Node\ShaderUtility.h" />
+    <ClInclude Include="Classes\Node\Utility.h" />
     <ClInclude Include="Classes\Node\TestAudioNode.h" />
     <ClInclude Include="Classes\Node\TestBufferNode.h" />
     <ClInclude Include="Classes\Node\TestDrawNode.h" />

@@ -9,7 +9,7 @@ namespace render
 	class FragmentQuery : public FragmentHandle
 	{
 	public:
-		FragmentQuery();
+		FragmentQuery(FragmentType type);
 		virtual ~FragmentQuery();
 	public:
 		uint32_t getQueryID();

@@ -1,7 +1,8 @@
 #include "FragmentQuery.h"
 #include "Graphic/import.h"
 
-render::FragmentQuery::FragmentQuery()
+render::FragmentQuery::FragmentQuery(FragmentType type)
+	:FragmentHandle(type)
 {
 	this->initQuery();
 }
@@ -65,8 +66,8 @@ void render::FragmentQuery::releaseQuery()
 
 /////////////////////////////////////////////////////////////
 render::FragmentOcclusionQuery::FragmentOcclusionQuery()
+	:FragmentQuery(FragmentType::OCCLUSION_QUERY)
 {
-	_fragmentType = FragmentType::OCCLUSION_QUERY;
 }
 
 render::FragmentOcclusionQuery::~FragmentOcclusionQuery()
@@ -96,8 +97,8 @@ void render::FragmentOcclusionQuery::end()
 /////////////////////////////////////////////////////////////
 
 render::FragmentConditionRender::FragmentConditionRender()
+	:FragmentQuery(FragmentType::CONDITION_RENDER)
 {
-	_fragmentType = FragmentType::CONDITION_RENDER;
 }
 
 render::FragmentConditionRender::~FragmentConditionRender()

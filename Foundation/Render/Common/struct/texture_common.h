@@ -45,10 +45,6 @@ namespace render
 		void setRightDownUV(const math::Vector2& point);
 		void setRightUpUV(const math::Vector2& point);
 		void setLeftUpUV(const math::Vector2& point);
-
-		void flipX();
-		void flipY();
-
 	};
 
 	// 立方体纹理

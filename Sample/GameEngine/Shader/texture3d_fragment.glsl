@@ -15,5 +15,6 @@ void main(){
 	//vec4 c2 = texture(texSampler1, fragmentUV);
 
 	//color = mix(c1, c2, 0.5f);
+	
 	color = c1;
 }

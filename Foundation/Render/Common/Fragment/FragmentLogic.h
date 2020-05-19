@@ -13,10 +13,12 @@ namespace render
 	public:
 		void setOpCode(LogicOpCode code);
 	public:
-		virtual void begin();
 		virtual void update();
-		virtual void end();
+	protected:
+		virtual void saveData();
+		virtual void reloadData();
 	private:
 		LogicOpCode _opCode = LogicOpCode::COPY;
+		LogicOpCode _lastOpCode = LogicOpCode::COPY;
 	};
 }

@@ -1,6 +1,6 @@
 #include "TestShaderNode.h"
 #include "mathlib.h"
-#include "ShaderUtility.h"
+#include "Utility.h"
 using namespace render;
 using namespace math;
 
@@ -18,7 +18,7 @@ void TestShaderNode::testFunc()
 {
 	//this->addLight();
 	//this->testImageShader();
-	this->testModelShader();
+	this->testClipShader();
 	//this->test3dsModelShader();
 	//this->testFbxModelShader();
 	//this->testObjModelShader();
@@ -95,7 +95,7 @@ void TestShaderNode::testImageShader()
 	pImage->setPosition(Vector2(500, 500));
 	this->addChild(pImage);
 
-	ShaderUtility::updateNodeShader(pImage, false);
+	Utility::updateNodeShader(pImage, false);
 }
 
 void TestShaderNode::testModelShader()
@@ -119,7 +119,7 @@ void TestShaderNode::testModelShader()
 	pModel->setAnchorPoint(0.0f, 0.5f, 0.5f);
 	this->addChild(pModel);
 
-	ShaderUtility::updateNodeShader(pModel);
+	Utility::updateNodeShader(pModel);
 }
 
 void TestShaderNode::test3dsModelShader()
@@ -131,7 +131,7 @@ void TestShaderNode::test3dsModelShader()
 	pModel->setVolume(400, 400, 400);
 	this->addChild(pModel);
 
-	ShaderUtility::updateNodeShader(pModel);
+	Utility::updateNodeShader(pModel);
 }
 
 void TestShaderNode::testObjModelShader()
@@ -145,7 +145,7 @@ void TestShaderNode::testObjModelShader()
 	pModel->setVolume(400, 400, 400);
 	this->addChild(pModel);
 
-	ShaderUtility::updateNodeShader(pModel);
+	Utility::updateNodeShader(pModel);
 }
 
 void TestShaderNode::testFbxModelShader()
@@ -158,7 +158,7 @@ void TestShaderNode::testFbxModelShader()
 	pModel->setRotationX(0);
 	this->addChild(pModel);
 
-	ShaderUtility::updateNodeShader(pModel);
+	Utility::updateNodeShader(pModel);
 }
 
 void TestShaderNode::addLight()
@@ -172,5 +172,40 @@ void TestShaderNode::addLight()
 	this->addChild(pSpotLight);
 }
 
+void TestShaderNode::testClipShader()
+{
+	auto pTexture = G_TEXTURE_CACHE->createTexture2D("Resource/Image/NeHe.png");
+	std::string textureName = "face";
+
+	CubeModel* pModel = CREATE_NODE(CubeModel);
+	pModel->addTexture(textureName, pTexture);
+
+	pModel->setAllFacesTexture(textureName);
+	pModel->setPosition(400, 400, 0);
+	pModel->setVolume(200, 200, 200);
+	pModel->setAnchorPoint(0.0f, 0.5f, 0.5f);
+	this->addChild(pModel);
+
+	std::string textureClipVertexPath = "Shader/clip_vertex.glsl";
+
+	ShaderProgram* pProgram = CREATE_OBJECT(ShaderProgram);
+	pProgram->loadVertexAndFragmentShader(textureClipVertexPath, Utility::texture3dFragmentPath);
+	pProgram->link();
+
+
+	pModel->getMaterial()->setShaderProgram(pProgram);
+	Utility::initShaderAttrib(pModel->getMaterial());
+	Utility::runRotateAction(pModel);
+
+
+	pModel->getMaterial()->setProgramFunc([](ShaderProgram* program) {
+		auto pUniform = program->getUniform("Plane");
+		if (pUniform)
+		{
+			float param[4] = { 1, 0, 0, -400 };
+			pUniform->setValue(VertexAttribSize::FOUR, 1, param);
+		}
+	});
+}
 
 

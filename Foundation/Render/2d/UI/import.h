@@ -10,4 +10,4 @@
 #include "CtrlScrollView.h"
 
 
-//#include "CtrlStencil.h"
+#include "CtrlStencil.h"

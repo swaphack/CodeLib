@@ -23,6 +23,14 @@ namespace render
 		*	…Ë÷√±≥æ∞Õº∆¨
 		*/
 		void setBackgroundImage(const std::string& filepath);
+		/**
+		*	±≥æ∞Õº∆¨
+		*/
+		CtrlImage* getBackgroundImage() const;
+		/**
+		*	±≥æ∞—’…´
+		*/
+		CtrlMask* getBackgroundMask() const;
 	private:
 		/**
 		*	±≥æ∞Õº∆¨

@@ -111,17 +111,33 @@ void TextureTool::setTexture3DVertexts(TextureCubeVertex* texcube, const math::V
 	texcube->setBackLeftUpPoint(math::Vector3(x, y, z));
 }
 
-void TextureTool::setTexture2DFlip(TextureRectVertex* texRect, bool bFlipX, bool bFlipY)
+void render::TextureTool::setTexture2DFlip(float* uvs, bool bFlipX, bool bFlipY)
 {
-	math::Vector3 temp;
-
 	if (bFlipX)
 	{
-		texRect->flipX();
+		float x0 = uvs[0];
+		float x1 = uvs[2];
+		float x2 = uvs[4];
+		float x3 = uvs[6];
+
+		uvs[0] = x1;
+		uvs[2] = x0;
+
+		uvs[4] = x3;
+		uvs[6] = x2;
 	}
 
 	if (bFlipY)
 	{
-		texRect->flipY();
+		float y0 = uvs[1];
+		float y1 = uvs[3];
+		float y2 = uvs[5];
+		float y3 = uvs[7];
+
+		uvs[1] = y1;
+		uvs[3] = y0;
+
+		uvs[5] = y3;
+		uvs[7] = y2;
 	}
 }

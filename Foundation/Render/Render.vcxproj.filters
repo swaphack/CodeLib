@@ -378,6 +378,9 @@
     <ClCompile Include="Common\View\Pixel.cpp">
       <Filter>Common\View</Filter>
     </ClCompile>
+    <ClCompile Include="2d\UI\CtrlStencil.cpp">
+      <Filter>2d\UI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Common\Node\import.h">
@@ -884,6 +887,9 @@
     </ClInclude>
     <ClInclude Include="Common\View\Pixel.h">
       <Filter>Common\View</Filter>
+    </ClInclude>
+    <ClInclude Include="2d\UI\CtrlStencil.h">
+      <Filter>2d\UI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

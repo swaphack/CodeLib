@@ -1,5 +1,5 @@
 #include "TestFragmentNode.h"
-#include "ShaderUtility.h"
+#include "Utility.h"
 
 using namespace render;
 
@@ -25,7 +25,7 @@ void TestFragmentNode::testStencil()
 	pCube->setAllFacesTexture("Face");
 	pCube->setRotation(45, 45, 0);
 	pCube->setPosition(400, 400);
-	ShaderUtility::updateNodeShader(pCube);
+	Utility::updateNodeShader(pCube);
 
 	FragmentBlend* pBlend = pCube->getFragOperator()->getHandle<FragmentBlend>();
 	pBlend->setEnabled(true);

@@ -210,8 +210,9 @@ enum class DrawBufferMode
 	AUX3 = GL_AUX3,
 };
 
-enum class EnableModel
+enum class EnableMode
 {
+	NONE = 0,
 	FOG = GL_FOG,
 	LIGHTING = GL_LIGHTING,
 	TEXTURE_1D = GL_TEXTURE_1D,

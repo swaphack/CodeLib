@@ -16,10 +16,12 @@ namespace render
 	public:
 		void setFunc(DepthFunction func);
 	public:
-		virtual void begin();
 		virtual void update();
-		virtual void end();
+	public:
+		virtual void saveData();
+		virtual void reloadData();
 	protected:
-		DepthFunction _func;
+		DepthFunction _func = DepthFunction::LESS;
+		DepthFunction _lastFunc = DepthFunction::LESS;
 	};
 }

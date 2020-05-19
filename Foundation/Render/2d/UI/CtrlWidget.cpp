@@ -29,7 +29,7 @@ bool render::CtrlWidget::init()
 		calRectData();
 	});
 
-	FragmentBlend* pBlend = this->getFragOperator()->getHandle<FragmentBlend>();
+ 	FragmentBlend* pBlend = this->getFragOperator()->getHandle<FragmentBlend>();
 	if (pBlend)
 	{
 		pBlend->setEnabled(true);
@@ -43,52 +43,40 @@ void render::CtrlWidget::setClip(bool bClip)
 	_bClip = bClip;
 }
 
-void render::CtrlWidget::updateNode()
-{
-	for (auto item : _widgets)
-	{
-		item->updateNode();
-	}
-
-	DrawNode::updateNode();
-}
-
 void render::CtrlWidget::beforeDrawNode()
 {
-	DrawNode::beforeDrawNode();
-
 	if (_bClip)
 	{
-		GLState::enable(EnableModel::SCISSOR_TEST);
+		GLState::enable(EnableMode::SCISSOR_TEST);
 		GLState::setScissor(_clipRect.getX(), _clipRect.getY(), _clipRect.getWidth(), _clipRect.getHeight());
 	}
 }
 
 void render::CtrlWidget::afterDrawNode()
 {
-	for (auto item : _widgets)
-	{
-		item->drawNode();
-	}
-
-	DrawNode::afterDrawNode();
+	this->drawAllChildren();
 
 	if (_bClip)
 	{
-		GLState::disable(EnableModel::SCISSOR_TEST);
+		GLState::disable(EnableMode::SCISSOR_TEST);
 	}
-
 }
+
 void render::CtrlWidget::addWidget(CtrlWidget* widget)
+{
+	this->addWidget(widget, 0);
+}
+
+void render::CtrlWidget::addWidget(CtrlWidget* widget, int zOrder)
 {
 	if (widget == nullptr)
 	{
 		return;
 	}
 
-	SAFE_RETAIN(widget);
-
 	_widgets.push_back(widget);
+
+	this->addChild(widget, zOrder);
 }
 
 void render::CtrlWidget::removeWidget(CtrlWidget* widget)
@@ -102,16 +90,18 @@ void render::CtrlWidget::removeWidget(CtrlWidget* widget)
 	if (it != _widgets.end())
 	{
 		_widgets.erase(it);
-		SAFE_RELEASE(widget);
 	}
+
+	this->removeChild(widget);
 }
 
 void render::CtrlWidget::removeAllWidgets()
 {
 	for (auto item : _widgets)
 	{
-		SAFE_RELEASE(item);
+		this->removeChild(item);
 	}
+	_widgets.clear();
 }
 
 const render::RectVectices& render::CtrlWidget::getRectVertex()

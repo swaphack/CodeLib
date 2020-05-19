@@ -3,17 +3,17 @@
 
 using namespace render;
 
-void GLState::enable(EnableModel capability)
+void GLState::enable(EnableMode capability)
 {
 	glEnable((GLenum)capability);
 }
 
-void GLState::disable(EnableModel capability)
+void GLState::disable(EnableMode capability)
 {
 	glDisable((GLenum)capability);
 }
 
-bool GLState::isEnabled(EnableModel capability)
+bool GLState::isEnabled(EnableMode capability)
 {
 	return glIsEnabled((GLenum)capability) != 0;
 }

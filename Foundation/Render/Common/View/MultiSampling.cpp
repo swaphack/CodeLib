@@ -11,17 +11,17 @@ bool render::MultiSampling::isSupport()
 
 void render::MultiSampling::enable()
 {
-	GLState::enable(EnableModel::MULTISAMPLE);
+	GLState::enable(EnableMode::MULTISAMPLE);
 }
 
 void render::MultiSampling::disable()
 {
-	GLState::disable(EnableModel::MULTISAMPLE);
+	GLState::disable(EnableMode::MULTISAMPLE);
 }
 
 void render::MultiSampling::enableShader()
 {
-	GLState::enable(EnableModel::SAMPLE_SHADING);
+	GLState::enable(EnableMode::SAMPLE_SHADING);
 }
 
 void render::MultiSampling::setMinSampleShader(float value)
@@ -31,7 +31,7 @@ void render::MultiSampling::setMinSampleShader(float value)
 
 void render::MultiSampling::disableShader()
 {
-	GLState::disable(EnableModel::SAMPLE_SHADING);
+	GLState::disable(EnableMode::SAMPLE_SHADING);
 }
 
 int render::MultiSampling::getSamples()

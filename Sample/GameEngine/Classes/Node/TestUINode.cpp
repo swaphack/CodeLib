@@ -1,5 +1,6 @@
 #include "TestUINode.h"
 #include "system.h"
+#include "Utility.h"
 
 using namespace sys;
 using namespace render;
@@ -16,7 +17,13 @@ TestUINode::~TestUINode()
 
 void TestUINode::testFunc()
 {
-	this->testScissor();
+	//this->testScissor();
+
+	//this->testScrollView();
+
+	//this->testSequenceFrame();
+
+	this->testStencil();
 }
 
 void TestUINode::testEditBox()
@@ -61,10 +68,6 @@ void TestUINode::testSequenceFrame()
 	pSequenceFrame->setPosition(512, 384, 0);
 	pSequenceFrame->setFrameRate(1.0f / 10);
 	pSequenceFrame->start();
-
-	//pSequenceFrame->getMovie()->setBlend(EBFS_SRC_ALPHA, EBFD_ONE_MINUS_SRC_ALPHA);
-	//pSequenceFrame->getMovie()->setColor(Color3B(0.299f * 255, 0.587f * 255, 0.114f * 255));
-	//pSequenceFrame->getMovie()->setOpacity(255);
 
 	this->addChild(pSequenceFrame);
 	G_KEYBOARDMANAGER->addDispatcher(pSequenceFrame, this, KEYBOARD_DELEGATTE_SELECTOR(TestUINode::onKeyBoardRole));
@@ -120,10 +123,8 @@ void TestUINode::onKeyBoardRole(sys::Object* object, sys::BoardKey key, sys::But
 	if (pRole)
 	{
 		DirectionAction* pConfig = &ActionConfigs[index];
-		if (pRole->getMovie()->isFlipX() != pConfig->bFlipX)
-		{
-			pRole->getMovie()->setFlipX(pConfig->bFlipX);
-		}
+
+		pRole->getMovie()->setFlipX(pConfig->bFlipX);
 		pRole->setFrameImagePath(pConfig->path, pConfig->count);
 	}
 }
@@ -131,23 +132,30 @@ void TestUINode::onKeyBoardRole(sys::Object* object, sys::BoardKey key, sys::But
 void TestUINode::testScissor()
 {
 	CtrlLayout* pLayout = CREATE_NODE(CtrlLayout);
-	pLayout->setBackgroundColor(sys::Color4B(255, 0, 0, 125));
-	pLayout->setBackgroundImage("Resource/Image/1.jpg");
+ 	pLayout->getBackgroundMask()->setVisible(false);
+	//pLayout->getBackgroundImage()->setVisible(false);
+ 	pLayout->setBackgroundImage("Resource/Image/1.jpg");
+ 	Utility::updateNodeShader(pLayout->getBackgroundImage(), false);
 	pLayout->setClip(true);
-	pLayout->setVolume(200, 200, 0);
-	pLayout->setPosition(200, 200);
+	pLayout->setVolume(400, 400, 0);
+	pLayout->setPosition(400, 400);
 	this->addChild(pLayout);
+
 
 	CtrlImage* pImage = CREATE_NODE(CtrlImage);
 	pImage->setImagePath("Resource/Image/sqi.png");
-	pImage->setVolume(300, 300, 0);
-	pImage->setScale(3, 3, 1);
-	pLayout->addChild(pImage);
+	pImage->setVolume(200, 200, 0);
+	pImage->setScale(1, 1, 1);
+	Utility::updateNodeShader(pImage, false);
+	pLayout->addWidget(pImage, 3);
 }
 
 void TestUINode::testScrollView()
 {
 	CtrlScrollView* pScrollView = CREATE_NODE(CtrlScrollView);
+	pScrollView->getBackgroundImage()->setVisible(false);
+	pScrollView->getBackgroundMask()->setVisible(false);
+	pScrollView->setClip(true);
 	pScrollView->setPosition(512, 384);
 	pScrollView->setVolume(200, 600);
 	pScrollView->setItemSize(200, 200);
@@ -161,7 +169,7 @@ void TestUINode::testScrollView()
 		pScrollView->append(pImage);
 	}
 
-	pScrollView->setScrollDirection(ScrollDirection::HORIZONTAL_LEFT_TO_RIGHT);
+	pScrollView->setScrollDirection(ScrollDirection::VERTICAL_TOP_TO_BOTTOM);
 }
 
 void TestUINode::testMask()
@@ -172,4 +180,27 @@ void TestUINode::testMask()
 	pMask->setVolume(1024, 768, 0);
 	pMask->setColor(Color4B(120, 120, 120, 125));
 	this->addChild(pMask);
+}
+
+void TestUINode::testStencil()
+{
+	CtrlStencil* pStencil = CREATE_NODE(CtrlStencil);
+	pStencil->setPosition(400, 400, 0.0f);
+	pStencil->setVolume(400, 400, 0);
+	this->addChild(pStencil);
+
+	CtrlMask* pMask = CREATE_NODE(CtrlMask);
+	pMask->setAnchorPoint(0, 0, 0);
+	pMask->setPosition(0, 0, 0.0f);
+	pMask->setVolume(200, 200, 0);
+	pMask->setColor(Color4B(120, 120, 120, 125));
+	pStencil->addChild(pMask);
+	pStencil->setStencilNode(pMask);
+
+	CtrlImage* pImage = CREATE_NODE(CtrlImage);
+	pImage->setImagePath("Resource/Image/sqi.png");
+	pImage->setVolume(400, 400, 0);
+	pImage->setScale(1, 1, 1);
+	Utility::updateNodeShader(pImage, false);
+	pStencil->addChild(pImage);
 }

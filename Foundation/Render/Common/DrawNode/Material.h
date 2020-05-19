@@ -51,6 +51,8 @@ namespace render
 	class NoNamedBufferObject;
 	class Texture2D;
 	class Node;
+
+	typedef std::function<void(ShaderProgram* program)> UpdateProgramFunc;
 	/**
 	*	材质
 	*/
@@ -153,8 +155,10 @@ namespace render
 		void applyMaterialWithShader(uint32_t nMatID) const;
 		// 更新纹理
 		void updateMatTexture();
-		// 移除所有缓存对象
-		void removeAllBufferObjects();
+	public:
+		void setProgramFunc(const UpdateProgramFunc& func);
+	protected:
+		void runProgramFunc();
 	private:
 		// 模型材质
 		std::map<int, sys::MaterialDetail*> _materials;
@@ -174,5 +178,9 @@ namespace render
 		*	Uniform
 		*/
 		std::map<VertexUniformType, std::string> _vertexUniformIndices;
+		/**
+		*	shader设置函数
+		*/
+		UpdateProgramFunc _programFunc = nullptr;
 	};
 }

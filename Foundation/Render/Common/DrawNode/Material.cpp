@@ -169,6 +169,8 @@ void render::Material::startUpdateShaderUniformValue(Node* node)
 		GLDebug::showError();
 	}
 
+	runProgramFunc();
+
 	GLDebug::showError();
 }
 
@@ -315,7 +317,7 @@ void render::Material::applyMaterialWithShader(uint32_t nMatID) const
 		GLMaterial::setMaterialEmission(FaceType::FRONT, matrialEmission);
 	}
 
-	GLState::enable(EnableModel::TEXTURE_2D);
+	GLState::enable(EnableMode::TEXTURE_2D);
 
 	for (auto item : _vertexUniformIndices)
 	{
@@ -371,6 +373,19 @@ void render::Material::updateMatTexture()
 		}
 	}
 	_texturePaths.clear();
+}
+
+void render::Material::setProgramFunc(const UpdateProgramFunc& func)
+{
+	_programFunc = func;
+}
+
+void render::Material::runProgramFunc()
+{
+	if (_programFunc != nullptr && _shaderProgram != nullptr)
+	{
+		_programFunc(_shaderProgram);
+	}
 }
 
 void render::Material::endUpdateShaderVertexValue(VertexArrayObject* data)

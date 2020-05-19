@@ -1,11 +1,11 @@
-#include "ShaderUtility.h"
+#include "Utility.h"
 
 using namespace render;
 
-static std::string texture3dVertexPath = "Shader/texture3d_vertex.glsl";
-static std::string texture3dFragmentPath = "Shader/texture3d_fragment.glsl";
+std::string Utility::texture3dVertexPath = "Shader/texture3d_vertex.glsl";
+std::string Utility::texture3dFragmentPath = "Shader/texture3d_fragment.glsl";
 
-void ShaderUtility::loadShader(render::Material* mat, const std::string& vpath, const std::string& fpath)
+void Utility::loadShader(render::Material* mat, const std::string& vpath, const std::string& fpath)
 {
 	if (mat == nullptr)
 	{
@@ -19,7 +19,7 @@ void ShaderUtility::loadShader(render::Material* mat, const std::string& vpath, 
 
 }
 
-void ShaderUtility::initShaderAttrib(render::Material* mat)
+void Utility::initShaderAttrib(render::Material* mat)
 {
 	if (mat == nullptr)
 	{
@@ -38,7 +38,7 @@ void ShaderUtility::initShaderAttrib(render::Material* mat)
 	mat->addAttrib(VertexAttribType::UV, "vUV");
 }
 
-void ShaderUtility::initProgramAttrib(render::ShaderProgram* program)
+void Utility::initProgramAttrib(render::ShaderProgram* program)
 {
 	if (program == nullptr)
 	{
@@ -52,7 +52,7 @@ void ShaderUtility::initProgramAttrib(render::ShaderProgram* program)
 	GLDebug::showError();
 }
 
-void ShaderUtility::runRotateAction(render::Node* node)
+void Utility::runRotateAction(render::Node* node)
 {
 	if (node == nullptr)
 	{
@@ -68,7 +68,7 @@ void ShaderUtility::runRotateAction(render::Node* node)
 	node->getActionProxy()->runAction(pRepeateAction);
 }
 
-void ShaderUtility::updateNodeShader(render::DrawNode* node, bool autoRotate)
+void Utility::updateNodeShader(render::DrawNode* node, bool autoRotate)
 {
 	loadShader(node->getMaterial(), texture3dVertexPath, texture3dFragmentPath);
 	initShaderAttrib(node->getMaterial());

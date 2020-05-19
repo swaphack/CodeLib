@@ -2,10 +2,8 @@
 #include "Graphic/import.h"
 
 render::FragmentSample::FragmentSample()
+	:FragmentHandle(FragmentType::SAMPLE, (EnableMode)FragmentSampleType::SAMPLE_MASK)
 {
-	_fragmentType = FragmentType::SAMPLE;
-
-	_sampleType = FragmentSampleType::SAMPLE_MASK;
 	_sampleConverage.t1 = 0;
 	_sampleConverage.t2 = false;
 }
@@ -17,7 +15,7 @@ render::FragmentSample::~FragmentSample()
 
 void render::FragmentSample::setSampleType(FragmentSampleType type)
 {
-	_sampleType = type;
+	setEnableMode((EnableMode)type);
 }
 
 void render::FragmentSample::setSampleCoverage(float value, bool invert)
@@ -36,28 +34,19 @@ void render::FragmentSample::clearSampelMask()
 	_sampleMask.clear();
 }
 
-void render::FragmentSample::begin()
-{
-	GLState::enable((EnableModel)_sampleType);
-}
-
 void render::FragmentSample::update()
 {
-	if (_sampleType == FragmentSampleType::SAMPLE_ALPHA_TO_COVERAGE
-		|| _sampleType == FragmentSampleType::SAMPLE_COVERAGE)
+	FragmentSampleType sampleType = (FragmentSampleType)getEnableMode();
+	if (sampleType == FragmentSampleType::SAMPLE_ALPHA_TO_COVERAGE
+		|| sampleType == FragmentSampleType::SAMPLE_COVERAGE)
 	{
 		GLState::setSampleCoverage(_sampleConverage.t1, _sampleConverage.t2);
 	}
-	else if (_sampleType == FragmentSampleType::SAMPLE_MASK)
+	else if (sampleType == FragmentSampleType::SAMPLE_MASK)
 	{
 		for (auto item : _sampleMask)
 		{
 			GLState::setSampleMask(item.first, item.second);
 		}
 	}
-}
-
-void render::FragmentSample::end()
-{
-	GLState::disable((EnableModel)_sampleType);
 }

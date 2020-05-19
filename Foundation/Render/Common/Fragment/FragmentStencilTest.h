@@ -33,15 +33,14 @@ namespace render
 	class FragmentStencilTest : public FragmentHandle
 	{
 	private:
-		struct StencilData
+		struct StencilTestData
 		{
-			bool isEnableDepthTest = false;
 			int nStencilFun = 0;
 			int nStencilRef = 0;
 			int nStencilValueMask = 0;
-			int nStencilFail = 0;
-			int nStencilPassDepthFail = 0;
-			int nStencilPassDepthPass = 0;
+			int nStencilFail = (int)StencilOpResult::KEEP;
+			int nStencilPassDepthFail = (int)StencilOpResult::KEEP;
+			int nStencilPassDepthPass = (int)StencilOpResult::KEEP;
 		};
 	public:
 		FragmentStencilTest();
@@ -50,21 +49,13 @@ namespace render
 		void setFunc(StencilFunction func, int ref, uint32_t mask);
 		void setOperator(StencilOpResult stencilFail, StencilOpResult depthFail, StencilOpResult depthPass);
 	public:
-		virtual void begin();
 		virtual void update();
-		virtual void end();
 	protected:
-		void saveStencilData();
-		void resetStencilData();
+		virtual void saveData();
+		virtual void reloadData();
 	protected:
-		StencilFunction _func;
-		int _ref = 0;
-		uint32_t _mask = 0;
-		StencilOpResult _stencilFail = StencilOpResult::KEEP;
-		StencilOpResult _depthFail = StencilOpResult::KEEP;
-		StencilOpResult _depthPass = StencilOpResult::KEEP;
-	private:
-		StencilData _stencilData;
+		StencilTestData _lastStencilData;
+		StencilTestData _stencilData;
 	};
 
 	//////////////////////////////////////////////////////////////////////////

@@ -25,4 +25,6 @@ private:
 	void testFbxModelShader();
 
 	void addLight();
+	// ”–Œ Ã‚
+	void testClipShader();
 };

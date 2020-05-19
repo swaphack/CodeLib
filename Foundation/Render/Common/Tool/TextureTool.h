@@ -38,10 +38,11 @@ namespace render
 		/**
 		*
 		* 设置2d纹理顶点翻转
-		* @param texcube 纹理数据 out
+		* @param uvs[8] 纹理数据
 		* @param bFlipX 是否水平翻转
 		* @param bFlipY 是否垂直翻转
+		* @param outUVs[8] 纹理数据
 		*/
-		static void setTexture2DFlip(TextureRectVertex* texRect, bool bFlipX, bool bFlipY);
+		static void setTexture2DFlip(float* uvs, bool bFlipX, bool bFlipY);
 	};
 }

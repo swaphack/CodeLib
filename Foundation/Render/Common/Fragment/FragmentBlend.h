@@ -12,12 +12,11 @@ namespace render
 		virtual ~FragmentBlendBase();
 	public:
 		void setBlendColor(const sys::Color4F& color);
+		void setBlendColor(const sys::Color4B& color);
 	public:
-		virtual void begin();
 		virtual void update();
-		virtual void end();
 	protected:
-		sys::Color4F _blendColor;
+		sys::Color4F _blendColor = sys::Color4F(1,1,1,1);
 	};
 	/**
 	*	»ìºÏ

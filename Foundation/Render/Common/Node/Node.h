@@ -49,6 +49,8 @@ namespace render
 	public:
 		// 添加子节点
 		void addChild(Node* node);
+		// 添加子节点
+		void addChild(Node* node, int zOrder);
 		// 移除子节点
 		void removeChild(Node* node);
 		// 移除所有子节点
@@ -75,9 +77,9 @@ namespace render
 		void* getUserData();
 	public:
 		// 设置z轴坐标
-		void setZOrder(float z);
+		void setZOrder(int z);
 		// 获取z轴坐标
-		float getZOrder();
+		int getZOrder();
 	public:
 		// 设置可见性
 		void setVisible(bool status);
@@ -94,6 +96,8 @@ namespace render
 	protected:
 		// 绘制,重写
 		virtual void draw();
+
+		void drawAllChildren();
 	public:
 		// 获取动作代理
 		ActionProxy* getActionProxy();
@@ -151,7 +155,7 @@ namespace render
 		// 数据
 		void* _userData = nullptr;
 		// z轴坐标
-		float _zOrder = 0;
+		int _zOrder = 0;
 		// 父节点
 		Node* _parent = nullptr;
 		// 子节点
