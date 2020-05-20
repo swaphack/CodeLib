@@ -13,7 +13,7 @@ out vec4 fragmentColor;
 
 void main()
 {
-	vec4 position = vec4(vPosition,1);
+	vec4 position = vec4(vPosition, 1.0);
     gl_Position = projectMatrix * viewMatrix * modelMatrix * position;
     fragmentUV = vUV;
     fragmentColor = vColor;	

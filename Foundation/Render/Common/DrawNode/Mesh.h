@@ -11,8 +11,8 @@ namespace sys
 namespace render
 {
 	class VertexArrayObject;
-	class ArrayBufferObject;
-	class ElementArrayBufferObject;
+	class ArrayBuffer;
+	class ElementArrayBuffer;
 	class Material;
 	class Node;
 
@@ -48,22 +48,32 @@ namespace render
 		*/
 		sys::MeshDetail* getMesh(int id);
 	public:
+		/**
+		*	使用缓存对象绘制
+		*/
 		void drawWithBufferObject(Node* node, Material* mat);
-
+		/**
+		*	使用客户端数组绘制
+		*/
 		void drawWithClientArray(Node* node, Material* mat);
-
+		/**
+		*	初始化
+		*/
 		void initBufferData();
-
+		/**
+		*	更新顶点信息
+		*/
 		void updateVerticeData();
-
+		/**
+		*	移除所有缓存对象
+		*/
 		void removeAllBufferObjects();
-	protected:
 	private:
 		// 纹理网格
 		std::map<int, sys::MeshDetail*> _meshes;
 
 		std::map<uint32_t, VertexArrayObject*> _vertexArrayObjects;
-		std::map<uint32_t, ElementArrayBufferObject*> _indiceObjects;
-		std::map<uint32_t, ArrayBufferObject*> _vertexObjects;
+		std::map<uint32_t, ElementArrayBuffer*> _indiceObjects;
+		std::map<uint32_t, ArrayBuffer*> _vertexObjects;
 	};
 }

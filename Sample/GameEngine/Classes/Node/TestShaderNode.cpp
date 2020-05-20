@@ -50,7 +50,7 @@ void TestShaderNode::testShaderUniformBlock()
 			blockData.setValue("rotation", &rotation);
 			blockData.setValue("enabled", &enabled);
 
-			NoNamedBufferObject* pObject = CREATE_OBJECT(NoNamedBufferObject);
+			NoNamedBuffer* pObject = CREATE_OBJECT(NoNamedBuffer);
 			pObject->setBufferTarget(BufferTarget::UNIFORM_BUFFER);
 			pObject->bindBuffer();
 			pObject->setBufferData(blockData.getBlockData().getSize(), blockData.getBlockData().getValue(), BufferDataUsage::STATIC_DRAW);

@@ -18,6 +18,12 @@ Matrix22::Matrix22(float a00, float a01, float a10, float a11)
 	(*this)[3] = a11;
 }
 
+math::Matrix22::Matrix22(const Matrix22& mat)
+	: Matrix22()
+{
+	this->set(mat.getValue(), mat.getHeight(), mat.getWidth());
+}
+
 Matrix22::~Matrix22()
 {
 

@@ -6,7 +6,6 @@
 #include "Common/Tool/Tool.h"
 #include "Common/Shader/ShaderProgram.h"
 #include "Common/View/import.h"
-#include "Common/Buffer/import.h"
 #include "Graphic/import.h"
 #include "Common/DrawNode/import.h"
 

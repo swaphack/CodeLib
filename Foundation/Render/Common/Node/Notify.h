@@ -28,6 +28,8 @@ namespace render
 		GEOMETRY,
 		// 文本纹理
 		TEXT,
+		// 粒子
+		PARTICLE,
 		// 视窗改变
 		VIEWSIZE,
 	};

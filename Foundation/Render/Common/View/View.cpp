@@ -45,9 +45,9 @@ void View::initView()
 {
 	if (isDirty())
 	{
-		GLState::setClipControl(ClipControlOrigin::LOWER_LEFT, ClipControlDepth::ZERO_TO_ONE);
+		//GLState::setClipControl(ClipControlOrigin::LOWER_LEFT, ClipControlDepth::ZERO_TO_ONE);
 		// 定义视图远近距离
-		GLState::setDepthRange(0, 1);
+		//GLState::setDepthRange(0, 1);
 		// 定义视窗位置
 		GLState::setViewport(_position.getX(), _position.getY(), _size.getWidth(), _size.getHeight());
 

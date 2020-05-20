@@ -19,11 +19,11 @@ Line3::Line3(const Plane& plane0, const Plane& plane1)
 	Matrix22 dx = Matrix22(-plane0.getParamD(), plane0.getParamB(), -plane1.getParamD(), plane1.getParamB());
 	Matrix22 dy = Matrix22(plane0.getParamA(), -plane0.getParamD(), plane1.getParamA(), - plane1.getParamD());
 
-	float base = d.getValue();
+	float base = d.getDetValue();
 
 	assert(base != 0);
 
-	_point = Vector3(dx.getValue() / base, dy.getValue() / base, 0);
+	_point = Vector3(dx.getDetValue() / base, dy.getDetValue() / base, 0);
 
 	
 	Vector3 n0 = plane0.normal();

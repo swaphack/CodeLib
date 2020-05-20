@@ -127,7 +127,7 @@ const math::Matrix44& render::Camera::getProjectMatrix() const
 
 const math::Matrix44& render::Camera::getViewMatrix() const
 {
-	return _localMatrix;
+	return _worldMatrix;
 }
 
 void render::Camera::updateViewPort()

@@ -4,7 +4,7 @@
 #include "Common/Buffer/import.h"
 #include "Common/View/import.h"
 #include "Common/Texture/import.h"
-#include "Common/VAO/import.h"
+#include "Common/BufferObject/import.h"
 
 using namespace render;
 
@@ -94,6 +94,11 @@ sys::MaterialDetail* Material::getMaterial(int id)
 	return it->second;
 }
 
+const std::map<int, sys::MaterialDetail*>& render::Material::getMaterials() const
+{
+	return _materials;
+}
+
 void render::Material::addAttrib(VertexAttribType vat, const std::string& name)
 {
 	_vertexAttribIndices[vat] = name;
@@ -156,15 +161,15 @@ void render::Material::startUpdateShaderUniformValue(Node* node)
 		}
 		if (item.first == VertexUniformType::PROJECT_MATRIX)
 		{
-			pUniform->setMatrix4(1, false, projMat.getValue());
+			pUniform->setMatrix4(projMat);
 		}
 		else if (item.first == VertexUniformType::VIEW_MATRIX)
 		{
-			pUniform->setMatrix4(1, false, viewMat.getValue());
+			pUniform->setMatrix4(viewMat);
 		}
 		else if (item.first == VertexUniformType::MODEL_VIEW)
 		{
-			pUniform->setMatrix4(1, false, modelMat.getValue());
+			pUniform->setMatrix4(modelMat);
 		}
 
 		GLDebug::showError();
@@ -376,7 +381,7 @@ void render::Material::updateMatTexture()
 	_texturePaths.clear();
 }
 
-void render::Material::setProgramFunc(const UpdateProgramFunc& func)
+void render::Material::setProgramFunc(const ShaderProgramFunc& func)
 {
 	_programFunc = func;
 }

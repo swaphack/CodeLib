@@ -12,6 +12,12 @@ namespace sys
 
 namespace render
 {
+	class ShaderProgram;
+	class VertexArrayObject;
+	class NoNamedBuffer;
+	class Texture2D;
+	class Node;
+
 	enum class VertexAttribType
 	{
 		POSITION,
@@ -45,19 +51,13 @@ namespace render
 		SPECULAR_TEXTURE,
 	};
 
-	
-	class ShaderProgram;
-	class VertexArrayObject;
-	class NoNamedBufferObject;
-	class Texture2D;
-	class Node;
-
-	typedef std::function<void(ShaderProgram* program)> UpdateProgramFunc;
 	/**
 	*	材质
 	*/
 	class Material : public sys::Object
 	{
+	public:
+		typedef std::function<void(ShaderProgram* program)> ShaderProgramFunc;
 	public:
 		Material();
 		virtual ~Material();
@@ -156,7 +156,7 @@ namespace render
 		// 更新纹理
 		void updateMatTexture();
 	public:
-		void setProgramFunc(const UpdateProgramFunc& func);
+		void setProgramFunc(const ShaderProgramFunc& func);
 	protected:
 		void runProgramFunc();
 	private:
@@ -181,6 +181,6 @@ namespace render
 		/**
 		*	shader设置函数
 		*/
-		UpdateProgramFunc _programFunc = nullptr;
+		ShaderProgramFunc _programFunc = nullptr;
 	};
 }

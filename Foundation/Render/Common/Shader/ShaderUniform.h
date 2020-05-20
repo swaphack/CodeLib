@@ -38,18 +38,28 @@ namespace render
 		void setValue(int32_t v0, int32_t v1);
 		void setValue(int32_t v0, int32_t v1, int32_t v2);
 		void setValue(int32_t v0, int32_t v1, int32_t v2, int32_t v3);
-
+		// 2*2
 		void setMatrix2(int count, bool transpose, const float* value);
+		// 3*3
 		void setMatrix3(int count, bool transpose, const float* value);
+		// 4*4
 		void setMatrix4(int count, bool transpose, const float* value);
-
+		// 2*2
 		void setMatrix2(bool transpose, const float* value);
+		// 3*3
 		void setMatrix3(bool transpose, const float* value);
+		// 4*4
 		void setMatrix4(bool transpose, const float* value);
-
+		// 2*2
 		void setMatrix2(const float* value);
+		// 3*3
 		void setMatrix3(const float* value);
+		// 4*4
 		void setMatrix4(const float* value);
+
+		void setMatrix2(const math::Matrix22& value);
+		void setMatrix3(const math::Matrix33& value);
+		void setMatrix4(const math::Matrix44& value);
 	private:
 		uint32_t _uniformID = 0;
 	};

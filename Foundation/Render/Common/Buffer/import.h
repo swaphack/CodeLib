@@ -1,10 +1,12 @@
 #pragma once
 
-#include "BufferObject.h"
-#include "NoNamedBufferObject.h"
-#include "NamedBufferObject.h"
+#include "Buffer.h"
+#include "NoNamedBuffer.h"
+#include "NamedBuffer.h"
 
-#include "ArrayBufferObject.h"
-#include "ElementArrayBufferObject.h"
-#include "UniformBufferObject.h"
+#include "ArrayBuffer.h"
+#include "ElementArrayBuffer.h"
+#include "UniformBuffer.h"
+#include "TransformFeedbackBuffer.h"
+#include "TextureBuffer.h"
 

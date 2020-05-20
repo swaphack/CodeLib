@@ -5,7 +5,7 @@
 #include "Material.h"
 #include "Common/Node/Node.h"
 #include "Common/Tool/Tool.h"
-#include "Common/VAO/import.h"
+#include "Common/BufferObject/import.h"
 using namespace render;
 
 render::Mesh::Mesh()
@@ -122,7 +122,7 @@ void render::Mesh::drawWithBufferObject(Node* node, Material* mat)
 			continue;
 		}
 
-		ArrayBufferObject* pVertexObject = _vertexObjects[id];
+		ArrayBuffer* pVertexObject = _vertexObjects[id];
 		if (!pVertexObject)
 		{
 			continue;
@@ -184,7 +184,7 @@ void render::Mesh::drawWithBufferObject(Node* node, Material* mat)
 
 		GLDebug::showError();
 
-		ElementArrayBufferObject* pIndiceObject = _indiceObjects[id];
+		ElementArrayBuffer* pIndiceObject = _indiceObjects[id];
 		if (pIndiceObject)
 		{
 			pIndiceObject->bindBuffer();
@@ -200,6 +200,7 @@ void render::Mesh::drawWithBufferObject(Node* node, Material* mat)
 		mat->endUpdateShaderUniformValue();
 
 		GLState::disable(EnableMode::TEXTURE_2D);
+		GLVertexArrays::bindVertexArray(0);
 		GLShader::useProgram(0);
 		GLDebug::showError();
 	}
@@ -291,7 +292,7 @@ void render::Mesh::initBufferData()
 		auto it1 = _indiceObjects.find(id);
 		if (it1 == _indiceObjects.end())
 		{
-			ElementArrayBufferObject* obj = CREATE_OBJECT(ElementArrayBufferObject);
+			ElementArrayBuffer* obj = CREATE_OBJECT(ElementArrayBuffer);
 			SAFE_RETAIN(obj);
 			_indiceObjects[id] = obj;
 		}
@@ -307,11 +308,11 @@ void render::Mesh::initBufferData()
 		auto it2 = _vertexObjects.find(id);
 		if (it2 == _vertexObjects.end())
 		{
-			ArrayBufferObject* obj = CREATE_OBJECT(ArrayBufferObject);
+			ArrayBuffer* obj = CREATE_OBJECT(ArrayBuffer);
 			SAFE_RETAIN(obj);
 
 			auto pVertexArrayObject = _vertexArrayObjects[id];
-			pVertexArrayObject->setBufferObject(obj);
+			pVertexArrayObject->setBuffer(obj);
 
 			_vertexObjects[id] = obj;
 		}

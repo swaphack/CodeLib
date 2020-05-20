@@ -35,6 +35,11 @@ namespace render
 	public:
 		static void setTransformFeedbackBufferBase(uint32_t xfb, uint32_t index, uint32_t buffer);
 		static void setTransformFeedbackBufferRange(uint32_t xfb, uint32_t index, uint32_t buffer, ptrdiff_t offset, int size);
+		/**
+		*	@param varyings 增加间隔 gl_SkipComponents1-4, 跳转到下个缓存gl_NextBuffer 
+		*	GL_SEPARATE_ATTRIBS gl_NextBuffer 一个跳转
+		*	GL_INTERLEAVED_ATTRIBS gl_NextBuffer 二个以上跳转
+		*/
 		static void setTransformFeedbackVaryings(uint32_t program, int count, const char** varyings, TransformFeedbackBufferMode mode);
 	};
 }
