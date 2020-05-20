@@ -59,7 +59,7 @@ void View::initView()
 
 void View::updateView()
 {
-	GLState::setStencilMask(0x00);
+	GLState::setStencilMask(0xff);
 
 	uint32_t bitfield = (uint32_t)ClearBufferBitType::COLOR_BUFFER_BIT | (uint32_t)ClearBufferBitType::DEPTH_BUFFER_BIT | (uint32_t)ClearBufferBitType::STENCIL_BUFFER_BIT;
 	GLRender::clearColor(0, 0, 0, 0);
@@ -74,6 +74,7 @@ void View::updateView()
 void View::applyConfig()
 {
 	GLState::enable(EnableMode::DEPTH_TEST);
+	GLState::enable(EnableMode::STENCIL_TEST);
 	GLState::setDepthFunc(DepthFunction::LESS);
 
 	GLFixedFunction::setShadeModel(ShadingModel::SMOOTH);

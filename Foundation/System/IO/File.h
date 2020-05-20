@@ -30,6 +30,8 @@ namespace sys
 	public:
 		// 将数据写到本地
 		static bool write(const std::string& url, const char* data, size_t size, size_t& writtenSize);
+		// 将数据写到本地
+		static bool write(const std::string& url, const char* data, size_t size);
 		// 从本地读取数据
 		static MemoryData read(const std::string& url, size_t& readSize);
 		// 从本地读取数据

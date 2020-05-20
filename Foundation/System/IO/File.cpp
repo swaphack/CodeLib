@@ -32,6 +32,13 @@ bool File::write(const std::string& url, const char* data, size_t size, size_t& 
 	return true;
 }
 
+bool sys::File::write(const std::string& url, const char* data, size_t size)
+{
+	size_t writtenSize = 0;
+
+	return write(url, data, size, writtenSize);
+}
+
 MemoryData File::read(const std::string& url, size_t& readSize)
 {
 	readSize = 0;

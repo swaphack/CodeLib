@@ -1,6 +1,7 @@
 #include "CtrlStencil.h"
 #include "Common/Fragment/import.h"
 #include "Graphic/import.h"
+#include "Common/View/import.h"
 
 render::CtrlStencil::CtrlStencil()
 {
@@ -54,14 +55,25 @@ void render::CtrlStencil::beforeDrawNode()
 
 void render::CtrlStencil::afterDrawNode()
 {
+	GLState::disable(EnableMode::DEPTH_TEST);
 	GLState::enable(EnableMode::STENCIL_TEST);
-	GLState::setStencilOp(StencilOpResult::KEEP, StencilOpResult::DECR_WRAP, StencilOpResult::REPLACE);
+	GLState::setStencilFunc(StencilFunction::EQUAL, 1, 0xff);
+	GLState::setStencilOp(StencilOpResult::KEEP, StencilOpResult::KEEP, StencilOpResult::KEEP);
 
-	//GLState::setStencilMask(0xFF);
-	GLState::setStencilFunc(StencilFunction::ALWAYS, 2, 0xff);
+	//////////////////////////////////////////////////////////////////////////
+	//Pixel::dumpStencil();
 
-	GLDebug::showError();
 
+
+	this->drawAllChildren();
+
+	
+
+	//////////////////////////////////////////////////////////////////////////
+
+	GLState::setStencilFunc(StencilFunction::NOTEQUAL, 1, 0xff);
+	GLState::setStencilOp(StencilOpResult::INVERT, StencilOpResult::INVERT, StencilOpResult::KEEP);
+	//////////////////////////////////////////////////////////////////////////
 	if (_stencilNode)
 	{
 		bool hasParent = _stencilNode->getParent() != nullptr;
@@ -72,14 +84,7 @@ void render::CtrlStencil::afterDrawNode()
 
 		_stencilNode->drawNode();
 	}
-
-	GLState::setStencilOp(StencilOpResult::DECR_WRAP, StencilOpResult::INCR, StencilOpResult::KEEP);
-	GLState::setStencilFunc(StencilFunction::EQUAL, 2, 0xff);
-	//GLState::setStencilMask(0x00);
-
-	GLDebug::showError();
-
-	this->drawAllChildren();
+	//////////////////////////////////////////////////////////////////////////
 
 	if (_bClip)
 	{
@@ -87,5 +92,6 @@ void render::CtrlStencil::afterDrawNode()
 	}
 
 	GLState::disable(EnableMode::STENCIL_TEST);
+	GLState::enable(EnableMode::DEPTH_TEST);
 }
 

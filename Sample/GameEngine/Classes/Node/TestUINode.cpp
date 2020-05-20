@@ -193,8 +193,8 @@ void TestUINode::testStencil()
 	pMask->setAnchorPoint(0, 0, 0);
 	pMask->setPosition(0, 0, 0.0f);
 	pMask->setVolume(200, 200, 0);
-	pMask->setColor(Color4B(120, 120, 120, 125));
-	pStencil->addChild(pMask);
+	pMask->setColor(Color4B(255, 255, 255, 255));
+	//pStencil->addChild(pMask);
 	pStencil->setStencilNode(pMask);
 
 	CtrlImage* pImage = CREATE_NODE(CtrlImage);
