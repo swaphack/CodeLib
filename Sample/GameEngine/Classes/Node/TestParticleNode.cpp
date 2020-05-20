@@ -67,6 +67,8 @@ void TestParticleNode::testParticle()
 
 		GLDebug::showError();
 	};
+
+	GLDebug::showError();
 	//////////////////////////////////////////////////////////////////////////
 
 	auto pRenderFeedback = node->getRenderFeedback();
@@ -95,6 +97,6 @@ void TestParticleNode::testParticle()
 		pUniform = sp->getUniform("modelMatrix");
 		if (pUniform) pUniform->setMatrix4(modelMat);
 	};
-
+	GLDebug::showError();
 }
 

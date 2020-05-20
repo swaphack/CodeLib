@@ -63,7 +63,7 @@ namespace render
 		/**
 		*	更新顶点信息
 		*/
-		void updateVerticeData();
+		void updateBufferData();
 		/**
 		*	移除所有缓存对象
 		*/

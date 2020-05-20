@@ -321,34 +321,58 @@ void render::Mesh::initBufferData()
 	GLDebug::showError();
 }
 
-void render::Mesh::updateVerticeData()
+void render::Mesh::updateBufferData()
 {
 	for (auto item : _meshes)
 	{
 		auto pMesh = item.second;
 
-		uint32_t nLength = pMesh->getVertices().getLength();
-		uint32_t nUnitSize = pMesh->getVertices().getUnitSize();
-		uint32_t nTypeSize = pMesh->getVertices().getTypeSize();
-		if (nLength > 0)
+		uint32_t id = item.first;
+
+		ArrayBuffer* pVertexObject = _vertexObjects[id];
+		if (!pVertexObject)
 		{
-			int k = nLength / nUnitSize;
-			for (int i = 0; i < k; i++)
-			{
-				auto ptr = (float*)pMesh->getVertices().getPtr(i * nUnitSize);
-				float x = *(ptr);
-				float y = *(ptr + 1);
-				float z = *(ptr + 2);
+			continue;
+		}
 
-				math::Vector3 vector = Tool::convertToOGLPoisition(x, y, z);
-				memcpy(ptr, vector.getValue(), nTypeSize);
-				memcpy(ptr + 1, vector.getValue() + 1, nTypeSize);
-				memcpy(ptr + 2, vector.getValue() + 2, nTypeSize);
+		uint32_t nVerticeSize = pMesh->getVertices().getSize();
+		uint32_t nColorSize = pMesh->getColors().getSize();
+		uint32_t nUVSize = pMesh->getUVs().getSize();
+		uint32_t nNormalSize = pMesh->getNormals().getSize();
 
-				x = *(ptr);
-				y = *(ptr + 1);
-				z = *(ptr + 2);
-			}
+		if (nVerticeSize == 0)
+		{
+			PRINT("Mesh Vertice is NULL\n");
+			continue;
+		}
+		if (nColorSize == 0 && nUVSize == 0)
+		{
+			PRINT("Mesh Color or UI is NULL\n");
+			continue;
+		}
+
+		pVertexObject->bindBuffer();
+
+		uint32_t nTotalSize = nVerticeSize + nColorSize + nUVSize + nNormalSize;
+		pVertexObject->setBufferData(nTotalSize, nullptr, BufferDataUsage::STATIC_DRAW);
+		if (nVerticeSize > 0)
+		{
+			pVertexObject->setBufferSubData(0, nVerticeSize, pMesh->getVertices().getPtr());
+		}
+		GLDebug::showError();
+		if (nColorSize > 0)
+		{
+			pVertexObject->setBufferSubData(nVerticeSize, nColorSize, pMesh->getColors().getPtr());
+		}
+		GLDebug::showError();
+		if (nUVSize > 0)
+		{
+			pVertexObject->setBufferSubData(nVerticeSize + nColorSize, nUVSize, pMesh->getUVs().getPtr());
+		}
+		GLDebug::showError();
+		if (nNormalSize > 0)
+		{
+			pVertexObject->setBufferSubData(nVerticeSize + nColorSize + nUVSize, nNormalSize, pMesh->getNormals().getPtr());
 		}
 	}
 }
