@@ -5,6 +5,7 @@
 #include "Common/BufferObject/import.h"
 #include "Graphic/import.h"
 #include "Common/Tool/Tool.h"
+#include "Common/Texture/import.h"
 
 render::FeedbackProgram::FeedbackProgram()
 {
@@ -57,6 +58,7 @@ render::ParticleSystem::ParticleSystem()
 
 	_renderVAO->setBuffer(_renderTB);
 	_renderTBO->setBuffer(_renderTB);
+	_renderTBO->setTexture(CREATE_OBJECT(Texture2D));
 }
 
 render::ParticleSystem::~ParticleSystem()
@@ -147,11 +149,11 @@ struct buffer_t
 
 uint32_t render::ParticleSystem::getTextureID()
 {
-	if (_renderTBO == nullptr)
+	if (_renderTBO == nullptr || _renderTBO->getTexture() == nullptr)
 	{
 		return 0;
 	}
-	return _renderTBO->getTextureID();
+	return _renderTBO->getTexture()->getTextureID();
 }
 
 void render::ParticleSystem::onParticleChange()
@@ -203,7 +205,7 @@ void render::ParticleSystem::onParticleChange()
 
 	_renderTB->bindBuffer();
 	_renderTB->setBufferData(volume.getWidth() * volume.getHeight() * 4 * sizeof(float), BufferDataUsage::DYNAMIC_COPY);
-	_renderTBO->bindTexture(TextureTarget::TEXTURE_2D);
+	_renderTBO->bindTexture();
 	_renderTBO->setFormat(TexSizedInternalFormat::RGBA32F);
 
 	_renderVAO->bindVertexArray();

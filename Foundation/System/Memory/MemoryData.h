@@ -75,6 +75,8 @@ namespace sys
 		void remove(size_t offset, int size);
 
 		void resize(size_t len, uint32_t typeSize = 1);
+	public:
+		MemoryData& operator=(const MemoryData& data);
 	private:
 		/**
 		*	³¤¶È

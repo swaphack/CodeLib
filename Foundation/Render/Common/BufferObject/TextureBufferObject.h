@@ -6,6 +6,7 @@
 namespace render
 {
 	class Buffer;
+	class Texture;
 
 	/**
 	*	纹理缓存对象
@@ -17,13 +18,15 @@ namespace render
 		virtual ~TextureBufferObject();
 	public:
 		/**
-		*	纹理编号
+		*	纹理
 		*/
-		uint32_t getTextureID() const;
+		void setTexture(Texture* texture);
 		/**
-		*	绑定
+		*	纹理
 		*/
-		void bindBuffer();
+		Texture* getTexture() const;
+		
+		void bindTexture();
 	public:
 		/**
 		*	设置纹理数据格式
@@ -34,9 +37,9 @@ namespace render
 		*/
 		void bindTextureUnit(int32_t index);
 		/**
-		*	绑定纹理
+		*	绑定
 		*/
-		void bindTexture(TextureTarget target);
+		void bindBuffer();
 	protected:
 		/**
 		*	生成tbo
@@ -48,8 +51,9 @@ namespace render
 		void relaseTBO();
 	private:
 		/**
-		*	纹理编号
+		*	纹理
 		*/
-		uint32_t _textureID = 0;
+		Texture* _texture = nullptr;
+
 	};
 }

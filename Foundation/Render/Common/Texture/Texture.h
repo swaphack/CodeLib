@@ -16,12 +16,18 @@ namespace render
 	{
 	public:
 		Texture();
+		Texture(TextureTarget target);
 		virtual ~Texture();
 	public:
 		/**
 		*	纹理编号
 		*/
 		uint32_t getTextureID() const;
+		/**
+		*	纹理类型
+		*/
+		TextureTarget getTextureTarget();
+	public:
 		/**
 		*	宽度
 		*/
@@ -46,15 +52,37 @@ namespace render
 		*	深度
 		*/
 		void setDepth(uint32_t val);
+	public:
 		/**
 		*	纹理是否可用
 		*/
-		bool isEnable();
+		bool isValid();
+		/**
+		*	绑定纹理
+		*/
+		void bindTexture();
+		/**
+		*	绑定纹理
+		*/
+		void unbindTexture();
+		/**
+		*	绑定纹理单元
+		*/
+		void bindTextureUnit(uint32_t unit);
+	public:
+		/**
+		*	获取纹理数据
+		*/
+		void getTextureImage(int level, TextureDataFormat format, TextureDataType type, int size, void* pixels);
 	public:
 		/**
 		*	根据图片数据格式，获取纹理格式
 		*/
-		static void getTextureFormat(sys::ImageDataFormat imgFormat, TexImageDataFormat& format, TexImageInternalFormat& internalFormat);
+		static void getTextureFormat(sys::ImageDataFormat imgFormat, TextureDataFormat& format, TextureInternalFormat& internalFormat);
+		/**
+		*	根据图片数据格式，获取纹理格式
+		*/
+		static void getStorageTextureFormat(sys::ImageDataFormat imgFormat, TextureDataFormat& format, TextureInternalFormat& internalFormat);
 	protected:
 		/**
 		*	创建纹理
@@ -68,35 +96,22 @@ namespace render
 		/**
 		*	纹理编号
 		*/
-		uint32_t _textureID;
+		uint32_t _textureID = 0;
+		/**
+		*	纹理类型
+		*/
+		TextureTarget _textureTarget = TextureTarget::NONE;
 		/**
 		*	宽度
 		*/
-		uint32_t _width;
+		uint32_t _width = 0;
 		/**
 		*	高度
 		*/
-		uint32_t _height;
+		uint32_t _height = 0;
 		/**
 		*	深度
 		*/
-		uint32_t _depth;
-	};
-
-	//////////////////////////////////////////////////////////////////////////
-
-	struct TextureSetting2D
-	{
-		TextureMinFilter minFilter = TextureMinFilter::LINEAR;
-		TextureMagFilter magFilter = TextureMagFilter::LINEAR;
-		TextureWrapMode wrapS = TextureWrapMode::CLAMP;
-		TextureWrapMode wrapT = TextureWrapMode::CLAMP;
-	}; 
-
-	// 2d纹理
-	class Texture2D : public Texture
-	{
-	public:
-		virtual void load(const sys::ImageDetail* image, const TextureSetting2D& setting = TextureSetting2D());
+		uint32_t _depth = 0;
 	};
 }

@@ -12,31 +12,31 @@ using namespace sys;
 
 String::String()
 {
-	_data = new MemoryData(0);
+	this->initString(0, "");
 }
 
 String::String(const String& value)
 {
-	_data = new MemoryData(value.getSize(), value.getString());
+	this->initString(value.getSize(), value.getString());
 }
 
 String::String(const std::string& value)
 {
-	_data = new MemoryData(value.size(), value.c_str());
+	this->initString(value.size(), value.c_str());
 }
 
 String::String(const char* value, size_t count)
 {
 	ASSERT(value != nullptr);
 
-	_data = new MemoryData(count, value);
+	this->initString(count, value);
 }
 
 String::String(const char* value, int32_t count)
 {
 	ASSERT(value != nullptr);
 
-	_data = new MemoryData((size_t)count, value);
+	this->initString(count, value);
 }
 
 String::~String()
@@ -46,13 +46,13 @@ String::~String()
 
 String& String::operator=(const String& value)
 {
-	_data->init(value.getSize(), value.getString());
+	this->initString(value.getSize(), value.getString());
 	return *this;
 }
 
 String& String::operator=(const std::string& value)
 {
-	_data->init(value.size(), value.c_str());
+	this->initString(value.size(), value.c_str());
 	return *this;
 }
 
@@ -152,12 +152,12 @@ String& String::concat(const std::string& value)
 	size_t count = value.size();
 	size_t len = getSize() + count;
 
-	MemoryData* pData = new MemoryData(len);
-	pData->set(0, getSize(), getString());
-	pData->set(getSize(), count, value.c_str());
+	MemoryData data;
+	allocString(len, data);
+	data.set(0, getSize(), getString());
+	data.set(getSize(), count, value.c_str());
 
-	SAFE_DELETE(_data);
-	_data = pData;
+	*_data = data;
 	
 	return *this;
 }
@@ -168,13 +168,13 @@ String& String::concat(const std::string& value1, const std::string& value2)
 	size_t count2 = value2.size();
 	size_t len = getSize() + count1 + count2;
 
-	MemoryData* pData = new MemoryData(len);
-	pData->set(0, getSize(), getString());
-	pData->set(getSize(), count1, value1.c_str());
-	pData->set(getSize() + count1, count2, value2.c_str());
+	MemoryData data;
+	allocString(len, data);
+	data.set(0, getSize(), getString());
+	data.set(getSize(), count1, value1.c_str());
+	data.set(getSize() + count1, count2, value2.c_str());
 
-	SAFE_DELETE(_data);
-	_data = pData;
+	*_data = data;
 
 	return *this;
 }
@@ -187,14 +187,14 @@ String& String::concat(const std::string& value1, const std::string& value2, con
 
 	size_t len = getSize() + count1 + count2 + count3;
 
-	MemoryData* pData = new MemoryData(len);
-	pData->set(0, getSize(), getString());
-	pData->set(getSize(), count1, value1.c_str());
-	pData->set(getSize() + count1, count2, value2.c_str());
-	pData->set(getSize() + count1 + count2, count3, value3.c_str());
+	MemoryData data;
+	allocString(len, data);
+	data.set(0, getSize(), getString());
+	data.set(getSize(), count1, value1.c_str());
+	data.set(getSize() + count1, count2, value2.c_str());
+	data.set(getSize() + count1 + count2, count3, value3.c_str());
 
-	SAFE_DELETE(_data);
-	_data = pData;
+	*_data = data;
 
 	return *this;
 }
@@ -561,12 +561,12 @@ String& String::make(const char* format, ...)
 	va_list ap;
 	va_start(ap, format);
 	uint32_t size = _vscprintf(format, ap) + 1;
-	MemoryData* pData = new MemoryData(size);
-	vsprintf(pData->getPtr(), format, ap);
+	MemoryData data;
+	allocString(size, data);
+	vsprintf(data.getPtr(), format, ap);
 	va_end(ap);
 
-	SAFE_DELETE(_data);
-	_data = pData;
+	*_data = data;
 
 	return *this;
 }
@@ -760,8 +760,28 @@ char* String::getString()
 	return _data->getPtr();
 }
 
-
 size_t String::getSize() const
 {
-	return _data->getLength();
+	if (_data->getSize() == 0)
+	{
+		return 0;
+	}
+	return _data->getSize() - 1;
+}
+
+void sys::String::initString(size_t size, const char* value)
+{
+	if (_data == nullptr)
+	{
+		_data = new MemoryData(size + 1, value);
+	}
+	else
+	{
+		_data->init(size + 1, value);
+	}
+}
+
+void sys::String::allocString(size_t size, MemoryData& data)
+{
+	data.resize(size + 1);
 }

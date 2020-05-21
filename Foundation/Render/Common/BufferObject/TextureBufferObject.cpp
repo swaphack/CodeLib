@@ -1,6 +1,7 @@
 #include "TextureBufferObject.h"
 #include "Graphic/import.h"
 #include "Common/Buffer/Buffer.h"
+#include "Common/Texture/Texture.h"
 
 using namespace render;
 
@@ -11,12 +12,20 @@ render::TextureBufferObject::TextureBufferObject()
 
 render::TextureBufferObject::~TextureBufferObject()
 {
+	SAFE_RELEASE(_texture);
 	this->relaseTBO();
 }
 
-uint32_t render::TextureBufferObject::getTextureID() const
+void render::TextureBufferObject::setTexture(Texture* texture)
 {
-	return _textureID;
+	SAFE_RELEASE(_texture);
+	SAFE_RETAIN(texture);
+	_texture = texture;
+}
+
+render::Texture* render::TextureBufferObject::getTexture() const
+{
+	return _texture;
 }
 
 void render::TextureBufferObject::bindBuffer()
@@ -30,12 +39,20 @@ void render::TextureBufferObject::bindBuffer()
 
 void render::TextureBufferObject::bindTextureUnit(int32_t index)
 {
-	GLTexture::bindTextureUnit(index, _textureID);
+	if (getTexture() == nullptr)
+	{
+		return;
+	}
+	GLTexture::bindTextureUnit(index, getTexture()->getTextureID());
 }
 
-void render::TextureBufferObject::bindTexture(TextureTarget target)
+void render::TextureBufferObject::bindTexture()
 {
-	GLTexture::bindTexture(target, _textureID);
+	if (getTexture() == nullptr)
+	{
+		return;
+	}
+	getTexture()->bindTexture();
 }
 
 void render::TextureBufferObject::setFormat(TexSizedInternalFormat format)
@@ -49,11 +66,9 @@ void render::TextureBufferObject::setFormat(TexSizedInternalFormat format)
 
 void render::TextureBufferObject::initTBO()
 {
-	_textureID = GLTexture::genTexture();
 }
 
 void render::TextureBufferObject::relaseTBO()
 {
-	GLTexture::deleteTexture(_textureID);
 }
 

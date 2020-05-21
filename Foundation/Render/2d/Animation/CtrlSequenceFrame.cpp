@@ -1,7 +1,7 @@
 #include "CtrlSequenceFrame.h"
 #include "2d/UI/CtrlFrame.h"
 #include "Common/Texture/TextureCache.h"
-#include "Common/Texture/Texture.h"
+#include "Common/Texture/Texture2D.h"
 
 using namespace render;
 
@@ -84,7 +84,7 @@ Texture2D* CtrlSequenceFrame::getNextTexture()
 	{
 		return nullptr;
 	}
-	if (!texture2D->isEnable())
+	if (!texture2D->isValid())
 	{
 		SAFE_DELETE(texture2D);
 		return nullptr;

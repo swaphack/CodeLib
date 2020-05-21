@@ -33,6 +33,11 @@ void render::Buffer::bindBuffer()
 	GLBufferObjects::bindBuffer(_target, _bufferID);
 }
 
+void render::Buffer::unbindBuffer()
+{
+	GLBufferObjects::bindBuffer(_target, 0);
+}
+
 void render::Buffer::setBufferBase(uint32_t index)
 {
 	GLBufferObjects::bindBufferBase(_target, index, _bufferID);

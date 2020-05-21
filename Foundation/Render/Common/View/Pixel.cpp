@@ -44,7 +44,7 @@ void render::Pixel::dumpStencil()
 	GLDebug::showError();
 	static int dump = 0;
 	std::thread th([data]() {
-		std::string filepath = getCString("stencil_dump%d.txt", dump);
+		std::string filepath = getCString("dump/pixel/stencil_dump%d.txt", dump);
 		sys::File::write(filepath, data.getValue(), data.getSize());
 	});
 	th.detach();

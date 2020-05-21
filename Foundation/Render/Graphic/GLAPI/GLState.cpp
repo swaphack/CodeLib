@@ -67,7 +67,7 @@ void render::GLState::getFloat(uint32_t pname, float* value)
 	return glGetFloatv(pname, value);
 }
 
-void GLState::getTexImage(TextureTarget target, int level, TexImageInternalFormat internalFormat, TexImageDataType pixelType, void* data)
+void GLState::getTexImage(TextureTarget target, int level, TextureInternalFormat internalFormat, TextureDataType pixelType, void* data)
 {
 	glGetTexImage((GLenum)target, level, (GLenum)internalFormat, (GLenum)pixelType, data);
 }

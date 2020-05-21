@@ -101,6 +101,7 @@ void MemoryData::init(size_t len, const void* value, uint32_t typeSize)
 	_typeSize = typeSize;
 	_length = len;
 	_value = (char*)malloc(size);
+	memset(_value, 0, size);
 	if (value)
 	{
 		memcpy(_value, value, size);
@@ -159,6 +160,10 @@ void MemoryData::init(size_t len, const int8_t* value)
 
 void MemoryData::set(size_t offset, int size, const char* value)
 {
+	if (size == 0)
+	{
+		return;
+	}
 	ASSERT((offset + size <= _length) && (offset + size > 0));
 
 	memcpy(_value + offset, value, size);
@@ -214,5 +219,12 @@ void MemoryData::resize(size_t len, uint32_t typeSize)
 	_value = val;
 	_length = len;
 	_typeSize = typeSize;
+}
+
+sys::MemoryData& sys::MemoryData::operator=(const MemoryData& data)
+{
+	this->init(data.getLength(), data.getValue(), data.getTypeSize());
+
+	return *this;
 }
 

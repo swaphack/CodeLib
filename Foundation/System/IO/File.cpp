@@ -1,6 +1,7 @@
 #include "File.h"
 #include "Stream/StreamBase.h"
 #include "Stream/StreamHelper.h"
+#include "Directory.h"
 #include <cstdio>
 #include <cstdlib>
 #include <cstring>
@@ -13,6 +14,9 @@ bool File::write(const std::string& url, const char* data, size_t size, size_t& 
 	{
 		return false;
 	}
+	std::string dir;
+	Directory::getDirectory(url, dir);
+	Directory::createDirectory(dir);
 
 	FILE* fptr = nullptr;
 	fptr = fopen(url.c_str(), "wb+");

@@ -106,6 +106,9 @@ namespace sys
 		char* getString();
 		// 获取字符串长度
 		size_t getSize() const;
+	protected:
+		void initString(size_t size, const char* value);
+		void allocString(size_t size, MemoryData& data);
 	private:
 		MemoryData* _data = nullptr;
 	};

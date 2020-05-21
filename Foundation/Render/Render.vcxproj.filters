@@ -402,6 +402,33 @@
     <ClCompile Include="Common\BufferObject\VertexArrayAttrib.cpp">
       <Filter>Common\BufferObject</Filter>
     </ClCompile>
+    <ClCompile Include="Common\Texture\Texture2D.cpp">
+      <Filter>Common\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Texture\Texture1D.cpp">
+      <Filter>Common\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Texture\Texture3D.cpp">
+      <Filter>Common\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Texture\Texture1DArray.cpp">
+      <Filter>Common\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Texture\Texture2DArray.cpp">
+      <Filter>Common\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Texture\Texture2DMultiSampleArray.cpp">
+      <Filter>Common\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Texture\Texture2DMultiSample.cpp">
+      <Filter>Common\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Texture\TextureCubeMap.cpp">
+      <Filter>Common\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Texture\TextureCubeMapArray.cpp">
+      <Filter>Common\Texture</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Common\Node\import.h">
@@ -941,6 +968,33 @@
     </ClInclude>
     <ClInclude Include="Common\BufferObject\VertexArrayAttrib.h">
       <Filter>Common\BufferObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Texture\Texture2D.h">
+      <Filter>Common\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Texture\Texture1D.h">
+      <Filter>Common\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Texture\Texture3D.h">
+      <Filter>Common\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Texture\Texture1DArray.h">
+      <Filter>Common\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Texture\Texture2DArray.h">
+      <Filter>Common\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Texture\Texture2DMultiSampleArray.h">
+      <Filter>Common\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Texture\Texture2DMultiSample.h">
+      <Filter>Common\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Texture\TextureCubeMap.h">
+      <Filter>Common\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Texture\TextureCubeMapArray.h">
+      <Filter>Common\Texture</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

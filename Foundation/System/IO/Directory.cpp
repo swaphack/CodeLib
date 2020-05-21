@@ -3,6 +3,7 @@
 #include <direct.h>
 #include <cstdlib>
 #include <io.h>
+#include "Type/String.h"
 
 #include <sys/types.h>
 #include <stdio.h>
@@ -116,7 +117,20 @@ int32_t Directory::createDirectory(const std::string& dirname)
 		return -1;
 	}
 
-	return mkdir(dirname.c_str());
+	String fullpath = dirname;
+	fullpath = fullpath.replace("\\", "/");
+
+	std::vector<std::string> eachDir;
+	fullpath.split("/", eachDir);
+
+	std::string fullDir;
+	for (size_t i = 0; i < eachDir.size(); i++)
+	{
+		fullDir += eachDir[i] + "/";
+		mkdir(fullDir.c_str());
+	}
+
+	return 0;
 }
 
 int32_t Directory::deleteDirectory(const std::string& dirname)

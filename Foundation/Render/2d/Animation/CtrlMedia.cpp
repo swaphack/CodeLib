@@ -1,6 +1,6 @@
 #include "CtrlMedia.h"
 #include "../UI/CtrlFrame.h"
-#include "Common/Texture/Texture.h"
+#include "Common/Texture/Texture2D.h"
 #include "Common/Audio/CtrlAudioSourceClip.h"
 #include "system.h"
 using namespace render;
@@ -139,7 +139,7 @@ Texture2D* CtrlMedia::getNextTexture()
 	Texture2D* texture2D = CREATE_OBJECT(Texture2D);
 	texture2D->load(image);
 
-	if (!texture2D->isEnable())
+	if (!texture2D->isValid())
 	{
 		delete texture2D;
 		return nullptr;

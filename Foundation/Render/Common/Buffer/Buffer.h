@@ -32,6 +32,10 @@ namespace render
 		*/
 		void bindBuffer();
 		/**
+		*	绑定类型
+		*/
+		void unbindBuffer();
+		/**
 		*	是否有效
 		*/
 		bool isBuffer();

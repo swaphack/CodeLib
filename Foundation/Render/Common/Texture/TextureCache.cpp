@@ -1,6 +1,6 @@
 #include "TextureCache.h"
 #include "Texture.h"
-
+#include "Texture2D.h"
 #include "system.h"
 
 using namespace render;

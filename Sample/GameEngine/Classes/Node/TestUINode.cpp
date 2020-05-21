@@ -185,6 +185,7 @@ void TestUINode::testMask()
 void TestUINode::testStencil()
 {
 	CtrlStencil* pStencil = CREATE_NODE(CtrlStencil);
+	pStencil->setStencilMode(StencilMode::EXCLUDE);
 	pStencil->setPosition(400, 400, 0.0f);
 	pStencil->setVolume(400, 400, 0);
 	this->addChild(pStencil);

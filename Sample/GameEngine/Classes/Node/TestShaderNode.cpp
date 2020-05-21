@@ -18,8 +18,8 @@ void TestShaderNode::testFunc()
 {
 	//this->addLight();
 	//this->testImageShader();
-	this->testClipShader();
-	//this->test3dsModelShader();
+	//this->testClipShader();
+	this->testCubeModelShader();
 	//this->testFbxModelShader();
 	//this->testObjModelShader();
 }
@@ -98,7 +98,7 @@ void TestShaderNode::testImageShader()
 	Utility::updateNodeShader(pImage, false);
 }
 
-void TestShaderNode::testModelShader()
+void TestShaderNode::testCubeModelShader()
 {
 	auto pTexture = G_TEXTURE_CACHE->createTexture2D("Resource/Image/NeHe.png");
 	auto pTexture1 = G_TEXTURE_CACHE->createTexture2D("Resource/Image/1.jpg");

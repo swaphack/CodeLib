@@ -20,7 +20,7 @@ namespace render
 	public:
 		// 复制数据到缓存区
 		static void copyPixels(float x, float y, int width, int height, PixelCopyType copyType);
-		static void drawPixels(int width, int heith, TexImageDataFormat format, TexImageDataType type, const void* value);
+		static void drawPixels(int width, int heith, TextureDataFormat format, TextureDataType type, const void* value);
 	public:
 		static void getFeedBackBuffer(int size, FeedBackMode mode, float* buffer);
 	public:
