@@ -4,6 +4,13 @@
 
 namespace render
 {
+	enum class StencilMode
+	{
+		// 在模板内显示
+		INCLUDE,
+		// 在模板外显示
+		EXCLUDE,
+	};
 	/**
 	*	模板
 	*/
@@ -18,12 +25,21 @@ namespace render
 		void setFunc(StencilFunction func, int ref, uint32_t mask);
 		void setOperator(StencilOpResult stencilFail, StencilOpResult depthFail, StencilOpResult depthPass);
 	public:
+		/**
+		*	设置模板节点
+		*/
 		void setStencilNode(Node* node);
+		/**
+		*	设置模板显示模式
+		*/
+		void setStencilMode(StencilMode mode);
 	protected:
 		virtual void beforeDrawNode();
 		virtual void afterDrawNode();
 	protected:
 	private:
 		Node* _stencilNode = nullptr;
+
+		StencilMode _stencilMode = StencilMode::INCLUDE;
 	};
 }

@@ -192,15 +192,17 @@ void TestUINode::testStencil()
 	CtrlMask* pMask = CREATE_NODE(CtrlMask);
 	pMask->setAnchorPoint(0, 0, 0);
 	pMask->setPosition(0, 0, 0.0f);
-	pMask->setVolume(200, 200, 0);
+	pMask->setVolume(400, 400, 0);
 	pMask->setColor(Color4B(255, 255, 255, 255));
-	//pStencil->addChild(pMask);
-	pStencil->setStencilNode(pMask);
+	pStencil->addChild(pMask);
+	//pStencil->setStencilNode(pMask);
 
 	CtrlImage* pImage = CREATE_NODE(CtrlImage);
 	pImage->setImagePath("Resource/Image/sqi.png");
-	pImage->setVolume(400, 400, 0);
+	pImage->setVolume(300, 300, 0);
+	pImage->setAnchorPoint(0, 0, 0);
+	pImage->setPosition(0, 0, 0.0f);
 	pImage->setScale(1, 1, 1);
 	Utility::updateNodeShader(pImage, false);
-	pStencil->addChild(pImage);
+	pStencil->setStencilNode(pImage);
 }

@@ -48,43 +48,58 @@ void render::CtrlStencil::setStencilNode(Node* node)
 	_stencilNode = node;
 }
 
+void render::CtrlStencil::setStencilMode(StencilMode mode)
+{
+	_stencilMode = mode;
+}
+
 void render::CtrlStencil::beforeDrawNode()
 {
 	CtrlWidget::beforeDrawNode();
 }
 
 void render::CtrlStencil::afterDrawNode()
-{
-	GLState::disable(EnableMode::DEPTH_TEST);
+{	
 	GLState::enable(EnableMode::STENCIL_TEST);
-	GLState::setStencilFunc(StencilFunction::EQUAL, 1, 0xff);
-	GLState::setStencilOp(StencilOpResult::KEEP, StencilOpResult::KEEP, StencilOpResult::KEEP);
+	GLState::setStencilMask(0x1);
+	GLState::setStencilFunc(StencilFunction::ALWAYS, 0x1, 0x1);
+	GLState::setStencilOp(StencilOpResult::KEEP, StencilOpResult::KEEP, StencilOpResult::REPLACE);
+	GLState::setColorMask(false, false, false, false);
+	GLState::setDepthMask(false);
 
-	//////////////////////////////////////////////////////////////////////////
-	//Pixel::dumpStencil();
-
-
-
-	this->drawAllChildren();
-
-	
-
-	//////////////////////////////////////////////////////////////////////////
-
-	GLState::setStencilFunc(StencilFunction::NOTEQUAL, 1, 0xff);
-	GLState::setStencilOp(StencilOpResult::INVERT, StencilOpResult::INVERT, StencilOpResult::KEEP);
-	//////////////////////////////////////////////////////////////////////////
 	if (_stencilNode)
 	{
 		bool hasParent = _stencilNode->getParent() != nullptr;
 		if (!hasParent)
 		{
+			this->addChild(_stencilNode);
 			_stencilNode->updateNode();
 		}
 
 		_stencilNode->drawNode();
+		if (!hasParent)
+		{
+			this->removeChild(_stencilNode);
+		}
 	}
-	//////////////////////////////////////////////////////////////////////////
+	if (_stencilMode == StencilMode::INCLUDE)
+	{
+		GLState::setStencilFunc(StencilFunction::EQUAL, 0x1, 0x1);
+	}
+	else
+	{
+		GLState::setStencilFunc(StencilFunction::NOTEQUAL, 0x1, 0x1);
+	}
+	
+	GLState::setStencilOp(StencilOpResult::REPLACE, StencilOpResult::REPLACE, StencilOpResult::KEEP);
+	GLState::setColorMask(true, true, true, true);
+	GLState::setDepthMask(true);
+
+	this->drawAllChildren();
+
+
+	GLState::disable(EnableMode::STENCIL_TEST);
+	GLState::setStencilMask(0x0);
 
 	if (_bClip)
 	{
@@ -92,6 +107,5 @@ void render::CtrlStencil::afterDrawNode()
 	}
 
 	GLState::disable(EnableMode::STENCIL_TEST);
-	GLState::enable(EnableMode::DEPTH_TEST);
 }
 

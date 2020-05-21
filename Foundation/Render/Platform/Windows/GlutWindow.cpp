@@ -81,7 +81,7 @@ void GlutWindow::createWindow(const std::string& title, int width, int height, i
 	}
 	
 
-	int mode = GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGBA;
+	int mode = GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGBA | GLUT_STENCIL;
 	int left = (GetSystemMetrics(SM_CXSCREEN) - width)* 0.5f;
 	int top = (GetSystemMetrics(SM_CYSCREEN) - height)* 0.5f;
 	
