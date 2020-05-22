@@ -8,7 +8,27 @@ Texture::~Texture()
 	this->releaseTexture();
 }
 
-bool render::Texture::isValid()
+void render::Texture::setTexParameter(TextureParameter name, int value)
+{
+	GLTexture::setTexParameter(_textureTarget, name, value);
+}
+
+void render::Texture::setTexParameter(TextureParameter name, const float* value)
+{
+	GLTexture::setTexParameter(_textureTarget, name, value);
+}
+
+void render::Texture::setTexParameter(TextureParameter name, const int* value)
+{
+	GLTexture::setTexParameter(_textureTarget, name, value);
+}
+
+void render::Texture::setTexParameter(TextureParameter name, float value)
+{
+	GLTexture::setTexParameter(_textureTarget, name, value);
+}
+
+bool render::Texture::isValid() const
 {
 	if (_textureID == 0)
 		return false;
@@ -27,54 +47,73 @@ void render::Texture::unbindTexture()
 	GLTexture::bindTexture(_textureTarget, 0);
 }
 
+void render::Texture::activeTexture(ActiveTextureName unit)
+{
+	GLTexture::activeTexture(ActiveTextureName::TEXTURE0);
+}
+
 void render::Texture::bindTextureUnit(uint32_t unit)
 {
 	GLTexture::bindTextureUnit(unit, _textureID);
 }
 
-void render::Texture::getTextureImage(int level, TextureDataFormat format, TextureDataType type, int size, void* pixels)
+void render::Texture::apply(const TextureSetting& setting)
+{
+	this->setTexParameter(TextureParameter::TEXTURE_MIN_FILTER, (int)setting.minFilter);
+	this->setTexParameter(TextureParameter::TEXTURE_MAG_FILTER, (int)setting.magFilter);
+	this->setTexParameter(TextureParameter::TEXTURE_WRAP_S, (int)setting.wrapS);
+	this->setTexParameter(TextureParameter::TEXTURE_WRAP_T, (int)setting.wrapT);
+}
+
+void render::Texture::getTextureImage(int level, TextureExternalFormat format, TextureExternalDataType type, int size, void* pixels)
 {
 	GLTexture::getTextureImage(_textureID, level, format, type, size, pixels);
 }
 
-void render::Texture::getTextureFormat(sys::ImageDataFormat imgFormat, TextureDataFormat& format, TextureInternalFormat& internalFormat)
+void render::Texture::getTextureFormat(sys::ImageDataFormat imgFormat, TextureExternalFormat& format, TextureInternalBaseFormat& internalFormat, int& size)
 {
 	switch (imgFormat)
 	{
 	case sys::ImageDataFormat::RED:
 	{
-		format = TextureDataFormat::RED;
-		internalFormat = TextureInternalFormat::RED;
+		format = TextureExternalFormat::RED;
+		internalFormat = TextureInternalBaseFormat::RED;
+		size = 1;
 	}
 	break;
 	case sys::ImageDataFormat::RG:
 	{
-		format = TextureDataFormat::RG;
-		internalFormat = TextureInternalFormat::RG;
+		format = TextureExternalFormat::RG;
+		internalFormat = TextureInternalBaseFormat::RG;
+		size = 2;
 	}
 	break;
 	case sys::ImageDataFormat::RGB:
 	{
-		format = TextureDataFormat::RGB;
-		internalFormat = TextureInternalFormat::RGB;
+		format = TextureExternalFormat::RGB;
+		internalFormat = TextureInternalBaseFormat::RGB;
+		size = 3;
 	}
 	break;
 	case sys::ImageDataFormat::RGBA:
 	{
-		format = TextureDataFormat::RGBA;
-		internalFormat = TextureInternalFormat::RGBA;
+		format = TextureExternalFormat::RGBA;
+		internalFormat = TextureInternalBaseFormat::RGBA;
+		size = 4;
 	}
 	break;
 	case sys::ImageDataFormat::BGR:
 	{
-		format = TextureDataFormat::BGR;
-		internalFormat = TextureInternalFormat::RGB;
+		format = TextureExternalFormat::BGR;
+		internalFormat = TextureInternalBaseFormat::RGB;
+		size = 3;
 	}
 	break;
 	case sys::ImageDataFormat::BGRA:
 	{
-		format = TextureDataFormat::BGRA;
-		internalFormat = TextureInternalFormat::RGBA;
+		format = TextureExternalFormat::BGRA;
+		internalFormat = TextureInternalBaseFormat::RGBA;
+		size = 4;
 	}
 	break;
 	default:
@@ -82,44 +121,50 @@ void render::Texture::getTextureFormat(sys::ImageDataFormat imgFormat, TextureDa
 	}
 }
 
-void render::Texture::getStorageTextureFormat(sys::ImageDataFormat imgFormat, TextureDataFormat& format, TextureInternalFormat& internalFormat)
+void render::Texture::getStorageTextureFormat(sys::ImageDataFormat imgFormat, TextureExternalFormat& format, TextureInternalSizedFormat& internalFormat, int& size)
 {
 	switch (imgFormat)
 	{
 	case sys::ImageDataFormat::RED:
 	{
-		format = TextureDataFormat::RED;
-		internalFormat = TextureInternalFormat::R8;
+		format = TextureExternalFormat::RED;
+		internalFormat = TextureInternalSizedFormat::R8;
+		size = 1;
 	}
 	break;
 	case sys::ImageDataFormat::RG:
 	{
-		format = TextureDataFormat::RG;
-		internalFormat = TextureInternalFormat::RG8;
+		format = TextureExternalFormat::RG;
+		internalFormat = TextureInternalSizedFormat::RG8;
+		size = 2;
 	}
 	break;
 	case sys::ImageDataFormat::RGB:
 	{
-		format = TextureDataFormat::RGB;
-		internalFormat = TextureInternalFormat::RGB8;
+		format = TextureExternalFormat::RGB;
+		internalFormat = TextureInternalSizedFormat::RGB8;
+		size = 3;
 	}
 	break;
 	case sys::ImageDataFormat::RGBA:
 	{
-		format = TextureDataFormat::RGBA;
-		internalFormat = TextureInternalFormat::RGBA8;
+		format = TextureExternalFormat::RGBA;
+		internalFormat = TextureInternalSizedFormat::RGBA8;
+		size = 4;
 	}
 	break;
 	case sys::ImageDataFormat::BGR:
 	{
-		format = TextureDataFormat::BGR;
-		internalFormat = TextureInternalFormat::RGB8;
+		format = TextureExternalFormat::BGR;
+		internalFormat = TextureInternalSizedFormat::RGB8;
+		size = 3;
 	}
 	break;
 	case sys::ImageDataFormat::BGRA:
 	{
-		format = TextureDataFormat::BGRA;
-		internalFormat = TextureInternalFormat::RGBA8;
+		format = TextureExternalFormat::BGRA;
+		internalFormat = TextureInternalSizedFormat::RGBA8;
+		size = 4;
 	}
 	break;
 	default:

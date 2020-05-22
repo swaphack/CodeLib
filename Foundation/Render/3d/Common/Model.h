@@ -12,8 +12,8 @@ namespace sys
 
 namespace render
 {
-	class Mesh;
-	class Material;
+	class Meshes;
+	class Materials;
 
 	// Ä£ÐÍ
 	class Model : public DrawNode

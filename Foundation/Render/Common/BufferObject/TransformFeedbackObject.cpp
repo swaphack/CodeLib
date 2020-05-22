@@ -19,7 +19,7 @@ uint32_t render::TransformFeedbackObject::getTransformFeedbackID() const
 	return _transformFeedbackID;
 }
 
-bool render::TransformFeedbackObject::isValid()
+bool render::TransformFeedbackObject::isValid() const
 {
 	return GLTransformFeedback::isTransformFeedback(_transformFeedbackID);
 }

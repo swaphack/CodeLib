@@ -1,9 +1,10 @@
 #pragma once
 
 #include "system.h"
-#include "render.h"
+#include "Layout/ui_common.h"
 #include <map>
 #include <string>
+#include "render.h"
 
 namespace ui
 {

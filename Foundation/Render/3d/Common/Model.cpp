@@ -4,6 +4,8 @@
 #include "Common/View/import.h"
 #include "Common/DrawNode/import.h"
 #include "Common/Fragment/import.h"
+#include "Common/Material/import.h"
+#include "Common/Mesh/import.h"
 
 using namespace render;
 
@@ -25,13 +27,9 @@ bool render::Model::init()
 
 	_notify->addListen(NodeNotifyType::MODEL, [this](){
 		_loadModel = true;
-		if (_material)
+		if (_materiales)
 		{
-			_material->updateMatTexture();
-		}
-		if (_mesh)
-		{
-			_mesh->initBufferData();
+			_materiales->updateMatTexture();
 		}
 	});
 
@@ -60,8 +58,8 @@ void render::Model::setModelData(sys::ModelDetail* detail)
 	{
 		return;
 	}
-	_material->setModelDetail(detail);
-	_mesh->setModelDetail(detail);
+	_materiales->setModelDetail(detail);
+	_meshes->setModelDetail(detail);
 	this->notify(NodeNotifyType::MODEL);
 }
 

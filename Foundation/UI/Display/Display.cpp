@@ -7,7 +7,7 @@ using namespace ui;
 
 Display::Display()
 :m_pLayout(nullptr)
-,m_eLayoutDirection(ELD_NONE)
+,m_eLayoutDirection(LayoutDirection::NONE)
 , m_pRoot(nullptr)
 {
 
@@ -154,4 +154,9 @@ void Display::autoResize()
 	math::Size viewSize(render::Tool::getGLViewWidth(), render::Tool::getGLViewHeight());
 
 	this->onViewSizeChanged(viewSize);
+}
+
+const math::Size& ui::Display::getViewSize()
+{
+	return m_sViewSize;
 }

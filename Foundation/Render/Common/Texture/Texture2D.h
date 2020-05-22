@@ -9,14 +9,6 @@ namespace sys
 
 namespace render
 {
-	struct TextureSetting2D
-	{
-		TextureMinFilter minFilter = TextureMinFilter::LINEAR;
-		TextureMagFilter magFilter = TextureMagFilter::LINEAR;
-		TextureWrapMode wrapS = TextureWrapMode::CLAMP;
-		TextureWrapMode wrapT = TextureWrapMode::CLAMP;
-	};
-
 	// 2d纹理
 	class Texture2D : public Texture
 	{
@@ -27,17 +19,26 @@ namespace render
 		/**
 		*	分配纹理缓存
 		*/
-		void setTextureStorage(int levels, TextureInternalFormat internalFormat, int width, int height);
+		void setTextureStorage(int levels, TextureInternalSizedFormat internalFormat, int width, int height);
 		/**
 		*	设置纹理数据
 		*/
-		void setTextureSubImage(int level, int xoffset, int yoffset, int width, int height, TextureDataFormat format, TextureDataType type, const void* pixels);
+		void setTextureSubImage(int level, int xoffset, int yoffset, int width, int height, TextureExternalFormat format, TextureExternalDataType type, const void* pixels);
+	public:
+		/**
+		*	纹理压缩
+		*/
+		void compressedTextureImage(int level, TextureCompressedInternalFormat format, int width, int height, int imageSize, const void* data);
+		/**
+		*	纹理压缩
+		*/
+		void compressedTextureSubImage(int level, int xoffset, int yoffset, int width, int height, TextureCompressedInternalFormat format, int imageSize, const void* data);
 	public:
 		/**
 		*	设置纹理
 		*/
-		void setTextureImage(int level, TextureInternalFormat internalFormat, int width, int height, int border, TextureDataFormat format, TextureDataType type, const void* data);
+		void setTextureImage(int level, TextureInternalBaseFormat internalFormat, int width, int height, int border, TextureExternalFormat format, TextureExternalDataType type, const void* data);
 	public:
-		virtual void load(const sys::ImageDetail* image, const TextureSetting2D& setting = TextureSetting2D());
+		virtual void load(const sys::ImageDetail* image, const TextureSetting& setting = TextureSetting());
 	};
 }

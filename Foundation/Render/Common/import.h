@@ -17,3 +17,5 @@
 #include "Fragment/import.h"
 #include "Particle/import.h"
 #include "Transform/import.h"
+#include "Mesh/import.h"
+#include "Material/import.h"

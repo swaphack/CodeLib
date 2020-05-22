@@ -4,6 +4,8 @@
 
 namespace render
 {
+	class Materials;
+	class Meshes;
 	class Material;
 	class Mesh;
 	class FragmentOperator;
@@ -24,15 +26,24 @@ namespace render
 		/** 
 		*	材质
 		*/
-		Material* getMaterial();
+		Materials* getMaterials();
 		/**
 		*	网格
 		*/
-		Mesh* getMesh();
+		Meshes* getMeshes();
 		/**
 		*	片元处理
 		*/
 		FragmentOperator* getFragOperator();
+	public:
+		/**
+		*	材质
+		*/
+		Material* getMaterial(int id = 0);
+		/**
+		*	网格
+		*/
+		Mesh* getMesh(int id = 0);
 	protected:
 		/**
 		*	绘制前工作
@@ -57,9 +68,9 @@ namespace render
 		void drawWithBufferObject();
 	protected:
 		// 材质
-		Material* _material = nullptr;
+		Materials* _materiales = nullptr;
 		// 网格
-		Mesh* _mesh = nullptr;
+		Meshes* _meshes = nullptr;
 		// 片元处理
 		FragmentOperator* _fragOperator = nullptr;
 	};

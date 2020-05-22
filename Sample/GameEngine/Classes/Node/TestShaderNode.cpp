@@ -194,7 +194,7 @@ void TestShaderNode::testClipShader()
 
 
 	pModel->getMaterial()->setShaderProgram(pProgram);
-	Utility::initShaderAttrib(pModel->getMaterial());
+	Utility::initShaderAttrib(pModel->getMaterials());
 	Utility::runRotateAction(pModel);
 
 

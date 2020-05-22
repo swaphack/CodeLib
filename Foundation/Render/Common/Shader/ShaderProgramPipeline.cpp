@@ -19,7 +19,7 @@ void render::ShaderProgramPipeline::setProgramPipelineID(uint32_t id)
 	_programPipelineID = id;
 }
 
-uint32_t render::ShaderProgramPipeline::getProgramPipelineID()
+uint32_t render::ShaderProgramPipeline::getProgramPipelineID() const
 {
 	return _programPipelineID;
 }
@@ -29,7 +29,7 @@ void render::ShaderProgramPipeline::bind()
 	GLProgramPipelines::bindProgramPipeline(getProgramPipelineID());
 }
 
-bool render::ShaderProgramPipeline::isValid()
+bool render::ShaderProgramPipeline::isValid() const
 {
 	return GLProgramPipelines::isProgramPipeline(getProgramPipelineID());
 }

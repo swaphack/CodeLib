@@ -7,8 +7,8 @@
 namespace render
 {
 	class Texture2D;
-	class Material;
-	class Mesh;
+	class Materials;
+	class Meshes;
 
 	// 帧图片，默认逆时针绘制
 	class CtrlFrame : public CtrlWidget
@@ -34,8 +34,8 @@ namespace render
 		// 是否垂直翻转
 		bool isFlipY();
 	public:
-		Material* getMaterial();
-		Mesh* getMesh();
+		Materials* getMaterials();
+		Meshes* getMeshes();
 	protected:
 		void onTextureChange();
 

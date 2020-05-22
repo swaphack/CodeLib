@@ -13,14 +13,15 @@ namespace render
 	class VertexArrayObject;
 	class ArrayBuffer;
 	class ElementArrayBuffer;
-	class Material;
+	class Materials;
 	class Node;
+	class Mesh;
 
-	class Mesh : public sys::Object
+	class Meshes : public sys::Object
 	{
 	public:
-		Mesh();
-		virtual ~Mesh();
+		Meshes();
+		virtual ~Meshes();
 	public:
 		/**
 		*	模型数据
@@ -30,7 +31,7 @@ namespace render
 		/**
 		*	网格数据
 		*/
-		const std::map<int, sys::MeshDetail*>& getMeshes() const;
+		const std::map<int, Mesh*>& getMeshes() const;
 		/**
 		*	设置模型网格
 		*/
@@ -46,34 +47,22 @@ namespace render
 		/**
 		*	获取模型网格
 		*/
-		sys::MeshDetail* getMesh(int id);
+		Mesh* getMesh(int id);
 	public:
 		/**
 		*	使用缓存对象绘制
 		*/
-		void drawWithBufferObject(Node* node, Material* mat);
+		void drawWithBufferObject(Node* node, Materials* mats);
 		/**
 		*	使用客户端数组绘制
 		*/
-		void drawWithClientArray(Node* node, Material* mat);
-		/**
-		*	初始化
-		*/
-		void initBufferData();
+		void drawWithClientArray(Node* node, Materials* mats);
 		/**
 		*	更新顶点信息
 		*/
 		void updateBufferData();
-		/**
-		*	移除所有缓存对象
-		*/
-		void removeAllBufferObjects();
 	private:
 		// 纹理网格
-		std::map<int, sys::MeshDetail*> _meshes;
-
-		std::map<uint32_t, VertexArrayObject*> _vertexArrayObjects;
-		std::map<uint32_t, ElementArrayBuffer*> _indiceObjects;
-		std::map<uint32_t, ArrayBuffer*> _vertexObjects;
+		std::map<int, Mesh*> _meshes;
 	};
 }

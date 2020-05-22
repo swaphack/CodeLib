@@ -22,7 +22,7 @@ namespace render
 		/**
 		*	属性编号
 		*/
-		uint32_t getProgramPipelineID();
+		uint32_t getProgramPipelineID() const;
 	public:
 		/**
 		*	绑定
@@ -31,7 +31,7 @@ namespace render
 		/**
 		*	是否可用
 		*/
-		bool isValid();
+		bool isValid() const;
 		/**
 		*	验证是否可用
 		*/

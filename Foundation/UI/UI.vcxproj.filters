@@ -44,7 +44,6 @@
     <ClInclude Include="File\Load\LayoutLoader.h">
       <Filter>File\Load</Filter>
     </ClInclude>
-    <ClInclude Include="macros.h" />
     <ClInclude Include="File\Load\define.h">
       <Filter>File\Load</Filter>
     </ClInclude>
@@ -63,9 +62,11 @@
     <ClInclude Include="LayoutEx\LayoutEx.h">
       <Filter>LayoutEx</Filter>
     </ClInclude>
-    <ClInclude Include="ui_common.h" />
     <ClInclude Include="File\Load\WidgetLoader.h">
       <Filter>File\Load</Filter>
+    </ClInclude>
+    <ClInclude Include="Layout\ui_common.h">
+      <Filter>Layout</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

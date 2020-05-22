@@ -22,7 +22,7 @@ namespace render
 		/**
 		*	是否可用
 		*/
-		bool isValid();
+		bool isValid() const;
 	public:
 		/**
 		*	绑定顶点反馈对象

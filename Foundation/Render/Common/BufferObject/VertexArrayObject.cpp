@@ -31,6 +31,11 @@ void render::VertexArrayObject::bindVertexArray()
 	GLVertexArrays::bindVertexArray(_vaoID);
 }
 
+void render::VertexArrayObject::unbindVertexArray()
+{
+	GLVertexArrays::bindVertexArray(0);
+}
+
 void render::VertexArrayObject::bindBuffer()
 {
 	if (getBuffer() == nullptr)

@@ -14,11 +14,11 @@ namespace render
 		/**
 		*	分配纹理缓存
 		*/
-		void setTextureStorage(int samples, TextureInternalFormat internalFormat, int width, int height, bool fixedSamplelocations);
+		void setTextureStorage(int samples, TextureInternalSizedFormat internalFormat, int width, int height, bool fixedSamplelocations);
 	public:
 		/**
 		*	设置纹理
 		*/
-		void setTextureImage(int samples, TextureInternalFormat internalFormat, int width, int height, bool fixedSamplelocations);
+		void setTextureImage(int samples, TextureInternalBaseFormat internalFormat, int width, int height, bool fixedSamplelocations);
 	};
 }

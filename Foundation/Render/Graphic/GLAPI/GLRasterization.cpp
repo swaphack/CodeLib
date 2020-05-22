@@ -22,7 +22,7 @@ void GLRasterization::copyPixels(float x, float y, int width, int height, PixelC
 	glCopyPixels(x, y, width, height, (GLenum)copyType);
 }
 
-void GLRasterization::drawPixels(int width, int heith, TextureDataFormat format, TextureDataType type, const void* value)
+void GLRasterization::drawPixels(int width, int heith, TextureExternalFormat format, TextureExternalDataType type, const void* value)
 {
 	glDrawPixels(width, heith, (GLenum)format, (GLenum)type, value);
 }

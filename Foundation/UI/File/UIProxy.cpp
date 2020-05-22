@@ -348,7 +348,7 @@ bool UIProxy::saveRoot(Layout* layout, tinyxml2::XMLDocument* document)
 	tinyxml2::XMLElement* pRootNode = document->NewElement(LAYOUT_ROOT_NAME);
 	pRootNode->SetAttribute(LAYOUT_SIZE_WIDTH, _designSize.getWidth());
 	pRootNode->SetAttribute(LAYOUT_SIZE_HEIGHT, _designSize.getHeight());
-	pRootNode->SetAttribute(LAYOUT_DIRECTION, _designDirection);
+	pRootNode->SetAttribute(LAYOUT_DIRECTION, (int)_designDirection);
 	document->InsertEndChild(pRootNode);
 
 	tinyxml2::XMLElement* pChildNode = document->NewElement(ELEMENT_NAME_LAYOUT);

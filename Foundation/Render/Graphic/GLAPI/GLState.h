@@ -38,7 +38,7 @@ namespace render
 		static void getInteger(GetTarget pname, int* value);	
 		static void getInteger(uint32_t pname, int* value);
 	public:		
-		static void getTexImage(TextureTarget target, int level, TextureInternalFormat internalFormat, TextureDataType pixelType, void* data);
+		static void getTexImage(TextureTarget target, int level, TextureInternalSizedFormat internalFormat, TextureExternalDataType pixelType, void* data);
 		static void getTexLevelParameter(TextureTarget target, int level, GetTextureParameter parameter, float* value);
 		static void getTexParameter(TextureTarget target, GetTextureParameter parameter, int* value);
 		static void getTexParameter(TextureTarget target, GetTextureParameter parameter, float* value);

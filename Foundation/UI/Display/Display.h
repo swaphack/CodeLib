@@ -1,7 +1,8 @@
 #pragma once
 
-#include "macros.h"
-#include "ui_common.h"
+#include "system.h"
+#include "render.h"
+#include "Layout/ui_common.h"
 
 namespace ui
 {

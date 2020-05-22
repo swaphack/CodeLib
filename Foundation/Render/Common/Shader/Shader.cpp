@@ -15,12 +15,12 @@ Shader::~Shader()
 	this->releaseShader();
 }
 
-uint32_t Shader::getShaderID()
+uint32_t Shader::getShaderID() const
 {
 	return _shaderID;
 }
 
-ShaderType Shader::getShaderType()
+ShaderType Shader::getShaderType() const
 {
 	return _shaderType;
 }
@@ -149,7 +149,7 @@ bool render::Shader::loadFromBindary(const void* binary, int length)
 	//GLShader::setShaderBinary(1, &_shaderID, GL_SHADER_BINARY_FORMAT_SPIR_V, binary, length);
 }
 
-bool render::Shader::isValid()
+bool render::Shader::isValid() const
 {
 	return GLShader::isShader(_shaderID);
 }

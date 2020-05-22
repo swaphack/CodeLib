@@ -291,12 +291,6 @@
     <ClCompile Include="Common\DrawNode\PrimitiveNode.cpp">
       <Filter>Common\DrawNode</Filter>
     </ClCompile>
-    <ClCompile Include="Common\DrawNode\Material.cpp">
-      <Filter>Common\DrawNode</Filter>
-    </ClCompile>
-    <ClCompile Include="Common\DrawNode\Mesh.cpp">
-      <Filter>Common\DrawNode</Filter>
-    </ClCompile>
     <ClCompile Include="Common\DrawNode\DrawNode.cpp">
       <Filter>Common\DrawNode</Filter>
     </ClCompile>
@@ -428,6 +422,21 @@
     </ClCompile>
     <ClCompile Include="Common\Texture\TextureCubeMapArray.cpp">
       <Filter>Common\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Texture\Sampler.cpp">
+      <Filter>Common\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Mesh\Mesh.cpp">
+      <Filter>Common\Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Mesh\Meshes.cpp">
+      <Filter>Common\Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Material\Materials.cpp">
+      <Filter>Common\Material</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Material\Material.cpp">
+      <Filter>Common\Material</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -849,12 +858,6 @@
     <ClInclude Include="Common\DrawNode\PrimitiveNode.h">
       <Filter>Common\DrawNode</Filter>
     </ClInclude>
-    <ClInclude Include="Common\DrawNode\Mesh.h">
-      <Filter>Common\DrawNode</Filter>
-    </ClInclude>
-    <ClInclude Include="Common\DrawNode\Material.h">
-      <Filter>Common\DrawNode</Filter>
-    </ClInclude>
     <ClInclude Include="Common\DrawNode\DrawNode.h">
       <Filter>Common\DrawNode</Filter>
     </ClInclude>
@@ -996,6 +999,27 @@
     <ClInclude Include="Common\Texture\TextureCubeMapArray.h">
       <Filter>Common\Texture</Filter>
     </ClInclude>
+    <ClInclude Include="Common\Texture\Sampler.h">
+      <Filter>Common\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Mesh\Mesh.h">
+      <Filter>Common\Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Mesh\Meshes.h">
+      <Filter>Common\Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Material\import.h">
+      <Filter>Common\Material</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Mesh\import.h">
+      <Filter>Common\Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Material\Materials.h">
+      <Filter>Common\Material</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Material\Material.h">
+      <Filter>Common\Material</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Common">
@@ -1096,6 +1120,12 @@
     </Filter>
     <Filter Include="Common\BufferObject">
       <UniqueIdentifier>{511070b7-0cc7-4062-98b2-c564bd382067}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common\Material">
+      <UniqueIdentifier>{3eb74b0e-e56a-42aa-82b4-b4c2c419ba32}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common\Mesh">
+      <UniqueIdentifier>{850d567f-bc86-451b-ba17-8441dbca1c7a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

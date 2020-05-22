@@ -21,7 +21,7 @@ ShaderProgram::~ShaderProgram()
 	this->releaseProgram();
 }
 
-uint32_t ShaderProgram::getProgramID()
+uint32_t ShaderProgram::getProgramID() const
 {
 	return _programID;
 }
@@ -94,9 +94,9 @@ void ShaderProgram::use()
 	GLDebug::showError();
 }
 
-void ShaderProgram::useNone()
+void ShaderProgram::unuse()
 {
-	//GLShader::useProgram(0);
+	GLShader::useProgram(0);
 }
 
 void ShaderProgram::releaseProgram()
@@ -219,7 +219,7 @@ bool ShaderProgram::loadVertexAndFragmentShader(const std::string& vpath, const 
 	return true;
 }
 
-bool render::ShaderProgram::isValid()
+bool render::ShaderProgram::isValid() const
 {
 	return GLShader::isProgram(_programID);
 }

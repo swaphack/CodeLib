@@ -63,26 +63,6 @@ void GLTexture::setTexParameter(TextureTarget target, TextureParameter paramType
 	glTexParameteri((GLenum)target, (GLenum)paramType, paramValue);
 }
 
-void GLTexture::setTexParameterMinFilter2D(TextureMinFilter paramValue)
-{
-	setTexParameter(TextureTarget::TEXTURE_2D, TextureParameter::TEXTURE_MIN_FILTER, (int)paramValue);
-}
-
-void GLTexture::setTexParameterMagFilter2D(TextureMagFilter paramValue)
-{
-	setTexParameter(TextureTarget::TEXTURE_2D, TextureParameter::TEXTURE_MAG_FILTER, (int)paramValue);
-}
-
-void GLTexture::setTexParameterWrapS2D(TextureWrapMode paramValue)
-{
-	setTexParameter(TextureTarget::TEXTURE_2D, TextureParameter::TEXTURE_WRAP_S, (int)paramValue);
-}
-
-void GLTexture::setTexParameterWrapT2D(TextureWrapMode paramValue)
-{
-	setTexParameter(TextureTarget::TEXTURE_2D, TextureParameter::TEXTURE_WRAP_T, (int)paramValue);
-}
-
 void GLTexture::setTexGenMode(TextureCoordName name, TextureGenParameter paramType)
 {
 	glTexGeni((GLenum)name, (GLenum)TextureGenParameter::TEXTURE_GEN_MODE, (int)paramType);
@@ -166,59 +146,59 @@ void GLTexture::bindTextures(uint32_t first, int count, const uint32_t *textures
 	glBindTextures(first, count, textures);
 }
 
-void GLTexture::clearTexImage(uint32_t texture, int level, TextureDataFormat format, TextureDataType type, const void* data)
+void GLTexture::clearTexImage(uint32_t texture, int level, TextureExternalFormat format, TextureExternalDataType type, const void* data)
 {
 	glClearTexImage(texture, level, (GLenum)format, (GLenum)type, data);
 }
 
-void GLTexture::clearTexSubImage(uint32_t texture, int level, int xoffset, int yoffset, int zoffset, int width, int height, int depth, TextureDataFormat format, TextureDataType type, const void* data)
+void GLTexture::clearTexSubImage(uint32_t texture, int level, int xoffset, int yoffset, int zoffset, int width, int height, int depth, TextureExternalFormat format, TextureExternalDataType type, const void* data)
 {
 	glClearTexSubImage(texture, level, xoffset, yoffset, zoffset, width, height, depth, (GLenum)format, (GLenum)type, data);
 }
 
-void GLTexture::compressedTexImage1D(TextureTarget1D target, int level, TexCompressedInternalFormat internalFormat, int width, int imageSize, const void* data)
+void GLTexture::compressedTexImage1D(TextureTarget1D target, int level, TextureCompressedInternalFormat internalFormat, int width, int imageSize, const void* data)
 {
 	glCompressedTexImage1D((GLenum)target, level, (GLenum)internalFormat, width, 0, imageSize, data);
 }
 
-void GLTexture::compressedTexImage2D(TextureTarget2D target, int level, TexCompressedInternalFormat internalFormat, int width, int height, int imageSize, const void* data)
+void GLTexture::compressedTexImage2D(TextureTarget2D target, int level, TextureCompressedInternalFormat internalFormat, int width, int height, int imageSize, const void* data)
 {
 	glCompressedTexImage2D((GLenum)target, level, (GLenum)internalFormat, width, height, 0, imageSize, data);
 }
 
-void GLTexture::compressedTexImage3D(TextureTarget3D target, int level, TexCompressedInternalFormat internalFormat, int width, int height, int depth, int imageSize, const void* data)
+void GLTexture::compressedTexImage3D(TextureTarget3D target, int level, TextureCompressedInternalFormat internalFormat, int width, int height, int depth, int imageSize, const void* data)
 {
 	glCompressedTexImage3D((GLenum)target, level, (GLenum)internalFormat, width, height, depth, 0, imageSize, data);
 }
 
-void GLTexture::compressedTexSubImage1D(TextureTarget1D target, int level, int xoffset, int width, int imageSize, const void* data)
+void GLTexture::compressedTexSubImage1D(TextureTarget1D target, int level, int xoffset, int width, TextureCompressedInternalFormat internalFormat, int imageSize, const void* data)
 {
-	glCompressedTexSubImage1D((GLenum)target, level, xoffset, width, 0, imageSize, data);
+	glCompressedTexSubImage1D((GLenum)target, level, xoffset, width, (GLenum)internalFormat, imageSize, data);
 }
 
-void GLTexture::compressedTextureSubImage1D(uint32_t texture, int level, int xoffset, int width, int imageSize, const void* data)
+void GLTexture::compressedTextureSubImage1D(uint32_t texture, int level, int xoffset, int width, TextureCompressedInternalFormat internalFormat, int imageSize, const void* data)
 {
-	glCompressedTextureSubImage1D(texture, level, xoffset, width, 0, imageSize, data);
+	glCompressedTextureSubImage1D(texture, level, xoffset, width, (GLenum)internalFormat, imageSize, data);
 }
 
-void GLTexture::compressedTexSubImage2D(TextureTarget2D target, int level, int xoffset, int yoffset, int width, int height, int imageSize, const void* data)
+void GLTexture::compressedTexSubImage2D(TextureTarget2D target, int level, int xoffset, int yoffset, int width, int height, TextureCompressedInternalFormat internalFormat, int imageSize, const void* data)
 {
-	glCompressedTexSubImage2D((GLenum)target, level, xoffset, yoffset, width, height, 0, imageSize, data);
+	glCompressedTexSubImage2D((GLenum)target, level, xoffset, yoffset, width, height, (GLenum)internalFormat, imageSize, data);
 }
 
-void GLTexture::compressedTextureSubImage2D(uint32_t texture, int level, int xoffset, int yoffset, int width, int height, int imageSize, const void* data)
+void GLTexture::compressedTextureSubImage2D(uint32_t texture, int level, int xoffset, int yoffset, int width, int height, TextureCompressedInternalFormat internalFormat, int imageSize, const void* data)
 {
-	glCompressedTextureSubImage2D(texture, level, xoffset, yoffset, width, height, 0, imageSize, data);
+	glCompressedTextureSubImage2D(texture, level, xoffset, yoffset, width, height, (GLenum)internalFormat, imageSize, data);
 }
 
-void GLTexture::compressedTexSubImage3D(TextureTarget3D target, int level, int xoffset, int yoffset, int zoffset, int width, int height, int depth, int imageSize, const void* data)
+void GLTexture::compressedTexSubImage3D(TextureTarget3D target, int level, int xoffset, int yoffset, int zoffset, int width, int height, int depth, TextureCompressedInternalFormat internalFormat, int imageSize, const void* data)
 {
-	glCompressedTexSubImage3D((GLenum)target, level, xoffset, yoffset, zoffset, width, height, depth, 0, imageSize, data);
+	glCompressedTexSubImage3D((GLenum)target, level, xoffset, yoffset, zoffset, width, height, depth, (GLenum)internalFormat, imageSize, data);
 }
 
-void GLTexture::compressedTextureSubImage3D(uint32_t texture, int level, int xoffset, int yoffset, int zoffset, int width, int height, int depth, int imageSize, const void* data)
+void GLTexture::compressedTextureSubImage3D(uint32_t texture, int level, int xoffset, int yoffset, int zoffset, int width, int height, int depth, TextureCompressedInternalFormat internalFormat, int imageSize, const void* data)
 {
-	glCompressedTextureSubImage3D(texture, level, xoffset, yoffset, zoffset, width, height, depth, 0, imageSize, data);
+	glCompressedTextureSubImage3D(texture, level, xoffset, yoffset, zoffset, width, height, depth, (GLenum)internalFormat, imageSize, data);
 }
 
 void GLTexture::copyImageSubData(uint32_t srcName, GLenum srcTarget, int srcLevel, int srcX, int srcY, int srcZ, uint32_t destName, GLenum destTarget, int destLevel, int destX, int destY, int destZ, int srcWidth, int srcHeight, int srcDepth)
@@ -291,12 +271,12 @@ void GLTexture::getCompressedTextureSubImage(uint32_t texture, int level, int xo
 	glGetCompressedTextureSubImage(texture, level, xoffset, yoffset, zoffset, width, height, depth, bufSize, pixels);
 }
 
-void GLTexture::getTexImage(TextureTarget target, int level, TextureDataFormat format, TextureDataType type, void* pixels)
+void GLTexture::getTexImage(TextureTarget target, int level, TextureExternalFormat format, TextureExternalDataType type, void* pixels)
 {
 	glGetTexImage((GLenum)target, level, (GLenum)format, (GLenum)type, pixels);
 }
 
-void GLTexture::getTextureImage(uint32_t texture, int level, TextureDataFormat format, TextureDataType type, int bufSize, void* pixels)
+void GLTexture::getTextureImage(uint32_t texture, int level, TextureExternalFormat format, TextureExternalDataType type, int bufSize, void* pixels)
 {
 	glGetTextureImage(texture, level, (GLenum)format, (GLenum)type, bufSize, pixels);
 }
@@ -321,7 +301,7 @@ void GLTexture::getTextureParameter(uint32_t texture, GetTexParameter name, floa
 	glGetTextureParameterfv(texture, (GLenum)name, params);
 }
 
-void GLTexture::getTextureSubImage(uint32_t texture, int level, int xoffset, int yoffset, int zoffset, int width, int height, int depth, TextureDataFormat format, TextureDataType type, int bufSize, void* pixels)
+void GLTexture::getTextureSubImage(uint32_t texture, int level, int xoffset, int yoffset, int zoffset, int width, int height, int depth, TextureExternalFormat format, TextureExternalDataType type, int bufSize, void* pixels)
 {
 	glGetTextureSubImage(texture, level, xoffset, yoffset, zoffset, width, height, depth, (GLenum)format, (GLenum)type, bufSize, pixels);
 }
@@ -331,7 +311,7 @@ void GLTexture::invalidateTexImage(uint32_t texture, int level)
 	glInvalidateTexImage(texture, level);
 }
 
-void GLTexture::getTexImage(TextureTarget target, int level, TextureDataFormat format, TextureDataType type, int bufSize, void* pixels)
+void GLTexture::getTexImage(TextureTarget target, int level, TextureExternalFormat format, TextureExternalDataType type, int bufSize, void* pixels)
 {
 
 }
@@ -361,67 +341,67 @@ void GLTexture::setTextureBufferRange(uint32_t texture, TexSizedInternalFormat f
 	glTextureBufferRange(texture, (GLenum)format, buff, offset, size);
 }
 
-void GLTexture::setTexImage1D(TextureTarget1D target, int level, TextureInternalFormat internalFormat, int width, int border, TextureDataFormat format, TextureDataType type, const void* data)
+void GLTexture::setTexImage1D(TextureTarget1D target, int level, TextureInternalBaseFormat internalFormat, int width, int border, TextureExternalFormat format, TextureExternalDataType type, const void* data)
 {
 	glTexImage1D((GLenum)target, level, (GLenum)internalFormat, width, border, (GLenum)format, (GLenum)type, data);
 }
 
-void GLTexture::setTexImage2D(TextureTarget2D target, int level, TextureInternalFormat internalFormat, int width, int heigth, int border, TextureDataFormat format, TextureDataType type, const void* data)
+void GLTexture::setTexImage2D(TextureTarget2D target, int level, TextureInternalBaseFormat internalFormat, int width, int heigth, int border, TextureExternalFormat format, TextureExternalDataType type, const void* data)
 {
 	glTexImage2D((GLenum)target, level, (GLenum)internalFormat, width, heigth, border, (GLenum)format, (GLenum)type, data);
 }
 
-void GLTexture::setTexImage3D(TextureTarget3D target, int level, TextureInternalFormat internalFormat, int width, int heigth, int depth, int border, TextureDataFormat format, TextureDataType type, const void* data)
+void GLTexture::setTexImage3D(TextureTarget3D target, int level, TextureInternalBaseFormat internalFormat, int width, int heigth, int depth, int border, TextureExternalFormat format, TextureExternalDataType type, const void* data)
 {
 	glTexImage3D((GLenum)target, level, (GLenum)internalFormat, width, heigth, depth, border, (GLenum)format, (GLenum)type, data);
 }
 
-void GLTexture::setTexImage2DMultisample(Texture2DMultisampleTarget target, int samples, TextureInternalFormat internalformat, int width, int heigth, bool fixedsamplelocations)
+void GLTexture::setTexImage2DMultisample(Texture2DMultisampleTarget target, int samples, TextureInternalBaseFormat internalformat, int width, int heigth, bool fixedsamplelocations)
 {
 	glTexImage2DMultisample((GLenum)target, samples, (GLenum)internalformat, width, heigth, fixedsamplelocations ? GL_TRUE : GL_FALSE);
 }
 
-void GLTexture::setTexImage3DMultisample(Texture3DMultisampleTarget target, int samples, TextureInternalFormat internalformat, int width, int heigth, int depth, bool fixedsamplelocations)
+void GLTexture::setTexImage3DMultisample(Texture3DMultisampleTarget target, int samples, TextureInternalBaseFormat internalformat, int width, int heigth, int depth, bool fixedsamplelocations)
 {
 	glTexImage3DMultisample((GLenum)target, samples, (GLenum)internalformat, width, heigth, depth, fixedsamplelocations ? GL_TRUE : GL_FALSE);
 }
 
-void GLTexture::setTexStorage1D(TextureTarget1D target, int level, TextureInternalFormat internalFormat, int width)
+void GLTexture::setTexStorage1D(TextureTarget1D target, int level, TextureInternalSizedFormat internalFormat, int width)
 {
 	glTexStorage1D((GLenum)target, level, (GLenum)internalFormat, width);
 }
 
-void GLTexture::setTexStorage2D(TextureTarget2D target, int level, TextureInternalFormat internalFormat, int width, int heigth)
+void GLTexture::setTexStorage2D(TextureTarget2D target, int level, TextureInternalSizedFormat internalFormat, int width, int heigth)
 {
 	glTexStorage2D((GLenum)target, level, (GLenum)internalFormat, width, heigth);
 }
 
-void GLTexture::setTexStorage3D(TextureTarget3D target, int level, TextureInternalFormat internalFormat, int width, int heigth, int depth)
+void GLTexture::setTexStorage3D(TextureTarget3D target, int level, TextureInternalSizedFormat internalFormat, int width, int heigth, int depth)
 {
 	glTexStorage3D((GLenum)target, level, (GLenum)internalFormat, width, heigth, depth);
 }
 
-void GLTexture::setTexStorage2DMultisample(Texture2DMultisampleTarget target, int samples, TextureInternalFormat internalformat, int width, int heigth, bool fixedsamplelocations)
+void GLTexture::setTexStorage2DMultisample(Texture2DMultisampleTarget target, int samples, TextureInternalSizedFormat internalformat, int width, int heigth, bool fixedsamplelocations)
 {
 	glTexStorage2DMultisample((GLenum)target, samples, (GLenum)internalformat, width, heigth, fixedsamplelocations ? GL_TRUE : GL_FALSE);
 }
 
-void GLTexture::setTexStorage3DMultisample(Texture3DMultisampleTarget target, int samples, TextureInternalFormat internalformat, int width, int heigth, int depth, bool fixedsamplelocations)
+void GLTexture::setTexStorage3DMultisample(Texture3DMultisampleTarget target, int samples, TextureInternalSizedFormat internalformat, int width, int heigth, int depth, bool fixedsamplelocations)
 {
 	glTexStorage3DMultisample((GLenum)target, samples, (GLenum)internalformat, width, heigth, depth, fixedsamplelocations ? GL_TRUE : GL_FALSE);
 }
 
-void GLTexture::setTexSubImage1D(TextureTarget1D target, int level, int xOffset, int width, TextureDataFormat pixelFormat, TextureDataType pixelType, const void* data)
+void GLTexture::setTexSubImage1D(TextureTarget1D target, int level, int xOffset, int width, TextureExternalFormat pixelFormat, TextureExternalDataType pixelType, const void* data)
 {
 	glTexSubImage1D((GLenum)target, level, xOffset, width, (GLenum)pixelFormat, (GLenum)pixelType, data);
 }
 
-void GLTexture::setTexSubImage2D(TextureTarget2D target, int level, int xOffset, int yOffset, int width, int height, TextureDataFormat pixelFormat, TextureDataType pixelType, const void* data)
+void GLTexture::setTexSubImage2D(TextureTarget2D target, int level, int xOffset, int yOffset, int width, int height, TextureExternalFormat pixelFormat, TextureExternalDataType pixelType, const void* data)
 {
 	glTexSubImage2D((GLenum)target, level, xOffset, yOffset, width, height, (GLenum)pixelFormat, (GLenum)pixelType, data);
 }
 
-void GLTexture::setTexSubImage3D(TextureTarget3D target, int level, int xOffset, int yOffset, int zOffset, int width, int height, int depth, TextureDataFormat pixelFormat, TextureDataType pixelType, const void* data)
+void GLTexture::setTexSubImage3D(TextureTarget3D target, int level, int xOffset, int yOffset, int zOffset, int width, int height, int depth, TextureExternalFormat pixelFormat, TextureExternalDataType pixelType, const void* data)
 {
 	glTexSubImage3D((GLenum)target, level, xOffset, yOffset, zOffset, width, height, depth, (GLenum)pixelFormat, (GLenum)pixelType, data);
 }
@@ -434,5 +414,15 @@ void GLTexture::setTextureView(uint32_t texture, TextureViewCompatibleNewTarget 
 void GLTexture::setTexParameter(TextureTarget target, TextureParameter paramType, const float* paramValue)
 {
 	glTexParameterfv((GLenum)target, (GLenum)paramType, paramValue);
+}
+
+void render::GLTexture::setTexParameter(TextureTarget target, TextureParameter paramType, float paramValue)
+{
+	glTexParameterf((GLenum)target, (GLenum)paramType, paramValue);
+}
+
+void render::GLTexture::setTexParameter(TextureTarget target, TextureParameter paramType, const int* paramValue)
+{
+	glTexParameteriv((GLenum)target, (GLenum)paramType, paramValue);
 }
 

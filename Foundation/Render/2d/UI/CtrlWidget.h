@@ -5,7 +5,7 @@
 
 namespace render
 {
-	class Material;
+	class Materials;
 
 	/**
 	*	UI¿Ø¼ş»ùÀà

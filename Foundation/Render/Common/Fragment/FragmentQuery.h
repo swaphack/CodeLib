@@ -12,9 +12,9 @@ namespace render
 		FragmentQuery(FragmentType type);
 		virtual ~FragmentQuery();
 	public:
-		uint32_t getQueryID();
+		uint32_t getQueryID() const;
 
-		bool isValid();
+		bool isValid() const;
 		void getResult(QueryParameter name, uint32_t* params);
 		void getResult(QueryParameter name, int32_t* params);
 	public:

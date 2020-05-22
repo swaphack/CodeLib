@@ -25,7 +25,6 @@ bool CtrlText::init()
 	_notify->removeListens(NodeNotifyType::TEXTURE);
 
 	_notify->addListen(NodeNotifyType::TEXT, [&](){
-		_material->updateMatTexture();
 
 		this->onTextChange();
 

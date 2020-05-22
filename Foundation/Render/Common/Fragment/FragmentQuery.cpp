@@ -12,12 +12,12 @@ render::FragmentQuery::~FragmentQuery()
 	this->releaseQuery();
 }
 
-uint32_t render::FragmentQuery::getQueryID()
+uint32_t render::FragmentQuery::getQueryID()const
 {
 	return _queryID;
 }
 
-bool render::FragmentQuery::isValid()
+bool render::FragmentQuery::isValid() const
 {
 	return GLQuery::isQuery(_queryID);
 }

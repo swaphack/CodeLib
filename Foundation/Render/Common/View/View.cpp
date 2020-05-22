@@ -82,6 +82,5 @@ void View::applyConfig()
 
 	GLState::setCullFace(FaceType::BACK);
 	GLState::setFrontFace(FrontFaceDirection::CCW);
-	GLState::setPixelStore(PixelStore::UNPACK_ALIGNMENT, 1);
 	GLDebug::showError();
 }

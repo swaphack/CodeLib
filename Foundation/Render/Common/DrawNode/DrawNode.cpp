@@ -1,7 +1,7 @@
 #include "DrawNode.h"
 #include "Graphic/import.h"
-#include "Material.h"
-#include "Mesh.h"
+#include "Common/Material/import.h"
+#include "Common/Mesh/import.h"
 #include "FragmentOperator.h"
 
 using namespace render;
@@ -9,11 +9,11 @@ using namespace render;
 
 DrawNode::DrawNode()
 {
-	_material = CREATE_OBJECT(Material);
-	SAFE_RETAIN(_material);
+	_materiales = CREATE_OBJECT(Materials);
+	SAFE_RETAIN(_materiales);
 
-	_mesh = CREATE_OBJECT(Mesh);
-	SAFE_RETAIN(_mesh);
+	_meshes = CREATE_OBJECT(Meshes);
+	SAFE_RETAIN(_meshes);
 
 	_fragOperator = CREATE_OBJECT(FragmentOperator);
 	SAFE_RETAIN(_fragOperator);
@@ -21,8 +21,8 @@ DrawNode::DrawNode()
 
 DrawNode::~DrawNode()
 {
-	SAFE_RELEASE(_material);
-	SAFE_RELEASE(_mesh);
+	SAFE_RELEASE(_materiales);
+	SAFE_RELEASE(_meshes);
 	SAFE_RELEASE(_fragOperator);
 }
 
@@ -45,19 +45,29 @@ void DrawNode::draw()
 	this->afterDraw();
 }
 
-Material* render::DrawNode::getMaterial()
+Materials* render::DrawNode::getMaterials()
 {
-	return _material;
+	return _materiales;
 }
 
-Mesh* render::DrawNode::getMesh()
+Meshes* render::DrawNode::getMeshes()
 {
-	return _mesh;
+	return _meshes;
 }
 
 FragmentOperator* render::DrawNode::getFragOperator()
 {
 	return _fragOperator;
+}
+
+render::Material* render::DrawNode::getMaterial(int id)
+{
+	return _materiales->getMaterial(id);
+}
+
+render::Mesh* render::DrawNode::getMesh(int id)
+{
+	return _meshes->getMesh(id);
 }
 
 void render::DrawNode::beforeDraw()
@@ -69,14 +79,11 @@ void render::DrawNode::beforeDraw()
 
 void DrawNode::onDraw()
 {
-	if (_material->getShaderProgram())
-	{
-		this->drawWithBufferObject();
-	}
-	else
-	{
-		this->drawWithClientArray();
-	}
+#if USE_PROGRAME
+	this->drawWithBufferObject();
+#else
+	this->drawWithClientArray();
+#endif
 }
 
 void render::DrawNode::afterDraw()
@@ -86,10 +93,10 @@ void render::DrawNode::afterDraw()
 
 void render::DrawNode::drawWithClientArray()
 {
-	_mesh->drawWithClientArray(this, _material);
+	_meshes->drawWithClientArray(this, _materiales);
 }
 
 void render::DrawNode::drawWithBufferObject()
 {
-	_mesh->drawWithBufferObject(this, _material);
+	_meshes->drawWithBufferObject(this, _materiales);
 }

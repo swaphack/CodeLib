@@ -21,11 +21,11 @@ namespace render
 		/**
 		*	着色器编号
 		*/
-		uint32_t getShaderID();
+		uint32_t getShaderID() const;
 		/**
 		*	着色器类型
 		*/
-		ShaderType getShaderType();
+		ShaderType getShaderType() const;
 		/**
 		*	设置着色器类型
 		*/
@@ -66,7 +66,7 @@ namespace render
 		/**
 		*	是否有效
 		*/
-		bool isValid();
+		bool isValid() const;
 	private:
 		/**
 		*	着色器编号

@@ -4,10 +4,10 @@
 #include "Common/Texture/TexFrame.h"
 #include "Common/Tool/TextureTool.h"
 #include "Common/Tool/Tool.h"
-#include "Common/Shader/ShaderProgram.h"
 #include "Common/View/import.h"
 #include "Graphic/import.h"
-#include "Common/DrawNode/import.h"
+#include "Common/Mesh/import.h"
+#include "Common/Material/import.h"
 
 #define MAT_TEXTURE_NAEM "MAT_TEXTURE_NAEM"
 #define MATERIAL_INDEX 0
@@ -39,8 +39,6 @@ bool CtrlFrame::init()
 	});
 
 	_notify->addListen(NodeNotifyType::TEXTURE, [this](){
-		_material->updateMatTexture();
-
 		onTextureChange();
 		updateBufferData();
 	});
@@ -57,14 +55,14 @@ void CtrlFrame::setTexture(const Texture2D* texture)
 		return;
 	}
 
-	_material->addTexture(MAT_TEXTURE_NAEM, texture);
+	_materiales->addTexture(MAT_TEXTURE_NAEM, texture);
 
 	this->notify(NodeNotifyType::TEXTURE);
 }
 
 void CtrlFrame::setTextureWithRect(const Texture2D* texture)
 {
-	_material->addTexture(MAT_TEXTURE_NAEM, texture);
+	_materiales->addTexture(MAT_TEXTURE_NAEM, texture);
 	this->setVolume(texture->getWidth(), texture->getHeight(), texture->getDepth());
 
 	this->notify(NodeNotifyType::TEXTURE);
@@ -108,14 +106,14 @@ void CtrlFrame::onTextureChange()
 	TextureTool::setTexture2DVertexts(&_texRect, math::Vector3(), _volume, _anchor);
 }
 
-render::Material* render::CtrlFrame::getMaterial()
+render::Materials* render::CtrlFrame::getMaterials()
 {
-	return _material;
+	return _materiales;
 }
 
-render::Mesh* render::CtrlFrame::getMesh()
+render::Meshes* render::CtrlFrame::getMeshes()
 {
-	return _mesh;
+	return _meshes;
 }
 
 void render::CtrlFrame::initBufferObject()
@@ -130,23 +128,22 @@ void render::CtrlFrame::initBufferObject()
 	pMesh->setMaterial(MATERIAL_INDEX);
 	pModelDetail->addMesh(MESH_INDEX, pMesh);
 
-	_material->setModelDetail(pModelDetail);
-	_mesh->setModelDetail(pModelDetail);
-
-	_mesh->initBufferData();
+	_materiales->setModelDetail(pModelDetail);
+	_meshes->setModelDetail(pModelDetail);
 }
 
 void render::CtrlFrame::updateBufferData()
 {
-	auto pMesh = _mesh->getMesh(MESH_INDEX);
+	auto pMesh = _meshes->getMesh(MESH_INDEX);
 	if (pMesh)
 	{
 		float uvs[8] = { 0 };
 		memcpy(uvs, _texRect.uvs, sizeof(uvs));
 		render::TextureTool::setTexture2DFlip(uvs, _bFlipX, _bFlipY);
-		pMesh->setVertices(12, _texRect.vertices);
-		pMesh->setColors(16, _texRect.colors);
-		pMesh->setUVs(8, uvs);
-		pMesh->setIndices(6, _texRect.indices);
+		pMesh->getMeshDetail()->setVertices(12, _texRect.vertices);
+		pMesh->getMeshDetail()->setColors(16, _texRect.colors);
+		pMesh->getMeshDetail()->setUVs(8, uvs);
+		pMesh->getMeshDetail()->setIndices(6, _texRect.indices);
+		pMesh->updateBufferData();
 	}
 }

@@ -1,7 +1,8 @@
 #pragma once
 
 #include "WidgetProperty.h"
-#include "macros.h"
+#include "system.h"
+#include "render.h"
 
 namespace ui
 {

@@ -21,13 +21,13 @@ void LayoutSpacerItem::setOrientation(SpacerOrientation eType)
 
 	if (m_eOrientation == ESO_Horizontal)
 	{
-		this->getSizePolicy().width = EST_Expanding;
-		this->getSizePolicy().height = EST_Fixed;
+		this->getSizePolicy().width = SizeType::EXPANDING;
+		this->getSizePolicy().height = SizeType::FIXED;
 	}
 	else if (m_eOrientation == ESO_Vertial)
 	{
-		this->getSizePolicy().width = EST_Fixed;
-		this->getSizePolicy().height = EST_Expanding;
+		this->getSizePolicy().width = SizeType::FIXED;
+		this->getSizePolicy().height = SizeType::EXPANDING;
 	}
 }
 

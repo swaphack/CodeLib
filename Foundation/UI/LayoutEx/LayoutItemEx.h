@@ -1,7 +1,8 @@
 #pragma once
 
 #include "Layout/LayoutItem.h"
-#include "ui_common.h"
+#include "system.h"
+#include "Layout/ui_common.h"
 
 namespace ui
 {

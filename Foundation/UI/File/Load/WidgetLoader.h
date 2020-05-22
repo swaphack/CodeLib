@@ -1,6 +1,7 @@
 #pragma once
 
 #include "define.h"
+#include "render.h"
 
 namespace ui
 {

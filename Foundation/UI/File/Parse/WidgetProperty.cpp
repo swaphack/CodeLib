@@ -1,5 +1,6 @@
 #include "WidgetProperty.h"
-#include "ui_common.h"
+#include "system.h"
+
 using namespace ui;
 
 

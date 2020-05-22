@@ -14,15 +14,24 @@ namespace render
 		/**
 		*	分配纹理缓存
 		*/
-		void setTextureStorage(int levels, TextureInternalFormat internalFormat, int width);
+		void setTextureStorage(int levels, TextureInternalSizedFormat internalFormat, int width);
 		/**
 		*	设置纹理数据
 		*/
-		void setTextureSubImage(int level, int xoffset, int width, TextureDataFormat format, TextureDataType type, const void* pixels);
+		void setTextureSubImage(int level, int xoffset, int width, TextureExternalFormat format, TextureExternalDataType type, const void* pixels);
+	public:
+		/**
+		*	纹理压缩
+		*/
+		void compressedTextureImage(int level, TextureCompressedInternalFormat format, int width, int imageSize, const void* data);
+		/**
+		*	纹理压缩
+		*/
+		void compressedTextureSubImage(int level, int xoffset, int width, TextureCompressedInternalFormat format, int imageSize, const void* data);
 	public:
 		/**
 		*	设置纹理
 		*/
-		void setTextureImage(int level, TextureInternalFormat internalFormat, int width, int border, TextureDataFormat format, TextureDataType type, const void* data);
+		void setTextureImage(int level, TextureInternalBaseFormat internalFormat, int width, int border, TextureExternalFormat format, TextureExternalDataType type, const void* data);
 	};
 }

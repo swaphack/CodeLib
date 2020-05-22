@@ -28,6 +28,10 @@ namespace render
 		*	绑定
 		*/
 		void bindVertexArray();
+		/**
+		*	解除绑定
+		*/
+		void unbindVertexArray();
 	public:
 		/**
 		*	绑定

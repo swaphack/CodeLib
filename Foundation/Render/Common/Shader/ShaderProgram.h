@@ -53,7 +53,7 @@ namespace render
 		/**
 		*	程序编号
 		*/
-		uint32_t getProgramID();
+		uint32_t getProgramID() const;
 	public:
 		/**
 		*	关联着色器
@@ -79,7 +79,7 @@ namespace render
 		/**
 		*	是否有效
 		*/
-		bool isValid();
+		bool isValid() const;
 	public:
 		/**
 		*	添加文件 v 顶点， f片元
@@ -177,7 +177,7 @@ namespace render
 		/**
 		*	调用无
 		*/
-		static void useNone();
+		void unuse();
 	protected:
 		/**
 		*	初始化

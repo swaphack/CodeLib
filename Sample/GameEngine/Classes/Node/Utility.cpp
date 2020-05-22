@@ -5,9 +5,9 @@ using namespace render;
 std::string Utility::texture3dVertexPath = "Shader/texture3d_vertex.glsl";
 std::string Utility::texture3dFragmentPath = "Shader/texture3d_fragment.glsl";
 
-void Utility::loadShader(render::Material* mat, const std::string& vpath, const std::string& fpath)
+void Utility::loadShader(render::Materials* mats, const std::string& vpath, const std::string& fpath)
 {
-	if (mat == nullptr)
+	if (mats == nullptr)
 	{
 		return;
 	}
@@ -15,27 +15,33 @@ void Utility::loadShader(render::Material* mat, const std::string& vpath, const 
 	pProgram->loadVertexAndFragmentShader(vpath, fpath);
 	pProgram->link();
 
-	mat->setShaderProgram(pProgram);
+	for (auto item : mats->getMaterials())
+	{
+		item.second->setShaderProgram(pProgram);
+	}
 
 }
 
-void Utility::initShaderAttrib(render::Material* mat)
+void Utility::initShaderAttrib(render::Materials* mats)
 {
-	if (mat == nullptr)
+	if (mats == nullptr)
 	{
 		return;
 	}
 
-	mat->addUniform(VertexUniformType::PROJECT_MATRIX, "projectMatrix");
-	mat->addUniform(VertexUniformType::VIEW_MATRIX, "viewMatrix");
-	mat->addUniform(VertexUniformType::MODEL_VIEW, "modelMatrix");
+	for (auto item : mats->getMaterials())
+	{
+		item.second->addUniform(VertexUniformType::PROJECT_MATRIX, "projectMatrix");
+		item.second->addUniform(VertexUniformType::VIEW_MATRIX, "viewMatrix");
+		item.second->addUniform(VertexUniformType::MODEL_VIEW, "modelMatrix");
 
-	mat->addUniform(VertexUniformType::AMBIENT_TEXTURE, "texSampler0");
-	mat->addUniform(VertexUniformType::DIFFUSE_TEXTURE, "texSampler1");
+		item.second->addUniform(VertexUniformType::AMBIENT_TEXTURE, "texSampler0");
+		item.second->addUniform(VertexUniformType::DIFFUSE_TEXTURE, "texSampler1");
 
-	mat->addAttrib(VertexAttribType::POSITION, "vPosition");
-	mat->addAttrib(VertexAttribType::COLOR, "vColor");
-	mat->addAttrib(VertexAttribType::UV, "vUV");
+		item.second->addAttrib(VertexAttribType::POSITION, "vPosition");
+		item.second->addAttrib(VertexAttribType::COLOR, "vColor");
+		item.second->addAttrib(VertexAttribType::UV, "vUV");
+	}
 }
 
 void Utility::initProgramAttrib(render::ShaderProgram* program)
@@ -70,8 +76,8 @@ void Utility::runRotateAction(render::Node* node)
 
 void Utility::updateNodeShader(render::DrawNode* node, bool autoRotate)
 {
-	loadShader(node->getMaterial(), texture3dVertexPath, texture3dFragmentPath);
-	initShaderAttrib(node->getMaterial());
+	loadShader(node->getMaterials(), texture3dVertexPath, texture3dFragmentPath);
+	initShaderAttrib(node->getMaterials());
 	if (autoRotate)
 	{
 		runRotateAction(node);

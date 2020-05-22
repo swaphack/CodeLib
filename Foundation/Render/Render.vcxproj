@@ -132,8 +132,6 @@
     <ClCompile Include="Common\DrawNode\DrawNode.cpp" />
     <ClCompile Include="Common\DrawNode\DrawProtocol.cpp" />
     <ClCompile Include="Common\DrawNode\FragmentOperator.cpp" />
-    <ClCompile Include="Common\DrawNode\Material.cpp" />
-    <ClCompile Include="Common\DrawNode\Mesh.cpp" />
     <ClCompile Include="Common\DrawNode\PrimitiveNode.cpp" />
     <ClCompile Include="Common\Fragment\FragmentBlend.cpp" />
     <ClCompile Include="Common\Fragment\FragmentDepthTest.cpp" />
@@ -145,6 +143,10 @@
     <ClCompile Include="Common\Fragment\FragmentScissorTest.cpp" />
     <ClCompile Include="Common\Fragment\FragmentStencilTest.cpp" />
     <ClCompile Include="Common\Keyboard\KeyboardManager.cpp" />
+    <ClCompile Include="Common\Material\Material.cpp" />
+    <ClCompile Include="Common\Material\Materials.cpp" />
+    <ClCompile Include="Common\Mesh\Mesh.cpp" />
+    <ClCompile Include="Common\Mesh\Meshes.cpp" />
     <ClCompile Include="Common\Node\Node.cpp" />
     <ClCompile Include="Common\Node\NodeProtocol.cpp" />
     <ClCompile Include="Common\Particle\ParticleSystem.cpp" />
@@ -160,6 +162,7 @@
     <ClCompile Include="Common\Shader\ShaderVariable.cpp" />
     <ClCompile Include="Common\struct\shape_common.cpp" />
     <ClCompile Include="Common\struct\texture_common.cpp" />
+    <ClCompile Include="Common\Texture\Sampler.cpp" />
     <ClCompile Include="Common\Texture\TexFrame.cpp" />
     <ClCompile Include="Common\Texture\Texture.cpp" />
     <ClCompile Include="Common\Texture\Texture1D.cpp" />
@@ -297,8 +300,6 @@
     <ClInclude Include="Common\DrawNode\DrawNode.h" />
     <ClInclude Include="Common\DrawNode\DrawProtocol.h" />
     <ClInclude Include="Common\DrawNode\FragmentOperator.h" />
-    <ClInclude Include="Common\DrawNode\Material.h" />
-    <ClInclude Include="Common\DrawNode\Mesh.h" />
     <ClInclude Include="Common\DrawNode\PrimitiveNode.h" />
     <ClInclude Include="Common\DrawNode\import.h" />
     <ClInclude Include="Common\Fragment\FragmentBlend.h" />
@@ -315,6 +316,12 @@
     <ClInclude Include="Common\macros.h" />
     <ClInclude Include="Common\Keyboard\import.h" />
     <ClInclude Include="Common\Keyboard\KeyboardManager.h" />
+    <ClInclude Include="Common\Material\import.h" />
+    <ClInclude Include="Common\Material\Material.h" />
+    <ClInclude Include="Common\Material\Materials.h" />
+    <ClInclude Include="Common\Mesh\import.h" />
+    <ClInclude Include="Common\Mesh\Mesh.h" />
+    <ClInclude Include="Common\Mesh\Meshes.h" />
     <ClInclude Include="Common\Node\import.h" />
     <ClInclude Include="Common\Node\Node.h" />
     <ClInclude Include="Common\Node\NodeProtocol.h" />
@@ -338,6 +345,7 @@
     <ClInclude Include="Common\struct\shape_common.h" />
     <ClInclude Include="Common\struct\texture_common.h" />
     <ClInclude Include="Common\Texture\import.h" />
+    <ClInclude Include="Common\Texture\Sampler.h" />
     <ClInclude Include="Common\Texture\TexFrame.h" />
     <ClInclude Include="Common\Texture\Texture.h" />
     <ClInclude Include="Common\Texture\Texture1D.h" />

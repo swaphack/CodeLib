@@ -5,16 +5,16 @@
 namespace ui
 {
 	// 大小调整类型
-	enum SizeType
+	enum class SizeType
 	{
 		// 固定
-		EST_Fixed,
+		FIXED,
 		// 缩小到最小时保持最小
-		EST_Minimum,
+		MINIMUM,
 		// 放大到最大时保持最大
-		EST_Maximum,
+		MAXIMUM,
 		// 自动缩放
-		EST_Expanding,
+		EXPANDING,
 	};
 
 	/**
@@ -27,7 +27,7 @@ namespace ui
 		// 高度调整策略
 		SizeType height;
 
-		SizePolicy() :width(EST_Expanding), height(EST_Expanding){}
+		SizePolicy() :width(SizeType::EXPANDING), height(SizeType::EXPANDING){}
 		SizePolicy(SizeType w, SizeType h) :width(w), height(h){}
 
 		SizePolicy& operator=(const SizePolicy& value)
@@ -42,50 +42,50 @@ namespace ui
 	/**
 	*	元素类型
 	*/
-	enum ElementType
+	enum class ElementType
 	{
 		/**
 		*	未定义
 		*/
-		EET_NONE,
+		NONE,
 		/**
 		*	控件
 		*/
-		EET_WIDGET,
+		WIDGET,
 		/**
 		*	布局
 		*/
-		EET_LAYOUT,
+		LAYOUT,
 	};
 
 	/**
 	*	布局方向
 	*/
-	enum LayoutDirection
+	enum class LayoutDirection
 	{
 		// 无
-		ELD_NONE,
+		NONE,
 		// 垂直布局
-		ELD_HORIZONTAL,
+		HORIZONTAL,
 		// 水平布局
-		ELD_VERTICAL,
+		ERTICAL,
 	};
 
 	/**
 	* 位置
 	*/
-	enum AnchorPosition
+	enum class AnchorPosition
 	{
 		// 无，默认
-		EAP_NONE,
-		EAP_DOWN_LEFT,
-		EAP_DOWN_CENTER,
-		EAP_DOWN_RIGHT,
-		EAP_CENTER_LEFT,
-		EAP_CENTER_CENTER,
-		EAP_CENTER_RIGHT,
-		EAP_UP_LEFT,
-		EAP_UP_CENTER,
-		EAP_UP_RIGHT,
+		NONE,
+		DOWN_LEFT,
+		DOWN_CENTER,
+		DOWN_RIGHT,
+		CENTER_LEFT,
+		CENTER_CENTER,
+		CENTER_RIGHT,
+		UP_LEFT,
+		UP_CENTER,
+		UP_RIGHT,
 	};
 }

@@ -1,7 +1,8 @@
 #include "PrimitiveNode.h"
 #include "Graphic/import.h"
 #include "Common/Tool/Tool.h"
-#include "Mesh.h"
+#include "Common/Mesh/import.h"
+#include "Common/Material/import.h"
 using namespace render;
 
 

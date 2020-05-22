@@ -112,8 +112,8 @@ void render::ParticleSystem::draw()
 	_renderProgram.feedback->endWatch();
 
 	GLState::disable(EnableMode::TEXTURE_2D);
-	GLVertexArrays::bindVertexArray(0);
-	GLShader::useProgram(0);
+	_renderProgram.vao->unbindVertexArray();
+	_renderProgram.program->unuse();
 	GLDebug::showError();
 
 	_frameCount++;

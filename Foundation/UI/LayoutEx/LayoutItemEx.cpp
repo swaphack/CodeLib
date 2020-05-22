@@ -58,16 +58,16 @@ math::Size LayoutItemEx::getLayoutMinSize()
 	SizeType st = getSizePolicy().width;
 	switch (st)
 	{
-	case ui::EST_Fixed:
+	case ui::SizeType::FIXED:
 		w = getGeometry().getWidth();
 		break;
-	case ui::EST_Minimum:
+	case ui::SizeType::MINIMUM:
 		w = getMinSize().getWidth();
 		break;
-	case ui::EST_Maximum:
+	case ui::SizeType::MAXIMUM:
 		w = 0;
 		break;
-	case ui::EST_Expanding:
+	case ui::SizeType::EXPANDING:
 		w = 0;
 		break;
 	default:
@@ -76,16 +76,16 @@ math::Size LayoutItemEx::getLayoutMinSize()
 	st = getSizePolicy().height;
 	switch (st)
 	{
-	case ui::EST_Fixed:
+	case ui::SizeType::FIXED:
 		h = getGeometry().getHeight();
 		break;
-	case ui::EST_Minimum:
+	case ui::SizeType::MINIMUM:
 		h = getMinSize().getHeight();
 		break;
-	case ui::EST_Maximum:
+	case ui::SizeType::MAXIMUM:
 		h = 0;
 		break;
-	case ui::EST_Expanding:
+	case ui::SizeType::EXPANDING:
 		h = 0;
 		break;
 	default:
@@ -100,16 +100,16 @@ math::Size LayoutItemEx::getLayoutMaxSize()
 	SizeType st = getSizePolicy().width;
 	switch (st)
 	{
-	case ui::EST_Fixed:
+	case ui::SizeType::FIXED:
 		w = getGeometry().getWidth();
 		break;
-	case ui::EST_Minimum:
+	case ui::SizeType::MINIMUM:
 		w = 0;
 		break;
-	case ui::EST_Maximum:
+	case ui::SizeType::MAXIMUM:
 		w = getMaxSize().getWidth();
 		break;
-	case ui::EST_Expanding:
+	case ui::SizeType::EXPANDING:
 		w = 0;
 		break;
 	default:
@@ -118,16 +118,16 @@ math::Size LayoutItemEx::getLayoutMaxSize()
 	st = getSizePolicy().height;
 	switch (st)
 	{
-	case ui::EST_Fixed:
+	case ui::SizeType::FIXED:
 		h = getGeometry().getHeight();
 		break;
-	case ui::EST_Minimum:
+	case ui::SizeType::MINIMUM:
 		h = 0;
 		break;
-	case ui::EST_Maximum:
+	case ui::SizeType::MAXIMUM:
 		h = getMaxSize().getHeight();
 		break;
-	case ui::EST_Expanding:
+	case ui::SizeType::EXPANDING:
 		h = 0;
 		break;
 	default:

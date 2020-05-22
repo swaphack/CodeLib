@@ -1,22 +1,24 @@
 #pragma once
 
 #include "system.h"
+
 #include "mathlib.h"
+#include <Resource\Model\MaterialDetail.cpp>
 
 namespace sys
 {
-	class MeshDetail;
-	class ModelDetail;
 	class MaterialDetail;
 }
+
 
 namespace render
 {
 	class ShaderProgram;
 	class VertexArrayObject;
-	class NoNamedBuffer;
 	class Texture2D;
+	class Mesh;
 	class Node;
+	class Materials;
 
 	enum class VertexAttribType
 	{
@@ -51,9 +53,6 @@ namespace render
 		SPECULAR_TEXTURE,
 	};
 
-	/**
-	*	材质
-	*/
 	class Material : public sys::Object
 	{
 	public:
@@ -63,10 +62,6 @@ namespace render
 		virtual ~Material();
 	public:
 		/**
-		*	模型数据
-		*/
-		void setModelDetail(const sys::ModelDetail* modelDetail);
-		/**
 		*	shader
 		*/
 		void setShaderProgram(ShaderProgram* shaderProgram);
@@ -74,27 +69,19 @@ namespace render
 		*	shader
 		*/
 		ShaderProgram* getShaderProgram();
+		/**
+		*	材质信息
+		*/
+		void setMaterialDetail(MaterialDetail* detail);
+		/**
+		*	材质信息
+		*/
+		MaterialDetail* getMaterialDetail() const;
 	public:
 		/**
-		*	设置模型材质
+		*	shader设置函数
 		*/
-		void addMaterial(int id, sys::MaterialDetail* material);
-		/**
-		*	移除模型材质
-		*/
-		void removeMaterial(int id);
-		/**
-		*	移除所有模型材质
-		*/
-		void removeAllMaterials();
-		/**
-		*	获取模型材质
-		*/
-		sys::MaterialDetail* getMaterial(int id);
-		/**
-		*	获取模型材质
-		*/
-		const std::map<int, sys::MaterialDetail*>& getMaterials() const;
+		void setProgramFunc(const ShaderProgramFunc& func);
 	public:
 		/**
 		*	添加Attrib shader in字段
@@ -110,7 +97,7 @@ namespace render
 		void removeAttribIndices();
 	public:
 		/**
-		*	添加Attrib shader in字段
+		*	添加Uniform shader字段
 		*/
 		void addUniform(VertexUniformType vut, const std::string& name);
 		/**
@@ -122,54 +109,23 @@ namespace render
 		*/
 		void removeUniformIndices();
 	public:
-		/**
-		*	设置模型网格
-		*/
-		void addTexture(const std::string& name, const Texture2D* id);
-		/**
-		*	移除模型网格
-		*/
-		void removeTexture(const std::string& name);
-		/**
-		*	移除所有模型网格
-		*/
-		void removeAllTextures();
-		/**
-		*	获取模型网格
-		*/
-		int getTexture(const std::string& name) const;
-
-		// 创建纹理
-		Texture2D* createTexture(const std::string& strFullpath);
-	public:
-		// 更新着色器uniform值
-		void startUpdateShaderUniformValue(Node* node);
-		void endUpdateShaderUniformValue();
-
-		// 更新着色器in值
-		void startUpdateShaderVertexValue(VertexArrayObject* data, sys::MeshDetail* pMesh);
-		void endUpdateShaderVertexValue(VertexArrayObject* data);
-
 		// 应用材质
-		void applyMaterial(uint32_t nMatID) const;
-		void applyMaterialWithShader(uint32_t nMatID) const;
-		// 更新纹理
-		void updateMatTexture();
-	public:
-		void setProgramFunc(const ShaderProgramFunc& func);
+		void apply(Materials* mats);
+
+		void beginApplyWithShader(Node* node, Mesh* pMesh, Materials* mats);
+		void endApplyWithShader(Mesh* pMesh);
+	protected:
+		// 应用材质
+		void applyMaterial();
+		// 更新着色器uniform值
+		void startUpdateShaderUniformValue(Node* node, Materials* mats);
+		// 更新着色器attrib值
+		void startUpdateShaderVertexValue(Mesh* pMesh);
+		void endUpdateShaderUniformValue();
+		void endUpdateShaderVertexValue(Mesh* pMesh);
 	protected:
 		void runProgramFunc();
 	private:
-		// 模型材质
-		std::map<int, sys::MaterialDetail*> _materials;
-		// 图片纹理
-		std::map<std::string, Texture2D*> _textures;
-		// 纹理路径
-		std::map<std::string, std::string> _texturePaths;
-		/**
-		*	shader
-		*/
-		ShaderProgram* _shaderProgram = nullptr;
 		/**
 		*	Attrib
 		*/
@@ -178,6 +134,14 @@ namespace render
 		*	Uniform
 		*/
 		std::map<VertexUniformType, std::string> _vertexUniformIndices;
+		/**
+		*	基础信息
+		*/
+		sys::MaterialDetail* _detail = nullptr;
+		/**
+		*	shader
+		*/
+		ShaderProgram* _shaderProgram = nullptr;
 		/**
 		*	shader设置函数
 		*/

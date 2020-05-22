@@ -12,7 +12,7 @@ render::TextureCubeMap::~TextureCubeMap()
 
 }
 
-void render::TextureCubeMap::setTextureStorage(int levels, TextureInternalFormat internalFormat, int width, int height, int depth)
+void render::TextureCubeMap::setTextureStorage(int levels, TextureInternalSizedFormat internalFormat, int width, int height, int depth)
 {
 	GLTexture::setTexStorage3D((TextureTarget3D)getTextureTarget(), levels, internalFormat, width, height, depth);
 }

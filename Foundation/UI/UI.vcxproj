@@ -90,8 +90,7 @@
     <ClInclude Include="Layout\import.h" />
     <ClInclude Include="Layout\Layout.h" />
     <ClInclude Include="Layout\LayoutItem.h" />
-    <ClInclude Include="macros.h" />
-    <ClInclude Include="ui_common.h" />
+    <ClInclude Include="Layout\ui_common.h" />
     <ClInclude Include="ui.h" />
   </ItemGroup>
   <ItemGroup>

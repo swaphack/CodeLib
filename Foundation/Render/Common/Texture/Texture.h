@@ -11,6 +11,16 @@ namespace sys
 
 namespace render
 {
+	class TextureSetting
+	{
+	public:
+		// 纹理单元 ActiveTextureName::TEXTURE0 + unit
+		TextureMinFilter minFilter = TextureMinFilter::LINEAR;
+		TextureMagFilter magFilter = TextureMagFilter::LINEAR;
+		TextureWrapMode wrapS = TextureWrapMode::CLAMP;
+		TextureWrapMode wrapT = TextureWrapMode::CLAMP;
+	};
+
 	// 纹理基础
 	class Texture : public sys::Object
 	{
@@ -54,9 +64,26 @@ namespace render
 		void setDepth(uint32_t val);
 	public:
 		/**
+		*	设置参数
+		*/
+		void setTexParameter(TextureParameter name, int value);
+		/**
+		*	设置参数
+		*/
+		void setTexParameter(TextureParameter name, float value);
+		/**
+		*	设置参数
+		*/
+		void setTexParameter(TextureParameter name, const int* value);
+		/**
+		*	设置参数
+		*/
+		void setTexParameter(TextureParameter name, const float* value);
+	public:
+		/**
 		*	纹理是否可用
 		*/
-		bool isValid();
+		bool isValid() const;
 		/**
 		*	绑定纹理
 		*/
@@ -66,23 +93,34 @@ namespace render
 		*/
 		void unbindTexture();
 		/**
+		*	启用
+		*/
+		void activeTexture(ActiveTextureName unit);
+		/**
 		*	绑定纹理单元
+		*	等价
+		*	activeTexture(ActiveTextureName::TEXTURE0 + unit);
+		*	bindTexture();
 		*/
 		void bindTextureUnit(uint32_t unit);
+		/**
+		*	应用配置
+		*/
+		void apply(const TextureSetting& setting);
 	public:
 		/**
 		*	获取纹理数据
 		*/
-		void getTextureImage(int level, TextureDataFormat format, TextureDataType type, int size, void* pixels);
+		void getTextureImage(int level, TextureExternalFormat format, TextureExternalDataType type, int size, void* pixels);
 	public:
 		/**
 		*	根据图片数据格式，获取纹理格式
 		*/
-		static void getTextureFormat(sys::ImageDataFormat imgFormat, TextureDataFormat& format, TextureInternalFormat& internalFormat);
+		static void getTextureFormat(sys::ImageDataFormat imgFormat, TextureExternalFormat& format, TextureInternalBaseFormat& internalFormat, int& size);
 		/**
 		*	根据图片数据格式，获取纹理格式
 		*/
-		static void getStorageTextureFormat(sys::ImageDataFormat imgFormat, TextureDataFormat& format, TextureInternalFormat& internalFormat);
+		static void getStorageTextureFormat(sys::ImageDataFormat imgFormat, TextureExternalFormat& format, TextureInternalSizedFormat& internalFormat, int& size);
 	protected:
 		/**
 		*	创建纹理

@@ -2,6 +2,8 @@
 #include "Common/Texture/Texture.h"
 #include "Common/Tool/TextureTool.h"
 #include "Common/DrawNode/import.h"
+#include "Common/Mesh/import.h"
+#include "Common/Material/import.h"
 
 using namespace render;
 
@@ -42,7 +44,7 @@ void CubeModel::onCubeChange()
 	
 	for (int i = 0; i < CUBE_FACE_COUNT; i++)
 	{
-		auto pMesh = _mesh->getMesh(i);
+		auto pMesh = _meshes->getMesh(i);
 		if (!pMesh)
 		{
 			return;
@@ -58,13 +60,13 @@ void CubeModel::onCubeChange()
 		indices2[3] = indices1[5];
 
 		float* ptr = nullptr;
-		if (pMesh->getVertices().getSize() == 0)
+		if (pMesh->getMeshDetail()->getVertices().getSize() == 0)
 		{
-			ptr = (float*)pMesh->createVertices(12, sizeof(float), 3);
+			ptr = (float*)pMesh->getMeshDetail()->createVertices(12, sizeof(float), 3);
 		}
 		else
 		{
-			ptr = (float*)pMesh->getVertices().getPtr();
+			ptr = (float*)pMesh->getMeshDetail()->getVertices().getPtr();
 		}
 
 		for (int j = 0; j < 4; j++)
@@ -72,31 +74,33 @@ void CubeModel::onCubeChange()
 			memcpy(ptr + j * 3, _cubePosition.vertices + indices2[j] * 3, 3 * sizeof(float));
 		}
 	}
+
+	_meshes->updateBufferData();
 }
 
 void render::CubeModel::addTexture(const std::string& name, Texture2D* texture)
 {
-	_material->addTexture(name, texture);
+	_materiales->addTexture(name, texture);
 }
 
 void render::CubeModel::setAllFacesTexture(const std::string& name)
 {
 	for (int i = 0; i < CUBE_FACE_COUNT; i++)
 	{
-		auto pMat = _material->getMaterial(i);
+		auto pMat = _materiales->getMaterial(i);
 		if (pMat)
 		{
-			pMat->setAmbientTextureMap(name);
+			pMat->getMaterialDetail()->setAmbientTextureMap(name);
 		}
 	}
 }
 
 void render::CubeModel::setFaceTexture(ModelFace face, const std::string& name)
 {
-	auto pMat = _material->getMaterial((int)face);
+	auto pMat = _materiales->getMaterial((int)face);
 	if (pMat)
 	{
-		pMat->setAmbientTextureMap(name);
+		pMat->getMaterialDetail()->setAmbientTextureMap(name);
 	}
 }
 
