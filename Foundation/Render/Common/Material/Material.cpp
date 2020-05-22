@@ -33,7 +33,7 @@ render::ShaderProgram* render::Material::getShaderProgram()
 	return _shaderProgram;
 }
 
-void render::Material::setMaterialDetail(MaterialDetail* detail)
+void render::Material::setMaterialDetail(sys::MaterialDetail* detail)
 {
 	SAFE_RELEASE(_detail);
 	SAFE_RETAIN(detail);
@@ -41,7 +41,7 @@ void render::Material::setMaterialDetail(MaterialDetail* detail)
 	_detail = detail;
 }
 
-MaterialDetail* render::Material::getMaterialDetail() const
+sys::MaterialDetail* render::Material::getMaterialDetail() const
 {
 	return _detail;
 }

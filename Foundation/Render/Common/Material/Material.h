@@ -3,13 +3,11 @@
 #include "system.h"
 
 #include "mathlib.h"
-#include <Resource\Model\MaterialDetail.cpp>
 
 namespace sys
 {
 	class MaterialDetail;
 }
-
 
 namespace render
 {
@@ -72,11 +70,11 @@ namespace render
 		/**
 		*	材质信息
 		*/
-		void setMaterialDetail(MaterialDetail* detail);
+		void setMaterialDetail(sys::MaterialDetail* detail);
 		/**
 		*	材质信息
 		*/
-		MaterialDetail* getMaterialDetail() const;
+		sys::MaterialDetail* getMaterialDetail() const;
 	public:
 		/**
 		*	shader设置函数
