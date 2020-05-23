@@ -205,6 +205,9 @@ void render::Material::startUpdateShaderVertexValue(Mesh* pMesh)
 	auto detail = pMesh->getMeshDetail();
 	auto vao = pMesh->getVertexArrayObject();
 
+	vao->bindVertexArray();
+	vao->bindBuffer();
+
 	const sys::MeshMemoryData& vertices = detail->getVertices();
 	const sys::MeshMemoryData& colors = detail->getColors();
 	const sys::MeshMemoryData& texcoords = detail->getUVs();
@@ -221,7 +224,7 @@ void render::Material::startUpdateShaderVertexValue(Mesh* pMesh)
 		if (!pAttrib) continue;
 		VertexAttribPointer* pointer = vao->getVertexAttrib<VertexAttribPointer>(pAttrib->getAttribID());
 		pointer->enableVertexArrayAttrib();
-
+		GLDebug::showError();
 		if (item.first == VertexAttribType::POSITION)
 		{
 			if (nVerticeSize > 0)

@@ -83,8 +83,6 @@ void render::CtrlStencil::afterDrawNode()
 		}
 	}
 
-	Pixel::dumpStencil();
-
 	if (_stencilMode == StencilMode::INCLUDE)
 	{
 		GLState::setStencilFunc(StencilFunction::EQUAL, 0x1, 0x1);

@@ -58,15 +58,6 @@ namespace render
 		*/
 		void afterDraw();
 	protected:
-		/**
-		*	使用客户端数组绘制
-		*/
-		void drawWithClientArray();
-		/**
-		*	使缓存对象绘制
-		*/
-		void drawWithBufferObject();
-	protected:
 		// 材质
 		Materials* _materiales = nullptr;
 		// 网格

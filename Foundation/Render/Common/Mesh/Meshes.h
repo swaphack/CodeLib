@@ -52,11 +52,7 @@ namespace render
 		/**
 		*	使用缓存对象绘制
 		*/
-		void drawWithBufferObject(Node* node, Materials* mats);
-		/**
-		*	使用客户端数组绘制
-		*/
-		void drawWithClientArray(Node* node, Materials* mats);
+		void drawNodeWithMaterials(Node* node, Materials* mats);
 		/**
 		*	更新顶点信息
 		*/

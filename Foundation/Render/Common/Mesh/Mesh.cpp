@@ -78,13 +78,11 @@ void render::Mesh::drawWithBufferObject()
 		return;
 	}
 
-	_vertexArrayObject->bindVertexArray();
-	_indiceBuffer->bindBuffer();
 	GLDebug::showError();
+	_indiceBuffer->bindBuffer();
 
 	uint32_t nIndiceLength = _detail->getIndices().getLength();
 	GLBufferObjects::drawElements(DrawMode::TRIANGLES, nIndiceLength, IndexDataType::UNSIGNED_INT, nullptr);
-
 
 	GLDebug::showError();
 
@@ -181,6 +179,8 @@ void render::Mesh::updateBufferData()
 
 	_vertexBuffer->bindBuffer();
 
+	GLDebug::showError();
+
 	uint32_t nTotalSize = nVerticeSize + nColorSize + nUVSize + nNormalSize;
 	_vertexBuffer->setBufferData(nTotalSize, nullptr, BufferDataUsage::STATIC_DRAW);
 	if (nVerticeSize > 0)
@@ -200,9 +200,12 @@ void render::Mesh::updateBufferData()
 		_vertexBuffer->setBufferSubData(nVerticeSize + nColorSize + nUVSize, nNormalSize, _detail->getNormals().getPtr());
 	}
 	_vertexBuffer->unbindBuffer();
-
+	GLDebug::showError();
 	_indiceBuffer->bindBuffer();
+	GLDebug::showError();
 	_indiceBuffer->setElementData(_detail->getIndices());
+	GLDebug::showError();
 	_indiceBuffer->unbindBuffer();
+	GLDebug::showError();
 }
 

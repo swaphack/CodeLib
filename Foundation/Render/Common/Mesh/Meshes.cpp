@@ -83,9 +83,9 @@ Mesh* Meshes::getMesh(int id)
 	return it->second;
 }
 
-void render::Meshes::drawWithBufferObject(Node* node, Materials* mats)
+void render::Meshes::drawNodeWithMaterials(Node* node, Materials* mats)
 {
-	if (mats == nullptr)
+	if (node == nullptr || mats == nullptr)
 	{
 		return;
 	}
@@ -96,12 +96,20 @@ void render::Meshes::drawWithBufferObject(Node* node, Materials* mats)
 		auto pMat = mats->getMaterial(nMatID);
 
 		GLState::enable(EnableMode::TEXTURE_2D);
+		if (pMat->getShaderProgram() != nullptr)
+		{
+			pMat->beginApplyWithShader(node, pMesh, mats);
 
-		pMat->beginApplyWithShader(node, pMesh, mats);
+			pMesh->drawWithBufferObject();
 
-		pMesh->drawWithBufferObject();
+			pMat->endApplyWithShader(pMesh);
+		}
+		else
+		{
+			pMat->apply(mats);
 
-		pMat->endApplyWithShader(pMesh);
+			pMesh->drawWithClientArray();
+		}
 
 		GLState::disable(EnableMode::TEXTURE_2D);
 
@@ -109,29 +117,6 @@ void render::Meshes::drawWithBufferObject(Node* node, Materials* mats)
 	}
 
 	GLDebug::showError();
-}
-
-void render::Meshes::drawWithClientArray(Node* node, Materials* mats)
-{
-	if (mats == nullptr)
-	{
-		return;
-	}
-	for (auto item : _meshes)
-	{
-		auto pMesh = item.second;
-		auto nMatID = pMesh->getMeshDetail()->getMaterial();
-		auto pMat = mats->getMaterial(nMatID);
-
-		GLState::enable(EnableMode::TEXTURE_2D);
-		pMat->apply(mats);
-
-		pMesh->drawWithClientArray();
-		
-		GLState::disable(EnableMode::TEXTURE_2D);
-
-		GLTexture::bindTexture2D(0);
-	}
 }
 
 void render::Meshes::updateBufferData()

@@ -19,8 +19,10 @@ private:
 	void testScrollView();
 
 	void testMask();
-	// ”–Œ Ã‚
+
 	void testStencil();
+
+	void testImage();
 private:
 
 	void onKeyBoardRole(sys::Object* object, sys::BoardKey key, sys::ButtonStatus type);

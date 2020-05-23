@@ -11,7 +11,8 @@ CtrlAnimation::CtrlAnimation()
 , _frame(0)
 , _duration(0)
 {
-	
+	_ctrlFrame = CREATE_NODE(CtrlFrame);
+	this->addChild(_ctrlFrame);
 }
 
 CtrlAnimation::~CtrlAnimation()
@@ -136,8 +137,7 @@ bool CtrlAnimation::init()
 	{
 		return false;
 	}
-	_ctrlFrame = CREATE_NODE(CtrlFrame);
-	this->addChild(_ctrlFrame);
+	
 
 	return true;
 }

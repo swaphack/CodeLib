@@ -95,7 +95,7 @@ void TestShaderNode::testImageShader()
 	pImage->setPosition(Vector2(500, 500));
 	this->addChild(pImage);
 
-	Utility::updateNodeShader(pImage, false);
+	Utility::updateNodeShader(pImage);
 }
 
 void TestShaderNode::testCubeModelShader()
@@ -120,6 +120,7 @@ void TestShaderNode::testCubeModelShader()
 	this->addChild(pModel);
 
 	Utility::updateNodeShader(pModel);
+	Utility::runRotateAction(pModel);
 }
 
 void TestShaderNode::test3dsModelShader()
@@ -132,6 +133,7 @@ void TestShaderNode::test3dsModelShader()
 	this->addChild(pModel);
 
 	Utility::updateNodeShader(pModel);
+	Utility::runRotateAction(pModel);
 }
 
 void TestShaderNode::testObjModelShader()
@@ -146,6 +148,7 @@ void TestShaderNode::testObjModelShader()
 	this->addChild(pModel);
 
 	Utility::updateNodeShader(pModel);
+	Utility::runRotateAction(pModel);
 }
 
 void TestShaderNode::testFbxModelShader()
@@ -159,6 +162,7 @@ void TestShaderNode::testFbxModelShader()
 	this->addChild(pModel);
 
 	Utility::updateNodeShader(pModel);
+	Utility::runRotateAction(pModel);
 }
 
 void TestShaderNode::addLight()

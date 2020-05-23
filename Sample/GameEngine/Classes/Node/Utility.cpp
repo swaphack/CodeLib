@@ -74,12 +74,8 @@ void Utility::runRotateAction(render::Node* node)
 	node->getActionProxy()->runAction(pRepeateAction);
 }
 
-void Utility::updateNodeShader(render::DrawNode* node, bool autoRotate)
+void Utility::updateNodeShader(render::DrawNode* node)
 {
 	loadShader(node->getMaterials(), texture3dVertexPath, texture3dFragmentPath);
 	initShaderAttrib(node->getMaterials());
-	if (autoRotate)
-	{
-		runRotateAction(node);
-	}
 }

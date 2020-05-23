@@ -5,7 +5,7 @@
 class Utility
 {
 public:
-	static void updateNodeShader(render::DrawNode* node, bool autoRotate = true);
+	static void updateNodeShader(render::DrawNode* node);
 
 	static void loadShader(render::Materials* mats, const std::string& vpath, const std::string& fpath);
 	static void initShaderAttrib(render::Materials* mats);

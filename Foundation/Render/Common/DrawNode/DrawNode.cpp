@@ -79,24 +79,10 @@ void render::DrawNode::beforeDraw()
 
 void DrawNode::onDraw()
 {
-#if USE_PROGRAME
-	this->drawWithBufferObject();
-#else
-	this->drawWithClientArray();
-#endif
+	_meshes->drawNodeWithMaterials(this, _materiales);
 }
 
 void render::DrawNode::afterDraw()
 {
 	_fragOperator->end();
-}
-
-void render::DrawNode::drawWithClientArray()
-{
-	_meshes->drawWithClientArray(this, _materiales);
-}
-
-void render::DrawNode::drawWithBufferObject()
-{
-	_meshes->drawWithBufferObject(this, _materiales);
 }
