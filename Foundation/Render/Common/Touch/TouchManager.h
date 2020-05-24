@@ -9,7 +9,7 @@ namespace render
 	class Node;
 	class TouchProxy;
 	// 触摸管理
-	class TouchManager : public TouchProtocol
+	class TouchManager 
 	{
 	public:
 		TouchManager();
@@ -22,12 +22,11 @@ namespace render
 		// 移除所有触摸代理
 		void removeAllTouches();
 
-		bool onTouchBegan(float x, float y);
+		void onTouchBegan(float x, float y);
 		void onTouchMoved(float x, float y);
 		void onTouchEnded(float x, float y);
 	private:
 		std::vector<TouchProxy*> _touchProtocols;
-		TouchProxy* _lastTouchProtocol;
 	};
 
 	#define G_TOUCHMANAGER sys::Instance<TouchManager>::getInstance()

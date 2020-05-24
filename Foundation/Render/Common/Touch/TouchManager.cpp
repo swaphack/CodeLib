@@ -3,7 +3,6 @@
 using namespace render;
 
 TouchManager::TouchManager()
-:_lastTouchProtocol(nullptr)
 {
 
 }
@@ -50,11 +49,6 @@ void TouchManager::removeTouch(TouchProxy* protocol)
 		}
 		it++;
 	}
-
-	if (_lastTouchProtocol == protocol)
-	{
-		_lastTouchProtocol = nullptr;
-	}
 }
 
 void TouchManager::removeAllTouches()
@@ -62,50 +56,63 @@ void TouchManager::removeAllTouches()
 	_touchProtocols.clear();
 }
 
-bool TouchManager::onTouchBegan(float x, float y)
+void TouchManager::onTouchBegan(float x, float y)
 {
 	// 转化为opengl（0，1）会有误差,所以采用实际大小
 // 	x = x / Tool::getGLViewSize().width;
 // 	y = y / Tool::getGLViewSize().height;
-	std::vector<TouchProxy*>::reverse_iterator it = _touchProtocols.rbegin();
-
+	auto it = _touchProtocols.rbegin();
 	while (it != _touchProtocols.rend())
 	{
-		if ((*it)->isTouchEnabled() && (*it)->onTouchBegan(x, y))
+		if ((*it)->isTouchEnabled())
 		{
-			_lastTouchProtocol = (*it);
-			return true;
+			if ((*it)->onTouchBegan(x, y))
+			{
+				if ((*it)->isSwallowTouch())
+				{
+					break;
+				}
+			}
 		}
 		it++;
 	}
-
-	return false;
 }
 
 void TouchManager::onTouchMoved(float x, float y)
 {
-	if (_lastTouchProtocol == nullptr)
+	auto it = _touchProtocols.rbegin();
+	while (it != _touchProtocols.rend())
 	{
-		return;
-	}
-
-	if (_lastTouchProtocol->isTouchEnabled())
-	{
-		_lastTouchProtocol->onTouchMoved(x, y);
+		if ((*it)->isTouchEnabled())
+		{
+			if ((*it)->onTouchMoved(x, y))
+			{
+				if ((*it)->isSwallowTouch())
+				{
+					break;
+				}
+			}
+		}
+		it++;
 	}
 }
 
 void TouchManager::onTouchEnded(float x, float y)
 {
-	if (_lastTouchProtocol == nullptr)
+	auto it = _touchProtocols.rbegin();
+	bool ret = false;
+	while (it != _touchProtocols.rend())
 	{
-		return;
+		if ((*it)->isTouchEnabled())
+		{
+			if ((*it)->onTouchEnded(x, y))
+			{
+				if ((*it)->isSwallowTouch())
+				{
+					break;
+				}
+			}
+		}
+		it++;
 	}
-
-	if (_lastTouchProtocol->isTouchEnabled())
-	{
-		_lastTouchProtocol->onTouchEnded(x, y);
-	}
-
-	_lastTouchProtocol = nullptr;
 }

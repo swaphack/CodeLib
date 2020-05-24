@@ -58,14 +58,14 @@ namespace render
 		const math::Size& getItemSize();
 	protected:
 		// 点击处理
-		void onBeginTouch(sys::Object* object, float x, float y);
-		void onMoveTouch(sys::Object* object, float x, float y);
-		void onEndTouch(sys::Object* object, float x, float y);
+		void onBeginTouch(Node* node, float x, float y, bool include);
+		void onMoveTouch(Node* node, float x, float y, bool include);
+		void onEndTouch(Node* node, float x, float y, bool include);
 
 		// 触摸处理
-		virtual bool onTouchBegan(float x, float y);
-		virtual void onTouchMoved(float x, float y);
-		virtual void onTouchEnded(float x, float y);
+		virtual bool onTouchBegan(float x, float y, bool include);
+		virtual bool onTouchMoved(float x, float y, bool include);
+		virtual bool onTouchEnded(float x, float y, bool include);
 
 		// 初始化滑动项
 		virtual void initItems();

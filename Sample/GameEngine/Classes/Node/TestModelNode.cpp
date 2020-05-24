@@ -157,12 +157,12 @@ void TestModelNode::testFbx()
 void TestModelNode::testCamera()
 {
 	Camera* camera = Camera::getMainCamera();
-	G_KEYBOARDMANAGER->addDispatcher(camera, this, KEYBOARD_DELEGATTE_SELECTOR(TestModelNode::onKeyBoardCamera));
+	G_KEYBOARDMANAGER->addKeyboardDelegate(this, camera, KEYBOARD_DELEGATTE_SELECTOR(TestModelNode::onKeyBoardCamera));
 }
 
-void TestModelNode::onKeyBoardCamera(sys::Object* object, sys::BoardKey key, sys::ButtonStatus type)
+void TestModelNode::onKeyBoardCamera(render::Node* node, sys::BoardKey key, sys::ButtonStatus type)
 {
-	Camera* pNode = dynamic_cast<Camera*>(object);
+	Camera* pNode = node->as<Camera>();
 	if (pNode == nullptr)
 	{
 		return;

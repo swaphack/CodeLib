@@ -43,6 +43,21 @@ void render::CtrlWidget::setClip(bool bClip)
 	_bClip = bClip;
 }
 
+bool render::CtrlWidget::isClip()
+{
+	return _bClip;
+}
+
+void render::CtrlWidget::setRectVisible(bool bVisible)
+{
+	_bRectVisible = bVisible;
+}
+
+bool render::CtrlWidget::isRectVisible()
+{
+	return _bRectVisible;
+}
+
 void render::CtrlWidget::beforeDrawNode()
 {
 	if (_bClip)
@@ -55,6 +70,8 @@ void render::CtrlWidget::beforeDrawNode()
 void render::CtrlWidget::afterDrawNode()
 {
 	this->drawAllChildren();
+
+	this->drawRect();
 
 	if (_bClip)
 	{
@@ -145,5 +162,37 @@ void render::CtrlWidget::onBlendChange()
 
 		pBlend->setBlendColor(_blendColor);
 	}
+}
+
+void render::CtrlWidget::drawRect()
+{
+	if (!isRectVisible())
+	{
+		return;
+	}
+	GLVertex::setColor(1.0f, 0.0f, 0.0f, 1.0f);
+	GLState::setLineWidth(5);
+
+	GLVertex::beginMode(ShapeMode::LINE_LOOP);
+	GLVertex::setVertex(_rectVertex.leftDown);
+	GLVertex::setVertex(_rectVertex.rightDown);
+	GLVertex::setVertex(_rectVertex.rightUp);
+	GLVertex::setVertex(_rectVertex.leftUp);
+	GLVertex::endMode();
+
+	GLMatrix::pushMatrix();
+	GLMatrix::loadIdentity();
+
+	GLVertex::setColor(0.0f, 1.0f, 0.0f, 1.0f);
+	GLState::setLineWidth(8);
+
+	GLVertex::beginMode(ShapeMode::LINE_LOOP);
+	GLVertex::setVertex(_realRectVertex.leftDown);
+	GLVertex::setVertex(_realRectVertex.rightDown);
+	GLVertex::setVertex(_realRectVertex.rightUp);
+	GLVertex::setVertex(_realRectVertex.leftUp);
+	GLVertex::endMode();
+
+	GLMatrix::popMatrix();
 }
 

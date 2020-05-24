@@ -357,28 +357,22 @@ void Node::calRealSpaceByMatrix()
 
 	//PRINT("mat\n%s\n", _mat44.toString().c_str());
 
-	Node* temp = this;
-	std::vector<math::Matrix44> vecMat;
-	do
+	if (this->getParent() != nullptr)
 	{
-		vecMat.insert(vecMat.begin(), temp->getLocalMatrix());
-		if (!temp->isRelativeWithParent())
+		if (this->isRelativeWithParent())
 		{
-			break;
+			math::Matrix44 mat = this->getParent()->getWorldMatrix();
+			_worldMatrix = _localMatrix * mat;
 		}
 		else
 		{
-			temp = temp->getParent();
+			_worldMatrix = _localMatrix;
 		}
-	} while (temp != nullptr);
-
-	math::Matrix44 ret;
-	for (auto &item : vecMat)
-	{
-		ret = item * ret;
 	}
-
-	_worldMatrix = ret;
+	else
+	{
+		_worldMatrix = _localMatrix;
+	}
 }
 
 void Node::onSpaceChange()

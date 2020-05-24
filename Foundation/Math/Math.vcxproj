@@ -79,6 +79,7 @@
     <ClInclude Include="Algebra\import.h" />
     <ClInclude Include="Algebra\Matrix\import.h" />
     <ClInclude Include="Algebra\Matrix\Matrix.h" />
+    <ClInclude Include="Algebra\Matrix\Matrix14.h" />
     <ClInclude Include="Algebra\Matrix\Matrix22.h" />
     <ClInclude Include="Algebra\Matrix\Matrix33.h" />
     <ClInclude Include="Algebra\Matrix\Matrix41.h" />
@@ -191,6 +192,7 @@
     <ClCompile Include="Algebra\Determinant\Determinant.cpp" />
     <ClCompile Include="Algebra\Equation\Equation.cpp" />
     <ClCompile Include="Algebra\Matrix\Matrix.cpp" />
+    <ClCompile Include="Algebra\Matrix\Matrix14.cpp" />
     <ClCompile Include="Algebra\Matrix\Matrix22.cpp" />
     <ClCompile Include="Algebra\Matrix\Matrix33.cpp" />
     <ClCompile Include="Algebra\Matrix\Matrix41.cpp" />

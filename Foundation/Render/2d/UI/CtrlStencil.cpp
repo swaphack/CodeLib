@@ -98,7 +98,6 @@ void render::CtrlStencil::afterDrawNode()
 
 	this->drawAllChildren();
 
-
 	GLState::disable(EnableMode::STENCIL_TEST);
 	GLState::setStencilMask(0x0);
 
@@ -108,5 +107,7 @@ void render::CtrlStencil::afterDrawNode()
 	}
 
 	GLState::disable(EnableMode::STENCIL_TEST);
+
+	this->drawRect();
 }
 

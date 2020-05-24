@@ -70,7 +70,7 @@ namespace render
 		/**
 		*	获取模型网格
 		*/
-		int getTexture(const std::string& name) const;
+		Texture2D* getTexture(const std::string& name) const;
 
 		// 创建纹理
 		Texture2D* createTexture(const std::string& strFullpath);

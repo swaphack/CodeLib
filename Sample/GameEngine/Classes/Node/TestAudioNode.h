@@ -13,5 +13,5 @@ private:
 	void testAudio();
 	void testAudio3D();
 private:
-	void onKeyBoardListener(sys::Object* object, sys::BoardKey key, sys::ButtonStatus type);
+	void onKeyBoardListener(render::Node* node, sys::BoardKey key, sys::ButtonStatus type);
 };

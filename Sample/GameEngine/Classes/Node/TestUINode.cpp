@@ -17,13 +17,13 @@ TestUINode::~TestUINode()
 
 void TestUINode::testFunc()
 {
-	this->testScissor();
+	//this->testScissor();
 
 	//this->testScrollView();
 
-	this->testStencil();
+	//this->testStencil();
 
-	this->testSequenceFrame();
+	//this->testSequenceFrame();
 
 	this->testImage();
 }
@@ -73,17 +73,17 @@ void TestUINode::testSequenceFrame()
 	pSequenceFrame->start();
 
 	this->addChild(pSequenceFrame);
-	G_KEYBOARDMANAGER->addDispatcher(pSequenceFrame, this, KEYBOARD_DELEGATTE_SELECTOR(TestUINode::onKeyBoardRole));
+	G_KEYBOARDMANAGER->addKeyboardDelegate(pSequenceFrame, this, KEYBOARD_DELEGATTE_SELECTOR(TestUINode::onKeyBoardRole));
 }
 
-void TestUINode::onKeyBoardRole(sys::Object* object, sys::BoardKey key, sys::ButtonStatus type)
+void TestUINode::onKeyBoardRole(render::Node* node, sys::BoardKey key, sys::ButtonStatus type)
 {
 	if (type != ButtonStatus::BUTTON_DOWN)
 	{
 		return;
 	}
 
-	CtrlSequenceFrame* pRole = static_cast<CtrlSequenceFrame*>(object);
+	CtrlSequenceFrame* pRole = node->as<CtrlSequenceFrame>();
 	if (pRole == nullptr)
 	{
 		return;
@@ -221,8 +221,48 @@ void TestUINode::testImage()
 	pImage->setImagePath(filepath);
 	pImage->setAnchorPoint(math::Vector2(0.5f, 0.5f));
 	pImage->setVolume(500, 500);
+	pImage->setRotation(0, 0, 45);
 	pImage->setPosition(math::Vector2(500, 500));
+	pImage->getTouchProxy()->setSwallowTouch(false);
+	pImage->getTouchProxy()->addTouchFunc(TouchType::DOWN, [](Node* node, float x, float y, bool include) 
+	{
+		node->as<CtrlImage>()->setRectVisible(include);
+	});
+	pImage->getTouchProxy()->addTouchFunc(TouchType::ON, [](Node* node, float x, float y, bool include)
+	{
+		node->as<CtrlImage>()->setRectVisible(include);
+	});
+	pImage->getTouchProxy()->addTouchFunc(TouchType::UP, [](Node* node, float x, float y, bool include)
+	{
+		node->as<CtrlImage>()->setRectVisible(false);
+	});
+	Utility::updateNodeShader(pImage);
 	this->addChild(pImage);
 
-	Utility::updateNodeShader(pImage);
+	auto parent = pImage;
+	for (size_t i = 0; i < 1; i++)
+	{
+		pImage = CREATE_NODE(CtrlImage);
+		pImage->setImagePath(filepath);
+		pImage->setAnchorPoint(math::Vector2(0.5f, 0.5f));
+		pImage->setVolume(500, 500);
+		pImage->setRotation(0, 0, 15);
+		pImage->setPosition(math::Vector2(10, 10));
+		pImage->getTouchProxy()->setSwallowTouch(false);
+		pImage->getTouchProxy()->addTouchFunc(TouchType::DOWN, [](Node* node, float x, float y, bool include)
+		{
+			node->as<CtrlImage>()->setRectVisible(include);
+		});
+		pImage->getTouchProxy()->addTouchFunc(TouchType::ON, [](Node* node, float x, float y, bool include)
+		{
+			node->as<CtrlImage>()->setRectVisible(include);
+		});
+		pImage->getTouchProxy()->addTouchFunc(TouchType::UP, [](Node* node, float x, float y, bool include)
+		{
+			node->as<CtrlImage>()->setRectVisible(include);
+		});
+		Utility::updateNodeShader(pImage);
+		parent->addChild(pImage);
+		parent = pImage;
+	}
 }

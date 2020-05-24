@@ -1,5 +1,6 @@
 #include "Matrix44.h"
 #include "Basic/base.h"
+#include "Matrix14.h"
 #include <cassert>
 
 using namespace math;
@@ -326,11 +327,12 @@ math::Matrix44 math::Matrix44::getTSR(const Vector3& translate, const Vector3& s
 
 Vector3 math::Matrix44::transpose(const Vector3& src, const Matrix44& mat)
 {
+	//printf("%s\n", mat.toString().c_str());
 
-	Matrix44 srcMatrix;
-	srcMatrix.setTranslate(src);
-	Matrix44 result = (Matrix44)mat * srcMatrix;
-	Vector3 pos = result.getPosition();
+	Matrix14 srcMatrix(src);
+	Matrix14 result = srcMatrix * mat;
+	//printf("%s\n", result.toString().c_str());
+	Vector3 pos = (Vector3)result;
 	return pos;
 }
 

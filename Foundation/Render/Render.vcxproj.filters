@@ -1020,6 +1020,9 @@
     <ClInclude Include="Common\Material\Material.h">
       <Filter>Common\Material</Filter>
     </ClInclude>
+    <ClInclude Include="Common\Keyboard\KeyboardDelegate.h">
+      <Filter>Common\Keyboard</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Common">

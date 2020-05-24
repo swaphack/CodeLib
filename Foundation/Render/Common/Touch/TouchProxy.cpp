@@ -13,7 +13,8 @@ TouchProxy::TouchProxy(Node* target)
 
 TouchProxy::~TouchProxy()
 {
-	this->removeAllTouchEvent();
+	this->removeAllTouchDelegates();
+	this->removeAllTouchFuncs();
 	G_TOUCHMANAGER->removeTouch(this);
 }
 
@@ -37,6 +38,16 @@ bool TouchProxy::isTouchEnabled()
 	return _bTouchEnabled;
 }
 
+void render::TouchProxy::setSwallowTouch(bool status)
+{
+	_bSwallowTouch = status;
+}
+
+bool render::TouchProxy::isSwallowTouch()
+{
+	return _bSwallowTouch;
+}
+
 bool TouchProxy::onTouchBegan(float x, float y)
 {
 	if (_target == nullptr)
@@ -44,34 +55,39 @@ bool TouchProxy::onTouchBegan(float x, float y)
 		return false;
 	}
 
-	if (!_target->containTouchPoint(x, y))
+	bool include = _target->containTouchPoint(x, y);
+
+	dispatchTouchEvent(TouchType::DOWN, x, y, include);
+
+	return include;
+}
+
+bool TouchProxy::onTouchMoved(float x, float y)
+{
+	if (_target == nullptr)
 	{
 		return false;
 	}
 
-	dispatchTouchEvent(TouchType::DOWN, x, y);
+	bool include = _target->containTouchPoint(x, y);
 
-	return true;
+	dispatchTouchEvent(TouchType::ON, x, y, include);
+
+	return include;
 }
 
-void TouchProxy::onTouchMoved(float x, float y)
+bool TouchProxy::onTouchEnded(float x, float y)
 {
 	if (_target == nullptr)
 	{
-		return;
+		return false;
 	}
 
-	dispatchTouchEvent(TouchType::ON, x, y);
-}
+	bool include = _target->containTouchPoint(x, y);
 
-void TouchProxy::onTouchEnded(float x, float y)
-{
-	if (_target == nullptr)
-	{
-		return;
-	}
+	dispatchTouchEvent(TouchType::UP, x, y, include);
 
-	dispatchTouchEvent(TouchType::UP, x, y);
+	return include;
 }
 
 void TouchProxy::addTouchDelegate(TouchType type, sys::Object* object, TOUCH_DELEGATE_HANDLER handler)
@@ -79,58 +95,63 @@ void TouchProxy::addTouchDelegate(TouchType type, sys::Object* object, TOUCH_DEL
 	TouchDelegate del;
 	del.first = object;
 	del.second = handler;
-	_touchEvent[type].push_back(del);
+	_touchDelegates[type] = del;
 }
 
-void TouchProxy::removeTouchDelegate(TouchType type, sys::Object* object, TOUCH_DELEGATE_HANDLER handler)
+void TouchProxy::removeTouchDelegate(TouchType type)
 {
-	std::map<TouchType, std::vector<TouchDelegate>>::iterator it = _touchEvent.find(type);
-	if (it == _touchEvent.end())
+	auto it = _touchDelegates.find(type);
+	if (it == _touchDelegates.end())
+	{
+		return;
+	}
+	_touchDelegates.erase(it);
+}
+
+void TouchProxy::removeAllTouchDelegates()
+{
+	_touchDelegates.clear();
+}
+
+void render::TouchProxy::addTouchFunc(TouchType type, TouchFunc func)
+{
+	if (func == nullptr)
+	{
+		return;
+	}
+	_touchFuncs[type] = func;
+}
+
+void render::TouchProxy::removeTouchFunc(TouchType type)
+{
+	auto it = _touchFuncs.find(type);
+	if (it == _touchFuncs.end())
 	{
 		return;
 	}
 
-	std::vector<TouchDelegate>::iterator itD = it->second.begin();
-	while (itD != it->second.end())
-	{
-		if ((*itD).first == object && (*itD).second == handler)
-		{
-			it->second.erase(itD);
-			break;
-		}
-		itD++;
-	}
+	_touchFuncs.erase(it);
 }
 
-void TouchProxy::removeTouchEvent(TouchType type)
+void render::TouchProxy::removeAllTouchFuncs()
 {
-	std::map<TouchType, std::vector<TouchDelegate>>::iterator it = _touchEvent.find(type);
-	if (it == _touchEvent.end())
-	{
-		return;
-	}
-
-	it->second.clear();
-	_touchEvent.erase(it);
+	_touchFuncs.clear();
 }
 
-void TouchProxy::removeAllTouchEvent()
+void TouchProxy::dispatchTouchEvent(TouchType type, float x, float y, bool include)
 {
-	_touchEvent.clear();
-}
-
-void TouchProxy::dispatchTouchEvent(TouchType type, float x, float y)
-{
-	std::map<TouchType, std::vector<TouchDelegate>>::iterator it = _touchEvent.find(type);
-	if (it == _touchEvent.end())
+	auto it0 = _touchDelegates.find(type);
+	if (it0 != _touchDelegates.end())
 	{
-		return;
+		auto item = _touchDelegates[type];
+		((item.first)->*(item.second))(_target, x, y, include);
 	}
 
-	std::vector<TouchDelegate>::iterator itD = it->second.begin();
-	while (itD != it->second.end())
+	auto it1 = _touchFuncs.find(type);
+	if (it1 != _touchFuncs.end())
 	{
-		((*itD).first->*(*itD).second)(_target, x, y);
-		itD++;
+		auto item = _touchFuncs[type];
+		item(_target, x, y, include);
 	}
+	
 }

@@ -430,6 +430,9 @@
     <ClInclude Include="Algebra\Vector\Vector4.h">
       <Filter>Algebra\Vector</Filter>
     </ClInclude>
+    <ClInclude Include="Algebra\Matrix\Matrix14.h">
+      <Filter>Algebra\Matrix</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
@@ -660,6 +663,9 @@
     </ClCompile>
     <ClCompile Include="Algebra\Vector\Vector4.cpp">
       <Filter>Algebra\Vector</Filter>
+    </ClCompile>
+    <ClCompile Include="Algebra\Matrix\Matrix14.cpp">
+      <Filter>Algebra\Matrix</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

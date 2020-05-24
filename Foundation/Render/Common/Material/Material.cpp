@@ -7,6 +7,7 @@
 #include "Common/View/Camera.h"
 #include "Materials.h"
 #include "Common/Mesh/import.h"
+#include "Common/Texture/import.h"
 
 render::Material::Material()
 {
@@ -155,28 +156,33 @@ void render::Material::startUpdateShaderUniformValue(Node* node, Materials* mats
 
 		else if (item.first == VertexUniformType::AMBIENT_TEXTURE)
 		{
-			auto nTextureID = mats->getTexture(_detail->getAmbientTextureMap());
-			GLTexture::activeTexture(ActiveTextureName::TEXTURE0);
-			GLTexture::bindTexture2D(nTextureID);
+			auto pTexture = mats->getTexture(_detail->getAmbientTextureMap());
+			if (pTexture)
+			{
+				pTexture->bindTextureUnit(0);
+			}
 			pUniform->setValue(0);
 
 			GLDebug::showError();
 		}
 		else if (item.first == VertexUniformType::DIFFUSE_TEXTURE)
 		{
-			auto nTextureID = mats->getTexture(_detail->getDiffuseTextureMap());
-
-			GLTexture::activeTexture(ActiveTextureName::TEXTURE1);
-			GLTexture::bindTexture2D(nTextureID);
+			auto pTexture = mats->getTexture(_detail->getDiffuseTextureMap());
+			if (pTexture)
+			{
+				pTexture->bindTextureUnit(1);
+			}
 			pUniform->setValue(1);
 
 			GLDebug::showError();
 		}
 		else if (item.first == VertexUniformType::SPECULAR_TEXTURE)
 		{
-			auto nTextureID = mats->getTexture(_detail->getSpecularTextureMap());
-			GLTexture::activeTexture(ActiveTextureName::TEXTURE2);
-			GLTexture::bindTexture2D(nTextureID);
+			auto pTexture = mats->getTexture(_detail->getSpecularTextureMap());
+			if (pTexture)
+			{
+				pTexture->bindTextureUnit(2);
+			}
 			pUniform->setValue(2);
 
 			GLDebug::showError();
@@ -293,9 +299,11 @@ void render::Material::apply(Materials* mats)
 {
 	this->applyMaterial();
 
-	auto nTextureID = mats->getTexture(_detail->getAmbientTextureMap());
-	GLTexture::activeTexture(ActiveTextureName::TEXTURE0);
-	GLTexture::bindTexture2D(nTextureID);
+	auto pTexture = mats->getTexture(_detail->getAmbientTextureMap());
+	if (pTexture)
+	{
+		pTexture->bindTextureUnit(0);
+	}
 #if 0
 	nTextureID = this->getTexture(_detail->getDiffuseTextureMap());
 	GLTexture::activeTexture(ActiveTextureName::TEXTURE1);

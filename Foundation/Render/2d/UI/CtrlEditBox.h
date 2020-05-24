@@ -38,8 +38,8 @@ namespace render
 		// ÒÆ³ı¼üÅÌ¼àÌıÎ¯ÍĞ
 		void removeKeyboardDelegate();
 	protected:
-		void onTouchUp(sys::Object* object, float x, float y);
-		void onKeyBoardInput(sys::Object* object, sys::BoardKey key, sys::ButtonStatus type);
+		void onTouchUp(Node* node, float x, float y, bool include);
+		void onKeyBoardInput(Node* node, sys::BoardKey key, sys::ButtonStatus type);
 	private:
 		// ¼üÅÌÊÇ·ñ¿ÉÓÃ
 		bool _keyboardEnabled = false;

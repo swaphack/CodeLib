@@ -25,5 +25,5 @@ private:
 	void testImage();
 private:
 
-	void onKeyBoardRole(sys::Object* object, sys::BoardKey key, sys::ButtonStatus type);
+	void onKeyBoardRole(render::Node* node, sys::BoardKey key, sys::ButtonStatus type);
 };

@@ -313,6 +313,7 @@
     <ClInclude Include="Common\Fragment\FragmentScissorTest.h" />
     <ClInclude Include="Common\Fragment\FragmentStencilTest.h" />
     <ClInclude Include="Common\import.h" />
+    <ClInclude Include="Common\Keyboard\KeyboardDelegate.h" />
     <ClInclude Include="Common\macros.h" />
     <ClInclude Include="Common\Keyboard\import.h" />
     <ClInclude Include="Common\Keyboard\KeyboardManager.h" />

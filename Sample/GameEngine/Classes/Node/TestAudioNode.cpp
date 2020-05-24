@@ -50,7 +50,7 @@ void TestAudioNode::testAudio3D()
 	pListenerDrawNode->appendPoint(math::Vector3());
 	pListener->addChild(pListenerDrawNode);
 
-	G_KEYBOARDMANAGER->addDispatcher(pListener, this, KEYBOARD_DELEGATTE_SELECTOR(TestAudioNode::onKeyBoardListener));
+	G_KEYBOARDMANAGER->addKeyboardDelegate(this, pListener, KEYBOARD_DELEGATTE_SELECTOR(TestAudioNode::onKeyBoardListener));
 
 	CtrlAudioSource3D* pSrcAudio = CREATE_NODE(CtrlAudioSource3D);
 	pSrcAudio->loadDataFromFile("Resource/Audio/city_castle.mp3");
@@ -98,9 +98,9 @@ void TestAudioNode::testAudio3D()
 	this->addChild(pGeometryNode);
 }
 
-void TestAudioNode::onKeyBoardListener(sys::Object* object, sys::BoardKey key, sys::ButtonStatus type)
+void TestAudioNode::onKeyBoardListener(render::Node* node, sys::BoardKey key, sys::ButtonStatus type)
 {
-	CtrlAudioListener* pNode = dynamic_cast<CtrlAudioListener*>(object);
+	CtrlAudioListener* pNode = node->as<CtrlAudioListener>();
 	if (pNode == nullptr)
 	{
 		return;

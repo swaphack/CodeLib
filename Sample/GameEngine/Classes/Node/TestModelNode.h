@@ -26,5 +26,5 @@ private:
 
 	void testClipPlane();
 private:
-	void onKeyBoardCamera(sys::Object* object, sys::BoardKey key, sys::ButtonStatus type);
+	void onKeyBoardCamera(render::Node* node, sys::BoardKey key, sys::ButtonStatus type);
 };

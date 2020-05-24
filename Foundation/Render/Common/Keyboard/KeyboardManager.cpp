@@ -10,54 +10,85 @@ KeyboardManager::KeyboardManager()
 
 KeyboardManager::~KeyboardManager()
 {
-	this->removeAllDispatchers();
+	this->removeAllKeyboardDelegates();
 }
 
-void KeyboardManager::addDispatcher(sys::Object* node, sys::Object* target, KEYBOARD_DELEGATE_HANDLER handler)
+void KeyboardManager::addKeyboardDelegate(sys::Object* target, Node* node, KEYBOARD_DELEGATE_HANDLER handler)
 {
-	if (node == nullptr || handler == nullptr)
+	if (node == nullptr || target == nullptr || handler == nullptr)
 	{
 		return;
 	}
 
-	this->removeDispatcher(node);
+	KeyboardDelegate item;
+	item.first = node;
+	item.second = handler;
 
-	_keyboardDispatchers.push_back(sys::make_tuple3(target, handler, node));
+	_keyboardDelegates[target] = item;
 }
 
-void KeyboardManager::removeDispatcher(sys::Object* node)
+void KeyboardManager::removeKeyboardDelegate(sys::Object* target)
+{
+	if (target == nullptr)
+	{
+		return;
+	}
+
+	auto it = _keyboardDelegates.find(target);
+	if (it == _keyboardDelegates.end())
+	{
+		return;
+	}
+
+	_keyboardDelegates.erase(it);
+}
+
+void KeyboardManager::removeAllKeyboardDelegates()
+{
+	_keyboardDelegates.clear();
+}
+
+void render::KeyboardManager::addKeyboardFunc(Node* node, KeyboardFunc func)
+{
+	if (node == nullptr || func == nullptr)
+	{
+		return;
+	}
+
+	_keyboardFuncs[node] = func;
+}
+
+void render::KeyboardManager::removeKeyboardFunc(Node* node)
 {
 	if (node == nullptr)
 	{
 		return;
 	}
 
-	std::vector<KeyBoardDelegate>::iterator iter = _keyboardDispatchers.begin();
-
-	while (iter != _keyboardDispatchers.end())
+	auto it = _keyboardFuncs.find(node);
+	if (it == _keyboardFuncs.end())
 	{
-		if ((*iter).t3 == node)
-		{
-			_keyboardDispatchers.erase(iter);
-			break;
-		}
-
-		iter++;
+		return;
 	}
+
+	_keyboardFuncs.erase(it);
 }
 
-void KeyboardManager::removeAllDispatchers()
+void render::KeyboardManager::removeAllKeyboardFuncs()
 {
-	_keyboardDispatchers.clear();
+	_keyboardFuncs.clear();
 }
 
 void KeyboardManager::onDispatcher(sys::BoardKey key, sys::ButtonStatus type)
 {
-	std::vector<KeyBoardDelegate>::iterator iter = _keyboardDispatchers.begin();
-
-	while (iter != _keyboardDispatchers.end())
+	for (auto item : _keyboardDelegates)
 	{
-		((*iter).t1->*(*iter).t2)((*iter).t3, key, type);
-		iter++;
+		auto func = item.second.second;
+		(item.first->*func)(item.second.first, key, type);
+	}
+
+	for (auto item : _keyboardFuncs)
+	{
+		item.second(item.first, key, type);
 	}
 }

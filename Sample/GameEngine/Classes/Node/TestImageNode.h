@@ -20,11 +20,11 @@ private:
 
 	void testPixelImage();
 private:
-	void onTouchBegin(sys::Object* object, float x, float y);
-	void onTouchMove(sys::Object* object, float x, float y);
-	void onTouchEnd(sys::Object* object, float x, float y);
-	void onKeyBoard(sys::Object* object, sys::BoardKey key, sys::ButtonStatus type);
+	void onTouchBegin(Node* node, float x, float y, bool include);
+	void onTouchMove(Node* node, float x, float y, bool include);
+	void onTouchEnd(Node* node, float x, float y, bool include);
+	void onKeyBoard(Node* node, sys::BoardKey key, sys::ButtonStatus type);
 
 
-	void onTouchImage(sys::Object* object, float x, float y);
+	void onTouchImage(Node* node, float x, float y, bool include);
 };

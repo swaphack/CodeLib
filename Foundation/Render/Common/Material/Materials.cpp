@@ -143,7 +143,7 @@ void Materials::removeAllTextures()
 	_textures.clear();
 }
 
-int Materials::getTexture(const std::string& name) const
+Texture2D* Materials::getTexture(const std::string& name) const
 {
 	auto it = _textures.find(name);
 	if (it == _textures.end())
@@ -151,7 +151,7 @@ int Materials::getTexture(const std::string& name) const
 		return 0;
 	}
 
-	return it->second->getTextureID();
+	return it->second;
 }
 
 Texture2D* Materials::createTexture(const std::string& strFullpath)

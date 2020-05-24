@@ -144,44 +144,44 @@ const math::Size& CtrlScrollView::getItemSize()
 }
 
 
-void CtrlScrollView::onBeginTouch(sys::Object* object, float x, float y)
+void CtrlScrollView::onBeginTouch(Node* node, float x, float y, bool include)
 {
-	if (object != this)
+	if (node != this)
 	{
 		return;
 	}
 
-	onTouchBegan(x, y);
+	onTouchBegan(x, y, include);
 }
 
-void CtrlScrollView::onMoveTouch(sys::Object* object, float x, float y)
+void CtrlScrollView::onMoveTouch(Node* node, float x, float y, bool include)
 {
-	if (object != this)
+	if (node != this)
 	{
 		return;
 	}
 
-	onTouchMoved(x, y);
+	onTouchMoved(x, y, include);
 }
 
-void CtrlScrollView::onEndTouch(sys::Object* object, float x, float y)
+void CtrlScrollView::onEndTouch(Node* node, float x, float y, bool include)
 {
-	if (object != this)
+	if (node != this)
 	{
 		return;
 	}
 
-	onTouchEnded(x, y);
+	onTouchEnded(x, y, include);
 }
 
-bool CtrlScrollView::onTouchBegan(float x, float y)
+bool CtrlScrollView::onTouchBegan(float x, float y, bool include)
 {
 	_touchPosition.set(x, y);
 
 	return true;
 }
 
-void CtrlScrollView::onTouchMoved(float x, float y)
+bool CtrlScrollView::onTouchMoved(float x, float y, bool include)
 {
 	math::Vector2 delta = math::Vector2(x, y);
 	delta-=_touchPosition;
@@ -239,11 +239,13 @@ void CtrlScrollView::onTouchMoved(float x, float y)
 	_content->setPosition(pos);
 
 	_touchPosition = math::Vector2(x, y);
+
+	return true;
 }
 
-void CtrlScrollView::onTouchEnded(float x, float y)
+bool CtrlScrollView::onTouchEnded(float x, float y, bool include)
 {
-
+	return true;
 }
 
 void CtrlScrollView::initItems()

@@ -82,12 +82,12 @@ void TestImageNode::testMoveImage()
 
 	pImage->getTouchProxy()->addTouchDelegate(TouchType::UP, this, TOUCH_DELEGATTE_SELECTOR(TestImageNode::onTouchEnd));
 
-	G_KEYBOARDMANAGER->addDispatcher(pImage, this, KEYBOARD_DELEGATTE_SELECTOR(TestImageNode::onKeyBoard));
+	G_KEYBOARDMANAGER->addKeyboardDelegate(this, pImage, KEYBOARD_DELEGATTE_SELECTOR(TestImageNode::onKeyBoard));
 }
 
-void TestImageNode::onTouchBegin(sys::Object* object, float x, float y)
+void TestImageNode::onTouchBegin(Node* node, float x, float y, bool include)
 {
-	CtrlImage* pNode = dynamic_cast<CtrlImage*>(object);
+	CtrlImage* pNode = node->as<CtrlImage>();
 	if (pNode == nullptr)
 	{
 		return;
@@ -100,9 +100,9 @@ void TestImageNode::onTouchBegin(sys::Object* object, float x, float y)
 	pNode->setUserData(pAry);
 }
 
-void TestImageNode::onTouchMove(sys::Object* object, float x, float y)
+void TestImageNode::onTouchMove(Node* node, float x, float y, bool include)
 {
-	CtrlImage* pNode = dynamic_cast<CtrlImage*>(object);
+	CtrlImage* pNode = node->as<CtrlImage>();
 	if (pNode == nullptr)
 	{
 		return;
@@ -112,9 +112,9 @@ void TestImageNode::onTouchMove(sys::Object* object, float x, float y)
 	pNode->setPosition((*pAry)[0].getX() + x - (*pAry)[1].getX(), (*pAry)[0].getY() + y - (*pAry)[1].getY(), 0);
 }
 
-void TestImageNode::onTouchEnd(sys::Object* object, float x, float y)
+void TestImageNode::onTouchEnd(Node* node, float x, float y, bool include)
 {
-	CtrlImage* pNode = dynamic_cast<CtrlImage*>(object);
+	CtrlImage* pNode = node->as<CtrlImage>();
 	if (pNode == nullptr)
 	{
 		return;
@@ -124,9 +124,9 @@ void TestImageNode::onTouchEnd(sys::Object* object, float x, float y)
 	SAFE_DELETE(pAry);
 }
 
-void TestImageNode::onKeyBoard(sys::Object* object, sys::BoardKey key, sys::ButtonStatus type)
+void TestImageNode::onKeyBoard(Node* node, sys::BoardKey key, sys::ButtonStatus type)
 {
-	CtrlImage* pNode = dynamic_cast<CtrlImage*>(object);
+	CtrlImage* pNode = node->as<CtrlImage>();
 	if (pNode == nullptr)
 	{
 		return;
@@ -175,9 +175,9 @@ void TestImageNode::testPixelImage()
 	pImage->getTouchProxy()->addTouchDelegate(TouchType::ON, this, TOUCH_DELEGATTE_SELECTOR(TestImageNode::onTouchImage));
 }
 
-void TestImageNode::onTouchImage(sys::Object* object, float x, float y)
+void TestImageNode::onTouchImage(Node* node, float x, float y, bool include)
 {
-	CtrlImage* pImage = dynamic_cast<CtrlImage*>(object);
+	CtrlImage* pImage = node->as<CtrlImage>();
 	if (pImage == nullptr)
 	{
 		return;
