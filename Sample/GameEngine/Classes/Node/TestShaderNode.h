@@ -19,6 +19,7 @@ private:
 	void testSubroutineUniform();
 	void testImageShader();
 	void testCubeModelShader();
+	void testSphereModelShader();
 	
 	void test3dsModelShader();
 	void testObjModelShader();

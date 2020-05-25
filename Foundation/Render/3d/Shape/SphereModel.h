@@ -45,18 +45,23 @@ namespace render
 		SphereModel();
 		virtual ~SphereModel();
 	public:
-		virtual void draw();
-
+		virtual bool init();
+	public:
 		// …Ë÷√«Ú∞Îæ∂
 		void setRadius(float radius);
 		// ªÒ»°«Ú∞Îæ∂
 		float getRadius();
-		// …Ë÷√Œ∆¿Ì÷°
-		void setTexFrame(TexFrame* frame);
+	protected:
+		math::Vector3 getPoint(const math::Vector2& uv);
+		math::Vector3 getPoint(float u, float v);
+
+		void updateSphere();
+	protected:
+		virtual void onDraw();
+		virtual void initBufferObject();
+		virtual void updateBufferData();
 	private:
 		// «Ú∞Îæ∂
 		float _radius = 1;
-		float _obRadius = 1;
-		TexFrame* _frame = nullptr;
 	};
 }

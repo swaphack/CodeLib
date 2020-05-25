@@ -224,7 +224,7 @@ Polygon Surface::projectOnXOY(const Surface& surface)
 	}
 
 	// ͶӰ
-	Polygon polygon(ps, count);
+	Polygon polygon(count, ps);
 	delete[] ps;
 
 	return polygon;
@@ -244,7 +244,7 @@ Polygon Surface::projectOnYOZ(const Surface& surface)
 	}
 
 	// ͶӰ
-	Polygon polygon(ps, count);
+	Polygon polygon(count, ps);
 	delete[] ps;
 
 	return polygon;
@@ -265,7 +265,7 @@ Polygon Surface::projectOnXOZ(const Surface& surface)
 	}
 
 	// ͶӰ
-	Polygon polygon(ps, count);
+	Polygon polygon(count, ps);
 	delete[] ps;
 
 	return polygon;

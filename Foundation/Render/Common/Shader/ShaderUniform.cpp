@@ -88,6 +88,11 @@ uint32_t render::ShaderUniform::getUniformID()
 	return _uniformID;
 }
 
+void render::ShaderUniform::setValue(uint32_t v0)
+{
+	GLShader::setUniformValue(getUniformID(), (int32_t)v0);
+}
+
 void render::ShaderUniform::setMatrix2(bool transpose, const float* value)
 {
 	this->setMatrix2(1, transpose, value);

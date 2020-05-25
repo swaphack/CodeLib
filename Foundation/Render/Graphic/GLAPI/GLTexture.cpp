@@ -421,6 +421,31 @@ void render::GLTexture::setTexParameter(TextureTarget target, TextureParameter p
 	glTexParameterf((GLenum)target, (GLenum)paramType, paramValue);
 }
 
+void render::GLTexture::setTextureParameter(uint32_t texture, TextureParameter paramType, int paramValue)
+{
+	glTextureParameteri(texture, (GLenum)paramType, paramValue);
+}
+
+void render::GLTexture::setTextureParameter(uint32_t texture, TextureParameter paramType, const uint32_t* paramValue)
+{
+	glTextureParameterIuiv(texture, (GLenum)paramType, paramValue);
+}
+
+void render::GLTexture::setTextureParameter(uint32_t texture, TextureParameter paramType, const float* paramValue)
+{
+	glTextureParameterfv(texture, (GLenum)paramType, paramValue);
+}
+
+void render::GLTexture::setTextureParameter(uint32_t texture, TextureParameter paramType, const int* paramValue)
+{
+	glTextureParameteriv(texture, (GLenum)paramType, paramValue);
+}
+
+void render::GLTexture::setTextureParameter(uint32_t texture, TextureParameter paramType, float paramValue)
+{
+	glTextureParameterf(texture, (GLenum)paramType, paramValue);
+}
+
 void render::GLTexture::setTexParameter(TextureTarget target, TextureParameter paramType, const int* paramValue)
 {
 	glTexParameteriv((GLenum)target, (GLenum)paramType, paramValue);

@@ -102,13 +102,15 @@ void render::Meshes::drawNodeWithMaterials(Node* node, Materials* mats)
 
 			pMesh->drawWithBufferObject();
 
-			pMat->endApplyWithShader(pMesh);
+			pMat->endApplyWithShader(pMesh, mats);
 		}
 		else
 		{
-			pMat->apply(mats);
+			pMat->beginApply(mats);
 
 			pMesh->drawWithClientArray();
+
+			pMat->endApply(mats);
 		}
 
 		GLState::disable(EnableMode::TEXTURE_2D);

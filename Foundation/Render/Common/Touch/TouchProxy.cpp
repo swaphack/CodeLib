@@ -56,6 +56,11 @@ bool TouchProxy::onTouchBegan(float x, float y)
 	}
 
 	bool include = _target->containTouchPoint(x, y);
+	_bIncludeTouch = include;
+	if (!_bIncludeTouch)
+	{
+		return include;
+	}
 
 	dispatchTouchEvent(TouchType::DOWN, x, y, include);
 
@@ -65,6 +70,10 @@ bool TouchProxy::onTouchBegan(float x, float y)
 bool TouchProxy::onTouchMoved(float x, float y)
 {
 	if (_target == nullptr)
+	{
+		return false;
+	}
+	if (!_bIncludeTouch)
 	{
 		return false;
 	}
@@ -82,6 +91,7 @@ bool TouchProxy::onTouchEnded(float x, float y)
 	{
 		return false;
 	}
+	_bIncludeTouch = false;
 
 	bool include = _target->containTouchPoint(x, y);
 

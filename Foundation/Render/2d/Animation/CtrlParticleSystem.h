@@ -27,7 +27,7 @@ namespace render
 		// 初始颜色
 		sys::Color4F _colorInit;
 		// 纹理坐标
-		TextureRectVertex _texRect;
+		RectVertex _texRect;
 	};
 
 	// 粒子系统

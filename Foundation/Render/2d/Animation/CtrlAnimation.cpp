@@ -90,7 +90,7 @@ int CtrlAnimation::getFrame()
 	return static_cast<int>(_frame);
 }
 
-CtrlFrame* CtrlAnimation::getMovie()
+CtrlFrame* CtrlAnimation::getAnimationFrame()
 {
 	return _ctrlFrame;
 }

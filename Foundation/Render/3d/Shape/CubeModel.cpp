@@ -25,17 +25,15 @@ bool CubeModel::init()
 	_notify->addListen(NodeNotifyType::SPACE, [this](){
 		TextureTool::setTexture3DVertexts(&_cubePosition, math::Vector3(), _volume, _anchor);
 
-		this->onCubeChange();
+		this->updateBufferData();
 	});
 	_notify->addListen(NodeNotifyType::MODEL, [this]() {
-		this->onCubeChange();
+		this->updateBufferData();
 	});
-
-	this->initModelDetail();
 	return true;
 }
 
-void CubeModel::onCubeChange()
+void CubeModel::updateBufferData()
 {
 	if (!_loadModel)
 	{
@@ -78,33 +76,12 @@ void CubeModel::onCubeChange()
 	_meshes->updateBufferData();
 }
 
-void render::CubeModel::addTexture(const std::string& name, Texture2D* texture)
-{
-	_materiales->addTexture(name, texture);
-}
-
-void render::CubeModel::setAllFacesTexture(const std::string& name)
-{
-	for (int i = 0; i < CUBE_FACE_COUNT; i++)
-	{
-		auto pMat = _materiales->getMaterial(i);
-		if (pMat)
-		{
-			pMat->getMaterialDetail()->setAmbientTextureMap(name);
-		}
-	}
-}
-
 void render::CubeModel::setFaceTexture(ModelFace face, const std::string& name)
 {
-	auto pMat = _materiales->getMaterial((int)face);
-	if (pMat)
-	{
-		pMat->getMaterialDetail()->setAmbientTextureMap(name);
-	}
+	setMaterialTexture((int)face, name);
 }
 
-void render::CubeModel::initModelDetail()
+void render::CubeModel::initBufferObject()
 {
 	sys::ModelDetail* pModel = CREATE_OBJECT(sys::ModelDetail);
 

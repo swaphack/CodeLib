@@ -138,15 +138,12 @@ void render::Mesh::drawWithClientArray()
 		GLDebug::showError();
 	}
 
-	GLState::enable(EnableMode::TEXTURE_2D);
-
 	const sys::MeshMemoryData& indices = _detail->getIndices();
 	if (indices.getLength() > 0)
 	{
 		GLClientArrays::drawElements(DrawMode::TRIANGLES, indices.getLength(), IndexDataType::UNSIGNED_INT, indices.getValue());
 		GLDebug::showError();
 	}
-	GLState::disable(EnableMode::TEXTURE_2D);
 
 	GLClientArrays::disableClientState(ClientArrayType::VERTEX_ARRAY);
 	GLClientArrays::disableClientState(ClientArrayType::NORMAL_ARRAY);

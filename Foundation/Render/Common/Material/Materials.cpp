@@ -90,6 +90,26 @@ const std::map<int, Material*>& render::Materials::getMaterials() const
 	return _materials;
 }
 
+int render::Materials::getMaterialCount() const
+{
+	return _materials.size();
+}
+
+void render::Materials::addTexture(const std::string& name, const std::string& fullpath)
+{
+	if (fullpath.empty())
+	{
+		return;
+	}
+	Texture2D* pTexture = G_TEXTURE_CACHE->createTexture2D(fullpath);
+	if (!pTexture)
+	{
+		return;
+	}
+
+	this->addTexture(name, pTexture);
+}
+
 void render::Materials::updateMatTexture()
 {
 	if (_texturePaths.empty())
@@ -98,11 +118,7 @@ void render::Materials::updateMatTexture()
 	}
 	for (auto item : _texturePaths)
 	{
-		Texture2D* pTexture = this->createTexture(item.second);
-		if (pTexture)
-		{
-			this->addTexture(item.first, pTexture);
-		}
+		this->addTexture(item.first, item.second);
 	}
 	_texturePaths.clear();
 }
@@ -152,14 +168,4 @@ Texture2D* Materials::getTexture(const std::string& name) const
 	}
 
 	return it->second;
-}
-
-Texture2D* Materials::createTexture(const std::string& strFullpath)
-{
-	if (strFullpath.empty())
-	{
-		return nullptr;
-	}
-	Texture2D* pTexture = G_TEXTURE_CACHE->createTexture2D(strFullpath);
-	return pTexture;
 }

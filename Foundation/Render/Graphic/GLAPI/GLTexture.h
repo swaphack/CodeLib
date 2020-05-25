@@ -99,6 +99,12 @@ namespace render
 		static void setTexParameter(TextureTarget target, TextureParameter paramType, float paramValue);
 		static void setTexParameter(TextureTarget target, TextureParameter paramType, const int* paramValue);
 		static void setTexParameter(TextureTarget target, TextureParameter paramType, const float* paramValue);
+
+		static void setTextureParameter(uint32_t texture, TextureParameter paramType, int paramValue);
+		static void setTextureParameter(uint32_t texture, TextureParameter paramType, float paramValue);
+		static void setTextureParameter(uint32_t texture, TextureParameter paramType, const int* paramValue);
+		static void setTextureParameter(uint32_t texture, TextureParameter paramType, const uint32_t* paramValue);
+		static void setTextureParameter(uint32_t texture, TextureParameter paramType, const float* paramValue);
 	public:
 		static void setTexStorage1D(TextureTarget1D target, int level, TextureInternalSizedFormat internalFormat, int width);
 		static void setTexStorage2D(TextureTarget2D target, int level, TextureInternalSizedFormat internalFormat, int width, int heigth);

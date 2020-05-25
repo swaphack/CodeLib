@@ -162,14 +162,14 @@ void CtrlText::onTextChange()
 
 	math::Size size = math::Size(texture->getWidth(), texture->getHeight());
 	math::Rect rect(math::Vector2(), size);
-	TextureTool::setTexture2DCoords(&_texRect, size, rect);
+	TextureTool::setTexture2DCoords(&_vertexes, size, rect);
 
 
 	math::Vector3 anchor = math::Vector3(0.5f, 0.5f, 0.5f);
 	math::Vector3 orgin = getOrgin(size);
 	math::Volume volume = math::Volume(texture->getWidth(), texture->getHeight());
 
-	TextureTool::setTexture2DVertexts(&_texRect, orgin, volume, anchor);
+	TextureTool::setTexture2DVertexts(&_vertexes, orgin, volume, anchor);
 }
 
 math::Vector3 render::CtrlText::getOrgin(const math::Size& size)

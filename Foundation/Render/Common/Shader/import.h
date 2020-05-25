@@ -7,3 +7,4 @@
 #include "ShaderAttrib.h"
 #include "Shader.h"
 #include "ShaderProgram.h"
+#include "ShaderProgramDelegate.h"

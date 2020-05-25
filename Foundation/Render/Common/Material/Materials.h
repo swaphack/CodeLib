@@ -53,27 +53,32 @@ namespace render
 		*	获取模型材质
 		*/
 		const std::map<int, Material*>& getMaterials() const;
-	
+		/**
+		*	统计模型材质数量
+		*/
+		int getMaterialCount() const;
 	public:
 		/**
-		*	设置模型网格
+		*	添加纹理
+		*/
+		void addTexture(const std::string& name, const std::string& fullpath);
+		/**
+		*	添加纹理
 		*/
 		void addTexture(const std::string& name, const Texture2D* id);
 		/**
-		*	移除模型网格
+		*	移除纹理
 		*/
 		void removeTexture(const std::string& name);
 		/**
-		*	移除所有模型网格
+		*	移除纹理
 		*/
 		void removeAllTextures();
 		/**
-		*	获取模型网格
+		*	获取纹理
 		*/
 		Texture2D* getTexture(const std::string& name) const;
-
-		// 创建纹理
-		Texture2D* createTexture(const std::string& strFullpath);
+	public:
 		// 更新纹理
 		void updateMatTexture();
 	private:

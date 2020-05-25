@@ -23,8 +23,6 @@ namespace render
 		void setTexture(const Texture2D* texture);
 		// 设置图片纹理
 		void setTextureWithRect(const Texture2D* texture);
-		// 设置要显示的纹理区域
-		void setTexRect(const math::Rect& rect);
 		// 设置水平翻转
 		void setFlipX(bool status);
 		// 是否水平翻转
@@ -33,17 +31,13 @@ namespace render
 		void setFlipY(bool status);
 		// 是否垂直翻转
 		bool isFlipY();
-	public:
-		Materials* getMaterials();
-		Meshes* getMeshes();
 	protected:
 		void onTextureChange();
 
-		virtual void initBufferObject();
 		virtual void updateBufferData();
 	protected:
-		// 纹理坐标
-		TextureRectVertex _texRect;
+		// 顶点坐标信息
+		RectVertex _vertexes;
 		// 是否水平翻转
 		bool _bFlipX = false;
 		// 是否垂直翻转

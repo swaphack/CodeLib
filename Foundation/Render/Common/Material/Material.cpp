@@ -120,7 +120,6 @@ void render::Material::applyMaterial()
 		GLMaterial::setMaterialEmission(FaceType::FRONT, matrialEmission);
 		GLDebug::showError();
 	}
-
 }
 
 void render::Material::startUpdateShaderUniformValue(Node* node, Materials* mats)
@@ -159,10 +158,14 @@ void render::Material::startUpdateShaderUniformValue(Node* node, Materials* mats
 			auto pTexture = mats->getTexture(_detail->getAmbientTextureMap());
 			if (pTexture)
 			{
-				pTexture->bindTextureUnit(0);
+				pTexture->activeTexture(0);
+				GLDebug::showError();
+				pTexture->bindSampler(0);
+				GLDebug::showError();
+				pTexture->bindTexture();
+				//pUniform->setValue(pTexture->getTextureID());
 			}
 			pUniform->setValue(0);
-
 			GLDebug::showError();
 		}
 		else if (item.first == VertexUniformType::DIFFUSE_TEXTURE)
@@ -170,7 +173,12 @@ void render::Material::startUpdateShaderUniformValue(Node* node, Materials* mats
 			auto pTexture = mats->getTexture(_detail->getDiffuseTextureMap());
 			if (pTexture)
 			{
-				pTexture->bindTextureUnit(1);
+				pTexture->activeTexture(1);
+				GLDebug::showError();
+				pTexture->bindSampler(1);
+				GLDebug::showError();
+				pTexture->bindTexture();
+				//pUniform->setValue(pTexture->getTextureID());
 			}
 			pUniform->setValue(1);
 
@@ -181,7 +189,12 @@ void render::Material::startUpdateShaderUniformValue(Node* node, Materials* mats
 			auto pTexture = mats->getTexture(_detail->getSpecularTextureMap());
 			if (pTexture)
 			{
-				pTexture->bindTextureUnit(2);
+				pTexture->activeTexture(2);
+				GLDebug::showError();
+				pTexture->bindSampler(2);
+				GLDebug::showError();
+				pTexture->bindTexture();
+				//pUniform->setValue(pTexture->getTextureID());
 			}
 			pUniform->setValue(2);
 
@@ -265,8 +278,52 @@ void render::Material::startUpdateShaderVertexValue(Mesh* pMesh)
 	GLDebug::showError();
 }
 
-void render::Material::endUpdateShaderUniformValue()
+void render::Material::endUpdateShaderUniformValue(Materials* mats)
 {
+	if (_shaderProgram == nullptr)
+	{
+		return;
+	}
+
+	for (auto item : _vertexUniformIndices)
+	{
+		auto pUniform = _shaderProgram->getUniform(item.second);
+		if (!pUniform)
+		{
+			continue;
+		}
+		if (item.first == VertexUniformType::AMBIENT_TEXTURE)
+		{
+			auto pTexture = mats->getTexture(_detail->getAmbientTextureMap());
+			if (pTexture)
+			{
+				pTexture->unbindTexture();
+			}
+
+			GLDebug::showError();
+		}
+		else if (item.first == VertexUniformType::DIFFUSE_TEXTURE)
+		{
+			auto pTexture = mats->getTexture(_detail->getDiffuseTextureMap());
+			if (pTexture)
+			{
+				pTexture->unbindTexture();
+			}
+
+			GLDebug::showError();
+		}
+		else if (item.first == VertexUniformType::SPECULAR_TEXTURE)
+		{
+			auto pTexture = mats->getTexture(_detail->getSpecularTextureMap());
+			if (pTexture)
+			{
+				pTexture->unbindTexture();
+			}
+			GLDebug::showError();
+		}
+
+		GLDebug::showError();
+	}
 	GLDebug::showError();	
 }
 
@@ -295,7 +352,7 @@ void render::Material::endUpdateShaderVertexValue(Mesh* pMesh)
 	}
 }
 
-void render::Material::apply(Materials* mats)
+void render::Material::beginApply(Materials* mats)
 {
 	this->applyMaterial();
 
@@ -303,6 +360,25 @@ void render::Material::apply(Materials* mats)
 	if (pTexture)
 	{
 		pTexture->bindTextureUnit(0);
+		pTexture->applyTextureSetting();
+	}
+#if 0
+	nTextureID = this->getTexture(_detail->getDiffuseTextureMap());
+	GLTexture::activeTexture(ActiveTextureName::TEXTURE1);
+	GLTexture::bindTexture2D(nTextureID);
+
+	nTextureID = this->getTexture(_detail->getSpecularTextureMap());
+	GLTexture::activeTexture(ActiveTextureName::TEXTURE2);
+	GLTexture::bindTexture2D(nTextureID);
+#endif // 0
+}
+
+void render::Material::endApply(Materials* mats)
+{
+	auto pTexture = mats->getTexture(_detail->getAmbientTextureMap());
+	if (pTexture)
+	{
+		pTexture->unbindTexture();
 	}
 #if 0
 	nTextureID = this->getTexture(_detail->getDiffuseTextureMap());
@@ -333,9 +409,9 @@ void render::Material::beginApplyWithShader(Node* node, Mesh* pMesh, Materials* 
 	this->startUpdateShaderVertexValue(pMesh);
 }
 
-void render::Material::endApplyWithShader(Mesh* pMesh)
+void render::Material::endApplyWithShader(Mesh* pMesh, Materials* mats)
 {
-	this->endUpdateShaderUniformValue();
+	this->endUpdateShaderUniformValue(mats);
 	this->endUpdateShaderVertexValue(pMesh);
 
 	if (_shaderProgram)

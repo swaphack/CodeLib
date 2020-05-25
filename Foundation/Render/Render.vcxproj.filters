@@ -1023,6 +1023,9 @@
     <ClInclude Include="Common\Keyboard\KeyboardDelegate.h">
       <Filter>Common\Keyboard</Filter>
     </ClInclude>
+    <ClInclude Include="Common\Shader\ShaderProgramDelegate.h">
+      <Filter>Common\Shader</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Common">

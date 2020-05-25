@@ -11,6 +11,8 @@ namespace sys
 
 namespace render
 {
+	class Sampler;
+
 	class TextureSetting
 	{
 	public:
@@ -81,6 +83,27 @@ namespace render
 		void setTexParameter(TextureParameter name, const float* value);
 	public:
 		/**
+		*	设置参数
+		*/
+		void setTextureParameter(TextureParameter name, int value);
+		/**
+		*	设置参数
+		*/
+		void setTextureParameter(TextureParameter name, float value);
+		/**
+		*	设置参数
+		*/
+		void setTextureParameter(TextureParameter name, const int* value);
+		/**
+		*	设置参数
+		*/
+		void setTextureParameter(TextureParameter name, const uint32_t* value);
+		/**
+		*	设置参数
+		*/
+		void setTextureParameter(TextureParameter name, const float* value);
+	public:
+		/**
 		*	纹理是否可用
 		*/
 		bool isValid() const;
@@ -97,16 +120,37 @@ namespace render
 		*/
 		void activeTexture(ActiveTextureName unit);
 		/**
+		*	启用
+		*/
+		void activeTexture(uint32_t unit);
+		/**
 		*	绑定纹理单元
 		*	等价
 		*	activeTexture(ActiveTextureName::TEXTURE0 + unit);
 		*	bindTexture();
 		*/
 		void bindTextureUnit(uint32_t unit);
+	public:
+		/**
+		*	设置纹理配置
+		*/
+		void setTextureSetting(const TextureSetting& setting);
+		/**
+		*	纹理配置
+		*/
+		const TextureSetting& getTextureSetting() const;
 		/**
 		*	应用配置
 		*/
-		void apply(const TextureSetting& setting);
+		void applyTextureSettingWithSampler();
+		/**
+		*	应用配置
+		*/
+		void applyTextureSetting();
+		/**
+		*	应用配置
+		*/
+		void bindSampler(uint32_t unit);
 	public:
 		/**
 		*	获取纹理数据
@@ -151,5 +195,14 @@ namespace render
 		*	深度
 		*/
 		uint32_t _depth = 0;
+		/**
+		*	采样器
+		*/
+		Sampler* _sampler = nullptr;
+
+		/**
+		*	纹理配置
+		*/
+		TextureSetting _textureSettings;
 	};
 }

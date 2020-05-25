@@ -34,6 +34,7 @@ namespace render
 		void setValue(float v0, float v1, float v2);
 		void setValue(float v0, float v1, float v2, float v3);
 
+		void setValue(uint32_t v0);
 		void setValue(int32_t v0);
 		void setValue(int32_t v0, int32_t v1);
 		void setValue(int32_t v0, int32_t v1, int32_t v2);

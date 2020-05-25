@@ -1,10 +1,12 @@
 #include "Texture.h"
 #include <exception>
 #include "Graphic/import.h"
+#include "Sampler.h"
 using namespace render;
 
 Texture::~Texture()
 {
+	SAFE_RELEASE(_sampler);
 	this->releaseTexture();
 }
 
@@ -28,6 +30,31 @@ void render::Texture::setTexParameter(TextureParameter name, float value)
 	GLTexture::setTexParameter(_textureTarget, name, value);
 }
 
+void render::Texture::setTextureParameter(TextureParameter name, int value)
+{
+	GLTexture::setTextureParameter(_textureID, name, value);
+}
+
+void render::Texture::setTextureParameter(TextureParameter name, const float* value)
+{
+	GLTexture::setTextureParameter(_textureID, name, value);
+}
+
+void render::Texture::setTextureParameter(TextureParameter name, const uint32_t* value)
+{
+	GLTexture::setTextureParameter(_textureID, name, value);
+}
+
+void render::Texture::setTextureParameter(TextureParameter name, const int* value)
+{
+	GLTexture::setTextureParameter(_textureID, name, value);
+}
+
+void render::Texture::setTextureParameter(TextureParameter name, float value)
+{
+	GLTexture::setTextureParameter(_textureID, name, value);
+}
+
 bool render::Texture::isValid() const
 {
 	if (_textureID == 0)
@@ -49,7 +76,12 @@ void render::Texture::unbindTexture()
 
 void render::Texture::activeTexture(ActiveTextureName unit)
 {
-	GLTexture::activeTexture(ActiveTextureName::TEXTURE0);
+	GLTexture::activeTexture(unit);
+}
+
+void render::Texture::activeTexture(uint32_t unit)
+{
+	GLTexture::activeTexture((ActiveTextureName)((uint32_t)ActiveTextureName::TEXTURE0 + unit));
 }
 
 void render::Texture::bindTextureUnit(uint32_t unit)
@@ -57,12 +89,42 @@ void render::Texture::bindTextureUnit(uint32_t unit)
 	GLTexture::bindTextureUnit(unit, _textureID);
 }
 
-void render::Texture::apply(const TextureSetting& setting)
+void render::Texture::setTextureSetting(const TextureSetting& setting)
 {
-	this->setTexParameter(TextureParameter::TEXTURE_MIN_FILTER, (int)setting.minFilter);
-	this->setTexParameter(TextureParameter::TEXTURE_MAG_FILTER, (int)setting.magFilter);
-	this->setTexParameter(TextureParameter::TEXTURE_WRAP_S, (int)setting.wrapS);
-	this->setTexParameter(TextureParameter::TEXTURE_WRAP_T, (int)setting.wrapT);
+	_textureSettings = setting;
+	applyTextureSettingWithSampler();
+}
+
+const TextureSetting& render::Texture::getTextureSetting() const
+{
+	return _textureSettings;
+}
+
+void render::Texture::applyTextureSettingWithSampler()
+{
+	if (_sampler == nullptr)
+	{
+		return;
+	}
+
+	_sampler->apply(_textureSettings);
+}
+
+void render::Texture::applyTextureSetting()
+{
+	this->setTextureParameter(TextureParameter::TEXTURE_MIN_FILTER, (int)_textureSettings.minFilter);
+	this->setTextureParameter(TextureParameter::TEXTURE_MAG_FILTER, (int)_textureSettings.magFilter);
+	this->setTextureParameter(TextureParameter::TEXTURE_WRAP_S, (int)_textureSettings.wrapS);
+	this->setTextureParameter(TextureParameter::TEXTURE_WRAP_T, (int)_textureSettings.wrapT);
+}
+
+void render::Texture::bindSampler(uint32_t unit)
+{
+	if (_sampler == nullptr)
+	{
+		return;
+	}
+	_sampler->bindTexture(unit);
 }
 
 void render::Texture::getTextureImage(int level, TextureExternalFormat format, TextureExternalDataType type, int size, void* pixels)
@@ -222,12 +284,18 @@ int render::Texture::getWidth() const
 
 render::Texture::Texture(TextureTarget target)
 {
+	_sampler = CREATE_OBJECT(Sampler);
+	SAFE_RETAIN(_sampler);
+
 	_textureTarget = target;
 	this->initTexture();
 }
 
 render::Texture::Texture()
 {
+	_sampler = CREATE_OBJECT(Sampler);
+	SAFE_RETAIN(_sampler);
+
 	this->initTexture();
 }
 

@@ -335,6 +335,7 @@
     <ClInclude Include="Common\Shader\import.h" />
     <ClInclude Include="Common\Shader\Shader.h" />
     <ClInclude Include="Common\Shader\ShaderProgram.h" />
+    <ClInclude Include="Common\Shader\ShaderProgramDelegate.h" />
     <ClInclude Include="Common\Shader\ShaderProgramPipeline.h" />
     <ClInclude Include="Common\Shader\ShaderProgramUniform.h" />
     <ClInclude Include="Common\Shader\ShaderSubroutineUniform.h" />

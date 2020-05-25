@@ -3,7 +3,7 @@
 
 render::Sampler::Sampler()
 {
-	this->releaseSampler();
+	this->initSampler();
 }
 
 render::Sampler::~Sampler()
@@ -21,9 +21,14 @@ bool render::Sampler::isValid() const
 	return GLSampler::isSampler(_samplerID);
 }
 
-void render::Sampler::bind(uint32_t unit)
+void render::Sampler::bindTexture(uint32_t unit)
 {
 	GLSampler::bindSampler(unit, _samplerID);
+}
+
+void render::Sampler::unbindTexture(uint32_t unit)
+{
+	GLSampler::bindSampler(unit, 0);
 }
 
 void render::Sampler::setParameter(SamplerParameter name, int value)
@@ -39,9 +44,10 @@ void render::Sampler::setParameter(SamplerParameter name, const float* value)
 void render::Sampler::apply(const TextureSetting& setting)
 {
 	this->setParameter(SamplerParameter::TEXTURE_MIN_FILTER, (int)setting.minFilter);
-	this->setParameter(SamplerParameter::TEXTURE_MAG_FILTER, (int)setting.minFilter);
-	this->setParameter(SamplerParameter::TEXTURE_WRAP_S, (int)setting.minFilter);
-	this->setParameter(SamplerParameter::TEXTURE_WRAP_T, (int)setting.minFilter);
+	this->setParameter(SamplerParameter::TEXTURE_MAG_FILTER, (int)setting.magFilter);
+	this->setParameter(SamplerParameter::TEXTURE_WRAP_S, (int)setting.wrapS);
+	this->setParameter(SamplerParameter::TEXTURE_WRAP_T, (int)setting.wrapT);
+	GLDebug::showError();
 }
 
 void render::Sampler::setParameter(SamplerParameter name, const uint32_t* value)

@@ -2,14 +2,14 @@
 
 using namespace render;
 
-TextureVertex::TextureVertex()
+Vertex::Vertex()
 {
 	normal = math::Vector3(0, 0, 1);
 }
 //////////////////////////////////////////////////////////////////////////
 
 //////////////////////////////////////////////////////////////////////////
-TextureRectVertex::TextureRectVertex()
+RectVertex::RectVertex()
 {
 	uvs[0] = 0; uvs[1] = 0;
 	uvs[2] = 1; uvs[3] = 0;
@@ -30,31 +30,31 @@ TextureRectVertex::TextureRectVertex()
 	}
 }
 
-void TextureRectVertex::setLeftDownPoint(const math::Vector3& point)
+void RectVertex::setLeftDownPoint(const math::Vector3& point)
 {
 	int index = 0;
 	memcpy(vertices + index, point.getValue(), point.getSize());
 }
 
-void TextureRectVertex::setRightDownPoint(const math::Vector3& point)
+void RectVertex::setRightDownPoint(const math::Vector3& point)
 {
 	int index = 3;
 	memcpy(vertices + index, point.getValue(), point.getSize());
 }
 
-void TextureRectVertex::setRightUpPoint(const math::Vector3& point)
+void RectVertex::setRightUpPoint(const math::Vector3& point)
 {
 	int index = 6;
 	memcpy(vertices + index, point.getValue(), point.getSize());
 }
 
-void TextureRectVertex::setLeftUpPoint(const math::Vector3& point)
+void RectVertex::setLeftUpPoint(const math::Vector3& point)
 {
 	int index = 9;
 	memcpy(vertices + index, point.getValue(), point.getSize());
 }
 
-void TextureRectVertex::setLeftDownColor(const sys::Color4F& color)
+void RectVertex::setLeftDownColor(const sys::Color4F& color)
 {
 	int index = 0;
 	colors[index + 0] = color.red;
@@ -63,7 +63,7 @@ void TextureRectVertex::setLeftDownColor(const sys::Color4F& color)
 	colors[index + 3] = color.alpha;
 }
 
-void TextureRectVertex::setRightDownColor(const sys::Color4F& color)
+void RectVertex::setRightDownColor(const sys::Color4F& color)
 {
 	int index = 4;
 	colors[index + 0] = color.red;
@@ -72,7 +72,7 @@ void TextureRectVertex::setRightDownColor(const sys::Color4F& color)
 	colors[index + 3] = color.alpha;
 }
 
-void TextureRectVertex::setRightUpColor(const sys::Color4F& color)
+void RectVertex::setRightUpColor(const sys::Color4F& color)
 {
 	int index = 8;
 	colors[index + 0] = color.red;
@@ -81,7 +81,7 @@ void TextureRectVertex::setRightUpColor(const sys::Color4F& color)
 	colors[index + 3] = color.alpha;
 }
 
-void TextureRectVertex::setLeftUpColor(const sys::Color4F& color)
+void RectVertex::setLeftUpColor(const sys::Color4F& color)
 {
 	int index = 12;
 	colors[index + 0] = color.red;
@@ -90,25 +90,25 @@ void TextureRectVertex::setLeftUpColor(const sys::Color4F& color)
 	colors[index + 3] = color.alpha;
 }
 
-void TextureRectVertex::setLeftDownUV(const math::Vector2& point)
+void RectVertex::setLeftDownUV(const math::Vector2& point)
 {
 	int index = 0;
 	memcpy(uvs + index, point.getValue(), point.getSize());
 }
 
-void TextureRectVertex::setRightDownUV(const math::Vector2& point)
+void RectVertex::setRightDownUV(const math::Vector2& point)
 {
 	int index = 2;
 	memcpy(uvs + index, point.getValue(), point.getSize());
 }
 
-void TextureRectVertex::setRightUpUV(const math::Vector2& point)
+void RectVertex::setRightUpUV(const math::Vector2& point)
 {
 	int index = 4;
 	memcpy(uvs + index, point.getValue(), point.getSize());
 }
 
-void TextureRectVertex::setLeftUpUV(const math::Vector2& point)
+void RectVertex::setLeftUpUV(const math::Vector2& point)
 {
 	int index = 6;
 	memcpy(uvs + index, point.getValue(), point.getSize());
@@ -116,7 +116,7 @@ void TextureRectVertex::setLeftUpUV(const math::Vector2& point)
 
 //////////////////////////////////////////////////////////////////////////
 
-TextureCubeVertex::TextureCubeVertex()
+CubeVertex::CubeVertex()
 {
 	// ǰ
 	indices[0] = 0; indices[1] = 1; indices[2] = 2;
@@ -146,49 +146,49 @@ TextureCubeVertex::TextureCubeVertex()
 	}
 }
 
-void TextureCubeVertex::setFrontLeftDownPoint(const math::Vector3& point)
+void CubeVertex::setFrontLeftDownPoint(const math::Vector3& point)
 {
 	int index = 0;
 	memcpy(vertices + index, point.getValue(), point.getSize());
 }
 
-void TextureCubeVertex::setFrontRightDownPoint(const math::Vector3& point)
+void CubeVertex::setFrontRightDownPoint(const math::Vector3& point)
 {
 	int index = 3;
 	memcpy(vertices + index, point.getValue(), point.getSize());
 }
 
-void TextureCubeVertex::setFrontRightUpPoint(const math::Vector3& point)
+void CubeVertex::setFrontRightUpPoint(const math::Vector3& point)
 {
 	int index = 6;
 	memcpy(vertices + index, point.getValue(), point.getSize());
 }
 
-void TextureCubeVertex::setFrontLeftUpPoint(const math::Vector3& point)
+void CubeVertex::setFrontLeftUpPoint(const math::Vector3& point)
 {
 	int index = 9;
 	memcpy(vertices + index, point.getValue(), point.getSize());
 }
 
-void TextureCubeVertex::setBackLeftDownPoint(const math::Vector3& point)
+void CubeVertex::setBackLeftDownPoint(const math::Vector3& point)
 {
 	int index = 12;
 	memcpy(vertices + index, point.getValue(), point.getSize());
 }
 
-void TextureCubeVertex::setBackRightDownPoint(const math::Vector3& point)
+void CubeVertex::setBackRightDownPoint(const math::Vector3& point)
 {
 	int index = 15;
 	memcpy(vertices + index, point.getValue(), point.getSize());
 }
 
-void TextureCubeVertex::setBackRightUpPoint(const math::Vector3& point)
+void CubeVertex::setBackRightUpPoint(const math::Vector3& point)
 {
 	int index = 18;
 	memcpy(vertices + index, point.getValue(), point.getSize());
 }
 
-void TextureCubeVertex::setBackLeftUpPoint(const math::Vector3& point)
+void CubeVertex::setBackLeftUpPoint(const math::Vector3& point)
 {
 	int index = 21;
 	memcpy(vertices + index, point.getValue(), point.getSize());

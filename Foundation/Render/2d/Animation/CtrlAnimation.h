@@ -44,7 +44,7 @@ namespace render
 		// 获取当前帧
 		int getFrame();
 		// 获取当前动画
-		CtrlFrame* getMovie();
+		CtrlFrame* getAnimationFrame();
 	protected:
 		// 添加定时器
 		void registerScheduler();

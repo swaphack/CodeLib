@@ -45,13 +45,17 @@ void render::Texture2D::load(const sys::ImageDetail* image, const TextureSetting
 		return;
 	}
 
+
+	this->setTextureSetting(setting);
+	this->applyTextureSettingWithSampler();
+	GLDebug::showError();
+
 	this->setWidth(image->getWidth());
 	this->setHeight(image->getHeight());
 
 	/* Generate texture */
 	this->bindTexture();
 	GLDebug::showError();
-
 	
 	int size = 0;
 #if USE_STORAGE	
@@ -85,9 +89,6 @@ void render::Texture2D::load(const sys::ImageDetail* image, const TextureSetting
 
 	GLDebug::showError();
 	/* Setup some parameters for texture filters and mipmapping */
-	this->apply(setting);
-
 	this->unbindTexture();
-
 	GLDebug::showError();
 }

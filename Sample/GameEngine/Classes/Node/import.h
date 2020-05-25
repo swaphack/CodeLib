@@ -13,3 +13,4 @@
 #include "TestUtilityNode.h"
 #include "TestBufferNode.h"
 #include "TestFragmentNode.h"
+#include "TestTextureNode.h"

@@ -128,7 +128,7 @@ const render::RectVectices& render::CtrlWidget::getRectVertex()
 
 bool render::CtrlWidget::containTouchPoint(float x, float y)
 {
-	return _realRectVertex.containPoint(x, y);
+	return _realRectVertex.containPointByPolygon(x, y);
 }
 
 void render::CtrlWidget::calRectData()
@@ -139,6 +139,14 @@ void render::CtrlWidget::calRectData()
 	_realRectVertex.rightDown = this->convertLocalPostitionToWorld(_rectVertex.rightDown);
 	_realRectVertex.rightUp = this->convertLocalPostitionToWorld(_rectVertex.rightUp);
 	_realRectVertex.leftUp = this->convertLocalPostitionToWorld(_rectVertex.leftUp);
+
+	math::Vector2 nvec[4];
+	nvec[0] = math::Vector2(_realRectVertex.leftDown.getX(), _realRectVertex.leftDown.getY());
+	nvec[1] = math::Vector2(_realRectVertex.rightDown.getX(), _realRectVertex.rightDown.getY());
+	nvec[2] = math::Vector2(_realRectVertex.rightUp.getX(), _realRectVertex.rightUp.getY());
+	nvec[3] = math::Vector2(_realRectVertex.leftUp.getX(), _realRectVertex.leftUp.getY());
+
+	_realPolygon.init(4, nvec);
 
 	float x0 = _realRectVertex.leftDown.getX();
 	float y0 = _realRectVertex.leftDown.getY();

@@ -4,40 +4,30 @@
 
 using namespace math;
 
-Polygon::Polygon(Vector2* _points, int32_t _count) 
+Polygon::Polygon(int32_t vcount, const Vector2* vpoints)
 :Polygon()
 {
-	if (_points == nullptr || _count < 3)
-	{
-		return;
-	}
-
-	this->_points = new Vector2[_count];
-	this->_count = _count;
-	for (int32_t i = 0; i < _count; i++)
-	{
-		this->_points[i] = _points[i];
-	}
+	this->init(vcount, vpoints);
 }
 
 Polygon::Polygon()
-	:_points(nullptr)
-	, _count(0)
+	:points(nullptr)
+	, count(0)
 {
 
 }
 
 Polygon::Polygon(const Polygon & polygon)
-	:Polygon(polygon._points, polygon._count)
+	:Polygon(polygon.count, polygon.points)
 {
 
 }
 
 Polygon::~Polygon()
 {
-	if (_points != nullptr)
+	if (points != nullptr)
 	{
-		delete[] _points;
+		delete[] points;
 	}
 }
 
@@ -47,10 +37,10 @@ bool Polygon::contains(const Vector2& point)
 	Vector2 p0;
 	Vector2 p1;
 
-	for (int32_t i = 0; i < _count; i++)
+	for (int32_t i = 0; i < count; i++)
 	{		
-		p0 = _points[i];
-		p1 = _points[(i + 1) % _count];
+		p0 = points[i];
+		p1 = points[(i + 1) % count];
 
 		// ˮƽ
 		if (p0.getY() == p1.getY()) continue;
@@ -77,10 +67,10 @@ bool Polygon::contains(const Line2& line)
 	Vector2 p0;
 	Vector2 p1;
 	Line2 segment;
-	for (int32_t i = 0; i < _count; i++)
+	for (int32_t i = 0; i < count; i++)
 	{
-		segment.src = _points[i];
-		segment.dest = _points[(i + 1) % _count];
+		segment.src = points[i];
+		segment.dest = points[(i + 1) % count];
 
 		if (segment.intersects(line))
 		{
@@ -100,10 +90,10 @@ bool Polygon::intersects(const Line2& line)
 	Vector2 p0;
 	Vector2 p1;
 	Line2 segment;
-	for (int32_t i = 0; i < _count; i++)
+	for (int32_t i = 0; i < count; i++)
 	{
-		segment.src = _points[i];
-		segment.dest = _points[(i + 1) % _count];
+		segment.src = points[i];
+		segment.dest = points[(i + 1) % count];
 
 		if (segment.intersects(line))
 		{
@@ -116,9 +106,9 @@ bool Polygon::intersects(const Line2& line)
 
 bool Polygon::intersects(const Polygon& polygon)
 {
-	for (int32_t i = 0; i < polygon._count; i++)
+	for (int32_t i = 0; i < polygon.count; i++)
 	{
-		Line2 line(polygon._points[i], polygon._points[(i + 1) % polygon._count]);
+		Line2 line(polygon.points[i], polygon.points[(i + 1) % polygon.count]);
 		if (this->intersects(line) || this->contains(line))
 		{
 			return true;
@@ -130,21 +120,21 @@ bool Polygon::intersects(const Polygon& polygon)
 
 Polygon& Polygon::operator=(const Polygon& polygon)
 {
-	if (polygon._points == nullptr || polygon._count < 3)
+	if (polygon.points == nullptr || polygon.count < 3)
 	{
 		return *this;
 	}
 
-	if (this->_points != nullptr)
+	if (this->points != nullptr)
 	{
-		delete[] this->_points;
+		delete[] this->points;
 	}
 
-	this->_points = new Vector2[_count];
-	this->_count = _count;
-	for (int32_t i = 0; i < _count; i++)
+	this->points = new Vector2[count];
+	this->count = count;
+	for (int32_t i = 0; i < count; i++)
 	{
-		this->_points[i] = _points[i];
+		this->points[i] = points[i];
 	}
 
 	return *this;
@@ -152,18 +142,18 @@ Polygon& Polygon::operator=(const Polygon& polygon)
 
 bool Polygon::isStandard(const Polygon& polygon)
 {
-	if (polygon._points == nullptr || polygon._count < 3)
+	if (polygon.points == nullptr || polygon.count < 3)
 	{
 		return false;
 	}
 
-	int32_t lineCount = polygon._count;
+	int32_t lineCount = polygon.count;
 	PointAndLinePositionType lastDirection = PointAndLinePositionType::NONE;
 	for (int32_t i = 0; i < lineCount; i++)
 	{
-		Vector2 v0 = polygon._points[i % lineCount];
-		Vector2 v1 = polygon._points[(i + 1) % lineCount];
-		Vector2 v2 = polygon._points[(i + 1) % lineCount];
+		Vector2 v0 = polygon.points[i % lineCount];
+		Vector2 v1 = polygon.points[(i + 1) % lineCount];
+		Vector2 v2 = polygon.points[(i + 1) % lineCount];
 		Line2 line(v0, v1);
 		PointAndLinePositionType eType = line.getPointPositionType(v2);
 		if (eType == PointAndLinePositionType::INCLUDE)
@@ -194,13 +184,13 @@ bool Polygon::isConvex(const Polygon& polygon)
 		return false;
 	}
 
-	int32_t lineCount = polygon._count;
+	int32_t lineCount = polygon.count;
 	PointAndLinePositionType lastDirection = PointAndLinePositionType::NONE;
 	for (int32_t i = 0; i < lineCount; i++)
 	{
-		Vector2 v0 = polygon._points[i % lineCount];
-		Vector2 v1 = polygon._points[(i + 1) % lineCount];
-		Vector2 v2 = polygon._points[(i + 1) % lineCount];
+		Vector2 v0 = polygon.points[i % lineCount];
+		Vector2 v1 = polygon.points[(i + 1) % lineCount];
+		Vector2 v2 = polygon.points[(i + 1) % lineCount];
 		Line2 line(v0, v1);
 		PointAndLinePositionType eType = line.getPointPositionType(v2);
 		if (eType == PointAndLinePositionType::INCLUDE)
@@ -222,4 +212,24 @@ bool Polygon::isConvex(const Polygon& polygon)
 	}
 
 	return true;
+}
+
+void Polygon::init(int32_t vcount, const Vector2* vpoints)
+{
+	if (vpoints == nullptr || vcount < 3)
+	{
+		return;
+	}
+
+	if (this->points != nullptr)
+	{
+		delete[] this->points;
+	}
+
+	this->points = new Vector2[vcount];
+	this->count = vcount;
+	for (int32_t i = 0; i < vcount; i++)
+	{
+		this->points[i] = vpoints[i];
+	}
 }

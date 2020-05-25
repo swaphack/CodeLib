@@ -1,6 +1,7 @@
 #pragma once
 
-#include "../Node/Node.h"
+#include "Common/Node/Node.h"
+#include "Common/Shader/ShaderProgramDelegate.h"
 
 namespace render
 {
@@ -9,6 +10,12 @@ namespace render
 	class Material;
 	class Mesh;
 	class FragmentOperator;
+	class ShaderProgram;
+	class Texture2D;
+
+
+#define DRAW_MATERIAL_INDEX 0
+#define DRAW_MESH_INDEX 0
 
 	/**
 	*	绘制节点
@@ -44,6 +51,45 @@ namespace render
 		*	网格
 		*/
 		Mesh* getMesh(int id = 0);
+	public:
+		/**
+		*	添加纹理
+		*/
+		void addMaterialTexture(const std::string& name, const std::string& fullpath);
+		/**
+		*	添加纹理
+		*/
+		void addMaterialTexture(const std::string& name, Texture2D* texture);
+		/**
+		*	设置纹理
+		*/
+		void setAllMaterialsTexture(const std::string& name);
+		/**
+		*	设置纹理
+		*/
+		void setMaterialTexture(int mat, const std::string& name);
+	public:
+		/**
+		*	获取着色器
+		*/
+		ShaderProgram* getMaterialShaderProgram(int mat);
+		/**
+		*	设置着色器
+		*/
+		void setAllMaterialsShaderProgram(ShaderProgram* program);
+		/**
+		*	设置着色器
+		*/
+		void setMaterialShaderProgram(int mat, ShaderProgram* program);
+	public:
+		/**
+		*	设置着色器处理函数
+		*/
+		void setAllShaderProgramFunc(const ShaderProgramFunc& func);
+		/**
+		*	设置着色器处理函数
+		*/
+		void setMaterialShaderProgram(int mat, const ShaderProgramFunc& func);
 	protected:
 		/**
 		*	绘制前工作
@@ -57,6 +103,9 @@ namespace render
 		*	绘制后工作
 		*/
 		void afterDraw();
+	protected:
+		virtual void initBufferObject();
+		virtual void updateBufferData();
 	protected:
 		// 材质
 		Materials* _materiales = nullptr;

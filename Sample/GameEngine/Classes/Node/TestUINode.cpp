@@ -65,7 +65,7 @@ void TestUINode::testEditBox()
 void TestUINode::testSequenceFrame()
 {
 	CtrlSequenceFrame* pSequenceFrame = CREATE_NODE(CtrlSequenceFrame);
-	Utility::updateNodeShader(pSequenceFrame->getMovie());
+	Utility::updateNodeShader(pSequenceFrame->getAnimationFrame());
 	pSequenceFrame->setVolume(1024, 768);
 	pSequenceFrame->setFrameImagePath("Resource/Role/1/20%d.png", 8);
 	pSequenceFrame->setPosition(512, 384, 0);
@@ -127,7 +127,7 @@ void TestUINode::onKeyBoardRole(render::Node* node, sys::BoardKey key, sys::Butt
 	{
 		DirectionAction* pConfig = &ActionConfigs[index];
 
-		pRole->getMovie()->setFlipX(pConfig->bFlipX);
+		pRole->getAnimationFrame()->setFlipX(pConfig->bFlipX);
 		pRole->setFrameImagePath(pConfig->path, pConfig->count);
 	}
 }
@@ -226,11 +226,11 @@ void TestUINode::testImage()
 	pImage->getTouchProxy()->setSwallowTouch(false);
 	pImage->getTouchProxy()->addTouchFunc(TouchType::DOWN, [](Node* node, float x, float y, bool include) 
 	{
-		node->as<CtrlImage>()->setRectVisible(include);
+		node->as<CtrlImage>()->setRectVisible(true);
 	});
 	pImage->getTouchProxy()->addTouchFunc(TouchType::ON, [](Node* node, float x, float y, bool include)
 	{
-		node->as<CtrlImage>()->setRectVisible(include);
+		node->as<CtrlImage>()->setRectVisible(true);
 	});
 	pImage->getTouchProxy()->addTouchFunc(TouchType::UP, [](Node* node, float x, float y, bool include)
 	{
@@ -238,7 +238,7 @@ void TestUINode::testImage()
 	});
 	Utility::updateNodeShader(pImage);
 	this->addChild(pImage);
-
+	/*
 	auto parent = pImage;
 	for (size_t i = 0; i < 1; i++)
 	{
@@ -265,4 +265,5 @@ void TestUINode::testImage()
 		parent->addChild(pImage);
 		parent = pImage;
 	}
+	*/
 }

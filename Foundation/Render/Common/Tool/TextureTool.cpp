@@ -3,7 +3,7 @@
 
 using namespace render;
 
-void TextureTool::setTexture2DCoords(TextureRectVertex* texRect, const math::Size& size, const math::Rect& rect)
+void TextureTool::setTexture2DCoords(RectVertex* texRect, const math::Size& size, const math::Rect& rect)
 {
 	// left down
 	texRect->setLeftDownUV(math::Vector2(rect.getX() / size.getWidth(), rect.getY() / size.getHeight()));
@@ -18,7 +18,7 @@ void TextureTool::setTexture2DCoords(TextureRectVertex* texRect, const math::Siz
 	texRect->setLeftUpUV(math::Vector2(rect.getX() / size.getWidth(), rect.getMaxY() / size.getHeight()));
 }
 
-void TextureTool::setTexture2DVertexts(TextureRectVertex* texRect, const math::Vector3& position, const math::Volume& volume, const math::Vector3& anchor)
+void TextureTool::setTexture2DVertexts(RectVertex* texRect, const math::Vector3& position, const math::Volume& volume, const math::Vector3& anchor)
 {
 	float x = 0;
 	float y = 0;
@@ -44,7 +44,7 @@ void TextureTool::setTexture2DVertexts(TextureRectVertex* texRect, const math::V
 	texRect->setLeftUpPoint(math::Vector3(x, y, position.getZ()));
 }
 
-void TextureTool::setTexture3DVertexts(TextureCubeVertex* texcube, const math::Vector3& position, const math::Volume& volume, const math::Vector3& anchor)
+void TextureTool::setTexture3DVertexts(CubeVertex* texcube, const math::Vector3& position, const math::Volume& volume, const math::Vector3& anchor)
 {
 	float x;
 	float y;

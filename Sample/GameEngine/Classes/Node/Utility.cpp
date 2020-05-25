@@ -15,10 +15,13 @@ void Utility::loadShader(render::Materials* mats, const std::string& vpath, cons
 	pProgram->loadVertexAndFragmentShader(vpath, fpath);
 	pProgram->link();
 
+
 	for (auto item : mats->getMaterials())
 	{
 		item.second->setShaderProgram(pProgram);
 	}
+
+	initShaderAttrib(mats);
 
 }
 
@@ -77,5 +80,4 @@ void Utility::runRotateAction(render::Node* node)
 void Utility::updateNodeShader(render::DrawNode* node)
 {
 	loadShader(node->getMaterials(), texture3dVertexPath, texture3dFragmentPath);
-	initShaderAttrib(node->getMaterials());
 }

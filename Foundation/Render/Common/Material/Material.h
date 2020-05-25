@@ -3,6 +3,7 @@
 #include "system.h"
 
 #include "mathlib.h"
+#include "Common/Shader/ShaderProgramDelegate.h"
 
 namespace sys
 {
@@ -53,8 +54,6 @@ namespace render
 
 	class Material : public sys::Object
 	{
-	public:
-		typedef std::function<void(ShaderProgram* program)> ShaderProgramFunc;
 	public:
 		Material();
 		virtual ~Material();
@@ -107,11 +106,22 @@ namespace render
 		*/
 		void removeUniformIndices();
 	public:
-		// 应用材质
-		void apply(Materials* mats);
-
+		/**
+		*	使用代码设置材质
+		*/
+		void beginApply(Materials* mats);
+		/**
+		*	使用代码
+		*/
+		void endApply(Materials* mats);
+		/**
+		*	使用shader设置材质
+		*/
 		void beginApplyWithShader(Node* node, Mesh* pMesh, Materials* mats);
-		void endApplyWithShader(Mesh* pMesh);
+		/**
+		*	使用shader
+		*/
+		void endApplyWithShader(Mesh* pMesh, Materials* mats);
 	protected:
 		// 应用材质
 		void applyMaterial();
@@ -119,7 +129,7 @@ namespace render
 		void startUpdateShaderUniformValue(Node* node, Materials* mats);
 		// 更新着色器attrib值
 		void startUpdateShaderVertexValue(Mesh* pMesh);
-		void endUpdateShaderUniformValue();
+		void endUpdateShaderUniformValue(Materials* mats);
 		void endUpdateShaderVertexValue(Mesh* pMesh);
 	protected:
 		void runProgramFunc();

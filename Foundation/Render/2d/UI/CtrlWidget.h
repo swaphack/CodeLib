@@ -92,6 +92,8 @@ namespace render
 		RectVectices _rectVertex;
 		// 实际矩形框
 		RectVectices _realRectVertex;
+		// 多边形
+		math::Polygon _realPolygon;
 		// 控件
 		std::vector<CtrlWidget*> _widgets;
 		/**

@@ -57,6 +57,9 @@ namespace render
 		bool _bTouchEnabled = false;
 		// 吞噬点击
 		bool _bSwallowTouch = true;
+		// 是否点击到
+		bool _bIncludeTouch = false;
+
 		std::map<TouchType, TouchDelegate> _touchDelegates;
 		std::map<TouchType, TouchFunc> _touchFuncs;
 	};

@@ -11,18 +11,19 @@ namespace math
 	*/ 
 	struct Polygon
 	{
-	protected:
+	public:
 		// 顶点
-		Vector2* _points;
+		Vector2* points;
 		// 顶点数
-		int32_t _count;
+		int32_t count;
 	public:
 		Polygon();
 		Polygon(const Polygon & polygon);
-		Polygon(Vector2* points, int32_t count);
+		Polygon(int32_t vcount, const Vector2* vpoints);
 
 		virtual ~Polygon();
 	public:
+		void init(int32_t vcount, const Vector2* vpoints);
 		/**
 		*	是否包含点
 		*/

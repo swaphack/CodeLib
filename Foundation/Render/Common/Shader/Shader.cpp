@@ -1,7 +1,7 @@
 #include "Shader.h"
 #include "ext-config.h"
 #include "ShaderProgram.h"
-#include "Graphic/GLAPI/GLShader.h"
+#include "Graphic/import.h"
 
 
 using namespace render;
@@ -54,8 +54,9 @@ bool Shader::loadData(const char* data)
 	}
 
 	GLShader::setShaderSource(_shaderID, 1, &data, nullptr);
+	GLDebug::showError();
 	GLShader::compileShader(_shaderID);
-
+	GLDebug::showError();
 	int compiled = 0;
 	GLShader::getShader(_shaderID, ShaderParameter::COMPILE_STATUS, &compiled);
 	if (compiled != GL_TRUE)

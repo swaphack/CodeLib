@@ -30,10 +30,10 @@ void TestModelNode::testCubeModel()
 	std::string textureName1 = "face1";
 
 	CubeModel* pModel = CREATE_NODE(CubeModel);
-	pModel->addTexture(textureName, pTexture);
-	pModel->addTexture(textureName1, pTexture1);
+	pModel->addMaterialTexture(textureName, pTexture);
+	pModel->addMaterialTexture(textureName1, pTexture1);
 
-	pModel->setAllFacesTexture(textureName);
+	pModel->setAllMaterialsTexture(textureName);
 	pModel->setFaceTexture(ModelFace::FRONT, textureName1);
 	pModel->setFaceTexture(ModelFace::LEFT, textureName1);
 	pModel->setFaceTexture(ModelFace::TOP, textureName1);
@@ -56,16 +56,6 @@ void TestModelNode::testCubeModel()
 
 void TestModelNode::testSphereModel()
 {
-	std::string filepath = "Resource/Image/NeHe.png";
-	Texture2D* texture2D = G_TEXTURE_CACHE->createTexture2D(filepath);
-
-	TexFrame* frame = CREATE_OBJECT(TexFrame);
-	frame->setTextureWithRect(texture2D);
-
-	render::SphereModel* pSphere = CREATE_NODE(render::SphereModel);
-	pSphere->setRadius(512);
-	pSphere->setTexFrame(frame);
-	this->addChild(pSphere);
 }
 
 void TestModelNode::addLight()

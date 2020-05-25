@@ -7,8 +7,8 @@
 // 纹理
 namespace render
 {
-	// 纹理坐标
-	struct TextureVertex
+	// 顶点信息
+	struct Vertex
 	{
 		// 顶点坐标
 		math::Vector3 point;
@@ -19,17 +19,17 @@ namespace render
 		// 法线
 		math::Vector3 normal;
 
-		TextureVertex();
+		Vertex();
 	};
-
-	struct TextureRectVertex
+	// 矩形顶点信息
+	struct RectVertex
 	{
 		float vertices[12];
 		float colors[16];
 		float uvs[8];
 		uint32_t indices[6];
 	public:
-		TextureRectVertex();
+		RectVertex();
 	public:
 		void setLeftDownPoint(const math::Vector3& point);
 		void setRightDownPoint(const math::Vector3& point);
@@ -47,13 +47,14 @@ namespace render
 		void setLeftUpUV(const math::Vector2& point);
 	};
 
-	// 立方体纹理
-	struct TextureCubeVertex
+	// 立方体顶点信息
+	struct CubeVertex
 	{
+	public:
 		float vertices[24];
 		uint32_t indices[36];
 	public:
-		TextureCubeVertex();
+		CubeVertex();
 	public:
 		void setFrontLeftDownPoint(const math::Vector3& point);
 		void setFrontRightDownPoint(const math::Vector3& point);

@@ -31,7 +31,11 @@ namespace render
 		*	纹理：ActiveTextureName::TEXTURE0 + unit;
 		*	
 		*/
-		void bind(uint32_t unit);
+		void bindTexture(uint32_t unit);
+		/**
+		*	解除纹理单元绑定
+		*/
+		void unbindTexture(uint32_t unit);
 		/**
 		*	设置参数
 		*/

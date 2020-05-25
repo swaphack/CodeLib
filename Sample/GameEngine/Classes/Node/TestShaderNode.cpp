@@ -19,9 +19,11 @@ void TestShaderNode::testFunc()
 	//this->addLight();
 	//this->testImageShader();
 	//this->testClipShader();
-	this->testCubeModelShader();
 	//this->testFbxModelShader();
 	//this->testObjModelShader();
+
+	this->testCubeModelShader();
+	this->testSphereModelShader();
 }
 
 void TestShaderNode::testShaderUniformBlock()
@@ -106,10 +108,10 @@ void TestShaderNode::testCubeModelShader()
 	std::string textureName1 = "face1";
 
 	CubeModel* pModel = CREATE_NODE(CubeModel);
-	pModel->addTexture(textureName, pTexture);
-	pModel->addTexture(textureName1, pTexture1);
+	pModel->addMaterialTexture(textureName, pTexture);
+	pModel->addMaterialTexture(textureName1, pTexture1);
 
-	pModel->setAllFacesTexture(textureName);
+	pModel->setAllMaterialsTexture(textureName);
 	pModel->setFaceTexture(ModelFace::FRONT, textureName1);
 	pModel->setFaceTexture(ModelFace::LEFT, textureName1);
 	pModel->setFaceTexture(ModelFace::TOP, textureName1);
@@ -120,6 +122,24 @@ void TestShaderNode::testCubeModelShader()
 	this->addChild(pModel);
 
 	Utility::updateNodeShader(pModel);
+	Utility::runRotateAction(pModel);
+}
+
+void TestShaderNode::testSphereModelShader()
+{
+	auto pTexture = G_TEXTURE_CACHE->createTexture2D("Resource/Image/1.jpg");
+	std::string textureName = "face";
+
+	SphereModel* pModel = CREATE_NODE(SphereModel);
+	//pModel->addMaterialTexture(textureName, pTexture);
+	//pModel->setAllMaterialsTexture(textureName);
+	pModel->setVolume(200, 200, 200);
+	pModel->setScale(300);
+	pModel->setAnchorPoint(0.5, 0.5f, 0.5f);
+	pModel->setPosition(400, 400, 0);
+	this->addChild(pModel);
+
+	//Utility::updateNodeShader(pModel);
 	Utility::runRotateAction(pModel);
 }
 
@@ -182,9 +202,9 @@ void TestShaderNode::testClipShader()
 	std::string textureName = "face";
 
 	CubeModel* pModel = CREATE_NODE(CubeModel);
-	pModel->addTexture(textureName, pTexture);
+	pModel->addMaterialTexture(textureName, pTexture);
 
-	pModel->setAllFacesTexture(textureName);
+	pModel->setAllMaterialsTexture(textureName);
 	pModel->setPosition(400, 400, 0);
 	pModel->setVolume(200, 200, 200);
 	pModel->setAnchorPoint(0.0f, 0.5f, 0.5f);
