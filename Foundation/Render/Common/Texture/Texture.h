@@ -11,6 +11,11 @@ namespace sys
 
 namespace render
 {
+	// 是否使用最新的纹理函数
+#define USE_NEW_TEXTURE_FUNCTION true
+	// 使用存储
+#define USE_TEXTURE_STORAGE true
+
 	class Sampler;
 
 	class TextureSetting
@@ -21,6 +26,7 @@ namespace render
 		TextureMagFilter magFilter = TextureMagFilter::LINEAR;
 		TextureWrapMode wrapS = TextureWrapMode::CLAMP;
 		TextureWrapMode wrapT = TextureWrapMode::CLAMP;
+		TextureWrapMode wrapR = TextureWrapMode::CLAMP;
 	};
 
 	// 纹理基础

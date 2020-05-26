@@ -94,7 +94,10 @@ void render::Meshes::drawNodeWithMaterials(Node* node, Materials* mats)
 		auto pMesh = item.second;
 		auto nMatID = pMesh->getMeshDetail()->getMaterial();
 		auto pMat = mats->getMaterial(nMatID);
-
+		if (pMat == nullptr)
+		{// ÁÙÊ±´¦Àí
+			continue;
+		}
 		GLState::enable(EnableMode::TEXTURE_2D);
 		if (pMat->getShaderProgram() != nullptr)
 		{

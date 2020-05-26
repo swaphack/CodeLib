@@ -19,11 +19,11 @@ namespace render
 		virtual bool init();
 	public:
 		// …Ë÷√Œ∆¿Ì
-		void setFaceTexture(ModelFace face, const std::string& name);
+		void setFaceTexture(CubeFace face, const std::string& name);
 	protected:
-		void initBufferObject();
+		virtual void initBufferObject();
 
-		void updateBufferData();
+		void onCubeChanged();
 	private:
 		// ◊¯±Í
 		CubeVertex _cubePosition;

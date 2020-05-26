@@ -31,10 +31,11 @@ namespace render
 		static void compressedTexImage3D(TextureTarget3D target, int level, TextureCompressedInternalFormat internalFormat, int width, int height, int depth, int imageSize, const void* data);
 
 		static void compressedTexSubImage1D(TextureTarget1D target, int level, int xoffset, int width, TextureCompressedInternalFormat internalFormat, int imageSize, const void* data);
-		static void compressedTextureSubImage1D(uint32_t texture, int level, int xoffset, int width, TextureCompressedInternalFormat internalFormat, int imageSize, const void* data);
 		static void compressedTexSubImage2D(TextureTarget2D target, int level, int xoffset, int yoffset, int width, int height, TextureCompressedInternalFormat internalFormat, int imageSize, const void* data);
-		static void compressedTextureSubImage2D(uint32_t texture, int level, int xoffset, int yoffset, int width, int height, TextureCompressedInternalFormat internalFormat, int imageSize, const void* data);
 		static void compressedTexSubImage3D(TextureTarget3D target, int level, int xoffset, int yoffset, int zoffset, int width, int height, int depth, TextureCompressedInternalFormat internalFormat, int imageSize, const void* data);
+
+		static void compressedTextureSubImage1D(uint32_t texture, int level, int xoffset, int width, TextureCompressedInternalFormat internalFormat, int imageSize, const void* data);
+		static void compressedTextureSubImage2D(uint32_t texture, int level, int xoffset, int yoffset, int width, int height, TextureCompressedInternalFormat internalFormat, int imageSize, const void* data);
 		static void compressedTextureSubImage3D(uint32_t texture, int level, int xoffset, int yoffset, int zoffset, int width, int height, int depth, TextureCompressedInternalFormat internalFormat, int imageSize, const void* data);
 	public:
 		static void copyImageSubData(uint32_t srcName, GLenum srcTarget, int srcLevel, int srcX, int srcY, int srcZ,
@@ -110,6 +111,10 @@ namespace render
 		static void setTexStorage2D(TextureTarget2D target, int level, TextureInternalSizedFormat internalFormat, int width, int heigth);
 		static void setTexStorage3D(TextureTarget3D target, int level, TextureInternalSizedFormat internalFormat, int width, int heigth, int depth);
 
+		static void setTextureStorage1D(uint32_t texture, int level, TextureInternalSizedFormat internalFormat, int width);
+		static void setTextureStorage2D(uint32_t texture, int level, TextureInternalSizedFormat internalFormat, int width, int heigth);
+		static void setTextureStorage3D(uint32_t texture, int level, TextureInternalSizedFormat internalFormat, int width, int heigth, int depth);
+
 		static void setTexStorage2DMultisample(Texture2DMultisampleTarget target, int samples, TextureInternalSizedFormat internalformat, int width, int heigth, bool fixedsamplelocations);
 		static void setTexStorage3DMultisample(Texture3DMultisampleTarget target, int samples, TextureInternalSizedFormat internalformat, int width, int heigth, int depth, bool fixedsamplelocations);
 	public:
@@ -125,6 +130,12 @@ namespace render
 		static void setTexSubImage1D(TextureTarget1D target, int level, int xOffset, int width, TextureExternalFormat pixelFormat, TextureExternalDataType pixelType, const void* data);
 		static void setTexSubImage2D(TextureTarget2D target, int level, int xOffset, int yOffset, int width, int height, TextureExternalFormat pixelFormat, TextureExternalDataType pixelType, const void* data);
 		static void setTexSubImage3D(TextureTarget3D target, int level, int xOffset, int yOffset, int zOffset, int width, int height, int depth, TextureExternalFormat pixelFormat, TextureExternalDataType pixelType, const void* data);
+
+
+		static void setTextureSubImage1D(uint32_t texture, int level, int xOffset, int width, TextureExternalFormat pixelFormat, TextureExternalDataType pixelType, const void* data);
+		static void setTextureSubImage2D(uint32_t texture, int level, int xOffset, int yOffset, int width, int height, TextureExternalFormat pixelFormat, TextureExternalDataType pixelType, const void* data);
+		static void setTextureSubImage3D(uint32_t texture, int level, int xOffset, int yOffset, int zOffset, int width, int height, int depth, TextureExternalFormat pixelFormat, TextureExternalDataType pixelType, const void* data);
+
 	public:
 		static void setTextureView(uint32_t texture, TextureViewCompatibleNewTarget target, uint32_t origtexture, TextureViewFormat internalFormat,
 			uint32_t minlevel, uint32_t numlevels, uint32_t minlayer, uint32_t numlayers);

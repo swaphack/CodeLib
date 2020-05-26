@@ -109,17 +109,13 @@ bool ModelDetailObj::load(const std::string& fullpath)
 			int nVertCount = pData->Vertices.size();
 			if (nVertCount > 0)
 			{
-				int nVerticeCount = 3 * nVertCount;
-				float* verticeData = (float*)pMesh->createVertices(nVerticeCount, sizeof(float), 3);
+				float* verticeData = (float*)pMesh->createVertices(nVertCount, sizeof(float), 3);
 
-				int nNormalCount = 3 * nVertCount;
-				float* normalData = (float*)pMesh->createNormals(nNormalCount, sizeof(float), 3);
+				float* normalData = (float*)pMesh->createNormals(nVertCount, sizeof(float), 3);
 
-				int nTexCoordCount = 2 * nVertCount;
-				float* texCoordData = (float*)pMesh->createUVs(nTexCoordCount, sizeof(float), 2);
+				float* texCoordData = (float*)pMesh->createUVs(nVertCount, sizeof(float), 2);
 
-				int nColorCount = 4 * nVertCount;
-				float* colorData = (float*)pMesh->createColors(nColorCount, sizeof(float), 4);
+				float* colorData = (float*)pMesh->createColors(nVertCount, sizeof(float), 4);
 
 				for (int i = 0; i < nVertCount; i++)
 				{

@@ -4,6 +4,7 @@
 #include "Common/Texture/Texture2D.h"
 #include "Common/Texture/TexFrame.h"
 #include "Common/Tool/TextureTool.h"
+#include "Common/Mesh/import.h"
 
 using namespace render;
 
@@ -164,12 +165,23 @@ void CtrlText::onTextChange()
 	math::Rect rect(math::Vector2(), size);
 	TextureTool::setTexture2DCoords(&_vertexes, size, rect);
 
-
 	math::Vector3 anchor = math::Vector3(0.5f, 0.5f, 0.5f);
 	math::Vector3 orgin = getOrgin(size);
 	math::Volume volume = math::Volume(texture->getWidth(), texture->getHeight());
 
 	TextureTool::setTexture2DVertexts(&_vertexes, orgin, volume, anchor);
+
+	auto pMesh = getMesh(DRAW_MESH_INDEX);
+	if (pMesh)
+	{
+		float uvs[8] = { 0 };
+		memcpy(uvs, _vertexes.uvs, sizeof(uvs));
+		render::TextureTool::setTexture2DFlip(uvs, _bFlipX, _bFlipY);
+		pMesh->getMeshDetail()->setVertices(4, _vertexes.vertices, 3);
+		pMesh->getMeshDetail()->setColors(4, _vertexes.colors, 4);
+		pMesh->getMeshDetail()->setUVs(4, uvs, 2);
+		pMesh->getMeshDetail()->setIndices(6, _vertexes.indices);
+	}
 }
 
 math::Vector3 render::CtrlText::getOrgin(const math::Size& size)

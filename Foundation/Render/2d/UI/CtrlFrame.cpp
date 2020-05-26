@@ -95,20 +95,16 @@ void CtrlFrame::onTextureChange()
 	math::Rect rect(math::Vector2(), size);
 	TextureTool::setTexture2DCoords(&_vertexes, size, rect);
 	TextureTool::setTexture2DVertexts(&_vertexes, math::Vector3(), _volume, _anchor);
-}
 
-void render::CtrlFrame::updateBufferData()
-{
-	auto pMesh = _meshes->getMesh(DRAW_MESH_INDEX);
+	auto pMesh = getMesh(DRAW_MESH_INDEX);
 	if (pMesh)
 	{
 		float uvs[8] = { 0 };
 		memcpy(uvs, _vertexes.uvs, sizeof(uvs));
 		render::TextureTool::setTexture2DFlip(uvs, _bFlipX, _bFlipY);
-		pMesh->getMeshDetail()->setVertices(12, _vertexes.vertices);
-		pMesh->getMeshDetail()->setColors(16, _vertexes.colors);
-		pMesh->getMeshDetail()->setUVs(8, uvs);
+		pMesh->getMeshDetail()->setVertices(4, _vertexes.vertices, 3);
+		pMesh->getMeshDetail()->setColors(4, _vertexes.colors, 4);
+		pMesh->getMeshDetail()->setUVs(4, uvs, 2);
 		pMesh->getMeshDetail()->setIndices(6, _vertexes.indices);
-		pMesh->updateBufferData();
 	}
 }

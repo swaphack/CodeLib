@@ -12,27 +12,27 @@ MeshDetail::~MeshDetail()
 {
 }
 
-void MeshDetail::setVertices(int size, float* vertexes, int unitSize)
+void MeshDetail::setVertices(int len, float* vertexes, int unitSize)
 {
-	_vertices.init(size, vertexes, sizeof(float));
+	_vertices.init(len * unitSize, vertexes, sizeof(float));
 	_vertices.setUnitSize(unitSize);
 }
 
-void MeshDetail::setNormals(int size, float* normals, int unitSize)
+void MeshDetail::setNormals(int len, float* normals, int unitSize)
 {
-	_normals.init(size, normals, sizeof(float));
+	_normals.init(len * unitSize, normals, sizeof(float));
 	_normals.setUnitSize(unitSize);
 }
 
-void MeshDetail::setColors(int size, float* colors, int unitSize)
+void MeshDetail::setColors(int len, float* colors, int unitSize)
 {
-	_colors.init(size, colors, sizeof(float));
+	_colors.init(len * unitSize, colors, sizeof(float));
 	_colors.setUnitSize(unitSize);
 }
 
-void MeshDetail::setUVs(int size, float* texCoords, int unitSize)
+void MeshDetail::setUVs(int len, float* texCoords, int unitSize)
 {
-	_uvs.init(size, texCoords, sizeof(float));
+	_uvs.init(len * unitSize, texCoords, sizeof(float));
 	_uvs.setUnitSize(unitSize);
 }
 
@@ -66,10 +66,10 @@ int MeshDetail::getMaterial() const
 	return _material;
 }
 
-void MeshDetail::setIndices(int size, uint32_t* indices)
+void MeshDetail::setIndices(int size, uint32_t* indices, int unitSize)
 {
 	_indices.init(size, indices);
-	_indices.setUnitSize(1);
+	_indices.setUnitSize(unitSize);
 }
 
 const MeshMemoryData& MeshDetail::getIndices() const
@@ -87,37 +87,37 @@ void MeshDetail::setMatrix(const math::Matrix44& mat)
 	_matrix = mat;
 }
 
-char* sys::MeshDetail::createVertices(size_t size, uint32_t typeSize, int unitSize)
+char* sys::MeshDetail::createVertices(size_t len, uint32_t typeSize, int unitSize)
 {
-	_vertices.resize(size, typeSize);
+	_vertices.resize(len * unitSize, typeSize);
 	_vertices.setUnitSize(unitSize);
 	return _vertices.getPtr();
 }
 
-char* sys::MeshDetail::createNormals(size_t size, uint32_t typeSize, int unitSize)
+char* sys::MeshDetail::createNormals(size_t len, uint32_t typeSize, int unitSize)
 {
-	_normals.resize(size, typeSize);
+	_normals.resize(len * unitSize, typeSize);
 	_normals.setUnitSize(unitSize);
 	return _normals.getPtr();
 }
 
-char* sys::MeshDetail::createColors(size_t size, uint32_t typeSize, int unitSize)
+char* sys::MeshDetail::createColors(size_t len, uint32_t typeSize, int unitSize)
 {
-	_colors.resize(size, typeSize);
+	_colors.resize(len * unitSize, typeSize);
 	_colors.setUnitSize(unitSize);
 	return _colors.getPtr();
 }
 
-char* sys::MeshDetail::createUVs(size_t size, uint32_t typeSize, int unitSize)
+char* sys::MeshDetail::createUVs(size_t len, uint32_t typeSize, int unitSize)
 {
-	_uvs.resize(size, typeSize);
+	_uvs.resize(len * unitSize, typeSize);
 	_uvs.setUnitSize(unitSize);
 	return _uvs.getPtr();
 }
 
-char* sys::MeshDetail::createIndices(size_t size, uint32_t typeSize, int unitSize)
+char* sys::MeshDetail::createIndices(size_t len, uint32_t typeSize, int unitSize)
 {
-	_indices.resize(size, typeSize);
+	_indices.resize(len * unitSize, typeSize);
 	_indices.setUnitSize(unitSize);
 	return _indices.getPtr();
 }

@@ -32,8 +32,6 @@ void render::Mesh::setMeshDetail(sys::MeshDetail* detail)
 	SAFE_RETAIN(detail);
 
 	_detail = detail;
-
-	this->updateBufferData();
 }
 
 sys::MeshDetail* render::Mesh::getMeshDetail() const

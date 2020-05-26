@@ -118,13 +118,12 @@ bool ModelDetail3DS::load(const std::string& fullpath)
 
 			if (pMeshData->nvertices)
 			{
+				int nVertices = pMeshData->nvertices;
 				if (pMeshData->vertices)
 				{
-					int nVerticeCount = 3 * pMeshData->nvertices;
-					float* verticeData = (float*)pMesh->createVertices(nVerticeCount, sizeof(float), 3);
+					float* verticeData = (float*)pMesh->createVertices(nVertices, sizeof(float), 3);
 
-					int nColorCount = 4 * pMeshData->nvertices;
-					float* colorData = (float*)pMesh->createColors(nColorCount, sizeof(float), 4);
+					float* colorData = (float*)pMesh->createColors(nVertices, sizeof(float), 4);
 
 					for (int j = 0; j < pMeshData->nvertices; j++)
 					{
@@ -145,8 +144,7 @@ bool ModelDetail3DS::load(const std::string& fullpath)
 
 				if (pMeshData->texcos)
 				{
-					int nTexCoordCount = 2 * pMeshData->nvertices;
-					float* texCoordData = (float*)pMesh->createUVs(nTexCoordCount, sizeof(float), 2);
+					float* texCoordData = (float*)pMesh->createUVs(nVertices, sizeof(float), 2);
 					for (int j = 0; j < pMeshData->nvertices; j++)
 					{
 						memcpy(texCoordData + 2 * j, pMeshData->texcos[j], 2 * sizeof(float));
@@ -154,8 +152,7 @@ bool ModelDetail3DS::load(const std::string& fullpath)
 				}
 				else
 				{
-					int nTexCoordCount = 2 * pMeshData->nvertices;
-					float* texCoordData = (float*)pMesh->createUVs(nTexCoordCount, sizeof(float), 2);
+					float* texCoordData = (float*)pMesh->createUVs(nVertices, sizeof(float), 2);
 					for (int j = 0; j < pMeshData->nvertices; j++)
 					{
 						float uv[3] = { 0 };

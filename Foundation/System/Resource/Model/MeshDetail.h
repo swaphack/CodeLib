@@ -48,7 +48,7 @@ namespace sys
 		/**
 		*	设置顶点坐标信息
 		*/
-		void setVertices(int size, float* vertexes, int unitSize = 3);
+		void setVertices(int len, float* vertexes, int unitSize = 3);
 		/**
 		*	法线坐标信息
 		*/
@@ -56,7 +56,7 @@ namespace sys
 		/**
 		*	设置法线坐标信息
 		*/
-		void setNormals(int size, float* normals, int unitSize = 3);
+		void setNormals(int len, float* normals, int unitSize = 3);
 		/**
 		*	颜色坐标信息
 		*/
@@ -64,7 +64,7 @@ namespace sys
 		/**
 		*	设置颜色坐标信息
 		*/
-		void setColors(int size, float* colors, int unitSize = 4);
+		void setColors(int len, float* colors, int unitSize = 4);
 		/**
 		*	纹理坐标信息
 		*/
@@ -72,7 +72,7 @@ namespace sys
 		/**
 		*	设置纹理坐标信息
 		*/
-		void setUVs(int size, float* texCoords, int unitSize = 2);
+		void setUVs(int len, float* texCoords, int unitSize = 2);
 		/**
 		*	设置材质
 		*/
@@ -84,7 +84,7 @@ namespace sys
 		/**
 		*	设置三角形索引
 		*/
-		void setIndices(int size, uint32_t* indices);
+		void setIndices(int size, uint32_t* indices, int unitSize = 1);
 		/**
 		*	获取三角形索引
 		*/
@@ -101,23 +101,23 @@ namespace sys
 		/**
 		*	分配顶点
 		*/
-		char* createVertices(size_t size, uint32_t typeSize, int unitSize = 3);
+		char* createVertices(size_t len, uint32_t typeSize, int unitSize = 3);
 		/**
 		*	分配法线
 		*/
-		char* createNormals(size_t size, uint32_t typeSize, int unitSize = 3);
+		char* createNormals(size_t len, uint32_t typeSize, int unitSize = 3);
 		/**
 		*	分配颜色
 		*/
-		char* createColors(size_t size, uint32_t typeSize, int unitSize = 4);
+		char* createColors(size_t len, uint32_t typeSize, int unitSize = 4);
 		/**
 		*	分配纹理坐标
 		*/
-		char* createUVs(size_t size, uint32_t typeSize, int unitSize = 2);
+		char* createUVs(size_t len, uint32_t typeSize, int unitSize = 2);
 		/**
 		*	分配顶点索引
 		*/
-		char* createIndices(size_t size, uint32_t typeSize, int unitSize = 1);
+		char* createIndices(size_t len, uint32_t typeSize, int unitSize = 1);
 	private:
 		std::string _meshName;
 		// 材质

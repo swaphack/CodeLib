@@ -11,7 +11,6 @@ namespace render
 		TextureCubeMap();
 		virtual ~TextureCubeMap();
 	public:
-		// depth 为6的倍数，因为一个立方体有六个面
-		void setTextureStorage(int levels, TextureInternalSizedFormat internalFormat, int width, int height, int depth);
+		void load(const sys::ImageDetail* imageDetails[6], const TextureSetting& setting = TextureSetting());
 	};
 }

@@ -59,7 +59,6 @@ namespace render
 	protected:
 		virtual void onDraw();
 		virtual void initBufferObject();
-		virtual void updateBufferData();
 	private:
 		// Çò°ë¾¶
 		float _radius = 1;

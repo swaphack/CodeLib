@@ -438,6 +438,9 @@
     <ClCompile Include="Common\Material\Material.cpp">
       <Filter>Common\Material</Filter>
     </ClCompile>
+    <ClCompile Include="3d\Environment\SkyBox.cpp">
+      <Filter>3d\Environment</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Common\Node\import.h">
@@ -1025,6 +1028,9 @@
     </ClInclude>
     <ClInclude Include="Common\Shader\ShaderProgramDelegate.h">
       <Filter>Common\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="3d\Environment\SkyBox.h">
+      <Filter>3d\Environment</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

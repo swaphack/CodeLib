@@ -14,6 +14,7 @@ namespace render
 {
 	class Texture;
 	class Texture2D;
+	class TextureCubeMap;
 
 	// 纹理池
 	class TextureCache
@@ -23,15 +24,15 @@ namespace render
 		~TextureCache();
 	public:
 		// 添加纹理
-		void addTexture(const std::string& path, Texture* texture);
+		void addTexture2D(const std::string& path, Texture2D* texture);
 		// 移除纹理
 		void removeTexture(Texture* texture);
 		// 移除纹理
-		void removeTexture(const std::string& path);
+		void removeTexture2D(const std::string& path);
 		// 移除所有纹理
 		void removeAllTextures();
 		// 获取纹理
-		Texture* getTexture(const std::string& path);
+		Texture2D* getTexture2D(const std::string& path);
 	public:
 		// 添加一个2d纹理
 		Texture2D* createTexture2D(const sys::ImageDefine& imageDefine);
@@ -39,8 +40,16 @@ namespace render
 		Texture2D* createTexture2D(const std::string& path);
 		// 添加一个文本纹理
 		Texture2D* createTexture2D(const sys::TextDefine& textDefine);
+		// 添加一个立方体纹理
+		TextureCubeMap* createTextureCubeMap(const std::string* images[6]);
+	public:
+		sys::ImageDetail* loadImageDetail(const std::string& path);
+
+		sys::ImageDetail* loadImageDetail(const sys::ImageDefine& imageDefine);
 	private:
-		std::map<std::string, Texture*> _textures;
+		std::map<std::string, Texture2D*> _texture2Ds;
+
+		std::map<uint32_t, Texture*> _textures;
 	};
 
 	#define G_TEXTURE_CACHE sys::Instance<TextureCache>::getInstance()

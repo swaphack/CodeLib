@@ -4,7 +4,7 @@
 namespace render
 {
 	// 六个面
-	enum class ModelFace
+	enum class CubeFace
 	{
 		FRONT,		// 前面
 		RIGHT,		// 右面

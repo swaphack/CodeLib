@@ -21,10 +21,11 @@ void TestShaderNode::testFunc()
 	//this->testClipShader();
 	//this->testFbxModelShader();
 	//this->testObjModelShader();
+	//this->test3dsModelShader();
 
 	this->testCubeModelShader();
 	this->testSphereModelShader();
-}
+}	
 
 void TestShaderNode::testShaderUniformBlock()
 {

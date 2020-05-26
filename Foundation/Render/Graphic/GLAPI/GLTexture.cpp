@@ -426,6 +426,36 @@ void render::GLTexture::setTextureParameter(uint32_t texture, TextureParameter p
 	glTextureParameteri(texture, (GLenum)paramType, paramValue);
 }
 
+void render::GLTexture::setTextureStorage1D(uint32_t texture, int level, TextureInternalSizedFormat internalFormat, int width)
+{
+	glTextureStorage1D(texture, level, (GLenum)internalFormat, width);
+}
+
+void render::GLTexture::setTextureStorage2D(uint32_t texture, int level, TextureInternalSizedFormat internalFormat, int width, int heigth)
+{
+	glTextureStorage2D(texture, level, (GLenum)internalFormat, width, heigth);
+}
+
+void render::GLTexture::setTextureStorage3D(uint32_t texture, int level, TextureInternalSizedFormat internalFormat, int width, int heigth, int depth)
+{
+	glTextureStorage3D(texture, level, (GLenum)internalFormat, width, heigth, depth);
+}
+
+void render::GLTexture::setTextureSubImage1D(uint32_t texture, int level, int xOffset, int width, TextureExternalFormat pixelFormat, TextureExternalDataType pixelType, const void* data)
+{
+	glTextureSubImage1D(texture, level, xOffset, width, (GLenum)pixelFormat, (GLenum)pixelType, data);
+}
+
+void render::GLTexture::setTextureSubImage2D(uint32_t texture, int level, int xOffset, int yOffset, int width, int height, TextureExternalFormat pixelFormat, TextureExternalDataType pixelType, const void* data)
+{
+	glTextureSubImage2D(texture, level, xOffset, yOffset, width, height, (GLenum)pixelFormat, (GLenum)pixelType, data);
+}
+
+void render::GLTexture::setTextureSubImage3D(uint32_t texture, int level, int xOffset, int yOffset, int zOffset, int width, int height, int depth, TextureExternalFormat pixelFormat, TextureExternalDataType pixelType, const void* data)
+{
+	glTextureSubImage3D(texture, level, xOffset, yOffset, zOffset, width, height, depth, (GLenum)pixelFormat, (GLenum)pixelType, data);
+}
+
 void render::GLTexture::setTextureParameter(uint32_t texture, TextureParameter paramType, const uint32_t* paramValue)
 {
 	glTextureParameterIuiv(texture, (GLenum)paramType, paramValue);

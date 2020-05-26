@@ -27,10 +27,7 @@ bool render::Model::init()
 
 	_notify->addListen(NodeNotifyType::MODEL, [this](){
 		_loadModel = true;
-		if (_materiales)
-		{
-			_materiales->updateMatTexture();
-		}
+		this->updateBufferData();
 	});
 
 	FragmentDepthTest* pDepthTest = this->getFragOperator()->getHandle<FragmentDepthTest>();

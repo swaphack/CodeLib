@@ -94,6 +94,7 @@
     <ClCompile Include="3d\Environment\ClipPlane.cpp" />
     <ClCompile Include="3d\Environment\Fog.cpp" />
     <ClCompile Include="3d\Environment\Light.cpp" />
+    <ClCompile Include="3d\Environment\SkyBox.cpp" />
     <ClCompile Include="3d\Environment\SpotLight.cpp" />
     <ClCompile Include="3d\Shape\CubeModel.cpp" />
     <ClCompile Include="3d\Shape\SphereModel.cpp" />
@@ -251,6 +252,7 @@
     <ClInclude Include="3d\Environment\ClipPlane.h" />
     <ClInclude Include="3d\Environment\Fog.h" />
     <ClInclude Include="3d\Environment\Light.h" />
+    <ClInclude Include="3d\Environment\SkyBox.h" />
     <ClInclude Include="3d\Environment\SpotLight.h" />
     <ClInclude Include="3d\Environment\import.h" />
     <ClInclude Include="3d\import.h" />

@@ -54,8 +54,7 @@ void handNodeMesh(ModelDetailFbx* file, FbxNode* node)
 	{
 		FbxVector4* lControlPoints = pMeshData->GetControlPoints();
 
-		int nVerticeCount = 3 * nPointCount;
-		float* verticeData = (float*)pMesh->createVertices(nVerticeCount, sizeof(float), 3);
+		float* verticeData = (float*)pMesh->createVertices(nPointCount, sizeof(float), 3);
 
 		for (int i = 0; i < nPointCount; i++)
 		{
@@ -76,10 +75,10 @@ void handNodeMesh(ModelDetailFbx* file, FbxNode* node)
 		FbxGeometryElementNormal* leNormal = pMeshData->GetElementNormal(0);
 		auto vector = leNormal->GetDirectArray();
 
-		int nVerticeCount = 3 * vector.GetCount();
+		int nVerticeCount = vector.GetCount();
 		float* normalData = (float*)pMesh->createNormals(nVerticeCount, sizeof(float), 3);
 
-		for (int i = 0; i < vector.GetCount(); i++)
+		for (int i = 0; i < nVerticeCount; i++)
 		{
 			float pos[3] = { 0 };
 			pos[0] = (float)vector.GetAt(i).mData[0];
@@ -97,10 +96,10 @@ void handNodeMesh(ModelDetailFbx* file, FbxNode* node)
 		FbxGeometryElementUV* leUV = pMeshData->GetElementUV(0);
 		auto vector = leUV->GetDirectArray();
 
-		int nVerticeCount = 2 * vector.GetCount();
+		int nVerticeCount = vector.GetCount();
 		float* uvData = (float*)pMesh->createUVs(nVerticeCount, sizeof(float), 2);
 
-		for (int i = 0; i < vector.GetCount(); i++)
+		for (int i = 0; i < nVerticeCount; i++)
 		{
 			float pos[2] = { 0 };
 			pos[0] = (float)vector.GetAt(i).mData[0];
@@ -118,10 +117,10 @@ void handNodeMesh(ModelDetailFbx* file, FbxNode* node)
 		FbxGeometryElementVertexColor* leVtxc = pMeshData->GetElementVertexColor(0);
 		auto vector = leVtxc->GetDirectArray();
 
-		int nVerticeCount = 4 * vector.GetCount();
+		int nVerticeCount = vector.GetCount();
 		float* colorData = (float*)pMesh->createColors(nVerticeCount, sizeof(float), 4);
 
-		for (int i = 0; i < vector.GetCount(); i++)
+		for (int i = 0; i < nVerticeCount; i++)
 		{
 			float pos[4] = { 0 };
 			pos[0] = (float)vector.GetAt(i).mRed;
@@ -133,8 +132,7 @@ void handNodeMesh(ModelDetailFbx* file, FbxNode* node)
 	}
 	else
 	{
-		int nVerticeCount = 4 * nPointCount;
-		float* colorData = (float*)pMesh->createColors(nVerticeCount, sizeof(float), 4);
+		float* colorData = (float*)pMesh->createColors(nPointCount, sizeof(float), 4);
 
 		for (int i = 0; i < nPointCount; i++)
 		{

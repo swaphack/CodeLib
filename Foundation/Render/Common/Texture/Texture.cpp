@@ -2,6 +2,7 @@
 #include <exception>
 #include "Graphic/import.h"
 #include "Sampler.h"
+#include "TextureCache.h"
 using namespace render;
 
 Texture::~Texture()
@@ -250,6 +251,8 @@ void render::Texture::releaseTexture()
 {
 	GLTexture::deleteTexture(_textureID);
 	_textureID = 0;
+
+	G_TEXTURE_CACHE->removeTexture(this);
 }
 
 void render::Texture::setDepth(uint32_t val)

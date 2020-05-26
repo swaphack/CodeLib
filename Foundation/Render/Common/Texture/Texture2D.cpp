@@ -1,8 +1,6 @@
 #include "Texture2D.h"
 #include "Graphic/import.h"
-
-#define USE_STORAGE true
-
+#include "TextureCache.h"
 render::Texture2D::Texture2D()
 	:Texture(TextureTarget::TEXTURE_2D)
 {
@@ -10,17 +8,24 @@ render::Texture2D::Texture2D()
 
 render::Texture2D::~Texture2D()
 {
-
 }
 
 void render::Texture2D::setTextureStorage(int levels, TextureInternalSizedFormat internalFormat, int width, int height)
 {
+#if USE_NEW_TEXTURE_FUNCTION
+	GLTexture::setTextureStorage2D(getTextureID(), levels, internalFormat, width, height);
+#else
 	GLTexture::setTexStorage2D((TextureTarget2D)getTextureTarget(), levels, internalFormat, width, height);
+#endif
 }
 
 void render::Texture2D::setTextureSubImage(int level, int xoffset, int yoffset, int width, int height, TextureExternalFormat format, TextureExternalDataType type, const void* pixels)
 {
+#if USE_NEW_TEXTURE_FUNCTION
+	GLTexture::setTextureSubImage2D(getTextureID(), level, xoffset, yoffset, width, height, format, type, pixels);
+#else
 	GLTexture::setTexSubImage2D((TextureTarget2D)getTextureTarget(), level, xoffset, yoffset, width, height, format, type, pixels);
+#endif
 }
 
 void render::Texture2D::compressedTextureImage(int level, TextureCompressedInternalFormat format, int width, int height, int imageSize, const void* data)
@@ -30,7 +35,11 @@ void render::Texture2D::compressedTextureImage(int level, TextureCompressedInter
 
 void render::Texture2D::compressedTextureSubImage(int level, int xoffset, int yoffset, int width, int height, TextureCompressedInternalFormat format, int imageSize, const void* data)
 {
+#if USE_NEW_TEXTURE_FUNCTION
+	GLTexture::compressedTextureSubImage2D(getTextureID(), level, xoffset, yoffset, width, height, format, imageSize, data);
+#else
 	GLTexture::compressedTexSubImage2D((TextureTarget2D)getTextureTarget(), level, xoffset, yoffset, width, height, format, imageSize, data);
+#endif
 }
 
 void render::Texture2D::setTextureImage(int level, TextureInternalBaseFormat internalFormat, int width, int height, int border, TextureExternalFormat format, TextureExternalDataType type, const void* data)
@@ -45,7 +54,6 @@ void render::Texture2D::load(const sys::ImageDetail* image, const TextureSetting
 		return;
 	}
 
-
 	this->setTextureSetting(setting);
 	this->applyTextureSettingWithSampler();
 	GLDebug::showError();
@@ -58,7 +66,7 @@ void render::Texture2D::load(const sys::ImageDetail* image, const TextureSetting
 	GLDebug::showError();
 	
 	int size = 0;
-#if USE_STORAGE	
+#if USE_TEXTURE_STORAGE	
 	TextureExternalFormat format = TextureExternalFormat::RGBA;
 	TextureInternalSizedFormat internalFormat = TextureInternalSizedFormat::RGBA8;
 	getStorageTextureFormat(image->getDataFormat(), format, internalFormat, size);
@@ -77,11 +85,10 @@ void render::Texture2D::load(const sys::ImageDetail* image, const TextureSetting
 		GLState::setPixelStore(PixelStore::UNPACK_ALIGNMENT, 2);
 	}
 
-#if USE_STORAGE
+#if USE_TEXTURE_STORAGE
 	this->setTextureStorage(1, internalFormat, getWidth(), getHeight());
 	this->setTextureSubImage(0, 0, 0, getWidth(), getHeight(), format, TextureExternalDataType::UNSIGNED_BYTE, image->getPixels());
 #else
-	GLState::setPixelStore(PixelStore::UNPACK_ALIGNMENT, 4);
 	this->setTextureImage(0, internalFormat,
 		image->getWidth(), image->getHeight(), 0, format,
 		TextureExternalDataType::UNSIGNED_BYTE, image->getPixels());

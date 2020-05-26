@@ -13,7 +13,7 @@ CtrlAudioGeometry::CtrlAudioGeometry()
 	, _maxPolygonCount(0)
 	, _maxVerticesCount(0)
 {
-	for (int i = 0; i < (int)ModelFace::MAX; i++)
+	for (int i = 0; i < (int)CubeFace::MAX; i++)
 	{
 		_polygons[i] = nullptr;
 	}
@@ -232,7 +232,7 @@ CtrlAudioGeometryPolygon* CtrlAudioGeometry::addPolygon(const RectVectices& vert
 	return polygon;
 }
 
-CtrlAudioGeometryPolygon* CtrlAudioGeometry::getPolygon(ModelFace index)
+CtrlAudioGeometryPolygon* CtrlAudioGeometry::getPolygon(CubeFace index)
 {
 	return _polygons[(uint8_t)index];
 }
@@ -260,9 +260,9 @@ void CtrlAudioGeometry::onPolygonsChange()
 	math::Vector3 position = mat.getPosition();
 	math::Volume volume = this->getVolume();
 	Tool::calRealCube(position, volume, getAnchorPoint(), _cubeVertex);
-	for (int i = 0; i < (int)ModelFace::MAX; i++)
+	for (int i = 0; i < (int)CubeFace::MAX; i++)
 	{
-		CtrlAudioGeometryPolygon* polygon = getPolygon((ModelFace)i);
+		CtrlAudioGeometryPolygon* polygon = getPolygon((CubeFace)i);
 		RectVectices rectVertex = getRectVertex(i);
 		if (polygon == nullptr)
 		{
@@ -277,29 +277,29 @@ void CtrlAudioGeometry::onPolygonsChange()
 
 const RectVectices& CtrlAudioGeometry::getRectVertex(int i)
 {
-	if (i < 0 || i >= (int)ModelFace::MAX)
+	if (i < 0 || i >= (int)CubeFace::MAX)
 	{
 		return _cubeVertex.front;
 	}
-	ModelFace face = (ModelFace)i;
+	CubeFace face = (CubeFace)i;
 	switch (face)
 	{
-	case render::ModelFace::FRONT:
+	case render::CubeFace::FRONT:
 		return _cubeVertex.front;
 		break;
-	case render::ModelFace::BACK:
+	case render::CubeFace::BACK:
 		return _cubeVertex.back;
 		break;
-	case render::ModelFace::LEFT:
+	case render::CubeFace::LEFT:
 		return _cubeVertex.left;
 		break;
-	case render::ModelFace::RIGHT:
+	case render::CubeFace::RIGHT:
 		return _cubeVertex.right;
 		break;
-	case render::ModelFace::TOP:
+	case render::CubeFace::TOP:
 		return _cubeVertex.top;
 		break;
-	case render::ModelFace::BOTTOM:
+	case render::CubeFace::BOTTOM:
 		return _cubeVertex.bottom;
 		break;
 	default:

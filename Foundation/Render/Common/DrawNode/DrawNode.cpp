@@ -193,4 +193,12 @@ void render::DrawNode::initBufferObject()
 
 void render::DrawNode::updateBufferData()
 {
+	if (_materiales)
+	{
+		_materiales->updateMatTexture();
+	}
+	if (_meshes)
+	{
+		_meshes->updateBufferData();
+	}
 }

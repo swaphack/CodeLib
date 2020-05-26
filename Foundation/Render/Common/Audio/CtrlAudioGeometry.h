@@ -40,7 +40,7 @@ namespace render
 		int getPolygonsCount();
 		int getVerticesCount();
 
-		CtrlAudioGeometryPolygon* getPolygon(ModelFace face);
+		CtrlAudioGeometryPolygon* getPolygon(CubeFace face);
 	protected:
 		CtrlAudioGeometryPolygon* addPolygon(const std::vector<math::Vector3>& vertexes);
 		CtrlAudioGeometryPolygon* addPolygon(const RectVectices& vertexes);
@@ -57,7 +57,7 @@ namespace render
 		// 最大多边形顶点数
 		int _maxVerticesCount;
 		// 六面
-		CtrlAudioGeometryPolygon* _polygons[(uint8_t)ModelFace::MAX];
+		CtrlAudioGeometryPolygon* _polygons[(uint8_t)CubeFace::MAX];
 		// 立方体顶点
 		CubeVectices _cubeVertex;
 	};

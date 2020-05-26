@@ -33,8 +33,6 @@ namespace render
 		bool isFlipY();
 	protected:
 		void onTextureChange();
-
-		virtual void updateBufferData();
 	protected:
 		// 顶点坐标信息
 		RectVertex _vertexes;
