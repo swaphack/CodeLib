@@ -93,7 +93,6 @@ void render::Texture::bindTextureUnit(uint32_t unit)
 void render::Texture::setTextureSetting(const TextureSetting& setting)
 {
 	_textureSettings = setting;
-	applyTextureSettingWithSampler();
 }
 
 const TextureSetting& render::Texture::getTextureSetting() const
@@ -113,10 +112,16 @@ void render::Texture::applyTextureSettingWithSampler()
 
 void render::Texture::applyTextureSetting()
 {
-	this->setTextureParameter(TextureParameter::TEXTURE_MIN_FILTER, (int)_textureSettings.minFilter);
-	this->setTextureParameter(TextureParameter::TEXTURE_MAG_FILTER, (int)_textureSettings.magFilter);
-	this->setTextureParameter(TextureParameter::TEXTURE_WRAP_S, (int)_textureSettings.wrapS);
-	this->setTextureParameter(TextureParameter::TEXTURE_WRAP_T, (int)_textureSettings.wrapT);
+	this->setTexParameter(TextureParameter::TEXTURE_MIN_FILTER, (int)_textureSettings.minFilter);
+	GLDebug::showError();
+	this->setTexParameter(TextureParameter::TEXTURE_MAG_FILTER, (int)_textureSettings.magFilter);
+	GLDebug::showError();
+	this->setTexParameter(TextureParameter::TEXTURE_WRAP_S, (int)_textureSettings.wrapS);
+	GLDebug::showError();
+	this->setTexParameter(TextureParameter::TEXTURE_WRAP_T, (int)_textureSettings.wrapT);
+	GLDebug::showError();
+	this->setTexParameter(TextureParameter::TEXTURE_WRAP_R, (int)_textureSettings.wrapR);
+	GLDebug::showError();
 }
 
 void render::Texture::bindSampler(uint32_t unit)

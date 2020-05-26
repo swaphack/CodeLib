@@ -63,13 +63,14 @@
     <ClCompile Include="Classes\Node\TestUtilityNode.cpp">
       <Filter>Classes\Node</Filter>
     </ClCompile>
-    <ClCompile Include="Classes\Node\TestFragmentNode.cpp">
-      <Filter>Classes\Node</Filter>
-    </ClCompile>
     <ClCompile Include="Classes\Node\Utility.cpp">
       <Filter>Classes\Node</Filter>
     </ClCompile>
     <ClCompile Include="Classes\Node\TestTextureNode.cpp">
+      <Filter>Classes\Node</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Node\TestEnviromentNode.cpp" />
+    <ClCompile Include="Classes\Node\TestEnvironmentNode.cpp">
       <Filter>Classes\Node</Filter>
     </ClCompile>
   </ItemGroup>
@@ -129,6 +130,9 @@
       <Filter>Classes\Node</Filter>
     </ClInclude>
     <ClInclude Include="Classes\Node\TestTextureNode.h">
+      <Filter>Classes\Node</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Node\TestEnvironmentNode.h">
       <Filter>Classes\Node</Filter>
     </ClInclude>
   </ItemGroup>

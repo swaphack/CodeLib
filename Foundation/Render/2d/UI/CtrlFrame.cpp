@@ -9,9 +9,6 @@
 #include "Common/Mesh/import.h"
 #include "Common/Material/import.h"
 
-#define MAT_TEXTURE_NAEM "MAT_TEXTURE_NAEM"
-
-
 using namespace render;
 
 CtrlFrame::CtrlFrame()
@@ -51,16 +48,16 @@ void CtrlFrame::setTexture(const Texture2D* texture)
 		return;
 	}
 
-	_materiales->addTexture(MAT_TEXTURE_NAEM, texture);
-	getMaterial(DRAW_MATERIAL_INDEX)->getMaterialDetail()->setAmbientTextureMap(MAT_TEXTURE_NAEM);
+	_materiales->addTexture(MAT_TEXTURE_NAME, texture);
+	getMaterial(DRAW_MATERIAL_INDEX)->getMaterialDetail()->setAmbientTextureMap(MAT_TEXTURE_NAME);
 
 	this->notify(NodeNotifyType::TEXTURE);
 }
 
 void CtrlFrame::setTextureWithRect(const Texture2D* texture)
 {
-	_materiales->addTexture(MAT_TEXTURE_NAEM, texture);
-	getMaterial(DRAW_MATERIAL_INDEX)->getMaterialDetail()->setAmbientTextureMap(MAT_TEXTURE_NAEM);
+	_materiales->addTexture(MAT_TEXTURE_NAME, texture);
+	getMaterial(DRAW_MATERIAL_INDEX)->getMaterialDetail()->setAmbientTextureMap(MAT_TEXTURE_NAME);
 
 	this->setVolume(texture->getWidth(), texture->getHeight(), texture->getDepth());
 

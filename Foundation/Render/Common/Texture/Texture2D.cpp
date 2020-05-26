@@ -55,7 +55,6 @@ void render::Texture2D::load(const sys::ImageDetail* image, const TextureSetting
 	}
 
 	this->setTextureSetting(setting);
-	this->applyTextureSettingWithSampler();
 	GLDebug::showError();
 
 	this->setWidth(image->getWidth());
@@ -90,10 +89,9 @@ void render::Texture2D::load(const sys::ImageDetail* image, const TextureSetting
 	this->setTextureSubImage(0, 0, 0, getWidth(), getHeight(), format, TextureExternalDataType::UNSIGNED_BYTE, image->getPixels());
 #else
 	this->setTextureImage(0, internalFormat,
-		image->getWidth(), image->getHeight(), 0, format,
+		getWidth(), getHeight(), 0, format,
 		TextureExternalDataType::UNSIGNED_BYTE, image->getPixels());
 #endif
-
 	GLDebug::showError();
 	/* Setup some parameters for texture filters and mipmapping */
 	this->unbindTexture();

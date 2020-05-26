@@ -41,7 +41,7 @@ namespace render
 		// 添加一个文本纹理
 		Texture2D* createTexture2D(const sys::TextDefine& textDefine);
 		// 添加一个立方体纹理
-		TextureCubeMap* createTextureCubeMap(const std::string* images[6]);
+		TextureCubeMap* createTextureCubeMap(int count, const std::string* images);
 	public:
 		sys::ImageDetail* loadImageDetail(const std::string& path);
 
@@ -52,5 +52,5 @@ namespace render
 		std::map<uint32_t, Texture*> _textures;
 	};
 
-	#define G_TEXTURE_CACHE sys::Instance<TextureCache>::getInstance()
+	#define G_TEXTURE_CACHE sys::Instance<render::TextureCache>::getInstance()
 }

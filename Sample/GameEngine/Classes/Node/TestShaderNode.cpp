@@ -24,7 +24,7 @@ void TestShaderNode::testFunc()
 	//this->test3dsModelShader();
 
 	this->testCubeModelShader();
-	this->testSphereModelShader();
+	//this->testSphereModelShader();
 }	
 
 void TestShaderNode::testShaderUniformBlock()
@@ -113,9 +113,9 @@ void TestShaderNode::testCubeModelShader()
 	pModel->addMaterialTexture(textureName1, pTexture1);
 
 	pModel->setAllMaterialsTexture(textureName);
-	pModel->setFaceTexture(ModelFace::FRONT, textureName1);
-	pModel->setFaceTexture(ModelFace::LEFT, textureName1);
-	pModel->setFaceTexture(ModelFace::TOP, textureName1);
+	pModel->setFaceTexture(CubeFace::FRONT, textureName1);
+	pModel->setFaceTexture(CubeFace::LEFT, textureName1);
+	pModel->setFaceTexture(CubeFace::TOP, textureName1);
 
 	pModel->setPosition(400, 400, 0);
 	pModel->setVolume(200, 200, 200);

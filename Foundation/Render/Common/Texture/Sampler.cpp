@@ -47,6 +47,7 @@ void render::Sampler::apply(const TextureSetting& setting)
 	this->setParameter(SamplerParameter::TEXTURE_MAG_FILTER, (int)setting.magFilter);
 	this->setParameter(SamplerParameter::TEXTURE_WRAP_S, (int)setting.wrapS);
 	this->setParameter(SamplerParameter::TEXTURE_WRAP_T, (int)setting.wrapT);
+	this->setParameter(SamplerParameter::TEXTURE_WRAP_R, (int)setting.wrapR);
 	GLDebug::showError();
 }
 

@@ -11,6 +11,6 @@ namespace render
 		TextureCubeMap();
 		virtual ~TextureCubeMap();
 	public:
-		void load(const sys::ImageDetail* imageDetails[6], const TextureSetting& setting = TextureSetting());
+		void load(int count, sys::ImageDetail** imageDetails, const TextureSetting& setting = TextureSetting());
 	};
 }

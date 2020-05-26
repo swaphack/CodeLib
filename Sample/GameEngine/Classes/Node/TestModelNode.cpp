@@ -34,9 +34,9 @@ void TestModelNode::testCubeModel()
 	pModel->addMaterialTexture(textureName1, pTexture1);
 
 	pModel->setAllMaterialsTexture(textureName);
-	pModel->setFaceTexture(ModelFace::FRONT, textureName1);
-	pModel->setFaceTexture(ModelFace::LEFT, textureName1);
-	pModel->setFaceTexture(ModelFace::TOP, textureName1);
+	pModel->setFaceTexture(CubeFace::FRONT, textureName1);
+	pModel->setFaceTexture(CubeFace::LEFT, textureName1);
+	pModel->setFaceTexture(CubeFace::TOP, textureName1);
 
 	pModel->setAnchorPoint(math::Vector3(0.5f, 0.5f, 0.5f));
 	pModel->setPosition(200, 200, -50);

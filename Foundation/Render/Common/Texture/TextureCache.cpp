@@ -126,26 +126,31 @@ Texture2D* TextureCache::createTexture2D(const sys::TextDefine& textDefine)
 	return texture2D;
 }
 
-TextureCubeMap* render::TextureCache::createTextureCubeMap(const std::string* images[6])
+TextureCubeMap* render::TextureCache::createTextureCubeMap(int count, const std::string* images)
 {
 	if (images == nullptr)
 	{
 		return nullptr;
 	}
 
-	sys::ImageDetail* imageDetails[6];
+	sys::ImageDetail** imageDetails = new sys::ImageDetail*[count];
 	TextureCubeMap* textureCubeMap = CREATE_OBJECT(TextureCubeMap);
-	for (int i = 0; i < 6; i++)
+	for (int i = 0; i < count; i++)
 	{
-		if (images[i]->empty())
+		if (images[i].empty())
 		{
+			imageDetails[i] = nullptr;
 			continue;
 		}
-		sys::ImageDetail* imageDetail = loadImageDetail(*images[i]);
+		sys::ImageDetail* imageDetail = loadImageDetail(images[i]);
 		imageDetails[i] = imageDetail;
 	}
-	//textureCubeMap->load(imageDetails);
-	for (int i = 0; i < 6; i++)
+	TextureSetting setting;
+	setting.wrapR = TextureWrapMode::CLAMP_TO_EDGE;
+	setting.wrapS = TextureWrapMode::CLAMP_TO_EDGE;
+	setting.wrapT = TextureWrapMode::CLAMP_TO_EDGE;
+	textureCubeMap->load(count, imageDetails, setting);
+	for (int i = 0; i < count; i++)
 	{
 		if (imageDetails[i] == nullptr)
 		{
@@ -153,6 +158,7 @@ TextureCubeMap* render::TextureCache::createTextureCubeMap(const std::string* im
 		}
 		SAFE_DELETE(imageDetails[i]);
 	}
+	delete[] imageDetails;
 	return textureCubeMap;
 }
 

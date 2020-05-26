@@ -77,7 +77,7 @@ void render::DrawNode::addMaterialTexture(const std::string& name, const std::st
 	_materiales->addTexture(name, fullpath);
 }
 
-void render::DrawNode::addMaterialTexture(const std::string& name, Texture2D* texture)
+void render::DrawNode::addMaterialTexture(const std::string& name, Texture* texture)
 {
 	_materiales->addTexture(name, texture);
 }

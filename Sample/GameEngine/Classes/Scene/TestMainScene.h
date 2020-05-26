@@ -9,6 +9,5 @@ public:
 	virtual ~TestMainScene();
 public:
 	virtual bool init();
-private:
 };
 

@@ -14,7 +14,7 @@ namespace render
 {
 	class ShaderProgram;
 	class VertexArrayObject;
-	class Texture2D;
+	class Texture;
 	class Node;
 	class Material;
 
@@ -65,7 +65,7 @@ namespace render
 		/**
 		*	添加纹理
 		*/
-		void addTexture(const std::string& name, const Texture2D* id);
+		void addTexture(const std::string& name, const Texture* id);
 		/**
 		*	移除纹理
 		*/
@@ -77,7 +77,7 @@ namespace render
 		/**
 		*	获取纹理
 		*/
-		Texture2D* getTexture(const std::string& name) const;
+		Texture* getTexture(const std::string& name) const;
 	public:
 		// 更新纹理
 		void updateMatTexture();
@@ -85,7 +85,7 @@ namespace render
 		// 模型材质
 		std::map<int, Material*> _materials;
 		// 图片纹理
-		std::map<std::string, Texture2D*> _textures;
+		std::map<std::string, Texture*> _textures;
 		// 纹理路径
 		std::map<std::string, std::string> _texturePaths;
 	};

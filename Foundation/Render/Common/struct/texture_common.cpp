@@ -1,4 +1,5 @@
 #include "texture_common.h"
+#include "enum_common.h"
 
 using namespace render;
 
@@ -118,6 +119,24 @@ void RectVertex::setLeftUpUV(const math::Vector2& point)
 
 CubeVertex::CubeVertex()
 {
+	uint32_t front[6]	= { 0, 1, 2, 0, 2, 3 };
+	uint32_t right[6]	= { 1, 5, 6, 1, 6, 2 };
+	uint32_t top[6]		= { 3, 2, 6, 3, 6, 7 };
+	uint32_t back[6]	= { 5, 4, 7, 5, 7, 6 };
+	uint32_t left[6]	= { 4, 0, 3, 4, 3, 7 };
+	uint32_t bottom[6]	= { 0, 4, 5, 0, 5, 1 };
+
+
+	uint32_t unit = 6 * sizeof(uint32_t);
+
+	memcpy(indices + ((uint32_t)CubeFace::FRONT) * 6, front, unit);
+	memcpy(indices + ((uint32_t)CubeFace::RIGHT) * 6, right, unit);
+	memcpy(indices + ((uint32_t)CubeFace::TOP) * 6, top, unit);
+	memcpy(indices + ((uint32_t)CubeFace::BACK) * 6, back, unit);
+	memcpy(indices + ((uint32_t)CubeFace::LEFT) * 6, left, unit);
+	memcpy(indices + ((uint32_t)CubeFace::BOTTOM) * 6, bottom, unit);
+
+	/*
 	// 前
 	indices[0] = 0; indices[1] = 1; indices[2] = 2;
 	indices[3] = 0; indices[4] = 2; indices[5] = 3;
@@ -129,6 +148,7 @@ CubeVertex::CubeVertex()
 	// 顶部
 	indices[12] = 3; indices[13] = 2; indices[14] = 6;
 	indices[15] = 3; indices[16] = 6; indices[17] = 7;
+
 	//背面
 	indices[18] = 5; indices[19] = 4; indices[20] = 7;
 	indices[21] = 5; indices[22] = 7; indices[23] = 6;
@@ -139,6 +159,7 @@ CubeVertex::CubeVertex()
 	// 底部
 	indices[30] = 0; indices[31] = 4; indices[32] = 5;
 	indices[33] = 0; indices[34] = 5; indices[35] = 1;
+	*/
 
 	for (int i = 0; i < 24; i++)
 	{

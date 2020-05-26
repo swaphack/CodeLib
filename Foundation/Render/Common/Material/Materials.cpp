@@ -123,7 +123,7 @@ void render::Materials::updateMatTexture()
 	_texturePaths.clear();
 }
 
-void Materials::addTexture(const std::string& name, const Texture2D* id)
+void Materials::addTexture(const std::string& name, const Texture* id)
 {
 	if (id == nullptr)
 	{
@@ -131,7 +131,7 @@ void Materials::addTexture(const std::string& name, const Texture2D* id)
 	}
 	this->removeTexture(name);
 
-	Texture2D* pid = (Texture2D*)id;
+	Texture* pid = (Texture*)id;
 	SAFE_RETAIN(pid);
 
 	_textures[name] = pid;
@@ -159,7 +159,7 @@ void Materials::removeAllTextures()
 	_textures.clear();
 }
 
-Texture2D* Materials::getTexture(const std::string& name) const
+Texture* Materials::getTexture(const std::string& name) const
 {
 	auto it = _textures.find(name);
 	if (it == _textures.end())

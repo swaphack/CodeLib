@@ -4,7 +4,7 @@
 
 uniform samplerCube texSampler0;
 
-in vec2 fragmentUV;
+in vec3 fragmentUV;
 
 out vec4 color;
 

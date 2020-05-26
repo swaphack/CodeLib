@@ -5,6 +5,10 @@
 
 namespace render
 {
+	class TextureCubeMap;
+	/**
+	*	Ìì¿ÕºÐ
+	*/
 	class SkyBox : public Model
 	{
 	public:
@@ -13,10 +17,16 @@ namespace render
 	public:
 		virtual bool init();
 	public:
-		void loadImages(CubeFace face, const std::string& fullpath);
+		void setFaceImage(CubeFace face, const std::string& fullpath);
+		void setAllFacesImage(const std::string& fullpath);
 	protected:
 		void onImageChanged();
+		void onSpaceChanged();
 	private:
 		std::string _imagePaths[6];
+		// ×ø±ê
+		CubeVertex _cubePosition;
+		// ÎÆÀí
+		TextureCubeMap* _texCubeMap = nullptr;
 	};
 }

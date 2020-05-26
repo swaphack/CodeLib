@@ -11,11 +11,14 @@ namespace render
 	class Mesh;
 	class FragmentOperator;
 	class ShaderProgram;
-	class Texture2D;
+	class Texture;
 
 
 #define DRAW_MATERIAL_INDEX 0
 #define DRAW_MESH_INDEX 0
+
+
+#define MAT_TEXTURE_NAME "MAT_TEXTURE_NAME"
 
 	/**
 	*	绘制节点
@@ -59,7 +62,7 @@ namespace render
 		/**
 		*	添加纹理
 		*/
-		void addMaterialTexture(const std::string& name, Texture2D* texture);
+		void addMaterialTexture(const std::string& name, Texture* texture);
 		/**
 		*	设置纹理
 		*/

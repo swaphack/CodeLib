@@ -12,7 +12,7 @@ render::TextureCubeMap::~TextureCubeMap()
 
 }
 
-void render::TextureCubeMap::load(const sys::ImageDetail* imageDetails[6], const TextureSetting& setting /*= TextureSetting()*/)
+void render::TextureCubeMap::load(int count, sys::ImageDetail** imageDetails, const TextureSetting& setting /*= TextureSetting()*/)
 {
 	if (imageDetails == nullptr)
 	{
@@ -20,26 +20,28 @@ void render::TextureCubeMap::load(const sys::ImageDetail* imageDetails[6], const
 	}
 
 	this->setTextureSetting(setting);
-	this->applyTextureSettingWithSampler();
 	GLDebug::showError();
 
 	/* Generate texture */
 	this->bindTexture();
 	GLDebug::showError();
 
-	for (int i = 0; i <  6; i++)
+	this->setDepth(count);
+	for (int i = 0; i < count; i++)
 	{
 		auto image = imageDetails[i];
+		
+		
 		int size = 0;
-#if USE_TEXTURE_STORAGE	
-		TextureExternalFormat format = TextureExternalFormat::RGBA;
-		TextureInternalSizedFormat internalFormat = TextureInternalSizedFormat::RGBA8;
-		getStorageTextureFormat(image->getDataFormat(), format, internalFormat, size);
-#else
+//#if USE_TEXTURE_STORAGE	
+//		TextureExternalFormat format = TextureExternalFormat::RGBA;
+//		TextureInternalSizedFormat internalFormat = TextureInternalSizedFormat::RGBA8;
+//		getStorageTextureFormat(image->getDataFormat(), format, internalFormat, size);
+//#else
 		TextureExternalFormat format = TextureExternalFormat::RGBA;
 		TextureInternalBaseFormat internalFormat = TextureInternalBaseFormat::RGBA;
 		getTextureFormat(image->getDataFormat(), format, internalFormat, size);
-#endif
+//#endif
 		int len = size * getWidth();
 		if ((len % 4 == 3) || (len % 4 == 0))
 		{
@@ -50,17 +52,26 @@ void render::TextureCubeMap::load(const sys::ImageDetail* imageDetails[6], const
 			GLState::setPixelStore(PixelStore::UNPACK_ALIGNMENT, 2);
 		}
 
-		TextureTarget2D target = (TextureTarget2D)((uint32_t)TextureTarget2D::TEXTURE_CUBE_MAP_NEGATIVE_X + i);
-#if USE_TEXTURE_STORAGE
-		GLTexture::setTexStorage2D(target, 0, internalFormat, getWidth(), getHeight());
-		GLTexture::setTexSubImage2D(target, 0, 0, 0, getWidth(), getHeight(), format, TextureExternalDataType::UNSIGNED_BYTE, image->getPixels());
-#else
+		
+		if (i == 0)
+		{
+			this->setWidth(image->getWidth());
+			this->setHeight(image->getHeight());
+			//GLTexture::setTextureStorage2D(getTextureID(), 10, internalFormat, getWidth(), getHeight());
+			GLDebug::showError();
+		}
+		TextureTarget2D target = (TextureTarget2D)((uint32_t)TextureTarget2D::TEXTURE_CUBE_MAP_POSITIVE_X + i);
+//#if USE_TEXTURE_STORAGE
+//		GLTexture::setTexSubImage2D(target, 0, 0, 0, getWidth(), getHeight(), format, TextureExternalDataType::UNSIGNED_BYTE, image->getPixels());
+//#else
 		GLTexture::setTexImage2D(target, 0, internalFormat,
-			image->getWidth(), image->getHeight(), 0, format,
+			getWidth(), getHeight(), 0, format,
 			TextureExternalDataType::UNSIGNED_BYTE, image->getPixels());
-#endif
+//#endif
+		GLDebug::showError();
 	}
 
+	//GLFrameBuffer::generateMipmap((MipmapTextureTarget)getTextureTarget()));
 	GLDebug::showError();
 	/* Setup some parameters for texture filters and mipmapping */
 	this->unbindTexture();

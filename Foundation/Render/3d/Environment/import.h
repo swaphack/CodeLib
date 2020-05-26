@@ -4,3 +4,4 @@
 #include "Light.h"
 #include "SpotLight.h"
 #include "ClipPlane.h"
+#include "SkyBox.h"
