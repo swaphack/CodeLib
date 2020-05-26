@@ -33,6 +33,6 @@ void render::SkyBox::loadImages(CubeFace face, const std::string& fullpath)
 
 void render::SkyBox::onImageChanged()
 {
-	G_TEXTURE_CACHE->createTextureCubeMap();
+	//G_TEXTURE_CACHE->createTextureCubeMap();
 }
 

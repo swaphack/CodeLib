@@ -37,7 +37,7 @@ void TextureCache::removeTexture(Texture* texture)
 		return;
 	}
 
-	auto iter = _textures.find(texture->getID());
+	auto iter = _textures.find(texture->getTextureID());
 	if (iter != _textures.end())
 	{
 		SAFE_DELETE(iter->second);
@@ -130,7 +130,7 @@ TextureCubeMap* render::TextureCache::createTextureCubeMap(const std::string* im
 {
 	if (images == nullptr)
 	{
-		return;
+		return nullptr;
 	}
 
 	sys::ImageDetail* imageDetails[6];
@@ -144,7 +144,7 @@ TextureCubeMap* render::TextureCache::createTextureCubeMap(const std::string* im
 		sys::ImageDetail* imageDetail = loadImageDetail(*images[i]);
 		imageDetails[i] = imageDetail;
 	}
-	textureCubeMap->load(imageDetails);
+	//textureCubeMap->load(imageDetails);
 	for (int i = 0; i < 6; i++)
 	{
 		if (imageDetails[i] == nullptr)
