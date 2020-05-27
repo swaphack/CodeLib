@@ -1,7 +1,7 @@
 #include "SkyBox.h"
 #include "Common/Texture/TextureCache.h"
 #include "Common/Texture/TextureCubeMap.h"
-#include "Common/Tool/TextureTool.h"
+#include "Common/Tool/VertexTool.h"
 #include "Common/Mesh/Mesh.h"
 #include "Graphic/import.h"
 
@@ -22,5 +22,18 @@ bool render::SkyBox::init()
 	}
 
 	return true;
+}
+
+void render::SkyBox::beforeDrawNode()
+{
+	GLState::setDepthMask(false);
+	Cube::beforeDrawNode();
+}
+
+void render::SkyBox::afterDrawNode()
+{
+	Cube::afterDrawNode();
+
+	GLState::setDepthMask(true);
 }
 

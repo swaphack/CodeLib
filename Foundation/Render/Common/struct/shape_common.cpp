@@ -113,6 +113,7 @@ void render::CubeVectices::setBackLeftUpPosition(const math::Vector3& point)
 
 bool render::CubeVectices::containPointByPolygon(float x, float y)
 {
+	// ͶӰ
 	return front.containPointByPolygon(x, y)
 		|| back.containPointByPolygon(x, y)
 		|| left.containPointByPolygon(x, y)

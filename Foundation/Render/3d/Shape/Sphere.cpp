@@ -1,12 +1,11 @@
 #include "Sphere.h"
 #include "Graphic/import.h"
 #include "mathlib.h"
-#include "Common/struct/texture_common.h"
+#include "Common/struct/vertex_common.h"
 using namespace render;
 
 #define SPHERE_HORIZONTAL_COUNT 50
 #define SPHERE_VERTICAL_COUNT 50
-#define SPHERE_FACE_COUNT 3
 
 render::Sphere::Sphere()
 {
@@ -52,8 +51,6 @@ math::Vector3 render::Sphere::getPoint(float u, float v)
 
 void render::Sphere::updateSphere()
 {
-	CubeVertex pos;
-
 	float ustep = 1.0f / SPHERE_HORIZONTAL_COUNT, vstep = 1.0f / SPHERE_VERTICAL_COUNT;
 	float u = 0, v = 0;
 
@@ -81,20 +78,23 @@ void render::Sphere::updateSphere()
 	READ_VERTEX(vertex, uv) \
 	pIndices.push_back(pIndices.size()); \
 }
+	auto pMesh = _meshes->getMesh(0);
+
+	int nCount0 = 3 * SPHERE_HORIZONTAL_COUNT;
+	int nCount1 = 4 * (SPHERE_VERTICAL_COUNT - 2) * SPHERE_HORIZONTAL_COUNT;
+	int nCount2 = 3 * SPHERE_HORIZONTAL_COUNT;
+
+	auto pVertices = std::vector<float>();
+	pVertices.reserve(3 * (nCount0 + nCount1 + nCount2));
+	auto pUVs = std::vector<float>();
+	pUVs.reserve(2 * (nCount0 + nCount1 + nCount2));
+	auto pColors = std::vector<float>();
+	pColors.reserve(4 * (nCount0 + nCount1 + nCount2));
+	auto pIndices = std::vector<uint32_t>();
+	pIndices.reserve(nCount0 + 1.5f * nCount1 + nCount2);
 
 	//绘制上端三角形组
 	{
-		int nCount = 3 * SPHERE_HORIZONTAL_COUNT;
-		auto pMesh = _meshes->getMesh(0);
-		auto pVertices = std::vector<float>();
-		pVertices.reserve(3 * nCount);
-		auto pUVs = std::vector<float>();
-		pUVs.reserve(2 * nCount);
-		auto pColors = std::vector<float>();
-		pColors.reserve(4 * nCount);
-		auto pIndices = std::vector<uint32_t>();
-		pIndices.reserve(nCount);
-
 		for (int i = 0; i < SPHERE_HORIZONTAL_COUNT; i++)
 		{
 			math::Vector2 ua = math::Vector2(0, 0);
@@ -111,27 +111,11 @@ void render::Sphere::updateSphere()
 
 			u += ustep;
 		}
-
-		pMesh->getMeshDetail()->setVertices(nCount, &pVertices[0]);
-		pMesh->getMeshDetail()->setUVs(nCount, &pUVs[0]);
-		pMesh->getMeshDetail()->setColors(nCount, &pColors[0]);
-		pMesh->getMeshDetail()->setIndices(pIndices.size(), &pIndices[0]);
 	}
 
 	//绘制中间四边形组
 	u = 0, v = vstep;
 	{
-		int nCount = 4 * (SPHERE_VERTICAL_COUNT - 2) * SPHERE_HORIZONTAL_COUNT;
-		auto pMesh = _meshes->getMesh(1);
-		auto pVertices = std::vector<float>();
-		pVertices.reserve(3 * nCount);
-		auto pUVs = std::vector<float>();
-		pUVs.reserve(2 * nCount);
-		auto pColors = std::vector<float>();
-		pColors.reserve(4 * nCount);
-		auto pIndices = std::vector<uint32_t>();
-		pIndices.reserve(1.5f * nCount);
-
 		int index = 0;
 		for (int i = 1; i < SPHERE_VERTICAL_COUNT - 1; i++)
 		{
@@ -152,39 +136,24 @@ void render::Sphere::updateSphere()
 				READ_VERTEX(vc, uc);
 				READ_VERTEX(vd, ud);
 
-				pIndices.push_back(4 * index + 0);
-				pIndices.push_back(4 * index + 1);
-				pIndices.push_back(4 * index + 2);
-				pIndices.push_back(4 * index + 0);
-				pIndices.push_back(4 * index + 2);
-				pIndices.push_back(4 * index + 3);
+				pIndices.push_back(nCount0 + 4 * index + 0);
+				pIndices.push_back(nCount0 + 4 * index + 1);
+				pIndices.push_back(nCount0 + 4 * index + 2);
+				pIndices.push_back(nCount0 + 4 * index + 0);
+				pIndices.push_back(nCount0 + 4 * index + 2);
+				pIndices.push_back(nCount0 + 4 * index + 3);
 
 				index++;
 				u += ustep;
 			}
 			v += vstep;
 		}
-
-		pMesh->getMeshDetail()->setVertices(nCount, &pVertices[0]);
-		pMesh->getMeshDetail()->setUVs(nCount, &pUVs[0]);
-		pMesh->getMeshDetail()->setColors(nCount, &pColors[0]);
-		pMesh->getMeshDetail()->setIndices(pIndices.size(), &pIndices[0]);
 	}
 	
 	//绘制下端三角形组
 	u = 0;
 	{
-		int nCount = 3 * SPHERE_HORIZONTAL_COUNT;
-		auto pMesh = _meshes->getMesh(2);
-		auto pVertices = std::vector<float>();
-		pVertices.reserve(3 * nCount);
-		auto pUVs = std::vector<float>();
-		pUVs.reserve(2 * nCount);
-		auto pColors = std::vector<float>();
-		pColors.reserve(4 * nCount);
-		auto pIndices = std::vector<uint32_t>();
-		pIndices.reserve(nCount);
-
+		int index = 0;
 		//绘制下端三角形组
 		for (int i = 0; i < SPHERE_HORIZONTAL_COUNT; i++)
 		{
@@ -196,17 +165,23 @@ void render::Sphere::updateSphere()
 			math::Vector3 vb = getPoint(ub);
 			math::Vector3 vc = getPoint(uc);
 
-			READ_VERTEX_1(va, ua);
-			READ_VERTEX_1(vb, ub);
-			READ_VERTEX_1(vc, uc);
+			READ_VERTEX(va, ua);
+			READ_VERTEX(vb, ub);
+			READ_VERTEX(vc, uc);
 
+			pIndices.push_back(nCount0 + nCount1 + 3 * index + 0);
+			pIndices.push_back(nCount0 + nCount1 + 3 * index + 1);
+			pIndices.push_back(nCount0 + nCount1 + 3 * index + 2);
+
+			index++;
 			u += ustep;
 		}
-		pMesh->getMeshDetail()->setVertices(nCount, &pVertices[0]);
-		pMesh->getMeshDetail()->setUVs(nCount, &pUVs[0]);
-		pMesh->getMeshDetail()->setColors(nCount, &pColors[0]);
-		pMesh->getMeshDetail()->setIndices(pIndices.size(), &pIndices[0]);
 	}
+
+	pMesh->getMeshDetail()->setVertices(nCount0 + nCount1 + nCount2, &pVertices[0]);
+	pMesh->getMeshDetail()->setUVs(nCount0 + nCount1 + nCount2, &pUVs[0]);
+	pMesh->getMeshDetail()->setColors(nCount0 + nCount1 + nCount2, &pColors[0]);
+	pMesh->getMeshDetail()->setIndices(pIndices.size(), &pIndices[0]);
 }
 
 #ifdef SPHERE_DRAW_METHOD_ONE
@@ -340,19 +315,6 @@ void render::Sphere::draw()
 	}
 }
 #endif
-
-void render::Sphere::initBufferObject()
-{
-	for (int i = 0; i < SPHERE_FACE_COUNT; i++)
-	{
-		auto pMat = CREATE_OBJECT(sys::MaterialDetail);
-		_materiales->addMaterial(i, pMat);
-
-		auto pMesh = CREATE_OBJECT(sys::MeshDetail);
-		pMesh->setMaterial(i);
-		_meshes->addMesh(i, pMesh);
-	}
-}
 
 void Sphere::setRadius(float radius)
 {

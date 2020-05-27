@@ -48,7 +48,7 @@ namespace sys
 		/**
 		*	设置顶点坐标信息
 		*/
-		void setVertices(int len, float* vertexes, int unitSize = 3);
+		void setVertices(int len, const float* vertexes, int unitSize = 3);
 		/**
 		*	法线坐标信息
 		*/
@@ -56,7 +56,7 @@ namespace sys
 		/**
 		*	设置法线坐标信息
 		*/
-		void setNormals(int len, float* normals, int unitSize = 3);
+		void setNormals(int len, const float* normals, int unitSize = 3);
 		/**
 		*	颜色坐标信息
 		*/
@@ -64,7 +64,7 @@ namespace sys
 		/**
 		*	设置颜色坐标信息
 		*/
-		void setColors(int len, float* colors, int unitSize = 4);
+		void setColors(int len, const float* colors, int unitSize = 4);
 		/**
 		*	纹理坐标信息
 		*/
@@ -72,7 +72,7 @@ namespace sys
 		/**
 		*	设置纹理坐标信息
 		*/
-		void setUVs(int len, float* texCoords, int unitSize = 2);
+		void setUVs(int len, const float* texCoords, int unitSize = 2);
 		/**
 		*	设置材质
 		*/
@@ -84,7 +84,7 @@ namespace sys
 		/**
 		*	设置三角形索引
 		*/
-		void setIndices(int size, uint32_t* indices, int unitSize = 1);
+		void setIndices(int size, const uint32_t* indices, int unitSize = 1);
 		/**
 		*	获取三角形索引
 		*/

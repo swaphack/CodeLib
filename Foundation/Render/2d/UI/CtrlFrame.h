@@ -2,7 +2,7 @@
 
 #include "CtrlWidget.h"
 #include "mathlib.h"
-#include "Common/struct/texture_common.h"
+#include "Common/struct/vertex_common.h"
 
 namespace render
 {

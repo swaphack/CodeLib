@@ -16,6 +16,8 @@ namespace render
 	public:
 		virtual bool init();
 	public:
-		
+	protected:
+		virtual void beforeDrawNode();
+		virtual void afterDrawNode();
 	};
 }

@@ -6,7 +6,6 @@ uniform mat4 viewMatrix;
 layout(location = 0) in vec3 vPosition;
 
 out vec3 fragmentUV;
-out vec4 fragmentColor;
 
 void main()
 {

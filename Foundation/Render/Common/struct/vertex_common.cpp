@@ -1,4 +1,4 @@
-#include "texture_common.h"
+#include "vertex_common.h"
 #include "enum_common.h"
 
 using namespace render;
@@ -119,89 +119,91 @@ void RectVertex::setLeftUpUV(const math::Vector2& point)
 
 CubeVertex::CubeVertex()
 {
-	uint32_t front[6]	= { 0, 1, 2, 0, 2, 3 };
-	uint32_t right[6]	= { 1, 5, 6, 1, 6, 2 };
-	uint32_t top[6]		= { 3, 2, 6, 3, 6, 7 };
-	uint32_t back[6]	= { 5, 4, 7, 5, 7, 6 };
-	uint32_t left[6]	= { 4, 0, 3, 4, 3, 7 };
-	uint32_t bottom[6]	= { 0, 4, 5, 0, 5, 1 };
+	
+}
 
+void CubeVertex::setFrontLeftDownPosition(const math::Vector3& point)
+{
+	front.setLeftDownPoint(point);
+	left.setRightDownPoint(point);
+	bottom.setLeftUpPoint(point);
+}
 
-	uint32_t unit = 6 * sizeof(uint32_t);
+void CubeVertex::setFrontRightDownPosition(const math::Vector3& point)
+{
+	front.setRightDownPoint(point);
+	right.setLeftDownPoint(point);
+	bottom.setRightUpPoint(point);
+}
 
-	memcpy(indices + ((uint32_t)CubeFace::FRONT) * 6, front, unit);
-	memcpy(indices + ((uint32_t)CubeFace::RIGHT) * 6, right, unit);
-	memcpy(indices + ((uint32_t)CubeFace::TOP) * 6, top, unit);
-	memcpy(indices + ((uint32_t)CubeFace::BACK) * 6, back, unit);
-	memcpy(indices + ((uint32_t)CubeFace::LEFT) * 6, left, unit);
-	memcpy(indices + ((uint32_t)CubeFace::BOTTOM) * 6, bottom, unit);
+void CubeVertex::setFrontRightUpPosition(const math::Vector3& point)
+{
+	front.setRightUpPoint(point);
+	right.setLeftUpPoint(point);
+	top.setRightDownPoint(point);
+}
 
-	float uv[8] = {
-		0,0,
-		1,0,
-		1,1,
-		0,1
-	};
-	unit = 8 * sizeof(float);
+void CubeVertex::setFrontLeftUpPosition(const math::Vector3& point)
+{
+	front.setLeftUpPoint(point);
+	left.setRightUpPoint(point);
+	top.setLeftDownPoint(point);
+}
 
-	memcpy(uvs + ((uint32_t)CubeFace::FRONT) * 8, uv, unit);
-	memcpy(uvs + ((uint32_t)CubeFace::RIGHT) * 8, uv, unit);
-	memcpy(uvs + ((uint32_t)CubeFace::TOP) * 8, uv, unit);
-	memcpy(uvs + ((uint32_t)CubeFace::BACK) * 8, uv, unit);
-	memcpy(uvs + ((uint32_t)CubeFace::LEFT) * 8, uv, unit);
-	memcpy(uvs + ((uint32_t)CubeFace::BOTTOM) * 8, uv, unit);
+void CubeVertex::setBackLeftDownPosition(const math::Vector3& point)
+{
+	back.setRightDownPoint(point);
+	left.setLeftDownPoint(point);
+	bottom.setLeftDownPoint(point);
+}
 
+void CubeVertex::setBackRightDownPosition(const math::Vector3& point)
+{
+	back.setLeftDownPoint(point);
+	right.setRightDownPoint(point);
+	bottom.setRightDownPoint(point);
+}
 
-	for (int i = 0; i < 24; i++)
+void CubeVertex::setBackRightUpPosition(const math::Vector3& point)
+{
+	back.setLeftUpPoint(point);
+	top.setRightUpPoint(point);
+	right.setRightUpPoint(point);
+}
+
+void CubeVertex::setBackLeftUpPosition(const math::Vector3& point)
+{
+	back.setRightUpPoint(point);
+	left.setLeftUpPoint(point);
+	top.setLeftUpPoint(point);
+}
+
+const RectVertex* render::CubeVertex::getFaceVertex(CubeFace face) const
+{
+	// TODO: 在此处插入 return 语句
+
+	switch (face)
 	{
-		vertices[i] = 0;
+	case render::CubeFace::RIGHT:
+		return &right;
+		break;
+	case render::CubeFace::LEFT:
+		return &left;
+		break;
+	case render::CubeFace::TOP:
+		return &top;
+		break;
+	case render::CubeFace::BOTTOM:
+		return &bottom;
+		break;
+	case render::CubeFace::FRONT:
+		return &front;
+		break;
+	case render::CubeFace::BACK:
+		return &back;
+		break;
+	default:
+		break;
 	}
-}
-
-void CubeVertex::setFrontLeftDownPoint(const math::Vector3& point)
-{
-	int index = 0;
-	memcpy(vertices + index, point.getValue(), point.getSize());
-}
-
-void CubeVertex::setFrontRightDownPoint(const math::Vector3& point)
-{
-	int index = 3;
-	memcpy(vertices + index, point.getValue(), point.getSize());
-}
-
-void CubeVertex::setFrontRightUpPoint(const math::Vector3& point)
-{
-	int index = 6;
-	memcpy(vertices + index, point.getValue(), point.getSize());
-}
-
-void CubeVertex::setFrontLeftUpPoint(const math::Vector3& point)
-{
-	int index = 9;
-	memcpy(vertices + index, point.getValue(), point.getSize());
-}
-
-void CubeVertex::setBackLeftDownPoint(const math::Vector3& point)
-{
-	int index = 12;
-	memcpy(vertices + index, point.getValue(), point.getSize());
-}
-
-void CubeVertex::setBackRightDownPoint(const math::Vector3& point)
-{
-	int index = 15;
-	memcpy(vertices + index, point.getValue(), point.getSize());
-}
-
-void CubeVertex::setBackRightUpPoint(const math::Vector3& point)
-{
-	int index = 18;
-	memcpy(vertices + index, point.getValue(), point.getSize());
-}
-
-void CubeVertex::setBackLeftUpPoint(const math::Vector3& point)
-{
-	int index = 21;
-	memcpy(vertices + index, point.getValue(), point.getSize());
+	return nullptr;
 }

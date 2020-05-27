@@ -1,6 +1,6 @@
 #include "MultiFaceCube.h"
 #include "Common/Texture/Texture.h"
-#include "Common/Tool/TextureTool.h"
+#include "Common/Tool/VertexTool.h"
 #include "Common/DrawNode/import.h"
 #include "Common/Mesh/import.h"
 #include "Common/Material/import.h"
@@ -41,7 +41,7 @@ void render::MultiFaceCube::setFaceTextureName(CubeFace face, const std::string&
 
 void render::MultiFaceCube::initBufferObject()
 {
-	for (int i = 0; i < CUBE_FACE_COUNT; i++)
+	for (int i = 0; i < (int)CubeFace::MAX; i++)
 	{
 		auto pMat = CREATE_OBJECT(sys::MaterialDetail);
 		_materiales->addMaterial(i, pMat);
@@ -51,47 +51,27 @@ void render::MultiFaceCube::initBufferObject()
 
 		pMesh->setMaterial(i);
 
-		pMesh->setUVs(4, _faces[i].uvs, 2);
-		pMesh->setIndices(6, _faces[i].indices);
-		pMesh->setColors(4, _faces[i].colors, 4);
+		CubeFace face = (CubeFace)i;
+
+		pMesh->setUVs(4, _cubePosition.getFaceVertex((CubeFace)i)->uvs, 2);
+		pMesh->setIndices(6, _cubePosition.getFaceVertex((CubeFace)i)->indices, 1);
+		pMesh->setColors(4, _cubePosition.getFaceVertex((CubeFace)i)->colors, 4);
 	}
 }
 
 void render::MultiFaceCube::onCubeChanged()
 {
-	TextureTool::setTexture3DVertexts(&_cubePosition, math::Vector3(), _volume, _anchor);
+	VertexTool::setTexture3DVertices(&_cubePosition, math::Vector3(), _volume, _anchor);
 
-	for (int i = 0; i < CUBE_FACE_COUNT; i++)
+	for (int i = 0; i < (int)CubeFace::MAX; i++)
 	{
 		auto pMesh = _meshes->getMesh(i);
 		if (!pMesh)
 		{
 			return;
 		}
-
-		uint32_t indices1[6] = { 0 };
-		memcpy(indices1, _cubePosition.indices + i * CUBE_FACE_COUNT, 6 * sizeof(uint32_t));
-
-		uint32_t indices2[4] = { 0 };
-		indices2[0] = indices1[0];
-		indices2[1] = indices1[1];
-		indices2[2] = indices1[2];
-		indices2[3] = indices1[5];
-
-		float* ptr = nullptr;
-		if (pMesh->getMeshDetail()->getVertices().getSize() == 0)
-		{
-			ptr = (float*)pMesh->getMeshDetail()->createVertices(4, sizeof(float), 3);
-		}
-		else
-		{
-			ptr = (float*)pMesh->getMeshDetail()->getVertices().getPtr();
-		}
-
-		for (int j = 0; j < 4; j++)
-		{
-			memcpy(ptr + j * 3, _cubePosition.vertices + indices2[j] * 3, 3 * sizeof(float));
-		}
+		CubeFace face = (CubeFace)i;
+		pMesh->getMeshDetail()->setVertices(4, _cubePosition.getFaceVertex(face)->vertices, 3);
 	}
 }
 

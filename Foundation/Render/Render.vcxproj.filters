@@ -28,9 +28,6 @@
     <ClCompile Include="Common\View\Camera.cpp">
       <Filter>Common\View</Filter>
     </ClCompile>
-    <ClCompile Include="Common\Tool\TextureTool.cpp">
-      <Filter>Common\Tool</Filter>
-    </ClCompile>
     <ClCompile Include="Common\Action\Scheduler.cpp">
       <Filter>Common\Action</Filter>
     </ClCompile>
@@ -218,9 +215,6 @@
     </ClCompile>
     <ClCompile Include="Graphic\GLAPI\GLRender.cpp">
       <Filter>Graphic\GLAPI</Filter>
-    </ClCompile>
-    <ClCompile Include="Common\struct\texture_common.cpp">
-      <Filter>Common\struct</Filter>
     </ClCompile>
     <ClCompile Include="Common\Audio\CtrlAudioSourceClip.cpp">
       <Filter>Common\Audio</Filter>
@@ -447,6 +441,12 @@
     <ClCompile Include="3d\Common\ModelFile.cpp">
       <Filter>3d\Common</Filter>
     </ClCompile>
+    <ClCompile Include="Common\struct\vertex_common.cpp">
+      <Filter>Common\struct</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Tool\VertexTool.cpp">
+      <Filter>Common\Tool</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Common\Node\import.h">
@@ -490,9 +490,6 @@
     </ClInclude>
     <ClInclude Include="Common\View\Camera.h">
       <Filter>Common\View</Filter>
-    </ClInclude>
-    <ClInclude Include="Common\Tool\TextureTool.h">
-      <Filter>Common\Tool</Filter>
     </ClInclude>
     <ClInclude Include="Common\Action\Scheduler.h">
       <Filter>Common\Action</Filter>
@@ -715,9 +712,6 @@
       <Filter>Common\struct</Filter>
     </ClInclude>
     <ClInclude Include="Common\struct\shape_common.h">
-      <Filter>Common\struct</Filter>
-    </ClInclude>
-    <ClInclude Include="Common\struct\texture_common.h">
       <Filter>Common\struct</Filter>
     </ClInclude>
     <ClInclude Include="Common\Shader\import.h">
@@ -1043,6 +1037,12 @@
     </ClInclude>
     <ClInclude Include="3d\Common\ModelFile.h">
       <Filter>3d\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\struct\vertex_common.h">
+      <Filter>Common\struct</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Tool\VertexTool.h">
+      <Filter>Common\Tool</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

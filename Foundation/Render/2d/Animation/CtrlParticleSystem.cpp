@@ -2,7 +2,7 @@
 #include "system.h"
 #include "Graphic/import.h"
 #include "Common/Tool/Tool.h"
-#include "Common/Tool/TextureTool.h"
+#include "Common/Tool/VertexTool.h"
 using namespace render;
 
 ParticleNode::ParticleNode()
@@ -66,8 +66,8 @@ void ParticleNode::notifyEvents()
 	math::Size size = math::Size(_volume.getWidth(), _volume.getHeight());
 	math::Rect rect = math::Rect(0, 0, _volume.getWidth(), _volume.getHeight());
 
-	TextureTool::setTexture2DCoords(&_texRect, size, rect);
-	TextureTool::setTexture2DVertexts(&_texRect, math::Vector3(), _volume, _anchor);
+	VertexTool::setTexture2DCoords(&_texRect, size, rect);
+	VertexTool::setTexture2DVertices(&_texRect, math::Vector3(), _volume, _anchor);
 }
 */
 //////////////////////////////////////////////////////////////////////////

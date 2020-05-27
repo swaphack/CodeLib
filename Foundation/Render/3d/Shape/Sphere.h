@@ -56,9 +56,6 @@ namespace render
 		math::Vector3 getPoint(float u, float v);
 	protected:
 		void updateSphere();
-	protected:
-		//virtual void draw();
-		virtual void initBufferObject();
 	private:
 		// Çò°ë¾¶
 		float _radius = 1;

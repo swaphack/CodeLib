@@ -23,9 +23,9 @@ void TestShaderNode::testFunc()
 	//this->testObjModelShader();
 	//this->test3dsModelShader();
 
-	this->testCubeModelShader();
-	//this->testMultiMeshCubeModelShader();
-	//this->testSphereModelShader();
+	//this->testCubeModelShader();
+	this->testMultiMeshCubeModelShader();
+	this->testSphereModelShader();
 }	
 
 void TestShaderNode::testShaderUniformBlock()
@@ -95,8 +95,8 @@ void TestShaderNode::testImageShader()
 	CtrlImage* pImage = CREATE_NODE(CtrlImage);
 	pImage->setImagePath(filepath);
 	pImage->setAnchorPoint(Vector2(0.5f, 0.5f));
-	pImage->setVolume(500, 500);
-	pImage->setPosition(Vector2(500, 500));
+	pImage->setVolume(1024, 768);
+	pImage->setPosition(Vector2(512, 384));
 	this->addChild(pImage);
 
 	Utility::updateNodeShader(pImage);
@@ -109,7 +109,7 @@ void TestShaderNode::testCubeModelShader()
 
 	pModel->setAllFacesImage(filepath);
 
-	pModel->setPosition(400, 400, 0);
+	pModel->setPosition(500, 500, 0);
 	pModel->setVolume(200, 200, 200);
 	pModel->setAnchorPoint(0.0f, 0.5f, 0.5f);
 	this->addChild(pModel);
@@ -154,7 +154,7 @@ void TestShaderNode::testSphereModelShader()
 	pModel->setRadius(300);
 	pModel->setVolume(200, 200, 200);
 	pModel->setAnchorPoint(0.5, 0.5f, 0.5f);
-	pModel->setPosition(700, 500, 0);
+	pModel->setPosition(500, 500, 0);
 	this->addChild(pModel);
 
 	Utility::updateNodeShader(pModel);

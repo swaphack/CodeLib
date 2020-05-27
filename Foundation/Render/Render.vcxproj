@@ -164,7 +164,7 @@
     <ClCompile Include="Common\Shader\ShaderUniformBlock.cpp" />
     <ClCompile Include="Common\Shader\ShaderVariable.cpp" />
     <ClCompile Include="Common\struct\shape_common.cpp" />
-    <ClCompile Include="Common\struct\texture_common.cpp" />
+    <ClCompile Include="Common\struct\vertex_common.cpp" />
     <ClCompile Include="Common\Texture\Sampler.cpp" />
     <ClCompile Include="Common\Texture\TexFrame.cpp" />
     <ClCompile Include="Common\Texture\Texture.cpp" />
@@ -178,7 +178,7 @@
     <ClCompile Include="Common\Texture\TextureCache.cpp" />
     <ClCompile Include="Common\Texture\TextureCubeMap.cpp" />
     <ClCompile Include="Common\Texture\TextureCubeMapArray.cpp" />
-    <ClCompile Include="Common\Tool\TextureTool.cpp" />
+    <ClCompile Include="Common\Tool\VertexTool.cpp" />
     <ClCompile Include="Common\Tool\Tool.cpp" />
     <ClCompile Include="Common\Touch\TouchManager.cpp" />
     <ClCompile Include="Common\Touch\TouchProxy.cpp" />
@@ -351,7 +351,7 @@
     <ClInclude Include="Common\struct\enum_common.h" />
     <ClInclude Include="Common\struct\import.h" />
     <ClInclude Include="Common\struct\shape_common.h" />
-    <ClInclude Include="Common\struct\texture_common.h" />
+    <ClInclude Include="Common\struct\vertex_common.h" />
     <ClInclude Include="Common\Texture\import.h" />
     <ClInclude Include="Common\Texture\Sampler.h" />
     <ClInclude Include="Common\Texture\TexFrame.h" />
@@ -367,7 +367,7 @@
     <ClInclude Include="Common\Texture\TextureCubeMap.h" />
     <ClInclude Include="Common\Texture\TextureCubeMapArray.h" />
     <ClInclude Include="Common\Tool\import.h" />
-    <ClInclude Include="Common\Tool\TextureTool.h" />
+    <ClInclude Include="Common\Tool\VertexTool.h" />
     <ClInclude Include="Common\Tool\Tool.h" />
     <ClInclude Include="Common\Touch\import.h" />
     <ClInclude Include="Common\Touch\macros.h" />

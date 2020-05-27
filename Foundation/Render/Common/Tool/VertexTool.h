@@ -4,7 +4,7 @@
 
 namespace render
 {
-	class TextureTool
+	class VertexTool
 	{
 	public:
 		/**
@@ -24,7 +24,7 @@ namespace render
 		* @param volume 体积
 		* @param anchor 锚点
 		*/
-		static void setTexture2DVertexts(RectVertex* texRect, const math::Vector3& position, const math::Volume& volume, const math::Vector3& anchor);
+		static void setTexture2DVertices(RectVertex* texRect, const math::Vector3& position, const math::Volume& volume, const math::Vector3& anchor);
 
 		/**
 		*
@@ -34,7 +34,7 @@ namespace render
 		* @param volume 体积
 		* @param anchor 锚点
 		*/
-		static void setTexture3DVertexts(CubeVertex* texcube, const math::Vector3& position, const math::Volume& volume, const math::Vector3& anchor);
+		static void setTexture3DVertices(CubeVertex* texcube, const math::Vector3& position, const math::Volume& volume, const math::Vector3& anchor);
 		/**
 		*
 		* 设置2d纹理顶点翻转

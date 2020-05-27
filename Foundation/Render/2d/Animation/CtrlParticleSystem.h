@@ -4,7 +4,7 @@
 #include "Common/DrawNode/DrawNode.h"
 #include "Particle.h"
 #include "CtrlAnimation.h"
-#include "Common/struct/texture_common.h"
+#include "Common/struct/vertex_common.h"
 
 namespace render
 {

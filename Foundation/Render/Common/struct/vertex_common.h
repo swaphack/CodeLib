@@ -3,6 +3,7 @@
 #include "system.h"
 #include "mathlib.h"
 #include "Graphic/GLAPI/macros.h"
+#include "enum_common.h"
 
 // Œ∆¿Ì
 namespace render
@@ -51,21 +52,27 @@ namespace render
 	struct CubeVertex
 	{
 	public:
-		float vertices[24];
-		uint32_t indices[36];
-		float uvs[48];
-		float normals[24];
+		RectVertex left;
+		RectVertex right;
+
+		RectVertex front;
+		RectVertex back;
+
+		RectVertex top;
+		RectVertex bottom;
 	public:
 		CubeVertex();
 	public:
-		void setFrontLeftDownPoint(const math::Vector3& point);
-		void setFrontRightDownPoint(const math::Vector3& point);
-		void setFrontRightUpPoint(const math::Vector3& point);
-		void setFrontLeftUpPoint(const math::Vector3& point);
+		void setFrontLeftDownPosition(const math::Vector3& point);
+		void setFrontRightDownPosition(const math::Vector3& point);
+		void setFrontRightUpPosition(const math::Vector3& point);
+		void setFrontLeftUpPosition(const math::Vector3& point);
 
-		void setBackLeftDownPoint(const math::Vector3& point);
-		void setBackRightDownPoint(const math::Vector3& point);
-		void setBackRightUpPoint(const math::Vector3& point);
-		void setBackLeftUpPoint(const math::Vector3& point);
+		void setBackLeftDownPosition(const math::Vector3& point);
+		void setBackRightDownPosition(const math::Vector3& point);
+		void setBackRightUpPosition(const math::Vector3& point);
+		void setBackLeftUpPosition(const math::Vector3& point);
+
+		const RectVertex* getFaceVertex(CubeFace face) const;
 	};
 }

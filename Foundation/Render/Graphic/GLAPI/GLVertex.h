@@ -3,7 +3,7 @@
 #include "mathlib.h"
 #include "macros.h"
 #include "Common/struct/shape_common.h"
-#include "Common/struct/texture_common.h"
+#include "Common/struct/vertex_common.h"
 
 namespace render
 {

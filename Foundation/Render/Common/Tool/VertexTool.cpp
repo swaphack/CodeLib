@@ -1,9 +1,9 @@
-#include "TextureTool.h"
+#include "VertexTool.h"
 #include "Tool.h"
 
 using namespace render;
 
-void TextureTool::setTexture2DCoords(RectVertex* texRect, const math::Size& size, const math::Rect& rect)
+void VertexTool::setTexture2DCoords(RectVertex* texRect, const math::Size& size, const math::Rect& rect)
 {
 	// left down
 	texRect->setLeftDownUV(math::Vector2(rect.getX() / size.getWidth(), rect.getY() / size.getHeight()));
@@ -18,7 +18,7 @@ void TextureTool::setTexture2DCoords(RectVertex* texRect, const math::Size& size
 	texRect->setLeftUpUV(math::Vector2(rect.getX() / size.getWidth(), rect.getMaxY() / size.getHeight()));
 }
 
-void TextureTool::setTexture2DVertexts(RectVertex* texRect, const math::Vector3& position, const math::Volume& volume, const math::Vector3& anchor)
+void VertexTool::setTexture2DVertices(RectVertex* texRect, const math::Vector3& position, const math::Volume& volume, const math::Vector3& anchor)
 {
 	float x = 0;
 	float y = 0;
@@ -44,7 +44,7 @@ void TextureTool::setTexture2DVertexts(RectVertex* texRect, const math::Vector3&
 	texRect->setLeftUpPoint(math::Vector3(x, y, position.getZ()));
 }
 
-void TextureTool::setTexture3DVertexts(CubeVertex* texcube, const math::Vector3& position, const math::Volume& volume, const math::Vector3& anchor)
+void VertexTool::setTexture3DVertices(CubeVertex* texcube, const math::Vector3& position, const math::Volume& volume, const math::Vector3& anchor)
 {
 	float x;
 	float y;
@@ -57,28 +57,28 @@ void TextureTool::setTexture3DVertexts(CubeVertex* texcube, const math::Vector3&
 	y = position.getY() - volume.getHeight() * anchor.getY();
 	z = position.getZ() - volume.getDepth() * anchor.getZ();
 
-	texcube->setFrontLeftDownPoint(math::Vector3(x, y, z));
+	texcube->setFrontLeftDownPosition(math::Vector3(x, y, z));
 
 	// right down
 	x = position.getX() + volume.getWidth() * (1 - anchor.getX());
 	y = position.getY() - volume.getHeight() * anchor.getY();
 	z = position.getZ() - volume.getDepth() * anchor.getZ();
 
-	texcube->setFrontRightDownPoint(math::Vector3(x, y, z));
+	texcube->setFrontRightDownPosition(math::Vector3(x, y, z));
 
 	// right up
 	x = position.getX() + volume.getWidth() * (1 - anchor.getX());
 	y = position.getY() + volume.getHeight() * (1 - anchor.getY());
 	z = position.getZ() - volume.getDepth() * anchor.getZ();
 
-	texcube->setFrontRightUpPoint(math::Vector3(x, y, z));
+	texcube->setFrontRightUpPosition(math::Vector3(x, y, z));
 
 	// left up
 	x = position.getX() - volume.getWidth() * anchor.getX();
 	y = position.getY() + volume.getHeight() * (1 - anchor.getY());
 	z = position.getZ() - volume.getDepth() * anchor.getZ();
 
-	texcube->setFrontLeftUpPoint(math::Vector3(x, y, z));
+	texcube->setFrontLeftUpPosition(math::Vector3(x, y, z));
 
 	//------ back ------
 
@@ -87,31 +87,31 @@ void TextureTool::setTexture3DVertexts(CubeVertex* texcube, const math::Vector3&
 	y = position.getY() - volume.getHeight() * anchor.getY();
 	z = position.getZ() + volume.getDepth() * (1 - anchor.getZ());
 
-	texcube->setBackLeftDownPoint(math::Vector3(x, y, z));
+	texcube->setBackLeftDownPosition(math::Vector3(x, y, z));
 
 	// right down
 	x = position.getX() + volume.getWidth() * (1 - anchor.getX());
 	y = position.getY() - volume.getHeight() * anchor.getY();
 	z = position.getZ() + volume.getDepth() * (1 - anchor.getZ());
 
-	texcube->setBackRightDownPoint(math::Vector3(x, y, z));
+	texcube->setBackRightDownPosition(math::Vector3(x, y, z));
 
 	// right up
 	x = position.getX() + volume.getWidth() * (1 - anchor.getX());
 	y = position.getY() + volume.getHeight() * (1 - anchor.getY());
 	z = position.getZ() + volume.getDepth() * (1 - anchor.getZ());
 
-	texcube->setBackRightUpPoint(math::Vector3(x, y, z));
+	texcube->setBackRightUpPosition(math::Vector3(x, y, z));
 
 	// left up
 	x = position.getX() - volume.getWidth() * anchor.getX();
 	y = position.getY() + volume.getHeight() * (1 - anchor.getY());
 	z = position.getZ() + volume.getDepth() * (1 - anchor.getZ());
 
-	texcube->setBackLeftUpPoint(math::Vector3(x, y, z));
+	texcube->setBackLeftUpPosition(math::Vector3(x, y, z));
 }
 
-void render::TextureTool::setTexture2DFlip(float* uvs, bool bFlipX, bool bFlipY)
+void render::VertexTool::setTexture2DFlip(float* uvs, bool bFlipX, bool bFlipY)
 {
 	if (bFlipX)
 	{

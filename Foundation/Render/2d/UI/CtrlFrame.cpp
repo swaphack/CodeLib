@@ -2,7 +2,7 @@
 
 #include "Common/Texture/Texture2D.h"
 #include "Common/Texture/TexFrame.h"
-#include "Common/Tool/TextureTool.h"
+#include "Common/Tool/VertexTool.h"
 #include "Common/Tool/Tool.h"
 #include "Common/View/import.h"
 #include "Graphic/import.h"
@@ -90,15 +90,15 @@ void CtrlFrame::onTextureChange()
 {
 	math::Size size = math::Size(this->getWidth(), this->getHeight());
 	math::Rect rect(math::Vector2(), size);
-	TextureTool::setTexture2DCoords(&_vertexes, size, rect);
-	TextureTool::setTexture2DVertexts(&_vertexes, math::Vector3(), _volume, _anchor);
+	VertexTool::setTexture2DCoords(&_vertexes, size, rect);
+	VertexTool::setTexture2DVertices(&_vertexes, math::Vector3(), _volume, _anchor);
 
 	auto pMesh = getMesh(DRAW_MESH_INDEX);
 	if (pMesh)
 	{
 		float uvs[8] = { 0 };
 		memcpy(uvs, _vertexes.uvs, sizeof(uvs));
-		render::TextureTool::setTexture2DFlip(uvs, _bFlipX, _bFlipY);
+		render::VertexTool::setTexture2DFlip(uvs, _bFlipX, _bFlipY);
 		pMesh->getMeshDetail()->setVertices(4, _vertexes.vertices, 3);
 		pMesh->getMeshDetail()->setColors(4, _vertexes.colors, 4);
 		pMesh->getMeshDetail()->setUVs(4, uvs, 2);

@@ -12,25 +12,25 @@ MeshDetail::~MeshDetail()
 {
 }
 
-void MeshDetail::setVertices(int len, float* vertexes, int unitSize)
+void MeshDetail::setVertices(int len, const float* vertexes, int unitSize)
 {
 	_vertices.init(len * unitSize, vertexes, sizeof(float));
 	_vertices.setUnitSize(unitSize);
 }
 
-void MeshDetail::setNormals(int len, float* normals, int unitSize)
+void MeshDetail::setNormals(int len, const float* normals, int unitSize)
 {
 	_normals.init(len * unitSize, normals, sizeof(float));
 	_normals.setUnitSize(unitSize);
 }
 
-void MeshDetail::setColors(int len, float* colors, int unitSize)
+void MeshDetail::setColors(int len, const float* colors, int unitSize)
 {
 	_colors.init(len * unitSize, colors, sizeof(float));
 	_colors.setUnitSize(unitSize);
 }
 
-void MeshDetail::setUVs(int len, float* texCoords, int unitSize)
+void MeshDetail::setUVs(int len, const float* texCoords, int unitSize)
 {
 	_uvs.init(len * unitSize, texCoords, sizeof(float));
 	_uvs.setUnitSize(unitSize);
@@ -66,7 +66,7 @@ int MeshDetail::getMaterial() const
 	return _material;
 }
 
-void MeshDetail::setIndices(int size, uint32_t* indices, int unitSize)
+void MeshDetail::setIndices(int size, const uint32_t* indices, int unitSize)
 {
 	_indices.init(size, indices);
 	_indices.setUnitSize(unitSize);
