@@ -48,6 +48,11 @@ void render::VertexArrayObject::bindBuffer()
 	//_bufferObject->bindBuffer();
 }
 
+void render::VertexArrayObject::unbindBuffer()
+{
+	GLBufferObjects::bindBuffer(BufferTarget::ARRAY_BUFFER, 0);
+}
+
 void render::VertexArrayObject::removeAllVertexAttribs()
 {
 	for (auto item : _mapVertexAttrib)

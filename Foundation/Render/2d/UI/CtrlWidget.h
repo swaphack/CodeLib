@@ -61,7 +61,7 @@ namespace render
 		virtual void afterDrawNode();
 	public:
 		/**
-		*	坐标是否在当前对象内
+		*	获取矩形框
 		*/
 		const RectVectices& getRectVertex();
 		/**
@@ -80,19 +80,19 @@ namespace render
 		*/
 		virtual void onBlendChange();
 		/**
-		*	混合改变
+		*	绘制矩形
 		*/
 		void drawRect();
 	protected:
 		/**
-		*	是否裁剪
+		*	是否显示矩形框
 		*/
 		bool _bRectVisible = false;
 		// 矩形框
 		RectVectices _rectVertex;
 		// 实际矩形框
 		RectVectices _realRectVertex;
-		// 多边形
+		// 实际多边形
 		math::Polygon _realPolygon;
 		// 控件
 		std::vector<CtrlWidget*> _widgets;

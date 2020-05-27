@@ -23,8 +23,9 @@ void TestShaderNode::testFunc()
 	//this->testObjModelShader();
 	//this->test3dsModelShader();
 
-	this->testCubeModelShader();
-	//this->testSphereModelShader();
+	//this->testCubeModelShader();
+	this->testMultiMeshCubeModelShader();
+	this->testSphereModelShader();
 }	
 
 void TestShaderNode::testShaderUniformBlock()
@@ -103,19 +104,35 @@ void TestShaderNode::testImageShader()
 
 void TestShaderNode::testCubeModelShader()
 {
+	std::string filepath = "Resource/Image/NeHe.png";
+	Cube* pModel = CREATE_NODE(Cube);
+
+	pModel->setAllFacesImage(filepath);
+
+	pModel->setPosition(400, 400, 0);
+	pModel->setVolume(200, 200, 200);
+	pModel->setAnchorPoint(0.0f, 0.5f, 0.5f);
+	this->addChild(pModel);
+
+	Utility::updateNodeShader(pModel);
+	Utility::runRotateAction(pModel);
+}
+
+void TestShaderNode::testMultiMeshCubeModelShader()
+{
 	auto pTexture = G_TEXTURE_CACHE->createTexture2D("Resource/Image/NeHe.png");
 	auto pTexture1 = G_TEXTURE_CACHE->createTexture2D("Resource/Image/1.jpg");
 	std::string textureName = "face";
 	std::string textureName1 = "face1";
 
-	CubeModel* pModel = CREATE_NODE(CubeModel);
+	MultiFaceCube* pModel = CREATE_NODE(MultiFaceCube);
 	pModel->addMaterialTexture(textureName, pTexture);
 	pModel->addMaterialTexture(textureName1, pTexture1);
 
 	pModel->setAllMaterialsTexture(textureName);
-	pModel->setFaceTexture(CubeFace::FRONT, textureName1);
-	pModel->setFaceTexture(CubeFace::LEFT, textureName1);
-	pModel->setFaceTexture(CubeFace::TOP, textureName1);
+	pModel->setFaceTextureName(CubeFace::FRONT, textureName1);
+	pModel->setFaceTextureName(CubeFace::LEFT, textureName1);
+	pModel->setFaceTextureName(CubeFace::TOP, textureName1);
 
 	pModel->setPosition(400, 400, 0);
 	pModel->setVolume(200, 200, 200);
@@ -128,19 +145,19 @@ void TestShaderNode::testCubeModelShader()
 
 void TestShaderNode::testSphereModelShader()
 {
-	auto pTexture = G_TEXTURE_CACHE->createTexture2D("Resource/Image/1.jpg");
+	auto pTexture = G_TEXTURE_CACHE->createTexture2D("Resource/Image/world_texture.jpg");
 	std::string textureName = "face";
 
-	SphereModel* pModel = CREATE_NODE(SphereModel);
-	//pModel->addMaterialTexture(textureName, pTexture);
-	//pModel->setAllMaterialsTexture(textureName);
+	render::Sphere* pModel = CREATE_NODE(render::Sphere);
+	pModel->addMaterialTexture(textureName, pTexture);
+	pModel->setAllMaterialsTexture(textureName);
+	pModel->setRadius(300);
 	pModel->setVolume(200, 200, 200);
-	pModel->setScale(300);
 	pModel->setAnchorPoint(0.5, 0.5f, 0.5f);
-	pModel->setPosition(400, 400, 0);
+	pModel->setPosition(700, 500, 0);
 	this->addChild(pModel);
 
-	//Utility::updateNodeShader(pModel);
+	Utility::updateNodeShader(pModel);
 	Utility::runRotateAction(pModel);
 }
 
@@ -202,7 +219,7 @@ void TestShaderNode::testClipShader()
 	auto pTexture = G_TEXTURE_CACHE->createTexture2D("Resource/Image/NeHe.png");
 	std::string textureName = "face";
 
-	CubeModel* pModel = CREATE_NODE(CubeModel);
+	MultiFaceCube* pModel = CREATE_NODE(MultiFaceCube);
 	pModel->addMaterialTexture(textureName, pTexture);
 
 	pModel->setAllMaterialsTexture(textureName);

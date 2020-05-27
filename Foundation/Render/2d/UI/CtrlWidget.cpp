@@ -188,6 +188,7 @@ void render::CtrlWidget::drawRect()
 	GLVertex::setVertex(_rectVertex.leftUp);
 	GLVertex::endMode();
 
+	/*
 	GLMatrix::pushMatrix();
 	GLMatrix::loadIdentity();
 
@@ -202,5 +203,6 @@ void render::CtrlWidget::drawRect()
 	GLVertex::endMode();
 
 	GLMatrix::popMatrix();
+	*/
 }
 

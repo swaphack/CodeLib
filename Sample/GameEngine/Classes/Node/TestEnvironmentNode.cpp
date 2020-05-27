@@ -19,7 +19,7 @@ void TestFragmentNode::testFunc()
 void TestFragmentNode::testStencil()
 {	
 	Texture2D* pTexture2D = G_TEXTURE_CACHE->createTexture2D("Resource/Image/NeHe.png");
-	CubeModel* pCube = CREATE_NODE(CubeModel);
+	MultiFaceCube* pCube = CREATE_NODE(MultiFaceCube);
 	pCube->addMaterialTexture("Face", pTexture2D);
 	pCube->setVolume(200, 300, 200);
 	pCube->setAllMaterialsTexture("Face");

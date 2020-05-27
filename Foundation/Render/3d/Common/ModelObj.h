@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Model.h"
+#include "ModelFile.h"
 #include <string>
 
 namespace render
@@ -8,7 +8,7 @@ namespace render
 	/**
 	*	obj格式 模型
 	*/
-	class ModelObj : public Model
+	class ModelObj : public ModelFile
 	{
 	public:
 		ModelObj();

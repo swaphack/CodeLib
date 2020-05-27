@@ -350,6 +350,9 @@ void render::Material::endUpdateShaderVertexValue(Mesh* pMesh)
 			pointer->disableVertexArrayAttrib();
 		}
 	}
+
+	vao->unbindVertexArray();
+	vao->unbindBuffer();
 }
 
 void render::Material::beginApply(Materials* mats)

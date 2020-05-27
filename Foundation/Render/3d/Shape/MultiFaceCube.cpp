@@ -1,4 +1,4 @@
-#include "CubeModel.h"
+#include "MultiFaceCube.h"
 #include "Common/Texture/Texture.h"
 #include "Common/Tool/TextureTool.h"
 #include "Common/DrawNode/import.h"
@@ -7,15 +7,15 @@
 
 using namespace render;
 
-CubeModel::CubeModel()
+MultiFaceCube::MultiFaceCube()
 {
 }
 
-CubeModel::~CubeModel()
+MultiFaceCube::~MultiFaceCube()
 {
 }
 
-bool CubeModel::init()
+bool MultiFaceCube::init()
 {
 	if (!Model::init())
 	{
@@ -34,22 +34,20 @@ bool CubeModel::init()
 	return true;
 }
 
-void render::CubeModel::setFaceTexture(CubeFace face, const std::string& name)
+void render::MultiFaceCube::setFaceTextureName(CubeFace face, const std::string& name)
 {
 	setMaterialTexture((int)face, name);
 }
 
-void render::CubeModel::initBufferObject()
+void render::MultiFaceCube::initBufferObject()
 {
-	sys::ModelDetail* pModel = CREATE_OBJECT(sys::ModelDetail);
-
 	for (int i = 0; i < CUBE_FACE_COUNT; i++)
 	{
 		auto pMat = CREATE_OBJECT(sys::MaterialDetail);
-		pModel->addMaterial(i, pMat);
+		_materiales->addMaterial(i, pMat);
 
 		auto pMesh = CREATE_OBJECT(sys::MeshDetail);
-		pModel->addMesh(i, pMesh);
+		_meshes->addMesh(i, pMesh);
 
 		pMesh->setMaterial(i);
 
@@ -57,17 +55,12 @@ void render::CubeModel::initBufferObject()
 		pMesh->setIndices(6, _faces[i].indices);
 		pMesh->setColors(4, _faces[i].colors, 4);
 	}
-	
-	this->setModelData(pModel);
 }
 
-void render::CubeModel::onCubeChanged()
+void render::MultiFaceCube::onCubeChanged()
 {
 	TextureTool::setTexture3DVertexts(&_cubePosition, math::Vector3(), _volume, _anchor);
-	if (!_loadModel)
-	{
-		return;
-	}
+
 	for (int i = 0; i < CUBE_FACE_COUNT; i++)
 	{
 		auto pMesh = _meshes->getMesh(i);

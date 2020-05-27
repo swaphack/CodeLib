@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Common/DrawNode/DrawNode.h"
-
+#include "Common/struct/shape_common.h"
 #include <map>
 #include <string>
 
@@ -25,11 +25,35 @@ namespace render
 		// 务必调用，包含属性修改时通知
 		virtual bool init();
 	public:
-		// 设置模型数据
-		void setModelData(sys::ModelDetail* detail);
+		/**
+		*	是否显示矩形框
+		*/
+		void setBoxVisible(bool bVisible);
+		/**
+		*	是否显示矩形框
+		*/
+		bool isBoxVisible() const;
+	public:
+		virtual bool containTouchPoint(float x, float y);
 	protected:
-		virtual void onDraw();
+		void calBoxData();
+		/**
+		*	绘制模型框
+		*/
+		void drawBox();
 	protected:
-		bool _loadModel = false;
+		/**
+		*	绘制
+		*/
+		virtual void afterDrawNode();
+	private:
+		/**
+		*	是否显示矩形框
+		*/
+		bool _bBoxVisible = false;
+		// 模型框
+		CubeVectices _boxVertex;
+		// 实际模型框
+		CubeVectices _realBoxVertex;
 	};
 }

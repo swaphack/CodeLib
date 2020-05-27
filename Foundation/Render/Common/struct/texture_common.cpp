@@ -136,30 +136,21 @@ CubeVertex::CubeVertex()
 	memcpy(indices + ((uint32_t)CubeFace::LEFT) * 6, left, unit);
 	memcpy(indices + ((uint32_t)CubeFace::BOTTOM) * 6, bottom, unit);
 
-	/*
-	// Ç°
-	indices[0] = 0; indices[1] = 1; indices[2] = 2;
-	indices[3] = 0; indices[4] = 2; indices[5] = 3;
+	float uv[8] = {
+		0,0,
+		1,0,
+		1,1,
+		0,1
+	};
+	unit = 8 * sizeof(float);
 
-	// ÓÒ±ß
-	indices[6] = 1; indices[7] = 5; indices[8] = 6;
-	indices[9] = 1; indices[10] = 6; indices[11] = 2;
+	memcpy(uvs + ((uint32_t)CubeFace::FRONT) * 8, uv, unit);
+	memcpy(uvs + ((uint32_t)CubeFace::RIGHT) * 8, uv, unit);
+	memcpy(uvs + ((uint32_t)CubeFace::TOP) * 8, uv, unit);
+	memcpy(uvs + ((uint32_t)CubeFace::BACK) * 8, uv, unit);
+	memcpy(uvs + ((uint32_t)CubeFace::LEFT) * 8, uv, unit);
+	memcpy(uvs + ((uint32_t)CubeFace::BOTTOM) * 8, uv, unit);
 
-	// ¶¥²¿
-	indices[12] = 3; indices[13] = 2; indices[14] = 6;
-	indices[15] = 3; indices[16] = 6; indices[17] = 7;
-
-	//±³Ãæ
-	indices[18] = 5; indices[19] = 4; indices[20] = 7;
-	indices[21] = 5; indices[22] = 7; indices[23] = 6;
-	// ×ó±ß
-	indices[24] = 4; indices[25] = 0; indices[26] = 3;
-	indices[27] = 4; indices[28] = 3; indices[29] = 7;
-
-	// µ×²¿
-	indices[30] = 0; indices[31] = 4; indices[32] = 5;
-	indices[33] = 0; indices[34] = 5; indices[35] = 1;
-	*/
 
 	for (int i = 0; i < 24; i++)
 	{

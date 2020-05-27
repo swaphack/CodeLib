@@ -83,9 +83,6 @@ void render::Mesh::drawWithBufferObject()
 	GLBufferObjects::drawElements(DrawMode::TRIANGLES, nIndiceLength, IndexDataType::UNSIGNED_INT, nullptr);
 
 	GLDebug::showError();
-
-	_vertexArrayObject->unbindVertexArray();
-	_indiceBuffer->unbindBuffer();
 }
 
 void render::Mesh::drawWithClientArray()
@@ -166,12 +163,12 @@ void render::Mesh::updateBufferData()
 		PRINT("Mesh Vertice is NULL\n");
 		return;
 	}
+
 	if (nColorSize == 0 && nUVSize == 0)
 	{
 		PRINT("Mesh Color or UI is NULL\n");
 		return;
 	}
-
 	_vertexBuffer->bindBuffer();
 
 	GLDebug::showError();

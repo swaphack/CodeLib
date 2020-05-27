@@ -93,7 +93,6 @@ void render::Texture2D::load(const sys::ImageDetail* image, const TextureSetting
 		TextureExternalDataType::UNSIGNED_BYTE, image->getPixels());
 #endif
 	GLDebug::showError();
-	/* Setup some parameters for texture filters and mipmapping */
 	this->unbindTexture();
 	GLDebug::showError();
 }

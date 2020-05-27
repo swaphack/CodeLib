@@ -29,14 +29,14 @@ void TestModelNode::testCubeModel()
 	std::string textureName = "face";
 	std::string textureName1 = "face1";
 
-	CubeModel* pModel = CREATE_NODE(CubeModel);
+	MultiFaceCube* pModel = CREATE_NODE(MultiFaceCube);
 	pModel->addMaterialTexture(textureName, pTexture);
 	pModel->addMaterialTexture(textureName1, pTexture1);
 
 	pModel->setAllMaterialsTexture(textureName);
-	pModel->setFaceTexture(CubeFace::FRONT, textureName1);
-	pModel->setFaceTexture(CubeFace::LEFT, textureName1);
-	pModel->setFaceTexture(CubeFace::TOP, textureName1);
+	pModel->setFaceTextureName(CubeFace::FRONT, textureName1);
+	pModel->setFaceTextureName(CubeFace::LEFT, textureName1);
+	pModel->setFaceTextureName(CubeFace::TOP, textureName1);
 
 	pModel->setAnchorPoint(math::Vector3(0.5f, 0.5f, 0.5f));
 	pModel->setPosition(200, 200, -50);

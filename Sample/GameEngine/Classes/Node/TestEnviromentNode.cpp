@@ -19,6 +19,7 @@ void TestEnvironmentNode::initSkyBox()
 	render::SkyBox* pSkyBox = CREATE_NODE(render::SkyBox);
 	pSkyBox->setAllFacesImage("Resource/Image/NeHe.png");
 
+	pSkyBox->setVolume(1, 1, 1);
 	pSkyBox->setPosition(0, 0, 0);
 	pSkyBox->setAnchorPoint(0.5f, 0.5f, 0.5f);
 	this->addChild(pSkyBox);

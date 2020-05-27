@@ -39,11 +39,11 @@ namespace render
 	φ = arctan(y/x)
 
 	*/
-	class SphereModel : public Model // 还有问题
+	class Sphere : public Model // 还有问题
 	{
 	public:
-		SphereModel();
-		virtual ~SphereModel();
+		Sphere();
+		virtual ~Sphere();
 	public:
 		virtual bool init();
 	public:
@@ -54,10 +54,10 @@ namespace render
 	protected:
 		math::Vector3 getPoint(const math::Vector2& uv);
 		math::Vector3 getPoint(float u, float v);
-
+	protected:
 		void updateSphere();
 	protected:
-		virtual void onDraw();
+		//virtual void draw();
 		virtual void initBufferObject();
 	private:
 		// 球半径

@@ -53,4 +53,70 @@ double RectVectices::getArea(const math::Vector3& p1, const math::Vector3& p2, c
 	double s = 0.5 * (p1.getX() * p2.getY() + p2.getX() * p3.getY() + p3.getX() * p1.getY() - p1.getX() * p3.getY() - p2.getX() * p1.getY() - p3.getX() * p2.getY());
 	return abs(s);
 }
-	
+
+//////////////////////////////////////////////////////////////////////////
+void render::CubeVectices::setFrontLeftDownPosition(const math::Vector3& point)
+{
+	front.leftDown = point;
+	left.rightDown = point;
+	bottom.leftUp = point;
+}
+
+void render::CubeVectices::setFrontRightDownPosition(const math::Vector3& point)
+{
+	front.rightDown = point;
+	right.leftDown = point;
+	bottom.rightUp = point;
+}
+
+void render::CubeVectices::setFrontRightUpPosition(const math::Vector3& point)
+{
+	front.rightUp = point;
+	right.leftUp = point;
+	top.rightDown = point;
+}
+
+void render::CubeVectices::setFrontLeftUpPosition(const math::Vector3& point)
+{
+	front.leftUp = point;
+	left.rightUp = point;
+	top.leftDown = point;
+}
+
+void render::CubeVectices::setBackLeftDownPosition(const math::Vector3& point)
+{
+	back.rightDown = point;
+	left.leftDown = point;
+	bottom.leftDown = point;
+}
+
+void render::CubeVectices::setBackRightDownPosition(const math::Vector3& point)
+{
+	back.leftDown = point;
+	right.rightDown = point;
+	bottom.rightDown = point;
+}
+
+void render::CubeVectices::setBackRightUpPosition(const math::Vector3& point)
+{
+	back.leftUp = point;
+	top.rightUp = point;
+	right.rightUp = point;
+}
+
+void render::CubeVectices::setBackLeftUpPosition(const math::Vector3& point)
+{
+	back.rightUp = point;
+	left.leftUp = point;
+	top.leftUp = point;
+}
+
+bool render::CubeVectices::containPointByPolygon(float x, float y)
+{
+	return front.containPointByPolygon(x, y)
+		|| back.containPointByPolygon(x, y)
+		|| left.containPointByPolygon(x, y)
+		|| right.containPointByPolygon(x, y)
+		|| top.containPointByPolygon(x, y)
+		|| bottom.containPointByPolygon(x, y);
+}

@@ -53,6 +53,8 @@ namespace render
 	public:
 		float vertices[24];
 		uint32_t indices[36];
+		float uvs[48];
+		float normals[24];
 	public:
 		CubeVertex();
 	public:

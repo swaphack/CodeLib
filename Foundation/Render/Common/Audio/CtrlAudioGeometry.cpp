@@ -259,7 +259,7 @@ void CtrlAudioGeometry::onPolygonsChange()
 	math::Matrix44 mat = this->getWorldMatrix();
 	math::Vector3 position = mat.getPosition();
 	math::Volume volume = this->getVolume();
-	Tool::calRealCube(position, volume, getAnchorPoint(), _cubeVertex);
+	Tool::calCube(position, volume, getAnchorPoint(), _cubeVertex);
 	for (int i = 0; i < (int)CubeFace::MAX; i++)
 	{
 		CtrlAudioGeometryPolygon* polygon = getPolygon((CubeFace)i);

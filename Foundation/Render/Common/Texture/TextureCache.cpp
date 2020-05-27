@@ -145,11 +145,8 @@ TextureCubeMap* render::TextureCache::createTextureCubeMap(int count, const std:
 		sys::ImageDetail* imageDetail = loadImageDetail(images[i]);
 		imageDetails[i] = imageDetail;
 	}
-	TextureSetting setting;
-	setting.wrapR = TextureWrapMode::CLAMP_TO_EDGE;
-	setting.wrapS = TextureWrapMode::CLAMP_TO_EDGE;
-	setting.wrapT = TextureWrapMode::CLAMP_TO_EDGE;
-	textureCubeMap->load(count, imageDetails, setting);
+
+	textureCubeMap->load(count, imageDetails);
 	for (int i = 0; i < count; i++)
 	{
 		if (imageDetails[i] == nullptr)

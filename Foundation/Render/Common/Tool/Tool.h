@@ -63,22 +63,13 @@ namespace render
 		*/
 		static void calRect(const math::Vector3& position, const math::Volume& volume, const math::Vector3& anchor, RectVectices& rectVertex);
 		/**
-		* 矩形顶点的计算
-		* @param position 位置
-		* @param volume 体积
-		* @param anchor 锚点
-		* @param rectVertex 矩形顶点
-		*/
-		static void calRealRect(const math::Vector3& position, const math::Volume& volume, const math::Vector3& anchor, RectVectices& rectVertex);
-
-		/**
 		* 立方体顶点的计算
 		* @param position 位置
 		* @param volume 体积
 		* @param anchor 锚点
 		* @param cube 正方体
 		*/
-		static void calRealCube(const math::Vector3& position, const math::Volume& volume, const math::Vector3& anchor, CubeVectices& cube);
+		static void calCube(const math::Vector3& position, const math::Volume& volume, const math::Vector3& anchor, CubeVectices& cube);
 	private:
 		// 视窗大小
 		static math::Volume GL_VIEW_SIZE;

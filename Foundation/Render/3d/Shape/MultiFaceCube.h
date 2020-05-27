@@ -10,16 +10,19 @@ namespace render
 
 	class Texture2D;
 
-	class CubeModel : public Model
+	/**
+	*	多面立方体，每个面一个mesh
+	*/
+	class MultiFaceCube : public Model
 	{
 	public:
-		CubeModel();
-		virtual ~CubeModel();
+		MultiFaceCube();
+		virtual ~MultiFaceCube();
 	public:
 		virtual bool init();
 	public:
 		// 设置纹理
-		void setFaceTexture(CubeFace face, const std::string& name);
+		void setFaceTextureName(CubeFace face, const std::string& name);
 	protected:
 		virtual void initBufferObject();
 

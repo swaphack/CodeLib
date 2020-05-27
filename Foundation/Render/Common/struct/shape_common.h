@@ -47,8 +47,22 @@ namespace render
 		RectVectices top;
 		// 底部
 		RectVectices bottom;
-
+	public:
 		CubeVectices()
 		{ }
+
+	public:
+		void setFrontLeftDownPosition(const math::Vector3& point);
+		void setFrontRightDownPosition(const math::Vector3& point);
+		void setFrontRightUpPosition(const math::Vector3& point);
+		void setFrontLeftUpPosition(const math::Vector3& point);
+
+		void setBackLeftDownPosition(const math::Vector3& point);
+		void setBackRightDownPosition(const math::Vector3& point);
+		void setBackRightUpPosition(const math::Vector3& point);
+		void setBackLeftUpPosition(const math::Vector3& point);
+	public:
+		// 多边形法判断
+		bool containPointByPolygon(float x, float y);
 	};
 }

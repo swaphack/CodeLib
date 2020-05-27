@@ -24,9 +24,9 @@ namespace render
 		// 纹理单元 ActiveTextureName::TEXTURE0 + unit
 		TextureMinFilter minFilter = TextureMinFilter::LINEAR;
 		TextureMagFilter magFilter = TextureMagFilter::LINEAR;
-		TextureWrapMode wrapS = TextureWrapMode::CLAMP;
-		TextureWrapMode wrapT = TextureWrapMode::CLAMP;
-		TextureWrapMode wrapR = TextureWrapMode::CLAMP;
+		TextureWrapMode wrapS = TextureWrapMode::CLAMP_TO_EDGE;
+		TextureWrapMode wrapT = TextureWrapMode::CLAMP_TO_EDGE;
+		TextureWrapMode wrapR = TextureWrapMode::CLAMP_TO_EDGE;
 	};
 
 	// 纹理基础

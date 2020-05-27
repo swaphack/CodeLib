@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Model.h"
+#include "ModelFile.h"
 
 #include <string>
 
@@ -9,7 +9,7 @@ namespace render
 	/**
 	*	3ds格式 模型
 	*/
-	class Model3DS : public Model
+	class Model3DS : public ModelFile
 	{
 	public:
 		Model3DS();

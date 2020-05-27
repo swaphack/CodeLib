@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Model.h"
+#include "ModelFile.h"
 #include <string>
 
 namespace render
@@ -8,7 +8,7 @@ namespace render
 	/**
 	*	fbx格式 模型
 	*/
-	class ModelFbx : public Model
+	class ModelFbx : public ModelFile
 	{
 	public:
 		ModelFbx();

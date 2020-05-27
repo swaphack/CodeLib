@@ -117,8 +117,6 @@ void render::Meshes::drawNodeWithMaterials(Node* node, Materials* mats)
 		}
 
 		GLState::disable(EnableMode::TEXTURE_2D);
-
-		GLTexture::bindTexture2D(0);
 	}
 
 	GLDebug::showError();

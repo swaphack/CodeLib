@@ -138,14 +138,8 @@
     <ClCompile Include="Common\Audio\AudioProtocol.cpp">
       <Filter>Common\Audio</Filter>
     </ClCompile>
-    <ClCompile Include="3d\Shape\SphereModel.cpp">
-      <Filter>3d\Shape</Filter>
-    </ClCompile>
     <ClCompile Include="3d\Common\Model3DS.cpp">
       <Filter>3d\Common</Filter>
-    </ClCompile>
-    <ClCompile Include="3d\Shape\CubeModel.cpp">
-      <Filter>3d\Shape</Filter>
     </ClCompile>
     <ClCompile Include="3d\Common\ModelObj.cpp">
       <Filter>3d\Common</Filter>
@@ -441,6 +435,18 @@
     <ClCompile Include="3d\Environment\SkyBox.cpp">
       <Filter>3d\Environment</Filter>
     </ClCompile>
+    <ClCompile Include="3d\Shape\MultiFaceCube.cpp">
+      <Filter>3d\Shape</Filter>
+    </ClCompile>
+    <ClCompile Include="3d\Shape\Cube.cpp">
+      <Filter>3d\Shape</Filter>
+    </ClCompile>
+    <ClCompile Include="3d\Shape\Sphere.cpp">
+      <Filter>3d\Shape</Filter>
+    </ClCompile>
+    <ClCompile Include="3d\Common\ModelFile.cpp">
+      <Filter>3d\Common</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Common\Node\import.h">
@@ -681,14 +687,8 @@
     <ClInclude Include="Common\Audio\AudioProtocol.h">
       <Filter>Common\Audio</Filter>
     </ClInclude>
-    <ClInclude Include="3d\Shape\SphereModel.h">
-      <Filter>3d\Shape</Filter>
-    </ClInclude>
     <ClInclude Include="3d\Common\Model3DS.h">
       <Filter>3d\Common</Filter>
-    </ClInclude>
-    <ClInclude Include="3d\Shape\CubeModel.h">
-      <Filter>3d\Shape</Filter>
     </ClInclude>
     <ClInclude Include="3d\Common\ModelObj.h">
       <Filter>3d\Common</Filter>
@@ -1031,6 +1031,18 @@
     </ClInclude>
     <ClInclude Include="3d\Environment\SkyBox.h">
       <Filter>3d\Environment</Filter>
+    </ClInclude>
+    <ClInclude Include="3d\Shape\MultiFaceCube.h">
+      <Filter>3d\Shape</Filter>
+    </ClInclude>
+    <ClInclude Include="3d\Shape\Cube.h">
+      <Filter>3d\Shape</Filter>
+    </ClInclude>
+    <ClInclude Include="3d\Shape\Sphere.h">
+      <Filter>3d\Shape</Filter>
+    </ClInclude>
+    <ClInclude Include="3d\Common\ModelFile.h">
+      <Filter>3d\Common</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

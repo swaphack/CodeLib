@@ -27,9 +27,3 @@ void Model3DS::load(const std::string& filepath)
 		SAFE_DELETE(pFile);
 	});
 }
-/*
-void Model3DS::draw()
-{
-	
-}
-*/

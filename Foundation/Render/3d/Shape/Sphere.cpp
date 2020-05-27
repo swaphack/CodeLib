@@ -1,57 +1,59 @@
-#include "SphereModel.h"
+#include "Sphere.h"
 #include "Graphic/import.h"
 #include "mathlib.h"
-
+#include "Common/struct/texture_common.h"
 using namespace render;
 
 #define SPHERE_HORIZONTAL_COUNT 50
 #define SPHERE_VERTICAL_COUNT 50
 #define SPHERE_FACE_COUNT 3
 
-render::SphereModel::SphereModel()
+render::Sphere::Sphere()
 {
 
 }
 
-render::SphereModel::~SphereModel()
+render::Sphere::~Sphere()
 {
 }
 
-bool render::SphereModel::init()
+bool render::Sphere::init()
 {
 	if (!Model::init())
 	{
 		return false;
 	}
 
-	_notify->addListen(NodeNotifyType::MODEL, [this]() {
-		_loadModel = true;
-		this->updateBufferData();
+	_notify->addListen(NodeNotifyType::GEOMETRY, [this]() {
+		updateSphere();
+		updateBufferData();
 	});
-
 
 	return true;
 }
 
-math::Vector3 render::SphereModel::getPoint(const math::Vector2& uv)
+math::Vector3 render::Sphere::getPoint(const math::Vector2& uv)
 {
 	return getPoint(uv.getX(), uv.getY());
 }
 
-math::Vector3 render::SphereModel::getPoint(float u, float v)
+math::Vector3 render::Sphere::getPoint(float u, float v)
 {
 	float x = sin(PI * v) * cos(2 * PI * u);
 	float y = sin(PI * v) * sin(2 * PI * u);
 	float z = cos(PI * v);
-	if (abs(x) < 0.0001f) x = 0;
-	if (abs(y) < 0.0001f) y = 0;
-	if (abs(z) < 0.0001f) z = 0;
+
+	x = x * _radius + (_anchor.getX() - 0.5f) * getWidth();
+	y = y * _radius + (_anchor.getY() - 0.5f) * getHeight();
+	z = z * _radius + (_anchor.getZ() - 0.5f) * getDepth();
 
 	return math::Vector3(x, y, z);
 }
 
-void render::SphereModel::updateSphere()
+void render::Sphere::updateSphere()
 {
+	CubeVertex pos;
+
 	float ustep = 1.0f / SPHERE_HORIZONTAL_COUNT, vstep = 1.0f / SPHERE_VERTICAL_COUNT;
 	float u = 0, v = 0;
 
@@ -72,6 +74,11 @@ void render::SphereModel::updateSphere()
 	pColors.push_back(color[1]); \
 	pColors.push_back(color[2]); \
 	pColors.push_back(color[3]); \
+}
+
+#define READ_VERTEX_1(vertex, uv) \
+{\
+	READ_VERTEX(vertex, uv) \
 	pIndices.push_back(pIndices.size()); \
 }
 
@@ -98,9 +105,9 @@ void render::SphereModel::updateSphere()
 			math::Vector3 vb = getPoint(ub);
 			math::Vector3 vc = getPoint(uc);
 
-			READ_VERTEX(va, ua);
-			READ_VERTEX(vb, ub);
-			READ_VERTEX(vc, uc);
+			READ_VERTEX_1(va, ua);
+			READ_VERTEX_1(vb, ub);
+			READ_VERTEX_1(vc, uc);
 
 			u += ustep;
 		}
@@ -108,7 +115,7 @@ void render::SphereModel::updateSphere()
 		pMesh->getMeshDetail()->setVertices(nCount, &pVertices[0]);
 		pMesh->getMeshDetail()->setUVs(nCount, &pUVs[0]);
 		pMesh->getMeshDetail()->setColors(nCount, &pColors[0]);
-		pMesh->getMeshDetail()->setIndices(nCount, &pIndices[0]);
+		pMesh->getMeshDetail()->setIndices(pIndices.size(), &pIndices[0]);
 	}
 
 	//绘制中间四边形组
@@ -123,8 +130,9 @@ void render::SphereModel::updateSphere()
 		auto pColors = std::vector<float>();
 		pColors.reserve(4 * nCount);
 		auto pIndices = std::vector<uint32_t>();
-		pIndices.reserve(nCount);
+		pIndices.reserve(1.5f * nCount);
 
+		int index = 0;
 		for (int i = 1; i < SPHERE_VERTICAL_COUNT - 1; i++)
 		{
 			for (int j = 0; j < SPHERE_HORIZONTAL_COUNT; j++)
@@ -144,6 +152,14 @@ void render::SphereModel::updateSphere()
 				READ_VERTEX(vc, uc);
 				READ_VERTEX(vd, ud);
 
+				pIndices.push_back(4 * index + 0);
+				pIndices.push_back(4 * index + 1);
+				pIndices.push_back(4 * index + 2);
+				pIndices.push_back(4 * index + 0);
+				pIndices.push_back(4 * index + 2);
+				pIndices.push_back(4 * index + 3);
+
+				index++;
 				u += ustep;
 			}
 			v += vstep;
@@ -152,7 +168,7 @@ void render::SphereModel::updateSphere()
 		pMesh->getMeshDetail()->setVertices(nCount, &pVertices[0]);
 		pMesh->getMeshDetail()->setUVs(nCount, &pUVs[0]);
 		pMesh->getMeshDetail()->setColors(nCount, &pColors[0]);
-		pMesh->getMeshDetail()->setIndices(nCount, &pIndices[0]);
+		pMesh->getMeshDetail()->setIndices(pIndices.size(), &pIndices[0]);
 	}
 	
 	//绘制下端三角形组
@@ -172,7 +188,7 @@ void render::SphereModel::updateSphere()
 		//绘制下端三角形组
 		for (int i = 0; i < SPHERE_HORIZONTAL_COUNT; i++)
 		{
-			math::Vector2 ua = math::Vector2(0, 0);
+			math::Vector2 ua = math::Vector2(0, 1);
 			math::Vector2 ub = math::Vector2(u, 1 - vstep);
 			math::Vector2 uc = math::Vector2(u + ustep, 1 - vstep);
 
@@ -180,74 +196,63 @@ void render::SphereModel::updateSphere()
 			math::Vector3 vb = getPoint(ub);
 			math::Vector3 vc = getPoint(uc);
 
-			READ_VERTEX(va, ua);
-			READ_VERTEX(vb, ub);
-			READ_VERTEX(vc, uc);
+			READ_VERTEX_1(va, ua);
+			READ_VERTEX_1(vb, ub);
+			READ_VERTEX_1(vc, uc);
 
-			//u += ustep;
+			u += ustep;
 		}
 		pMesh->getMeshDetail()->setVertices(nCount, &pVertices[0]);
 		pMesh->getMeshDetail()->setUVs(nCount, &pUVs[0]);
 		pMesh->getMeshDetail()->setColors(nCount, &pColors[0]);
-		pMesh->getMeshDetail()->setIndices(nCount, &pIndices[0]);
+		pMesh->getMeshDetail()->setIndices(pIndices.size(), &pIndices[0]);
 	}
 }
 
-void render::SphereModel::onDraw()
+#ifdef SPHERE_DRAW_METHOD_ONE
+void render::Sphere::draw()
 {
-	if (true)
+	for (int i = 0; i < SPHERE_FACE_COUNT; i++)
 	{
-		for (int i = 0; i < SPHERE_FACE_COUNT; i++)
+		auto pMesh = _meshes->getMesh(i);
+		if (pMesh)
 		{
-			auto pMesh = _meshes->getMesh(i);
-			if (pMesh)
+			const sys::MeshMemoryData& vertices = pMesh->getMeshDetail()->getVertices();
+			auto ptr = (float*)vertices.getValue();
+			int unitSize = vertices.getUnitSize();
+			int size = 0;
+			ShapeMode mode;
+			if (i == 1)
 			{
-				const sys::MeshMemoryData& vertices = pMesh->getMeshDetail()->getVertices();
-				auto ptr = (float*)vertices.getValue();
-				int size = 0;
-				if (i == 1)
+				size = 4;
+				mode = ShapeMode::LINE_LOOP;
+			}
+			else
+			{
+				size = 3;
+				mode = ShapeMode::LINE_LOOP;
+			}
+			int count = vertices.getLength() / size / unitSize;
+			for (int j = 0; j < count; j++)
+			{
+				GLVertex::beginMode(mode);
+				for (int k = 0; k < size; k++)
 				{
-					size = vertices.getLength() / 4;
-					GLVertex::beginMode(ShapeMode::LINE_LOOP);
-				}
-				else
-				{
-					size = vertices.getLength() / 3;
-					GLVertex::beginMode(ShapeMode::LINE_LOOP);
-				}
-				
-				for (int j = 0; j < size; j++)
-				{
-					math::Vector3 a(ptr[3 * j + 0], ptr[3 * j + 1], ptr[3 * j + 2]);
+					int index = j * size * unitSize + unitSize * k;
+					math::Vector3 a(ptr[index + 0], ptr[index + 1], ptr[index + 2]);
 					GLVertex::setVertex(a);
 				}
+
 				GLVertex::endMode();
 			}
 		}
-		/*
-		for (int i = 0; i < SPHERE_FACE_COUNT; i++)
-		{
-			auto pMesh = _meshes->getMesh(i);
-			if (pMesh)
-			{
-				const sys::MeshMemoryData& vertices = pMesh->getMeshDetail()->getVertices();
-				GLClientArrays::enableClientState(ClientArrayType::VERTEX_ARRAY);
-				GLClientArrays::setVertexPointer(vertices.getUnitSize(), DataType::FLOAT, 0, vertices.getValue());
-				GLDebug::showError();
-
-				const sys::MeshMemoryData& indices = pMesh->getMeshDetail()->getIndices();
-				GLDebug::showError();
-
-				DrawMode mode = DrawMode::LINE_LOOP;
-				if (i == 1) mode = DrawMode::LINE_LOOP;
-				GLClientArrays::drawElements(DrawMode::TRIANGLES, indices.getLength(), IndexDataType::UNSIGNED_INT, indices.getValue());
-				GLDebug::showError();
-				GLClientArrays::disableClientState(ClientArrayType::VERTEX_ARRAY);
-			}
-		}
-		*/
-		return;
 	}
+}
+#endif
+
+#ifdef SPHERE_DRAW_METHOD_TWO
+void render::Sphere::draw()
+{
 	double ustep = 1 / (double)SPHERE_HORIZONTAL_COUNT, vstep = 1 / (double)SPHERE_VERTICAL_COUNT;
 	double u = 0, v = 0;
 	//绘制下端三角形组
@@ -305,31 +310,58 @@ void render::SphereModel::onDraw()
 	}
 }
 
-void render::SphereModel::initBufferObject()
-{
-	sys::ModelDetail* pModelDetail = CREATE_OBJECT(sys::ModelDetail);
+#endif
 
+#ifdef SPHERE_DRAW_METHOD_TWO
+void render::Sphere::draw()
+{
+	for (int i = 0; i < SPHERE_FACE_COUNT; i++)
+	{
+		auto pMesh = _meshes->getMesh(i);
+		if (pMesh)
+		{
+			const sys::MeshMemoryData& vertices = pMesh->getMeshDetail()->getVertices();
+			auto pVertex = (float*)vertices.getValue();
+
+			GLClientArrays::enableClientState(ClientArrayType::VERTEX_ARRAY);
+			GLClientArrays::setVertexPointer(vertices.getUnitSize(), DataType::FLOAT, 0, pVertex);
+			GLDebug::showError();
+
+			const sys::MeshMemoryData& indices = pMesh->getMeshDetail()->getIndices();
+			auto pIndice = (uint32_t*)indices.getValue();
+
+			GLClientArrays::drawElements(DrawMode::TRIANGLES, indices.getLength(), IndexDataType::UNSIGNED_INT, pIndice);
+
+			GLDebug::showError();
+
+			GLClientArrays::disableClientState(ClientArrayType::VERTEX_ARRAY);
+			GLDebug::showError();
+		}
+	}
+}
+#endif
+
+void render::Sphere::initBufferObject()
+{
 	for (int i = 0; i < SPHERE_FACE_COUNT; i++)
 	{
 		auto pMat = CREATE_OBJECT(sys::MaterialDetail);
-		pModelDetail->addMaterial(i, pMat);
+		_materiales->addMaterial(i, pMat);
 
 		auto pMesh = CREATE_OBJECT(sys::MeshDetail);
 		pMesh->setMaterial(i);
-		pModelDetail->addMesh(i, pMesh);
+		_meshes->addMesh(i, pMesh);
 	}
-
-	this->setModelData(pModelDetail);
-
-	this->updateSphere();
 }
 
-void SphereModel::setRadius(float radius)
+void Sphere::setRadius(float radius)
 {
 	_radius = radius;
+
+	this->notify(NodeNotifyType::GEOMETRY);
 }
 
-float SphereModel::getRadius()
+float Sphere::getRadius()
 {
 	return _radius;
 }
