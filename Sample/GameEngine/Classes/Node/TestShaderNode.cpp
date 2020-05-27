@@ -23,9 +23,9 @@ void TestShaderNode::testFunc()
 	//this->testObjModelShader();
 	//this->test3dsModelShader();
 
-	//this->testCubeModelShader();
-	this->testMultiMeshCubeModelShader();
-	this->testSphereModelShader();
+	this->testCubeModelShader();
+	//this->testMultiMeshCubeModelShader();
+	//this->testSphereModelShader();
 }	
 
 void TestShaderNode::testShaderUniformBlock()
@@ -114,7 +114,7 @@ void TestShaderNode::testCubeModelShader()
 	pModel->setAnchorPoint(0.0f, 0.5f, 0.5f);
 	this->addChild(pModel);
 
-	Utility::updateNodeShader(pModel);
+	Utility::loadShader(pModel->getMaterials(), "Shader/cube_vertex.glsl", "Shader/cube_fragment.glsl");
 	Utility::runRotateAction(pModel);
 }
 

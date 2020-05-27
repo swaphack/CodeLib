@@ -66,8 +66,11 @@ void render::Cube::onSpaceChanged()
 	TextureTool::setTexture3DVertexts(&_cubePosition, math::Vector3(), _volume, _anchor);
 
 	auto pMesh = getMesh();
-	pMesh->getMeshDetail()->setVertices(24, _cubePosition.vertices, 3);
-	pMesh->getMeshDetail()->setIndices(36, _cubePosition.indices, 1);
-	pMesh->getMeshDetail()->setUVs(48, _cubePosition.uvs, 2);
+	if (pMesh)
+	{
+		pMesh->getMeshDetail()->setVertices(24, _cubePosition.vertices, 3);
+		pMesh->getMeshDetail()->setIndices(36, _cubePosition.indices, 1);
+		pMesh->getMeshDetail()->setNormals(24, _cubePosition.normals, 3);
+	}
 }
 

@@ -70,12 +70,13 @@ void render::Mesh::drawWithBufferObject()
 		PRINT("Mesh Vertice is NULL\n");
 		return;
 	}
+	/*
 	if (nColorSize == 0 && nUVSize == 0)
 	{
 		PRINT("Mesh Color or UI is NULL\n");
 		return;
 	}
-
+	*/
 	GLDebug::showError();
 	_indiceBuffer->bindBuffer();
 
@@ -100,12 +101,13 @@ void render::Mesh::drawWithClientArray()
 		PRINT("Mesh Vertice is NULL\n");
 		return;
 	}
+	/*
 	if (colors.getLength() == 0 && texcoords.getLength() == 0)
 	{
 		PRINT("Mesh Color or UI is NULL\n");
 		return;
 	}
-
+	*/
 	if (vertices.getLength() > 0)
 	{
 		GLClientArrays::enableClientState(ClientArrayType::VERTEX_ARRAY);
@@ -163,12 +165,13 @@ void render::Mesh::updateBufferData()
 		PRINT("Mesh Vertice is NULL\n");
 		return;
 	}
-
+	/*
 	if (nColorSize == 0 && nUVSize == 0)
 	{
 		PRINT("Mesh Color or UI is NULL\n");
 		return;
 	}
+	*/
 	_vertexBuffer->bindBuffer();
 
 	GLDebug::showError();

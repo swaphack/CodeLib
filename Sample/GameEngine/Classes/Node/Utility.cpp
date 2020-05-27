@@ -44,6 +44,7 @@ void Utility::initShaderAttrib(render::Materials* mats)
 		item.second->addAttrib(VertexAttribType::POSITION, "vPosition");
 		item.second->addAttrib(VertexAttribType::COLOR, "vColor");
 		item.second->addAttrib(VertexAttribType::UV, "vUV");
+		item.second->addAttrib(VertexAttribType::NORMAL, "vNormal");
 	}
 }
 
