@@ -1,36 +1,46 @@
-#include "TestFragmentNode.h"
+#include "TestEnvironmentNode.h"
 #include "Utility.h"
 
 using namespace render;
-
-TestFragmentNode::TestFragmentNode()
+TestEnvironmentNode::TestEnvironmentNode()
 {
 }
 
-TestFragmentNode::~TestFragmentNode()
+TestEnvironmentNode::~TestEnvironmentNode()
 {
 }
 
-void TestFragmentNode::testFunc()
+void TestEnvironmentNode::testFunc()
 {
-	this->testStencil();
+	this->initSkyBox();
 }
 
-void TestFragmentNode::testStencil()
-{	
-	Texture2D* pTexture2D = G_TEXTURE_CACHE->createTexture2D("Resource/Image/NeHe.png");
-	MultiFaceCube* pCube = CREATE_NODE(MultiFaceCube);
-	pCube->addMaterialTexture("Face", pTexture2D);
-	pCube->setVolume(200, 300, 200);
-	pCube->setAllMaterialsTexture("Face");
-	pCube->setRotation(45, 45, 0);
-	pCube->setPosition(400, 400);
-	Utility::updateNodeShader(pCube);
+void TestEnvironmentNode::initSkyBox()
+{
+	render::SkyBox* pSkyBox = CREATE_NODE(render::SkyBox);
+	pSkyBox->setFaceImage(CubeFace::LEFT, "Resource/skybox/left.jpg");
+	pSkyBox->setFaceImage(CubeFace::RIGHT, "Resource/skybox/right.jpg");
+	pSkyBox->setFaceImage(CubeFace::FRONT, "Resource/skybox/front.jpg");
+	pSkyBox->setFaceImage(CubeFace::BACK, "Resource/skybox/back.jpg");
+	pSkyBox->setFaceImage(CubeFace::TOP, "Resource/skybox/top.jpg");
+	pSkyBox->setFaceImage(CubeFace::BOTTOM, "Resource/skybox/bottom.jpg");
 
-	FragmentBlend* pBlend = pCube->getFragOperator()->getHandle<FragmentBlend>();
-	pBlend->setEnabled(true);
-	pBlend->setBlendColor(sys::Color4F(0.25f, 0.25f, 0, 1.0f));
-	pBlend->setBlendFactor(BlendingFactorSrc::SRC_ALPHA, BlendingFactorDest::DST_COLOR);
+	pSkyBox->setScale(1000000);
+	pSkyBox->setVolume(400, 400, 400);
+	pSkyBox->setPosition(512, 384, 0);
+	pSkyBox->setAnchorPoint(0.5f, 0.5f, 0.5f);
+	this->addChild(pSkyBox);
 
-	this->addChild(pCube);
+	Utility::loadShader(pSkyBox->getMaterials(), "Shader/skybox_vertex.glsl", "Shader/skybox_fragment.glsl");
+	Utility::runRotateAction(pSkyBox);
+
+	pSkyBox->setAllShaderProgramFunc([](ShaderProgram* program) {
+		auto pUniform = program->getUniform("viewMatrix");
+		if (pUniform)
+		{
+			math::Matrix44 viewMat = Camera::getMainCamera()->getViewMatrix();
+			math::Matrix44 Mat = math::Matrix33(viewMat);
+			pUniform->setMatrix4(Mat);
+		}
+	});
 }

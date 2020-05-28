@@ -69,8 +69,10 @@
     <ClCompile Include="Classes\Node\TestTextureNode.cpp">
       <Filter>Classes\Node</Filter>
     </ClCompile>
-    <ClCompile Include="Classes\Node\TestEnviromentNode.cpp" />
     <ClCompile Include="Classes\Node\TestEnvironmentNode.cpp">
+      <Filter>Classes\Node</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Node\TestFragmentNode.cpp">
       <Filter>Classes\Node</Filter>
     </ClCompile>
   </ItemGroup>

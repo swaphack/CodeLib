@@ -18,7 +18,7 @@ void render::Texture2DMultiSample::setTextureStorage(int samples, TextureInterna
 
 }
 
-void render::Texture2DMultiSample::setTextureImage(int samples, TextureInternalBaseFormat internalFormat, int width, int height, bool fixedSamplelocations)
+void render::Texture2DMultiSample::setTextureImage(int samples, TextureInternalSizedFormat internalFormat, int width, int height, bool fixedSamplelocations)
 {
 	GLTexture::setTexImage2DMultisample((Texture2DMultisampleTarget)samples, samples, internalFormat, width, height, fixedSamplelocations);
 }

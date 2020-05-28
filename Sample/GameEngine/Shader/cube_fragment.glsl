@@ -1,12 +1,15 @@
 #version 330 core
 
-uniform samplerCube texSampler0;
+uniform sampler2D texSampler0;
 
 in vec2 fragmentUV;
+in vec4 fragmentColor;
 
-out vec4 FragColor;
+out vec4 color;
 
 void main()
 {    
-    FragColor = texture(texSampler0, vec3(fragmentUV, 0));
+    color = fragmentColor * texture(texSampler0, fragmentUV);
+
+    //color = vec4(1, 1, 1, 1);
 }

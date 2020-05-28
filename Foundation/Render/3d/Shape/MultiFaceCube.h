@@ -22,6 +22,8 @@ namespace render
 	public:
 		// 设置纹理
 		void setFaceTextureName(CubeFace face, const std::string& name);
+		// 设置纹理
+		void setAllFacesTextureName(const std::string& name);
 	protected:
 		virtual void initBufferObject();
 

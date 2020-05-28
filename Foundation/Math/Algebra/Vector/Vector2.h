@@ -23,6 +23,10 @@ namespace math
 		void set(float x, float y);
 	public:
 		/**
+		*	单位化
+		*/
+		void normalize();
+		/**
 		*	复制元素
 		*/
 		virtual Vector2& operator=(const Vector2& vec);

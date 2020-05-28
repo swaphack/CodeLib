@@ -1,7 +1,5 @@
 #version 330 core
 
-
-
 uniform sampler2D texSampler0;
 
 in vec2 fragmentUV;

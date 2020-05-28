@@ -143,7 +143,7 @@
   <ItemGroup>
     <ClCompile Include="Classes\GLRenderApplication.cpp" />
     <ClCompile Include="Classes\Main.cpp" />
-    <ClCompile Include="Classes\Node\TestEnviromentNode.cpp" />
+    <ClCompile Include="Classes\Node\TestFragmentNode.cpp" />
     <ClCompile Include="Classes\Node\TestTextureNode.cpp" />
     <ClCompile Include="Classes\Node\Utility.cpp" />
     <ClCompile Include="Classes\Node\TestAudioNode.cpp" />

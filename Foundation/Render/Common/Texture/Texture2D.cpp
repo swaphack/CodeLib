@@ -42,7 +42,7 @@ void render::Texture2D::compressedTextureSubImage(int level, int xoffset, int yo
 #endif
 }
 
-void render::Texture2D::setTextureImage(int level, TextureInternalBaseFormat internalFormat, int width, int height, int border, TextureExternalFormat format, TextureExternalDataType type, const void* data)
+void render::Texture2D::setTextureImage(int level, TextureInternalSizedFormat internalFormat, int width, int height, int border, TextureExternalFormat format, TextureExternalDataType type, const void* data)
 {
 	GLTexture::setTexImage2D((TextureTarget2D)getTextureTarget(), level, internalFormat, width, height, border, format, type, data);
 }
@@ -65,15 +65,11 @@ void render::Texture2D::load(const sys::ImageDetail* image, const TextureSetting
 	GLDebug::showError();
 	
 	int size = 0;
-#if USE_TEXTURE_STORAGE	
+
 	TextureExternalFormat format = TextureExternalFormat::RGBA;
 	TextureInternalSizedFormat internalFormat = TextureInternalSizedFormat::RGBA8;
-	getStorageTextureFormat(image->getDataFormat(), format, internalFormat, size);
-#else
-	TextureExternalFormat format = TextureExternalFormat::RGBA;
-	TextureInternalBaseFormat internalFormat = TextureInternalBaseFormat::RGBA;
 	getTextureFormat(image->getDataFormat(), format, internalFormat, size);
-#endif
+
 	int len = size * getWidth();
 	if ((len % 4 == 3) || (len % 4 == 0))
 	{

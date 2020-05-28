@@ -265,6 +265,11 @@ Matrix Matrix::getInverse() const
 	return transpose / det;
 }
 
+math::Matrix::Matrix(const Matrix& mat)
+{
+	this->set(mat.getValue(), mat.getHeight(), mat.getWidth());
+}
+
 math::Matrix::~Matrix()
 {
 

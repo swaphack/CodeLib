@@ -1,5 +1,5 @@
 #include "Matrix33.h"
-
+#include "Matrix44.h"
 using namespace math;
 
 
@@ -15,6 +15,17 @@ Matrix33::Matrix33(const Vector3& row0, const Vector3& row1, const Vector3& row2
 	this->setRow(0, row0);
 	this->setRow(1, row1);
 	this->setRow(2, row2);
+}
+
+math::Matrix33::Matrix33(const Matrix44& mat)
+{
+	for (int i = 0; i < this->getHeight(); i++)
+	{
+		for (int j = 0; j < this->getWidth(); j++)
+		{
+			this->setValue(i, j, mat.getValue(i, j));
+		}
+	}
 }
 
 Matrix33::~Matrix33()
@@ -44,4 +55,17 @@ void Matrix33::setRotate(float rotation)
 {
 	(*this)[0] = cos(rotation); (*this)[1] = -sin(rotation);
 	(*this)[3] = sin(rotation); (*this)[4] = cos(rotation);
+}
+
+Matrix33& math::Matrix33::operator=(const Matrix44& mat)
+{
+	for (int i = 0; i < this->getHeight(); i++)
+	{
+		for (int j = 0; j < this->getWidth(); j++)
+		{
+			this->setValue(i, j, mat.getValue(i, j));
+		}
+	}
+
+	return *this;
 }

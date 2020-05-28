@@ -48,16 +48,16 @@ void CtrlFrame::setTexture(const Texture2D* texture)
 		return;
 	}
 
-	_materiales->addTexture(MAT_TEXTURE_NAME, texture);
-	getMaterial(DRAW_MATERIAL_INDEX)->getMaterialDetail()->setAmbientTextureMap(MAT_TEXTURE_NAME);
+	addMaterialTexture(MAT_TEXTURE_NAME, texture);
+	setAllMaterialsTexture(MAT_TEXTURE_NAME);
 
 	this->notify(NodeNotifyType::TEXTURE);
 }
 
 void CtrlFrame::setTextureWithRect(const Texture2D* texture)
 {
-	_materiales->addTexture(MAT_TEXTURE_NAME, texture);
-	getMaterial(DRAW_MATERIAL_INDEX)->getMaterialDetail()->setAmbientTextureMap(MAT_TEXTURE_NAME);
+	addMaterialTexture(MAT_TEXTURE_NAME, texture);
+	setAllMaterialsTexture(MAT_TEXTURE_NAME);
 
 	this->setVolume(texture->getWidth(), texture->getHeight(), texture->getDepth());
 

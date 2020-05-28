@@ -341,27 +341,27 @@ void GLTexture::setTextureBufferRange(uint32_t texture, TexSizedInternalFormat f
 	glTextureBufferRange(texture, (GLenum)format, buff, offset, size);
 }
 
-void GLTexture::setTexImage1D(TextureTarget1D target, int level, TextureInternalBaseFormat internalFormat, int width, int border, TextureExternalFormat format, TextureExternalDataType type, const void* data)
+void GLTexture::setTexImage1D(TextureTarget1D target, int level, TextureInternalSizedFormat internalFormat, int width, int border, TextureExternalFormat format, TextureExternalDataType type, const void* data)
 {
 	glTexImage1D((GLenum)target, level, (GLenum)internalFormat, width, border, (GLenum)format, (GLenum)type, data);
 }
 
-void GLTexture::setTexImage2D(TextureTarget2D target, int level, TextureInternalBaseFormat internalFormat, int width, int heigth, int border, TextureExternalFormat format, TextureExternalDataType type, const void* data)
+void GLTexture::setTexImage2D(TextureTarget2D target, int level, TextureInternalSizedFormat internalFormat, int width, int heigth, int border, TextureExternalFormat format, TextureExternalDataType type, const void* data)
 {
 	glTexImage2D((GLenum)target, level, (GLenum)internalFormat, width, heigth, border, (GLenum)format, (GLenum)type, data);
 }
 
-void GLTexture::setTexImage3D(TextureTarget3D target, int level, TextureInternalBaseFormat internalFormat, int width, int heigth, int depth, int border, TextureExternalFormat format, TextureExternalDataType type, const void* data)
+void GLTexture::setTexImage3D(TextureTarget3D target, int level, TextureInternalSizedFormat internalFormat, int width, int heigth, int depth, int border, TextureExternalFormat format, TextureExternalDataType type, const void* data)
 {
 	glTexImage3D((GLenum)target, level, (GLenum)internalFormat, width, heigth, depth, border, (GLenum)format, (GLenum)type, data);
 }
 
-void GLTexture::setTexImage2DMultisample(Texture2DMultisampleTarget target, int samples, TextureInternalBaseFormat internalformat, int width, int heigth, bool fixedsamplelocations)
+void GLTexture::setTexImage2DMultisample(Texture2DMultisampleTarget target, int samples, TextureInternalSizedFormat internalformat, int width, int heigth, bool fixedsamplelocations)
 {
 	glTexImage2DMultisample((GLenum)target, samples, (GLenum)internalformat, width, heigth, fixedsamplelocations ? GL_TRUE : GL_FALSE);
 }
 
-void GLTexture::setTexImage3DMultisample(Texture3DMultisampleTarget target, int samples, TextureInternalBaseFormat internalformat, int width, int heigth, int depth, bool fixedsamplelocations)
+void GLTexture::setTexImage3DMultisample(Texture3DMultisampleTarget target, int samples, TextureInternalSizedFormat internalformat, int width, int heigth, int depth, bool fixedsamplelocations)
 {
 	glTexImage3DMultisample((GLenum)target, samples, (GLenum)internalformat, width, heigth, depth, fixedsamplelocations ? GL_TRUE : GL_FALSE);
 }

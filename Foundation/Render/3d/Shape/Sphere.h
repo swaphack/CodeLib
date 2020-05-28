@@ -39,7 +39,7 @@ namespace render
 	φ = arctan(y/x)
 
 	*/
-	class Sphere : public Model // 还有问题
+	class Sphere : public Model 
 	{
 	public:
 		Sphere();

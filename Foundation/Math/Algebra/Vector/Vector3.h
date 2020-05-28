@@ -44,6 +44,10 @@ namespace math
 		Vector3 rotationByLine(const Vector3& src, const Vector3& dest, float radian);
 	public:
 		/**
+		*	单位化
+		*/
+		void normalize();
+		/**
 		*	复制元素
 		*/
 		virtual Vector3& operator=(const Vector3& vec);

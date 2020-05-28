@@ -325,3 +325,17 @@ math::Vector3::~Vector3()
 {
 
 }
+
+void math::Vector3::normalize()
+{
+	float magn = this->getMagnitude();
+	if (magn == 0)
+	{
+		return;
+	}
+
+	for (int i = 0; i < getLength(); i++)
+	{
+		setValue(i, getValue(i) / magn);
+	}
+}

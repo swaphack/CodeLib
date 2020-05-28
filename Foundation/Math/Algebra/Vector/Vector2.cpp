@@ -232,3 +232,17 @@ math::Vector2::~Vector2()
 {
 
 }
+
+void math::Vector2::normalize()
+{
+	float magn = this->getMagnitude();
+	if (magn == 0)
+	{
+		return;
+	}
+
+	for (int i = 0; i < getLength(); i++)
+	{
+		setValue(i, getValue(i) / magn);
+	}
+}

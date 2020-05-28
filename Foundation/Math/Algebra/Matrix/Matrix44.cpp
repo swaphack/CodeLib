@@ -1,6 +1,7 @@
 #include "Matrix44.h"
 #include "Basic/base.h"
 #include "Matrix14.h"
+#include "Matrix33.h"
 #include <cassert>
 
 using namespace math;
@@ -21,18 +22,19 @@ Matrix44::Matrix44(const Matrix44& mat)
 	}
 }
 
-Matrix44::Matrix44(const Matrix& mat)
+Matrix44::Matrix44(const Matrix33& mat)
 	: Matrix44()
 {
-	assert(mat.getSize() != 0);
-
-	for (size_t i = 0; i < getSize(); i++)
+	for (int i = 0; i < mat.getHeight(); i++)
 	{
-		setValue(i, mat.getValue(i));
+		for (int j = 0; j < mat.getWidth(); j++)
+		{
+			this->setValue(i, j, mat.getValue(i, j));
+		}
 	}
 }
 
-Matrix44::Matrix44(float* value)
+Matrix44::Matrix44(const float* value)
 	: Matrix44()
 {
 	this->set(value, 4, 4);
@@ -145,8 +147,8 @@ void Matrix44::setRotationByLine(const Vector3& src, const Vector3& dest, float 
 	float b = src.getY();
 	float c = src.getZ();
 
-	Vector3 p0 = dest - src;
-	Vector3 p = p0.normalize();
+	Vector3 p = dest - src;
+	p.normalize();
 
 	float u = p.getX();
 	float v = p.getY();
@@ -196,14 +198,14 @@ Matrix41 Matrix44::operator*(const Matrix41& mat)
 {
 	Matrix mat0 = *this;
 	Matrix mat1 = mat0 * mat;
-	return Matrix41(mat1[0], mat1[1], mat1[2], mat1[3]);
+	return Matrix41(mat1.getValue());
 }
 
 Matrix44 Matrix44::operator*(const Matrix44& mat)
 {
 	Matrix mat0 = *this;
 	Matrix mat1 = mat0 * mat;
-	return Matrix44(mat1);
+	return Matrix44(mat1.getValue());
 }
 
 Vector3 Matrix44::getEularAngle() const
@@ -221,9 +223,61 @@ Vector3 Matrix44::getEularAngle() const
 	return Vector3(x, y, z);
 }
 
+math::Matrix44::Matrix44(const Matrix& mat)
+	: Matrix44()
+{
+	assert(mat.getWidth() == this->getWidth() && mat.getHeight() == this->getHeight());
+
+	for (int i = 0; i < mat.getHeight(); i++)
+	{
+		for (int j = 0; j < mat.getWidth(); j++)
+		{
+			this->setValue(i, j, mat.getValue(i, j));
+		}
+	}
+}
+
 math::Matrix44::~Matrix44()
 {
 
+}
+
+math::Matrix44& math::Matrix44::operator=(const Matrix44& mat)
+{
+	for (size_t i = 0; i < getSize(); i++)
+	{
+		setValue(i, mat.getValue(i));
+	}
+
+	return *this;
+}
+
+math::Matrix44& math::Matrix44::operator=(const Matrix& mat)
+{
+	assert(mat.getWidth() == this->getWidth() && mat.getHeight() == this->getHeight());
+
+	for (int i = 0; i < mat.getHeight(); i++)
+	{
+		for (int j = 0; j < mat.getWidth(); j++)
+		{
+			this->setValue(i, j, mat.getValue(i, j));
+		}
+	}
+
+	return *this;
+}
+
+math::Matrix44& math::Matrix44::operator=(const Matrix33& mat)
+{
+	for (int i = 0; i < mat.getHeight(); i++)
+	{
+		for (int j = 0; j < mat.getWidth(); j++)
+		{
+			this->setValue(i, j, mat.getValue(i, j));
+		}
+	}
+
+	return *this;
 }
 
 math::Matrix44 math::Matrix44::ortho(float l, float r, float b, float t, float n, float f)
@@ -284,9 +338,9 @@ math::Matrix44 math::Matrix44::lookAt(const Vector3& target, const Vector3& eye,
 {
 	Vector3 dir = target - eye;
 	Vector3 z(dir);
-	z = z.normalize();
+	z.normalize();
 	Vector3 x(up * z); // x = up cross z 
-	z = x.normalize();
+	z.normalize();
 	Vector3 y(z * x); // y = z cross x 
 
 	Vector cx(4, x);

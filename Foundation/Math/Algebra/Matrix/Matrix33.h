@@ -2,6 +2,7 @@
 
 #include "Matrix.h"
 #include "../Vector/Vector2.h"
+#include "Matrix44.h"
 
 namespace math
 {
@@ -13,7 +14,7 @@ namespace math
 	public:
 		Matrix33();
 		Matrix33(const Vector3& row0, const Vector3& row1, const Vector3& row2);
-		Matrix33(const Matrix33& mat);
+		Matrix33(const Matrix44& mat);
 		virtual ~Matrix33();
 	public:
 		/**
@@ -34,5 +35,7 @@ namespace math
 		*	Ðý×ª
 		*/
 		void setRotate(float rotation);
+	public:
+		virtual Matrix33& operator=(const Matrix44& mat);
 	};
 }

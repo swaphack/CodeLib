@@ -210,7 +210,7 @@ void render::Camera3D::updateViewPort()
 	float xh = x * 0.5f;
 	float yh = y * 0.5f;
 	float zh = z * 0.5f;
-	this->setViewPortParams(-xh, xh, -yh, yh, 0.1f, 1.1f);
+	this->setViewPortParams(-xh, xh, -yh, yh, 0.1f, 10000.0f);
 
 	const CameraParams& params = getViewPortParams();
 	_projectMat = math::Matrix44::perspective(params.xLeft, params.xRight, params.yBottom, params.yTop, params.zNear, params.zFar);

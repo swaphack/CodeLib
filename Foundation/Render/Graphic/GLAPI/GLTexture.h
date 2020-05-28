@@ -89,12 +89,12 @@ namespace render
 		static void setTexBufferRange(TexSizedInternalFormat format, uint32_t buff, ptrdiff_t offset, ptrdiff_t size);
 		static void setTextureBufferRange(uint32_t texture, TexSizedInternalFormat format, uint32_t buff, ptrdiff_t offset, ptrdiff_t size);
 	public:
-		static void setTexImage1D(TextureTarget1D target, int level, TextureInternalBaseFormat internalFormat, int width, int border, TextureExternalFormat format, TextureExternalDataType type, const void* data);
-		static void setTexImage2D(TextureTarget2D target, int level, TextureInternalBaseFormat internalFormat, int width, int heigth, int border, TextureExternalFormat format, TextureExternalDataType type, const void* data);
-		static void setTexImage3D(TextureTarget3D target, int level, TextureInternalBaseFormat internalFormat, int width, int heigth, int depth, int border, TextureExternalFormat format, TextureExternalDataType type, const void* data);
+		static void setTexImage1D(TextureTarget1D target, int level, TextureInternalSizedFormat internalFormat, int width, int border, TextureExternalFormat format, TextureExternalDataType type, const void* data);
+		static void setTexImage2D(TextureTarget2D target, int level, TextureInternalSizedFormat internalFormat, int width, int heigth, int border, TextureExternalFormat format, TextureExternalDataType type, const void* data);
+		static void setTexImage3D(TextureTarget3D target, int level, TextureInternalSizedFormat internalFormat, int width, int heigth, int depth, int border, TextureExternalFormat format, TextureExternalDataType type, const void* data);
 
-		static void setTexImage2DMultisample(Texture2DMultisampleTarget target, int samples, TextureInternalBaseFormat internalformat, int width, int heigth, bool fixedsamplelocations);
-		static void setTexImage3DMultisample(Texture3DMultisampleTarget target, int samples, TextureInternalBaseFormat internalformat, int width, int heigth, int depth, bool fixedsamplelocations);
+		static void setTexImage2DMultisample(Texture2DMultisampleTarget target, int samples, TextureInternalSizedFormat internalformat, int width, int heigth, bool fixedsamplelocations);
+		static void setTexImage3DMultisample(Texture3DMultisampleTarget target, int samples, TextureInternalSizedFormat internalformat, int width, int heigth, int depth, bool fixedsamplelocations);
 	public:
 		static void setTexParameter(TextureTarget target, TextureParameter paramType, int paramValue);
 		static void setTexParameter(TextureTarget target, TextureParameter paramType, float paramValue);

@@ -45,7 +45,7 @@ void render::Texture1D::compressedTextureSubImage(int level, int xoffset, int wi
 #endif
 }
 
-void render::Texture1D::setTextureImage(int level, TextureInternalBaseFormat internalFormat, int width, int border, TextureExternalFormat format, TextureExternalDataType type, const void* data)
+void render::Texture1D::setTextureImage(int level, TextureInternalSizedFormat internalFormat, int width, int border, TextureExternalFormat format, TextureExternalDataType type, const void* data)
 {
 	GLTexture::setTexImage1D((TextureTarget1D)getTextureTarget(), level, internalFormat, width, border, format, type, data);
 }

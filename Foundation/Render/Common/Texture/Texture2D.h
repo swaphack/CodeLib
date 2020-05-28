@@ -37,7 +37,7 @@ namespace render
 		/**
 		*	…Ë÷√Œ∆¿Ì
 		*/
-		void setTextureImage(int level, TextureInternalBaseFormat internalFormat, int width, int height, int border, TextureExternalFormat format, TextureExternalDataType type, const void* data);
+		void setTextureImage(int level, TextureInternalSizedFormat internalFormat, int width, int height, int border, TextureExternalFormat format, TextureExternalDataType type, const void* data);
 	public:
 		virtual void load(const sys::ImageDetail* image, const TextureSetting& setting = TextureSetting());
 	};

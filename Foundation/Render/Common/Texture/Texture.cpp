@@ -138,58 +138,7 @@ void render::Texture::getTextureImage(int level, TextureExternalFormat format, T
 	GLTexture::getTextureImage(_textureID, level, format, type, size, pixels);
 }
 
-void render::Texture::getTextureFormat(sys::ImageDataFormat imgFormat, TextureExternalFormat& format, TextureInternalBaseFormat& internalFormat, int& size)
-{
-	switch (imgFormat)
-	{
-	case sys::ImageDataFormat::RED:
-	{
-		format = TextureExternalFormat::RED;
-		internalFormat = TextureInternalBaseFormat::RED;
-		size = 1;
-	}
-	break;
-	case sys::ImageDataFormat::RG:
-	{
-		format = TextureExternalFormat::RG;
-		internalFormat = TextureInternalBaseFormat::RG;
-		size = 2;
-	}
-	break;
-	case sys::ImageDataFormat::RGB:
-	{
-		format = TextureExternalFormat::RGB;
-		internalFormat = TextureInternalBaseFormat::RGB;
-		size = 3;
-	}
-	break;
-	case sys::ImageDataFormat::RGBA:
-	{
-		format = TextureExternalFormat::RGBA;
-		internalFormat = TextureInternalBaseFormat::RGBA;
-		size = 4;
-	}
-	break;
-	case sys::ImageDataFormat::BGR:
-	{
-		format = TextureExternalFormat::BGR;
-		internalFormat = TextureInternalBaseFormat::RGB;
-		size = 3;
-	}
-	break;
-	case sys::ImageDataFormat::BGRA:
-	{
-		format = TextureExternalFormat::BGRA;
-		internalFormat = TextureInternalBaseFormat::RGBA;
-		size = 4;
-	}
-	break;
-	default:
-		break;
-	}
-}
-
-void render::Texture::getStorageTextureFormat(sys::ImageDataFormat imgFormat, TextureExternalFormat& format, TextureInternalSizedFormat& internalFormat, int& size)
+void render::Texture::getTextureFormat(sys::ImageDataFormat imgFormat, TextureExternalFormat& format, TextureInternalSizedFormat& internalFormat, int& size)
 {
 	switch (imgFormat)
 	{

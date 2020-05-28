@@ -35,7 +35,7 @@ void render::TextureCubeMap::load(int count, sys::ImageDetail** imageDetails, co
 		int size = 0;
 
 		TextureExternalFormat format = TextureExternalFormat::RGBA;
-		TextureInternalBaseFormat internalFormat = TextureInternalBaseFormat::RGBA;
+		TextureInternalSizedFormat internalFormat = TextureInternalSizedFormat::RGBA8;
 		getTextureFormat(image->getDataFormat(), format, internalFormat, size);
 
 		int len = size * getWidth();
@@ -64,7 +64,7 @@ void render::TextureCubeMap::load(int count, sys::ImageDetail** imageDetails, co
 		GLDebug::showError();
 	}
 
-
+	this->applyTextureSetting();
 	GLDebug::showError();
 	this->unbindTexture();
 	GLDebug::showError();

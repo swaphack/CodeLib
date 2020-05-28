@@ -19,6 +19,6 @@ namespace render
 		/**
 		*	…Ë÷√Œ∆¿Ì
 		*/
-		void setTextureImage(int samples, TextureInternalBaseFormat internalFormat, int width, int height, bool fixedSamplelocations);
+		void setTextureImage(int samples, TextureInternalSizedFormat internalFormat, int width, int height, bool fixedSamplelocations);
 	};
 }

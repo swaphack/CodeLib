@@ -5,7 +5,7 @@
 
 namespace render
 {
-	class TextureCubeMap;
+	class Texture2D;
 	/**
 	*	立方体，采用立方体纹理
 	*/
@@ -17,16 +17,13 @@ namespace render
 	public:
 		virtual bool init();
 	public:
-		void setFaceImage(CubeFace face, const std::string& fullfilepathpath);
-		void setAllFacesImage(const std::string& filepath);
+		void setFaceImage(const std::string& filepath);
 	protected:
-		void onImageChanged();
 		void onSpaceChanged();
 	private:
-		std::string _imagePaths[6];
 		// 坐标
 		CubeVertex _cubePosition;
 		// 纹理
-		TextureCubeMap* _texCubeMap = nullptr;
+		Texture2D* _tex2d = nullptr;
 	};
 }

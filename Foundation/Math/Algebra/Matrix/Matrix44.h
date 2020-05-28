@@ -6,6 +6,7 @@
 
 namespace math
 {
+	struct Matrix33;
 	/**
 	*	ËÄ½×·½Õó
 	*	00 01 02 03
@@ -28,9 +29,10 @@ namespace math
 	{
 	public:
 		Matrix44();
-		Matrix44(const Matrix44& mat);
 		Matrix44(const Matrix& mat);
-		Matrix44(float* value);
+		Matrix44(const Matrix44& mat);
+		Matrix44(const Matrix33& mat);
+		Matrix44(const float* value);
 		virtual ~Matrix44();
 	public:
 		/**
@@ -84,6 +86,9 @@ namespace math
 	public:
 		virtual Matrix41 operator*(const Matrix41& mat);
 		virtual Matrix44 operator*(const Matrix44& mat);
+		virtual Matrix44& operator=(const Matrix44& mat);
+		virtual Matrix44& operator=(const Matrix& mat);
+		virtual Matrix44& operator=(const Matrix33& mat);
 	public:
 		//--------------------------------------------------------------------------------
 		// set a ortho (right hand)

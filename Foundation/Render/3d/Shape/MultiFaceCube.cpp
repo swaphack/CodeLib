@@ -27,9 +27,6 @@ bool MultiFaceCube::init()
 
 		this->updateBufferData();
 	});
-	_notify->addListen(NodeNotifyType::MODEL, [this]() {
-		this->updateBufferData();
-	});
 
 	return true;
 }
@@ -37,6 +34,11 @@ bool MultiFaceCube::init()
 void render::MultiFaceCube::setFaceTextureName(CubeFace face, const std::string& name)
 {
 	setMaterialTexture((int)face, name);
+}
+
+void render::MultiFaceCube::setAllFacesTextureName(const std::string& name)
+{
+	setAllMaterialsTexture(name);
 }
 
 void render::MultiFaceCube::initBufferObject()

@@ -56,6 +56,12 @@ Matrix41::operator Vector3()
 	return Vector3(x, y, z);
 }
 
+math::Matrix41::Matrix41(const float* value)
+	: Matrix41()
+{
+	this->set(value, 4, 1);
+}
+
 math::Matrix41::~Matrix41()
 {
 

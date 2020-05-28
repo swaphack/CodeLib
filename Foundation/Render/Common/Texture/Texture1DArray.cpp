@@ -43,7 +43,7 @@ void render::Texture1DArray::compressedTextureSubImage(int level, int xoffset, i
 #endif
 }
 
-void render::Texture1DArray::setTextureImage(int level, TextureInternalBaseFormat internalFormat, int width, int height, int border, TextureExternalFormat format, TextureExternalDataType type, const void* data)
+void render::Texture1DArray::setTextureImage(int level, TextureInternalSizedFormat internalFormat, int width, int height, int border, TextureExternalFormat format, TextureExternalDataType type, const void* data)
 {
 	GLTexture::setTexImage2D((TextureTarget2D)getTextureTarget(), level, internalFormat, width, height, border, format, type, data);
 }

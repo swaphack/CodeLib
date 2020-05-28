@@ -129,9 +129,9 @@ void render::Material::startUpdateShaderUniformValue(Node* node, Materials* mats
 		return;
 	}
 
-	math::Matrix44 projMat = Camera::getMainCamera()->getProjectMatrix();
-	math::Matrix44 viewMat = Camera::getMainCamera()->getViewMatrix();
-	math::Matrix44 modelMat = node->getWorldMatrix();
+	const math::Matrix44& projMat = Camera::getMainCamera()->getProjectMatrix();
+	const math::Matrix44& viewMat = Camera::getMainCamera()->getViewMatrix();
+	const math::Matrix44& modelMat = node->getWorldMatrix();
 
 	for (auto item : _vertexUniformIndices)
 	{
@@ -203,8 +203,6 @@ void render::Material::startUpdateShaderUniformValue(Node* node, Materials* mats
 
 		GLDebug::showError();
 	}
-
-	runProgramFunc();
 
 	GLDebug::showError();
 }
@@ -410,6 +408,8 @@ void render::Material::beginApplyWithShader(Node* node, Mesh* pMesh, Materials* 
 
 	this->startUpdateShaderUniformValue(node, mats);
 	this->startUpdateShaderVertexValue(pMesh);
+
+	runProgramFunc();
 }
 
 void render::Material::endApplyWithShader(Mesh* pMesh, Materials* mats)

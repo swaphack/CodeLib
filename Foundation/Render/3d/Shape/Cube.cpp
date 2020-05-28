@@ -20,54 +20,27 @@ bool render::Cube::init()
 		return false;
 	}
 
-	_notify->addListen(NodeNotifyType::TEXTURE, [this]() {
-		this->onImageChanged();
-	});
-
 	_notify->addListen(NodeNotifyType::SPACE, [this]() {
 		this->onSpaceChanged();
+		this->updateBufferData();
 	});
 
 	return true;
 }
 
-void render::Cube::setFaceImage(CubeFace face, const std::string& filepath)
+void render::Cube::setFaceImage(const std::string& filepath)
 {
-	_imagePaths[(int)face] = filepath;
-
-	this->notify(NodeNotifyType::TEXTURE);
-}
-
-void render::Cube::setAllFacesImage(const std::string& filepath)
-{
-	for (int i = 0; i < (int)CubeFace::MAX; i++)
-	{
-		this->setFaceImage((CubeFace)i, filepath);
-	}
-}
-
-void render::Cube::onImageChanged()
-{
-	_texCubeMap = G_TEXTURE_CACHE->createTextureCubeMap(6, _imagePaths);
-	if (_texCubeMap == nullptr)
-	{
-		return;
-	}
-
-	SAFE_RETAIN(_texCubeMap);
-
-	this->addMaterialTexture(MAT_TEXTURE_NAME, _texCubeMap);
-	this->setAllMaterialsTexture(MAT_TEXTURE_NAME);
-
-	this->updateBufferData();
+	addMaterialTexture(MAT_TEXTURE_NAME, filepath);
+	setAllMaterialsTexture(MAT_TEXTURE_NAME);
 }
 
 void render::Cube::onSpaceChanged()
 {
 	VertexTool::setTexture3DVertices(&_cubePosition, math::Vector3(), _volume, _anchor);
 
-	float vertices[24 * 3] = {0};
+	float vertices[24 * 3] = { 0 };
 	float uvs[24 * 2] = { 0 };
+	float colors[24 * 4] = { 1 };
 	uint32_t indices[36] = { 0 };
 
 	for (int i = 0; i < (int)CubeFace::MAX; i++)
@@ -80,7 +53,8 @@ void render::Cube::onSpaceChanged()
 
 		memcpy(vertices + i * 4 * 3, pRectVertex->vertices, sizeof(pRectVertex->vertices));
 		memcpy(uvs + i * 4 * 2, pRectVertex->uvs, sizeof(pRectVertex->uvs));
-		
+		memcpy(colors + i * 4 * 4, pRectVertex->colors, sizeof(pRectVertex->colors));
+
 		indices[6 * i + 0] = i * 4 + 0;
 		indices[6 * i + 1] = i * 4 + 1;
 		indices[6 * i + 2] = i * 4 + 2;
@@ -95,6 +69,7 @@ void render::Cube::onSpaceChanged()
 	{
 		pMesh->getMeshDetail()->setVertices(24, vertices, 3);
 		pMesh->getMeshDetail()->setUVs(24, uvs, 2);
+		pMesh->getMeshDetail()->setColors(24, colors, 3);
 		pMesh->getMeshDetail()->setIndices(36, indices, 1);
 	}
 }

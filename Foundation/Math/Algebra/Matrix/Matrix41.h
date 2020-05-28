@@ -14,6 +14,7 @@ namespace math
 		Matrix41(float x, float y, float z, float w);
 		Matrix41(const Vector3& vector);
 		Matrix41(const Vector3& vector, float w);
+		Matrix41(const float* value);
 		virtual ~Matrix41();
 	public:
 		operator Vector3();

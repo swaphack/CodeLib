@@ -17,15 +17,15 @@ TestShaderNode::~TestShaderNode()
 void TestShaderNode::testFunc()
 {
 	//this->addLight();
-	//this->testImageShader();
+	this->testImageShader();
 	//this->testClipShader();
 	//this->testFbxModelShader();
 	//this->testObjModelShader();
 	//this->test3dsModelShader();
 
 	//this->testCubeModelShader();
-	this->testMultiMeshCubeModelShader();
-	this->testSphereModelShader();
+	//this->testMultiMeshCubeModelShader();
+	//this->testSphereModelShader();
 }	
 
 void TestShaderNode::testShaderUniformBlock()
@@ -95,7 +95,7 @@ void TestShaderNode::testImageShader()
 	CtrlImage* pImage = CREATE_NODE(CtrlImage);
 	pImage->setImagePath(filepath);
 	pImage->setAnchorPoint(Vector2(0.5f, 0.5f));
-	pImage->setVolume(1024, 768);
+	pImage->setVolume(800, 600);
 	pImage->setPosition(Vector2(512, 384));
 	this->addChild(pImage);
 
@@ -105,16 +105,15 @@ void TestShaderNode::testImageShader()
 void TestShaderNode::testCubeModelShader()
 {
 	std::string filepath = "Resource/Image/NeHe.png";
+
 	Cube* pModel = CREATE_NODE(Cube);
-
-	pModel->setAllFacesImage(filepath);
-
+	pModel->setFaceImage(filepath);
 	pModel->setPosition(500, 500, 0);
 	pModel->setVolume(200, 200, 200);
-	pModel->setAnchorPoint(0.0f, 0.5f, 0.5f);
+	pModel->setAnchorPoint(0.5f, 0.5f, 0.5f);
 	this->addChild(pModel);
 
-	Utility::loadShader(pModel->getMaterials(), "Shader/cube_vertex.glsl", "Shader/cube_fragment.glsl");
+	Utility::updateNodeShader(pModel);
 	Utility::runRotateAction(pModel);
 }
 
@@ -129,7 +128,7 @@ void TestShaderNode::testMultiMeshCubeModelShader()
 	pModel->addMaterialTexture(textureName, pTexture);
 	pModel->addMaterialTexture(textureName1, pTexture1);
 
-	pModel->setAllMaterialsTexture(textureName);
+	pModel->setAllFacesTextureName(textureName);
 	pModel->setFaceTextureName(CubeFace::FRONT, textureName1);
 	pModel->setFaceTextureName(CubeFace::LEFT, textureName1);
 	pModel->setFaceTextureName(CubeFace::TOP, textureName1);
@@ -151,10 +150,10 @@ void TestShaderNode::testSphereModelShader()
 	render::Sphere* pModel = CREATE_NODE(render::Sphere);
 	pModel->addMaterialTexture(textureName, pTexture);
 	pModel->setAllMaterialsTexture(textureName);
-	pModel->setRadius(300);
+	pModel->setRadius(100);
 	pModel->setVolume(200, 200, 200);
 	pModel->setAnchorPoint(0.5, 0.5f, 0.5f);
-	pModel->setPosition(500, 500, 0);
+	pModel->setPosition(200, 500, 0);
 	this->addChild(pModel);
 
 	Utility::updateNodeShader(pModel);
