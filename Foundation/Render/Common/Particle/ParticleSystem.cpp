@@ -30,12 +30,6 @@ render::FeedbackProgram::~FeedbackProgram()
 	SAFE_RELEASE(buffer);
 	SAFE_RELEASE(vao);
 }
-
-void render::FeedbackProgram::initShaderProgram(const std::string& vpath, const std::string& fpath)
-{
-	program->loadVertexAndFragmentShader(vpath, fpath);
-}
-
 void render::FeedbackProgram::doFunc(ParticleSystem* node)
 {
 	if (program && func)
@@ -58,7 +52,7 @@ render::ParticleSystem::ParticleSystem()
 
 	_renderVAO->setBuffer(_renderTB);
 	_renderTBO->setBuffer(_renderTB);
-	_renderTBO->setTexture(CREATE_OBJECT(Texture2D));
+	_renderTBO->setTexture(CREATE_OBJECT(Texture));
 }
 
 render::ParticleSystem::~ParticleSystem()
@@ -90,30 +84,32 @@ void render::ParticleSystem::draw()
 	GLBufferObjects::bindBufferBase(BufferTarget::TRANSFORM_FEEDBACK_BUFFER, 0, _renderTB->getBufferID());
 
 	_renderProgram.feedback->beginWatch(TransformFeedbackPrimitiveMode::TRIANGLES);
+	this->drawAllChildren();
 	// render;
 	_renderProgram.feedback->endWatch();
 
 	_updateProgram.program->use();
-	_renderProgram.doFunc(this);
+	_updateProgram.doFunc(this);
 
 	if ((_frameCount & 1) != 0)
 	{
-		_renderProgram.vao->bindVertexArray();
-		_updateProgram.buffer->setBufferBase(0);
+		_updateProgram.vao->bindVertexArray();
+		GLBufferObjects::bindBufferBase(BufferTarget::TRANSFORM_FEEDBACK_BUFFER, 0, _renderProgram.buffer->getBufferID());
 	}
 	else
 	{
-		_updateProgram.vao->bindVertexArray();
-		_renderProgram.buffer->setBufferBase(0);
+		_renderProgram.vao->bindVertexArray();
+		GLBufferObjects::bindBufferBase(BufferTarget::TRANSFORM_FEEDBACK_BUFFER, 0, _updateProgram.buffer->getBufferID());
 	}
 
-	_renderProgram.feedback->beginWatch(TransformFeedbackPrimitiveMode::TRIANGLES);
-	GLBufferObjects::drawArrays(DrawMode::POINTS, 0, _particleCount);
-	_renderProgram.feedback->endWatch();
+	_updateProgram.feedback->beginWatch(TransformFeedbackPrimitiveMode::TRIANGLES);
+	GLBufferObjects::drawArrays(DrawMode::POINTS, 0, min(_particleCount, _frameCount>>3));
+	_updateProgram.feedback->endWatch();
 
 	GLState::disable(EnableMode::TEXTURE_2D);
-	_renderProgram.vao->unbindVertexArray();
+	_updateProgram.vao->unbindVertexArray();
 	_renderProgram.program->unuse();
+	_updateProgram.program->unuse();
 	GLDebug::showError();
 
 	_frameCount++;
@@ -167,10 +163,10 @@ void render::ParticleSystem::onParticleChange()
 	{
 		math::Vector3 pos = math::Vector3(sys::Random::getNumber0_1(), sys::Random::getNumber0_1(), sys::Random::getNumber0_1());
 		pos = pos + math::Vector3(-0.5f, 120.0f, 0.0f);
-		memcpy(buffer + i * 3, pos.getValue(), 3 * sizeof(float));
+		memcpy(buffer + i * 6, pos.getValue(), 3 * sizeof(float));
 
 		pos = math::Vector3(pos.getX(), pos.getY() * 0.3f, pos.getZ() * 0.3f);
-		memcpy(buffer + i * 3 + 3, pos.getValue(), 3 * sizeof(float));
+		memcpy(buffer + i * 6 + 3, pos.getValue(), 3 * sizeof(float));
 	}
 	_updateProgram.buffer->unmapBuffer();	
 
@@ -204,7 +200,7 @@ void render::ParticleSystem::onParticleChange()
 	math::Volume volume = Tool::getGLViewSize();
 
 	_renderTB->bindBuffer();
-	_renderTB->setBufferData(volume.getWidth() * volume.getHeight() * 4 * sizeof(float), BufferDataUsage::DYNAMIC_COPY);
+	_renderTB->setBufferData(volume.getWidth() * volume.getHeight() * 3 * sizeof(float), BufferDataUsage::DYNAMIC_COPY);
 	_renderTBO->bindTexture();
 	_renderTBO->setFormat(TexSizedInternalFormat::RGBA32F);
 

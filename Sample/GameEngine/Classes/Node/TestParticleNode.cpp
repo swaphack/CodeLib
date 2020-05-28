@@ -27,18 +27,17 @@ void TestParticleNode::testParticle()
 	//////////////////////////////////////////////////////////////////////////
 	auto pUpdateFeedback = node->getUpdateFeedback();
 
-	std::string uvfile = "Resource/Shader/particule_vertex.glsl";
-	std::string uffile = "Resource/Shader/particule_fragment.glsl";
+	std::string uvfile = "Resource/Shader/particle_update_vertex.glsl";
+	std::string uffile = "Resource/Shader/particle_update_fragment.glsl";
 
 	const char* varings0[] = {
 		"outPosition",
 		"outVelocity",
 	};
 
-	pUpdateFeedback->initShaderProgram(uvfile, uffile);
+	pUpdateFeedback->program->loadVertexAndFragmentShader(uvfile, uffile);
 	
-	TransformFeedbackObject* xfbObject = pUpdateFeedback->feedback;
-	xfbObject->setFeedbackVaryings(2, varings0, TransformFeedbackBufferMode::INTERLEAVED_ATTRIBS);
+	pUpdateFeedback->feedback->setFeedbackVaryings(2, varings0, TransformFeedbackBufferMode::INTERLEAVED_ATTRIBS);
 
 	pUpdateFeedback->program->link();
 
@@ -53,7 +52,7 @@ void TestParticleNode::testParticle()
 		if (pUniform) pUniform->setMatrix4(modelMat);
 
 		pUniform = sp->getUniform("triangleCount");
-		if (pUniform) pUniform->setValue(ps->getParticleCount() / 3.0f);
+		if (pUniform) pUniform->setValue(ps->getParticleCount() / 3);
 
 		pUniform = sp->getUniform("timeStep");
 		if (pUniform) pUniform->setValue(0.02f);
@@ -61,6 +60,7 @@ void TestParticleNode::testParticle()
 		pUniform = sp->getUniform("geometryTBO");
 		if (pUniform) 
 		{
+			GLTexture::activeTexture(ActiveTextureName::TEXTURE0);
 			GLTexture::bindTexture2D(ps->getTextureID());
 			pUniform->setValue(0);
 		}
@@ -73,17 +73,16 @@ void TestParticleNode::testParticle()
 
 	auto pRenderFeedback = node->getRenderFeedback();
 
-	std::string rvfile = "Resource/Shader/particule_vertex.glsl";
-	std::string rffile = "Resource/Shader/particule_fragment.glsl";
+	std::string rvfile = "Resource/Shader/particle_render_vertex.glsl";
+	std::string rffile = "Resource/Shader/particle_render_fragment.glsl";
 
 	const char* varings1[] = {
 		"worldSpacePosition",
 	};
 
-	pRenderFeedback->initShaderProgram(uvfile, uffile);
+	pRenderFeedback->program->loadVertexAndFragmentShader(uvfile, uffile);
 
-	xfbObject = pRenderFeedback->feedback;
-	xfbObject->setFeedbackVaryings(1, varings1, TransformFeedbackBufferMode::INTERLEAVED_ATTRIBS);
+	pRenderFeedback->feedback->setFeedbackVaryings(1, varings1, TransformFeedbackBufferMode::INTERLEAVED_ATTRIBS);
 
 	pRenderFeedback->program->link();
 

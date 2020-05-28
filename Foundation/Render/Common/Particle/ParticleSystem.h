@@ -25,8 +25,6 @@ namespace render
 		FeedbackProgram();
 		~FeedbackProgram();
 
-		void initShaderProgram(const std::string& vpath, const std::string& fpath);
-
 		void doFunc(ParticleSystem* node);
 	};
 

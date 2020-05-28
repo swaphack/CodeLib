@@ -3,6 +3,7 @@
 uniform mat4 projectMatrix;
 uniform mat4 modelMatrix;
 uniform int triangleCount;
+
 uniform samplerBuffer geometryTBO;
 uniform float timeStep = 0.02;
 
@@ -22,12 +23,14 @@ bool intersect(vec3 origin, vec3 direction, vec3 v0, vec3 v1, vec3 v2, out vec3 
     u = (v1 - v0);
     v = (v2 - v0);
     n = cross(u, v);
+
     if (length(n) < 0.1)
         return false;
 
     w0 = origin - v0;
     a = -dot(n, w0);
     b = dot(n, direction);
+
     if (abs(b) < 0.1)
         return false;
  
@@ -88,9 +91,9 @@ void main(void)
     }
 
       //超出一定范围，回归。
-    if (new_position.y < -80.0)
+    if (new_position.y < -40.0)
     {
-        new_position = vec3(-new_position.x * 0.3, vPosition.y + 200.0, 0.0);
+        new_position = vec3(-new_position.x * 0.3, vPosition.y + 80.0, 0.0);
         new_velocity *= vec3(0.2, 0.1, -0.3);
     }
     outVelocity = new_velocity * 0.9999;//几乎无衰减的速度
