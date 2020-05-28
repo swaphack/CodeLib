@@ -77,6 +77,7 @@ bool render::ParticleSystem::init()
 
 void render::ParticleSystem::draw()
 {
+	GLDebug::showError();
 	_renderProgram.program->use();
 	_renderProgram.doFunc(this);
 
