@@ -164,6 +164,10 @@ namespace render
 		void getTextureImage(int level, TextureExternalFormat format, TextureExternalDataType type, int size, void* pixels);
 	public:
 		/**
+		*	生成mipmap
+		*/
+		void generateTextureMipMap();
+		/**
 		*	根据图片数据格式，获取纹理格式
 		*/
 		static void getTextureFormat(sys::ImageDataFormat imgFormat, TextureExternalFormat& format, TextureInternalSizedFormat& internalFormat, int& size);

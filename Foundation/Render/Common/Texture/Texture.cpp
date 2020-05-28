@@ -138,6 +138,21 @@ void render::Texture::getTextureImage(int level, TextureExternalFormat format, T
 	GLTexture::getTextureImage(_textureID, level, format, type, size, pixels);
 }
 
+void render::Texture::generateTextureMipMap()
+{
+	if (getTextureTarget() != TextureTarget::TEXTURE_1D
+		|| getTextureTarget() != TextureTarget::TEXTURE_2D
+		|| getTextureTarget() != TextureTarget::TEXTURE_3D
+		|| getTextureTarget() != TextureTarget::TEXTURE_1D_ARRAY
+		|| getTextureTarget() != TextureTarget::TEXTURE_2D_ARRAY
+		|| getTextureTarget() != TextureTarget::TEXTURE_CUBE_MAP)
+	{
+		return;
+	}
+
+	GLFrameBuffer::generateTextureMipmap(_textureID);
+}
+
 void render::Texture::getTextureFormat(sys::ImageDataFormat imgFormat, TextureExternalFormat& format, TextureInternalSizedFormat& internalFormat, int& size)
 {
 	switch (imgFormat)
