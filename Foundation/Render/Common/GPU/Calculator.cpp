@@ -76,24 +76,24 @@ void render::Calculator::getOutputData()
 void render::Calculator::calOutputBuffer()
 {
 	int count = _document->getAllOutputParameters().size();
-	const char** names = new char*[count];
+	//char** names = new char*[count];
 
 	uint32_t size = 0;
 	int i = 0;
 	for (auto item : _document->getAllOutputParameters())
 	{
 		size += _document->getTypeSize(item.second->getType());
-		names[i++] = item.first.c_str();
+		//names[i++] = item.first.c_str();
 	}
 
 	_xfbObject->setShaderProgram(_shaderProgram);
-	_xfbObject->setFeedbackVaryings(count, names, TransformFeedbackBufferMode::INTERLEAVED_ATTRIBS);
+	//_xfbObject->setFeedbackVaryings(count, names, TransformFeedbackBufferMode::INTERLEAVED_ATTRIBS);
 	GLDebug::showError();
 
 	_shaderProgram->link();
 	GLDebug::showError();
 
-	delete[] names;
+	//delete[] names;
 
 	_xfbBuffer->bindBuffer();
 	_xfbBuffer->setBufferData(size, BufferDataUsage::DYNAMIC_READ);
