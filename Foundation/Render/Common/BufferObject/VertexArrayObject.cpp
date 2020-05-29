@@ -48,6 +48,11 @@ void render::VertexArrayObject::bindBuffer()
 	//_bufferObject->bindBuffer();
 }
 
+void render::VertexArrayObject::bindBuffer(uint32_t bufferID)
+{
+	GLBufferObjects::bindBuffer(BufferTarget::ARRAY_BUFFER, bufferID);
+}
+
 void render::VertexArrayObject::unbindBuffer()
 {
 	GLBufferObjects::bindBuffer(BufferTarget::ARRAY_BUFFER, 0);

@@ -1,4 +1,4 @@
-#version 420 core
+#version 330 core
 
 uniform mat4 projectMatrix;
 uniform mat4 modelMatrix;
@@ -71,21 +71,23 @@ vec3 reflect_vector(vec3 v, vec3 n)
 void main(void)
 {
     vec3 accelleration = vec3(0.0, -0.3, 0.0);
-    vec3 new_velocity = velocity + accelleration * time_step;
-    vec3 new_position = vPosition + new_velocity * time_step;//计算粒子新的速度和位置
-    vec3 v0, v1, v2;
+    vec3 new_velocity = velocity + accelleration * timeStep;
+    vec3 new_position = vPosition + new_velocity * timeStep;//计算粒子新的速度和位置
+    vec3 v0;
+    vec3 v1;
+    vec3 v2;
     vec3 point;
     int i;
     for (i = 0; i < triangleCount; i++)
     {
-            //利用纹理查找tbo获取模型的三角形平面。做相交测试，如果相交在交点处计算反弹之后的新速度向量和位置
-        v0 = texelFetch(geometryTBO, i * 3).xyz
+        //利用纹理查找tbo获取模型的三角形平面。做相交测试，如果相交在交点处计算反弹之后的新速度向量和位置
+        v0 = texelFetch(geometryTBO, i * 3).xyz;
         v1 = texelFetch(geometryTBO, i * 3 + 1).xyz;
         v2 = texelFetch(geometryTBO, i * 3 + 2).xyz;
         if (intersect(vPosition.xyz, vPosition.xyz - new_position.xyz, v0, v1, v2, point))
         {
             vec3 n = normalize(cross(v1 - v0, v2 - v0));
-            new_position = vec4(point + reflect_vector(new_position.xyz - point, n), 1.0);
+            new_position = point + reflect_vector(new_position.xyz - point, n);
             new_velocity = 0.8 * reflect_vector(new_velocity, n);
         }
     }
@@ -98,5 +100,5 @@ void main(void)
     }
     outVelocity = new_velocity * 0.9999;//几乎无衰减的速度
     outPosition = new_position;
-    gl_Position = projectMatrix * (modelMatrix * vPosition);
+    gl_Position = projectMatrix * (modelMatrix * vec4(vPosition, 1.0));
 }

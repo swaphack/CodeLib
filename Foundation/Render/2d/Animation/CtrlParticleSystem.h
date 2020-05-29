@@ -2,7 +2,7 @@
 
 #include "system.h"
 #include "Common/DrawNode/DrawNode.h"
-#include "Particle.h"
+#include "ParticleProtocol.h"
 #include "CtrlAnimation.h"
 #include "Common/struct/vertex_common.h"
 

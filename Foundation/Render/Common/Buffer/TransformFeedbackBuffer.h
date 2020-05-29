@@ -10,6 +10,5 @@ namespace render
 		TransformFeedbackBuffer();
 		virtual ~TransformFeedbackBuffer();
 	public:
-		void setBufferSize(int size);
 	};
 }

@@ -1,32 +1,15 @@
 #pragma once
 
 #include "Common/Node/Node.h"
+#include "ParticleXFbObject.h"
 
 namespace render
 {
-	class ShaderProgram;
-	class TransformFeedbackObject;
-	class TransformFeedbackBuffer;
-	class VertexArrayObject;
+
 	class ParticleSystem;
-	class TextureBufferObject;
+	class ShaderProgram;
 	class TextureBuffer;
-
-	typedef std::function<void(ParticleSystem* node, ShaderProgram* program)> ParticleShaderFunc;
-
-	struct FeedbackProgram
-	{
-		ShaderProgram* program = nullptr;
-		TransformFeedbackObject* feedback = nullptr;
-		ParticleShaderFunc func = nullptr;
-		VertexArrayObject* vao = nullptr;
-		TransformFeedbackBuffer* buffer = nullptr;
-
-		FeedbackProgram();
-		~FeedbackProgram();
-
-		void doFunc(ParticleSystem* node);
-	};
+	class Texture;
 
 	/**
 	*	粒子系统
@@ -38,6 +21,8 @@ namespace render
 		virtual ~ParticleSystem();
 	public:
 		virtual bool init();
+
+		void initParticleSystem();
 	protected:
 		// 绘制,重写
 		virtual void draw();
@@ -45,11 +30,11 @@ namespace render
 		/**
 		*	更新回馈
 		*/
-		FeedbackProgram* getUpdateFeedback() const;
+		ParticleUpdateXFbObject* getUpdateXFBObject() const;
 		/**
 		*	绘制回馈
 		*/
-		FeedbackProgram* getRenderFeedback() const;
+		ParticleRenderXFbObject* getRenderXFBObject() const;
 	public:
 		/**
 		*	粒子个数
@@ -59,29 +44,25 @@ namespace render
 		*	粒子个数
 		*/
 		int getParticleCount() const;
-		/**
-		*	纹理编号
-		*/
-		uint32_t getTextureID();
 	protected:
-		void onParticleChange();
-	
+		void renderParticles();
 		/**
 		*	更新的
 		*/
-		FeedbackProgram _updateProgram;
+		ParticleUpdateXFbObject* _updateXFBObject;
 		/**
 		*	绘制的
 		*/
-		FeedbackProgram _renderProgram;
+		ParticleRenderXFbObject* _renderXFBObject;
 		/**
 		*	粒子个数
 		*/
-		int _particleCount = 100;
+		int _particleCount = 0;
 
-		TextureBufferObject* _renderTBO = nullptr;
+		TextureBuffer* _geometryVBO = nullptr;
+		Texture* _geometryTex = nullptr;
+
 		VertexArrayObject* _renderVAO = nullptr;
-		TextureBuffer* _renderTB = nullptr;
 
 		int _frameCount = 0;
 	};

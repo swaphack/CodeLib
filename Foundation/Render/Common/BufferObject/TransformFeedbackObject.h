@@ -29,6 +29,10 @@ namespace render
 		*/
 		void bindTransformFeedback();
 		/**
+		*	解除顶点反馈对象绑定
+		*/
+		void unbindTransformFeedback();
+		/**
 		*	设置缓存对象
 		*/
 		void setBufferBase(uint32_t index);

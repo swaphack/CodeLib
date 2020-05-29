@@ -29,6 +29,11 @@ void render::TransformFeedbackObject::bindTransformFeedback()
 	GLTransformFeedback::bindTransformFeedback(_transformFeedbackID);
 }
 
+void render::TransformFeedbackObject::unbindTransformFeedback()
+{
+	GLTransformFeedback::bindTransformFeedback(0);
+}
+
 void render::TransformFeedbackObject::setBufferBase(uint32_t index)
 {
 	if (getBuffer() == nullptr)

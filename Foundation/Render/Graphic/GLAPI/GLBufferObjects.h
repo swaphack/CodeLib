@@ -99,10 +99,10 @@ namespace render
 		static bool isBuffer(uint32_t buffer);
 	public:
 		static void* getMapBuffer(BufferTarget target, AccessType access);
-		static void* setMapNamedBuffer(GLuint buffer, AccessType access);
+		static void* getMapNamedBuffer(GLuint buffer, AccessType access);
 		//@see MapBufferRangeAccess
-		static void* setMapBufferRange(BufferTarget target, ptrdiff_t offset, ptrdiff_t length, uint32_t access);
-		static void* setMapNamedBufferRange(uint32_t buffer, ptrdiff_t offset, ptrdiff_t length, uint32_t access);
+		static void* getMapBufferRange(BufferTarget target, ptrdiff_t offset, ptrdiff_t length, uint32_t access);
+		static void* getMapNamedBufferRange(uint32_t buffer, ptrdiff_t offset, ptrdiff_t length, uint32_t access);
 	public:
 		static void multiDrawArrays(DrawMode mode, const int* first, const int* count, int drawcount);
 		static void multiDrawArraysIndirect(DrawMode mode, const int* indirect, int primcount, int stride);

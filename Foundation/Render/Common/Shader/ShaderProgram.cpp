@@ -72,20 +72,24 @@ void ShaderProgram::initProgram()
 	_programID = GLShader::createProgram();
 }
 
-void ShaderProgram::link()
+bool ShaderProgram::link()
 {
 	GLShader::linkProgram(_programID);
 
 	int nStatus = 0;
 	GLShader::getProgram(_programID, GetProgramParameter::LINK_STATUS, &nStatus);
-	if (nStatus != GL_TRUE)
+	bool ret = nStatus == GL_TRUE;
+	if (!ret)
 	{
+		PRINT("Link Program Error:\n");
 		GLShader::showProgramError(_programID);
 	}
 
 	detachAllShaders();
 
 	GLDebug::showError();
+
+	return ret;
 }
 
 void ShaderProgram::use()

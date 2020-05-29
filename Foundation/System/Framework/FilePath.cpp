@@ -1,6 +1,7 @@
 #include "FilePath.h"
 
 #include "IO/File.h"
+#include "Base/macros.h"
 
 using namespace sys;
 
@@ -62,6 +63,7 @@ bool FilePath::getFileData(const std::string& filename, std::string& data)
 	const std::string& fullpath = getFilePath(filename);
 	if (fullpath.empty())
 	{
+		PRINT("Error : Load Data From File [%s]\n", filename.c_str());
 		return false;
 	}
 

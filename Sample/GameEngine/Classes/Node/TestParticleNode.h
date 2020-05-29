@@ -11,4 +11,6 @@ protected:
 	virtual void testFunc();
 private:
 	void testParticle();
+
+	render::Node* createCubeModel();
 };

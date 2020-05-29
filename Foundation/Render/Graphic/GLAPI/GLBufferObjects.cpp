@@ -297,17 +297,17 @@ void* GLBufferObjects::getMapBuffer(BufferTarget target, AccessType access)
 	return glMapBuffer((GLenum)target, (GLenum)access);
 }
 
-void* GLBufferObjects::setMapNamedBuffer(GLuint buffer, AccessType access)
+void* GLBufferObjects::getMapNamedBuffer(GLuint buffer, AccessType access)
 {
 	return glMapNamedBuffer(buffer, (GLenum)access);
 }
 
-void* GLBufferObjects::setMapBufferRange(BufferTarget target, ptrdiff_t offset, ptrdiff_t length, uint32_t access)
+void* GLBufferObjects::getMapBufferRange(BufferTarget target, ptrdiff_t offset, ptrdiff_t length, uint32_t access)
 {
 	return glMapBufferRange((GLenum)target, offset, length, access);
 }
 
-void* GLBufferObjects::setMapNamedBufferRange(uint32_t buffer, ptrdiff_t offset, ptrdiff_t length, uint32_t access)
+void* GLBufferObjects::getMapNamedBufferRange(uint32_t buffer, ptrdiff_t offset, ptrdiff_t length, uint32_t access)
 {
 	return glMapNamedBufferRange(buffer, offset, length, access);
 }

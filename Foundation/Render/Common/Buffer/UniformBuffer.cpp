@@ -14,5 +14,5 @@ void render::UniformBuffer::setUniformBlockData(const ShaderUniformBlockData* da
 {
 	this->bindBuffer();
 	this->setBufferData(data->getBlockData().getSize(), data->getBlockData().getValue(), BufferDataUsage::STATIC_DRAW);
-	this->setBufferBase(data->getUniformBlock()->getUniformBlockID());
+	this->bindBufferBase(data->getUniformBlock()->getUniformBlockID());
 }

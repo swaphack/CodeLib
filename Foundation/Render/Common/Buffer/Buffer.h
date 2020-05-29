@@ -19,6 +19,7 @@ namespace render
 		*	缓存编号
 		*/
 		uint32_t getBufferID() const;
+	public:
 		/**
 		*	设置类型
 		*/
@@ -27,6 +28,10 @@ namespace render
 		*	获取类型
 		*/
 		BufferTarget getBufferTarget() const;
+		/**
+		*	绑定类型
+		*/
+		void bindBuffer(uint32_t bufferID);
 		/**
 		*	绑定类型
 		*/
@@ -40,14 +45,15 @@ namespace render
 		*/
 		bool isBuffer();
 	public:
+		void bindBufferBase(BufferTarget target, uint32_t index);
 		/**
 		*	设置数据索引
 		*/
-		void setBufferBase(uint32_t index);
+		void bindBufferBase(uint32_t index);
 		/**
 		*	设置数据范围
 		*/
-		void setBufferRange(uint32_t index, ptrdiff_t offset, ptrdiff_t size);
+		void getBufferRange(uint32_t index, ptrdiff_t offset, ptrdiff_t size);
 		/**
 		*	获取关联数据
 		*/
@@ -60,6 +66,7 @@ namespace render
 		*	抛弃
 		*/
 		void invalidateBufferSubData(ptrdiff_t offset, ptrdiff_t length);
+
 	protected:
 		/**
 		*	初始化

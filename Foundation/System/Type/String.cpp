@@ -556,19 +556,17 @@ String String::toUpper()
 	return text;
 }
 
-String& String::make(const char* format, ...)
+std::string String::make(const char* format, ...)
 {
 	va_list ap;
 	va_start(ap, format);
 	uint32_t size = _vscprintf(format, ap) + 1;
-	MemoryData data;
-	allocString(size, data);
+	MemoryData data(size);
 	vsprintf(data.getPtr(), format, ap);
 	va_end(ap);
 
-	*_data = data;
-
-	return *this;
+	std::string str(data.getValue(), data.getSize());
+	return str;
 }
 
 void String::split(char spot, std::vector<String>& dest)

@@ -84,9 +84,10 @@ namespace sys
 		String toLower();
 		// 转大写
 		String toUpper();
-
+	public:
 		// 格式化
-		String& make(const char* format, ...);
+		static std::string make(const char* format, ...);
+	public:
 		// 分割
 		void split(char spot, std::vector<String>& dest);
 		// 分割
@@ -108,7 +109,7 @@ namespace sys
 		size_t getSize() const;
 	protected:
 		void initString(size_t size, const char* value);
-		void allocString(size_t size, MemoryData& data);
+		static void allocString(size_t size, MemoryData& data);
 	private:
 		MemoryData* _data = nullptr;
 	};

@@ -117,9 +117,6 @@
     <ClCompile Include="2d\Animation\CtrlSequenceFrame.cpp">
       <Filter>2d\Animation</Filter>
     </ClCompile>
-    <ClCompile Include="2d\Animation\Particle.cpp">
-      <Filter>2d\Animation</Filter>
-    </ClCompile>
     <ClCompile Include="2d\Animation\CtrlMedia.cpp">
       <Filter>2d\Animation</Filter>
     </ClCompile>
@@ -369,9 +366,6 @@
     <ClCompile Include="Common\BufferObject\TransformFeedbackObject.cpp">
       <Filter>Common\BufferObject</Filter>
     </ClCompile>
-    <ClCompile Include="Common\BufferObject\TextureBufferObject.cpp">
-      <Filter>Common\BufferObject</Filter>
-    </ClCompile>
     <ClCompile Include="Common\BufferObject\VertexArrayObject.cpp">
       <Filter>Common\BufferObject</Filter>
     </ClCompile>
@@ -446,6 +440,27 @@
     </ClCompile>
     <ClCompile Include="Common\Tool\VertexTool.cpp">
       <Filter>Common\Tool</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Particle\Particle.cpp">
+      <Filter>Common\Particle</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Particle\ParticleXFbObject.cpp">
+      <Filter>Common\Particle</Filter>
+    </ClCompile>
+    <ClCompile Include="2d\Animation\ParticleProtocol.cpp">
+      <Filter>2d\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\GPU\Calculator.cpp">
+      <Filter>Common\GPU</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\GPU\ShaderParameter.cpp">
+      <Filter>Common\GPU</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\GPU\ShaderDocument.cpp">
+      <Filter>Common\GPU</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\GPU\ShaderType.cpp">
+      <Filter>Common\GPU</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -660,9 +675,6 @@
       <Filter>2d\Animation</Filter>
     </ClInclude>
     <ClInclude Include="2d\Animation\macros.h">
-      <Filter>2d\Animation</Filter>
-    </ClInclude>
-    <ClInclude Include="2d\Animation\Particle.h">
       <Filter>2d\Animation</Filter>
     </ClInclude>
     <ClInclude Include="2d\Animation\CtrlMedia.h">
@@ -951,9 +963,6 @@
     <ClInclude Include="Common\BufferObject\TransformFeedbackObject.h">
       <Filter>Common\BufferObject</Filter>
     </ClInclude>
-    <ClInclude Include="Common\BufferObject\TextureBufferObject.h">
-      <Filter>Common\BufferObject</Filter>
-    </ClInclude>
     <ClInclude Include="Common\BufferObject\import.h">
       <Filter>Common\BufferObject</Filter>
     </ClInclude>
@@ -1043,6 +1052,30 @@
     </ClInclude>
     <ClInclude Include="Common\Tool\VertexTool.h">
       <Filter>Common\Tool</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Particle\Particle.h">
+      <Filter>Common\Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Particle\ParticleXFbObject.h">
+      <Filter>Common\Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="2d\Animation\ParticleProtocol.h">
+      <Filter>2d\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\GPU\Calculator.h">
+      <Filter>Common\GPU</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\GPU\import.h">
+      <Filter>Common\GPU</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\GPU\ShaderDocument.h">
+      <Filter>Common\GPU</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\GPU\ShaderParameter.h">
+      <Filter>Common\GPU</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\GPU\ShaderType.h">
+      <Filter>Common\GPU</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1150,6 +1183,9 @@
     </Filter>
     <Filter Include="Common\Mesh">
       <UniqueIdentifier>{850d567f-bc86-451b-ba17-8441dbca1c7a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common\GPU">
+      <UniqueIdentifier>{5ed30168-1abe-4571-9e21-332f042c143c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

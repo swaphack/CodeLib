@@ -54,7 +54,7 @@ namespace render
 		/**
 		*	获取指定位置的数据指针
 		*/
-		void* setBufferRange(ptrdiff_t offset, ptrdiff_t length, uint32_t access);
+		void* getBufferRange(ptrdiff_t offset, ptrdiff_t length, uint32_t access);
 		/**
 		*	通知指定位置的数据发生改变
 		*/ 

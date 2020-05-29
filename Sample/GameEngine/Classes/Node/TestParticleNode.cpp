@@ -1,5 +1,5 @@
 #include "TestParticleNode.h"
-
+#include "Utility.h"
 using namespace render;
 
 TestParticleNode::TestParticleNode()
@@ -25,10 +25,10 @@ void TestParticleNode::testParticle()
 	this->addChild(node);
 
 	//////////////////////////////////////////////////////////////////////////
-	auto pUpdateFeedback = node->getUpdateFeedback();
+	auto pUpdateFeedback = node->getUpdateXFBObject();
 
-	std::string uvfile = "Resource/Shader/particle_update_vertex.glsl";
-	std::string uffile = "Resource/Shader/particle_update_fragment.glsl";
+	std::string uvfile = "Shader/particle_update_vertex.glsl";
+	std::string uffile = "Shader/particle_update_fragment.glsl";
 
 	const char* varings0[] = {
 		"outPosition",
@@ -36,10 +36,13 @@ void TestParticleNode::testParticle()
 	};
 
 	pUpdateFeedback->program->loadVertexAndFragmentShader(uvfile, uffile);
-	
-	pUpdateFeedback->feedback->setFeedbackVaryings(2, varings0, TransformFeedbackBufferMode::INTERLEAVED_ATTRIBS);
+	GLDebug::showError();
+
+	pUpdateFeedback->xfbo->setFeedbackVaryings(2, varings0, TransformFeedbackBufferMode::INTERLEAVED_ATTRIBS);
+	GLDebug::showError();
 
 	pUpdateFeedback->program->link();
+	GLDebug::showError();
 
 	pUpdateFeedback->func = [](ParticleSystem* ps, ShaderProgram* sp) {
 		const math::Matrix44& proMat = Camera::getMainCamera()->getProjectMatrix();
@@ -56,7 +59,7 @@ void TestParticleNode::testParticle()
 
 		pUniform = sp->getUniform("timeStep");
 		if (pUniform) pUniform->setValue(0.02f);
-
+		/*
 		pUniform = sp->getUniform("geometryTBO");
 		if (pUniform) 
 		{
@@ -64,27 +67,30 @@ void TestParticleNode::testParticle()
 			GLTexture::bindTexture2D(ps->getTextureID());
 			pUniform->setValue(0);
 		}
-
+		*/
 		GLDebug::showError();
 	};
 
 	GLDebug::showError();
 	//////////////////////////////////////////////////////////////////////////
 
-	auto pRenderFeedback = node->getRenderFeedback();
+	auto pRenderFeedback = node->getRenderXFBObject();
 
-	std::string rvfile = "Resource/Shader/particle_render_vertex.glsl";
-	std::string rffile = "Resource/Shader/particle_render_fragment.glsl";
+	std::string rvfile = "Shader/particle_render_vertex.glsl";
+	std::string rffile = "Shader/particle_render_fragment.glsl";
 
 	const char* varings1[] = {
 		"worldSpacePosition",
 	};
 
-	pRenderFeedback->program->loadVertexAndFragmentShader(uvfile, uffile);
+	pRenderFeedback->program->loadVertexAndFragmentShader(rvfile, rffile);
+	GLDebug::showError();
 
-	pRenderFeedback->feedback->setFeedbackVaryings(1, varings1, TransformFeedbackBufferMode::INTERLEAVED_ATTRIBS);
+	pRenderFeedback->xfbo->setFeedbackVaryings(1, varings1, TransformFeedbackBufferMode::INTERLEAVED_ATTRIBS);
+	GLDebug::showError();
 
 	pRenderFeedback->program->link();
+	GLDebug::showError();
 
 	pRenderFeedback->func = [](ParticleSystem* ps, ShaderProgram* sp) {
 		const math::Matrix44& proMat = Camera::getMainCamera()->getProjectMatrix();
@@ -97,5 +103,23 @@ void TestParticleNode::testParticle()
 		if (pUniform) pUniform->setMatrix4(modelMat);
 	};
 	GLDebug::showError();
+
+	node->setParticleCount(1000);
+}
+
+render::Node* TestParticleNode::createCubeModel()
+{
+	std::string filepath = "Resource/Image/NeHe.png";
+
+	Cube* pModel = CREATE_NODE(Cube);
+	pModel->setFaceImage(filepath);
+	pModel->setPosition(500, 500, 0);
+	pModel->setVolume(200, 200, 200);
+	pModel->setAnchorPoint(0.5f, 0.5f, 0.5f);
+
+	Utility::updateNodeShader(pModel);
+	Utility::runRotateAction(pModel);
+
+	return pModel;
 }
 

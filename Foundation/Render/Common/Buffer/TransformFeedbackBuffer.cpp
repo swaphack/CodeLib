@@ -10,8 +10,3 @@ render::TransformFeedbackBuffer::~TransformFeedbackBuffer()
 
 }
 
-void render::TransformFeedbackBuffer::setBufferSize(int size)
-{
-	this->setBufferData(size, BufferDataUsage::DYNAMIC_COPY);
-}
-

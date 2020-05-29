@@ -1,4 +1,4 @@
-#include "Particle.h"
+#include "ParticleProtocol.h"
 
 using namespace render;
 

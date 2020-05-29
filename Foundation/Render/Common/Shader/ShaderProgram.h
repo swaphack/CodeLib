@@ -71,7 +71,7 @@ namespace render
 		/**
 		*	Á´½Ó
 		*/
-		void link();
+		bool link();
 		/**
 		*	µ÷ÓÃ
 		*/

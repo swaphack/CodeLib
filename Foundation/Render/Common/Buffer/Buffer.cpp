@@ -33,14 +33,24 @@ void render::Buffer::bindBuffer()
 	GLBufferObjects::bindBuffer(_target, _bufferID);
 }
 
+void render::Buffer::bindBuffer(uint32_t bufferID)
+{
+	GLBufferObjects::bindBuffer(_target, bufferID);
+}
+
 void render::Buffer::unbindBuffer()
 {
 	GLBufferObjects::bindBuffer(_target, 0);
 }
 
-void render::Buffer::setBufferBase(uint32_t index)
+void render::Buffer::bindBufferBase(uint32_t index)
 {
 	GLBufferObjects::bindBufferBase(_target, index, _bufferID);
+}
+
+void render::Buffer::bindBufferBase(BufferTarget target, uint32_t index)
+{
+	GLBufferObjects::bindBufferBase(target, index, _bufferID);
 }
 
 void* render::Buffer::getMapBuffer(AccessType type)
@@ -48,7 +58,7 @@ void* render::Buffer::getMapBuffer(AccessType type)
 	return GLBufferObjects::getMapBuffer(_target, type);
 }
 
-void render::Buffer::setBufferRange(uint32_t index, ptrdiff_t offset, ptrdiff_t size)
+void render::Buffer::getBufferRange(uint32_t index, ptrdiff_t offset, ptrdiff_t size)
 {
 	GLBufferObjects::bindBufferRange(_target, index, _bufferID, offset, size);
 }

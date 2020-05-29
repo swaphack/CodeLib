@@ -62,9 +62,9 @@ void render::NoNamedBuffer::unmapBuffer()
 	GLBufferObjects::unmapBuffer(getBufferTarget());
 }
 
-void* render::NoNamedBuffer::setBufferRange(ptrdiff_t offset, ptrdiff_t length, uint32_t type)
+void* render::NoNamedBuffer::getBufferRange(ptrdiff_t offset, ptrdiff_t length, uint32_t type)
 {
-	return GLBufferObjects::setMapBufferRange(getBufferTarget(), offset, length, type);
+	return GLBufferObjects::getMapBufferRange(getBufferTarget(), offset, length, type);
 }
 
 void render::NoNamedBuffer::flushMappedBufferRange(ptrdiff_t offset, ptrdiff_t length)

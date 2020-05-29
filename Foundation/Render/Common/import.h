@@ -19,3 +19,4 @@
 #include "Transform/import.h"
 #include "Mesh/import.h"
 #include "Material/import.h"
+#include "GPU/import.h"

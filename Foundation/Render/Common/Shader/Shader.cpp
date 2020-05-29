@@ -2,7 +2,7 @@
 #include "ext-config.h"
 #include "ShaderProgram.h"
 #include "Graphic/import.h"
-
+#include "system.h"
 
 using namespace render;
 
@@ -70,6 +70,8 @@ bool Shader::loadData(const char* data)
 
 bool Shader::loadFromFile(const std::string& filepath)
 {
+	PRINT("INFO : Load Shader From File [%s]\n", filepath.c_str());
+
 	std::string data;
 	if (!G_FILEPATH->getFileData(filepath, data))
 	{

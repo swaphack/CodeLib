@@ -38,6 +38,10 @@ namespace render
 		*/
 		void bindBuffer();
 		/**
+		*	°ó¶¨
+		*/
+		void bindBuffer(uint32_t bufferID);
+		/**
 		*	½â³ý°ó¶¨
 		*/
 		void unbindBuffer();
