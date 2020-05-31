@@ -40,6 +40,6 @@ namespace render
 		*	GL_SEPARATE_ATTRIBS gl_NextBuffer 一个跳转
 		*	GL_INTERLEAVED_ATTRIBS gl_NextBuffer 二个以上跳转
 		*/
-		static void setTransformFeedbackVaryings(uint32_t program, int count, const char** varyings, TransformFeedbackBufferMode mode);
+		static void setTransformFeedbackVaryings(uint32_t program, int count, const char* const* varyings, TransformFeedbackBufferMode mode);
 	};
 }

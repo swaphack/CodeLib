@@ -40,13 +40,15 @@ namespace render
 		DMAT3X2, DMAT3X3, DMAT3X4,
 		DMAT4X2, DMAT4X3, DMAT4X4,
 	};
-
-	class ShaderType : public sys::Object
+	/**
+	*	变量类型
+	*/
+	class ShaderVariableType : public sys::Object
 	{
 	public:
-		ShaderType();
-		ShaderType(ShaderParamterType type, uint32_t size, const std::string& mark);
-		virtual ~ShaderType();
+		ShaderVariableType();
+		ShaderVariableType(ShaderParamterType type, uint32_t size, const std::string& mark);
+		virtual ~ShaderVariableType();
 	public:
 		/**
 		*	类型

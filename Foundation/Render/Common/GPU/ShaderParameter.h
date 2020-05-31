@@ -1,13 +1,14 @@
 #pragma once
 
 #include "system.h"
-#include "ShaderType.h"
+#include "ShaderVariableType.h"
 #include <string>
 
 namespace render
 {
-	
-
+	/**
+	*	参数
+	*/
 	class ShaderParameter : public sys::Object
 	{
 	public:
@@ -31,6 +32,14 @@ namespace render
 		*	类型
 		*/
 		ShaderParamterType getType() const;
+		/**
+		*	类型
+		*/
+		void setValue(uint32_t len, const char* value);
+		/**
+		*	类型
+		*/
+		const char* getValue() const;
 	private:
 		/**
 		*	名字
@@ -40,5 +49,9 @@ namespace render
 		*	类型
 		*/
 		ShaderParamterType _type = ShaderParamterType::FLOAT;
+		/**
+		*	数据
+		*/
+		sys::MemoryData _value;
 	};
 }

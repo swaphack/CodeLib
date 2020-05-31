@@ -34,26 +34,26 @@ void render::Meshes::setModelDetail(const sys::ModelDetail* modelDetail)
 	}
 }
 
-void Meshes::addMesh(int id, sys::MeshDetail* mesh)
+void Meshes::addMesh(const std::string& name, sys::MeshDetail* mesh)
 {
 	if (mesh == nullptr)
 	{
 		return;
 	}
 
-	this->removeMesh(id);
+	this->removeMesh(name);
 
 	Mesh* pMesh = CREATE_OBJECT(Mesh);
 	SAFE_RETAIN(pMesh);
 
 	pMesh->setMeshDetail(mesh);
 
-	_meshes[id] = pMesh;
+	_meshes[name] = pMesh;
 }
 
-void Meshes::removeMesh(int id)
+void Meshes::removeMesh(const std::string& name)
 {
-	auto it = _meshes.find(id);
+	auto it = _meshes.find(name);
 	if (it == _meshes.end())
 	{
 		return;
@@ -72,9 +72,9 @@ void Meshes::removeAllMeshes()
 	_meshes.clear();
 }
 
-Mesh* Meshes::getMesh(int id)
+Mesh* Meshes::getMesh(const std::string& name)
 {
-	auto it = _meshes.find(id);
+	auto it = _meshes.find(name);
 	if (it == _meshes.end())
 	{
 		return nullptr;
@@ -132,7 +132,7 @@ void render::Meshes::updateBufferData()
 	}
 }
 
-const std::map<int, Mesh*>& render::Meshes::getMeshes() const
+const std::map<std::string, Mesh*>& render::Meshes::getMeshes() const
 {
 	return _meshes;
 }

@@ -20,7 +20,7 @@ ModelDetail::~ModelDetail()
 	this->removeAllTexturePaths();
 }
 
-void ModelDetail::addMaterial(int id, MaterialDetail* material)
+void ModelDetail::addMaterial(const std::string& name, MaterialDetail* material)
 {
 	if (material == nullptr)
 	{
@@ -29,14 +29,14 @@ void ModelDetail::addMaterial(int id, MaterialDetail* material)
 
 	SAFE_RETAIN(material);
 
-	this->removeMaterial(id);
+	this->removeMaterial(name);
 
-	_materials[id] = material;
+	_materials[name] = material;
 }
 
-void ModelDetail::removeMaterial(int id)
+void ModelDetail::removeMaterial(const std::string& name)
 {
-	auto it = _materials.find(id);
+	auto it = _materials.find(name);
 	if (it == _materials.end())
 	{
 		return;
@@ -55,9 +55,9 @@ void ModelDetail::removeAllMaterials()
 	_materials.clear();
 }
 
-MaterialDetail* ModelDetail::getMaterial(int id)
+MaterialDetail* ModelDetail::getMaterial(const std::string& name)
 {
-	auto it = _materials.find(id);
+	auto it = _materials.find(name);
 	if (it == _materials.end())
 	{
 		return nullptr;
@@ -66,7 +66,7 @@ MaterialDetail* ModelDetail::getMaterial(int id)
 	return it->second;
 }
 
-void ModelDetail::addMesh(int id, MeshDetail* mesh)
+void ModelDetail::addMesh(const std::string& name, MeshDetail* mesh)
 {
 	if (mesh == nullptr)
 	{
@@ -75,14 +75,14 @@ void ModelDetail::addMesh(int id, MeshDetail* mesh)
 
 	SAFE_RETAIN(mesh);
 
-	this->removeMesh(id);
+	this->removeMesh(name);
 
-	_meshes[id] = mesh;
+	_meshes[name] = mesh;
 }
 
-void ModelDetail::removeMesh(int id)
+void ModelDetail::removeMesh(const std::string& name)
 {
-	auto it = _meshes.find(id);
+	auto it = _meshes.find(name);
 	if (it == _meshes.end())
 	{
 		return;
@@ -101,9 +101,9 @@ void ModelDetail::removeAllMeshes()
 	_meshes.clear();
 }
 
-MeshDetail* ModelDetail::getMesh(int id)
+MeshDetail* ModelDetail::getMesh(const std::string& name)
 {
-	auto it = _meshes.find(id);
+	auto it = _meshes.find(name);
 	if (it == _meshes.end())
 	{
 		return nullptr;
@@ -112,12 +112,12 @@ MeshDetail* ModelDetail::getMesh(int id)
 	return it->second;
 }
 
-const std::map<int, MaterialDetail*>& ModelDetail::getMaterials() const
+const std::map<std::string, MaterialDetail*>& ModelDetail::getMaterials() const
 {
 	return _materials;
 }
 
-const std::map<int, MeshDetail*>& ModelDetail::getMeshes() const
+const std::map<std::string, MeshDetail*>& ModelDetail::getMeshes() const
 {
 	return _meshes;
 }

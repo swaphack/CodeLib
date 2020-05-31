@@ -114,11 +114,14 @@ void render::ParticleSystem::renderParticles()
 	_renderXFBObject->vao->bindVertexArray();
 	_geometryVBO->bindBufferBase(BufferTarget::TRANSFORM_FEEDBACK_BUFFER, 0);
 	GLDebug::showError();
+	_renderXFBObject->xfbo->bindTransformFeedback();
+	GLDebug::showError();
 	_renderXFBObject->xfbo->beginWatch(TransformFeedbackPrimitiveMode::TRIANGLES);
 	GLDebug::showError();
 	this->drawAllChildren();
 	GLDebug::showError();
 	_renderXFBObject->xfbo->endWatch();
+	_renderXFBObject->xfbo->unbindTransformFeedback();
 	GLDebug::showError();
 
 	_updateXFBObject->program->use();
@@ -135,10 +138,12 @@ void render::ParticleSystem::renderParticles()
 		_renderXFBObject->vbo->bindBufferBase(BufferTarget::TRANSFORM_FEEDBACK_BUFFER, 0);
 	}
 	GLDebug::showError();
-	_renderXFBObject->xfbo->beginWatch(TransformFeedbackPrimitiveMode::POINTS);
+	_updateXFBObject->xfbo->bindTransformFeedback();
+	_updateXFBObject->xfbo->beginWatch(TransformFeedbackPrimitiveMode::POINTS);
 	GLBufferObjects::drawArrays(DrawMode::POINTS, 0, min(_particleCount, (_frameCount >> 3)));
-	_renderXFBObject->xfbo->endWatch();
+	_updateXFBObject->xfbo->endWatch();
+	_updateXFBObject->xfbo->bindTransformFeedback();
 	GLDebug::showError();
-	_renderXFBObject->vao->unbindVertexArray();
+	_updateXFBObject->vao->unbindVertexArray();
 	GLDebug::showError();
 }

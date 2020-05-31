@@ -14,8 +14,8 @@ namespace render
 	class Texture;
 
 
-#define DRAW_MATERIAL_INDEX 0
-#define DRAW_MESH_INDEX 0
+#define DRAW_MATERIAL_INDEX "0"
+#define DRAW_MESH_INDEX "0"
 
 
 #define MAT_TEXTURE_NAME "MAT_TEXTURE_NAME"
@@ -49,33 +49,33 @@ namespace render
 		/**
 		*	材质
 		*/
-		Material* getMaterial(int id = 0);
+		Material* getMaterial(const std::string& name = DRAW_MATERIAL_INDEX);
 		/**
 		*	网格
 		*/
-		Mesh* getMesh(int id = 0);
+		Mesh* getMesh(const std::string& name = DRAW_MESH_INDEX);
 	public:
 		/**
 		*	添加纹理
 		*/
-		void addMaterialTexture(const std::string& name, const std::string& fullpath);
+		void addMaterialTexture(const std::string& matName, const std::string& fullpath);
 		/**
 		*	添加纹理
 		*/
-		void addMaterialTexture(const std::string& name, const Texture* texture);
+		void addMaterialTexture(const std::string& matName, const Texture* texture);
 		/**
 		*	设置纹理
 		*/
-		void setAllMaterialsTexture(const std::string& name);
+		void setAllMaterialsTexture(const std::string& textureName);
 		/**
 		*	设置纹理
 		*/
-		void setMaterialTexture(int mat, const std::string& name);
+		void setMaterialTexture(const std::string& matName, const std::string& textureName);
 	public:
 		/**
 		*	获取着色器
 		*/
-		ShaderProgram* getMaterialShaderProgram(int mat);
+		ShaderProgram* getMaterialShaderProgram(const std::string& matName);
 		/**
 		*	设置着色器
 		*/
@@ -83,7 +83,7 @@ namespace render
 		/**
 		*	设置着色器
 		*/
-		void setMaterialShaderProgram(int mat, ShaderProgram* program);
+		void setMaterialShaderProgram(const std::string& matName, ShaderProgram* program);
 	public:
 		/**
 		*	设置着色器处理函数
@@ -92,7 +92,7 @@ namespace render
 		/**
 		*	设置着色器处理函数
 		*/
-		void setMaterialShaderProgram(int mat, const ShaderProgramFunc& func);
+		void setMaterialShaderProgram(const std::string& matName, const ShaderProgramFunc& func);
 	protected:
 		/**
 		*	绘制前工作

@@ -35,14 +35,14 @@ void render::Materials::setModelDetail(const sys::ModelDetail* modelDetail)
 	}
 }
 
-void Materials::addMaterial(int id, sys::MaterialDetail* material)
+void Materials::addMaterial(const std::string& name, sys::MaterialDetail* material)
 {
 	if (material == nullptr)
 	{
 		return;
 	}
 
-	this->removeMaterial(id);
+	this->removeMaterial(name);
 
 	Material* pMat = CREATE_OBJECT(Material);
 	SAFE_RETAIN(pMat);
@@ -50,12 +50,12 @@ void Materials::addMaterial(int id, sys::MaterialDetail* material)
 
 	pMat->setMaterialDetail(material);
 
-	_materials[id] = pMat;
+	_materials[name] = pMat;
 }
 
-void Materials::removeMaterial(int id)
+void Materials::removeMaterial(const std::string& name)
 {
-	auto it = _materials.find(id);
+	auto it = _materials.find(name);
 	if (it == _materials.end())
 	{
 		return;
@@ -74,9 +74,9 @@ void Materials::removeAllMaterials()
 	_materials.clear();
 }
 
-Material* Materials::getMaterial(int id)
+Material* Materials::getMaterial(const std::string& name)
 {
-	auto it = _materials.find(id);
+	auto it = _materials.find(name);
 	if (it == _materials.end())
 	{
 		return nullptr;
@@ -85,7 +85,7 @@ Material* Materials::getMaterial(int id)
 	return it->second;
 }
 
-const std::map<int, Material*>& render::Materials::getMaterials() const
+const std::map<std::string, Material*>& render::Materials::getMaterials() const
 {
 	return _materials;
 }
@@ -164,7 +164,7 @@ Texture* Materials::getTexture(const std::string& name) const
 	auto it = _textures.find(name);
 	if (it == _textures.end())
 	{
-		return 0;
+		return nullptr;
 	}
 
 	return it->second;

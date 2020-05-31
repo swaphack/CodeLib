@@ -142,74 +142,74 @@ std::string render::ShaderDocument::getText()
 
 const std::string& render::ShaderDocument::getTypeMark(ShaderParamterType type)
 {
-	const ShaderType& value = _shaderTypes[(int)type];
+	const ShaderVariableType& value = _shaderTypes[(int)type];
 	return value.getMark();
 }
 
 uint32_t render::ShaderDocument::getTypeSize(ShaderParamterType type)
 {
-	const ShaderType& value = _shaderTypes[(int)type];
+	const ShaderVariableType& value = _shaderTypes[(int)type];
 	return value.getSize();
 }
 
 void render::ShaderDocument::initTypes()
 {
-	_shaderTypes[(int)ShaderParamterType::FLOAT] = ShaderType(ShaderParamterType::FLOAT, sizeof(float), "float");
-	_shaderTypes[(int)ShaderParamterType::DOUBLE] = ShaderType(ShaderParamterType::DOUBLE, sizeof(double), "double");
-	_shaderTypes[(int)ShaderParamterType::INTEGER] = ShaderType(ShaderParamterType::INTEGER, sizeof(int), "int");
-	_shaderTypes[(int)ShaderParamterType::UNSIGNED_INTTEGER] = ShaderType(ShaderParamterType::UNSIGNED_INTTEGER, sizeof(uint32_t), "uint");
-	_shaderTypes[(int)ShaderParamterType::BOOL] = ShaderType(ShaderParamterType::BOOL, sizeof(bool), "bool");
+	_shaderTypes[(int)ShaderParamterType::FLOAT] = ShaderVariableType(ShaderParamterType::FLOAT, sizeof(float), "float");
+	_shaderTypes[(int)ShaderParamterType::DOUBLE] = ShaderVariableType(ShaderParamterType::DOUBLE, sizeof(double), "double");
+	_shaderTypes[(int)ShaderParamterType::INTEGER] = ShaderVariableType(ShaderParamterType::INTEGER, sizeof(int), "int");
+	_shaderTypes[(int)ShaderParamterType::UNSIGNED_INTTEGER] = ShaderVariableType(ShaderParamterType::UNSIGNED_INTTEGER, sizeof(uint32_t), "uint");
+	_shaderTypes[(int)ShaderParamterType::BOOL] = ShaderVariableType(ShaderParamterType::BOOL, sizeof(bool), "bool");
 
 
-	_shaderTypes[(int)ShaderParamterType::FLOAT2] = ShaderType(ShaderParamterType::FLOAT2, 2 * sizeof(float), "vec2");
-	_shaderTypes[(int)ShaderParamterType::DOUBLE2] = ShaderType(ShaderParamterType::DOUBLE2, 2 * sizeof(double), "dvec2");
-	_shaderTypes[(int)ShaderParamterType::INTEGER2] = ShaderType(ShaderParamterType::INTEGER2, 2 * sizeof(int), "ivec2");
-	_shaderTypes[(int)ShaderParamterType::UNSIGNED_INTTEGER2] = ShaderType(ShaderParamterType::UNSIGNED_INTTEGER2, 2 * sizeof(uint32_t), "uvec2");
-	_shaderTypes[(int)ShaderParamterType::BOOL2] = ShaderType(ShaderParamterType::BOOL2, 2 * sizeof(bool), "bvec2");
+	_shaderTypes[(int)ShaderParamterType::FLOAT2] = ShaderVariableType(ShaderParamterType::FLOAT2, 2 * sizeof(float), "vec2");
+	_shaderTypes[(int)ShaderParamterType::DOUBLE2] = ShaderVariableType(ShaderParamterType::DOUBLE2, 2 * sizeof(double), "dvec2");
+	_shaderTypes[(int)ShaderParamterType::INTEGER2] = ShaderVariableType(ShaderParamterType::INTEGER2, 2 * sizeof(int), "ivec2");
+	_shaderTypes[(int)ShaderParamterType::UNSIGNED_INTTEGER2] = ShaderVariableType(ShaderParamterType::UNSIGNED_INTTEGER2, 2 * sizeof(uint32_t), "uvec2");
+	_shaderTypes[(int)ShaderParamterType::BOOL2] = ShaderVariableType(ShaderParamterType::BOOL2, 2 * sizeof(bool), "bvec2");
 
-	_shaderTypes[(int)ShaderParamterType::FLOAT3] = ShaderType(ShaderParamterType::FLOAT3, 3 * sizeof(float), "vec3");
-	_shaderTypes[(int)ShaderParamterType::DOUBLE3] = ShaderType(ShaderParamterType::DOUBLE3, 3 * sizeof(double), "dvec3");
-	_shaderTypes[(int)ShaderParamterType::INTEGER3] = ShaderType(ShaderParamterType::INTEGER3, 3 * sizeof(int), "ivec3");
-	_shaderTypes[(int)ShaderParamterType::UNSIGNED_INTTEGER3] = ShaderType(ShaderParamterType::UNSIGNED_INTTEGER3, 3 * sizeof(uint32_t), "uvec3");
-	_shaderTypes[(int)ShaderParamterType::BOOL3] = ShaderType(ShaderParamterType::BOOL3, 3 * sizeof(bool), "bvec3");
+	_shaderTypes[(int)ShaderParamterType::FLOAT3] = ShaderVariableType(ShaderParamterType::FLOAT3, 3 * sizeof(float), "vec3");
+	_shaderTypes[(int)ShaderParamterType::DOUBLE3] = ShaderVariableType(ShaderParamterType::DOUBLE3, 3 * sizeof(double), "dvec3");
+	_shaderTypes[(int)ShaderParamterType::INTEGER3] = ShaderVariableType(ShaderParamterType::INTEGER3, 3 * sizeof(int), "ivec3");
+	_shaderTypes[(int)ShaderParamterType::UNSIGNED_INTTEGER3] = ShaderVariableType(ShaderParamterType::UNSIGNED_INTTEGER3, 3 * sizeof(uint32_t), "uvec3");
+	_shaderTypes[(int)ShaderParamterType::BOOL3] = ShaderVariableType(ShaderParamterType::BOOL3, 3 * sizeof(bool), "bvec3");
 
-	_shaderTypes[(int)ShaderParamterType::FLOAT4] = ShaderType(ShaderParamterType::FLOAT4, 4 * sizeof(float), "vec4");
-	_shaderTypes[(int)ShaderParamterType::DOUBLE4] = ShaderType(ShaderParamterType::DOUBLE4, 4 * sizeof(double), "dvec3");
-	_shaderTypes[(int)ShaderParamterType::INTEGER4] = ShaderType(ShaderParamterType::INTEGER4, 4 * sizeof(int), "ivec3");
-	_shaderTypes[(int)ShaderParamterType::UNSIGNED_INTTEGER4] = ShaderType(ShaderParamterType::UNSIGNED_INTTEGER4, 4 * sizeof(uint32_t), "uvec4");
-	_shaderTypes[(int)ShaderParamterType::BOOL4] = ShaderType(ShaderParamterType::BOOL4, 4 * sizeof(bool), "bvec4");
+	_shaderTypes[(int)ShaderParamterType::FLOAT4] = ShaderVariableType(ShaderParamterType::FLOAT4, 4 * sizeof(float), "vec4");
+	_shaderTypes[(int)ShaderParamterType::DOUBLE4] = ShaderVariableType(ShaderParamterType::DOUBLE4, 4 * sizeof(double), "dvec3");
+	_shaderTypes[(int)ShaderParamterType::INTEGER4] = ShaderVariableType(ShaderParamterType::INTEGER4, 4 * sizeof(int), "ivec3");
+	_shaderTypes[(int)ShaderParamterType::UNSIGNED_INTTEGER4] = ShaderVariableType(ShaderParamterType::UNSIGNED_INTTEGER4, 4 * sizeof(uint32_t), "uvec4");
+	_shaderTypes[(int)ShaderParamterType::BOOL4] = ShaderVariableType(ShaderParamterType::BOOL4, 4 * sizeof(bool), "bvec4");
 
-	_shaderTypes[(int)ShaderParamterType::MAT2] = ShaderType(ShaderParamterType::MAT2, 2 * sizeof(float), "mat2");
-	_shaderTypes[(int)ShaderParamterType::MAT3] = ShaderType(ShaderParamterType::MAT3, 3 * sizeof(float), "mat3");
-	_shaderTypes[(int)ShaderParamterType::MAT4] = ShaderType(ShaderParamterType::MAT4, 4 * sizeof(float), "mat4");
+	_shaderTypes[(int)ShaderParamterType::MAT2] = ShaderVariableType(ShaderParamterType::MAT2, 2 * sizeof(float), "mat2");
+	_shaderTypes[(int)ShaderParamterType::MAT3] = ShaderVariableType(ShaderParamterType::MAT3, 3 * sizeof(float), "mat3");
+	_shaderTypes[(int)ShaderParamterType::MAT4] = ShaderVariableType(ShaderParamterType::MAT4, 4 * sizeof(float), "mat4");
 
-	_shaderTypes[(int)ShaderParamterType::MAT2X2] = ShaderType(ShaderParamterType::MAT2X2, 2 * 2 * sizeof(float), "mat2x2");
-	_shaderTypes[(int)ShaderParamterType::MAT2X3] = ShaderType(ShaderParamterType::MAT2X3, 2 * 3 * sizeof(float), "mat2x3");
-	_shaderTypes[(int)ShaderParamterType::MAT2X4] = ShaderType(ShaderParamterType::MAT2X4, 2 * 4 * sizeof(float), "mat2x4");
+	_shaderTypes[(int)ShaderParamterType::MAT2X2] = ShaderVariableType(ShaderParamterType::MAT2X2, 2 * 2 * sizeof(float), "mat2x2");
+	_shaderTypes[(int)ShaderParamterType::MAT2X3] = ShaderVariableType(ShaderParamterType::MAT2X3, 2 * 3 * sizeof(float), "mat2x3");
+	_shaderTypes[(int)ShaderParamterType::MAT2X4] = ShaderVariableType(ShaderParamterType::MAT2X4, 2 * 4 * sizeof(float), "mat2x4");
 
-	_shaderTypes[(int)ShaderParamterType::MAT3X2] = ShaderType(ShaderParamterType::MAT3X2, 3 * 2 * sizeof(float), "mat3x2");
-	_shaderTypes[(int)ShaderParamterType::MAT3X3] = ShaderType(ShaderParamterType::MAT3X3, 3 * 3 * sizeof(float), "mat3x3");
-	_shaderTypes[(int)ShaderParamterType::MAT3X4] = ShaderType(ShaderParamterType::MAT3X4, 3 * 4 * sizeof(float), "mat3x4");
+	_shaderTypes[(int)ShaderParamterType::MAT3X2] = ShaderVariableType(ShaderParamterType::MAT3X2, 3 * 2 * sizeof(float), "mat3x2");
+	_shaderTypes[(int)ShaderParamterType::MAT3X3] = ShaderVariableType(ShaderParamterType::MAT3X3, 3 * 3 * sizeof(float), "mat3x3");
+	_shaderTypes[(int)ShaderParamterType::MAT3X4] = ShaderVariableType(ShaderParamterType::MAT3X4, 3 * 4 * sizeof(float), "mat3x4");
 
-	_shaderTypes[(int)ShaderParamterType::MAT4X2] = ShaderType(ShaderParamterType::MAT4X2, 4 * 2 * sizeof(float), "mat4x2");
-	_shaderTypes[(int)ShaderParamterType::MAT4X3] = ShaderType(ShaderParamterType::MAT4X3, 4 * 3 * sizeof(float), "mat4x3");
-	_shaderTypes[(int)ShaderParamterType::MAT4X4] = ShaderType(ShaderParamterType::MAT4X4, 4 * 4 * sizeof(float), "mat4x4");
+	_shaderTypes[(int)ShaderParamterType::MAT4X2] = ShaderVariableType(ShaderParamterType::MAT4X2, 4 * 2 * sizeof(float), "mat4x2");
+	_shaderTypes[(int)ShaderParamterType::MAT4X3] = ShaderVariableType(ShaderParamterType::MAT4X3, 4 * 3 * sizeof(float), "mat4x3");
+	_shaderTypes[(int)ShaderParamterType::MAT4X4] = ShaderVariableType(ShaderParamterType::MAT4X4, 4 * 4 * sizeof(float), "mat4x4");
 
-	_shaderTypes[(int)ShaderParamterType::DMAT2] = ShaderType(ShaderParamterType::DMAT2, 2 * sizeof(double), "dmat2");
-	_shaderTypes[(int)ShaderParamterType::DMAT3] = ShaderType(ShaderParamterType::DMAT3, 3 * sizeof(double), "dmat3");
-	_shaderTypes[(int)ShaderParamterType::DMAT4] = ShaderType(ShaderParamterType::DMAT4, 4 * sizeof(double), "dmat4");
+	_shaderTypes[(int)ShaderParamterType::DMAT2] = ShaderVariableType(ShaderParamterType::DMAT2, 2 * sizeof(double), "dmat2");
+	_shaderTypes[(int)ShaderParamterType::DMAT3] = ShaderVariableType(ShaderParamterType::DMAT3, 3 * sizeof(double), "dmat3");
+	_shaderTypes[(int)ShaderParamterType::DMAT4] = ShaderVariableType(ShaderParamterType::DMAT4, 4 * sizeof(double), "dmat4");
 										  
-	_shaderTypes[(int)ShaderParamterType::DMAT2X2] = ShaderType(ShaderParamterType::DMAT2X2, 2 * 2 * sizeof(double), "dmat2x2");
-	_shaderTypes[(int)ShaderParamterType::DMAT2X3] = ShaderType(ShaderParamterType::DMAT2X3, 2 * 3 * sizeof(double), "dmat2x3");
-	_shaderTypes[(int)ShaderParamterType::DMAT2X4] = ShaderType(ShaderParamterType::DMAT2X4, 2 * 4 * sizeof(double), "dmat2x4");
+	_shaderTypes[(int)ShaderParamterType::DMAT2X2] = ShaderVariableType(ShaderParamterType::DMAT2X2, 2 * 2 * sizeof(double), "dmat2x2");
+	_shaderTypes[(int)ShaderParamterType::DMAT2X3] = ShaderVariableType(ShaderParamterType::DMAT2X3, 2 * 3 * sizeof(double), "dmat2x3");
+	_shaderTypes[(int)ShaderParamterType::DMAT2X4] = ShaderVariableType(ShaderParamterType::DMAT2X4, 2 * 4 * sizeof(double), "dmat2x4");
 																			   
-	_shaderTypes[(int)ShaderParamterType::DMAT3X2] = ShaderType(ShaderParamterType::DMAT3X2, 3 * 2 * sizeof(double), "dmat3x2");
-	_shaderTypes[(int)ShaderParamterType::DMAT3X3] = ShaderType(ShaderParamterType::DMAT3X3, 3 * 3 * sizeof(double), "dmat3x3");
-	_shaderTypes[(int)ShaderParamterType::DMAT3X4] = ShaderType(ShaderParamterType::DMAT3X4, 3 * 4 * sizeof(double), "dmat3x4");
+	_shaderTypes[(int)ShaderParamterType::DMAT3X2] = ShaderVariableType(ShaderParamterType::DMAT3X2, 3 * 2 * sizeof(double), "dmat3x2");
+	_shaderTypes[(int)ShaderParamterType::DMAT3X3] = ShaderVariableType(ShaderParamterType::DMAT3X3, 3 * 3 * sizeof(double), "dmat3x3");
+	_shaderTypes[(int)ShaderParamterType::DMAT3X4] = ShaderVariableType(ShaderParamterType::DMAT3X4, 3 * 4 * sizeof(double), "dmat3x4");
 																			   
-	_shaderTypes[(int)ShaderParamterType::DMAT4X2] = ShaderType(ShaderParamterType::DMAT4X2, 4 * 2 * sizeof(double), "dmat4x2");
-	_shaderTypes[(int)ShaderParamterType::DMAT4X3] = ShaderType(ShaderParamterType::DMAT4X3, 4 * 3 * sizeof(double), "dmat4x3");
-	_shaderTypes[(int)ShaderParamterType::DMAT4X4] = ShaderType(ShaderParamterType::DMAT4X4, 4 * 4 * sizeof(double), "dmat4x4");
+	_shaderTypes[(int)ShaderParamterType::DMAT4X2] = ShaderVariableType(ShaderParamterType::DMAT4X2, 4 * 2 * sizeof(double), "dmat4x2");
+	_shaderTypes[(int)ShaderParamterType::DMAT4X3] = ShaderVariableType(ShaderParamterType::DMAT4X3, 4 * 3 * sizeof(double), "dmat4x3");
+	_shaderTypes[(int)ShaderParamterType::DMAT4X4] = ShaderVariableType(ShaderParamterType::DMAT4X4, 4 * 4 * sizeof(double), "dmat4x4");
 
 
 }

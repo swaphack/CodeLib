@@ -1,7 +1,7 @@
 #pragma once
 
 #include "system.h"
-#include "ShaderType.h"
+#include "ShaderVariableType.h"
 #include <map>
 #include <string>
 
@@ -84,7 +84,7 @@ namespace render
 	protected:
 		void initTypes();
 	private:
-		std::map<int, ShaderType> _shaderTypes;
+		std::map<int, ShaderVariableType> _shaderTypes;
 		/**
 		*	°æ±¾
 		*/

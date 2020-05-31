@@ -12,10 +12,10 @@ TestEnvironmentNode::~TestEnvironmentNode()
 
 void TestEnvironmentNode::testFunc()
 {
-	this->initSkyBox();
+	this->init3DSkyBox();
 }
 
-void TestEnvironmentNode::initSkyBox()
+void TestEnvironmentNode::init3DSkyBox()
 {
 	render::SkyBox* pSkyBox = CREATE_NODE(render::SkyBox);
 	pSkyBox->setFaceImage(CubeFace::LEFT, "Resource/skybox/left.jpg");
@@ -25,7 +25,6 @@ void TestEnvironmentNode::initSkyBox()
 	pSkyBox->setFaceImage(CubeFace::TOP, "Resource/skybox/top.jpg");
 	pSkyBox->setFaceImage(CubeFace::BOTTOM, "Resource/skybox/bottom.jpg");
 
-	pSkyBox->setScale(1000000);
 	pSkyBox->setVolume(400, 400, 400);
 	pSkyBox->setPosition(512, 384, 0);
 	pSkyBox->setAnchorPoint(0.5f, 0.5f, 0.5f);
@@ -43,4 +42,42 @@ void TestEnvironmentNode::initSkyBox()
 			pUniform->setMatrix4(Mat);
 		}
 	});
+}
+
+void TestEnvironmentNode::init2DSkyBox()
+{
+	render::MultiFaceCube* pSkyBox = CREATE_NODE(render::MultiFaceCube);
+	pSkyBox->setFaceImage(CubeFace::LEFT, "Resource/skybox/right.jpg");
+	pSkyBox->setFaceImage(CubeFace::RIGHT, "Resource/skybox/left.jpg");
+	pSkyBox->setFaceImage(CubeFace::FRONT, "Resource/skybox/front.jpg");
+	pSkyBox->setFaceImage(CubeFace::BACK, "Resource/skybox/back.jpg");
+	pSkyBox->setFaceImage(CubeFace::TOP, "Resource/skybox/top.jpg");
+	pSkyBox->setFaceImage(CubeFace::BOTTOM, "Resource/skybox/bottom.jpg");
+
+	//pSkyBox->setScale(0.25f);
+	pSkyBox->setVolume(2048, 2048, 2048);
+	pSkyBox->setPosition(512, 384, 0);
+	pSkyBox->setAnchorPoint(0.5f, 0.5f, 0.5f);
+	this->addChild(pSkyBox);
+
+	Utility::loadShader(pSkyBox->getMaterials(), "Shader/texture3d_vertex.glsl", "Shader/texture3d_fragment.glsl");
+
+	pSkyBox->setAllShaderProgramFunc([](ShaderProgram* program) {
+		auto pUniform = program->getUniform("viewMatrix");
+		if (pUniform)
+		{
+			math::Matrix44 viewMat = Camera::getMainCamera()->getViewMatrix();
+			math::Matrix44 Mat = math::Matrix33(viewMat);
+			pUniform->setMatrix4(Mat);
+		}
+	});
+
+	RotateByAction* pRotateByAction = CREATE_ACTION(RotateByAction);
+	pRotateByAction->setRotation(0, 180, 0);
+	pRotateByAction->setDuration(10);
+
+	RepeateForeverAction* pRepeateAction = CREATE_ACTION(RepeateForeverAction);
+	pRepeateAction->setAction(pRotateByAction);
+
+	pSkyBox->getActionProxy()->runAction(pRepeateAction);
 }

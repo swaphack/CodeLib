@@ -21,14 +21,6 @@ namespace render
 		virtual ~Calculator();
 	public:
 		/**
-		*	shader
-		*/
-		void setShaderProgram(ShaderProgram* shaderProgram);
-		/**
-		*	shader
-		*/
-		ShaderProgram* getShaderProgram();
-		/**
 		*	shader…Ë÷√∫Ø ˝
 		*/
 		void setProgramFunc(const ShaderProgramFunc& func);

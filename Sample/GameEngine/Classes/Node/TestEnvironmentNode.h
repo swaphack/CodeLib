@@ -11,5 +11,6 @@ protected:
 	virtual void testFunc();
 
 protected:
-	void initSkyBox();
+	void init3DSkyBox();
+	void init2DSkyBox();
 };

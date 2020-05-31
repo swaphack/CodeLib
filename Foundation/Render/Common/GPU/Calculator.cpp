@@ -3,12 +3,15 @@
 #include "Common/BufferObject/import.h"
 #include "Common/Buffer/import.h"
 #include "ShaderDocument.h"
-#include "ShaderType.h"
+#include "ShaderVariableType.h"
 #include "ShaderParameter.h"
 #include "Graphic/import.h"
 
 render::Calculator::Calculator()
 {
+	_shaderProgram = CREATE_OBJECT(ShaderProgram);
+	SAFE_RETAIN(_shaderProgram);
+
 	_xfbObject = CREATE_OBJECT(TransformFeedbackObject);
 	SAFE_RETAIN(_xfbObject);
 
@@ -23,18 +26,6 @@ render::Calculator::~Calculator()
 	SAFE_RELEASE(_shaderProgram);
 	SAFE_RELEASE(_xfbObject);
 	SAFE_RELEASE(_xfbBuffer);
-}
-
-void render::Calculator::setShaderProgram(ShaderProgram* shaderProgram)
-{
-	SAFE_RETAIN(shaderProgram);
-	SAFE_RELEASE(_shaderProgram);
-	_shaderProgram = shaderProgram;
-}
-
-render::ShaderProgram* render::Calculator::getShaderProgram()
-{
-	return _shaderProgram;
 }
 
 void render::Calculator::setProgramFunc(const ShaderProgramFunc& func)
@@ -68,32 +59,48 @@ void render::Calculator::run()
 void render::Calculator::getOutputData()
 {
 	_xfbBuffer->bindBuffer();
-	void* data = _xfbBuffer->getMapBuffer(AccessType::READ_ONLY);
-
+	char* data = (char*)_xfbBuffer->getMapBuffer(AccessType::READ_ONLY);
+	if (data == nullptr)
+	{
+		_xfbBuffer->unbindBuffer();
+		return;
+	}
+	uint32_t offset = 0;
+	for (auto item : _document->getAllOutputParameters())
+	{
+		uint32_t size = _document->getTypeSize(item.second->getType());
+		item.second->setValue(size, data + offset);
+		offset += size;
+	}
 	_xfbBuffer->unbindBuffer();
 }
 
 void render::Calculator::calOutputBuffer()
 {
 	int count = _document->getAllOutputParameters().size();
-	//char** names = new char*[count];
+	char** names = new char*[count];
 
 	uint32_t size = 0;
 	int i = 0;
 	for (auto item : _document->getAllOutputParameters())
 	{
 		size += _document->getTypeSize(item.second->getType());
-		//names[i++] = item.first.c_str();
+		names[i] = new char[item.first.size() + 1];
+		strcpy(names[i], item.first.c_str());
+		i++;
 	}
 
 	_xfbObject->setShaderProgram(_shaderProgram);
-	//_xfbObject->setFeedbackVaryings(count, names, TransformFeedbackBufferMode::INTERLEAVED_ATTRIBS);
+	_xfbObject->setFeedbackVaryings(count, names, TransformFeedbackBufferMode::INTERLEAVED_ATTRIBS);
 	GLDebug::showError();
 
 	_shaderProgram->link();
 	GLDebug::showError();
 
-	//delete[] names;
+	for (size_t i = 0; i < count; i++) {
+		delete[] names[i];
+	}
+	delete[] names;
 
 	_xfbBuffer->bindBuffer();
 	_xfbBuffer->setBufferData(size, BufferDataUsage::DYNAMIC_READ);

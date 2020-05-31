@@ -21,9 +21,8 @@ namespace render
 		virtual bool init();
 	public:
 		// 设置纹理
-		void setFaceTextureName(CubeFace face, const std::string& name);
-		// 设置纹理
-		void setAllFacesTextureName(const std::string& name);
+		void setFaceImage(CubeFace face, const std::string& filepath);
+		void setAllFacesImage(const std::string& filepath);
 	protected:
 		virtual void initBufferObject();
 

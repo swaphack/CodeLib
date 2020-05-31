@@ -459,8 +459,11 @@
     <ClCompile Include="Common\GPU\ShaderDocument.cpp">
       <Filter>Common\GPU</Filter>
     </ClCompile>
-    <ClCompile Include="Common\GPU\ShaderType.cpp">
+    <ClCompile Include="Common\GPU\ShaderVariableType.cpp">
       <Filter>Common\GPU</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\struct\enum_common.cpp">
+      <Filter>Common\struct</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1074,7 +1077,7 @@
     <ClInclude Include="Common\GPU\ShaderParameter.h">
       <Filter>Common\GPU</Filter>
     </ClInclude>
-    <ClInclude Include="Common\GPU\ShaderType.h">
+    <ClInclude Include="Common\GPU\ShaderVariableType.h">
       <Filter>Common\GPU</Filter>
     </ClInclude>
   </ItemGroup>

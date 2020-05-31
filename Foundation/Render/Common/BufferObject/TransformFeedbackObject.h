@@ -54,7 +54,7 @@ namespace render
 		/**
 		*	设置监视参数
 		*/
-		void setFeedbackVaryings(int count, const char** varyings, TransformFeedbackBufferMode mode);
+		void setFeedbackVaryings(int count, const char* const* varyings, TransformFeedbackBufferMode mode);
 		/**
 		*	开始监视
 		*/

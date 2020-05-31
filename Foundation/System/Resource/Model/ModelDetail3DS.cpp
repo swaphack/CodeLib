@@ -101,7 +101,7 @@ bool ModelDetail3DS::load(const std::string& fullpath)
 			pMat->setDiffuse(pMatData->diffuse[0], pMatData->diffuse[1], pMatData->diffuse[2]);
 			pMat->setSpecular(pMatData->specular[0], pMatData->specular[1], pMatData->specular[2]);
 			pMat->setShiness(pMatData->shininess);
-			this->addMaterial(id, pMat);
+			this->addMaterial(pMatData->name, pMat);
 		}
 	}
 
@@ -110,11 +110,9 @@ bool ModelDetail3DS::load(const std::string& fullpath)
 		auto pMeshData = pFile->meshes[i];
 		if (pMeshData)
 		{
-			int id = lib3ds_file_mesh_by_name(pFile, pMeshData->name);
-
 			auto pMesh = CREATE_OBJECT(MeshDetail);
-			pMesh->setMeshName(pMeshData->name);
-			this->addMesh(id, pMesh);
+			pMesh->setName(pMeshData->name);
+			this->addMesh(pMeshData->name, pMesh);
 
 			if (pMeshData->nvertices)
 			{
@@ -179,7 +177,12 @@ bool ModelDetail3DS::load(const std::string& fullpath)
 
 				for (auto item0 : mapMat)
 				{
-					pMesh->setMaterial(item0.first);
+					auto pMatData = pFile->materials[item0.first];
+					if (!pMatData)
+					{
+						continue;
+					}
+					pMesh->setMaterial(pMatData->name);
 					int nFaceCount = 3 * item0.second.size();
 					if (nFaceCount > 0)
 					{

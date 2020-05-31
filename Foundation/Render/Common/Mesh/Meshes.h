@@ -31,15 +31,15 @@ namespace render
 		/**
 		*	网格数据
 		*/
-		const std::map<int, Mesh*>& getMeshes() const;
+		const std::map<std::string, Mesh*>& getMeshes() const;
 		/**
 		*	设置模型网格
 		*/
-		void addMesh(int id, sys::MeshDetail* mesh);
+		void addMesh(const std::string& name, sys::MeshDetail* mesh);
 		/**
 		*	移除模型网格
 		*/
-		void removeMesh(int id);
+		void removeMesh(const std::string& name);
 		/**
 		*	移除所有模型网格
 		*/
@@ -47,7 +47,7 @@ namespace render
 		/**
 		*	获取模型网格
 		*/
-		Mesh* getMesh(int id);
+		Mesh* getMesh(const std::string& name);
 	public:
 		/**
 		*	使用缓存对象绘制
@@ -59,6 +59,6 @@ namespace render
 		void updateBufferData();
 	private:
 		// 纹理网格
-		std::map<int, Mesh*> _meshes;
+		std::map<std::string, Mesh*> _meshes;
 	};
 }

@@ -38,3 +38,13 @@ render::ShaderParamterType render::ShaderParameter::getType() const
 	return _type;
 }
 
+void render::ShaderParameter::setValue(uint32_t len, const char* value)
+{
+	_value.init(len, value);
+}
+
+const char* render::ShaderParameter::getValue() const
+{
+	return _value.getValue();
+}
+

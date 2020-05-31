@@ -12,5 +12,5 @@ void main()
 	vec4 position = vec4(vPosition, 1.0);
     vec4 pos = projectMatrix * viewMatrix * position;
     gl_Position = pos.xyww;
-    fragmentUV = vPosition;
+    fragmentUV = normalize(vPosition);
 }

@@ -18,11 +18,11 @@ namespace sys
 		/**
 		*	设置模型材质
 		*/
-		void addMaterial(int id, MaterialDetail* material);
+		void addMaterial(const std::string& name, MaterialDetail* material);
 		/**
 		*	移除模型材质
 		*/
-		void removeMaterial(int id);
+		void removeMaterial(const std::string& name);
 		/**
 		*	移除所有模型材质
 		*/
@@ -30,20 +30,20 @@ namespace sys
 		/**
 		*	获取模型材质
 		*/
-		MaterialDetail* getMaterial(int id);
+		MaterialDetail* getMaterial(const std::string& name);
 		/**
 		*	获取模型材质
 		*/
-		const std::map<int, MaterialDetail*>& getMaterials() const;
+		const std::map<std::string, MaterialDetail*>& getMaterials() const;
 	public:
 		/**
 		*	设置模型网格
 		*/
-		void addMesh(int id, MeshDetail* mesh);
+		void addMesh(const std::string& name, MeshDetail* mesh);
 		/**
 		*	移除模型网格
 		*/
-		void removeMesh(int id);
+		void removeMesh(const std::string& name);
 		/**
 		*	移除所有模型网格
 		*/
@@ -51,11 +51,11 @@ namespace sys
 		/**
 		*	获取模型网格
 		*/
-		MeshDetail* getMesh(int id);
+		MeshDetail* getMesh(const std::string& name);
 		/**
 		*	获取模型网格
 		*/
-		const std::map<int, MeshDetail*>& getMeshes() const;
+		const std::map<std::string, MeshDetail*>& getMeshes() const;
 	public:
 		/**
 		*	设置纹理路径
@@ -78,9 +78,9 @@ namespace sys
 		std::string getTextureFullPath(const std::string& strFileName, const std::string& dir);
 	protected:
 		// 纹理网格
-		std::map<int, MeshDetail*> _meshes;
+		std::map<std::string, MeshDetail*> _meshes;
 		// 模型材质
-		std::map<int, MaterialDetail*> _materials;
+		std::map<std::string, MaterialDetail*> _materials;
 		// 纹理路径
 		std::map<std::string, std::string> _texturePaths;
 	};

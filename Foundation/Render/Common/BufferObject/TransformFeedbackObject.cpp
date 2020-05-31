@@ -65,7 +65,7 @@ render::ShaderProgram* render::TransformFeedbackObject::getShaderProgram() const
 	return _program;
 }
 
-void render::TransformFeedbackObject::setFeedbackVaryings(int count, const char** varyings, TransformFeedbackBufferMode mode)
+void render::TransformFeedbackObject::setFeedbackVaryings(int count, const char* const* varyings, TransformFeedbackBufferMode mode)
 {
 	if (_program == nullptr)
 	{

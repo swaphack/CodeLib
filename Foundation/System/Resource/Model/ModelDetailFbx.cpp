@@ -10,8 +10,8 @@ void handNode(ModelDetailFbx* file, FbxNode* node);
 void handNodeMesh(ModelDetailFbx* file, FbxNode* node);
 void handNodeMaterial(ModelDetailFbx* file, FbxNode* node);
 
-void handMaterial(ModelDetailFbx* file, FbxSurfaceMaterial* mat, int id);
-void handMaterialTexture(ModelDetailFbx* file, FbxSurfaceMaterial* mat, int id, int textureIndex);
+void handMaterial(ModelDetailFbx* file, FbxSurfaceMaterial* mat);
+void handMaterialTexture(ModelDetailFbx* file, FbxSurfaceMaterial* mat, int textureIndex);
 
 void handNode(ModelDetailFbx* file, FbxNode* node)
 {
@@ -42,9 +42,9 @@ void handNodeMesh(ModelDetailFbx* file, FbxNode* node)
 		return;
 	}
 	auto pMesh = CREATE_OBJECT(MeshDetail);
-	pMesh->setMeshName(node->GetName());
+	pMesh->setName(node->GetName());
 	int meshCount = file->getMeshes().size();
-	file->addMesh(meshCount, pMesh);
+	file->addMesh(node->GetName(), pMesh);
 
 	int nPolygonCount = pMeshData->GetPolygonCount();
 	//ASSERT(nPolygonCount <= 1);
@@ -158,7 +158,7 @@ void handNodeMesh(ModelDetailFbx* file, FbxNode* node)
 		ASSERT(nMatCount == 1);
 		FbxGeometryElementMaterial* pMaterialElement = pMeshData->GetElementMaterial(0);
 		FbxSurfaceMaterial* lMaterial = node->GetMaterial(pMaterialElement->GetIndexArray().GetAt(0));
-		pMesh->setMaterial(lMaterial->GetUniqueID());
+		pMesh->setMaterial(lMaterial->GetName());
 	}
 
 	{
@@ -191,17 +191,17 @@ void handNodeMaterial(ModelDetailFbx* file, FbxNode* node)
 		FbxSurfaceMaterial *mat = node->GetMaterial(i);
 		if (mat)
 		{
-			handMaterial(file, mat, mat->GetUniqueID());
+			handMaterial(file, mat);
 			int lTextureIndex = 0;
 			FBXSDK_FOR_EACH_TEXTURE(lTextureIndex)
 			{
-				handMaterialTexture(file, mat, mat->GetUniqueID(), lTextureIndex);
+				handMaterialTexture(file, mat, lTextureIndex);
 			}
 		}
 	}
 }
 
-void handMaterial(ModelDetailFbx* file, FbxSurfaceMaterial* mat, int id)
+void handMaterial(ModelDetailFbx* file, FbxSurfaceMaterial* mat)
 {
 	FbxPropertyT<FbxDouble3> lKFbxDouble3;
 	FbxPropertyT<FbxDouble> lKFbxDouble1;
@@ -351,7 +351,7 @@ void handMaterial(ModelDetailFbx* file, FbxSurfaceMaterial* mat, int id)
 	}
 	else if (mat->GetClassId().Is(FbxSurfacePhong::ClassId))
 	{
-		auto it = file->getMaterial(id);
+		auto it = file->getMaterial(mat->GetName());
 		if (it != nullptr)
 		{
 			return;
@@ -364,11 +364,11 @@ void handMaterial(ModelDetailFbx* file, FbxSurfaceMaterial* mat, int id)
 		pMat->setSpecular((float)phong->Specular.Get()[0], (float)phong->Specular.Get()[1], (float)phong->Specular.Get()[2]);
 		pMat->setEmission((float)phong->Emissive.Get()[0], (float)phong->Emissive.Get()[1], (float)phong->Emissive.Get()[2]);
 		pMat->setShiness((float)phong->Shininess.Get());
-		file->addMaterial(id, pMat);
+		file->addMaterial(phong->GetName(), pMat);
 	}
 	else if (mat->GetClassId().Is(FbxSurfaceLambert::ClassId))
 	{
-		auto it = file->getMaterial(id);
+		auto it = file->getMaterial(mat->GetName());
 		if (it != nullptr)
 		{
 			return;
@@ -380,11 +380,11 @@ void handMaterial(ModelDetailFbx* file, FbxSurfaceMaterial* mat, int id)
 		pMat->setAmbient((float)lambert->Ambient.Get()[0], (float)lambert->Ambient.Get()[1], (float)lambert->Ambient.Get()[2]);
 		pMat->setDiffuse((float)lambert->Diffuse.Get()[0], (float)lambert->Diffuse.Get()[1], (float)lambert->Diffuse.Get()[2]);
 		pMat->setEmission((float)lambert->Emissive.Get()[0], (float)lambert->Emissive.Get()[1], (float)lambert->Emissive.Get()[2]);
-		file->addMaterial(id, pMat);
+		file->addMaterial(lambert->GetName(), pMat);
 	}
 }
 
-void handMaterialTexture(ModelDetailFbx* file, FbxSurfaceMaterial* mat, int id, int textureIndex)
+void handMaterialTexture(ModelDetailFbx* file, FbxSurfaceMaterial* mat, int textureIndex)
 {
 	auto pProperty = mat->FindProperty(FbxLayerElement::sTextureChannelNames[textureIndex]);
 	if (!pProperty.IsValid())
@@ -397,7 +397,7 @@ void handMaterialTexture(ModelDetailFbx* file, FbxSurfaceMaterial* mat, int id, 
 	{
 		return;
 	}
-	auto pMat = file->getMaterial(id);
+	auto pMat = file->getMaterial(mat->GetName());
 
 	for (int j = 0; j < lTextureCount; ++j)
 	{

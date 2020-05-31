@@ -99,7 +99,7 @@ void GLTransformFeedback::setTransformFeedbackBufferRange(uint32_t xfb, uint32_t
 	glTransformFeedbackBufferRange(xfb, index, buffer, offset, size);
 }
 
-void GLTransformFeedback::setTransformFeedbackVaryings(uint32_t program, int count, const char** varyings, TransformFeedbackBufferMode mode)
+void GLTransformFeedback::setTransformFeedbackVaryings(uint32_t program, int count, const char* const* varyings, TransformFeedbackBufferMode mode)
 {
 	glTransformFeedbackVaryings(program, count, varyings, (GLenum)mode);
 }

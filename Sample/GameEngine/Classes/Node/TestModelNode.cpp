@@ -24,19 +24,14 @@ void TestModelNode::testFunc()
 
 void TestModelNode::testCubeModel()
 {
-	auto pTexture = G_TEXTURE_CACHE->createTexture2D("Resource/Image/NeHe.png");
-	auto pTexture1 = G_TEXTURE_CACHE->createTexture2D("Resource/Image/1.jpg");
-	std::string textureName = "face";
-	std::string textureName1 = "face1";
+	std::string filepath = "Resource/Image/NeHe.png";
+	std::string filepath1 = "Resource/Image/1.jpg";
 
 	MultiFaceCube* pModel = CREATE_NODE(MultiFaceCube);
-	pModel->addMaterialTexture(textureName, pTexture);
-	pModel->addMaterialTexture(textureName1, pTexture1);
-
-	pModel->setAllMaterialsTexture(textureName);
-	pModel->setFaceTextureName(CubeFace::FRONT, textureName1);
-	pModel->setFaceTextureName(CubeFace::LEFT, textureName1);
-	pModel->setFaceTextureName(CubeFace::TOP, textureName1);
+	pModel->setAllFacesImage(filepath);
+	pModel->setFaceImage(CubeFace::FRONT, filepath1);
+	pModel->setFaceImage(CubeFace::LEFT, filepath1);
+	pModel->setFaceImage(CubeFace::TOP, filepath1);
 
 	pModel->setAnchorPoint(math::Vector3(0.5f, 0.5f, 0.5f));
 	pModel->setPosition(200, 200, -50);

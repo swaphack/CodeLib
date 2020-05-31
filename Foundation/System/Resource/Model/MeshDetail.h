@@ -38,9 +38,9 @@ namespace sys
 		MeshDetail();
 		virtual ~MeshDetail();
 	public:
-		const std::string& getMeshName() const;
+		const std::string& getName() const;
 
-		void setMeshName(const std::string& name);
+		void setName(const std::string& name);
 		/**
 		*	顶点坐标信息
 		*/
@@ -76,11 +76,11 @@ namespace sys
 		/**
 		*	设置材质
 		*/
-		void setMaterial(int mat);
+		void setMaterial(const std::string& name);
 		/**
 		*	获取材质
 		*/
-		int getMaterial() const;
+		const std::string& getMaterial() const;
 		/**
 		*	设置三角形索引
 		*/
@@ -121,7 +121,7 @@ namespace sys
 	private:
 		std::string _meshName;
 		// 材质
-		int _material = 0;
+		std::string _materialName;
 		
 		// 顶点索引
 		MeshMemoryData _indices;

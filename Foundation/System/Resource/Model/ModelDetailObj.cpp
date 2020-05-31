@@ -74,7 +74,7 @@ bool ModelDetailObj::load(const std::string& fullpath)
 			pMat->setDiffuse(pMatData->Kd.X, pMatData->Kd.Y, pMatData->Kd.Z);
 			pMat->setSpecular(pMatData->Ks.X, pMatData->Ks.Y, pMatData->Ks.Z);
 			//pMat->setShiness(pMatData->Ns);
-			this->addMaterial(id, pMat);
+			this->addMaterial(pMatData->name, pMat);
 
 			mapMatID[pMatData->name] = id;
 		}
@@ -86,12 +86,13 @@ bool ModelDetailObj::load(const std::string& fullpath)
 
 		for (int j = 0; j < nCount; j++)
 		{
-			auto pMesh = CREATE_OBJECT(MeshDetail);
-			
-			this->addMesh(j, pMesh);
-
 			auto pData = &loader.LoadedMeshes[j];
-			pMesh->setMeshName(pData->MeshName);
+			
+
+			auto pMesh = CREATE_OBJECT(MeshDetail);
+			pMesh->setName(pData->MeshName);
+
+			this->addMesh(pData->MeshMaterial.name, pMesh);
 
 			int nMatID = 0;
 			auto it = mapMatID.find(pData->MeshMaterial.name);
@@ -104,7 +105,7 @@ bool ModelDetailObj::load(const std::string& fullpath)
 				}
 			}
 
-			pMesh->setMaterial(nMatID);
+			pMesh->setMaterial(pData->MeshMaterial.name);
 
 			int nVertCount = pData->Vertices.size();
 			if (nVertCount > 0)

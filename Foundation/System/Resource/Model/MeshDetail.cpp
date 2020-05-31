@@ -56,14 +56,14 @@ const MeshMemoryData& MeshDetail::getUVs() const
 	return _uvs;
 }
 
-void MeshDetail::setMaterial(int mat)
+void MeshDetail::setMaterial(const std::string& name)
 {
-	_material = mat;
+	_materialName = name;
 }
 
-int MeshDetail::getMaterial() const
+const std::string& MeshDetail::getMaterial() const
 {
-	return _material;
+	return _materialName;
 }
 
 void MeshDetail::setIndices(int size, const uint32_t* indices, int unitSize)
@@ -122,12 +122,12 @@ char* sys::MeshDetail::createIndices(size_t len, uint32_t typeSize, int unitSize
 	return _indices.getPtr();
 }
 
-const std::string& MeshDetail::getMeshName() const
+const std::string& MeshDetail::getName() const
 {
 	return _meshName;
 }
 
-void MeshDetail::setMeshName(const std::string& name)
+void MeshDetail::setName(const std::string& name)
 {
 	_meshName = name;
 }

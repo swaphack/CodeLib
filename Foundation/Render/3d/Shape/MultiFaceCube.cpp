@@ -5,6 +5,7 @@
 #include "Common/Mesh/import.h"
 #include "Common/Material/import.h"
 
+
 using namespace render;
 
 MultiFaceCube::MultiFaceCube()
@@ -31,27 +32,36 @@ bool MultiFaceCube::init()
 	return true;
 }
 
-void render::MultiFaceCube::setFaceTextureName(CubeFace face, const std::string& name)
+void render::MultiFaceCube::setFaceImage(CubeFace face, const std::string& filepath)
 {
-	setMaterialTexture((int)face, name);
+	int i = (int)face;
+	std::string name = CubeFaceString[i];
+
+	this->addMaterialTexture(name, filepath);
+	setMaterialTexture(name, name);
 }
 
-void render::MultiFaceCube::setAllFacesTextureName(const std::string& name)
+void render::MultiFaceCube::setAllFacesImage(const std::string& filepath)
 {
-	setAllMaterialsTexture(name);
+	for (int i = 0; i < (int)CubeFace::MAX; i++)
+	{
+		setFaceImage((CubeFace)i, filepath);
+	}
 }
 
 void render::MultiFaceCube::initBufferObject()
 {
 	for (int i = 0; i < (int)CubeFace::MAX; i++)
 	{
+		std::string name = CubeFaceString[i];
+
 		auto pMat = CREATE_OBJECT(sys::MaterialDetail);
-		_materiales->addMaterial(i, pMat);
+		_materiales->addMaterial(name, pMat);
 
 		auto pMesh = CREATE_OBJECT(sys::MeshDetail);
-		_meshes->addMesh(i, pMesh);
+		_meshes->addMesh(name, pMesh);
 
-		pMesh->setMaterial(i);
+		pMesh->setMaterial(name);
 
 		CubeFace face = (CubeFace)i;
 
@@ -67,7 +77,8 @@ void render::MultiFaceCube::onCubeChanged()
 
 	for (int i = 0; i < (int)CubeFace::MAX; i++)
 	{
-		auto pMesh = _meshes->getMesh(i);
+		std::string name = CubeFaceString[i];
+		auto pMesh = _meshes->getMesh(name);
 		if (!pMesh)
 		{
 			return;

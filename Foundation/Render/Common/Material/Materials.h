@@ -36,11 +36,11 @@ namespace render
 		/**
 		*	设置模型材质
 		*/
-		void addMaterial(int id, sys::MaterialDetail* material);
+		void addMaterial(const std::string& name, sys::MaterialDetail* material);
 		/**
 		*	移除模型材质
 		*/
-		void removeMaterial(int id);
+		void removeMaterial(const std::string& name);
 		/**
 		*	移除所有模型材质
 		*/
@@ -48,11 +48,11 @@ namespace render
 		/**
 		*	获取模型材质
 		*/
-		Material* getMaterial(int id);
+		Material* getMaterial(const std::string& name);
 		/**
 		*	获取模型材质
 		*/
-		const std::map<int, Material*>& getMaterials() const;
+		const std::map<std::string, Material*>& getMaterials() const;
 		/**
 		*	统计模型材质数量
 		*/
@@ -83,7 +83,7 @@ namespace render
 		void updateMatTexture();
 	private:
 		// 模型材质
-		std::map<int, Material*> _materials;
+		std::map<std::string, Material*> _materials;
 		// 图片纹理
 		std::map<std::string, Texture*> _textures;
 		// 纹理路径
