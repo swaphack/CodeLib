@@ -13,9 +13,11 @@ TestEnvironmentNode::~TestEnvironmentNode()
 void TestEnvironmentNode::testFunc()
 {
 	this->init3DSkyBox();
-	//this->testImageShader();
+	this->testImageShader();
 
-	this->testCubeMap();
+	//this->testCubeMap();
+
+	this->testCamera();
 }
 
 void TestEnvironmentNode::init3DSkyBox()
@@ -28,7 +30,7 @@ void TestEnvironmentNode::init3DSkyBox()
 	pSkyBox->setFaceImage(CubeFace::TOP, "Resource/skybox/top.jpg");
 	pSkyBox->setFaceImage(CubeFace::BOTTOM, "Resource/skybox/bottom.jpg");
 
-	//pSkyBox->setScale(2);
+	//pSkyBox->setScale(0.25f);
 	pSkyBox->setRotation(0, 0, 180);
 	pSkyBox->setVolume(2048, 2048, 2048);
 	pSkyBox->setPosition(512, 384, 0);
@@ -69,7 +71,7 @@ void TestEnvironmentNode::init2DSkyBox()
 	pSkyBox->setFaceImage(CubeFace::TOP, "Resource/skybox/top.jpg");
 	pSkyBox->setFaceImage(CubeFace::BOTTOM, "Resource/skybox/bottom.jpg");
 
-	//pSkyBox->setScale(0.25f);
+	pSkyBox->setScale(0.25f);
 	pSkyBox->setVolume(2048, 2048, 2048);
 	pSkyBox->setPosition(512, 384, 0);
 	pSkyBox->setAnchorPoint(0.5f, 0.5f, 0.5f);
@@ -109,7 +111,7 @@ void TestEnvironmentNode::testCubeMap()
 
 	//pSkyBox->setScale(0.25f);
 	pCubMap->setVolume(512, 384, 512);
-	pCubMap->setPosition(512, 384, 100);
+	pCubMap->setPosition(512, 384, -512);
 	pCubMap->setAnchorPoint(0.5f, 0.5f, 0.5f);
 	this->addChild(pCubMap);
 
@@ -139,4 +141,18 @@ void TestEnvironmentNode::testImageShader()
 	this->addChild(pImage);
 
 	Utility::updateNodeShader(pImage);
+}
+
+void TestEnvironmentNode::testCamera()
+{
+	Camera* pCamera = Camera::getMainCamera();
+
+	MoveByAction* pRotateByAction = CREATE_ACTION(MoveByAction);
+	pRotateByAction->setPosition(0, 0, 1);
+	pRotateByAction->setDuration(1);
+
+	RepeateForeverAction* pRepeateAction = CREATE_ACTION(RepeateForeverAction);
+	pRepeateAction->setAction(pRotateByAction);
+
+	//pCamera->getActionProxy()->runAction(pRepeateAction);
 }

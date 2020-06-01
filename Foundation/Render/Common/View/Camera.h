@@ -50,7 +50,7 @@ namespace render
 		const math::Matrix44& getViewMatrix() const;
 	public:
 		// 相机对准指定位置
-		virtual void lookAt(const math::Vector3& position);
+		math::Matrix44 lookAt(const math::Vector3& position);
 	public:
 		// 更新空间位置
 		virtual void visit();

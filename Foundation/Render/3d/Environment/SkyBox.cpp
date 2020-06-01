@@ -17,20 +17,21 @@ render::SkyBox::~SkyBox()
 
 void render::SkyBox::beforeDrawNode()
 {
+	Model::beforeDrawNode();
+
 	GLState::enable(EnableMode::TEXTURE_CUBE_MAP_SEAMLESS);
 	GLState::setDepthFunc(DepthFunction::LEQUAL);
 	//GLState::setCullFace(FaceType::FRONT);
-	Model::beforeDrawNode();
 }
 
 void render::SkyBox::afterDrawNode()
 {
-	Model::afterDrawNode();
-
 	GLState::setDepthFunc(DepthFunction::LESS);
 	//GLState::setCullFace(FaceType::BACK);
 
 	GLState::disable(EnableMode::TEXTURE_CUBE_MAP_SEAMLESS);
+
+	Model::afterDrawNode();
 }
 
 void render::SkyBox::onCubeChanged()

@@ -31,7 +31,7 @@ void Scene::visit()
 	// Ä£ÐÍ¾ØÕó
 	GLMatrix::applyModelView();
 
-	Camera::getMainCamera()->lookAt(math::Vector3());
+	//Camera::getMainCamera()->lookAt(math::Vector3());
 
 	this->drawNode();
 }

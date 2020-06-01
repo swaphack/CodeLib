@@ -110,7 +110,7 @@ void Camera::startUpdateTranform()
 {
 	GLMatrix::loadIdentity();
 
-	GLMatrix::multMatrix(_localMatrix);
+	GLMatrix::multMatrix(_worldMatrix);
 
 	GLDebug::showError();
 }
@@ -130,12 +130,12 @@ const math::Matrix44& render::Camera::getViewMatrix() const
 	return _worldMatrix;
 }
 
-void render::Camera::lookAt(const math::Vector3& position)
+math::Matrix44 render::Camera::lookAt(const math::Vector3& position)
 {
 	math::Vector3 pos = this->getPosition();
 	pos.setZ(-pos.getZ());
 	math::Matrix44 mat = math::Matrix44::lookAt(pos, position, math::Vector3(0, 1, 0));
-	GLMatrix::multMatrix(mat);
+	return mat;
 }
 
 void render::Camera::updateViewPort()

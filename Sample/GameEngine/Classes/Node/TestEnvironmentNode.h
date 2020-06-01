@@ -17,4 +17,6 @@ protected:
 	void testCubeMap();
 
 	void testImageShader();
+
+	void testCamera();
 };
