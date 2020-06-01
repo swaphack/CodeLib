@@ -39,7 +39,7 @@ namespace render
 
 		static void 	genFramebuffers(int n, uint32_t* ids);
 		static void 	genRenderbuffers(int n, uint32_t* renderbuffers);
-		static void 	generateMipmap(MipmapTextureTarget target);
+		
 		static void 	generateTextureMipmap(uint32_t texture);
 		static void 	getFramebufferAttachmentParameter(FrameBufferTarget target, FramebufferAttachment attachment, FramebufferAttachmentParameter name, int* params);
 		static void 	getNamedFramebufferAttachmentParameter(uint32_t framebuffer, FramebufferAttachment attachment, FramebufferAttachmentParameter name, int* params);

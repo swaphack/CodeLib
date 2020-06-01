@@ -98,6 +98,7 @@
     <ClCompile Include="3d\Environment\SkyBox.cpp" />
     <ClCompile Include="3d\Environment\SpotLight.cpp" />
     <ClCompile Include="3d\Shape\Cube.cpp" />
+    <ClCompile Include="3d\Shape\CubeMap.cpp" />
     <ClCompile Include="3d\Shape\MultiFaceCube.cpp" />
     <ClCompile Include="3d\Shape\Sphere.cpp" />
     <ClCompile Include="Canvas.cpp" />
@@ -269,6 +270,7 @@
     <ClInclude Include="3d\Map\macros.h" />
     <ClInclude Include="3d\Map\Terrian.h" />
     <ClInclude Include="3d\Shape\Cube.h" />
+    <ClInclude Include="3d\Shape\CubeMap.h" />
     <ClInclude Include="3d\Shape\MultiFaceCube.h" />
     <ClInclude Include="3d\Shape\import.h" />
     <ClInclude Include="3d\Shape\Sphere.h" />

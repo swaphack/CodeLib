@@ -90,11 +90,11 @@ void Camera::setMainCamera(CameraDimensions d)
 {
 	SAFE_RELEASE(_mainCamera);
 
-	if (d == CameraDimensions::D2)
+	if (d == CameraDimensions::TWO)
 	{
 		_mainCamera = CREATE_NODE(Camera2D);
 	}
-	else if (d == CameraDimensions::D3)
+	else if (d == CameraDimensions::THREE)
 	{
 		_mainCamera = CREATE_NODE(Camera3D);
 	}
@@ -130,6 +130,14 @@ const math::Matrix44& render::Camera::getViewMatrix() const
 	return _worldMatrix;
 }
 
+void render::Camera::lookAt(const math::Vector3& position)
+{
+	math::Vector3 pos = this->getPosition();
+	pos.setZ(-pos.getZ());
+	math::Matrix44 mat = math::Matrix44::lookAt(pos, position, math::Vector3(0, 1, 0));
+	GLMatrix::multMatrix(mat);
+}
+
 void render::Camera::updateViewPort()
 {
 
@@ -139,7 +147,7 @@ void render::Camera::updateViewPort()
 
 Camera2D::Camera2D()
 {
-	this->setDimensions(CameraDimensions::D2);
+	this->setDimensions(CameraDimensions::TWO);
 	updateViewPort();
 }
 
@@ -150,8 +158,6 @@ Camera2D::~Camera2D()
 
 void Camera2D::updateView()
 {
-	
-
 	GLMatrix::loadOrtho(_cameraParams.xLeft,
 		_cameraParams.xRight,
 		_cameraParams.yBottom,
@@ -166,8 +172,8 @@ void render::Camera2D::updateViewPort()
 	float x = size.getWidth();
 	float y = size.getHeight();
 	float z = size.getDepth();
-	float zh = z * 0.5f;
-	this->setViewPortParams(0, x, 0, y, -zh, zh);
+	//float zh = z * 0.5f;
+	this->setViewPortParams(0, x, 0, y, -1, 2 * z);
 
 	const CameraParams& params = getViewPortParams();
 	_projectMat = math::Matrix44::ortho(params.xLeft, params.xRight, params.yBottom, params.yTop, params.zNear, params.zFar);
@@ -177,7 +183,7 @@ void render::Camera2D::updateViewPort()
 
 Camera3D::Camera3D()
 {
-	this->setDimensions(CameraDimensions::D3);
+	this->setDimensions(CameraDimensions::THREE);
 	updateViewPort();
 }
 
@@ -186,10 +192,7 @@ Camera3D::~Camera3D()
 
 }
 
-void Camera3D::lookAt(const math::Vector3& position)
-{
 
-}
 
 void Camera3D::updateView()
 {
@@ -210,7 +213,10 @@ void render::Camera3D::updateViewPort()
 	float xh = x * 0.5f;
 	float yh = y * 0.5f;
 	float zh = z * 0.5f;
-	this->setViewPortParams(-xh, xh, -yh, yh, 0.1f, 10000.0f);
+	this->setViewPortParams(-xh, xh, -yh, yh, z, z * 100);
+	this->setViewPortParams(0, x, 0, y, 0.1f, 20.0f * z);
+
+	this->setPositionZ(-5 * z);
 
 	const CameraParams& params = getViewPortParams();
 	_projectMat = math::Matrix44::perspective(params.xLeft, params.xRight, params.yBottom, params.yTop, params.zNear, params.zFar);

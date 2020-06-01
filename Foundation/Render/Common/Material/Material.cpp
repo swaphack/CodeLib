@@ -158,6 +158,7 @@ void render::Material::startUpdateShaderUniformValue(Node* node, Materials* mats
 			auto pTexture = mats->getTexture(_detail->getAmbientTextureMap());
 			if (pTexture)
 			{
+				GLState::enable((EnableMode)pTexture->getTextureTarget());
 				pTexture->activeTexture(0);
 				GLDebug::showError();
 				pTexture->bindSampler(0);
@@ -173,6 +174,7 @@ void render::Material::startUpdateShaderUniformValue(Node* node, Materials* mats
 			auto pTexture = mats->getTexture(_detail->getDiffuseTextureMap());
 			if (pTexture)
 			{
+				GLState::enable((EnableMode)pTexture->getTextureTarget());
 				pTexture->activeTexture(1);
 				GLDebug::showError();
 				pTexture->bindSampler(1);
@@ -189,6 +191,7 @@ void render::Material::startUpdateShaderUniformValue(Node* node, Materials* mats
 			auto pTexture = mats->getTexture(_detail->getSpecularTextureMap());
 			if (pTexture)
 			{
+				GLState::enable((EnableMode)pTexture->getTextureTarget());
 				pTexture->activeTexture(2);
 				GLDebug::showError();
 				pTexture->bindSampler(2);
@@ -296,6 +299,7 @@ void render::Material::endUpdateShaderUniformValue(Materials* mats)
 			if (pTexture)
 			{
 				pTexture->unbindTexture();
+				GLState::disable((EnableMode)pTexture->getTextureTarget());
 			}
 
 			GLDebug::showError();
@@ -306,6 +310,7 @@ void render::Material::endUpdateShaderUniformValue(Materials* mats)
 			if (pTexture)
 			{
 				pTexture->unbindTexture();
+				GLState::disable((EnableMode)pTexture->getTextureTarget());
 			}
 
 			GLDebug::showError();
@@ -316,6 +321,7 @@ void render::Material::endUpdateShaderUniformValue(Materials* mats)
 			if (pTexture)
 			{
 				pTexture->unbindTexture();
+				GLState::disable((EnableMode)pTexture->getTextureTarget());
 			}
 			GLDebug::showError();
 		}

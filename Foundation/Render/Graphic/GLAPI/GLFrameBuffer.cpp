@@ -143,10 +143,7 @@ void GLFrameBuffer::genRenderbuffers(int n, uint32_t* renderbuffers)
 	glGenRenderbuffers(n, renderbuffers);
 }
 
-void GLFrameBuffer::generateMipmap(MipmapTextureTarget target)
-{
-	glGenerateMipmap((GLenum)target);
-}
+
 
 void GLFrameBuffer::generateTextureMipmap(uint32_t texture)
 {

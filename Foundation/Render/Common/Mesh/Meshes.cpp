@@ -98,7 +98,6 @@ void render::Meshes::drawNodeWithMaterials(Node* node, Materials* mats)
 		{// ÁÙÊ±´¦Àí
 			continue;
 		}
-		GLState::enable(EnableMode::TEXTURE_2D);
 		if (pMat->getShaderProgram() != nullptr)
 		{
 			pMat->beginApplyWithShader(node, pMesh, mats);
@@ -115,8 +114,6 @@ void render::Meshes::drawNodeWithMaterials(Node* node, Materials* mats)
 
 			pMat->endApply(mats);
 		}
-
-		GLState::disable(EnableMode::TEXTURE_2D);
 	}
 
 	GLDebug::showError();

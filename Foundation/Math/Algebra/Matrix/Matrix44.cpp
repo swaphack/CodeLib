@@ -334,25 +334,27 @@ math::Matrix44 math::Matrix44::horizontalPerspective(float fov, float aspect, fl
 	return perspective(-width, width, -height, height, front, back);
 }
 
-math::Matrix44 math::Matrix44::lookAt(const Vector3& target, const Vector3& eye, const Vector3& up)
+math::Matrix44 math::Matrix44::lookAt(const Vector3& eye, const Vector3& center, const Vector3& up)
 {
-	Vector3 dir = target - eye;
-	Vector3 z(dir);
-	z.normalize();
-	Vector3 x(up * z); // x = up cross z 
-	z.normalize();
-	Vector3 y(z * x); // y = z cross x 
+	math::Vector3 f = math::Vector3::normalize(center - eye);
+	math::Vector3 u = math::Vector3::normalize(up);
+	math::Vector3 s = math::Vector3::normalize(math::Vector3::cross(f, u));
+	u = math::Vector3::cross(s, f);
 
-	Vector cx(4, x);
-	Vector cy(4, y);
-	Vector cz(4, z);
-
-	Matrix44 m;
-	m.setColumn(0, cx);
-	m.setColumn(1, cz);
-	m.setColumn(2, cz);
-
-	return m;
+	math::Matrix44 Result;
+	Result.setValue(0, 0, s.getX());
+	Result.setValue(1, 0, s.getY());
+	Result.setValue(2, 0, s.getZ());
+	Result.setValue(0, 1, u.getX());
+	Result.setValue(1, 1, u.getY());
+	Result.setValue(2, 1, u.getZ());
+	Result.setValue(0, 2, -f.getX());
+	Result.setValue(1, 2, -f.getY());
+	Result.setValue(2, 2, -f.getZ());
+	Result.setValue(0, 3, math::Vector3::dot(s, eye));
+	Result.setValue(1, 3, math::Vector3::dot(u, eye));
+	Result.setValue(2, 3, math::Vector3::dot(f, eye));
+	return Result;
 }
 
 math::Matrix44 math::Matrix44::getRST(const Vector3& rotate, const Vector3& scale, const Vector3& translate)

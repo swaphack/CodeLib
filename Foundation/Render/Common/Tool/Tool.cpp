@@ -9,7 +9,7 @@ math::Volume Tool::GL_VIEW_SIZE = math::Volume();
 void Tool::setGLViewSize(float width, float height)
 {
 	float max = width <= height ? width : height;
-	GL_VIEW_SIZE.set(width, height, max * 100);
+	GL_VIEW_SIZE.set(width, height, max);
 }
 
 const math::Volume& Tool::getGLViewSize()

@@ -481,3 +481,7 @@ void render::GLTexture::setTexParameter(TextureTarget target, TextureParameter p
 	glTexParameteriv((GLenum)target, (GLenum)paramType, paramValue);
 }
 
+void render::GLTexture::generateMipmap(MipmapTextureTarget target)
+{
+	glGenerateMipmap((GLenum)target);
+}

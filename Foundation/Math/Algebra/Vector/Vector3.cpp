@@ -339,3 +339,20 @@ void math::Vector3::normalize()
 		setValue(i, getValue(i) / magn);
 	}
 }
+
+math::Vector3 math::Vector3::normalize(const Vector3& vector)
+{
+	math::Vector3 ret;
+	float magn = vector.getMagnitude();
+	if (magn == 0)
+	{
+		return vector;
+	}
+
+	for (int i = 0; i < vector.getLength(); i++)
+	{
+		ret.setValue(i, vector.getValue(i) / magn);
+	}
+
+	return ret;
+}

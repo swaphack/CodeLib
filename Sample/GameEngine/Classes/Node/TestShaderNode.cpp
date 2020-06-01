@@ -17,7 +17,7 @@ TestShaderNode::~TestShaderNode()
 void TestShaderNode::testFunc()
 {
 	//this->addLight();
-	this->testImageShader();
+	//this->testImageShader();
 	//this->testClipShader();
 	//this->testFbxModelShader();
 	//this->testObjModelShader();
@@ -222,7 +222,7 @@ void TestShaderNode::testClipShader()
 	pModel->setAnchorPoint(0.0f, 0.5f, 0.5f);
 	this->addChild(pModel);
 
-	std::string textureClipVertexPath = "Shader/clip_vertex.glsl";
+	std::string textureClipVertexPath = "Shader/clip.vs";
 
 	ShaderProgram* pProgram = CREATE_OBJECT(ShaderProgram);
 	pProgram->loadVertexAndFragmentShader(textureClipVertexPath, Utility::texture3dFragmentPath);

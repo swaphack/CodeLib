@@ -1,5 +1,5 @@
 #include "Scene.h"
-#include "Common/View/View.h"
+#include "Common/View/import.h"
 #include "Graphic/import.h"
 
 using namespace render;
@@ -30,6 +30,8 @@ void Scene::visit()
 
 	// Ä£ÐÍ¾ØÕó
 	GLMatrix::applyModelView();
+
+	Camera::getMainCamera()->lookAt(math::Vector3());
 
 	this->drawNode();
 }

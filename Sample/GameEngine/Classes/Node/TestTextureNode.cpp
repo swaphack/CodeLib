@@ -23,7 +23,7 @@ void TestTextureNode::testMultiTexture()
 	pFrame->setPosition(0, 0);
 	pFrame->setAnchorPoint(0, 0);
 	pFrame->setVolume(300, 300);
-	Utility::loadShader(pFrame->getMaterials(), "Shader/multi_texture_vertex.glsl", "Shader/multi_texture_fragment.glsl");
+	Utility::loadShader(pFrame->getMaterials(), "Shader/multi_texture.vs", "Shader/multi_texture.fs");
 	Utility::initShaderAttrib(pFrame->getMaterials());
 
 	pFrame->getMaterials()->addTexture("texture0", "Resource/Image/1.jpg");

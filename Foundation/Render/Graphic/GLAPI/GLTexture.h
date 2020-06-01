@@ -147,5 +147,7 @@ namespace render
 		
 		static void setPixelTransfer(PixelTransfer name, float value);
 		static void setPixelMap(PixelMap name, int size, const float* value);
+
+		static void generateMipmap(MipmapTextureTarget target);
 	};
 }

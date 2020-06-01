@@ -2,8 +2,8 @@
 
 using namespace render;
 
-std::string Utility::texture3dVertexPath = "Shader/texture3d_vertex.glsl";
-std::string Utility::texture3dFragmentPath = "Shader/texture3d_fragment.glsl";
+std::string Utility::texture3dVertexPath = "Shader/texture3d.vs";
+std::string Utility::texture3dFragmentPath = "Shader/texture3d.fs";
 
 void Utility::loadShader(render::Materials* mats, const std::string& vpath, const std::string& fpath)
 {

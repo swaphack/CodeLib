@@ -65,6 +65,9 @@ void render::TextureCubeMap::load(int count, sys::ImageDetail** imageDetails, co
 	}
 
 	this->applyTextureSetting();
+
+	GLTexture::generateMipmap((MipmapTextureTarget)getTextureTarget());
+
 	GLDebug::showError();
 	this->unbindTexture();
 	GLDebug::showError();

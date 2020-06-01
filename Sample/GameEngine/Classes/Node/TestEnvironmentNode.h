@@ -13,4 +13,8 @@ protected:
 protected:
 	void init3DSkyBox();
 	void init2DSkyBox();
+
+	void testCubeMap();
+
+	void testImageShader();
 };

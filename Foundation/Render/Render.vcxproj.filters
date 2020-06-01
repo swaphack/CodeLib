@@ -465,6 +465,9 @@
     <ClCompile Include="Common\struct\enum_common.cpp">
       <Filter>Common\struct</Filter>
     </ClCompile>
+    <ClCompile Include="3d\Shape\CubeMap.cpp">
+      <Filter>3d\Shape</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Common\Node\import.h">
@@ -1079,6 +1082,9 @@
     </ClInclude>
     <ClInclude Include="Common\GPU\ShaderVariableType.h">
       <Filter>Common\GPU</Filter>
+    </ClInclude>
+    <ClInclude Include="3d\Shape\CubeMap.h">
+      <Filter>3d\Shape</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

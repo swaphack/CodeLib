@@ -8,8 +8,8 @@ namespace render
 	enum class CameraDimensions
 	{
 		NONE,
-		D2,
-		D3
+		TWO,
+		THREE
 	};
 
 	// 视窗参数
@@ -48,6 +48,9 @@ namespace render
 		const math::Matrix44& getProjectMatrix() const;
 		// 视图矩阵
 		const math::Matrix44& getViewMatrix() const;
+	public:
+		// 相机对准指定位置
+		virtual void lookAt(const math::Vector3& position);
 	public:
 		// 更新空间位置
 		virtual void visit();
@@ -93,9 +96,6 @@ namespace render
 		virtual ~Camera3D();
 	public:
 		virtual void updateView();
-	public:
-		// 相机对准指定位置
-		virtual void lookAt(const math::Vector3& position);
 	protected:
 		//视窗大小发生改变
 		virtual void updateViewPort();
