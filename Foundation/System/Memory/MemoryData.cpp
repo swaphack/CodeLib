@@ -164,7 +164,7 @@ void MemoryData::set(size_t offset, int size, const char* value)
 	{
 		return;
 	}
-	ASSERT((offset + size <= _length) && (offset + size > 0));
+	ASSERT((offset + size <= _length * _typeSize) && (offset + size > 0));
 
 	memcpy(_value + offset, value, size);
 }

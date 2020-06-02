@@ -149,5 +149,6 @@ namespace render
 		static void setPixelMap(PixelMap name, int size, const float* value);
 
 		static void generateMipmap(MipmapTextureTarget target);
+		static void generateTextureMipmap(uint32_t texture);
 	};
 }

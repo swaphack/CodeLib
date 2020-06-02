@@ -21,6 +21,8 @@ private:
 
 	void testMultiFaceCube();
 
+	void testCubeMap();
+
 	void testFog();
 	void testCamera();
 

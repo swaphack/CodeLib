@@ -66,7 +66,7 @@ void render::CubeMap::onCubeChanged()
 	for (int i = 0; i < (int)CubeFace::MAX; i++)
 	{
 		CubeFace face = (CubeFace)i;
-		const auto* pRectVertex = _cubePosition.getFaceVertex(face);
+		const auto* pRectVertex = _cubePosition.getCubMapFaceVertex(face);
 		if (!pRectVertex)
 		{
 			continue;

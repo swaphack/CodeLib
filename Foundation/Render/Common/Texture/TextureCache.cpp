@@ -3,6 +3,7 @@
 #include "Texture2D.h"
 #include "TextureCubeMap.h"
 #include "system.h"
+#include "Common/struct/enum_common.h"
 
 using namespace render;
 
@@ -143,6 +144,15 @@ TextureCubeMap* render::TextureCache::createTextureCubeMap(int count, const std:
 			continue;
 		}
 		sys::ImageDetail* imageDetail = loadImageDetail(images[i]);
+		if (imageDetail)
+		{
+			CubeFace face = (CubeFace)i;
+			if (face != CubeFace::TOP && face != CubeFace::BOTTOM)
+			{
+				imageDetail->flipY();
+				imageDetail->flipX();
+			}
+		}
 		imageDetails[i] = imageDetail;
 	}
 

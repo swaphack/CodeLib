@@ -363,9 +363,6 @@
     <ClCompile Include="Common\BufferObject\BufferObject.cpp">
       <Filter>Common\BufferObject</Filter>
     </ClCompile>
-    <ClCompile Include="Common\BufferObject\TransformFeedbackObject.cpp">
-      <Filter>Common\BufferObject</Filter>
-    </ClCompile>
     <ClCompile Include="Common\BufferObject\VertexArrayObject.cpp">
       <Filter>Common\BufferObject</Filter>
     </ClCompile>
@@ -467,6 +464,27 @@
     </ClCompile>
     <ClCompile Include="3d\Shape\CubeMap.cpp">
       <Filter>3d\Shape</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\BufferObject\FrameBuffer.cpp">
+      <Filter>Common\BufferObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\BufferObject\RenderBuffer.cpp">
+      <Filter>Common\BufferObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\BufferObject\NamedFrameBuffer.cpp">
+      <Filter>Common\BufferObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\BufferObject\NoNamedFrameBuffer.cpp">
+      <Filter>Common\BufferObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\BufferObject\TransformFeedback.cpp">
+      <Filter>Common\BufferObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\BufferObject\NamedRenderBuffer.cpp">
+      <Filter>Common\BufferObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\BufferObject\NoNamedRenderBuffer.cpp">
+      <Filter>Common\BufferObject</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -966,9 +984,6 @@
     <ClInclude Include="Common\BufferObject\BufferObject.h">
       <Filter>Common\BufferObject</Filter>
     </ClInclude>
-    <ClInclude Include="Common\BufferObject\TransformFeedbackObject.h">
-      <Filter>Common\BufferObject</Filter>
-    </ClInclude>
     <ClInclude Include="Common\BufferObject\import.h">
       <Filter>Common\BufferObject</Filter>
     </ClInclude>
@@ -1085,6 +1100,27 @@
     </ClInclude>
     <ClInclude Include="3d\Shape\CubeMap.h">
       <Filter>3d\Shape</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\BufferObject\FrameBuffer.h">
+      <Filter>Common\BufferObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\BufferObject\RenderBuffer.h">
+      <Filter>Common\BufferObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\BufferObject\NamedFrameBuffer.h">
+      <Filter>Common\BufferObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\BufferObject\NoNamedFrameBuffer.h">
+      <Filter>Common\BufferObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\BufferObject\TransformFeedback.h">
+      <Filter>Common\BufferObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\BufferObject\NamedRenderBuffer.h">
+      <Filter>Common\BufferObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\BufferObject\NoNamedRenderBuffer.h">
+      <Filter>Common\BufferObject</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

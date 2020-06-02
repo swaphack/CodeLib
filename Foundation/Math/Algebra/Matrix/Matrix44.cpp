@@ -280,58 +280,62 @@ math::Matrix44& math::Matrix44::operator=(const Matrix33& mat)
 	return *this;
 }
 
-math::Matrix44 math::Matrix44::ortho(float l, float r, float b, float t, float n, float f)
+math::Matrix44 math::Matrix44::ortho(float left, float right, float bottom, float top,
+	float znear, float zfar)
 {
 	math::Matrix44 mat;
 
-	mat[0] = 2 / (r - l);
-	mat[5] = 2 / (t - b);
-	mat[10] = -2 / (f - n);
+	mat[0] = 2 / (right - left);
+	mat[5] = 2 / (top - bottom);
+	mat[10] = -2 / (zfar - znear);
 	
-	mat[12] = -(r + l) / (r - l);
-	mat[13] = -(t + b) / (t - b);
-	mat[14] = -(f + n) / (f - n);
+	mat[12] = -(right + left) / (right - left);
+	mat[13] = -(top + bottom) / (top - bottom);
+	mat[14] = -(zfar + znear) / (zfar - znear);
 
 	return mat;
 }
 
-math::Matrix44 math::Matrix44::perspective(float l, float r, float b, float t, float n, float f)
+math::Matrix44 math::Matrix44::frustum(float left, float right, float bottom, float top,
+	float znear, float zfar)
 {
 	math::Matrix44 mat;
 
-	mat[0] = 2.0f * n / (r - l);
-	mat[2] = (r + l) / (r - l);
-	mat[5] = 2.0f * n / (t - b);
-	mat[6] = (t + b) / (t - b);
-	mat[10] = -(f + n) / (f - n);
-	mat[11] = -(2.0f * f * n) / (f - n);
-	mat[14] = -1.0f;
-	mat[15] = 0.0f;
+	float temp, temp2, temp3, temp4;
+	temp = 2.0 * znear;
+	temp2 = right - left;
+	temp3 = top - bottom;
+	temp4 = zfar - znear;
+	mat[0] = temp / temp2;
+	mat[1] = 0.0;
+	mat[2] = 0.0;
+	mat[3] = 0.0;
+	mat[4] = 0.0;
+	mat[5] = temp / temp3;
+	mat[6] = 0.0;
+	mat[7] = 0.0;
+	mat[8] = (right + left) / temp2;
+	mat[9] = (top + bottom) / temp3;
+	mat[10] = (-zfar - znear) / temp4;
+	mat[11] = -1.0;
+	mat[12] = 0.0;
+	mat[13] = 0.0;
+	mat[14] = (-temp * zfar) / temp4;
+	mat[15] = 0.0;
 
 	return mat;
 }
 
-math::Matrix44 math::Matrix44::verticalPerspective(float fov, float aspect, float front, float back)
+math::Matrix44 math::Matrix44::perspective(float fovyInDegrees, float aspectRatio, float znear, float zfar)
 {
-	fov = ANGLE_TO_RADIAN(fov);                      // transform fov from degrees to radians
+	float ymax, xmax;
+	float temp, temp2, temp3, temp4;
+	ymax = znear * tanf(fovyInDegrees * M_PI / 360.0);
+	// ymin = -ymax;
+	// xmin = -ymax * aspectRatio;
+	xmax = ymax * aspectRatio;
 
-	float tangent = tanf(fov / 2.0f);               // tangent of half vertical fov
-	float height = front * tangent;                 // half height of near plane
-	float width = height * aspect;                  // half width of near plane
-
-	return perspective(-width, width, -height, height, front, back);
-}
-
-math::Matrix44 math::Matrix44::horizontalPerspective(float fov, float aspect, float front, float back)
-{
-	fov = ANGLE_TO_RADIAN(fov);                      // transform fov from degrees to radians
-	fov = 2.0f * atanf(tanf(fov * 0.5f) / aspect);  // transform from horizontal fov to vertical fov
-
-	float tangent = tanf(fov / 2.0f);               // tangent of half vertical fov
-	float height = front * tangent;                 // half height of near plane
-	float width = height * aspect;                  // half width of near plane
-
-	return perspective(-width, width, -height, height, front, back);
+	return frustum(-xmax, xmax, -ymax, ymax, znear, zfar);
 }
 
 math::Matrix44 math::Matrix44::lookAt(const Vector3& eye, const Vector3& center, const Vector3& up)

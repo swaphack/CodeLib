@@ -1,5 +1,6 @@
 #include "TestModelNode.h"
 #include "system.h"
+#include "Utility.h"
 
 using namespace sys;
 using namespace render;
@@ -17,28 +18,23 @@ TestModelNode::~TestModelNode()
 void TestModelNode::testFunc()
 {
 	this->testCubeModel();
-	//this->test3ds();
-	//this->testFbx();
+	this->testCubeMap();
+
 	this->testObj();
 }
 
 void TestModelNode::testCubeModel()
 {
 	std::string filepath = "Resource/Image/NeHe.png";
-	std::string filepath1 = "Resource/Image/1.jpg";
 
-	MultiFaceCube* pModel = CREATE_NODE(MultiFaceCube);
-	pModel->setAllFacesImage(filepath);
-	pModel->setFaceImage(CubeFace::FRONT, filepath1);
-	pModel->setFaceImage(CubeFace::LEFT, filepath1);
-	pModel->setFaceImage(CubeFace::TOP, filepath1);
+	render::Cube* pModel = CREATE_NODE(render::Cube);
+	pModel->setFaceImage(filepath);
 
 	pModel->setAnchorPoint(math::Vector3(0.5f, 0.5f, 0.5f));
 	pModel->setPosition(200, 200, -50);
 	pModel->setVolume(200, 200, 200);
 	this->addChild(pModel);
 
-	// has bug
 	RotateByAction* pRotateByAction = CREATE_ACTION(RotateByAction);
 	pRotateByAction->setRotation(0, 45, 0);
 	pRotateByAction->setDuration(5);
@@ -51,6 +47,7 @@ void TestModelNode::testCubeModel()
 
 void TestModelNode::testSphereModel()
 {
+	
 }
 
 void TestModelNode::addLight()
@@ -66,7 +63,56 @@ void TestModelNode::addLight()
 
 void TestModelNode::testMultiFaceCube()
 {
-	
+	std::string filepath = "Resource/Image/NeHe.png";
+	std::string filepath1 = "Resource/Image/1.jpg";
+
+	MultiFaceCube* pModel = CREATE_NODE(MultiFaceCube);
+	pModel->setAllFacesImage(filepath);
+	pModel->setFaceImage(CubeFace::FRONT, filepath1);
+	pModel->setFaceImage(CubeFace::LEFT, filepath1);
+	pModel->setFaceImage(CubeFace::TOP, filepath1);
+
+	pModel->setAnchorPoint(math::Vector3(0.5f, 0.5f, 0.5f));
+	pModel->setPosition(200, 200, -50);
+	pModel->setVolume(200, 200, 200);
+	this->addChild(pModel);
+
+	RotateByAction* pRotateByAction = CREATE_ACTION(RotateByAction);
+	pRotateByAction->setRotation(0, 45, 0);
+	pRotateByAction->setDuration(5);
+
+	RepeateForeverAction* pRepeateAction = CREATE_ACTION(RepeateForeverAction);
+	pRepeateAction->setAction(pRotateByAction);
+
+	pModel->getActionProxy()->runAction(pRepeateAction);
+}
+
+void TestModelNode::testCubeMap()
+{
+	render::CubeMap* pCubMap = CREATE_NODE(render::CubeMap);
+	pCubMap->setFaceImage(CubeFace::LEFT, "Resource/skybox/left.jpg");
+	pCubMap->setFaceImage(CubeFace::RIGHT, "Resource/skybox/right.jpg");
+	pCubMap->setFaceImage(CubeFace::FRONT, "Resource/skybox/front.jpg");
+	pCubMap->setFaceImage(CubeFace::BACK, "Resource/skybox/back.jpg");
+	pCubMap->setFaceImage(CubeFace::TOP, "Resource/skybox/top.jpg");
+	pCubMap->setFaceImage(CubeFace::BOTTOM, "Resource/skybox/bottom.jpg");
+
+	//pSkyBox->setScale(0.25f);
+	pCubMap->setVolume(512, 384, 512);
+	pCubMap->setPosition(0, 0, 0);
+	pCubMap->setAnchorPoint(0.5f, 0.5f, 0.5f);
+	this->addChild(pCubMap);
+
+	Utility::loadShader(pCubMap->getMaterials(), "Shader/cubemap.vs", "Shader/cubemap.fs");
+
+	RotateByAction* pAction = CREATE_ACTION(RotateByAction);
+	pAction->setRotation(1, 1, 1);
+	pAction->setDuration(1);
+
+	RepeateForeverAction* pRepeateAction = CREATE_ACTION(RepeateForeverAction);
+	pRepeateAction->setAction(pAction);
+
+	pCubMap->getActionProxy()->runAction(pRepeateAction);
 }
 
 void TestModelNode::testFog()

@@ -6,7 +6,7 @@
 namespace render
 {
 	class ShaderProgram;
-	class TransformFeedbackObject;
+	class TransformFeedback;
 	class TransformFeedbackBuffer;
 	class ShaderDocument;
 	class VertexArrayObject;
@@ -37,7 +37,7 @@ namespace render
 		/**
 		*	xfb对象
 		*/
-		TransformFeedbackObject* _xfbObject = nullptr;
+		TransformFeedback* _xfbObject = nullptr;
 		/**
 		*	xfb缓存数据
 		*/

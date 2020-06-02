@@ -1,6 +1,7 @@
 #include "Scene.h"
 #include "Common/View/import.h"
 #include "Graphic/import.h"
+#include "Common/Tool/Tool.h"
 
 using namespace render;
 
@@ -31,7 +32,12 @@ void Scene::visit()
 	// Ä£ÐÍ¾ØÕó
 	GLMatrix::applyModelView();
 
-	//Camera::getMainCamera()->lookAt(math::Vector3());
+	
+	if (Camera::getMainCamera()->getDimensions() == CameraDimensions::THREE)
+	{
+		auto size = Tool::getGLViewSize();
+		Camera::getMainCamera()->lookAt(math::Vector3(0, 0));
+	}
 
 	this->drawNode();
 }

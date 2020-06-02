@@ -108,9 +108,10 @@ void Camera::updateView()
 
 void Camera::startUpdateTranform()
 {
+	//PRINT("%s\n", _worldMatrix.toString().c_str());
 	GLMatrix::loadIdentity();
 
-	GLMatrix::multMatrix(_worldMatrix);
+	//GLMatrix::multMatrix(_worldMatrix);
 
 	GLDebug::showError();
 }
@@ -133,8 +134,9 @@ const math::Matrix44& render::Camera::getViewMatrix() const
 math::Matrix44 render::Camera::lookAt(const math::Vector3& position)
 {
 	math::Vector3 pos = this->getPosition();
-	pos.setZ(-pos.getZ());
 	math::Matrix44 mat = math::Matrix44::lookAt(pos, position, math::Vector3(0, 1, 0));
+	//PRINT("%s\n", mat.toString().c_str());
+	//GLMatrix::multMatrix(mat);
 	return mat;
 }
 
@@ -173,7 +175,7 @@ void render::Camera2D::updateViewPort()
 	float y = size.getHeight();
 	float z = size.getDepth();
 	//float zh = z * 0.5f;
-	this->setViewPortParams(0, x, 0, y, -1, 2 * z);
+	this->setViewPortParams(0, x, 0, y, 0, 2 * z);
 
 	const CameraParams& params = getViewPortParams();
 	_projectMat = math::Matrix44::ortho(params.xLeft, params.xRight, params.yBottom, params.yTop, params.zNear, params.zFar);
@@ -213,12 +215,10 @@ void render::Camera3D::updateViewPort()
 	float xh = x * 0.5f;
 	float yh = y * 0.5f;
 	float zh = z * 0.5f;
-	this->setViewPortParams(-xh, xh, -yh, yh, z, z * 100);
-	this->setViewPortParams(0, x, 0, y, 0.1f, 20.0f * z);
-
-	this->setPositionZ(-5 * z);
+	this->setViewPortParams(-xh, xh, -yh, yh, 0.1f, z * 100);
+	//this->setViewPortParams(0, x, 0, y, 0.1f, z * 100);
 
 	const CameraParams& params = getViewPortParams();
-	_projectMat = math::Matrix44::perspective(params.xLeft, params.xRight, params.yBottom, params.yTop, params.zNear, params.zFar);
+	_projectMat = math::Matrix44::frustum(params.xLeft, params.xRight, params.yBottom, params.yTop, params.zNear, params.zFar);
 }
 

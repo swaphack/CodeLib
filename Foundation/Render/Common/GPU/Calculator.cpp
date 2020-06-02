@@ -12,7 +12,7 @@ render::Calculator::Calculator()
 	_shaderProgram = CREATE_OBJECT(ShaderProgram);
 	SAFE_RETAIN(_shaderProgram);
 
-	_xfbObject = CREATE_OBJECT(TransformFeedbackObject);
+	_xfbObject = CREATE_OBJECT(TransformFeedback);
 	SAFE_RETAIN(_xfbObject);
 
 	_xfbBuffer = CREATE_OBJECT(TransformFeedbackBuffer);

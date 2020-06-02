@@ -94,22 +94,16 @@ namespace math
 		// set a ortho (right hand)
 		// (left, right, bottom, top, near, far)
 		//--------------------------------------------------------------------------------
-		static Matrix44 ortho(float l, float r, float b, float t, float n, float f);
+		static Matrix44 ortho(float left, float right, float bottom, float top,
+			float znear, float zfar);
 		//--------------------------------------------------------------------------------
 		// set a perspective frustum (right hand)
 		// (left, right, bottom, top, near, far)
 		//--------------------------------------------------------------------------------
-		static Matrix44 perspective(float l, float r, float b, float t, float n, float f);
-		//--------------------------------------------------------------------------------
-		// set a symmetric perspective frustum
-		// ((vertical, degrees) field of view, (width/height) aspect ratio, near, far)
-		//--------------------------------------------------------------------------------
-		static Matrix44 verticalPerspective(float fov, float aspect, float front, float back);
-		//--------------------------------------------------------------------------------
-		// set a symmetric perspective frustum
-		// ((horizontal, degrees) field of view, (width/height) aspect ratio, near, far)
-		//--------------------------------------------------------------------------------
-		static Matrix44 horizontalPerspective(float fov, float aspect, float front, float back);
+		static Matrix44 frustum(float left, float right, float bottom, float top,
+			float znear, float zfar);
+
+		static Matrix44 perspective(float fovyInDegrees, float aspectRatio,	float znear, float zfar);
 
 		static Matrix44 lookAt(const Vector3& eye, const Vector3& center, const Vector3& up);
 		// rst

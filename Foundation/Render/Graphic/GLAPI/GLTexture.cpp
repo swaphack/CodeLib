@@ -485,3 +485,8 @@ void render::GLTexture::generateMipmap(MipmapTextureTarget target)
 {
 	glGenerateMipmap((GLenum)target);
 }
+
+void render::GLTexture::generateTextureMipmap(uint32_t texture)
+{
+	glGenerateTextureMipmap(texture);
+}

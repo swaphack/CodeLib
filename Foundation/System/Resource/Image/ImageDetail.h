@@ -31,6 +31,12 @@ namespace sys
 		ImageDataFormat getDataFormat() const;
 		// 获取图片像素数据
 		uint8_t * getPixels() const;
+		// 获取像素单位大小
+		uint8_t getUnitSize();
+		// 水平翻转
+		void flipX();
+		// 垂直翻转
+		void flipY();
 	protected:
 		// 设置图片格式 一个像素所有的rgba类型
 		void setDataFormat(ImageDataFormat val);

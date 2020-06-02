@@ -9,7 +9,7 @@ namespace render
 {
 	class ParticleSystem;
 	class ShaderProgram;
-	class TransformFeedbackObject;
+	class TransformFeedback;
 	class TransformFeedbackBuffer;
 	class VertexArrayObject;
 	class ArrayBuffer;
@@ -22,7 +22,7 @@ namespace render
 		ShaderProgram* program = nullptr;
 		ParticleShaderFunc func = nullptr;
 
-		TransformFeedbackObject* xfbo = nullptr;
+		TransformFeedback* xfbo = nullptr;
 		TransformFeedbackBuffer* xfbb = nullptr;
 
 		VertexArrayObject* vao = nullptr;

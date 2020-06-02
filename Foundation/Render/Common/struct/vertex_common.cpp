@@ -180,8 +180,6 @@ void CubeVertex::setBackLeftUpPosition(const math::Vector3& point)
 
 const RectVertex* render::CubeVertex::getFaceVertex(CubeFace face) const
 {
-	// TODO: 在此处插入 return 语句
-
 	switch (face)
 	{
 	case render::CubeFace::RIGHT:
@@ -201,6 +199,34 @@ const RectVertex* render::CubeVertex::getFaceVertex(CubeFace face) const
 		break;
 	case render::CubeFace::BACK:
 		return &back;
+		break;
+	default:
+		break;
+	}
+	return nullptr;
+}
+
+const render::RectVertex* render::CubeVertex::getCubMapFaceVertex(CubeFace face) const
+{
+	switch (face)
+	{
+	case render::CubeFace::RIGHT:
+		return &right;
+		break;
+	case render::CubeFace::LEFT:
+		return &left;
+		break;
+	case render::CubeFace::TOP:
+		return &top;
+		break;
+	case render::CubeFace::BOTTOM:
+		return &bottom;
+		break;
+	case render::CubeFace::FRONT:
+		return &back;
+		break;
+	case render::CubeFace::BACK:
+		return &front;
 		break;
 	default:
 		break;

@@ -150,7 +150,7 @@ void render::Texture::generateTextureMipMap()
 		return;
 	}
 
-	GLFrameBuffer::generateTextureMipmap(_textureID);
+	GLTexture::generateTextureMipmap(_textureID);
 }
 
 void render::Texture::getTextureFormat(sys::ImageDataFormat imgFormat, TextureExternalFormat& format, TextureInternalSizedFormat& internalFormat, int& size)

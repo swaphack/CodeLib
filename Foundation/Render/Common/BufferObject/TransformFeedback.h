@@ -12,11 +12,11 @@ namespace render
 	/**
 	*	顶点反馈对象
 	*/
-	class TransformFeedbackObject : public BufferObject
+	class TransformFeedback : public BufferObject
 	{
 	public:
-		TransformFeedbackObject();
-		virtual ~TransformFeedbackObject();
+		TransformFeedback();
+		virtual ~TransformFeedback();
 	public:
 		uint32_t getTransformFeedbackID() const;
 		/**

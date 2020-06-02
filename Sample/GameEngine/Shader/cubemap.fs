@@ -10,5 +10,5 @@ void main()
 {
 	color = texture(texSampler0, fragmentPosition);
 
-	//color = vec4(fragmentUV, 1.0);
+	//color = vec4(fragmentPosition, 1.0);
 }

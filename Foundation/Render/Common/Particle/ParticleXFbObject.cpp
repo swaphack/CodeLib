@@ -11,7 +11,7 @@
 render::ParticleXFbObject::ParticleXFbObject()
 {
 	program = CREATE_OBJECT(ShaderProgram);
-	xfbo = CREATE_OBJECT(TransformFeedbackObject);
+	xfbo = CREATE_OBJECT(TransformFeedback);
 	xfbb = CREATE_OBJECT(TransformFeedbackBuffer);
 
 	vao = CREATE_OBJECT(VertexArrayObject);

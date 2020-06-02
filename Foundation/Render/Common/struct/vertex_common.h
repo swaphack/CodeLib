@@ -74,5 +74,7 @@ namespace render
 		void setBackLeftUpPosition(const math::Vector3& point);
 
 		const RectVertex* getFaceVertex(CubeFace face) const;
+
+		const RectVertex* getCubMapFaceVertex(CubeFace face) const;
 	};
 }

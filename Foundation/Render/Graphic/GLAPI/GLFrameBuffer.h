@@ -7,56 +7,85 @@ namespace render
 	class GLFrameBuffer
 	{
 	public:
-		static void bindVertexArray(FrameBufferTarget target, uint32_t ary);
-		static void		bindRenderbuffer(RenderBufferTarget target, uint32_t renderBuffer);
-		static void 	blitFramebuffer(uint32_t srcX0, uint32_t srcY0, uint32_t srcX1, uint32_t srcY1,
+		static uint32_t createFrameBuffer();
+		static void createFrameBuffers(int n, uint32_t* ids);
+
+		static void deleteFrameBuffer(uint32_t framebuffer);
+		static void deleteFrameBuffers(int n, uint32_t* framebuffers);
+
+	public:
+		static uint32_t	genFrameBuffer();
+		static void genFrameBuffers(int n, uint32_t* ids);
+	public:
+		static bool isFrameBuffer(uint32_t framebuffer);
+
+		static void bindFramebuffer(FrameBufferTarget target, uint32_t frameBuffer);
+	public:
+		static void blitFrameBuffer(uint32_t srcX0, uint32_t srcY0, uint32_t srcX1, uint32_t srcY1,
 			uint32_t dstX0, uint32_t dstY0, uint32_t dstX1, uint32_t dstY1,
 			uint32_t mask, BlitFrameBufferFilter filter);
-		static void 	blitNamedFramebuffer(uint32_t readFramebuffer, uint32_t drawFramebuffer,
+		static void blitNamedFrameBuffer(uint32_t readFrameBuffer, uint32_t drawFrameBuffer,
 			uint32_t srcX0, uint32_t srcY0, uint32_t srcX1, uint32_t srcY1,
 			uint32_t dstX0, uint32_t dstY0, uint32_t dstX1, uint32_t dstY1,
 			uint32_t mask, BlitFrameBufferFilter filter);
-		static void 	checkFramebufferStatus(FrameBufferTarget target);
-		static void 	checkNamedFramebufferStatus(uint32_t framebuffer, FrameBufferTarget target);
-		static void 	createFramebuffers(int n, uint32_t *ids);
-		static void 	createRenderbuffers(int n, uint32_t *ids);
-		static void 	deleteFramebuffers(int n, uint32_t *framebuffers);
-		static void 	deleteRenderbuffers(int n, uint32_t *renderBuffers);
-		static void 	setDrawBuffers(int n, const DrawBufferType* bufs);
-		static void 	setNamedFramebufferDrawBuffers(uint32_t framebuffer, int n, const DrawBufferType* bufs);
-		static void 	setFramebufferParameter(FrameBufferTarget target, FramebufferParameter name, int value);
-		static void 	setNamedFramebufferParameter(uint32_t framebuffer, FramebufferParameter name, int value);
-		static void 	setFramebufferRenderbuffer(FrameBufferTarget target, FramebufferAttachment attachment, RenderBufferTarget rbTarget, uint32_t renderBuffer);
-		static void 	setNamedFramebufferRenderbuffer(uint32_t framebuffer, FramebufferAttachment attachment, RenderBufferTarget rbTarget, uint32_t renderBuffer);
-		static void 	setFramebufferTexture(FrameBufferTarget target, FramebufferAttachment attachment, uint32_t texture, int level);
-		static void 	setFramebufferTexture1D(FrameBufferTarget target, FramebufferAttachment attachment, uint32_t texture, int level);
-		static void 	setFramebufferTexture2D(FrameBufferTarget target, FramebufferAttachment attachment, uint32_t texture, int level);
-		static void 	setFramebufferTexture3D(FrameBufferTarget target, FramebufferAttachment attachment, uint32_t texture, int level);
-		static void 	setNamedFramebufferTexture(uint32_t framebuffer, FramebufferAttachment attachment, uint32_t texture, int level);
 
-		static void 	setFramebufferTextureLayer(FrameBufferTarget target, FramebufferAttachment attachment, uint32_t texture, int level, int layer);
-		static void 	setNamedFramebufferTextureLayer(uint32_t framebuffer, FramebufferAttachment attachment, uint32_t texture, int level, int layer);
-
-		static void 	genFramebuffers(int n, uint32_t* ids);
-		static void 	genRenderbuffers(int n, uint32_t* renderbuffers);
+		static GLenum checkFrameBufferStatus(FrameBufferTarget target);
+		static GLenum checkNamedFrameBufferStatus(uint32_t framebuffer, FrameBufferTarget target);
 		
-		static void 	generateTextureMipmap(uint32_t texture);
-		static void 	getFramebufferAttachmentParameter(FrameBufferTarget target, FramebufferAttachment attachment, FramebufferAttachmentParameter name, int* params);
-		static void 	getNamedFramebufferAttachmentParameter(uint32_t framebuffer, FramebufferAttachment attachment, FramebufferAttachmentParameter name, int* params);
+	public:
+		static void setDrawBuffers(int n, const DrawBufferType* bufs);
+	public:
+		static void setNamedFrameBufferDrawBuffers(uint32_t framebuffer, int n, const DrawBufferType* bufs);
+		static void setNamedFrameBufferParameter(uint32_t framebuffer, FrameBufferParameter name, int value);
+		static void setNamedFrameBufferRenderBuffer(uint32_t framebuffer, FrameBufferAttachment attachment, RenderBufferTarget rbTarget, uint32_t renderBuffer);
+		static void setNamedFrameBufferTexture(uint32_t framebuffer, FrameBufferAttachment attachment, uint32_t texture, int level);
+		static void setNamedFrameBufferTextureLayer(uint32_t framebuffer, FrameBufferAttachment attachment, uint32_t texture, int level, int layer);
 
-		static void 	getFramebufferParameter(FrameBufferTarget target, AllFramebufferParameter name, int *params);
-		static void 	getNamedFramebufferParameter(uint32_t framebuffer, FramebufferParameter name, int *params);
-		static void 	getRenderbufferParameter(RenderBufferTarget target, RenderbufferParameter name, int *params);
-		static void 	getNamedRenderbufferParameter(uint32_t renderbuffer, RenderbufferParameter name, int *params);
-		static void 	invalidateFramebuffer(FrameBufferTarget target, int num, const FramebufferAttachment* attachments);
-		static void 	invalidateNamesFramebuffer(uint32_t framebuffer, int num, const FramebufferAttachment* attachments);
-		static void 	invalidateSubFramebuffer(FrameBufferTarget target, int num, const FramebufferAttachment* attachments, int x, int y, int width, int height);
-		static void 	invalidateNamedFramebufferSubData(uint32_t framebuffer, int num, const FramebufferAttachment* attachments, int x, int y, int width, int height);
-		static bool 	isFramebuffer(uint32_t framebuffer);
-		static bool 	isRenderbuffer(uint32_t renderbuffer);
-		static void 	setRenderbufferStorage(RenderBufferTarget target, InternalImageFormat format, int width, int height);
-		static void 	setNamedRenderbufferStorage(uint32_t renderbuffer, InternalImageFormat format, int width, int height);
-		static void 	setRenderbufferStorageMultisample(RenderBufferTarget target, int samples, InternalImageFormat format, int width, int height);
-		static void 	setNamedRenderbufferStorageMultisample(uint32_t renderbuffer, int samples, InternalImageFormat format, int width, int height);
+		static void setFrameBufferParameter(FrameBufferTarget target, FrameBufferParameter name, int value);
+		static void setFrameBufferRenderBuffer(FrameBufferTarget target, FrameBufferAttachment attachment, RenderBufferTarget rbTarget, uint32_t renderBuffer);
+		static void setFrameBufferTexture(FrameBufferTarget target, FrameBufferAttachment attachment, uint32_t texture, int level);
+		static void setFrameBufferTexture1D(FrameBufferTarget target, FrameBufferAttachment attachment, uint32_t texture, int level);
+		static void setFrameBufferTexture2D(FrameBufferTarget target, FrameBufferAttachment attachment, uint32_t texture, int level);
+		static void setFrameBufferTexture3D(FrameBufferTarget target, FrameBufferAttachment attachment, uint32_t texture, int level);
+		static void setFrameBufferTextureLayer(FrameBufferTarget target, FrameBufferAttachment attachment, uint32_t texture, int level, int layer);
+		
+	
+	public:
+		static void invalidateFrameBuffer(FrameBufferTarget target, int num, const FrameBufferAttachment* attachments);
+
+		static void invalidateSubFrameBuffer(FrameBufferTarget target, int num, const FrameBufferAttachment* attachments, int x, int y, int width, int height);
+
+		static void invalidateNamedFrameBuffer(uint32_t framebuffer, int num, const FrameBufferAttachment* attachments);
+		static void invalidateNamedFrameBufferSubData(uint32_t framebuffer, int num, const FrameBufferAttachment* attachments, int x, int y, int width, int height);
+	
+	public:
+		static void getFrameBufferAttachmentParameter(FrameBufferTarget target, FrameBufferAttachment attachment, FrameBufferAttachmentParameter name, int* params);
+		static void getFrameBufferParameter(FrameBufferTarget target, FrameBufferParameter name, int* params);
+
+		static void getNamedFrameBufferAttachmentParameter(uint32_t framebuffer, FrameBufferAttachment attachment, FrameBufferAttachmentParameter name, int* params);
+		static void getNamedFrameBufferParameter(uint32_t framebuffer, FrameBufferParameter name, int* params);
+
+		//////////////////////////////////////////////////////////////////////////
+	public:
+		static void	bindRenderBuffer(RenderBufferTarget target, uint32_t renderBuffer);
+
+		static uint32_t	genRenderBuffer();
+		static void genRenderBuffers(int n, uint32_t* renderbuffers);
+
+		static uint32_t createRenderBuffer();
+		static void createRenderBuffers(int n, uint32_t* ids);
+
+		static void deleteRenderBuffer(uint32_t renderBuffer);
+		static void deleteRenderBuffers(int n, uint32_t* renderBuffers);
+	public:
+		static void setRenderBufferStorage(RenderBufferTarget target, InternalImageFormat format, int width, int height);
+		static void setRenderBufferStorageMultisample(RenderBufferTarget target, int samples, InternalImageFormat format, int width, int height);
+		static void getRenderBufferParameter(RenderBufferTarget target, RenderBufferParameter name, int* params);
+	
+		static bool isRenderBuffer(uint32_t renderbuffer);
+	public:
+		static void setNamedRenderBufferStorage(uint32_t renderbuffer, InternalImageFormat format, int width, int height);
+		static void getNamedRenderBufferParameter(uint32_t renderbuffer, RenderBufferParameter name, int* params);
+		static void setNamedRenderBufferStorageMultisample(uint32_t renderbuffer, int samples, InternalImageFormat format, int width, int height);
 	};
 }
