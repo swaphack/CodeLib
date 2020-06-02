@@ -1,9 +1,10 @@
 #include "ParticleSystem.h"
 #include "Common/Buffer/import.h"
-#include "Common/BufferObject/import.h"
+#include "Common/VAO/import.h"
 #include "Common/Texture/import.h"
 #include "Common/Shader/import.h"
 #include "Graphic/import.h"
+#include "Common/XFB/TransformFeedback.h"
 
 render::ParticleSystem::ParticleSystem()
 {

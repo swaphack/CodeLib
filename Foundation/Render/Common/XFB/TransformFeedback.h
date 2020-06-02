@@ -2,7 +2,7 @@
 
 #include <cstdint>
 #include "Graphic/GLAPI/macros.h"
-#include "BufferObject.h"
+#include "Common/Buffer/BufferObject.h"
 
 namespace render
 {

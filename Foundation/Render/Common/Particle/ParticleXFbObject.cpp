@@ -3,10 +3,11 @@
 #include "Common/Transform/import.h"
 #include "Common/Shader/import.h"
 #include "Common/Buffer/import.h"
-#include "Common/BufferObject/import.h"
+#include "Common/VAO/import.h"
 #include "Graphic/import.h"
 #include "Common/Tool/Tool.h"
 #include "Common/Texture/import.h"
+#include "Common/XFB/TransformFeedback.h"
 
 render::ParticleXFbObject::ParticleXFbObject()
 {

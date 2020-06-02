@@ -360,21 +360,6 @@
     <ClCompile Include="Common\Particle\ParticleSystem.cpp">
       <Filter>Common\Particle</Filter>
     </ClCompile>
-    <ClCompile Include="Common\BufferObject\BufferObject.cpp">
-      <Filter>Common\BufferObject</Filter>
-    </ClCompile>
-    <ClCompile Include="Common\BufferObject\VertexArrayObject.cpp">
-      <Filter>Common\BufferObject</Filter>
-    </ClCompile>
-    <ClCompile Include="Common\BufferObject\VertexAttrib.cpp">
-      <Filter>Common\BufferObject</Filter>
-    </ClCompile>
-    <ClCompile Include="Common\BufferObject\VertexAttribPointer.cpp">
-      <Filter>Common\BufferObject</Filter>
-    </ClCompile>
-    <ClCompile Include="Common\BufferObject\VertexArrayAttrib.cpp">
-      <Filter>Common\BufferObject</Filter>
-    </ClCompile>
     <ClCompile Include="Common\Texture\Texture2D.cpp">
       <Filter>Common\Texture</Filter>
     </ClCompile>
@@ -465,26 +450,41 @@
     <ClCompile Include="3d\Shape\CubeMap.cpp">
       <Filter>3d\Shape</Filter>
     </ClCompile>
-    <ClCompile Include="Common\BufferObject\FrameBuffer.cpp">
-      <Filter>Common\BufferObject</Filter>
+    <ClCompile Include="Common\XFB\TransformFeedback.cpp">
+      <Filter>Common\XFB</Filter>
     </ClCompile>
-    <ClCompile Include="Common\BufferObject\RenderBuffer.cpp">
-      <Filter>Common\BufferObject</Filter>
+    <ClCompile Include="Common\VAO\VertexArrayAttrib.cpp">
+      <Filter>Common\VAO</Filter>
     </ClCompile>
-    <ClCompile Include="Common\BufferObject\NamedFrameBuffer.cpp">
-      <Filter>Common\BufferObject</Filter>
+    <ClCompile Include="Common\VAO\VertexArrayObject.cpp">
+      <Filter>Common\VAO</Filter>
     </ClCompile>
-    <ClCompile Include="Common\BufferObject\NoNamedFrameBuffer.cpp">
-      <Filter>Common\BufferObject</Filter>
+    <ClCompile Include="Common\VAO\VertexAttrib.cpp">
+      <Filter>Common\VAO</Filter>
     </ClCompile>
-    <ClCompile Include="Common\BufferObject\TransformFeedback.cpp">
-      <Filter>Common\BufferObject</Filter>
+    <ClCompile Include="Common\VAO\VertexAttribPointer.cpp">
+      <Filter>Common\VAO</Filter>
     </ClCompile>
-    <ClCompile Include="Common\BufferObject\NamedRenderBuffer.cpp">
-      <Filter>Common\BufferObject</Filter>
+    <ClCompile Include="Common\FrameRender\FrameBuffer.cpp">
+      <Filter>Common\FrameRender</Filter>
     </ClCompile>
-    <ClCompile Include="Common\BufferObject\NoNamedRenderBuffer.cpp">
-      <Filter>Common\BufferObject</Filter>
+    <ClCompile Include="Common\FrameRender\NamedFrameBuffer.cpp">
+      <Filter>Common\FrameRender</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\FrameRender\NamedRenderBuffer.cpp">
+      <Filter>Common\FrameRender</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\FrameRender\NoNamedFrameBuffer.cpp">
+      <Filter>Common\FrameRender</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\FrameRender\NoNamedRenderBuffer.cpp">
+      <Filter>Common\FrameRender</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\FrameRender\RenderBuffer.cpp">
+      <Filter>Common\FrameRender</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Buffer\BufferObject.cpp">
+      <Filter>Common\Buffer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -981,24 +981,6 @@
     <ClInclude Include="Common\Transform\import.h">
       <Filter>Common\Transform</Filter>
     </ClInclude>
-    <ClInclude Include="Common\BufferObject\BufferObject.h">
-      <Filter>Common\BufferObject</Filter>
-    </ClInclude>
-    <ClInclude Include="Common\BufferObject\import.h">
-      <Filter>Common\BufferObject</Filter>
-    </ClInclude>
-    <ClInclude Include="Common\BufferObject\VertexArrayObject.h">
-      <Filter>Common\BufferObject</Filter>
-    </ClInclude>
-    <ClInclude Include="Common\BufferObject\VertexAttrib.h">
-      <Filter>Common\BufferObject</Filter>
-    </ClInclude>
-    <ClInclude Include="Common\BufferObject\VertexAttribPointer.h">
-      <Filter>Common\BufferObject</Filter>
-    </ClInclude>
-    <ClInclude Include="Common\BufferObject\VertexArrayAttrib.h">
-      <Filter>Common\BufferObject</Filter>
-    </ClInclude>
     <ClInclude Include="Common\Texture\Texture2D.h">
       <Filter>Common\Texture</Filter>
     </ClInclude>
@@ -1101,26 +1083,50 @@
     <ClInclude Include="3d\Shape\CubeMap.h">
       <Filter>3d\Shape</Filter>
     </ClInclude>
-    <ClInclude Include="Common\BufferObject\FrameBuffer.h">
-      <Filter>Common\BufferObject</Filter>
+    <ClInclude Include="Common\XFB\TransformFeedback.h">
+      <Filter>Common\XFB</Filter>
     </ClInclude>
-    <ClInclude Include="Common\BufferObject\RenderBuffer.h">
-      <Filter>Common\BufferObject</Filter>
+    <ClInclude Include="Common\VAO\import.h">
+      <Filter>Common\VAO</Filter>
     </ClInclude>
-    <ClInclude Include="Common\BufferObject\NamedFrameBuffer.h">
-      <Filter>Common\BufferObject</Filter>
+    <ClInclude Include="Common\VAO\VertexArrayAttrib.h">
+      <Filter>Common\VAO</Filter>
     </ClInclude>
-    <ClInclude Include="Common\BufferObject\NoNamedFrameBuffer.h">
-      <Filter>Common\BufferObject</Filter>
+    <ClInclude Include="Common\VAO\VertexArrayObject.h">
+      <Filter>Common\VAO</Filter>
     </ClInclude>
-    <ClInclude Include="Common\BufferObject\TransformFeedback.h">
-      <Filter>Common\BufferObject</Filter>
+    <ClInclude Include="Common\VAO\VertexAttrib.h">
+      <Filter>Common\VAO</Filter>
     </ClInclude>
-    <ClInclude Include="Common\BufferObject\NamedRenderBuffer.h">
-      <Filter>Common\BufferObject</Filter>
+    <ClInclude Include="Common\VAO\VertexAttribPointer.h">
+      <Filter>Common\VAO</Filter>
     </ClInclude>
-    <ClInclude Include="Common\BufferObject\NoNamedRenderBuffer.h">
-      <Filter>Common\BufferObject</Filter>
+    <ClInclude Include="Common\FrameRender\FrameBuffer.h">
+      <Filter>Common\FrameRender</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\FrameRender\NamedFrameBuffer.h">
+      <Filter>Common\FrameRender</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\FrameRender\NamedRenderBuffer.h">
+      <Filter>Common\FrameRender</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\FrameRender\NoNamedFrameBuffer.h">
+      <Filter>Common\FrameRender</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\FrameRender\NoNamedRenderBuffer.h">
+      <Filter>Common\FrameRender</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\FrameRender\RenderBuffer.h">
+      <Filter>Common\FrameRender</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\FrameRender\import.h">
+      <Filter>Common\FrameRender</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\XFB\import.h">
+      <Filter>Common\XFB</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Buffer\BufferObject.h">
+      <Filter>Common\Buffer</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1220,9 +1226,6 @@
     <Filter Include="Common\Particle">
       <UniqueIdentifier>{1f423431-28e9-469c-b253-877be6e19bff}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Common\BufferObject">
-      <UniqueIdentifier>{511070b7-0cc7-4062-98b2-c564bd382067}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Common\Material">
       <UniqueIdentifier>{3eb74b0e-e56a-42aa-82b4-b4c2c419ba32}</UniqueIdentifier>
     </Filter>
@@ -1231,6 +1234,15 @@
     </Filter>
     <Filter Include="Common\GPU">
       <UniqueIdentifier>{5ed30168-1abe-4571-9e21-332f042c143c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common\XFB">
+      <UniqueIdentifier>{ae72e815-8167-4747-9d9c-27238188b9a0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common\VAO">
+      <UniqueIdentifier>{511070b7-0cc7-4062-98b2-c564bd382067}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common\FrameRender">
+      <UniqueIdentifier>{b41a4217-8f48-47d8-b2e2-287c56dd4ea6}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

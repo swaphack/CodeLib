@@ -5,7 +5,7 @@
 #include "Mesh.h"
 #include "Common/Node/Node.h"
 #include "Common/Tool/Tool.h"
-#include "Common/BufferObject/import.h"
+#include "Common/VAO/import.h"
 #include "Common/Material/import.h"
 using namespace render;
 

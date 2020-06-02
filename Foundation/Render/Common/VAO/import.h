@@ -1,7 +1,6 @@
 #pragma once
 
-#include "BufferObject.h"
-#include "TransformFeedback.h"
+
 #include "VertexArrayObject.h"
 
 #include "VertexArrayAttrib.h"

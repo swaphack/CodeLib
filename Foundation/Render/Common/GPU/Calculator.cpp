@@ -1,6 +1,7 @@
 #include "Calculator.h"
 #include "Common/Shader/import.h"
-#include "Common/BufferObject/import.h"
+#include "Common/VAO/import.h"
+#include "Common/XFB/TransformFeedback.h"
 #include "Common/Buffer/import.h"
 #include "ShaderDocument.h"
 #include "ShaderVariableType.h"

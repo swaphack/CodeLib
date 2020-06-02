@@ -2,7 +2,7 @@
 #include "Common/Shader/import.h"
 #include "Common/Node/import.h"
 #include "Graphic/import.h"
-#include "Common/BufferObject/import.h"
+#include "Common/VAO/import.h"
 #include "Common/Buffer/import.h"
 #include "Common/View/Camera.h"
 #include "Materials.h"

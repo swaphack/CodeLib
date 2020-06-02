@@ -10,3 +10,5 @@
 #include "TransformFeedbackBuffer.h"
 #include "TextureBuffer.h"
 
+#include "BufferObject.h"
+
