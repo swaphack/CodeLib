@@ -122,5 +122,7 @@ void render::PostProcessingNode::updateTextureSize()
 		pMesh->getMeshDetail()->setIndices(6, indices, 1);
 		pMesh->getMeshDetail()->setUVs(4, uvs, 2);
 	}
+
+	this->updateBufferData();
 }
 
