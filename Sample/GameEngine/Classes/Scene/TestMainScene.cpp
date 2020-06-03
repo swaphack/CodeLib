@@ -20,6 +20,7 @@ bool TestMainScene::init()
 
 	this->addChild(CREATE_NODE(TestEnvironmentNode));
 	this->addChild(CREATE_NODE(TestModelNode));
+	this->addChild(CREATE_NODE(TestPostProcessing));
 	//this->addChild(CREATE_NODE(TestShaderNode));
 	
 	//this->addChild(CREATE_NODE(TestLayoutNode));

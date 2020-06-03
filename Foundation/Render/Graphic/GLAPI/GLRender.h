@@ -32,7 +32,7 @@ namespace render
 		static void finish();
 		static void flush();
 	public:
-		static void setReadBufferMode(ReadBufferMode mode);
+		static void setReadBuffer(ReadBufferMode mode);
 		static void setNamedFramebufferReadBuffer(GLuint framebuffer, DrawBufferMode mode);
 
 		static void readPixels(float x, float y, float width, float height, ReadPixelDataFormat pixelFormat, ReadPixelDataType pixelType, void* data);

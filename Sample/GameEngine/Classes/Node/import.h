@@ -16,3 +16,5 @@
 #include "TestBufferNode.h"
 #include "TestFragmentNode.h"
 #include "TestTextureNode.h"
+#include "TestFrameBufferNode.h"
+#include "TestPostProcessing.h"

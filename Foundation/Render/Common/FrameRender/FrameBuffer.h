@@ -1,53 +1,37 @@
 #pragma once
 
-#include "system.h"
+#include "FrameBufferBase.h"
 #include "Graphic/GLAPI/macros.h"
+
 namespace render
 {
-	/**
-	*	帧缓存对象
-	*/
-	class FrameBuffer : public sys::Object
+	class FrameBuffer : public FrameBufferBase
 	{
 	public:
 		FrameBuffer();
 		virtual ~FrameBuffer();
 	public:
-		/**
-		*	帧缓存对象编号
-		*/
-		uint32_t getFrameBufferID() const;
-		/**
-		*	是否有效
-		*/
-		bool isValid();
-		/**
-		*	帧缓存类型
-		*/
-		void setFrameBufferTarget(FrameBufferTarget target);
-		/**
-		*	帧缓存类型
-		*/
-		FrameBufferTarget getFrameBufferTarget()const;
-		/**
-		*	绑定帧缓存对象
-		*/
-		void bindTarget();
-		/**
-		*	绑定帧缓存对象
-		*/
-		void setDrawBuffers(int n, const DrawBufferType* bufs);
+		void setParameter(FrameBufferParameter name, int value);
+		void setRenderBuffer(FrameBufferAttachment attachment, RenderBufferTarget rbTarget, uint32_t renderBuffer);
+		void setTexture(FrameBufferAttachment attachment, uint32_t texture, int level);
+		void setTexture1D(FrameBufferAttachment attachment, uint32_t texture, int level);
+		void setTexture2D(FrameBufferAttachment attachment, uint32_t texture, int level);
+		void setTexture3D(FrameBufferAttachment attachment, uint32_t texture, int level);
+		void setTextureLayer(FrameBufferAttachment attachment, uint32_t texture, int level, int layer);
+
+		static void blitFrameBuffer(uint32_t srcX0, uint32_t srcY0, uint32_t srcX1, uint32_t srcY1,
+			uint32_t dstX0, uint32_t dstY0, uint32_t dstX1, uint32_t dstY1,
+			uint32_t mask, BlitFrameBufferFilter filter);
+
+		FrameBufferStatus checkStatus();
+
+		void invalidateFrameBuffer(int num, const FrameBufferAttachment* attachments);
+
+		void invalidateSubFrameBuffer(int num, const FrameBufferAttachment* attachments, int x, int y, int width, int height);
+
+		void getAttachmentParameter(FrameBufferAttachment attachment, FrameBufferAttachmentParameter name, int* params);
+		void getParameter(FrameBufferParameter name, int* params);
 	protected:
-		void initFrameBuffer();
-		void relaseFrameBuffer();
 	private:
-		/**
-		*	帧缓存对象编号
-		*/
-		uint32_t _frameBufferID = 0;
-		/**
-		*	帧缓存类型
-		*/
-		FrameBufferTarget _frameBufferTarget = FrameBufferTarget::FRAMEBUFFER;
 	};
 }

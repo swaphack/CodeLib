@@ -1,44 +1,29 @@
 #include "RenderBuffer.h"
+
 #include "Graphic/import.h"
 
 render::RenderBuffer::RenderBuffer()
 {
-	this->initRenderBuffer();
+
 }
 
 render::RenderBuffer::~RenderBuffer()
 {
-	this->relaseRenderBuffer();
+
 }
 
-bool render::RenderBuffer::isValid()
+void render::RenderBuffer::getParameter(RenderBufferParameter name, int* params)
 {
-	return GLFrameBuffer::isRenderBuffer(_renderBufferID);
+	GLFrameRender::getRenderBufferParameter(getRenderBufferTarget(), name, params);
 }
 
-uint32_t render::RenderBuffer::getRenderBufferID() const
+void render::RenderBuffer::setStorage(RenderBufferInternalFormat format, int width, int height)
 {
-	return _renderBufferID;
+	GLFrameRender::setRenderBufferStorage(getRenderBufferTarget(), format, width, height);
 }
 
-void render::RenderBuffer::setRenderBufferTarget(RenderBufferTarget target)
+void render::RenderBuffer::setStorageMultisample(int samples, RenderBufferInternalFormat format, int width, int height)
 {
-	_renderBufferTarget = target;
-}
-
-RenderBufferTarget render::RenderBuffer::getRenderBufferTarget() const
-{
-	return _renderBufferTarget;
-}
-
-void render::RenderBuffer::initRenderBuffer()
-{
-	_renderBufferID = GLFrameBuffer::createRenderBuffer();
-}
-
-void render::RenderBuffer::relaseRenderBuffer()
-{
-	GLFrameBuffer::deleteRenderBuffer(_renderBufferID);
-	_renderBufferID = 0;
+	GLFrameRender::setRenderBufferStorage(getRenderBufferTarget(), format, width, height);
 }
 

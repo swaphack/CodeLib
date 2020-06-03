@@ -1,26 +1,20 @@
 #pragma once
 
-#include "system.h"
+#include "RenderBufferBase.h"
 #include "Graphic/GLAPI/macros.h"
+
 namespace render
 {
-	class RenderBuffer : public sys::Object
+	class RenderBuffer : public RenderBufferBase
 	{
 	public:
 		RenderBuffer();
 		virtual ~RenderBuffer();
 	public:
-		bool isValid();
-
-		uint32_t getRenderBufferID() const;
-
-		void setRenderBufferTarget(RenderBufferTarget target);
-		RenderBufferTarget getRenderBufferTarget() const;
+		void getParameter(RenderBufferParameter name, int* params);
+		void setStorage(RenderBufferInternalFormat format, int width, int height);
+		void setStorageMultisample(int samples, RenderBufferInternalFormat format, int width, int height);
 	protected:
-		void initRenderBuffer();
-		void relaseRenderBuffer();
 	private:
-		uint32_t _renderBufferID = 0;
-		RenderBufferTarget _renderBufferTarget = RenderBufferTarget::RENDERBUFFER;
 	};
 }

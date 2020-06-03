@@ -4,7 +4,7 @@
 
 namespace render
 {
-	class GLFrameBuffer
+	class GLFrameRender
 	{
 	public:
 		static uint32_t createFrameBuffer();
@@ -29,10 +29,11 @@ namespace render
 			uint32_t dstX0, uint32_t dstY0, uint32_t dstX1, uint32_t dstY1,
 			uint32_t mask, BlitFrameBufferFilter filter);
 
-		static GLenum checkFrameBufferStatus(FrameBufferTarget target);
-		static GLenum checkNamedFrameBufferStatus(uint32_t framebuffer, FrameBufferTarget target);
+		static FrameBufferStatus checkFrameBufferStatus(FrameBufferTarget target);
+		static FrameBufferStatus checkNamedFrameBufferStatus(uint32_t framebuffer, FrameBufferTarget target);
 		
 	public:
+		static void setDrawBuffer(DrawBufferType mode);
 		static void setDrawBuffers(int n, const DrawBufferType* bufs);
 	public:
 		static void setNamedFrameBufferDrawBuffers(uint32_t framebuffer, int n, const DrawBufferType* bufs);
@@ -78,14 +79,14 @@ namespace render
 		static void deleteRenderBuffer(uint32_t renderBuffer);
 		static void deleteRenderBuffers(int n, uint32_t* renderBuffers);
 	public:
-		static void setRenderBufferStorage(RenderBufferTarget target, InternalImageFormat format, int width, int height);
-		static void setRenderBufferStorageMultisample(RenderBufferTarget target, int samples, InternalImageFormat format, int width, int height);
+		static void setRenderBufferStorage(RenderBufferTarget target, RenderBufferInternalFormat format, int width, int height);
+		static void setRenderBufferStorageMultisample(RenderBufferTarget target, int samples, RenderBufferInternalFormat format, int width, int height);
 		static void getRenderBufferParameter(RenderBufferTarget target, RenderBufferParameter name, int* params);
 	
 		static bool isRenderBuffer(uint32_t renderbuffer);
 	public:
-		static void setNamedRenderBufferStorage(uint32_t renderbuffer, InternalImageFormat format, int width, int height);
+		static void setNamedRenderBufferStorage(uint32_t renderbuffer, RenderBufferInternalFormat format, int width, int height);
 		static void getNamedRenderBufferParameter(uint32_t renderbuffer, RenderBufferParameter name, int* params);
-		static void setNamedRenderBufferStorageMultisample(uint32_t renderbuffer, int samples, InternalImageFormat format, int width, int height);
+		static void setNamedRenderBufferStorageMultisample(uint32_t renderbuffer, int samples, RenderBufferInternalFormat format, int width, int height);
 	};
 }

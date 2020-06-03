@@ -23,8 +23,7 @@ namespace render
 	/**
 	*	绘制节点
 	*/
-	class DrawNode :  
-		public Node
+	class DrawNode : public Node
 	{
 	public:
 		DrawNode();
@@ -97,7 +96,7 @@ namespace render
 		/**
 		*	绘制前工作
 		*/
-		void beforeDraw();
+		virtual void beforeDraw();
 		/**
 		*	绘制
 		*/
@@ -105,7 +104,7 @@ namespace render
 		/**
 		*	绘制后工作
 		*/
-		void afterDraw();
+		virtual void afterDraw();
 	protected:
 		virtual void initBufferObject();
 		virtual void updateBufferData();

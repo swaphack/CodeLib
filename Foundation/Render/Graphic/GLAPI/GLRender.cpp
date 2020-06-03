@@ -68,7 +68,7 @@ void GLRender::flush()
 	glFlush();
 }
 
-void GLRender::setReadBufferMode(ReadBufferMode mode)
+void GLRender::setReadBuffer(ReadBufferMode mode)
 {
 	glReadBuffer((GLenum)mode);
 }
@@ -77,7 +77,6 @@ void GLRender::setNamedFramebufferReadBuffer(GLuint framebuffer, DrawBufferMode 
 {
 	glNamedFramebufferReadBuffer(framebuffer, (GLenum)mode);
 }
-
 
 void GLRender::readPixels(float x, float y, float width, float height, ReadPixelDataFormat pixelFormat, ReadPixelDataType pixelType, void* data)
 {

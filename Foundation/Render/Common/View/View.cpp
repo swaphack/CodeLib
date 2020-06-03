@@ -1,7 +1,6 @@
 #include "View.h"
 #include "Graphic/import.h"
 #include "Camera.h"
-
 using namespace render;
 
 
@@ -60,7 +59,6 @@ void View::initView()
 void View::updateView()
 {
 	GLState::setStencilMask(0xff);
-
 	uint32_t bitfield = (uint32_t)ClearBufferBitType::COLOR_BUFFER_BIT | (uint32_t)ClearBufferBitType::DEPTH_BUFFER_BIT | (uint32_t)ClearBufferBitType::STENCIL_BUFFER_BIT;
 	GLRender::clearColor(0, 0, 0, 0);
 	GLRender::clearDepth(1.0f);

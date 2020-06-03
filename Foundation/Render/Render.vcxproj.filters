@@ -252,9 +252,6 @@
     <ClCompile Include="Graphic\GLAPI\GLBufferObjects.cpp">
       <Filter>Graphic\GLAPI</Filter>
     </ClCompile>
-    <ClCompile Include="Graphic\GLAPI\GLFrameBuffer.cpp">
-      <Filter>Graphic\GLAPI</Filter>
-    </ClCompile>
     <ClCompile Include="Common\Shader\ShaderUniformBlock.cpp">
       <Filter>Common\Shader</Filter>
     </ClCompile>
@@ -465,26 +462,35 @@
     <ClCompile Include="Common\VAO\VertexAttribPointer.cpp">
       <Filter>Common\VAO</Filter>
     </ClCompile>
-    <ClCompile Include="Common\FrameRender\FrameBuffer.cpp">
-      <Filter>Common\FrameRender</Filter>
-    </ClCompile>
     <ClCompile Include="Common\FrameRender\NamedFrameBuffer.cpp">
       <Filter>Common\FrameRender</Filter>
     </ClCompile>
     <ClCompile Include="Common\FrameRender\NamedRenderBuffer.cpp">
       <Filter>Common\FrameRender</Filter>
     </ClCompile>
-    <ClCompile Include="Common\FrameRender\NoNamedFrameBuffer.cpp">
-      <Filter>Common\FrameRender</Filter>
+    <ClCompile Include="Common\Buffer\BufferObject.cpp">
+      <Filter>Common\Buffer</Filter>
     </ClCompile>
-    <ClCompile Include="Common\FrameRender\NoNamedRenderBuffer.cpp">
+    <ClCompile Include="Graphic\GLAPI\GLFrameRender.cpp">
+      <Filter>Graphic\GLAPI</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\FrameRender\RenderBufferBase.cpp">
       <Filter>Common\FrameRender</Filter>
     </ClCompile>
     <ClCompile Include="Common\FrameRender\RenderBuffer.cpp">
       <Filter>Common\FrameRender</Filter>
     </ClCompile>
-    <ClCompile Include="Common\Buffer\BufferObject.cpp">
-      <Filter>Common\Buffer</Filter>
+    <ClCompile Include="Common\FrameRender\FrameBufferBase.cpp">
+      <Filter>Common\FrameRender</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\FrameRender\FrameBuffer.cpp">
+      <Filter>Common\FrameRender</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\PostProcessing\PostProcessingNode.cpp">
+      <Filter>Common\PostProcessing</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\PostProcessing\PostProcessing.cpp">
+      <Filter>Common\PostProcessing</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -861,9 +867,6 @@
     <ClInclude Include="Graphic\GLAPI\GLBufferObjects.h">
       <Filter>Graphic\GLAPI</Filter>
     </ClInclude>
-    <ClInclude Include="Graphic\GLAPI\GLFrameBuffer.h">
-      <Filter>Graphic\GLAPI</Filter>
-    </ClInclude>
     <ClInclude Include="Common\Shader\ShaderUniformBlock.h">
       <Filter>Common\Shader</Filter>
     </ClInclude>
@@ -1101,22 +1104,10 @@
     <ClInclude Include="Common\VAO\VertexAttribPointer.h">
       <Filter>Common\VAO</Filter>
     </ClInclude>
-    <ClInclude Include="Common\FrameRender\FrameBuffer.h">
-      <Filter>Common\FrameRender</Filter>
-    </ClInclude>
     <ClInclude Include="Common\FrameRender\NamedFrameBuffer.h">
       <Filter>Common\FrameRender</Filter>
     </ClInclude>
     <ClInclude Include="Common\FrameRender\NamedRenderBuffer.h">
-      <Filter>Common\FrameRender</Filter>
-    </ClInclude>
-    <ClInclude Include="Common\FrameRender\NoNamedFrameBuffer.h">
-      <Filter>Common\FrameRender</Filter>
-    </ClInclude>
-    <ClInclude Include="Common\FrameRender\NoNamedRenderBuffer.h">
-      <Filter>Common\FrameRender</Filter>
-    </ClInclude>
-    <ClInclude Include="Common\FrameRender\RenderBuffer.h">
       <Filter>Common\FrameRender</Filter>
     </ClInclude>
     <ClInclude Include="Common\FrameRender\import.h">
@@ -1127,6 +1118,30 @@
     </ClInclude>
     <ClInclude Include="Common\Buffer\BufferObject.h">
       <Filter>Common\Buffer</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphic\GLAPI\GLFrameRender.h">
+      <Filter>Graphic\GLAPI</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\FrameRender\RenderBufferBase.h">
+      <Filter>Common\FrameRender</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\FrameRender\RenderBuffer.h">
+      <Filter>Common\FrameRender</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\FrameRender\FrameBufferBase.h">
+      <Filter>Common\FrameRender</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\FrameRender\FrameBuffer.h">
+      <Filter>Common\FrameRender</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\PostProcessing\import.h">
+      <Filter>Common\PostProcessing</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\PostProcessing\PostProcessingNode.h">
+      <Filter>Common\PostProcessing</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\PostProcessing\PostProcessing.h">
+      <Filter>Common\PostProcessing</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1243,6 +1258,9 @@
     </Filter>
     <Filter Include="Common\FrameRender">
       <UniqueIdentifier>{b41a4217-8f48-47d8-b2e2-287c56dd4ea6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common\PostProcessing">
+      <UniqueIdentifier>{aa556586-8459-4345-b44c-9a745f9c3ded}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

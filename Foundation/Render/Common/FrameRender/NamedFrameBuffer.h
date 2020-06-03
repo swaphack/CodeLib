@@ -1,11 +1,11 @@
 #pragma once
 
-#include "FrameBuffer.h"
+#include "FrameBufferBase.h"
 #include "Graphic/GLAPI/macros.h"
 
 namespace render
 {
-	class NamedFrameBuffer : public FrameBuffer
+	class NamedFrameBuffer : public FrameBufferBase
 	{
 	public:
 		NamedFrameBuffer();
@@ -22,7 +22,7 @@ namespace render
 			uint32_t dstX0, uint32_t dstY0, uint32_t dstX1, uint32_t dstY1,
 			uint32_t mask, BlitFrameBufferFilter filter);
 
-		GLenum checkStatus();
+		FrameBufferStatus checkStatus();
 
 		void invalidateFrameBuffer(int num, const FrameBufferAttachment* attachments);
 

@@ -1,9 +1,9 @@
 #pragma once
 
+#include "FrameBufferBase.h"
 #include "FrameBuffer.h"
-#include "NoNamedFrameBuffer.h"
 #include "NamedFrameBuffer.h"
 
+#include "RenderBufferBase.h"
 #include "RenderBuffer.h"
-#include "NoNamedRenderBuffer.h"
 #include "NamedRenderBuffer.h"

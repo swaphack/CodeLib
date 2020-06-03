@@ -22,3 +22,4 @@
 #include "GPU/import.h"
 #include "FrameRender/import.h"
 #include "XFB/import.h"
+#include "PostProcessing/import.h"

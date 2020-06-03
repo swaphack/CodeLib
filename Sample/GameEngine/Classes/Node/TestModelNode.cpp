@@ -17,10 +17,10 @@ TestModelNode::~TestModelNode()
 
 void TestModelNode::testFunc()
 {
-	this->testCubeModel();
+	//this->testCubeModel();
 	this->testCubeMap();
 
-	this->testObj();
+	//this->testObj();
 }
 
 void TestModelNode::testCubeModel()
@@ -99,15 +99,15 @@ void TestModelNode::testCubeMap()
 
 	//pSkyBox->setScale(0.25f);
 	pCubMap->setVolume(512, 384, 512);
-	pCubMap->setPosition(0, 0, 0);
+	pCubMap->setPosition(512, 384, 0);
 	pCubMap->setAnchorPoint(0.5f, 0.5f, 0.5f);
 	this->addChild(pCubMap);
 
 	Utility::loadShader(pCubMap->getMaterials(), "Shader/cubemap.vs", "Shader/cubemap.fs");
 
 	RotateByAction* pAction = CREATE_ACTION(RotateByAction);
-	pAction->setRotation(1, 1, 1);
-	pAction->setDuration(1);
+	pAction->setRotation(0, 180, 0);
+	pAction->setDuration(10);
 
 	RepeateForeverAction* pRepeateAction = CREATE_ACTION(RepeateForeverAction);
 	pRepeateAction->setAction(pAction);

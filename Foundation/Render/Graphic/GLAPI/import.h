@@ -20,7 +20,7 @@
 #include "GLSampler.h"
 #include "GLRasterization.h"
 #include "GLBufferObjects.h"
-#include "GLFrameBuffer.h"
+#include "GLFrameRender.h"
 #include "GLProgramPipelines.h"
 #include "GLQuery.h"
 #include "GLUtility.h"

@@ -75,6 +75,12 @@
     <ClCompile Include="Classes\Node\TestFragmentNode.cpp">
       <Filter>Classes\Node</Filter>
     </ClCompile>
+    <ClCompile Include="Classes\Node\TestFrameBufferNode.cpp">
+      <Filter>Classes\Node</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Node\TestPostProcessing.cpp">
+      <Filter>Classes\Node</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Classes\GLRenderApplication.h">
@@ -135,6 +141,12 @@
       <Filter>Classes\Node</Filter>
     </ClInclude>
     <ClInclude Include="Classes\Node\TestEnvironmentNode.h">
+      <Filter>Classes\Node</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Node\TestFrameBufferNode.h">
+      <Filter>Classes\Node</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Node\TestPostProcessing.h">
       <Filter>Classes\Node</Filter>
     </ClInclude>
   </ItemGroup>

@@ -3,52 +3,76 @@
 
 render::FrameBuffer::FrameBuffer()
 {
-	this->initFrameBuffer();
+
 }
 
 render::FrameBuffer::~FrameBuffer()
 {
-	this->relaseFrameBuffer();
+
 }
 
-uint32_t render::FrameBuffer::getFrameBufferID() const
+void render::FrameBuffer::setParameter(FrameBufferParameter name, int value)
 {
-	return _frameBufferID;
+	GLFrameRender::setFrameBufferParameter(getFrameBufferTarget(), name, value);
 }
 
-bool render::FrameBuffer::isValid()
+void render::FrameBuffer::setRenderBuffer(FrameBufferAttachment attachment, RenderBufferTarget rbTarget, uint32_t renderBuffer)
 {
-	return GLFrameBuffer::isFrameBuffer(_frameBufferID);
+	GLFrameRender::setFrameBufferRenderBuffer(getFrameBufferTarget(), attachment, rbTarget, renderBuffer);
 }
 
-void render::FrameBuffer::setFrameBufferTarget(FrameBufferTarget target)
+void render::FrameBuffer::setTexture(FrameBufferAttachment attachment, uint32_t texture, int level)
 {
-	_frameBufferTarget = target;
+	GLFrameRender::setFrameBufferTexture(getFrameBufferTarget(), attachment, texture, level);
 }
 
-FrameBufferTarget render::FrameBuffer::getFrameBufferTarget() const
+void render::FrameBuffer::setTexture1D(FrameBufferAttachment attachment, uint32_t texture, int level)
 {
-	return _frameBufferTarget;
+	GLFrameRender::setFrameBufferTexture1D(getFrameBufferTarget(), attachment, texture, level);
 }
 
-void render::FrameBuffer::bindTarget()
+void render::FrameBuffer::setTexture2D(FrameBufferAttachment attachment, uint32_t texture, int level)
 {
-	GLFrameBuffer::bindFramebuffer(_frameBufferTarget, _frameBufferID);
+	GLFrameRender::setFrameBufferTexture2D(getFrameBufferTarget(), attachment, texture, level);
 }
 
-void render::FrameBuffer::setDrawBuffers(int n, const DrawBufferType* bufs)
+void render::FrameBuffer::setTexture3D(FrameBufferAttachment attachment, uint32_t texture, int level)
 {
-	GLFrameBuffer::setDrawBuffers(n, bufs);
+	GLFrameRender::setFrameBufferTexture3D(getFrameBufferTarget(), attachment, texture, level);
 }
 
-void render::FrameBuffer::initFrameBuffer()
+void render::FrameBuffer::setTextureLayer(FrameBufferAttachment attachment, uint32_t texture, int level, int layer)
 {
-	_frameBufferID = GLFrameBuffer::createFrameBuffer();
+	GLFrameRender::setFrameBufferTextureLayer(getFrameBufferTarget(), attachment, texture, level, layer);
 }
 
-void render::FrameBuffer::relaseFrameBuffer()
+void render::FrameBuffer::blitFrameBuffer(uint32_t srcX0, uint32_t srcY0, uint32_t srcX1, uint32_t srcY1, uint32_t dstX0, uint32_t dstY0, uint32_t dstX1, uint32_t dstY1, uint32_t mask, BlitFrameBufferFilter filter)
 {
-	GLFrameBuffer::deleteFrameBuffer(_frameBufferID);
-	_frameBufferID = 0;
+	GLFrameRender::blitFrameBuffer(srcX0, srcY0, srcX1, srcY1, dstX0, dstY0, dstX1, dstY1, mask, filter);
+}
+
+FrameBufferStatus render::FrameBuffer::checkStatus()
+{
+	return GLFrameRender::checkFrameBufferStatus(getFrameBufferTarget());
+}
+
+void render::FrameBuffer::invalidateFrameBuffer(int num, const FrameBufferAttachment* attachments)
+{
+	GLFrameRender::invalidateFrameBuffer(getFrameBufferTarget(), num, attachments);
+}
+
+void render::FrameBuffer::invalidateSubFrameBuffer(int num, const FrameBufferAttachment* attachments, int x, int y, int width, int height)
+{
+	GLFrameRender::invalidateSubFrameBuffer(getFrameBufferTarget(), num, attachments, x, y, width, height);
+}
+
+void render::FrameBuffer::getAttachmentParameter(FrameBufferAttachment attachment, FrameBufferAttachmentParameter name, int* params)
+{
+	GLFrameRender::getFrameBufferAttachmentParameter(getFrameBufferTarget(), attachment, name, params);
+}
+
+void render::FrameBuffer::getParameter(FrameBufferParameter name, int* params)
+{
+	GLFrameRender::getFrameBufferParameter(getFrameBufferTarget(), name, params);
 }
 

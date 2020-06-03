@@ -1,5 +1,6 @@
 #include "Canvas.h"
 
+#include "Common/PostProcessing/PostProcessing.h"
 using namespace render;
 
 Canvas* render::Canvas::_sCanvas = nullptr;
@@ -26,6 +27,8 @@ Canvas::~Canvas()
 
 void Canvas::draw()
 {
+	PostProcessing::getInstance()->use();
+
 	_view->initView();
 	_view->updateView();
 
@@ -40,6 +43,8 @@ void Canvas::draw()
 	{
 		pTop->visit();
 	}
+
+	PostProcessing::getInstance()->draw();
 
 	GLRender::flush();
 }

@@ -86,11 +86,13 @@ namespace render
 		// 是否可见
 		bool isVisible();
 	public:
-		// 更新节点
+		// 更新节点, 更新节点逻辑
 		virtual void updateNode();
-		virtual void beforeDrawNode();
-		// 绘制节点
+	public:
+		// 绘制节点 矩阵变换->测试和预处理->绘制当前界面
 		virtual void drawNode();
+
+		virtual void beforeDrawNode();
 
 		virtual void afterDrawNode();
 	protected:
