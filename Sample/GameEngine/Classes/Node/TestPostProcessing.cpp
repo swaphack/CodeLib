@@ -21,7 +21,7 @@ void TestPostProcessing::testSimplePostProcessing()
 	render::PostProcessingNode* pNode = CREATE_NODE(render::PostProcessingNode);
 	pNode->setAnchorPoint(0, 0);
 	pNode->setPosition(0, 0);
-	pNode->setVolume(render::Tool::getGLViewSize());
+	pNode->setVolume(512,384);
 
 	this->addChild(pNode);
 

@@ -33,7 +33,7 @@ bool TestMainScene::init()
 
 	this->addChild(CREATE_NODE(TestTextureNode));
 
-	//this->addChild(CREATE_NODE(TestPostProcessing));
+	this->addChild(CREATE_NODE(TestPostProcessing));
 
 	return true;
 }

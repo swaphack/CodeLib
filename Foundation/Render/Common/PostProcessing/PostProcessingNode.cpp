@@ -59,14 +59,10 @@ void render::PostProcessingNode::beforeDrawNode()
 	_frameBuffer->unbindFrameBuffer();
 	DrawNode::beforeDrawNode();
 	GLState::disable(EnableMode::DEPTH_TEST);
-	/*
-	uint32_t bitfield = (uint32_t)ClearBufferBitType::COLOR_BUFFER_BIT | (uint32_t)ClearBufferBitType::DEPTH_BUFFER_BIT | (uint32_t)ClearBufferBitType::STENCIL_BUFFER_BIT;
-	GLRender::clearColor(0, 0, 0, 0);
-	GLRender::clearDepth(1.0f);
-	GLRender::clearStencil(0x0);
-	GLRender::clear(bitfield);
-	
-	*/
+
+	//uint32_t bitfield = (uint32_t)ClearBufferBitType::COLOR_BUFFER_BIT;
+	//GLRender::clearColor(0, 0, 0, 0);
+	//GLRender::clear(bitfield);
 }
 
 void render::PostProcessingNode::afterDrawNode()
@@ -91,7 +87,7 @@ void render::PostProcessingNode::updateTextureSize()
 	_frameBuffer->bindFrameBuffer();
 
 	_texture->bindTexture();
-	_texture->setTextureImage(0, TextureInternalSizedFormat::RGBA8, getWidth(), getHeight(), 0, TextureExternalFormat::RGBA, TextureExternalDataType::UNSIGNED_BYTE, nullptr);
+	_texture->setTextureImage(0, TextureInternalSizedFormat::RGB8, getWidth(), getHeight(), 0, TextureExternalFormat::RGB, TextureExternalDataType::UNSIGNED_BYTE, nullptr);
 	_texture->applyTextureSetting();
 	GLDebug::showError();
 	
@@ -99,10 +95,10 @@ void render::PostProcessingNode::updateTextureSize()
 	GLDebug::showError();
 
 	_renderBuffer->bindRenderBuffer();
-	_renderBuffer->setStorage(RenderBufferInternalFormat::DEPTH24_STENCIL8, getWidth(), getHeight());
+	_renderBuffer->setStorage(RenderBufferInternalFormat::DEPTH_COMPONENT24, getWidth(), getHeight());
 	GLDebug::showError();
 
-	_frameBuffer->setRenderBuffer(FrameBufferAttachment::DEPTH_STENCIL_ATTACHMENT, _renderBuffer);
+	_frameBuffer->setRenderBuffer(FrameBufferAttachment::DEPTH_ATTACHMENT, _renderBuffer);
 	GLDebug::showError();
 
 	if (_frameBuffer->checkStatus() != FrameBufferStatus::FRAMEBUFFER_COMPLETE)

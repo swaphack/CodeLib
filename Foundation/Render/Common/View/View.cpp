@@ -72,8 +72,9 @@ void View::updateView()
 void View::applyConfig()
 {
 	GLState::enable(EnableMode::DEPTH_TEST);
-	GLState::enable(EnableMode::STENCIL_TEST);
 	GLState::setDepthFunc(DepthFunction::LESS);
+
+	GLState::enable(EnableMode::STENCIL_TEST);
 
 	GLFixedFunction::setShadeModel(ShadingModel::SMOOTH);
 	GLState::setPerspectiveCorrectionHint(HintMode::NICEST);

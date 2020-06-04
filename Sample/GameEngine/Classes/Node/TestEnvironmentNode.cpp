@@ -96,12 +96,14 @@ void TestEnvironmentNode::testCamera()
 {
 	Camera* pCamera = Camera::getMainCamera();
 
-	pCamera->setPositionZ(10.0f);
+	//
 
 	if (true)
 	{
 		return;
 	}
+
+	pCamera->setPositionZ(10.0f);
 
 	Action* pAction = nullptr;
 	{
