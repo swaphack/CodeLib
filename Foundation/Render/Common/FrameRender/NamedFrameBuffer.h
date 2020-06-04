@@ -5,6 +5,8 @@
 
 namespace render
 {
+	class RenderBufferBase;
+
 	class NamedFrameBuffer : public FrameBufferBase
 	{
 	public:
@@ -13,6 +15,7 @@ namespace render
 	public:
 		void setDrawBuffers(int n, const DrawBufferType* bufs);
 		void setParameter(FrameBufferParameter name, int value);
+		void setRenderBuffer(FrameBufferAttachment attachment, RenderBufferBase* renderBuffer);
 		void setRenderBuffer(FrameBufferAttachment attachment, RenderBufferTarget rbTarget, uint32_t renderBuffer);
 		void setTexture(FrameBufferAttachment attachment, uint32_t texture, int level);
 		void setTextureLayer(FrameBufferAttachment attachment, uint32_t texture, int level, int layer);

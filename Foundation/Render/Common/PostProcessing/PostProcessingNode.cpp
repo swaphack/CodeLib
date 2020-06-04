@@ -12,6 +12,9 @@ render::PostProcessingNode::PostProcessingNode()
 	_frameBuffer = CREATE_OBJECT(FrameBuffer);
 	_renderBuffer = CREATE_OBJECT(RenderBuffer);
 
+	_frameBuffer->setFrameBufferTarget(FrameBufferTarget::FRAMEBUFFER);
+	_renderBuffer->setRenderBufferTarget(RenderBufferTarget::RENDERBUFFER);
+
 	SAFE_RETAIN(_texture);
 	SAFE_RETAIN(_frameBuffer);
 	SAFE_RETAIN(_renderBuffer);
@@ -54,9 +57,16 @@ void render::PostProcessingNode::drawNode()
 void render::PostProcessingNode::beforeDrawNode()
 {
 	_frameBuffer->unbindFrameBuffer();
-	GLRender::clearColor(0.0f, 0.0f, 0.0f, 0.0f);
-	GLRender::clear(ClearBufferBitType::COLOR_BUFFER_BIT);
+	DrawNode::beforeDrawNode();
 	GLState::disable(EnableMode::DEPTH_TEST);
+	/*
+	uint32_t bitfield = (uint32_t)ClearBufferBitType::COLOR_BUFFER_BIT | (uint32_t)ClearBufferBitType::DEPTH_BUFFER_BIT | (uint32_t)ClearBufferBitType::STENCIL_BUFFER_BIT;
+	GLRender::clearColor(0, 0, 0, 0);
+	GLRender::clearDepth(1.0f);
+	GLRender::clearStencil(0x0);
+	GLRender::clear(bitfield);
+	
+	*/
 }
 
 void render::PostProcessingNode::afterDrawNode()
@@ -78,28 +88,33 @@ void render::PostProcessingNode::updateTextureSize()
 {
 	_bInitedFrameBufferData = true;
 
-	_texture->bindTexture();
-	_texture->setTextureImage(0, TextureInternalSizedFormat::RGBA8, getWidth(), getHeight(), 0, TextureExternalFormat::RGB, TextureExternalDataType::UNSIGNED_BYTE, nullptr);
-	_texture->applyTextureSetting();
-
 	_frameBuffer->bindFrameBuffer();
+
+	_texture->bindTexture();
+	_texture->setTextureImage(0, TextureInternalSizedFormat::RGBA8, getWidth(), getHeight(), 0, TextureExternalFormat::RGBA, TextureExternalDataType::UNSIGNED_BYTE, nullptr);
+	_texture->applyTextureSetting();
+	GLDebug::showError();
+	
 	_frameBuffer->setTexture2D(FrameBufferAttachment::COLOR_ATTACHMENT0, _texture->getTextureID(), 0);
+	GLDebug::showError();
 
 	_renderBuffer->bindRenderBuffer();
 	_renderBuffer->setStorage(RenderBufferInternalFormat::DEPTH24_STENCIL8, getWidth(), getHeight());
-	
+	GLDebug::showError();
 
-	_frameBuffer->setRenderBuffer(FrameBufferAttachment::DEPTH_STENCIL_ATTACHMENT, RenderBufferTarget::RENDERBUFFER, _renderBuffer->getRenderBufferID());
+	_frameBuffer->setRenderBuffer(FrameBufferAttachment::DEPTH_STENCIL_ATTACHMENT, _renderBuffer);
+	GLDebug::showError();
 
 	if (_frameBuffer->checkStatus() != FrameBufferStatus::FRAMEBUFFER_COMPLETE)
 	{
 		PRINT("Frame Buffer is not Complete!\n");
 		return;
 	}
-	//_renderBuffer->unbindRenderBuffer();
-	//_texture->unbindTexture();
+	_renderBuffer->unbindRenderBuffer();
+	_texture->unbindTexture();
 	_frameBuffer->unbindFrameBuffer();
 
+	GLDebug::showError();
 	float vertices[] = {
 		0,0,
 		getWidth(),0,
@@ -119,8 +134,8 @@ void render::PostProcessingNode::updateTextureSize()
 	if (pMesh)
 	{
 		pMesh->getMeshDetail()->setVertices(4, vertices, 2);
-		pMesh->getMeshDetail()->setIndices(6, indices, 1);
 		pMesh->getMeshDetail()->setUVs(4, uvs, 2);
+		pMesh->getMeshDetail()->setIndices(6, indices, 1);
 	}
 
 	this->updateBufferData();

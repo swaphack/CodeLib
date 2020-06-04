@@ -24,6 +24,10 @@ void render::PostProcessing::use()
 
 void render::PostProcessing::draw()
 {
+	if (true)
+	{
+		return;
+	}
 	if (_node == nullptr)
 	{
 		return;

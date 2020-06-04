@@ -1,5 +1,7 @@
 #include "NamedFrameBuffer.h"
 #include "Graphic/import.h"
+#include "RenderBufferBase.h"
+
 render::NamedFrameBuffer::NamedFrameBuffer()
 {
 
@@ -23,6 +25,15 @@ void render::NamedFrameBuffer::setParameter(FrameBufferParameter name, int value
 void render::NamedFrameBuffer::setRenderBuffer(FrameBufferAttachment attachment, RenderBufferTarget rbTarget, uint32_t renderBuffer)
 {
 	GLFrameRender::setNamedFrameBufferRenderBuffer(getFrameBufferID(), attachment, rbTarget, renderBuffer);
+}
+
+void render::NamedFrameBuffer::setRenderBuffer(FrameBufferAttachment attachment, RenderBufferBase* renderBuffer)
+{
+	if (renderBuffer == nullptr)
+	{
+		return;
+	}
+	this->setRenderBuffer(attachment, renderBuffer->getRenderBufferTarget(), renderBuffer->getRenderBufferID());
 }
 
 void render::NamedFrameBuffer::setTexture(FrameBufferAttachment attachment, uint32_t texture, int level)

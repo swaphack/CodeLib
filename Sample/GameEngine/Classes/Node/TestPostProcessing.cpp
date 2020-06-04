@@ -19,8 +19,11 @@ void TestPostProcessing::testFunc()
 void TestPostProcessing::testSimplePostProcessing()
 {
 	render::PostProcessingNode* pNode = CREATE_NODE(render::PostProcessingNode);
+	pNode->setAnchorPoint(0, 0);
 	pNode->setPosition(0, 0);
 	pNode->setVolume(render::Tool::getGLViewSize());
+
+	this->addChild(pNode);
 
 	Utility::loadShader(pNode->getMaterials(), "Shader/simple_frame_buffer.vs", "Shader/simple_frame_buffer.fs");
 

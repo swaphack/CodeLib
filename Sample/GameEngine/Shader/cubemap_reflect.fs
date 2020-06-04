@@ -1,5 +1,7 @@
 #version 330 core
 
+
+
 uniform samplerCube texSampler0;
 
 in vec3 fragmentPosition;

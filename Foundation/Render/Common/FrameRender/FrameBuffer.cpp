@@ -1,5 +1,6 @@
 #include "FrameBuffer.h"
 #include "Graphic/import.h"
+#include "RenderBufferBase.h"
 
 render::FrameBuffer::FrameBuffer()
 {
@@ -19,6 +20,15 @@ void render::FrameBuffer::setParameter(FrameBufferParameter name, int value)
 void render::FrameBuffer::setRenderBuffer(FrameBufferAttachment attachment, RenderBufferTarget rbTarget, uint32_t renderBuffer)
 {
 	GLFrameRender::setFrameBufferRenderBuffer(getFrameBufferTarget(), attachment, rbTarget, renderBuffer);
+}
+
+void render::FrameBuffer::setRenderBuffer(FrameBufferAttachment attachment, RenderBufferBase* renderBuffer)
+{
+	if (renderBuffer == nullptr)
+	{
+		return;
+	}
+	this->setRenderBuffer(attachment, renderBuffer->getRenderBufferTarget(), renderBuffer->getRenderBufferID());
 }
 
 void render::FrameBuffer::setTexture(FrameBufferAttachment attachment, uint32_t texture, int level)
