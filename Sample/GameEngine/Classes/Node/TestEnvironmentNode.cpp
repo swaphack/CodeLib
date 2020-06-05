@@ -96,9 +96,7 @@ void TestEnvironmentNode::testCamera()
 {
 	Camera* pCamera = Camera::getMainCamera();
 
-	//
-
-	if (true)
+	if (pCamera->getDimensions() != CameraDimensions::THREE)
 	{
 		return;
 	}
@@ -125,6 +123,6 @@ void TestEnvironmentNode::testCamera()
 	RepeateForeverAction* pRepeateAction = CREATE_ACTION(RepeateForeverAction);
 	pRepeateAction->setAction(pAction);
 
-	//pCamera->getActionProxy()->runAction(pRepeateAction);
+	pCamera->getActionProxy()->runAction(pRepeateAction);
 	
 }

@@ -13,6 +13,5 @@ void main()
 {
 	vec4 pos = vec4(vPosition.x, vPosition.y, 0, 1.0);
 	gl_Position = projectMatrix * viewMatrix * modelMatrix * pos;
-	gl_Position = pos;
 	fragmentUV = vUV;
 }

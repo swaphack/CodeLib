@@ -10,6 +10,7 @@ namespace render
 
 	/**
 	*	后期处理
+	*	还有问题
 	*/
 	class PostProcessingNode : public DrawNode
 	{

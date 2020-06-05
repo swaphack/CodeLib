@@ -43,10 +43,7 @@ void render::FragmentOperator::begin()
 {
 	for (auto item : _handles)
 	{
-		if (item.second->isEnabled())
-		{
-			item.second->begin();
-		}
+		item.second->begin();
 	}
 }
 
@@ -54,10 +51,7 @@ void render::FragmentOperator::update()
 {
 	for (auto item : _handles)
 	{
-		if (item.second->isEnabled())
-		{
-			item.second->update();
-		}
+		item.second->update();
 	}
 }
 
@@ -65,9 +59,6 @@ void render::FragmentOperator::end()
 {
 	for (auto item : _handles)
 	{
-		if (item.second->isEnabled())
-		{
-			item.second->end();
-		}
+		item.second->end();
 	}
 }

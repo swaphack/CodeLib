@@ -13,6 +13,7 @@ void Utility::loadShader(render::Materials* mats, const std::string& vpath, cons
 	}
 	ShaderProgram* pProgram = CREATE_OBJECT(ShaderProgram);
 	pProgram->loadVertexAndFragmentShader(vpath, fpath);
+	pProgram->bindFragDataLocation(0, "color");
 	pProgram->link();
 
 
@@ -34,30 +35,34 @@ void Utility::initShaderAttrib(render::Materials* mats)
 
 	for (auto item : mats->getMaterials())
 	{
-		item.second->addUniform(VertexUniformType::PROJECT_MATRIX, "projectMatrix");
-		item.second->addUniform(VertexUniformType::VIEW_MATRIX, "viewMatrix");
-		item.second->addUniform(VertexUniformType::MODEL_VIEW, "modelMatrix");
+		item.second->addUniform(UniformType::PROJECT_MATRIX, "projectMatrix");
+		item.second->addUniform(UniformType::VIEW_MATRIX, "viewMatrix");
+		item.second->addUniform(UniformType::MODEL_VIEW, "modelMatrix");
 
-		item.second->addUniform(VertexUniformType::AMBIENT_TEXTURE, "texSampler0");
-		item.second->addUniform(VertexUniformType::DIFFUSE_TEXTURE, "texSampler1");
+		item.second->addUniform(UniformType::AMBIENT_TEXTURE, "texSampler0");
+		item.second->addUniform(UniformType::DIFFUSE_TEXTURE, "texSampler1");
 
-		item.second->addAttrib(VertexAttribType::POSITION, "vPosition");
-		item.second->addAttrib(VertexAttribType::COLOR, "vColor");
-		item.second->addAttrib(VertexAttribType::UV, "vUV");
-		item.second->addAttrib(VertexAttribType::NORMAL, "vNormal");
+		item.second->addUniform(UniformType::LIGHT_AMBIENT, "ligthAmbient");
+		item.second->addUniform(UniformType::LIGHT_DIFFUSE, "ligthDiffuse");
+		item.second->addUniform(UniformType::LIGHT_SPECULAR, "ligthSpecular");
+
+		item.second->addVertexData(VertexDataType::POSITION, "vPosition");
+		item.second->addVertexData(VertexDataType::COLOR, "vColor");
+		item.second->addVertexData(VertexDataType::UV, "vUV");
+		item.second->addVertexData(VertexDataType::NORMAL, "vNormal");
 	}
 }
 
-void Utility::initProgramAttrib(render::ShaderProgram* program)
+void Utility::bindProgramAttrib(render::ShaderProgram* program)
 {
 	if (program == nullptr)
 	{
 		return;
 	}
 
-	program->bindAttrib((uint32_t)VertexAttribType::POSITION, "vPosition");
-	program->bindAttrib((uint32_t)VertexAttribType::COLOR, "vColor");
-	program->bindAttrib((uint32_t)VertexAttribType::UV, "vUV");
+	program->bindAttrib((uint32_t)VertexDataType::POSITION, "vPosition");
+	program->bindAttrib((uint32_t)VertexDataType::COLOR, "vColor");
+	program->bindAttrib((uint32_t)VertexDataType::UV, "vUV");
 
 	GLDebug::showError();
 }

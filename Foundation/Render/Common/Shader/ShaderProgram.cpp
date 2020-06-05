@@ -223,6 +223,16 @@ bool ShaderProgram::loadVertexAndFragmentShader(const std::string& vpath, const 
 	return true;
 }
 
+void render::ShaderProgram::bindFragDataLocation(uint32_t colorNumber, const char* name)
+{
+	GLShader::bindFragDataLocation(getProgramID(), colorNumber, name);
+}
+
+void render::ShaderProgram::bindFragDataLocationIndexed(uint32_t colorNumber, uint32_t index, const char* name)
+{
+	GLShader::bindFragDataLocationIndexed(getProgramID(), colorNumber, index, name);
+}
+
 bool render::ShaderProgram::isValid() const
 {
 	return GLShader::isProgram(_programID);

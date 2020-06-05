@@ -19,7 +19,7 @@ namespace render
 	class Node;
 	class Materials;
 
-	enum class VertexAttribType
+	enum class VertexDataType
 	{
 		POSITION,
 		COLOR,
@@ -36,7 +36,7 @@ namespace render
 	};
 
 	// 统一变量
-	enum class VertexUniformType
+	enum class UniformType
 	{
 		// 投影矩阵
 		PROJECT_MATRIX,
@@ -50,6 +50,12 @@ namespace render
 		DIFFUSE_TEXTURE,
 		// 高光纹理
 		SPECULAR_TEXTURE,
+		// 环境参数
+		LIGHT_AMBIENT,
+		// 漫射参数
+		LIGHT_DIFFUSE,
+		// 高光参数
+		LIGHT_SPECULAR,
 	};
 
 	class Material : public sys::Object
@@ -83,28 +89,28 @@ namespace render
 		/**
 		*	添加Attrib shader in字段
 		*/
-		void addAttrib(VertexAttribType vat, const std::string& name);
+		void addVertexData(VertexDataType vat, const std::string& name);
 		/**
 		*	添加Attrib索引
 		*/
-		std::string getAttribIndex(VertexAttribType vat) const;
+		std::string getVertexName(VertexDataType vat) const;
 		/**
 		*	移除所有Attrib
 		*/
-		void removeAttribIndices();
+		void removeVertexDatas();
 	public:
 		/**
 		*	添加Uniform shader字段
 		*/
-		void addUniform(VertexUniformType vut, const std::string& name);
+		void addUniform(UniformType vut, const std::string& name);
 		/**
 		*	添加Attrib索引
 		*/
-		std::string getUniformIndex(VertexUniformType vut) const;
+		std::string getUniformName(UniformType vut) const;
 		/**
 		*	移除所有Attrib
 		*/
-		void removeUniformIndices();
+		void removeUniformDatas();
 	public:
 		/**
 		*	使用代码设置材质
@@ -129,19 +135,20 @@ namespace render
 		void startUpdateShaderUniformValue(Node* node, Materials* mats);
 		// 更新着色器attrib值
 		void startUpdateShaderVertexValue(Mesh* pMesh);
+
 		void endUpdateShaderUniformValue(Materials* mats);
 		void endUpdateShaderVertexValue(Mesh* pMesh);
 	protected:
 		void runProgramFunc();
 	private:
 		/**
-		*	Attrib
+		*	vertex
 		*/
-		std::map<VertexAttribType, std::string> _vertexAttribIndices;
+		std::map<VertexDataType, std::string> _vertexAttribIndices;
 		/**
 		*	Uniform
 		*/
-		std::map<VertexUniformType, std::string> _vertexUniformIndices;
+		std::map<UniformType, std::string> _vertexUniformIndices;
 		/**
 		*	基础信息
 		*/

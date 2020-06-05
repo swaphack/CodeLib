@@ -35,6 +35,12 @@ bool render::CtrlWidget::init()
 		pBlend->setEnabled(true);
 	}
 
+	FragmentDepthTest* pDepthTest = this->getFragOperator()->getHandle<FragmentDepthTest>();
+	if (pDepthTest)
+	{
+		pDepthTest->setEnabled(false);
+	}
+
 	return true; 
 }
 

@@ -69,6 +69,15 @@ namespace render
 		void detachAllShaders();
 	public:
 		/**
+		*	关联片元着色器中颜色输出位置
+		*/
+		void bindFragDataLocation(uint32_t colorNumber, const char* name);
+		/**
+		*	关联片元着色器中颜色输出位置
+		*/
+		void bindFragDataLocationIndexed(uint32_t colorNumber, uint32_t index, const char* name);
+	public:
+		/**
 		*	链接
 		*/
 		bool link();

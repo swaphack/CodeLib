@@ -12,7 +12,6 @@ using namespace sys;
 
 int main(int argc, char** argv)                  // 窗口显示状态
 {
-
 	//控制台输出
 	AllocConsole();
 	//AttachConsole(ATTACH_PARENT_PROCESS); // 将当前程序附着到父进程上  

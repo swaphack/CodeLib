@@ -52,12 +52,12 @@ void render::Material::setProgramFunc(const ShaderProgramFunc& func)
 	_programFunc = func;
 }
 
-void render::Material::addAttrib(VertexAttribType vat, const std::string& name)
+void render::Material::addVertexData(VertexDataType vat, const std::string& name)
 {
 	_vertexAttribIndices[vat] = name;
 }
 
-std::string render::Material::getAttribIndex(VertexAttribType vat) const
+std::string render::Material::getVertexName(VertexDataType vat) const
 {
 	auto it = _vertexAttribIndices.find(vat);
 	if (it == _vertexAttribIndices.end())
@@ -68,17 +68,17 @@ std::string render::Material::getAttribIndex(VertexAttribType vat) const
 	return it->second;
 }
 
-void render::Material::removeAttribIndices()
+void render::Material::removeVertexDatas()
 {
 	_vertexAttribIndices.clear();
 }
 
-void render::Material::addUniform(VertexUniformType vut, const std::string& name)
+void render::Material::addUniform(UniformType vut, const std::string& name)
 {
 	_vertexUniformIndices[vut] = name;
 }
 
-std::string render::Material::getUniformIndex(VertexUniformType vut) const
+std::string render::Material::getUniformName(UniformType vut) const
 {
 	auto it = _vertexUniformIndices.find(vut);
 	if (it == _vertexUniformIndices.end())
@@ -89,11 +89,10 @@ std::string render::Material::getUniformIndex(VertexUniformType vut) const
 	return it->second;
 }
 
-void render::Material::removeUniformIndices()
+void render::Material::removeUniformDatas()
 {
 	_vertexUniformIndices.clear();
 }
-
 void render::Material::applyMaterial()
 {
 	if (_detail)
@@ -140,20 +139,20 @@ void render::Material::startUpdateShaderUniformValue(Node* node, Materials* mats
 		{
 			continue;
 		}
-		if (item.first == VertexUniformType::PROJECT_MATRIX)
+		if (item.first == UniformType::PROJECT_MATRIX)
 		{
 			pUniform->setMatrix4(projMat);
 		}
-		else if (item.first == VertexUniformType::VIEW_MATRIX)
+		else if (item.first == UniformType::VIEW_MATRIX)
 		{
 			pUniform->setMatrix4(viewMat);
 		}
-		else if (item.first == VertexUniformType::MODEL_VIEW)
+		else if (item.first == UniformType::MODEL_VIEW)
 		{
 			pUniform->setMatrix4(modelMat);
 		}
 
-		else if (item.first == VertexUniformType::AMBIENT_TEXTURE)
+		else if (item.first == UniformType::AMBIENT_TEXTURE)
 		{
 			auto pTexture = mats->getTexture(_detail->getAmbientTextureMap());
 			if (pTexture)
@@ -169,7 +168,7 @@ void render::Material::startUpdateShaderUniformValue(Node* node, Materials* mats
 			pUniform->setValue(0);
 			GLDebug::showError();
 		}
-		else if (item.first == VertexUniformType::DIFFUSE_TEXTURE)
+		else if (item.first == UniformType::DIFFUSE_TEXTURE)
 		{
 			auto pTexture = mats->getTexture(_detail->getDiffuseTextureMap());
 			if (pTexture)
@@ -186,7 +185,7 @@ void render::Material::startUpdateShaderUniformValue(Node* node, Materials* mats
 
 			GLDebug::showError();
 		}
-		else if (item.first == VertexUniformType::SPECULAR_TEXTURE)
+		else if (item.first == UniformType::SPECULAR_TEXTURE)
 		{
 			auto pTexture = mats->getTexture(_detail->getSpecularTextureMap());
 			if (pTexture)
@@ -245,28 +244,28 @@ void render::Material::startUpdateShaderVertexValue(Mesh* pMesh)
 		VertexAttribPointer* pointer = vao->getVertexAttrib<VertexAttribPointer>(pAttrib->getAttribID());
 		pointer->enableVertexArrayAttrib();
 		GLDebug::showError();
-		if (item.first == VertexAttribType::POSITION)
+		if (item.first == VertexDataType::POSITION)
 		{
 			if (nVerticeSize > 0)
 			{
 				pointer->setVertexAttribPointer(vertices.getUnitSize(), VertexAttribPointerType::FLOAT, 0);
 			}
 		}
-		else if (item.first == VertexAttribType::COLOR)
+		else if (item.first == VertexDataType::COLOR)
 		{
 			if (nColorSize > 0)
 			{
 				pointer->setVertexAttribPointer(colors.getUnitSize(), VertexAttribPointerType::FLOAT, nVerticeSize);
 			}
 		}
-		else if (item.first == VertexAttribType::UV)
+		else if (item.first == VertexDataType::UV)
 		{
 			if (nUVSize > 0)
 			{
 				pointer->setVertexAttribPointer(texcoords.getUnitSize(), VertexAttribPointerType::FLOAT, nVerticeSize + nColorSize);
 			}
 		}
-		else if (item.first == VertexAttribType::NORMAL)
+		else if (item.first == VertexDataType::NORMAL)
 		{
 			if (nNormalSize > 0)
 			{
@@ -293,7 +292,7 @@ void render::Material::endUpdateShaderUniformValue(Materials* mats)
 		{
 			continue;
 		}
-		if (item.first == VertexUniformType::AMBIENT_TEXTURE)
+		if (item.first == UniformType::AMBIENT_TEXTURE)
 		{
 			auto pTexture = mats->getTexture(_detail->getAmbientTextureMap());
 			if (pTexture)
@@ -304,7 +303,7 @@ void render::Material::endUpdateShaderUniformValue(Materials* mats)
 
 			GLDebug::showError();
 		}
-		else if (item.first == VertexUniformType::DIFFUSE_TEXTURE)
+		else if (item.first == UniformType::DIFFUSE_TEXTURE)
 		{
 			auto pTexture = mats->getTexture(_detail->getDiffuseTextureMap());
 			if (pTexture)
@@ -315,7 +314,7 @@ void render::Material::endUpdateShaderUniformValue(Materials* mats)
 
 			GLDebug::showError();
 		}
-		else if (item.first == VertexUniformType::SPECULAR_TEXTURE)
+		else if (item.first == UniformType::SPECULAR_TEXTURE)
 		{
 			auto pTexture = mats->getTexture(_detail->getSpecularTextureMap());
 			if (pTexture)

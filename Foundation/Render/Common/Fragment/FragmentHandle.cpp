@@ -48,20 +48,24 @@ void render::FragmentHandle::begin()
 		GLState::getInteger((uint32_t)_enableMode, &_lastEnableModeStatus);
 	}
 	this->saveData();
-
-	GLState::enable(_enableMode);
 }
 
 void render::FragmentHandle::update()
 {
-
+	if (_enabled)
+	{
+		GLState::enable(_enableMode);
+	}
+	else
+	{
+		GLState::disable(_enableMode);
+	}
 }
 
 void render::FragmentHandle::end()
 {
 	if (_enableMode != EnableMode::NONE)
 	{
-		GLState::disable(_enableMode);
 		bool lastEnabled = _lastEnableModeStatus == 1;
 		if (lastEnabled)
 		{
