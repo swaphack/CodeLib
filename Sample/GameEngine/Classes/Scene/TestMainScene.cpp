@@ -31,7 +31,7 @@ bool TestMainScene::init()
 
 	//this->addChild(CREATE_NODE(TestParticleNode));
 
-	this->addChild(CREATE_NODE(TestTextureNode));
+	//this->addChild(CREATE_NODE(TestTextureNode));
 
 	//this->addChild(CREATE_NODE(TestPostProcessing));
 

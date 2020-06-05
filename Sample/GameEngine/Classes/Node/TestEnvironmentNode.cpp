@@ -117,7 +117,7 @@ void TestEnvironmentNode::testCamera()
 		pAction1->setPosition(0, 0, 1);
 		pAction1->setDuration(10);
 
-		pAction = pAction1;
+		//pAction = pAction1;
 	}
 
 	RepeateForeverAction* pRepeateAction = CREATE_ACTION(RepeateForeverAction);
