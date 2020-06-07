@@ -1,5 +1,6 @@
 #include "ActionManager.h"
 #include "Action.h"
+#include "../Node/Node.h"
 #include <vector>
 
 using namespace render;
@@ -72,7 +73,7 @@ void ActionManager::removeAllActions()
 	}
 }
 
-void ActionManager::pauseAllActionsByTargets(sys::Object* target)
+void ActionManager::pauseAllActionsByTargets(Node* target)
 {
 	if (target == nullptr)
 	{
@@ -89,7 +90,7 @@ void ActionManager::pauseAllActionsByTargets(sys::Object* target)
 	}
 }
 
-void ActionManager::resumeAllActionsByTargets(sys::Object* target)
+void ActionManager::resumeAllActionsByTargets(Node* target)
 {
 	if (target == nullptr)
 	{
@@ -107,7 +108,7 @@ void ActionManager::resumeAllActionsByTargets(sys::Object* target)
 	}
 }
 
-void ActionManager::removeAllActionsByTargets(sys::Object* target)
+void ActionManager::removeAllActionsByTargets(Node* target)
 {
 	if (target == nullptr)
 	{

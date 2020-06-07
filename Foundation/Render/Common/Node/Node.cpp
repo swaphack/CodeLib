@@ -1,5 +1,5 @@
 #include "Node.h"
-#include "Common/Touch/TouchProxy.h"
+#include "Common/Input/TouchProxy.h"
 #include "Common/Action/ActionProxy.h"
 #include "Common/Tool/Tool.h"
 #include <algorithm>
@@ -114,7 +114,7 @@ void Node::removeAllChildren()
 
 	while (it != children.end())
 	{
-		Node* node = dynamic_cast<Node*>((*it));
+		Node* node = (*it);
 		ASSERT(node != nullptr);
 		node->removeFromParent();
 		it++;

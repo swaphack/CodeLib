@@ -25,12 +25,12 @@ bool render::CubeMap::init()
 
 	_notify->addListen(NodeNotifyType::TEXTURE, [this]() {
 		this->onImageChanged();
-		});
+	});
 
 	_notify->addListen(NodeNotifyType::SPACE, [this]() {
 		this->onCubeChanged();
 		this->updateBufferData();
-		});
+	});
 
 	return true;
 }

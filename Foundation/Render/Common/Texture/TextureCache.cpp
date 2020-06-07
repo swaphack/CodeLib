@@ -97,7 +97,7 @@ Texture2D* TextureCache::createTexture2D(const sys::ImageDefine& imageDefine)
 	Texture* texture = getTexture2D(imageDefine.filepath);
 	if (texture)
 	{
-		return dynamic_cast<Texture2D*>(texture);
+		return texture->as<Texture2D>();
 	}
 
 	sys::ImageDetail* image = loadImageDetail(imageDefine);

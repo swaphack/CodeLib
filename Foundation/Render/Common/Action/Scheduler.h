@@ -4,7 +4,7 @@
 
 namespace render
 {
-	typedef void (sys::Object::*ACTION_UPDATE)(float intervale);
+	typedef void (Node::*ACTION_UPDATE)(float intervale);
 	#define SEL_ACTION_UPDATE(SELECTOR) static_cast<ACTION_UPDATE>(&SELECTOR)
 
 	// 周期性定时器

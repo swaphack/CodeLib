@@ -32,7 +32,7 @@ void RepeateAction::setAction(Action* action)
 	_action = action;
 }
 
-void RepeateAction::setTarget(sys::Object* target)
+void RepeateAction::setTarget(Node* target)
 {
 	Action::setTarget(target);
 	if (_action)
@@ -70,7 +70,7 @@ void RepeateAction::update(float duration)
 
 	float d1 = duration;
 
-	IntervalAction* pIntervalAction = dynamic_cast<IntervalAction*>(_action);
+	IntervalAction* pIntervalAction = _action->as<IntervalAction>();
 	if (pIntervalAction)
 	{
 		float elapsed = pIntervalAction->getElapsed();
@@ -119,7 +119,7 @@ void RepeateForeverAction::setAction(Action* action)
 	_action = action;
 }
 
-void RepeateForeverAction::setTarget(sys::Object* target)
+void RepeateForeverAction::setTarget(Node* target)
 {
 	Action::setTarget(target);
 	if (_action)
@@ -152,7 +152,7 @@ void RepeateForeverAction::update(float duration)
 	}
 
 	float d1 = duration;
-	IntervalAction* pIntervalAction = dynamic_cast<IntervalAction*>(_action);
+	IntervalAction* pIntervalAction = _action->as<IntervalAction>();
 	if (pIntervalAction)
 	{
 		float elapsed = pIntervalAction->getElapsed();
@@ -229,7 +229,7 @@ void SequenceAction::removeAllActions()
 	_actions.clear();
 }
 
-void SequenceAction::setTarget(sys::Object* target)
+void SequenceAction::setTarget(Node* target)
 {
 	Action::setTarget(target);
 
@@ -341,7 +341,7 @@ void SpawnAction::removeAllActions()
 	_actions.clear();
 }
 
-void SpawnAction::setTarget(sys::Object* target)
+void SpawnAction::setTarget(Node* target)
 {
 	Action::setTarget(target);
 
@@ -456,7 +456,7 @@ CallFuncN::~CallFuncN()
 
 }
 
-void CallFuncN::setFunc(const std::function<void(sys::Object*)>& func)
+void CallFuncN::setFunc(const std::function<void(Node*)>& func)
 {
 	_func = func;
 }

@@ -19,7 +19,7 @@ namespace ui
 		/**
 		*	几何信息
 		*/
-		const math::Rect& getGeometry();
+		const math::Rect& getGeometry() const;
 		/**
 		*	设置几何信息
 		*/
@@ -39,7 +39,7 @@ namespace ui
 		/**
 		*	获取几何位置
 		*/
-		math::Vector2 getOrgin();
+		const math::Vector2& getOrgin() const;
 		/**
 		*	设置几何面积
 		*/
@@ -51,7 +51,7 @@ namespace ui
 		/**
 		*	获取几何面积
 		*/
-		math::Size getSize();
+		const math::Size& getSize()const;
 		/**
 		*	设置元件
 		*/
@@ -59,7 +59,7 @@ namespace ui
 		/**
 		*	获取元件
 		*/
-		render::CtrlWidget* getWidget();
+		render::CtrlWidget* getWidget() const;
 		/**
 		*	设置锚点位置
 		*/
@@ -85,7 +85,7 @@ namespace ui
 		/**
 		*	矩形框是否可见
 		*/
-		bool isBoxVisible();
+		bool isBoxVisible() const;
 		/**
 		*	设置矩形框显示颜色
 		*/
@@ -93,7 +93,7 @@ namespace ui
 		/**
 		*	获取矩形框显示颜色
 		*/
-		const sys::Color4B& getBoxColor();
+		const sys::Color4B& getBoxColor() const;
 		/**
 		*	设置元件的集合信息
 		*/

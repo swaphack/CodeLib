@@ -26,7 +26,7 @@ void ImageLoader::parseAttributes()
 	bool bFlipX = false;
 	bool bFlipY = false;
 	uint8_t opacity = 255;
-	BlendParam blend;
+	render::BlendParam blend;
 
 	LOAD_WIDGET_ATTRIBUTE(PROPERTY_COLOR, setColor, color);
 	LOAD_WIDGET_ATTRIBUTE(PROPERTY_BLEND, setBlend, blend);

@@ -94,7 +94,7 @@ math::Vector3 MoveToAction::getPosition()
 
 void MoveToAction::updateInterval(float percent)
 {
-	Node* node = dynamic_cast<Node*>(_target);
+	Node* node = _target;
 	if (node && _currentTime == 0)
 	{
 		_offset = _destination;
@@ -138,7 +138,7 @@ math::Vector3 MoveByAction::getPosition()
 
 void MoveByAction::updateInterval(float percent)
 {
-	Node* node = dynamic_cast<Node*>(_target);
+	Node* node =_target;
 	if (node)
 	{
 		const math::Vector3& current = node->getPosition();
@@ -177,7 +177,7 @@ math::Vector3 RotateToAction::getRotation()
 
 void RotateToAction::updateInterval(float percent)
 {
-	Node* node = dynamic_cast<Node*>(_target);
+	Node* node =_target;
 	if (node && _currentTime == _totalTime)
 	{
 		_offset = _rotation;
@@ -221,7 +221,7 @@ math::Vector3 RotateByAction::getRotation()
 
 void RotateByAction::updateInterval(float percent)
 {
-	Node* node = dynamic_cast<Node*>(_target);
+	Node* node =_target;
 	if (node)
 	{
 		const math::Vector3& current = node->getRotation();
@@ -260,7 +260,7 @@ math::Vector3 ScaleToAction::getScale()
 
 void ScaleToAction::updateInterval(float percent)
 {
-	Node* node = dynamic_cast<Node*>(_target);
+	Node* node =_target;
 	if (node && _currentTime == _totalTime)
 	{
 		_offset = _scale;
@@ -305,7 +305,7 @@ math::Vector3 ScaleByAction::getScale()
 
 void ScaleByAction::updateInterval(float percent)
 {
-	Node* node = dynamic_cast<Node*>(_target);
+	Node* node =_target;
 	if (node)
 	{
 		const math::Vector3& current = node->getScale();

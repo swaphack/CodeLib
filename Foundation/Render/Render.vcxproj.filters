@@ -34,15 +34,6 @@
     <ClCompile Include="Common\Action\ActionProxy.cpp">
       <Filter>Common\Action</Filter>
     </ClCompile>
-    <ClCompile Include="Common\Touch\TouchManager.cpp">
-      <Filter>Common\Touch</Filter>
-    </ClCompile>
-    <ClCompile Include="Common\Touch\TouchProxy.cpp">
-      <Filter>Common\Touch</Filter>
-    </ClCompile>
-    <ClCompile Include="Common\Keyboard\KeyboardManager.cpp">
-      <Filter>Common\Keyboard</Filter>
-    </ClCompile>
     <ClCompile Include="Graphic\Command\DrawCommander.cpp">
       <Filter>Graphic\Command</Filter>
     </ClCompile>
@@ -492,6 +483,18 @@
     <ClCompile Include="Common\PostProcessing\PostProcessing.cpp">
       <Filter>Common\PostProcessing</Filter>
     </ClCompile>
+    <ClCompile Include="Common\Input\KeyboardManager.cpp">
+      <Filter>Common\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Input\TouchManager.cpp">
+      <Filter>Common\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Input\TouchProxy.cpp">
+      <Filter>Common\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Input\MouseManager.cpp">
+      <Filter>Common\Input</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Common\Node\import.h">
@@ -549,21 +552,6 @@
       <Filter>Platform\Windows</Filter>
     </ClInclude>
     <ClInclude Include="render.h" />
-    <ClInclude Include="Common\Touch\import.h">
-      <Filter>Common\Touch</Filter>
-    </ClInclude>
-    <ClInclude Include="Common\Touch\macros.h">
-      <Filter>Common\Touch</Filter>
-    </ClInclude>
-    <ClInclude Include="Common\Touch\TouchManager.h">
-      <Filter>Common\Touch</Filter>
-    </ClInclude>
-    <ClInclude Include="Common\Touch\TouchDelegate.h">
-      <Filter>Common\Touch</Filter>
-    </ClInclude>
-    <ClInclude Include="Common\Touch\TouchProxy.h">
-      <Filter>Common\Touch</Filter>
-    </ClInclude>
     <ClInclude Include="3d\Shape\import.h">
       <Filter>3d\Shape</Filter>
     </ClInclude>
@@ -572,12 +560,6 @@
     </ClInclude>
     <ClInclude Include="3d\import.h">
       <Filter>3d</Filter>
-    </ClInclude>
-    <ClInclude Include="Common\Keyboard\KeyboardManager.h">
-      <Filter>Common\Keyboard</Filter>
-    </ClInclude>
-    <ClInclude Include="Common\Keyboard\import.h">
-      <Filter>Common\Keyboard</Filter>
     </ClInclude>
     <ClInclude Include="Graphic\Command\macros.h">
       <Filter>Graphic\Command</Filter>
@@ -1032,9 +1014,6 @@
     <ClInclude Include="Common\Material\Material.h">
       <Filter>Common\Material</Filter>
     </ClInclude>
-    <ClInclude Include="Common\Keyboard\KeyboardDelegate.h">
-      <Filter>Common\Keyboard</Filter>
-    </ClInclude>
     <ClInclude Include="Common\Shader\ShaderProgramDelegate.h">
       <Filter>Common\Shader</Filter>
     </ClInclude>
@@ -1143,6 +1122,30 @@
     <ClInclude Include="Common\PostProcessing\PostProcessing.h">
       <Filter>Common\PostProcessing</Filter>
     </ClInclude>
+    <ClInclude Include="Common\Input\import.h">
+      <Filter>Common\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Input\KeyboardDelegate.h">
+      <Filter>Common\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Input\KeyboardManager.h">
+      <Filter>Common\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Input\TouchDelegate.h">
+      <Filter>Common\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Input\TouchManager.h">
+      <Filter>Common\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Input\TouchProxy.h">
+      <Filter>Common\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Input\MouseDelegate.h">
+      <Filter>Common\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Input\MouseManager.h">
+      <Filter>Common\Input</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Common">
@@ -1172,14 +1175,8 @@
     <Filter Include="Platform\Windows">
       <UniqueIdentifier>{b2c7b399-fa6c-49e8-9325-933e2dcec101}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Common\Touch">
-      <UniqueIdentifier>{2f218a69-d8e9-4b3a-8f41-c4dc02aabb6c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="3d\Shape">
       <UniqueIdentifier>{ac244ac0-0e32-49a2-b0c2-cccbd2b85bff}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Common\Keyboard">
-      <UniqueIdentifier>{a6dde4f6-3baa-4bd1-ac2d-6e093a8890f7}</UniqueIdentifier>
     </Filter>
     <Filter Include="Graphic">
       <UniqueIdentifier>{b0c0f800-c2ea-47bf-a1f2-f696a2daf561}</UniqueIdentifier>
@@ -1261,6 +1258,9 @@
     </Filter>
     <Filter Include="Common\PostProcessing">
       <UniqueIdentifier>{aa556586-8459-4345-b44c-9a745f9c3ded}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common\Input">
+      <UniqueIdentifier>{409b1e32-3246-4c04-bffe-9e0fb742b02f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

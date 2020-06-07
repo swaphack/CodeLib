@@ -43,7 +43,7 @@ void TestUINode::testEditBox()
 	pEditLabel->setVolume(400, 100, 0);
 	pEditLabel->setKeyboardEnable(true);
 	pEditLabel->setInputListen([](sys::Object* object, EditInputStatus status){
-		CtrlEditLabel* pNode = dynamic_cast<CtrlEditLabel*>(object);
+		CtrlEditLabel* pNode = object->as<CtrlEditLabel>();
 		if (pNode == nullptr)
 		{
 			return;
@@ -73,7 +73,7 @@ void TestUINode::testSequenceFrame()
 	pSequenceFrame->start();
 
 	this->addChild(pSequenceFrame);
-	G_KEYBOARDMANAGER->addKeyboardDelegate(pSequenceFrame, this, KEYBOARD_DELEGATTE_SELECTOR(TestUINode::onKeyBoardRole));
+	G_KEYBOARDMANAGER->addKeyboardDelegate(this, pSequenceFrame, KEYBOARD_DELEGATE_SELECTOR(TestUINode::onKeyBoardRole));
 }
 
 void TestUINode::onKeyBoardRole(render::Node* node, sys::BoardKey key, sys::ButtonStatus type)

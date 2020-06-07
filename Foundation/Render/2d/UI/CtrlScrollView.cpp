@@ -1,6 +1,6 @@
 #include "CtrlScrollView.h"
-#include "Common/Touch/TouchProxy.h"
-#include "Common/Touch/TouchManager.h"
+#include "Common/Input/TouchProxy.h"
+#include "Common/Input/TouchManager.h"
 #include <cassert>
 using namespace render;
 

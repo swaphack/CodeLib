@@ -96,33 +96,74 @@ void TestEnvironmentNode::testCamera()
 {
 	Camera* pCamera = Camera::getMainCamera();
 
-	if (pCamera->getDimensions() != CameraDimensions::THREE)
-	{
-		return;
-	}
+	auto size = Tool::getGLViewSize();
+	pCamera->setPosition(-size.getWidth() * 0.5f, -size.getHeight() * 0.5f);
+	G_KEYBOARDMANAGER->addKeyboardFunc(this, pCamera, [this](Node* object, sys::BoardKey key, sys::ButtonStatus type) {
+		auto camera = object->as<Camera>();
+		if (camera == nullptr)
+		{
+			return;
+		}
 
-	pCamera->setPositionZ(10.0f);
+		if (key == sys::BoardKey::K1)
+		{
+			_viewType = 0;
+		}
+		else if (key == sys::BoardKey::K2)
+		{
+			_viewType = 1;
+		}
+		else if (key == sys::BoardKey::KA)
+		{
+			camera->setPositionX(camera->getPositionX() + 10);
+		}
+		else if (key == sys::BoardKey::KD)
+		{
+			camera->setPositionX(camera->getPositionX() - 10);
+		}
+		else if (key == sys::BoardKey::KQ)
+		{
+			camera->setPositionY(camera->getPositionY() - 10);
+		}
+		else if (key == sys::BoardKey::KE)
+		{
+			camera->setPositionY(camera->getPositionY() + 10);
+		}
+		else if (key == sys::BoardKey::KW)
+		{
+			camera->setPositionZ(camera->getPositionZ() + 10);
+		}
+		else if (key == sys::BoardKey::KS)
+		{
+			camera->setPositionZ(camera->getPositionZ() - 10);
+		}
+	});
 
-	Action* pAction = nullptr;
-	{
-		RotateByAction* pAction0 = CREATE_ACTION(RotateByAction);
-		pAction0->setRotation(0, 30, 0);
-		pAction0->setDuration(1);
+	G_MOUSEMANAGER->addMouseScrollFunc(this, pCamera, [this](Node* object, sys::ScrollEvent evt, float param) {
+		auto camera = object->as<Camera>();
+		if (camera == nullptr)
+		{
+			return;
+		}
 
-		pAction = pAction0;
-	}
-	
-	{
-		MoveByAction* pAction1 = CREATE_ACTION(MoveByAction);
-		pAction1->setPosition(0, 0, 1);
-		pAction1->setDuration(10);
+		float value = param * 10;
 
-		//pAction = pAction1;
-	}
-
-	RepeateForeverAction* pRepeateAction = CREATE_ACTION(RepeateForeverAction);
-	pRepeateAction->setAction(pAction);
-
-	pCamera->getActionProxy()->runAction(pRepeateAction);
-	
+		float zNear = camera->getViewParameter().zNear;
+		float zFar = camera->getViewParameter().zFar;
+		if (_viewType == 0)
+		{
+			if (camera->getDimensions() == CameraDimensions::THREE)
+			{
+				if (zNear + value <= 0)
+				{
+					return;
+				}
+			}
+			camera->setViewDistance(zNear + value, zFar);
+		}
+		else
+		{
+			camera->setViewDistance(zNear, zFar + value);
+		}
+	});
 }

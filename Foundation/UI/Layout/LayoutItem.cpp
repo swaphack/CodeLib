@@ -13,7 +13,7 @@ LayoutItem::~LayoutItem()
 {
 }
 
-const math::Rect& LayoutItem::getGeometry()
+const math::Rect& LayoutItem::getGeometry() const
 {
 	return m_rGeometry;
 }
@@ -35,7 +35,7 @@ void LayoutItem::setOrgin(float x, float y)
 	m_rGeometry.setOrigin(x, y);
 }
 
-math::Vector2 LayoutItem::getOrgin()
+const math::Vector2& LayoutItem::getOrgin() const
 {
 	return m_rGeometry.getOrigin();
 }
@@ -45,7 +45,7 @@ void LayoutItem::setSize(float width, float height)
 	m_rGeometry.setSize(width, height);
 }
 
-math::Size LayoutItem::getSize()
+const math::Size& LayoutItem::getSize() const
 {
 	return m_rGeometry.getSize();
 }
@@ -59,7 +59,7 @@ void LayoutItem::setWidget(render::CtrlWidget* widget)
 	m_pWidget = widget;
 }
 
-render::CtrlWidget* LayoutItem::getWidget()
+render::CtrlWidget* LayoutItem::getWidget() const
 {
 	return m_pWidget;
 }
@@ -103,7 +103,7 @@ void LayoutItem::setBoxVisible(bool status)
 	m_bBoxVisible = status;
 }
 
-bool LayoutItem::isBoxVisible()
+bool LayoutItem::isBoxVisible() const
 {
 	return m_bBoxVisible;
 }
@@ -113,7 +113,7 @@ void LayoutItem::setBoxColor(const sys::Color4B& color)
 	m_cBoxColor = color;
 }
 
-const sys::Color4B& LayoutItem::getBoxColor()
+const sys::Color4B& LayoutItem::getBoxColor() const
 {
 	return m_cBoxColor;
 }
@@ -134,53 +134,6 @@ void LayoutItem::calAnchorPoint(float& x, float& y)
 {
 	x = m_vAnchorPoint.getX();
 	y = m_vAnchorPoint.getY();
-	/*
-	switch (m_eAnchorPosition)
-	{
-	case ui::EAP_NONE:
-		x = 0;
-		y = 0;
-		break;
-	case ui::EAP_DOWN_LEFT:
-		x = 0;
-		y = 0;
-		break;
-	case ui::EAP_DOWN_CENTER:
-		x = 0.5f;
-		y = 0;
-		break;
-	case ui::EAP_DOWN_RIGHT:
-		x = 1;
-		y = 0;
-		break;
-	case ui::EAP_CENTER_LEFT:
-		x = 0;
-		y = 0.5f;
-		break;
-	case ui::EAP_CENTER_CENTER:
-		x = 0.5f;
-		y = 0.5f;
-		break;
-	case ui::EAP_CENTER_RIGHT:
-		x = 1;
-		y = 0.5f;
-		break;
-	case ui::EAP_UP_LEFT:
-		x = 0;
-		y = 1;
-		break;
-	case ui::EAP_UP_CENTER:
-		x = 0.5f;
-		y = 1;
-		break;
-	case ui::EAP_UP_RIGHT:
-		x = 1;
-		y = 1;
-		break;
-	default:
-		break;
-	}
-	*/
 }
 
 void ui::LayoutItem::showWidgetInfo()

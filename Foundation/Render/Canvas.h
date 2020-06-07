@@ -25,11 +25,6 @@ namespace render
 		// 获取视图
 		View* getView();
 	public:
-		// 动作管理
-		const ActionManager* getActionManager();
-		// 触摸管理
-		const TouchManager* getTouchManager();
-	public:
 		// 是否存在场景
 		bool hasScene();
 		// 压入场景
@@ -45,10 +40,6 @@ namespace render
 	private:
 		// 视图
 		View* _view;
-		// 动作管理
-		ActionManager* _actionManager;
-		// 触摸管理
-		TouchManager* _touchManager;
 		// 场景
 		std::stack<Scene*> _scenes;
 

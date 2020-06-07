@@ -15,4 +15,6 @@ protected:
 	void init2DSkyBox();
 
 	void testCamera();
+private:
+	int _viewType = 0;
 };

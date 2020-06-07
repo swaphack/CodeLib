@@ -1,4 +1,7 @@
 #include "UIProxy.h"
+#include "Layout/import.h"
+#include "Loader/import.h"
+
 using namespace ui;
 
 #define LAYOUT_ROOT_NAME	"root"
@@ -37,9 +40,9 @@ std::string getLayoutName(Layout* layout)
 		return "";
 	}
 
-// 	if (dynamic_cast<HorizontalLayout*>(layout))
+// 	if (layout->is<HorizontalLayout>())
 // 		return ELEMENT_NAME_HLAYOUT;
-// 	else if (dynamic_cast<VerticalLayout*>(layout))
+// 	else if (layout->is<VerticalLayout>())
 // 		return ELEMENT_NAME_VLAYOUT;
 // 	else
 		return ELEMENT_NAME_LAYOUT;
@@ -161,12 +164,12 @@ void UIProxy::removeAllElementParsers()
 	_elementParsers.clear();
 }
 
-const math::Size& UIProxy::getDesignSize()
+const math::Size& UIProxy::getDesignSize() const
 {
 	return _designSize;
 }
 
-LayoutDirection UIProxy::getDesignDirection()
+LayoutDirection UIProxy::getDesignDirection() const
 {
 	return _designDirection;
 }
@@ -195,7 +198,7 @@ LayoutItem* UIProxy::initLayoutItem(tinyxml2::XMLElement* xmlNode)
 	}
 	IElement* element = iter->second;
 
-	WidgetLoader* loader = dynamic_cast<WidgetLoader*>(element);
+	WidgetLoader* loader = element->as<WidgetLoader>();
 	if (loader == nullptr)
 	{
 		return nullptr;
@@ -232,7 +235,7 @@ bool UIProxy::loadLayout(Layout* pLayout, tinyxml2::XMLElement* xmlNode)
 				pLayout->getWidget()->addChild(childItem->getWidget());
 			}
 
-			Layout* childLayout = dynamic_cast<Layout*>(childItem);
+			Layout* childLayout = childItem->as<Layout>();
 			if (childNode->FirstChild() && childLayout)
 			{
 				loadLayout(childLayout, childNode->FirstChildElement());
@@ -274,7 +277,7 @@ Layout* UIProxy::loadRoot(tinyxml2::XMLElement* xmlNode)
 		return nullptr;
 	}
 
-	Layout* pLayout = dynamic_cast<Layout*>(pRootItem);
+	Layout* pLayout = pRootItem->as<Layout>();
 	if (pLayout == nullptr)
 	{// 非布局节点
 		return nullptr;
@@ -303,7 +306,7 @@ bool UIProxy::saveLayoutItem(LayoutItem* item, tinyxml2::XMLElement* xmlNode)
 	{
 		return false;
 	}
-	LayoutLoader* pLoader = dynamic_cast<LayoutLoader*>(pElement);
+	LayoutLoader* pLoader = pElement->as<LayoutLoader>();
 	if (pLoader == nullptr)
 	{
 		return false;
@@ -312,7 +315,7 @@ bool UIProxy::saveLayoutItem(LayoutItem* item, tinyxml2::XMLElement* xmlNode)
 	pLoader->setWidget(item->getWidget());
 	pLoader->save(xmlNode);
 
-	Layout* layout = dynamic_cast<Layout*>(item);
+	Layout* layout = item->as<Layout>();
 	if (layout == nullptr)
 	{
 		return true;

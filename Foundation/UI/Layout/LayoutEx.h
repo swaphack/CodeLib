@@ -1,7 +1,7 @@
 #pragma once
 
 #include "LayoutItemEx.h"
-#include "Layout/ui_common.h"
+#include "ui_common.h"
 
 namespace ui
 {

@@ -15,13 +15,13 @@ namespace render
 		// 添加按键派发对象
 		void addKeyboardDelegate(sys::Object* target, Node* node, KEYBOARD_DELEGATE_HANDLER handler);
 		// 移除按键派发对象
-		void removeKeyboardDelegate(sys::Object* target);
+		void removeKeyboardDelegate(sys::Object* target, Node* node);
 		// 移除所有按键派发对象
 		void removeAllKeyboardDelegates();
 		// 添加按键派发对象
-		void addKeyboardFunc(Node* node, KeyboardFunc func);
+		void addKeyboardFunc(sys::Object* target, Node* node, KeyboardFunc func);
 		// 移除按键派发对象
-		void removeKeyboardFunc(Node* node);
+		void removeKeyboardFunc(sys::Object* target, Node* node);
 		// 移除所有按键派发对象
 		void removeAllKeyboardFuncs();
 		// 派发接受到的按钮事件
@@ -29,9 +29,9 @@ namespace render
 	protected:
 	private:
 		// 键盘事件委托集
-		std::map<sys::Object*, KeyboardDelegate> _keyboardDelegates;
+		std::map<sys::Object*, std::map<Node*, KEYBOARD_DELEGATE_HANDLER>> _keyboardDelegates;
 		// 键盘事件委托集
-		std::map<Node*, KeyboardFunc> _keyboardFuncs;
+		std::map< sys::Object*, std::map<Node*, KeyboardFunc>> _keyboardFuncs;
 	};
 
 

@@ -2,10 +2,10 @@
 #include "Action.h"
 #include "ActionProxy.h"
 #include "ActionManager.h"
-
+#include "../Node/Node.h"
 using namespace render;
 
-ActionProxy::ActionProxy(sys::Object* target)
+ActionProxy::ActionProxy(Node* target)
 {
 	SAFE_RETAIN(target);
 	_target = target;

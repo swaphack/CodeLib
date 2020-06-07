@@ -2,138 +2,138 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClInclude Include="ui.h" />
+    <ClInclude Include="Display\Display.h">
+      <Filter>Display</Filter>
+    </ClInclude>
+    <ClInclude Include="Display\import.h">
+      <Filter>Display</Filter>
+    </ClInclude>
     <ClInclude Include="Layout\Layout.h">
       <Filter>Layout</Filter>
     </ClInclude>
     <ClInclude Include="Layout\LayoutItem.h">
       <Filter>Layout</Filter>
     </ClInclude>
-    <ClInclude Include="File\Load\ImageLoader.h">
-      <Filter>File\Load</Filter>
+    <ClInclude Include="Layout\ui_common.h">
+      <Filter>Layout</Filter>
     </ClInclude>
-    <ClInclude Include="File\Load\import.h">
-      <Filter>File\Load</Filter>
+    <ClInclude Include="Layout\LayoutEx.h">
+      <Filter>Layout</Filter>
     </ClInclude>
-    <ClInclude Include="File\Load\TextLoader.h">
-      <Filter>File\Load</Filter>
+    <ClInclude Include="Layout\LayoutItemEx.h">
+      <Filter>Layout</Filter>
     </ClInclude>
-    <ClInclude Include="File\Parse\import.h">
-      <Filter>File\Parse</Filter>
+    <ClInclude Include="Layout\LayoutSpacerItem.h">
+      <Filter>Layout</Filter>
     </ClInclude>
-    <ClInclude Include="File\import.h">
-      <Filter>File</Filter>
-    </ClInclude>
-    <ClInclude Include="File\UIProxy.h">
-      <Filter>File</Filter>
+    <ClInclude Include="Layout\LayoutWidgetItem.h">
+      <Filter>Layout</Filter>
     </ClInclude>
     <ClInclude Include="Layout\import.h">
       <Filter>Layout</Filter>
     </ClInclude>
-    <ClInclude Include="Display\Display.h">
+    <ClInclude Include="Loader\import.h">
+      <Filter>Loader</Filter>
+    </ClInclude>
+    <ClInclude Include="Loader\2dLoader\ImageLoader.h">
+      <Filter>Loader\2dLoader</Filter>
+    </ClInclude>
+    <ClInclude Include="Loader\2dLoader\import.h">
+      <Filter>Loader\2dLoader</Filter>
+    </ClInclude>
+    <ClInclude Include="Loader\2dLoader\LayoutLoader.h">
+      <Filter>Loader\2dLoader</Filter>
+    </ClInclude>
+    <ClInclude Include="Loader\2dLoader\TextLoader.h">
+      <Filter>Loader\2dLoader</Filter>
+    </ClInclude>
+    <ClInclude Include="Loader\2dLoader\WidgetLoader.h">
+      <Filter>Loader\2dLoader</Filter>
+    </ClInclude>
+    <ClInclude Include="Loader\3dLoader\import.h">
+      <Filter>Loader\3dLoader</Filter>
+    </ClInclude>
+    <ClInclude Include="Loader\ElementWidget\define.h">
+      <Filter>Loader\ElementWidget</Filter>
+    </ClInclude>
+    <ClInclude Include="Loader\ElementWidget\IElement.h">
+      <Filter>Loader\ElementWidget</Filter>
+    </ClInclude>
+    <ClInclude Include="Loader\ElementWidget\import.h">
+      <Filter>Loader\ElementWidget</Filter>
+    </ClInclude>
+    <ClInclude Include="Loader\ElementWidget\WidgetProperty.h">
+      <Filter>Loader\ElementWidget</Filter>
+    </ClInclude>
+    <ClInclude Include="Display\UIProxy.h">
       <Filter>Display</Filter>
-    </ClInclude>
-    <ClInclude Include="File\Parse\WidgetProperty.h">
-      <Filter>File\Parse</Filter>
-    </ClInclude>
-    <ClInclude Include="Display\import.h">
-      <Filter>Display</Filter>
-    </ClInclude>
-    <ClInclude Include="File\Parse\IElement.h">
-      <Filter>File\Parse</Filter>
-    </ClInclude>
-    <ClInclude Include="File\Load\LayoutLoader.h">
-      <Filter>File\Load</Filter>
-    </ClInclude>
-    <ClInclude Include="File\Load\define.h">
-      <Filter>File\Load</Filter>
-    </ClInclude>
-    <ClInclude Include="LayoutEx\import.h">
-      <Filter>LayoutEx</Filter>
-    </ClInclude>
-    <ClInclude Include="LayoutEx\LayoutSpacerItem.h">
-      <Filter>LayoutEx</Filter>
-    </ClInclude>
-    <ClInclude Include="LayoutEx\LayoutWidgetItem.h">
-      <Filter>LayoutEx</Filter>
-    </ClInclude>
-    <ClInclude Include="LayoutEx\LayoutItemEx.h">
-      <Filter>LayoutEx</Filter>
-    </ClInclude>
-    <ClInclude Include="LayoutEx\LayoutEx.h">
-      <Filter>LayoutEx</Filter>
-    </ClInclude>
-    <ClInclude Include="File\Load\WidgetLoader.h">
-      <Filter>File\Load</Filter>
-    </ClInclude>
-    <ClInclude Include="Layout\ui_common.h">
-      <Filter>Layout</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Filter Include="Layout">
-      <UniqueIdentifier>{25c75f58-eb86-4a54-bbe3-e3e0a690a482}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="File">
-      <UniqueIdentifier>{f4961c8d-bcbc-4200-ba95-4e6bcb507eb1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="File\Load">
-      <UniqueIdentifier>{e11f3531-b386-4473-aeed-6b64a9be76cf}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="File\Parse">
-      <UniqueIdentifier>{6644c169-2edf-4c5c-a413-bf0adc974e17}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Display">
       <UniqueIdentifier>{1c8ec4f5-d498-4823-a48b-5df1683c61d4}</UniqueIdentifier>
     </Filter>
     <Filter Include="Resource">
       <UniqueIdentifier>{7c1ebd8a-3116-46ab-9b57-3570cf0c386c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="LayoutEx">
-      <UniqueIdentifier>{c2bca5f9-40b6-409c-b310-3ef2afa0db1b}</UniqueIdentifier>
+    <Filter Include="Loader">
+      <UniqueIdentifier>{da4b62b5-10b4-43ab-a01f-4430fd823240}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Layout">
+      <UniqueIdentifier>{3297f67a-79a9-4e77-8a67-38127835b0b6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Loader\2dLoader">
+      <UniqueIdentifier>{5bad5b09-2d13-48e2-96f1-4a6c01d03a21}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Loader\3dLoader">
+      <UniqueIdentifier>{670de2ab-d90e-4e48-b44b-e0574ba82de0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Loader\ElementWidget">
+      <UniqueIdentifier>{df846a21-11b3-4d6f-a429-78226fcd4e66}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Layout\Layout.cpp">
-      <Filter>Layout</Filter>
+    <ClCompile Include="Display\Display.cpp">
+      <Filter>Display</Filter>
     </ClCompile>
     <ClCompile Include="Layout\LayoutItem.cpp">
       <Filter>Layout</Filter>
     </ClCompile>
-    <ClCompile Include="File\Load\ImageLoader.cpp">
-      <Filter>File\Load</Filter>
+    <ClCompile Include="Layout\LayoutEx.cpp">
+      <Filter>Layout</Filter>
     </ClCompile>
-    <ClCompile Include="File\Load\TextLoader.cpp">
-      <Filter>File\Load</Filter>
+    <ClCompile Include="Layout\LayoutItemEx.cpp">
+      <Filter>Layout</Filter>
     </ClCompile>
-    <ClCompile Include="File\UIProxy.cpp">
-      <Filter>File</Filter>
+    <ClCompile Include="Layout\LayoutSpacerItem.cpp">
+      <Filter>Layout</Filter>
     </ClCompile>
-    <ClCompile Include="File\Parse\WidgetProperty.cpp">
-      <Filter>File\Parse</Filter>
+    <ClCompile Include="Layout\LayoutWidgetItem.cpp">
+      <Filter>Layout</Filter>
     </ClCompile>
-    <ClCompile Include="Display\Display.cpp">
+    <ClCompile Include="Loader\2dLoader\ImageLoader.cpp">
+      <Filter>Loader\2dLoader</Filter>
+    </ClCompile>
+    <ClCompile Include="Loader\2dLoader\LayoutLoader.cpp">
+      <Filter>Loader\2dLoader</Filter>
+    </ClCompile>
+    <ClCompile Include="Loader\2dLoader\TextLoader.cpp">
+      <Filter>Loader\2dLoader</Filter>
+    </ClCompile>
+    <ClCompile Include="Loader\2dLoader\WidgetLoader.cpp">
+      <Filter>Loader\2dLoader</Filter>
+    </ClCompile>
+    <ClCompile Include="Loader\ElementWidget\IElement.cpp">
+      <Filter>Loader\ElementWidget</Filter>
+    </ClCompile>
+    <ClCompile Include="Loader\ElementWidget\WidgetProperty.cpp">
+      <Filter>Loader\ElementWidget</Filter>
+    </ClCompile>
+    <ClCompile Include="Display\UIProxy.cpp">
       <Filter>Display</Filter>
     </ClCompile>
-    <ClCompile Include="File\Parse\IElement.cpp">
-      <Filter>File\Parse</Filter>
-    </ClCompile>
-    <ClCompile Include="File\Load\LayoutLoader.cpp">
-      <Filter>File\Load</Filter>
-    </ClCompile>
-    <ClCompile Include="LayoutEx\LayoutSpacerItem.cpp">
-      <Filter>LayoutEx</Filter>
-    </ClCompile>
-    <ClCompile Include="LayoutEx\LayoutWidgetItem.cpp">
-      <Filter>LayoutEx</Filter>
-    </ClCompile>
-    <ClCompile Include="LayoutEx\LayoutItemEx.cpp">
-      <Filter>LayoutEx</Filter>
-    </ClCompile>
-    <ClCompile Include="LayoutEx\LayoutEx.cpp">
-      <Filter>LayoutEx</Filter>
-    </ClCompile>
-    <ClCompile Include="File\Load\WidgetLoader.cpp">
-      <Filter>File\Load</Filter>
+    <ClCompile Include="Layout\Layout.cpp">
+      <Filter>Layout</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -1,12 +1,14 @@
 #pragma once
 
-#include "Parse/import.h"
-#include "Load/import.h"
 #include "Layout/ui_common.h"
 #include "render.h"
 
 namespace ui
 {
+	class IElement;
+	class Layout;
+	class LayoutItem;
+
 	// ui加载
 	class UIProxy
 	{
@@ -38,11 +40,11 @@ namespace ui
 		/**
 		*	设计大小
 		*/
-		const math::Size& getDesignSize();
+		const math::Size& getDesignSize() const;
 		/**
 		*	获取布局方向
 		*/
-		LayoutDirection getDesignDirection();
+		LayoutDirection getDesignDirection() const;
 	protected:
 		/**
 		*	初始化

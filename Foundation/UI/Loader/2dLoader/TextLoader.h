@@ -1,8 +1,6 @@
 #pragma once
 
 #include "WidgetLoader.h"
-#include "render.h"
-using namespace render;
 
 namespace ui
 {
@@ -16,6 +14,6 @@ namespace ui
 
 		virtual void saveAttributes();
 	public:
-		INIT_LOADER_WIDGET(LayoutItem, CtrlText, ELEMENT_NAME_TEXT);
+		INIT_LOADER_WIDGET(LayoutItem, render::CtrlText, ELEMENT_NAME_TEXT);
 	};
 }

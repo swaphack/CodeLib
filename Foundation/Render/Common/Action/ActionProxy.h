@@ -2,19 +2,15 @@
 
 #include <vector>
 
-namespace sys
-{
-	class Object;
-}
-
 namespace render
 {
+	class Node;
 	class Action;
 
 	class ActionProxy
 	{
 	public:
-		ActionProxy(sys::Object* target);
+		ActionProxy(Node* target);
 		~ActionProxy();
 	public:
 		// 执行动作
@@ -33,6 +29,6 @@ namespace render
 		void stopAllActions();
 	private:
 		// 对象
-		sys::Object* _target;
+		Node* _target;
 	};
 }

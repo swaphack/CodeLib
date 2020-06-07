@@ -50,7 +50,7 @@ void TestAudioNode::testAudio3D()
 	pListenerDrawNode->appendPoint(math::Vector3());
 	pListener->addChild(pListenerDrawNode);
 
-	G_KEYBOARDMANAGER->addKeyboardDelegate(this, pListener, KEYBOARD_DELEGATTE_SELECTOR(TestAudioNode::onKeyBoardListener));
+	G_KEYBOARDMANAGER->addKeyboardDelegate(this, pListener, KEYBOARD_DELEGATE_SELECTOR(TestAudioNode::onKeyBoardListener));
 
 	CtrlAudioSource3D* pSrcAudio = CREATE_NODE(CtrlAudioSource3D);
 	pSrcAudio->loadDataFromFile("Resource/Audio/city_castle.mp3");

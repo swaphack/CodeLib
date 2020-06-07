@@ -1,9 +1,6 @@
 #pragma once
 
-#include "File/Parse/import.h"
-#include "Layout/import.h"
 #include "system.h"
-
 
 namespace ui
 {
@@ -16,8 +13,8 @@ namespace ui
 #define INIT_LOADER_WIDGET(TL,TW, NAME) \
 public:\
 	virtual std::string getName() { return NAME; }\
-	TW* getCastWidget() { return dynamic_cast<TW*>(getWidget()); }\
-	TL* getCastLayoutItem() { return dynamic_cast<TL*>(getLayoutItem()); } \
+	TW* getCastWidget() { return getWidget()->as<TW>(); }\
+	TL* getCastLayoutItem() { return getLayoutItem()->as<TL>(); } \
 	virtual void initLayoutItem() { _layoutItem = CREATE_OBJECT(TL);  } \
 	virtual void initWidget() { _node = CREATE_NODE(TW);  }
 

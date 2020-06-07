@@ -126,7 +126,7 @@ void CtrlParticleSystem::updateSelf(float interval)
 	auto it = _children.begin();
 	while (it != _children.end())
 	{
-		ParticleNode* node = dynamic_cast<ParticleNode*>(*it);
+		ParticleNode* node = (*it)->as<ParticleNode>();
 		if (node)
 		{
 			if (node->getLifeTime() <= 0)

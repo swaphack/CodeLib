@@ -23,9 +23,9 @@ namespace sys
 	enum class ScrollEvent
 	{
 		// 向上滑动滚轮
-		ESE_SCORLL_UP,
+		SCORLL_UP,
 		// 向下滑动滚轮
-		ESE_SCORLL_DOWN,
+		SCORLL_DOWN,
 	};
 
 	// 鼠标键

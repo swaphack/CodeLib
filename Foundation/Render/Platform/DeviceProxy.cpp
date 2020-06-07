@@ -1,17 +1,14 @@
 #include "DeviceProxy.h"
-#include "common/Keyboard/KeyboardManager.h"
-#include "common/Touch/TouchManager.h"
+#include "Common/Input/KeyboardManager.h"
+#include "Common/Input/TouchManager.h"
+#include "Common/Input/MouseManager.h"
 #include "mathlib.h"
 #include "Common/Tool/Tool.h"
 
 using namespace render;
 
-DeviceProxy::DeviceProxy(const TouchManager* touchManager)
+DeviceProxy::DeviceProxy()
 {
-	ASSERT(touchManager != nullptr);
-	_touchManager = (TouchManager*)touchManager;
-
-	_keyboardManager = G_KEYBOARDMANAGER;
 }
 
 DeviceProxy::~DeviceProxy()
@@ -26,39 +23,30 @@ void DeviceProxy::onMouseButtonHandler(sys::MouseKey key, sys::ButtonStatus type
 		return;
 	}
 
-	if (_touchManager == nullptr)
-	{
-		return;
-	}
-
 	math::Volume size = Tool::getGLViewSize();
 	if (type == sys::ButtonStatus::BUTTON_DOWN)
 	{
-		_touchManager->onTouchBegan(x, size.getHeight() - y);
+		G_TOUCHMANAGER->onTouchBegan(x, size.getHeight() - y);
 	}
 	else if (type == sys::ButtonStatus::BUTTON_UP)
 	{
-		_touchManager->onTouchEnded(x, size.getHeight() - y);
+		G_TOUCHMANAGER->onTouchEnded(x, size.getHeight() - y);
 	}
 }
 
 void DeviceProxy::onMouseMoveHandler(float x, float y)
 {
-	if (_touchManager == nullptr)
-	{
-		return;
-	}
 
 	math::Volume size = Tool::getGLViewSize();
-	_touchManager->onTouchMoved(x, size.getHeight() - y);
+	G_TOUCHMANAGER->onTouchMoved(x, size.getHeight() - y);
+}
+
+void render::DeviceProxy::onMouseScrollHandler(sys::ScrollEvent evt, float param)
+{
+	G_MOUSEMANAGER->onDispatcher(evt, param);
 }
 
 void DeviceProxy::onKeyBoardButtonHandler(sys::BoardKey key, sys::ButtonStatus type)
 {
-	_keyboardManager->onDispatcher(key, type);
-}
-
-void render::DeviceProxy::setTouchMananger(const TouchManager* touchManager)
-{
-	_touchManager = (TouchManager*)touchManager;
+	G_KEYBOARDMANAGER->onDispatcher(key, type);
 }

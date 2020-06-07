@@ -56,7 +56,7 @@ namespace sys
 			return nullptr;
 		}
 
-		return dynamic_cast<T*>(manager);
+		return manager->as<T>();
 	}
 
 	template<typename T>
@@ -68,7 +68,7 @@ namespace sys
 
 		while (iter != _protocolManagers.end())
 		{
-			t = dynamic_cast<T*>(iter->second);
+			t = iter->second->as<T>();
 			if (t != nullptr)
 			{
 				return t;

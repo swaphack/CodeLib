@@ -9,21 +9,16 @@ namespace render
 	class DeviceProxy : public sys::Object
 	{
 	public:
-		DeviceProxy(const TouchManager* touchManager);
+		DeviceProxy();
 		~DeviceProxy();
 	public:
 		void onMouseButtonHandler(sys::MouseKey key, sys::ButtonStatus type, float x, float y);
 
 		void onMouseMoveHandler(float x, float y);
 
-		void onKeyBoardButtonHandler(sys::BoardKey key, sys::ButtonStatus type);
+		void onMouseScrollHandler(sys::ScrollEvent evt, float param);
 
-		void setTouchMananger(const TouchManager* touchManager);
+		void onKeyBoardButtonHandler(sys::BoardKey key, sys::ButtonStatus type);
 	protected:
-	private:
-		// 触摸事件
-		TouchManager* _touchManager;
-		// 键盘事件
-		KeyboardManager* _keyboardManager;
 	};
 }

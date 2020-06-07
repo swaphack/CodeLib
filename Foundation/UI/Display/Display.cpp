@@ -1,5 +1,5 @@
 #include "Display.h"
-#include "File/UIProxy.h"
+#include "UIProxy.h"
 #include "Layout/Layout.h"
 
 using namespace ui;

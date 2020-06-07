@@ -1,5 +1,5 @@
 #include "Action.h"
-
+#include "../Node/Node.h"
 using namespace render;
 
 Action::Action()
@@ -13,14 +13,14 @@ Action::~Action()
 	SAFE_RELEASE(_target);
 }
 
-void Action::setTarget(sys::Object* target)
+void Action::setTarget(Node* target)
 {
 	SAFE_RELEASE(_target);
 	SAFE_RETAIN(target);
 	_target = target;
 }
 
-bool Action::isEqualsTarget(const sys::Object* target)
+bool Action::isEqualsTarget(const Node* target)
 {
 	return _target == target;
 }

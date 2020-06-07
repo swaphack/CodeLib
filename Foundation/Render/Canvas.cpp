@@ -1,6 +1,7 @@
 #include "Canvas.h"
 
 #include "Common/PostProcessing/PostProcessing.h"
+
 using namespace render;
 
 Canvas* render::Canvas::_sCanvas = nullptr;
@@ -10,10 +11,6 @@ Canvas::Canvas()
 	ASSERT(_sCanvas == nullptr);
 
 	_view = new View();
-
-	_actionManager = G_ACTIONMANAGER;
-
-	_touchManager = G_TOUCHMANAGER;
 
 	_sCanvas = this;
 }
@@ -51,9 +48,9 @@ void Canvas::draw()
 
 void Canvas::update(float interval)
 {
-	if (_actionManager)
+	if (G_ACTIONMANAGER)
 	{
-		_actionManager->update(interval);
+		G_ACTIONMANAGER->update(interval);
 	}
 
 	G_AUDIO->update();
@@ -73,7 +70,7 @@ void Canvas::setViewPort(float x, float y, float width, float height)
 	auto pCamera = Camera::getMainCamera();
 	if (pCamera)
 	{
-		pCamera->notify(NodeNotifyType::VIEWSIZE);
+		pCamera->setViewPort(x, x + width, y, y + height);
 	}
 
 	Tool::setGLViewSize(width, height);
@@ -91,16 +88,6 @@ Scene* Canvas::getCurScene()
 View* Canvas::getView()
 {
 	return _view;
-}
-
-const TouchManager* render::Canvas::getTouchManager()
-{
-	return _touchManager;
-}
-
-const ActionManager* render::Canvas::getActionManager()
-{
-	return _actionManager;
 }
 
 void render::Canvas::pushScene(Scene* scene)
@@ -159,5 +146,3 @@ Canvas* render::Canvas::getInstance()
 {
 	return _sCanvas;
 }
-
-

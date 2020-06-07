@@ -6,6 +6,7 @@
 namespace render
 {
 	class Action;
+	class Node;
 
 	// 动作管理
 	class ActionManager : public sys::ITimer
@@ -23,9 +24,9 @@ namespace render
 		// 移除所有动作
 		void removeAllActions();
 
-		void pauseAllActionsByTargets(sys::Object* target);
-		void resumeAllActionsByTargets(sys::Object* target);
-		void removeAllActionsByTargets(sys::Object* target);
+		void pauseAllActionsByTargets(Node* target);
+		void resumeAllActionsByTargets(Node* target);
+		void removeAllActionsByTargets(Node* target);
 	private:
 		std::set<Action*> _actions;
 	};

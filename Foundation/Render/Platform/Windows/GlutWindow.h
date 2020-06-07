@@ -20,6 +20,7 @@ namespace render
 		void onKeyboardUp(unsigned char key, int x, int y);
 		void onMouseDown(int button, int state, int x, int y);
 		void onMouseMove(int x, int y);
+		void onMouseScroll(int evt, int value);
 		void onSizeChange(int width, int height);
 
 		float getRefreshInterval();

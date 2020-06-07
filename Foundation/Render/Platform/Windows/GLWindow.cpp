@@ -14,6 +14,7 @@ _bits(0),
 _render(nullptr),
 _deviceProxy(nullptr)
 {
+	_deviceProxy = new DeviceProxy();
 }
 
 GLWindow::~GLWindow()
@@ -219,18 +220,11 @@ void GLWindow::initDevice()
 	{
 		return;
 	}
-	if (_deviceProxy == nullptr)
-	{
-		_deviceProxy = new DeviceProxy(_render->getCanvas()->getTouchManager());
-	}
-	else
-	{
-		_deviceProxy->setTouchMananger(_render->getCanvas()->getTouchManager());
-	}
 	if (getMouse())
 	{
 		getMouse()->setButtonHandler(_deviceProxy, MOUSE_BUTTON_SELECTOR(DeviceProxy::onMouseButtonHandler));
 		getMouse()->setMoveHandler(_deviceProxy, MOUSE_MOVE_SELECTOR(DeviceProxy::onMouseMoveHandler));
+		getMouse()->setScrollHandler(_deviceProxy, MOUSE_SCROLL_SELECTOR(DeviceProxy::onMouseScrollHandler));
 	}
 
 	if (getKeyboard())

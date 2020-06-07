@@ -82,7 +82,7 @@ void TestImageNode::testMoveImage()
 
 	pImage->getTouchProxy()->addTouchDelegate(TouchType::UP, this, TOUCH_DELEGATTE_SELECTOR(TestImageNode::onTouchEnd));
 
-	G_KEYBOARDMANAGER->addKeyboardDelegate(this, pImage, KEYBOARD_DELEGATTE_SELECTOR(TestImageNode::onKeyBoard));
+	G_KEYBOARDMANAGER->addKeyboardDelegate(this, pImage, KEYBOARD_DELEGATE_SELECTOR(TestImageNode::onKeyBoard));
 }
 
 void TestImageNode::onTouchBegin(Node* node, float x, float y, bool include)

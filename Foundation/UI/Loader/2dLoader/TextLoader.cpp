@@ -32,7 +32,7 @@ void TextLoader::parseAttributes()
 	int horizontal = 1;
 	int vertical = 1;
 	uint8_t opacity = 255;
-	BlendParam blend;
+	render::BlendParam blend;
 	math::Size size;
 
 	LOAD_WIDGET_ATTRIBUTE(PROPERTY_COLOR, setTextColor, color);

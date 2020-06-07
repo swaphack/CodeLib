@@ -2,7 +2,7 @@
 
 #include "CtrlWidget.h"
 #include "CtrlLayout.h"
-#include "Common/Touch/TouchDelegate.h"
+#include "Common/Input/TouchDelegate.h"
 
 namespace render
 {

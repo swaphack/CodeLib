@@ -18,7 +18,7 @@ namespace render
 		void setCount(int count);
 
 		void setAction(Action* action);
-		virtual void setTarget(sys::Object* target);
+		virtual void setTarget(Node* target);
 	protected:
 		// 重置
 		virtual void reset();
@@ -40,7 +40,7 @@ namespace render
 		virtual ~RepeateForeverAction();
 	public:
 		void setAction(Action* action);
-		virtual void setTarget(sys::Object* target);
+		virtual void setTarget(Node* target);
 		
 	protected:
 		// 重置
@@ -63,7 +63,7 @@ namespace render
 		void addAction(Action* action);
 		void removeAction(Action* action);
 		void removeAllActions();
-		virtual void setTarget(sys::Object* target);
+		virtual void setTarget(Node* target);
 	protected:
 		// 重置
 		virtual void reset();
@@ -86,7 +86,7 @@ namespace render
 		void addAction(Action* action);
 		void removeAction(Action* action);
 		void removeAllActions();
-		virtual void setTarget(sys::Object* target);
+		virtual void setTarget(Node* target);
 	protected:
 		// 重置
 		virtual void reset();
@@ -120,10 +120,10 @@ namespace render
 		CallFuncN();
 		virtual ~CallFuncN();
 	public:
-		void setFunc(const std::function<void(sys::Object*)>& func);
+		void setFunc(const std::function<void(Node*)>& func);
 	protected:
 		virtual void update(float duration);
 	private:
-		std::function<void(sys::Object*)> _func;
+		std::function<void(Node*)> _func;
 	};
 }

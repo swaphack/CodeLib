@@ -1,15 +1,15 @@
 #pragma once
 
 #include "WidgetProperty.h"
+#include "Layout/LayoutItem.h"
+#include "Layout/Layout.h"
 #include "system.h"
 #include "render.h"
 
 namespace ui
 {
-	class LayoutItem;
-
 	// ½Úµã½âÎöÆ÷
-	class IElement
+	class IElement : public sys::Object
 	{
 	public:
 		IElement();

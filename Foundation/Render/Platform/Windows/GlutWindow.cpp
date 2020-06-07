@@ -52,6 +52,11 @@ void mouseDown(int button, int state, int x, int y)
 	sWindow->onMouseDown(button, state, x, y);
 };
 
+void mouseScroll(int button, int state, int x, int y)
+{
+	sWindow->onMouseScroll(state, y);
+}
+
 void mouseMove(int x, int y)
 {
 	sWindow->onMouseMove(x, y);
@@ -71,15 +76,6 @@ void GlutWindow::createWindow(const std::string& title, int width, int height, i
 
 	_render = render;
 	_render->setRefreshInterval(millis / 1000.0f);
-	if (_deviceProxy == nullptr)
-	{
-		_deviceProxy = new DeviceProxy(_render->getCanvas()->getTouchManager());
-	}
-	else
-	{
-		_deviceProxy->setTouchMananger(_render->getCanvas()->getTouchManager());
-	}
-	
 
 	int mode = GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGBA | GLUT_STENCIL;
 	int left = (GetSystemMetrics(SM_CXSCREEN) - width)* 0.5f;
@@ -105,7 +101,9 @@ void GlutWindow::createWindow(const std::string& title, int width, int height, i
 	glutKeyboardUpFunc(::keyboardUp);
 	glutMouseFunc(::mouseDown);
 	glutMotionFunc(::mouseMove);
+	glutMouseWheelFunc(::mouseScroll);
 	glutReshapeFunc(::sizeChange);
+	
 
 	if (_render)
 	{
@@ -126,6 +124,7 @@ void GlutWindow::initDevice()
 	{
 		getMouse()->setButtonHandler(_deviceProxy, MOUSE_BUTTON_SELECTOR(DeviceProxy::onMouseButtonHandler));
 		getMouse()->setMoveHandler(_deviceProxy, MOUSE_MOVE_SELECTOR(DeviceProxy::onMouseMoveHandler));
+		getMouse()->setScrollHandler(_deviceProxy, MOUSE_SCROLL_SELECTOR(DeviceProxy::onMouseScrollHandler));
 	}
 
 	if (getKeyboard())
@@ -171,6 +170,11 @@ void GlutWindow::onMouseDown(int button, int state, int x, int y)
 void GlutWindow::onMouseMove(int x, int y)
 {
 	_deviceProxy->onMouseMoveHandler(x, y);
+}
+
+void render::GlutWindow::onMouseScroll(int evt, int value)
+{
+	_deviceProxy->onMouseScrollHandler((sys::ScrollEvent)evt, value);
 }
 
 void GlutWindow::onSizeChange(int width, int height)

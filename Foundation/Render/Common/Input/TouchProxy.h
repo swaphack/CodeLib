@@ -18,29 +18,29 @@ namespace render
 		void setTarget(Node* target);
 		// 作用对象
 		Node* getTarget();
-
+	public:
 		// 设置可点击性
 		void setTouchEnabled(bool status);
 		// 是否可点击
 		bool isTouchEnabled();
-
+	public:
 		// 设置吞噬点击
 		void setSwallowTouch(bool status);
 		// 是否吞噬点击
 		bool isSwallowTouch();
-
+	public:
 		// 触摸处理
 		virtual bool onTouchBegan(float x, float y);
 		virtual bool onTouchMoved(float x, float y);
 		virtual bool onTouchEnded(float x, float y);
-
+	public:
 		// 添加触摸事件
 		void addTouchDelegate(TouchType type, sys::Object* object, TOUCH_DELEGATE_HANDLER handler);
 		// 移除指定类型的触摸事件
 		void removeTouchDelegate(TouchType type);
 		// 移除所有触摸事件
 		void removeAllTouchDelegates();
-
+	public:
 		// 添加触摸事件
 		void addTouchFunc(TouchType type, TouchFunc func);
 		// 移除指定类型的触摸事件

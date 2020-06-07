@@ -4,6 +4,7 @@
 
 using namespace ui;
 using namespace math;
+using namespace render;
 
 TestLayoutNode::TestLayoutNode()
 {

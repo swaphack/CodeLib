@@ -17,6 +17,8 @@ namespace render
 		return temp;
 	}
 
+	class Node;
+
 	//class ActionManager;
 	// 动作接口
 	class Action : public sys::Object, public ActionProtocol, public sys::ITimer
@@ -31,12 +33,11 @@ namespace render
 		// 反转
 		virtual void reverse() {}
 		// 设置动作执行目标
-		virtual void setTarget(sys::Object* target);
+		virtual void setTarget(Node* target);
 		// 判断动作执行对象是否相同
-		bool isEqualsTarget(const sys::Object* target);
+		bool isEqualsTarget(const Node* target);
 	protected:
 		// 动作执行目标
-		sys::Object* _target;
-		
+		Node* _target;
 	};
 }

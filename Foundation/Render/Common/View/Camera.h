@@ -13,14 +13,14 @@ namespace render
 	};
 
 	// 视窗参数
-	struct CameraParams
+	struct ViewParameter
 	{
 		float xLeft = 0;
 		float xRight = 0;
 		float yBottom = 0;
 		float yTop = 0;
-		float zNear = 0;
-		float zFar = 0;
+		float zNear = 0.1f;
+		float zFar = 1000;
 	};
 
 	// 摄像机
@@ -31,19 +31,24 @@ namespace render
 		virtual ~Camera();
 	public:
 		static Camera* getMainCamera();
-		static void setMainCamera(CameraDimensions d);
+		static void setMainCamera(Camera* camera);
 	public:
 		virtual bool init();
 	public:
+		// 设置维度
+		void setDimensions(CameraDimensions d);
 		// 获取维度
 		CameraDimensions getDimensions();
 		// 绘制节点
 		virtual void drawNode();
 	public:
 		// 设置视窗参数
-		void setViewPortParams(float left, float right, float bottom, float top, float zNear, float zFar);
+		void setViewPort(float left, float right, float bottom, float top);
+		// 设置视野距离
+		void setViewDistance(float zNear, float zFar);
 		// 获取视窗参数
-		const CameraParams& getViewPortParams() const;
+		const ViewParameter& getViewParameter() const;
+	public:
 		// 投影矩阵
 		const math::Matrix44& getProjectMatrix() const;
 		// 视图矩阵
@@ -63,41 +68,13 @@ namespace render
 		//视窗大小发生改变
 		virtual void updateViewPort();
 	protected:
-		// 设置维度
-		void setDimensions(CameraDimensions d);
-	protected:
 		// 主摄像头
 		static Camera* _mainCamera;
 		// 维度
-		CameraDimensions _dimensions;
-		// 参数
-		CameraParams _cameraParams;
+		CameraDimensions _dimensions = CameraDimensions::TWO;
 		// 投影矩阵
 		math::Matrix44 _projectMat;
-	};
-
-	// 2d 摄像头
-	class Camera2D : public Camera
-	{
-	public:
-		Camera2D();
-		virtual ~Camera2D();
-	public:
-		virtual void updateView();
-	protected:
-		//视窗大小发生改变
-		virtual void updateViewPort();
-	};
-	// 3d 摄像头
-	class Camera3D : public Camera
-	{
-	public:
-		Camera3D();
-		virtual ~Camera3D();
-	public:
-		virtual void updateView();
-	protected:
-		//视窗大小发生改变
-		virtual void updateViewPort();
+		// 视野参数
+		ViewParameter _viewParameter;
 	};
 }

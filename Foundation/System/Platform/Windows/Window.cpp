@@ -316,6 +316,20 @@ bool Window::onHandSignal(Signal* signal)
 			getMouse()->onMoveHandler(LOWORD(params->t3), HIWORD(params->t3));
 		}
 		break;
+	case WM_MOUSEWHEEL:
+		if (getMouse())
+		{
+			int value = GET_WHEEL_DELTA_WPARAM(params->t2);
+			if (value > 0)
+			{
+				getMouse()->onScrollHandler(sys::ScrollEvent::SCORLL_UP, value / 120);
+			}
+			else
+			{
+				getMouse()->onScrollHandler(sys::ScrollEvent::SCORLL_DOWN, value / 120);
+			}
+		}
+		break;
 	default:
 		return false;
 		break;

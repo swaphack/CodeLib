@@ -98,7 +98,7 @@ void TestModelNode::testCubeMap()
 	pCubMap->setFaceImage(CubeFace::BOTTOM, "Resource/skybox/bottom.jpg");
 
 	//pSkyBox->setScale(0.25f);
-	pCubMap->setVolume(512, 384, 512);
+	pCubMap->setVolume(2048, 2048, 2048);
 	pCubMap->setPosition(512, 384, 0);
 	pCubMap->setAnchorPoint(0.5f, 0.5f, 0.5f);
 	this->addChild(pCubMap);
@@ -188,7 +188,7 @@ void TestModelNode::testFbx()
 void TestModelNode::testCamera()
 {
 	Camera* camera = Camera::getMainCamera();
-	G_KEYBOARDMANAGER->addKeyboardDelegate(this, camera, KEYBOARD_DELEGATTE_SELECTOR(TestModelNode::onKeyBoardCamera));
+	G_KEYBOARDMANAGER->addKeyboardDelegate(this, camera, KEYBOARD_DELEGATE_SELECTOR(TestModelNode::onKeyBoardCamera));
 }
 
 void TestModelNode::onKeyBoardCamera(render::Node* node, sys::BoardKey key, sys::ButtonStatus type)

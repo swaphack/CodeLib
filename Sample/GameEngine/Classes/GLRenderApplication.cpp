@@ -16,8 +16,8 @@ GLRenderApplication::~GLRenderApplication()
 
 void GLRenderApplication::show()
 {
-	CameraDimensions d = CameraDimensions::THREE;
-	Camera::setMainCamera(d);
+	CameraDimensions d = CameraDimensions::TWO;
+	Camera::getMainCamera()->setDimensions(d);
 
 	getCanvas()->pushScene(CREATE_NODE(TestMainScene));
 }

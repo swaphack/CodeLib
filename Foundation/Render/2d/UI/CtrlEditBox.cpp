@@ -1,8 +1,5 @@
 #include "CtrlEditBox.h"
-#include "Common/Touch/TouchProxy.h"
-#include "Common/Touch/TouchDelegate.h"
-#include "Common/Touch/TouchManager.h"
-#include "Common/Keyboard/KeyboardManager.h"
+#include "Common/Input/import.h"
 
 using namespace render;
 
@@ -62,12 +59,12 @@ void CtrlEditBox::dispatchInputListen(EditInputStatus status)
 
 void CtrlEditBox::addKeyboardDelegate()
 {
-	G_KEYBOARDMANAGER->addKeyboardDelegate(this, this, KEYBOARD_DELEGATTE_SELECTOR(CtrlEditBox::onKeyBoardInput));
+	G_KEYBOARDMANAGER->addKeyboardDelegate(this, this, KEYBOARD_DELEGATE_SELECTOR(CtrlEditBox::onKeyBoardInput));
 }
 
 void CtrlEditBox::removeKeyboardDelegate()
 {
-	G_KEYBOARDMANAGER->removeKeyboardDelegate(this);
+	G_KEYBOARDMANAGER->removeKeyboardDelegate(this, this);
 }
 
 void CtrlEditBox::onTouchUp(Node* node, float x, float y, bool include)
