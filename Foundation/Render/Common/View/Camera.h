@@ -7,7 +7,6 @@ namespace render
 	// 维度模式
 	enum class CameraDimensions
 	{
-		NONE,
 		TWO,
 		THREE
 	};
@@ -38,7 +37,7 @@ namespace render
 		// 设置维度
 		void setDimensions(CameraDimensions d);
 		// 获取维度
-		CameraDimensions getDimensions();
+		CameraDimensions getDimensions() const;
 		// 绘制节点
 		virtual void drawNode();
 	public:
@@ -74,7 +73,9 @@ namespace render
 		CameraDimensions _dimensions = CameraDimensions::TWO;
 		// 投影矩阵
 		math::Matrix44 _projectMat;
-		// 视野参数
-		ViewParameter _viewParameter;
+		// 2d视野参数
+		ViewParameter _viewParameter2D;
+		// 3D视野参数
+		ViewParameter _viewParameter3D;
 	};
 }

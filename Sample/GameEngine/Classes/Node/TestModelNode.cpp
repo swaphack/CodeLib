@@ -17,8 +17,8 @@ TestModelNode::~TestModelNode()
 
 void TestModelNode::testFunc()
 {
-	//this->testCubeModel();
-	this->testCubeMap();
+	this->testCubeModel();
+	//this->testCubeMap();
 
 	//this->testObj();
 }
@@ -31,7 +31,7 @@ void TestModelNode::testCubeModel()
 	pModel->setFaceImage(filepath);
 
 	pModel->setAnchorPoint(math::Vector3(0.5f, 0.5f, 0.5f));
-	pModel->setPosition(200, 200, -50);
+	pModel->setPosition(512, 384, 0);
 	pModel->setVolume(200, 200, 200);
 	this->addChild(pModel);
 

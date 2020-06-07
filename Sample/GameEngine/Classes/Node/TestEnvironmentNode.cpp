@@ -95,7 +95,10 @@ void TestEnvironmentNode::init2DSkyBox()
 void TestEnvironmentNode::testCamera()
 {
 	Camera* pCamera = Camera::getMainCamera();
-
+	if (pCamera->getDimensions() == CameraDimensions::TWO)
+	{
+		return;
+	}
 	auto size = Tool::getGLViewSize();
 	pCamera->setPosition(-size.getWidth() * 0.5f, -size.getHeight() * 0.5f);
 	G_KEYBOARDMANAGER->addKeyboardFunc(this, pCamera, [this](Node* object, sys::BoardKey key, sys::ButtonStatus type) {

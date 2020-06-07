@@ -15,6 +15,9 @@ Camera::Camera()
 	_rotation.set(0, 0, 0);
 
 	_scale.set(1.0f, 1.0f, 1.0f);
+
+	_viewParameter2D.zNear = 0;
+	_viewParameter3D.zNear = 0.1f;
 }
 
 Camera::~Camera()
@@ -40,20 +43,20 @@ void Camera::setViewPort(float left, float right, float bottom, float top)
 {
 	if (getDimensions() == CameraDimensions::TWO)
 	{
-		_viewParameter.xLeft = left;
-		_viewParameter.xRight = right;
-		_viewParameter.yBottom = bottom;
-		_viewParameter.yTop = top;
+		_viewParameter2D.xLeft = left;
+		_viewParameter2D.xRight = right;
+		_viewParameter2D.yBottom = bottom;
+		_viewParameter2D.yTop = top;
 	}
 	else
 	{
 		float w = 0.5f * (left + right);
 		float h = 0.5f * (bottom + top);
 
-		_viewParameter.xLeft = -w;
-		_viewParameter.xRight = w;
-		_viewParameter.yBottom = -h;
-		_viewParameter.yTop = h;
+		_viewParameter3D.xLeft = -w;
+		_viewParameter3D.xRight = w;
+		_viewParameter3D.yBottom = -h;
+		_viewParameter3D.yTop = h;
 	}
 
 	this->notify(NodeNotifyType::VIEWSIZE);
@@ -61,14 +64,29 @@ void Camera::setViewPort(float left, float right, float bottom, float top)
 
 void render::Camera::setViewDistance(float zNear, float zFar)
 {
-	_viewParameter.zNear = zNear;
-	_viewParameter.zFar = zFar;
+	if (getDimensions() == CameraDimensions::TWO)
+	{
+		_viewParameter2D.zNear = zNear;
+		_viewParameter2D.zFar = zFar;
+	}
+	else
+	{
+		_viewParameter3D.zNear = zNear;
+		_viewParameter3D.zFar = zFar;
+	}
 	this->notify(NodeNotifyType::VIEWSIZE);
 }
 
 const ViewParameter& Camera::getViewParameter()const
 {
-	return _viewParameter;
+	if (getDimensions() == CameraDimensions::TWO)
+	{
+		return _viewParameter2D;
+	}
+	else
+	{
+		return _viewParameter3D;
+	}
 }
 
 Camera* Camera::getMainCamera()
@@ -88,7 +106,7 @@ void Camera::setMainCamera(Camera* camera)
 	_mainCamera = camera;
 }
 
-CameraDimensions Camera::getDimensions()
+CameraDimensions Camera::getDimensions() const
 {
 	return _dimensions;
 }
@@ -123,22 +141,22 @@ void Camera::updateView()
 	if (getDimensions() == CameraDimensions::TWO)
 	{
 		GLMatrix::loadOrtho(
-			_viewParameter.xLeft,
-			_viewParameter.xRight,
-			_viewParameter.yBottom,
-			_viewParameter.yTop,
-			_viewParameter.zNear,
-			_viewParameter.zFar);
+			_viewParameter2D.xLeft,
+			_viewParameter2D.xRight,
+			_viewParameter2D.yBottom,
+			_viewParameter2D.yTop,
+			_viewParameter2D.zNear,
+			_viewParameter2D.zFar);
 	}
 	else if (getDimensions() == CameraDimensions::THREE)
 	{
 		GLMatrix::loadFrustum(
-			_viewParameter.xLeft,
-			_viewParameter.xRight,
-			_viewParameter.yBottom,
-			_viewParameter.yTop,
-			_viewParameter.zNear,
-			_viewParameter.zFar);
+			_viewParameter3D.xLeft,
+			_viewParameter3D.xRight,
+			_viewParameter3D.yBottom,
+			_viewParameter3D.yTop,
+			_viewParameter3D.zNear,
+			_viewParameter3D.zFar);
 	}
 
 	GLDebug::showError();
@@ -187,16 +205,16 @@ void render::Camera::updateViewPort()
 	if (getDimensions() == CameraDimensions::TWO)
 	{
 		_projectMat = math::Matrix44::ortho(
-			_viewParameter.xLeft, _viewParameter.xRight, 
-			_viewParameter.yBottom, _viewParameter.yTop, 
-			_viewParameter.zNear, _viewParameter.zFar);
+			_viewParameter2D.xLeft, _viewParameter2D.xRight,
+			_viewParameter2D.yBottom, _viewParameter2D.yTop,
+			_viewParameter2D.zNear, _viewParameter2D.zFar);
 	}
 	else if (getDimensions() == CameraDimensions::THREE)
 	{
 		_projectMat = math::Matrix44::frustum(
-			_viewParameter.xLeft, _viewParameter.xRight, 
-			_viewParameter.yBottom, _viewParameter.yTop, 
-			_viewParameter.zNear, _viewParameter.zFar);
+			_viewParameter3D.xLeft, _viewParameter3D.xRight,
+			_viewParameter3D.yBottom, _viewParameter3D.yTop,
+			_viewParameter3D.zNear, _viewParameter3D.zFar);
 	}
 	GLDebug::showError();
 }

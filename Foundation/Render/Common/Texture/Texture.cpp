@@ -90,6 +90,25 @@ void render::Texture::bindTextureUnit(uint32_t unit)
 	GLTexture::bindTextureUnit(unit, _textureID);
 }
 
+void render::Texture::enableTextureWithSampler(uint32_t unit)
+{
+	GLState::enable((EnableMode)getTextureTarget());
+	this->activeTexture(unit);
+	GLDebug::showError();
+	this->bindSampler(unit);
+	GLDebug::showError();
+	this->bindTexture();
+}
+
+void render::Texture::enableTexture(uint32_t unit)
+{
+	GLState::enable((EnableMode)getTextureTarget());
+	this->activeTexture(unit);
+	GLDebug::showError();
+	this->bindTexture();
+	this->applyTextureSetting();
+}
+
 void render::Texture::setTextureSetting(const TextureSetting& setting)
 {
 	_textureSettings = setting;

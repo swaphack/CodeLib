@@ -138,6 +138,15 @@ namespace render
 		void bindTextureUnit(uint32_t unit);
 	public:
 		/**
+		*	生效
+		*/
+		void enableTextureWithSampler(uint32_t unit);
+		/**
+		*	失效
+		*/
+		void enableTexture(uint32_t unit);
+	public:
+		/**
 		*	设置纹理配置
 		*/
 		void setTextureSetting(const TextureSetting& setting);
