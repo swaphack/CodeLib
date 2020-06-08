@@ -36,7 +36,6 @@ void DeviceProxy::onMouseButtonHandler(sys::MouseKey key, sys::ButtonStatus type
 
 void DeviceProxy::onMouseMoveHandler(float x, float y)
 {
-
 	math::Volume size = Tool::getGLViewSize();
 	G_TOUCHMANAGER->onTouchMoved(x, size.getHeight() - y);
 }

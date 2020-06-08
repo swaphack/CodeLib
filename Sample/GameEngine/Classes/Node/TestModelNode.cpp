@@ -17,8 +17,8 @@ TestModelNode::~TestModelNode()
 
 void TestModelNode::testFunc()
 {
-	this->testCubeModel();
-	//this->testCubeMap();
+	//this->testCubeModel();
+	this->testCubeMap();
 
 	//this->testObj();
 }

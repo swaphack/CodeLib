@@ -4,6 +4,7 @@
 #include "Platform/DeviceProxy.h"
 #include "system.h"
 #include "Graphic/GLAPI/GLVersion.h"
+#include "Common/Input/KeyChar.h"
 
 using namespace render;
 using namespace sys;
@@ -34,7 +35,7 @@ void update(int value)
 
 	glutPostRedisplay();
 
-	//glutTimerFunc(sWindow->getRefreshInterval() * 1000, ::update, value);
+	glutTimerFunc(sWindow->getRefreshInterval() * 1000, ::update, value);
 };
 
 void keyboardDown(unsigned char key, int x, int y)
@@ -54,7 +55,15 @@ void mouseDown(int button, int state, int x, int y)
 
 void mouseScroll(int button, int state, int x, int y)
 {
-	sWindow->onMouseScroll(state, y);
+	if (state == 1)
+	{
+		sWindow->onMouseScroll(0, 1);
+	}
+	else
+	{
+		sWindow->onMouseScroll(1, -1);
+	}
+	
 }
 
 void mouseMove(int x, int y)
@@ -154,12 +163,12 @@ void GlutWindow::onUpdate()
 
 void GlutWindow::onKeyboardDown(unsigned char key, int x, int y)
 {
-	_deviceProxy->onKeyBoardButtonHandler((sys::BoardKey)key, sys::ButtonStatus::BUTTON_DOWN);
+	_deviceProxy->onKeyBoardButtonHandler(G_KEYCHAR->getKey(key), sys::ButtonStatus::BUTTON_DOWN);
 }
 
 void GlutWindow::onKeyboardUp(unsigned char key, int x, int y)
 {
-	_deviceProxy->onKeyBoardButtonHandler((sys::BoardKey)key, sys::ButtonStatus::BUTTON_UP);
+	_deviceProxy->onKeyBoardButtonHandler(G_KEYCHAR->getKey(key), sys::ButtonStatus::BUTTON_UP);
 }
 
 void GlutWindow::onMouseDown(int button, int state, int x, int y)
@@ -189,7 +198,7 @@ float GlutWindow::getRefreshInterval()
 {
 	if (_render)
 	{
-		_render->getRefreshInterval();
+		return _render->getRefreshInterval();
 	}
 
 	return 0;

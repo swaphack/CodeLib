@@ -151,6 +151,7 @@
     <ClCompile Include="Common\GPU\ShaderParameter.cpp" />
     <ClCompile Include="Common\GPU\ShaderVariableType.cpp" />
     <ClCompile Include="Common\Input\KeyboardManager.cpp" />
+    <ClCompile Include="Common\Input\KeyChar.cpp" />
     <ClCompile Include="Common\Input\MouseManager.cpp" />
     <ClCompile Include="Common\Input\TouchManager.cpp" />
     <ClCompile Include="Common\Input\TouchProxy.cpp" />
@@ -344,6 +345,7 @@
     <ClInclude Include="Common\Input\import.h" />
     <ClInclude Include="Common\Input\KeyboardDelegate.h" />
     <ClInclude Include="Common\Input\KeyboardManager.h" />
+    <ClInclude Include="Common\Input\KeyChar.h" />
     <ClInclude Include="Common\Input\MouseDelegate.h" />
     <ClInclude Include="Common\Input\MouseManager.h" />
     <ClInclude Include="Common\Input\TouchDelegate.h" />

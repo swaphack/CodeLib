@@ -27,7 +27,13 @@ int main(int argc, char** argv)                  // ´°¿ÚÏÔÊ¾×´Ì¬
 	int height = 768;
 	int millis = 17;
 
+	/*
 	render::GLWindow* pWindow = new render::GLWindow();
+	pWindow->createWindow("OpenGL", width, height, millis, new GLRenderApplication());
+	*/
+
+	glutInit(&argc, argv);
+	render::GlutWindow* pWindow = new render::GlutWindow();
 	pWindow->createWindow("OpenGL", width, height, millis, new GLRenderApplication());
 
 	return 0;                                                                                                                          

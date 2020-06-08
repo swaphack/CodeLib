@@ -13,6 +13,8 @@ TestEnvironmentNode::~TestEnvironmentNode()
 void TestEnvironmentNode::testFunc()
 {
 	this->testCamera();
+
+	this->init3DSkyBox();
 }
 
 void TestEnvironmentNode::init3DSkyBox()
@@ -32,17 +34,18 @@ void TestEnvironmentNode::init3DSkyBox()
 	this->addChild(pSkyBox);
 
 	Utility::loadShader(pSkyBox->getMaterials(), "Shader/skybox.vs", "Shader/skybox.fs");
-	/*
+	
 	pSkyBox->setAllShaderProgramFunc([](ShaderProgram* program) {
 		auto pUniform = program->getUniform("viewMatrix");
 		if (pUniform)
 		{
 			math::Matrix44 viewMat = Camera::getMainCamera()->getViewMatrix();
-			math::Matrix44 Mat = math::Matrix33(viewMat);
-			pUniform->setMatrix4(Mat);
+			PRINT("%s\n", viewMat.toString().c_str());
+			math::Matrix44 mat = math::Matrix33(viewMat);
+			PRINT("%s\n", mat.toString().c_str());
+			pUniform->setMatrix4(mat);
 		}
 	});
-	*/
 
 	RotateByAction* pRotateByAction = CREATE_ACTION(RotateByAction);
 	pRotateByAction->setRotation(0, 180, 0);
@@ -99,6 +102,16 @@ void TestEnvironmentNode::testCamera()
 	{
 		return;
 	}
+
+	RotateByAction* pRotateByAction = CREATE_ACTION(RotateByAction);
+	pRotateByAction->setRotation(0, 180, 0);
+	pRotateByAction->setDuration(10);
+
+	RepeateForeverAction* pRepeateAction = CREATE_ACTION(RepeateForeverAction);
+	pRepeateAction->setAction(pRotateByAction);
+
+	pCamera->getActionProxy()->runAction(pRepeateAction);
+
 	auto size = Tool::getGLViewSize();
 	pCamera->setPosition(-size.getWidth() * 0.5f, -size.getHeight() * 0.5f);
 	G_KEYBOARDMANAGER->addKeyboardFunc(this, pCamera, [this](Node* object, sys::BoardKey key, sys::ButtonStatus type) {

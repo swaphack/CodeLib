@@ -18,6 +18,7 @@ Matrix33::Matrix33(const Vector3& row0, const Vector3& row1, const Vector3& row2
 }
 
 math::Matrix33::Matrix33(const Matrix44& mat)
+	: Matrix33()
 {
 	for (int i = 0; i < this->getHeight(); i++)
 	{
