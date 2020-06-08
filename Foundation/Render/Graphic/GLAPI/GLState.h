@@ -141,7 +141,13 @@ namespace render
 		static void setLogicOp(LogicOpCode op);
 
 		static void setPixelStore(PixelStore name, float value);
+
+		static void setPointParameter(PointParameter pname, int value);
+		static void setPointParameter(PointParameter pname, float value);
+		static void setPointParameter(PointParameter pname, const int* value);
 		static void setPointParameter(PointParameter pname, const float* value);
+
+		static void setPointSpriteCoordOrigin(PointSpriteCoordType value);
 		
 		/**
 		*	多边形样式

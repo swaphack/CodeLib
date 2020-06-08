@@ -19,15 +19,13 @@ void render::PostProcessing::use()
 		return;
 	}
 
+	//GLFrameRender::bindFramebuffer(FrameBufferTarget::DRAW_FRAMEBUFFER, _node->getf)
+
 	_node->bindFrameBuffer();
 }
 
 void render::PostProcessing::draw()
 {
-	if (true)
-	{
-		return;
-	}
 	if (_node == nullptr)
 	{
 		return;

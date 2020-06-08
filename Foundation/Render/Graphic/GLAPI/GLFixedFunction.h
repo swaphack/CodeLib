@@ -19,8 +19,16 @@ namespace render
 		static void clearAccum(float red, float green, float blue, float alpha);
 	public:
 		static void getTexEnv(TextureEnvTarget target, TextureEnvParameter parameter, float* value);
-
 		static void getTexGen(TextureCoordName coord, TextureGenParameter parameter, float* value);
+
+		static void setTexEnv(TextureEnvTarget target, TextureEnvParameter parameter, float value);
+		static void setTexEnv(TextureEnvTarget target, TextureEnvParameter parameter, int value);
+		static void setTexEnv(TextureEnvTarget target, TextureEnvParameter parameter, TextureEnvValue value);
+
+		//  a single symbolic constant, single floating-point number, or an RGBA color
+		static void setTexEnv(TextureEnvTargetv target, TextureEnvParameterv parameter, const float* value);
+		//  a single symbolic constant, single floating-point number, or an RGBA color
+		static void setTexEnv(TextureEnvTargetv target, TextureEnvParameterv parameter, const int* value);
 	public:
 		static void setIndexMask(uint32_t mask);
 	public:

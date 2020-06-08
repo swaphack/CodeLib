@@ -5,6 +5,7 @@
 #include "Common/Material/import.h"
 #include "Common/Mesh/import.h"
 #include "Graphic/import.h"
+#include "Common/Tool/Tool.h"
 
 render::PostProcessingNode::PostProcessingNode()
 {
@@ -12,8 +13,8 @@ render::PostProcessingNode::PostProcessingNode()
 	_frameBuffer = CREATE_OBJECT(FrameBuffer);
 	_renderBuffer = CREATE_OBJECT(RenderBuffer);
 
-	_frameBuffer->setFrameBufferTarget(FrameBufferTarget::FRAMEBUFFER);
-	_renderBuffer->setRenderBufferTarget(RenderBufferTarget::RENDERBUFFER);
+	//_frameBuffer->setFrameBufferTarget(FrameBufferTarget::DRAW_FRAMEBUFFER);
+	//_renderBuffer->setRenderBufferTarget(RenderBufferTarget::RENDERBUFFER);
 
 	SAFE_RETAIN(_texture);
 	SAFE_RETAIN(_frameBuffer);
@@ -35,6 +36,7 @@ bool render::PostProcessingNode::init()
 	}
 
 	_notify->addListen(NodeNotifyType::SPACE, [this]() {
+		Tool::calRect(math::Vector3(), _volume, _anchor, _rectVertex);
 		this->updateTextureSize();
 	});
 
@@ -57,12 +59,14 @@ void render::PostProcessingNode::drawNode()
 void render::PostProcessingNode::beforeDrawNode()
 {
 	_frameBuffer->unbindFrameBuffer();
+
 	DrawNode::beforeDrawNode();
 	GLState::disable(EnableMode::DEPTH_TEST);
 
-	//uint32_t bitfield = (uint32_t)ClearBufferBitType::COLOR_BUFFER_BIT;
-	//GLRender::clearColor(0, 0, 0, 0);
-	//GLRender::clear(bitfield);
+	uint32_t bitfield = (uint32_t)ClearBufferBitType::COLOR_BUFFER_BIT;
+
+	GLRender::clearColor(1, 1, 1, 1);
+	GLRender::clear(bitfield);
 }
 
 void render::PostProcessingNode::afterDrawNode()
@@ -86,36 +90,42 @@ void render::PostProcessingNode::updateTextureSize()
 
 	_frameBuffer->bindFrameBuffer();
 
+	float width = _rectVertex.getWidth();
+	float height = _rectVertex.getHeight();
+
+	_texture->setWidth(width);
+	_texture->setHeight(height);
 	_texture->bindTexture();
-	_texture->setTextureImage(0, TextureInternalSizedFormat::RGB8, getWidth(), getHeight(), 0, TextureExternalFormat::RGB, TextureExternalDataType::UNSIGNED_BYTE, nullptr);
+	_texture->setTextureImage(0, TextureInternalSizedFormat::RGBA8, width, height, 0, TextureExternalFormat::RGBA, TextureExternalDataType::UNSIGNED_BYTE, nullptr);
 	_texture->applyTextureSetting();
+	_texture->unbindTexture();
 	GLDebug::showError();
 	
 	_frameBuffer->setTexture2D(FrameBufferAttachment::COLOR_ATTACHMENT0, _texture->getTextureID(), 0);
 	GLDebug::showError();
 
 	_renderBuffer->bindRenderBuffer();
-	_renderBuffer->setStorage(RenderBufferInternalFormat::DEPTH_COMPONENT24, getWidth(), getHeight());
+	_renderBuffer->setStorage(RenderBufferInternalFormat::DEPTH24_STENCIL8, width, height);
+	_renderBuffer->unbindRenderBuffer();
 	GLDebug::showError();
 
-	_frameBuffer->setRenderBuffer(FrameBufferAttachment::DEPTH_ATTACHMENT, _renderBuffer);
+	_frameBuffer->setRenderBuffer(FrameBufferAttachment::DEPTH_STENCIL_ATTACHMENT, _renderBuffer);
 	GLDebug::showError();
 
-	if (_frameBuffer->checkStatus() != FrameBufferStatus::FRAMEBUFFER_COMPLETE)
+	FrameBufferStatus status = _frameBuffer->checkStatus();
+	if (status != FrameBufferStatus::FRAMEBUFFER_COMPLETE)
 	{
 		PRINT("Frame Buffer is not Complete!\n");
 		return;
 	}
-	_renderBuffer->unbindRenderBuffer();
-	_texture->unbindTexture();
 	_frameBuffer->unbindFrameBuffer();
 
 	GLDebug::showError();
 	float vertices[] = {
-		0,0,
-		getWidth(),0,
-		getWidth(), getHeight(),
-		0, getHeight()
+		_rectVertex.leftDown.getX(),_rectVertex.leftDown.getY(),
+		_rectVertex.rightDown.getX(),_rectVertex.rightDown.getY(),
+		_rectVertex.rightUp.getX(),_rectVertex.rightUp.getY(),
+		_rectVertex.leftUp.getX(),_rectVertex.leftUp.getY(),
 	};
 
 	float uvs[] = {

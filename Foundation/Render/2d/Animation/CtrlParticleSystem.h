@@ -8,28 +8,6 @@
 
 namespace render
 {
-	// 粒子
-	class ParticleNode : public DrawNode, 
-		public ColorProtocol,
-		public BlendProtocol,
-		public ParticleProtocol
-	{
-	public:
-		ParticleNode();
-		virtual ~ParticleNode();
-	protected:
-		virtual void onDraw();
-	public:
-		// 更新
-		virtual void update(float interval);
-	protected:
-	private:
-		// 初始颜色
-		sys::Color4F _colorInit;
-		// 纹理坐标
-		RectVertex _texRect;
-	};
-
 	// 粒子系统
 	class CtrlParticleSystem : public CtrlAnimation // 还有问题
 	{
@@ -44,8 +22,6 @@ namespace render
 		uint32_t getCount();
 		// 粒子播放结束后处理 override
 		virtual void onParticleEndHandler();
-		// 创建粒子 override
-		virtual ParticleNode* createParticle();
 	protected:
 		virtual void updateSelf(float interval);
 	private:

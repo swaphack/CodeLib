@@ -54,6 +54,26 @@ double RectVectices::getArea(const math::Vector3& p1, const math::Vector3& p2, c
 	return abs(s);
 }
 
+float render::RectVectices::getX()
+{
+	return leftDown.getX();
+}
+
+float render::RectVectices::getY()
+{
+	return leftDown.getY();
+}
+
+float render::RectVectices::getWidth()
+{
+	return rightDown.getX() - leftDown.getX();
+}
+
+float render::RectVectices::getHeight()
+{
+	return rightUp.getY() - rightDown.getY();
+}
+
 //////////////////////////////////////////////////////////////////////////
 void render::CubeVectices::setFrontLeftDownPosition(const math::Vector3& point)
 {

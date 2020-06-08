@@ -34,6 +34,10 @@ namespace render
 		*/
 		void bindFrameBuffer();
 		/**
+		*	绑定帧缓存对象
+		*/
+		void bindFramebuffer(FrameBufferTarget target);
+		/**
 		*	解除帧缓存对象绑定
 		*/
 		void unbindFrameBuffer();

@@ -27,7 +27,6 @@ bool ImageJPEG::load(const std::string& fullpath)
 	int result = fopen_s(&fptr, fullpath.c_str(), "rb");
 	if (result != 0)
 	{
-		fclose(fptr);
 		return false;
 	}
 

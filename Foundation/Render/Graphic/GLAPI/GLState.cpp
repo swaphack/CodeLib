@@ -266,6 +266,26 @@ void GLState::setPixelStore(PixelStore name, float value)
 	glPixelStoref((GLenum)name, value);
 }
 
+void render::GLState::setPointParameter(PointParameter pname, int value)
+{
+	glPointParameteri((GLenum)pname, value);
+}
+
+void render::GLState::setPointSpriteCoordOrigin(PointSpriteCoordType value)
+{
+	setPointParameter(PointParameter::POINT_SPRITE_COORD_ORIGIN, (int)value);
+}
+
+void render::GLState::setPointParameter(PointParameter pname, float value)
+{
+	glPointParameterf((GLenum)pname, value);
+}
+
+void render::GLState::setPointParameter(PointParameter pname, const int* value)
+{
+	glPointParameteriv((GLenum)pname, value);
+}
+
 void GLState::setPointParameter(PointParameter pname, const float* value)
 {
 	glPointParameterfv((GLenum)pname, value);

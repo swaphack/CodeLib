@@ -27,6 +27,13 @@ namespace render
 		bool containPointByPolygon(float x, float y);
 		//  获取点坐在的锚点位置
 		math::Vector3 getAnchorByPoint(float x, float y);
+
+	public: 
+		float getX();
+		float getY();
+
+		float getWidth();
+		float getHeight();
 	protected:
 		double getArea(const math::Vector3& p1, const math::Vector3& p2, const math::Vector3& p3);
 	};

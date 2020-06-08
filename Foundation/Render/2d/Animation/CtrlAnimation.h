@@ -5,7 +5,6 @@
 namespace render
 {
 	class CtrlFrame;
-	class CtrlAudioSource;
 	class Scheduler;
 
 	// 动画控件
@@ -17,8 +16,6 @@ namespace render
 		virtual ~CtrlAnimation();
 	public:
 		virtual bool init();
-
-		virtual void draw();
 	public:
 		// 开始
 		virtual void start();
@@ -52,8 +49,6 @@ namespace render
 		void unregisterScheduler();
 		// 定时更新事件
 		virtual void updateSelf(float interval);
-		// 帧数改变
-		virtual void onFrameChange();
 	protected:
 		// 图片帧
 		CtrlFrame* _ctrlFrame = nullptr;

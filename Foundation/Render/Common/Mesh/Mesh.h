@@ -1,7 +1,7 @@
 #pragma once
 
 #include "system.h"
-
+#include "Graphic/GLAPI/macros.h"
 namespace sys
 {
 	class MeshDetail;
@@ -40,6 +40,15 @@ namespace render
 		ArrayBuffer* getVertexBuffer() const;
 	public:
 		/**
+		*	绘制图形方式
+		*/
+		void setDrawMode(DrawMode mode);
+		/**
+		*	绘制图形方式
+		*/
+		DrawMode getDrawMode() const;
+	public:
+		/**
 		*	使用缓存对象绘制
 		*/
 		void drawWithBufferObject();
@@ -65,5 +74,9 @@ namespace render
 		*	顶点数据
 		*/
 		ArrayBuffer* _vertexBuffer = nullptr;
+		/**
+		*	绘制图形方式
+		*/
+		DrawMode _drawMode = DrawMode::TRIANGLES;
 	};
 }

@@ -21,11 +21,6 @@ CtrlAnimation::~CtrlAnimation()
 	SAFE_DELETE(_scheduler);
 }
 
-void CtrlAnimation::draw()
-{
-	CtrlWidget::draw();
-}
-
 void render::CtrlAnimation::start()
 {
 	this->registerScheduler();
@@ -82,7 +77,8 @@ void CtrlAnimation::setFrame(int frame)
 {
 	_frame = static_cast<float>(frame);
 	_duration = 0;
-	onFrameChange();
+
+	this->notify(NodeNotifyType::ANIMATION);
 }
 
 int CtrlAnimation::getFrame()
@@ -122,13 +118,9 @@ void CtrlAnimation::updateSelf(float interval)
 	{
 		_duration -= getFrameRate();
 		_frame+=1;
-		onFrameChange();
-	}
-}
 
-void CtrlAnimation::onFrameChange()
-{
-	this->notify(NodeNotifyType::ANIMATION);
+		this->notify(NodeNotifyType::ANIMATION);
+	}
 }
 
 bool CtrlAnimation::init()

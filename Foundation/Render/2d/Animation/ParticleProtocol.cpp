@@ -16,9 +16,10 @@ ParticleProtocol::~ParticleProtocol()
 void ParticleProtocol::setSpeedAcceleration(float x, float y, float z)
 {
 	_speedAcceleration.set(x,y,z);
+	onPariticleChange();
 }
 
-math::Vector3 ParticleProtocol::getSpeedAccelertaion()
+const math::Vector3& ParticleProtocol::getSpeedAccelertaion()const
 {
 	return _speedAcceleration;
 }
@@ -29,14 +30,16 @@ void ParticleProtocol::setColorAcceleration(float red, float green, float blue, 
 	_colorAcceleration.green = green;
 	_colorAcceleration.blue = blue;
 	_colorAcceleration.alpha = alpha;
+	onPariticleChange();
 }
 
 void ParticleProtocol::setAngleAcceleration(float x, float y, float z)
 {
 	_angleAcceleration.set(x, y, z);
+	onPariticleChange();
 }
 
-math::Vector3 ParticleProtocol::getAngleAcceleration()
+const math::Vector3& ParticleProtocol::getAngleAcceleration() const
 {
 	return _angleAcceleration;
 }
@@ -44,14 +47,15 @@ math::Vector3 ParticleProtocol::getAngleAcceleration()
 void ParticleProtocol::setScaleAcceleration(float x, float y, float z)
 {
 	_scaleAcceleration.set(x,y,z);
+	onPariticleChange();
 }
 
-math::Vector3 ParticleProtocol::getScaleAcceleration()
+const math::Vector3& ParticleProtocol::getScaleAcceleration() const
 {
 	return _scaleAcceleration;
 }
 
-sys::Color4F ParticleProtocol::getColorAcceleration()
+const sys::Color4F& ParticleProtocol::getColorAcceleration() const
 {
 	return _colorAcceleration;
 }
@@ -59,9 +63,15 @@ sys::Color4F ParticleProtocol::getColorAcceleration()
 void ParticleProtocol::setLifeTime(float time)
 {
 	_lifeTime = time;
+	onPariticleChange();
 }
 
 float ParticleProtocol::getLifeTime()
 {
 	return _lifeTime;
+}
+
+void render::ParticleProtocol::onPariticleChange()
+{
+
 }

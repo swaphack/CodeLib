@@ -74,6 +74,7 @@
     <ClCompile Include="2d\Animation\CtrlAnimation.cpp" />
     <ClCompile Include="2d\Animation\CtrlMedia.cpp" />
     <ClCompile Include="2d\Animation\CtrlParticleSystem.cpp" />
+    <ClCompile Include="2d\Animation\CtrlPointSprite.cpp" />
     <ClCompile Include="2d\Animation\CtrlSequenceFrame.cpp" />
     <ClCompile Include="2d\Animation\ParticleProtocol.cpp" />
     <ClCompile Include="2d\UI\CtrlEditBox.cpp" />
@@ -244,6 +245,7 @@
     <ClInclude Include="2d\Animation\CtrlFluid.h" />
     <ClInclude Include="2d\Animation\CtrlMedia.h" />
     <ClInclude Include="2d\Animation\CtrlParticleSystem.h" />
+    <ClInclude Include="2d\Animation\CtrlPointSprite.h" />
     <ClInclude Include="2d\Animation\CtrlSequenceFrame.h" />
     <ClInclude Include="2d\Animation\import.h" />
     <ClInclude Include="2d\Animation\macros.h" />

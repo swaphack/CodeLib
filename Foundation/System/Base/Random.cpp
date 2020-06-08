@@ -35,7 +35,10 @@ float Random::getNumber(float minValue, float maxValue)
 {
 	float min = minValue < maxValue ? minValue : maxValue;
 	float max = maxValue > minValue ? maxValue : minValue;
-
+	if (min == max)
+	{
+		return min;
+	}
 	return getNumber0_1() * (max - min) + min;
 }
 

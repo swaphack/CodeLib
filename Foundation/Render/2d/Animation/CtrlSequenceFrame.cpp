@@ -29,8 +29,6 @@ bool CtrlSequenceFrame::init()
 		if (_ctrlFrame)
 		{
 			_ctrlFrame->setTextureWithRect(texture);
-// 			_ctrlFrame->setSize(this->getWidth(), this->getHeight());
-// 			_ctrlFrame->setAnchorPoint(this->getAnchorPoint());
 		}
 	});
 

@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Common/DrawNode/DrawNode.h"
-
+#include "Common/struct/shape_common.h"
 namespace render
 {
 	class Texture2D;
@@ -46,5 +46,7 @@ namespace render
 		*	是否初始化数据
 		*/
 		bool _bInitedFrameBufferData = false;
+		// 矩形框
+		RectVectices _rectVertex;
 	};
 }

@@ -40,9 +40,7 @@ void TestEnvironmentNode::init3DSkyBox()
 		if (pUniform)
 		{
 			math::Matrix44 viewMat = Camera::getMainCamera()->getViewMatrix();
-			PRINT("%s\n", viewMat.toString().c_str());
 			math::Matrix44 mat = math::Matrix33(viewMat);
-			PRINT("%s\n", mat.toString().c_str());
 			pUniform->setMatrix4(mat);
 		}
 	});
@@ -102,15 +100,6 @@ void TestEnvironmentNode::testCamera()
 	{
 		return;
 	}
-
-	RotateByAction* pRotateByAction = CREATE_ACTION(RotateByAction);
-	pRotateByAction->setRotation(0, 180, 0);
-	pRotateByAction->setDuration(10);
-
-	RepeateForeverAction* pRepeateAction = CREATE_ACTION(RepeateForeverAction);
-	pRepeateAction->setAction(pRotateByAction);
-
-	pCamera->getActionProxy()->runAction(pRepeateAction);
 
 	auto size = Tool::getGLViewSize();
 	pCamera->setPosition(-size.getWidth() * 0.5f, -size.getHeight() * 0.5f);

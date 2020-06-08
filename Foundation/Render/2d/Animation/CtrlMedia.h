@@ -20,8 +20,6 @@ namespace render
 		virtual ~CtrlMedia();
 	public:
 		virtual bool init();
-
-		virtual void draw();
 	public:
 		// ¿ªÊ¼
 		virtual void start();

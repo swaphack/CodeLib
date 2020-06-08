@@ -47,3 +47,30 @@ void GLFixedFunction::setShadeModel(ShadingModel model)
 {
 	glShadeModel((GLenum)model);
 }
+
+void render::GLFixedFunction::setTexEnv(TextureEnvTarget target, TextureEnvParameter parameter, float value)
+{
+	glTexEnvf((GLenum)target, (GLenum)parameter, value);
+}
+
+void render::GLFixedFunction::setTexEnv(TextureEnvTarget target, TextureEnvParameter parameter, int value)
+{
+	glTexEnvi((GLenum)target, (GLenum)parameter, value);
+}
+
+void render::GLFixedFunction::setTexEnv(TextureEnvTarget target, TextureEnvParameter parameter, TextureEnvValue value)
+{
+	glTexEnvi((GLenum)target, (GLenum)parameter, (int)value);
+}
+
+void render::GLFixedFunction::setTexEnv(TextureEnvTargetv target, TextureEnvParameterv parameter, const int* value)
+{
+	glTexEnviv((GLenum)target, (GLenum)parameter, value);
+}
+
+void render::GLFixedFunction::setTexEnv(TextureEnvTargetv target, TextureEnvParameterv parameter, const float* value)
+{
+	glTexEnvfv((GLenum)target, (GLenum)parameter, value);
+}
+
+

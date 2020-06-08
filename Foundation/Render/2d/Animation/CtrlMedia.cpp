@@ -60,11 +60,6 @@ bool CtrlMedia::init()
 	return true;
 }
 
-void CtrlMedia::draw()
-{
-	CtrlAnimation::draw();
-}
-
 void CtrlMedia::start()
 {
 	CtrlAnimation::start();

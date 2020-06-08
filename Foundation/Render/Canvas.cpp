@@ -43,7 +43,7 @@ void Canvas::draw()
 
 	PostProcessing::getInstance()->draw();
 
-	GLRender::flush();
+	//GLRender::flush();
 }
 
 void Canvas::update(float interval)

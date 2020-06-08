@@ -14,11 +14,11 @@ private:
 
 	void testDifferentImages();
 
-	void testImages();
-
 	void testMoveImage();
 
 	void testPixelImage();
+
+	void testPointSprite();
 private:
 	void onTouchBegin(Node* node, float x, float y, bool include);
 	void onTouchMove(Node* node, float x, float y, bool include);

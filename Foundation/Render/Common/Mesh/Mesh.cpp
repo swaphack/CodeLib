@@ -54,6 +54,16 @@ render::ArrayBuffer* render::Mesh::getVertexBuffer() const
 	return _vertexBuffer;
 }
 
+void render::Mesh::setDrawMode(DrawMode mode)
+{
+	_drawMode = mode;
+}
+
+DrawMode render::Mesh::getDrawMode() const
+{
+	return _drawMode;
+}
+
 void render::Mesh::drawWithBufferObject()
 {
 	if (_detail == nullptr)
@@ -81,7 +91,7 @@ void render::Mesh::drawWithBufferObject()
 	_indiceBuffer->bindBuffer();
 
 	uint32_t nIndiceLength = _detail->getIndices().getLength();
-	GLBufferObjects::drawElements(DrawMode::TRIANGLES, nIndiceLength, IndexDataType::UNSIGNED_INT, nullptr);
+	GLBufferObjects::drawElements(_drawMode, nIndiceLength, IndexDataType::UNSIGNED_INT, nullptr);
 
 	GLDebug::showError();
 }
@@ -138,7 +148,7 @@ void render::Mesh::drawWithClientArray()
 	const sys::MeshMemoryData& indices = _detail->getIndices();
 	if (indices.getLength() > 0)
 	{
-		GLClientArrays::drawElements(DrawMode::TRIANGLES, indices.getLength(), IndexDataType::UNSIGNED_INT, indices.getValue());
+		GLClientArrays::drawElements(_drawMode, indices.getLength(), IndexDataType::UNSIGNED_INT, indices.getValue());
 		GLDebug::showError();
 	}
 

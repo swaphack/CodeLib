@@ -1,7 +1,7 @@
 #include "TestImageNode.h"
 #include "mathlib.h"
 #include "system.h"
-
+#include "Utility.h"
 using namespace sys;
 using namespace render;
 using namespace math;
@@ -18,7 +18,8 @@ TestImageNode::~TestImageNode()
 
 void TestImageNode::testFunc()
 {
-	testImage();
+	//testImage();
+	testPointSprite();
 }
 
 void TestImageNode::testImage()
@@ -173,6 +174,21 @@ void TestImageNode::testPixelImage()
 
 	//pImage->setUserData(pCtrlText);
 	pImage->getTouchProxy()->addTouchDelegate(TouchType::ON, this, TOUCH_DELEGATTE_SELECTOR(TestImageNode::onTouchImage));
+}
+
+void TestImageNode::testPointSprite()
+{
+	CtrlPointSprite* pSprite = CREATE_NODE(CtrlPointSprite);
+	pSprite->setImagePath("Resource/Image/point_sprite.jpg");
+	pSprite->setSpriteCount(200);
+	pSprite->setPointSize(64);
+	pSprite->setPosition(512, 384, 0);
+	pSprite->setVolume(512, 384);
+	pSprite->setAnchorPoint(0.5f, 0.5f);
+
+	Utility::loadShader(pSprite->getMaterials(), "Shader/point_sprite.vs", "Shader/point_sprite.fs");
+
+	this->addChild(pSprite);
 }
 
 void TestImageNode::onTouchImage(Node* node, float x, float y, bool include)
