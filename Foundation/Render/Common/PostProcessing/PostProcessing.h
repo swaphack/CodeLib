@@ -3,6 +3,7 @@
 namespace render
 {
 	class PostProcessingNode;
+	class View;
 
 	/**
 	*	后期处理
@@ -12,7 +13,17 @@ namespace render
 	public:
 		static PostProcessing* getInstance();
 	public:
-		void use();
+		/**
+		*	是否开启
+		*/
+		bool isEnable();
+		/**
+		*	记录
+		*/
+		void record();
+		/**
+		*	是否开启
+		*/
 		void draw();
 	public:
 		void setPostProcessingNode(PostProcessingNode* node);

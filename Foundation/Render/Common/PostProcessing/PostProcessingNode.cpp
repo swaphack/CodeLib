@@ -58,20 +58,18 @@ void render::PostProcessingNode::drawNode()
 
 void render::PostProcessingNode::beforeDrawNode()
 {
-	_frameBuffer->unbindFrameBuffer();
-
 	DrawNode::beforeDrawNode();
 	GLState::disable(EnableMode::DEPTH_TEST);
 
 	uint32_t bitfield = (uint32_t)ClearBufferBitType::COLOR_BUFFER_BIT;
 
-	GLRender::clearColor(1, 1, 1, 1);
+	GLRender::clearColor(0, 0, 0, 1);
 	GLRender::clear(bitfield);
 }
 
 void render::PostProcessingNode::afterDrawNode()
 {
-	GLState::enable(EnableMode::DEPTH_TEST);
+	//GLState::enable(EnableMode::DEPTH_TEST);
 }
 
 void render::PostProcessingNode::bindFrameBuffer()
@@ -84,32 +82,48 @@ void render::PostProcessingNode::bindFrameBuffer()
 	_frameBuffer->bindFrameBuffer();
 }
 
+void render::PostProcessingNode::unbindFrameBuffer()
+{
+	if (!_bInitedFrameBufferData)
+	{
+		return;
+	}
+
+	_frameBuffer->unbindFrameBuffer();
+}
+
 void render::PostProcessingNode::updateTextureSize()
 {
 	_bInitedFrameBufferData = true;
 
-	_frameBuffer->bindFrameBuffer();
+	
 
 	float width = _rectVertex.getWidth();
 	float height = _rectVertex.getHeight();
 
 	_texture->setWidth(width);
 	_texture->setHeight(height);
+
+	GLState::enable((EnableMode)_texture->getTextureTarget());
 	_texture->bindTexture();
 	_texture->setTextureImage(0, TextureInternalSizedFormat::RGBA8, width, height, 0, TextureExternalFormat::RGBA, TextureExternalDataType::UNSIGNED_BYTE, nullptr);
 	_texture->applyTextureSetting();
 	_texture->unbindTexture();
-	GLDebug::showError();
-	
-	_frameBuffer->setTexture2D(FrameBufferAttachment::COLOR_ATTACHMENT0, _texture->getTextureID(), 0);
+	GLState::disable((EnableMode)_texture->getTextureTarget());
 	GLDebug::showError();
 
+	GLDebug::showError();
+	GLDebug::showError();
 	_renderBuffer->bindRenderBuffer();
-	_renderBuffer->setStorage(RenderBufferInternalFormat::DEPTH24_STENCIL8, width, height);
+	_renderBuffer->setStorage(RenderBufferInternalFormat::DEPTH_STENCIL, width, height);
 	_renderBuffer->unbindRenderBuffer();
 	GLDebug::showError();
 
+	GLDebug::showError();
+	_frameBuffer->bindFrameBuffer();
+	_frameBuffer->setTexture2D(FrameBufferAttachment::COLOR_ATTACHMENT0, _texture->getTextureID(), 0);
 	_frameBuffer->setRenderBuffer(FrameBufferAttachment::DEPTH_STENCIL_ATTACHMENT, _renderBuffer);
+	
 	GLDebug::showError();
 
 	FrameBufferStatus status = _frameBuffer->checkStatus();
@@ -119,8 +133,8 @@ void render::PostProcessingNode::updateTextureSize()
 		return;
 	}
 	_frameBuffer->unbindFrameBuffer();
-
 	GLDebug::showError();
+
 	float vertices[] = {
 		_rectVertex.leftDown.getX(),_rectVertex.leftDown.getY(),
 		_rectVertex.rightDown.getX(),_rectVertex.rightDown.getY(),

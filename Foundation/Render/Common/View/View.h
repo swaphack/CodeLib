@@ -21,13 +21,13 @@ namespace render
 		void setFrameSize(float width, float height);
 		// 获取视窗大小
 		const math::Size& getFrameSize();
+	public:
 		// 重置视图
-		void initView();
-		// 更新视图
-		virtual void updateView();
-	protected:
+		void initViewPort();
 		// 应用设置
 		void applyConfig();
+		// 更新视图
+		virtual void updateView();
 	protected:
 		// 视窗位置
 		math::Vector2 _position;

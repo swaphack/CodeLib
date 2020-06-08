@@ -1,5 +1,7 @@
 #include "PostProcessing.h"
 #include "PostProcessingNode.h"
+#include "Graphic/import.h"
+#include "Common/View/View.h"
 
 render::PostProcessing* render::PostProcessing::getInstance()
 {
@@ -12,15 +14,17 @@ render::PostProcessing* render::PostProcessing::getInstance()
 	return sInstance;
 }
 
-void render::PostProcessing::use()
+bool render::PostProcessing::isEnable()
+{
+	return _node != nullptr;
+}
+
+void render::PostProcessing::record()
 {
 	if (_node == nullptr)
 	{
 		return;
 	}
-
-	//GLFrameRender::bindFramebuffer(FrameBufferTarget::DRAW_FRAMEBUFFER, _node->getf)
-
 	_node->bindFrameBuffer();
 }
 
@@ -30,7 +34,7 @@ void render::PostProcessing::draw()
 	{
 		return;
 	}
-
+	_node->unbindFrameBuffer();
 	_node->updateNode();
 	_node->drawNode();
 }

@@ -27,6 +27,7 @@ namespace render
 		virtual void afterDrawNode();
 	public:
 		void bindFrameBuffer();
+		void unbindFrameBuffer();
 	protected:
 		void updateTextureSize();
 	private:

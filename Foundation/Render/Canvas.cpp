@@ -24,9 +24,14 @@ Canvas::~Canvas()
 
 void Canvas::draw()
 {
-	PostProcessing::getInstance()->use();
-
-	_view->initView();
+	bool bEnablePostProcess = PostProcessing::getInstance()->isEnable();
+	if (bEnablePostProcess)
+	{
+		GLFixedFunction::pushAttrib(AttribMask::VIEWPORT_BIT);
+		PostProcessing::getInstance()->record();
+	}
+	_view->initViewPort();
+	_view->applyConfig();
 	_view->updateView();
 
 	Camera* mainCamera = Camera::getMainCamera();
@@ -40,8 +45,12 @@ void Canvas::draw()
 	{
 		pTop->visit();
 	}
-
-	PostProcessing::getInstance()->draw();
+	if (bEnablePostProcess)
+	{
+		GLFixedFunction::popAttrib();
+		_view->initViewPort();
+		PostProcessing::getInstance()->draw();
+	}
 
 	//GLRender::flush();
 }

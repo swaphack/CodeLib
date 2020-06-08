@@ -40,26 +40,10 @@ const math::Size& View::getFrameSize()
 	return _size;
 }
 
-void View::initView()
-{
-	if (isDirty())
-	{
-		//GLState::setClipControl(ClipControlOrigin::LOWER_LEFT, ClipControlDepth::ZERO_TO_ONE);
-		// 定义视图远近距离
-		//GLState::setDepthRange(0, 1);
-		// 定义视窗位置
-		GLState::setViewport(_position.getX(), _position.getY(), _size.getWidth(), _size.getHeight());
-
-		this->applyConfig();
-
-		setDirty(false);
-	}
-}
-
 void View::updateView()
 {
 	GLState::setStencilMask(0xff);
-uint32_t bitfield = (uint32_t)ClearBufferBitType::COLOR_BUFFER_BIT | (uint32_t)ClearBufferBitType::DEPTH_BUFFER_BIT | (uint32_t)ClearBufferBitType::STENCIL_BUFFER_BIT;
+	uint32_t bitfield = (uint32_t)ClearBufferBitType::COLOR_BUFFER_BIT | (uint32_t)ClearBufferBitType::DEPTH_BUFFER_BIT | (uint32_t)ClearBufferBitType::STENCIL_BUFFER_BIT;
 	GLRender::clearColor(0, 0, 0, 0);
 	GLRender::clearDepth(1.0f);
 	GLRender::clearStencil(0x0);
@@ -67,6 +51,11 @@ uint32_t bitfield = (uint32_t)ClearBufferBitType::COLOR_BUFFER_BIT | (uint32_t)C
 	GLState::setStencilMask(0x00);
 
 	GLDebug::showError();
+}
+
+void render::View::initViewPort()
+{
+	GLState::setViewport(_position.getX(), _position.getY(), _size.getWidth(), _size.getHeight());
 }
 
 void View::applyConfig()
