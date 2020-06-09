@@ -13,6 +13,7 @@ namespace render
 	public:
 		static PostProcessing* getInstance();
 	public:
+		bool hasNode();
 		/**
 		*	ÊÇ·ñ¿ªÆô
 		*/

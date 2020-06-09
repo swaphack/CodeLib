@@ -14,9 +14,18 @@ render::PostProcessing* render::PostProcessing::getInstance()
 	return sInstance;
 }
 
-bool render::PostProcessing::isEnable()
+bool render::PostProcessing::hasNode()
 {
 	return _node != nullptr;
+}
+
+bool render::PostProcessing::isEnable()
+{
+	if (_node == nullptr)
+	{
+		return false;
+	}
+	return _node->isFrameInited();
 }
 
 void render::PostProcessing::record()
@@ -26,6 +35,7 @@ void render::PostProcessing::record()
 		return;
 	}
 	_node->bindFrameBuffer();
+	GLDebug::showError();
 }
 
 void render::PostProcessing::draw()
@@ -34,9 +44,11 @@ void render::PostProcessing::draw()
 	{
 		return;
 	}
-	_node->unbindFrameBuffer();
 	_node->updateNode();
+
 	_node->drawNode();
+
+	GLDebug::showError();
 }
 
 void render::PostProcessing::setPostProcessingNode(PostProcessingNode* node)

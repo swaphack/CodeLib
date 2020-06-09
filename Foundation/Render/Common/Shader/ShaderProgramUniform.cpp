@@ -68,19 +68,64 @@ void render::ShaderProgramUniform::setMatrix4x3(int count, bool transpose, const
 	GLShader::setProgramUniformMatrix4x3(getProgramID(), getProgramUniformID(), count, transpose, value);
 }
 
-void render::ShaderProgramUniform::setValue(VertexAttribSize type, int len, const int32_t* v)
+void render::ShaderProgramUniform::setValue1(int len, const int32_t* v)
 {
-	GLShader::setProgramUniformValue(getProgramID(), getProgramUniformID(), type, len, v);
+	GLShader::setProgramUniformValue1(getProgramID(), getProgramUniformID(), len, v);
 }
 
-void render::ShaderProgramUniform::setValue(VertexAttribSize type, int count, const uint32_t* value)
+void render::ShaderProgramUniform::setValue2(int len, const int32_t* v)
 {
-	GLShader::setProgramUniformValue(getProgramID(), getProgramUniformID(), type, count, value);
+	GLShader::setProgramUniformValue2(getProgramID(), getProgramUniformID(), len, v);
 }
 
-void render::ShaderProgramUniform::setValue(VertexAttribSize type, int count, const float* value)
+void render::ShaderProgramUniform::setValue3(int len, const int32_t* v)
 {
-	GLShader::setProgramUniformValue(getProgramID(), getProgramUniformID(), type, count, value);
+	GLShader::setProgramUniformValue3(getProgramID(), getProgramUniformID(), len, v);
+}
+
+void render::ShaderProgramUniform::setValue4(int len, const int32_t* v)
+{
+	GLShader::setProgramUniformValue4(getProgramID(), getProgramUniformID(), len, v);
+}
+
+void render::ShaderProgramUniform::setValue1(int count, const uint32_t* value)
+{
+	GLShader::setProgramUniformValue1(getProgramID(), getProgramUniformID(), count, value);
+}
+
+void render::ShaderProgramUniform::setValue2(int count, const uint32_t* value)
+{
+	GLShader::setProgramUniformValue2(getProgramID(), getProgramUniformID(), count, value);
+}
+
+void render::ShaderProgramUniform::setValue3(int count, const uint32_t* value)
+{
+	GLShader::setProgramUniformValue3(getProgramID(), getProgramUniformID(), count, value);
+}
+
+void render::ShaderProgramUniform::setValue4(int count, const uint32_t* value)
+{
+	GLShader::setProgramUniformValue4(getProgramID(), getProgramUniformID(), count, value);
+}
+
+void render::ShaderProgramUniform::setValue1(int count, const float* value)
+{
+	GLShader::setProgramUniformValue1(getProgramID(), getProgramUniformID(), count, value);
+}
+
+void render::ShaderProgramUniform::setValue2(int count, const float* value)
+{
+	GLShader::setProgramUniformValue2(getProgramID(), getProgramUniformID(), count, value);
+}
+
+void render::ShaderProgramUniform::setValue3(int count, const float* value)
+{
+	GLShader::setProgramUniformValue3(getProgramID(), getProgramUniformID(), count, value);
+}
+
+void render::ShaderProgramUniform::setValue4(int count, const float* value)
+{
+	GLShader::setProgramUniformValue4(getProgramID(), getProgramUniformID(), count, value);
 }
 
 void render::ShaderProgramUniform::setValue(uint32_t v0, uint32_t v1, uint32_t v2, uint32_t v3)

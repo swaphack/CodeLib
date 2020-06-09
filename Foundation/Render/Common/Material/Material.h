@@ -44,17 +44,81 @@ namespace render
 		VIEW_MATRIX,
 		// 模型矩阵
 		MODEL_VIEW,
-		// 环境纹理
-		AMBIENT_TEXTURE,
-		// 漫射纹理
-		DIFFUSE_TEXTURE,
-		// 高光纹理
-		SPECULAR_TEXTURE,
-		// 环境参数
+		// 纹理
+		TEXTURE0,
+		// 纹理
+		TEXTURE1,
+		// 纹理
+		TEXTURE2,
+		// 纹理
+		TEXTURE3,
+		// 纹理
+		TEXTURE4,
+		// 纹理
+		TEXTURE5,
+		// 纹理
+		TEXTURE6,
+		// 纹理
+		TEXTURE7,
+		// 纹理
+		TEXTURE8,
+		// 纹理
+		TEXTURE9,
+		// 纹理
+		TEXTURE10,
+		// 纹理
+		TEXTURE11,
+		// 纹理
+		TEXTURE12,
+		// 纹理
+		TEXTURE13,
+		// 纹理
+		TEXTURE14,
+		// 纹理
+		TEXTURE15,
+		// 纹理
+		TEXTURE16,
+		// 纹理
+		TEXTURE17,
+		// 纹理
+		TEXTURE18,
+		// 纹理
+		TEXTURE19,
+		// 纹理
+		TEXTURE20,
+		// 纹理
+		TEXTURE21,
+		// 纹理
+		TEXTURE22,
+		// 纹理
+		TEXTURE23,
+		// 纹理
+		TEXTURE24,
+		// 纹理
+		TEXTURE25,
+		// 纹理
+		TEXTURE26,
+		// 纹理
+		TEXTURE27,
+		// 纹理
+		TEXTURE28,
+		// 纹理
+		TEXTURE29,
+		// 纹理
+		TEXTURE30,
+		// 纹理
+		TEXTURE31,
+		// 材质环境参数
+		MATERIAL_AMBIENT,
+		// 材质漫射参数
+		MATERIAL_DIFFUSE,
+		// 材质高光参数
+		MATERIAL_SPECULAR,
+		// 光源环境参数
 		LIGHT_AMBIENT,
-		// 漫射参数
+		// 光源漫射参数
 		LIGHT_DIFFUSE,
-		// 高光参数
+		// 光源高光参数
 		LIGHT_SPECULAR,
 	};
 

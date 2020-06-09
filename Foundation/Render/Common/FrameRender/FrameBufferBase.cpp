@@ -36,7 +36,7 @@ void render::FrameBufferBase::bindFrameBuffer()
 	GLFrameRender::bindFramebuffer(_frameBufferTarget, _frameBufferID);
 }
 
-void render::FrameBufferBase::bindFramebuffer(FrameBufferTarget target)
+void render::FrameBufferBase::bindFrameBuffer(FrameBufferTarget target)
 {
 	GLFrameRender::bindFramebuffer(target, _frameBufferID);
 }

@@ -1,5 +1,6 @@
 #include "Light.h"
 #include "Graphic/GLAPI/import.h"
+#include "Environment.h"
 
 using namespace render;
 
@@ -19,11 +20,13 @@ Light::Light()
 	_lightSpecular[1] = 1.0f;
 	_lightSpecular[2] = 1.0f;
 	_lightSpecular[3] = 1.0f;
+
+	G_ENVIRONMENT->addLight(this);
 }
 
 Light::~Light()
 {
-
+	G_ENVIRONMENT->removeLight(this);
 }
 
 void Light::draw()

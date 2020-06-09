@@ -60,14 +60,16 @@ void render::View::initViewPort()
 
 void View::applyConfig()
 {
+	GLDebug::showError();
 	GLState::enable(EnableMode::DEPTH_TEST);
-	GLState::setDepthFunc(DepthFunction::LESS);
+	GLState::setDepthFunc(DepthFunction::LEQUAL);
 
 	GLState::enable(EnableMode::STENCIL_TEST);
 
 	GLFixedFunction::setShadeModel(ShadingModel::SMOOTH);
 	GLState::setPerspectiveCorrectionHint(HintMode::NICEST);
 
+	GLState::enable(EnableMode::CULL_FACE);
 	GLState::setCullFace(FaceType::BACK);
 	GLState::setFrontFace(FrontFaceDirection::CCW);
 	GLDebug::showError();

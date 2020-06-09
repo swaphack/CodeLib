@@ -24,7 +24,7 @@ Canvas::~Canvas()
 
 void Canvas::draw()
 {
-	bool bEnablePostProcess = PostProcessing::getInstance()->isEnable();
+	bool bEnablePostProcess = PostProcessing::getInstance()->hasNode();
 	if (bEnablePostProcess)
 	{
 		GLFixedFunction::pushAttrib(AttribMask::VIEWPORT_BIT);

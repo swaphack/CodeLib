@@ -26,7 +26,7 @@ namespace render
 		static void clearStencil(int mask);
 	public:
 
-		static void setDrawBuffMode(DrawBufferMode mode);
+		static void setDrawBuffer(DrawBufferMode mode);
 		static void setNamedFramebufferDrawBuffer(GLuint framebuffer, DrawBufferMode mode);
 	public:
 		static void finish();

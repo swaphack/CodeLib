@@ -53,7 +53,26 @@ void render::PostProcessingNode::drawNode()
 		return;
 	}
 
+	unbindFrameBuffer();
+	/*
+	int size = getWidth() * getHeight() * 4;
+	//std::vector<uint8_t> data(size);
+	uint8_t* data = (uint8_t*)malloc(size);
+	memset(data, 0, size);
+	_texture->getTextureImage(0, TextureExternalFormat::RGBA, TextureExternalDataType::UNSIGNED_BYTE, size, data);
+	GLDebug::showError();
+
+	for (int i = 0; i < size; i++)
+	{
+		PRINT("%u", data[i]);
+	}
+	free(data);
+	int a = 1;
+	*/
+
+	GLDebug::showError();
 	DrawNode::drawNode();
+	GLDebug::showError();
 }
 
 void render::PostProcessingNode::beforeDrawNode()
@@ -61,15 +80,37 @@ void render::PostProcessingNode::beforeDrawNode()
 	DrawNode::beforeDrawNode();
 	GLState::disable(EnableMode::DEPTH_TEST);
 
-	uint32_t bitfield = (uint32_t)ClearBufferBitType::COLOR_BUFFER_BIT;
+	uint32_t bitfield =
+		(uint32_t)ClearBufferBitType::COLOR_BUFFER_BIT 
+		|(uint32_t)ClearBufferBitType::DEPTH_BUFFER_BIT 
+		|(uint32_t)ClearBufferBitType::STENCIL_BUFFER_BIT
+	;
 
-	GLRender::clearColor(0, 0, 0, 1);
-	GLRender::clear(bitfield);
+	//GLRender::clear(bitfield);
+}
+
+void render::PostProcessingNode::onDraw()
+{
+	DrawNode::onDraw();
+
+	
+	/*
+	const math::Volume& size = Tool::getGLViewSize();
+	_frameBuffer->blitFrameBuffer(
+		0, 0, size.getWidth(), size.getHeight(),
+		0, 0, size.getWidth(), size.getHeight(),
+		(uint32_t)ClearBufferBitType::COLOR_BUFFER_BIT, BlitFrameBufferFilter::NEAREST);
+	*/
 }
 
 void render::PostProcessingNode::afterDrawNode()
 {
-	//GLState::enable(EnableMode::DEPTH_TEST);
+	GLState::enable(EnableMode::DEPTH_TEST);
+}
+
+bool render::PostProcessingNode::isFrameInited()
+{
+	return _bInitedFrameBufferData;
 }
 
 void render::PostProcessingNode::bindFrameBuffer()
@@ -78,8 +119,7 @@ void render::PostProcessingNode::bindFrameBuffer()
 	{
 		return;
 	}
-
-	_frameBuffer->bindFrameBuffer();
+	_frameBuffer->bindFrameBuffer(FrameBufferTarget::DRAW_FRAMEBUFFER);
 }
 
 void render::PostProcessingNode::unbindFrameBuffer()
@@ -88,15 +128,12 @@ void render::PostProcessingNode::unbindFrameBuffer()
 	{
 		return;
 	}
-
 	_frameBuffer->unbindFrameBuffer();
 }
 
 void render::PostProcessingNode::updateTextureSize()
 {
-	_bInitedFrameBufferData = true;
-
-	
+	_bInitedFrameBufferData = true;	
 
 	float width = _rectVertex.getWidth();
 	float height = _rectVertex.getHeight();
@@ -119,7 +156,6 @@ void render::PostProcessingNode::updateTextureSize()
 	_renderBuffer->unbindRenderBuffer();
 	GLDebug::showError();
 
-	GLDebug::showError();
 	_frameBuffer->bindFrameBuffer();
 	_frameBuffer->setTexture2D(FrameBufferAttachment::COLOR_ATTACHMENT0, _texture->getTextureID(), 0);
 	_frameBuffer->setRenderBuffer(FrameBufferAttachment::DEPTH_STENCIL_ATTACHMENT, _renderBuffer);
@@ -132,6 +168,14 @@ void render::PostProcessingNode::updateTextureSize()
 		PRINT("Frame Buffer is not Complete!\n");
 		return;
 	}
+
+	GLFrameRender::setDrawBuffer(DrawBufferType::COLOR_ATTACHMENT0);
+	GLDebug::showError();
+
+
+	GLRender::setReadBuffer(ReadBufferMode::COLOR_ATTACHMENT0);
+	GLDebug::showError();
+
 	_frameBuffer->unbindFrameBuffer();
 	GLDebug::showError();
 

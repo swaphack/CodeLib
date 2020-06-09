@@ -7,7 +7,6 @@ namespace render
 	class TextureCubeMap;
 	/**
 	*	天空盒
-	*	还有问题
 	*/
 	class SkyBox : public CubeMap
 	{

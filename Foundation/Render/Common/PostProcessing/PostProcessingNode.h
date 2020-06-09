@@ -24,7 +24,11 @@ namespace render
 
 		virtual void beforeDrawNode();
 
+		virtual void onDraw();
+
 		virtual void afterDrawNode();
+
+		bool isFrameInited();
 	public:
 		void bindFrameBuffer();
 		void unbindFrameBuffer();

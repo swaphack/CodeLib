@@ -8,6 +8,7 @@
 #include "Materials.h"
 #include "Common/Mesh/import.h"
 #include "Common/Texture/import.h"
+#include "3d/Environment/import.h"
 
 render::Material::Material()
 {
@@ -132,6 +133,21 @@ void render::Material::startUpdateShaderUniformValue(Node* node, Materials* mats
 	const math::Matrix44& viewMat = Camera::getMainCamera()->getViewMatrix();
 	const math::Matrix44& modelMat = node->getWorldMatrix();
 
+	const float* lightAmbient = nullptr;
+	const float* lightDiffuse = nullptr;
+	const float* lightSpecular = nullptr;
+
+	if (G_ENVIRONMENT->hasLight())
+	{
+		auto pLight = G_ENVIRONMENT->getLight(LightName::LIGHT0);
+		if (pLight)
+		{
+			lightAmbient = pLight->getAmbient();
+			lightDiffuse = pLight->getDiffuse();
+			lightSpecular = pLight->getSpecular();
+		}
+	}
+
 	for (auto item : _vertexUniformIndices)
 	{
 		auto pUniform = _shaderProgram->getUniform(item.second);
@@ -151,8 +167,14 @@ void render::Material::startUpdateShaderUniformValue(Node* node, Materials* mats
 		{
 			pUniform->setMatrix4(modelMat);
 		}
-
-		else if (item.first == UniformType::AMBIENT_TEXTURE)
+		else if (item.first == UniformType::LIGHT_AMBIENT)
+		{
+			if (lightAmbient)
+			{
+				pUniform->setValue(lightAmbient);
+			}
+		}
+		else if (item.first == UniformType::TEXTURE0)
 		{
 			auto pTexture = mats->getTexture(_detail->getAmbientTextureMap());
 			if (pTexture)
@@ -162,7 +184,7 @@ void render::Material::startUpdateShaderUniformValue(Node* node, Materials* mats
 			pUniform->setValue(0);
 			GLDebug::showError();
 		}
-		else if (item.first == UniformType::DIFFUSE_TEXTURE)
+		else if (item.first == UniformType::TEXTURE1)
 		{
 			auto pTexture = mats->getTexture(_detail->getDiffuseTextureMap());
 			if (pTexture)
@@ -173,7 +195,7 @@ void render::Material::startUpdateShaderUniformValue(Node* node, Materials* mats
 
 			GLDebug::showError();
 		}
-		else if (item.first == UniformType::SPECULAR_TEXTURE)
+		else if (item.first == UniformType::TEXTURE2)
 		{
 			auto pTexture = mats->getTexture(_detail->getSpecularTextureMap());
 			if (pTexture)
@@ -274,7 +296,7 @@ void render::Material::endUpdateShaderUniformValue(Materials* mats)
 		{
 			continue;
 		}
-		if (item.first == UniformType::AMBIENT_TEXTURE)
+		if (item.first == UniformType::TEXTURE0)
 		{
 			auto pTexture = mats->getTexture(_detail->getAmbientTextureMap());
 			if (pTexture)
@@ -285,7 +307,7 @@ void render::Material::endUpdateShaderUniformValue(Materials* mats)
 
 			GLDebug::showError();
 		}
-		else if (item.first == UniformType::DIFFUSE_TEXTURE)
+		else if (item.first == UniformType::TEXTURE1)
 		{
 			auto pTexture = mats->getTexture(_detail->getDiffuseTextureMap());
 			if (pTexture)
@@ -296,7 +318,7 @@ void render::Material::endUpdateShaderUniformValue(Materials* mats)
 
 			GLDebug::showError();
 		}
-		else if (item.first == UniformType::SPECULAR_TEXTURE)
+		else if (item.first == UniformType::TEXTURE2)
 		{
 			auto pTexture = mats->getTexture(_detail->getSpecularTextureMap());
 			if (pTexture)

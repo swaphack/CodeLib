@@ -27,12 +27,25 @@ namespace render
 	public:
 		void showAttribs();
 	public:
-		void setValue(VertexAttribSize len, const double* v);
-		void setValue(VertexAttribSize len, const float* v);
+		void setValue1(const double* v);
+		void setValue2(const double* v);
+		void setValue3(const double* v);
+		void setValue4(const double* v);
+
+		void setValue1(const float* v);
+		void setValue2(const float* v);
+		void setValue3(const float* v);
+		void setValue4(const float* v);
+
 		void setValue4(const uint32_t* v);
 		void setValue4(const int32_t* v);
 		void setValue4(const uint16_t* v);
-		void setValue(VertexAttribSize len, const int16_t* v);
+
+		void setValue1(const int16_t* v);
+		void setValue2(const int16_t* v);
+		void setValue3(const int16_t* v);
+		void setValue4(const int16_t* v);
+
 		void setValue4(const uint8_t* v);
 		void setValue4(const int8_t* v);
 

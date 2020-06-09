@@ -41,9 +41,20 @@ namespace render
 		void setValue(uint32_t v0, uint32_t v1, uint32_t v2);
 		void setValue(uint32_t v0, uint32_t v1, uint32_t v2, uint32_t v3);
 
-		void setValue(VertexAttribSize type, int count, const float* value);
-		void setValue(VertexAttribSize type, int count, const int32_t* value);
-		void setValue(VertexAttribSize type, int count, const uint32_t* value);
+		void setValue1(int count, const float* value);
+		void setValue2(int count, const float* value);
+		void setValue3(int count, const float* value);
+		void setValue4(int count, const float* value);
+
+		void setValue1(int count, const int32_t* value);
+		void setValue2(int count, const int32_t* value);
+		void setValue3(int count, const int32_t* value);
+		void setValue4(int count, const int32_t* value);
+
+		void setValue1(int count, const uint32_t* value);
+		void setValue2(int count, const uint32_t* value);
+		void setValue3(int count, const uint32_t* value);
+		void setValue4(int count, const uint32_t* value);
 
 		void setMatrix2(int count, const float* value);
 		void setMatrix3(int count, const float* value);

@@ -26,8 +26,15 @@ namespace render
 		*/
 		uint32_t getUniformID();
 	public:
-		void setValue(VertexAttribSize type, int len, float* v);
-		void setValue(VertexAttribSize type, int len, int32_t* v);
+		void setValue1(int len, const float* v);
+		void setValue2(int len, const float* v);
+		void setValue3(int len, const float* v);
+		void setValue4(int len, const float* v);
+
+		void setValue1(int len, const int32_t* v);
+		void setValue2(int len, const int32_t* v);
+		void setValue3(int len, const int32_t* v);
+		void setValue4(int len, const int32_t* v);
 
 		void setValue(float v0);
 		void setValue(float v0, float v1);

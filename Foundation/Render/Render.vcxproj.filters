@@ -501,6 +501,9 @@
     <ClCompile Include="2d\Animation\CtrlPointSprite.cpp">
       <Filter>2d\Animation</Filter>
     </ClCompile>
+    <ClCompile Include="3d\Environment\Environment.cpp">
+      <Filter>3d\Environment</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Common\Node\import.h">
@@ -1157,6 +1160,9 @@
     </ClInclude>
     <ClInclude Include="2d\Animation\CtrlPointSprite.h">
       <Filter>2d\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="3d\Environment\Environment.h">
+      <Filter>3d\Environment</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

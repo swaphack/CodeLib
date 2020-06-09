@@ -18,12 +18,25 @@ namespace render
 		static void useProgram(uint32_t program);
 		static void showProgramError(uint32_t program);
 	public:
-		static void setVertexAttribValue(uint32_t attribID, VertexAttribSize type, const double* v);
-		static void setVertexAttribValue(uint32_t attribID, VertexAttribSize type, const float* v);
+		static void setVertexAttribValue1(uint32_t attribID, const double* v);
+		static void setVertexAttribValue2(uint32_t attribID, const double* v);
+		static void setVertexAttribValue3(uint32_t attribID, const double* v);
+		static void setVertexAttribValue4(uint32_t attribID, const double* v);
+
+		static void setVertexAttribValue1(uint32_t attribID, const float* v);
+		static void setVertexAttribValue2(uint32_t attribID, const float* v);
+		static void setVertexAttribValue3(uint32_t attribID, const float* v);
+		static void setVertexAttribValue4(uint32_t attribID, const float* v);
+
 		static void setVertexAttribValue4(uint32_t attribID, const uint32_t* v);
 		static void setVertexAttribValue4(uint32_t attribID, const int32_t* v);
 		static void setVertexAttribValue4(uint32_t attribID, const uint16_t* v);
-		static void setVertexAttribValue(uint32_t attribID, VertexAttribSize type, const int16_t* v);
+
+		static void setVertexAttribValue1(uint32_t attribID, const int16_t* v);
+		static void setVertexAttribValue2(uint32_t attribID, const int16_t* v);
+		static void setVertexAttribValue3(uint32_t attribID, const int16_t* v);
+		static void setVertexAttribValue4(uint32_t attribID, const int16_t* v);
+
 		static void setVertexAttribValue4(uint32_t attribID, const uint8_t* v);
 		static void setVertexAttribValue4(uint32_t attribID, const int8_t* v);
 
@@ -49,8 +62,15 @@ namespace render
 	public:
 		static int getUniformLocation(int32_t program, const char* uniformName);
 
-		static void setUniformValue(int32_t uniformID, VertexAttribSize type, int len, float* v);
-		static void setUniformValue(int32_t uniformID, VertexAttribSize type, int len, int32_t* v);
+		static void setUniformValue1(int32_t uniformID, int len, const float* v);
+		static void setUniformValue2(int32_t uniformID, int len, const float* v);
+		static void setUniformValue3(int32_t uniformID, int len, const float* v);
+		static void setUniformValue4(int32_t uniformID, int len, const float* v);
+
+		static void setUniformValue1(int32_t uniformID, int len, const int32_t* v);
+		static void setUniformValue2(int32_t uniformID, int len, const int32_t* v);
+		static void setUniformValue3(int32_t uniformID, int len, const int32_t* v);
+		static void setUniformValue4(int32_t uniformID, int len, const int32_t* v);
 		 
 		static void setUniformValue(int32_t uniformID, float v0);
 		static void setUniformValue(int32_t uniformID, float v0, float v1);
@@ -81,9 +101,20 @@ namespace render
 		static void setProgramUniformValue(uint32_t program, int location, uint32_t v0, uint32_t v1, uint32_t v2);
 		static void setProgramUniformValue(uint32_t program, int location, uint32_t v0, uint32_t v1, uint32_t v2, uint32_t v3);
 
-		static void setProgramUniformValue(uint32_t program, int location, VertexAttribSize type, int count, const float* value);					  
-		static void setProgramUniformValue(uint32_t program, int location, VertexAttribSize type, int count, const int32_t* value);										  
-		static void setProgramUniformValue(uint32_t program, int location, VertexAttribSize type, int count, const uint32_t* value);
+		static void setProgramUniformValue1(uint32_t program, int location, int count, const float* value);	
+		static void setProgramUniformValue2(uint32_t program, int location, int count, const float* value);
+		static void setProgramUniformValue3(uint32_t program, int location, int count, const float* value);
+		static void setProgramUniformValue4(uint32_t program, int location, int count, const float* value);
+
+		static void setProgramUniformValue1(uint32_t program, int location, int count, const int32_t* value);										  
+		static void setProgramUniformValue2(uint32_t program, int location, int count, const int32_t* value);
+		static void setProgramUniformValue3(uint32_t program, int location, int count, const int32_t* value);
+		static void setProgramUniformValue4(uint32_t program, int location, int count, const int32_t* value);
+
+		static void setProgramUniformValue1(uint32_t program, int location, int count, const uint32_t* value);
+		static void setProgramUniformValue2(uint32_t program, int location, int count, const uint32_t* value);
+		static void setProgramUniformValue3(uint32_t program, int location, int count, const uint32_t* value);
+		static void setProgramUniformValue4(uint32_t program, int location, int count, const uint32_t* value);
 
 		static void setProgramUniformMatrix2(uint32_t program, int location, int count, const float* value);
 		static void setProgramUniformMatrix3(uint32_t program, int location, int count, const float* value);

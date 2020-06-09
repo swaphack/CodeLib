@@ -20,14 +20,44 @@ void ShaderAttrib::showAttribs()
 	
 }
 
-void ShaderAttrib::setValue(VertexAttribSize len, const double* v)
+void ShaderAttrib::setValue1(const double* v)
 {
-	GLShader::setVertexAttribValue(getAttribID(), len, v);
+	GLShader::setVertexAttribValue1(getAttribID(), v);
 }
 
-void ShaderAttrib::setValue(VertexAttribSize len, const float* v)
+void ShaderAttrib::setValue2(const double* v)
 {
-	GLShader::setVertexAttribValue(getAttribID(), len, v);
+	GLShader::setVertexAttribValue2(getAttribID(), v);
+}
+
+void ShaderAttrib::setValue3(const double* v)
+{
+	GLShader::setVertexAttribValue3(getAttribID(), v);
+}
+
+void ShaderAttrib::setValue4(const double* v)
+{
+	GLShader::setVertexAttribValue4(getAttribID(), v);
+}
+
+void ShaderAttrib::setValue1(const float* v)
+{
+	GLShader::setVertexAttribValue1(getAttribID(), v);
+}
+
+void ShaderAttrib::setValue2(const float* v)
+{
+	GLShader::setVertexAttribValue2(getAttribID(), v);
+}
+
+void ShaderAttrib::setValue3(const float* v)
+{
+	GLShader::setVertexAttribValue3(getAttribID(), v);
+}
+
+void ShaderAttrib::setValue4(const float* v)
+{
+	GLShader::setVertexAttribValue4(getAttribID(), v);
 }
 
 void ShaderAttrib::setValue4(const uint32_t* v)
@@ -45,9 +75,24 @@ void ShaderAttrib::setValue4(const uint16_t* v)
 	GLShader::setVertexAttribValue4(getAttribID(), v);
 }
 
-void ShaderAttrib::setValue(VertexAttribSize len, const int16_t* v)
+void ShaderAttrib::setValue1(const int16_t* v)
 {
-	GLShader::setVertexAttribValue(getAttribID(), len, v);
+	GLShader::setVertexAttribValue1(getAttribID(), v);
+}
+
+void ShaderAttrib::setValue2(const int16_t* v)
+{
+	GLShader::setVertexAttribValue2(getAttribID(), v);
+}
+
+void ShaderAttrib::setValue3(const int16_t* v)
+{
+	GLShader::setVertexAttribValue3(getAttribID(), v);
+}
+
+void ShaderAttrib::setValue4(const int16_t* v)
+{
+	GLShader::setVertexAttribValue4(getAttribID(), v);
 }
 
 void ShaderAttrib::setValue4(const uint8_t* v)

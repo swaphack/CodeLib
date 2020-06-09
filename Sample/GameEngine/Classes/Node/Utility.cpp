@@ -39,8 +39,8 @@ void Utility::initShaderAttrib(render::Materials* mats)
 		item.second->addUniform(UniformType::VIEW_MATRIX, "viewMatrix");
 		item.second->addUniform(UniformType::MODEL_VIEW, "modelMatrix");
 
-		item.second->addUniform(UniformType::AMBIENT_TEXTURE, "texSampler0");
-		item.second->addUniform(UniformType::DIFFUSE_TEXTURE, "texSampler1");
+		item.second->addUniform(UniformType::TEXTURE0, "texSampler0");
+		item.second->addUniform(UniformType::TEXTURE1, "texSampler1");
 
 		item.second->addUniform(UniformType::LIGHT_AMBIENT, "ligthAmbient");
 		item.second->addUniform(UniformType::LIGHT_DIFFUSE, "ligthDiffuse");

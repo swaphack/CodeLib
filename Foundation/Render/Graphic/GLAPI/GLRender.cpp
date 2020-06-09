@@ -48,7 +48,7 @@ void GLRender::clearStencil(int mask)
 }
 
 
-void GLRender::setDrawBuffMode(DrawBufferMode mode)
+void GLRender::setDrawBuffer(DrawBufferMode mode)
 {
 	glDrawBuffer((GLenum)mode);
 }

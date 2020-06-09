@@ -13,14 +13,44 @@ ShaderUniform::~ShaderUniform()
 {
 
 }
-void ShaderUniform::setValue(VertexAttribSize type, int len, float* v)
+void ShaderUniform::setValue1(int len, const float* v)
 {
-	GLShader::setUniformValue(getUniformID(), type, len, v);
+	GLShader::setUniformValue1(getUniformID(), len, v);
 }
 
-void ShaderUniform::setValue(VertexAttribSize type, int len, int32_t* v)
+void ShaderUniform::setValue2(int len, const float* v)
 {
-	GLShader::setUniformValue(getUniformID(), type, len, v);
+	GLShader::setUniformValue2(getUniformID(), len, v);
+}
+
+void ShaderUniform::setValue3(int len, const float* v)
+{
+	GLShader::setUniformValue3(getUniformID(), len, v);
+}
+
+void ShaderUniform::setValue4(int len, const float* v)
+{
+	GLShader::setUniformValue4(getUniformID(), len, v);
+}
+
+void ShaderUniform::setValue1(int len, const int32_t* v)
+{
+	GLShader::setUniformValue1(getUniformID(), len, v);
+}
+
+void ShaderUniform::setValue2(int len, const int32_t* v)
+{
+	GLShader::setUniformValue2(getUniformID(), len, v);
+}
+
+void ShaderUniform::setValue3(int len, const int32_t* v)
+{
+	GLShader::setUniformValue3(getUniformID(), len, v);
+}
+
+void ShaderUniform::setValue4(int len, const int32_t* v)
+{
+	GLShader::setUniformValue4(getUniformID(), len, v);
 }
 
 void ShaderUniform::setValue(float v0)
