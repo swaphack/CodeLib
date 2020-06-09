@@ -133,19 +133,11 @@ void render::Material::startUpdateShaderUniformValue(Node* node, Materials* mats
 	const math::Matrix44& viewMat = Camera::getMainCamera()->getViewMatrix();
 	const math::Matrix44& modelMat = node->getWorldMatrix();
 
-	const float* lightAmbient = nullptr;
-	const float* lightDiffuse = nullptr;
-	const float* lightSpecular = nullptr;
 
+	Light* pLight = nullptr;
 	if (G_ENVIRONMENT->hasLight())
 	{
-		auto pLight = G_ENVIRONMENT->getLight(LightName::LIGHT0);
-		if (pLight)
-		{
-			lightAmbient = pLight->getAmbient();
-			lightDiffuse = pLight->getDiffuse();
-			lightSpecular = pLight->getSpecular();
-		}
+		pLight = G_ENVIRONMENT->getLight(LightName::LIGHT0);
 	}
 
 	for (auto item : _vertexUniformIndices)
@@ -167,12 +159,39 @@ void render::Material::startUpdateShaderUniformValue(Node* node, Materials* mats
 		{
 			pUniform->setMatrix4(modelMat);
 		}
-		else if (item.first == UniformType::LIGHT_AMBIENT)
+		else if (item.first == UniformType::LIGHT_COLOR)
 		{
-			if (lightAmbient)
+			if (pLight)
 			{
-				pUniform->setValue(lightAmbient);
+				pUniform->setValue4(1, pLight->getAmbient());
 			}
+		}
+		else if (item.first == UniformType::LIGHT_POSITION)
+		{
+			if (pLight)
+			{
+				pUniform->setValue3(1, pLight->getWorldMatrix().getPosition().getValue());
+			}
+		}
+		else if (item.first == UniformType::VIEW_POSITION)
+		{
+			pUniform->setValue3(1, viewMat.getPosition().getValue());
+		}
+		else if (item.first == UniformType::MATERIAL_AMBIENT)
+		{
+			pUniform->setValue4(1, _detail->getAmbient());
+		}
+		else if (item.first == UniformType::MATERIAL_DIFFUSE)
+		{
+			pUniform->setValue4(1, _detail->getDiffuse());
+		}
+		else if (item.first == UniformType::MATERIAL_SPECULAR)
+		{
+			pUniform->setValue4(1, _detail->getSpecular());
+		}
+		else if (item.first == UniformType::MATERIAL_SHININESS)
+		{
+			pUniform->setValue(_detail->getShiness());
 		}
 		else if (item.first == UniformType::TEXTURE0)
 		{
@@ -407,7 +426,7 @@ void render::Material::beginApplyWithShader(Node* node, Mesh* pMesh, Materials* 
 		return;
 	}
 
-	this->applyMaterial();
+	//this->applyMaterial();
 
 	if (_shaderProgram)
 	{

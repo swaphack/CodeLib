@@ -16,7 +16,6 @@ namespace render
 		virtual ~Model3DS();
 	public:
 		void load(const std::string& filepath);
-	public:
-		//virtual void draw();
+		void loadAsyn(const std::string& filepath, const std::function<void(Node*)>& callback = nullptr);
 	};
 }

@@ -16,11 +16,11 @@ TestShaderNode::~TestShaderNode()
 
 void TestShaderNode::testFunc()
 {
-	//this->addLight();
+	this->addLight();
 	//this->testImageShader();
 	//this->testClipShader();
 	//this->testFbxModelShader();
-	//this->testObjModelShader();
+	this->testObjModelShader();
 	//this->test3dsModelShader();
 
 	//this->testCubeModelShader();
@@ -179,7 +179,7 @@ void TestShaderNode::testObjModelShader()
 	pModel->setVolume(400, 400, 400);
 	this->addChild(pModel);
 
-	Utility::updateNodeShader(pModel);
+	Utility::loadShader(pModel->getMaterials(), "Shader/simple_light.vs", "Shader/simple_light.fs");
 	Utility::runRotateAction(pModel);
 }
 
@@ -239,7 +239,7 @@ void TestShaderNode::testClipShader()
 		if (pUniform)
 		{
 			float param[4] = { 1, 0, 0, -400 };
-			pUniform->setValue(VertexAttribSize::FOUR, 1, param);
+			pUniform->setValue4(1, param);
 		}
 	});
 }

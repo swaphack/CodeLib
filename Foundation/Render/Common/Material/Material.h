@@ -114,12 +114,14 @@ namespace render
 		MATERIAL_DIFFUSE,
 		// 材质高光参数
 		MATERIAL_SPECULAR,
-		// 光源环境参数
-		LIGHT_AMBIENT,
-		// 光源漫射参数
-		LIGHT_DIFFUSE,
-		// 光源高光参数
-		LIGHT_SPECULAR,
+		// 材质亮度参数
+		MATERIAL_SHININESS,
+		// 光源颜色参数
+		LIGHT_COLOR,
+		// 光源位置参数
+		LIGHT_POSITION,
+		// 摄像机位置
+		VIEW_POSITION,
 	};
 
 	class Material : public sys::Object
