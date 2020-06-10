@@ -49,7 +49,7 @@ void CtrlFrame::setTexture(const Texture2D* texture)
 	}
 
 	addMaterialTexture(MAT_TEXTURE_NAME, texture);
-	setAllMaterialsTexture(MAT_TEXTURE_NAME);
+	setTextureName(MAT_TEXTURE_NAME);
 
 	this->notify(NodeNotifyType::TEXTURE);
 }
@@ -57,7 +57,7 @@ void CtrlFrame::setTexture(const Texture2D* texture)
 void CtrlFrame::setTextureWithRect(const Texture2D* texture)
 {
 	addMaterialTexture(MAT_TEXTURE_NAME, texture);
-	setAllMaterialsTexture(MAT_TEXTURE_NAME);
+	setTextureName(MAT_TEXTURE_NAME);
 
 	this->setVolume(texture->getWidth(), texture->getHeight(), texture->getDepth());
 

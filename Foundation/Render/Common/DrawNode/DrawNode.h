@@ -57,7 +57,7 @@ namespace render
 		/**
 		*	添加纹理
 		*/
-		void setAllMaterialsTexture(const Texture* texture);
+		void setTexture(const Texture* texture);
 		/**
 		*	添加纹理
 		*/
@@ -69,7 +69,7 @@ namespace render
 		/**
 		*	设置纹理
 		*/
-		void setAllMaterialsTexture(const std::string& textureName);
+		void setTextureName(const std::string& textureName);
 		/**
 		*	设置纹理
 		*/
@@ -82,7 +82,7 @@ namespace render
 		/**
 		*	设置着色器
 		*/
-		void setAllMaterialsShaderProgram(ShaderProgram* program);
+		void setShaderProgram(ShaderProgram* program);
 		/**
 		*	设置着色器
 		*/
@@ -91,11 +91,11 @@ namespace render
 		/**
 		*	设置着色器处理函数
 		*/
-		void setAllShaderProgramFunc(const ShaderProgramFunc& func);
+		void setShaderProgramFunc(const ShaderProgramFunc& func);
 		/**
 		*	设置着色器处理函数
 		*/
-		void setMaterialShaderProgram(const std::string& matName, const ShaderProgramFunc& func);
+		void setMaterialShaderProgramFunc(const std::string& matName, const ShaderProgramFunc& func);
 	protected:
 		/**
 		*	绘制前工作

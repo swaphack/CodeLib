@@ -35,7 +35,7 @@ void TestEnvironmentNode::init3DSkyBox()
 
 	Utility::loadShader(pSkyBox->getMaterials(), "Shader/skybox.vs", "Shader/skybox.fs");
 	
-	pSkyBox->setAllShaderProgramFunc([](ShaderProgram* program) {
+	pSkyBox->setShaderProgramFunc([](ShaderProgram* program) {
 		auto pUniform = program->getUniform("viewMatrix");
 		if (pUniform)
 		{
@@ -74,7 +74,7 @@ void TestEnvironmentNode::init2DSkyBox()
 
 	Utility::loadShader(pSkyBox->getMaterials(), "Shader/texture3d.vs", "Shader/texture3d.fs");
 
-	pSkyBox->setAllShaderProgramFunc([](ShaderProgram* program) {
+	pSkyBox->setShaderProgramFunc([](ShaderProgram* program) {
 		auto pUniform = program->getUniform("viewMatrix");
 		if (pUniform)
 		{

@@ -504,6 +504,9 @@
     <ClCompile Include="3d\Environment\Environment.cpp">
       <Filter>3d\Environment</Filter>
     </ClCompile>
+    <ClCompile Include="Common\Shader\ShaderManager.cpp">
+      <Filter>Common\Shader</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Common\Node\import.h">
@@ -1163,6 +1166,9 @@
     </ClInclude>
     <ClInclude Include="3d\Environment\Environment.h">
       <Filter>3d\Environment</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Shader\ShaderManager.h">
+      <Filter>Common\Shader</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

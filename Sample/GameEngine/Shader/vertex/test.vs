@@ -1,8 +1,6 @@
-#version 330 core
+#include "Shader/vertex/matrix.vs"
 
-uniform mat4 projectMatrix;
-uniform mat4 viewMatrix;
-uniform mat4 modelMatrix;
+#version 330 core
 
 layout(location = 0) in vec3 vPosition;
 layout(location = 1) in vec4 vColor;

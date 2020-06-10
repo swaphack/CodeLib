@@ -17,7 +17,7 @@ TestShaderNode::~TestShaderNode()
 void TestShaderNode::testFunc()
 {
 	this->addLight();
-	//this->testImageShader();
+	this->testImageShader();
 	//this->testClipShader();
 	//this->testFbxModelShader();
 	//this->testObjModelShader();
@@ -25,7 +25,7 @@ void TestShaderNode::testFunc()
 
 	//this->testCubeModelShader();
 	//this->testMultiMeshCubeModelShader();
-	this->testSphereModelShader();
+	//this->testSphereModelShader();
 }	
 
 void TestShaderNode::testShaderUniformBlock()
@@ -99,7 +99,9 @@ void TestShaderNode::testImageShader()
 	pImage->setPosition(Vector2(512, 384));
 	this->addChild(pImage);
 
-	Utility::updateNodeShader(pImage);
+	//Utility::updateNodeShader(pImage);
+
+	Utility::loadShader(pImage->getMaterials(), "Shader/vertex/test.vs", "Shader/fragment/test.fs");
 }
 
 void TestShaderNode::testCubeModelShader()
@@ -141,7 +143,7 @@ void TestShaderNode::testSphereModelShader()
 {
 	auto pTexture = G_TEXTURE_CACHE->createTexture2D("Resource/Image/world_texture.jpg");
 	render::Sphere* pModel = CREATE_NODE(render::Sphere);
-	pModel->setAllMaterialsTexture(pTexture);
+	pModel->setTexture(pTexture);
 	pModel->setRadius(200);
 	pModel->setVolume(400, 400, 400);
 	pModel->setAnchorPoint(0.5, 0.5f, 0.5f);
@@ -252,7 +254,7 @@ void TestShaderNode::testClipShader()
 	MultiFaceCube* pModel = CREATE_NODE(MultiFaceCube);
 	pModel->addMaterialTexture(textureName, pTexture);
 
-	pModel->setAllMaterialsTexture(textureName);
+	pModel->setTextureName(textureName);
 	pModel->setPosition(400, 400, 0);
 	pModel->setVolume(200, 200, 200);
 	pModel->setAnchorPoint(0.0f, 0.5f, 0.5f);

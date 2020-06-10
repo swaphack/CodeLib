@@ -16,7 +16,8 @@ namespace render
 		virtual ~Shader();
 	public:
 		static Shader* create(ShaderType type);
-		static Shader* create(ShaderType type, const std::string& filepath);
+		static Shader* createFromData(ShaderType type, const char* data);
+		static Shader* createFromFile(ShaderType type, const std::string& filepath);
 	public:
 		/**
 		*	着色器编号
@@ -33,7 +34,7 @@ namespace render
 		/**
 		*	加载程序代码
 		*/
-		bool loadData(const char* data);
+		bool loadFromData(const char* data);
 		/**
 		*	从文件加载程序
 		*/

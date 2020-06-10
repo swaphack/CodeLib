@@ -46,7 +46,7 @@ void Shader::releaseShader()
 	_shaderID = 0;
 }
 
-bool Shader::loadData(const char* data)
+bool Shader::loadFromData(const char* data)
 {
 	if (data == nullptr)
 	{
@@ -78,7 +78,7 @@ bool Shader::loadFromFile(const std::string& filepath)
 		return false;
 	}
 
-	return this->loadData(data.c_str());
+	return this->loadFromData(data.c_str());
 }
 
 void Shader::attachProgram(ShaderProgram* program)
@@ -130,7 +130,23 @@ Shader* render::Shader::create(ShaderType type)
 	}	
 }
 
-render::Shader* render::Shader::create(ShaderType type, const std::string& filepath)
+Shader* render::Shader::createFromData(ShaderType type, const char* data)
+{
+	auto pShader = Shader::create(type);
+	if (pShader == nullptr)
+	{
+		return nullptr;
+	}
+
+	if (!pShader->loadFromData(data))
+	{
+		SAFE_DELETE(pShader);
+	}
+
+	return pShader;
+}
+
+render::Shader* render::Shader::createFromFile(ShaderType type, const std::string& filepath)
 {
 	auto pShader = Shader::create(type);
 	if (pShader == nullptr)

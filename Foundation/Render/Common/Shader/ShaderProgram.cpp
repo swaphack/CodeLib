@@ -240,7 +240,7 @@ bool render::ShaderProgram::isValid() const
 
 bool render::ShaderProgram::loadFromFile(ShaderType type, const std::string& path)
 {
-	Shader* pShader = Shader::create(type, path);
+	Shader* pShader = Shader::createFromFile(type, path);
 	if (pShader == nullptr)
 	{
 		return false;

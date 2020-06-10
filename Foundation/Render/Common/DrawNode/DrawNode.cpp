@@ -77,10 +77,10 @@ void render::DrawNode::addMaterialTexture(const std::string& matName, const std:
 	_materiales->addTexture(matName, fullpath);
 }
 
-void render::DrawNode::setAllMaterialsTexture(const Texture* texture)
+void render::DrawNode::setTexture(const Texture* texture)
 {
 	this->addMaterialTexture(MAT_TEXTURE_NAME, texture);
-	this->setAllMaterialsTexture(MAT_TEXTURE_NAME);
+	this->setTextureName(MAT_TEXTURE_NAME);
 }
 
 void render::DrawNode::addMaterialTexture(const std::string& matName, const Texture* texture)
@@ -88,7 +88,7 @@ void render::DrawNode::addMaterialTexture(const std::string& matName, const Text
 	_materiales->addTexture(matName, texture);
 }
 
-void render::DrawNode::setAllMaterialsTexture(const std::string& textureName)
+void render::DrawNode::setTextureName(const std::string& textureName)
 {
 	int count = _materiales->getMaterialCount();
 	for (auto item : _materiales->getMaterials())
@@ -117,7 +117,7 @@ render::ShaderProgram* render::DrawNode::getMaterialShaderProgram(const std::str
 	return pMat->getShaderProgram();
 }
 
-void render::DrawNode::setAllMaterialsShaderProgram(ShaderProgram* program)
+void render::DrawNode::setShaderProgram(ShaderProgram* program)
 {
 	int count = _materiales->getMaterialCount();
 	for (auto item : _materiales->getMaterials())
@@ -135,7 +135,7 @@ void render::DrawNode::setMaterialShaderProgram(const std::string& matName, Shad
 	}
 }
 
-void render::DrawNode::setAllShaderProgramFunc(const ShaderProgramFunc& func)
+void render::DrawNode::setShaderProgramFunc(const ShaderProgramFunc& func)
 {
 	int count = _materiales->getMaterialCount();
 	for (auto item : _materiales->getMaterials())
@@ -144,7 +144,7 @@ void render::DrawNode::setAllShaderProgramFunc(const ShaderProgramFunc& func)
 	}
 }
 
-void render::DrawNode::setMaterialShaderProgram(const std::string& matName, const ShaderProgramFunc& func)
+void render::DrawNode::setMaterialShaderProgramFunc(const std::string& matName, const ShaderProgramFunc& func)
 {
 	auto pMat = _materiales->getMaterial(matName);
 	if (pMat)

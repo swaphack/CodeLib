@@ -82,7 +82,7 @@ void render::CtrlPointSprite::setTexture(const Texture2D* texture)
 	}
 
 	addMaterialTexture(MAT_TEXTURE_NAME, texture);
-	setAllMaterialsTexture(MAT_TEXTURE_NAME);
+	setTextureName(MAT_TEXTURE_NAME);
 }
 
 void render::CtrlPointSprite::updatePointSprite()

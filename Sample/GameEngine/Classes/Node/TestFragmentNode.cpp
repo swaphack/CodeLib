@@ -22,7 +22,7 @@ void TestFragmentNode::testStencil()
 	MultiFaceCube* pCube = CREATE_NODE(MultiFaceCube);
 	pCube->addMaterialTexture("Face", pTexture2D);
 	pCube->setVolume(200, 300, 200);
-	pCube->setAllMaterialsTexture("Face");
+	pCube->setTextureName("Face");
 	pCube->setRotation(45, 45, 0);
 	pCube->setPosition(400, 400);
 	Utility::updateNodeShader(pCube);

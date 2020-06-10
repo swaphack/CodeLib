@@ -31,7 +31,7 @@ bool render::Cube::init()
 void render::Cube::setFaceImage(const std::string& filepath)
 {
 	addMaterialTexture(MAT_TEXTURE_NAME, filepath);
-	setAllMaterialsTexture(MAT_TEXTURE_NAME);
+	setTextureName(MAT_TEXTURE_NAME);
 }
 
 void render::Cube::onSpaceChanged()

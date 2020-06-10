@@ -192,13 +192,16 @@ void MemoryData::insert(size_t offset, int size, const char* value)
 
 void MemoryData::remove(size_t offset, int size)
 {
-	ASSERT(offset >= _length);
+	ASSERT(offset < _length);
 
 	size_t length = _length - size;
 	char* val = (char*)malloc(length);
 
 	uint32_t s1 = offset;
-	memcpy(val, _value, s1);
+	if (s1 > 0)
+	{
+		memcpy(val, _value, s1);
+	}
 	memcpy(val + s1, _value + offset + size, length);
 
 	this->clear();

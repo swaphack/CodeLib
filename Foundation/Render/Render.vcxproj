@@ -170,6 +170,7 @@
     <ClCompile Include="Common\PostProcessing\PostProcessingNode.cpp" />
     <ClCompile Include="Common\Scene\Scene.cpp" />
     <ClCompile Include="Common\Shader\ShaderAttrib.cpp" />
+    <ClCompile Include="Common\Shader\ShaderManager.cpp" />
     <ClCompile Include="Common\Shader\ShaderProgram.cpp" />
     <ClCompile Include="Common\Shader\Shader.cpp" />
     <ClCompile Include="Common\Shader\ShaderProgramPipeline.cpp" />
@@ -378,6 +379,7 @@
     <ClInclude Include="Common\Shader\ShaderAttrib.h" />
     <ClInclude Include="Common\Shader\import.h" />
     <ClInclude Include="Common\Shader\Shader.h" />
+    <ClInclude Include="Common\Shader\ShaderManager.h" />
     <ClInclude Include="Common\Shader\ShaderProgram.h" />
     <ClInclude Include="Common\Shader\ShaderProgramDelegate.h" />
     <ClInclude Include="Common\Shader\ShaderProgramPipeline.h" />

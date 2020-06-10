@@ -777,6 +777,8 @@ void sys::String::initString(size_t size, const char* value)
 	{
 		_data->init(size + 1, value);
 	}
+
+	_data->set(size, 1, "\0");
 }
 
 void sys::String::allocString(size_t size, MemoryData& data)

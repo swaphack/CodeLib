@@ -189,7 +189,7 @@ void render::Sphere::draw()
 {
 	for (int i = 0; i < SPHERE_FACE_COUNT; i++)
 	{
-		auto pMesh = _meshes->getMesh(i);
+		auto pMesh = getMesh(i);
 		if (pMesh)
 		{
 			const sys::MeshMemoryData& vertices = pMesh->getMeshDetail()->getVertices();
@@ -292,7 +292,7 @@ void render::Sphere::draw()
 {
 	for (int i = 0; i < SPHERE_FACE_COUNT; i++)
 	{
-		auto pMesh = _meshes->getMesh(i);
+		auto pMesh = getMesh(i);
 		if (pMesh)
 		{
 			const sys::MeshMemoryData& vertices = pMesh->getMeshDetail()->getVertices();

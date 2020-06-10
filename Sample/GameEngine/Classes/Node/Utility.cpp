@@ -11,12 +11,11 @@ void Utility::loadShader(render::Materials* mats, const std::string& vpath, cons
 	{
 		return;
 	}
-	ShaderProgram* pProgram = CREATE_OBJECT(ShaderProgram);
-	pProgram->loadVertexAndFragmentShader(vpath, fpath);
-	pProgram->bindFragDataLocation(0, "color");
-	pProgram->link();
-
-
+	ShaderProgram* pProgram = G_SHANDER->createShaderProgram(vpath, fpath);
+	if (pProgram == nullptr)
+	{
+		return;
+	}
 	for (auto item : mats->getMaterials())
 	{
 		item.second->setShaderProgram(pProgram);

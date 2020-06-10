@@ -8,3 +8,5 @@
 #include "Shader.h"
 #include "ShaderProgram.h"
 #include "ShaderProgramDelegate.h"
+
+#include "ShaderManager.h"
