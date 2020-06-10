@@ -20,12 +20,12 @@ void TestShaderNode::testFunc()
 	//this->testImageShader();
 	//this->testClipShader();
 	//this->testFbxModelShader();
-	this->testObjModelShader();
+	//this->testObjModelShader();
 	//this->test3dsModelShader();
 
 	//this->testCubeModelShader();
 	//this->testMultiMeshCubeModelShader();
-	//this->testSphereModelShader();
+	this->testSphereModelShader();
 }	
 
 void TestShaderNode::testShaderUniformBlock()
@@ -140,31 +140,54 @@ void TestShaderNode::testMultiMeshCubeModelShader()
 void TestShaderNode::testSphereModelShader()
 {
 	auto pTexture = G_TEXTURE_CACHE->createTexture2D("Resource/Image/world_texture.jpg");
-	std::string textureName = "face";
-
 	render::Sphere* pModel = CREATE_NODE(render::Sphere);
-	pModel->addMaterialTexture(textureName, pTexture);
-	pModel->setAllMaterialsTexture(textureName);
-	pModel->setRadius(100);
-	pModel->setVolume(200, 200, 200);
+	pModel->setAllMaterialsTexture(pTexture);
+	pModel->setRadius(200);
+	pModel->setVolume(400, 400, 400);
 	pModel->setAnchorPoint(0.5, 0.5f, 0.5f);
-	pModel->setPosition(200, 500, 0);
+	pModel->setPosition(752, 200, 0);
 	this->addChild(pModel);
 
-	Utility::updateNodeShader(pModel);
+	Utility::loadShader(pModel->getMaterials(), "Shader/simple_texture.vs", "Shader/simple_texture.fs");
 	Utility::runRotateAction(pModel);
+
+	pModel->getTouchProxy()->addTouchFunc(render::TouchType::DOWN, [](Node* node, float x, float y, bool include) {
+		auto sphere = node->as<render::Sphere>();
+		if (sphere == nullptr)
+		{
+			return;
+		}
+
+		sphere->setBoxVisible(true);
+	});
+
+	pModel->getTouchProxy()->addTouchFunc(render::TouchType::UP, [](Node* node, float x, float y, bool include) {
+		auto sphere = node->as<render::Sphere>();
+		if (sphere == nullptr)
+		{
+			return;
+		}
+
+		sphere->setBoxVisible(false);
+	});
 }
 
 void TestShaderNode::test3dsModelShader()
 {
+	std::string filename = "Resource/3DS/Bld_38.3ds";
+
 	Model3DS* pModel = CREATE_NODE(Model3DS);
-	pModel->load("Resource/3DS/Bld_38.3ds");
+	if (!pModel->load(filename))
+	{
+		SAFE_DELETE(pModel);
+		return;
+	}
 	pModel->setScale(20);
 	pModel->setPosition(500, 500, 0);
 	pModel->setVolume(400, 400, 400);
 	this->addChild(pModel);
 
-	Utility::updateNodeShader(pModel);
+	Utility::loadShader(pModel->getMaterials(), "Shader/simple_texture.vs", "Shader/simple_texture.fs");
 	Utility::runRotateAction(pModel);
 }
 
@@ -173,13 +196,17 @@ void TestShaderNode::testObjModelShader()
 	std::string filename = "Resource/Obj/Skull_v3_L2/12140_Skull_v3_L2.obj";
 
 	ModelObj* pModel = CREATE_NODE(ModelObj);
-	pModel->load(filename);
-	pModel->setScale(5);
+	if (!pModel->load(filename))
+	{
+		SAFE_DELETE(pModel);
+		return;
+	}
+	pModel->setScale(50);
 	pModel->setPosition(512, 384, 0);
 	pModel->setVolume(400, 400, 400);
 	this->addChild(pModel);
 
-	Utility::loadShader(pModel->getMaterials(), "Shader/simple_light.vs", "Shader/simple_light.fs");
+	Utility::loadShader(pModel->getMaterials(), "Shader/simple_texture.vs", "Shader/simple_texture.fs");
 	Utility::runRotateAction(pModel);
 }
 
@@ -188,24 +215,33 @@ void TestShaderNode::testFbxModelShader()
 	std::string filename = "Resource/fbx/LANCER_EVOLUTION/LANCEREVOX.FBX";
 
 	ModelFbx* pModel = CREATE_NODE(ModelFbx);
-	pModel->load(filename);
+	if (!pModel->load(filename))
+	{
+		SAFE_DELETE(pModel);
+		return;
+	}
 	pModel->setScale(200);
+	pModel->setPosition(512, 384, 0);
 	pModel->setRotationX(0);
 	this->addChild(pModel);
 
-	Utility::updateNodeShader(pModel);
+	Utility::loadShader(pModel->getMaterials(), "Shader/simple_texture.vs", "Shader/simple_texture.fs");
 	Utility::runRotateAction(pModel);
 }
 
 void TestShaderNode::addLight()
 {
+	render::Sphere* light = CREATE_NODE(render::Sphere);
+	light->setPosition(200, 500);
+	light->setRadius(50);
+	Utility::loadShader(light->getMaterials(), "Shader/light.vs", "Shader/light.fs");
+	this->addChild(light);
+
 	Light0* pSpotLight = CREATE_NODE(Light0);
-	pSpotLight->setPosition(0, 0, 50);
 	pSpotLight->setAmbient(255, 255, 255, 255);
 	pSpotLight->setDiffuse(255, 255, 255, 255);
 	pSpotLight->setSpecular(255, 255, 255, 255);
-
-	this->addChild(pSpotLight);
+	light->addChild(pSpotLight);
 }
 
 void TestShaderNode::testClipShader()

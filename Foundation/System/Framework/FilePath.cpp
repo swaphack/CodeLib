@@ -17,7 +17,7 @@ FilePath::~FilePath()
 }
 
 
-std::string FilePath::getFilePath(const std::string& filename)
+std::string FilePath::getFilePath(const std::string& filename, bool bIngoreEmpty)
 {
 	if (filename.empty())
 	{
@@ -36,6 +36,11 @@ std::string FilePath::getFilePath(const std::string& filename)
 	while (it2 != _searchPaths.end())
 	{
 		fullpath = (*it2);
+		if (fullpath.empty() && !bIngoreEmpty)
+		{
+			it2++;
+			continue;
+		}
 		if (!fullpath.empty())
 		{
 			fullpath += "/";

@@ -78,7 +78,7 @@ void render::Sphere::updateSphere()
 	READ_VERTEX(vertex, uv) \
 	pIndices.push_back(pIndices.size()); \
 }
-	auto pMesh = _meshes->getMesh(0);
+	auto pMesh = getMesh();
 
 	int nCount0 = 3 * SPHERE_HORIZONTAL_COUNT;
 	int nCount1 = 4 * (SPHERE_VERTICAL_COUNT - 2) * SPHERE_HORIZONTAL_COUNT;

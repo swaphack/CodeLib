@@ -10,28 +10,30 @@ Model3DS::~Model3DS()
 {
 }
 
-void Model3DS::load(const std::string& filepath)
+bool Model3DS::load(const std::string& filepath)
 {
 	std::string fullpath = G_FILEPATH->getFilePath(filepath);
 	if (fullpath.empty())
 	{
-		return;
+		return false;
 	}
 	sys::ModelDetail3DS* pFile = sys::Loader::loadModel<sys::ModelDetail3DS>(fullpath);
 	if (!pFile)
 	{
-		return;
+		return false;
 	}
 	this->setModelData(pFile);
 	SAFE_DELETE(pFile);
+
+	return true;
 }
 
-void render::Model3DS::loadAsyn(const std::string& filepath, const std::function<void(Node*)>& callback)
+bool render::Model3DS::loadAsyn(const std::string& filepath, const std::function<void(Node*)>& callback)
 {
 	std::string fullpath = G_FILEPATH->getFilePath(filepath);
 	if (fullpath.empty())
 	{
-		return;
+		return false;
 	}
 	this->startThread([this, fullpath, callback]() {
 		sys::ModelDetail3DS* pFile = sys::Loader::loadModel<sys::ModelDetail3DS>(fullpath);
@@ -46,4 +48,6 @@ void render::Model3DS::loadAsyn(const std::string& filepath, const std::function
 			callback(this);
 		}
 	});
+
+	return true;
 }

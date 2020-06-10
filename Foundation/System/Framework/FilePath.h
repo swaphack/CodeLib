@@ -13,7 +13,7 @@ namespace sys
 		virtual ~FilePath();
 	public:
 		// 获取文件路径
-		std::string getFilePath(const std::string& filename);
+		std::string getFilePath(const std::string& filename, bool bIngoreEmpty = true);
 		// 获取文件数据
 		bool getFileData(const std::string& filename, std::string& data);
 		// 设置搜索路径

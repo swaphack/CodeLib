@@ -13,6 +13,7 @@ namespace sys
 	// 按钮状态
 	enum class ButtonStatus
 	{
+		NONE = -1,
 		// 按下按钮
 		BUTTON_DOWN,
 		// 放开按钮
@@ -31,6 +32,7 @@ namespace sys
 	// 鼠标键
 	enum class MouseKey
 	{
+		NONE = -1,
 		// 左按钮
 		LEFTBUTTON,
 		// 滚轮

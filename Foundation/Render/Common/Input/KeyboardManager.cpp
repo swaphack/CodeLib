@@ -86,7 +86,27 @@ void render::KeyboardManager::removeAllKeyboardFuncs()
 	_keyboardFuncs.clear();
 }
 
-void KeyboardManager::onDispatcher(sys::BoardKey key, sys::ButtonStatus type)
+void render::KeyboardManager::removeTargetAllEvents(sys::Object* target)
+{
+	if (target == nullptr)
+	{
+		return;
+	}
+
+	auto it0 = _keyboardFuncs.find(target);
+	if (it0 != _keyboardFuncs.end())
+	{
+		_keyboardFuncs.erase(it0);
+	}
+
+	auto it1 = _keyboardDelegates.find(target);
+	if (it1 != _keyboardDelegates.end())
+	{
+		_keyboardDelegates.erase(it1);
+	}
+}
+
+void KeyboardManager::onDispatchButtonEvent(sys::BoardKey key, sys::ButtonStatus type)
 {
 	for (auto item0 : _keyboardDelegates)
 	{

@@ -13,9 +13,9 @@ MaterialDetail::MaterialDetail()
 
 	memset(_matrialAmbient, 0, size);
 
-	_matrialAmbient[0] = 0.2f;
-	_matrialAmbient[1] = 0.2f;
-	_matrialAmbient[2] = 0.2f;
+	_matrialAmbient[0] = 1.0f;
+	_matrialAmbient[1] = 1.0f;
+	_matrialAmbient[2] = 1.0f;
 	_matrialAmbient[3] = 1.0f;
 
 	_matrialDiffuse[0] = 0.8f;
@@ -23,13 +23,13 @@ MaterialDetail::MaterialDetail()
 	_matrialDiffuse[2] = 0.8f;
 	_matrialDiffuse[3] = 1.0f;
 
-	_matrialSpecular[0] = 0.0f;
-	_matrialSpecular[1] = 0.0f;
-	_matrialSpecular[2] = 0.0f;
-	_matrialSpecular[3] = 0.0f;
+	_matrialSpecular[0] = 1.0f;
+	_matrialSpecular[1] = 1.0f;
+	_matrialSpecular[2] = 1.0f;
+	_matrialSpecular[3] = 1.0f;
 
 
-	_matrialShiness = 0.0f;
+	_matrialShiness = 32.0f;
 
 	_matrialEmission[0] = 0.0f;
 	_matrialEmission[1] = 0.0f;

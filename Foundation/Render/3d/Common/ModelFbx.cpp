@@ -12,28 +12,30 @@ ModelFbx::~ModelFbx()
 
 }
 
-void ModelFbx::load(const std::string& filepath)
+bool ModelFbx::load(const std::string& filepath)
 {
 	std::string fullpath = G_FILEPATH->getFilePath(filepath);
 	if (fullpath.empty())
 	{
-		return;
+		return false;
 	}
 	sys::ModelDetailFbx* pFile = sys::Loader::loadModel<sys::ModelDetailFbx>(fullpath);
 	if (!pFile)
 	{
-		return;
+		return false;
 	}
 	this->setModelData(pFile);
 	SAFE_DELETE(pFile);
+
+	return true;
 }
 
-void render::ModelFbx::loadAsyn(const std::string& filepath, const std::function<void(Node*)>& callback)
+bool render::ModelFbx::loadAsyn(const std::string& filepath, const std::function<void(Node*)>& callback)
 {
 	std::string fullpath = G_FILEPATH->getFilePath(filepath);
 	if (fullpath.empty())
 	{
-		return;
+		return false;
 	}
 	this->startThread([this, fullpath, callback]() {
 		sys::ModelDetailFbx* pFile = sys::Loader::loadModel<sys::ModelDetailFbx>(fullpath);
@@ -48,5 +50,7 @@ void render::ModelFbx::loadAsyn(const std::string& filepath, const std::function
 			callback(this);
 		}
 	});
+
+	return true;
 }
 

@@ -12,29 +12,31 @@ ModelObj::~ModelObj()
 
 }
 
-void ModelObj::load(const std::string& filepath)
+bool ModelObj::load(const std::string& filepath)
 {
 	std::string fullpath = G_FILEPATH->getFilePath(filepath);
 	if (fullpath.empty())
 	{
-		return;
+		return false;
 	}
 
 	sys::ModelDetailObj* pFile = sys::Loader::loadModel<sys::ModelDetailObj>(fullpath);
 	if (!pFile)
 	{
-		return;
+		return false;
 	}
 	this->setModelData(pFile);
 	SAFE_DELETE(pFile);
+
+	return true;
 }
 
-void render::ModelObj::loadAsyn(const std::string& filepath, const std::function<void(Node*)>& callback)
+bool render::ModelObj::loadAsyn(const std::string& filepath, const std::function<void(Node*)>& callback)
 {
 	std::string fullpath = G_FILEPATH->getFilePath(filepath);
 	if (fullpath.empty())
 	{
-		return;
+		return false;
 	}
 
 	this->startThread([this, fullpath, callback]() {
@@ -50,5 +52,7 @@ void render::ModelObj::loadAsyn(const std::string& filepath, const std::function
 			callback(this);
 		}
 	});
+
+	return true;
 }
 

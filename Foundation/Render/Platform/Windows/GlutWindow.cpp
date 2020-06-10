@@ -13,6 +13,7 @@ static GlutWindow* sWindow = nullptr;
 
 GlutWindow::GlutWindow()
 {
+	_deviceProxy = new DeviceProxy();
 	sWindow = this;
 }
 

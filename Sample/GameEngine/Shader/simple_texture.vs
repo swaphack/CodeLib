@@ -16,7 +16,7 @@ void main()
 {
 	vec4 position = vec4(vPosition, 1.0);
 
-	fragmentPos =  vec3(modelMatrix * position);
+	fragmentPos = vec3(modelMatrix * position);
     fragmentUV = vUV;
     fragmentNormal = vNormal;
 

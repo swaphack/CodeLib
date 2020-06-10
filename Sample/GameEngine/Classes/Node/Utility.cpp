@@ -46,10 +46,10 @@ void Utility::initShaderAttrib(render::Materials* mats)
 		item.second->addUniform(UniformType::LIGHT_POSITION, "lightPos");
 		item.second->addUniform(UniformType::VIEW_POSITION, "viewPos");
 
-		item.second->addUniform(UniformType::MATERIAL_AMBIENT, "matAmbient");
-		item.second->addUniform(UniformType::MATERIAL_DIFFUSE, "matDiffuse");
-		item.second->addUniform(UniformType::MATERIAL_SPECULAR, "matSpecular");
-		item.second->addUniform(UniformType::MATERIAL_SHININESS, "matShininess");
+		item.second->addUniform(UniformType::MATERIAL_AMBIENT, "material.ambient");
+		item.second->addUniform(UniformType::MATERIAL_DIFFUSE, "material.diffuse");
+		item.second->addUniform(UniformType::MATERIAL_SPECULAR, "material.specular");
+		item.second->addUniform(UniformType::MATERIAL_SHININESS, "material.shininess");
 
 		item.second->addVertexData(VertexDataType::POSITION, "vPosition");
 		item.second->addVertexData(VertexDataType::COLOR, "vColor");

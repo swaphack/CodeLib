@@ -20,5 +20,10 @@ namespace render
 
 		void onKeyBoardButtonHandler(sys::BoardKey key, sys::ButtonStatus type);
 	protected:
+		void processMouseTouchEvent(sys::MouseKey key, sys::ButtonStatus type, float x, float y);
+		void processMouseButtonEvent(sys::MouseKey key, sys::ButtonStatus type, float x, float y);
+	protected:
+		sys::MouseKey _lastMouseKey = sys::MouseKey::NONE;
+		sys::ButtonStatus _lastMouseButtonStatus = sys::ButtonStatus::NONE;
 	};
 }

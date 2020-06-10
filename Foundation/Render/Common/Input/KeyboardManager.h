@@ -18,14 +18,19 @@ namespace render
 		void removeKeyboardDelegate(sys::Object* target, Node* node);
 		// 移除所有按键派发对象
 		void removeAllKeyboardDelegates();
+	public:
 		// 添加按键派发对象
 		void addKeyboardFunc(sys::Object* target, Node* node, KeyboardFunc func);
 		// 移除按键派发对象
 		void removeKeyboardFunc(sys::Object* target, Node* node);
 		// 移除所有按键派发对象
 		void removeAllKeyboardFuncs();
-		// 派发接受到的按钮事件
-		void onDispatcher(sys::BoardKey key, sys::ButtonStatus type);
+	public:
+		// 移除对象事件
+		void removeTargetAllEvents(sys::Object* target);
+	public:
+		// 派发接收到的按钮事件
+		void onDispatchButtonEvent(sys::BoardKey key, sys::ButtonStatus type);
 	protected:
 	private:
 		// 键盘事件委托集

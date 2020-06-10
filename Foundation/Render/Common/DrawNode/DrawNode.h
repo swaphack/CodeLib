@@ -57,6 +57,10 @@ namespace render
 		/**
 		*	添加纹理
 		*/
+		void setAllMaterialsTexture(const Texture* texture);
+		/**
+		*	添加纹理
+		*/
 		void addMaterialTexture(const std::string& matName, const std::string& fullpath);
 		/**
 		*	添加纹理
