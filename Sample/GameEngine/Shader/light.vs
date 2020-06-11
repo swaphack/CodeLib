@@ -1,13 +1,13 @@
 #version 330 core
 
-uniform mat4 projectMatrix;
-uniform mat4 viewMatrix;
-uniform mat4 modelMatrix;
+#include "Shader/vertex/matrix.vs"
+#include "Shader/vertex/vertex.vs"
 
-layout(location = 0) in vec3 vPosition;
+uniform Matrix matrix;
+
 
 void main()
 {
-	vec4 position = vec4(vPosition, 1.0);
-    gl_Position = projectMatrix * viewMatrix * modelMatrix * position;
+	vec4 pos = vec4(v_position, 1.0);
+	gl_Position = get_mvp(matrix) * pos;
 }

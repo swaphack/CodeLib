@@ -323,6 +323,24 @@ bool String::startWith(const std::string& value)
 	return true;
 }
 
+String& sys::String::removeAt(size_t offset)
+{
+	return this->remove(offset, 1);
+}
+
+sys::String sys::String::makeString(const char* format, ...)
+{
+	va_list ap;
+	va_start(ap, format);
+	uint32_t size = _vscprintf(format, ap) + 1;
+	MemoryData data(size);
+	vsprintf(data.getPtr(), format, ap);
+	va_end(ap);
+
+	sys::String str(data.getValue(), data.getSize());
+	return str;
+}
+
 String& String::remove(size_t offset, size_t count)
 {
 	if (offset >= getSize() || offset < 0)
@@ -556,7 +574,7 @@ String String::toUpper()
 	return text;
 }
 
-std::string String::make(const char* format, ...)
+std::string String::makeCString(const char* format, ...)
 {
 	va_list ap;
 	va_start(ap, format);
@@ -565,7 +583,7 @@ std::string String::make(const char* format, ...)
 	vsprintf(data.getPtr(), format, ap);
 	va_end(ap);
 
-	std::string str(data.getValue(), data.getSize());
+	std::string str(data.getValue(), data.getSize() - 1);
 	return str;
 }
 

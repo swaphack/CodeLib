@@ -5,6 +5,7 @@
 
 #include <set>
 #include <map>
+#include <string>
 
 namespace render
 {
@@ -21,13 +22,15 @@ namespace render
 
 		void clear();
 	protected:
-		bool createShaderFile(ShaderType type, const std::string& filepath, std::set<Shader*>& shaders);
+		render::Shader* createShader(ShaderType type, const std::string& filepath);
 
 		Shader* createShader(ShaderType type, const std::string& filepath, const char* shaderData);
+
+		bool findAllFile(const std::string& filepath, std::map<std::string, std::string>& fileDatas);
 	private:
 		std::map<std::string, ShaderProgram*> _shaderPrograms;
 
-		std::map<std::string, std::set<Shader*> > _shaderFiles;
+		std::map<std::string, std::map<std::string, std::string> > _shaderFiles;
 
 		std::map<std::string, Shader* > _shaders;
 	};

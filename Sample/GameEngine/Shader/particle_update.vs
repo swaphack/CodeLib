@@ -72,7 +72,7 @@ void main(void)
 {
     vec3 accelleration = vec3(0.0, -0.3, 0.0);
     vec3 new_velocity = velocity + accelleration * timeStep;
-    vec3 new_position = vPosition + new_velocity * timeStep;//计算粒子新的速度和位置
+    vec3 newv_position = vPosition + new_velocity * timeStep;//计算粒子新的速度和位置
     vec3 v0;
     vec3 v1;
     vec3 v2;
@@ -84,21 +84,21 @@ void main(void)
         v0 = texelFetch(geometryTBO, i * 3).xyz;
         v1 = texelFetch(geometryTBO, i * 3 + 1).xyz;
         v2 = texelFetch(geometryTBO, i * 3 + 2).xyz;
-        if (intersect(vPosition.xyz, vPosition.xyz - new_position.xyz, v0, v1, v2, point))
+        if (intersect(vPosition.xyz, vPosition.xyz - newv_position.xyz, v0, v1, v2, point))
         {
             vec3 n = normalize(cross(v1 - v0, v2 - v0));
-            new_position = point + reflect_vector(new_position.xyz - point, n);
+            newv_position = point + reflect_vector(newv_position.xyz - point, n);
             new_velocity = 0.8 * reflect_vector(new_velocity, n);
         }
     }
 
       //超出一定范围，回归。
-    if (new_position.y < -40.0)
+    if (newv_position.y < -40.0)
     {
-        new_position = vec3(-new_position.x * 0.3, vPosition.y + 80.0, 0.0);
+        newv_position = vec3(-newv_position.x * 0.3, vPosition.y + 80.0, 0.0);
         new_velocity *= vec3(0.2, 0.1, -0.3);
     }
     outVelocity = new_velocity * 0.9999;//几乎无衰减的速度
-    outPosition = new_position;
+    outPosition = newv_position;
     gl_Position = projectMatrix * (modelMatrix * vec4(vPosition, 1.0));
 }

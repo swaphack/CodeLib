@@ -1,11 +1,13 @@
 
 #version 330 core
 
-uniform vec4 lightColor;
+#include "Shader/fragment/light.fs"
+
+uniform Light light;
 
 out vec4 color;
 
 void main()
 {
-	color = lightColor;
+	color = light.ambient;
 }

@@ -1,12 +1,10 @@
 #version 330 core
 
-uniform mat4 projectMatrix;
-uniform mat4 viewMatrix;
-uniform mat4 modelMatrix;
+#include "Shader/vertex/matrix.vs"
+#include "Shader/vertex/vertex.vs"
 
-layout(location = 0) in vec3 vPosition;
-layout(location = 2) in vec2 vUV;
-layout(location = 7) in vec3 vNormal;
+uniform Matrix matrix;
+
 
 out vec2 fragmentUV;
 out vec3 fragmentNormal;
@@ -14,11 +12,10 @@ out vec3 fragmentPos;
 
 void main()
 {
-	vec4 position = vec4(vPosition, 1.0);
+	vec4 pos = vec4(v_position, 1.0);
+    gl_Position = get_mvp(matrix) * pos;
 
-	fragmentPos = vec3(modelMatrix * position);
-    fragmentUV = vUV;
-    fragmentNormal = vNormal;
-
-    gl_Position = projectMatrix * viewMatrix * modelMatrix * position;
+	fragmentPos = vec3(matrix.model * pos);
+    fragmentUV = v_texcoord;
+    fragmentNormal = mat3(transpose(inverse(matrix.model))) * v_normal; 
 }

@@ -1,17 +1,15 @@
 #version 330 core
 
-uniform mat4 projectMatrix;
-uniform mat4 viewMatrix;
-uniform mat4 modelMatrix;
+#include "Shader/vertex/matrix.vs"
+#include "Shader/vertex/vertex.vs"
 
-layout(location = 0) in vec3 vPosition;
+uniform Matrix matrix;
 
 out vec3 fragmentPosition;
 
 void main()
 {
-	vec4 position = vec4(vPosition, 1.0);
-    vec4 pos = projectMatrix * viewMatrix * position;
-    gl_Position = pos.xyzw;
-    fragmentPosition = normalize(vPosition);
+	vec4 pos = vec4(v_position, 1.0);
+	gl_Position = matrix.project * matrix.view * pos;
+    fragmentPosition = normalize(v_position);
 }

@@ -166,6 +166,27 @@ void render::Material::startUpdateShaderUniformValue(Node* node, Materials* mats
 				pUniform->setValue4(1, pLight->getAmbient());
 			}
 		}
+		else if (item.first == UniformType::LIGHT_AMBIENT)
+		{
+			if (pLight)
+			{
+				pUniform->setValue4(1, pLight->getAmbient());
+			}
+		}
+		else if (item.first == UniformType::LIGHT_SPECULAR)
+		{
+			if (pLight)
+			{
+				pUniform->setValue4(1, pLight->getSpecular());
+			}
+		}
+		else if (item.first == UniformType::LIGHT_DIFFUSE)
+		{
+			if (pLight)
+			{
+				pUniform->setValue4(1, pLight->getDiffuse());
+			}
+		}
 		else if (item.first == UniformType::LIGHT_POSITION)
 		{
 			if (pLight)
@@ -177,17 +198,55 @@ void render::Material::startUpdateShaderUniformValue(Node* node, Materials* mats
 		{
 			pUniform->setValue3(1, viewMat.getPosition().getValue());
 		}
-		else if (item.first == UniformType::MATERIAL_AMBIENT)
+		else if (item.first == UniformType::MATERIAL_COLOR_AMBIENT)
 		{
 			pUniform->setValue4(1, _detail->getAmbient());
 		}
-		else if (item.first == UniformType::MATERIAL_DIFFUSE)
+		else if (item.first == UniformType::MATERIAL_COLOR_DIFFUSE)
 		{
 			pUniform->setValue4(1, _detail->getDiffuse());
 		}
-		else if (item.first == UniformType::MATERIAL_SPECULAR)
+		else if (item.first == UniformType::MATERIAL_COLOR_SPECULAR)
 		{
 			pUniform->setValue4(1, _detail->getSpecular());
+		}
+		else if (item.first == UniformType::MATERIAL_TEXTURE_AMBIENT)
+		{
+			auto pTexture = mats->getTexture(_detail->getAmbientTextureMap());
+			if (pTexture)
+			{
+				pTexture->enableTextureWithSampler(0);
+				pUniform->setValue(0);
+			}
+			GLDebug::showError();
+		}
+		else if (item.first == UniformType::MATERIAL_TEXTURE_DIFFUSE)
+		{
+			auto pTexture = mats->getTexture(_detail->getDiffuseTextureMap());
+			if (pTexture)
+			{
+				pTexture->enableTextureWithSampler(1);
+				pUniform->setValue(1);
+			}
+			else
+			{
+				pUniform->setValue(0);
+			}
+			GLDebug::showError();
+		}
+		else if (item.first == UniformType::MATERIAL_TEXTURE_SPECULAR)
+		{
+			auto pTexture = mats->getTexture(_detail->getSpecularTextureMap());
+			if (pTexture)
+			{
+				pTexture->enableTextureWithSampler(2);
+				pUniform->setValue(2);
+			}
+			else
+			{
+				pUniform->setValue(0);
+			}
+			GLDebug::showError();
 		}
 		else if (item.first == UniformType::MATERIAL_SHININESS)
 		{
@@ -199,8 +258,8 @@ void render::Material::startUpdateShaderUniformValue(Node* node, Materials* mats
 			if (pTexture)
 			{
 				pTexture->enableTextureWithSampler(0);
+				pUniform->setValue(0);
 			}
-			pUniform->setValue(0);
 			GLDebug::showError();
 		}
 		else if (item.first == UniformType::TEXTURE1)
@@ -209,8 +268,13 @@ void render::Material::startUpdateShaderUniformValue(Node* node, Materials* mats
 			if (pTexture)
 			{
 				pTexture->enableTextureWithSampler(1);
+
+				pUniform->setValue(1);
 			}
-			pUniform->setValue(1);
+			else
+			{
+				pUniform->setValue(0);
+			}
 
 			GLDebug::showError();
 		}
@@ -220,9 +284,12 @@ void render::Material::startUpdateShaderUniformValue(Node* node, Materials* mats
 			if (pTexture)
 			{
 				pTexture->enableTextureWithSampler(2);
+				pUniform->setValue(2);
 			}
-			pUniform->setValue(2);
-
+			else
+			{
+				pUniform->setValue(0);
+			}
 			GLDebug::showError();
 		}
 
@@ -338,6 +405,38 @@ void render::Material::endUpdateShaderUniformValue(Materials* mats)
 			GLDebug::showError();
 		}
 		else if (item.first == UniformType::TEXTURE2)
+		{
+			auto pTexture = mats->getTexture(_detail->getSpecularTextureMap());
+			if (pTexture)
+			{
+				pTexture->unbindTexture();
+				GLState::disable((EnableMode)pTexture->getTextureTarget());
+			}
+			GLDebug::showError();
+		}
+		else if (item.first == UniformType::MATERIAL_TEXTURE_AMBIENT)
+		{
+			auto pTexture = mats->getTexture(_detail->getAmbientTextureMap());
+			if (pTexture)
+			{
+				pTexture->unbindTexture();
+				GLState::disable((EnableMode)pTexture->getTextureTarget());
+			}
+
+			GLDebug::showError();
+		}
+		else if (item.first == UniformType::MATERIAL_TEXTURE_DIFFUSE)
+		{
+			auto pTexture = mats->getTexture(_detail->getDiffuseTextureMap());
+			if (pTexture)
+			{
+				pTexture->unbindTexture();
+				GLState::disable((EnableMode)pTexture->getTextureTarget());
+			}
+
+			GLDebug::showError();
+		}
+		else if (item.first == UniformType::MATERIAL_TEXTURE_SPECULAR)
 		{
 			auto pTexture = mats->getTexture(_detail->getSpecularTextureMap());
 			if (pTexture)

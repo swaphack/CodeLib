@@ -17,15 +17,15 @@ TestShaderNode::~TestShaderNode()
 void TestShaderNode::testFunc()
 {
 	this->addLight();
-	this->testImageShader();
+	//this->testImageShader();
 	//this->testClipShader();
 	//this->testFbxModelShader();
 	//this->testObjModelShader();
 	//this->test3dsModelShader();
 
-	//this->testCubeModelShader();
+	this->testCubeModelShader();
 	//this->testMultiMeshCubeModelShader();
-	//this->testSphereModelShader();
+	this->testSphereModelShader();
 }	
 
 void TestShaderNode::testShaderUniformBlock()
@@ -147,7 +147,7 @@ void TestShaderNode::testSphereModelShader()
 	pModel->setRadius(200);
 	pModel->setVolume(400, 400, 400);
 	pModel->setAnchorPoint(0.5, 0.5f, 0.5f);
-	pModel->setPosition(752, 200, 0);
+	pModel->setPosition(512, 384, 0);
 	this->addChild(pModel);
 
 	Utility::loadShader(pModel->getMaterials(), "Shader/simple_texture.vs", "Shader/simple_texture.fs");

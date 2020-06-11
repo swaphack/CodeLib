@@ -116,11 +116,11 @@ const std::string& render::ShaderDocument::getContent() const
 
 std::string render::ShaderDocument::getText()
 {
-	sys::String version = sys::String::make("#version %s core", _version);
+	sys::String version = sys::String::makeString("#version %s core", _version);
 	sys::String input = "";
 	for (auto item : _inputParameters)
 	{
-		std::string paramter = sys::String::make("in %s %s;\n", 
+		std::string paramter = sys::String::makeCString("in %s %s;\n", 
 			this->getTypeMark(item.second->getType()).c_str(), item.second->getName().c_str());
 		input.concat(paramter);
 	}
@@ -128,12 +128,12 @@ std::string render::ShaderDocument::getText()
 	sys::String out = "";
 	for (auto item : _inputParameters)
 	{
-		std::string paramter = sys::String::make("in %s %s;\n",
+		std::string paramter = sys::String::makeCString("in %s %s;\n",
 			this->getTypeMark(item.second->getType()).c_str(), item.second->getName().c_str());
 		out.concat(paramter);
 	}
 
-	sys::String content = sys::String::make("void main(void) { %s };", _content);
+	sys::String content = sys::String::makeString("void main(void) { %s };", _content);
 
 	sys::String all = version + input + out + content;
 

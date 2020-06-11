@@ -56,6 +56,8 @@ namespace sys
 		// 以指定字符串开头
 		bool startWith(const std::string& value);
 		// 移除从指定位置开始的一段字符串
+		String& removeAt(size_t offset);
+		// 移除从指定位置开始的一段字符串
 		String& remove(size_t offset, size_t count);
 		// 插入字符串
 		String& insert(size_t offset, const std::string& value);
@@ -86,7 +88,9 @@ namespace sys
 		String toUpper();
 	public:
 		// 格式化
-		static std::string make(const char* format, ...);
+		static std::string makeCString(const char* format, ...);
+		// 格式化
+		static String makeString(const char* format, ...);
 	public:
 		// 分割
 		void split(char spot, std::vector<String>& dest);

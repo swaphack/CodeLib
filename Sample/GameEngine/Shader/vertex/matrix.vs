@@ -1,8 +1,16 @@
-#version 330 core
+struct Matrix 
+{
+	mat4 project;	
+	mat4 view;
+	mat4 model;
+};
 
-uniform mat4 projectMatrix;
-uniform mat4 viewMatrix;
-uniform mat4 modelMatrix;
+mat4 get_mvp(Matrix matrix) 
+{
+	return matrix.project * matrix.view * matrix.model;
+}
 
-#define MVP projectMatrix * viewMatrix * modelMatrix
-#define MV projectMatrix * viewMatrix
+mat4 get_mv(Matrix matrix) 
+{
+	return matrix.project * matrix.view;
+}

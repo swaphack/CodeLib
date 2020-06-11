@@ -1,10 +1,10 @@
 #version 330 core
 
-uniform mat4 projectMatrix;
-uniform mat4 modelMatrix;
+#include "Shader/vertex/matrix.vs"
+#include "Shader/vertex/vertex.vs"
 
-layout (location=0) in vec3 vPosition;
-layout (location=1) in vec3 vNormal;
+uniform Matrix matrix;
+
 
  //输出
 out vec3 worldSpacePosition;
@@ -12,10 +12,10 @@ out vec3 fragmentNormal;
 
 void main(void)
 {
-	vec4 position = modelMatrix * vec4(vPosition, 1.0);
+	vec4 position = matrix.model * vec4(v_texcoord, 1.0);
 	worldSpacePosition = position.xyz;
 
-    fragmentNormal = normalize((modelMatrix * vec4(vNormal, 0)).xyz);
+    fragmentNormal = normalize((matrix.model * vec4(v_normal, 0)).xyz);
     
-    gl_Position = projectMatrix * position;
+    gl_Position = matrix.project * position;
 }

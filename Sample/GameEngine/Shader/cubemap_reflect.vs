@@ -1,23 +1,23 @@
 #version 330 core
 
-uniform mat4 projectMatrix;
-uniform mat4 viewMatrix;
-uniform mat4 modelMatrix;
+#include "Shader/vertex/matrix.vs"
+#include "Shader/vertex/vertex.vs"
 
-layout(location = 0) in vec3 vPosition;
-layout(location = 7) in vec3 vNormal;
+uniform Matrix matrix;
+
+
 
 out vec3 fragmentPosition;
 out vec3 fragmentNormal;
 
 void main()
 {
-	vec4 pos = vec4(vPosition, 1);
-	mat4 mvp = projectMatrix * viewMatrix * modelMatrix;
-	mat4 mv = viewMatrix * modelMatrix;
+	vec4 pos = vec4(v_position, 1.0);
+	mat4 mvp = get_mvp(matrix);
+	mat4 mv = get_mv(matrix);
 
 	gl_Position = mvp * pos;
 
-	fragmentNormal = mat3(mv) * vNormal;
+	fragmentNormal = mat3(mv) * v_normal;;
 	fragmentPosition = (mv * pos).xyz;
 }

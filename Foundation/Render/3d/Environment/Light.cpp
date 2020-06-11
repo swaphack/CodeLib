@@ -6,9 +6,9 @@ using namespace render;
 
 Light::Light()
 {
-	_lightAmbient[0] = 0.0f;
-	_lightAmbient[1] = 0.0f;
-	_lightAmbient[2] = 0.0f;
+	_lightAmbient[0] = 1.0f;
+	_lightAmbient[1] = 1.0f;
+	_lightAmbient[2] = 1.0f;
 	_lightAmbient[3] = 1.0f;
 
 	_lightDiffuse[0] = 1.0f;

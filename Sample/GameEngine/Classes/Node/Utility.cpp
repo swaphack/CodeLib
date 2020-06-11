@@ -34,26 +34,36 @@ void Utility::initShaderAttrib(render::Materials* mats)
 
 	for (auto item : mats->getMaterials())
 	{
-		item.second->addUniform(UniformType::PROJECT_MATRIX, "projectMatrix");
-		item.second->addUniform(UniformType::VIEW_MATRIX, "viewMatrix");
-		item.second->addUniform(UniformType::MODEL_VIEW, "modelMatrix");
+		item.second->addUniform(UniformType::PROJECT_MATRIX, "matrix.project");
+		item.second->addUniform(UniformType::VIEW_MATRIX, "matrix.view");
+		item.second->addUniform(UniformType::MODEL_VIEW, "matrix.model");
+
+		item.second->addUniform(UniformType::LIGHT_COLOR, "light.ambient");
+		item.second->addUniform(UniformType::LIGHT_POSITION, "light.position");
+		item.second->addUniform(UniformType::LIGHT_AMBIENT, "light.ambient");
+		item.second->addUniform(UniformType::LIGHT_DIFFUSE, "light.diffuse");
+		item.second->addUniform(UniformType::LIGHT_SPECULAR, "light.specular");
+
+		item.second->addUniform(UniformType::MATERIAL_COLOR_AMBIENT, "material.ambient");
+		item.second->addUniform(UniformType::MATERIAL_COLOR_DIFFUSE, "material.diffuse");
+		item.second->addUniform(UniformType::MATERIAL_COLOR_SPECULAR, "material.specular");
+
+		item.second->addUniform(UniformType::MATERIAL_TEXTURE_AMBIENT, "material.texAmbient");
+		item.second->addUniform(UniformType::MATERIAL_TEXTURE_DIFFUSE, "material.texDiffuse");
+		item.second->addUniform(UniformType::MATERIAL_TEXTURE_SPECULAR, "material.texSpecular");
+
+		item.second->addUniform(UniformType::MATERIAL_SHININESS, "material.shininess");
+
+		item.second->addVertexData(VertexDataType::POSITION, "v_position");
+		item.second->addVertexData(VertexDataType::COLOR, "v_color");
+		item.second->addVertexData(VertexDataType::UV, "v_texcoord");
+		item.second->addVertexData(VertexDataType::NORMAL, "v_normal");
+
+
+		item.second->addUniform(UniformType::VIEW_POSITION, "viewPos");
 
 		item.second->addUniform(UniformType::TEXTURE0, "texSampler0");
 		item.second->addUniform(UniformType::TEXTURE1, "texSampler1");
-
-		item.second->addUniform(UniformType::LIGHT_COLOR, "lightColor");
-		item.second->addUniform(UniformType::LIGHT_POSITION, "lightPos");
-		item.second->addUniform(UniformType::VIEW_POSITION, "viewPos");
-
-		item.second->addUniform(UniformType::MATERIAL_AMBIENT, "material.ambient");
-		item.second->addUniform(UniformType::MATERIAL_DIFFUSE, "material.diffuse");
-		item.second->addUniform(UniformType::MATERIAL_SPECULAR, "material.specular");
-		item.second->addUniform(UniformType::MATERIAL_SHININESS, "material.shininess");
-
-		item.second->addVertexData(VertexDataType::POSITION, "vPosition");
-		item.second->addVertexData(VertexDataType::COLOR, "vColor");
-		item.second->addVertexData(VertexDataType::UV, "vUV");
-		item.second->addVertexData(VertexDataType::NORMAL, "vNormal");
 	}
 }
 

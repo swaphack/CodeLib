@@ -21,27 +21,20 @@ render::ShaderProgram* render::ShaderManager::createShaderProgram(const std::str
 	}
 
 	ShaderProgram* pProgram = CREATE_OBJECT(ShaderProgram);
-	std::set<render::Shader*> vertexShaders;
-	if (!createShaderFile(ShaderType::VERTEX_SHADER, vertexFilepath, vertexShaders))
+	render::Shader* pVertexShader = createShader(ShaderType::VERTEX_SHADER, vertexFilepath);
+	if (!pVertexShader)
 	{
 		return nullptr;
 	}
 
-	std::set<render::Shader*> fragShaders;
-	if (!createShaderFile(ShaderType::FRAGMENT_SHADER, fragFilepath, fragShaders))
+	render::Shader* fragShader = createShader(ShaderType::FRAGMENT_SHADER, fragFilepath);
+	if (!fragShader)
 	{
 		return nullptr;
 	}
 
-	for (auto item : vertexShaders)
-	{
-		pProgram->attachShader(item);
-	}
-
-	for (auto item : fragShaders)
-	{
-		pProgram->attachShader(item);
-	}
+	pProgram->attachShader(pVertexShader);
+	pProgram->attachShader(fragShader);
 
 	pProgram->bindFragDataLocation(0, "color");
 	pProgram->link();
@@ -66,12 +59,53 @@ void render::ShaderManager::clear()
 	}
 }
 
-bool render::ShaderManager::createShaderFile(ShaderType type, const std::string& filepath, std::set<render::Shader*>& shaders)
+render::Shader* render::ShaderManager::createShader(ShaderType type, const std::string& filepath)
+{
+	std::map<std::string, std::string> fileDatas;
+	if (!findAllFile(filepath, fileDatas))
+	{
+		return nullptr;
+	}
+
+	sys::String root = fileDatas[filepath];
+
+	std::function<void(sys::String& fileData)> pFunc = nullptr;
+	pFunc = [&](sys::String& fileData) {
+
+		for (auto item : fileDatas)
+		{
+			if (item.first == filepath)
+			{
+				continue;
+			}
+			std::string includeFile = sys::String::makeCString("#include \"%s\"", item.first.c_str());
+			if (fileData.findFirstOf(includeFile) != -1)
+			{
+				sys::String subFileData = item.second;
+				pFunc(subFileData);
+
+				fileData = fileData.replace(includeFile, subFileData.getString());
+			}
+		}
+	};
+
+	pFunc(root);
+
+	render::Shader* pShader = render::Shader::createFromData(type, root.getString());
+	if (pShader == nullptr)
+	{
+		return nullptr;
+	}
+
+	return pShader;
+}
+
+bool render::ShaderManager::findAllFile(const std::string& filepath, std::map<std::string, std::string>& fileDatas)
 {
 	auto it = _shaderFiles.find(filepath);
 	if (it != _shaderFiles.end())
 	{
-		shaders = it->second;
+		fileDatas = it->second;
 		return true;
 	}
 
@@ -100,26 +134,31 @@ bool render::ShaderManager::createShaderFile(ShaderType type, const std::string&
 		sys::String filename = temp.subString(0, endIndex);
 		includeFiles.insert(includeFiles.begin(), filename.getString());
 
-		content.remove(startIndex, endIndex + len - startIndex);
+		content.remove(startIndex, len + filename.getSize() + 1);
 	}
 
-	Shader* pShader = createShader(type, filepath, content.getString());
-	if (pShader == nullptr)
-	{
-		return false;
-	}
-	shaders.insert(pShader);
+// 	if (content.empty())
+// 	{
+// 		return false;
+// 	}
 
-	bool bRet = true;
+// 	int32_t index = content.findFirstOf("#");
+// 	if (index != -1)
+// 	{
+// 		content.remove(0, index);
+// 	}
+
+	fileDatas[filepath] = data;
+
 	for (auto item : includeFiles)
 	{
-		if (!createShaderFile(type, item, shaders))
+		if (!findAllFile(item, fileDatas))
 		{
 			return false;
 		}
 	}
 
-	return bRet;
+	return true;
 }
 
 render::Shader* render::ShaderManager::createShader(ShaderType type, const std::string& filepath, const char* shaderData)
