@@ -48,10 +48,10 @@ void TestParticleNode::testParticle()
 		const math::Matrix44& proMat = Camera::getMainCamera()->getProjectMatrix();
 		const math::Matrix44& modelMat = ps->getWorldMatrix();
 
-		ShaderUniform* pUniform = sp->getUniform("projectMatrix");
+		ShaderUniform* pUniform = sp->getUniform("matrix.project");
 		if (pUniform) pUniform->setMatrix4(proMat);
 
-		pUniform = sp->getUniform("modelMatrix");
+		pUniform = sp->getUniform("matrix.model");
 		if (pUniform) pUniform->setMatrix4(modelMat);
 
 		pUniform = sp->getUniform("triangleCount");
@@ -96,10 +96,10 @@ void TestParticleNode::testParticle()
 		const math::Matrix44& proMat = Camera::getMainCamera()->getProjectMatrix();
 		const math::Matrix44& modelMat = ps->getWorldMatrix();
 
-		ShaderUniform* pUniform = sp->getUniform("projectMatrix");
+		ShaderUniform* pUniform = sp->getUniform("matrix.project");
 		if (pUniform) pUniform->setMatrix4(proMat);
 
-		pUniform = sp->getUniform("modelMatrix");
+		pUniform = sp->getUniform("matrix.model");
 		if (pUniform) pUniform->setMatrix4(modelMat);
 	};
 	GLDebug::showError();

@@ -36,7 +36,7 @@ void TestEnvironmentNode::init3DSkyBox()
 	Utility::loadShader(pSkyBox->getMaterials(), "Shader/env/skybox.vs", "Shader/env/skybox.fs");
 	
 	pSkyBox->setShaderProgramFunc([](ShaderProgram* program) {
-		auto pUniform = program->getUniform("viewMatrix");
+		auto pUniform = program->getUniform("matrix.view");
 		if (pUniform)
 		{
 			math::Matrix44 viewMat = Camera::getMainCamera()->getViewMatrix();
@@ -75,7 +75,7 @@ void TestEnvironmentNode::init2DSkyBox()
 	Utility::loadShader(pSkyBox->getMaterials(), "Shader/texture/texture.vs", "Shader/texture/texture.fs");
 
 	pSkyBox->setShaderProgramFunc([](ShaderProgram* program) {
-		auto pUniform = program->getUniform("viewMatrix");
+		auto pUniform = program->getUniform("matrix.view");
 		if (pUniform)
 		{
 			math::Matrix44 viewMat = Camera::getMainCamera()->getViewMatrix();
