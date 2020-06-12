@@ -2,6 +2,7 @@
 
 #include "Matrix.h"
 #include "../Vector/Vector3.h"
+#include "../Vector/Vector4.h"
 #include "Matrix41.h"
 
 namespace math
@@ -83,6 +84,18 @@ namespace math
 		*	缩放比例
 		*/
 		Vector3 getScale() const;
+		/**
+		*	行
+		*/
+		Vector4 getRow(int column) const;
+
+		void setRow(int column, const Vector4& value);
+		/**
+		*	列
+		*/
+		Vector4 getColumn(int column) const;
+
+		void setColumn(int column, const Vector4& value);
 	public:
 		virtual Matrix41 operator*(const Matrix41& mat);
 		virtual Matrix44 operator*(const Matrix44& mat);

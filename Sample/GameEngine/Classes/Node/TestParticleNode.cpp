@@ -27,8 +27,8 @@ void TestParticleNode::testParticle()
 	//////////////////////////////////////////////////////////////////////////
 	auto pUpdateFeedback = node->getUpdateXFBObject();
 
-	std::string uvfile = "Shader/particle_update.vs";
-	std::string uffile = "Shader/particle_update.fs";
+	std::string uvfile = "Shader/frame/particle_update.vs";
+	std::string uffile = "Shader/frame/particle_update.fs";
 
 	const char* varings0[] = {
 		"outPosition",
@@ -76,8 +76,8 @@ void TestParticleNode::testParticle()
 
 	auto pRenderFeedback = node->getRenderXFBObject();
 
-	std::string rvfile = "Shader/particle_render.vs";
-	std::string rffile = "Shader/particle_render.fs";
+	std::string rvfile = "Shader/texture/particle_render.vs";
+	std::string rffile = "Shader/texture/particle_render.fs";
 
 	const char* varings1[] = {
 		"worldSpacePosition",

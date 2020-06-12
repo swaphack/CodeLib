@@ -2,8 +2,8 @@
 
 using namespace render;
 
-std::string Utility::texture3dVertexPath = "Shader/texture3d.vs";
-std::string Utility::texture3dFragmentPath = "Shader/texture3d.fs";
+std::string Utility::texture3dVertexPath = "Shader/texture/texture.vs";
+std::string Utility::texture3dFragmentPath = "Shader/texture/texture.fs";
 
 void Utility::loadShader(render::Materials* mats, const std::string& vpath, const std::string& fpath)
 {
@@ -62,8 +62,16 @@ void Utility::initShaderAttrib(render::Materials* mats)
 
 		item.second->addUniform(UniformType::VIEW_POSITION, "viewPos");
 
-		item.second->addUniform(UniformType::TEXTURE0, "texSampler0");
-		item.second->addUniform(UniformType::TEXTURE1, "texSampler1");
+		item.second->addUniform(UniformType::TEXTURE0, "tex.texture0");
+		item.second->addUniform(UniformType::TEXTURE1, "tex.texture1");
+		item.second->addUniform(UniformType::TEXTURE2, "tex.texture2");
+		/*
+		item.second->addUniform(UniformType::TEXTURE3, "texture.texture3");
+		item.second->addUniform(UniformType::TEXTURE4, "texture.texture4");
+		item.second->addUniform(UniformType::TEXTURE5, "texture.texture5");
+		item.second->addUniform(UniformType::TEXTURE6, "texture.texture6");
+		item.second->addUniform(UniformType::TEXTURE7, "texture.texture7");
+		*/
 	}
 }
 

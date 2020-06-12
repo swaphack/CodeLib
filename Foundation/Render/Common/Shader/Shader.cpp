@@ -4,6 +4,14 @@
 #include "Graphic/import.h"
 #include "system.h"
 
+#include "ComputeShader.h"
+#include "FragmentShader.h"
+#include "GeometryShader.h"
+#include "TessControlShader.h"
+#include "TessEvaluationShader.h"
+#include "VertexShader.h"
+
+
 using namespace render;
 
 Shader::Shader()
@@ -173,73 +181,3 @@ bool render::Shader::isValid() const
 	return GLShader::isShader(_shaderID);
 }
 
-//////////////////////////////////////////////////////////////////////////
-
-VertexShader::VertexShader()
-{
-	this->setShaderType(ShaderType::VERTEX_SHADER);
-	this->initShader();
-}
-
-VertexShader::~VertexShader()
-{
-
-}
-
-//////////////////////////////////////////////////////////////////////////
-FragmentShader::FragmentShader()
-{
-	this->setShaderType(ShaderType::FRAGMENT_SHADER);
-	this->initShader();
-}
-
-FragmentShader::~FragmentShader()
-{
-
-}
-//////////////////////////////////////////////////////////////////////////
-render::GeometryShader::GeometryShader()
-{
-	this->setShaderType(ShaderType::GEOMETRY_SHADER);
-	this->initShader();
-}
-
-render::GeometryShader::~GeometryShader()
-{
-
-}
-//////////////////////////////////////////////////////////////////////////
-render::TessControlShader::TessControlShader()
-{
-	this->setShaderType(ShaderType::TESS_CONTROL_SHADER);
-	this->initShader();
-}
-
-render::TessControlShader::~TessControlShader()
-{
-
-}
-
-//////////////////////////////////////////////////////////////////////////
-render::TessEvaluationShader::TessEvaluationShader()
-{
-	this->setShaderType(ShaderType::TESS_EVALUATION_SHADER);
-	this->initShader();
-}
-
-render::TessEvaluationShader::~TessEvaluationShader()
-{
-
-}
-
-//////////////////////////////////////////////////////////////////////////
-render::ComputeShader::ComputeShader()
-{
-	this->setShaderType(ShaderType::COMPUTE_SHADER);
-	this->initShader();
-}
-
-render::ComputeShader::~ComputeShader()
-{
-
-}

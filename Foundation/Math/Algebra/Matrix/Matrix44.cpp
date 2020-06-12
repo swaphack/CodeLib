@@ -210,15 +210,34 @@ Matrix44 Matrix44::operator*(const Matrix44& mat)
 
 Vector3 Matrix44::getEularAngle() const
 {
-	float r32 = getValue((size_t)1, (size_t)2);
-	float r33 = getValue((size_t)2, (size_t)2);
-	float r31 = getValue((size_t)0, (size_t)2);
-	float r21 = getValue((size_t)0, (size_t)1);
 	float r11 = getValue((size_t)0, (size_t)0);
+	float r12 = getValue((size_t)0, (size_t)1);
+	float r13 = getValue((size_t)0, (size_t)2);
+	float r21 = getValue((size_t)1, (size_t)0);
+	float r22 = getValue((size_t)1, (size_t)1);
+	float r23 = getValue((size_t)1, (size_t)2);
+	float r31 = getValue((size_t)2, (size_t)0);
+	float r33 = getValue((size_t)2, (size_t)2);
+	float r34 = getValue((size_t)2, (size_t)3);
 
-	float x = atan2(r32, r33);
-	float y = atan2(-r31, sqrt(pow(r32, 2)+ pow(r33, 2)));
-	float z = atan2(r21, r11);
+	float x = 0;
+	float y = 0;
+	float z = 0;
+
+	if (r11 == 1.0f)
+	{
+		x = atan2(r13, r34);
+	}
+	else if (r11 == -1.0f)
+	{
+		x = atan2(r13, r34);
+	}
+	else
+	{
+		x = atan2(- r31, r11);
+		y = asin(r21);
+		z = atan2(-r23, r22);
+	}
 
 	return Vector3(x, y, z);
 }
@@ -291,7 +310,7 @@ math::Matrix44 math::Matrix44::ortho(float left, float right, float bottom, floa
 	
 	mat[12] = -(right + left) / (right - left);
 	mat[13] = -(top + bottom) / (top - bottom);
-	mat[14] = -(zfar + znear) / (zfar - znear);
+	mat[14] = (zfar + znear) / (zfar - znear);
 
 	return mat;
 }
@@ -320,7 +339,7 @@ math::Matrix44 math::Matrix44::frustum(float left, float right, float bottom, fl
 	mat[11] = -1.0;
 	mat[12] = 0.0;
 	mat[13] = 0.0;
-	mat[14] = (-temp * zfar) / temp4;
+	mat[14] = (-2.0 * zfar) / temp4;
 	mat[15] = 0.0;
 
 	return mat;
@@ -355,9 +374,9 @@ math::Matrix44 math::Matrix44::lookAt(const Vector3& eye, const Vector3& center,
 	Result.setValue(0, 2, -f.getX());
 	Result.setValue(1, 2, -f.getY());
 	Result.setValue(2, 2, -f.getZ());
-	Result.setValue(0, 3, math::Vector3::dot(s, eye));
-	Result.setValue(1, 3, math::Vector3::dot(u, eye));
-	Result.setValue(2, 3, math::Vector3::dot(f, eye));
+	//Result.setValue(0, 3, math::Vector3::dot(s, eye));
+	//Result.setValue(1, 3, math::Vector3::dot(u, eye));
+	//Result.setValue(2, 3, math::Vector3::dot(f, eye));
 	return Result;
 }
 
@@ -404,5 +423,39 @@ math::Vector3 math::Matrix44::getPosition() const
 math::Vector3 math::Matrix44::getScale() const
 {
 	return Vector3((*this)[0], (*this)[5], (*this)[10]);
+}
+
+Vector4 math::Matrix44::getRow(int column) const
+{
+	return Vector4(
+		getValue(column),
+		getValue(column + 4),
+		getValue(column + 8),
+		getValue(column + 12));
+}
+
+void math::Matrix44::setRow(int column, const Vector4& value)
+{
+	this->setValue(column, value[0]);
+	this->setValue(column + 4, value[1]);
+	this->setValue(column + 8, value[2]);
+	this->setValue(column + 12, value[3]);
+}
+
+math::Vector4 math::Matrix44::getColumn(int column) const
+{
+	return Vector4(
+		getValue(column * 4),
+		getValue(column * 4 + 1),
+		getValue(column * 4 + 2),
+		getValue(column * 4 + 3));
+}
+
+void math::Matrix44::setColumn(int column, const Vector4& value)
+{
+	this->setValue(column * 4, value[0]);
+	this->setValue(column * 4 + 1, value[1]);
+	this->setValue(column * 4 + 2, value[2]);
+	this->setValue(column * 4 + 3, value[3]);
 }
 

@@ -5,6 +5,7 @@
 
 namespace render
 {
+	
 	class ShaderProgram;
 	class TransformFeedback;
 	class TransformFeedbackBuffer;
@@ -28,6 +29,10 @@ namespace render
 		*	Ö´ÐÐ
 		*/
 		void run();
+		/**
+		*	ÎÄµµ
+		*/
+		ShaderDocument* getDocument() const;
 	protected:
 		void calOutputBuffer();
 

@@ -3,11 +3,9 @@
 #include "Common/VAO/import.h"
 #include "Common/XFB/TransformFeedback.h"
 #include "Common/Buffer/import.h"
-#include "ShaderDocument.h"
-#include "ShaderVariableType.h"
-#include "ShaderParameter.h"
 #include "Graphic/import.h"
 
+/*
 render::Calculator::Calculator()
 {
 	_shaderProgram = CREATE_OBJECT(ShaderProgram);
@@ -20,6 +18,9 @@ render::Calculator::Calculator()
 	SAFE_RETAIN(_xfbBuffer);
 
 	_xfbObject->setBuffer(_xfbBuffer);
+
+	_document = CREATE_OBJECT(ShaderDocument);
+	SAFE_RETAIN(_document);
 }
 
 render::Calculator::~Calculator()
@@ -27,6 +28,7 @@ render::Calculator::~Calculator()
 	SAFE_RELEASE(_shaderProgram);
 	SAFE_RELEASE(_xfbObject);
 	SAFE_RELEASE(_xfbBuffer);
+	SAFE_RELEASE(_document);
 }
 
 void render::Calculator::setProgramFunc(const ShaderProgramFunc& func)
@@ -55,6 +57,11 @@ void render::Calculator::run()
 	_xfbObject->endWatch();
 	_xfbObject->unbindTransformFeedback();
 	_shaderProgram->unuse();
+}
+
+render::ShaderDocument* render::Calculator::getDocument() const
+{
+	return _document;
 }
 
 void render::Calculator::getOutputData()
@@ -113,3 +120,4 @@ void render::Calculator::calOutputBuffer()
 	_xfbBuffer->unbindBuffer();
 }
 
+*/

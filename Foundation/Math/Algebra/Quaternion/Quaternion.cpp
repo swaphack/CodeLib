@@ -81,6 +81,7 @@ Quaternion Quaternion::operator*(const Quaternion& quaternion)
 
 Quaternion::operator Matrix44()
 {
+	/*
 	float a = (*this)[0];
 	float b = (*this)[1];
 	float c = (*this)[2];
@@ -91,6 +92,38 @@ Quaternion::operator Matrix44()
 	mat.setValue(4, b); mat.setValue(5, a); mat.setValue(6, -c); mat.setValue(7, -d);
 	mat.setValue(8, -d); mat.setValue(9, c); mat.setValue(10, a); mat.setValue(11, -b);
 	mat.setValue(12, c); mat.setValue(13, d); mat.setValue(14, b); mat.setValue(15, a);
+	*/
+
+	Matrix44 mat;
+
+	float x = (*this)[0];
+	float y = (*this)[1];
+	float z = (*this)[2];
+	float w = (*this)[3];
+
+	float xx = x * x;
+	float yy = y * y;
+	float zz = z * z;
+	float ww = w * w;
+
+	float xy = x * y;
+	float xz = x * z;
+	float xw = x * w;
+	float yz = y * z;
+	float yw = y * w;
+	float zw = z * w;
+
+	mat.setValue(0, 0, 1 - 2 * (yy + zz));
+	mat.setValue(0, 1, 2 * (xy - zw));
+	mat.setValue(0, 2, 2 * (xz + yw));
+
+	mat.setValue(1, 0, 2 * (xy + zw));
+	mat.setValue(1, 1, 1 - 2 * (xx + zz));
+	mat.setValue(1, 2, 2 * (yz - xw));
+
+	mat.setValue(2, 0, 2 * (xz - yw));
+	mat.setValue(2, 1, 2 * (yz + xw));
+	mat.setValue(2, 2, 1 - 2 * (xx + yy));
 
 	return mat;
 }

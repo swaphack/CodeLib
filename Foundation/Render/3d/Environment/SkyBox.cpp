@@ -21,13 +21,13 @@ void render::SkyBox::beforeDrawNode()
 
 	GLState::enable(EnableMode::TEXTURE_CUBE_MAP_SEAMLESS);
 	GLState::setDepthFunc(DepthFunction::LEQUAL);
-	GLState::setCullFace(FaceType::FRONT);
+	//GLState::setCullFace(FaceType::FRONT);
 }
 
 void render::SkyBox::afterDrawNode()
 {
 	GLState::setDepthFunc(DepthFunction::LESS);
-	GLState::setCullFace(FaceType::BACK);
+	//GLState::setCullFace(FaceType::BACK);
 
 	GLState::disable(EnableMode::TEXTURE_CUBE_MAP_SEAMLESS);
 

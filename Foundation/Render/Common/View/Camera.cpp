@@ -17,9 +17,9 @@ Camera::Camera()
 	_scale.set(1.0f, 1.0f, 1.0f);
 
 	_viewParameter2D.zNear = 0;
-	_viewParameter2D.zFar = 10000;
+	_viewParameter2D.zFar = 100000;
 	_viewParameter3D.zNear = 0.1f;
-	_viewParameter2D.zFar = 10000;
+	_viewParameter2D.zFar = 1000000;
 }
 
 Camera::~Camera()
@@ -193,10 +193,10 @@ math::Matrix44 render::Camera::lookAt(const math::Vector3& position)
 {
 	math::Vector3 pos = _worldMatrix.getPosition();
 	math::Vector3 up = _worldMatrix.getEularAngle();
-	up = math::Vector3(0, 1, 0);
+	//up = math::Vector3(0, 1, 0);
 	math::Matrix44 mat = math::Matrix44::lookAt(pos, position, up);
 	//PRINT("%s\n", mat.toString().c_str());
-	GLMatrix::multMatrix(mat);
+	//GLMatrix::multMatrix(mat);
 
 	//GLMatrix::multMatrix(_worldMatrix);
 	return mat;

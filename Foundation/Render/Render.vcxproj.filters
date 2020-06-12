@@ -420,18 +420,6 @@
     <ClCompile Include="2d\Animation\ParticleProtocol.cpp">
       <Filter>2d\Animation</Filter>
     </ClCompile>
-    <ClCompile Include="Common\GPU\Calculator.cpp">
-      <Filter>Common\GPU</Filter>
-    </ClCompile>
-    <ClCompile Include="Common\GPU\ShaderParameter.cpp">
-      <Filter>Common\GPU</Filter>
-    </ClCompile>
-    <ClCompile Include="Common\GPU\ShaderDocument.cpp">
-      <Filter>Common\GPU</Filter>
-    </ClCompile>
-    <ClCompile Include="Common\GPU\ShaderVariableType.cpp">
-      <Filter>Common\GPU</Filter>
-    </ClCompile>
     <ClCompile Include="Common\struct\enum_common.cpp">
       <Filter>Common\struct</Filter>
     </ClCompile>
@@ -506,6 +494,33 @@
     </ClCompile>
     <ClCompile Include="Common\Shader\ShaderManager.cpp">
       <Filter>Common\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Shader\VertexShader.cpp">
+      <Filter>Common\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Shader\FragmentShader.cpp">
+      <Filter>Common\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Shader\GeometryShader.cpp">
+      <Filter>Common\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Shader\ComputeShader.cpp">
+      <Filter>Common\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Shader\TessControlShader.cpp">
+      <Filter>Common\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Shader\TessEvaluationShader.cpp">
+      <Filter>Common\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\ShaderDocument\ShaderDocument.cpp">
+      <Filter>Common\ShaderDocument</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\ShaderDocument\ShaderParameter.cpp">
+      <Filter>Common\ShaderDocument</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\ShaderDocument\ShaderVariableType.cpp">
+      <Filter>Common\ShaderDocument</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1059,19 +1074,7 @@
     <ClInclude Include="2d\Animation\ParticleProtocol.h">
       <Filter>2d\Animation</Filter>
     </ClInclude>
-    <ClInclude Include="Common\GPU\Calculator.h">
-      <Filter>Common\GPU</Filter>
-    </ClInclude>
     <ClInclude Include="Common\GPU\import.h">
-      <Filter>Common\GPU</Filter>
-    </ClInclude>
-    <ClInclude Include="Common\GPU\ShaderDocument.h">
-      <Filter>Common\GPU</Filter>
-    </ClInclude>
-    <ClInclude Include="Common\GPU\ShaderParameter.h">
-      <Filter>Common\GPU</Filter>
-    </ClInclude>
-    <ClInclude Include="Common\GPU\ShaderVariableType.h">
       <Filter>Common\GPU</Filter>
     </ClInclude>
     <ClInclude Include="3d\Shape\CubeMap.h">
@@ -1169,6 +1172,36 @@
     </ClInclude>
     <ClInclude Include="Common\Shader\ShaderManager.h">
       <Filter>Common\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Shader\VertexShader.h">
+      <Filter>Common\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Shader\FragmentShader.h">
+      <Filter>Common\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Shader\GeometryShader.h">
+      <Filter>Common\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Shader\ComputeShader.h">
+      <Filter>Common\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Shader\TessControlShader.h">
+      <Filter>Common\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Shader\TessEvaluationShader.h">
+      <Filter>Common\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\ShaderDocument\ShaderVariableType.h">
+      <Filter>Common\ShaderDocument</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\ShaderDocument\ShaderDocument.h">
+      <Filter>Common\ShaderDocument</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\ShaderDocument\ShaderParameter.h">
+      <Filter>Common\ShaderDocument</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\ShaderDocument\import.h">
+      <Filter>Common\ShaderDocument</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1285,6 +1318,9 @@
     </Filter>
     <Filter Include="Common\Input">
       <UniqueIdentifier>{409b1e32-3246-4c04-bffe-9e0fb742b02f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common\ShaderDocument">
+      <UniqueIdentifier>{5f729342-6400-48c8-a3b5-b37ebc696b2a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

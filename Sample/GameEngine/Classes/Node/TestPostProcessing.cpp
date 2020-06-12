@@ -25,7 +25,7 @@ void TestPostProcessing::testSimplePostProcessing()
 
 	//this->addChild(pNode);
 
-	Utility::loadShader(pNode->getMaterials(), "Shader/simple_frame_buffer.vs", "Shader/simple_frame_buffer.fs");
+	Utility::loadShader(pNode->getMaterials(), "Shader/frame/simple_frame_buffer.vs", "Shader/frame/simple_frame_buffer.fs");
 
 	render::PostProcessing::getInstance()->setPostProcessingNode(pNode);
 }

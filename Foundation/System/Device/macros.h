@@ -23,6 +23,7 @@ namespace sys
 	// 滚轮事件
 	enum class ScrollEvent
 	{
+		NONE = -1,
 		// 向上滑动滚轮
 		SCORLL_UP,
 		// 向下滑动滚轮

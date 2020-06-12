@@ -103,7 +103,7 @@ void TestModelNode::testCubeMap()
 	pCubMap->setAnchorPoint(0.5f, 0.5f, 0.5f);
 	this->addChild(pCubMap);
 
-	Utility::loadShader(pCubMap->getMaterials(), "Shader/cubemap.vs", "Shader/cubemap.fs");
+	Utility::loadShader(pCubMap->getMaterials(), "Shader/cubemap/cubemap.vs", "Shader/cubemap/cubemap.fs");
 
 	RotateByAction* pAction = CREATE_ACTION(RotateByAction);
 	pAction->setRotation(0, 180, 0);

@@ -33,7 +33,7 @@ void TestEnvironmentNode::init3DSkyBox()
 	pSkyBox->setAnchorPoint(0.5f, 0.5f, 0.5f);
 	this->addChild(pSkyBox);
 
-	Utility::loadShader(pSkyBox->getMaterials(), "Shader/skybox.vs", "Shader/skybox.fs");
+	Utility::loadShader(pSkyBox->getMaterials(), "Shader/env/skybox.vs", "Shader/env/skybox.fs");
 	
 	pSkyBox->setShaderProgramFunc([](ShaderProgram* program) {
 		auto pUniform = program->getUniform("viewMatrix");
@@ -72,7 +72,7 @@ void TestEnvironmentNode::init2DSkyBox()
 	pSkyBox->setAnchorPoint(0.5f, 0.5f, 0.5f);
 	this->addChild(pSkyBox);
 
-	Utility::loadShader(pSkyBox->getMaterials(), "Shader/texture3d.vs", "Shader/texture3d.fs");
+	Utility::loadShader(pSkyBox->getMaterials(), "Shader/texture/texture.vs", "Shader/texture/texture.fs");
 
 	pSkyBox->setShaderProgramFunc([](ShaderProgram* program) {
 		auto pUniform = program->getUniform("viewMatrix");
@@ -101,57 +101,82 @@ void TestEnvironmentNode::testCamera()
 		return;
 	}
 
+	
 	auto size = Tool::getGLViewSize();
+
 	pCamera->setPosition(-size.getWidth() * 0.5f, -size.getHeight() * 0.5f);
-	G_KEYBOARDMANAGER->addKeyboardFunc(this, pCamera, [this](Node* object, sys::BoardKey key, sys::ButtonStatus type) {
+	G_KEYBOARDMANAGER->addKeyboardFunc(this, pCamera, [&](Node* object, sys::BoardKey key, sys::ButtonStatus type) {
 		auto camera = object->as<Camera>();
 		if (camera == nullptr)
 		{
 			return;
+		}
+
+		if (type == sys::ButtonStatus::BUTTON_DOWN)
+		{
+			_spaceSpeed += 1.0f;
+		}
+		else
+		{
+			_spaceSpeed = 0.0f;
 		}
 
 		if (key == sys::BoardKey::K1)
 		{
 			_viewType = 0;
+			_mouseScroll = 1;
 		}
 		else if (key == sys::BoardKey::K2)
 		{
 			_viewType = 1;
+			_mouseScroll = 1;
 		}
 		else if (key == sys::BoardKey::KA)
 		{
-			camera->setPositionX(camera->getPositionX() + 10);
+			camera->setPositionX(camera->getPositionX() + _spaceSpeed);
 		}
 		else if (key == sys::BoardKey::KD)
 		{
-			camera->setPositionX(camera->getPositionX() - 10);
+			camera->setPositionX(camera->getPositionX() - _spaceSpeed);
 		}
 		else if (key == sys::BoardKey::KQ)
 		{
-			camera->setPositionY(camera->getPositionY() - 10);
+			camera->setPositionY(camera->getPositionY() - _spaceSpeed);
 		}
 		else if (key == sys::BoardKey::KE)
 		{
-			camera->setPositionY(camera->getPositionY() + 10);
+			camera->setPositionY(camera->getPositionY() + _spaceSpeed);
 		}
 		else if (key == sys::BoardKey::KW)
 		{
-			camera->setPositionZ(camera->getPositionZ() + 10);
+			camera->setPositionZ(camera->getPositionZ() + _spaceSpeed);
 		}
 		else if (key == sys::BoardKey::KS)
 		{
-			camera->setPositionZ(camera->getPositionZ() - 10);
+			camera->setPositionZ(camera->getPositionZ() - _spaceSpeed);
 		}
 	});
 
-	G_MOUSEMANAGER->addMouseScrollFunc(this, pCamera, [this](Node* object, sys::ScrollEvent evt, float param) {
+	
+	G_MOUSEMANAGER->addMouseScrollFunc(this, pCamera, [&](Node* object, sys::ScrollEvent evt, float param) {
 		auto camera = object->as<Camera>();
 		if (camera == nullptr)
 		{
 			return;
 		}
 
-		float value = param * 10;
+		if (_scrollEvt != evt)
+		{
+			_mouseScroll = 1;
+		}
+		else
+		{
+			_mouseScroll *= 2.0f;
+		}
+
+		_scrollEvt = evt;
+
+		float value = param * _mouseScroll;
 
 		float zNear = camera->getViewParameter().zNear;
 		float zFar = camera->getViewParameter().zFar;
