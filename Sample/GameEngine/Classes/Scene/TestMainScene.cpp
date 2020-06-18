@@ -22,7 +22,7 @@ bool TestMainScene::init()
 	//this->addChild(CREATE_NODE(TestImageNode));
 	//this->addChild(CREATE_NODE(TestModelNode));
 	
-	this->addChild(CREATE_NODE(TestShaderNode));
+	//this->addChild(CREATE_NODE(TestShaderNode));
 	
 	//this->addChild(CREATE_NODE(TestLayoutNode));
 	//this->addChild(CREATE_NODE(TestMediaNode));
@@ -35,6 +35,8 @@ bool TestMainScene::init()
 	//this->addChild(CREATE_NODE(TestTextureNode));
 
 	//this->addChild(CREATE_NODE(TestPostProcessing));
+
+	this->addChild(CREATE_NODE(TestComputeShader));
 
 	return true;
 }

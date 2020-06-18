@@ -32,6 +32,7 @@ namespace render
 	public:
 		static void setIndexMask(uint32_t mask);
 	public:
+		static void pushAttrib(uint32_t value);
 		static void pushAttrib(AttribMask value);
 		static void popAttrib();
 	public:

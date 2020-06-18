@@ -18,3 +18,4 @@
 #include "TestTextureNode.h"
 #include "TestFrameBufferNode.h"
 #include "TestPostProcessing.h"
+#include "TestComputeShader.h"

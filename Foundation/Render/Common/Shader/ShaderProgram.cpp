@@ -209,20 +209,6 @@ void ShaderProgram::removeAllUniforms()
 	_attributes.clear();
 }
 
-bool ShaderProgram::loadVertexAndFragmentShader(const std::string& vpath, const std::string& fpath)
-{
-	if (!this->loadFromFile(ShaderType::VERTEX_SHADER, vpath))
-	{
-		return false;
-	}
-	if (!this->loadFromFile(ShaderType::FRAGMENT_SHADER, fpath))
-	{
-		return false;
-	}
-
-	return true;
-}
-
 void render::ShaderProgram::bindFragDataLocation(uint32_t colorNumber, const char* name)
 {
 	GLShader::bindFragDataLocation(getProgramID(), colorNumber, name);
@@ -238,7 +224,7 @@ bool render::ShaderProgram::isValid() const
 	return GLShader::isProgram(_programID);
 }
 
-bool render::ShaderProgram::loadFromFile(ShaderType type, const std::string& path)
+bool render::ShaderProgram::loadShaderFromFile(ShaderType type, const std::string& path)
 {
 	Shader* pShader = Shader::createFromFile(type, path);
 	if (pShader == nullptr)

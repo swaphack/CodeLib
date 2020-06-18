@@ -1,3 +1,5 @@
+#include "Shader/core/light.fs"
+
 struct Material 
 {
 	vec4 ambient;

@@ -102,9 +102,6 @@
     <ClCompile Include="2d\Animation\CtrlAnimation.cpp">
       <Filter>2d\Animation</Filter>
     </ClCompile>
-    <ClCompile Include="2d\Animation\CtrlParticleSystem.cpp">
-      <Filter>2d\Animation</Filter>
-    </ClCompile>
     <ClCompile Include="2d\Animation\CtrlSequenceFrame.cpp">
       <Filter>2d\Animation</Filter>
     </ClCompile>
@@ -345,9 +342,6 @@
     <ClCompile Include="Common\Buffer\TextureBuffer.cpp">
       <Filter>Common\Buffer</Filter>
     </ClCompile>
-    <ClCompile Include="Common\Particle\ParticleSystem.cpp">
-      <Filter>Common\Particle</Filter>
-    </ClCompile>
     <ClCompile Include="Common\Texture\Texture2D.cpp">
       <Filter>Common\Texture</Filter>
     </ClCompile>
@@ -411,15 +405,6 @@
     <ClCompile Include="Common\Tool\VertexTool.cpp">
       <Filter>Common\Tool</Filter>
     </ClCompile>
-    <ClCompile Include="Common\Particle\Particle.cpp">
-      <Filter>Common\Particle</Filter>
-    </ClCompile>
-    <ClCompile Include="Common\Particle\ParticleXFbObject.cpp">
-      <Filter>Common\Particle</Filter>
-    </ClCompile>
-    <ClCompile Include="2d\Animation\ParticleProtocol.cpp">
-      <Filter>2d\Animation</Filter>
-    </ClCompile>
     <ClCompile Include="Common\struct\enum_common.cpp">
       <Filter>Common\struct</Filter>
     </ClCompile>
@@ -466,9 +451,6 @@
       <Filter>Common\FrameRender</Filter>
     </ClCompile>
     <ClCompile Include="Common\PostProcessing\PostProcessingNode.cpp">
-      <Filter>Common\PostProcessing</Filter>
-    </ClCompile>
-    <ClCompile Include="Common\PostProcessing\PostProcessing.cpp">
       <Filter>Common\PostProcessing</Filter>
     </ClCompile>
     <ClCompile Include="Common\Input\KeyboardManager.cpp">
@@ -521,6 +503,36 @@
     </ClCompile>
     <ClCompile Include="Common\ShaderDocument\ShaderVariableType.cpp">
       <Filter>Common\ShaderDocument</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Shader\VertexFragmentProgram.cpp">
+      <Filter>Common\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Shader\ComputeProgram.cpp">
+      <Filter>Common\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Buffer\DispatchIndirectBuffer.cpp">
+      <Filter>Common\Buffer</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Particle\XFBParticleNode.cpp">
+      <Filter>Common\Particle</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Particle\XFBParticle.cpp">
+      <Filter>Common\Particle</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Particle\ParticleProtocol.cpp">
+      <Filter>Common\Particle</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Particle\ParticleData.cpp">
+      <Filter>Common\Particle</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Particle\ComputeParticleNode.cpp">
+      <Filter>Common\Particle</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Particle\PariticleNode.cpp">
+      <Filter>Common\Particle</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\TBO\TextureBufferObject.cpp">
+      <Filter>Common\TBO</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -702,9 +714,6 @@
       <Filter>2d\Animation</Filter>
     </ClInclude>
     <ClInclude Include="2d\Animation\CtrlFluid.h">
-      <Filter>2d\Animation</Filter>
-    </ClInclude>
-    <ClInclude Include="2d\Animation\CtrlParticleSystem.h">
       <Filter>2d\Animation</Filter>
     </ClInclude>
     <ClInclude Include="2d\Animation\CtrlSequenceFrame.h">
@@ -987,9 +996,6 @@
     <ClInclude Include="Common\Particle\import.h">
       <Filter>Common\Particle</Filter>
     </ClInclude>
-    <ClInclude Include="Common\Particle\ParticleSystem.h">
-      <Filter>Common\Particle</Filter>
-    </ClInclude>
     <ClInclude Include="Common\Transform\import.h">
       <Filter>Common\Transform</Filter>
     </ClInclude>
@@ -1065,15 +1071,6 @@
     <ClInclude Include="Common\Tool\VertexTool.h">
       <Filter>Common\Tool</Filter>
     </ClInclude>
-    <ClInclude Include="Common\Particle\Particle.h">
-      <Filter>Common\Particle</Filter>
-    </ClInclude>
-    <ClInclude Include="Common\Particle\ParticleXFbObject.h">
-      <Filter>Common\Particle</Filter>
-    </ClInclude>
-    <ClInclude Include="2d\Animation\ParticleProtocol.h">
-      <Filter>2d\Animation</Filter>
-    </ClInclude>
     <ClInclude Include="Common\GPU\import.h">
       <Filter>Common\GPU</Filter>
     </ClInclude>
@@ -1132,9 +1129,6 @@
       <Filter>Common\PostProcessing</Filter>
     </ClInclude>
     <ClInclude Include="Common\PostProcessing\PostProcessingNode.h">
-      <Filter>Common\PostProcessing</Filter>
-    </ClInclude>
-    <ClInclude Include="Common\PostProcessing\PostProcessing.h">
       <Filter>Common\PostProcessing</Filter>
     </ClInclude>
     <ClInclude Include="Common\Input\import.h">
@@ -1202,6 +1196,39 @@
     </ClInclude>
     <ClInclude Include="Common\ShaderDocument\import.h">
       <Filter>Common\ShaderDocument</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Shader\VertexFragmentProgram.h">
+      <Filter>Common\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Shader\ComputeProgram.h">
+      <Filter>Common\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Buffer\DispatchIndirectBuffer.h">
+      <Filter>Common\Buffer</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Particle\XFBParticleNode.h">
+      <Filter>Common\Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Particle\XFBParticle.h">
+      <Filter>Common\Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Particle\ParticleProtocol.h">
+      <Filter>Common\Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Particle\ParticleData.h">
+      <Filter>Common\Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Particle\ComputeParticleNode.h">
+      <Filter>Common\Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Particle\PariticleNode.h">
+      <Filter>Common\Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\TBO\TextureBufferObject.h">
+      <Filter>Common\TBO</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\TBO\import.h">
+      <Filter>Common\TBO</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1321,6 +1348,9 @@
     </Filter>
     <Filter Include="Common\ShaderDocument">
       <UniqueIdentifier>{5f729342-6400-48c8-a3b5-b37ebc696b2a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common\TBO">
+      <UniqueIdentifier>{abbd5e93-f250-496f-956a-5c52395d9cd4}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

@@ -13,6 +13,8 @@ TestPostProcessing::~TestPostProcessing()
 
 void TestPostProcessing::testFunc()
 {
+	this->testImage();
+
 	this->testSimplePostProcessing();
 }
 
@@ -21,12 +23,40 @@ void TestPostProcessing::testSimplePostProcessing()
 	render::PostProcessingNode* pNode = CREATE_NODE(render::PostProcessingNode);
 	pNode->setAnchorPoint(0, 0);
 	pNode->setPosition(0, 0);
-	pNode->setVolume(1024,768);
+	pNode->setVolume(512,384);
 
-	//this->addChild(pNode);
+	pNode->addChild(createImage());
+
+	this->addChild(pNode);
 
 	Utility::loadShader(pNode->getMaterials(), "Shader/frame/simple_frame_buffer.vs", "Shader/frame/simple_frame_buffer.fs");
+}
 
-	render::PostProcessing::getInstance()->setPostProcessingNode(pNode);
+void TestPostProcessing::testImage()
+{
+	auto frameSize = render::Canvas::getInstance()->getView()->getFrameSize();
+
+	std::string filepath = "Resource/Image/world_texture.jpg";
+
+	render::CtrlImage* pImage = CREATE_NODE(render::CtrlImage);
+	pImage->setImagePath(filepath);
+	pImage->setAnchorPoint(math::Vector2());
+	pImage->setVolume(frameSize);
+
+	this->addChild(pImage);
+}
+
+render::CtrlImage* TestPostProcessing::createImage()
+{
+	auto frameSize = render::Canvas::getInstance()->getView()->getFrameSize();
+
+	std::string filepath = "Resource/Image/world.jpg";
+
+	render::CtrlImage* pImage = CREATE_NODE(render::CtrlImage);
+	pImage->setImagePath(filepath);
+	pImage->setAnchorPoint(math::Vector2());
+	pImage->setVolume(frameSize);
+
+	return pImage;
 }
 

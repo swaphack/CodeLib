@@ -32,6 +32,10 @@ namespace render
 		void setLifeTime(float time);
 		// 获取寿命
 		float getLifeTime();
+		// 设置粒子数量
+		void setParticleCount(int count);
+		// 获取粒子数量
+		int getParticleCount() const;
 	protected:
 		virtual void onPariticleChange();
 	protected:
@@ -45,5 +49,7 @@ namespace render
 		sys::Color4F _colorAcceleration;
 		// 寿命
 		float _lifeTime = 0;
+		// 粒子数量
+		int _particleCount = 1;
 	};
 }

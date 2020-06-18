@@ -28,17 +28,17 @@ BufferTarget render::Buffer::getBufferTarget() const
 	return _target;
 }
 
-void render::Buffer::bindBuffer()
+void render::Buffer::bindBuffer() const
 {
 	GLBufferObjects::bindBuffer(_target, _bufferID);
 }
 
-void render::Buffer::bindBuffer(uint32_t bufferID)
+void render::Buffer::bindBuffer(uint32_t bufferID) const
 {
 	GLBufferObjects::bindBuffer(_target, bufferID);
 }
 
-void render::Buffer::unbindBuffer()
+void render::Buffer::unbindBuffer() const
 {
 	GLBufferObjects::bindBuffer(_target, 0);
 }
@@ -63,7 +63,7 @@ void render::Buffer::getBufferRange(uint32_t index, ptrdiff_t offset, ptrdiff_t 
 	GLBufferObjects::bindBufferRange(_target, index, _bufferID, offset, size);
 }
 
-bool render::Buffer::isBuffer()
+bool render::Buffer::isBuffer() const
 {
 	return GLBufferObjects::isBuffer(_bufferID);
 }

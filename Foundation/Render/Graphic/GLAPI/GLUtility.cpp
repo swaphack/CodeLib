@@ -42,8 +42,18 @@ void render::GLUtility::setMemoryBarrier(uint32_t barriers)
 	glMemoryBarrier(barriers);
 }
 
+void render::GLUtility::setMemoryBarrier(MemoryBarrierBit barrier)
+{
+	glMemoryBarrier((GLbitfield)barrier);
+}
+
 void render::GLUtility::setMemoryBarrierByRegion(uint32_t barriers)
 {
 	glMemoryBarrierByRegion(barriers);
+}
+
+void render::GLUtility::setMemoryBarrierByRegion(MemoryBarrierRegionBit barrier)
+{
+	glMemoryBarrierByRegion((GLbitfield)barrier);
 }
 

@@ -1,3 +1,4 @@
 #pragma once
 
-#include "ParticleSystem.h"
+#include "XFBParticleNode.h"
+#include "ComputeParticleNode.h"

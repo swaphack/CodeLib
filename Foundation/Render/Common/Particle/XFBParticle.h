@@ -2,25 +2,24 @@
 
 #include "mathlib.h"
 #include "system.h"
+#include "Common/Shader/ShaderProgramDelegate.h"
 #include <cstdint>
 #include <functional>
 
 namespace render
 {
-	class ParticleSystem;
-	class ShaderProgram;
+	class XFBParticleNode;
+	class VertexFragmentProgram;
 	class TransformFeedback;
 	class TransformFeedbackBuffer;
 	class VertexArrayObject;
 	class ArrayBuffer;
 
-	typedef std::function<void(ParticleSystem* node, ShaderProgram* program)> ParticleShaderFunc;
-
-	struct ParticleXFbObject : public sys::Object
+	struct XFBParticle : public sys::Object
 	{
 	public:
-		ShaderProgram* program = nullptr;
-		ParticleShaderFunc func = nullptr;
+		VertexFragmentProgram* program = nullptr;
+		ShaderProgramNFunc func = nullptr;
 
 		TransformFeedback* xfbo = nullptr;
 		TransformFeedbackBuffer* xfbb = nullptr;
@@ -28,18 +27,18 @@ namespace render
 		VertexArrayObject* vao = nullptr;
 		ArrayBuffer* vbo = nullptr;
 	public:
-		ParticleXFbObject();
-		virtual ~ParticleXFbObject();
+		XFBParticle();
+		virtual ~XFBParticle();
 	public:
 		void initXFBObject(int count);
 
-		void doFunc(ParticleSystem* node);
+		void doFunc(XFBParticleNode* node);
 	protected:
 		virtual void initXFB(int count);
 		virtual void initVAO(int count);
 	};
 
-	struct ParticleUpdateXFbObject : public ParticleXFbObject
+	struct XFBUpdateParticle : public XFBParticle
 	{
 	protected:
 		virtual void initXFB(int count);
@@ -47,7 +46,7 @@ namespace render
 	};
 
 
-	struct ParticleRenderXFbObject : public ParticleXFbObject
+	struct XFBRenderParticle : public XFBParticle
 	{
 	protected:
 		virtual void initXFB(int count);

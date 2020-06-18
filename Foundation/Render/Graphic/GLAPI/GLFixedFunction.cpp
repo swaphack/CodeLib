@@ -53,6 +53,11 @@ void render::GLFixedFunction::setTexEnv(TextureEnvTarget target, TextureEnvParam
 	glTexEnvf((GLenum)target, (GLenum)parameter, value);
 }
 
+void render::GLFixedFunction::pushAttrib(uint32_t value)
+{
+	glPushAttrib(value);
+}
+
 void render::GLFixedFunction::setTexEnv(TextureEnvTarget target, TextureEnvParameter parameter, int value)
 {
 	glTexEnvi((GLenum)target, (GLenum)parameter, value);

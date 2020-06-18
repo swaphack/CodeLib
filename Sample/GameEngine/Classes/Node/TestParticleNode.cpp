@@ -19,13 +19,13 @@ void TestParticleNode::testFunc()
 
 void TestParticleNode::testParticle()
 {
-	ParticleSystem* node = CREATE_NODE(ParticleSystem);
-	node->setPosition(512, 386, 0);
-	node->setScale(2, 1, 1);
-	this->addChild(node);
+	XFBParticleNode* particleNode = CREATE_NODE(XFBParticleNode);
+	particleNode->setPosition(512, 386, 0);
+	particleNode->setScale(2, 1, 1);
+	this->addChild(particleNode);
 
 	//////////////////////////////////////////////////////////////////////////
-	auto pUpdateFeedback = node->getUpdateXFBObject();
+	auto pUpdateFeedback = particleNode->getUpdateXFBObject();
 
 	std::string uvfile = "Shader/frame/particle_update.vs";
 	std::string uffile = "Shader/frame/particle_update.fs";
@@ -44,7 +44,7 @@ void TestParticleNode::testParticle()
 	pUpdateFeedback->program->link();
 	GLDebug::showError();
 
-	pUpdateFeedback->func = [](ParticleSystem* ps, ShaderProgram* sp) {
+	pUpdateFeedback->func = [&](Node* ps, ShaderProgram* sp) {
 		const math::Matrix44& proMat = Camera::getMainCamera()->getProjectMatrix();
 		const math::Matrix44& modelMat = ps->getWorldMatrix();
 
@@ -55,7 +55,7 @@ void TestParticleNode::testParticle()
 		if (pUniform) pUniform->setMatrix4(modelMat);
 
 		pUniform = sp->getUniform("triangleCount");
-		if (pUniform) pUniform->setValue(ps->getParticleCount() / 3);
+		if (pUniform) pUniform->setValue(particleNode->getParticleCount() / 3);
 
 		pUniform = sp->getUniform("timeStep");
 		if (pUniform) pUniform->setValue(0.02f);
@@ -74,7 +74,7 @@ void TestParticleNode::testParticle()
 	GLDebug::showError();
 	//////////////////////////////////////////////////////////////////////////
 
-	auto pRenderFeedback = node->getRenderXFBObject();
+	auto pRenderFeedback = particleNode->getRenderXFBObject();
 
 	std::string rvfile = "Shader/texture/particle_render.vs";
 	std::string rffile = "Shader/texture/particle_render.fs";
@@ -92,7 +92,7 @@ void TestParticleNode::testParticle()
 	pRenderFeedback->program->link();
 	GLDebug::showError();
 
-	pRenderFeedback->func = [](ParticleSystem* ps, ShaderProgram* sp) {
+	pRenderFeedback->func = [](Node* ps, ShaderProgram* sp) {
 		const math::Matrix44& proMat = Camera::getMainCamera()->getProjectMatrix();
 		const math::Matrix44& modelMat = ps->getWorldMatrix();
 
@@ -104,7 +104,7 @@ void TestParticleNode::testParticle()
 	};
 	GLDebug::showError();
 
-	node->setParticleCount(1000);
+	particleNode->setParticleCount(1000);
 }
 
 render::Node* TestParticleNode::createCubeModel()

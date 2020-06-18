@@ -90,14 +90,11 @@ namespace render
 		*/
 		bool isValid() const;
 	public:
+		
 		/**
-		*	添加文件 v 顶点， f片元
+		*	从文件加载shader
 		*/
-		bool loadVertexAndFragmentShader(const std::string& vpath, const std::string& fpath);
-		/**
-		*	加载文件
-		*/
-		bool loadFromFile(ShaderType type, const std::string& path);
+		bool loadShaderFromFile(ShaderType type, const std::string& path);
 	public:
 		/**
 		*	设置成可分离

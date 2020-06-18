@@ -1,6 +1,7 @@
 #version 330 core
 
 #include "Shader/core/light.fs"
+#include "Shader/core/material.fs"
 
 
 uniform Light light;

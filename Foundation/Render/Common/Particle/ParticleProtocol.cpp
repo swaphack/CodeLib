@@ -71,6 +71,17 @@ float ParticleProtocol::getLifeTime()
 	return _lifeTime;
 }
 
+void render::ParticleProtocol::setParticleCount(int count)
+{
+	_particleCount = count;
+	onPariticleChange();
+}
+
+int render::ParticleProtocol::getParticleCount() const
+{
+	return _particleCount;
+}
+
 void render::ParticleProtocol::onPariticleChange()
 {
 

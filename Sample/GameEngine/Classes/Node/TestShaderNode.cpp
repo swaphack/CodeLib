@@ -33,7 +33,7 @@ void TestShaderNode::testShaderUniformBlock()
 	std::string vPath = "Shader/shader_v_1.glsl";
 	std::string fPath = "Shader/shader_f_1.glsl";
 
-	ShaderProgram* pProgram = CREATE_OBJECT(ShaderProgram);
+	VertexFragmentProgram* pProgram = CREATE_OBJECT(VertexFragmentProgram);
 	pProgram->loadVertexAndFragmentShader(vPath, fPath);
 	pProgram->link();
 
@@ -69,7 +69,7 @@ void TestShaderNode::testSubroutineUniform()
 {
 	ShaderProgram* pProgram = CREATE_OBJECT(ShaderProgram);
 	std::string vlPath = "Shader/lighting.glsl";
-	if (!pProgram->loadFromFile(ShaderType::VERTEX_SHADER, vlPath))
+	if (!pProgram->loadShaderFromFile(ShaderType::VERTEX_SHADER, vlPath))
 	{
 		return;
 	}
@@ -262,7 +262,7 @@ void TestShaderNode::testClipShader()
 
 	std::string textureClipVertexPath = "Shader/clip.vs";
 
-	ShaderProgram* pProgram = CREATE_OBJECT(ShaderProgram);
+	VertexFragmentProgram* pProgram = CREATE_OBJECT(VertexFragmentProgram);
 	pProgram->loadVertexAndFragmentShader(textureClipVertexPath, Utility::texture3dFragmentPath);
 	pProgram->link();
 

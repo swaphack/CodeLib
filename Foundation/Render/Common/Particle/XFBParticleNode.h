@@ -1,24 +1,24 @@
 #pragma once
 
 #include "Common/Node/Node.h"
-#include "ParticleXFbObject.h"
+#include "XFBParticle.h"
 
 namespace render
 {
-
-	class ParticleSystem;
-	class ShaderProgram;
 	class TextureBuffer;
+	class XFBParticleNode;
+	class ShaderProgram;
+	class TextureBufferObject;
 	class Texture;
 
 	/**
 	*	粒子系统
 	*/
-	class ParticleSystem : public Node
+	class XFBParticleNode : public Node
 	{
 	public:
-		ParticleSystem();
-		virtual ~ParticleSystem();
+		XFBParticleNode();
+		virtual ~XFBParticleNode();
 	public:
 		virtual bool init();
 
@@ -30,11 +30,11 @@ namespace render
 		/**
 		*	更新回馈
 		*/
-		ParticleUpdateXFbObject* getUpdateXFBObject() const;
+		XFBUpdateParticle* getUpdateXFBObject() const;
 		/**
 		*	绘制回馈
 		*/
-		ParticleRenderXFbObject* getRenderXFBObject() const;
+		XFBRenderParticle* getRenderXFBObject() const;
 	public:
 		/**
 		*	粒子个数
@@ -49,18 +49,18 @@ namespace render
 		/**
 		*	更新的
 		*/
-		ParticleUpdateXFbObject* _updateXFBObject;
+		XFBUpdateParticle* _updateXFBObject;
 		/**
 		*	绘制的
 		*/
-		ParticleRenderXFbObject* _renderXFBObject;
+		XFBRenderParticle* _renderXFBObject;
 		/**
 		*	粒子个数
 		*/
 		int _particleCount = 0;
 
-		TextureBuffer* _geometryVBO = nullptr;
-		Texture* _geometryTex = nullptr;
+		TextureBufferObject* _geometryTBO = nullptr;
+		TextureBuffer* _geometryBuffer = nullptr;
 
 		VertexArrayObject* _renderVAO = nullptr;
 

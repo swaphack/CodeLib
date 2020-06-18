@@ -1,5 +1,5 @@
-#include "ParticleXFbObject.h"
-#include "Particle.h"
+#include "XFBParticle.h"
+#include "ParticleData.h"
 #include "Common/Transform/import.h"
 #include "Common/Shader/import.h"
 #include "Common/Buffer/import.h"
@@ -9,9 +9,9 @@
 #include "Common/Texture/import.h"
 #include "Common/XFB/TransformFeedback.h"
 
-render::ParticleXFbObject::ParticleXFbObject()
+render::XFBParticle::XFBParticle()
 {
-	program = CREATE_OBJECT(ShaderProgram);
+	program = CREATE_OBJECT(VertexFragmentProgram);
 	xfbo = CREATE_OBJECT(TransformFeedback);
 	xfbb = CREATE_OBJECT(TransformFeedbackBuffer);
 
@@ -27,7 +27,7 @@ render::ParticleXFbObject::ParticleXFbObject()
 	SAFE_RETAIN(vbo);
 }
 
-render::ParticleXFbObject::~ParticleXFbObject()
+render::XFBParticle::~XFBParticle()
 {
 	SAFE_RELEASE(program);
 	SAFE_RELEASE(xfbo);
@@ -35,7 +35,7 @@ render::ParticleXFbObject::~ParticleXFbObject()
 	SAFE_RELEASE(vao);
 }
 
-void render::ParticleXFbObject::initXFBObject(int count)
+void render::XFBParticle::initXFBObject(int count)
 {
 	if (program)
 	{
@@ -45,16 +45,16 @@ void render::ParticleXFbObject::initXFBObject(int count)
 	this->initVAO(count);
 }
 
-void render::ParticleXFbObject::initXFB(int count)
+void render::XFBParticle::initXFB(int count)
 {
 }
 
-void render::ParticleXFbObject::initVAO(int count)
+void render::XFBParticle::initVAO(int count)
 {
 	
 }
 
-void render::ParticleXFbObject::doFunc(ParticleSystem* node)
+void render::XFBParticle::doFunc(XFBParticleNode* node)
 {
 	if (program && func)
 	{
@@ -63,10 +63,10 @@ void render::ParticleXFbObject::doFunc(ParticleSystem* node)
 }
 
 //////////////////////////////////////////////////////////////////////////
-void render::ParticleUpdateXFbObject::initXFB(int count)
+void render::XFBUpdateParticle::initXFB(int count)
 {
 	xfbb->bindBuffer();
-	xfbb->setBufferData(count * Particle::totalSize(), BufferDataUsage::DYNAMIC_COPY);
+	xfbb->setBufferData(count * ParticleData::totalSize(), BufferDataUsage::DYNAMIC_COPY);
 
 	auto buffer = (float*)xfbb->getMapBuffer(AccessType::WRITE_ONLY);
 	for (int i = 0; i < count; i++)
@@ -81,37 +81,37 @@ void render::ParticleUpdateXFbObject::initXFB(int count)
 	xfbb->unmapBuffer();
 }
 
-void render::ParticleUpdateXFbObject::initVAO(int count)
+void render::XFBUpdateParticle::initVAO(int count)
 {
 	vao->bindVertexArray();
 	vbo->bindBuffer(xfbb->getBufferID());
 
 	auto p0 = vao->getVertexAttrib<VertexAttribPointer>(0);
-	p0->setVertexAttribPointer(3, VertexAttribPointerType::FLOAT, Particle::totalSize(), 0);
+	p0->setVertexAttribPointer(3, VertexAttribPointerType::FLOAT, ParticleData::totalSize(), 0);
 	p0->enableVertexAttribArray();
 
 	auto p1 = vao->getVertexAttrib<VertexAttribPointer>(1);
-	p1->setVertexAttribPointer(3, VertexAttribPointerType::FLOAT, Particle::totalSize(), Particle::offsetVel());
+	p1->setVertexAttribPointer(3, VertexAttribPointerType::FLOAT, ParticleData::totalSize(), ParticleData::offsetVel());
 	p1->enableVertexAttribArray();
 }
 
 //////////////////////////////////////////////////////////////////////////
-void render::ParticleRenderXFbObject::initXFB(int count)
+void render::XFBRenderParticle::initXFB(int count)
 {
 	xfbb->bindBuffer();
-	xfbb->setBufferData(count * Particle::totalSize(), BufferDataUsage::DYNAMIC_COPY);
+	xfbb->setBufferData(count * ParticleData::totalSize(), BufferDataUsage::DYNAMIC_COPY);
 }
 
-void render::ParticleRenderXFbObject::initVAO(int count)
+void render::XFBRenderParticle::initVAO(int count)
 {
 	vao->bindVertexArray();
 	vbo->bindBuffer(xfbb->getBufferID());
 
 	auto p0 = vao->getVertexAttrib<VertexAttribPointer>(0);
-	p0->setVertexAttribPointer(3, VertexAttribPointerType::FLOAT, Particle::totalSize(), 0);
+	p0->setVertexAttribPointer(3, VertexAttribPointerType::FLOAT, ParticleData::totalSize(), 0);
 	p0->enableVertexAttribArray();
 
 	auto p1 = vao->getVertexAttrib<VertexAttribPointer>(1);
-	p1->setVertexAttribPointer(3, VertexAttribPointerType::FLOAT, Particle::totalSize(), Particle::offsetVel());
+	p1->setVertexAttribPointer(3, VertexAttribPointerType::FLOAT, ParticleData::totalSize(), ParticleData::offsetVel());
 	p1->enableVertexAttribArray();
 }

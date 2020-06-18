@@ -5,7 +5,7 @@
 
 namespace render
 {
-	struct Particle
+	struct ParticleData
 	{
 		math::Vector3 pos;
 		math::Vector3 vel;

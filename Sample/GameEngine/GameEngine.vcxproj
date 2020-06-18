@@ -143,6 +143,7 @@
   <ItemGroup>
     <ClCompile Include="Classes\GLRenderApplication.cpp" />
     <ClCompile Include="Classes\Main.cpp" />
+    <ClCompile Include="Classes\Node\TestComputeShader.cpp" />
     <ClCompile Include="Classes\Node\TestFragmentNode.cpp" />
     <ClCompile Include="Classes\Node\TestFrameBufferNode.cpp" />
     <ClCompile Include="Classes\Node\TestPostProcessing.cpp" />
@@ -167,6 +168,7 @@
   <ItemGroup>
     <ClInclude Include="Classes\GLRenderApplication.h" />
     <ClInclude Include="Classes\Node\import.h" />
+    <ClInclude Include="Classes\Node\TestComputeShader.h" />
     <ClInclude Include="Classes\Node\TestEnvironmentNode.h" />
     <ClInclude Include="Classes\Node\TestFrameBufferNode.h" />
     <ClInclude Include="Classes\Node\TestPostProcessing.h" />

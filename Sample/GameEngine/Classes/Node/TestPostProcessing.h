@@ -11,4 +11,8 @@ protected:
 	virtual void testFunc();
 private:
 	void testSimplePostProcessing();
+
+	void testImage();
+
+	render::CtrlImage* createImage();
 };

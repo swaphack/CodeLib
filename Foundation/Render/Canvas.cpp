@@ -1,7 +1,5 @@
 #include "Canvas.h"
 
-#include "Common/PostProcessing/PostProcessing.h"
-
 using namespace render;
 
 Canvas* render::Canvas::_sCanvas = nullptr;
@@ -24,12 +22,6 @@ Canvas::~Canvas()
 
 void Canvas::draw()
 {
-	bool bEnablePostProcess = PostProcessing::getInstance()->hasNode();
-	if (bEnablePostProcess)
-	{
-		GLFixedFunction::pushAttrib(AttribMask::VIEWPORT_BIT);
-		PostProcessing::getInstance()->record();
-	}
 	_view->initViewPort();
 	_view->applyConfig();
 	_view->updateView();
@@ -44,12 +36,6 @@ void Canvas::draw()
 	if (pTop)
 	{
 		pTop->visit();
-	}
-	if (bEnablePostProcess)
-	{
-		GLFixedFunction::popAttrib();
-		_view->initViewPort();
-		PostProcessing::getInstance()->draw();
 	}
 
 	//GLRender::flush();

@@ -44,7 +44,6 @@ void render::CtrlAnimation::resume()
 
 void render::CtrlAnimation::stop()
 {
-
 	this->unregisterScheduler();
 }
 
@@ -98,7 +97,7 @@ void render::CtrlAnimation::registerScheduler()
 	if (_scheduler == nullptr)
 	{
 		_scheduler = new Scheduler();
-		_scheduler->setHandler(SEL_ACTION_UPDATE(CtrlAnimation::updateAnimation));
+		_scheduler->setHandler(this, SCHEDULER_DELEGATE_SCHEDULER(CtrlAnimation::updateAnimation));
 	}
 	this->getActionProxy()->runAction(_scheduler);
 }

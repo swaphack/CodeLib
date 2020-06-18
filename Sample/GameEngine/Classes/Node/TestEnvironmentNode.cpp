@@ -14,7 +14,7 @@ void TestEnvironmentNode::testFunc()
 {
 	this->testCamera();
 
-	this->init3DSkyBox();
+	//this->init3DSkyBox();
 }
 
 void TestEnvironmentNode::init3DSkyBox()

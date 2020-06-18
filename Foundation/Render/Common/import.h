@@ -22,3 +22,5 @@
 #include "FrameRender/import.h"
 #include "XFB/import.h"
 #include "PostProcessing/import.h"
+
+#include "Particle/import.h"

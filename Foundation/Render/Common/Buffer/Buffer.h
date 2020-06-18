@@ -31,19 +31,19 @@ namespace render
 		/**
 		*	绑定类型
 		*/
-		void bindBuffer(uint32_t bufferID);
+		void bindBuffer(uint32_t bufferID) const;;
 		/**
 		*	绑定类型
 		*/
-		void bindBuffer();
+		void bindBuffer() const;
 		/**
 		*	绑定类型
 		*/
-		void unbindBuffer();
+		void unbindBuffer() const;
 		/**
 		*	是否有效
 		*/
-		bool isBuffer();
+		bool isBuffer() const;
 	public:
 		void bindBufferBase(BufferTarget target, uint32_t index);
 		/**

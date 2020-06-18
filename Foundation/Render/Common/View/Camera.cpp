@@ -16,8 +16,8 @@ Camera::Camera()
 
 	_scale.set(1.0f, 1.0f, 1.0f);
 
-	_viewParameter2D.zNear = 0;
-	_viewParameter2D.zFar = 100000;
+	_viewParameter2D.zNear = -50000;
+	_viewParameter2D.zFar = 50000;
 	_viewParameter3D.zNear = 0.1f;
 	_viewParameter2D.zFar = 1000000;
 }

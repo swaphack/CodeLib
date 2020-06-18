@@ -11,6 +11,8 @@ namespace render
 {
 	class Shader;
 	class ShaderProgram;
+	class VertexFragmentProgram;
+	class ComputeProgram;
 
 	class ShaderManager
 	{
@@ -18,14 +20,30 @@ namespace render
 		ShaderManager();
 		virtual ~ShaderManager();
 	public:
-		ShaderProgram* createShaderProgram(const std::string& vertexFilepath, const std::string& fragFilepath);
-
+		/**
+		*	创建shader program
+		*/
+		VertexFragmentProgram* createVertexFragmentProgram(const std::string& vertexFilepath, const std::string& fragFilepath);
+		/**
+		*	创建shader program
+		*/
+		ComputeProgram* createComputeProgram(const std::string& computeFilepath);
+		/**
+		*	清空
+		*/
 		void clear();
 	protected:
-		render::Shader* createShader(ShaderType type, const std::string& filepath);
-
+		/**
+		*	创建shader
+		*/
+		Shader* createShader(ShaderType type, const std::string& filepath);
+		/**
+		*	创建shader
+		*/
 		Shader* createShader(ShaderType type, const std::string& filepath, const char* shaderData);
-
+		/**
+		*	查找所有关联文件
+		*/
 		bool findAllFile(const std::string& filepath, std::map<std::string, std::string>& fileDatas);
 	private:
 		std::map<std::string, ShaderProgram*> _shaderPrograms;
@@ -36,5 +54,5 @@ namespace render
 	};
 	
 
-#define G_SHANDER sys::Instance<ShaderManager>::getInstance()
+#define G_SHANDER sys::Instance<render::ShaderManager>::getInstance()
 }

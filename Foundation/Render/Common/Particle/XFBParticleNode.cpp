@@ -1,40 +1,41 @@
-#include "ParticleSystem.h"
+#include "XFBParticleNode.h"
 #include "Common/Buffer/import.h"
 #include "Common/VAO/import.h"
+#include "Common/TBO/import.h"
 #include "Common/Texture/import.h"
 #include "Common/Shader/import.h"
 #include "Graphic/import.h"
 #include "Common/XFB/TransformFeedback.h"
 
-render::ParticleSystem::ParticleSystem()
+render::XFBParticleNode::XFBParticleNode()
 {
-	_updateXFBObject = CREATE_OBJECT(ParticleUpdateXFbObject);
+	_updateXFBObject = CREATE_OBJECT(XFBUpdateParticle);
 	SAFE_RETAIN(_updateXFBObject);
 
-	_renderXFBObject = CREATE_OBJECT(ParticleRenderXFbObject);
+	_renderXFBObject = CREATE_OBJECT(XFBRenderParticle);
 	SAFE_RETAIN(_renderXFBObject);
 
-	_geometryVBO = CREATE_OBJECT(TextureBuffer);
-	SAFE_RETAIN(_geometryVBO);
+	_geometryTBO = CREATE_OBJECT(TextureBufferObject);
+	SAFE_RETAIN(_geometryTBO);
 
-	_geometryTex = CREATE_OBJECT(Texture);
-	SAFE_RETAIN(_geometryTex);
+	_geometryBuffer = CREATE_OBJECT(TextureBuffer);
+	SAFE_RETAIN(_geometryBuffer);
 
 	_renderVAO = CREATE_OBJECT(VertexArrayObject);
 	SAFE_RETAIN(_renderVAO);
 }
 
-render::ParticleSystem::~ParticleSystem()
+render::XFBParticleNode::~XFBParticleNode()
 {
 	SAFE_RELEASE(_updateXFBObject);
 	SAFE_RELEASE(_renderXFBObject);
 
-	SAFE_RELEASE(_geometryVBO);
-	SAFE_RELEASE(_geometryTex);
+	SAFE_RELEASE(_geometryTBO);
+	SAFE_RELEASE(_geometryBuffer);
 	SAFE_RELEASE(_renderVAO);
 }
 
-bool render::ParticleSystem::init()
+bool render::XFBParticleNode::init()
 {
 	if (!Node::init())
 	{
@@ -48,49 +49,48 @@ bool render::ParticleSystem::init()
 	return true;
 }
 
-void render::ParticleSystem::draw()
+void render::XFBParticleNode::draw()
 {
 	this->renderParticles();
 
 	_frameCount++;
 }
 
-render::ParticleUpdateXFbObject* render::ParticleSystem::getUpdateXFBObject() const
+render::XFBUpdateParticle* render::XFBParticleNode::getUpdateXFBObject() const
 {
 	return _updateXFBObject;
 }
 
-render::ParticleRenderXFbObject* render::ParticleSystem::getRenderXFBObject() const
+render::XFBRenderParticle* render::XFBParticleNode::getRenderXFBObject() const
 {
 	return _renderXFBObject;
 }
 
-void render::ParticleSystem::setParticleCount(int count)
+void render::XFBParticleNode::setParticleCount(int count)
 {
 	_particleCount = count;
 
 	this->notify(NodeNotifyType::PARTICLE);
 }
 
-int render::ParticleSystem::getParticleCount() const
+int render::XFBParticleNode::getParticleCount() const
 {
 	return _particleCount;
 }
 
-void render::ParticleSystem::initParticleSystem()
+void render::XFBParticleNode::initParticleSystem()
 {
 	GLDebug::showError();
 	_updateXFBObject->initXFBObject(_particleCount);
 	GLDebug::showError();
 	_renderXFBObject->initXFBObject(_particleCount);
 	GLDebug::showError();
-	_geometryVBO->setTexture(_geometryTex);
-	_geometryVBO->bindBuffer();
-	_geometryVBO->setBufferData(1024 * 1024 * sizeof(float), BufferDataUsage::DYNAMIC_COPY);
-	_geometryVBO->bindTexture();
-	_geometryVBO->setTexBuffer(TexSizedInternalFormat::RGBA32F);
+	_geometryTBO->setBuffer(_geometryBuffer);
+	_geometryBuffer->setBufferData(1024 * 1024 * sizeof(float), BufferDataUsage::DYNAMIC_COPY);
+	_geometryTBO->bindTexture();
+	_geometryTBO->setTexBuffer(TexSizedInternalFormat::RGBA32F);
 	GLDebug::showError();
-	_renderVAO->setBuffer(_geometryVBO);
+	_renderVAO->setBuffer(_geometryBuffer);
 	_renderVAO->bindVertexArray();
 	_renderVAO->bindBuffer();
 	GLDebug::showError();
@@ -103,7 +103,7 @@ void render::ParticleSystem::initParticleSystem()
 	GLDebug::showError();
 }
 
-void render::ParticleSystem::renderParticles()
+void render::XFBParticleNode::renderParticles()
 {
 	if (_particleCount == 0)
 	{
@@ -113,7 +113,7 @@ void render::ParticleSystem::renderParticles()
 	_renderXFBObject->program->use();
 	_renderXFBObject->doFunc(this);
 	_renderXFBObject->vao->bindVertexArray();
-	_geometryVBO->bindBufferBase(BufferTarget::TRANSFORM_FEEDBACK_BUFFER, 0);
+	_geometryBuffer->bindBufferBase(BufferTarget::TRANSFORM_FEEDBACK_BUFFER, 0);
 	GLDebug::showError();
 	_renderXFBObject->xfbo->bindTransformFeedback();
 	GLDebug::showError();

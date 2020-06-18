@@ -1,5 +1,7 @@
 #include "ShaderManager.h"
 #include "ShaderProgram.h"
+#include "VertexFragmentProgram.h"
+#include "ComputeProgram.h"
 #include "Shader.h"
 
 render::ShaderManager::ShaderManager()
@@ -11,16 +13,16 @@ render::ShaderManager::~ShaderManager()
 	this->clear();
 }
 
-render::ShaderProgram* render::ShaderManager::createShaderProgram(const std::string& vertexFilepath, const std::string& fragFilepath)
+render::VertexFragmentProgram* render::ShaderManager::createVertexFragmentProgram(const std::string& vertexFilepath, const std::string& fragFilepath)
 {
 	auto key = vertexFilepath + fragFilepath;
 	auto it = _shaderPrograms.find(key);
 	if (it != _shaderPrograms.end())
 	{
-		return it->second;
+		return it->second->as<render::VertexFragmentProgram>();
 	}
 
-	ShaderProgram* pProgram = CREATE_OBJECT(ShaderProgram);
+	VertexFragmentProgram* pProgram = CREATE_OBJECT(VertexFragmentProgram);
 	render::Shader* pVertexShader = createShader(ShaderType::VERTEX_SHADER, vertexFilepath);
 	if (!pVertexShader)
 	{
@@ -37,6 +39,33 @@ render::ShaderProgram* render::ShaderManager::createShaderProgram(const std::str
 	pProgram->attachShader(fragShader);
 
 	pProgram->bindFragDataLocation(0, "color");
+	pProgram->link();
+
+	SAFE_RETAIN(pProgram);
+
+	_shaderPrograms[key] = pProgram;
+
+	return pProgram;
+}
+
+render::ComputeProgram* render::ShaderManager::createComputeProgram(const std::string& computeFilepath)
+{
+	auto key = computeFilepath;
+	auto it = _shaderPrograms.find(key);
+	if (it != _shaderPrograms.end())
+	{
+		return it->second->as<render::ComputeProgram>();
+	}
+
+	ComputeProgram* pProgram = CREATE_OBJECT(ComputeProgram);
+	render::Shader* pComputeShader = createShader(ShaderType::COMPUTE_SHADER, computeFilepath);
+	if (!pComputeShader)
+	{
+		return nullptr;
+	}
+
+	pProgram->attachShader(pComputeShader);
+
 	pProgram->link();
 
 	SAFE_RETAIN(pProgram);
@@ -68,7 +97,7 @@ render::Shader* render::ShaderManager::createShader(ShaderType type, const std::
 	}
 
 	sys::String root = fileDatas[filepath];
-
+	std::set<std::string> includedFiles;
 	std::function<void(sys::String& fileData)> pFunc = nullptr;
 	pFunc = [&](sys::String& fileData) {
 
@@ -83,8 +112,15 @@ render::Shader* render::ShaderManager::createShader(ShaderType type, const std::
 			{
 				sys::String subFileData = item.second;
 				pFunc(subFileData);
-
-				fileData = fileData.replace(includeFile, subFileData.getString());
+				if (includedFiles.find(includeFile) == includedFiles.end())
+				{
+					fileData = fileData.replace(includeFile, subFileData.getString());
+					includedFiles.insert(includeFile);
+				}
+				else
+				{
+					fileData = fileData.replace(includeFile, "");
+				}
 			}
 		}
 	};

@@ -29,8 +29,13 @@ namespace render
 			GLfloat *val);
 
 		// @see MemoryBarrierBit
+		// ÄÚ´æÆÁ±Î
 		static void setMemoryBarrier(uint32_t barriers);
+		static void setMemoryBarrier(MemoryBarrierBit barrier);
+
 		// @see MemoryBarrierRegionBit
+		// ÄÚ´æ×éÆÁ±Î
 		static void setMemoryBarrierByRegion(uint32_t barriers);
+		static void setMemoryBarrierByRegion(MemoryBarrierRegionBit barrier);
 	};
 }
