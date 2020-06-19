@@ -8,7 +8,6 @@ render::PariticleNode::PariticleNode()
 
 render::PariticleNode::~PariticleNode()
 {
-	SAFE_DELETE(_scheduler);
 }
 
 bool render::PariticleNode::init()
@@ -22,16 +21,36 @@ bool render::PariticleNode::init()
 		this->updateParticleParameter();
 	});
 
-	//_scheduler = new Scheduler();
+
+	_scheduler->setTarget(this);
 	//_scheduler->setHandler(this, SCHEDULER_DELEGATE_SCHEDULER(PariticleNode::updatePariticle));
-	//this->getActionProxy()->runAction(_scheduler);
+	_scheduler->setHandler([this](float dt) {
+		this->updatePariticle(dt);
+	});
 
 	return true;
 }
 
-float render::PariticleNode::getDelta() const
+void render::PariticleNode::resetPassedTime()
 {
-	return _delta;
+	_passedTime = 0;
+}
+
+float render::PariticleNode::getPassedTime() const
+{
+	return _passedTime;
+}
+
+void render::PariticleNode::registerScheduler()
+{
+	this->unregisterScheduler();
+
+	this->getActionProxy()->runAction(getScheduler());
+}
+
+void render::PariticleNode::unregisterScheduler()
+{
+	this->getActionProxy()->stopAction(getScheduler());
 }
 
 void render::PariticleNode::onPariticleChange()
@@ -46,11 +65,11 @@ void render::PariticleNode::updateParticleParameter()
 
 void render::PariticleNode::updatePariticle(float dt)
 {
-	_delta = dt;
-	this->updateTime(dt);
+	_passedTime = dt;
+	this->update(dt);
 }
 
-void render::PariticleNode::updateTime(float dt)
+void render::PariticleNode::update(float dt)
 {
 
 }

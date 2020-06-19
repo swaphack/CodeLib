@@ -31,11 +31,15 @@ namespace render
 		*	加载渲染着色器文件
 		*/
 		void loadVertexAndFragmentFile(const std::string& vertex, const std::string& fragment, const ShaderProgramNFunc& updateFunc = nullptr);
+
+		void setParticleGroupSize(int size);
+
+		VertexArrayObject* getVAO() const;
 	protected:
 		virtual void draw();
 	protected:
 		// 更新时间
-		virtual void updateTime(float dt);
+		virtual void update(float dt);
 		// 参数改变
 		virtual void updateParticleParameter();
 	private:
@@ -60,5 +64,7 @@ namespace render
 		UniformBuffer* _attractorBuffer = nullptr;
 		// 质量
 		float* _attractorMasses = nullptr;
+		// 组大小，跟shader有关
+		int _particleGroupSize = 512;
 	};
 }

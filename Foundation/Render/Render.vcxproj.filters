@@ -534,6 +534,9 @@
     <ClCompile Include="Common\TBO\TextureBufferObject.cpp">
       <Filter>Common\TBO</Filter>
     </ClCompile>
+    <ClCompile Include="Common\Action\SchedulerProtocol.cpp">
+      <Filter>Common\Action</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Common\Node\import.h">
@@ -1229,6 +1232,9 @@
     </ClInclude>
     <ClInclude Include="Common\TBO\import.h">
       <Filter>Common\TBO</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Action\SchedulerProtocol.h">
+      <Filter>Common\Action</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

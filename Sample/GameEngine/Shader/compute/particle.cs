@@ -26,7 +26,7 @@ void main()
 	for (i = 0; i < 4; i++)
 	{
 		vec3 dist = (attractor[i].xyz - pos.xyz);
-		vel.xyz += dt * dt * attractor[i].w * normalize(dist) / dot(dist, dist) + 10.0);
+		vel.xyz += dt * dt * attractor[i].w * normalize(dist) / (dot(dist, dist) + 10.0);
 	}
 
 	if (pos.w <= 0.0)

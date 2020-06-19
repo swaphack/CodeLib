@@ -1,7 +1,8 @@
 #version 330 core
 
 #include "Shader/core/matrix.vs"
-#include "Shader/core/vertex.vs"
+
+layout(location = 0) in vec4 v_position;
 
 uniform Matrix matrix;
 

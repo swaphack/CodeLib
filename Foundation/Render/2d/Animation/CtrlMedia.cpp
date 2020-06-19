@@ -101,7 +101,7 @@ void CtrlMedia::loadFromURL(const std::string& url, bool defaultSize)
 	_filepath = url;
 
 	SAFE_DELETE(_media);
-	this->stop();
+	//this->stop();
 
 	_media = sys::Loader::loadMedia<sys::MediaFFmpeg>(_filepath);
 	if (!_media)

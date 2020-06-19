@@ -31,8 +31,7 @@ void Scheduler::update(float interval)
 
 void Scheduler::setHandler(Node* target, SCHEDULER_DELEGATE_HANDLER handler)
 {
-	_handler.first = target;
-	_handler.second = handler;
+	_handler = std::make_pair(target, handler);
 }
 
 void render::Scheduler::setHandler(SCHEDULER_FUNC func)

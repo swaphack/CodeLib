@@ -96,6 +96,8 @@ render::Shader* render::ShaderManager::createShader(ShaderType type, const std::
 		return nullptr;
 	}
 
+	PRINT("ShaderManager createShader, filepath :%s\n", filepath.c_str());
+
 	sys::String root = fileDatas[filepath];
 	std::set<std::string> includedFiles;
 	std::function<void(sys::String& fileData)> pFunc = nullptr;

@@ -82,6 +82,7 @@ void render::ComputeParticleNode::loadComputeFile(const std::string& filepath, c
 	SAFE_RELEASE(_computeProgram);
 
 	_computeProgram = G_SHANDER->createComputeProgram(filepath);
+	SAFE_RETAIN(_computeProgram);
 	_computeUpdateFunc = updateFunc;
 }
 
@@ -90,56 +91,83 @@ void render::ComputeParticleNode::loadVertexAndFragmentFile(const std::string& v
 	SAFE_RELEASE(_renderProgram);
 
 	_renderProgram = G_SHANDER->createVertexFragmentProgram(vertex, fragment);
+	SAFE_RETAIN(_renderProgram);
 	_renderUpdateFunc = updateFunc;
+}
+
+void render::ComputeParticleNode::setParticleGroupSize(int size)
+{
+	_particleGroupSize = size;
+}
+
+render::VertexArrayObject* render::ComputeParticleNode::getVAO() const
+{
+	return _renderVAO;
 }
 
 void render::ComputeParticleNode::draw()
 {
+	if (_computeProgram)
 	{
+		GLDebug::showError();
 		_computeProgram->use();
+		GLDebug::showError();
+		_velocityBuffer->bindBuffer();
 		GLTexture::bindImageTexture(0, _velocityBuffer->getBufferID(), 0, false, 0, AccessType::READ_WRITE, InternalImageFormat::RGBA32F);
+		GLDebug::showError();
+		_positionBuffer->bindBuffer();
 		GLTexture::bindImageTexture(1, _positionBuffer->getBufferID(), 0, false, 0, AccessType::READ_WRITE, InternalImageFormat::RGBA32F);
-
+		GLDebug::showError();
 		if (_computeUpdateFunc)
 		{
 			_computeUpdateFunc(this, _computeProgram);
 		}
 
-		_computeProgram->dispatchCompute(getParticleCount(), 1, 1);
+		_computeProgram->dispatchCompute(_particleGroupSize, 1, 1);
 
 		_computeProgram->setMemoryBarrier(MemoryBarrierBit::SHADER_IMAGE_ACCESS_BARRIER_BIT);
 
 		_computeProgram->unuse();
+
+		_velocityBuffer->unbindBuffer();
+		_positionBuffer->unbindBuffer();
+
+		GLDebug::showError();
 	}
 
-
+	if (_renderProgram)
 	{
+		GLDebug::showError();
 		_renderProgram->use();
 		if (_renderUpdateFunc)
 		{
 			_renderUpdateFunc(this, _renderProgram);
 		}
 		_renderVAO->bindVertexArray();
-
+		GLDebug::showError();
 		GLState::enable(EnableMode::BLEND);
 		GLState::setBlendFunc(BlendingFactorSrc::ONE, BlendingFactorDest::ONE);
 		GLBufferObjects::drawArrays(DrawMode::POINTS, 0, getParticleCount());
-
+		GLDebug::showError();
 		GLState::disable(EnableMode::BLEND);
 
+		_renderVAO->unbindBuffer();
+
 		_renderProgram->unuse();
+
+		GLDebug::showError();
 	}
 }
 
-void render::ComputeParticleNode::updateTime(float dt)
+void render::ComputeParticleNode::update(float dt)
 {
 	int count = 32;
-	int size = 32 * 4 * sizeof(float);
-
+	int size = count * 4 * sizeof(float);
+	GLDebug::showError();
 	_attractorBuffer->bindBuffer();
 
 	float* positions = (float*)_attractorBuffer->getBufferRange(0, size, GL_MAP_WRITE_BIT | GL_MAP_INVALIDATE_BUFFER_BIT);
-	for (int i = 0; i < getParticleCount(); i++)
+	for (int i = 0; i < count; i++)
 	{
 		positions[i * 4 + 0] = sinf(dt * (float)(i + 4) * 7.5f * 20.0f) * 50.0f;
 		positions[i * 4 + 1] = cosf(dt * (float)(i + 7) * 3.9f * 20.0f) * 50.0f;
@@ -149,6 +177,9 @@ void render::ComputeParticleNode::updateTime(float dt)
 	}
 	_attractorBuffer->unmapBuffer();
 	_attractorBuffer->unbindBuffer();
+	GLDebug::showError();
+
+	GLDebug::showError();
 }
 
 void render::ComputeParticleNode::updateParticleParameter()
@@ -157,9 +188,11 @@ void render::ComputeParticleNode::updateParticleParameter()
 	{
 		return;
 	}
-
+	GLDebug::showError();
 	int size = getParticleCount() * 4 * sizeof(float);
 
+	//_computeProgram->use();
+	GLDebug::showError();
 	_renderVAO->bindVertexArray();
 	_positionBuffer->bindBuffer();
 	_positionBuffer->setBufferData(size, BufferDataUsage::DYNAMIC_COPY);
@@ -179,23 +212,31 @@ void render::ComputeParticleNode::updateParticleParameter()
 		vap->setVertexAttribPointer(4, VertexAttribPointerType::FLOAT, 0);
 		vap->enableVertexAttribArray();
 	}
-
+	GLDebug::showError();
 	_positionBuffer->unmapBuffer();
 	_positionBuffer->unbindBuffer();
 
 	_renderVAO->unbindVertexArray();
+	GLDebug::showError();
 
+	//////////////////////////////////////////////////////////////////////////
 	_velocityBuffer->bindBuffer();
 	_velocityBuffer->setBufferData(size, BufferDataUsage::DYNAMIC_COPY);
 
 	float* velocity = (float*)_velocityBuffer->getBufferRange(0, size, GL_MAP_WRITE_BIT | GL_MAP_INVALIDATE_BUFFER_BIT);
 	for (int i = 0; i < getParticleCount(); i++)
 	{
-		velocity[i * 4 + 0] = sys::Random::getNumber(-1, 1);
+		velocity[i * 4 + 0] = sys::Random::getNumber(-1.0f, 1.0f);
 		velocity[i * 4 + 1] = 0;
 		velocity[i * 4 + 2] = 0;
 		velocity[i * 4 + 3] = 0;
 	}
 	_velocityBuffer->unmapBuffer();
 	_velocityBuffer->unbindBuffer();
+
+	GLDebug::showError();
+
+	//_computeProgram->unuse();
+
+	GLDebug::showError();
 }

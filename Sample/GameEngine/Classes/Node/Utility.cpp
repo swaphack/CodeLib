@@ -82,9 +82,9 @@ void Utility::bindProgramAttrib(render::ShaderProgram* program)
 		return;
 	}
 
-	program->bindAttrib((uint32_t)VertexDataType::POSITION, "vPosition");
-	program->bindAttrib((uint32_t)VertexDataType::COLOR, "vColor");
-	program->bindAttrib((uint32_t)VertexDataType::UV, "vUV");
+	program->bindAttrib((uint32_t)VertexDataType::POSITION, "v_position");
+	program->bindAttrib((uint32_t)VertexDataType::COLOR, "v_color");
+	program->bindAttrib((uint32_t)VertexDataType::UV, "v_texcoord");
 
 	GLDebug::showError();
 }

@@ -1,15 +1,16 @@
 #pragma once
 
 #include "2d/UI/CtrlWidget.h"
+#include "Common/Action/SchedulerProtocol.h"
 
 namespace render
 {
 	class CtrlFrame;
-	class Scheduler;
 
 	// 动画控件
 	class CtrlAnimation : 
-		public CtrlWidget
+		public CtrlWidget,
+		public SchedulerProtocol
 	{
 	public:
 		CtrlAnimation();
@@ -17,43 +18,53 @@ namespace render
 	public:
 		virtual bool init();
 	public:
-		// 开始
-		virtual void start();
-		// 恢复
-		virtual void pause();
-		// 暂停
-		virtual void resume();
-		// 结束
-		virtual void stop();
 		// 定时更新事件,不要修改
 		void updateAnimation(float interval);
 	public:
-		// 设置速度系数
+		/**
+		*	设置速度系数
+		*/ 
 		void setSpeedRatio(float ratio);
-		// 获取速度系数
+		/**
+		*	获取速度系数
+		*/ 
 		float getSpeedRatio();
-		// 设置帧率
+		/**
+		*	设置帧率
+		*/ 
 		void setFrameRate(float ratio);
-		// 获取帧率
+		/**
+		*	获取帧率
+		*/ 
 		float getFrameRate();
-		// 设置当前帧
+		/**
+		*	设置当前帧
+		*/ 
 		virtual void setFrame(int frame);
-		// 获取当前帧
+		/**
+		*	获取当前帧
+		*/ 
 		int getFrame();
-		// 获取当前动画
+		/**
+		*	获取当前动画
+		*/ 
 		CtrlFrame* getAnimationFrame();
 	protected:
-		// 添加定时器
-		void registerScheduler();
-		// 移除定时器
-		void unregisterScheduler();
-		// 定时更新事件
-		virtual void updateSelf(float interval);
+		/**
+		*	添加定时器
+		*/
+		virtual void registerScheduler();
+		/**
+		*	移除定时器
+		*/
+		virtual void unregisterScheduler();
+		/**
+		*	定时更新事件
+		*/
+		virtual void update(float interval);
 	protected:
 		// 图片帧
 		CtrlFrame* _ctrlFrame = nullptr;
-		// 定时器
-		Scheduler* _scheduler = nullptr;
 	private:
 		// 速度系数
 		float _speedRatio;

@@ -26,6 +26,8 @@ namespace render
 	protected:
 		// 绘制,重写
 		virtual void draw();
+
+		virtual void update(float dt);
 	public:
 		/**
 		*	更新回馈

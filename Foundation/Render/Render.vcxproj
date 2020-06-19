@@ -109,6 +109,7 @@
     <ClCompile Include="Common\Action\ExtAction.cpp" />
     <ClCompile Include="Common\Action\IntervalAction.cpp" />
     <ClCompile Include="Common\Action\Scheduler.cpp" />
+    <ClCompile Include="Common\Action\SchedulerProtocol.cpp" />
     <ClCompile Include="Common\Audio\AudioProtocol.cpp" />
     <ClCompile Include="Common\Audio\AudioManager.cpp" />
     <ClCompile Include="Common\Audio\CtrlAudioGeometry.cpp" />
@@ -305,6 +306,7 @@
     <ClInclude Include="Common\Action\IntervalAction.h" />
     <ClInclude Include="Common\Action\ExtAction.h" />
     <ClInclude Include="Common\Action\Scheduler.h" />
+    <ClInclude Include="Common\Action\SchedulerProtocol.h" />
     <ClInclude Include="Common\Audio\AudioProtocol.h" />
     <ClInclude Include="Common\Audio\AudioManager.h" />
     <ClInclude Include="Common\Audio\CtrlAudioSourceClip.h" />

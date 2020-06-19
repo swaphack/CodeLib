@@ -17,39 +17,26 @@ CtrlAnimation::CtrlAnimation()
 
 CtrlAnimation::~CtrlAnimation()
 {
-	this->unregisterScheduler();
-	SAFE_DELETE(_scheduler);
 }
 
-void render::CtrlAnimation::start()
+bool CtrlAnimation::init()
 {
-	this->registerScheduler();
-}
-
-void render::CtrlAnimation::pause()
-{
-	if (_scheduler)
+	if (!CtrlWidget::init())
 	{
-		_scheduler->pause();
+		return false;
 	}
-}
 
-void render::CtrlAnimation::resume()
-{
-	if (_scheduler)
-	{
-		_scheduler->resume();
-	}
-}
+	_scheduler->setTarget(this);
+	_scheduler->setHandler([this](float dt) {
+		this->updateAnimation(dt);
+		});
 
-void render::CtrlAnimation::stop()
-{
-	this->unregisterScheduler();
+	return true;
 }
 
 void render::CtrlAnimation::updateAnimation(float interval)
 {
-	this->updateSelf(interval);
+	this->update(interval);
 }
 
 void CtrlAnimation::setSpeedRatio(float ratio)
@@ -94,23 +81,15 @@ void render::CtrlAnimation::registerScheduler()
 {
 	this->unregisterScheduler();
 
-	if (_scheduler == nullptr)
-	{
-		_scheduler = new Scheduler();
-		_scheduler->setHandler(this, SCHEDULER_DELEGATE_SCHEDULER(CtrlAnimation::updateAnimation));
-	}
-	this->getActionProxy()->runAction(_scheduler);
+	this->getActionProxy()->runAction(getScheduler());
 }
 
 void render::CtrlAnimation::unregisterScheduler()
 {
-	if (_scheduler)
-	{
-		this->getActionProxy()->stopAction(_scheduler);
-	}
+	this->getActionProxy()->stopAction(getScheduler());
 }
 
-void CtrlAnimation::updateSelf(float interval)
+void CtrlAnimation::update(float interval)
 {
 	_duration += interval * getSpeedRatio();
 	if (_duration > getFrameRate())
@@ -122,13 +101,4 @@ void CtrlAnimation::updateSelf(float interval)
 	}
 }
 
-bool CtrlAnimation::init()
-{
-	if (!CtrlWidget::init())
-	{
-		return false;
-	}
-	
 
-	return true;
-}

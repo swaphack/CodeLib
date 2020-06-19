@@ -56,6 +56,11 @@ void render::XFBParticleNode::draw()
 	_frameCount++;
 }
 
+void render::XFBParticleNode::update(float dt)
+{
+
+}
+
 render::XFBUpdateParticle* render::XFBParticleNode::getUpdateXFBObject() const
 {
 	return _updateXFBObject;
