@@ -26,7 +26,7 @@ void TestImageNode::testImage()
 {
 	auto frameSize = Canvas::getInstance()->getView()->getFrameSize();
 	
-
+	if (0)
 	{
 		std::string filepath = "Resource/Image/world.jpg";
 
@@ -39,6 +39,7 @@ void TestImageNode::testImage()
 		Utility::updateNodeShader(pImage);
 	}
 
+	if (1)
 	{
 		std::string filepath = "Resource/Image/2k_earth_specular_map.tif";
 

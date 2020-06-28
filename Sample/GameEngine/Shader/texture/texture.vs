@@ -12,4 +12,6 @@ void main()
 	vec4 pos = vec4(v_position, 1.0);
 
 	gl_Position = get_mvp(matrix) * pos;
+
+	fragTexcoord = v_texcoord;
 }
