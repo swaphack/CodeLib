@@ -160,6 +160,9 @@
     <Filter Include="tinyxml2">
       <UniqueIdentifier>{35c49182-bb85-4eec-ae11-f9bcf4fce69b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="tiff">
+      <UniqueIdentifier>{288b0ed1-90c0-49ec-912e-d8ba2a994e54}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Lib\include\png\png.h">
@@ -2112,6 +2115,21 @@
     </ClInclude>
     <ClInclude Include="..\..\Lib\include\freetype\freetype\internal\services\svwinfnt.h">
       <Filter>freetype\freetype\internal\services</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Lib\include\tiff\tif_config.h">
+      <Filter>tiff</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Lib\include\tiff\tiff.h">
+      <Filter>tiff</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Lib\include\tiff\tiffconf.h">
+      <Filter>tiff</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Lib\include\tiff\tiffio.h">
+      <Filter>tiff</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Lib\include\tiff\tiffvers.h">
+      <Filter>tiff</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

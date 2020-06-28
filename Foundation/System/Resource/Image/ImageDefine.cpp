@@ -32,5 +32,6 @@ void sys::ImageDefine::setFilePath(const std::string& _filename)
 	else if (strFormat == "jpg") this->format = ImageFormat::JPEG;
 	else if (strFormat == "tga") this->format = ImageFormat::TARGA;
 	else if (strFormat == "bmp") this->format = ImageFormat::BMP;
+	else if (strFormat == "tif") this->format = ImageFormat::TIFF;
 	else this->format = ImageFormat::NONE;
 }

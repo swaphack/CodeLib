@@ -10,7 +10,7 @@ TestComputeShader::~TestComputeShader()
 
 }
 
-void TestComputeShader::testFunc()
+void TestComputeShader::initNodes()
 {
 	this->testParticleNode();
 }
@@ -66,5 +66,9 @@ void TestComputeShader::testParticleNode()
 	particleNode->start();
 
 	this->addChild(particleNode);
+}
+
+void TestComputeShader::testCalulate()
+{
 }
 

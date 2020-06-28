@@ -16,23 +16,40 @@ TestImageNode::~TestImageNode()
 
 }
 
-void TestImageNode::testFunc()
+void TestImageNode::initNodes()
 {
-	//testImage();
-	testPointSprite();
+	testImage();
+	//testPointSprite();
 }
 
 void TestImageNode::testImage()
 {
 	auto frameSize = Canvas::getInstance()->getView()->getFrameSize();
+	
 
-	std::string filepath = "Resource/Image/world.jpg";
+	{
+		std::string filepath = "Resource/Image/world.jpg";
 
-	CtrlImage* pImage = CREATE_NODE(CtrlImage);
-	pImage->setImagePath(filepath);
-	pImage->setAnchorPoint(Vector2());
-	pImage->setVolume(frameSize);
-	this->addChild(pImage);
+		CtrlImage* pImage = CREATE_NODE(CtrlImage);
+		pImage->setImagePath(filepath);
+		pImage->setAnchorPoint(0.5f, 0.5f);
+		pImage->setPosition(512, 384);
+		pImage->setVolume(frameSize);
+		this->addChild(pImage);
+		Utility::updateNodeShader(pImage);
+	}
+
+	{
+		std::string filepath = "Resource/Image/2k_earth_specular_map.tif";
+
+		CtrlImage* pImage = CREATE_NODE(CtrlImage);
+		pImage->setImagePath(filepath);
+		pImage->setAnchorPoint(0.5f, 0.5f);
+		pImage->setPosition(512, 384);
+		pImage->setVolume(512, 384);
+		this->addChild(pImage);
+		Utility::updateNodeShader(pImage);
+	}
 }
 
 void TestImageNode::testDifferentImages()

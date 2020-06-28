@@ -8,6 +8,7 @@
 #include "Common/Tool/Tool.h"
 #include "Common/Texture/import.h"
 #include "Common/XFB/TransformFeedback.h"
+#include "XFBParticleNode.h"
 
 render::XFBParticle::XFBParticle()
 {

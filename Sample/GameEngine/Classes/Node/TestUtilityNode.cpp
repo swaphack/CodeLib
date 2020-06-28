@@ -15,7 +15,7 @@ TestUtilityNode::~TestUtilityNode()
 	SAFE_DELETE(_httpDownload);
 }
 
-void TestUtilityNode::testFunc()
+void TestUtilityNode::initNodes()
 {
 
 }

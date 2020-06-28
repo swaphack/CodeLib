@@ -16,7 +16,7 @@ TestLayoutNode::~TestLayoutNode()
 
 }
 
-void TestLayoutNode::testFunc()
+void TestLayoutNode::initNodes()
 {
 	this->testLayout();
 }

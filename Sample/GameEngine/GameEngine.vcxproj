@@ -92,8 +92,8 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>freeglut.lib;glew32d.lib;opengl32.lib;zlib.lib;libpng16.lib;freetype263.lib;avutil.lib;avcodec.lib;avdevice.lib;avfilter.lib;avformat.lib;swscale.lib;swresample.lib;postproc.lib;libjpeg.lib;fmod_vc.lib;System.lib;Text.lib;Render.lib;UI.lib;Web.lib;Math.lib;libobj.lib;lib3ds.lib;libfbxsdk-md.lib;wininet.lib;libxml2-md.lib;zlib-md.lib;libtga.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>../../Lib/lib/freetype;../../Lib/lib/jpeg;../../Lib/lib/png;../../Lib/lib/zlib;../../Lib/lib/fmod;../../Lib/lib/3ds;../../Lib/lib/obj;../../Lib/lib/fbx;../../Lib/lib/tga;../../Lib/lib/freeglut;../../Lib/lib/glew;../../Lib/lib/ffmpeg;$(OutDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>freeglut.lib;glew32d.lib;opengl32.lib;zlib.lib;libpng16.lib;freetype263.lib;avutil.lib;avcodec.lib;avdevice.lib;avfilter.lib;avformat.lib;swscale.lib;swresample.lib;postproc.lib;libjpeg.lib;fmod_vc.lib;System.lib;Text.lib;Render.lib;UI.lib;Web.lib;Math.lib;libobj.lib;lib3ds.lib;libfbxsdk-md.lib;wininet.lib;libxml2-md.lib;zlib-md.lib;libtga.lib;libtiff.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>../../Lib/lib/freetype;../../Lib/lib/jpeg;../../Lib/lib/png;../../Lib/lib/zlib;../../Lib/lib/fmod;../../Lib/lib/3ds;../../Lib/lib/obj;../../Lib/lib/fbx;../../Lib/lib/tga;../../Lib/lib/freeglut;../../Lib/lib/glew;../../Lib/lib/tiff;../../Lib/lib/ffmpeg;$(OutDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -146,6 +146,7 @@
     <ClCompile Include="Classes\Node\TestComputeShader.cpp" />
     <ClCompile Include="Classes\Node\TestFragmentNode.cpp" />
     <ClCompile Include="Classes\Node\TestFrameBufferNode.cpp" />
+    <ClCompile Include="Classes\Node\TestLightingNode.cpp" />
     <ClCompile Include="Classes\Node\TestPostProcessing.cpp" />
     <ClCompile Include="Classes\Node\TestTextureNode.cpp" />
     <ClCompile Include="Classes\Node\Utility.cpp" />
@@ -153,7 +154,7 @@
     <ClCompile Include="Classes\Node\TestBufferNode.cpp" />
     <ClCompile Include="Classes\Node\TestDrawNode.cpp" />
     <ClCompile Include="Classes\Node\TestEnvironmentNode.cpp" />
-    <ClCompile Include="Classes\Node\TestFuncNode.cpp" />
+    <ClCompile Include="Classes\Node\TestNode.cpp" />
     <ClCompile Include="Classes\Node\TestImageNode.cpp" />
     <ClCompile Include="Classes\Node\TestLayoutNode.cpp" />
     <ClCompile Include="Classes\Node\TestMediaNode.cpp" />
@@ -171,6 +172,7 @@
     <ClInclude Include="Classes\Node\TestComputeShader.h" />
     <ClInclude Include="Classes\Node\TestEnvironmentNode.h" />
     <ClInclude Include="Classes\Node\TestFrameBufferNode.h" />
+    <ClInclude Include="Classes\Node\TestLightingNode.h" />
     <ClInclude Include="Classes\Node\TestPostProcessing.h" />
     <ClInclude Include="Classes\Node\TestTextureNode.h" />
     <ClInclude Include="Classes\Node\Utility.h" />
@@ -178,7 +180,7 @@
     <ClInclude Include="Classes\Node\TestBufferNode.h" />
     <ClInclude Include="Classes\Node\TestDrawNode.h" />
     <ClInclude Include="Classes\Node\TestFragmentNode.h" />
-    <ClInclude Include="Classes\Node\TestFuncNode.h" />
+    <ClInclude Include="Classes\Node\TestNode.h" />
     <ClInclude Include="Classes\Node\TestImageNode.h" />
     <ClInclude Include="Classes\Node\TestLayoutNode.h" />
     <ClInclude Include="Classes\Node\TestMediaNode.h" />

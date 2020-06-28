@@ -1,14 +1,14 @@
 #pragma once
 
-#include "TestFuncNode.h"
+#include "TestNode.h"
 
-class TestTextureNode : public TestFuncNode
+class TestTextureNode : public TestNode
 {
 public:
 	TestTextureNode();
 	virtual ~TestTextureNode();
 protected:
-	virtual void testFunc();
+	virtual void initNodes();
 private:
 	void testMultiTexture();
 };

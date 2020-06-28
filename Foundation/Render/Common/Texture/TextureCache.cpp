@@ -196,6 +196,10 @@ sys::ImageDetail* render::TextureCache::loadImageDetail(const sys::ImageDefine& 
 	{
 		image = sys::Loader::loadImage<sys::ImageBMP>(imageDefine.filepath);
 	}
+	else if (imageDefine.format == sys::ImageFormat::TIFF)
+	{
+		image = sys::Loader::loadImage<sys::ImageTIFF>(imageDefine.filepath);
+	}
 
 	if (image == nullptr)
 	{

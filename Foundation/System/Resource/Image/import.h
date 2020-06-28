@@ -7,3 +7,4 @@
 #include "ImageJPEG.h"
 #include "ImagePNG.h"
 #include "ImageTarga.h"
+#include "ImageTIFF.h"

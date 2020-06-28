@@ -11,7 +11,7 @@ TestFragmentNode::~TestFragmentNode()
 {
 }
 
-void TestFragmentNode::testFunc()
+void TestFragmentNode::initNodes()
 {
 	this->testStencil();
 }

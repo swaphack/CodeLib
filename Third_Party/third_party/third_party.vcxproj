@@ -719,6 +719,11 @@
     <ClInclude Include="..\..\Lib\include\sqlite\sqlite3ext.h" />
     <ClInclude Include="..\..\Lib\include\tga\targa.h" />
     <ClInclude Include="..\..\Lib\include\third_party.h" />
+    <ClInclude Include="..\..\Lib\include\tiff\tiff.h" />
+    <ClInclude Include="..\..\Lib\include\tiff\tiffconf.h" />
+    <ClInclude Include="..\..\Lib\include\tiff\tiffio.h" />
+    <ClInclude Include="..\..\Lib\include\tiff\tiffvers.h" />
+    <ClInclude Include="..\..\Lib\include\tiff\tif_config.h" />
     <ClInclude Include="..\..\Lib\include\tinyxml2\tinyxml2.h" />
   </ItemGroup>
   <ItemGroup>

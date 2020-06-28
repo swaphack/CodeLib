@@ -1,14 +1,14 @@
 #pragma once
 
-#include "TestFuncNode.h"
+#include "TestNode.h"
 
-class TestPostProcessing : public TestFuncNode
+class TestPostProcessing : public TestNode
 {
 public:
 	TestPostProcessing();
 	virtual ~TestPostProcessing();
 protected:
-	virtual void testFunc();
+	virtual void initNodes();
 private:
 	void testSimplePostProcessing();
 

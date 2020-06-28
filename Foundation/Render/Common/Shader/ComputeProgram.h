@@ -28,9 +28,13 @@ namespace render
 		*	把缓存数据发送到计算管线上
 		*/
 		void dispatchBuffer(const DispatchIndirectBuffer* buffer);
-
+		/**
+		*	设置内存屏障类型
+		*/
 		void setMemoryBarrier(MemoryBarrierBit barrier);
-
+		/**
+		*	设置内存屏障类型
+		*/
 		void setMemoryBarrier(uint32_t barriers);
 	public:
 		/**

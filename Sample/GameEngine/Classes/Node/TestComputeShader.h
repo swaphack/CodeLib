@@ -1,16 +1,18 @@
 #pragma once
 
-#include "TestFuncNode.h"
+#include "TestNode.h"
 
-class TestComputeShader : public TestFuncNode
+class TestComputeShader : public TestNode
 {
 public:
 	TestComputeShader();
 	virtual ~TestComputeShader();
 protected:
-	virtual void testFunc();
+	virtual void initNodes();
 private:
 	void testSimpleComputeShader();
 
 	void testParticleNode();
+
+	void testCalulate();
 };

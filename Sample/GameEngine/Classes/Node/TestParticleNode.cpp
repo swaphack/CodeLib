@@ -12,7 +12,7 @@ TestParticleNode::~TestParticleNode()
 
 }
 
-void TestParticleNode::testFunc()
+void TestParticleNode::initNodes()
 {
 	testParticle();
 }

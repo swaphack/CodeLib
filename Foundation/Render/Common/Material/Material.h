@@ -44,6 +44,7 @@ namespace render
 		VIEW_MATRIX,
 		// 模型矩阵
 		MODEL_VIEW,
+
 		// 纹理
 		TEXTURE0,
 		// 纹理
@@ -108,6 +109,7 @@ namespace render
 		TEXTURE30,
 		// 纹理
 		TEXTURE31,
+
 		// 材质环境参数
 		MATERIAL_COLOR_AMBIENT,
 		// 材质漫射参数
@@ -122,6 +124,7 @@ namespace render
 		MATERIAL_TEXTURE_SPECULAR,
 		// 材质亮度参数
 		MATERIAL_SHININESS,
+
 		// 光源颜色参数
 		LIGHT_COLOR,
 		// 光源颜色参数
@@ -132,6 +135,18 @@ namespace render
 		LIGHT_SPECULAR,
 		// 光源位置参数
 		LIGHT_POSITION,
+
+		// 光源颜色参数
+		LIGHT_COLORS,
+		// 光源颜色参数
+		LIGHT_AMBIENTS,
+		// 光源颜色参数
+		LIGHT_DIFFUSES,
+		// 光源颜色参数
+		LIGHT_SPECULARS,
+		// 光源位置参数
+		LIGHT_POSITIONS,
+
 		// 摄像机位置
 		VIEW_POSITION,
 	};
@@ -216,6 +231,18 @@ namespace render
 
 		void endUpdateShaderUniformValue(Materials* mats);
 		void endUpdateShaderVertexValue(Mesh* pMesh);
+	protected:
+		// 更新矩阵
+		void updateMVPMatrixUniformValue(Node* node);
+		// 更新单色光源，距离最近
+		void updateNearestLightUniformValue(Node* node);
+		// 更新所有光源
+		void updateAllLightsUniformValue();
+		// 更新材质
+		void updateMaterialUniformValue(Materials* mats);
+		// 更新纹理
+		void updateTexturesUnifromValue(Materials* mats);
+
 	protected:
 		void runProgramFunc();
 	private:

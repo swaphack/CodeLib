@@ -547,6 +547,9 @@
     <ClInclude Include="Resource\Loader.h">
       <Filter>Resource</Filter>
     </ClInclude>
+    <ClInclude Include="Resource\Image\ImageTIFF.h">
+      <Filter>Resource\Image</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Framework\Application.cpp">
@@ -839,6 +842,9 @@
     </ClCompile>
     <ClCompile Include="Light\ColorSample.cpp">
       <Filter>Light</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource\Image\ImageTIFF.cpp">
+      <Filter>Resource\Image</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

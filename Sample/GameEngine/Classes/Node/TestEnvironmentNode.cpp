@@ -10,7 +10,7 @@ TestEnvironmentNode::~TestEnvironmentNode()
 {
 }
 
-void TestEnvironmentNode::testFunc()
+void TestEnvironmentNode::initNodes()
 {
 	this->testCamera();
 
@@ -100,7 +100,6 @@ void TestEnvironmentNode::testCamera()
 	{
 		return;
 	}
-
 	
 	auto size = Tool::getGLViewSize();
 

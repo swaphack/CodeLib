@@ -14,7 +14,7 @@ TestDrawNode::~TestDrawNode()
 
 }
 
-void TestDrawNode::testFunc()
+void TestDrawNode::initNodes()
 {
 	testDrawNode();
 }

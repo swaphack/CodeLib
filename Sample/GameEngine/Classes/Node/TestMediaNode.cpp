@@ -12,7 +12,7 @@ TestMediaNode::~TestMediaNode()
 
 }
 
-void TestMediaNode::testFunc()
+void TestMediaNode::initNodes()
 {
 	testMedia();
 }

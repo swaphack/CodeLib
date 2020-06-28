@@ -15,7 +15,7 @@ TestModelNode::~TestModelNode()
 
 }
 
-void TestModelNode::testFunc()
+void TestModelNode::initNodes()
 {
 	//this->testCubeModel();
 	this->testCubeMap();

@@ -13,6 +13,7 @@ namespace sys
 		JPEG,	// jpg
 		TARGA,	// tga
 		BMP,	// bmp
+		TIFF,	// tif
 	};
 
 	// 图片数据描述结构

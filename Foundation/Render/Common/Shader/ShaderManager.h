@@ -21,11 +21,11 @@ namespace render
 		virtual ~ShaderManager();
 	public:
 		/**
-		*	创建shader program
+		*	创建顶点片元 program
 		*/
 		VertexFragmentProgram* createVertexFragmentProgram(const std::string& vertexFilepath, const std::string& fragFilepath);
 		/**
-		*	创建shader program
+		*	创建计算 program
 		*/
 		ComputeProgram* createComputeProgram(const std::string& computeFilepath);
 		/**

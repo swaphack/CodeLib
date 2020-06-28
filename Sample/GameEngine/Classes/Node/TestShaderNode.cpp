@@ -14,7 +14,7 @@ TestShaderNode::~TestShaderNode()
 
 }
 
-void TestShaderNode::testFunc()
+void TestShaderNode::initNodes()
 {
 	this->addLight();
 	//this->testImageShader();

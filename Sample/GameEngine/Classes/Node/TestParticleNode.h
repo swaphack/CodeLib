@@ -1,14 +1,14 @@
 #pragma once
 
-#include "TestFuncNode.h"
+#include "TestNode.h"
 
-class TestParticleNode : public TestFuncNode
+class TestParticleNode : public TestNode
 {
 public:
 	TestParticleNode();
 	virtual ~TestParticleNode();
 protected:
-	virtual void testFunc();
+	virtual void initNodes();
 private:
 	void testParticle();
 

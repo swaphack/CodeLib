@@ -12,7 +12,7 @@ TestTextureNode::~TestTextureNode()
 
 }
 
-void TestTextureNode::testFunc()
+void TestTextureNode::initNodes()
 {
 	this->testMultiTexture();
 }

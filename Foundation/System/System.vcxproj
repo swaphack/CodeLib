@@ -166,6 +166,7 @@
     <ClInclude Include="Resource\Image\ImageJPEG.h" />
     <ClInclude Include="Resource\Image\ImagePNG.h" />
     <ClInclude Include="Resource\Image\ImageTarga.h" />
+    <ClInclude Include="Resource\Image\ImageTIFF.h" />
     <ClInclude Include="Resource\Image\import.h" />
     <ClInclude Include="Resource\import.h" />
     <ClInclude Include="Resource\IResource.h" />
@@ -283,6 +284,7 @@
     <ClCompile Include="Resource\Image\ImageJPEG.cpp" />
     <ClCompile Include="Resource\Image\ImagePNG.cpp" />
     <ClCompile Include="Resource\Image\ImageTarga.cpp" />
+    <ClCompile Include="Resource\Image\ImageTIFF.cpp" />
     <ClCompile Include="Resource\LocalResource.cpp" />
     <ClCompile Include="Resource\Media\AudioDetail.cpp" />
     <ClCompile Include="Resource\Media\MediaDetail.cpp" />

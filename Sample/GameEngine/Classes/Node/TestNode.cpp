@@ -1,17 +1,17 @@
-#include "TestFuncNode.h"
+#include "TestNode.h"
 
 using namespace render;
-TestFuncNode::TestFuncNode()
+TestNode::TestNode()
 {
 
 }
 
-TestFuncNode::~TestFuncNode()
+TestNode::~TestNode()
 {
 
 }
 
-bool TestFuncNode::init()
+bool TestNode::init()
 {
 	if (!Node::init())
 	{
@@ -23,12 +23,12 @@ bool TestFuncNode::init()
 	this->setPosition(math::Vector2(0, 0));
 	this->setVolume(size);
 
-	this->testFunc();
+	this->initNodes();
 
 	return true;
 }
 
-void TestFuncNode::testFunc()
+void TestNode::initNodes()
 {
 
 }

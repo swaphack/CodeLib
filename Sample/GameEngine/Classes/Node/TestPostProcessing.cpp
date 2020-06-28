@@ -11,7 +11,7 @@ TestPostProcessing::~TestPostProcessing()
 
 }
 
-void TestPostProcessing::testFunc()
+void TestPostProcessing::initNodes()
 {
 	this->testImage();
 

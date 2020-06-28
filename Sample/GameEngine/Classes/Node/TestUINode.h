@@ -1,14 +1,14 @@
 #pragma once
 
-#include "TestFuncNode.h"
+#include "TestNode.h"
 
-class TestUINode : public TestFuncNode
+class TestUINode : public TestNode
 {
 public:
 	TestUINode();
 	virtual ~TestUINode();
 protected:
-	virtual void testFunc();
+	virtual void initNodes();
 private:
 	void testEditBox();
 

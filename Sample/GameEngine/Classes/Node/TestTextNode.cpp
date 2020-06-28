@@ -14,7 +14,7 @@ TestTextNode::~TestTextNode()
 	
 }
 
-void TestTextNode::testFunc()
+void TestTextNode::initNodes()
 {
 	this->testTimeText();
 	this->testChineseText();

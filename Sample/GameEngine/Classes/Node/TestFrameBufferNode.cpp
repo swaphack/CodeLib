@@ -12,7 +12,7 @@ TestFrameBufferNode::~TestFrameBufferNode()
 
 }
 
-void TestFrameBufferNode::testFunc()
+void TestFrameBufferNode::initNodes()
 {
 }
 

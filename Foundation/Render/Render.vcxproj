@@ -148,6 +148,8 @@
     <ClCompile Include="Common\FrameRender\FrameBuffer.cpp" />
     <ClCompile Include="Common\FrameRender\RenderBuffer.cpp" />
     <ClCompile Include="Common\FrameRender\RenderBufferBase.cpp" />
+    <ClCompile Include="Common\GPU\Calculator.cpp" />
+    <ClCompile Include="Common\GPU\GPUComputeObject.cpp" />
     <ClCompile Include="Common\Input\KeyboardManager.cpp" />
     <ClCompile Include="Common\Input\KeyChar.cpp" />
     <ClCompile Include="Common\Input\MouseManager.cpp" />
@@ -351,6 +353,8 @@
     <ClInclude Include="Common\FrameRender\FrameBuffer.h" />
     <ClInclude Include="Common\FrameRender\RenderBuffer.h" />
     <ClInclude Include="Common\FrameRender\RenderBufferBase.h" />
+    <ClInclude Include="Common\GPU\Calculator.h" />
+    <ClInclude Include="Common\GPU\GPUComputeObject.h" />
     <ClInclude Include="Common\GPU\import.h" />
     <ClInclude Include="Common\import.h" />
     <ClInclude Include="Common\Input\import.h" />

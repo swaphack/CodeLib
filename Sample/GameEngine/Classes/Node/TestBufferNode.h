@@ -1,12 +1,12 @@
 #pragma once
 
-#include "TestFuncNode.h"
+#include "TestNode.h"
 
-class TestBufferNode : public TestFuncNode
+class TestBufferNode : public TestNode
 {
 public:
 	TestBufferNode();
 	virtual ~TestBufferNode();
 protected:
-	virtual void testFunc();
+	virtual void initNodes();
 };

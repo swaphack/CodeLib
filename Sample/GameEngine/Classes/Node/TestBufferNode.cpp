@@ -12,7 +12,7 @@ TestBufferNode::~TestBufferNode()
 
 }
 
-void TestBufferNode::testFunc()
+void TestBufferNode::initNodes()
 {
 
 }

@@ -1,14 +1,14 @@
 #pragma once
 
-#include "TestFuncNode.h"
+#include "TestNode.h"
 
-class TestLayoutNode : public TestFuncNode
+class TestLayoutNode : public TestNode
 {
 public:
 	TestLayoutNode();
 	virtual ~TestLayoutNode();
 protected:
-	virtual void testFunc();
+	virtual void initNodes();
 private:
 	void testLayout();
 };

@@ -15,7 +15,7 @@ TestUINode::~TestUINode()
 
 }
 
-void TestUINode::testFunc()
+void TestUINode::initNodes()
 {
 	//this->testScissor();
 

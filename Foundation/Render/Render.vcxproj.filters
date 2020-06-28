@@ -537,6 +537,12 @@
     <ClCompile Include="Common\Action\SchedulerProtocol.cpp">
       <Filter>Common\Action</Filter>
     </ClCompile>
+    <ClCompile Include="Common\GPU\Calculator.cpp">
+      <Filter>Common\GPU</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\GPU\GPUComputeObject.cpp">
+      <Filter>Common\GPU</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Common\Node\import.h">
@@ -1235,6 +1241,12 @@
     </ClInclude>
     <ClInclude Include="Common\Action\SchedulerProtocol.h">
       <Filter>Common\Action</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\GPU\Calculator.h">
+      <Filter>Common\GPU</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\GPU\GPUComputeObject.h">
+      <Filter>Common\GPU</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

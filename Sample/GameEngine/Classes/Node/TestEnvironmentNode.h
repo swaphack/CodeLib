@@ -1,15 +1,14 @@
 #pragma once
 
-#include "TestFuncNode.h"
+#include "TestNode.h"
 
-class TestEnvironmentNode : public TestFuncNode
+class TestEnvironmentNode : public TestNode
 {
 public:
 	TestEnvironmentNode();
 	virtual ~TestEnvironmentNode();
 protected:
-	virtual void testFunc();
-
+	virtual void initNodes();
 protected:
 	void init3DSkyBox();
 	void init2DSkyBox();

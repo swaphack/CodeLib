@@ -33,9 +33,6 @@
     <ClCompile Include="Classes\Node\TestDrawNode.cpp">
       <Filter>Classes\Node</Filter>
     </ClCompile>
-    <ClCompile Include="Classes\Node\TestFuncNode.cpp">
-      <Filter>Classes\Node</Filter>
-    </ClCompile>
     <ClCompile Include="Classes\Node\TestImageNode.cpp">
       <Filter>Classes\Node</Filter>
     </ClCompile>
@@ -84,6 +81,12 @@
     <ClCompile Include="Classes\Node\TestComputeShader.cpp">
       <Filter>Classes\Node</Filter>
     </ClCompile>
+    <ClCompile Include="Classes\Node\TestLightingNode.cpp">
+      <Filter>Classes\Node</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Node\TestNode.cpp">
+      <Filter>Classes\Node</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Classes\GLRenderApplication.h">
@@ -102,9 +105,6 @@
       <Filter>Classes\Node</Filter>
     </ClInclude>
     <ClInclude Include="Classes\Node\TestDrawNode.h">
-      <Filter>Classes\Node</Filter>
-    </ClInclude>
-    <ClInclude Include="Classes\Node\TestFuncNode.h">
       <Filter>Classes\Node</Filter>
     </ClInclude>
     <ClInclude Include="Classes\Node\TestImageNode.h">
@@ -153,6 +153,12 @@
       <Filter>Classes\Node</Filter>
     </ClInclude>
     <ClInclude Include="Classes\Node\TestComputeShader.h">
+      <Filter>Classes\Node</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Node\TestLightingNode.h">
+      <Filter>Classes\Node</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Node\TestNode.h">
       <Filter>Classes\Node</Filter>
     </ClInclude>
   </ItemGroup>

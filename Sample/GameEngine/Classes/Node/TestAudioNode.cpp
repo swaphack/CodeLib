@@ -15,7 +15,7 @@ TestAudioNode::~TestAudioNode()
 
 }
 
-void TestAudioNode::testFunc()
+void TestAudioNode::initNodes()
 {
 
 }

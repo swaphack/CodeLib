@@ -6,7 +6,6 @@
 namespace render
 {
 	class TextureBuffer;
-	class XFBParticleNode;
 	class ShaderProgram;
 	class TextureBufferObject;
 	class Texture;

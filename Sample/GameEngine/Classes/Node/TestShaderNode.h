@@ -1,19 +1,19 @@
 #pragma once
 
-#include "TestFuncNode.h"
+#include "TestNode.h"
 
 namespace render
 {
 	class Material;
 }
 
-class TestShaderNode : public TestFuncNode
+class TestShaderNode : public TestNode
 {
 public:
 	TestShaderNode();
 	virtual ~TestShaderNode();
 protected:
-	virtual void testFunc();
+	virtual void initNodes();
 private:
 	void testShaderUniformBlock();
 	void testSubroutineUniform();
