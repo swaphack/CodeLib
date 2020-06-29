@@ -9,7 +9,7 @@
 namespace render
 {
 	class XFBParticleNode;
-	class VertexFragmentProgram;
+	class VertexFragmentShaderProgram;
 	class TransformFeedback;
 	class TransformFeedbackBuffer;
 	class VertexArrayObject;
@@ -18,7 +18,7 @@ namespace render
 	struct XFBParticle : public sys::Object
 	{
 	public:
-		VertexFragmentProgram* program = nullptr;
+		VertexFragmentShaderProgram* program = nullptr;
 		ShaderProgramNFunc func = nullptr;
 
 		TransformFeedback* xfbo = nullptr;

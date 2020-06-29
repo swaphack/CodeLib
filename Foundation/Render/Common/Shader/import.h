@@ -9,7 +9,7 @@
 #include "ShaderProgram.h"
 #include "ShaderProgramDelegate.h"
 
-#include "VertexFragmentProgram.h"
-#include "ComputeProgram.h"
+#include "VertexFragmentShaderProgram.h"
+#include "ComputeShaderProgram.h"
 
 #include "ShaderManager.h"

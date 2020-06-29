@@ -87,6 +87,9 @@
     <ClCompile Include="Classes\Node\TestNode.cpp">
       <Filter>Classes\Node</Filter>
     </ClCompile>
+    <ClCompile Include="Classes\Node\TestXFBNode.cpp">
+      <Filter>Classes\Node</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Classes\GLRenderApplication.h">
@@ -159,6 +162,9 @@
       <Filter>Classes\Node</Filter>
     </ClInclude>
     <ClInclude Include="Classes\Node\TestNode.h">
+      <Filter>Classes\Node</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Node\TestXFBNode.h">
       <Filter>Classes\Node</Filter>
     </ClInclude>
   </ItemGroup>

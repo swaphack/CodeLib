@@ -9,11 +9,11 @@ namespace render
 	/**
 	*	计算着色器
 	*/
-	class ComputeProgram : public ShaderProgram
+	class ComputeShaderProgram : public ShaderProgram
 	{
 	public:
-		ComputeProgram();
-		virtual ~ComputeProgram();
+		ComputeShaderProgram();
+		virtual ~ComputeShaderProgram();
 	public:
 		/**
 		*	添加文件 cpath 计算

@@ -11,8 +11,9 @@ namespace render
 {
 	class Shader;
 	class ShaderProgram;
-	class VertexFragmentProgram;
-	class ComputeProgram;
+	class VertexShaderProgram;
+	class VertexFragmentShaderProgram;
+	class ComputeShaderProgram;
 
 	class ShaderManager
 	{
@@ -23,11 +24,15 @@ namespace render
 		/**
 		*	创建顶点片元 program
 		*/
-		VertexFragmentProgram* createVertexFragmentProgram(const std::string& vertexFilepath, const std::string& fragFilepath);
+		VertexShaderProgram* createVertexProgram(const std::string& vertexFilepath);
+		/**
+		*	创建顶点片元 program
+		*/
+		VertexFragmentShaderProgram* createVertexFragmentProgram(const std::string& vertexFilepath, const std::string& fragFilepath);
 		/**
 		*	创建计算 program
 		*/
-		ComputeProgram* createComputeProgram(const std::string& computeFilepath);
+		ComputeShaderProgram* createComputeProgram(const std::string& computeFilepath);
 		/**
 		*	清空
 		*/

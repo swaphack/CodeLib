@@ -5,8 +5,8 @@
 #include "Common/Shader/ShaderProgramDelegate.h"
 namespace render
 {
-	class ComputeProgram;
-	class VertexFragmentProgram;
+	class ComputeShaderProgram;
+	class VertexFragmentShaderProgram;
 	class ArrayBuffer;
 	class UniformBuffer;
 	class VertexArrayObject;
@@ -43,11 +43,11 @@ namespace render
 		// 参数改变
 		virtual void updateParticleParameter();
 	private:
-		ComputeProgram* _computeProgram = nullptr;
+		ComputeShaderProgram* _computeProgram = nullptr;
 
 		ShaderProgramNFunc _computeUpdateFunc = nullptr;
 
-		VertexFragmentProgram* _renderProgram = nullptr;
+		VertexFragmentShaderProgram* _renderProgram = nullptr;
 
 		ShaderProgramNFunc _renderUpdateFunc = nullptr;
 

@@ -33,7 +33,7 @@ void TestShaderNode::testShaderUniformBlock()
 	std::string vPath = "Shader/shader_v_1.glsl";
 	std::string fPath = "Shader/shader_f_1.glsl";
 
-	VertexFragmentProgram* pProgram = CREATE_OBJECT(VertexFragmentProgram);
+	VertexFragmentShaderProgram* pProgram = CREATE_OBJECT(VertexFragmentShaderProgram);
 	pProgram->loadVertexAndFragmentShader(vPath, fPath);
 	pProgram->link();
 
@@ -262,7 +262,7 @@ void TestShaderNode::testClipShader()
 
 	std::string textureClipVertexPath = "Shader/clip.vs";
 
-	VertexFragmentProgram* pProgram = CREATE_OBJECT(VertexFragmentProgram);
+	VertexFragmentShaderProgram* pProgram = CREATE_OBJECT(VertexFragmentShaderProgram);
 	pProgram->loadVertexAndFragmentShader(textureClipVertexPath, Utility::texture3dFragmentPath);
 	pProgram->link();
 

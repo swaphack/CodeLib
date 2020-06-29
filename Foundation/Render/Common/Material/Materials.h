@@ -2,6 +2,7 @@
 
 #include "system.h"
 #include "mathlib.h"
+#include "Common/Shader/ShaderProgramDelegate.h"
 
 namespace sys
 {
@@ -78,6 +79,19 @@ namespace render
 		*	获取纹理
 		*/
 		Texture* getTexture(const std::string& name) const;
+	public:
+		/**
+		*	设置纹理
+		*/
+		void setMaterialTexture(const std::string& matName, const std::string& textureName);
+		/**
+		*	设置着色器
+		*/
+		void setMaterialShaderProgram(const std::string& matName, ShaderProgram* program);
+		/**
+		*	设置着色器处理函数
+		*/
+		void setMaterialShaderProgramFunc(const std::string& matName, const ShaderProgramFunc& func);
 	public:
 		// 更新纹理
 		void updateMatTexture();

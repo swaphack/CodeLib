@@ -190,15 +190,6 @@ const std::string& MaterialDetail::getSpecularTextureMap()
 {
 	return _mapTextureSpecular;
 }
-void MaterialDetail::setSpecularHightlightMap(const std::string& name)
-{
-	_mapSpecularHightlight = name;
-}
-
-const std::string& MaterialDetail::getSpecularHightlightMap()
-{
-	return _mapSpecularHightlight;
-}
 
 void MaterialDetail::setAlphaTextureMap(const std::string& name)
 {
@@ -210,12 +201,12 @@ const std::string& MaterialDetail::getAlphaTextureMap()
 	return _mapTextureAlpha;
 }
 
-void MaterialDetail::setBumpMap(const std::string& name)
+void MaterialDetail::setBumpTextureMap(const std::string& name)
 {
-	_mapBump = name;
+	_mapTextureBump = name;
 }
 
-const std::string& MaterialDetail::getBumpMap()
+const std::string& MaterialDetail::getBumpTextureMap()
 {
-	return _mapBump;
+	return _mapTextureBump;
 }

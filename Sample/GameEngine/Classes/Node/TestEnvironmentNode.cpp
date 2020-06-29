@@ -14,7 +14,7 @@ void TestEnvironmentNode::initNodes()
 {
 	this->testCamera();
 
-	//this->init3DSkyBox();
+	this->init3DSkyBox();
 }
 
 void TestEnvironmentNode::init3DSkyBox()
@@ -28,7 +28,7 @@ void TestEnvironmentNode::init3DSkyBox()
 	pSkyBox->setFaceImage(CubeFace::BOTTOM, "Resource/skybox/bottom.jpg");
 
 	//pSkyBox->setScale(0.25f);
-	pSkyBox->setVolume(2048, 2048, 2048);
+	pSkyBox->setVolume(1024, 1024, 1024);
 	pSkyBox->setPosition(0, 0, 0);
 	pSkyBox->setAnchorPoint(0.5f, 0.5f, 0.5f);
 	this->addChild(pSkyBox);
@@ -179,6 +179,10 @@ void TestEnvironmentNode::testCamera()
 
 		float zNear = camera->getViewParameter().zNear;
 		float zFar = camera->getViewParameter().zFar;
+		if (zFar + value <= zNear)
+		{
+			return;
+		}
 		if (_viewType == 0)
 		{
 			if (camera->getDimensions() == CameraDimensions::THREE)

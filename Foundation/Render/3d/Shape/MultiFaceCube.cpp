@@ -38,7 +38,7 @@ void render::MultiFaceCube::setFaceImage(CubeFace face, const std::string& filep
 	std::string name = CubeFaceString[i];
 
 	this->addMaterialTexture(name, filepath);
-	setMaterialTexture(name, name);
+	getMaterials()->setMaterialTexture(name, name);
 }
 
 void render::MultiFaceCube::setAllFacesImage(const std::string& filepath)

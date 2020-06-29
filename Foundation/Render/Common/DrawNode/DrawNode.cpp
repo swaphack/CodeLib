@@ -90,19 +90,49 @@ void render::DrawNode::addMaterialTexture(const std::string& matName, const Text
 
 void render::DrawNode::setTextureName(const std::string& textureName)
 {
-	int count = _materiales->getMaterialCount();
 	for (auto item : _materiales->getMaterials())
 	{
 		item.second->getMaterialDetail()->setAmbientTextureMap(textureName);
 	}
 }
 
-void render::DrawNode::setMaterialTexture(const std::string& matName, const std::string& textureName)
+void render::DrawNode::setAmbientTextureName(const std::string& textureName)
 {
-	auto pMat = _materiales->getMaterial(matName);
-	if (pMat)
+	for (auto item : _materiales->getMaterials())
 	{
-		pMat->getMaterialDetail()->setAmbientTextureMap(textureName);
+		item.second->getMaterialDetail()->setAmbientTextureMap(textureName);
+	}
+}
+
+void render::DrawNode::setDiffuseTextureName(const std::string& textureName)
+{
+	for (auto item : _materiales->getMaterials())
+	{
+		item.second->getMaterialDetail()->setDiffuseTextureMap(textureName);
+	}
+}
+
+void render::DrawNode::setSpecularTextureName(const std::string& textureName)
+{
+	for (auto item : _materiales->getMaterials())
+	{
+		item.second->getMaterialDetail()->setSpecularTextureMap(textureName);
+	}
+}
+
+void render::DrawNode::setAlphaTextureName(const std::string& textureName)
+{
+	for (auto item : _materiales->getMaterials())
+	{
+		item.second->getMaterialDetail()->setAlphaTextureMap(textureName);
+	}
+}
+
+void render::DrawNode::setBumpTextureName(const std::string& textureName)
+{
+	for (auto item : _materiales->getMaterials())
+	{
+		item.second->getMaterialDetail()->setBumpTextureMap(textureName);
 	}
 }
 
@@ -119,37 +149,17 @@ render::ShaderProgram* render::DrawNode::getMaterialShaderProgram(const std::str
 
 void render::DrawNode::setShaderProgram(ShaderProgram* program)
 {
-	int count = _materiales->getMaterialCount();
 	for (auto item : _materiales->getMaterials())
 	{
 		item.second->setShaderProgram(program);
 	}
 }
 
-void render::DrawNode::setMaterialShaderProgram(const std::string& matName, ShaderProgram* program)
-{
-	auto pMat = _materiales->getMaterial(matName);
-	if (pMat)
-	{
-		pMat->setShaderProgram(program);
-	}
-}
-
 void render::DrawNode::setShaderProgramFunc(const ShaderProgramFunc& func)
 {
-	int count = _materiales->getMaterialCount();
 	for (auto item : _materiales->getMaterials())
 	{
 		item.second->setProgramFunc(func);
-	}
-}
-
-void render::DrawNode::setMaterialShaderProgramFunc(const std::string& matName, const ShaderProgramFunc& func)
-{
-	auto pMat = _materiales->getMaterial(matName);
-	if (pMat)
-	{
-		pMat->setProgramFunc(func);
 	}
 }
 

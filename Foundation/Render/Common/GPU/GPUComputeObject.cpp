@@ -1,6 +1,6 @@
 #include "GPUComputeObject.h"
 #include "Common/Shader/ShaderManager.h"
-#include "Common/Shader/ComputeProgram.h"
+#include "Common/Shader/ComputeShaderProgram.h"
 
 render::GPUComputeObject::GPUComputeObject()
 {
@@ -9,7 +9,7 @@ render::GPUComputeObject::GPUComputeObject()
 
 render::GPUComputeObject::~GPUComputeObject()
 {
-
+	SAFE_RELEASE(_computeProgram);
 }
 
 void render::GPUComputeObject::loadComputeProgram(const std::string& computeFilepath)
@@ -17,11 +17,6 @@ void render::GPUComputeObject::loadComputeProgram(const std::string& computeFile
 	SAFE_RELEASE(_computeProgram);
 	_computeProgram = G_SHANDER->createComputeProgram(computeFilepath);
 	SAFE_RETAIN(_computeProgram);
-}
-
-void render::GPUComputeObject::setProgramFunc(const ShaderProgramFunc& func)
-{
-	_shaderProgramFunc = func;
 }
 
 void render::GPUComputeObject::setGroupSize(uint32_t groupXCount, uint32_t groupYCount /*= 1*/, uint32_t groupZCount /*= 1*/)
@@ -85,5 +80,7 @@ bool render::GPUComputeObject::run()
 	_computeProgram->setMemoryBarrier(_memoryBarrierBit);
 
 	_computeProgram->unuse();
+
+	return true;
 }
 

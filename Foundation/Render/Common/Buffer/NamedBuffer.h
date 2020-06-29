@@ -50,14 +50,18 @@ namespace render
 		/**
 		*	获取指定位置的数据指针
 		*/
-		void* setBufferRange(ptrdiff_t offset, ptrdiff_t length, uint32_t access);
+		void* getMapBuffer(ptrdiff_t offset, ptrdiff_t length, uint32_t access);
 		/**
-		*	通知指定位置的数据发生改变
+		*	获取指定位置的数据指针
 		*/
-		void flushMappedBufferRange(ptrdiff_t offset, ptrdiff_t length);
+		void* getMapBuffer(ptrdiff_t offset, ptrdiff_t length, AccessType access);
 		/**
 		*	取消关联buffer
 		*/
 		void unmapBuffer();
+		/**
+		*	通知指定位置的数据发生改变
+		*/
+		void flushMappedBufferRange(ptrdiff_t offset, ptrdiff_t length);
 	};
 }

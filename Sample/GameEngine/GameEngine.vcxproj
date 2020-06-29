@@ -149,6 +149,7 @@
     <ClCompile Include="Classes\Node\TestLightingNode.cpp" />
     <ClCompile Include="Classes\Node\TestPostProcessing.cpp" />
     <ClCompile Include="Classes\Node\TestTextureNode.cpp" />
+    <ClCompile Include="Classes\Node\TestXFBNode.cpp" />
     <ClCompile Include="Classes\Node\Utility.cpp" />
     <ClCompile Include="Classes\Node\TestAudioNode.cpp" />
     <ClCompile Include="Classes\Node\TestBufferNode.cpp" />
@@ -175,6 +176,7 @@
     <ClInclude Include="Classes\Node\TestLightingNode.h" />
     <ClInclude Include="Classes\Node\TestPostProcessing.h" />
     <ClInclude Include="Classes\Node\TestTextureNode.h" />
+    <ClInclude Include="Classes\Node\TestXFBNode.h" />
     <ClInclude Include="Classes\Node\Utility.h" />
     <ClInclude Include="Classes\Node\TestAudioNode.h" />
     <ClInclude Include="Classes\Node\TestBufferNode.h" />

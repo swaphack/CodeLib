@@ -4,11 +4,11 @@
 
 namespace render
 {
-	class VertexFragmentProgram : public ShaderProgram
+	class VertexFragmentShaderProgram : public ShaderProgram
 	{
 	public:
-		VertexFragmentProgram();
-		virtual ~VertexFragmentProgram();
+		VertexFragmentShaderProgram();
+		virtual ~VertexFragmentShaderProgram();
 	public:
 		/**
 		*	添加文件 vpath 顶点， fpath片元

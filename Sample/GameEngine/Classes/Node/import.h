@@ -20,3 +20,4 @@
 #include "TestPostProcessing.h"
 #include "TestComputeShader.h"
 #include "TestLightingNode.h"
+#include "TestXFBNode.h"

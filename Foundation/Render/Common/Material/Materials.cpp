@@ -110,6 +110,33 @@ void render::Materials::addTexture(const std::string& name, const std::string& f
 	this->addTexture(name, pTexture);
 }
 
+void render::Materials::setMaterialTexture(const std::string& matName, const std::string& textureName)
+{
+	auto it = _materials.find(matName);
+	if (it != _materials.end())
+	{
+		it->second->getMaterialDetail()->setAmbientTextureMap(textureName);
+	}
+}
+
+void render::Materials::setMaterialShaderProgram(const std::string& matName, ShaderProgram* program)
+{
+	auto it = _materials.find(matName);
+	if (it != _materials.end())
+	{
+		it->second->setShaderProgram(program);
+	}
+}
+
+void render::Materials::setMaterialShaderProgramFunc(const std::string& matName, const ShaderProgramFunc& func)
+{
+	auto it = _materials.find(matName);
+	if (it != _materials.end())
+	{
+		it->second->setProgramFunc(func);
+	}
+}
+
 void render::Materials::updateMatTexture()
 {
 	if (_texturePaths.empty())

@@ -7,7 +7,7 @@
 
 namespace render
 {
-	class ComputeProgram;
+	class ComputeShaderProgram;
 
 	class GPUComputeObject : public sys::Object
 	{
@@ -25,10 +25,6 @@ namespace render
 		*	加载计算着色器
 		*/
 		void loadComputeProgram(const std::string& computeFilepath);
-		/**
-		*	shader设置函数
-		*/
-		void setProgramFunc(const ShaderProgramFunc& func);
 		/**
 		*	设置计算组大小
 		*/
@@ -67,7 +63,7 @@ namespace render
 		/**
 		*	计算着色器程序
 		*/
-		ComputeProgram* _computeProgram = nullptr;
+		ComputeShaderProgram* _computeProgram = nullptr;
 		/**
 		*	计算组大小
 		*/

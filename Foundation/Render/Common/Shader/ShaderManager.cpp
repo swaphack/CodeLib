@@ -1,7 +1,8 @@
 #include "ShaderManager.h"
 #include "ShaderProgram.h"
-#include "VertexFragmentProgram.h"
-#include "ComputeProgram.h"
+#include "VertexFragmentShaderProgram.h"
+#include "ComputeShaderProgram.h"
+#include "VertexShaderProgram.h"
 #include "Shader.h"
 
 render::ShaderManager::ShaderManager()
@@ -13,16 +14,41 @@ render::ShaderManager::~ShaderManager()
 	this->clear();
 }
 
-render::VertexFragmentProgram* render::ShaderManager::createVertexFragmentProgram(const std::string& vertexFilepath, const std::string& fragFilepath)
+render::VertexShaderProgram* render::ShaderManager::createVertexProgram(const std::string& vertexFilepath)
+{
+	auto it = _shaderPrograms.find(vertexFilepath);
+	if (it != _shaderPrograms.end())
+	{
+		return it->second->as<render::VertexShaderProgram>();
+	}
+
+	VertexShaderProgram* pProgram = CREATE_OBJECT(VertexShaderProgram);
+	render::Shader* pVertexShader = createShader(ShaderType::VERTEX_SHADER, vertexFilepath);
+	if (!pVertexShader)
+	{
+		return nullptr;
+	}
+
+	pProgram->attachShader(pVertexShader);
+	pProgram->link();
+
+	SAFE_RETAIN(pProgram);
+
+	_shaderPrograms[vertexFilepath] = pProgram;
+
+	return pProgram;
+}
+
+render::VertexFragmentShaderProgram* render::ShaderManager::createVertexFragmentProgram(const std::string& vertexFilepath, const std::string& fragFilepath)
 {
 	auto key = vertexFilepath + fragFilepath;
 	auto it = _shaderPrograms.find(key);
 	if (it != _shaderPrograms.end())
 	{
-		return it->second->as<render::VertexFragmentProgram>();
+		return it->second->as<render::VertexFragmentShaderProgram>();
 	}
 
-	VertexFragmentProgram* pProgram = CREATE_OBJECT(VertexFragmentProgram);
+	VertexFragmentShaderProgram* pProgram = CREATE_OBJECT(VertexFragmentShaderProgram);
 	render::Shader* pVertexShader = createShader(ShaderType::VERTEX_SHADER, vertexFilepath);
 	if (!pVertexShader)
 	{
@@ -48,16 +74,15 @@ render::VertexFragmentProgram* render::ShaderManager::createVertexFragmentProgra
 	return pProgram;
 }
 
-render::ComputeProgram* render::ShaderManager::createComputeProgram(const std::string& computeFilepath)
+render::ComputeShaderProgram* render::ShaderManager::createComputeProgram(const std::string& computeFilepath)
 {
-	auto key = computeFilepath;
-	auto it = _shaderPrograms.find(key);
+	auto it = _shaderPrograms.find(computeFilepath);
 	if (it != _shaderPrograms.end())
 	{
-		return it->second->as<render::ComputeProgram>();
+		return it->second->as<render::ComputeShaderProgram>();
 	}
 
-	ComputeProgram* pProgram = CREATE_OBJECT(ComputeProgram);
+	ComputeShaderProgram* pProgram = CREATE_OBJECT(ComputeShaderProgram);
 	render::Shader* pComputeShader = createShader(ShaderType::COMPUTE_SHADER, computeFilepath);
 	if (!pComputeShader)
 	{
@@ -70,7 +95,7 @@ render::ComputeProgram* render::ShaderManager::createComputeProgram(const std::s
 
 	SAFE_RETAIN(pProgram);
 
-	_shaderPrograms[key] = pProgram;
+	_shaderPrograms[computeFilepath] = pProgram;
 
 	return pProgram;
 }

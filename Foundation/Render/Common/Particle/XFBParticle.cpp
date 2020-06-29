@@ -12,7 +12,7 @@
 
 render::XFBParticle::XFBParticle()
 {
-	program = CREATE_OBJECT(VertexFragmentProgram);
+	program = CREATE_OBJECT(VertexFragmentShaderProgram);
 	xfbo = CREATE_OBJECT(TransformFeedback);
 	xfbb = CREATE_OBJECT(TransformFeedbackBuffer);
 
@@ -69,7 +69,7 @@ void render::XFBUpdateParticle::initXFB(int count)
 	xfbb->bindBuffer();
 	xfbb->setBufferData(count * ParticleData::totalSize(), BufferDataUsage::DYNAMIC_COPY);
 
-	auto buffer = (float*)xfbb->getMapBuffer(AccessType::WRITE_ONLY);
+	auto buffer = (float*)xfbb->getMapBuffer(0, count * ParticleData::totalSize(), AccessType::WRITE_ONLY);
 	for (int i = 0; i < count; i++)
 	{
 		math::Vector3 pos = math::Vector3(sys::Random::getNumber0_1(), sys::Random::getNumber0_1(), sys::Random::getNumber0_1());

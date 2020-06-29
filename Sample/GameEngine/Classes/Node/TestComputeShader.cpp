@@ -17,7 +17,7 @@ void TestComputeShader::initNodes()
 
 void TestComputeShader::testSimpleComputeShader()
 {
-	render::ComputeProgram* program = G_SHANDER->createComputeProgram("Shader/compute/test.cs");
+	render::ComputeShaderProgram* program = G_SHANDER->createComputeProgram("Shader/compute/test.cs");
 	render::GLDebug::showError();
 }
 

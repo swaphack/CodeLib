@@ -53,7 +53,7 @@ namespace render
 		/**
 		*	设置数据范围
 		*/
-		void getBufferRange(uint32_t index, ptrdiff_t offset, ptrdiff_t size);
+		void getMapBuffer(uint32_t index, ptrdiff_t offset, ptrdiff_t size);
 		/**
 		*	获取关联数据
 		*/
@@ -84,6 +84,6 @@ namespace render
 		/**
 		*	缓存类型
 		*/
-		BufferTarget _target;
+		BufferTarget _target = BufferTarget::ARRAY_BUFFER;
 	};
 }

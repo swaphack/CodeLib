@@ -504,12 +504,6 @@
     <ClCompile Include="Common\ShaderDocument\ShaderVariableType.cpp">
       <Filter>Common\ShaderDocument</Filter>
     </ClCompile>
-    <ClCompile Include="Common\Shader\VertexFragmentProgram.cpp">
-      <Filter>Common\Shader</Filter>
-    </ClCompile>
-    <ClCompile Include="Common\Shader\ComputeProgram.cpp">
-      <Filter>Common\Shader</Filter>
-    </ClCompile>
     <ClCompile Include="Common\Buffer\DispatchIndirectBuffer.cpp">
       <Filter>Common\Buffer</Filter>
     </ClCompile>
@@ -537,11 +531,23 @@
     <ClCompile Include="Common\Action\SchedulerProtocol.cpp">
       <Filter>Common\Action</Filter>
     </ClCompile>
-    <ClCompile Include="Common\GPU\Calculator.cpp">
-      <Filter>Common\GPU</Filter>
-    </ClCompile>
     <ClCompile Include="Common\GPU\GPUComputeObject.cpp">
       <Filter>Common\GPU</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\GPU\GPUCalculator.cpp">
+      <Filter>Common\GPU</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\XFB\XFBObject.cpp">
+      <Filter>Common\XFB</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Shader\VertexShaderProgram.cpp">
+      <Filter>Common\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Shader\VertexFragmentShaderProgram.cpp">
+      <Filter>Common\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Shader\ComputeShaderProgram.cpp">
+      <Filter>Common\Shader</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1206,12 +1212,6 @@
     <ClInclude Include="Common\ShaderDocument\import.h">
       <Filter>Common\ShaderDocument</Filter>
     </ClInclude>
-    <ClInclude Include="Common\Shader\VertexFragmentProgram.h">
-      <Filter>Common\Shader</Filter>
-    </ClInclude>
-    <ClInclude Include="Common\Shader\ComputeProgram.h">
-      <Filter>Common\Shader</Filter>
-    </ClInclude>
     <ClInclude Include="Common\Buffer\DispatchIndirectBuffer.h">
       <Filter>Common\Buffer</Filter>
     </ClInclude>
@@ -1242,11 +1242,23 @@
     <ClInclude Include="Common\Action\SchedulerProtocol.h">
       <Filter>Common\Action</Filter>
     </ClInclude>
-    <ClInclude Include="Common\GPU\Calculator.h">
-      <Filter>Common\GPU</Filter>
-    </ClInclude>
     <ClInclude Include="Common\GPU\GPUComputeObject.h">
       <Filter>Common\GPU</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\GPU\GPUCalculator.h">
+      <Filter>Common\GPU</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\XFB\XFBObject.h">
+      <Filter>Common\XFB</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Shader\VertexShaderProgram.h">
+      <Filter>Common\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Shader\VertexFragmentShaderProgram.h">
+      <Filter>Common\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Shader\ComputeShaderProgram.h">
+      <Filter>Common\Shader</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -4,6 +4,9 @@
 
 namespace render
 {
+	/**
+	*	顶点变量指针
+	*/
 	class VertexAttribPointer : public VertexArrayAttrib
 	{
 	public:

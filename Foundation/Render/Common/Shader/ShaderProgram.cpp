@@ -75,6 +75,7 @@ void ShaderProgram::initProgram()
 bool ShaderProgram::link()
 {
 	GLShader::linkProgram(_programID);
+	GLDebug::showError();
 
 	int nStatus = 0;
 	GLShader::getProgram(_programID, GetProgramParameter::LINK_STATUS, &nStatus);
@@ -95,6 +96,7 @@ bool ShaderProgram::link()
 void ShaderProgram::use()
 {
 	GLShader::useProgram(_programID);
+	GLShader::showProgramError(_programID);
 	GLDebug::showError();
 }
 
@@ -222,6 +224,19 @@ void render::ShaderProgram::bindFragDataLocationIndexed(uint32_t colorNumber, ui
 bool render::ShaderProgram::isValid() const
 {
 	return GLShader::isProgram(_programID);
+}
+
+bool render::ShaderProgram::validate()
+{
+	GLShader::validateProgram(_programID);
+	int status = GL_TRUE;
+	GLShader::getProgram(_programID, GetProgramParameter::VALIDATE_STATUS, &status);
+	if (status != GL_TRUE)
+	{
+		GLShader::showProgramError(_programID);
+	}
+
+	return status == GL_TRUE;
 }
 
 bool render::ShaderProgram::loadShaderFromFile(ShaderType type, const std::string& path)

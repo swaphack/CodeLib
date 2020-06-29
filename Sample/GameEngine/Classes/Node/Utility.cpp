@@ -11,7 +11,7 @@ void Utility::loadShader(render::Materials* mats, const std::string& vpath, cons
 	{
 		return;
 	}
-	VertexFragmentProgram* pProgram = G_SHANDER->createVertexFragmentProgram(vpath, fpath);
+	VertexFragmentShaderProgram* pProgram = G_SHANDER->createVertexFragmentProgram(vpath, fpath);
 	if (pProgram == nullptr)
 	{
 		return;

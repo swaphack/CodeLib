@@ -8,11 +8,11 @@ namespace render
 	/**
 	*	¼ÆËãÆ÷
 	*/
-	class Calculator : public GPUComputeObject
+	class GPUCalculator : public GPUComputeObject
 	{
 	public:
-		Calculator();
-		virtual ~Calculator();
+		GPUCalculator();
+		virtual ~GPUCalculator();
 	public:
 	private:
 

@@ -49,7 +49,7 @@ namespace render
 		/**
 		*	生成顶点属性指针
 		*/
-		template<class T, class = std::enable_if<std::is_base_of<VertexArrayAttrib, T>::value, T>::type>
+		template<class T, class = std::enable_if<std::is_base_of<render::VertexArrayAttrib, T>::value, T>::type>
 		T* getVertexAttrib(uint32_t index)
 		{
 			auto it = _mapVertexAttrib.find(index);

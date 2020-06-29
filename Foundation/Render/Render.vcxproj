@@ -148,7 +148,7 @@
     <ClCompile Include="Common\FrameRender\FrameBuffer.cpp" />
     <ClCompile Include="Common\FrameRender\RenderBuffer.cpp" />
     <ClCompile Include="Common\FrameRender\RenderBufferBase.cpp" />
-    <ClCompile Include="Common\GPU\Calculator.cpp" />
+    <ClCompile Include="Common\GPU\GPUCalculator.cpp" />
     <ClCompile Include="Common\GPU\GPUComputeObject.cpp" />
     <ClCompile Include="Common\Input\KeyboardManager.cpp" />
     <ClCompile Include="Common\Input\KeyChar.cpp" />
@@ -172,7 +172,7 @@
     <ClCompile Include="Common\ShaderDocument\ShaderDocument.cpp" />
     <ClCompile Include="Common\ShaderDocument\ShaderParameter.cpp" />
     <ClCompile Include="Common\ShaderDocument\ShaderVariableType.cpp" />
-    <ClCompile Include="Common\Shader\ComputeProgram.cpp" />
+    <ClCompile Include="Common\Shader\ComputeShaderProgram.cpp" />
     <ClCompile Include="Common\Shader\ComputeShader.cpp" />
     <ClCompile Include="Common\Shader\FragmentShader.cpp" />
     <ClCompile Include="Common\Shader\GeometryShader.cpp" />
@@ -188,7 +188,8 @@
     <ClCompile Include="Common\Shader\ShaderVariable.cpp" />
     <ClCompile Include="Common\Shader\TessControlShader.cpp" />
     <ClCompile Include="Common\Shader\TessEvaluationShader.cpp" />
-    <ClCompile Include="Common\Shader\VertexFragmentProgram.cpp" />
+    <ClCompile Include="Common\Shader\VertexFragmentShaderProgram.cpp" />
+    <ClCompile Include="Common\Shader\VertexShaderProgram.cpp" />
     <ClCompile Include="Common\Shader\VertexShader.cpp" />
     <ClCompile Include="Common\struct\enum_common.cpp" />
     <ClCompile Include="Common\struct\shape_common.cpp" />
@@ -220,6 +221,7 @@
     <ClCompile Include="Common\View\View.cpp" />
     <ClCompile Include="Common\View\ViewConfig.cpp" />
     <ClCompile Include="Common\XFB\TransformFeedback.cpp" />
+    <ClCompile Include="Common\XFB\XFBObject.cpp" />
     <ClCompile Include="Graphic\Command\DrawCommand.cpp" />
     <ClCompile Include="Graphic\Command\DrawCommander.cpp" />
     <ClCompile Include="Graphic\Command\DrawCommandList.cpp" />
@@ -353,7 +355,7 @@
     <ClInclude Include="Common\FrameRender\FrameBuffer.h" />
     <ClInclude Include="Common\FrameRender\RenderBuffer.h" />
     <ClInclude Include="Common\FrameRender\RenderBufferBase.h" />
-    <ClInclude Include="Common\GPU\Calculator.h" />
+    <ClInclude Include="Common\GPU\GPUCalculator.h" />
     <ClInclude Include="Common\GPU\GPUComputeObject.h" />
     <ClInclude Include="Common\GPU\import.h" />
     <ClInclude Include="Common\import.h" />
@@ -392,7 +394,7 @@
     <ClInclude Include="Common\ShaderDocument\ShaderDocument.h" />
     <ClInclude Include="Common\ShaderDocument\ShaderParameter.h" />
     <ClInclude Include="Common\ShaderDocument\ShaderVariableType.h" />
-    <ClInclude Include="Common\Shader\ComputeProgram.h" />
+    <ClInclude Include="Common\Shader\ComputeShaderProgram.h" />
     <ClInclude Include="Common\Shader\ComputeShader.h" />
     <ClInclude Include="Common\Shader\FragmentShader.h" />
     <ClInclude Include="Common\Shader\GeometryShader.h" />
@@ -410,7 +412,8 @@
     <ClInclude Include="Common\Shader\ShaderVariable.h" />
     <ClInclude Include="Common\Shader\TessControlShader.h" />
     <ClInclude Include="Common\Shader\TessEvaluationShader.h" />
-    <ClInclude Include="Common\Shader\VertexFragmentProgram.h" />
+    <ClInclude Include="Common\Shader\VertexFragmentShaderProgram.h" />
+    <ClInclude Include="Common\Shader\VertexShaderProgram.h" />
     <ClInclude Include="Common\Shader\VertexShader.h" />
     <ClInclude Include="Common\struct\enum_common.h" />
     <ClInclude Include="Common\struct\import.h" />
@@ -450,6 +453,7 @@
     <ClInclude Include="Common\View\ViewConfig.h" />
     <ClInclude Include="Common\XFB\import.h" />
     <ClInclude Include="Common\XFB\TransformFeedback.h" />
+    <ClInclude Include="Common\XFB\XFBObject.h" />
     <ClInclude Include="ext-config.h" />
     <ClInclude Include="Graphic\Command\GUID.h" />
     <ClInclude Include="Graphic\Command\DrawCommandList.h" />

@@ -18,7 +18,7 @@ TestModelNode::~TestModelNode()
 void TestModelNode::initNodes()
 {
 	//this->testCubeModel();
-	this->testCubeMap();
+	this->testSphereModel();
 
 	//this->testObj();
 }
@@ -47,7 +47,17 @@ void TestModelNode::testCubeModel()
 
 void TestModelNode::testSphereModel()
 {
-	
+	auto pTexture = G_TEXTURE_CACHE->createTexture2D("Resource/Image/world_texture.jpg");
+	render::Sphere* pModel = CREATE_NODE(render::Sphere);
+	pModel->setTexture(pTexture);
+	pModel->setRadius(200);
+	pModel->setVolume(400, 400, 400);
+	pModel->setAnchorPoint(0.5, 0.5f, 0.5f);
+	pModel->setPosition(512, 384, 0);
+	this->addChild(pModel);
+
+	Utility::loadShader(pModel->getMaterials(), "Shader/texture/texture.vs", "Shader/texture/texture.fs");
+	Utility::runRotateAction(pModel);
 }
 
 void TestModelNode::addLight()

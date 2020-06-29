@@ -71,9 +71,25 @@ namespace render
 		*/
 		void setTextureName(const std::string& textureName);
 		/**
-		*	设置纹理
+		*	设置Ambient纹理
 		*/
-		void setMaterialTexture(const std::string& matName, const std::string& textureName);
+		void setAmbientTextureName(const std::string& textureName);
+		/**
+		*	设置Diffuse纹理
+		*/
+		void setDiffuseTextureName(const std::string& textureName);
+		/**
+		*	设置Diffuse纹理
+		*/
+		void setSpecularTextureName(const std::string& textureName);
+		/**
+		*	设置Alpha纹理
+		*/
+		void setAlphaTextureName(const std::string& textureName);
+		/**
+		*	设置Alpha纹理
+		*/
+		void setBumpTextureName(const std::string& textureName);
 	public:
 		/**
 		*	获取着色器
@@ -83,19 +99,11 @@ namespace render
 		*	设置着色器
 		*/
 		void setShaderProgram(ShaderProgram* program);
-		/**
-		*	设置着色器
-		*/
-		void setMaterialShaderProgram(const std::string& matName, ShaderProgram* program);
 	public:
 		/**
 		*	设置着色器处理函数
 		*/
 		void setShaderProgramFunc(const ShaderProgramFunc& func);
-		/**
-		*	设置着色器处理函数
-		*/
-		void setMaterialShaderProgramFunc(const std::string& matName, const ShaderProgramFunc& func);
 	protected:
 		/**
 		*	绘制前工作

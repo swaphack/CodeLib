@@ -89,6 +89,10 @@ namespace render
 		*	是否有效
 		*/
 		bool isValid() const;
+		/**
+		*	验证是否有效
+		**/
+		bool validate();
 	public:
 		
 		/**

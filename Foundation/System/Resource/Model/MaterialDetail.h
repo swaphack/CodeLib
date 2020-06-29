@@ -46,14 +46,6 @@ namespace sys
 		*/
 		const std::string& getSpecularTextureMap();
 		/**
-		*	设置Specular Hightlight
-		*/
-		void setSpecularHightlightMap(const std::string& name);
-		/**
-		*	获取Specular Hightlight
-		*/
-		const std::string& getSpecularHightlightMap();
-		/**
 		*	设置Alpha纹理
 		*/
 		void setAlphaTextureMap(const std::string& name);
@@ -64,11 +56,11 @@ namespace sys
 		/**
 		*	设置Bump 纹理
 		*/
-		void setBumpMap(const std::string& name);
+		void setBumpTextureMap(const std::string& name);
 		/**
 		*	获取Bump纹理
 		*/
-		const std::string& getBumpMap();
+		const std::string& getBumpTextureMap();
 		/**
 		*	环境光
 		*/
@@ -154,10 +146,8 @@ namespace sys
 		// 纹理名称
 		std::string _mapTextureSpecular;
 		// 纹理名称
-		std::string _mapSpecularHightlight;
-		// 纹理名称
 		std::string _mapTextureAlpha;
 		// 纹理名称
-		std::string _mapBump;
+		std::string _mapTextureBump;
 	};
 }
