@@ -23,14 +23,27 @@ void IntervalAction::update(float duration)
 		this->stop();
 		return;
 	}
-	if (_currentTime < _totalTime)
+	if (_currentTime == 0)
 	{
+		initAction();
+	}
+	if (_currentTime <= _totalTime && duration != 0)
+	{
+		float temp = duration;
 		if (_currentTime + duration >= _totalTime)
 		{
-			duration = _totalTime - _currentTime;
+			temp = _totalTime - _currentTime;
 		}
-		float percent = duration / _totalTime;
-		this->updateInterval(percent);
+		{
+			float percent = temp / _totalTime;
+			this->updateInterval(percent);
+		}
+
+		{
+			float percent = _currentTime / _totalTime;
+			this->updatePercent(percent);
+		}
+
 		_currentTime += duration;
 	}
 	else
@@ -44,12 +57,12 @@ void IntervalAction::setDuration(float interval)
 	_totalTime = interval;
 }
 
-float IntervalAction::getDuration()
+float IntervalAction::getDuration() const
 {
 	return _totalTime;
 }
 
-float IntervalAction::getElapsed()
+float IntervalAction::getElapsed() const
 {
 	return _currentTime;
 }
@@ -71,6 +84,16 @@ void IntervalAction::reverse()
 	_currentTime = _totalTime - _currentTime;
 }
 
+void render::IntervalAction::initAction()
+{
+
+}
+
+void render::IntervalAction::updatePercent(float curPercent)
+{
+
+}
+
 //////////////////////////////////////////////////////////////////////////
 
 MoveToAction::MoveToAction()
@@ -82,38 +105,42 @@ MoveToAction::~MoveToAction()
 {
 }
 
-void MoveToAction::setPosition(float x, float y, float z)
+void MoveToAction::setDestPosition(float x, float y, float z)
 {
-	_destination.set(x, y, z);
+	_desPosition.set(x, y, z);
 }
 
-math::Vector3 MoveToAction::getPosition()
+void render::MoveToAction::setDestPosition(const math::Vector3& pos)
 {
-	return _destination;
+	_desPosition = pos;
 }
 
-void MoveToAction::updateInterval(float percent)
+void render::MoveToAction::initAction()
 {
-	Node* node = _target;
-	if (node && _currentTime == 0)
-	{
-		_offset = _destination;
-		_offset-=node->getPosition();
-	}
-	if (node)
-	{
-		const math::Vector3& current = node->getPosition();
-		node->setPosition(
-			current.getX() + _offset.getX() * percent,
-			current.getY() + _offset.getY() * percent,
-			current.getZ() + _offset.getZ() * percent);
-	}
+	ASSERT(_target != nullptr);
+
+	_srcPosition = _target->getPosition();
+	_differentPosition = _desPosition - _srcPosition;
+}
+
+const math::Vector3& MoveToAction::getDestPosition() const
+{
+	return _desPosition;
+}
+
+void MoveToAction::updatePercent(float percent)
+{
+	_target->setPosition(_srcPosition + percent * _differentPosition);
 }
 
 void MoveToAction::reverse()
 {
 	IntervalAction::reverse();
-	_offset *= -1;
+	auto value = _srcPosition + _desPosition;
+	_desPosition = value - _srcPosition;
+	_srcPosition = value - _desPosition;
+
+	_differentPosition *= -1;
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -126,33 +153,42 @@ MoveByAction::~MoveByAction()
 {
 }
 
-void MoveByAction::setPosition(float x, float y, float z /*= 0*/)
+void MoveByAction::setDifferentPosition(float x, float y, float z /*= 0*/)
 {
-	_offset.set(x, y, z);
+	_differentPosition.set(x, y, z);
 }
 
-math::Vector3 MoveByAction::getPosition()
+void render::MoveByAction::setDifferentPosition(const math::Vector3& pos)
 {
-	return _offset;
+	_differentPosition = pos;
 }
 
-void MoveByAction::updateInterval(float percent)
+const math::Vector3& render::MoveByAction::getDifferentPosition() const
 {
-	Node* node =_target;
-	if (node)
-	{
-		const math::Vector3& current = node->getPosition();
-		node->setPosition(
-			current.getX() + _offset.getX() * percent,
-			current.getY() + _offset.getY() * percent,
-			current.getZ() + _offset.getZ() * percent);
-	}
+	return _differentPosition;
+}
+
+void render::MoveByAction::initAction()
+{
+	ASSERT(_target != nullptr);
+
+	_srcPosition = _target->getPosition();
+	_desPosition = _srcPosition + _differentPosition;
+}
+
+void render::MoveByAction::updatePercent(float percent)
+{
+	_target->setPosition(_srcPosition + percent * _differentPosition);
 }
 
 void MoveByAction::reverse()
 {
 	IntervalAction::reverse();
-	_offset *= -1;
+	auto value = _srcPosition + _desPosition;
+	_desPosition = value - _srcPosition;
+	_srcPosition = value - _desPosition;
+
+	_differentPosition *= -1;
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -165,38 +201,43 @@ RotateToAction::~RotateToAction()
 {
 }
 
-void RotateToAction::setRotation(float x, float y, float z /*= 0*/)
+void RotateToAction::setDestRotation(float x, float y, float z /*= 0*/)
 {
-	_rotation.set(x, y, z);
+	_destRotation.set(x, y, z);
 }
 
-math::Vector3 RotateToAction::getRotation()
+void render::RotateToAction::setDestRotation(const math::Vector3& rotation)
 {
-	return _rotation;
+	_destRotation = rotation;
 }
 
-void RotateToAction::updateInterval(float percent)
+const math::Vector3& render::RotateToAction::getDestRotation() const
 {
-	Node* node =_target;
-	if (node && _currentTime == _totalTime)
-	{
-		_offset = _rotation;
-		_offset-=node->getRotation();
-	}
-	if (node)
-	{
-		const math::Vector3& current = node->getRotation();
-		node->setRotation(
-			current.getX() + _offset.getX() * percent,
-			current.getY() + _offset.getY() * percent,
-			current.getZ() + _offset.getZ() * percent);
-	}
+	return _destRotation;
+}
+
+void RotateToAction::updatePercent(float percent)
+{
+	_target->setRotation(_srcRotation + percent * _differentRotation);
 }
 
 void RotateToAction::reverse()
 {
 	IntervalAction::reverse();
-	_offset *= -1;
+
+	auto value = _srcRotation + _destRotation;
+	_destRotation = value - _srcRotation;
+	_srcRotation = value - _destRotation;
+
+	_differentRotation *= -1;
+}
+
+void render::RotateToAction::initAction()
+{
+	ASSERT(_target != nullptr);
+
+	_srcRotation = _target->getRotation();
+	_differentRotation = _destRotation - _srcRotation;
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -209,33 +250,43 @@ RotateByAction::~RotateByAction()
 {
 }
 
-void RotateByAction::setRotation(float x, float y, float z /*= 0*/)
+void RotateByAction::setDifferentRotation(float x, float y, float z /*= 0*/)
 {
-	_offset.set(x, y, z);
+	_differentRotation.set(x, y, z);
 }
 
-math::Vector3 RotateByAction::getRotation()
+void render::RotateByAction::setDifferentRotation(const math::Vector3& rotation)
 {
-	return _offset;
+	_differentRotation = rotation;
 }
 
-void RotateByAction::updateInterval(float percent)
+void render::RotateByAction::initAction()
 {
-	Node* node =_target;
-	if (node)
-	{
-		const math::Vector3& current = node->getRotation();
-		node->setRotation(
-			current.getX() + _offset.getX() * percent,
-			current.getY() + _offset.getY() * percent,
-			current.getZ() + _offset.getZ() * percent);
-	}
+	ASSERT(_target != nullptr);
+
+	_srcRotation = _target->getPosition();
+	_destRotation = _srcRotation + _differentRotation;
+}
+
+const math::Vector3& RotateByAction::getDifferentRotation() const
+{
+	return _differentRotation;
+}
+
+void RotateByAction::updatePercent(float percent)
+{
+	_target->setRotation(_srcRotation + percent * _differentRotation);
 }
 
 void RotateByAction::reverse()
 {
 	IntervalAction::reverse();
-	_offset *= -1;
+
+	auto value = _srcRotation + _destRotation;
+	_destRotation = value - _srcRotation;
+	_srcRotation = value - _destRotation;
+
+	_differentRotation *= -1;
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -248,39 +299,43 @@ ScaleToAction::~ScaleToAction()
 {
 }
 
-void ScaleToAction::setScale(float x, float y, float z /*= 0*/)
+void ScaleToAction::setDestScale(float x, float y, float z /*= 0*/)
 {
-	_scale.set(x, y, z);
+	_destScale.set(x, y, z);
 }
 
-math::Vector3 ScaleToAction::getScale()
+void render::ScaleToAction::setDestScale(const math::Vector3& scale)
 {
-	return _scale;
+	_destScale = scale;
 }
 
-void ScaleToAction::updateInterval(float percent)
+void render::ScaleToAction::initAction()
 {
-	Node* node =_target;
-	if (node && _currentTime == _totalTime)
-	{
-		_offset = _scale;
-		_offset-=node->getScale();
-		_src = node->getScale();
-	}
-	if (node)
-	{
-		const math::Vector3& current = node->getScale();
-		node->setScale(
-			current.getX() + _offset.getX() * percent,
-			current.getY() + _offset.getY() * percent,
-			current.getZ() + _offset.getZ() * percent);
-	}
+	ASSERT(_target != nullptr);
+	
+	_srcScale = _target->getScale();
+	_differentScale = _destScale - _srcScale;
+}
+
+const math::Vector3& ScaleToAction::getDestScale() const
+{
+	return _destScale;
+}
+
+void ScaleToAction::updatePercent(float percent)
+{
+	_target->setScale(_srcScale + percent * _differentScale);
 }
 
 void ScaleToAction::reverse()
 {
 	IntervalAction::reverse();
-	_offset *= -1;
+
+	auto value = _srcScale + _destScale;
+	_destScale = value - _srcScale;
+	_srcScale = value - _destScale;
+
+	_differentScale *= -1;
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -293,31 +348,41 @@ ScaleByAction::~ScaleByAction()
 {
 }
 
-void ScaleByAction::setScale(float x, float y, float z /*= 0*/)
+void ScaleByAction::setDifferentScale(float x, float y, float z /*= 0*/)
 {
-	_offset.set(x, y, z);
+	_differentScale.set(x, y, z);
 }
 
-math::Vector3 ScaleByAction::getScale()
+void ScaleByAction::setDifferentScale(const math::Vector3& scale)
 {
-	return _offset;
+	_differentScale = scale;
 }
 
-void ScaleByAction::updateInterval(float percent)
+const math::Vector3& render::ScaleByAction::getDifferentScale() const
 {
-	Node* node =_target;
-	if (node)
-	{
-		const math::Vector3& current = node->getScale();
-		node->setScale(
-			current.getX() + _offset.getX() * percent,
-			current.getY() + _offset.getY() * percent,
-			current.getZ() + _offset.getZ() * percent);
-	}
+	return _differentScale;
+}
+
+void render::ScaleByAction::initAction()
+{
+	ASSERT(_target != nullptr);
+
+	_srcScale = _target->getScale();
+	_destScale = _srcScale + _differentScale;
+}
+
+void ScaleByAction::updatePercent(float percent)
+{
+	_target->setScale(_srcScale + percent * _differentScale);
 }
 
 void ScaleByAction::reverse()
 {
 	IntervalAction::reverse();
-	_offset *= -1;
+
+	auto value = _srcScale + _destScale;
+	_destScale = value - _srcScale;
+	_srcScale = value - _destScale;
+
+	_differentScale *= -1;
 }

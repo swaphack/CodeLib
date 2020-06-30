@@ -51,5 +51,15 @@ namespace math
 		*	ПаіЛ
 		*/
 		virtual Vector4 operator*(const Vector4& vec) const;
+
+		/**
+		*	ПаіЛ
+		*/
+		virtual Vector4 operator*(float k) const;
 	};
+
+	static inline Vector4 operator*(float k, const Vector4& value)
+	{
+		return value * k;
+	}
 }

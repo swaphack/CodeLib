@@ -20,7 +20,7 @@ void Action::setTarget(Node* target)
 	_target = target;
 }
 
-bool Action::isEqualsTarget(const Node* target)
+bool Action::isEqualsTarget(const Node* target) const
 {
 	return _target == target;
 }
@@ -30,5 +30,9 @@ void Action::reset()
 	this->start();
 }
 
+const render::Node* render::Action::getTarget() const
+{
+	return _target;
+}
 
 

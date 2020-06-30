@@ -25,6 +25,16 @@ void Utility::loadShader(render::Materials* mats, const std::string& vpath, cons
 
 }
 
+void Utility::loadShader(render::DrawNode* node, const std::string& vpath, const std::string& fpath)
+{
+	loadShader(node->getMaterials(), vpath, fpath);
+}
+
+void Utility::initShaderAttrib(render::DrawNode* node)
+{
+	initShaderAttrib(node->getMaterials());
+}
+
 void Utility::initShaderAttrib(render::Materials* mats)
 {
 	if (mats == nullptr)
@@ -96,7 +106,7 @@ void Utility::runRotateAction(render::Node* node)
 		return;
 	}
 	RotateByAction* pRotateByAction = CREATE_ACTION(RotateByAction);
-	pRotateByAction->setRotation(180, 180, 0);
+	pRotateByAction->setDifferentRotation(180, 180, 0);
 	pRotateByAction->setDuration(10);
 
 	RepeateForeverAction* pRepeateAction = CREATE_ACTION(RepeateForeverAction);

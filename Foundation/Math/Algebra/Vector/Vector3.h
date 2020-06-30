@@ -166,4 +166,9 @@ namespace math
 
 		static Vector3 normalize(const Vector3& vector);
 	};
+
+	static inline Vector3 operator*(float k, const Vector3& value)
+	{
+		return value * k;
+	}
 }

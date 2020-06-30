@@ -14,7 +14,7 @@ namespace render
 		RepeateAction();
 		virtual ~RepeateAction();
 	public:
-		int getCount();
+		int getCount()  const;
 		void setCount(int count);
 
 		void setAction(Action* action);
@@ -39,9 +39,10 @@ namespace render
 		RepeateForeverAction();
 		virtual ~RepeateForeverAction();
 	public:
+		static RepeateForeverAction* create(Action* action);
+	public:
 		void setAction(Action* action);
 		virtual void setTarget(Node* target);
-		
 	protected:
 		// ÖØÖÃ
 		virtual void reset();

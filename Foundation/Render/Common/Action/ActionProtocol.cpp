@@ -33,12 +33,12 @@ void ActionProtocol::stop()
 	_actionStatus = ActionStatus::STOP;
 }
 
-bool ActionProtocol::isFinish()
+bool ActionProtocol::isFinish() const
 {
 	return _actionStatus == ActionStatus::STOP;
 }
 
-bool ActionProtocol::isRunning()
+bool ActionProtocol::isRunning() const
 {
 	return _actionStatus == ActionStatus::RUNNING;
 }

@@ -12,5 +12,7 @@ public:
 protected:
 	virtual void initNodes();
 private:
-	void addLight();
+	void addSun();
+
+	void addEarth();
 };

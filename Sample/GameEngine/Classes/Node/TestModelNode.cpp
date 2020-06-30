@@ -36,7 +36,7 @@ void TestModelNode::testCubeModel()
 	this->addChild(pModel);
 
 	RotateByAction* pRotateByAction = CREATE_ACTION(RotateByAction);
-	pRotateByAction->setRotation(0, 45, 0);
+	pRotateByAction->setDifferentRotation(0, 45, 0);
 	pRotateByAction->setDuration(5);
 
 	RepeateForeverAction* pRepeateAction = CREATE_ACTION(RepeateForeverAction);
@@ -56,7 +56,7 @@ void TestModelNode::testSphereModel()
 	pModel->setPosition(512, 384, 0);
 	this->addChild(pModel);
 
-	Utility::loadShader(pModel->getMaterials(), "Shader/texture/texture.vs", "Shader/texture/texture.fs");
+	Utility::loadShader(pModel, "Shader/texture/texture.vs", "Shader/texture/texture.fs");
 	Utility::runRotateAction(pModel);
 }
 
@@ -88,7 +88,7 @@ void TestModelNode::testMultiFaceCube()
 	this->addChild(pModel);
 
 	RotateByAction* pRotateByAction = CREATE_ACTION(RotateByAction);
-	pRotateByAction->setRotation(0, 45, 0);
+	pRotateByAction->setDifferentRotation(0, 45, 0);
 	pRotateByAction->setDuration(5);
 
 	RepeateForeverAction* pRepeateAction = CREATE_ACTION(RepeateForeverAction);
@@ -113,10 +113,10 @@ void TestModelNode::testCubeMap()
 	pCubMap->setAnchorPoint(0.5f, 0.5f, 0.5f);
 	this->addChild(pCubMap);
 
-	Utility::loadShader(pCubMap->getMaterials(), "Shader/cubemap/cubemap.vs", "Shader/cubemap/cubemap.fs");
+	Utility::loadShader(pCubMap, "Shader/cubemap/cubemap.vs", "Shader/cubemap/cubemap.fs");
 
 	RotateByAction* pAction = CREATE_ACTION(RotateByAction);
-	pAction->setRotation(0, 180, 0);
+	pAction->setDifferentRotation(0, 180, 0);
 	pAction->setDuration(10);
 
 	RepeateForeverAction* pRepeateAction = CREATE_ACTION(RepeateForeverAction);
@@ -144,7 +144,7 @@ void TestModelNode::test3ds()
 	this->addChild(pModel);
 
 	RotateByAction* pRotateByAction = CREATE_ACTION(RotateByAction);
-	pRotateByAction->setRotation(180, 180, 0);
+	pRotateByAction->setDifferentRotation(180, 180, 0);
 	pRotateByAction->setDuration(10);
 
 	RepeateForeverAction* pRepeateAction = CREATE_ACTION(RepeateForeverAction);
@@ -166,7 +166,7 @@ void TestModelNode::testObj()
 	this->addChild(pModel);
 
 	RotateByAction* pRotateByAction = CREATE_ACTION(RotateByAction);
-	pRotateByAction->setRotation(180, 180, 0);
+	pRotateByAction->setDifferentRotation(180, 180, 0);
 	pRotateByAction->setDuration(10);
 
 	RepeateForeverAction* pRepeateAction = CREATE_ACTION(RepeateForeverAction);
@@ -184,7 +184,7 @@ void TestModelNode::testFbx()
 	this->addChild(pModel);
 
 	RotateByAction* pRotateByAction = CREATE_ACTION(RotateByAction);
-	pRotateByAction->setRotation(0, 180, 0);
+	pRotateByAction->setDifferentRotation(0, 180, 0);
 	pRotateByAction->setDuration(10);
 
 	RepeateForeverAction* pRepeateAction = CREATE_ACTION(RepeateForeverAction);

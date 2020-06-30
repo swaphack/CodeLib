@@ -16,15 +16,17 @@ namespace render
 		// 设置动作时长
 		void setDuration(float duration);
 		// 获取动作时长
-		float getDuration();
+		float getDuration() const;
 		// 已经过时间
-		float getElapsed();
+		float getElapsed() const;
 		// 重置
 		virtual void reset();
 		// 反转
 		virtual void reverse();
 	protected:
+		virtual void initAction();
 		virtual void updateInterval(float percent);
+		virtual void updatePercent(float curPercent);
 	protected:
 		// 总时长
 		float _totalTime;
@@ -45,17 +47,21 @@ namespace render
 		virtual ~MoveToAction();
 	public:
 		// 目标位置
-		void setPosition(float x, float y, float z = 0);
-		math::Vector3 getPosition();
+		void setDestPosition(float x, float y, float z = 0);
+		void setDestPosition(const math::Vector3& pos);
+		const math::Vector3& getDestPosition() const;
 		// 反转
 		virtual void reverse();
 	protected:
-		virtual void updateInterval(float percent);
+		virtual void initAction();
+		virtual void updatePercent(float percent);
 	protected:
+		// 起始位置
+		math::Vector3 _srcPosition;
 		// 目标位置
-		math::Vector3 _destination;
+		math::Vector3 _desPosition;
 		// 偏移总量
-		math::Vector3 _offset;
+		math::Vector3 _differentPosition;
 	};
 
 	class MoveByAction : public IntervalAction
@@ -65,15 +71,22 @@ namespace render
 		virtual ~MoveByAction();
 	public:
 		// 偏移
-		void setPosition(float x, float y, float z = 0);
-		math::Vector3 getPosition();
+		void setDifferentPosition(float x, float y, float z = 0);
+		void setDifferentPosition(const math::Vector3& pos);
+
+		const math::Vector3& getDifferentPosition() const;
 		// 反转
 		virtual void reverse();
 	protected:
-		virtual void updateInterval(float percent);
+		virtual void initAction();
+		virtual void updatePercent(float percent);
 	protected:
+		// 起始位置
+		math::Vector3 _srcPosition;
+		// 目标位置
+		math::Vector3 _desPosition;
 		// 偏移总量
-		math::Vector3 _offset;
+		math::Vector3 _differentPosition;
 	};
 
 	// 旋转
@@ -84,17 +97,21 @@ namespace render
 		virtual ~RotateToAction();
 	public:
 		// 最终旋转角度
-		void setRotation(float x, float y, float z = 0);
-		math::Vector3 getRotation();
+		void setDestRotation(float x, float y, float z = 0);
+		void setDestRotation(const math::Vector3& rotation);
+		const math::Vector3& getDestRotation() const;
 		// 反转
 		virtual void reverse();
 	protected:
-		virtual void updateInterval(float percent);
+		virtual void initAction();
+		virtual void updatePercent(float percent);
 	protected:
+		// 起始旋转角度
+		math::Vector3 _srcRotation;
 		// 最终旋转角度
-		math::Vector3 _rotation;
+		math::Vector3 _destRotation;
 		// 总改变量
-		math::Vector3 _offset;
+		math::Vector3 _differentRotation;
 	};
 
 	class RotateByAction : public IntervalAction
@@ -104,15 +121,21 @@ namespace render
 		virtual ~RotateByAction();
 	public:
 		// 偏移
-		void setRotation(float x, float y, float z = 0);
-		math::Vector3 getRotation();
+		void setDifferentRotation(float x, float y, float z = 0);
+		void setDifferentRotation(const math::Vector3& rotation);
+		const math::Vector3& getDifferentRotation() const;
 		// 反转
 		virtual void reverse();
 	protected:
-		virtual void updateInterval(float percent);
+		virtual void initAction();
+		virtual void updatePercent(float percent);
 	protected:
-		// 偏移总量
-		math::Vector3 _offset;
+		// 起始旋转角度
+		math::Vector3 _srcRotation;
+		// 最终旋转角度
+		math::Vector3 _destRotation;
+		// 总改变量
+		math::Vector3 _differentRotation;
 	};
 
 	// 缩放
@@ -122,19 +145,21 @@ namespace render
 		ScaleToAction();
 		virtual ~ScaleToAction();
 	public:
-		void setScale(float x, float y, float z = 0);
-		math::Vector3 getScale();
+		void setDestScale(float x, float y, float z = 0);
+		void setDestScale(const math::Vector3& scale);
+		const math::Vector3& getDestScale() const;
 		// 反转
 		virtual void reverse();
 	protected:
-		virtual void updateInterval(float percent);
+		virtual void initAction();
+		virtual void updatePercent(float percent);
 	protected:
 		// 初始缩放比例
-		math::Vector3 _src;
+		math::Vector3 _srcScale;
 		// 最终缩放比例
-		math::Vector3 _scale;
+		math::Vector3 _destScale;
 		// 总改变量
-		math::Vector3 _offset;
+		math::Vector3 _differentScale;
 	};
 
 	class ScaleByAction : public IntervalAction
@@ -143,14 +168,20 @@ namespace render
 		ScaleByAction();
 		virtual ~ScaleByAction();
 	public:
-		void setScale(float x, float y, float z = 0);
-		math::Vector3 getScale();
+		void setDifferentScale(float x, float y, float z = 0);
+		void setDifferentScale(const math::Vector3& scale);
+		const math::Vector3& getDifferentScale() const;
 		// 反转
 		virtual void reverse();
 	protected:
-		virtual void updateInterval(float percent);
+		virtual void initAction();
+		virtual void updatePercent(float percent);
 	protected:
-		// 偏移总量
-		math::Vector3 _offset;
+		// 初始缩放比例
+		math::Vector3 _srcScale;
+		// 最终缩放比例
+		math::Vector3 _destScale;
+		// 总改变量
+		math::Vector3 _differentScale;
 	};
 }

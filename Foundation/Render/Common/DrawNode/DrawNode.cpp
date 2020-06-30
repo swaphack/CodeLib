@@ -83,6 +83,12 @@ void render::DrawNode::setTexture(const Texture* texture)
 	this->setTextureName(MAT_TEXTURE_NAME);
 }
 
+void render::DrawNode::setTexture(const std::string& fullpath)
+{
+	this->addMaterialTexture(MAT_TEXTURE_NAME, fullpath);
+	this->setTextureName(MAT_TEXTURE_NAME);
+}
+
 void render::DrawNode::addMaterialTexture(const std::string& matName, const Texture* texture)
 {
 	_materiales->addTexture(matName, texture);

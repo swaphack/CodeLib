@@ -6,3 +6,7 @@
 #include "IntervalAction.h"
 #include "ExtAction.h"
 #include "Scheduler.h"
+
+#include "TrackAction.h"
+#include "LinearAction.h"
+#include "CurveAction.h"

@@ -27,9 +27,9 @@ namespace render
 		// 停止
 		virtual void stop();
 		// 是否结束
-		bool isFinish();
+		bool isFinish() const;
 		// 是否正在运行
-		bool isRunning();
+		bool isRunning() const;
 	protected:
 		// 动作状态
 		ActionStatus _actionStatus;

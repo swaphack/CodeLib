@@ -88,6 +88,8 @@ void render::Texture2D::load(const sys::ImageDetail* image, const TextureSetting
 		getWidth(), getHeight(), 0, format,
 		TextureExternalDataType::UNSIGNED_BYTE, image->getPixels());
 #endif
+
+	GLTexture::generateMipmap((MipmapTextureTarget)getTextureTarget());
 	GLDebug::showError();
 	this->unbindTexture();
 	GLDebug::showError();

@@ -101,7 +101,7 @@ void TestShaderNode::testImageShader()
 
 	//Utility::updateNodeShader(pImage);
 
-	Utility::loadShader(pImage->getMaterials(), "Shader/vertex/test.vs", "Shader/fragment/test.fs");
+	Utility::loadShader(pImage, "Shader/vertex/test.vs", "Shader/fragment/test.fs");
 }
 
 void TestShaderNode::testCubeModelShader()
@@ -150,7 +150,7 @@ void TestShaderNode::testSphereModelShader()
 	pModel->setPosition(512, 384, 0);
 	this->addChild(pModel);
 
-	Utility::loadShader(pModel->getMaterials(), "Shader/texture/simple_texture.vs", "Shader/texture/simple_texture.fs");
+	Utility::loadShader(pModel, "Shader/texture/simple_texture.vs", "Shader/texture/simple_texture.fs");
 	Utility::runRotateAction(pModel);
 
 	pModel->getTouchProxy()->addTouchFunc(render::TouchType::DOWN, [](Node* node, float x, float y, bool include) {
@@ -189,7 +189,7 @@ void TestShaderNode::test3dsModelShader()
 	pModel->setVolume(400, 400, 400);
 	this->addChild(pModel);
 
-	Utility::loadShader(pModel->getMaterials(), "Shader/texture/simple_texture.vs", "Shader/texture/simple_texture.fs");
+	Utility::loadShader(pModel, "Shader/texture/simple_texture.vs", "Shader/texture/simple_texture.fs");
 	Utility::runRotateAction(pModel);
 }
 
@@ -208,7 +208,7 @@ void TestShaderNode::testObjModelShader()
 	pModel->setVolume(400, 400, 400);
 	this->addChild(pModel);
 
-	Utility::loadShader(pModel->getMaterials(), "Shader/texture/simple_texture.vs", "Shader/texture/simple_texture.fs");
+	Utility::loadShader(pModel, "Shader/texture/simple_texture.vs", "Shader/texture/simple_texture.fs");
 	Utility::runRotateAction(pModel);
 }
 
@@ -227,7 +227,7 @@ void TestShaderNode::testFbxModelShader()
 	pModel->setRotationX(0);
 	this->addChild(pModel);
 
-	Utility::loadShader(pModel->getMaterials(), "Shader/texture/simple_texture.vs", "Shader/texture/simple_texture.fs");
+	Utility::loadShader(pModel, "Shader/texture/simple_texture.vs", "Shader/texture/simple_texture.fs");
 	Utility::runRotateAction(pModel);
 }
 
@@ -236,7 +236,7 @@ void TestShaderNode::addLight()
 	render::Sphere* light = CREATE_NODE(render::Sphere);
 	light->setPosition(200, 500);
 	light->setRadius(50);
-	Utility::loadShader(light->getMaterials(), "Shader/env/light.vs", "Shader/env/light.fs");
+	Utility::loadShader(light, "Shader/env/light.vs", "Shader/env/light.fs");
 	this->addChild(light);
 
 	Light0* pSpotLight = CREATE_NODE(Light0);
@@ -268,7 +268,7 @@ void TestShaderNode::testClipShader()
 
 
 	pModel->getMaterial()->setShaderProgram(pProgram);
-	Utility::initShaderAttrib(pModel->getMaterials());
+	Utility::initShaderAttrib(pModel);
 	Utility::runRotateAction(pModel);
 
 

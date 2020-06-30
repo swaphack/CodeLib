@@ -113,4 +113,9 @@ namespace math
 		*/
 		static bool isThreePointsOnSameLine(const Vector2& point0, const Vector2& point1, const Vector2& point2);
 	};
+
+	static inline Vector2 operator*(float k, const Vector2& value)
+	{
+		return value * k;
+	}
 }

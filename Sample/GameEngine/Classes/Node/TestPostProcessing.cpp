@@ -29,7 +29,7 @@ void TestPostProcessing::testSimplePostProcessing()
 
 	this->addChild(pNode);
 
-	Utility::loadShader(pNode->getMaterials(), "Shader/frame/simple_frame_buffer.vs", "Shader/frame/simple_frame_buffer.fs");
+	Utility::loadShader(pNode, "Shader/frame/simple_frame_buffer.vs", "Shader/frame/simple_frame_buffer.fs");
 }
 
 void TestPostProcessing::testImage()

@@ -15,7 +15,7 @@ RepeateAction::~RepeateAction()
 	SAFE_RELEASE(_action);
 }
 
-int RepeateAction::getCount()
+int RepeateAction::getCount() const
 {
 	return _count;
 }
@@ -173,6 +173,13 @@ void RepeateForeverAction::update(float duration)
 			pIntervalAction->update(duration - d1);
 		}
 	}
+}
+
+render::RepeateForeverAction* render::RepeateForeverAction::create(Action* action)
+{
+	auto pAction = CREATE_ACTION(render::RepeateForeverAction);
+	pAction->setAction(action);
+	return pAction;
 }
 
 //////////////////////////////////////////////////////////////////////////

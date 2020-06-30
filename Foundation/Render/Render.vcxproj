@@ -108,8 +108,11 @@
     <ClCompile Include="Common\Action\ActionProxy.cpp" />
     <ClCompile Include="Common\Action\ExtAction.cpp" />
     <ClCompile Include="Common\Action\IntervalAction.cpp" />
+    <ClCompile Include="Common\Action\LinearAction.cpp" />
     <ClCompile Include="Common\Action\Scheduler.cpp" />
     <ClCompile Include="Common\Action\SchedulerProtocol.cpp" />
+    <ClCompile Include="Common\Action\CurveAction.cpp" />
+    <ClCompile Include="Common\Action\TrackAction.cpp" />
     <ClCompile Include="Common\Audio\AudioProtocol.cpp" />
     <ClCompile Include="Common\Audio\AudioManager.cpp" />
     <ClCompile Include="Common\Audio\CtrlAudioGeometry.cpp" />
@@ -309,8 +312,11 @@
     <ClInclude Include="Common\Action\import.h" />
     <ClInclude Include="Common\Action\IntervalAction.h" />
     <ClInclude Include="Common\Action\ExtAction.h" />
+    <ClInclude Include="Common\Action\LinearAction.h" />
     <ClInclude Include="Common\Action\Scheduler.h" />
     <ClInclude Include="Common\Action\SchedulerProtocol.h" />
+    <ClInclude Include="Common\Action\CurveAction.h" />
+    <ClInclude Include="Common\Action\TrackAction.h" />
     <ClInclude Include="Common\Audio\AudioProtocol.h" />
     <ClInclude Include="Common\Audio\AudioManager.h" />
     <ClInclude Include="Common\Audio\CtrlAudioSourceClip.h" />

@@ -5,18 +5,6 @@
 
 namespace render
 {
-#define CREATE_ACTION(ACTION_TYPE) createAction<ACTION_TYPE>()
-
-	template<typename T>
-	T* createAction()
-	{
-		T* temp = new T();
-
-		AUTO_RELEASE_OBJECT(temp);
-
-		return temp;
-	}
-
 	class Node;
 
 	//class ActionManager;
@@ -35,9 +23,23 @@ namespace render
 		// 设置动作执行目标
 		virtual void setTarget(Node* target);
 		// 判断动作执行对象是否相同
-		bool isEqualsTarget(const Node* target);
+		bool isEqualsTarget(const Node* target) const;
+
+		const Node* getTarget() const;
 	protected:
 		// 动作执行目标
 		Node* _target;
 	};
+
+#define CREATE_ACTION(ACTION_TYPE) createAction<ACTION_TYPE>()
+
+	template<typename T, typename = std::enable_if<std::is_base_of<Action, T>::value, T>::type>
+	T* createAction()
+	{
+		T* temp = new T();
+
+		AUTO_RELEASE_OBJECT(temp);
+
+		return temp;
+	}
 }

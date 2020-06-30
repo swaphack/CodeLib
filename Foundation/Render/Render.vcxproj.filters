@@ -549,6 +549,15 @@
     <ClCompile Include="Common\Shader\ComputeShaderProgram.cpp">
       <Filter>Common\Shader</Filter>
     </ClCompile>
+    <ClCompile Include="Common\Action\LinearAction.cpp">
+      <Filter>Common\Action</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Action\CurveAction.cpp">
+      <Filter>Common\Action</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Action\TrackAction.cpp">
+      <Filter>Common\Action</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Common\Node\import.h">
@@ -1259,6 +1268,15 @@
     </ClInclude>
     <ClInclude Include="Common\Shader\ComputeShaderProgram.h">
       <Filter>Common\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Action\LinearAction.h">
+      <Filter>Common\Action</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Action\CurveAction.h">
+      <Filter>Common\Action</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Action\TrackAction.h">
+      <Filter>Common\Action</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

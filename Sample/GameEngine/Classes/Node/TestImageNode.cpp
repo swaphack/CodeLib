@@ -204,7 +204,7 @@ void TestImageNode::testPointSprite()
 	pSprite->setVolume(512, 384);
 	pSprite->setAnchorPoint(0.5f, 0.5f);
 
-	Utility::loadShader(pSprite->getMaterials(), "Shader/point_sprite/point_sprite.vs", "Shader/point_sprite/point_sprite.fs");
+	Utility::loadShader(pSprite, "Shader/point_sprite/point_sprite.vs", "Shader/point_sprite/point_sprite.fs");
 
 	this->addChild(pSprite);
 }

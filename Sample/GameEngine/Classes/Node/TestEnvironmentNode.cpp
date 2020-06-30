@@ -33,7 +33,7 @@ void TestEnvironmentNode::init3DSkyBox()
 	pSkyBox->setAnchorPoint(0.5f, 0.5f, 0.5f);
 	this->addChild(pSkyBox);
 
-	Utility::loadShader(pSkyBox->getMaterials(), "Shader/env/skybox.vs", "Shader/env/skybox.fs");
+	Utility::loadShader(pSkyBox, "Shader/env/skybox.vs", "Shader/env/skybox.fs");
 	
 	pSkyBox->setShaderProgramFunc([](ShaderProgram* program) {
 		auto pUniform = program->getUniform("matrix.view");
@@ -46,7 +46,7 @@ void TestEnvironmentNode::init3DSkyBox()
 	});
 
 	RotateByAction* pRotateByAction = CREATE_ACTION(RotateByAction);
-	pRotateByAction->setRotation(0, 180, 0);
+	pRotateByAction->setDifferentRotation(0, 180, 0);
 	pRotateByAction->setDuration(20);
 
 	RepeateForeverAction* pRepeateAction = CREATE_ACTION(RepeateForeverAction);
@@ -72,7 +72,7 @@ void TestEnvironmentNode::init2DSkyBox()
 	pSkyBox->setAnchorPoint(0.5f, 0.5f, 0.5f);
 	this->addChild(pSkyBox);
 
-	Utility::loadShader(pSkyBox->getMaterials(), "Shader/texture/texture.vs", "Shader/texture/texture.fs");
+	Utility::loadShader(pSkyBox, "Shader/texture/texture.vs", "Shader/texture/texture.fs");
 
 	pSkyBox->setShaderProgramFunc([](ShaderProgram* program) {
 		auto pUniform = program->getUniform("matrix.view");
@@ -85,7 +85,7 @@ void TestEnvironmentNode::init2DSkyBox()
 	});
 
 	RotateByAction* pRotateByAction = CREATE_ACTION(RotateByAction);
-	pRotateByAction->setRotation(0, 180, 0);
+	pRotateByAction->setDifferentRotation(0, 180, 0);
 	pRotateByAction->setDuration(10);
 
 	RepeateForeverAction* pRepeateAction = CREATE_ACTION(RepeateForeverAction);
@@ -96,10 +96,12 @@ void TestEnvironmentNode::init2DSkyBox()
 void TestEnvironmentNode::testCamera()
 {
 	Camera* pCamera = Camera::getMainCamera();
+	/*
 	if (pCamera->getDimensions() == CameraDimensions::TWO)
 	{
 		return;
 	}
+	*/
 	
 	auto size = Tool::getGLViewSize();
 

@@ -113,3 +113,8 @@ math::Vector4::~Vector4()
 {
 
 }
+
+math::Vector4 math::Vector4::operator*(float k) const
+{
+	return math::Vector4(k * this->getX(), k * this->getY(), k * this->getZ(), k * this->getW());
+}

@@ -55,9 +55,13 @@ namespace render
 		Mesh* getMesh(const std::string& name = DRAW_MESH_INDEX);
 	public:
 		/**
-		*	添加纹理
+		*	设置纹理
 		*/
 		void setTexture(const Texture* texture);
+		/**
+		*	设置纹理
+		*/
+		void setTexture(const std::string& fullpath);
 		/**
 		*	添加纹理
 		*/
