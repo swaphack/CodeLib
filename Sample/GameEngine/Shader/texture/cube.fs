@@ -2,7 +2,7 @@
 
 #include "Shader/core/texture.fs"
 
-uniform Texture tex;
+uniform TextureCube tex;
 
 in vec2 fragTexcoord;
 in vec4 fragColor;

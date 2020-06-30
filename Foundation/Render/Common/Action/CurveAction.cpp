@@ -117,18 +117,12 @@ math::Vector3 render::EllipseAction::getPosition(float percent)
 {
 	float angle = percent * 2 * M_PI;
 
-	PRINT("percent %f, angle %f, %f, %f\n", percent, angle, cosf(angle), sinf(angle));
-
 	float x = _radiusX * cosf(angle);
 	float y = _radiusY * sinf(angle);
 
 	math::Vector3 pos(x, y);
 
-	PRINT("pos %f, %f\n", x, y);
-
 	math::Matrix44 transpose = math::Matrix44::getRST(_eularRadian, math::Vector3(1, 1, 1), pos);
-
-	PRINT("transpose %s\n", transpose.toString().c_str());
 
 	math::Matrix44 center;
 	center.setTranslate(_centerPoint);
@@ -136,8 +130,6 @@ math::Vector3 render::EllipseAction::getPosition(float percent)
 	math::Matrix44 result = transpose * center;
 
 	math::Vector3 newPos = result.getPosition();
-
-	PRINT("newPos %f, %f, %f\n\n", newPos.getX(), newPos.getY(), newPos.getZ());
 
 	return newPos;
 }

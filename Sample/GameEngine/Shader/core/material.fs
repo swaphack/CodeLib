@@ -13,11 +13,12 @@ struct Material
 	float shininess;
 };
 
+// 环境
 vec4 get_mat_ambient(Light light,  Material material)
 {
 	return light.ambient * material.ambient;
 }
-
+// 漫反射
 vec4 get_mat_diffuse(Light light, Material material, vec3 fragNormal, vec3 fragPos)
 {
 	vec3 norm = normalize(fragNormal);
@@ -28,7 +29,7 @@ vec4 get_mat_diffuse(Light light, Material material, vec3 fragNormal, vec3 fragP
 
     return light.diffuse * (diff * material.diffuse); 
 }
-
+// 镜面反射
 vec4 get_mat_specular(Light light, Material material, vec3 fragNormal, vec3 fragPos, vec3 viewPos)
 {
 	vec3 norm = normalize(fragNormal);
@@ -43,16 +44,18 @@ vec4 get_mat_specular(Light light, Material material, vec3 fragNormal, vec3 frag
 	return light.specular * (spec * material.specular);
 }
 
+// 环境
 vec4 get_mat_ambient(Light light,  Material material, vec2 fragTexcoord)
 {
 	return get_mat_ambient(light, material) * texture(material.texAmbient, fragTexcoord);
 }
-
+// 漫反射
 vec4 get_mat_diffuse(Light light, Material material, vec3 fragNormal, vec3 fragPos, vec2 fragTexcoord)
 {
     return get_mat_diffuse(light, material, fragNormal, fragPos) * texture(material.texDiffuse, fragTexcoord); 
 }
 
+// 镜面反射
 vec4 get_mat_specular(Light light, Material material, vec3 fragNormal, vec3 fragPos, vec2 fragTexcoord, vec3 viewPos)
 {
 	return get_mat_specular(light, material, fragNormal, fragPos, viewPos) * texture(material.texSpecular, fragTexcoord);

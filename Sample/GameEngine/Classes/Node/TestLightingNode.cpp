@@ -29,10 +29,12 @@ void TestLightingNode::addSun()
 	Utility::loadShader(pLightShape, "Shader/texture/texture.vs", "Shader/texture/texture.fs");
 	this->addChild(pLightShape);
 
+	Utility::runRotateAction(pLightShape);
+
 	render::Light0* pLight = CREATE_NODE(render::Light0);
-	pLight->setAmbient(255, 255, 255, 255);
-	pLight->setDiffuse(255, 255, 255, 255);
-	pLight->setSpecular(255, 255, 255, 255);
+	pLight->setAmbient(100, 100, 100, 255);
+	pLight->setDiffuse(255, 0, 0, 255);
+	pLight->setSpecular(0, 255, 0, 255);
 	pLightShape->addChild(pLight);
 }
 
@@ -42,10 +44,11 @@ void TestLightingNode::addEarth()
 	pEarth->setTexture("Resource/Image/2k_earth_daymap.jpg");
 	pEarth->setRadius(25);
 
-	Utility::loadShader(pEarth, "Shader/texture/texture.vs", "Shader/texture/texture.fs");
+	//Utility::loadShader(pEarth, "Shader/texture/texture.vs", "Shader/texture/texture.fs");
+	Utility::loadShader(pEarth, "Shader/material/material_texture.vs", "Shader/material/material_texture.fs");
 	this->addChild(pEarth);
 
-	//Utility::runRotateAction(pEarth);
+	Utility::runRotateAction(pEarth);
 
 	render::EllipseAction* pAction = render::CREATE_ACTION(render::EllipseAction);
 	pAction->setControlParameters(math::Vector3(512, 384), 400, 200, math::Vector3(45, 45, 0));

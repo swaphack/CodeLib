@@ -5,7 +5,6 @@
 
 uniform Matrix matrix;
 
-
 out vec2 fragTexcoord;
 out vec3 fragNormal;
 out vec3 fragPos;

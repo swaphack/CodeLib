@@ -106,8 +106,8 @@ void Utility::runRotateAction(render::Node* node)
 		return;
 	}
 	RotateByAction* pRotateByAction = CREATE_ACTION(RotateByAction);
-	pRotateByAction->setDifferentRotation(180, 180, 0);
-	pRotateByAction->setDuration(10);
+	pRotateByAction->setDifferentRotation(360, 0, 0);
+	pRotateByAction->setDuration(5);
 
 	RepeateForeverAction* pRepeateAction = CREATE_ACTION(RepeateForeverAction);
 	pRepeateAction->setAction(pRotateByAction);

@@ -1,10 +1,8 @@
 #version 330 core
 
-
-
 #include "Shader/core/texture.fs"
 
-uniform Texture tex;
+uniform TextureCube tex;
 
 in vec3 fragPosition;
 in vec3 fragNormal;

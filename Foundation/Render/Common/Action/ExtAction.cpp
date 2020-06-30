@@ -152,6 +152,7 @@ void RepeateForeverAction::update(float duration)
 	}
 
 	float d1 = duration;
+	/*
 	IntervalAction* pIntervalAction = _action->as<IntervalAction>();
 	if (pIntervalAction)
 	{
@@ -161,17 +162,19 @@ void RepeateForeverAction::update(float duration)
 		{
 			d1 = pIntervalAction->getDuration() - elapsed;
 		}
-	}	
+	}
+	*/
 
 	_action->update(d1);
 	if (_action->isFinish())
 	{
 		_action->reset();
-
+		/*
 		if (pIntervalAction)
 		{
 			pIntervalAction->update(duration - d1);
 		}
+		*/
 	}
 }
 

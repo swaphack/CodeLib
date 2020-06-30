@@ -27,12 +27,15 @@ void IntervalAction::update(float duration)
 	{
 		initAction();
 	}
-	if (_currentTime <= _totalTime && duration != 0)
+	if (_currentTime < _totalTime)
 	{
 		float temp = duration;
-		if (_currentTime + duration >= _totalTime)
+
+		_currentTime += duration;
+		if (_currentTime >= _totalTime)
 		{
-			temp = _totalTime - _currentTime;
+			temp = duration - (_currentTime - _totalTime);
+			_currentTime = _totalTime;
 		}
 		{
 			float percent = temp / _totalTime;
@@ -43,8 +46,6 @@ void IntervalAction::update(float duration)
 			float percent = _currentTime / _totalTime;
 			this->updatePercent(percent);
 		}
-
-		_currentTime += duration;
 	}
 	else
 	{

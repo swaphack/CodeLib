@@ -150,7 +150,7 @@ void TestShaderNode::testSphereModelShader()
 	pModel->setPosition(512, 384, 0);
 	this->addChild(pModel);
 
-	Utility::loadShader(pModel, "Shader/texture/simple_texture.vs", "Shader/texture/simple_texture.fs");
+	Utility::loadShader(pModel, "Shader/material/material_texture.vs", "Shader/material/material_texture.fs");
 	Utility::runRotateAction(pModel);
 
 	pModel->getTouchProxy()->addTouchFunc(render::TouchType::DOWN, [](Node* node, float x, float y, bool include) {
@@ -189,7 +189,7 @@ void TestShaderNode::test3dsModelShader()
 	pModel->setVolume(400, 400, 400);
 	this->addChild(pModel);
 
-	Utility::loadShader(pModel, "Shader/texture/simple_texture.vs", "Shader/texture/simple_texture.fs");
+	Utility::loadShader(pModel, "Shader/material/material_texture.vs", "Shader/material/material_texture.fs");
 	Utility::runRotateAction(pModel);
 }
 
@@ -208,7 +208,7 @@ void TestShaderNode::testObjModelShader()
 	pModel->setVolume(400, 400, 400);
 	this->addChild(pModel);
 
-	Utility::loadShader(pModel, "Shader/texture/simple_texture.vs", "Shader/texture/simple_texture.fs");
+	Utility::loadShader(pModel, "Shader/material/material_texture.vs", "Shader/material/material_texture.fs");
 	Utility::runRotateAction(pModel);
 }
 
@@ -227,7 +227,7 @@ void TestShaderNode::testFbxModelShader()
 	pModel->setRotationX(0);
 	this->addChild(pModel);
 
-	Utility::loadShader(pModel, "Shader/texture/simple_texture.vs", "Shader/texture/simple_texture.fs");
+	Utility::loadShader(pModel, "Shader/material/material_texture.vs", "Shader/material/material_texture.fs");
 	Utility::runRotateAction(pModel);
 }
 
