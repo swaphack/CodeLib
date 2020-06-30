@@ -98,8 +98,8 @@ void render::Sphere::updateSphere()
 		for (int i = 0; i < SPHERE_HORIZONTAL_COUNT; i++)
 		{
 			math::Vector2 ua = math::Vector2(0, 0);
-			math::Vector2 ub = math::Vector2(u, vstep);
-			math::Vector2 uc = math::Vector2(u + ustep, vstep);
+			math::Vector2 uc = math::Vector2(u, vstep);
+			math::Vector2 ub = math::Vector2(u + ustep, vstep);
 
 			math::Vector3 va = getPoint(ua);
 			math::Vector3 vb = getPoint(ub);
