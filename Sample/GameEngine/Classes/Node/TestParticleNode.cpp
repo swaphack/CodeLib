@@ -112,7 +112,7 @@ render::Node* TestParticleNode::createCubeModel()
 	std::string filepath = "Resource/Image/NeHe.png";
 
 	Cube* pModel = CREATE_NODE(Cube);
-	pModel->setFaceImage(filepath);
+	pModel->setTexture(filepath);
 	pModel->setPosition(500, 500, 0);
 	pModel->setVolume(200, 200, 200);
 	pModel->setAnchorPoint(0.5f, 0.5f, 0.5f);

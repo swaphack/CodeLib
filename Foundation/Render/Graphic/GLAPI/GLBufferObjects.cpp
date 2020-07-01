@@ -472,6 +472,16 @@ void GLBufferObjects::getBufferParameter(GetBufferTarget target, GetBufferParame
 	glGetBufferParameteri64v((GLenum)target, (GLenum)pname, params);
 }
 
+void* render::GLBufferObjects::getMapBufferRange(BufferTarget target, ptrdiff_t offset, ptrdiff_t length, MapBufferRangeAccess access)
+{
+	return getMapBufferRange(target, offset, length, (uint32_t)access);
+}
+
+void* render::GLBufferObjects::getMapNamedBufferRange(uint32_t buffer, ptrdiff_t offset, ptrdiff_t length, MapBufferRangeAccess access)
+{
+	return getMapNamedBufferRange(buffer, offset, length, (uint32_t)access);
+}
+
 void render::GLBufferObjects::setVertexAttrib(uint32_t index, float v0)
 {
 	glVertexAttrib1f(index, v0);
@@ -817,6 +827,16 @@ uint32_t render::GLBufferObjects::genBuffer()
 	uint32_t id;
 	genBuffers(1, &id);
 	return id;
+}
+
+void render::GLBufferObjects::setBufferStorage(BufferTarget target, ptrdiff_t size, const void* data, BufferStorageFlag flag)
+{
+	setBufferStorage(target, size, data, (uint32_t)flag);
+}
+
+void render::GLBufferObjects::setNamedBufferStorage(uint32_t buffer, ptrdiff_t size, const void* data, BufferStorageFlag flag)
+{
+	setNamedBufferStorage(buffer, size, data, (uint32_t)flag);
 }
 
 uint32_t render::GLBufferObjects::createBuffer()

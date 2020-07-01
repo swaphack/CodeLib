@@ -109,7 +109,7 @@ void TestShaderNode::testCubeModelShader()
 	std::string filepath = "Resource/Image/NeHe.png";
 
 	Cube* pModel = CREATE_NODE(Cube);
-	pModel->setFaceImage(filepath);
+	pModel->setTexture(filepath);
 	pModel->setPosition(100, 100, 0);
 	pModel->setVolume(200, 200, 200);
 	pModel->setAnchorPoint(0.5f, 0.5f, 0.5f);
@@ -252,9 +252,7 @@ void TestShaderNode::testClipShader()
 	std::string textureName = "face";
 
 	MultiFaceCube* pModel = CREATE_NODE(MultiFaceCube);
-	pModel->addMaterialTexture(textureName, pTexture);
-
-	pModel->setTextureName(textureName);
+	pModel->setTexture(pTexture);
 	pModel->setPosition(400, 400, 0);
 	pModel->setVolume(200, 200, 200);
 	pModel->setAnchorPoint(0.0f, 0.5f, 0.5f);

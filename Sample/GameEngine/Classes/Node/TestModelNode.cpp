@@ -28,7 +28,7 @@ void TestModelNode::testCubeModel()
 	std::string filepath = "Resource/Image/NeHe.png";
 
 	render::Cube* pModel = CREATE_NODE(render::Cube);
-	pModel->setFaceImage(filepath);
+	pModel->setTexture(filepath);
 
 	pModel->setAnchorPoint(math::Vector3(0.5f, 0.5f, 0.5f));
 	pModel->setPosition(512, 384, 0);

@@ -16,8 +16,6 @@ namespace render
 		virtual ~Cube();
 	public:
 		virtual bool init();
-	public:
-		void setFaceImage(const std::string& filepath);
 	protected:
 		void onSpaceChanged();
 	private:

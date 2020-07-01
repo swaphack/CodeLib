@@ -19,6 +19,11 @@ namespace render
 
 
 #define MAT_TEXTURE_NAME "MAT_TEXTURE_NAME"
+#define MAT_TEXTURE_AMBIENT "MAT_TEXTURE_AMBIENT"
+#define MAT_TEXTURE_DIFFUSE "MAT_TEXTURE_DIFFUSE"
+#define MAT_TEXTURE_SPECULAR "MAT_TEXTURE_SPECULAR"
+#define MAT_TEXTURE_ALPHA "MAT_TEXTURE_ALPHA"
+#define MAT_TEXTURE_BUMP "MAT_TEXTURE_BUMP"
 
 	/**
 	*	绘制节点
@@ -57,53 +62,44 @@ namespace render
 		/**
 		*	设置纹理
 		*/
-		void setTexture(const Texture* texture);
+		void setTexture(const std::string& name, const std::string& fullpath);
+		/**
+		*	设置纹理
+		*/
+		void setTexture(const std::string& name, const Texture* texture);
 		/**
 		*	设置纹理
 		*/
 		void setTexture(const std::string& fullpath);
 		/**
-		*	添加纹理
-		*/
-		void addMaterialTexture(const std::string& matName, const std::string& fullpath);
-		/**
-		*	添加纹理
-		*/
-		void addMaterialTexture(const std::string& matName, const Texture* texture);
-		/**
 		*	设置纹理
 		*/
-		void setTextureName(const std::string& textureName);
+		void setTexture(const Texture* texture);
 		/**
 		*	设置Ambient纹理
 		*/
-		void setAmbientTextureName(const std::string& textureName);
+		void setAmbientTexture(const std::string& fullpath);
 		/**
 		*	设置Diffuse纹理
 		*/
-		void setDiffuseTextureName(const std::string& textureName);
+		void setDiffuseTexture(const std::string& fullpath);
 		/**
 		*	设置Diffuse纹理
 		*/
-		void setSpecularTextureName(const std::string& textureName);
+		void setSpecularTexture(const std::string& fullpath);
 		/**
 		*	设置Alpha纹理
 		*/
-		void setAlphaTextureName(const std::string& textureName);
+		void setAlphaTexture(const std::string& fullpath);
 		/**
 		*	设置Alpha纹理
 		*/
-		void setBumpTextureName(const std::string& textureName);
+		void setBumpTexture(const std::string& fullpath);
 	public:
-		/**
-		*	获取着色器
-		*/
-		ShaderProgram* getMaterialShaderProgram(const std::string& matName);
 		/**
 		*	设置着色器
 		*/
 		void setShaderProgram(ShaderProgram* program);
-	public:
 		/**
 		*	设置着色器处理函数
 		*/
@@ -122,7 +118,13 @@ namespace render
 		*/
 		virtual void afterDraw();
 	protected:
+		/**
+		*	初始化缓存对象
+		*/
 		virtual void initBufferObject();
+		/**
+		*	更新mesh数据
+		*/
 		virtual void updateBufferData();
 	protected:
 		// 材质

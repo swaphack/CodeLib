@@ -30,19 +30,18 @@ namespace render
 		*	大小
 		*/
 		int getPointSize() const;
-		/**
-		*	设置图片
-		*/
-		void setImagePath(const std::string& filepath);
-		/**
-		*	设置纹理
-		*/
-		void setTexture(const Texture2D* texture);
 	protected:
+		/**
+		*	更新点精灵
+		*/
 		void updatePointSprite();
-
+		/**
+		*	绘制前处理
+		*/
 		virtual void beforeDraw();
-
+		/**
+		*	绘制后处理
+		*/
 		virtual void afterDraw();
 	private:
 		/**

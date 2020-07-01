@@ -14,7 +14,7 @@ render::ShaderManager::~ShaderManager()
 	this->clear();
 }
 
-render::VertexShaderProgram* render::ShaderManager::createVertexProgram(const std::string& vertexFilepath)
+render::VertexShaderProgram* render::ShaderManager::createVertexProgram(const std::string& vertexFilepath, bool link)
 {
 	auto it = _shaderPrograms.find(vertexFilepath);
 	if (it != _shaderPrograms.end())
@@ -30,7 +30,10 @@ render::VertexShaderProgram* render::ShaderManager::createVertexProgram(const st
 	}
 
 	pProgram->attachShader(pVertexShader);
-	pProgram->link();
+	if (link)
+	{
+		pProgram->link();
+	}
 
 	SAFE_RETAIN(pProgram);
 
@@ -39,7 +42,7 @@ render::VertexShaderProgram* render::ShaderManager::createVertexProgram(const st
 	return pProgram;
 }
 
-render::VertexFragmentShaderProgram* render::ShaderManager::createVertexFragmentProgram(const std::string& vertexFilepath, const std::string& fragFilepath)
+render::VertexFragmentShaderProgram* render::ShaderManager::createVertexFragmentProgram(const std::string& vertexFilepath, const std::string& fragFilepath, bool link)
 {
 	auto key = vertexFilepath + fragFilepath;
 	auto it = _shaderPrograms.find(key);
@@ -65,7 +68,10 @@ render::VertexFragmentShaderProgram* render::ShaderManager::createVertexFragment
 	pProgram->attachShader(fragShader);
 
 	pProgram->bindFragDataLocation(0, "color");
-	pProgram->link();
+	if (link)
+	{
+		pProgram->link();
+	}
 
 	SAFE_RETAIN(pProgram);
 
@@ -74,7 +80,7 @@ render::VertexFragmentShaderProgram* render::ShaderManager::createVertexFragment
 	return pProgram;
 }
 
-render::ComputeShaderProgram* render::ShaderManager::createComputeProgram(const std::string& computeFilepath)
+render::ComputeShaderProgram* render::ShaderManager::createComputeProgram(const std::string& computeFilepath, bool link)
 {
 	auto it = _shaderPrograms.find(computeFilepath);
 	if (it != _shaderPrograms.end())
@@ -91,7 +97,10 @@ render::ComputeShaderProgram* render::ShaderManager::createComputeProgram(const 
 
 	pProgram->attachShader(pComputeShader);
 
-	pProgram->link();
+	if (link)
+	{
+		pProgram->link();
+	}
 
 	SAFE_RETAIN(pProgram);
 

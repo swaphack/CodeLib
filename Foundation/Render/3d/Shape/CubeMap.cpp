@@ -50,8 +50,7 @@ void render::CubeMap::onImageChanged()
 		return;
 	}
 
-	this->addMaterialTexture(MAT_TEXTURE_NAME, _texCubeMap);
-	this->setTextureName(MAT_TEXTURE_NAME);
+	this->setTexture(_texCubeMap);
 }
 
 void render::CubeMap::onCubeChanged()

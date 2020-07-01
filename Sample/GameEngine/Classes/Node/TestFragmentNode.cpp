@@ -18,11 +18,8 @@ void TestFragmentNode::initNodes()
 
 void TestFragmentNode::testStencil()
 {
-	Texture2D* pTexture2D = G_TEXTURE_CACHE->createTexture2D("Resource/Image/NeHe.png");
 	MultiFaceCube* pCube = CREATE_NODE(MultiFaceCube);
-	pCube->addMaterialTexture("Face", pTexture2D);
-	pCube->setVolume(200, 300, 200);
-	pCube->setTextureName("Face");
+	pCube->setTexture("Resource/Image/NeHe.png");
 	pCube->setRotation(45, 45, 0);
 	pCube->setPosition(400, 400);
 	Utility::updateNodeShader(pCube);

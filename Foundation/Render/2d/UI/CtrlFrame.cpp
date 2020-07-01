@@ -41,25 +41,27 @@ bool CtrlFrame::init()
 	return true;
 }
 
-void CtrlFrame::setTexture(const Texture2D* texture)
+void CtrlFrame::setTextureWithRect(const std::string& filepath)
 {
-	if (texture == nullptr)
-	{
-		return;
-	}
+	this->setTexture(filepath);
 
-	addMaterialTexture(MAT_TEXTURE_NAME, texture);
-	setTextureName(MAT_TEXTURE_NAME);
+	auto pTexture = this->getMaterials()->getTexture(MAT_TEXTURE_NAME);
+	if (pTexture)
+	{
+		this->setVolume(pTexture->getWidth(), pTexture->getHeight(), pTexture->getDepth());
+	}
 
 	this->notify(NodeNotifyType::TEXTURE);
 }
 
-void CtrlFrame::setTextureWithRect(const Texture2D* texture)
+void render::CtrlFrame::setTextureWithRect(const Texture* texture)
 {
-	addMaterialTexture(MAT_TEXTURE_NAME, texture);
-	setTextureName(MAT_TEXTURE_NAME);
+	this->setTexture(texture);
 
-	this->setVolume(texture->getWidth(), texture->getHeight(), texture->getDepth());
+	if (texture)
+	{
+		this->setVolume(texture->getWidth(), texture->getHeight(), texture->getDepth());
+	}
 
 	this->notify(NodeNotifyType::TEXTURE);
 }

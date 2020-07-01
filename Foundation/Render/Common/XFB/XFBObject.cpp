@@ -20,7 +20,7 @@ render::XFBObject::~XFBObject()
 void render::XFBObject::loadVertexProgram(const std::string& vertexFilepath)
 {
 	SAFE_RELEASE(_vertexProgram);
-	_vertexProgram = (ShaderProgram*)G_SHANDER->createVertexProgram(vertexFilepath);
+	_vertexProgram = (ShaderProgram*)G_SHANDER->createVertexProgram(vertexFilepath, false);
 	SAFE_RETAIN(_vertexProgram);
 
 	_transformFeedback->setShaderProgram(_vertexProgram);
@@ -43,11 +43,6 @@ void render::XFBObject::setBufferSize(uint32_t size)
 	}
 
 	_bufferSize = size;
-
-	_transformFeedbackBuffer->bindBuffer();
-	_transformFeedbackBuffer->setBufferData(size, nullptr, BufferDataUsage::STREAM_DRAW);
-	_transformFeedbackBuffer->unbindBuffer();
-	GLDebug::showError();
 }
 
 void render::XFBObject::setTargetBufferRange(int index, uint32_t offset, uint32_t size)
@@ -100,7 +95,7 @@ void render::XFBObject::draw()
 		return;
 	}
 
-	//_hadDraw = true;
+	_hadDraw = true;
 
 	if (_vertexProgram == nullptr)
 	{
@@ -120,7 +115,15 @@ void render::XFBObject::draw()
 
 	GLDebug::showError();
 
+	_transformFeedbackBuffer->bindBuffer();
+	_transformFeedbackBuffer->setBufferData(_bufferSize, nullptr, BufferDataUsage::STATIC_READ);
+	
+	
+	GLDebug::showError();
+
 	GLState::enable(EnableMode::RASTERIZER_DISCARD);
+
+	_transformFeedbackBuffer->bindBufferBase(0);
 
 	_transformFeedback->bindTransformFeedback();
 	_transformFeedback->beginWatch(_primitiveMode);
@@ -128,10 +131,13 @@ void render::XFBObject::draw()
 	GLBufferObjects::drawArrays(DrawMode::POINTS, 0, _watchCount);
 	GLDebug::showError();
 	_transformFeedback->endWatch();
-	_transformFeedback->unbindTransformFeedback();
-	GLDebug::showError();
+
 
 	GLState::disable(EnableMode::RASTERIZER_DISCARD);
+
+	GLRender::flush();
+	//
+	GLDebug::showError();
 	_vertexProgram->unuse();
 	GLDebug::showError();
 
@@ -139,6 +145,9 @@ void render::XFBObject::draw()
 	{
 		_outputFunc(_transformFeedbackBuffer);
 	}
+
+	_transformFeedbackBuffer->unbindBuffer();
+	_transformFeedback->unbindTransformFeedback();
 }
 
 void render::XFBObject::initXFB()

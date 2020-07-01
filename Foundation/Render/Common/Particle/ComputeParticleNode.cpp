@@ -166,7 +166,7 @@ void render::ComputeParticleNode::update(float dt)
 	GLDebug::showError();
 	_attractorBuffer->bindBuffer();
 
-	float* positions = (float*)_attractorBuffer->getMapBuffer(0, size, GL_MAP_WRITE_BIT | GL_MAP_INVALIDATE_BUFFER_BIT);
+	float* positions = (float*)_attractorBuffer->getMapBufferRange(0, size, GL_MAP_WRITE_BIT | GL_MAP_INVALIDATE_BUFFER_BIT);
 	for (int i = 0; i < count; i++)
 	{
 		positions[i * 4 + 0] = sinf(dt * (float)(i + 4) * 7.5f * 20.0f) * 50.0f;
@@ -197,7 +197,7 @@ void render::ComputeParticleNode::updateParticleParameter()
 	_positionBuffer->bindBuffer();
 	_positionBuffer->setBufferData(size, BufferDataUsage::DYNAMIC_COPY);
 
-	float* position = (float*)_positionBuffer->getMapBuffer(0, size, GL_MAP_WRITE_BIT | GL_MAP_INVALIDATE_BUFFER_BIT);
+	float* position = (float*)_positionBuffer->getMapBufferRange(0, size, GL_MAP_WRITE_BIT | GL_MAP_INVALIDATE_BUFFER_BIT);
 	for (int i = 0; i < getParticleCount(); i++)
 	{
 		position[i * 4 + 0] = sys::Random::getNumber(-getAnchorPointX(), 1 - getAnchorPointX()) * getWidth();
@@ -223,7 +223,7 @@ void render::ComputeParticleNode::updateParticleParameter()
 	_velocityBuffer->bindBuffer();
 	_velocityBuffer->setBufferData(size, BufferDataUsage::DYNAMIC_COPY);
 
-	float* velocity = (float*)_velocityBuffer->getMapBuffer(0, size, GL_MAP_WRITE_BIT | GL_MAP_INVALIDATE_BUFFER_BIT);
+	float* velocity = (float*)_velocityBuffer->getMapBufferRange(0, size, GL_MAP_WRITE_BIT | GL_MAP_INVALIDATE_BUFFER_BIT);
 	for (int i = 0; i < getParticleCount(); i++)
 	{
 		velocity[i * 4 + 0] = sys::Random::getNumber(-1.0f, 1.0f);

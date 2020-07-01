@@ -26,11 +26,8 @@ void TestTextureNode::testMultiTexture()
 	Utility::loadShader(pFrame, "Shader/texture/multi_texture.vs", "Shader/texture/multi_texture.fs");
 	Utility::initShaderAttrib(pFrame);
 
-	pFrame->addMaterialTexture("texture0", "Resource/Image/1.jpg");
-	pFrame->addMaterialTexture("texture1", "Resource/Image/NeHe.png");
-
-	pFrame->setAmbientTextureName("texture0");
-	pFrame->setDiffuseTextureName("texture1");
+	pFrame->setAmbientTexture("Resource/Image/1.jpg");
+	pFrame->setDiffuseTexture("Resource/Image/NeHe.png");
 
 	this->addChild(pFrame);
 }

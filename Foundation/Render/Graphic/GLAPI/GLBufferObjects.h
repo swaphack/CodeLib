@@ -22,7 +22,10 @@ namespace render
 		static void setNamedBufferData(uint32_t buffer, ptrdiff_t size, const void* data, BufferDataUsage usage);
 		// @see BufferStorageFlag
 		static void setBufferStorage(BufferTarget target, ptrdiff_t size, const void* data, uint32_t flags);
+		static void setBufferStorage(BufferTarget target, ptrdiff_t size, const void* data, BufferStorageFlag flag);
+
 		static void setNamedBufferStorage(uint32_t buffer, ptrdiff_t size, const void* data, uint32_t flags);
+		static void setNamedBufferStorage(uint32_t buffer, ptrdiff_t size, const void* data, BufferStorageFlag flag);
 
 		static void setBufferSubData(BufferTarget target, ptrdiff_t offset, ptrdiff_t size, const void* data);
 		static void setNamedBufferSubData(uint32_t buffer, ptrdiff_t offset, ptrdiff_t size, const void* data);
@@ -102,7 +105,10 @@ namespace render
 		static void* getMapNamedBuffer(GLuint buffer, AccessType access);
 		//@see MapBufferRangeAccess
 		static void* getMapBufferRange(BufferTarget target, ptrdiff_t offset, ptrdiff_t length, uint32_t access);
+		static void* getMapBufferRange(BufferTarget target, ptrdiff_t offset, ptrdiff_t length, MapBufferRangeAccess access);
+
 		static void* getMapNamedBufferRange(uint32_t buffer, ptrdiff_t offset, ptrdiff_t length, uint32_t access);
+		static void* getMapNamedBufferRange(uint32_t buffer, ptrdiff_t offset, ptrdiff_t length, MapBufferRangeAccess access);
 	public:
 		static void multiDrawArrays(DrawMode mode, const int* first, const int* count, int drawcount);
 		static void multiDrawArraysIndirect(DrawMode mode, const int* indirect, int primcount, int stride);

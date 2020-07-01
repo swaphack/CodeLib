@@ -72,85 +72,77 @@ render::Mesh* render::DrawNode::getMesh(const std::string& name)
 	return _meshes->getMesh(name);
 }
 
-void render::DrawNode::addMaterialTexture(const std::string& matName, const std::string& fullpath)
+void render::DrawNode::setTexture(const std::string& fullpath)
 {
-	_materiales->addTexture(matName, fullpath);
+	this->setTexture(MAT_TEXTURE_NAME, fullpath);
+}
+
+void render::DrawNode::setTexture(const std::string& name, const std::string& fullpath)
+{
+	_materiales->addTexture(name, fullpath);
+	for (auto item : _materiales->getMaterials())
+	{
+		item.second->getMaterialDetail()->setAmbientTextureMap(name);
+	}
+}
+
+void render::DrawNode::setTexture(const std::string& name, const Texture* texture)
+{
+	_materiales->addTexture(name, texture);
+	for (auto item : _materiales->getMaterials())
+	{
+		item.second->getMaterialDetail()->setAmbientTextureMap(name);
+	}
 }
 
 void render::DrawNode::setTexture(const Texture* texture)
 {
-	this->addMaterialTexture(MAT_TEXTURE_NAME, texture);
-	this->setTextureName(MAT_TEXTURE_NAME);
+	setTexture(MAT_TEXTURE_NAME, texture);
 }
 
-void render::DrawNode::setTexture(const std::string& fullpath)
+void render::DrawNode::setAmbientTexture(const std::string& fullpath)
 {
-	this->addMaterialTexture(MAT_TEXTURE_NAME, fullpath);
-	this->setTextureName(MAT_TEXTURE_NAME);
+	setTexture(MAT_TEXTURE_NAME, fullpath);
 }
 
-void render::DrawNode::addMaterialTexture(const std::string& matName, const Texture* texture)
+void render::DrawNode::setDiffuseTexture(const std::string& fullpath)
 {
-	_materiales->addTexture(matName, texture);
-}
+	_materiales->addTexture(MAT_TEXTURE_DIFFUSE, fullpath);
 
-void render::DrawNode::setTextureName(const std::string& textureName)
-{
 	for (auto item : _materiales->getMaterials())
 	{
-		item.second->getMaterialDetail()->setAmbientTextureMap(textureName);
+		item.second->getMaterialDetail()->setDiffuseTextureMap(MAT_TEXTURE_DIFFUSE);
 	}
 }
 
-void render::DrawNode::setAmbientTextureName(const std::string& textureName)
+void render::DrawNode::setSpecularTexture(const std::string& fullpath)
 {
+	_materiales->addTexture(MAT_TEXTURE_SPECULAR, fullpath);
+
 	for (auto item : _materiales->getMaterials())
 	{
-		item.second->getMaterialDetail()->setAmbientTextureMap(textureName);
+		item.second->getMaterialDetail()->setSpecularTextureMap(MAT_TEXTURE_SPECULAR);
 	}
 }
 
-void render::DrawNode::setDiffuseTextureName(const std::string& textureName)
+void render::DrawNode::setAlphaTexture(const std::string& fullpath)
 {
+	_materiales->addTexture(MAT_TEXTURE_ALPHA, fullpath);
+
 	for (auto item : _materiales->getMaterials())
 	{
-		item.second->getMaterialDetail()->setDiffuseTextureMap(textureName);
+		item.second->getMaterialDetail()->setAlphaTextureMap(MAT_TEXTURE_ALPHA);
 	}
 }
 
-void render::DrawNode::setSpecularTextureName(const std::string& textureName)
+void render::DrawNode::setBumpTexture(const std::string& fullpath)
 {
+	_materiales->addTexture(MAT_TEXTURE_BUMP, fullpath);
+
 	for (auto item : _materiales->getMaterials())
 	{
-		item.second->getMaterialDetail()->setSpecularTextureMap(textureName);
+		item.second->getMaterialDetail()->setBumpTextureMap(MAT_TEXTURE_BUMP);
 	}
-}
-
-void render::DrawNode::setAlphaTextureName(const std::string& textureName)
-{
-	for (auto item : _materiales->getMaterials())
-	{
-		item.second->getMaterialDetail()->setAlphaTextureMap(textureName);
-	}
-}
-
-void render::DrawNode::setBumpTextureName(const std::string& textureName)
-{
-	for (auto item : _materiales->getMaterials())
-	{
-		item.second->getMaterialDetail()->setBumpTextureMap(textureName);
-	}
-}
-
-render::ShaderProgram* render::DrawNode::getMaterialShaderProgram(const std::string& matName)
-{
-	auto pMat = _materiales->getMaterial(matName);
-	if (!pMat)
-	{
-		return nullptr;
-	}
-
-	return pMat->getShaderProgram();
 }
 
 void render::DrawNode::setShaderProgram(ShaderProgram* program)

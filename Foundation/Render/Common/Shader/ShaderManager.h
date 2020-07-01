@@ -24,15 +24,15 @@ namespace render
 		/**
 		*	创建顶点片元 program
 		*/
-		VertexShaderProgram* createVertexProgram(const std::string& vertexFilepath);
+		VertexShaderProgram* createVertexProgram(const std::string& vertexFilepath, bool link = true);
 		/**
 		*	创建顶点片元 program
 		*/
-		VertexFragmentShaderProgram* createVertexFragmentProgram(const std::string& vertexFilepath, const std::string& fragFilepath);
+		VertexFragmentShaderProgram* createVertexFragmentProgram(const std::string& vertexFilepath, const std::string& fragFilepath, bool link = true);
 		/**
 		*	创建计算 program
 		*/
-		ComputeShaderProgram* createComputeProgram(const std::string& computeFilepath);
+		ComputeShaderProgram* createComputeProgram(const std::string& computeFilepath, bool link = true);
 		/**
 		*	清空
 		*/

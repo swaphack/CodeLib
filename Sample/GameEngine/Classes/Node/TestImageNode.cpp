@@ -197,7 +197,7 @@ void TestImageNode::testPixelImage()
 void TestImageNode::testPointSprite()
 {
 	CtrlPointSprite* pSprite = CREATE_NODE(CtrlPointSprite);
-	pSprite->setImagePath("Resource/Image/point_sprite.jpg");
+	pSprite->setTexture("Resource/Image/point_sprite.jpg");
 	pSprite->setSpriteCount(200);
 	pSprite->setPointSize(64);
 	pSprite->setPosition(512, 384, 0);

@@ -26,13 +26,35 @@ void TestXFBNode::initNodes()
 	xfbObj->setBufferSize(UNIT_SIZE);
 	xfbObj->setTargetBufferRange(0, 0, UNIT_SIZE);
 
-	xfbObj->setInputFunc([](render::ShaderProgram* program) {
-		render::VertexArrayObject* vao = CREATE_OBJECT(render::VertexArrayObject);
+
+	float num0 = 2;
+	float num1 = 3;
+
+	render::VertexArrayObject* vao = CREATE_OBJECT(render::VertexArrayObject);
+	vao->bindVertexArray();
+	render::GLDebug::showError();
+	render::ArrayBuffer* buffer = CREATE_OBJECT(render::ArrayBuffer);
+	buffer->bindBuffer();
+	buffer->setBufferData(2 * UNIT_SIZE, nullptr, BufferDataUsage::STATIC_DRAW);
+	buffer->setBufferSubData(0, UNIT_SIZE, &num0);
+	buffer->setBufferSubData(UNIT_SIZE, UNIT_SIZE, &num1);
+	render::GLDebug::showError();
+
+	auto data = vao->getVertexAttrib<render::VertexAttribPointer>(0);
+	data->setVertexAttribPointer(1, VertexAttribPointerType::FLOAT, 0);
+	render::GLDebug::showError();
+
+	data = vao->getVertexAttrib<render::VertexAttribPointer>(1);
+	data->setVertexAttribPointer(1, VertexAttribPointerType::FLOAT, UNIT_SIZE);
+	render::GLDebug::showError();
+
+	vao->setBuffer(buffer);
+	vao->unbindVertexArray();
+	render::GLDebug::showError();
+
+	xfbObj->setInputFunc([vao](render::ShaderProgram* program) {
 		vao->bindVertexArray();
-
-
-		float num0 = 2;
-		float num1 = 3;
+		render::GLDebug::showError();
 
 		auto a = program->getAttrib("in_num0");
 		if (a)
@@ -41,7 +63,7 @@ void TestXFBNode::initNodes()
 			if (data)
 			{
 				data->enableVertexArrayAttrib();
-				data->setVertexAttribPointer(UNIT_SIZE, VertexAttribPointerType::FLOAT, false, 0, &num0);
+				render::GLDebug::showError();
 			}
 		}
 
@@ -52,19 +74,28 @@ void TestXFBNode::initNodes()
 			if (data)
 			{
 				data->enableVertexArrayAttrib();
-				data->setVertexAttribPointer(UNIT_SIZE, VertexAttribPointerType::FLOAT, false, 0, &num1);
+				render::GLDebug::showError();
 			}
 		}
 	});
 
-	xfbObj->setOutputFunc([](render::TransformFeedbackBuffer* buffer) {
+	xfbObj->setOutputFunc([vao](render::TransformFeedbackBuffer* buffer) {
+		render::GLDebug::showError();
+		vao->unbindVertexArray();
+		render::GLDebug::showError();
 		buffer->bindBuffer();
-		auto pData = (float*)buffer->getMapBuffer(0, sizeof(float), AccessType::READ_WRITE);
-		PRINT("out put data %f", *pData);
+		render::GLDebug::showError();
+		auto pData = (float*)buffer->getMapBufferRange(0, sizeof(float), MapBufferRangeAccess::MAP_READ_BIT);
+		render::GLDebug::showError();
+		if (pData)
+		{
+			PRINT("out put data %f", *pData);
+		}
 		buffer->unmapBuffer();
-
-		buffer->unbindBuffer();
+		buffer->bindBuffer();
+		render::GLDebug::showError();
 	});
+
 	render::GLDebug::showError();
 
 	this->addChild(xfbObj);

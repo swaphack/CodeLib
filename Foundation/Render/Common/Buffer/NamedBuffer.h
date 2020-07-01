@@ -17,6 +17,10 @@ namespace render
 		*	设置存储
 		*/
 		void setBufferStorage(ptrdiff_t size, const void* data, uint32_t flags);
+		/**
+		*	设置存储
+		*/
+		void setBufferStorage(ptrdiff_t size, const void* data, BufferStorageFlag flag);
 	public:
 		/**
 		*	绑定数据
@@ -26,6 +30,10 @@ namespace render
 		*	设置部分缓存，必须先调用setBufferStorage， flags 包含GL_CLIENT_STORAGE_BIT
 		*/
 		void setBufferSubData(ptrdiff_t offset, ptrdiff_t size, const void* data);
+		/**
+		*	获取部分缓存数据
+		*/
+		void getBufferSubData(ptrdiff_t offset, ptrdiff_t size, void* data);
 		/**
 		*	用给定的格式数据，清除存储数据
 		*/
@@ -50,11 +58,15 @@ namespace render
 		/**
 		*	获取指定位置的数据指针
 		*/
-		void* getMapBuffer(ptrdiff_t offset, ptrdiff_t length, uint32_t access);
+		void* getMapBuffer(AccessType access);
 		/**
 		*	获取指定位置的数据指针
 		*/
-		void* getMapBuffer(ptrdiff_t offset, ptrdiff_t length, AccessType access);
+		void* getMapBufferRange(ptrdiff_t offset, ptrdiff_t length, uint32_t access);
+		/**
+		*	获取指定位置的数据指针
+		*/
+		void* getMapBufferRange(ptrdiff_t offset, ptrdiff_t length, MapBufferRangeAccess access);
 		/**
 		*	取消关联buffer
 		*/

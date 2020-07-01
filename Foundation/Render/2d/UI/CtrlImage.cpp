@@ -19,13 +19,7 @@ void CtrlImage::setImagePath(const std::string& path)
 {
 	_imageDefine.setFilePath(path);
 
-	Texture2D* texture = G_TEXTURE_CACHE->createTexture2D(_imageDefine);
-	if (texture == nullptr)
-	{
-		return;
-	}
-
-	this->setTextureWithRect(texture);
+	this->setTextureWithRect(path);
 }
 
 const std::string& CtrlImage::getImagePath()

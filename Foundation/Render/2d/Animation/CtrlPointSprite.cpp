@@ -63,28 +63,6 @@ int render::CtrlPointSprite::getPointSize() const
 	return _pointSize;
 }
 
-void render::CtrlPointSprite::setImagePath(const std::string& filepath)
-{
-	Texture2D* texture = G_TEXTURE_CACHE->createTexture2D(filepath);
-	if (texture == nullptr)
-	{
-		return;
-	}
-
-	this->setTexture(texture);
-}
-
-void render::CtrlPointSprite::setTexture(const Texture2D* texture)
-{
-	if (texture == nullptr)
-	{
-		return;
-	}
-
-	addMaterialTexture(MAT_TEXTURE_NAME, texture);
-	setTextureName(MAT_TEXTURE_NAME);
-}
-
 void render::CtrlPointSprite::updatePointSprite()
 {
 	math::Vector3 leftDown = _rectVertex.leftDown;

@@ -69,7 +69,7 @@ void render::XFBUpdateParticle::initXFB(int count)
 	xfbb->bindBuffer();
 	xfbb->setBufferData(count * ParticleData::totalSize(), BufferDataUsage::DYNAMIC_COPY);
 
-	auto buffer = (float*)xfbb->getMapBuffer(0, count * ParticleData::totalSize(), AccessType::WRITE_ONLY);
+	auto buffer = (float*)xfbb->getMapBufferRange(0, count * ParticleData::totalSize(), GL_MAP_WRITE_BIT | GL_MAP_INVALIDATE_BUFFER_BIT);
 	for (int i = 0; i < count; i++)
 	{
 		math::Vector3 pos = math::Vector3(sys::Random::getNumber0_1(), sys::Random::getNumber0_1(), sys::Random::getNumber0_1());
