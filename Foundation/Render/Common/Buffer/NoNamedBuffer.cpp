@@ -92,4 +92,19 @@ void render::NoNamedBuffer::flushMappedBufferRange(ptrdiff_t offset, ptrdiff_t l
 	GLBufferObjects::flushMappedBufferRange(getBufferTarget(), offset, length);
 }
 
+void render::NoNamedBuffer::flush(ptrdiff_t offset, ptrdiff_t length, sys::StreamReader& reader)
+{
+	this->bindBuffer();
+
+	void* data = this->getMapBufferRange(offset, length, MapBufferRangeAccess::MAP_READ_BIT);
+	GLDebug::showError();
+
+	void* cpyData = malloc(length);
+	memcpy(cpyData, data, length);
+
+	reader.setData(cpyData, length);
+	this->unmapBuffer();
+
+	this->unbindBuffer();
+}
 

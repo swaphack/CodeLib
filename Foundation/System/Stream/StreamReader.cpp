@@ -11,7 +11,7 @@ StreamReader::StreamReader()
 
 }
 
-StreamReader::StreamReader(const char* data, size_t size)
+StreamReader::StreamReader(const void* data, size_t size)
 : Stream(new StreamBaseRef())
 {
 	this->setData(data, size);
@@ -73,7 +73,7 @@ double StreamReader::readDouble()
 	return this->read<double>();
 }
 
-char* StreamReader::readString(size_t size)
+char* StreamReader::readString(uint32_t size)
 {
 	if (getCursor() + size > this->getLength())
 	{
@@ -94,7 +94,7 @@ std::string StreamReader::readString()
 	return std::string(pszText, size);
 }
 
-char* StreamReader::readRemain(size_t& size)
+void* StreamReader::readRemain(uint32_t& size)
 {
 	size = this->getLength() - this->getCursor();
 

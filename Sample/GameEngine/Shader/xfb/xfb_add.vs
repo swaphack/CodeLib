@@ -3,9 +3,12 @@
 layout(location = 0) in float in_num0;
 layout(location = 1) in float in_num1;
 
-out float out_value;
+out float out_addValue;
+out float out_subValue;
 
 void main()
 {
-	out_value = in_num0 + in_num1;
+	out_addValue = in_num0 + in_num1;
+
+	out_subValue = in_num0 - in_num1;
 }

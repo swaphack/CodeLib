@@ -19,11 +19,34 @@ render::XFBObject::~XFBObject()
 
 void render::XFBObject::loadVertexProgram(const std::string& vertexFilepath)
 {
-	SAFE_RELEASE(_vertexProgram);
-	_vertexProgram = (ShaderProgram*)G_SHANDER->createVertexProgram(vertexFilepath, false);
-	SAFE_RETAIN(_vertexProgram);
+	SAFE_RELEASE(_shaderProgram);
+	_shaderProgram = (ShaderProgram*)G_SHANDER->createVertexProgram(vertexFilepath, false);
+	SAFE_RETAIN(_shaderProgram);
 
-	_transformFeedback->setShaderProgram(_vertexProgram);
+	_transformFeedback->setShaderProgram(_shaderProgram);
+
+	_discardFragment = true;
+}
+
+render::ShaderProgram* render::XFBObject::getShaderProgram() const
+{
+	return _shaderProgram;
+}
+
+render::TransformFeedbackBuffer* render::XFBObject::getFeedbackBuffer() const
+{
+	return _transformFeedbackBuffer;
+}
+
+void render::XFBObject::loadVertexFragmentProgram(const std::string& vertexFilepath, const std::string& fragmentFilepath)
+{
+	SAFE_RELEASE(_shaderProgram);
+	_shaderProgram = (ShaderProgram*)G_SHANDER->createVertexFragmentProgram(vertexFilepath, false);
+	SAFE_RETAIN(_shaderProgram);
+
+	_transformFeedback->setShaderProgram(_shaderProgram);
+
+	_discardFragment = false;
 }
 
 void render::XFBObject::setInputFunc(const XFBProgramFunc& func)
@@ -43,6 +66,10 @@ void render::XFBObject::setBufferSize(uint32_t size)
 	}
 
 	_bufferSize = size;
+
+	_transformFeedbackBuffer->bindBuffer();
+	_transformFeedbackBuffer->setBufferData(_bufferSize, nullptr, BufferDataUsage::STATIC_READ);
+	_transformFeedbackBuffer->unbindBuffer();
 }
 
 void render::XFBObject::setTargetBufferRange(int index, uint32_t offset, uint32_t size)
@@ -60,7 +87,7 @@ void render::XFBObject::setTargetBufferRange(int index, uint32_t offset, uint32_
 	GLDebug::showError();
 }
 
-void render::XFBObject::setWatchVaryings(int count, const char** varyings, TransformFeedbackBufferMode mode)
+void render::XFBObject::setWatchVaryings(int count, const char** varyings)
 {
 	if (varyings == nullptr)
 	{
@@ -72,14 +99,14 @@ void render::XFBObject::setWatchVaryings(int count, const char** varyings, Trans
 		return;
 	}
 
-	ASSERT(_vertexProgram != nullptr);
+	ASSERT(_shaderProgram != nullptr);
 
-	_transformFeedback->setFeedbackVaryings(count, varyings, mode);
+	_transformFeedback->setFeedbackVaryings(count, varyings, TransformFeedbackBufferMode::INTERLEAVED_ATTRIBS);
 
-	_vertexProgram->link();
+	_shaderProgram->link();
 	GLDebug::showError();
 
-	_vertexProgram->validate();
+	_shaderProgram->validate();
 }
 
 void render::XFBObject::setWatchPrimitiveMode(TransformFeedbackPrimitiveMode mode, uint32_t count)
@@ -88,42 +115,36 @@ void render::XFBObject::setWatchPrimitiveMode(TransformFeedbackPrimitiveMode mod
 	_watchCount = count;
 }
 
-void render::XFBObject::draw()
+void render::XFBObject::run()
 {
-	if (_hadDraw)
-	{
-		return;
-	}
-
-	_hadDraw = true;
-
-	if (_vertexProgram == nullptr)
+	if (_shaderProgram == nullptr)
 	{
 		return;
 	}
 	GLDebug::showError();
-	if (!_vertexProgram->isValid())
+	if (!_shaderProgram->isValid())
 	{
 		int a = 1;
 	}
-	_vertexProgram->use();
+	_shaderProgram->use();
 	GLDebug::showError();
 	if (_inputFunc)
 	{
-		_inputFunc(_vertexProgram);
+		_inputFunc(_shaderProgram);
 	}
 
 	GLDebug::showError();
 
-	_transformFeedbackBuffer->bindBuffer();
-	_transformFeedbackBuffer->setBufferData(_bufferSize, nullptr, BufferDataUsage::STATIC_READ);
-	
+	_transformFeedbackBuffer->bindBuffer();	
 	
 	GLDebug::showError();
 
-	GLState::enable(EnableMode::RASTERIZER_DISCARD);
+	if (_discardFragment)
+	{
+		GLState::enable(EnableMode::RASTERIZER_DISCARD);
+	}
 
-	_transformFeedbackBuffer->bindBufferBase(0);
+	//_transformFeedbackBuffer->bindBufferBase(0);
 
 	_transformFeedback->bindTransformFeedback();
 	_transformFeedback->beginWatch(_primitiveMode);
@@ -132,13 +153,15 @@ void render::XFBObject::draw()
 	GLDebug::showError();
 	_transformFeedback->endWatch();
 
-
-	GLState::disable(EnableMode::RASTERIZER_DISCARD);
+	if (_discardFragment)
+	{
+		GLState::disable(EnableMode::RASTERIZER_DISCARD);
+	}
 
 	GLRender::flush();
 	//
 	GLDebug::showError();
-	_vertexProgram->unuse();
+	_shaderProgram->unuse();
 	GLDebug::showError();
 
 	if (_outputFunc)
@@ -170,6 +193,6 @@ void render::XFBObject::releaseXFB()
 	SAFE_RELEASE(_transformFeedbackBuffer);
 	SAFE_RELEASE(_transformFeedback);
 
-	SAFE_RELEASE(_vertexProgram);
+	SAFE_RELEASE(_shaderProgram);
 }
 

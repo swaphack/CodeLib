@@ -12,7 +12,7 @@ namespace sys
 	{
 	public:
 		StreamWriter(size_t size = STREAM_DEFAULT_SIZE);
-		StreamWriter(const char* data, size_t size);
+		StreamWriter(const void* data, size_t size);
 		virtual ~StreamWriter();
 	public:
 		void writeInt8(char data);
@@ -25,7 +25,8 @@ namespace sys
 		void writeUInt64(uint64_t data);
 		void writeFloat(float data);
 		void writeDouble(double data);
-		void writeString(char* data, uint32_t size);
+		void writeData(const void* data, uint32_t size);
+		void writeString(const char* data, uint32_t size);
 		void writeString(const std::string& data);
 	public:
 		template<typename T>

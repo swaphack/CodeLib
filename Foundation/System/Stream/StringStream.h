@@ -21,9 +21,9 @@ namespace sys
 		virtual ~StringStream();
 	public:
 		// 字符串初始化
-		void initWithText(const std::string& text);
+		void initWithData(const std::string& text);
 		// 字符串初始化
-		void initWithText(const char* text, size_t size);
+		void initWithData(const char* content, size_t size);
 		// 读取一行
 		void readLine(std::string& text);
 		// 读取剩余

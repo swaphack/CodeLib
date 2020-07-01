@@ -15,13 +15,13 @@ StringStream::StringStream()
 StringStream::StringStream(const std::string& text)
 : Stream(new StreamBaseRef())
 {
-	this->initWithText(text);
+	this->initWithData(text);
 }
 
 StringStream::StringStream(const char* text, size_t size)
 : Stream(new StreamBaseRef())
 {
-	this->initWithText(text, size);
+	this->initWithData(text, size);
 }
 
 StringStream::~StringStream()
@@ -29,16 +29,16 @@ StringStream::~StringStream()
 	SAFE_DELETE(_baseStream);
 }
 
-void StringStream::initWithText(const std::string& text)
+void StringStream::initWithData(const std::string& text)
 {
-	this->initWithText(text.c_str(), text.size());
+	this->initWithData(text.c_str(), text.size());
 }
 
-void StringStream::initWithText(const char* text, size_t size)
+void StringStream::initWithData(const char* content, size_t size)
 {
 	int32_t len = size;
 
-	char* newData = StreamHelper::mallocStream((void*)text, len);
+	char* newData = StreamHelper::mallocStream((void*)content, len);
 
 	this->setData(newData, len);
 }

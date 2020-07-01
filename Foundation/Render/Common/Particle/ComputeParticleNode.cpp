@@ -53,13 +53,13 @@ bool render::ComputeParticleNode::init()
 			this->updateParticleParameter();
 	});
 
-	_positionTBO->setBuffer(_positionBuffer);
+	_positionTBO->setTextureBuffer(_positionBuffer);
 	_positionTBO->bindTexture();
-	_positionTBO->setTexBuffer(TexSizedInternalFormat::RGBA32F);
+	_positionTBO->setTexBufferFromat(TexSizedInternalFormat::RGBA32F);
 
-	_velocityTBO->setBuffer(_velocityBuffer);
+	_velocityTBO->setTextureBuffer(_velocityBuffer);
 	_velocityTBO->bindTexture();
-	_velocityTBO->setTexBuffer(TexSizedInternalFormat::RGBA32F);
+	_velocityTBO->setTexBufferFromat(TexSizedInternalFormat::RGBA32F);
 
 	for (int i = 0; i < ATTRACTOR_COUNT; i++)
 	{

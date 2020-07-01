@@ -80,5 +80,9 @@ namespace render
 		*	通知指定位置的数据发生改变
 		*/
 		void flushMappedBufferRange(ptrdiff_t offset, ptrdiff_t length);
+		/**
+		*	读取数据
+		*/
+		void flush(ptrdiff_t offset, ptrdiff_t length, sys::StreamReader& reader);
 	};
 }

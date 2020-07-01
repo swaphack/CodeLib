@@ -6,6 +6,7 @@
 #include "Common/Shader/import.h"
 #include "Graphic/import.h"
 #include "Common/XFB/TransformFeedback.h"
+#include "Common/XFB/XFBObject.h"
 
 render::XFBParticleNode::XFBParticleNode()
 {
@@ -18,9 +19,6 @@ render::XFBParticleNode::XFBParticleNode()
 	_geometryTBO = CREATE_OBJECT(TextureBufferObject);
 	SAFE_RETAIN(_geometryTBO);
 
-	_geometryBuffer = CREATE_OBJECT(TextureBuffer);
-	SAFE_RETAIN(_geometryBuffer);
-
 	_renderVAO = CREATE_OBJECT(VertexArrayObject);
 	SAFE_RETAIN(_renderVAO);
 }
@@ -31,7 +29,6 @@ render::XFBParticleNode::~XFBParticleNode()
 	SAFE_RELEASE(_renderXFBObject);
 
 	SAFE_RELEASE(_geometryTBO);
-	SAFE_RELEASE(_geometryBuffer);
 	SAFE_RELEASE(_renderVAO);
 }
 
@@ -87,15 +84,23 @@ void render::XFBParticleNode::initParticleSystem()
 {
 	GLDebug::showError();
 	_updateXFBObject->initXFBObject(_particleCount);
+	_updateXFBObject->xfb->setWatchPrimitiveMode(TransformFeedbackPrimitiveMode::POINTS, _particleCount);
+	_updateXFBObject->doFunc(this);
 	GLDebug::showError();
 	_renderXFBObject->initXFBObject(_particleCount);
+	_renderXFBObject->xfb->setWatchPrimitiveMode(TransformFeedbackPrimitiveMode::TRIANGLES, _particleCount);
+	_renderXFBObject->doFunc(this);
 	GLDebug::showError();
-	_geometryTBO->setBuffer(_geometryBuffer);
-	_geometryBuffer->setBufferData(1024 * 1024 * sizeof(float), BufferDataUsage::DYNAMIC_COPY);
-	_geometryTBO->bindTexture();
-	_geometryTBO->setTexBuffer(TexSizedInternalFormat::RGBA32F);
+
+	auto pTxtBuffer = _geometryTBO->getTextureBuffer();
+	if (pTxtBuffer)
+	{
+		pTxtBuffer->setBufferData(1024 * 1024 * sizeof(float), BufferDataUsage::DYNAMIC_COPY);
+	}
+	_geometryTBO->bindTextureBuffer();
+	_geometryTBO->setTexBufferFromat(TexSizedInternalFormat::RGBA32F);
 	GLDebug::showError();
-	_renderVAO->setBuffer(_geometryBuffer);
+	_renderVAO->setBuffer(pTxtBuffer);
 	_renderVAO->bindVertexArray();
 	_renderVAO->bindBuffer();
 	GLDebug::showError();
@@ -115,41 +120,19 @@ void render::XFBParticleNode::renderParticles()
 		return;
 	}
 	GLDebug::showError();
-	_renderXFBObject->program->use();
-	_renderXFBObject->doFunc(this);
-	_renderXFBObject->vao->bindVertexArray();
-	_geometryBuffer->bindBufferBase(BufferTarget::TRANSFORM_FEEDBACK_BUFFER, 0);
-	GLDebug::showError();
-	_renderXFBObject->xfbo->bindTransformFeedback();
-	GLDebug::showError();
-	_renderXFBObject->xfbo->beginWatch(TransformFeedbackPrimitiveMode::TRIANGLES);
-	GLDebug::showError();
-	this->drawAllChildren();
-	GLDebug::showError();
-	_renderXFBObject->xfbo->endWatch();
-	_renderXFBObject->xfbo->unbindTransformFeedback();
-	GLDebug::showError();
+	_renderXFBObject->xfb->run();
 
-	_updateXFBObject->program->use();
-	_updateXFBObject->doFunc(this);
 	GLDebug::showError();
 	if ((_frameCount & 1) != 0)
 	{
 		_renderXFBObject->vao->bindVertexArray();
-		_updateXFBObject->vbo->bindBufferBase(BufferTarget::TRANSFORM_FEEDBACK_BUFFER, 0);
 	}
 	else
 	{
 		_updateXFBObject->vao->bindVertexArray();
-		_renderXFBObject->vbo->bindBufferBase(BufferTarget::TRANSFORM_FEEDBACK_BUFFER, 0);
 	}
+
 	GLDebug::showError();
-	_updateXFBObject->xfbo->bindTransformFeedback();
-	_updateXFBObject->xfbo->beginWatch(TransformFeedbackPrimitiveMode::POINTS);
-	GLBufferObjects::drawArrays(DrawMode::POINTS, 0, min(_particleCount, (_frameCount >> 3)));
-	_updateXFBObject->xfbo->endWatch();
-	_updateXFBObject->xfbo->bindTransformFeedback();
-	GLDebug::showError();
-	_updateXFBObject->vao->unbindVertexArray();
+	_updateXFBObject->xfb->run();
 	GLDebug::showError();
 }

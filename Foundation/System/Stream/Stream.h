@@ -14,7 +14,7 @@ namespace sys
 		virtual ~Stream();
 	public:
 		// 设置数据内容
-		virtual void setData(const char* data, size_t size);
+		virtual void setData(const void* data, size_t size);
 		// 分配的内存长度
 		size_t getCapacity() const;
 		// 获取数据长度

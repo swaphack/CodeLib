@@ -13,7 +13,7 @@ StreamWriter::StreamWriter(size_t size)
 	this->realloct(size);
 }
 
-StreamWriter::StreamWriter(const char* data, size_t size)
+StreamWriter::StreamWriter(const void* data, size_t size)
 : Stream(new StreamBaseRef())
 {
 	this->setData(data, size);
@@ -36,9 +36,21 @@ void StreamWriter::writeUInt8( uint8_t data )
 	this->write<uint8_t>(data);
 }
 
-void StreamWriter::writeInt16( short data )
+void sys::StreamWriter::writeInt16(int16_t data)
 {
-	this->write<short>(data);
+	this->write<int16_t>(data);
+}
+
+void sys::StreamWriter::writeData(const void* data, uint32_t size)
+{
+	while (getCursor() + size > this->getCapacity())
+	{
+		this->realloct(size + this->getCursor() + 1);
+	}
+
+	memcpy(getPtr(), data, size);
+
+	setCursorAndLength(getCursor() + size);
 }
 
 void StreamWriter::writeUInt16( uint16_t data )
@@ -76,16 +88,9 @@ void StreamWriter::writeDouble( double data )
 	this->write<double>(data);
 }
 
-void StreamWriter::writeString(char* data, size_t size)
+void StreamWriter::writeString(const char* data, size_t size)
 {
-	while (getCursor() + size > this->getCapacity())
-	{
-		this->realloct(size + this->getCursor() + 1);
-	}
-
-	memcpy(getPtr(), data, size);
-
-	setCursorAndLength(getCursor() + size);
+	this->writeData(data, size);
 }
 
 void StreamWriter::writeString(const std::string& data)

@@ -558,6 +558,9 @@
     <ClCompile Include="Common\Action\TrackAction.cpp">
       <Filter>Common\Action</Filter>
     </ClCompile>
+    <ClCompile Include="Common\VAO\VertexArrayBufferObject.cpp">
+      <Filter>Common\VAO</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Common\Node\import.h">
@@ -1277,6 +1280,9 @@
     </ClInclude>
     <ClInclude Include="Common\Action\TrackAction.h">
       <Filter>Common\Action</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\VAO\VertexArrayBufferObject.h">
+      <Filter>Common\VAO</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

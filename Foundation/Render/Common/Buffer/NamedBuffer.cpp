@@ -87,3 +87,10 @@ void render::NamedBuffer::flushMappedBufferRange(ptrdiff_t offset, ptrdiff_t len
 {
 	GLBufferObjects::flushMappedNamedBufferRange(getBufferID(), offset, length);
 }
+
+void render::NamedBuffer::flush(ptrdiff_t offset, ptrdiff_t length, sys::StreamReader& reader)
+{
+	void* data = this->getMapBufferRange(offset, length, MapBufferRangeAccess::MAP_READ_BIT);
+	reader.setData(data, length);
+	this->unmapBuffer();
+}

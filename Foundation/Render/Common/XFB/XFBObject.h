@@ -19,16 +19,28 @@ namespace render
 	/**
 	*	顶点反馈对象
 	*/
-	class XFBObject : public Node
+	class XFBObject : public sys::Object
 	{
 	public:
 		XFBObject();
 		virtual ~XFBObject();
 	public:
 		/**
-		*	加载顶点着色器
+		*	获取着色器
+		*/
+		ShaderProgram* getShaderProgram() const;
+		/**
+		*	获取反馈缓存
+		*/
+		TransformFeedbackBuffer* getFeedbackBuffer() const;
+		/**
+		*	只加载顶点着色器
 		*/
 		void loadVertexProgram(const std::string& vertexFilepath);
+		/**
+		*	加载顶点和片元着色器
+		*/
+		void loadVertexFragmentProgram(const std::string& vertexFilepath, const  std::string& fragmentFilepath);
 	public:
 		/**
 		*	设置输入处理函数
@@ -49,14 +61,16 @@ namespace render
 		/**
 		*	监听变量
 		*/
-		void setWatchVaryings(int count, const char** varyings, TransformFeedbackBufferMode mode = TransformFeedbackBufferMode::INTERLEAVED_ATTRIBS);
+		void setWatchVaryings(int count, const char** varyings);
 		/**
 		*	基础图形类型
 		*/
 		void setWatchPrimitiveMode(TransformFeedbackPrimitiveMode mode, uint32_t count = 1);
-	protected:
-		// 绘制,重写
-		virtual void draw();
+	public:
+		/**
+		*	运行
+		*/
+		void run();
 	protected:
 		/**
 		*	初始化xfb
@@ -78,7 +92,7 @@ namespace render
 		/**
 		*	计算着色器程序
 		*/
-		ShaderProgram* _vertexProgram = nullptr;
+		ShaderProgram* _shaderProgram = nullptr;
 		/**
 		*	顶点反馈
 		*/
@@ -99,7 +113,9 @@ namespace render
 		*	监视大小
 		*/
 		uint32_t _watchCount = 0;
-
-		bool _hadDraw = false;
+		/**
+		*	抛弃片元
+		*/
+		bool _discardFragment = false;
 	};
 }

@@ -61,8 +61,6 @@ namespace render
 		int _particleCount = 0;
 
 		TextureBufferObject* _geometryTBO = nullptr;
-		TextureBuffer* _geometryBuffer = nullptr;
-
 		VertexArrayObject* _renderVAO = nullptr;
 
 		int _frameCount = 0;

@@ -60,14 +60,13 @@ void render::PostProcessingNode::drawNode()
 
 void render::PostProcessingNode::beforeDrawNode()
 {
-
 	const auto& size = Tool::getGLViewSize();
 	_frameBuffer->bindFrameBuffer();
 	GLDebug::showError();
-	/*
+
 	GLState::setViewport(0, 0, 
 		size.getWidth(), size.getHeight());
-	*/
+
 	GLDebug::showError();
 	GLState::enable(EnableMode::DEPTH_TEST);
 	
@@ -99,6 +98,7 @@ void render::PostProcessingNode::onDraw()
 
 void render::PostProcessingNode::afterDrawNode()
 {
+	_frameBuffer->bindFrameBuffer(FrameBufferTarget::READ_FRAMEBUFFER);
 	_frameBuffer->unbindFrameBuffer();
 
 	GLDebug::showError();
@@ -159,11 +159,12 @@ void render::PostProcessingNode::updateTextureSize()
 
 	_frameBuffer->bindFrameBuffer();
 	_frameBuffer->setTexture(FrameBufferAttachment::COLOR_ATTACHMENT0, _texture->getTextureID(), 0);
-
-	GLFrameRender::setDrawBuffer(DrawBufferType::COLOR_ATTACHMENT0);
 	GLDebug::showError();
 
 	_frameBuffer->setRenderBuffer(FrameBufferAttachment::DEPTH_ATTACHMENT, _renderBuffer);
+	GLDebug::showError();
+
+	GLFrameRender::setDrawBuffer(DrawBufferType::COLOR_ATTACHMENT0);
 	
 	GLDebug::showError();
 

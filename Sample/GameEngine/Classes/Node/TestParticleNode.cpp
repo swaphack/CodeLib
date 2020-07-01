@@ -27,21 +27,19 @@ void TestParticleNode::testParticle()
 	//////////////////////////////////////////////////////////////////////////
 	auto pUpdateFeedback = particleNode->getUpdateXFBObject();
 
-	std::string uvfile = "Shader/frame/particle_update.vs";
-	std::string uffile = "Shader/frame/particle_update.fs";
+	std::string uvfile = "Shader/particle/particle_update.vs";
+	std::string uffile = "Shader/particle/particle_update.fs";
 
 	const char* varings0[] = {
 		"outPosition",
 		"outVelocity",
 	};
 
-	pUpdateFeedback->program->loadVertexAndFragmentShader(uvfile, uffile);
+	pUpdateFeedback->xfb->loadVertexFragmentProgram(uvfile, uffile);
 	GLDebug::showError();
 
-	pUpdateFeedback->xfbo->setFeedbackVaryings(2, varings0, TransformFeedbackBufferMode::INTERLEAVED_ATTRIBS);
-	GLDebug::showError();
+	pUpdateFeedback->xfb->setWatchVaryings(2, varings0);
 
-	pUpdateFeedback->program->link();
 	GLDebug::showError();
 
 	pUpdateFeedback->func = [&](Node* ps, ShaderProgram* sp) {
@@ -76,20 +74,18 @@ void TestParticleNode::testParticle()
 
 	auto pRenderFeedback = particleNode->getRenderXFBObject();
 
-	std::string rvfile = "Shader/texture/particle_render.vs";
-	std::string rffile = "Shader/texture/particle_render.fs";
+	std::string rvfile = "Shader/particle/particle_render.vs";
+	std::string rffile = "Shader/particle/particle_render.fs";
 
 	const char* varings1[] = {
 		"worldSpacePosition",
 	};
 
-	pRenderFeedback->program->loadVertexAndFragmentShader(rvfile, rffile);
+	pRenderFeedback->xfb->loadVertexFragmentProgram(rvfile, rffile);
 	GLDebug::showError();
 
-	pRenderFeedback->xfbo->setFeedbackVaryings(1, varings1, TransformFeedbackBufferMode::INTERLEAVED_ATTRIBS);
-	GLDebug::showError();
+	pRenderFeedback->xfb->setWatchVaryings(1, varings1);
 
-	pRenderFeedback->program->link();
 	GLDebug::showError();
 
 	pRenderFeedback->func = [](Node* ps, ShaderProgram* sp) {

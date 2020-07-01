@@ -14,9 +14,9 @@ StreamBase::~StreamBase()
 	this->freeStream();
 }
 
-void StreamBase::setData(const char* data, size_t size)
+void StreamBase::setData(const void* data, size_t size)
 {
-	_memoryData.init(size, data);
+	_memoryData.init(size, (char*)data);
 }
 
 const char* StreamBase::getData() const
@@ -50,7 +50,7 @@ StreamBaseRef::~StreamBaseRef()
 	this->freeStream();
 }
 
-void StreamBaseRef::setData(const char* data, size_t size)
+void StreamBaseRef::setData(const void* data, size_t size)
 {
 	ASSERT(data != nullptr && size > 0);
 

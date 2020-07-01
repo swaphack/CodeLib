@@ -20,7 +20,7 @@ Stream::~Stream()
 
 }
 
-void Stream::setData(const char* data, size_t size)
+void Stream::setData(const void* data, size_t size)
 {
 	ASSERT(data != nullptr && getStream() != nullptr && size > 0);
 

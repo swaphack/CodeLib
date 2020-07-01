@@ -23,7 +23,7 @@ namespace sys
 		virtual float readFloat() = 0;
 		virtual double readDouble() = 0;
 		virtual char* readString(uint32_t size) = 0;
-		virtual char* readRemain(uint32_t& size) = 0;
+		virtual void* readRemain(uint32_t& size) = 0;
 		virtual std::string readString() = 0;
 	};
 
@@ -43,7 +43,8 @@ namespace sys
 		virtual void writeUInt64(uint64_t data) = 0;
 		virtual void writeFloat(float data) = 0;
 		virtual void writeDouble(double data) = 0;
-		virtual void writeString(char* data, uint32_t size) = 0;
+		virtual void writeData(const void* data, uint32_t size) = 0;
+		virtual void writeString(const char* data, uint32_t size) = 0;
 		virtual void writeString(const std::string& data) = 0;
 	};
 
@@ -54,7 +55,7 @@ namespace sys
 		virtual ~IStreamBase() {}
 	public:
 		// 设置数据内容
-		virtual void setData(const char* data, size_t size) = 0;
+		virtual void setData(const void* data, size_t size) = 0;
 		// 获取数据内容
 		virtual const char* getData() const = 0;
 		// 获取数据长度

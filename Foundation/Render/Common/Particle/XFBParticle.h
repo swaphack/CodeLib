@@ -8,24 +8,16 @@
 
 namespace render
 {
+	class XFBObject;
+	class VertexArrayBufferObject;
 	class XFBParticleNode;
-	class VertexFragmentShaderProgram;
-	class TransformFeedback;
-	class TransformFeedbackBuffer;
-	class VertexArrayObject;
-	class ArrayBuffer;
 
 	struct XFBParticle : public sys::Object
 	{
 	public:
-		VertexFragmentShaderProgram* program = nullptr;
+		XFBObject* xfb = nullptr;
 		ShaderProgramNFunc func = nullptr;
-
-		TransformFeedback* xfbo = nullptr;
-		TransformFeedbackBuffer* xfbb = nullptr;
-
-		VertexArrayObject* vao = nullptr;
-		ArrayBuffer* vbo = nullptr;
+		VertexArrayBufferObject* vao = nullptr;
 	public:
 		XFBParticle();
 		virtual ~XFBParticle();

@@ -16,7 +16,7 @@ namespace sys
 		virtual ~StreamBase();
 	public:
 		// 设置数据内容
-		virtual void setData(const char* data, size_t size);
+		virtual void setData(const void* data, size_t size);
 		// 获取数据内容
 		const char* getData() const;
 		// 获取数据长度
@@ -37,7 +37,7 @@ namespace sys
 		virtual ~StreamBaseRef();
 	public:
 		// 设置数据内容
-		virtual void setData(const char* data, size_t size);
+		virtual void setData(const void* data, size_t size);
 		// 获取数据内容
 		const char* getData() const;
 		// 获取数据长度

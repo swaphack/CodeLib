@@ -9,39 +9,25 @@
 #include "Common/Texture/import.h"
 #include "Common/XFB/TransformFeedback.h"
 #include "XFBParticleNode.h"
+#include "Common/XFB/XFBObject.h"
 
 render::XFBParticle::XFBParticle()
 {
-	program = CREATE_OBJECT(VertexFragmentShaderProgram);
-	xfbo = CREATE_OBJECT(TransformFeedback);
-	xfbb = CREATE_OBJECT(TransformFeedbackBuffer);
+	xfb = CREATE_OBJECT(XFBObject);
+	vao = CREATE_OBJECT(VertexArrayBufferObject);
 
-	vao = CREATE_OBJECT(VertexArrayObject);
-	vbo = CREATE_OBJECT(ArrayBuffer);
-
-	SAFE_RETAIN(program);
-
-	SAFE_RETAIN(xfbo);
-	SAFE_RETAIN(xfbb);
-
+	SAFE_RETAIN(xfb);
 	SAFE_RETAIN(vao);
-	SAFE_RETAIN(vbo);
 }
 
 render::XFBParticle::~XFBParticle()
 {
-	SAFE_RELEASE(program);
-	SAFE_RELEASE(xfbo);
-	SAFE_RELEASE(vbo);
+	SAFE_RELEASE(xfb);
 	SAFE_RELEASE(vao);
 }
 
 void render::XFBParticle::initXFBObject(int count)
 {
-	if (program)
-	{
-		program->use();
-	}
 	this->initXFB(count);
 	this->initVAO(count);
 }
@@ -57,19 +43,20 @@ void render::XFBParticle::initVAO(int count)
 
 void render::XFBParticle::doFunc(XFBParticleNode* node)
 {
-	if (program && func)
-	{
+	xfb->setInputFunc([this, node](ShaderProgram* program) {
 		func(node, program);
-	}
+	});
 }
 
 //////////////////////////////////////////////////////////////////////////
 void render::XFBUpdateParticle::initXFB(int count)
 {
-	xfbb->bindBuffer();
-	xfbb->setBufferData(count * ParticleData::totalSize(), BufferDataUsage::DYNAMIC_COPY);
+	auto xfbBuffer = xfb->getFeedbackBuffer();
 
-	auto buffer = (float*)xfbb->getMapBufferRange(0, count * ParticleData::totalSize(), GL_MAP_WRITE_BIT | GL_MAP_INVALIDATE_BUFFER_BIT);
+	xfbBuffer->bindBuffer();
+	xfbBuffer->setBufferData(count * ParticleData::totalSize(), BufferDataUsage::DYNAMIC_COPY);
+
+	float* buffer = (float*)xfbBuffer->getMapBufferRange(0, count * ParticleData::totalSize(), GL_MAP_WRITE_BIT | GL_MAP_INVALIDATE_BUFFER_BIT);
 	for (int i = 0; i < count; i++)
 	{
 		math::Vector3 pos = math::Vector3(sys::Random::getNumber0_1(), sys::Random::getNumber0_1(), sys::Random::getNumber0_1());
@@ -79,40 +66,28 @@ void render::XFBUpdateParticle::initXFB(int count)
 		pos = math::Vector3(pos.getX(), pos.getY() * 0.3f, pos.getZ() * 0.3f);
 		memcpy(buffer + i * 6 + 3, pos.getValue(), 3 * sizeof(float));
 	}
-	xfbb->unmapBuffer();
+	xfbBuffer->unmapBuffer();
 }
 
 void render::XFBUpdateParticle::initVAO(int count)
 {
-	vao->bindVertexArray();
-	vbo->bindBuffer(xfbb->getBufferID());
-
-	auto p0 = vao->getVertexAttrib<VertexAttribPointer>(0);
-	p0->setVertexAttribPointer(3, VertexAttribPointerType::FLOAT, ParticleData::totalSize(), 0);
-	p0->enableVertexAttribArray();
-
-	auto p1 = vao->getVertexAttrib<VertexAttribPointer>(1);
-	p1->setVertexAttribPointer(3, VertexAttribPointerType::FLOAT, ParticleData::totalSize(), ParticleData::offsetVel());
-	p1->enableVertexAttribArray();
+	vao->resize(count * ParticleData::totalSize());
+	vao->writeVertexAttrib(VertexAttribPointerType::FLOAT, nullptr, 3, ParticleData::totalSize());
+	vao->writeVertexAttrib(VertexAttribPointerType::FLOAT, nullptr, 3, ParticleData::totalSize());
 }
 
 //////////////////////////////////////////////////////////////////////////
 void render::XFBRenderParticle::initXFB(int count)
 {
-	xfbb->bindBuffer();
-	xfbb->setBufferData(count * ParticleData::totalSize(), BufferDataUsage::DYNAMIC_COPY);
+	auto xfbBuffer = xfb->getFeedbackBuffer();
+
+	xfbBuffer->bindBuffer();
+	xfbBuffer->setBufferData(count * ParticleData::totalSize(), BufferDataUsage::DYNAMIC_COPY);
 }
 
 void render::XFBRenderParticle::initVAO(int count)
 {
-	vao->bindVertexArray();
-	vbo->bindBuffer(xfbb->getBufferID());
-
-	auto p0 = vao->getVertexAttrib<VertexAttribPointer>(0);
-	p0->setVertexAttribPointer(3, VertexAttribPointerType::FLOAT, ParticleData::totalSize(), 0);
-	p0->enableVertexAttribArray();
-
-	auto p1 = vao->getVertexAttrib<VertexAttribPointer>(1);
-	p1->setVertexAttribPointer(3, VertexAttribPointerType::FLOAT, ParticleData::totalSize(), ParticleData::offsetVel());
-	p1->enableVertexAttribArray();
+	vao->resize(count * ParticleData::totalSize());
+	vao->writeVertexAttrib(VertexAttribPointerType::FLOAT, nullptr, 3, ParticleData::totalSize());
+	vao->writeVertexAttrib(VertexAttribPointerType::FLOAT, nullptr, 3, ParticleData::totalSize());
 }

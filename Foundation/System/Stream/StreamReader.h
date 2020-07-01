@@ -13,7 +13,7 @@ namespace sys
 	{
 	public:
 		StreamReader();
-		StreamReader(const char* data, size_t size);
+		StreamReader(const void* data, size_t size);
 		virtual ~StreamReader();
 	public:
 		virtual char readInt8();
@@ -26,8 +26,8 @@ namespace sys
 		virtual uint64_t readUInt64();
 		virtual float readFloat();
 		virtual double readDouble();
-		virtual char* readString(size_t size);
-		virtual char* readRemain(size_t& size);
+		virtual char* readString(uint32_t size);
+		virtual void* readRemain(uint32_t& size);
 		virtual std::string readString();
 	public:
 		template<typename T>

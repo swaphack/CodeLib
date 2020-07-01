@@ -26,7 +26,7 @@ HttpDocument::~HttpDocument()
 
 bool HttpDocument::parse(const std::string& msg)
 {
-	_stream->initWithText(msg);
+	_stream->initWithData(msg);
 	_stream->setCursor(0);
 	do 
 	{

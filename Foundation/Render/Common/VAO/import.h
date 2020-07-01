@@ -6,3 +6,5 @@
 #include "VertexArrayAttrib.h"
 #include "VertexAttribPointer.h"
 #include "VertexAttrib.h"
+
+#include "VertexArrayBufferObject.h"
