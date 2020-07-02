@@ -79,7 +79,7 @@ void render::Texture2D::load(const sys::ImageDetail* image, const TextureSetting
 	{
 		GLState::setPixelStore(PixelStore::UNPACK_ALIGNMENT, 2);
 	}
-
+/*
 #if USE_TEXTURE_STORAGE
 	this->setTextureStorage(1, internalFormat, getWidth(), getHeight());
 	this->setTextureSubImage(0, 0, 0, getWidth(), getHeight(), format, TextureExternalDataType::UNSIGNED_BYTE, image->getPixels());
@@ -88,7 +88,10 @@ void render::Texture2D::load(const sys::ImageDetail* image, const TextureSetting
 		getWidth(), getHeight(), 0, format,
 		TextureExternalDataType::UNSIGNED_BYTE, image->getPixels());
 #endif
-
+*/
+	this->setTextureImage(0, internalFormat,
+		getWidth(), getHeight(), 0, format,
+		TextureExternalDataType::UNSIGNED_BYTE, image->getPixels());
 	GLTexture::generateMipmap((MipmapTextureTarget)getTextureTarget());
 	GLDebug::showError();
 	this->unbindTexture();

@@ -14,18 +14,18 @@ void TestEnvironmentNode::initNodes()
 {
 	this->testCamera();
 
-	this->init3DSkyBox();
+	//this->init3DSkyBox();
 }
 
 void TestEnvironmentNode::init3DSkyBox()
 {
 	render::SkyBox* pSkyBox = CREATE_NODE(render::SkyBox);
-	pSkyBox->setFaceImage(CubeFace::LEFT, "Resource/skybox/left.jpg");
-	pSkyBox->setFaceImage(CubeFace::RIGHT, "Resource/skybox/right.jpg");
-	pSkyBox->setFaceImage(CubeFace::FRONT, "Resource/skybox/front.jpg");
-	pSkyBox->setFaceImage(CubeFace::BACK, "Resource/skybox/back.jpg");
-	pSkyBox->setFaceImage(CubeFace::TOP, "Resource/skybox/top.jpg");
-	pSkyBox->setFaceImage(CubeFace::BOTTOM, "Resource/skybox/bottom.jpg");
+	pSkyBox->setLeftTexture("Resource/skybox/left.jpg");
+	pSkyBox->setRightTexture("Resource/skybox/right.jpg");
+	pSkyBox->setFrontTexture("Resource/skybox/front.jpg");
+	pSkyBox->setBackTexture("Resource/skybox/back.jpg");
+	pSkyBox->setTopTexture("Resource/skybox/top.jpg");
+	pSkyBox->setBottomTexture("Resource/skybox/bottom.jpg");
 
 	//pSkyBox->setScale(0.25f);
 	pSkyBox->setVolume(1024, 1024, 1024);
@@ -59,12 +59,12 @@ void TestEnvironmentNode::init3DSkyBox()
 void TestEnvironmentNode::init2DSkyBox()
 {
 	render::MultiFaceCube* pSkyBox = CREATE_NODE(render::MultiFaceCube);
-	pSkyBox->setFaceImage(CubeFace::LEFT, "Resource/skybox/left.jpg");
-	pSkyBox->setFaceImage(CubeFace::RIGHT, "Resource/skybox/right.jpg");
-	pSkyBox->setFaceImage(CubeFace::FRONT, "Resource/skybox/front.jpg");
-	pSkyBox->setFaceImage(CubeFace::BACK, "Resource/skybox/back.jpg");
-	pSkyBox->setFaceImage(CubeFace::TOP, "Resource/skybox/top.jpg");
-	pSkyBox->setFaceImage(CubeFace::BOTTOM, "Resource/skybox/bottom.jpg");
+	pSkyBox->setFaceTexture(CubeFace::LEFT, "Resource/skybox/left.jpg");
+	pSkyBox->setFaceTexture(CubeFace::RIGHT, "Resource/skybox/right.jpg");
+	pSkyBox->setFaceTexture(CubeFace::FRONT, "Resource/skybox/front.jpg");
+	pSkyBox->setFaceTexture(CubeFace::BACK, "Resource/skybox/back.jpg");
+	pSkyBox->setFaceTexture(CubeFace::TOP, "Resource/skybox/top.jpg");
+	pSkyBox->setFaceTexture(CubeFace::BOTTOM, "Resource/skybox/bottom.jpg");
 
 	pSkyBox->setScale(0.25f);
 	pSkyBox->setVolume(2048, 2048, 2048);
@@ -96,16 +96,13 @@ void TestEnvironmentNode::init2DSkyBox()
 void TestEnvironmentNode::testCamera()
 {
 	Camera* pCamera = Camera::getMainCamera();
-	/*
-	if (pCamera->getDimensions() == CameraDimensions::TWO)
-	{
-		return;
-	}
-	*/
 	
-	auto size = Tool::getGLViewSize();
+	if (pCamera->getDimensions() == CameraDimensions::THREE)
+	{
+		auto size = Tool::getGLViewSize();
+		pCamera->setPosition(-size.getWidth() * 0.5f, -size.getHeight() * 0.5f);
+	}
 
-	pCamera->setPosition(-size.getWidth() * 0.5f, -size.getHeight() * 0.5f);
 	G_KEYBOARDMANAGER->addKeyboardFunc(this, pCamera, [&](Node* object, sys::BoardKey key, sys::ButtonStatus type) {
 		auto camera = object->as<Camera>();
 		if (camera == nullptr)

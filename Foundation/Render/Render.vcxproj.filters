@@ -450,9 +450,6 @@
     <ClCompile Include="Common\FrameRender\FrameBuffer.cpp">
       <Filter>Common\FrameRender</Filter>
     </ClCompile>
-    <ClCompile Include="Common\PostProcessing\PostProcessingNode.cpp">
-      <Filter>Common\PostProcessing</Filter>
-    </ClCompile>
     <ClCompile Include="Common\Input\KeyboardManager.cpp">
       <Filter>Common\Input</Filter>
     </ClCompile>
@@ -560,6 +557,12 @@
     </ClCompile>
     <ClCompile Include="Common\VAO\VertexArrayBufferObject.cpp">
       <Filter>Common\VAO</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\PostProcessing\FramePostProcessingNode.cpp">
+      <Filter>Common\PostProcessing</Filter>
+    </ClCompile>
+    <ClCompile Include="PixelPostProcessingNode.cpp">
+      <Filter>Common\PostProcessing</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1155,9 +1158,6 @@
     <ClInclude Include="Common\PostProcessing\import.h">
       <Filter>Common\PostProcessing</Filter>
     </ClInclude>
-    <ClInclude Include="Common\PostProcessing\PostProcessingNode.h">
-      <Filter>Common\PostProcessing</Filter>
-    </ClInclude>
     <ClInclude Include="Common\Input\import.h">
       <Filter>Common\Input</Filter>
     </ClInclude>
@@ -1283,6 +1283,12 @@
     </ClInclude>
     <ClInclude Include="Common\VAO\VertexArrayBufferObject.h">
       <Filter>Common\VAO</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\PostProcessing\FramePostProcessingNode.h">
+      <Filter>Common\PostProcessing</Filter>
+    </ClInclude>
+    <ClInclude Include="PixelPostProcessingNode.h">
+      <Filter>Common\PostProcessing</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

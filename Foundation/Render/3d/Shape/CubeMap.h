@@ -18,7 +18,14 @@ namespace render
 	public:
 		virtual bool init();
 	public:
-		void setFaceImage(CubeFace face, const std::string& filepath);
+		void setFaceTexture(CubeFace face, const std::string& filepath);
+
+		void setLeftTexture(const std::string& filepath);
+		void setRightTexture(const std::string& filepath);
+		void setBottomTexture(const std::string& filepath);
+		void setTopTexture(const std::string& filepath);
+		void setFrontTexture(const std::string& filepath);
+		void setBackTexture(const std::string& filepath);
 	protected:
 		void onImageChanged();
 		virtual void onCubeChanged();

@@ -10,7 +10,9 @@ public:
 protected:
 	virtual void initNodes();
 private:
-	void testSimplePostProcessing();
+	void testFramePostProcessing();
+
+	void testPixelPostProcessing();
 
 	void testImage();
 

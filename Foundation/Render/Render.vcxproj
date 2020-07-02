@@ -170,7 +170,7 @@
     <ClCompile Include="Common\Particle\ParticleProtocol.cpp" />
     <ClCompile Include="Common\Particle\XFBParticle.cpp" />
     <ClCompile Include="Common\Particle\XFBParticleNode.cpp" />
-    <ClCompile Include="Common\PostProcessing\PostProcessingNode.cpp" />
+    <ClCompile Include="Common\PostProcessing\FramePostProcessingNode.cpp" />
     <ClCompile Include="Common\Scene\Scene.cpp" />
     <ClCompile Include="Common\ShaderDocument\ShaderDocument.cpp" />
     <ClCompile Include="Common\ShaderDocument\ShaderParameter.cpp" />
@@ -255,6 +255,7 @@
     <ClCompile Include="Graphic\GLAPI\GLVertex.cpp" />
     <ClCompile Include="Graphic\GLAPI\GLRasterization.cpp" />
     <ClCompile Include="Graphic\GLAPI\GLVertexArrays.cpp" />
+    <ClCompile Include="PixelPostProcessingNode.cpp" />
     <ClCompile Include="Platform\DeviceProxy.cpp" />
     <ClCompile Include="Platform\Windows\GlutWindow.cpp" />
     <ClCompile Include="Platform\Windows\GLWindow.cpp" />
@@ -394,7 +395,7 @@
     <ClInclude Include="Common\Particle\XFBParticle.h" />
     <ClInclude Include="Common\Particle\XFBParticleNode.h" />
     <ClInclude Include="Common\PostProcessing\import.h" />
-    <ClInclude Include="Common\PostProcessing\PostProcessingNode.h" />
+    <ClInclude Include="Common\PostProcessing\FramePostProcessingNode.h" />
     <ClInclude Include="Common\Scene\import.h" />
     <ClInclude Include="Common\Scene\Scene.h" />
     <ClInclude Include="Common\ShaderDocument\import.h" />
@@ -497,6 +498,7 @@
     <ClInclude Include="Graphic\GLAPI\import.h" />
     <ClInclude Include="Graphic\GLApi\macros.h" />
     <ClInclude Include="Graphic\import.h" />
+    <ClInclude Include="PixelPostProcessingNode.h" />
     <ClInclude Include="Platform\DeviceProxy.h" />
     <ClInclude Include="Platform\import.h" />
     <ClInclude Include="Platform\Windows\GlutWindow.h" />

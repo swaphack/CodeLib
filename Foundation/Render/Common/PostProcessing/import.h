@@ -1,3 +1,4 @@
 #pragma once
 
-#include "PostProcessingNode.h"
+#include "FramePostProcessingNode.h"
+#include "PixelPostProcessingNode.h"

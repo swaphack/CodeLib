@@ -77,10 +77,10 @@ void TestModelNode::testMultiFaceCube()
 	std::string filepath1 = "Resource/Image/1.jpg";
 
 	MultiFaceCube* pModel = CREATE_NODE(MultiFaceCube);
-	pModel->setAllFacesImage(filepath);
-	pModel->setFaceImage(CubeFace::FRONT, filepath1);
-	pModel->setFaceImage(CubeFace::LEFT, filepath1);
-	pModel->setFaceImage(CubeFace::TOP, filepath1);
+	pModel->setAllFacesTexture(filepath);
+	pModel->setFaceTexture(CubeFace::FRONT, filepath1);
+	pModel->setFaceTexture(CubeFace::LEFT, filepath1);
+	pModel->setFaceTexture(CubeFace::TOP, filepath1);
 
 	pModel->setAnchorPoint(math::Vector3(0.5f, 0.5f, 0.5f));
 	pModel->setPosition(200, 200, -50);
@@ -100,12 +100,12 @@ void TestModelNode::testMultiFaceCube()
 void TestModelNode::testCubeMap()
 {
 	render::CubeMap* pCubMap = CREATE_NODE(render::CubeMap);
-	pCubMap->setFaceImage(CubeFace::LEFT, "Resource/skybox/left.jpg");
-	pCubMap->setFaceImage(CubeFace::RIGHT, "Resource/skybox/right.jpg");
-	pCubMap->setFaceImage(CubeFace::FRONT, "Resource/skybox/front.jpg");
-	pCubMap->setFaceImage(CubeFace::BACK, "Resource/skybox/back.jpg");
-	pCubMap->setFaceImage(CubeFace::TOP, "Resource/skybox/top.jpg");
-	pCubMap->setFaceImage(CubeFace::BOTTOM, "Resource/skybox/bottom.jpg");
+	pCubMap->setFaceTexture(CubeFace::LEFT, "Resource/skybox/left.jpg");
+	pCubMap->setFaceTexture(CubeFace::RIGHT, "Resource/skybox/right.jpg");
+	pCubMap->setFaceTexture(CubeFace::FRONT, "Resource/skybox/front.jpg");
+	pCubMap->setFaceTexture(CubeFace::BACK, "Resource/skybox/back.jpg");
+	pCubMap->setFaceTexture(CubeFace::TOP, "Resource/skybox/top.jpg");
+	pCubMap->setFaceTexture(CubeFace::BOTTOM, "Resource/skybox/bottom.jpg");
 
 	//pSkyBox->setScale(0.25f);
 	pCubMap->setVolume(2048, 2048, 2048);

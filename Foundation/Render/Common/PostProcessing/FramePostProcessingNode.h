@@ -9,14 +9,14 @@ namespace render
 	class RenderBuffer;
 
 	/**
-	*	后期处理
+	*	帧缓存后期处理
 	*	还有问题
 	*/
-	class PostProcessingNode : public DrawNode
+	class FramePostProcessingNode : public DrawNode
 	{
 	public:
-		PostProcessingNode();
-		virtual ~PostProcessingNode();
+		FramePostProcessingNode();
+		virtual ~FramePostProcessingNode();
 	public:
 		virtual bool init();
 
@@ -24,7 +24,7 @@ namespace render
 
 		virtual void beforeDrawNode();
 
-		virtual void onDraw();
+		//virtual void onDraw();
 
 		virtual void afterDrawNode();
 

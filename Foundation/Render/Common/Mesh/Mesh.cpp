@@ -182,6 +182,7 @@ void render::Mesh::updateBufferData()
 		return;
 	}
 	*/
+
 	_vertexBuffer->bindBuffer();
 
 	GLDebug::showError();
@@ -206,10 +207,9 @@ void render::Mesh::updateBufferData()
 	}
 	_vertexBuffer->unbindBuffer();
 	GLDebug::showError();
+
 	_indiceBuffer->bindBuffer();
-	GLDebug::showError();
 	_indiceBuffer->setElementData(_detail->getIndices());
-	GLDebug::showError();
 	_indiceBuffer->unbindBuffer();
 	GLDebug::showError();
 }

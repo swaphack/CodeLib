@@ -37,7 +37,7 @@ namespace sys
 		void flipX();
 		// 垂直翻转
 		void flipY();
-	protected:
+	public:
 		// 设置图片格式 一个像素所有的rgba类型
 		void setDataFormat(ImageDataFormat val);
 		// 设置图片像素数据

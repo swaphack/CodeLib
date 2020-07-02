@@ -163,6 +163,7 @@ render::Shader* render::ShaderManager::createShader(ShaderType type, const std::
 
 	pFunc(root);
 
+	//PRINT("\n%s\n\n", root.getString());
 	render::Shader* pShader = render::Shader::createFromData(type, root.getString());
 	if (pShader == nullptr)
 	{

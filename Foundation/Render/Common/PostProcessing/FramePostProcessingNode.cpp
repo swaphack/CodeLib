@@ -1,4 +1,4 @@
-#include "PostProcessingNode.h"
+#include "FramePostProcessingNode.h"
 #include "Common/Texture/Texture2D.h"
 #include "Common/FrameRender/FrameBuffer.h"
 #include "Common/FrameRender/RenderBuffer.h"
@@ -8,7 +8,7 @@
 #include "Graphic/import.h"
 #include "Common/Tool/Tool.h"
 
-render::PostProcessingNode::PostProcessingNode()
+render::FramePostProcessingNode::FramePostProcessingNode()
 {
 	_texture = CREATE_OBJECT(Texture2D);
 	_frameBuffer = CREATE_OBJECT(FrameBuffer);
@@ -22,14 +22,14 @@ render::PostProcessingNode::PostProcessingNode()
 	SAFE_RETAIN(_renderBuffer);
 }
 
-render::PostProcessingNode::~PostProcessingNode()
+render::FramePostProcessingNode::~FramePostProcessingNode()
 {
 	SAFE_RELEASE(_texture);
 	SAFE_RELEASE(_frameBuffer);
 	SAFE_RELEASE(_renderBuffer);
 }
 
-bool render::PostProcessingNode::init()
+bool render::FramePostProcessingNode::init()
 {
 	if (!DrawNode::init())
 	{
@@ -46,7 +46,7 @@ bool render::PostProcessingNode::init()
 	return true;
 }
 
-void render::PostProcessingNode::drawNode()
+void render::FramePostProcessingNode::drawNode()
 {
 	if (!_bInitedFrameBufferData)
 	{
@@ -58,24 +58,23 @@ void render::PostProcessingNode::drawNode()
 	GLDebug::showError();
 }
 
-void render::PostProcessingNode::beforeDrawNode()
+void render::FramePostProcessingNode::beforeDrawNode()
 {
-	const auto& size = Tool::getGLViewSize();
 	_frameBuffer->bindFrameBuffer();
-	GLDebug::showError();
 
+	this->drawAllChildren();
+
+	_frameBuffer->unbindFrameBuffer();
+	GLDebug::showError();
+	/*
+	const auto& size = Tool::getGLViewSize();
 	GLState::setViewport(0, 0, 
 		size.getWidth(), size.getHeight());
 
 	GLDebug::showError();
 	GLState::enable(EnableMode::DEPTH_TEST);
 	
-	/*
-	uint32_t value = 
-		(uint32_t)AttribMask::COLOR_BUFFER_BIT
-		| (uint32_t)AttribMask::DEPTH_BUFFER_BIT;
-	GLFixedFunction::pushAttrib(value);
-	*/
+
 	GLDebug::showError();
 
 	uint32_t bitfield =
@@ -87,52 +86,45 @@ void render::PostProcessingNode::beforeDrawNode()
 	//GLRender::clear(bitfield);
 
 	GLDebug::showError();
+	*/
 }
-
-void render::PostProcessingNode::onDraw()
+/*
+void render::FramePostProcessingNode::onDraw()
 {
-	this->drawAllChildren();
-
 	GLDebug::showError();
 }
-
-void render::PostProcessingNode::afterDrawNode()
+*/
+void render::FramePostProcessingNode::afterDrawNode()
 {
-	_frameBuffer->bindFrameBuffer(FrameBufferTarget::READ_FRAMEBUFFER);
-	_frameBuffer->unbindFrameBuffer();
-
-	GLDebug::showError();
-	float x = _rectVertex.getX();
-	float y = _rectVertex.getY();
-	float width = _rectVertex.getWidth();
-	float height = _rectVertex.getHeight();
-	//GLState::setViewport(x, y, width, height);
+	/*
 	GLDebug::showError();
 
 	GLState::disable(EnableMode::DEPTH_TEST);
 	uint32_t bitfield =
 		(uint32_t)ClearBufferBitType::COLOR_BUFFER_BIT
-		//| (uint32_t)ClearBufferBitType::DEPTH_BUFFER_BIT
-		//| (uint32_t)ClearBufferBitType::STENCIL_BUFFER_BIT
+		| (uint32_t)ClearBufferBitType::DEPTH_BUFFER_BIT
+		| (uint32_t)ClearBufferBitType::STENCIL_BUFFER_BIT
 		;
 
-	//GLRender::clearColor(0.0f, 0.0f, 0.0f, 1.0f);
+	//GLRender::clearColor(1.0f, 1.0f, 1.0f, 1.0f);
 	//GLRender::clear(bitfield);
 	GLDebug::showError();
+
 	DrawNode::onDraw();
 	GLDebug::showError();
 	//GLFixedFunction::popAttrib();
 
 
 	//this->drawAllChildren();
+	*/
 }
 
-bool render::PostProcessingNode::isFrameInited()
+bool render::FramePostProcessingNode::isFrameInited()
 {
 	return _bInitedFrameBufferData;
 }
 
-void render::PostProcessingNode::updateTextureSize()
+void render::FramePostProcessingNode::updateTextureSize()
 {
 	_bInitedFrameBufferData = true;	
 
@@ -142,42 +134,41 @@ void render::PostProcessingNode::updateTextureSize()
 	_texture->setWidth(width);
 	_texture->setHeight(height);
 
+	_frameBuffer->bindFrameBuffer();
+
 	GLState::enable((EnableMode)_texture->getTextureTarget());
 	_texture->bindTexture();
-	_texture->setTextureImage(0, TextureInternalSizedFormat::RGB8, width, height, 0, TextureExternalFormat::RGB, TextureExternalDataType::UNSIGNED_BYTE, 0);
+	_texture->setTextureImage(0, TextureInternalSizedFormat::RGBA8, width, height, 0, TextureExternalFormat::RGBA, TextureExternalDataType::UNSIGNED_BYTE, 0);
 	_texture->applyTextureSetting();
-	_texture->unbindTexture();
-	GLState::disable((EnableMode)_texture->getTextureTarget());
+	_frameBuffer->setTexture(FrameBufferAttachment::COLOR_ATTACHMENT0, _texture->getTextureID(), 0);
+
+	//_texture->unbindTexture();
+	//GLState::disable((EnableMode)_texture->getTextureTarget());
 	GLDebug::showError();
 
 	GLDebug::showError();
 	GLDebug::showError();
 	_renderBuffer->bindRenderBuffer();
-	_renderBuffer->setStorage(RenderBufferInternalFormat::DEPTH_COMPONENT, width, height);
-	_renderBuffer->unbindRenderBuffer();
+	_renderBuffer->setStorage(RenderBufferInternalFormat::DEPTH24_STENCIL8, width, height);
+	_frameBuffer->setRenderBuffer(FrameBufferAttachment::DEPTH_STENCIL_ATTACHMENT, _renderBuffer);
+
+	//_renderBuffer->unbindRenderBuffer();
+	GLDebug::showError();
 	GLDebug::showError();
 
-	_frameBuffer->bindFrameBuffer();
-	_frameBuffer->setTexture(FrameBufferAttachment::COLOR_ATTACHMENT0, _texture->getTextureID(), 0);
 	GLDebug::showError();
 
-	_frameBuffer->setRenderBuffer(FrameBufferAttachment::DEPTH_ATTACHMENT, _renderBuffer);
-	GLDebug::showError();
-
-	GLFrameRender::setDrawBuffer(DrawBufferType::COLOR_ATTACHMENT0);
+	//GLFrameRender::setDrawBuffer(DrawBufferType::COLOR_ATTACHMENT0);
 	
 	GLDebug::showError();
 
 	FrameBufferStatus status = _frameBuffer->checkStatus();
+	GLDebug::showError();
 	if (status != FrameBufferStatus::FRAMEBUFFER_COMPLETE)
 	{
 		PRINT("Frame Buffer is not Complete!\n");
 		return;
 	}
-// 
-// 
-// 	GLRender::setReadBuffer(ReadBufferMode::COLOR_ATTACHMENT0);
-// 	GLDebug::showError();
 
 	_frameBuffer->unbindFrameBuffer();
 	GLDebug::showError();

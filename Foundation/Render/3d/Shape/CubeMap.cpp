@@ -35,11 +35,41 @@ bool render::CubeMap::init()
 	return true;
 }
 
-void render::CubeMap::setFaceImage(CubeFace face, const std::string& filepath)
+void render::CubeMap::setFaceTexture(CubeFace face, const std::string& filepath)
 {
 	_imagePaths[(int)face] = filepath;
 
 	this->notify(NodeNotifyType::TEXTURE);
+}
+
+void render::CubeMap::setLeftTexture(const std::string& filepath)
+{
+	this->setFaceTexture(CubeFace::LEFT, filepath);
+}
+
+void render::CubeMap::setRightTexture(const std::string& filepath)
+{
+	this->setFaceTexture(CubeFace::RIGHT, filepath);
+}
+
+void render::CubeMap::setBottomTexture(const std::string& filepath)
+{
+	this->setFaceTexture(CubeFace::BOTTOM, filepath);
+}
+
+void render::CubeMap::setTopTexture(const std::string& filepath)
+{
+	this->setFaceTexture(CubeFace::TOP, filepath);
+}
+
+void render::CubeMap::setFrontTexture(const std::string& filepath)
+{
+	this->setFaceTexture(CubeFace::FRONT, filepath);
+}
+
+void render::CubeMap::setBackTexture(const std::string& filepath)
+{
+	this->setFaceTexture(CubeFace::BACK, filepath);
 }
 
 void render::CubeMap::onImageChanged()

@@ -125,10 +125,10 @@ void TestShaderNode::testMultiMeshCubeModelShader()
 	std::string filepath1 = "Resource/Image/1.jpg";
 
 	MultiFaceCube* pModel = CREATE_NODE(MultiFaceCube);
-	pModel->setAllFacesImage(filepath);
-	pModel->setFaceImage(CubeFace::FRONT, filepath1);
-	pModel->setFaceImage(CubeFace::LEFT, filepath1);
-	pModel->setFaceImage(CubeFace::TOP, filepath1);
+	pModel->setAllFacesTexture(filepath);
+	pModel->setFaceTexture(CubeFace::FRONT, filepath1);
+	pModel->setFaceTexture(CubeFace::LEFT, filepath1);
+	pModel->setFaceTexture(CubeFace::TOP, filepath1);
 
 	pModel->setPosition(400, 400, 0);
 	pModel->setVolume(200, 200, 200);

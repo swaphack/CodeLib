@@ -534,6 +534,8 @@ void render::Material::updateMaterialUniformValue(Materials* mats)
 			auto pTexture = mats->getTexture(_detail->getAmbientTextureMap());
 			if (pTexture)
 			{
+				pTexture->activeTexture(ActiveTextureName::TEXTURE0);
+				pTexture->bindTexture();
 				pTexture->enableTextureWithSampler(0);
 				pUniform->setValue(0);
 			}
@@ -544,6 +546,8 @@ void render::Material::updateMaterialUniformValue(Materials* mats)
 			auto pTexture = mats->getTexture(_detail->getDiffuseTextureMap());
 			if (pTexture)
 			{
+				pTexture->activeTexture(ActiveTextureName::TEXTURE1);
+				pTexture->bindTexture();
 				pTexture->enableTextureWithSampler(1);
 				pUniform->setValue(1);
 			}
@@ -558,6 +562,8 @@ void render::Material::updateMaterialUniformValue(Materials* mats)
 			auto pTexture = mats->getTexture(_detail->getSpecularTextureMap());
 			if (pTexture)
 			{
+				pTexture->activeTexture(ActiveTextureName::TEXTURE2);
+				pTexture->bindTexture();
 				pTexture->enableTextureWithSampler(2);
 				pUniform->setValue(2);
 			}
@@ -593,6 +599,8 @@ void render::Material::updateTexturesUnifromValue(Materials* mats)
 			auto pTexture = mats->getTexture(_detail->getAmbientTextureMap());
 			if (pTexture)
 			{
+				pTexture->activeTexture(ActiveTextureName::TEXTURE0);
+				pTexture->bindTexture();
 				pTexture->enableTextureWithSampler(0);
 				pUniform->setValue(0);
 			}
@@ -602,8 +610,9 @@ void render::Material::updateTexturesUnifromValue(Materials* mats)
 			auto pTexture = mats->getTexture(_detail->getDiffuseTextureMap());
 			if (pTexture)
 			{
+				pTexture->activeTexture(ActiveTextureName::TEXTURE1);
+				pTexture->bindTexture();
 				pTexture->enableTextureWithSampler(1);
-
 				pUniform->setValue(1);
 			}
 			else
@@ -618,6 +627,8 @@ void render::Material::updateTexturesUnifromValue(Materials* mats)
 			auto pTexture = mats->getTexture(_detail->getSpecularTextureMap());
 			if (pTexture)
 			{
+				pTexture->activeTexture(ActiveTextureName::TEXTURE2);
+				pTexture->bindTexture();
 				pTexture->enableTextureWithSampler(2);
 				pUniform->setValue(2);
 			}

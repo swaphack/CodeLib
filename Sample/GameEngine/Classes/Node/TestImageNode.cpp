@@ -35,8 +35,11 @@ void TestImageNode::testImage()
 		pImage->setAnchorPoint(0.5f, 0.5f);
 		pImage->setPosition(512, 384);
 		pImage->setVolume(frameSize);
-		this->addChild(pImage);
+		
+		Utility::loadShader(pImage, "Shader/texture/texture.vs", "Shader/texture/texture.fs");
 		Utility::updateNodeShader(pImage);
+
+		this->addChild(pImage);
 	}
 
 	if (1)
@@ -48,8 +51,10 @@ void TestImageNode::testImage()
 		pImage->setAnchorPoint(0.5f, 0.5f);
 		pImage->setPosition(512, 384);
 		pImage->setVolume(512, 384);
-		this->addChild(pImage);
+		Utility::loadShader(pImage, "Shader/texture/texture.vs", "Shader/texture/texture.fs");
 		Utility::updateNodeShader(pImage);
+
+		this->addChild(pImage);
 	}
 }
 
