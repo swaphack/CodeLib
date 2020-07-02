@@ -1,4 +1,4 @@
-#include "XFBObject.h"
+#include "TransformFeedbackBufferObject.h"
 #include "Common/Shader/ShaderProgram.h"
 #include "Common/Shader/ShaderManager.h"
 #include "Common/Buffer/TransformFeedbackBuffer.h"
@@ -7,17 +7,17 @@
 #include "Common/VAO/VertexArrayObject.h"
 #include "Common/Buffer/ArrayBuffer.h"
 
-render::XFBObject::XFBObject()
+render::TransformFeedbackBufferObject::TransformFeedbackBufferObject()
 {
 	this->initXFB();
 }
 
-render::XFBObject::~XFBObject()
+render::TransformFeedbackBufferObject::~TransformFeedbackBufferObject()
 {
 	this->releaseXFB();
 }
 
-void render::XFBObject::loadVertexProgram(const std::string& vertexFilepath)
+void render::TransformFeedbackBufferObject::loadVertexProgram(const std::string& vertexFilepath)
 {
 	SAFE_RELEASE(_shaderProgram);
 	_shaderProgram = (ShaderProgram*)G_SHANDER->createVertexProgram(vertexFilepath, false);
@@ -28,17 +28,17 @@ void render::XFBObject::loadVertexProgram(const std::string& vertexFilepath)
 	_discardFragment = true;
 }
 
-render::ShaderProgram* render::XFBObject::getShaderProgram() const
+render::ShaderProgram* render::TransformFeedbackBufferObject::getShaderProgram() const
 {
 	return _shaderProgram;
 }
 
-render::TransformFeedbackBuffer* render::XFBObject::getFeedbackBuffer() const
+render::TransformFeedbackBuffer* render::TransformFeedbackBufferObject::getFeedbackBuffer() const
 {
 	return _transformFeedbackBuffer;
 }
 
-void render::XFBObject::loadVertexFragmentProgram(const std::string& vertexFilepath, const std::string& fragmentFilepath)
+void render::TransformFeedbackBufferObject::loadVertexFragmentProgram(const std::string& vertexFilepath, const std::string& fragmentFilepath)
 {
 	SAFE_RELEASE(_shaderProgram);
 	_shaderProgram = (ShaderProgram*)G_SHANDER->createVertexFragmentProgram(vertexFilepath, false);
@@ -49,16 +49,16 @@ void render::XFBObject::loadVertexFragmentProgram(const std::string& vertexFilep
 	_discardFragment = false;
 }
 
-void render::XFBObject::setInputFunc(const XFBProgramFunc& func)
+void render::TransformFeedbackBufferObject::setInputFunc(const XFBProgramFunc& func)
 {
 	_inputFunc = func;
 }
 
-void render::XFBObject::setOutputFunc(const XFBBufferFunc& func)
+void render::TransformFeedbackBufferObject::setOutputFunc(const XFBBufferFunc& func)
 {
 	_outputFunc = func;
 }
-void render::XFBObject::setBufferSize(uint32_t size)
+void render::TransformFeedbackBufferObject::setBufferSize(uint32_t size)
 {
 	if (_transformFeedbackBuffer == nullptr)
 	{
@@ -72,7 +72,7 @@ void render::XFBObject::setBufferSize(uint32_t size)
 	_transformFeedbackBuffer->unbindBuffer();
 }
 
-void render::XFBObject::setTargetBufferRange(int index, uint32_t offset, uint32_t size)
+void render::TransformFeedbackBufferObject::setTargetBufferRange(int index, uint32_t offset, uint32_t size)
 {
 	if (_transformFeedback == nullptr)
 	{
@@ -87,7 +87,7 @@ void render::XFBObject::setTargetBufferRange(int index, uint32_t offset, uint32_
 	GLDebug::showError();
 }
 
-void render::XFBObject::setWatchVaryings(int count, const char** varyings)
+void render::TransformFeedbackBufferObject::setWatchVaryings(int count, const char** varyings)
 {
 	if (varyings == nullptr)
 	{
@@ -109,13 +109,13 @@ void render::XFBObject::setWatchVaryings(int count, const char** varyings)
 	_shaderProgram->validate();
 }
 
-void render::XFBObject::setWatchPrimitiveMode(TransformFeedbackPrimitiveMode mode, uint32_t count)
+void render::TransformFeedbackBufferObject::setWatchPrimitiveMode(TransformFeedbackPrimitiveMode mode, uint32_t count)
 {
 	_primitiveMode = mode;
 	_watchCount = count;
 }
 
-void render::XFBObject::run()
+void render::TransformFeedbackBufferObject::run()
 {
 	if (_shaderProgram == nullptr)
 	{
@@ -173,7 +173,7 @@ void render::XFBObject::run()
 	_transformFeedback->unbindTransformFeedback();
 }
 
-void render::XFBObject::initXFB()
+void render::TransformFeedbackBufferObject::initXFB()
 {
 	_transformFeedbackBuffer = CREATE_OBJECT(TransformFeedbackBuffer);
 	SAFE_RETAIN(_transformFeedbackBuffer);
@@ -188,7 +188,7 @@ void render::XFBObject::initXFB()
 	_transformFeedback->unbindTransformFeedback();
 }
 
-void render::XFBObject::releaseXFB()
+void render::TransformFeedbackBufferObject::releaseXFB()
 {
 	SAFE_RELEASE(_transformFeedbackBuffer);
 	SAFE_RELEASE(_transformFeedback);

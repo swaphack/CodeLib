@@ -19,11 +19,11 @@ namespace render
 	/**
 	*	顶点反馈对象
 	*/
-	class XFBObject : public sys::Object
+	class TransformFeedbackBufferObject : public sys::Object
 	{
 	public:
-		XFBObject();
-		virtual ~XFBObject();
+		TransformFeedbackBufferObject();
+		virtual ~TransformFeedbackBufferObject();
 	public:
 		/**
 		*	获取着色器

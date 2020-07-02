@@ -10,7 +10,9 @@ public:
 protected:
 	virtual void initNodes();
 private:
-	void testParticle();
+	void testCollideParticle();
+
+	void testXFBParticle();
 
 	render::Node* createCubeModel();
 };

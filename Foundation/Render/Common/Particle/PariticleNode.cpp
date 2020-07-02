@@ -65,7 +65,8 @@ void render::PariticleNode::updateParticleParameter()
 
 void render::PariticleNode::updatePariticle(float dt)
 {
-	_passedTime = dt;
+	_deltaTime = dt;
+	_passedTime += dt;
 	this->update(dt);
 }
 

@@ -1,4 +1,5 @@
 #pragma once
 
-#include "XFBParticleNode.h"
+#include "PariticleNode.h"
+#include "TransformFeedbackParticleNode.h"
 #include "ComputeParticleNode.h"

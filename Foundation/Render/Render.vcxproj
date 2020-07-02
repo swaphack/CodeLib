@@ -168,8 +168,7 @@
     <ClCompile Include="Common\Particle\PariticleNode.cpp" />
     <ClCompile Include="Common\Particle\ParticleData.cpp" />
     <ClCompile Include="Common\Particle\ParticleProtocol.cpp" />
-    <ClCompile Include="Common\Particle\XFBParticle.cpp" />
-    <ClCompile Include="Common\Particle\XFBParticleNode.cpp" />
+    <ClCompile Include="Common\Particle\TransformFeedbackParticleNode.cpp" />
     <ClCompile Include="Common\PostProcessing\FramePostProcessingNode.cpp" />
     <ClCompile Include="Common\Scene\Scene.cpp" />
     <ClCompile Include="Common\ShaderDocument\ShaderDocument.cpp" />
@@ -225,7 +224,7 @@
     <ClCompile Include="Common\View\View.cpp" />
     <ClCompile Include="Common\View\ViewConfig.cpp" />
     <ClCompile Include="Common\XFB\TransformFeedback.cpp" />
-    <ClCompile Include="Common\XFB\XFBObject.cpp" />
+    <ClCompile Include="Common\XFB\TransformFeedbackBufferObject.cpp" />
     <ClCompile Include="Graphic\Command\DrawCommand.cpp" />
     <ClCompile Include="Graphic\Command\DrawCommander.cpp" />
     <ClCompile Include="Graphic\Command\DrawCommandList.cpp" />
@@ -392,8 +391,7 @@
     <ClInclude Include="Common\Particle\PariticleNode.h" />
     <ClInclude Include="Common\Particle\ParticleData.h" />
     <ClInclude Include="Common\Particle\ParticleProtocol.h" />
-    <ClInclude Include="Common\Particle\XFBParticle.h" />
-    <ClInclude Include="Common\Particle\XFBParticleNode.h" />
+    <ClInclude Include="Common\Particle\TransformFeedbackParticleNode.h" />
     <ClInclude Include="Common\PostProcessing\import.h" />
     <ClInclude Include="Common\PostProcessing\FramePostProcessingNode.h" />
     <ClInclude Include="Common\Scene\import.h" />
@@ -462,7 +460,7 @@
     <ClInclude Include="Common\View\ViewConfig.h" />
     <ClInclude Include="Common\XFB\import.h" />
     <ClInclude Include="Common\XFB\TransformFeedback.h" />
-    <ClInclude Include="Common\XFB\XFBObject.h" />
+    <ClInclude Include="Common\XFB\TransformFeedbackBufferObject.h" />
     <ClInclude Include="ext-config.h" />
     <ClInclude Include="Graphic\Command\GUID.h" />
     <ClInclude Include="Graphic\Command\DrawCommandList.h" />

@@ -51,8 +51,10 @@ namespace render
 		virtual void update(float dt);
 		// 参数改变
 		virtual void updateParticleParameter();
-	private:
+	protected:
 		// 运行时间
 		float _passedTime = 0;
+
+		float _deltaTime = 0;
 	};
 }

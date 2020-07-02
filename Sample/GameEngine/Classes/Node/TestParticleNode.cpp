@@ -14,11 +14,12 @@ TestParticleNode::~TestParticleNode()
 
 void TestParticleNode::initNodes()
 {
-	testParticle();
+	testXFBParticle();
 }
 
-void TestParticleNode::testParticle()
+void TestParticleNode::testCollideParticle()
 {
+	/*
 	XFBParticleNode* particleNode = CREATE_NODE(XFBParticleNode);
 	particleNode->setPosition(512, 386, 0);
 	particleNode->setScale(2, 1, 1);
@@ -36,8 +37,6 @@ void TestParticleNode::testParticle()
 	};
 
 	pUpdateFeedback->xfb->loadVertexFragmentProgram(uvfile, uffile);
-	GLDebug::showError();
-
 	pUpdateFeedback->xfb->setWatchVaryings(2, varings0);
 
 	GLDebug::showError();
@@ -57,15 +56,15 @@ void TestParticleNode::testParticle()
 
 		pUniform = sp->getUniform("timeStep");
 		if (pUniform) pUniform->setValue(0.02f);
-		/*
-		pUniform = sp->getUniform("geometryTBO");
-		if (pUniform) 
-		{
-			GLTexture::activeTexture(ActiveTextureName::TEXTURE0);
-			GLTexture::bindTexture2D(ps->getTextureID());
-			pUniform->setValue(0);
-		}
-		*/
+	
+		//pUniform = sp->getUniform("geometryTBO");
+		//if (pUniform)
+		//{
+		//	GLTexture::activeTexture(ActiveTextureName::TEXTURE0);
+		//	GLTexture::bindTexture2D(ps->getTextureID());
+		//	pUniform->setValue(0);
+		//}
+		
 		GLDebug::showError();
 	};
 
@@ -101,6 +100,18 @@ void TestParticleNode::testParticle()
 	GLDebug::showError();
 
 	particleNode->setParticleCount(1000);
+	*/
+}
+
+void TestParticleNode::testXFBParticle()
+{
+	render::TransformFeedbackParticleNode* node = CREATE_NODE(render::TransformFeedbackParticleNode);
+	node->setPosition(512, 384);
+	node->setSpeedAcceleration(10, 0, 0);
+	node->setParticleCount(1000);
+	node->loadShaderProgram("Shader/particle/simple_particle_render.vs", "Shader/particle/simple_particle_render.fs");
+
+	this->addChild(node);
 }
 
 render::Node* TestParticleNode::createCubeModel()
