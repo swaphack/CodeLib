@@ -35,7 +35,7 @@ bool render::TransformFeedbackParticleNode::init()
 	const char* varying[] = {"out_Position"};
 
 	uint32_t size = _particleCount * 3 * UNIT_SIZE;
-	_updateObject->loadVertexProgram("Shader/particle/simple_particle.vs");
+	_updateObject->loadVertexProgram("Shader/particle/simple_particle_update.vs");
 	_updateObject->setWatchVaryings(1, varying);
 	_updateObject->setWatchPrimitiveMode(TransformFeedbackPrimitiveMode::POINTS, _particleCount);
 	_updateObject->setBufferSize(size);
