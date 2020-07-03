@@ -28,9 +28,12 @@ void TestXFBNode::initNodes()
 	float num1 = 3;
 
 	render::VertexArrayBufferObject* vab = CREATE_OBJECT(render::VertexArrayBufferObject);
-	vab->resize(2 * UNIT_SIZE);
-	vab->writeVertexAttrib(VertexAttribPointerType::FLOAT, &num0);
-	vab->writeVertexAttrib(VertexAttribPointerType::FLOAT, &num1);
+	vab->resizeBuffer(2 * UNIT_SIZE);
+	vab->setSubBuffer(0, UNIT_SIZE, &num0);
+	vab->setSubBuffer(UNIT_SIZE, UNIT_SIZE, &num1);
+
+	vab->setVertexBuffer(0, 1, VertexAttribPointerType::FLOAT, 0, 0);
+	vab->setVertexBuffer(1, 1, VertexAttribPointerType::FLOAT, 0, UNIT_SIZE);
 
 	xfbObj->setInputFunc([vab](render::ShaderProgram* program) {
 		vab->bindVertexArray();

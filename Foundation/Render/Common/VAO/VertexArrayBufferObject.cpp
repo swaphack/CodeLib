@@ -14,45 +14,38 @@ render::VertexArrayBufferObject::~VertexArrayBufferObject()
 	this->releaseVABO();
 }
 
-void render::VertexArrayBufferObject::resize(uint32_t size, BufferDataUsage usage)
+void render::VertexArrayBufferObject::resizeBuffer(uint32_t size, BufferDataUsage usage)
 {
 	_buffer->bindBuffer();
 	_buffer->setBufferData(size, nullptr, usage);
 	_buffer->unbindBuffer();
-
-	_cursor = 0;
-	_index = 0;
+	GLDebug::showError();
 }
 
-void render::VertexArrayBufferObject::writeVertexAttrib(VertexAttribPointerType type, const void* value, uint32_t count, uint32_t stride)
+void render::VertexArrayBufferObject::setSubBuffer(uint32_t offset, uint32_t size, const void* value)
 {
-	uint32_t unitSize = getTypeSize(type);
-	if (unitSize == 0)
-	{
-		return;
-	}
-
-	uint32_t size = count * unitSize;
-
-	_vao->bindVertexArray();
 	_buffer->bindBuffer();
-	_buffer->setBufferSubData(_cursor, size, value);
-	
+	_buffer->setBufferSubData(offset, size, value);
+	_buffer->unbindBuffer();
 	GLDebug::showError();
+}
 
-	auto pData = _vao->getVertexAttrib<VertexAttribPointer>(_index);
-	pData->setVertexAttribPointer(count, type, stride, _cursor);
-
-	//_buffer->unbindBuffer();
+void render::VertexArrayBufferObject::setVertexBuffer(int index, uint32_t count, VertexAttribPointerType type, uint32_t stride, uint32_t offset)
+{
+	GLDebug::showError();
+	_vao->bindVertexArray();
+	_vao->bindBuffer();
+	auto pData = _vao->getVertexAttrib<VertexAttribPointer>(index);
+	pData->setVertexAttribPointer(count, type, stride, offset);
+	GLDebug::showError();
 	_vao->unbindVertexArray();
 	GLDebug::showError();
-	_cursor += size;
-	_index++;
 }
 
 void render::VertexArrayBufferObject::bindVertexArray()
 {
 	_vao->bindVertexArray();
+	_vao->bindBuffer();
 }
 
 void render::VertexArrayBufferObject::unbindVertexArray()
@@ -62,8 +55,6 @@ void render::VertexArrayBufferObject::unbindVertexArray()
 
 void render::VertexArrayBufferObject::enableVertexArrayAttrib(uint32_t index)
 {
-	ASSERT(index <= _index);
-
 	_vao->bindVertexArray();
 	auto pData = _vao->getVertexAttrib<VertexAttribPointer>(index);
 	pData->enableVertexArrayAttrib();

@@ -50,33 +50,46 @@ bool render::TransformFeedbackParticleNode::init()
 
 		auto buffer = _updateObject->getFeedbackBuffer();
 		buffer->bindBuffer();
+		GLDebug::showError();
 		float* data = (float*)buffer->getMapBufferRange(0, len, MapBufferRangeAccess::MAP_READ_BIT);
+		_renderObject->resizeBuffer(len);
+		GLDebug::showError();
+		_renderObject->setSubBuffer(0, posSize, data);
+		_renderObject->setSubBuffer(posSize, speedSize, data + posSize);
+		_renderObject->setSubBuffer(posSize + speedSize, angleSize, data + posSize + speedSize);
+		buffer->unmapBuffer();
+		buffer->unbindBuffer();
+
+		GLDebug::showError();
+		_renderObject->setVertexBuffer(0, 3, VertexAttribPointerType::FLOAT, 0, 0);
+		_renderObject->setVertexBuffer(1, 3, VertexAttribPointerType::FLOAT, 0, posSize);
+		_renderObject->setVertexBuffer(2, 3, VertexAttribPointerType::FLOAT, 0, posSize + speedSize);
+
+		GLDebug::showError();
 
 		_renderObject->bindVertexArray();
-		_renderObject->resize(len);
-		_renderObject->writeVertexAttrib(VertexAttribPointerType::FLOAT, data, posSize);
-		_renderObject->writeVertexAttrib(VertexAttribPointerType::FLOAT, (void*)(data + posSize), speedSize);
-		_renderObject->writeVertexAttrib(VertexAttribPointerType::FLOAT, (void*)(data + posSize + speedSize), angleSize);
-
+		GLDebug::showError();
 		auto in_position = program->getAttrib("in_position");
 		if (in_position) _renderObject->enableVertexArrayAttrib(in_position->getAttribID());
-
+		GLDebug::showError();
 		auto in_speedAcceleration = program->getAttrib("in_speedAcceleration");
 		if (in_speedAcceleration) _renderObject->enableVertexArrayAttrib(in_speedAcceleration->getAttribID());
-
+		GLDebug::showError();
 		auto in_angleAcceleration = program->getAttrib("in_angleAcceleration");
 		if (in_angleAcceleration) _renderObject->enableVertexArrayAttrib(in_angleAcceleration->getAttribID());
-
+		_renderObject->unbindVertexArray();
+		GLDebug::showError();
 		auto lifeTime = program->getUniform("lifeTime");
 		if (lifeTime) lifeTime->setValue(_passedTime);
-
+		GLDebug::showError();
 		auto deltaTime = program->getUniform("deltaTime");
 		if (deltaTime) deltaTime->setValue(_deltaTime);
-
+		GLDebug::showError();
 		auto maxTime = program->getUniform("maxTime");
-		if (maxTime) deltaTime->setValue(10);
-
-		buffer->unmapBuffer();
+		if (maxTime) maxTime->setValue(10.0f);
+		
+		GLDebug::showError();
+		GLDebug::showError();
 	});
 
 	_updateObject->setOutputFunc([this](TransformFeedbackBuffer* buffer) {
@@ -87,18 +100,22 @@ bool render::TransformFeedbackParticleNode::init()
 		uint32_t angleSize = 3 * UNIT_SIZE * _particleCount;
 
 		uint32_t len = posSize + speedSize + angleSize;
-
+		GLDebug::showError();
 		buffer->bindBuffer();
 		float* data = (float*)buffer->getMapBufferRange(0, len, MapBufferRangeAccess::MAP_READ_BIT);
-
-		_renderObject->bindVertexArray();
-		_renderObject->resize(len);
-		_renderObject->writeVertexAttrib(VertexAttribPointerType::FLOAT, data, posSize);
-		_renderObject->writeVertexAttrib(VertexAttribPointerType::FLOAT, data + posSize, speedSize);
-		_renderObject->writeVertexAttrib(VertexAttribPointerType::FLOAT, data + posSize + speedSize, angleSize);
+		GLDebug::showError();
+		_renderObject->resizeBuffer(len);
+		_renderObject->setSubBuffer(0, posSize, data);
+		_renderObject->setSubBuffer(posSize, speedSize, data + posSize);
+		_renderObject->setSubBuffer(posSize + speedSize, angleSize, data + posSize + speedSize);
+		GLDebug::showError();
 		buffer->unmapBuffer();
 		buffer->unbindBuffer();
-		_renderObject->unbindVertexArray();
+		GLDebug::showError();
+		_renderObject->setVertexBuffer(0, 3, VertexAttribPointerType::FLOAT, 0, 0);
+		_renderObject->setVertexBuffer(1, 3, VertexAttribPointerType::FLOAT, 0, posSize);
+		_renderObject->setVertexBuffer(2, 3, VertexAttribPointerType::FLOAT, 0, posSize + speedSize);
+		GLDebug::showError();
 	});
 
 	return true;
@@ -111,25 +128,46 @@ void render::TransformFeedbackParticleNode::update(float dt)
 		return;
 	}
 
-	_updateObject->run();
+	if (_deltaTime >= 10)
+	{
+		_deltaTime = 0;
+	}
 
+	_updateObject->run();
+	GLDebug::showError();
+
+	GLState::enable(EnableMode::POINT_SPRITE);
+	GLFixedFunction::setTexEnv(TextureEnvTarget::POINT_SPRITE, TextureEnvParameter::COORD_REPLACE, 1);
+	GLState::setPointSpriteCoordOrigin(PointSpriteCoordType::LOWER_LEFT);
 	
 	_shaderProgram->use();
 	_renderObject->bindVertexArray();
+
+	GLDebug::showError();
 	auto v_position = _shaderProgram->getAttrib("v_position");
 	if (v_position) _renderObject->enableVertexArrayAttrib(v_position->getAttribID());
 
+	GLDebug::showError();
 	auto pointScale = _shaderProgram->getUniform("pointScale");
-	if (pointScale) pointScale->setValue(1);
+	if (pointScale) pointScale->setValue(10.0f);
 
+	GLDebug::showError();
+	GLState::setPointSize(10);
 	GLBufferObjects::drawArrays(DrawMode::POINTS, 0, _particleCount);
+	GLState::setPointSize(1);
+	GLDebug::showError();
 
 	_renderObject->unbindVertexArray();
 	_shaderProgram->unuse();
+
+	GLState::disable(EnableMode::POINT_SPRITE);
+
+	GLDebug::showError();
 }
 
 void render::TransformFeedbackParticleNode::updateParticleParameter()
 {
+	GLDebug::showError();
 	uint32_t posSize = 3 * UNIT_SIZE * _particleCount;
 	uint32_t speedSize = 3 * UNIT_SIZE * _particleCount;
 	uint32_t angleSize = 3 * UNIT_SIZE * _particleCount;
@@ -137,24 +175,23 @@ void render::TransformFeedbackParticleNode::updateParticleParameter()
 	uint32_t len = posSize + speedSize + angleSize;
 
 	auto buffer = _updateObject->getFeedbackBuffer();
-
+	
 	buffer->bindBuffer();
-	buffer->setBufferData(len, BufferDataUsage::DYNAMIC_DRAW);
-	float* data = (float*)buffer->getMapBufferRange(0, len, MapBufferRangeAccess::MAP_WRITE_BIT);
-
+	buffer->setBufferData(len, BufferDataUsage::STATIC_DRAW);
 	for (int i = 0; i < _particleCount; i++)
 	{
 		math::Vector3 pos(sys::Random::getNumber0_1(), sys::Random::getNumber0_1(), sys::Random::getNumber0_1());
 		math::Vector3 speed(sys::Random::getNumber0_1(), sys::Random::getNumber0_1(), sys::Random::getNumber0_1());
 		math::Vector3 angle(sys::Random::getNumber0_1(), sys::Random::getNumber0_1(), sys::Random::getNumber0_1());
 
-		memcpy(data + 3 * i, pos.getValue(), 3 * UNIT_SIZE);
-		memcpy(data + posSize + 3 * i, speed.getValue(), 3 * UNIT_SIZE);
-		memcpy(data + posSize + speedSize + 3 * i, angle.getValue(), 3 * UNIT_SIZE);
+		buffer->setBufferSubData(3 * i, 3 * UNIT_SIZE, pos.getValue());
+		buffer->setBufferSubData(posSize + 3 * i, 3 * UNIT_SIZE, pos.getValue());
+		buffer->setBufferSubData(posSize + speedSize + 3 * i, 3 * UNIT_SIZE, pos.getValue());
 	}
 
-	buffer->unmapBuffer();
 	buffer->unbindBuffer();
+
+	GLDebug::showError();
 }
 
 render::TransformFeedbackBufferObject* render::TransformFeedbackParticleNode::getUpdateObject() const

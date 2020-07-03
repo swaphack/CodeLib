@@ -31,7 +31,7 @@ bool render::CtrlPointSprite::init()
 		ShaderUniform* pValue = program->getUniform("pointScale");
 		if (pValue)
 		{
-			pValue->setValue(sys::Random::getNumber0_1());
+			pValue->setValue(_pointSize);
 		}
 	});
 

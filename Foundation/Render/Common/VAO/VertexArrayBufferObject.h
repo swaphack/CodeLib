@@ -20,11 +20,15 @@ namespace render
 		/**
 		*	重置大小
 		*/
-		void resize(uint32_t size, BufferDataUsage usage = BufferDataUsage::STATIC_DRAW);
+		void resizeBuffer(uint32_t size, BufferDataUsage usage = BufferDataUsage::STATIC_DRAW);
 		/**
-		*	写入数据
+		*	设置数据
 		*/
-		void writeVertexAttrib(VertexAttribPointerType type, const void* value, uint32_t count = 1, uint32_t stride = 0);
+		void setSubBuffer(uint32_t offset, uint32_t size, const void* value);
+		/**
+		*	设置引用数据
+		*/
+		void setVertexBuffer(int index, uint32_t count, VertexAttribPointerType type, uint32_t stride, uint32_t offset);
 		/**
 		*	绑定
 		*/
@@ -60,13 +64,5 @@ namespace render
 		*	数组缓存
 		*/
 		ArrayBuffer* _buffer = nullptr;
-		/**
-		*	游标
-		*/
-		uint32_t _cursor = 0;
-		/**
-		*	索引
-		*/
-		uint32_t _index = 0;
 	};
 }

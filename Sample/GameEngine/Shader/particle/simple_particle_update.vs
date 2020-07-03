@@ -19,11 +19,13 @@ out vec3 out_Position;
 
 void main()
 {
+	/*
 	if (lifeTime > maxTime)
 	{
 		out_Position = vec3(0,0,0);
 		return;
 	}
+	*/
 
 	vec3 speed = in_speedAcceleration + in_angleAcceleration;
 
