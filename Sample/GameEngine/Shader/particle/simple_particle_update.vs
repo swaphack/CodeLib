@@ -33,5 +33,5 @@ void main()
 
 	out_Position = in_position + vec3(deltaTime, deltaTime, deltaTime);
 
-	out_Position = vec3(1,1,1);
+	//out_Position = vec3(1,1,1);
 }
