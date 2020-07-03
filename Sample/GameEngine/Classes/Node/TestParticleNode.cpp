@@ -107,8 +107,10 @@ void TestParticleNode::testXFBParticle()
 {
 	render::TransformFeedbackParticleNode* node = CREATE_NODE(render::TransformFeedbackParticleNode);
 	node->setPosition(512, 384);
+	node->setAnchorPoint(0.5f, 0.5f);
+	node->setVolume(512, 384);
 	node->setSpeedAcceleration(10, 0, 0);
-	node->setParticleCount(1000);
+	node->setParticleCount(10);
 	node->loadShaderProgram("Shader/particle/simple_particle_render.vs", "Shader/particle/simple_particle_render.fs");
 	node->start();
 	this->addChild(node);

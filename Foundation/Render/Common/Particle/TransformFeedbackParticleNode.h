@@ -38,9 +38,13 @@ namespace render
 		*/
 		TransformFeedbackBufferObject* _updateObject = nullptr;
 		/**
+		*	更新数据
+		*/
+		VertexArrayBufferObject* _updateBufferObject = nullptr;
+		/**
 		*	渲染数据
 		*/
-		VertexArrayBufferObject* _renderObject = nullptr;
+		VertexArrayBufferObject* _renderBufferObject = nullptr;
 		/**
 		*	渲染
 		*/

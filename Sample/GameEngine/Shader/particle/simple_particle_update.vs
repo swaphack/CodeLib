@@ -30,4 +30,6 @@ void main()
 	vec3 speed = in_speedAcceleration + in_angleAcceleration;
 
 	out_Position = in_position + deltaTime * speed; 
+
+	//out_Position = vec3(1,1,1);
 }
