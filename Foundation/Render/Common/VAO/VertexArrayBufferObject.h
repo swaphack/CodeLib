@@ -34,6 +34,14 @@ namespace render
 		*/
 		void bindVertexArray();
 		/**
+		*	°ó¶¨
+		*/
+		void bindBuffer();
+		/**
+		*	½â°ó
+		*/
+		void unbindBuffer();
+		/**
 		*	½â°ó
 		*/
 		void unbindVertexArray();

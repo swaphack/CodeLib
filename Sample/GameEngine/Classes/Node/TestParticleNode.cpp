@@ -110,7 +110,7 @@ void TestParticleNode::testXFBParticle()
 	node->setAnchorPoint(0.5f, 0.5f);
 	node->setVolume(512, 384);
 	node->setSpeedAcceleration(10, 0, 0);
-	node->setParticleCount(10);
+	node->setParticleCount(999);
 	node->loadShaderProgram("Shader/particle/simple_particle_render.vs", "Shader/particle/simple_particle_render.fs");
 	node->start();
 	this->addChild(node);

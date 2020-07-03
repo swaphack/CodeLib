@@ -16,41 +16,45 @@ render::VertexArrayBufferObject::~VertexArrayBufferObject()
 
 void render::VertexArrayBufferObject::resizeBuffer(uint32_t size, BufferDataUsage usage)
 {
-	_buffer->bindBuffer();
 	_buffer->setBufferData(size, nullptr, usage);
-	_buffer->unbindBuffer();
 	GLDebug::showError();
 }
 
 void render::VertexArrayBufferObject::setSubBuffer(uint32_t offset, uint32_t size, const void* value)
 {
-	_buffer->bindBuffer();
 	_buffer->setBufferSubData(offset, size, value);
-	_buffer->unbindBuffer();
 	GLDebug::showError();
 }
 
 void render::VertexArrayBufferObject::setVertexBuffer(int index, uint32_t count, VertexAttribPointerType type, uint32_t stride, uint32_t offset)
 {
 	GLDebug::showError();
-	_vao->bindVertexArray();
-	_vao->bindBuffer();
 	auto pData = _vao->getVertexAttrib<VertexAttribPointer>(index);
 	pData->setVertexAttribPointer(count, type, stride, offset);
-	GLDebug::showError();
-	_vao->unbindVertexArray();
 	GLDebug::showError();
 }
 
 void render::VertexArrayBufferObject::bindVertexArray()
 {
 	_vao->bindVertexArray();
-	_vao->bindBuffer();
+	GLDebug::showError();
+}
+
+void render::VertexArrayBufferObject::bindBuffer()
+{
+	_buffer->bindBuffer();
+	GLDebug::showError();
+}
+
+void render::VertexArrayBufferObject::unbindBuffer()
+{
+	_buffer->unbindBuffer();
 }
 
 void render::VertexArrayBufferObject::unbindVertexArray()
 {
 	_vao->unbindVertexArray();
+	GLDebug::showError();
 }
 
 void render::VertexArrayBufferObject::enableVertexArrayAttrib(uint32_t index)

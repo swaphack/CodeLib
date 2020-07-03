@@ -54,7 +54,9 @@ int32_t Random::getNumber(int32_t minValue, int32_t maxValue)
 
 float Random::getNumber0_1()
 {
-	return rand() * 1.0f / RAND_MAX;
+	float value = rand() * 1.0f / RAND_MAX;
+
+	return value;
 }
 
 int32_t Random::getNumber0_max()

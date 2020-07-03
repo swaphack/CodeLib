@@ -83,8 +83,13 @@ bool render::TransformFeedbackParticleNode::init()
 		buffer->unmapBuffer();
 		buffer->unbindBuffer();
 		GLDebug::showError();
+		_renderBufferObject->bindBuffer();
 		_renderBufferObject->setSubBuffer(0, posSize, var);
+		_renderBufferObject->unbindBuffer();
+
+		_updateBufferObject->bindBuffer();
 		_updateBufferObject->setSubBuffer(0, posSize, var);
+		_updateBufferObject->unbindBuffer();
 		free(var);
 		GLDebug::showError();
 		GLDebug::showError();
@@ -125,7 +130,7 @@ void render::TransformFeedbackParticleNode::update(float dt)
 
 	GLDebug::showError();
 	GLState::setPointSize(10);
-	GLBufferObjects::drawArrays(DrawMode::POINTS, 0, _particleCount);
+	GLBufferObjects::drawArrays(DrawMode::TRIANGLES, 0, _particleCount / 3);
 	GLState::setPointSize(1);
 	GLDebug::showError();
 
@@ -147,30 +152,37 @@ void render::TransformFeedbackParticleNode::updateParticleParameter()
 
 	uint32_t len = posSize + speedSize + angleSize;
 
-	_renderBufferObject->resizeBuffer(posSize);
-	_renderBufferObject->setVertexBuffer(0, 3, VertexAttribPointerType::FLOAT, 0, 0);
-
 	_updateObject->setWatchPrimitiveMode(TransformFeedbackPrimitiveMode::POINTS, _particleCount);
 	_updateObject->setBufferSize(posSize);
 	_updateObject->setTargetBufferRange(0, 0, posSize);
 
+	_renderBufferObject->bindVertexArray();
+	_renderBufferObject->bindBuffer();
+	_renderBufferObject->resizeBuffer(posSize);
+	_renderBufferObject->setVertexBuffer(0, 3, VertexAttribPointerType::FLOAT, 0, 0);
+	_renderBufferObject->unbindVertexArray();
+
 	GLDebug::showError();
 
+	_updateBufferObject->bindVertexArray();
+	_updateBufferObject->bindBuffer();
 	_updateBufferObject->resizeBuffer(len);
 	for (int i = 0; i < _particleCount; i++)
 	{
-		math::Vector3 pos(sys::Random::getNumber0_1() * getWidth(), sys::Random::getNumber0_1() * getHeight(), sys::Random::getNumber0_1() * getDepth());
+		math::Vector3 pos(sys::Random::getNumber(getWidth() / 2, getWidth()) , sys::Random::getNumber(getHeight() / 2, getHeight()), sys::Random::getNumber(getDepth() / 2, getDepth()));
 		math::Vector3 speed(sys::Random::getNumber0_1(), sys::Random::getNumber0_1(), sys::Random::getNumber0_1());
 		math::Vector3 angle(sys::Random::getNumber0_1(), sys::Random::getNumber0_1(), sys::Random::getNumber0_1());
 
 		_updateBufferObject->setSubBuffer(3 * i, 3 * UNIT_SIZE, pos.getValue());
-		_updateBufferObject->setSubBuffer(posSize + 3 * i, 3 * UNIT_SIZE, pos.getValue());
-		_updateBufferObject->setSubBuffer(posSize + speedSize + 3 * i, 3 * UNIT_SIZE, pos.getValue());
+		_updateBufferObject->setSubBuffer(posSize + 3 * i, 3 * UNIT_SIZE, speed.getValue());
+		_updateBufferObject->setSubBuffer(posSize + speedSize + 3 * i, 3 * UNIT_SIZE, angle.getValue());
 	}
 
 	_updateBufferObject->setVertexBuffer(0, 3, VertexAttribPointerType::FLOAT, 0, 0);
 	_updateBufferObject->setVertexBuffer(1, 3, VertexAttribPointerType::FLOAT, 0, posSize);
 	_updateBufferObject->setVertexBuffer(2, 3, VertexAttribPointerType::FLOAT, 0, posSize + speedSize);
+
+	_updateBufferObject->unbindVertexArray();
 }
 
 render::TransformFeedbackBufferObject* render::TransformFeedbackParticleNode::getUpdateObject() const
