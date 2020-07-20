@@ -14,11 +14,14 @@ namespace render
 		PostProcessing();
 		virtual ~PostProcessing();
 	public:
-		void AddFramePostProcessing(FramePostProcessingNode* node);
+		void addFramePostProcessing(FramePostProcessingNode* node);
 		void removeFramePostProcessing(FramePostProcessingNode* node);
+	public:
+		void begin();
+		void end();
 	protected:
 	private:
-		std::set<FramePostProcessingNode> _framePostProcessingNodes;
+		std::set<FramePostProcessingNode*> _framePostProcessingNodes;
 	};
 
 #define G_POSTPROCESSING sys::Instance<PostProcessing>::getInstance()

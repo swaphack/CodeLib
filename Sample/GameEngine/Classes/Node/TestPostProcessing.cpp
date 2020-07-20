@@ -18,7 +18,7 @@ void TestPostProcessing::initNodes()
 
 	this->testPixelPostProcessing();
 
-	//testFramePostProcessing();
+	testFramePostProcessing();
 }
 
 void TestPostProcessing::testFramePostProcessing()
@@ -29,14 +29,15 @@ void TestPostProcessing::testFramePostProcessing()
 
 	render::CtrlImage* pImage = CREATE_NODE(render::CtrlImage);
 	pImage->setImagePath(filepath);
-	pImage->setAnchorPoint(math::Vector2());
+	pImage->setAnchorPoint(0, 0);
+	pImage->setPosition(100, 100);
 	pImage->setVolume(512, 384);
 	Utility::loadShader(pImage, "Shader/texture/texture.vs", "Shader/texture/texture.fs");
 
 	render::FramePostProcessingNode* pNode = CREATE_NODE(render::FramePostProcessingNode);
-	pNode->setAnchorPoint(0, 0);
-	pNode->setPosition(200, 100);
-	pNode->setVolume(512,384);
+	pNode->setAnchorPoint(0.0f, 0.0f);
+	pNode->setPosition(100, 100);
+	pNode->setVolume(924, 668);
 	Utility::loadShader(pNode, "Shader/frame/simple_frame_buffer.vs", "Shader/frame/simple_frame_buffer.fs");
 
 	pNode->addChild(pImage);

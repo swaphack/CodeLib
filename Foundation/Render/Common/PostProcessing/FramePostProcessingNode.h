@@ -10,7 +10,7 @@ namespace render
 
 	/**
 	*	帧缓存后期处理
-	*	还有问题
+	*	需要设置监视大小
 	*/
 	class FramePostProcessingNode : public DrawNode
 	{
@@ -29,6 +29,10 @@ namespace render
 		virtual void afterDrawNode();
 
 		bool isFrameInited();
+	public:
+		void beginRecord();
+
+		void endRecord();
 	protected:
 		void updateTextureSize();
 	private:
@@ -40,10 +44,6 @@ namespace render
 		*	帧缓存
 		*/
 		FrameBuffer* _frameBuffer = nullptr;
-		/**
-		*	渲染缓存
-		*/
-		RenderBuffer* _renderBuffer = nullptr;
 		/**
 		*	是否初始化数据
 		*/
