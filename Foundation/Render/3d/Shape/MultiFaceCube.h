@@ -1,6 +1,6 @@
 #pragma once
 
-#include "3d/Common/Model.h"
+#include "3d/Common/MultiModel.h"
 #include "Common/struct/enum_common.h"
 #include "Common/struct/vertex_common.h"
 
@@ -12,7 +12,7 @@ namespace render
 	/**
 	*	多面立方体，每个面一个mesh
 	*/
-	class MultiFaceCube : public Model
+	class MultiFaceCube : public MultiModel
 	{
 	public:
 		MultiFaceCube();

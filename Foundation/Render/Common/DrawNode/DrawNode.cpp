@@ -4,25 +4,39 @@
 #include "Common/Mesh/import.h"
 #include "FragmentOperator.h"
 #include "Common/Texture/import.h"
+#include "Common/Shader/ShaderProgram.h"
+#include "DrawTextureCache.h"
 
 using namespace render;
 
+#define DRAW_MATERIAL_INDEX "0"
+
+#define MAT_TEXTURE_NAME "MAT_TEXTURE_NAME"
+#define MAT_TEXTURE_AMBIENT "MAT_TEXTURE_AMBIENT"
+#define MAT_TEXTURE_DIFFUSE "MAT_TEXTURE_DIFFUSE"
+#define MAT_TEXTURE_SPECULAR "MAT_TEXTURE_SPECULAR"
+#define MAT_TEXTURE_ALPHA "MAT_TEXTURE_ALPHA"
+#define MAT_TEXTURE_BUMP "MAT_TEXTURE_BUMP"
+
 DrawNode::DrawNode()
 {
-	_materiales = CREATE_OBJECT(Materials);
-	SAFE_RETAIN(_materiales);
+	_material = CREATE_OBJECT(Material);
+	SAFE_RETAIN(_material);
 
-	_meshes = CREATE_OBJECT(Meshes);
-	SAFE_RETAIN(_meshes);
+	_mesh = CREATE_OBJECT(Mesh);
+	SAFE_RETAIN(_mesh);
 
 	_fragOperator = CREATE_OBJECT(FragmentOperator);
 	SAFE_RETAIN(_fragOperator);
+
+	_textureCache = CREATE_OBJECT(DrawTextureCache);
+	SAFE_RETAIN(_textureCache);
 }
 
 DrawNode::~DrawNode()
 {
-	SAFE_RELEASE(_materiales);
-	SAFE_RELEASE(_meshes);
+	SAFE_RELEASE(_material);
+	SAFE_RELEASE(_mesh);
 	SAFE_RELEASE(_fragOperator);
 }
 
@@ -47,118 +61,81 @@ void DrawNode::draw()
 	this->afterDraw();
 }
 
-Materials* render::DrawNode::getMaterials()
-{
-	return _materiales;
-}
-
-Meshes* render::DrawNode::getMeshes()
-{
-	return _meshes;
-}
-
 FragmentOperator* render::DrawNode::getFragOperator()
 {
 	return _fragOperator;
 }
 
-render::Material* render::DrawNode::getMaterial(const std::string& name)
+render::Material* render::DrawNode::getMaterial()
 {
-	return _materiales->getMaterial(name);
+	return _material;
 }
 
-render::Mesh* render::DrawNode::getMesh(const std::string& name)
+render::Mesh* render::DrawNode::getMesh()
 {
-	return _meshes->getMesh(name);
+	return _mesh;
 }
 
 void render::DrawNode::setTexture(const std::string& fullpath)
 {
-	this->setTexture(MAT_TEXTURE_NAME, fullpath);
-}
-
-void render::DrawNode::setTexture(const std::string& name, const std::string& fullpath)
-{
-	_materiales->addTexture(name, fullpath);
-	for (auto item : _materiales->getMaterials())
-	{
-		item.second->getMaterialDetail()->setAmbientTextureMap(name);
-	}
-}
-
-void render::DrawNode::setTexture(const std::string& name, const Texture* texture)
-{
-	_materiales->addTexture(name, texture);
-	for (auto item : _materiales->getMaterials())
-	{
-		item.second->getMaterialDetail()->setAmbientTextureMap(name);
-	}
+	_material->getMaterialDetail()->setAmbientTextureMap(MAT_TEXTURE_NAME);
+	_textureCache->addTexture(MAT_TEXTURE_NAME, fullpath);
 }
 
 void render::DrawNode::setTexture(const Texture* texture)
 {
-	setTexture(MAT_TEXTURE_NAME, texture);
+	_material->getMaterialDetail()->setAmbientTextureMap(MAT_TEXTURE_NAME);
+	_textureCache->addTexture(MAT_TEXTURE_NAME, texture);
 }
 
 void render::DrawNode::setAmbientTexture(const std::string& fullpath)
 {
-	setTexture(MAT_TEXTURE_NAME, fullpath);
+	_material->getMaterialDetail()->setAmbientTextureMap(MAT_TEXTURE_NAME);
+	_textureCache->addTexture(MAT_TEXTURE_NAME, fullpath);
 }
 
 void render::DrawNode::setDiffuseTexture(const std::string& fullpath)
 {
-	_materiales->addTexture(MAT_TEXTURE_DIFFUSE, fullpath);
-
-	for (auto item : _materiales->getMaterials())
-	{
-		item.second->getMaterialDetail()->setDiffuseTextureMap(MAT_TEXTURE_DIFFUSE);
-	}
+	_material->getMaterialDetail()->setDiffuseTextureMap(MAT_TEXTURE_DIFFUSE);
+	_textureCache->addTexture(MAT_TEXTURE_DIFFUSE, fullpath);
 }
 
 void render::DrawNode::setSpecularTexture(const std::string& fullpath)
 {
-	_materiales->addTexture(MAT_TEXTURE_SPECULAR, fullpath);
-
-	for (auto item : _materiales->getMaterials())
-	{
-		item.second->getMaterialDetail()->setSpecularTextureMap(MAT_TEXTURE_SPECULAR);
-	}
+	_material->getMaterialDetail()->setSpecularTextureMap(MAT_TEXTURE_SPECULAR);
+	_textureCache->addTexture(MAT_TEXTURE_SPECULAR, fullpath);
 }
 
 void render::DrawNode::setAlphaTexture(const std::string& fullpath)
 {
-	_materiales->addTexture(MAT_TEXTURE_ALPHA, fullpath);
-
-	for (auto item : _materiales->getMaterials())
-	{
-		item.second->getMaterialDetail()->setAlphaTextureMap(MAT_TEXTURE_ALPHA);
-	}
+	_material->getMaterialDetail()->setAlphaTextureMap(MAT_TEXTURE_ALPHA);
+	_textureCache->addTexture(MAT_TEXTURE_ALPHA, fullpath);
 }
 
 void render::DrawNode::setBumpTexture(const std::string& fullpath)
 {
-	_materiales->addTexture(MAT_TEXTURE_BUMP, fullpath);
+	_material->getMaterialDetail()->setBumpTextureMap(MAT_TEXTURE_BUMP);
+	_textureCache->addTexture(MAT_TEXTURE_BUMP, fullpath);
+}
 
-	for (auto item : _materiales->getMaterials())
-	{
-		item.second->getMaterialDetail()->setBumpTextureMap(MAT_TEXTURE_BUMP);
-	}
+const render::Texture* render::DrawNode::getTexture(const std::string& name) const
+{
+	return _textureCache->getTexture(name);
+}
+
+const render::Texture* render::DrawNode::getTexture() const
+{
+	return getTexture(MAT_TEXTURE_NAME);
 }
 
 void render::DrawNode::setShaderProgram(ShaderProgram* program)
 {
-	for (auto item : _materiales->getMaterials())
-	{
-		item.second->setShaderProgram(program);
-	}
+	_material->setShaderProgram(program);
 }
 
 void render::DrawNode::setShaderProgramFunc(const ShaderProgramFunc& func)
 {
-	for (auto item : _materiales->getMaterials())
-	{
-		item.second->setProgramFunc(func);
-	}
+	_material->setProgramFunc(func);
 }
 
 void render::DrawNode::beforeDraw()
@@ -170,7 +147,24 @@ void render::DrawNode::beforeDraw()
 
 void DrawNode::onDraw()
 {
-	_meshes->drawNodeWithMaterials(this, _materiales);
+	auto nMatID = _mesh->getMeshDetail()->getMaterial();
+
+	if (_material->getShaderProgram() != nullptr)
+	{
+		_material->beginApplyWithShader(this, _mesh, _textureCache);
+
+		_mesh->drawWithBufferObject();
+
+		_material->endApplyWithShader(_mesh, _textureCache);
+	}
+	else
+	{
+		_material->beginApply(_textureCache);
+
+		_mesh->drawWithClientArray();
+
+		_material->endApply(_textureCache);
+	}
 }
 
 void render::DrawNode::afterDraw()
@@ -180,27 +174,16 @@ void render::DrawNode::afterDraw()
 
 void render::DrawNode::initBufferObject()
 {
-	sys::ModelDetail* pModelDetail = CREATE_OBJECT(sys::ModelDetail);
+	auto pMaterialDetail = CREATE_OBJECT(sys::MaterialDetail);
+	pMaterialDetail->setName(DRAW_MATERIAL_INDEX);
+	_material->setMaterialDetail(pMaterialDetail);
 
-	auto pMat = CREATE_OBJECT(sys::MaterialDetail);
-	pModelDetail->addMaterial(DRAW_MATERIAL_INDEX, pMat);
-
-	auto pMesh = CREATE_OBJECT(sys::MeshDetail);
-	pMesh->setMaterial(DRAW_MATERIAL_INDEX);
-	pModelDetail->addMesh(DRAW_MESH_INDEX, pMesh);
-
-	_materiales->setModelDetail(pModelDetail);
-	_meshes->setModelDetail(pModelDetail);
+	auto pMeshDetail = CREATE_OBJECT(sys::MeshDetail);
+	pMeshDetail->setMaterial(DRAW_MATERIAL_INDEX);
+	_mesh->setMeshDetail(pMeshDetail);
 }
 
 void render::DrawNode::updateBufferData()
 {
-	if (_materiales)
-	{
-		_materiales->updateMatTexture();
-	}
-	if (_meshes)
-	{
-		_meshes->updateBufferData();
-	}
+	_mesh->updateBufferData();
 }

@@ -45,7 +45,7 @@ void CtrlFrame::setTextureWithRect(const std::string& filepath)
 {
 	this->setTexture(filepath);
 
-	auto pTexture = this->getMaterials()->getTexture(MAT_TEXTURE_NAME);
+	auto pTexture = this->getTexture();
 	if (pTexture)
 	{
 		this->setVolume(pTexture->getWidth(), pTexture->getHeight(), pTexture->getDepth());
@@ -95,7 +95,7 @@ void CtrlFrame::onTextureChange()
 	VertexTool::setTexture2DCoords(&_vertexes, size, rect);
 	VertexTool::setTexture2DVertices(&_vertexes, math::Vector3(), _volume, _anchor);
 
-	auto pMesh = getMesh(DRAW_MESH_INDEX);
+	auto pMesh = getMesh();
 	if (pMesh)
 	{
 		float uvs[8] = { 0 };

@@ -27,12 +27,33 @@ void Utility::loadShader(render::Materials* mats, const std::string& vpath, cons
 
 void Utility::loadShader(render::DrawNode* node, const std::string& vpath, const std::string& fpath)
 {
+	loadShader(node->getMaterial(), vpath, fpath);
+}
+
+void Utility::loadShader(render::Material* mat, const std::string& vpath, const std::string& fpath)
+{
+	if (mat == nullptr)
+	{
+		return;
+	}
+	VertexFragmentShaderProgram* pProgram = G_SHANDER->createVertexFragmentProgram(vpath, fpath);
+	if (pProgram == nullptr)
+	{
+		return;
+	}
+	mat->setShaderProgram(pProgram);
+
+	initShaderAttrib(mat);
+}
+
+void Utility::loadShader(render::MultiDrawNode* node, const std::string& vpath, const std::string& fpath)
+{
 	loadShader(node->getMaterials(), vpath, fpath);
 }
 
 void Utility::initShaderAttrib(render::DrawNode* node)
 {
-	initShaderAttrib(node->getMaterials());
+	initShaderAttrib(node->getMaterial());
 }
 
 void Utility::initShaderAttrib(render::Materials* mats)
@@ -44,45 +65,65 @@ void Utility::initShaderAttrib(render::Materials* mats)
 
 	for (auto item : mats->getMaterials())
 	{
-		item.second->addUniform(UniformType::PROJECT_MATRIX, "matrix.project");
-		item.second->addUniform(UniformType::VIEW_MATRIX, "matrix.view");
-		item.second->addUniform(UniformType::MODEL_VIEW, "matrix.model");
-
-		item.second->addUniform(UniformType::LIGHT_COLOR, "light.ambient");
-		item.second->addUniform(UniformType::LIGHT_POSITION, "light.position");
-		item.second->addUniform(UniformType::LIGHT_AMBIENT, "light.ambient");
-		item.second->addUniform(UniformType::LIGHT_DIFFUSE, "light.diffuse");
-		item.second->addUniform(UniformType::LIGHT_SPECULAR, "light.specular");
-
-		item.second->addUniform(UniformType::MATERIAL_COLOR_AMBIENT, "material.ambient");
-		item.second->addUniform(UniformType::MATERIAL_COLOR_DIFFUSE, "material.diffuse");
-		item.second->addUniform(UniformType::MATERIAL_COLOR_SPECULAR, "material.specular");
-
-		item.second->addUniform(UniformType::MATERIAL_TEXTURE_AMBIENT, "material.texAmbient");
-		item.second->addUniform(UniformType::MATERIAL_TEXTURE_DIFFUSE, "material.texDiffuse");
-		item.second->addUniform(UniformType::MATERIAL_TEXTURE_SPECULAR, "material.texSpecular");
-
-		item.second->addUniform(UniformType::MATERIAL_SHININESS, "material.shininess");
-
-		item.second->addVertexData(VertexDataType::POSITION, "v_position");
-		item.second->addVertexData(VertexDataType::COLOR, "v_color");
-		item.second->addVertexData(VertexDataType::UV, "v_texcoord");
-		item.second->addVertexData(VertexDataType::NORMAL, "v_normal");
-
-
-		item.second->addUniform(UniformType::VIEW_POSITION, "viewPos");
-
-		item.second->addUniform(UniformType::TEXTURE0, "tex.texture0");
-		item.second->addUniform(UniformType::TEXTURE1, "tex.texture1");
-		item.second->addUniform(UniformType::TEXTURE2, "tex.texture2");
-		/*
-		item.second->addUniform(UniformType::TEXTURE3, "texture.texture3");
-		item.second->addUniform(UniformType::TEXTURE4, "texture.texture4");
-		item.second->addUniform(UniformType::TEXTURE5, "texture.texture5");
-		item.second->addUniform(UniformType::TEXTURE6, "texture.texture6");
-		item.second->addUniform(UniformType::TEXTURE7, "texture.texture7");
-		*/
+		initShaderAttrib(item.second);
+		
 	}
+}
+
+void Utility::initShaderAttrib(render::Material* mat)
+{
+	if (mat == nullptr)
+	{
+		return;
+	}
+	mat->addUniform(UniformType::PROJECT_MATRIX, "matrix.project");
+	mat->addUniform(UniformType::VIEW_MATRIX, "matrix.view");
+	mat->addUniform(UniformType::MODEL_VIEW, "matrix.model");
+	
+	mat->addUniform(UniformType::LIGHT_COLOR, "light.ambient");
+	mat->addUniform(UniformType::LIGHT_POSITION, "light.position");
+	mat->addUniform(UniformType::LIGHT_AMBIENT, "light.ambient");
+	mat->addUniform(UniformType::LIGHT_DIFFUSE, "light.diffuse");
+	mat->addUniform(UniformType::LIGHT_SPECULAR, "light.specular");
+	
+	mat->addUniform(UniformType::MATERIAL_COLOR_AMBIENT, "material.ambient");
+	mat->addUniform(UniformType::MATERIAL_COLOR_DIFFUSE, "material.diffuse");
+	mat->addUniform(UniformType::MATERIAL_COLOR_SPECULAR, "material.specular");
+	
+	mat->addUniform(UniformType::MATERIAL_TEXTURE_AMBIENT, "material.texAmbient");
+	mat->addUniform(UniformType::MATERIAL_TEXTURE_DIFFUSE, "material.texDiffuse");
+	mat->addUniform(UniformType::MATERIAL_TEXTURE_SPECULAR, "material.texSpecular");
+	
+	mat->addUniform(UniformType::MATERIAL_SHININESS, "material.shininess");
+	
+	mat->addVertexData(VertexDataType::POSITION, "v_position");
+	mat->addVertexData(VertexDataType::COLOR, "v_color");
+	mat->addVertexData(VertexDataType::UV, "v_texcoord");
+	mat->addVertexData(VertexDataType::NORMAL, "v_normal");
+	
+	
+	mat->addUniform(UniformType::VIEW_POSITION, "viewPos");
+	
+	mat->addUniform(UniformType::TEXTURE0, "tex.texture0");
+	mat->addUniform(UniformType::TEXTURE1, "tex.texture1");
+	mat->addUniform(UniformType::TEXTURE2, "tex.texture2");
+
+	/*
+		mat->addUniform(UniformType::TEXTURE3, "texture.texture3");
+		mat->addUniform(UniformType::TEXTURE4, "texture.texture4");
+		mat->addUniform(UniformType::TEXTURE5, "texture.texture5");
+		mat->addUniform(UniformType::TEXTURE6, "texture.texture6");
+		mat->addUniform(UniformType::TEXTURE7, "texture.texture7");
+	*/
+}
+
+void Utility::initShaderAttrib(render::MultiDrawNode* node)
+{
+	if (node == nullptr)
+	{
+		return;
+	}
+	initShaderAttrib(node->getMaterials());
 }
 
 void Utility::bindProgramAttrib(render::ShaderProgram* program)
@@ -116,6 +157,11 @@ void Utility::runRotateAction(render::Node* node)
 }
 
 void Utility::updateNodeShader(render::DrawNode* node)
+{
+	loadShader(node->getMaterial(), texture3dVertexPath, texture3dFragmentPath);
+}
+
+void Utility::updateNodeShader(render::MultiDrawNode* node)
 {
 	loadShader(node->getMaterials(), texture3dVertexPath, texture3dFragmentPath);
 }

@@ -60,27 +60,6 @@ namespace render
 		int getMaterialCount() const;
 	public:
 		/**
-		*	添加纹理
-		*/
-		void addTexture(const std::string& name, const std::string& fullpath);
-		/**
-		*	添加纹理
-		*/
-		void addTexture(const std::string& name, const Texture* id);
-		/**
-		*	移除纹理
-		*/
-		void removeTexture(const std::string& name);
-		/**
-		*	移除纹理
-		*/
-		void removeAllTextures();
-		/**
-		*	获取纹理
-		*/
-		Texture* getTexture(const std::string& name) const;
-	public:
-		/**
 		*	设置纹理
 		*/
 		void setMaterialTexture(const std::string& matName, const std::string& textureName);
@@ -92,15 +71,9 @@ namespace render
 		*	设置着色器处理函数
 		*/
 		void setMaterialShaderProgramFunc(const std::string& matName, const ShaderProgramFunc& func);
-	public:
-		// 更新纹理
-		void updateMatTexture();
+
 	private:
 		// 模型材质
 		std::map<std::string, Material*> _materials;
-		// 图片纹理
-		std::map<std::string, Texture*> _textures;
-		// 纹理路径
-		std::map<std::string, std::string> _texturePaths;
 	};
 }

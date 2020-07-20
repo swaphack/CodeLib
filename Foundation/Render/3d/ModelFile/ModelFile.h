@@ -1,10 +1,13 @@
 #pragma once
 
-#include "Model.h"
+#include "Common/DrawNode/MultiDrawNode.h"
 
 namespace render
 {
-	class ModelFile : public Model
+	class Model;
+
+	// 从配置加载模型
+	class ModelFile : public MultiDrawNode
 	{
 	public:
 		ModelFile();
@@ -19,5 +22,7 @@ namespace render
 		virtual void onDraw();
 	protected:
 		bool _bloadedModel = false;
+		// 部件
+		std::vector<Model*> _models;
 	};
 }

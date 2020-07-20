@@ -17,7 +17,7 @@ namespace render
 	class Texture2D;
 	class Mesh;
 	class Node;
-	class Materials;
+	class DrawTextureCache;
 
 	enum class VertexDataType
 	{
@@ -208,28 +208,28 @@ namespace render
 		/**
 		*	使用代码设置材质
 		*/
-		void beginApply(Materials* mats);
+		void beginApply(DrawTextureCache* textureCache);
 		/**
 		*	使用代码
 		*/
-		void endApply(Materials* mats);
+		void endApply(DrawTextureCache* textureCache);
 		/**
 		*	使用shader设置材质
 		*/
-		void beginApplyWithShader(Node* node, Mesh* pMesh, Materials* mats);
+		void beginApplyWithShader(Node* node, Mesh* pMesh, DrawTextureCache* textureCache);
 		/**
 		*	使用shader
 		*/
-		void endApplyWithShader(Mesh* pMesh, Materials* mats);
+		void endApplyWithShader(Mesh* pMesh, DrawTextureCache* textureCache);
 	protected:
 		// 应用材质
 		void applyMaterial();
 		// 更新着色器uniform值
-		void startUpdateShaderUniformValue(Node* node, Materials* mats);
+		void startUpdateShaderUniformValue(Node* node, DrawTextureCache* textureCache);
 		// 更新着色器attrib值
 		void startUpdateShaderVertexValue(Mesh* pMesh);
 
-		void endUpdateShaderUniformValue(Materials* mats);
+		void endUpdateShaderUniformValue(DrawTextureCache* textureCache);
 		void endUpdateShaderVertexValue(Mesh* pMesh);
 	protected:
 		// 更新矩阵
@@ -239,9 +239,9 @@ namespace render
 		// 更新所有光源
 		void updateAllLightsUniformValue();
 		// 更新材质
-		void updateMaterialUniformValue(Materials* mats);
+		void updateMaterialUniformValue(DrawTextureCache* textureCache);
 		// 更新纹理
-		void updateTexturesUnifromValue(Materials* mats);
+		void updateTexturesUnifromValue(DrawTextureCache* textureCache);
 
 	protected:
 		void runProgramFunc();

@@ -120,15 +120,6 @@
     <ClCompile Include="Common\Audio\AudioProtocol.cpp">
       <Filter>Common\Audio</Filter>
     </ClCompile>
-    <ClCompile Include="3d\Common\Model3DS.cpp">
-      <Filter>3d\Common</Filter>
-    </ClCompile>
-    <ClCompile Include="3d\Common\ModelObj.cpp">
-      <Filter>3d\Common</Filter>
-    </ClCompile>
-    <ClCompile Include="3d\Common\ModelFbx.cpp">
-      <Filter>3d\Common</Filter>
-    </ClCompile>
     <ClCompile Include="Common\Texture\TexFrame.cpp">
       <Filter>Common\Texture</Filter>
     </ClCompile>
@@ -396,9 +387,6 @@
     <ClCompile Include="3d\Shape\Sphere.cpp">
       <Filter>3d\Shape</Filter>
     </ClCompile>
-    <ClCompile Include="3d\Common\ModelFile.cpp">
-      <Filter>3d\Common</Filter>
-    </ClCompile>
     <ClCompile Include="Common\struct\vertex_common.cpp">
       <Filter>Common\struct</Filter>
     </ClCompile>
@@ -560,6 +548,30 @@
     </ClCompile>
     <ClCompile Include="Common\XFB\TransformFeedbackBufferObject.cpp">
       <Filter>Common\XFB</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\PostProcessing\PostProcessing.cpp">
+      <Filter>Common\PostProcessing</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\DrawNode\MultiDrawNode.cpp">
+      <Filter>Common\DrawNode</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\DrawNode\DrawTextureCache.cpp">
+      <Filter>Common\DrawNode</Filter>
+    </ClCompile>
+    <ClCompile Include="3d\ModelFile\Model3DS.cpp">
+      <Filter>3d\ModelFile</Filter>
+    </ClCompile>
+    <ClCompile Include="3d\ModelFile\ModelFbx.cpp">
+      <Filter>3d\ModelFile</Filter>
+    </ClCompile>
+    <ClCompile Include="3d\ModelFile\ModelFile.cpp">
+      <Filter>3d\ModelFile</Filter>
+    </ClCompile>
+    <ClCompile Include="3d\ModelFile\ModelObj.cpp">
+      <Filter>3d\ModelFile</Filter>
+    </ClCompile>
+    <ClCompile Include="3d\Common\MultiModel.cpp">
+      <Filter>3d\Common</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -770,15 +782,6 @@
     </ClInclude>
     <ClInclude Include="Common\Audio\AudioProtocol.h">
       <Filter>Common\Audio</Filter>
-    </ClInclude>
-    <ClInclude Include="3d\Common\Model3DS.h">
-      <Filter>3d\Common</Filter>
-    </ClInclude>
-    <ClInclude Include="3d\Common\ModelObj.h">
-      <Filter>3d\Common</Filter>
-    </ClInclude>
-    <ClInclude Include="3d\Common\ModelFbx.h">
-      <Filter>3d\Common</Filter>
     </ClInclude>
     <ClInclude Include="Common\Texture\import.h">
       <Filter>Common\Texture</Filter>
@@ -1089,9 +1092,6 @@
     <ClInclude Include="3d\Shape\Sphere.h">
       <Filter>3d\Shape</Filter>
     </ClInclude>
-    <ClInclude Include="3d\Common\ModelFile.h">
-      <Filter>3d\Common</Filter>
-    </ClInclude>
     <ClInclude Include="Common\struct\vertex_common.h">
       <Filter>Common\struct</Filter>
     </ClInclude>
@@ -1284,6 +1284,33 @@
     <ClInclude Include="Common\XFB\TransformFeedbackBufferObject.h">
       <Filter>Common\XFB</Filter>
     </ClInclude>
+    <ClInclude Include="Common\PostProcessing\PostProcessing.h">
+      <Filter>Common\PostProcessing</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\DrawNode\MultiDrawNode.h">
+      <Filter>Common\DrawNode</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\DrawNode\DrawTextureCache.h">
+      <Filter>Common\DrawNode</Filter>
+    </ClInclude>
+    <ClInclude Include="3d\ModelFile\ModelObj.h">
+      <Filter>3d\ModelFile</Filter>
+    </ClInclude>
+    <ClInclude Include="3d\ModelFile\Model3DS.h">
+      <Filter>3d\ModelFile</Filter>
+    </ClInclude>
+    <ClInclude Include="3d\ModelFile\ModelFbx.h">
+      <Filter>3d\ModelFile</Filter>
+    </ClInclude>
+    <ClInclude Include="3d\ModelFile\ModelFile.h">
+      <Filter>3d\ModelFile</Filter>
+    </ClInclude>
+    <ClInclude Include="3d\ModelFile\import.h">
+      <Filter>3d\ModelFile</Filter>
+    </ClInclude>
+    <ClInclude Include="3d\Common\MultiModel.h">
+      <Filter>3d\Common</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Common">
@@ -1405,6 +1432,9 @@
     </Filter>
     <Filter Include="Common\TBO">
       <UniqueIdentifier>{abbd5e93-f250-496f-956a-5c52395d9cd4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3d\ModelFile">
+      <UniqueIdentifier>{8ee9473a-1a12-4b51-8833-e5a4bf6f1572}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

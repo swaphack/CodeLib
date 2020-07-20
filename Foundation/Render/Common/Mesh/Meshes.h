@@ -50,10 +50,6 @@ namespace render
 		Mesh* getMesh(const std::string& name);
 	public:
 		/**
-		*	使用缓存对象绘制
-		*/
-		void drawNodeWithMaterials(Node* node, Materials* mats);
-		/**
 		*	更新顶点信息
 		*/
 		void updateBufferData();

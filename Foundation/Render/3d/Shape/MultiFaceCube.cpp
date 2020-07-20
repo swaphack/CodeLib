@@ -4,7 +4,7 @@
 #include "Common/DrawNode/import.h"
 #include "Common/Mesh/import.h"
 #include "Common/Material/import.h"
-
+#include "Common/DrawNode/DrawTextureCache.h"
 
 using namespace render;
 
@@ -18,7 +18,7 @@ MultiFaceCube::~MultiFaceCube()
 
 bool MultiFaceCube::init()
 {
-	if (!Model::init())
+	if (!MultiDrawNode::init())
 	{
 		return false;
 	}
@@ -37,7 +37,7 @@ void render::MultiFaceCube::setFaceTexture(CubeFace face, const std::string& fil
 	int i = (int)face;
 	std::string name = CubeFaceString[i];
 
-	this->setTexture(name, filepath);
+	_textureCache->addTexture(name, filepath);
 }
 
 void render::MultiFaceCube::setLeftTexture(const std::string& filepath)

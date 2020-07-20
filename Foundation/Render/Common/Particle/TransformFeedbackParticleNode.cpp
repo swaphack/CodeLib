@@ -46,6 +46,7 @@ bool render::TransformFeedbackParticleNode::init()
 		GLDebug::showError();
 
 		_updateBufferObject->bindVertexArray();
+		_updateBufferObject->bindBuffer();
 		GLDebug::showError();
 		auto in_position = program->getAttrib("in_position");
 		if (in_position) _updateBufferObject->enableVertexArrayAttrib(in_position->getAttribID());
@@ -55,7 +56,7 @@ bool render::TransformFeedbackParticleNode::init()
 		GLDebug::showError();
 		auto in_angleAcceleration = program->getAttrib("in_angleAcceleration");
 		if (in_angleAcceleration) _updateBufferObject->enableVertexArrayAttrib(in_angleAcceleration->getAttribID());
-		_updateBufferObject->unbindVertexArray();
+		//_updateBufferObject->unbindVertexArray();
 		GLDebug::showError();
 		auto lifeTime = program->getUniform("lifeTime");
 		if (lifeTime) lifeTime->setValue(_passedTime);
@@ -119,6 +120,7 @@ void render::TransformFeedbackParticleNode::update(float dt)
 	
 	_shaderProgram->use();
 	_renderBufferObject->bindVertexArray();
+	_renderBufferObject->bindBuffer();
 
 	GLDebug::showError();
 	auto v_position = _shaderProgram->getAttrib("v_position");
@@ -130,7 +132,8 @@ void render::TransformFeedbackParticleNode::update(float dt)
 
 	GLDebug::showError();
 	GLState::setPointSize(10);
-	GLBufferObjects::drawArrays(DrawMode::TRIANGLES, 0, _particleCount / 3);
+	//GLBufferObjects::drawArrays(DrawMode::TRIANGLES, 0, _particleCount / 3);
+	GLBufferObjects::drawArrays(DrawMode::POINTS, 0, _particleCount);
 	GLState::setPointSize(1);
 	GLDebug::showError();
 

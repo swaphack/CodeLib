@@ -188,7 +188,7 @@ void render::FramePostProcessingNode::updateTextureSize()
 	};
 
 	uint32_t indices[] = { 0,1,2,0,2,3 };
-	auto pMesh = getMesh(DRAW_MESH_INDEX);
+	auto pMesh = getMesh();
 	if (pMesh)
 	{
 		pMesh->getMeshDetail()->setVertices(4, vertices, 2);

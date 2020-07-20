@@ -83,42 +83,6 @@ Mesh* Meshes::getMesh(const std::string& name)
 	return it->second;
 }
 
-void render::Meshes::drawNodeWithMaterials(Node* node, Materials* mats)
-{
-	if (node == nullptr || mats == nullptr)
-	{
-		return;
-	}
-	for (auto item : _meshes)
-	{
-		auto pMesh = item.second;
-		auto nMatID = pMesh->getMeshDetail()->getMaterial();
-		auto pMat = mats->getMaterial(nMatID);
-		if (pMat == nullptr)
-		{// ÁÙÊ±´¦Àí
-			continue;
-		}
-		if (pMat->getShaderProgram() != nullptr)
-		{
-			pMat->beginApplyWithShader(node, pMesh, mats);
-
-			pMesh->drawWithBufferObject();
-
-			pMat->endApplyWithShader(pMesh, mats);
-		}
-		else
-		{
-			pMat->beginApply(mats);
-
-			pMesh->drawWithClientArray();
-
-			pMat->endApply(mats);
-		}
-	}
-
-	GLDebug::showError();
-}
-
 void render::Meshes::updateBufferData()
 {
 	for (auto item : _meshes)

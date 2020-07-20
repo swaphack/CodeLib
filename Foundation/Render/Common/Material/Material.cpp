@@ -9,6 +9,7 @@
 #include "Common/Mesh/import.h"
 #include "Common/Texture/import.h"
 #include "3d/Environment/import.h"
+#include "Common/DrawNode/DrawTextureCache.h"
 
 render::Material::Material()
 {
@@ -122,7 +123,7 @@ void render::Material::applyMaterial()
 	}
 }
 
-void render::Material::startUpdateShaderUniformValue(Node* node, Materials* mats)
+void render::Material::startUpdateShaderUniformValue(Node* node, DrawTextureCache* textureCache)
 {
 	if (_shaderProgram == nullptr)
 	{
@@ -134,8 +135,8 @@ void render::Material::startUpdateShaderUniformValue(Node* node, Materials* mats
 	updateNearestLightUniformValue(node);
 	updateAllLightsUniformValue();
 
-	updateMaterialUniformValue(mats);
-	updateTexturesUnifromValue(mats);
+	updateMaterialUniformValue(textureCache);
+	updateTexturesUnifromValue(textureCache);
 }
 
 void render::Material::startUpdateShaderVertexValue(Mesh* pMesh)
@@ -207,7 +208,7 @@ void render::Material::startUpdateShaderVertexValue(Mesh* pMesh)
 	GLDebug::showError();
 }
 
-void render::Material::endUpdateShaderUniformValue(Materials* mats)
+void render::Material::endUpdateShaderUniformValue(DrawTextureCache* textureCache)
 {
 	if (_shaderProgram == nullptr)
 	{
@@ -223,7 +224,7 @@ void render::Material::endUpdateShaderUniformValue(Materials* mats)
 		}
 		if (item.first == UniformType::TEXTURE0)
 		{
-			auto pTexture = mats->getTexture(_detail->getAmbientTextureMap());
+			auto pTexture = textureCache->getTexture(_detail->getAmbientTextureMap());
 			if (pTexture)
 			{
 				pTexture->unbindTexture();
@@ -234,7 +235,7 @@ void render::Material::endUpdateShaderUniformValue(Materials* mats)
 		}
 		else if (item.first == UniformType::TEXTURE1)
 		{
-			auto pTexture = mats->getTexture(_detail->getDiffuseTextureMap());
+			auto pTexture = textureCache->getTexture(_detail->getDiffuseTextureMap());
 			if (pTexture)
 			{
 				pTexture->unbindTexture();
@@ -245,7 +246,7 @@ void render::Material::endUpdateShaderUniformValue(Materials* mats)
 		}
 		else if (item.first == UniformType::TEXTURE2)
 		{
-			auto pTexture = mats->getTexture(_detail->getSpecularTextureMap());
+			auto pTexture = textureCache->getTexture(_detail->getSpecularTextureMap());
 			if (pTexture)
 			{
 				pTexture->unbindTexture();
@@ -255,7 +256,7 @@ void render::Material::endUpdateShaderUniformValue(Materials* mats)
 		}
 		else if (item.first == UniformType::MATERIAL_TEXTURE_AMBIENT)
 		{
-			auto pTexture = mats->getTexture(_detail->getAmbientTextureMap());
+			auto pTexture = textureCache->getTexture(_detail->getAmbientTextureMap());
 			if (pTexture)
 			{
 				pTexture->unbindTexture();
@@ -266,7 +267,7 @@ void render::Material::endUpdateShaderUniformValue(Materials* mats)
 		}
 		else if (item.first == UniformType::MATERIAL_TEXTURE_DIFFUSE)
 		{
-			auto pTexture = mats->getTexture(_detail->getDiffuseTextureMap());
+			auto pTexture = textureCache->getTexture(_detail->getDiffuseTextureMap());
 			if (pTexture)
 			{
 				pTexture->unbindTexture();
@@ -277,7 +278,7 @@ void render::Material::endUpdateShaderUniformValue(Materials* mats)
 		}
 		else if (item.first == UniformType::MATERIAL_TEXTURE_SPECULAR)
 		{
-			auto pTexture = mats->getTexture(_detail->getSpecularTextureMap());
+			auto pTexture = textureCache->getTexture(_detail->getSpecularTextureMap());
 			if (pTexture)
 			{
 				pTexture->unbindTexture();
@@ -503,7 +504,7 @@ void render::Material::updateAllLightsUniformValue()
 	delete[] pLightPositions;
 }
 
-void render::Material::updateMaterialUniformValue(Materials* mats)
+void render::Material::updateMaterialUniformValue(DrawTextureCache* textureCache)
 {
 	if (_shaderProgram == nullptr)
 	{
@@ -531,7 +532,7 @@ void render::Material::updateMaterialUniformValue(Materials* mats)
 		}
 		else if (item.first == UniformType::MATERIAL_TEXTURE_AMBIENT)
 		{
-			auto pTexture = mats->getTexture(_detail->getAmbientTextureMap());
+			auto pTexture = textureCache->getTexture(_detail->getAmbientTextureMap());
 			if (pTexture)
 			{
 				pTexture->activeTexture(ActiveTextureName::TEXTURE0);
@@ -543,7 +544,7 @@ void render::Material::updateMaterialUniformValue(Materials* mats)
 		}
 		else if (item.first == UniformType::MATERIAL_TEXTURE_DIFFUSE)
 		{
-			auto pTexture = mats->getTexture(_detail->getDiffuseTextureMap());
+			auto pTexture = textureCache->getTexture(_detail->getDiffuseTextureMap());
 			if (pTexture)
 			{
 				pTexture->activeTexture(ActiveTextureName::TEXTURE1);
@@ -559,7 +560,7 @@ void render::Material::updateMaterialUniformValue(Materials* mats)
 		}
 		else if (item.first == UniformType::MATERIAL_TEXTURE_SPECULAR)
 		{
-			auto pTexture = mats->getTexture(_detail->getSpecularTextureMap());
+			auto pTexture = textureCache->getTexture(_detail->getSpecularTextureMap());
 			if (pTexture)
 			{
 				pTexture->activeTexture(ActiveTextureName::TEXTURE2);
@@ -580,7 +581,7 @@ void render::Material::updateMaterialUniformValue(Materials* mats)
 	}
 }
 
-void render::Material::updateTexturesUnifromValue(Materials* mats)
+void render::Material::updateTexturesUnifromValue(DrawTextureCache* textureCache)
 {
 	if (_shaderProgram == nullptr)
 	{
@@ -596,7 +597,7 @@ void render::Material::updateTexturesUnifromValue(Materials* mats)
 		}
 		if (item.first == UniformType::TEXTURE0)
 		{
-			auto pTexture = mats->getTexture(_detail->getAmbientTextureMap());
+			auto pTexture = textureCache->getTexture(_detail->getAmbientTextureMap());
 			if (pTexture)
 			{
 				pTexture->activeTexture(ActiveTextureName::TEXTURE0);
@@ -607,7 +608,7 @@ void render::Material::updateTexturesUnifromValue(Materials* mats)
 		}
 		else if (item.first == UniformType::TEXTURE1)
 		{
-			auto pTexture = mats->getTexture(_detail->getDiffuseTextureMap());
+			auto pTexture = textureCache->getTexture(_detail->getDiffuseTextureMap());
 			if (pTexture)
 			{
 				pTexture->activeTexture(ActiveTextureName::TEXTURE1);
@@ -624,7 +625,7 @@ void render::Material::updateTexturesUnifromValue(Materials* mats)
 		}
 		else if (item.first == UniformType::TEXTURE2)
 		{
-			auto pTexture = mats->getTexture(_detail->getSpecularTextureMap());
+			auto pTexture = textureCache->getTexture(_detail->getSpecularTextureMap());
 			if (pTexture)
 			{
 				pTexture->activeTexture(ActiveTextureName::TEXTURE2);
@@ -640,11 +641,11 @@ void render::Material::updateTexturesUnifromValue(Materials* mats)
 	}
 }
 
-void render::Material::beginApply(Materials* mats)
+void render::Material::beginApply(DrawTextureCache* textureCache)
 {
 	this->applyMaterial();
 
-	auto pTexture = mats->getTexture(_detail->getAmbientTextureMap());
+	auto pTexture = textureCache->getTexture(_detail->getAmbientTextureMap());
 	if (pTexture)
 	{
 		pTexture->enableTexture(0);
@@ -660,9 +661,9 @@ void render::Material::beginApply(Materials* mats)
 #endif // 0
 }
 
-void render::Material::endApply(Materials* mats)
+void render::Material::endApply(DrawTextureCache* textureCache)
 {
-	auto pTexture = mats->getTexture(_detail->getAmbientTextureMap());
+	auto pTexture = textureCache->getTexture(_detail->getAmbientTextureMap());
 	if (pTexture)
 	{
 		pTexture->unbindTexture();
@@ -678,7 +679,7 @@ void render::Material::endApply(Materials* mats)
 #endif // 0
 }
 
-void render::Material::beginApplyWithShader(Node* node, Mesh* pMesh, Materials* mats)
+void render::Material::beginApplyWithShader(Node* node, Mesh* pMesh, DrawTextureCache* textureCache)
 {
 	if (_shaderProgram == nullptr)
 	{
@@ -692,15 +693,15 @@ void render::Material::beginApplyWithShader(Node* node, Mesh* pMesh, Materials* 
 		_shaderProgram->use();
 	}
 
-	this->startUpdateShaderUniformValue(node, mats);
+	this->startUpdateShaderUniformValue(node, textureCache);
 	this->startUpdateShaderVertexValue(pMesh);
 
 	runProgramFunc();
 }
 
-void render::Material::endApplyWithShader(Mesh* pMesh, Materials* mats)
+void render::Material::endApplyWithShader(Mesh* pMesh, DrawTextureCache* textureCache)
 {
-	this->endUpdateShaderUniformValue(mats);
+	this->endUpdateShaderUniformValue(textureCache);
 	this->endUpdateShaderVertexValue(pMesh);
 
 	if (_shaderProgram)

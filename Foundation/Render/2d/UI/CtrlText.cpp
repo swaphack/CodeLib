@@ -171,7 +171,7 @@ void CtrlText::onTextChange()
 
 	VertexTool::setTexture2DVertices(&_vertexes, orgin, volume, anchor);
 
-	auto pMesh = getMesh(DRAW_MESH_INDEX);
+	auto pMesh = getMesh();
 	if (pMesh)
 	{
 		float uvs[8] = { 0 };

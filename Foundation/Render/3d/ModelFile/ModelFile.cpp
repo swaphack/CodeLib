@@ -1,6 +1,7 @@
 #include "ModelFile.h"
 #include "Common/Material/import.h"
 #include "Common/Mesh/import.h"
+#include "Common/DrawNode/DrawTextureCache.h"
 
 render::ModelFile::ModelFile()
 {
@@ -14,7 +15,7 @@ render::ModelFile::~ModelFile()
 
 bool render::ModelFile::init()
 {
-	if (!Model::init())
+	if (!MultiDrawNode::init())
 	{
 		return false;
 	}
@@ -35,6 +36,10 @@ void render::ModelFile::setModelData(sys::ModelDetail* detail)
 	}
 	_materiales->setModelDetail(detail);
 	_meshes->setModelDetail(detail);
+	for (auto item : detail->getTexturePaths())
+	{
+		_textureCache->addTexture(item.first, item.second);
+	}
 	this->notify(NodeNotifyType::MODEL);
 }
 
@@ -45,6 +50,6 @@ void render::ModelFile::onDraw()
 		return;
 	}
 
-	Model::onDraw();
+	MultiDrawNode::onDraw();
 }
 

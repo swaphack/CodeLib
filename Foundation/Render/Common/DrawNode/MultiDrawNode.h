@@ -5,6 +5,8 @@
 
 namespace render
 {
+	class Materials;
+	class Meshes;
 	class Material;
 	class Mesh;
 	class FragmentOperator;
@@ -12,30 +14,49 @@ namespace render
 	class Texture;
 	class DrawTextureCache;
 
+
 	/**
 	*	绘制节点
 	*/
-	class DrawNode : public Node
+	class MultiDrawNode : public Node
 	{
+#define DRAW_MATERIAL_INDEX "0"
+#define DRAW_MESH_INDEX "0"
+
+#define MAT_TEXTURE_NAME "MAT_TEXTURE_NAME"
+#define MAT_TEXTURE_AMBIENT "MAT_TEXTURE_AMBIENT"
+#define MAT_TEXTURE_DIFFUSE "MAT_TEXTURE_DIFFUSE"
+#define MAT_TEXTURE_SPECULAR "MAT_TEXTURE_SPECULAR"
+#define MAT_TEXTURE_ALPHA "MAT_TEXTURE_ALPHA"
+#define MAT_TEXTURE_BUMP "MAT_TEXTURE_BUMP"
 	public:
-		DrawNode();
-		virtual ~DrawNode();
+		MultiDrawNode();
+		virtual ~MultiDrawNode();
 	public:
 		virtual bool init();
 		virtual void draw();
 	public:
 		/**
-		*	片元处理
-		*/
-		FragmentOperator* getFragOperator();
-		/**
 		*	材质
 		*/
-		Material* getMaterial();
+		Materials* getMaterials();
 		/**
 		*	网格
 		*/
-		Mesh* getMesh();
+		Meshes* getMeshes();
+		/**
+		*	片元处理
+		*/
+		FragmentOperator* getFragOperator();
+	public:
+		/**
+		*	材质
+		*/
+		Material* getMaterial(const std::string& name = DRAW_MATERIAL_INDEX);
+		/**
+		*	网格
+		*/
+		Mesh* getMesh(const std::string& name = DRAW_MESH_INDEX);
 	public:
 		/**
 		*	设置纹理
@@ -65,14 +86,6 @@ namespace render
 		*	设置Alpha纹理
 		*/
 		void setBumpTexture(const std::string& fullpath);
-		/**
-		*	获取纹理
-		*/
-		const Texture* getTexture() const;
-		/**
-		*	获取纹理
-		*/
-		const Texture* getTexture(const std::string& name) const;
 	public:
 		/**
 		*	设置着色器
@@ -106,9 +119,9 @@ namespace render
 		virtual void updateBufferData();
 	protected:
 		// 材质
-		Material* _material = nullptr;
+		Materials* _materiales = nullptr;
 		// 网格
-		Mesh* _mesh = nullptr;
+		Meshes* _meshes = nullptr;
 		// 片元处理
 		FragmentOperator* _fragOperator = nullptr;
 		// 纹理缓存
