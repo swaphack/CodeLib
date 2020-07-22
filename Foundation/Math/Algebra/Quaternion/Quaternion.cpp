@@ -132,10 +132,14 @@ Quaternion Quaternion::rotate(const Vector3& vector, float angle)
 {
 	float radian = ANGLE_TO_RADIAN(angle) * 0.5f;
 
+	float len = vector.getLength();
+
+	assert(len != 0);
+
 	float w = cos(radian);
-	float x = sin(radian) * vector.getX();
-	float y = sin(radian) * vector.getY();
-	float z = sin(radian) * vector.getZ();
+	float x = sin(radian) * vector.getX() / len;
+	float y = sin(radian) * vector.getY() / len;
+	float z = sin(radian) * vector.getZ() / len;
 
 	return Quaternion(w, x, y, z);
 }

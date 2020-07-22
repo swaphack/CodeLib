@@ -17,7 +17,12 @@ void render::Environment::addLight(Light* light)
 	{
 		return;
 	}
-	int index = (int)light->getLightName();
+	int index = light->getLightIndex();
+
+	auto it = _lights.find(index);
+
+	ASSERT(it == _lights.end());
+
 	_lights[index] = light;
 }
 
@@ -27,7 +32,7 @@ void render::Environment::removeLight(Light* light)
 	{
 		return;
 	}
-	int index = (int)light->getLightName();
+	int index = light->getLightIndex();
 	auto it = _lights.find(index);
 	if (it != _lights.end())
 	{
@@ -35,9 +40,8 @@ void render::Environment::removeLight(Light* light)
 	}
 }
 
-render::Light* render::Environment::getLight(LightName name) const
+render::Light* render::Environment::getLight(int index) const
 {
-	int index = (int)name;
 	auto it = _lights.find(index);
 	if (it != _lights.end())
 	{

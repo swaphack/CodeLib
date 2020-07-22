@@ -133,7 +133,7 @@ void render::Material::startUpdateShaderUniformValue(Node* node, DrawTextureCach
 	updateMVPMatrixUniformValue(node);
 
 	updateNearestLightUniformValue(node);
-	updateAllLightsUniformValue();
+	updateAllLightsUniformValue(node);
 
 	updateMaterialUniformValue(textureCache);
 	updateTexturesUnifromValue(textureCache);
@@ -327,9 +327,13 @@ void render::Material::updateMVPMatrixUniformValue(Node* node)
 		return;
 	}
 
-	const math::Matrix44& projMat = Camera::getMainCamera()->getProjectMatrix();
-	const math::Matrix44& viewMat = Camera::getMainCamera()->getViewMatrix();
-	const math::Matrix44& modelMat = node->getWorldMatrix();
+	math::Matrix44 projMat = Camera::getMainCamera()->getProjectMatrix();
+	math::Matrix44 viewMat = Camera::getMainCamera()->getViewMatrix();
+	math::Matrix44 modelMat = node->getWorldMatrix();
+
+	math::Matrix33 normalMat = modelMat.getInverse().getTranspose();
+	math::Matrix44 mvpMat = projMat * viewMat * modelMat;
+	math::Matrix44 mvMat = viewMat * projMat;
 
 	for (auto item : _vertexUniformIndices)
 	{
@@ -338,8 +342,11 @@ void render::Material::updateMVPMatrixUniformValue(Node* node)
 		{
 			continue;
 		}
-
-		if (item.first == UniformType::PROJECT_MATRIX)
+		if (item.first == UniformType::VIEW_POSITION)
+		{
+			pUniform->setValue3(1, viewMat.getPosition().getValue());
+		}
+		else if (item.first == UniformType::PROJECT_MATRIX)
 		{
 			pUniform->setMatrix4(projMat);
 		}
@@ -351,6 +358,20 @@ void render::Material::updateMVPMatrixUniformValue(Node* node)
 		{
 			pUniform->setMatrix4(modelMat);
 		}
+		else if (item.first == UniformType::NORMAL_MATRIX)
+		{
+			pUniform->setMatrix3(normalMat);
+		}
+		else if (item.first == UniformType::MVP_MATRIX)
+		{
+			pUniform->setMatrix4(mvpMat);
+		}
+		else if (item.first == UniformType::MV_MATRIX)
+		{
+			pUniform->setMatrix4(mvMat);
+		}
+
+		GLDebug::showError();
 	}
 }
 
@@ -367,9 +388,9 @@ void render::Material::updateNearestLightUniformValue(Node* node)
 
 	float fPos = -1;
 	Light* pLight = nullptr;
-	for (uint32_t i = (uint32_t)LightName::LIGHT0; i < (uint32_t)LightName::LIGHT7; i++)
+	for (int i = 0; i < Light::getLightMaxCount(); i++)
 	{
-		auto pTempLight = G_ENVIRONMENT->getLight((LightName)i);
+		auto pTempLight = G_ENVIRONMENT->getLight(i);
 		if (pTempLight)
 		{
 			float fDistance = math::Vector3::distance(pTempLight->getPosition(), node->getPosition());
@@ -380,8 +401,13 @@ void render::Material::updateNearestLightUniformValue(Node* node)
 			}
 		}
 	}
-
+	if (!pLight)
+	{
+		return;
+	}
 	const math::Matrix44& viewMat = Camera::getMainCamera()->getViewMatrix();
+	math::Vector3 halfVector = viewMat.getPosition() - node->getWorldMatrix().getPosition() + pLight->getWorldMatrix().getPosition() - node->getWorldMatrix().getPosition();
+	halfVector.normalize();
 
 	for (auto item : _vertexUniformIndices)
 	{
@@ -390,49 +416,94 @@ void render::Material::updateNearestLightUniformValue(Node* node)
 		{
 			continue;
 		}
-		if (item.first == UniformType::VIEW_POSITION)
+		
+		if (item.first == UniformType::LIGHT_ENABLED)
 		{
-			pUniform->setValue3(1, viewMat.getPosition().getValue());
+			pUniform->setValue(true);
 		}
-		else if (item.first == UniformType::LIGHT_COLOR)
+		else if (item.first == UniformType::LIGHT_LOCAL)
 		{
-			if (pLight)
+			if (pLight->is<PointLight>() || pLight->is<SpotLight>())
 			{
-				pUniform->setValue4(1, pLight->getAmbient());
+				pUniform->setValue(true);
+			}
+			else
+			{
+				pUniform->setValue(false);
 			}
 		}
-		else if (item.first == UniformType::LIGHT_AMBIENT)
+		else if (item.first == UniformType::LIGHT_SPOT)
 		{
-			if (pLight)
-			{
-				pUniform->setValue4(1, pLight->getAmbient());
-			}
-		}
-		else if (item.first == UniformType::LIGHT_SPECULAR)
-		{
-			if (pLight)
-			{
-				pUniform->setValue4(1, pLight->getSpecular());
-			}
-		}
-		else if (item.first == UniformType::LIGHT_DIFFUSE)
-		{
-			if (pLight)
-			{
-				pUniform->setValue4(1, pLight->getDiffuse());
-			}
+			pUniform->setValue(pLight->is<SpotLight>());
 		}
 		else if (item.first == UniformType::LIGHT_POSITION)
 		{
+			pUniform->setValue3(1, pLight->getWorldMatrix().getPosition().getValue());
+		}
+		else if (item.first == UniformType::LIGHT_DIRECTION)
+		{
 			if (pLight)
 			{
-				pUniform->setValue3(1, pLight->getWorldMatrix().getPosition().getValue());
+				pUniform->setValue3(1, pLight->getDirection());
 			}
 		}
+		else if (item.first == UniformType::LIGHT_HALF_VECTOR)
+		{
+			pUniform->setValue3(1, halfVector.getValue());
+		}
+		else if (item.first == UniformType::LIGHT_COLOR)
+		{
+			pUniform->setValue4(1, pLight->getColor());
+		}
+		else if (item.first == UniformType::LIGHT_AMBIENT)
+		{
+			pUniform->setValue4(1, pLight->getAmbient());
+		}
+		else if (item.first == UniformType::LIGHT_SPOT_EXPONENT)
+		{
+			auto pSpotLight = pLight->as<SpotLight>();
+			if (pSpotLight)
+			{
+				pUniform->setValue(pSpotLight->getExponent());
+			}
+		}
+		else if (item.first == UniformType::LIGHT_SPOT_COST_CUTOFF)
+		{
+			auto pSpotLight = pLight->as<SpotLight>();
+			if (pSpotLight)
+			{
+				pUniform->setValue(pSpotLight->getCutOff());
+			}
+		}
+		else if (item.first == UniformType::LIGHT_CONSTANT_ATTENUATION)
+		{
+			auto pPointLight = pLight->as<PointLight>();
+			if (pPointLight)
+			{
+				pUniform->setValue(pPointLight->getConstantAttenuation());
+			}
+		}
+		else if (item.first == UniformType::LIGHT_LINEAR_ATTENUATION)
+		{
+			auto pPointLight = pLight->as<PointLight>();
+			if (pPointLight)
+			{
+				pUniform->setValue(pPointLight->getLinearAttenuation());
+			}
+		}
+		else if (item.first == UniformType::LIGHT_QUADRATIC_ATTENUATION)
+		{
+			auto pPointLight = pLight->as<PointLight>();
+			if (pPointLight)
+			{
+				pUniform->setValue(pPointLight->getQuadraticAttenuation());
+			}
+		}
+		GLDebug::showError();
 	}
 }
 
-void render::Material::updateAllLightsUniformValue()
+void render::Material::updateAllLightsUniformValue(Node* node)
 {
 	if (_shaderProgram == nullptr)
 	{
@@ -445,63 +516,108 @@ void render::Material::updateAllLightsUniformValue()
 	}
 
 	const auto& mapLights = G_ENVIRONMENT->getAllLights();
-	int nLightCount = mapLights.size();
-
-	float* pLightAmbients = new float[4 * nLightCount];
-	float* pLightDiffuses = new float[4 * nLightCount];
-	float* pLightSpeculars = new float[4 * nLightCount];
-	float* pLightPositions = new float[3 * nLightCount];
-
-	int index = 0;
-	for (auto item : mapLights)
-	{
-		memcpy(pLightAmbients + 4 * index, item.second->getAmbient(), 4 * nLightCount);
-		memcpy(pLightDiffuses + 4 * index, item.second->getDiffuse(), 4 * nLightCount);
-		memcpy(pLightSpeculars + 4 * index, item.second->getSpecular(), 4 * nLightCount);
-		memcpy(pLightPositions + 3 * index, item.second->getWorldMatrix().getPosition().getValue(), 3 * nLightCount);
-
-		index++;
-	}
 
 	const math::Matrix44& viewMat = Camera::getMainCamera()->getViewMatrix();
 
-	for (auto item : _vertexUniformIndices)
+	for (auto light : mapLights)
 	{
-		auto pUniform = _shaderProgram->getUniform(item.second);
-		if (!pUniform)
-		{
-			continue;
-		}
-		if (item.first == UniformType::VIEW_POSITION)
-		{
-			pUniform->setValue3(1, viewMat.getPosition().getValue());
-		}
-		else if (item.first == UniformType::LIGHT_COLORS)
-		{
-			pUniform->setValue4(nLightCount, pLightAmbients);
-		}
-		else if (item.first == UniformType::LIGHT_AMBIENTS)
-		{
-			pUniform->setValue4(nLightCount, pLightAmbients);
-		}
-		else if (item.first == UniformType::LIGHT_SPECULARS)
-		{
-			pUniform->setValue4(nLightCount, pLightSpeculars);
-		}
-		else if (item.first == UniformType::LIGHT_DIFFUSES)
-		{
-			pUniform->setValue4(nLightCount, pLightDiffuses);
-		}
-		else if (item.first == UniformType::LIGHT_POSITIONS)
-		{
-			pUniform->setValue4(nLightCount, pLightPositions);
-		}
-	}
+		auto pLight = light.second;
+		int index = light.first;
 
-	delete[] pLightAmbients;
-	delete[] pLightSpeculars;
-	delete[] pLightDiffuses;
-	delete[] pLightPositions;
+		math::Vector3 halfVector = viewMat.getPosition() - node->getWorldMatrix().getPosition() + pLight->getWorldMatrix().getPosition() - node->getWorldMatrix().getPosition();
+		halfVector.normalize();
+
+		for (auto item : _vertexUniformIndices)
+		{
+			std::string text = getCString(item.second.c_str(), index);
+			auto pUniform = _shaderProgram->getUniform(item.second);
+			if (!pUniform)
+			{
+				continue;
+			}
+			else if (item.first == UniformType::MULTI_LIGHT_ENABLED)
+			{
+				pUniform->setValue(true);
+			}
+			else if (item.first == UniformType::MULTI_LIGHT_LOCAL)
+			{
+				if (pLight->is<PointLight>() || pLight->is<SpotLight>())
+				{
+					pUniform->setValue(true);
+				}
+				else
+				{
+					pUniform->setValue(false);
+				}
+			}
+			else if (item.first == UniformType::MULTI_LIGHT_SPOT)
+			{
+				pUniform->setValue(pLight->is<SpotLight>());
+			}
+			else if (item.first == UniformType::MULTI_LIGHT_POSITION)
+			{
+				pUniform->setValue3(1, pLight->getWorldMatrix().getPosition().getValue());
+			}
+			else if (item.first == UniformType::MULTI_LIGHT_DIRECTION)
+			{
+				pUniform->setValue3(1, pLight->getDirection());
+			}
+			else if (item.first == UniformType::MULTI_LIGHT_HALF_VECTOR)
+			{
+				pUniform->setValue3(1, halfVector.getValue());
+			}
+			else if (item.first == UniformType::MULTI_LIGHT_COLOR)
+			{
+				pUniform->setValue4(1, pLight->getColor());
+			}
+			else if (item.first == UniformType::MULTI_LIGHT_AMBIENT)
+			{
+				pUniform->setValue4(1, pLight->getAmbient());
+			}
+			else if (item.first == UniformType::MULTI_LIGHT_SPOT_EXPONENT)
+			{
+				auto pSpotLight = pLight->as<SpotLight>();
+				if (pSpotLight)
+				{
+					pUniform->setValue(pSpotLight->getExponent());
+				}
+			}
+			else if (item.first == UniformType::MULTI_LIGHT_SPOT_COST_CUTOFF)
+			{
+				auto pSpotLight = pLight->as<SpotLight>();
+				if (pSpotLight)
+				{
+					pUniform->setValue(pSpotLight->getCutOff());
+				}
+			}
+			else if (item.first == UniformType::MULTI_LIGHT_CONSTANT_ATTENUATION)
+			{
+				auto pPointLight = pLight->as<PointLight>();
+				if (pPointLight)
+				{
+					pUniform->setValue(pPointLight->getConstantAttenuation());
+				}
+			}
+			else if (item.first == UniformType::MULTI_LIGHT_LINEAR_ATTENUATION)
+			{
+				auto pPointLight = pLight->as<PointLight>();
+				if (pPointLight)
+				{
+					pUniform->setValue(pPointLight->getLinearAttenuation());
+				}
+			}
+			else if (item.first == UniformType::MULTI_LIGHT_QUADRATIC_ATTENUATION)
+			{
+				auto pPointLight = pLight->as<PointLight>();
+				if (pPointLight)
+				{
+					pUniform->setValue(pPointLight->getQuadraticAttenuation());
+				}
+			}
+			GLDebug::showError();
+		}
+		GLDebug::showError();
+	}
 }
 
 void render::Material::updateMaterialUniformValue(DrawTextureCache* textureCache)

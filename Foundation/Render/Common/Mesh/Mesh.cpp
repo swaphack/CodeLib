@@ -214,3 +214,103 @@ void render::Mesh::updateBufferData()
 	GLDebug::showError();
 }
 
+void render::Mesh::initDetailNormalData()
+{
+	if (getMeshDetail()->getVertices().getSize() == 0)
+	{
+		return;
+	}
+
+	int nSize = getMeshDetail()->getVertices().getSize();
+	int nCount = getMeshDetail()->getVertices().getLength();
+	int nUnitSize = getMeshDetail()->getVertices().getUnitSize();
+
+	int nLength = nCount / nUnitSize;
+
+	float* normals = (float*)malloc(nSize);
+	this->calTrianglesVertexNormal(getMeshDetail()->getVertices(), getMeshDetail()->getIndices(), normals);
+	getMeshDetail()->setNormals(nLength, normals, nUnitSize);
+	free(normals);
+}
+
+class mycompare {
+public:
+	bool operator()(const math::Vector3& _Left, const math::Vector3& _Right)const {
+		return _Left.toString() < _Right.toString();
+	}
+};
+
+void render::Mesh::calTrianglesVertexNormal(const sys::MeshMemoryData& vertices, const sys::MeshMemoryData& indices, float* normals)
+{
+	int nUnitSize = vertices.getUnitSize();
+	int nVerticeCount = vertices.getLength() / nUnitSize;
+
+	float* pVerticeData = (float*)vertices.getValue();
+
+	if (nVerticeCount < 3)
+	{
+		return;
+	}
+
+	if (!(nUnitSize == 2 || nUnitSize == 3))
+	{
+		return;
+	}
+
+	std::vector<math::Vector3> vecPoint;
+
+	for (int i = 0 ; i < nVerticeCount; i++)
+	{
+		math::Vector3 pos;
+		if (nUnitSize == 2)
+		{
+			pos = math::Vector3(pVerticeData[i * nUnitSize], pVerticeData[i * nUnitSize + 1]);
+		}
+		else if (nUnitSize == 3)
+		{
+			pos = math::Vector3(pVerticeData[i * nUnitSize], pVerticeData[i * nUnitSize + 1], pVerticeData[i * nUnitSize + 2]);
+		}
+		vecPoint.push_back(pos);
+	}
+
+	int nPointCount = indices.getLength() / indices.getUnitSize();
+	int nTriangleCount = nPointCount / 3;
+
+	uint32_t* pIndice = (uint32_t*)indices.getValue();
+
+	std::map<int, std::vector<math::Vector3>> mapPointNormal;
+	for (int i = 0; i < nTriangleCount; i++)
+	{
+		math::Vector3 p0 = vecPoint[pIndice[i * 3 + 0]];
+		math::Vector3 p1 = vecPoint[pIndice[i * 3 + 1]];
+		math::Vector3 p2 = vecPoint[pIndice[i * 3 + 2]];
+
+		math::Vector3 normal = math::Vector3::cross(p1 - p0, p2 - p0);
+
+		mapPointNormal[pIndice[i * 3 + 0]].push_back(normal);
+		mapPointNormal[pIndice[i * 3 + 1]].push_back(normal);
+		mapPointNormal[pIndice[i * 3 + 2]].push_back(normal);
+	}
+
+	for (int i = 0; i < nVerticeCount; i++)
+	{
+		math::Vector3 normal;
+		if (mapPointNormal[i].empty())
+		{
+			normal = math::Vector3(0, 1, 0);
+		}
+		else
+		{
+			for (auto item : mapPointNormal[i])
+			{
+				normal += item;
+			}
+			normal /= mapPointNormal[i].size();
+			normal.normalize();
+		}
+		memcpy(normals + i * 3, normal.getValue(), 3 * sizeof(float));
+	}
+
+	int a = 1;
+}
+

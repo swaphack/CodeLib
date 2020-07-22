@@ -25,6 +25,7 @@ namespace render
 		virtual void reverse();
 	protected:
 		virtual void initAction();
+		virtual void endAction();
 		virtual void updateInterval(float percent);
 		virtual void updatePercent(float curPercent);
 	protected:
@@ -79,6 +80,7 @@ namespace render
 		virtual void reverse();
 	protected:
 		virtual void initAction();
+		virtual void endAction();
 		virtual void updatePercent(float percent);
 	protected:
 		// 起始位置
@@ -128,6 +130,7 @@ namespace render
 		virtual void reverse();
 	protected:
 		virtual void initAction();
+		virtual void endAction();
 		virtual void updatePercent(float percent);
 	protected:
 		// 起始旋转角度
@@ -175,6 +178,7 @@ namespace render
 		virtual void reverse();
 	protected:
 		virtual void initAction();
+		virtual void endAction();
 		virtual void updatePercent(float percent);
 	protected:
 		// 初始缩放比例

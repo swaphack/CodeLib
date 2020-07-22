@@ -573,6 +573,9 @@
     <ClCompile Include="3d\Common\MultiModel.cpp">
       <Filter>3d\Common</Filter>
     </ClCompile>
+    <ClCompile Include="3d\Environment\PointLight.cpp">
+      <Filter>3d\Environment</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Common\Node\import.h">
@@ -1310,6 +1313,15 @@
     </ClInclude>
     <ClInclude Include="3d\Common\MultiModel.h">
       <Filter>3d\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\DrawNode\macros.h">
+      <Filter>Common\DrawNode</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Material\macros.h">
+      <Filter>Common\Material</Filter>
+    </ClInclude>
+    <ClInclude Include="3d\Environment\PointLight.h">
+      <Filter>3d\Environment</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

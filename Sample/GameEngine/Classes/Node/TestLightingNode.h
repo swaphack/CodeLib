@@ -15,4 +15,7 @@ private:
 	void addSun();
 
 	void addEarth();
+
+
+	void testCubeModel();
 };

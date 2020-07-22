@@ -50,6 +50,7 @@ void IntervalAction::update(float duration)
 	else
 	{
 		this->stop();
+		this->endAction();
 	}
 }
 
@@ -86,6 +87,11 @@ void IntervalAction::reverse()
 }
 
 void render::IntervalAction::initAction()
+{
+
+}
+
+void render::IntervalAction::endAction()
 {
 
 }
@@ -174,6 +180,12 @@ void render::MoveByAction::initAction()
 	ASSERT(_target != nullptr);
 
 	_srcPosition = _target->getPosition();
+	_desPosition = _srcPosition + _differentPosition;
+}
+
+void render::MoveByAction::endAction()
+{
+	_srcPosition = _desPosition;
 	_desPosition = _srcPosition + _differentPosition;
 }
 
@@ -266,6 +278,12 @@ void render::RotateByAction::initAction()
 	ASSERT(_target != nullptr);
 
 	_srcRotation = _target->getPosition();
+	_destRotation = _srcRotation + _differentRotation;
+}
+
+void render::RotateByAction::endAction()
+{
+	_srcRotation = _destRotation;
 	_destRotation = _srcRotation + _differentRotation;
 }
 
@@ -369,6 +387,12 @@ void render::ScaleByAction::initAction()
 	ASSERT(_target != nullptr);
 
 	_srcScale = _target->getScale();
+	_destScale = _srcScale + _differentScale;
+}
+
+void render::ScaleByAction::endAction()
+{
+	_srcScale = _destScale;
 	_destScale = _srcScale + _differentScale;
 }
 

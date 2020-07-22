@@ -101,9 +101,12 @@ void CtrlFrame::onTextureChange()
 		float uvs[8] = { 0 };
 		memcpy(uvs, _vertexes.uvs, sizeof(uvs));
 		render::VertexTool::setTexture2DFlip(uvs, _bFlipX, _bFlipY);
+
 		pMesh->getMeshDetail()->setVertices(4, _vertexes.vertices, 3);
 		pMesh->getMeshDetail()->setColors(4, _vertexes.colors, 4);
 		pMesh->getMeshDetail()->setUVs(4, uvs, 2);
 		pMesh->getMeshDetail()->setIndices(6, _vertexes.indices);
+
+		pMesh->initDetailNormalData();
 	}
 }

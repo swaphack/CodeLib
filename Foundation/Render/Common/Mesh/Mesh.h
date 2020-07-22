@@ -60,6 +60,15 @@ namespace render
 		*	更新顶点信息
 		*/
 		void updateBufferData();
+		/**
+		*	初始化法线数据
+		*/
+		void initDetailNormalData();
+	protected:
+		/**
+		*	计算三角形顶点法线
+		*/
+		void calTrianglesVertexNormal(const sys::MeshMemoryData& vertices, const sys::MeshMemoryData& indices, float* normals);
 	private:
 		sys::MeshDetail* _detail = nullptr;
 		/**

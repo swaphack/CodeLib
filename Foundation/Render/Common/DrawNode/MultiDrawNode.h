@@ -2,6 +2,7 @@
 
 #include "Common/Node/Node.h"
 #include "Common/Shader/ShaderProgramDelegate.h"
+#include "macros.h"
 
 namespace render
 {
@@ -20,15 +21,7 @@ namespace render
 	*/
 	class MultiDrawNode : public Node
 	{
-#define DRAW_MATERIAL_INDEX "0"
-#define DRAW_MESH_INDEX "0"
 
-#define MAT_TEXTURE_NAME "MAT_TEXTURE_NAME"
-#define MAT_TEXTURE_AMBIENT "MAT_TEXTURE_AMBIENT"
-#define MAT_TEXTURE_DIFFUSE "MAT_TEXTURE_DIFFUSE"
-#define MAT_TEXTURE_SPECULAR "MAT_TEXTURE_SPECULAR"
-#define MAT_TEXTURE_ALPHA "MAT_TEXTURE_ALPHA"
-#define MAT_TEXTURE_BUMP "MAT_TEXTURE_BUMP"
 	public:
 		MultiDrawNode();
 		virtual ~MultiDrawNode();

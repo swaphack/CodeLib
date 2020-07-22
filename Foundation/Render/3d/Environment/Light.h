@@ -5,23 +5,35 @@
 
 namespace render
 {
-	// 光,点光源
+	// 光源
 	class Light : public Node
 	{
 	public:
 		Light();
 		virtual ~Light();
 	public:
-		virtual LightName getLightName() { return LightName::LIGHT0; }
-
+		// 光源名称
+		virtual LightName getLightName();
+		// 光源索引
+		int getLightIndex();
+		// 最大光源数
+		static int getLightMaxCount();
 	public:
 		virtual void draw();
 		virtual bool init();
 	public:
+		// 颜色
+		void setColor(uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha);
+		const float* getColor();
+
 		// 环境光
 		void setAmbient(uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha);
 		const float* getAmbient();
 
+		// 朝向
+		const float* getDirection();
+
+		/*下方两个在shader无用*/
 		// 漫射光
 		void setDiffuse(uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha);
 		const float* getDiffuse();
@@ -30,21 +42,19 @@ namespace render
 		void setSpecular(uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha);
 		const float* getSpecular();
 	protected:
+		// 颜色
+		float _lightColor[4];
 		// 环境光
 		float _lightAmbient[4];
 		// 漫射光
 		float _lightDiffuse[4];
 		// 反射光
 		float _lightSpecular[4];
-	};
-#define CTREATE_LIGHT_CLASS_0(index) \
-	class Light##index : public Light \
-	{ \
-	public: \
-	virtual LightName getLightName() { return LightName::LIGHT##index; } \
+		// 朝向
+		float _lightDirection[3];
 	};
 
-#define CTREATE_LIGHT_CLASS_1(index) \
+#define CTREATE_LIGHT(index) \
 	class Light##index : public Light \
 	{ \
 	public: \
@@ -62,12 +72,12 @@ namespace render
 	virtual LightName getLightName() { return LightName::LIGHT##index; } \
 	};
 
-	CTREATE_LIGHT_CLASS_0(0);
-	CTREATE_LIGHT_CLASS_1(1);
-	CTREATE_LIGHT_CLASS_1(2);
-	CTREATE_LIGHT_CLASS_1(3);
-	CTREATE_LIGHT_CLASS_1(4);
-	CTREATE_LIGHT_CLASS_1(5);
-	CTREATE_LIGHT_CLASS_1(6);
-	CTREATE_LIGHT_CLASS_1(7);
+	CTREATE_LIGHT(0);
+	CTREATE_LIGHT(1);
+	CTREATE_LIGHT(2);
+	CTREATE_LIGHT(3);
+	CTREATE_LIGHT(4);
+	CTREATE_LIGHT(5);
+	CTREATE_LIGHT(6);
+	CTREATE_LIGHT(7);
 }

@@ -80,11 +80,34 @@ void Utility::initShaderAttrib(render::Material* mat)
 	mat->addUniform(UniformType::VIEW_MATRIX, "matrix.view");
 	mat->addUniform(UniformType::MODEL_VIEW, "matrix.model");
 	
-	mat->addUniform(UniformType::LIGHT_COLOR, "light.ambient");
+
+	mat->addUniform(UniformType::LIGHT_ENABLED, "light.isEnabled");
+	mat->addUniform(UniformType::LIGHT_LOCAL, "light.isLocal");
+	mat->addUniform(UniformType::LIGHT_SPOT, "light.isSpot");
 	mat->addUniform(UniformType::LIGHT_POSITION, "light.position");
+	mat->addUniform(UniformType::LIGHT_DIRECTION, "light.direction");
+	mat->addUniform(UniformType::LIGHT_HALF_VECTOR, "light.halfVector");
+	mat->addUniform(UniformType::LIGHT_COLOR, "light.color");
 	mat->addUniform(UniformType::LIGHT_AMBIENT, "light.ambient");
-	mat->addUniform(UniformType::LIGHT_DIFFUSE, "light.diffuse");
-	mat->addUniform(UniformType::LIGHT_SPECULAR, "light.specular");
+	mat->addUniform(UniformType::LIGHT_SPOT_EXPONENT, "light.spotExponent");
+	mat->addUniform(UniformType::LIGHT_SPOT_COST_CUTOFF, "light.spotCostCutoff");
+	mat->addUniform(UniformType::LIGHT_CONSTANT_ATTENUATION, "light.constantAttenuation");
+	mat->addUniform(UniformType::LIGHT_LINEAR_ATTENUATION, "light.linearAttenuation");
+	mat->addUniform(UniformType::LIGHT_QUADRATIC_ATTENUATION, "light.quadraticAttenuation");
+
+	mat->addUniform(UniformType::MULTI_LIGHT_ENABLED, "light[%d].isEnabled");
+	mat->addUniform(UniformType::MULTI_LIGHT_LOCAL, "light[%d].isLocal");
+	mat->addUniform(UniformType::MULTI_LIGHT_SPOT, "light[%d].isSpot");
+	mat->addUniform(UniformType::MULTI_LIGHT_POSITION, "light[%d].position");
+	mat->addUniform(UniformType::MULTI_LIGHT_DIRECTION, "light[%d].direction");
+	mat->addUniform(UniformType::MULTI_LIGHT_HALF_VECTOR, "light[%d].halfVector");
+	mat->addUniform(UniformType::MULTI_LIGHT_COLOR, "light[%d].color");
+	mat->addUniform(UniformType::MULTI_LIGHT_AMBIENT, "light[%d].ambient");
+	mat->addUniform(UniformType::MULTI_LIGHT_SPOT_EXPONENT, "light[%d].spotExponent");
+	mat->addUniform(UniformType::MULTI_LIGHT_SPOT_COST_CUTOFF, "light[%d].spotCostCutoff");
+	mat->addUniform(UniformType::MULTI_LIGHT_CONSTANT_ATTENUATION, "light[%d].constantAttenuation");
+	mat->addUniform(UniformType::MULTI_LIGHT_LINEAR_ATTENUATION, "light[%d].linearAttenuation");
+	mat->addUniform(UniformType::MULTI_LIGHT_QUADRATIC_ATTENUATION, "light[%d].quadraticAttenuation");
 	
 	mat->addUniform(UniformType::MATERIAL_COLOR_AMBIENT, "material.ambient");
 	mat->addUniform(UniformType::MATERIAL_COLOR_DIFFUSE, "material.diffuse");
@@ -95,6 +118,7 @@ void Utility::initShaderAttrib(render::Material* mat)
 	mat->addUniform(UniformType::MATERIAL_TEXTURE_SPECULAR, "material.texSpecular");
 	
 	mat->addUniform(UniformType::MATERIAL_SHININESS, "material.shininess");
+	mat->addUniform(UniformType::MATERIAL_STRENGTH, "material.strength");
 	
 	mat->addVertexData(VertexDataType::POSITION, "v_position");
 	mat->addVertexData(VertexDataType::COLOR, "v_color");
@@ -147,7 +171,7 @@ void Utility::runRotateAction(render::Node* node)
 		return;
 	}
 	RotateByAction* pRotateByAction = CREATE_ACTION(RotateByAction);
-	pRotateByAction->setDifferentRotation(360, 0, 0);
+	pRotateByAction->setDifferentRotation(0, 0, 360);
 	pRotateByAction->setDuration(5);
 
 	RepeateForeverAction* pRepeateAction = CREATE_ACTION(RepeateForeverAction);

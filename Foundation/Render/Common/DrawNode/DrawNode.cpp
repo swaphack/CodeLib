@@ -6,17 +6,9 @@
 #include "Common/Texture/import.h"
 #include "Common/Shader/ShaderProgram.h"
 #include "DrawTextureCache.h"
+#include "macros.h"
 
 using namespace render;
-
-#define DRAW_MATERIAL_INDEX "0"
-
-#define MAT_TEXTURE_NAME "MAT_TEXTURE_NAME"
-#define MAT_TEXTURE_AMBIENT "MAT_TEXTURE_AMBIENT"
-#define MAT_TEXTURE_DIFFUSE "MAT_TEXTURE_DIFFUSE"
-#define MAT_TEXTURE_SPECULAR "MAT_TEXTURE_SPECULAR"
-#define MAT_TEXTURE_ALPHA "MAT_TEXTURE_ALPHA"
-#define MAT_TEXTURE_BUMP "MAT_TEXTURE_BUMP"
 
 DrawNode::DrawNode()
 {

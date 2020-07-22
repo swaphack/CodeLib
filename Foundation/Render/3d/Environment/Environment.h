@@ -24,7 +24,7 @@ namespace render
 		/**
 		*	获取光源
 		*/ 
-		Light* getLight(LightName name) const;
+		Light* getLight(int index) const;
 		/**
 		*	获取所有光源
 		*/

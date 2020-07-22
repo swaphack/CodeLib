@@ -65,5 +65,7 @@ void render::SkyBox::onCubeChanged()
 	{
 		pMesh->getMeshDetail()->setVertices(24, vertices, 3);
 		pMesh->getMeshDetail()->setIndices(36, indices, 1);
+
+		pMesh->initDetailNormalData();
 	}
 }
