@@ -406,7 +406,9 @@ void render::Material::updateNearestLightUniformValue(Node* node)
 		return;
 	}
 	const math::Matrix44& viewMat = Camera::getMainCamera()->getViewMatrix();
-	math::Vector3 halfVector = viewMat.getPosition() - node->getWorldMatrix().getPosition() + pLight->getWorldMatrix().getPosition() - node->getWorldMatrix().getPosition();
+	math::Vector3 lightDirection = viewMat.getPosition() - node->getWorldMatrix().getPosition();
+	math::Vector3 viewDirection = pLight->getWorldMatrix().getPosition() - node->getWorldMatrix().getPosition();
+	math::Vector3 halfVector = lightDirection + viewDirection;
 	halfVector.normalize();
 
 	for (auto item : _vertexUniformIndices)
@@ -442,9 +444,14 @@ void render::Material::updateNearestLightUniformValue(Node* node)
 		}
 		else if (item.first == UniformType::LIGHT_DIRECTION)
 		{
-			if (pLight)
+			auto pSpotLight = pLight->as<SpotLight>();
+			if (pSpotLight)
 			{
-				pUniform->setValue3(1, pLight->getDirection());
+				pUniform->setValue3(1, pSpotLight->getDirection());
+			}
+			else
+			{
+				pUniform->setValue3(1, lightDirection.getValue());
 			}
 		}
 		else if (item.first == UniformType::LIGHT_HALF_VECTOR)
@@ -524,8 +531,9 @@ void render::Material::updateAllLightsUniformValue(Node* node)
 		auto pLight = light.second;
 		int index = light.first;
 
-		math::Vector3 halfVector = viewMat.getPosition() - node->getWorldMatrix().getPosition() + pLight->getWorldMatrix().getPosition() - node->getWorldMatrix().getPosition();
-		halfVector.normalize();
+		math::Vector3 lightDirection = viewMat.getPosition() - node->getWorldMatrix().getPosition();
+		math::Vector3 viewDirection = pLight->getWorldMatrix().getPosition() - node->getWorldMatrix().getPosition();
+		math::Vector3 halfVector = lightDirection + viewDirection;
 
 		for (auto item : _vertexUniformIndices)
 		{
@@ -560,7 +568,16 @@ void render::Material::updateAllLightsUniformValue(Node* node)
 			}
 			else if (item.first == UniformType::MULTI_LIGHT_DIRECTION)
 			{
-				pUniform->setValue3(1, pLight->getDirection());
+				auto pSpotLight = pLight->as<SpotLight>();
+
+				if (pSpotLight->is<SpotLight>())
+				{
+					pUniform->setValue3(1, pSpotLight->getDirection());
+				}
+				else
+				{
+					pUniform->setValue3(1, lightDirection.getValue());
+				}
 			}
 			else if (item.first == UniformType::MULTI_LIGHT_HALF_VECTOR)
 			{

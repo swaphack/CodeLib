@@ -11,21 +11,17 @@ namespace math
 	/**
 	*	二维数组
 	*/
-	template<typename T>
+	template<typename T, const int Height, const int Width>
 	struct Array2D
 	{
 	public:
 		Array2D()
 		{
-			this->reset(1, 1);
+			this->reset();
 		}
-		Array2D(size_t h, size_t w)
+		Array2D(T* val)
 		{
-			this->reset(h, w);
-		}
-		Array2D(T* val, size_t h, size_t w)
-		{
-			this->set(val, h, w);
+			this->set(val);
 		}
 		Array2D(const Array2D& mat)
 		{
@@ -33,7 +29,7 @@ namespace math
 		}
 		virtual ~Array2D()
 		{
-			this->dispose();
+
 		}
 	public:
 		/**
@@ -46,166 +42,175 @@ namespace math
 		/**
 		*	单元值
 		*/
-		void getValue(T* array, size_t len) const
+		void setValue(T* array, int len) const
 		{
-			size_t length = _width * _height;
+			int length = getLength();
 			assert(len <= length);
 			memcpy(array, _values, len * sizeof(T));
 		}
 		/**
 		*	列数
 		*/
-		size_t getWidth() const
+		int getWidth() const
 		{
-			return _width;
+			return Width;
 		}
 		/**
 		*	行数
 		*/
-		size_t getHeight() const
+		int getHeight() const
 		{
-			return _height;
+			return Height;
+		}
+		/**
+		*	行数
+		*/
+		int getLength() const
+		{
+			return Width * Height;
 		}
 		/**
 		*	大小
 		*/
-		size_t getSize() const
+		int getSize() const
 		{
-			return _width * _height;
+			return Width * Height * sizeof(T);
 		}
-		void set(const T* val, int32_t h, int32_t w)
+		void set(const T* val)
 		{
-			assert(val != nullptr && w > 0 && h > 0);
+			assert(val != nullptr);
 
-			this->dispose();
-
-			_height = h;
-			_width = w;
-			int size = _width * _height * sizeof(T);
-			uint8_t* values = (uint8_t*)malloc(size);
-			memcpy(values, (uint8_t*)val, size);
-			_values = values;
-		}
-		/**
-		*	重置
-		*/
-		void reset(size_t h, size_t w)
-		{
-			assert(w != 0 && h != 0);
-
-			this->dispose();
-
-			_height = h;
-			_width = w;
-			int size = _width * _height * sizeof(T);
-			uint8_t* values = (uint8_t*)malloc(size);
-			memset(values, 0, size);
-			_values = values;
+			memcpy(_values, (T*)val, getSize());
 		}
 		/**
 		*	重置
 		*/
 		void reset()
 		{
-			if (_values != nullptr && _width != 0 && _height != 0)
-			{
-				int size = _width * _height * sizeof(T);
-				memset(_values, 0, size);
-			}
+			memset(_values, 0, getSize());
 		}
 		/**
 		*	获取指定位置的数据
 		*/
-		const T& getValue(size_t index) const
+		const T& getValue(int index) const
 		{
-			assert(index >= 0 && index < _width * _height);
+			//printf("%d, %d, %d\n", index, Width, Height);
+			assert(index >= 0 && index < getLength());
 
-			return *(T*)(_values + index * sizeof(T));
+			int i = index / Width;
+			int j = index % Width;
+
+			return getValue(i, j);
 		}
 
 		/**
 		*	获取h行，w列的数据
 		*/
-		const T& getValue(size_t i, size_t j) const
+		const T& getValue(int i, int j) const
 		{
-			assert(i >= 0 && j >= 0 && i < _height && j < _width);
+			assert(i >= 0 && j >= 0 && i < Height && j < Width);
 
-			int index = i * _width + j;
-			return getValue(index);
+			return _values[i][j];
 		}
 		/**
 		*	设置h行，w列的数据
 		*/
-		void setValue(size_t i, size_t j, const T& value)
-		{
-			int index = i * _width + j;
-			memcpy(_values + index * sizeof(T), &value, sizeof(T));
+		void setValue(int i, int j, const T& value)
+		{			
+			_values[i][j] = value;
 		}
 		/**
 		*	设置指定位置的数据
 		*/
-		void setValue(size_t index, const T& value)
+		void setValue(int index, const T& value)
 		{
-			assert(index >= 0 && index < _width * _height);
+			assert(index >= 0 && index < getLength());
 
-			memcpy(_values + index * sizeof(T), &value, sizeof(T));
+			int i = index / Width;
+			int j = index % Width;
+
+			_values[i][j] = value;
 		}
 	public:
 		/**
 		*	设置指定行的值
 		*/
-		void setRow(size_t row, const Array<T>& value)
+		void setRow(int row, const Array<T, Width>& value)
 		{
-			assert(row >= 0 && row < _height);
+			assert(row >= 0 && row < Height);
 
-			assert(value.getLength() == _width);
+			assert(value.getLength() == Width);
 
-			for (size_t i = 0; i < _width; i++)
+			for (int i = 0; i < Width; i++)
 			{
-				int index = row * _width + i;
-				setValue(index, value.getValue(i));
+				setValue(row, i, value.getValue(i));
+			}
+		}
+		/**
+		*	设置指定行的值
+		*/
+		void setRow(int row, const T* value)
+		{
+			assert(row >= 0 && row < Height);
+
+			for (int i = 0; i < Width; i++)
+			{
+				setValue(row, i, value[i]);
 			}
 		}
 		/**
 		*	获取指定行的值
 		*/
-		Array<T> getRow(size_t row)
+		Array<T, Width> getRow(int row)
 		{
-			assert(row >= 0 && row < _height);
+			assert(row >= 0 && row < Height);
 
-			Array<T> vector(_width);
+			Array<T, Width> vector;
 
-			for (size_t i = 0; i < _width; i++)
+			for (int i = 0; i < Width; i++)
 			{
-				vector.setValue(i, getValue(row * _width + i));
+				vector.setValue(i, getValue(row, i));
 			}
 		}
 		/**
 		*	设置指定列的值
 		*/
-		void setColumn(size_t column, const Array<T>& value)
+		void setColumn(int column, const Array<T, Height>& value)
 		{
-			assert(column >= 0 && column < _width);
+			assert(column >= 0 && column < Width);
 
-			assert(value.getLength() == _height);
+			assert(value.getLength() == Height);
 
-			for (size_t i = 0; i < _height; i++)
+			for (int i = 0; i < Height; i++)
 			{
-				setValue(i * _height + column, value.getValue(i));
+				setValue(i, column, value.getValue(i));
+			}
+		}
+
+		/**
+		*	设置指定列的值
+		*/
+		void setColumn(int column, const T* value)
+		{
+			assert(column >= 0 && column < Width);
+
+			for (int i = 0; i < Height; i++)
+			{
+				setValue(i, column, value[i]);
 			}
 		}
 		/**
 		*	获取指定列的值
 		*/
-		Array<T> getColumn(size_t column)
+		Array<T, Height> getColumn(int column)
 		{
-			assert(column >= 0 && column < _width);
+			assert(column >= 0 && column < Width);
 
-			Array<T> vector(_height);
+			Array<T, Height> vector;
 
-			for (size_t i = 0; i < _height; i++)
+			for (int i = 0; i < Height; i++)
 			{
-				vector.setValue(i, getValue(i * _height + column));
+				vector.setValue(i, getValue(i, column));
 			}
 		}
 	public:
@@ -215,13 +220,12 @@ namespace math
 		Array2D transpose() const
 		{
 			Array2D mat;
-			mat.reset(_height, _width);
 
-			for (size_t i = 0; i < _height; i++)
+			for (int i = 0; i < Height; i++)
 			{
-				for (size_t j = 0; j < _width; j++)
+				for (int j = 0; j < Width; j++)
 				{
-					mat.setValue(i * _height + j, getValue(i * _width + j));
+					mat.setValue(i, j, getValue(i, j));
 				}
 			}
 
@@ -233,9 +237,8 @@ namespace math
 		*/
 		Array2D& operator=(const Array2D& mat)
 		{
-			this->reset(mat._height, mat._width);
-			size_t len = mat._width * mat._height;
-			for (size_t i = 0; i < len; i++)
+			int len = mat.Width * mat.Height;
+			for (int i = 0; i < len; i++)
 			{
 				setValue(i, mat.getValue(i));
 			}
@@ -245,27 +248,34 @@ namespace math
 		/**
 		*	获取指定位置的数据
 		*/
-		T& operator[](size_t index)
+		T& operator[](int index)
 		{
-			assert(index >= 0 && index < _width * _height);
+			assert(index >= 0 && index < getLength());
 
-			return *((T*)(_values + index * sizeof(T)));
+			int i = index / Width;
+			int j = index % Width;
+
+			return _values[i][j];
 		}
 		/**
 		*	获取指定位置的数据
 		*/
-		const T& operator[](size_t index) const
+		const T& operator[](int index) const
 		{
-			assert(index >= 0 && index < _width * _height);
-			return *((T*)(_values + index * sizeof(T)));
+			assert(index >= 0 && index < getLength());
+
+			int i = index / Width;
+			int j = index % Width;
+
+			return _values[i][j];
 		}
 	public:
 		std::string toString() const
 		{
 			std::ostringstream stream;
-			for (size_t i = 0; i < _height; i++)
+			for (int i = 0; i < Height; i++)
 			{
-				for (size_t j = 0; j < _width; j++)
+				for (int j = 0; j < Width; j++)
 				{
 					T fValue = getValue(i, j);
 					stream << fValue;
@@ -276,31 +286,17 @@ namespace math
 
 			return stream.str();
 		}
-	public:
-		/**
-		*	清除
-		*/
-		void dispose()
-		{
-			if (_values)
-			{
-				free(_values);
-				_values = nullptr;
-			}
-			_width = 0;
-			_height = 0;
-		}
 	protected:
 		T* getPtr()
 		{
-			return (T*)_values;
+			return _values;
 		}
-	private:
+	protected:
 		// 单元值
-		uint8_t* _values = nullptr;
+		T _values[Height][Width];
 		// 列数
-		size_t _width = 0;
+		//int Width = 0;
 		// 行数
-		size_t _height = 0;
+		//int Height = 0;
 	};
 }

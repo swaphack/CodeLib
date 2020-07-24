@@ -7,7 +7,7 @@ namespace math
 	/**
 	*	Ãæ»ý
 	*/
-	struct Size : public Vector
+	struct Size : public Vector<float, 2>
 	{
 	public:
 		Size();

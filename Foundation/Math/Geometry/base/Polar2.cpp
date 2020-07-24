@@ -7,20 +7,17 @@
 using namespace math;
 
 Polar2::Polar2()
-	:Vector(2)
 {
 
 }
 
 Polar2::Polar2(float r, float radian)
-	: Polar2()
 {
 	this->setRadius(r);
 	this->setRadian(radian);
 }
 
 Polar2::Polar2(const Vector2& vector)
-	: Polar2()
 {
 	float r = vector.getMagnitude();
 	float radian = atan2(vector.getY(), vector.getX());
@@ -30,7 +27,6 @@ Polar2::Polar2(const Vector2& vector)
 }
 
 Polar2::Polar2(const Polar2& polar)
-	: Polar2()
 {
 	this->setRadius(polar.getRadius());
 	this->setRadian(polar.getRadian());

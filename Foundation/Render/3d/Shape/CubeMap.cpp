@@ -27,8 +27,8 @@ bool render::CubeMap::init()
 		this->onImageChanged();
 	});
 
-	_notify->addListen(NodeNotifyType::SPACE, [this]() {
-		this->onCubeChanged();
+	_notify->addListen(NodeNotifyType::BODY, [this]() {
+		this->onCubeMapBodyChanged();
 		this->updateBufferData();
 	});
 
@@ -83,7 +83,7 @@ void render::CubeMap::onImageChanged()
 	this->setTexture(_texCubeMap);
 }
 
-void render::CubeMap::onCubeChanged()
+void render::CubeMap::onCubeMapBodyChanged()
 {
 	VertexTool::setTexture3DVertices(&_cubePosition, math::Vector3(), _volume, _anchor);
 

@@ -20,15 +20,15 @@ bool render::Cube::init()
 		return false;
 	}
 
-	_notify->addListen(NodeNotifyType::SPACE, [this]() {
-		this->onSpaceChanged();
+	_notify->addListen(NodeNotifyType::BODY, [this]() {
+		this->onCubeBodyChanged();
 		this->updateBufferData();
 	});
 
 	return true;
 }
 
-void render::Cube::onSpaceChanged()
+void render::Cube::onCubeBodyChanged()
 {
 	VertexTool::setTexture3DVertices(&_cubePosition, math::Vector3(), _volume, _anchor);
 

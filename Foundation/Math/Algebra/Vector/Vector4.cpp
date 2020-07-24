@@ -5,33 +5,28 @@
 using namespace math;
 
 Vector4::Vector4()
-	:Vector(4)
 {
 
 }
 
 Vector4::Vector4(const Vector4& vector)
-	: Vector4()
 {
 	this->set(vector.getX(), vector.getY(), vector.getZ(), vector.getW());
 }
 
 Vector4::Vector4(const Vector3& vector)
-	: Vector4()
 {
 	this->set(vector.getX(), vector.getY(), vector.getZ());
 }
 
 Vector4::Vector4(const Vector2& vector)
-	: Vector4()
 {
 	this->set(vector.getX(), vector.getY());
 }
 
 Vector4::Vector4(const Vector& vector)
-	: Vector4()
 {
-	assert(vector.getSize() == getSize());
+	assert(vector.getLength() == getLength());
 
 	this->setX(vector[0]);
 	this->setY(vector[1]);
@@ -40,7 +35,6 @@ Vector4::Vector4(const Vector& vector)
 }
 
 Vector4::Vector4(float x, float y, float z, float w /*= 1*/)
-	: Vector4()
 {
 	this->setX(x);
 	this->setY(y);

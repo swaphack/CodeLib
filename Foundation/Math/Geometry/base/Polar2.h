@@ -8,7 +8,7 @@ namespace math
 	*	极坐标
 	*	二维圆坐标
 	*/
-	struct Polar2 : Vector
+	struct Polar2 : public Vector<float, 2>
 	{
 	public:
 		Polar2();

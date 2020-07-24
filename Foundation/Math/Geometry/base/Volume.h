@@ -7,7 +7,7 @@ namespace math
 	/**
 	*	Με»ύ
 	*/
-	struct Volume : public Vector
+	struct Volume : public Vector<float, 3>
 	{
 	public:
 		Volume();

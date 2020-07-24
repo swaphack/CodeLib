@@ -31,7 +31,7 @@ namespace math
 	*	jk = i, kj = -i;
 	*	ki = j, ik= -j;
 	*/
-	struct Quaternion : public Vector
+	struct Quaternion : public Vector<float, 4>
 	{
 	public:
 		Quaternion();

@@ -28,8 +28,8 @@ bool CtrlFrame::init()
 		return false;
 	}
 
-	_notify->addListen(NodeNotifyType::SPACE, [this](){
-		onTextureChange();		
+	_notify->addListen(NodeNotifyType::BODY, [this]() {
+		onTextureChange();
 		updateBufferData();
 	});
 

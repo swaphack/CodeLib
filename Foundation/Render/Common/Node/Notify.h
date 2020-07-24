@@ -14,6 +14,8 @@ namespace render
 		NODE,
 		// 空间属性
 		SPACE,
+		// 自生属性
+		BODY,
 		// 纹理
 		TEXTURE,
 		// 模型

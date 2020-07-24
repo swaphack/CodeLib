@@ -5,6 +5,21 @@
 
 using namespace math;
 
+template<int A, int B>
+struct classA
+{
+	int getValue()
+	{
+		return A * A + B * B;
+	}
+};
+
+template<int C>
+struct classB : public classA <C, C>
+{
+
+};
+
 void testMatrix()
 {
 	float value32[6] = {
@@ -12,19 +27,36 @@ void testMatrix()
 		3, 4,
 		5, 6
 	};
-	Matrix mat32(value32, 3, 2);
+	Matrix<float, 3, 2> mat32(value32);
 
 	float value23[6] = {
 		1, 2, 3, 
 		4, 5, 6
 	};
-	Matrix mat23(value32, 2, 3);
+	Matrix<float, 2, 3> mat23(value32);
 
-	Matrix mat33 = mat32 * mat23;
+	//Matrix<3, 3> mat33 = mat32 * mat23;
 	float value33[9] = { 0 };
-	mat33.getValue(value33, 9);
+	//mat33.getValue(value33, 9);
 
 	int a = 1;
+
+	Matrix14 mat14;
+	Matrix22 mat22;
+	Matrix33 mat33;
+	Matrix41 mat41;
+	Matrix44 mat44;
+
+	Vector2 vec2;
+	Vector3 vec3;
+	Vector4 vec4;
+
+	vec2.setX(vec3.getX());
+
+	Quaternion quaternion;
+
+	Determinant2 det2;
+	Determinant3 det3;
 }
 
 void testInference()
@@ -47,6 +79,8 @@ void testInference()
 
 int main(int argc, char** argv)
 {
+	testMatrix();
+
 	testInference();
 
 	return 0;

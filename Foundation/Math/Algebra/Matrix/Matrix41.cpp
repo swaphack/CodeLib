@@ -3,7 +3,6 @@
 using namespace math;
 
 Matrix41::Matrix41()
-	:Matrix(4, 1)
 {
 	(*this)[0] = 0;
 	(*this)[1] = 0;
@@ -18,7 +17,6 @@ Matrix41::Matrix41(const Vector3& vector)
 }
 
 Matrix41::Matrix41(const Vector3& vector, float w)
-	: Matrix41()
 {
 	(*this)[0] = vector.getX();
 	(*this)[1] = vector.getY();
@@ -27,7 +25,6 @@ Matrix41::Matrix41(const Vector3& vector, float w)
 }
 
 Matrix41::Matrix41(float x, float y, float z)
-	: Matrix41()
 {
 	(*this)[0] = x;
 	(*this)[1] = y;
@@ -36,7 +33,6 @@ Matrix41::Matrix41(float x, float y, float z)
 }
 
 Matrix41::Matrix41(float x, float y, float z, float w)
-	: Matrix41()
 {
 	(*this)[0] = x;
 	(*this)[1] = y;
@@ -59,7 +55,7 @@ Matrix41::operator Vector3()
 math::Matrix41::Matrix41(const float* value)
 	: Matrix41()
 {
-	this->set(value, 4, 1);
+	this->set(value);
 }
 
 math::Matrix41::~Matrix41()

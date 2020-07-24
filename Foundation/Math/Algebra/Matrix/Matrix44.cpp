@@ -8,36 +8,26 @@ using namespace math;
 
 
 Matrix44::Matrix44()
-:Matrix(4, 4)
 {
 	this->loadIdentity();
 }
 
 Matrix44::Matrix44(const Matrix44& mat)
-	: Matrix44()
 {
-	for (size_t i = 0; i < getSize(); i++)
+	for (size_t i = 0; i < getLength(); i++)
 	{
 		setValue(i, mat.getValue(i));
 	}
 }
 
 Matrix44::Matrix44(const Matrix33& mat)
-	: Matrix44()
 {
-	for (int i = 0; i < mat.getHeight(); i++)
-	{
-		for (int j = 0; j < mat.getWidth(); j++)
-		{
-			this->setValue(i, j, mat.getValue(i, j));
-		}
-	}
+	*this = mat;
 }
 
 Matrix44::Matrix44(const float* value)
-	: Matrix44()
 {
-	this->set(value, 4, 4);
+	this->set(value);
 }
 
 void Matrix44::loadIdentity()
@@ -196,16 +186,18 @@ void Matrix44::setRotationByLine(const Vector3& src, const Vector3& dest, float 
 
 Matrix41 Matrix44::operator*(const Matrix41& mat)
 {
-	Matrix mat0 = *this;
-	Matrix mat1 = mat0 * mat;
-	return Matrix41(mat1.getValue());
+	Matrix<float, 4, 4> mat0(*this);
+	Matrix<float, 4, 4> mat1;
+	mat1.setColumn(0, mat.getValue());
+	Matrix44 mat2 = mat0 * mat1;
+	return Matrix41(mat1[0], mat1[1], mat1[2], mat1[3]);
 }
 
 Matrix44 Matrix44::operator*(const Matrix44& mat)
 {
-	Matrix mat0 = *this;
-	Matrix mat1 = mat0 * mat;
-	return Matrix44(mat1.getValue());
+	Matrix<float, 4, 4> mat0(*this);
+	Matrix<float, 4, 4> mat1(mat.getValue());
+	return Matrix44(mat0 * mat1);
 }
 
 Vector3 Matrix44::getEularAngle() const
@@ -242,8 +234,7 @@ Vector3 Matrix44::getEularAngle() const
 	return Vector3(x, y, z);
 }
 
-math::Matrix44::Matrix44(const Matrix& mat)
-	: Matrix44()
+math::Matrix44::Matrix44(const Matrix<float, 4, 4>& mat)
 {
 	assert(mat.getWidth() == this->getWidth() && mat.getHeight() == this->getHeight());
 
@@ -256,6 +247,11 @@ math::Matrix44::Matrix44(const Matrix& mat)
 	}
 }
 
+math::Matrix44::Matrix44(const Matrix41& mat)
+{
+	*this = mat;
+}
+
 math::Matrix44::~Matrix44()
 {
 
@@ -263,7 +259,7 @@ math::Matrix44::~Matrix44()
 
 math::Matrix44& math::Matrix44::operator=(const Matrix44& mat)
 {
-	for (size_t i = 0; i < getSize(); i++)
+	for (size_t i = 0; i < getLength(); i++)
 	{
 		setValue(i, mat.getValue(i));
 	}
@@ -271,7 +267,7 @@ math::Matrix44& math::Matrix44::operator=(const Matrix44& mat)
 	return *this;
 }
 
-math::Matrix44& math::Matrix44::operator=(const Matrix& mat)
+math::Matrix44& math::Matrix44::operator=(const Matrix<float, 4, 4>& mat)
 {
 	assert(mat.getWidth() == this->getWidth() && mat.getHeight() == this->getHeight());
 
@@ -287,6 +283,19 @@ math::Matrix44& math::Matrix44::operator=(const Matrix& mat)
 }
 
 math::Matrix44& math::Matrix44::operator=(const Matrix33& mat)
+{
+	for (int i = 0; i < mat.getHeight(); i++)
+	{
+		for (int j = 0; j < mat.getWidth(); j++)
+		{
+			this->setValue(i, j, mat.getValue(i, j));
+		}
+	}
+
+	return *this;
+}
+
+math::Matrix44& math::Matrix44::operator=(const Matrix41& mat)
 {
 	for (int i = 0; i < mat.getHeight(); i++)
 	{
@@ -321,7 +330,7 @@ math::Matrix44 math::Matrix44::frustum(float left, float right, float bottom, fl
 	math::Matrix44 mat;
 
 	float temp, temp2, temp3, temp4;
-	temp = 2.0 * znear;
+	temp = 2.0f * znear;
 	temp2 = right - left;
 	temp3 = top - bottom;
 	temp4 = zfar - znear;
@@ -339,7 +348,7 @@ math::Matrix44 math::Matrix44::frustum(float left, float right, float bottom, fl
 	mat[11] = -1.0;
 	mat[12] = 0.0;
 	mat[13] = 0.0;
-	mat[14] = (-2.0 * zfar) / temp4;
+	mat[14] = (-2.0f * zfar) / temp4;
 	mat[15] = 0.0;
 
 	return mat;
@@ -348,7 +357,7 @@ math::Matrix44 math::Matrix44::frustum(float left, float right, float bottom, fl
 math::Matrix44 math::Matrix44::perspective(float fovyInDegrees, float aspectRatio, float znear, float zfar)
 {
 	float ymax, xmax;
-	float temp, temp2, temp3, temp4;
+	//float temp, temp2, temp3, temp4;
 	ymax = znear * tanf(fovyInDegrees * M_PI / 360.0);
 	// ymin = -ymax;
 	// xmin = -ymax * aspectRatio;
@@ -428,34 +437,34 @@ math::Vector3 math::Matrix44::getScale() const
 Vector4 math::Matrix44::getRow(int column) const
 {
 	return Vector4(
-		getValue(column),
-		getValue(column + 4),
-		getValue(column + 8),
-		getValue(column + 12));
+		getValue(column, 0),
+		getValue(column, 1),
+		getValue(column, 2),
+		getValue(column, 3));
 }
 
 void math::Matrix44::setRow(int column, const Vector4& value)
 {
-	this->setValue(column, value[0]);
-	this->setValue(column + 4, value[1]);
-	this->setValue(column + 8, value[2]);
-	this->setValue(column + 12, value[3]);
+	this->setValue(column, 0, value[0]);
+	this->setValue(column, 1, value[1]);
+	this->setValue(column, 2, value[2]);
+	this->setValue(column, 3, value[3]);
 }
 
 math::Vector4 math::Matrix44::getColumn(int column) const
 {
 	return Vector4(
-		getValue(column * 4),
-		getValue(column * 4 + 1),
-		getValue(column * 4 + 2),
-		getValue(column * 4 + 3));
+		getValue(column, 0),
+		getValue(column, 1),
+		getValue(column, 2),
+		getValue(column, 3));
 }
 
 void math::Matrix44::setColumn(int column, const Vector4& value)
 {
-	this->setValue(column * 4, value[0]);
-	this->setValue(column * 4 + 1, value[1]);
-	this->setValue(column * 4 + 2, value[2]);
-	this->setValue(column * 4 + 3, value[3]);
+	this->setValue(column, 0, value[0]);
+	this->setValue(column, 1, value[1]);
+	this->setValue(column, 2, value[2]);
+	this->setValue(column, 3, value[3]);
 }
 

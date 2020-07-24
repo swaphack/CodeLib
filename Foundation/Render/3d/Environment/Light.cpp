@@ -28,9 +28,7 @@ Light::Light()
 	_lightColor[2] = 1.0f;
 	_lightColor[3] = 1.0f;
 
-	_lightDirection[0] = 0.0f;
-	_lightDirection[1] = 0.0f;
-	_lightDirection[2] = -1.0f;
+	
 
 	G_ENVIRONMENT->addLight(this);
 }
@@ -101,11 +99,6 @@ bool Light::init()
 		return false;
 	}
 
-	_notify->addListen(NodeNotifyType::SPACE, [this]() {
-		math::Quaternion q = math::Quaternion::rotate(getRotation());
-		memcpy(_lightDirection, q.getValue(), sizeof(_lightDirection));
-	});
-
 	return true;
 }
 
@@ -135,9 +128,4 @@ void render::Light::setColor(uint8_t red, uint8_t green, uint8_t blue, uint8_t a
 const float* render::Light::getColor()
 {
 	return _lightColor;
-}
-
-const float* Light::getDirection()
-{
-	return _lightDirection;
 }

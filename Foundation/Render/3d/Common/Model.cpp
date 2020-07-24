@@ -24,7 +24,7 @@ bool render::Model::init()
 		return false;
 	}	
 
-	_notify->addListen(NodeNotifyType::SPACE, [this]() {
+	_notify->addListen(NodeNotifyType::BODY, [this]() {
 		this->calBoxData();
 	});
 

@@ -16,6 +16,7 @@ namespace render
 	public:
 		virtual void draw();
 	public:
+
 		// 常量衰减，与距离无关
 		void setConstantAttenuation(float value);
 		float getConstantAttenuation();
@@ -34,6 +35,9 @@ namespace render
 		float _linearAttenuation;
 		// 按距离二次函数衰减
 		float _quadraticAttenuation;
+
+		// 朝向
+		float _lightDirection[3];
 	};
 
 #define CTREATE_POINT_LIGHT(index) \

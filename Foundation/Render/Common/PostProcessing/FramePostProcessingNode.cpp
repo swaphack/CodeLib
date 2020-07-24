@@ -33,7 +33,7 @@ bool render::FramePostProcessingNode::init()
 		return false;
 	}
 
-	_notify->addListen(NodeNotifyType::SPACE, [this]() {
+	_notify->addListen(NodeNotifyType::BODY, [this]() {
 		Tool::calRect(math::Vector3(), _volume, _anchor, _rectVertex);
 		this->updateTextureSize();
 	});

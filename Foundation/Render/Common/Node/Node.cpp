@@ -40,7 +40,9 @@ bool Node::init()
 		calSpaceData(); 
 	});
 
-	_notify->addListen(NodeNotifyType::NODE, [&](){ this->sortChildren(); });
+	_notify->addListen(NodeNotifyType::NODE, [&](){ 
+		this->sortChildren();
+	});
 
 	return true;
 }
@@ -382,7 +384,7 @@ void Node::onSpaceChange()
 
 void Node::onBodyChange()
 {
-	this->notify(NodeNotifyType::SPACE);
+	this->notify(NodeNotifyType::BODY);
 }
 
 void Node::onChildrenChange()

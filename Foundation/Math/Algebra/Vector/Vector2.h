@@ -8,12 +8,12 @@
 namespace math
 {
 	// 2d
-	struct Vector2 : public Vector
+	struct Vector2 : public Vector<float, 2>
 	{
 	public:
 		Vector2();
 		Vector2(float x, float y);
-		Vector2(const Vector& vector);
+		Vector2(const Vector<float, 2>& vector);
 		Vector2(const Vector2& point);
 		virtual ~Vector2();
 	public:

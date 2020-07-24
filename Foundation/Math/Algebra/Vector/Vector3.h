@@ -9,7 +9,7 @@ namespace math
 {
 	struct Vector2;
 	// 3d
-	struct Vector3 : public Vector
+	struct Vector3 : public Vector<float, 3>
 	{
 	public:
 		Vector3();

@@ -8,13 +8,11 @@ using namespace math;
 
 
 Vector3::Vector3() 
-	:Vector(3)
 {
 
 }
 
 Vector3::Vector3(float x, float y, float z /*= 0*/) 
-	: Vector3()
 {
 	this->setX(x);
 	this->setY(y);
@@ -22,14 +20,12 @@ Vector3::Vector3(float x, float y, float z /*= 0*/)
 }
 
 Vector3::Vector3(const Vector2& vector)
-	: Vector3()
 {
 	this->setX(vector.getX());
 	this->setY(vector.getY());
 }
 
 Vector3::Vector3(const Vector3& vector) 
-	: Vector3()
 {
 	this->setX(vector.getX());
 	this->setY(vector.getY());
@@ -38,9 +34,8 @@ Vector3::Vector3(const Vector3& vector)
 }
 
 Vector3::Vector3(const Vector& vector)
-	: Vector3()
 {
-	assert(vector.getSize() == getSize());
+	assert(vector.getLength() == getLength());
 
 	this->setX(vector[0]);
 	this->setY(vector[1]);
@@ -230,7 +225,8 @@ Vector3 Vector3::tranlate(const Vector3& vector)
 	mat.setTranslate(vector);
 
 	Matrix41 mat41(*this);
-	Matrix ret = mat * mat41; 
+
+	Matrix41 ret = mat * mat41; 
 	float w = ret[3];
 	return Vector3(ret[0] / w, ret[1] / w, ret[2] / w);
 }
@@ -241,7 +237,7 @@ Vector3 Vector3::scale(const Vector3& vector)
 	mat.setScale(vector);
 
 	Matrix41 mat41(*this);
-	Matrix ret = mat * mat41;
+	Matrix41 ret = mat * mat41;
 	float w = ret[3];
 	return Vector3(ret[0] / w, ret[1] / w, ret[2] / w);
 }
@@ -252,7 +248,7 @@ Vector3 Vector3::rotationByAxis(const Vector3& vector, float radian)
 	mat.setRotationByAxis(vector, radian);
 
 	Matrix41 mat41(*this);
-	Matrix ret = mat * mat41;
+	Matrix41 ret = mat * mat41;
 	float w = ret[3];
 	return Vector3(ret[0] / w, ret[1] / w, ret[2] / w);
 }
@@ -263,7 +259,7 @@ Vector3 Vector3::rotationByLine(const Vector3& src, const Vector3& dest, float r
 	mat.setRotationByLine(src, dest, radian);
 
 	Matrix41 mat41(*this);
-	Matrix ret = mat * mat41;
+	Matrix41 ret = mat * mat41;
 	float w = ret[3];
 	return Vector3(ret[0] / w, ret[1] / w, ret[2] / w);
 }
@@ -275,12 +271,12 @@ float Vector3::sinAngle(const Vector3& vector0, const Vector3& vector1)
 
 	assert(a != 0 && b != 0);
 
-	Determinant det(3);
+	Determinant3 det;
 	det.setRow(0, Vector3(1,1,1));
 	det.setRow(1, vector0);
 	det.setRow(2, vector1);
 
-	return det.getMagnitude() / (a * b);
+	return getDeterminantMagnitude(det) / (a * b);
 }
 
 bool Vector3::isThreePointsOnSameLine(const Vector3& point0, const Vector3& point1, const Vector3& point2)
@@ -288,22 +284,22 @@ bool Vector3::isThreePointsOnSameLine(const Vector3& point0, const Vector3& poin
 	Vector3 v0 = point2 - point0;
 	Vector3 v1 = point2 - point1;
 
-	Determinant det(3);
+	Determinant3 det;
 	det.setRow(0, Vector3(1, 1, 1));
 	det.setRow(1, v0);
 	det.setRow(2, v1);
 
-	return det.getMagnitude() == 0;
+	return getDeterminantMagnitude(det) == 0;
 }
 
 bool Vector3::isThreeVectorInSamePlane(const Vector3& vector0, const Vector3& vector1, const Vector3& vector2)
 {
-	Determinant det(3);
+	Determinant3 det;
 	det.setRow(0, vector0);
 	det.setRow(1, vector1);
 	det.setRow(2, vector2);
 
-	return det.getMagnitude() == 0;
+	return getDeterminantMagnitude(det) == 0;
 }
 
 Vector3 Vector3::calDoubleCross(const Vector3& vector0, const Vector3& vector1, const Vector3& vector2)

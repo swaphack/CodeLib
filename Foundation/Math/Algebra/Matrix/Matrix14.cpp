@@ -3,7 +3,6 @@
 using namespace math;
 
 Matrix14::Matrix14()
-	:Matrix(1, 4)
 {
 	(*this)[0] = 0;
 	(*this)[1] = 0;
@@ -18,7 +17,6 @@ Matrix14::Matrix14(const Vector3& vector)
 }
 
 Matrix14::Matrix14(const Vector3& vector, float w)
-	: Matrix14()
 {
 	(*this)[0] = vector.getX();
 	(*this)[1] = vector.getY();
@@ -27,7 +25,6 @@ Matrix14::Matrix14(const Vector3& vector, float w)
 }
 
 Matrix14::Matrix14(float x, float y, float z)
-	: Matrix14()
 {
 	(*this)[0] = x;
 	(*this)[1] = y;
@@ -36,7 +33,6 @@ Matrix14::Matrix14(float x, float y, float z)
 }
 
 Matrix14::Matrix14(float x, float y, float z, float w)
-	: Matrix14()
 {
 	(*this)[0] = x;
 	(*this)[1] = y;
@@ -63,7 +59,10 @@ math::Matrix14::~Matrix14()
 
 math::Matrix14 math::Matrix14::operator*(const math::Matrix44& mat)
 {
-	Matrix mat0 = *this;
-	Matrix mat1 = mat0 * mat;
-	return Matrix14(mat1[0], mat1[1], mat1[2], mat1[3]);
+	Matrix<float, 4, 4> mat0;
+	mat0.setRow(0, this->getValue());
+	Matrix<float, 4, 4> mat1(mat);
+
+	Matrix44 mat2 = mat0 * mat1;
+	return Matrix14(mat2[0], mat2[4], mat2[8], mat2[12]);
 }

@@ -13,6 +13,7 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{D1634C1B-6654-4995-A862-67D58DEDFC72}</ProjectGuid>
     <RootNamespace>Math</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -189,7 +190,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Algebra\Coordinate\CoordinateSystem.cpp" />
-    <ClCompile Include="Algebra\Determinant\Determinant.cpp" />
     <ClCompile Include="Algebra\Equation\Equation.cpp" />
     <ClCompile Include="Algebra\Matrix\Matrix.cpp" />
     <ClCompile Include="Algebra\Matrix\Matrix14.cpp" />
@@ -201,7 +201,6 @@
     <ClCompile Include="Algebra\Polynomial\Polynomial.cpp" />
     <ClCompile Include="Algebra\Polynomial\UnaryPolynomial.cpp" />
     <ClCompile Include="Algebra\Quaternion\Quaternion.cpp" />
-    <ClCompile Include="Algebra\Vector\Vector.cpp" />
     <ClCompile Include="Algebra\Vector\Vector2.cpp" />
     <ClCompile Include="Algebra\Vector\Vector3.cpp" />
     <ClCompile Include="Algebra\Vector\Vector4.cpp" />

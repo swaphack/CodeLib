@@ -49,10 +49,11 @@ bool CtrlMedia::init()
 		}
 	});
 
-	_notify->addListen(NodeNotifyType::SPACE, [&](){
+	_notify->addListen(NodeNotifyType::BODY, [&](){
 		if (_ctrlFrame)
 		{
 			_ctrlFrame->setVolume(this->getWidth(), this->getHeight());
+
 			_ctrlFrame->setAnchorPoint(this->getAnchorPoint());
 		}
 	});

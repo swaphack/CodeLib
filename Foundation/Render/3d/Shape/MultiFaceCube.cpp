@@ -23,8 +23,8 @@ bool MultiFaceCube::init()
 		return false;
 	}
 
-	_notify->addListen(NodeNotifyType::SPACE, [this](){
-		onCubeChanged();
+	_notify->addListen(NodeNotifyType::BODY, [this](){
+		onMultiFaceCubeBodyChanged();
 
 		this->updateBufferData();
 	});
@@ -100,7 +100,7 @@ void render::MultiFaceCube::initBufferObject()
 	}
 }
 
-void render::MultiFaceCube::onCubeChanged()
+void render::MultiFaceCube::onMultiFaceCubeBodyChanged()
 {
 	VertexTool::setTexture3DVertices(&_cubePosition, math::Vector3(), _volume, _anchor);
 

@@ -38,6 +38,9 @@ bool CtrlAudioGeometry::init()
 		_geometryBody.position = this->getPosition();
 		_geometryBody.scale = this->getScale();
 		onGeometryChange();
+	});
+
+	_notify->addListen(NodeNotifyType::BODY, [this]() {
 		onPolygonsChange();
 	});
 

@@ -7,19 +7,16 @@
 using namespace math;
 
 Quaternion::Quaternion()
-	:Vector(4)
 {
 
 }
 
 Quaternion::Quaternion(const Quaternion& quaternion)
-	: Vector(4)
 {
 	*this = quaternion;
 }
 
 Quaternion::Quaternion(float w, float x, float y, float z)
-	: Vector(4)
 {
 	this->setX(x);
 	this->setY(y);
@@ -28,7 +25,6 @@ Quaternion::Quaternion(float w, float x, float y, float z)
 }
 
 Quaternion::Quaternion(float w, const Vector3& vector)
-	: Vector(4)
 {
 	this->setX(vector.getX());
 	this->setY(vector.getY());

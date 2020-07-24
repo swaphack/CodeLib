@@ -6,13 +6,11 @@ using namespace math;
 
 
 Polar3::Polar3()
-	:Vector(3)
 {
 
 }
 
 Polar3::Polar3(float r, float radianX, float radianZ)
-	: Polar3()
 {
 	this->setRadius(r);
 	this->setRadianX(radianX);
@@ -20,7 +18,6 @@ Polar3::Polar3(float r, float radianX, float radianZ)
 }
 
 Polar3::Polar3(const Vector3& vector)
-	: Polar3()
 {
 	float r = vector.getMagnitude();
 	float randianX = atan2(vector.getY(), vector.getX());
@@ -30,7 +27,6 @@ Polar3::Polar3(const Vector3& vector)
 }
 
 Polar3::Polar3(const Polar3& polar)
-	: Polar3()
 {
 	this->setRadius(polar.getRadius());
 	this->setRadianX(polar.getRadianX());

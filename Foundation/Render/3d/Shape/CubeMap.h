@@ -28,7 +28,7 @@ namespace render
 		void setBackTexture(const std::string& filepath);
 	protected:
 		void onImageChanged();
-		virtual void onCubeChanged();
+		virtual void onCubeMapBodyChanged();
 	protected:
 		// зјБъ
 		CubeVertex _cubePosition;

@@ -34,7 +34,7 @@ void render::SkyBox::afterDrawNode()
 	Model::afterDrawNode();
 }
 
-void render::SkyBox::onCubeChanged()
+void render::SkyBox::onCubeMapBodyChanged()
 {
 	VertexTool::setTexture3DVertices(&_cubePosition, math::Vector3(), _volume, _anchor);
 

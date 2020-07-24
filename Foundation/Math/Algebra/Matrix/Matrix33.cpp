@@ -4,13 +4,11 @@ using namespace math;
 
 
 Matrix33::Matrix33() 
-:Matrix(3, 3)
 {
 	this->loadIdentity();
 }
 
 Matrix33::Matrix33(const Vector3& row0, const Vector3& row1, const Vector3& row2)
-	: Matrix33()
 {
 	this->setRow(0, row0);
 	this->setRow(1, row1);
@@ -18,7 +16,6 @@ Matrix33::Matrix33(const Vector3& row0, const Vector3& row1, const Vector3& row2
 }
 
 math::Matrix33::Matrix33(const Matrix44& mat)
-	: Matrix33()
 {
 	for (int i = 0; i < this->getHeight(); i++)
 	{
@@ -27,6 +24,24 @@ math::Matrix33::Matrix33(const Matrix44& mat)
 			this->setValue(i, j, mat.getValue(i, j));
 		}
 	}
+}
+
+math::Matrix33::Matrix33(const Matrix33& mat)
+{
+	this->set(mat.getValue());
+}
+
+math::Matrix33& math::Matrix33::operator=(const Matrix33& mat)
+{
+	this->set(mat.getValue());
+
+	return *this;
+
+}
+
+math::Matrix33::Matrix33(const float* value)
+{
+	this->set(value);
 }
 
 Matrix33::~Matrix33()

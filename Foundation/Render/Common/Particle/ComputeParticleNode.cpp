@@ -50,7 +50,7 @@ bool render::ComputeParticleNode::init()
 
 	_notify->addListen(NodeNotifyType::SPACE, [this]() 
 	{
-			this->updateParticleParameter();
+		this->updateParticleParameter();
 	});
 
 	_positionTBO->setTextureBuffer(_positionBuffer);

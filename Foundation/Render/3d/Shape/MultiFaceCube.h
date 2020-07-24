@@ -34,7 +34,7 @@ namespace render
 	protected:
 		virtual void initBufferObject();
 
-		void onCubeChanged();
+		void onMultiFaceCubeBodyChanged();
 	private:
 		// зјБъ
 		CubeVertex _cubePosition;

@@ -25,7 +25,7 @@ bool render::CtrlWidget::init()
 		return false;
 	}
 	// 添加属性改变监听
-	_notify->addListen(NodeNotifyType::SPACE, [this](){
+	_notify->addListen(NodeNotifyType::BODY, [this](){
 		calRectData();
 	});
 

@@ -9,11 +9,13 @@ namespace math
 	/**
 	*	Èý½×·½Õó
 	*/
-	struct Matrix33 : public Matrix
+	struct Matrix33 : public Matrix<float, 3, 3>
 	{
 	public:
 		Matrix33();
+		Matrix33(const float* value);
 		Matrix33(const Vector3& row0, const Vector3& row1, const Vector3& row2);
+		Matrix33(const Matrix33& mat);
 		Matrix33(const Matrix44& mat);
 		virtual ~Matrix33();
 	public:
@@ -36,6 +38,7 @@ namespace math
 		*/
 		void setRotate(float rotation);
 	public:
-		virtual Matrix33& operator=(const Matrix44& mat);
+		Matrix33& operator=(const Matrix44& mat);
+		Matrix33& operator=(const Matrix33& mat);
 	};
 }

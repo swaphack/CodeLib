@@ -3,21 +3,20 @@
 using namespace math;
 
 Size::Size()
-	:Vector(2)
 {
 
 }
 
 Size::Size(float w, float h)
-	: Size()
 {
 	this->setWidth(w);
 	this->setHeight(h);
 }
 
 Size::Size(const Size& size)
-	:Size(size.getWidth(), size.getHeight())
 {
+	this->setWidth(size.getWidth());
+	this->setHeight(size.getHeight());
 }
 
 void Size::set(float w, float h)

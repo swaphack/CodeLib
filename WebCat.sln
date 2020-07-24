@@ -8,6 +8,9 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sample", "Sample", "{EAFB8210-3AA6-4227-BD36-3C49E9B3706E}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Render", "Foundation\Render\Render.vcxproj", "{340633A3-0EC6-4B8A-A2CE-6F701A18666C}"
+	ProjectSection(ProjectDependencies) = postProject
+		{D1634C1B-6654-4995-A862-67D58DEDFC72} = {D1634C1B-6654-4995-A862-67D58DEDFC72}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "System", "Foundation\System\System.vcxproj", "{BEAC5C99-0F40-47AE-8093-1B5F8C5FF6BA}"
 EndProject

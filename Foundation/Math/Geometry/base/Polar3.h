@@ -8,7 +8,7 @@ namespace math
 	*	极坐标
 	*	三维球面坐标
 	*/
-	struct Polar3 : Vector
+	struct Polar3 : public Vector<float, 3>
 	{
 	public:
 		Polar3();

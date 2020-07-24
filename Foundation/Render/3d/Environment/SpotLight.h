@@ -12,7 +12,12 @@ namespace render
 		virtual ~SpotLight();
 	public:
 		virtual void draw();
+
+		virtual bool init();
 	public:
+		// 朝向
+		const float* getDirection();
+
 		// 聚光强度
 		void setExponent(float value);
 		float getExponent();

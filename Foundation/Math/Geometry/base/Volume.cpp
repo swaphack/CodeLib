@@ -3,13 +3,11 @@
 using namespace math;
 
 Volume::Volume()
-	:Vector(3)
 {
 
 }
 
 Volume::Volume(float w, float h, float d)
-	: Volume()
 {
 	this->setWidth(w);
 	this->setHeight(h);
@@ -22,7 +20,7 @@ Volume::Volume(const Volume& volumn)
 }
 
 Volume::Volume(float w, float h)
-	: Volume(w,h, 0)
+	: Volume(w, h, 0)
 {
 }
 

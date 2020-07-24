@@ -7,7 +7,7 @@
 namespace math
 {
 	// 用于向量转换的矩阵
-	struct Matrix14 : public Matrix
+	struct Matrix14 : public Matrix<float, 1, 4>
 	{
 	public:
 		Matrix14();

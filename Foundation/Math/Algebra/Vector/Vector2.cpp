@@ -9,31 +9,25 @@
 using namespace math;
 
 Vector2::Vector2() 
-	:Vector(2)
 {
 
 }
 
 Vector2::Vector2(float x, float y) 
-	: Vector2()
 {
 	this->setX(x);
 	this->setY(y);
 }
 
 Vector2::Vector2(const Vector2& point)
-	: Vector2()
 {
 	this->setX(point.getX());
 	this->setY(point.getY());
 
 }
 
-Vector2::Vector2(const Vector& vector)
-	: Vector2()
+Vector2::Vector2(const Vector<float, 2>& vector)
 {
-	assert(vector.getSize() == vector.getSize());
-
 	this->setX(vector[0]);
 	this->setY(vector[1]);
 }
@@ -161,11 +155,11 @@ float Vector2::sinAngle(const Vector2& vector0, const Vector2& vector1)
 
 	assert(a != 0 && b != 0);
 
-	Determinant det(2);
+	Determinant2 det;
 	det.setRow(0, vector0);
 	det.setRow(1, vector1);
 
-	return det.getMagnitude() / (a * b);
+	return getDeterminantMagnitude(det) / (a * b);
 }
 
 float Vector2::project(const Vector2& vector0, const Vector2& vector1)
@@ -221,11 +215,11 @@ bool Vector2::isThreePointsOnSameLine(const Vector2& point0, const Vector2& poin
 	Vector2 v0 = point2 - point0;
 	Vector2 v1 = point2 - point1;
 
-	Determinant det(2);
+	Determinant2 det;
 	det.setRow(0, v0);
 	det.setRow(1, v1);
 
-	return det.getMagnitude() == 0;
+	return getDeterminantMagnitude(det) == 0;
 }
 
 math::Vector2::~Vector2()

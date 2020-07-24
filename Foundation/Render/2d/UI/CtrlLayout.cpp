@@ -24,7 +24,7 @@ bool render::CtrlLayout::init()
 		return false;
 	}
 
-	_notify->addListen(NodeNotifyType::SPACE, [this](){
+	_notify->addListen(NodeNotifyType::BODY, [this](){
 		_backgroundImage->setVolume(this->getVolume());
 		_backgroundMask->setVolume(this->getVolume());
 	});

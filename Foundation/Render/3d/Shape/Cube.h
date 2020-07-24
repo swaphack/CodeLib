@@ -17,7 +17,7 @@ namespace render
 	public:
 		virtual bool init();
 	protected:
-		void onSpaceChanged();
+		void onCubeBodyChanged();
 	private:
 		// зјБъ
 		CubeVertex _cubePosition;

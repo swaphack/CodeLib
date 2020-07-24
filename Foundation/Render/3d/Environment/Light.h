@@ -30,9 +30,6 @@ namespace render
 		void setAmbient(uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha);
 		const float* getAmbient();
 
-		// 朝向
-		const float* getDirection();
-
 		/*下方两个在shader无用*/
 		// 漫射光
 		void setDiffuse(uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha);
@@ -50,8 +47,6 @@ namespace render
 		float _lightDiffuse[4];
 		// 反射光
 		float _lightSpecular[4];
-		// 朝向
-		float _lightDirection[3];
 	};
 
 #define CTREATE_LIGHT(index) \

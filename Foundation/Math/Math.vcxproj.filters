@@ -628,12 +628,6 @@
     <ClCompile Include="Algebra\Matrix\Matrixi.cpp">
       <Filter>Algebra\Matrix</Filter>
     </ClCompile>
-    <ClCompile Include="Algebra\Determinant\Determinant.cpp">
-      <Filter>Algebra\Determinant</Filter>
-    </ClCompile>
-    <ClCompile Include="Algebra\Vector\Vector.cpp">
-      <Filter>Algebra\Vector</Filter>
-    </ClCompile>
     <ClCompile Include="Algebra\Polynomial\Polynomial.cpp">
       <Filter>Algebra\Polynomial</Filter>
     </ClCompile>

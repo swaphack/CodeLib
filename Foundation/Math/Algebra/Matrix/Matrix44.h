@@ -26,12 +26,13 @@ namespace math
 	*	Ðý×ªy 00 02 08 10
 	*	Ðý×ªz 00 01 04 05
 	*/
-	struct Matrix44 : public Matrix
+	struct Matrix44 : public Matrix<float, 4,4>
 	{
 	public:
 		Matrix44();
-		Matrix44(const Matrix& mat);
+		Matrix44(const Matrix<float, 4, 4>& mat);
 		Matrix44(const Matrix44& mat);
+		Matrix44(const Matrix41& mat);
 		Matrix44(const Matrix33& mat);
 		Matrix44(const float* value);
 		virtual ~Matrix44();
@@ -100,7 +101,8 @@ namespace math
 		virtual Matrix41 operator*(const Matrix41& mat);
 		virtual Matrix44 operator*(const Matrix44& mat);
 		virtual Matrix44& operator=(const Matrix44& mat);
-		virtual Matrix44& operator=(const Matrix& mat);
+		virtual Matrix44& operator=(const Matrix41& mat);
+		virtual Matrix44& operator=(const Matrix<float, 4, 4>& mat);
 		virtual Matrix44& operator=(const Matrix33& mat);
 	public:
 		//--------------------------------------------------------------------------------

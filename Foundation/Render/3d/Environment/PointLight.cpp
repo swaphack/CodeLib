@@ -6,6 +6,8 @@ render::PointLight::PointLight()
 	_constantAttenuation = 1.0f;
 	_linearAttenuation = 0.0f;
 	_quadraticAttenuation = 0.0f;
+
+	
 }
 
 render::PointLight::~PointLight()
