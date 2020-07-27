@@ -4,6 +4,7 @@
 
 #include "Basic/Array2D.h"
 #include "Algebra/Determinant/Determinant.h"
+#include <map>
 
 namespace math
 {
@@ -66,21 +67,25 @@ namespace math
 		*/
 		Matrix operator*(const Matrix& mat)
 		{
+			assert(Width == mat.getHeight());
+
+			std::map<int, Array<T, Width>> mapRow;
+			std::map<int, Array<T, Height>> mapColumn;
+
+			for (int i = 0; i < Height; i++)
+			{
+				mapRow[i] = this->getRow(i);
+				mapColumn[i] = mat.getColumn(i);
+			}
+
 			Matrix result;
 
-			float val = 0;
-			for (int32_t bh = 0; bh < Height; bh++)
+			for (int i = 0 ; i < Height; i++)
 			{
-				for (int32_t mw = 0; mw < Height; mw++)
+				for (int j = 0; j < mat.getWidth(); j++)
 				{
-					val = 0;
-					for (int32_t mh = 0; mh < Width; mh++)
-					{
-						float a = base::getValue(bh, mh);
-						float b = mat.getValue(mh, mw);
-						val += a * b;
-					}
-					result.setValue(bh, mw, val);
+					float value = mapRow[i] * mapColumn[j];
+					result.setValue(i, j, value);
 				}
 			}
 

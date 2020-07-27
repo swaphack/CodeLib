@@ -72,6 +72,8 @@ vec4 get_mat_color_with_multi_lights(vec4 color, Material material, vec4 positio
 	vec4 scatteredLight = vec4(0.0);
 	vec4 reflectedLight = vec4(0.0);
 
+	if (lightCount > MAX_LIGHT_COUNT) lightCount = MAX_LIGHT_COUNT;
+
 	for	(int i = 0; i < lightCount; i++)
 	{
 		if (!lights[i].isEnabled) continue;

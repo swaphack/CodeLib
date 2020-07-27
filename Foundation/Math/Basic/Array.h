@@ -132,6 +132,19 @@ namespace math
 
 			return *this;
 		}
+		/**
+		*	ПаіЛ
+		*/
+		float operator*(const Array& vec)
+		{
+			float value = 0;
+			for (int i = 0; i < Length; i++)
+			{
+				value += this->getValue(i) * vec.getValue(i);
+			}
+
+			return value;
+		}
 
 		std::string toString() const
 		{

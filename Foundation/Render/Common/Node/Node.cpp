@@ -353,7 +353,7 @@ void Node::calRealSpaceByMatrix()
 {
 	//_localMatrix = math::Matrix44::getRST(_obRotation, getScale(), _obPosition);
 
-	_localMatrix = math::Matrix44::getRST(_obRotation, getScale(), _position);
+	math::Matrix44::getRST(_obRotation, getScale(), _position, _localMatrix);
 
 	_localInverseMatrix = _localMatrix.getInverse();
 

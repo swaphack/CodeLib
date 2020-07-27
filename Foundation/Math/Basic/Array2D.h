@@ -108,6 +108,7 @@ namespace math
 		*/
 		const T& getValue(int i, int j) const
 		{
+			//printf("Width %d, Height %d, j : %d, i :%d\n", Width, Height, j, i);
 			assert(i >= 0 && j >= 0 && i < Height && j < Width);
 
 			return _values[i][j];
@@ -161,7 +162,7 @@ namespace math
 		/**
 		*	获取指定行的值
 		*/
-		Array<T, Width> getRow(int row)
+		Array<T, Width> getRow(int row) const
 		{
 			assert(row >= 0 && row < Height);
 
@@ -171,6 +172,8 @@ namespace math
 			{
 				vector.setValue(i, getValue(row, i));
 			}
+
+			return vector;
 		}
 		/**
 		*	设置指定列的值
@@ -202,7 +205,7 @@ namespace math
 		/**
 		*	获取指定列的值
 		*/
-		Array<T, Height> getColumn(int column)
+		Array<T, Height> getColumn(int column) const
 		{
 			assert(column >= 0 && column < Width);
 
@@ -212,6 +215,8 @@ namespace math
 			{
 				vector.setValue(i, getValue(i, column));
 			}
+
+			return vector;
 		}
 	public:
 		/**

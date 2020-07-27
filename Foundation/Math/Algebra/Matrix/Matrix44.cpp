@@ -14,10 +14,7 @@ Matrix44::Matrix44()
 
 Matrix44::Matrix44(const Matrix44& mat)
 {
-	for (size_t i = 0; i < getLength(); i++)
-	{
-		setValue(i, mat.getValue(i));
-	}
+	*this = mat;
 }
 
 Matrix44::Matrix44(const Matrix33& mat)
@@ -202,15 +199,15 @@ Matrix44 Matrix44::operator*(const Matrix44& mat)
 
 Vector3 Matrix44::getEularAngle() const
 {
-	float r11 = getValue((size_t)0, (size_t)0);
-	float r12 = getValue((size_t)0, (size_t)1);
-	float r13 = getValue((size_t)0, (size_t)2);
-	float r21 = getValue((size_t)1, (size_t)0);
-	float r22 = getValue((size_t)1, (size_t)1);
-	float r23 = getValue((size_t)1, (size_t)2);
-	float r31 = getValue((size_t)2, (size_t)0);
-	float r33 = getValue((size_t)2, (size_t)2);
-	float r34 = getValue((size_t)2, (size_t)3);
+	float r11 = getValue(0, 0);
+	float r12 = getValue(0, 1);
+	float r13 = getValue(0, 2);
+	float r21 = getValue(1, 0);
+	float r22 = getValue(1, 1);
+	float r23 = getValue(1, 2);
+	float r31 = getValue(2, 0);
+	float r33 = getValue(2, 2);
+	float r34 = getValue(2, 3);
 
 	float x = 0;
 	float y = 0;
@@ -259,9 +256,12 @@ math::Matrix44::~Matrix44()
 
 math::Matrix44& math::Matrix44::operator=(const Matrix44& mat)
 {
-	for (size_t i = 0; i < getLength(); i++)
+	for (int i = 0; i < getHeight(); i++)
 	{
-		setValue(i, mat.getValue(i));
+		for (int j = 0; j < getWidth(); j++)
+		{
+			this->setValue(i, j, mat.getValue(i, j));
+		}
 	}
 
 	return *this;
@@ -314,12 +314,15 @@ math::Matrix44 math::Matrix44::ortho(float left, float right, float bottom, floa
 	math::Matrix44 mat;
 
 	mat[0] = 2 / (right - left);
-	mat[5] = 2 / (top - bottom);
-	mat[10] = -2 / (zfar - znear);
-	
 	mat[12] = -(right + left) / (right - left);
+
+	mat[5] = 2 / (top - bottom);
 	mat[13] = -(top + bottom) / (top - bottom);
-	mat[14] = (zfar + znear) / (zfar - znear);
+
+	mat[10] = -2 / (zfar - znear);
+	mat[14] = -(zfar + znear) / (zfar - znear);
+
+	mat[15] = 1;
 
 	return mat;
 }
@@ -329,27 +332,34 @@ math::Matrix44 math::Matrix44::frustum(float left, float right, float bottom, fl
 {
 	math::Matrix44 mat;
 
-	float temp, temp2, temp3, temp4;
+	float temp, temp1, temp2, temp3, temp4, temp5, temp6;
 	temp = 2.0f * znear;
+	temp1 = left + right;
 	temp2 = right - left;
-	temp3 = top - bottom;
-	temp4 = zfar - znear;
+	temp3 = top + bottom;
+	temp4 = top - bottom;
+	temp5 = zfar + znear;
+	temp6 = zfar - znear;
+
 	mat[0] = temp / temp2;
-	mat[1] = 0.0;
-	mat[2] = 0.0;
-	mat[3] = 0.0;
-	mat[4] = 0.0;
-	mat[5] = temp / temp3;
-	mat[6] = 0.0;
-	mat[7] = 0.0;
-	mat[8] = (right + left) / temp2;
-	mat[9] = (top + bottom) / temp3;
-	mat[10] = (-zfar - znear) / temp4;
-	mat[11] = -1.0;
-	mat[12] = 0.0;
-	mat[13] = 0.0;
-	mat[14] = (-2.0f * zfar) / temp4;
-	mat[15] = 0.0;
+	mat[1] = 0.0f;
+	mat[2] = 0.0f;
+	mat[3] = 0.0f;
+
+	mat[4] = 0.0f;
+	mat[5] = temp / temp4;
+	mat[6] = 0.0f;
+	mat[7] = 0.0f;
+
+	mat[8] = temp1 / temp2;
+	mat[9] = temp3 / temp4;
+	mat[10] = -temp5 / temp6;
+	mat[11] = -1.0f;
+
+	mat[12] = 0.0f;
+	mat[13] = 0.0f;
+	mat[14] = -2.0f * zfar * znear / temp6;
+	mat[15] = 0.0f;
 
 	return mat;
 }
@@ -389,7 +399,7 @@ math::Matrix44 math::Matrix44::lookAt(const Vector3& eye, const Vector3& center,
 	return Result;
 }
 
-math::Matrix44 math::Matrix44::getRST(const Vector3& rotate, const Vector3& scale, const Vector3& translate)
+void math::Matrix44::getRST(const Vector3& rotate, const Vector3& scale, const Vector3& translate, Matrix44& outValue)
 {
 	math::Matrix44 matScale;
 	matScale.setScale(scale);
@@ -398,7 +408,7 @@ math::Matrix44 math::Matrix44::getRST(const Vector3& rotate, const Vector3& scal
 	math::Matrix44 matTranslate;
 	matTranslate.setTranslate(translate);
 
-	return matRotate * matScale * matTranslate;
+	outValue = matRotate * matScale * matTranslate;
 }
 
 math::Matrix44 math::Matrix44::getTSR(const Vector3& translate, const Vector3& scale, const Vector3& rotate)

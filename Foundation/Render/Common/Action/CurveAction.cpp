@@ -84,7 +84,8 @@ math::Vector3 render::CircleAction::getPosition(float percent)
 
 	math::Vector3 pos(x, y);
 
-	math::Matrix44 transpose = math::Matrix44::getRST(_eularRadian, math::Vector3(1,1,1), pos);
+	math::Matrix44 transpose;
+	math::Matrix44::getRST(_eularRadian, math::Vector3(1, 1, 1), pos, transpose);
 
 	math::Matrix44 center;
 	center.setTranslate(_centerPoint);
@@ -121,8 +122,9 @@ math::Vector3 render::EllipseAction::getPosition(float percent)
 	float y = _radiusY * sinf(angle);
 
 	math::Vector3 pos(x, y);
+	math::Matrix44 transpose;
 
-	math::Matrix44 transpose = math::Matrix44::getRST(_eularRadian, math::Vector3(1, 1, 1), pos);
+	math::Matrix44::getRST(_eularRadian, math::Vector3(1, 1, 1), pos, transpose);
 
 	math::Matrix44 center;
 	center.setTranslate(_centerPoint);

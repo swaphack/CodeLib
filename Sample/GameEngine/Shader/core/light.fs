@@ -90,6 +90,8 @@ vec4 get_multi_lights_Color(vec4 color, vec4 position, vec3 normal, vec3 viewDir
 	vec4 scatteredLight = vec4(0.0);
 	vec4 reflectedLight = vec4(0.0);
 
+	if (lightCount > MAX_LIGHT_COUNT) lightCount = MAX_LIGHT_COUNT;
+
 	for	(int i = 0; i < lightCount; i++)
 	{
 		if (!lights[i].isEnabled) continue;

@@ -89,21 +89,25 @@ namespace math
 		*	行
 		*/
 		Vector4 getRow(int column) const;
-
+		/**
+		*	行
+		*/
 		void setRow(int column, const Vector4& value);
 		/**
 		*	列
 		*/
 		Vector4 getColumn(int column) const;
-
+		/**
+		*	列
+		*/
 		void setColumn(int column, const Vector4& value);
 	public:
-		virtual Matrix41 operator*(const Matrix41& mat);
-		virtual Matrix44 operator*(const Matrix44& mat);
-		virtual Matrix44& operator=(const Matrix44& mat);
-		virtual Matrix44& operator=(const Matrix41& mat);
-		virtual Matrix44& operator=(const Matrix<float, 4, 4>& mat);
-		virtual Matrix44& operator=(const Matrix33& mat);
+		Matrix41 operator*(const Matrix41& mat);
+		Matrix44 operator*(const Matrix44& mat);
+		Matrix44& operator=(const Matrix44& mat);
+		Matrix44& operator=(const Matrix41& mat);
+		Matrix44& operator=(const Matrix<float, 4, 4>& mat);
+		Matrix44& operator=(const Matrix33& mat);
 	public:
 		//--------------------------------------------------------------------------------
 		// set a ortho (right hand)
@@ -122,7 +126,7 @@ namespace math
 
 		static Matrix44 lookAt(const Vector3& eye, const Vector3& center, const Vector3& up);
 		// rst
-		static Matrix44 getRST(const Vector3& rotate, const Vector3& scale, const Vector3& translate);
+		static void getRST(const Vector3& rotate, const Vector3& scale, const Vector3& translate, Matrix44& outValue);
 		// tsr
 		static Matrix44 getTSR(const Vector3& translate, const Vector3& scale, const Vector3& rotate);
 		// 坐标计算

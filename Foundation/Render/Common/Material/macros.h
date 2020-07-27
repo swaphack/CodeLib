@@ -32,7 +32,7 @@ namespace render
 		// 视图矩阵
 		VIEW_MATRIX,
 		// 模型矩阵
-		MODEL_VIEW,
+		MODEL_MATRIX,
 		// 法线矩阵
 		NORMAL_MATRIX,
 		// m v p

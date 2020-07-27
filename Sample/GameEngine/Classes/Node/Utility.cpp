@@ -78,7 +78,10 @@ void Utility::initShaderAttrib(render::Material* mat)
 	}
 	mat->addUniform(UniformType::PROJECT_MATRIX, "matrix.project");
 	mat->addUniform(UniformType::VIEW_MATRIX, "matrix.view");
-	mat->addUniform(UniformType::MODEL_VIEW, "matrix.model");
+	mat->addUniform(UniformType::MODEL_MATRIX, "matrix.model");
+	mat->addUniform(UniformType::NORMAL_MATRIX, "matrix.normal");
+	mat->addUniform(UniformType::MVP_MATRIX, "matrix.mvp");
+	mat->addUniform(UniformType::MV_MATRIX, "matrix.mv");
 	
 
 	mat->addUniform(UniformType::LIGHT_ENABLED, "light.isEnabled");
@@ -94,7 +97,7 @@ void Utility::initShaderAttrib(render::Material* mat)
 	mat->addUniform(UniformType::LIGHT_CONSTANT_ATTENUATION, "light.constantAttenuation");
 	mat->addUniform(UniformType::LIGHT_LINEAR_ATTENUATION, "light.linearAttenuation");
 	mat->addUniform(UniformType::LIGHT_QUADRATIC_ATTENUATION, "light.quadraticAttenuation");
-
+	/*
 	mat->addUniform(UniformType::MULTI_LIGHT_ENABLED, "light[%d].isEnabled");
 	mat->addUniform(UniformType::MULTI_LIGHT_LOCAL, "light[%d].isLocal");
 	mat->addUniform(UniformType::MULTI_LIGHT_SPOT, "light[%d].isSpot");
@@ -108,7 +111,7 @@ void Utility::initShaderAttrib(render::Material* mat)
 	mat->addUniform(UniformType::MULTI_LIGHT_CONSTANT_ATTENUATION, "light[%d].constantAttenuation");
 	mat->addUniform(UniformType::MULTI_LIGHT_LINEAR_ATTENUATION, "light[%d].linearAttenuation");
 	mat->addUniform(UniformType::MULTI_LIGHT_QUADRATIC_ATTENUATION, "light[%d].quadraticAttenuation");
-	
+	*/
 	mat->addUniform(UniformType::MATERIAL_COLOR_AMBIENT, "material.ambient");
 	mat->addUniform(UniformType::MATERIAL_COLOR_DIFFUSE, "material.diffuse");
 	mat->addUniform(UniformType::MATERIAL_COLOR_SPECULAR, "material.specular");

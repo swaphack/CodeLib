@@ -102,6 +102,11 @@ void TestEnvironmentNode::testCamera()
 		auto size = Tool::getGLViewSize();
 		pCamera->setPosition(-size.getWidth() * 0.5f, -size.getHeight() * 0.5f);
 	}
+	else
+	{
+		auto size = Tool::getGLViewSize();
+		pCamera->setPositionZ(-size.getWidth() * 0.25f);
+	}
 
 	G_KEYBOARDMANAGER->addKeyboardFunc(this, pCamera, [&](Node* object, sys::BoardKey key, sys::ButtonStatus type) {
 		auto camera = object->as<Camera>();

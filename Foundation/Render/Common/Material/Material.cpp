@@ -333,7 +333,7 @@ void render::Material::updateMVPMatrixUniformValue(Node* node)
 
 	math::Matrix33 normalMat = modelMat.getInverse().getTranspose();
 	math::Matrix44 mvpMat = projMat * viewMat * modelMat;
-	math::Matrix44 mvMat = viewMat * projMat;
+	math::Matrix44 mvMat = viewMat * modelMat;
 
 	for (auto item : _vertexUniformIndices)
 	{
@@ -354,7 +354,7 @@ void render::Material::updateMVPMatrixUniformValue(Node* node)
 		{
 			pUniform->setMatrix4(viewMat);
 		}
-		else if (item.first == UniformType::MODEL_VIEW)
+		else if (item.first == UniformType::MODEL_MATRIX)
 		{
 			pUniform->setMatrix4(modelMat);
 		}
@@ -406,8 +406,10 @@ void render::Material::updateNearestLightUniformValue(Node* node)
 		return;
 	}
 	const math::Matrix44& viewMat = Camera::getMainCamera()->getViewMatrix();
-	math::Vector3 lightDirection = viewMat.getPosition() - node->getWorldMatrix().getPosition();
-	math::Vector3 viewDirection = pLight->getWorldMatrix().getPosition() - node->getWorldMatrix().getPosition();
+
+	math::Vector3 nodePos = node->getWorldMatrix().getPosition();
+	math::Vector3 viewDirection = viewMat.getPosition() - nodePos;
+	math::Vector3 lightDirection = pLight->getWorldMatrix().getPosition() - nodePos;
 	math::Vector3 halfVector = lightDirection + viewDirection;
 	halfVector.normalize();
 
@@ -531,8 +533,9 @@ void render::Material::updateAllLightsUniformValue(Node* node)
 		auto pLight = light.second;
 		int index = light.first;
 
-		math::Vector3 lightDirection = viewMat.getPosition() - node->getWorldMatrix().getPosition();
-		math::Vector3 viewDirection = pLight->getWorldMatrix().getPosition() - node->getWorldMatrix().getPosition();
+		math::Vector3 nodePos = node->getWorldMatrix().getPosition();
+		math::Vector3 viewDirection = viewMat.getPosition() - nodePos;
+		math::Vector3 lightDirection = pLight->getWorldMatrix().getPosition() - nodePos;
 		math::Vector3 halfVector = lightDirection + viewDirection;
 
 		for (auto item : _vertexUniformIndices)
