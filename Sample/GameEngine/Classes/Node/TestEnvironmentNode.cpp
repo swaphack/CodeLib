@@ -39,8 +39,8 @@ void TestEnvironmentNode::init3DSkyBox()
 		auto pUniform = program->getUniform("matrix.view");
 		if (pUniform)
 		{
-			math::Matrix44 viewMat = Camera::getMainCamera()->getViewMatrix();
-			math::Matrix44 mat = math::Matrix33(viewMat);
+			math::Matrix4x4 viewMat = Camera::getMainCamera()->getViewMatrix();
+			math::Matrix4x4 mat = math::Matrix3x3(viewMat);
 			pUniform->setMatrix4(mat);
 		}
 	});
@@ -78,8 +78,8 @@ void TestEnvironmentNode::init2DSkyBox()
 		auto pUniform = program->getUniform("matrix.view");
 		if (pUniform)
 		{
-			math::Matrix44 viewMat = Camera::getMainCamera()->getViewMatrix();
-			math::Matrix44 Mat = math::Matrix33(viewMat);
+			math::Matrix4x4 viewMat = Camera::getMainCamera()->getViewMatrix();
+			math::Matrix4x4 Mat = math::Matrix3x3(viewMat);
 			pUniform->setMatrix4(Mat);
 		}
 	});
@@ -96,15 +96,17 @@ void TestEnvironmentNode::init2DSkyBox()
 void TestEnvironmentNode::testCamera()
 {
 	Camera* pCamera = Camera::getMainCamera();
-	
+
+	auto size = Tool::getGLViewSize();
 	if (pCamera->getDimensions() == CameraDimensions::THREE)
 	{
 		auto size = Tool::getGLViewSize();
-		pCamera->setPosition(-size.getWidth() * 0.5f, -size.getHeight() * 0.5f);
+		float d = sqrt(powf(size.getWidth(), 2) + powf(size.getHeight(), 2));
+		pCamera->setViewDistance(d - 100, d * 100);
+		pCamera->setPosition(-size.getWidth() * 0.5f, -size.getHeight() * 0.5f, -d);
 	}
 	else
 	{
-		auto size = Tool::getGLViewSize();
 		pCamera->setPositionZ(-size.getWidth() * 0.25f);
 	}
 

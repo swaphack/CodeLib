@@ -77,12 +77,12 @@ const MeshMemoryData& MeshDetail::getIndices() const
 	return _indices;
 }
 
-const math::Matrix44& MeshDetail::getMatrix() const
+const math::Matrix4x4& MeshDetail::getMatrix() const
 {
 	return _matrix;
 }
 
-void MeshDetail::setMatrix(const math::Matrix44& mat)
+void MeshDetail::setMatrix(const math::Matrix4x4& mat)
 {
 	_matrix = mat;
 }

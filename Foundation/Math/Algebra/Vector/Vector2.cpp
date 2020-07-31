@@ -3,7 +3,7 @@
 #include <cassert>
 //#include "Size.h"
 #include "Basic/base.h"
-#include "../Matrix/Matrix33.h"
+#include "../Matrix/Matrix3x3.h"
 #include "../Determinant/Determinant.h"
 
 using namespace math;

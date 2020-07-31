@@ -11,7 +11,6 @@ namespace render
 	*	UI控件基类
 	*/
 	class CtrlWidget : public DrawNode,
-		public ColorProtocol,
 		public BlendProtocol
 	{
 	public:
@@ -72,10 +71,6 @@ namespace render
 		void calRectData();
 	protected:
 		/**
-		*	颜色改变
-		*/
-		virtual void onColorChange();
-		/**
 		*	混合改变
 		*/
 		virtual void onBlendChange();
@@ -93,7 +88,7 @@ namespace render
 		// 实际矩形框
 		RectVectices _realRectVertex;
 		// 实际多边形
-		math::Polygon _realPolygon;
+		math::Polygon<4> _realPolygon;
 		// 控件
 		std::vector<CtrlWidget*> _widgets;
 		/**

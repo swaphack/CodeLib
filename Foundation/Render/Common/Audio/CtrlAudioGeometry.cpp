@@ -259,7 +259,7 @@ void CtrlAudioGeometry::onGeometryChange()
 
 void CtrlAudioGeometry::onPolygonsChange()
 {
-	math::Matrix44 mat = this->getWorldMatrix();
+	math::Matrix4x4 mat = this->getWorldMatrix();
 	math::Vector3 position = mat.getPosition();
 	math::Volume volume = this->getVolume();
 	Tool::calCube(position, volume, getAnchorPoint(), _cubeVertex);
@@ -489,7 +489,7 @@ void CtrlAudioGeometryPolygon::onPolygonChange()
 	if (_realVertexes == nullptr)
 	{
 
-		math::Matrix44 mat = this->getWorldMatrix();
+		math::Matrix4x4 mat = this->getWorldMatrix();
 		math::Vector3 position = mat.getPosition();
 
 		_realVertexes = new FMOD_VECTOR[count];
@@ -508,7 +508,7 @@ void CtrlAudioGeometryPolygon::onPolygonChange()
 	}
 	else
 	{
-		math::Matrix44 mat = this->getWorldMatrix();
+		math::Matrix4x4 mat = this->getWorldMatrix();
 		math::Vector3 position = mat.getPosition();
 		for (int i = 0; i < count; i++)
 		{

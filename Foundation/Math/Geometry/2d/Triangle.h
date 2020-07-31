@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Polygon.h"
-#include "Geometry/base/Vector2.h"
+#include "base/Vector2.h"
 
 namespace math
 {

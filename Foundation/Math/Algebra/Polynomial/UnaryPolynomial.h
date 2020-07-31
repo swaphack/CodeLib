@@ -42,7 +42,7 @@ namespace math
 		};
 	public:
 		UnaryPolynomial();
-		UnaryPolynomial(const std::map<int, float>& mapTerm);
+		UnaryPolynomial(const std::map<float, float>& mapTerm);
 		UnaryPolynomial(const UnaryPolynomial& value);
 		virtual~UnaryPolynomial();
 	public:

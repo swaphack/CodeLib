@@ -18,7 +18,7 @@ MultiFaceCube::~MultiFaceCube()
 
 bool MultiFaceCube::init()
 {
-	if (!MultiDrawNode::init())
+	if (!MultiMeshModel::init())
 	{
 		return false;
 	}

@@ -3,11 +3,11 @@
 #include "Matrix.h"
 #include "../Vector/Vector3.h"
 #include "../Vector/Vector4.h"
-#include "Matrix41.h"
+#include "Matrix4x1.h"
 
 namespace math
 {
-	struct Matrix33;
+	struct Matrix3x3;
 	/**
 	*	四阶方阵
 	*	00 01 02 03
@@ -26,16 +26,16 @@ namespace math
 	*	旋转y 00 02 08 10
 	*	旋转z 00 01 04 05
 	*/
-	struct Matrix44 : public Matrix<float, 4,4>
+	struct Matrix4x4 : public Matrix<float, 4,4>
 	{
 	public:
-		Matrix44();
-		Matrix44(const Matrix<float, 4, 4>& mat);
-		Matrix44(const Matrix44& mat);
-		Matrix44(const Matrix41& mat);
-		Matrix44(const Matrix33& mat);
-		Matrix44(const float* value);
-		virtual ~Matrix44();
+		Matrix4x4();
+		Matrix4x4(const Matrix<float, 4, 4>& mat);
+		Matrix4x4(const Matrix4x4& mat);
+		Matrix4x4(const Matrix4x1& mat);
+		Matrix4x4(const Matrix3x3& mat);
+		Matrix4x4(const float* value);
+		virtual ~Matrix4x4();
 	public:
 		/**
 		*	标准化,单位矩阵
@@ -102,34 +102,34 @@ namespace math
 		*/
 		void setColumn(int column, const Vector4& value);
 	public:
-		Matrix41 operator*(const Matrix41& mat);
-		Matrix44 operator*(const Matrix44& mat);
-		Matrix44& operator=(const Matrix44& mat);
-		Matrix44& operator=(const Matrix41& mat);
-		Matrix44& operator=(const Matrix<float, 4, 4>& mat);
-		Matrix44& operator=(const Matrix33& mat);
+		Matrix4x1 operator*(const Matrix4x1& mat);
+		Matrix4x4 operator*(const Matrix4x4& mat);
+		Matrix4x4& operator=(const Matrix4x4& mat);
+		Matrix4x4& operator=(const Matrix4x1& mat);
+		Matrix4x4& operator=(const Matrix<float, 4, 4>& mat);
+		Matrix4x4& operator=(const Matrix3x3& mat);
 	public:
 		//--------------------------------------------------------------------------------
 		// set a ortho (right hand)
 		// (left, right, bottom, top, near, far)
 		//--------------------------------------------------------------------------------
-		static Matrix44 ortho(float left, float right, float bottom, float top,
+		static Matrix4x4 ortho(float left, float right, float bottom, float top,
 			float znear, float zfar);
 		//--------------------------------------------------------------------------------
 		// set a perspective frustum (right hand)
 		// (left, right, bottom, top, near, far)
 		//--------------------------------------------------------------------------------
-		static Matrix44 frustum(float left, float right, float bottom, float top,
+		static Matrix4x4 frustum(float left, float right, float bottom, float top,
 			float znear, float zfar);
 
-		static Matrix44 perspective(float fovyInDegrees, float aspectRatio,	float znear, float zfar);
+		static Matrix4x4 perspective(float fovyInDegrees, float aspectRatio,	float znear, float zfar);
 
-		static Matrix44 lookAt(const Vector3& eye, const Vector3& center, const Vector3& up);
+		static Matrix4x4 lookAt(const Vector3& eye, const Vector3& center, const Vector3& up);
 		// rst
-		static void getRST(const Vector3& rotate, const Vector3& scale, const Vector3& translate, Matrix44& outValue);
+		static void getRST(const Vector3& rotate, const Vector3& scale, const Vector3& translate, Matrix4x4& outValue);
 		// tsr
-		static Matrix44 getTSR(const Vector3& translate, const Vector3& scale, const Vector3& rotate);
+		static Matrix4x4 getTSR(const Vector3& translate, const Vector3& scale, const Vector3& rotate);
 		// 坐标计算
-		static Vector3 transpose(const Vector3& src, const Matrix44& mat);
+		static Vector3 transpose(const Vector3& src, const Matrix4x4& mat);
 	};
 }

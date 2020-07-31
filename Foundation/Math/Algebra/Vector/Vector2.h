@@ -17,8 +17,8 @@ namespace math
 		Vector2(const Vector2& point);
 		virtual ~Vector2();
 	public:
-		CREATE_AXIS(X, 0);
-		CREATE_AXIS(Y, 1);
+		CREATE_INDEX_VALUE(X, 0, float);
+		CREATE_INDEX_VALUE(Y, 1, float);
 
 		void set(float x, float y);
 	public:

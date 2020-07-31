@@ -41,11 +41,11 @@ void testMatrix()
 
 	int a = 1;
 
-	Matrix14 mat14;
-	Matrix22 mat22;
-	Matrix33 mat33;
-	Matrix41 mat41;
-	Matrix44 mat44;
+	Matrix1x4 mat14;
+	Matrix2x2 mat22;
+	Matrix3x3 mat33;
+	Matrix4x1 mat41;
+	Matrix4x4 mat44;
 
 	Vector2 vec2;
 	Vector3 vec3;

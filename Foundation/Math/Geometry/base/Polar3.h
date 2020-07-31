@@ -17,9 +17,9 @@ namespace math
 		Polar3(const Polar3& polar);
 		virtual ~Polar3();
 	public:
-		CREATE_AXIS(Radius, 0);
-		CREATE_AXIS(RadianX, 1);
-		CREATE_AXIS(RadianZ, 2);
+		CREATE_INDEX_VALUE(Radius, 0, float);
+		CREATE_INDEX_VALUE(RadianX, 1, float);
+		CREATE_INDEX_VALUE(RadianZ, 2, float);
 	public:
 		void set(float r, float radianX, float radianZ);
 	public:

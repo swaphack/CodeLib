@@ -327,13 +327,13 @@ void render::Material::updateMVPMatrixUniformValue(Node* node)
 		return;
 	}
 
-	math::Matrix44 projMat = Camera::getMainCamera()->getProjectMatrix();
-	math::Matrix44 viewMat = Camera::getMainCamera()->getViewMatrix();
-	math::Matrix44 modelMat = node->getWorldMatrix();
+	math::Matrix4x4 projMat = Camera::getMainCamera()->getProjectMatrix();
+	math::Matrix4x4 viewMat = Camera::getMainCamera()->getViewMatrix();
+	math::Matrix4x4 modelMat = node->getWorldMatrix();
 
-	math::Matrix33 normalMat = modelMat.getInverse().getTranspose();
-	math::Matrix44 mvpMat = projMat * viewMat * modelMat;
-	math::Matrix44 mvMat = viewMat * modelMat;
+	math::Matrix3x3 normalMat = modelMat.getInverse().getTranspose();
+	math::Matrix4x4 mvpMat = projMat * viewMat * modelMat;
+	math::Matrix4x4 mvMat = viewMat * modelMat;
 
 	for (auto item : _vertexUniformIndices)
 	{
@@ -405,7 +405,7 @@ void render::Material::updateNearestLightUniformValue(Node* node)
 	{
 		return;
 	}
-	const math::Matrix44& viewMat = Camera::getMainCamera()->getViewMatrix();
+	const math::Matrix4x4& viewMat = Camera::getMainCamera()->getViewMatrix();
 
 	math::Vector3 nodePos = node->getWorldMatrix().getPosition();
 	math::Vector3 viewDirection = viewMat.getPosition() - nodePos;
@@ -526,7 +526,7 @@ void render::Material::updateAllLightsUniformValue(Node* node)
 
 	const auto& mapLights = G_ENVIRONMENT->getAllLights();
 
-	const math::Matrix44& viewMat = Camera::getMainCamera()->getViewMatrix();
+	const math::Matrix4x4& viewMat = Camera::getMainCamera()->getViewMatrix();
 
 	for (auto light : mapLights)
 	{

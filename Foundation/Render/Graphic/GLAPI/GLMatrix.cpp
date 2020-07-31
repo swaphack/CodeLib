@@ -27,7 +27,7 @@ void GLMatrix::loadMatrix(const float* value)
 	glLoadMatrixf(value);
 }
 
-void GLMatrix::loadMatrix(const math::Matrix44& value)
+void GLMatrix::loadMatrix(const math::Matrix4x4& value)
 {
 	loadMatrix(value.getValue());
 }
@@ -52,7 +52,7 @@ void GLMatrix::multMatrix(const float* value)
 	glMultMatrixf(value);
 }
 
-void GLMatrix::multMatrix(const math::Matrix44& value)
+void GLMatrix::multMatrix(const math::Matrix4x4& value)
 {
 	multMatrix(value.getValue());
 }

@@ -16,9 +16,9 @@ namespace math
 		Volume(const Volume& volumn);
 		virtual ~Volume();
 	public:
-		CREATE_AXIS(Width, 0);
-		CREATE_AXIS(Height, 1);
-		CREATE_AXIS(Depth, 2);
+		CREATE_INDEX_VALUE(Width, 0, float);
+		CREATE_INDEX_VALUE(Height, 1, float);
+		CREATE_INDEX_VALUE(Depth, 2, float);
 
 		void set(float w, float h, float d);
 		void set(float w, float h);

@@ -36,17 +36,17 @@ bool AABB::contains(const Vector3& point32)
 
 bool AABB::contains(const LineSegment2& line)
 {
-	return contains(line.src) && contains(line.dest);
+	return contains(line.getSrc()) && contains(line.getDest());
 }
 
 bool AABB::contains(const LineSegment& line)
 {
-	return contains(line.src) && contains(line.dest);
+	return contains(line.getSrc()) && contains(line.getDest());
 }
 
 bool AABB::intersects(const LineSegment2& line)
 {
-	if (!contains(line.src) && !contains(line.dest))
+	if (!contains(line.getSrc()) && !contains(line.getDest()))
 	{
 		return false;
 	}
@@ -56,7 +56,7 @@ bool AABB::intersects(const LineSegment2& line)
 
 bool AABB::intersects(const LineSegment& line)
 {
-	if (!contains(line.src) && !contains(line.dest))
+	if (!contains(line.getSrc()) && !contains(line.getDest()))
 	{
 		return false;
 	}

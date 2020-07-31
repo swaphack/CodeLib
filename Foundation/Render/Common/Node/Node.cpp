@@ -351,9 +351,9 @@ void Node::calSpaceData()
 
 void Node::calRealSpaceByMatrix()
 {
-	//_localMatrix = math::Matrix44::getRST(_obRotation, getScale(), _obPosition);
+	//_localMatrix = math::Matrix4x4::getRST(_obRotation, getScale(), _obPosition);
 
-	math::Matrix44::getRST(_obRotation, getScale(), _position, _localMatrix);
+	math::Matrix4x4::getRST(_obRotation, getScale(), _position, _localMatrix);
 
 	_localInverseMatrix = _localMatrix.getInverse();
 
@@ -363,7 +363,7 @@ void Node::calRealSpaceByMatrix()
 	{
 		if (this->isRelativeWithParent())
 		{
-			math::Matrix44 mat = this->getParent()->getWorldMatrix();
+			math::Matrix4x4 mat = this->getParent()->getWorldMatrix();
 			_worldMatrix = _localMatrix * mat;
 		}
 		else
@@ -392,26 +392,26 @@ void Node::onChildrenChange()
 	this->notify(NodeNotifyType::NODE);
 }
 
-const math::Matrix44& Node::getWorldMatrix() const
+const math::Matrix4x4& Node::getWorldMatrix() const
 {
 	return _worldMatrix;
 }
 
-const math::Matrix44& Node::getLocalMatrix() const
+const math::Matrix4x4& Node::getLocalMatrix() const
 {
 	return _localMatrix;
 }
 
 math::Vector3 render::Node::convertWorldPostitionToLocal(const math::Vector3& point)
 {
-	math::Matrix44 mat = _worldMatrix.getInverse();
+	math::Matrix4x4 mat = _worldMatrix.getInverse();
 
-	return math::Matrix44::transpose(point, mat);
+	return math::Matrix4x4::transpose(point, mat);
 }
 
 math::Vector3 render::Node::convertLocalPostitionToWorld(const math::Vector3& point)
 {
-	return math::Matrix44::transpose(point, _worldMatrix);
+	return math::Matrix4x4::transpose(point, _worldMatrix);
 }
 
 void render::Node::updateNode()

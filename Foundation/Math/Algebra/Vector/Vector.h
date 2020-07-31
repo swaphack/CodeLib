@@ -5,13 +5,6 @@
 
 namespace math
 {
-
-	// 创建轴
-#define CREATE_AXIS(Name, Index)\
-	public: \
-	float get##Name() const { return getValue(Index); }\
-	void set##Name(float val) { setValue(Index, val); }
-
 	/**
 	*	向量
 	*/

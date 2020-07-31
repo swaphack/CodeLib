@@ -19,9 +19,9 @@ namespace math
 		Vector3(const Vector3& vector);
 		virtual ~Vector3();
 	public:
-		CREATE_AXIS(X, 0);
-		CREATE_AXIS(Y, 1);
-		CREATE_AXIS(Z, 2);
+		CREATE_INDEX_VALUE(X, 0, float);
+		CREATE_INDEX_VALUE(Y, 1, float);
+		CREATE_INDEX_VALUE(Z, 2, float);
 
 		void set(float x, float y, float z);
 		void set(float x, float y);

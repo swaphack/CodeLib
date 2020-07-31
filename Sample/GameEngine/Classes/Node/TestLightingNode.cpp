@@ -17,13 +17,15 @@ void TestLightingNode::initNodes()
 	this->addSun();
 
 	this->testCubeModel();
+
+	this->addEarth();
 }
 
 void TestLightingNode::addSun()
 {
 	render::Sphere* pLightShape = CREATE_NODE(render::Sphere);
 	pLightShape->setTexture("Resource/Image/2k_sun.jpg");
-	pLightShape->setPosition(50, 700);
+	pLightShape->setPosition(1000, 25);
 	pLightShape->setRadius(50);
 
 	Utility::loadShader(pLightShape, "Shader/texture/texture.vs", "Shader/texture/texture.fs");
@@ -42,7 +44,7 @@ void TestLightingNode::addEarth()
 {
 	render::Sphere* pEarth = CREATE_NODE(render::Sphere);
 	pEarth->setTexture("Resource/Image/2k_earth_daymap.jpg");
-	pEarth->setRadius(25);
+	pEarth->setRadius(50);
 
 	//Utility::loadShader(pEarth, "Shader/texture/texture.vs", "Shader/texture/texture.fs");
 	Utility::loadShader(pEarth, "Shader/material/material_texture.vs", "Shader/material/material_texture.fs");
@@ -63,13 +65,27 @@ void TestLightingNode::testCubeModel()
 
 	render::MultiFaceCube* pModel = CREATE_NODE(render::MultiFaceCube);
 	pModel->setTexture(filepath);
-
+	pModel->setColor(0.5f, 0.5f, 0.5f);
 	pModel->setAnchorPoint(math::Vector3(0.5f, 0.5f, 0.5f));
 	pModel->setPosition(512, 384, 0);
 	pModel->setVolume(200, 200, 200);
-	Utility::loadShader(pModel, "Shader/material/material_texture.vs", "Shader/material/material_texture.fs");
+	Utility::loadShader(pModel, "Shader/material/material_single_light.vs", "Shader/material/material_single_light.fs");
 	this->addChild(pModel);
 
 	Utility::runRotateAction(pModel);
+
+	pModel->getTouchProxy()->addTouchFunc(render::TouchType::DOWN, [](render::Node* node, float x, float y, bool include) {
+		if (!include)
+		{
+			return;
+		}
+		auto cube = node->as<render::MultiFaceCube>();
+		if (cube == nullptr)
+		{
+			return;
+		}
+
+		cube->setBoxVisible(!cube->isBoxVisible());
+	});
 }
 

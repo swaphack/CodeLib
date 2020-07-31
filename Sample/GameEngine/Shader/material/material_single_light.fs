@@ -25,5 +25,5 @@ void main()
 	Light lights[MAX_LIGHT_COUNT];
 	lights[0] = light;
 
-	color = get_mat_color_with_multi_lights(color, material, fragPos, fragNormal, viewDirection, lights, 1);
+	color = get_mat_color_with_multi_lights(matColor, material, vec4(fragPos, 1.0), fragNormal, viewDirection, lights, 1);
 }

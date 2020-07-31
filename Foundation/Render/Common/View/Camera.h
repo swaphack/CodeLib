@@ -49,12 +49,12 @@ namespace render
 		const ViewParameter& getViewParameter() const;
 	public:
 		// 投影矩阵
-		const math::Matrix44& getProjectMatrix() const;
+		const math::Matrix4x4& getProjectMatrix() const;
 		// 视图矩阵
-		const math::Matrix44& getViewMatrix() const;
+		const math::Matrix4x4& getViewMatrix() const;
 	public:
 		// 相机对准指定位置
-		math::Matrix44 lookAt(const math::Vector3& position);
+		math::Matrix4x4 lookAt(const math::Vector3& position);
 	public:
 		// 更新空间位置
 		virtual void visit();
@@ -72,7 +72,7 @@ namespace render
 		// 维度
 		CameraDimensions _dimensions = CameraDimensions::TWO;
 		// 投影矩阵
-		math::Matrix44 _projectMat;
+		math::Matrix4x4 _projectMat;
 		// 2d视野参数
 		ViewParameter _viewParameter2D;
 		// 3D视野参数

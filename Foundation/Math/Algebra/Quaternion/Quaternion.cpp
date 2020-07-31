@@ -1,6 +1,6 @@
 #include "Quaternion.h"
 #include "../Vector/Vector3.h"
-#include "../Matrix/Matrix44.h"
+#include "../Matrix/Matrix4x4.h"
 #include "Basic/base.h"
 #include <cassert>
 
@@ -75,7 +75,7 @@ Quaternion Quaternion::operator*(const Quaternion& quaternion)
 	return Quaternion(qw, qx, qy, qz);
 }
 
-Quaternion::operator Matrix44()
+Quaternion::operator Matrix4x4()
 {
 	/*
 	float a = (*this)[0];
@@ -90,7 +90,7 @@ Quaternion::operator Matrix44()
 	mat.setValue(12, c); mat.setValue(13, d); mat.setValue(14, b); mat.setValue(15, a);
 	*/
 
-	Matrix44 mat;
+	Matrix4x4 mat;
 
 	float x = (*this)[0];
 	float y = (*this)[1];
@@ -208,9 +208,9 @@ Vector3 Quaternion::euler(const Quaternion& quaternion)
 	return Vector3(RADIAN_TO_ANGLE(x), RADIAN_TO_ANGLE(y), RADIAN_TO_ANGLE(z));
 }
 
-Matrix44 Quaternion::mat(const Quaternion& quaternion)
+Matrix4x4 Quaternion::mat(const Quaternion& quaternion)
 {
-	Matrix44 mat44;
+	Matrix4x4 mat44;
 
 	float x = quaternion.getX();
 	float y = quaternion.getY();

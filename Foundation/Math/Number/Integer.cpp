@@ -224,3 +224,71 @@ Integer Integer::identity()
 {
 	return Integer(Real::identity());
 }
+
+math::Integer math::Integer::operator/(const Integer& value) const
+{
+	return this->value() / value.value();
+}
+
+math::Integer math::Integer::operator%(const Integer& value) const
+{
+	return this->value() % value.value();
+}
+
+math::Integer& math::Integer::operator%=(const Integer& value)
+{
+	_value = this->value() % value.value();
+
+	return *this;
+}
+
+math::Integer& math::Integer::operator/=(const Integer& value)
+{
+	_value = this->value() / value.value();
+
+	return *this;
+}
+
+math::Integer math::Integer::getLeastCommonMultiple(const Integer& src, const Integer& dest)
+{
+	Integer zero = Integer::zero();
+	if (src == zero || dest == zero)
+	{
+		return zero;
+	}
+
+	if (src == dest)
+	{
+		return src;
+	}
+
+	Integer lcm = getLeastCommonMultiple(src, dest);
+
+	return src * dest / lcm;
+}
+
+math::Integer math::Integer::getGreatestCommonDivisor(const Integer& src, const Integer& dest)
+{
+	Integer zero = Integer::zero();
+	if (src == zero || dest == zero)
+	{
+		return zero;
+	}
+
+	if (src == dest)
+	{
+		return src;
+	}
+
+	Integer big = src > dest ? src : dest;
+	Integer small = big == src ? dest : src;
+
+	while (small != zero)
+	{
+		Integer r = big % small;
+		big = small;
+		small = r;
+	}
+
+	return big;
+}

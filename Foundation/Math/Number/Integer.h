@@ -25,10 +25,14 @@ namespace math
 		Integer operator+(const Integer& value) const;
 		Integer operator-(const Integer& value) const;
 		Integer operator*(const Integer& value) const;
+		Integer operator/(const Integer& value) const;
+		Integer operator%(const Integer& value) const;
 
 		Integer& operator+=(const Integer& value);
 		Integer& operator-=(const Integer& value);
 		Integer& operator*=(const Integer& value);
+		Integer& operator/=(const Integer& value);
+		Integer& operator%=(const Integer& value);
 	public:
 		bool operator>(const Integer& value) const;
 		bool operator>=(const Integer& value) const;
@@ -64,9 +68,20 @@ namespace math
 		/**
 		*	单位元
 		*/
-		static Integer identity();
-	protected:
+		static Integer identity();	
+	public:
+		/**
+		*	获取最小公倍数
+		*/
+		static Integer getLeastCommonMultiple(const Integer& src, const Integer& dest);
+		/**
+		*	获取最大公约数
+		*/
+		static Integer getGreatestCommonDivisor(const Integer& src, const Integer& dest);
 	private:
+		/**
+		*	值
+		*/
 		int64_t _value = 0;
 	};
 }

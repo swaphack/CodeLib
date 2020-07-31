@@ -394,18 +394,6 @@
     <ClInclude Include="Algebra\Quaternion\Quaternion.h">
       <Filter>Algebra\Quaternion</Filter>
     </ClInclude>
-    <ClInclude Include="Algebra\Matrix\Matrix22.h">
-      <Filter>Algebra\Matrix</Filter>
-    </ClInclude>
-    <ClInclude Include="Algebra\Matrix\Matrix33.h">
-      <Filter>Algebra\Matrix</Filter>
-    </ClInclude>
-    <ClInclude Include="Algebra\Matrix\Matrix41.h">
-      <Filter>Algebra\Matrix</Filter>
-    </ClInclude>
-    <ClInclude Include="Algebra\Matrix\Matrix44.h">
-      <Filter>Algebra\Matrix</Filter>
-    </ClInclude>
     <ClInclude Include="Algebra\Vector\Vector2.h">
       <Filter>Algebra\Vector</Filter>
     </ClInclude>
@@ -430,21 +418,39 @@
     <ClInclude Include="Algebra\Vector\Vector4.h">
       <Filter>Algebra\Vector</Filter>
     </ClInclude>
-    <ClInclude Include="Algebra\Matrix\Matrix14.h">
+    <ClInclude Include="Geometry\GeometryUtiity.h">
+      <Filter>Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="Geometry\base\Points.h">
+      <Filter>Geometry\base</Filter>
+    </ClInclude>
+    <ClInclude Include="Basic\VariableLengthArray.h">
+      <Filter>Basic</Filter>
+    </ClInclude>
+    <ClInclude Include="Algebra\Matrix\Matrix1x4.h">
       <Filter>Algebra\Matrix</Filter>
+    </ClInclude>
+    <ClInclude Include="Algebra\Matrix\Matrix2x2.h">
+      <Filter>Algebra\Matrix</Filter>
+    </ClInclude>
+    <ClInclude Include="Algebra\Matrix\Matrix3x3.h">
+      <Filter>Algebra\Matrix</Filter>
+    </ClInclude>
+    <ClInclude Include="Algebra\Matrix\Matrix4x1.h">
+      <Filter>Algebra\Matrix</Filter>
+    </ClInclude>
+    <ClInclude Include="Algebra\Matrix\Matrix4x4.h">
+      <Filter>Algebra\Matrix</Filter>
+    </ClInclude>
+    <ClInclude Include="Function\MultiPowerFunction.h">
+      <Filter>Function</Filter>
+    </ClInclude>
+    <ClInclude Include="Function\MultivariateLinearFunction.h">
+      <Filter>Function</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Geometry\2d\Polygon.cpp">
-      <Filter>Geometry\2d</Filter>
-    </ClCompile>
-    <ClCompile Include="Geometry\3d\Polyhedron.cpp">
-      <Filter>Geometry\3d</Filter>
-    </ClCompile>
-    <ClCompile Include="Geometry\3d\Surface.cpp">
-      <Filter>Geometry\3d</Filter>
-    </ClCompile>
     <ClCompile Include="Geometry\2d\Rect.cpp">
       <Filter>Geometry\2d</Filter>
     </ClCompile>
@@ -637,18 +643,6 @@
     <ClCompile Include="Algebra\Quaternion\Quaternion.cpp">
       <Filter>Algebra\Quaternion</Filter>
     </ClCompile>
-    <ClCompile Include="Algebra\Matrix\Matrix22.cpp">
-      <Filter>Algebra\Matrix</Filter>
-    </ClCompile>
-    <ClCompile Include="Algebra\Matrix\Matrix33.cpp">
-      <Filter>Algebra\Matrix</Filter>
-    </ClCompile>
-    <ClCompile Include="Algebra\Matrix\Matrix41.cpp">
-      <Filter>Algebra\Matrix</Filter>
-    </ClCompile>
-    <ClCompile Include="Algebra\Matrix\Matrix44.cpp">
-      <Filter>Algebra\Matrix</Filter>
-    </ClCompile>
     <ClCompile Include="Algebra\Vector\Vector2.cpp">
       <Filter>Algebra\Vector</Filter>
     </ClCompile>
@@ -658,7 +652,25 @@
     <ClCompile Include="Algebra\Vector\Vector4.cpp">
       <Filter>Algebra\Vector</Filter>
     </ClCompile>
-    <ClCompile Include="Algebra\Matrix\Matrix14.cpp">
+    <ClCompile Include="Geometry\GeometryUtiity.cpp">
+      <Filter>Geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="Geometry\base\Points.cpp">
+      <Filter>Geometry\base</Filter>
+    </ClCompile>
+    <ClCompile Include="Algebra\Matrix\Matrix1x4.cpp">
+      <Filter>Algebra\Matrix</Filter>
+    </ClCompile>
+    <ClCompile Include="Algebra\Matrix\Matrix2x2.cpp">
+      <Filter>Algebra\Matrix</Filter>
+    </ClCompile>
+    <ClCompile Include="Algebra\Matrix\Matrix3x3.cpp">
+      <Filter>Algebra\Matrix</Filter>
+    </ClCompile>
+    <ClCompile Include="Algebra\Matrix\Matrix4x1.cpp">
+      <Filter>Algebra\Matrix</Filter>
+    </ClCompile>
+    <ClCompile Include="Algebra\Matrix\Matrix4x4.cpp">
       <Filter>Algebra\Matrix</Filter>
     </ClCompile>
   </ItemGroup>

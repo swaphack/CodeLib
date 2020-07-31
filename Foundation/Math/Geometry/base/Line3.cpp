@@ -15,9 +15,9 @@ Line3::Line3(const Vector3& src, const Vector3& dest)
 Line3::Line3(const Plane& plane0, const Plane& plane1)
 {
 	// Áî z = 0 ¼ÆËã×ø±ê
-	Matrix22 d = Matrix22(plane0.getParamA(), plane0.getParamB(), plane1.getParamA(), plane1.getParamB());
-	Matrix22 dx = Matrix22(-plane0.getParamD(), plane0.getParamB(), -plane1.getParamD(), plane1.getParamB());
-	Matrix22 dy = Matrix22(plane0.getParamA(), -plane0.getParamD(), plane1.getParamA(), - plane1.getParamD());
+	Matrix2x2 d = Matrix2x2(plane0.getParamA(), plane0.getParamB(), plane1.getParamA(), plane1.getParamB());
+	Matrix2x2 dx = Matrix2x2(-plane0.getParamD(), plane0.getParamB(), -plane1.getParamD(), plane1.getParamB());
+	Matrix2x2 dy = Matrix2x2(plane0.getParamA(), -plane0.getParamD(), plane1.getParamA(), - plane1.getParamD());
 
 	float base = d.getDetValue();
 

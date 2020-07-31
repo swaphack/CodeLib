@@ -179,3 +179,8 @@ void render::DrawNode::updateBufferData()
 {
 	_mesh->updateBufferData();
 }
+
+void render::DrawNode::onColorChange()
+{
+	_material->getMaterialDetail()->setAmbientByte(_color.red, _color.green, _color.blue, _color.alpha);
+}

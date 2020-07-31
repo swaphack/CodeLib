@@ -202,8 +202,24 @@ namespace math
 	};
 
 
-	struct Determinant2 : public Determinant<2> {};
-	struct Determinant3 : public Determinant<3> {};
+	struct Determinant2 : public Determinant<2> 
+	{
+		Determinant2() {}
+		Determinant2(const float* value)
+		{
+			this->set(value);
+		}
+		Determinant2(float x0, float x1, float x2, float x3)
+		{
+			(*this)[0] = x0;
+			(*this)[1] = x1;
+			(*this)[2] = x2;
+			(*this)[3] = x3;
+		}
+	};
+	struct Determinant3 : public Determinant<3> 
+	{
+	};
 
 
 	static float getDeterminantMagnitude(const Determinant<1>& value)

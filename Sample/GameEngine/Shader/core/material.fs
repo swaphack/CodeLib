@@ -20,7 +20,7 @@ struct Material
 // 环境
 vec4 get_mat_ambient(Light light,  Material material)
 {
-	return light.ambient * material.ambient;
+	return light.color * material.ambient;
 }
 // 漫反射
 vec4 get_mat_diffuse(Light light, Material material, vec3 fragNormal, vec3 fragPos)

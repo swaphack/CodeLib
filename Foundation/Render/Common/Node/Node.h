@@ -113,9 +113,9 @@ namespace render
 		TouchProxy* getTouchProxy();
 	public:
 		// 世界矩阵
-		const math::Matrix44& getWorldMatrix() const;
+		const math::Matrix4x4& getWorldMatrix() const;
 		// 相对父节点的矩阵
-		const math::Matrix44& getLocalMatrix() const;
+		const math::Matrix4x4& getLocalMatrix() const;
 		// 将世界坐标转化为本地坐标
 		math::Vector3 convertWorldPostitionToLocal(const math::Vector3& point);
 		// 将本地坐标转化为世界坐标
@@ -175,11 +175,11 @@ namespace render
 		// 通知
 		Notify<NodeNotifyType>* _notify;
 		// 相对于父节点的矩阵
-		math::Matrix44 _localMatrix;
+		math::Matrix4x4 _localMatrix;
 		// 逆矩阵
-		math::Matrix44 _localInverseMatrix;
+		math::Matrix4x4 _localInverseMatrix;
 		// 实际在世界坐标系中的矩阵
-		math::Matrix44 _worldMatrix;
+		math::Matrix4x4 _worldMatrix;
 	};
 
 

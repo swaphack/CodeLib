@@ -16,5 +16,5 @@ void main()
 
 	fragPos = vec3(matrix.model * pos);
     fragTexcoord = v_texcoord;
-    fragNormal = mat3(transpose(inverse(matrix.model))) * v_normal; 
+    fragNormal = matrix.normal * v_normal; 
 }

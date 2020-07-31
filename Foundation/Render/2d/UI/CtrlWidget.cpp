@@ -152,7 +152,7 @@ void render::CtrlWidget::calRectData()
 	nvec[2] = math::Vector2(_realRectVertex.rightUp.getX(), _realRectVertex.rightUp.getY());
 	nvec[3] = math::Vector2(_realRectVertex.leftUp.getX(), _realRectVertex.leftUp.getY());
 
-	_realPolygon.init(4, nvec);
+	_realPolygon.set(nvec);
 
 	float x0 = _realRectVertex.leftDown.getX();
 	float y0 = _realRectVertex.leftDown.getY();
@@ -161,10 +161,6 @@ void render::CtrlWidget::calRectData()
 
 	_clipRect.setOrigin(x0, y0);
 	_clipRect.setSize(x1 - x0, y1 - y0);
-}
-
-void render::CtrlWidget::onColorChange()
-{
 }
 
 void render::CtrlWidget::onBlendChange()

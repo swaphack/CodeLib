@@ -44,7 +44,7 @@ bool RectVectices::containPointByPolygon(float x, float y)
 	nvec[2] = math::Vector2(rightUp.getX(), rightUp.getY());
 	nvec[3] = math::Vector2(leftUp.getX(), leftUp.getY());
 
-	math::Polygon p(4, nvec);
+	math::Polygon<4> p(nvec);
 	return p.contains(math::Vector2(x, y));
 }
 

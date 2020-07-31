@@ -1,8 +1,8 @@
-#include "Matrix41.h"
+#include "Matrix4x1.h"
 #include <cassert>
 using namespace math;
 
-Matrix41::Matrix41()
+Matrix4x1::Matrix4x1()
 {
 	(*this)[0] = 0;
 	(*this)[1] = 0;
@@ -10,13 +10,13 @@ Matrix41::Matrix41()
 	(*this)[3] = 1;
 }
 
-Matrix41::Matrix41(const Vector3& vector)
-	: Matrix41(vector, 1)
+Matrix4x1::Matrix4x1(const Vector3& vector)
+	: Matrix4x1(vector, 1)
 {
 
 }
 
-Matrix41::Matrix41(const Vector3& vector, float w)
+Matrix4x1::Matrix4x1(const Vector3& vector, float w)
 {
 	(*this)[0] = vector.getX();
 	(*this)[1] = vector.getY();
@@ -24,7 +24,7 @@ Matrix41::Matrix41(const Vector3& vector, float w)
 	(*this)[3] = w;
 }
 
-Matrix41::Matrix41(float x, float y, float z)
+Matrix4x1::Matrix4x1(float x, float y, float z)
 {
 	(*this)[0] = x;
 	(*this)[1] = y;
@@ -32,7 +32,7 @@ Matrix41::Matrix41(float x, float y, float z)
 	(*this)[3] = 1;
 }
 
-Matrix41::Matrix41(float x, float y, float z, float w)
+Matrix4x1::Matrix4x1(float x, float y, float z, float w)
 {
 	(*this)[0] = x;
 	(*this)[1] = y;
@@ -40,7 +40,7 @@ Matrix41::Matrix41(float x, float y, float z, float w)
 	(*this)[3] = w;
 }
 
-Matrix41::operator Vector3()
+Matrix4x1::operator Vector3()
 {
 	float w = (*this)[3];
 
@@ -52,13 +52,13 @@ Matrix41::operator Vector3()
 	return Vector3(x, y, z);
 }
 
-math::Matrix41::Matrix41(const float* value)
-	: Matrix41()
+math::Matrix4x1::Matrix4x1(const float* value)
+	: Matrix4x1()
 {
 	this->set(value);
 }
 
-math::Matrix41::~Matrix41()
+math::Matrix4x1::~Matrix4x1()
 {
 
 }

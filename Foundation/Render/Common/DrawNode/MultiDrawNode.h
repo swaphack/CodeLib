@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Common/Node/Node.h"
+#include "DrawProtocol.h"
 #include "Common/Shader/ShaderProgramDelegate.h"
 #include "macros.h"
 
@@ -19,7 +20,9 @@ namespace render
 	/**
 	*	绘制节点
 	*/
-	class MultiDrawNode : public Node
+	class MultiDrawNode : 
+		public Node,
+		public ColorProtocol
 	{
 
 	public:
@@ -110,6 +113,8 @@ namespace render
 		*	更新mesh数据
 		*/
 		virtual void updateBufferData();
+	protected:
+		virtual void onColorChange();
 	protected:
 		// 材质
 		Materials* _materiales = nullptr;

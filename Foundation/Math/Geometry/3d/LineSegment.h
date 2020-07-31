@@ -1,17 +1,12 @@
 ﻿#pragma once
 
 #include "Algebra/import.h"
-
+#include "Geometry/base/Points.h"
 namespace math
 {
 	// 线段
-	struct LineSegment
+	struct LineSegment : public Points<Vector3, 2>
 	{
-	public:
-		// 起点
-		Vector3 src;
-		// 终点
-		Vector3 dest;
 	public:
 		/**
 		*	构造函数
@@ -22,6 +17,8 @@ namespace math
 		*/
 		LineSegment(const Vector3& src, const Vector3& dest);
 	public:
+		CREATE_INDEX_VALUE(Src, 0, Vector3);
+		CREATE_INDEX_VALUE(Dest, 1, Vector3);
 		/**
 		*	长度
 		*/
@@ -41,7 +38,7 @@ namespace math
 		/**
 		*	线段是否相交
 		*/
-		bool intersects(const LineSegment& line);
+		bool intersects(const LineSegment& line, Vector3& point);
 		/**
 		*	到线段的最近点
 		*/

@@ -65,9 +65,9 @@ namespace render
 		// 4*4
 		void setMatrix4(const float* value);
 
-		void setMatrix2(const math::Matrix22& value);
-		void setMatrix3(const math::Matrix33& value);
-		void setMatrix4(const math::Matrix44& value);
+		void setMatrix2(const math::Matrix2x2& value);
+		void setMatrix3(const math::Matrix3x3& value);
+		void setMatrix4(const math::Matrix4x4& value);
 	private:
 		uint32_t _uniformID = 0;
 	};

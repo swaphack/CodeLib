@@ -92,11 +92,11 @@ namespace sys
 		/**
 		*	获取变换矩阵
 		*/
-		const math::Matrix44& getMatrix() const;
+		const math::Matrix4x4& getMatrix() const;
 		/**
 		*	设置变换矩阵
 		*/
-		void setMatrix(const math::Matrix44& mat);
+		void setMatrix(const math::Matrix4x4& mat);
 	public:
 		/**
 		*	分配顶点
@@ -136,6 +136,6 @@ namespace sys
 		// 纹理坐标 (x,y,z)
 		MeshMemoryData _uvs;
 		// 变换矩阵
-		math::Matrix44 _matrix;
+		math::Matrix4x4 _matrix;
 	};
 }

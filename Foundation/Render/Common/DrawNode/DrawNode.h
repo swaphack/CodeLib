@@ -2,6 +2,7 @@
 
 #include "Common/Node/Node.h"
 #include "Common/Shader/ShaderProgramDelegate.h"
+#include "DrawProtocol.h"
 
 namespace render
 {
@@ -15,7 +16,8 @@ namespace render
 	/**
 	*	绘制节点
 	*/
-	class DrawNode : public Node
+	class DrawNode : 
+		public Node, public ColorProtocol
 	{
 	public:
 		DrawNode();
@@ -104,6 +106,8 @@ namespace render
 		*	更新mesh数据
 		*/
 		virtual void updateBufferData();
+	protected:
+		virtual void onColorChange();
 	protected:
 		// 材质
 		Material* _material = nullptr;

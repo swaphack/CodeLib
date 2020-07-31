@@ -10,6 +10,12 @@
 
 namespace math
 {
+	// 创建轴
+#define CREATE_INDEX_VALUE(Name, Index, Type)\
+	public: \
+	Type get##Name() const { return (Type)getValue(Index); }\
+	void set##Name(Type val) { setValue(Index, val); }
+
 	/**
 	*	一维数组
 	*/

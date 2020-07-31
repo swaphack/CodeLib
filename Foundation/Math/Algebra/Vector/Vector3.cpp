@@ -1,7 +1,7 @@
 #include "Vector3.h"
 #include "Vector2.h"
 #include <cassert>
-#include "../Matrix/Matrix44.h"
+#include "../Matrix/Matrix4x4.h"
 #include "../Determinant/Determinant.h"
 
 using namespace math;
@@ -221,45 +221,45 @@ float Vector3::project(const Vector3& vector0, const Vector3& vector1)
 
 Vector3 Vector3::tranlate(const Vector3& vector)
 {
-	Matrix44 mat;
+	Matrix4x4 mat;
 	mat.setTranslate(vector);
 
-	Matrix41 mat41(*this);
+	Matrix4x1 mat41(*this);
 
-	Matrix41 ret = mat * mat41; 
+	Matrix4x1 ret = mat * mat41; 
 	float w = ret[3];
 	return Vector3(ret[0] / w, ret[1] / w, ret[2] / w);
 }
 
 Vector3 Vector3::scale(const Vector3& vector)
 {
-	Matrix44 mat;
+	Matrix4x4 mat;
 	mat.setScale(vector);
 
-	Matrix41 mat41(*this);
-	Matrix41 ret = mat * mat41;
+	Matrix4x1 mat41(*this);
+	Matrix4x1 ret = mat * mat41;
 	float w = ret[3];
 	return Vector3(ret[0] / w, ret[1] / w, ret[2] / w);
 }
 
 Vector3 Vector3::rotationByAxis(const Vector3& vector, float radian)
 {
-	Matrix44 mat;
+	Matrix4x4 mat;
 	mat.setRotationByAxis(vector, radian);
 
-	Matrix41 mat41(*this);
-	Matrix41 ret = mat * mat41;
+	Matrix4x1 mat41(*this);
+	Matrix4x1 ret = mat * mat41;
 	float w = ret[3];
 	return Vector3(ret[0] / w, ret[1] / w, ret[2] / w);
 }
 
 Vector3 Vector3::rotationByLine(const Vector3& src, const Vector3& dest, float radian)
 {
-	Matrix44 mat;
+	Matrix4x4 mat;
 	mat.setRotationByLine(src, dest, radian);
 
-	Matrix41 mat41(*this);
-	Matrix41 ret = mat * mat41;
+	Matrix4x1 mat41(*this);
+	Matrix4x1 ret = mat * mat41;
 	float w = ret[3];
 	return Vector3(ret[0] / w, ret[1] / w, ret[2] / w);
 }

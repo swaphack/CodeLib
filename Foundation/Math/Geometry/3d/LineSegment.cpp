@@ -9,33 +9,32 @@ LineSegment::LineSegment()
 }
 
 LineSegment::LineSegment(const Vector3& src, const Vector3& dest) 
-:src(src), 
-dest(dest)
 {
-
+	this->setSrc(src);
+	this->setDest(dest);
 }
 
 float LineSegment::getMagnitude() const
 {
-	return Vector3::distance(src, dest);
+	return Vector3::distance(getSrc(), getDest());
 }
 
 Vector3 LineSegment::getVector() const
 {
-	return dest - src;
+	return getDest() - getSrc();
 }
 
 bool LineSegment::contains(const Vector3& point)
 {
-	Vector3 p = dest - src;
-	Cuboids cuboids(src, p);
+	Vector3 p = getVector();
+	Cuboids cuboids(getSrc(), p);
 	if (!cuboids.contains(point))
 	{
 		return false;
 	}
 
-	Vector3 v0 = point - src;
-	Vector3 v1 = dest - src;
+	Vector3 v0 = point - getSrc();
+	Vector3 v1 = getDest() - getSrc();
 
 	if (Vector3::cosAngle(v0, v1) != 0)
 	{
@@ -47,24 +46,31 @@ bool LineSegment::contains(const Vector3& point)
 
 bool LineSegment::contains(const LineSegment& line)
 {
-	return false;
+	return this->contains(line.getSrc()) && this->contains(line.getDest());
 }
 
-bool LineSegment::intersects(const LineSegment& line)
+bool LineSegment::intersects(const LineSegment& line, Vector3& point)
 {
-	Vector3 v0 = src - line.src;
-	Vector3 v1 = dest - src;
-	Vector3 v2 = line.dest - src;
+	Vector3 v0 = getSrc() - line.getSrc();
+	Vector3 v1 = getDest() - getSrc();
+	Vector3 v2 = line.getDest() - getSrc();
 
 	float d0 = Vector3::dot(v0, v1);
 	float d1 = Vector3::dot(v1, v2);
 
-	return d0 * d1 >= 0;
+	bool result = d0 * d1 >= 0;
+	if (!result)
+	{
+		return false;
+	}
+
+	return true;
 }
 
 Vector3 LineSegment::closestPoint(const Vector3& point)
 {
-
+	Vector3 src = getSrc();
+	Vector3 dest = getDest();
 	float x0 = dest.getX() - src.getX();
 	float y0 = dest.getY() - src.getY();
 	float z0 = dest.getZ() - src.getZ();
@@ -99,8 +105,8 @@ Vector3 LineSegment::closestPoint(const Vector3& point)
 
 float LineSegment::distance(const LineSegment& line, const Vector3& point)
 {
-	Vector3 v0 = line.dest - line.src;
-	Vector3 v1 = point - line.src;
+	Vector3 v0 = line.getDest() - line.getSrc();
+	Vector3 v1 = point - line.getSrc();
 
 	float top = Vector3::dot(v0, v1);
 	float bottom = v0.getMagnitude();

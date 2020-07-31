@@ -52,7 +52,7 @@ void TestUtilityNode::testMatrix()
 	};
 
 
-	math::Matrix22 mat22(data2x2);
+	math::Matrix2x2 mat22(data2x2);
 	PRINT("src:\n%s\n", mat22.toString().c_str());
 	math::Matrix<float, 2, 2> inverse22 = mat22.getInverse();
 	PRINT("transpose:\n%s\n", inverse22.toString().c_str());
@@ -66,7 +66,7 @@ void TestUtilityNode::testMatrix()
 	};
 
 
-	math::Matrix33 mat33(data3x3);
+	math::Matrix3x3 mat33(data3x3);
 	PRINT("src:\n%s\n", mat33.toString().c_str());
 	math::Matrix<float, 3, 3> inverse33 = mat33.getInverse();
 	PRINT("transpose:\n%s\n", inverse33.toString().c_str());

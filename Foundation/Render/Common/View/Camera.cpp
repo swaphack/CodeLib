@@ -179,22 +179,22 @@ void Camera::endUpdateTranform()
 
 }
 
-const math::Matrix44& render::Camera::getProjectMatrix() const
+const math::Matrix4x4& render::Camera::getProjectMatrix() const
 {
 	return _projectMat;
 }
 
-const math::Matrix44& render::Camera::getViewMatrix() const
+const math::Matrix4x4& render::Camera::getViewMatrix() const
 {
 	return _worldMatrix;
 }
 
-math::Matrix44 render::Camera::lookAt(const math::Vector3& position)
+math::Matrix4x4 render::Camera::lookAt(const math::Vector3& position)
 {
 	math::Vector3 pos = _worldMatrix.getPosition();
 	math::Vector3 up = _worldMatrix.getEularAngle();
 	//up = math::Vector3(0, 1, 0);
-	math::Matrix44 mat = math::Matrix44::lookAt(pos, position, up);
+	math::Matrix4x4 mat = math::Matrix4x4::lookAt(pos, position, up);
 	//PRINT("%s\n", mat.toString().c_str());
 	//GLMatrix::multMatrix(mat);
 
@@ -206,14 +206,14 @@ void render::Camera::updateViewPort()
 {
 	if (getDimensions() == CameraDimensions::TWO)
 	{
-		_projectMat = math::Matrix44::ortho(
+		_projectMat = math::Matrix4x4::ortho(
 			_viewParameter2D.xLeft, _viewParameter2D.xRight,
 			_viewParameter2D.yBottom, _viewParameter2D.yTop,
 			_viewParameter2D.zNear, _viewParameter2D.zFar);
 	}
 	else if (getDimensions() == CameraDimensions::THREE)
 	{
-		_projectMat = math::Matrix44::frustum(
+		_projectMat = math::Matrix4x4::frustum(
 			_viewParameter3D.xLeft, _viewParameter3D.xRight,
 			_viewParameter3D.yBottom, _viewParameter3D.yTop,
 			_viewParameter3D.zNear, _viewParameter3D.zFar);

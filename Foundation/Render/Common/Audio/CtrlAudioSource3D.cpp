@@ -25,7 +25,7 @@ bool CtrlAudioSource3D::init()
 		FMOD_VECTOR pos;
 		FMOD_VECTOR vel;
 
-		math::Matrix44 mat = this->getWorldMatrix();
+		math::Matrix4x4 mat = this->getWorldMatrix();
 		_3dSettings.position = mat.getPosition();
 
 		ConvertToFMODVector(_3dSettings.position, &pos);

@@ -13,4 +13,6 @@ namespace math
 	public:
 		//virtual Range getValue(const Domain& value);
 	};
+
+	
 }

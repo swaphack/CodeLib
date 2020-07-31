@@ -178,7 +178,7 @@ void handNodeMesh(ModelDetailFbx* file, FbxNode* node)
 		{
 			v[i] = value[i];
 		}
-		math::Matrix44 m(v);
+		math::Matrix4x4 m(v);
 		pMesh->setMatrix(m);
 	}
 }

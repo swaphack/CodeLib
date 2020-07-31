@@ -4,7 +4,7 @@
 
 namespace math
 {
-	struct Matrix44;
+	struct Matrix4x4;
 	struct Vector3;
 	/**
 	*	四元数
@@ -40,10 +40,10 @@ namespace math
 		Quaternion(float w, const Vector3& vector);
 		virtual ~Quaternion();
 	public:
-		CREATE_AXIS(W, 0);
-		CREATE_AXIS(X, 1);
-		CREATE_AXIS(Y, 2);
-		CREATE_AXIS(Z, 3);
+		CREATE_INDEX_VALUE(W, 0, float);
+		CREATE_INDEX_VALUE(X, 1, float);
+		CREATE_INDEX_VALUE(Y, 2, float);
+		CREATE_INDEX_VALUE(Z, 3, float);
 	public:
 		/**
 		*	标准化,单位四元数
@@ -82,7 +82,7 @@ namespace math
 		/**
 		*	转换为矩阵
 		*/
-		operator Matrix44();
+		operator Matrix4x4();
 	public:
 		/**
 		*	绕轴vector旋转angle得到的四元数
@@ -111,6 +111,6 @@ namespace math
 		/**
 		*	通过四元组，求得矩阵
 		*/
-		static Matrix44 mat(const Quaternion& quaternion);
+		static Matrix4x4 mat(const Quaternion& quaternion);
 	};
 }

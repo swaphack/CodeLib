@@ -16,14 +16,14 @@ namespace render
 		static void applyTexture();
 	public:
 		static void loadMatrix(const float* value);
-		static void loadMatrix(const math::Matrix44& value);
+		static void loadMatrix(const math::Matrix4x4& value);
 		static void loadIdentity();
 	public:
 		static void pushMatrix();
 		static void popMatrix();
 	public:
 		static void multMatrix(const float* value);
-		static void multMatrix(const math::Matrix44& value);
+		static void multMatrix(const math::Matrix4x4& value);
 	public:
 		static void rotate(float angle, float x, float y, float z);
 		static void rotate(float angle, const math::Vector3& value);

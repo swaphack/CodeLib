@@ -15,8 +15,8 @@ namespace math
 		Size(const Size& size);
 		virtual ~Size();
 	public:
-		CREATE_AXIS(Width, 0);
-		CREATE_AXIS(Height, 1);
+		CREATE_INDEX_VALUE(Width, 0, float);
+		CREATE_INDEX_VALUE(Height, 1, float);
 
 		void set(float w, float h);
 	};

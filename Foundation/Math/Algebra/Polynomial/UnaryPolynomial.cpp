@@ -10,7 +10,7 @@ UnaryPolynomial::UnaryPolynomial()
 
 }
 
-UnaryPolynomial::UnaryPolynomial(const std::map<int, float>& mapTerm)
+UnaryPolynomial::UnaryPolynomial(const std::map<float, float>& mapTerm)
 {
 	for (auto item : mapTerm)
 	{

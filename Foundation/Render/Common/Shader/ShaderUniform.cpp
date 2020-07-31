@@ -133,7 +133,7 @@ void render::ShaderUniform::setMatrix3(const float* value)
 	this->setMatrix3(false, value);
 }
 
-void render::ShaderUniform::setMatrix4(const math::Matrix44& value)
+void render::ShaderUniform::setMatrix4(const math::Matrix4x4& value)
 {
 	this->setMatrix4(value.getValue());
 }
@@ -143,12 +143,12 @@ void render::ShaderUniform::setMatrix4(const float* value)
 	this->setMatrix4(false, value);
 }
 
-void render::ShaderUniform::setMatrix2(const math::Matrix22& value)
+void render::ShaderUniform::setMatrix2(const math::Matrix2x2& value)
 {
 	this->setMatrix2(value.getValue());
 }
 
-void render::ShaderUniform::setMatrix3(const math::Matrix33& value)
+void render::ShaderUniform::setMatrix3(const math::Matrix3x3& value)
 {
 	this->setMatrix3(value.getValue());
 }

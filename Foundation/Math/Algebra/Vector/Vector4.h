@@ -21,10 +21,10 @@ namespace math
 		Vector4(const Vector4& vector);
 		virtual ~Vector4();
 	public:
-		CREATE_AXIS(X, 0);
-		CREATE_AXIS(Y, 1);
-		CREATE_AXIS(Z, 2);
-		CREATE_AXIS(W, 3);
+		CREATE_INDEX_VALUE(X, 0, float);
+		CREATE_INDEX_VALUE(Y, 1, float);
+		CREATE_INDEX_VALUE(Z, 2, float);
+		CREATE_INDEX_VALUE(W, 3, float);
 
 		void set(float x, float y, float z, float w);
 		void set(float x, float y, float z);
