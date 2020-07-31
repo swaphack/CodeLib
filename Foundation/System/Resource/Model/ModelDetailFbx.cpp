@@ -359,11 +359,11 @@ void handMaterial(ModelDetailFbx* file, FbxSurfaceMaterial* mat)
 		FbxSurfacePhong* phong = (FbxSurfacePhong *)mat;
 		auto pMat = CREATE_OBJECT(MaterialDetail);
 		pMat->setName(phong->GetName());
+		pMat->setEmission((float)phong->Emissive.Get()[0], (float)phong->Emissive.Get()[1], (float)phong->Emissive.Get()[2]);
 		pMat->setAmbient((float)phong->Ambient.Get()[0], (float)phong->Ambient.Get()[1], (float)phong->Ambient.Get()[2]);
 		pMat->setDiffuse((float)phong->Diffuse.Get()[0], (float)phong->Diffuse.Get()[1], (float)phong->Diffuse.Get()[2]);
 		pMat->setSpecular((float)phong->Specular.Get()[0], (float)phong->Specular.Get()[1], (float)phong->Specular.Get()[2]);
-		pMat->setEmission((float)phong->Emissive.Get()[0], (float)phong->Emissive.Get()[1], (float)phong->Emissive.Get()[2]);
-		pMat->setShiness((float)phong->Shininess.Get());
+		pMat->setSpecularShiness((float)phong->Shininess.Get());
 		file->addMaterial(phong->GetName(), pMat);
 	}
 	else if (mat->GetClassId().Is(FbxSurfaceLambert::ClassId))
@@ -377,6 +377,7 @@ void handMaterial(ModelDetailFbx* file, FbxSurfaceMaterial* mat)
 		FbxSurfaceLambert* lambert = (FbxSurfaceLambert *)mat;
 		auto pMat = CREATE_OBJECT(MaterialDetail);
 		pMat->setName(lambert->GetName());
+		pMat->setEmission((float)lambert->Emissive.Get()[0], (float)lambert->Emissive.Get()[1], (float)lambert->Emissive.Get()[2]);
 		pMat->setAmbient((float)lambert->Ambient.Get()[0], (float)lambert->Ambient.Get()[1], (float)lambert->Ambient.Get()[2]);
 		pMat->setDiffuse((float)lambert->Diffuse.Get()[0], (float)lambert->Diffuse.Get()[1], (float)lambert->Diffuse.Get()[2]);
 		pMat->setEmission((float)lambert->Emissive.Get()[0], (float)lambert->Emissive.Get()[1], (float)lambert->Emissive.Get()[2]);

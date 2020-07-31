@@ -103,12 +103,19 @@ namespace sys
 		/**
 		*	镜面指数
 		*/   
-		void setShiness(float value);
+		void setSpecularShiness(float value);
 		/**
 		*	镜面指数
 		*/
-		float getShiness() const;
-
+		float getSpecularShiness() const;
+		/**
+		*	镜面增强系数
+		*/
+		void setSpecularStrength(float value);
+		/**
+		*	镜面增强系数
+		*/
+		float getSpecularStrength() const;
 		/**
 		*	辐射光颜色
 		*/  
@@ -129,15 +136,17 @@ namespace sys
 		// 名称
 		std::string _name;
 		// 环境光
-		float*  _matrialAmbient = nullptr;
+		float _ambientColor[4];
 		// 漫射光
-		float*  _matrialDiffuse = nullptr;
+		float  _diffuseColor[4];
 		// 反射光
-		float*  _matrialSpecular = nullptr;
+		float  _specularColor[4];
 		// 镜面指数
-		float _matrialShiness = 0;
+		float _specularShiness = 0;
+		// 镜面指数
+		float _specularStrength = 0;
 		// 辐射光颜色
-		float* _matrialEmission = nullptr;
+		float _emissionColor[4];
 
 		// 纹理名称
 		std::string _mapTextureAmbient;

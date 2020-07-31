@@ -52,55 +52,40 @@ bool ModelDetail3DS::load(const std::string& fullpath)
 			{
 				std::string fullpath = getTextureFullPath(pMatData->texture1_map.name, dir);
 				this->addTexturePath(pMatData->texture1_map.name, fullpath);
-// 				Texture2D* textureID = createTexture(pMatData->texture1_map.name, dir);
-// 				if (textureID)
-// 				{
-// 					this->addTexture(pMatData->texture1_map.name, textureID);
-// 				}
-			}
-			if (pMatData->texture1_mask.name[0])
-			{
-				std::string fullpath = getTextureFullPath(pMatData->texture1_mask.name, dir);
-				this->addTexturePath(pMatData->texture1_mask.name, fullpath);
-
-// 				Texture2D* textureID = createTexture(pMatData->texture1_mask.name, dir);
-// 				if (textureID)
-// 				{
-// 					this->addTexture(pMatData->texture1_mask.name, textureID);
-// 				}
-
 			}
 			if (pMatData->texture2_map.name[0])
 			{
 				std::string fullpath = getTextureFullPath(pMatData->texture2_map.name, dir);
 				this->addTexturePath(pMatData->texture2_map.name, fullpath);
-
-// 				Texture2D* textureID = createTexture(pMatData->texture2_map.name, dir);
-// 				if (textureID)
-// 				{
-// 					this->addTexture(pMatData->texture2_map.name, textureID);
-// 				}
 			}
-			if (pMatData->texture2_mask.name[0])
+			if (pMatData->bump_map.name[0])
 			{
-				std::string fullpath = getTextureFullPath(pMatData->texture2_mask.name, dir);
-				this->addTexturePath(pMatData->texture2_mask.name, fullpath);
-
-// 				Texture2D* textureID = createTexture(pMatData->texture2_mask.name, dir);
-// 				if (textureID)
-// 				{
-// 					this->addTexture(pMatData->texture2_mask.name, textureID);
-// 				}
+				std::string fullpath = getTextureFullPath(pMatData->bump_map.name, dir);
+				this->addTexturePath(pMatData->bump_map.name, fullpath);
+			}
+			if (pMatData->specular_map.name[0])
+			{
+				std::string fullpath = getTextureFullPath(pMatData->specular_map.name, dir);
+				this->addTexturePath(pMatData->specular_map.name, fullpath);
+			}
+			if (pMatData->opacity_map.name[0])
+			{
+				std::string fullpath = getTextureFullPath(pMatData->opacity_map.name, dir);
+				this->addTexturePath(pMatData->opacity_map.name, fullpath);
 			}
 
 			auto pMat = CREATE_OBJECT(MaterialDetail);
 			pMat->setName(pMatData->name);
 			pMat->setAmbientTextureMap(pMatData->texture1_map.name);
 			pMat->setDiffuseTextureMap(pMatData->texture2_map.name);
+			pMat->setBumpTextureMap(pMatData->bump_map.name);
+			pMat->setSpecularTextureMap(pMatData->specular_map.name);
+			pMat->setAlphaTextureMap(pMatData->opacity_map.name);
 			pMat->setAmbient(pMatData->ambient[0], pMatData->ambient[1], pMatData->ambient[2]);
 			pMat->setDiffuse(pMatData->diffuse[0], pMatData->diffuse[1], pMatData->diffuse[2]);
 			pMat->setSpecular(pMatData->specular[0], pMatData->specular[1], pMatData->specular[2]);
-			pMat->setShiness(pMatData->shininess);
+			pMat->setSpecularShiness(pMatData->shininess);
+			pMat->setSpecularStrength(pMatData->shin_strength);
 			this->addMaterial(pMatData->name, pMat);
 		}
 	}

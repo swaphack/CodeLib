@@ -69,6 +69,9 @@ bool ModelDetailObj::load(const std::string& fullpath)
 			auto pMat = CREATE_OBJECT(MaterialDetail);
 			pMat->setAmbientTextureMap(pMatData->map_Ka);
 			pMat->setDiffuseTextureMap(pMatData->map_Kd);
+			pMat->setSpecularTextureMap(pMatData->map_Ks);
+			pMat->setAlphaTextureMap(pMatData->map_d);
+			pMat->setBumpTextureMap(pMatData->map_bump);
 			pMat->setName(pMatData->name);
 			pMat->setAmbient(pMatData->Ka.X, pMatData->Ka.Y, pMatData->Ka.Z);
 			pMat->setDiffuse(pMatData->Kd.X, pMatData->Kd.Y, pMatData->Kd.Z);

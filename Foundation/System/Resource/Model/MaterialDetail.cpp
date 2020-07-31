@@ -5,148 +5,138 @@ using namespace	sys;
 
 MaterialDetail::MaterialDetail()
 {
-	size_t size = 4 * sizeof(float);
-	_matrialAmbient = (float*)malloc(size);
-	_matrialDiffuse = (float*)malloc(size);
-	_matrialSpecular = (float*)malloc(size);
-	_matrialEmission = (float*)malloc(size);
+	_ambientColor[0] = 1.0f;
+	_ambientColor[1] = 1.0f;
+	_ambientColor[2] = 1.0f;
+	_ambientColor[3] = 1.0f;
 
-	memset(_matrialAmbient, 0, size);
+	_diffuseColor[0] = 0.8f;
+	_diffuseColor[1] = 0.8f;
+	_diffuseColor[2] = 0.8f;
+	_diffuseColor[3] = 1.0f;
 
-	_matrialAmbient[0] = 1.0f;
-	_matrialAmbient[1] = 1.0f;
-	_matrialAmbient[2] = 1.0f;
-	_matrialAmbient[3] = 1.0f;
-
-	_matrialDiffuse[0] = 0.8f;
-	_matrialDiffuse[1] = 0.8f;
-	_matrialDiffuse[2] = 0.8f;
-	_matrialDiffuse[3] = 1.0f;
-
-	_matrialSpecular[0] = 1.0f;
-	_matrialSpecular[1] = 1.0f;
-	_matrialSpecular[2] = 1.0f;
-	_matrialSpecular[3] = 1.0f;
+	_specularColor[0] = 1.0f;
+	_specularColor[1] = 1.0f;
+	_specularColor[2] = 1.0f;
+	_specularColor[3] = 1.0f;
 
 
-	_matrialShiness = 32.0f;
+	_specularShiness = 32.0f;
 
-	_matrialEmission[0] = 0.0f;
-	_matrialEmission[1] = 0.0f;
-	_matrialEmission[2] = 0.0f;
-	_matrialEmission[3] = 1.0f;
+	_specularStrength = 16;
+
+	_emissionColor[0] = 0.0f;
+	_emissionColor[1] = 0.0f;
+	_emissionColor[2] = 0.0f;
+	_emissionColor[3] = 1.0f;
 }
 
 MaterialDetail::~MaterialDetail()
 {
-	free(_matrialAmbient);
-	free(_matrialDiffuse);
-	free(_matrialSpecular);
-	free(_matrialEmission);
 }
 
 void MaterialDetail::setAmbientByte(uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha)
 {
-	_matrialAmbient[0] = red / COLOR_FLOAT_VALUE;
-	_matrialAmbient[1] = green / COLOR_FLOAT_VALUE;
-	_matrialAmbient[2] = blue / COLOR_FLOAT_VALUE;
-	_matrialAmbient[3] = alpha / COLOR_FLOAT_VALUE;
+	_ambientColor[0] = red / COLOR_FLOAT_VALUE;
+	_ambientColor[1] = green / COLOR_FLOAT_VALUE;
+	_ambientColor[2] = blue / COLOR_FLOAT_VALUE;
+	_ambientColor[3] = alpha / COLOR_FLOAT_VALUE;
 }
 
 void MaterialDetail::setAmbient(float red, float green, float blue, float alpha)
 {
-	_matrialAmbient[0] = red;
-	_matrialAmbient[1] = green;
-	_matrialAmbient[2] = blue;
-	_matrialAmbient[3] = alpha;
+	_ambientColor[0] = red;
+	_ambientColor[1] = green;
+	_ambientColor[2] = blue;
+	_ambientColor[3] = alpha;
 }
 
 void MaterialDetail::setDiffuse(float red, float green, float blue, float alpha)
 {
-	_matrialDiffuse[0] = red;
-	_matrialDiffuse[1] = green;
-	_matrialDiffuse[2] = blue;
-	_matrialDiffuse[3] = alpha;
+	_diffuseColor[0] = red;
+	_diffuseColor[1] = green;
+	_diffuseColor[2] = blue;
+	_diffuseColor[3] = alpha;
 }
 
 void MaterialDetail::setSpecular(float red, float green, float blue, float alpha)
 {
-	_matrialSpecular[0] = red;
-	_matrialSpecular[1] = green;
-	_matrialSpecular[2] = blue;
-	_matrialSpecular[3] = alpha;
+	_specularColor[0] = red;
+	_specularColor[1] = green;
+	_specularColor[2] = blue;
+	_specularColor[3] = alpha;
 }
 
 void MaterialDetail::setEmission(float red, float green, float blue, float alpha)
 {
-	_matrialEmission[0] = red;
-	_matrialEmission[1] = green;
-	_matrialEmission[2] = blue;
-	_matrialEmission[3] = alpha;
+	_emissionColor[0] = red;
+	_emissionColor[1] = green;
+	_emissionColor[2] = blue;
+	_emissionColor[3] = alpha;
 }
 
 const float* MaterialDetail::getAmbient() const
 {
-	return _matrialAmbient;
+	return _ambientColor;
 }
 
 void MaterialDetail::setDiffuseByte(uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha)
 {
-	_matrialDiffuse[0] = red / COLOR_FLOAT_VALUE;
-	_matrialDiffuse[1] = green / COLOR_FLOAT_VALUE;
-	_matrialDiffuse[2] = blue / COLOR_FLOAT_VALUE;
-	_matrialDiffuse[3] = alpha / COLOR_FLOAT_VALUE;
+	_diffuseColor[0] = red / COLOR_FLOAT_VALUE;
+	_diffuseColor[1] = green / COLOR_FLOAT_VALUE;
+	_diffuseColor[2] = blue / COLOR_FLOAT_VALUE;
+	_diffuseColor[3] = alpha / COLOR_FLOAT_VALUE;
 }
 
 const float* MaterialDetail::getDiffuse() const
 {
-	return _matrialDiffuse;
+	return _diffuseColor;
 }
 
 void MaterialDetail::setSpecularByte(uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha)
 {
-	_matrialSpecular[0] = red / COLOR_FLOAT_VALUE;
-	_matrialSpecular[1] = green / COLOR_FLOAT_VALUE;
-	_matrialSpecular[2] = blue / COLOR_FLOAT_VALUE;
-	_matrialSpecular[3] = alpha / COLOR_FLOAT_VALUE;
+	_specularColor[0] = red / COLOR_FLOAT_VALUE;
+	_specularColor[1] = green / COLOR_FLOAT_VALUE;
+	_specularColor[2] = blue / COLOR_FLOAT_VALUE;
+	_specularColor[3] = alpha / COLOR_FLOAT_VALUE;
 }
 
 const float* MaterialDetail::getSpecular() const
 {
-	return _matrialSpecular;
+	return _specularColor;
 }
 
-void MaterialDetail::setShiness(float value)
+void MaterialDetail::setSpecularShiness(float value)
 {
-	_matrialShiness = value;
+	_specularShiness = value;
 }
 
-float MaterialDetail::getShiness() const
+float MaterialDetail::getSpecularShiness() const
 {
-	return _matrialShiness;
+	return _specularShiness;
 }
 
 void MaterialDetail::setEmissionByte(uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha)
 {
-	_matrialEmission[0] = red / COLOR_FLOAT_VALUE;
-	_matrialEmission[1] = green / COLOR_FLOAT_VALUE;
-	_matrialEmission[2] = blue / COLOR_FLOAT_VALUE;
-	_matrialEmission[3] = alpha / COLOR_FLOAT_VALUE;
+	_emissionColor[0] = red / COLOR_FLOAT_VALUE;
+	_emissionColor[1] = green / COLOR_FLOAT_VALUE;
+	_emissionColor[2] = blue / COLOR_FLOAT_VALUE;
+	_emissionColor[3] = alpha / COLOR_FLOAT_VALUE;
 }
 
 const float* MaterialDetail::getEmission() const
 {
-	return _matrialEmission;
+	return _emissionColor;
 }
 
 MaterialDetail& MaterialDetail::operator = (const MaterialDetail& value)
 {
-	memcpy(_matrialAmbient, (float*)value.getAmbient(), sizeof(_matrialAmbient));
-	memcpy(_matrialDiffuse, (float*)value.getDiffuse(), sizeof(_matrialDiffuse));
-	memcpy(_matrialSpecular, (float*)value.getSpecular(), sizeof(_matrialSpecular));
-	memcpy(_matrialEmission, (float*)value.getEmission(), sizeof(_matrialEmission));
+	memcpy(_ambientColor, (float*)value.getAmbient(), sizeof(_ambientColor));
+	memcpy(_diffuseColor, (float*)value.getDiffuse(), sizeof(_diffuseColor));
+	memcpy(_specularColor, (float*)value.getSpecular(), sizeof(_specularColor));
+	memcpy(_emissionColor, (float*)value.getEmission(), sizeof(_emissionColor));
 
-	_matrialShiness = value.getShiness();
+	_specularShiness = value.getSpecularShiness();
 
 	return *this;
 }
@@ -209,4 +199,14 @@ void MaterialDetail::setBumpTextureMap(const std::string& name)
 const std::string& MaterialDetail::getBumpTextureMap()
 {
 	return _mapTextureBump;
+}
+
+void sys::MaterialDetail::setSpecularStrength(float value)
+{
+	_specularStrength = value;
+}
+
+float sys::MaterialDetail::getSpecularStrength() const
+{
+	return _specularStrength;
 }

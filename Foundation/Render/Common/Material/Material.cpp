@@ -102,7 +102,7 @@ void render::Material::applyMaterial()
 		GLMaterial::setMaterialAmbient(FaceType::FRONT, _detail->getAmbient());
 		GLMaterial::setMaterialDiffuse(FaceType::FRONT, _detail->getDiffuse());
 		GLMaterial::setMaterialSpecular(FaceType::FRONT, _detail->getSpecular());
-		GLMaterial::setMaterialShininess(FaceType::FRONT, _detail->getShiness());
+		GLMaterial::setMaterialShininess(FaceType::FRONT, _detail->getSpecularShiness());
 		GLMaterial::setMaterialEmission(FaceType::FRONT, _detail->getEmission());
 		GLDebug::showError();
 	}
@@ -712,7 +712,11 @@ void render::Material::updateMaterialUniformValue(DrawTextureCache* textureCache
 		}
 		else if (item.first == UniformType::MATERIAL_SHININESS)
 		{
-			pUniform->setValue(_detail->getShiness());
+			pUniform->setValue(_detail->getSpecularShiness());
+		}
+		else if (item.first == UniformType::MATERIAL_STRENGTH)
+		{
+			pUniform->setValue(_detail->getSpecularStrength());
 		}
 	}
 }
