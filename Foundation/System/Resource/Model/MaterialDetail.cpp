@@ -25,9 +25,9 @@ MaterialDetail::MaterialDetail()
 
 	_specularStrength = 16;
 
-	_emissionColor[0] = 0.0f;
-	_emissionColor[1] = 0.0f;
-	_emissionColor[2] = 0.0f;
+	_emissionColor[0] = 1.0f;
+	_emissionColor[1] = 1.0f;
+	_emissionColor[2] = 1.0f;
 	_emissionColor[3] = 1.0f;
 }
 

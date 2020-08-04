@@ -1,5 +1,6 @@
 #include "CurveAction.h"
 #include "Common/Tool/Tool.h"
+#include "../Node/Node.h"
 render::CurveAction::CurveAction()
 {
 
@@ -81,8 +82,9 @@ math::Vector3 render::CircleAction::getPosition(float percent)
 	float angle = percent * 2 * M_PI;
 	float x = _cicleRadius * cosf(angle);
 	float y = _cicleRadius * sinf(angle);
+	float z = getTarget()->getPositionZ();
 
-	math::Vector3 pos(x, y);
+	math::Vector3 pos(x, y, z);
 
 	math::Matrix4x4 transpose;
 	math::Matrix4x4::getRST(_eularRadian, math::Vector3(1, 1, 1), pos, transpose);
@@ -120,16 +122,17 @@ math::Vector3 render::EllipseAction::getPosition(float percent)
 
 	float x = _radiusX * cosf(angle);
 	float y = _radiusY * sinf(angle);
+	float z = getTarget()->getPositionZ();
 
-	math::Vector3 pos(x, y);
+	math::Vector3 pos(x, y, z);
 	math::Matrix4x4 transpose;
 
-	math::Matrix4x4::getRST(_eularRadian, math::Vector3(1, 1, 1), pos, transpose);
+	math::Matrix4x4::getRST(_eularRadian, math::Vector3(1, 1, 1), pos - _centerPoint, transpose);
 
 	math::Matrix4x4 center;
 	center.setTranslate(_centerPoint);
 
-	math::Matrix4x4 result = transpose * center;
+	math::Matrix4x4 result = transpose.getInverse() * center;
 
 	math::Vector3 newPos = result.getPosition();
 

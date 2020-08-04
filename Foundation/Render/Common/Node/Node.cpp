@@ -379,7 +379,14 @@ void Node::calRealSpaceByMatrix()
 
 void Node::onSpaceChange()
 {
+	this->notifyToAll(NodeNotifyType::SPACE);
+	/*
 	this->notify(NodeNotifyType::SPACE);
+	for (auto item : _children)
+	{
+		item->notify(NodeNotifyType::SPACE);
+	}
+	*/
 }
 
 void Node::onBodyChange()

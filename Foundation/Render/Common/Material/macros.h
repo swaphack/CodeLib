@@ -106,14 +106,20 @@ namespace render
 		TEXTURE31,
 
 		/**************单材质*****************/
-		// 材质环境参数
+		// 发射颜色
+		MATERIAL_EMISSION,
+		// 材质环境颜色参数
 		MATERIAL_COLOR_AMBIENT,
-		// 材质漫射参数
+		// 材质漫射颜色参数
 		MATERIAL_COLOR_DIFFUSE,
-		// 材质高光参数
+		// 材质高光颜色参数
 		MATERIAL_COLOR_SPECULAR,
 		// 材质环境参数
-		MATERIAL_TEXTURE_AMBIENT,
+		MATERIAL_TEXTURE,
+		// 透明度参数
+		MATERIAL_TEXTURE_ALPHA,
+		// bump参数
+		MATERIAL_TEXTURE_BUMP,
 		// 材质漫射参数
 		MATERIAL_TEXTURE_DIFFUSE,
 		// 材质高光参数

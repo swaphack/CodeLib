@@ -29,12 +29,12 @@ vec2[9] getOffsets(float offset)
 }
 
 // 偏移量
-vec4 getEffectColor(sampler2D texture, vec2 uv, vec2 offsets[9], float kernel[9])
+vec4 getEffectColor(sampler2D tex, vec2 uv, vec2 offsets[9], float kernel[9])
 {
 	vec3 sampleTex[9];
     for(int i = 0; i < 9; i++)
     {
-        sampleTex[i] = vec3(texture(texture, uv + offsets[i]));
+        sampleTex[i] = vec3(texture(tex, uv + offsets[i]));
     }
     vec3 col = vec3(0.0);
     for(int i = 0; i < 9; i++)
@@ -44,7 +44,7 @@ vec4 getEffectColor(sampler2D texture, vec2 uv, vec2 offsets[9], float kernel[9]
 }
 
 // 硬核
-vec4 getKernelEffect(float offset, sampler2D texture, vec2 uv)
+vec4 getKernelEffect(float offset, sampler2D tex, vec2 uv)
 {
 	vec2 offsets[9] = getOffsets(offset);
 
@@ -54,11 +54,11 @@ vec4 getKernelEffect(float offset, sampler2D texture, vec2 uv)
         -1, -1, -1
     );
     
-    return getEffectColor(texture, uv, offsets, kernel);
+    return getEffectColor(tex, uv, offsets, kernel);
 }
 
 // 模糊
-vec4 getBlurEffect(float offset, sampler2D texture, vec2 uv)
+vec4 getBlurEffect(float offset, sampler2D tex, vec2 uv)
 {
 	vec2 offsets[9] = getOffsets(offset);
 	
@@ -68,11 +68,11 @@ vec4 getBlurEffect(float offset, sampler2D texture, vec2 uv)
     	1.0 / 16, 2.0 / 16, 1.0 / 16  
 	);
     
-   return getEffectColor(texture, uv, offsets, kernel);
+   return getEffectColor(tex, uv, offsets, kernel);
 }
 
 // 边缘
-vec4 getEdgeEffect(float offset, sampler2D texture, vec2 uv)
+vec4 getEdgeEffect(float offset, sampler2D tex, vec2 uv)
 {
 	vec2 offsets[9] = getOffsets(offset);
 	
@@ -82,5 +82,5 @@ vec4 getEdgeEffect(float offset, sampler2D texture, vec2 uv)
     	1.0, 1.0, 1.0
 	);
     
-   return getEffectColor(texture, uv, offsets, kernel);
+   return getEffectColor(tex, uv, offsets, kernel);
 }

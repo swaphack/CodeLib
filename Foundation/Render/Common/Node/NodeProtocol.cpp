@@ -40,7 +40,7 @@ void SpaceProtocol::setPosition(const math::Vector2& position)
 	onSpaceChange();
 }
 
-const math::Vector3& SpaceProtocol::getPosition()
+const math::Vector3& SpaceProtocol::getPosition() const
 {
 	return _position;
 }
@@ -63,7 +63,7 @@ void SpaceProtocol::setScale(float scale)
 	onSpaceChange();
 }
 
-const math::Vector3& SpaceProtocol::getScale()
+const math::Vector3& SpaceProtocol::getScale() const
 {
 	return _scale;
 }
@@ -80,7 +80,7 @@ void SpaceProtocol::setRotation(const math::Vector3& rotation)
 	onSpaceChange();
 }
 
-const math::Vector3& SpaceProtocol::getRotation()
+const math::Vector3& SpaceProtocol::getRotation() const
 {
 	return _rotation;
 }
@@ -103,17 +103,17 @@ void SpaceProtocol::setPositionZ(float z)
 	onSpaceChange();
 }
 
-float SpaceProtocol::getPositionX()
+float SpaceProtocol::getPositionX() const
 {
 	return _position.getX();
 }
 
-float SpaceProtocol::getPositionY()
+float SpaceProtocol::getPositionY() const
 {
 	return _position.getY();
 }
 
-float SpaceProtocol::getPositionZ()
+float SpaceProtocol::getPositionZ() const
 {
 	return _position.getZ();
 }
@@ -136,17 +136,17 @@ void SpaceProtocol::setScaleZ(float z)
 	onSpaceChange();
 }
 
-float SpaceProtocol::getScaleX()
+float SpaceProtocol::getScaleX() const
 {
 	return _scale.getX();
 }
 
-float SpaceProtocol::getScaleY()
+float SpaceProtocol::getScaleY() const
 {
 	return _scale.getY();
 }
 
-float SpaceProtocol::getScaleZ()
+float SpaceProtocol::getScaleZ() const
 {
 	return _scale.getZ();
 }
@@ -169,17 +169,17 @@ void SpaceProtocol::setRotationZ(float z)
 	onSpaceChange();
 }
 
-float SpaceProtocol::getRotationX()
+float SpaceProtocol::getRotationX() const
 {
 	return _rotation.getX();
 }
 
-float SpaceProtocol::getRotationY()
+float SpaceProtocol::getRotationY() const
 {
 	return _rotation.getY();
 }
 
-float SpaceProtocol::getRotationZ()
+float SpaceProtocol::getRotationZ() const
 {
 	return _rotation.getZ();
 }

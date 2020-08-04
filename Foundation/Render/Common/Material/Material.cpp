@@ -133,7 +133,7 @@ void render::Material::startUpdateShaderUniformValue(Node* node, DrawTextureCach
 	updateMVPMatrixUniformValue(node);
 
 	updateNearestLightUniformValue(node);
-	updateAllLightsUniformValue(node);
+	//updateAllLightsUniformValue(node);
 
 	updateMaterialUniformValue(textureCache);
 	updateTexturesUnifromValue(textureCache);
@@ -254,7 +254,7 @@ void render::Material::endUpdateShaderUniformValue(DrawTextureCache* textureCach
 			}
 			GLDebug::showError();
 		}
-		else if (item.first == UniformType::MATERIAL_TEXTURE_AMBIENT)
+		else if (item.first == UniformType::MATERIAL_TEXTURE)
 		{
 			auto pTexture = textureCache->getTexture(_detail->getAmbientTextureMap());
 			if (pTexture)
@@ -279,6 +279,26 @@ void render::Material::endUpdateShaderUniformValue(DrawTextureCache* textureCach
 		else if (item.first == UniformType::MATERIAL_TEXTURE_SPECULAR)
 		{
 			auto pTexture = textureCache->getTexture(_detail->getSpecularTextureMap());
+			if (pTexture)
+			{
+				pTexture->unbindTexture();
+				GLState::disable((EnableMode)pTexture->getTextureTarget());
+			}
+			GLDebug::showError();
+		}
+		else if (item.first == UniformType::MATERIAL_TEXTURE_ALPHA)
+		{
+			auto pTexture = textureCache->getTexture(_detail->getAlphaTextureMap());
+			if (pTexture)
+			{
+				pTexture->unbindTexture();
+				GLState::disable((EnableMode)pTexture->getTextureTarget());
+			}
+			GLDebug::showError();
+		}
+		else if (item.first == UniformType::MATERIAL_TEXTURE_BUMP)
+		{
+			auto pTexture = textureCache->getTexture(_detail->getBumpTextureMap());
 			if (pTexture)
 			{
 				pTexture->unbindTexture();
@@ -335,6 +355,9 @@ void render::Material::updateMVPMatrixUniformValue(Node* node)
 	math::Matrix4x4 mvpMat = projMat * viewMat * modelMat;
 	math::Matrix4x4 mvMat = viewMat * modelMat;
 
+	math::Vector3 viewPos = viewMat.getPosition();
+	//viewPos *= -1.0f;
+
 	for (auto item : _vertexUniformIndices)
 	{
 		auto pUniform = _shaderProgram->getUniform(item.second);
@@ -344,7 +367,7 @@ void render::Material::updateMVPMatrixUniformValue(Node* node)
 		}
 		if (item.first == UniformType::VIEW_POSITION)
 		{
-			pUniform->setValue3(1, viewMat.getPosition().getValue());
+			pUniform->setValue3(1, viewPos.getValue());
 		}
 		else if (item.first == UniformType::PROJECT_MATRIX)
 		{
@@ -407,9 +430,15 @@ void render::Material::updateNearestLightUniformValue(Node* node)
 	}
 	const math::Matrix4x4& viewMat = Camera::getMainCamera()->getViewMatrix();
 
+	math::Vector3 viewPos = viewMat.getPosition();
+	math::Vector3 lightPos = pLight->getWorldMatrix().getPosition();
+
+	//viewPos *= -1.0f;
+	//lightPos *= -1.0f;
+
 	math::Vector3 nodePos = node->getWorldMatrix().getPosition();
-	math::Vector3 viewDirection = viewMat.getPosition() - nodePos;
-	math::Vector3 lightDirection = pLight->getWorldMatrix().getPosition() - nodePos;
+	math::Vector3 viewDirection = viewPos - nodePos;
+	math::Vector3 lightDirection = lightPos - nodePos;
 	math::Vector3 halfVector = lightDirection + viewDirection;
 	halfVector.normalize();
 
@@ -442,7 +471,7 @@ void render::Material::updateNearestLightUniformValue(Node* node)
 		}
 		else if (item.first == UniformType::LIGHT_POSITION)
 		{
-			pUniform->setValue3(1, pLight->getWorldMatrix().getPosition().getValue());
+			pUniform->setValue3(1, lightPos.getValue());
 		}
 		else if (item.first == UniformType::LIGHT_DIRECTION)
 		{
@@ -533,9 +562,14 @@ void render::Material::updateAllLightsUniformValue(Node* node)
 		auto pLight = light.second;
 		int index = light.first;
 
+		math::Vector3 viewPos = viewMat.getPosition();
+		math::Vector3 lightPos = pLight->getWorldMatrix().getPosition();
+		//lightPos *= -1.0f;
+		//viewPos *= -1.0f;
+
 		math::Vector3 nodePos = node->getWorldMatrix().getPosition();
-		math::Vector3 viewDirection = viewMat.getPosition() - nodePos;
-		math::Vector3 lightDirection = pLight->getWorldMatrix().getPosition() - nodePos;
+		math::Vector3 viewDirection = viewPos - nodePos;
+		math::Vector3 lightDirection = lightPos - nodePos;
 		math::Vector3 halfVector = lightDirection + viewDirection;
 
 		for (auto item : _vertexUniformIndices)
@@ -567,7 +601,7 @@ void render::Material::updateAllLightsUniformValue(Node* node)
 			}
 			else if (item.first == UniformType::MULTI_LIGHT_POSITION)
 			{
-				pUniform->setValue3(1, pLight->getWorldMatrix().getPosition().getValue());
+				pUniform->setValue3(1, lightPos.getValue());
 			}
 			else if (item.first == UniformType::MULTI_LIGHT_DIRECTION)
 			{
@@ -654,7 +688,11 @@ void render::Material::updateMaterialUniformValue(DrawTextureCache* textureCache
 		{
 			continue;
 		}
-		if (item.first == UniformType::MATERIAL_COLOR_AMBIENT)
+		if (item.first == UniformType::MATERIAL_EMISSION)
+		{
+			pUniform->setValue4(1, _detail->getEmission());
+		}
+		else if (item.first == UniformType::MATERIAL_COLOR_AMBIENT)
 		{
 			pUniform->setValue4(1, _detail->getAmbient());
 		}
@@ -666,7 +704,7 @@ void render::Material::updateMaterialUniformValue(DrawTextureCache* textureCache
 		{
 			pUniform->setValue4(1, _detail->getSpecular());
 		}
-		else if (item.first == UniformType::MATERIAL_TEXTURE_AMBIENT)
+		else if (item.first == UniformType::MATERIAL_TEXTURE)
 		{
 			auto pTexture = textureCache->getTexture(_detail->getAmbientTextureMap());
 			if (pTexture)
@@ -703,6 +741,38 @@ void render::Material::updateMaterialUniformValue(DrawTextureCache* textureCache
 				pTexture->bindTexture();
 				pTexture->enableTextureWithSampler(2);
 				pUniform->setValue(2);
+			}
+			else
+			{
+				pUniform->setValue(0);
+			}
+			GLDebug::showError();
+		}
+		else if (item.first == UniformType::MATERIAL_TEXTURE_ALPHA)
+		{
+			auto pTexture = textureCache->getTexture(_detail->getAlphaTextureMap());
+			if (pTexture)
+			{
+				pTexture->activeTexture(ActiveTextureName::TEXTURE3);
+				pTexture->bindTexture();
+				pTexture->enableTextureWithSampler(3);
+				pUniform->setValue(3);
+			}
+			else
+			{
+				pUniform->setValue(0);
+			}
+			GLDebug::showError();
+		}
+		else if (item.first == UniformType::MATERIAL_TEXTURE_BUMP)
+		{
+			auto pTexture = textureCache->getTexture(_detail->getBumpTextureMap());
+			if (pTexture)
+			{
+				pTexture->activeTexture(ActiveTextureName::TEXTURE4);
+				pTexture->bindTexture();
+				pTexture->enableTextureWithSampler(4);
+				pUniform->setValue(4);
 			}
 			else
 			{

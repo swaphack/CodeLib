@@ -25,7 +25,7 @@ void main()
 	// specular
 	vec4 specular = get_mat_specular(light, material, fragNormal, fragPos, viewPos);
 
-	vec4 result = (ambient + diffuse + specular) ;
+	vec4 result = material.emission + (ambient + diffuse + specular) ;
 
 	color = result;
 }

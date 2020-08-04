@@ -112,11 +112,14 @@ void Utility::initShaderAttrib(render::Material* mat)
 	mat->addUniform(UniformType::MULTI_LIGHT_LINEAR_ATTENUATION, "light[%d].linearAttenuation");
 	mat->addUniform(UniformType::MULTI_LIGHT_QUADRATIC_ATTENUATION, "light[%d].quadraticAttenuation");
 	*/
+	mat->addUniform(UniformType::MATERIAL_EMISSION, "material.emission");
 	mat->addUniform(UniformType::MATERIAL_COLOR_AMBIENT, "material.ambient");
 	mat->addUniform(UniformType::MATERIAL_COLOR_DIFFUSE, "material.diffuse");
 	mat->addUniform(UniformType::MATERIAL_COLOR_SPECULAR, "material.specular");
 	
-	mat->addUniform(UniformType::MATERIAL_TEXTURE_AMBIENT, "material.texAmbient");
+	mat->addUniform(UniformType::MATERIAL_TEXTURE, "material.tex");
+	mat->addUniform(UniformType::MATERIAL_TEXTURE_ALPHA, "material.texAlpha");
+	mat->addUniform(UniformType::MATERIAL_TEXTURE_BUMP, "material.texBump");
 	mat->addUniform(UniformType::MATERIAL_TEXTURE_DIFFUSE, "material.texDiffuse");
 	mat->addUniform(UniformType::MATERIAL_TEXTURE_SPECULAR, "material.texSpecular");
 	
@@ -174,7 +177,7 @@ void Utility::runRotateAction(render::Node* node)
 		return;
 	}
 	RotateByAction* pRotateByAction = CREATE_ACTION(RotateByAction);
-	pRotateByAction->setDifferentRotation(0, 0, 360);
+	pRotateByAction->setDifferentRotation(0, 360, 0);
 	pRotateByAction->setDuration(5);
 
 	RepeateForeverAction* pRepeateAction = CREATE_ACTION(RepeateForeverAction);

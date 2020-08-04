@@ -28,13 +28,13 @@ namespace render
 
 		void setPosition(const math::Vector2& position);
 		// 获取坐标
-		float getPositionX();
+		float getPositionX() const;
 
-		float getPositionY();
+		float getPositionY() const;
 
-		float getPositionZ();
+		float getPositionZ() const;
 
-		const math::Vector3& getPosition();
+		const math::Vector3& getPosition() const;
 		// 设置缩放比
 		void setScaleX(float x);
 
@@ -48,13 +48,13 @@ namespace render
 
 		void setScale(float scale);
 		// 获取缩放比
-		float getScaleX();
+		float getScaleX() const;
 
-		float getScaleY();
+		float getScaleY() const;
 
-		float getScaleZ();
+		float getScaleZ() const;
 
-		const math::Vector3& getScale();
+		const math::Vector3& getScale() const;
 		// 设置旋转系数
 		void setRotationX(float x);
 
@@ -66,13 +66,13 @@ namespace render
 
 		void setRotation(const math::Vector3& rotation);
 		// 获取旋转系数
-		float getRotationX();
+		float getRotationX() const;
 
-		float getRotationY();
+		float getRotationY() const;
 
-		float getRotationZ();
+		float getRotationZ() const;
 
-		const math::Vector3& getRotation();
+		const math::Vector3& getRotation() const;
 	public:
 		virtual void onSpaceChange() {}
 	protected:

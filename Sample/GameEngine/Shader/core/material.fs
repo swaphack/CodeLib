@@ -2,16 +2,16 @@
 
 struct Material 
 {
-	vec4 emission; // 颜色
-	
-	vec4 ambient;
-	vec4 diffuse;
-	vec4 specular;
+	vec4 emission; // 发射颜色
+	vec4 ambient; // 环境颜色
+	vec4 diffuse;	// 漫反射颜色
+	vec4 specular; // 高光反射颜色
 
-	sampler2D texAmbient;
-	sampler2D texDiffuse;
-	sampler2D texSpecular;
-
+	sampler2D tex; // 纹理
+	sampler2D texDiffuse; // 漫反射纹理
+	sampler2D texSpecular; // 高光反射纹理
+	sampler2D texAlpha;	// alpha纹理
+	sampler2D texBump;	// bump纹理
 
 	float shininess; 	// 镜面反射高光指数
 	float strength;		// 镜面反射高光增强系数
@@ -20,14 +20,15 @@ struct Material
 // 环境
 vec4 get_mat_ambient(Light light,  Material material)
 {
-	return light.color * material.ambient;
+	return light.color * material.emission;
 }
+
 // 漫反射
 vec4 get_mat_diffuse(Light light, Material material, vec3 fragNormal, vec3 fragPos)
 {
 	vec3 norm = normalize(fragNormal);
 
-    vec3 lightDir = normalize(light.position - fragPos);
+    vec3 lightDir = normalize(-light.position - fragPos);
 
     float diff = max(dot(norm, lightDir), 0.0);
 
@@ -41,7 +42,7 @@ vec4 get_mat_specular(Light light, Material material, vec3 fragNormal, vec3 frag
 	vec3 lightDir = normalize(light.position - fragPos);
 	vec3 viewDir = normalize(viewPos - fragPos);
 
-	vec3 reflectDir = reflect(-lightDir, norm);
+	vec3 reflectDir = reflect(lightDir, norm);
 
 	float spec = pow(max(dot(viewDir, reflectDir), 0.0), material.shininess);
 
@@ -51,7 +52,7 @@ vec4 get_mat_specular(Light light, Material material, vec3 fragNormal, vec3 frag
 // 环境
 vec4 get_mat_ambient(Light light,  Material material, vec2 fragTexcoord)
 {
-	return get_mat_ambient(light, material) * texture(material.texAmbient, fragTexcoord);
+	return get_mat_ambient(light, material) * texture(material.tex, fragTexcoord);
 }
 // 漫反射
 vec4 get_mat_diffuse(Light light, Material material, vec3 fragNormal, vec3 fragPos, vec2 fragTexcoord)

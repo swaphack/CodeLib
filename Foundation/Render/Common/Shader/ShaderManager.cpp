@@ -4,6 +4,7 @@
 #include "ComputeShaderProgram.h"
 #include "VertexShaderProgram.h"
 #include "Shader.h"
+#include "system.h"
 
 render::ShaderManager::ShaderManager()
 {
@@ -167,6 +168,9 @@ render::Shader* render::ShaderManager::createShader(ShaderType type, const std::
 	render::Shader* pShader = render::Shader::createFromData(type, root.getString());
 	if (pShader == nullptr)
 	{
+		std::string errFilePath = "error/";
+		errFilePath += filepath;
+		sys::File::write(errFilePath, root.getString(), root.getSize());
 		PRINT("\n%s\n\n", root.getString());
 		return nullptr;
 	}

@@ -18,7 +18,7 @@ out vec4 color;
 void main()
 {
 
-	vec4 matColor = texture(material.texAmbient, fragTexcoord);
+	vec4 matColor = texture(material.tex, fragTexcoord);
 
 	vec3 viewDirection = normalize(viewPos - fragPos);
 
