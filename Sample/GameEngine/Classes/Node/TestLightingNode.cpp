@@ -18,7 +18,7 @@ void TestLightingNode::initNodes()
 
 	this->testCubeModel();
 
-	//this->addEarth();
+	this->addEarth();
 }
 
 void TestLightingNode::addSun()
@@ -31,8 +31,6 @@ void TestLightingNode::addSun()
 	Utility::loadShader(pLightShape, "Shader/texture/texture.vs", "Shader/texture/texture.fs");
 	this->addChild(pLightShape);
 
-	Utility::runRotateAction(pLightShape);
-
 	render::Light0* pLight = CREATE_NODE(render::Light0);
 	pLight->setAmbient(100, 100, 100, 255);
 	pLight->setDiffuse(255, 0, 0, 255);
@@ -40,7 +38,7 @@ void TestLightingNode::addSun()
 	pLightShape->addChild(pLight);
 
 	render::EllipseAction* pAction = render::CREATE_ACTION(render::EllipseAction);
-	pAction->setControlParameters(math::Vector3(150, 300), 500, 350, math::Vector3(120, 0, 0));
+	pAction->setControlParameters(math::Vector3(512, 384), 400, 150, math::Vector3(0, 0, 0));
 	pAction->setDuration(10);
 
 	pLightShape->getActionProxy()->runAction(render::RepeateForeverAction::create(pAction));
@@ -53,7 +51,7 @@ void TestLightingNode::addEarth()
 	//pEarth->setDiffuseTexture("Resource/Image/2k_earth_normal_map.tif");
 	//pEarth->setSpecularTexture("Resource/Image/2k_earth_specular_map.tif");
 	pEarth->setRadius(150);
-	pEarth->setPosition(512, 384);
+	pEarth->setPosition(600, 200);
 
 	//pEarth->setShaderProgramFunc([](render::ShaderProgram* program) {
 	//	auto specularPercent = program->getUniform("specularPercent");
@@ -62,8 +60,8 @@ void TestLightingNode::addEarth()
 	//	if (diffusePercent) diffusePercent->setValue(0.0f);
 	//});
 
-	//Utility::loadShader(pEarth, "Shader/material/material_texture_light.vs", "Shader/material/material_texture_light.fs");
-	Utility::loadShader(pEarth, "Shader/material/material_single_light.vs", "Shader/material/material_single_light.fs");
+	Utility::loadShader(pEarth, "Shader/material/material_texture.vs", "Shader/material/material_texture.fs");
+	//Utility::loadShader(pEarth, "Shader/material/material_single_light.vs", "Shader/material/material_single_light.fs");
 	this->addChild(pEarth);
 
 	Utility::runRotateAction(pEarth);
@@ -85,10 +83,11 @@ void TestLightingNode::testCubeModel()
 	pModel->setTexture(filepath);
 	pModel->setColor(0.5f, 0.5f, 0.5f);
 	pModel->setAnchorPoint(math::Vector3(0.5f, 0.5f, 0.5f));
-	pModel->setPosition(512, 384, 0);
+	pModel->setPosition(512, 384, 10);
 	pModel->setRotation(0, 45, 0);
 	pModel->setVolume(150, 150, 150);
-	Utility::loadShader(pModel, "Shader/material/material_texture.vs", "Shader/material/material_texture.fs");
+	//Utility::loadShader(pModel, "Shader/material/material_texture.vs", "Shader/material/material_texture.fs");
+	Utility::loadShader(pModel, "Shader/material/material_single_light.vs", "Shader/material/material_single_light.fs");
 	this->addChild(pModel);
 
 	//Utility::runRotateAction(pModel);

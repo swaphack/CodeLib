@@ -285,7 +285,7 @@ void render::Mesh::calTrianglesVertexNormal(const sys::MeshMemoryData& vertices,
 		math::Vector3 p1 = vecPoint[pIndice[i * 3 + 1]];
 		math::Vector3 p2 = vecPoint[pIndice[i * 3 + 2]];
 
-		math::Vector3 normal = math::Vector3::cross(p1 - p0, p2 - p0);
+		math::Vector3 normal = math::Vector3::cross(p0 -p1, p2 - p0);
 
 		mapPointNormal[pIndice[i * 3 + 0]].push_back(normal);
 		mapPointNormal[pIndice[i * 3 + 1]].push_back(normal);
