@@ -8,9 +8,9 @@ using namespace render;
 
 Light::Light()
 {
-	_lightAmbient[0] = 1.0f;
-	_lightAmbient[1] = 1.0f;
-	_lightAmbient[2] = 1.0f;
+	_lightAmbient[0] = 0.5f;
+	_lightAmbient[1] = 0.5f;
+	_lightAmbient[2] = 0.5f;
 	_lightAmbient[3] = 1.0f;
 
 	_lightDiffuse[0] = 1.0f;
@@ -104,12 +104,18 @@ bool Light::init()
 
 LightName render::Light::getLightName()
 {
-	return LightName::LIGHT0;
+	return (LightName)((int)LightName::LIGHT0 + _lightIndex);
+}
+
+void render::Light::setLightIndex(int index)
+{
+	ASSERT(index >= 0 || index <= getLightMaxCount());
+	_lightIndex = index;
 }
 
 int render::Light::getLightIndex()
 {
-	return (int)getLightName() - (int)LightName::LIGHT0;
+	return _lightIndex;
 }
 
 int render::Light::getLightMaxCount()

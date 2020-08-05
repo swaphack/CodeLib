@@ -27,8 +27,15 @@ vec4 get_mat_ambient(Light light,  Material material)
 vec4 get_mat_diffuse(Light light, Material material, vec3 fragNormal, vec3 fragPos)
 {
 	vec3 norm = normalize(fragNormal);
-
-    vec3 lightDir = normalize(light.position - fragPos);
+	vec3 lightDir;
+	if (!light.isLocal) 
+	{
+		lightDir = light.direction;
+	}
+    else 
+    {
+    	lightDir = normalize(light.position - fragPos);
+    }
 
     float diff = max(dot(norm, lightDir), 0.0);
 
@@ -38,8 +45,15 @@ vec4 get_mat_diffuse(Light light, Material material, vec3 fragNormal, vec3 fragP
 vec4 get_mat_specular(Light light, Material material, vec3 fragNormal, vec3 fragPos, vec3 viewPos)
 {
 	vec3 norm = normalize(fragNormal);
-
-	vec3 lightDir = normalize(light.position - fragPos);
+	vec3 lightDir;
+	if (!light.isLocal) 
+	{
+		lightDir = light.direction;
+	}
+    else 
+    {
+    	lightDir = normalize(light.position - fragPos);
+    }
 	vec3 viewDir = normalize(viewPos - fragPos);
 
 	vec3 reflectDir = reflect(lightDir, norm);
@@ -96,7 +110,7 @@ vec4 get_mat_color_with_multi_lights(vec4 color, Material material, vec4 positio
 		reflectedLight += lights[i].color * material.specular * pro.specular * pro.attenuation;
 	}
 
-	vec4 result = min(/*material.emission +*/ color * scatteredLight + reflectedLight, vec4(1.0));
+	vec4 result = min(material.emission + color * scatteredLight + reflectedLight, vec4(1.0));
 
 	return vec4(result.rgb, color.a);
 }

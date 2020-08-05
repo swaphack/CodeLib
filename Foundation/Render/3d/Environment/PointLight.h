@@ -35,24 +35,5 @@ namespace render
 		float _linearAttenuation;
 		// 按距离二次函数衰减
 		float _quadraticAttenuation;
-
-		// 朝向
-		float _lightDirection[3];
 	};
-
-#define CTREATE_POINT_LIGHT(index) \
-	class PointLight##index : public PointLight \
-	{ \
-	public: \
-	virtual LightName getLightName() { return LightName::LIGHT##index; } \
-	};
-
-	CTREATE_POINT_LIGHT(0);
-	CTREATE_POINT_LIGHT(1);
-	CTREATE_POINT_LIGHT(2);
-	CTREATE_POINT_LIGHT(3);
-	CTREATE_POINT_LIGHT(4);
-	CTREATE_POINT_LIGHT(5);
-	CTREATE_POINT_LIGHT(6);
-	CTREATE_POINT_LIGHT(7);
 }

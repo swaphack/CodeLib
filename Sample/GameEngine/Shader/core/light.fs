@@ -45,7 +45,7 @@ LightComputeProperty compute_light_property(Light light, vec4 position, vec3 nor
 
 	pro.attenuation = 1.0;
 
-	if	(light.isLocal)
+	if (light.isLocal)
 	{
 		lightDirection = lightPosition - vec3(position);
 		float lightDistance = length(lightDirection);
@@ -56,7 +56,7 @@ LightComputeProperty compute_light_property(Light light, vec4 position, vec3 nor
 				+ light.linearAttenuation * lightDistance
 				+ light.quadraticAttenuation * lightDistance * lightDistance);
 
-		if	(light.isSpot)
+		if (light.isSpot)
 		{
 			float spotCos = dot(lightDirection, - light.direction);
 			if (spotCos < light.spotCostCutoff)

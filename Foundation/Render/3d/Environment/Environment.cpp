@@ -17,7 +17,8 @@ void render::Environment::addLight(Light* light)
 	{
 		return;
 	}
-	int index = light->getLightIndex();
+	int index = _lights.size();
+	light->setLightIndex(index);
 
 	auto it = _lights.find(index);
 

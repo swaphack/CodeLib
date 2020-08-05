@@ -576,6 +576,9 @@
     <ClCompile Include="3d\Common\MultiMeshModel.cpp">
       <Filter>3d\Common</Filter>
     </ClCompile>
+    <ClCompile Include="3d\Environment\DirectionLight.cpp">
+      <Filter>3d\Environment</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Common\Node\import.h">
@@ -1322,6 +1325,9 @@
     </ClInclude>
     <ClInclude Include="3d\Common\MultiMeshModel.h">
       <Filter>3d\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="3d\Environment\DirectionLight.h">
+      <Filter>3d\Environment</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

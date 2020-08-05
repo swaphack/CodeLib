@@ -30,21 +30,7 @@ namespace render
 		float _spotExponent;
 		// ¸²¸Ç·¶Î§
 		float _spotCutOff;
+		// ³¯Ïò
+		float _lightDirection[3];
 	};
-
-#define CTREATE_SPOT_LIGHT(index) \
-	class SpotLight##index : public SpotLight \
-	{ \
-	public: \
-	virtual LightName getLightName() { return LightName::LIGHT##index; } \
-	};
-
-	CTREATE_SPOT_LIGHT(0);
-	CTREATE_SPOT_LIGHT(1);
-	CTREATE_SPOT_LIGHT(2);
-	CTREATE_SPOT_LIGHT(3);
-	CTREATE_SPOT_LIGHT(4);
-	CTREATE_SPOT_LIGHT(5);
-	CTREATE_SPOT_LIGHT(6);
-	CTREATE_SPOT_LIGHT(7);
 }

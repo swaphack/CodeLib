@@ -89,6 +89,7 @@
     <ClCompile Include="3d\Common\Model.cpp" />
     <ClCompile Include="3d\Common\MultiMeshModel.cpp" />
     <ClCompile Include="3d\Environment\ClipPlane.cpp" />
+    <ClCompile Include="3d\Environment\DirectionLight.cpp" />
     <ClCompile Include="3d\Environment\Environment.cpp" />
     <ClCompile Include="3d\Environment\Fog.cpp" />
     <ClCompile Include="3d\Environment\Light.cpp" />
@@ -292,6 +293,7 @@
     <ClInclude Include="3d\Common\Model.h" />
     <ClInclude Include="3d\Common\import.h" />
     <ClInclude Include="3d\Environment\ClipPlane.h" />
+    <ClInclude Include="3d\Environment\DirectionLight.h" />
     <ClInclude Include="3d\Environment\Environment.h" />
     <ClInclude Include="3d\Environment\Fog.h" />
     <ClInclude Include="3d\Environment\Light.h" />

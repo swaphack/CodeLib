@@ -144,6 +144,15 @@ namespace render
 		virtual void onBodyChange();
 		// 子节点发生改变
 		virtual void onChildrenChange();
+	public:
+		// 支持光源
+		void setSupportLight(bool supported);
+		// 支持光源
+		bool isSupportedLight();
+		// 支持多光源
+		void setSupportMultiLight(bool supported);
+		// 支持多光源
+		bool isSupportedMultiLight();
 	private:
 		// 使用矩阵计算空间变化属性
 		void calRealSpaceByMatrix();
@@ -180,6 +189,10 @@ namespace render
 		math::Matrix4x4 _localInverseMatrix;
 		// 实际在世界坐标系中的矩阵
 		math::Matrix4x4 _worldMatrix;
+		// 支持多光源
+		bool _bSupportMultiLight = false;
+		// 支持多光源
+		bool _bSupportLight = false;
 	};
 
 

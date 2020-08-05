@@ -158,6 +158,8 @@ namespace render
 		LIGHT_SPOT_COST_CUTOFF,
 
 		/**************多光源*****************/
+		// 光源数量
+		MULTI_LIGHT_COUNT,
 		// 启用多光源
 		MULTI_LIGHT_ENABLED,
 		// 是否本地光源

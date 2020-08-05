@@ -12,8 +12,8 @@ namespace render
 		Light();
 		virtual ~Light();
 	public:
-		// 光源名称
-		virtual LightName getLightName();
+		LightName getLightName();
+		void setLightIndex(int index);
 		// 光源索引
 		int getLightIndex();
 		// 最大光源数
@@ -47,6 +47,8 @@ namespace render
 		float _lightDiffuse[4];
 		// 反射光
 		float _lightSpecular[4];
+		// 光源索引
+		int _lightIndex = 0;
 	};
 
 #define CTREATE_LIGHT(index) \

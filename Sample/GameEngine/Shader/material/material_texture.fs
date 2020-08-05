@@ -28,7 +28,7 @@ void main()
 	//diffuse = vec4(0.0);
 	//specular = vec4(0.0);
 
-	vec4 result = /*material.emission +*/ (ambient + diffuse + specular) ;
+	vec4 result = material.emission + (ambient + diffuse + specular) ;
 
 	color = result;
 }

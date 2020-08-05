@@ -236,6 +236,7 @@ vec4 get_mat_color_with_multi_lights(vec4 color, Material material, vec4 positio
 	return vec4(result.rgb, color.a);
 }
 
+
 uniform Light light;
 uniform Material material;
 
@@ -249,19 +250,13 @@ out vec4 color;
 
 void main()
 {
-	// ambient
-	vec4 ambient = get_mat_ambient(light, material, fragTexcoord);
 
-	// diffuse
-	vec4 diffuse = get_mat_diffuse(light, material, fragNormal, fragPos, fragTexcoord);
+	vec4 matColor = texture(material.tex, fragTexcoord);
 
-	// specular
-	vec4 specular = get_mat_specular(light, material, fragNormal, fragPos, fragTexcoord, -viewPos);
+	vec3 viewDirection = normalize(viewPos - fragPos);
 
-	//diffuse = vec4(0.0);
-	//specular = vec4(0.0);
+	Light lights[MAX_LIGHT_COUNT];
+	lights[0] = light;
 
-	vec4 result = material.emission + (ambient + diffuse + specular) ;
-
-	color = result;
+	color = get_mat_color_with_multi_lights(matColor, material, vec4(fragPos, 1.0), fragNormal, viewDirection, lights, 1);
 }

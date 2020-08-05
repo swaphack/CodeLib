@@ -14,6 +14,8 @@ protected:
 private:
 	void addSun();
 
+	void addStar();
+
 	void addEarth();
 
 

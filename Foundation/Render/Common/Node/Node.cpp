@@ -483,3 +483,23 @@ void render::Node::notifyToAll(NodeNotifyType id)
 		(*it)->notifyToAll(id);
 	}
 }
+
+void render::Node::setSupportLight(bool supported)
+{
+	_bSupportLight = supported;
+}
+
+bool render::Node::isSupportedLight()
+{
+	return _bSupportLight;
+}
+
+void render::Node::setSupportMultiLight(bool supported)
+{
+	_bSupportMultiLight = supported;
+}
+
+bool render::Node::isSupportedMultiLight()
+{
+	return _bSupportMultiLight;
+}

@@ -132,8 +132,17 @@ void render::Material::startUpdateShaderUniformValue(Node* node, DrawTextureCach
 
 	updateMVPMatrixUniformValue(node);
 
-	updateNearestLightUniformValue(node);
-	//updateAllLightsUniformValue(node);
+	if (node->isSupportedLight())
+	{
+		if (node->isSupportedMultiLight())
+		{
+			updateAllLightsUniformValue(node);
+		}
+		else
+		{
+			updateNearestLightUniformValue(node);
+		}
+	}
 
 	updateMaterialUniformValue(textureCache);
 	updateTexturesUnifromValue(textureCache);
@@ -452,22 +461,22 @@ void render::Material::updateNearestLightUniformValue(Node* node)
 		
 		if (item.first == UniformType::LIGHT_ENABLED)
 		{
-			pUniform->setValue(true);
+			pUniform->setValue(1);
 		}
 		else if (item.first == UniformType::LIGHT_LOCAL)
 		{
 			if (pLight->is<PointLight>() || pLight->is<SpotLight>())
 			{
-				pUniform->setValue(true);
+				pUniform->setValue(1);
 			}
 			else
 			{
-				pUniform->setValue(false);
+				pUniform->setValue(0);
 			}
 		}
 		else if (item.first == UniformType::LIGHT_SPOT)
 		{
-			pUniform->setValue(pLight->is<SpotLight>());
+			pUniform->setValue(pLight->is<SpotLight>() ? 1 : 0);
 		}
 		else if (item.first == UniformType::LIGHT_POSITION)
 		{
@@ -475,14 +484,23 @@ void render::Material::updateNearestLightUniformValue(Node* node)
 		}
 		else if (item.first == UniformType::LIGHT_DIRECTION)
 		{
-			auto pSpotLight = pLight->as<SpotLight>();
-			if (pSpotLight)
+			auto pPointLight = pLight->as<PointLight>();
+			if (pPointLight)
 			{
-				pUniform->setValue3(1, pSpotLight->getDirection());
+				pUniform->setValue3(1, lightDirection.getValue());
 			}
 			else
 			{
-				pUniform->setValue3(1, lightDirection.getValue());
+				auto pSpotLight = pLight->as<SpotLight>();
+				if (pSpotLight)
+				{
+					pUniform->setValue3(1, pSpotLight->getDirection());
+				}
+				auto pDirLight = pLight->as<DirectionLight>();
+				if (pDirLight)
+				{
+					pUniform->setValue3(1, pDirLight->getDirection());
+				}
 			}
 		}
 		else if (item.first == UniformType::LIGHT_HALF_VECTOR)
@@ -556,7 +574,18 @@ void render::Material::updateAllLightsUniformValue(Node* node)
 	const auto& mapLights = G_ENVIRONMENT->getAllLights();
 
 	const math::Matrix4x4& viewMat = Camera::getMainCamera()->getViewMatrix();
-
+	auto it = _vertexUniformIndices.find(UniformType::MULTI_LIGHT_COUNT);
+	if (it == _vertexUniformIndices.end())
+	{
+		return;
+	}
+	const std::string strCount = it->second;
+	auto pUniform = _shaderProgram->getUniform(strCount);
+	if (!pUniform)
+	{
+		return;
+	}
+	pUniform->setValue((int)mapLights.size());
 	for (auto light : mapLights)
 	{
 		auto pLight = light.second;
@@ -575,29 +604,29 @@ void render::Material::updateAllLightsUniformValue(Node* node)
 		for (auto item : _vertexUniformIndices)
 		{
 			std::string text = getCString(item.second.c_str(), index);
-			auto pUniform = _shaderProgram->getUniform(item.second);
+			auto pUniform = _shaderProgram->getUniform(text);
 			if (!pUniform)
 			{
 				continue;
 			}
 			else if (item.first == UniformType::MULTI_LIGHT_ENABLED)
 			{
-				pUniform->setValue(true);
+				pUniform->setValue(1);
 			}
 			else if (item.first == UniformType::MULTI_LIGHT_LOCAL)
 			{
 				if (pLight->is<PointLight>() || pLight->is<SpotLight>())
 				{
-					pUniform->setValue(true);
+					pUniform->setValue(1);
 				}
 				else
 				{
-					pUniform->setValue(false);
+					pUniform->setValue(0);
 				}
 			}
 			else if (item.first == UniformType::MULTI_LIGHT_SPOT)
 			{
-				pUniform->setValue(pLight->is<SpotLight>());
+				pUniform->setValue(pLight->is<SpotLight>() ? 1 : 0);
 			}
 			else if (item.first == UniformType::MULTI_LIGHT_POSITION)
 			{
@@ -605,15 +634,23 @@ void render::Material::updateAllLightsUniformValue(Node* node)
 			}
 			else if (item.first == UniformType::MULTI_LIGHT_DIRECTION)
 			{
-				auto pSpotLight = pLight->as<SpotLight>();
-
-				if (pSpotLight->is<SpotLight>())
+				auto pPointLight = pLight->as<PointLight>();
+				if (pPointLight)
 				{
-					pUniform->setValue3(1, pSpotLight->getDirection());
+					pUniform->setValue3(1, lightDirection.getValue());
 				}
 				else
 				{
-					pUniform->setValue3(1, lightDirection.getValue());
+					auto pSpotLight = pLight->as<SpotLight>();
+					if (pSpotLight)
+					{
+						pUniform->setValue3(1, pSpotLight->getDirection());
+					}
+					auto pDirLight = pLight->as<DirectionLight>();
+					if (pDirLight)
+					{
+						pUniform->setValue3(1, pDirLight->getDirection());
+					}
 				}
 			}
 			else if (item.first == UniformType::MULTI_LIGHT_HALF_VECTOR)

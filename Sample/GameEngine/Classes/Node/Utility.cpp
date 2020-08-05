@@ -97,21 +97,22 @@ void Utility::initShaderAttrib(render::Material* mat)
 	mat->addUniform(UniformType::LIGHT_CONSTANT_ATTENUATION, "light.constantAttenuation");
 	mat->addUniform(UniformType::LIGHT_LINEAR_ATTENUATION, "light.linearAttenuation");
 	mat->addUniform(UniformType::LIGHT_QUADRATIC_ATTENUATION, "light.quadraticAttenuation");
-	/*
-	mat->addUniform(UniformType::MULTI_LIGHT_ENABLED, "light[%d].isEnabled");
-	mat->addUniform(UniformType::MULTI_LIGHT_LOCAL, "light[%d].isLocal");
-	mat->addUniform(UniformType::MULTI_LIGHT_SPOT, "light[%d].isSpot");
-	mat->addUniform(UniformType::MULTI_LIGHT_POSITION, "light[%d].position");
-	mat->addUniform(UniformType::MULTI_LIGHT_DIRECTION, "light[%d].direction");
-	mat->addUniform(UniformType::MULTI_LIGHT_HALF_VECTOR, "light[%d].halfVector");
-	mat->addUniform(UniformType::MULTI_LIGHT_COLOR, "light[%d].color");
-	mat->addUniform(UniformType::MULTI_LIGHT_AMBIENT, "light[%d].ambient");
-	mat->addUniform(UniformType::MULTI_LIGHT_SPOT_EXPONENT, "light[%d].spotExponent");
-	mat->addUniform(UniformType::MULTI_LIGHT_SPOT_COST_CUTOFF, "light[%d].spotCostCutoff");
-	mat->addUniform(UniformType::MULTI_LIGHT_CONSTANT_ATTENUATION, "light[%d].constantAttenuation");
-	mat->addUniform(UniformType::MULTI_LIGHT_LINEAR_ATTENUATION, "light[%d].linearAttenuation");
-	mat->addUniform(UniformType::MULTI_LIGHT_QUADRATIC_ATTENUATION, "light[%d].quadraticAttenuation");
-	*/
+
+	mat->addUniform(UniformType::MULTI_LIGHT_COUNT, "lightCount");
+	mat->addUniform(UniformType::MULTI_LIGHT_ENABLED, "lights[%d].isEnabled");
+	mat->addUniform(UniformType::MULTI_LIGHT_LOCAL, "lights[%d].isLocal");
+	mat->addUniform(UniformType::MULTI_LIGHT_SPOT, "lights[%d].isSpot");
+	mat->addUniform(UniformType::MULTI_LIGHT_POSITION, "lights[%d].position");
+	mat->addUniform(UniformType::MULTI_LIGHT_DIRECTION, "lights[%d].direction");
+	mat->addUniform(UniformType::MULTI_LIGHT_HALF_VECTOR, "lights[%d].halfVector");
+	mat->addUniform(UniformType::MULTI_LIGHT_COLOR, "lights[%d].color");
+	mat->addUniform(UniformType::MULTI_LIGHT_AMBIENT, "lights[%d].ambient");
+	mat->addUniform(UniformType::MULTI_LIGHT_SPOT_EXPONENT, "lights[%d].spotExponent");
+	mat->addUniform(UniformType::MULTI_LIGHT_SPOT_COST_CUTOFF, "lights[%d].spotCostCutoff");
+	mat->addUniform(UniformType::MULTI_LIGHT_CONSTANT_ATTENUATION, "lights[%d].constantAttenuation");
+	mat->addUniform(UniformType::MULTI_LIGHT_LINEAR_ATTENUATION, "lights[%d].linearAttenuation");
+	mat->addUniform(UniformType::MULTI_LIGHT_QUADRATIC_ATTENUATION, "lights[%d].quadraticAttenuation");
+
 	mat->addUniform(UniformType::MATERIAL_EMISSION, "material.emission");
 	mat->addUniform(UniformType::MATERIAL_COLOR_AMBIENT, "material.ambient");
 	mat->addUniform(UniformType::MATERIAL_COLOR_DIFFUSE, "material.diffuse");
