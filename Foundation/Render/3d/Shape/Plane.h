@@ -5,21 +5,19 @@
 
 namespace render
 {
-	class Texture2D;
 	/**
-	*	立方体，采用立方体纹理
+	*	平面，单面纹理
 	*/
-	class Cube : public Model
+	class Plane : public Model
 	{
 	public:
-		Cube();
-		virtual ~Cube();
+		Plane();
+		virtual ~Plane();
 	public:
 		virtual bool init();
 	protected:
-		void onCubeBodyChanged();
+		void onPlaneBodyChanged();
 	private:
-		// 坐标
-		CubeVertex _cubePosition;
+		RectVertex _rectPosition;
 	};
 }

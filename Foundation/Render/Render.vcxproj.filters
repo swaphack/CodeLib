@@ -579,6 +579,9 @@
     <ClCompile Include="3d\Environment\DirectionLight.cpp">
       <Filter>3d\Environment</Filter>
     </ClCompile>
+    <ClCompile Include="3d\Shape\Plane.cpp">
+      <Filter>3d\Shape</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Common\Node\import.h">
@@ -1328,6 +1331,9 @@
     </ClInclude>
     <ClInclude Include="3d\Environment\DirectionLight.h">
       <Filter>3d\Environment</Filter>
+    </ClInclude>
+    <ClInclude Include="3d\Shape\Plane.h">
+      <Filter>3d\Shape</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

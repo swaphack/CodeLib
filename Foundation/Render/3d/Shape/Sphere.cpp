@@ -4,8 +4,8 @@
 #include "Common/struct/vertex_common.h"
 using namespace render;
 
-#define SPHERE_HORIZONTAL_COUNT 50
-#define SPHERE_VERTICAL_COUNT 50
+#define SPHERE_HORIZONTAL_COUNT 100
+#define SPHERE_VERTICAL_COUNT 100
 
 render::Sphere::Sphere()
 {
@@ -98,8 +98,8 @@ void render::Sphere::updateSphere()
 		for (int i = 0; i < SPHERE_HORIZONTAL_COUNT; i++)
 		{
 			math::Vector2 ua = math::Vector2(0, 0);
-			math::Vector2 uc = math::Vector2(u, vstep);
-			math::Vector2 ub = math::Vector2(u + ustep, vstep);
+			math::Vector2 ub = math::Vector2(u, vstep);
+			math::Vector2 uc = math::Vector2(u + ustep, vstep);
 
 			math::Vector3 va = getPoint(ua);
 			math::Vector3 vb = getPoint(ub);
@@ -137,11 +137,11 @@ void render::Sphere::updateSphere()
 				READ_VERTEX(vd, ud);
 
 				pIndices.push_back(nCount0 + 4 * index + 0);
+				pIndices.push_back(nCount0 + 4 * index + 2);
 				pIndices.push_back(nCount0 + 4 * index + 1);
-				pIndices.push_back(nCount0 + 4 * index + 2);
 				pIndices.push_back(nCount0 + 4 * index + 0);
-				pIndices.push_back(nCount0 + 4 * index + 2);
 				pIndices.push_back(nCount0 + 4 * index + 3);
+				pIndices.push_back(nCount0 + 4 * index + 2);
 
 				index++;
 				u += ustep;
@@ -170,8 +170,8 @@ void render::Sphere::updateSphere()
 			READ_VERTEX(vc, uc);
 
 			pIndices.push_back(nCount0 + nCount1 + 3 * index + 0);
-			pIndices.push_back(nCount0 + nCount1 + 3 * index + 1);
 			pIndices.push_back(nCount0 + nCount1 + 3 * index + 2);
+			pIndices.push_back(nCount0 + nCount1 + 3 * index + 1);
 
 			index++;
 			u += ustep;

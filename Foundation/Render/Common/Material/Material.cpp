@@ -365,7 +365,7 @@ void render::Material::updateMVPMatrixUniformValue(Node* node)
 	math::Matrix4x4 mvMat = viewMat * modelMat;
 
 	math::Vector3 viewPos = viewMat.getPosition();
-	//viewPos *= -1.0f;
+	//viewPos.setZ(-viewPos.getZ());
 
 	for (auto item : _vertexUniformIndices)
 	{
@@ -418,6 +418,7 @@ void render::Material::updateNearestLightUniformValue(Node* node)
 		return;
 	}
 
+	math::Vector3 nodePos = node->getWorldMatrix().getPosition();
 	float fPos = -1;
 	Light* pLight = nullptr;
 	for (int i = 0; i < Light::getLightMaxCount(); i++)
@@ -425,7 +426,7 @@ void render::Material::updateNearestLightUniformValue(Node* node)
 		auto pTempLight = G_ENVIRONMENT->getLight(i);
 		if (pTempLight)
 		{
-			float fDistance = math::Vector3::distance(pTempLight->getPosition(), node->getPosition());
+			float fDistance = math::Vector3::distance(pTempLight->getWorldMatrix().getPosition(), nodePos);
 			if (fPos == -1 || fDistance < fPos)
 			{
 				fPos = fDistance;
@@ -441,11 +442,11 @@ void render::Material::updateNearestLightUniformValue(Node* node)
 
 	math::Vector3 viewPos = viewMat.getPosition();
 	math::Vector3 lightPos = pLight->getWorldMatrix().getPosition();
-
+	//viewPos.setZ(-viewPos.getZ());
 	//viewPos *= -1.0f;
 	//lightPos *= -1.0f;
 
-	math::Vector3 nodePos = node->getWorldMatrix().getPosition();
+	
 	math::Vector3 viewDirection = viewPos - nodePos;
 	math::Vector3 lightDirection = lightPos - nodePos;
 	math::Vector3 halfVector = lightDirection + viewDirection;
@@ -593,6 +594,8 @@ void render::Material::updateAllLightsUniformValue(Node* node)
 
 		math::Vector3 viewPos = viewMat.getPosition();
 		math::Vector3 lightPos = pLight->getWorldMatrix().getPosition();
+
+		//viewPos.setZ(-viewPos.getZ());
 		//lightPos *= -1.0f;
 		//viewPos *= -1.0f;
 

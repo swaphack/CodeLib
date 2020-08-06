@@ -18,6 +18,9 @@ private:
 
 	void addEarth();
 
+	
+	void addGround();
+
 
 	void testCubeModel();
 };

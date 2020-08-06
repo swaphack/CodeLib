@@ -102,7 +102,7 @@ void TestEnvironmentNode::testCamera()
 	{
 		auto size = Tool::getGLViewSize();
 		float d = sqrt(powf(size.getWidth(), 2) + powf(size.getHeight(), 2));
-		pCamera->setViewDistance(d - 100, d * 100);
+		pCamera->setViewDistance(d - 200, d * 100);
 		pCamera->setPosition(-size.getWidth() * 0.5f, -size.getHeight() * 0.5f, -d);
 	}
 	else

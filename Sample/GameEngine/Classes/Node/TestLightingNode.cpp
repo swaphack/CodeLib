@@ -14,6 +14,8 @@ TestLightingNode::~TestLightingNode()
 
 void TestLightingNode::initNodes()
 {
+	this->addGround();
+
 	this->addSun();
 
 	this->addStar();
@@ -27,7 +29,7 @@ void TestLightingNode::addSun()
 {
 	render::Sphere* pLightShape = CREATE_NODE(render::Sphere);
 	pLightShape->setTexture("Resource/Image/2k_sun.jpg");
-	pLightShape->setPosition(1024, 768, 00);
+	pLightShape->setPosition(1024, 768, 0);
 	pLightShape->setRadius(50);
 
 	Utility::loadShader(pLightShape, "Shader/texture/texture.vs", "Shader/texture/texture.fs");
@@ -46,7 +48,7 @@ void TestLightingNode::addStar()
 	render::Sphere* pLightShape = CREATE_NODE(render::Sphere);
 	pLightShape->setSupportLight(true);
 	pLightShape->setTexture("Resource/Image/2k_venus_surface.jpg");
-	pLightShape->setPosition(512, 384, 0);
+	pLightShape->setPosition(512, 384, 400);
 	pLightShape->setRadius(50);
 
 	Utility::loadShader(pLightShape, "Shader/texture/texture.vs", "Shader/texture/texture.fs");
@@ -61,7 +63,7 @@ void TestLightingNode::addStar()
 	pLightShape->addChild(pLight);
 
 	render::EllipseAction* pAction = render::CREATE_ACTION(render::EllipseAction);
-	pAction->setControlParameters(math::Vector3(512, 384), 400, 200, math::Vector3(0, 0, 0));
+	pAction->setControlParameters(math::Vector3(512, 384, 400), 400, 200, math::Vector3(0, 0, 0));
 	pAction->setDuration(10);
 
 	pLightShape->getActionProxy()->runAction(render::RepeateForeverAction::create(pAction));
@@ -85,9 +87,9 @@ void TestLightingNode::addEarth()
 		if (diffusePercent) diffusePercent->setValue(0.25f);
 	});
 
-	//Utility::loadShader(pEarth, "Shader/material/material_texture.vs", "Shader/material/material_texture.fs");
+	Utility::loadShader(pEarth, "Shader/material/material_texture.vs", "Shader/material/material_texture.fs");
 	//Utility::loadShader(pEarth, "Shader/material/material_single_light.vs", "Shader/material/material_multi_lights.fs");
-	Utility::loadShader(pEarth, "Shader/material/material_single_light.vs", "Shader/material/material_single_light.fs");
+	//Utility::loadShader(pEarth, "Shader/material/material_single_light.vs", "Shader/material/material_single_light.fs");
 	this->addChild(pEarth);
 
 	Utility::runRotateAction(pEarth);
@@ -101,6 +103,38 @@ void TestLightingNode::addEarth()
 	*/
 }
 
+void TestLightingNode::addGround()
+{
+	std::string filepath = "Resource/Image/ground.jpg";
+
+	render::Plane* pModel = CREATE_NODE(render::Plane);
+	pModel->setSupportLight(true);
+	pModel->setSupportMultiLight(true);
+	pModel->setTexture(filepath);
+	pModel->setColor(0.5f, 0.5f, 0.5f);
+	pModel->setAnchorPoint(math::Vector3(0.5f, 0.5f, 0.5f));
+	pModel->setPosition(512, 384, -300);
+	pModel->setRotation(0, 0, 0);
+	pModel->setVolume(1024, 768);
+	//Utility::loadShader(pModel, "Shader/material/material_texture.vs", "Shader/material/material_texture.fs");
+	Utility::loadShader(pModel, "Shader/material/material_single_light.vs", "Shader/material/material_multi_lights.fs");
+	this->addChild(pModel);
+
+	render::MoveByAction* pAction0 = render::CREATE_ACTION(render::MoveByAction);
+	pAction0->setDifferentPosition(math::Vector3(0, 0, 300));
+	pAction0->setDuration(10);
+
+	render::MoveByAction* pAction1 = render::CREATE_ACTION(render::MoveByAction);
+	pAction1->setDifferentPosition(math::Vector3(0, 0, -300));
+	pAction1->setDuration(10);
+
+	render::SequenceAction* pAction2 = render::CREATE_ACTION(render::SequenceAction);
+	pAction2->addAction(pAction0);
+	pAction2->addAction(pAction1);
+
+	pModel->getActionProxy()->runAction(render::RepeateForeverAction::create(pAction2));
+}
+
 void TestLightingNode::testCubeModel()
 {
 	std::string filepath = "Resource/Image/NeHe.png";
@@ -110,14 +144,14 @@ void TestLightingNode::testCubeModel()
 	pModel->setTexture(filepath);
 	pModel->setColor(0.5f, 0.5f, 0.5f);
 	pModel->setAnchorPoint(math::Vector3(0.5f, 0.5f, 0.5f));
-	pModel->setPosition(512, 384, 10);
+	pModel->setPosition(512, 384, 0);
 	pModel->setRotation(0, 45, 0);
-	pModel->setVolume(150, 150, 150);
+	pModel->setVolume(200, 200, 200);
 	//Utility::loadShader(pModel, "Shader/material/material_texture.vs", "Shader/material/material_texture.fs");
 	Utility::loadShader(pModel, "Shader/material/material_single_light.vs", "Shader/material/material_single_light.fs");
 	this->addChild(pModel);
 
-	//Utility::runRotateAction(pModel);
+	Utility::runRotateAction(pModel);
 
 	pModel->getTouchProxy()->addTouchFunc(render::TouchType::DOWN, [](render::Node* node, float x, float y, bool include) {
 		if (!include)

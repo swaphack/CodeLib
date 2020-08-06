@@ -141,7 +141,7 @@ struct Material
 // 环境
 vec4 get_mat_ambient(Light light,  Material material)
 {
-	return light.color * material.emission;
+	return light.color * material.ambient;
 }
 
 // 漫反射
@@ -166,7 +166,7 @@ vec4 get_mat_diffuse(Light light, Material material, vec3 fragNormal, vec3 fragP
 vec4 get_mat_specular(Light light, Material material, vec3 fragNormal, vec3 fragPos, vec3 viewPos)
 {
 	vec3 norm = normalize(fragNormal);
-
+	vec3 lightDir;
 	if (!light.isLocal) 
 	{
 		lightDir = light.direction;
@@ -177,9 +177,12 @@ vec4 get_mat_specular(Light light, Material material, vec3 fragNormal, vec3 frag
     }
 	vec3 viewDir = normalize(viewPos - fragPos);
 
-	vec3 reflectDir = reflect(lightDir, norm);
+	//vec3 reflectDir = reflect(-lightDir, norm);
 
-	float spec = pow(max(dot(viewDir, reflectDir), 0.0), material.shininess);
+	vec3 halfwayDir = normalize(lightDir  + viewDir);  
+    float spec = pow(max(dot(normal, halfwayDir), 0.0), 32.0);
+
+	//float spec = pow(max(dot(viewDir, reflectDir), 0.0), material.shininess);
 
 	return (spec * material.specular);
 }

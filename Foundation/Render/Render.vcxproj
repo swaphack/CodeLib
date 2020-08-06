@@ -103,6 +103,7 @@
     <ClCompile Include="3d\Shape\Cube.cpp" />
     <ClCompile Include="3d\Shape\CubeMap.cpp" />
     <ClCompile Include="3d\Shape\MultiFaceCube.cpp" />
+    <ClCompile Include="3d\Shape\Plane.cpp" />
     <ClCompile Include="3d\Shape\Sphere.cpp" />
     <ClCompile Include="Canvas.cpp" />
     <ClCompile Include="Common\Action\Action.cpp" />
@@ -314,6 +315,7 @@
     <ClInclude Include="3d\Shape\CubeMap.h" />
     <ClInclude Include="3d\Shape\MultiFaceCube.h" />
     <ClInclude Include="3d\Shape\import.h" />
+    <ClInclude Include="3d\Shape\Plane.h" />
     <ClInclude Include="3d\Shape\Sphere.h" />
     <ClInclude Include="Canvas.h" />
     <ClInclude Include="Common\Action\Action.h" />

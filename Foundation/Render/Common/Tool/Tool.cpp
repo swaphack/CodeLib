@@ -205,7 +205,7 @@ void Tool::calCube(const math::Vector3& position, const math::Volume& volume, co
 	// left down
 	float x = position.getX() - volume.getWidth() * anchor.getX();
 	float y = position.getY() - volume.getHeight() * anchor.getY();
-	float z = position.getZ() - volume.getDepth() * anchor.getZ();
+	float z = position.getZ() + volume.getDepth() * anchor.getZ();
 
 	point = math::Vector3(x, y, z);
 	cube.setFrontLeftDownPosition(point);
@@ -213,7 +213,7 @@ void Tool::calCube(const math::Vector3& position, const math::Volume& volume, co
 	// right down
 	x = position.getX() + volume.getWidth() * (1 - anchor.getX());
 	y = position.getY() - volume.getHeight() * anchor.getY();
-	z = position.getZ() - volume.getDepth() * anchor.getZ();
+	z = position.getZ() + volume.getDepth() * anchor.getZ();
 
 	point = math::Vector3(x, y, z);
 	cube.setFrontRightDownPosition(point);
@@ -221,7 +221,7 @@ void Tool::calCube(const math::Vector3& position, const math::Volume& volume, co
 	// right up
 	x = position.getX() + volume.getWidth() * (1 - anchor.getX());
 	y = position.getY() + volume.getHeight() * (1 - anchor.getY());
-	z = position.getZ() - volume.getDepth() * anchor.getZ();
+	z = position.getZ() + volume.getDepth() * anchor.getZ();
 
 	point = math::Vector3(x, y, z);
 	cube.setFrontRightUpPosition(point);
@@ -229,7 +229,7 @@ void Tool::calCube(const math::Vector3& position, const math::Volume& volume, co
 	// left up
 	x = position.getX() - volume.getWidth() * anchor.getX();
 	y = position.getY() + volume.getHeight() * (1 - anchor.getY());
-	z = position.getZ() - volume.getDepth() * anchor.getZ();
+	z = position.getZ() + volume.getDepth() * anchor.getZ();
 
 	point = math::Vector3(x, y, z);
 	cube.setFrontLeftUpPosition(point);
@@ -239,7 +239,7 @@ void Tool::calCube(const math::Vector3& position, const math::Volume& volume, co
 	// left down
 	x = position.getX() - volume.getWidth() * anchor.getX();
 	y = position.getY() - volume.getHeight() * anchor.getY();
-	z = position.getZ() + volume.getDepth() * (1 - anchor.getZ());
+	z = position.getZ() - volume.getDepth() * (1 - anchor.getZ());
 
 	point = math::Vector3(x, y, z);
 	cube.setBackLeftDownPosition(point);
@@ -247,7 +247,7 @@ void Tool::calCube(const math::Vector3& position, const math::Volume& volume, co
 	// right down
 	x = position.getX() + volume.getWidth() * (1 - anchor.getX());
 	y = position.getY() - volume.getHeight() * anchor.getY();
-	z = position.getZ() + volume.getDepth() * (1 - anchor.getZ());
+	z = position.getZ() - volume.getDepth() * (1 - anchor.getZ());
 
 	point = math::Vector3(x, y, z);
 	cube.setBackRightDownPosition(point);
@@ -255,7 +255,7 @@ void Tool::calCube(const math::Vector3& position, const math::Volume& volume, co
 	// right up
 	x = position.getX() + volume.getWidth() * (1 - anchor.getX());
 	y = position.getY() + volume.getHeight() * (1 - anchor.getY());
-	z = position.getZ() + volume.getDepth() * (1 - anchor.getZ());
+	z = position.getZ() - volume.getDepth() * (1 - anchor.getZ());
 
 	point = math::Vector3(x, y, z);
 	cube.setBackRightUpPosition(point);
@@ -263,7 +263,7 @@ void Tool::calCube(const math::Vector3& position, const math::Volume& volume, co
 	// left up
 	x = position.getX() - volume.getWidth() * anchor.getX();
 	y = position.getY() + volume.getHeight() * (1 - anchor.getY());
-	z = position.getZ() + volume.getDepth() * (1 - anchor.getZ());
+	z = position.getZ() - volume.getDepth() * (1 - anchor.getZ());
 
 	point = math::Vector3(x, y, z);
 	cube.setBackLeftUpPosition(point);
