@@ -190,5 +190,7 @@ namespace render
 
 		// 摄像机位置
 		VIEW_POSITION,
+		// 伽马值
+		GAMMA,
 	};
 }

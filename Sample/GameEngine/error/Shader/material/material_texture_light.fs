@@ -47,7 +47,7 @@ LightComputeProperty compute_light_property(Light light, vec4 position, vec3 nor
 
 	pro.attenuation = 1.0;
 
-	if	(light.isLocal)
+	if (light.isLocal)
 	{
 		lightDirection = lightPosition - vec3(position);
 		float lightDistance = length(lightDirection);
@@ -58,7 +58,7 @@ LightComputeProperty compute_light_property(Light light, vec4 position, vec3 nor
 				+ light.linearAttenuation * lightDistance
 				+ light.quadraticAttenuation * lightDistance * lightDistance);
 
-		if	(light.isSpot)
+		if (light.isSpot)
 		{
 			float spotCos = dot(lightDirection, - light.direction);
 			if (spotCos < light.spotCostCutoff)
@@ -129,10 +129,10 @@ struct Material
 	vec4 specular; // 高光反射颜色
 
 	sampler2D tex; // 纹理
-	sampler2D texAlpha;	// alpha纹理
-	sampler2D texBump;	// bump纹理
 	sampler2D texDiffuse; // 漫反射纹理
 	sampler2D texSpecular; // 高光反射纹理
+	sampler2D texAlpha;	// alpha纹理
+	sampler2D texBump;	// bump纹理
 
 	float shininess; 	// 镜面反射高光指数
 	float strength;		// 镜面反射高光增强系数
@@ -141,15 +141,22 @@ struct Material
 // 环境
 vec4 get_mat_ambient(Light light,  Material material)
 {
-	return light.color * material.emission;
+	return light.color * material.ambient;
 }
 
 // 漫反射
 vec4 get_mat_diffuse(Light light, Material material, vec3 fragNormal, vec3 fragPos)
 {
 	vec3 norm = normalize(fragNormal);
-
-    vec3 lightDir = normalize(light.position - fragPos);
+	vec3 lightDir;
+	if (!light.isLocal) 
+	{
+		lightDir = light.direction;
+	}
+    else 
+    {
+    	lightDir = normalize(light.position - fragPos);
+    }
 
     float diff = max(dot(norm, lightDir), 0.0);
 
@@ -159,13 +166,23 @@ vec4 get_mat_diffuse(Light light, Material material, vec3 fragNormal, vec3 fragP
 vec4 get_mat_specular(Light light, Material material, vec3 fragNormal, vec3 fragPos, vec3 viewPos)
 {
 	vec3 norm = normalize(fragNormal);
-
-	vec3 lightDir = normalize(light.position - fragPos);
+	vec3 lightDir;
+	if (!light.isLocal) 
+	{
+		lightDir = light.direction;
+	}
+    else 
+    {
+    	lightDir = normalize(light.position - fragPos);
+    }
 	vec3 viewDir = normalize(viewPos - fragPos);
 
-	vec3 reflectDir = reflect(-lightDir, norm);
+	//vec3 reflectDir = reflect(-lightDir, norm);
 
-	float spec = pow(max(dot(viewDir, reflectDir), 0.0), material.shininess);
+	vec3 halfwayDir = normalize(lightDir  + viewDir);  
+    float spec = pow(max(dot(norm, halfwayDir), 0.0), 32.0);
+
+	//float spec = pow(max(dot(viewDir, reflectDir), 0.0), material.shininess);
 
 	return (spec * material.specular);
 }
@@ -235,7 +252,6 @@ out vec4 color;
 void main()
 {
 	vec4 baseColor = texture(material.tex, fragTexcoord);
-
 	vec4 diffuseColor = texture(material.texDiffuse, normalize(fargNormal));
 	vec4 specularColor = texture(material.texSpecular, normalize(fragReflectDir));
 	vec4 c1 = mix(baseColor, diffuseColor * baseColor, diffusePercent);

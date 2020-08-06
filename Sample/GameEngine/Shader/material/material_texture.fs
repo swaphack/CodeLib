@@ -2,11 +2,11 @@
 
 #include "Shader/core/light.fs"
 #include "Shader/core/material.fs"
+#include "Shader/core/env.fs"
 
 uniform Light light;
 uniform Material material;
-
-uniform vec3 viewPos;
+uniform Environment env;
 
 in vec2 fragTexcoord;
 in vec3 fragNormal;
@@ -23,7 +23,7 @@ void main()
 	vec4 diffuse = get_mat_diffuse(light, material, fragNormal, fragPos, fragTexcoord);
 
 	// specular
-	vec4 specular = get_mat_specular(light, material, fragNormal, fragPos, fragTexcoord, -viewPos);
+	vec4 specular = get_mat_specular(light, material, fragNormal, fragPos, fragTexcoord, env.viewPos);
 
 	//diffuse = vec4(0.0);
 	//specular = vec4(0.0);

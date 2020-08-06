@@ -84,3 +84,16 @@ vec4 getEdgeEffect(float offset, sampler2D tex, vec2 uv)
     
    return getEffectColor(tex, uv, offsets, kernel);
 }
+
+// gamma
+vec4 getGamma(float gamma, vec4 color)
+{
+    if (gamma != 0)
+    {
+        vec3 rgb = color.rgb;
+        rgb = pow(rgb, vec3(1 / gamma));
+        color = vec4(rgb, color.a);
+    }
+
+    return color;
+}

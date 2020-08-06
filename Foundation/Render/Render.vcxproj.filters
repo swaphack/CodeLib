@@ -537,9 +537,6 @@
     <ClCompile Include="Common\VAO\VertexArrayBufferObject.cpp">
       <Filter>Common\VAO</Filter>
     </ClCompile>
-    <ClCompile Include="Common\PostProcessing\FramePostProcessingNode.cpp">
-      <Filter>Common\PostProcessing</Filter>
-    </ClCompile>
     <ClCompile Include="PixelPostProcessingNode.cpp">
       <Filter>Common\PostProcessing</Filter>
     </ClCompile>
@@ -548,9 +545,6 @@
     </ClCompile>
     <ClCompile Include="Common\XFB\TransformFeedbackBufferObject.cpp">
       <Filter>Common\XFB</Filter>
-    </ClCompile>
-    <ClCompile Include="Common\PostProcessing\PostProcessing.cpp">
-      <Filter>Common\PostProcessing</Filter>
     </ClCompile>
     <ClCompile Include="Common\DrawNode\MultiDrawNode.cpp">
       <Filter>Common\DrawNode</Filter>
@@ -581,6 +575,15 @@
     </ClCompile>
     <ClCompile Include="3d\Shape\Plane.cpp">
       <Filter>3d\Shape</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\PostProcessing\ShadowMapping.cpp">
+      <Filter>Common\PostProcessing</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\PostProcessing\FrameBufferNode.cpp">
+      <Filter>Common\PostProcessing</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\PostProcessing\PostProcessingNode.cpp">
+      <Filter>Common\PostProcessing</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1281,9 +1284,6 @@
     <ClInclude Include="Common\VAO\VertexArrayBufferObject.h">
       <Filter>Common\VAO</Filter>
     </ClInclude>
-    <ClInclude Include="Common\PostProcessing\FramePostProcessingNode.h">
-      <Filter>Common\PostProcessing</Filter>
-    </ClInclude>
     <ClInclude Include="PixelPostProcessingNode.h">
       <Filter>Common\PostProcessing</Filter>
     </ClInclude>
@@ -1292,9 +1292,6 @@
     </ClInclude>
     <ClInclude Include="Common\XFB\TransformFeedbackBufferObject.h">
       <Filter>Common\XFB</Filter>
-    </ClInclude>
-    <ClInclude Include="Common\PostProcessing\PostProcessing.h">
-      <Filter>Common\PostProcessing</Filter>
     </ClInclude>
     <ClInclude Include="Common\DrawNode\MultiDrawNode.h">
       <Filter>Common\DrawNode</Filter>
@@ -1334,6 +1331,15 @@
     </ClInclude>
     <ClInclude Include="3d\Shape\Plane.h">
       <Filter>3d\Shape</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\PostProcessing\ShadowMapping.h">
+      <Filter>Common\PostProcessing</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\PostProcessing\FrameBufferNode.h">
+      <Filter>Common\PostProcessing</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\PostProcessing\PostProcessingNode.h">
+      <Filter>Common\PostProcessing</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

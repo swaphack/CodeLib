@@ -34,7 +34,7 @@ void TestPostProcessing::testFramePostProcessing()
 	pImage->setVolume(512, 384);
 	Utility::loadShader(pImage, "Shader/texture/texture.vs", "Shader/texture/texture.fs");
 
-	render::FramePostProcessingNode* pNode = CREATE_NODE(render::FramePostProcessingNode);
+	render::PostProcessingNode* pNode = CREATE_NODE(render::PostProcessingNode);
 	pNode->setAnchorPoint(0.0f, 0.0f);
 	pNode->setPosition(100, 100);
 	pNode->setVolume(924, 668);

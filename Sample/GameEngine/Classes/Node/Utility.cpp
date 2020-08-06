@@ -98,7 +98,7 @@ void Utility::initShaderAttrib(render::Material* mat)
 	mat->addUniform(UniformType::LIGHT_LINEAR_ATTENUATION, "light.linearAttenuation");
 	mat->addUniform(UniformType::LIGHT_QUADRATIC_ATTENUATION, "light.quadraticAttenuation");
 
-	mat->addUniform(UniformType::MULTI_LIGHT_COUNT, "lightCount");
+	
 	mat->addUniform(UniformType::MULTI_LIGHT_ENABLED, "lights[%d].isEnabled");
 	mat->addUniform(UniformType::MULTI_LIGHT_LOCAL, "lights[%d].isLocal");
 	mat->addUniform(UniformType::MULTI_LIGHT_SPOT, "lights[%d].isSpot");
@@ -117,13 +117,11 @@ void Utility::initShaderAttrib(render::Material* mat)
 	mat->addUniform(UniformType::MATERIAL_COLOR_AMBIENT, "material.ambient");
 	mat->addUniform(UniformType::MATERIAL_COLOR_DIFFUSE, "material.diffuse");
 	mat->addUniform(UniformType::MATERIAL_COLOR_SPECULAR, "material.specular");
-	
 	mat->addUniform(UniformType::MATERIAL_TEXTURE, "material.tex");
 	mat->addUniform(UniformType::MATERIAL_TEXTURE_ALPHA, "material.texAlpha");
 	mat->addUniform(UniformType::MATERIAL_TEXTURE_BUMP, "material.texBump");
 	mat->addUniform(UniformType::MATERIAL_TEXTURE_DIFFUSE, "material.texDiffuse");
 	mat->addUniform(UniformType::MATERIAL_TEXTURE_SPECULAR, "material.texSpecular");
-	
 	mat->addUniform(UniformType::MATERIAL_SHININESS, "material.shininess");
 	mat->addUniform(UniformType::MATERIAL_STRENGTH, "material.strength");
 	
@@ -133,7 +131,9 @@ void Utility::initShaderAttrib(render::Material* mat)
 	mat->addVertexData(VertexDataType::NORMAL, "v_normal");
 	
 	
-	mat->addUniform(UniformType::VIEW_POSITION, "viewPos");
+	mat->addUniform(UniformType::VIEW_POSITION, "env.viewPos");
+	mat->addUniform(UniformType::GAMMA, "env.gamma");
+	mat->addUniform(UniformType::MULTI_LIGHT_COUNT, "env.lightCount");
 	
 	mat->addUniform(UniformType::TEXTURE0, "tex.texture0");
 	mat->addUniform(UniformType::TEXTURE1, "tex.texture1");

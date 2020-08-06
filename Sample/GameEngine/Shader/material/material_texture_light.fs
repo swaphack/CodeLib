@@ -19,8 +19,8 @@ void main()
 
 	//vec4 diffuseColor = texture(material.texDiffuse, normalize(fargNormal));
 	//vec4 specularColor = texture(material.texSpecular, normalize(fragReflectDir));
-	vec4 diffuseColor = texture(material.texDiffuse, normalize(fragTexcoord));
-	vec4 specularColor = texture(material.texSpecular, normalize(fragTexcoord));
+	vec4 diffuseColor = texture(material.texDiffuse, fragTexcoord);
+	vec4 specularColor = texture(material.texSpecular, fragTexcoord);
 	vec4 c1 = mix(baseColor, diffuseColor * baseColor, diffusePercent);
 	vec4 c2 = mix(c1, specularColor + c1, specularPercent);
 	color = vec4(c2.rgb, baseColor.a);

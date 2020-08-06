@@ -2,12 +2,12 @@
 
 #include "Shader/core/light.fs"
 #include "Shader/core/material.fs"
-
+#include "Shader/core/env.fs"
 
 uniform Light light;
 uniform Material material;
 
-uniform vec3 viewPos;
+uniform Environment env;
 
 in vec2 fragTexcoord;
 in vec3 fragNormal;
@@ -20,7 +20,7 @@ void main()
 
 	vec4 matColor = texture(material.tex, fragTexcoord);
 
-	vec3 viewDirection = normalize(viewPos - fragPos);
+	vec3 viewDirection = normalize(env.viewPos - fragPos);
 
 	Light lights[MAX_LIGHT_COUNT];
 	lights[0] = light;

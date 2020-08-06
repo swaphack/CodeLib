@@ -55,9 +55,10 @@ void TestLightingNode::addStar()
 	this->addChild(pLightShape);
 
 	render::PointLight* pLight = CREATE_NODE(render::PointLight);
-	pLight->setAmbient(100, 100, 100, 100);
-	pLight->setDiffuse(100, 100, 100, 100);
-	pLight->setSpecular(100, 100, 100, 100);
+	pLight->setColor(255, 0, 0, 255);
+	pLight->setAmbient(255, 255, 255, 255);
+	pLight->setDiffuse(255, 255, 255, 255);
+	pLight->setSpecular(255, 255, 255, 255);
 	pLight->setLinearAttenuation(0);
 	pLight->setQuadraticAttenuation(0);
 	pLightShape->addChild(pLight);
@@ -75,20 +76,20 @@ void TestLightingNode::addEarth()
 	pEarth->setSupportLight(true);
 	//pEarth->setSupportMultiLight(true);
 	pEarth->setTexture("Resource/Image/2k_earth_daymap.jpg");
-	//pEarth->setDiffuseTexture("Resource/Image/2k_earth_normal_map.tif");
-	//pEarth->setSpecularTexture("Resource/Image/2k_earth_specular_map.tif");
-	pEarth->setRadius(150);
+	pEarth->setDiffuseTexture("Resource/Image/2k_earth_normal_map.tif");
+	pEarth->setSpecularTexture("Resource/Image/2k_earth_specular_map.tif");
+	pEarth->setRadius(300);
 	pEarth->setPosition(200, 400);
 
 	pEarth->setShaderProgramFunc([](render::ShaderProgram* program) {
-		auto specularPercent = program->getUniform("specularPercent");
-		if (specularPercent) specularPercent->setValue(0.25f);
 		auto diffusePercent = program->getUniform("diffusePercent");
-		if (diffusePercent) diffusePercent->setValue(0.25f);
+		if (diffusePercent) diffusePercent->setValue(0.2f);
+		auto specularPercent = program->getUniform("specularPercent");
+		if (specularPercent) specularPercent->setValue(0.8f);
 	});
 
-	Utility::loadShader(pEarth, "Shader/material/material_texture.vs", "Shader/material/material_texture.fs");
-	//Utility::loadShader(pEarth, "Shader/material/material_single_light.vs", "Shader/material/material_multi_lights.fs");
+	//Utility::loadShader(pEarth, "Shader/material/material_texture_light.vs", "Shader/material/material_texture_light.fs");
+	Utility::loadShader(pEarth, "Shader/material/material_emulate_diffuse.vs", "Shader/material/material_emulate_diffuse.fs");
 	//Utility::loadShader(pEarth, "Shader/material/material_single_light.vs", "Shader/material/material_single_light.fs");
 	this->addChild(pEarth);
 
@@ -120,12 +121,17 @@ void TestLightingNode::addGround()
 	Utility::loadShader(pModel, "Shader/material/material_single_light.vs", "Shader/material/material_multi_lights.fs");
 	this->addChild(pModel);
 
+	pModel->setShaderProgramFunc([](render::ShaderProgram* program) {
+		auto gamma = program->getUniform("env.gamma");
+		if (gamma) gamma->setValue(5.0f);
+	});
+
 	render::MoveByAction* pAction0 = render::CREATE_ACTION(render::MoveByAction);
-	pAction0->setDifferentPosition(math::Vector3(0, 0, 300));
+	pAction0->setDifferentPosition(math::Vector3(0, 0, 600));
 	pAction0->setDuration(10);
 
 	render::MoveByAction* pAction1 = render::CREATE_ACTION(render::MoveByAction);
-	pAction1->setDifferentPosition(math::Vector3(0, 0, -300));
+	pAction1->setDifferentPosition(math::Vector3(0, 0, -600));
 	pAction1->setDuration(10);
 
 	render::SequenceAction* pAction2 = render::CREATE_ACTION(render::SequenceAction);

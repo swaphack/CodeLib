@@ -175,8 +175,9 @@
     <ClCompile Include="Common\Particle\ParticleData.cpp" />
     <ClCompile Include="Common\Particle\ParticleProtocol.cpp" />
     <ClCompile Include="Common\Particle\TransformFeedbackParticleNode.cpp" />
-    <ClCompile Include="Common\PostProcessing\FramePostProcessingNode.cpp" />
-    <ClCompile Include="Common\PostProcessing\PostProcessing.cpp" />
+    <ClCompile Include="Common\PostProcessing\PostProcessingNode.cpp" />
+    <ClCompile Include="Common\PostProcessing\FrameBufferNode.cpp" />
+    <ClCompile Include="Common\PostProcessing\ShadowMapping.cpp" />
     <ClCompile Include="Common\Scene\Scene.cpp" />
     <ClCompile Include="Common\ShaderDocument\ShaderDocument.cpp" />
     <ClCompile Include="Common\ShaderDocument\ShaderParameter.cpp" />
@@ -408,9 +409,10 @@
     <ClInclude Include="Common\Particle\ParticleData.h" />
     <ClInclude Include="Common\Particle\ParticleProtocol.h" />
     <ClInclude Include="Common\Particle\TransformFeedbackParticleNode.h" />
+    <ClInclude Include="Common\PostProcessing\FrameBufferNode.h" />
     <ClInclude Include="Common\PostProcessing\import.h" />
-    <ClInclude Include="Common\PostProcessing\FramePostProcessingNode.h" />
-    <ClInclude Include="Common\PostProcessing\PostProcessing.h" />
+    <ClInclude Include="Common\PostProcessing\PostProcessingNode.h" />
+    <ClInclude Include="Common\PostProcessing\ShadowMapping.h" />
     <ClInclude Include="Common\Scene\import.h" />
     <ClInclude Include="Common\Scene\Scene.h" />
     <ClInclude Include="Common\ShaderDocument\import.h" />
