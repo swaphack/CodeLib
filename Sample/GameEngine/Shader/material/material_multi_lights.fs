@@ -7,7 +7,6 @@
 
 uniform Light lights[MAX_LIGHT_COUNT];
 uniform Material material;
-
 uniform Environment env;
 
 in vec2 fragTexcoord;

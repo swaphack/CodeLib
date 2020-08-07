@@ -66,7 +66,7 @@ void render::Cube::onCubeBodyChanged()
 		pMesh->getMeshDetail()->setColors(24, colors, 3);
 		pMesh->getMeshDetail()->setIndices(36, indices, 1);
 
-		pMesh->initDetailNormalData();
+		pMesh->initMeshOtherDetail();
 	}
 }
 

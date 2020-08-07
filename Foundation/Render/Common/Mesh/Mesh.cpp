@@ -106,6 +106,9 @@ void render::Mesh::drawWithClientArray()
 	const sys::MeshMemoryData& colors = _detail->getColors();
 	const sys::MeshMemoryData& texcoords = _detail->getUVs();
 	const sys::MeshMemoryData& normals = _detail->getNormals();
+	const sys::MeshMemoryData& tangents = _detail->getTangents();
+	const sys::MeshMemoryData& bitangents = _detail->getBitangents();
+
 	if (vertices.getLength() == 0)
 	{
 		PRINT("Mesh Vertice is NULL\n");
@@ -145,6 +148,20 @@ void render::Mesh::drawWithClientArray()
 		GLDebug::showError();
 	}
 
+	if (tangents.getLength() > 0)
+	{
+		GLClientArrays::enableClientState(ClientArrayType::TANGENT_ARRAY);
+		GLClientArrays::setTangentPointer(DataType::FLOAT, 0, bitangents.getValue());
+		GLDebug::showError();
+	}
+
+	if (bitangents.getLength() > 0)
+	{
+		GLClientArrays::enableClientState(ClientArrayType::BITANGENT_ARRAY);
+		GLClientArrays::setBitangentPointer(DataType::FLOAT, 0, bitangents.getValue());
+		GLDebug::showError();
+	}
+
 	const sys::MeshMemoryData& indices = _detail->getIndices();
 	if (indices.getLength() > 0)
 	{
@@ -156,6 +173,8 @@ void render::Mesh::drawWithClientArray()
 	GLClientArrays::disableClientState(ClientArrayType::NORMAL_ARRAY);
 	GLClientArrays::disableClientState(ClientArrayType::TEXTURE_COORD_ARRAY);
 	GLClientArrays::disableClientState(ClientArrayType::COLOR_ARRAY);
+	GLClientArrays::disableClientState(ClientArrayType::BITANGENT_ARRAY);
+	GLClientArrays::disableClientState(ClientArrayType::TANGENT_ARRAY);
 }
 
 void render::Mesh::updateBufferData()
@@ -169,6 +188,8 @@ void render::Mesh::updateBufferData()
 	uint32_t nColorSize = _detail->getColors().getSize();
 	uint32_t nUVSize = _detail->getUVs().getSize();
 	uint32_t nNormalSize = _detail->getNormals().getSize();
+	uint32_t nTangentSize = _detail->getTangents().getSize();
+	uint32_t nBitangentSize = _detail->getBitangents().getSize();
 
 	if (nVerticeSize == 0)
 	{
@@ -187,23 +208,39 @@ void render::Mesh::updateBufferData()
 
 	GLDebug::showError();
 
-	uint32_t nTotalSize = nVerticeSize + nColorSize + nUVSize + nNormalSize;
+	uint32_t nTotalSize = nVerticeSize + nColorSize + nUVSize + nNormalSize + nTangentSize + nBitangentSize;
 	_vertexBuffer->setBufferData(nTotalSize, nullptr, BufferDataUsage::STATIC_DRAW);
+
+	int nOffset = 0;
 	if (nVerticeSize > 0)
 	{
-		_vertexBuffer->setBufferSubData(0, nVerticeSize, _detail->getVertices().getPtr());
+		_vertexBuffer->setBufferSubData(nOffset, nVerticeSize, _detail->getVertices().getPtr());
+		nOffset += nVerticeSize;
 	}
 	if (nColorSize > 0)
 	{
-		_vertexBuffer->setBufferSubData(nVerticeSize, nColorSize, _detail->getColors().getPtr());
+		_vertexBuffer->setBufferSubData(nOffset, nColorSize, _detail->getColors().getPtr());
+		nOffset += nColorSize;
 	}
 	if (nUVSize > 0)
 	{
-		_vertexBuffer->setBufferSubData(nVerticeSize + nColorSize, nUVSize, _detail->getUVs().getPtr());
+		_vertexBuffer->setBufferSubData(nOffset, nUVSize, _detail->getUVs().getPtr());
+		nOffset += nUVSize;
 	}
 	if (nNormalSize > 0)
 	{
-		_vertexBuffer->setBufferSubData(nVerticeSize + nColorSize + nUVSize, nNormalSize, _detail->getNormals().getPtr());
+		_vertexBuffer->setBufferSubData(nOffset, nNormalSize, _detail->getNormals().getPtr());
+		nOffset += nNormalSize;
+	}
+	if (nTangentSize > 0)
+	{
+		_vertexBuffer->setBufferSubData(nOffset, nTangentSize, _detail->getTangents().getPtr());
+		nOffset += nTangentSize;
+	}
+	if (nBitangentSize > 0)
+	{
+		_vertexBuffer->setBufferSubData(nOffset, nBitangentSize, _detail->getBitangents().getPtr());
+		nOffset += nBitangentSize;
 	}
 	_vertexBuffer->unbindBuffer();
 	GLDebug::showError();
@@ -212,6 +249,23 @@ void render::Mesh::updateBufferData()
 	_indiceBuffer->setElementData(_detail->getIndices());
 	_indiceBuffer->unbindBuffer();
 	GLDebug::showError();
+}
+
+void render::Mesh::initMeshOtherDetail()
+{
+	if (getMeshDetail()->getVertices().getSize() == 0)
+	{
+		return;
+	}
+
+	if (getMeshDetail()->getUVs().getSize() == 0)
+	{
+		this->initDetailNormalData();
+	}
+	else
+	{
+		this->initDetailNormalAndTangentData();
+	}
 }
 
 void render::Mesh::initDetailNormalData()
@@ -227,10 +281,28 @@ void render::Mesh::initDetailNormalData()
 
 	int nLength = nCount / nUnitSize;
 
-	float* normals = (float*)malloc(nSize);
+	float* normals = (float*)getMeshDetail()->createNormals(nLength, sizeof(float), 3);
 	this->calTrianglesVertexNormal(getMeshDetail()->getVertices(), getMeshDetail()->getIndices(), normals);
-	getMeshDetail()->setNormals(nLength, normals, nUnitSize);
-	free(normals);
+}
+
+void render::Mesh::initDetailNormalAndTangentData()
+{
+	if (getMeshDetail()->getVertices().getSize() == 0)
+	{
+		return;
+	}
+
+	int nSize = getMeshDetail()->getVertices().getSize();
+	int nCount = getMeshDetail()->getVertices().getLength();
+	int nUnitSize = getMeshDetail()->getVertices().getUnitSize();
+
+	int nLength = nCount / nUnitSize;
+
+	float* normals = (float*)getMeshDetail()->createNormals(nLength, sizeof(float), 3);
+	float* tangents = (float*)getMeshDetail()->createTangents(nLength, sizeof(float), 3);
+	this->calTrianglesVertexNormalAndTangent(getMeshDetail()->getVertices(), getMeshDetail()->getUVs(), getMeshDetail()->getIndices(), normals, tangents);
+
+	int a = 1;
 }
 
 class mycompare {
@@ -310,7 +382,119 @@ void render::Mesh::calTrianglesVertexNormal(const sys::MeshMemoryData& vertices,
 		}
 		memcpy(normals + i * 3, normal.getValue(), 3 * sizeof(float));
 	}
+}
 
-	int a = 1;
+void render::Mesh::calTrianglesVertexNormalAndTangent(const sys::MeshMemoryData& vertices, const sys::MeshMemoryData& uvs, const sys::MeshMemoryData& indices, float* normals, float* tangents)
+{
+	int nUnitSize = vertices.getUnitSize();
+	int nVerticeCount = vertices.getLength() / nUnitSize;
+
+	float* pVerticeData = (float*)vertices.getValue();
+	float* pUVData = (float*)uvs.getValue();
+
+	if (nVerticeCount < 3)
+	{
+		return;
+	}
+
+	if (!(nUnitSize == 2 || nUnitSize == 3))
+	{
+		return;
+	}
+
+	std::vector<math::Vector3> vecPoint;
+	std::vector<math::Vector2> vecUV;
+
+	for (int i = 0; i < nVerticeCount; i++)
+	{
+		math::Vector3 pos;
+		if (nUnitSize == 2)
+		{
+			pos = math::Vector3(pVerticeData[i * nUnitSize], pVerticeData[i * nUnitSize + 1]);
+		}
+		else if (nUnitSize == 3)
+		{
+			pos = math::Vector3(pVerticeData[i * nUnitSize], pVerticeData[i * nUnitSize + 1], pVerticeData[i * nUnitSize + 2]);
+		}
+
+		vecPoint.push_back(pos);
+
+		math::Vector2 uv = math::Vector2(pUVData[i * 2], pUVData[i * 2 + 1]);
+		vecUV.push_back(uv);
+	}
+
+	int nPointCount = indices.getLength() / indices.getUnitSize();
+	int nTriangleCount = nPointCount / 3;
+
+	uint32_t* pIndice = (uint32_t*)indices.getValue();
+
+	std::map<int, std::vector<math::Vector3>> mapPointNormal;
+	std::map<int, std::vector<math::Vector3>> mapPointTangent;
+
+	for (int i = 0; i < nTriangleCount; i++)
+	{
+		math::Vector3 p0 = vecPoint[pIndice[i * 3 + 0]];
+		math::Vector3 p1 = vecPoint[pIndice[i * 3 + 1]];
+		math::Vector3 p2 = vecPoint[pIndice[i * 3 + 2]];
+
+		math::Vector3 edge1 = p1 - p0;
+		math::Vector3 edge2 = p2 - p0;
+
+		math::Vector3 normal = math::Vector3::cross(edge1, edge2);
+		mapPointNormal[pIndice[i * 3 + 0]].push_back(normal);
+		mapPointNormal[pIndice[i * 3 + 1]].push_back(normal);
+		mapPointNormal[pIndice[i * 3 + 2]].push_back(normal);
+
+		math::Vector2 uv0 = vecUV[pIndice[i * 3 + 0]];
+		math::Vector2 uv1 = vecUV[pIndice[i * 3 + 1]];
+		math::Vector2 uv2 = vecUV[pIndice[i * 3 + 2]];
+		math::Vector2 deltaUV1 = uv1 - uv0;
+		math::Vector2 deltaUV2 = uv2 - uv0;
+
+		float f = 1.0f / (deltaUV1.getX() * deltaUV2.getY() - deltaUV2.getX() * deltaUV1.getY());
+		float tx = f * (deltaUV2.getY() * edge1.getX() - deltaUV1.getY() * edge2.getX());
+		float ty = f * (deltaUV2.getY() * edge1.getY() - deltaUV1.getY() * edge2.getY());
+		float tz = f * (deltaUV2.getY() * edge1.getZ() - deltaUV1.getY() * edge2.getZ());
+
+		float btx = f * (deltaUV1.getX() * edge1.getX() - deltaUV2.getY() * edge2.getX());
+		float bty = f * (deltaUV1.getX() * edge1.getY() - deltaUV2.getY() * edge2.getY());
+		float btz = f * (deltaUV1.getX() * edge1.getZ() - deltaUV2.getY() * edge2.getZ());
+
+		math::Vector3 tangent(tx, ty, tz);
+
+		mapPointTangent[pIndice[i * 3 + 0]].push_back(tangent);
+		mapPointTangent[pIndice[i * 3 + 1]].push_back(tangent);
+		mapPointTangent[pIndice[i * 3 + 2]].push_back(tangent);
+		
+	}
+
+	for (int i = 0; i < nVerticeCount; i++)
+	{
+		math::Vector3 normal;
+		math::Vector3 tangent;
+		if (mapPointNormal[i].empty())
+		{
+			normal = math::Vector3(0, 0, 1);
+			tangent = math::Vector3(0, 1, 0);
+		}
+		else
+		{
+			for (auto item : mapPointNormal[i])
+			{
+				normal += item;
+			}
+			for (auto item : mapPointTangent[i])
+			{
+				tangent += item;
+			}
+			normal /= mapPointNormal[i].size();
+			normal.normalize();
+
+			tangent /= mapPointTangent[i].size();
+			tangent.normalize();
+		}
+		memcpy(normals + i * 3, normal.getValue(), 3 * sizeof(float));
+		memcpy(tangents + i * 3, tangent.getValue(), 3 * sizeof(float));
+	}
 }
 

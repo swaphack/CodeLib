@@ -170,46 +170,106 @@ void render::Material::startUpdateShaderVertexValue(Mesh* pMesh)
 	const sys::MeshMemoryData& colors = detail->getColors();
 	const sys::MeshMemoryData& texcoords = detail->getUVs();
 	const sys::MeshMemoryData& normals = detail->getNormals();
+	const sys::MeshMemoryData& tangents = detail->getTangents();
+	const sys::MeshMemoryData& bitangents = detail->getBitangents();
 
 	uint32_t nVerticeSize = vertices.getSize();
 	uint32_t nColorSize = colors.getSize();
 	uint32_t nUVSize = texcoords.getSize();
 	uint32_t nNormalSize = normals.getSize();
+	uint32_t nTangentSize = tangents.getSize();
+	uint32_t nBitangentSize = bitangents.getSize();
 
+	int nOffset = 0;
 	for (auto item : _vertexAttribIndices)
 	{
-		auto pAttrib = _shaderProgram->getAttrib(item.second);
-		if (!pAttrib) continue;
-		VertexAttribPointer* pointer = vao->getVertexAttrib<VertexAttribPointer>(pAttrib->getAttribID());
-		pointer->enableVertexArrayAttrib();
-		GLDebug::showError();
+
 		if (item.first == VertexDataType::POSITION)
 		{
-			if (nVerticeSize > 0)
+			auto pAttrib = _shaderProgram->getAttrib(item.second);
+			if (pAttrib)
 			{
-				pointer->setVertexAttribPointer(vertices.getUnitSize(), VertexAttribPointerType::FLOAT, 0);
+				VertexAttribPointer* pointer = vao->getVertexAttrib<VertexAttribPointer>(pAttrib->getAttribID());
+				if (nVerticeSize > 0)
+				{
+					pointer->enableVertexArrayAttrib();
+					pointer->setVertexAttribPointer(vertices.getUnitSize(), VertexAttribPointerType::FLOAT, nOffset);
+				}
 			}
+
+			nOffset += nVerticeSize;
 		}
 		else if (item.first == VertexDataType::COLOR)
 		{
-			if (nColorSize > 0)
+			auto pAttrib = _shaderProgram->getAttrib(item.second);
+			if (pAttrib)
 			{
-				pointer->setVertexAttribPointer(colors.getUnitSize(), VertexAttribPointerType::FLOAT, nVerticeSize);
+				VertexAttribPointer* pointer = vao->getVertexAttrib<VertexAttribPointer>(pAttrib->getAttribID());
+				
+				if (nColorSize > 0)
+				{
+					pointer->enableVertexArrayAttrib();
+					pointer->setVertexAttribPointer(colors.getUnitSize(), VertexAttribPointerType::FLOAT, nOffset);
+				}
 			}
+			nOffset += nColorSize;
 		}
 		else if (item.first == VertexDataType::UV)
 		{
-			if (nUVSize > 0)
+			auto pAttrib = _shaderProgram->getAttrib(item.second);
+			if (pAttrib)
 			{
-				pointer->setVertexAttribPointer(texcoords.getUnitSize(), VertexAttribPointerType::FLOAT, nVerticeSize + nColorSize);
+				VertexAttribPointer* pointer = vao->getVertexAttrib<VertexAttribPointer>(pAttrib->getAttribID());
+				if (nUVSize > 0)
+				{
+					pointer->enableVertexArrayAttrib();
+					pointer->setVertexAttribPointer(texcoords.getUnitSize(), VertexAttribPointerType::FLOAT, nOffset);
+				}
 			}
+			nOffset += nUVSize;
 		}
 		else if (item.first == VertexDataType::NORMAL)
 		{
-			if (nNormalSize > 0)
+			auto pAttrib = _shaderProgram->getAttrib(item.second);
+			if (pAttrib)
 			{
-				pointer->setVertexAttribPointer(normals.getUnitSize(), VertexAttribPointerType::FLOAT, nVerticeSize + nColorSize + nUVSize);
+				VertexAttribPointer* pointer = vao->getVertexAttrib<VertexAttribPointer>(pAttrib->getAttribID());
+				if (nNormalSize > 0)
+				{
+					pointer->enableVertexArrayAttrib();
+					pointer->setVertexAttribPointer(normals.getUnitSize(), VertexAttribPointerType::FLOAT, nOffset);
+				}
 			}
+			nOffset += nNormalSize;
+		}
+		else if (item.first == VertexDataType::TANGENT)
+		{
+			auto pAttrib = _shaderProgram->getAttrib(item.second);
+			if (pAttrib)
+			{
+				VertexAttribPointer* pointer = vao->getVertexAttrib<VertexAttribPointer>(pAttrib->getAttribID());
+				if (nTangentSize > 0)
+				{
+					pointer->enableVertexArrayAttrib();
+					pointer->setVertexAttribPointer(tangents.getUnitSize(), VertexAttribPointerType::FLOAT, nOffset);
+					
+				}
+			}
+			nOffset += nTangentSize;
+		}
+		else if (item.first == VertexDataType::BITANGENT)
+		{
+			auto pAttrib = _shaderProgram->getAttrib(item.second);
+			if (pAttrib)
+			{
+				VertexAttribPointer* pointer = vao->getVertexAttrib<VertexAttribPointer>(pAttrib->getAttribID());
+				if (nBitangentSize > 0)
+				{
+					pointer->enableVertexArrayAttrib();
+					pointer->setVertexAttribPointer(bitangents.getUnitSize(), VertexAttribPointerType::FLOAT, nOffset);
+				}
+			}
+			nOffset += nBitangentSize;
 		}
 		GLDebug::showError();
 	}
@@ -308,6 +368,16 @@ void render::Material::endUpdateShaderUniformValue(DrawTextureCache* textureCach
 		else if (item.first == UniformType::MATERIAL_TEXTURE_BUMP)
 		{
 			auto pTexture = textureCache->getTexture(_detail->getBumpTextureMap());
+			if (pTexture)
+			{
+				pTexture->unbindTexture();
+				GLState::disable((EnableMode)pTexture->getTextureTarget());
+			}
+			GLDebug::showError();
+		}
+		else if (item.first == UniformType::MATERIAL_TEXTURE_NORMAL)
+		{
+			auto pTexture = textureCache->getTexture(_detail->getNormalTextureMap());
 			if (pTexture)
 			{
 				pTexture->unbindTexture();
@@ -720,7 +790,7 @@ void render::Material::updateMaterialUniformValue(DrawTextureCache* textureCache
 	{
 		return;
 	}
-
+	GLDebug::showError();
 	for (auto item : _vertexUniformIndices)
 	{
 		auto pUniform = _shaderProgram->getUniform(item.second);
@@ -766,10 +836,6 @@ void render::Material::updateMaterialUniformValue(DrawTextureCache* textureCache
 				pTexture->enableTextureWithSampler(1);
 				pUniform->setValue(1);
 			}
-			else
-			{
-				pUniform->setValue(0);
-			}
 			GLDebug::showError();
 		}
 		else if (item.first == UniformType::MATERIAL_TEXTURE_SPECULAR)
@@ -781,10 +847,6 @@ void render::Material::updateMaterialUniformValue(DrawTextureCache* textureCache
 				pTexture->bindTexture();
 				pTexture->enableTextureWithSampler(2);
 				pUniform->setValue(2);
-			}
-			else
-			{
-				pUniform->setValue(0);
 			}
 			GLDebug::showError();
 		}
@@ -798,10 +860,6 @@ void render::Material::updateMaterialUniformValue(DrawTextureCache* textureCache
 				pTexture->enableTextureWithSampler(3);
 				pUniform->setValue(3);
 			}
-			else
-			{
-				pUniform->setValue(0);
-			}
 			GLDebug::showError();
 		}
 		else if (item.first == UniformType::MATERIAL_TEXTURE_BUMP)
@@ -814,9 +872,17 @@ void render::Material::updateMaterialUniformValue(DrawTextureCache* textureCache
 				pTexture->enableTextureWithSampler(4);
 				pUniform->setValue(4);
 			}
-			else
+			GLDebug::showError();
+		}
+		else if (item.first == UniformType::MATERIAL_TEXTURE_NORMAL)
+		{
+			auto pTexture = textureCache->getTexture(_detail->getNormalTextureMap());
+			if (pTexture)
 			{
-				pUniform->setValue(0);
+				pTexture->activeTexture(ActiveTextureName::TEXTURE5);
+				pTexture->bindTexture();
+				pTexture->enableTextureWithSampler(5);
+				pUniform->setValue(5);
 			}
 			GLDebug::showError();
 		}

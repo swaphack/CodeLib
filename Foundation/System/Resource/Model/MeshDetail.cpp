@@ -87,6 +87,28 @@ void MeshDetail::setMatrix(const math::Matrix4x4& mat)
 	_matrix = mat;
 }
 
+const sys::MeshMemoryData& sys::MeshDetail::getTangents() const
+{
+	return _tangents;
+}
+
+void sys::MeshDetail::setTangents(int len, const float* normals, int unitSize /*= 3*/)
+{
+	_tangents.init(len * unitSize, normals, sizeof(float));
+	_tangents.setUnitSize(unitSize);
+}
+
+const sys::MeshMemoryData& sys::MeshDetail::getBitangents() const
+{
+	return _bitangents;
+}
+
+void sys::MeshDetail::setBitangents(int len, const float* normals, int unitSize /*= 3*/)
+{
+	_bitangents.init(len * unitSize, normals, sizeof(float));
+	_bitangents.setUnitSize(unitSize);
+}
+
 char* sys::MeshDetail::createVertices(size_t len, uint32_t typeSize, int unitSize)
 {
 	_vertices.resize(len * unitSize, typeSize);
@@ -99,6 +121,20 @@ char* sys::MeshDetail::createNormals(size_t len, uint32_t typeSize, int unitSize
 	_normals.resize(len * unitSize, typeSize);
 	_normals.setUnitSize(unitSize);
 	return _normals.getPtr();
+}
+
+char* sys::MeshDetail::createTangents(size_t len, uint32_t typeSize, int unitSize /*= 3*/)
+{
+	_tangents.resize(len * unitSize, typeSize);
+	_tangents.setUnitSize(unitSize);
+	return _tangents.getPtr();
+}
+
+char* sys::MeshDetail::createBitangents(size_t len, uint32_t typeSize, int unitSize /*= 3*/)
+{
+	_bitangents.resize(len * unitSize, typeSize);
+	_bitangents.setUnitSize(unitSize);
+	return _bitangents.getPtr();
 }
 
 char* sys::MeshDetail::createColors(size_t len, uint32_t typeSize, int unitSize)

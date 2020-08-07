@@ -110,6 +110,12 @@ void render::DrawNode::setBumpTexture(const std::string& fullpath)
 	_textureCache->addTexture(MAT_TEXTURE_BUMP, fullpath);
 }
 
+void render::DrawNode::setNormalTexture(const std::string& fullpath)
+{
+	_material->getMaterialDetail()->setBumpTextureMap(MAT_TEXTURE_NORMAL);
+	_textureCache->addTexture(MAT_TEXTURE_NORMAL, fullpath);
+}
+
 const render::Texture* render::DrawNode::getTexture(const std::string& name) const
 {
 	return _textureCache->getTexture(name);

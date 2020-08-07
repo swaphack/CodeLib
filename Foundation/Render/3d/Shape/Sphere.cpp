@@ -183,7 +183,7 @@ void render::Sphere::updateSphere()
 	pMesh->getMeshDetail()->setColors(nCount0 + nCount1 + nCount2, &pColors[0]);
 	pMesh->getMeshDetail()->setIndices(pIndices.size(), &pIndices[0]);
 
-	pMesh->initDetailNormalData();
+	pMesh->initMeshOtherDetail();
 }
 
 #ifdef SPHERE_DRAW_METHOD_ONE

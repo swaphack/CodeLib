@@ -153,52 +153,62 @@ const std::string& MaterialDetail::getName()
 
 const std::string& MaterialDetail::getAmbientTextureMap()
 {
-	return _mapTextureAmbient;
+	return _ambientTextureMap;
 }
 
 void MaterialDetail::setAmbientTextureMap(const std::string& name)
 {
-	_mapTextureAmbient = name;
+	_ambientTextureMap = name;
 }
 
 const std::string& MaterialDetail::getDiffuseTextureMap()
 {
-	return _mapTextureDiffuse;
+	return _diffuseTextureMap;
 }
 
 void MaterialDetail::setDiffuseTextureMap(const std::string& name)
 {
-	_mapTextureDiffuse = name;
+	_diffuseTextureMap = name;
 }
 
 void MaterialDetail::setSpecularTextureMap(const std::string& name)
 {
-	_mapTextureSpecular = name;
+	_specularTextureMap = name;
 }
 
 const std::string& MaterialDetail::getSpecularTextureMap()
 {
-	return _mapTextureSpecular;
+	return _specularTextureMap;
 }
 
 void MaterialDetail::setAlphaTextureMap(const std::string& name)
 {
-	_mapTextureAlpha = name;
+	_alphaTextureMap = name;
 }
 
 const std::string& MaterialDetail::getAlphaTextureMap()
 {
-	return _mapTextureAlpha;
+	return _alphaTextureMap;
 }
 
 void MaterialDetail::setBumpTextureMap(const std::string& name)
 {
-	_mapTextureBump = name;
+	_bumpTextureMap = name;
 }
 
 const std::string& MaterialDetail::getBumpTextureMap()
 {
-	return _mapTextureBump;
+	return _bumpTextureMap;
+}
+
+void sys::MaterialDetail::setNormalTextureMap(const std::string& name)
+{
+	_normalTextureMap = name;
+}
+
+const std::string& sys::MaterialDetail::getNormalTextureMap()
+{
+	return _normalTextureMap;
 }
 
 void sys::MaterialDetail::setSpecularStrength(float value)

@@ -64,9 +64,13 @@ namespace render
 		*/
 		void setAlphaTexture(const std::string& fullpath);
 		/**
-		*	设置Alpha纹理
+		*	设置Bump纹理
 		*/
 		void setBumpTexture(const std::string& fullpath);
+		/**
+		*	设置normal纹理
+		*/
+		void setNormalTexture(const std::string& fullpath);
 		/**
 		*	获取纹理
 		*/

@@ -11,11 +11,13 @@ namespace render
 		POSITION,
 		COLOR,
 		UV,
+		NORMAL,
+		TANGENT,
+		BITANGENT,
 		UV1,
 		UV2,
 		UV3,
 		UV4,
-		NORMAL,
 		BLEND_WEIGHT,
 		BLEND_INDEX,
 		MAX,
@@ -124,6 +126,8 @@ namespace render
 		MATERIAL_TEXTURE_DIFFUSE,
 		// 材质高光参数
 		MATERIAL_TEXTURE_SPECULAR,
+		// 材质法线参数
+		MATERIAL_TEXTURE_NORMAL,
 		// 材质亮度参数
 		MATERIAL_SHININESS,
 		// 材质亮度增强参数

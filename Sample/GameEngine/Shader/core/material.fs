@@ -12,6 +12,7 @@ struct Material
 	sampler2D texSpecular; // 高光反射纹理
 	sampler2D texAlpha;	// alpha纹理
 	sampler2D texBump;	// bump纹理
+	sampler2D texNormal;// normal纹理
 
 	float shininess; 	// 镜面反射高光指数
 	float strength;		// 镜面反射高光增强系数

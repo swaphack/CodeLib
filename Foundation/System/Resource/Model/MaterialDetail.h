@@ -54,13 +54,21 @@ namespace sys
 		*/
 		const std::string& getAlphaTextureMap();
 		/**
-		*	设置Bump 纹理
+		*	设置凹凸纹理
 		*/
 		void setBumpTextureMap(const std::string& name);
 		/**
-		*	获取Bump纹理
+		*	获取凹凸纹理
 		*/
 		const std::string& getBumpTextureMap();
+		/**
+		*	设置法线纹理
+		*/
+		void setNormalTextureMap(const std::string& name);
+		/**
+		*	获取法线纹理
+		*/
+		const std::string& getNormalTextureMap();
 		/**
 		*	环境光
 		*/
@@ -148,15 +156,17 @@ namespace sys
 		// 辐射光颜色
 		float _emissionColor[4];
 
-		// 纹理名称
-		std::string _mapTextureAmbient;
-		// 纹理名称
-		std::string _mapTextureDiffuse;
-		// 纹理名称
-		std::string _mapTextureSpecular;
-		// 纹理名称
-		std::string _mapTextureAlpha;
-		// 纹理名称
-		std::string _mapTextureBump;
+		// 环境纹理（本身）
+		std::string _ambientTextureMap;
+		// 漫反射纹理
+		std::string _diffuseTextureMap;
+		// 高光发射纹理
+		std::string _specularTextureMap;
+		// 透明纹理
+		std::string _alphaTextureMap;
+		// 凹凸纹理
+		std::string _bumpTextureMap;
+		// 法线纹理
+		std::string _normalTextureMap;
 	};
 }

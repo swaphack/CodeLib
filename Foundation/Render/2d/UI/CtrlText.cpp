@@ -182,7 +182,7 @@ void CtrlText::onTextChange()
 		pMesh->getMeshDetail()->setUVs(4, uvs, 2);
 		pMesh->getMeshDetail()->setIndices(6, _vertexes.indices);
 
-		pMesh->initDetailNormalData();
+		pMesh->initMeshOtherDetail();
 	}
 }
 

@@ -20,9 +20,9 @@ void TestLightingNode::initNodes()
 
 	this->addStar();
 
-	this->testCubeModel();
+	//this->testCubeModel();
 
-	this->addEarth();
+	//this->addEarth();
 }
 
 void TestLightingNode::addSun()
@@ -59,12 +59,13 @@ void TestLightingNode::addStar()
 	pLight->setAmbient(255, 255, 255, 255);
 	pLight->setDiffuse(255, 255, 255, 255);
 	pLight->setSpecular(255, 255, 255, 255);
-	pLight->setLinearAttenuation(0);
-	pLight->setQuadraticAttenuation(0);
+	//pLight->setConstantAttenuation(0);
+	pLight->setLinearAttenuation(0.0f);
+	pLight->setQuadraticAttenuation(0.0f);
 	pLightShape->addChild(pLight);
 
 	render::EllipseAction* pAction = render::CREATE_ACTION(render::EllipseAction);
-	pAction->setControlParameters(math::Vector3(512, 384, 400), 400, 200, math::Vector3(0, 0, 0));
+	pAction->setControlParameters(math::Vector3(512, 384, 0), 512, 384, math::Vector3(0, 0, 0));
 	pAction->setDuration(10);
 
 	pLightShape->getActionProxy()->runAction(render::RepeateForeverAction::create(pAction));
@@ -77,7 +78,7 @@ void TestLightingNode::addEarth()
 	//pEarth->setSupportMultiLight(true);
 	pEarth->setTexture("Resource/Image/2k_earth_daymap.jpg");
 	pEarth->setDiffuseTexture("Resource/Image/2k_earth_normal_map.tif");
-	pEarth->setSpecularTexture("Resource/Image/2k_earth_specular_map.tif");
+	//pEarth->setSpecularTexture("Resource/Image/2k_earth_specular_map.tif");
 	pEarth->setRadius(300);
 	pEarth->setPosition(200, 400);
 
@@ -89,8 +90,9 @@ void TestLightingNode::addEarth()
 	});
 
 	//Utility::loadShader(pEarth, "Shader/material/material_texture_light.vs", "Shader/material/material_texture_light.fs");
-	Utility::loadShader(pEarth, "Shader/material/material_emulate_diffuse.vs", "Shader/material/material_emulate_diffuse.fs");
-	//Utility::loadShader(pEarth, "Shader/material/material_single_light.vs", "Shader/material/material_single_light.fs");
+	//Utility::loadShader(pEarth, "Shader/material/material_emulate_diffuse.vs", "Shader/material/material_emulate_diffuse.fs");
+	Utility::loadShader(pEarth, "Shader/material/material_single_light.vs", "Shader/material/material_single_light.fs");
+	//Utility::loadShader(pEarth, "Shader/material/material_normal_map.vs", "Shader/material/material_normal_map.fs");
 	this->addChild(pEarth);
 
 	Utility::runRotateAction(pEarth);
@@ -111,14 +113,15 @@ void TestLightingNode::addGround()
 	render::Plane* pModel = CREATE_NODE(render::Plane);
 	pModel->setSupportLight(true);
 	pModel->setSupportMultiLight(true);
-	pModel->setTexture(filepath);
+	pModel->setTexture("Resource/Image/2k_earth_daymap.jpg");
+	pModel->setNormalTexture("Resource/Image/2k_earth_normal_map.tif");
 	pModel->setColor(0.5f, 0.5f, 0.5f);
 	pModel->setAnchorPoint(math::Vector3(0.5f, 0.5f, 0.5f));
 	pModel->setPosition(512, 384, -300);
 	pModel->setRotation(0, 0, 0);
 	pModel->setVolume(1024, 768);
-	//Utility::loadShader(pModel, "Shader/material/material_texture.vs", "Shader/material/material_texture.fs");
-	Utility::loadShader(pModel, "Shader/material/material_single_light.vs", "Shader/material/material_multi_lights.fs");
+	Utility::loadShader(pModel, "Shader/material/material_normal_map.vs", "Shader/material/material_normal_map.fs");
+	//Utility::loadShader(pModel, "Shader/material/material_single_light.vs", "Shader/material/material_multi_lights.fs");
 	this->addChild(pModel);
 
 	pModel->setShaderProgramFunc([](render::ShaderProgram* program) {
@@ -154,6 +157,7 @@ void TestLightingNode::testCubeModel()
 	pModel->setRotation(0, 45, 0);
 	pModel->setVolume(200, 200, 200);
 	//Utility::loadShader(pModel, "Shader/material/material_texture.vs", "Shader/material/material_texture.fs");
+	//Utility::loadShader(pModel, "Shader/texture/texture.vs", "Shader/texture/texture.fs");
 	Utility::loadShader(pModel, "Shader/material/material_single_light.vs", "Shader/material/material_single_light.fs");
 	this->addChild(pModel);
 

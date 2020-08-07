@@ -45,7 +45,7 @@ void render::Plane::onPlaneBodyChanged()
 		pMesh->getMeshDetail()->setUVs(4, uvs, 2);
 		pMesh->getMeshDetail()->setIndices(6, _rectPosition.indices);
 
-		pMesh->initDetailNormalData();
+		pMesh->initMeshOtherDetail();
 	}
 }
 

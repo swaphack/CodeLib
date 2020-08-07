@@ -147,6 +147,16 @@ void render::MultiDrawNode::setBumpTexture(const std::string& fullpath)
 	}
 }
 
+void render::MultiDrawNode::setNormalTexture(const std::string& fullpath)
+{
+	_textureCache->addTexture(MAT_TEXTURE_NORMAL, fullpath);
+
+	for (auto item : _materiales->getMaterials())
+	{
+		item.second->getMaterialDetail()->setAmbientTextureMap(MAT_TEXTURE_NORMAL);
+	}
+}
+
 void render::MultiDrawNode::setShaderProgram(ShaderProgram* program)
 {
 	for (auto item : _materiales->getMaterials())

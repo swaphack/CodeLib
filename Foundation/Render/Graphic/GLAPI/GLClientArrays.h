@@ -20,6 +20,9 @@ namespace render
 		static void setColorPointer4(DataType type, int stride, const void* value);
 	public: // 法线
 		static void setNormalPointer(DataType type, int stride, const void* value);
+	public:// 切线
+		static void setTangentPointer(DataType type, int stride, const void* value);
+		static void setBitangentPointer(DataType type, int stride, const void* value);
 	public: // 纹理
 		static void setTexCoordPointer(int size, DataType type, int stride, const void* value);
 		static void setTexCoordPointer1(DataType type, int stride, const void* value);

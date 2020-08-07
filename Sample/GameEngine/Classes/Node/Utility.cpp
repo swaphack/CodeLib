@@ -118,6 +118,7 @@ void Utility::initShaderAttrib(render::Material* mat)
 	mat->addUniform(UniformType::MATERIAL_COLOR_DIFFUSE, "material.diffuse");
 	mat->addUniform(UniformType::MATERIAL_COLOR_SPECULAR, "material.specular");
 	mat->addUniform(UniformType::MATERIAL_TEXTURE, "material.tex");
+	mat->addUniform(UniformType::MATERIAL_TEXTURE_NORMAL, "material.texNormal");
 	mat->addUniform(UniformType::MATERIAL_TEXTURE_ALPHA, "material.texAlpha");
 	mat->addUniform(UniformType::MATERIAL_TEXTURE_BUMP, "material.texBump");
 	mat->addUniform(UniformType::MATERIAL_TEXTURE_DIFFUSE, "material.texDiffuse");
@@ -129,6 +130,8 @@ void Utility::initShaderAttrib(render::Material* mat)
 	mat->addVertexData(VertexDataType::COLOR, "v_color");
 	mat->addVertexData(VertexDataType::UV, "v_texcoord");
 	mat->addVertexData(VertexDataType::NORMAL, "v_normal");
+	mat->addVertexData(VertexDataType::TANGENT, "v_tangent");
+	mat->addVertexData(VertexDataType::BITANGENT, "v_bitangent");
 	
 	
 	mat->addUniform(UniformType::VIEW_POSITION, "env.viewPos");

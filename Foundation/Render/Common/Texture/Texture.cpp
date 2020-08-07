@@ -92,7 +92,9 @@ void render::Texture::bindTextureUnit(uint32_t unit)
 
 void render::Texture::enableTextureWithSampler(uint32_t unit)
 {
+	GLDebug::showError();
 	GLState::enable((EnableMode)getTextureTarget());
+	GLDebug::showError();
 	this->activeTexture(unit);
 	GLDebug::showError();
 	this->bindSampler(unit);

@@ -131,3 +131,13 @@ void GLClientArrays::drawElements(DrawMode mode, int count, IndexDataType type, 
 {
 	glDrawElements((GLenum)mode, count, (GLenum)type, data);
 }
+
+void render::GLClientArrays::setTangentPointer(DataType type, int stride, const void* value)
+{
+	glTangentPointerEXT((GLenum)type, stride, (void*)value);
+}
+
+void render::GLClientArrays::setBitangentPointer(DataType type, int stride, const void* value)
+{
+	glBinormalPointerEXT((GLenum)type, stride, (void*)value);
+}

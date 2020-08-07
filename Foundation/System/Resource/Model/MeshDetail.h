@@ -58,6 +58,22 @@ namespace sys
 		*/
 		void setNormals(int len, const float* normals, int unitSize = 3);
 		/**
+		*	切线坐标信息
+		*/
+		const MeshMemoryData& getTangents() const;
+		/**
+		*	设置切线坐标信息
+		*/
+		void setTangents(int len, const float* normals, int unitSize = 3);
+		/**
+		*	辅助切线坐标信息
+		*/
+		const MeshMemoryData& getBitangents() const;
+		/**
+		*	设置辅助切线坐标信息
+		*/
+		void setBitangents(int len, const float* normals, int unitSize = 3);
+		/**
 		*	颜色坐标信息
 		*/
 		const MeshMemoryData& getColors() const;
@@ -107,6 +123,14 @@ namespace sys
 		*/
 		char* createNormals(size_t len, uint32_t typeSize, int unitSize = 3);
 		/**
+		*	分配切线
+		*/
+		char* createTangents(size_t len, uint32_t typeSize, int unitSize = 3);
+		/**
+		*	分配辅助切线
+		*/
+		char* createBitangents(size_t len, uint32_t typeSize, int unitSize = 3);
+		/**
 		*	分配颜色
 		*/
 		char* createColors(size_t len, uint32_t typeSize, int unitSize = 4);
@@ -135,6 +159,10 @@ namespace sys
 		MeshMemoryData _colors;
 		// 纹理坐标 (x,y,z)
 		MeshMemoryData _uvs;
+		// tangent坐标 (x,y,z)
+		MeshMemoryData _tangents;
+		// bitangent坐标 (x,y,z)
+		MeshMemoryData _bitangents;
 		// 变换矩阵
 		math::Matrix4x4 _matrix;
 	};
