@@ -239,7 +239,7 @@ void TestShaderNode::addLight()
 	Utility::loadShader(light, "Shader/env/light.vs", "Shader/env/light.fs");
 	this->addChild(light);
 
-	Light0* pSpotLight = CREATE_NODE(Light0);
+	Light* pSpotLight = CREATE_NODE(Light);
 	pSpotLight->setAmbient(255, 255, 255, 255);
 	pSpotLight->setDiffuse(255, 255, 255, 255);
 	pSpotLight->setSpecular(255, 255, 255, 255);

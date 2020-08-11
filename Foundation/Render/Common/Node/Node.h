@@ -86,6 +86,11 @@ namespace render
 		// 是否可见
 		bool isVisible();
 	public:
+		// 跳过绘制
+		void setSkipDraw(bool status);
+		// 是否跳过绘制
+		bool isSkipDraw();
+	public:
 		// 更新节点, 更新节点逻辑
 		virtual void updateNode();
 	public:
@@ -128,9 +133,12 @@ namespace render
 		// 逆转空间矩阵
 		virtual void endUpdateTranform();
 	public:
+		// 将事件通知给所有节点
 		void notifyToAll(NodeNotifyType id);
-
+		// 将事件通知给节点
 		void notify(NodeNotifyType id);
+		// 广播事件
+		void broadcastFunc(const std::function<void(Node*)>& func, bool recursive = false);
 	protected:
 		void notifyEvents();
 	protected:
@@ -144,15 +152,7 @@ namespace render
 		virtual void onBodyChange();
 		// 子节点发生改变
 		virtual void onChildrenChange();
-	public:
-		// 支持光源
-		void setSupportLight(bool supported);
-		// 支持光源
-		bool isSupportedLight();
-		// 支持多光源
-		void setSupportMultiLight(bool supported);
-		// 支持多光源
-		bool isSupportedMultiLight();
+
 	private:
 		// 使用矩阵计算空间变化属性
 		void calRealSpaceByMatrix();
@@ -171,6 +171,8 @@ namespace render
 		Node* _parent = nullptr;
 		// 子节点
 		std::vector<Node*> _children;
+		// 跳过绘制
+		bool _bSkipDraw = false;
 		// 是否可见
 		bool _bVisibled = false;
 		// 是否可点击
@@ -189,10 +191,7 @@ namespace render
 		math::Matrix4x4 _localInverseMatrix;
 		// 实际在世界坐标系中的矩阵
 		math::Matrix4x4 _worldMatrix;
-		// 支持多光源
-		bool _bSupportMultiLight = false;
-		// 支持多光源
-		bool _bSupportLight = false;
+		
 	};
 
 

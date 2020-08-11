@@ -40,5 +40,13 @@ namespace render
 		void setTextureImage(int level, TextureInternalSizedFormat internalFormat, int width, int height, int border, TextureExternalFormat format, TextureExternalDataType type, const void* data);
 	public:
 		virtual void load(const sys::ImageDetail* image, const TextureSetting& setting = TextureSetting());
+
+	public:
+		static Texture2D* getEmptyTexture();
+	private:
+		/**
+		*	ø’Œ∆¿Ì
+		*/
+		static Texture2D* _emptyTexture;
 	};
 }

@@ -5,6 +5,8 @@ using namespace render;
 std::string Utility::texture3dVertexPath = "Shader/texture/texture.vs";
 std::string Utility::texture3dFragmentPath = "Shader/texture/texture.fs";
 
+bool Utility::bInitShaderAttrib = false;
+
 void Utility::loadShader(render::Materials* mats, const std::string& vpath, const std::string& fpath)
 {
 	if (mats == nullptr)
@@ -21,7 +23,7 @@ void Utility::loadShader(render::Materials* mats, const std::string& vpath, cons
 		item.second->setShaderProgram(pProgram);
 	}
 
-	initShaderAttrib(mats);
+	initShaderAttrib();
 
 }
 
@@ -43,7 +45,7 @@ void Utility::loadShader(render::Material* mat, const std::string& vpath, const 
 	}
 	mat->setShaderProgram(pProgram);
 
-	initShaderAttrib(mat);
+	initShaderAttrib();
 }
 
 void Utility::loadShader(render::MultiDrawNode* node, const std::string& vpath, const std::string& fpath)
@@ -53,94 +55,85 @@ void Utility::loadShader(render::MultiDrawNode* node, const std::string& vpath, 
 
 void Utility::initShaderAttrib(render::DrawNode* node)
 {
-	initShaderAttrib(node->getMaterial());
+	initShaderAttrib();
 }
 
-void Utility::initShaderAttrib(render::Materials* mats)
+void Utility::initShaderAttrib()
 {
-	if (mats == nullptr)
+	if (bInitShaderAttrib)
 	{
 		return;
 	}
 
-	for (auto item : mats->getMaterials())
-	{
-		initShaderAttrib(item.second);
-		
-	}
-}
+	bInitShaderAttrib = true;
 
-void Utility::initShaderAttrib(render::Material* mat)
-{
-	if (mat == nullptr)
-	{
-		return;
-	}
-	mat->addUniform(UniformType::PROJECT_MATRIX, "matrix.project");
-	mat->addUniform(UniformType::VIEW_MATRIX, "matrix.view");
-	mat->addUniform(UniformType::MODEL_MATRIX, "matrix.model");
-	mat->addUniform(UniformType::NORMAL_MATRIX, "matrix.normal");
-	mat->addUniform(UniformType::MVP_MATRIX, "matrix.mvp");
-	mat->addUniform(UniformType::MV_MATRIX, "matrix.mv");
+	G_UNIFORMSHADERAPPLY->addUniform(UniformType::PROJECT_MATRIX, "matrix.project");
+	G_UNIFORMSHADERAPPLY->addUniform(UniformType::VIEW_MATRIX, "matrix.view");
+	G_UNIFORMSHADERAPPLY->addUniform(UniformType::MODEL_MATRIX, "matrix.model");
+	G_UNIFORMSHADERAPPLY->addUniform(UniformType::NORMAL_MATRIX, "matrix.normal");
+	G_UNIFORMSHADERAPPLY->addUniform(UniformType::MVP_MATRIX, "matrix.mvp");
+	G_UNIFORMSHADERAPPLY->addUniform(UniformType::MV_MATRIX, "matrix.mv");
 	
 
-	mat->addUniform(UniformType::LIGHT_ENABLED, "light.isEnabled");
-	mat->addUniform(UniformType::LIGHT_LOCAL, "light.isLocal");
-	mat->addUniform(UniformType::LIGHT_SPOT, "light.isSpot");
-	mat->addUniform(UniformType::LIGHT_POSITION, "light.position");
-	mat->addUniform(UniformType::LIGHT_DIRECTION, "light.direction");
-	mat->addUniform(UniformType::LIGHT_HALF_VECTOR, "light.halfVector");
-	mat->addUniform(UniformType::LIGHT_COLOR, "light.color");
-	mat->addUniform(UniformType::LIGHT_AMBIENT, "light.ambient");
-	mat->addUniform(UniformType::LIGHT_SPOT_EXPONENT, "light.spotExponent");
-	mat->addUniform(UniformType::LIGHT_SPOT_COST_CUTOFF, "light.spotCostCutoff");
-	mat->addUniform(UniformType::LIGHT_CONSTANT_ATTENUATION, "light.constantAttenuation");
-	mat->addUniform(UniformType::LIGHT_LINEAR_ATTENUATION, "light.linearAttenuation");
-	mat->addUniform(UniformType::LIGHT_QUADRATIC_ATTENUATION, "light.quadraticAttenuation");
+	G_UNIFORMSHADERAPPLY->addUniform(UniformType::LIGHT_ENABLED, "light.isEnabled");
+	G_UNIFORMSHADERAPPLY->addUniform(UniformType::LIGHT_LOCAL, "light.isLocal");
+	G_UNIFORMSHADERAPPLY->addUniform(UniformType::LIGHT_SPOT, "light.isSpot");
+	G_UNIFORMSHADERAPPLY->addUniform(UniformType::LIGHT_POSITION, "light.position");
+	G_UNIFORMSHADERAPPLY->addUniform(UniformType::LIGHT_DIRECTION, "light.direction");
+	G_UNIFORMSHADERAPPLY->addUniform(UniformType::LIGHT_HALF_VECTOR, "light.halfVector");
+	G_UNIFORMSHADERAPPLY->addUniform(UniformType::LIGHT_SPACE_MATRIX, "light.spaceMatrix");
+	G_UNIFORMSHADERAPPLY->addUniform(UniformType::LIGHT_COLOR, "light.color");
+	G_UNIFORMSHADERAPPLY->addUniform(UniformType::LIGHT_AMBIENT, "light.ambient");
+	G_UNIFORMSHADERAPPLY->addUniform(UniformType::LIGHT_SPOT_EXPONENT, "light.spotExponent");
+	G_UNIFORMSHADERAPPLY->addUniform(UniformType::LIGHT_SPOT_COST_CUTOFF, "light.spotCostCutoff");
+	G_UNIFORMSHADERAPPLY->addUniform(UniformType::LIGHT_CONSTANT_ATTENUATION, "light.constantAttenuation");
+	G_UNIFORMSHADERAPPLY->addUniform(UniformType::LIGHT_LINEAR_ATTENUATION, "light.linearAttenuation");
+	G_UNIFORMSHADERAPPLY->addUniform(UniformType::LIGHT_QUADRATIC_ATTENUATION, "light.quadraticAttenuation");
 
-	
-	mat->addUniform(UniformType::MULTI_LIGHT_ENABLED, "lights[%d].isEnabled");
-	mat->addUniform(UniformType::MULTI_LIGHT_LOCAL, "lights[%d].isLocal");
-	mat->addUniform(UniformType::MULTI_LIGHT_SPOT, "lights[%d].isSpot");
-	mat->addUniform(UniformType::MULTI_LIGHT_POSITION, "lights[%d].position");
-	mat->addUniform(UniformType::MULTI_LIGHT_DIRECTION, "lights[%d].direction");
-	mat->addUniform(UniformType::MULTI_LIGHT_HALF_VECTOR, "lights[%d].halfVector");
-	mat->addUniform(UniformType::MULTI_LIGHT_COLOR, "lights[%d].color");
-	mat->addUniform(UniformType::MULTI_LIGHT_AMBIENT, "lights[%d].ambient");
-	mat->addUniform(UniformType::MULTI_LIGHT_SPOT_EXPONENT, "lights[%d].spotExponent");
-	mat->addUniform(UniformType::MULTI_LIGHT_SPOT_COST_CUTOFF, "lights[%d].spotCostCutoff");
-	mat->addUniform(UniformType::MULTI_LIGHT_CONSTANT_ATTENUATION, "lights[%d].constantAttenuation");
-	mat->addUniform(UniformType::MULTI_LIGHT_LINEAR_ATTENUATION, "lights[%d].linearAttenuation");
-	mat->addUniform(UniformType::MULTI_LIGHT_QUADRATIC_ATTENUATION, "lights[%d].quadraticAttenuation");
 
-	mat->addUniform(UniformType::MATERIAL_EMISSION, "material.emission");
-	mat->addUniform(UniformType::MATERIAL_COLOR_AMBIENT, "material.ambient");
-	mat->addUniform(UniformType::MATERIAL_COLOR_DIFFUSE, "material.diffuse");
-	mat->addUniform(UniformType::MATERIAL_COLOR_SPECULAR, "material.specular");
-	mat->addUniform(UniformType::MATERIAL_TEXTURE, "material.tex");
-	mat->addUniform(UniformType::MATERIAL_TEXTURE_NORMAL, "material.texNormal");
-	mat->addUniform(UniformType::MATERIAL_TEXTURE_ALPHA, "material.texAlpha");
-	mat->addUniform(UniformType::MATERIAL_TEXTURE_BUMP, "material.texBump");
-	mat->addUniform(UniformType::MATERIAL_TEXTURE_DIFFUSE, "material.texDiffuse");
-	mat->addUniform(UniformType::MATERIAL_TEXTURE_SPECULAR, "material.texSpecular");
-	mat->addUniform(UniformType::MATERIAL_SHININESS, "material.shininess");
-	mat->addUniform(UniformType::MATERIAL_STRENGTH, "material.strength");
+	G_UNIFORMSHADERAPPLY->addUniform(UniformType::MULTI_LIGHT_ENABLED, "lights[%d].isEnabled");
+	G_UNIFORMSHADERAPPLY->addUniform(UniformType::MULTI_LIGHT_LOCAL, "lights[%d].isLocal");
+	G_UNIFORMSHADERAPPLY->addUniform(UniformType::MULTI_LIGHT_SPOT, "lights[%d].isSpot");
+	G_UNIFORMSHADERAPPLY->addUniform(UniformType::MULTI_LIGHT_POSITION, "lights[%d].position");
+	G_UNIFORMSHADERAPPLY->addUniform(UniformType::MULTI_LIGHT_DIRECTION, "lights[%d].direction");
+	G_UNIFORMSHADERAPPLY->addUniform(UniformType::MULTI_LIGHT_HALF_VECTOR, "lights[%d].halfVector");
+	G_UNIFORMSHADERAPPLY->addUniform(UniformType::MULTI_LIGHT_SPACE_MATRIX, "lights[%d].spaceMatrix");
+	G_UNIFORMSHADERAPPLY->addUniform(UniformType::MULTI_LIGHT_COLOR, "lights[%d].color");
+	G_UNIFORMSHADERAPPLY->addUniform(UniformType::MULTI_LIGHT_AMBIENT, "lights[%d].ambient");
+	G_UNIFORMSHADERAPPLY->addUniform(UniformType::MULTI_LIGHT_SPOT_EXPONENT, "lights[%d].spotExponent");
+	G_UNIFORMSHADERAPPLY->addUniform(UniformType::MULTI_LIGHT_SPOT_COST_CUTOFF, "lights[%d].spotCostCutoff");
+	G_UNIFORMSHADERAPPLY->addUniform(UniformType::MULTI_LIGHT_CONSTANT_ATTENUATION, "lights[%d].constantAttenuation");
+	G_UNIFORMSHADERAPPLY->addUniform(UniformType::MULTI_LIGHT_LINEAR_ATTENUATION, "lights[%d].linearAttenuation");
+	G_UNIFORMSHADERAPPLY->addUniform(UniformType::MULTI_LIGHT_QUADRATIC_ATTENUATION, "lights[%d].quadraticAttenuation");
+
+	G_UNIFORMSHADERAPPLY->addUniform(UniformType::MATERIAL_EMISSION, "material.emission");
+	G_UNIFORMSHADERAPPLY->addUniform(UniformType::MATERIAL_COLOR_AMBIENT, "material.ambient");
+	G_UNIFORMSHADERAPPLY->addUniform(UniformType::MATERIAL_COLOR_DIFFUSE, "material.diffuse");
+	G_UNIFORMSHADERAPPLY->addUniform(UniformType::MATERIAL_COLOR_SPECULAR, "material.specular");
+	G_UNIFORMSHADERAPPLY->addUniform(UniformType::MATERIAL_TEXTURE, "material.tex");
+	G_UNIFORMSHADERAPPLY->addUniform(UniformType::MATERIAL_TEXTURE_NORMAL, "material.texNormal");
+	G_UNIFORMSHADERAPPLY->addUniform(UniformType::MATERIAL_TEXTURE_ALPHA, "material.texAlpha");
+	G_UNIFORMSHADERAPPLY->addUniform(UniformType::MATERIAL_TEXTURE_BUMP, "material.texBump");
+	G_UNIFORMSHADERAPPLY->addUniform(UniformType::MATERIAL_TEXTURE_DIFFUSE, "material.texDiffuse");
+	G_UNIFORMSHADERAPPLY->addUniform(UniformType::MATERIAL_TEXTURE_SPECULAR, "material.texSpecular");
+	G_UNIFORMSHADERAPPLY->addUniform(UniformType::MATERIAL_SHININESS, "material.shininess");
+	G_UNIFORMSHADERAPPLY->addUniform(UniformType::MATERIAL_STRENGTH, "material.strength");
 	
-	mat->addVertexData(VertexDataType::POSITION, "v_position");
-	mat->addVertexData(VertexDataType::COLOR, "v_color");
-	mat->addVertexData(VertexDataType::UV, "v_texcoord");
-	mat->addVertexData(VertexDataType::NORMAL, "v_normal");
-	mat->addVertexData(VertexDataType::TANGENT, "v_tangent");
-	mat->addVertexData(VertexDataType::BITANGENT, "v_bitangent");
+	G_UNIFORMSHADERAPPLY->addVertexData(VertexDataType::POSITION, "v_position");
+	G_UNIFORMSHADERAPPLY->addVertexData(VertexDataType::COLOR, "v_color");
+	G_UNIFORMSHADERAPPLY->addVertexData(VertexDataType::UV, "v_texcoord");
+	G_UNIFORMSHADERAPPLY->addVertexData(VertexDataType::NORMAL, "v_normal");
+	G_UNIFORMSHADERAPPLY->addVertexData(VertexDataType::TANGENT, "v_tangent");
+	G_UNIFORMSHADERAPPLY->addVertexData(VertexDataType::BITANGENT, "v_bitangent");
 	
 	
-	mat->addUniform(UniformType::VIEW_POSITION, "env.viewPos");
-	mat->addUniform(UniformType::GAMMA, "env.gamma");
-	mat->addUniform(UniformType::MULTI_LIGHT_COUNT, "env.lightCount");
-	
-	mat->addUniform(UniformType::TEXTURE0, "tex.texture0");
-	mat->addUniform(UniformType::TEXTURE1, "tex.texture1");
-	mat->addUniform(UniformType::TEXTURE2, "tex.texture2");
+	G_UNIFORMSHADERAPPLY->addUniform(UniformType::VIEW_POSITION, "env.viewPos");
+	G_UNIFORMSHADERAPPLY->addUniform(UniformType::GAMMA, "env.gamma");
+	G_UNIFORMSHADERAPPLY->addUniform(UniformType::MULTI_LIGHT_COUNT, "env.lightCount");
+
+	G_UNIFORMSHADERAPPLY->addUniform(UniformType::TEXTURE0, "tex.texture0");
+	G_UNIFORMSHADERAPPLY->addUniform(UniformType::TEXTURE1, "tex.texture1");
+	G_UNIFORMSHADERAPPLY->addUniform(UniformType::TEXTURE2, "tex.texture2");
 
 	/*
 		mat->addUniform(UniformType::TEXTURE3, "texture.texture3");
@@ -157,7 +150,7 @@ void Utility::initShaderAttrib(render::MultiDrawNode* node)
 	{
 		return;
 	}
-	initShaderAttrib(node->getMaterials());
+	initShaderAttrib();
 }
 
 void Utility::bindProgramAttrib(render::ShaderProgram* program)

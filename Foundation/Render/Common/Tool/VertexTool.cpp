@@ -54,59 +54,63 @@ void VertexTool::setTexture3DVertices(CubeVertex* texcube, const math::Vector3& 
 
 	// left down
 	x = position.getX() - volume.getWidth() * anchor.getX();
+
 	y = position.getY() - volume.getHeight() * anchor.getY();
-	z = position.getZ() + volume.getDepth() * anchor.getZ();
+	z = position.getZ() + volume.getDepth() * (1 - anchor.getZ());
 
 	texcube->setFrontLeftDownPosition(math::Vector3(x, y, z));
 
 	// right down
 	x = position.getX() + volume.getWidth() * (1 - anchor.getX());
+
 	y = position.getY() - volume.getHeight() * anchor.getY();
-	z = position.getZ() + volume.getDepth() * anchor.getZ();
+	z = position.getZ() + volume.getDepth() * (1 - anchor.getZ());
 
 	texcube->setFrontRightDownPosition(math::Vector3(x, y, z));
 
 	// right up
 	x = position.getX() + volume.getWidth() * (1 - anchor.getX());
+
 	y = position.getY() + volume.getHeight() * (1 - anchor.getY());
-	z = position.getZ() + volume.getDepth() * anchor.getZ();
+	z = position.getZ() + volume.getDepth() * (1 - anchor.getZ());
 
 	texcube->setFrontRightUpPosition(math::Vector3(x, y, z));
 
 	// left up
 	x = position.getX() - volume.getWidth() * anchor.getX();
+
 	y = position.getY() + volume.getHeight() * (1 - anchor.getY());
-	z = position.getZ() + volume.getDepth() * anchor.getZ();
+	z = position.getZ() + volume.getDepth() * (1 - anchor.getZ());
 
 	texcube->setFrontLeftUpPosition(math::Vector3(x, y, z));
 
 	//------ back ------
 
 	// left down
-	x = position.getX() - volume.getWidth() * anchor.getX();
+	x = position.getX() + volume.getWidth() * (1 - anchor.getX());
 	y = position.getY() - volume.getHeight() * anchor.getY();
-	z = position.getZ() - volume.getDepth() * (1 - anchor.getZ());
+	z = position.getZ() - volume.getDepth() * anchor.getZ();
 
 	texcube->setBackLeftDownPosition(math::Vector3(x, y, z));
 
 	// right down
-	x = position.getX() + volume.getWidth() * (1 - anchor.getX());
+	x = position.getX() - volume.getWidth() * anchor.getX(); 
 	y = position.getY() - volume.getHeight() * anchor.getY();
-	z = position.getZ() - volume.getDepth() * (1 - anchor.getZ());
+	z = position.getZ() - volume.getDepth() * anchor.getZ();
 
 	texcube->setBackRightDownPosition(math::Vector3(x, y, z));
 
 	// right up
-	x = position.getX() + volume.getWidth() * (1 - anchor.getX());
+	x = position.getX() - volume.getWidth() * anchor.getX(); 
 	y = position.getY() + volume.getHeight() * (1 - anchor.getY());
-	z = position.getZ() - volume.getDepth() * (1 - anchor.getZ());
+	z = position.getZ() - volume.getDepth() * anchor.getZ();
 
 	texcube->setBackRightUpPosition(math::Vector3(x, y, z));
 
 	// left up
-	x = position.getX() - volume.getWidth() * anchor.getX();
+	x = position.getX() + volume.getWidth() * (1 - anchor.getX());
 	y = position.getY() + volume.getHeight() * (1 - anchor.getY());
-	z = position.getZ() - volume.getDepth() * (1 - anchor.getZ());
+	z = position.getZ() - volume.getDepth() * anchor.getZ();
 
 	texcube->setBackLeftUpPosition(math::Vector3(x, y, z));
 }

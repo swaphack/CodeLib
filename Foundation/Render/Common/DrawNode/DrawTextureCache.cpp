@@ -63,10 +63,6 @@ render::Texture* render::DrawTextureCache::getTexture(const std::string& name) c
 
 void render::DrawTextureCache::addTexture(const std::string& name, const Texture* id)
 {
-	if (id == nullptr)
-	{
-		return;
-	}
 	this->removeTexture(name);
 
 	Texture* pid = (Texture*)id;

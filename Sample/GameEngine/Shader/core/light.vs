@@ -1,3 +1,10 @@
+// 光照空间属性
+struct LightSpace
+{
+	mat4 spaceMatrix; 	// 光照方向的空间矩阵
+};
+
+
 // 模拟光照
 
 const float EMULATE_LIGHT_DIFFUSE_PARAMETER1 = 0.429043;

@@ -86,6 +86,10 @@ namespace render
 		*	设置Normal纹理
 		*/
 		void setNormalTexture(const std::string& fullpath);
+		/**
+		*	设置Shadow纹理
+		*/
+		void setShadowTexture(const Texture* texture);
 	public:
 		/**
 		*	设置着色器

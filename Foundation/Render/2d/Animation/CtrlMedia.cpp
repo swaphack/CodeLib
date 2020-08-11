@@ -1,7 +1,7 @@
 #include "CtrlMedia.h"
 #include "../UI/CtrlFrame.h"
 #include "Common/Texture/Texture2D.h"
-#include "Common/Audio/CtrlAudioSourceClip.h"
+#include "Audio/CtrlAudioSourceClip.h"
 #include "system.h"
 using namespace render;
 

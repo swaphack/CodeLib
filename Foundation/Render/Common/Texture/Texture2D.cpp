@@ -1,6 +1,10 @@
 #include "Texture2D.h"
 #include "Graphic/import.h"
 #include "TextureCache.h"
+
+
+render::Texture2D* render::Texture2D::_emptyTexture = nullptr;
+
 render::Texture2D::Texture2D()
 	:Texture(TextureTarget::TEXTURE_2D)
 {
@@ -97,3 +101,27 @@ void render::Texture2D::load(const sys::ImageDetail* image, const TextureSetting
 	this->unbindTexture();
 	GLDebug::showError();
 }
+
+render::Texture2D* render::Texture2D::getEmptyTexture()
+{
+	if (_emptyTexture == nullptr)
+	{
+		int width = 1;
+		int height = 1;
+		uint8_t data[] = { 255,255, 255, 255 };
+
+		_emptyTexture = CREATE_OBJECT(Texture2D);
+		_emptyTexture->setWidth(width);
+		_emptyTexture->setHeight(height);
+
+		_emptyTexture->bindTexture();
+		_emptyTexture->setTextureImage(0, TextureInternalSizedFormat::RGBA, width, height, 0, TextureExternalFormat::RGBA, TextureExternalDataType::UNSIGNED_BYTE, data);
+		_emptyTexture->applyTextureSetting();
+		_emptyTexture->unbindTexture();
+
+		SAFE_RETAIN(_emptyTexture);
+	}
+
+	return _emptyTexture;
+}
+

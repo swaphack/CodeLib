@@ -23,9 +23,10 @@ void IntervalAction::update(float duration)
 		this->stop();
 		return;
 	}
-	if (_currentTime == 0)
+	if (!_bInitData)
 	{
 		initAction();
+		_bInitData = true;
 	}
 	if (_currentTime < _totalTime)
 	{

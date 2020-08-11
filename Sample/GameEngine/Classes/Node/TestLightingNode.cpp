@@ -23,6 +23,8 @@ void TestLightingNode::initNodes()
 	//this->testCubeModel();
 
 	//this->addEarth();
+
+	testShadow();
 }
 
 void TestLightingNode::addSun()
@@ -55,13 +57,13 @@ void TestLightingNode::addStar()
 	this->addChild(pLightShape);
 
 	render::PointLight* pLight = CREATE_NODE(render::PointLight);
-	pLight->setColor(255, 0, 0, 255);
+	pLight->setColor(255, 255, 0, 255);
 	pLight->setAmbient(255, 255, 255, 255);
 	pLight->setDiffuse(255, 255, 255, 255);
 	pLight->setSpecular(255, 255, 255, 255);
-	//pLight->setConstantAttenuation(0);
-	pLight->setLinearAttenuation(0.0f);
-	pLight->setQuadraticAttenuation(0.0f);
+	pLight->setConstantAttenuation(2.0f);
+	pLight->setLinearAttenuation(0.000f);
+	pLight->setQuadraticAttenuation(0.000f);
 	pLightShape->addChild(pLight);
 
 	render::EllipseAction* pAction = render::CREATE_ACTION(render::EllipseAction);
@@ -129,6 +131,7 @@ void TestLightingNode::addGround()
 		if (gamma) gamma->setValue(5.0f);
 	});
 
+	/*
 	render::MoveByAction* pAction0 = render::CREATE_ACTION(render::MoveByAction);
 	pAction0->setDifferentPosition(math::Vector3(0, 0, 600));
 	pAction0->setDuration(10);
@@ -141,7 +144,17 @@ void TestLightingNode::addGround()
 	pAction2->addAction(pAction0);
 	pAction2->addAction(pAction1);
 
-	pModel->getActionProxy()->runAction(render::RepeateForeverAction::create(pAction2));
+	render::RotateByAction* pAction3 = render::CREATE_ACTION(render::RotateByAction);
+	pAction3->setDifferentRotation(math::Vector3(0, 360, 0));
+	pAction3->setDuration(20);
+
+	render::SpawnAction* pAction4 = render::CREATE_ACTION(render::SpawnAction);
+	pAction4->addAction(pAction2);
+	pAction4->addAction(pAction3);
+
+	pModel->getActionProxy()->runAction(render::RepeateForeverAction::create(pAction4));
+
+	*/
 }
 
 void TestLightingNode::testCubeModel()
@@ -176,5 +189,48 @@ void TestLightingNode::testCubeModel()
 
 		cube->setBoxVisible(!cube->isBoxVisible());
 	});
+}
+
+void TestLightingNode::testShadow()
+{
+	std::string filepath = "Resource/Image/NeHe.png";
+
+	render::ShadowMapping* pShadowNode = CREATE_NODE(render::ShadowMapping);
+	pShadowNode->setVolume(1024, 768);
+	pShadowNode->setPosition(512, 384, -280);
+	pShadowNode->setAnchorPoint(0.5, 0.5f);
+
+	for (int i = 0 ; i < 6; i ++)
+	{
+		render::Cube* pModel = CREATE_NODE(render::Cube);
+		pModel->setSupportLight(true);
+		pModel->setCastShadow(i % 2 == 0);
+		//pModel->setRecieveShadow(i % 2 == 1);
+		pModel->setTexture(filepath);
+		pModel->setColor(0.5f, 0.5f, 0.5f);
+		pModel->setAnchorPoint(math::Vector3(0.5f, 0.5f, 0.5f));
+		pModel->setPosition(-400 + i * 70, -200 + i * 70, 10);
+		pModel->setVolume(100, 100, 100);
+		//Utility::loadShader(pModel, "Shader/material/material_dirlight_shadow.vs", "Shader/material/material_dirlight_shadow.fs");
+		Utility::loadShader(pModel, "Shader/material/material_texture.vs", "Shader/material/material_texture.fs");
+
+		pShadowNode->addChild(pModel);
+	}
+
+	this->addChild(pShadowNode);
+
+	for (int i = 0; i < 6; i++)
+	{
+		render::Cube* pModel = CREATE_NODE(render::Cube);
+		pModel->setTexture(filepath);
+		pModel->setColor(0.5f, 0.5f, 0.5f);
+		pModel->setAnchorPoint(math::Vector3(0.5f, 0.5f, 0.5f));
+		pModel->setPosition(400 + i * 70, 200 + i * 70, 10);
+		pModel->setVolume(100, 100, 100);
+		//Utility::loadShader(pModel, "Shader/material/material_dirlight_shadow.vs", "Shader/material/material_dirlight_shadow.fs");
+		Utility::loadShader(pModel, "Shader/material/material_texture.vs", "Shader/material/material_texture.fs");
+
+		this->addChild(pModel);
+	}
 }
 

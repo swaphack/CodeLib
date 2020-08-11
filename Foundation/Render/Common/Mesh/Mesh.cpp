@@ -147,7 +147,7 @@ void render::Mesh::drawWithClientArray()
 		GLClientArrays::setNormalPointer(DataType::FLOAT, 0, normals.getValue());
 		GLDebug::showError();
 	}
-
+	/*
 	if (tangents.getLength() > 0)
 	{
 		GLClientArrays::enableClientState(ClientArrayType::TANGENT_ARRAY);
@@ -161,7 +161,7 @@ void render::Mesh::drawWithClientArray()
 		GLClientArrays::setBitangentPointer(DataType::FLOAT, 0, bitangents.getValue());
 		GLDebug::showError();
 	}
-
+	*/
 	const sys::MeshMemoryData& indices = _detail->getIndices();
 	if (indices.getLength() > 0)
 	{
@@ -173,8 +173,10 @@ void render::Mesh::drawWithClientArray()
 	GLClientArrays::disableClientState(ClientArrayType::NORMAL_ARRAY);
 	GLClientArrays::disableClientState(ClientArrayType::TEXTURE_COORD_ARRAY);
 	GLClientArrays::disableClientState(ClientArrayType::COLOR_ARRAY);
+	/*
 	GLClientArrays::disableClientState(ClientArrayType::BITANGENT_ARRAY);
 	GLClientArrays::disableClientState(ClientArrayType::TANGENT_ARRAY);
+	*/
 }
 
 void render::Mesh::updateBufferData()
@@ -260,17 +262,31 @@ void render::Mesh::initMeshOtherDetail()
 
 	if (getMeshDetail()->getUVs().getSize() == 0)
 	{
-		this->initDetailNormalData();
+		if (getMeshDetail()->getNormals().getSize() == 0)
+		{
+			this->initDetailNormalData();
+		}
 	}
 	else
 	{
-		this->initDetailNormalAndTangentData();
+		if (getMeshDetail()->getNormals().getSize() == 0)
+		{
+			this->initDetailNormalData();
+		}
+		if (getMeshDetail()->getTangents().getSize() == 0)
+		{
+			this->initDetailTangentData();
+		}
 	}
 }
 
 void render::Mesh::initDetailNormalData()
 {
 	if (getMeshDetail()->getVertices().getSize() == 0)
+	{
+		return;
+	}
+	if (getMeshDetail()->getTangents().getSize() != 0)
 	{
 		return;
 	}
@@ -285,9 +301,14 @@ void render::Mesh::initDetailNormalData()
 	this->calTrianglesVertexNormal(getMeshDetail()->getVertices(), getMeshDetail()->getIndices(), normals);
 }
 
-void render::Mesh::initDetailNormalAndTangentData()
+void render::Mesh::initDetailTangentData()
 {
 	if (getMeshDetail()->getVertices().getSize() == 0)
+	{
+		return;
+	}
+
+	if (getMeshDetail()->getBitangents().getSize() != 0)
 	{
 		return;
 	}
@@ -297,12 +318,8 @@ void render::Mesh::initDetailNormalAndTangentData()
 	int nUnitSize = getMeshDetail()->getVertices().getUnitSize();
 
 	int nLength = nCount / nUnitSize;
-
-	float* normals = (float*)getMeshDetail()->createNormals(nLength, sizeof(float), 3);
 	float* tangents = (float*)getMeshDetail()->createTangents(nLength, sizeof(float), 3);
-	this->calTrianglesVertexNormalAndTangent(getMeshDetail()->getVertices(), getMeshDetail()->getUVs(), getMeshDetail()->getIndices(), normals, tangents);
-
-	int a = 1;
+	this->calTrianglesVertexTangent(getMeshDetail()->getVertices(), getMeshDetail()->getUVs(), getMeshDetail()->getIndices(), tangents);
 }
 
 class mycompare {
@@ -318,7 +335,10 @@ void render::Mesh::calTrianglesVertexNormal(const sys::MeshMemoryData& vertices,
 	int nVerticeCount = vertices.getLength() / nUnitSize;
 
 	float* pVerticeData = (float*)vertices.getValue();
-
+	if (pVerticeData == nullptr)
+	{
+		return;
+	}
 	if (nVerticeCount < 3)
 	{
 		return;
@@ -384,13 +404,20 @@ void render::Mesh::calTrianglesVertexNormal(const sys::MeshMemoryData& vertices,
 	}
 }
 
-void render::Mesh::calTrianglesVertexNormalAndTangent(const sys::MeshMemoryData& vertices, const sys::MeshMemoryData& uvs, const sys::MeshMemoryData& indices, float* normals, float* tangents)
+void render::Mesh::calTrianglesVertexTangent(const sys::MeshMemoryData& vertices, const sys::MeshMemoryData& uvs,
+	const sys::MeshMemoryData& indices,
+	float* tangents)
 {
 	int nUnitSize = vertices.getUnitSize();
 	int nVerticeCount = vertices.getLength() / nUnitSize;
 
 	float* pVerticeData = (float*)vertices.getValue();
 	float* pUVData = (float*)uvs.getValue();
+
+	if (pVerticeData == nullptr || pUVData == nullptr)
+	{
+		return;
+	}
 
 	if (nVerticeCount < 3)
 	{
@@ -428,7 +455,6 @@ void render::Mesh::calTrianglesVertexNormalAndTangent(const sys::MeshMemoryData&
 
 	uint32_t* pIndice = (uint32_t*)indices.getValue();
 
-	std::map<int, std::vector<math::Vector3>> mapPointNormal;
 	std::map<int, std::vector<math::Vector3>> mapPointTangent;
 
 	for (int i = 0; i < nTriangleCount; i++)
@@ -439,11 +465,6 @@ void render::Mesh::calTrianglesVertexNormalAndTangent(const sys::MeshMemoryData&
 
 		math::Vector3 edge1 = p1 - p0;
 		math::Vector3 edge2 = p2 - p0;
-
-		math::Vector3 normal = math::Vector3::cross(edge1, edge2);
-		mapPointNormal[pIndice[i * 3 + 0]].push_back(normal);
-		mapPointNormal[pIndice[i * 3 + 1]].push_back(normal);
-		mapPointNormal[pIndice[i * 3 + 2]].push_back(normal);
 
 		math::Vector2 uv0 = vecUV[pIndice[i * 3 + 0]];
 		math::Vector2 uv1 = vecUV[pIndice[i * 3 + 1]];
@@ -472,28 +493,19 @@ void render::Mesh::calTrianglesVertexNormalAndTangent(const sys::MeshMemoryData&
 	{
 		math::Vector3 normal;
 		math::Vector3 tangent;
-		if (mapPointNormal[i].empty())
+		if (mapPointTangent[i].empty())
 		{
-			normal = math::Vector3(0, 0, 1);
 			tangent = math::Vector3(0, 1, 0);
 		}
 		else
 		{
-			for (auto item : mapPointNormal[i])
-			{
-				normal += item;
-			}
 			for (auto item : mapPointTangent[i])
 			{
 				tangent += item;
 			}
-			normal /= mapPointNormal[i].size();
-			normal.normalize();
-
 			tangent /= mapPointTangent[i].size();
 			tangent.normalize();
 		}
-		memcpy(normals + i * 3, normal.getValue(), 3 * sizeof(float));
 		memcpy(tangents + i * 3, tangent.getValue(), 3 * sizeof(float));
 	}
 }

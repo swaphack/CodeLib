@@ -37,10 +37,13 @@ bool render::PostProcessingNode::init()
 
 void render::PostProcessingNode::updateTextureSize()
 {
-	_bInitedFBN = true;
-
 	int width = _rectVertex.getWidth();
 	int height = _rectVertex.getHeight();
+	if (width == 0 || height == 0)
+	{
+		return;
+	}
+	_bInitedFBN = true;
 
 	_texture->setWidth(width);
 	_texture->setHeight(height);

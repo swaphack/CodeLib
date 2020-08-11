@@ -4,8 +4,6 @@
 
 namespace render
 {
-	
-
 	// ø’º‰ Ù–‘
 	class SpaceProtocol
 	{
@@ -142,4 +140,6 @@ namespace render
 		math::Volume _volume;
 	private:
 	};
+
+	
 }

@@ -8,3 +8,4 @@
 #include "ClipPlane.h"
 #include "SkyBox.h"
 #include "Environment.h"
+#include "LightProtocol.h"

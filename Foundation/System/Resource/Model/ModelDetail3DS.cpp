@@ -108,6 +108,12 @@ bool ModelDetail3DS::load(const std::string& fullpath)
 
 					float* colorData = (float*)pMesh->createColors(nVertices, sizeof(float), 4);
 
+					float* normalData = (float*)pMesh->createNormals(nVertices, sizeof(float), 3);
+
+					float pNormals[3] = {};
+
+					lib3ds_mesh_calculate_vertex_normals(pMeshData, &pNormals);
+
 					for (int j = 0; j < pMeshData->nvertices; j++)
 					{
 						float pos[3] = { 0 };
@@ -122,6 +128,8 @@ bool ModelDetail3DS::load(const std::string& fullpath)
 						color[2] = 1.0f;
 						color[3] = 1.0f;
 						memcpy(colorData + 4 * i, color, 4 * sizeof(float));
+
+						memcpy(normalData + 3 * j, pNormals, 3 * sizeof(float));
 					}
 				}
 
@@ -144,6 +152,8 @@ bool ModelDetail3DS::load(const std::string& fullpath)
 						memcpy(texCoordData + 2 * j, uv, 2 * sizeof(float));
 					}
 				}
+
+
 			}
 
 			if (pMeshData->nfaces)
@@ -183,6 +193,8 @@ bool ModelDetail3DS::load(const std::string& fullpath)
 					}
 				}
 			}
+
+			pMesh->setMatrix(math::Matrix4x4(pMeshData->map_matrix));
 		}
 	}
 

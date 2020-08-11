@@ -2,10 +2,13 @@
 
 #include "Common/DrawNode/MultiDrawNode.h"
 #include "Common/struct/shape_common.h"
+#include "3d/Environment/LightProtocol.h"
 
 namespace render
 {
-	class MultiMeshModel : public MultiDrawNode
+	class MultiMeshModel : 
+		public MultiDrawNode,
+		public LightProtocol
 	{
 	public:
 		MultiMeshModel();

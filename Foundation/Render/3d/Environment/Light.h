@@ -13,7 +13,6 @@ namespace render
 		virtual ~Light();
 	public:
 		LightName getLightName();
-		void setLightIndex(int index);
 		// 光源索引
 		int getLightIndex();
 		// 最大光源数
@@ -39,6 +38,9 @@ namespace render
 		void setSpecular(uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha);
 		const float* getSpecular();
 	protected:
+		friend class Environment;
+		void setLightIndex(int index);
+	protected:
 		// 颜色
 		float _lightColor[4];
 		// 环境光
@@ -50,31 +52,4 @@ namespace render
 		// 光源索引
 		int _lightIndex = 0;
 	};
-
-#define CTREATE_LIGHT(index) \
-	class Light##index : public Light \
-	{ \
-	public: \
-	Light##index() \
-	{ \
-	_lightDiffuse[0] = 0.0f; \
-	_lightDiffuse[1] = 0.0f; \
-	_lightDiffuse[2] = 0.0f; \
-	_lightDiffuse[3] = 1.0f; \
-	_lightSpecular[0] = 0.0f; \
-	_lightSpecular[1] = 0.0f; \
-	_lightSpecular[2] = 0.0f; \
-	_lightSpecular[3] = 1.0f; \
-	} \
-	virtual LightName getLightName() { return LightName::LIGHT##index; } \
-	};
-
-	CTREATE_LIGHT(0);
-	CTREATE_LIGHT(1);
-	CTREATE_LIGHT(2);
-	CTREATE_LIGHT(3);
-	CTREATE_LIGHT(4);
-	CTREATE_LIGHT(5);
-	CTREATE_LIGHT(6);
-	CTREATE_LIGHT(7);
 }

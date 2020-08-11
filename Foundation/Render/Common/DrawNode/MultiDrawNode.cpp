@@ -5,6 +5,7 @@
 #include "FragmentOperator.h"
 #include "Common/Texture/import.h"
 #include "DrawTextureCache.h"
+#include "UniformShaderApply.h"
 
 using namespace render;
 
@@ -113,7 +114,7 @@ void render::MultiDrawNode::setDiffuseTexture(const std::string& fullpath)
 
 	for (auto item : _materiales->getMaterials())
 	{
-		item.second->getMaterialDetail()->setAmbientTextureMap(MAT_TEXTURE_DIFFUSE);
+		item.second->getMaterialDetail()->setDiffuseTextureMap(MAT_TEXTURE_DIFFUSE);
 	}
 }
 
@@ -123,7 +124,7 @@ void render::MultiDrawNode::setSpecularTexture(const std::string& fullpath)
 
 	for (auto item : _materiales->getMaterials())
 	{
-		item.second->getMaterialDetail()->setAmbientTextureMap(MAT_TEXTURE_SPECULAR);
+		item.second->getMaterialDetail()->setSpecularTextureMap(MAT_TEXTURE_SPECULAR);
 	}
 }
 
@@ -133,7 +134,7 @@ void render::MultiDrawNode::setAlphaTexture(const std::string& fullpath)
 
 	for (auto item : _materiales->getMaterials())
 	{
-		item.second->getMaterialDetail()->setAmbientTextureMap(MAT_TEXTURE_ALPHA);
+		item.second->getMaterialDetail()->setAlphaTextureMap(MAT_TEXTURE_ALPHA);
 	}
 }
 
@@ -143,7 +144,7 @@ void render::MultiDrawNode::setBumpTexture(const std::string& fullpath)
 
 	for (auto item : _materiales->getMaterials())
 	{
-		item.second->getMaterialDetail()->setAmbientTextureMap(MAT_TEXTURE_BUMP);
+		item.second->getMaterialDetail()->setBumpTextureMap(MAT_TEXTURE_BUMP);
 	}
 }
 
@@ -153,7 +154,17 @@ void render::MultiDrawNode::setNormalTexture(const std::string& fullpath)
 
 	for (auto item : _materiales->getMaterials())
 	{
-		item.second->getMaterialDetail()->setAmbientTextureMap(MAT_TEXTURE_NORMAL);
+		item.second->getMaterialDetail()->setNormalTextureMap(MAT_TEXTURE_NORMAL);
+	}
+}
+
+void render::MultiDrawNode::setShadowTexture(const Texture* texture)
+{
+	_textureCache->addTexture(MAT_TEXTURE_SHADOW, texture);
+
+	for (auto item : _materiales->getMaterials())
+	{
+		item.second->getMaterialDetail()->setShadowTextureMap(MAT_TEXTURE_SHADOW);
 	}
 }
 
@@ -186,27 +197,30 @@ void MultiDrawNode::onDraw()
 	{
 		auto pMesh = item.second;
 		auto nMatID = pMesh->getMeshDetail()->getMaterial();
-		auto pMat = _materiales->getMaterial(nMatID);
-		if (pMat == nullptr)
+		auto pMaterial = _materiales->getMaterial(nMatID);
+		if (pMaterial == nullptr)
 		{// ÁÙÊ±´¦Àí
 			continue;
 		}
-		if (pMat->getShaderProgram() != nullptr)
+		auto program = pMaterial->getShaderProgram();
+		G_UNIFORMSHADERAPPLY->setTempMatrix(pMesh->getMeshDetail()->getMatrix());
+		if (program != nullptr)
 		{
-			pMat->beginApplyWithShader(this, pMesh, _textureCache);
+			G_UNIFORMSHADERAPPLY->beginApplyWithShader(this, program, pMesh, pMaterial, _textureCache);
 
 			pMesh->drawWithBufferObject();
 
-			pMat->endApplyWithShader(pMesh, _textureCache);
+			G_UNIFORMSHADERAPPLY->endApplyWithShader(program, pMesh, pMaterial, _textureCache);
 		}
 		else
 		{
-			pMat->beginApply(_textureCache);
+			G_UNIFORMSHADERAPPLY->beginApply(pMaterial, _textureCache);
 
 			pMesh->drawWithClientArray();
 
-			pMat->endApply(_textureCache);
+			G_UNIFORMSHADERAPPLY->endApply(pMaterial, _textureCache);
 		}
+		G_UNIFORMSHADERAPPLY->reloadTempMatrix();
 	}
 
 	GLDebug::showError();

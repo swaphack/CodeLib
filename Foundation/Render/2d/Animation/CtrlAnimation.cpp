@@ -1,6 +1,6 @@
 #include "CtrlAnimation.h"
 #include "2d/UI/CtrlFrame.h"
-#include "Common/Audio/CtrlAudioSource.h"
+#include "Audio/CtrlAudioSource.h"
 #include "Common/Action/import.h"
 
 using namespace render;

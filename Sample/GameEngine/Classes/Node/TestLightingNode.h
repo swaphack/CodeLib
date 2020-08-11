@@ -21,6 +21,7 @@ private:
 	
 	void addGround();
 
-
 	void testCubeModel();
+
+	void testShadow();
 };

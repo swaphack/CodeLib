@@ -152,30 +152,33 @@ void CubeVertex::setFrontLeftUpPosition(const math::Vector3& point)
 
 void CubeVertex::setBackLeftDownPosition(const math::Vector3& point)
 {
-	back.setRightDownPoint(point);
-	left.setLeftDownPoint(point);
-	bottom.setLeftDownPoint(point);
+	back.setLeftDownPoint(point);
+	right.setRightDownPoint(point);
+
+	bottom.setRightDownPoint(point);
 }
 
 void CubeVertex::setBackRightDownPosition(const math::Vector3& point)
 {
-	back.setLeftDownPoint(point);
-	right.setRightDownPoint(point);
-	bottom.setRightDownPoint(point);
+	back.setRightDownPoint(point);
+	left.setLeftDownPoint(point);
+
+	bottom.setLeftDownPoint(point);
 }
 
 void CubeVertex::setBackRightUpPosition(const math::Vector3& point)
 {
-	back.setLeftUpPoint(point);
-	top.setRightUpPoint(point);
-	right.setRightUpPoint(point);
+	back.setRightUpPoint(point);
+	left.setLeftUpPoint(point);
+	top.setLeftUpPoint(point);
 }
 
 void CubeVertex::setBackLeftUpPosition(const math::Vector3& point)
 {
-	back.setRightUpPoint(point);
-	left.setLeftUpPoint(point);
-	top.setLeftUpPoint(point);
+	back.setLeftUpPoint(point);
+	right.setRightUpPoint(point);
+
+	top.setRightUpPoint(point);
 }
 
 const RectVertex* render::CubeVertex::getFaceVertex(CubeFace face) const

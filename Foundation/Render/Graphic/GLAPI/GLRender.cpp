@@ -17,6 +17,11 @@ void render::GLRender::clearBuffer(ClearBufferType mask, int drawbuffer, const f
 	glClearBufferfv((GLenum)mask, drawbuffer, value);
 }
 
+void render::GLRender::setDrawBuffer(int mode)
+{
+	glDrawBuffer(mode);
+}
+
 void render::GLRender::clearBuffer(float depth, float stencil)
 {
 	glClearBufferfi(GL_DEPTH_STENCIL, 0, depth, stencil);

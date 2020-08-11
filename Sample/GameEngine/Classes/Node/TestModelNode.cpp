@@ -17,10 +17,15 @@ TestModelNode::~TestModelNode()
 
 void TestModelNode::initNodes()
 {
+	addLight();
 	//this->testCubeModel();
-	this->testSphereModel();
+	//this->testSphereModel();
+	//this->testCubeMap();
+	//this->testObj();
 
 	//this->testObj();
+	//this->test3ds();
+	this->testFbx();
 }
 
 void TestModelNode::testCubeModel()
@@ -28,21 +33,23 @@ void TestModelNode::testCubeModel()
 	std::string filepath = "Resource/Image/NeHe.png";
 
 	render::Cube* pModel = CREATE_NODE(render::Cube);
+	pModel->setSupportLight(true);
 	pModel->setTexture(filepath);
-
 	pModel->setAnchorPoint(math::Vector3(0.5f, 0.5f, 0.5f));
 	pModel->setPosition(512, 384, 0);
 	pModel->setVolume(200, 200, 200);
+	Utility::loadShader(pModel, "Shader/texture/texture.vs", "Shader/texture/texture.fs");
 	this->addChild(pModel);
-
+	
 	RotateByAction* pRotateByAction = CREATE_ACTION(RotateByAction);
-	pRotateByAction->setDifferentRotation(0, 45, 0);
+	pRotateByAction->setDifferentRotation(0, 360, 0);
 	pRotateByAction->setDuration(5);
 
 	RepeateForeverAction* pRepeateAction = CREATE_ACTION(RepeateForeverAction);
 	pRepeateAction->setAction(pRotateByAction);
 
 	pModel->getActionProxy()->runAction(pRepeateAction);
+
 }
 
 void TestModelNode::testSphereModel()
@@ -62,7 +69,7 @@ void TestModelNode::testSphereModel()
 
 void TestModelNode::addLight()
 {
-	Light0* pSpotLight = CREATE_NODE(Light0);
+	Light* pSpotLight = CREATE_NODE(Light);
 	pSpotLight->setPosition(0, 0, 50);
 	pSpotLight->setAmbient(255, 255, 255, 255);
 	pSpotLight->setDiffuse(255, 255, 255, 255);
@@ -143,6 +150,8 @@ void TestModelNode::test3ds()
 	pModel->setVolume(400, 400, 400);
 	this->addChild(pModel);
 
+	Utility::loadShader(pModel, "Shader/material/material_texture.vs", "Shader/material/material_one_texture_light.fs");
+
 	RotateByAction* pRotateByAction = CREATE_ACTION(RotateByAction);
 	pRotateByAction->setDifferentRotation(180, 180, 0);
 	pRotateByAction->setDuration(10);
@@ -165,6 +174,8 @@ void TestModelNode::testObj()
 	pModel->setVolume(400, 400, 400);
 	this->addChild(pModel);
 
+	Utility::loadShader(pModel, "Shader/texture/texture.vs", "Shader/texture/texture.fs");
+
 	RotateByAction* pRotateByAction = CREATE_ACTION(RotateByAction);
 	pRotateByAction->setDifferentRotation(180, 180, 0);
 	pRotateByAction->setDuration(10);
@@ -180,8 +191,10 @@ void TestModelNode::testFbx()
 	ModelFbx* pModel = CREATE_NODE(ModelFbx);
 	pModel->load("Resource/fbx/LANCER_EVOLUTION/LANCEREVOX.FBX");
 	pModel->setScale(200);
-	pModel->setRotationX(0);
+	pModel->setRotation(90, 90, 0);
 	this->addChild(pModel);
+
+	Utility::loadShader(pModel, "Shader/texture/texture.vs", "Shader/texture/texture.fs");
 
 	RotateByAction* pRotateByAction = CREATE_ACTION(RotateByAction);
 	pRotateByAction->setDifferentRotation(0, 180, 0);
@@ -192,8 +205,6 @@ void TestModelNode::testFbx()
 
 	pModel->getActionProxy()->runAction(pRepeateAction);
 }
-
-
 
 void TestModelNode::testCamera()
 {

@@ -17,7 +17,8 @@ namespace render
 	*	绘制节点
 	*/
 	class DrawNode : 
-		public Node, public ColorProtocol
+		public Node, 
+		public ColorProtocol
 	{
 	public:
 		DrawNode();
@@ -71,6 +72,10 @@ namespace render
 		*	设置normal纹理
 		*/
 		void setNormalTexture(const std::string& fullpath);
+		/**
+		*	设置shadow纹理
+		*/
+		void setShadowTexture(const Texture* texture);
 		/**
 		*	获取纹理
 		*/

@@ -19,9 +19,8 @@ namespace render
 	public:
 		virtual bool init();
 	public:
-		virtual void beginRecord();
-		virtual void endRecord();
-	public:
+		virtual void beforeDrawNode();
+		virtual void draw();
 		virtual void afterDrawNode();
 	protected:
 		void updateShadowMapping();
@@ -30,5 +29,9 @@ namespace render
 		*	界面纹理
 		*/
 		Texture2D* _texture = nullptr;
+		/**
+		*	隐藏节点，不生成阴影
+		*/
+		std::set<Node*> _setHideNode;
 	};
 }

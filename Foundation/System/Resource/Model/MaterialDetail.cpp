@@ -211,6 +211,16 @@ const std::string& sys::MaterialDetail::getNormalTextureMap()
 	return _normalTextureMap;
 }
 
+void sys::MaterialDetail::setShadowTextureMap(const std::string& name)
+{
+	_shadowTextureMap = name;
+}
+
+const std::string& sys::MaterialDetail::getShadowTextureMap()
+{
+	return _shadowTextureMap;
+}
+
 void sys::MaterialDetail::setSpecularStrength(float value)
 {
 	_specularStrength = value;

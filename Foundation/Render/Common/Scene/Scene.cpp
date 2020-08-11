@@ -32,13 +32,5 @@ void Scene::visit()
 	// Ä£ÐÍ¾ØÕó
 	GLMatrix::applyModelView();
 
-	
-	if (Camera::getMainCamera()->getDimensions() == CameraDimensions::THREE)
-	{
-		auto size = Tool::getGLViewSize();
-		//Camera::getMainCamera()->lookAt(math::Vector3(0, 0));
-		Camera::getMainCamera()->lookAt(math::Vector3(size.getWidth() * 0.5f, size.getHeight() * 0.5f));
-	}
-
 	this->drawNode();
 }

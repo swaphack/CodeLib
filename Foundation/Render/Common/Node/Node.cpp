@@ -421,6 +421,16 @@ math::Vector3 render::Node::convertLocalPostitionToWorld(const math::Vector3& po
 	return math::Matrix4x4::transpose(point, _worldMatrix);
 }
 
+void render::Node::setSkipDraw(bool status)
+{
+	_bSkipDraw = status;
+}
+
+bool render::Node::isSkipDraw()
+{
+	return _bSkipDraw;
+}
+
 void render::Node::updateNode()
 {
 	this->notifyEvents();
@@ -437,7 +447,11 @@ void render::Node::beforeDrawNode()
 
 void Node::drawNode()
 {
-	if (this->isVisible() == false)
+	if (this->isSkipDraw())
+	{
+		return;
+	}
+	if (!this->isVisible())
 	{
 		return;
 	}
@@ -484,22 +498,20 @@ void render::Node::notifyToAll(NodeNotifyType id)
 	}
 }
 
-void render::Node::setSupportLight(bool supported)
+void render::Node::broadcastFunc(const std::function<void(Node*)>& func, bool recursive /*= false*/)
 {
-	_bSupportLight = supported;
-}
+	if (func == nullptr)
+	{
+		return;
+	}
 
-bool render::Node::isSupportedLight()
-{
-	return _bSupportLight;
-}
+	func(this);
 
-void render::Node::setSupportMultiLight(bool supported)
-{
-	_bSupportMultiLight = supported;
-}
-
-bool render::Node::isSupportedMultiLight()
-{
-	return _bSupportMultiLight;
+	if (recursive)
+	{
+		for (auto it = _children.begin(); it != _children.end(); it++)
+		{
+			(*it)->broadcastFunc(func, recursive);
+		}
+	}
 }

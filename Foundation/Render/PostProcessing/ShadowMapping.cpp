@@ -3,6 +3,7 @@
 #include "Common/Texture/Texture2D.h"
 #include "Common/FrameRender/import.h"
 #include "Graphic/import.h"
+#include "3d/Common/Model.h"
 
 render::ShadowMapping::ShadowMapping()
 {
@@ -21,18 +22,61 @@ bool render::ShadowMapping::init()
 	{
 		return false;
 	}
-	this->setTexture(_texture);
+	_notify->addListen(NodeNotifyType::BODY, [this]() {
+		this->updateShadowMapping();
+	});
+	//this->setTexture(_texture);
 	return true;
 }
 
-void render::ShadowMapping::beginRecord()
+void render::ShadowMapping::beforeDrawNode()
 {
-	FrameBufferNode::beginRecord();
+	this->broadcastFunc([this](Node* node) {
+		if (node == nullptr || node == this)
+		{
+			return;
+		}
+		if (node->is<Model>())
+		{
+			auto pDrawNode = node->as<Model>();
+			if (!pDrawNode->isCastShadow())
+			{
+				if (pDrawNode->isVisible())
+				{
+					pDrawNode->setSkipDraw(true);
+					_setHideNode.insert(pDrawNode);
+				}
+			}
+			pDrawNode->setShadowTexture(nullptr);
+		}
+	}, true);
+	FrameBufferNode::beforeDrawNode();
 }
 
-void render::ShadowMapping::endRecord()
+void render::ShadowMapping::draw()
 {
-	FrameBufferNode::endRecord();
+	int a = 1;
+	this->broadcastFunc([this](Node* node) {
+		if (node == nullptr || node == this)
+		{
+			return;
+		}
+		if (node->is<Model>())
+		{
+			auto pDrawNode = node->as<Model>();
+			if (pDrawNode->isRecieveShadow())
+			{
+				pDrawNode->setShadowTexture(_texture);
+			}
+			auto it = _setHideNode.find(pDrawNode);
+			if (it != _setHideNode.end())
+			{
+				pDrawNode->setSkipDraw(false);
+			}
+		}
+	}, true);
+
+	_setHideNode.clear();
 }
 
 void render::ShadowMapping::afterDrawNode()
@@ -42,10 +86,13 @@ void render::ShadowMapping::afterDrawNode()
 
 void render::ShadowMapping::updateShadowMapping()
 {
-	_bInitedFBN = true;
-
 	int width = _rectVertex.getWidth();
 	int height = _rectVertex.getHeight();
+	if (width == 0 || height == 0)
+	{
+		return;
+	}
+	_bInitedFBN = true;
 
 	_texture->setWidth(width);
 	_texture->setHeight(height);
@@ -76,7 +123,5 @@ void render::ShadowMapping::updateShadowMapping()
 
 	_frameBuffer->unbindFrameBuffer();
 	GLDebug::showError();
-
-	//
 }
 

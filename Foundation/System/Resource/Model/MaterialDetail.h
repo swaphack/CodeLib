@@ -70,6 +70,14 @@ namespace sys
 		*/
 		const std::string& getNormalTextureMap();
 		/**
+		*	设置阴影纹理
+		*/
+		void setShadowTextureMap(const std::string& name);
+		/**
+		*	获取阴影纹理
+		*/
+		const std::string& getShadowTextureMap();
+		/**
 		*	环境光
 		*/
 		void setAmbientByte(uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha);
@@ -168,5 +176,7 @@ namespace sys
 		std::string _bumpTextureMap;
 		// 法线纹理
 		std::string _normalTextureMap;
+		// 阴影纹理
+		std::string _shadowTextureMap;
 	};
 }

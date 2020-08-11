@@ -244,6 +244,17 @@ math::Matrix4x4::Matrix4x4(const Matrix<float, 4, 4>& mat)
 	}
 }
 
+math::Matrix4x4::Matrix4x4(const float value[4][4])
+{
+	for (int i = 0; i < 4; i++)
+	{
+		for (int j = 0; j < 4; j++)
+		{
+			this->setValue(i, j, value[i][j]);
+		}
+	}
+}
+
 math::Matrix4x4::Matrix4x4(const Matrix4x1& mat)
 {
 	*this = mat;
@@ -393,9 +404,6 @@ math::Matrix4x4 math::Matrix4x4::lookAt(const Vector3& eye, const Vector3& cente
 	Result.setValue(0, 2, -f.getX());
 	Result.setValue(1, 2, -f.getY());
 	Result.setValue(2, 2, -f.getZ());
-	//Result.setValue(0, 3, math::Vector3::dot(s, eye));
-	//Result.setValue(1, 3, math::Vector3::dot(u, eye));
-	//Result.setValue(2, 3, math::Vector3::dot(f, eye));
 	return Result;
 }
 

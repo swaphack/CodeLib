@@ -88,6 +88,48 @@ void handNodeMesh(ModelDetailFbx* file, FbxNode* node)
 		}
 	}
 
+	int nTangentCount = pMeshData->GetElementTangentCount();
+	if (nTangentCount > 0)
+	{
+		ASSERT(nTangentCount == 1);
+
+		FbxGeometryElementTangent* leTangent = pMeshData->GetElementTangent(0);
+		auto vector = leTangent->GetDirectArray();
+
+		int nVerticeCount = vector.GetCount();
+		float* normalData = (float*)pMesh->createTangents(nVerticeCount, sizeof(float), 3);
+
+		for (int i = 0; i < nVerticeCount; i++)
+		{
+			float pos[3] = { 0 };
+			pos[0] = (float)vector.GetAt(i).mData[0];
+			pos[1] = (float)vector.GetAt(i).mData[1];
+			pos[2] = (float)vector.GetAt(i).mData[2];
+			memcpy(normalData + 3 * i, pos, 3 * sizeof(float));
+		}
+	}
+
+	int nBitangentCount = pMeshData->GetElementBinormalCount();
+	if (nBitangentCount > 0)
+	{
+		ASSERT(nBitangentCount == 1);
+
+		FbxGeometryElementBinormal* leBinormal = pMeshData->GetElementBinormal(0);
+		auto vector = leBinormal->GetDirectArray();
+
+		int nVerticeCount = vector.GetCount();
+		float* normalData = (float*)pMesh->createBitangents(nVerticeCount, sizeof(float), 3);
+
+		for (int i = 0; i < nVerticeCount; i++)
+		{
+			float pos[3] = { 0 };
+			pos[0] = (float)vector.GetAt(i).mData[0];
+			pos[1] = (float)vector.GetAt(i).mData[1];
+			pos[2] = (float)vector.GetAt(i).mData[2];
+			memcpy(normalData + 3 * i, pos, 3 * sizeof(float));
+		}
+	}
+
 	int nUVCount = pMeshData->GetElementUVCount();
 	if (nUVCount > 0)
 	{
@@ -162,7 +204,7 @@ void handNodeMesh(ModelDetailFbx* file, FbxNode* node)
 	}
 
 	{
-		FbxAMatrix mat = node->EvaluateGlobalTransform();
+		FbxAMatrix& mat = node->EvaluateLocalTransform();
 
 		const FbxVector4& pT = mat.GetT();
 		const FbxVector4& pR = mat.GetR();

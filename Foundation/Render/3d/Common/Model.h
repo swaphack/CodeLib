@@ -2,6 +2,7 @@
 
 #include "Common/DrawNode/DrawNode.h"
 #include "Common/struct/shape_common.h"
+#include "3d/Environment/LightProtocol.h"
 #include <map>
 #include <string>
 
@@ -16,7 +17,9 @@ namespace render
 	class Materials;
 
 	// Ä£ÐÍ
-	class Model : public DrawNode
+	class Model : 
+		public DrawNode,
+		public LightProtocol
 	{
 	public:
 		Model();

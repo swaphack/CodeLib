@@ -17,7 +17,7 @@ out vec4 color;
 
 void main()
 {
-	vec3 normal = vec3(texture(material.texNormal, fragTexcoord).rgb);
+	vec3 normal = texture(material.texNormal, fragTexcoord).rgb;
 	vec3 fragNormal = normalize(normal* 2.0 - 1.0);
 
 	vec4 matColor = texture(material.tex, fragTexcoord);

@@ -72,7 +72,7 @@ namespace render
 		/**
 		*	初始化切线数据
 		*/
-		void initDetailNormalAndTangentData();
+		void initDetailTangentData();
 		/**
 		*	计算三角形顶点法线
 		*/
@@ -80,7 +80,7 @@ namespace render
 		/**
 		*	计算三角形顶点法线
 		*/
-		void calTrianglesVertexNormalAndTangent(const sys::MeshMemoryData& vertices, const sys::MeshMemoryData& uvs, const sys::MeshMemoryData& indices, float* normals, float* tangents);
+		void calTrianglesVertexTangent(const sys::MeshMemoryData& vertices, const sys::MeshMemoryData& uvs, const sys::MeshMemoryData& indices, float* tangents);
 	private:
 		sys::MeshDetail* _detail = nullptr;
 		/**

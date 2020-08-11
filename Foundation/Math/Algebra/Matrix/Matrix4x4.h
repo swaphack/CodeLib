@@ -35,6 +35,7 @@ namespace math
 		Matrix4x4(const Matrix4x1& mat);
 		Matrix4x4(const Matrix3x3& mat);
 		Matrix4x4(const float* value);
+		Matrix4x4(const float value[4][4]);
 		virtual ~Matrix4x4();
 	public:
 		/**

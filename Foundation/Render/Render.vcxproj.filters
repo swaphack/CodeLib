@@ -60,21 +60,6 @@
     <ClCompile Include="3d\Environment\ClipPlane.cpp">
       <Filter>3d\Environment</Filter>
     </ClCompile>
-    <ClCompile Include="Common\Audio\AudioManager.cpp">
-      <Filter>Common\Audio</Filter>
-    </ClCompile>
-    <ClCompile Include="Common\Audio\CtrlAudioListener.cpp">
-      <Filter>Common\Audio</Filter>
-    </ClCompile>
-    <ClCompile Include="Common\Audio\CtrlAudioSource.cpp">
-      <Filter>Common\Audio</Filter>
-    </ClCompile>
-    <ClCompile Include="Common\Audio\CtrlAudioSource3D.cpp">
-      <Filter>Common\Audio</Filter>
-    </ClCompile>
-    <ClCompile Include="Common\Audio\macros.cpp">
-      <Filter>Common\Audio</Filter>
-    </ClCompile>
     <ClCompile Include="Common\Action\ExtAction.cpp">
       <Filter>Common\Action</Filter>
     </ClCompile>
@@ -110,15 +95,6 @@
     </ClCompile>
     <ClCompile Include="3d\Common\Model.cpp">
       <Filter>3d\Common</Filter>
-    </ClCompile>
-    <ClCompile Include="Common\Audio\CtrlAudioGeometry.cpp">
-      <Filter>Common\Audio</Filter>
-    </ClCompile>
-    <ClCompile Include="Common\Audio\CtrlAudioSpeaker.cpp">
-      <Filter>Common\Audio</Filter>
-    </ClCompile>
-    <ClCompile Include="Common\Audio\AudioProtocol.cpp">
-      <Filter>Common\Audio</Filter>
     </ClCompile>
     <ClCompile Include="Common\Texture\TexFrame.cpp">
       <Filter>Common\Texture</Filter>
@@ -191,9 +167,6 @@
     </ClCompile>
     <ClCompile Include="Graphic\GLAPI\GLRender.cpp">
       <Filter>Graphic\GLAPI</Filter>
-    </ClCompile>
-    <ClCompile Include="Common\Audio\CtrlAudioSourceClip.cpp">
-      <Filter>Common\Audio</Filter>
     </ClCompile>
     <ClCompile Include="Graphic\GLAPI\GLCallList.cpp">
       <Filter>Graphic\GLAPI</Filter>
@@ -492,29 +465,11 @@
     <ClCompile Include="Common\Buffer\DispatchIndirectBuffer.cpp">
       <Filter>Common\Buffer</Filter>
     </ClCompile>
-    <ClCompile Include="Common\Particle\ParticleProtocol.cpp">
-      <Filter>Common\Particle</Filter>
-    </ClCompile>
-    <ClCompile Include="Common\Particle\ParticleData.cpp">
-      <Filter>Common\Particle</Filter>
-    </ClCompile>
-    <ClCompile Include="Common\Particle\ComputeParticleNode.cpp">
-      <Filter>Common\Particle</Filter>
-    </ClCompile>
-    <ClCompile Include="Common\Particle\PariticleNode.cpp">
-      <Filter>Common\Particle</Filter>
-    </ClCompile>
     <ClCompile Include="Common\TBO\TextureBufferObject.cpp">
       <Filter>Common\TBO</Filter>
     </ClCompile>
     <ClCompile Include="Common\Action\SchedulerProtocol.cpp">
       <Filter>Common\Action</Filter>
-    </ClCompile>
-    <ClCompile Include="Common\GPU\GPUComputeObject.cpp">
-      <Filter>Common\GPU</Filter>
-    </ClCompile>
-    <ClCompile Include="Common\GPU\GPUCalculator.cpp">
-      <Filter>Common\GPU</Filter>
     </ClCompile>
     <ClCompile Include="Common\Shader\VertexShaderProgram.cpp">
       <Filter>Common\Shader</Filter>
@@ -536,12 +491,6 @@
     </ClCompile>
     <ClCompile Include="Common\VAO\VertexArrayBufferObject.cpp">
       <Filter>Common\VAO</Filter>
-    </ClCompile>
-    <ClCompile Include="PixelPostProcessingNode.cpp">
-      <Filter>Common\PostProcessing</Filter>
-    </ClCompile>
-    <ClCompile Include="Common\Particle\TransformFeedbackParticleNode.cpp">
-      <Filter>Common\Particle</Filter>
     </ClCompile>
     <ClCompile Include="Common\XFB\TransformFeedbackBufferObject.cpp">
       <Filter>Common\XFB</Filter>
@@ -576,14 +525,71 @@
     <ClCompile Include="3d\Shape\Plane.cpp">
       <Filter>3d\Shape</Filter>
     </ClCompile>
-    <ClCompile Include="Common\PostProcessing\ShadowMapping.cpp">
-      <Filter>Common\PostProcessing</Filter>
+    <ClCompile Include="Audio\AudioManager.cpp">
+      <Filter>Audio</Filter>
     </ClCompile>
-    <ClCompile Include="Common\PostProcessing\FrameBufferNode.cpp">
-      <Filter>Common\PostProcessing</Filter>
+    <ClCompile Include="Audio\AudioProtocol.cpp">
+      <Filter>Audio</Filter>
     </ClCompile>
-    <ClCompile Include="Common\PostProcessing\PostProcessingNode.cpp">
-      <Filter>Common\PostProcessing</Filter>
+    <ClCompile Include="Audio\CtrlAudioGeometry.cpp">
+      <Filter>Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="Audio\CtrlAudioListener.cpp">
+      <Filter>Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="Audio\CtrlAudioSource.cpp">
+      <Filter>Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="Audio\CtrlAudioSource3D.cpp">
+      <Filter>Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="Audio\CtrlAudioSourceClip.cpp">
+      <Filter>Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="Audio\CtrlAudioSpeaker.cpp">
+      <Filter>Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="Audio\macros.cpp">
+      <Filter>Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="PostProcessing\FrameBufferNode.cpp">
+      <Filter>PostProcessing</Filter>
+    </ClCompile>
+    <ClCompile Include="PostProcessing\PostProcessingNode.cpp">
+      <Filter>PostProcessing</Filter>
+    </ClCompile>
+    <ClCompile Include="PostProcessing\ShadowMapping.cpp">
+      <Filter>PostProcessing</Filter>
+    </ClCompile>
+    <ClCompile Include="Particle\ComputeParticleNode.cpp">
+      <Filter>Particle</Filter>
+    </ClCompile>
+    <ClCompile Include="Particle\PariticleNode.cpp">
+      <Filter>Particle</Filter>
+    </ClCompile>
+    <ClCompile Include="Particle\ParticleData.cpp">
+      <Filter>Particle</Filter>
+    </ClCompile>
+    <ClCompile Include="Particle\ParticleProtocol.cpp">
+      <Filter>Particle</Filter>
+    </ClCompile>
+    <ClCompile Include="Particle\TransformFeedbackParticleNode.cpp">
+      <Filter>Particle</Filter>
+    </ClCompile>
+    <ClCompile Include="GPU\GPUCalculator.cpp">
+      <Filter>GPU</Filter>
+    </ClCompile>
+    <ClCompile Include="GPU\GPUComputeObject.cpp">
+      <Filter>GPU</Filter>
+    </ClCompile>
+    <ClCompile Include="3d\Environment\LightProtocol.cpp">
+      <Filter>3d\Environment</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\DrawNode\UniformShaderApply.cpp">
+      <Filter>Common\DrawNode</Filter>
+    </ClCompile>
+    <ClCompile Include="PostProcessing\PixelPostProcessingNode.cpp">
+      <Filter>PostProcessing</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -704,27 +710,6 @@
     <ClInclude Include="3d\Map\Terrian.h">
       <Filter>3d\Map</Filter>
     </ClInclude>
-    <ClInclude Include="Common\Audio\AudioManager.h">
-      <Filter>Common\Audio</Filter>
-    </ClInclude>
-    <ClInclude Include="Common\Audio\import.h">
-      <Filter>Common\Audio</Filter>
-    </ClInclude>
-    <ClInclude Include="Common\Audio\CtrlAudioListener.h">
-      <Filter>Common\Audio</Filter>
-    </ClInclude>
-    <ClInclude Include="Common\Audio\CtrlAudioSource.h">
-      <Filter>Common\Audio</Filter>
-    </ClInclude>
-    <ClInclude Include="Common\Audio\CtrlAudioSpeaker.h">
-      <Filter>Common\Audio</Filter>
-    </ClInclude>
-    <ClInclude Include="Common\Audio\macros.h">
-      <Filter>Common\Audio</Filter>
-    </ClInclude>
-    <ClInclude Include="Common\Audio\CtrlAudioSource3D.h">
-      <Filter>Common\Audio</Filter>
-    </ClInclude>
     <ClInclude Include="Common\DrawNode\import.h">
       <Filter>Common\DrawNode</Filter>
     </ClInclude>
@@ -785,15 +770,6 @@
     <ClInclude Include="ext-config.h" />
     <ClInclude Include="2d\import.h">
       <Filter>2d</Filter>
-    </ClInclude>
-    <ClInclude Include="Common\Audio\CtrlAudioGeometry.h">
-      <Filter>Common\Audio</Filter>
-    </ClInclude>
-    <ClInclude Include="Common\Audio\CtrlAudioReverb3D.h">
-      <Filter>Common\Audio</Filter>
-    </ClInclude>
-    <ClInclude Include="Common\Audio\AudioProtocol.h">
-      <Filter>Common\Audio</Filter>
     </ClInclude>
     <ClInclude Include="Common\Texture\import.h">
       <Filter>Common\Texture</Filter>
@@ -887,9 +863,6 @@
     </ClInclude>
     <ClInclude Include="Graphic\GLAPI\GLRender.h">
       <Filter>Graphic\GLAPI</Filter>
-    </ClInclude>
-    <ClInclude Include="Common\Audio\CtrlAudioSourceClip.h">
-      <Filter>Common\Audio</Filter>
     </ClInclude>
     <ClInclude Include="Graphic\GLAPI\GLCallList.h">
       <Filter>Graphic\GLAPI</Filter>
@@ -1035,9 +1008,6 @@
     <ClInclude Include="Common\Buffer\TextureBuffer.h">
       <Filter>Common\Buffer</Filter>
     </ClInclude>
-    <ClInclude Include="Common\Particle\import.h">
-      <Filter>Common\Particle</Filter>
-    </ClInclude>
     <ClInclude Include="Common\Transform\import.h">
       <Filter>Common\Transform</Filter>
     </ClInclude>
@@ -1110,9 +1080,6 @@
     <ClInclude Include="Common\Tool\VertexTool.h">
       <Filter>Common\Tool</Filter>
     </ClInclude>
-    <ClInclude Include="Common\GPU\import.h">
-      <Filter>Common\GPU</Filter>
-    </ClInclude>
     <ClInclude Include="3d\Shape\CubeMap.h">
       <Filter>3d\Shape</Filter>
     </ClInclude>
@@ -1163,9 +1130,6 @@
     </ClInclude>
     <ClInclude Include="Common\FrameRender\FrameBuffer.h">
       <Filter>Common\FrameRender</Filter>
-    </ClInclude>
-    <ClInclude Include="Common\PostProcessing\import.h">
-      <Filter>Common\PostProcessing</Filter>
     </ClInclude>
     <ClInclude Include="Common\Input\import.h">
       <Filter>Common\Input</Filter>
@@ -1236,18 +1200,6 @@
     <ClInclude Include="Common\Buffer\DispatchIndirectBuffer.h">
       <Filter>Common\Buffer</Filter>
     </ClInclude>
-    <ClInclude Include="Common\Particle\ParticleProtocol.h">
-      <Filter>Common\Particle</Filter>
-    </ClInclude>
-    <ClInclude Include="Common\Particle\ParticleData.h">
-      <Filter>Common\Particle</Filter>
-    </ClInclude>
-    <ClInclude Include="Common\Particle\ComputeParticleNode.h">
-      <Filter>Common\Particle</Filter>
-    </ClInclude>
-    <ClInclude Include="Common\Particle\PariticleNode.h">
-      <Filter>Common\Particle</Filter>
-    </ClInclude>
     <ClInclude Include="Common\TBO\TextureBufferObject.h">
       <Filter>Common\TBO</Filter>
     </ClInclude>
@@ -1256,12 +1208,6 @@
     </ClInclude>
     <ClInclude Include="Common\Action\SchedulerProtocol.h">
       <Filter>Common\Action</Filter>
-    </ClInclude>
-    <ClInclude Include="Common\GPU\GPUComputeObject.h">
-      <Filter>Common\GPU</Filter>
-    </ClInclude>
-    <ClInclude Include="Common\GPU\GPUCalculator.h">
-      <Filter>Common\GPU</Filter>
     </ClInclude>
     <ClInclude Include="Common\Shader\VertexShaderProgram.h">
       <Filter>Common\Shader</Filter>
@@ -1283,12 +1229,6 @@
     </ClInclude>
     <ClInclude Include="Common\VAO\VertexArrayBufferObject.h">
       <Filter>Common\VAO</Filter>
-    </ClInclude>
-    <ClInclude Include="PixelPostProcessingNode.h">
-      <Filter>Common\PostProcessing</Filter>
-    </ClInclude>
-    <ClInclude Include="Common\Particle\TransformFeedbackParticleNode.h">
-      <Filter>Common\Particle</Filter>
     </ClInclude>
     <ClInclude Include="Common\XFB\TransformFeedbackBufferObject.h">
       <Filter>Common\XFB</Filter>
@@ -1317,9 +1257,6 @@
     <ClInclude Include="Common\DrawNode\macros.h">
       <Filter>Common\DrawNode</Filter>
     </ClInclude>
-    <ClInclude Include="Common\Material\macros.h">
-      <Filter>Common\Material</Filter>
-    </ClInclude>
     <ClInclude Include="3d\Environment\PointLight.h">
       <Filter>3d\Environment</Filter>
     </ClInclude>
@@ -1332,14 +1269,86 @@
     <ClInclude Include="3d\Shape\Plane.h">
       <Filter>3d\Shape</Filter>
     </ClInclude>
-    <ClInclude Include="Common\PostProcessing\ShadowMapping.h">
-      <Filter>Common\PostProcessing</Filter>
+    <ClInclude Include="Audio\AudioManager.h">
+      <Filter>Audio</Filter>
     </ClInclude>
-    <ClInclude Include="Common\PostProcessing\FrameBufferNode.h">
-      <Filter>Common\PostProcessing</Filter>
+    <ClInclude Include="Audio\AudioProtocol.h">
+      <Filter>Audio</Filter>
     </ClInclude>
-    <ClInclude Include="Common\PostProcessing\PostProcessingNode.h">
-      <Filter>Common\PostProcessing</Filter>
+    <ClInclude Include="Audio\CtrlAudioGeometry.h">
+      <Filter>Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="Audio\CtrlAudioListener.h">
+      <Filter>Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="Audio\CtrlAudioReverb3D.h">
+      <Filter>Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="Audio\CtrlAudioSource.h">
+      <Filter>Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="Audio\CtrlAudioSource3D.h">
+      <Filter>Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="Audio\CtrlAudioSourceClip.h">
+      <Filter>Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="Audio\CtrlAudioSpeaker.h">
+      <Filter>Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="Audio\import.h">
+      <Filter>Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="Audio\macros.h">
+      <Filter>Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="PostProcessing\FrameBufferNode.h">
+      <Filter>PostProcessing</Filter>
+    </ClInclude>
+    <ClInclude Include="PostProcessing\import.h">
+      <Filter>PostProcessing</Filter>
+    </ClInclude>
+    <ClInclude Include="PostProcessing\PostProcessingNode.h">
+      <Filter>PostProcessing</Filter>
+    </ClInclude>
+    <ClInclude Include="PostProcessing\ShadowMapping.h">
+      <Filter>PostProcessing</Filter>
+    </ClInclude>
+    <ClInclude Include="Particle\ComputeParticleNode.h">
+      <Filter>Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="Particle\import.h">
+      <Filter>Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="Particle\PariticleNode.h">
+      <Filter>Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="Particle\ParticleData.h">
+      <Filter>Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="Particle\ParticleProtocol.h">
+      <Filter>Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="Particle\TransformFeedbackParticleNode.h">
+      <Filter>Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="GPU\GPUCalculator.h">
+      <Filter>GPU</Filter>
+    </ClInclude>
+    <ClInclude Include="GPU\GPUComputeObject.h">
+      <Filter>GPU</Filter>
+    </ClInclude>
+    <ClInclude Include="GPU\import.h">
+      <Filter>GPU</Filter>
+    </ClInclude>
+    <ClInclude Include="3d\Environment\LightProtocol.h">
+      <Filter>3d\Environment</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\DrawNode\UniformShaderApply.h">
+      <Filter>Common\DrawNode</Filter>
+    </ClInclude>
+    <ClInclude Include="PostProcessing\PixelPostProcessingNode.h">
+      <Filter>PostProcessing</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1394,9 +1403,6 @@
     <Filter Include="3d\Map">
       <UniqueIdentifier>{39b72897-e237-4d06-b0ad-dc4d6a4b036c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Common\Audio">
-      <UniqueIdentifier>{61b06823-1aed-4daf-8287-4d1d7f5d9149}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Common\DrawNode">
       <UniqueIdentifier>{c3eeb252-4d38-4194-8503-f7bbbff42e74}</UniqueIdentifier>
     </Filter>
@@ -1430,17 +1436,11 @@
     <Filter Include="Common\Transform">
       <UniqueIdentifier>{aa9f6c13-684c-46e7-b0f7-8f5279aa88a5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Common\Particle">
-      <UniqueIdentifier>{1f423431-28e9-469c-b253-877be6e19bff}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Common\Material">
       <UniqueIdentifier>{3eb74b0e-e56a-42aa-82b4-b4c2c419ba32}</UniqueIdentifier>
     </Filter>
     <Filter Include="Common\Mesh">
       <UniqueIdentifier>{850d567f-bc86-451b-ba17-8441dbca1c7a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Common\GPU">
-      <UniqueIdentifier>{5ed30168-1abe-4571-9e21-332f042c143c}</UniqueIdentifier>
     </Filter>
     <Filter Include="Common\XFB">
       <UniqueIdentifier>{ae72e815-8167-4747-9d9c-27238188b9a0}</UniqueIdentifier>
@@ -1450,9 +1450,6 @@
     </Filter>
     <Filter Include="Common\FrameRender">
       <UniqueIdentifier>{b41a4217-8f48-47d8-b2e2-287c56dd4ea6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Common\PostProcessing">
-      <UniqueIdentifier>{aa556586-8459-4345-b44c-9a745f9c3ded}</UniqueIdentifier>
     </Filter>
     <Filter Include="Common\Input">
       <UniqueIdentifier>{409b1e32-3246-4c04-bffe-9e0fb742b02f}</UniqueIdentifier>
@@ -1465,6 +1462,18 @@
     </Filter>
     <Filter Include="3d\ModelFile">
       <UniqueIdentifier>{8ee9473a-1a12-4b51-8833-e5a4bf6f1572}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Audio">
+      <UniqueIdentifier>{6c209da1-7500-48d3-83c9-27b484f2ecda}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PostProcessing">
+      <UniqueIdentifier>{0796f41f-db2a-4bee-8d3f-3ad04a06c561}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Particle">
+      <UniqueIdentifier>{1516f20b-3ed1-40cf-83b6-7bf571f9c96d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GPU">
+      <UniqueIdentifier>{d64b7a08-5d95-4198-bf38-36a4b83b6cc7}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

@@ -2,7 +2,7 @@
 
 #include "Shader/core/matrix.vs"
 #include "Shader/core/vertex.vs"
-#include "Shader/core/emulate_light.vs"
+#include "Shader/core/light.vs"
 
 uniform Matrix matrix;
 

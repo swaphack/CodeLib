@@ -27,6 +27,7 @@ namespace render
 	public:
 
 		static void setDrawBuffer(DrawBufferMode mode);
+		static void setDrawBuffer(int mode);
 		static void setNamedFramebufferDrawBuffer(GLuint framebuffer, DrawBufferMode mode);
 	public:
 		static void finish();

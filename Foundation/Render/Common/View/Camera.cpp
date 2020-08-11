@@ -189,17 +189,55 @@ const math::Matrix4x4& render::Camera::getViewMatrix() const
 	return _worldMatrix;
 }
 
+math::Matrix4x4 render::Camera::getProjectMatrix(float znear, float zfar)
+{
+	math::Matrix4x4 matrix;
+
+	if (getDimensions() == CameraDimensions::TWO)
+	{
+		matrix = math::Matrix4x4::ortho(
+			_viewParameter2D.xLeft, _viewParameter2D.xRight,
+			_viewParameter2D.yBottom, _viewParameter2D.yTop,
+			znear, zfar);
+	}
+	else if (getDimensions() == CameraDimensions::THREE)
+	{
+		matrix = math::Matrix4x4::frustum(
+			_viewParameter3D.xLeft, _viewParameter3D.xRight,
+			_viewParameter3D.yBottom, _viewParameter3D.yTop,
+			znear, zfar);
+	}
+
+	return matrix;
+}
+
 math::Matrix4x4 render::Camera::lookAt(const math::Vector3& position)
 {
 	math::Vector3 pos = _worldMatrix.getPosition();
-	math::Vector3 up = _worldMatrix.getEularAngle();
-	//up = math::Vector3(0, 1, 0);
-	math::Matrix4x4 mat = math::Matrix4x4::lookAt(pos, position, up);
-	//PRINT("%s\n", mat.toString().c_str());
-	//GLMatrix::multMatrix(mat);
-
-	//GLMatrix::multMatrix(_worldMatrix);
+	math::Matrix4x4 mat = math::Matrix4x4::lookAt(pos, position, math::Vector3(0,1,0));
 	return mat;
+}
+
+math::Matrix4x4 render::Camera::lookAtCenter()
+{
+	return lookAt(getCenterPosition());
+}
+
+math::Vector3 render::Camera::getCenterPosition()
+{
+	math::Vector3 center;
+	if (getDimensions() == CameraDimensions::TWO)
+	{
+		center.setX(0.5f * (_viewParameter2D.xLeft + _viewParameter2D.xRight));
+		center.setY(0.5f * (_viewParameter2D.yBottom + _viewParameter2D.yTop));
+	}
+	else
+	{
+		center.setX(0.5f * (_viewParameter3D.xLeft + _viewParameter3D.xRight));
+		center.setY(0.5f * (_viewParameter3D.yBottom + _viewParameter3D.yTop));
+	}
+
+	return center;
 }
 
 void render::Camera::updateViewPort()

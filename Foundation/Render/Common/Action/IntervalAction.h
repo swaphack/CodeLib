@@ -30,9 +30,11 @@ namespace render
 		virtual void updatePercent(float curPercent);
 	protected:
 		// 总时长
-		float _totalTime;
+		float _totalTime = 0;
 		// 当前间隔
-		float _currentTime;
+		float _currentTime = 0;
+		// 是否初始化
+		bool _bInitData = false;
 	};
 
 	class DelayAction : public IntervalAction

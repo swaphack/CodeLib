@@ -5,11 +5,12 @@ struct Light
 	bool isSpot;	// 是否是锥形光源
 
 	vec4 color;		// 光颜色
-	vec4 ambient;	// 环境光
 
 	vec3 position; 	// 位置
 	vec3 direction; // 方向
 	vec3 halfVector;	// 方向光的半向量
+
+	mat4 spaceMatrix; 	// 光照方向的空间矩阵
 
 	// 锥形光源属性
 	float spotExponent;
@@ -76,7 +77,7 @@ LightComputeProperty compute_light_property(Light light, vec4 position, vec3 nor
 		pro.halfVector = light.halfVector;
 	}
 
-	pro.diffuse = max(0.0, dot(normal, lightDirection));
+	pro.diffuse = max(0.0, dot(lightDirection, normal));
 	pro.specular = max(0.0, dot(normal, pro.halfVector));
 
 	return pro;
@@ -107,7 +108,7 @@ vec4 get_multi_lights_Color(vec4 color, vec4 position, vec3 normal, vec3 viewDir
 			pro.specular = pow(pro.specular, shininess) * strength;
 		}
 
-		scatteredLight += lights[i].ambient * pro.attenuation 
+		scatteredLight += lights[i].color * pro.attenuation 
 			+ lights[i].color * pro.diffuse * pro.attenuation;
 
 		reflectedLight += lights[i].color * pro.specular * pro.attenuation;

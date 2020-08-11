@@ -18,11 +18,11 @@ public:
 	static void bindProgramAttrib(render::ShaderProgram* program);
 protected:
 	static void loadShader(render::Material* mat, const std::string& vpath, const std::string& fpath);
-	static void initShaderAttrib(render::Material* mat);
+	static void initShaderAttrib();
 
 	static void loadShader(render::Materials* mats, const std::string& vpath, const std::string& fpath);
-	static void initShaderAttrib(render::Materials* mats);
 public:
 	static std::string texture3dVertexPath;
 	static std::string texture3dFragmentPath;
+	static bool bInitShaderAttrib;
 };

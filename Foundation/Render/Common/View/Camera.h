@@ -53,8 +53,14 @@ namespace render
 		// 视图矩阵
 		const math::Matrix4x4& getViewMatrix() const;
 	public:
+		// 投影矩阵
+		math::Matrix4x4 getProjectMatrix(float znear, float zfar);
 		// 相机对准指定位置
 		math::Matrix4x4 lookAt(const math::Vector3& position);
+		// 相机对准中心位置
+		math::Matrix4x4 lookAtCenter();
+		// 中心点位置
+		math::Vector3 getCenterPosition();
 	public:
 		// 更新空间位置
 		virtual void visit();
