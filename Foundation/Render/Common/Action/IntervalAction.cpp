@@ -278,7 +278,7 @@ void render::RotateByAction::initAction()
 {
 	ASSERT(_target != nullptr);
 
-	_srcRotation = _target->getPosition();
+	_srcRotation = _target->getRotation();
 	_destRotation = _srcRotation + _differentRotation;
 }
 

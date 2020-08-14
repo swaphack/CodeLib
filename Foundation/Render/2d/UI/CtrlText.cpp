@@ -28,8 +28,6 @@ bool CtrlText::init()
 	_notify->addListen(NodeNotifyType::TEXT, [&](){
 
 		this->onTextChange();
-
-		this->updateBufferData();
 	});	
 
 	return true;
@@ -181,9 +179,9 @@ void CtrlText::onTextChange()
 		pMesh->getMeshDetail()->setColors(4, _vertexes.colors, 4);
 		pMesh->getMeshDetail()->setUVs(4, uvs, 2);
 		pMesh->getMeshDetail()->setIndices(6, _vertexes.indices);
-
-		pMesh->initMeshOtherDetail();
 	}
+
+	this->updateMeshData();
 }
 
 math::Vector3 render::CtrlText::getOrgin(const math::Size& size)

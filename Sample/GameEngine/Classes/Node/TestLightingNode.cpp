@@ -16,7 +16,7 @@ void TestLightingNode::initNodes()
 {
 	this->addGround();
 
-	this->addSun();
+	//this->addSun();
 
 	this->addStar();
 
@@ -61,7 +61,7 @@ void TestLightingNode::addStar()
 	pLight->setAmbient(255, 255, 255, 255);
 	pLight->setDiffuse(255, 255, 255, 255);
 	pLight->setSpecular(255, 255, 255, 255);
-	pLight->setConstantAttenuation(2.0f);
+	pLight->setConstantAttenuation(1.0f);
 	pLight->setLinearAttenuation(0.000f);
 	pLight->setQuadraticAttenuation(0.000f);
 	pLightShape->addChild(pLight);
@@ -200,25 +200,29 @@ void TestLightingNode::testShadow()
 	pShadowNode->setPosition(512, 384, -280);
 	pShadowNode->setAnchorPoint(0.5, 0.5f);
 
+	Utility::loadShader(pShadowNode, "Shader/texture/texture.vs", "Shader/texture/texture.fs");
+	pShadowNode->setRecordShaderProgram(G_SHANDER->createVertexFragmentProgram("Shader/light/simple_record_shadow.vs", "Shader/light/simple_record_shadow.fs"));
+	pShadowNode->setRenderShaderProgram(G_SHANDER->createVertexFragmentProgram("Shader/light/material_dirlight_shadow.vs", "Shader/light/material_dirlight_shadow.fs"));
+
 	for (int i = 0 ; i < 6; i ++)
 	{
 		render::Cube* pModel = CREATE_NODE(render::Cube);
 		pModel->setSupportLight(true);
-		pModel->setCastShadow(i % 2 == 0);
-		//pModel->setRecieveShadow(i % 2 == 1);
+		pModel->setCastShadow(true);
+		pModel->setRecieveShadow(true);
 		pModel->setTexture(filepath);
 		pModel->setColor(0.5f, 0.5f, 0.5f);
 		pModel->setAnchorPoint(math::Vector3(0.5f, 0.5f, 0.5f));
-		pModel->setPosition(-400 + i * 70, -200 + i * 70, 10);
+		pModel->setPosition(-400 + i * 150, -200 + i * 150, 200);
 		pModel->setVolume(100, 100, 100);
 		//Utility::loadShader(pModel, "Shader/material/material_dirlight_shadow.vs", "Shader/material/material_dirlight_shadow.fs");
-		Utility::loadShader(pModel, "Shader/material/material_texture.vs", "Shader/material/material_texture.fs");
 
 		pShadowNode->addChild(pModel);
 	}
 
 	this->addChild(pShadowNode);
 
+	/*
 	for (int i = 0; i < 6; i++)
 	{
 		render::Cube* pModel = CREATE_NODE(render::Cube);
@@ -232,5 +236,6 @@ void TestLightingNode::testShadow()
 
 		this->addChild(pModel);
 	}
+	*/
 }
 

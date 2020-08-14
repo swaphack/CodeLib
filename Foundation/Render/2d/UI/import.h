@@ -9,5 +9,4 @@
 #include "CtrlEditLabel.h"
 #include "CtrlScrollView.h"
 
-
 #include "CtrlStencil.h"

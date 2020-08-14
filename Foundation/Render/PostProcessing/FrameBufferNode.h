@@ -1,13 +1,13 @@
 #pragma once
 
-#include "Common/DrawNode/DrawNode.h"
+#include "Common/DrawNode/DrawNode2D.h"
 #include "Common/struct/shape_common.h"
 
 namespace render
 {
 	class FrameBuffer;
 
-	class FrameBufferNode : public DrawNode
+	class FrameBufferNode : public DrawNode2D
 	{
 	public:
 		FrameBufferNode();
@@ -27,8 +27,6 @@ namespace render
 
 		virtual void endRecord();
 	protected:
-		void updateFrameSize();
-	protected:
 		/**
 		*	帧缓存
 		*/
@@ -37,7 +35,5 @@ namespace render
 		*	是否初始化数据
 		*/
 		bool _bInitedFBN = false;
-		// 矩形框
-		RectVectices _rectVertex;
 	};
 }

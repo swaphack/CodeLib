@@ -37,32 +37,34 @@ Quaternion Quaternion::identity()
 	return Quaternion(1, 0, 0, 0);
 }
 
-Quaternion Quaternion::negative()
+Quaternion Quaternion::negative() const
 {
 	return Quaternion(-getW(), -getX(), -getY(), -getZ());
 }
 
-Quaternion Quaternion::conjugate()
+Quaternion Quaternion::conjugate() const
 {
 	return Quaternion(getW(), -getX(), -getY(), -getZ());
 }
 
-Quaternion Quaternion::inverse()
+Quaternion Quaternion::inverse() const
 {
 	return Quaternion(getW(), -getX(), -getY(), -getZ());
 }
 
-float Quaternion::getMagnitude()
+float Quaternion::getMagnitude() const
 {
 	return pow(getX(), 2) + pow(getY(), 2) + pow(getZ(), 2);
 }
 
-Quaternion Quaternion::normalize()
+void Quaternion::normalize()
 {
 	float len = getMagnitude();
 	assert(len > 0);
 
-	return Quaternion(getW(), getX() / len, getY() / len, getZ() / len);
+	setX(getX() / len);
+	setY(getY() / len);
+	setZ(getZ() / len);
 }
 
 Quaternion Quaternion::operator*(const Quaternion& quaternion)
@@ -243,4 +245,16 @@ math::Quaternion::~Quaternion()
 
 }
 
+math::Quaternion math::Quaternion::normalize(const Quaternion& quaternion)
+{
+	float len = quaternion.getMagnitude();
+	assert(len > 0);
+
+	return Quaternion(quaternion.getW(), quaternion.getX() / len, quaternion.getY() / len, quaternion.getZ() / len);
+}
+
+math::Vector3 math::Quaternion::eulerAngle() const
+{
+	return euler(*this);
+}
 

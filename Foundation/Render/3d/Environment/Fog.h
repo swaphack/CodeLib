@@ -1,12 +1,12 @@
 #pragma once
 
-#include "Common/DrawNode/DrawNode.h"
+#include "Common/Node/Node.h"
 #include "Graphic/GLAPI/macros.h"
 
 namespace render
 {
 	// Он
-	class Fog : public DrawNode
+	class Fog : public Node
 	{
 	public:
 		Fog();

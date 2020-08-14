@@ -73,8 +73,9 @@
   <ItemGroup>
     <ClCompile Include="2d\Animation\CtrlAnimation.cpp" />
     <ClCompile Include="2d\Animation\CtrlMedia.cpp" />
-    <ClCompile Include="2d\Animation\CtrlPointSprite.cpp" />
     <ClCompile Include="2d\Animation\CtrlSequenceFrame.cpp" />
+    <ClCompile Include="2d\Primitive\PointSprite.cpp" />
+    <ClCompile Include="2d\Primitive\PrimitiveNode.cpp" />
     <ClCompile Include="2d\UI\CtrlEditBox.cpp" />
     <ClCompile Include="2d\UI\CtrlEditLabel.cpp" />
     <ClCompile Include="2d\UI\CtrlFrame.cpp" />
@@ -92,6 +93,7 @@
     <ClCompile Include="3d\Environment\DirectionLight.cpp" />
     <ClCompile Include="3d\Environment\Environment.cpp" />
     <ClCompile Include="3d\Environment\Fog.cpp" />
+    <ClCompile Include="3d\Environment\Grid.cpp" />
     <ClCompile Include="3d\Environment\Light.cpp" />
     <ClCompile Include="3d\Environment\LightProtocol.cpp" />
     <ClCompile Include="3d\Environment\PointLight.cpp" />
@@ -138,11 +140,12 @@
     <ClCompile Include="Common\Buffer\TransformFeedbackBuffer.cpp" />
     <ClCompile Include="Common\Buffer\UniformBuffer.cpp" />
     <ClCompile Include="Common\DrawNode\DrawNode.cpp" />
+    <ClCompile Include="Common\DrawNode\DrawNode2D.cpp" />
+    <ClCompile Include="Common\DrawNode\DrawNode3D.cpp" />
     <ClCompile Include="Common\DrawNode\DrawProtocol.cpp" />
     <ClCompile Include="Common\DrawNode\DrawTextureCache.cpp" />
     <ClCompile Include="Common\DrawNode\FragmentOperator.cpp" />
     <ClCompile Include="Common\DrawNode\MultiDrawNode.cpp" />
-    <ClCompile Include="Common\DrawNode\PrimitiveNode.cpp" />
     <ClCompile Include="Common\DrawNode\UniformShaderApply.cpp" />
     <ClCompile Include="Common\Fragment\FragmentBlend.cpp" />
     <ClCompile Include="Common\Fragment\FragmentDepthTest.cpp" />
@@ -274,11 +277,13 @@
     <ClInclude Include="2d\Animation\CtrlAnimation.h" />
     <ClInclude Include="2d\Animation\CtrlFluid.h" />
     <ClInclude Include="2d\Animation\CtrlMedia.h" />
-    <ClInclude Include="2d\Animation\CtrlPointSprite.h" />
     <ClInclude Include="2d\Animation\CtrlSequenceFrame.h" />
     <ClInclude Include="2d\Animation\import.h" />
     <ClInclude Include="2d\Animation\macros.h" />
     <ClInclude Include="2d\import.h" />
+    <ClInclude Include="2d\Primitive\PointSprite.h" />
+    <ClInclude Include="2d\Primitive\import.h" />
+    <ClInclude Include="2d\Primitive\PrimitiveNode.h" />
     <ClInclude Include="2d\UI\CtrlEditBox.h" />
     <ClInclude Include="2d\UI\CtrlEditLabel.h" />
     <ClInclude Include="2d\UI\CtrlFrame.h" />
@@ -300,6 +305,7 @@
     <ClInclude Include="3d\Environment\DirectionLight.h" />
     <ClInclude Include="3d\Environment\Environment.h" />
     <ClInclude Include="3d\Environment\Fog.h" />
+    <ClInclude Include="3d\Environment\Grid.h" />
     <ClInclude Include="3d\Environment\Light.h" />
     <ClInclude Include="3d\Environment\LightProtocol.h" />
     <ClInclude Include="3d\Environment\PointLight.h" />
@@ -357,12 +363,13 @@
     <ClInclude Include="Common\Buffer\TransformFeedbackBuffer.h" />
     <ClInclude Include="Common\Buffer\UniformBuffer.h" />
     <ClInclude Include="Common\DrawNode\DrawNode.h" />
+    <ClInclude Include="Common\DrawNode\DrawNode2D.h" />
+    <ClInclude Include="Common\DrawNode\DrawNode3D.h" />
     <ClInclude Include="Common\DrawNode\DrawProtocol.h" />
     <ClInclude Include="Common\DrawNode\DrawTextureCache.h" />
     <ClInclude Include="Common\DrawNode\FragmentOperator.h" />
     <ClInclude Include="Common\DrawNode\macros.h" />
     <ClInclude Include="Common\DrawNode\MultiDrawNode.h" />
-    <ClInclude Include="Common\DrawNode\PrimitiveNode.h" />
     <ClInclude Include="Common\DrawNode\import.h" />
     <ClInclude Include="Common\DrawNode\UniformShaderApply.h" />
     <ClInclude Include="Common\Fragment\FragmentBlend.h" />

@@ -33,8 +33,20 @@ namespace render
 		*	是否有光源
 		*/
 		bool hasLight() const;
+	public:
+		/**
+		*	gamma 值
+		*/
+		void setGamma(float value);
+		/**
+		*	gamma 值
+		*/
+		float getGamma() const;
 	private:
+		// 光源
 		std::map<int, Light*> _lights;
+		// gamma 值
+		float _gamma = 0.0f;
 	};
 
 #define G_ENVIRONMENT sys::Instance<render::Environment>::getInstance()

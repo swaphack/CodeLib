@@ -18,8 +18,8 @@ TestImageNode::~TestImageNode()
 
 void TestImageNode::initNodes()
 {
-	testImage();
-	//testPointSprite();
+	//testImage();
+	testPointSprite();
 }
 
 void TestImageNode::testImage()
@@ -37,7 +37,7 @@ void TestImageNode::testImage()
 		pImage->setVolume(frameSize);
 		
 		Utility::loadShader(pImage, "Shader/texture/texture.vs", "Shader/texture/texture.fs");
-		Utility::updateNodeShader(pImage);
+		Utility::loadDefaultShader(pImage);
 
 		this->addChild(pImage);
 	}
@@ -52,7 +52,7 @@ void TestImageNode::testImage()
 		pImage->setPosition(512, 384);
 		pImage->setVolume(512, 384);
 		Utility::loadShader(pImage, "Shader/texture/texture.vs", "Shader/texture/texture.fs");
-		Utility::updateNodeShader(pImage);
+		Utility::loadDefaultShader(pImage);
 
 		this->addChild(pImage);
 	}
@@ -201,7 +201,7 @@ void TestImageNode::testPixelImage()
 
 void TestImageNode::testPointSprite()
 {
-	CtrlPointSprite* pSprite = CREATE_NODE(CtrlPointSprite);
+	PointSprite* pSprite = CREATE_NODE(PointSprite);
 	pSprite->setTexture("Resource/Image/point_sprite.jpg");
 	pSprite->setSpriteCount(200);
 	pSprite->setPointSize(64);

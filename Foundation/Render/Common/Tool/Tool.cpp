@@ -37,9 +37,17 @@ math::Vector3 Tool::convertToRadian(const math::Vector3& src)
 
 void Tool::convertToRadian(const math::Vector3& src, math::Vector3& dest)
 {
-	float x = ANGLE_TO_RADIAN(src.getX());
-	float y = ANGLE_TO_RADIAN(src.getY());
-	float z = ANGLE_TO_RADIAN(src.getZ());
+	float x = src.getX();
+	float y = src.getY();
+	float z = src.getZ();
+
+	ADJUST_DURATION_VALUE_RANGE(x, 0, 360, 360);
+	ADJUST_DURATION_VALUE_RANGE(y, 0, 360, 360);
+	ADJUST_DURATION_VALUE_RANGE(z, 0, 360, 360);
+
+	x = ANGLE_TO_RADIAN(x);
+	y = ANGLE_TO_RADIAN(y);
+	z = ANGLE_TO_RADIAN(z);
 
 	dest.set(x, y, z);
 }

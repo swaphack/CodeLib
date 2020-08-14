@@ -27,15 +27,15 @@ namespace render
 		*/
 		sys::MeshDetail* getMeshDetail() const;
 		/**
-		*	网格信息
+		*	网格顶点数据
 		*/
 		VertexArrayObject* getVertexArrayObject() const;
 		/**
-		*	网格信息
+		*	网格索引
 		*/
 		ElementArrayBuffer* getIndiceBuffer() const;
 		/**
-		*	网格信息
+		*	网格缓存
 		*/
 		ArrayBuffer* getVertexBuffer() const;
 	public:
@@ -47,6 +47,23 @@ namespace render
 		*	绘制图形方式
 		*/
 		DrawMode getDrawMode() const;
+	public:
+		/**
+		*	计算法线
+		*/
+		void setComputeNormal(bool compute);
+		/**
+		*	是否计算法线
+		*/
+		bool isComputeNormal();
+		/**
+		*	计算切线
+		*/
+		void setComputeTangent(bool compute);
+		/**
+		*	是否计算切线
+		*/
+		bool isComputeTangent();
 	public:
 		/**
 		*	使用缓存对象绘制
@@ -99,5 +116,13 @@ namespace render
 		*	绘制图形方式
 		*/
 		DrawMode _drawMode = DrawMode::TRIANGLES;
+		/**
+		*	是否计算法线
+		*/
+		bool _bComputeNormal = false;
+		/**
+		*	是否计算七县
+		*/
+		bool _bComputeTangent = false;
 	};
 }

@@ -43,17 +43,21 @@ namespace render
 		void startUpdateShaderUniformValue(Node* node, ShaderProgram* program, Mesh* pMesh, Material* pMaterial, DrawTextureCache* textureCache);
 		// 结束更新着色器attrib值
 		void startUpdateShaderVertexValue(ShaderProgram* program, Mesh* pMesh);
-		// 开始更新着色器uniform值
+		// 结束更新着色器uniform值
 		void endUpdateShaderUniformValue(ShaderProgram* program, Material* pMaterial, DrawTextureCache* textureCache);
 		// 结束更新着色器attrib值
 		void endUpdateShaderVertexValue(ShaderProgram* program, Mesh* pMesh);
 	protected:
+		void updateEnvUniformVallue(Node* node, ShaderProgram* program);
 		// 更新矩阵
 		void updateMVPMatrixUniformValue(Node* node, ShaderProgram* program);
 		// 更新材质
 		void updateMaterialUniformValue(ShaderProgram* program, Material* pMaterial, DrawTextureCache* textureCache);
 		// 更新纹理
 		void updateTexturesUnifromValue(ShaderProgram* program, Material* pMaterial, DrawTextureCache* textureCache);
+
+		void releaseMaterialUniformValue(ShaderProgram* program, Material* pMaterial, DrawTextureCache* textureCache);
+		void releaseTextureUniformValue(ShaderProgram* program, Material* pMaterial, DrawTextureCache* textureCache);
 	public:
 		// 应用光照着色器
 		void applyLightShader(Node* node, ShaderProgram* program);
@@ -79,11 +83,33 @@ namespace render
 		/**
 		*	添加Uniform shader字段
 		*/
-		void addUniform(UniformType vut, const std::string& name);
+		void addUniform(EnvUniformType vut, const std::string& name);
+		std::string getUniformName(EnvUniformType vut) const;
 		/**
-		*	添加Attrib索引
+		*	添加Uniform shader字段
 		*/
-		std::string getUniformName(UniformType vut) const;
+		void addUniform(MatrixUniformType vut, const std::string& name);
+		std::string getUniformName(MatrixUniformType vut) const;
+		/**
+		*	添加Uniform shader字段
+		*/
+		void addUniform(TextureUniformType vut, const std::string& name);
+		std::string getUniformName(TextureUniformType vut) const;
+		/**
+		*	添加Uniform shader字段
+		*/
+		void addUniform(MaterialUniformType vut, const std::string& name);
+		std::string getUniformName(MaterialUniformType vut) const;
+		/**
+		*	添加Uniform shader字段
+		*/
+		void addUniform(SingleLightUniformType vut, const std::string& name);
+		std::string getUniformName(SingleLightUniformType vut) const;
+		/**
+		*	添加Uniform shader字段
+		*/
+		void addUniform(MultiLightsUniformType vut, const std::string& name);
+		std::string getUniformName(MultiLightsUniformType vut) const;
 		/**
 		*	移除所有Attrib
 		*/
@@ -102,7 +128,27 @@ namespace render
 		/**
 		*	Uniform
 		*/
-		std::map<UniformType, std::string> _vertexUniformIndices;
+		std::map<EnvUniformType, std::string> _mapEnvUniform;
+		/**
+		*	Uniform
+		*/
+		std::map<MatrixUniformType, std::string> _mapMatrixUniform;
+		/**
+		*	Uniform
+		*/
+		std::map<TextureUniformType, std::string> _mapTextureUniform;
+		/**
+		*	Uniform
+		*/
+		std::map<MaterialUniformType, std::string> _mapMaterialUniform;
+		/**
+		*	Uniform
+		*/
+		std::map<SingleLightUniformType, std::string> _mapSingleLightUniform;
+		/**
+		*	Uniform
+		*/
+		std::map<MultiLightsUniformType, std::string> _mapMultiLightsUniform;
 		/**
 		*	临时矩阵
 		*/

@@ -25,8 +25,6 @@ bool MultiFaceCube::init()
 
 	_notify->addListen(NodeNotifyType::BODY, [this](){
 		onMultiFaceCubeBodyChanged();
-
-		this->updateBufferData();
 	});
 
 	return true;
@@ -114,8 +112,8 @@ void render::MultiFaceCube::onMultiFaceCubeBodyChanged()
 		}
 		CubeFace face = (CubeFace)i;
 		pMesh->getMeshDetail()->setVertices(4, _cubePosition.getFaceVertex(face)->vertices, 3);
-
-		pMesh->initMeshOtherDetail();
 	}
+
+	this->updateBufferData();
 }
 

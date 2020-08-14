@@ -25,20 +25,26 @@ namespace render
 		NORMAL,
 		TANGENT,
 		BITANGENT,
-		UV1,
-		UV2,
-		UV3,
-		UV4,
-		BLEND_WEIGHT,
-		BLEND_INDEX,
 		MAX,
-		UVS = UV,
 	};
-
 	/**
-	*	统一变量
+	*	环境
 	*/
-	enum class UniformType
+	enum class EnvUniformType
+	{
+		// 摄像机位置
+		VIEW_POSITION,
+		// 伽马值
+		GAMMA,
+		// 光源数量
+		LIGHT_COUNT,
+		// 点大小
+		POINT_SIZE,
+	};
+	/**
+	*	矩阵
+	*/
+	enum class MatrixUniformType
 	{
 		// 投影矩阵
 		PROJECT_MATRIX,
@@ -48,11 +54,12 @@ namespace render
 		MODEL_MATRIX,
 		// 法线矩阵
 		NORMAL_MATRIX,
-		// m v p
-		MVP_MATRIX,
-		// m v
-		MV_MATRIX,
-
+	};
+	/**
+	*	纹理
+	*/
+	enum class TextureUniformType
+	{
 		// 纹理
 		TEXTURE0,
 		// 纹理
@@ -117,8 +124,12 @@ namespace render
 		TEXTURE30,
 		// 纹理
 		TEXTURE31,
-
-		/**************单材质*****************/
+	};
+	/**
+	*	材质
+	*/
+	enum class MaterialUniformType
+	{
 		// 发射颜色
 		MATERIAL_EMISSION,
 		// 材质环境颜色参数
@@ -145,8 +156,12 @@ namespace render
 		MATERIAL_SHININESS,
 		// 材质亮度增强参数
 		MATERIAL_STRENGTH,
-
-		/**************单光源*****************/
+	};
+	/**
+	*	单光源
+	*/
+	enum class SingleLightUniformType
+	{
 		// 启用光源
 		LIGHT_ENABLED,
 		// 是否本地光源
@@ -175,9 +190,12 @@ namespace render
 		LIGHT_SPOT_COST_CUTOFF,
 		// 光照矩阵
 		LIGHT_SPACE_MATRIX,
-		/**************多光源*****************/
-		// 光源数量
-		MULTI_LIGHT_COUNT,
+	};
+	/**
+	*	多光源
+	*/
+	enum class MultiLightsUniformType
+	{
 		// 启用多光源
 		MULTI_LIGHT_ENABLED,
 		// 是否本地光源
@@ -206,10 +224,5 @@ namespace render
 		MULTI_LIGHT_SPOT_COST_CUTOFF,
 		// 光照矩阵
 		MULTI_LIGHT_SPACE_MATRIX,
-
-		// 摄像机位置
-		VIEW_POSITION,
-		// 伽马值
-		GAMMA,
 	};
 }

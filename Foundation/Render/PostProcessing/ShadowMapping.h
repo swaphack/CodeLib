@@ -5,6 +5,7 @@
 namespace render
 {
 	class Texture2D;
+	class ShaderProgram;
 
 	/**
 	*	阴影
@@ -18,6 +19,9 @@ namespace render
 		virtual ~ShadowMapping();
 	public:
 		virtual bool init();
+	public:
+		void setRecordShaderProgram(ShaderProgram* program);
+		void setRenderShaderProgram(ShaderProgram* program);
 	public:
 		virtual void beforeDrawNode();
 		virtual void draw();
@@ -33,5 +37,9 @@ namespace render
 		*	隐藏节点，不生成阴影
 		*/
 		std::set<Node*> _setHideNode;
+		// 记录阴影着色器
+		ShaderProgram* _recordShaderProgram = nullptr;
+		// 绘制着色器
+		ShaderProgram* _renderShaderProgram = nullptr;
 	};
 }

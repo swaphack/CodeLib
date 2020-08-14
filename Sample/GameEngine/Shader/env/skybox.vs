@@ -1,7 +1,7 @@
 #version 330 core
 
-#include "Shader/core/matrix.vs"
-#include "Shader/core/vertex.vs"
+#include "Shader/core/vertex/matrix.vs"
+#include "Shader/core/vertex/vertex.vs"
 
 uniform Matrix matrix;
 

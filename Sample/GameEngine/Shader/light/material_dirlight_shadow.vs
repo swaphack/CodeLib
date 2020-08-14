@@ -1,8 +1,8 @@
 #version 330 core
 
-#include "Shader/core/matrix.vs"
-#include "Shader/core/light.vs"
-#include "Shader/core/vertex.vs"
+#include "Shader/core/vertex/matrix.vs"
+#include "Shader/core/vertex/light.vs"
+#include "Shader/core/vertex/vertex.vs"
 
 uniform Matrix matrix;
 uniform LightSpace lightSpace;
@@ -18,8 +18,8 @@ void main()
 	vec4 fragPos = matrix.model * pos;
 	fragNormal = matrix.normal * v_normal;
 	fragTexcoord = v_texcoord;
-	fragPos = lightSpace.spaceMatrix * fragPos;
+	fragPosLightSpace = lightSpace.spaceMatrix * fragPos;
 
-	gl_Position = get_mvp(matrix) * pos;
+	gl_Position = getMVP(matrix) * pos;
 	fragPosition = fragPos.xyz;
 }

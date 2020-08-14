@@ -115,7 +115,7 @@ void TestShaderNode::testCubeModelShader()
 	pModel->setAnchorPoint(0.5f, 0.5f, 0.5f);
 	this->addChild(pModel);
 
-	Utility::updateNodeShader(pModel);
+	Utility::loadDefaultShader(pModel);
 	Utility::runRotateAction(pModel);
 }
 
@@ -135,7 +135,7 @@ void TestShaderNode::testMultiMeshCubeModelShader()
 	pModel->setAnchorPoint(0.0f, 0.5f, 0.5f);
 	this->addChild(pModel);
 
-	Utility::updateNodeShader(pModel);
+	Utility::loadDefaultShader(pModel);
 	Utility::runRotateAction(pModel);
 }
 
@@ -266,7 +266,6 @@ void TestShaderNode::testClipShader()
 
 
 	pModel->getMaterial()->setShaderProgram(pProgram);
-	Utility::initShaderAttrib(pModel);
 	Utility::runRotateAction(pModel);
 
 

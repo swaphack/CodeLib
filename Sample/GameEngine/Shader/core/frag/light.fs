@@ -37,7 +37,7 @@ struct LightComputeProperty
 const int MAX_LIGHT_COUNT = 8;
 
 // 计算光照属性
-LightComputeProperty compute_light_property(Light light, vec4 position, vec3 normal, vec3 viewDirection)
+LightComputeProperty computeLightProperty(Light light, vec4 position, vec3 normal, vec3 viewDirection)
 {
 	LightComputeProperty pro;
 
@@ -84,7 +84,7 @@ LightComputeProperty compute_light_property(Light light, vec4 position, vec3 nor
 }
 
 // 计算光照颜色
-vec4 get_multi_lights_Color(vec4 color, vec4 position, vec3 normal, vec3 viewDirection, 
+vec4 getMultiLightsColor(vec4 color, vec4 position, vec3 normal, vec3 viewDirection, 
 	float shininess, float strength,
 	Light lights[MAX_LIGHT_COUNT], int lightCount)
 {
@@ -97,7 +97,7 @@ vec4 get_multi_lights_Color(vec4 color, vec4 position, vec3 normal, vec3 viewDir
 	{
 		if (!lights[i].isEnabled) continue;
 
-		LightComputeProperty pro = compute_light_property(lights[i], position, normal, viewDirection);
+		LightComputeProperty pro = computeLightProperty(lights[i], position, normal, viewDirection);
 
 		if (pro.diffuse == 0.0)
 		{

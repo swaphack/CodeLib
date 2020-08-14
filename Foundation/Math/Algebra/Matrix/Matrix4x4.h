@@ -53,7 +53,7 @@ namespace math
 		/**
 		*	旋转
 		*/
-		void setRotate(const Vector3& rotation);
+		void setRotate(const Vector3& radian);
 		/**
 		*	绕x轴旋转
 		*/
@@ -130,6 +130,7 @@ namespace math
 		static void getRST(const Vector3& rotate, const Vector3& scale, const Vector3& translate, Matrix4x4& outValue);
 		// tsr
 		static Matrix4x4 getTSR(const Vector3& translate, const Vector3& scale, const Vector3& rotate);
+
 		// 坐标计算
 		static Vector3 transpose(const Vector3& src, const Matrix4x4& mat);
 	};

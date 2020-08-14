@@ -22,7 +22,7 @@ void TestFragmentNode::testStencil()
 	pCube->setTexture("Resource/Image/NeHe.png");
 	pCube->setRotation(45, 45, 0);
 	pCube->setPosition(400, 400);
-	Utility::updateNodeShader(pCube);
+	Utility::loadDefaultShader(pCube);
 
 	FragmentBlend* pBlend = pCube->getFragOperator()->getHandle<FragmentBlend>();
 	pBlend->setEnabled(true);

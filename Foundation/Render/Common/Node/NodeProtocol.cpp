@@ -307,3 +307,86 @@ float render::BodyProtocol::getAnchorPointZ()
 {
 	return _anchor.getZ();
 }
+
+//////////////////////////////////////////////////////////////////////////
+render::DirectionProtocol::DirectionProtocol()
+{
+	_up = math::Vector3(0, 1, 0);
+	_right = math::Vector3(1, 0, 0);
+	_front = math::Vector3(0, 0, 1);
+
+	_defaultUp = math::Vector3(0, 1, 0);
+	_defaultRight = math::Vector3(1, 0, 0);
+	_defaultFront = math::Vector3(0, 0, 1);
+
+	_zDirection = ZDirectionType::OUTSIDE;
+}
+
+render::DirectionProtocol::~DirectionProtocol()
+{
+
+}
+
+const math::Vector3& render::DirectionProtocol::getUp() const
+{
+	return _up;
+}
+
+const math::Vector3& render::DirectionProtocol::getRight() const
+{
+	return _right;
+}
+
+const math::Vector3& render::DirectionProtocol::getFront() const
+{
+	return _front;
+}
+
+void render::DirectionProtocol::setZDirection(ZDirectionType type)
+{
+	_zDirection = type;
+
+	if (type == ZDirectionType::INSIDE)
+	{
+		_front = math::Vector3(0, 0, -1);
+	}
+	else
+	{
+		_front = math::Vector3(0, 0, 1);
+	}
+}
+
+render::DirectionProtocol::ZDirectionType render::DirectionProtocol::getZDirection() const
+{
+	return _zDirection;
+}
+
+const math::Vector3& render::DirectionProtocol::getDefaultUp() const
+{
+	return _defaultUp;
+}
+
+const math::Vector3& render::DirectionProtocol::getDefaultRight() const
+{
+	return _defaultRight;
+}
+
+const math::Vector3& render::DirectionProtocol::getDefaultFront() const
+{
+	return _defaultUp;
+}
+
+void render::DirectionProtocol::setUp(const math::Vector3& up)
+{
+	_up = up;
+}
+
+void render::DirectionProtocol::setRight(const math::Vector3& right)
+{
+	_right = right;
+}
+
+void render::DirectionProtocol::setFront(const math::Vector3& front)
+{
+	_front = front;
+}

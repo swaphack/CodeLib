@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Common/DrawNode/DrawNode.h"
+#include "Common/DrawNode/DrawNode2D.h"
 #include "Common/struct/shape_common.h"
 
 namespace render
@@ -9,7 +9,7 @@ namespace render
 	/**
 	*	像素后期处理
 	*/
-	class PixelPostProcessingNode : public DrawNode
+	class PixelPostProcessingNode : public DrawNode2D
 	{
 	public:
 		PixelPostProcessingNode();

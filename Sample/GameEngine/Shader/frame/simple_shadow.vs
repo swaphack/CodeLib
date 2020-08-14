@@ -1,8 +1,8 @@
 #version 330 core
 
-#include "Shader/core/light.vs"
-#include "Shader/core/vertex.vs"
-#include "Shader/core/matrix.vs"
+#include "Shader/core/vertex/light.vs"
+#include "Shader/core/vertex/vertex.vs"
+#include "Shader/core/vertex/matrix.vs"
 
 uniform LightSpace lightSpace;
 uniform Matrix matrix;

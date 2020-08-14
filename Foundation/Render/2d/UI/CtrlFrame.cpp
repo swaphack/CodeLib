@@ -30,12 +30,10 @@ bool CtrlFrame::init()
 
 	_notify->addListen(NodeNotifyType::BODY, [this]() {
 		onTextureChange();
-		updateBufferData();
 	});
 
 	_notify->addListen(NodeNotifyType::TEXTURE, [this](){
 		onTextureChange();
-		updateBufferData();
 	});
 
 	return true;
@@ -106,7 +104,7 @@ void CtrlFrame::onTextureChange()
 		pMesh->getMeshDetail()->setColors(4, _vertexes.colors, 4);
 		pMesh->getMeshDetail()->setUVs(4, uvs, 2);
 		pMesh->getMeshDetail()->setIndices(6, _vertexes.indices);
-
-		pMesh->initMeshOtherDetail();
 	}
+
+	this->updateMeshData();
 }

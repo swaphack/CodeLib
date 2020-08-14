@@ -21,7 +21,7 @@ render::PixelPostProcessingNode::~PixelPostProcessingNode()
 
 bool render::PixelPostProcessingNode::init()
 {
-	if (!DrawNode::init())
+	if (!DrawNode2D::init())
 	{
 		return false;
 	}
@@ -88,10 +88,8 @@ void render::PixelPostProcessingNode::updateTextureSize()
 		pMesh->getMeshDetail()->setVertices(4, vertices, 2);
 		pMesh->getMeshDetail()->setUVs(4, uvs, 2);
 		pMesh->getMeshDetail()->setIndices(6, indices, 1);
-
-		pMesh->initMeshOtherDetail();
 	}
 
-	this->updateBufferData();
+	this->updateMeshData();
 }
 

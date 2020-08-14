@@ -75,7 +75,7 @@ namespace render
 		// 滑动方向
 		ScrollDirection _scrollDirection;
 		// 管理所有项的位置
-		Node* _content;
+		Node* _content = nullptr;
 		// 项
 		std::vector<Node*> _nodes;
 		// 点击位置

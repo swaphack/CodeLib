@@ -21,7 +21,6 @@ bool render::Plane::init()
 
 	_notify->addListen(NodeNotifyType::BODY, [this]() {
 		this->onPlaneBodyChanged();
-		this->updateBufferData();
 		});
 
 	return true;
@@ -44,8 +43,8 @@ void render::Plane::onPlaneBodyChanged()
 		pMesh->getMeshDetail()->setColors(4, _rectPosition.colors, 4);
 		pMesh->getMeshDetail()->setUVs(4, uvs, 2);
 		pMesh->getMeshDetail()->setIndices(6, _rectPosition.indices);
-
-		pMesh->initMeshOtherDetail();
 	}
+
+	this->updateMeshData();
 }
 

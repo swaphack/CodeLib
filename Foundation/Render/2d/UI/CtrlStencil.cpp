@@ -2,6 +2,7 @@
 #include "Common/Fragment/import.h"
 #include "Graphic/import.h"
 #include "Common/View/import.h"
+#include "Common/DrawNode/FragmentOperator.h"
 
 render::CtrlStencil::CtrlStencil()
 {

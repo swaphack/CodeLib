@@ -127,23 +127,6 @@ void render::Model::drawBox()
 	GLVertex::setVertex(_boxVertex.bottom.rightUp);
 	GLVertex::setVertex(_boxVertex.bottom.leftUp);
 	GLVertex::endMode();
-
-	/*
-	GLMatrix::pushMatrix();
-	GLMatrix::loadIdentity();
-
-	GLVertex::setColor(0.0f, 1.0f, 0.0f, 1.0f);
-	GLState::setLineWidth(8);
-
-	GLVertex::beginMode(ShapeMode::LINE_LOOP);
-	GLVertex::setVertex(_realRectVertex.leftDown);
-	GLVertex::setVertex(_realRectVertex.rightDown);
-	GLVertex::setVertex(_realRectVertex.rightUp);
-	GLVertex::setVertex(_realRectVertex.leftUp);
-	GLVertex::endMode();
-
-	GLMatrix::popMatrix();
-	*/
 }
 
 void render::Model::afterDrawNode()

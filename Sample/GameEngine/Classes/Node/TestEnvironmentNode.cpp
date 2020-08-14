@@ -12,6 +12,8 @@ TestEnvironmentNode::~TestEnvironmentNode()
 
 void TestEnvironmentNode::initNodes()
 {
+	this->addGrid();
+
 	this->testCamera();
 
 	//this->init3DSkyBox();
@@ -103,12 +105,15 @@ void TestEnvironmentNode::testCamera()
 		auto size = Tool::getGLViewSize();
 		float d = sqrt(powf(size.getWidth(), 2) + powf(size.getHeight(), 2));
 		pCamera->setViewDistance(d - 200, d * 100);
-		pCamera->setPosition(-size.getWidth() * 0.5f, -size.getHeight() * 0.5f, -d);
+		pCamera->setPosition(size.getWidth() * 0.5f, size.getHeight() * 0.5f, d);
 	}
 	else
 	{
-		pCamera->setPositionZ(-size.getWidth() * 0.25f);
+		pCamera->setPositionZ(size.getWidth() * 0.25f);
 	}
+
+	//pCamera->setPositionY(pCamera->getPositionY() + 100);
+	//pCamera->setRotationX(pCamera->getRotationX() - 30);
 
 	G_KEYBOARDMANAGER->addKeyboardFunc(this, pCamera, [&](Node* object, sys::BoardKey key, sys::ButtonStatus type) {
 		auto camera = object->as<Camera>();
@@ -138,27 +143,43 @@ void TestEnvironmentNode::testCamera()
 		}
 		else if (key == sys::BoardKey::KA)
 		{
-			camera->setPositionX(camera->getPositionX() + _spaceSpeed);
+			camera->setPosition(camera->getPosition() - _spaceSpeed * camera->getDefaultRight());
 		}
 		else if (key == sys::BoardKey::KD)
 		{
-			camera->setPositionX(camera->getPositionX() - _spaceSpeed);
-		}
-		else if (key == sys::BoardKey::KQ)
-		{
-			camera->setPositionY(camera->getPositionY() - _spaceSpeed);
-		}
-		else if (key == sys::BoardKey::KE)
-		{
-			camera->setPositionY(camera->getPositionY() + _spaceSpeed);
+			camera->setPosition(camera->getPosition() + _spaceSpeed * camera->getDefaultRight());
 		}
 		else if (key == sys::BoardKey::KW)
 		{
-			camera->setPositionZ(camera->getPositionZ() + _spaceSpeed);
+			camera->setPosition(camera->getPosition() - _spaceSpeed * camera->getFront());
 		}
 		else if (key == sys::BoardKey::KS)
 		{
-			camera->setPositionZ(camera->getPositionZ() - _spaceSpeed);
+			camera->setPosition(camera->getPosition() + _spaceSpeed * camera->getFront());
+		}
+		else if (key == sys::BoardKey::KQ)
+		{
+			camera->setPosition(camera->getPosition() - _spaceSpeed * camera->getDefaultUp());
+		}
+		else if (key == sys::BoardKey::KE)
+		{
+			camera->setPosition(camera->getPosition() + _spaceSpeed * camera->getDefaultUp());
+		}
+		else if (key == sys::BoardKey::KL)
+		{
+			camera->setRotationY(camera->getRotationY() - _spaceSpeed);
+		}
+		else if (key == sys::BoardKey::KJ)
+		{
+			camera->setRotationY(camera->getRotationY() + _spaceSpeed);
+		}
+		else if (key == sys::BoardKey::KK)
+		{
+			camera->setRotationX(camera->getRotationX() + _spaceSpeed);
+		}
+		else if (key == sys::BoardKey::KI)
+		{
+			camera->setRotationX(camera->getRotationX() - _spaceSpeed);
 		}
 	});
 
@@ -205,4 +226,25 @@ void TestEnvironmentNode::testCamera()
 			camera->setViewDistance(zNear, zFar + value);
 		}
 	});
+}
+
+void TestEnvironmentNode::addGrid()
+{
+	render::Grid* pGrid = CREATE_NODE(render::Grid);
+	pGrid->setAnchorPoint(0.5f, 0.5f, 0.5f);
+	pGrid->setVolume(10240, 0, 10240);
+	pGrid->setGridWidth(100);
+	pGrid->setPosition(512, 384);
+	//pGrid->setRotationX(90);
+
+	Utility::loadShader(pGrid, "Shader/geometry/draw_line.vs", "Shader/geometry/draw_line.gs", "Shader/geometry/draw_line.fs");
+
+	this->addChild(pGrid);
+
+	RotateByAction* pRotateByAction = CREATE_ACTION(RotateByAction);
+	pRotateByAction->setDifferentRotation(360, 0, 0);
+	pRotateByAction->setDuration(5);
+
+	RepeateForeverAction* pRepeateAction = CREATE_ACTION(RepeateForeverAction);
+	pRepeateAction->setAction(pRotateByAction);
 }

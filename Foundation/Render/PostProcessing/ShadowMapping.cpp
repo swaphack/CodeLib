@@ -1,5 +1,6 @@
 #include "ShadowMapping.h"
 
+#include "Common/Shader/ShaderProgram.h"
 #include "Common/Texture/Texture2D.h"
 #include "Common/FrameRender/import.h"
 #include "Graphic/import.h"
@@ -14,6 +15,8 @@ render::ShadowMapping::ShadowMapping()
 render::ShadowMapping::~ShadowMapping()
 {
 	SAFE_RELEASE(_texture);
+	SAFE_RELEASE(_recordShaderProgram);
+	SAFE_RELEASE(_renderShaderProgram);
 }
 
 bool render::ShadowMapping::init()
@@ -25,8 +28,22 @@ bool render::ShadowMapping::init()
 	_notify->addListen(NodeNotifyType::BODY, [this]() {
 		this->updateShadowMapping();
 	});
-	//this->setTexture(_texture);
+	this->setTexture(_texture);
 	return true;
+}
+
+void render::ShadowMapping::setRecordShaderProgram(ShaderProgram* program)
+{
+	SAFE_RELEASE(_recordShaderProgram);
+	SAFE_RETAIN(program);
+	_recordShaderProgram = program;
+}
+
+void render::ShadowMapping::setRenderShaderProgram(ShaderProgram* program)
+{
+	SAFE_RELEASE(_renderShaderProgram);
+	SAFE_RETAIN(program);
+	_renderShaderProgram = program;
 }
 
 void render::ShadowMapping::beforeDrawNode()
@@ -46,6 +63,10 @@ void render::ShadowMapping::beforeDrawNode()
 					pDrawNode->setSkipDraw(true);
 					_setHideNode.insert(pDrawNode);
 				}
+			}
+			else
+			{
+				pDrawNode->setShaderProgram(_recordShaderProgram);
 			}
 			pDrawNode->setShadowTexture(nullptr);
 		}
@@ -68,6 +89,10 @@ void render::ShadowMapping::draw()
 			{
 				pDrawNode->setShadowTexture(_texture);
 			}
+
+			pDrawNode->setShaderProgram(_renderShaderProgram);
+
+
 			auto it = _setHideNode.find(pDrawNode);
 			if (it != _setHideNode.end())
 			{
@@ -77,6 +102,8 @@ void render::ShadowMapping::draw()
 	}, true);
 
 	_setHideNode.clear();
+
+	DrawNode2D::onDraw();
 }
 
 void render::ShadowMapping::afterDrawNode()
@@ -103,8 +130,8 @@ void render::ShadowMapping::updateShadowMapping()
 
 	_texture->bindTexture();
 	_texture->setTextureStorage(1, TextureInternalSizedFormat::DEPTH_COMPONENT32, width, height);
-	_texture->setTexParameter(TextureParameter::TEXTURE_COMPARE_MODE, GL_COMPARE_REF_TO_TEXTURE);
-	_texture->setTexParameter(TextureParameter::TEXTURE_COMPARE_FUNC, GL_LEQUAL);
+	//_texture->setTexParameter(TextureParameter::TEXTURE_COMPARE_MODE, GL_COMPARE_REF_TO_TEXTURE);
+	//_texture->setTexParameter(TextureParameter::TEXTURE_COMPARE_FUNC, GL_LEQUAL);
 	_texture->applyTextureSetting();
 	_frameBuffer->setTexture(FrameBufferAttachment::DEPTH_ATTACHMENT, _texture->getTextureID(), 0);
 

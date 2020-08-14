@@ -157,24 +157,36 @@ void DrawNode::onDraw()
 		return;
 	}
 
+	uint32_t nVerticeSize = _mesh->getMeshDetail()->getVertices().getSize();
+	if (nVerticeSize == 0)
+	{
+		return;
+	}
+
 	auto program = _material->getShaderProgram();
 
 	if (program != nullptr)
 	{
 		G_UNIFORMSHADERAPPLY->beginApplyWithShader(this, program,  _mesh, _material, _textureCache);
 
+		GLDebug::showError();
 		_mesh->drawWithBufferObject();
 
+		GLDebug::showError();
 		G_UNIFORMSHADERAPPLY->endApplyWithShader(program, _mesh, _material, _textureCache);
 	}
 	else
 	{
 		G_UNIFORMSHADERAPPLY->beginApply(_material, _textureCache);
 
+		GLDebug::showError();
 		_mesh->drawWithClientArray();
 
+		GLDebug::showError();
 		G_UNIFORMSHADERAPPLY->endApply(_material, _textureCache);
 	}
+
+	GLDebug::showError();
 }
 
 void render::DrawNode::afterDraw()
@@ -193,8 +205,48 @@ void render::DrawNode::initBufferObject()
 	_mesh->setMeshDetail(pMeshDetail);
 }
 
-void render::DrawNode::updateBufferData()
+void render::DrawNode::updateMeshData()
 {
+	if (!_mesh)
+	{
+		return;
+	}
+
+	_mesh->setComputeNormal(false);
+	_mesh->setComputeTangent(false);
+
+	if (_material != nullptr)
+	{
+		auto program = _material->getShaderProgram();
+		if (program)
+		{
+			program->use();
+			// 计算法线
+			std::string name = G_UNIFORMSHADERAPPLY->getVertexName(VertexDataType::NORMAL);
+			if (!name.empty())
+			{
+				auto pUnitValue = program->getAttrib(name);
+				if (pUnitValue)
+				{
+					_mesh->setComputeNormal(true);
+				}
+			}
+			
+			// 计算切线
+			name = G_UNIFORMSHADERAPPLY->getVertexName(VertexDataType::TANGENT);
+			if (!name.empty())
+			{
+				auto pUnitValue = program->getAttrib(name);
+				if (pUnitValue)
+				{
+					_mesh->setComputeTangent(true);
+				}
+			}
+			program->unuse();
+		}
+	}
+
+	_mesh->initMeshOtherDetail();
 	_mesh->updateBufferData();
 }
 

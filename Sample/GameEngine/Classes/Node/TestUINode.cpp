@@ -19,13 +19,13 @@ void TestUINode::initNodes()
 {
 	//this->testScissor();
 
-	//this->testScrollView();
+	this->testScrollView();
 
 	//this->testStencil();
 
 	//this->testSequenceFrame();
 
-	this->testImage();
+	//this->testImage();
 }
 
 void TestUINode::testEditBox()
@@ -65,7 +65,7 @@ void TestUINode::testEditBox()
 void TestUINode::testSequenceFrame()
 {
 	CtrlSequenceFrame* pSequenceFrame = CREATE_NODE(CtrlSequenceFrame);
-	Utility::updateNodeShader(pSequenceFrame->getAnimationFrame());
+	Utility::loadDefaultShader(pSequenceFrame->getAnimationFrame());
 	pSequenceFrame->setVolume(1024, 768);
 	pSequenceFrame->setFrameImagePath("Resource/Role/1/20%d.png", 8);
 	pSequenceFrame->setPosition(512, 384, 0);
@@ -138,7 +138,7 @@ void TestUINode::testScissor()
  	pLayout->getBackgroundMask()->setVisible(false);
 	//pLayout->getBackgroundImage()->setVisible(false);
  	pLayout->setBackgroundImage("Resource/Image/1.jpg");
- 	Utility::updateNodeShader(pLayout->getBackgroundImage());
+ 	Utility::loadDefaultShader(pLayout->getBackgroundImage());
 	pLayout->setClip(true);
 	pLayout->setVolume(400, 400, 0);
 	pLayout->setPosition(400, 400);
@@ -149,7 +149,7 @@ void TestUINode::testScissor()
 	pImage->setImagePath("Resource/Image/sqi.png");
 	pImage->setVolume(200, 200, 0);
 	pImage->setScale(1, 1, 1);
-	Utility::updateNodeShader(pImage);
+	Utility::loadDefaultShader(pImage);
 	pLayout->addWidget(pImage, 3);
 }
 
@@ -207,7 +207,7 @@ void TestUINode::testStencil()
 	pImage->setAnchorPoint(0, 0, 0);
 	pImage->setPosition(0, 0, 0.0f);
 	pImage->setScale(1, 1, 1);
-	Utility::updateNodeShader(pImage);
+	Utility::loadDefaultShader(pImage);
 	pStencil->setStencilNode(pImage);
 }
 
@@ -236,7 +236,7 @@ void TestUINode::testImage()
 	{
 		node->as<CtrlImage>()->setRectVisible(false);
 	});
-	Utility::updateNodeShader(pImage);
+	Utility::loadDefaultShader(pImage);
 	this->addChild(pImage);
 	/*
 	auto parent = pImage;

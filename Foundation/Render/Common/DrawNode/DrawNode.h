@@ -112,9 +112,9 @@ namespace render
 		*/
 		virtual void initBufferObject();
 		/**
-		*	更新mesh数据
+		*	更新缓存数据
 		*/
-		virtual void updateBufferData();
+		virtual void updateMeshData();
 	protected:
 		virtual void onColorChange();
 	protected:

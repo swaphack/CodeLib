@@ -1,6 +1,6 @@
 #include "CtrlAudioGeometry.h"
 #include "AudioManager.h"
-#include "Common/DrawNode/PrimitiveNode.h"
+#include "2d/Primitive/PrimitiveNode.h"
 #include "Common/Tool/Tool.h"
 
 #define MAX_POLYGON_COUNT 1

@@ -55,25 +55,29 @@ namespace math
 		/**
 		*	负四元数
 		*/
-		Quaternion negative();
+		Quaternion negative() const;
 		/**
 		*	共轭
 		*	q*= (w, -x, -y, -z)相反的轴旋转相同的量，也可以为q*= (-w, x, y, z)相同的轴旋转相反的量
 		*	一般用(w, -x, -y, -z)表示为单位四元数
 		*/
-		Quaternion conjugate();
+		Quaternion conjugate() const;
 		/**
 		*	四元数的逆
 		*/
-		Quaternion inverse();
+		Quaternion inverse()const;
 		/**
 		*	模
 		*/
-		float getMagnitude();
+		float getMagnitude() const;
 		/**
 		*	单位化
 		*/
-		Quaternion normalize();
+		void normalize();
+		/**
+		*	获取角度
+		*/
+		math::Vector3 eulerAngle() const;
 	public:
 		/**
 		*	相等
@@ -112,5 +116,9 @@ namespace math
 		*	通过四元组，求得矩阵
 		*/
 		static Matrix4x4 mat(const Quaternion& quaternion);
+		/**
+		*	标准化
+		*/
+		static Quaternion normalize(const Quaternion& quaternion);
 	};
 }

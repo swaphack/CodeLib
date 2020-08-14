@@ -1,7 +1,7 @@
 #version 330 core
 
-#include "Shader/core/texture.fs"
-#include "Shader/core/effect.fs"
+#include "Shader/core/frag/texture.fs"
+#include "Shader/core/frag/effect.fs"
 
 uniform Texture tex;
 

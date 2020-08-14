@@ -88,3 +88,8 @@ void CtrlEditBox::onKeyBoardInput(Node* node, sys::BoardKey key, sys::ButtonStat
 
 	editBox->onInputHand(key, type);
 }
+
+void render::CtrlEditBox::draw()
+{
+
+}

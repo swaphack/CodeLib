@@ -29,7 +29,6 @@ bool render::CubeMap::init()
 
 	_notify->addListen(NodeNotifyType::BODY, [this]() {
 		this->onCubeMapBodyChanged();
-		this->updateBufferData();
 	});
 
 	return true;
@@ -131,8 +130,9 @@ void render::CubeMap::onCubeMapBodyChanged()
 		pMesh->getMeshDetail()->setVertices(36, vertices, 3);
 		pMesh->getMeshDetail()->setNormals(36, normals, 3);
 		pMesh->getMeshDetail()->setIndices(36, indices, 1);
-
-		pMesh->initMeshOtherDetail();
 	}
+
+
+	this->updateMeshData();
 }
 

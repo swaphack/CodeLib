@@ -347,6 +347,8 @@ void Node::calSpaceData()
 	Tool::convertToRadian(_rotation, _obRotation);
 
 	calRealSpaceByMatrix();
+
+	calDirectionWithRotate();
 }
 
 void Node::calRealSpaceByMatrix()
@@ -488,6 +490,11 @@ void Node::notify(NodeNotifyType id)
 	setDirty(true);
 }
 
+void render::Node::addNotify(NodeNotifyType id, const NotifyDelegate& handler)
+{
+	_notify->addListen(id, handler);
+}
+
 void render::Node::notifyToAll(NodeNotifyType id)
 {
 	this->notify(id);
@@ -514,4 +521,14 @@ void render::Node::broadcastFunc(const std::function<void(Node*)>& func, bool re
 			(*it)->broadcastFunc(func, recursive);
 		}
 	}
+}
+
+void render::Node::calDirectionWithRotate()
+{
+	math::Matrix4x4 mat; 
+	mat.setRotate(_obRotation);
+
+	setRight(math::Matrix4x4::transpose(getDefaultRight(), mat));
+	setUp(math::Matrix4x4::transpose(getDefaultUp(), mat));
+	setFront(math::Matrix4x4::transpose(getDefaultFront(), mat));
 }

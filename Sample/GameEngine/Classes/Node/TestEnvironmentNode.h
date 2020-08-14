@@ -14,6 +14,8 @@ protected:
 	void init2DSkyBox();
 
 	void testCamera();
+
+	void addGrid();
 private:
 	int _viewType = 0;
 

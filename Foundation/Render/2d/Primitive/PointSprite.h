@@ -1,16 +1,16 @@
 #pragma once
 
-#include "CtrlAnimation.h"
+#include "PrimitiveNode.h"
 
 namespace render
 {
 	class Texture2D;
 
-	class CtrlPointSprite : public CtrlAnimation
+	class PointSprite : public PrimitiveNode
 	{
 	public:
-		CtrlPointSprite();
-		virtual ~CtrlPointSprite();
+		PointSprite();
+		virtual ~PointSprite();
 	public:
 		virtual bool init();
 	public:
@@ -22,14 +22,6 @@ namespace render
 		*	精灵数
 		*/
 		int getSpriteCount() const;
-		/**
-		*	大小
-		*/
-		void setPointSize(int size);
-		/**
-		*	大小
-		*/
-		int getPointSize() const;
 	protected:
 		/**
 		*	更新点精灵
@@ -48,9 +40,5 @@ namespace render
 		*	精灵数
 		*/
 		int _spriteCount = 1;
-		/**
-		*	大小
-		*/
-		int _pointSize = 1;
 	};
 }

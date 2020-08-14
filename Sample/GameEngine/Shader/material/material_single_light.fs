@@ -1,8 +1,8 @@
 #version 330 core
 
-#include "Shader/core/light.fs"
-#include "Shader/core/material.fs"
-#include "Shader/core/env.fs"
+#include "Shader/core/frag/light.fs"
+#include "Shader/core/frag/material.fs"
+#include "Shader/core/frag/env.fs"
 
 uniform Light light;
 uniform Material material;

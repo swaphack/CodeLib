@@ -22,6 +22,8 @@ namespace render
 		CtrlEditBox();
 		virtual ~CtrlEditBox();
 	public:
+		virtual void draw();
+	public:
 		// 设置键盘是否相应
 		void setKeyboardEnable(bool status);
 		// 获取键盘相应状态

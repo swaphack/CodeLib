@@ -14,12 +14,14 @@
 
 #ifdef REALSE
 #define PRINT(FORMAT, ...)
+#define PRINTLN(FORMAT, ...)
 #else
-#define PRINT(FORMAT, ...) printf(FORMAT, __VA_ARGS__)
+#define PRINT(FORMAT, ...) printf(FORMAT, __VA_ARGS__);
+#define PRINTLN(FORMAT, ...) {printf(FORMAT, __VA_ARGS__);printf("\n");}
 #endif
 
 #define LOG_FILENAME "log"
-#define LOG(FORMAT, ...)  printf(FORMAT, __VA_ARGS__)
+#define LOG(FORMAT, ...)  printf(FORMAT, __VA_ARGS__);
 
 
 // ÊÇ·ñ´óÐ´×ÖÄ¸

@@ -12,6 +12,7 @@
 #include "Common/DrawNode/DrawTextureCache.h"
 #include "system.h"
 #include "Common/Material/import.h"
+#include "2d/Primitive/PrimitiveNode.h"
 
 render::UniformShaderApply::UniformShaderApply()
 {
@@ -30,6 +31,7 @@ void render::UniformShaderApply::startUpdateShaderUniformValue(Node* node, Shade
 		return;
 	}
 
+	updateEnvUniformVallue(node, program);
 	updateMVPMatrixUniformValue(node, program);
 
 	applyLightShader(node, program);
@@ -52,10 +54,11 @@ void render::UniformShaderApply::startUpdateShaderVertexValue(ShaderProgram* pro
 
 	auto detail = pMesh->getMeshDetail();
 	auto vao = pMesh->getVertexArrayObject();
-
+	GLDebug::showError();
 	vao->bindVertexArray();
+	GLDebug::showError();
 	vao->bindBuffer();
-
+	GLDebug::showError();
 	const sys::MeshMemoryData& vertices = detail->getVertices();
 	const sys::MeshMemoryData& colors = detail->getColors();
 	const sys::MeshMemoryData& texcoords = detail->getUVs();
@@ -73,91 +76,94 @@ void render::UniformShaderApply::startUpdateShaderVertexValue(ShaderProgram* pro
 	int nOffset = 0;
 	for (auto item : _vertexAttribIndices)
 	{
-
 		if (item.first == VertexDataType::POSITION)
 		{
+			if (nVerticeSize == 0)
+			{
+				return;
+			}
 			auto pAttrib = program->getAttrib(item.second);
 			if (pAttrib)
 			{
 				VertexAttribPointer* pointer = vao->getVertexAttrib<VertexAttribPointer>(pAttrib->getAttribID());
-				if (nVerticeSize > 0)
-				{
-					pointer->enableVertexArrayAttrib();
-					pointer->setVertexAttribPointer(vertices.getUnitSize(), VertexAttribPointerType::FLOAT, nOffset);
-				}
+				pointer->enableVertexArrayAttrib();
+				pointer->setVertexAttribPointer(vertices.getUnitSize(), VertexAttribPointerType::FLOAT, nOffset);
 			}
 
 			nOffset += nVerticeSize;
 		}
 		else if (item.first == VertexDataType::COLOR)
 		{
+			if (nColorSize == 0)
+			{
+				continue;
+			}
 			auto pAttrib = program->getAttrib(item.second);
 			if (pAttrib)
 			{
 				VertexAttribPointer* pointer = vao->getVertexAttrib<VertexAttribPointer>(pAttrib->getAttribID());
-
-				if (nColorSize > 0)
-				{
-					pointer->enableVertexArrayAttrib();
-					pointer->setVertexAttribPointer(colors.getUnitSize(), VertexAttribPointerType::FLOAT, nOffset);
-				}
+				pointer->enableVertexArrayAttrib();
+				pointer->setVertexAttribPointer(colors.getUnitSize(), VertexAttribPointerType::FLOAT, nOffset);
 			}
 			nOffset += nColorSize;
 		}
 		else if (item.first == VertexDataType::UV)
 		{
+			if (nUVSize == 0)
+			{
+				continue;
+			}
 			auto pAttrib = program->getAttrib(item.second);
 			if (pAttrib)
 			{
 				VertexAttribPointer* pointer = vao->getVertexAttrib<VertexAttribPointer>(pAttrib->getAttribID());
-				if (nUVSize > 0)
-				{
-					pointer->enableVertexArrayAttrib();
-					pointer->setVertexAttribPointer(texcoords.getUnitSize(), VertexAttribPointerType::FLOAT, nOffset);
-				}
+				pointer->enableVertexArrayAttrib();
+				pointer->setVertexAttribPointer(texcoords.getUnitSize(), VertexAttribPointerType::FLOAT, nOffset);
 			}
 			nOffset += nUVSize;
 		}
 		else if (item.first == VertexDataType::NORMAL)
 		{
+			if (nNormalSize == 0)
+			{
+				continue;
+			}
 			auto pAttrib = program->getAttrib(item.second);
 			if (pAttrib)
 			{
 				VertexAttribPointer* pointer = vao->getVertexAttrib<VertexAttribPointer>(pAttrib->getAttribID());
-				if (nNormalSize > 0)
-				{
-					pointer->enableVertexArrayAttrib();
-					pointer->setVertexAttribPointer(normals.getUnitSize(), VertexAttribPointerType::FLOAT, nOffset);
-				}
+				pointer->enableVertexArrayAttrib();
+				pointer->setVertexAttribPointer(normals.getUnitSize(), VertexAttribPointerType::FLOAT, nOffset);
 			}
 			nOffset += nNormalSize;
 		}
 		else if (item.first == VertexDataType::TANGENT)
 		{
+			if (nTangentSize == 0)
+			{
+				continue;
+			}
 			auto pAttrib = program->getAttrib(item.second);
 			if (pAttrib)
 			{
 				VertexAttribPointer* pointer = vao->getVertexAttrib<VertexAttribPointer>(pAttrib->getAttribID());
-				if (nTangentSize > 0)
-				{
-					pointer->enableVertexArrayAttrib();
-					pointer->setVertexAttribPointer(tangents.getUnitSize(), VertexAttribPointerType::FLOAT, nOffset);
-
-				}
+				pointer->enableVertexArrayAttrib();
+				pointer->setVertexAttribPointer(tangents.getUnitSize(), VertexAttribPointerType::FLOAT, nOffset);
 			}
 			nOffset += nTangentSize;
 		}
 		else if (item.first == VertexDataType::BITANGENT)
 		{
+			if (nBitangentSize == 0)
+			{
+				continue;
+			}
 			auto pAttrib = program->getAttrib(item.second);
 			if (pAttrib)
 			{
 				VertexAttribPointer* pointer = vao->getVertexAttrib<VertexAttribPointer>(pAttrib->getAttribID());
-				if (nBitangentSize > 0)
-				{
-					pointer->enableVertexArrayAttrib();
-					pointer->setVertexAttribPointer(bitangents.getUnitSize(), VertexAttribPointerType::FLOAT, nOffset);
-				}
+				pointer->enableVertexArrayAttrib();
+				pointer->setVertexAttribPointer(bitangents.getUnitSize(), VertexAttribPointerType::FLOAT, nOffset);
 			}
 			nOffset += nBitangentSize;
 		}
@@ -169,131 +175,8 @@ void render::UniformShaderApply::startUpdateShaderVertexValue(ShaderProgram* pro
 
 void render::UniformShaderApply::endUpdateShaderUniformValue(ShaderProgram* program, Material* pMaterial, DrawTextureCache* textureCache)
 {
-	if (program == nullptr || pMaterial == nullptr)
-	{
-		return;
-	}
-
-	const auto pDetail = pMaterial->getMaterialDetail();
-	if (pDetail == nullptr)
-	{
-		return;
-	}
-	for (auto item : _vertexUniformIndices)
-	{
-		auto pUniform = program->getUniform(item.second);
-		if (!pUniform)
-		{
-			continue;
-		}
-		if (item.first == UniformType::TEXTURE0)
-		{
-			auto pTexture = textureCache->getTexture(pDetail->getAmbientTextureMap());
-			if (pTexture)
-			{
-				pTexture->unbindTexture();
-				GLState::disable((EnableMode)pTexture->getTextureTarget());
-			}
-
-			GLDebug::showError();
-		}
-		else if (item.first == UniformType::TEXTURE1)
-		{
-			auto pTexture = textureCache->getTexture(pDetail->getDiffuseTextureMap());
-			if (pTexture)
-			{
-				pTexture->unbindTexture();
-				GLState::disable((EnableMode)pTexture->getTextureTarget());
-			}
-
-			GLDebug::showError();
-		}
-		else if (item.first == UniformType::TEXTURE2)
-		{
-			auto pTexture = textureCache->getTexture(pDetail->getSpecularTextureMap());
-			if (pTexture)
-			{
-				pTexture->unbindTexture();
-				GLState::disable((EnableMode)pTexture->getTextureTarget());
-			}
-			GLDebug::showError();
-		}
-		else if (item.first == UniformType::MATERIAL_TEXTURE)
-		{
-			auto pTexture = textureCache->getTexture(pDetail->getAmbientTextureMap());
-			if (pTexture)
-			{
-				pTexture->unbindTexture();
-				GLState::disable((EnableMode)pTexture->getTextureTarget());
-			}
-
-			GLDebug::showError();
-		}
-		else if (item.first == UniformType::MATERIAL_TEXTURE_DIFFUSE)
-		{
-			auto pTexture = textureCache->getTexture(pDetail->getDiffuseTextureMap());
-			if (pTexture)
-			{
-				pTexture->unbindTexture();
-				GLState::disable((EnableMode)pTexture->getTextureTarget());
-			}
-
-			GLDebug::showError();
-		}
-		else if (item.first == UniformType::MATERIAL_TEXTURE_SPECULAR)
-		{
-			auto pTexture = textureCache->getTexture(pDetail->getSpecularTextureMap());
-			if (pTexture)
-			{
-				pTexture->unbindTexture();
-				GLState::disable((EnableMode)pTexture->getTextureTarget());
-			}
-			GLDebug::showError();
-		}
-		else if (item.first == UniformType::MATERIAL_TEXTURE_ALPHA)
-		{
-			auto pTexture = textureCache->getTexture(pDetail->getAlphaTextureMap());
-			if (pTexture)
-			{
-				pTexture->unbindTexture();
-				GLState::disable((EnableMode)pTexture->getTextureTarget());
-			}
-			GLDebug::showError();
-		}
-		else if (item.first == UniformType::MATERIAL_TEXTURE_BUMP)
-		{
-			auto pTexture = textureCache->getTexture(pDetail->getBumpTextureMap());
-			if (pTexture)
-			{
-				pTexture->unbindTexture();
-				GLState::disable((EnableMode)pTexture->getTextureTarget());
-			}
-			GLDebug::showError();
-		}
-		else if (item.first == UniformType::MATERIAL_TEXTURE_NORMAL)
-		{
-			auto pTexture = textureCache->getTexture(pDetail->getNormalTextureMap());
-			if (pTexture)
-			{
-				pTexture->unbindTexture();
-				GLState::disable((EnableMode)pTexture->getTextureTarget());
-			}
-			GLDebug::showError();
-		}
-		else if (item.first == UniformType::MATERIAL_TEXTURE_SHADOW)
-		{
-			auto pTexture = textureCache->getTexture(pDetail->getShadowTextureMap());
-			if (pTexture)
-			{
-				pTexture->unbindTexture();
-				GLState::disable((EnableMode)pTexture->getTextureTarget());
-			}
-			GLDebug::showError();
-		}
-
-		GLDebug::showError();
-	}
-	GLDebug::showError();
+	releaseMaterialUniformValue(program, pMaterial, textureCache);
+	releaseTextureUniformValue(program, pMaterial, textureCache);
 }
 
 void render::UniformShaderApply::endUpdateShaderVertexValue(ShaderProgram* program, Mesh* pMesh)
@@ -324,6 +207,44 @@ void render::UniformShaderApply::endUpdateShaderVertexValue(ShaderProgram* progr
 	vao->unbindBuffer();
 }
 
+void render::UniformShaderApply::updateEnvUniformVallue(Node* node, ShaderProgram* program)
+{
+	if (program == nullptr || node == nullptr)
+	{
+		return;
+	}
+	math::Matrix4x4 viewMat = Camera::getMainCamera()->getViewMatrix();
+	math::Vector3 viewPos = viewMat.getPosition();
+	for (auto item : _mapEnvUniform)
+	{
+		auto pUniform = program->getUniform(item.second);
+		if (!pUniform)
+		{
+			continue;
+		}
+		if (item.first == EnvUniformType::VIEW_POSITION)
+		{
+			pUniform->setValue3(1, viewPos.getValue());
+		}
+		else if (item.first == EnvUniformType::LIGHT_COUNT)
+		{
+			pUniform->setValue((int)G_ENVIRONMENT->getAllLights().size());
+		}	
+		else if (item.first == EnvUniformType::GAMMA)
+		{
+			pUniform->setValue(G_ENVIRONMENT->getGamma());
+		}
+		else if (item.first == EnvUniformType::POINT_SIZE)
+		{
+			auto pPrimitiveNode = node->as<PrimitiveNode>();
+			if (pPrimitiveNode)
+			{
+				pUniform->setValue(pPrimitiveNode->getPointSize());
+			}
+		}
+	}
+}
+
 void render::UniformShaderApply::updateMVPMatrixUniformValue(Node* node, ShaderProgram* program)
 {
 	if (program == nullptr || node == nullptr)
@@ -336,46 +257,32 @@ void render::UniformShaderApply::updateMVPMatrixUniformValue(Node* node, ShaderP
 	math::Matrix4x4 modelMat = getWorldMatrix(node);
 
 	math::Matrix3x3 normalMat = modelMat.getInverse().getTranspose();
-	math::Matrix4x4 mvpMat = projMat * viewMat * modelMat;
-	math::Matrix4x4 mvMat = viewMat * modelMat;
 
 	math::Vector3 viewPos = viewMat.getPosition();
 	//viewPos.setZ(-viewPos.getZ());
 
-	for (auto item : _vertexUniformIndices)
+	for (auto item : _mapMatrixUniform)
 	{
 		auto pUniform = program->getUniform(item.second);
 		if (!pUniform)
 		{
 			continue;
 		}
-		if (item.first == UniformType::VIEW_POSITION)
-		{
-			pUniform->setValue3(1, viewPos.getValue());
-		}
-		else if (item.first == UniformType::PROJECT_MATRIX)
+		if (item.first == MatrixUniformType::PROJECT_MATRIX)
 		{
 			pUniform->setMatrix4(projMat);
 		}
-		else if (item.first == UniformType::VIEW_MATRIX)
+		else if (item.first == MatrixUniformType::VIEW_MATRIX)
 		{
 			pUniform->setMatrix4(viewMat);
 		}
-		else if (item.first == UniformType::MODEL_MATRIX)
+		else if (item.first == MatrixUniformType::MODEL_MATRIX)
 		{
 			pUniform->setMatrix4(modelMat);
 		}
-		else if (item.first == UniformType::NORMAL_MATRIX)
+		else if (item.first == MatrixUniformType::NORMAL_MATRIX)
 		{
 			pUniform->setMatrix3(normalMat);
-		}
-		else if (item.first == UniformType::MVP_MATRIX)
-		{
-			pUniform->setMatrix4(mvpMat);
-		}
-		else if (item.first == UniformType::MV_MATRIX)
-		{
-			pUniform->setMatrix4(mvMat);
 		}
 
 		GLDebug::showError();
@@ -394,30 +301,30 @@ void render::UniformShaderApply::updateMaterialUniformValue(ShaderProgram* progr
 		return;
 	}
 	GLDebug::showError();
-	for (auto item : _vertexUniformIndices)
+	for (auto item : _mapMaterialUniform)
 	{
 		auto pUniform = program->getUniform(item.second);
 		if (!pUniform)
 		{
 			continue;
 		}
-		if (item.first == UniformType::MATERIAL_EMISSION)
+		if (item.first == MaterialUniformType::MATERIAL_EMISSION)
 		{
 			pUniform->setValue4(1, pDetail->getEmission());
 		}
-		else if (item.first == UniformType::MATERIAL_COLOR_AMBIENT)
+		else if (item.first == MaterialUniformType::MATERIAL_COLOR_AMBIENT)
 		{
 			pUniform->setValue4(1, pDetail->getAmbient());
 		}
-		else if (item.first == UniformType::MATERIAL_COLOR_DIFFUSE)
+		else if (item.first == MaterialUniformType::MATERIAL_COLOR_DIFFUSE)
 		{
 			pUniform->setValue4(1, pDetail->getDiffuse());
 		}
-		else if (item.first == UniformType::MATERIAL_COLOR_SPECULAR)
+		else if (item.first == MaterialUniformType::MATERIAL_COLOR_SPECULAR)
 		{
 			pUniform->setValue4(1, pDetail->getSpecular());
 		}
-		else if (item.first == UniformType::MATERIAL_TEXTURE)
+		else if (item.first == MaterialUniformType::MATERIAL_TEXTURE)
 		{
 			auto pTexture = textureCache->getTexture(pDetail->getAmbientTextureMap());
 			if (pTexture == nullptr)
@@ -433,7 +340,7 @@ void render::UniformShaderApply::updateMaterialUniformValue(ShaderProgram* progr
 			}
 			GLDebug::showError();
 		}
-		else if (item.first == UniformType::MATERIAL_TEXTURE_DIFFUSE)
+		else if (item.first == MaterialUniformType::MATERIAL_TEXTURE_DIFFUSE)
 		{
 			auto pTexture = textureCache->getTexture(pDetail->getDiffuseTextureMap());
 			if (pTexture == nullptr)
@@ -449,7 +356,7 @@ void render::UniformShaderApply::updateMaterialUniformValue(ShaderProgram* progr
 			}
 			GLDebug::showError();
 		}
-		else if (item.first == UniformType::MATERIAL_TEXTURE_SPECULAR)
+		else if (item.first == MaterialUniformType::MATERIAL_TEXTURE_SPECULAR)
 		{
 			auto pTexture = textureCache->getTexture(pDetail->getSpecularTextureMap());
 			if (pTexture == nullptr)
@@ -465,7 +372,7 @@ void render::UniformShaderApply::updateMaterialUniformValue(ShaderProgram* progr
 			}
 			GLDebug::showError();
 		}
-		else if (item.first == UniformType::MATERIAL_TEXTURE_ALPHA)
+		else if (item.first == MaterialUniformType::MATERIAL_TEXTURE_ALPHA)
 		{
 			auto pTexture = textureCache->getTexture(pDetail->getAlphaTextureMap());
 			if (pTexture == nullptr)
@@ -481,7 +388,7 @@ void render::UniformShaderApply::updateMaterialUniformValue(ShaderProgram* progr
 			}
 			GLDebug::showError();
 		}
-		else if (item.first == UniformType::MATERIAL_TEXTURE_BUMP)
+		else if (item.first == MaterialUniformType::MATERIAL_TEXTURE_BUMP)
 		{
 			auto pTexture = textureCache->getTexture(pDetail->getBumpTextureMap());
 			if (pTexture == nullptr)
@@ -497,7 +404,7 @@ void render::UniformShaderApply::updateMaterialUniformValue(ShaderProgram* progr
 			}
 			GLDebug::showError();
 		}
-		else if (item.first == UniformType::MATERIAL_TEXTURE_NORMAL)
+		else if (item.first == MaterialUniformType::MATERIAL_TEXTURE_NORMAL)
 		{
 			auto pTexture = textureCache->getTexture(pDetail->getNormalTextureMap());
 			if (pTexture == nullptr)
@@ -513,7 +420,7 @@ void render::UniformShaderApply::updateMaterialUniformValue(ShaderProgram* progr
 			}
 			GLDebug::showError();
 		}
-		else if (item.first == UniformType::MATERIAL_TEXTURE_SHADOW)
+		else if (item.first == MaterialUniformType::MATERIAL_TEXTURE_SHADOW)
 		{
 			auto pTexture = textureCache->getTexture(pDetail->getShadowTextureMap());
 			if (pTexture == nullptr)
@@ -529,11 +436,11 @@ void render::UniformShaderApply::updateMaterialUniformValue(ShaderProgram* progr
 			}
 			GLDebug::showError();
 		}
-		else if (item.first == UniformType::MATERIAL_SHININESS)
+		else if (item.first == MaterialUniformType::MATERIAL_SHININESS)
 		{
 			pUniform->setValue(pDetail->getSpecularShiness());
 		}
-		else if (item.first == UniformType::MATERIAL_STRENGTH)
+		else if (item.first == MaterialUniformType::MATERIAL_STRENGTH)
 		{
 			pUniform->setValue(pDetail->getSpecularStrength());
 		}
@@ -551,14 +458,21 @@ void render::UniformShaderApply::updateTexturesUnifromValue(ShaderProgram* progr
 	{
 		return;
 	}
-	for (auto item : _vertexUniformIndices)
+	for (auto item : _mapTextureUniform)
 	{
 		auto pUniform = program->getUniform(item.second);
 		if (!pUniform)
 		{
-			continue;
+			if (item.first == TextureUniformType::TEXTURE0)
+			{
+				return;
+			}
+			else
+			{
+				continue;
+			}
 		}
-		if (item.first == UniformType::TEXTURE0)
+		if (item.first == TextureUniformType::TEXTURE0)
 		{
 			auto pTexture = textureCache->getTexture(pDetail->getAmbientTextureMap());
 			if (pTexture == nullptr)
@@ -573,7 +487,7 @@ void render::UniformShaderApply::updateTexturesUnifromValue(ShaderProgram* progr
 				pUniform->setValue(0);
 			}
 		}
-		else if (item.first == UniformType::TEXTURE1)
+		else if (item.first == TextureUniformType::TEXTURE1)
 		{
 			auto pTexture = textureCache->getTexture(pDetail->getDiffuseTextureMap());
 			if (pTexture == nullptr)
@@ -590,7 +504,7 @@ void render::UniformShaderApply::updateTexturesUnifromValue(ShaderProgram* progr
 
 			GLDebug::showError();
 		}
-		else if (item.first == UniformType::TEXTURE2)
+		else if (item.first == TextureUniformType::TEXTURE2)
 		{
 			auto pTexture = textureCache->getTexture(pDetail->getSpecularTextureMap());
 			if (pTexture == nullptr)
@@ -604,6 +518,157 @@ void render::UniformShaderApply::updateTexturesUnifromValue(ShaderProgram* progr
 				pTexture->enableTextureWithSampler(2);
 				pUniform->setValue(2);
 			}
+		}
+	}
+}
+
+void render::UniformShaderApply::releaseMaterialUniformValue(ShaderProgram* program, Material* pMaterial, DrawTextureCache* textureCache)
+{
+	if (program == nullptr || pMaterial == nullptr)
+	{
+		return;
+	}
+
+	const auto pDetail = pMaterial->getMaterialDetail();
+	if (pDetail == nullptr)
+	{
+		return;
+	}
+	for (auto item : _mapMaterialUniform)
+	{
+		auto pUniform = program->getUniform(item.second);
+		if (!pUniform)
+		{
+			continue;
+		}
+		if (item.first == MaterialUniformType::MATERIAL_TEXTURE)
+		{
+			auto pTexture = textureCache->getTexture(pDetail->getAmbientTextureMap());
+			if (pTexture)
+			{
+				pTexture->unbindTexture();
+				GLState::disable((EnableMode)pTexture->getTextureTarget());
+			}
+
+			GLDebug::showError();
+		}
+		else if (item.first == MaterialUniformType::MATERIAL_TEXTURE_DIFFUSE)
+		{
+			auto pTexture = textureCache->getTexture(pDetail->getDiffuseTextureMap());
+			if (pTexture)
+			{
+				pTexture->unbindTexture();
+				GLState::disable((EnableMode)pTexture->getTextureTarget());
+			}
+
+			GLDebug::showError();
+		}
+		else if (item.first == MaterialUniformType::MATERIAL_TEXTURE_SPECULAR)
+		{
+			auto pTexture = textureCache->getTexture(pDetail->getSpecularTextureMap());
+			if (pTexture)
+			{
+				pTexture->unbindTexture();
+				GLState::disable((EnableMode)pTexture->getTextureTarget());
+			}
+			GLDebug::showError();
+		}
+		else if (item.first == MaterialUniformType::MATERIAL_TEXTURE_ALPHA)
+		{
+			auto pTexture = textureCache->getTexture(pDetail->getAlphaTextureMap());
+			if (pTexture)
+			{
+				pTexture->unbindTexture();
+				GLState::disable((EnableMode)pTexture->getTextureTarget());
+			}
+			GLDebug::showError();
+		}
+		else if (item.first == MaterialUniformType::MATERIAL_TEXTURE_BUMP)
+		{
+			auto pTexture = textureCache->getTexture(pDetail->getBumpTextureMap());
+			if (pTexture)
+			{
+				pTexture->unbindTexture();
+				GLState::disable((EnableMode)pTexture->getTextureTarget());
+			}
+			GLDebug::showError();
+		}
+		else if (item.first == MaterialUniformType::MATERIAL_TEXTURE_NORMAL)
+		{
+			auto pTexture = textureCache->getTexture(pDetail->getNormalTextureMap());
+			if (pTexture)
+			{
+				pTexture->unbindTexture();
+				GLState::disable((EnableMode)pTexture->getTextureTarget());
+			}
+			GLDebug::showError();
+		}
+		else if (item.first == MaterialUniformType::MATERIAL_TEXTURE_SHADOW)
+		{
+			auto pTexture = textureCache->getTexture(pDetail->getShadowTextureMap());
+			if (pTexture)
+			{
+				pTexture->unbindTexture();
+				GLState::disable((EnableMode)pTexture->getTextureTarget());
+			}
+			GLDebug::showError();
+		}
+
+		GLDebug::showError();
+	}
+	GLDebug::showError();
+}
+
+void render::UniformShaderApply::releaseTextureUniformValue(ShaderProgram* program, Material* pMaterial, DrawTextureCache* textureCache)
+{
+	if (program == nullptr || pMaterial == nullptr)
+	{
+		return;
+	}
+
+	const auto pDetail = pMaterial->getMaterialDetail();
+	if (pDetail == nullptr)
+	{
+		return;
+	}
+	for (auto item : _mapTextureUniform)
+	{
+		auto pUniform = program->getUniform(item.second);
+		if (!pUniform)
+		{
+			continue;
+		}
+		if (item.first == TextureUniformType::TEXTURE0)
+		{
+			auto pTexture = textureCache->getTexture(pDetail->getAmbientTextureMap());
+			if (pTexture)
+			{
+				pTexture->unbindTexture();
+				GLState::disable((EnableMode)pTexture->getTextureTarget());
+			}
+
+			GLDebug::showError();
+		}
+		else if (item.first == TextureUniformType::TEXTURE1)
+		{
+			auto pTexture = textureCache->getTexture(pDetail->getDiffuseTextureMap());
+			if (pTexture)
+			{
+				pTexture->unbindTexture();
+				GLState::disable((EnableMode)pTexture->getTextureTarget());
+			}
+
+			GLDebug::showError();
+		}
+		else if (item.first == TextureUniformType::TEXTURE2)
+		{
+			auto pTexture = textureCache->getTexture(pDetail->getSpecularTextureMap());
+			if (pTexture)
+			{
+				pTexture->unbindTexture();
+				GLState::disable((EnableMode)pTexture->getTextureTarget());
+			}
+			GLDebug::showError();
 		}
 	}
 }
@@ -688,11 +753,13 @@ void render::UniformShaderApply::beginApplyWithShader(Node* node, ShaderProgram*
 	}
 
 	program->use();
-
+	GLDebug::showError();
 	this->startUpdateShaderUniformValue(node, program, pMesh, pMaterial, textureCache);
+	GLDebug::showError();
 	this->startUpdateShaderVertexValue(program, pMesh);
-
+	GLDebug::showError();
 	pMaterial->runProgramFunc();
+	GLDebug::showError();
 }
 
 void render::UniformShaderApply::endApplyWithShader(ShaderProgram* program, Mesh* pMesh, Material* pMaterial, DrawTextureCache* textureCache)
@@ -734,7 +801,7 @@ void render::UniformShaderApply::applyLightShader(Node* node, ShaderProgram* pro
 
 void render::UniformShaderApply::updateNearestLightUniformValue(Node* node, ShaderProgram* program)
 {
-	if (node == nullptr)
+	if (node == nullptr || program == nullptr)
 	{
 		return;
 	}
@@ -783,7 +850,7 @@ void render::UniformShaderApply::updateNearestLightUniformValue(Node* node, Shad
 		bSupportShadow = node->as<LightProtocol>()->isCastShadow();
 	}
 
-	for (auto item : _vertexUniformIndices)
+	for (auto item : _mapSingleLightUniform)
 	{
 		auto pUniform = program->getUniform(item.second);
 		if (!pUniform)
@@ -791,11 +858,11 @@ void render::UniformShaderApply::updateNearestLightUniformValue(Node* node, Shad
 			continue;
 		}
 
-		if (item.first == UniformType::LIGHT_ENABLED)
+		if (item.first == SingleLightUniformType::LIGHT_ENABLED)
 		{
 			pUniform->setValue(1);
 		}
-		else if (item.first == UniformType::LIGHT_LOCAL)
+		else if (item.first == SingleLightUniformType::LIGHT_LOCAL)
 		{
 			if (pLight->is<PointLight>() || pLight->is<SpotLight>())
 			{
@@ -806,15 +873,15 @@ void render::UniformShaderApply::updateNearestLightUniformValue(Node* node, Shad
 				pUniform->setValue(0);
 			}
 		}
-		else if (item.first == UniformType::LIGHT_SPOT)
+		else if (item.first == SingleLightUniformType::LIGHT_SPOT)
 		{
 			pUniform->setValue(pLight->is<SpotLight>() ? 1 : 0);
 		}
-		else if (item.first == UniformType::LIGHT_POSITION)
+		else if (item.first == SingleLightUniformType::LIGHT_POSITION)
 		{
 			pUniform->setValue3(1, lightPos.getValue());
 		}
-		else if (item.first == UniformType::LIGHT_DIRECTION)
+		else if (item.first == SingleLightUniformType::LIGHT_DIRECTION)
 		{
 			auto pPointLight = pLight->as<PointLight>();
 			if (pPointLight)
@@ -835,19 +902,19 @@ void render::UniformShaderApply::updateNearestLightUniformValue(Node* node, Shad
 				}
 			}
 		}
-		else if (item.first == UniformType::LIGHT_HALF_VECTOR)
+		else if (item.first == SingleLightUniformType::LIGHT_HALF_VECTOR)
 		{
 			pUniform->setValue3(1, halfVector.getValue());
 		}
-		else if (item.first == UniformType::LIGHT_COLOR)
+		else if (item.first == SingleLightUniformType::LIGHT_COLOR)
 		{
 			pUniform->setValue4(1, pLight->getColor());
 		}
-		else if (item.first == UniformType::LIGHT_AMBIENT)
+		else if (item.first == SingleLightUniformType::LIGHT_AMBIENT)
 		{
 			pUniform->setValue4(1, pLight->getAmbient());
 		}
-		else if (item.first == UniformType::LIGHT_SPOT_EXPONENT)
+		else if (item.first == SingleLightUniformType::LIGHT_SPOT_EXPONENT)
 		{
 			auto pSpotLight = pLight->as<SpotLight>();
 			if (pSpotLight)
@@ -855,7 +922,7 @@ void render::UniformShaderApply::updateNearestLightUniformValue(Node* node, Shad
 				pUniform->setValue(pSpotLight->getExponent());
 			}
 		}
-		else if (item.first == UniformType::LIGHT_SPOT_COST_CUTOFF)
+		else if (item.first == SingleLightUniformType::LIGHT_SPOT_COST_CUTOFF)
 		{
 			auto pSpotLight = pLight->as<SpotLight>();
 			if (pSpotLight)
@@ -863,7 +930,7 @@ void render::UniformShaderApply::updateNearestLightUniformValue(Node* node, Shad
 				pUniform->setValue(pSpotLight->getCutOff());
 			}
 		}
-		else if (item.first == UniformType::LIGHT_CONSTANT_ATTENUATION)
+		else if (item.first == SingleLightUniformType::LIGHT_CONSTANT_ATTENUATION)
 		{
 			auto pPointLight = pLight->as<PointLight>();
 			if (pPointLight)
@@ -871,7 +938,7 @@ void render::UniformShaderApply::updateNearestLightUniformValue(Node* node, Shad
 				pUniform->setValue(pPointLight->getConstantAttenuation());
 			}
 		}
-		else if (item.first == UniformType::LIGHT_LINEAR_ATTENUATION)
+		else if (item.first == SingleLightUniformType::LIGHT_LINEAR_ATTENUATION)
 		{
 			auto pPointLight = pLight->as<PointLight>();
 			if (pPointLight)
@@ -879,7 +946,7 @@ void render::UniformShaderApply::updateNearestLightUniformValue(Node* node, Shad
 				pUniform->setValue(pPointLight->getLinearAttenuation());
 			}
 		}
-		else if (item.first == UniformType::LIGHT_QUADRATIC_ATTENUATION)
+		else if (item.first == SingleLightUniformType::LIGHT_QUADRATIC_ATTENUATION)
 		{
 			auto pPointLight = pLight->as<PointLight>();
 			if (pPointLight)
@@ -887,7 +954,7 @@ void render::UniformShaderApply::updateNearestLightUniformValue(Node* node, Shad
 				pUniform->setValue(pPointLight->getQuadraticAttenuation());
 			}
 		}
-		else if (item.first == UniformType::LIGHT_SPACE_MATRIX)
+		else if (item.first == SingleLightUniformType::LIGHT_SPACE_MATRIX)
 		{
 			if (bSupportShadow)
 			{
@@ -919,19 +986,6 @@ void render::UniformShaderApply::updateAllLightsUniformValue(Node* node, ShaderP
 	const auto& mapLights = G_ENVIRONMENT->getAllLights();
 
 	const math::Matrix4x4& viewMat = Camera::getMainCamera()->getViewMatrix();
-	auto it = _vertexUniformIndices.find(UniformType::MULTI_LIGHT_COUNT);
-	if (it == _vertexUniformIndices.end())
-	{
-		return;
-	}
-	const std::string strCount = it->second;
-	auto pUniform = program->getUniform(strCount);
-	if (!pUniform)
-	{
-		return;
-	}
-	pUniform->setValue((int)mapLights.size());
-
 	bool bSupportShadow = false;
 	if (node->is<LightProtocol>())
 	{
@@ -955,7 +1009,7 @@ void render::UniformShaderApply::updateAllLightsUniformValue(Node* node, ShaderP
 		math::Vector3 halfVector = lightDirection + viewDirection;
 		
 
-		for (auto item : _vertexUniformIndices)
+		for (auto item : _mapMultiLightsUniform)
 		{
 			std::string text = getCString(item.second.c_str(), index);
 			auto pUniform = program->getUniform(text);
@@ -963,11 +1017,11 @@ void render::UniformShaderApply::updateAllLightsUniformValue(Node* node, ShaderP
 			{
 				continue;
 			}
-			else if (item.first == UniformType::MULTI_LIGHT_ENABLED)
+			else if (item.first == MultiLightsUniformType::MULTI_LIGHT_ENABLED)
 			{
 				pUniform->setValue(1);
 			}
-			else if (item.first == UniformType::MULTI_LIGHT_LOCAL)
+			else if (item.first == MultiLightsUniformType::MULTI_LIGHT_LOCAL)
 			{
 				if (pLight->is<PointLight>() || pLight->is<SpotLight>())
 				{
@@ -978,15 +1032,15 @@ void render::UniformShaderApply::updateAllLightsUniformValue(Node* node, ShaderP
 					pUniform->setValue(0);
 				}
 			}
-			else if (item.first == UniformType::MULTI_LIGHT_SPOT)
+			else if (item.first == MultiLightsUniformType::MULTI_LIGHT_SPOT)
 			{
 				pUniform->setValue(pLight->is<SpotLight>() ? 1 : 0);
 			}
-			else if (item.first == UniformType::MULTI_LIGHT_POSITION)
+			else if (item.first == MultiLightsUniformType::MULTI_LIGHT_POSITION)
 			{
 				pUniform->setValue3(1, lightPos.getValue());
 			}
-			else if (item.first == UniformType::MULTI_LIGHT_DIRECTION)
+			else if (item.first == MultiLightsUniformType::MULTI_LIGHT_DIRECTION)
 			{
 				auto pPointLight = pLight->as<PointLight>();
 				if (pPointLight)
@@ -1007,19 +1061,19 @@ void render::UniformShaderApply::updateAllLightsUniformValue(Node* node, ShaderP
 					}
 				}
 			}
-			else if (item.first == UniformType::MULTI_LIGHT_HALF_VECTOR)
+			else if (item.first == MultiLightsUniformType::MULTI_LIGHT_HALF_VECTOR)
 			{
 				pUniform->setValue3(1, halfVector.getValue());
 			}
-			else if (item.first == UniformType::MULTI_LIGHT_COLOR)
+			else if (item.first == MultiLightsUniformType::MULTI_LIGHT_COLOR)
 			{
 				pUniform->setValue4(1, pLight->getColor());
 			}
-			else if (item.first == UniformType::MULTI_LIGHT_AMBIENT)
+			else if (item.first == MultiLightsUniformType::MULTI_LIGHT_AMBIENT)
 			{
 				pUniform->setValue4(1, pLight->getAmbient());
 			}
-			else if (item.first == UniformType::MULTI_LIGHT_SPOT_EXPONENT)
+			else if (item.first == MultiLightsUniformType::MULTI_LIGHT_SPOT_EXPONENT)
 			{
 				auto pSpotLight = pLight->as<SpotLight>();
 				if (pSpotLight)
@@ -1027,7 +1081,7 @@ void render::UniformShaderApply::updateAllLightsUniformValue(Node* node, ShaderP
 					pUniform->setValue(pSpotLight->getExponent());
 				}
 			}
-			else if (item.first == UniformType::MULTI_LIGHT_SPOT_COST_CUTOFF)
+			else if (item.first == MultiLightsUniformType::MULTI_LIGHT_SPOT_COST_CUTOFF)
 			{
 				auto pSpotLight = pLight->as<SpotLight>();
 				if (pSpotLight)
@@ -1035,7 +1089,7 @@ void render::UniformShaderApply::updateAllLightsUniformValue(Node* node, ShaderP
 					pUniform->setValue(pSpotLight->getCutOff());
 				}
 			}
-			else if (item.first == UniformType::MULTI_LIGHT_CONSTANT_ATTENUATION)
+			else if (item.first == MultiLightsUniformType::MULTI_LIGHT_CONSTANT_ATTENUATION)
 			{
 				auto pPointLight = pLight->as<PointLight>();
 				if (pPointLight)
@@ -1043,7 +1097,7 @@ void render::UniformShaderApply::updateAllLightsUniformValue(Node* node, ShaderP
 					pUniform->setValue(pPointLight->getConstantAttenuation());
 				}
 			}
-			else if (item.first == UniformType::MULTI_LIGHT_LINEAR_ATTENUATION)
+			else if (item.first == MultiLightsUniformType::MULTI_LIGHT_LINEAR_ATTENUATION)
 			{
 				auto pPointLight = pLight->as<PointLight>();
 				if (pPointLight)
@@ -1051,7 +1105,7 @@ void render::UniformShaderApply::updateAllLightsUniformValue(Node* node, ShaderP
 					pUniform->setValue(pPointLight->getLinearAttenuation());
 				}
 			}
-			else if (item.first == UniformType::MULTI_LIGHT_QUADRATIC_ATTENUATION)
+			else if (item.first == MultiLightsUniformType::MULTI_LIGHT_QUADRATIC_ATTENUATION)
 			{
 				auto pPointLight = pLight->as<PointLight>();
 				if (pPointLight)
@@ -1059,7 +1113,7 @@ void render::UniformShaderApply::updateAllLightsUniformValue(Node* node, ShaderP
 					pUniform->setValue(pPointLight->getQuadraticAttenuation());
 				}
 			}
-			else if (item.first == UniformType::LIGHT_SPACE_MATRIX)
+			else if (item.first == MultiLightsUniformType::MULTI_LIGHT_SPACE_MATRIX)
 			{
 				if (bSupportShadow)
 				{
@@ -1082,15 +1136,10 @@ void render::UniformShaderApply::removeVertexDatas()
 	_vertexAttribIndices.clear();
 }
 
-void render::UniformShaderApply::addUniform(UniformType vut, const std::string& name)
+std::string render::UniformShaderApply::getUniformName(MultiLightsUniformType vut) const
 {
-	_vertexUniformIndices[vut] = name;
-}
-
-std::string render::UniformShaderApply::getUniformName(UniformType vut) const
-{
-	auto it = _vertexUniformIndices.find(vut);
-	if (it == _vertexUniformIndices.end())
+	auto it = _mapMultiLightsUniform.find(vut);
+	if (it == _mapMultiLightsUniform.end())
 	{
 		return "";
 	}
@@ -1098,9 +1147,99 @@ std::string render::UniformShaderApply::getUniformName(UniformType vut) const
 	return it->second;
 }
 
+std::string render::UniformShaderApply::getUniformName(SingleLightUniformType vut) const
+{
+	auto it = _mapSingleLightUniform.find(vut);
+	if (it == _mapSingleLightUniform.end())
+	{
+		return "";
+	}
+
+	return it->second;
+}
+
+void render::UniformShaderApply::addUniform(MultiLightsUniformType vut, const std::string& name)
+{
+	_mapMultiLightsUniform[vut] = name;
+}
+
+std::string render::UniformShaderApply::getUniformName(MaterialUniformType vut) const
+{
+	auto it = _mapMaterialUniform.find(vut);
+	if (it == _mapMaterialUniform.end())
+	{
+		return "";
+	}
+
+	return it->second;
+}
+
+void render::UniformShaderApply::addUniform(SingleLightUniformType vut, const std::string& name)
+{
+	_mapSingleLightUniform[vut] = name;
+}
+
+std::string render::UniformShaderApply::getUniformName(TextureUniformType vut) const
+{
+	auto it = _mapTextureUniform.find(vut);
+	if (it == _mapTextureUniform.end())
+	{
+		return "";
+	}
+
+	return it->second;
+}
+
+void render::UniformShaderApply::addUniform(MaterialUniformType vut, const std::string& name)
+{
+	_mapMaterialUniform[vut] = name;
+}
+
+std::string render::UniformShaderApply::getUniformName(MatrixUniformType vut) const
+{
+	auto it = _mapMatrixUniform.find(vut);
+	if (it == _mapMatrixUniform.end())
+	{
+		return "";
+	}
+
+	return it->second;
+}
+
+void render::UniformShaderApply::addUniform(TextureUniformType vut, const std::string& name)
+{
+	_mapTextureUniform[vut] = name;
+}
+
+std::string render::UniformShaderApply::getUniformName(EnvUniformType vut) const
+{
+	auto it = _mapEnvUniform.find(vut);
+	if (it == _mapEnvUniform.end())
+	{
+		return "";
+	}
+
+	return it->second;
+}
+
+void render::UniformShaderApply::addUniform(MatrixUniformType vut, const std::string& name)
+{
+	_mapMatrixUniform[vut] = name;
+}
+
+void render::UniformShaderApply::addUniform(EnvUniformType vut, const std::string& name)
+{
+	_mapEnvUniform[vut] = name;
+}
+
 void render::UniformShaderApply::removeUniformDatas()
 {
-	_vertexUniformIndices.clear();
+	_mapEnvUniform.clear();
+	_mapTextureUniform.clear();
+	_mapMaterialUniform.clear();
+	_mapMatrixUniform.clear();
+	_mapSingleLightUniform.clear();
+	_mapMultiLightsUniform.clear();
 }
 
 void render::UniformShaderApply::setTempMatrix(const math::Matrix4x4& matrix)

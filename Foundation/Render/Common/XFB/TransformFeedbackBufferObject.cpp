@@ -20,7 +20,7 @@ render::TransformFeedbackBufferObject::~TransformFeedbackBufferObject()
 void render::TransformFeedbackBufferObject::loadVertexProgram(const std::string& vertexFilepath)
 {
 	SAFE_RELEASE(_shaderProgram);
-	_shaderProgram = (ShaderProgram*)G_SHANDER->createVertexProgram(vertexFilepath, false);
+	_shaderProgram = G_SHANDER->createVertexProgram(vertexFilepath, false);
 	SAFE_RETAIN(_shaderProgram);
 
 	_transformFeedback->setShaderProgram(_shaderProgram);

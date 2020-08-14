@@ -126,7 +126,7 @@ render::Node* TestParticleNode::createCubeModel()
 	pModel->setVolume(200, 200, 200);
 	pModel->setAnchorPoint(0.5f, 0.5f, 0.5f);
 
-	Utility::updateNodeShader(pModel);
+	Utility::loadDefaultShader(pModel);
 	Utility::runRotateAction(pModel);
 
 	return pModel;

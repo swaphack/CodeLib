@@ -1,6 +1,6 @@
 #version 330 core
 
-#include "Shader/core/material.fs"
+#include "Shader/core/frag/material.fs"
 
 uniform Material material;
 

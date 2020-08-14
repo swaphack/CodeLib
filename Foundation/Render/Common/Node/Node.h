@@ -31,7 +31,8 @@ namespace render
 		public sys::Name,
 		public sys::DirtyProtocol,
 		public SpaceProtocol,
-		public BodyProtocol
+		public BodyProtocol,
+		public DirectionProtocol
 	{
 	public:
 		Node();
@@ -133,6 +134,7 @@ namespace render
 		// 逆转空间矩阵
 		virtual void endUpdateTranform();
 	public:
+		void addNotify(NodeNotifyType id, const NotifyDelegate& func);
 		// 将事件通知给所有节点
 		void notifyToAll(NodeNotifyType id);
 		// 将事件通知给节点
@@ -152,10 +154,11 @@ namespace render
 		virtual void onBodyChange();
 		// 子节点发生改变
 		virtual void onChildrenChange();
-
 	private:
 		// 使用矩阵计算空间变化属性
 		void calRealSpaceByMatrix();
+		// 计算旋转后的方向
+		void calDirectionWithRotate();
 	protected:
 		// opengl 位置
 		math::Vector3 _obPosition;

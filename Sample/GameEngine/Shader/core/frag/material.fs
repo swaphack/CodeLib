@@ -1,4 +1,4 @@
-#include "Shader/core/light.fs"
+#include "Shader/core/frag/light.fs"
 
 struct Material 
 {
@@ -21,13 +21,13 @@ struct Material
 };
 
 // 环境
-vec4 get_mat_ambient(Light light,  Material material)
+vec4 getMaterialAmbient(Light light,  Material material)
 {
 	return light.color * material.ambient;
 }
 
 // 漫反射
-vec4 get_mat_diffuse(Light light, Material material, vec3 fragNormal, vec3 fragPos)
+vec4 getMaterialDiffuse(Light light, Material material, vec3 fragNormal, vec3 fragPos)
 {
 	vec3 norm = normalize(fragNormal);
 	vec3 lightDir;
@@ -45,7 +45,7 @@ vec4 get_mat_diffuse(Light light, Material material, vec3 fragNormal, vec3 fragP
     return (diff * material.diffuse); 
 }
 // 镜面反射
-vec4 get_mat_specular(Light light, Material material, vec3 fragNormal, vec3 fragPos, vec3 viewPos)
+vec4 getMaterialSpecular(Light light, Material material, vec3 fragNormal, vec3 fragPos, vec3 viewPos)
 {
 	vec3 norm = normalize(fragNormal);
 	vec3 lightDir;
@@ -70,7 +70,7 @@ vec4 get_mat_specular(Light light, Material material, vec3 fragNormal, vec3 frag
 }
 
 // 阴影
-float get_mat_shadow_ratio(Light light, Material material, vec4 fragPosLightSpace, vec3 fragNormal, vec3 fragPos)
+float getMaterialShadowRatio(Light light, Material material, vec4 fragPosLightSpace, vec3 fragNormal, vec3 fragPos)
 {
 	vec3 projCoords = fragPosLightSpace.xyz / fragPosLightSpace.w;
 
@@ -107,20 +107,20 @@ float get_mat_shadow_ratio(Light light, Material material, vec4 fragPosLightSpac
 }
 
 // 环境
-vec4 get_mat_ambient(Light light,  Material material, vec2 fragTexcoord)
+vec4 getMaterialAmbient(Light light,  Material material, vec2 fragTexcoord)
 {
-	return get_mat_ambient(light, material) * texture(material.tex, fragTexcoord);
+	return getMaterialAmbient(light, material) * texture(material.tex, fragTexcoord);
 }
 // 漫反射
-vec4 get_mat_diffuse(Light light, Material material, vec3 fragNormal, vec3 fragPos, vec2 fragTexcoord)
+vec4 getMaterialDiffuse(Light light, Material material, vec3 fragNormal, vec3 fragPos, vec2 fragTexcoord)
 {
-    return get_mat_diffuse(light, material, fragNormal, fragPos) * texture(material.texDiffuse, fragTexcoord); 
+    return getMaterialDiffuse(light, material, fragNormal, fragPos) * texture(material.texDiffuse, fragTexcoord); 
 }
 
 // 镜面反射
-vec4 get_mat_specular(Light light, Material material, vec3 fragNormal, vec3 fragPos, vec2 fragTexcoord, vec3 viewPos)
+vec4 getMaterialSpecular(Light light, Material material, vec3 fragNormal, vec3 fragPos, vec2 fragTexcoord, vec3 viewPos)
 {
-	return get_mat_specular(light, material, fragNormal, fragPos, viewPos) * texture(material.texSpecular, fragTexcoord);
+	return getMaterialSpecular(light, material, fragNormal, fragPos, viewPos) * texture(material.texSpecular, fragTexcoord);
 }
 
 // 计算多光源的材质颜色
@@ -136,7 +136,7 @@ vec4 get_mat_color_with_multi_lights(vec4 color, Material material, vec4 positio
 	{
 		if (!lights[i].isEnabled) continue;
 
-		LightComputeProperty pro = compute_light_property(lights[i], position, normal, viewDirection);
+		LightComputeProperty pro = computeLightProperty(lights[i], position, normal, viewDirection);
 
 		if (pro.diffuse == 0.0)
 		{

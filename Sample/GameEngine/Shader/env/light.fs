@@ -1,7 +1,7 @@
 
 #version 330 core
 
-#include "Shader/core/light.fs"
+#include "Shader/core/frag/light.fs"
 
 uniform Light light;
 

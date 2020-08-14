@@ -72,13 +72,17 @@ namespace render
 		virtual void endUpdateTranform();
 		//视窗大小发生改变
 		virtual void updateViewPort();
+
+		void onCameraSpaceChange();
 	protected:
 		// 主摄像头
 		static Camera* _mainCamera;
 		// 维度
 		CameraDimensions _dimensions = CameraDimensions::TWO;
 		// 投影矩阵
-		math::Matrix4x4 _projectMat;
+		math::Matrix4x4 _projectMatrix;
+		// 视图矩阵
+		math::Matrix4x4 _viewMatrix;
 		// 2d视野参数
 		ViewParameter _viewParameter2D;
 		// 3D视野参数

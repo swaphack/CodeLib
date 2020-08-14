@@ -18,7 +18,7 @@ TestModelNode::~TestModelNode()
 void TestModelNode::initNodes()
 {
 	addLight();
-	//this->testCubeModel();
+	this->testCubeModel();
 	//this->testSphereModel();
 	//this->testCubeMap();
 	//this->testObj();
@@ -191,14 +191,15 @@ void TestModelNode::testFbx()
 	ModelFbx* pModel = CREATE_NODE(ModelFbx);
 	pModel->load("Resource/fbx/LANCER_EVOLUTION/LANCEREVOX.FBX");
 	pModel->setScale(200);
-	pModel->setRotation(90, 90, 0);
+	pModel->setPosition(512, 384);
+	pModel->setRotation(90, 0, 90);
 	this->addChild(pModel);
 
 	Utility::loadShader(pModel, "Shader/texture/texture.vs", "Shader/texture/texture.fs");
 
 	RotateByAction* pRotateByAction = CREATE_ACTION(RotateByAction);
 	pRotateByAction->setDifferentRotation(0, 180, 0);
-	pRotateByAction->setDuration(10);
+	pRotateByAction->setDuration(4);
 
 	RepeateForeverAction* pRepeateAction = CREATE_ACTION(RepeateForeverAction);
 	pRepeateAction->setAction(pRotateByAction);

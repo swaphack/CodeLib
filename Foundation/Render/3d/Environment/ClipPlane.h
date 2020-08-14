@@ -19,7 +19,7 @@ namespace render
 	{
 	public:
 		ClipPlane();
-		~ClipPlane();
+		virtual ~ClipPlane();
 	public:
 		virtual void draw();
 		// 获取裁剪平面索引

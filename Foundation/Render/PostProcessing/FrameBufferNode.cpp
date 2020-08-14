@@ -18,14 +18,10 @@ render::FrameBufferNode::~FrameBufferNode()
 
 bool render::FrameBufferNode::init()
 {
-	if (!DrawNode::init())
+	if (!DrawNode2D::init())
 	{
 		return false;
 	}
-
-	_notify->addListen(NodeNotifyType::BODY, [this]() {
-		this->updateFrameSize();
-	});
 
 	_frameBuffer->bindFrameBuffer();
 	_frameBuffer->setParameter(FrameBufferParameter::FRAMEBUFFER_DEFAULT_WIDTH, (int)Tool::getGLViewWidth());
@@ -43,7 +39,7 @@ void render::FrameBufferNode::drawNode()
 	}
 
 	GLDebug::showError();
-	DrawNode::drawNode();
+	DrawNode2D::drawNode();
 	GLDebug::showError();
 }
 
@@ -74,37 +70,5 @@ void render::FrameBufferNode::beginRecord()
 void render::FrameBufferNode::endRecord()
 {
 	_frameBuffer->unbindFrameBuffer();
-}
-
-void render::FrameBufferNode::updateFrameSize()
-{
-	Tool::calRect(math::Vector3(), _volume, _anchor, _rectVertex);
-
-	float vertices[] = {
-		_rectVertex.leftDown.getX(),_rectVertex.leftDown.getY(),
-		_rectVertex.rightDown.getX(),_rectVertex.rightDown.getY(),
-		_rectVertex.rightUp.getX(),_rectVertex.rightUp.getY(),
-		_rectVertex.leftUp.getX(),_rectVertex.leftUp.getY(),
-	};
-
-	float uvs[] = {
-		0,0,
-		1,0,
-		1,1,
-		0,1
-	};
-
-	uint32_t indices[] = { 0,1,2,0,2,3 };
-	auto pMesh = getMesh();
-	if (pMesh)
-	{
-		pMesh->getMeshDetail()->setVertices(4, vertices, 2);
-		pMesh->getMeshDetail()->setUVs(4, uvs, 2);
-		pMesh->getMeshDetail()->setIndices(6, indices, 1);
-
-		pMesh->initMeshOtherDetail();
-	}
-
-	this->updateBufferData();
 }
 

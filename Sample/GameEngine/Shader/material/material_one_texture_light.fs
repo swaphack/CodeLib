@@ -1,8 +1,8 @@
 #version 330 core
 
-#include "Shader/core/light.fs"
-#include "Shader/core/material.fs"
-#include "Shader/core/env.fs"
+#include "Shader/core/frag/light.fs"
+#include "Shader/core/frag/material.fs"
+#include "Shader/core/frag/env.fs"
 
 uniform Light light;
 uniform Material material;
@@ -17,13 +17,13 @@ out vec4 color;
 void main()
 {
 	// ambient
-	vec4 ambient = get_mat_ambient(light, material) * texture(material.tex, fragTexcoord);
+	vec4 ambient = getMaterialAmbient(light, material) * texture(material.tex, fragTexcoord);
 
 	// diffuse
-	vec4 diffuse = get_mat_diffuse(light, material, fragNormal, fragPos) * texture(material.tex, fragTexcoord);
+	vec4 diffuse = getMaterialDiffuse(light, material, fragNormal, fragPos) * texture(material.tex, fragTexcoord);
 
 	// specular
-	vec4 specular = get_mat_specular(light, material, fragNormal, fragPos, env.viewPos) * texture(material.tex, fragTexcoord);
+	vec4 specular = getMaterialSpecular(light, material, fragNormal, fragPos, env.viewPos) * texture(material.tex, fragTexcoord);
 
 	//diffuse = vec4(0.0);
 	//specular = vec4(0.0);

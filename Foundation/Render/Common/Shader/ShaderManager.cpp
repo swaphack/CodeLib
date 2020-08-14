@@ -15,15 +15,15 @@ render::ShaderManager::~ShaderManager()
 	this->clear();
 }
 
-render::VertexShaderProgram* render::ShaderManager::createVertexProgram(const std::string& vertexFilepath, bool link)
+render::ShaderProgram* render::ShaderManager::createVertexProgram(const std::string& vertexFilepath, bool link)
 {
 	auto it = _shaderPrograms.find(vertexFilepath);
 	if (it != _shaderPrograms.end())
 	{
-		return it->second->as<render::VertexShaderProgram>();
+		return it->second;
 	}
 
-	VertexShaderProgram* pProgram = CREATE_OBJECT(VertexShaderProgram);
+	ShaderProgram* pProgram = CREATE_OBJECT(ShaderProgram);
 	render::Shader* pVertexShader = createShader(ShaderType::VERTEX_SHADER, vertexFilepath);
 	if (!pVertexShader)
 	{
@@ -43,16 +43,16 @@ render::VertexShaderProgram* render::ShaderManager::createVertexProgram(const st
 	return pProgram;
 }
 
-render::VertexFragmentShaderProgram* render::ShaderManager::createVertexFragmentProgram(const std::string& vertexFilepath, const std::string& fragFilepath, bool link)
+render::ShaderProgram* render::ShaderManager::createVertexFragmentProgram(const std::string& vertexFilepath, const std::string& fragFilepath, bool link)
 {
 	auto key = vertexFilepath + fragFilepath;
 	auto it = _shaderPrograms.find(key);
 	if (it != _shaderPrograms.end())
 	{
-		return it->second->as<render::VertexFragmentShaderProgram>();
+		return it->second;
 	}
 
-	VertexFragmentShaderProgram* pProgram = CREATE_OBJECT(VertexFragmentShaderProgram);
+	ShaderProgram* pProgram = CREATE_OBJECT(ShaderProgram);
 	render::Shader* pVertexShader = createShader(ShaderType::VERTEX_SHADER, vertexFilepath);
 	if (!pVertexShader)
 	{
@@ -66,6 +66,51 @@ render::VertexFragmentShaderProgram* render::ShaderManager::createVertexFragment
 	}
 
 	pProgram->attachShader(pVertexShader);
+	pProgram->attachShader(fragShader);
+
+	pProgram->bindFragDataLocation(0, "color");
+	if (link)
+	{
+		pProgram->link();
+	}
+
+	SAFE_RETAIN(pProgram);
+
+	_shaderPrograms[key] = pProgram;
+
+	return pProgram;
+}
+
+render::ShaderProgram* render::ShaderManager::createVertexGeometryFragmentProgram(const std::string& vertexFilepath, const std::string& geometryFilepath, const std::string& fragFilepath, bool link /*= true*/)
+{
+	auto key = vertexFilepath + fragFilepath;
+	auto it = _shaderPrograms.find(key);
+	if (it != _shaderPrograms.end())
+	{
+		return it->second;
+	}
+
+	ShaderProgram* pProgram = CREATE_OBJECT(ShaderProgram);
+	render::Shader* pVertexShader = createShader(ShaderType::VERTEX_SHADER, vertexFilepath);
+	if (!pVertexShader)
+	{
+		return nullptr;
+	}
+
+	render::Shader* geometryShader = createShader(ShaderType::GEOMETRY_SHADER, geometryFilepath);
+	if (!geometryShader)
+	{
+		return nullptr;
+	}
+
+	render::Shader* fragShader = createShader(ShaderType::FRAGMENT_SHADER, fragFilepath);
+	if (!fragShader)
+	{
+		return nullptr;
+	}
+
+	pProgram->attachShader(pVertexShader);
+	pProgram->attachShader(geometryShader);
 	pProgram->attachShader(fragShader);
 
 	pProgram->bindFragDataLocation(0, "color");

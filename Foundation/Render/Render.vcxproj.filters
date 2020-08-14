@@ -222,9 +222,6 @@
     <ClCompile Include="2d\UI\CtrlWidget.cpp">
       <Filter>2d\UI</Filter>
     </ClCompile>
-    <ClCompile Include="Common\DrawNode\PrimitiveNode.cpp">
-      <Filter>Common\DrawNode</Filter>
-    </ClCompile>
     <ClCompile Include="Common\DrawNode\DrawNode.cpp">
       <Filter>Common\DrawNode</Filter>
     </ClCompile>
@@ -426,9 +423,6 @@
     <ClCompile Include="Common\Input\KeyChar.cpp">
       <Filter>Common\Input</Filter>
     </ClCompile>
-    <ClCompile Include="2d\Animation\CtrlPointSprite.cpp">
-      <Filter>2d\Animation</Filter>
-    </ClCompile>
     <ClCompile Include="3d\Environment\Environment.cpp">
       <Filter>3d\Environment</Filter>
     </ClCompile>
@@ -590,6 +584,21 @@
     </ClCompile>
     <ClCompile Include="PostProcessing\PixelPostProcessingNode.cpp">
       <Filter>PostProcessing</Filter>
+    </ClCompile>
+    <ClCompile Include="3d\Environment\Grid.cpp">
+      <Filter>3d\Environment</Filter>
+    </ClCompile>
+    <ClCompile Include="2d\Primitive\PrimitiveNode.cpp">
+      <Filter>2d\Primitive</Filter>
+    </ClCompile>
+    <ClCompile Include="2d\Primitive\PointSprite.cpp">
+      <Filter>2d\Primitive</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\DrawNode\DrawNode2D.cpp">
+      <Filter>Common\DrawNode</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\DrawNode\DrawNode3D.cpp">
+      <Filter>Common\DrawNode</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -924,9 +933,6 @@
     <ClInclude Include="Common\Fragment\import.h">
       <Filter>Common\Fragment</Filter>
     </ClInclude>
-    <ClInclude Include="Common\DrawNode\PrimitiveNode.h">
-      <Filter>Common\DrawNode</Filter>
-    </ClInclude>
     <ClInclude Include="Common\DrawNode\DrawNode.h">
       <Filter>Common\DrawNode</Filter>
     </ClInclude>
@@ -1158,9 +1164,6 @@
     <ClInclude Include="Common\Input\KeyChar.h">
       <Filter>Common\Input</Filter>
     </ClInclude>
-    <ClInclude Include="2d\Animation\CtrlPointSprite.h">
-      <Filter>2d\Animation</Filter>
-    </ClInclude>
     <ClInclude Include="3d\Environment\Environment.h">
       <Filter>3d\Environment</Filter>
     </ClInclude>
@@ -1350,6 +1353,24 @@
     <ClInclude Include="PostProcessing\PixelPostProcessingNode.h">
       <Filter>PostProcessing</Filter>
     </ClInclude>
+    <ClInclude Include="3d\Environment\Grid.h">
+      <Filter>3d\Environment</Filter>
+    </ClInclude>
+    <ClInclude Include="2d\Primitive\import.h">
+      <Filter>2d\Primitive</Filter>
+    </ClInclude>
+    <ClInclude Include="2d\Primitive\PrimitiveNode.h">
+      <Filter>2d\Primitive</Filter>
+    </ClInclude>
+    <ClInclude Include="2d\Primitive\PointSprite.h">
+      <Filter>2d\Primitive</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\DrawNode\DrawNode2D.h">
+      <Filter>Common\DrawNode</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\DrawNode\DrawNode3D.h">
+      <Filter>Common\DrawNode</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Common">
@@ -1474,6 +1495,9 @@
     </Filter>
     <Filter Include="GPU">
       <UniqueIdentifier>{d64b7a08-5d95-4198-bf38-36a4b83b6cc7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2d\Primitive">
+      <UniqueIdentifier>{9a6a8e52-d6ec-44a8-8729-a8a1c5a7f8db}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

@@ -233,6 +233,7 @@ void handNodeMaterial(ModelDetailFbx* file, FbxNode* node)
 		FbxSurfaceMaterial *mat = node->GetMaterial(i);
 		if (mat)
 		{
+			PRINT("FBX MATERIAL Name : %s\n", mat->GetName());
 			handMaterial(file, mat);
 			int lTextureIndex = 0;
 			FBXSDK_FOR_EACH_TEXTURE(lTextureIndex)
@@ -425,6 +426,23 @@ void handMaterial(ModelDetailFbx* file, FbxSurfaceMaterial* mat)
 		pMat->setEmission((float)lambert->Emissive.Get()[0], (float)lambert->Emissive.Get()[1], (float)lambert->Emissive.Get()[2]);
 		file->addMaterial(lambert->GetName(), pMat);
 	}
+	else if (mat->GetClassId().Is(FbxSurfaceMaterial::ClassId))
+	{
+		auto it = file->getMaterial(mat->GetName());
+		if (it != nullptr)
+		{
+			return;
+		}
+
+		FbxSurfaceMaterial* material = (FbxSurfaceMaterial*)mat;
+		auto pMat = CREATE_OBJECT(MaterialDetail);
+		pMat->setName(material->GetName());
+		//pMat->setEmission((float)material->Emissive.Get()[0], (float)material->Emissive.Get()[1], (float)material->Emissive.Get()[2]);
+		//pMat->setAmbient((float)material->Ambient.Get()[0], (float)material->Ambient.Get()[1], (float)material->Ambient.Get()[2]);
+		//pMat->setDiffuse((float)material->Diffuse.Get()[0], (float)material->Diffuse.Get()[1], (float)material->Diffuse.Get()[2]);
+		//pMat->setEmission((float)material->Emissive.Get()[0], (float)material->Emissive.Get()[1], (float)material->Emissive.Get()[2]);
+		file->addMaterial(material->GetName(), pMat);
+	}
 }
 
 void handMaterialTexture(ModelDetailFbx* file, FbxSurfaceMaterial* mat, int textureIndex)
@@ -497,6 +515,10 @@ void handMaterialTexture(ModelDetailFbx* file, FbxSurfaceMaterial* mat, int text
 					else if (j == 1)
 					{
 						pMat->setDiffuseTextureMap(name);
+					}
+					else
+					{
+						int a = 1;
 					}
 				}
 			}

@@ -47,7 +47,7 @@ namespace render
 
 		ShaderProgramNFunc _computeUpdateFunc = nullptr;
 
-		VertexFragmentShaderProgram* _renderProgram = nullptr;
+		ShaderProgram* _renderProgram = nullptr;
 
 		ShaderProgramNFunc _renderUpdateFunc = nullptr;
 

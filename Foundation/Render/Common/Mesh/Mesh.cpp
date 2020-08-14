@@ -64,6 +64,34 @@ DrawMode render::Mesh::getDrawMode() const
 	return _drawMode;
 }
 
+void render::Mesh::setComputeNormal(bool compute)
+{
+	_bComputeNormal = compute;
+	if (compute == false)
+	{
+		getMeshDetail()->setNormals(0, nullptr);
+	}
+}
+
+bool render::Mesh::isComputeNormal()
+{
+	return _bComputeNormal;
+}
+
+void render::Mesh::setComputeTangent(bool compute)
+{
+	_bComputeTangent = compute;
+	if (compute == false)
+	{
+		getMeshDetail()->setTangents(0, nullptr);
+	}
+}
+
+bool render::Mesh::isComputeTangent()
+{
+	return _bComputeTangent;
+}
+
 void render::Mesh::drawWithBufferObject()
 {
 	if (_detail == nullptr)
@@ -71,9 +99,6 @@ void render::Mesh::drawWithBufferObject()
 		return;
 	}
 	uint32_t nVerticeSize = _detail->getVertices().getSize();
-	uint32_t nColorSize = _detail->getColors().getSize();
-	uint32_t nUVSize = _detail->getUVs().getSize();
-	uint32_t nNormalSize = _detail->getNormals().getSize();
 
 	if (nVerticeSize == 0)
 	{
@@ -103,17 +128,19 @@ void render::Mesh::drawWithClientArray()
 		return;
 	}
 	const sys::MeshMemoryData& vertices = _detail->getVertices();
+	if (vertices.getLength() == 0)
+	{
+		PRINT("Mesh Vertice is NULL\n");
+		return;
+	}
+
 	const sys::MeshMemoryData& colors = _detail->getColors();
 	const sys::MeshMemoryData& texcoords = _detail->getUVs();
 	const sys::MeshMemoryData& normals = _detail->getNormals();
 	const sys::MeshMemoryData& tangents = _detail->getTangents();
 	const sys::MeshMemoryData& bitangents = _detail->getBitangents();
 
-	if (vertices.getLength() == 0)
-	{
-		PRINT("Mesh Vertice is NULL\n");
-		return;
-	}
+	
 	/*
 	if (colors.getLength() == 0 && texcoords.getLength() == 0)
 	{
@@ -187,17 +214,18 @@ void render::Mesh::updateBufferData()
 	}
 
 	uint32_t nVerticeSize = _detail->getVertices().getSize();
+	if (nVerticeSize == 0)
+	{
+		//PRINT("Mesh Vertice is NULL\n");
+		return;
+	}
+
 	uint32_t nColorSize = _detail->getColors().getSize();
 	uint32_t nUVSize = _detail->getUVs().getSize();
 	uint32_t nNormalSize = _detail->getNormals().getSize();
 	uint32_t nTangentSize = _detail->getTangents().getSize();
 	uint32_t nBitangentSize = _detail->getBitangents().getSize();
 
-	if (nVerticeSize == 0)
-	{
-		PRINT("Mesh Vertice is NULL\n");
-		return;
-	}
 	/*
 	if (nColorSize == 0 && nUVSize == 0)
 	{
@@ -282,11 +310,15 @@ void render::Mesh::initMeshOtherDetail()
 
 void render::Mesh::initDetailNormalData()
 {
+	if (!isComputeNormal())
+	{
+		return;
+	}
 	if (getMeshDetail()->getVertices().getSize() == 0)
 	{
 		return;
 	}
-	if (getMeshDetail()->getTangents().getSize() != 0)
+	if (getMeshDetail()->getNormals().getSize() != 0)
 	{
 		return;
 	}
@@ -303,6 +335,10 @@ void render::Mesh::initDetailNormalData()
 
 void render::Mesh::initDetailTangentData()
 {
+	if (!isComputeTangent())
+	{
+		return;
+	}
 	if (getMeshDetail()->getVertices().getSize() == 0)
 	{
 		return;

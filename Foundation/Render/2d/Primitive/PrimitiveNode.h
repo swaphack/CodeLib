@@ -1,27 +1,24 @@
 #pragma once
 
-#include "DrawNode.h"
+#include "Common/DrawNode/DrawNode2D.h"
 #include "Graphic/GLAPI/macros.h"
 
 namespace render
 {
 	// opengl基础绘图节点
-	class PrimitiveNode : public DrawNode
+	class PrimitiveNode : public DrawNode2D
 	{
 	public:
 		PrimitiveNode();
 		virtual ~PrimitiveNode();
 	public:
 		virtual bool init();
-	protected:
-		virtual void onDraw();
 	public:
-		// 设置宽度
-		void setWidth(float width);
-		float getWidth();
 		// 模式
-		void setDrawMode(ShapeMode mode);
-		ShapeMode getDrawMode();
+		void setDrawMode(DrawMode mode);
+
+		DrawMode getDrawMode();
+	public:
 		// 设置点坐标
 		void setPoints(const std::vector<math::Vector3>& points);
 		// 添加一个点坐标
@@ -34,17 +31,23 @@ namespace render
 		void removePoint(const math::Vector2& point);
 		// 移除所有点坐标
 		void removeAllPoints();
-
-		void setColor(const sys::Color4F& color);
-		const sys::Color4F& getColor() const;
+	public:
+		/**
+		*	大小
+		*/
+		void setPointSize(float size);
+		/**
+		*	大小
+		*/
+		float getPointSize() const;
+	protected:
+		void onPrimitiveChange();
 	private:
-		// 宽度
-		float _width = 1;
-		// 模式
-		ShapeMode _drawMode = ShapeMode::POINTS;
 		// 点坐标
 		std::vector<math::Vector3> _points;
-
-		sys::Color4F _color;
+		/**
+		*	大小
+		*/
+		float _pointSize = 1;
 	};
 }

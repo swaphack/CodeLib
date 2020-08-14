@@ -71,6 +71,8 @@ namespace render
 		float getRotationZ() const;
 
 		const math::Vector3& getRotation() const;
+
+		
 	public:
 		virtual void onSpaceChange() {}
 	protected:
@@ -80,7 +82,6 @@ namespace render
 		math::Vector3 _scale;
 		// 旋转
 		math::Vector3 _rotation;
-	private:
 	};
 
 
@@ -141,5 +142,56 @@ namespace render
 	private:
 	};
 
+	// 方向属性
+	class DirectionProtocol
+	{
+	public:
+		enum class ZDirectionType
+		{
+			// 朝向屏幕内
+			INSIDE,
+			// 朝向屏幕外
+			OUTSIDE,
+		};
+	public:
+		DirectionProtocol();
+		virtual ~DirectionProtocol();
+	public:
+		const math::Vector3& getUp() const;
+
+		const math::Vector3& getRight() const;
+
+		const math::Vector3& getFront() const;
+	
+		void setZDirection(ZDirectionType type);
+
+		ZDirectionType getZDirection() const;
+
+		const math::Vector3& getDefaultUp() const;
+
+		const math::Vector3& getDefaultRight() const;
+
+		const math::Vector3& getDefaultFront() const;
+	protected:
+		void setUp(const math::Vector3& up);
+		void setRight(const math::Vector3& right);
+		void setFront(const math::Vector3& front);
+	protected:
+		// 头方向
+		math::Vector3 _up;
+		// 右边方向
+		math::Vector3 _right;
+		// 前方
+		math::Vector3 _front;
+
+		ZDirectionType _zDirection = ZDirectionType::OUTSIDE;
+
+		// 默认头方向
+		math::Vector3 _defaultUp;
+		// 默认右边方向
+		math::Vector3 _defaultRight;
+		// 默认前方
+		math::Vector3 _defaultFront;
+	};
 	
 }

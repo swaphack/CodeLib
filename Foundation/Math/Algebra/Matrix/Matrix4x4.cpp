@@ -49,14 +49,14 @@ void Matrix4x4::setScale(const Vector3& vector)
 	(*this)[10] = vector.getZ();
 }
 
-void Matrix4x4::setRotate(const Vector3& rotation)
+void Matrix4x4::setRotate(const Vector3& radian)
 {
-	float cosX = cos(rotation.getX());
-	float cosY = cos(rotation.getY());
-	float cosZ = cos(rotation.getZ());
-	float sinX = sin(rotation.getX());
-	float sinY = sin(rotation.getY());
-	float sinZ = sin(rotation.getZ());
+	float cosX = cos(radian.getX());
+	float cosY = cos(radian.getY());
+	float cosZ = cos(radian.getZ());
+	float sinX = sin(radian.getX());
+	float sinY = sin(radian.getY());
+	float sinZ = sin(radian.getZ());
 
 	(*this)[0] = cosY * cosZ;
 	(*this)[1] = -cosX * sinZ + sinX * sinY* cosZ;

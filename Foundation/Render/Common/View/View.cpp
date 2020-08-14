@@ -60,6 +60,7 @@ void render::View::initViewPort()
 
 void View::applyConfig()
 {
+	GLState::enable(EnableMode::PROGRAM_POINT_SIZE);
 	GLDebug::showError();
 	GLState::enable(EnableMode::DEPTH_TEST);
 	GLState::setDepthFunc(DepthFunction::LEQUAL);

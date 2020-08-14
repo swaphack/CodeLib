@@ -32,6 +32,11 @@ bool render::CtrlLayout::init()
 	return true;
 }
 
+void render::CtrlLayout::draw()
+{
+
+}
+
 void render::CtrlLayout::setBackgroundColor(const sys::Color4B& color)
 {
 	_backgroundMask->setColor(color);

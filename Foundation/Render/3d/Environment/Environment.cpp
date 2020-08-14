@@ -62,3 +62,13 @@ bool render::Environment::hasLight() const
 	return _lights.size() > 0;
 }
 
+void render::Environment::setGamma(float value)
+{
+	_gamma = value;
+}
+
+float render::Environment::getGamma() const
+{
+	return _gamma;
+}
+

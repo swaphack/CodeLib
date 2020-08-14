@@ -38,6 +38,10 @@ bool Camera::init()
 		this->updateViewPort();
 	});
 
+	_notify->addListen(NodeNotifyType::SPACE, [this]() {
+		this->onCameraSpaceChange();
+	});
+
 	return true;
 }
 
@@ -181,12 +185,12 @@ void Camera::endUpdateTranform()
 
 const math::Matrix4x4& render::Camera::getProjectMatrix() const
 {
-	return _projectMat;
+	return _projectMatrix;
 }
 
 const math::Matrix4x4& render::Camera::getViewMatrix() const
 {
-	return _worldMatrix;
+	return _viewMatrix;
 }
 
 math::Matrix4x4 render::Camera::getProjectMatrix(float znear, float zfar)
@@ -214,7 +218,7 @@ math::Matrix4x4 render::Camera::getProjectMatrix(float znear, float zfar)
 math::Matrix4x4 render::Camera::lookAt(const math::Vector3& position)
 {
 	math::Vector3 pos = _worldMatrix.getPosition();
-	math::Matrix4x4 mat = math::Matrix4x4::lookAt(pos, position, math::Vector3(0,1,0));
+	math::Matrix4x4 mat = math::Matrix4x4::lookAt(pos, position, math::Vector3(0, 1, 0));
 	return mat;
 }
 
@@ -244,18 +248,33 @@ void render::Camera::updateViewPort()
 {
 	if (getDimensions() == CameraDimensions::TWO)
 	{
-		_projectMat = math::Matrix4x4::ortho(
+		_projectMatrix = math::Matrix4x4::ortho(
 			_viewParameter2D.xLeft, _viewParameter2D.xRight,
 			_viewParameter2D.yBottom, _viewParameter2D.yTop,
 			_viewParameter2D.zNear, _viewParameter2D.zFar);
 	}
 	else if (getDimensions() == CameraDimensions::THREE)
 	{
-		_projectMat = math::Matrix4x4::frustum(
+		_projectMatrix = math::Matrix4x4::frustum(
 			_viewParameter3D.xLeft, _viewParameter3D.xRight,
 			_viewParameter3D.yBottom, _viewParameter3D.yTop,
 			_viewParameter3D.zNear, _viewParameter3D.zFar);
 	}
 	GLDebug::showError();
+}
+
+void render::Camera::onCameraSpaceChange()
+{
+	math::Matrix4x4 mat;
+	math::Vector3 pos = _position * -1;
+	math::Matrix4x4::getRST(_obRotation, _scale, pos, mat);
+	if (this->getParent() == nullptr || !this->isRelativeWithParent())
+	{
+		_viewMatrix = mat;
+	}
+	else
+	{
+		_viewMatrix = mat * this->getParent()->getWorldMatrix();
+	}
 }
 

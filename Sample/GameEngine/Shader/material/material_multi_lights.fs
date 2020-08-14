@@ -1,9 +1,9 @@
 #version 330 core
 
-#include "Shader/core/light.fs"
-#include "Shader/core/material.fs"
-#include "Shader/core/env.fs"
-#include "Shader/core/effect.fs"
+#include "Shader/core/frag/light.fs"
+#include "Shader/core/frag/material.fs"
+#include "Shader/core/frag/env.fs"
+#include "Shader/core/frag/effect.fs"
 
 uniform Light lights[MAX_LIGHT_COUNT];
 uniform Material material;
@@ -19,7 +19,7 @@ void main()
 {
 
 	vec4 matColor = texture(material.tex, fragTexcoord);
-	matColor = getGamma(env.gamma, matColor);
+	matColor = getGammaColor(env, matColor);
 
 	vec3 viewDirection = normalize(env.viewPos - fragPos);
 
