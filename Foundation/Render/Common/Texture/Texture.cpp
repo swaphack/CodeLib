@@ -225,6 +225,114 @@ void render::Texture::getTextureFormat(sys::ImageDataFormat imgFormat, TextureEx
 	}
 }
 
+bool render::Texture::getImageDetail(sys::ImageDetail& detail, TextureExternalFormat format)
+{
+	int nUnitSize = 0;
+	sys::ImageDataFormat dataFormat;
+	getImageFormat(format, nUnitSize, dataFormat);
+	if (nUnitSize == 0)
+	{
+		return false;
+	}
+
+	int width = getWidth();
+	int height = getHeight();
+	sys::ImageDataFormat dateFormat = sys::ImageDataFormat::NONE;
+	this->bindTexture();
+	if (width == 0)
+	{
+		GLTexture::getTextureParameter(getTextureID(), GetTextureParameter::TEXTURE_WIDTH, &width);
+		GLDebug::showError();
+		if (width == 0)
+		{
+			this->unbindTexture();
+			return false;
+		}
+	}
+	if (height == 0)
+	{
+		GLTexture::getTextureParameter(getTextureID(), GetTextureParameter::TEXTURE_HEIGHT, &height);
+		GLDebug::showError();
+		if(height == 0)
+		{
+			this->unbindTexture();
+			return false;
+		}
+	}
+	int bufferSize = width * height * nUnitSize * sizeof(uint8_t);
+	uint8_t* buffer = (uint8_t*)malloc(bufferSize);
+	GLTexture::getTextureImage(getTextureID(), 0, format, TextureExternalDataType::UNSIGNED_BYTE, bufferSize, buffer);
+	GLDebug::showError();
+	this->unbindTexture();
+
+	detail.setDataFormat(dataFormat);
+	detail.setPixels(buffer, width, height, nUnitSize);
+
+	return true;
+}
+
+bool render::Texture::getImageFormat(TextureExternalFormat format, int& nUnitSize, sys::ImageDataFormat& dataFormat)
+{
+	nUnitSize = 0;
+	dataFormat = sys::ImageDataFormat::NONE;
+	switch (format)
+	{
+	case TextureExternalFormat::RED:
+	{
+		nUnitSize = 1;
+		dataFormat = sys::ImageDataFormat::RED;
+	}
+	break;
+	case TextureExternalFormat::RG:
+	{
+		nUnitSize = 2;
+		dataFormat = sys::ImageDataFormat::RG;
+	}
+	break;
+	case TextureExternalFormat::RGB:
+	{
+		nUnitSize = 3;
+		dataFormat = sys::ImageDataFormat::RGB;
+	}
+	break;
+	case TextureExternalFormat::BGR:
+	{
+		nUnitSize = 3;
+		dataFormat = sys::ImageDataFormat::BGR;
+	}
+		break;
+	case TextureExternalFormat::RGBA:
+	{
+		nUnitSize = 4;
+		dataFormat = sys::ImageDataFormat::RGBA;
+	}
+		break;
+	case TextureExternalFormat::BGRA:
+	{
+		nUnitSize = 4;
+		dataFormat = sys::ImageDataFormat::BGRA;
+	}
+		break;
+	case TextureExternalFormat::DEPTH_COMPONENT:
+	{
+		nUnitSize = 4;
+		dataFormat = sys::ImageDataFormat::RGBA;
+	}
+		break;
+	case TextureExternalFormat::DEPTH_STENCIL:
+	{
+		nUnitSize = 4;
+		dataFormat = sys::ImageDataFormat::RGBA;
+	}
+		break;
+	default:
+		return false;
+		break;
+	}
+
+	return true;
+}
+
 void render::Texture::initTexture()
 {
 	if (_textureTarget == TextureTarget::NONE)

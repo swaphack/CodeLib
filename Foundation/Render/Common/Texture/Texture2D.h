@@ -40,7 +40,10 @@ namespace render
 		void setTextureImage(int level, TextureInternalSizedFormat internalFormat, int width, int height, int border, TextureExternalFormat format, TextureExternalDataType type, const void* data);
 	public:
 		virtual void load(const sys::ImageDetail* image, const TextureSetting& setting = TextureSetting());
-
+		/**
+		*	±£´æÎªpngÍ¼Æ¬
+		*/
+		bool saveToPNG(const std::string& filepath, TextureExternalFormat format);
 	public:
 		static Texture2D* getEmptyTexture();
 	private:

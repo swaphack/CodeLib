@@ -102,6 +102,18 @@ void render::Texture2D::load(const sys::ImageDetail* image, const TextureSetting
 	GLDebug::showError();
 }
 
+bool render::Texture2D::saveToPNG(const std::string& filepath, TextureExternalFormat format)
+{
+	GLDebug::showError();
+	sys::ImageDetail detail;
+	if (!getImageDetail(detail, format))
+	{
+		return false;
+	}
+	GLDebug::showError();
+	return sys::ImageHelp::saveToPNG(detail, filepath);
+}
+
 render::Texture2D* render::Texture2D::getEmptyTexture()
 {
 	if (_emptyTexture == nullptr)

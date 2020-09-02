@@ -33,7 +33,7 @@ bool render::FrameBufferNode::init()
 
 void render::FrameBufferNode::drawNode()
 {
-	if (!isInitedNode())
+	if (!isInitedFBN())
 	{
 		return;
 	}
@@ -57,7 +57,7 @@ void render::FrameBufferNode::afterDrawNode()
 
 }
 
-bool render::FrameBufferNode::isInitedNode()
+bool render::FrameBufferNode::isInitedFBN()
 {
 	return _bInitedFBN;
 }

@@ -16,6 +16,10 @@ protected:
 	void testCamera();
 
 	void addGrid();
+
+	void addCoordinate();
+
+	void testMatrix();
 private:
 	int _viewType = 0;
 

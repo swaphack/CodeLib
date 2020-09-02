@@ -30,13 +30,15 @@ bool render::PrimitiveNode::init()
 
 void render::PrimitiveNode::onPrimitiveChange()
 {
-	int nVertexCount = _points.size();
-	auto vertice = (float*)getMesh()->getMeshDetail()->createVertices(nVertexCount, sizeof(float), 3);
+	int nVertexCount = _vertexes.size();
+	auto pVertice = (float*)getMesh()->getMeshDetail()->createVertices(nVertexCount, sizeof(float), 3);
+	auto pColor = (uint8_t*)getMesh()->getMeshDetail()->createColors(nVertexCount, sizeof(uint8_t), 4);
 	auto indice = (uint32_t*)getMesh()->getMeshDetail()->createIndices(nVertexCount, sizeof(uint32_t), 1);
 
 	for (int i = 0; i < nVertexCount; i++)
 	{
-		memcpy(vertice + i * 3, _points[i].getValue(), 3 * sizeof(float));
+		memcpy(pVertice + i * 3, _vertexes[i].point.getValue(), 3 * sizeof(float));
+		memcpy(pColor + i * 4, &_vertexes[i].color, 4 * sizeof(uint8_t));
 		memcpy(indice + i, &i, sizeof(uint32_t));
 	}
 
@@ -55,50 +57,23 @@ DrawMode PrimitiveNode::getDrawMode()
 
 void PrimitiveNode::appendPoint(const math::Vector3& point)
 {
-	_points.push_back(point);
-
-	notify(NodeNotifyType::GEOMETRY);
-}
-
-void PrimitiveNode::appendPoint(const math::Vector2& point)
-{
-	math::Vector3 temp = point;
-	this->appendPoint(temp);
-}
-
-void PrimitiveNode::removePoint(const math::Vector3& point)
-{
-	std::vector<math::Vector3>::iterator it = _points.begin();
-	while (it != _points.end())
-	{
-		if ((*it) == point)
-		{
-			_points.erase(it);
-			notify(NodeNotifyType::GEOMETRY);
-			return;
-		}
-		it++;
-	}
-}
-
-void PrimitiveNode::removePoint(const math::Vector2& point)
-{
-	math::Vector3 temp = point;
-	this->removePoint(temp);
+	this->appendPoint(point, sys::Color4B(255, 255, 255, 255));
 }
 
 void PrimitiveNode::removeAllPoints()
 {
-	_points.clear();
+	_vertexes.clear();
 	notify(NodeNotifyType::GEOMETRY);
 }
 
-void PrimitiveNode::setPoints(const std::vector<math::Vector3>& points)
+void render::PrimitiveNode::appendPoint(const math::Vector3& point, const sys::Color4B& color)
 {
-	_points.clear();
+	this->appendPoint(PrimitiveVertex(point, color));
+}
 
-	_points = points;
-
+void render::PrimitiveNode::appendPoint(const PrimitiveVertex& vertex)
+{
+	_vertexes.push_back(vertex);
 	notify(NodeNotifyType::GEOMETRY);
 }
 

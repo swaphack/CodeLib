@@ -20,7 +20,17 @@ namespace render
 	public:
 		virtual bool init();
 	public:
-		void setRecordShaderProgram(ShaderProgram* program);
+		/**
+		*	投影阴影着色器
+		*/
+		void setCastShaderProgram(ShaderProgram* program);
+		/**
+		*	接受阴影着色器
+		*/
+		void setReceiveLightShaderProgram(ShaderProgram* program);
+		/**
+		*	绘制着色器
+		*/
 		void setRenderShaderProgram(ShaderProgram* program);
 	public:
 		virtual void beforeDrawNode();
@@ -38,8 +48,10 @@ namespace render
 		*/
 		std::set<Node*> _setHideNode;
 		// 记录阴影着色器
-		ShaderProgram* _recordShaderProgram = nullptr;
+		ShaderProgram* _castShaderProgram = nullptr;
 		// 绘制着色器
 		ShaderProgram* _renderShaderProgram = nullptr;
+		// 绘制着色器
+		ShaderProgram* _receiveLightShaderProgram = nullptr;
 	};
 }

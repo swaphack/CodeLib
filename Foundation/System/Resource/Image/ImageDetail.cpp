@@ -12,7 +12,7 @@ ImageDetail::ImageDetail()
 
 }
 
-uint8_t sys::ImageDetail::getUnitSize()
+uint8_t sys::ImageDetail::getUnitSize() const
 {
 	uint8_t size = 0;
 	switch (_format)
@@ -40,6 +40,11 @@ uint8_t sys::ImageDetail::getUnitSize()
 	}
 
 	return size;
+}
+
+uint8_t* sys::ImageDetail::getPtr(uint32_t offset) const
+{
+	return (uint8_t*)_data.getPtr(offset);
 }
 
 ImageDetail::~ImageDetail()

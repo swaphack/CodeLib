@@ -8,6 +8,20 @@ namespace render
 	// opengl基础绘图节点
 	class PrimitiveNode : public DrawNode2D
 	{
+	private:
+		struct PrimitiveVertex
+		{
+			// 顶点坐标
+			math::Vector3 point;
+			// 顶点颜色
+			sys::Color4B color;
+
+			PrimitiveVertex(const math::Vector3& point, const sys::Color4B& color)
+				:point(point), color(color)
+			{
+
+			}
+		};
 	public:
 		PrimitiveNode();
 		virtual ~PrimitiveNode();
@@ -19,16 +33,12 @@ namespace render
 
 		DrawMode getDrawMode();
 	public:
-		// 设置点坐标
-		void setPoints(const std::vector<math::Vector3>& points);
 		// 添加一个点坐标
 		void appendPoint(const math::Vector3& point);
-		// 添加一个点坐标
-		void appendPoint(const math::Vector2& point);
-		// 移除一个点坐标
-		void removePoint(const math::Vector3& point);
-		// 移除一个点坐标
-		void removePoint(const math::Vector2& point);
+
+		void appendPoint(const math::Vector3& point, const sys::Color4B& color);
+
+		void appendPoint(const PrimitiveVertex& vertex);
 		// 移除所有点坐标
 		void removeAllPoints();
 	public:
@@ -43,8 +53,8 @@ namespace render
 	protected:
 		void onPrimitiveChange();
 	private:
-		// 点坐标
-		std::vector<math::Vector3> _points;
+		// 顶点信息
+		std::vector<PrimitiveVertex> _vertexes;
 		/**
 		*	大小
 		*/

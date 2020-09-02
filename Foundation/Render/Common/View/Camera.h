@@ -47,6 +47,10 @@ namespace render
 		void setViewDistance(float zNear, float zFar);
 		// 获取视窗参数
 		const ViewParameter& getViewParameter() const;
+		// 获取视窗参数
+		const ViewParameter& get2DViewParameter() const;
+		// 获取视窗参数
+		const ViewParameter& get3DViewParameter() const;
 	public:
 		// 投影矩阵
 		const math::Matrix4x4& getProjectMatrix() const;

@@ -15,8 +15,9 @@ render::ShadowMapping::ShadowMapping()
 render::ShadowMapping::~ShadowMapping()
 {
 	SAFE_RELEASE(_texture);
-	SAFE_RELEASE(_recordShaderProgram);
+	SAFE_RELEASE(_castShaderProgram);
 	SAFE_RELEASE(_renderShaderProgram);
+	SAFE_RELEASE(_receiveLightShaderProgram);
 }
 
 bool render::ShadowMapping::init()
@@ -32,11 +33,11 @@ bool render::ShadowMapping::init()
 	return true;
 }
 
-void render::ShadowMapping::setRecordShaderProgram(ShaderProgram* program)
+void render::ShadowMapping::setCastShaderProgram(ShaderProgram* program)
 {
-	SAFE_RELEASE(_recordShaderProgram);
+	SAFE_RELEASE(_castShaderProgram);
 	SAFE_RETAIN(program);
-	_recordShaderProgram = program;
+	_castShaderProgram = program;
 }
 
 void render::ShadowMapping::setRenderShaderProgram(ShaderProgram* program)
@@ -44,6 +45,13 @@ void render::ShadowMapping::setRenderShaderProgram(ShaderProgram* program)
 	SAFE_RELEASE(_renderShaderProgram);
 	SAFE_RETAIN(program);
 	_renderShaderProgram = program;
+}
+
+void render::ShadowMapping::setReceiveLightShaderProgram(ShaderProgram* program)
+{
+	SAFE_RELEASE(_receiveLightShaderProgram);
+	SAFE_RETAIN(program);
+	_receiveLightShaderProgram = program;
 }
 
 void render::ShadowMapping::beforeDrawNode()
@@ -66,7 +74,7 @@ void render::ShadowMapping::beforeDrawNode()
 			}
 			else
 			{
-				pDrawNode->setShaderProgram(_recordShaderProgram);
+				pDrawNode->setShaderProgram(_castShaderProgram);
 			}
 			pDrawNode->setShadowTexture(nullptr);
 		}
@@ -76,7 +84,7 @@ void render::ShadowMapping::beforeDrawNode()
 
 void render::ShadowMapping::draw()
 {
-	int a = 1;
+	//_texture->saveToPNG(getCString("%ld.png", sys::Time::getNowTimeStamp()), TextureExternalFormat::DEPTH_COMPONENT);
 	this->broadcastFunc([this](Node* node) {
 		if (node == nullptr || node == this)
 		{
@@ -88,10 +96,12 @@ void render::ShadowMapping::draw()
 			if (pDrawNode->isRecieveShadow())
 			{
 				pDrawNode->setShadowTexture(_texture);
+				pDrawNode->setShaderProgram(_receiveLightShaderProgram);
 			}
-
-			pDrawNode->setShaderProgram(_renderShaderProgram);
-
+			else
+			{
+				pDrawNode->setShaderProgram(_renderShaderProgram);
+			}
 
 			auto it = _setHideNode.find(pDrawNode);
 			if (it != _setHideNode.end())
@@ -133,7 +143,7 @@ void render::ShadowMapping::updateShadowMapping()
 	//_texture->setTexParameter(TextureParameter::TEXTURE_COMPARE_MODE, GL_COMPARE_REF_TO_TEXTURE);
 	//_texture->setTexParameter(TextureParameter::TEXTURE_COMPARE_FUNC, GL_LEQUAL);
 	_texture->applyTextureSetting();
-	_frameBuffer->setTexture(FrameBufferAttachment::DEPTH_ATTACHMENT, _texture->getTextureID(), 0);
+	_frameBuffer->setTexture2D(FrameBufferAttachment::DEPTH_ATTACHMENT, _texture->getTextureID(), 0);
 
 	GLDebug::showError();
 
@@ -146,7 +156,7 @@ void render::ShadowMapping::updateShadowMapping()
 	}
 
 	GLRender::setDrawBuffer(DrawBufferMode::NONE);
-	GLRender::setReadBuffer(ReadBufferMode::NONE);
+	//GLRender::setReadBuffer(ReadBufferMode::NONE);
 
 	_frameBuffer->unbindFrameBuffer();
 	GLDebug::showError();

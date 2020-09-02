@@ -5,7 +5,7 @@
 namespace render
 {
 	class CtrlImage;
-	class CtrlMask;
+	class Mask;
 
 	class CtrlLayout : public CtrlWidget
 	{
@@ -32,7 +32,7 @@ namespace render
 		/**
 		*	±³¾°ÑÕÉ«
 		*/
-		CtrlMask* getBackgroundMask() const;
+		Mask* getBackgroundMask() const;
 	private:
 		/**
 		*	±³¾°Í¼Æ¬
@@ -41,7 +41,7 @@ namespace render
 		/**
 		*	±³¾°ÑÕÉ«
 		*/
-		CtrlMask* _backgroundMask = nullptr;
+		Mask* _backgroundMask = nullptr;
 		
 	};
 }

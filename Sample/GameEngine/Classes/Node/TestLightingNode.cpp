@@ -20,11 +20,11 @@ void TestLightingNode::initNodes()
 
 	this->addStar();
 
-	//this->testCubeModel();
+	this->testCubeModel();
 
 	//this->addEarth();
 
-	testShadow();
+	//testShadow();
 }
 
 void TestLightingNode::addSun()
@@ -61,9 +61,9 @@ void TestLightingNode::addStar()
 	pLight->setAmbient(255, 255, 255, 255);
 	pLight->setDiffuse(255, 255, 255, 255);
 	pLight->setSpecular(255, 255, 255, 255);
-	pLight->setConstantAttenuation(1.0f);
-	pLight->setLinearAttenuation(0.000f);
-	pLight->setQuadraticAttenuation(0.000f);
+	pLight->setConstantAttenuation(2.0f);
+	//pLight->setLinearAttenuation(1.0f / 100.0f);
+	//pLight->setQuadraticAttenuation(1.0f / 100000.0f);
 	pLightShape->addChild(pLight);
 
 	render::EllipseAction* pAction = render::CREATE_ACTION(render::EllipseAction);
@@ -117,7 +117,7 @@ void TestLightingNode::addGround()
 	pModel->setSupportMultiLight(true);
 	pModel->setTexture("Resource/Image/2k_earth_daymap.jpg");
 	pModel->setNormalTexture("Resource/Image/2k_earth_normal_map.tif");
-	pModel->setColor(0.5f, 0.5f, 0.5f);
+	pModel->setColor(1.0f, 0.5f, 1.0f);
 	pModel->setAnchorPoint(math::Vector3(0.5f, 0.5f, 0.5f));
 	pModel->setPosition(512, 384, -300);
 	pModel->setRotation(0, 0, 0);
@@ -159,22 +159,22 @@ void TestLightingNode::addGround()
 
 void TestLightingNode::testCubeModel()
 {
-	std::string filepath = "Resource/Image/NeHe.png";
+	std::string filepath = "Resource/Image/ExampleDiffuseAmbientLighting.png";
 
-	render::MultiFaceCube* pModel = CREATE_NODE(render::MultiFaceCube);
+	render::Sphere* pModel = CREATE_NODE(render::Sphere);
 	pModel->setSupportLight(true);
 	pModel->setTexture(filepath);
 	pModel->setColor(0.5f, 0.5f, 0.5f);
 	pModel->setAnchorPoint(math::Vector3(0.5f, 0.5f, 0.5f));
 	pModel->setPosition(512, 384, 0);
-	pModel->setRotation(0, 45, 0);
-	pModel->setVolume(200, 200, 200);
+	pModel->setRotation(45, 45, 0);
+	pModel->setRadius(200);
 	//Utility::loadShader(pModel, "Shader/material/material_texture.vs", "Shader/material/material_texture.fs");
 	//Utility::loadShader(pModel, "Shader/texture/texture.vs", "Shader/texture/texture.fs");
 	Utility::loadShader(pModel, "Shader/material/material_single_light.vs", "Shader/material/material_single_light.fs");
 	this->addChild(pModel);
 
-	Utility::runRotateAction(pModel);
+	//Utility::runRotateAction(pModel);
 
 	pModel->getTouchProxy()->addTouchFunc(render::TouchType::DOWN, [](render::Node* node, float x, float y, bool include) {
 		if (!include)
@@ -201,15 +201,16 @@ void TestLightingNode::testShadow()
 	pShadowNode->setAnchorPoint(0.5, 0.5f);
 
 	Utility::loadShader(pShadowNode, "Shader/texture/texture.vs", "Shader/texture/texture.fs");
-	pShadowNode->setRecordShaderProgram(G_SHANDER->createVertexFragmentProgram("Shader/light/simple_record_shadow.vs", "Shader/light/simple_record_shadow.fs"));
-	pShadowNode->setRenderShaderProgram(G_SHANDER->createVertexFragmentProgram("Shader/light/material_dirlight_shadow.vs", "Shader/light/material_dirlight_shadow.fs"));
+	pShadowNode->setCastShaderProgram(G_SHANDER->createVertexFragmentProgram("Shader/light/simple_record_shadow.vs", "Shader/light/simple_record_shadow.fs"));
+	pShadowNode->setRenderShaderProgram(G_SHANDER->createVertexFragmentProgram("Shader/material/material_single_light.vs", "Shader/material/material_single_light.fs"));
+	pShadowNode->setReceiveLightShaderProgram(G_SHANDER->createVertexFragmentProgram("Shader/light/material_dirlight_shadow.vs", "Shader/light/material_dirlight_shadow.fs"));
 
 	for (int i = 0 ; i < 6; i ++)
 	{
 		render::Cube* pModel = CREATE_NODE(render::Cube);
 		pModel->setSupportLight(true);
 		pModel->setCastShadow(true);
-		pModel->setRecieveShadow(true);
+		pModel->setRecieveShadow(i % 2 == 0);
 		pModel->setTexture(filepath);
 		pModel->setColor(0.5f, 0.5f, 0.5f);
 		pModel->setAnchorPoint(math::Vector3(0.5f, 0.5f, 0.5f));

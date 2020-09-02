@@ -73,8 +73,11 @@ namespace render
 		static void getTexLevelParameter(GetTexLevelTarget target, int level, GetTexLevelParameter name, float* params);
 		static void getTextureLevelParameter(uint32_t texture, int level, GetTexLevelParameter name, float* params);
 	public:
+		static void getTexParameter(TextureTarget target, GetTexParameter parameter, int* value);
+		static void getTextureParameter(uint32_t texture, GetTextureParameter name, int* params);
+
 		static void getTexParameter(TextureTarget target, GetTexParameter name, float* params);
-		static void getTextureParameter(uint32_t texture, GetTexParameter name, float* params);
+		static void getTextureParameter(uint32_t texture, GetTextureParameter name, float* params);
 	public:
 		static void getTextureSubImage(uint32_t texture, int level, int xoffset, int yoffset, int zoffset, int width, int height, int depth, TextureExternalFormat format, TextureExternalDataType type, int bufSize, void* pixels);
 	public:

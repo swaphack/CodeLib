@@ -180,6 +180,13 @@ namespace render
 		*	根据图片数据格式，获取纹理格式
 		*/
 		static void getTextureFormat(sys::ImageDataFormat imgFormat, TextureExternalFormat& format, TextureInternalSizedFormat& internalFormat, int& size);
+	public:
+		bool getImageDetail(sys::ImageDetail& detail, TextureExternalFormat format);
+	public:
+		/**
+		*	获取图片格式
+		*/
+		static bool getImageFormat(TextureExternalFormat format, int& nUnitSize, sys::ImageDataFormat& dataFormat);
 	protected:
 		/**
 		*	创建纹理

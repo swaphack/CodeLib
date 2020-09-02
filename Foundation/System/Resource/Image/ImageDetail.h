@@ -9,6 +9,7 @@ namespace sys
 {
 	enum class ImageDataFormat
 	{
+		NONE,
 		RED = 1,
 		RG,
 		RGB,
@@ -32,7 +33,9 @@ namespace sys
 		// 获取图片像素数据
 		uint8_t * getPixels() const;
 		// 获取像素单位大小
-		uint8_t getUnitSize();
+		uint8_t getUnitSize() const;
+
+		uint8_t* getPtr(uint32_t offset) const;
 		// 水平翻转
 		void flipX();
 		// 垂直翻转

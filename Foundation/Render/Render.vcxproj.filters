@@ -75,9 +75,6 @@
     <ClCompile Include="2d\UI\CtrlImage.cpp">
       <Filter>2d\UI</Filter>
     </ClCompile>
-    <ClCompile Include="2d\UI\CtrlMask.cpp">
-      <Filter>2d\UI</Filter>
-    </ClCompile>
     <ClCompile Include="2d\UI\CtrlScrollView.cpp">
       <Filter>2d\UI</Filter>
     </ClCompile>
@@ -600,6 +597,12 @@
     <ClCompile Include="Common\DrawNode\DrawNode3D.cpp">
       <Filter>Common\DrawNode</Filter>
     </ClCompile>
+    <ClCompile Include="2d\Primitive\CoordinateSystem.cpp">
+      <Filter>2d\Primitive</Filter>
+    </ClCompile>
+    <ClCompile Include="2d\Primitive\Mask.cpp">
+      <Filter>2d\Primitive</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Common\Node\import.h">
@@ -738,9 +741,6 @@
       <Filter>2d\UI</Filter>
     </ClInclude>
     <ClInclude Include="2d\UI\CtrlImage.h">
-      <Filter>2d\UI</Filter>
-    </ClInclude>
-    <ClInclude Include="2d\UI\CtrlMask.h">
       <Filter>2d\UI</Filter>
     </ClInclude>
     <ClInclude Include="2d\UI\CtrlScrollView.h">
@@ -1370,6 +1370,12 @@
     </ClInclude>
     <ClInclude Include="Common\DrawNode\DrawNode3D.h">
       <Filter>Common\DrawNode</Filter>
+    </ClInclude>
+    <ClInclude Include="2d\Primitive\CoordinateSystem.h">
+      <Filter>2d\Primitive</Filter>
+    </ClInclude>
+    <ClInclude Include="2d\Primitive\Mask.h">
+      <Filter>2d\Primitive</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

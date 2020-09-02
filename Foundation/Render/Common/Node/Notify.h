@@ -30,6 +30,8 @@ namespace render
 		GEOMETRY,
 		// 文本纹理
 		TEXT,
+		// 颜色
+		COLOR,
 		// 粒子
 		PARTICLE,
 		// 视窗改变

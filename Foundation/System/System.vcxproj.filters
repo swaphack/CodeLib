@@ -550,6 +550,9 @@
     <ClInclude Include="Resource\Image\ImageTIFF.h">
       <Filter>Resource\Image</Filter>
     </ClInclude>
+    <ClInclude Include="Resource\Image\ImageHelp.h">
+      <Filter>Resource\Image</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Framework\Application.cpp">
@@ -844,6 +847,9 @@
       <Filter>Light</Filter>
     </ClCompile>
     <ClCompile Include="Resource\Image\ImageTIFF.cpp">
+      <Filter>Resource\Image</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource\Image\ImageHelp.cpp">
       <Filter>Resource\Image</Filter>
     </ClCompile>
   </ItemGroup>

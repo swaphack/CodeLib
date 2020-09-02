@@ -50,7 +50,7 @@ namespace render
 	protected:
 		void updateEnvUniformVallue(Node* node, ShaderProgram* program);
 		// 更新矩阵
-		void updateMVPMatrixUniformValue(Node* node, ShaderProgram* program);
+		void updateMatrixUniformValue(Node* node, ShaderProgram* program);
 		// 更新材质
 		void updateMaterialUniformValue(ShaderProgram* program, Material* pMaterial, DrawTextureCache* textureCache);
 		// 更新纹理

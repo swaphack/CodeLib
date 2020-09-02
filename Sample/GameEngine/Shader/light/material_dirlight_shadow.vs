@@ -22,4 +22,6 @@ void main()
 
 	gl_Position = getMVP(matrix) * pos;
 	fragPosition = fragPos.xyz;
+
+	//fragPosLightSpace = matrix.project * matrix.view * fragPos;
 }

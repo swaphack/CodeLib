@@ -373,7 +373,7 @@ const math::Vector3& render::DirectionProtocol::getDefaultRight() const
 
 const math::Vector3& render::DirectionProtocol::getDefaultFront() const
 {
-	return _defaultUp;
+	return _defaultFront;
 }
 
 void render::DirectionProtocol::setUp(const math::Vector3& up)

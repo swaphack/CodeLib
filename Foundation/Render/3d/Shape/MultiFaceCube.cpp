@@ -114,6 +114,6 @@ void render::MultiFaceCube::onMultiFaceCubeBodyChanged()
 		pMesh->getMeshDetail()->setVertices(4, _cubePosition.getFaceVertex(face)->vertices, 3);
 	}
 
-	this->updateBufferData();
+	this->updateMeshData();
 }
 

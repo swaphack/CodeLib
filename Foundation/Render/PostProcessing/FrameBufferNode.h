@@ -14,17 +14,25 @@ namespace render
 		virtual ~FrameBufferNode();
 	public:
 		virtual bool init();
-
+	public:
 		virtual void drawNode();
 
 		virtual void beforeDrawNode();
 
 		virtual void afterDrawNode();
-
-		bool isInitedNode();
 	public:
+		/**
+		*	是否初始化
+		*/
+		bool isInitedFBN();
+	public:
+		/**
+		*	开始记录
+		*/
 		virtual void beginRecord();
-
+		/**
+		*	结束记录
+		*/
 		virtual void endRecord();
 	protected:
 		/**

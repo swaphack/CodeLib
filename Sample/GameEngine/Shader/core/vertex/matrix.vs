@@ -1,9 +1,9 @@
 struct Matrix 
 {
-	mat4 project;	
-	mat4 view;
-	mat4 model;
-	mat3 normal;
+	mat4 project;	// 投影矩阵
+	mat4 view;	// 视图矩阵
+	mat4 model;	// 模型矩阵
+	mat3 normal;	// 法线矩阵
 };
 
 // 模型-视图-透视 矩阵

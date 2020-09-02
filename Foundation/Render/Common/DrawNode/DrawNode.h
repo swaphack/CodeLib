@@ -117,6 +117,8 @@ namespace render
 		virtual void updateMeshData();
 	protected:
 		virtual void onColorChange();
+
+		void onDrawNodeColorChange();
 	protected:
 		// ²ÄÖÊ
 		Material* _material = nullptr;

@@ -34,6 +34,8 @@ bool Camera::init()
 		return false;
 	}
 
+	this->setZDirection(DirectionProtocol::ZDirectionType::INSIDE);
+
 	_notify->addListen(NodeNotifyType::VIEWSIZE, [this](){
 		this->updateViewPort();
 	});
@@ -47,14 +49,14 @@ bool Camera::init()
 
 void Camera::setViewPort(float left, float right, float bottom, float top)
 {
-	if (getDimensions() == CameraDimensions::TWO)
+	//if (getDimensions() == CameraDimensions::TWO)
 	{
 		_viewParameter2D.xLeft = left;
 		_viewParameter2D.xRight = right;
 		_viewParameter2D.yBottom = bottom;
 		_viewParameter2D.yTop = top;
 	}
-	else
+	//else
 	{
 		float w = 0.5f * (left + right);
 		float h = 0.5f * (bottom + top);
@@ -70,17 +72,27 @@ void Camera::setViewPort(float left, float right, float bottom, float top)
 
 void render::Camera::setViewDistance(float zNear, float zFar)
 {
-	if (getDimensions() == CameraDimensions::TWO)
+	//if (getDimensions() == CameraDimensions::TWO)
 	{
 		_viewParameter2D.zNear = zNear;
 		_viewParameter2D.zFar = zFar;
 	}
-	else
+	//else
 	{
 		_viewParameter3D.zNear = zNear;
 		_viewParameter3D.zFar = zFar;
 	}
 	this->notify(NodeNotifyType::VIEWSIZE);
+}
+
+const render::ViewParameter& render::Camera::get2DViewParameter() const
+{
+	return _viewParameter2D;
+}
+
+const render::ViewParameter& render::Camera::get3DViewParameter() const
+{
+	return _viewParameter3D;
 }
 
 const ViewParameter& Camera::getViewParameter()const

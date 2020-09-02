@@ -293,10 +293,10 @@ void GLTexture::getTextureLevelParameter(uint32_t texture, int level, GetTexLeve
 
 void GLTexture::getTexParameter(TextureTarget target, GetTexParameter name, float* params)
 {
-	glGetTexParameterfv((GLenum)target, (GLenum)name, params);
+	glGetTexParameterfv((GLenum)target, (GLenum)name, params); 
 }
 
-void GLTexture::getTextureParameter(uint32_t texture, GetTexParameter name, float* params)
+void GLTexture::getTextureParameter(uint32_t texture, GetTextureParameter name, float* params)
 {
 	glGetTextureParameterfv(texture, (GLenum)name, params);
 }
@@ -414,6 +414,16 @@ void GLTexture::setTextureView(uint32_t texture, TextureViewCompatibleNewTarget 
 void GLTexture::setTexParameter(TextureTarget target, TextureParameter paramType, const float* paramValue)
 {
 	glTexParameterfv((GLenum)target, (GLenum)paramType, paramValue);
+}
+
+void render::GLTexture::getTexParameter(TextureTarget target, GetTexParameter paramType, int* paramValue)
+{
+	glTexParameteriv((GLenum)target, (GLenum)paramType, paramValue);
+}
+
+void render::GLTexture::getTextureParameter(uint32_t texture, GetTextureParameter paramType, int* paramValue)
+{
+	glTextureParameteriv(texture, (GLenum)paramType, paramValue);
 }
 
 void render::GLTexture::setTexParameter(TextureTarget target, TextureParameter paramType, float paramValue)

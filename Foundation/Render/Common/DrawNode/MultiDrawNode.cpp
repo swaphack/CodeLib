@@ -6,6 +6,7 @@
 #include "Common/Texture/import.h"
 #include "DrawTextureCache.h"
 #include "UniformShaderApply.h"
+#include "Common/Shader/ShaderProgram.h"
 
 using namespace render;
 
@@ -38,6 +39,11 @@ bool render::MultiDrawNode::init()
 	{
 		return false;
 	}
+
+	_notify->addListen(NodeNotifyType::COLOR, [this]() {
+		this->onDrawNodeColorChange();
+	});
+
 
 	initBufferObject();
 
@@ -246,8 +252,65 @@ void render::MultiDrawNode::initBufferObject()
 	_meshes->setModelDetail(pModelDetail);
 }
 
-void render::MultiDrawNode::updateBufferData()
+void render::MultiDrawNode::updateMeshData()
 {
+	if (_meshes && _materiales)
+	{
+		for (auto item : _meshes->getMeshes())
+		{
+			auto pMesh = item.second;
+			if (!pMesh)
+			{
+				continue;
+			}
+
+			pMesh->setComputeNormal(false);
+			pMesh->setComputeTangent(false);
+
+			if (!pMesh->getMeshDetail())
+			{
+				continue;
+			}
+
+			auto pMaterial = _materiales->getMaterial(pMesh->getMeshDetail()->getMaterial());
+			if (!pMaterial)
+			{
+				continue;
+			}
+
+			auto program = pMaterial->getShaderProgram();
+			if (!program)
+			{
+				continue;
+			}
+
+			program->use();
+			// 计算法线
+			std::string name = G_UNIFORMSHADERAPPLY->getVertexName(VertexDataType::NORMAL);
+			if (!name.empty())
+			{
+				auto pUnitValue = program->getAttrib(name);
+				if (pUnitValue)
+				{
+					pMesh->setComputeNormal(true);
+				}
+			}
+
+			// 计算切线
+			name = G_UNIFORMSHADERAPPLY->getVertexName(VertexDataType::TANGENT);
+			if (!name.empty())
+			{
+				auto pUnitValue = program->getAttrib(name);
+				if (pUnitValue)
+				{
+					pMesh->setComputeTangent(true);
+				}
+			}
+			program->unuse();
+		}
+		
+	}
+
 	if (_meshes)
 	{
 		_meshes->updateBufferData();
@@ -256,8 +319,14 @@ void render::MultiDrawNode::updateBufferData()
 
 void render::MultiDrawNode::onColorChange()
 {
+	this->notify(NodeNotifyType::COLOR);
+	
+}
+
+void render::MultiDrawNode::onDrawNodeColorChange()
+{
 	for (auto item : _materiales->getMaterials())
 	{
-		item.second->getMaterialDetail()->setAmbientByte(_color.red, _color.green, _color.blue, _color.alpha);
+		item.second->getMaterialDetail()->setEmissionByte(_color.red, _color.green, _color.blue, _color.alpha);
 	}
 }

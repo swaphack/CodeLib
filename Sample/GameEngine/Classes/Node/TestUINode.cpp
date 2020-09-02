@@ -177,7 +177,7 @@ void TestUINode::testScrollView()
 
 void TestUINode::testMask()
 {
-	CtrlMask* pMask = CREATE_NODE(CtrlMask);
+	Mask* pMask = CREATE_NODE(Mask);
 	pMask->setAnchorPoint(0, 0, 0);
 	pMask->setPosition(0, 0, 0.0f);
 	pMask->setVolume(1024, 768, 0);
@@ -193,7 +193,7 @@ void TestUINode::testStencil()
 	pStencil->setVolume(400, 400, 0);
 	this->addChild(pStencil);
 
-	CtrlMask* pMask = CREATE_NODE(CtrlMask);
+	Mask* pMask = CREATE_NODE(Mask);
 	pMask->setAnchorPoint(0, 0, 0);
 	pMask->setPosition(0, 0, 0.0f);
 	pMask->setVolume(400, 400, 0);

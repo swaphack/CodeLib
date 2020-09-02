@@ -14,24 +14,6 @@ ImagePNG::~ImagePNG()
 {
 
 }
-int ImagePNG::setTextureInfo(int color_type)
-{
-	switch (color_type)
-	{
-	case PNG_COLOR_TYPE_RGB:
-		setDataFormat(ImageDataFormat::RGB);
-		return 3;
-
-	case PNG_COLOR_TYPE_RGB_ALPHA:
-		setDataFormat(ImageDataFormat::RGBA);
-		return 4;
-
-	default:
-		/* Badness */
-		break;
-	}
-	return 0;
-}
 
 bool ImagePNG::load(const std::string& fullpath)
 {
@@ -140,6 +122,24 @@ bool ImagePNG::load(const std::string& fullpath)
 	return true;
 }
 
+int ImagePNG::setTextureInfo(int color_type)
+{
+	switch (color_type)
+	{
+	case PNG_COLOR_TYPE_RGB:
+		setDataFormat(ImageDataFormat::RGB);
+		return 3;
+
+	case PNG_COLOR_TYPE_RGB_ALPHA:
+		setDataFormat(ImageDataFormat::RGBA);
+		return 4;
+
+	default:
+		/* Badness */
+		break;
+	}
+	return 0;
+}
 
 
 

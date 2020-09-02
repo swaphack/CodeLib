@@ -18,5 +18,6 @@ namespace sys
 	private:
 		// 获取纹理信息
 		int setTextureInfo(int color_type);
+
 	};
 }

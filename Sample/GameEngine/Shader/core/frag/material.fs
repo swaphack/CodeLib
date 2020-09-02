@@ -153,7 +153,7 @@ vec4 get_mat_color_with_multi_lights(vec4 color, Material material, vec4 positio
 		reflectedLight += lights[i].color * material.specular * pro.specular * pro.attenuation;
 	}
 
-	vec4 result = min(material.emission + color * scatteredLight + reflectedLight, vec4(1.0));
+	vec4 result = min(color * scatteredLight + reflectedLight, vec4(1.0));
 
 	return vec4(result.rgb, color.a);
 }

@@ -32,7 +32,7 @@ void render::UniformShaderApply::startUpdateShaderUniformValue(Node* node, Shade
 	}
 
 	updateEnvUniformVallue(node, program);
-	updateMVPMatrixUniformValue(node, program);
+	updateMatrixUniformValue(node, program);
 
 	applyLightShader(node, program);
 
@@ -175,6 +175,7 @@ void render::UniformShaderApply::startUpdateShaderVertexValue(ShaderProgram* pro
 
 void render::UniformShaderApply::endUpdateShaderUniformValue(ShaderProgram* program, Material* pMaterial, DrawTextureCache* textureCache)
 {
+	GLState::setLineWidth(1);
 	releaseMaterialUniformValue(program, pMaterial, textureCache);
 	releaseTextureUniformValue(program, pMaterial, textureCache);
 }
@@ -213,8 +214,12 @@ void render::UniformShaderApply::updateEnvUniformVallue(Node* node, ShaderProgra
 	{
 		return;
 	}
-	math::Matrix4x4 viewMat = Camera::getMainCamera()->getViewMatrix();
-	math::Vector3 viewPos = viewMat.getPosition();
+	auto pPrimitiveNode = node->as<PrimitiveNode>();
+	if (pPrimitiveNode)
+	{
+		GLState::setLineWidth(pPrimitiveNode->getPointSize());
+	}
+	math::Vector3 viewPos = Camera::getMainCamera()->getWorldMatrix().getPosition();
 	for (auto item : _mapEnvUniform)
 	{
 		auto pUniform = program->getUniform(item.second);
@@ -245,7 +250,7 @@ void render::UniformShaderApply::updateEnvUniformVallue(Node* node, ShaderProgra
 	}
 }
 
-void render::UniformShaderApply::updateMVPMatrixUniformValue(Node* node, ShaderProgram* program)
+void render::UniformShaderApply::updateMatrixUniformValue(Node* node, ShaderProgram* program)
 {
 	if (program == nullptr || node == nullptr)
 	{
@@ -257,9 +262,6 @@ void render::UniformShaderApply::updateMVPMatrixUniformValue(Node* node, ShaderP
 	math::Matrix4x4 modelMat = getWorldMatrix(node);
 
 	math::Matrix3x3 normalMat = modelMat.getInverse().getTranspose();
-
-	math::Vector3 viewPos = viewMat.getPosition();
-	//viewPos.setZ(-viewPos.getZ());
 
 	for (auto item : _mapMatrixUniform)
 	{
@@ -833,11 +835,8 @@ void render::UniformShaderApply::updateNearestLightUniformValue(Node* node, Shad
 	}
 	const math::Matrix4x4& viewMat = Camera::getMainCamera()->getViewMatrix();
 
-	math::Vector3 viewPos = viewMat.getPosition();
+	math::Vector3 viewPos = Camera::getMainCamera()->getWorldMatrix().getPosition();
 	math::Vector3 lightPos = pLight->getWorldMatrix().getPosition();
-	//viewPos.setZ(-viewPos.getZ());
-	//viewPos *= -1.0f;
-	//lightPos *= -1.0f;
 
 	math::Vector3 viewDirection = viewPos - nodePos;
 	math::Vector3 lightDirection = lightPos - nodePos;
@@ -991,18 +990,15 @@ void render::UniformShaderApply::updateAllLightsUniformValue(Node* node, ShaderP
 	{
 		bSupportShadow = node->as<LightProtocol>()->isCastShadow();
 	}
+
+	math::Vector3 viewPos = Camera::getMainCamera()->getWorldMatrix().getPosition();
 	for (auto light : mapLights)
 	{
 		auto pLight = light.second;
 		int index = light.first;
 
-		math::Vector3 viewPos = viewMat.getPosition();
+		
 		math::Vector3 lightPos = pLight->getWorldMatrix().getPosition();
-
-		//viewPos.setZ(-viewPos.getZ());
-		//lightPos *= -1.0f;
-		//viewPos *= -1.0f;
-
 		math::Vector3 nodePos = getWorldMatrix(node).getPosition();
 		math::Vector3 viewDirection = viewPos - nodePos;
 		math::Vector3 lightDirection = lightPos - nodePos;

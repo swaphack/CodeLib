@@ -122,10 +122,6 @@ void render::TransformFeedbackBufferObject::run()
 		return;
 	}
 	GLDebug::showError();
-	if (!_shaderProgram->isValid())
-	{
-		int a = 1;
-	}
 	_shaderProgram->use();
 	GLDebug::showError();
 	if (_inputFunc)

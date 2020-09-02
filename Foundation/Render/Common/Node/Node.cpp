@@ -4,7 +4,7 @@
 #include "Common/Tool/Tool.h"
 #include <algorithm>
 #include "Graphic/import.h"
-
+#include "Common/View/Camera.h"
 using namespace render;
 
 //////////////////////////////////////////////////////////////////////////
@@ -525,6 +525,13 @@ void render::Node::broadcastFunc(const std::function<void(Node*)>& func, bool re
 
 void render::Node::calDirectionWithRotate()
 {
+	if (_obRotation == math::Vector3(0,0,0))
+	{
+		setRight(getDefaultRight());
+		setUp(getDefaultUp());
+		setFront(getDefaultFront());
+		return;
+	}
 	math::Matrix4x4 mat; 
 	mat.setRotate(_obRotation);
 

@@ -163,6 +163,7 @@
     <ClInclude Include="Resource\Image\ImageBMP.h" />
     <ClInclude Include="Resource\Image\ImageDefine.h" />
     <ClInclude Include="Resource\Image\ImageDetail.h" />
+    <ClInclude Include="Resource\Image\ImageHelp.h" />
     <ClInclude Include="Resource\Image\ImageJPEG.h" />
     <ClInclude Include="Resource\Image\ImagePNG.h" />
     <ClInclude Include="Resource\Image\ImageTarga.h" />
@@ -281,6 +282,7 @@
     <ClCompile Include="Resource\Image\ImageBMP.cpp" />
     <ClCompile Include="Resource\Image\ImageDefine.cpp" />
     <ClCompile Include="Resource\Image\ImageDetail.cpp" />
+    <ClCompile Include="Resource\Image\ImageHelp.cpp" />
     <ClCompile Include="Resource\Image\ImageJPEG.cpp" />
     <ClCompile Include="Resource\Image\ImagePNG.cpp" />
     <ClCompile Include="Resource\Image\ImageTarga.cpp" />

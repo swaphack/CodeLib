@@ -8,3 +8,5 @@
 #include "ImagePNG.h"
 #include "ImageTarga.h"
 #include "ImageTIFF.h"
+
+#include "ImageHelp.h"

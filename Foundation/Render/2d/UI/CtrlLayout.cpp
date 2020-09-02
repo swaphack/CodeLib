@@ -1,6 +1,6 @@
 #include "CtrlLayout.h"
 #include "CtrlImage.h"
-#include "CtrlMask.h"
+#include "2d/Primitive/Mask.h"
 #include "Graphic/import.h"
 
 render::CtrlLayout::CtrlLayout()
@@ -8,8 +8,8 @@ render::CtrlLayout::CtrlLayout()
 	_backgroundImage = CREATE_NODE(CtrlImage);
 	this->addWidget(_backgroundImage, -1);
 
-	_backgroundMask = CREATE_NODE(CtrlMask);
-	this->addWidget(_backgroundMask, -1);
+	_backgroundMask = CREATE_NODE(Mask);
+	this->addChild(_backgroundMask, -1);
 }
 
 render::CtrlLayout::~CtrlLayout()
@@ -52,7 +52,7 @@ render::CtrlImage* render::CtrlLayout::getBackgroundImage() const
 	return _backgroundImage;
 }
 
-render::CtrlMask* render::CtrlLayout::getBackgroundMask() const
+render::Mask* render::CtrlLayout::getBackgroundMask() const
 {
 	return _backgroundMask;
 }

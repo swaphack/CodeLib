@@ -22,7 +22,7 @@ bool ImageJPEG::load(const std::string& fullpath)
 
 	struct jpeg_decompress_struct jds;
 	struct jpeg_error_mgr jem;
-	FILE* fptr = 0;
+	FILE* fptr = nullptr;
 
 	int result = fopen_s(&fptr, fullpath.c_str(), "rb");
 	if (result != 0)

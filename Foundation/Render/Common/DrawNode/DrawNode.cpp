@@ -40,6 +40,10 @@ bool render::DrawNode::init()
 		return false;
 	}
 
+	_notify->addListen(NodeNotifyType::COLOR, [this]() {
+		this->onDrawNodeColorChange();
+	});
+
 	initBufferObject();
 
 	return true;
@@ -231,7 +235,7 @@ void render::DrawNode::updateMeshData()
 					_mesh->setComputeNormal(true);
 				}
 			}
-			
+
 			// ¼ÆËãÇÐÏß
 			name = G_UNIFORMSHADERAPPLY->getVertexName(VertexDataType::TANGENT);
 			if (!name.empty())
@@ -252,5 +256,10 @@ void render::DrawNode::updateMeshData()
 
 void render::DrawNode::onColorChange()
 {
-	_material->getMaterialDetail()->setAmbientByte(_color.red, _color.green, _color.blue, _color.alpha);
+	this->notify(NodeNotifyType::COLOR);
+}
+
+void render::DrawNode::onDrawNodeColorChange()
+{
+	_material->getMaterialDetail()->setEmissionByte(_color.red, _color.green, _color.blue, _color.alpha);
 }

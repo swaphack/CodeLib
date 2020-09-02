@@ -120,9 +120,11 @@ namespace render
 		/**
 		*	更新mesh数据
 		*/
-		virtual void updateBufferData();
+		virtual void updateMeshData();
 	protected:
 		virtual void onColorChange();
+
+		void onDrawNodeColorChange();
 	protected:
 		// 材质
 		Materials* _materiales = nullptr;

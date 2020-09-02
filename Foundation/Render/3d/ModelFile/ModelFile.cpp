@@ -22,7 +22,7 @@ bool render::ModelFile::init()
 
 	_notify->addListen(NodeNotifyType::MODEL, [this]() {
 		_bloadedModel = true;
-		this->updateBufferData();
+		this->updateMeshData();
 	});
 
 	return true;

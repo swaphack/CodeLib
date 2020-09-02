@@ -17,6 +17,10 @@ void TestEnvironmentNode::initNodes()
 	this->testCamera();
 
 	//this->init3DSkyBox();
+
+	this->testMatrix();
+
+	this->addCoordinate();
 }
 
 void TestEnvironmentNode::init3DSkyBox()
@@ -143,11 +147,11 @@ void TestEnvironmentNode::testCamera()
 		}
 		else if (key == sys::BoardKey::KA)
 		{
-			camera->setPosition(camera->getPosition() - _spaceSpeed * camera->getDefaultRight());
+			camera->setPosition(camera->getPosition() - _spaceSpeed * camera->getRight());
 		}
 		else if (key == sys::BoardKey::KD)
 		{
-			camera->setPosition(camera->getPosition() + _spaceSpeed * camera->getDefaultRight());
+			camera->setPosition(camera->getPosition() + _spaceSpeed * camera->getRight());
 		}
 		else if (key == sys::BoardKey::KW)
 		{
@@ -159,11 +163,11 @@ void TestEnvironmentNode::testCamera()
 		}
 		else if (key == sys::BoardKey::KQ)
 		{
-			camera->setPosition(camera->getPosition() - _spaceSpeed * camera->getDefaultUp());
+			camera->setPosition(camera->getPosition() - _spaceSpeed * camera->getUp());
 		}
 		else if (key == sys::BoardKey::KE)
 		{
-			camera->setPosition(camera->getPosition() + _spaceSpeed * camera->getDefaultUp());
+			camera->setPosition(camera->getPosition() + _spaceSpeed * camera->getUp());
 		}
 		else if (key == sys::BoardKey::KL)
 		{
@@ -247,4 +251,35 @@ void TestEnvironmentNode::addGrid()
 
 	RepeateForeverAction* pRepeateAction = CREATE_ACTION(RepeateForeverAction);
 	pRepeateAction->setAction(pRotateByAction);
+}
+
+void TestEnvironmentNode::addCoordinate()
+{
+	render::Mask* pMask = CREATE_NODE(render::Mask);
+	pMask->setColor(sys::Color4B(255, 255, 255, 255));
+	pMask->setVolume(100, 100, -100);
+	Utility::loadShader(pMask, "Shader/geometry/draw_triangle.vs", "Shader/geometry/draw_triangle.fs");
+	this->addChild(pMask);
+
+	render::CoordinateSystem* pCoordSystem = CREATE_NODE(render::CoordinateSystem);
+	pCoordSystem->setVolume(100, 100, 100);
+	pCoordSystem->setPointSize(5);
+	Utility::loadShader(pCoordSystem, "Shader/geometry/draw_coordinate_system.vs","Shader/geometry/draw_coordinate_system.fs");
+	this->addChild(pCoordSystem);
+}
+
+void TestEnvironmentNode::testMatrix()
+{
+	math::Vector3 rotate(0, 90, 0);
+
+	math::Vector3 radian = Tool::convertToRadian(rotate);
+
+	math::Matrix4x4 mat;
+	mat.setRotate(radian);
+
+	math::Vector3 up(0, 0, 1);
+
+	math::Vector3 result = math::Matrix4x4::transpose(up, mat);
+
+	int a = 1;
 }

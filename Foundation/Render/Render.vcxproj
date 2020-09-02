@@ -74,6 +74,8 @@
     <ClCompile Include="2d\Animation\CtrlAnimation.cpp" />
     <ClCompile Include="2d\Animation\CtrlMedia.cpp" />
     <ClCompile Include="2d\Animation\CtrlSequenceFrame.cpp" />
+    <ClCompile Include="2d\Primitive\CoordinateSystem.cpp" />
+    <ClCompile Include="2d\Primitive\Mask.cpp" />
     <ClCompile Include="2d\Primitive\PointSprite.cpp" />
     <ClCompile Include="2d\Primitive\PrimitiveNode.cpp" />
     <ClCompile Include="2d\UI\CtrlEditBox.cpp" />
@@ -81,7 +83,6 @@
     <ClCompile Include="2d\UI\CtrlFrame.cpp" />
     <ClCompile Include="2d\UI\CtrlImage.cpp" />
     <ClCompile Include="2d\UI\CtrlLayout.cpp" />
-    <ClCompile Include="2d\UI\CtrlMask.cpp" />
     <ClCompile Include="2d\UI\CtrlScrollView.cpp" />
     <ClCompile Include="2d\UI\CtrlStencil.cpp" />
     <ClCompile Include="2d\UI\CtrlText.cpp" />
@@ -281,6 +282,8 @@
     <ClInclude Include="2d\Animation\import.h" />
     <ClInclude Include="2d\Animation\macros.h" />
     <ClInclude Include="2d\import.h" />
+    <ClInclude Include="2d\Primitive\CoordinateSystem.h" />
+    <ClInclude Include="2d\Primitive\Mask.h" />
     <ClInclude Include="2d\Primitive\PointSprite.h" />
     <ClInclude Include="2d\Primitive\import.h" />
     <ClInclude Include="2d\Primitive\PrimitiveNode.h" />
@@ -289,7 +292,6 @@
     <ClInclude Include="2d\UI\CtrlFrame.h" />
     <ClInclude Include="2d\UI\CtrlImage.h" />
     <ClInclude Include="2d\UI\CtrlLayout.h" />
-    <ClInclude Include="2d\UI\CtrlMask.h" />
     <ClInclude Include="2d\UI\CtrlScrollView.h" />
     <ClInclude Include="2d\UI\CtrlStencil.h" />
     <ClInclude Include="2d\UI\CtrlText.h" />

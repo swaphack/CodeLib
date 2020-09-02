@@ -67,32 +67,6 @@ void render::GLState::getFloat(uint32_t pname, float* value)
 	return glGetFloatv(pname, value);
 }
 
-void GLState::getTexImage(TextureTarget target, int level, TextureInternalSizedFormat internalFormat, TextureExternalDataType pixelType, void* data)
-{
-	glGetTexImage((GLenum)target, level, (GLenum)internalFormat, (GLenum)pixelType, data);
-}
-
-void GLState::getTexLevelParameter(TextureTarget target, int level, GetTextureParameter parameter, float* value)
-{
-	glGetTexLevelParameterfv((GLenum)target, level, (GLenum)parameter, value);
-}
-
-
-
-void GLState::getTexParameter(TextureTarget target, GetTextureParameter parameter, int* value)
-{
-	glGetTexParameteriv((GLenum)target, (GLenum)parameter, value);
-}
-
-void GLState::getTexParameter(TextureTarget target, GetTextureParameter parameter, float* value)
-{
-	glGetTexParameterfv((GLenum)target, (GLenum)parameter, value);
-}
-
-
-
-
-
 void GLState::getPointer(GetPointerTarget target, void** value)
 {
 	glGetPointerv((GLenum)target, value);
