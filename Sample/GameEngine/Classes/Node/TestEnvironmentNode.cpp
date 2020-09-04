@@ -104,7 +104,7 @@ void TestEnvironmentNode::testCamera()
 	Camera* pCamera = Camera::getMainCamera();
 
 	auto size = Tool::getGLViewSize();
-	if (pCamera->getDimensions() == CameraDimensions::THREE)
+	if (pCamera->getDimensions() == DimensionsType::THREE)
 	{
 		auto size = Tool::getGLViewSize();
 		float d = sqrt(powf(size.getWidth(), 2) + powf(size.getHeight(), 2));
@@ -134,6 +134,8 @@ void TestEnvironmentNode::testCamera()
 		{
 			_spaceSpeed = 0.0f;
 		}
+
+		math::Tool::clamp(_spaceSpeed, 0.0f, 20.0f);
 
 		if (key == sys::BoardKey::K1)
 		{
@@ -204,6 +206,8 @@ void TestEnvironmentNode::testCamera()
 			_mouseScroll *= 2.0f;
 		}
 
+		math::Tool::clamp(_mouseScroll, 0.0f, 32.0f);
+
 		_scrollEvt = evt;
 
 		float value = param * _mouseScroll;
@@ -216,7 +220,7 @@ void TestEnvironmentNode::testCamera()
 		}
 		if (_viewType == 0)
 		{
-			if (camera->getDimensions() == CameraDimensions::THREE)
+			if (camera->getDimensions() == DimensionsType::THREE)
 			{
 				if (zNear + value <= 0)
 				{

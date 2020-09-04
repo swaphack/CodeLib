@@ -12,11 +12,15 @@ namespace render
 		Light();
 		virtual ~Light();
 	public:
+		// 最大光源数
+		static int getLightMaxCount();
+	public:
+		// 光源名字
 		LightName getLightName();
 		// 光源索引
 		int getLightIndex();
-		// 最大光源数
-		static int getLightMaxCount();
+
+
 	public:
 		virtual void draw();
 		virtual bool init();

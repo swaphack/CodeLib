@@ -448,6 +448,9 @@
     <ClInclude Include="Function\MultivariateLinearFunction.h">
       <Filter>Function</Filter>
     </ClInclude>
+    <ClInclude Include="Basic\Tool.h">
+      <Filter>Basic</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />

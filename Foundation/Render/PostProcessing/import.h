@@ -5,4 +5,4 @@
 #include "ShadowMapping.h"
 
 #include "PixelPostProcessingNode.h"
-
+#include "Pixel.h"

@@ -1,27 +1,11 @@
 #pragma once
 
 #include "Common/Node/Node.h"
+#include "DimensionsType.h"
+#include "ViewParameter.h"
 
 namespace render
 {
-	// 维度模式
-	enum class CameraDimensions
-	{
-		TWO,
-		THREE
-	};
-
-	// 视窗参数
-	struct ViewParameter
-	{
-		float xLeft = 0;
-		float xRight = 0;
-		float yBottom = 0;
-		float yTop = 0;
-		float zNear = 0.1f;
-		float zFar = 1000;
-	};
-
 	// 摄像机
 	class Camera : public Node
 	{
@@ -29,15 +13,17 @@ namespace render
 		Camera();
 		virtual ~Camera();
 	public:
+		// 主摄像机
 		static Camera* getMainCamera();
+		// 主摄像机
 		static void setMainCamera(Camera* camera);
 	public:
 		virtual bool init();
 	public:
 		// 设置维度
-		void setDimensions(CameraDimensions d);
+		void setDimensions(DimensionsType d);
 		// 获取维度
-		CameraDimensions getDimensions() const;
+		DimensionsType getDimensions() const;
 		// 绘制节点
 		virtual void drawNode();
 	public:
@@ -82,7 +68,7 @@ namespace render
 		// 主摄像头
 		static Camera* _mainCamera;
 		// 维度
-		CameraDimensions _dimensions = CameraDimensions::TWO;
+		DimensionsType _dimensions = DimensionsType::TWO;
 		// 投影矩阵
 		math::Matrix4x4 _projectMatrix;
 		// 视图矩阵

@@ -20,11 +20,11 @@ void TestLightingNode::initNodes()
 
 	this->addStar();
 
-	this->testCubeModel();
+	//this->testCubeModel();
 
 	//this->addEarth();
 
-	//testShadow();
+	testShadow();
 }
 
 void TestLightingNode::addSun()
@@ -62,8 +62,8 @@ void TestLightingNode::addStar()
 	pLight->setDiffuse(255, 255, 255, 255);
 	pLight->setSpecular(255, 255, 255, 255);
 	pLight->setConstantAttenuation(2.0f);
-	//pLight->setLinearAttenuation(1.0f / 100.0f);
-	//pLight->setQuadraticAttenuation(1.0f / 100000.0f);
+	pLight->setLinearAttenuation(1.0f / 400.0f);
+	pLight->setQuadraticAttenuation(1.0f / 100000.0f);
 	pLightShape->addChild(pLight);
 
 	render::EllipseAction* pAction = render::CREATE_ACTION(render::EllipseAction);
@@ -119,9 +119,11 @@ void TestLightingNode::addGround()
 	pModel->setNormalTexture("Resource/Image/2k_earth_normal_map.tif");
 	pModel->setColor(1.0f, 0.5f, 1.0f);
 	pModel->setAnchorPoint(math::Vector3(0.5f, 0.5f, 0.5f));
-	pModel->setPosition(512, 384, -300);
+	pModel->setPosition(512, 384, -1000);
 	pModel->setRotation(0, 0, 0);
-	pModel->setVolume(1024, 768);
+	pModel->setVolume(10240, 7680); 
+	pModel->getMaterial()->getMaterialDetail()->setSpecularShiness(32);
+	pModel->getMaterial()->getMaterialDetail()->setSpecularStrength(2);
 	Utility::loadShader(pModel, "Shader/material/material_normal_map.vs", "Shader/material/material_normal_map.fs");
 	//Utility::loadShader(pModel, "Shader/material/material_single_light.vs", "Shader/material/material_multi_lights.fs");
 	this->addChild(pModel);
@@ -161,14 +163,14 @@ void TestLightingNode::testCubeModel()
 {
 	std::string filepath = "Resource/Image/ExampleDiffuseAmbientLighting.png";
 
-	render::Sphere* pModel = CREATE_NODE(render::Sphere);
+	render::MultiFaceCube* pModel = CREATE_NODE(render::MultiFaceCube);
 	pModel->setSupportLight(true);
 	pModel->setTexture(filepath);
 	pModel->setColor(0.5f, 0.5f, 0.5f);
 	pModel->setAnchorPoint(math::Vector3(0.5f, 0.5f, 0.5f));
 	pModel->setPosition(512, 384, 0);
 	pModel->setRotation(45, 45, 0);
-	pModel->setRadius(200);
+	pModel->setVolume(400, 400, 400);
 	//Utility::loadShader(pModel, "Shader/material/material_texture.vs", "Shader/material/material_texture.fs");
 	//Utility::loadShader(pModel, "Shader/texture/texture.vs", "Shader/texture/texture.fs");
 	Utility::loadShader(pModel, "Shader/material/material_single_light.vs", "Shader/material/material_single_light.fs");
@@ -197,7 +199,7 @@ void TestLightingNode::testShadow()
 
 	render::ShadowMapping* pShadowNode = CREATE_NODE(render::ShadowMapping);
 	pShadowNode->setVolume(1024, 768);
-	pShadowNode->setPosition(512, 384, -280);
+	pShadowNode->setPosition(512, 384, 0);
 	pShadowNode->setAnchorPoint(0.5, 0.5f);
 
 	Utility::loadShader(pShadowNode, "Shader/texture/texture.vs", "Shader/texture/texture.fs");
@@ -214,7 +216,7 @@ void TestLightingNode::testShadow()
 		pModel->setTexture(filepath);
 		pModel->setColor(0.5f, 0.5f, 0.5f);
 		pModel->setAnchorPoint(math::Vector3(0.5f, 0.5f, 0.5f));
-		pModel->setPosition(-400 + i * 150, -200 + i * 150, 200);
+		pModel->setPosition(-400 + i * 150, -200 + i * 150, -200);
 		pModel->setVolume(100, 100, 100);
 		//Utility::loadShader(pModel, "Shader/material/material_dirlight_shadow.vs", "Shader/material/material_dirlight_shadow.fs");
 

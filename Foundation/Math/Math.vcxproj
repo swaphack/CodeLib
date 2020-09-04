@@ -116,6 +116,7 @@
     <ClInclude Include="Basic\import.h" />
     <ClInclude Include="Basic\Interval.h" />
     <ClInclude Include="Basic\Boundary.h" />
+    <ClInclude Include="Basic\Tool.h" />
     <ClInclude Include="Basic\VariableLengthArray.h" />
     <ClInclude Include="Discrete\ManyValuedLogic\FuzzyProposition.h" />
     <ClInclude Include="Discrete\ManyValuedLogic\ManyValuedProposition.h" />

@@ -1,19 +1,18 @@
 #pragma once
 
-#include "PathNode.h"
-
-#include "mathlib.h"
+#include "Relation.h"
 
 namespace alg
 {
 	/**
 	*	地图点
 	*/
-	class MapNode : public PathNode
+	class MapNode : public Relation
 	{
 	public:
 		MapNode();
 		MapNode(const math::Vector2& position);
+		MapNode(const math::Vector3& position);
 		virtual ~MapNode();
 	public:
 		/**
@@ -23,11 +22,15 @@ namespace alg
 		/**
 		*	坐标
 		*/
-		const math::Vector2& getPosition() const;
+		void setPosition(const math::Vector3& pos);
+		/**
+		*	坐标
+		*/
+		const math::Vector3& getPosition() const;
 	private:
 		/**
 		*	坐标
 		*/
-		math::Vector2 _position;
+		math::Vector3 _position;
 	};
 }

@@ -1,7 +1,6 @@
 #pragma once
 
 #include "system.h"
-#include "ViewConfig.h"
 
 namespace render
 {
@@ -12,7 +11,6 @@ namespace render
 		View();
 		virtual ~View();
 	public:
-		const ViewConfig* getConfig();
 		// 设置视窗位置
 		void setPosition(float x, float y);
 		// 获取视窗位置
@@ -33,7 +31,5 @@ namespace render
 		math::Vector2 _position;
 		// 视窗大小
 		math::Size _size;
-		// 视图配置
-		ViewConfig _viewConfig;
 	};
 }

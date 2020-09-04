@@ -19,9 +19,6 @@
     <ClCompile Include="Common\View\View.cpp">
       <Filter>Common\View</Filter>
     </ClCompile>
-    <ClCompile Include="Common\View\ViewConfig.cpp">
-      <Filter>Common\View</Filter>
-    </ClCompile>
     <ClCompile Include="Common\Scene\Scene.cpp">
       <Filter>Common\Scene</Filter>
     </ClCompile>
@@ -266,9 +263,6 @@
     </ClCompile>
     <ClCompile Include="Common\Fragment\FragmentHandle.cpp">
       <Filter>Common\Fragment</Filter>
-    </ClCompile>
-    <ClCompile Include="Common\View\Pixel.cpp">
-      <Filter>Common\View</Filter>
     </ClCompile>
     <ClCompile Include="2d\UI\CtrlStencil.cpp">
       <Filter>2d\UI</Filter>
@@ -603,6 +597,9 @@
     <ClCompile Include="2d\Primitive\Mask.cpp">
       <Filter>2d\Primitive</Filter>
     </ClCompile>
+    <ClCompile Include="PostProcessing\Pixel.cpp">
+      <Filter>PostProcessing</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Common\Node\import.h">
@@ -633,9 +630,6 @@
       <Filter>Common\View</Filter>
     </ClInclude>
     <ClInclude Include="Common\View\import.h">
-      <Filter>Common\View</Filter>
-    </ClInclude>
-    <ClInclude Include="Common\View\ViewConfig.h">
       <Filter>Common\View</Filter>
     </ClInclude>
     <ClInclude Include="Common\Tool\import.h">
@@ -980,9 +974,6 @@
     </ClInclude>
     <ClInclude Include="Common\Fragment\FragmentHandle.h">
       <Filter>Common\Fragment</Filter>
-    </ClInclude>
-    <ClInclude Include="Common\View\Pixel.h">
-      <Filter>Common\View</Filter>
     </ClInclude>
     <ClInclude Include="2d\UI\CtrlStencil.h">
       <Filter>2d\UI</Filter>
@@ -1376,6 +1367,15 @@
     </ClInclude>
     <ClInclude Include="2d\Primitive\Mask.h">
       <Filter>2d\Primitive</Filter>
+    </ClInclude>
+    <ClInclude Include="PostProcessing\Pixel.h">
+      <Filter>PostProcessing</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\View\ViewParameter.h">
+      <Filter>Common\View</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\View\DimensionsType.h">
+      <Filter>Common\View</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

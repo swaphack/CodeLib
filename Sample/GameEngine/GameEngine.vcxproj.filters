@@ -90,6 +90,9 @@
     <ClCompile Include="Classes\Node\TestXFBNode.cpp">
       <Filter>Classes\Node</Filter>
     </ClCompile>
+    <ClCompile Include="Classes\Node\TestMeshNode.cpp">
+      <Filter>Classes\Node</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Classes\GLRenderApplication.h">
@@ -165,6 +168,9 @@
       <Filter>Classes\Node</Filter>
     </ClInclude>
     <ClInclude Include="Classes\Node\TestXFBNode.h">
+      <Filter>Classes\Node</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Node\TestMeshNode.h">
       <Filter>Classes\Node</Filter>
     </ClInclude>
   </ItemGroup>

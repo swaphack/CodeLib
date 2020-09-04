@@ -21,3 +21,4 @@
 #include "TestComputeShader.h"
 #include "TestLightingNode.h"
 #include "TestXFBNode.h"
+#include "TestMeshNode.h"

@@ -12,11 +12,6 @@ View::~View()
 {
 }
 
-const ViewConfig* View::getConfig()
-{
-	return &_viewConfig;
-}
-
 void View::setPosition(float x, float y)
 {
 	_position.set(x, y);

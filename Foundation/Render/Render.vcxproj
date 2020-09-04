@@ -224,9 +224,7 @@
     <ClCompile Include="Common\VAO\VertexAttribPointer.cpp" />
     <ClCompile Include="Common\View\Camera.cpp" />
     <ClCompile Include="Common\View\MultiSampling.cpp" />
-    <ClCompile Include="Common\View\Pixel.cpp" />
     <ClCompile Include="Common\View\View.cpp" />
-    <ClCompile Include="Common\View\ViewConfig.cpp" />
     <ClCompile Include="Common\XFB\TransformFeedback.cpp" />
     <ClCompile Include="Common\XFB\TransformFeedbackBufferObject.cpp" />
     <ClCompile Include="GPU\GPUCalculator.cpp" />
@@ -269,6 +267,7 @@
     <ClCompile Include="Platform\Windows\GlutWindow.cpp" />
     <ClCompile Include="Platform\Windows\GLWindow.cpp" />
     <ClCompile Include="PostProcessing\FrameBufferNode.cpp" />
+    <ClCompile Include="PostProcessing\Pixel.cpp" />
     <ClCompile Include="PostProcessing\PixelPostProcessingNode.cpp" />
     <ClCompile Include="PostProcessing\PostProcessingNode.cpp" />
     <ClCompile Include="PostProcessing\ShadowMapping.cpp" />
@@ -471,11 +470,11 @@
     <ClInclude Include="Common\VAO\VertexAttrib.h" />
     <ClInclude Include="Common\VAO\VertexAttribPointer.h" />
     <ClInclude Include="Common\View\Camera.h" />
+    <ClInclude Include="Common\View\DimensionsType.h" />
     <ClInclude Include="Common\View\import.h" />
     <ClInclude Include="Common\View\MultiSampling.h" />
-    <ClInclude Include="Common\View\Pixel.h" />
     <ClInclude Include="Common\View\View.h" />
-    <ClInclude Include="Common\View\ViewConfig.h" />
+    <ClInclude Include="Common\View\ViewParameter.h" />
     <ClInclude Include="Common\XFB\import.h" />
     <ClInclude Include="Common\XFB\TransformFeedback.h" />
     <ClInclude Include="Common\XFB\TransformFeedbackBufferObject.h" />
@@ -530,6 +529,7 @@
     <ClInclude Include="Platform\Windows\import.h" />
     <ClInclude Include="PostProcessing\FrameBufferNode.h" />
     <ClInclude Include="PostProcessing\import.h" />
+    <ClInclude Include="PostProcessing\Pixel.h" />
     <ClInclude Include="PostProcessing\PixelPostProcessingNode.h" />
     <ClInclude Include="PostProcessing\PostProcessingNode.h" />
     <ClInclude Include="PostProcessing\ShadowMapping.h" />

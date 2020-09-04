@@ -97,7 +97,7 @@ const render::ViewParameter& render::Camera::get3DViewParameter() const
 
 const ViewParameter& Camera::getViewParameter()const
 {
-	if (getDimensions() == CameraDimensions::TWO)
+	if (getDimensions() == DimensionsType::TWO)
 	{
 		return _viewParameter2D;
 	}
@@ -124,7 +124,7 @@ void Camera::setMainCamera(Camera* camera)
 	_mainCamera = camera;
 }
 
-CameraDimensions Camera::getDimensions() const
+DimensionsType Camera::getDimensions() const
 {
 	return _dimensions;
 }
@@ -140,7 +140,7 @@ void render::Camera::drawNode()
 	GLDebug::showError();
 }
 
-void Camera::setDimensions(CameraDimensions d)
+void Camera::setDimensions(DimensionsType d)
 {
 	_dimensions = d;
 }
@@ -156,7 +156,7 @@ void Camera::visit()
 
 void Camera::updateView()
 {
-	if (getDimensions() == CameraDimensions::TWO)
+	if (getDimensions() == DimensionsType::TWO)
 	{
 		GLMatrix::loadOrtho(
 			_viewParameter2D.xLeft,
@@ -166,7 +166,7 @@ void Camera::updateView()
 			_viewParameter2D.zNear,
 			_viewParameter2D.zFar);
 	}
-	else if (getDimensions() == CameraDimensions::THREE)
+	else if (getDimensions() == DimensionsType::THREE)
 	{
 		GLMatrix::loadFrustum(
 			_viewParameter3D.xLeft,
@@ -209,14 +209,14 @@ math::Matrix4x4 render::Camera::getProjectMatrix(float znear, float zfar)
 {
 	math::Matrix4x4 matrix;
 
-	if (getDimensions() == CameraDimensions::TWO)
+	if (getDimensions() == DimensionsType::TWO)
 	{
 		matrix = math::Matrix4x4::ortho(
 			_viewParameter2D.xLeft, _viewParameter2D.xRight,
 			_viewParameter2D.yBottom, _viewParameter2D.yTop,
 			znear, zfar);
 	}
-	else if (getDimensions() == CameraDimensions::THREE)
+	else if (getDimensions() == DimensionsType::THREE)
 	{
 		matrix = math::Matrix4x4::frustum(
 			_viewParameter3D.xLeft, _viewParameter3D.xRight,
@@ -242,7 +242,7 @@ math::Matrix4x4 render::Camera::lookAtCenter()
 math::Vector3 render::Camera::getCenterPosition()
 {
 	math::Vector3 center;
-	if (getDimensions() == CameraDimensions::TWO)
+	if (getDimensions() == DimensionsType::TWO)
 	{
 		center.setX(0.5f * (_viewParameter2D.xLeft + _viewParameter2D.xRight));
 		center.setY(0.5f * (_viewParameter2D.yBottom + _viewParameter2D.yTop));
@@ -258,14 +258,14 @@ math::Vector3 render::Camera::getCenterPosition()
 
 void render::Camera::updateViewPort()
 {
-	if (getDimensions() == CameraDimensions::TWO)
+	if (getDimensions() == DimensionsType::TWO)
 	{
 		_projectMatrix = math::Matrix4x4::ortho(
 			_viewParameter2D.xLeft, _viewParameter2D.xRight,
 			_viewParameter2D.yBottom, _viewParameter2D.yTop,
 			_viewParameter2D.zNear, _viewParameter2D.zFar);
 	}
-	else if (getDimensions() == CameraDimensions::THREE)
+	else if (getDimensions() == DimensionsType::THREE)
 	{
 		_projectMatrix = math::Matrix4x4::frustum(
 			_viewParameter3D.xLeft, _viewParameter3D.xRight,
