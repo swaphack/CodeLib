@@ -44,14 +44,20 @@ bool RectVectices::containPointByPolygon(float x, float y)
 	nvec[2] = math::Vector2(rightUp.getX(), rightUp.getY());
 	nvec[3] = math::Vector2(leftUp.getX(), leftUp.getY());
 
-	math::Polygon<4> p(nvec);
+	math::Polygon2d<4> p(nvec);
 	return p.contains(math::Vector2(x, y));
 }
 
 double RectVectices::getArea(const math::Vector3& p1, const math::Vector3& p2, const math::Vector3& p3)
 {
+	math::Vector3 v1 = p2 - p1;
+	math::Vector3 v2 = p3 - p1;
+
+	return 0.5f * math::Vector3::dot(v1, v2);
+	/*
 	double s = 0.5 * (p1.getX() * p2.getY() + p2.getX() * p3.getY() + p3.getX() * p1.getY() - p1.getX() * p3.getY() - p2.getX() * p1.getY() - p3.getX() * p2.getY());
 	return abs(s);
+	*/
 }
 
 float render::RectVectices::getX()

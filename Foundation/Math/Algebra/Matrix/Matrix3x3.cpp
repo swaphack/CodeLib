@@ -26,14 +26,19 @@ math::Matrix3x3::Matrix3x3(const Matrix4x4& mat)
 	}
 }
 
+math::Matrix3x3::Matrix3x3(const SquareMatrix3& mat)
+{
+	this->assign(mat.getValue());
+}
+
 math::Matrix3x3::Matrix3x3(const Matrix3x3& mat)
 {
-	this->set(mat.getValue());
+	this->assign(mat.getValue());
 }
 
 math::Matrix3x3& math::Matrix3x3::operator=(const Matrix3x3& mat)
 {
-	this->set(mat.getValue());
+	this->assign(mat.getValue());
 
 	return *this;
 
@@ -41,7 +46,7 @@ math::Matrix3x3& math::Matrix3x3::operator=(const Matrix3x3& mat)
 
 math::Matrix3x3::Matrix3x3(const float* value)
 {
-	this->set(value);
+	this->assign(value);
 }
 
 Matrix3x3::~Matrix3x3()
@@ -69,8 +74,22 @@ void Matrix3x3::setScale(const Vector2& vector)
 
 void Matrix3x3::setRotate(float rotation)
 {
-	(*this)[0] = cos(rotation); (*this)[1] = -sin(rotation);
-	(*this)[3] = sin(rotation); (*this)[4] = cos(rotation);
+	(*this)[0] = cos(rotation); (*this)[1] = sin(rotation);
+	(*this)[3] = -sin(rotation); (*this)[4] = cos(rotation);
+}
+
+void math::Matrix3x3::setShear(float radianX, float radianY)
+{
+	float tanX = tanf(radianX);
+	float tanY = tanf(radianY);
+
+	(*this)[1] = tanY;
+	(*this)[3] = tanX;
+}
+
+math::Matrix3x3::operator SquareMatrix3()
+{
+	return SquareMatrix3(*this);
 }
 
 Matrix3x3& math::Matrix3x3::operator=(const Matrix4x4& mat)

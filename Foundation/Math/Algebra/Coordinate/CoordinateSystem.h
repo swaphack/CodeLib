@@ -5,6 +5,7 @@ namespace math
 	/**
 	*	×ø±êÏµ
 	*/
+	template<const int Count>
 	class CoordinateSystem
 	{
 	public:
@@ -12,5 +13,6 @@ namespace math
 		virtual ~CoordinateSystem();
 	protected:
 	private:
+		SquareMatrix<Count>;
 	};
 }

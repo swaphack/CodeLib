@@ -6,3 +6,4 @@
 #include "Matrix4x4.h"
 #include "Matrix4x1.h"
 #include "Matrix1x4.h"
+#include "SquareMatrix.h"

@@ -24,7 +24,7 @@ Matrix4x4::Matrix4x4(const Matrix3x3& mat)
 
 Matrix4x4::Matrix4x4(const float* value)
 {
-	this->set(value);
+	this->assign(value);
 }
 
 void Matrix4x4::loadIdentity()
@@ -79,23 +79,28 @@ void Matrix4x4::setRotate(const Vector3& radian)
 	(*this)[15] = 1;
 }
 
+void math::Matrix4x4::setShear(float radianX, float radianY, float radianZ)
+{
+
+}
+
 void Matrix4x4::setRotateX(float x)
 {
-	(*this)[5] = cos(x); (*this)[6] = -sin(x);
-	(*this)[9] = sin(x); (*this)[10] = cos(x);
+	(*this)[5] = cos(x); (*this)[6] = sin(x);
+	(*this)[9] = -sin(x); (*this)[10] = cos(x);
 }
 
 void Matrix4x4::setRotateY(float y)
 {
-	(*this)[0] = cos(y); (*this)[2] = sin(y);
-	(*this)[8] = -sin(y); (*this)[10] = cos(y);
+	(*this)[0] = cos(y); (*this)[2] = -sin(y);
+	(*this)[8] = sin(y); (*this)[10] = cos(y);
 }
 
 void Matrix4x4::setRotateZ(float z)
 {
 	Matrix4x4 mat;
-	(*this)[0] = cos(z); (*this)[1] = -sin(z);
-	(*this)[4] = sin(z); (*this)[5] = cos(z);
+	(*this)[0] = cos(z); (*this)[1] = sin(z);
+	(*this)[4] = -sin(z); (*this)[5] = cos(z);
 }
 
 void Matrix4x4::setRotationByAxis(const Vector3& axis, float radian)
@@ -244,6 +249,11 @@ math::Matrix4x4::Matrix4x4(const Matrix<float, 4, 4>& mat)
 	}
 }
 
+math::Matrix4x4::Matrix4x4(const SquareMatrix4& mat)
+{
+	this->assign(mat.getValue());
+}
+
 math::Matrix4x4::Matrix4x4(const float value[4][4])
 {
 	for (int i = 0; i < 4; i++)
@@ -264,6 +274,8 @@ math::Matrix4x4::~Matrix4x4()
 {
 
 }
+
+
 
 math::Matrix4x4& math::Matrix4x4::operator=(const Matrix4x4& mat)
 {
@@ -317,6 +329,11 @@ math::Matrix4x4& math::Matrix4x4::operator=(const Matrix4x1& mat)
 	}
 
 	return *this;
+}
+
+math::Matrix4x4::operator SquareMatrix4()
+{
+	return SquareMatrix4(*this);
 }
 
 math::Matrix4x4 math::Matrix4x4::ortho(float left, float right, float bottom, float top,
@@ -442,6 +459,72 @@ Vector3 math::Matrix4x4::transpose(const Vector3& src, const Matrix4x4& mat)
 	return pos;
 }
 
+math::Matrix4x4 math::Matrix4x4::getFrontViewMatrix()
+{
+	Matrix4x4 mat;
+	mat.reset();
+	mat[0] = 1;
+	mat[5] = 1;
+	mat[10] = 1;
+	mat[15] = 1;
+	return mat;
+}
+
+math::Matrix4x4 math::Matrix4x4::getBackViewMatrix()
+{
+	Matrix4x4 mat;
+	mat.reset();
+	mat[2] = 1;
+	mat[5] = 1;
+	mat[8] = -1;
+	mat[15] = 1;
+	return mat;
+}
+
+math::Matrix4x4 math::Matrix4x4::getTopViewMatrix()
+{
+	Matrix4x4 mat;
+	mat.reset();
+	mat[0] = 1;
+	mat[6] = 1;
+	mat[9] = -1;
+	mat[15] = 1;
+	return mat;
+}
+
+math::Matrix4x4 math::Matrix4x4::getBottomViewMatrix()
+{
+	Matrix4x4 mat;
+	mat.reset();
+	mat[0] = 1;
+	mat[6] = -1;
+	mat[9] = 1;
+	mat[15] = 1;
+	return mat;
+}
+
+math::Matrix4x4 math::Matrix4x4::getLeftViewMatrix()
+{
+	Matrix4x4 mat;
+	mat.reset();
+	mat[2] = -1;
+	mat[5] = 1;
+	mat[8] = 1;
+	mat[15] = 1;
+	return mat;
+}
+
+math::Matrix4x4 math::Matrix4x4::getRightViewMatrix()
+{
+	Matrix4x4 mat;
+	mat.reset();
+	mat[2] = 1;
+	mat[5] = 1;
+	mat[8] = -1;
+	mat[15] = 1;
+	return mat;
+}
+
 math::Vector3 math::Matrix4x4::getPosition() const
 {
 	return Vector3((*this)[12], (*this)[13], (*this)[14]);
@@ -484,5 +567,32 @@ void math::Matrix4x4::setColumn(int column, const Vector4& value)
 	this->setValue(column, 1, value[1]);
 	this->setValue(column, 2, value[2]);
 	this->setValue(column, 3, value[3]);
+}
+
+void math::Matrix4x4::setShearX(float radianY, float radianZ)
+{
+	float tanY = tanf(radianY);
+	float tanZ = tanf(radianZ);
+
+	(*this)[4] = tanY;
+	(*this)[8] = tanZ;
+}
+
+void math::Matrix4x4::setShearY(float radianX, float radianZ)
+{
+	float tanX = tanf(radianX);
+	float tanZ = tanf(radianZ);
+
+	(*this)[1] = tanX;
+	(*this)[9] = tanZ;
+}
+
+void math::Matrix4x4::setShearZ(float radianX, float radianY)
+{
+	float tanX = tanf(radianX);
+	float tanY = tanf(radianY);
+
+	(*this)[2] = tanX;
+	(*this)[6] = tanY;
 }
 

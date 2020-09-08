@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Algebra/import.h"
-#include "Geometry/base/Line2.h"
+#include "Line2d.h"
 #include "Geometry/base/Points.h"
 #include <cstdint>
 #include "Basic/base.h"
@@ -12,20 +12,20 @@ namespace math
 	*	平面几何的多边形
 	*/ 
 	template<const int Length>
-	struct Polygon : public Points<math::Vector2, Length>
+	struct Polygon2d : public Points<math::Vector2, Length>
 	{
 	public:
-		Polygon() {}
-		Polygon(const Polygon& polygon)
+		Polygon2d() {}
+		Polygon2d(const Polygon2d& polygon)
 		{
 			this->set(polygon.getValue());
 		}
-		Polygon(const math::Vector2* vpoints)
+		Polygon2d(const math::Vector2* vpoints)
 		{
 			this->set(vpoints);
 		}
 
-		virtual ~Polygon() {}
+		virtual ~Polygon2d() {}
 	public:
 		/**
 		*	是否包含点
@@ -58,25 +58,25 @@ namespace math
 		/**
 		*	是否包含线段
 		*/
-		bool contains(const Line2& line)
+		bool contains(const Line2d& line)
 		{
 			return false;
 		}
 		/**
 		*	是否与线段相交
 		*/
-		bool intersects(const Line2& line)
+		bool intersects(const Line2d& line)
 		{
 			return false;
 		}
 		/**
 		*	是否与多边形相交
 		*/
-		bool intersects(const Polygon& polygon)
+		bool intersects(const Polygon2d& polygon)
 		{
 			for (int32_t i = 0; i < polygon.getLength(); i++)
 			{
-				Line2 line(polygon[i], polygon[(i + 1) % polygon.getLength()]);
+				Line2d line(polygon[i], polygon[(i + 1) % polygon.getLength()]);
 				if (this->intersects(line) || this->contains(line))
 				{
 					return true;
@@ -88,7 +88,7 @@ namespace math
 		/**
 		*	重载=
 		*/
-		Polygon& operator=(const Polygon& polygon)
+		Polygon2d& operator=(const Polygon2d& polygon)
 		{
 			this->set(polygon.getValue());
 		}
@@ -96,7 +96,7 @@ namespace math
 		/**
 		*	是否是标准的多边形，顶点数大于等于3,并且相邻不存在共线的情况
 		*/
-		static bool isStandard(const Polygon& polygon)
+		static bool isStandard(const Polygon2d& polygon)
 		{
 			if (polygon.getLength() < 3)
 			{
@@ -104,20 +104,20 @@ namespace math
 			}
 
 			int32_t lineCount = polygon.getLength();
-			PointAndLinePositionType lastDirection = PointAndLinePositionType::NONE;
+			PointAndLinePosition2DType lastDirection = PointAndLinePosition2DType::NONE;
 			for (int32_t i = 0; i < lineCount; i++)
 			{
 				Vector2 v0 = polygon[i % lineCount];
 				Vector2 v1 = polygon[(i + 1) % lineCount];
 				Vector2 v2 = polygon[(i + 1) % lineCount];
-				Line2 line(v0, v1);
-				PointAndLinePositionType eType = line.getPointPositionType(v2);
-				if (eType == PointAndLinePositionType::INCLUDE)
+				Line2d line(v0, v1);
+				PointAndLinePosition2DType eType = line.getPointPositionType(v2);
+				if (eType == PointAndLinePosition2DType::INCLUDE)
 				{
 					return false;
 				}
 
-				if (lastDirection != PointAndLinePositionType::NONE)
+				if (lastDirection != PointAndLinePosition2DType::NONE)
 				{
 					if (lastDirection != eType)
 					{
@@ -135,7 +135,7 @@ namespace math
 		/**
 		*	是否是凸多边形
 		*/
-		static bool isConvex(const Polygon& polygon)
+		static bool isConvex(const Polygon2d& polygon)
 		{
 			if (!isStandard(polygon))
 			{
@@ -143,20 +143,20 @@ namespace math
 			}
 
 			int32_t lineCount = polygon.getLength();
-			PointAndLinePositionType lastDirection = PointAndLinePositionType::NONE;
+			PointAndLinePosition2DType lastDirection = PointAndLinePosition2DType::NONE;
 			for (int32_t i = 0; i < lineCount; i++)
 			{
 				Vector2 v0 = polygon[i % lineCount];
 				Vector2 v1 = polygon[(i + 1) % lineCount];
 				Vector2 v2 = polygon[(i + 1) % lineCount];
-				Line2 line(v0, v1);
-				PointAndLinePositionType eType = line.getPointPositionType(v2);
-				if (eType == PointAndLinePositionType::INCLUDE)
+				Line2d line(v0, v1);
+				PointAndLinePosition2DType eType = line.getPointPositionType(v2);
+				if (eType == PointAndLinePosition2DType::INCLUDE)
 				{
 					return false;
 				}
 
-				if (lastDirection != PointAndLinePositionType::NONE)
+				if (lastDirection != PointAndLinePosition2DType::NONE)
 				{
 					if (lastDirection != eType)
 					{

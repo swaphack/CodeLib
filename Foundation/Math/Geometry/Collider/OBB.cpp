@@ -33,12 +33,12 @@ bool OBB::contains(const Vector3& point32)
 	return false;
 }
 
-bool OBB::contains(const LineSegment2& line)
+bool OBB::contains(const LineSegment2d& line)
 {
 	return false;
 }
 
-bool OBB::contains(const LineSegment& line)
+bool OBB::contains(const LineSegment3d& line)
 {
 	return false;
 }

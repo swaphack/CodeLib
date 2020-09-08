@@ -75,25 +75,10 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Geometry\2d\Circle.h">
-      <Filter>Geometry\2d</Filter>
-    </ClInclude>
-    <ClInclude Include="Geometry\2d\Polygon.h">
-      <Filter>Geometry\2d</Filter>
-    </ClInclude>
     <ClInclude Include="Geometry\2d\Rect.h">
       <Filter>Geometry\2d</Filter>
     </ClInclude>
-    <ClInclude Include="Geometry\2d\Triangle.h">
-      <Filter>Geometry\2d</Filter>
-    </ClInclude>
-    <ClInclude Include="Geometry\3d\Polyhedron.h">
-      <Filter>Geometry\3d</Filter>
-    </ClInclude>
     <ClInclude Include="Geometry\3d\Sphere.h">
-      <Filter>Geometry\3d</Filter>
-    </ClInclude>
-    <ClInclude Include="Geometry\3d\Surface.h">
       <Filter>Geometry\3d</Filter>
     </ClInclude>
     <ClInclude Include="Algebra\import.h">
@@ -103,37 +88,7 @@
       <Filter>Geometry</Filter>
     </ClInclude>
     <ClInclude Include="mathlib.h" />
-    <ClInclude Include="Geometry\3d\Cuboids.h">
-      <Filter>Geometry\3d</Filter>
-    </ClInclude>
-    <ClInclude Include="Geometry\base\Size.h">
-      <Filter>Geometry\base</Filter>
-    </ClInclude>
-    <ClInclude Include="Geometry\base\Volume.h">
-      <Filter>Geometry\base</Filter>
-    </ClInclude>
-    <ClInclude Include="Geometry\2d\LineSegment2.h">
-      <Filter>Geometry\2d</Filter>
-    </ClInclude>
-    <ClInclude Include="Geometry\3d\LineSegment.h">
-      <Filter>Geometry\3d</Filter>
-    </ClInclude>
-    <ClInclude Include="Geometry\base\Line2.h">
-      <Filter>Geometry\base</Filter>
-    </ClInclude>
-    <ClInclude Include="Geometry\base\Line3.h">
-      <Filter>Geometry\base</Filter>
-    </ClInclude>
     <ClInclude Include="Geometry\base\macros.h">
-      <Filter>Geometry\base</Filter>
-    </ClInclude>
-    <ClInclude Include="Geometry\base\Plane.h">
-      <Filter>Geometry\base</Filter>
-    </ClInclude>
-    <ClInclude Include="Geometry\base\Polar2.h">
-      <Filter>Geometry\base</Filter>
-    </ClInclude>
-    <ClInclude Include="Geometry\base\Polar3.h">
       <Filter>Geometry\base</Filter>
     </ClInclude>
     <ClInclude Include="Basic\Array.h">
@@ -451,41 +406,62 @@
     <ClInclude Include="Basic\Tool.h">
       <Filter>Basic</Filter>
     </ClInclude>
+    <ClInclude Include="Geometry\3d\Volume.h">
+      <Filter>Geometry\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="Geometry\2d\Size.h">
+      <Filter>Geometry\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="Geometry\2d\Line2d.h">
+      <Filter>Geometry\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="Geometry\2d\LineSegment2d.h">
+      <Filter>Geometry\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="Geometry\2d\Circle2d.h">
+      <Filter>Geometry\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="Geometry\2d\Polar2d.h">
+      <Filter>Geometry\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="Geometry\2d\Polygon2d.h">
+      <Filter>Geometry\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="Geometry\2d\Triangle2d.h">
+      <Filter>Geometry\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="Geometry\3d\Cuboids3d.h">
+      <Filter>Geometry\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="Geometry\3d\Line3d.h">
+      <Filter>Geometry\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="Geometry\3d\LineSegment3d.h">
+      <Filter>Geometry\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="Geometry\3d\Plane3d.h">
+      <Filter>Geometry\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="Geometry\3d\Polar3d.h">
+      <Filter>Geometry\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="Geometry\3d\Polyhedron3d.h">
+      <Filter>Geometry\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="Geometry\3d\Surface3d.h">
+      <Filter>Geometry\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="Algebra\Coordinate\Axis.h">
+      <Filter>Algebra\Coordinate</Filter>
+    </ClInclude>
+    <ClInclude Include="Algebra\Matrix\SquareMatrix.h">
+      <Filter>Algebra\Matrix</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Geometry\2d\Rect.cpp">
       <Filter>Geometry\2d</Filter>
-    </ClCompile>
-    <ClCompile Include="Geometry\base\Size.cpp">
-      <Filter>Geometry\base</Filter>
-    </ClCompile>
-    <ClCompile Include="Geometry\base\Volume.cpp">
-      <Filter>Geometry\base</Filter>
-    </ClCompile>
-    <ClCompile Include="Geometry\3d\Cuboids.cpp">
-      <Filter>Geometry\3d</Filter>
-    </ClCompile>
-    <ClCompile Include="Geometry\3d\LineSegment.cpp">
-      <Filter>Geometry\3d</Filter>
-    </ClCompile>
-    <ClCompile Include="Geometry\base\Line2.cpp">
-      <Filter>Geometry\base</Filter>
-    </ClCompile>
-    <ClCompile Include="Geometry\base\Plane.cpp">
-      <Filter>Geometry\base</Filter>
-    </ClCompile>
-    <ClCompile Include="Geometry\base\Line3.cpp">
-      <Filter>Geometry\base</Filter>
-    </ClCompile>
-    <ClCompile Include="Geometry\2d\Circle.cpp">
-      <Filter>Geometry\2d</Filter>
-    </ClCompile>
-    <ClCompile Include="Geometry\base\Polar2.cpp">
-      <Filter>Geometry\base</Filter>
-    </ClCompile>
-    <ClCompile Include="Geometry\base\Polar3.cpp">
-      <Filter>Geometry\base</Filter>
     </ClCompile>
     <ClCompile Include="Number\None.cpp">
       <Filter>Number</Filter>
@@ -507,9 +483,6 @@
     </ClCompile>
     <ClCompile Include="Number\Nature.cpp">
       <Filter>Number</Filter>
-    </ClCompile>
-    <ClCompile Include="Geometry\2d\LineSegment2.cpp">
-      <Filter>Geometry\2d</Filter>
     </ClCompile>
     <ClCompile Include="Set\Set.cpp">
       <Filter>Set</Filter>
@@ -675,6 +648,39 @@
     </ClCompile>
     <ClCompile Include="Algebra\Matrix\Matrix4x4.cpp">
       <Filter>Algebra\Matrix</Filter>
+    </ClCompile>
+    <ClCompile Include="Geometry\3d\Volume.cpp">
+      <Filter>Geometry\3d</Filter>
+    </ClCompile>
+    <ClCompile Include="Geometry\2d\Size.cpp">
+      <Filter>Geometry\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="Geometry\2d\Line2d.cpp">
+      <Filter>Geometry\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="Geometry\2d\LineSegment2d.cpp">
+      <Filter>Geometry\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="Geometry\2d\Circle2d.cpp">
+      <Filter>Geometry\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="Geometry\2d\Polar2d.cpp">
+      <Filter>Geometry\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="Geometry\3d\Cuboids3d.cpp">
+      <Filter>Geometry\3d</Filter>
+    </ClCompile>
+    <ClCompile Include="Geometry\3d\Line3d.cpp">
+      <Filter>Geometry\3d</Filter>
+    </ClCompile>
+    <ClCompile Include="Geometry\3d\LineSegment3d.cpp">
+      <Filter>Geometry\3d</Filter>
+    </ClCompile>
+    <ClCompile Include="Geometry\3d\Plane3d.cpp">
+      <Filter>Geometry\3d</Filter>
+    </ClCompile>
+    <ClCompile Include="Geometry\3d\Polar3d.cpp">
+      <Filter>Geometry\3d</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -18,18 +18,23 @@ Matrix2x2::Matrix2x2(float a00, float a01, float a10, float a11)
 
 math::Matrix2x2::Matrix2x2(const Matrix2x2& mat)
 {
-	this->set(mat.getValue());
+	this->assign(mat.getValue());
+}
+
+math::Matrix2x2::operator SquareMatrix<2>()
+{
+	return SquareMatrix<2>(*this);
 }
 
 math::Matrix2x2& math::Matrix2x2::operator=(const Matrix2x2& mat)
 {
-	this->set(mat.getValue());
+	this->assign(mat.getValue());
 	return *this;
 }
 
 math::Matrix2x2::Matrix2x2(const float* value)
 {
-	this->set(value);
+	this->assign(value);
 }
 
 Matrix2x2::~Matrix2x2()

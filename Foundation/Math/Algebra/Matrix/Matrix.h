@@ -22,11 +22,11 @@ namespace math
 		}
 		Matrix(const float* value) 
 		{
-			this->set(value);
+			this->assign(value);
 		}
 		Matrix(const Matrix& mat)
 		{
-			this->set(mat.getValue());
+			this->assign(mat.getValue());
 		}
 		virtual ~Matrix() {}
 	public:
@@ -201,15 +201,7 @@ namespace math
 
 			return mat;
 		}
-		/**
-		*	行列式的值
-		*/
-		float getDetValue() const
-		{
-			assert(Width == Height);
-
-			return getDeterminantMagnitude(Determinant<Width>(base::getValue()));
-		}
+		
 		/**
 		*	余子式
 		*/
@@ -242,56 +234,6 @@ namespace math
 
 			return mat;
 		}
-		/**
-		*	伴随矩阵
-		*/
-		Matrix getAdjoint() const
-		{
-			assert(Width == Height);
-
-			float det = this->getDetValue();
-
-			assert(det != 0);
-
-			Matrix mat;
-
-			if (Width == 1)
-			{
-				mat.setValue(0, 0, 1 / base::getValue((size_t)0, (size_t)0));
-				return mat;
-			}
-
-			for (int i = 0; i < Height; i++)
-			{
-				for (int j = 0; j < Width; j++)
-				{
-					Matrix<T, Height - 1, Width - 1> minor = this->getMinor(i, j);
-					float k = 1;
-					if (i != j)
-					{
-						if ((i + j) % 2 == 0) k = 1.0f;
-						else k = -1.0f;
-					}
-					mat.setValue(i, j, k * minor.getDetValue());
-				}
-			}
-
-			return mat;
-		}
-		/**
-		*	逆矩阵
-		*/
-		Matrix getInverse() const
-		{
-			assert(Width == Height);
-
-			float det = this->getDetValue();
-
-			assert(det != 0);
-
-			Matrix adjoint = this->getAdjoint();
-			Matrix transpose = adjoint.getTranspose();
-			return transpose / det;
-		}
+		
 	};
 }

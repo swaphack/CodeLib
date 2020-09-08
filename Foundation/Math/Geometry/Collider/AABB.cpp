@@ -34,17 +34,17 @@ bool AABB::contains(const Vector3& point32)
 		&& point32.getZ() <= maxPos.getZ();
 }
 
-bool AABB::contains(const LineSegment2& line)
+bool AABB::contains(const LineSegment2d& line)
 {
 	return contains(line.getSrc()) && contains(line.getDest());
 }
 
-bool AABB::contains(const LineSegment& line)
+bool AABB::contains(const LineSegment3d& line)
 {
 	return contains(line.getSrc()) && contains(line.getDest());
 }
 
-bool AABB::intersects(const LineSegment2& line)
+bool AABB::intersects(const LineSegment2d& line)
 {
 	if (!contains(line.getSrc()) && !contains(line.getDest()))
 	{
@@ -54,7 +54,7 @@ bool AABB::intersects(const LineSegment2& line)
 	return true;
 }
 
-bool AABB::intersects(const LineSegment& line)
+bool AABB::intersects(const LineSegment3d& line)
 {
 	if (!contains(line.getSrc()) && !contains(line.getDest()))
 	{

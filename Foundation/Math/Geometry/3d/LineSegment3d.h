@@ -5,17 +5,17 @@
 namespace math
 {
 	// 线段
-	struct LineSegment : public Points<Vector3, 2>
+	struct LineSegment3d : public Points<Vector3, 2>
 	{
 	public:
 		/**
 		*	构造函数
 		*/
-		LineSegment();
+		LineSegment3d();
 		/**
 		*	构造函数
 		*/
-		LineSegment(const Vector3& src, const Vector3& dest);
+		LineSegment3d(const Vector3& src, const Vector3& dest);
 	public:
 		CREATE_INDEX_VALUE(Src, 0, Vector3);
 		CREATE_INDEX_VALUE(Dest, 1, Vector3);
@@ -34,11 +34,11 @@ namespace math
 		/**
 		*	是否包含线段
 		*/
-		bool contains(const LineSegment& line);
+		bool contains(const LineSegment3d& line);
 		/**
 		*	线段是否相交
 		*/
-		bool intersects(const LineSegment& line, Vector3& point);
+		bool intersects(const LineSegment3d& line, Vector3& point);
 		/**
 		*	到线段的最近点
 		*/
@@ -51,6 +51,6 @@ namespace math
 		*	直线方程 a * x + b * y + c * z + d = 0
 		*	向量积和面积关系
 		*/
-		static float distance(const LineSegment& line, const Vector3& point);
+		static float distance(const LineSegment3d& line, const Vector3& point);
 	};
 }

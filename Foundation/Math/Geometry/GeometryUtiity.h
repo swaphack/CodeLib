@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Algebra/Vector/import.h"
-#include "base/Size.h"
+#include "2d/Size.h"
 
 namespace math
 {

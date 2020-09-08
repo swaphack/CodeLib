@@ -1,8 +1,8 @@
 #pragma once
 
 #include "Algebra/import.h"
-#include "Geometry/2d/LineSegment2.h"
-#include "Geometry/3d/LineSegment.h"
+#include "Geometry/2d/LineSegment2d.h"
+#include "Geometry/3d/LineSegment3d.h"
 
 namespace math
 {
@@ -46,19 +46,19 @@ namespace math
 		/**
 		*	是否包含线段
 		*/
-		bool contains(const LineSegment2& line);
+		bool contains(const LineSegment2d& line);
 		/**
 		*	是否包含线段
 		*/
-		bool contains(const LineSegment& line);
+		bool contains(const LineSegment3d& line);
 		/**
 		*	是否与线段相交
 		*/
-		bool intersects(const LineSegment2& line);
+		bool intersects(const LineSegment2d& line);
 		/**
 		*	是否与线段相交
 		*/
-		bool intersects(const LineSegment& line);
+		bool intersects(const LineSegment3d& line);
 		/**
 		*	是否包含盒子
 		*/

@@ -5,11 +5,11 @@
 
 namespace math
 {
-	struct LineSegment2 : public Points<Vector2, 2>
+	struct LineSegment2d : public Points<Vector2, 2>
 	{
 	public:
-		LineSegment2();
-		LineSegment2(Vector2 src, Vector2 dest);
+		LineSegment2d();
+		LineSegment2d(Vector2 src, Vector2 dest);
 	public:
 		CREATE_INDEX_VALUE(Src, 0, Vector2);
 		CREATE_INDEX_VALUE(Dest, 1, Vector2);
@@ -25,6 +25,6 @@ namespace math
 		/**
 		*	两向量是否相交
 		*/
-		bool intersects(const LineSegment2& line, Vector2& point);
+		bool intersects(const LineSegment2d& line, Vector2& point);
 	};
 }

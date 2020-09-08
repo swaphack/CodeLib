@@ -1,33 +1,33 @@
-#include "LineSegment.h"
+#include "LineSegment3d.h"
 #include "Geometry/2d/Rect.h"
-#include "Cuboids.h"
+#include "Cuboids3d.h"
 
 using namespace math;
 
-LineSegment::LineSegment()
+LineSegment3d::LineSegment3d()
 {
 }
 
-LineSegment::LineSegment(const Vector3& src, const Vector3& dest) 
+LineSegment3d::LineSegment3d(const Vector3& src, const Vector3& dest) 
 {
 	this->setSrc(src);
 	this->setDest(dest);
 }
 
-float LineSegment::getMagnitude() const
+float LineSegment3d::getMagnitude() const
 {
 	return Vector3::distance(getSrc(), getDest());
 }
 
-Vector3 LineSegment::getVector() const
+Vector3 LineSegment3d::getVector() const
 {
 	return getDest() - getSrc();
 }
 
-bool LineSegment::contains(const Vector3& point)
+bool LineSegment3d::contains(const Vector3& point)
 {
 	Vector3 p = getVector();
-	Cuboids cuboids(getSrc(), p);
+	Cuboids3d cuboids(getSrc(), p);
 	if (!cuboids.contains(point))
 	{
 		return false;
@@ -44,12 +44,12 @@ bool LineSegment::contains(const Vector3& point)
 	return false;
 }
 
-bool LineSegment::contains(const LineSegment& line)
+bool LineSegment3d::contains(const LineSegment3d& line)
 {
 	return this->contains(line.getSrc()) && this->contains(line.getDest());
 }
 
-bool LineSegment::intersects(const LineSegment& line, Vector3& point)
+bool LineSegment3d::intersects(const LineSegment3d& line, Vector3& point)
 {
 	Vector3 v0 = getSrc() - line.getSrc();
 	Vector3 v1 = getDest() - getSrc();
@@ -67,7 +67,7 @@ bool LineSegment::intersects(const LineSegment& line, Vector3& point)
 	return true;
 }
 
-Vector3 LineSegment::closestPoint(const Vector3& point)
+Vector3 LineSegment3d::closestPoint(const Vector3& point)
 {
 	Vector3 src = getSrc();
 	Vector3 dest = getDest();
@@ -103,7 +103,7 @@ Vector3 LineSegment::closestPoint(const Vector3& point)
 	return result;
 }
 
-float LineSegment::distance(const LineSegment& line, const Vector3& point)
+float LineSegment3d::distance(const LineSegment3d& line, const Vector3& point)
 {
 	Vector3 v0 = line.getDest() - line.getSrc();
 	Vector3 v1 = point - line.getSrc();

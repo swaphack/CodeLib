@@ -1,119 +1,119 @@
-#include "Cuboids.h"
+#include "Cuboids3d.h"
 
 using namespace math;
 
 
-Cuboids::Cuboids()
+Cuboids3d::Cuboids3d()
 {
 
 }
 
-Cuboids::Cuboids(const Vector3& origin, const Volume& size)
+Cuboids3d::Cuboids3d(const Vector3& origin, const Volume& size)
 {
 	this->_origin = origin;
 	this->_size = size;
 }
 
-Cuboids::Cuboids(const Cuboids& cuboids)
+Cuboids3d::Cuboids3d(const Cuboids3d& cuboids)
 {
 	this->_origin = cuboids._origin;
 	this->_size = cuboids._size;
 }
 
-Cuboids::~Cuboids()
+Cuboids3d::~Cuboids3d()
 {
 
 }
 
-float Cuboids::getX() const
-{
-	return this->_origin.getX();
-}
-
-float Cuboids::getY() const
+float Cuboids3d::getX() const
 {
 	return this->_origin.getX();
 }
 
-float Cuboids::getZ() const
+float Cuboids3d::getY() const
+{
+	return this->_origin.getX();
+}
+
+float Cuboids3d::getZ() const
 {
 	return this->_origin.getZ();
 }
 
-float Cuboids::getWidth() const
+float Cuboids3d::getWidth() const
 {
 	return this->_size.getWidth();
 }
 
-float Cuboids::getHeight() const
+float Cuboids3d::getHeight() const
 {
 	return this->_size.getHeight();
 }
 
-float Cuboids::getDepth() const
+float Cuboids3d::getDepth() const
 {
 	return this->_size.getDepth();
 }
 
-float Cuboids::getMinX() const
+float Cuboids3d::getMinX() const
 {
 	return getX();
 }
 
-float Cuboids::getMaxX() const
+float Cuboids3d::getMaxX() const
 {
 	return this->getMinX() + this->getWidth();
 }
 
-float Cuboids::getMinY() const
+float Cuboids3d::getMinY() const
 {
 	return getY();
 }
 
-float Cuboids::getMaxY() const
+float Cuboids3d::getMaxY() const
 {
 	return this->getMinY() + this->getHeight();
 }
 
-float Cuboids::getMinZ() const
+float Cuboids3d::getMinZ() const
 {
 	return getZ();
 }
 
-float Cuboids::getMaxZ() const
+float Cuboids3d::getMaxZ() const
 {
 	return getZ() + getDepth();
 }
 
-const Vector3& Cuboids::getOrigin() const
+const Vector3& Cuboids3d::getOrigin() const
 {
 	return _origin;
 }
 
-const Volume& Cuboids::getSize() const
+const Volume& Cuboids3d::getSize() const
 {
 	return _size;
 }
 
-void Cuboids::set(const Vector3& orgin, const Volume& size)
+void Cuboids3d::set(const Vector3& orgin, const Volume& size)
 {
 	this->_origin = orgin;
 	this->_size = size;
 }
 
-bool Cuboids::contains(float x, float y, float z)
+bool Cuboids3d::contains(float x, float y, float z)
 {
 	return (x >= getMinX() && x <= getMaxX())
 		&& (y >= getMinY() && y <= getMaxY())
 		&& (z >= getMinZ() && z <= getMaxZ());
 }
 
-bool Cuboids::contains(const Vector3& point)
+bool Cuboids3d::contains(const Vector3& point)
 {
 	return contains(point.getX(), point.getY(), point.getZ());
 }
 
-bool Cuboids::intersect(const Cuboids& cuboids)
+bool Cuboids3d::intersect(const Cuboids3d& cuboids)
 {
 	Vector3 points[8];
 
@@ -137,7 +137,7 @@ bool Cuboids::intersect(const Cuboids& cuboids)
 	return false;
 }
 
-Cuboids& Cuboids::operator=(const Cuboids& cuboids)
+Cuboids3d& Cuboids3d::operator=(const Cuboids3d& cuboids)
 {
 	this->_origin = cuboids._origin;
 	this->_size = cuboids._size;

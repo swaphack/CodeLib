@@ -1,22 +1,22 @@
-#include "LineSegment2.h"
+#include "LineSegment2d.h"
 #include "Algebra/Determinant/Determinant.h"
 
-math::LineSegment2::LineSegment2()
+math::LineSegment2d::LineSegment2d()
 {
 
 }
 
-float math::LineSegment2::getMagnitude() const
+float math::LineSegment2d::getMagnitude() const
 {
 	return math::Vector2::distance(getSrc(), getDest());
 }
 
-math::Vector2 math::LineSegment2::getVector() const
+math::Vector2 math::LineSegment2d::getVector() const
 {
 	return getDest() - getSrc();
 }
 
-bool math::LineSegment2::intersects(const LineSegment2& line, Vector2& point)
+bool math::LineSegment2d::intersects(const LineSegment2d& line, Vector2& point)
 {
 	Vector2 srcVec = this->getVector();
 	Vector2 destVec = line.getVector();
@@ -53,7 +53,7 @@ bool math::LineSegment2::intersects(const LineSegment2& line, Vector2& point)
 	return false;
 }
 
-math::LineSegment2::LineSegment2(Vector2 src, Vector2 dest)
+math::LineSegment2d::LineSegment2d(Vector2 src, Vector2 dest)
 {
 	this->setSrc(src);
 	this->setDest(dest);

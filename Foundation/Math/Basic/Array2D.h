@@ -21,7 +21,7 @@ namespace math
 		}
 		Array2D(T* val)
 		{
-			this->set(val);
+			this->assign(val);
 		}
 		Array2D(const Array2D& mat)
 		{
@@ -76,7 +76,10 @@ namespace math
 		{
 			return Width * Height * sizeof(T);
 		}
-		void set(const T* val)
+		/**
+		*	¸³Öµ
+		*/
+		void assign(const T* val)
 		{
 			assert(val != nullptr);
 

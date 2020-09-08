@@ -2,6 +2,9 @@
 
 namespace math
 {
+	/**
+	*	可变长数组
+	*/
 	template<typename T, const int Length, int... Sizes>
 	class VariableLengthArray
 	{
@@ -29,6 +32,9 @@ namespace math
 			delete[] _values;
 		}
 	public:
+		/**
+		*	设置值
+		*/
 		void set(const T** value)
 		{
 			if (value == nullptr) return;
@@ -38,35 +44,45 @@ namespace math
 				memcpy(_values[i], value[i], sizeof(T) * _length[i]);
 			}
 		}
-
+		/**
+		*	获取值
+		*/
 		const T& getValue(int i, int j) const
 		{
 			assert(i >= 0 && i < Length && j >= 0 && j < _length[j]);
 
 			return _values[i][j];
 		}
-
+		/**
+		*	获取数组
+		*/
 		const T* getValue(int i)
 		{
 			assert(i >= 0 && i < Length);
 
 			return _values[i];
 		}
-
+		/**
+		*	获取值
+		*/
 		T& getValue(int i, int j)
 		{
 			assert(i >= 0 && i < Length && j >= 0 && j < _length[j]);
 
 			return _values[i][j];
 		}
-
+		/**
+		*	设置值
+		*/
 		void setValue(int i, int j, const T& value)
 		{
 			assert(i >= 0 && i < Length && j >= 0 && j < _length[j]);
 
 			_values[i][j] = value;
 		}
-
+		/**
+		*	设置值
+		*/
 		void set(int i, const T* value)
 		{
 			if (value == nullptr) return;

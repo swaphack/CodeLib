@@ -55,7 +55,7 @@ Matrix4x1::operator Vector3()
 math::Matrix4x1::Matrix4x1(const float* value)
 	: Matrix4x1()
 {
-	this->set(value);
+	this->assign(value);
 }
 
 math::Matrix4x1::~Matrix4x1()

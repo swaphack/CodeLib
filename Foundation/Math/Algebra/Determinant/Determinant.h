@@ -19,11 +19,11 @@ namespace math
 		}
 		Determinant(const float* val)
 		{
-			this->set(val);
+			this->assign(val);
 		}
 		Determinant(const Determinant& det)
 		{
-			this->set(det.getValue());
+			this->assign(det.getValue());
 		}
 		virtual ~Determinant()
 		{
@@ -207,7 +207,7 @@ namespace math
 		Determinant2() {}
 		Determinant2(const float* value)
 		{
-			this->set(value);
+			this->assign(value);
 		}
 		Determinant2(float x0, float x1, float x2, float x3)
 		{

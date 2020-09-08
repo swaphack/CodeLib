@@ -4,6 +4,7 @@
 #include "../Vector/Vector3.h"
 #include "../Vector/Vector4.h"
 #include "Matrix4x1.h"
+#include "SquareMatrix.h"
 
 namespace math
 {
@@ -26,7 +27,7 @@ namespace math
 	*	旋转y 00 02 08 10
 	*	旋转z 00 01 04 05
 	*/
-	struct Matrix4x4 : public Matrix<float, 4,4>
+	struct Matrix4x4 : public SquareMatrix4
 	{
 	public:
 		Matrix4x4();
@@ -34,6 +35,7 @@ namespace math
 		Matrix4x4(const Matrix4x4& mat);
 		Matrix4x4(const Matrix4x1& mat);
 		Matrix4x4(const Matrix3x3& mat);
+		Matrix4x4(const SquareMatrix4& mat);
 		Matrix4x4(const float* value);
 		Matrix4x4(const float value[4][4]);
 		virtual ~Matrix4x4();
@@ -54,6 +56,10 @@ namespace math
 		*	旋转
 		*/
 		void setRotate(const Vector3& radian);
+		/**
+		*	错切
+		*/
+		void setShear(float radianX, float radianY, float radianZ);
 		/**
 		*	绕x轴旋转
 		*/
@@ -102,6 +108,19 @@ namespace math
 		*	列
 		*/
 		void setColumn(int column, const Vector4& value);
+
+		/**
+		*	x错切
+		*/
+		void setShearX(float radianY, float radianZ);
+		/**
+		*	y错切
+		*/
+		void setShearY(float radianX, float radianZ);
+		/**
+		*	z错切
+		*/
+		void setShearZ(float radianX, float radianY);
 	public:
 		Matrix4x1 operator*(const Matrix4x1& mat);
 		Matrix4x4 operator*(const Matrix4x4& mat);
@@ -109,6 +128,8 @@ namespace math
 		Matrix4x4& operator=(const Matrix4x1& mat);
 		Matrix4x4& operator=(const Matrix<float, 4, 4>& mat);
 		Matrix4x4& operator=(const Matrix3x3& mat);
+
+		operator SquareMatrix4();
 	public:
 		//--------------------------------------------------------------------------------
 		// set a ortho (right hand)
@@ -133,5 +154,18 @@ namespace math
 
 		// 坐标计算
 		static Vector3 transpose(const Vector3& src, const Matrix4x4& mat);
+
+		// 主视图
+		static Matrix4x4 getFrontViewMatrix();
+		// 后视图
+		static Matrix4x4 getBackViewMatrix();
+		// 俯视图
+		static Matrix4x4 getTopViewMatrix();
+		// 仰视图
+		static Matrix4x4 getBottomViewMatrix();
+		// 左视图
+		static Matrix4x4 getLeftViewMatrix();
+		// 右视图
+		static Matrix4x4 getRightViewMatrix();
 	};
 }

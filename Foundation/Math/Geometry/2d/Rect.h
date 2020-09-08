@@ -2,7 +2,7 @@
 
 #include "Algebra/import.h"
 
-#include "Geometry/base/Size.h"
+#include "Size.h"
 
 namespace math
 {

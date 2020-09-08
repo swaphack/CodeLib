@@ -1,18 +1,18 @@
-#include "Line3.h"
-#include "Plane.h"
+#include "Line3d.h"
+#include "Plane3d.h"
 #include "Algebra/import.h"
 
 #include <cassert>
 
 using namespace math;
 
-Line3::Line3(const Vector3& src, const Vector3& dest)
+Line3d::Line3d(const Vector3& src, const Vector3& dest)
 {
 	_point = src;
 	_direction = dest - src;
 }
 
-Line3::Line3(const Plane& plane0, const Plane& plane1)
+Line3d::Line3d(const Plane3d& plane0, const Plane3d& plane1)
 {
 	// Áî z = 0 ¼ÆËã×ø±ê
 	Matrix2x2 d = Matrix2x2(plane0.getParamA(), plane0.getParamB(), plane1.getParamA(), plane1.getParamB());
@@ -36,28 +36,28 @@ Line3::Line3(const Plane& plane0, const Plane& plane1)
 	_direction = Vector3(x, y, z);
 }
 
-Line3::Line3(const Line3& line)
+Line3d::Line3d(const Line3d& line)
 {
 	_point = line.getPoint();
 	_direction = line.getDirection();
 }
 
-Line3::~Line3()
+Line3d::~Line3d()
 {
 
 }
 
-const Vector3& Line3::getPoint() const
+const Vector3& Line3d::getPoint() const
 {
 	return _point;
 }
 
-const Vector3& Line3::getDirection() const
+const Vector3& Line3d::getDirection() const
 {
 	return _direction;
 }
 
-float Line3::getDistanceWithPoint(const Vector3& point)
+float Line3d::getDistanceWithPoint(const Vector3& point)
 {
 	Vector3 vec = point - _point;
 	
@@ -68,7 +68,7 @@ float Line3::getDistanceWithPoint(const Vector3& point)
 	return a / b;
 }
 
-bool Line3::contains(const Vector3& point)
+bool Line3d::contains(const Vector3& point)
 {
 	Vector3 diff = point - _point;
 
@@ -79,7 +79,7 @@ bool Line3::contains(const Vector3& point)
 	return a == b && b == c;
 }
 
-bool Line3::isParallel(const Line3& line)
+bool Line3d::isParallel(const Line3d& line)
 {
 	Vector3 v0 = getDirection();
 	Vector3 v1 = line.getDirection();
@@ -87,7 +87,7 @@ bool Line3::isParallel(const Line3& line)
 	return Vector3::cross(v0, v1).getMagnitude() == 0;
 }
 
-bool Line3::isIntersect(const Line3& line)
+bool Line3d::isIntersect(const Line3d& line)
 {
 	if (isParallel(line))
 	{

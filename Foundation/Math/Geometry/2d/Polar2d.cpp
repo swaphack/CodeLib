@@ -1,4 +1,4 @@
-#include "Polar2.h"
+#include "Polar2d.h"
 #include "Basic/base.h"
 
 #include <cmath>
@@ -6,18 +6,18 @@
 
 using namespace math;
 
-Polar2::Polar2()
+Polar2d::Polar2d()
 {
 
 }
 
-Polar2::Polar2(float r, float radian)
+Polar2d::Polar2d(float r, float radian)
 {
 	this->setRadius(r);
 	this->setRadian(radian);
 }
 
-Polar2::Polar2(const Vector2& vector)
+Polar2d::Polar2d(const Vector2& vector)
 {
 	float r = vector.getMagnitude();
 	float radian = atan2(vector.getY(), vector.getX());
@@ -26,24 +26,24 @@ Polar2::Polar2(const Vector2& vector)
 	this->setRadian(radian);
 }
 
-Polar2::Polar2(const Polar2& polar)
+Polar2d::Polar2d(const Polar2d& polar)
 {
 	this->setRadius(polar.getRadius());
 	this->setRadian(polar.getRadian());
 }
 
-Polar2::~Polar2()
+Polar2d::~Polar2d()
 {
 
 }
 
-void Polar2::set(float r, float radian)
+void Polar2d::set(float r, float radian)
 {
 	this->setRadius(r);
 	this->setRadian(radian);
 }
 
-Polar2& Polar2::operator=(const Polar2& polar)
+Polar2d& Polar2d::operator=(const Polar2d& polar)
 {
 	this->setRadius(polar.getRadius());
 	this->setRadian(polar.getRadian());
@@ -51,7 +51,7 @@ Polar2& Polar2::operator=(const Polar2& polar)
 	return *this;
 }
 
-Polar2& Polar2::operator=(const Vector2& vector)
+Polar2d& Polar2d::operator=(const Vector2& vector)
 {
 	float r = vector.getMagnitude();
 	float radian = atan2(vector.getY(), vector.getX());
@@ -62,7 +62,7 @@ Polar2& Polar2::operator=(const Vector2& vector)
 	return *this;
 }
 
-Polar2& Polar2::operator+=(float radian)
+Polar2d& Polar2d::operator+=(float radian)
 {
 	radian = this->getRadian() + radian;
 
@@ -73,7 +73,7 @@ Polar2& Polar2::operator+=(float radian)
 	return *this;
 }
 
-Polar2& Polar2::operator-=(float radian)
+Polar2d& Polar2d::operator-=(float radian)
 {
 	radian = this->getRadian() - radian;
 
@@ -84,13 +84,13 @@ Polar2& Polar2::operator-=(float radian)
 	return *this;
 }
 
-Polar2& Polar2::operator*=(float ratio)
+Polar2d& Polar2d::operator*=(float ratio)
 {
 	this->setRadius(ratio * this->getRadius());
 	return *this;
 }
 
-Polar2& Polar2::operator/=(float ratio)
+Polar2d& Polar2d::operator/=(float ratio)
 {
 	assert(ratio != 0);
 
@@ -98,47 +98,47 @@ Polar2& Polar2::operator/=(float ratio)
 	return *this;
 }
 
-Polar2 Polar2::operator+(float radian)
+Polar2d Polar2d::operator+(float radian)
 {
 	radian = this->getRadian() + radian;
 
 	ADJUST_DURATION_VALUE_RANGE(radian, 0, 2 * PI, 2 * PI);
 
-	return Polar2(this->getRadius(), radian);
+	return Polar2d(this->getRadius(), radian);
 }
 
-Polar2 Polar2::operator-(float radian)
+Polar2d Polar2d::operator-(float radian)
 {
 	radian = this->getRadian() - radian;
 
 	ADJUST_DURATION_VALUE_RANGE(radian, 0, 2 * PI, 2 * PI);
 
-	return Polar2(this->getRadius(), radian);
+	return Polar2d(this->getRadius(), radian);
 }
 
-Polar2 Polar2::operator*(float ratio)
+Polar2d Polar2d::operator*(float ratio)
 {
-	return Polar2(ratio * this->getRadius(), this->getRadian());
+	return Polar2d(ratio * this->getRadius(), this->getRadian());
 }
 
-Polar2 Polar2::operator/(float ratio)
+Polar2d Polar2d::operator/(float ratio)
 {
 	assert(ratio != 0);
 
-	return Polar2(this->getRadius() / ratio, this->getRadian());
+	return Polar2d(this->getRadius() / ratio, this->getRadian());
 }
 
-bool Polar2::operator==(const Polar2& polar)
+bool Polar2d::operator==(const Polar2d& polar)
 {
 	return polar.getRadian() == getRadian() && polar.getRadius() == getRadius();
 }
 
-bool Polar2::operator!=(const Polar2& polar)
+bool Polar2d::operator!=(const Polar2d& polar)
 {
 	return polar.getRadian() != getRadian() || polar.getRadius() != getRadius();
 }
 
-Polar2::operator Vector2()
+Polar2d::operator Vector2()
 {
 	return Vector2(getRadius() * cos(getRadian()), getRadian()* sin(getRadian()));
 }

@@ -1,14 +1,14 @@
 #pragma once
 
 #include "Algebra/import.h"
-#include "Geometry/base/Volume.h"
+#include "Volume.h"
 
 namespace math
 {
 	/**
 	*	长方体
 	*/
-	struct Cuboids
+	struct Cuboids3d
 	{
 	protected:
 		/**
@@ -20,10 +20,10 @@ namespace math
 		*/
 		Volume _size;
 	public:
-		Cuboids();
-		Cuboids(const Vector3& origin, const Volume& size);
-		Cuboids(const Cuboids& cuboids);
-		virtual ~Cuboids();
+		Cuboids3d();
+		Cuboids3d(const Vector3& origin, const Volume& size);
+		Cuboids3d(const Cuboids3d& cuboids);
+		virtual ~Cuboids3d();
 	public:
 		float getX() const;
 		float getY() const;
@@ -56,8 +56,8 @@ namespace math
 		/**
 		*	相交
 		*/
-		bool intersect(const Cuboids& cuboids);
+		bool intersect(const Cuboids3d& cuboids);
 	public:
-		Cuboids& operator=(const Cuboids& cuboids);
+		Cuboids3d& operator=(const Cuboids3d& cuboids);
 	};
 }

@@ -1,28 +1,27 @@
 #pragma once
 
 #include "Algebra/import.h"
-#include "macros.h"
 
 namespace math
 {
-	struct Plane;
+	struct Plane3d;
 	/**
 	*	直线方程
 	*	(x - x0) / vx = (y - y0) / vy = (z - z0)/ vz
 	*/
-	struct Line3
+	struct Line3d
 	{
 	public:
 		/**
 		*	两点确认一条直线
 		*/
-		Line3(const Vector3& src, const Vector3& dest);
+		Line3d(const Vector3& src, const Vector3& dest);
 		/**
 		*	两平面相交，确认一条直线
 		*/
-		Line3(const Plane& plane0, const Plane& plane1);
-		Line3(const Line3& line);
-		virtual ~Line3();
+		Line3d(const Plane3d& plane0, const Plane3d& plane1);
+		Line3d(const Line3d& line);
+		virtual ~Line3d();
 	public:
 		/**
 		*	点
@@ -44,11 +43,11 @@ namespace math
 		/**
 		*	是否平行
 		*/
-		bool isParallel(const Line3& line);
+		bool isParallel(const Line3d& line);
 		/**
 		*	是否相交
 		*/
-		bool isIntersect(const Line3& line);
+		bool isIntersect(const Line3d& line);
 	private:
 		/**
 		* 点
