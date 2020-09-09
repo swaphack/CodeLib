@@ -97,8 +97,8 @@ namespace math
 		FiniteSet& operator-=(const Element& value);
 	public:
 		FiniteSet& operator=(const FiniteSet& value);
-		bool operator==(const FiniteSet& value);
-		bool operator!=(const FiniteSet& value);
+		bool operator==(const FiniteSet& value) const;
+		bool operator!=(const FiniteSet& value) const;
 	public:
 	private:
 		/**

@@ -71,6 +71,7 @@
     <ClInclude Include="Algebra\Coordinate\CartesianCoordinatesSystem.h" />
     <ClInclude Include="Algebra\Coordinate\CoordinateSystem.h" />
     <ClInclude Include="Algebra\Coordinate\CurvilinearCoordinatesSystem.h" />
+    <ClInclude Include="Algebra\Coordinate\import.h" />
     <ClInclude Include="Algebra\Coordinate\PolarCoordinateSystem.h" />
     <ClInclude Include="Algebra\Determinant\Determinant.h" />
     <ClInclude Include="Algebra\Determinant\import.h" />
@@ -197,6 +198,7 @@
     <ClInclude Include="Set\FiniteSet.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Algebra\Coordinate\CartesianCoordinatesSystem.cpp" />
     <ClCompile Include="Algebra\Coordinate\CoordinateSystem.cpp" />
     <ClCompile Include="Algebra\Equation\Equation.cpp" />
     <ClCompile Include="Algebra\Matrix\Matrix.cpp" />

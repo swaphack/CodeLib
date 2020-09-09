@@ -21,6 +21,10 @@ namespace math
 		{
 			this->assign(val);
 		}
+		Determinant(const Array2D<float, Order, Order>& val)
+		{
+			this->assign(val.getValue());
+		}
 		Determinant(const Determinant& det)
 		{
 			this->assign(det.getValue());
@@ -201,50 +205,32 @@ namespace math
 		*/
 	};
 
+	typedef Determinant<1> Determinant1;
+	typedef Determinant<2> Determinant2;
+	typedef Determinant<3> Determinant3;
 
-	struct Determinant2 : public Determinant<2> 
-	{
-		Determinant2() {}
-		Determinant2(const float* value)
-		{
-			this->assign(value);
-		}
-		Determinant2(float x0, float x1, float x2, float x3)
-		{
-			(*this)[0] = x0;
-			(*this)[1] = x1;
-			(*this)[2] = x2;
-			(*this)[3] = x3;
-		}
-	};
-	struct Determinant3 : public Determinant<3> 
-	{
-	};
-
-
-	static float getDeterminantMagnitude(const Determinant<1>& value)
+	static float getDetMagnitude(const Determinant1& value)
 	{
 		return value.getValue(0);
 	}
 
-	static float getDeterminantMagnitude(const Determinant<2>& value)
+	static float getDetMagnitude(const Determinant2& value)
 	{
 		return value.getValue(0) * value.getValue(3) - value.getValue(1) * value.getValue(2);
 	}
 
 	template <const int N>
-	static float getDeterminantMagnitude(const Determinant<N>& value)
+	static float getDetMagnitude(const Determinant<N>& value)
 	{
 		float mag = 0;
 		for (int i = 0; i < N; i++)
 		{
 			Determinant<N - 1> det = value.getMinor(0, i);
 			float r = i % 2 == 0 ? 1.0f : -1.0f;
-			float k = value.getValue(0, i) * getDeterminantMagnitude(det) * r;
+			float k = value.getValue(0, i) * getDetMagnitude(det) * r;
 			mag += k;
 		}
 
 		return mag;
 	}
-
 }

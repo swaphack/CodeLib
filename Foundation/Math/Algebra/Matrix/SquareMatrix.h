@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Matrix.h"
+
 namespace math
 {
 	/**
@@ -35,7 +37,9 @@ namespace math
 		float getDetValue()
 		{
 			Determinant<Order> det = *this;
-			return getDeterminantMagnitude(det);
+			//return getDeterminantMagnitude(det);
+
+			return getDetMagnitude(det);
 		}
 	public:
 		/**

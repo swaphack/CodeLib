@@ -207,7 +207,7 @@ namespace math
 		{
 			T t;
 			Vector* p = &t;
-			p->set(base::getValue());
+			p->assign(base::getValue());
 			return t;
 		}
 	public:

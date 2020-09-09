@@ -108,11 +108,11 @@ namespace math
 		/**
 		*	相等
 		*/
-		virtual bool operator==(const Vector3& vec);
+		bool operator==(const Vector3& vec) const;
 		/**
 		*	不相等
 		*/
-		virtual bool operator!=(const Vector3& vec);
+		bool operator!=(const Vector3& vec) const;
 	public:
 		/**
 		*	向量点积

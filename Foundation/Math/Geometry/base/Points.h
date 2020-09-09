@@ -11,7 +11,7 @@ namespace math
 		Points(){}
 		Points(const T* value)
 		{
-			this->set(value);
+			this->assign(value);
 		}
 		virtual ~Points() {}
 	public:

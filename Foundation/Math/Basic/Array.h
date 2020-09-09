@@ -7,6 +7,8 @@
 #include <cassert>
 #include <string>
 #include <sstream>
+#include <cstdarg>
+#include "Basic/base.h"
 
 namespace math
 {
@@ -27,9 +29,30 @@ namespace math
 		{
 			reset();
 		}
-		Array(T* val)
+		Array(const T* val)
 		{
-			this->set(val);
+			this->assign(val);
+		}
+		Array(float start, ...)
+		{
+			int length = Length;
+			T* val = (T*)malloc(length * sizeof(T));
+			memset(val, 0, length * sizeof(T));
+			val[0] = start;
+
+			va_list ap;
+			va_start(ap, start);
+			for (int i = 0; i < length - 1; i++)
+			{
+				T temp;
+				GET_VA_ARG(temp, ap);
+				val[i + 1] = temp;
+			}
+			va_end(ap);
+
+			this->assign(val);
+
+			free(val);
 		}
 		Array(const Array& vec)
 		{
@@ -45,13 +68,6 @@ namespace math
 		const T* getValue() const
 		{
 			return _values;
-		}
-		/**
-		*	单元值
-		*/
-		void setValue(T* array) const
-		{
-			memcpy(array, _values, getSize());
 		}
 		/**
 		*	向量长度
@@ -71,7 +87,7 @@ namespace math
 		/**
 		*	设置值
 		*/
-		void set(const T* val)
+		void assign(const T* val)
 		{
 			if (val == nullptr)
 			{

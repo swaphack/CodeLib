@@ -18,11 +18,11 @@ namespace math
 		Polygon2d() {}
 		Polygon2d(const Polygon2d& polygon)
 		{
-			this->set(polygon.getValue());
+			this->assign(polygon.getValue());
 		}
 		Polygon2d(const math::Vector2* vpoints)
 		{
-			this->set(vpoints);
+			this->assign(vpoints);
 		}
 
 		virtual ~Polygon2d() {}
@@ -90,7 +90,7 @@ namespace math
 		*/
 		Polygon2d& operator=(const Polygon2d& polygon)
 		{
-			this->set(polygon.getValue());
+			this->assign(polygon.getValue());
 		}
 	public:
 		/**

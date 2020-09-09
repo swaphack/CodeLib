@@ -159,7 +159,7 @@ float Vector2::sinAngle(const Vector2& vector0, const Vector2& vector1)
 	det.setRow(0, vector0);
 	det.setRow(1, vector1);
 
-	return getDeterminantMagnitude(det) / (a * b);
+	return getDetMagnitude(det) / (a * b);
 }
 
 float Vector2::project(const Vector2& vector0, const Vector2& vector1)
@@ -219,7 +219,7 @@ bool Vector2::isThreePointsOnSameLine(const Vector2& point0, const Vector2& poin
 	det.setRow(0, v0);
 	det.setRow(1, v1);
 
-	return getDeterminantMagnitude(det) == 0;
+	return getDetMagnitude(det) == 0;
 }
 
 math::Vector2::~Vector2()

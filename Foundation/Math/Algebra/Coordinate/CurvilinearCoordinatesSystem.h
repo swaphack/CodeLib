@@ -7,7 +7,8 @@ namespace math
 	/**
 	*	ÇúÏß×ø±êÏµ
 	*/
-	class CurvilinearCoordinatesSystem : public CoordinateSystem
+	template<const int Count>
+	class CurvilinearCoordinatesSystem : public CoordinateSystem<Count>
 	{
 	public:
 	protected:

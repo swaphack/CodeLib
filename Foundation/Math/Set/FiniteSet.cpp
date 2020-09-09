@@ -168,7 +168,7 @@ FiniteSet& FiniteSet::operator=(const FiniteSet& value)
 	return *this;
 }
 
-bool FiniteSet::operator==(const FiniteSet& value)
+bool FiniteSet::operator==(const FiniteSet& value) const
 {
 	if (this->isSubSetEqual(value) && value.isSubSetEqual(*this))
 	{
@@ -178,7 +178,7 @@ bool FiniteSet::operator==(const FiniteSet& value)
 	return false;
 }
 
-bool FiniteSet::operator!=(const FiniteSet& value)
+bool FiniteSet::operator!=(const FiniteSet& value) const
 {
 	if (!this->isSubSetEqual(value) || ! value.isSubSetEqual(*this))
 	{

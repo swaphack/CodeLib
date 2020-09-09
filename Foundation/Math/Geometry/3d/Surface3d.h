@@ -17,11 +17,11 @@ namespace math
 		Surface3d() {}
 		Surface3d(const Surface3d& surface) 
 		{
-			this->set(surface.getValue());
+			this->assign(surface.getValue());
 		}
 		Surface3d(const T* poins)
 		{
-			this->set(poins);
+			this->assign(poins);
 		}
 
 		virtual ~Surface3d() {}
@@ -67,7 +67,7 @@ namespace math
 		*/
 		Surface3d& operator=(const Surface3d& surface)
 		{
-			this->set(surface.getValue());
+			this->assign(surface.getValue());
 		}
 	public:
 		/**

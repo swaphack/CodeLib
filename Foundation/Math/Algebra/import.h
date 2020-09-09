@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Coordinate/import.h"
+
 #include "Polynomial/import.h"
 
 #include "Vector/import.h"

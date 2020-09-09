@@ -1,5 +1,7 @@
 #pragma once
 
+#include <cstdarg>
+
 namespace math
 {
 	/**
@@ -80,4 +82,27 @@ public:\
 	Type get##Name() const { return (Type)VectorName[Index]; }\
 	void set##Name(Type val) { VectorName[Index] = val; }
 #endif
+
+	template<typename T>
+	void GET_VA_ARG(T& value, va_list& ap)
+	{
+		const char* name = typeid(T).name();
+		if (strcmp(name, typeid(char).name()) == 0
+			|| strcmp(name, typeid(signed char).name()) == 0
+			|| strcmp(name, typeid(unsigned char).name()) == 0
+			|| strcmp(name, typeid(short).name()) == 0
+			|| strcmp(name, typeid(unsigned short).name()) == 0
+			|| strcmp(name, typeid(signed short).name()) == 0)
+		{
+			value = (T)va_arg(ap, int);
+		}
+		else if (strcmp(name, typeid(float).name()) == 0)
+		{
+			value = (T)va_arg(ap, double);
+		}
+		else
+		{
+			value = (T)va_arg(ap, T);
+		}
+	}
 }

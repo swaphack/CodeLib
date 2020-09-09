@@ -21,11 +21,6 @@ math::Matrix2x2::Matrix2x2(const Matrix2x2& mat)
 	this->assign(mat.getValue());
 }
 
-math::Matrix2x2::operator SquareMatrix<2>()
-{
-	return SquareMatrix<2>(*this);
-}
-
 math::Matrix2x2& math::Matrix2x2::operator=(const Matrix2x2& mat)
 {
 	this->assign(mat.getValue());

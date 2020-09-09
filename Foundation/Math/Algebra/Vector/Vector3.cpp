@@ -149,7 +149,7 @@ Vector3& Vector3::operator/=(float k)
 	return *this;
 }
 
-bool Vector3::operator==(const Vector3& vec)
+bool Vector3::operator==(const Vector3& vec) const
 {
 	return getX() == vec.getX() && getY() == vec.getY() && getZ() == vec.getZ();
 }
@@ -162,7 +162,7 @@ Vector3& Vector3::operator=(const Vector2& vec)
 	return *this;
 }
 
-bool Vector3::operator!=(const Vector3& vec)
+bool Vector3::operator!=(const Vector3& vec) const
 {
 	return getX() != vec.getX() || getY() != vec.getY() || getZ() != vec.getZ();
 }
@@ -276,7 +276,7 @@ float Vector3::sinAngle(const Vector3& vector0, const Vector3& vector1)
 	det.setRow(1, vector0);
 	det.setRow(2, vector1);
 
-	return getDeterminantMagnitude(det) / (a * b);
+	return getDetMagnitude(det) / (a * b);
 }
 
 bool Vector3::isThreePointsOnSameLine(const Vector3& point0, const Vector3& point1, const Vector3& point2)
@@ -289,7 +289,7 @@ bool Vector3::isThreePointsOnSameLine(const Vector3& point0, const Vector3& poin
 	det.setRow(1, v0);
 	det.setRow(2, v1);
 
-	return getDeterminantMagnitude(det) == 0;
+	return getDetMagnitude(det) == 0;
 }
 
 bool Vector3::isThreeVectorInSamePlane(const Vector3& vector0, const Vector3& vector1, const Vector3& vector2)
@@ -299,7 +299,7 @@ bool Vector3::isThreeVectorInSamePlane(const Vector3& vector0, const Vector3& ve
 	det.setRow(1, vector1);
 	det.setRow(2, vector2);
 
-	return getDeterminantMagnitude(det) == 0;
+	return getDetMagnitude(det) == 0;
 }
 
 Vector3 Vector3::calDoubleCross(const Vector3& vector0, const Vector3& vector1, const Vector3& vector2)

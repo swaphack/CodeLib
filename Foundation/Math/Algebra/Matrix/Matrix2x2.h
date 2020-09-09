@@ -18,7 +18,5 @@ namespace math
 		virtual ~Matrix2x2();
 	public:
 		math::Matrix2x2& operator=(const Matrix2x2& mat);
-
-		operator SquareMatrix<2>();
 	};
 }

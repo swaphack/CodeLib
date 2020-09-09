@@ -7,7 +7,8 @@ namespace math
 	/**
 	*	¼«×ø±êÏµ
 	*/
-	class PolarCoordinateSystem : public CoordinateSystem
+	template<const int Count>
+	class PolarCoordinateSystem : public CoordinateSystem<Count>
 	{
 	public:
 		PolarCoordinateSystem();

@@ -2,9 +2,10 @@
 
 #include <cstdint>
 #include <cstring>
-
+#include <cstdarg>
 #include "Array.h"
 #include <sstream>
+#include "Basic/base.h"
 
 namespace math
 {
@@ -19,9 +20,31 @@ namespace math
 		{
 			this->reset();
 		}
-		Array2D(T* val)
+		Array2D(const T* val)
 		{
 			this->assign(val);
+		}
+
+		Array2D(float start, ...)
+		{
+			int length = Height * Width;
+			T* val = (T*)malloc(length * sizeof(T));
+			memset(val, 0, length * sizeof(T));
+			val[0] = start;
+
+			va_list ap;
+			va_start(ap, start);
+			for (int i = 0; i < length - 1; i++)
+			{
+				T temp;
+				GET_VA_ARG(temp, ap);
+				val[i + 1] = temp;
+			}
+			va_end(ap);
+
+			this->assign(val);
+
+			free(val);
 		}
 		Array2D(const Array2D& mat)
 		{
@@ -97,7 +120,7 @@ namespace math
 		*/
 		const T& getValue(int index) const
 		{
-			//printf("%d, %d, %d\n", index, Width, Height);
+			//printf("%d, %d, %dn", index, Width, Height);
 			assert(index >= 0 && index < getLength());
 
 			int i = index / Width;
@@ -111,7 +134,7 @@ namespace math
 		*/
 		const T& getValue(int i, int j) const
 		{
-			//printf("Width %d, Height %d, j : %d, i :%d\n", Width, Height, j, i);
+			//printf("Width %d, Height %d, j : %d, i :%dn", Width, Height, j, i);
 			assert(i >= 0 && j >= 0 && i < Height && j < Width);
 
 			return _values[i][j];
@@ -289,7 +312,7 @@ namespace math
 					stream << fValue;
 					stream << ",";
 				}
-				stream << "\n";
+				stream << "n";
 			}
 
 			return stream.str();

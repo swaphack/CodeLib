@@ -21,27 +21,33 @@ bool math::LineSegment2d::intersects(const LineSegment2d& line, Vector2& point)
 	Vector2 srcVec = this->getVector();
 	Vector2 destVec = line.getVector();
 
-	math::Determinant2 det(srcVec.getX(), srcVec.getY(), destVec.getX(), destVec.getY());
-	float value = getDeterminantMagnitude(det);
+	Array2D<float, 2, 2> val0(srcVec.getX(), srcVec.getY(), destVec.getX(), destVec.getY());
+	math::Determinant2 det(val0);
+	float value = getDetMagnitude(det);
 	if (value == 0)
 	{
 		return false;
 	}
 
-	math::Determinant2 det1(
+	Array2D<float, 2, 2> val1(
 		line.getSrc().getX() - this->getSrc().getX(),
 		line.getSrc().getY() - this->getSrc().getX(),
 		destVec.getX(),
 		destVec.getY());
 
-	math::Determinant2 det2(
-		srcVec.getX(), 
+	Array2D<float, 2, 2> val2(
+		srcVec.getX(),
 		srcVec.getY(),
 		line.getSrc().getX() - this->getSrc().getX(),
 		line.getSrc().getY() - this->getSrc().getY());
 
-	float sp = getDeterminantMagnitude(det1) / value;
-	float sq = getDeterminantMagnitude(det2) / value;
+	math::Determinant2 det1(val1);
+
+	math::Determinant2 det2(val2);
+
+	
+	float sp = getDetMagnitude(det1) / value;
+	float sq = getDetMagnitude(det2) / value;
 
 	if (sp >= 0 && sp <= 1 && sq >= 0 && sq < 1)
 	{
