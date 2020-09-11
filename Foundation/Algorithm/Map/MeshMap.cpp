@@ -33,10 +33,14 @@ bool alg::MeshRelation::findNeighbor(uint32_t srcIndex, std::vector<uint32_t>& n
 	{
 		neighbors.push_back(nexIndex);
 	}
+
+	return neighbors.size() > 0;
 }
 
 bool alg::MeshRelation::findWay(uint32_t fromIndex, uint32_t toIndex, std::vector<uint32_t>& indices) const
 {
+	indices.clear();
+
 	int32_t srcIndex = getIndex(fromIndex);
 	int32_t destIndex = getIndex(toIndex);
 	if (srcIndex == -1 || destIndex == -1)
@@ -68,6 +72,8 @@ bool alg::MeshRelation::findWay(uint32_t fromIndex, uint32_t toIndex, std::vecto
 		}
 		indices.push_back(toIndex);
 	}
+
+	return indices.size() > 0;
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -103,4 +109,6 @@ bool alg::MeshMap::findNeighborPoint(uint32_t srcIndex, std::vector<uint32_t>& n
 	{
 		neighboors.push_back(item);
 	}
+
+	return true;
 }

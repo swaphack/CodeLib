@@ -43,7 +43,7 @@ namespace alg
 		/**
 		*	查找相邻节点
 		*/
-		bool findNeighborPoint(uint32_t srcIndex, std::vector<uint32_t>& neighboors) const;
+		virtual bool findNeighborPoint(uint32_t srcIndex, std::vector<uint32_t>& neighboors) const;
 	protected:
 		/**
 		*	与中心相邻节点

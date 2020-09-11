@@ -122,7 +122,7 @@ bool alg::AStar::findNeareastNode(const Map* map, uint32_t srcIndex, uint32_t de
 		return false;
 	}
 
-	this->findNeareastNode(map, nShortestIndex, destIndex);
+	return this->findNeareastNode(map, nShortestIndex, destIndex);
 }
 
 void alg::AStar::pushCurrent(const Map* map, uint32_t srcIndex, uint32_t destIndex)

@@ -13,11 +13,13 @@ alg::RayRelation::~RayRelation()
 bool alg::RayRelation::findNeighbor(std::vector<uint32_t>& neighbors) const
 {
 	neighbors = _mapIndices;
+
+	return neighbors.size() > 0;
 }
 
 bool alg::RayRelation::findWay(uint32_t toIndex) const
 {
-	return getIndex(toIndex) > = 0;
+	return getIndex(toIndex) >= 0;
 }
 //////////////////////////////////////////////////////////////////////////
 

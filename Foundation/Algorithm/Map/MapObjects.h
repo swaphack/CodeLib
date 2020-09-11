@@ -63,7 +63,7 @@ namespace alg
 		/**
 		*	获取对象
 		*/
-		T* getObject(uint32_t nIndex) const
+		T* getObject(uint32_t nIndex)
 		{
 			auto it = _mapObjects.find(nIndex);
 			if (it == _mapObjects.end())
@@ -80,10 +80,12 @@ namespace alg
 		{
 			T* temp = new T();
 			SAFE_RETAIN(temp);
-			temp->setNodeIndex(_objectIndex);
+			temp->setObjectIndex(_objectIndex);
 			_mapObjects[_objectIndex] = temp;
 
 			_objectIndex++;
+
+			return temp;
 		}
 		/**
 		*	创建对象
@@ -91,12 +93,14 @@ namespace alg
 		template<typename Type, typename = std::enable_if<std::is_base_of<MapObject, Type>::value, Type>::type>
 		Type* create()
 		{
-			T* temp = new Type();
+			Type* temp = new Type();
 			SAFE_RETAIN(temp);
-			temp->setNodeIndex(_objectIndex);
+			temp->setObjectIndex(_objectIndex);
 			_mapObjects[_objectIndex] = temp;
 
 			_objectIndex++;
+
+			return temp;
 		}
 		/**
 		*	获取所有对象

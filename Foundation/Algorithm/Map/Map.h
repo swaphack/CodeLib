@@ -153,6 +153,11 @@ namespace alg
 		*	获取关系
 		*/
 		bool getRelation(uint32_t nIndex, std::vector<uint32_t>& indices) const;
+	public:
+		/**
+		*	查找相邻节点
+		*/
+		virtual bool findNeighborPoint(uint32_t srcIndex, std::vector<uint32_t>& neighboors) const;
 	protected:
 		// 地图点坐标集
 		MapObjects<MapPoint> _mapPoints;

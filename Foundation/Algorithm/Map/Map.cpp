@@ -30,11 +30,6 @@ alg::MapRelation::MapRelation()
 
 alg::MapRelation::~MapRelation()
 {
-
-}
-
-alg::MapRelation::~MapRelation()
-{
 	this->removeAllMapIndices();
 }
 
@@ -178,5 +173,10 @@ bool alg::Map::getRelation(uint32_t nIndex, std::vector<uint32_t>& indices) cons
 	indices = mp->getMapIndices();
 
 	return indices.size() > 0;
+}
+
+bool alg::Map::findNeighborPoint(uint32_t srcIndex, std::vector<uint32_t>& neighboors) const
+{
+	return false;
 }
 
