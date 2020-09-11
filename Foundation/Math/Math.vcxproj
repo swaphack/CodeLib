@@ -69,6 +69,9 @@
   <ItemGroup>
     <ClInclude Include="Algebra\Coordinate\Axis.h" />
     <ClInclude Include="Algebra\Coordinate\CartesianCoordinatesSystem.h" />
+    <ClInclude Include="Algebra\Coordinate\CartesianCoordinatesSystem2D.h" />
+    <ClInclude Include="Algebra\Coordinate\CartesianCoordinatesSystem3D.h" />
+    <ClInclude Include="Algebra\Coordinate\CartesianCoordinatesSystem4D.h" />
     <ClInclude Include="Algebra\Coordinate\CoordinateSystem.h" />
     <ClInclude Include="Algebra\Coordinate\CurvilinearCoordinatesSystem.h" />
     <ClInclude Include="Algebra\Coordinate\import.h" />
@@ -198,7 +201,9 @@
     <ClInclude Include="Set\FiniteSet.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Algebra\Coordinate\CartesianCoordinatesSystem.cpp" />
+    <ClCompile Include="Algebra\Coordinate\CartesianCoordinatesSystem2D.cpp" />
+    <ClCompile Include="Algebra\Coordinate\CartesianCoordinatesSystem3D.cpp" />
+    <ClCompile Include="Algebra\Coordinate\CartesianCoordinatesSystem4D.cpp" />
     <ClCompile Include="Algebra\Coordinate\CoordinateSystem.cpp" />
     <ClCompile Include="Algebra\Equation\Equation.cpp" />
     <ClCompile Include="Algebra\Matrix\Matrix.cpp" />

@@ -460,6 +460,15 @@
     <ClInclude Include="Algebra\Coordinate\import.h">
       <Filter>Algebra\Coordinate</Filter>
     </ClInclude>
+    <ClInclude Include="Algebra\Coordinate\CartesianCoordinatesSystem2D.h">
+      <Filter>Algebra\Coordinate</Filter>
+    </ClInclude>
+    <ClInclude Include="Algebra\Coordinate\CartesianCoordinatesSystem3D.h">
+      <Filter>Algebra\Coordinate</Filter>
+    </ClInclude>
+    <ClInclude Include="Algebra\Coordinate\CartesianCoordinatesSystem4D.h">
+      <Filter>Algebra\Coordinate</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
@@ -685,7 +694,13 @@
     <ClCompile Include="Geometry\3d\Polar3d.cpp">
       <Filter>Geometry\3d</Filter>
     </ClCompile>
-    <ClCompile Include="Algebra\Coordinate\CartesianCoordinatesSystem.cpp">
+    <ClCompile Include="Algebra\Coordinate\CartesianCoordinatesSystem2D.cpp">
+      <Filter>Algebra\Coordinate</Filter>
+    </ClCompile>
+    <ClCompile Include="Algebra\Coordinate\CartesianCoordinatesSystem3D.cpp">
+      <Filter>Algebra\Coordinate</Filter>
+    </ClCompile>
+    <ClCompile Include="Algebra\Coordinate\CartesianCoordinatesSystem4D.cpp">
       <Filter>Algebra\Coordinate</Filter>
     </ClCompile>
   </ItemGroup>

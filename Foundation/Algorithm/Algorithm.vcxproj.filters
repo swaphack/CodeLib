@@ -5,26 +5,42 @@
     <ClInclude Include="Sort\Sort.h">
       <Filter>Sort</Filter>
     </ClInclude>
-    <ClInclude Include="Path\Voronoi.h">
-      <Filter>Path</Filter>
+    <ClInclude Include="Struct\ObjectDetail.h">
+      <Filter>Struct</Filter>
     </ClInclude>
-    <ClInclude Include="Path\MapNode.h">
-      <Filter>Path</Filter>
+    <ClInclude Include="Struct\OneToManyRelationship.h">
+      <Filter>Struct</Filter>
     </ClInclude>
-    <ClInclude Include="Path\MapPath.h">
-      <Filter>Path</Filter>
+    <ClInclude Include="Struct\OneToOneRelationship.h">
+      <Filter>Struct</Filter>
+    </ClInclude>
+    <ClInclude Include="Struct\OneToOneDoubleRelationship.h">
+      <Filter>Struct</Filter>
+    </ClInclude>
+    <ClInclude Include="Map\Map.h">
+      <Filter>Map</Filter>
+    </ClInclude>
+    <ClInclude Include="Map\MeshMap.h">
+      <Filter>Map</Filter>
+    </ClInclude>
+    <ClInclude Include="Map\Voronoi.h">
+      <Filter>Map</Filter>
     </ClInclude>
     <ClInclude Include="Path\AStar.h">
       <Filter>Path</Filter>
     </ClInclude>
-    <ClInclude Include="Mesh\Mesh.h">
-      <Filter>Mesh</Filter>
-    </ClInclude>
-    <ClInclude Include="Path\Map.h">
+    <ClInclude Include="Path\Path.h">
       <Filter>Path</Filter>
     </ClInclude>
-    <ClInclude Include="Path\MapTool.h" />
-    <ClInclude Include="Path\Relation.h" />
+    <ClInclude Include="Map\RayMap.h">
+      <Filter>Map</Filter>
+    </ClInclude>
+    <ClInclude Include="Map\MapObjects.h">
+      <Filter>Map</Filter>
+    </ClInclude>
+    <ClInclude Include="Map\MapObject.h">
+      <Filter>Map</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Sort">
@@ -36,21 +52,44 @@
     <Filter Include="Picture">
       <UniqueIdentifier>{798d6ba2-d60a-407a-acfb-28bdbc205895}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Mesh">
-      <UniqueIdentifier>{a838d48d-3a0f-4aa8-bfbd-559250f481fa}</UniqueIdentifier>
+    <Filter Include="Struct">
+      <UniqueIdentifier>{17aa9ea6-2483-448e-8274-8a8f67f5167b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Map">
+      <UniqueIdentifier>{b9f1d5ab-2dcf-4415-98c4-99bfa7335700}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Path\MapNode.cpp">
+    <ClCompile Include="Struct\ObjectDetail.cpp">
+      <Filter>Struct</Filter>
+    </ClCompile>
+    <ClCompile Include="Struct\OneToManyRelationship.cpp">
+      <Filter>Struct</Filter>
+    </ClCompile>
+    <ClCompile Include="Struct\OneToOneRelationship.cpp">
+      <Filter>Struct</Filter>
+    </ClCompile>
+    <ClCompile Include="Struct\OneToOneDoubleRelationship.cpp">
+      <Filter>Struct</Filter>
+    </ClCompile>
+    <ClCompile Include="Map\Map.cpp">
+      <Filter>Map</Filter>
+    </ClCompile>
+    <ClCompile Include="Map\MeshMap.cpp">
+      <Filter>Map</Filter>
+    </ClCompile>
+    <ClCompile Include="Path\AStar.cpp">
       <Filter>Path</Filter>
     </ClCompile>
-    <ClCompile Include="Path\MapPath.cpp">
+    <ClCompile Include="Path\Path.cpp">
       <Filter>Path</Filter>
     </ClCompile>
-    <ClCompile Include="Path\Map.cpp">
-      <Filter>Path</Filter>
+    <ClCompile Include="Map\RayMap.cpp">
+      <Filter>Map</Filter>
     </ClCompile>
-    <ClCompile Include="Path\Relation.cpp" />
+    <ClCompile Include="Map\MapObject.cpp">
+      <Filter>Map</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

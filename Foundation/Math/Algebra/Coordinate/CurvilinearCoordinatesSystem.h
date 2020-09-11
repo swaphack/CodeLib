@@ -11,6 +11,13 @@ namespace math
 	class CurvilinearCoordinatesSystem : public CoordinateSystem<Count>
 	{
 	public:
+		CurvilinearCoordinatesSystem()
+		{
+		}
+		virtual ~CurvilinearCoordinatesSystem()
+		{
+		}
+	public:
 	protected:
 	private:
 	};

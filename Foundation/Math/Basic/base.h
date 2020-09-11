@@ -105,4 +105,41 @@ public:\
 			value = (T)va_arg(ap, T);
 		}
 	}
+
+	template<typename T>
+	T* GET_PARAMETERS(int length, T start)
+	{
+		T* val = (T*)malloc(length * sizeof(T));
+		memset(val, 0, length * sizeof(T));
+		val[0] = start;
+
+		va_list ap;
+		va_start(ap, start);
+		for (int i = 0; i < length - 1; i++)
+		{
+			T temp;
+			GET_VA_ARG(temp, ap);
+			val[i + 1] = temp;
+		}
+		va_end(ap);
+
+		return val;
+	}
+
+	template<typename T>
+	T* GET_PARAMETERS(int length, T start, va_list ap)
+	{
+		T* val = (T*)malloc(length * sizeof(T));
+		memset(val, 0, length * sizeof(T));
+		val[0] = start;
+
+		for (int i = 0; i < length - 1; i++)
+		{
+			T temp;
+			GET_VA_ARG(temp, ap);
+			val[i + 1] = temp;
+		}
+
+		return val;
+	}
 }

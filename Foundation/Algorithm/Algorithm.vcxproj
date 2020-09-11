@@ -44,7 +44,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>../System/;../Math/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);../System/;../Math/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -66,22 +66,32 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="algorithm.h" />
-    <ClInclude Include="Mesh\Mesh.h" />
+    <ClInclude Include="Map\Map.h" />
+    <ClInclude Include="Map\MapObject.h" />
+    <ClInclude Include="Map\MapObjects.h" />
+    <ClInclude Include="Map\MeshMap.h" />
+    <ClInclude Include="Map\RayMap.h" />
+    <ClInclude Include="Map\Voronoi.h" />
     <ClInclude Include="Path\AStar.h" />
-    <ClInclude Include="Path\Map.h" />
-    <ClInclude Include="Path\MapPath.h" />
-    <ClInclude Include="Path\MapTool.h" />
-    <ClInclude Include="Path\Relation.h" />
-    <ClInclude Include="Path\MapNode.h" />
-    <ClInclude Include="Path\Voronoi.h" />
+    <ClInclude Include="Path\Path.h" />
     <ClInclude Include="Sort\Sort.h" />
+    <ClInclude Include="Struct\OneToOneDoubleRelationship.h" />
+    <ClInclude Include="Struct\ObjectDetail.h" />
+    <ClInclude Include="Struct\OneToOneRelationship.h" />
+    <ClInclude Include="Struct\OneToManyRelationship.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Path\Map.cpp" />
-    <ClCompile Include="Path\MapNode.cpp" />
-    <ClCompile Include="Path\MapPath.cpp" />
-    <ClCompile Include="Path\Relation.cpp" />
+    <ClCompile Include="Map\MapObject.cpp" />
+    <ClCompile Include="Map\Map.cpp" />
+    <ClCompile Include="Map\MeshMap.cpp" />
+    <ClCompile Include="Map\RayMap.cpp" />
+    <ClCompile Include="Path\AStar.cpp" />
+    <ClCompile Include="Path\Path.cpp" />
+    <ClCompile Include="Struct\OneToOneDoubleRelationship.cpp" />
+    <ClCompile Include="Struct\ObjectDetail.cpp" />
+    <ClCompile Include="Struct\OneToOneRelationship.cpp" />
+    <ClCompile Include="Struct\OneToManyRelationship.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

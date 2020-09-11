@@ -25,25 +25,11 @@ namespace math
 			this->assign(val);
 		}
 
-		Array2D(float start, ...)
+		Array2D(T start, ...)
 		{
 			int length = Height * Width;
-			T* val = (T*)malloc(length * sizeof(T));
-			memset(val, 0, length * sizeof(T));
-			val[0] = start;
-
-			va_list ap;
-			va_start(ap, start);
-			for (int i = 0; i < length - 1; i++)
-			{
-				T temp;
-				GET_VA_ARG(temp, ap);
-				val[i + 1] = temp;
-			}
-			va_end(ap);
-
+			T* val = GET_PARAMETERS(length, start);
 			this->assign(val);
-
 			free(val);
 		}
 		Array2D(const Array2D& mat)

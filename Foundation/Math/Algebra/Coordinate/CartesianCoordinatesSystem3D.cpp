@@ -1,25 +1,4 @@
-#include "CartesianCoordinatesSystem.h"
-#include "Algebra/Determinant/Determinant.h"
-
-math::CartesianCoordinatesSystem2D::CartesianCoordinatesSystem2D()
-{
-	this->loadIdentity();
-}
-
-math::CartesianCoordinatesSystem2D::~CartesianCoordinatesSystem2D()
-{
-
-}
-
-void math::CartesianCoordinatesSystem2D::loadIdentity()
-{
-	_systemMatrix.reset();
-	_systemMatrix[0] = 1;
-	_systemMatrix[3] = 1;
-}
-
-//////////////////////////////////////////////////////////////////////////
-
+#include "CartesianCoordinatesSystem3D.h"
 
 math::CartesianCoordinatesSystem3D::CartesianCoordinatesSystem3D()
 {
@@ -46,7 +25,7 @@ math::CartesianCoordinatesSystem3D math::CartesianCoordinatesSystem3D::create(co
 	{
 		return system;
 	}
-	
+
 	float d = fabs(vector.getX()) + fabs(vector.getX());
 
 	Vector3 va = vector;
@@ -77,25 +56,4 @@ math::CartesianCoordinatesSystem3D math::CartesianCoordinatesSystem3D::create(co
 	vc.setZ(getDetMagnitude(valZ));
 
 	return system;
-}
-
-//////////////////////////////////////////////////////////////////////////
-
-math::CartesianCoordinatesSystem4D::CartesianCoordinatesSystem4D()
-{
-	this->loadIdentity();
-}
-
-math::CartesianCoordinatesSystem4D::~CartesianCoordinatesSystem4D()
-{
-
-}
-
-void math::CartesianCoordinatesSystem4D::loadIdentity()
-{
-	_systemMatrix.reset();
-	_systemMatrix[0] = 1;
-	_systemMatrix[5] = 1;
-	_systemMatrix[10] = 1;
-	_systemMatrix[15] = 1;
 }
