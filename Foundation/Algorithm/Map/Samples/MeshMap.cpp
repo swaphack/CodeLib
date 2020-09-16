@@ -1,30 +1,28 @@
 #include "MeshMap.h"
 #include "system.h"
 
-alg::MeshRelation::MeshRelation()
+alg::MeshMapRelation::MeshMapRelation()
 {
 
 }
 
-alg::MeshRelation::~MeshRelation()
+alg::MeshMapRelation::~MeshMapRelation()
 {
 
 }
 
-bool alg::MeshRelation::findNeighbor(uint32_t srcIndex, std::vector<uint32_t>& neighbors) const
+bool alg::MeshMapRelation::findNeighbor(uint32_t srcIndex, std::vector<uint32_t>& neighbors) const
 {
-	neighbors.clear();
-
-	int32_t index = getIndex(srcIndex);
+	int32_t index = getRelationIndex(srcIndex);
 	if (index == -1)
 	{
 		return false;
 	}
 
-	uint32_t count = getMapIndexCount();
+	uint32_t count = getRelationCount();
 
-	uint32_t preIndex = getMapIndex(index - 1 < 0 ? count - 1 : index - 1);
-	uint32_t nexIndex = getMapIndex(index + 1 > count ? 0 : index + 1);
+	uint32_t preIndex = getRelation(index - 1 < 0 ? count - 1 : index - 1);
+	uint32_t nexIndex = getRelation(index + 1 >= count ? 0 : index + 1);
 	if (preIndex != srcIndex)
 	{
 		neighbors.push_back(preIndex);
@@ -37,24 +35,24 @@ bool alg::MeshRelation::findNeighbor(uint32_t srcIndex, std::vector<uint32_t>& n
 	return neighbors.size() > 0;
 }
 
-bool alg::MeshRelation::findWay(uint32_t fromIndex, uint32_t toIndex, std::vector<uint32_t>& indices) const
+bool alg::MeshMapRelation::findWay(uint32_t fromIndex, uint32_t toIndex, std::vector<uint32_t>& indices) const
 {
 	indices.clear();
 
-	int32_t srcIndex = getIndex(fromIndex);
-	int32_t destIndex = getIndex(toIndex);
+	int32_t srcIndex = getRelationIndex(fromIndex);
+	int32_t destIndex = getRelationIndex(toIndex);
 	if (srcIndex == -1 || destIndex == -1)
 	{
 		return false;
 	}
 
-	uint32_t count = getMapIndexCount();
+	uint32_t count = getRelationCount();
 
 	if (fabs(srcIndex - destIndex) < (count / 2))
 	{
 		for (int i = srcIndex; i != destIndex;)
 		{
-			indices.push_back(getMapIndex(i));
+			indices.push_back(getRelation(i));
 			srcIndex < destIndex ? i++ : i--;
 		}
 		indices.push_back(toIndex);
@@ -63,7 +61,7 @@ bool alg::MeshRelation::findWay(uint32_t fromIndex, uint32_t toIndex, std::vecto
 	{
 		for (int i = srcIndex; i != destIndex;)
 		{
-			indices.push_back(getMapIndex(i));
+			indices.push_back(getRelation(i));
 			srcIndex < destIndex ? i-- : i++;
 			if (i == -1)
 			{
@@ -89,12 +87,10 @@ alg::MeshMap::~MeshMap()
 
 bool alg::MeshMap::findNeighborPoint(uint32_t srcIndex, std::vector<uint32_t>& neighboors) const
 {
-	neighboors.clear();
-
 	std::set<uint32_t> setData;
 	for (const auto& mesh : _mapRelations.getAllObjects())
 	{
-		MeshRelation* pRelation = mesh.second->as<MeshRelation>();
+		MeshMapRelation* pRelation = mesh.second->as<MeshMapRelation>();
 		std::vector<uint32_t> vecData;
 		if (pRelation->findNeighbor(srcIndex, vecData))
 		{

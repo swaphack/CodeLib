@@ -513,9 +513,9 @@ void render::Mesh::calTrianglesVertexTangent(const sys::MeshMemoryData& vertices
 		float ty = f * (deltaUV2.getY() * edge1.getY() - deltaUV1.getY() * edge2.getY());
 		float tz = f * (deltaUV2.getY() * edge1.getZ() - deltaUV1.getY() * edge2.getZ());
 
-		float btx = f * (deltaUV1.getX() * edge1.getX() - deltaUV2.getY() * edge2.getX());
-		float bty = f * (deltaUV1.getX() * edge1.getY() - deltaUV2.getY() * edge2.getY());
-		float btz = f * (deltaUV1.getX() * edge1.getZ() - deltaUV2.getY() * edge2.getZ());
+		float btx = f * (deltaUV1.getX() * edge1.getX() - deltaUV2.getX() * edge2.getX());
+		float bty = f * (deltaUV1.getX() * edge1.getY() - deltaUV2.getX() * edge2.getY());
+		float btz = f * (deltaUV1.getX() * edge1.getZ() - deltaUV2.getX() * edge2.getZ());
 
 		math::Vector3 tangent(tx, ty, tz);
 

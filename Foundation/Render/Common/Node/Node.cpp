@@ -353,14 +353,10 @@ void Node::calSpaceData()
 
 void Node::calRealSpaceByMatrix()
 {
-	//_localMatrix = math::Matrix4x4::getRST(_obRotation, getScale(), _obPosition);
-
 	math::Matrix4x4::getRST(_obRotation, getScale(), _position, _localMatrix);
 
 	math::SquareMatrix4 sm = _localMatrix;
 	_localInverseMatrix = sm.getInverse();
-
-	//PRINT("mat\n%s\n", _mat44.toString().c_str());
 
 	if (this->getParent() != nullptr)
 	{

@@ -1,25 +1,25 @@
 #include "RayMap.h"
 
-alg::RayRelation::RayRelation()
+alg::RayMapRelation::RayMapRelation()
 {
 
 }
 
-alg::RayRelation::~RayRelation()
+alg::RayMapRelation::~RayMapRelation()
 {
 
 }
 
-bool alg::RayRelation::findNeighbor(std::vector<uint32_t>& neighbors) const
+bool alg::RayMapRelation::findNeighbor(std::vector<uint32_t>& neighbors) const
 {
-	neighbors = _mapIndices;
+	neighbors = _relations;
 
 	return neighbors.size() > 0;
 }
 
-bool alg::RayRelation::findWay(uint32_t toIndex) const
+bool alg::RayMapRelation::findWay(uint32_t toIndex) const
 {
-	return getIndex(toIndex) >= 0;
+	return getRelationIndex(toIndex) >= 0;
 }
 //////////////////////////////////////////////////////////////////////////
 
@@ -30,21 +30,6 @@ alg::RayMap::RayMap()
 
 alg::RayMap::~RayMap()
 {
-
-}
-
-void alg::RayMap::addRayRelation(uint32_t centerIndex, uint32_t nLength, uint32_t start, ...)
-{
-	va_list ap;
-	va_start(ap, start);
-	int32_t relationIndex = this->addRelation<RayRelation>(nLength, start, ap);
-	va_end(ap);
-	if (relationIndex < 0)
-	{
-		return;
-	}
-
-	_centerRayRelation[centerIndex] = relationIndex;
 }
 
 bool alg::RayMap::findNeighborPoint(uint32_t srcIndex, std::vector<uint32_t>& neighboors) const
@@ -61,7 +46,7 @@ bool alg::RayMap::findNeighborPoint(uint32_t srcIndex, std::vector<uint32_t>& ne
 		return false;
 	}
 
-	auto rayRelation = pRelation->as<RayRelation>();
+	auto rayRelation = pRelation->as<RayMapRelation>();
 	if (rayRelation == nullptr)
 	{
 		return false;
@@ -76,8 +61,6 @@ bool alg::RayMap::findNeighborPoint(uint32_t srcIndex, std::vector<uint32_t>& ne
 	for (auto item : vecIndex)
 	{
 		neighboors.push_back(item);
-
-		this->findNeighborPoint(item, neighboors);
 	}
 
 	return true;

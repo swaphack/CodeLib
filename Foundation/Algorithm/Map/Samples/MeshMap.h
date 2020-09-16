@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Map.h"
+#include "PointMap.h"
 
 namespace alg
 {
@@ -13,11 +13,11 @@ namespace alg
 	*	/	\
 	*	\___/
 	*/
-	struct MeshRelation : public MapRelation
+	struct MeshMapRelation : public MapRelation
 	{
 	public:
-		MeshRelation();
-		virtual ~MeshRelation();
+		MeshMapRelation();
+		virtual ~MeshMapRelation();
 	public:
 		/**
 		*	查找相邻节点
@@ -32,12 +32,20 @@ namespace alg
 	/**
 	*	网格地图
 	*/
-	class MeshMap : public Map
+	class MeshMap : public PointMap<MeshMapRelation>
 	{
 	public:
 		MeshMap();
 		virtual ~MeshMap();
 	public:
+		template<uint32_t Length>
+		void addMeshRelation(uint32_t start, ...)
+		{
+			va_list ap;
+			va_start(ap, start);
+			int32_t relationIndex = this->addRelation<Length>(start, ap);
+			va_end(ap);
+		}
 		/**
 		*	查找相邻节点
 		*/

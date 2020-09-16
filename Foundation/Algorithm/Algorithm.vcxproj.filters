@@ -17,46 +17,106 @@
     <ClInclude Include="Struct\OneToOneDoubleRelationship.h">
       <Filter>Struct</Filter>
     </ClInclude>
-    <ClInclude Include="Map\Map.h">
-      <Filter>Map</Filter>
-    </ClInclude>
-    <ClInclude Include="Map\MeshMap.h">
-      <Filter>Map</Filter>
-    </ClInclude>
     <ClInclude Include="Map\Voronoi.h">
       <Filter>Map</Filter>
     </ClInclude>
-    <ClInclude Include="Path\AStar.h">
-      <Filter>Path</Filter>
-    </ClInclude>
-    <ClInclude Include="Path\Path.h">
-      <Filter>Path</Filter>
-    </ClInclude>
-    <ClInclude Include="Map\RayMap.h">
+    <ClInclude Include="Map\import.h">
       <Filter>Map</Filter>
     </ClInclude>
-    <ClInclude Include="Map\MapObjects.h">
-      <Filter>Map</Filter>
+    <ClInclude Include="Struct\import.h">
+      <Filter>Struct</Filter>
     </ClInclude>
-    <ClInclude Include="Map\MapObject.h">
-      <Filter>Map</Filter>
+    <ClInclude Include="Map\Path\AStar.h">
+      <Filter>Map\Path</Filter>
+    </ClInclude>
+    <ClInclude Include="Map\Path\import.h">
+      <Filter>Map\Path</Filter>
+    </ClInclude>
+    <ClInclude Include="Map\Path\Path.h">
+      <Filter>Map\Path</Filter>
+    </ClInclude>
+    <ClInclude Include="Map\Base\Map.h">
+      <Filter>Map\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Map\Base\MapObject.h">
+      <Filter>Map\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Map\Base\MapObjects.h">
+      <Filter>Map\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Map\Base\import.h">
+      <Filter>Map\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Map\Creator\import.h">
+      <Filter>Map\Creator</Filter>
+    </ClInclude>
+    <ClInclude Include="Map\Creator\MapCreator.h">
+      <Filter>Map\Creator</Filter>
+    </ClInclude>
+    <ClInclude Include="Map\Base\MapRelation.h">
+      <Filter>Map\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Map\Samples\import.h">
+      <Filter>Map\Samples</Filter>
+    </ClInclude>
+    <ClInclude Include="Map\Samples\MeshMap.h">
+      <Filter>Map\Samples</Filter>
+    </ClInclude>
+    <ClInclude Include="Map\Samples\RayMap.h">
+      <Filter>Map\Samples</Filter>
+    </ClInclude>
+    <ClInclude Include="Map\Samples\PointMap.h">
+      <Filter>Map\Samples</Filter>
+    </ClInclude>
+    <ClInclude Include="Map\Samples\PointMapCell.h">
+      <Filter>Map\Samples</Filter>
+    </ClInclude>
+    <ClInclude Include="Map\Base\MapCell.h">
+      <Filter>Map\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Map\Creator\MapModule.h">
+      <Filter>Map\Creator</Filter>
+    </ClInclude>
+    <ClInclude Include="Map\Creator\MapSlotRule.h">
+      <Filter>Map\Creator</Filter>
+    </ClInclude>
+    <ClInclude Include="Map\Samples\MapCreator3D.h">
+      <Filter>Map\Samples</Filter>
+    </ClInclude>
+    <ClInclude Include="Map\Samples\MapCreator2D.h">
+      <Filter>Map\Samples</Filter>
+    </ClInclude>
+    <ClInclude Include="Map\Creator\MapSlot.h">
+      <Filter>Map\Creator</Filter>
+    </ClInclude>
+    <ClInclude Include="Map\Samples\Array2DMap.h">
+      <Filter>Map\Samples</Filter>
+    </ClInclude>
+    <ClInclude Include="Map\Samples\Array3DMap.h">
+      <Filter>Map\Samples</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Sort">
       <UniqueIdentifier>{9009857c-58eb-4404-a8f0-3241054304c2}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Path">
-      <UniqueIdentifier>{4aff5cd0-556e-4cce-8e0e-c0ff72ac91d1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Picture">
-      <UniqueIdentifier>{798d6ba2-d60a-407a-acfb-28bdbc205895}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Struct">
       <UniqueIdentifier>{17aa9ea6-2483-448e-8274-8a8f67f5167b}</UniqueIdentifier>
     </Filter>
     <Filter Include="Map">
       <UniqueIdentifier>{b9f1d5ab-2dcf-4415-98c4-99bfa7335700}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Map\Path">
+      <UniqueIdentifier>{2180c047-a4b7-4a74-8477-785021a0d440}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Map\Base">
+      <UniqueIdentifier>{4ffcb724-1c82-4b51-9c55-b1aabf238226}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Map\Creator">
+      <UniqueIdentifier>{4a32e443-4676-49ad-97f2-4b0eed15aa53}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Map\Samples">
+      <UniqueIdentifier>{84b747df-74e3-4dfe-b9b8-ae434ef2fa32}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -73,23 +133,50 @@
     <ClCompile Include="Struct\OneToOneDoubleRelationship.cpp">
       <Filter>Struct</Filter>
     </ClCompile>
-    <ClCompile Include="Map\Map.cpp">
-      <Filter>Map</Filter>
+    <ClCompile Include="Map\Path\AStar.cpp">
+      <Filter>Map\Path</Filter>
     </ClCompile>
-    <ClCompile Include="Map\MeshMap.cpp">
-      <Filter>Map</Filter>
+    <ClCompile Include="Map\Path\Path.cpp">
+      <Filter>Map\Path</Filter>
     </ClCompile>
-    <ClCompile Include="Path\AStar.cpp">
-      <Filter>Path</Filter>
+    <ClCompile Include="Map\Base\MapObject.cpp">
+      <Filter>Map\Base</Filter>
     </ClCompile>
-    <ClCompile Include="Path\Path.cpp">
-      <Filter>Path</Filter>
+    <ClCompile Include="Map\Base\MapRelation.cpp">
+      <Filter>Map\Base</Filter>
     </ClCompile>
-    <ClCompile Include="Map\RayMap.cpp">
-      <Filter>Map</Filter>
+    <ClCompile Include="Map\Samples\MeshMap.cpp">
+      <Filter>Map\Samples</Filter>
     </ClCompile>
-    <ClCompile Include="Map\MapObject.cpp">
-      <Filter>Map</Filter>
+    <ClCompile Include="Map\Samples\RayMap.cpp">
+      <Filter>Map\Samples</Filter>
+    </ClCompile>
+    <ClCompile Include="Map\Samples\PointMapCell.cpp">
+      <Filter>Map\Samples</Filter>
+    </ClCompile>
+    <ClCompile Include="Map\Base\MapCell.cpp">
+      <Filter>Map\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Map\Creator\MapCreator.cpp">
+      <Filter>Map\Creator</Filter>
+    </ClCompile>
+    <ClCompile Include="Map\Creator\MapSlotRule.cpp">
+      <Filter>Map\Creator</Filter>
+    </ClCompile>
+    <ClCompile Include="Map\Creator\MapModule.cpp">
+      <Filter>Map\Creator</Filter>
+    </ClCompile>
+    <ClCompile Include="Map\Samples\MapCreator2D.cpp">
+      <Filter>Map\Samples</Filter>
+    </ClCompile>
+    <ClCompile Include="Map\Creator\MapSlot.cpp">
+      <Filter>Map\Creator</Filter>
+    </ClCompile>
+    <ClCompile Include="Map\Samples\Array2DMap.cpp">
+      <Filter>Map\Samples</Filter>
+    </ClCompile>
+    <ClCompile Include="Map\Samples\Array3DMap.cpp">
+      <Filter>Map\Samples</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

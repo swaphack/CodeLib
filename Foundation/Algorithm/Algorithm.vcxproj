@@ -13,10 +13,11 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{7F92B2CA-0F7B-418C-835D-D05409B6C156}</ProjectGuid>
     <RootNamespace>Algorithm</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
@@ -66,15 +67,33 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="algorithm.h" />
-    <ClInclude Include="Map\Map.h" />
-    <ClInclude Include="Map\MapObject.h" />
-    <ClInclude Include="Map\MapObjects.h" />
-    <ClInclude Include="Map\MeshMap.h" />
-    <ClInclude Include="Map\RayMap.h" />
+    <ClInclude Include="Map\Base\import.h" />
+    <ClInclude Include="Map\Base\Map.h" />
+    <ClInclude Include="Map\Base\MapCell.h" />
+    <ClInclude Include="Map\Base\MapObject.h" />
+    <ClInclude Include="Map\Base\MapObjects.h" />
+    <ClInclude Include="Map\Base\MapRelation.h" />
+    <ClInclude Include="Map\Creator\import.h" />
+    <ClInclude Include="Map\Creator\MapCreator.h" />
+    <ClInclude Include="Map\Creator\MapModule.h" />
+    <ClInclude Include="Map\Creator\MapSlotRule.h" />
+    <ClInclude Include="Map\Creator\MapSlot.h" />
+    <ClInclude Include="Map\import.h" />
+    <ClInclude Include="Map\Path\AStar.h" />
+    <ClInclude Include="Map\Path\import.h" />
+    <ClInclude Include="Map\Path\Path.h" />
+    <ClInclude Include="Map\Samples\Array2DMap.h" />
+    <ClInclude Include="Map\Samples\Array3DMap.h" />
+    <ClInclude Include="Map\Samples\import.h" />
+    <ClInclude Include="Map\Samples\MapCreator2D.h" />
+    <ClInclude Include="Map\Samples\MapCreator3D.h" />
+    <ClInclude Include="Map\Samples\PointMapCell.h" />
+    <ClInclude Include="Map\Samples\MeshMap.h" />
+    <ClInclude Include="Map\Samples\PointMap.h" />
+    <ClInclude Include="Map\Samples\RayMap.h" />
     <ClInclude Include="Map\Voronoi.h" />
-    <ClInclude Include="Path\AStar.h" />
-    <ClInclude Include="Path\Path.h" />
     <ClInclude Include="Sort\Sort.h" />
+    <ClInclude Include="Struct\import.h" />
     <ClInclude Include="Struct\OneToOneDoubleRelationship.h" />
     <ClInclude Include="Struct\ObjectDetail.h" />
     <ClInclude Include="Struct\OneToOneRelationship.h" />
@@ -82,12 +101,21 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Map\MapObject.cpp" />
-    <ClCompile Include="Map\Map.cpp" />
-    <ClCompile Include="Map\MeshMap.cpp" />
-    <ClCompile Include="Map\RayMap.cpp" />
-    <ClCompile Include="Path\AStar.cpp" />
-    <ClCompile Include="Path\Path.cpp" />
+    <ClCompile Include="Map\Base\MapCell.cpp" />
+    <ClCompile Include="Map\Base\MapObject.cpp" />
+    <ClCompile Include="Map\Base\MapRelation.cpp" />
+    <ClCompile Include="Map\Creator\MapCreator.cpp" />
+    <ClCompile Include="Map\Creator\MapModule.cpp" />
+    <ClCompile Include="Map\Creator\MapSlotRule.cpp" />
+    <ClCompile Include="Map\Creator\MapSlot.cpp" />
+    <ClCompile Include="Map\Path\AStar.cpp" />
+    <ClCompile Include="Map\Path\Path.cpp" />
+    <ClCompile Include="Map\Samples\Array2DMap.cpp" />
+    <ClCompile Include="Map\Samples\Array3DMap.cpp" />
+    <ClCompile Include="Map\Samples\MapCreator2D.cpp" />
+    <ClCompile Include="Map\Samples\PointMapCell.cpp" />
+    <ClCompile Include="Map\Samples\MeshMap.cpp" />
+    <ClCompile Include="Map\Samples\RayMap.cpp" />
     <ClCompile Include="Struct\OneToOneDoubleRelationship.cpp" />
     <ClCompile Include="Struct\ObjectDetail.cpp" />
     <ClCompile Include="Struct\OneToOneRelationship.cpp" />

@@ -8,9 +8,10 @@ namespace alg
 	/**
 	*	地图对象管理
 	*/
-	template<typename T, typename = std::enable_if<std::is_base_of<MapObject, T>::value, T>::type>
+	template<typename T>
 	class MapObjects : public MapObject
 	{
+		static_assert(std::is_base_of<MapObject, T>::value, "T must inherit from MapObject");
 	public:
 		MapObjects()
 		{

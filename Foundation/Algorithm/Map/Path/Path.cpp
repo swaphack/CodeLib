@@ -1,5 +1,5 @@
 #include "Path.h"
-#include "Map/Map.h"
+#include "Map/Base/Map.h"
 alg::Path::Path()
 {
 
@@ -10,21 +10,18 @@ alg::Path::~Path()
 
 }
 
-void alg::Path::addDistance(const Map* map, uint32_t fromIndex, uint32_t toIndex)
+void alg::Path::addDistance(const MapProtocol* map, uint32_t fromIndex, uint32_t toIndex)
 {
 	if (map == nullptr)
 	{
 		return;
 	}
 
-	auto point0 = map->getPoint(fromIndex);
-	auto point1 = map->getPoint(toIndex);
-	if (point0 == nullptr || point1 == nullptr)
+	float distance = map->getDistance(fromIndex, toIndex);
+	if (distance == -1)
 	{
 		return;
 	}
-
-	float distance = math::Vector3::distance(*point0, *point1);
 	std::string mark0 = getCString("%d, %d", fromIndex, toIndex);
 	std::string mark1 = getCString("%d, %d", toIndex, fromIndex);
 
@@ -32,7 +29,7 @@ void alg::Path::addDistance(const Map* map, uint32_t fromIndex, uint32_t toIndex
 	_distances[mark1] = distance;
 }
 
-float alg::Path::getDistance(const Map* map, uint32_t fromIndex, uint32_t toIndex)
+float alg::Path::getDistance(const MapProtocol* map, uint32_t fromIndex, uint32_t toIndex)
 {
 	if (map == nullptr)
 	{

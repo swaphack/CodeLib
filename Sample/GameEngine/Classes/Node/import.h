@@ -24,3 +24,4 @@
 #include "TestMeshNode.h"
 
 #include "TestMathNode.h"
+#include "TestAlgNode.h"
