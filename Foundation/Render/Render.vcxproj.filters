@@ -600,6 +600,9 @@
     <ClCompile Include="PostProcessing\Pixel.cpp">
       <Filter>PostProcessing</Filter>
     </ClCompile>
+    <ClCompile Include="Common\DrawNode\TessilationProtocol.cpp">
+      <Filter>Common\DrawNode</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Common\Node\import.h">
@@ -1376,6 +1379,9 @@
     </ClInclude>
     <ClInclude Include="Common\View\DimensionsType.h">
       <Filter>Common\View</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\DrawNode\TessilationProtocol.h">
+      <Filter>Common\DrawNode</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

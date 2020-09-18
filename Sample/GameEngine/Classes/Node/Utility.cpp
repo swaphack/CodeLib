@@ -9,7 +9,7 @@ std::string Utility::texture3dFragmentPath = "Shader/texture/texture.fs";
 
 bool Utility::bInitShaderAttrib = false;
 
-void Utility::loadShader(render::Materials* mats, const std::string& vpath, const std::string& fpath)
+void Utility::loadShaderVF(render::Materials* mats, const std::string& vpath, const std::string& fpath)
 {
 	if (mats == nullptr)
 	{
@@ -29,12 +29,22 @@ void Utility::loadShader(render::Materials* mats, const std::string& vpath, cons
 
 }
 
-void Utility::loadShader(render::DrawNode* node, const std::string& vpath, const std::string& fpath)
+void Utility::loadShaderVF(render::DrawNode* node, const std::string& vpath, const std::string& fpath)
 {
-	loadShader(node->getMaterial(), vpath, fpath);
+	loadShaderVF(node->getMaterial(), vpath, fpath);
 }
 
-void Utility::loadShader(render::Material* mat, const std::string& vpath, const std::string& fpath)
+void Utility::loadShaderVTF(render::DrawNode* node, const std::string& vpath, const std::string& tepath, const std::string& fpath)
+{
+	loadShaderVTF(node->getMaterial(), vpath, tepath, fpath);
+}
+
+void Utility::loadShaderVTF(render::DrawNode* node, const std::string& vpath, const std::string& tcpath, const std::string& tepath, const std::string& fpath)
+{
+	loadShaderVTF(node->getMaterial(), vpath, tcpath, tepath, fpath);
+}
+
+void Utility::loadShaderVF(render::Material* mat, const std::string& vpath, const std::string& fpath)
 {
 	if (mat == nullptr)
 	{
@@ -50,22 +60,59 @@ void Utility::loadShader(render::Material* mat, const std::string& vpath, const 
 	initShaderAttrib();
 }
 
-void Utility::loadShader(render::MultiDrawNode* node, const std::string& vpath, const std::string& fpath)
+void Utility::loadShaderVTF(render::Material* mat, const std::string& vpath, const std::string& tepath, const std::string& fpath)
 {
-	loadShader(node->getMaterials(), vpath, fpath);
+	if (mat == nullptr)
+	{
+		return;
+	}
+	ShaderProgram* pProgram = G_SHANDER->createVertexTessFragmentProgram(vpath, tepath, fpath);
+	if (pProgram == nullptr)
+	{
+		return;
+	}
+	mat->setShaderProgram(pProgram);
+
+	initShaderAttrib();
 }
 
-void Utility::loadShader(render::DrawNode* node, const std::string& vpath, const std::string& gpath, const std::string& fpath)
+void Utility::loadShaderVTF(render::Material* mat, const std::string& vpath, const std::string& tcpath, const std::string& tepath, const std::string& fpath)
 {
-	loadShader(node->getMaterial(), vpath, gpath, fpath);
+	if (mat == nullptr)
+	{
+		return;
+	}
+	ShaderProgram* pProgram = G_SHANDER->createVertexTessFragmentProgram(vpath, tcpath, tepath, fpath);
+	if (pProgram == nullptr)
+	{
+		return;
+	}
+	mat->setShaderProgram(pProgram);
+
+	initShaderAttrib();
 }
 
-void Utility::loadShader(render::MultiDrawNode* node, const std::string& vpath, const std::string& gpath, const std::string& fpath)
+void Utility::loadShaderVF(render::MultiDrawNode* node, const std::string& vpath, const std::string& fpath)
 {
-	loadShader(node->getMaterials(), vpath, gpath, fpath);
+	loadShaderVF(node->getMaterials(), vpath, fpath);
 }
 
-void Utility::loadShader(render::Material* mat, const std::string& vpath, const std::string& gpath, const std::string& fpath)
+void Utility::loadShaderVGF(render::DrawNode* node, const std::string& vpath, const std::string& gpath, const std::string& fpath)
+{
+	loadShaderVGF(node->getMaterial(), vpath, gpath, fpath);
+}
+
+void Utility::loadShaderVTGF(render::DrawNode* node, const std::string& vpath, const std::string& tepath, const std::string& gpath, const std::string& fpath)
+{
+	loadShaderVTGF(node->getMaterial(), vpath, tepath, gpath, fpath);
+}
+
+void Utility::loadShaderVTGF(render::DrawNode* node, const std::string& vpath, const std::string& tcpath, const std::string& tepath, const std::string& gpath, const std::string& fpath)
+{
+	loadShaderVTGF(node->getMaterial(), vpath, tcpath, tepath, gpath, fpath);
+}
+
+void Utility::loadShaderVGF(render::Material* mat, const std::string& vpath, const std::string& gpath, const std::string& fpath)
 {
 	if (mat == nullptr)
 	{
@@ -81,21 +128,34 @@ void Utility::loadShader(render::Material* mat, const std::string& vpath, const 
 	initShaderAttrib();
 }
 
-void Utility::loadShader(render::Materials* mats, const std::string& vpath, const std::string& gpath, const std::string& fpath)
+void Utility::loadShaderVTGF(render::Material* mat, const std::string& vpath, const std::string& tepath, const std::string& gpath, const std::string& fpath)
 {
-	if (mats == nullptr)
+	if (mat == nullptr)
 	{
 		return;
 	}
-	ShaderProgram* pProgram = G_SHANDER->createVertexGeometryFragmentProgram(vpath, gpath, fpath);
+	ShaderProgram* pProgram = G_SHANDER->createVertexTessGeometryFragmentProgram(vpath, tepath, gpath, fpath);
 	if (pProgram == nullptr)
 	{
 		return;
 	}
-	for (auto item : mats->getMaterials())
+	mat->setShaderProgram(pProgram);
+
+	initShaderAttrib();
+}
+
+void Utility::loadShaderVTGF(render::Material* mat, const std::string& vpath, const std::string& tcpath, const std::string& tepath, const std::string& gpath, const std::string& fpath)
+{
+	if (mat == nullptr)
 	{
-		item.second->setShaderProgram(pProgram);
+		return;
 	}
+	ShaderProgram* pProgram = G_SHANDER->createVertexTessGeometryFragmentProgram(vpath, tcpath, tepath, gpath, fpath);
+	if (pProgram == nullptr)
+	{
+		return;
+	}
+	mat->setShaderProgram(pProgram);
 
 	initShaderAttrib();
 }
@@ -217,10 +277,10 @@ void Utility::runRotateAction(render::Node* node)
 
 void Utility::loadDefaultShader(render::DrawNode* node)
 {
-	loadShader(node->getMaterial(), texture3dVertexPath, texture3dFragmentPath);
+	loadShaderVF(node->getMaterial(), texture3dVertexPath, texture3dFragmentPath);
 }
 
 void Utility::loadDefaultShader(render::MultiDrawNode* node)
 {
-	loadShader(node->getMaterials(), texture3dVertexPath, texture3dFragmentPath);
+	loadShaderVF(node->getMaterials(), texture3dVertexPath, texture3dFragmentPath);
 }

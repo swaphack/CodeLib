@@ -21,7 +21,7 @@ namespace math
 	/**
 	*	Ò»Î¬Êý×é
 	*/
-	template<typename T, const int Length>
+	template<typename T, const uint32_t Length>
 	struct Array
 	{
 	public:
@@ -177,4 +177,7 @@ namespace math
 		*/
 		T _values[Length];
 	};
+
+	template<const int Order>
+	class ArrayF : public Array<float, Order> {};
 }

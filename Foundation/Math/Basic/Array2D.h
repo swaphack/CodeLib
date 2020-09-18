@@ -12,7 +12,7 @@ namespace math
 	/**
 	*	ถþฮฌสýื้
 	*/
-	template<typename T, const int Height, const int Width>
+	template<typename T, const uint32_t Height, const uint32_t Width>
 	struct Array2D
 	{
 	public:

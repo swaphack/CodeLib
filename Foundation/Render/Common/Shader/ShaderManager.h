@@ -22,19 +22,36 @@ namespace render
 		virtual ~ShaderManager();
 	public:
 		/**
-		*	创建顶点片元 program
+		*	创建顶点着色器
 		*/
 		ShaderProgram* createVertexProgram(const std::string& vertexFilepath, bool link = true);
 		/**
-		*	创建顶点片元 program
+		*	创建顶点片元着色器
 		*/
 		ShaderProgram* createVertexFragmentProgram(const std::string& vertexFilepath, const std::string& fragFilepath, bool link = true);
 		/**
-		*	创建顶点几何片元 program
+		*	创建顶点细分片元着色器
+		*/
+		ShaderProgram* createVertexTessFragmentProgram(const std::string& vertexFilepath, const std::string& tessEvlFilepath, const std::string& fragFilepath, bool link = true);
+		/**
+		*	创建顶点细分片元着色器
+		*/
+		ShaderProgram* createVertexTessFragmentProgram(const std::string& vertexFilepath, const std::string& tessCtrFilepath, const std::string& tessEvlFilepath, const std::string& fragFilepath, bool link = true);
+
+		/**
+		*	创建顶点几何片元着色器
 		*/
 		ShaderProgram* createVertexGeometryFragmentProgram(const std::string& vertexFilepath, const std::string& geometryFilepath, const std::string& fragFilepath, bool link = true);
 		/**
-		*	创建计算 program
+		*	创建顶点细分几何片元着色器
+		*/
+		ShaderProgram* createVertexTessGeometryFragmentProgram(const std::string& vertexFilepath, const std::string& tessEvlFilepath, const std::string& geometryFilepath, const std::string& fragFilepath, bool link = true);
+		/**
+		*	创建顶点细分几何片元着色器
+		*/
+		ShaderProgram* createVertexTessGeometryFragmentProgram(const std::string& vertexFilepath, const std::string& tessCtrFilepath, const std::string& tessEvlFilepath, const std::string& geometryFilepath, const std::string& fragFilepath, bool link = true);
+		/**
+		*	创建计算着色器
 		*/
 		ComputeShaderProgram* createComputeProgram(const std::string& computeFilepath, bool link = true);
 		/**

@@ -7,8 +7,8 @@ namespace math
 	/**
 	*	∑Ω’Û
 	*/
-	template<const int Order>
-	class SquareMatrix :  public Matrix<float, Order, Order>
+	template<typename T, const int Order>
+	class SquareMatrix :  public Matrix<T, Order, Order>
 	{
 	public:
 		SquareMatrix()
@@ -45,11 +45,11 @@ namespace math
 		/**
 		*	”‡◊” Ω
 		*/
-		SquareMatrix<Order - 1> getMinor(int32_t i, int32_t j) const
+		SquareMatrix<T, Order - 1> getMinor(int32_t i, int32_t j) const
 		{
 			assert(i >= 0 && j >= 0 && i < Order&& j < Order);
 
-			SquareMatrix<Order - 1> mat;
+			SquareMatrix<T, Order - 1> mat;
 			int dn = 0;
 			int dm = 0;
 
@@ -95,7 +95,7 @@ namespace math
 			{
 				for (int j = 0; j < Order; j++)
 				{
-					SquareMatrix<Order - 1> minor = this->getMinor(i, j);
+					SquareMatrix<T, Order - 1> minor = this->getMinor(i, j);
 					float k = 1;
 					if (i != j)
 					{
@@ -140,7 +140,10 @@ namespace math
 		}
 	};
 
-	typedef SquareMatrix<2> SquareMatrix2;
-	typedef SquareMatrix<3> SquareMatrix3;
-	typedef SquareMatrix<4> SquareMatrix4;
+	template<const int Order>
+	class SquareMatrixF : public SquareMatrix<float, Order> {};
+
+	typedef SquareMatrixF<2> SquareMatrix2;
+	typedef SquareMatrixF<3> SquareMatrix3;
+	typedef SquareMatrixF<4> SquareMatrix4;
 }

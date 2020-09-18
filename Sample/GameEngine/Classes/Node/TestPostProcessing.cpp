@@ -32,13 +32,13 @@ void TestPostProcessing::testFramePostProcessing()
 	pImage->setAnchorPoint(0, 0);
 	pImage->setPosition(100, 100);
 	pImage->setVolume(512, 384);
-	Utility::loadShader(pImage, "Shader/texture/texture.vs", "Shader/texture/texture.fs");
+	Utility::loadShaderVF(pImage, "Shader/texture/texture.vs", "Shader/texture/texture.fs");
 
 	render::PostProcessingNode* pNode = CREATE_NODE(render::PostProcessingNode);
 	pNode->setAnchorPoint(0.0f, 0.0f);
 	pNode->setPosition(100, 100);
 	pNode->setVolume(924, 668);
-	Utility::loadShader(pNode, "Shader/frame/simple_frame_buffer.vs", "Shader/frame/simple_frame_buffer.fs");
+	Utility::loadShaderVF(pNode, "Shader/frame/simple_frame_buffer.vs", "Shader/frame/simple_frame_buffer.fs");
 
 	pNode->addChild(pImage);
 	this->addChild(pNode);
@@ -53,7 +53,7 @@ void TestPostProcessing::testPixelPostProcessing()
 	pNode->setAnchorPoint(0, 0);
 	pNode->setPosition(0, 0);
 	pNode->setVolume(frameSize.getWidth(), frameSize.getHeight());
-	Utility::loadShader(pNode, "Shader/frame/simple_frame_buffer.vs", "Shader/frame/simple_frame_buffer.fs");
+	Utility::loadShaderVF(pNode, "Shader/frame/simple_frame_buffer.vs", "Shader/frame/simple_frame_buffer.fs");
 	this->addChild(pNode);
 }
 
@@ -67,7 +67,7 @@ void TestPostProcessing::testImage()
 	pImage->setImagePath(filepath);
 	pImage->setAnchorPoint(math::Vector2());
 	pImage->setVolume(frameSize.getWidth(), frameSize.getHeight());
-	Utility::loadShader(pImage, "Shader/texture/texture.vs", "Shader/texture/texture.fs");
+	Utility::loadShaderVF(pImage, "Shader/texture/texture.vs", "Shader/texture/texture.fs");
 
 	this->addChild(pImage);
 }

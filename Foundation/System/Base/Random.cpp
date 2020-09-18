@@ -44,7 +44,7 @@ float Random::getNumber(float minValue, float maxValue)
 
 uint32_t Random::getNumber(uint32_t maxValue)
 {
-	return (uint32_t)getNumber0_1() * maxValue;
+	return (uint32_t)(getNumber0_1() * maxValue);
 }
 
 int32_t Random::getNumber(int32_t minValue, int32_t maxValue)

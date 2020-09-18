@@ -36,7 +36,7 @@ void TestImageNode::testImage()
 		pImage->setPosition(512, 384);
 		pImage->setVolume(frameSize);
 		
-		Utility::loadShader(pImage, "Shader/texture/texture.vs", "Shader/texture/texture.fs");
+		Utility::loadShaderVF(pImage, "Shader/texture/texture.vs", "Shader/texture/texture.fs");
 		Utility::loadDefaultShader(pImage);
 
 		this->addChild(pImage);
@@ -51,7 +51,7 @@ void TestImageNode::testImage()
 		pImage->setAnchorPoint(0.5f, 0.5f);
 		pImage->setPosition(512, 384);
 		pImage->setVolume(512, 384);
-		Utility::loadShader(pImage, "Shader/texture/texture.vs", "Shader/texture/texture.fs");
+		Utility::loadShaderVF(pImage, "Shader/texture/texture.vs", "Shader/texture/texture.fs");
 		Utility::loadDefaultShader(pImage);
 
 		this->addChild(pImage);
@@ -209,7 +209,7 @@ void TestImageNode::testPointSprite()
 	pSprite->setVolume(512, 384);
 	pSprite->setAnchorPoint(0.5f, 0.5f);
 
-	Utility::loadShader(pSprite, "Shader/point_sprite/point_sprite.vs", "Shader/point_sprite/point_sprite.fs");
+	Utility::loadShaderVF(pSprite, "Shader/point_sprite/point_sprite.vs", "Shader/point_sprite/point_sprite.fs");
 
 	this->addChild(pSprite);
 }

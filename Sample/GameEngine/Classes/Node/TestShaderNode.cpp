@@ -16,6 +16,7 @@ TestShaderNode::~TestShaderNode()
 
 void TestShaderNode::initNodes()
 {
+	/*
 	this->addLight();
 	//this->testImageShader();
 	//this->testClipShader();
@@ -26,6 +27,8 @@ void TestShaderNode::initNodes()
 	//this->testCubeModelShader();
 	//this->testMultiMeshCubeModelShader();
 	this->testSphereModelShader();
+	*/
+	this->testTessellation();
 }	
 
 void TestShaderNode::testShaderUniformBlock()
@@ -101,7 +104,7 @@ void TestShaderNode::testImageShader()
 
 	//Utility::updateNodeShader(pImage);
 
-	Utility::loadShader(pImage, "Shader/vertex/test.vs", "Shader/fragment/test.fs");
+	Utility::loadShaderVF(pImage, "Shader/vertex/test.vs", "Shader/fragment/test.fs");
 }
 
 void TestShaderNode::testCubeModelShader()
@@ -150,7 +153,7 @@ void TestShaderNode::testSphereModelShader()
 	pModel->setPosition(512, 384, 0);
 	this->addChild(pModel);
 
-	Utility::loadShader(pModel, "Shader/material/material_texture.vs", "Shader/material/material_texture.fs");
+	Utility::loadShaderVF(pModel, "Shader/material/material_texture.vs", "Shader/material/material_texture.fs");
 	Utility::runRotateAction(pModel);
 
 	pModel->getTouchProxy()->addTouchFunc(render::TouchType::DOWN, [](Node* node, float x, float y, bool include) {
@@ -189,7 +192,7 @@ void TestShaderNode::test3dsModelShader()
 	pModel->setVolume(400, 400, 400);
 	this->addChild(pModel);
 
-	Utility::loadShader(pModel, "Shader/material/material_texture.vs", "Shader/material/material_texture.fs");
+	Utility::loadShaderVF(pModel, "Shader/material/material_texture.vs", "Shader/material/material_texture.fs");
 	Utility::runRotateAction(pModel);
 }
 
@@ -208,7 +211,7 @@ void TestShaderNode::testObjModelShader()
 	pModel->setVolume(400, 400, 400);
 	this->addChild(pModel);
 
-	Utility::loadShader(pModel, "Shader/material/material_texture.vs", "Shader/material/material_texture.fs");
+	Utility::loadShaderVF(pModel, "Shader/material/material_texture.vs", "Shader/material/material_texture.fs");
 	Utility::runRotateAction(pModel);
 }
 
@@ -227,7 +230,7 @@ void TestShaderNode::testFbxModelShader()
 	pModel->setRotationX(0);
 	this->addChild(pModel);
 
-	Utility::loadShader(pModel, "Shader/material/material_texture.vs", "Shader/material/material_texture.fs");
+	Utility::loadShaderVF(pModel, "Shader/material/material_texture.vs", "Shader/material/material_texture.fs");
 	Utility::runRotateAction(pModel);
 }
 
@@ -236,7 +239,7 @@ void TestShaderNode::addLight()
 	render::Sphere* light = CREATE_NODE(render::Sphere);
 	light->setPosition(200, 500);
 	light->setRadius(50);
-	Utility::loadShader(light, "Shader/env/light.vs", "Shader/env/light.fs");
+	Utility::loadShaderVF(light, "Shader/env/light.vs", "Shader/env/light.fs");
 	this->addChild(light);
 
 	Light* pSpotLight = CREATE_NODE(Light);
@@ -277,6 +280,51 @@ void TestShaderNode::testClipShader()
 			pUniform->setValue4(1, param);
 		}
 	});
+}
+
+void TestShaderNode::testTessellation()
+{
+	auto frameSize = Canvas::getInstance()->getView()->getFrameSize();
+
+	std::string filepath = "Resource/Image/world.jpg";
+
+	CtrlImage* pImage = CREATE_NODE(CtrlImage);
+	pImage->setImagePath(filepath);
+	pImage->setAnchorPoint(Vector2(0.5f, 0.5f));
+	pImage->setVolume(800, 600);
+	pImage->setPosition(Vector2(512, 384));
+	this->addChild(pImage);
+	/*
+	Utility::loadShaderVF(pImage,
+		"Shader/texture/texture.vs",
+		"Shader/texture/texture.fs");
+	*/
+
+	float innerValue[2] = { 8, 0};
+	float outerValue[4] = { 10,10,10,0 };
+	pImage->setEnableTessilation(true);
+	pImage->setTessVerticeCount(3);
+	pImage->setTessInnerLevel(innerValue);
+	pImage->setTessOuterLevel(outerValue);
+
+	if (true)
+	{
+		Utility::loadShaderVTGF(pImage,
+			"Shader/tess/line_strip.vs",
+			"Shader/tess/line_strip.tcs",
+			"Shader/tess/line_strip.tes",
+			"Shader/tess/line_strip.gs",
+			"Shader/tess/line_strip.fs");
+	}
+	else
+	{
+		Utility::loadShaderVTGF(pImage,
+			"Shader/tess/triangles.vs",
+			"Shader/tess/triangles.tcs",
+			"Shader/tess/triangles.tes",
+			"Shader/tess/triangles.gs",
+			"Shader/tess/triangles.fs");
+	}	
 }
 
 

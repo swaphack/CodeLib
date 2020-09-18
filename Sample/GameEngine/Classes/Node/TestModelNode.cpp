@@ -38,7 +38,7 @@ void TestModelNode::testCubeModel()
 	pModel->setAnchorPoint(math::Vector3(0.5f, 0.5f, 0.5f));
 	pModel->setPosition(512, 384, 0);
 	pModel->setVolume(200, 200, 200);
-	Utility::loadShader(pModel, "Shader/texture/texture.vs", "Shader/texture/texture.fs");
+	Utility::loadShaderVF(pModel, "Shader/texture/texture.vs", "Shader/texture/texture.fs");
 	this->addChild(pModel);
 	
 	RotateByAction* pRotateByAction = CREATE_ACTION(RotateByAction);
@@ -63,7 +63,7 @@ void TestModelNode::testSphereModel()
 	pModel->setPosition(512, 384, 0);
 	this->addChild(pModel);
 
-	Utility::loadShader(pModel, "Shader/texture/texture.vs", "Shader/texture/texture.fs");
+	Utility::loadShaderVF(pModel, "Shader/texture/texture.vs", "Shader/texture/texture.fs");
 	Utility::runRotateAction(pModel);
 }
 
@@ -120,7 +120,7 @@ void TestModelNode::testCubeMap()
 	pCubMap->setAnchorPoint(0.5f, 0.5f, 0.5f);
 	this->addChild(pCubMap);
 
-	Utility::loadShader(pCubMap, "Shader/cubemap/cubemap.vs", "Shader/cubemap/cubemap.fs");
+	Utility::loadShaderVF(pCubMap, "Shader/cubemap/cubemap.vs", "Shader/cubemap/cubemap.fs");
 
 	RotateByAction* pAction = CREATE_ACTION(RotateByAction);
 	pAction->setDifferentRotation(0, 180, 0);
@@ -150,7 +150,7 @@ void TestModelNode::test3ds()
 	pModel->setVolume(400, 400, 400);
 	this->addChild(pModel);
 
-	Utility::loadShader(pModel, "Shader/material/material_texture.vs", "Shader/material/material_one_texture_light.fs");
+	Utility::loadShaderVF(pModel, "Shader/material/material_texture.vs", "Shader/material/material_one_texture_light.fs");
 
 	RotateByAction* pRotateByAction = CREATE_ACTION(RotateByAction);
 	pRotateByAction->setDifferentRotation(180, 180, 0);
@@ -174,7 +174,7 @@ void TestModelNode::testObj()
 	pModel->setVolume(400, 400, 400);
 	this->addChild(pModel);
 
-	Utility::loadShader(pModel, "Shader/texture/texture.vs", "Shader/texture/texture.fs");
+	Utility::loadShaderVF(pModel, "Shader/texture/texture.vs", "Shader/texture/texture.fs");
 
 	RotateByAction* pRotateByAction = CREATE_ACTION(RotateByAction);
 	pRotateByAction->setDifferentRotation(180, 180, 0);
@@ -195,7 +195,7 @@ void TestModelNode::testFbx()
 	pModel->setRotation(90, 0, 90);
 	this->addChild(pModel);
 
-	Utility::loadShader(pModel, "Shader/texture/texture.vs", "Shader/texture/texture.fs");
+	Utility::loadShaderVF(pModel, "Shader/texture/texture.vs", "Shader/texture/texture.fs");
 
 	RotateByAction* pRotateByAction = CREATE_ACTION(RotateByAction);
 	pRotateByAction->setDifferentRotation(0, 180, 0);

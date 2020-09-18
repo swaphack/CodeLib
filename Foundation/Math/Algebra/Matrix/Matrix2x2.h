@@ -8,7 +8,7 @@ namespace math
 	/**
 	*	用于计算二元一次方程
 	*/
-	struct Matrix2x2 : public SquareMatrix<2>
+	struct Matrix2x2 : public SquareMatrix2
 	{
 	public:
 		Matrix2x2();

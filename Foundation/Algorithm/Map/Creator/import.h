@@ -1,8 +1,7 @@
 #pragma once
 
+#include "MultiState.h"
+#include "RelationTable2D.h"
+#include "WFCAlgorithm.h"
 
-#include "MapSlot.h"
-#include "MapSlotRule.h"
-#include "MapModule.h"
 
-#include "MapCreator.h"

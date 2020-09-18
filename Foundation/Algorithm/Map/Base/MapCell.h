@@ -11,8 +11,26 @@ namespace alg
 		MapCell();
 		virtual ~MapCell();
 	public:
-
-	protected:
+		/**
+		*	设置配件索引
+		*/
+		void setModuleIndex(uint32_t moduleIndex);
+		/**
+		*	获取配件索引
+		*/
+		uint32_t getModuldeIndex() const;
+		/**
+		*	设置坐标
+		*/
+		void setPosition(const math::Vector3& pos);
+		/**
+		*	获取坐标
+		*/
+		const math::Vector3& getPosition() const;
 	private:
+		// 配件索引
+		uint32_t _moduleIndex = 0;
+		// 坐标
+		math::Vector3 _position;
 	};
 }

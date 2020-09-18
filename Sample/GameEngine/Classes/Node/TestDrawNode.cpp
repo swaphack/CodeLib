@@ -41,7 +41,7 @@ void TestDrawNode::testDrawNode()
 		pDrawNode->appendPoint(math::Vector3(points[i]));
 	}
 
-	Utility::loadShader(pDrawNode, "Shader/geometry/draw_primitive.vs", "Shader/geometry/draw_primitive.fs");
+	Utility::loadShaderVF(pDrawNode, "Shader/geometry/draw_primitive.vs", "Shader/geometry/draw_primitive.fs");
 	this->addChild(pDrawNode);
 
 	auto vector = pDrawNode->getPosition() - Camera::getMainCamera()->getPosition();

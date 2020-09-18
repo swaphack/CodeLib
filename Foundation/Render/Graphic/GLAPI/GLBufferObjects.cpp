@@ -337,7 +337,7 @@ void GLBufferObjects::multiDrawElementsIndirect(DrawMode mode, DrawElementsIndir
 	glMultiDrawElementsIndirect((GLenum)mode, (GLenum)type, indirect, primcount, stride);
 }
 
-void GLBufferObjects::patchParameter(PatchParameter pname, int value)
+void GLBufferObjects::setPatchParameter(PatchParameter pname, int value)
 {
 	glPatchParameteri((GLenum)pname, value);
 }
@@ -437,9 +437,24 @@ void GLBufferObjects::setVertexArrayBindingDivisor(uint32_t vaobj, uint32_t bind
 	glVertexArrayBindingDivisor(vaobj, bindingindex, divisor);
 }
 
-void GLBufferObjects::patchParameter(PatchParameter pname, const float* values)
+void GLBufferObjects::setPatchParameter(PatchParameter pname, const float* values)
 {
 	glPatchParameterfv((GLenum)pname, values);
+}
+
+void render::GLBufferObjects::setPatchVertices(int value)
+{
+	setPatchParameter(PatchParameter::PATCH_VERTICES, value);
+}
+
+void render::GLBufferObjects::setPatchTessOuterLevel(float value[4])
+{
+	setPatchParameter(PatchParameter::PATCH_DEFAULT_OUTER_LEVEL, value);
+}
+
+void render::GLBufferObjects::setPatchTessInnerLevel(float value[2])
+{
+	setPatchParameter(PatchParameter::PATCH_DEFAULT_INNER_LEVEL, value);
 }
 
 void GLBufferObjects::getVertexAttrib(uint32_t index, GetVertexAttribParameter pname, double* params)

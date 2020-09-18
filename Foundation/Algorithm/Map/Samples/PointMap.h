@@ -1,10 +1,19 @@
 #pragma once
 
 #include "Map/Base/Map.h"
-#include "PointMapCell.h"
 
 namespace alg
 {
+	/**
+	*	点标志单元
+	*/
+	class PointMapCell : public MapCell
+	{
+	public:
+	protected:
+	private:
+	};
+
 	/**
 	*	点标志地图 
 	*/

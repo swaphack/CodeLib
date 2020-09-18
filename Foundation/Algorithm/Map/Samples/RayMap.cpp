@@ -63,6 +63,6 @@ bool alg::RayMap::findNeighborPoint(uint32_t srcIndex, std::vector<uint32_t>& ne
 		neighboors.push_back(item);
 	}
 
-	return true;
+	return neighboors.size() > 0;
 }
 

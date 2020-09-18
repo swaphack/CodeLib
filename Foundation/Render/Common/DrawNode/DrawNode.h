@@ -3,6 +3,7 @@
 #include "Common/Node/Node.h"
 #include "Common/Shader/ShaderProgramDelegate.h"
 #include "DrawProtocol.h"
+#include "TessilationProtocol.h"
 
 namespace render
 {
@@ -18,7 +19,8 @@ namespace render
 	*/
 	class DrawNode : 
 		public Node, 
-		public ColorProtocol
+		public ColorProtocol,
+		public TessilationProtocol
 	{
 	public:
 		DrawNode();
@@ -93,6 +95,7 @@ namespace render
 		*	设置着色器处理函数
 		*/
 		void setShaderProgramFunc(const ShaderProgramFunc& func);
+	
 	protected:
 		/**
 		*	绘制前工作

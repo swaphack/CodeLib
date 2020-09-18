@@ -81,6 +81,103 @@ render::ShaderProgram* render::ShaderManager::createVertexFragmentProgram(const 
 	return pProgram;
 }
 
+render::ShaderProgram* render::ShaderManager::createVertexTessFragmentProgram(const std::string& vertexFilepath, const std::string& tessEvlFilepath, const std::string& fragFilepath, bool link)
+{
+	auto key = vertexFilepath + fragFilepath;
+	auto it = _shaderPrograms.find(key);
+	if (it != _shaderPrograms.end())
+	{
+		return it->second;
+	}
+
+	ShaderProgram* pProgram = CREATE_OBJECT(ShaderProgram);
+	render::Shader* pVertexShader = createShader(ShaderType::VERTEX_SHADER, vertexFilepath);
+	if (!pVertexShader)
+	{
+		return nullptr;
+	}
+
+	render::Shader* tessEvlShader = createShader(ShaderType::TESS_EVALUATION_SHADER, tessEvlFilepath);
+	if (!tessEvlShader)
+	{
+		return nullptr;
+	}
+
+	render::Shader* fragShader = createShader(ShaderType::FRAGMENT_SHADER, fragFilepath);
+	if (!fragShader)
+	{
+		return nullptr;
+	}
+
+	pProgram->attachShader(pVertexShader);
+	pProgram->attachShader(tessEvlShader);
+	pProgram->attachShader(fragShader);
+
+	pProgram->bindFragDataLocation(0, "color");
+	if (link)
+	{
+		pProgram->link();
+	}
+
+	SAFE_RETAIN(pProgram);
+
+	_shaderPrograms[key] = pProgram;
+
+	return pProgram;
+}
+
+render::ShaderProgram* render::ShaderManager::createVertexTessFragmentProgram(const std::string& vertexFilepath, const std::string& tessCtrFilepath, const std::string& tessEvlFilepath, const std::string& fragFilepath, bool link)
+{
+	auto key = vertexFilepath + fragFilepath;
+	auto it = _shaderPrograms.find(key);
+	if (it != _shaderPrograms.end())
+	{
+		return it->second;
+	}
+
+	ShaderProgram* pProgram = CREATE_OBJECT(ShaderProgram);
+	render::Shader* pVertexShader = createShader(ShaderType::VERTEX_SHADER, vertexFilepath);
+	if (!pVertexShader)
+	{
+		return nullptr;
+	}
+
+	render::Shader* tessCtrShader = createShader(ShaderType::TESS_CONTROL_SHADER, tessCtrFilepath);
+	if (!tessCtrShader)
+	{
+		return nullptr;
+	}
+
+	render::Shader* tessEvlShader = createShader(ShaderType::TESS_EVALUATION_SHADER, tessEvlFilepath);
+	if (!tessEvlShader)
+	{
+		return nullptr;
+	}
+
+	render::Shader* fragShader = createShader(ShaderType::FRAGMENT_SHADER, fragFilepath);
+	if (!fragShader)
+	{
+		return nullptr;
+	}
+
+	pProgram->attachShader(pVertexShader);
+	pProgram->attachShader(tessCtrShader);
+	pProgram->attachShader(tessEvlShader);
+	pProgram->attachShader(fragShader);
+
+	pProgram->bindFragDataLocation(0, "color");
+	if (link)
+	{
+		pProgram->link();
+	}
+
+	SAFE_RETAIN(pProgram);
+
+	_shaderPrograms[key] = pProgram;
+
+	return pProgram;
+}
+
 render::ShaderProgram* render::ShaderManager::createVertexGeometryFragmentProgram(const std::string& vertexFilepath, const std::string& geometryFilepath, const std::string& fragFilepath, bool link /*= true*/)
 {
 	auto key = vertexFilepath + fragFilepath;
@@ -110,6 +207,117 @@ render::ShaderProgram* render::ShaderManager::createVertexGeometryFragmentProgra
 	}
 
 	pProgram->attachShader(pVertexShader);
+	pProgram->attachShader(geometryShader);
+	pProgram->attachShader(fragShader);
+
+	pProgram->bindFragDataLocation(0, "color");
+	if (link)
+	{
+		pProgram->link();
+	}
+
+	SAFE_RETAIN(pProgram);
+
+	_shaderPrograms[key] = pProgram;
+
+	return pProgram;
+}
+
+render::ShaderProgram* render::ShaderManager::createVertexTessGeometryFragmentProgram(const std::string& vertexFilepath, const std::string& tessEvlFilepath, const std::string& geometryFilepath, const std::string& fragFilepath, bool link)
+{
+	auto key = vertexFilepath + fragFilepath;
+	auto it = _shaderPrograms.find(key);
+	if (it != _shaderPrograms.end())
+	{
+		return it->second;
+	}
+
+	ShaderProgram* pProgram = CREATE_OBJECT(ShaderProgram);
+	render::Shader* pVertexShader = createShader(ShaderType::VERTEX_SHADER, vertexFilepath);
+	if (!pVertexShader)
+	{
+		return nullptr;
+	}
+	
+	render::Shader* tessEvlShader = createShader(ShaderType::TESS_EVALUATION_SHADER, tessEvlFilepath);
+	if (!tessEvlShader)
+	{
+		return nullptr;
+	}
+
+	render::Shader* geometryShader = createShader(ShaderType::GEOMETRY_SHADER, geometryFilepath);
+	if (!geometryShader)
+	{
+		return nullptr;
+	}
+
+	render::Shader* fragShader = createShader(ShaderType::FRAGMENT_SHADER, fragFilepath);
+	if (!fragShader)
+	{
+		return nullptr;
+	}
+
+	pProgram->attachShader(pVertexShader);
+	pProgram->attachShader(tessEvlShader);
+	pProgram->attachShader(geometryShader);
+	pProgram->attachShader(fragShader);
+
+	pProgram->bindFragDataLocation(0, "color");
+	if (link)
+	{
+		pProgram->link();
+	}
+
+	SAFE_RETAIN(pProgram);
+
+	_shaderPrograms[key] = pProgram;
+
+	return pProgram;
+}
+
+render::ShaderProgram* render::ShaderManager::createVertexTessGeometryFragmentProgram(const std::string& vertexFilepath, const std::string& tessCtrFilepath, const std::string& tessEvlFilepath, const std::string& geometryFilepath, const std::string& fragFilepath, bool link)
+{
+	auto key = vertexFilepath + fragFilepath;
+	auto it = _shaderPrograms.find(key);
+	if (it != _shaderPrograms.end())
+	{
+		return it->second;
+	}
+
+	ShaderProgram* pProgram = CREATE_OBJECT(ShaderProgram);
+	render::Shader* pVertexShader = createShader(ShaderType::VERTEX_SHADER, vertexFilepath);
+	if (!pVertexShader)
+	{
+		return nullptr;
+	}
+
+	render::Shader* tessCtrShader = createShader(ShaderType::TESS_CONTROL_SHADER, tessCtrFilepath);
+	if (!tessCtrShader)
+	{
+		return nullptr;
+	}
+
+	render::Shader* tessEvlShader = createShader(ShaderType::TESS_EVALUATION_SHADER, tessEvlFilepath);
+	if (!tessEvlShader)
+	{
+		return nullptr;
+	}
+
+	render::Shader* geometryShader = createShader(ShaderType::GEOMETRY_SHADER, geometryFilepath);
+	if (!geometryShader)
+	{
+		return nullptr;
+	}
+
+	render::Shader* fragShader = createShader(ShaderType::FRAGMENT_SHADER, fragFilepath);
+	if (!fragShader)
+	{
+		return nullptr;
+	}
+
+	pProgram->attachShader(pVertexShader);
+	pProgram->attachShader(tessCtrShader);
+	pProgram->attachShader(tessEvlShader);
 	pProgram->attachShader(geometryShader);
 	pProgram->attachShader(fragShader);
 

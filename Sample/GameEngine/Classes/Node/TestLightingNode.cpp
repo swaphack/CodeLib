@@ -34,7 +34,7 @@ void TestLightingNode::addSun()
 	pLightShape->setPosition(1024, 768, 0);
 	pLightShape->setRadius(50);
 
-	Utility::loadShader(pLightShape, "Shader/texture/texture.vs", "Shader/texture/texture.fs");
+	Utility::loadShaderVF(pLightShape, "Shader/texture/texture.vs", "Shader/texture/texture.fs");
 	this->addChild(pLightShape);
 
 	render::DirectionLight* pLight = CREATE_NODE(render::DirectionLight);
@@ -53,7 +53,7 @@ void TestLightingNode::addStar()
 	pLightShape->setPosition(512, 384, 400);
 	pLightShape->setRadius(50);
 
-	Utility::loadShader(pLightShape, "Shader/texture/texture.vs", "Shader/texture/texture.fs");
+	Utility::loadShaderVF(pLightShape, "Shader/texture/texture.vs", "Shader/texture/texture.fs");
 	this->addChild(pLightShape);
 
 	render::PointLight* pLight = CREATE_NODE(render::PointLight);
@@ -91,10 +91,10 @@ void TestLightingNode::addEarth()
 		if (specularPercent) specularPercent->setValue(0.8f);
 	});
 
-	//Utility::loadShader(pEarth, "Shader/material/material_texture_light.vs", "Shader/material/material_texture_light.fs");
-	//Utility::loadShader(pEarth, "Shader/material/material_emulate_diffuse.vs", "Shader/material/material_emulate_diffuse.fs");
-	Utility::loadShader(pEarth, "Shader/material/material_single_light.vs", "Shader/material/material_single_light.fs");
-	//Utility::loadShader(pEarth, "Shader/material/material_normal_map.vs", "Shader/material/material_normal_map.fs");
+	//Utility::loadShaderVF(pEarth, "Shader/material/material_texture_light.vs", "Shader/material/material_texture_light.fs");
+	//Utility::loadShaderVF(pEarth, "Shader/material/material_emulate_diffuse.vs", "Shader/material/material_emulate_diffuse.fs");
+	Utility::loadShaderVF(pEarth, "Shader/material/material_single_light.vs", "Shader/material/material_single_light.fs");
+	//Utility::loadShaderVF(pEarth, "Shader/material/material_normal_map.vs", "Shader/material/material_normal_map.fs");
 	this->addChild(pEarth);
 
 	Utility::runRotateAction(pEarth);
@@ -124,8 +124,8 @@ void TestLightingNode::addGround()
 	pModel->setVolume(10240, 7680); 
 	pModel->getMaterial()->getMaterialDetail()->setSpecularShiness(32);
 	pModel->getMaterial()->getMaterialDetail()->setSpecularStrength(2);
-	Utility::loadShader(pModel, "Shader/material/material_normal_map.vs", "Shader/material/material_normal_map.fs");
-	//Utility::loadShader(pModel, "Shader/material/material_single_light.vs", "Shader/material/material_multi_lights.fs");
+	Utility::loadShaderVF(pModel, "Shader/material/material_normal_map.vs", "Shader/material/material_normal_map.fs");
+	//Utility::loadShaderVF(pModel, "Shader/material/material_single_light.vs", "Shader/material/material_multi_lights.fs");
 	this->addChild(pModel);
 
 	pModel->setShaderProgramFunc([](render::ShaderProgram* program) {
@@ -171,9 +171,9 @@ void TestLightingNode::testCubeModel()
 	pModel->setPosition(512, 384, 0);
 	pModel->setRotation(45, 45, 0);
 	pModel->setVolume(400, 400, 400);
-	//Utility::loadShader(pModel, "Shader/material/material_texture.vs", "Shader/material/material_texture.fs");
-	//Utility::loadShader(pModel, "Shader/texture/texture.vs", "Shader/texture/texture.fs");
-	Utility::loadShader(pModel, "Shader/material/material_single_light.vs", "Shader/material/material_single_light.fs");
+	//Utility::loadShaderVF(pModel, "Shader/material/material_texture.vs", "Shader/material/material_texture.fs");
+	//Utility::loadShaderVF(pModel, "Shader/texture/texture.vs", "Shader/texture/texture.fs");
+	Utility::loadShaderVF(pModel, "Shader/material/material_single_light.vs", "Shader/material/material_single_light.fs");
 	this->addChild(pModel);
 
 	//Utility::runRotateAction(pModel);
@@ -202,7 +202,7 @@ void TestLightingNode::testShadow()
 	pShadowNode->setPosition(512, 384, 0);
 	pShadowNode->setAnchorPoint(0.5, 0.5f);
 
-	Utility::loadShader(pShadowNode, "Shader/texture/texture.vs", "Shader/texture/texture.fs");
+	Utility::loadShaderVF(pShadowNode, "Shader/texture/texture.vs", "Shader/texture/texture.fs");
 	pShadowNode->setCastShaderProgram(G_SHANDER->createVertexFragmentProgram("Shader/light/simple_record_shadow.vs", "Shader/light/simple_record_shadow.fs"));
 	pShadowNode->setRenderShaderProgram(G_SHANDER->createVertexFragmentProgram("Shader/material/material_single_light.vs", "Shader/material/material_single_light.fs"));
 	pShadowNode->setReceiveLightShaderProgram(G_SHANDER->createVertexFragmentProgram("Shader/light/material_dirlight_shadow.vs", "Shader/light/material_dirlight_shadow.fs"));
@@ -218,7 +218,7 @@ void TestLightingNode::testShadow()
 		pModel->setAnchorPoint(math::Vector3(0.5f, 0.5f, 0.5f));
 		pModel->setPosition(-400 + i * 150, -200 + i * 150, -200);
 		pModel->setVolume(100, 100, 100);
-		//Utility::loadShader(pModel, "Shader/material/material_dirlight_shadow.vs", "Shader/material/material_dirlight_shadow.fs");
+		//Utility::loadShaderVF(pModel, "Shader/material/material_dirlight_shadow.vs", "Shader/material/material_dirlight_shadow.fs");
 
 		pShadowNode->addChild(pModel);
 	}
@@ -234,8 +234,8 @@ void TestLightingNode::testShadow()
 		pModel->setAnchorPoint(math::Vector3(0.5f, 0.5f, 0.5f));
 		pModel->setPosition(400 + i * 70, 200 + i * 70, 10);
 		pModel->setVolume(100, 100, 100);
-		//Utility::loadShader(pModel, "Shader/material/material_dirlight_shadow.vs", "Shader/material/material_dirlight_shadow.fs");
-		Utility::loadShader(pModel, "Shader/material/material_texture.vs", "Shader/material/material_texture.fs");
+		//Utility::loadShaderVF(pModel, "Shader/material/material_dirlight_shadow.vs", "Shader/material/material_dirlight_shadow.fs");
+		Utility::loadShaderVF(pModel, "Shader/material/material_texture.vs", "Shader/material/material_texture.fs");
 
 		this->addChild(pModel);
 	}

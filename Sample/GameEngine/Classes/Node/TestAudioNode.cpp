@@ -48,7 +48,7 @@ void TestAudioNode::testAudio3D()
 	pListenerDrawNode->setPointSize(100);
 	pListenerDrawNode->setDrawMode(DrawMode::POINTS);
 	pListenerDrawNode->appendPoint(math::Vector3());
-	Utility::loadShader(pListenerDrawNode, "Shader/geometry/draw_primitive.vs", "Shader/geometry/draw_primitive.fs");
+	Utility::loadShaderVF(pListenerDrawNode, "Shader/geometry/draw_primitive.vs", "Shader/geometry/draw_primitive.fs");
 	pListener->addChild(pListenerDrawNode);
 
 	G_KEYBOARDMANAGER->addKeyboardDelegate(this, pListener, KEYBOARD_DELEGATE_SELECTOR(TestAudioNode::onKeyBoardListener));
@@ -67,7 +67,7 @@ void TestAudioNode::testAudio3D()
 	pSrcDrawNode->setPointSize(100);
 	pSrcDrawNode->setDrawMode(DrawMode::POINTS);
 	pSrcDrawNode->appendPoint(math::Vector3());
-	Utility::loadShader(pSrcDrawNode, "Shader/geometry/draw_primitive.vs", "Shader/geometry/draw_primitive.fs");
+	Utility::loadShaderVF(pSrcDrawNode, "Shader/geometry/draw_primitive.vs", "Shader/geometry/draw_primitive.fs");
 	pSrcAudio->addChild(pSrcDrawNode);
 
 
@@ -85,7 +85,7 @@ void TestAudioNode::testAudio3D()
 	pSrcDrawNode->setPointSize(100);
 	pSrcDrawNode->setDrawMode(DrawMode::POINTS);
 	pSrcDrawNode->appendPoint(math::Vector3());
-	Utility::loadShader(pSrcDrawNode, "Shader/geometry/draw_primitive.vs", "Shader/geometry/draw_primitive.fs");
+	Utility::loadShaderVF(pSrcDrawNode, "Shader/geometry/draw_primitive.vs", "Shader/geometry/draw_primitive.fs");
 	pSrcAudio->addChild(pSrcDrawNode);
 
 	float maxSize = G_AUDIO->getGeometrySettings();

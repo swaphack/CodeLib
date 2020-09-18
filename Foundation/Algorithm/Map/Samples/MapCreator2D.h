@@ -1,19 +1,20 @@
 #pragma once
 
-#include "Map/Creator/MapModule.h"
-#include "Map/Creator/MapCreator.h"
+#include "Map/Base/MapModule.h"
+#include "Map/Base/MapAssets.h"
+#include "Array2DMap.h"
 
 namespace alg
 {
 	// 二维方位
-	enum class Map2DDirection
+	enum class MapDirection2D
 	{
 		LEFT,
 		RIGHT,
 		UP,
 		DOWN,
 	};
-	// 二维配件
+	// 二维模块
 	class MapModule2D : public MapModule
 	{
 	public:
@@ -23,7 +24,7 @@ namespace alg
 		/**
 		*	设置方位插槽
 		*/
-		void setDirectionSlot(Map2DDirection eDirection, uint32_t slotIndex);
+		void setDirectionSlot(MapDirection2D eDirection, uint32_t slotIndex);
 		/**
 		*	设置左方位插槽
 		*/
@@ -44,34 +45,15 @@ namespace alg
 
 	//////////////////////////////////////////////////////////////////////////
 
-	// 二维地图创建
-	class MapCreator2D : public MapCreator
+	/**
+	*	二维地图创建
+	*/
+	template<const uint32_t SlotCount, const uint32_t Width, const uint32_t Height, const uint32_t Count = Width * Height>
+	class MapCreator2D : public WFCAlgorithm
 	{
 	public:
-		MapCreator2D();
-		virtual ~MapCreator2D();
+		MapCreator2D() {}
+		virtual ~MapCreator2D() {}
 	public:
-		/**
-		*	设置地图大小
-		*/
-		void setMapSize(uint32_t width, uint32_t height);
-		/**
-		*	设置地图宽度
-		*/
-		uint32_t getWidth() const;
-		/**
-		*	设置地图高度
-		*/
-		uint32_t getHeight() const;
-	public:
-		/**
-		*	生成地图
-		*/
-		//void create(Map& map);
-	private:
-		// 地图宽度
-		uint32_t _mapWidth = 0;
-		// 地图高度
-		uint32_t _mapHeight = 0;
 	};
 }

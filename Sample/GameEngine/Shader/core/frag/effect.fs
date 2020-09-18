@@ -77,9 +77,9 @@ vec4 getEdgeEffect(float offset, sampler2D tex, vec2 uv)
 	vec2 offsets[9] = getOffsets(offset);
 	
     float kernel[9] = float[](
-    	1.0, 1.0, 1.0,
-    	1.0, -8.0, 1.0,
-    	1.0, 1.0, 1.0
+    	-1.0, -1.0, -1.0,
+    	-1.0, 8.0, -1.0,
+    	-1.0, -1.0, -1.0
 	);
     
    return getEffectColor(tex, uv, offsets, kernel);

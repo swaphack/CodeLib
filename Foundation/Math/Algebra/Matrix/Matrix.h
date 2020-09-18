@@ -11,7 +11,7 @@ namespace math
 	/**
 	*	¾ØÕó
 	*/
-	template<typename T, const int Height, const int Width>
+	template<typename T, const uint32_t Height, const uint32_t Width>
 	struct Matrix : public Array2D<T, Height, Width>
 	{
 		typedef Array2D<T, Height, Width> base;

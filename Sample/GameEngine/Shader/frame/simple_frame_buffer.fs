@@ -14,7 +14,8 @@ void main()
 	color = texture(tex.texture0, fragTexcoord);
 
 
-	color = getKernelEffect(0.01, tex.texture0, fragTexcoord);
+	color = getEdgeEffect(0.1, tex.texture0, fragTexcoord);
+	//color = getGrayScaleEffect(texture(tex.texture0, fragTexcoord));
 	//color = vec4(1.0, 0, 0, 1);
 	//color = vec4(vec3(1.0 - texture(tex.texture0, fragTexcoord)), 1.0);
 }

@@ -34,7 +34,7 @@ void TestMeshNode::testMesh()
 		pNode->appendPoint(pos3);
 	}
 
-	Utility::loadShader(pNode, "Shader/geometry/draw_primitive.vs", "Shader/geometry/draw_primitive.fs");
+	Utility::loadShaderVF(pNode, "Shader/geometry/draw_primitive.vs", "Shader/geometry/draw_primitive.fs");
 	this->addChild(pNode);
 }
 

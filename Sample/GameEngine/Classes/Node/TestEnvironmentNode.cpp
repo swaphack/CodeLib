@@ -39,7 +39,7 @@ void TestEnvironmentNode::init3DSkyBox()
 	pSkyBox->setAnchorPoint(0.5f, 0.5f, 0.5f);
 	this->addChild(pSkyBox);
 
-	Utility::loadShader(pSkyBox, "Shader/env/skybox.vs", "Shader/env/skybox.fs");
+	Utility::loadShaderVF(pSkyBox, "Shader/env/skybox.vs", "Shader/env/skybox.fs");
 	
 	pSkyBox->setShaderProgramFunc([](ShaderProgram* program) {
 		auto pUniform = program->getUniform("matrix.view");
@@ -78,7 +78,7 @@ void TestEnvironmentNode::init2DSkyBox()
 	pSkyBox->setAnchorPoint(0.5f, 0.5f, 0.5f);
 	this->addChild(pSkyBox);
 
-	Utility::loadShader(pSkyBox, "Shader/texture/texture.vs", "Shader/texture/texture.fs");
+	Utility::loadShaderVF(pSkyBox, "Shader/texture/texture.vs", "Shader/texture/texture.fs");
 
 	pSkyBox->setShaderProgramFunc([](ShaderProgram* program) {
 		auto pUniform = program->getUniform("matrix.view");
@@ -245,7 +245,7 @@ void TestEnvironmentNode::addGrid()
 	pGrid->setPosition(512, 384);
 	//pGrid->setRotationX(90);
 
-	Utility::loadShader(pGrid, "Shader/geometry/draw_line.vs", "Shader/geometry/draw_line.gs", "Shader/geometry/draw_line.fs");
+	Utility::loadShaderVGF(pGrid, "Shader/geometry/draw_line.vs", "Shader/geometry/draw_line.gs", "Shader/geometry/draw_line.fs");
 
 	this->addChild(pGrid);
 
@@ -262,13 +262,13 @@ void TestEnvironmentNode::addCoordinate()
 	render::Mask* pMask = CREATE_NODE(render::Mask);
 	pMask->setColor(sys::Color4B(255, 255, 255, 255));
 	pMask->setVolume(100, 100, -100);
-	Utility::loadShader(pMask, "Shader/geometry/draw_triangle.vs", "Shader/geometry/draw_triangle.fs");
+	Utility::loadShaderVF(pMask, "Shader/geometry/draw_triangle.vs", "Shader/geometry/draw_triangle.fs");
 	this->addChild(pMask);
 
 	render::CoordinateSystem* pCoordSystem = CREATE_NODE(render::CoordinateSystem);
 	pCoordSystem->setVolume(100, 100, 100);
 	pCoordSystem->setPointSize(5);
-	Utility::loadShader(pCoordSystem, "Shader/geometry/draw_coordinate_system.vs","Shader/geometry/draw_coordinate_system.fs");
+	Utility::loadShaderVF(pCoordSystem, "Shader/geometry/draw_coordinate_system.vs","Shader/geometry/draw_coordinate_system.fs");
 	this->addChild(pCoordSystem);
 }
 

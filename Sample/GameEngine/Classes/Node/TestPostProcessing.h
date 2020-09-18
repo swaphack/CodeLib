@@ -15,6 +15,4 @@ private:
 	void testPixelPostProcessing();
 
 	void testImage();
-
-	render::CtrlImage* createImage();
 };

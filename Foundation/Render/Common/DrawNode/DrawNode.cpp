@@ -162,6 +162,7 @@ void DrawNode::onDraw()
 	}
 
 	uint32_t nVerticeSize = _mesh->getMeshDetail()->getVertices().getSize();
+	
 	if (nVerticeSize == 0)
 	{
 		return;
@@ -173,8 +174,21 @@ void DrawNode::onDraw()
 	{
 		G_UNIFORMSHADERAPPLY->beginApplyWithShader(this, program,  _mesh, _material, _textureCache);
 
+		DrawMode mode = _mesh->getDrawMode();
+		if (isTessilationEnable())
+		{
+			//uint32_t nVerticeCount = _mesh->getMeshDetail()->getVertices().getLength();
+			this->updateTessilation();
+			_mesh->setDrawMode(DrawMode::PATCHES);
+		}
+
 		GLDebug::showError();
 		_mesh->drawWithBufferObject();
+		
+		if (isTessilationEnable())
+		{
+			_mesh->setDrawMode(mode);
+		}
 
 		GLDebug::showError();
 		G_UNIFORMSHADERAPPLY->endApplyWithShader(program, _mesh, _material, _textureCache);

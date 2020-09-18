@@ -116,8 +116,15 @@ namespace render
 		static void multiDrawElementsBaseVertex(DrawMode mode, int* count, IndexDataType type, void** indices, int primcount, int* basevertex);
 		static void multiDrawElementsIndirect(DrawMode mode, DrawElementsIndirectType type, const int* indirect, int primcount, int stride);
 	public:
-		static void patchParameter(PatchParameter pname, int value);
-		static void patchParameter(PatchParameter pname, const float* values);
+		static void setPatchParameter(PatchParameter pname, int value);
+		static void setPatchParameter(PatchParameter pname, const float* values);
+
+		// 设置细分顶点数量
+		static void setPatchVertices(int value);
+		// 设置细分
+		static void setPatchTessOuterLevel(float value[4]);
+		// 设置细分
+		static void setPatchTessInnerLevel(float value[2]);
 	public:
 		static void setPrimitiveRestartIndex(uint32_t index);
 		static void setProvokingVertex(ProvokeMode mode);

@@ -29,4 +29,7 @@ private:
 	void addLight();
 	// 有问题
 	void testClipShader();
+
+	// 细分着色器
+	void testTessellation();
 };

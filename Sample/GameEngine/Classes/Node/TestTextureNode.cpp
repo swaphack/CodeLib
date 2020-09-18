@@ -23,7 +23,7 @@ void TestTextureNode::testMultiTexture()
 	pFrame->setPosition(0, 0);
 	pFrame->setAnchorPoint(0, 0);
 	pFrame->setVolume(300, 300);
-	Utility::loadShader(pFrame, "Shader/texture/multi_texture.vs", "Shader/texture/multi_texture.fs");
+	Utility::loadShaderVF(pFrame, "Shader/texture/multi_texture.vs", "Shader/texture/multi_texture.fs");
 
 	pFrame->setAmbientTexture("Resource/Image/1.jpg");
 	pFrame->setDiffuseTexture("Resource/Image/NeHe.png");
