@@ -16,9 +16,6 @@
     <ClCompile Include="Common\Action\IntervalAction.cpp">
       <Filter>Common\Action</Filter>
     </ClCompile>
-    <ClCompile Include="Common\View\View.cpp">
-      <Filter>Common\View</Filter>
-    </ClCompile>
     <ClCompile Include="Common\Scene\Scene.cpp">
       <Filter>Common\Scene</Filter>
     </ClCompile>
@@ -603,6 +600,9 @@
     <ClCompile Include="Common\DrawNode\TessilationProtocol.cpp">
       <Filter>Common\DrawNode</Filter>
     </ClCompile>
+    <ClCompile Include="Common\View\ViewPort.cpp">
+      <Filter>Common\View</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Common\Node\import.h">
@@ -628,9 +628,6 @@
     </ClInclude>
     <ClInclude Include="Common\Action\IntervalAction.h">
       <Filter>Common\Action</Filter>
-    </ClInclude>
-    <ClInclude Include="Common\View\View.h">
-      <Filter>Common\View</Filter>
     </ClInclude>
     <ClInclude Include="Common\View\import.h">
       <Filter>Common\View</Filter>
@@ -1382,6 +1379,9 @@
     </ClInclude>
     <ClInclude Include="Common\DrawNode\TessilationProtocol.h">
       <Filter>Common\DrawNode</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\View\ViewPort.h">
+      <Filter>Common\View</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

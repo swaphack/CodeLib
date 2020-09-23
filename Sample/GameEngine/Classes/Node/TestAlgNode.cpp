@@ -14,12 +14,14 @@ TestAlgNode::~TestAlgNode()
 
 void TestAlgNode::initNodes()
 {
-	this->testMeshMapFindPath();
+	//this->testMeshMapFindPath();
+
+	this->testWFCCreateMap();
 }
 
 void TestAlgNode::testRayMapFindPath()
 {
-	alg::RayMap* pMap = CREATE_OBJECT(alg::RayMap);
+	alg::map::RayMap* pMap = CREATE_OBJECT(alg::map::RayMap);
 	pMap->addPoint(math::Vector3(0, 0));
 	pMap->addPoint(math::Vector3(0, 10));
 	pMap->addPoint(math::Vector3(1, 0));
@@ -36,7 +38,7 @@ void TestAlgNode::testRayMapFindPath()
 
 	std::vector<uint32_t> path;
 
-	alg::AStar* pPathFinder = CREATE_OBJECT(alg::AStar);
+	alg::map::AStar* pPathFinder = CREATE_OBJECT(alg::map::AStar);
 	bool ret = pPathFinder->findWay(pMap, 0, 5, path);
 
 	int a = 0;
@@ -44,7 +46,7 @@ void TestAlgNode::testRayMapFindPath()
 
 void TestAlgNode::testMeshMapFindPath()
 {
-	alg::MeshMap* pMap = CREATE_OBJECT(alg::MeshMap);
+	alg::map::MeshMap* pMap = CREATE_OBJECT(alg::map::MeshMap);
 	pMap->addPoint(math::Vector3(0, 0));
 	pMap->addPoint(math::Vector3(0, 10));
 	pMap->addPoint(math::Vector3(1, 0));
@@ -61,9 +63,52 @@ void TestAlgNode::testMeshMapFindPath()
 
 	std::vector<uint32_t> path;
 
-	alg::AStar* pPathFinder = CREATE_OBJECT(alg::AStar);
+	alg::map::AStar* pPathFinder = CREATE_OBJECT(alg::map::AStar);
 	bool ret = pPathFinder->findWay(pMap, 0, 5, path);
 
 	int a = 0;
+}
+
+void TestAlgNode::testWFCCreateMap()
+{
+#define SLOT_COUNT 4
+#define RECT_WIDTH 4
+#define RECT_HEIGHT 4
+#define RELATION_VALUE 1
+#define MODULE_COUNT 2
+
+	auto mapAssets = new alg::map::MapAssets<alg::map::RectModule, SLOT_COUNT, RELATION_VALUE>();
+	{
+		std::map<uint32_t, uint32_t> slots;
+		slots[(uint32_t)alg::map::RectModuleDirection::LEFT] = 1;
+		slots[(uint32_t)alg::map::RectModuleDirection::RIGHT] = 2;
+		slots[(uint32_t)alg::map::RectModuleDirection::UP] = 3;
+		slots[(uint32_t)alg::map::RectModuleDirection::DOWN] = 4;
+		mapAssets->createModule(1, slots);
+	}
+	{
+		std::map<uint32_t, uint32_t> slots;
+		slots[(uint32_t)alg::map::RectModuleDirection::LEFT] = 5;
+		slots[(uint32_t)alg::map::RectModuleDirection::RIGHT] = 6;
+		slots[(uint32_t)alg::map::RectModuleDirection::UP] = 7;
+		slots[(uint32_t)alg::map::RectModuleDirection::DOWN] = 8;
+		mapAssets->createModule(2, slots);
+	}
+
+	{
+		mapAssets->addMatchSlot<8>(0, 1, 2, 3, 4, 5, 6, 7, 8);
+		mapAssets->addMatchSlot<1>(2, 5);
+		mapAssets->addMatchSlot<1>(6, 1);
+
+		mapAssets->addMatchSlot<1>(8, 3);
+		mapAssets->addMatchSlot<1>(4, 7);
+	}
+	auto map = new alg::map::RectMap<RECT_WIDTH, RECT_HEIGHT>();
+	auto creator = new alg::map::RectMapCreator<SLOT_COUNT, RECT_WIDTH, RECT_HEIGHT>();
+	auto wfc = new alg::map::WFCAlgorithm();
+	creator->setMapAssets(mapAssets);
+	creator->create(map, wfc);
+
+	int a = 1;
 }
 

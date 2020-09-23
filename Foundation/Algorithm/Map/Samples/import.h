@@ -4,6 +4,8 @@
 #include "MeshMap.h"
 #include "RayMap.h"
 
+#include "RectMap.h"
+#include "RectMapCreator.h"
 
-#include "MapCreator2D.h"
-#include "MapCreator3D.h"
+#include "CubeMap.h"
+#include "CubeMapCreator.h"

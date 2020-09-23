@@ -114,11 +114,14 @@ vec4 getEdgeEffect(float offset, sampler2D tex, vec2 uv)
 
 uniform Texture tex;
 
-in vec2 tesTexcoord;
+in vec2 fragTexcoord;
+in vec3 fragColor;
 
-out vec4 color;
+out vec3 color;
 
 void main()
 {
-	color = texture(tex.texture0, gsTexcoord);
+	color = texture(tex.texture0, fragTexcoord);
+
+	color = vec4(fragColor, 1.0);
 }

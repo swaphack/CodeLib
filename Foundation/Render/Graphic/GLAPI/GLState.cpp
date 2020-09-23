@@ -325,6 +325,11 @@ void GLState::setViewport(float x, float y, float width, float height)
 	glViewport(x, y, width, height);
 }
 
+void render::GLState::setViewport(const math::Rect& rect)
+{
+	setViewport(rect.getX(), rect.getY(), rect.getWidth(), rect.getHeight());
+}
+
 void GLState::setViewportArray(uint32_t first, int count, const float* v)
 {
 	glViewportArrayv(first, count, v);
@@ -333,5 +338,10 @@ void GLState::setViewportArray(uint32_t first, int count, const float* v)
 void GLState::setViewportIndexed(uint32_t index, float x, float y, float width, float height)
 {
 	glViewportIndexedf(index, x, y, width, height);
+}
+
+void render::GLState::setViewportIndexed(uint32_t index, const math::Rect& rect)
+{
+	setViewportIndexed(index, rect.getX(), rect.getY(), rect.getWidth(), rect.getHeight());
 }
 

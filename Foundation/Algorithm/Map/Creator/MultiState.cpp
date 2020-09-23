@@ -1,55 +1,65 @@
 #include "MultiState.h"
 #include <cassert>
 
-alg::MultiState::MultiState()
+alg::map::MultiState::MultiState()
 {
 
 }
 
-alg::MultiState::~MultiState()
+alg::map::MultiState::~MultiState()
 {
 
 }
 
-void alg::MultiState::add(uint32_t status)
+void alg::map::MultiState::set(const std::vector<uint32_t>& states)
 {
-	_statusVec.push_back(status);
+	_states = states;
 }
 
-void alg::MultiState::remove(uint32_t status)
+void alg::map::MultiState::add(uint32_t state)
 {
-	auto it = std::find(_statusVec.begin(), _statusVec.end(), status);
-	if (it != _statusVec.end())
+	_states.push_back(state);
+}
+
+void alg::map::MultiState::remove(uint32_t state)
+{
+	auto it = std::find(_states.begin(), _states.end(), state);
+	if (it != _states.end())
 	{
-		_statusVec.erase(it);
+		_states.erase(it);
 	}
 }
 
-bool alg::MultiState::has(uint32_t status)
+bool alg::map::MultiState::has(uint32_t state)
 {
-	auto it = std::find(_statusVec.begin(), _statusVec.end(), status);
-	return it != _statusVec.end();
+	auto it = std::find(_states.begin(), _states.end(), state);
+	return it != _states.end();
 }
 
-uint32_t alg::MultiState::get(uint32_t index)
+uint32_t alg::map::MultiState::get(uint32_t index)
 {
-	assert(index < _statusVec.size());
+	assert(index < _states.size());
 
-	return _statusVec[index];
+	return _states[index];
 }
 
-uint32_t alg::MultiState::getCount() const
+uint32_t alg::map::MultiState::getCount() const
 {
-	return _statusVec.size();
+	return _states.size();
 }
 
-bool alg::MultiState::isEmpty() const
+bool alg::map::MultiState::isEmpty() const
 {
-	return _statusVec.empty();
+	return _states.empty();
 }
 
-void alg::MultiState::removeAllStates()
+void alg::map::MultiState::removeAllStates()
 {
-	_statusVec.clear();
+	_states.clear();
+}
+
+const std::vector<uint32_t>& alg::map::MultiState::getAllStates() const
+{
+	return _states;
 }
 

@@ -4,28 +4,31 @@
 
 namespace alg
 {
-	class MapProtocol;
-	/**
-	*	路径
-	*/
-	class Path : public sys::Object
+	namespace map
 	{
-	public:
-		Path();
-		virtual ~Path();
-	public:
-		
+		class MapProtocol;
 		/**
-		*	获取直线距离
+		*	路径
 		*/
-		float getDistance(const MapProtocol* map, uint32_t fromIndex, uint32_t toIndex);
-	protected:
-		/**
-		*	添加距离
-		*/
-		void addDistance(const MapProtocol* map, uint32_t fromIndex, uint32_t toIndex);
-	protected:
-		// 距离
-		std::map<std::string, float> _distances;
-	};
+		class Path : public sys::Object
+		{
+		public:
+			Path();
+			virtual ~Path();
+		public:
+
+			/**
+			*	获取直线距离
+			*/
+			float getDistance(const MapProtocol* map, uint32_t fromIndex, uint32_t toIndex);
+		protected:
+			/**
+			*	添加距离
+			*/
+			void addDistance(const MapProtocol* map, uint32_t fromIndex, uint32_t toIndex);
+		protected:
+			// 距离
+			std::map<std::string, float> _distances;
+		};
+	}
 }

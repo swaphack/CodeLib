@@ -277,8 +277,6 @@
     <ClCompile Include="Number\Number.cpp" />
     <ClCompile Include="Number\Real.cpp" />
     <ClCompile Include="Set\Element.cpp" />
-    <ClCompile Include="Set\FiniteSet.cpp" />
-    <ClCompile Include="Set\Set.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

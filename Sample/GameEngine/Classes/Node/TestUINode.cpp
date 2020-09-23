@@ -213,7 +213,7 @@ void TestUINode::testStencil()
 
 void TestUINode::testImage()
 {
-	auto frameSize = Canvas::getInstance()->getView()->getFrameSize();
+	auto frameSize = Canvas::getInstance()->getView()->getViewSize();
 
 	std::string filepath = "Resource/Image/world.jpg";
 

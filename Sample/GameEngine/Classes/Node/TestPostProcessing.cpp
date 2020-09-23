@@ -23,7 +23,7 @@ void TestPostProcessing::initNodes()
 
 void TestPostProcessing::testFramePostProcessing()
 {
-	auto frameSize = render::Canvas::getInstance()->getView()->getFrameSize();
+	auto frameSize = render::Canvas::getInstance()->getView()->getViewSize();
 
 	std::string filepath = "Resource/Image/world.jpg";
 

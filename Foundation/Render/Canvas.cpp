@@ -8,7 +8,7 @@ Canvas::Canvas()
 {
 	ASSERT(_sCanvas == nullptr);
 
-	_view = new View();
+	_view = new ViewPort();
 
 	_sCanvas = this;
 }
@@ -53,8 +53,7 @@ void Canvas::update(float interval)
 
 void Canvas::setViewPort(float x, float y, float width, float height)
 {
-	_view->setPosition(x, y);
-	_view->setFrameSize(width, height);
+	_view->setViewRect(x, y, width, height);
 
 	auto pTop = getCurScene();
 	if (pTop)
@@ -80,7 +79,7 @@ Scene* Canvas::getCurScene()
 	return _scenes.top();
 }
 
-View* Canvas::getView()
+ViewPort* Canvas::getView()
 {
 	return _view;
 }

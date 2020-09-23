@@ -23,7 +23,7 @@ void TestLayoutNode::initNodes()
 
 void TestLayoutNode::testLayout()
 {
-	auto frameSize = Canvas::getInstance()->getView()->getFrameSize();
+	auto frameSize = Canvas::getInstance()->getView()->getViewSize();
 
 	Display* pDisplay = new Display();
 	pDisplay->setUIRoot(this);

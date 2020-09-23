@@ -1,17 +1,17 @@
 #include "MeshMap.h"
 #include "system.h"
 
-alg::MeshMapRelation::MeshMapRelation()
+alg::map::MeshMapRelation::MeshMapRelation()
 {
 
 }
 
-alg::MeshMapRelation::~MeshMapRelation()
+alg::map::MeshMapRelation::~MeshMapRelation()
 {
 
 }
 
-bool alg::MeshMapRelation::findNeighbor(uint32_t srcIndex, std::vector<uint32_t>& neighbors) const
+bool alg::map::MeshMapRelation::findNeighbor(uint32_t srcIndex, std::vector<uint32_t>& neighbors) const
 {
 	int32_t index = getRelationIndex(srcIndex);
 	if (index == -1)
@@ -35,7 +35,7 @@ bool alg::MeshMapRelation::findNeighbor(uint32_t srcIndex, std::vector<uint32_t>
 	return neighbors.size() > 0;
 }
 
-bool alg::MeshMapRelation::findWay(uint32_t fromIndex, uint32_t toIndex, std::vector<uint32_t>& indices) const
+bool alg::map::MeshMapRelation::findWay(uint32_t fromIndex, uint32_t toIndex, std::vector<uint32_t>& indices) const
 {
 	indices.clear();
 
@@ -75,17 +75,17 @@ bool alg::MeshMapRelation::findWay(uint32_t fromIndex, uint32_t toIndex, std::ve
 }
 
 //////////////////////////////////////////////////////////////////////////
-alg::MeshMap::MeshMap()
+alg::map::MeshMap::MeshMap()
 {
 
 }
 
-alg::MeshMap::~MeshMap()
+alg::map::MeshMap::~MeshMap()
 {
 	
 }
 
-bool alg::MeshMap::findNeighborPoint(uint32_t srcIndex, std::vector<uint32_t>& neighboors) const
+bool alg::map::MeshMap::findNeighborCells(uint32_t srcIndex, std::vector<uint32_t>& neighboors) const
 {
 	std::set<uint32_t> setData;
 	for (const auto& mesh : _mapRelations.getAllObjects())

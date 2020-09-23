@@ -287,3 +287,9 @@ void TestEnvironmentNode::testMatrix()
 
 	int a = 1;
 }
+
+void TestEnvironmentNode::testMultiPort()
+{
+	math::Size size = Canvas::getInstance()->getView()->getViewSize();
+	Canvas::getInstance()->setViewPort(0, 0, size.getWidth() * 0.5f, size.getHeight() * 0.5f);
+}

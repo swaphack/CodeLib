@@ -225,7 +225,7 @@
     <ClCompile Include="Common\VAO\VertexAttribPointer.cpp" />
     <ClCompile Include="Common\View\Camera.cpp" />
     <ClCompile Include="Common\View\MultiSampling.cpp" />
-    <ClCompile Include="Common\View\View.cpp" />
+    <ClCompile Include="Common\View\ViewPort.cpp" />
     <ClCompile Include="Common\XFB\TransformFeedback.cpp" />
     <ClCompile Include="Common\XFB\TransformFeedbackBufferObject.cpp" />
     <ClCompile Include="GPU\GPUCalculator.cpp" />
@@ -475,7 +475,7 @@
     <ClInclude Include="Common\View\DimensionsType.h" />
     <ClInclude Include="Common\View\import.h" />
     <ClInclude Include="Common\View\MultiSampling.h" />
-    <ClInclude Include="Common\View\View.h" />
+    <ClInclude Include="Common\View\ViewPort.h" />
     <ClInclude Include="Common\View\ViewParameter.h" />
     <ClInclude Include="Common\XFB\import.h" />
     <ClInclude Include="Common\XFB\TransformFeedback.h" />

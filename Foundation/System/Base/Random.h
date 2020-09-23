@@ -21,15 +21,15 @@ namespace sys
 		static uint32_t getSeed();
 	public:
 		/**
-		*	设置区间的浮点数
+		*	设置区间的浮点数， 包含最大值
 		*/ 
 		static float getNumber(float minValue, float maxValue);
 		/**
-		*	获取下一个数值
+		*	获取下一个数值， 包含最大值
 		*/  
 		static uint32_t getNumber(uint32_t maxValue);
 		/**
-		*	获取区间内的整形
+		*	获取区间内的整形, 包含两端
 		*/   
 		static int32_t getNumber(int32_t minValue, int32_t maxValue);
 	public:

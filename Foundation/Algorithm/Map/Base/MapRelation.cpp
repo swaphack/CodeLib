@@ -1,26 +1,26 @@
 #include "MapRelation.h"
 
-alg::MapRelation::MapRelation()
+alg::map::MapRelation::MapRelation()
 {
 
 }
 
-alg::MapRelation::~MapRelation()
+alg::map::MapRelation::~MapRelation()
 {
 	this->removeAllRelations();
 }
 
-void alg::MapRelation::addRelation(uint32_t relationIndex)
+void alg::map::MapRelation::addRelation(uint32_t relationIndex)
 {
 	_relations.push_back(relationIndex);
 }
 
-void alg::MapRelation::addRelation(const std::vector<uint32_t>& relationIndex)
+void alg::map::MapRelation::addRelation(const std::vector<uint32_t>& relationIndex)
 {
 	_relations = relationIndex;
 }
 
-void alg::MapRelation::addRelation(uint32_t nLength, uint32_t relationIndex[])
+void alg::map::MapRelation::addRelation(uint32_t nLength, uint32_t relationIndex[])
 {
 	if (relationIndex == nullptr)
 	{
@@ -33,20 +33,20 @@ void alg::MapRelation::addRelation(uint32_t nLength, uint32_t relationIndex[])
 	}
 }
 
-void alg::MapRelation::addRelation(uint32_t relationIndex0, uint32_t relationIndex1, uint32_t relationIndex2)
+void alg::map::MapRelation::addRelation(uint32_t relationIndex0, uint32_t relationIndex1, uint32_t relationIndex2)
 {
 	_relations.push_back(relationIndex0);
 	_relations.push_back(relationIndex1);
 	_relations.push_back(relationIndex2);
 }
 
-void alg::MapRelation::addRelation(uint32_t relationIndex0, uint32_t relationIndex1)
+void alg::map::MapRelation::addRelation(uint32_t relationIndex0, uint32_t relationIndex1)
 {
 	_relations.push_back(relationIndex0);
 	_relations.push_back(relationIndex1);
 }
 
-void alg::MapRelation::addRelation(uint32_t nLength, uint32_t startIndex, va_list ap)
+void alg::map::MapRelation::addRelation(uint32_t nLength, uint32_t startIndex, va_list ap)
 {
 	uint32_t* value = math::GET_PARAMETERS(nLength, startIndex, ap);
 
@@ -55,7 +55,7 @@ void alg::MapRelation::addRelation(uint32_t nLength, uint32_t startIndex, va_lis
 	free(value);
 }
 
-void alg::MapRelation::addRelation(uint32_t nLength, uint32_t startIndex, ...)
+void alg::map::MapRelation::addRelation(uint32_t nLength, uint32_t startIndex, ...)
 {
 	uint32_t* value = math::GET_PARAMETERS(nLength, startIndex);
 	_relations.resize(nLength);
@@ -63,7 +63,7 @@ void alg::MapRelation::addRelation(uint32_t nLength, uint32_t startIndex, ...)
 	free(value);
 }
 
-void alg::MapRelation::removeRelation(uint32_t relationIndex)
+void alg::map::MapRelation::removeRelation(uint32_t relationIndex)
 {
 	auto it = std::find(_relations.begin(), _relations.end(), relationIndex);
 	if (it != _relations.end())
@@ -72,35 +72,35 @@ void alg::MapRelation::removeRelation(uint32_t relationIndex)
 	}
 }
 
-void alg::MapRelation::removeAllRelations()
+void alg::map::MapRelation::removeAllRelations()
 {
 	_relations.clear();
 }
 
-bool alg::MapRelation::containRelation(uint32_t relationIndex) const
+bool alg::map::MapRelation::containRelation(uint32_t relationIndex) const
 {
 	auto it = std::find(_relations.begin(), _relations.end(), relationIndex);
 	return it != _relations.end();
 }
 
-const std::vector<uint32_t>& alg::MapRelation::getAllRelations() const
+const std::vector<uint32_t>& alg::map::MapRelation::getAllRelations() const
 {
 	return _relations;
 }
 
-uint32_t alg::MapRelation::getRelationCount() const
+uint32_t alg::map::MapRelation::getRelationCount() const
 {
 	return _relations.size();
 }
 
-uint32_t alg::MapRelation::getRelation(uint32_t index) const
+uint32_t alg::map::MapRelation::getRelation(uint32_t index) const
 {
 	assert(index < _relations.size());
 
 	return _relations[index];
 }
 
-int32_t alg::MapRelation::getRelationIndex(uint32_t relationIndex) const
+int32_t alg::map::MapRelation::getRelationIndex(uint32_t relationIndex) const
 {
 	int count = getRelationCount();
 	for (int i = 0; i < count; i++)

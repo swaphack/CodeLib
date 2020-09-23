@@ -20,6 +20,8 @@ protected:
 	void addCoordinate();
 
 	void testMatrix();
+
+	void testMultiPort();
 private:
 	int _viewType = 0;
 

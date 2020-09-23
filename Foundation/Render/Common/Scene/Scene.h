@@ -4,7 +4,7 @@
 
 namespace render
 {
-	class View;
+	class ViewPort;
 	// ³¡¾°
 	class Scene : public Node
 	{

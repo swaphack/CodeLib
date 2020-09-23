@@ -1,16 +1,16 @@
 #include "Path.h"
 #include "Map/Base/Map.h"
-alg::Path::Path()
+alg::map::Path::Path()
 {
 
 }
 
-alg::Path::~Path()
+alg::map::Path::~Path()
 {
 
 }
 
-void alg::Path::addDistance(const MapProtocol* map, uint32_t fromIndex, uint32_t toIndex)
+void alg::map::Path::addDistance(const MapProtocol* map, uint32_t fromIndex, uint32_t toIndex)
 {
 	if (map == nullptr)
 	{
@@ -29,7 +29,7 @@ void alg::Path::addDistance(const MapProtocol* map, uint32_t fromIndex, uint32_t
 	_distances[mark1] = distance;
 }
 
-float alg::Path::getDistance(const MapProtocol* map, uint32_t fromIndex, uint32_t toIndex)
+float alg::map::Path::getDistance(const MapProtocol* map, uint32_t fromIndex, uint32_t toIndex)
 {
 	if (map == nullptr)
 	{

@@ -67,30 +67,32 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="algorithm.h" />
+    <ClInclude Include="Map\Base\CombineSlots.h" />
     <ClInclude Include="Map\Base\import.h" />
     <ClInclude Include="Map\Base\Map.h" />
     <ClInclude Include="Map\Base\MapCell.h" />
     <ClInclude Include="Map\Base\MapAssets.h" />
-    <ClInclude Include="Map\Base\MapModule.h" />
+    <ClInclude Include="Map\Base\Module.h" />
     <ClInclude Include="Map\Base\MapObject.h" />
     <ClInclude Include="Map\Base\MapObjects.h" />
+    <ClInclude Include="Map\Base\MapProtocol.h" />
     <ClInclude Include="Map\Base\MapRelation.h" />
-    <ClInclude Include="Map\Base\ModuleSlots.h" />
+    <ClInclude Include="Map\Base\Slots.h" />
+    <ClInclude Include="Map\Base\RelationTable.h" />
     <ClInclude Include="Map\Base\SlotRule.h" />
     <ClInclude Include="Map\Creator\import.h" />
-    <ClInclude Include="Map\Creator\MapRandom.h" />
+    <ClInclude Include="Map\Creator\MapCreator.h" />
     <ClInclude Include="Map\Creator\MultiState.h" />
-    <ClInclude Include="Map\Creator\RelationTable2D.h" />
     <ClInclude Include="Map\Creator\WFCAlgorithm.h" />
     <ClInclude Include="Map\import.h" />
     <ClInclude Include="Map\Path\AStar.h" />
     <ClInclude Include="Map\Path\import.h" />
     <ClInclude Include="Map\Path\Path.h" />
-    <ClInclude Include="Map\Samples\Array2DMap.h" />
-    <ClInclude Include="Map\Samples\Array3DMap.h" />
+    <ClInclude Include="Map\Samples\RectMap.h" />
+    <ClInclude Include="Map\Samples\CubeMap.h" />
     <ClInclude Include="Map\Samples\import.h" />
-    <ClInclude Include="Map\Samples\MapCreator2D.h" />
-    <ClInclude Include="Map\Samples\MapCreator3D.h" />
+    <ClInclude Include="Map\Samples\RectMapCreator.h" />
+    <ClInclude Include="Map\Samples\CubeMapCreator.h" />
     <ClInclude Include="Map\Samples\MeshMap.h" />
     <ClInclude Include="Map\Samples\PointMap.h" />
     <ClInclude Include="Map\Samples\RayMap.h" />
@@ -104,17 +106,18 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Map\Base\CombineSlots.cpp" />
     <ClCompile Include="Map\Base\MapCell.cpp" />
-    <ClCompile Include="Map\Base\MapModule.cpp" />
+    <ClCompile Include="Map\Base\Module.cpp" />
     <ClCompile Include="Map\Base\MapObject.cpp" />
     <ClCompile Include="Map\Base\MapRelation.cpp" />
-    <ClCompile Include="Map\Base\ModuleSlots.cpp" />
-    <ClCompile Include="Map\Base\SlotRule.cpp" />
+    <ClCompile Include="Map\Base\Slots.cpp" />
     <ClCompile Include="Map\Creator\MultiState.cpp" />
+    <ClCompile Include="Map\Creator\WFCAlgorithm.cpp" />
     <ClCompile Include="Map\Path\AStar.cpp" />
     <ClCompile Include="Map\Path\Path.cpp" />
-    <ClCompile Include="Map\Samples\MapCreator2D.cpp" />
-    <ClCompile Include="Map\Samples\MapCreator3D.cpp" />
+    <ClCompile Include="Map\Samples\RectMapCreator.cpp" />
+    <ClCompile Include="Map\Samples\CubeMapCreator.cpp" />
     <ClCompile Include="Map\Samples\MeshMap.cpp" />
     <ClCompile Include="Map\Samples\RayMap.cpp" />
     <ClCompile Include="Struct\OneToOneDoubleRelationship.cpp" />

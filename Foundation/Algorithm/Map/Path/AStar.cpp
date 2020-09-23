@@ -1,69 +1,69 @@
 #include "AStar.h"
-#include "Map/Base/Map.h"
+#include "Map/Base/MapProtocol.h"
 
-alg::AStar::AStartNode::AStartNode(uint32_t index)
+alg::map::AStar::AStartNode::AStartNode(uint32_t index)
 {
 	_index = index;
 }
 
-alg::AStar::AStartNode::AStartNode()
+alg::map::AStar::AStartNode::AStartNode()
 {
 
 }
 
-uint32_t alg::AStar::AStartNode::getIndex() const
+uint32_t alg::map::AStar::AStartNode::getIndex() const
 {
 	return _index;
 }
 
-void alg::AStar::AStartNode::setParent(int32_t parent)
+void alg::map::AStar::AStartNode::setParent(int32_t parent)
 {
 	_parent = parent;
 }
 
-int32_t alg::AStar::AStartNode::getParent() const
+int32_t alg::map::AStar::AStartNode::getParent() const
 {
 	return _parent;
 }
 
-void alg::AStar::AStartNode::setG(float value)
+void alg::map::AStar::AStartNode::setG(float value)
 {
 	_g = value;
 }
 
-float alg::AStar::AStartNode::getG() const
+float alg::map::AStar::AStartNode::getG() const
 {
 	return _g;
 }
 
-void alg::AStar::AStartNode::setH(float value)
+void alg::map::AStar::AStartNode::setH(float value)
 {
 	_h = value;
 }
 
-float alg::AStar::AStartNode::getH() const
+float alg::map::AStar::AStartNode::getH() const
 {
 	return _h;
 }
 
-float alg::AStar::AStartNode::getF() const
+float alg::map::AStar::AStartNode::getF() const
 {
 	return getG() + getH();
 }
 
 //////////////////////////////////////////////////////////////////////////
 
-alg::AStar::AStar()
+alg::map::AStar::AStar()
 {
 
 }
 
-alg::AStar::~AStar()
+alg::map::AStar::~AStar()
 {
 
 }
 
-bool alg::AStar::findWay(const MapProtocol* map, uint32_t srcIndex, uint32_t destIndex, std::vector<uint32_t>& path)
+bool alg::map::AStar::findWay(const MapProtocol* map, uint32_t srcIndex, uint32_t destIndex, std::vector<uint32_t>& path)
 {
 	if (map == nullptr)
 	{
@@ -102,7 +102,7 @@ bool alg::AStar::findWay(const MapProtocol* map, uint32_t srcIndex, uint32_t des
 
 		// 查找接壤节点
 		std::vector<uint32_t> neighbors;
-		if (!map->findNeighborPoint(nParentIndex, neighbors))
+		if (!map->findNeighborCells(nParentIndex, neighbors))
 		{
 			return false;
 		}
@@ -154,7 +154,7 @@ bool alg::AStar::findWay(const MapProtocol* map, uint32_t srcIndex, uint32_t des
 	return false;
 }
 
-void alg::AStar::initNodes()
+void alg::map::AStar::initNodes()
 {
 	_openSet.clear();
 	_closeSet.clear();
@@ -162,7 +162,7 @@ void alg::AStar::initNodes()
 	_mapNode.clear();
 }
 
-alg::AStar::AStartNode* alg::AStar::getAStartNode(uint32_t index)
+alg::map::AStar::AStartNode* alg::map::AStar::getAStartNode(uint32_t index)
 {
 	auto it = _mapNode.find(index);
 	if (it == _mapNode.end())
@@ -174,7 +174,7 @@ alg::AStar::AStartNode* alg::AStar::getAStartNode(uint32_t index)
 	return &_mapNode[index];
 }
 
-bool alg::AStar::getPath(uint32_t srcIndex, uint32_t endIndex, std::vector<uint32_t>& path)
+bool alg::map::AStar::getPath(uint32_t srcIndex, uint32_t endIndex, std::vector<uint32_t>& path)
 {
 	uint32_t index = endIndex;
 	do 

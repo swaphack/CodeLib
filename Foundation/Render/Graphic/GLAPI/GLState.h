@@ -199,7 +199,10 @@ namespace render
 		static void setStencilOpSeparate(FaceType type, StencilOpResult stencilFail, StencilOpResult depthFail, StencilOpResult depthPass);
 	public:
 		static void setViewport(float x, float y, float width, float height);
+		static void setViewport(const math::Rect& rect);
+
 		static void setViewportArray(uint32_t first, int count, const float* v);
 		static void setViewportIndexed(uint32_t index, float x, float y, float width, float height);
+		static void setViewportIndexed(uint32_t index, const math::Rect& rect);
 	};
 }

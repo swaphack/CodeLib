@@ -1,21 +1,21 @@
 #include "MapObject.h"
 
-alg::MapObject::MapObject()
+alg::map::MapObject::MapObject()
 {
 
 }
 
-alg::MapObject::~MapObject()
+alg::map::MapObject::~MapObject()
 {
 
 }
 
-void alg::MapObject::setObjectIndex(uint32_t nIndex)
+void alg::map::MapObject::setMapObjectID(uint32_t nIndex)
 {
-	_objectIndex = nIndex;
+	_mapObjectID = nIndex;
 }
 
-uint32_t alg::MapObject::getObjectIndex() const
+uint32_t alg::map::MapObject::getMapObjectID() const
 {
-	return _objectIndex;
+	return _mapObjectID;
 }

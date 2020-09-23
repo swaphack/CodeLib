@@ -5,27 +5,30 @@
 
 namespace alg
 {
-	/**
-	*	地图上对象
-	*/
-	class MapObject : public ObjectDetail
+	namespace map
 	{
-	public:
-		MapObject();
-		virtual ~MapObject();
-	public:
 		/**
-		*	节点索引
+		*	地图上对象
 		*/
-		void setObjectIndex(uint32_t nIndex);
-		/**
-		*	节点索引
-		*/
-		uint32_t getObjectIndex() const;
-	private:
-		/**
-		*	节点索引
-		*/
-		uint32_t _objectIndex = 0;
-	};
+		class MapObject : public ObjectDetail
+		{
+		public:
+			MapObject();
+			virtual ~MapObject();
+		public:
+			/**
+			*	节点编号
+			*/
+			void setMapObjectID(uint32_t nIndex);
+			/**
+			*	节点编号
+			*/
+			uint32_t getMapObjectID() const;
+		private:
+			/**
+			*	节点索引
+			*/
+			uint32_t _mapObjectID = 0;
+		};
+	}
 }

@@ -496,15 +496,6 @@
     <ClCompile Include="Number\Nature.cpp">
       <Filter>Number</Filter>
     </ClCompile>
-    <ClCompile Include="Set\Set.cpp">
-      <Filter>Set</Filter>
-    </ClCompile>
-    <ClCompile Include="Set\Element.cpp">
-      <Filter>Set</Filter>
-    </ClCompile>
-    <ClCompile Include="Set\FiniteSet.cpp">
-      <Filter>Set</Filter>
-    </ClCompile>
     <ClCompile Include="Basic\Interval.cpp">
       <Filter>Basic</Filter>
     </ClCompile>
@@ -702,6 +693,9 @@
     </ClCompile>
     <ClCompile Include="Algebra\Coordinate\CartesianCoordinatesSystem4D.cpp">
       <Filter>Algebra\Coordinate</Filter>
+    </ClCompile>
+    <ClCompile Include="Set\Element.cpp">
+      <Filter>Set</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

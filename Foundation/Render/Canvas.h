@@ -23,7 +23,7 @@ namespace render
 		void setViewPort(float x, float y, float width, float height);
 	public:
 		// 获取视图
-		View* getView();
+		ViewPort* getView();
 	public:
 		// 是否存在场景
 		bool hasScene();
@@ -39,7 +39,7 @@ namespace render
 		Scene* getCurScene();
 	private:
 		// 视图
-		View* _view;
+		ViewPort* _view;
 		// 场景
 		std::stack<Scene*> _scenes;
 

@@ -5,115 +5,124 @@
 
 namespace alg
 {
-	/**
-	*	地图对象管理
-	*/
-	template<typename T>
-	class MapObjects : public MapObject
+	namespace map
 	{
-		static_assert(std::is_base_of<MapObject, T>::value, "T must inherit from MapObject");
-	public:
-		MapObjects()
-		{
-
-		}
-		virtual ~MapObjects()
-		{
-			this->removeAllObjects();
-		}
-	public:
 		/**
-		*	移除所有对象
+		*	地图对象管理
 		*/
-		void removeAllObjects()
+		template<typename T>
+		class MapObjects : public MapObject
 		{
-			for (auto& item : _mapObjects)
+			static_assert(std::is_base_of<MapObject, T>::value, "T must inherit from MapObject");
+		public:
+			MapObjects()
 			{
-				SAFE_RELEASE(item.second);
-			}
 
-			_mapObjects.clear();
-		}
-		/**
-		*	获取地图对象
-		*/
-		uint32_t getObjectCount() const
-		{
-			return _mapObjects.size();
-		}
-		/**
-		*	是否为空
-		*/
-		bool isEmpty() const
-		{
-			return _mapObjects.empty();
-		}
-		/**
-		*	获取对象
-		*/
-		const T* getObject(uint32_t nIndex) const
-		{
-			auto it = _mapObjects.find(nIndex);
-			if (it == _mapObjects.end())
+			}
+			virtual ~MapObjects()
 			{
-				return nullptr;
+				this->removeAllObjects();
 			}
-
-			return it->second;
-		}
-		/**
-		*	获取对象
-		*/
-		T* getObject(uint32_t nIndex)
-		{
-			auto it = _mapObjects.find(nIndex);
-			if (it == _mapObjects.end())
+		public:
+			/**
+			*	移除所有对象
+			*/
+			void removeAllObjects()
 			{
-				return nullptr;
+				for (auto& item : _mapObjects)
+				{
+					SAFE_RELEASE(item.second);
+				}
+
+				_mapObjects.clear();
 			}
+			/**
+			*	获取地图对象
+			*/
+			uint32_t getObjectCount() const
+			{
+				return _mapObjects.size();
+			}
+			/**
+			*	是否为空
+			*/
+			bool isEmpty() const
+			{
+				return _mapObjects.empty();
+			}
+			/**
+			*	获取对象
+			*/
+			const T* getObject(uint32_t nIndex) const
+			{
+				auto it = _mapObjects.find(nIndex);
+				if (it == _mapObjects.end())
+				{
+					return nullptr;
+				}
 
-			return it->second;
-		}
-		/**
-		*	创建对象
-		*/
-		T* create()
-		{
-			T* temp = new T();
-			SAFE_RETAIN(temp);
-			temp->setObjectIndex(_objectIndex);
-			_mapObjects[_objectIndex] = temp;
+				return it->second;
+			}
+			/**
+			*	获取对象
+			*/
+			T* getObject(uint32_t nIndex)
+			{
+				auto it = _mapObjects.find(nIndex);
+				if (it == _mapObjects.end())
+				{
+					return nullptr;
+				}
 
-			_objectIndex++;
+				return it->second;
+			}
+			/**
+			*	创建对象
+			*/
+			T* create()
+			{
+				T* temp = new T();
+				SAFE_RETAIN(temp);
+				temp->setMapObjectID(_mapObjectID);
+				_mapObjects[_mapObjectID] = temp;
 
-			return temp;
-		}
-		/**
-		*	创建对象
-		*/
-		template<typename Type, typename = std::enable_if<std::is_base_of<MapObject, Type>::value, Type>::type>
-		Type* create()
-		{
-			Type* temp = new Type();
-			SAFE_RETAIN(temp);
-			temp->setObjectIndex(_objectIndex);
-			_mapObjects[_objectIndex] = temp;
+				_mapObjectID++;
+				return temp;
+			}
+			/**
+			*	递增id
+			*/
+			void increaseID()
+			{
+				_mapObjectID++;
+			}
+			/**
+			*	创建对象
+			*/
+			template<typename Type, typename = std::enable_if<std::is_base_of<MapObject, Type>::value, Type>::type>
+			Type* create()
+			{
+				_mapObjectID++;
 
-			_objectIndex++;
+				Type* temp = new Type();
+				SAFE_RETAIN(temp);
+				temp->setMapObjectID(_mapObjectID);
+				_mapObjects[_mapObjectID] = temp;
 
-			return temp;
-		}
-		/**
-		*	获取所有对象
-		*/
-		const std::map<uint32_t, T*>& getAllObjects() const
-		{
-			return _mapObjects;
-		}
-	protected:
-		// 索引
-		uint32_t _objectIndex = 0;
-		// 地图点
-		std::map<uint32_t, T*> _mapObjects;
-	};
+				return temp;
+			}
+			/**
+			*	获取所有对象
+			*/
+			const std::map<uint32_t, T*>& getAllObjects() const
+			{
+				return _mapObjects;
+			}
+		protected:
+			// 索引
+			uint32_t _mapObjectID = 0;
+			// 地图点
+			std::map<uint32_t, T*> _mapObjects;
+		};
+	}
 }

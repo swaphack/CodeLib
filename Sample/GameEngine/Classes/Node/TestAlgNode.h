@@ -13,4 +13,6 @@ private:
 	void testRayMapFindPath();
 
 	void testMeshMapFindPath();
+
+	void testWFCCreateMap();
 };

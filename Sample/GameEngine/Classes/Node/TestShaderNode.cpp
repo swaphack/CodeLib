@@ -91,7 +91,7 @@ void TestShaderNode::testSubroutineUniform()
 
 void TestShaderNode::testImageShader()
 {
-	auto frameSize = Canvas::getInstance()->getView()->getFrameSize();
+	auto frameSize = Canvas::getInstance()->getView()->getViewSize();
 
 	std::string filepath = "Resource/Image/world.jpg";
 
@@ -284,7 +284,7 @@ void TestShaderNode::testClipShader()
 
 void TestShaderNode::testTessellation()
 {
-	auto frameSize = Canvas::getInstance()->getView()->getFrameSize();
+	auto frameSize = Canvas::getInstance()->getView()->getViewSize();
 
 	std::string filepath = "Resource/Image/world.jpg";
 
@@ -307,7 +307,7 @@ void TestShaderNode::testTessellation()
 	pImage->setTessInnerLevel(innerValue);
 	pImage->setTessOuterLevel(outerValue);
 
-	if (true)
+	if (false)
 	{
 		Utility::loadShaderVTGF(pImage,
 			"Shader/tess/line_strip.vs",
