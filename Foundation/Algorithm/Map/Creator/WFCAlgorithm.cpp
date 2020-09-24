@@ -52,7 +52,10 @@ bool alg::map::WFCAlgorithm::autoFillMap(MapProtocol* map, CreateMapProtocol* cr
 			return false;
 		}
 
-		roundFillPoint(nIndex, map, creator);
+		if (!roundFillPoint(nIndex, map, creator))
+		{
+			return false;
+		}
 
 	} while (!_unFillPoint.empty());
 	
@@ -123,48 +126,44 @@ bool alg::map::WFCAlgorithm::roundFillPoint(uint32_t nIndex, MapProtocol* map, C
 		return false;
 	}
 
+	std::vector<uint32_t> modules;
+	if (!creator->getFillPointModules(map, nIndex, modules))
+	{
+		return false;
+	}
+
+	if (modules.empty())
+	{
+		modules = _pointModules[nIndex].getAllStates();
+	}
+
+	uint32_t idx = sys::Random::getNumber(modules.size() - 1);
+	uint32_t moduleID = modules[idx];
+	_pointModules[nIndex].remove(moduleID);
+	setPoint(map, nIndex, moduleID);
+
 	for (const auto item : neighboors)
 	{
-		std::vector<uint32_t> modules;
-		if (!creator->getFillPointModules(map, item, modules))
-		{
-			resetPoint(map, item);
-			return false;
-		}
-		else
-		{
-			modules = _pointModules[item].getAllStates();
-		}
+		uint32_t nModuleID = _mapPoint[item];
 
-		if (modules.empty())
+		// Î´·ÖÅäµÄ
+		if (nModuleID == 0)
 		{
-			resetPoint(map, item);
-			return false;
-		}
-
-		auto it = _mapPoint.find(item);
-		if (it != _mapPoint.end())
-		{
-			auto it1 = std::find(modules.begin(), modules.end(), it->second);
-			if (it1 != modules.end())
-			{
-				continue;
-			}
-			else
+			std::vector<uint32_t> modules;
+			if (!creator->getFillPointModules(map, item, modules))
 			{
 				resetPoint(map, item);
+				return false;
+			}
+			if (!modules.empty())
+			{
 				_pointModules[item].set(modules);
 			}
 		}
 		else
-		{
-			_pointModules[item].set(modules);
+		{// »ØËÝ
+			int a = 1;
 		}
-
-		uint32_t idx = sys::Random::getNumber(modules.size() - 1);
-		uint32_t moduleID = modules[idx];
-		_pointModules[item].remove(moduleID);
-		setPoint(map, item, moduleID);
 	}
 
 	return true;
@@ -185,10 +184,9 @@ void alg::map::WFCAlgorithm::setPoint(MapProtocol* map, uint32_t index, uint32_t
 	{
 		pCell->setModuleID(moduleID);
 	}
-
-	_mapPoint[index] = moduleID;
 	_unFillPoint.erase(index);
 	_filledPoint.insert(index);
+	_mapPoint[index] = moduleID;
 }
 
 /**
@@ -206,10 +204,9 @@ void alg::map::WFCAlgorithm::resetPoint(MapProtocol* map, uint32_t index)
 	{
 		pCell->setModuleID(0);
 	}
-
-	uint32_t value = _mapPoint[index];
 	_unFillPoint.insert(index);
 	_filledPoint.erase(index);
+	_mapPoint[index] = 0;
 	_pointModules[index] = _moduleStates;
 }
 
@@ -254,12 +251,14 @@ bool alg::map::WFCAlgorithm::getRandomFilledPoint(uint32_t& index)
 	int32_t idx = -1;
 	int32_t count = 0;
 
-	for (size_t i = 0; i < _pointModules.size(); i++)
+	for (auto item : _unFillPoint)
 	{
-		if (idx == -1 || count > _pointModules[i].getCount() )
+		uint32_t i = item;
+		uint32_t j = _pointModules[i].getCount();
+		if (idx == -1 || count > j)
 		{
 			idx = i;
-			count = _pointModules[i].getCount();
+			count = j;
 		}
 	}
 
@@ -267,6 +266,7 @@ bool alg::map::WFCAlgorithm::getRandomFilledPoint(uint32_t& index)
 	{
 		return false;
 	}
+
 	index = idx;
 	return true;
 }
@@ -277,12 +277,6 @@ bool alg::map::WFCAlgorithm::getRandomFilledPoint(uint32_t& index)
 
 const alg::map::Module* alg::map::WFCAlgorithm::getModule(CreateMapProtocol* creator, uint32_t index) const
 {
-	auto it = _filledPoint.find(index);
-	if (it == _filledPoint.end())
-	{
-		return nullptr;
-	}
-
 	auto it1 = _mapPoint.find(index);
 	if (it1 == _mapPoint.end())
 	{
@@ -299,15 +293,10 @@ const alg::map::Module* alg::map::WFCAlgorithm::getModule(CreateMapProtocol* cre
 
 bool alg::map::WFCAlgorithm::getModuleID(uint32_t index, uint32_t& moduleID) const
 {
-	auto it = _filledPoint.find(index);
-	if (it == _filledPoint.end())
-	{
-		return false;
-	}
 	auto it1 = _mapPoint.find(index);
 	if (it1 == _mapPoint.end())
 	{
-		return nullptr;
+		return false;
 	}
 	moduleID = it1->second;
 	return true;

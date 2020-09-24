@@ -103,11 +103,11 @@ namespace alg
 					break;
 				}
 
-				uint32_t nTargetSlot = pModule->getModuleSlot()->getSlot((uint32)reverseDir);
+				uint32_t nTargetSlot = pModule->getModuleSlot()->getSlot((uint32_t)reverseDir);
 				std::vector<uint32_t> relations;
 				if (base::getMapAssets()->getMatchSlots(nTargetSlot, relations))
 				{
-					slots.addSlots((uint32)dir, relations);
+					slots.addSlots((uint32_t)dir, relations);
 					return true;
 				}
 
@@ -124,11 +124,12 @@ namespace alg
 				{
 					return false;
 				}
-
+				/*
 				if (pCell->getModuldeID() > 0)
 				{
 					return false;
 				}
+				*/
 
 				uint32_t i = nIndex / Width;
 				uint32_t j = nIndex % Width;
@@ -138,7 +139,7 @@ namespace alg
 				{
 					auto pLeftCell = map->getCell(nIndex - 1);
 					
-					if (pLeftCell != nullptr)
+					if (pLeftCell != nullptr && pLeftCell->getModuldeID() > 0)
 					{// ×ó±ß
 						getDirectionSlots(pLeftCell, RectModuleDirection::LEFT, slots);
 						
@@ -147,7 +148,7 @@ namespace alg
 				if (j < Width - 1)
 				{
 					auto pRightCell = map->getCell(nIndex + 1);
-					if (pRightCell != nullptr)
+					if (pRightCell != nullptr && pRightCell->getModuldeID() > 0)
 					{// ÓÒ±ß
 						getDirectionSlots(pRightCell, RectModuleDirection::RIGHT, slots);
 					}
@@ -155,7 +156,7 @@ namespace alg
 				if (i > 0)
 				{
 					auto pDownCell = map->getCell(nIndex - Width);
-					if (pDownCell != nullptr)
+					if (pDownCell != nullptr && pDownCell->getModuldeID() > 0)
 					{// ÓÒ±ß
 						getDirectionSlots(pDownCell, RectModuleDirection::DOWN, slots);
 					}
@@ -164,7 +165,7 @@ namespace alg
 				if (i < Height - 1)
 				{
 					auto pUpCell = map->getCell(nIndex + Width);
-					if (pUpCell != nullptr)
+					if (pUpCell != nullptr && pUpCell->getModuldeID() > 0)
 					{// ÓÒ±ß
 						getDirectionSlots(pUpCell, RectModuleDirection::UP, slots);
 					}
