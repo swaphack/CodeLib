@@ -129,6 +129,9 @@ void TestAlgNode::testWFCCreateMap()
 	creator->setMapAssets(mapAssets);
 	creator->create(map, wfc);
 
-	int a = 1;
+	if (!wfc->isFinish())
+	{
+		return;
+	}
 }
 

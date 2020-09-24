@@ -92,12 +92,7 @@ namespace ui
 		*	布局内部大小改变
 		*	计算位置
 		*/
-		static void calLayoutPosition(LayoutItem* child, const math::Size& srcSize, const math::Size& newSize, float& x, float& y);
-		/**
-		*	布局内部大小改变
-		*	计算大小
-		*/
-		static void calLayoutSize(LayoutItem* child, const math::Size& srcSize, const math::Size& newSize, float& w, float& h);
+		static void calLayoutSpace(LayoutItem* child, const math::Size& srcSize, const math::Size& newSize, math::Vector2& point, math::Size& size);
 	protected:
 		/**
 		*	布局内部大小改变

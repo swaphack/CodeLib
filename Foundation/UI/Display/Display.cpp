@@ -100,11 +100,11 @@ void Display::onViewSizeChanged(const math::Size& inputSize)
 		return;
 	}
 
-	float x, y, w, h;
-	Layout::calLayoutPosition(m_pLayout, m_sViewSize, inputSize, x, y);
-	Layout::calLayoutSize(m_pLayout, m_sViewSize, inputSize, w, h);
+	math::Vector2 point;
+	math::Size size;
+	Layout::calLayoutSpace(m_pLayout, m_sViewSize, inputSize, point, size);
 
-	m_pLayout->resize(math::Rect(x,y,w,h));
+	m_pLayout->resize(math::Rect(point, size));
 }
 
 bool Display::loadFile()
@@ -125,7 +125,7 @@ bool Display::loadFile()
 	m_sViewSize = UIProxy::getInstance()->getDesignSize();
 	m_eLayoutDirection = UIProxy::getInstance()->getDesignDirection();
 
-	//this->autoResize();
+	this->autoResize();
 
 	if (m_pRoot && m_pLayout->getWidget())
 	{

@@ -29,11 +29,6 @@ void MultiStream::initSteam(uint32_t width, uint32_t height, uint32_t depth /*= 
 
 void MultiStream::expendStream(uint32_t width, uint32_t height, uint32_t depth /*= 1*/, bool bBottom/* = false*/)
 {
-	if (_data.getPtr() == nullptr)
-	{
-		return;
-	}
-
 	if (width < _width || height < _heigth || depth < depth)
 	{
 		return;

@@ -179,7 +179,7 @@ void TestShaderNode::testSphereModelShader()
 
 void TestShaderNode::test3dsModelShader()
 {
-	std::string filename = "Resource/3DS/Bld_38.3ds";
+	std::string filename = "Resource/Model/3DS/Bld_38.3ds";
 
 	Model3DS* pModel = CREATE_NODE(Model3DS);
 	if (!pModel->load(filename))
@@ -198,7 +198,7 @@ void TestShaderNode::test3dsModelShader()
 
 void TestShaderNode::testObjModelShader()
 {
-	std::string filename = "Resource/Obj/Skull_v3_L2/12140_Skull_v3_L2.obj";
+	std::string filename = "Resource/Model/Obj/Skull_v3_L2/12140_Skull_v3_L2.obj";
 
 	ModelObj* pModel = CREATE_NODE(ModelObj);
 	if (!pModel->load(filename))
@@ -217,7 +217,7 @@ void TestShaderNode::testObjModelShader()
 
 void TestShaderNode::testFbxModelShader()
 {
-	std::string filename = "Resource/fbx/LANCER_EVOLUTION/LANCEREVOX.FBX";
+	std::string filename = "Resource/Model/fbx/LANCER_EVOLUTION/LANCEREVOX.FBX";
 
 	ModelFbx* pModel = CREATE_NODE(ModelFbx);
 	if (!pModel->load(filename))

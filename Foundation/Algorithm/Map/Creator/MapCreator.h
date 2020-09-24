@@ -132,7 +132,7 @@ namespace alg
 					states.add(item.first);
 				}
 				alg->initMap(map->getCellCount(), states);
-				alg->autoFillMap(map, this);
+				return alg->autoFillMap(map, this);
 			}
 
 			/**

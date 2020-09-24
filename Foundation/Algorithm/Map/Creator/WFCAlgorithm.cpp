@@ -162,7 +162,7 @@ bool alg::map::WFCAlgorithm::roundFillPoint(uint32_t nIndex, MapProtocol* map, C
 		}
 		else
 		{// »ØËÝ
-			int a = 1;
+
 		}
 	}
 
@@ -217,6 +217,11 @@ void alg::map::WFCAlgorithm::resetPoint(MapProtocol* map, uint32_t index)
 bool alg::map::WFCAlgorithm::isFinish()
 {
 	return _unFillPoint.empty();
+}
+
+const std::map<uint32_t, uint32_t>& alg::map::WFCAlgorithm::getResult()
+{
+	return _mapPoint;
 }
 
 /**

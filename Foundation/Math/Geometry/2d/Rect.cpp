@@ -154,7 +154,17 @@ void Rect::setOrigin(float x, float y)
 	this->_origin.set(x, y);
 }
 
+void math::Rect::setOrigin(const Vector2& origin)
+{
+	this->_origin = origin;
+}
+
 void Rect::setSize(float x, float y)
 {
 	this->_size.set(x, y);
+}
+
+void math::Rect::setSize(const Size& size)
+{
+	this->_size = size;
 }

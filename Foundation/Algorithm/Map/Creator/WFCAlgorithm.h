@@ -38,9 +38,22 @@ namespace alg
 			WFCAlgorithm();
 			virtual ~WFCAlgorithm();
 		public:
+			/**
+			*	初始化地图
+			*/
 			void initMap(uint32_t pointCount, const MultiState& states);
-
+			/**
+			*	自动填充地图
+			*/
 			bool autoFillMap(MapProtocol* map, CreateMapProtocol* creator);
+			/**
+			*	是否全部已设置
+			*/
+			bool isFinish();
+			/**
+			*	分配结果
+			*/
+			const std::map<uint32_t, uint32_t>& getResult();
 		protected:
 			/**
 			*	随机方法，尽可能填充
@@ -60,10 +73,6 @@ namespace alg
 			*	重置点信息
 			*/
 			void resetPoint(MapProtocol* map, uint32_t index);
-			/**
-			*	是否全部已设置
-			*/
-			bool isFinish();
 
 			/**
 			*	随机获取一个未填充点

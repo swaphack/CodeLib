@@ -35,6 +35,11 @@ void LayoutItem::setOrgin(float x, float y)
 	m_rGeometry.setOrigin(x, y);
 }
 
+void ui::LayoutItem::setOrgin(const math::Vector2& position)
+{
+	m_rGeometry.setOrigin(position);
+}
+
 const math::Vector2& LayoutItem::getOrgin() const
 {
 	return m_rGeometry.getOrigin();
@@ -43,6 +48,11 @@ const math::Vector2& LayoutItem::getOrgin() const
 void LayoutItem::setSize(float width, float height)
 {
 	m_rGeometry.setSize(width, height);
+}
+
+void ui::LayoutItem::setSize(const math::Size& size)
+{
+	m_rGeometry.setSize(size);
 }
 
 const math::Size& LayoutItem::getSize() const

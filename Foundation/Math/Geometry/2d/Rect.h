@@ -38,7 +38,10 @@ namespace math
 		*/
 		void set(float x, float y, float w, float h);
 		void setOrigin(float x, float y);
+		void setOrigin(const Vector2& origin);
+		
 		void setSize(float x, float y);
+		void setSize(const Size& size);
 		/**
 		*	…Ë÷√≤Œ ˝
 		*/

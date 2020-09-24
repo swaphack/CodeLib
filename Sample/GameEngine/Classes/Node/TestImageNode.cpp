@@ -61,7 +61,7 @@ void TestImageNode::testImage()
 void TestImageNode::testDifferentImages()
 {
 	CtrlImage* pImage = CREATE_NODE(CtrlImage);
-	pImage->setImagePath("Resource/Obj/SCI_FRS_13_HD/lights_lod0.bmp");
+	pImage->setImagePath("Resource/Model/Obj/SCI_FRS_13_HD/lights_lod0.bmp");
 	pImage->setPosition(0, 0, 0);
 	pImage->setScale(1, 1, 1);
 	pImage->setVolume(100, 100);
@@ -69,7 +69,7 @@ void TestImageNode::testDifferentImages()
 	this->addChild(pImage);
 
 	pImage = CREATE_NODE(CtrlImage);
-	pImage->setImagePath("Resource/Obj/SCI_FRS_13_HD/BRAKES.png");
+	pImage->setImagePath("Resource/Model/Obj/SCI_FRS_13_HD/BRAKES.png");
 	pImage->setPosition(200, 200, 0);
 	pImage->setScale(1, 1, 1);
 	pImage->setVolume(100, 100);
@@ -77,7 +77,7 @@ void TestImageNode::testDifferentImages()
 	this->addChild(pImage);
 
 	pImage = CREATE_NODE(CtrlImage);
-	pImage->setImagePath("Resource/Obj/SCI_FRS_13_HD/grille2.tga");
+	pImage->setImagePath("Resource/Model/Obj/SCI_FRS_13_HD/grille2.tga");
 	pImage->setPosition(400, 400, 0);
 	pImage->setScale(1, 1, 1);
 	pImage->setVolume(100, 100);

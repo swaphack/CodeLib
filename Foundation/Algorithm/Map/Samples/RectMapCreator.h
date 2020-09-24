@@ -84,7 +84,7 @@ namespace alg
 					return false;
 				}
 
-				RectModuleDirection reverseDir;
+				RectModuleDirection reverseDir = RectModuleDirection::LEFT;
 				switch (dir)
 				{
 				case alg::map::RectModuleDirection::LEFT:

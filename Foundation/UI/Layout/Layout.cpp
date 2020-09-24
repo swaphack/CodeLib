@@ -181,79 +181,16 @@ void Layout::onLayoutSizeChanged(const math::Size& innerSize)
 		// 内部大小
 		const math::Size& srcSize = child->getSize();
 
-		float xx, yy, ww, hh;
-		calLayoutPosition(child, srcSize, innerSize, xx, yy);
-		calLayoutSize(child, parentSize, innerSize, ww, hh);
-		ww -= ww * x;
-		yy -= hh * y;
+		math::Vector2 point;
+		math::Size size;
 
-		child->resize(math::Rect(xx, yy, ww, hh));
+		calLayoutSpace(child, parentSize, innerSize, point, size);
+
+		child->resize(math::Rect(innerSize, size));
 	}
 }
 
-void Layout::calLayoutPosition(LayoutItem* child, const math::Size& srcSize, const math::Size& newSize, float& x, float& y)
-{
-	if (child == nullptr)
-	{
-		return;
-	}
-
-	const math::Rect& itemRect = child->getGeometry();
-
-	const math::Vector2 anchorPoint = child->getAnchorPoint();
-
-	x = anchorPoint.getX();
-	y = anchorPoint.getY();
-	/*
-	switch (anchorPos)
-	{
-	case ui::EAP_NONE:
-		x = itemRect.getX() / srcSize.getWidth() * newSize.getWidth();
-		y = itemRect.getY() / srcSize.getHeight() * newSize.getHeight();
-		break;
-	case ui::EAP_DOWN_LEFT:
-		x = 0;
-		y = 0;
-		break;
-	case ui::EAP_DOWN_CENTER:
-		x = newSize.getWidth() * 0.5f;
-		y = 0;
-		break;
-	case ui::EAP_DOWN_RIGHT:
-		x = newSize.getWidth();
-		y = 0;
-		break;
-	case ui::EAP_CENTER_LEFT:
-		x = 0;
-		y = newSize.getHeight() * 0.5f;
-		break;
-	case ui::EAP_CENTER_CENTER:
-		x = newSize.getWidth() * 0.5f;
-		y = newSize.getHeight() * 0.5f;
-		break;
-	case ui::EAP_CENTER_RIGHT:
-		x = newSize.getWidth();
-		y = newSize.getHeight() * 0.5f;
-		break;
-	case ui::EAP_UP_LEFT:
-		x = 0;
-		y = newSize.getHeight();
-		break;
-	case ui::EAP_UP_CENTER:
-		x = newSize.getWidth() * 0.5f;
-		y = newSize.getHeight();
-		break;
-	case ui::EAP_UP_RIGHT:
-		x = newSize.getWidth();
-		y = newSize.getHeight();
-		break;
-	default:
-		break;
-	}
-	*/
-}
-
-void Layout::calLayoutSize(LayoutItem* child, const math::Size& srcSize, const math::Size& newSize, float& w, float& h)
+void ui::Layout::calLayoutSpace(LayoutItem* child, const math::Size& srcSize, const math::Size& newSize, math::Vector2& point, math::Size& size)
 {
 	if (child == nullptr)
 	{
@@ -263,12 +200,14 @@ void Layout::calLayoutSize(LayoutItem* child, const math::Size& srcSize, const m
 	float scaleX = newSize.getWidth() / srcSize.getWidth();
 	float scaleY = newSize.getHeight() / srcSize.getHeight();
 	float scale = 1;
-	if (scaleX < 1 || scaleY < 1)
-	{
-		scale = scaleX < scaleY ? scaleX : scaleY;
-	}
+
+	scale = scaleX < scaleY ? scaleX : scaleY;
 
 	const math::Size& childSize = child->getSize();
-	w = childSize.getWidth() * scale;
-	h = childSize.getHeight() * scale;
+	size.setWidth(childSize.getWidth() * scale);
+	size.setHeight(childSize.getHeight() * scale);
+
+	const math::Vector2& childPos = child->getOrgin();
+	point.setX(childPos.getX() * scale);
+	point.setY(childPos.getY() * scale);
 }

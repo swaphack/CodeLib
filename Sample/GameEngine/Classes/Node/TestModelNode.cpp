@@ -144,7 +144,7 @@ void TestModelNode::testFog()
 void TestModelNode::test3ds()
 {
 	Model3DS* pModel = CREATE_NODE(Model3DS);
-	pModel->load("Resource/3DS/Bld_38.3ds");
+	pModel->load("Resource/Model/3DS/Bld_38.3ds");
 	pModel->setScale(100);
 	pModel->setPosition(500, 500, 0);
 	pModel->setVolume(400, 400, 400);
@@ -164,8 +164,8 @@ void TestModelNode::test3ds()
 
 void TestModelNode::testObj()
 {
-	//std::string filename = "Resource/Obj/SCI_FRS_13_HD/SCI_FRS_13_HD.obj";
-	std::string filename = "Resource/Obj/Skull_v3_L2/12140_Skull_v3_L2.obj";
+	//std::string filename = "Resource/Model/Obj/SCI_FRS_13_HD/SCI_FRS_13_HD.obj";
+	std::string filename = "Resource/Model/Obj/Skull_v3_L2/12140_Skull_v3_L2.obj";
 
 	ModelObj* pModel = CREATE_NODE(ModelObj);
 	pModel->load(filename);
@@ -189,7 +189,7 @@ void TestModelNode::testObj()
 void TestModelNode::testFbx()
 {
 	ModelFbx* pModel = CREATE_NODE(ModelFbx);
-	pModel->load("Resource/fbx/LANCER_EVOLUTION/LANCEREVOX.FBX");
+	pModel->load("Resource/Model/fbx/LANCER_EVOLUTION/LANCEREVOX.FBX");
 	pModel->setScale(200);
 	pModel->setPosition(512, 384);
 	pModel->setRotation(90, 0, 90);

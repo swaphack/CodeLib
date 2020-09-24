@@ -2,7 +2,7 @@
 <root width="960" height="640" layout="1">
   <Layout rect="0,0,400,600" boxvisible="1" margin="0,0,0,0" anchorPoint="0,0">
     <Layout rect="200,200,200,200" boxvisible="1" margin="0,0,0,0" anchorPoint="0,0">
-      <Text rect="200,200,200,50" text="255" path="Resource/Font/font_3.ttf" fontsize="24" anchorPoint="1,1"/>
+      <Text rect="200,200,200,50" dimensions="200,50" text="255" path="Resource/Font/font_3.ttf" fontsize="24" anchorPoint="1,1"/>
     </Layout>
   </Layout>
 </root>
