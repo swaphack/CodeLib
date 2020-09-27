@@ -18,6 +18,6 @@ namespace render
 	protected:
 		void onPlaneBodyChanged();
 	private:
-		RectVertex _rectPosition;
+		RectVertex _rectVertex;
 	};
 }

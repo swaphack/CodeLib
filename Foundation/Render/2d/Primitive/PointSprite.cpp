@@ -49,8 +49,8 @@ int render::PointSprite::getSpriteCount() const
 
 void render::PointSprite::updatePointSprite()
 {
-	math::Vector3 leftDown = _rectVertex.leftDown;
-	math::Vector3 rightUp = _rectVertex.rightUp;
+	math::Vector3 leftDown = _rectPoints.leftDown;
+	math::Vector3 rightUp = _rectPoints.rightUp;
 
 	this->removeAllPoints();
 

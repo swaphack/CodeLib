@@ -41,7 +41,7 @@ bool TestMainScene::init()
 
 	//this->addChild(CREATE_NODE(TestXFBNode));
 
-	//this->addChild(CREATE_NODE(TestImageNode));
+	this->addChild(CREATE_NODE(TestImageNode));
 
 	//this->addChild(CREATE_NODE(TestMeshNode));
 

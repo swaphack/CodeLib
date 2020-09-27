@@ -34,6 +34,10 @@ void render::FragmentSample::clearSampelMask()
 	_sampleMask.clear();
 }
 
+void render::FragmentSample::begin()
+{
+}
+
 void render::FragmentSample::update()
 {
 	FragmentSampleType sampleType = (FragmentSampleType)getEnableMode();
@@ -49,4 +53,8 @@ void render::FragmentSample::update()
 			GLState::setSampleMask(item.first, item.second);
 		}
 	}
+}
+
+void render::FragmentSample::end()
+{
 }

@@ -198,21 +198,16 @@ LayoutItem* UIProxy::initLayoutItem(tinyxml2::XMLElement* xmlNode)
 	}
 	IElement* element = iter->second;
 
-	WidgetLoader* loader = element->as<WidgetLoader>();
-	if (loader == nullptr)
+	if (element == nullptr)
 	{
 		return nullptr;
 	}
 
-	loader->setLayoutItem(nullptr);
-	loader->setWidget(nullptr);
-
-	if (!loader->load(xmlNode))
+	if (!element->load(xmlNode))
 	{
 		return nullptr;
 	}
-	loader->getLayoutItem()->showWidgetInfo();
-	return loader->getLayoutItem();
+	return element->getLayoutItem();
 }
 
 bool UIProxy::loadLayout(Layout* pLayout, tinyxml2::XMLElement* xmlNode)
@@ -232,7 +227,7 @@ bool UIProxy::loadLayout(Layout* pLayout, tinyxml2::XMLElement* xmlNode)
 			pLayout->addItem(childItem);
 			if (pLayout->getWidget() && childItem->getWidget())
 			{
-				pLayout->getWidget()->addChild(childItem->getWidget());
+				pLayout->getWidget()->addWidget(childItem->getWidget());
 			}
 
 			Layout* childLayout = childItem->as<Layout>();

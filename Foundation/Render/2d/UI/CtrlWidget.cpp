@@ -29,11 +29,12 @@ bool render::CtrlWidget::init()
 	_notify->addListen(NodeNotifyType::BODY, [this]() {
 		onCtrlWidgetBodyChange();
 	});
-
+	
+	
  	FragmentBlend* pBlend = this->getFragOperator()->getHandle<FragmentBlend>();
 	if (pBlend)
 	{
-		pBlend->setEnabled(true);
+		pBlend->setEnabled(false);
 	}
 
 	FragmentDepthTest* pDepthTest = this->getFragOperator()->getHandle<FragmentDepthTest>();
@@ -131,10 +132,10 @@ void render::CtrlWidget::onBlendChange()
 
 void render::CtrlWidget::onCtrlWidgetBodyChange()
 {
-	float x0 = _realRectVertex.leftDown.getX();
-	float y0 = _realRectVertex.leftDown.getY();
-	float x1 = _realRectVertex.rightDown.getX();
-	float y1 = _realRectVertex.leftUp.getY();
+	float x0 = _realRectPoints.leftDown.getX();
+	float y0 = _realRectPoints.leftDown.getY();
+	float x1 = _realRectPoints.rightDown.getX();
+	float y1 = _realRectPoints.leftUp.getY();
 
 	_clipRect.setOrigin(x0, y0);
 	_clipRect.setSize(x1 - x0, y1 - y0);

@@ -51,7 +51,7 @@ void render::FragmentOperator::update()
 {
 	for (auto item : _handles)
 	{
-		item.second->update();
+		item.second->updateFragmentHand();
 	}
 }
 

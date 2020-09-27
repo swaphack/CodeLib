@@ -18,8 +18,8 @@ TestImageNode::~TestImageNode()
 
 void TestImageNode::initNodes()
 {
-	//testImage();
-	testPointSprite();
+	testImages();
+	//testPointSprite();
 }
 
 void TestImageNode::testImage()
@@ -212,6 +212,31 @@ void TestImageNode::testPointSprite()
 	Utility::loadShaderVF(pSprite, "Shader/point_sprite/point_sprite.vs", "Shader/point_sprite/point_sprite.fs");
 
 	this->addChild(pSprite);
+}
+
+void TestImageNode::testImages()
+{
+	std::string filepath = "Resource/Image/world.jpg";
+
+	Node* node = nullptr;
+	node = CREATE_NODE(CtrlLayout);
+	node->setAnchorPoint(0.0f, 0.0f);
+	node->setPosition(0, 0);
+	node->setVolume(1024, 768);
+	this->addChild(node);
+
+	for (int i = 0; i < 10; i++)
+	{
+		auto pChild = CREATE_NODE(CtrlImage);
+		pChild->setImagePath(filepath);
+		pChild->setAnchorPoint(0.0f, 0.0f);
+		pChild->setPosition(20 * i, 20 * i);
+		pChild->setVolume(200, 200);
+		this->addChild(pChild);
+
+		Utility::loadDefaultShader(pChild);
+	}
+
 }
 
 void TestImageNode::onTouchImage(Node* node, float x, float y, bool include)

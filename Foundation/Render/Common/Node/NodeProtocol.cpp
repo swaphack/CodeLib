@@ -187,7 +187,7 @@ float SpaceProtocol::getRotationZ() const
 //////////////////////////////////////////////////////////////////////////
 BodyProtocol::BodyProtocol()
 {
-	this->setAnchorPoint(0.5, 0.5, 0.5);
+	this->setAnchorPoint(0.5f, 0.5f, 0.5f);
 	this->setVolume(0, 0, 0);
 }
 
@@ -218,7 +218,6 @@ void BodyProtocol::setAnchorPoint(const math::Vector2& anchor)
 {
 	_anchor = anchor;
 	onBodyChange();
-
 }
 
 const math::Vector3& BodyProtocol::getAnchorPoint()

@@ -39,12 +39,9 @@ void WidgetLoader::parseAttributes()
 
 	LOAD_WIDGET_ATTRIBUTE(PROPERTY_NAME, setName, name);
 	LOAD_WIDGET_ATTRIBUTE(PROPERTY_ANCHOR, setAnchorPoint, anchor);
-
-	if (getCastWidget())
-	{
-		getCastWidget()->setPosition(rect.getOrigin());
-		getCastWidget()->setVolume(rect.getSize());
-	}
+	
+	this->getCastWidget()->setPosition(rect.getOrigin());
+	this->getCastWidget()->setVolume(rect.getSize());
 }
 
 void WidgetLoader::saveAttributes()

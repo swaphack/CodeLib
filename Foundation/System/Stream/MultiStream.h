@@ -35,7 +35,7 @@ namespace sys
 		// 初始化流
 		void initSteam(uint32_t width, uint32_t height, uint32_t depth = 1);
 		// 扩展流，如果有旧数据，旧数据也复制到新流中
-		void expendStream(uint32_t width, uint32_t height, uint32_t depth = 1, bool bBottom = false);
+		void expendStream(uint32_t width, uint32_t height, uint32_t depth = 1, bool bBottom = true);
 
 		// 从流中读取一组2维数据
 		void readBlock(uint32_t x, uint32_t y, uint32_t width, uint32_t height, MemoryData& outData, uint32_t z = 0);
@@ -59,7 +59,7 @@ namespace sys
 		// 获取高度
 		inline uint32_t getHeigth() const { return _heigth; }
 		// 获取深度
-		inline uint32_t getDepth() const { return _deep; }
+		inline uint32_t getDepth() const { return _depth; }
 		// 获取数据
 		inline const char* getData() const { return (char*)_data.getValue(); }
 
@@ -72,6 +72,6 @@ namespace sys
 		// 高度
 		uint32_t _heigth;
 		// 深度
-		uint32_t _deep;
+		uint32_t _depth;
 	};
 }

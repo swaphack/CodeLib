@@ -61,7 +61,7 @@ namespace render
 		* @param anchor 锚点
 		* @param rectVertex 矩形顶点
 		*/
-		static void calRect(const math::Vector3& position, const math::Volume& volume, const math::Vector3& anchor, RectVectices& rectVertex);
+		static void calRect(const math::Vector3& position, const math::Volume& volume, const math::Vector3& anchor, RectPoints& rectVertex);
 		/**
 		* 立方体顶点的计算
 		* @param position 位置
@@ -69,7 +69,7 @@ namespace render
 		* @param anchor 锚点
 		* @param cube 正方体
 		*/
-		static void calCube(const math::Vector3& position, const math::Volume& volume, const math::Vector3& anchor, CubeVectices& cube);
+		static void calCube(const math::Vector3& position, const math::Volume& volume, const math::Vector3& anchor, CubePoints& cube);
 	private:
 		// 视窗大小
 		static math::Volume GL_VIEW_SIZE;

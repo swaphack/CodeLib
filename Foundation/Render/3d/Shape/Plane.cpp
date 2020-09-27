@@ -30,19 +30,19 @@ void render::Plane::onPlaneBodyChanged()
 {
 	math::Size size = math::Size(this->getWidth(), this->getHeight());
 	math::Rect rect(math::Vector2(), size);
-	VertexTool::setTexture2DCoords(&_rectPosition, size, rect);
-	VertexTool::setTexture2DVertices(&_rectPosition, math::Vector3(), _volume, _anchor);
+	VertexTool::setTexture2DCoords(&_rectVertex, size, rect);
+	VertexTool::setTexture2DVertices(&_rectVertex, math::Vector3(), _volume, _anchor);
 
 	auto pMesh = getMesh();
 	if (pMesh)
 	{
 		float uvs[8] = { 0 };
-		memcpy(uvs, _rectPosition.uvs, sizeof(uvs));
+		memcpy(uvs, _rectVertex.uvs, sizeof(uvs));
 
-		pMesh->getMeshDetail()->setVertices(4, _rectPosition.vertices, 3);
-		pMesh->getMeshDetail()->setColors(4, _rectPosition.colors, 4);
+		pMesh->getMeshDetail()->setVertices(4, _rectVertex.vertices, 3);
+		pMesh->getMeshDetail()->setColors(4, _rectVertex.colors, 4);
 		pMesh->getMeshDetail()->setUVs(4, uvs, 2);
-		pMesh->getMeshDetail()->setIndices(6, _rectPosition.indices);
+		pMesh->getMeshDetail()->setIndices(6, _rectVertex.indices);
 	}
 
 	this->updateMeshData();

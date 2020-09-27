@@ -22,6 +22,6 @@ namespace render
 		virtual void reloadData();
 	protected:
 		DepthFunction _func = DepthFunction::LESS;
-		DepthFunction _lastFunc = DepthFunction::LESS;
+		DepthFunction _lastFunc = DepthFunction::LEQUAL;
 	};
 }

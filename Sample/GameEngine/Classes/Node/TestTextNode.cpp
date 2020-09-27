@@ -52,8 +52,6 @@ void TestTextNode::testTimeText()
 	pRepeateForeverAction->setAction(pSequenceAction);
 
 	pCtrlText->getActionProxy()->runAction(pRepeateForeverAction);
-
-	
 }
 
 void TestTextNode::testChineseText()

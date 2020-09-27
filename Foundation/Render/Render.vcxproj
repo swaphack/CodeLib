@@ -83,6 +83,7 @@
     <ClCompile Include="2d\UI\CtrlFrame.cpp" />
     <ClCompile Include="2d\UI\CtrlImage.cpp" />
     <ClCompile Include="2d\UI\CtrlLayout.cpp" />
+    <ClCompile Include="2d\UI\CtrlMask.cpp" />
     <ClCompile Include="2d\UI\CtrlScrollView.cpp" />
     <ClCompile Include="2d\UI\CtrlStencil.cpp" />
     <ClCompile Include="2d\UI\CtrlText.cpp" />
@@ -292,6 +293,7 @@
     <ClInclude Include="2d\UI\CtrlFrame.h" />
     <ClInclude Include="2d\UI\CtrlImage.h" />
     <ClInclude Include="2d\UI\CtrlLayout.h" />
+    <ClInclude Include="2d\UI\CtrlMask.h" />
     <ClInclude Include="2d\UI\CtrlScrollView.h" />
     <ClInclude Include="2d\UI\CtrlStencil.h" />
     <ClInclude Include="2d\UI\CtrlText.h" />

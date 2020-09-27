@@ -18,6 +18,9 @@ bool IElement::load(tinyxml2::XMLElement* pXmlNode, bool clean/* = true*/)
 	{
 		return false;
 	}
+
+	this->setLayoutItem(nullptr);
+	this->setWidget(nullptr);
 	if (clean)
 	{
 		_nodeProperty->Clear();
@@ -39,8 +42,8 @@ bool IElement::load(tinyxml2::XMLElement* pXmlNode, bool clean/* = true*/)
 
 	if (getLayoutItem())
 	{
+		//getLayoutItem()->setName(pXmlNode->Name());
 		getLayoutItem()->setWidget(getWidget());
-		getLayoutItem()->setName(pXmlNode->Name());
 	}
 
 	return true;

@@ -27,7 +27,7 @@ bool render::PixelPostProcessingNode::init()
 	}
 
 	_notify->addListen(NodeNotifyType::BODY, [this]() {
-		Tool::calRect(math::Vector3(), _volume, _anchor, _rectVertex);
+		Tool::calRect(math::Vector3(), _volume, _anchor, _rectPoints);
 		this->updateTextureSize();
 	});
 
@@ -68,10 +68,10 @@ void render::PixelPostProcessingNode::afterDrawNode()
 void render::PixelPostProcessingNode::updateTextureSize()
 {
 	float vertices[] = {
-		_rectVertex.leftDown.getX(),_rectVertex.leftDown.getY(),
-		_rectVertex.rightDown.getX(),_rectVertex.rightDown.getY(),
-		_rectVertex.rightUp.getX(),_rectVertex.rightUp.getY(),
-		_rectVertex.leftUp.getX(),_rectVertex.leftUp.getY(),
+		_rectPoints.leftDown.getX(),_rectPoints.leftDown.getY(),
+		_rectPoints.rightDown.getX(),_rectPoints.rightDown.getY(),
+		_rectPoints.rightUp.getX(),_rectPoints.rightUp.getY(),
+		_rectPoints.leftUp.getX(),_rectPoints.leftUp.getY(),
 	};
 
 	float uvs[] = {

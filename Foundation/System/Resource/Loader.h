@@ -36,10 +36,10 @@ namespace sys
 		}
 		// ╪стьндвж
 		template<typename T, typename = std::enable_if<std::is_base_of<ILabelLoader, T>::value, T>::type>
-		static T* loadLabel(const TextDefine& filename)
+		static T* loadLabel(const TextDefine& config)
 		{
 			T* t = new T();
-			if (!t->load(filename))
+			if (!t->load(config))
 			{
 				delete t;
 				return nullptr;

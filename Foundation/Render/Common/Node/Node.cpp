@@ -312,7 +312,7 @@ void Node::sortChildren()
 			oIt = orderNodes.begin();
 			while (oIt != orderNodes.end())
 			{
-				if ((*oIt)->getZOrder() < node->getZOrder())
+				if ( node->getZOrder() < (*oIt)->getZOrder())
 				{
 					orderNodes.insert(oIt, node);
 					bInsert = true;

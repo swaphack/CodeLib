@@ -41,6 +41,22 @@ EnableMode render::FragmentHandle::getEnableMode()
 	return _enableMode;
 }
 
+void render::FragmentHandle::updateFragmentHand()
+{
+	if (_enabled)
+	{
+		GLState::enable(_enableMode);
+	}
+	else
+	{
+		GLState::disable(_enableMode);
+	}
+	if (_enabled)
+	{
+		this->update();
+	}
+}
+
 void render::FragmentHandle::begin()
 {
 	if (_enableMode != EnableMode::NONE)
@@ -52,14 +68,7 @@ void render::FragmentHandle::begin()
 
 void render::FragmentHandle::update()
 {
-	if (_enabled)
-	{
-		GLState::enable(_enableMode);
-	}
-	else
-	{
-		GLState::disable(_enableMode);
-	}
+	
 }
 
 void render::FragmentHandle::end()

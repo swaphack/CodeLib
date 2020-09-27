@@ -135,9 +135,9 @@ void LayoutItem::setWidgetGeomerty(const math::Rect& geometry, const math::Vecto
 		return;
 	}
 
-	m_pWidget->setPosition(geometry.getOrigin());
-	m_pWidget->setVolume(geometry.getWidth(), geometry.getHeight());
 	m_pWidget->setAnchorPoint(anchorPoint);
+	m_pWidget->setPosition(geometry.getOrigin());
+	m_pWidget->setVolume(geometry.getSize());
 }
 
 void LayoutItem::calAnchorPoint(float& x, float& y)

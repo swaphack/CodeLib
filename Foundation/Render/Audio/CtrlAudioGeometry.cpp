@@ -209,7 +209,7 @@ CtrlAudioGeometryPolygon* CtrlAudioGeometry::addPolygon(const std::vector<math::
 	return polygon;
 }
 
-CtrlAudioGeometryPolygon* CtrlAudioGeometry::addPolygon(const RectVectices& vertexes)
+CtrlAudioGeometryPolygon* CtrlAudioGeometry::addPolygon(const RectPoints& vertexes)
 {
 	if (_geometry == nullptr)
 	{
@@ -266,7 +266,7 @@ void CtrlAudioGeometry::onPolygonsChange()
 	for (int i = 0; i < (int)CubeFace::MAX; i++)
 	{
 		CtrlAudioGeometryPolygon* polygon = getPolygon((CubeFace)i);
-		RectVectices rectVertex = getRectVertex(i);
+		RectPoints rectVertex = getRectVertex(i);
 		if (polygon == nullptr)
 		{
 			this->addPolygon(rectVertex);
@@ -278,7 +278,7 @@ void CtrlAudioGeometry::onPolygonsChange()
 	}
 }
 
-const RectVectices& CtrlAudioGeometry::getRectVertex(int i)
+const RectPoints& CtrlAudioGeometry::getRectVertex(int i)
 {
 	if (i < 0 || i >= (int)CubeFace::MAX)
 	{
@@ -444,7 +444,7 @@ bool CtrlAudioGeometryPolygon::setVertexes(const std::vector<math::Vector3>& ver
 	return true;
 }
 
-bool CtrlAudioGeometryPolygon::setVertexes(const RectVectices& vertexes)
+bool CtrlAudioGeometryPolygon::setVertexes(const RectPoints& vertexes)
 {
 	_vertexes.clear();
 	_vertexes.push_back(vertexes.leftDown);

@@ -53,6 +53,8 @@ namespace render
 		*/
 		EnableMode getEnableMode();
 	public:
+		void updateFragmentHand();
+	public:
 		virtual void begin();
 		virtual void update();
 		virtual void end();

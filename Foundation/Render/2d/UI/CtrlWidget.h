@@ -55,7 +55,9 @@ namespace render
 		*	混合改变
 		*/
 		virtual void onBlendChange();
-
+		/**
+		*	形状改变
+		*/
 		void onCtrlWidgetBodyChange();
 	protected:
 		// 控件

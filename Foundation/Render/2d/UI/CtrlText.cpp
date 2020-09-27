@@ -152,36 +152,26 @@ void CtrlText::onTextChange()
 	}
 
 	this->setTextureWithRect(texture);
-
+	/*
 	if (_textDefine.width == 0 || _textDefine.height == 0)
 	{
 		this->setWidth(static_cast<float>(texture->getWidth()));
 		this->setHeight(static_cast<float>(texture->getHeight()));
 	}
+	*/
 
 	math::Size size = math::Size(texture->getWidth(), texture->getHeight());
 	math::Rect rect(math::Vector2(), size);
-	VertexTool::setTexture2DCoords(&_vertexes, size, rect);
+	VertexTool::setTexture2DCoords(&_rectVertex, size, rect);
 
-	math::Vector3 anchor = math::Vector3(0.5f, 0.5f, 0.5f);
+	//math::Vector3 anchor = math::Vector3(0.5f, 0.5f, 0.5f);
+	math::Vector3 anchor = getAnchorPoint();
 	math::Vector3 orgin = getOrgin(size);
 	math::Volume volume = math::Volume(texture->getWidth(), texture->getHeight());
 
-	VertexTool::setTexture2DVertices(&_vertexes, orgin, volume, anchor);
+	VertexTool::setTexture2DVertices(&_rectVertex, orgin, volume, anchor);
 
-	auto pMesh = getMesh();
-	if (pMesh)
-	{
-		float uvs[8] = { 0 };
-		memcpy(uvs, _vertexes.uvs, sizeof(uvs));
-		render::VertexTool::setTexture2DFlip(uvs, _bFlipX, _bFlipY);
-		pMesh->getMeshDetail()->setVertices(4, _vertexes.vertices, 3);
-		pMesh->getMeshDetail()->setColors(4, _vertexes.colors, 4);
-		pMesh->getMeshDetail()->setUVs(4, uvs, 2);
-		pMesh->getMeshDetail()->setIndices(6, _vertexes.indices);
-	}
-
-	this->updateMeshData();
+	updateCtrlFrameMeshData();
 }
 
 math::Vector3 render::CtrlText::getOrgin(const math::Size& size)

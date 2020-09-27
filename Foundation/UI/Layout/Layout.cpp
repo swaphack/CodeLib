@@ -179,14 +179,12 @@ void Layout::onLayoutSizeChanged(const math::Size& innerSize)
 		}
 
 		// 内部大小
-		const math::Size& srcSize = child->getSize();
-
 		math::Vector2 point;
 		math::Size size;
 
 		calLayoutSpace(child, parentSize, innerSize, point, size);
 
-		child->resize(math::Rect(innerSize, size));
+		child->resize(math::Rect(point, size));
 	}
 }
 
@@ -202,6 +200,8 @@ void ui::Layout::calLayoutSpace(LayoutItem* child, const math::Size& srcSize, co
 	float scale = 1;
 
 	scale = scaleX < scaleY ? scaleX : scaleY;
+
+	scale = 1;
 
 	const math::Size& childSize = child->getSize();
 	size.setWidth(childSize.getWidth() * scale);

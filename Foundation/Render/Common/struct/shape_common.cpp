@@ -2,12 +2,12 @@
 #include "mathlib.h"
 using namespace render;
 
-RectVectices::RectVectices()
+RectPoints::RectPoints()
 {
 
 }
 
-bool RectVectices::containPointByArea(float x, float y)
+bool RectPoints::containPointByArea(float x, float y)
 {
 	bool bRet = false;
 	
@@ -28,7 +28,7 @@ bool RectVectices::containPointByArea(float x, float y)
 	return bRet;
 }
 
-math::Vector3 RectVectices::getAnchorByPoint(float x, float y)
+math::Vector3 RectPoints::getAnchorByPoint(float x, float y)
 {
 	float xx = (x - leftUp.getX()) / (rightUp.getX() - leftUp.getX());
 	float yy = (y - leftUp.getY()) / (leftUp.getY() - leftDown.getY());
@@ -36,7 +36,7 @@ math::Vector3 RectVectices::getAnchorByPoint(float x, float y)
 	return math::Vector3(xx, yy);
 }
 
-bool RectVectices::containPointByPolygon(float x, float y)
+bool RectPoints::containPointByPolygon(float x, float y)
 {
 	math::Vector2 nvec[4];
 	nvec[0] = math::Vector2(leftDown.getX(), leftDown.getY());
@@ -48,7 +48,7 @@ bool RectVectices::containPointByPolygon(float x, float y)
 	return p.contains(math::Vector2(x, y));
 }
 
-double RectVectices::getArea(const math::Vector3& p1, const math::Vector3& p2, const math::Vector3& p3)
+double RectPoints::getArea(const math::Vector3& p1, const math::Vector3& p2, const math::Vector3& p3)
 {
 	math::Vector3 v1 = p2 - p1;
 	math::Vector3 v2 = p3 - p1;
@@ -60,84 +60,84 @@ double RectVectices::getArea(const math::Vector3& p1, const math::Vector3& p2, c
 	*/
 }
 
-float render::RectVectices::getX()
+float render::RectPoints::getX()
 {
 	return leftDown.getX();
 }
 
-float render::RectVectices::getY()
+float render::RectPoints::getY()
 {
 	return leftDown.getY();
 }
 
-float render::RectVectices::getWidth()
+float render::RectPoints::getWidth()
 {
 	return rightDown.getX() - leftDown.getX();
 }
 
-float render::RectVectices::getHeight()
+float render::RectPoints::getHeight()
 {
 	return rightUp.getY() - rightDown.getY();
 }
 
 //////////////////////////////////////////////////////////////////////////
-void render::CubeVectices::setFrontLeftDownPosition(const math::Vector3& point)
+void render::CubePoints::setFrontLeftDownPosition(const math::Vector3& point)
 {
 	front.leftDown = point;
 	left.rightDown = point;
 	bottom.leftUp = point;
 }
 
-void render::CubeVectices::setFrontRightDownPosition(const math::Vector3& point)
+void render::CubePoints::setFrontRightDownPosition(const math::Vector3& point)
 {
 	front.rightDown = point;
 	right.leftDown = point;
 	bottom.rightUp = point;
 }
 
-void render::CubeVectices::setFrontRightUpPosition(const math::Vector3& point)
+void render::CubePoints::setFrontRightUpPosition(const math::Vector3& point)
 {
 	front.rightUp = point;
 	right.leftUp = point;
 	top.rightDown = point;
 }
 
-void render::CubeVectices::setFrontLeftUpPosition(const math::Vector3& point)
+void render::CubePoints::setFrontLeftUpPosition(const math::Vector3& point)
 {
 	front.leftUp = point;
 	left.rightUp = point;
 	top.leftDown = point;
 }
 
-void render::CubeVectices::setBackLeftDownPosition(const math::Vector3& point)
+void render::CubePoints::setBackLeftDownPosition(const math::Vector3& point)
 {
 	back.rightDown = point;
 	left.leftDown = point;
 	bottom.leftDown = point;
 }
 
-void render::CubeVectices::setBackRightDownPosition(const math::Vector3& point)
+void render::CubePoints::setBackRightDownPosition(const math::Vector3& point)
 {
 	back.leftDown = point;
 	right.rightDown = point;
 	bottom.rightDown = point;
 }
 
-void render::CubeVectices::setBackRightUpPosition(const math::Vector3& point)
+void render::CubePoints::setBackRightUpPosition(const math::Vector3& point)
 {
 	back.leftUp = point;
 	top.rightUp = point;
 	right.rightUp = point;
 }
 
-void render::CubeVectices::setBackLeftUpPosition(const math::Vector3& point)
+void render::CubePoints::setBackLeftUpPosition(const math::Vector3& point)
 {
 	back.rightUp = point;
 	left.leftUp = point;
 	top.leftUp = point;
 }
 
-bool render::CubeVectices::containPointByPolygon(float x, float y)
+bool render::CubePoints::containPointByPolygon(float x, float y)
 {
 	// ͶӰ
 	return front.containPointByPolygon(x, y)

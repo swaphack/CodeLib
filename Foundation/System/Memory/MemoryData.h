@@ -53,6 +53,7 @@ namespace sys
 		char& getValue(size_t index);
 	public:
 		void init(size_t len);
+		void init(size_t len, uint32_t typeSize);
 		/**
 		*	≥ı ºªØ
 		*/
@@ -70,9 +71,10 @@ namespace sys
 		void init(size_t len, const float* value);
 		void init(size_t len, const double* value);
 	public:
-		void set(size_t offset, int size, const char* value);
-		void insert(size_t offset, int size, const char* value);
-		void remove(size_t offset, int size);
+		void set(size_t offset, size_t size, const char* value);
+		void reset(size_t offset, size_t size);
+		void insert(size_t offset, size_t size, const char* value);
+		void remove(size_t offset, size_t size);
 
 		void resize(size_t len, uint32_t typeSize = 1);
 	public:

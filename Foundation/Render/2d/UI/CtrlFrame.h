@@ -32,10 +32,8 @@ namespace render
 		// 是否垂直翻转
 		bool isFlipY();
 	protected:
-		void onTextureChange();
+		void updateCtrlFrameMeshData();
 	protected:
-		// 顶点坐标信息
-		RectVertex _vertexes;
 		// 是否水平翻转
 		bool _bFlipX = false;
 		// 是否垂直翻转

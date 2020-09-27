@@ -43,8 +43,8 @@ namespace render
 		*/
 		bool _bBoxVisible = false;
 		// 模型框
-		CubeVectices _boxVertex;
+		CubePoints _boxVertex;
 		// 实际模型框
-		CubeVectices _realBoxVertex;
+		CubePoints _realBoxVertex;
 	};
 }

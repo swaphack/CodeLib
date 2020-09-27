@@ -29,11 +29,11 @@ bool CtrlFrame::init()
 	}
 
 	_notify->addListen(NodeNotifyType::BODY, [this]() {
-		onTextureChange();
+		updateCtrlFrameMeshData();
 	});
 
 	_notify->addListen(NodeNotifyType::TEXTURE, [this](){
-		onTextureChange();
+		updateCtrlFrameMeshData();
 	});
 
 	return true;
@@ -86,24 +86,19 @@ bool CtrlFrame::isFlipY()
 	return _bFlipY;
 }
 
-void CtrlFrame::onTextureChange()
+void CtrlFrame::updateCtrlFrameMeshData()
 {
-	math::Size size = math::Size(this->getWidth(), this->getHeight());
-	math::Rect rect(math::Vector2(), size);
-	VertexTool::setTexture2DCoords(&_vertexes, size, rect);
-	VertexTool::setTexture2DVertices(&_vertexes, math::Vector3(), _volume, _anchor);
-
 	auto pMesh = getMesh();
 	if (pMesh)
 	{
 		float uvs[8] = { 0 };
-		memcpy(uvs, _vertexes.uvs, sizeof(uvs));
+		memcpy(uvs, _rectVertex.uvs, sizeof(uvs));
 		render::VertexTool::setTexture2DFlip(uvs, _bFlipX, _bFlipY);
 
-		pMesh->getMeshDetail()->setVertices(4, _vertexes.vertices, 3);
-		pMesh->getMeshDetail()->setColors(4, _vertexes.colors, 4);
+		pMesh->getMeshDetail()->setVertices(4, _rectVertex.vertices, 3);
+		pMesh->getMeshDetail()->setColors(4, _rectVertex.colors, 4);
 		pMesh->getMeshDetail()->setUVs(4, uvs, 2);
-		pMesh->getMeshDetail()->setIndices(6, _vertexes.indices);
+		pMesh->getMeshDetail()->setIndices(6, _rectVertex.indices);
 	}
 
 	this->updateMeshData();

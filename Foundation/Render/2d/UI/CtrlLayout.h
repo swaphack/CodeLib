@@ -5,7 +5,7 @@
 namespace render
 {
 	class CtrlImage;
-	class Mask;
+	class CtrlMask;
 
 	class CtrlLayout : public CtrlWidget
 	{
@@ -22,9 +22,17 @@ namespace render
 		*/
 		void setBackgroundColor(const sys::Color4B& color);
 		/**
+		*	±³¾°ÑÕÉ«
+		*/
+		const sys::Color4B& getBackgroundColor() const;
+		/**
 		*	ÉèÖÃ±³¾°Í¼Æ¬
 		*/
-		void setBackgroundImage(const std::string& filepath);
+		void setBackgroundImagePath(const std::string& filepath);
+		/**
+		*	±³¾°Í¼Æ¬
+		*/
+		const std::string& getBackgroundImagePath() const;
 		/**
 		*	±³¾°Í¼Æ¬
 		*/
@@ -32,7 +40,23 @@ namespace render
 		/**
 		*	±³¾°ÑÕÉ«
 		*/
-		Mask* getBackgroundMask() const;
+		CtrlMask* getBackgroundMask() const;
+		/**
+		*	ÉèÖÃ±³¾°Í¼Æ¬ÊÇ·ñ¿É¼û
+		*/
+		void setBackgroudImageVisible(bool bVisible);
+		/**
+		*	±³¾°Í¼Æ¬ÊÇ·ñ¿É¼û
+		*/
+		bool isBackgroudImageVisible() const;
+		/**
+		*	ÉèÖÃ±³¾°ÑÕÉ«ÊÇ·ñ¿É¼û
+		*/
+		void setBackgroudMaskVisible(bool bVisible);
+		/**
+		*	±³¾°ÑÕÉ«ÊÇ·ñ¿É¼û
+		*/
+		bool isBackgroudMaskVisible() const;
 	private:
 		/**
 		*	±³¾°Í¼Æ¬
@@ -41,7 +65,7 @@ namespace render
 		/**
 		*	±³¾°ÑÕÉ«
 		*/
-		Mask* _backgroundMask = nullptr;
+		CtrlMask* _backgroundMask = nullptr;
 		
 	};
 }

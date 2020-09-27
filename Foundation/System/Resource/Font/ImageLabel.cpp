@@ -319,14 +319,12 @@ void FT_LABEL::writeStream(uint64_t ch, LabelStream* stream, const Color3B& colo
 			uint8_t bit = _vl == 0 ? 0 : 255;
 			if (bit == 0)
 			{
-				memset(pBuf + RGBA_PIXEL_UNIT * i + (height - j - 1) * width * RGBA_PIXEL_UNIT,
-					0, RGBA_PIXEL_UNIT);
+				memData.reset(RGBA_PIXEL_UNIT * ((height - j - 1) * width + i), RGBA_PIXEL_UNIT);
 			}
 			else
 			{
 				uint8_t ary[RGBA_PIXEL_UNIT] = { color.red, color.green, color.blue, bit };
-				memcpy(pBuf + RGBA_PIXEL_UNIT * i + (height - j - 1) * width * RGBA_PIXEL_UNIT,
-					ary, RGBA_PIXEL_UNIT);
+				memData.set(RGBA_PIXEL_UNIT * ((height - j - 1) * width + i), RGBA_PIXEL_UNIT, (char*)ary);
 			}
 		}
 	}
@@ -391,7 +389,7 @@ void LabelStream::writeOneLineBlock(int width, int height, const char* buffer, i
 	char* faceData = _data.getPtr();
 	for (int i = 0; i < height; i++)
 	{
-		memcpy(faceData + (i + _offsetY + deltaY) * _width + _offsetX, buffer + i * realWidth, realWidth);
+		_data.set((i + _offsetY + deltaY) * _width + _offsetX, realWidth, buffer + i * realWidth);
 	}
 
 	_offsetX += realWidth;
@@ -403,13 +401,27 @@ void LabelStream::writeMultiLineBlock(int width, int height, const char* buffer,
 	int realWidth = width * RGBA_PIXEL_UNIT;
 	int realHeight = getLineHeight();
 
-	int newW = realWidth + _offsetX > getWidth() ? realWidth + _offsetX : getWidth();
+	if (getHeigth() < realHeight)
+	{
+		this->expendStream(getFixWidth(), realHeight);
+	}
+
+	uint32_t offsetX = realWidth + _offsetX;
+	int newW = 0;
+	if (offsetX <= getWidth())
+	{
+		offsetX = getWidth();
+	}
+	else
+	{
+		newW = offsetX;
+	}
 
 	if (newW <= getFixWidth())
 	{// ¿ÉÌî³ä
 		if (newW > getWidth())
 		{
-			this->expendStream(newW, getLineHeight());
+			this->expendStream(newW, getHeigth());
 		}
 	}
 	else
@@ -420,7 +432,7 @@ void LabelStream::writeMultiLineBlock(int width, int height, const char* buffer,
 	char* faceData = _data.getPtr();
 	for (int i = 0; i < height; i++)
 	{
-		memcpy(faceData + (i + _offsetY + deltaY) * _width + _offsetX, buffer + i * realWidth, realWidth);
+		_data.set((i + _offsetY + deltaY) * _width + _offsetX, realWidth, buffer + i * realWidth);
 	}
 
 	_offsetX += realWidth;
@@ -435,7 +447,7 @@ void LabelStream::writeEndLine()
 
 	_lineWidthStack.push(_offsetX);
 
-	this->expendStream(getFixWidth(), getHeigth() + getLineHeight(),1,true);
+	this->expendStream(getFixWidth(), getHeigth() + getLineHeight());
 
 	_offsetX = 0;
 	_offsetY = 0;
@@ -449,7 +461,7 @@ void LabelStream::writeSpaceLine()
 	}
 	_lineWidthStack.push(_offsetX);
 	_lineWidthStack.push(0);
-	this->expendStream(getFixWidth(), getHeigth() + 2 * getLineHeight(), 1, true);
+	this->expendStream(getFixWidth(), getHeigth() + 2 * getLineHeight());
 
 	_offsetX = 0;
 	_offsetY = 0;
@@ -539,8 +551,12 @@ ImageLabel::~ImageLabel()
 
 bool ImageLabel::load(const TextDefine& textDefine)
 {
-	_stream->setFixWidth((uint32_t)textDefine.width * RGBA_PIXEL_UNIT);
-
+	uint32_t fixeWidth = (uint32_t)textDefine.width * RGBA_PIXEL_UNIT;
+	if (fixeWidth > 0)
+	{
+		_stream->setFixWidth(fixeWidth);
+		_stream->expendStream(fixeWidth, 1);
+	}
 	FT_LABEL* label = new FT_LABEL();
 	if (!label->load(textDefine, _stream))
 	{
@@ -554,14 +570,9 @@ bool ImageLabel::load(const TextDefine& textDefine)
 		_stream->format(textDefine.horizontalAlignment);
 	}
 
-	int count = _stream->getWidth() * _stream->getHeigth();
-	uint8_t* destPixels = (uint8_t *)malloc(sizeof(uint8_t)* count);
-	memcpy(destPixels, _stream->getData(), sizeof(uint8_t)* count);
-
-	this->setPixels(destPixels, _stream->getWidth() / RGBA_PIXEL_UNIT, _stream->getHeigth(), RGBA_PIXEL_UNIT);
+	this->setPixels((uint8_t*)_stream->getData(), _stream->getWidth() / RGBA_PIXEL_UNIT, _stream->getHeigth(), RGBA_PIXEL_UNIT);
 	this->setDataFormat(ImageDataFormat::RGBA);
 
-	free(destPixels);
 	_stream->clear();
 
 	return true;

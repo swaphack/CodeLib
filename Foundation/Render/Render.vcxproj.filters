@@ -603,6 +603,9 @@
     <ClCompile Include="Common\View\ViewPort.cpp">
       <Filter>Common\View</Filter>
     </ClCompile>
+    <ClCompile Include="2d\UI\CtrlMask.cpp">
+      <Filter>2d\UI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Common\Node\import.h">
@@ -1382,6 +1385,9 @@
     </ClInclude>
     <ClInclude Include="Common\View\ViewPort.h">
       <Filter>Common\View</Filter>
+    </ClInclude>
+    <ClInclude Include="2d\UI\CtrlMask.h">
+      <Filter>2d\UI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

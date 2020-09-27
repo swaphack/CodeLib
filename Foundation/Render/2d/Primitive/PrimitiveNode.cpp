@@ -16,7 +16,7 @@ PrimitiveNode::~PrimitiveNode()
 
 bool render::PrimitiveNode::init()
 {
-	if (!DrawNode::init())
+	if (!DrawNode2D::init())
 	{
 		return false;
 	}

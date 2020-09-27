@@ -34,11 +34,11 @@ bool render::Mask::init()
 void render::Mask::onMaskBodyChange()
 {
 	this->removeAllPoints();
-	this->appendPoint(_rectVertex.leftDown, getColor());
-	this->appendPoint(_rectVertex.rightDown, getColor());
-	this->appendPoint(_rectVertex.rightUp, getColor());
+	this->appendPoint(_rectPoints.leftDown, getColor());
+	this->appendPoint(_rectPoints.rightDown, getColor());
+	this->appendPoint(_rectPoints.rightUp, getColor());
 
-	this->appendPoint(_rectVertex.leftDown, getColor());
-	this->appendPoint(_rectVertex.rightUp, getColor());
-	this->appendPoint(_rectVertex.leftUp, getColor());
+	this->appendPoint(_rectPoints.leftDown, getColor());
+	this->appendPoint(_rectPoints.rightUp, getColor());
+	this->appendPoint(_rectPoints.leftUp, getColor());
 }

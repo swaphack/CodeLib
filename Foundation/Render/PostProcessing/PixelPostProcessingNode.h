@@ -24,7 +24,7 @@ namespace render
 		void updateTextureSize();
 	private:
 		// 矩形框
-		RectVectices _rectVertex;
+		RectPoints _rectPoints;
 		/**
 		*	界面纹理
 		*/

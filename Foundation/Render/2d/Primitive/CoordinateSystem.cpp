@@ -28,7 +28,7 @@ bool render::CoordinateSystem::init()
 
 void render::CoordinateSystem::onCoordianteSystemBodyChange()
 {
-	CubeVectices cube;
+	CubePoints cube;
 	Tool::calCube(getPosition(), getVolume(), getAnchorPoint(), cube);
 
 	this->removeAllPoints();

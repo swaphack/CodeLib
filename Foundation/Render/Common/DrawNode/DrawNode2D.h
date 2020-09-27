@@ -38,27 +38,38 @@ namespace render
 		/**
 		*	获取矩形框
 		*/
-		const RectVectices& getRectVertex();
+		const RectPoints& getRectVertex();
 		/**
 		*	坐标是否在当前对象内
 		*/
 		virtual bool containTouchPoint(float x, float y);
 	protected:
+		/**
+		*	形状改变
+		*/
 		void onDrawNode2DBodyChange();
+		/**
+		*	颜色改变
+		*/
+		void onDrawNode2DColorChange();
 		/**
 		*	绘制矩形
 		*/
 		void drawRect();
+		/**
+		*	更新2d节点信息
+		*/
+		void updateDrawNode2DMesh();
 	protected:
 		// 是否显示矩形框
 		bool _bRectVisible = false;
 		// 是否显示网格
 		bool _bMeshVisible = false;
 		// 矩形框
-		RectVectices _rectVertex;
+		RectPoints _rectPoints;
 		// 实际矩形框
-		RectVectices _realRectVertex;
+		RectPoints _realRectPoints;
 		// 矩形坐标
-		RectVertex _rectPosition;
+		RectVertex _rectVertex;
 	};
 }

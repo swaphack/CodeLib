@@ -96,7 +96,13 @@ MemoryData::MemoryData(size_t length, const uint8_t* value)
 
 void MemoryData::init(size_t len, const void* value, uint32_t typeSize)
 {
+
 	this->clear();
+
+	if (len == 0)
+	{
+		return;
+	}
 	uint32_t size = typeSize * len;
 	_typeSize = typeSize;
 	_length = len;
@@ -115,7 +121,12 @@ void MemoryData::init(size_t len, const char* value)
 
 void MemoryData::init(size_t len)
 {
-	this->init(len, nullptr, 1);
+	this->init(len, 1);
+}
+
+void sys::MemoryData::init(size_t len, uint32_t typeSize)
+{
+	this->init(len, nullptr, typeSize);
 }
 
 void MemoryData::init(size_t len, const double* value)
@@ -158,19 +169,33 @@ void MemoryData::init(size_t len, const int8_t* value)
 	this->init(len, value, sizeof(int8_t));
 }
 
-void MemoryData::set(size_t offset, int size, const char* value)
+void MemoryData::set(size_t offset, size_t size, const char* value)
 {
-	if (size == 0)
+	if (size == 0 || value == nullptr)
 	{
 		return;
 	}
-	ASSERT((offset + size <= _length * _typeSize) && (offset + size > 0));
+	if (offset + size > _length * _typeSize)
+	{
+		int a = 1;
+	}
+	ASSERT(offset + size <= _length * _typeSize);
 
 	memcpy(_value + offset, value, size);
 }
 
-void MemoryData::insert(size_t offset, int size, const char* value)
+void sys::MemoryData::reset(size_t offset, size_t size)
 {
+	memset(_value + offset, 0, size);
+}
+
+void MemoryData::insert(size_t offset, size_t size, const char* value)
+{
+	if (size == 0 || value == nullptr)
+	{
+		return;
+	}
+
 	if (offset >= _length)
 	{
 		offset = _length;
@@ -190,7 +215,7 @@ void MemoryData::insert(size_t offset, int size, const char* value)
 	_typeSize = 1;
 }
 
-void MemoryData::remove(size_t offset, int size)
+void MemoryData::remove(size_t offset, size_t size)
 {
 	if (size == 0)
 	{

@@ -24,6 +24,10 @@ bool render::DrawNode2D::init()
 		onDrawNode2DBodyChange();
 	});
 
+	_notify->addListen(NodeNotifyType::COLOR, [this]() {
+		this->onDrawNode2DColorChange();
+	});
+
 	return true;
 }
 
@@ -47,46 +51,43 @@ bool render::DrawNode2D::isMeshVisible()
 	return _bMeshVisible;
 }
 
-const render::RectVectices& render::DrawNode2D::getRectVertex()
+const render::RectPoints& render::DrawNode2D::getRectVertex()
 {
-	return _rectVertex;
+	return _rectPoints;
 }
 
 bool render::DrawNode2D::containTouchPoint(float x, float y)
 {
-	return _realRectVertex.containPointByPolygon(x, y);
+	return _realRectPoints.containPointByPolygon(x, y);
 }
 
 void render::DrawNode2D::onDrawNode2DBodyChange()
 {
-	Tool::calRect(math::Vector3(), _volume, _anchor, _rectVertex);
+	Tool::calRect(math::Vector3(), _volume, _anchor, _rectPoints);
 
-	_realRectVertex.leftDown = this->convertLocalPostitionToWorld(_rectVertex.leftDown);
-	_realRectVertex.rightDown = this->convertLocalPostitionToWorld(_rectVertex.rightDown);
-	_realRectVertex.rightUp = this->convertLocalPostitionToWorld(_rectVertex.rightUp);
-	_realRectVertex.leftUp = this->convertLocalPostitionToWorld(_rectVertex.leftUp);
+	_realRectPoints.leftDown = this->convertLocalPostitionToWorld(_rectPoints.leftDown);
+	_realRectPoints.rightDown = this->convertLocalPostitionToWorld(_rectPoints.rightDown);
+	_realRectPoints.rightUp = this->convertLocalPostitionToWorld(_rectPoints.rightUp);
+	_realRectPoints.leftUp = this->convertLocalPostitionToWorld(_rectPoints.leftUp);
 
-	if (isMeshVisible())
-	{
-		math::Size size = math::Size(this->getWidth(), this->getHeight());
-		math::Rect rect(math::Vector2(), size);
-		VertexTool::setTexture2DCoords(&_rectPosition, size, rect);
-		VertexTool::setTexture2DVertices(&_rectPosition, math::Vector3(), _volume, _anchor);
+	math::Size size = math::Size(this->getWidth(), this->getHeight());
+	math::Rect rect(math::Vector2(), size);
+	VertexTool::setTexture2DCoords(&_rectVertex, size, rect);
+	VertexTool::setTexture2DVertices(&_rectVertex, math::Vector3(), _volume, _anchor);
 
-		auto pMesh = getMesh();
-		if (pMesh)
-		{
-			float uvs[8] = { 0 };
-			memcpy(uvs, _rectPosition.uvs, sizeof(uvs));
+	updateDrawNode2DMesh();
+}
 
-			pMesh->getMeshDetail()->setVertices(4, _rectPosition.vertices, 3);
-			pMesh->getMeshDetail()->setColors(4, _rectPosition.colors, 4);
-			pMesh->getMeshDetail()->setUVs(4, uvs, 2);
-			pMesh->getMeshDetail()->setIndices(6, _rectPosition.indices);
-		}
+void render::DrawNode2D::onDrawNode2DColorChange()
+{
+	sys::Color4F color;
+	convertColor4BTo4F(getColor(), color);
+	_rectVertex.setLeftDownColor(color);
+	_rectVertex.setRightDownColor(color);
+	_rectVertex.setRightUpColor(color);
+	_rectVertex.setLeftUpColor(color);
 
-		this->updateMeshData();
-	}
+	updateDrawNode2DMesh();
 }
 
 void render::DrawNode2D::drawRect()
@@ -99,10 +100,31 @@ void render::DrawNode2D::drawRect()
 	GLState::setLineWidth(5);
 
 	GLVertex::beginMode(ShapeMode::LINE_LOOP);
-	GLVertex::setVertex(_rectVertex.leftDown);
-	GLVertex::setVertex(_rectVertex.rightDown);
-	GLVertex::setVertex(_rectVertex.rightUp);
-	GLVertex::setVertex(_rectVertex.leftUp);
+	GLVertex::setVertex(_rectPoints.leftDown);
+	GLVertex::setVertex(_rectPoints.rightDown);
+	GLVertex::setVertex(_rectPoints.rightUp);
+	GLVertex::setVertex(_rectPoints.leftUp);
 	GLVertex::endMode();
+}
+
+void render::DrawNode2D::updateDrawNode2DMesh()
+{
+	if (!isMeshVisible())
+	{
+		return;
+	}
+	auto pMesh = getMesh();
+	if (pMesh)
+	{
+		float uvs[8] = { 0 };
+		memcpy(uvs, _rectVertex.uvs, sizeof(uvs));
+
+		pMesh->getMeshDetail()->setVertices(4, _rectVertex.vertices, 3);
+		pMesh->getMeshDetail()->setColors(4, _rectVertex.colors, 4);
+		pMesh->getMeshDetail()->setUVs(4, uvs, 2);
+		pMesh->getMeshDetail()->setIndices(6, _rectVertex.indices);
+	}
+
+	this->updateMeshData();
 }
 

@@ -37,8 +37,8 @@ bool render::PostProcessingNode::init()
 
 void render::PostProcessingNode::updateTextureSize()
 {
-	int width = _rectVertex.getWidth();
-	int height = _rectVertex.getHeight();
+	int width = _rectPoints.getWidth();
+	int height = _rectPoints.getHeight();
 	if (width == 0 || height == 0)
 	{
 		return;

@@ -137,7 +137,7 @@ void TestUINode::testScissor()
 	CtrlLayout* pLayout = CREATE_NODE(CtrlLayout);
  	pLayout->getBackgroundMask()->setVisible(false);
 	//pLayout->getBackgroundImage()->setVisible(false);
- 	pLayout->setBackgroundImage("Resource/Image/1.jpg");
+ 	pLayout->setBackgroundImagePath("Resource/Image/1.jpg");
  	Utility::loadDefaultShader(pLayout->getBackgroundImage());
 	pLayout->setClip(true);
 	pLayout->setVolume(400, 400, 0);
