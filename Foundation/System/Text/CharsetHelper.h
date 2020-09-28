@@ -27,10 +27,12 @@ namespace sys
 		static int32_t getUTF8WordCount(const char* data);
 		// 获取utf8文字
 		static char* convertToUTF8(wchar_t* src);
-		// zh_CN.utf8 zh_CN.GB2312 
+		// 转为宽字节 zh_CN.utf8 zh_CN.GB2312 
 		static wchar_t* convertToWideChar(const char* src, int32_t& length);
+		// 转为宽字节 windows
+		static wchar_t* convertToWideCharWnd(const char *str, int32_t& length);
 
-		static wchar_t* convertToWideCharWnd(const char *str);
+		static void convertToWideChar(const char* str, std::string& text);
 	protected:
 	private:
 	};

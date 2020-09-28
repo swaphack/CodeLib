@@ -18,16 +18,16 @@ struct FT_CHAR_DATA
 	// 字符bit数据
 	MemoryData data;
 	// 实际显示面积，宽度
-	int width;
-	int height;
+	int width = 0;
+	int height = 0;
 
 	// 实际标准面积-步进,宽度
-	int advX;
-	int advY;
+	int advX = 0;
+	int advY = 0;
 
 	// 字形原点(0,0)到字形位图最左边象素的水平距离.它以整数象素的形式表示。 
-	int deltaX;
-	int deltaY;
+	int deltaX = 0;
+	int deltaY = 0;
 
 	FT_CHAR_DATA();
 	~FT_CHAR_DATA();
@@ -123,7 +123,7 @@ bool FT_LABEL::load(const TextDefine& textDefine, LabelStream* stream)
 	}
 	char* text = (char*)textDefine.text.c_str();
 	int length = -1;
-	wchar_t* dest = CharsetHelper::convertToWideChar(text, length);
+	wchar_t* dest = CharsetHelper::convertToWideCharWnd(text, length);
 	if (dest == nullptr || length == -1)
 	{
 		return false;
@@ -316,10 +316,11 @@ void FT_LABEL::writeStream(uint64_t ch, LabelStream* stream, const Color3B& colo
 				_vl = data->data.getValue(i + width * j);
 			}
 
-			uint8_t bit = _vl == 0 ? 0 : 255;
+			uint8_t bit = _vl == 0 ? 0 : _vl;
 			if (bit == 0)
 			{
-				memData.reset(RGBA_PIXEL_UNIT * ((height - j - 1) * width + i), RGBA_PIXEL_UNIT);
+				uint8_t ary[RGBA_PIXEL_UNIT] = { 0, 0, 0, 0 };
+				memData.set(RGBA_PIXEL_UNIT * ((height - j - 1) * width + i), RGBA_PIXEL_UNIT, (char*)ary);
 			}
 			else
 			{

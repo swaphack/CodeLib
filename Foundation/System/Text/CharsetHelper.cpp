@@ -85,6 +85,10 @@ int32_t CharsetHelper::getUTF8WordCount(const char* data)
 
 char* CharsetHelper::convertToUTF8(wchar_t* src)
 {
+	if (src == nullptr)
+	{
+		return nullptr;
+	}
 	int32_t mbs_size;
 #if (defined WIN32) ||  (defined _WIN32)  
 	setlocale(LC_ALL, "chs");
@@ -106,7 +110,7 @@ char* CharsetHelper::convertToUTF8(wchar_t* src)
 
 wchar_t* CharsetHelper::convertToWideChar(const char* src, int32_t& length)
 {
-	if (src == NULL) {
+	if (src == nullptr) {
 		return nullptr;
 	}
 
@@ -134,11 +138,40 @@ wchar_t* CharsetHelper::convertToWideChar(const char* src, int32_t& length)
 	return wc;
 }
 
-wchar_t* CharsetHelper::convertToWideCharWnd(const char *str)
+wchar_t* CharsetHelper::convertToWideCharWnd(const char *str, int32_t& length)
 {
-	int32_t length = strlen(str) + 1;
+	if (str == nullptr)
+	{
+		return nullptr;
+	}
+	length = strlen(str) + 1;
 	wchar_t *t = (wchar_t*)malloc(sizeof(wchar_t)*length);
 	memset(t, 0, length*sizeof(wchar_t));
 	MultiByteToWideChar(CP_ACP, 0, str, strlen(str), t, length);
 	return t;
+}
+
+void sys::CharsetHelper::convertToWideChar(const char* str, std::string& text)
+{
+	if (str == nullptr)
+	{
+		return;
+	}
+#ifdef WIN32
+	int32_t length = 0;
+	wchar_t* content = convertToWideCharWnd(str, length);
+	if (content == nullptr)
+	{
+		text = std::string((char*)content, length);
+		free(content);
+	}
+#else
+	int32_t length = 0;
+	wchar_t* content = convertToWideChar(str, length);
+	if (content == nullptr)
+	{
+		text = std::string((char*)content, length);
+		free(content);
+	}
+#endif // WIN32
 }

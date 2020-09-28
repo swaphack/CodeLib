@@ -101,8 +101,6 @@ namespace ui
 	public:
 		void showWidgetInfo();
 	protected:
-		void calAnchorPoint(float& x, float& y);
-	protected:
 		// 几何信息
 		math::Rect m_rGeometry;
 		// 锚点位置

@@ -157,17 +157,7 @@ bool Layout::copy(Layout* item)
 
 void Layout::onLayoutSizeChanged(const math::Size& innerSize)
 {
-	float calW = 0;
-	float calH = 0;
-
-	float realW = 0;
-	float realH = 0;
-
-	std::vector<math::Rect> innerItems;
 	const math::Size& parentSize = this->getSize();
-	
-	float x, y;
-	calAnchorPoint(x, y);
 
 	int count = m_vChildren.size();
 	for (int i = 0; i < count; i++)

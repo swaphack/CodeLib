@@ -31,4 +31,25 @@ void TestLayoutNode::testLayout()
 	pDisplay->show();
 }
 
+void TestLayoutNode::testLayouts()
+{
+
+	render::CtrlLayout* pLayout = CREATE_NODE(render::CtrlLayout);
+	pLayout->setAnchorPoint(0, 0);
+	pLayout->setPosition(0, 0);
+	pLayout->setVolume(1027, 768);
+
+	this->addChild(pLayout);
+
+	auto pChildLayout = CREATE_NODE(render::CtrlLayout);
+	pLayout->setAnchorPoint(1, 1);
+	pLayout->setPosition(1024, 768);
+	pLayout->setVolume(500, 500);
+	pLayout->setBackgroudMaskVisible(true);
+
+	pLayout->addWidget(pChildLayout);
+
+}
+
+
 

@@ -11,4 +11,6 @@ protected:
 	virtual void initNodes();
 private:
 	void testLayout();
+
+	void testLayouts();
 };

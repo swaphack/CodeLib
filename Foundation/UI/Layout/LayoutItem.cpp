@@ -102,10 +102,7 @@ bool LayoutItem::copy(LayoutItem* item)
 
 void LayoutItem::resize(const math::Rect& rect)
 {
-	float x = 0;
-	float y = 0;
-	calAnchorPoint(x, y);
-	this->setWidgetGeomerty(rect, math::Vector2(x, y));
+	this->setWidgetGeomerty(rect, m_vAnchorPoint);
 }
 
 void LayoutItem::setBoxVisible(bool status)
@@ -138,12 +135,6 @@ void LayoutItem::setWidgetGeomerty(const math::Rect& geometry, const math::Vecto
 	m_pWidget->setAnchorPoint(anchorPoint);
 	m_pWidget->setPosition(geometry.getOrigin());
 	m_pWidget->setVolume(geometry.getSize());
-}
-
-void LayoutItem::calAnchorPoint(float& x, float& y)
-{
-	x = m_vAnchorPoint.getX();
-	y = m_vAnchorPoint.getY();
 }
 
 void ui::LayoutItem::showWidgetInfo()

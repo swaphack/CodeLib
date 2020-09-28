@@ -33,7 +33,10 @@ bool render::CtrlLayout::init()
 	}
 
 	_notify->addListen(NodeNotifyType::BODY, [this](){
+		_backgroundImage->setAnchorPoint(this->getAnchorPoint());
 		_backgroundImage->setVolume(this->getVolume());
+
+		_backgroundMask->setAnchorPoint(this->getAnchorPoint());
 		_backgroundMask->setVolume(this->getVolume());
 	});
 
@@ -41,11 +44,6 @@ bool render::CtrlLayout::init()
 	//setBackgroudMaskVisible(false);
 
 	return true;
-}
-
-void render::CtrlLayout::draw()
-{
-
 }
 
 void render::CtrlLayout::setBackgroundColor(const sys::Color4B& color)

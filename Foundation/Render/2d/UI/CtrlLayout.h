@@ -14,8 +14,6 @@ namespace render
 		virtual ~CtrlLayout();
 	public:
 		virtual bool init();
-
-		virtual void draw();
 	public:
 		/**
 		*	ÉèÖÃ±³¾°ÑÕÉ«

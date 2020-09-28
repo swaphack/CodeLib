@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <root width="1024" height="768" layout="1">
   <Layout name="body" rect="0,0,1024,768" showbgmask="0" bgmaskcolor="255,255,255,255" margin="0,0,0,0" anchorPoint="0,0">
-	<Layout name="layout_1" rect="0,0,200,200" showbgmask="1" bgmaskcolor="0,255,0,255" margin="0,0,0,0" anchorPoint="0,0">
+	<Layout name="layout_1" rect="0,0,400,400" showbgmask="1" bgmaskcolor="0,255,0,255" margin="0,0,0,0" anchorPoint="0,0">
       <Text name="text_2" rect="0,200,200,50" text="255" path="Resource/Font/font_3.ttf" fontsize="24" anchorPoint="0,1"/>
-    </Layout>
+    </Layout>  
 	<Image name="image_1" rect="200,200,200,200" color="255,255,255,255" opacity="255" path="Resource/Image/NeHe.png" anchorPoint="0,0"/>
 	<Text name="text_1" rect="0,300,200,50" text="护发素快递费骄傲" path="Resource/Font/font_3.ttf" fontsize="24" anchorPoint="0,1"/>
-    
+	<Layout name="layout_3" rect="1024,768,400,400" showbgmask="1" bgmaskcolor="0,255,0,255" margin="0,0,0,0" anchorPoint="1,1">
+      <Text name="text_3" rect="-400,-400,200,50" text="255" path="Resource/Font/font_3.ttf" fontsize="24" anchorPoint="0,0"/>
+	  <Image name="image_2" rect="0,0,200,200" color="255,255,255,255" opacity="255" path="Resource/Image/NeHe.png" anchorPoint="1,1"/>
+    </Layout>	
   </Layout>
 </root>
 
@@ -16,5 +19,6 @@ LayoutItem 包含 Widget
 <Image rect="0,0,200,200" color="255,255,255,255" opacity="255" path="Resource/Image/NeHe.png" flipX="0" flipY="0"/>
 <Text rect="0,0,200,50" dimensions="200,50" text="255,255,255,255" path="Resource/Font/font_3.ttf" fontsize="24"/>
 
+	
 
 -->
