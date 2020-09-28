@@ -147,7 +147,7 @@ wchar_t* CharsetHelper::convertToWideCharWnd(const char *str, int32_t& length)
 	length = strlen(str) + 1;
 	wchar_t *t = (wchar_t*)malloc(sizeof(wchar_t)*length);
 	memset(t, 0, length*sizeof(wchar_t));
-	MultiByteToWideChar(CP_ACP, 0, str, strlen(str), t, length);
+	MultiByteToWideChar(CP_UTF8, 0, str, strlen(str), t, length);
 	return t;
 }
 

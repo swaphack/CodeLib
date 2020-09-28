@@ -5,7 +5,7 @@
       <Text name="text_2" rect="0,200,200,50" text="255" path="Resource/Font/font_3.ttf" fontsize="24" anchorPoint="0,1"/>
     </Layout>  
 	<Image name="image_1" rect="200,200,200,200" color="255,255,255,255" opacity="255" path="Resource/Image/NeHe.png" anchorPoint="0,0"/>
-	<Text name="text_1" rect="0,300,200,50" text="护发素快递费骄傲" path="Resource/Font/font_3.ttf" fontsize="24" anchorPoint="0,1"/>
+	<Text name="text_1" rect="0,300,200,50" color="125,125,255" text="护发素快递费骄傲" path="Resource/Font/font_3.ttf" fontsize="24" anchorPoint="0,1"/>
 	<Layout name="layout_3" rect="1024,768,400,400" showbgmask="1" bgmaskcolor="0,255,0,255" margin="0,0,0,0" anchorPoint="1,1">
       <Text name="text_3" rect="-400,-400,200,50" text="255" path="Resource/Font/font_3.ttf" fontsize="24" anchorPoint="0,0"/>
 	  <Image name="image_2" rect="0,0,200,200" color="255,255,255,255" opacity="255" path="Resource/Image/NeHe.png" anchorPoint="1,1"/>
