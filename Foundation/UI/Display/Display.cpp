@@ -6,21 +6,15 @@ using namespace ui;
 
 
 Display::Display()
-:m_pLayout(nullptr)
-,m_eLayoutDirection(LayoutDirection::NONE)
-, m_pRoot(nullptr)
 {
-
+	render::RenderApplication::getInstance()->addWndProtocol(this);
 }
 
 Display::~Display()
 {
-	this->close();
-}
+	render::RenderApplication::getInstance()->removeWndProtocol(this);
 
-void Display::setUIRoot(render::Node* root)
-{
-	m_pRoot = root;
+	SAFE_RELEASE(m_pLayout);
 }
 
 void Display::show()
@@ -55,11 +49,6 @@ void Display::hide()
 	}
 }
 
-void Display::close()
-{
-	SAFE_DELETE(m_pLayout);
-}
-
 void Display::reload()
 {
 	if (m_pLayout == nullptr)
@@ -73,9 +62,11 @@ void Display::reload()
 	initEvent();
 }
 
-void Display::setFilePath(const std::string& filepath)
+void Display::load(const std::string& filepath)
 {
 	m_strFilePath = filepath;
+
+	this->show();
 }
 
 const std::string& Display::getFilePath()
@@ -93,18 +84,13 @@ Layout* Display::getLayout()
 	return m_pLayout;
 }
 
-void Display::onViewSizeChanged(const math::Size& inputSize)
+void Display::onWindowSizeChange(const math::Size& inputSize)
 {
 	if (m_pLayout == nullptr)
 	{
 		return;
 	}
-
-	math::Vector2 point;
-	math::Size size;
-	Layout::calLayoutSpace(m_pLayout, m_sViewSize, inputSize, point, size);
-
-	m_pLayout->resize(math::Rect(point, size));
+	m_pLayout->resize(inputSize);
 }
 
 bool Display::loadFile()
@@ -120,16 +106,18 @@ bool Display::loadFile()
 		return false;
 	}
 
-	SAFE_DELETE(m_pLayout);
+	SAFE_RELEASE(m_pLayout);
+	SAFE_RETAIN(pLayout);
+
 	m_pLayout = pLayout;
 	m_sViewSize = UIProxy::getInstance()->getDesignSize();
 	m_eLayoutDirection = UIProxy::getInstance()->getDesignDirection();
 
 	this->autoResize();
 
-	if (m_pRoot && m_pLayout->getWidget())
+	if (m_pLayout->getWidget())
 	{
-		m_pRoot->addChild(m_pLayout->getWidget());
+		this->addChild(m_pLayout->getWidget());
 	}
 
 	return true;
@@ -153,7 +141,7 @@ void Display::autoResize()
 {
 	math::Size viewSize(render::Tool::getGLViewWidth(), render::Tool::getGLViewHeight());
 
-	this->onViewSizeChanged(viewSize);
+	this->onWindowSizeChange(viewSize);
 }
 
 const math::Size& ui::Display::getViewSize()

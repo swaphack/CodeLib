@@ -61,7 +61,7 @@ bool render::DrawNode2D::containTouchPoint(float x, float y)
 	return _realRectPoints.containPointByPolygon(x, y);
 }
 
-void render::DrawNode2D::onDrawNode2DBodyChange()
+void render::DrawNode2D::calRealRectPoints()
 {
 	Tool::calRect(math::Vector3(), _volume, _anchor, _rectPoints);
 
@@ -69,6 +69,11 @@ void render::DrawNode2D::onDrawNode2DBodyChange()
 	_realRectPoints.rightDown = this->convertLocalPostitionToWorld(_rectPoints.rightDown);
 	_realRectPoints.rightUp = this->convertLocalPostitionToWorld(_rectPoints.rightUp);
 	_realRectPoints.leftUp = this->convertLocalPostitionToWorld(_rectPoints.leftUp);
+}
+
+void render::DrawNode2D::onDrawNode2DBodyChange()
+{
+	calRealRectPoints();
 
 	math::Size size = math::Size(this->getWidth(), this->getHeight());
 	math::Rect rect(math::Vector2(), size);

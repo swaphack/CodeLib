@@ -11,67 +11,12 @@ Layout::~Layout()
 	this->removeAllItems();
 }
 
-void Layout::setLeftMargin(float margin)
-{
-	m_fMargin.left = margin;
-}
-
-float Layout::getLeftMargin()
-{
-	return m_fMargin.left;
-}
-
-void Layout::setRightMargin(float margin)
-{
-	m_fMargin.right = margin;
-}
-
-float Layout::getRightMargin()
-{
-	return m_fMargin.right;
-}
-
-void Layout::setTopMargin(float margin)
-{
-	m_fMargin.top = margin;
-}
-
-float Layout::getTopMargin()
-{
-	return m_fMargin.top;
-}
-
-void Layout::setBottomMargin(float margin)
-{
-	m_fMargin.bottom = margin;
-}
-
-float Layout::getBottomMargin()
-{
-	return m_fMargin.bottom;
-}
-
-void Layout::setMargin(const sys::Margin& margin)
-{
-	m_fMargin = margin;
-}
-
-const sys::Margin& Layout::getMargin()
-{
-	return m_fMargin;
-}
-
 void Layout::addItem(LayoutItem* item)
 {
 	ASSERT(item != nullptr);
 	
 	SAFE_RETAIN(item);
 	m_vChildren.push_back(item);
-	
-// 	if (item->getWidget() && this->getWidget())
-// 	{
-// 		this->getWidget()->addChild(item->getWidget());
-// 	}
 }
 
 void Layout::removeItem(LayoutItem* item)
@@ -87,11 +32,6 @@ void Layout::removeItem(LayoutItem* item)
 			break;
 		}
 	}
-
-// 	if (item->getWidget() && this->getWidget())
-// 	{
-// 		this->getWidget()->removeChild(item->getWidget());
-// 	}
 }
 
 void Layout::removeAllItems()
@@ -113,27 +53,11 @@ const std::vector<LayoutItem*>& Layout::getChildren()
 	return m_vChildren;
 }
 
-void Layout::resize(const math::Size& inputSize)
+void Layout::resize(const math::Size& size)
 {
-	math::Vector2 pos = getOrgin();
-	float x = pos.getX() / this->getGeometry().getWidth() * inputSize.getWidth();
-	float y = pos.getY() / this->getGeometry().getHeight() * inputSize.getHeight();
+	LayoutItem::resize(size);
 
-	this->resize(math::Vector2(x, y), inputSize);
-}
-
-void Layout::resize(const math::Vector2& position, const math::Size& size)
-{
-	this->resize(math::Rect(position, size));
-}
-
-void Layout::resize(const math::Rect& rect)
-{
-	LayoutItem::resize(rect);
-
-	float w = rect.getWidth() - m_fMargin.left - m_fMargin.right;
-	float h = rect.getHeight() - m_fMargin.bottom - m_fMargin.top;
-	this->onLayoutSizeChanged(math::Size(w, h));
+	this->onLayoutSizeChanged(size);
 }
 
 bool Layout::copy(Layout* item)
@@ -157,7 +81,7 @@ bool Layout::copy(Layout* item)
 
 void Layout::onLayoutSizeChanged(const math::Size& innerSize)
 {
-	const math::Size& parentSize = this->getSize();
+	const math::Size& parentSize = m_pWidget->getSize();
 
 	int count = m_vChildren.size();
 	for (int i = 0; i < count; i++)
@@ -167,37 +91,7 @@ void Layout::onLayoutSizeChanged(const math::Size& innerSize)
 		{
 			continue;
 		}
-
-		// 内部大小
-		math::Vector2 point;
-		math::Size size;
-
-		calLayoutSpace(child, parentSize, innerSize, point, size);
-
-		child->resize(math::Rect(point, size));
+		
+		child->resize(parentSize);
 	}
-}
-
-void ui::Layout::calLayoutSpace(LayoutItem* child, const math::Size& srcSize, const math::Size& newSize, math::Vector2& point, math::Size& size)
-{
-	if (child == nullptr)
-	{
-		return;
-	}
-
-	float scaleX = newSize.getWidth() / srcSize.getWidth();
-	float scaleY = newSize.getHeight() / srcSize.getHeight();
-	float scale = 1;
-
-	scale = scaleX < scaleY ? scaleX : scaleY;
-
-	scale = 1;
-
-	const math::Size& childSize = child->getSize();
-	size.setWidth(childSize.getWidth() * scale);
-	size.setHeight(childSize.getHeight() * scale);
-
-	const math::Vector2& childPos = child->getOrgin();
-	point.setX(childPos.getX() * scale);
-	point.setY(childPos.getY() * scale);
 }

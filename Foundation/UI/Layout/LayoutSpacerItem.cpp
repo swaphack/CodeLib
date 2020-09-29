@@ -6,7 +6,6 @@ LayoutSpacerItem::LayoutSpacerItem()
 {
 	render::CtrlWidget* pCtrlWidget = render::createNode<render::CtrlWidget>();
 	this->setWidget(pCtrlWidget);
-	this->setGeometry(0, 0, 20, 20);
 	this->setOrientation(ESO_Horizontal);
 }
 
@@ -21,13 +20,13 @@ void LayoutSpacerItem::setOrientation(SpacerOrientation eType)
 
 	if (m_eOrientation == ESO_Horizontal)
 	{
-		this->getSizePolicy().width = SizeType::EXPANDING;
-		this->getSizePolicy().height = SizeType::FIXED;
+		this->m_spAdjust.width = SizeType::EXPANDING;
+		this->m_spAdjust.height = SizeType::FIXED;
 	}
 	else if (m_eOrientation == ESO_Vertial)
 	{
-		this->getSizePolicy().width = SizeType::FIXED;
-		this->getSizePolicy().height = SizeType::EXPANDING;
+		this->m_spAdjust.width = SizeType::FIXED;
+		this->m_spAdjust.height = SizeType::EXPANDING;
 	}
 }
 

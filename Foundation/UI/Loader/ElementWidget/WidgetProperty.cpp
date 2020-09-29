@@ -3,7 +3,6 @@
 
 using namespace ui;
 
-
 WidgetProperty::WidgetProperty()
 {
 }
@@ -192,13 +191,28 @@ void WidgetProperty::setAttribute(const std::string& name, const render::BlendPa
 	setAttribute(name, str);
 }
 
-void WidgetProperty::setAttribute(const std::string& name, const sys::Margin& value)
+void WidgetProperty::setAttribute(const std::string& name, const sys::CSSMargin& value)
 {
 	if (name.empty())
 	{
 		return;
 	}
-	std::string str = getCString("%f,%f,%f,%f", value.left, value.right, value.bottom, value.top);
+
+	std::string str = getCString("%f,%f,%f,%f", 
+		value.getTop().toString(), value.getRight().toString(), 
+		value.getBottom().toString(), value.getLeft().toString());
+
+	setAttribute(name, str);
+}
+
+void ui::WidgetProperty::setAttribute(const std::string& name, const sys::CSSSize& value)
+{
+	if (name.empty())
+	{
+		return;
+	}
+
+	std::string str = getCString("%s,%s", value.getWidth().toString(), value.getHeight().toString());
 	setAttribute(name, str);
 }
 
@@ -483,7 +497,7 @@ bool WidgetProperty::getAttribute(const std::string& name, math::Rect& defaultVa
 	return true;
 }
 
-bool WidgetProperty::getAttribute(const std::string& name, sys::Margin& defaultValue)
+bool WidgetProperty::getAttribute(const std::string& name, sys::CSSMargin& defaultValue)
 {
 	const std::string& value = getAttribute(name);
 	if (value.empty())
@@ -501,7 +515,50 @@ bool WidgetProperty::getAttribute(const std::string& name, sys::Margin& defaultV
 		return false;
 	}
 
-	defaultValue = sys::Margin(atof(params[0].getString()), atof(params[1].getString()), atof(params[2].getString()), atof(params[3].getString()));
+	std::string top = params[0].getString();
+	std::string right = params[1].getString();
+	std::string bottom = params[2].getString();
+	std::string left = params[3].getString();
+
+	auto topValue = sys::CSSNumber::load(top);
+	auto rightValue = sys::CSSNumber::load(right);
+	auto bottomValue = sys::CSSNumber::load(bottom);
+	auto leftValue = sys::CSSNumber::load(left);
+
+	defaultValue.setTop(topValue);
+	defaultValue.setRight(rightValue);
+	defaultValue.setBottom(bottomValue);
+	defaultValue.setLeft(leftValue);
+
+	return true;
+}
+
+bool ui::WidgetProperty::getAttribute(const std::string& name, sys::CSSSize& defaultValue)
+{
+	const std::string& value = getAttribute(name);
+	if (value.empty())
+	{
+		return false;
+	}
+
+	sys::String val = value;
+	std::vector<sys::String> params;
+
+	val.split(",", params);
+
+	if (params.size() != 2)
+	{
+		return false;
+	}
+
+	std::string width = params[0].getString();
+	std::string height = params[1].getString();
+
+	auto widthValue = sys::CSSNumber::load(width);
+	auto heightValue = sys::CSSNumber::load(height);
+
+	defaultValue.setWidth(widthValue);
+	defaultValue.setHeight(heightValue);
 
 	return true;
 }

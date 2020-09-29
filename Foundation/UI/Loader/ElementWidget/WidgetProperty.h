@@ -8,6 +8,8 @@
 
 namespace ui
 {
+	
+
 	typedef std::map<std::string, std::string> Attributes;
 
 	struct SizePolicy;
@@ -41,7 +43,8 @@ namespace ui
 		void setAttribute(const std::string& name, const sys::Color3B& value);
 		void setAttribute(const std::string& name, const math::Size& value);
 		void setAttribute(const std::string& name, const math::Rect& value);
-		void setAttribute(const std::string& name, const sys::Margin& value);
+		void setAttribute(const std::string& name, const sys::CSSMargin& value);
+		void setAttribute(const std::string& name, const sys::CSSSize& value);
 		void setAttribute(const std::string& name, const render::BlendParam& value);
 		void setAttribute(const std::string& name, const SizePolicy& value);
 
@@ -67,7 +70,8 @@ namespace ui
 		bool getAttribute(const std::string& name, sys::Color4B& defaultValue);
 		bool getAttribute(const std::string& name, math::Size& defaultValue);
 		bool getAttribute(const std::string& name, math::Rect& defaultValue);
-		bool getAttribute(const std::string& name, sys::Margin& defaultValue);
+		bool getAttribute(const std::string& name, sys::CSSMargin& defaultValue);
+		bool getAttribute(const std::string& name, sys::CSSSize& defaultValue);
 		bool getAttribute(const std::string& name, render::BlendParam& defaultValue);
 		bool getAttribute(const std::string& name, SizePolicy& defaultValue);
 

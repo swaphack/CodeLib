@@ -400,9 +400,6 @@
     <ClInclude Include="Type\Bit.h">
       <Filter>Type</Filter>
     </ClInclude>
-    <ClInclude Include="CSS\Margin.h">
-      <Filter>CSS</Filter>
-    </ClInclude>
     <ClInclude Include="IO\Directory.h">
       <Filter>IO</Filter>
     </ClInclude>
@@ -552,6 +549,24 @@
     </ClInclude>
     <ClInclude Include="Resource\Image\ImageHelp.h">
       <Filter>Resource\Image</Filter>
+    </ClInclude>
+    <ClInclude Include="CSS\NumberType.h">
+      <Filter>CSS</Filter>
+    </ClInclude>
+    <ClInclude Include="CSS\CSSNumber.h">
+      <Filter>CSS</Filter>
+    </ClInclude>
+    <ClInclude Include="CSS\import.h">
+      <Filter>CSS</Filter>
+    </ClInclude>
+    <ClInclude Include="CSS\CSSBox.h">
+      <Filter>CSS</Filter>
+    </ClInclude>
+    <ClInclude Include="CSS\CSSSpace.h">
+      <Filter>CSS</Filter>
+    </ClInclude>
+    <ClInclude Include="CSS\CSSSize.h">
+      <Filter>CSS</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -738,9 +753,6 @@
     <ClCompile Include="Type\Bit.cpp">
       <Filter>Type</Filter>
     </ClCompile>
-    <ClCompile Include="CSS\Margin.cpp">
-      <Filter>CSS</Filter>
-    </ClCompile>
     <ClCompile Include="Net\NetData.cpp">
       <Filter>Net</Filter>
     </ClCompile>
@@ -851,6 +863,18 @@
     </ClCompile>
     <ClCompile Include="Resource\Image\ImageHelp.cpp">
       <Filter>Resource\Image</Filter>
+    </ClCompile>
+    <ClCompile Include="CSS\CSSNumber.cpp">
+      <Filter>CSS</Filter>
+    </ClCompile>
+    <ClCompile Include="CSS\CSSSpace.cpp">
+      <Filter>CSS</Filter>
+    </ClCompile>
+    <ClCompile Include="CSS\CSSBox.cpp">
+      <Filter>CSS</Filter>
+    </ClCompile>
+    <ClCompile Include="CSS\CSSSize.cpp">
+      <Filter>CSS</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

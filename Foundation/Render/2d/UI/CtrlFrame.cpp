@@ -33,7 +33,7 @@ bool CtrlFrame::init()
 	});
 
 	_notify->addListen(NodeNotifyType::TEXTURE, [this](){
-		updateCtrlFrameMeshData();
+		onDrawNode2DBodyChange();
 	});
 
 	return true;

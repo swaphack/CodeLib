@@ -17,46 +17,6 @@ namespace ui
 		virtual ~LayoutEx();
 	public:
 		/**
-		*	设置左边缘距离
-		*/
-		void setLeftMargin(float margin);
-		/**
-		*	获取左边缘距离
-		*/
-		float getLeftMargin();
-		/**
-		*	设置右边缘距离
-		*/
-		void setRightMargin(float margin);
-		/**
-		*	获取右边缘距离
-		*/
-		float getRightMargin();
-		/**
-		*	设置上边缘距离
-		*/
-		void setTopMargin(float margin);
-		/**
-		*	获取上边缘距离
-		*/
-		float getTopMargin();
-		/**
-		*	设置下边缘距离
-		*/
-		void setBottomMargin(float margin);
-		/**
-		*	获取左边缘距离
-		*/
-		float getBottomMargin();
-		/**
-		*	设置边缘距离
-		*/
-		void setMargin(const sys::Margin& margin);
-		/**
-		*	获取边缘距离
-		*/
-		const sys::Margin& getMargin();
-		/**
 		*	添加一个元件
 		*/
 		void addItem(LayoutItemEx* item);
@@ -78,14 +38,6 @@ namespace ui
 		*/
 		virtual void resize(const math::Size& size);
 		/**
-		*	当窗口位置和大小发生改变时
-		*/
-		virtual void resize(const math::Vector2& position, const math::Size& size);
-		/**
-		*	当窗口位置和大小发生改变时
-		*/
-		virtual void resize(const math::Rect& rect);
-		/**
 		*	获取布局的最小面积
 		*/
 		virtual math::Size getLayoutMinSize();
@@ -96,7 +48,7 @@ namespace ui
 		/**
 		*	复制对象
 		*/
-		virtual bool copy(LayoutEx* item);
+		bool copy(LayoutEx* item);
 	protected:
 		/**
 		*	获取布局内部的最小面积
@@ -121,8 +73,6 @@ namespace ui
 		*/
 		virtual float calItemHeight(LayoutItemEx* item, float height);
 	protected:
-		// 边缘距离
-		sys::Margin m_fMargin;
 		// 子元件集合
 		std::vector<LayoutItemEx*> m_vChildren;
 	};

@@ -10,6 +10,9 @@ IElement::IElement()
 IElement::~IElement()
 {
 	SAFE_DELETE(_nodeProperty);
+
+	SAFE_RELEASE(_node);
+	SAFE_RELEASE(_layoutItem);
 }
 
 bool IElement::load(tinyxml2::XMLElement* pXmlNode, bool clean/* = true*/)
@@ -84,11 +87,17 @@ WidgetProperty* IElement::getNodeProperty()
 
 void IElement::setWidget(render::CtrlWidget* node)
 {
+	//SAFE_RETAIN(node);
+	//SAFE_RELEASE(_node);
+
 	_node = node;
 }
 
 void IElement::setLayoutItem(LayoutItem* item)
 {
+	//SAFE_RETAIN(item);
+	//SAFE_RELEASE(_layoutItem);
+
 	_layoutItem = item;
 }
 

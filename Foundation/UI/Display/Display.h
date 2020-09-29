@@ -10,16 +10,12 @@ namespace ui
 	/**
 	*	界面显示
 	*/
-	class Display : public sys::Object
+	class Display : public render::Node, public render::WindowProtocol
 	{
 	public:
 		Display();
 		virtual ~Display();
 	public:
-		/**
-		*	设置ui根节点
-		*/
-		void setUIRoot(render::Node* root);
 		/**
 		*	显示
 		*/
@@ -29,17 +25,14 @@ namespace ui
 		*/
 		void hide();
 		/**
-		*	销毁
-		*/
-		void close();
-		/**
 		*	重新加载
 		*/
 		void reload();
+	public:
 		/**
 		*	设置文件路径
 		*/
-		void setFilePath(const std::string& filepath);
+		void load(const std::string& filepath);
 		/**
 		*	文件路径
 		*/
@@ -60,7 +53,7 @@ namespace ui
 		/**
 		*	当窗口大小发生改变时
 		*/
-		void onViewSizeChanged(const math::Size& inputSize);
+		virtual void onWindowSizeChange(const math::Size& inputSize);
 		/**
 		*	加载界面文件
 		*/
@@ -84,12 +77,10 @@ namespace ui
 	protected:
 		// 文件路径
 		std::string m_strFilePath;
-		// ui根节点
-		render::Node* m_pRoot;
 		// 布局
-		Layout* m_pLayout;
+		Layout* m_pLayout = nullptr;
 		// 布局方向
-		LayoutDirection m_eLayoutDirection;
+		LayoutDirection m_eLayoutDirection = LayoutDirection::NONE;
 		// 窗口界面大小
 		math::Size m_sViewSize;
 	};

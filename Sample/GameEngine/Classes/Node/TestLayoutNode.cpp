@@ -25,15 +25,14 @@ void TestLayoutNode::testLayout()
 {
 	auto frameSize = Canvas::getInstance()->getView()->getViewSize();
 
-	Display* pDisplay = new Display();
-	pDisplay->setUIRoot(this);
-	pDisplay->setFilePath("Resource/Layout/Test.xml");
-	pDisplay->show();
+	Display* pDisplay = CREATE_NODE(Display);
+	pDisplay->load("Resource/Layout/Test.xml");
+	this->addChild(pDisplay);
+
 }
 
 void TestLayoutNode::testLayouts()
 {
-
 	render::CtrlLayout* pLayout = CREATE_NODE(render::CtrlLayout);
 	pLayout->setAnchorPoint(0, 0);
 	pLayout->setPosition(0, 0);

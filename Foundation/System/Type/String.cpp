@@ -282,7 +282,7 @@ bool String::endWith(const std::string& value)
 		return true;
 	}
 
-	size_t len = value.size() + 1;
+	size_t len = value.size();
 	if (len	 > getSize())
 	{
 		return false;
@@ -369,7 +369,7 @@ String String::subString(size_t offset, size_t count)
 {
 	if (offset >= getSize())
 	{
-		return String(nullptr);
+		return String();
 	}
 
 	if (offset + count >= getSize())

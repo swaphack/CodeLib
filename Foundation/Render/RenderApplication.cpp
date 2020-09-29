@@ -14,6 +14,8 @@ RenderApplication::RenderApplication()
 	,_lastClock(INVALID_CLOCK)
 	,_refreshInterval(REFRESH_INTERVAL)
 {
+	ASSERT(s_application == nullptr);
+
 	s_application = this;
 	this->init();
 }
@@ -59,12 +61,18 @@ void RenderApplication::update()
 
 void RenderApplication::dispose()
 {
+	removeAllWndProtocols();
+
 	this->disposeRender();
 
 	this->clearProtocolManagers();
 }
 
-Canvas* RenderApplication::getCanvas()
+void render::RenderApplication::show()
+{
+}
+
+Canvas* RenderApplication::getCanvas() const
 {
 	return _canvas;
 }
@@ -74,9 +82,14 @@ void RenderApplication::setFrameSize( int width, int height )
 	_frameSize.setWidth(width);
 	_frameSize.setHeight(height);
 	_canvas->setViewPort(0, 0, width, height);
+
+	for (auto item : _windowProtocols)
+	{
+		item->onWindowSizeChange(_frameSize);
+	}
 }
 
-math::Size& RenderApplication::getFrameSize()
+const math::Size& RenderApplication::getFrameSize() const
 {
 	return _frameSize;
 }
@@ -86,7 +99,7 @@ void RenderApplication::setRefreshInterval( float interval )
 	_refreshInterval = interval;
 }
 
-float RenderApplication::getRefreshInterval()
+float RenderApplication::getRefreshInterval() const
 {
 	return _refreshInterval;
 }
@@ -114,4 +127,34 @@ void RenderApplication::disposeRender()
 void RenderApplication::initProtocolManagers()
 {
 
+}
+
+void RenderApplication::addWndProtocol(WindowProtocol* obj)
+{
+	if (obj == nullptr)
+	{
+		return;
+	}
+
+	_windowProtocols.insert(obj);
+}
+
+void RenderApplication::removeWndProtocol(WindowProtocol* obj)
+{
+	if (obj == nullptr)
+	{
+		return;
+	}
+
+	_windowProtocols.erase(obj);
+}
+
+void RenderApplication::removeAllWndProtocols()
+{
+	_windowProtocols.clear();
+}
+
+RenderApplication* render::RenderApplication::getInstance()
+{
+	return s_application;
 }

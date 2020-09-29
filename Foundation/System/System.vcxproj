@@ -86,7 +86,12 @@
     <ClInclude Include="Concurrent\Concurrent.h" />
     <ClInclude Include="Concurrent\Concurrents.h" />
     <ClInclude Include="Concurrent\import.h" />
-    <ClInclude Include="CSS\Margin.h" />
+    <ClInclude Include="CSS\CSSBox.h" />
+    <ClInclude Include="CSS\CSSNumber.h" />
+    <ClInclude Include="CSS\CSSSize.h" />
+    <ClInclude Include="CSS\CSSSpace.h" />
+    <ClInclude Include="CSS\import.h" />
+    <ClInclude Include="CSS\NumberType.h" />
     <ClInclude Include="DataBase\DataRecord.h" />
     <ClInclude Include="DataBase\DataSheet.h" />
     <ClInclude Include="DataBase\IDataBase.h" />
@@ -233,7 +238,10 @@
     <ClCompile Include="Concurrent\ConcurrentFile.cpp" />
     <ClCompile Include="Concurrent\Concurrent.cpp" />
     <ClCompile Include="Concurrent\Concurrents.cpp" />
-    <ClCompile Include="CSS\Margin.cpp" />
+    <ClCompile Include="CSS\CSSBox.cpp" />
+    <ClCompile Include="CSS\CSSNumber.cpp" />
+    <ClCompile Include="CSS\CSSSize.cpp" />
+    <ClCompile Include="CSS\CSSSpace.cpp" />
     <ClCompile Include="DataBase\DataRecord.cpp" />
     <ClCompile Include="DataBase\DataSheet.cpp" />
     <ClCompile Include="DateTime\Time.cpp" />

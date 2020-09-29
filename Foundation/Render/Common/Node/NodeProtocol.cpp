@@ -289,7 +289,7 @@ float BodyProtocol::getDepth()
 
 math::Size BodyProtocol::getSize()
 {
-	return math::Size(_volume.getWidth(), _volume.getWidth());
+	return math::Size(_volume.getWidth(), _volume.getHeight());
 }
 
 float render::BodyProtocol::getAnchorPointX()

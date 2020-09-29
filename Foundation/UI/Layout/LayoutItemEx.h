@@ -1,7 +1,6 @@
 #pragma once
 
-#include "LayoutItem.h"
-#include "system.h"
+#include "LayoutItemBase.h"
 #include "ui_common.h"
 
 namespace ui
@@ -17,7 +16,7 @@ namespace ui
 	*	布局项, 抽象类
 	*	布局项的集合信息在界面调整中不做改变，改变的只有Widget的集合信息
 	*/
-	class LayoutItemEx : public LayoutItem
+	class LayoutItemEx : public LayoutItemBase
 	{
 	public:
 		LayoutItemEx();
@@ -26,7 +25,7 @@ namespace ui
 		/**
 		*	获取最小长宽的信息
 		*/
-		const math::Size& getMinSize();
+		const math::Size& getMinSize() const;
 		/**
 		*	设置最小长宽的信息
 		*/
@@ -38,7 +37,7 @@ namespace ui
 		/**
 		*	获取最大长宽的信息
 		*/
-		const math::Size& getMaxSize();
+		const math::Size& getMaxSize() const;
 		/**
 		*	设置最大长宽的信息
 		*/
@@ -50,11 +49,32 @@ namespace ui
 		/**
 		*	获取在窗体大小改变时的自我调整策略
 		*/
-		SizePolicy& getSizePolicy();
+		const SizePolicy& getSizePolicy() const;
 		/**
 		*	获取在窗体大小改变时的自我调整策略
 		*/
 		void setSizePolicy(const SizePolicy& policy);
+	public:
+		/**
+		*	默认矩形框
+		*/
+		const math::Rect& getLayoutRect() const;
+		/**
+		*	默认矩形框
+		*/
+		void setLayoutRect(const math::Rect& rect);
+		/**
+		*	默认矩形框
+		*/
+		void setLayoutRect(const math::Vector2& position, const math::Size& size);
+		/**
+		*	默认大小
+		*/
+		const math::Size& getGeometry() const;
+		/**
+		*	默认位置
+		*/
+		const math::Vector2& getPosition() const;
 	public: // 可能需重载的方法
 		/**
 		*	获取布局的最小面积
@@ -67,8 +87,10 @@ namespace ui
 		/**
 		*	复制对象
 		*/
-		virtual bool copy(LayoutItemEx* item);
+		bool copy(LayoutItemEx* item);
 	protected:
+		// 矩形框
+		math::Rect m_sDefaultRect;
 		// 最小面积
 		math::Size m_sMinSize;
 		// 最大面积

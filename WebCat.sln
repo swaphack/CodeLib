@@ -31,7 +31,6 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GameEngine", "Sample\GameEngine\GameEngine.vcxproj", "{8875629C-9901-40EA-B9A3-F43FA6E683B1}"
 	ProjectSection(ProjectDependencies) = postProject
 		{0AD3E54A-11CD-49AD-BD43-6609FE7122A4} = {0AD3E54A-11CD-49AD-BD43-6609FE7122A4}
-		{340633A3-0EC6-4B8A-A2CE-6F701A18666C} = {340633A3-0EC6-4B8A-A2CE-6F701A18666C}
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Algorithm", "Foundation\Algorithm\Algorithm.vcxproj", "{7F92B2CA-0F7B-418C-835D-D05409B6C156}"

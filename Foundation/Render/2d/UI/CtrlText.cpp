@@ -23,7 +23,13 @@ bool CtrlText::init()
 		return false;
 	}
 
+	_notify->removeListens(NodeNotifyType::BODY);
 	_notify->removeListens(NodeNotifyType::TEXTURE);
+
+	_notify->addListen(NodeNotifyType::BODY, [&](){
+		this->calRealRectPoints();
+		this->onCtrlWidgetBodyChange();
+	});
 
 	_notify->addListen(NodeNotifyType::TEXT, [&](){
 
@@ -152,13 +158,6 @@ void CtrlText::onTextChange()
 	}
 
 	this->setTextureWithRect(texture);
-	/*
-	if (_textDefine.width == 0 || _textDefine.height == 0)
-	{
-		this->setWidth(static_cast<float>(texture->getWidth()));
-		this->setHeight(static_cast<float>(texture->getHeight()));
-	}
-	*/
 
 	math::Size size = math::Size(texture->getWidth(), texture->getHeight());
 	math::Rect rect(math::Vector2(), size);

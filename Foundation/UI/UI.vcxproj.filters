@@ -68,6 +68,9 @@
     <ClInclude Include="Display\UIProxy.h">
       <Filter>Display</Filter>
     </ClInclude>
+    <ClInclude Include="Layout\LayoutItemBase.h">
+      <Filter>Layout</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Display">
@@ -135,10 +138,8 @@
     <ClCompile Include="Layout\Layout.cpp">
       <Filter>Layout</Filter>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <Xml Include="Resource\SampleLayout.xml">
-      <Filter>Resource</Filter>
-    </Xml>
+    <ClCompile Include="Layout\LayoutItemBase.cpp">
+      <Filter>Layout</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

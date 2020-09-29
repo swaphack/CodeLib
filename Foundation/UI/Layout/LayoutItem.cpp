@@ -4,8 +4,6 @@
 using namespace ui;
 
 LayoutItem::LayoutItem()
-:m_pWidget(nullptr)
-, m_bBoxVisible(false)
 {
 }
 
@@ -13,138 +11,124 @@ LayoutItem::~LayoutItem()
 {
 }
 
-const math::Rect& LayoutItem::getGeometry() const
+void ui::LayoutItem::setMargin(const sys::CSSMargin& margin)
 {
-	return m_rGeometry;
+	m_sMargin = margin;
 }
 
-void LayoutItem::setGeometry(float x, float y, float width, float height)
+const sys::CSSMargin& ui::LayoutItem::getMargin() const
 {
-	m_rGeometry.set(x,y, width, height);
+	return m_sMargin;
 }
 
-void LayoutItem::setGeometry(const math::Rect& rect)
+void ui::LayoutItem::setSize(const sys::CSSSize& size)
 {
-	m_rGeometry = rect;
-
-	//this->setLayoutGeometry(rect);
+	m_sSize = size;
 }
 
-void LayoutItem::setOrgin(float x, float y)
+const sys::CSSSize& ui::LayoutItem::getSize() const
 {
-	m_rGeometry.setOrigin(x, y);
-}
-
-void ui::LayoutItem::setOrgin(const math::Vector2& position)
-{
-	m_rGeometry.setOrigin(position);
-}
-
-const math::Vector2& LayoutItem::getOrgin() const
-{
-	return m_rGeometry.getOrigin();
-}
-
-void LayoutItem::setSize(float width, float height)
-{
-	m_rGeometry.setSize(width, height);
-}
-
-void ui::LayoutItem::setSize(const math::Size& size)
-{
-	m_rGeometry.setSize(size);
-}
-
-const math::Size& LayoutItem::getSize() const
-{
-	return m_rGeometry.getSize();
-}
-
-void LayoutItem::setWidget(render::CtrlWidget* widget)
-{
-	if (widget == nullptr)
-	{
-		return;
-	}
-	m_pWidget = widget;
-}
-
-render::CtrlWidget* LayoutItem::getWidget() const
-{
-	return m_pWidget;
-}
-
-void LayoutItem::setAnchorPoint(const math::Vector2& anchorPoint)
-{
-	m_vAnchorPoint = anchorPoint;
-}
-
-const math::Vector2& LayoutItem::getAnchorPoint() const
-{
-	return m_vAnchorPoint;
+	return m_sSize;
 }
 
 bool LayoutItem::copy(LayoutItem* item)
 {
-	if (item == nullptr)
+	if (!LayoutItemBase::copy(item))
 	{
 		return false;
 	}
 
-	setWidget(item->getWidget());
-	setGeometry(item->getGeometry());
-	setBoxColor(item->getBoxColor());
-	setBoxVisible(item->isBoxVisible());
-	setAnchorPoint(item->getAnchorPoint());
+	setMargin(item->getMargin());
 
 	return true;
 }
 
-void LayoutItem::resize(const math::Rect& rect)
-{
-	this->setWidgetGeomerty(rect, m_vAnchorPoint);
-}
-
-void LayoutItem::setBoxVisible(bool status)
-{
-	m_bBoxVisible = status;
-}
-
-bool LayoutItem::isBoxVisible() const
-{
-	return m_bBoxVisible;
-}
-
-void LayoutItem::setBoxColor(const sys::Color4B& color)
-{
-	m_cBoxColor = color;
-}
-
-const sys::Color4B& LayoutItem::getBoxColor() const
-{
-	return m_cBoxColor;
-}
-
-void LayoutItem::setWidgetGeomerty(const math::Rect& geometry, const math::Vector2& anchorPoint)
+void LayoutItem::resize(const math::Size& size)
 {
 	if (m_pWidget == nullptr)
 	{
 		return;
 	}
 
-	m_pWidget->setAnchorPoint(anchorPoint);
-	m_pWidget->setPosition(geometry.getOrigin());
-	m_pWidget->setVolume(geometry.getSize());
-}
+	float x = 0, y = 0, w = size.getWidth(), h = size.getHeight();
 
-void ui::LayoutItem::showWidgetInfo()
-{
-	if (m_pWidget == nullptr)
+	const auto& left = m_sMargin.getLeft();
+	const auto& right = m_sMargin.getRight();
+	const auto& top = m_sMargin.getTop();
+	const auto& bottom = m_sMargin.getBottom();
+
+	const auto& width = m_sSize.getWidth();
+	const auto& height = m_sSize.getHeight();
+
+	if (left.isFixedValue())
 	{
-		return;
+		x = left.getValue();
+		w -= x;
 	}
-	PRINT("Position: (%f,%f)\n", m_pWidget->getPositionX(), m_pWidget->getPositionY());
-	PRINT("Size: (%f,%f)\n", m_pWidget->getWidth(), m_pWidget->getHeight());
-	PRINT("AnchorPoint: (%f,%f)\n", m_pWidget->getAnchorPointX(), m_pWidget->getAnchorPointY());
+	else
+	{
+		x = size.getWidth() * left.getValue();
+		w -= x;
+	}
+
+	if (bottom.isFixedValue())
+	{
+		y = bottom.getValue();
+		h -= y;
+	}
+	else
+	{
+		y = size.getHeight() * bottom.getValue();
+		h -= y;
+	}
+
+	if (width.getValue() != 0)
+	{
+		if (width.isFixedValue())
+		{
+			w = width.getValue();
+		}
+		else
+		{
+			w = size.getWidth() * width.getValue();
+		}
+	}
+	else
+	{
+		if (right.isFixedValue())
+		{
+			w -= right.getValue();
+		}
+		else
+		{
+			w -= size.getWidth() * right.getValue();
+		}
+	}
+
+	if (height.getValue() != 0)
+	{
+		if (height.isFixedValue())
+		{
+			h = height.getValue();
+		}
+		else
+		{
+			h = size.getHeight() * height.getValue();
+		}
+	}
+	else
+	{
+		if (top.isFixedValue())
+		{
+			h -= top.getValue();
+		}
+		else
+		{
+			h -= size.getHeight() * top.getValue();
+		}
+	}
+
+	m_pWidget->setVolume(w, h);
+	m_pWidget->setPosition(x + w * m_pWidget->getAnchorPointX(), y + h * m_pWidget->getAnchorPointY());
 }
 

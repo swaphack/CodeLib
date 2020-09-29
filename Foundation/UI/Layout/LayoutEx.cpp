@@ -12,56 +12,6 @@ LayoutEx::~LayoutEx()
 	this->removeAllItems();
 }
 
-void LayoutEx::setLeftMargin(float margin)
-{
-	m_fMargin.left = margin;
-}
-
-float LayoutEx::getLeftMargin()
-{
-	return m_fMargin.left;
-}
-
-void LayoutEx::setRightMargin(float margin)
-{
-	m_fMargin.right = margin;
-}
-
-float LayoutEx::getRightMargin()
-{
-	return m_fMargin.right;
-}
-
-void LayoutEx::setTopMargin(float margin)
-{
-	m_fMargin.top = margin;
-}
-
-float LayoutEx::getTopMargin()
-{
-	return m_fMargin.top;
-}
-
-void LayoutEx::setBottomMargin(float margin)
-{
-	m_fMargin.bottom = margin;
-}
-
-float LayoutEx::getBottomMargin()
-{
-	return m_fMargin.bottom;
-}
-
-void LayoutEx::setMargin(const sys::Margin& margin)
-{
-	m_fMargin = margin;
-}
-
-const sys::Margin& LayoutEx::getMargin()
-{
-	return m_fMargin;
-}
-
 void LayoutEx::addItem(LayoutItemEx* item)
 {
 	ASSERT(item != nullptr);
@@ -117,58 +67,29 @@ const std::vector<LayoutItemEx*>& LayoutEx::getChildren()
 	return m_vChildren;
 }
 
-void LayoutEx::resize(const math::Size& inputSize)
+void LayoutEx::resize(const math::Size& size)
 {
-	this->resize(getOrgin(), inputSize);
-}
+	//LayoutItem::resize(size);
 
-void LayoutEx::resize(const math::Vector2& position, const math::Size& size)
-{
-	this->resize(math::Rect(position, size));
-}
-
-void LayoutEx::resize(const math::Rect& rect)
-{
-	this->resize(rect);
-
-	float w = rect.getWidth() - m_fMargin.left - m_fMargin.right;
-	float h = rect.getHeight() - m_fMargin.bottom - m_fMargin.top;
-
-	this->onLayoutSizeChanged(math::Size(w, h));
+	this->onLayoutSizeChanged(size);
 }
 
 math::Size LayoutEx::getLayoutMinSize()
 {
-	math::Size size = getLayoutInnerMinSize();
-	float w = m_fMargin.left + m_fMargin.right;
-	float h = m_fMargin.bottom + m_fMargin.top;
-
-	size.setWidth(w + size.getWidth());
-	size.setHeight(h + size.getHeight());
-
-	return size;
+	return m_sMinSize;
 }
 
 math::Size LayoutEx::getLayoutMaxSize()
 {
-	math::Size size = getLayoutInnerMaxSize();
-	float w = m_fMargin.left + m_fMargin.right;
-	float h = m_fMargin.bottom + m_fMargin.top;
-
-	size.setWidth(w + size.getWidth());
-	size.setHeight(h + size.getHeight());
-
-	return size;
+	return m_sMaxSize;
 }
 
 bool LayoutEx::copy(LayoutEx* item)
 {
-	if (item == nullptr) 
+	if (!LayoutItemEx::copy(item))
 	{
 		return false;
 	}
-
-	setMargin(item->getMargin());
 
 	std::vector<LayoutItemEx*>::const_iterator iter = item->getChildren().begin();
 	while (iter != item->getChildren().end())
@@ -177,21 +98,17 @@ bool LayoutEx::copy(LayoutEx* item)
 		iter++;
 	}
 
-	return LayoutItemEx::copy(item);
+	return true;
 }
 
 math::Size LayoutEx::getLayoutInnerMinSize()
 {
-	return math::Size(
-		m_sMinSize.getWidth() - m_fMargin.left - m_fMargin.right,
-		m_sMinSize.getHeight() - m_fMargin.bottom - m_fMargin.top);
+	return m_sMinSize;
 }
 
 math::Size LayoutEx::getLayoutInnerMaxSize()
 {
-	return math::Size(
-		m_sMaxSize.getWidth() - m_fMargin.left - m_fMargin.right,
-		m_sMaxSize.getHeight() - m_fMargin.bottom - m_fMargin.top);
+	return m_sMaxSize;
 }
 
 void LayoutEx::onLayoutSizeChanged(const math::Size& innerSize)
@@ -213,7 +130,7 @@ void LayoutEx::onLayoutSizeChanged(const math::Size& innerSize)
 		// 内部大小
 		math::Rect innerItem;
 
-		const math::Rect& itemRect = pItem->getGeometry();
+		const math::Rect& itemRect = pItem->getLayoutRect();
 
 		float x = itemRect.getX() / this->getGeometry().getWidth() * innerSize.getWidth();
 		float y = itemRect.getY() / this->getGeometry().getHeight() * innerSize.getHeight();

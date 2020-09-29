@@ -12,7 +12,7 @@ LayoutItemEx::~LayoutItemEx()
 {
 }
 
-const math::Size& LayoutItemEx::getMinSize()
+const math::Size& LayoutItemEx::getMinSize() const
 {
 	return m_sMinSize;
 }
@@ -27,7 +27,7 @@ void LayoutItemEx::setMinSize(const math::Size& size)
 	m_sMinSize = size;
 }
 
-const math::Size& LayoutItemEx::getMaxSize()
+const math::Size& LayoutItemEx::getMaxSize() const
 {
 	return m_sMaxSize;
 }
@@ -42,7 +42,7 @@ void LayoutItemEx::setMaxSize(const math::Size& size)
 	m_sMaxSize = size;	
 }
 
-SizePolicy& LayoutItemEx::getSizePolicy()
+const SizePolicy& LayoutItemEx::getSizePolicy() const
 {
 	return m_spAdjust;
 }
@@ -50,6 +50,32 @@ SizePolicy& LayoutItemEx::getSizePolicy()
 void LayoutItemEx::setSizePolicy(const SizePolicy& policy)
 {
 	m_spAdjust = policy;
+}
+
+const math::Rect& ui::LayoutItemEx::getLayoutRect() const
+{
+	return m_sDefaultRect;
+}
+
+void ui::LayoutItemEx::setLayoutRect(const math::Rect& rect)
+{
+	m_sDefaultRect = rect;
+}
+
+void ui::LayoutItemEx::setLayoutRect(const math::Vector2& position, const math::Size& size)
+{
+	m_sDefaultRect.setOrigin(position);
+	m_sDefaultRect.setSize(size);
+}
+
+const math::Size& ui::LayoutItemEx::getGeometry() const
+{
+	return m_sDefaultRect.getSize();
+}
+
+const math::Vector2& ui::LayoutItemEx::getPosition() const
+{
+	return m_sDefaultRect.getOrigin();
 }
 
 math::Size LayoutItemEx::getLayoutMinSize()
@@ -138,7 +164,7 @@ math::Size LayoutItemEx::getLayoutMaxSize()
 
 bool LayoutItemEx::copy(LayoutItemEx* item)
 {
-	if (item == nullptr)
+	if (!LayoutItemBase::copy(item))
 	{
 		return false;
 	}
@@ -146,5 +172,5 @@ bool LayoutItemEx::copy(LayoutItemEx* item)
 	setMaxSize(item->getMaxSize());
 	setSizePolicy(item->getSizePolicy());
 
-	return LayoutItem::copy(item);
+	return true;
 }

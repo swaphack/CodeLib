@@ -76,6 +76,7 @@
     <ClInclude Include="Layout\Layout.h" />
     <ClInclude Include="Layout\LayoutEx.h" />
     <ClInclude Include="Layout\LayoutItem.h" />
+    <ClInclude Include="Layout\LayoutItemBase.h" />
     <ClInclude Include="Layout\LayoutItemEx.h" />
     <ClInclude Include="Layout\LayoutSpacerItem.h" />
     <ClInclude Include="Layout\LayoutWidgetItem.h" />
@@ -99,6 +100,7 @@
     <ClCompile Include="Layout\Layout.cpp" />
     <ClCompile Include="Layout\LayoutEx.cpp" />
     <ClCompile Include="Layout\LayoutItem.cpp" />
+    <ClCompile Include="Layout\LayoutItemBase.cpp" />
     <ClCompile Include="Layout\LayoutItemEx.cpp" />
     <ClCompile Include="Layout\LayoutSpacerItem.cpp" />
     <ClCompile Include="Layout\LayoutWidgetItem.cpp" />
@@ -108,11 +110,6 @@
     <ClCompile Include="Loader\2dLoader\WidgetLoader.cpp" />
     <ClCompile Include="Loader\ElementWidget\IElement.cpp" />
     <ClCompile Include="Loader\ElementWidget\WidgetProperty.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <Xml Include="Resource\SampleLayout.xml">
-      <SubType>Designer</SubType>
-    </Xml>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

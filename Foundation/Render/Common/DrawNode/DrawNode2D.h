@@ -45,6 +45,10 @@ namespace render
 		virtual bool containTouchPoint(float x, float y);
 	protected:
 		/**
+		*	计算实际矩形框坐标
+		*/
+		void calRealRectPoints();
+		/**
 		*	形状改变
 		*/
 		void onDrawNode2DBodyChange();
