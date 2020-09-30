@@ -558,8 +558,6 @@ void LabelStream::setFixWidth(uint32_t width)
 	_fixWidth = width;
 }
 
-
-
 //////////////////////////////////////////////////////////////////////////
 ImageLabel::ImageLabel()
 {
