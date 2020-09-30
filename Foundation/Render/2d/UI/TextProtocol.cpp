@@ -17,7 +17,7 @@ void TextProtocol::setString(const std::string& text)
 	_textBody = text;
 }
 
-const std::string& TextProtocol::getString()
+const std::string& TextProtocol::getString() const
 {
 	return _textBody;
 }

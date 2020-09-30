@@ -7,6 +7,7 @@ using namespace ui;
 
 Display::Display()
 {
+	this->setAnchorPoint(0.0f, 0.0f, 0.0f);
 	render::RenderApplication::getInstance()->addWndProtocol(this);
 }
 
@@ -90,6 +91,7 @@ void Display::onWindowSizeChange(const math::Size& inputSize)
 	{
 		return;
 	}
+	this->setVolume(inputSize);
 	m_pLayout->resize(inputSize);
 }
 

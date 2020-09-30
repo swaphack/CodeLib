@@ -46,7 +46,7 @@ void CtrlText::setFontPath(const std::string& fonturl)
 	this->notify(NodeNotifyType::TEXT);
 }
 
-const std::string& CtrlText::getFontPath()
+const std::string& CtrlText::getFontPath() const
 {
 	return _textDefine.filepath;
 }
@@ -58,7 +58,7 @@ void CtrlText::setFontSize(float size)
 	this->notify(NodeNotifyType::TEXT);
 }
 
-float CtrlText::getFontSize()
+float CtrlText::getFontSize() const
 {
 	return _textDefine.fontSize;
 }
@@ -70,7 +70,7 @@ void CtrlText::setHorizontalDistance(float distance)
 	this->notify(NodeNotifyType::TEXT);
 }
 
-float CtrlText::getHorizontalDistance()
+float CtrlText::getHorizontalDistance() const
 {
 	return _textDefine.horizontalDistance;
 }
@@ -82,9 +82,20 @@ void CtrlText::setVerticalDistance(float distance)
 	this->notify(NodeNotifyType::TEXT);
 }
 
-float CtrlText::getVerticalDistance()
+float CtrlText::getVerticalDistance() const
 {
 	return _textDefine.verticalDistance;
+}
+
+void render::CtrlText::setBorder(bool bBorder)
+{
+	_textDefine.border = bBorder;
+	this->notify(NodeNotifyType::TEXT);
+}
+
+bool render::CtrlText::isBorder() const
+{
+	return _textDefine.border;
 }
 
 void CtrlText::setString(const std::string&text)
@@ -102,7 +113,7 @@ void CtrlText::setHorizontalAlignment(sys::HorizontalAlignment alignment)
 	this->notify(NodeNotifyType::TEXT);
 }
 
-sys::HorizontalAlignment CtrlText::getHorizontalAlignment()
+sys::HorizontalAlignment CtrlText::getHorizontalAlignment() const
 {
 	return _textDefine.horizontalAlignment;
 }
@@ -114,7 +125,7 @@ void CtrlText::setVerticalAlignment(sys::VerticalAlignment alignment)
 	this->notify(NodeNotifyType::TEXT);
 }
 
-sys::VerticalAlignment CtrlText::getVerticalAlignment()
+sys::VerticalAlignment CtrlText::getVerticalAlignment() const
 {
 	return _textDefine.verticalAlignment;
 }
@@ -133,7 +144,7 @@ void CtrlText::setDimensions(const math::Size& size)
 	this->setDimensions(size.getWidth(), size.getHeight());
 }
 
-math::Size CtrlText::getDimensions()
+math::Size CtrlText::getDimensions() const
 {
 	return math::Size(_textDefine.width, _textDefine.height);
 }
@@ -144,7 +155,7 @@ void CtrlText::setTextColor(const sys::Color3B& color)
 	this->notify(NodeNotifyType::TEXT);
 }
 
-const sys::Color3B& render::CtrlText::getTextColor()
+const sys::Color3B& render::CtrlText::getTextColor() const
 {
 	return _textDefine.color;
 }

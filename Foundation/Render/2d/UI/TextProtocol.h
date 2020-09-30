@@ -11,8 +11,14 @@ namespace render
 		TextProtocol();
 		virtual ~TextProtocol();
 	public:
-		void setString(const std::string& text);
-		const std::string& getString();
+		/**
+		*	设置文本内容
+		*/
+		virtual void setString(const std::string& text);
+		/**
+		*	获取文本内容
+		*/
+		const std::string& getString() const;
 	private:
 		std::string _textBody;
 	};

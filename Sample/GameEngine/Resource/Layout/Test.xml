@@ -2,13 +2,13 @@
 <root width="1024" height="768" layout="1">
   <Layout name="body" showmask="0" maskcolor="255,255,255,255" margin="0,0,0,0" size="100%,100%" anchorPoint="0,0">
 	<Layout name="layout_1" showmask="1" maskcolor="0,255,0,255" margin="0,0,0,400" size="400,400" anchorPoint="0,0">
-      <Text name="text_2" text="255" path="Resource/Font/font_3.ttf" margin="0,0,300,0" size="400,42" fontsize="24" anchorPoint="0,1"/>
+      <Text name="text_2" text="发射点发生范德萨没地方，阿萨" path="Resource/Font/font_3.ttf" margin="0,0,300,0" size="320,50" fontsize="32" anchorPoint="0,0"/>
     </Layout>  
-	<Image name="image_1" color="255,255,255,255" opacity="255" margin="0,0,0,0" size="300,60%" path="Resource/Image/NeHe.png" anchorPoint="0,0"/>
-	<Text name="text_1" color="125,125,255" text="护发素快递费骄傲" margin="0,0,200,0" size="300,42" path="Resource/Font/font_3.ttf" fontsize="24" anchorPoint="0,1"/>
+	<Image name="image_1" color="255,255,255,255" opacity="255" margin="0,0,0,0" size="300,60%" path="Resource/Image/2k_earth_clouds.jpg" anchorPoint="0,0"/>
+	<Text name="text_1" color="125,125,255" text="护发素快递费骄傲" margin="0,0,200,0" size="300,50" path="Resource/Font/font_3.ttf" fontsize="32" anchorPoint="0,1"/>
 	<Layout name="layout_3" showmask="1" maskcolor="0,255,0,255" margin="0,0,60%,0" size="100%,0" anchorPoint="0,0">
 		<Image name="image_2" path="Resource/Image/NeHe.png" margin="0,0,0,0" anchorPoint="0,0"/>
-		<Text name="text_3" color="255,255,255,255" opacity="255" margin="0,0,0,0" size="100,42" text="255" path="Resource/Font/font_3.ttf" fontsize="24" anchorPoint="0,0"/>
+		<Text name="text_3" color="255,255,255,255" margin="0,0,0,0" size="0,0" dimensions="400,0" text="十大免费数码单反，什么，啊进口发动机士大夫艰苦拉萨地方艰苦拉萨孔四道口附近撒扩大洛夫克拉士大夫艰苦垃圾" path="Resource/Font/font_3.ttf" fontsize="32" anchorPoint="0,0"/>
     </Layout>	
   </Layout>
 </root>

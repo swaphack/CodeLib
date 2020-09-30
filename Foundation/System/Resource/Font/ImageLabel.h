@@ -49,9 +49,9 @@ namespace sys
 		void format(HorizontalAlignment ha);
 	private:
 		// 写入开始的位置x
-		uint32_t _offsetX;
+		int32_t _offsetX;
 		// 写入开始的位置y
-		uint32_t _offsetY;
+		int32_t _offsetY;
 		// 行高
 		uint32_t _lineHeight;
 		// 固定宽度

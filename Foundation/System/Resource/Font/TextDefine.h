@@ -27,37 +27,31 @@ namespace sys
 		// 字库路径
 		std::string filepath;
 		// 字体大小
-		float fontSize;
+		float fontSize = 0;
 		// 水平字间距
-		float horizontalDistance;
+		float horizontalDistance = 0;
 		// 垂直间距
-		float verticalDistance;
+		float verticalDistance = 0;
 		// 显示的文本
 		std::string text;
 
 		// 宽度
-		float width;
+		float width = 0;
 		// 高度
-		float height;
+		float height = 0;
 
 		// 颜色
 		Color3B color;
 
+		// 加粗
+		bool border = false;
+
 		// 水平对齐方式
-		sys::HorizontalAlignment horizontalAlignment;
+		sys::HorizontalAlignment horizontalAlignment = sys::HorizontalAlignment::CENTER;
 		// 垂直对齐方式
-		sys::VerticalAlignment verticalAlignment;
+		sys::VerticalAlignment verticalAlignment = sys::VerticalAlignment::MIDDLE;
 
 		TextDefine()
-			:filepath("")
-			, fontSize(0)
-			, horizontalDistance(0)
-			, verticalDistance(0)
-			, text("")
-			, width(0)
-			, height(0)
-			, horizontalAlignment(sys::HorizontalAlignment::CENTER)
-			, verticalAlignment(sys::VerticalAlignment::MIDDLE)
 		{
 
 		}

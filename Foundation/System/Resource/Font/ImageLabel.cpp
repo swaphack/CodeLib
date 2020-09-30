@@ -69,7 +69,7 @@ protected:
 	// 加载字符数据
 	FT_CHAR_DATA* loadChar(uint64_t ch, int fontSize);
 	// 初始化FT模块
-	bool initFT(const std::string& filepath, int size);
+	bool initFT(const std::string& filepath, int size, bool bBorder = false);
 	// 是否FT模块
 	void disposeFT();
 private:
@@ -79,8 +79,8 @@ private:
 	FT_Library    _library;
 	FT_Face       _face;
 	FT_Error      _error;
-	int			  _lowY;
-	int			  _fontSize;
+	int	_fontSize = 0;
+	bool _border = false;
 	static std::map<uint64_t, FT_CHAR_DATA> _datas;
 };
 
@@ -91,7 +91,6 @@ FT_LABEL::FT_LABEL()
 : _library(nullptr)
 , _face(nullptr)
 , _error(0)
-, _lowY(0)
 , _fontSize(0)
 {
 	
@@ -104,19 +103,14 @@ FT_LABEL::~FT_LABEL()
 
 bool FT_LABEL::load(const TextDefine& textDefine, LabelStream* stream)
 {
-	if (!this->initFT(textDefine.filepath.c_str(), (int)textDefine.fontSize))
+	if (!this->initFT(textDefine.filepath.c_str(), (int)textDefine.fontSize, textDefine.border))
 	{
 		return false;
 	}
 
-	FT_CHAR_DATA* gData = loadChar(char('g'), (int)textDefine.fontSize);
-	if (gData == nullptr)
-	{
-		return false;
-	}
-	_lowY = gData->deltaY;
 	_fontSize = (int)textDefine.fontSize;
-	stream->setLineHeight(gData->advY);
+	float scalY = 1.0f * _face->max_advance_height / _face->units_per_EM;
+	stream->setLineHeight(ceil(scalY * _fontSize));
 	if (textDefine.text.empty())
 	{
 		return false;
@@ -128,15 +122,65 @@ bool FT_LABEL::load(const TextDefine& textDefine, LabelStream* stream)
 	{
 		return false;
 	}
+
+	uint32_t rect_width = 0;
+	uint32_t rect_height = 0;
+	bool bFixedWidth = stream->isFixWidth();
+	if (bFixedWidth)
+	{
+		rect_width = stream->getFixWidth();
+	}
+	rect_height = stream->getLineHeight();
+
+	int offset_width = 0;
+
  	wchar_t* ptr = dest;
 	int offset = 0;
 	while (*ptr != 0 && offset < length)
 	{
 		this->loadChar(*ptr, (int)textDefine.fontSize);
+
+		uint64_t ch = *ptr;
+		if (ch == '\n')
+		{
+			if (bFixedWidth)
+			{
+				offset_width = 0;
+				rect_height += stream->getLineHeight();
+			}
+			continue;
+		}
+		FT_CHAR_DATA* data = getCharData(ch);
+		int font_width = static_cast<int>(_fontSize * 0.5f);
+		int font_height = _fontSize;
+
+		if (data)
+		{
+			font_width = data->width;
+			font_height = data->height;
+		}
+
+		font_width *= RGBA_PIXEL_UNIT;
+		if (bFixedWidth)
+		{
+			if (offset_width + font_width > rect_width)
+			{
+				offset_width = 0;
+				rect_height += stream->getLineHeight();
+			}
+		}
+		else
+		{
+			rect_width += font_width;
+		}
+		
+		offset_width += font_width;
+
 		ptr++;
 		offset++;
 	}
 
+	stream->initSteam(rect_width * RGBA_PIXEL_UNIT, rect_height, 1);
 	stream->resetOffset();
 	ptr = dest;
 	offset = 0;
@@ -178,7 +222,6 @@ FT_CHAR_DATA* FT_LABEL::loadChar(uint64_t ch, int fontSize)
 	{
 		return data;
 	}
-
 	_error = FT_Load_Char(_face, ch, FT_LOAD_RENDER);
 	if (_error != 0)
 	{
@@ -200,7 +243,7 @@ FT_CHAR_DATA* FT_LABEL::loadChar(uint64_t ch, int fontSize)
 	FT_BBox bbox;
 	FT_Glyph_Get_CBox(glyph, FT_GLYPH_BBOX_PIXELS, &bbox);
 
-	FT_Vector  origin;
+	FT_Vector origin;
 	origin.x = 0;
 	origin.y = 0;
 
@@ -220,21 +263,26 @@ FT_CHAR_DATA* FT_LABEL::loadChar(uint64_t ch, int fontSize)
 	int width = bitmap.width;
 	int height = bitmap.rows;
 
+	float scaleY = 1.0f * _face->max_advance_height / _face->units_per_EM;
+
 	data = &_datas[ch];
 	data->width = width ;
 	data->height = height;
 	data->advX = _face->glyph->metrics.horiAdvance / FREETYPE_PIXEL_UNIT;
 	data->advY = _face->glyph->metrics.vertAdvance / FREETYPE_PIXEL_UNIT;
-	data->deltaX = _face->glyph->metrics.horiBearingX / FREETYPE_PIXEL_UNIT;
-	data->deltaY = bitmap_glyph->top - height;
+	data->deltaX = bbox.xMin;
+	data->deltaY = bbox.yMin - _fontSize * _face->descender / _face->units_per_EM * scaleY;
 	data->data.init(width * height, (char*)bitmap.buffer);
 
-	data->printString();
+	if (data->deltaY < 0)
+	{
+		int a = 1;
+	}
 
 	return data;
 }
 
-bool FT_LABEL::initFT(const std::string& filepath, int size)
+bool FT_LABEL::initFT(const std::string& filepath, int size, bool bBorder)
 {
 	_error = FT_Init_FreeType(&_library);
 	if (_error != 0)
@@ -254,11 +302,13 @@ bool FT_LABEL::initFT(const std::string& filepath, int size)
 		return false;
 	}
 
-	_error = FT_Set_Pixel_Sizes(_face, size, size);
+	_error = FT_Set_Pixel_Sizes(_face, 0, size);
 	if (_error != 0)
 	{
 		return false;
 	}
+
+	_border = bBorder;
 
 	return true;
 }
@@ -316,6 +366,11 @@ void FT_LABEL::writeStream(uint64_t ch, LabelStream* stream, const Color3B& colo
 				_vl = data->data.getValue(i + width * j);
 			}
 
+			if (_border)
+			{
+				_vl = 255;
+			}
+
 			uint8_t bit = _vl == 0 ? 0 : _vl;
 			if (bit == 0)
 			{
@@ -331,17 +386,11 @@ void FT_LABEL::writeStream(uint64_t ch, LabelStream* stream, const Color3B& colo
 	}
 
 	int deltaY = 0;
-
 	if (data)
 	{
-		deltaY = data->deltaY - _lowY;
-		deltaY = deltaY < 0 ? 0 : deltaY;
+		deltaY = data->deltaY;
 	}
-
-	if (deltaY + height > stream->getLineHeight())
-	{
-		deltaY = stream->getLineHeight() - height;
-	}
+	deltaY = deltaY < 0 ? 0 : deltaY;
 
 	if (stream->isFixWidth())
 	{
@@ -371,7 +420,7 @@ LabelStream::~LabelStream()
 void LabelStream::resetOffset()
 {
 	_offsetX = 0;
-	_offsetY = 0;
+	_offsetY = getHeigth() - getLineHeight();
 }
 
 void LabelStream::writeOneLineBlock(int width, int height, const char* buffer, int deltaY)
@@ -379,13 +428,6 @@ void LabelStream::writeOneLineBlock(int width, int height, const char* buffer, i
 	// 实际大小
 	int realWidth = width * RGBA_PIXEL_UNIT;
 	int realHeight = getLineHeight();
-
-	int newW = realWidth + _offsetX > getWidth() ? realWidth + _offsetX : getWidth();
-
-	if (newW > getWidth())
-	{
-		this->expendStream(newW, realHeight);
-	}
 
 	char* faceData = _data.getPtr();
 	for (int i = 0; i < height; i++)
@@ -402,32 +444,9 @@ void LabelStream::writeMultiLineBlock(int width, int height, const char* buffer,
 	int realWidth = width * RGBA_PIXEL_UNIT;
 	int realHeight = getLineHeight();
 
-	if (getHeigth() < realHeight)
+	if (_offsetX + realWidth > getFixWidth())
 	{
-		this->expendStream(getFixWidth(), realHeight);
-	}
-
-	uint32_t offsetX = realWidth + _offsetX;
-	int newW = 0;
-	if (offsetX <= getWidth())
-	{
-		offsetX = getWidth();
-	}
-	else
-	{
-		newW = offsetX;
-	}
-
-	if (newW <= getFixWidth())
-	{// 可填充
-		if (newW > getWidth())
-		{
-			this->expendStream(newW, getHeigth());
-		}
-	}
-	else
-	{// 换行
-		this->writeEndLine();
+		this->writeSpaceLine();
 	}
 
 	char* faceData = _data.getPtr();
@@ -448,10 +467,8 @@ void LabelStream::writeEndLine()
 
 	_lineWidthStack.push(_offsetX);
 
-	this->expendStream(getFixWidth(), getHeigth() + getLineHeight());
-
 	_offsetX = 0;
-	_offsetY = 0;
+	_offsetY -= getLineHeight();
 }
 
 void LabelStream::writeSpaceLine()
@@ -461,11 +478,9 @@ void LabelStream::writeSpaceLine()
 		return;
 	}
 	_lineWidthStack.push(_offsetX);
-	_lineWidthStack.push(0);
-	this->expendStream(getFixWidth(), getHeigth() + 2 * getLineHeight());
 
 	_offsetX = 0;
-	_offsetY = 0;
+	_offsetY -= getLineHeight();
 }
 
 void LabelStream::endStream()
@@ -479,6 +494,7 @@ void LabelStream::format(HorizontalAlignment ha)
 	{
 		return;
 	}
+
 	int count = _heigth / getLineHeight();
 	int width = 0;
 	int offsetX = 0;
@@ -496,6 +512,11 @@ void LabelStream::format(HorizontalAlignment ha)
 		{
 			width = _lineWidthStack.top();
 			offsetX = (getFixWidth() - width) * 0.5f;
+			offsetX -= offsetX % 4;
+			if (offsetX < 0)
+			{
+				offsetX = 0;
+			}
 			moveBlock(0, i * getLineHeight(), width, getLineHeight(), offsetX, i * getLineHeight());
 			_lineWidthStack.pop();
 		}
@@ -556,7 +577,6 @@ bool ImageLabel::load(const TextDefine& textDefine)
 	if (fixeWidth > 0)
 	{
 		_stream->setFixWidth(fixeWidth);
-		_stream->expendStream(fixeWidth, 1);
 	}
 	FT_LABEL* label = new FT_LABEL();
 	if (!label->load(textDefine, _stream))

@@ -128,7 +128,17 @@ void LayoutItem::resize(const math::Size& size)
 		}
 	}
 
+	x += w * m_pWidget->getAnchorPointX();
+	y += h * m_pWidget->getAnchorPointY();
+
+	auto pParent = m_pWidget->getParent();
+	if (pParent)
+	{
+		x -= pParent->getAnchorPointX() * size.getWidth();
+		y -= pParent->getAnchorPointY() * size.getHeight();
+	}
+
 	m_pWidget->setVolume(w, h);
-	m_pWidget->setPosition(x + w * m_pWidget->getAnchorPointX(), y + h * m_pWidget->getAnchorPointY());
+	m_pWidget->setPosition(x, y);
 }
 
