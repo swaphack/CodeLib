@@ -1,2 +1,2 @@
-F:\github\CodeLib\Debug\UI.pdb
-F:\github\CodeLib\Foundation\UI\Debug\UI.pdb
+F:\Github\CodeLib\Debug\UI.pdb
+F:\Github\CodeLib\Foundation\UI\Debug\UI.pdb

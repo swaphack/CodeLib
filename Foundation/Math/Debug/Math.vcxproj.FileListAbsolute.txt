@@ -1,2 +1,2 @@
-F:\github\CodeLib\Debug\Math.pdb
-F:\github\CodeLib\Foundation\Math\Debug\Math.pdb
+F:\Github\CodeLib\Debug\Math.pdb
+F:\Github\CodeLib\Foundation\Math\Debug\Math.pdb

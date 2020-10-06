@@ -1,2 +1,2 @@
-F:\github\CodeLib\Debug\Text.pdb
-F:\github\CodeLib\Foundation\Text\Debug\Text.pdb
+F:\Github\CodeLib\Debug\Text.pdb
+F:\Github\CodeLib\Foundation\Text\Debug\Text.pdb

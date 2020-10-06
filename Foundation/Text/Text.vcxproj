@@ -44,7 +44,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>../../Lib/include/tinyxml2</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../Lib/include/tinyxml2;../System/;../Math/;../../Lib/include/;../../Lib/include/freetype;../../Lib/include/fbx</AdditionalIncludeDirectories>
       <BrowseInformation>true</BrowseInformation>
     </ClCompile>
     <Link>

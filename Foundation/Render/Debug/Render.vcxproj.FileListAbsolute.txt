@@ -1,2 +1,2 @@
-F:\github\CodeLib\Debug\Render.pdb
-F:\github\CodeLib\Foundation\Render\Debug\Render.pdb
+F:\Github\CodeLib\Debug\Render.pdb
+F:\Github\CodeLib\Foundation\Render\Debug\Render.pdb

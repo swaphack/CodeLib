@@ -1,7 +1,7 @@
 #include "XmlConfig.h"
-
+#include "system.h"
 #include <vector>
-using namespace sys;
+using namespace text;
 
 XmlConfig::XmlConfig()
 {

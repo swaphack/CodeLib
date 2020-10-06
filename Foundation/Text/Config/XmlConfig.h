@@ -2,7 +2,7 @@
 
 #include "tinyxml2.h"
 
-namespace sys
+namespace text
 {
 	// xml ≈‰÷√
 	class XmlConfig
