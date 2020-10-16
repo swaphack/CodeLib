@@ -6,6 +6,7 @@
 #include "Common/View/import.h"
 #include "Common/Fragment/import.h"
 #include "Common/DrawNode/import.h"
+#include "Common/Input/import.h"
 
 using namespace render;
 
@@ -42,6 +43,10 @@ bool render::CtrlWidget::init()
 	{
 		pDepthTest->setEnabled(false);
 	}
+
+	getTouchProxy()->addTouchDelegate(TouchType::DOWN, this, TOUCH_DELEGATTE_SELECTOR(CtrlWidget::onBeginTouch));
+	getTouchProxy()->addTouchDelegate(TouchType::ON, this, TOUCH_DELEGATTE_SELECTOR(CtrlWidget::onMoveTouch));
+	getTouchProxy()->addTouchDelegate(TouchType::UP, this, TOUCH_DELEGATTE_SELECTOR(CtrlWidget::onEndTouch));
 
 	return true; 
 }
@@ -117,6 +122,61 @@ void render::CtrlWidget::removeAllWidgets()
 		this->removeChild(item);
 	}
 	_widgets.clear();
+}
+
+bool render::CtrlWidget::isTouchEnable()
+{
+	return getTouchProxy()->isTouchEnabled();
+}
+
+void render::CtrlWidget::setTouchEnable(bool bEnabled)
+{
+	getTouchProxy()->setTouchEnabled(bEnabled);
+}
+
+void render::CtrlWidget::onBeginTouch(Node* node, float x, float y, bool include)
+{
+	if (node != this)
+	{
+		return;
+	}
+
+	onTouchBegan(x, y, include);
+}
+
+void render::CtrlWidget::onMoveTouch(Node* node, float x, float y, bool include)
+{
+	if (node != this)
+	{
+		return;
+	}
+
+	onTouchMoved(x, y, include);
+}
+
+void render::CtrlWidget::onEndTouch(Node* node, float x, float y, bool include)
+{
+	if (node != this)
+	{
+		return;
+	}
+
+	onTouchEnded(x, y, include);
+}
+
+bool render::CtrlWidget::onTouchBegan(float x, float y, bool include) 
+{ 
+	return false; 
+}
+
+bool render::CtrlWidget::onTouchMoved(float x, float y, bool include) 
+{ 
+	return false; 
+}
+
+bool render::CtrlWidget::onTouchEnded(float x, float y, bool include) 
+{ 
+	return false;
 }
 
 void render::CtrlWidget::onBlendChange()

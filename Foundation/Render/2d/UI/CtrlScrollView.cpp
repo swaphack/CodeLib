@@ -20,6 +20,7 @@ void ScrollItem::addItem(Node* node, const math::Size& size)
 	{
 		return;
 	}
+	node->setAnchorPoint(0.5f, 0.5f);
 	node->setPosition(size.getWidth() * 0.5f, size.getHeight() * 0.5f);
 	this->addChild(node);
 	this->setVolume(size.getWidth(), size.getHeight());
@@ -28,7 +29,10 @@ void ScrollItem::addItem(Node* node, const math::Size& size)
 ScrollItem* ScrollItem::create(Node* node, const math::Size& size)
 {
 	ScrollItem* item = CREATE_NODE(ScrollItem);
-	item->addItem(node, size);
+	if (item)
+	{
+		item->addItem(node, size);
+	}
 
 	return item;
 }
@@ -36,14 +40,9 @@ ScrollItem* ScrollItem::create(Node* node, const math::Size& size)
 
 //////////////////////////////////////////////////////////////////////////
 CtrlScrollView::CtrlScrollView()
-:_scrollDirection(ScrollDirection::NONE)
 {
-	_content = CREATE_NODE(Node);
+	_content = CREATE_NODE(CtrlLayout);
 	this->addChild(_content);
-
-	this->getTouchProxy()->addTouchDelegate(TouchType::DOWN, this, (TOUCH_DELEGATE_HANDLER)&CtrlScrollView::onBeginTouch);
-	this->getTouchProxy()->addTouchDelegate(TouchType::ON, this, (TOUCH_DELEGATE_HANDLER)&CtrlScrollView::onMoveTouch);
-	this->getTouchProxy()->addTouchDelegate(TouchType::UP, this, (TOUCH_DELEGATE_HANDLER)&CtrlScrollView::onEndTouch);
 }
 
 CtrlScrollView::~CtrlScrollView()
@@ -66,17 +65,17 @@ ScrollDirection CtrlScrollView::getScrollDirection()
 	return _scrollDirection;
 }
 
-void CtrlScrollView::append(Node* item)
+void CtrlScrollView::addItem(CtrlWidget* item, int zOrder)
 {
 	if (item == nullptr)
 	{
 		return;
 	}
 	
-	this->append(item, _itemSize);
+	this->addItem(item, _itemSize, zOrder);
 }
 
-void CtrlScrollView::append(Node* item, const math::Size& size)
+void CtrlScrollView::addItem(CtrlWidget* item, const math::Size& size, int zOrder)
 {
 	if (item == nullptr)
 	{
@@ -86,25 +85,25 @@ void CtrlScrollView::append(Node* item, const math::Size& size)
 	assert(size.getWidth() != 0 && size.getHeight() != 0);
 	
 	ScrollItem* pScrollItem = ScrollItem::create(item, size);
-	_content->addChild(pScrollItem);
-	_nodes.push_back(pScrollItem);
+	_content->addWidget(pScrollItem, zOrder);
+	_itemWidgets.push_back(pScrollItem);
 
 	initItems();
 }
 
-void CtrlScrollView::remove(Node* item)
+void CtrlScrollView::removeItem(CtrlWidget* item)
 {
 	if (item == nullptr)
 	{
 		return;
 	}
 	
-	std::vector<Node*>::iterator iter = _nodes.begin();
-	while (iter != _nodes.end())
+	std::vector<CtrlWidget*>::iterator iter = _itemWidgets.begin();
+	while (iter != _itemWidgets.end())
 	{
 		if ((*iter)->getFirstChild() == item)
 		{
-			_nodes.erase(iter);
+			_itemWidgets.erase(iter);
 			_content->removeChild(*iter);
 			break;
 		}
@@ -116,14 +115,14 @@ void CtrlScrollView::remove(Node* item)
 
 void CtrlScrollView::removeAllItems()
 {
-	std::vector<Node*>::iterator iter = _nodes.begin();
-	while (iter != _nodes.end())
+	std::vector<CtrlWidget*>::iterator iter = _itemWidgets.begin();
+	while (iter != _itemWidgets.end())
 	{
 		(*iter)->release();
 		iter++;
 	}
 
-	_nodes.clear();
+	_itemWidgets.clear();
 	initItems();
 }
 
@@ -143,35 +142,24 @@ const math::Size& CtrlScrollView::getItemSize()
 	return _itemSize;
 }
 
-
-void CtrlScrollView::onBeginTouch(Node* node, float x, float y, bool include)
+void render::CtrlScrollView::addWidget(CtrlWidget* item)
 {
-	if (node != this)
-	{
-		return;
-	}
-
-	onTouchBegan(x, y, include);
+	this->addItem(item);
 }
 
-void CtrlScrollView::onMoveTouch(Node* node, float x, float y, bool include)
+void render::CtrlScrollView::addWidget(CtrlWidget* item, int zOrder)
 {
-	if (node != this)
-	{
-		return;
-	}
-
-	onTouchMoved(x, y, include);
+	this->addItem(item, zOrder);
 }
 
-void CtrlScrollView::onEndTouch(Node* node, float x, float y, bool include)
+void render::CtrlScrollView::removeWidget(CtrlWidget* item)
 {
-	if (node != this)
-	{
-		return;
-	}
+	this->removeItem(item);
+}
 
-	onTouchEnded(x, y, include);
+void render::CtrlScrollView::removeAllWidgets()
+{
+	this->removeAllItems();
 }
 
 bool CtrlScrollView::onTouchBegan(float x, float y, bool include)
@@ -254,7 +242,7 @@ void CtrlScrollView::initItems()
 	{
 		return;
 	}
-	if (_nodes.size() == 0)
+	if (_itemWidgets.size() == 0)
 	{
 		return;
 	}
@@ -265,8 +253,8 @@ void CtrlScrollView::initItems()
 	{
 	case ScrollDirection::HORIZONTAL_LEFT_TO_RIGHT:
 	{
-		std::vector<Node*>::iterator iter = _nodes.begin();
-		while (iter != _nodes.end())
+		std::vector<CtrlWidget*>::iterator iter = _itemWidgets.begin();
+		while (iter != _itemWidgets.end())
 		{
 			ScrollItem* pItem = static_cast<ScrollItem*>(*iter);
 			pItem->setPosition(posX, posY);
@@ -278,8 +266,8 @@ void CtrlScrollView::initItems()
 	}
 	case ScrollDirection::HORIZONTAL_RIGHT_TO_LEFT:
 	{
-		std::vector<Node*>::reverse_iterator iter = _nodes.rbegin();
-		while (iter != _nodes.rend())
+		std::vector<CtrlWidget*>::reverse_iterator iter = _itemWidgets.rbegin();
+		while (iter != _itemWidgets.rend())
 		{
 			ScrollItem* pItem = static_cast<ScrollItem*>(*iter);
 			pItem->setPosition(posX, posY);
@@ -291,8 +279,8 @@ void CtrlScrollView::initItems()
 	}
 	case ScrollDirection::VERTICAL_TOP_TO_BOTTOM:
 	{
-		std::vector<Node*>::iterator iter = _nodes.begin();
-		while (iter != _nodes.end())
+		std::vector<CtrlWidget*>::iterator iter = _itemWidgets.begin();
+		while (iter != _itemWidgets.end())
 		{
 			ScrollItem* pItem = static_cast<ScrollItem*>(*iter);
 			pItem->setPosition(posX, posY);
@@ -304,8 +292,8 @@ void CtrlScrollView::initItems()
 	}
 	case ScrollDirection::VERTICAL_BOTTOM_TO_TOP:
 	{
-		std::vector<Node*>::reverse_iterator iter = _nodes.rbegin();
-		while (iter != _nodes.rend())
+		std::vector<CtrlWidget*>::reverse_iterator iter = _itemWidgets.rbegin();
+		while (iter != _itemWidgets.rend())
 		{
 			ScrollItem* pItem = static_cast<ScrollItem*>(*iter);
 			pItem->setPosition(posX, posY);

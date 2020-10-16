@@ -1,0 +1,2 @@
+H:\Github\CodeLib\Debug\Algorithm.pdb
+H:\Github\CodeLib\Foundation\Algorithm\Debug\Algorithm.pdb

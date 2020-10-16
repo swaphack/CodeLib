@@ -606,6 +606,9 @@
     <ClCompile Include="2d\UI\CtrlMask.cpp">
       <Filter>2d\UI</Filter>
     </ClCompile>
+    <ClCompile Include="2d\UI\CtrlButton.cpp">
+      <Filter>2d\UI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Common\Node\import.h">
@@ -1387,6 +1390,9 @@
       <Filter>Common\View</Filter>
     </ClInclude>
     <ClInclude Include="2d\UI\CtrlMask.h">
+      <Filter>2d\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="2d\UI\CtrlButton.h">
       <Filter>2d\UI</Filter>
     </ClInclude>
   </ItemGroup>

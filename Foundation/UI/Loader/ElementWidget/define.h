@@ -91,9 +91,5 @@ public:\
 #define ADD_LAYOUTITEM_ATTRIBUTE(NAME, FUNC) ADD_ATTRIBUTE(GET_LAYOUTITEM, NAME, FUNC)
 
 //////////////////////////////////////////////////////////////////////////
-#define ELEMENT_NAME_WIDGET			"Widget"
-#define ELEMENT_NAME_LAYOUT			"Layout"
-#define ELEMENT_NAME_NODE			"Node"
-#define ELEMENT_NAME_IMAGE			"Image"
-#define ELEMENT_NAME_TEXT			"Text"
+
 }

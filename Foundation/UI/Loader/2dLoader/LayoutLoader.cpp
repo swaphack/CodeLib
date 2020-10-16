@@ -3,10 +3,10 @@
 using namespace ui;
 
 #define PROPERTY_MARGIN			"margin"
-#define PROPERTY_IMAGE_SHOW		"showimage"
-#define PROPERTY_MASK_SHOW		"showmask"
-#define PROPERTY_MASK_COLOR		"maskcolor"
-#define PROPERTY_IMAGE_PATH		"imagepath"
+#define PROPERTY_IMAGE_SHOW		"showImage"
+#define PROPERTY_MASK_SHOW		"showMask"
+#define PROPERTY_MASK_COLOR		"maskColor"
+#define PROPERTY_IMAGE_PATH		"imagePath"
 
 LayoutLoader::LayoutLoader()
 {

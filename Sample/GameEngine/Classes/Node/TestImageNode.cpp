@@ -187,7 +187,7 @@ void TestImageNode::testPixelImage()
 	this->addChild(pImage);
 
 	CtrlText* pCtrlText = CREATE_NODE(CtrlText);
-	pCtrlText->setFontPath("Resource/font_3.ttf");
+	pCtrlText->setFontPath("Resource/Font/font_3.ttf");
 	pCtrlText->setAnchorPoint(0, 0, 0);
 	pCtrlText->setFontSize(58);
 	pCtrlText->setString("点击后移动鼠标，改变颜色");

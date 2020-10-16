@@ -2,9 +2,6 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClInclude Include="ui.h" />
-    <ClInclude Include="Display\Display.h">
-      <Filter>Display</Filter>
-    </ClInclude>
     <ClInclude Include="Display\import.h">
       <Filter>Display</Filter>
     </ClInclude>
@@ -12,21 +9,6 @@
       <Filter>Layout</Filter>
     </ClInclude>
     <ClInclude Include="Layout\LayoutItem.h">
-      <Filter>Layout</Filter>
-    </ClInclude>
-    <ClInclude Include="Layout\ui_common.h">
-      <Filter>Layout</Filter>
-    </ClInclude>
-    <ClInclude Include="Layout\LayoutEx.h">
-      <Filter>Layout</Filter>
-    </ClInclude>
-    <ClInclude Include="Layout\LayoutItemEx.h">
-      <Filter>Layout</Filter>
-    </ClInclude>
-    <ClInclude Include="Layout\LayoutSpacerItem.h">
-      <Filter>Layout</Filter>
-    </ClInclude>
-    <ClInclude Include="Layout\LayoutWidgetItem.h">
       <Filter>Layout</Filter>
     </ClInclude>
     <ClInclude Include="Layout\import.h">
@@ -71,6 +53,45 @@
     <ClInclude Include="Layout\LayoutItemBase.h">
       <Filter>Layout</Filter>
     </ClInclude>
+    <ClInclude Include="LayoutExtension\LayoutWidgetItem.h">
+      <Filter>LayoutExtension</Filter>
+    </ClInclude>
+    <ClInclude Include="LayoutExtension\LayoutEx.h">
+      <Filter>LayoutExtension</Filter>
+    </ClInclude>
+    <ClInclude Include="LayoutExtension\LayoutItemEx.h">
+      <Filter>LayoutExtension</Filter>
+    </ClInclude>
+    <ClInclude Include="LayoutExtension\LayoutSpacerItem.h">
+      <Filter>LayoutExtension</Filter>
+    </ClInclude>
+    <ClInclude Include="LayoutExtension\import.h">
+      <Filter>LayoutExtension</Filter>
+    </ClInclude>
+    <ClInclude Include="LayoutExtension\macros.h">
+      <Filter>LayoutExtension</Filter>
+    </ClInclude>
+    <ClInclude Include="Layout\macros.h">
+      <Filter>Layout</Filter>
+    </ClInclude>
+    <ClInclude Include="Loader\2dLoader\FileLoader.h">
+      <Filter>Loader\2dLoader</Filter>
+    </ClInclude>
+    <ClInclude Include="Loader\2dLoader\macros.h">
+      <Filter>Loader\2dLoader</Filter>
+    </ClInclude>
+    <ClInclude Include="Display\CtrlFile.h">
+      <Filter>Display</Filter>
+    </ClInclude>
+    <ClInclude Include="Loader\2dLoader\ButtonLoader.h">
+      <Filter>Loader\2dLoader</Filter>
+    </ClInclude>
+    <ClInclude Include="Loader\2dLoader\EditLabelLoader.h">
+      <Filter>Loader\2dLoader</Filter>
+    </ClInclude>
+    <ClInclude Include="Loader\2dLoader\ScrollViewLoader.h">
+      <Filter>Loader\2dLoader</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Display">
@@ -94,24 +115,12 @@
     <Filter Include="Loader\ElementWidget">
       <UniqueIdentifier>{df846a21-11b3-4d6f-a429-78226fcd4e66}</UniqueIdentifier>
     </Filter>
+    <Filter Include="LayoutExtension">
+      <UniqueIdentifier>{95efb6b8-41eb-4349-90da-9fc35b72c86e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Display\Display.cpp">
-      <Filter>Display</Filter>
-    </ClCompile>
     <ClCompile Include="Layout\LayoutItem.cpp">
-      <Filter>Layout</Filter>
-    </ClCompile>
-    <ClCompile Include="Layout\LayoutEx.cpp">
-      <Filter>Layout</Filter>
-    </ClCompile>
-    <ClCompile Include="Layout\LayoutItemEx.cpp">
-      <Filter>Layout</Filter>
-    </ClCompile>
-    <ClCompile Include="Layout\LayoutSpacerItem.cpp">
-      <Filter>Layout</Filter>
-    </ClCompile>
-    <ClCompile Include="Layout\LayoutWidgetItem.cpp">
       <Filter>Layout</Filter>
     </ClCompile>
     <ClCompile Include="Loader\2dLoader\ImageLoader.cpp">
@@ -140,6 +149,33 @@
     </ClCompile>
     <ClCompile Include="Layout\LayoutItemBase.cpp">
       <Filter>Layout</Filter>
+    </ClCompile>
+    <ClCompile Include="LayoutExtension\LayoutEx.cpp">
+      <Filter>LayoutExtension</Filter>
+    </ClCompile>
+    <ClCompile Include="LayoutExtension\LayoutItemEx.cpp">
+      <Filter>LayoutExtension</Filter>
+    </ClCompile>
+    <ClCompile Include="LayoutExtension\LayoutSpacerItem.cpp">
+      <Filter>LayoutExtension</Filter>
+    </ClCompile>
+    <ClCompile Include="LayoutExtension\LayoutWidgetItem.cpp">
+      <Filter>LayoutExtension</Filter>
+    </ClCompile>
+    <ClCompile Include="Loader\2dLoader\FileLoader.cpp">
+      <Filter>Loader\2dLoader</Filter>
+    </ClCompile>
+    <ClCompile Include="Display\CtrlFile.cpp">
+      <Filter>Display</Filter>
+    </ClCompile>
+    <ClCompile Include="Loader\2dLoader\ButtonLoader.cpp">
+      <Filter>Loader\2dLoader</Filter>
+    </ClCompile>
+    <ClCompile Include="Loader\2dLoader\EditLabelLoader.cpp">
+      <Filter>Loader\2dLoader</Filter>
+    </ClCompile>
+    <ClCompile Include="Loader\2dLoader\ScrollViewLoader.cpp">
+      <Filter>Loader\2dLoader</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

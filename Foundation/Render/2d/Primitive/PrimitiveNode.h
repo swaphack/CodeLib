@@ -28,26 +28,38 @@ namespace render
 	public:
 		virtual bool init();
 	public:
-		// 模式
+		/**
+		*	设置模式
+		*/ 
 		void setDrawMode(DrawMode mode);
-
+		/**
+		*	模式
+		*/
 		DrawMode getDrawMode();
 	public:
-		// 添加一个点坐标
+		/**
+		*	添加一个点坐标
+		*/
 		void appendPoint(const math::Vector3& point);
-
+		/**
+		*	添加一个点坐标
+		*/
 		void appendPoint(const math::Vector3& point, const sys::Color4B& color);
-
+		/**
+		*	添加一些坐标
+		*/
 		void appendPoint(const PrimitiveVertex& vertex);
-		// 移除所有点坐标
+		/**
+		*	移除所有点坐标
+		*/
 		void removeAllPoints();
 	public:
 		/**
-		*	大小
+		*	点大小
 		*/
 		void setPointSize(float size);
 		/**
-		*	大小
+		*	点大小
 		*/
 		float getPointSize() const;
 	protected:
@@ -56,7 +68,7 @@ namespace render
 		// 顶点信息
 		std::vector<PrimitiveVertex> _vertexes;
 		/**
-		*	大小
+		*	点大小
 		*/
 		float _pointSize = 1;
 	};

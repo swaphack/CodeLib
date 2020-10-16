@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Layout/ui_common.h"
+#include "Layout/macros.h"
 #include "render.h"
 
 namespace ui
@@ -63,8 +63,6 @@ namespace ui
 		// 加载根元素
 		Layout* loadRoot(tinyxml2::XMLElement* xmlNode);
 		//////////////////////////////////////////////////////////////////////////
-		// 保存节点
-		bool saveWidget(render::CtrlWidget* CtrlWidget, tinyxml2::XMLElement* xmlNode);
 		// 保存布局
 		bool saveLayoutItem(LayoutItem* item, tinyxml2::XMLElement* xmlNode);
 		// 保存根元素

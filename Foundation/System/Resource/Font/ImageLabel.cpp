@@ -180,7 +180,7 @@ bool FT_LABEL::load(const TextDefine& textDefine, LabelStream* stream)
 		offset++;
 	}
 
-	stream->initSteam(rect_width * RGBA_PIXEL_UNIT, rect_height, 1);
+	stream->initSteam(rect_width, rect_height, 1);
 	stream->resetOffset();
 	ptr = dest;
 	offset = 0;
@@ -287,24 +287,28 @@ bool FT_LABEL::initFT(const std::string& filepath, int size, bool bBorder)
 	_error = FT_Init_FreeType(&_library);
 	if (_error != 0)
 	{
+		PRINT("ERROR %s, %d", __FILE__, _error);
 		return false;
 	}
 
 	_error = FT_New_Face(_library, filepath.c_str(), 0, &_face);
 	if (_error != 0)
 	{
+		PRINT("ERROR %s, %d", __FILE__, _error);
 		return false;
 	}
 
 	_error = FT_Select_Charmap(_face, FT_ENCODING_UNICODE);
 	if (_error != 0)
 	{
+		PRINT("ERROR %s, %d", __FILE__, _error);
 		return false;
 	}
 
 	_error = FT_Set_Pixel_Sizes(_face, 0, size);
 	if (_error != 0)
 	{
+		PRINT("ERROR %s, %d", __FILE__, _error);
 		return false;
 	}
 

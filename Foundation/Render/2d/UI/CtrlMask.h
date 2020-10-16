@@ -14,9 +14,5 @@ namespace render
 		virtual ~CtrlMask();
 	public:
 		virtual bool init();
-	protected:
-		void onCtrlMaskBodyChange();
-
-		void onCtrlColorChange();
 	};
 }

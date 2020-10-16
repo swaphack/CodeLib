@@ -33,11 +33,17 @@ namespace render
 	public:
 		virtual ~TouchProtocol() {}
 	public:
-		// 点击屏幕
+		/**
+		*	点击屏幕
+		*/
 		virtual bool onTouchBegan(float x, float y, bool include) = 0;
-		// 在屏幕上滑动
+		/**
+		*	在屏幕上滑动
+		*/
 		virtual bool onTouchMoved(float x, float y, bool include) = 0;
-		// 离开屏幕
+		/**
+		*	离开屏幕
+		*/
 		virtual bool onTouchEnded(float x, float y, bool include) = 0;
 	};
 }

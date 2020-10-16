@@ -342,12 +342,11 @@ math::Matrix4x4 math::Matrix4x4::ortho(float left, float right, float bottom, fl
 	math::Matrix4x4 mat;
 
 	mat[0] = 2 / (right - left);
-	mat[12] = -(right + left) / (right - left);
-
 	mat[5] = 2 / (top - bottom);
-	mat[13] = -(top + bottom) / (top - bottom);
-
 	mat[10] = -2 / (zfar - znear);
+
+	mat[12] = -(right + left) / (right - left);
+	mat[13] = -(top + bottom) / (top - bottom);
 	mat[14] = -(zfar + znear) / (zfar - znear);
 
 	mat[15] = 1;

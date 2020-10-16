@@ -1,15 +1,14 @@
 #pragma once
 
 #include "system.h"
-#include "Layout/ui_common.h"
 #include <map>
 #include <string>
 #include "render.h"
+#include "Layout/macros.h"
+#include "LayoutExtension/macros.h"
 
 namespace ui
 {
-	
-
 	typedef std::map<std::string, std::string> Attributes;
 
 	struct SizePolicy;
@@ -47,6 +46,7 @@ namespace ui
 		void setAttribute(const std::string& name, const sys::CSSSize& value);
 		void setAttribute(const std::string& name, const render::BlendParam& value);
 		void setAttribute(const std::string& name, const SizePolicy& value);
+		void setAttribute(const std::string& name, const MarginState& value);
 
 // 		template<typename T>
 // 		void setAttribute(const std::string& name, const T& value);
@@ -74,6 +74,7 @@ namespace ui
 		bool getAttribute(const std::string& name, sys::CSSSize& defaultValue);
 		bool getAttribute(const std::string& name, render::BlendParam& defaultValue);
 		bool getAttribute(const std::string& name, SizePolicy& defaultValue);
+		bool getAttribute(const std::string& name, MarginState& defaultValue);
 
 // 		template<typename T>
 // 		bool getAttribute(const std::string& name, T& defaultValue);

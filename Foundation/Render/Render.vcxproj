@@ -78,6 +78,7 @@
     <ClCompile Include="2d\Primitive\Mask.cpp" />
     <ClCompile Include="2d\Primitive\PointSprite.cpp" />
     <ClCompile Include="2d\Primitive\PrimitiveNode.cpp" />
+    <ClCompile Include="2d\UI\CtrlButton.cpp" />
     <ClCompile Include="2d\UI\CtrlEditBox.cpp" />
     <ClCompile Include="2d\UI\CtrlEditLabel.cpp" />
     <ClCompile Include="2d\UI\CtrlFrame.cpp" />
@@ -288,6 +289,7 @@
     <ClInclude Include="2d\Primitive\PointSprite.h" />
     <ClInclude Include="2d\Primitive\import.h" />
     <ClInclude Include="2d\Primitive\PrimitiveNode.h" />
+    <ClInclude Include="2d\UI\CtrlButton.h" />
     <ClInclude Include="2d\UI\CtrlEditBox.h" />
     <ClInclude Include="2d\UI\CtrlEditLabel.h" />
     <ClInclude Include="2d\UI\CtrlFrame.h" />

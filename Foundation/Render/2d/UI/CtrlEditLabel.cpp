@@ -7,13 +7,15 @@ using namespace render;
 //////////////////////////////////////////////////////////////////////////
 CtrlEditLabel::CtrlEditLabel()
 {
-	_ctrlText = CREATE_OBJECT(CtrlText);
-	this->addChild(_ctrlText);
+	_ctrlTextPlaceholder = CREATE_NODE(CtrlText);
+	this->addWidget(_ctrlTextPlaceholder);
+
+	_ctrlText = CREATE_NODE(CtrlText);
+	this->addWidget(_ctrlText);
 }
 
 CtrlEditLabel::~CtrlEditLabel()
 {
-	_ctrlText->release();
 }
 
 void CtrlEditLabel::setString(const std::string& text)
@@ -23,11 +25,66 @@ void CtrlEditLabel::setString(const std::string& text)
 	{
 		_ctrlText->setString(text);
 	}
+
+	bool empty = text.empty();
+	_ctrlTextPlaceholder->setVisible(empty);
 }
 
-CtrlText* CtrlEditLabel::getCtrlText()
+CtrlText* CtrlEditLabel::getTextControl() const
 {
 	return _ctrlText;
+}
+
+void render::CtrlEditLabel::setPlaceholder(const std::string& text)
+{
+	_ctrlTextPlaceholder->setString(text);
+}
+
+const std::string& render::CtrlEditLabel::getPlaceholder() const
+{
+	return _ctrlTextPlaceholder->getString();
+}
+
+void render::CtrlEditLabel::setFontPath(const std::string& fonturl)
+{
+	_ctrlText->setFontPath(fonturl);
+	_ctrlTextPlaceholder->setFontPath(fonturl);
+}
+
+const std::string& render::CtrlEditLabel::getFontPath()  const
+{
+	return _ctrlText->getFontPath();
+}
+
+void render::CtrlEditLabel::setFontSize(float size)
+{
+	_ctrlText->setFontSize(size);
+	_ctrlTextPlaceholder->setFontSize(size);
+}
+
+float render::CtrlEditLabel::getFontSize()  const
+{
+	return _ctrlText->getFontSize();
+}
+
+void render::CtrlEditLabel::setTextColor(const sys::Color3B& color)
+{
+	_ctrlText->setTextColor(color);
+}
+
+const sys::Color3B& render::CtrlEditLabel::getTextColor() const
+{
+	return _ctrlText->getTextColor();
+}
+
+void render::CtrlEditLabel::setPlaceholderTextColor(const sys::Color3B& color)
+{
+	_ctrlTextPlaceholder->setTextColor(color);
+}
+
+const sys::Color3B& render::CtrlEditLabel::getPlaceholderTextColor() const
+{
+	return _ctrlTextPlaceholder->getTextColor();
 }
 
 void CtrlEditLabel::onInputHand(sys::BoardKey key, sys::ButtonStatus type)

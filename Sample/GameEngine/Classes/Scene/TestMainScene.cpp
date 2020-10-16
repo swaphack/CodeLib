@@ -23,11 +23,11 @@ bool TestMainScene::init()
 	
 	//this->addChild(CREATE_NODE(TestShaderNode));
 	//this->addChild(CREATE_NODE(TestTextNode));
-	this->addChild(CREATE_NODE(TestLayoutNode));
+	//this->addChild(CREATE_NODE(TestLayoutNode));
 	//this->addChild(CREATE_NODE(TestMediaNode));
 	//this->addChild(CREATE_NODE(TestFragmentNode));
 	//this->addChild(CREATE_NODE(TestDrawNode));
-	//this->addChild(CREATE_NODE(TestUINode));
+	this->addChild(CREATE_NODE(TestUINode));
 
 	//this->addChild(CREATE_NODE(TestParticleNode));
 

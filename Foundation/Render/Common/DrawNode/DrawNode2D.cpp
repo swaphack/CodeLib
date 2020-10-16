@@ -56,8 +56,25 @@ const render::RectPoints& render::DrawNode2D::getRectVertex()
 	return _rectPoints;
 }
 
+#include "Common/View/Camera.h"
+
 bool render::DrawNode2D::containTouchPoint(float x, float y)
 {
+	/*
+	math::Matrix4x4 projMat = Camera::getMainCamera()->getProjectMatrix();
+	math::Matrix4x4 viewMat = Camera::getMainCamera()->getViewMatrix();
+	math::Matrix4x4 modelMat = getWorldMatrix();
+
+	math::Matrix4x4 mvpMat = projMat * viewMat * modelMat;
+
+	render::RectPoints rectPoint;
+	rectPoint.leftDown = math::Matrix4x4::transpose(_realRectPoints.leftDown, mvpMat);
+	rectPoint.rightDown = math::Matrix4x4::transpose(_realRectPoints.rightDown, mvpMat);
+	rectPoint.rightUp = math::Matrix4x4::transpose(_realRectPoints.rightUp, mvpMat);
+	rectPoint.leftUp = math::Matrix4x4::transpose(_realRectPoints.leftUp, mvpMat);
+
+	return rectPoint.containPointByPolygon(x, y);
+	*/
 	return _realRectPoints.containPointByPolygon(x, y);
 }
 

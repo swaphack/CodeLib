@@ -43,6 +43,6 @@ namespace render
 		/**
 		*	Í¼Æ¬ÕÅÊı
 		*/
-		int _frameImageCount;
+		int _frameImageCount = 0;
 	};
 }

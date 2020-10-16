@@ -4,6 +4,7 @@
 
 namespace ui
 {
+	// 图片
 	class ImageLoader : public WidgetLoader
 	{
 	public:

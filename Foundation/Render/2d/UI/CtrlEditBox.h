@@ -22,11 +22,12 @@ namespace render
 		CtrlEditBox();
 		virtual ~CtrlEditBox();
 	public:
+		virtual bool init();
 		virtual void draw();
 	public:
-		// 设置键盘是否相应
+		// 设置键盘是否响应
 		void setKeyboardEnable(bool status);
-		// 获取键盘相应状态
+		// 获取键盘响应状态
 		bool isKeyboardEnable();
 		// 设置输入监听事件
 		void setInputListen(EDITINPUT_DELEGATE_HANDLER handler);
@@ -40,7 +41,9 @@ namespace render
 		// 移除键盘监听委托
 		void removeKeyboardDelegate();
 	protected:
-		void onTouchUp(Node* node, float x, float y, bool include);
+		// 点击屏幕
+		virtual bool onTouchBegan(float x, float y, bool include);
+	protected:
 		void onKeyBoardInput(Node* node, sys::BoardKey key, sys::ButtonStatus type);
 	private:
 		// 键盘是否可用

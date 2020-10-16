@@ -6,7 +6,7 @@ using namespace render;
 
 TouchProxy::TouchProxy(Node* target)
 :_target(target)
-, _bTouchEnabled(true)
+, _bTouchEnabled(false)
 {
 	G_TOUCHMANAGER->addTouch(this);
 }

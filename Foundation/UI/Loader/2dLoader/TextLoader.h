@@ -4,6 +4,7 @@
 
 namespace ui
 {
+	// нд╠╬
 	class TextLoader : public WidgetLoader
 	{
 	public:

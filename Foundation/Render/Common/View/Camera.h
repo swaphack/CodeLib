@@ -40,6 +40,10 @@ namespace render
 	public:
 		// 投影矩阵
 		const math::Matrix4x4& getProjectMatrix() const;
+		// 投影矩阵
+		const math::Matrix4x4& getProjectMatrix2D() const;
+		// 投影矩阵
+		const math::Matrix4x4& getProjectMatrix3D() const;
 		// 视图矩阵
 		const math::Matrix4x4& getViewMatrix() const;
 	public:
@@ -70,7 +74,9 @@ namespace render
 		// 维度
 		DimensionsType _dimensions = DimensionsType::TWO;
 		// 投影矩阵
-		math::Matrix4x4 _projectMatrix;
+		math::Matrix4x4 _projectMatrix2D;
+		// 投影矩阵
+		math::Matrix4x4 _projectMatrix3D;
 		// 视图矩阵
 		math::Matrix4x4 _viewMatrix;
 		// 2d视野参数

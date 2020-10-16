@@ -11,14 +11,16 @@ using namespace ui;
 
 void UIProxy::init()
 {
-	//this->registerElementParser(ELEMENT_NAME_LAYOUTITEM, new LayoutItemLoader());
-	//this->registerElementParser(ELEMENT_NAME_LAYOUT, new LayoutLoader());
-	this->registerElementParser(ELEMENT_NAME_LAYOUT, new LayoutLoader());
-	this->registerElementParser(ELEMENT_NAME_TEXT, new TextLoader());
-	this->registerElementParser(ELEMENT_NAME_IMAGE, new ImageLoader());
 
-	//this->registerElementParser(ELEMENT_NAME_HLAYOUT, new HLayoutLoader());
-	//this->registerElementParser(ELEMENT_NAME_VLAYOUT, new VLayoutLoader());
+	this->registerElementParser(ELEMENT_NAME_WIDGET, new TextLoader());
+	this->registerElementParser(ELEMENT_NAME_LAYOUT, new LayoutLoader());
+	this->registerElementParser(ELEMENT_NAME_IMAGE, new ImageLoader());
+	this->registerElementParser(ELEMENT_NAME_TEXT, new TextLoader());
+	this->registerElementParser(ELEMENT_NAME_BUTTON, new ButtonLoader());
+	this->registerElementParser(ELEMENT_NAME_EDITLABEL, new EditLabelLoader());
+	this->registerElementParser(ELEMENT_NAME_SCROLLVIEW, new ScrollViewLoader());
+
+	this->registerElementParser(ELEMENT_NAME_FILE, new FileLoader());
 }
 
 // 获取控件名称

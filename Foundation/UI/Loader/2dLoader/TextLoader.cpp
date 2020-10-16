@@ -4,9 +4,9 @@ using namespace ui;
 
 
 #define PROPERTY_TEXT		"text"
-#define PROPERTY_PATH		"path"
-#define PROPERTY_FONTSIZE	"fontsize"
-#define PROPERTY_COLOR		"color"
+#define PROPERTY_FONTPATH	"fontPath"
+#define PROPERTY_FONTSIZE	"fontSize"
+#define PROPERTY_TEXTCOLOR		"textColor"
 #define PROPERTY_BLEND		"blend"
 #define PROPERTY_HORIZONTAL	"horizontal"
 #define PROPERTY_VERTICAL	"vertical"
@@ -35,10 +35,10 @@ void TextLoader::parseAttributes()
 	render::BlendParam blend;
 	math::Size size;
 
-	LOAD_WIDGET_ATTRIBUTE(PROPERTY_COLOR, setTextColor, color);
+	LOAD_WIDGET_ATTRIBUTE(PROPERTY_TEXTCOLOR, setTextColor, color);
 	LOAD_WIDGET_ATTRIBUTE(PROPERTY_BLEND, setBlend, blend);
 
-	LOAD_WIDGET_STRING_ATTRIBUTE(PROPERTY_PATH, setFontPath, fontpath);
+	LOAD_WIDGET_STRING_ATTRIBUTE(PROPERTY_FONTPATH, setFontPath, fontpath);
 	LOAD_WIDGET_ATTRIBUTE(PROPERTY_FONTSIZE, setFontSize, fontSize);
 	LOAD_WIDGET_STRING_ATTRIBUTE(PROPERTY_TEXT, setString, text);
 
@@ -53,10 +53,10 @@ void TextLoader::saveAttributes()
 {
 	WidgetLoader::saveAttributes();
 
-	SAVE_WIDGET_ATTRIBUTE(PROPERTY_COLOR, getColor);
+	SAVE_WIDGET_ATTRIBUTE(PROPERTY_TEXTCOLOR, getTextColor);
 	SAVE_WIDGET_ATTRIBUTE(PROPERTY_BLEND, getBlend);
 
-	SAVE_WIDGET_ATTRIBUTE(PROPERTY_PATH, getFontPath);
+	SAVE_WIDGET_ATTRIBUTE(PROPERTY_FONTPATH, getFontPath);
 	SAVE_WIDGET_ATTRIBUTE(PROPERTY_FONTSIZE, getFontSize);
 	SAVE_WIDGET_ATTRIBUTE(PROPERTY_TEXT, getString);
 

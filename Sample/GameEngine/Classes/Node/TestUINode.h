@@ -23,6 +23,8 @@ private:
 	void testStencil();
 
 	void testImage();
+
+	void testButton();
 private:
 
 	void onKeyBoardRole(render::Node* node, sys::BoardKey key, sys::ButtonStatus type);

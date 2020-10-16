@@ -182,10 +182,6 @@ namespace render
 		bool _bTouchEnabled = false;
 		// 是否和父节点关联
 		bool _bRelativeToParent = false;
-		// 动作代理
-		ActionProxy* _actionProxy;
-		// 触摸代理
-		TouchProxy* _touchProxy;
 		// 通知
 		Notify<NodeNotifyType>* _notify;
 		// 相对于父节点的矩阵
@@ -194,6 +190,11 @@ namespace render
 		math::Matrix4x4 _localInverseMatrix;
 		// 实际在世界坐标系中的矩阵
 		math::Matrix4x4 _worldMatrix;
+	private:
+		// 动作代理
+		ActionProxy* _actionProxy;
+		// 触摸代理
+		TouchProxy* _touchProxy;
 		
 	};
 

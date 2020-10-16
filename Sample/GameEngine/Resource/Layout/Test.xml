@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <root width="1024" height="768" layout="1">
-  <Layout name="body" showmask="0" maskcolor="255,255,255,255" margin="0,0,0,0" size="100%,100%" anchorPoint="0,0">  
-	<Image name="image_1" color="255,255,255,255" opacity="255" margin="0,0,0,0" size="300,60%" path="Resource/Image/2k_earth_clouds.jpg" anchorPoint="0,0"/>
-	<Text name="text_1" color="125,125,255" text="护发素快递费骄傲" margin="0,0,200,0" size="300,50" path="Resource/Font/font_3.ttf" fontsize="32" anchorPoint="0,1"/>
-	<Layout name="layout_3" showmask="1" maskcolor="0,255,0,255" margin="0,0,60%,0" size="100%,0" anchorPoint="0,0">
-		<Image name="image_2" path="Resource/Image/NeHe.png" margin="0,0,0,0" anchorPoint="0,0"/>
-		<Text name="text_3" color="255,255,255,255" margin="0,0,0,0" size="0,0" dimensions="400,0" text="十大免费数码单反，什么，啊进口发动机士大夫艰苦拉萨地方艰苦拉萨孔四道口附近撒扩大洛夫克拉士大夫艰苦垃圾" path="Resource/Font/font_3.ttf" fontsize="32" anchorPoint="0,0" horizontal="2"/>
+  <Layout name="body" showmask="0" maskcolor="255,255,255,255" margin="0,0,0,0" size="100%,100%">  
+	<Image name="image_1" color="255,255,255,255" opacity="255" margin="50%,50%,20,20" marginState="1,1,1,1" path="Resource/Image/2k_earth_clouds.jpg"/>
+	<Text name="text_1" textColor="125,125,255" text="护发素快递费骄傲" margin="50%,50%,100,0" marginState="1,1,1,1" fontPath="Resource/Font/font_3.ttf" fontSize="32" horizontal="0" />
+	<Layout name="layout_3" showmask="1" maskcolor="255,0,0,255" margin="0,0,60%,0" marginState="1,0,1,0" size="100%,0">
+		<Image name="image_2" path="Resource/Image/NeHe.png" margin="0,0,50%,50%" marginState="1,1,1,1"/>
+		<Text name="text_3" textColor="255,255,255,255" margin="0,0,0,0" size="100%,100%" dimensions="400,100" text="十大免费数码单反，什么，啊进口发动机士大夫艰苦拉萨地方艰苦拉萨孔四道口附近撒扩大洛夫克拉士大夫艰苦垃圾" fontPath="Resource/Font/font_3.ttf" fontSize="32" horizontal="1"/>
     </Layout>	
-	<Layout name="layout_1" showmask="1" maskcolor="0,255,0,255" margin="0,0,50%,50%" size="50%,50%" anchorPoint="0,0">
-      <Text name="text_2" text="发射点发生范德萨没地方，阿萨" path="Resource/Font/font_3.ttf" margin="0,80%,80%,0" size="100%,50" fontsize="32" anchorPoint="0,0"/>
+	<Layout name="layout_1" showmask="1" maskcolor="0,255,0,255" margin="0,0,50%,50%" marginState="1,1,1,1">
+      <Text name="text_2" text="发射点发生范德萨没地方，阿萨" fontPath="Resource/Font/font_3.ttf" margin="0,80%,80%,0" marginState="1,1,1,1" fontSize="32" horizontal="0"/>
     </Layout>
   </Layout>
 </root>

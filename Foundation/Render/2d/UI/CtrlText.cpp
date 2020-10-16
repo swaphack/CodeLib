@@ -168,16 +168,19 @@ void CtrlText::onTextChange()
 		return;
 	}
 
+	float w = texture->getWidth();
+	float h = texture->getHeight();
+
 	this->setTextureWithRect(texture);
 
-	math::Size size = math::Size(texture->getWidth(), texture->getHeight());
+	math::Size size = math::Size(w, h);
 	math::Rect rect(math::Vector2(), size);
 	VertexTool::setTexture2DCoords(&_rectVertex, size, rect);
 
 	//math::Vector3 anchor = math::Vector3(0.5f, 0.5f, 0.5f);
 	math::Vector3 anchor = getAnchorPoint();
 	math::Vector3 orgin = getOrgin(size);
-	math::Volume volume = math::Volume(texture->getWidth(), texture->getHeight());
+	math::Volume volume = math::Volume(w, h);
 
 	VertexTool::setTexture2DVertices(&_rectVertex, orgin, volume, anchor);
 

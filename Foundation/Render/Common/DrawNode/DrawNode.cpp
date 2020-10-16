@@ -156,7 +156,7 @@ void render::DrawNode::beforeDraw()
 
 void DrawNode::onDraw()
 {
-	if (_mesh == nullptr || _material == nullptr)
+	if (_mesh == nullptr || _material == nullptr || _mesh->getMeshDetail() == nullptr)
 	{
 		return;
 	}

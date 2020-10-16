@@ -226,6 +226,16 @@ void WidgetProperty::setAttribute(const std::string& name, const SizePolicy& val
 	setAttribute(name, str);
 }
 
+void ui::WidgetProperty::setAttribute(const std::string& name, const MarginState& value)
+{
+	if (name.empty())
+	{
+		return;
+	}
+	std::string str = getCString("%d,%d,%d,%d", value.Top ? 1 : 0, value.Right ? 1 : 0, value.Bottom ? 1 : 0, value.Left ? 1 : 0);
+	setAttribute(name, str);
+}
+
 bool WidgetProperty::getAttribute(const std::string& name, bool& defaultValue)
 {
 	int value = 0;
@@ -608,6 +618,29 @@ bool WidgetProperty::getAttribute(const std::string& name, SizePolicy& defaultVa
 	}
 
 	defaultValue = SizePolicy((SizeType)atoi(params[0].getString()), (SizeType)atoi(params[1].getString()));
+
+	return true;
+}
+
+bool ui::WidgetProperty::getAttribute(const std::string& name, MarginState& defaultValue)
+{
+	const std::string& value = getAttribute(name);
+	if (value.empty())
+	{
+		return false;
+	}
+
+	sys::String val = value;
+	std::vector<sys::String> params;
+
+	val.split(",", params);
+
+	if (params.size() != 4)
+	{
+		return false;
+	}
+
+	defaultValue = MarginState(atoi(params[0].getString()), atoi(params[1].getString()), atoi(params[2].getString()), atoi(params[3].getString()));
 
 	return true;
 }

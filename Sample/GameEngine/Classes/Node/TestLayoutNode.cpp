@@ -25,8 +25,8 @@ void TestLayoutNode::testLayout()
 {
 	auto frameSize = Canvas::getInstance()->getView()->getViewSize();
 
-	Display* pDisplay = CREATE_NODE(Display);
-	pDisplay->load("Resource/Layout/Test.xml");
+	CtrlFile* pDisplay = CREATE_NODE(CtrlFile);
+	pDisplay->setFilePath("Resource/Layout/Test.xml");
 	this->addChild(pDisplay);
 
 }
@@ -49,6 +49,8 @@ void TestLayoutNode::testLayouts()
 	pLayout->addWidget(pChildLayout);
 
 }
+
+
 
 
 

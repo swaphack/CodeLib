@@ -88,6 +88,10 @@ bool CtrlFrame::isFlipY()
 
 void CtrlFrame::updateCtrlFrameMeshData()
 {
+	if (getTexture() == nullptr)
+	{
+		return;
+	}
 	auto pMesh = getMesh();
 	if (pMesh)
 	{

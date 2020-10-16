@@ -1,6 +1,7 @@
 #pragma once
 
 #include "LayoutItemBase.h"
+#include "macros.h"
 
 namespace ui
 {
@@ -15,13 +16,21 @@ namespace ui
 		virtual ~LayoutItem();
 	public:
 		/**
-		*	ÉèÖÃ±ßÔµ¾àÀë
+		*	ÉèÖÃÁô°×¾àÀë
 		*/
 		void setMargin(const sys::CSSMargin& margin);
 		/**
-		*	»ñÈ¡±ßÔµ¾àÀë
+		*	»ñÈ¡Áô°×¾àÀë
 		*/
 		const sys::CSSMargin& getMargin() const;
+		/**
+		*	ÉèÖÃÁô°××´Ì¬
+		*/
+		void setMarginState(const MarginState& state);
+		/**
+		*	»ñÈ¡Áô°××´Ì¬
+		*/
+		const MarginState& getMarginState() const;
 		/**
 		*	ÉèÖÃÄÚ²¿Ãæ»ı
 		*/
@@ -41,9 +50,11 @@ namespace ui
 		virtual void resize(const math::Size& size);
 	
 	protected:
-		// ±ßÔµ¾àÀë
+		// Áô°×¾àÀë
 		sys::CSSMargin m_sMargin;
-		// ±ßÔµ¾àÀë
+		// Áô°×¾àÀë
 		sys::CSSSize m_sSize;
+		// Áô°××´Ì¬
+		MarginState m_sMarginState;
 	};
 }

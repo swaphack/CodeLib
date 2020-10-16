@@ -36,6 +36,8 @@ namespace render
 		PARTICLE,
 		// 视窗改变
 		VIEWSIZE,
+		// 文件改变
+		FILE,
 	};
 
 	// 推送委托

@@ -19,21 +19,23 @@ void TestUINode::initNodes()
 {
 	//this->testScissor();
 
-	this->testScrollView();
+	//this->testScrollView();
 
 	//this->testStencil();
 
 	//this->testSequenceFrame();
 
 	//this->testImage();
+
+	this->testButton();
 }
 
 void TestUINode::testEditBox()
 {
 	CtrlEditLabel* pEditLabel = CREATE_NODE(CtrlEditLabel);
 
-	CtrlText* pCtrlText = pEditLabel->getCtrlText();
-	pCtrlText->setFontPath("Resource/font_3.ttf");
+	CtrlText* pCtrlText = pEditLabel->getTextControl();
+	pCtrlText->setFontPath("Resource/Font/font_3.ttf");
 	pCtrlText->setFontSize(58);
 	pCtrlText->setAnchorPoint(0.0f, 0.0f, 0.0f);
 	pCtrlText->setColor(sys::Color4B(125, 80, 255, 255));
@@ -169,7 +171,7 @@ void TestUINode::testScrollView()
 		CtrlImage* pImage = CREATE_NODE(CtrlImage);
 		pImage->setImagePath("Resource/Image/sqi.png");
 		pImage->setVolume(200, 200, 0);
-		pScrollView->append(pImage);
+		pScrollView->addWidget(pImage);
 	}
 
 	pScrollView->setScrollDirection(ScrollDirection::VERTICAL_TOP_TO_BOTTOM);
@@ -266,4 +268,20 @@ void TestUINode::testImage()
 		parent = pImage;
 	}
 	*/
+}
+
+void TestUINode::testButton()
+{
+	auto pBtn = CREATE_NODE(render::CtrlButton);
+	pBtn->setFontSize(32);
+	pBtn->setAnchorPoint(0.5f, 0.5f);
+	pBtn->setPosition(512, 384);
+	pBtn->setVolume(200, 100);
+	pBtn->setString("dsfsdfsa");
+	pBtn->setTextColor(sys::Color3B(255,255,255));
+	pBtn->setFontPath("Resource/Font/font_3.ttf");
+
+	pBtn->setNormalImage("Resource/Image/sqi.png");
+
+	this->addChild(pBtn);
 }

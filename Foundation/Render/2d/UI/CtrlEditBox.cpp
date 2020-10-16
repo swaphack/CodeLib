@@ -8,9 +8,6 @@ CtrlEditBox::CtrlEditBox()
 :_keyboardEnabled(false)
 , _editInputHandler(nullptr)
 {
-	this->getTouchProxy()->addTouchDelegate(render::TouchType::UP, this, TOUCH_DELEGATTE_SELECTOR(CtrlEditBox::onTouchUp));
-
-	this->addKeyboardDelegate();
 }
 
 CtrlEditBox::~CtrlEditBox()
@@ -67,26 +64,39 @@ void CtrlEditBox::removeKeyboardDelegate()
 	G_KEYBOARDMANAGER->removeKeyboardDelegate(this, this);
 }
 
-void CtrlEditBox::onTouchUp(Node* node, float x, float y, bool include)
+bool render::CtrlEditBox::onTouchBegan(float x, float y, bool include)
 {
-	CtrlEditBox* editBox = node->as<CtrlEditBox>();
-	if (editBox == nullptr)
-	{
-		return;
-	}
+	bool bEnable = !_keyboardEnabled;
 
-	editBox->setKeyboardEnable(true);
+	this->setKeyboardEnable(bEnable);
+
+	return true;
 }
 
 void CtrlEditBox::onKeyBoardInput(Node* node, sys::BoardKey key, sys::ButtonStatus type)
 {
-	CtrlEditBox* editBox = node->as<CtrlEditBox>();
-	if (editBox == nullptr || editBox->isKeyboardEnable() == false)
+	if (node != this)
+	{
+		return;
+	}
+	if (this->isKeyboardEnable() == false)
 	{
 		return;
 	}
 
-	editBox->onInputHand(key, type);
+	this->onInputHand(key, type);
+}
+
+bool render::CtrlEditBox::init()
+{
+	if (!CtrlWidget::init())
+	{
+		return false;
+	}
+
+	this->addKeyboardDelegate();
+
+	return true;
 }
 
 void render::CtrlEditBox::draw()

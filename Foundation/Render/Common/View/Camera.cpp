@@ -197,7 +197,24 @@ void Camera::endUpdateTranform()
 
 const math::Matrix4x4& render::Camera::getProjectMatrix() const
 {
-	return _projectMatrix;
+	if (getDimensions() == DimensionsType::TWO)
+	{
+		return _projectMatrix2D;
+	}
+	else
+	{
+		return _projectMatrix3D;
+	}
+}
+
+const math::Matrix4x4& render::Camera::getProjectMatrix2D() const
+{
+	return _projectMatrix2D;
+}
+
+const math::Matrix4x4& render::Camera::getProjectMatrix3D() const
+{
+	return _projectMatrix3D;
 }
 
 const math::Matrix4x4& render::Camera::getViewMatrix() const
@@ -258,16 +275,16 @@ math::Vector3 render::Camera::getCenterPosition()
 
 void render::Camera::updateViewPort()
 {
-	if (getDimensions() == DimensionsType::TWO)
+	//if (getDimensions() == DimensionsType::TWO)
 	{
-		_projectMatrix = math::Matrix4x4::ortho(
+		_projectMatrix2D = math::Matrix4x4::ortho(
 			_viewParameter2D.xLeft, _viewParameter2D.xRight,
 			_viewParameter2D.yBottom, _viewParameter2D.yTop,
 			_viewParameter2D.zNear, _viewParameter2D.zFar);
 	}
-	else if (getDimensions() == DimensionsType::THREE)
+	//else if (getDimensions() == DimensionsType::THREE)
 	{
-		_projectMatrix = math::Matrix4x4::frustum(
+		_projectMatrix3D = math::Matrix4x4::frustum(
 			_viewParameter3D.xLeft, _viewParameter3D.xRight,
 			_viewParameter3D.yBottom, _viewParameter3D.yTop,
 			_viewParameter3D.zNear, _viewParameter3D.zFar);
