@@ -77,10 +77,6 @@ LayoutItem* ui::Layout::findItemByName(const std::string& name) const
 
 void Layout::resize(const math::Size& size)
 {
-	if (this->getName() == "UIMain")
-	{
-		int a = 1;
-	}
 	LayoutItem::resize(size);
 
 	this->onLayoutSizeChanged(size);

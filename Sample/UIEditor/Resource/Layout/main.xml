@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <root width="1024" height="768" layout="1">
   <Layout name="UIMain" showMask="1" maskColor="0,0,0,255" margin="0,0,0,0" size="100%,100%">  
-		<Text text="Name" anchorPoint="0,0.5" marginState="1,0,0,1" margin="0,0,0,5" size="50,100" fontPath="Resource/Font/font_3.ttf" fontSize="24" textColor="255,0,0" />
+		<Text text="Name" anchorPoint="0,0.5" marginState="1,0,0,1" margin="0,0,0,5" size="50,100" fontPath="Resource/Font/font_3.ttf" fontSize="24" textColor="255,255,255" />
   </Layout>
 </root>
