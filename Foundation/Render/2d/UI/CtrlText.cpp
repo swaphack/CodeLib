@@ -162,20 +162,22 @@ const sys::Color3B& render::CtrlText::getTextColor() const
 
 void CtrlText::onTextChange()
 {
+	float w = 0, h = 0;
 	Texture2D* texture = G_TEXTURE_CACHE->createTexture2D(_textDefine);
-	if (texture == nullptr)
+	if (texture != nullptr)
 	{
-		return;
+		w = texture->getWidth();
+		h = texture->getHeight();
+		this->setTextureWithRect(texture);
+	}
+	else
+	{
+		this->setTextureWithRect(nullptr);
 	}
 
-	float w = texture->getWidth();
-	float h = texture->getHeight();
-
-	this->setTextureWithRect(texture);
-
 	math::Size size = math::Size(w, h);
-	math::Rect rect(math::Vector2(), size);
-	VertexTool::setTexture2DCoords(&_rectVertex, size, rect);
+	//math::Rect rect(math::Vector2(), size);
+	//VertexTool::setTexture2DCoords(&_rectVertex, size, rect);
 
 	//math::Vector3 anchor = math::Vector3(0.5f, 0.5f, 0.5f);
 	math::Vector3 anchor = getAnchorPoint();

@@ -28,9 +28,13 @@ namespace ui
 		*/
 		void removeAllItems();
 		/**
-		*	获取子元件元件
+		*	获取子元件
 		*/
-		const std::vector<LayoutItem*>& getChildren();
+		const std::vector<LayoutItem*>& getChildren() const;
+		/**
+		*	查找子元件
+		*/
+		LayoutItem* findItemByName(const std::string& name) const;
 	public:
 		/**
 		*	当窗口大小发生改变时

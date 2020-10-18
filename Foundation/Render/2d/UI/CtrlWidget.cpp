@@ -124,6 +124,27 @@ void render::CtrlWidget::removeAllWidgets()
 	_widgets.clear();
 }
 
+render::CtrlWidget* render::CtrlWidget::findWidgetByName(const std::string& name)
+{
+	if (this->getName() == name)
+	{
+		return this;
+	}
+	for (auto item : _widgets)
+	{
+		if (item->getName() == name)
+		{
+			return item;
+		}
+		else
+		{
+			return item->findWidgetByName(name);
+		}
+	}
+
+	return nullptr;
+}
+
 bool render::CtrlWidget::isTouchEnable()
 {
 	return getTouchProxy()->isTouchEnabled();

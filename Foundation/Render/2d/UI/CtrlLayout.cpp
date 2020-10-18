@@ -17,7 +17,7 @@ render::CtrlLayout::CtrlLayout()
 	_backgroundMask->setName("layout_bg_mask");
 	_backgroundMask->setAnchorPoint(0, 0);
 	_backgroundMask->setColor(sys::Color4B(125, 125, 125, 125));
-	_backgroundMask->setVisible(true);
+	_backgroundMask->setVisible(false);
 	this->addWidget(_backgroundMask, -1);
 }
 

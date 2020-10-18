@@ -7,3 +7,4 @@
 #include "WidgetPanel.h"
 #include "DesignPanel.h"
 #include "PropertyPanel.h"
+#include "DirectoryPanel.h"

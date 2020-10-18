@@ -5,11 +5,11 @@
 namespace ue
 {
 	// ¿Ø¼þÀ¸
-	class WidgetPanel : public Panel
+	class ControlPanel : public Panel
 	{
 	public:
-		WidgetPanel();
-		virtual ~WidgetPanel();
+		ControlPanel();
+		virtual ~ControlPanel();
 	public:
 	};
 }

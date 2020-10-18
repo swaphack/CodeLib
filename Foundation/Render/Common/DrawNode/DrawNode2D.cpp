@@ -93,8 +93,8 @@ void render::DrawNode2D::onDrawNode2DBodyChange()
 	calRealRectPoints();
 
 	math::Size size = math::Size(this->getWidth(), this->getHeight());
-	math::Rect rect(math::Vector2(), size);
-	VertexTool::setTexture2DCoords(&_rectVertex, size, rect);
+	//math::Rect rect(math::Vector2(), size);
+	//VertexTool::setTexture2DCoords(&_rectVertex, size, rect);
 	VertexTool::setTexture2DVertices(&_rectVertex, math::Vector3(), _volume, _anchor);
 
 	updateDrawNode2DMesh();

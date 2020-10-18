@@ -90,7 +90,8 @@ char render::KeyChar::getChar(sys::BoardKey key)
 	if (value != 0) return value;
 
 	value = getFuncChar(key);
-	return value;
+	if (value != 0) return value;
+	return (char)0;
 }
 
 char render::KeyChar::getNumber(sys::BoardKey key)

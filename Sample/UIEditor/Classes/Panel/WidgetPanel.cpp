@@ -1,9 +1,9 @@
 #include "WidgetPanel.h"
 
-ue::WidgetPanel::WidgetPanel()
+ue::ControlPanel::ControlPanel()
 {
 }
 
-ue::WidgetPanel::~WidgetPanel()
+ue::ControlPanel::~ControlPanel()
 {
 }

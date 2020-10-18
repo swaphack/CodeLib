@@ -6,7 +6,7 @@ using namespace ui;
 #define PROPERTY_TEXT		"text"
 #define PROPERTY_FONTPATH	"fontPath"
 #define PROPERTY_FONTSIZE	"fontSize"
-#define PROPERTY_TEXTCOLOR		"textColor"
+#define PROPERTY_TEXTCOLOR	"textColor"
 #define PROPERTY_BLEND		"blend"
 #define PROPERTY_HORIZONTAL	"horizontal"
 #define PROPERTY_VERTICAL	"vertical"

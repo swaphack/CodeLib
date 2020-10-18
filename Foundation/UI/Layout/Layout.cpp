@@ -48,13 +48,39 @@ void Layout::removeAllItems()
 	
 }
 
-const std::vector<LayoutItem*>& Layout::getChildren()
+const std::vector<LayoutItem*>& Layout::getChildren() const
 {
 	return m_vChildren;
 }
 
+LayoutItem* ui::Layout::findItemByName(const std::string& name) const
+{
+	if (this->getName() == name)
+	{
+		return (LayoutItem*)this;
+	}
+
+	for (auto item : m_vChildren)
+	{
+		if (item->getName() == name)
+		{
+			return item;
+		}
+		else if (item->is<Layout>())
+		{
+			return item->as<Layout>()->findItemByName(name);
+		}
+	}
+
+	return nullptr;
+}
+
 void Layout::resize(const math::Size& size)
 {
+	if (this->getName() == "viewScene")
+	{
+		int a = 1;
+	}
 	LayoutItem::resize(size);
 
 	this->onLayoutSizeChanged(size);

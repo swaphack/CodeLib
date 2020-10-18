@@ -8,10 +8,16 @@ using namespace render;
 CtrlEditLabel::CtrlEditLabel()
 {
 	_ctrlTextPlaceholder = CREATE_NODE(CtrlText);
+	_ctrlTextPlaceholder->setHorizontalAlignment(sys::HorizontalAlignment::LEFT);
+	_ctrlTextPlaceholder->setAnchorPoint(0, 0);
 	this->addWidget(_ctrlTextPlaceholder);
 
 	_ctrlText = CREATE_NODE(CtrlText);
+	_ctrlText->setHorizontalAlignment(sys::HorizontalAlignment::LEFT);
+	_ctrlText->setAnchorPoint(0, 0);
 	this->addWidget(_ctrlText);
+
+	this->setTouchEnable(true);
 }
 
 CtrlEditLabel::~CtrlEditLabel()
@@ -28,11 +34,31 @@ void CtrlEditLabel::setString(const std::string& text)
 
 	bool empty = text.empty();
 	_ctrlTextPlaceholder->setVisible(empty);
+	//_ctrlText->setVisible(!empty);
 }
 
 CtrlText* CtrlEditLabel::getTextControl() const
 {
 	return _ctrlText;
+}
+
+bool render::CtrlEditLabel::init()
+{
+	if (!CtrlEditBox::init())
+	{
+		return false;
+	}
+
+	_notify->addListen(NodeNotifyType::BODY, [this]() {
+		_ctrlTextPlaceholder->setAnchorPoint(this->getAnchorPoint());
+		_ctrlTextPlaceholder->setDimensions(this->getSize());
+
+		_ctrlText->setAnchorPoint(this->getAnchorPoint());
+		_ctrlText->setDimensions(this->getSize());
+	});
+
+
+	return true;
 }
 
 void render::CtrlEditLabel::setPlaceholder(const std::string& text)
@@ -119,8 +145,11 @@ void CtrlEditLabel::onInputHand(sys::BoardKey key, sys::ButtonStatus type)
 void CtrlEditLabel::onInputKeyBackHandler()
 {
 	std::string text = this->getString();
-	text = text.substr(0, text.size() - 1);
-	this->setString(text.c_str());
+	if (!text.empty())
+	{
+		text = text.substr(0, text.size() - 1);
+		this->setString(text.c_str());
+	}
 }
 
 void CtrlEditLabel::onInputKeyReturnHandler()

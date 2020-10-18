@@ -14,6 +14,8 @@ namespace render
 		CtrlEditLabel();
 		virtual ~CtrlEditLabel();
 	public:
+		virtual bool init();
+	public:
 		/**
 		*	ÉèÖÃÎÄ±¾
 		*/ 

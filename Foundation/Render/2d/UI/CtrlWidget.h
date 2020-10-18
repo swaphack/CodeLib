@@ -38,6 +38,10 @@ namespace render
 		*	移除所有控件
 		*/
 		virtual void removeAllWidgets();
+		/**
+		*	根据名字查找控件
+		*/
+		CtrlWidget* findWidgetByName(const std::string& name);
 	public:
 		/**
 		*	是否可点击
