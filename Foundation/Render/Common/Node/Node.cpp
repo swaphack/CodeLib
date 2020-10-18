@@ -390,6 +390,10 @@ void Node::onSpaceChange()
 
 void Node::onBodyChange()
 {
+	if (this->getWidth() == 0)
+	{
+		int a = 1;
+	}
 	this->notify(NodeNotifyType::BODY);
 }
 

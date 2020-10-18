@@ -23,7 +23,7 @@ bool ui::CtrlFile::init()
 	{
 		return false;
 	}
-
+	
 	_notify->addListen(render::NodeNotifyType::BODY, [this]() {
 		math::Size size = this->getSize();
 		if (m_pLayout)

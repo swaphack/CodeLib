@@ -34,13 +34,13 @@ void ue::DesignPanel::setUIFile(const std::string& filepath)
 		{
 			item->getWidget()->addWidget(m_pUIFile);
 		}
-	}
 
-	ui::Layout* childLayout = item->as<ui::Layout>();
-	if (childLayout && m_pUIFile->getLayout())
-	{
-		childLayout->addItem(m_pUIFile->getLayout());
-	}
+		ui::Layout* childLayout = item->as<ui::Layout>();
+		if (childLayout && m_pUIFile->getLayout())
+		{
+			childLayout->addItem(m_pUIFile->getLayout());
+		}
+	}	
 }
 
 void ue::DesignPanel::initUI()
