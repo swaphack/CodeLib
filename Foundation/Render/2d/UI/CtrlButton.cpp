@@ -7,14 +7,14 @@ render::CtrlButton::CtrlButton()
 	_btnImage = CREATE_NODE(CtrlImage);
 	_btnImage->setName("button_image");
 	_btnImage->setAnchorPoint(0, 0);
-	this->addWidget(_btnImage, -1);
+	this->addProtectedWidget(_btnImage);
 
 	_btnText = CREATE_NODE(CtrlText);
 	_btnText->setName("button_text");
 	_btnText->setAnchorPoint(0, 0);
 	_btnText->setHorizontalAlignment(sys::HorizontalAlignment::CENTER);
 	_btnText->setVerticalAlignment(sys::VerticalAlignment::MIDDLE);
-	this->addWidget(_btnText, -1);
+	this->addProtectedWidget(_btnText);
 
 	this->setTouchEnable(true);
 }
@@ -140,18 +140,30 @@ float render::CtrlButton::getTouchScale() const
 
 bool render::CtrlButton::onTouchBegan(float x, float y, bool include)
 {
+	if (!CtrlWidget::onTouchBegan(x, y, include))
+	{
+		return false;
+	}
 	this->setScale(_touchScale);
 	return include;
 }
 
 bool render::CtrlButton::onTouchMoved(float x, float y, bool include)
 {
+	if (!CtrlWidget::onTouchMoved(x, y, include))
+	{
+		return false;
+	}
 	this->setScale(_touchScale);
 	return include;
 }
 
 bool render::CtrlButton::onTouchEnded(float x, float y, bool include)
 {
+	if (!CtrlWidget::onTouchEnded(x, y, include))
+	{
+		return false;
+	}
 	this->setScale(1.0f);
 	return include;
 }

@@ -16,18 +16,18 @@ void Layout::addItem(LayoutItem* item)
 	ASSERT(item != nullptr);
 	
 	SAFE_RETAIN(item);
-	m_vChildren.push_back(item);
+	_items.push_back(item);
 }
 
 void Layout::removeItem(LayoutItem* item)
 {
 	ASSERT(item != nullptr);
 
-	for (int i = 0; i < m_vChildren.size(); i++)
+	for (int i = 0; i < _items.size(); i++)
 	{
-		if (m_vChildren[i] == item)
+		if (_items[i] == item)
 		{
-			m_vChildren.erase(m_vChildren.begin() + i);
+			_items.erase(_items.begin() + i);
 			SAFE_RELEASE(item);
 			break;
 		}
@@ -36,21 +36,21 @@ void Layout::removeItem(LayoutItem* item)
 
 void Layout::removeAllItems()
 {
-	std::vector<LayoutItem*>::iterator iter = m_vChildren.begin();
+	std::vector<LayoutItem*>::iterator iter = _items.begin();
 
-	while (iter != m_vChildren.end())
+	while (iter != _items.end())
 	{
 		SAFE_RELEASE((*iter));
 		iter++;
 	}
 
-	m_vChildren.clear();
+	_items.clear();
 	
 }
 
-const std::vector<LayoutItem*>& Layout::getChildren() const
+const std::vector<LayoutItem*>& Layout::getAllItems() const
 {
-	return m_vChildren;
+	return _items;
 }
 
 LayoutItem* ui::Layout::findItemByName(const std::string& name) const
@@ -60,19 +60,33 @@ LayoutItem* ui::Layout::findItemByName(const std::string& name) const
 		return (LayoutItem*)this;
 	}
 
-	for (auto item : m_vChildren)
+	for (auto item : _items)
 	{
 		if (item->getName() == name)
 		{
 			return item;
 		}
-		else if (item->is<Layout>())
+
+		if (item->is<Layout>())
 		{
-			return item->as<Layout>()->findItemByName(name);
+			auto layoutItem = item->as<Layout>()->findItemByName(name);
+			if (layoutItem != nullptr)
+			{
+				return layoutItem;
+			}
 		}
 	}
 
 	return nullptr;
+}
+
+LayoutItem* ui::Layout::getItem(int index) const
+{
+	if (index < 0 || index >= _items.size())
+	{
+		return nullptr;
+	}
+	return _items[index];
 }
 
 void Layout::resize(const math::Size& size)
@@ -91,8 +105,8 @@ bool Layout::copy(Layout* item)
 
 	setMargin(item->getMargin());
 
-	std::vector<LayoutItem*>::const_iterator iter = item->getChildren().begin();
-	while (iter != item->getChildren().end())
+	std::vector<LayoutItem*>::const_iterator iter = item->getAllItems().begin();
+	while (iter != item->getAllItems().end())
 	{
 		this->addItem(*iter);
 		iter++;
@@ -105,10 +119,10 @@ void Layout::onLayoutSizeChanged(const math::Size& innerSize)
 {
 	const math::Size& parentSize = m_pWidget->getSize();
 
-	int count = m_vChildren.size();
+	int count = _items.size();
 	for (int i = 0; i < count; i++)
 	{
-		LayoutItem* child = m_vChildren[i];
+		LayoutItem* child = _items[i];
 		if (child == nullptr)
 		{
 			continue;

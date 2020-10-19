@@ -30,11 +30,15 @@ namespace ui
 		/**
 		*	获取子元件
 		*/
-		const std::vector<LayoutItem*>& getChildren() const;
+		const std::vector<LayoutItem*>& getAllItems() const;
 		/**
 		*	查找子元件
 		*/
 		LayoutItem* findItemByName(const std::string& name) const;
+		/**
+		*	查找子元件
+		*/
+		LayoutItem* getItem(int index) const;
 	public:
 		/**
 		*	当窗口大小发生改变时
@@ -53,6 +57,6 @@ namespace ui
 		virtual void onLayoutSizeChanged(const math::Size& innerSize);		
 	protected:
 		// 子元件集合
-		std::vector<LayoutItem*> m_vChildren;		
+		std::vector<LayoutItem*> _items;		
 	};
 }

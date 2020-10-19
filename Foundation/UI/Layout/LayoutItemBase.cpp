@@ -23,24 +23,21 @@ render::CtrlWidget* ui::LayoutItemBase::getWidget() const
 	return m_pWidget;
 }
 
-void ui::LayoutItemBase::setBoxVisible(bool status)
+void ui::LayoutItemBase::setBoxVisible(bool bVisible)
 {
-	m_bBoxVisible = status;
+	if (m_pWidget)
+	{
+		m_pWidget->setRectVisible(bVisible);
+	}
 }
 
-bool ui::LayoutItemBase::isBoxVisible() const
+bool ui::LayoutItemBase::containPoint(float x, float y)
 {
-	return m_bBoxVisible;
-}
-
-void ui::LayoutItemBase::setBoxColor(const sys::Color4B& color)
-{
-	m_cBoxColor = color;
-}
-
-const sys::Color4B& ui::LayoutItemBase::getBoxColor() const
-{
-	return m_cBoxColor;
+	if (m_pWidget)
+	{
+		return m_pWidget->containTouchPoint(x, y);
+	}
+	return false;
 }
 
 bool ui::LayoutItemBase::copy(LayoutItemBase* item)
@@ -50,8 +47,6 @@ bool ui::LayoutItemBase::copy(LayoutItemBase* item)
 		return false;
 	}
 	setWidget(item->getWidget());
-	setBoxColor(item->getBoxColor());
-	setBoxVisible(item->isBoxVisible());
 
 	return true;
 }

@@ -84,7 +84,7 @@
     <ClInclude Include="Layout\LayoutItemBase.h" />
     <ClInclude Include="Layout\macros.h" />
     <ClInclude Include="Loader\2dLoader\ButtonLoader.h" />
-    <ClInclude Include="Loader\2dLoader\EditLabelLoader.h" />
+    <ClInclude Include="Loader\2dLoader\EditTextLoader.h" />
     <ClInclude Include="Loader\2dLoader\FileLoader.h" />
     <ClInclude Include="Loader\2dLoader\ImageLoader.h" />
     <ClInclude Include="Loader\2dLoader\import.h" />
@@ -112,7 +112,7 @@
     <ClCompile Include="Layout\LayoutItem.cpp" />
     <ClCompile Include="Layout\LayoutItemBase.cpp" />
     <ClCompile Include="Loader\2dLoader\ButtonLoader.cpp" />
-    <ClCompile Include="Loader\2dLoader\EditLabelLoader.cpp" />
+    <ClCompile Include="Loader\2dLoader\EditTextLoader.cpp" />
     <ClCompile Include="Loader\2dLoader\FileLoader.cpp" />
     <ClCompile Include="Loader\2dLoader\ImageLoader.cpp" />
     <ClCompile Include="Loader\2dLoader\LayoutLoader.cpp" />

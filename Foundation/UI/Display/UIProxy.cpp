@@ -17,7 +17,7 @@ void UIProxy::init()
 	this->registerElementParser(ELEMENT_NAME_IMAGE, new ImageLoader());
 	this->registerElementParser(ELEMENT_NAME_TEXT, new TextLoader());
 	this->registerElementParser(ELEMENT_NAME_BUTTON, new ButtonLoader());
-	this->registerElementParser(ELEMENT_NAME_EDITLABEL, new EditLabelLoader());
+	this->registerElementParser(ELEMENT_NAME_EDITTEXT, new EditTextLoader());
 	this->registerElementParser(ELEMENT_NAME_SCROLLVIEW, new ScrollViewLoader());
 
 	this->registerElementParser(ELEMENT_NAME_FILE, new FileLoader());
@@ -318,8 +318,8 @@ bool UIProxy::saveLayoutItem(LayoutItem* item, tinyxml2::XMLElement* xmlNode)
 		return true;
 	}
 
-	std::vector<LayoutItem*>::const_iterator iter = layout->getChildren().begin();
-	while (iter != layout->getChildren().end())
+	std::vector<LayoutItem*>::const_iterator iter = layout->getAllItems().begin();
+	while (iter != layout->getAllItems().end())
 	{
 		tinyxml2::XMLElement* pChildNode = nullptr;
 

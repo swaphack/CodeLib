@@ -4,6 +4,11 @@
 
 namespace ue
 {
+
+#define PANEL_SELECT_TARGET "selectTarget"
+#define PANEL_SELECT_FILE "selectFile"
+#define PANEL_SELECT_XML "selectXML"
+
 	// 面板
 	class Panel : public ui::CtrlFile
 	{
@@ -25,7 +30,7 @@ namespace ue
 		*	初始化文本
 		*/
 		virtual void initText();
-	protected:
+	protected: // 点击
 		/**
 		*	点击屏幕
 		*/ 
@@ -38,5 +43,36 @@ namespace ue
 		*	离开屏幕
 		*/   
 		virtual bool onTouchEnded(float x, float y, bool include);
+	protected: // 事件派发
+		/**
+		*	派发布局项
+		*/
+		void dispatchItem(ui::LayoutItem* item);
+		/**
+		*	派发布局项
+		*/
+		void dispatchFile(ui::CtrlFile* layout);
+		/**
+		*	派发配置文件
+		*/
+		void dispatchXml(tinyxml2::XMLElement* doc);
+	protected:
+		/**
+		*	创建文件
+		*/
+		static ui::LayoutItem* createUIFile(const std::string& filepath);
+		/**
+		*	创建文件
+		*/
+		template<typename T>
+		static T* createPanel(const std::string& filepath)
+		{
+			auto pFile = CREATE_NODE(T);
+			pFile->setRootView(true);
+			pFile->setFilePath(filepath);
+			pFile->autoResize();
+
+			return pFile;
+		}
 	};
 }

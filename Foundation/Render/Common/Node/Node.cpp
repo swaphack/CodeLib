@@ -54,7 +54,7 @@ void Node::setParent( Node* node )
 	_parent = node;
 }
 
-Node* Node::getParent()
+Node* Node::getParent() const
 {
 	return _parent;
 }
@@ -126,7 +126,7 @@ void Node::removeAllChildren()
 	onChildrenChange();
 }
 
-Node* Node::getChildByID( long id )
+Node* Node::getChildByID( long id ) const
 {
 	for (auto item : _children)
 	{
@@ -143,12 +143,12 @@ void Node::setTag( int tag )
 	_tag = tag;
 }
 
-int Node::getTag()
+int Node::getTag() const
 {
 	return _tag;
 }
 
-Node* Node::getChildByTag(int tag)
+Node* Node::getChildByTag(int tag) const
 {
 	for (auto item : _children)
 	{
@@ -160,7 +160,7 @@ Node* Node::getChildByTag(int tag)
 	return nullptr;
 }
 
-Node* Node::getChildByName(const std::string& name)
+Node* Node::getChildByName(const std::string& name) const
 {
 	for (auto item : _children)
 	{
@@ -172,7 +172,7 @@ Node* Node::getChildByName(const std::string& name)
 	return nullptr;
 }
 
-Node* Node::getFirstChild()
+Node* Node::getFirstChild() const
 {
 	if (_children.size() == 0)
 	{
@@ -197,7 +197,7 @@ void Node::setUserData( void* data )
 	_userData = data;
 }
 
-void* Node::getUserData()
+void* Node::getUserData() const
 {
 	return _userData;
 }
@@ -208,7 +208,7 @@ void Node::setZOrder(int z)
 	setDirty(true);
 }
 
-int Node::getZOrder()
+int Node::getZOrder() const
 {
 	return _zOrder;
 }
@@ -223,7 +223,7 @@ void Node::setVisible( bool status )
 	_bVisibled = status;
 }
 
-bool Node::isVisible()
+bool Node::isVisible() const
 {
 	return _bVisibled;
 }
@@ -425,7 +425,7 @@ void render::Node::setSkipDraw(bool status)
 	_bSkipDraw = status;
 }
 
-bool render::Node::isSkipDraw()
+bool render::Node::isSkipDraw() const
 {
 	return _bSkipDraw;
 }

@@ -16,7 +16,7 @@ void LayoutEx::addItem(LayoutItemEx* item)
 {
 	ASSERT(item != nullptr);
 
-	m_vChildren.push_back(item);
+	_items.push_back(item);
 	
 	if (item->getWidget() && this->getWidget())
 	{
@@ -28,11 +28,11 @@ void LayoutEx::removeItem(LayoutItemEx* item)
 {
 	ASSERT(item != nullptr);
 
-	for (int i = 0; i < m_vChildren.size(); i++)
+	for (int i = 0; i < _items.size(); i++)
 	{
-		if (m_vChildren[i] == item)
+		if (_items[i] == item)
 		{
-			m_vChildren.erase(m_vChildren.begin() + i);
+			_items.erase(_items.begin() + i);
 			delete item;
 			break;
 		}
@@ -46,15 +46,15 @@ void LayoutEx::removeItem(LayoutItemEx* item)
 
 void LayoutEx::removeAllItems()
 {
-	std::vector<LayoutItemEx*>::iterator iter = m_vChildren.begin();
+	std::vector<LayoutItemEx*>::iterator iter = _items.begin();
 
-	while (iter != m_vChildren.end())
+	while (iter != _items.end())
 	{
 		delete *iter;
 		iter++;
 	}
 
-	m_vChildren.clear();
+	_items.clear();
 
 // 	if (this->getWidget())
 // 	{
@@ -64,7 +64,7 @@ void LayoutEx::removeAllItems()
 
 const std::vector<LayoutItemEx*>& LayoutEx::getChildren()
 {
-	return m_vChildren;
+	return _items;
 }
 
 void LayoutEx::resize(const math::Size& size)
@@ -123,8 +123,8 @@ void LayoutEx::onLayoutSizeChanged(const math::Size& innerSize)
 
 	std::vector<math::Rect> innerItems;
 
-	std::vector<LayoutItemEx*>::iterator iter = m_vChildren.begin();
-	while (iter != m_vChildren.end())
+	std::vector<LayoutItemEx*>::iterator iter = _items.begin();
+	while (iter != _items.end())
 	{
 		pItem = *iter;
 		// 内部大小
@@ -144,7 +144,7 @@ void LayoutEx::onLayoutSizeChanged(const math::Size& innerSize)
 	for (int i = 0; i < innerItems.size(); i++)
 	{
 		math::Rect allocRect = innerItems[i];
-		//m_vChildren[i]->setLayoutGeometry(allocRect);
+		//_items[i]->setLayoutGeometry(allocRect);
 	}
 }
 
@@ -199,8 +199,8 @@ math::Size HorizontalLayout::getLayoutInnerMinSize()
 	LayoutItemEx* pItem;
 	float w = 0, h = 0;
 
-	std::vector<LayoutItemEx*>::iterator iter = m_vChildren.begin();
-	while (iter != m_vChildren.end())
+	std::vector<LayoutItemEx*>::iterator iter = _items.begin();
+	while (iter != _items.end())
 	{
 		pItem = *iter;
 		// 宽度拼接
@@ -230,8 +230,8 @@ math::Size HorizontalLayout::getLayoutInnerMaxSize()
 	LayoutItemEx* pItem;
 	float w = 0, h = 0;
 
-	std::vector<LayoutItemEx*>::iterator iter = m_vChildren.begin();
-	while (iter != m_vChildren.end())
+	std::vector<LayoutItemEx*>::iterator iter = _items.begin();
+	while (iter != _items.end())
 	{
 		pItem = *iter;
 		// 宽度拼接
@@ -273,8 +273,8 @@ math::Size VerticalLayout::getLayoutInnerMinSize()
 	LayoutItemEx* pItem;
 	float w = 0, h = 0;
 
-	std::vector<LayoutItemEx*>::iterator iter = m_vChildren.begin();
-	while (iter != m_vChildren.end())
+	std::vector<LayoutItemEx*>::iterator iter = _items.begin();
+	while (iter != _items.end())
 	{
 		pItem = *iter;
 		// 高度拼接
@@ -305,8 +305,8 @@ math::Size VerticalLayout::getLayoutInnerMaxSize()
 
 	float w = 0, h = 0;
 
-	std::vector<LayoutItemEx*>::iterator iter = m_vChildren.begin();
-	while (iter != m_vChildren.end())
+	std::vector<LayoutItemEx*>::iterator iter = _items.begin();
+	while (iter != _items.end())
 	{
 		pItem = *iter;
 		// 高度拼接

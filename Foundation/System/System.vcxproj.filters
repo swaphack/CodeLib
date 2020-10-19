@@ -88,6 +88,9 @@
     <Filter Include="Light">
       <UniqueIdentifier>{1b35fbbc-d200-4c3b-8c65-1ec1c48bc916}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Event">
+      <UniqueIdentifier>{0d517976-7d2f-4286-b3d0-73b67baaea08}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Base\import.h">
@@ -568,6 +571,18 @@
     <ClInclude Include="CSS\CSSSize.h">
       <Filter>CSS</Filter>
     </ClInclude>
+    <ClInclude Include="Event\EventCenter.h">
+      <Filter>Event</Filter>
+    </ClInclude>
+    <ClInclude Include="Event\EventProtocol.h">
+      <Filter>Event</Filter>
+    </ClInclude>
+    <ClInclude Include="Event\Event.h">
+      <Filter>Event</Filter>
+    </ClInclude>
+    <ClInclude Include="Event\import.h">
+      <Filter>Event</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Framework\Application.cpp">
@@ -875,6 +890,12 @@
     </ClCompile>
     <ClCompile Include="CSS\CSSSize.cpp">
       <Filter>CSS</Filter>
+    </ClCompile>
+    <ClCompile Include="Event\Event.cpp">
+      <Filter>Event</Filter>
+    </ClCompile>
+    <ClCompile Include="Event\EventCenter.cpp">
+      <Filter>Event</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

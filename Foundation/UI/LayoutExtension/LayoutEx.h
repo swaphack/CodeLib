@@ -74,7 +74,7 @@ namespace ui
 		virtual float calItemHeight(LayoutItemEx* item, float height);
 	protected:
 		// 子元件集合
-		std::vector<LayoutItemEx*> m_vChildren;
+		std::vector<LayoutItemEx*> _items;
 	};
 
 	/**

@@ -14,9 +14,13 @@ namespace ue
 		virtual bool init();
 	public:
 		/**
-		*	设置文件
+		*	取消选中
 		*/
-		void setUIFile(const std::string& filepath);
+		void unselectTarget();
+		/**
+		*	获取取消选中
+		*/
+		ui::LayoutItem* getSelectedTarget() const;
 	protected:
 		/**
 		*	初始化
@@ -31,7 +35,29 @@ namespace ue
 		*/
 		virtual void initText();
 	protected:
-		//设置文件
-		ui::CtrlFile* m_pUIFile = nullptr;
+		/**
+		*	点击屏幕
+		*/
+		virtual bool onTouchBegan(float x, float y, bool include);
+		/**
+		*	在屏幕上滑动
+		*/
+		virtual bool onTouchMoved(float x, float y, bool include);
+		/**
+		*	离开屏幕
+		*/
+		virtual bool onTouchEnded(float x, float y, bool include);
+	protected:
+		/**
+		*	点击最前面的组件
+		*/
+		bool touchFrontWidget(ui::LayoutItem* layoutItem,float x, float y);
+	protected:
+		// 设计文件
+		ui::LayoutItem* m_pUIFile = nullptr;
+		// 是否选中
+		bool m_bSelected = false;
+		// 选中对象
+		ui::LayoutItem* m_pSelectedTarget = nullptr;
 	};
 }

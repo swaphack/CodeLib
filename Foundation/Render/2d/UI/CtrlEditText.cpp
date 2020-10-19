@@ -1,11 +1,11 @@
-#include "CtrlEditLabel.h"
+#include "CtrlEditText.h"
 #include "CtrlText.h"
 #include "Common/Input/KeyChar.h"
 #include <map>
 using namespace render;
 
 //////////////////////////////////////////////////////////////////////////
-CtrlEditLabel::CtrlEditLabel()
+CtrlEditText::CtrlEditText()
 {
 	_ctrlTextPlaceholder = CREATE_NODE(CtrlText);
 	_ctrlTextPlaceholder->setHorizontalAlignment(sys::HorizontalAlignment::LEFT);
@@ -20,11 +20,11 @@ CtrlEditLabel::CtrlEditLabel()
 	this->setTouchEnable(true);
 }
 
-CtrlEditLabel::~CtrlEditLabel()
+CtrlEditText::~CtrlEditText()
 {
 }
 
-void CtrlEditLabel::setString(const std::string& text)
+void CtrlEditText::setString(const std::string& text)
 {
 	TextProtocol::setString(text);
 	if (_ctrlText)
@@ -37,12 +37,12 @@ void CtrlEditLabel::setString(const std::string& text)
 	//_ctrlText->setVisible(!empty);
 }
 
-CtrlText* CtrlEditLabel::getTextControl() const
+CtrlText* CtrlEditText::getTextControl() const
 {
 	return _ctrlText;
 }
 
-bool render::CtrlEditLabel::init()
+bool render::CtrlEditText::init()
 {
 	if (!CtrlEditBox::init())
 	{
@@ -61,59 +61,59 @@ bool render::CtrlEditLabel::init()
 	return true;
 }
 
-void render::CtrlEditLabel::setPlaceholder(const std::string& text)
+void render::CtrlEditText::setPlaceholder(const std::string& text)
 {
 	_ctrlTextPlaceholder->setString(text);
 }
 
-const std::string& render::CtrlEditLabel::getPlaceholder() const
+const std::string& render::CtrlEditText::getPlaceholder() const
 {
 	return _ctrlTextPlaceholder->getString();
 }
 
-void render::CtrlEditLabel::setFontPath(const std::string& fonturl)
+void render::CtrlEditText::setFontPath(const std::string& fonturl)
 {
 	_ctrlText->setFontPath(fonturl);
 	_ctrlTextPlaceholder->setFontPath(fonturl);
 }
 
-const std::string& render::CtrlEditLabel::getFontPath()  const
+const std::string& render::CtrlEditText::getFontPath()  const
 {
 	return _ctrlText->getFontPath();
 }
 
-void render::CtrlEditLabel::setFontSize(float size)
+void render::CtrlEditText::setFontSize(float size)
 {
 	_ctrlText->setFontSize(size);
 	_ctrlTextPlaceholder->setFontSize(size);
 }
 
-float render::CtrlEditLabel::getFontSize()  const
+float render::CtrlEditText::getFontSize()  const
 {
 	return _ctrlText->getFontSize();
 }
 
-void render::CtrlEditLabel::setTextColor(const sys::Color3B& color)
+void render::CtrlEditText::setTextColor(const sys::Color3B& color)
 {
 	_ctrlText->setTextColor(color);
 }
 
-const sys::Color3B& render::CtrlEditLabel::getTextColor() const
+const sys::Color3B& render::CtrlEditText::getTextColor() const
 {
 	return _ctrlText->getTextColor();
 }
 
-void render::CtrlEditLabel::setPlaceholderTextColor(const sys::Color3B& color)
+void render::CtrlEditText::setPlaceholderTextColor(const sys::Color3B& color)
 {
 	_ctrlTextPlaceholder->setTextColor(color);
 }
 
-const sys::Color3B& render::CtrlEditLabel::getPlaceholderTextColor() const
+const sys::Color3B& render::CtrlEditText::getPlaceholderTextColor() const
 {
 	return _ctrlTextPlaceholder->getTextColor();
 }
 
-void CtrlEditLabel::onInputHand(sys::BoardKey key, sys::ButtonStatus type)
+void CtrlEditText::onInputHand(sys::BoardKey key, sys::ButtonStatus type)
 {
 	if (type != sys::ButtonStatus::BUTTON_DOWN)
 	{
@@ -142,7 +142,7 @@ void CtrlEditLabel::onInputHand(sys::BoardKey key, sys::ButtonStatus type)
 	}
 }
 
-void CtrlEditLabel::onInputKeyBackHandler()
+void CtrlEditText::onInputKeyBackHandler()
 {
 	std::string text = this->getString();
 	if (!text.empty())
@@ -152,12 +152,12 @@ void CtrlEditLabel::onInputKeyBackHandler()
 	}
 }
 
-void CtrlEditLabel::onInputKeyReturnHandler()
+void CtrlEditText::onInputKeyReturnHandler()
 {
 	this->setKeyboardEnable(false);
 }
 
-void CtrlEditLabel::onInputKeyCharHandler(char value)
+void CtrlEditText::onInputKeyCharHandler(char value)
 {
 	std::string text = this->getString();
 	text.append(1, value);

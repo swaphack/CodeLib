@@ -19,23 +19,26 @@ namespace ui
 		*	获取元件
 		*/
 		render::CtrlWidget* getWidget() const;
-	public: // 其他辅助方法
-	/**
-	*	设置矩形框是否可见
-	*/
-		void setBoxVisible(bool status);
 		/**
-		*	矩形框是否可见
+		*	获取元件
 		*/
-		bool isBoxVisible() const;
+		template<typename T>
+		T* getWidget() const
+		{
+			if (getWidget() == nullptr)
+			{
+				return nullptr;
+			}
+			return getWidget()->as<T>();
+		}
 		/**
-		*	设置矩形框显示颜色
+		*	设置盒子是否可见
 		*/
-		void setBoxColor(const sys::Color4B& color);
+		void setBoxVisible(bool bVisible);
 		/**
-		*	获取矩形框显示颜色
+		*	是否包含点
 		*/
-		const sys::Color4B& getBoxColor() const;
+		bool containPoint(float x, float y);
 	public: // 可能需重载的方法
 		/**
 		*	复制对象
@@ -48,9 +51,5 @@ namespace ui
 	protected:
 		// 空置项
 		render::CtrlWidget* m_pWidget = nullptr;
-		// 矩形框颜色
-		sys::Color4B m_cBoxColor;
-		// 是否显示矩形框
-		bool m_bBoxVisible = false;
 	};
 }

@@ -8,6 +8,8 @@
 #include "Common/DrawNode/import.h"
 #include "Common/Input/import.h"
 
+#define PROTECTED_ZORDER -999
+
 using namespace render;
 
 render::CtrlWidget::CtrlWidget()
@@ -16,6 +18,7 @@ render::CtrlWidget::CtrlWidget()
 
 render::CtrlWidget::~CtrlWidget()
 {
+	this->removeAllProtectedWidgets();
 	this->removeAllWidgets();
 }
 
@@ -136,13 +139,29 @@ render::CtrlWidget* render::CtrlWidget::findWidgetByName(const std::string& name
 		{
 			return item;
 		}
-		else
+
+		auto target = item->findWidgetByName(name);
+		if (target != nullptr)
 		{
-			return item->findWidgetByName(name);
+			return target;
 		}
 	}
 
 	return nullptr;
+}
+
+const std::vector<CtrlWidget*>& render::CtrlWidget::getAllWidgets() const
+{
+	return _widgets;
+}
+
+CtrlWidget* render::CtrlWidget::getFirstWidget() const
+{
+	if (_widgets.size() == 0)
+	{
+		return nullptr;
+	}
+	return _widgets[0];
 }
 
 bool render::CtrlWidget::isTouchEnable()
@@ -153,6 +172,16 @@ bool render::CtrlWidget::isTouchEnable()
 void render::CtrlWidget::setTouchEnable(bool bEnabled)
 {
 	getTouchProxy()->setTouchEnabled(bEnabled);
+}
+
+void render::CtrlWidget::addClickFunc(const ClickWidgetFunc& func)
+{
+	_clickFuncs.push_back(func);
+}
+
+void render::CtrlWidget::removeAllClickFuncs()
+{
+	_clickFuncs.clear();
 }
 
 void render::CtrlWidget::onBeginTouch(Node* node, float x, float y, bool include)
@@ -187,17 +216,21 @@ void render::CtrlWidget::onEndTouch(Node* node, float x, float y, bool include)
 
 bool render::CtrlWidget::onTouchBegan(float x, float y, bool include) 
 { 
-	return false; 
+	for (auto item : _clickFuncs)
+	{
+		item(this);
+	}
+	return true; 
 }
 
 bool render::CtrlWidget::onTouchMoved(float x, float y, bool include) 
 { 
-	return false; 
+	return true;
 }
 
 bool render::CtrlWidget::onTouchEnded(float x, float y, bool include) 
 { 
-	return false;
+	return true;
 }
 
 void render::CtrlWidget::onBlendChange()
@@ -220,5 +253,42 @@ void render::CtrlWidget::onCtrlWidgetBodyChange()
 
 	_clipRect.setOrigin(x0, y0);
 	_clipRect.setSize(x1 - x0, y1 - y0);
+}
+
+void render::CtrlWidget::addProtectedWidget(CtrlWidget* widget)
+{
+	if (widget == nullptr)
+	{
+		return;
+	}
+
+	_protectedWidgets.push_back(widget);
+
+	this->addChild(widget, PROTECTED_ZORDER);
+}
+
+void render::CtrlWidget::removeProtectedWidget(CtrlWidget* widget)
+{
+	if (widget == nullptr)
+	{
+		return;
+	}
+
+	auto it = std::find(_protectedWidgets.begin(), _protectedWidgets.end(), widget);
+	if (it != _widgets.end())
+	{
+		_protectedWidgets.erase(it);
+	}
+
+	this->removeChild(widget);
+}
+
+void render::CtrlWidget::removeAllProtectedWidgets()
+{
+	for (auto item : _protectedWidgets)
+	{
+		this->removeChild(item);
+	}
+	_protectedWidgets.clear();
 }
 

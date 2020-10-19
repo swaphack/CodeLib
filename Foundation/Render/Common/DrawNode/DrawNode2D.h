@@ -25,6 +25,14 @@ namespace render
 		*	是否显示矩形框
 		*/
 		bool isRectVisible();
+		/**
+		*	设置矩形框颜色
+		*/
+		void setRectColor(const sys::Color4B& color);
+		/**
+		*	矩形框颜色
+		*/
+		const sys::Color4B& getRectColor() const;
 	public:
 		/**
 		*	是否显示网格
@@ -65,8 +73,12 @@ namespace render
 		*/
 		void updateDrawNode2DMesh();
 	protected:
+		virtual void afterDraw();
+	protected:
 		// 是否显示矩形框
 		bool _bRectVisible = false;
+		// 矩形框颜色
+		sys::Color4B _rectColor;
 		// 是否显示网格
 		bool _bMeshVisible = false;
 		// 矩形框

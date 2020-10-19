@@ -11,14 +11,14 @@ render::CtrlLayout::CtrlLayout()
 	_backgroundImage->setName("layout_bg_image");
 	_backgroundImage->setAnchorPoint(0, 0);
 	_backgroundImage->setVisible(false);
-	this->addWidget(_backgroundImage, -1);
+	this->addProtectedWidget(_backgroundImage);
 
 	_backgroundMask = CREATE_NODE(CtrlMask);
 	_backgroundMask->setName("layout_bg_mask");
 	_backgroundMask->setAnchorPoint(0, 0);
 	_backgroundMask->setColor(sys::Color4B(125, 125, 125, 125));
 	_backgroundMask->setVisible(false);
-	this->addWidget(_backgroundMask, -1);
+	this->addProtectedWidget(_backgroundMask);
 }
 
 render::CtrlLayout::~CtrlLayout()

@@ -112,6 +112,10 @@
     <ClInclude Include="Device\Signal.h" />
     <ClInclude Include="Device\Mouse.h" />
     <ClInclude Include="Device\WindowImpl.h" />
+    <ClInclude Include="Event\Event.h" />
+    <ClInclude Include="Event\EventCenter.h" />
+    <ClInclude Include="Event\EventProtocol.h" />
+    <ClInclude Include="Event\import.h" />
     <ClInclude Include="Framework\Application.h" />
     <ClInclude Include="Framework\AutoReleasePool.h" />
     <ClInclude Include="Framework\Container.h" />
@@ -252,6 +256,8 @@
     <ClCompile Include="Device\Mouse.cpp" />
     <ClCompile Include="Device\Signal.cpp" />
     <ClCompile Include="Device\WindowImpl.cpp" />
+    <ClCompile Include="Event\Event.cpp" />
+    <ClCompile Include="Event\EventCenter.cpp" />
     <ClCompile Include="Framework\Application.cpp" />
     <ClCompile Include="Framework\AutoReleasePool.cpp" />
     <ClCompile Include="Framework\Container.cpp" />

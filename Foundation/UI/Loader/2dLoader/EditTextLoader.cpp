@@ -1,4 +1,4 @@
-#include "EditLabelLoader.h"
+#include "EditTextLoader.h"
 
 #define PROPERTY_TEXT "text"
 #define PROPERTY_PLACEHOLDER "placeholder"
@@ -8,15 +8,15 @@
 #define PROPERTY_TEXTCOLOR	"textColor"
 #define PROPERTY_PLACEHOLDERCOLOR	"placeholderColor"
 
-ui::EditLabelLoader::EditLabelLoader()
+ui::EditTextLoader::EditTextLoader()
 {
 }
 
-ui::EditLabelLoader::~EditLabelLoader()
+ui::EditTextLoader::~EditTextLoader()
 {
 }
 
-void ui::EditLabelLoader::parseAttributes()
+void ui::EditTextLoader::parseAttributes()
 {
 	std::string text;
 	std::string tips;
@@ -38,7 +38,7 @@ void ui::EditLabelLoader::parseAttributes()
 	WidgetLoader::parseAttributes();
 }
 
-void ui::EditLabelLoader::saveAttributes()
+void ui::EditTextLoader::saveAttributes()
 {
 	WidgetLoader::saveAttributes();
 

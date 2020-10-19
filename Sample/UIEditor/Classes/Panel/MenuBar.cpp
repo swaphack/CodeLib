@@ -1,4 +1,5 @@
 #include "MenuBar.h"
+#include "PopMenu.h"
 
 ue::MenuBar::MenuBar()
 {
@@ -10,7 +11,13 @@ ue::MenuBar::~MenuBar()
 
 void ue::MenuBar::initUI()
 {
-	int a = 1;
+	auto item = m_pLayout->findItemByName("file");
+	if (item)
+	{
+		item->getWidget()->addClickFunc([this](render::Node* node) {
+			PopMenu::show();
+		});
+	}
 }
 
 void ue::MenuBar::initEvent()

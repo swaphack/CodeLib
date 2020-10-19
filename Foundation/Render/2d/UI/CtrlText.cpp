@@ -98,7 +98,7 @@ bool render::CtrlText::isBorder() const
 	return _textDefine.border;
 }
 
-void CtrlText::setString(const std::string&text)
+void CtrlText::setString(const std::string& text)
 {
 	TextProtocol::setString(text);
 	_textDefine.text = text;

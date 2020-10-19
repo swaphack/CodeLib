@@ -46,6 +46,15 @@
     <ClCompile Include="Classes\Panel\DirectoryPanel.cpp">
       <Filter>Classes\Panel</Filter>
     </ClCompile>
+    <ClCompile Include="Classes\Panel\PopMenu.cpp">
+      <Filter>Classes\Panel</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Panel\PanelEvent.cpp">
+      <Filter>Classes\Panel</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Panel\DocumentPanel.cpp">
+      <Filter>Classes\Panel</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Classes\UIEditorApplication.h">
@@ -79,6 +88,15 @@
       <Filter>Classes\Panel</Filter>
     </ClInclude>
     <ClInclude Include="Classes\Panel\DirectoryPanel.h">
+      <Filter>Classes\Panel</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Panel\PopMenu.h">
+      <Filter>Classes\Panel</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Panel\PanelEvent.h">
+      <Filter>Classes\Panel</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Panel\DocumentPanel.h">
       <Filter>Classes\Panel</Filter>
     </ClInclude>
   </ItemGroup>

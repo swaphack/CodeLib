@@ -17,6 +17,9 @@ namespace render
 		public TouchProtocol
 	{
 	public:
+		// 点击处理函数
+		typedef std::function<void(CtrlWidget*)> ClickWidgetFunc;
+	public:
 		CtrlWidget();
 		virtual ~CtrlWidget();
 	public:
@@ -42,6 +45,14 @@ namespace render
 		*	根据名字查找控件
 		*/
 		CtrlWidget* findWidgetByName(const std::string& name);
+		/**
+		*	获取所有控件
+		*/
+		const std::vector<CtrlWidget*>& getAllWidgets() const;
+		/**
+		*	获取第一个子节点
+		*/
+		CtrlWidget* getFirstWidget() const;
 	public:
 		/**
 		*	是否可点击
@@ -51,6 +62,14 @@ namespace render
 		*	设置是否可点击
 		*/
 		void setTouchEnable(bool bEnabled);
+		/**
+		*	添加点击事件
+		*/
+		void addClickFunc(const ClickWidgetFunc& func);
+		/**
+		*	移除所有点击事件
+		*/
+		void removeAllClickFuncs();
 	protected:
 		/**
 		*	点击屏幕
@@ -102,6 +121,21 @@ namespace render
 		*/
 		void onCtrlWidgetBodyChange();
 	protected:
+		/**
+		*	添加内部访问控件
+		*/
+		void addProtectedWidget(CtrlWidget* widget);
+		/**
+		*	移除内部访问控件
+		*/
+		void removeProtectedWidget(CtrlWidget* widget);
+		/**
+		*	移除所有内部访问控件
+		*/
+		void removeAllProtectedWidgets();
+	protected:
+		// 内部访问控件
+		std::vector<CtrlWidget*> _protectedWidgets;
 		// 控件
 		std::vector<CtrlWidget*> _widgets;
 		/**
@@ -112,5 +146,9 @@ namespace render
 		*	裁剪区域
 		*/
 		math::Rect _clipRect;
+		/**
+		*	点击事件
+		*/
+		std::vector<ClickWidgetFunc> _clickFuncs;
 	};
 }

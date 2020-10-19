@@ -8,11 +8,11 @@ namespace render
 	class CtrlText;
 
 	// ¿É±à¼­ÎÄ±¾
-	class CtrlEditLabel : public CtrlEditBox, public TextProtocol
+	class CtrlEditText : public CtrlEditBox, public TextProtocol
 	{
 	public:
-		CtrlEditLabel();
-		virtual ~CtrlEditLabel();
+		CtrlEditText();
+		virtual ~CtrlEditText();
 	public:
 		virtual bool init();
 	public:

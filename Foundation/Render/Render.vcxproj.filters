@@ -60,9 +60,6 @@
     <ClCompile Include="2d\UI\CtrlEditBox.cpp">
       <Filter>2d\UI</Filter>
     </ClCompile>
-    <ClCompile Include="2d\UI\CtrlEditLabel.cpp">
-      <Filter>2d\UI</Filter>
-    </ClCompile>
     <ClCompile Include="2d\UI\CtrlFrame.cpp">
       <Filter>2d\UI</Filter>
     </ClCompile>
@@ -609,6 +606,9 @@
     <ClCompile Include="2d\UI\CtrlButton.cpp">
       <Filter>2d\UI</Filter>
     </ClCompile>
+    <ClCompile Include="2d\UI\CtrlEditText.cpp">
+      <Filter>2d\UI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Common\Node\import.h">
@@ -732,9 +732,6 @@
       <Filter>Common\Action</Filter>
     </ClInclude>
     <ClInclude Include="2d\UI\CtrlEditBox.h">
-      <Filter>2d\UI</Filter>
-    </ClInclude>
-    <ClInclude Include="2d\UI\CtrlEditLabel.h">
       <Filter>2d\UI</Filter>
     </ClInclude>
     <ClInclude Include="2d\UI\CtrlFrame.h">
@@ -1393,6 +1390,9 @@
       <Filter>2d\UI</Filter>
     </ClInclude>
     <ClInclude Include="2d\UI\CtrlButton.h">
+      <Filter>2d\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="2d\UI\CtrlEditText.h">
       <Filter>2d\UI</Filter>
     </ClInclude>
   </ItemGroup>

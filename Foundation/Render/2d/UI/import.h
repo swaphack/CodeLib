@@ -9,7 +9,7 @@
 #include "CtrlButton.h"
 
 #include "CtrlEditBox.h"
-#include "CtrlEditLabel.h"
+#include "CtrlEditText.h"
 
 
 #include "CtrlScrollView.h"
