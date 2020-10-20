@@ -41,14 +41,6 @@ bool ue::ViewLayout::onTouchBegan(float x, float y, bool include)
 		}
 	}
 
-	if (PopMenu::isShow())
-	{
-		if (!PopMenu::getInstance()->containTouchPoint(x, y))
-		{
-			PopMenu::hide();
-		}
-	}
-
 	return false;
 }
 

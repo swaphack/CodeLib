@@ -113,6 +113,14 @@ MoveToAction::~MoveToAction()
 {
 }
 
+MoveToAction* render::MoveToAction::create(float duration, const math::Vector3& pos)
+{
+	auto action = CREATE_ACTION(MoveToAction);
+	action->setDuration(duration);
+	action->setDestPosition(pos);
+	return action;
+}
+
 void MoveToAction::setDestPosition(float x, float y, float z)
 {
 	_desPosition.set(x, y, z);
@@ -159,6 +167,14 @@ MoveByAction::MoveByAction()
 
 MoveByAction::~MoveByAction()
 {
+}
+
+MoveByAction* render::MoveByAction::create(float duration, const math::Vector3& pos)
+{
+	auto action = CREATE_ACTION(MoveByAction);
+	action->setDuration(duration);
+	action->setDifferentPosition(pos);
+	return action;
 }
 
 void MoveByAction::setDifferentPosition(float x, float y, float z /*= 0*/)
@@ -215,6 +231,14 @@ RotateToAction::~RotateToAction()
 {
 }
 
+RotateToAction* render::RotateToAction::create(float duration, const math::Vector3& rotation)
+{
+	auto action = CREATE_ACTION(RotateToAction);
+	action->setDuration(duration);
+	action->setDestRotation(rotation);
+	return action;
+}
+
 void RotateToAction::setDestRotation(float x, float y, float z /*= 0*/)
 {
 	_destRotation.set(x, y, z);
@@ -262,6 +286,14 @@ RotateByAction::RotateByAction()
 
 RotateByAction::~RotateByAction()
 {
+}
+
+RotateByAction* render::RotateByAction::create(float duration, const math::Vector3& rotation)
+{
+	auto action = CREATE_ACTION(RotateByAction);
+	action->setDuration(duration);
+	action->setDifferentRotation(rotation);
+	return action;
 }
 
 void RotateByAction::setDifferentRotation(float x, float y, float z /*= 0*/)
@@ -319,6 +351,14 @@ ScaleToAction::~ScaleToAction()
 {
 }
 
+ScaleToAction* render::ScaleToAction::create(float duration, const math::Vector3& scale)
+{
+	auto action = CREATE_ACTION(ScaleToAction);
+	action->setDuration(duration);
+	action->setDestScale(scale);
+	return action;
+}
+
 void ScaleToAction::setDestScale(float x, float y, float z /*= 0*/)
 {
 	_destScale.set(x, y, z);
@@ -368,6 +408,14 @@ ScaleByAction::~ScaleByAction()
 {
 }
 
+ScaleByAction* render::ScaleByAction::create(float duration, const math::Vector3& scale)
+{
+	auto action = CREATE_ACTION(ScaleByAction);
+	action->setDuration(duration);
+	action->setDifferentScale(scale);
+	return action;
+}
+
 void ScaleByAction::setDifferentScale(float x, float y, float z /*= 0*/)
 {
 	_differentScale.set(x, y, z);
@@ -411,4 +459,11 @@ void ScaleByAction::reverse()
 	_srcScale = value - _destScale;
 
 	_differentScale *= -1;
+}
+
+DelayAction* render::DelayAction::create(float duration)
+{
+	auto action = CREATE_ACTION(DelayAction);
+	action->setDuration(duration);
+	return action;
 }

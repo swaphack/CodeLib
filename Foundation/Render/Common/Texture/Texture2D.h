@@ -39,6 +39,13 @@ namespace render
 		*/
 		void setTextureImage(int level, TextureInternalSizedFormat internalFormat, int width, int height, int border, TextureExternalFormat format, TextureExternalDataType type, const void* data);
 	public:
+		/**
+		*	加载颜色纹理
+		*/
+		void load(const sys::Color4B& color);
+		/**
+		*	加载图片纹理
+		*/
 		virtual void load(const sys::ImageDetail* image, const TextureSetting& setting = TextureSetting());
 		/**
 		*	保存为png图片

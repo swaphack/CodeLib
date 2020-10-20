@@ -15,6 +15,14 @@ RepeateAction::~RepeateAction()
 	SAFE_RELEASE(_action);
 }
 
+RepeateAction* render::RepeateAction::create(int nCount, Action* action)
+{
+	auto pAction = CREATE_ACTION(render::RepeateAction);
+	pAction->setCount(nCount);
+	pAction->setAction(action);
+	return pAction;
+}
+
 int RepeateAction::getCount() const
 {
 	return _count;
@@ -198,6 +206,33 @@ SequenceAction::~SequenceAction()
 	this->removeAllActions();
 }
 
+SequenceAction* render::SequenceAction::create(Action* action0, Action* action1)
+{
+	auto pAction = CREATE_ACTION(render::SequenceAction);
+	pAction->addAction(action0);
+	pAction->addAction(action1);
+	return pAction;
+}
+
+SequenceAction* render::SequenceAction::create(Action* action0, Action* action1, Action* action2)
+{
+	auto pAction = CREATE_ACTION(render::SequenceAction);
+	pAction->addAction(action0);
+	pAction->addAction(action1);
+	pAction->addAction(action2);
+	return pAction;
+}
+
+SequenceAction* render::SequenceAction::create(Action* action0, Action* action1, Action* action2, Action* action3)
+{
+	auto pAction = CREATE_ACTION(render::SequenceAction);
+	pAction->addAction(action0);
+	pAction->addAction(action1);
+	pAction->addAction(action2);
+	pAction->addAction(action3);
+	return pAction;
+}
+
 void SequenceAction::addAction(Action* action)
 {
 	if (action)
@@ -313,6 +348,33 @@ SpawnAction::SpawnAction()
 SpawnAction::~SpawnAction()
 {
 
+}
+
+SpawnAction* render::SpawnAction::create(Action* action0, Action* action1)
+{
+	auto pAction = CREATE_ACTION(render::SpawnAction);
+	pAction->addAction(action0);
+	pAction->addAction(action1);
+	return pAction;
+}
+
+SpawnAction* render::SpawnAction::create(Action* action0, Action* action1, Action* action2)
+{
+	auto pAction = CREATE_ACTION(render::SpawnAction);
+	pAction->addAction(action0);
+	pAction->addAction(action1);
+	pAction->addAction(action2);
+	return pAction;
+}
+
+SpawnAction* render::SpawnAction::create(Action* action0, Action* action1, Action* action2, Action* action3)
+{
+	auto pAction = CREATE_ACTION(render::SpawnAction);
+	pAction->addAction(action0);
+	pAction->addAction(action1);
+	pAction->addAction(action2);
+	pAction->addAction(action3);
+	return pAction;
 }
 
 void SpawnAction::addAction(Action* action)
@@ -433,6 +495,13 @@ CallFunc::~CallFunc()
 
 }
 
+CallFunc* render::CallFunc::create(const std::function<void()>& func)
+{
+	auto pAction = CREATE_ACTION(render::CallFunc);
+	pAction->setFunc(func);
+	return pAction;
+}
+
 void CallFunc::setFunc(const std::function<void()>& func)
 {
 	_func = func;
@@ -464,6 +533,13 @@ CallFuncN::CallFuncN()
 CallFuncN::~CallFuncN()
 {
 
+}
+
+CallFuncN* render::CallFuncN::create(const std::function<void(Node*)>& func)
+{
+	auto pAction = CREATE_ACTION(render::CallFuncN);
+	pAction->setFunc(func);
+	return pAction;
 }
 
 void CallFuncN::setFunc(const std::function<void(Node*)>& func)

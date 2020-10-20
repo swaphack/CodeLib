@@ -6,6 +6,7 @@
 namespace render
 {
 	class CtrlText;
+	class CtrlFrame;
 
 	// 可编辑文本
 	class CtrlEditText : public CtrlEditBox, public TextProtocol
@@ -64,6 +65,14 @@ namespace render
 		*	占位颜色
 		*/
 		const sys::Color3B& getPlaceholderTextColor() const;
+		/**
+		*	是否多行显示
+		*/
+		void setMultiLine(bool bMulti);
+		/**
+		*	是否多行显示
+		*/
+		bool isMultiLine() const;
 	public:
 		// 输出操作处理
 		virtual void onInputHand(sys::BoardKey key, sys::ButtonStatus type);
@@ -74,10 +83,23 @@ namespace render
 		virtual void onInputKeyReturnHandler();
 		// 输入字符事件
 		virtual void onInputKeyCharHandler(char value);
+	protected:
+		/**
+		*	显示光标
+		*/
+		void showCursor();
+		/**
+		*	隐藏光标
+		*/
+		void hideCursor();
 	private:
 		// 文本控件
 		CtrlText* _ctrlText = nullptr;
 		// 提示文本控件
 		CtrlText* _ctrlTextPlaceholder = nullptr;
+		// 光标
+		CtrlFrame* _ctrlCursor = nullptr;
+		// 是否多行
+		bool _multiLine = false;
 	};
 }

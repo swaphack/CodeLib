@@ -44,14 +44,22 @@ void CtrlEditBox::setInputListen(EDITINPUT_DELEGATE_HANDLER handler)
 	_editInputHandler = handler;
 }
 
+void render::CtrlEditBox::setInputFunc(const EditInputFunc& func)
+{
+	_editInputFunc = func;
+}
+
 void CtrlEditBox::dispatchInputListen(EditInputStatus status)
 {
-	if (_editInputHandler == nullptr)
+	if (_editInputHandler)
 	{
-		return;
+		_editInputHandler(this, status);
 	}
 
-	_editInputHandler(this, status);
+	if (_editInputFunc)
+	{
+		_editInputFunc(this, status);
+	}
 }
 
 void CtrlEditBox::addKeyboardDelegate()

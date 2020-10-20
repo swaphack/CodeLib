@@ -4,6 +4,29 @@
 namespace sys
 {
 	/**
+	*	位置方向
+	*/
+	enum class CSSDirection
+	{
+		/**
+		*	上
+		*/
+		Top,
+		/**
+		*	右
+		*/
+		Right,
+		/**
+		*	下
+		*/
+		Bottom,
+		/**
+		*	左
+		*/
+		Left,
+	};
+
+	/**
 	*	留白方向 上右下左
 	*/
 	struct CSSSpace

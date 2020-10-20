@@ -92,6 +92,13 @@ Texture2D* TextureCache::getTexture2D(const std::string& path)
 	return it->second;
 }
 
+Texture2D* render::TextureCache::createTexture2D(const sys::Color4B& color)
+{
+	Texture2D* texture2D = CREATE_OBJECT(Texture2D);
+	texture2D->load(color);
+	return texture2D;
+}
+
 Texture2D* TextureCache::createTexture2D(const sys::ImageDefine& imageDefine)
 {
 	Texture* texture = getTexture2D(imageDefine.filepath);

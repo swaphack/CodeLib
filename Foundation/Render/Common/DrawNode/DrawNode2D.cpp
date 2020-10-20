@@ -36,7 +36,7 @@ void render::DrawNode2D::setRectVisible(bool bVisible)
 	_bRectVisible = bVisible;
 }
 
-bool render::DrawNode2D::isRectVisible()
+bool render::DrawNode2D::isRectVisible() const
 {
 	return _bRectVisible;
 }
@@ -56,14 +56,19 @@ void render::DrawNode2D::setMeshVisible(bool bVisible)
 	_bMeshVisible = bVisible;
 }
 
-bool render::DrawNode2D::isMeshVisible()
+bool render::DrawNode2D::isMeshVisible() const
 {
 	return _bMeshVisible;
 }
 
-const render::RectPoints& render::DrawNode2D::getRectVertex()
+const render::RectPoints& render::DrawNode2D::getRectVertex() const
 {
 	return _rectPoints;
+}
+
+const render::RectPoints& render::DrawNode2D::getRealRectVertex() const
+{
+	return _realRectPoints;
 }
 
 #include "Common/View/Camera.h"

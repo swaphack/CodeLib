@@ -105,6 +105,12 @@ void render::Mesh::drawWithBufferObject()
 		PRINT("Mesh Vertice is NULL\n");
 		return;
 	}
+
+	uint32_t nIndiceLength = _detail->getIndices().getLength();
+	if (nIndiceLength == 0)
+	{
+		return;
+	}
 	/*
 	if (nColorSize == 0 && nUVSize == 0)
 	{
@@ -114,8 +120,6 @@ void render::Mesh::drawWithBufferObject()
 	*/
 	GLDebug::showError();
 	_indiceBuffer->bindBuffer();
-
-	uint32_t nIndiceLength = _detail->getIndices().getLength();
 	GLBufferObjects::drawElements(_drawMode, nIndiceLength, IndexDataType::UNSIGNED_INT, nullptr);
 
 	GLDebug::showError();
@@ -131,6 +135,12 @@ void render::Mesh::drawWithClientArray()
 	if (vertices.getLength() == 0)
 	{
 		PRINT("Mesh Vertice is NULL\n");
+		return;
+	}
+
+	const sys::MeshMemoryData& indices = _detail->getIndices();
+	if (indices.getLength() == 0)
+	{
 		return;
 	}
 
@@ -189,8 +199,6 @@ void render::Mesh::drawWithClientArray()
 		GLDebug::showError();
 	}
 	*/
-	const sys::MeshMemoryData& indices = _detail->getIndices();
-	if (indices.getLength() > 0)
 	{
 		GLClientArrays::drawElements(_drawMode, indices.getLength(), IndexDataType::UNSIGNED_INT, indices.getValue());
 		GLDebug::showError();

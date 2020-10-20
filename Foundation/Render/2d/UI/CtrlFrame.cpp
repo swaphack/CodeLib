@@ -48,6 +48,10 @@ void CtrlFrame::setTextureWithRect(const std::string& filepath)
 	{
 		this->setVolume(pTexture->getWidth(), pTexture->getHeight(), pTexture->getDepth());
 	}
+	else
+	{
+		this->setVolume(0, 0, 0);
+	}
 
 	this->notify(NodeNotifyType::TEXTURE);
 }
@@ -59,6 +63,10 @@ void render::CtrlFrame::setTextureWithRect(const Texture* texture)
 	if (texture)
 	{
 		this->setVolume(texture->getWidth(), texture->getHeight(), texture->getDepth());
+	}
+	else
+	{
+		this->setVolume(0, 0, 0);
 	}
 
 	this->notify(NodeNotifyType::TEXTURE);
@@ -88,10 +96,6 @@ bool CtrlFrame::isFlipY()
 
 void CtrlFrame::updateCtrlFrameMeshData()
 {
-	if (getTexture() == nullptr)
-	{
-		return;
-	}
 	auto pMesh = getMesh();
 	if (pMesh)
 	{
@@ -102,8 +106,15 @@ void CtrlFrame::updateCtrlFrameMeshData()
 		pMesh->getMeshDetail()->setVertices(4, _rectVertex.vertices, 3);
 		pMesh->getMeshDetail()->setColors(4, _rectVertex.colors, 4);
 		pMesh->getMeshDetail()->setUVs(4, uvs, 2);
-		pMesh->getMeshDetail()->setIndices(6, _rectVertex.indices);
-	}
 
+		if (getTexture() != nullptr)
+		{
+			pMesh->getMeshDetail()->setIndices(6, _rectVertex.indices);
+		}
+		else
+		{
+			pMesh->getMeshDetail()->setIndices(0, nullptr);
+		}
+	}
 	this->updateMeshData();
 }

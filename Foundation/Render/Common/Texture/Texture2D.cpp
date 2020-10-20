@@ -51,6 +51,40 @@ void render::Texture2D::setTextureImage(int level, TextureInternalSizedFormat in
 	GLTexture::setTexImage2D((TextureTarget2D)getTextureTarget(), level, internalFormat, width, height, border, format, type, data);
 }
 
+void render::Texture2D::load(const sys::Color4B& color)
+{
+	TextureSetting setting;
+	setting.wrapS = TextureWrapMode::REPEAT;
+	setting.wrapT = TextureWrapMode::REPEAT;
+	setting.wrapR = TextureWrapMode::REPEAT;
+
+	this->setTextureSetting(setting);
+	GLDebug::showError();
+
+	this->setWidth(1);
+	this->setHeight(1);
+
+	/* Generate texture */
+	this->bindTexture();
+	GLDebug::showError();
+
+	int size = 0;
+
+	TextureExternalFormat format = TextureExternalFormat::RGBA;
+	TextureInternalSizedFormat internalFormat = TextureInternalSizedFormat::RGBA8;
+
+	GLState::setPixelStore(PixelStore::UNPACK_ALIGNMENT, 4);
+
+	uint8_t data[4] = {color.red, color.green, color.blue, color.alpha};
+
+	this->setTextureImage(0, internalFormat,
+		getWidth(), getHeight(), 0, format,
+		TextureExternalDataType::UNSIGNED_BYTE, data);
+	GLDebug::showError();
+	this->unbindTexture();
+	GLDebug::showError();
+}
+
 void render::Texture2D::load(const sys::ImageDetail* image, const TextureSetting& setting /*= TextureSetting2D()*/)
 {
 	if (image == nullptr || image->getPixels() == nullptr)

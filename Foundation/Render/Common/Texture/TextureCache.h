@@ -34,13 +34,15 @@ namespace render
 		// 获取纹理
 		Texture2D* getTexture2D(const std::string& path);
 	public:
-		// 添加一个2d纹理
+		// 创建一个2d纹理
+		Texture2D* createTexture2D(const sys::Color4B& color);
+		// 创建一个2d纹理
 		Texture2D* createTexture2D(const sys::ImageDefine& imageDefine);
-		// 添加一个2d纹理
+		// 创建一个2d纹理
 		Texture2D* createTexture2D(const std::string& path);
-		// 添加一个文本纹理
+		// 创建一个文本纹理
 		Texture2D* createTexture2D(const sys::TextDefine& textDefine);
-		// 添加一个立方体纹理
+		// 创建一个立方体纹理
 		TextureCubeMap* createTextureCubeMap(int count, const std::string* images);
 	public:
 		sys::ImageDetail* loadImageDetail(const std::string& path);

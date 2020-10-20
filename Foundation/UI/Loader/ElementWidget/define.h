@@ -7,7 +7,7 @@ namespace ui
 	/**
 	*	初始化节点加载方法
 	*	@param TL 布局类型
-	*	@param TW 空间类型
+	*	@param TW 控件类型
 	*	@param NAME 解析节点的名称
 	*/
 #define INIT_LOADER_WIDGET(TL,TW, NAME) \

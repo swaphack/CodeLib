@@ -156,6 +156,7 @@ bool FT_LABEL::load(const TextDefine& textDefine, LabelStream* stream)
 
 		if (data)
 		{
+			font_width = data->advX;
 			font_width = data->width;
 			font_height = data->height;
 		}
@@ -345,14 +346,22 @@ void FT_LABEL::writeStream(uint64_t ch, LabelStream* stream, const Color3B& colo
 	FT_CHAR_DATA* data = getCharData(ch);
 	int width = static_cast<int>(_fontSize * 0.5f);
 	int height = _fontSize;
+	int charWidth = width;
+	int deltaX = 0;
 
 	if (data)
 	{
 		width = data->width;
 		height = data->height;
+
+		//deltaX = data->deltaX;
+		//deltaX = data->deltaX;
+		charWidth = width;
+		deltaX = 0;
+		
 	}
 
-	MemoryData memData(width * RGBA_PIXEL_UNIT * height);
+	MemoryData memData(charWidth * RGBA_PIXEL_UNIT * height);
 
 	// 获取rgba数据
 	char* pBuf = memData.getPtr();
@@ -379,12 +388,12 @@ void FT_LABEL::writeStream(uint64_t ch, LabelStream* stream, const Color3B& colo
 			if (bit == 0)
 			{
 				uint8_t ary[RGBA_PIXEL_UNIT] = { 0, 0, 0, 0 };
-				memData.set(RGBA_PIXEL_UNIT * ((height - j - 1) * width + i), RGBA_PIXEL_UNIT, (char*)ary);
+				memData.set(RGBA_PIXEL_UNIT * ((height - j - 1) * charWidth + i + deltaX), RGBA_PIXEL_UNIT, (char*)ary);
 			}
 			else
 			{
 				uint8_t ary[RGBA_PIXEL_UNIT] = { color.red, color.green, color.blue, bit };
-				memData.set(RGBA_PIXEL_UNIT * ((height - j - 1) * width + i), RGBA_PIXEL_UNIT, (char*)ary);
+				memData.set(RGBA_PIXEL_UNIT * ((height - j - 1) * charWidth + i + deltaX), RGBA_PIXEL_UNIT, (char*)ary);
 			}
 		}
 	}
@@ -398,11 +407,11 @@ void FT_LABEL::writeStream(uint64_t ch, LabelStream* stream, const Color3B& colo
 
 	if (stream->isFixWidth())
 	{
-		stream->writeMultiLineBlock(width, height, (char*)pBuf, deltaY);
+		stream->writeMultiLineBlock(charWidth, height, (char*)pBuf, deltaY);
 	}
 	else
 	{
-		stream->writeOneLineBlock(width, height, (char*)pBuf, deltaY);
+		stream->writeOneLineBlock(charWidth, height, (char*)pBuf, deltaY);
 	}
 }
 

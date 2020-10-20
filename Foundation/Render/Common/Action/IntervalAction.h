@@ -39,7 +39,8 @@ namespace render
 
 	class DelayAction : public IntervalAction
 	{
-
+	public:
+		static DelayAction* create(float duration);
 	};
 
 	// 移动
@@ -49,6 +50,8 @@ namespace render
 		MoveToAction();
 		virtual ~MoveToAction();
 	public:
+		static MoveToAction* create(float duration, const math::Vector3& pos);
+
 		// 目标位置
 		void setDestPosition(float x, float y, float z = 0);
 		void setDestPosition(const math::Vector3& pos);
@@ -73,6 +76,8 @@ namespace render
 		MoveByAction();
 		virtual ~MoveByAction();
 	public:
+		static MoveByAction* create(float duration, const math::Vector3& pos);
+
 		// 偏移
 		void setDifferentPosition(float x, float y, float z = 0);
 		void setDifferentPosition(const math::Vector3& pos);
@@ -100,6 +105,8 @@ namespace render
 		RotateToAction();
 		virtual ~RotateToAction();
 	public:
+		static RotateToAction* create(float duration, const math::Vector3& rotation);
+
 		// 最终旋转角度
 		void setDestRotation(float x, float y, float z = 0);
 		void setDestRotation(const math::Vector3& rotation);
@@ -124,6 +131,8 @@ namespace render
 		RotateByAction();
 		virtual ~RotateByAction();
 	public:
+		static RotateByAction* create(float duration, const math::Vector3& rotation);
+
 		// 偏移
 		void setDifferentRotation(float x, float y, float z = 0);
 		void setDifferentRotation(const math::Vector3& rotation);
@@ -150,6 +159,8 @@ namespace render
 		ScaleToAction();
 		virtual ~ScaleToAction();
 	public:
+		static ScaleToAction* create(float duration, const math::Vector3& scale);
+
 		void setDestScale(float x, float y, float z = 0);
 		void setDestScale(const math::Vector3& scale);
 		const math::Vector3& getDestScale() const;
@@ -173,6 +184,8 @@ namespace render
 		ScaleByAction();
 		virtual ~ScaleByAction();
 	public:
+		static ScaleByAction* create(float duration, const math::Vector3& scale);
+
 		void setDifferentScale(float x, float y, float z = 0);
 		void setDifferentScale(const math::Vector3& scale);
 		const math::Vector3& getDifferentScale() const;

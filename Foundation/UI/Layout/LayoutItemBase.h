@@ -48,6 +48,11 @@ namespace ui
 		*	当窗口位置和大小发生改变时
 		*/
 		virtual void resize(const math::Size& size);
+	public:
+		/**
+		*	获取对象框坐标
+		*/
+		const render::RectPoints* getRectPoints() const;
 	protected:
 		// 空置项
 		render::CtrlWidget* m_pWidget = nullptr;

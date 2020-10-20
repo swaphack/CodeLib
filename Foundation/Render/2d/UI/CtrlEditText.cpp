@@ -1,6 +1,8 @@
 #include "CtrlEditText.h"
 #include "CtrlText.h"
 #include "Common/Input/KeyChar.h"
+#include "Common/Texture/TextureCache.h"
+#include "Common/Action/import.h"
 #include <map>
 using namespace render;
 
@@ -10,12 +12,18 @@ CtrlEditText::CtrlEditText()
 	_ctrlTextPlaceholder = CREATE_NODE(CtrlText);
 	_ctrlTextPlaceholder->setHorizontalAlignment(sys::HorizontalAlignment::LEFT);
 	_ctrlTextPlaceholder->setAnchorPoint(0, 0);
-	this->addWidget(_ctrlTextPlaceholder);
+	this->addProtectedWidget(_ctrlTextPlaceholder);
 
 	_ctrlText = CREATE_NODE(CtrlText);
 	_ctrlText->setHorizontalAlignment(sys::HorizontalAlignment::LEFT);
 	_ctrlText->setAnchorPoint(0, 0);
-	this->addWidget(_ctrlText);
+	this->addProtectedWidget(_ctrlText);
+
+	Texture2D* pTexture = G_TEXTURE_CACHE->createTexture2D(sys::Color4B(255, 255, 255, 255));
+	_ctrlCursor = CREATE_NODE(CtrlFrame);
+	_ctrlCursor->setTexture((Texture*)pTexture);
+	_ctrlCursor->setVisible(false);
+	this->addProtectedWidget(_ctrlCursor);
 
 	this->setTouchEnable(true);
 }
@@ -54,10 +62,33 @@ bool render::CtrlEditText::init()
 		_ctrlTextPlaceholder->setDimensions(this->getSize());
 
 		_ctrlText->setAnchorPoint(this->getAnchorPoint());
-		_ctrlText->setDimensions(this->getSize());
+		if (_multiLine)
+		{
+			_ctrlText->setDimensions(this->getSize());
+		}
+		else
+		{
+			_ctrlText->setDimensions(math::Vector2());
+		}
+
+		_ctrlCursor->setAnchorPoint(this->getAnchorPoint());
+		_ctrlCursor->setVolume(1, this->getHeight());
 	});
 
+	_ctrlText->addNotify(NodeNotifyType::TEXT, [this]() {
+		_ctrlCursor->setPositionX(_ctrlText->getWidth() + 1);
+	});
 
+	this->setInputFunc([this](sys::Object* object, EditInputStatus status) {
+		if (status == EditInputStatus::BEGIN)
+		{
+			showCursor();
+		}
+		else
+		{
+			hideCursor();
+		}
+	});
 	return true;
 }
 
@@ -113,6 +144,25 @@ const sys::Color3B& render::CtrlEditText::getPlaceholderTextColor() const
 	return _ctrlTextPlaceholder->getTextColor();
 }
 
+void render::CtrlEditText::setMultiLine(bool bMulti)
+{
+	_multiLine = bMulti;
+
+	if (_multiLine)
+	{
+		_ctrlText->setDimensions(this->getSize());
+	}
+	else
+	{
+		_ctrlText->setDimensions(math::Vector2());
+	}
+}
+
+bool render::CtrlEditText::isMultiLine() const
+{
+	return _multiLine;
+}
+
 void CtrlEditText::onInputHand(sys::BoardKey key, sys::ButtonStatus type)
 {
 	if (type != sys::ButtonStatus::BUTTON_DOWN)
@@ -162,4 +212,35 @@ void CtrlEditText::onInputKeyCharHandler(char value)
 	std::string text = this->getString();
 	text.append(1, value);
 	this->setString(text.c_str());
+}
+
+void render::CtrlEditText::showCursor()
+{
+	if (_ctrlCursor == nullptr)
+	{
+		return;
+	}
+
+	_ctrlCursor->setVisible(true);
+
+	auto pSequenceAction = SequenceAction::create(
+		DelayAction::create(0.5f),
+		CallFuncN::create([](Node* node) { node->setVisible(true); }),
+		DelayAction::create(0.5f),
+		CallFuncN::create([](Node* node) { node->setVisible(false); })
+	);
+	auto pForeverAction = RepeateForeverAction::create(pSequenceAction);
+
+	_ctrlCursor->getActionProxy()->runAction(pForeverAction);
+}
+
+void render::CtrlEditText::hideCursor()
+{
+	if (_ctrlCursor == nullptr)
+	{
+		return;
+	}
+
+	_ctrlCursor->setVisible(false);
+	_ctrlCursor->getActionProxy()->stopAllActions();
 }

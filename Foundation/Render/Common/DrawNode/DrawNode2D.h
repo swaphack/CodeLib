@@ -24,7 +24,7 @@ namespace render
 		/**
 		*	是否显示矩形框
 		*/
-		bool isRectVisible();
+		bool isRectVisible() const;
 		/**
 		*	设置矩形框颜色
 		*/
@@ -41,12 +41,16 @@ namespace render
 		/**
 		*	是否显示网格
 		*/
-		bool isMeshVisible();
+		bool isMeshVisible() const;
 	public:
 		/**
 		*	获取矩形框
 		*/
-		const RectPoints& getRectVertex();
+		const RectPoints& getRectVertex() const;
+		/**
+		*	获取实际矩形框
+		*/
+		const RectPoints& getRealRectVertex() const;
 		/**
 		*	坐标是否在当前对象内
 		*/

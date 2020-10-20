@@ -15,6 +15,8 @@ namespace render
 
 	#define EDITINPUT_DELEGATTE_SELECTOR(HANDLER_SEL) static_cast<EDITINPUT_DELEGATE_HANDLER>(&HANDLER_SEL)
 
+	typedef std::function<void(sys::Object* object, EditInputStatus status)> EditInputFunc;
+
 	// 编辑框
 	class CtrlEditBox : public CtrlWidget
 	{
@@ -31,6 +33,8 @@ namespace render
 		bool isKeyboardEnable();
 		// 设置输入监听事件
 		void setInputListen(EDITINPUT_DELEGATE_HANDLER handler);
+
+		void setInputFunc(const EditInputFunc& func);
 		// 输出操作处理
 		virtual void onInputHand(sys::BoardKey key, sys::ButtonStatus type) {}
 	protected:
@@ -50,5 +54,7 @@ namespace render
 		bool _keyboardEnabled = false;
 		// 编辑输入空间监听
 		EDITINPUT_DELEGATE_HANDLER _editInputHandler;
+
+		EditInputFunc _editInputFunc = nullptr;
 	};
 }

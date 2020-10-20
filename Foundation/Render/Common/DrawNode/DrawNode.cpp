@@ -51,6 +51,18 @@ bool render::DrawNode::init()
 
 void DrawNode::draw()
 {
+	uint32_t nVerticeSize = _mesh->getMeshDetail()->getVertices().getSize();
+
+	if (nVerticeSize == 0)
+	{
+		return;
+	}
+
+	if (_mesh->getMeshDetail()->getIndices().getLength() <= 0)
+	{
+		return;
+	}
+
 	this->beforeDraw();
 
 	this->onDraw();
@@ -157,13 +169,6 @@ void render::DrawNode::beforeDraw()
 void DrawNode::onDraw()
 {
 	if (_mesh == nullptr || _material == nullptr || _mesh->getMeshDetail() == nullptr)
-	{
-		return;
-	}
-
-	uint32_t nVerticeSize = _mesh->getMeshDetail()->getVertices().getSize();
-	
-	if (nVerticeSize == 0)
 	{
 		return;
 	}

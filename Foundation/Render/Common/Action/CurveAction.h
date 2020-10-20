@@ -23,6 +23,8 @@ namespace render
 		BezierAction2();
 		virtual ~BezierAction2();
 	public:
+		static BezierAction2* create(const math::Vector3& p0, const math::Vector3& p1);
+
 		void setControlParameters(const math::Vector3& p0, const math::Vector3& p1);
 	protected:
 		// 获取位置
@@ -41,6 +43,8 @@ namespace render
 		BezierAction3();
 		virtual ~BezierAction3();
 	public:
+		static BezierAction3* create(const math::Vector3& p0, const math::Vector3& p1, const math::Vector3& p2);
+
 		void setControlParameters(const math::Vector3& p0, const math::Vector3& p1, const math::Vector3& p2);
 	protected:
 		// 获取位置
@@ -60,6 +64,8 @@ namespace render
 		CircleAction();
 		virtual ~CircleAction();
 	public:
+		static CircleAction* create(const math::Vector3& centerPos, float circleRadius, const math::Vector3& eularAngle);
+
 		void setControlParameters(const math::Vector3& centerPos, float circleRadius, const math::Vector3& eularAngle);
 	protected:
 		// 获取位置
@@ -79,6 +85,8 @@ namespace render
 		EllipseAction();
 		virtual ~EllipseAction();
 	public:
+		static EllipseAction* create(const math::Vector3& centerPos, float radiusX, float radiusY, const math::Vector3& eularAngle);
+
 		void setControlParameters(const math::Vector3& centerPos, float radiusX, float radiusY, const math::Vector3& eularAngle);
 	protected:
 		// 获取位置

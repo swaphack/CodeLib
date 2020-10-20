@@ -8,6 +8,8 @@
 #define PROPERTY_TEXTCOLOR	"textColor"
 #define PROPERTY_PLACEHOLDERCOLOR	"placeholderColor"
 
+#define PROPERTY_MULTILINE	"multiLine"
+
 ui::EditTextLoader::EditTextLoader()
 {
 }
@@ -25,6 +27,7 @@ void ui::EditTextLoader::parseAttributes()
 	sys::Color3B tipsColor;
 	std::string fontpath;
 	float fontSize = 0;
+	bool multiLine = false;
 
 	LOAD_WIDGET_ATTRIBUTE(PROPERTY_TEXT, setString, text);
 	LOAD_WIDGET_ATTRIBUTE(PROPERTY_PLACEHOLDER, setPlaceholder, tips);
@@ -34,6 +37,8 @@ void ui::EditTextLoader::parseAttributes()
 
 	LOAD_WIDGET_STRING_ATTRIBUTE(PROPERTY_FONTPATH, setFontPath, fontpath);
 	LOAD_WIDGET_ATTRIBUTE(PROPERTY_FONTSIZE, setFontSize, fontSize);
+
+	LOAD_WIDGET_ATTRIBUTE(PROPERTY_MULTILINE, setMultiLine, multiLine);
 
 	WidgetLoader::parseAttributes();
 }
@@ -50,4 +55,6 @@ void ui::EditTextLoader::saveAttributes()
 
 	SAVE_WIDGET_ATTRIBUTE(PROPERTY_FONTPATH, getFontPath);
 	SAVE_WIDGET_ATTRIBUTE(PROPERTY_FONTSIZE, getFontSize);
+
+	SAVE_WIDGET_ATTRIBUTE(PROPERTY_MULTILINE, isMultiLine);
 }

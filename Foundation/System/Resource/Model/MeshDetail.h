@@ -149,8 +149,6 @@ namespace sys
 		
 		// 顶点索引
 		MeshMemoryData _indices;
-		// 顶点坐标位数
-		uint8_t _verticeSize = 0;
 		// 顶点坐标 (x,y,z)
 		MeshMemoryData _vertices;
 		// 法线坐标 (x,y,z)

@@ -54,3 +54,13 @@ bool ui::LayoutItemBase::copy(LayoutItemBase* item)
 void ui::LayoutItemBase::resize(const math::Size& size)
 {
 }
+
+const render::RectPoints* ui::LayoutItemBase::getRectPoints() const
+{
+	if (getWidget() == nullptr)
+	{
+		return nullptr;
+	}
+	
+	return &getWidget()->getRealRectVertex();
+}

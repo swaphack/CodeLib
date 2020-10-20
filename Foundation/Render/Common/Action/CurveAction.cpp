@@ -23,6 +23,13 @@ render::BezierAction2::~BezierAction2()
 
 }
 
+render::BezierAction2* render::BezierAction2::create(const math::Vector3& p0, const math::Vector3& p1)
+{
+	auto action = CREATE_ACTION(BezierAction2);
+	action->setControlParameters(p0, p1);
+	return action;
+}
+
 void render::BezierAction2::setControlParameters(const math::Vector3& p0, const math::Vector3& p1)
 {
 	_controlPoint0 = p0;
@@ -46,6 +53,13 @@ render::BezierAction3::~BezierAction3()
 
 }
 
+render::BezierAction3* render::BezierAction3::create(const math::Vector3& p0, const math::Vector3& p1, const math::Vector3& p2)
+{
+	auto action = CREATE_ACTION(BezierAction3);
+	action->setControlParameters(p0, p1, p2);
+	return action;
+}
+
 void render::BezierAction3::setControlParameters(const math::Vector3& p0, const math::Vector3& p1, const math::Vector3& p2)
 {
 	_controlPoint0 = p0;
@@ -67,6 +81,13 @@ render::CircleAction::CircleAction()
 render::CircleAction::~CircleAction()
 {
 
+}
+
+render::CircleAction* render::CircleAction::create(const math::Vector3& centerPos, float circleRadius, const math::Vector3& eularAngle)
+{
+	auto action = CREATE_ACTION(CircleAction);
+	action->setControlParameters(centerPos, circleRadius, eularAngle);
+	return action;
 }
 
 void render::CircleAction::setControlParameters(const math::Vector3& centerPos, float circleRadius, const math::Vector3& eularAngle)
@@ -104,6 +125,13 @@ render::EllipseAction::EllipseAction()
 render::EllipseAction::~EllipseAction()
 {
 
+}
+
+render::EllipseAction* render::EllipseAction::create(const math::Vector3& centerPos, float radiusX, float radiusY, const math::Vector3& eularAngle)
+{
+	auto action = CREATE_ACTION(EllipseAction);
+	action->setControlParameters(centerPos, radiusX, radiusY, eularAngle);
+	return action;
 }
 
 void render::EllipseAction::setControlParameters(const math::Vector3& centerPos, float radiusX, float radiusY, const math::Vector3& eularAngle)
