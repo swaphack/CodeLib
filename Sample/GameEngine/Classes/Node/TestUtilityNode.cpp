@@ -44,37 +44,6 @@ void TestUtilityNode::testString()
 	str.concat("hello", ", CN", ", PNG");
 }
 
-void TestUtilityNode::testMatrix()
-{
-	float data2x2[4] = {
-		1, 2,
-		-1, -3
-	};
-
-
-	math::Matrix2x2 mat22(data2x2);
-	PRINT("src:\n%s\n", mat22.toString().c_str());
-	math::Matrix<float, 2, 2> inverse22 = mat22.getInverse();
-	PRINT("transpose:\n%s\n", inverse22.toString().c_str());
-	math::Matrix<float, 2, 2> mul22 = mat22 * inverse22;
-	PRINT("mul:\n%s\n", mul22.toString().c_str());
-
-	float data3x3[9] = {
-		1, 2, 3,
-		3, 2, 1,
-		1, 4, 5
-	};
-
-
-	math::Matrix3x3 mat33(data3x3);
-	PRINT("src:\n%s\n", mat33.toString().c_str());
-	math::Matrix<float, 3, 3> inverse33 = mat33.getInverse();
-	PRINT("transpose:\n%s\n", inverse33.toString().c_str());
-
-	math::Matrix<float, 3, 3> mul33 = mat33 * inverse33;
-	PRINT("mul:\n%s\n", mul33.toString().c_str());
-}
-
 void TestUtilityNode::testHttpDownload()
 {
 	std::string url = "http://pgcvideo.cdn.xiaodutv.com/3655477038_3129027130_20200415121806.mp4?Cache-Control%3Dmax-age%3A8640000%26responseExpires%3DFri%2C_24_Jul_2020_12%3A18%3A16_GMT=&xcode=829315dc4b5218e61407710580f6c8325009948d0a4a4c20&time=1587101501&_=1587017616119";

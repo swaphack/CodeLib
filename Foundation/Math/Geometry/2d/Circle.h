@@ -7,13 +7,13 @@ namespace math
 	/**
 	*	Ô²
 	*/
-	struct Circle2d
+	struct Circle
 	{
 	public:
-		Circle2d();
-		Circle2d(const Vector2& position, float radius);
-		Circle2d(const Circle2d& circle);
-		virtual ~Circle2d();
+		Circle();
+		Circle(const Vector2& position, float radius);
+		Circle(const Circle& circle);
+		virtual ~Circle();
 	public:
 		/**
 		*	Ô²ÐÎ

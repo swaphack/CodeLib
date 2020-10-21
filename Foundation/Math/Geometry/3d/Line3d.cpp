@@ -1,5 +1,5 @@
 #include "Line3d.h"
-#include "Plane3d.h"
+#include "Plane.h"
 #include "Algebra/import.h"
 
 #include <cassert>
@@ -12,7 +12,7 @@ Line3d::Line3d(const Vector3& src, const Vector3& dest)
 	_direction = dest - src;
 }
 
-Line3d::Line3d(const Plane3d& plane0, const Plane3d& plane1)
+Line3d::Line3d(const Plane& plane0, const Plane& plane1)
 {
 	// Áî z = 0 ¼ÆËã×ø±ê
 	Matrix2x2 d = Matrix2x2(plane0.getParamA(), plane0.getParamB(), plane1.getParamA(), plane1.getParamB());

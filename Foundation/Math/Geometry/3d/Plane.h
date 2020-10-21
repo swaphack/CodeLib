@@ -8,26 +8,26 @@ namespace math
 	*	平面方程
 	*	Ax + By + Cz + D = 0;
 	*/
-	struct Plane3d
+	struct Plane
 	{
 	public:
 		/**
 		*	三点确定一条平面
 		*/
-		Plane3d(const Vector3& point0, const Vector3& point1, const Vector3& point2);
+		Plane(const Vector3& point0, const Vector3& point1, const Vector3& point2);
 		/**
 		*	过点，且知道法向量
 		*/
-		Plane3d(const Vector3& point, const Vector3& normal);
+		Plane(const Vector3& point, const Vector3& normal);
 		/**
 		*	参数方程
 		*/
-		Plane3d(float a, float b, float c, float d);
+		Plane(float a, float b, float c, float d);
 		/**
 		*	复制
 		*/
-		Plane3d(const Plane3d& plane);
-		virtual ~Plane3d();
+		Plane(const Plane& plane);
+		virtual ~Plane();
 	public:
 		float getParamA() const;
 		float getParamB() const;

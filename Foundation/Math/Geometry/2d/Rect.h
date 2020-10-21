@@ -75,7 +75,9 @@ namespace math
 	public:
 		Rect& operator=(const Rect& rect);
 	protected:
+		// 原点
 		Vector2 _origin;
+		// 面积
 		Size _size;
 	};
 }

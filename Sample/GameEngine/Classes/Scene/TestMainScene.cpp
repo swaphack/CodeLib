@@ -27,7 +27,7 @@ bool TestMainScene::init()
 	//this->addChild(CREATE_NODE(TestMediaNode));
 	//this->addChild(CREATE_NODE(TestFragmentNode));
 	//this->addChild(CREATE_NODE(TestDrawNode));
-	this->addChild(CREATE_NODE(TestUINode));
+	//this->addChild(CREATE_NODE(TestUINode));
 
 	//this->addChild(CREATE_NODE(TestParticleNode));
 
@@ -45,7 +45,7 @@ bool TestMainScene::init()
 
 	//this->addChild(CREATE_NODE(TestMeshNode));
 
-	//this->addChild(CREATE_NODE(TestMathNode));
+	this->addChild(CREATE_NODE(TestMathNode));
 
 	//this->addChild(CREATE_NODE(TestAlgNode));
 

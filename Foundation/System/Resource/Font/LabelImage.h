@@ -62,11 +62,11 @@ namespace sys
 
 	// 文本图片
 	// 文本变成图片，只关心图片的生成，不考虑实际摆放的位置
-	class ImageLabel : public ImageDetail, public ILabelLoader
+	class LabelImage : public ImageDetail, public ILabelLoader
 	{
 	public:
-		ImageLabel();
-		virtual ~ImageLabel();
+		LabelImage();
+		virtual ~LabelImage();
 	public:
 		// 加载文本
 		virtual bool load(const TextDefine& textDefine);

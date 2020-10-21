@@ -57,6 +57,13 @@ namespace math
 			return _systemMatrix;
 		}
 		/**
+		*	坐标系矩阵
+		*/
+		SquareMatrixF<Count>& getMatrix()
+		{
+			return _systemMatrix;
+		}
+		/**
 		*	设置坐标系矩阵
 		*	有时坐标系矩阵不是固定，可改变
 		*/

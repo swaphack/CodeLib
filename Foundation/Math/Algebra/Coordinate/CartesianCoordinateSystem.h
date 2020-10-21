@@ -1,6 +1,6 @@
 #pragma once
 
-#include "CurvilinearCoordinatesSystem.h"
+#include "CurvilinearCoordinateSystem.h"
 #include "Algebra/Vector/Vector3.h"
 
 namespace math
@@ -10,12 +10,12 @@ namespace math
 	*	Ö±½Ç×ø±êÏµ
 	*/
 	template<const int Count>
-	class CartesianCoordinatesSystem : public CurvilinearCoordinatesSystem<Count>
+	class CartesianCoordinateSystem : public CurvilinearCoordinateSystem<Count>
 	{
 	public:
-		CartesianCoordinatesSystem()
+		CartesianCoordinateSystem()
 		{}
-		virtual ~CartesianCoordinatesSystem()
+		virtual ~CartesianCoordinateSystem()
 		{}
 	public:
 

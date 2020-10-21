@@ -460,9 +460,6 @@
     <ClInclude Include="Framework\Workflow\WorkFlow.h">
       <Filter>Framework\Workflow</Filter>
     </ClInclude>
-    <ClInclude Include="Resource\Font\ImageLabel.h">
-      <Filter>Resource\Font</Filter>
-    </ClInclude>
     <ClInclude Include="Resource\Font\TextDefine.h">
       <Filter>Resource\Font</Filter>
     </ClInclude>
@@ -582,6 +579,9 @@
     </ClInclude>
     <ClInclude Include="Event\import.h">
       <Filter>Event</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\Font\LabelImage.h">
+      <Filter>Resource\Font</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -822,9 +822,6 @@
     <ClCompile Include="Framework\Workflow\WorkFlow.cpp">
       <Filter>Framework\Workflow</Filter>
     </ClCompile>
-    <ClCompile Include="Resource\Font\ImageLabel.cpp">
-      <Filter>Resource\Font</Filter>
-    </ClCompile>
     <ClCompile Include="Resource\Image\ImageBMP.cpp">
       <Filter>Resource\Image</Filter>
     </ClCompile>
@@ -896,6 +893,9 @@
     </ClCompile>
     <ClCompile Include="Event\EventCenter.cpp">
       <Filter>Event</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource\Font\LabelImage.cpp">
+      <Filter>Resource\Font</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

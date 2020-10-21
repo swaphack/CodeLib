@@ -1,8 +1,9 @@
 #pragma once
 
-#include "Algebra/import.h"
+#include "BoundingBox.h"
 #include "Geometry/2d/LineSegment2d.h"
 #include "Geometry/3d/LineSegment3d.h"
+#include "SphereBB.h"
 
 namespace math
 {
@@ -11,21 +12,8 @@ namespace math
 	*	oriented bounding box(方向矩形边界框)
 	*	
 	*/
-	struct OBB 
+	struct OBB : public BoundingBox
 	{
-	public:
-		// 中性点
-		Vector3 center;
-		// 面积
-		Vector3 size;
-		// 外围
-		Vector3 extents;
-		// 旋转角度
-		Vector3 rotation;
-		// 最小坐标
-		Vector3 minPos;
-		// 最大坐标
-		Vector3 maxPos;
 	public:
 		/**
 		*	构造
@@ -35,14 +23,33 @@ namespace math
 		*	构造
 		*/
 		OBB(const Vector3& center, const Vector3& size);
+	public:
+		/**
+		*	体积
+		*/
+		const Vector3& getVolume() const;
+		/**
+		*	旋转
+		*/
+		const Vector3& getRotation() const;
+		/**
+		*	设置参数
+		*/
+		void set(const Vector3& center, const Vector3& size, const Vector3& rotation);
+		/**
+		*	设置参数
+		*/
+		void set(const Vector3& center, const Vector3& size);
+	public:
 		/**
 		*	是否包含点
 		*/
-		bool contains(const Vector2& point32);
+		virtual bool contains(const Vector2& point);
 		/**
 		*	是否包含点
 		*/
-		bool contains(const Vector3& point32);
+		virtual bool contains(const Vector3& point);
+	public:
 		/**
 		*	是否包含线段
 		*/
@@ -80,5 +87,10 @@ namespace math
 		*	计算投影
 		*/
 		void calProjections();
+	protected:
+		// 面积
+		Vector3 _volume;
+		// 旋转角度
+		Vector3 _rotation;
 	};
 }

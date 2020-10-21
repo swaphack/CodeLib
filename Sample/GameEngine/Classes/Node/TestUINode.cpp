@@ -32,7 +32,7 @@ void TestUINode::initNodes()
 
 void TestUINode::testEditBox()
 {
-	CtrlEditLabel* pEditLabel = CREATE_NODE(CtrlEditLabel);
+	CtrlEditText* pEditLabel = CREATE_NODE(CtrlEditText);
 
 	CtrlText* pCtrlText = pEditLabel->getTextControl();
 	pCtrlText->setFontPath("Resource/Font/font_3.ttf");
@@ -45,7 +45,7 @@ void TestUINode::testEditBox()
 	pEditLabel->setVolume(400, 100, 0);
 	pEditLabel->setKeyboardEnable(true);
 	pEditLabel->setInputListen([](sys::Object* object, EditInputStatus status){
-		CtrlEditLabel* pNode = object->as<CtrlEditLabel>();
+		CtrlEditText* pNode = object->as<CtrlEditText>();
 		if (pNode == nullptr)
 		{
 			return;

@@ -81,7 +81,9 @@ void Matrix4x4::setRotate(const Vector3& radian)
 
 void math::Matrix4x4::setShear(float radianX, float radianY, float radianZ)
 {
-
+	this->setShearX(radianX);
+	this->setShearY(radianY);
+	this->setShearZ(radianZ);
 }
 
 void Matrix4x4::setRotateX(float x)
@@ -568,30 +570,27 @@ void math::Matrix4x4::setColumn(int column, const Vector4& value)
 	this->setValue(column, 3, value[3]);
 }
 
-void math::Matrix4x4::setShearX(float radianY, float radianZ)
+void math::Matrix4x4::setShearX(float radian)
 {
-	float tanY = tanf(radianY);
-	float tanZ = tanf(radianZ);
+	float offset = tanf(radian);
 
-	(*this)[4] = tanY;
-	(*this)[8] = tanZ;
+	(*this)[4] = offset;
+	(*this)[8] = offset;
 }
 
-void math::Matrix4x4::setShearY(float radianX, float radianZ)
+void math::Matrix4x4::setShearY(float radian)
 {
-	float tanX = tanf(radianX);
-	float tanZ = tanf(radianZ);
+	float offset = tanf(radian);
 
-	(*this)[1] = tanX;
-	(*this)[9] = tanZ;
+	(*this)[1] = offset;
+	(*this)[9] = offset;
 }
 
-void math::Matrix4x4::setShearZ(float radianX, float radianY)
+void math::Matrix4x4::setShearZ(float radian)
 {
-	float tanX = tanf(radianX);
-	float tanY = tanf(radianY);
+	float offset = tanf(radian);
 
-	(*this)[2] = tanX;
-	(*this)[6] = tanY;
+	(*this)[2] = offset;
+	(*this)[6] = offset;
 }
 

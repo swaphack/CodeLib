@@ -1,6 +1,6 @@
 #include "LineSegment3d.h"
 #include "Geometry/2d/Rect.h"
-#include "Cuboids3d.h"
+#include "Cuboids.h"
 
 using namespace math;
 
@@ -27,7 +27,7 @@ Vector3 LineSegment3d::getVector() const
 bool LineSegment3d::contains(const Vector3& point)
 {
 	Vector3 p = getVector();
-	Cuboids3d cuboids(getSrc(), p);
+	Cuboids cuboids(getSrc(), p);
 	if (!cuboids.contains(point))
 	{
 		return false;

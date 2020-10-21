@@ -5,13 +5,13 @@
 namespace ue
 {
 	/**
-	*	弹出菜单
+	*  打开文件面板
 	*/
-	class PopMenu : public SinglePanel
+	class OpenFilePanel : public SinglePanel
 	{
 	public:
-		PopMenu();
-		virtual ~PopMenu();
+		OpenFilePanel ();
+		virtual ~OpenFilePanel ();
 	public:
 		/**
 		*	文件路径
@@ -30,5 +30,6 @@ namespace ue
 		*	初始化文本
 		*/
 		virtual void initText();
+
 	};
 }

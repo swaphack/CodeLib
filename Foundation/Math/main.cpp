@@ -80,7 +80,7 @@ void testInference()
 int main(int argc, char** argv)
 {
 	int a = 1;
-	math::CartesianCoordinatesSystem3D system;
+	math::CartesianCoordinateSystem3D system;
 	system.loadIdentity();
 
 	math::Array2D<float, 2, 2> value(1.0f, 3.0f, 4.0f, 5.0f);

@@ -1,5 +1,5 @@
 #pragma once
 
 #include "ILabelLoader.h"
-#include "ImageLabel.h"
+#include "LabelImage.h"
 #include "TextDefine.h"

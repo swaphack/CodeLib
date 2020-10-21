@@ -8,13 +8,13 @@ namespace math
 	*	ÇúÏß×ø±êÏµ
 	*/
 	template<const int Count>
-	class CurvilinearCoordinatesSystem : public CoordinateSystem<Count>
+	class CurvilinearCoordinateSystem : public CoordinateSystem<Count>
 	{
 	public:
-		CurvilinearCoordinatesSystem()
+		CurvilinearCoordinateSystem()
 		{
 		}
-		virtual ~CurvilinearCoordinatesSystem()
+		virtual ~CurvilinearCoordinateSystem()
 		{
 		}
 	public:

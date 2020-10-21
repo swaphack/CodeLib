@@ -23,10 +23,12 @@
     <ClCompile Include="Classes\Panel\DirectoryPanel.cpp" />
     <ClCompile Include="Classes\Panel\DocumentPanel.cpp" />
     <ClCompile Include="Classes\Panel\MenuBar.cpp" />
+    <ClCompile Include="Classes\Panel\OpenFilePanel.cpp" />
     <ClCompile Include="Classes\Panel\PopMenu.cpp" />
     <ClCompile Include="Classes\Panel\PropertyPanel.cpp" />
     <ClCompile Include="Classes\Panel\Panel.cpp" />
     <ClCompile Include="Classes\Panel\PanelEvent.cpp" />
+    <ClCompile Include="Classes\Panel\SinglePanel.cpp" />
     <ClCompile Include="Classes\Panel\ViewLayout.cpp" />
     <ClCompile Include="Classes\Panel\WidgetPanel.cpp" />
     <ClCompile Include="Classes\UIEditorApplication.cpp" />
@@ -37,12 +39,14 @@
     <ClInclude Include="Classes\Panel\DesignPanel.h" />
     <ClInclude Include="Classes\Panel\DirectoryPanel.h" />
     <ClInclude Include="Classes\Panel\DocumentPanel.h" />
+    <ClInclude Include="Classes\Panel\OpenFilePanel.h" />
     <ClInclude Include="Classes\Panel\PanelEvent.h" />
     <ClInclude Include="Classes\Panel\import.h" />
     <ClInclude Include="Classes\Panel\macros.h" />
     <ClInclude Include="Classes\Panel\PopMenu.h" />
     <ClInclude Include="Classes\Panel\PropertyPanel.h" />
     <ClInclude Include="Classes\Panel\Panel.h" />
+    <ClInclude Include="Classes\Panel\SinglePanel.h" />
     <ClInclude Include="Classes\Panel\ViewLayout.h" />
     <ClInclude Include="Classes\Panel\MenuBar.h" />
     <ClInclude Include="Classes\Panel\WidgetPanel.h" />

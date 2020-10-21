@@ -4,7 +4,7 @@
 
 namespace math
 {
-	struct Plane3d;
+	struct Plane;
 	/**
 	*	直线方程
 	*	(x - x0) / vx = (y - y0) / vy = (z - z0)/ vz
@@ -19,7 +19,7 @@ namespace math
 		/**
 		*	两平面相交，确认一条直线
 		*/
-		Line3d(const Plane3d& plane0, const Plane3d& plane1);
+		Line3d(const Plane& plane0, const Plane& plane1);
 		Line3d(const Line3d& line);
 		virtual ~Line3d();
 	public:

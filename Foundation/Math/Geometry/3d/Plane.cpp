@@ -1,10 +1,10 @@
 #pragma once
 
-#include "Plane3d.h"
+#include "Plane.h"
 
 using namespace math;
 
-Plane3d::Plane3d(const Vector3& point0, const Vector3& point1, const Vector3& point2)
+Plane::Plane(const Vector3& point0, const Vector3& point1, const Vector3& point2)
 {
 	Vector3 v1 = point1 - point0;
 	Vector3 v2 = point2 - point0;
@@ -18,7 +18,7 @@ Plane3d::Plane3d(const Vector3& point0, const Vector3& point1, const Vector3& po
 	_normal = Vector3(_paramA, _paramB, _paramC);
 }
 
-Plane3d::Plane3d(const Vector3& point, const Vector3& normal)
+Plane::Plane(const Vector3& point, const Vector3& normal)
 {
 	_paramA = normal.getX();
 	_paramB = normal.getY();
@@ -29,7 +29,7 @@ Plane3d::Plane3d(const Vector3& point, const Vector3& normal)
 	_normal = normal;
 }
 
-Plane3d::Plane3d(float a, float b, float c, float d)
+Plane::Plane(float a, float b, float c, float d)
 {
 	_paramA = a;
 	_paramB = b;
@@ -39,42 +39,42 @@ Plane3d::Plane3d(float a, float b, float c, float d)
 	_normal = Vector3(a, b, c);
 }
 
-Plane3d::Plane3d(const Plane3d& plane)
+Plane::Plane(const Plane& plane)
 {
 
 }
 
-Plane3d::~Plane3d()
+Plane::~Plane()
 {
 
 }
 
-float Plane3d::getParamA() const
+float Plane::getParamA() const
 {
 	return _paramA;
 }
 
-float Plane3d::getParamB() const
+float Plane::getParamB() const
 {
 	return _paramB;
 }
 
-float Plane3d::getParamC() const
+float Plane::getParamC() const
 {
 	return _paramC;
 }
 
-const Vector3& Plane3d::normal() const
+const Vector3& Plane::normal() const
 {
 	return _normal;
 }
 
-float Plane3d::getParamD() const
+float Plane::getParamD() const
 {
 	return _paramD;
 }
 
-float Plane3d::getDistanceWithPoint(const Vector3& point)
+float Plane::getDistanceWithPoint(const Vector3& point)
 {
 	float a = _paramA * point.getX() + _paramB * point.getY() + _paramC * point.getZ() + _paramD;
 	float b = sqrt(pow(_paramA, 2) + pow(_paramB, 2) + pow(_paramC, 2));

@@ -138,6 +138,25 @@ namespace math
 			SquareMatrix transpose = adjoint.getTranspose();
 			return transpose / det;
 		}
+		/**
+		*	Äæ¾ØÕó
+		*/
+		/*
+		SquareMatrix getInverseMatrix()
+		{
+			SquareMatrix mat = this->getTranspose();
+
+			for (uint32_t i = 0; i < Order - 1; i++)
+			{
+				for (uint32_t j = 0; i < Order - 1; i++)
+				{
+					mat.setValue(Order - 1, i, mat.getValue(Order - 1, i) - this->getValue(Order - 1, j) * mat.getValue(j, i));
+				}
+			}
+
+			return mat;
+		}
+		*/
 	};
 
 	template<const int Order>

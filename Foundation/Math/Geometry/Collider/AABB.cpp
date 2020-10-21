@@ -2,36 +2,50 @@
 
 using namespace math;
 
-AABB::AABB(const Vector3& center, const Vector3& size)
-:center(center)
-, size(size)
+AABB::AABB(const Vector3& center, const Vector3& volume)
 {
-	minPos = center - size * 0.5f;
-	maxPos = center + size * 0.5f;
+	this->set(center, volume);
 }
 
 AABB::AABB(const Vector2& center, const Vector2& size)
-:center(center)
-, size(size)
 {
+	this->set(center, size);
+}
+
+void math::AABB::set(const Vector2& center, const Vector2& size)
+{
+	_center = center;
+	_volume = size;
+
+	_minPos = center - size * 0.5f;
+	_maxPos = center + size * 0.5f;
+}
+
+void math::AABB::set(const Vector3& center, const Vector3& volume)
+{
+	_center = center;
+	_volume = volume;
+
+	_minPos = center - volume * 0.5f;
+	_maxPos = center + volume * 0.5f;
 }
 
 bool AABB::contains(const Vector2& point32)
 {
-	return point32.getX() >= minPos.getX()
-		&& point32.getX() <= maxPos.getX()
-		&& point32.getY() >= minPos.getY()
-		&& point32.getY() <= maxPos.getY();
+	return point32.getX() >= _minPos.getX()
+		&& point32.getX() <= _maxPos.getX()
+		&& point32.getY() >= _minPos.getY()
+		&& point32.getY() <= _maxPos.getY();
 }
 
 bool AABB::contains(const Vector3& point32)
 {
-	return point32.getX() >= minPos.getX()
-		&& point32.getX() <= maxPos.getX()
-		&& point32.getY() >= minPos.getY()
-		&& point32.getY() <= maxPos.getY()
-		&& point32.getZ() >= minPos.getZ()
-		&& point32.getZ() <= maxPos.getZ();
+	return point32.getX() >= _minPos.getX()
+		&& point32.getX() <= _maxPos.getX()
+		&& point32.getY() >= _minPos.getY()
+		&& point32.getY() <= _maxPos.getY()
+		&& point32.getZ() >= _minPos.getZ()
+		&& point32.getZ() <= _maxPos.getZ();
 }
 
 bool AABB::contains(const LineSegment2d& line)
@@ -66,22 +80,22 @@ bool AABB::intersects(const LineSegment3d& line)
 
 bool AABB::contains(const AABB& bounds)
 {
-	return bounds.Min().getX() >= Min().getX()
-		&& bounds.Max().getX() <= Max().getX()
-		&& bounds.Min().getY() >= Min().getY()
-		&& bounds.Max().getY() <= Max().getY()
-		&& bounds.Min().getZ() >= Min().getZ()
-		&& bounds.Max().getZ() <= Max().getZ();
+	return bounds.getMin().getX() >= getMin().getX()
+		&& bounds.getMax().getX() <= getMax().getX()
+		&& bounds.getMin().getY() >= getMin().getY()
+		&& bounds.getMax().getY() <= getMax().getY()
+		&& bounds.getMin().getZ() >= getMin().getZ()
+		&& bounds.getMax().getZ() <= getMax().getZ();
 }
 
 bool AABB::intersects(const AABB& bounds)
 {
-	float x0 = bounds.Min().getX();
-	float x1 = bounds.Max().getX();
-	float y0 = bounds.Min().getY();
-	float y1 = bounds.Min().getY();
-	float z0 = bounds.Min().getZ();
-	float z1 = bounds.Min().getZ();
+	float x0 = bounds.getMin().getX();
+	float x1 = bounds.getMax().getX();
+	float y0 = bounds.getMin().getY();
+	float y1 = bounds.getMin().getY();
+	float z0 = bounds.getMin().getZ();
+	float z1 = bounds.getMin().getZ();
 
 	Vector3 v0(x0, y0, z0);
 	Vector3 v1(x0, y1, z0);
@@ -104,8 +118,23 @@ bool AABB::intersects(const AABB& bounds)
 	return false;
 }
 
+const Vector3& math::AABB::getMin() const 
+{ 
+	return _minPos; 
+}
+
+const Vector3& math::AABB::getMax() const 
+{ 
+	return _maxPos; 
+}
+
+const Vector3& math::AABB::getVolume() const 
+{
+	return _volume; 
+}
+
 void AABB::operator=(const AABB& aabb)
 {
-	center = aabb.center;
-	size = aabb.size;
+	_center = aabb._center;
+	_volume = aabb._volume;
 }

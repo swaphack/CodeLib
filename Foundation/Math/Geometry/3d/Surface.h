@@ -6,25 +6,25 @@
 namespace math
 {
 	/**
-	*	立体几何的面
+	*	表面
 	*/
 	template<typename T,
 		const int Length,
 		typename = std::enable_if<std::is_base_of<math::Vector3, T>::value, T>::type>
-	struct Surface3d : public Array<T, Length>
+	struct Surface : public Array<T, Length>
 	{
 	public:
-		Surface3d() {}
-		Surface3d(const Surface3d& surface) 
+		Surface() {}
+		Surface(const Surface& surface) 
 		{
 			this->assign(surface.getValue());
 		}
-		Surface3d(const T* poins)
+		Surface(const T* poins)
 		{
 			this->assign(poins);
 		}
 
-		virtual ~Surface3d() {}
+		virtual ~Surface() {}
 	public:
 		/**
 		*	法向量
@@ -51,9 +51,9 @@ namespace math
 			Vector2 pyz(point.getY(), point.getZ());
 			Vector2 pxz(point.getX(), point.getZ());
 
-			Polygon2d pxoy = Surface3d::projectOnXOY(*this);
-			Polygon2d pyoz = Surface3d::projectOnXOY(*this);
-			Polygon2d pxoz = Surface3d::projectOnXOY(*this);
+			Polygon pxoy = Surface::projectOnXOY(*this);
+			Polygon pyoz = Surface::projectOnXOY(*this);
+			Polygon pxoz = Surface::projectOnXOY(*this);
 
 			if (pxoy.contains(pxy) || pyoz.contains(pyz) || pyoz.contains(pxz))
 			{
@@ -65,7 +65,7 @@ namespace math
 		/**
 		*	重载=
 		*/
-		Surface3d& operator=(const Surface3d& surface)
+		Surface& operator=(const Surface& surface)
 		{
 			this->assign(surface.getValue());
 		}
@@ -74,7 +74,7 @@ namespace math
 		*	是否是标准的多边形，顶点数大于等于3,并且相邻不存在共线的情况
 		*	且共面
 		*/
-		static bool isStandard(const Surface3d& surface)
+		static bool isStandard(const Surface& surface)
 		{
 			if (surface.getLength() < 3)
 			{
@@ -106,7 +106,7 @@ namespace math
 		/**
 		*	是否是凸多边形
 		*/
-		static bool isConvex(const Surface3d& surface)
+		static bool isConvex(const Surface& surface)
 		{
 			if (!isStandard(surface))
 			{
@@ -138,7 +138,7 @@ namespace math
 		/**
 		*	点与平面是否共面
 		*/
-		static bool isCoplanar(const Surface3d& surface, const Vector3& point)
+		static bool isCoplanar(const Surface& surface, const Vector3& point)
 		{
 			if (!isStandard(surface))
 			{
@@ -196,7 +196,7 @@ namespace math
 		/**
 		*	投影到xoy面
 		*/
-		static Polygon2d<Length> projectOnXOY(const Surface3d& surface)
+		static Polygon<Length> projectOnXOY(const Surface& surface)
 		{
 			int32_t count = surface.getLength();
 			// 投影坐标计算
@@ -210,7 +210,7 @@ namespace math
 			}
 
 			// 投影
-			Polygon2d<Length> polygon(ps);
+			Polygon<Length> polygon(ps);
 			delete[] ps;
 
 			return polygon;
@@ -218,7 +218,7 @@ namespace math
 		/**
 		*	投影到yoz面
 		*/
-		static Polygon2d<Length> projectOnYOZ(const Surface3d& surface)
+		static Polygon<Length> projectOnYOZ(const Surface& surface)
 		{
 			int32_t count = surface.getLength();
 			// 投影坐标计算
@@ -232,7 +232,7 @@ namespace math
 			}
 
 			// 投影
-			Polygon2d<Length> polygon(ps);
+			Polygon<Length> polygon(ps);
 			delete[] ps;
 
 			return polygon;
@@ -240,7 +240,7 @@ namespace math
 		/**
 		*	投影到xoz面
 		*/
-		static Polygon2d<Length> projectOnXOZ(const Surface3d& surface)
+		static Polygon<Length> projectOnXOZ(const Surface& surface)
 		{
 			int32_t count = surface.getLength();
 			// 投影坐标计算
@@ -255,7 +255,7 @@ namespace math
 			}
 
 			// 投影
-			Polygon2d<Length> polygon(ps);
+			Polygon<Length> polygon(ps);
 			delete[] ps;
 
 			return polygon;

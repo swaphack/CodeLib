@@ -120,7 +120,7 @@ Texture2D* TextureCache::createTexture2D(const sys::ImageDefine& imageDefine)
 
 Texture2D* TextureCache::createTexture2D(const sys::TextDefine& textDefine)
 {
-	sys::ImageLabel* image = sys::Loader::loadLabel<sys::ImageLabel>(textDefine);
+	sys::LabelImage* image = sys::Loader::loadLabel<sys::LabelImage>(textDefine);
 	if (image == nullptr)
 	{
 		return nullptr;

@@ -1,10 +1,10 @@
 #pragma once
 
 #include "CoordinateSystem.h"
-#include "CurvilinearCoordinatesSystem.h"
-#include "CartesianCoordinatesSystem.h"
+#include "CurvilinearCoordinateSystem.h"
+#include "CartesianCoordinateSystem.h"
 #include "PolarCoordinateSystem.h"
 
-#include "CartesianCoordinatesSystem2D.h"
-#include "CartesianCoordinatesSystem3D.h"
-#include "CartesianCoordinatesSystem4D.h"
+#include "CartesianCoordinateSystem2D.h"
+#include "CartesianCoordinateSystem3D.h"
+#include "CartesianCoordinateSystem4D.h"

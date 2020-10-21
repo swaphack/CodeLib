@@ -8,7 +8,7 @@ namespace math
 	/**
 	*	长方体
 	*/
-	struct Cuboids3d
+	struct Cuboids
 	{
 	protected:
 		/**
@@ -20,10 +20,10 @@ namespace math
 		*/
 		Volume _size;
 	public:
-		Cuboids3d();
-		Cuboids3d(const Vector3& origin, const Volume& size);
-		Cuboids3d(const Cuboids3d& cuboids);
-		virtual ~Cuboids3d();
+		Cuboids();
+		Cuboids(const Vector3& origin, const Volume& size);
+		Cuboids(const Cuboids& cuboids);
+		virtual ~Cuboids();
 	public:
 		float getX() const;
 		float getY() const;
@@ -56,8 +56,8 @@ namespace math
 		/**
 		*	相交
 		*/
-		bool intersect(const Cuboids3d& cuboids);
+		bool intersect(const Cuboids& cuboids);
 	public:
-		Cuboids3d& operator=(const Cuboids3d& cuboids);
+		Cuboids& operator=(const Cuboids& cuboids);
 	};
 }

@@ -181,13 +181,7 @@
     <ClInclude Include="Basic\Boundary.h">
       <Filter>Basic</Filter>
     </ClInclude>
-    <ClInclude Include="Algebra\Coordinate\CartesianCoordinatesSystem.h">
-      <Filter>Algebra\Coordinate</Filter>
-    </ClInclude>
     <ClInclude Include="Algebra\Coordinate\CoordinateSystem.h">
-      <Filter>Algebra\Coordinate</Filter>
-    </ClInclude>
-    <ClInclude Include="Algebra\Coordinate\CurvilinearCoordinatesSystem.h">
       <Filter>Algebra\Coordinate</Filter>
     </ClInclude>
     <ClInclude Include="Algebra\Coordinate\PolarCoordinateSystem.h">
@@ -239,9 +233,6 @@
       <Filter>Function\Elementary</Filter>
     </ClInclude>
     <ClInclude Include="Geometry\Collider\AABB.h">
-      <Filter>Geometry\Collider</Filter>
-    </ClInclude>
-    <ClInclude Include="Geometry\Collider\Box.h">
       <Filter>Geometry\Collider</Filter>
     </ClInclude>
     <ClInclude Include="Geometry\Collider\import.h">
@@ -418,20 +409,8 @@
     <ClInclude Include="Geometry\2d\LineSegment2d.h">
       <Filter>Geometry\2d</Filter>
     </ClInclude>
-    <ClInclude Include="Geometry\2d\Circle2d.h">
-      <Filter>Geometry\2d</Filter>
-    </ClInclude>
     <ClInclude Include="Geometry\2d\Polar2d.h">
       <Filter>Geometry\2d</Filter>
-    </ClInclude>
-    <ClInclude Include="Geometry\2d\Polygon2d.h">
-      <Filter>Geometry\2d</Filter>
-    </ClInclude>
-    <ClInclude Include="Geometry\2d\Triangle2d.h">
-      <Filter>Geometry\2d</Filter>
-    </ClInclude>
-    <ClInclude Include="Geometry\3d\Cuboids3d.h">
-      <Filter>Geometry\3d</Filter>
     </ClInclude>
     <ClInclude Include="Geometry\3d\Line3d.h">
       <Filter>Geometry\3d</Filter>
@@ -439,16 +418,7 @@
     <ClInclude Include="Geometry\3d\LineSegment3d.h">
       <Filter>Geometry\3d</Filter>
     </ClInclude>
-    <ClInclude Include="Geometry\3d\Plane3d.h">
-      <Filter>Geometry\3d</Filter>
-    </ClInclude>
     <ClInclude Include="Geometry\3d\Polar3d.h">
-      <Filter>Geometry\3d</Filter>
-    </ClInclude>
-    <ClInclude Include="Geometry\3d\Polyhedron3d.h">
-      <Filter>Geometry\3d</Filter>
-    </ClInclude>
-    <ClInclude Include="Geometry\3d\Surface3d.h">
       <Filter>Geometry\3d</Filter>
     </ClInclude>
     <ClInclude Include="Algebra\Coordinate\Axis.h">
@@ -460,13 +430,46 @@
     <ClInclude Include="Algebra\Coordinate\import.h">
       <Filter>Algebra\Coordinate</Filter>
     </ClInclude>
-    <ClInclude Include="Algebra\Coordinate\CartesianCoordinatesSystem2D.h">
+    <ClInclude Include="Geometry\Collider\BoundingBox.h">
+      <Filter>Geometry\Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="Geometry\Collider\SphereBB.h">
+      <Filter>Geometry\Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="Geometry\2d\Triangle.h">
+      <Filter>Geometry\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="Geometry\2d\Circle.h">
+      <Filter>Geometry\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="Geometry\2d\Polygon.h">
+      <Filter>Geometry\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="Geometry\3d\Cuboids.h">
+      <Filter>Geometry\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="Geometry\3d\Plane.h">
+      <Filter>Geometry\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="Geometry\3d\Surface.h">
+      <Filter>Geometry\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="Geometry\3d\Polyhedron.h">
+      <Filter>Geometry\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="Algebra\Coordinate\CartesianCoordinateSystem.h">
       <Filter>Algebra\Coordinate</Filter>
     </ClInclude>
-    <ClInclude Include="Algebra\Coordinate\CartesianCoordinatesSystem3D.h">
+    <ClInclude Include="Algebra\Coordinate\CartesianCoordinateSystem2D.h">
       <Filter>Algebra\Coordinate</Filter>
     </ClInclude>
-    <ClInclude Include="Algebra\Coordinate\CartesianCoordinatesSystem4D.h">
+    <ClInclude Include="Algebra\Coordinate\CartesianCoordinateSystem3D.h">
+      <Filter>Algebra\Coordinate</Filter>
+    </ClInclude>
+    <ClInclude Include="Algebra\Coordinate\CartesianCoordinateSystem4D.h">
+      <Filter>Algebra\Coordinate</Filter>
+    </ClInclude>
+    <ClInclude Include="Algebra\Coordinate\CurvilinearCoordinateSystem.h">
       <Filter>Algebra\Coordinate</Filter>
     </ClInclude>
   </ItemGroup>
@@ -536,9 +539,6 @@
       <Filter>Function\Elementary</Filter>
     </ClCompile>
     <ClCompile Include="Geometry\Collider\AABB.cpp">
-      <Filter>Geometry\Collider</Filter>
-    </ClCompile>
-    <ClCompile Include="Geometry\Collider\Box.cpp">
       <Filter>Geometry\Collider</Filter>
     </ClCompile>
     <ClCompile Include="Geometry\Collider\OBB.cpp">
@@ -664,14 +664,8 @@
     <ClCompile Include="Geometry\2d\LineSegment2d.cpp">
       <Filter>Geometry\2d</Filter>
     </ClCompile>
-    <ClCompile Include="Geometry\2d\Circle2d.cpp">
-      <Filter>Geometry\2d</Filter>
-    </ClCompile>
     <ClCompile Include="Geometry\2d\Polar2d.cpp">
       <Filter>Geometry\2d</Filter>
-    </ClCompile>
-    <ClCompile Include="Geometry\3d\Cuboids3d.cpp">
-      <Filter>Geometry\3d</Filter>
     </ClCompile>
     <ClCompile Include="Geometry\3d\Line3d.cpp">
       <Filter>Geometry\3d</Filter>
@@ -679,23 +673,35 @@
     <ClCompile Include="Geometry\3d\LineSegment3d.cpp">
       <Filter>Geometry\3d</Filter>
     </ClCompile>
-    <ClCompile Include="Geometry\3d\Plane3d.cpp">
-      <Filter>Geometry\3d</Filter>
-    </ClCompile>
     <ClCompile Include="Geometry\3d\Polar3d.cpp">
       <Filter>Geometry\3d</Filter>
     </ClCompile>
-    <ClCompile Include="Algebra\Coordinate\CartesianCoordinatesSystem2D.cpp">
-      <Filter>Algebra\Coordinate</Filter>
-    </ClCompile>
-    <ClCompile Include="Algebra\Coordinate\CartesianCoordinatesSystem3D.cpp">
-      <Filter>Algebra\Coordinate</Filter>
-    </ClCompile>
-    <ClCompile Include="Algebra\Coordinate\CartesianCoordinatesSystem4D.cpp">
-      <Filter>Algebra\Coordinate</Filter>
-    </ClCompile>
     <ClCompile Include="Set\Element.cpp">
       <Filter>Set</Filter>
+    </ClCompile>
+    <ClCompile Include="Geometry\Collider\BoundingBox.cpp">
+      <Filter>Geometry\Collider</Filter>
+    </ClCompile>
+    <ClCompile Include="Geometry\Collider\SphereBB.cpp">
+      <Filter>Geometry\Collider</Filter>
+    </ClCompile>
+    <ClCompile Include="Geometry\2d\Circle.cpp">
+      <Filter>Geometry\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="Geometry\3d\Cuboids.cpp">
+      <Filter>Geometry\3d</Filter>
+    </ClCompile>
+    <ClCompile Include="Geometry\3d\Plane.cpp">
+      <Filter>Geometry\3d</Filter>
+    </ClCompile>
+    <ClCompile Include="Algebra\Coordinate\CartesianCoordinateSystem2D.cpp">
+      <Filter>Algebra\Coordinate</Filter>
+    </ClCompile>
+    <ClCompile Include="Algebra\Coordinate\CartesianCoordinateSystem3D.cpp">
+      <Filter>Algebra\Coordinate</Filter>
+    </ClCompile>
+    <ClCompile Include="Algebra\Coordinate\CartesianCoordinateSystem4D.cpp">
+      <Filter>Algebra\Coordinate</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

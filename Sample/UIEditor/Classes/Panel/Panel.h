@@ -64,13 +64,43 @@ namespace ue
 		/**
 		*	创建文件
 		*/
-		template<typename T>
+		template<typename T, typename = std::enable_if<std::is_base_of<Panel, T>::value, T>::type>
 		static T* createPanel(const std::string& filepath)
 		{
 			auto pFile = CREATE_NODE(T);
 			pFile->setRootView(true);
 			pFile->setFilePath(filepath);
 			pFile->autoResize();
+
+			return pFile;
+		}
+
+
+		/**
+		*	创建面板
+		*/
+		template<typename T, typename = std::enable_if<std::is_base_of<SinglePanel, T>::value, T>::type>
+		static T* showWithTarget(const ui::LayoutItem* item, sys::CSSDirection eDir)
+		{
+			auto pFile = CREATE_NODE(T);
+			pFile->setRootView(true);
+			pFile->setFilePath(pFile->getPanelPath());
+			pFile->autoResize();
+			pFile->showWithTarget(item, eDir);
+
+			return pFile;
+		}
+		/**
+		*	创建面板
+		*/
+		template<typename T, typename = std::enable_if<std::is_base_of<SinglePanel, T>::value, T>::type>
+		static T* show()
+		{
+			auto pFile = CREATE_NODE(T);
+			pFile->setRootView(true);
+			pFile->setFilePath(pFile->getPanelPath());
+			pFile->autoResize();
+			pFile->show();
 
 			return pFile;
 		}

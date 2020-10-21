@@ -11,5 +11,7 @@ protected:
 	virtual void initNodes();
 protected:
 	void testMath();
+
+	void testMatrix();
 private:
 };

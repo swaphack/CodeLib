@@ -298,7 +298,7 @@ namespace math
 					stream << fValue;
 					stream << ",";
 				}
-				stream << "n";
+				stream << "\n";
 			}
 
 			return stream.str();

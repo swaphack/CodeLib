@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Algebra/import.h"
+#include "LineSegment2d.h"
 #include "Line2d.h"
 #include "Geometry/base/Points.h"
 #include <cstdint>
@@ -12,20 +13,20 @@ namespace math
 	*	平面几何的多边形
 	*/ 
 	template<const int Length>
-	struct Polygon2d : public Points<math::Vector2, Length>
+	struct Polygon : public Points<math::Vector2, Length>
 	{
 	public:
-		Polygon2d() {}
-		Polygon2d(const Polygon2d& polygon)
+		Polygon() {}
+		Polygon(const Polygon& polygon)
 		{
 			this->assign(polygon.getValue());
 		}
-		Polygon2d(const math::Vector2* vpoints)
+		Polygon(const math::Vector2* vpoints)
 		{
 			this->assign(vpoints);
 		}
 
-		virtual ~Polygon2d() {}
+		virtual ~Polygon() {}
 	public:
 		/**
 		*	是否包含点
@@ -58,26 +59,30 @@ namespace math
 		/**
 		*	是否包含线段
 		*/
-		bool contains(const Line2d& line)
+		bool contains(const LineSegment2d& line)
 		{
-			return false;
+			bool one = contains(line.getSrc());
+			bool two = contains(line.getDest());
+			return one && two;
 		}
 		/**
 		*	是否与线段相交
 		*/
-		bool intersects(const Line2d& line)
+		bool intersects(const LineSegment2d& line)
 		{
-			return false;
+			bool one = contains(line.getSrc());
+			bool two = contains(line.getDest());
+			return (one && ! two) || (!one && two);
 		}
 		/**
 		*	是否与多边形相交
 		*/
-		bool intersects(const Polygon2d& polygon)
+		bool intersects(const Polygon& polygon)
 		{
-			for (int32_t i = 0; i < polygon.getLength(); i++)
+			for (int32_t i = 0; i < Length; i++)
 			{
-				Line2d line(polygon[i], polygon[(i + 1) % polygon.getLength()]);
-				if (this->intersects(line) || this->contains(line))
+				LineSegment2d line(polygon[i], polygon[(i + 1) % polygon.getLength()]);
+				if (this->intersects(line))
 				{
 					return true;
 				}
@@ -88,7 +93,7 @@ namespace math
 		/**
 		*	重载=
 		*/
-		Polygon2d& operator=(const Polygon2d& polygon)
+		Polygon& operator=(const Polygon& polygon)
 		{
 			this->assign(polygon.getValue());
 		}
@@ -96,14 +101,14 @@ namespace math
 		/**
 		*	是否是标准的多边形，顶点数大于等于3,并且相邻不存在共线的情况
 		*/
-		static bool isStandard(const Polygon2d& polygon)
+		static bool isStandard(const Polygon& polygon)
 		{
-			if (polygon.getLength() < 3)
+			if (Length < 3)
 			{
 				return false;
 			}
 
-			int32_t lineCount = polygon.getLength();
+			int32_t lineCount = Length;
 			PointAndLinePosition2DType lastDirection = PointAndLinePosition2DType::NONE;
 			for (int32_t i = 0; i < lineCount; i++)
 			{
@@ -135,14 +140,14 @@ namespace math
 		/**
 		*	是否是凸多边形
 		*/
-		static bool isConvex(const Polygon2d& polygon)
+		static bool isConvex(const Polygon& polygon)
 		{
 			if (!isStandard(polygon))
 			{
 				return false;
 			}
 
-			int32_t lineCount = polygon.getLength();
+			int32_t lineCount = Length;
 			PointAndLinePosition2DType lastDirection = PointAndLinePosition2DType::NONE;
 			for (int32_t i = 0; i < lineCount; i++)
 			{

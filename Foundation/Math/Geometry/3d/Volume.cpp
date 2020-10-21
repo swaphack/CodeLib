@@ -14,8 +14,8 @@ Volume::Volume(float w, float h, float d)
 	this->setDepth(d);
 }
 
-Volume::Volume(const Volume& volumn)
-	: Volume(volumn.getWidth(), volumn.getHeight(), volumn.getDepth())
+Volume::Volume(const Volume& volume)
+	: Volume(volume.getWidth(), volume.getHeight(), volume.getDepth())
 {
 }
 

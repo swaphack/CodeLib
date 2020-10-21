@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Polygon2d.h"
-#include "Circle2d.h"
+#include "Polygon.h"
+#include "Circle.h"
 #include "Rect.h"
 #include "LineSegment2d.h"
 

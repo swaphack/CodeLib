@@ -15,7 +15,7 @@ void ue::MenuBar::initUI()
 	if (item)
 	{
 		item->getWidget()->addClickFunc([item](render::Node* node) {
-			PopMenu::show(item, sys::CSSDirection::Bottom);
+			showWithTarget<PopMenu>(item, sys::CSSDirection::Bottom);
 		});
 	}
 
@@ -23,7 +23,7 @@ void ue::MenuBar::initUI()
 	if (item)
 	{
 		item->getWidget()->addClickFunc([item](render::Node* node) {
-			PopMenu::show(item, sys::CSSDirection::Bottom);
+			showWithTarget<PopMenu>(item, sys::CSSDirection::Bottom);
 		});
 	}
 }

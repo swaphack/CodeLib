@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Algebra/import.h"
+#include "BoundingBox.h"
 #include "Geometry/2d/LineSegment2d.h"
 #include "Geometry/3d/LineSegment3d.h"
 
@@ -10,17 +10,8 @@ namespace math
 	*	AABB碰撞盒
 	*	axially aligned bounding box(轴对齐矩形边界框)
 	*/
-	struct AABB
+	struct AABB : public BoundingBox
 	{
-	private:
-		// 中心点
-		Vector3 center;
-		// 面积
-		Vector3 size;
-		// 最小坐标
-		Vector3 minPos;
-		// 最大坐标
-		Vector3 maxPos;
 	public:
 		/**
 		*	构造
@@ -29,15 +20,39 @@ namespace math
 		/**
 		*	构造
 		*/
-		AABB(const Vector3& center, const Vector3& size);
+		AABB(const Vector3& center, const Vector3& volume);
+	public:
+		/**
+		*	最小坐标
+		*/
+		const Vector3& getMin() const;
+		/**
+		*	最大坐标
+		*/
+		const Vector3& getMax() const;
+		/**
+		*	体积
+		*/
+		const Vector3& getVolume() const;
+
+		/**
+		*	设置参数
+		*/
+		void set(const Vector2& center, const Vector2& size);
+		/**
+		*	设置参数
+		*/
+		void set(const Vector3& center, const Vector3& volume);
+	public:
 		/**
 		*	是否包含点
 		*/
-		bool contains(const Vector2& point32);
+		virtual bool contains(const Vector2& point32);
 		/**
 		*	是否包含点
 		*/
-		bool contains(const Vector3& point32);
+		virtual bool contains(const Vector3& point32);
+	public:
 		/**
 		*	是否包含线段
 		*/
@@ -63,16 +78,15 @@ namespace math
 		*/
 		bool intersects(const AABB& bounds);
 		/**
-		*	最小坐标
-		*/
-		inline const Vector3& Min() const { return minPos;  }
-		/**
-		*	最大坐标
-		*/
-		inline const Vector3& Max() const { return maxPos; }
-		/**
 		*	重载=
 		*/
 		void operator=(const AABB& aabb);
+	private:
+		// 面积
+		Vector3 _volume;
+		// 最小坐标
+		Vector3 _minPos;
+		// 最大坐标
+		Vector3 _maxPos;
 	};
 }

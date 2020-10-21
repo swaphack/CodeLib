@@ -77,7 +77,7 @@ namespace math
 		*/
 		void setRotationByAxis(const Vector3& axis, float radian);
 		/**
-		*	绕轴线段旋转度数
+		*	绕线段轴旋转度数
 		*/
 		void setRotationByLine(const Vector3& src, const Vector3& dest, float radian);
 		/**
@@ -112,15 +112,15 @@ namespace math
 		/**
 		*	x错切
 		*/
-		void setShearX(float radianY, float radianZ);
+		void setShearX(float radian);
 		/**
 		*	y错切
 		*/
-		void setShearY(float radianX, float radianZ);
+		void setShearY(float radian);
 		/**
 		*	z错切
 		*/
-		void setShearZ(float radianX, float radianY);
+		void setShearZ(float radianX);
 	public:
 		Matrix4x1 operator*(const Matrix4x1& mat);
 		Matrix4x4 operator*(const Matrix4x4& mat);

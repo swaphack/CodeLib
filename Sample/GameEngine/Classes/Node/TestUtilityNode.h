@@ -12,8 +12,6 @@ protected:
 private:
 	void testString();
 
-	void testMatrix();
-
 	void testHttpDownload();
 private:
 	sys::ConcurrentFile* _concurFile = nullptr;

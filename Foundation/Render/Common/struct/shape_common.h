@@ -35,7 +35,7 @@ namespace render
 		float getWidth();
 		float getHeight();
 	protected:
-		double getArea(const math::Vector3& p1, const math::Vector3& p2, const math::Vector3& p3);
+		float getArea(const math::Vector3& p1, const math::Vector3& p2, const math::Vector3& p3);
 	};
 
 	// 立方体顶点集

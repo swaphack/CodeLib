@@ -56,9 +56,9 @@ Matrix3x3::~Matrix3x3()
 
 void Matrix3x3::loadIdentity()
 {
-	(*this)[0] = 1; (*this)[1] = 0; (*this)[2] = 0; // x
-	(*this)[3] = 0; (*this)[4] = 1; (*this)[5] = 0; // y
-	(*this)[6] = 0; (*this)[7] = 0; (*this)[8] = 1; // translate
+	(*this)[0] = 1; (*this)[1] = 0; (*this)[2] = 0; 
+	(*this)[3] = 0; (*this)[4] = 1; (*this)[5] = 0; 
+	(*this)[6] = 0; (*this)[7] = 0; (*this)[8] = 1;
 }
 
 void Matrix3x3::setTranslate(const Vector2& vector)
@@ -83,8 +83,8 @@ void math::Matrix3x3::setShear(float radianX, float radianY)
 	float tanX = tanf(radianX);
 	float tanY = tanf(radianY);
 
-	(*this)[1] = tanY;
-	(*this)[3] = tanX;
+	(*this)[1] = tanX;
+	(*this)[3] = -tanY;
 }
 
 math::Matrix3x3::operator SquareMatrix3()

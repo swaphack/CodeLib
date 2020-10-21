@@ -1,4 +1,4 @@
-#include "ImageLabel.h"
+#include "LabelImage.h"
 #include "../extensions.h"
 #include "Memory/MemoryData.h"
 #include "Text/CharsetHelper.h"
@@ -572,17 +572,17 @@ void LabelStream::setFixWidth(uint32_t width)
 }
 
 //////////////////////////////////////////////////////////////////////////
-ImageLabel::ImageLabel()
+LabelImage::LabelImage()
 {
 	_stream = new LabelStream();
 }
 
-ImageLabel::~ImageLabel()
+LabelImage::~LabelImage()
 {
 	SAFE_DELETE(_stream);
 }
 
-bool ImageLabel::load(const TextDefine& textDefine)
+bool LabelImage::load(const TextDefine& textDefine)
 {
 	uint32_t fixeWidth = (uint32_t)textDefine.width * RGBA_PIXEL_UNIT;
 	if (fixeWidth > 0)

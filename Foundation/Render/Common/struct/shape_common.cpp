@@ -44,11 +44,11 @@ bool RectPoints::containPointByPolygon(float x, float y)
 	nvec[2] = math::Vector2(rightUp.getX(), rightUp.getY());
 	nvec[3] = math::Vector2(leftUp.getX(), leftUp.getY());
 
-	math::Polygon2d<4> p(nvec);
+	math::Polygon<4> p(nvec);
 	return p.contains(math::Vector2(x, y));
 }
 
-double RectPoints::getArea(const math::Vector3& p1, const math::Vector3& p2, const math::Vector3& p3)
+float RectPoints::getArea(const math::Vector3& p1, const math::Vector3& p2, const math::Vector3& p3)
 {
 	math::Vector3 v1 = p2 - p1;
 	math::Vector3 v2 = p3 - p1;

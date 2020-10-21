@@ -10,14 +10,14 @@ namespace math
 	*	多面体
 	*/
 	template<const int Length, const int... Sizes>
-	struct Polyhedron3d : public VariableLengthArray<math::Vector3, Length, Sizes>
+	struct Polyhedron : public VariableLengthArray<math::Vector3, Length, Sizes>
 	{
 	public:
-		Polyhedron3d()
+		Polyhedron()
 		{
 			
 		}
-		virtual ~Polyhedron3d()
+		virtual ~Polyhedron()
 		{
 
 		}
@@ -29,9 +29,9 @@ namespace math
 		bool contiains(const Vector3& point)
 		{
 
-			Polygon2d pxoy;
-			Polygon2d pyoz;
-			Polygon2d pxoz;
+			Polygon pxoy;
+			Polygon pyoz;
+			Polygon pxoz;
 
 			Vector2 pxy(point.getX(), point.getY());
 			Vector2 pyz(point.getY(), point.getZ());
@@ -39,9 +39,9 @@ namespace math
 
 			for (int32_t i = 0; i < Length; i++)
 			{
-				pxoy = Surface3d::projectOnXOY(this->getValue(i));
-				pyoz = Surface3d::projectOnYOZ(this->getValue(i));
-				pxoz = Surface3d::projectOnXOZ(this->getValue(i));
+				pxoy = Surface::projectOnXOY(this->getValue(i));
+				pyoz = Surface::projectOnYOZ(this->getValue(i));
+				pxoz = Surface::projectOnXOZ(this->getValue(i));
 
 				if (pxoy.contains(pxy) || pyoz.contains(pyz) || pyoz.contains(pxz))
 				{
@@ -55,7 +55,7 @@ namespace math
 		*	两多面体是否相交
 		*	
 		*/
-		bool intersects(const Polyhedron3d& polyhedron)
+		bool intersects(const Polyhedron& polyhedron)
 		{
 			return false;
 		}
