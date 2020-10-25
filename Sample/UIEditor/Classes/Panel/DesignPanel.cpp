@@ -45,11 +45,7 @@ void ue::DesignPanel::initUI()
 			if (childLayout)
 			{
 				childLayout->addItem(m_pUIFile);
-			}
-
-			if (item->getWidget())
-			{
-				item->getWidget()->addWidget(pWidget);
+				childLayout->addWidget(pWidget);
 			}
 		}
 	}

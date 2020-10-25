@@ -227,10 +227,7 @@ bool UIProxy::loadLayout(Layout* pLayout, tinyxml2::XMLElement* xmlNode)
 		if (childItem)
 		{
 			pLayout->addItem(childItem);
-			if (pLayout->getWidget() && childItem->getWidget())
-			{
-				pLayout->getWidget()->addWidget(childItem->getWidget());
-			}
+			pLayout->addWidget(childItem->getWidget());
 
 			Layout* childLayout = childItem->as<Layout>();
 			if (childNode->FirstChild() && childLayout)

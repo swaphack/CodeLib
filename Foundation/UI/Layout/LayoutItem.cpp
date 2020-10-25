@@ -200,3 +200,15 @@ void LayoutItem::resize(const math::Size& size)
 	m_pWidget->setPosition(x, y);
 }
 
+
+
+void ui::LayoutItem::addWidget(render::CtrlWidget* widget)
+{
+	if (widget == nullptr || this->getWidget() == nullptr)
+	{
+		return;
+	}
+
+	this->getWidget()->addWidget(widget);
+}
+

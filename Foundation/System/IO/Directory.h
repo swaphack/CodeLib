@@ -2,7 +2,7 @@
 
 #include <string>
 #include <cstdint>
-#include <set>
+#include <vector>
 
 namespace sys
 {
@@ -13,7 +13,7 @@ namespace sys
 		// 获取目录
 		static void getDirectory(const std::string& fullpath, std::string& dir);
 		// 获取所有文件
-		static void getAllFiles(const std::string& dir, std::set<std::string> files);
+		static void getAllFiles(const std::string& dir, std::vector<std::string>& files);
 		// 创建文件
 		static int32_t createFile(const std::string& filename);
 		// 删除文件
@@ -32,7 +32,37 @@ namespace sys
 		static void getCurrentDirectory(std::string& dir);
 		// 设置当前目录
 		static int32_t setCurrentDirectory(const std::string& name);
-	protected:
+	public:
+		Directory();
+		virtual ~Directory();
+	public:
+		/**
+		*	设置目录路径
+		*/
+		void setRoot(const std::string root);
+		/**
+		*	获取目录路径
+		*/
+		const std::string& getRoot() const;
+	public:
+		/**
+		*	获取目录下文件
+		*/
+		const std::vector<std::string>& getFiles() const;
+		/**
+		*	获取目录子目录
+		*/
+		const std::vector<std::string>& getSubDirs() const;
+		/**
+		*	加载信息
+		*/
+		void load();
 	private:
+		// 根路径
+		std::string _root;
+		// 文件
+		std::vector<std::string> _files;
+		// 子目录
+		std::vector<std::string> _sudDirs;
 	};
 }

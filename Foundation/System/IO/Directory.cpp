@@ -32,7 +32,7 @@ void Directory::getDirectory(const std::string& fullpath, std::string& dir)
 	}
 }
 
-void sys::Directory::getAllFiles(const std::string& dir, std::set<std::string> files)
+void sys::Directory::getAllFiles(const std::string& dir, std::vector<std::string>& files)
 {
 	if (access(dir.c_str(), 0) == -1)
 	{
@@ -64,7 +64,7 @@ void sys::Directory::getAllFiles(const std::string& dir, std::set<std::string> f
 		}
 		else
 		{
-			files.insert(findData.name);
+			files.push_back(findData.name);
 		}
 	} while (_findnext(handle, &findData) == 0);
 
@@ -169,4 +169,76 @@ int32_t Directory::setCurrentDirectory(const std::string& name)
 	}
 
 	return chdir(name.c_str());
+}
+
+
+
+
+sys::Directory::Directory()
+{
+
+}
+
+sys::Directory::~Directory()
+{
+
+}
+
+void sys::Directory::setRoot(const std::string root)
+{
+	_root = root;
+
+	this->load();
+}
+
+const std::string& sys::Directory::getRoot() const
+{
+	return _root;
+}
+
+const std::vector<std::string>& sys::Directory::getFiles() const
+{
+	return _files;
+}
+
+const std::vector<std::string>& sys::Directory::getSubDirs() const
+{
+	return _sudDirs;
+}
+
+void sys::Directory::load()
+{
+	_files.clear();
+	_sudDirs.clear();
+
+	if (access(_root.c_str(), 0) == -1)
+	{
+		return;
+	}
+	std::string dirNew = _root;
+	dirNew += "/*.*";
+
+	intptr_t handle;
+	_finddata_t findData;
+
+	handle = _findfirst(dirNew.c_str(), &findData);
+	if (handle == -1)        // 检查是否成功
+		return;
+
+	do
+	{
+		if (findData.attrib & _A_SUBDIR)
+		{
+			if (strcmp(findData.name, ".") == 0 || strcmp(findData.name, "..") == 0)
+				continue;
+
+			_sudDirs.push_back(findData.name);
+		}
+		else
+		{
+			_files.push_back(findData.name);
+		}
+	} while (_findnext(handle, &findData) == 0);
+
+	_findclose(handle);    // 关闭搜索句柄
 }
