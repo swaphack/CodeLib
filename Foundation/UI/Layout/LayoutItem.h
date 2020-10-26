@@ -48,6 +48,11 @@ namespace ui
 		*	当窗口位置和大小发生改变时
 		*/
 		virtual void resize(const math::Size& size);
+	public:
+		/**
+		*	添加控件
+		*/
+		void addWidget(render::CtrlWidget* widget);
 	protected:
 		// 留白距离
 		sys::CSSMargin m_sMargin;

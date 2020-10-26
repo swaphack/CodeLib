@@ -21,7 +21,7 @@ void ue::PopMenu::initUI()
 	if (item)
 	{
 		item->getWidget()->addClickFunc([](render::Node* node) {
-			OpenFilePanel* panel = showWithTarget<OpenFilePanel>();
+			//OpenFilePanel* panel = showWithTarget<OpenFilePanel>();
 		});
 	}
 }
