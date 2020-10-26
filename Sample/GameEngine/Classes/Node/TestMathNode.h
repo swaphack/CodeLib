@@ -12,6 +12,10 @@ protected:
 protected:
 	void testMath();
 
+	// æÿ’Û
 	void testMatrix();
+
+	// Õ∂”∞
+	void testProject();
 private:
 };

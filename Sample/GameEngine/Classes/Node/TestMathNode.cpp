@@ -13,7 +13,7 @@ TestMathNode::~TestMathNode()
 
 void TestMathNode::initNodes()
 {
-	testMatrix();
+	testProject();
 }
 
 void TestMathNode::testMath()
@@ -59,5 +59,24 @@ void TestMathNode::testMatrix()
 
 	math::Matrix<float, 3, 3> mul33 = mat33 * inverse33;
 	PRINT("mul:\n%s\n", mul33.toString().c_str());
+}
+
+void TestMathNode::testProject()
+{
+	math::Vector3 center = math::Vector3(20, 10, 0);
+	math::Vector3 rotation = math::Vector3(45, 0, 0);
+	math::Vector3 scale = math::Vector3(1, 1, 1);
+
+	math::Matrix4x4 mat;
+	math::Matrix4x4::getRST(rotation, scale, center, mat);
+
+	math::Vector3 volumn(20, 10, 10);
+	math::OBB box(center, volumn, rotation);
+
+	math::Vector3 pos(20.06f, 10.43f, 0.25f);
+	if (box.contains(pos))
+	{
+		int a = 1;
+	}
 }
 

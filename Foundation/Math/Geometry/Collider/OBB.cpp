@@ -1,4 +1,5 @@
 #include "OBB.h"
+#include "AABB.h"
 
 using namespace math;
 
@@ -36,48 +37,39 @@ void math::OBB::set(const Vector3& center, const Vector3& size)
 
 bool OBB::contains(const Vector2& point)
 {
-	return false;
+	return contains(Vector3(point));
 }
 
 bool OBB::contains(const Vector3& point)
 {
-	return false;
+	math::Matrix4x4 mat;
+	math::Matrix4x4::getRST(_rotation, math::Vector3(1, 1, 1), _center, mat);
+
+	math::Vector3 pos = math::Matrix4x4::transpose(point, mat.getInverse());
+
+	AABB box(math::Vector3(0, 0, 0), _volume);
+
+	return box.contains(pos);
 }
 
 bool OBB::contains(const LineSegment2d& line)
 {
-	return false;
+	return contains(line.getSrc()) && contains(line.getDest());
 }
 
 bool OBB::contains(const LineSegment3d& line)
 {
-	return false;
+	return contains(line.getSrc()) && contains(line.getDest());
 }
 
 bool math::OBB::intersects(const LineSegment2d& line)
 {
-	return false;
+	return contains(line.getSrc()) || contains(line.getDest());
 }
 
 bool math::OBB::intersects(const LineSegment3d& line)
 {
-	return false;
-}
-
-bool OBB::contains(const OBB& bounds)
-{
-	return false;
-}
-
-bool OBB::intersects(const OBB& bounds)
-{
-	Vector3 nv = bounds._center - _center;
-	
-
-	//Matrix44 mat1;
-	//mat1.rotate(bounds._rotation);
-
-	return false;
+	return contains(line.getSrc()) || contains(line.getDest());
 }
 
 void OBB::operator=(const OBB& obb)

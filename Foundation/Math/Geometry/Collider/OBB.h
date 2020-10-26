@@ -67,26 +67,9 @@ namespace math
 		*/
 		bool intersects(const LineSegment3d& line);
 		/**
-		*	是否包含盒子
-		*/
-		bool contains(const OBB& bounds);
-		/**
-		*	两盒子是否相交
-		*	分离轴定律：
-		*	两个凸多边形物体，如果我们能找到一个轴，使得两个在物体在该轴上的投影互不重叠，则这两个物体之间没有碰撞发生，该轴为Separating Axis
-		*
-		*	两个多边形在所有轴上的投影都发生重叠，则判定为碰撞；否则，没有发生碰撞
-		*/
-		bool intersects(const OBB& bounds);
-		/**
 		*	重载=
 		*/
 		void operator=(const OBB& obb);
-	private:
-		/**
-		*	计算投影
-		*/
-		void calProjections();
 	protected:
 		// 面积
 		Vector3 _volume;
