@@ -1,4 +1,7 @@
 #include "CartesianCoordinateSystem3D.h"
+#include "Basic/base.h"
+#include "Algebra/Vector/Vector2.h"
+#include "Algebra/Vector/Vector3.h"
 
 math::CartesianCoordinateSystem3D::CartesianCoordinateSystem3D()
 {
@@ -57,7 +60,7 @@ math::CartesianCoordinateSystem3D math::CartesianCoordinateSystem3D::create(cons
 
 	switch (eAxis)
 	{
-	case math::CartesianCoordinateSystem3D::X:
+	case Axis3D::X:
 	{
 		//float ra[] = { va.getX(), va.getY(), va.getZ(), 0 };
 		//float rb[] = { vb.getX(), vb.getY(), vb.getZ(), 0 };
@@ -70,7 +73,7 @@ math::CartesianCoordinateSystem3D math::CartesianCoordinateSystem3D::create(cons
 		system.getMatrix().setRow(3, { vd.getX(), vd.getY(), vd.getZ(), 1 });
 	}
 		break;
-	case math::CartesianCoordinateSystem3D::Y:
+	case Axis3D::Y:
 	{
 		//float ra[] = { va.getZ(), va.getX(), va.getY(), 0 };
 		//float rb[] = { vb.getZ(), vb.getX(), vb.getY(), 0 };
@@ -84,7 +87,7 @@ math::CartesianCoordinateSystem3D math::CartesianCoordinateSystem3D::create(cons
 
 	}
 		break;
-	case math::CartesianCoordinateSystem3D::Z:
+	case Axis3D::Z:
 	{
 		//float ra[] = { va.getY(), va.getZ(), va.getX(), 0 };
 		//float rb[] = { vb.getY(), vb.getZ(), vb.getX(), 0 };
@@ -117,4 +120,65 @@ math::CartesianCoordinateSystem3D math::CartesianCoordinateSystem3D::createWithT
 	vector.normalize();
 
 	return create(srcPoint, vector, eAxis);
+}
+
+math::CartesianCoordinateSystem3D math::CartesianCoordinateSystem3D::createAxonometric(const Vector3& ratio, const Vector2& angle)
+{
+	float radianX = ANGLE_TO_RADIAN(angle.getX());
+	float radianY = ANGLE_TO_RADIAN(angle.getY());
+
+	math::CartesianCoordinateSystem3D system;
+	system.getMatrix().setValue(0, 0, ratio.getX() * sinf(radianX));
+	system.getMatrix().setValue(0, 1, ratio.getX() * cosf(radianX));
+	system.getMatrix().setValue(2, 0, -ratio.getZ() * sinf(radianY));
+	system.getMatrix().setValue(2, 1, ratio.getZ() * cosf(radianY));
+	system.getMatrix().setValue(1, 1, ratio.getY());
+
+	return system;
+
+}
+
+math::CartesianCoordinateSystem3D math::CartesianCoordinateSystem3D::createAxonometric(Axonometric eType)
+{
+	Vector3 ratio;
+	Vector2 angle;
+	switch (eType)
+	{
+	case Axonometric::PositiveIsometric:
+	{
+		float v0 = sqrt(6.0f) / 3.0f;
+		ratio.setX(v0);
+		ratio.setY(v0);
+		ratio.setZ(v0);
+
+		angle.setX(120);
+		angle.setY(120);
+	}
+		break;
+	case Axonometric::PositiveTwoMeasurement:
+	{
+		float v0 = sqrt(2.0f) / 3.0f;
+		ratio.setX(v0);
+		ratio.setY(2 * v0);
+		ratio.setZ(2 * v0);
+
+		angle.setX(131.4166667f);
+		angle.setY(97.16666667f);
+	}
+		break;
+	case Axonometric::ObliqueTwoMeasurement:
+	{
+		ratio.setX(1.0f);
+		ratio.setY(1.0f);
+		ratio.setZ(0.5f);
+
+		angle.setX(90.0f);
+		angle.setY(135.0f);
+	}
+		break;
+	default:
+		break;
+	}
+
+	return createAxonometric(ratio, angle);
 }

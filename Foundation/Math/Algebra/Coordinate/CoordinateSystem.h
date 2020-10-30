@@ -19,7 +19,7 @@ namespace math
 		{
 			_systemMatrix = cs.getMatrix();
 		}
-		CoordinateSystem(const SquareMatrixF<Count>& matrix)
+		CoordinateSystem(const SquareMatrixF<Count + 1>& matrix)
 		{
 			_systemMatrix = matrix;
 		}
@@ -38,28 +38,28 @@ namespace math
 		/**
 		*	行系数
 		*/
-		ArrayF<Count> getRow(int nRow)
+		ArrayF<Count + 1> getRow(int nRow)
 		{
 			return _systemMatrix.getRow(nRow);
 		}
 		/**
 		*	列系数
 		*/
-		ArrayF<Count> getColumn(int nRow)
+		ArrayF<Count + 1> getColumn(int nRow)
 		{
 			return _systemMatrix.getColumn(nRow);
 		}
 		/**
 		*	坐标系矩阵
 		*/
-		const SquareMatrixF<Count>& getMatrix() const
+		const SquareMatrixF<Count + 1>& getMatrix() const
 		{
 			return _systemMatrix;
 		}
 		/**
 		*	坐标系矩阵
 		*/
-		SquareMatrixF<Count>& getMatrix()
+		SquareMatrixF<Count + 1>& getMatrix()
 		{
 			return _systemMatrix;
 		}
@@ -67,7 +67,7 @@ namespace math
 		*	设置坐标系矩阵
 		*	有时坐标系矩阵不是固定，可改变
 		*/
-		void setMatrix(const SquareMatrixF<Count>& matrix)
+		void setMatrix(const SquareMatrixF<Count + 1>& matrix)
 		{
 			_systemMatrix = matrix;
 		}
@@ -78,7 +78,7 @@ namespace math
 		CoordinateSystem<Count + 1> getHomogeneousCoordinateSystem()
 		{
 			CoordinateSystem<Count + 1> system;
-			SquareMatrixF<Count + 1> matrix;
+			SquareMatrixF<Count + 2> matrix;
 
 			for (int i = 0; i < Count; i++)
 			{
@@ -88,12 +88,12 @@ namespace math
 				}
 			}
 
-			matrix.setValue(Count, Count, 1);
+			matrix.setValue(Count + 1, Count + 1, 1);
 		}
 	protected:
 		/**
 		*	坐标系矩阵
 		*/
-		SquareMatrixF<Count> _systemMatrix;
+		SquareMatrixF<Count + 1> _systemMatrix;
 	};
 }
