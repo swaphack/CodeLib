@@ -21,7 +21,7 @@ namespace ui
 	};
 
 	// ¿Ø¼þ
-	template<typename FileType>
+	template<typename FileType, typename = std::enable_if<std::is_base_of<CtrlFile, FileType>::value, FileType>::type>
 	class TFileLoader : public FileLoader
 	{
 	public:

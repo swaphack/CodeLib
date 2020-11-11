@@ -164,6 +164,14 @@ CtrlWidget* render::CtrlWidget::getFirstWidget() const
 	return _widgets[0];
 }
 
+void render::CtrlWidget::removeFromParent()
+{
+	if (this->getParent()->is<CtrlWidget>())
+	{
+		this->getParent()->as<CtrlWidget>()->removeWidget(this);
+	}
+}
+
 bool render::CtrlWidget::isTouchEnable()
 {
 	return getTouchProxy()->isTouchEnabled();

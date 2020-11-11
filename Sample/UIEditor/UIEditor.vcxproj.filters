@@ -37,9 +37,6 @@
     <ClCompile Include="Classes\Panel\PropertyPanel.cpp">
       <Filter>Classes\Panel</Filter>
     </ClCompile>
-    <ClCompile Include="Classes\Panel\WidgetPanel.cpp">
-      <Filter>Classes\Panel</Filter>
-    </ClCompile>
     <ClCompile Include="Classes\Panel\Panel.cpp">
       <Filter>Classes\Panel</Filter>
     </ClCompile>
@@ -61,6 +58,9 @@
     <ClCompile Include="Classes\Panel\OpenFilePanel.cpp">
       <Filter>Classes\Panel</Filter>
     </ClCompile>
+    <ClCompile Include="Classes\Panel\ControlPanel.cpp">
+      <Filter>Classes\Panel</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Classes\UIEditorApplication.h">
@@ -79,9 +79,6 @@
       <Filter>Classes\Panel</Filter>
     </ClInclude>
     <ClInclude Include="Classes\Panel\ViewLayout.h">
-      <Filter>Classes\Panel</Filter>
-    </ClInclude>
-    <ClInclude Include="Classes\Panel\WidgetPanel.h">
       <Filter>Classes\Panel</Filter>
     </ClInclude>
     <ClInclude Include="Classes\Panel\PropertyPanel.h">
@@ -109,6 +106,9 @@
       <Filter>Classes\Panel</Filter>
     </ClInclude>
     <ClInclude Include="Classes\Panel\OpenFilePanel.h">
+      <Filter>Classes\Panel</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Panel\ControlPanel.h">
       <Filter>Classes\Panel</Filter>
     </ClInclude>
   </ItemGroup>

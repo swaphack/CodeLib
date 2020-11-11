@@ -43,6 +43,7 @@ bool IElement::load(tinyxml2::XMLElement* pXmlNode, bool clean/* = true*/)
 
 	this->parseAttributes();
 
+	_nodeProperty->setName(pXmlNode->Name());
 	if (getLayoutItem())
 	{
 		//getLayoutItem()->setName(pXmlNode->Name());

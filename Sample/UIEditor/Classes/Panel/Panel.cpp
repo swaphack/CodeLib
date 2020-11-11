@@ -12,7 +12,7 @@ ue::Panel::~Panel()
 
 bool ue::Panel::init()
 {
-	if (!ui::CtrlFile::init())
+	if (!CtrlFile::init())
 	{
 		return false;
 	}

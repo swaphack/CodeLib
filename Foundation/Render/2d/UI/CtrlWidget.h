@@ -53,6 +53,10 @@ namespace render
 		*	获取第一个子节点
 		*/
 		CtrlWidget* getFirstWidget() const;
+		/**
+		*	从父节点移除
+		*/
+		virtual void removeFromParent();
 	public:
 		/**
 		*	是否可点击

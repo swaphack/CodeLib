@@ -97,17 +97,20 @@ void CtrlFile::onWindowSizeChange(const math::Size& inputSize)
 
 bool CtrlFile::loadFile()
 {
-	std::string fullpath = G_FILEPATH->getFilePath(m_strFilePath.c_str());
+	std::string fullpath = G_FILEPATH->getFilePath(m_strFilePath);
 	if (fullpath.empty())
 	{
 		return false;
 	}
-	Layout* pLayout = UIProxy::getInstance()->loadFile(fullpath.c_str());
+	Layout* pLayout = UIProxy::getInstance()->loadFile(fullpath);
 	if (pLayout == nullptr)
 	{
 		return false;
 	}
-
+	if (m_pLayout && m_pLayout->getWidget())
+	{
+		m_pLayout->getWidget()->removeFromParent();
+	}
 	SAFE_RELEASE(m_pLayout);
 	SAFE_RETAIN(pLayout);
 

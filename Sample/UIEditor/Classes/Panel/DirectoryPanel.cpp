@@ -1,6 +1,6 @@
 #include "DirectoryPanel.h"
 
-void ue::DirectoryPanel::DirDetail::setRoot(const std::string& root)
+void ue::DirDetail::setRoot(const std::string& root)
 {
 	name = root;
 
@@ -20,7 +20,7 @@ void ue::DirectoryPanel::DirDetail::setRoot(const std::string& root)
 	}
 }
 
-void ue::DirectoryPanel::DirDetail::clear()
+void ue::DirDetail::clear()
 {
 	subDirs.clear();
 	files.clear();
@@ -34,7 +34,7 @@ ue::DirectoryPanel::DirectoryPanel()
 
 ue::DirectoryPanel::~DirectoryPanel()
 {
-
+	int a = 1;
 }
 
 bool ue::DirectoryPanel::init()
@@ -44,6 +44,18 @@ bool ue::DirectoryPanel::init()
 		return false;
 	}
 	return true;
+}
+
+void ue::DirectoryPanel::initUI()
+{
+}
+
+void ue::DirectoryPanel::initEvent()
+{
+}
+
+void ue::DirectoryPanel::initText()
+{
 }
 
 void ue::DirectoryPanel::setDirectory(const std::string& root)

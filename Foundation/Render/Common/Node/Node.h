@@ -46,7 +46,7 @@ namespace render
 		// 获取父节点
 		Node* getParent() const;
 		// 从父节点移除
-		void removeFromParent();
+		virtual void removeFromParent();
 	public:
 		// 添加子节点
 		void addChild(Node* node);
@@ -209,7 +209,7 @@ namespace render
 		{
 			return nullptr;
 		}
-		if (temp && temp->init() == false)
+		if (temp->init() == false)
 		{
 			delete temp;
 			return nullptr;

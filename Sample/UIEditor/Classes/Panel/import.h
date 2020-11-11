@@ -4,7 +4,7 @@
 
 #include "ViewLayout.h"
 #include "MenuBar.h"
-#include "WidgetPanel.h"
+#include "ControlPanel.h"
 #include "DesignPanel.h"
 #include "PropertyPanel.h"
 #include "DirectoryPanel.h"
