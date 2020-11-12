@@ -2,6 +2,7 @@
 #include "Platform/DeviceProxy.h"
 #include "RenderApplication.h"
 #include "Graphic/GLAPI/GLVersion.h"
+#include "Common/Input/KeyChar.h"
 
 using namespace render;
 
@@ -236,18 +237,10 @@ void GLWindow::initDevice()
 		{
 			getKeyboard()->onKeyEvent(sys::BoardKey::KCAPITAL, sys::ButtonStatus::BUTTON_DOWN);
 		}
-		else
-		{
-			getKeyboard()->onKeyEvent(sys::BoardKey::KCAPITAL, sys::ButtonStatus::BUTTON_UP);
-		}
 		// Êý×ÖËø
 		if (GetKeyState(VK_NUMLOCK) & 1)
 		{
 			getKeyboard()->onKeyEvent(sys::BoardKey::KNUMLOCK, sys::ButtonStatus::BUTTON_DOWN);
-		}
-		else
-		{
-			getKeyboard()->onKeyEvent(sys::BoardKey::KCAPITAL, sys::ButtonStatus::BUTTON_UP);
 		}
 	}
 }

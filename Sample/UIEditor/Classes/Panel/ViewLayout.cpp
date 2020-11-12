@@ -15,11 +15,7 @@ ue::ViewLayout::~ViewLayout()
 
 void ue::ViewLayout::initUI()
 {
-	auto layoutItem = m_pLayout->findItemByName("DesignPanel");
-	if (layoutItem->getWidget() != nullptr)
-	{
-		m_pDesignPanel = layoutItem->getWidget()->as<DesignPanel>();
-	}
+	m_pLayout->findWidgetByName("DesignPanel", m_pDesignPanel);
 }
 
 void ue::ViewLayout::initEvent()

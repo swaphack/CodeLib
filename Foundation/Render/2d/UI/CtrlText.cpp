@@ -29,6 +29,8 @@ bool CtrlText::init()
 	_notify->addListen(NodeNotifyType::BODY, [&](){
 		this->calRealRectPoints();
 		this->onCtrlWidgetBodyChange();
+
+		onTextChange();
 	});
 
 	_notify->addListen(NodeNotifyType::TEXT, [&](){
@@ -176,10 +178,6 @@ void CtrlText::onTextChange()
 	}
 
 	math::Size size = math::Size(w, h);
-	//math::Rect rect(math::Vector2(), size);
-	//VertexTool::setTexture2DCoords(&_rectVertex, size, rect);
-
-	//math::Vector3 anchor = math::Vector3(0.5f, 0.5f, 0.5f);
 	math::Vector3 anchor = getAnchorPoint();
 	math::Vector3 orgin = getOrgin(size);
 	math::Volume volume = math::Volume(w, h);

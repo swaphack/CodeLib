@@ -78,5 +78,6 @@ void render::DeviceProxy::processMouseButtonEvent(sys::MouseKey key, sys::Button
 
 void DeviceProxy::onKeyBoardButtonHandler(sys::BoardKey key, sys::ButtonStatus type)
 {
+
 	G_KEYBOARDMANAGER->onDispatchButtonEvent(key, type);
 }

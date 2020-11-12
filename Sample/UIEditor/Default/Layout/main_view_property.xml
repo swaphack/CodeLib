@@ -13,5 +13,46 @@
   				<EditText name="NameText" text="4545454dsfajk" anchorPoint="0,0.5" marginState="0,1,0,1" margin="0,5,0,5" size="0,100%" fontPath="Default/Font/font_3.ttf" fontSize="24" textColor="255,255,255" />
   			</Layout>
   		</Layout>
+      <Layout marginState="1,1,0,1" margin="90,5,0,5" size="100%,60">
+        <Text text="AnchorPoint" anchorPoint="0,0.5" marginState="1,0,0,1" margin="0,0,0,5" size="100%,30" fontPath="Default/Font/font_3.ttf" fontSize="20" textColor="255,255,255" />
+        <Layout marginState="0,0,1,1" margin="0,0,0,5" size="45%,30" showMask="1" maskColor="0,0,0,125">
+          <EditText name="AnchorPointX" text="0.5" anchorPoint="0,0.5" marginState="0,0,0,1" margin="0,0,0,2" size="100%,100%" fontPath="Default/Font/font_3.ttf" fontSize="24" textColor="255,255,255" />
+        </Layout>
+         <Layout marginState="0,0,1,1" margin="0,0,0,50%" size="45%,30" showMask="1" maskColor="0,0,0,125">
+          <EditText name="AnchorPointY" text="0.5" anchorPoint="0,0.5" marginState="0,0,0,1" margin="0,0,0,2" size="100%,100%" fontPath="Default/Font/font_3.ttf" fontSize="24" textColor="255,255,255" />
+        </Layout>
+      </Layout>
+      <Layout marginState="1,1,0,1" margin="150,5,0,5" size="100%,60">
+        <Text text="Size" anchorPoint="0,0.5" marginState="1,0,0,1" margin="0,0,0,5" size="100%,30" fontPath="Default/Font/font_3.ttf" fontSize="20" textColor="255,255,255" />
+        <Layout marginState="0,0,1,1" margin="0,0,0,5" size="45%,30" showMask="1" maskColor="0,0,0,125">
+          <EditText name="Width" text="0.5" anchorPoint="0,0.5" marginState="0,0,0,1" margin="0,0,0,2" size="100%,100%" fontPath="Default/Font/font_3.ttf" fontSize="24" textColor="255,255,255" />
+        </Layout>
+         <Layout marginState="0,0,1,1" margin="0,0,0,50%" size="45%,30" showMask="1" maskColor="0,0,0,125">
+          <EditText name="Height" text="0.5" anchorPoint="0,0.5" marginState="0,0,0,1" margin="0,0,0,2" size="100%,100%" fontPath="Default/Font/font_3.ttf" fontSize="24" textColor="255,255,255" />
+        </Layout>
+      </Layout>
+      <Layout marginState="1,1,0,1" margin="210,5,0,5" size="100%,60">
+        <Text text="Scale" anchorPoint="0,0.5" marginState="1,0,0,1" margin="0,0,0,5" size="100%,30" fontPath="Default/Font/font_3.ttf" fontSize="20" textColor="255,255,255" />
+        <Layout marginState="0,0,1,1" margin="0,0,0,5" size="45%,30" showMask="1" maskColor="0,0,0,125">
+          <EditText name="ScaleX" text="0.5" anchorPoint="0,0.5" marginState="0,0,0,1" margin="0,0,0,2" size="100%,100%" fontPath="Default/Font/font_3.ttf" fontSize="24" textColor="255,255,255" />
+        </Layout>
+         <Layout marginState="0,0,1,1" margin="0,0,0,50%" size="45%,30" showMask="1" maskColor="0,0,0,125">
+          <EditText name="ScaleY" text="0.5" anchorPoint="0,0.5" marginState="0,0,0,1" margin="0,0,0,2" size="100%,100%" fontPath="Default/Font/font_3.ttf" fontSize="24" textColor="255,255,255" />
+        </Layout>
+      </Layout>
+      <Layout marginState="1,1,0,1" margin="270,5,0,5" size="100%,60">
+        <Text text="Position" anchorPoint="0,0.5" marginState="1,0,0,1" margin="0,0,0,5" size="100%,30" fontPath="Default/Font/font_3.ttf" fontSize="20" textColor="255,255,255" />
+        <Layout marginState="0,0,1,1" margin="0,0,0,5" size="45%,30" showMask="1" maskColor="0,0,0,125">
+          <EditText name="PosX" text="0.5" anchorPoint="0,0.5" marginState="0,0,0,1" margin="0,0,0,2" size="100%,100%" fontPath="Default/Font/font_3.ttf" fontSize="24" textColor="255,255,255" />
+        </Layout>
+         <Layout marginState="0,0,1,1" margin="0,0,0,50%" size="45%,30" showMask="1" maskColor="0,0,0,125">
+          <EditText name="PosY" text="0.5" anchorPoint="0,0.5" marginState="0,0,0,1" margin="0,0,0,2" size="100%,100%" fontPath="Default/Font/font_3.ttf" fontSize="24" textColor="255,255,255" />
+        </Layout>
+      </Layout>
+      <Layout marginState="1,1,0,1" margin="330,5,0,5" size="0,200">
+        <Text text="Edit" anchorPoint="0,0.5" marginState="1,0,0,1" margin="0,0,0,5" size="100%,30" fontPath="Default/Font/font_3.ttf" fontSize="20" textColor="255,255,255" />
+        <Layout marginState="0,1,1,1" margin="0,5,0,5" size="0,170" showMask="1" maskColor="0,0,0,200">
+        </Layout>
+      </Layout>
   	</Layout>
 </root>

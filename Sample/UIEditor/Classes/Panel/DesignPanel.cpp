@@ -34,14 +34,13 @@ ui::LayoutItem* ue::DesignPanel::getSelectedTarget() const
 
 void ue::DesignPanel::initUI()
 {
-	auto item = m_pLayout->findItemByName("viewScene");
-	if (item)
+	ui::Layout* childLayout = nullptr;
+	if (m_pLayout->findItemByName("viewScene", childLayout))
 	{
 		m_pUIFile = createUIFile("Resource/Layout/main.xml");
 		if (m_pUIFile)
 		{
 			auto pWidget = m_pUIFile->getWidget();
-			ui::Layout* childLayout = item->as<ui::Layout>();
 			if (childLayout)
 			{
 				childLayout->addItem(m_pUIFile);

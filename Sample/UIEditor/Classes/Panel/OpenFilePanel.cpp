@@ -15,11 +15,7 @@ const char* ue::OpenFilePanel::getPanelPath()
 
 void ue::OpenFilePanel::initUI()
 {
-	auto item = m_pLayout->findItemByName("body");
-	if (item->getWidget() != nullptr)
-	{
-		_body = item->as<ui::Layout>();
-	}
+	m_pLayout->findItemByName("body", _body);
 }
 
 void ue::OpenFilePanel::initEvent()

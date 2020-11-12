@@ -1,4 +1,5 @@
 #include "KeyboardManager.h"
+#include "KeyChar.h"
 
 using namespace render;
 
@@ -108,6 +109,16 @@ void render::KeyboardManager::removeTargetAllEvents(sys::Object* target)
 
 void KeyboardManager::onDispatchButtonEvent(sys::BoardKey key, sys::ButtonStatus type)
 {
+	if (key == sys::BoardKey::KSHIFT)
+	{
+		G_KEYCHAR->setShiftEnable(type == sys::ButtonStatus::BUTTON_DOWN);
+	}
+
+	if (type == sys::ButtonStatus::BUTTON_DOWN)
+	{
+		G_KEYCHAR->setControlKey(key);
+	}
+
 	for (auto item0 : _keyboardDelegates)
 	{
 		for (auto item1 : item0.second)

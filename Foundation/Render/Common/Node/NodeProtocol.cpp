@@ -297,14 +297,35 @@ float render::BodyProtocol::getAnchorPointX()
 	return _anchor.getX();
 }
 
+void render::BodyProtocol::setAnchorPointX(float value)
+{
+	_anchor.setX(value);
+
+	onBodyChange();
+}
+
 float render::BodyProtocol::getAnchorPointY()
 {
 	return _anchor.getY();
 }
 
+void render::BodyProtocol::setAnchorPointY(float value)
+{
+	_anchor.setY(value);
+
+	onBodyChange();
+}
+
 float render::BodyProtocol::getAnchorPointZ()
 {
 	return _anchor.getZ();
+}
+
+void render::BodyProtocol::setAnchorPointZ(float value)
+{
+	_anchor.setZ(value);
+
+	onBodyChange();
 }
 
 //////////////////////////////////////////////////////////////////////////

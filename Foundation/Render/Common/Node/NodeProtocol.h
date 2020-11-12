@@ -102,12 +102,18 @@ namespace render
 		void setAnchorPoint(const math::Vector2& anchor);
 		// 获取锚点
 		const math::Vector3& getAnchorPoint();
-		// 获取宽度
+		// 获取锚点
 		float getAnchorPointX();
-		// 获取高度
+		// 设置锚点
+		void setAnchorPointX(float value);
+		// 获取锚点
 		float getAnchorPointY();
-		// 获取深度
+		// 设置锚点
+		void setAnchorPointY(float value);
+		// 获取锚点
 		float getAnchorPointZ();
+		// 设置锚点
+		void setAnchorPointZ(float value);
 		// 设置宽度
 		void setWidth(float w);
 		// 设置高度

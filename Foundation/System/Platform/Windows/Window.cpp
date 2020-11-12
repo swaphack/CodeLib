@@ -255,68 +255,82 @@ bool Window::onHandSignal(Signal* signal)
 		if (!HIWORD(params->t2))
 		{
 		}
-		break;
 	}
+	break;
 	case WM_CLOSE:
 	{
 		PostQuitMessage(0);
-		break;
 	}
+		break;
 	case WM_KEYDOWN:
 	{
 		if (getKeyboard())
 		{
-			getKeyboard()->onKeyEvent((BoardKey)params->t2, ButtonStatus::BUTTON_DOWN);
+			BoardKey key = (BoardKey)params->t2;
+			if (key == BoardKey::KPROCESSKEY)
+			{
+				key = (BoardKey)ImmGetVirtualKey(_wnd);
+			}
+			getKeyboard()->onKeyEvent(key, ButtonStatus::BUTTON_DOWN);
 		}
-		break;
 	}
+		break;
 	case WM_KEYUP:
 	{
 		if (getKeyboard())
 		{
-			getKeyboard()->onKeyEvent((BoardKey)params->t2, ButtonStatus::BUTTON_UP);
+			BoardKey key = (BoardKey)params->t2;
+			if (key == BoardKey::KPROCESSKEY)
+			{
+				key = (BoardKey)ImmGetVirtualKey(_wnd);
+			}
+
+			getKeyboard()->onKeyEvent(key, ButtonStatus::BUTTON_UP);
 		}
-		break;
 	}
+		break;
 	case WM_LBUTTONDOWN:
 	{
 		if (getMouse())
 		{
 			getMouse()->onButtonHandler(MouseKey::LEFTBUTTON, ButtonStatus::BUTTON_DOWN, LOWORD(params->t3), HIWORD(params->t3));
 		}
-		break;
 	}
+		break;
 	case WM_LBUTTONUP:
 	{
 		if (getMouse())
 		{
 			getMouse()->onButtonHandler(MouseKey::LEFTBUTTON, ButtonStatus::BUTTON_UP, LOWORD(params->t3), HIWORD(params->t3));
 		}
-		break;
 	}
+		break;
 	case WM_RBUTTONDOWN:
 	{
 		if (getMouse())
 		{
 			getMouse()->onButtonHandler(MouseKey::RIGHTBUTTON, ButtonStatus::BUTTON_DOWN, LOWORD(params->t3), HIWORD(params->t3));
 		}
-		break;
 	}
+		break;
 	case WM_RBUTTONUP:
 	{
 		if (getMouse())
 		{
 			getMouse()->onButtonHandler(MouseKey::RIGHTBUTTON, ButtonStatus::BUTTON_UP, LOWORD(params->t3), HIWORD(params->t3));
 		}
-		break;
 	}
+		break;
 	case WM_MOUSEMOVE:
+	{
 		if (getMouse())
 		{
 			getMouse()->onMoveHandler(LOWORD(params->t3), HIWORD(params->t3));
 		}
+	}
 		break;
 	case WM_MOUSEWHEEL:
+	{
 		if (getMouse())
 		{
 			int value = GET_WHEEL_DELTA_WPARAM(params->t2);
@@ -329,6 +343,7 @@ bool Window::onHandSignal(Signal* signal)
 				getMouse()->onScrollHandler(sys::ScrollEvent::SCORLL_DOWN, value / 120);
 			}
 		}
+	}
 		break;
 	default:
 		return false;

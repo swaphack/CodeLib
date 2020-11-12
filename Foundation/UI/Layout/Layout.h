@@ -35,6 +35,30 @@ namespace ui
 		*	查找子元件
 		*/
 		LayoutItem* findItemByName(const std::string& name) const;
+
+		template<typename T, typename = std::enable_if<std::is_base_of<LayoutItem, T>::value, T>::type>
+		bool findItemByName(const std::string& name, T* & t) const
+		{
+			LayoutItem* pItem = findItemByName(name);
+			if (pItem == nullptr) return false;
+
+			t = pItem->as<T>();
+
+			return t != nullptr;
+		}
+		/**
+		*	查找子元件控件
+		*/
+		template<typename T, typename = std::enable_if<std::is_base_of<render::CtrlWidget, T>::value, T>::type>
+		bool findWidgetByName(const std::string& name, T* & t) const
+		{
+			LayoutItem* pItem = findItemByName(name);
+			if (pItem == nullptr) return false;
+
+			t = pItem->getWidget<T>();
+
+			return t != nullptr;
+		}
 		/**
 		*	查找子元件
 		*/

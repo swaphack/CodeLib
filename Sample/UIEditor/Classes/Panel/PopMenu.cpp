@@ -11,16 +11,12 @@ ue::PopMenu::~PopMenu()
 
 void ue::PopMenu::initUI()
 {
-	auto item = m_pLayout->findItemByName("body");
-	if (item->getWidget() != nullptr)
-	{
-		_body = item->as<ui::Layout>();
-	}
+	m_pLayout->findItemByName("body", _body);
 
-	item = m_pLayout->findItemByName("openFile");
-	if (item)
+	render::CtrlWidget* item = nullptr;
+	if (m_pLayout->findWidgetByName("openFile", item))
 	{
-		item->getWidget()->addClickFunc([](render::Node* node) {
+		item->addClickFunc([](render::Node* node) {
 			//OpenFilePanel* panel = showWithTarget<OpenFilePanel>();
 		});
 	}

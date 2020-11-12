@@ -80,13 +80,16 @@ sys::BoardKey render::KeyChar::getKey(uint8_t ascii)
 
 char render::KeyChar::getChar(sys::BoardKey key)
 {
-	char value = getPadNumber(key);
+	char value = getPadNumberChar(key);
 	if (value != 0) return value;
 
-	value = getNumber(key);
+	value = getNumberChar(key);
 	if (value != 0) return value;
 
-	value = getLetter(key);
+	value = getLetterChar(key);
+	if (value != 0) return value;
+
+	value = getShiftChar(key);
 	if (value != 0) return value;
 
 	value = getFuncChar(key);
@@ -94,26 +97,58 @@ char render::KeyChar::getChar(sys::BoardKey key)
 	return (char)0;
 }
 
-char render::KeyChar::getNumber(sys::BoardKey key)
+char render::KeyChar::getNumberChar(sys::BoardKey key)
+{
+	if (isEnableShift())
+	{
+		switch (key)
+		{
+		case sys::BoardKey::K0: return '!';
+		case sys::BoardKey::K1: return '@';
+		case sys::BoardKey::K2: return '#';
+		case sys::BoardKey::K3: return '$';
+		case sys::BoardKey::K4: return '%';
+		case sys::BoardKey::K5: return '^';
+		case sys::BoardKey::K6: return '&';
+		case sys::BoardKey::K7: return '*';
+		case sys::BoardKey::K8: return '(';
+		case sys::BoardKey::K9: return ')';
+		default: break;
+		}
+	}
+	else
+	{
+		switch (key)
+		{
+		case sys::BoardKey::K0: return '0';
+		case sys::BoardKey::K1: return '1';
+		case sys::BoardKey::K2: return '2';
+		case sys::BoardKey::K3: return '3';
+		case sys::BoardKey::K4: return '4';
+		case sys::BoardKey::K5: return '5';
+		case sys::BoardKey::K6: return '6';
+		case sys::BoardKey::K7: return '7';
+		case sys::BoardKey::K8: return '8';
+		case sys::BoardKey::K9: return '9';
+		default: break;
+		}
+	}
+
+	return 0;
+}
+
+char render::KeyChar::getPadNumberChar(sys::BoardKey key)
 {
 	switch (key)
 	{
-	case sys::BoardKey::K0: return '0';
-	case sys::BoardKey::K1: return '1';
-	case sys::BoardKey::K2: return '2';
-	case sys::BoardKey::K3: return '3';
-	case sys::BoardKey::K4: return '4';
-	case sys::BoardKey::K5: return '5';
-	case sys::BoardKey::K6: return '6';
-	case sys::BoardKey::K7: return '7';
-	case sys::BoardKey::K8: return '8';
-	case sys::BoardKey::K9: return '9';
-	default: return 0;
+	case sys::BoardKey::KMULTIPLY: return '*';
+	case sys::BoardKey::KADD: return '+';
+	case sys::BoardKey::KSUBTRACT: return '-';
+	case sys::BoardKey::KDIVIDE: return '/';
+	default:
+		break;
 	}
-}
 
-char render::KeyChar::getPadNumber(sys::BoardKey key)
-{
 	if (_controlkeys[sys::BoardKey::KNUMLOCK] == false)
 	{
 		return 0;
@@ -130,13 +165,18 @@ char render::KeyChar::getPadNumber(sys::BoardKey key)
 	case sys::BoardKey::KNUMPAD7: return '7';
 	case sys::BoardKey::KNUMPAD8: return '8';
 	case sys::BoardKey::KNUMPAD9: return '9';
+	case sys::BoardKey::KDECIMAL: return '.';
 	default: return 0;
 	}
 }
 
-char render::KeyChar::getLetter(sys::BoardKey key)
+
+char render::KeyChar::getLetterChar(sys::BoardKey key)
 {
-	if (_controlkeys[sys::BoardKey::KCAPITAL])
+	bool big = _controlkeys[sys::BoardKey::KCAPITAL];
+	if (isEnableShift()) big = !big;
+
+	if (big)
 	{
 		switch (key)
 		{
@@ -166,7 +206,7 @@ char render::KeyChar::getLetter(sys::BoardKey key)
 		case sys::BoardKey::KX: return 'X';
 		case sys::BoardKey::KY: return 'Y';
 		case sys::BoardKey::KZ: return 'Z';
-		default: return 0;
+		default: break;
 		}
 	}
 	else
@@ -199,9 +239,53 @@ char render::KeyChar::getLetter(sys::BoardKey key)
 		case sys::BoardKey::KX: return 'x';
 		case sys::BoardKey::KY: return 'y';
 		case sys::BoardKey::KZ: return 'z';
-		default: return 0;
+		default: break;
 		}
 	}
+	return 0;
+}
+
+char render::KeyChar::getShiftChar(sys::BoardKey key)
+{
+	if (isEnableShift())
+	{
+		switch (key)
+		{
+
+		case sys::BoardKey::KOEM_MINUS: return '_';
+		case sys::BoardKey::KOEM_PLUS: return '+';
+		case sys::BoardKey::KOEM_COMMA: return '<';
+		case sys::BoardKey::KOEM_PERIOD: return '>';
+		case sys::BoardKey::KOEM_1: return ':';
+		case sys::BoardKey::KOEM_2: return '?';
+		case sys::BoardKey::KOEM_3: return '~';
+		case sys::BoardKey::KOEM_4: return '{';
+		case sys::BoardKey::KOEM_5: return '|';
+		case sys::BoardKey::KOEM_6: return '}';
+		case sys::BoardKey::KOEM_7: return '"';
+		default: break;
+		}
+	}
+	else
+	{
+		switch (key)
+		{
+
+		case sys::BoardKey::KOEM_MINUS: return '-';
+		case sys::BoardKey::KOEM_PLUS: return '=';
+		case sys::BoardKey::KOEM_COMMA: return ',';
+		case sys::BoardKey::KOEM_PERIOD: return '.';
+		case sys::BoardKey::KOEM_1: return ';';
+		case sys::BoardKey::KOEM_2: return '/';
+		case sys::BoardKey::KOEM_3: return '`';
+		case sys::BoardKey::KOEM_4: return '[';
+		case sys::BoardKey::KOEM_5: return '\\';
+		case sys::BoardKey::KOEM_6: return ']';
+		case sys::BoardKey::KOEM_7: return '\'';
+		default: break;
+		}
+	}
+	return 0;
 }
 
 char render::KeyChar::getFuncChar(sys::BoardKey key)
@@ -217,6 +301,24 @@ void render::KeyChar::setControlKey(sys::BoardKey key)
 {
 	if (key == sys::BoardKey::KCAPITAL || key == sys::BoardKey::KNUMLOCK)
 	{
-		_controlkeys[key] = !_controlkeys[key];
+		auto it = _controlkeys.find(key);
+		if (it == _controlkeys.end())
+		{
+			_controlkeys[key] = true;
+		}
+		else
+		{
+			_controlkeys[key] = !_controlkeys[key];
+		}
 	}
+}
+
+void render::KeyChar::setShiftEnable(bool enable)
+{
+	_enableShift = enable;
+}
+
+bool render::KeyChar::isEnableShift() const
+{
+	return _enableShift;
 }

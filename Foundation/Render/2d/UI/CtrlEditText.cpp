@@ -170,8 +170,6 @@ void CtrlEditText::onInputHand(sys::BoardKey key, sys::ButtonStatus type)
 		return;
 	}
 
-	G_KEYCHAR->setControlKey(key);
-
 	if (key == sys::BoardKey::KRETURN)
 	{
 		onInputKeyReturnHandler();

@@ -40,5 +40,5 @@ namespace render
 	};
 
 
-	#define G_KEYBOARDMANAGER sys::Instance<KeyboardManager>::getInstance()
+	#define G_KEYBOARDMANAGER sys::Instance<render::KeyboardManager>::getInstance()
 }
