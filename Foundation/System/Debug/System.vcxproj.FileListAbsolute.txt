@@ -1,2 +1,0 @@
-F:\Github\CodeLib\Debug\System.pdb
-F:\Github\CodeLib\Foundation\System\Debug\System.pdb

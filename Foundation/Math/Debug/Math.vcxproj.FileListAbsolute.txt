@@ -1,2 +1,0 @@
-F:\Github\CodeLib\Debug\Math.pdb
-F:\Github\CodeLib\Foundation\Math\Debug\Math.pdb

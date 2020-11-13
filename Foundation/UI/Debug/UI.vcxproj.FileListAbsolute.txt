@@ -1,2 +1,0 @@
-F:\Github\CodeLib\Debug\UI.pdb
-F:\Github\CodeLib\Foundation\UI\Debug\UI.pdb

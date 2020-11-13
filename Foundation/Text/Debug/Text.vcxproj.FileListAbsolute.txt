@@ -1,2 +1,0 @@
-F:\Github\CodeLib\Debug\Text.pdb
-F:\Github\CodeLib\Foundation\Text\Debug\Text.pdb

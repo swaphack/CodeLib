@@ -28,3 +28,8 @@ WebCat.sdf
 /Lib/libobj
 /Lib/lpng1637
 /Lib/zlib
+/Foundation/Math/Debug/Math.vcxproj.FileListAbsolute.txt
+/Foundation/Render/Debug/Render.vcxproj.FileListAbsolute.txt
+/Foundation/System/Debug/System.vcxproj.FileListAbsolute.txt
+/Foundation/Text/Debug/Text.vcxproj.FileListAbsolute.txt
+/Foundation/UI/Debug/UI.vcxproj.FileListAbsolute.txt
