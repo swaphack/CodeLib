@@ -24,6 +24,10 @@ namespace ui
 		*/
 		const sys::CSSMargin& getMargin() const;
 		/**
+		*	获取留白距离
+		*/
+		sys::CSSMargin& getMargin();
+		/**
 		*	设置留白状态
 		*/
 		void setMarginState(const MarginState& state);
@@ -31,6 +35,10 @@ namespace ui
 		*	获取留白状态
 		*/
 		const MarginState& getMarginState() const;
+		/**
+		*	获取留白状态
+		*/
+		MarginState& getMarginState();
 		/**
 		*	设置内部面积
 		*/

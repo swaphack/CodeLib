@@ -21,12 +21,22 @@ const sys::CSSMargin& ui::LayoutItem::getMargin() const
 	return m_sMargin;
 }
 
+sys::CSSMargin& ui::LayoutItem::getMargin()
+{
+	return m_sMargin;
+}
+
 void ui::LayoutItem::setMarginState(const MarginState& state)
 {
 	m_sMarginState = state;
 }
 
 const MarginState& ui::LayoutItem::getMarginState() const
+{
+	return m_sMarginState;
+}
+
+MarginState& ui::LayoutItem::getMarginState()
 {
 	return m_sMarginState;
 }

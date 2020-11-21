@@ -42,6 +42,8 @@ namespace render
 
 		void setScale(float x, float y, float z);
 
+		void setScale(const math::Vector2& scale);
+
 		void setScale(const math::Vector3& scale);
 
 		void setScale(float scale);

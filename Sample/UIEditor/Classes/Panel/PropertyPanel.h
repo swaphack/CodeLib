@@ -55,5 +55,18 @@ namespace ue
 		// ×ø±ê
 		render::CtrlEditText* m_pEditPosX = nullptr;
 		render::CtrlEditText* m_pEditPosY = nullptr;
+		// Ðý×ª
+		render::CtrlEditText* m_pEditRotateZ = nullptr;
+
+		render::CtrlButton* m_pBtnMarginTop = nullptr;
+		render::CtrlButton* m_pBtnMarginRight = nullptr;
+		render::CtrlButton* m_pBtnMarginBottom = nullptr;
+		render::CtrlButton* m_pBtnMarginLeft = nullptr;
+
+		// ±ß¾à
+		render::CtrlEditText* m_pEditTopValue = nullptr;
+		render::CtrlEditText* m_pEditRightValue = nullptr;
+		render::CtrlEditText* m_pEditBottomValue = nullptr;
+		render::CtrlEditText* m_pEditLeftValue = nullptr;
 	};
 }

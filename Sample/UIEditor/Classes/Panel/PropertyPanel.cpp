@@ -85,6 +85,76 @@ void ue::PropertyPanel::loadProperty()
 	{
 		m_pEditPosY->setString(getCString("%f", pWidget->getPositionY()));
 	}
+
+	if (m_pEditRotateZ)
+	{
+		m_pEditRotateZ->setString(getCString("%f", pWidget->getRotationZ()));
+	}
+
+	if (m_pBtnMarginTop)
+	{
+		m_pBtnMarginTop->setSelect(m_pTargetItem->getMarginState().Top);
+	}
+
+	if (m_pBtnMarginRight)
+	{
+		m_pBtnMarginRight->setSelect(m_pTargetItem->getMarginState().Right);
+	}
+
+	if (m_pBtnMarginBottom)
+	{
+		m_pBtnMarginBottom->setSelect(m_pTargetItem->getMarginState().Bottom);
+	}
+
+	if (m_pBtnMarginLeft)
+	{
+		m_pBtnMarginLeft->setSelect(m_pTargetItem->getMarginState().Left);
+	}
+
+	sys::CSSMargin& margin = m_pTargetItem->getMargin();
+	if (m_pEditTopValue)
+	{
+		std::string strPercent;
+		if (m_pTargetItem->getMargin().getTop().getType() == sys::NumberType::Percent)
+		{
+			strPercent = "%";
+		}
+
+		m_pEditTopValue->setString(getCString("%f%s", margin.getTop().getValue(), strPercent));
+	}
+
+	if (m_pEditRightValue)
+	{
+		std::string strPercent;
+		if (m_pTargetItem->getMargin().getRight().getType() == sys::NumberType::Percent)
+		{
+			strPercent = "%";
+		}
+
+		m_pEditRightValue->setString(getCString("%f%s", margin.getRight().getValue(), strPercent));
+	}
+
+	if (m_pEditBottomValue)
+	{
+		std::string strPercent;
+		if (m_pTargetItem->getMargin().getBottom().getType() == sys::NumberType::Percent)
+		{
+			strPercent = "%";
+		}
+
+		m_pEditBottomValue->setString(getCString("%f%s", margin.getBottom().getValue(), strPercent));
+	}
+
+	if (m_pEditLeftValue)
+	{
+		std::string strPercent;
+		if (m_pTargetItem->getMargin().getLeft().getType() == sys::NumberType::Percent)
+		{
+			strPercent = "%";
+		}
+
+		m_pEditLeftValue->setString(getCString("%f%s", margin.getLeft().getValue(), strPercent));
+	}
 }
 
 void ue::PropertyPanel::saveProperty()
@@ -94,6 +164,8 @@ void ue::PropertyPanel::saveProperty()
 		return;
 	}
 	auto pWidget = m_pTargetItem->getWidget();
+
+
 
 	if (m_pEditTextName)
 	{
@@ -141,6 +213,92 @@ void ue::PropertyPanel::saveProperty()
 		float value = atof(m_pEditPosY->getString().c_str());
 		pWidget->setPositionY(value);
 	}
+
+	if (m_pEditRotateZ)
+	{
+		float value = atof(m_pEditRotateZ->getString().c_str());
+		pWidget->setRotationZ(value);
+	}
+
+	if (m_pBtnMarginTop)
+	{
+		m_pTargetItem->getMarginState().Top = m_pBtnMarginTop->isSelected();
+	}
+
+	if (m_pBtnMarginRight)
+	{
+		m_pTargetItem->getMarginState().Right = m_pBtnMarginRight->isSelected();
+	}
+
+	if (m_pBtnMarginBottom)
+	{
+		m_pTargetItem->getMarginState().Bottom = m_pBtnMarginBottom->isSelected();
+	}
+
+	if (m_pBtnMarginLeft)
+	{
+		m_pTargetItem->getMarginState().Left = m_pBtnMarginLeft->isSelected();
+	}
+
+	if (m_pEditTopValue)
+	{
+		sys::NumberType eType = sys::NumberType::Fixed;
+		sys::String strText = m_pEditTopValue->getString();
+		sys::String strValue = strText;
+		if (strText.endWith("%"))
+		{
+			eType = sys::NumberType::Percent;
+			strValue = strText.subString(0, strText.findLastOf("%"));
+		}
+
+		float value = atof(strValue.getString());
+		m_pTargetItem->getMargin().setTop(eType, value);
+	}
+
+	if (m_pEditRightValue)
+	{
+		sys::NumberType eType = sys::NumberType::Fixed;
+		sys::String strText = m_pEditRightValue->getString();
+		sys::String strValue = strText;
+		if (strText.endWith("%"))
+		{
+			eType = sys::NumberType::Percent;
+			strValue = strText.subString(0, strText.findLastOf("%"));
+		}
+
+		float value = atof(strValue.getString());
+		m_pTargetItem->getMargin().setRight(eType, value);
+	}
+
+	if (m_pEditBottomValue)
+	{
+		sys::NumberType eType = sys::NumberType::Fixed;
+		sys::String strText = m_pEditBottomValue->getString();
+		sys::String strValue = strText;
+		if (strText.endWith("%"))
+		{
+			eType = sys::NumberType::Percent;
+			strValue = strText.subString(0, strText.findLastOf("%"));
+		}
+
+		float value = atof(strValue.getString());
+		m_pTargetItem->getMargin().setBottom(eType, value);
+	}
+
+	if (m_pEditLeftValue)
+	{
+		sys::NumberType eType = sys::NumberType::Fixed;
+		sys::String strText = m_pEditLeftValue->getString();
+		sys::String strValue = strText;
+		if (strText.endWith("%")) 
+		{
+			eType = sys::NumberType::Percent;
+			strValue = strText.subString(0, strText.findLastOf("%"));
+		}
+		
+		float value = atof(strValue.getString());
+		m_pTargetItem->getMargin().setLeft(eType, value);
+	}
 }
 
 void ue::PropertyPanel::initUI()
@@ -156,6 +314,50 @@ void ue::PropertyPanel::initUI()
 
 	m_pLayout->findWidgetByName("PosX", m_pEditPosX);
 	m_pLayout->findWidgetByName("PosY", m_pEditPosY);
+
+	m_pLayout->findWidgetByName("RotationZ", m_pEditRotateZ);
+
+	m_pLayout->findWidgetByName("MarginTop", m_pBtnMarginTop);
+	m_pLayout->findWidgetByName("MarginRight", m_pBtnMarginRight);
+	m_pLayout->findWidgetByName("MarginBottom", m_pBtnMarginBottom);
+	m_pLayout->findWidgetByName("MarginLeft", m_pBtnMarginLeft);
+
+	m_pLayout->findWidgetByName("TopValue", m_pEditTopValue);
+	m_pLayout->findWidgetByName("RightValue", m_pEditRightValue);
+	m_pLayout->findWidgetByName("BottomValue", m_pEditTopValue);
+	m_pLayout->findWidgetByName("LeftValue", m_pEditLeftValue);
+
+	if (m_pBtnMarginTop)
+	{
+		m_pBtnMarginTop->addClickFunc([this](CtrlWidget* target) {
+			m_pBtnMarginTop->setSelect(!m_pBtnMarginTop->isSelected());
+			this->saveProperty();
+		});
+	}
+
+	if (m_pBtnMarginRight)
+	{
+		m_pBtnMarginRight->addClickFunc([this](CtrlWidget* target) {
+			m_pBtnMarginRight->setSelect(!m_pBtnMarginRight->isSelected());
+			this->saveProperty();
+		});
+	}
+
+	if (m_pBtnMarginBottom)
+	{
+		m_pBtnMarginBottom->addClickFunc([this](CtrlWidget* target) {
+			m_pBtnMarginBottom->setSelect(!m_pBtnMarginBottom->isSelected());
+			this->saveProperty();
+		});
+	}
+
+	if (m_pBtnMarginLeft)
+	{
+		m_pBtnMarginLeft->addClickFunc([this](CtrlWidget* target) {
+			m_pBtnMarginLeft->setSelect(!m_pBtnMarginLeft->isSelected());
+			this->saveProperty();
+		});
+	}
 }
 
 void ue::PropertyPanel::initEvent()

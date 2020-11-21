@@ -82,14 +82,26 @@ render::CtrlText* render::CtrlButton::getTextControl() const
 	return _btnText;
 }
 
-void render::CtrlButton::setEnableImage(bool bEnabled)
+void render::CtrlButton::setEnable(bool bEnabled)
 {
+	_enableButton = bEnabled;
 	_btnImage->loadImage(bEnabled ? _btnImagePath.normal : _btnImagePath.disabled);
 }
 
-void render::CtrlButton::setSelectImage(bool bSelected)
+bool render::CtrlButton::isEnabled() const
 {
+	return _enableButton;
+}
+
+void render::CtrlButton::setSelect(bool bSelected)
+{
+	_selected = bSelected;
 	_btnImage->loadImage(bSelected ? _btnImagePath.selected : _btnImagePath.normal);
+}
+
+bool render::CtrlButton::isSelected() const
+{
+	return _selected;
 }
 
 void render::CtrlButton::setNormalImage(const std::string& filepath)

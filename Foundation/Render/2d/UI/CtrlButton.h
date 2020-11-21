@@ -56,11 +56,19 @@ namespace render
 		/**
 		*	有效
 		*/
-		void setEnableImage(bool bEnabled);
+		void setEnable(bool bEnabled);
+		/**
+		*	是否有效
+		*/
+		bool isEnabled() const;
 		/**
 		*	选中
 		*/
-		void setSelectImage(bool bSelected);
+		void setSelect(bool bSelected);
+		/**
+		*	是否选中
+		*/
+		bool isSelected() const;
 	public:
 		/**
 		*	设置正常状态下的图片
@@ -119,5 +127,9 @@ namespace render
 		CtrlImage* _btnImage = nullptr;
 		// 点击缩放
 		float _touchScale = 1.1f;
+		// 选中
+		bool _selected = false;
+		// 生效
+		bool _enableButton = false;
 	};
 }

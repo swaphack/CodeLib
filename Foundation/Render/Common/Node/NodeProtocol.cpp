@@ -51,6 +51,12 @@ void SpaceProtocol::setScale(float x, float y, float z)
 	onSpaceChange();
 }
 
+void render::SpaceProtocol::setScale(const math::Vector2& scale)
+{
+	_scale = scale;
+	onSpaceChange();
+}
+
 void SpaceProtocol::setScale(const math::Vector3& scale)
 {
 	_scale = scale;
