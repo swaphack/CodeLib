@@ -285,6 +285,10 @@ FT_CHAR_DATA* FT_LABEL::loadChar(uint64_t ch, int fontSize)
 
 bool FT_LABEL::initFT(const std::string& filepath, int size, bool bBorder)
 {
+	if (filepath.empty())
+	{
+		return false;
+	}
 	_error = FT_Init_FreeType(&_library);
 	if (_error != 0)
 	{

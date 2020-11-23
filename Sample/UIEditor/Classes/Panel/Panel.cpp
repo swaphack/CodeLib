@@ -62,18 +62,30 @@ void ue::Panel::dispatchXml(tinyxml2::XMLElement* doc)
 	G_PANELEVT->dispatchEvent(PANEL_SELECT_XML, doc);
 }
 
-ui::LayoutItem* ue::Panel::createUIFile(const std::string& filepath)
+ui::LayoutItem* ue::Panel::createIteam()
 {
-	auto pFile = CREATE_NODE(ui::CtrlFile);
-	pFile->setFilePath(filepath);
-
 	sys::CSSSize size;
-	size.setWidth(sys::NumberType::Percent, 1);
-	size.setHeight(sys::NumberType::Percent, 1);
-
+	size.setWidth(sys::NumberType::Percent, ONE_HUNDRED);
+	size.setHeight(sys::NumberType::Percent, ONE_HUNDRED);
 	auto layoutItem = CREATE_OBJECT(ui::LayoutItem);
 	layoutItem->setSize(size);
-	layoutItem->setWidget(pFile);
-
 	return layoutItem;
+}
+
+ui::LayoutItem* ue::Panel::createUIFile(const std::string& filepath)
+{
+	auto pItem = createIteam();
+	if (pItem == nullptr)
+	{
+		return nullptr;
+	}
+
+	auto pFile = CREATE_NODE(ui::CtrlFile);
+	if (pFile)
+	{
+		pFile->setFilePath(filepath);
+		pItem->setWidget(pFile);
+	}
+
+	return pItem;
 }

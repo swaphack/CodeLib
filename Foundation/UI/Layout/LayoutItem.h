@@ -47,6 +47,10 @@ namespace ui
 		*	获取内部面积
 		*/
 		const sys::CSSSize& getSize() const;
+		/**
+		*	获取内部面积
+		*/
+		sys::CSSSize& getSize();
 	public: // 可能需重载的方法
 		/**
 		*	复制对象

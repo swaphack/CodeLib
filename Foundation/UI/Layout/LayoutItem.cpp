@@ -9,6 +9,7 @@ LayoutItem::LayoutItem()
 
 LayoutItem::~LayoutItem()
 {
+	int a = 1;
 }
 
 void ui::LayoutItem::setMargin(const sys::CSSMargin& margin)
@@ -51,6 +52,11 @@ const sys::CSSSize& ui::LayoutItem::getSize() const
 	return m_sSize;
 }
 
+sys::CSSSize& ui::LayoutItem::getSize()
+{
+	return m_sSize;
+}
+
 bool LayoutItem::copy(LayoutItem* item)
 {
 	if (!LayoutItemBase::copy(item))
@@ -65,6 +71,8 @@ bool LayoutItem::copy(LayoutItem* item)
 
 void LayoutItem::resize(const math::Size& size)
 {
+	LayoutItemBase::resize(size);
+
 	if (m_pWidget == nullptr)
 	{
 		return;
@@ -82,66 +90,22 @@ void LayoutItem::resize(const math::Size& size)
 
 	float leftX = 0, rightX = 0, topY = 0, bottomY = 0, widthX = 0, heightY = 0;
 
-	if (left.isFixedValue())
+	leftX = left.getRealValue(sizeW);
+
+	bottomY = bottom.getRealValue(sizeH);
+
+	rightX = right.getRealValue(sizeW);
+
+	topY = top.getRealValue(sizeH);
+
+	if (width.getRealValue() != 0) 
 	{
-		leftX = left.getValue();
-	}
-	else
-	{
-		leftX = size.getWidth() * left.getValue();
-	}
-	
-	if (bottom.isFixedValue())
-	{
-		bottomY = bottom.getValue();
-	}
-	else
-	{
-		bottomY = size.getHeight() * bottom.getValue();
+		widthX = width.getRealValue(sizeW);
 	}
 
-	if (right.isFixedValue())
+	if (height.getRealValue() != 0)
 	{
-		rightX = right.getValue();
-	}
-	else
-	{
-		rightX -= size.getWidth() * right.getValue();
-	}
-
-	
-	if (top.isFixedValue())
-	{
-		topY = top.getValue();
-	}
-	else
-	{
-		topY = size.getHeight() * top.getValue();
-	}
-
-
-	if (width.getValue() != 0)
-	{
-		if (width.isFixedValue())
-		{
-			widthX = width.getValue();
-		}
-		else
-		{
-			widthX = size.getWidth() * width.getValue();
-		}
-	}
-		
-	if (height.getValue() != 0)
-	{
-		if (height.isFixedValue())
-		{
-			heightY = height.getValue();
-		}
-		else
-		{
-			heightY = size.getHeight() * height.getValue();
-		}
+		heightY = height.getRealValue(sizeH);
 	}
 
 	float x = 0, y = 0, w = 0, h = 0;

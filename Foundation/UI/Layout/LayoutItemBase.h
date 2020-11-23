@@ -22,8 +22,8 @@ namespace ui
 		/**
 		*	获取元件
 		*/
-		template<typename T>
-		T* getWidget() const
+		template<typename T, typename = std::enable_if<std::is_base_of<render::CtrlWidget, T>::value, T>::type>
+		T* getCastWidget() const
 		{
 			if (getWidget() == nullptr)
 			{
@@ -39,7 +39,11 @@ namespace ui
 		*	是否包含点
 		*/
 		bool containPoint(float x, float y);
-	public: // 可能需重载的方法
+	public: 
+		/**
+		*	自动调整大小
+		*/
+		void autoResize();
 		/**
 		*	复制对象
 		*/
@@ -56,5 +60,8 @@ namespace ui
 	protected:
 		// 空置项
 		render::CtrlWidget* m_pWidget = nullptr;
+
+		// 父节点大小
+		math::Size m_sParentSize;
 	};
 }

@@ -16,6 +16,10 @@ namespace ui
 		virtual ~Layout();
 	public:
 		/**
+		*	添加一个元件和其控件
+		*/
+		void addItemWithWidget(LayoutItem* item);
+		/**
 		*	添加一个元件
 		*/
 		void addItem(LayoutItem* item);
@@ -55,7 +59,7 @@ namespace ui
 			LayoutItem* pItem = findItemByName(name);
 			if (pItem == nullptr) return false;
 
-			t = pItem->getWidget<T>();
+			t = pItem->getCastWidget<T>();
 
 			return t != nullptr;
 		}

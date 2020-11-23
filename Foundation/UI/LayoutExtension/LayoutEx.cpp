@@ -69,7 +69,7 @@ const std::vector<LayoutItemEx*>& LayoutEx::getChildren()
 
 void LayoutEx::resize(const math::Size& size)
 {
-	//LayoutItem::resize(size);
+	LayoutItemEx::resize(size);
 
 	this->onLayoutSizeChanged(size);
 }

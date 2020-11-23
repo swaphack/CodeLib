@@ -171,6 +171,29 @@ int32_t Directory::setCurrentDirectory(const std::string& name)
 	return chdir(name.c_str());
 }
 
+std::string sys::Directory::getDirName(const std::string& fullpath, bool containsFormat)
+{
+	if (fullpath.empty()) return fullpath;
+
+	sys::String path = fullpath;
+	path = path.replace("\\", "/");
+
+	if (path[path.getSize() - 1] == '/')
+		path = path.subString(0, path.getSize() - 1);
+
+	int index = path.findLastOf("/");
+	if (index == -1) return fullpath;
+
+	std::string name = path.subString(index + 1, fullpath.size() - index - 1).getString();
+
+	if (!containsFormat)
+	{
+		index = name.find_last_of('.');
+		if (index != -1) name = fullpath.substr(0, index);
+	}
+	return name;
+}
+
 
 
 

@@ -77,6 +77,18 @@ float sys::CSSNumber::getValue() const
 	return _value;
 }
 
+float sys::CSSNumber::getRealValue() const
+{
+	if (isFixedValue()) return _value;
+	else return _value * PERCENT_ONE;
+}
+
+float sys::CSSNumber::getRealValue(float value) const
+{
+	if (isFixedValue()) return _value;
+	else return value * _value * PERCENT_ONE;
+}
+
 void sys::CSSNumber::setValue(float value)
 {
 	_value = value;
@@ -90,9 +102,26 @@ void sys::CSSNumber::set(NumberType eType, float value)
 
 std::string sys::CSSNumber::toString() const
 {
-	bool bFixed = _type == sys::NumberType::Fixed;
+	std::string str = getCString("%f", _value);
+	if (isPercentValue())
+	{
+		str += "%";
+	}
 
-	return getCString("%f%s", bFixed ? _value : ONE_HUNDRED * _value, bFixed ? "" : PERCENT_NUMBER_SIGN);
+	return str;
+}
+
+std::string sys::CSSNumber::toString(int digits) const
+{
+	std::string spotFormat = getCString("0.%d", digits);
+	spotFormat = "%" + spotFormat + "f";
+	std::string str = getCString(spotFormat.c_str(), _value);
+	if (isPercentValue())
+	{
+		str += "%";
+	}
+
+	return str;
 }
 
 sys::CSSNumber sys::CSSNumber::load(const std::string& text)
@@ -109,7 +138,7 @@ sys::CSSNumber sys::CSSNumber::load(const std::string& text)
 	String content = text;
 	if (content.endWith(PERCENT_NUMBER_SIGN))
 	{
-		value.set(sys::NumberType::Percent, PERCENT_ONE * atof(content.subString(0, content.getSize() - 1).getString()));
+		value.set(sys::NumberType::Percent, atof(content.subString(0, content.getSize() - 1).getString()));
 	}
 	else
 	{

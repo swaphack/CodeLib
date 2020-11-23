@@ -11,6 +11,18 @@ Layout::~Layout()
 	this->removeAllItems();
 }
 
+void ui::Layout::addItemWithWidget(LayoutItem* item)
+{
+	ASSERT(item != nullptr);
+
+	this->addItem(item);
+	
+	if (this->getWidget() != nullptr && item->getWidget())
+	{
+		this->addWidget(item->getWidget());
+	}
+}
+
 void Layout::addItem(LayoutItem* item)
 {
 	ASSERT(item != nullptr);

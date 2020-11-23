@@ -53,42 +53,42 @@ void ue::PropertyPanel::loadProperty()
 	}
 	if (m_pEditAnchorPointX)
 	{
-		m_pEditAnchorPointX->setString(getCString("%f", pWidget->getAnchorPointX()));
+		m_pEditAnchorPointX->setString(getCString("%0.2f", pWidget->getAnchorPointX()));
 	}
 	if (m_pEditAnchorPointY)
 	{
-		m_pEditAnchorPointY->setString(getCString("%f", pWidget->getAnchorPointY()));
+		m_pEditAnchorPointY->setString(getCString("%0.2f", pWidget->getAnchorPointY()));
 	}
 	if (m_pEditSizeW)
 	{
-		m_pEditSizeW->setString(getCString("%f", pWidget->getWidth()));
+		m_pEditSizeW->setString(getCString("%0.2f", pWidget->getWidth()));
 	}
 	if (m_pEditSizeH)
 	{
-		m_pEditSizeH->setString(getCString("%f", pWidget->getHeight()));
+		m_pEditSizeH->setString(getCString("%0.2f", pWidget->getHeight()));
 	}
 
 	if (m_pEditScaleX)
 	{
-		m_pEditScaleX->setString(getCString("%f", pWidget->getScaleX()));
+		m_pEditScaleX->setString(getCString("%0.2f", pWidget->getScaleX()));
 	}
 	if (m_pEditScaleY)
 	{
-		m_pEditScaleY->setString(getCString("%f", pWidget->getScaleY()));
+		m_pEditScaleY->setString(getCString("%0.2f", pWidget->getScaleY()));
 	}
 
 	if (m_pEditPosX)
 	{
-		m_pEditPosX->setString(getCString("%f", pWidget->getPositionX()));
+		m_pEditPosX->setString(getCString("%0.2f", pWidget->getPositionX()));
 	}
 	if (m_pEditPosY)
 	{
-		m_pEditPosY->setString(getCString("%f", pWidget->getPositionY()));
+		m_pEditPosY->setString(getCString("%0.2f", pWidget->getPositionY()));
 	}
 
 	if (m_pEditRotateZ)
 	{
-		m_pEditRotateZ->setString(getCString("%f", pWidget->getRotationZ()));
+		m_pEditRotateZ->setString(getCString("%0.2f", pWidget->getRotationZ()));
 	}
 
 	if (m_pBtnMarginTop)
@@ -111,49 +111,37 @@ void ue::PropertyPanel::loadProperty()
 		m_pBtnMarginLeft->setSelect(m_pTargetItem->getMarginState().Left);
 	}
 
-	sys::CSSMargin& margin = m_pTargetItem->getMargin();
+	const sys::CSSMargin& margin = m_pTargetItem->getMargin();
+	const sys::CSSSize& size = m_pTargetItem->getSize();
+
 	if (m_pEditTopValue)
 	{
-		std::string strPercent;
-		if (m_pTargetItem->getMargin().getTop().getType() == sys::NumberType::Percent)
-		{
-			strPercent = "%";
-		}
-
-		m_pEditTopValue->setString(getCString("%f%s", margin.getTop().getValue(), strPercent));
+		m_pEditTopValue->setString(margin.getTop().toString(2));
 	}
 
 	if (m_pEditRightValue)
 	{
-		std::string strPercent;
-		if (m_pTargetItem->getMargin().getRight().getType() == sys::NumberType::Percent)
-		{
-			strPercent = "%";
-		}
-
-		m_pEditRightValue->setString(getCString("%f%s", margin.getRight().getValue(), strPercent));
+		m_pEditRightValue->setString(margin.getRight().toString(2));
 	}
 
 	if (m_pEditBottomValue)
 	{
-		std::string strPercent;
-		if (m_pTargetItem->getMargin().getBottom().getType() == sys::NumberType::Percent)
-		{
-			strPercent = "%";
-		}
-
-		m_pEditBottomValue->setString(getCString("%f%s", margin.getBottom().getValue(), strPercent));
+		m_pEditBottomValue->setString(margin.getBottom().toString(2));
 	}
 
 	if (m_pEditLeftValue)
 	{
-		std::string strPercent;
-		if (m_pTargetItem->getMargin().getLeft().getType() == sys::NumberType::Percent)
-		{
-			strPercent = "%";
-		}
+		m_pEditLeftValue->setString(margin.getLeft().toString(2));
+	}
 
-		m_pEditLeftValue->setString(getCString("%f%s", margin.getLeft().getValue(), strPercent));
+	if (m_pEditWidthValue)
+	{
+		m_pEditWidthValue->setString(size.getWidth().toString(2));
+	}
+
+	if (m_pEditHeightValue)
+	{
+		m_pEditHeightValue->setString(size.getHeight().toString(2));
 	}
 }
 
@@ -242,63 +230,48 @@ void ue::PropertyPanel::saveProperty()
 
 	if (m_pEditTopValue)
 	{
-		sys::NumberType eType = sys::NumberType::Fixed;
-		sys::String strText = m_pEditTopValue->getString();
-		sys::String strValue = strText;
-		if (strText.endWith("%"))
-		{
-			eType = sys::NumberType::Percent;
-			strValue = strText.subString(0, strText.findLastOf("%"));
-		}
-
-		float value = atof(strValue.getString());
-		m_pTargetItem->getMargin().setTop(eType, value);
+		std::string strText = m_pEditTopValue->getString();
+		sys::CSSNumber number = sys::CSSNumber::load(strText);
+		m_pTargetItem->getMargin().setTop(number);
 	}
 
 	if (m_pEditRightValue)
 	{
-		sys::NumberType eType = sys::NumberType::Fixed;
-		sys::String strText = m_pEditRightValue->getString();
-		sys::String strValue = strText;
-		if (strText.endWith("%"))
-		{
-			eType = sys::NumberType::Percent;
-			strValue = strText.subString(0, strText.findLastOf("%"));
-		}
-
-		float value = atof(strValue.getString());
-		m_pTargetItem->getMargin().setRight(eType, value);
+		std::string strText = m_pEditRightValue->getString();
+		sys::CSSNumber number = sys::CSSNumber::load(strText);
+		m_pTargetItem->getMargin().setRight(number);
 	}
 
 	if (m_pEditBottomValue)
 	{
-		sys::NumberType eType = sys::NumberType::Fixed;
-		sys::String strText = m_pEditBottomValue->getString();
-		sys::String strValue = strText;
-		if (strText.endWith("%"))
-		{
-			eType = sys::NumberType::Percent;
-			strValue = strText.subString(0, strText.findLastOf("%"));
-		}
-
-		float value = atof(strValue.getString());
-		m_pTargetItem->getMargin().setBottom(eType, value);
+		std::string strText = m_pEditBottomValue->getString();
+		sys::CSSNumber number = sys::CSSNumber::load(strText);
+		m_pTargetItem->getMargin().setBottom(number);
 	}
 
 	if (m_pEditLeftValue)
 	{
-		sys::NumberType eType = sys::NumberType::Fixed;
-		sys::String strText = m_pEditLeftValue->getString();
-		sys::String strValue = strText;
-		if (strText.endWith("%")) 
-		{
-			eType = sys::NumberType::Percent;
-			strValue = strText.subString(0, strText.findLastOf("%"));
-		}
-		
-		float value = atof(strValue.getString());
-		m_pTargetItem->getMargin().setLeft(eType, value);
+		std::string strText = m_pEditLeftValue->getString();
+		sys::CSSNumber number = sys::CSSNumber::load(strText);
+		m_pTargetItem->getMargin().setLeft(number);
 	}
+
+	if (m_pEditWidthValue)
+	{
+		std::string strText = m_pEditWidthValue->getString();
+		sys::CSSNumber number = sys::CSSNumber::load(strText);
+		m_pTargetItem->getSize().setWidth(number);
+	}
+
+	if (m_pEditHeightValue)
+	{
+		std::string strText = m_pEditHeightValue->getString();
+		sys::CSSNumber number = sys::CSSNumber::load(strText);
+		m_pTargetItem->getSize().setHeight(number);
+	}
+
+	m_pTargetItem->autoResize();
+	this->loadProperty();
 }
 
 void ue::PropertyPanel::initUI()
@@ -324,8 +297,11 @@ void ue::PropertyPanel::initUI()
 
 	m_pLayout->findWidgetByName("TopValue", m_pEditTopValue);
 	m_pLayout->findWidgetByName("RightValue", m_pEditRightValue);
-	m_pLayout->findWidgetByName("BottomValue", m_pEditTopValue);
+	m_pLayout->findWidgetByName("BottomValue", m_pEditBottomValue);
 	m_pLayout->findWidgetByName("LeftValue", m_pEditLeftValue);
+
+	m_pLayout->findWidgetByName("WidthValue", m_pEditWidthValue);
+	m_pLayout->findWidgetByName("HeightValue", m_pEditHeightValue);
 
 	if (m_pBtnMarginTop)
 	{

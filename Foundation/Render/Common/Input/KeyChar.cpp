@@ -103,16 +103,16 @@ char render::KeyChar::getNumberChar(sys::BoardKey key)
 	{
 		switch (key)
 		{
-		case sys::BoardKey::K0: return '!';
-		case sys::BoardKey::K1: return '@';
-		case sys::BoardKey::K2: return '#';
-		case sys::BoardKey::K3: return '$';
-		case sys::BoardKey::K4: return '%';
-		case sys::BoardKey::K5: return '^';
-		case sys::BoardKey::K6: return '&';
-		case sys::BoardKey::K7: return '*';
-		case sys::BoardKey::K8: return '(';
-		case sys::BoardKey::K9: return ')';
+		case sys::BoardKey::K0: return ')';
+		case sys::BoardKey::K1: return '!';
+		case sys::BoardKey::K2: return '@';
+		case sys::BoardKey::K3: return '#';
+		case sys::BoardKey::K4: return '$';
+		case sys::BoardKey::K5: return '%';
+		case sys::BoardKey::K6: return '^';
+		case sys::BoardKey::K7: return '&';
+		case sys::BoardKey::K8: return '*';
+		case sys::BoardKey::K9: return '(';
 		default: break;
 		}
 	}

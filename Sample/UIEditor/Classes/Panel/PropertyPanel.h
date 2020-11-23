@@ -68,5 +68,8 @@ namespace ue
 		render::CtrlEditText* m_pEditRightValue = nullptr;
 		render::CtrlEditText* m_pEditBottomValue = nullptr;
 		render::CtrlEditText* m_pEditLeftValue = nullptr;
+
+		render::CtrlEditText* m_pEditWidthValue = nullptr;
+		render::CtrlEditText* m_pEditHeightValue = nullptr;
 	};
 }

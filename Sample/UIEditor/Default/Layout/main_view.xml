@@ -4,11 +4,11 @@
 		<MenuBar name="MenuBar" filepath="Default/Layout/main_view_menu.xml" margin="0,0,0,0" marginState="1,1,0,1" size="0,40"/>
 		<Layout margin="40,0,0,0" marginState="1,1,1,1">
 			<Layout margin="0,0,0,0" marginState="1,0,1,1" size="320,0">
-				<ControlPanel name="ControlPanel" filepath="Default/Layout/main_view_control.xml" margin="0,0,0,0" marginState="1,1,0,1" size="100%,50%"/>
-				<DirectoryPanel name="DirectoryPanel" filepath="Default/Layout/main_view_directory.xml" margin="0,0,0,0" marginState="0,1,1,1" size="100%,50%"/>
+				<ControlPanel name="ControlPanel" filepath="Default/Layout/main_view_control.xml" margin="0,0,0,0" marginState="1,1,0,1" size="0,50%"/>
+				<DirectoryPanel name="DirectoryPanel" filepath="Default/Layout/main_view_directory.xml" margin="0,0,0,0" marginState="0,1,1,1" size="0,50%"/>
 			</Layout>
-			<DesignPanel name="DesignPanel" filepath="Default/Layout/main_view_scene.xml" margin="0,250,0,320" marginState="1,1,1,1"/>
-			<PropertyPanel name="PropertyPanel" filepath="Default/Layout/main_view_property.xml" margin="0,0,0,0" marginState="1,1,1,0" size="250,0"/>
+			<DesignPanel name="DesignPanel" filepath="Default/Layout/main_view_scene.xml" margin="0,280,0,320" marginState="1,1,1,1"/>
+			<PropertyPanel name="PropertyPanel" filepath="Default/Layout/main_view_property.xml" margin="0,0,0,0" marginState="1,1,1,0" size="280,0"/>
 		</Layout>
 	</Layout>
 </root>

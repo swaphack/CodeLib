@@ -32,6 +32,8 @@ namespace sys
 		static void getCurrentDirectory(std::string& dir);
 		// 设置当前目录
 		static int32_t setCurrentDirectory(const std::string& name);
+		// 获取目录名字
+		static std::string getDirName(const std::string& fullpath, bool containsFormat = true);
 	public:
 		Directory();
 		virtual ~Directory();

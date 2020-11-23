@@ -40,12 +40,7 @@ void ue::DesignPanel::initUI()
 		m_pUIFile = createUIFile("Resource/Layout/main.xml");
 		if (m_pUIFile)
 		{
-			auto pWidget = m_pUIFile->getWidget();
-			if (childLayout)
-			{
-				childLayout->addItem(m_pUIFile);
-				childLayout->addWidget(pWidget);
-			}
+			childLayout->addItemWithWidget(m_pUIFile);
 		}
 	}
 }

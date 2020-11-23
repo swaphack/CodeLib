@@ -61,6 +61,11 @@ namespace render
 				return;
 			}
 
+			auto it = _notifyEvent.find(k);
+			if (it == _notifyEvent.end())
+			{
+				_notifyEvent.insert(std::make_pair(k, std::vector<NotifyDelegate>()));
+			}
 			_notifyEvent[k].push_back(handler);
 		}
 		// 移除某一类型的监听

@@ -40,6 +40,11 @@ bool ui::LayoutItemBase::containPoint(float x, float y)
 	return false;
 }
 
+void ui::LayoutItemBase::autoResize()
+{
+	this->resize(m_sParentSize);
+}
+
 bool ui::LayoutItemBase::copy(LayoutItemBase* item)
 {
 	if (item == nullptr)
@@ -53,6 +58,7 @@ bool ui::LayoutItemBase::copy(LayoutItemBase* item)
 
 void ui::LayoutItemBase::resize(const math::Size& size)
 {
+	m_sParentSize = size;
 }
 
 const render::RectPoints* ui::LayoutItemBase::getRectPoints() const

@@ -58,11 +58,35 @@ namespace ue
 		void dispatchXml(tinyxml2::XMLElement* doc);
 	protected:
 		/**
+		*	创建控件
+		*/
+		static ui::LayoutItem* createIteam();
+		/**
+		*	创建控件
+		*/
+		template<typename T, typename = std::enable_if<std::is_base_of<render::CtrlWidget, T>::value, T>::type>
+		static ui::LayoutItem* createIteam()
+		{
+			auto pItem = createIteam();
+			if (pItem == nullptr)
+			{
+				return nullptr;
+			}
+
+			auto pNode = CREATE_NODE(T);
+			if (pNode != nullptr)
+			{
+				pItem->setWidget(pNode);
+			}
+
+			return pItem;
+		}
+		/**
 		*	创建文件
 		*/
 		static ui::LayoutItem* createUIFile(const std::string& filepath);
 		/**
-		*	创建文件
+		*	创建文件面板
 		*/
 		template<typename T, typename = std::enable_if<std::is_base_of<Panel, T>::value, T>::type>
 		static T* createPanel(const std::string& filepath)

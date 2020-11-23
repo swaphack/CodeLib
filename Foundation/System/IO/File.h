@@ -40,6 +40,8 @@ namespace sys
 		static bool append(const std::string& url, const char* data, size_t size, size_t& appendSize);
 		// 判断文件是否存在
 		static bool exists(const std::string& url);
+		// 获取文件名字
+		static std::string getFileName(const std::string& fullpath, bool containsFormat = true);
 	public:
 		bool open();
 		// 将数据写到本地

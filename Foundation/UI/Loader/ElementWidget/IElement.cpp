@@ -31,7 +31,7 @@ bool IElement::load(tinyxml2::XMLElement* pXmlNode, bool clean/* = true*/)
 
 	tinyxml2::XMLAttribute* pAttribute = (tinyxml2::XMLAttribute*)pXmlNode->FirstAttribute();
 
-	while (pAttribute)
+	while (pAttribute != nullptr)
 	{
 		getNodeProperty()->setAttribute(std::string(pAttribute->Name()), std::string(pAttribute->Value()));
 

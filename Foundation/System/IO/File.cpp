@@ -2,6 +2,7 @@
 #include "Stream/StreamBase.h"
 #include "Stream/StreamHelper.h"
 #include "Directory.h"
+#include "Type/String.h"
 #include <cstdio>
 #include <cstdlib>
 #include <cstring>
@@ -138,6 +139,26 @@ bool File::exists(const std::string& url)
 	fclose(fptr);
 
 	return true;
+}
+
+std::string File::getFileName(const std::string& fullpath, bool containsFormat)
+{
+	if (fullpath.empty()) return fullpath;
+
+	sys::String path = fullpath;
+	path = path.replace("\\", "/");
+
+	int index = path.findLastOf("/");
+	if (index == -1) return fullpath;
+
+	std::string name = fullpath.substr(index,  fullpath.size() - index);
+
+	if (!containsFormat)
+	{
+		index = name.find_last_of('.');
+		if (index != -1) name = fullpath.substr(0, index);
+	}
+	return name;
 }
 
 File::File(const std::string& url)

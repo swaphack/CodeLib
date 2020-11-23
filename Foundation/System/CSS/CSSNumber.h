@@ -29,6 +29,10 @@ namespace sys
 		*/
 		std::string toString() const;
 		/**
+		*	转化成字符串，保留小数点后几位
+		*/
+		std::string toString(int digits) const;
+		/**
 		*	从字符串获取数值
 		*/
 		static CSSNumber load(const std::string& text);
@@ -61,6 +65,15 @@ namespace sys
 		*	设置值
 		*/
 		void set(NumberType eType, float value);
+	public:
+		/**
+		*	获取实际值
+		*/
+		float getRealValue() const;
+		/**
+		*	获取实际值
+		*/
+		float getRealValue(float value) const;
 	private:
 		// 类型
 		NumberType _type = NumberType::Fixed;
