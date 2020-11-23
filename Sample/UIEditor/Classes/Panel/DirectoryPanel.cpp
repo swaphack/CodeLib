@@ -84,7 +84,7 @@ void ue::DirectoryPanel::updateRootPanel()
 	this->getLayout()->autoResize();
 }
 
-void ue::DirectoryPanel::updateRootList(ui::Layout* layout, const DirDetail& detail)
+void ue::DirectoryPanel::updateRootList(ui::Layout* layout, const DirDetail& detail, int layer)
 {
 	if (layout == nullptr)
 	{
@@ -96,25 +96,28 @@ void ue::DirectoryPanel::updateRootList(ui::Layout* layout, const DirDetail& det
 		return;
 	}
 
-	auto pItem = createRootItem(_top, CONST_ITEM_HEIGHT, true, detail.name, detail.fullpath);
+	bool isFolded = isDirFolded(detail.fullpath);
+
+	auto pItem = createRootItem(_top, CONST_ITEM_HEIGHT, true, std::string(layer + 1, ' ') + detail.name, detail.fullpath);
 	if (pItem)
 	{
+		pItem->getCastWidget<render::CtrlButton>()->setSelect(isFolded);
 		layout->addItemWithWidget(pItem);
 		_top += CONST_ITEM_HEIGHT + CONST_OFFSET_Y;
 	}
 	
 	// 文件
-	if (!isDirFolded(detail.fullpath))
+	if (!isFolded)
 	{
 		// 子目录
 		for (const auto& subDir : detail.subDirs)
 		{
-			updateRootList(layout, subDir);
+			updateRootList(layout, subDir, layer + 1);
 		}
 
 		for (auto item : detail.files)
 		{
-			auto pItem = createRootItem(_top, CONST_ITEM_HEIGHT, false, item, detail.fullpath + "/" + item);
+			auto pItem = createRootItem(_top, CONST_ITEM_HEIGHT, false, std::string(layer + 2, ' ') + item, detail.fullpath + "/" + item);
 			if (pItem)
 			{
 				layout->addItemWithWidget(pItem);
@@ -148,11 +151,14 @@ ui::LayoutItem* ue::DirectoryPanel::createDirItem(int top, int height, const std
 	if (pWidget)
 	{
 		pWidget->setNormalImage("Default/Image/dir_bg.png");
+		pWidget->setSelectedImage("Default/Image/dir_bg_2.png");
 		pWidget->setAnchorPoint(0.5f, 0.5f);
 		pWidget->setTextColor(sys::Color3B(255, 255, 255));
 		pWidget->setFontSize(24);
 		pWidget->setFontPath("Default/Font/font_3.ttf");
 		pWidget->setString(name);
+		pWidget->getTextControl()->setHorizontalAlignment(sys::HorizontalAlignment::LEFT);
+		pWidget->getTextControl()->setVerticalAlignment(sys::VerticalAlignment::MIDDLE);
 	}
 	return pItem;
 }
@@ -180,11 +186,14 @@ ui::LayoutItem* ue::DirectoryPanel::createFileItem(int top, int height, const st
 	if (pWidget)
 	{
 		pWidget->setNormalImage("Default/Image/file_bg.png");
+		pWidget->setSelectedImage("Default/Image/file_bg_2.png");
 		pWidget->setAnchorPoint(0.5f, 0.5f);
 		pWidget->setTextColor(sys::Color3B(0, 0, 0));
 		pWidget->setFontSize(24);
 		pWidget->setFontPath("Default/Font/font_3.ttf");
 		pWidget->setString(name);
+		pWidget->getTextControl()->setHorizontalAlignment(sys::HorizontalAlignment::LEFT);
+		pWidget->getTextControl()->setVerticalAlignment(sys::VerticalAlignment::MIDDLE);
 	}
 	
 	return pItem;

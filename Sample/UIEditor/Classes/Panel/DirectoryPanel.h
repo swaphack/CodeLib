@@ -58,7 +58,7 @@ namespace ue
 		/**
 		*	更新目录栏
 		*/
-		void updateRootList(ui::Layout* layout, const DirDetail& detail);
+		void updateRootList(ui::Layout* layout, const DirDetail& detail, int layer = 0);
 	private:
 		/**
 		*	改变对折信息
