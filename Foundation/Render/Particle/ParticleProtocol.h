@@ -27,7 +27,7 @@ namespace render
 		// 设置色彩渐变速度
 		void setColorAcceleration(float red, float green, float blue, float alpha = 1);
 		// 获取色彩渐变速度
-		const sys::Color4F& getColorAcceleration() const;
+		const phy::Color4F& getColorAcceleration() const;
 		// 设置寿命
 		void setLifeTime(float time);
 		// 获取寿命
@@ -46,7 +46,7 @@ namespace render
 		// 缩放变换速度
 		math::Vector3 _scaleAcceleration;
 		// 色变速度
-		sys::Color4F _colorAcceleration;
+		phy::Color4F _colorAcceleration;
 		// 寿命
 		float _lifeTime = 0;
 		// 粒子数量

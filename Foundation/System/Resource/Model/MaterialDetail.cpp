@@ -1,6 +1,6 @@
 #include "MaterialDetail.h"
 #include "../extensions.h"
-#include "Light/ColorSample.h"
+#include "physicslib.h"
 using namespace	sys;
 
 MaterialDetail::MaterialDetail()

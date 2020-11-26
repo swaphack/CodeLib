@@ -24,10 +24,10 @@ namespace render
 	public:// 颜色
 		static void setColor(float r, float g, float b, float a = 1);
 		static void setColor(float* rgba);
-		static void setColor(const sys::Color3F& value, float opacity = 1);
-		static void setColor(const sys::Color4F& value, float opacity = 1);
-		static void setColor(const sys::Color3B& value, uint8_t opacity = 255);
-		static void setColor(const sys::Color4B& value, uint8_t opacity = 255);
+		static void setColor(const phy::Color3F& value, float opacity = 1);
+		static void setColor(const phy::Color4F& value, float opacity = 1);
+		static void setColor(const phy::Color3B& value, uint8_t opacity = 255);
+		static void setColor(const phy::Color4B& value, uint8_t opacity = 255);
 	public:// 颜色索引
 		static void setIndex(int index);
 	public:// 纹理

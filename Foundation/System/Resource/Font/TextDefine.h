@@ -1,7 +1,7 @@
 #pragma once
 
 #include <string>
-#include "Light/ColorSample.h"
+#include "physicslib.h"
 
 namespace sys
 {
@@ -41,7 +41,7 @@ namespace sys
 		float height = 0;
 
 		// ÑÕÉ«
-		Color3B color;
+		phy::Color3B color;
 
 		// ¼Ó´Ö
 		bool border = false;

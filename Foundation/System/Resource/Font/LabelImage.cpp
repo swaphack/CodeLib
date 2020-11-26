@@ -3,6 +3,7 @@
 #include "Memory/MemoryData.h"
 #include "Text/CharsetHelper.h"
 #include "Base/macros.h"
+#include "physicslib.h"
 #include <map>
 #include <cstdint>
 #define FREETYPE_PIXEL_UNIT 64
@@ -74,7 +75,7 @@ protected:
 	void disposeFT();
 private:
 	// 将数据写入流中
-	void writeStream(uint64_t ch, LabelStream* stream, const Color3B& color);
+	void writeStream(uint64_t ch, LabelStream* stream, const phy::Color3B& color);
 private:
 	FT_Library    _library;
 	FT_Face       _face;
@@ -337,7 +338,7 @@ void FT_LABEL::disposeFT()
 	}
 }
 
-void FT_LABEL::writeStream(uint64_t ch, LabelStream* stream, const Color3B& color)
+void FT_LABEL::writeStream(uint64_t ch, LabelStream* stream, const phy::Color3B& color)
 {
 	if (ch == '\n')
 	{
@@ -396,7 +397,7 @@ void FT_LABEL::writeStream(uint64_t ch, LabelStream* stream, const Color3B& colo
 			}
 			else
 			{
-				uint8_t ary[RGBA_PIXEL_UNIT] = { color.red, color.green, color.blue, bit };
+				uint8_t ary[RGBA_PIXEL_UNIT] = { color.getRed(), color.getGreen(), color.getBlue(), bit };
 				memData.set(RGBA_PIXEL_UNIT * ((height - j - 1) * charWidth + i + deltaX), RGBA_PIXEL_UNIT, (char*)ary);
 			}
 		}

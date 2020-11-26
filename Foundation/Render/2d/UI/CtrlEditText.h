@@ -2,6 +2,7 @@
 
 #include "CtrlEditBox.h"
 #include "TextProtocol.h"
+#include "physicslib.h"
 
 namespace render
 {
@@ -52,19 +53,19 @@ namespace render
 		/**
 		*	设置颜色
 		*/
-		void setTextColor(const sys::Color3B& color);
+		void setTextColor(const phy::Color3B& color);
 		/**
 		*	颜色
 		*/
-		const sys::Color3B& getTextColor() const;
+		const phy::Color3B& getTextColor() const;
 		/**
 		*	设置占位颜色
 		*/
-		void setPlaceholderTextColor(const sys::Color3B& color);
+		void setPlaceholderTextColor(const phy::Color3B& color);
 		/**
 		*	占位颜色
 		*/
-		const sys::Color3B& getPlaceholderTextColor() const;
+		const phy::Color3B& getPlaceholderTextColor() const;
 		/**
 		*	是否多行显示
 		*/

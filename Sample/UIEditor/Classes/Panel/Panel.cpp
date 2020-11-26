@@ -52,14 +52,19 @@ void ue::Panel::dispatchItem(ui::LayoutItem* item)
 	G_PANELEVT->dispatchEvent(PANEL_SELECT_TARGET, item);
 }
 
-void ue::Panel::dispatchFile(ui::CtrlFile* layout)
+void ue::Panel::dispatchLayoutFile(ui::CtrlFile* layout)
 {
-	G_PANELEVT->dispatchEvent(PANEL_SELECT_FILE, layout);
+	G_PANELEVT->dispatchEvent(PANEL_SELECT_LAYOUT, layout);
 }
 
 void ue::Panel::dispatchXml(tinyxml2::XMLElement* doc)
 {
 	G_PANELEVT->dispatchEvent(PANEL_SELECT_XML, doc);
+}
+
+void ue::Panel::dispatchDesignFile(const std::string& filepath)
+{
+	G_PANELEVT->dispatchEvent(PANEL_SELECT_DESIGN_FILE, (void*)filepath.c_str());
 }
 
 ui::LayoutItem* ue::Panel::createIteam()

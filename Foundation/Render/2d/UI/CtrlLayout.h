@@ -18,11 +18,11 @@ namespace render
 		/**
 		*	…Ë÷√±≥æ∞—’…´
 		*/
-		void setBackgroundColor(const sys::Color4B& color);
+		void setBackgroundColor(const phy::Color4B& color);
 		/**
 		*	±≥æ∞—’…´
 		*/
-		const sys::Color4B& getBackgroundColor() const;
+		const phy::Color4B& getBackgroundColor() const;
 		/**
 		*	…Ë÷√±≥æ∞Õº∆¨
 		*/

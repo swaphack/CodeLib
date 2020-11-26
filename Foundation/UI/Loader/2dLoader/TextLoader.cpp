@@ -25,7 +25,7 @@ TextLoader::~TextLoader()
 
 void TextLoader::parseAttributes()
 {
-	sys::Color3B color;
+	phy::Color3B color;
 	std::string fontpath;
 	std::string text;
 	float fontSize = 0;

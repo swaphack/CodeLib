@@ -9,7 +9,6 @@ LayoutItem::LayoutItem()
 
 LayoutItem::~LayoutItem()
 {
-	int a = 1;
 }
 
 void ui::LayoutItem::setMargin(const sys::CSSMargin& margin)

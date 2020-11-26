@@ -55,40 +55,40 @@ void RectVertex::setLeftUpPoint(const math::Vector3& point)
 	memcpy(vertices + index, point.getValue(), point.getSize());
 }
 
-void RectVertex::setLeftDownColor(const sys::Color4F& color)
+void RectVertex::setLeftDownColor(const phy::Color4F& color)
 {
 	int index = 0;
-	colors[index + 0] = color.red;
-	colors[index + 1] = color.green;
-	colors[index + 2] = color.blue;
-	colors[index + 3] = color.alpha;
+	colors[index + 0] = color[0];
+	colors[index + 1] = color[1];
+	colors[index + 2] = color[2];
+	colors[index + 3] = color[3];
 }
 
-void RectVertex::setRightDownColor(const sys::Color4F& color)
+void RectVertex::setRightDownColor(const phy::Color4F& color)
 {
 	int index = 4;
-	colors[index + 0] = color.red;
-	colors[index + 1] = color.green;
-	colors[index + 2] = color.blue;
-	colors[index + 3] = color.alpha;
+	colors[index + 0] = color[0];
+	colors[index + 1] = color[1];
+	colors[index + 2] = color[2];
+	colors[index + 3] = color[3];
 }
 
-void RectVertex::setRightUpColor(const sys::Color4F& color)
+void RectVertex::setRightUpColor(const phy::Color4F& color)
 {
 	int index = 8;
-	colors[index + 0] = color.red;
-	colors[index + 1] = color.green;
-	colors[index + 2] = color.blue;
-	colors[index + 3] = color.alpha;
+	colors[index + 0] = color[0];
+	colors[index + 1] = color[1];
+	colors[index + 2] = color[2];
+	colors[index + 3] = color[3];
 }
 
-void RectVertex::setLeftUpColor(const sys::Color4F& color)
+void RectVertex::setLeftUpColor(const phy::Color4F& color)
 {
 	int index = 12;
-	colors[index + 0] = color.red;
-	colors[index + 1] = color.green;
-	colors[index + 2] = color.blue;
-	colors[index + 3] = color.alpha;
+	colors[index + 0] = color[0];
+	colors[index + 1] = color[1];
+	colors[index + 2] = color[2];
+	colors[index + 3] = color[3];
 }
 
 void RectVertex::setLeftDownUV(const math::Vector2& point)

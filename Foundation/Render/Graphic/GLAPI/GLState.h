@@ -40,7 +40,7 @@ namespace render
 	public:		
 		static void getPointer(GetPointerTarget target, void** value);
 	public:
-		static void setBlendColor(const sys::Color4F& color);
+		static void setBlendColor(const phy::Color4F& color);
 		static void setBlendEquation(BlendEquationMode mode);
 		static void setBlendEquation(uint32_t buf, BlendEquationMode mode);
 		static void setBlendEquationSeparate(BlendEquationMode rgb, BlendEquationMode alpha);

@@ -260,7 +260,7 @@ void TestEnvironmentNode::addGrid()
 void TestEnvironmentNode::addCoordinate()
 {
 	render::Mask* pMask = CREATE_NODE(render::Mask);
-	pMask->setColor(sys::Color4B(255, 255, 255, 255));
+	pMask->setColor(phy::Color4B(255, 255, 255, 255));
 	pMask->setVolume(100, 100, -100);
 	Utility::loadShaderVF(pMask, "Shader/geometry/draw_triangle.vs", "Shader/geometry/draw_triangle.fs");
 	this->addChild(pMask);

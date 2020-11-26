@@ -37,7 +37,7 @@ namespace render
 		/**
 		*	获取指定位置的像素
 		*/
-		static sys::Color4B readPixelColor(float x, float y);
+		static phy::Color4B readPixelColor(float x, float y);
 		/**
 		*	获取屏幕的模板测试值
 		*/

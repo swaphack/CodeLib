@@ -151,13 +151,13 @@ void WidgetProperty::setAttribute(const std::string& name, const math::Vector2& 
 	setAttribute(name, str);
 }
 
-void WidgetProperty::setAttribute(const std::string& name, const sys::Color4B& value)
+void WidgetProperty::setAttribute(const std::string& name, const phy::Color4B& value)
 {
 	if (name.empty())
 	{
 		return;
 	}
-	std::string str = getCString("%d,%d,%d,%d", value.red, value.green, value.blue, value.alpha);
+	std::string str = getCString("%d,%d,%d,%d", value[0], value[1], value[2], value[3]);
 	setAttribute(name, str);
 }
 
@@ -438,7 +438,7 @@ bool WidgetProperty::getAttribute(const std::string& name, math::Vector2& defaul
 	return true;
 }
 
-bool WidgetProperty::getAttribute(const std::string& name, sys::Color4B& defaultValue)
+bool WidgetProperty::getAttribute(const std::string& name, phy::Color4B& defaultValue)
 {
 	const std::string& value = getAttribute(name);
 	if (value.empty())
@@ -456,7 +456,7 @@ bool WidgetProperty::getAttribute(const std::string& name, sys::Color4B& default
 		return false;
 	}
 
-	defaultValue = sys::Color4B(atof(params[0].getString()), atof(params[1].getString()), atof(params[2].getString()), atof(params[3].getString()));
+	defaultValue = phy::Color4B(atof(params[0].getString()), atof(params[1].getString()), atof(params[2].getString()), atof(params[3].getString()));
 
 	return true;
 }
@@ -670,7 +670,7 @@ std::string WidgetProperty::getAttribute(const std::string& name)
 	return _attributes[name];
 }
 
-bool ui::WidgetProperty::getAttribute(const std::string& name, sys::Color3B& defaultValue)
+bool ui::WidgetProperty::getAttribute(const std::string& name, phy::Color3B& defaultValue)
 {
 	const std::string& value = getAttribute(name);
 	if (value.empty())
@@ -688,17 +688,17 @@ bool ui::WidgetProperty::getAttribute(const std::string& name, sys::Color3B& def
 		return false;
 	}
 
-	defaultValue = sys::Color3B(atof(params[0].getString()), atof(params[1].getString()), atof(params[2].getString()));
+	defaultValue = phy::Color3B(atof(params[0].getString()), atof(params[1].getString()), atof(params[2].getString()));
 
 	return true;
 }
 
-void ui::WidgetProperty::setAttribute(const std::string& name, const sys::Color3B& value)
+void ui::WidgetProperty::setAttribute(const std::string& name, const phy::Color3B& value)
 {
 	if (name.empty())
 	{
 		return;
 	}
-	std::string str = getCString("%d,%d,%d", value.red, value.green, value.blue);
+	std::string str = getCString("%d,%d,%d", value[0], value[1], value[2]);
 	setAttribute(name, str);
 }

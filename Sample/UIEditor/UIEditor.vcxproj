@@ -19,6 +19,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Classes\Config\IDEConfig.cpp" />
+    <ClCompile Include="Classes\Config\ProjectConfig.cpp" />
     <ClCompile Include="Classes\Panel\DesignPanel.cpp" />
     <ClCompile Include="Classes\Panel\DirectoryPanel.cpp" />
     <ClCompile Include="Classes\Panel\DocumentPanel.cpp" />
@@ -36,6 +38,9 @@
     <ClCompile Include="Classes\Window\MainWindow.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Classes\Config\Config.h" />
+    <ClInclude Include="Classes\Config\IDEConfig.h" />
+    <ClInclude Include="Classes\Config\ProjectConfig.h" />
     <ClInclude Include="Classes\Panel\DesignPanel.h" />
     <ClInclude Include="Classes\Panel\DirectoryPanel.h" />
     <ClInclude Include="Classes\Panel\DocumentPanel.h" />
@@ -124,13 +129,13 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>../../Foundation/Math/;../../Foundation/Algorithm/;../../Foundation/System/;../../Foundation/Render/;../../Foundation/UI/;../../Lib/include/;../../Lib/include/fbx/;../../Lib/include/freetype/;/Classes/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../Foundation/Math/;../../Foundation/Algorithm/;../../Foundation/System/;../../Foundation/Render/;../../Foundation/Tool/;../../Foundation/Physics/;../../Foundation/UI/;../../Lib/include/;../../Lib/include/fbx/;../../Lib/include/tinyxml2;../../Lib/include/freetype/;/Classes/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>../../Lib/lib/freetype;../../Lib/lib/jpeg;../../Lib/lib/png;../../Lib/lib/zlib;../../Lib/lib/fmod;../../Lib/lib/3ds;../../Lib/lib/obj;../../Lib/lib/fbx;../../Lib/lib/tga;../../Lib/lib/freeglut;../../Lib/lib/glew;../../Lib/lib/tiff;../../Lib/lib/ffmpeg;../../Lib/lib/tinyxml2;$(OutDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>freeglut.lib;glew32d.lib;opengl32.lib;zlib.lib;libpng16.lib;freetype263.lib;avutil.lib;avcodec.lib;avdevice.lib;avfilter.lib;avformat.lib;swscale.lib;swresample.lib;postproc.lib;libjpeg.lib;fmod_vc.lib;System.lib;Render.lib;UI.lib;Math.lib;libobj.lib;lib3ds.lib;libfbxsdk-md.lib;wininet.lib;libxml2-md.lib;zlib-md.lib;libtga.lib;libtiff.lib;Algorithm.lib;Text.lib;tinyxml2.lib;Imm32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>freeglut.lib;glew32d.lib;opengl32.lib;zlib.lib;libpng16.lib;freetype263.lib;avutil.lib;avcodec.lib;avdevice.lib;avfilter.lib;avformat.lib;swscale.lib;swresample.lib;postproc.lib;libjpeg.lib;fmod_vc.lib;System.lib;Render.lib;UI.lib;Math.lib;libobj.lib;lib3ds.lib;libfbxsdk-md.lib;wininet.lib;libxml2-md.lib;zlib-md.lib;libtga.lib;libtiff.lib;Algorithm.lib;Text.lib;tinyxml2.lib;Imm32.lib;Tool.lib;Physics.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">

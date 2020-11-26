@@ -82,12 +82,12 @@ void Fog::setDensity(float val)
 	_density = val;
 }
 
-void render::Fog::setFogColor(const sys::Color4F& color)
+void render::Fog::setFogColor(const phy::Color4F& color)
 {
 	_fogColor = color;
 }
 
-const sys::Color4F& render::Fog::getFogColor() const
+const phy::Color4F& render::Fog::getFogColor() const
 {
 	return _fogColor;
 }

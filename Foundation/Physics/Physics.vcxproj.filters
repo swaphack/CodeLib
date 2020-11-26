@@ -8,4 +8,34 @@
       <UniqueIdentifier>{8486bce6-86a0-43a2-b8ba-47eabdedf613}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Light\Color.h">
+      <Filter>Light</Filter>
+    </ClInclude>
+    <ClInclude Include="physicslib.h" />
+    <ClInclude Include="Light\import.h">
+      <Filter>Light</Filter>
+    </ClInclude>
+    <ClInclude Include="Light\Color3.h">
+      <Filter>Light</Filter>
+    </ClInclude>
+    <ClInclude Include="Light\Color4.h">
+      <Filter>Light</Filter>
+    </ClInclude>
+    <ClInclude Include="Light\macros.h">
+      <Filter>Light</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Light\Color.cpp">
+      <Filter>Light</Filter>
+    </ClCompile>
+    <ClCompile Include="Light\Color3.cpp">
+      <Filter>Light</Filter>
+    </ClCompile>
+    <ClCompile Include="Light\Color4.cpp">
+      <Filter>Light</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp" />
+  </ItemGroup>
 </Project>

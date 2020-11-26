@@ -41,12 +41,12 @@ bool render::DrawNode2D::isRectVisible() const
 	return _bRectVisible;
 }
 
-void render::DrawNode2D::setRectColor(const sys::Color4B& color)
+void render::DrawNode2D::setRectColor(const phy::Color4B& color)
 {
 	_rectColor = color;
 }
 
-const sys::Color4B& render::DrawNode2D::getRectColor() const
+const phy::Color4B& render::DrawNode2D::getRectColor() const
 {
 	return _rectColor;
 }
@@ -117,7 +117,7 @@ void render::DrawNode2D::onDrawNode2DBodyChange()
 
 void render::DrawNode2D::onDrawNode2DColorChange()
 {
-	sys::Color4F color;
+	phy::Color4F color;
 	convertColor4BTo4F(getColor(), color);
 	_rectVertex.setLeftDownColor(color);
 	_rectVertex.setRightDownColor(color);

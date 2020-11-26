@@ -14,6 +14,9 @@
     <Filter Include="Classes\Panel">
       <UniqueIdentifier>{f2b41250-ad07-4e68-900b-ee9dd4b67af6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Classes\Config">
+      <UniqueIdentifier>{abb1c7f7-3b08-43c3-a3e2-0bb026852252}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Classes\main.cpp">
@@ -60,6 +63,12 @@
     </ClCompile>
     <ClCompile Include="Classes\Panel\ControlPanel.cpp">
       <Filter>Classes\Panel</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Config\ProjectConfig.cpp">
+      <Filter>Classes\Config</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Config\IDEConfig.cpp">
+      <Filter>Classes\Config</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -110,6 +119,15 @@
     </ClInclude>
     <ClInclude Include="Classes\Panel\ControlPanel.h">
       <Filter>Classes\Panel</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Config\Config.h">
+      <Filter>Classes\Config</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Config\ProjectConfig.h">
+      <Filter>Classes\Config</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Config\IDEConfig.h">
+      <Filter>Classes\Config</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

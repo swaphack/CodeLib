@@ -126,7 +126,7 @@ namespace render
 		static void setTexGenEyePlane(TextureCoordName name, const float* value);
 	public:
 		static void setTexEnvModel(TextureEnvMode value);
-		static void setTexEnvColor(const sys::Color4F& value);
+		static void setTexEnvColor(const phy::Color4F& value);
 	
 		static void setPrioritizeTextures(int size, const uint32_t* textures, const float* priorities);
 	public:

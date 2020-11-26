@@ -327,6 +327,6 @@ void render::MultiDrawNode::onDrawNodeColorChange()
 {
 	for (auto item : _materiales->getMaterials())
 	{
-		item.second->getMaterialDetail()->setEmissionByte(_color.red, _color.green, _color.blue, _color.alpha);
+		item.second->getMaterialDetail()->setEmissionByte(_color[0], _color[1], _color[2], _color[3]);
 	}
 }

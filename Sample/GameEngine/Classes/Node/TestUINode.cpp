@@ -38,7 +38,7 @@ void TestUINode::testEditBox()
 	pCtrlText->setFontPath("Resource/Font/font_3.ttf");
 	pCtrlText->setFontSize(58);
 	pCtrlText->setAnchorPoint(0.0f, 0.0f, 0.0f);
-	pCtrlText->setColor(sys::Color4B(125, 80, 255, 255));
+	pCtrlText->setColor(phy::Color4B(125, 80, 255, 255));
 
 	pEditLabel->setPosition(512, 384, 0);
 	pEditLabel->setAnchorPoint(0.0f, 0.0f, 0.0f);
@@ -183,7 +183,7 @@ void TestUINode::testMask()
 	pMask->setAnchorPoint(0, 0, 0);
 	pMask->setPosition(0, 0, 0.0f);
 	pMask->setVolume(1024, 768, 0);
-	pMask->setColor(Color4B(120, 120, 120, 125));
+	pMask->setColor(phy::Color4B(120, 120, 120, 125));
 	this->addChild(pMask);
 }
 
@@ -199,7 +199,7 @@ void TestUINode::testStencil()
 	pMask->setAnchorPoint(0, 0, 0);
 	pMask->setPosition(0, 0, 0.0f);
 	pMask->setVolume(400, 400, 0);
-	pMask->setColor(Color4B(255, 255, 255, 255));
+	pMask->setColor(phy::Color4B(255, 255, 255, 255));
 	pStencil->addChild(pMask);
 	//pStencil->setStencilNode(pMask);
 
@@ -278,7 +278,7 @@ void TestUINode::testButton()
 	pBtn->setPosition(512, 384);
 	pBtn->setVolume(200, 100);
 	pBtn->setString("dsfsdfsa");
-	pBtn->setTextColor(sys::Color3B(255,255,255));
+	pBtn->setTextColor(phy::Color3B(255,255,255));
 	pBtn->setFontPath("Resource/Font/font_3.ttf");
 
 	pBtn->setNormalImage("Resource/Image/sqi.png");

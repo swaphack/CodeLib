@@ -26,10 +26,10 @@ const math::Vector3& ParticleProtocol::getSpeedAccelertaion()const
 
 void ParticleProtocol::setColorAcceleration(float red, float green, float blue, float alpha)
 {
-	_colorAcceleration.red = red;
-	_colorAcceleration.green = green;
-	_colorAcceleration.blue = blue;
-	_colorAcceleration.alpha = alpha;
+	_colorAcceleration[0] = red;
+	_colorAcceleration[1] = green;
+	_colorAcceleration[2] = blue;
+	_colorAcceleration[3] = alpha;
 	onPariticleChange();
 }
 
@@ -55,7 +55,7 @@ const math::Vector3& ParticleProtocol::getScaleAcceleration() const
 	return _scaleAcceleration;
 }
 
-const sys::Color4F& ParticleProtocol::getColorAcceleration() const
+const phy::Color4F& ParticleProtocol::getColorAcceleration() const
 {
 	return _colorAcceleration;
 }

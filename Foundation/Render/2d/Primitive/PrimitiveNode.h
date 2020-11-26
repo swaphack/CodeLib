@@ -2,6 +2,7 @@
 
 #include "Common/DrawNode/DrawNode2D.h"
 #include "Graphic/GLAPI/macros.h"
+#include "physicslib.h"
 
 namespace render
 {
@@ -14,9 +15,9 @@ namespace render
 			// 顶点坐标
 			math::Vector3 point;
 			// 顶点颜色
-			sys::Color4B color;
+			phy::Color4B color;
 
-			PrimitiveVertex(const math::Vector3& point, const sys::Color4B& color)
+			PrimitiveVertex(const math::Vector3& point, const phy::Color4B& color)
 				:point(point), color(color)
 			{
 
@@ -44,7 +45,7 @@ namespace render
 		/**
 		*	添加一个点坐标
 		*/
-		void appendPoint(const math::Vector3& point, const sys::Color4B& color);
+		void appendPoint(const math::Vector3& point, const phy::Color4B& color);
 		/**
 		*	添加一些坐标
 		*/

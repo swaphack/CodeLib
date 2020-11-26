@@ -151,13 +151,13 @@ math::Size CtrlText::getDimensions() const
 	return math::Size(_textDefine.width, _textDefine.height);
 }
 
-void CtrlText::setTextColor(const sys::Color3B& color)
+void CtrlText::setTextColor(const phy::Color3B& color)
 {
 	_textDefine.color = color;
 	this->notify(NodeNotifyType::TEXT);
 }
 
-const sys::Color3B& render::CtrlText::getTextColor() const
+const phy::Color3B& render::CtrlText::getTextColor() const
 {
 	return _textDefine.color;
 }

@@ -1,5 +1,5 @@
 #include "DesignPanel.h"
-
+#include "PanelEvent.h"
 ue::DesignPanel::DesignPanel()
 {
 	this->setTouchEnable(true);
@@ -15,6 +15,13 @@ bool ue::DesignPanel::init()
 	{
 		return false;
 	}
+	G_PANELEVT->addEventListener(PANEL_SELECT_DESIGN_FILE, this, [this](const sys::Event* evt) {
+		if (evt)
+		{
+			std::string filpath = (char*)evt->getUserData();
+			this->setDesignFile(filpath);
+		}
+	});
 	return true;
 }
 
@@ -32,21 +39,32 @@ ui::LayoutItem* ue::DesignPanel::getSelectedTarget() const
 	return m_pSelectedTarget;
 }
 
+void ue::DesignPanel::setDesignFile(const std::string& filepath)
+{
+	if (m_pViewScene == nullptr)
+	{
+		return;
+	}
+
+	m_pViewScene->removeAllItems();
+	m_pViewScene->getWidget()->removeAllWidgets();
+
+	/*filepath = "Resource/Layout/main.xml";*/
+	m_pUIFile = createUIFile(filepath);
+	if (m_pUIFile)
+	{
+		m_pViewScene->addItemWithWidget(m_pUIFile);
+	}
+}
+
 void ue::DesignPanel::initUI()
 {
-	ui::Layout* childLayout = nullptr;
-	if (m_pLayout->findItemByName("viewScene", childLayout))
-	{
-		m_pUIFile = createUIFile("Resource/Layout/main.xml");
-		if (m_pUIFile)
-		{
-			childLayout->addItemWithWidget(m_pUIFile);
-		}
-	}
+	m_pLayout->findItemByName("viewScene", m_pViewScene);
 }
 
 void ue::DesignPanel::initEvent()
 {
+
 }
 
 void ue::DesignPanel::initText()

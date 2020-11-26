@@ -170,6 +170,10 @@ void render::CtrlWidget::removeFromParent()
 	{
 		this->getParent()->as<CtrlWidget>()->removeWidget(this);
 	}
+	else if (this->getParent()->is<Node>())
+	{
+		this->getParent()->as<Node>()->removeChild(this);
+	}
 }
 
 bool render::CtrlWidget::isTouchEnable()

@@ -21,7 +21,7 @@ ImageLoader::~ImageLoader()
 
 void ImageLoader::parseAttributes()
 {
-	sys::Color4B color;
+	phy::Color4B color;
 	std::string filepath;
 	bool bFlipX = false;
 	bool bFlipY = false;

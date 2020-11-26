@@ -5,9 +5,10 @@
 namespace ue
 {
 
-#define PANEL_SELECT_TARGET "selectTarget"
-#define PANEL_SELECT_FILE "selectFile"
-#define PANEL_SELECT_XML "selectXML"
+#define PANEL_SELECT_TARGET "PANEL_SELECT_TARGET"
+#define PANEL_SELECT_DESIGN_FILE "PANEL_SELECT_DESIGN_FILE"
+#define PANEL_SELECT_XML "PANEL_SELECT_XML"
+#define PANEL_SELECT_LAYOUT "PANEL_SELECT_LAYOUT"
 
 	// 面板
 	class Panel : public ui::CtrlFile
@@ -51,11 +52,15 @@ namespace ue
 		/**
 		*	派发布局项
 		*/
-		void dispatchFile(ui::CtrlFile* layout);
+		void dispatchLayoutFile(ui::CtrlFile* layout);
 		/**
 		*	派发配置文件
 		*/
 		void dispatchXml(tinyxml2::XMLElement* doc);
+		/**
+		*	派发涉及项
+		*/
+		void dispatchDesignFile(const std::string& filepath);
 	protected:
 		/**
 		*	创建控件

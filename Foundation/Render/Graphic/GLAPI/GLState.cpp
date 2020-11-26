@@ -72,9 +72,9 @@ void GLState::getPointer(GetPointerTarget target, void** value)
 	glGetPointerv((GLenum)target, value);
 }
 
-void GLState::setBlendColor(const sys::Color4F& color)
+void GLState::setBlendColor(const phy::Color4F& color)
 {
-	glBlendColor(color.red, color.green, color.blue, color.alpha);
+	glBlendColor(color[0], color[1], color[2], color[3]);
 }
 
 void GLState::setBlendEquation(BlendEquationMode mode)

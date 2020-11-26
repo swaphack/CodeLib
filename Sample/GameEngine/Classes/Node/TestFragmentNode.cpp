@@ -26,7 +26,7 @@ void TestFragmentNode::testStencil()
 
 	FragmentBlend* pBlend = pCube->getFragOperator()->getHandle<FragmentBlend>();
 	pBlend->setEnabled(true);
-	pBlend->setBlendColor(sys::Color4F(0.25f, 0.25f, 0, 1.0f));
+	pBlend->setBlendColor(phy::Color4B(0.25f, 0.25f, 0, 1.0f));
 	pBlend->setBlendFactor(BlendingFactorSrc::SRC_ALPHA, BlendingFactorDest::DST_COLOR);
 
 	this->addChild(pCube);

@@ -35,7 +35,7 @@ void TestDrawNode::testDrawNode()
 	PrimitiveNode* pDrawNode = CREATE_NODE(PrimitiveNode);
 	pDrawNode->setPointSize(10);
 	pDrawNode->setDrawMode(DrawMode::TRIANGLES);
-	pDrawNode->setColor(sys::Color4F(0, 1, 0));
+	pDrawNode->setColor(phy::Color3F(0, 1, 0));
 	for (int i = 0; i < COUNT; i++)
 	{
 		pDrawNode->appendPoint(math::Vector3(points[i]));

@@ -47,41 +47,41 @@ void GLVertex::setColor(float* rgba)
 	setColor(rgba[0], rgba[1], rgba[2], rgba[3]);
 }
 
-void GLVertex::setColor(const sys::Color3F& value, float opacity)
+void GLVertex::setColor(const phy::Color3F& value, float opacity)
 {
-	float r = value.red* opacity;
-	float g = value.green* opacity;
-	float b = value.blue* opacity;
+	float r = value[0] * opacity;
+	float g = value[1] * opacity;
+	float b = value[2] * opacity;
 	setColor(r, g, b);
 }
 
-void GLVertex::setColor(const sys::Color4F& value, float opacity)
+void GLVertex::setColor(const phy::Color4F& value, float opacity)
 {
-	float r = value.red* opacity;
-	float g = value.green* opacity;
-	float b = value.blue* opacity;
-	float a = value.alpha * opacity;
+	float r = value[0] * opacity;
+	float g = value[1] * opacity;
+	float b = value[2] * opacity;
+	float a = value[3] * opacity;
 
 	setColor(r, g, b, a);
 }
 
-void GLVertex::setColor(const sys::Color3B& value, uint8_t opacity)
+void GLVertex::setColor(const phy::Color3B& value, uint8_t opacity)
 {
 	float v = powf(COLOR_FLOAT_VALUE, 2);
-	float r = value.red * opacity / v;
-	float g = value.green * opacity / v;
-	float b = value.blue * opacity / v;
+	float r = value[0] * opacity / v;
+	float g = value[1] * opacity / v;
+	float b = value[2] * opacity / v;
 
 	setColor(r, g, b);
 }
 
-void GLVertex::setColor(const sys::Color4B& value, uint8_t opacity)
+void GLVertex::setColor(const phy::Color4B& value, uint8_t opacity)
 {
 	float v = powf(COLOR_FLOAT_VALUE, 2);
-	float r = value.red * opacity / v;
-	float g = value.green * opacity / v;
-	float b = value.blue * opacity / v;
-	float a = value.alpha * opacity / v;
+	float r = value[0] * opacity / v;
+	float g = value[1] * opacity / v;
+	float b = value[2] * opacity / v;
+	float a = value[3] * opacity / v;
 
 	setColor(r, g, b, a);
 }

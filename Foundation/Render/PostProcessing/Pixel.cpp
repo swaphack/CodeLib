@@ -27,12 +27,12 @@ void render::Pixel::loadRectPixel(float x, float y, float width, float height, R
 	render::GLRender::readPixels(x, y, width, height, pixelFormat, pixelType, ptr);
 }
 
-sys::Color4B render::Pixel::readPixelColor(float x, float y)
+phy::Color4B render::Pixel::readPixelColor(float x, float y)
 {
 	sys::MemoryData data;
 	data.resize(4);
 	loadRectPixel(x, y, 1, 1, ReadPixelDataFormat::RGBA, ReadPixelDataType::UNSIGNED_BYTE, data.getPtr());
-	return sys::Color4B(data.getValue(0), data.getValue(1), data.getValue(2), data.getValue(3));
+	return phy::Color4B(data.getValue(0), data.getValue(1), data.getValue(2), data.getValue(3));
 }
 
 void render::Pixel::dumpStencil()

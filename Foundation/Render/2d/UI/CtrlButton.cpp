@@ -67,14 +67,34 @@ float render::CtrlButton::getFontSize() const
 	return _btnText->getFontSize();
 }
 
-void render::CtrlButton::setTextColor(const sys::Color3B& color)
+void render::CtrlButton::setTextColor(const phy::Color3B& color)
 {
 	_btnText->setTextColor(color);
 }
 
-const sys::Color3B& render::CtrlButton::getTextColor() const
+const phy::Color3B& render::CtrlButton::getTextColor() const
 {
 	return _btnText->getTextColor();
+}
+
+void render::CtrlButton::setTextHorizontalAlignment(sys::HorizontalAlignment alignment)
+{
+	_btnText->setHorizontalAlignment(alignment);
+}
+
+sys::HorizontalAlignment render::CtrlButton::getTextHorizontalAlignment() const
+{
+	return _btnText->getHorizontalAlignment();
+}
+
+void render::CtrlButton::setTextVerticalAlignment(sys::VerticalAlignment alignment)
+{
+	_btnText->setVerticalAlignment(alignment);
+}
+
+sys::VerticalAlignment render::CtrlButton::getTextVerticalAlignment() const
+{
+	return _btnText->getVerticalAlignment();
 }
 
 render::CtrlText* render::CtrlButton::getTextControl() const

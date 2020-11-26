@@ -21,6 +21,10 @@ namespace ue
 		*	获取取消选中
 		*/
 		ui::LayoutItem* getSelectedTarget() const;
+		/**
+		*	设置涉及文件
+		*/
+		void setDesignFile(const std::string& filepath);
 	protected:
 		/**
 		*	初始化
@@ -59,5 +63,7 @@ namespace ue
 		bool m_bSelected = false;
 		// 选中对象
 		ui::LayoutItem* m_pSelectedTarget = nullptr;
+
+		ui::Layout* m_pViewScene = nullptr;
 	};
 }

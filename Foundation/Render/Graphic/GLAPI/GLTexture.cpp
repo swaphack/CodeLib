@@ -83,13 +83,9 @@ void GLTexture::setTexEnvModel(TextureEnvMode value)
 	glTexGeni((GLenum)TextureEnvTarget::TEXTURE_ENV, (GLenum)TextureEnvParameter::TEXTURE_ENV_MODE, (int)value);
 }
 
-void GLTexture::setTexEnvColor(const sys::Color4F& value)
+void GLTexture::setTexEnvColor(const phy::Color4F& value)
 {
-	float c[4] = { 0 };
-	c[0] = value.red;
-	c[1] = value.green;
-	c[2] = value.blue;
-	c[3] = value.alpha;
+	float c[4] = { value[0], value[1], value[2],value[3] };
 	glTexGenfv((GLenum)TextureEnvTarget::TEXTURE_ENV, (GLenum)TextureEnvParameter::TEXTURE_ENV_MODE, c);
 }
 

@@ -19,7 +19,7 @@ CtrlEditText::CtrlEditText()
 	_ctrlText->setAnchorPoint(0, 0);
 	this->addProtectedWidget(_ctrlText);
 
-	Texture2D* pTexture = G_TEXTURE_CACHE->createTexture2D(sys::Color4B(255, 255, 255, 255));
+	Texture2D* pTexture = G_TEXTURE_CACHE->createTexture2D(phy::Color4B(255, 255, 255, 255));
 	_ctrlCursor = CREATE_NODE(CtrlFrame);
 	_ctrlCursor->setTexture((Texture*)pTexture);
 	_ctrlCursor->setVisible(false);
@@ -124,22 +124,22 @@ float render::CtrlEditText::getFontSize()  const
 	return _ctrlText->getFontSize();
 }
 
-void render::CtrlEditText::setTextColor(const sys::Color3B& color)
+void render::CtrlEditText::setTextColor(const phy::Color3B& color)
 {
 	_ctrlText->setTextColor(color);
 }
 
-const sys::Color3B& render::CtrlEditText::getTextColor() const
+const phy::Color3B& render::CtrlEditText::getTextColor() const
 {
 	return _ctrlText->getTextColor();
 }
 
-void render::CtrlEditText::setPlaceholderTextColor(const sys::Color3B& color)
+void render::CtrlEditText::setPlaceholderTextColor(const phy::Color3B& color)
 {
 	_ctrlTextPlaceholder->setTextColor(color);
 }
 
-const sys::Color3B& render::CtrlEditText::getPlaceholderTextColor() const
+const phy::Color3B& render::CtrlEditText::getPlaceholderTextColor() const
 {
 	return _ctrlTextPlaceholder->getTextColor();
 }

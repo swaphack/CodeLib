@@ -23,8 +23,8 @@ void ui::EditTextLoader::parseAttributes()
 	std::string text;
 	std::string tips;
 
-	sys::Color3B color;
-	sys::Color3B tipsColor;
+	phy::Color3B color;
+	phy::Color3B tipsColor;
 	std::string fontpath;
 	float fontSize = 0;
 	bool multiLine = false;

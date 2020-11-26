@@ -29,7 +29,7 @@ void TestTextNode::testTimeText()
 	pCtrlText->setString("hafkdfjkldafd");
 	pCtrlText->setPosition(522, 600, 0);
 	pCtrlText->setVerticalAlignment(VerticalAlignment::MIDDLE);
-	pCtrlText->setTextColor(sys::Color3B(255, 255, 255));
+	pCtrlText->setTextColor(phy::Color3B(255, 255, 255));
 	this->addChild(pCtrlText);
 
 
@@ -65,6 +65,6 @@ void TestTextNode::testChineseText()
 	pCtrlText->setString("中华 fdsaf545放大发人民共和国");
 	pCtrlText->setPosition(512, 384, 0);
 	pCtrlText->setDimensions(300, 0);
-	pCtrlText->setTextColor(sys::Color3B(125, 0, 0));
+	pCtrlText->setTextColor(phy::Color3B(125, 0, 0));
 	this->addChild(pCtrlText);
 }

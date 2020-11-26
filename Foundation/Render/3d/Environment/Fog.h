@@ -30,8 +30,8 @@ namespace render
 		float getDensity() const;
 		void setDensity(float val);
 
-		void setFogColor(const sys::Color4F& color);
-		const sys::Color4F& getFogColor() const;
+		void setFogColor(const phy::Color4F& color);
+		const phy::Color4F& getFogColor() const;
 	protected:
 		// Ω¸æ‡¿Î
 		float _near;
@@ -44,6 +44,6 @@ namespace render
 		// √‹∂»
 		float _density;
 
-		sys::Color4F _fogColor;
+		phy::Color4F _fogColor;
 	};
 }

@@ -51,7 +51,7 @@ void render::Texture2D::setTextureImage(int level, TextureInternalSizedFormat in
 	GLTexture::setTexImage2D((TextureTarget2D)getTextureTarget(), level, internalFormat, width, height, border, format, type, data);
 }
 
-void render::Texture2D::load(const sys::Color4B& color)
+void render::Texture2D::load(const phy::Color4B& color)
 {
 	TextureSetting setting;
 	setting.wrapS = TextureWrapMode::REPEAT;
@@ -75,7 +75,7 @@ void render::Texture2D::load(const sys::Color4B& color)
 
 	GLState::setPixelStore(PixelStore::UNPACK_ALIGNMENT, 4);
 
-	uint8_t data[4] = {color.red, color.green, color.blue, color.alpha};
+	uint8_t data[4] = { color[0], color[1], color[2], color[3] };
 
 	this->setTextureImage(0, internalFormat,
 		getWidth(), getHeight(), 0, format,

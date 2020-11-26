@@ -28,11 +28,11 @@ namespace render
 		/**
 		*	设置矩形框颜色
 		*/
-		void setRectColor(const sys::Color4B& color);
+		void setRectColor(const phy::Color4B& color);
 		/**
 		*	矩形框颜色
 		*/
-		const sys::Color4B& getRectColor() const;
+		const phy::Color4B& getRectColor() const;
 	public:
 		/**
 		*	是否显示网格
@@ -82,7 +82,7 @@ namespace render
 		// 是否显示矩形框
 		bool _bRectVisible = false;
 		// 矩形框颜色
-		sys::Color4B _rectColor;
+		phy::Color4B _rectColor;
 		// 是否显示网格
 		bool _bMeshVisible = false;
 		// 矩形框

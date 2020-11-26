@@ -11,14 +11,14 @@ render::FragmentBlendBase::~FragmentBlendBase()
 
 }
 
-void render::FragmentBlendBase::setBlendColor(const sys::Color4F& color)
+void render::FragmentBlendBase::setBlendColor(const phy::Color4F& color)
 {
 	_blendColor = color;
 }
 
-void render::FragmentBlendBase::setBlendColor(const sys::Color4B& color)
+void render::FragmentBlendBase::setBlendColor(const phy::Color4B& color)
 {
-	sys::convertColor4BTo4F(color, _blendColor);
+	phy::convertColor4BTo4F(color, _blendColor);
 }
 
 void render::FragmentBlendBase::update()

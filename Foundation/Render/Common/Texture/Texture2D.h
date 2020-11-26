@@ -42,7 +42,7 @@ namespace render
 		/**
 		*	加载颜色纹理
 		*/
-		void load(const sys::Color4B& color);
+		void load(const phy::Color4B& color);
 		/**
 		*	加载图片纹理
 		*/

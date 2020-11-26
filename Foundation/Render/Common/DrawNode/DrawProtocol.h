@@ -24,20 +24,20 @@ namespace render
 		// 设置颜色
 		void setColor(float r, float g, float b, float a);
 		// 设置颜色
-		void setColor(const sys::Color4B& color);
+		void setColor(const phy::Color4B& color);
 		// 设置颜色
-		void setColor(const sys::Color3B& color);
+		void setColor(const phy::Color3B& color);
 		// 设置颜色
-		void setColor(const sys::Color4F& color);
+		void setColor(const phy::Color4F& color);
 		// 设置颜色
-		void setColor(const sys::Color3F& color);
+		void setColor(const phy::Color3F& color);
 		// 获取颜色
-		const sys::Color4B& getColor() const;
+		const phy::Color4B& getColor() const;
 	protected:
 		virtual void onColorChange() {};
 	protected:
 		// 混合
-		sys::Color4B _color;
+		phy::Color4B _color;
 	};
 
 	// 不透明度设置
@@ -81,13 +81,13 @@ namespace render
 		// 设置混合条件
 		void setBlend(const BlendParam& blend);
 		// 设置颜色
-		void setBlendColor(const sys::Color3B& color);
+		void setBlendColor(const phy::Color3B& color);
 		// 设置颜色
-		void setBlendColor(const sys::Color3F& color);
+		void setBlendColor(const phy::Color3F& color);
 		// 设置颜色
-		void setBlendColor(const sys::Color4B& color);
+		void setBlendColor(const phy::Color4B& color);
 		// 设置颜色
-		void setBlendColor(const sys::Color4F& color);
+		void setBlendColor(const phy::Color4F& color);
 		// 获取混合参数
 		const BlendParam& getBlend();
 	protected:
@@ -96,6 +96,6 @@ namespace render
 		// 混合参数
 		BlendParam _blendParam;
 		// 混合颜色
-		sys::Color4F _blendColor;
+		phy::Color4F _blendColor;
 	};
 }

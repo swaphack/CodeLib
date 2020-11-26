@@ -192,7 +192,7 @@ void TestImageNode::testPixelImage()
 	pCtrlText->setFontSize(58);
 	pCtrlText->setString("点击后移动鼠标，改变颜色");
 	pCtrlText->setPosition(100, 100, 0);
-	pCtrlText->setColor(sys::Color4B(255, 255, 255, 255));
+	pCtrlText->setColor(phy::Color4B(255, 255, 255, 255));
 	this->addChild(pCtrlText);
 
 	//pImage->setUserData(pCtrlText);
@@ -252,7 +252,7 @@ void TestImageNode::onTouchImage(Node* node, float x, float y, bool include)
 		return;
 	}
 
-	sys::Color4B color = Pixel::readPixelColor(x, y);
-	pText->setString(getCString("##%02x%02x%02x%02x", color.red, color.green, color.blue, color.alpha));
+	phy::Color4B color = Pixel::readPixelColor(x, y);
+	pText->setString(getCString("##%02x%02x%02x%02x", color[0], color[1], color[2], color[3]));
 	pText->setColor(color);
 }

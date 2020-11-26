@@ -85,9 +85,6 @@
     <Filter Include="Resource\Media">
       <UniqueIdentifier>{a8292f7b-ad1e-4f1b-841f-15fe4d6da00e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Light">
-      <UniqueIdentifier>{1b35fbbc-d200-4c3b-8c65-1ec1c48bc916}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Event">
       <UniqueIdentifier>{0d517976-7d2f-4286-b3d0-73b67baaea08}</UniqueIdentifier>
     </Filter>
@@ -535,12 +532,6 @@
     <ClInclude Include="Resource\Model\ModelDetailObj.h">
       <Filter>Resource\Model</Filter>
     </ClInclude>
-    <ClInclude Include="Light\ColorSample.h">
-      <Filter>Light</Filter>
-    </ClInclude>
-    <ClInclude Include="Light\import.h">
-      <Filter>Light</Filter>
-    </ClInclude>
     <ClInclude Include="Resource\Loader.h">
       <Filter>Resource</Filter>
     </ClInclude>
@@ -866,9 +857,6 @@
     </ClCompile>
     <ClCompile Include="Resource\Image\ImageDefine.cpp">
       <Filter>Resource\Image</Filter>
-    </ClCompile>
-    <ClCompile Include="Light\ColorSample.cpp">
-      <Filter>Light</Filter>
     </ClCompile>
     <ClCompile Include="Resource\Image\ImageTIFF.cpp">
       <Filter>Resource\Image</Filter>

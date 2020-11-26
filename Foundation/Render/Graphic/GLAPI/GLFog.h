@@ -15,6 +15,6 @@ namespace render
 		static void setFogStart(float value);
 		static void setFogEnd(float value);
 		static void setFogIndex(float value);
-		static void setFogColor(const sys::Color4F& color);
+		static void setFogColor(const phy::Color4F& color);
 	};
 }

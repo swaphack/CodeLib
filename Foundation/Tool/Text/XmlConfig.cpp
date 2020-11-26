@@ -1,26 +1,26 @@
 #include "XmlConfig.h"
 #include "system.h"
 #include <vector>
-using namespace text;
+using namespace tool;
 
-XmlConfig::XmlConfig()
+XmlHelper::XmlHelper()
 {
 	m_pDocument = new tinyxml2::XMLDocument();
 }
 
-XmlConfig::~XmlConfig()
+XmlHelper::~XmlHelper()
 {
 	delete m_pDocument;
 }
 
-bool XmlConfig::loadFile(const char* filepath)
+bool XmlHelper::loadFile(const std::string& filepath)
 {
-	if (filepath == nullptr)
+	if (filepath.empty())
 	{
 		return false;
 	}
 
-	tinyxml2::XMLError error = m_pDocument->LoadFile(filepath);
+	tinyxml2::XMLError error = m_pDocument->LoadFile(filepath.c_str());
 	if (error != tinyxml2::XML_SUCCESS)
 	{
 		return false;
@@ -29,9 +29,9 @@ bool XmlConfig::loadFile(const char* filepath)
 	return true;
 }
 
-tinyxml2::XMLElement* XmlConfig::getElement(const char* nodePath)
+tinyxml2::XMLElement* XmlHelper::getElement(const std::string& nodePath)
 {
-	if (nodePath == nullptr)
+	if (nodePath.empty())
 	{
 		return nullptr;
 	}
@@ -69,9 +69,9 @@ tinyxml2::XMLElement* XmlConfig::getElement(const char* nodePath)
 	return nullptr;
 }
 
-const char* XmlConfig::getValue(const char* nodepath, const char* attributeName)
+std::string XmlHelper::getAttribute(const std::string& nodepath, const std::string& name)
 {
-	if (nodepath == nullptr || attributeName == nullptr)
+	if (nodepath.empty() || name.empty())
 	{
 		return "";
 	}
@@ -82,7 +82,7 @@ const char* XmlConfig::getValue(const char* nodepath, const char* attributeName)
 		return "";
 	}
 
-	const char* result = element->Attribute(attributeName);
+	const char* result = element->Attribute(name.c_str());
 	if (result)
 	{
 		return result;

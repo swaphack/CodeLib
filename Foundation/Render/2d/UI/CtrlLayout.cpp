@@ -16,7 +16,7 @@ render::CtrlLayout::CtrlLayout()
 	_backgroundMask = CREATE_NODE(CtrlMask);
 	_backgroundMask->setName("layout_bg_mask");
 	_backgroundMask->setAnchorPoint(0, 0);
-	_backgroundMask->setColor(sys::Color4B(125, 125, 125, 125));
+	_backgroundMask->setColor(phy::Color4B(125, 125, 125, 125));
 	_backgroundMask->setVisible(false);
 	this->addProtectedWidget(_backgroundMask);
 }
@@ -47,12 +47,12 @@ bool render::CtrlLayout::init()
 	return true;
 }
 
-void render::CtrlLayout::setBackgroundColor(const sys::Color4B& color)
+void render::CtrlLayout::setBackgroundColor(const phy::Color4B& color)
 {
 	_backgroundMask->setColor(color);
 }
 
-const sys::Color4B& render::CtrlLayout::getBackgroundColor() const
+const phy::Color4B& render::CtrlLayout::getBackgroundColor() const
 {
 	return _backgroundMask->getColor();
 }

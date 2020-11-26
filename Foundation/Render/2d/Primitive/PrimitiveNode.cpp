@@ -3,6 +3,7 @@
 #include "Common/Tool/Tool.h"
 #include "Common/Mesh/import.h"
 #include "Common/Material/import.h"
+#include "physicslib.h"
 using namespace render;
 
 
@@ -57,7 +58,7 @@ DrawMode PrimitiveNode::getDrawMode()
 
 void PrimitiveNode::appendPoint(const math::Vector3& point)
 {
-	this->appendPoint(point, sys::Color4B(255, 255, 255, 255));
+	this->appendPoint(point, phy::Color4B(255, 255, 255, 255));
 }
 
 void PrimitiveNode::removeAllPoints()
@@ -66,7 +67,7 @@ void PrimitiveNode::removeAllPoints()
 	notify(NodeNotifyType::GEOMETRY);
 }
 
-void render::PrimitiveNode::appendPoint(const math::Vector3& point, const sys::Color4B& color)
+void render::PrimitiveNode::appendPoint(const math::Vector3& point, const phy::Color4B& color)
 {
 	this->appendPoint(PrimitiveVertex(point, color));
 }

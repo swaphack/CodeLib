@@ -1,5 +1,6 @@
 #include "CoordinateSystem.h"
 #include "Common/Tool/Tool.h"
+#include "physicslib.h"
 
 render::CoordinateSystem::CoordinateSystem()
 {
@@ -32,13 +33,13 @@ void render::CoordinateSystem::onCoordianteSystemBodyChange()
 	Tool::calCube(getPosition(), getVolume(), getAnchorPoint(), cube);
 
 	this->removeAllPoints();
-	this->appendPoint(cube.back.leftDown, sys::Color4B(255, 255, 255));
-	this->appendPoint(cube.back.rightDown, sys::Color4B(255, 255, 255));
+	this->appendPoint(cube.back.leftDown, phy::Color4B(255, 255, 255));
+	this->appendPoint(cube.back.rightDown, phy::Color4B(255, 255, 255));
 
-	this->appendPoint(cube.back.leftDown, sys::Color4B(255, 255, 255));
-	this->appendPoint(cube.back.leftUp, sys::Color4B(255, 255, 255));
+	this->appendPoint(cube.back.leftDown, phy::Color4B(255, 255, 255));
+	this->appendPoint(cube.back.leftUp, phy::Color4B(255, 255, 255));
 
-	this->appendPoint(cube.back.leftDown, sys::Color4B(255, 255, 255));
-	this->appendPoint(cube.front.rightDown, sys::Color4B(255, 255, 255));
+	this->appendPoint(cube.back.leftDown, phy::Color4B(255, 255, 255));
+	this->appendPoint(cube.front.rightDown, phy::Color4B(255, 255, 255));
 }
 

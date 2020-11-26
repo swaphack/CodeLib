@@ -44,7 +44,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <BrowseInformation>true</BrowseInformation>
-      <AdditionalIncludeDirectories>../Math/;../../Lib/include/fbx;../../Lib/include/freetype;../../Lib/include/;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../Math/;../Physics/;../../Lib/include/fbx;../../Lib/include/freetype;../../Lib/include/;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -143,8 +143,6 @@
     <ClInclude Include="IO\Directory.h" />
     <ClInclude Include="IO\File.h" />
     <ClInclude Include="IO\import.h" />
-    <ClInclude Include="Light\ColorSample.h" />
-    <ClInclude Include="Light\import.h" />
     <ClInclude Include="Memory\import.h" />
     <ClInclude Include="Memory\MemoryData.h" />
     <ClInclude Include="Memory\MemoryPointer.h" />
@@ -280,7 +278,6 @@
     <ClCompile Include="Http\HttpTime.cpp" />
     <ClCompile Include="IO\Directory.cpp" />
     <ClCompile Include="IO\File.cpp" />
-    <ClCompile Include="Light\ColorSample.cpp" />
     <ClCompile Include="Memory\MemoryData.cpp" />
     <ClCompile Include="Memory\MemoryPointer.cpp" />
     <ClCompile Include="Memory\Memory.cpp" />

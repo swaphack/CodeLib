@@ -28,7 +28,7 @@ WidgetLoader::~WidgetLoader()
 void WidgetLoader::parseAttributes()
 {
 	std::string name;
-	sys::Color4B color;
+	phy::Color4B color;
 	bool visible = false;
 	math::Vector3 anchor;
 	math::Vector3 scale;

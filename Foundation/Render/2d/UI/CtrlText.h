@@ -99,11 +99,11 @@ namespace render
 		/**
 		*	设置颜色
 		*/  
-		void setTextColor(const sys::Color3B& color);
+		void setTextColor(const phy::Color3B& color);
 		/**
 		*	颜色
 		*/ 
-		const sys::Color3B& getTextColor() const;
+		const phy::Color3B& getTextColor() const;
 	protected:
 		/**
 		*	起始坐标

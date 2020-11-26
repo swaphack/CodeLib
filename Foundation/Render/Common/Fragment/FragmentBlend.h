@@ -11,12 +11,12 @@ namespace render
 		FragmentBlendBase();
 		virtual ~FragmentBlendBase();
 	public:
-		void setBlendColor(const sys::Color4F& color);
-		void setBlendColor(const sys::Color4B& color);
+		void setBlendColor(const phy::Color4F& color);
+		void setBlendColor(const phy::Color4B& color);
 	public:
 		virtual void update();
 	protected:
-		sys::Color4F _blendColor = sys::Color4F(1,1,1,1);
+		phy::Color4F _blendColor = phy::Color4F(1,1,1,1);
 	};
 	/**
 	*	»ìºÏ

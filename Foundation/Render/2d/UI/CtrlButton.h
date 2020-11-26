@@ -3,6 +3,7 @@
 #include "CtrlWidget.h"
 #include "Common/Input/TouchDelegate.h"
 #include "TextProtocol.h"
+#include "physicslib.h"
 
 namespace render
 {
@@ -43,11 +44,27 @@ namespace render
 		/**
 		*	设置颜色
 		*/
-		void setTextColor(const sys::Color3B& color);
+		void setTextColor(const phy::Color3B& color);
 		/**
 		*	颜色
 		*/
-		const sys::Color3B& getTextColor() const;
+		const phy::Color3B& getTextColor() const;
+		/**
+		*	设置文本水平对齐方式
+		*/
+		void setTextHorizontalAlignment(sys::HorizontalAlignment alignment);
+		/**
+		*	获取文本水平对齐方式
+		*/
+		sys::HorizontalAlignment getTextHorizontalAlignment() const;
+		/**
+		*	设置文本垂直对齐方式
+		*/
+		void setTextVerticalAlignment(sys::VerticalAlignment alignment);
+		/**
+		*	获取文本垂直对齐方式
+		*/
+		sys::VerticalAlignment getTextVerticalAlignment() const;
 		/**
 		*	获取文本控件
 		*/

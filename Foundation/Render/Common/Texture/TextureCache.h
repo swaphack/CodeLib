@@ -4,6 +4,8 @@
 #include <map>
 #include <string>
 
+#include "physicslib.h"
+
 namespace sys
 {
 	struct ImageDefine;
@@ -35,7 +37,7 @@ namespace render
 		Texture2D* getTexture2D(const std::string& path);
 	public:
 		// 创建一个2d纹理
-		Texture2D* createTexture2D(const sys::Color4B& color);
+		Texture2D* createTexture2D(const phy::Color4B& color);
 		// 创建一个2d纹理
 		Texture2D* createTexture2D(const sys::ImageDefine& imageDefine);
 		// 创建一个2d纹理

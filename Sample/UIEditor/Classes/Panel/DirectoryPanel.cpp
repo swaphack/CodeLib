@@ -153,7 +153,7 @@ ui::LayoutItem* ue::DirectoryPanel::createDirItem(int top, int height, const std
 		pWidget->setNormalImage("Default/Image/dir_bg.png");
 		pWidget->setSelectedImage("Default/Image/dir_bg_2.png");
 		pWidget->setAnchorPoint(0.5f, 0.5f);
-		pWidget->setTextColor(sys::Color3B(255, 255, 255));
+		pWidget->setTextColor(phy::Color3B(255, 255, 255));
 		pWidget->setFontSize(24);
 		pWidget->setFontPath("Default/Font/font_3.ttf");
 		pWidget->setString(name);
@@ -188,7 +188,7 @@ ui::LayoutItem* ue::DirectoryPanel::createFileItem(int top, int height, const st
 		pWidget->setNormalImage("Default/Image/file_bg.png");
 		pWidget->setSelectedImage("Default/Image/file_bg_2.png");
 		pWidget->setAnchorPoint(0.5f, 0.5f);
-		pWidget->setTextColor(sys::Color3B(0, 0, 0));
+		pWidget->setTextColor(phy::Color3B(0, 0, 0));
 		pWidget->setFontSize(24);
 		pWidget->setFontPath("Default/Font/font_3.ttf");
 		pWidget->setString(name);

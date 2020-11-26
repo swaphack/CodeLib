@@ -171,7 +171,7 @@ namespace math
 		{
 			return _values;
 		}
-	private:
+	protected:
 		/**
 		*	µ¥ÔªÖµ
 		*/

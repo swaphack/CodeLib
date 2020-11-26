@@ -280,5 +280,5 @@ void render::DrawNode::onColorChange()
 
 void render::DrawNode::onDrawNodeColorChange()
 {
-	_material->getMaterialDetail()->setEmissionByte(_color.red, _color.green, _color.blue, _color.alpha);
+	_material->getMaterialDetail()->setEmissionByte(_color[0], _color[1], _color[2], _color[3]);
 }

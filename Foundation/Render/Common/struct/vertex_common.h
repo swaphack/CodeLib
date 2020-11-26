@@ -16,7 +16,7 @@ namespace render
 		// 顶点纹理坐标
 		math::Vector3 coords;
 		// 顶点颜色
-		sys::Color4B color;
+		phy::Color4B color;
 		// 法线
 		math::Vector3 normal;
 
@@ -37,10 +37,10 @@ namespace render
 		void setRightUpPoint(const math::Vector3& point);
 		void setLeftUpPoint(const math::Vector3& point);
 
-		void setLeftDownColor(const sys::Color4F& color);
-		void setRightDownColor(const sys::Color4F& color);
-		void setRightUpColor(const sys::Color4F& color);
-		void setLeftUpColor(const sys::Color4F& color);
+		void setLeftDownColor(const phy::Color4F& color);
+		void setRightDownColor(const phy::Color4F& color);
+		void setRightUpColor(const phy::Color4F& color);
+		void setLeftUpColor(const phy::Color4F& color);
 
 		void setLeftDownUV(const math::Vector2& point);
 		void setRightDownUV(const math::Vector2& point);

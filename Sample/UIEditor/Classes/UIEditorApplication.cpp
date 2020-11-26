@@ -16,6 +16,7 @@ ue::UIEditorApplication::UIEditorApplication()
 	ui::UIProxy::getInstance()->registerElementParser(PANEL_NAME_DESIGN, new ui::TFileLoader<DesignPanel>());
 	ui::UIProxy::getInstance()->registerElementParser(PANEL_NAME_PROPERTY, new ui::TFileLoader<PropertyPanel>());
 	
+
 }
 
 ue::UIEditorApplication::~UIEditorApplication()
