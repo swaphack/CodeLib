@@ -9,6 +9,9 @@ using namespace ui;
 #define LAYOUT_SIZE_HEIGHT	"height"
 #define LAYOUT_DIRECTION	"direction"
 
+
+std::string UIProxy::_defaultFontPath = "";
+
 void UIProxy::init()
 {
 
@@ -174,6 +177,16 @@ const math::Size& UIProxy::getDesignSize() const
 LayoutDirection UIProxy::getDesignDirection() const
 {
 	return _designDirection;
+}
+
+const std::string& ui::UIProxy::getFontPath()
+{
+	return _defaultFontPath;
+}
+
+void ui::UIProxy::setFontPath(const std::string& fontPath)
+{
+	_defaultFontPath = fontPath;
 }
 
 IElement* UIProxy::getElement(const std::string& name)

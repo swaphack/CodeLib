@@ -137,7 +137,8 @@ void WidgetProperty::setAttribute(const std::string& name, const math::Vector3& 
 	{
 		return;
 	}
-	std::string str = getCString("%f,%f,%f", value.getX(), value.getY(), value.getZ());
+	std::string str;
+	sys::VectorConvert::convertToText(value, str);
 	setAttribute(name, str);
 }
 
@@ -147,7 +148,8 @@ void WidgetProperty::setAttribute(const std::string& name, const math::Vector2& 
 	{
 		return;
 	}
-	std::string str = getCString("%f,%f", value.getX(), value.getY());
+	std::string str;
+	sys::VectorConvert::convertToText(value, str);
 	setAttribute(name, str);
 }
 
@@ -157,7 +159,8 @@ void WidgetProperty::setAttribute(const std::string& name, const phy::Color4B& v
 	{
 		return;
 	}
-	std::string str = getCString("%d,%d,%d,%d", value[0], value[1], value[2], value[3]);
+	std::string str;
+	sys::ColorConvert::convertToText(value, str);
 	setAttribute(name, str);
 }
 
@@ -394,71 +397,40 @@ bool WidgetProperty::getAttribute(const std::string& name, uint64_t& defaultValu
 
 bool WidgetProperty::getAttribute(const std::string& name, math::Vector3& defaultValue)
 {
-	const std::string& value = getAttribute(name);
-	if (value.empty())
+	const std::string& text = getAttribute(name);
+	if (text.empty())
 	{
 		return false;
 	}
 
-	sys::String val = value;
-	std::vector<sys::String> params;
-
-	val.split(",", params);
-
-	if (params.size() != 3)
+	if (text.empty())
 	{
 		return false;
 	}
 
-	defaultValue = math::Vector3(atof(params[0].getString()), atof(params[1].getString()), atof(params[2].getString()));
-
-	return true;
+	return sys::VectorConvert::convertToVector(text, defaultValue);
 }
 
 bool WidgetProperty::getAttribute(const std::string& name, math::Vector2& defaultValue)
 {
-	const std::string& value = getAttribute(name);
-	if (value.empty())
+	const std::string& text = getAttribute(name);
+	if (text.empty())
 	{
 		return false;
 	}
 
-	sys::String val = value;
-	std::vector<sys::String> params;
-	
-	val.split(",", params);
-
-	if (params.size() != 2)
-	{
-		return false;
-	}
-
-	defaultValue = math::Vector2(atof(params[0].getString()), atof(params[1].getString()));
-
-	return true;
+	return sys::VectorConvert::convertToVector(text, defaultValue);
 }
 
 bool WidgetProperty::getAttribute(const std::string& name, phy::Color4B& defaultValue)
 {
-	const std::string& value = getAttribute(name);
-	if (value.empty())
+	const std::string& text = getAttribute(name);
+	if (text.empty())
 	{
 		return false;
 	}
 
-	sys::String val = value;
-	std::vector<sys::String> params;
-
-	val.split(",", params);
-
-	if (params.size() != 4)
-	{
-		return false;
-	}
-
-	defaultValue = phy::Color4B(atof(params[0].getString()), atof(params[1].getString()), atof(params[2].getString()), atof(params[3].getString()));
-
-	return true;
+	return sys::ColorConvert::convertToColor(text, defaultValue);
 }
 
 bool WidgetProperty::getAttribute(const std::string& name, math::Size& defaultValue)
@@ -672,25 +644,13 @@ std::string WidgetProperty::getAttribute(const std::string& name)
 
 bool ui::WidgetProperty::getAttribute(const std::string& name, phy::Color3B& defaultValue)
 {
-	const std::string& value = getAttribute(name);
-	if (value.empty())
+	const std::string& text = getAttribute(name);
+	if (text.empty())
 	{
 		return false;
 	}
 
-	sys::String val = value;
-	std::vector<sys::String> params;
-
-	val.split(",", params);
-
-	if (params.size() != 3)
-	{
-		return false;
-	}
-
-	defaultValue = phy::Color3B(atof(params[0].getString()), atof(params[1].getString()), atof(params[2].getString()));
-
-	return true;
+	return sys::ColorConvert::convertToColor(text, defaultValue);
 }
 
 void ui::WidgetProperty::setAttribute(const std::string& name, const phy::Color3B& value)
@@ -699,6 +659,7 @@ void ui::WidgetProperty::setAttribute(const std::string& name, const phy::Color3
 	{
 		return;
 	}
-	std::string str = getCString("%d,%d,%d", value[0], value[1], value[2]);
+	std::string str;
+	sys::ColorConvert::convertToText(value, str);
 	setAttribute(name, str);
 }

@@ -2,6 +2,7 @@
 
 #include "system.h"
 #include "toollib.h"
+#include "Config.h"
 #include <string>
 
 namespace ue
@@ -9,13 +10,17 @@ namespace ue
 	/// <summary>
 	/// ide 配置
 	/// </summary>
-	class IDEConfig
+	class IDEConfig : public Config
 	{
 	public:
+		struct IDESetting
+		{
+			std::string Design;
+		};
 		/// <summary>
 		/// 文本配置
 		/// </summary>
-		struct Text
+		struct TextSetting
 		{
 		public:
 			/// <summary>
@@ -35,21 +40,32 @@ namespace ue
 		/// <summary>
 		/// 文本配置
 		/// </summary>
-		const Text& getText() const;
+		const TextSetting& getText() const;
+		/// <summary>
+		/// ide配置文件
+		/// </summary>
+		/// <returns></returns>
+		const IDESetting& getIDE() const;
 	public:
 		/// <summary>
 		/// 加载配置
 		/// </summary>
 		/// <param name="filepath"></param>
 		void loadXml(const std::string& filepath);
+
+		virtual void Dispose();
 	private:
-		/// <summary>
-		/// 文本配置
-		/// </summary>
-		Text _text;
 		/// <summary>
 		/// xml工具
 		/// </summary>
 		tool::XmlHelper _helper;
+		/// <summary>
+		/// 文本 配置
+		/// </summary>
+		TextSetting _text;
+		/// <summary>
+		/// ide 配置
+		/// </summary>
+		IDESetting _ide;
 	};
 }

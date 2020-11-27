@@ -214,11 +214,13 @@
     <ClInclude Include="system.h" />
     <ClInclude Include="Text\BitConvert.h" />
     <ClInclude Include="Text\CharsetHelper.h" />
+    <ClInclude Include="Text\ColorConvert.h" />
     <ClInclude Include="Text\Encoding.h" />
     <ClInclude Include="Text\Hash.h" />
     <ClInclude Include="Text\import.h" />
     <ClInclude Include="Text\TextParser.h" />
     <ClInclude Include="Text\IBlockParser.h" />
+    <ClInclude Include="Text\VectorConvert.h" />
     <ClInclude Include="Thread\Asynchronous.h" />
     <ClInclude Include="Thread\import.h" />
     <ClInclude Include="Thread\Mutex.h" />
@@ -323,10 +325,12 @@
     <ClCompile Include="Stream\StringStream.cpp" />
     <ClCompile Include="Text\BitConvert.cpp" />
     <ClCompile Include="Text\CharsetHelper.cpp" />
+    <ClCompile Include="Text\ColorConvert.cpp" />
     <ClCompile Include="Text\Encoding.cpp" />
     <ClCompile Include="Text\Hash.cpp" />
     <ClCompile Include="Text\TextParser.cpp" />
     <ClCompile Include="Text\IBlockParser.cpp" />
+    <ClCompile Include="Text\VectorConvert.cpp" />
     <ClCompile Include="Thread\Mutex.cpp" />
     <ClCompile Include="Thread\Thread.cpp" />
     <ClCompile Include="Thread\Threading.cpp" />

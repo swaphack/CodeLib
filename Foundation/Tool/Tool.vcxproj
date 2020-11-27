@@ -70,12 +70,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Text\import.h" />
-    <ClInclude Include="Text\XmlConfig.h" />
+    <ClInclude Include="Document\import.h" />
+    <ClInclude Include="Document\XmlConfig.h" />
     <ClInclude Include="toollib.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Text\XmlConfig.cpp" />
+    <ClCompile Include="Document\XmlConfig.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

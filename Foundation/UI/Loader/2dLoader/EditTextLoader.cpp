@@ -1,4 +1,5 @@
 #include "EditTextLoader.h"
+#include "Display/UIProxy.h"
 
 #define PROPERTY_TEXT "text"
 #define PROPERTY_PLACEHOLDER "placeholder"
@@ -39,6 +40,8 @@ void ui::EditTextLoader::parseAttributes()
 	LOAD_WIDGET_ATTRIBUTE(PROPERTY_FONTSIZE, setFontSize, fontSize);
 
 	LOAD_WIDGET_ATTRIBUTE(PROPERTY_MULTILINE, setMultiLine, multiLine);
+
+	if (fontpath.empty()) getCastWidget()->setFontPath(UIProxy::getFontPath());
 
 	WidgetLoader::parseAttributes();
 }

@@ -2,6 +2,8 @@
 
 #include "macros.h"
 
+#include "PanelEvent.h"
+
 #include "ViewLayout.h"
 #include "MenuBar.h"
 #include "ControlPanel.h"

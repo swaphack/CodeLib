@@ -25,7 +25,7 @@ namespace render
 		/**
 		*	设置字库路径
 		*/ 
-		void setFontPath(const std::string& fonturl);
+		void setFontPath(const std::string& filepath);
 		/**
 		*	获取字库路径
 		*/ 

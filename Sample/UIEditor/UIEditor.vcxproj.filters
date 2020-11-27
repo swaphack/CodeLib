@@ -70,6 +70,9 @@
     <ClCompile Include="Classes\Config\IDEConfig.cpp">
       <Filter>Classes\Config</Filter>
     </ClCompile>
+    <ClCompile Include="Classes\Config\import.h">
+      <Filter>Classes\Config</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Classes\UIEditorApplication.h">

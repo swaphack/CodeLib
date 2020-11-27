@@ -1,4 +1,5 @@
 #include "ButtonLoader.h"
+#include "Display/UIProxy.h"
 
 #define PROPERTY_TEXT		"text"
 #define PROPERTY_FONTPATH	"fontPath"
@@ -43,6 +44,8 @@ void ui::ButtonLoader::parseAttributes()
 	LOAD_WIDGET_ATTRIBUTE(PROPERTY_NORMAL_IMAGE, setNormalImage, normalImage);
 	LOAD_WIDGET_ATTRIBUTE(PROPERTY_SELECTED_IMAGE, setSelectedImage, selectedImage);
 	LOAD_WIDGET_ATTRIBUTE(PROPERTY_DISABLED_IMAGE, setDisabledImage, disabledImage);
+
+	if (fontpath.empty()) getCastWidget()->setFontPath(UIProxy::getFontPath());
 
 	WidgetLoader::parseAttributes();
 }

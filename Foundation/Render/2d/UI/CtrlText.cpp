@@ -41,9 +41,9 @@ bool CtrlText::init()
 	return true;
 }
 
-void CtrlText::setFontPath(const std::string& fonturl)
+void CtrlText::setFontPath(const std::string& filepath)
 {
-	_textDefine.filepath = fonturl;
+	_textDefine.filepath = filepath;
 
 	this->notify(NodeNotifyType::TEXT);
 }

@@ -1,4 +1,5 @@
 #include "TextLoader.h"
+#include "Display/UIProxy.h"
 
 using namespace ui;
 
@@ -45,6 +46,8 @@ void TextLoader::parseAttributes()
 	LOAD_WIDGET_CAST_ATTRIBUTE(PROPERTY_HORIZONTAL, setHorizontalAlignment, horizontal, sys::HorizontalAlignment);
 	LOAD_WIDGET_CAST_ATTRIBUTE(PROPERTY_VERTICAL, setVerticalAlignment, vertical, sys::VerticalAlignment);
 	LOAD_WIDGET_ATTRIBUTE(PROPERTY_DIMENSIONS, setDimensions, size);
+
+	if (fontpath.empty()) getCastWidget()->setFontPath(UIProxy::getFontPath());
 
 	WidgetLoader::parseAttributes();
 }

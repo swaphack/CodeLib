@@ -45,6 +45,15 @@ namespace ui
 		*	获取布局方向
 		*/
 		LayoutDirection getDesignDirection() const;
+	public:
+		/**
+		*	默认字体
+		*/
+		static const std::string& getFontPath();
+		/**
+		*	设置默认字体
+		*/
+		static void setFontPath(const std::string& fontPath);
 	protected:
 		/**
 		*	初始化
@@ -75,6 +84,8 @@ namespace ui
 		math::Size _designSize;
 		// 布局方向
 		LayoutDirection _designDirection;
+		// 默认字体
+		static std::string _defaultFontPath;
 	}; 
 
 	#define G_UIPROXY UIProxy::getInstance()

@@ -1,22 +1,25 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
+    <Filter Include="Document">
+      <UniqueIdentifier>{0a76329e-5489-486b-8b00-78f0d89c9306}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Text">
-      <UniqueIdentifier>{50b9b152-34d9-4de8-ac78-65d96d613a54}</UniqueIdentifier>
+      <UniqueIdentifier>{12d8f20b-89bd-4dbe-8896-ddd27cc6e4a5}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Text\import.h">
-      <Filter>Text</Filter>
-    </ClInclude>
-    <ClInclude Include="Text\XmlConfig.h">
-      <Filter>Text</Filter>
-    </ClInclude>
     <ClInclude Include="toollib.h" />
+    <ClInclude Include="Document\import.h">
+      <Filter>Document</Filter>
+    </ClInclude>
+    <ClInclude Include="Document\XmlConfig.h">
+      <Filter>Document</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Text\XmlConfig.cpp">
-      <Filter>Text</Filter>
+    <ClCompile Include="Document\XmlConfig.cpp">
+      <Filter>Document</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

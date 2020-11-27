@@ -2,6 +2,8 @@
 
 #include "render.h"
 
+#include "Config/import.h"
+
 namespace ue
 {
 	// ui±à¼­Æ÷
@@ -12,7 +14,9 @@ namespace ue
 		virtual ~UIEditorApplication();
 	public:
 		virtual void show();
-	protected:
+	private:
+		IDEConfig _ideConfig;
+		ProjectConfig _projectConfig;
 	};
 }
 

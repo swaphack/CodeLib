@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<root>
+	<IDE>
+		<Design>Default/Layout/main_view.xml</Design>
+	</IDE>
+	<Text>
+		<FontPath>Default/Font/font_3.ttf</FontPath>
+		<FontSize>24</FontSize>
+		<TextColor>255,255,255</TextColor>
+	</Text>
+</root>

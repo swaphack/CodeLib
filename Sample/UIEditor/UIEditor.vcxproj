@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Classes\Config\IDEConfig.cpp" />
+    <ClCompile Include="Classes\Config\import.h" />
     <ClCompile Include="Classes\Config\ProjectConfig.cpp" />
     <ClCompile Include="Classes\Panel\DesignPanel.cpp" />
     <ClCompile Include="Classes\Panel\DirectoryPanel.cpp" />

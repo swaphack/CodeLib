@@ -574,6 +574,12 @@
     <ClInclude Include="Resource\Font\LabelImage.h">
       <Filter>Resource\Font</Filter>
     </ClInclude>
+    <ClInclude Include="Text\ColorConvert.h">
+      <Filter>Text</Filter>
+    </ClInclude>
+    <ClInclude Include="Text\VectorConvert.h">
+      <Filter>Text</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Framework\Application.cpp">
@@ -884,6 +890,12 @@
     </ClCompile>
     <ClCompile Include="Resource\Font\LabelImage.cpp">
       <Filter>Resource\Font</Filter>
+    </ClCompile>
+    <ClCompile Include="Text\ColorConvert.cpp">
+      <Filter>Text</Filter>
+    </ClCompile>
+    <ClCompile Include="Text\VectorConvert.cpp">
+      <Filter>Text</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
