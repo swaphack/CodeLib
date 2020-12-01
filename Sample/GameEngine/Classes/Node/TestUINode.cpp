@@ -228,15 +228,15 @@ void TestUINode::testImage()
 	pImage->getTouchProxy()->setSwallowTouch(false);
 	pImage->getTouchProxy()->addTouchFunc(TouchType::DOWN, [](Node* node, float x, float y, bool include) 
 	{
-		node->as<CtrlImage>()->setRectVisible(true);
+		node->as<CtrlImage>()->setBoxVisible(true);
 	});
 	pImage->getTouchProxy()->addTouchFunc(TouchType::ON, [](Node* node, float x, float y, bool include)
 	{
-		node->as<CtrlImage>()->setRectVisible(true);
+		node->as<CtrlImage>()->setBoxVisible(true);
 	});
 	pImage->getTouchProxy()->addTouchFunc(TouchType::UP, [](Node* node, float x, float y, bool include)
 	{
-		node->as<CtrlImage>()->setRectVisible(false);
+		node->as<CtrlImage>()->setBoxVisible(false);
 	});
 	Utility::loadDefaultShader(pImage);
 	this->addChild(pImage);

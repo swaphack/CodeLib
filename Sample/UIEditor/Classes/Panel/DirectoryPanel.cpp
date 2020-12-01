@@ -98,7 +98,9 @@ void ue::DirectoryPanel::updateRootList(ui::Layout* layout, const DirDetail& det
 
 	bool isFolded = isDirFolded(detail.fullpath);
 
-	auto pItem = createRootItem(_top, CONST_ITEM_HEIGHT, true, std::string(layer + 1, ' ') + detail.name, detail.fullpath);
+	std::string fullpath = std::string(layer + 1, ' ') + detail.name;
+
+	auto pItem = createRootItem(_top, CONST_ITEM_HEIGHT, true, fullpath, detail.fullpath);
 	if (pItem)
 	{
 		pItem->getCastWidget<render::CtrlButton>()->setSelect(isFolded);

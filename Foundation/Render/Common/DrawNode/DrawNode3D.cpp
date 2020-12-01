@@ -6,6 +6,7 @@
 #include "Common/DrawNode/import.h"
 #include "Common/Tool/Tool.h"
 #include "Graphic/import.h"
+#include "Common/View/Camera.h"
 
 render::DrawNode3D::DrawNode3D()
 {
@@ -38,40 +39,10 @@ bool render::DrawNode3D::init()
 	return true;
 }
 
-void render::DrawNode3D::setBoxVisible(bool bVisible)
-{
-	_bBoxVisible = bVisible;
-}
-
-bool render::DrawNode3D::isBoxVisible() const
-{
-	return _bBoxVisible;
-}
-
-#include "Common/View/Camera.h"
-
 bool render::DrawNode3D::containTouchPoint(float x, float y)
 {
-	/*
-	math::Matrix4x4 projMat = Camera::getMainCamera()->getProjectMatrix();
-	math::Matrix4x4 viewMat = Camera::getMainCamera()->getViewMatrix();
-	math::Matrix4x4 modelMat = getWorldMatrix();
+	math::Vector3 point(x, y);
 
-	math::Matrix4x4 mvpMat = projMat * viewMat * modelMat;
-
-	render::CubePoints boxVertex;
-	boxVertex.setFrontLeftDownPosition(math::Matrix4x4::transpose(_realBoxVertex.front.leftDown, mvpMat));
-	boxVertex.setFrontRightDownPosition(math::Matrix4x4::transpose(_realBoxVertex.front.rightDown, mvpMat));
-	boxVertex.setFrontRightUpPosition(math::Matrix4x4::transpose(_realBoxVertex.front.rightUp, mvpMat));
-	boxVertex.setFrontLeftUpPosition(math::Matrix4x4::transpose(_realBoxVertex.front.leftUp, mvpMat));
-
-	boxVertex.setBackLeftDownPosition(math::Matrix4x4::transpose(_realBoxVertex.back.leftDown, mvpMat));
-	boxVertex.setBackRightDownPosition(math::Matrix4x4::transpose(_realBoxVertex.back.rightDown, mvpMat));
-	boxVertex.setBackRightUpPosition(math::Matrix4x4::transpose(_realBoxVertex.back.rightUp, mvpMat));
-	boxVertex.setBackLeftUpPosition(math::Matrix4x4::transpose(_realBoxVertex.back.leftUp, mvpMat));
-
-	return boxVertex.containPointByPolygon(x, y);
-	*/
 
 	return _realBoxVertex.containPointByPolygon(x, y);
 }
@@ -107,8 +78,8 @@ void render::DrawNode3D::drawBox()
 	{
 		return;
 	}
-	GLVertex::setColor(1.0f, 0.0f, 0.0f, 1.0f);
-	GLState::setLineWidth(5);
+	GLVertex::setColor(_boxColor);
+	GLState::setLineWidth(_boxWidth);
 
 	GLVertex::beginMode(ShapeMode::LINE_LOOP);
 	GLVertex::setVertex(_boxVertex.front.leftDown);

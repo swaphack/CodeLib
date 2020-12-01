@@ -27,7 +27,23 @@ void ui::LayoutItemBase::setBoxVisible(bool bVisible)
 {
 	if (m_pWidget)
 	{
-		m_pWidget->setRectVisible(bVisible);
+		m_pWidget->setBoxVisible(bVisible);
+	}
+}
+
+void ui::LayoutItemBase::setBoxLineWidth(float width)
+{
+	if (m_pWidget)
+	{
+		m_pWidget->setBoxWidth(width);
+	}
+}
+
+void ui::LayoutItemBase::setBoxLineColor(const phy::Color4B& color)
+{
+	if (m_pWidget)
+	{
+		m_pWidget->setBoxColor(color);
 	}
 }
 

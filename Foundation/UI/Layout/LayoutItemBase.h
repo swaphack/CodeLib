@@ -36,6 +36,14 @@ namespace ui
 		*/
 		void setBoxVisible(bool bVisible);
 		/**
+		*	设置盒子线宽
+		*/
+		void setBoxLineWidth(float width);
+		/**
+		*	设置盒子线颜色
+		*/
+		void setBoxLineColor(const phy::Color4B& color);
+		/**
 		*	是否包含点
 		*/
 		bool containPoint(float x, float y);

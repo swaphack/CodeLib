@@ -31,26 +31,6 @@ bool render::DrawNode2D::init()
 	return true;
 }
 
-void render::DrawNode2D::setRectVisible(bool bVisible)
-{
-	_bRectVisible = bVisible;
-}
-
-bool render::DrawNode2D::isRectVisible() const
-{
-	return _bRectVisible;
-}
-
-void render::DrawNode2D::setRectColor(const phy::Color4B& color)
-{
-	_rectColor = color;
-}
-
-const phy::Color4B& render::DrawNode2D::getRectColor() const
-{
-	return _rectColor;
-}
-
 void render::DrawNode2D::setMeshVisible(bool bVisible)
 {
 	_bMeshVisible = bVisible;
@@ -129,12 +109,12 @@ void render::DrawNode2D::onDrawNode2DColorChange()
 
 void render::DrawNode2D::drawRect()
 {
-	if (!isRectVisible())
+	if (!isBoxVisible())
 	{
 		return;
 	}
-	GLVertex::setColor(_rectColor);
-	GLState::setLineWidth(5);
+	GLVertex::setColor(_boxColor);
+	GLState::setLineWidth(_boxWidth);
 
 	GLVertex::beginMode(ShapeMode::LINE_LOOP);
 	GLVertex::setVertex(_rectPoints.leftDown);

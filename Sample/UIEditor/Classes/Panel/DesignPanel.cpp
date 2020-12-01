@@ -132,6 +132,8 @@ bool ue::DesignPanel::touchFrontWidget(ui::LayoutItem* layoutItem, float x, floa
 		if (m_pSelectedTarget == nullptr)
 		{
 			m_pSelectedTarget = layoutItem;
+			layoutItem->setBoxLineWidth(1.0f);
+			layoutItem->setBoxLineColor(phy::Color4B(255, 255, 255, 255));
 			layoutItem->setBoxVisible(true);
 		}
 		else

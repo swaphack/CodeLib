@@ -609,6 +609,9 @@
     <ClCompile Include="2d\UI\CtrlEditText.cpp">
       <Filter>2d\UI</Filter>
     </ClCompile>
+    <ClCompile Include="Common\DrawNode\DrawBoxProtocol.cpp">
+      <Filter>Common\DrawNode</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Common\Node\import.h">
@@ -1394,6 +1397,9 @@
     </ClInclude>
     <ClInclude Include="2d\UI\CtrlEditText.h">
       <Filter>2d\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\DrawNode\DrawBoxProtocol.h">
+      <Filter>Common\DrawNode</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
