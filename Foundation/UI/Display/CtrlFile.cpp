@@ -62,6 +62,16 @@ const std::string& CtrlFile::getFilePath()
 	return m_strFilePath;
 }
 
+void ui::CtrlFile::save()
+{
+	this->saveTo(m_strFilePath);
+}
+
+void ui::CtrlFile::saveTo(const std::string& filepath)
+{
+	UIProxy::getInstance()->saveFile(m_pLayout, filepath, m_sViewSize);
+}
+
 LayoutDirection CtrlFile::getLayoutDirection()
 {
 	return m_eLayoutDirection;
@@ -122,7 +132,6 @@ bool CtrlFile::loadFile()
 	{
 		this->addWidget(m_pLayout->getWidget());
 	}
-	
 
 	return true;
 }

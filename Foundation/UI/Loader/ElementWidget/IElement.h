@@ -29,6 +29,14 @@ namespace ui
 		LayoutItem* getLayoutItem();
 		// 获取控件
 		render::CtrlWidget* getWidget();
+		/**
+		*	默认字体
+		*/
+		const std::string& getFontPath();
+		/**
+		*	设置默认字体
+		*/
+		void setFontPath(const std::string& fontPath);
 	protected:
 		// 属性
 		WidgetProperty* getNodeProperty();
@@ -46,5 +54,7 @@ namespace ui
 	protected:
 		render::CtrlWidget* _node = nullptr;
 		LayoutItem* _layoutItem = nullptr;
+		// 默认字体
+		std::string _defaultFontPath;
 	};
 }

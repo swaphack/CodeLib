@@ -7,10 +7,9 @@ using namespace ui;
 #define LAYOUT_ROOT_NAME	"root"
 #define LAYOUT_SIZE_WIDTH	"width"
 #define LAYOUT_SIZE_HEIGHT	"height"
-#define LAYOUT_DIRECTION	"direction"
+#define LAYOUT_DIRECTION	"layout"
+#define LAYOUT_FONT_PATH	"fontPath"
 
-
-std::string UIProxy::_defaultFontPath = "";
 
 void UIProxy::init()
 {
@@ -27,30 +26,14 @@ void UIProxy::init()
 }
 
 // 获取控件名称
-std::string getWidgetName(LayoutItem* item)
+std::string getLayoutItemName(LayoutItem* item)
 {
 	if (item == nullptr)
 	{
 		return "";
 	}
 
-	return item->getName();
-}
-
-// 获取布局名称
-std::string getLayoutName(Layout* layout)
-{
-	if (layout == nullptr)
-	{
-		return "";
-	}
-
-// 	if (layout->is<HorizontalLayout>())
-// 		return ELEMENT_NAME_HLAYOUT;
-// 	else if (layout->is<VerticalLayout>())
-// 		return ELEMENT_NAME_VLAYOUT;
-// 	else
-		return ELEMENT_NAME_LAYOUT;
+	return item->getWdigetName();
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -218,6 +201,7 @@ LayoutItem* UIProxy::initLayoutItem(tinyxml2::XMLElement* xmlNode)
 		return nullptr;
 	}
 
+	element->setFontPath(_defaultFontPath);
 	if (!element->load(xmlNode))
 	{
 		return nullptr;
@@ -270,6 +254,10 @@ Layout* UIProxy::loadRoot(tinyxml2::XMLElement* xmlNode)
 	height = _designSize.getHeight();
 
 	_designDirection = (LayoutDirection)xmlNode->IntAttribute(LAYOUT_DIRECTION);
+	if (xmlNode->Attribute(LAYOUT_FONT_PATH))
+	{
+		_defaultFontPath = xmlNode->Attribute(LAYOUT_FONT_PATH);
+	}
 
 	tinyxml2::XMLElement* firstChild = xmlNode->FirstChildElement();
 	if (firstChild == nullptr)
@@ -301,7 +289,7 @@ bool UIProxy::saveLayoutItem(LayoutItem* item, tinyxml2::XMLElement* xmlNode)
 		return false;
 	}
 
-	const std::string& name = getWidgetName(item);
+	const std::string& name = getLayoutItemName(item);
 	if (name.empty())
 	{
 		return false;
@@ -312,14 +300,16 @@ bool UIProxy::saveLayoutItem(LayoutItem* item, tinyxml2::XMLElement* xmlNode)
 	{
 		return false;
 	}
+
+	pElement->setLayoutItem(item);
+	pElement->setWidget(item->getWidget());
+	pElement->save(xmlNode);
+
 	LayoutLoader* pLoader = pElement->as<LayoutLoader>();
 	if (pLoader == nullptr)
 	{
-		return false;
+		return true;
 	}
-	pLoader->setLayoutItem(item);
-	pLoader->setWidget(item->getWidget());
-	pLoader->save(xmlNode);
 
 	Layout* layout = item->as<Layout>();
 	if (layout == nullptr)
@@ -332,7 +322,7 @@ bool UIProxy::saveLayoutItem(LayoutItem* item, tinyxml2::XMLElement* xmlNode)
 	{
 		tinyxml2::XMLElement* pChildNode = nullptr;
 
-		std::string wName = getWidgetName(*iter);
+		std::string wName = getLayoutItemName(*iter);
 		if (wName.empty())
 		{
 			continue;
@@ -358,6 +348,7 @@ bool UIProxy::saveRoot(Layout* layout, tinyxml2::XMLDocument* document)
 	pRootNode->SetAttribute(LAYOUT_SIZE_WIDTH, _designSize.getWidth());
 	pRootNode->SetAttribute(LAYOUT_SIZE_HEIGHT, _designSize.getHeight());
 	pRootNode->SetAttribute(LAYOUT_DIRECTION, (int)_designDirection);
+	pRootNode->SetAttribute(LAYOUT_FONT_PATH, _defaultFontPath.c_str());
 	document->InsertEndChild(pRootNode);
 
 	tinyxml2::XMLElement* pChildNode = document->NewElement(ELEMENT_NAME_LAYOUT);

@@ -31,7 +31,11 @@ namespace render
 		// 上档
 		void setShiftEnable(bool enable);
 		// 上档
-		bool isEnableShift() const;
+		bool isShiftEnabled() const;
+		// 控制
+		void setControlEnable(bool enable);
+		// 控制
+		bool isControlEnabled() const;
 	private:
 		// 键盘转字符
 		std::map<sys::BoardKey, char> _keyChars;
@@ -39,7 +43,9 @@ namespace render
 		std::map<sys::BoardKey, bool> _controlkeys;
 		// 上档
 		bool _enableShift = false;
+		// 控制
+		bool _enableControl = false;
 	};
 
-#define G_KEYCHAR sys::Instance<KeyChar>::getInstance()
+#define G_KEYCHAR sys::Instance<render::KeyChar>::getInstance()
 }

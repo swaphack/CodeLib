@@ -32,6 +32,15 @@ namespace ui
 		*/
 		const std::string& getFilePath();
 		/**
+		*	保存
+		*/
+		void save();
+		/**
+		*	保存为指定目录文件
+		*/
+		void saveTo(const std::string& filepath);
+	public:
+		/**
 		*	窗口界面大小
 		*/
 		const math::Size& getViewSize();
@@ -43,6 +52,7 @@ namespace ui
 		*	获取布局
 		*/
 		Layout* getLayout();
+
 	public:
 		/**
 		*	是否是根视图

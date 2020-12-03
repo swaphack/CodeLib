@@ -17,7 +17,7 @@ bool ue::PropertyPanel::init()
 		return false;
 	}
 
-	G_PANELEVT->addEventListener(PANEL_SELECT_TARGET, this, [this](const sys::Event* evt) {
+	G_PANELEVT->addEventListener(PANEL_SELECT_LAYTOUT_ITEM, this, [this](const sys::Event* evt) {
 		if (evt)
 		{
 			m_pTargetItem = (ui::LayoutItem*)evt->getUserData();

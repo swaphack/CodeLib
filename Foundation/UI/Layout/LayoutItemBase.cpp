@@ -9,6 +9,16 @@ ui::LayoutItemBase::~LayoutItemBase()
 
 }
 
+void ui::LayoutItemBase::setWidgetName(const std::string& name)
+{
+	m_strWidgetName = name;
+}
+
+const std::string& ui::LayoutItemBase::getWdigetName() const
+{
+	return m_strWidgetName;
+}
+
 void ui::LayoutItemBase::setWidget(render::CtrlWidget* widget)
 {
 	if (widget == nullptr)

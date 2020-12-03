@@ -99,7 +99,7 @@ char render::KeyChar::getChar(sys::BoardKey key)
 
 char render::KeyChar::getNumberChar(sys::BoardKey key)
 {
-	if (isEnableShift())
+	if (isShiftEnabled())
 	{
 		switch (key)
 		{
@@ -174,7 +174,7 @@ char render::KeyChar::getPadNumberChar(sys::BoardKey key)
 char render::KeyChar::getLetterChar(sys::BoardKey key)
 {
 	bool big = _controlkeys[sys::BoardKey::KCAPITAL];
-	if (isEnableShift()) big = !big;
+	if (isShiftEnabled()) big = !big;
 
 	if (big)
 	{
@@ -247,7 +247,7 @@ char render::KeyChar::getLetterChar(sys::BoardKey key)
 
 char render::KeyChar::getShiftChar(sys::BoardKey key)
 {
-	if (isEnableShift())
+	if (isShiftEnabled())
 	{
 		switch (key)
 		{
@@ -318,7 +318,17 @@ void render::KeyChar::setShiftEnable(bool enable)
 	_enableShift = enable;
 }
 
-bool render::KeyChar::isEnableShift() const
+bool render::KeyChar::isShiftEnabled() const
 {
 	return _enableShift;
+}
+
+void render::KeyChar::setControlEnable(bool enable)
+{
+	_enableControl = enable;
+}
+
+bool render::KeyChar::isControlEnabled() const
+{
+	return _enableControl;
 }

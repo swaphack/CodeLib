@@ -54,7 +54,6 @@ void WidgetLoader::parseAttributes()
 
 void WidgetLoader::saveAttributes()
 {
-	SAVE_LAYOUTITEM_NAME();
 	SAVE_LAYOUTITEM_ATTRIBUTE(PROPERTY_NAME, getName);
 	SAVE_LAYOUTITEM_ATTRIBUTE(PROPERTY_MARGIN, getMargin);
 	SAVE_LAYOUTITEM_ATTRIBUTE(PROPERTY_SIZE, getSize);

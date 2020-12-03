@@ -33,13 +33,11 @@ void ue::UIEditorApplication::show()
 	DimensionsType eType = DimensionsType::TWO;
 	Camera::getMainCamera()->setDimensions(eType);
 
-	ui::UIProxy::setFontPath(_ideConfig.getText().FontPath);
-
 	MainWindow* pWindow = CREATE_NODE(MainWindow);
 	pWindow->setUIFile(_ideConfig.getIDE().Design);
 	getCanvas()->pushScene(pWindow);
 
 	std::string filepath = _projectConfig.getRecent().getFile(0);
-	G_PANELEVT->dispatchEvent(PANEL_SELECT_DESIGN_FILE, (void*)filepath.c_str());
+	G_PANELEVT->setDesignFile(filepath);
 }
 

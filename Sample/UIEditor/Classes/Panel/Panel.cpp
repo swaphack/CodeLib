@@ -7,6 +7,7 @@ ue::Panel::Panel()
 
 ue::Panel::~Panel()
 {
+	G_KEYBOARDMANAGER->removeTargetAllEvents(this);
 	G_PANELEVT->removeEventListener(this);
 }
 
@@ -45,26 +46,6 @@ bool ue::Panel::onTouchMoved(float x, float y, bool include)
 bool ue::Panel::onTouchEnded(float x, float y, bool include)
 {
 	return false;
-}
-
-void ue::Panel::dispatchItem(ui::LayoutItem* item)
-{
-	G_PANELEVT->dispatchEvent(PANEL_SELECT_TARGET, item);
-}
-
-void ue::Panel::dispatchLayoutFile(ui::CtrlFile* layout)
-{
-	G_PANELEVT->dispatchEvent(PANEL_SELECT_LAYOUT, layout);
-}
-
-void ue::Panel::dispatchXml(tinyxml2::XMLElement* doc)
-{
-	G_PANELEVT->dispatchEvent(PANEL_SELECT_XML, doc);
-}
-
-void ue::Panel::dispatchDesignFile(const std::string& filepath)
-{
-	G_PANELEVT->dispatchEvent(PANEL_SELECT_DESIGN_FILE, (void*)filepath.c_str());
 }
 
 ui::LayoutItem* ue::Panel::createIteam()

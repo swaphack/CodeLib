@@ -45,7 +45,10 @@ void ui::ButtonLoader::parseAttributes()
 	LOAD_WIDGET_ATTRIBUTE(PROPERTY_SELECTED_IMAGE, setSelectedImage, selectedImage);
 	LOAD_WIDGET_ATTRIBUTE(PROPERTY_DISABLED_IMAGE, setDisabledImage, disabledImage);
 
-	if (fontpath.empty()) getCastWidget()->setFontPath(UIProxy::getFontPath());
+	if (fontpath.empty())
+	{
+		getCastWidget()->setFontPath(getFontPath());
+	}
 
 	WidgetLoader::parseAttributes();
 }

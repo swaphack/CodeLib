@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <root width="1024" height="768" layout="1" fontPath="Resource/Font/font_3.ttf">
     <Layout anchorPoint="0.000000,0.000000,0.000000" imagePath="1" margin="0.00,0.00,0.00,0.00" marginState="0,0,0,0" maskColor="0,0,0,255" name="UIMain" rotation="0.000000,0.000000,0.000000" scale="1.000000,1.000000,1.000000" showImage="0" showMask="1" size="100.00%,100.00%">
-        <Text anchorPoint="0.000000,0.000000,0.500000" fontPath="Resource/Font/font_3.ttf" fontSize="24.000000" horizontal="1" margin="5.00,5.00,5.00,5.00" marginState="1,1,0,0" name="text" rotation="0.000000,0.000000,0.000000" scale="1.000000,1.000000,1.000000" size="100.00,50.00" text="Name" textColor="255,255,255" vertical="1"/>
+        <Image anchorPoint="0.000000,0.000000,0.500000" blend="1,771" color="255,255,255,255" flipX="0" flipY="0" margin="5.00,5.00,5.00,5.00" marginState="1,1,1,1" name="image" path="Resource/Image/button.png" rotation="0.000000,0.000000,0.000000" scale="1.000000,1.000000,1.000000" size="100.00,50.00"/>
     </Layout>
 </root>

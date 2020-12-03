@@ -18,8 +18,34 @@ bool ue::DesignPanel::init()
 	G_PANELEVT->addEventListener(PANEL_SELECT_DESIGN_FILE, this, [this](const sys::Event* evt) {
 		if (evt)
 		{
-			std::string filpath = (char*)evt->getUserData();
-			this->setDesignFile(filpath);
+			std::string filepath = (char*)evt->getUserData();
+			if (filepath.empty()) return;
+
+			int index = filepath.find_last_of(".xml");
+			if (index == filepath.size() - 1)
+			{
+				this->setDesignFile(filepath);
+			}
+		}
+	});
+	G_PANELEVT->addEventListener(PANEL_SAVE_FILE, this, [this](const sys::Event* evt) {
+		if (evt)
+		{
+			saveFile();
+		}
+	});
+
+
+	G_KEYBOARDMANAGER->addKeyboardFunc(this, this, [this](Node* object, sys::BoardKey key, sys::ButtonStatus status) {
+		if (!G_KEYCHAR->isControlEnabled())
+		{
+			return;
+		}
+
+		if (status == sys::ButtonStatus::BUTTON_DOWN)
+		{
+			if (key == sys::BoardKey::KS) saveFile();
+			else if (key == sys::BoardKey::KR) reloadFile();
 		}
 	});
 	return true;
@@ -46,6 +72,11 @@ void ue::DesignPanel::setDesignFile(const std::string& filepath)
 		return;
 	}
 
+	m_pSelectedTarget = nullptr;
+	G_PANELEVT->setSelectNode(m_pSelectedTarget);
+
+	m_strFileName = filepath;
+
 	m_pViewScene->removeAllItems();
 	m_pViewScene->getWidget()->removeAllWidgets();
 
@@ -54,6 +85,7 @@ void ue::DesignPanel::setDesignFile(const std::string& filepath)
 	if (m_pUIFile)
 	{
 		m_pViewScene->addItemWithWidget(m_pUIFile);
+		m_pViewScene->autoResize();
 	}
 }
 
@@ -73,6 +105,10 @@ void ue::DesignPanel::initText()
 
 bool ue::DesignPanel::onTouchBegan(float x, float y, bool include)
 {
+	if (m_pUIFile == nullptr)
+	{
+		return true;
+	}
 	render::CtrlWidget* pFileWiget = m_pUIFile->getWidget();
 	if (pFileWiget)
 	{
@@ -83,7 +119,7 @@ bool ue::DesignPanel::onTouchBegan(float x, float y, bool include)
 		}
 	}
 
-	this->dispatchItem(m_pSelectedTarget);
+	G_PANELEVT->setSelectNode(m_pSelectedTarget);
 
 	return true;
 }
@@ -153,5 +189,19 @@ bool ue::DesignPanel::touchFrontWidget(ui::LayoutItem* layoutItem, float x, floa
 	}
 
 	return true;
+}
+
+void ue::DesignPanel::saveFile()
+{
+	auto pFile = m_pUIFile->getCastWidget<ui::CtrlFile>();
+	if (pFile)
+	{
+		pFile->save();
+	}
+}
+
+void ue::DesignPanel::reloadFile()
+{
+	this->setDesignFile(m_strFileName);
 }
 

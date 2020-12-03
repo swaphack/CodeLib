@@ -12,6 +12,14 @@ namespace ui
 		virtual ~LayoutItemBase();
 	public:
 		/**
+		*	设置控件名称
+		*/
+		void setWidgetName(const std::string& name);
+		/**
+		*	获取控件名称
+		*/
+		const std::string& getWdigetName() const;
+		/**
 		*	设置元件
 		*/
 		void setWidget(render::CtrlWidget* widget);
@@ -71,5 +79,7 @@ namespace ui
 
 		// 父节点大小
 		math::Size m_sParentSize;
+		// 控件名称
+		std::string m_strWidgetName;
 	};
 }

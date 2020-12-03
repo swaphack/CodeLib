@@ -37,7 +37,7 @@ void TextLoader::parseAttributes()
 	math::Size size;
 
 	LOAD_WIDGET_ATTRIBUTE(PROPERTY_TEXTCOLOR, setTextColor, color);
-	LOAD_WIDGET_ATTRIBUTE(PROPERTY_BLEND, setBlend, blend);
+	//LOAD_WIDGET_ATTRIBUTE(PROPERTY_BLEND, setBlend, blend);
 
 	LOAD_WIDGET_STRING_ATTRIBUTE(PROPERTY_FONTPATH, setFontPath, fontpath);
 	LOAD_WIDGET_ATTRIBUTE(PROPERTY_FONTSIZE, setFontSize, fontSize);
@@ -45,9 +45,12 @@ void TextLoader::parseAttributes()
 
 	LOAD_WIDGET_CAST_ATTRIBUTE(PROPERTY_HORIZONTAL, setHorizontalAlignment, horizontal, sys::HorizontalAlignment);
 	LOAD_WIDGET_CAST_ATTRIBUTE(PROPERTY_VERTICAL, setVerticalAlignment, vertical, sys::VerticalAlignment);
-	LOAD_WIDGET_ATTRIBUTE(PROPERTY_DIMENSIONS, setDimensions, size);
+	//LOAD_WIDGET_ATTRIBUTE(PROPERTY_DIMENSIONS, setDimensions, size);
 
-	if (fontpath.empty()) getCastWidget()->setFontPath(UIProxy::getFontPath());
+	if (fontpath.empty())
+	{
+		getCastWidget()->setFontPath(getFontPath());
+	}
 
 	WidgetLoader::parseAttributes();
 }
@@ -57,7 +60,7 @@ void TextLoader::saveAttributes()
 	WidgetLoader::saveAttributes();
 
 	SAVE_WIDGET_ATTRIBUTE(PROPERTY_TEXTCOLOR, getTextColor);
-	SAVE_WIDGET_ATTRIBUTE(PROPERTY_BLEND, getBlend);
+	//SAVE_WIDGET_ATTRIBUTE(PROPERTY_BLEND, getBlend);
 
 	SAVE_WIDGET_ATTRIBUTE(PROPERTY_FONTPATH, getFontPath);
 	SAVE_WIDGET_ATTRIBUTE(PROPERTY_FONTSIZE, getFontSize);
@@ -65,5 +68,5 @@ void TextLoader::saveAttributes()
 
 	SAVE_WIDGET_CAST_ATTRIBUTE(PROPERTY_HORIZONTAL, getHorizontalAlignment, int);
 	SAVE_WIDGET_CAST_ATTRIBUTE(PROPERTY_VERTICAL, getVerticalAlignment, int);
-	SAVE_WIDGET_ATTRIBUTE(PROPERTY_DIMENSIONS, getDimensions);
+	//SAVE_WIDGET_ATTRIBUTE(PROPERTY_DIMENSIONS, getDimensions);
 }

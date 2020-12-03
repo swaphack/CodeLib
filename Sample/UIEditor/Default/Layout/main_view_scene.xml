@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<root width="1024" height="768" layout="1">
-  <Layout name="viewScene" showMask="1" maskColor="255,255,255,125" margin="0,0,0,0" size="100%,100%"> 
+<root width="1024" height="768" layout="1" fontPath="Default/Font/font_3.ttf">
+  <Layout name="root" showMask="1" maskColor="0,0,0,255" margin="0,0,0,0" size="100%,100%"> 
+  	<Layout name="viewScene" showMask="1" maskColor="255,255,255,125" margin="5,5,5,5" marginState="1,1,1,1"> 
+  	</Layout>
   </Layout>
 </root>

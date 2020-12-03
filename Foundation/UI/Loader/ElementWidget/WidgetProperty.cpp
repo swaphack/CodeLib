@@ -67,7 +67,7 @@ void WidgetProperty::setAttribute(const std::string& name, float value)
 	{
 		return;
 	}
-	std::string str = getCString("%d", value);
+	std::string str = getCString("%f", value);
 	setAttribute(name, str);
 }
 
@@ -201,9 +201,9 @@ void WidgetProperty::setAttribute(const std::string& name, const sys::CSSMargin&
 		return;
 	}
 
-	std::string str = getCString("%f,%f,%f,%f", 
-		value.getTop().toString(), value.getRight().toString(), 
-		value.getBottom().toString(), value.getLeft().toString());
+	std::string str = getCString("%s,%s,%s,%s", 
+		value.getTop().toString(2).c_str(), value.getRight().toString(2).c_str(),
+		value.getBottom().toString(2).c_str(), value.getLeft().toString(2).c_str());
 
 	setAttribute(name, str);
 }
@@ -215,7 +215,7 @@ void ui::WidgetProperty::setAttribute(const std::string& name, const sys::CSSSiz
 		return;
 	}
 
-	std::string str = getCString("%s,%s", value.getWidth().toString(), value.getHeight().toString());
+	std::string str = getCString("%s,%s", value.getWidth().toString(2).c_str(), value.getHeight().toString(2).c_str());
 	setAttribute(name, str);
 }
 

@@ -31,9 +31,9 @@ namespace ue
 		*/
 		void showWithTarget(const ui::LayoutItem* item, sys::CSSDirection eDir);
 		/**
-		*	隐藏
+		*	关闭
 		*/
-		void hide();
+		void close();
 	protected:
 		/**
 		*	设置主体位置

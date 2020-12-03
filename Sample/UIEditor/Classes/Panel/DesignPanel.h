@@ -22,7 +22,7 @@ namespace ue
 		*/
 		ui::LayoutItem* getSelectedTarget() const;
 		/**
-		*	设置涉及文件
+		*	设置设计文件
 		*/
 		void setDesignFile(const std::string& filepath);
 	protected:
@@ -57,6 +57,9 @@ namespace ue
 		*/
 		bool touchFrontWidget(ui::LayoutItem* layoutItem,float x, float y);
 	protected:
+		void saveFile();
+		void reloadFile();
+	protected:
 		// 设计文件
 		ui::LayoutItem* m_pUIFile = nullptr;
 		// 是否选中
@@ -65,5 +68,7 @@ namespace ue
 		ui::LayoutItem* m_pSelectedTarget = nullptr;
 
 		ui::Layout* m_pViewScene = nullptr;
+
+		std::string m_strFileName;
 	};
 }

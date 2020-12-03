@@ -65,7 +65,7 @@ void ue::SinglePanel::showWithTarget(const ui::LayoutItem* item, sys::CSSDirecti
 	this->show();
 }
 
-void ue::SinglePanel::hide()
+void ue::SinglePanel::close()
 {
 	this->removeFromParent();
 }
@@ -154,7 +154,7 @@ bool ue::SinglePanel::onTouchBegan(float x, float y, bool include)
 {
 	if (!_body->containPoint(x, y))
 	{
-		hide();
+		close();
 	}
 	return false;
 }

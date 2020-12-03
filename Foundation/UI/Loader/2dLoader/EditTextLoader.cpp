@@ -41,7 +41,10 @@ void ui::EditTextLoader::parseAttributes()
 
 	LOAD_WIDGET_ATTRIBUTE(PROPERTY_MULTILINE, setMultiLine, multiLine);
 
-	if (fontpath.empty()) getCastWidget()->setFontPath(UIProxy::getFontPath());
+	if (fontpath.empty())
+	{
+		getCastWidget()->setFontPath(getFontPath());
+	}
 
 	WidgetLoader::parseAttributes();
 }

@@ -114,6 +114,11 @@ void KeyboardManager::onDispatchButtonEvent(sys::BoardKey key, sys::ButtonStatus
 		G_KEYCHAR->setShiftEnable(type == sys::ButtonStatus::BUTTON_DOWN);
 	}
 
+	if (key == sys::BoardKey::KCONTROL)
+	{
+		G_KEYCHAR->setControlEnable(type == sys::ButtonStatus::BUTTON_DOWN);
+	}
+
 	if (type == sys::ButtonStatus::BUTTON_DOWN)
 	{
 		G_KEYCHAR->setControlKey(key);

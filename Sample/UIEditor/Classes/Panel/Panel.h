@@ -5,11 +5,6 @@
 namespace ue
 {
 
-#define PANEL_SELECT_TARGET "PANEL_SELECT_TARGET"
-#define PANEL_SELECT_DESIGN_FILE "PANEL_SELECT_DESIGN_FILE"
-#define PANEL_SELECT_XML "PANEL_SELECT_XML"
-#define PANEL_SELECT_LAYOUT "PANEL_SELECT_LAYOUT"
-
 	// 面板
 	class Panel : public ui::CtrlFile
 	{
@@ -44,23 +39,6 @@ namespace ue
 		*	离开屏幕
 		*/   
 		virtual bool onTouchEnded(float x, float y, bool include);
-	protected: // 事件派发
-		/**
-		*	派发布局项
-		*/
-		void dispatchItem(ui::LayoutItem* item);
-		/**
-		*	派发布局项
-		*/
-		void dispatchLayoutFile(ui::CtrlFile* layout);
-		/**
-		*	派发配置文件
-		*/
-		void dispatchXml(tinyxml2::XMLElement* doc);
-		/**
-		*	派发涉及项
-		*/
-		void dispatchDesignFile(const std::string& filepath);
 	protected:
 		/**
 		*	创建控件

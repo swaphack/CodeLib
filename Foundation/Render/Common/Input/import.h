@@ -8,3 +8,4 @@
 
 #include "MouseDelegate.h"
 #include "MouseManager.h"
+#include "KeyChar.h"

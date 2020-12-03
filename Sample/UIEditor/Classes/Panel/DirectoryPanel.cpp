@@ -1,5 +1,6 @@
 #include "DirectoryPanel.h"
 #include "render.h"
+#include "PanelEvent.h"
 
 void ue::DirDetail::setRoot(const std::string& root)
 {
@@ -233,6 +234,13 @@ ui::LayoutItem* ue::DirectoryPanel::createRootItem(int top, int height, bool isD
 		item->getWidget()->addClickFunc([this, fullpath](CtrlWidget*) {
 			this->onChangeFoldState(fullpath);
 			this->updateRootPanel();
+		});
+	}
+	else
+	{
+		item->getWidget()->removeAllClickFuncs();
+		item->getWidget()->addClickFunc([fullpath](CtrlWidget*) {
+			G_PANELEVT->setDesignFile(fullpath);
 		});
 	}
 
