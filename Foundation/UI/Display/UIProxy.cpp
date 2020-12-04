@@ -21,6 +21,7 @@ void UIProxy::init()
 	this->registerElementParser(ELEMENT_NAME_BUTTON, new ButtonLoader());
 	this->registerElementParser(ELEMENT_NAME_EDITTEXT, new EditTextLoader());
 	this->registerElementParser(ELEMENT_NAME_SCROLLVIEW, new ScrollViewLoader());
+	this->registerElementParser(ELEMENT_NAME_SCALE9_IMAGE, new Scale9ImageLoader());
 
 	this->registerElementParser(ELEMENT_NAME_FILE, new FileLoader());
 }

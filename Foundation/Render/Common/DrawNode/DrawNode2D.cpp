@@ -2,6 +2,7 @@
 #include "Common/Tool/import.h"
 #include "Graphic/import.h"
 #include "Common/Mesh/import.h"
+#include "Common/Texture/Texture2D.h"
 
 render::DrawNode2D::DrawNode2D()
 {
@@ -21,11 +22,16 @@ bool render::DrawNode2D::init()
 	}
 	// 添加属性改变监听
 	_notify->addListen(NodeNotifyType::BODY, [this]() {
+		calRealRectPoints();
 		onDrawNode2DBodyChange();
 	});
 
 	_notify->addListen(NodeNotifyType::COLOR, [this]() {
 		this->onDrawNode2DColorChange();
+	});
+
+	_notify->addListen(NodeNotifyType::TEXTURE, [this]() {
+		this->onDrawNode2DTextureChange();
 	});
 
 	return true;
@@ -85,11 +91,6 @@ void render::DrawNode2D::calRealRectPoints()
 
 void render::DrawNode2D::onDrawNode2DBodyChange()
 {
-	calRealRectPoints();
-
-	math::Size size = math::Size(this->getWidth(), this->getHeight());
-	//math::Rect rect(math::Vector2(), size);
-	//VertexTool::setTexture2DCoords(&_rectVertex, size, rect);
 	VertexTool::setTexture2DVertices(&_rectVertex, math::Vector3(), _volume, _anchor);
 
 	updateDrawNode2DMesh();
@@ -103,6 +104,18 @@ void render::DrawNode2D::onDrawNode2DColorChange()
 	_rectVertex.setRightDownColor(color);
 	_rectVertex.setRightUpColor(color);
 	_rectVertex.setLeftUpColor(color);
+
+	updateDrawNode2DMesh();
+}
+
+void render::DrawNode2D::onDrawNode2DTextureChange()
+{
+	if (getTexture() != nullptr)
+	{
+		math::Size size(getTexture()->getWidth(), getTexture()->getHeight());
+		math::Rect rect(math::Vector2(), math::Size(this->getWidth(), this->getHeight()));
+		VertexTool::setTexture2DCoords(&_rectVertex, size, rect);
+	}
 
 	updateDrawNode2DMesh();
 }

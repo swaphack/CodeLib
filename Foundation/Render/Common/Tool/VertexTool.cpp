@@ -5,6 +5,7 @@ using namespace render;
 
 void VertexTool::setTexture2DCoords(RectVertex* texRect, const math::Size& size, const math::Rect& rect)
 {
+	if (texRect == nullptr) return;
 	// left down
 	texRect->setLeftDownUV(math::Vector2(rect.getX() / size.getWidth(), rect.getY() / size.getHeight()));
 
@@ -20,103 +21,71 @@ void VertexTool::setTexture2DCoords(RectVertex* texRect, const math::Size& size,
 
 void VertexTool::setTexture2DVertices(RectVertex* texRect, const math::Vector3& position, const math::Volume& volume, const math::Vector3& anchor)
 {
-	float x = 0;
-	float y = 0;
+	if (texRect == nullptr) return;
+
+	float x0 = position.getX() - volume.getWidth() * anchor.getX();
+	float x1 = position.getX() + volume.getWidth() * (1 - anchor.getX());
+	float y0 = position.getY() - volume.getHeight() * anchor.getY();
+	float y1 = position.getY() + volume.getHeight() * (1 - anchor.getY());
 
 	// left down
-	x = position.getX() - volume.getWidth() * anchor.getX();
-	y = position.getY() - volume.getHeight() * anchor.getY();
-	texRect->setLeftDownPoint(math::Vector3(x, y, position.getZ()));
+	texRect->setLeftDownPoint(math::Vector3(x0, y0, position.getZ()));
 
 	// right down
-	x = position.getX() + volume.getWidth() * (1 - anchor.getX());
-	y = position.getY() - volume.getHeight() * anchor.getY();
-	texRect->setRightDownPoint(math::Vector3(x, y, position.getZ()));
+	texRect->setRightDownPoint(math::Vector3(x1, y0, position.getZ()));
 
 	// right up
-	x = position.getX() + volume.getWidth() * (1 - anchor.getX());
-	y = position.getY() + volume.getHeight() * (1 - anchor.getY());
-	texRect->setRightUpPoint(math::Vector3(x, y, position.getZ()));
+	texRect->setRightUpPoint(math::Vector3(x1, y1, position.getZ()));
 
 	// left up
-	x = position.getX() - volume.getWidth() * anchor.getX();
-	y = position.getY() + volume.getHeight() * (1 - anchor.getY());
-	texRect->setLeftUpPoint(math::Vector3(x, y, position.getZ()));
+	texRect->setLeftUpPoint(math::Vector3(x0, y1, position.getZ()));
 }
 
 void VertexTool::setTexture3DVertices(CubeVertex* texcube, const math::Vector3& position, const math::Volume& volume, const math::Vector3& anchor)
 {
-	float x;
-	float y;
-	float z;
+	if (texcube == nullptr) return;
+
+	float x0 = position.getX() - volume.getWidth() * anchor.getX();
+	float y0 = position.getY() - volume.getHeight() * anchor.getY();
+	float z0 = position.getZ() + volume.getDepth() * (1 - anchor.getZ());
+
+	float x1 = position.getX() + volume.getWidth() * (1 - anchor.getX());
+	float y1 = position.getY() + volume.getHeight() * (1 - anchor.getY());
+	float z1 = position.getZ() - volume.getDepth() * anchor.getZ();
 
 	//------ front ------
 
 	// left down
-	x = position.getX() - volume.getWidth() * anchor.getX();
-
-	y = position.getY() - volume.getHeight() * anchor.getY();
-	z = position.getZ() + volume.getDepth() * (1 - anchor.getZ());
-
-	texcube->setFrontLeftDownPosition(math::Vector3(x, y, z));
+	texcube->setFrontLeftDownPosition(math::Vector3(x0, y0, z0));
 
 	// right down
-	x = position.getX() + volume.getWidth() * (1 - anchor.getX());
-
-	y = position.getY() - volume.getHeight() * anchor.getY();
-	z = position.getZ() + volume.getDepth() * (1 - anchor.getZ());
-
-	texcube->setFrontRightDownPosition(math::Vector3(x, y, z));
+	texcube->setFrontRightDownPosition(math::Vector3(x1, y0, z0));
 
 	// right up
-	x = position.getX() + volume.getWidth() * (1 - anchor.getX());
-
-	y = position.getY() + volume.getHeight() * (1 - anchor.getY());
-	z = position.getZ() + volume.getDepth() * (1 - anchor.getZ());
-
-	texcube->setFrontRightUpPosition(math::Vector3(x, y, z));
+	texcube->setFrontRightUpPosition(math::Vector3(x1, y1, z0));
 
 	// left up
-	x = position.getX() - volume.getWidth() * anchor.getX();
-
-	y = position.getY() + volume.getHeight() * (1 - anchor.getY());
-	z = position.getZ() + volume.getDepth() * (1 - anchor.getZ());
-
-	texcube->setFrontLeftUpPosition(math::Vector3(x, y, z));
+	texcube->setFrontLeftUpPosition(math::Vector3(x0, y1, z0));
 
 	//------ back ------
 
 	// left down
-	x = position.getX() + volume.getWidth() * (1 - anchor.getX());
-	y = position.getY() - volume.getHeight() * anchor.getY();
-	z = position.getZ() - volume.getDepth() * anchor.getZ();
-
-	texcube->setBackLeftDownPosition(math::Vector3(x, y, z));
+	texcube->setBackLeftDownPosition(math::Vector3(x1, y0, z1));
 
 	// right down
-	x = position.getX() - volume.getWidth() * anchor.getX(); 
-	y = position.getY() - volume.getHeight() * anchor.getY();
-	z = position.getZ() - volume.getDepth() * anchor.getZ();
-
-	texcube->setBackRightDownPosition(math::Vector3(x, y, z));
+	texcube->setBackRightDownPosition(math::Vector3(x0, y0, z1));
 
 	// right up
-	x = position.getX() - volume.getWidth() * anchor.getX(); 
-	y = position.getY() + volume.getHeight() * (1 - anchor.getY());
-	z = position.getZ() - volume.getDepth() * anchor.getZ();
-
-	texcube->setBackRightUpPosition(math::Vector3(x, y, z));
+	texcube->setBackRightUpPosition(math::Vector3(x0, y1, z1));
 
 	// left up
-	x = position.getX() + volume.getWidth() * (1 - anchor.getX());
-	y = position.getY() + volume.getHeight() * (1 - anchor.getY());
-	z = position.getZ() - volume.getDepth() * anchor.getZ();
-
-	texcube->setBackLeftUpPosition(math::Vector3(x, y, z));
+	texcube->setBackLeftUpPosition(math::Vector3(x1, y1, z1));
 }
 
 void render::VertexTool::setTexture2DFlip(float* uvs, bool bFlipX, bool bFlipY)
 {
+	if (uvs == nullptr) return;
+
 	if (bFlipX)
 	{
 		float x0 = uvs[0];
@@ -144,4 +113,54 @@ void render::VertexTool::setTexture2DFlip(float* uvs, bool bFlipX, bool bFlipY)
 		uvs[5] = y3;
 		uvs[7] = y2;
 	}
+}
+
+void render::VertexTool::setTexture2DScale9Coords(SimpleScale9Vertex* scale9Vertex, const math::Size& size, const sys::CSSMargin& margin)
+{
+	if (scale9Vertex == nullptr) return;
+
+	float x0 = 0;
+	float x1 = margin.getLeft().getRealValue(size.getWidth()) / size.getWidth();
+	float x2 = 1 - margin.getRight().getRealValue(size.getWidth()) / size.getWidth();
+	float x3 = 1;
+
+	float y0 = 0;
+	float y1 = margin.getBottom().getRealValue(size.getHeight()) / size.getHeight();
+	float y2 = 1 - margin.getTop().getRealValue(size.getHeight()) / size.getHeight();
+	float y3 = 1;
+
+	scale9Vertex->setLayerUVs0(math::Vector2(x0, y0), math::Vector2(x1, y0), math::Vector2(x2, y0), math::Vector2(x3, y0));
+	scale9Vertex->setLayerUVs1(math::Vector2(x0, y1), math::Vector2(x1, y1), math::Vector2(x2, y1), math::Vector2(x3, y1));
+	scale9Vertex->setLayerUVs2(math::Vector2(x0, y2), math::Vector2(x1, y2), math::Vector2(x2, y2), math::Vector2(x3, y2));
+	scale9Vertex->setLayerUVs3(math::Vector2(x0, y3), math::Vector2(x1, y3), math::Vector2(x2, y3), math::Vector2(x3, y3));
+}
+
+void render::VertexTool::setTexture2DScale9Vertices(SimpleScale9Vertex* scale9Vertex, const math::Vector3& position, const math::Volume& volume, const math::Vector3& anchor, const sys::CSSMargin& margin)
+{
+	if (scale9Vertex == nullptr) return;
+
+	float x0 = position.getX() - volume.getWidth() * anchor.getX();
+	float x1 = x0 + margin.getLeft().getRealValue(volume.getWidth());
+	float x3 = position.getX() + volume.getWidth() * (1 - anchor.getX());
+	float x2 = x3 - margin.getRight().getRealValue(volume.getWidth());
+
+	float y0 = position.getY() - volume.getHeight() * anchor.getY();
+	float y1 = y0 + margin.getBottom().getRealValue(volume.getHeight());
+	float y3 = position.getY() + volume.getHeight() * (1 - anchor.getY());
+	float y2 = y3 - margin.getTop().getRealValue(volume.getHeight());
+
+	/*
+	float z0 = position.getZ() + volume.getDepth() * (1 - anchor.getZ());
+	float z1 = z0 + margin.getLeft().getRealValue(volume.getDepth());
+	float z3 = position.getZ() - volume.getDepth() * anchor.getZ();
+	float z2 = z3 - margin.getTop().getRealValue(volume.getDepth());
+	*/
+
+	float z0 = 0;
+
+	scale9Vertex->setLayerPoints0(math::Vector3(x0, y0, z0), math::Vector3(x1, y0, z0), math::Vector3(x2, y0, z0), math::Vector3(x3, y0, z0));
+	scale9Vertex->setLayerPoints1(math::Vector3(x0, y1, z0), math::Vector3(x1, y1, z0), math::Vector3(x2, y1, z0), math::Vector3(x3, y1, z0));
+	scale9Vertex->setLayerPoints2(math::Vector3(x0, y2, z0), math::Vector3(x1, y2, z0), math::Vector3(x2, y2, z0), math::Vector3(x3, y2, z0));
+	scale9Vertex->setLayerPoints3(math::Vector3(x0, y3, z0), math::Vector3(x1, y3, z0), math::Vector3(x2, y3, z0), math::Vector3(x3, y3, z0));
+
 }

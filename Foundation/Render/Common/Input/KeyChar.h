@@ -36,6 +36,10 @@ namespace render
 		void setControlEnable(bool enable);
 		// ¿ØÖÆ
 		bool isControlEnabled() const;
+		// »»µ²
+		void setAltEnable(bool enable);
+		// »»µ²
+		bool isAltEnabled() const;
 	private:
 		// ¼üÅÌ×ª×Ö·û
 		std::map<sys::BoardKey, char> _keyChars;
@@ -45,6 +49,8 @@ namespace render
 		bool _enableShift = false;
 		// ¿ØÖÆ
 		bool _enableControl = false;
+		// »»µ²
+		bool _enableAlt = false;
 	};
 
 #define G_KEYCHAR sys::Instance<render::KeyChar>::getInstance()

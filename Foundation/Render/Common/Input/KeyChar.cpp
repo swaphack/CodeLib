@@ -332,3 +332,13 @@ bool render::KeyChar::isControlEnabled() const
 {
 	return _enableControl;
 }
+
+void render::KeyChar::setAltEnable(bool enable)
+{
+	_enableAlt = enable;
+}
+
+bool render::KeyChar::isAltEnabled() const
+{
+	return _enableAlt;
+}

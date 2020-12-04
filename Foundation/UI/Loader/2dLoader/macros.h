@@ -7,6 +7,7 @@ namespace ui
 #define ELEMENT_NAME_WIDGET			"Widget"
 #define ELEMENT_NAME_LAYOUT			"Layout"
 #define ELEMENT_NAME_IMAGE			"Image"
+#define ELEMENT_NAME_SCALE9_IMAGE	"Scale9Image"
 #define ELEMENT_NAME_TEXT			"Text"
 #define ELEMENT_NAME_BUTTON			"Button"
 #define ELEMENT_NAME_EDITTEXT		"EditText"

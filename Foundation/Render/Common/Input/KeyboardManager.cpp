@@ -119,6 +119,11 @@ void KeyboardManager::onDispatchButtonEvent(sys::BoardKey key, sys::ButtonStatus
 		G_KEYCHAR->setControlEnable(type == sys::ButtonStatus::BUTTON_DOWN);
 	}
 
+	if (key == sys::BoardKey::KMENU)
+	{
+		G_KEYCHAR->setAltEnable(type == sys::ButtonStatus::BUTTON_DOWN);
+	}
+
 	if (type == sys::ButtonStatus::BUTTON_DOWN)
 	{
 		G_KEYCHAR->setControlKey(key);

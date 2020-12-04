@@ -4,7 +4,7 @@ using namespace ui;
 
 #define PROPERTY_COLOR		"color"
 #define PROPERTY_BLEND		"blend"
-#define PROPERTY_PATH		"path"
+#define PROPERTY_PATH		"filepath"
 #define PROPERTY_FLIPX		"flipX"
 #define PROPERTY_FLIPY		"flipY"
 

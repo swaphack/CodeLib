@@ -15,3 +15,4 @@
 #include "CtrlScrollView.h"
 
 #include "CtrlStencil.h"
+#include "CtrlScale9Image.h"

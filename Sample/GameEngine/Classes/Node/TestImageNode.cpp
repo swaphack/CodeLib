@@ -18,7 +18,7 @@ TestImageNode::~TestImageNode()
 
 void TestImageNode::initNodes()
 {
-	testImages();
+	testScale9Image();
 	//testPointSprite();
 }
 
@@ -237,6 +237,36 @@ void TestImageNode::testImages()
 		Utility::loadDefaultShader(pChild);
 	}
 
+}
+
+void TestImageNode::testScale9Image()
+{
+
+
+	std::string filepath = "Resource/Image/sqi.png";
+	/*
+	{
+		auto pChild = CREATE_NODE(CtrlImage);
+		pChild->setImagePath(filepath);
+		pChild->setAnchorPoint(0.0f, 0.0f);
+		pChild->setPosition(500, 500);
+		pChild->setVolume(200, 200);
+		this->addChild(pChild);
+	}
+	*/
+	{
+		auto pChild = CREATE_NODE(CtrlScale9Image);
+		pChild->setImagePath(filepath);
+		pChild->setAnchorPoint(0.0f, 0.0f);
+		pChild->setVolume(400, 400);
+		pChild->setMarginLeft(50);
+		pChild->setMarginRight(50);
+		pChild->setMarginTop(50);
+		pChild->setMarginBottom(50);
+		this->addChild(pChild);
+	}
+
+	//Utility::loadDefaultShader(pChild);
 }
 
 void TestImageNode::onTouchImage(Node* node, float x, float y, bool include)

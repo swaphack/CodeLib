@@ -44,5 +44,24 @@ namespace render
 		* @param outUVs[8] 纹理数据
 		*/
 		static void setTexture2DFlip(float* uvs, bool bFlipX, bool bFlipY);
+
+		/**
+		*
+		* 设置九宫格2d纹理坐标 逆时针
+		* @param scale9Vertex 纹理数据 out
+		* @param size 纹理大小
+		* @param rect 显示区域
+		*/
+		static void setTexture2DScale9Coords(SimpleScale9Vertex* scale9Vertex, const math::Size& size, const sys::CSSMargin& margin);
+
+		/**
+		*
+		* 设置九宫格2d纹理顶点位置
+		* @param scale9Vertex 纹理数据 out
+		* @param position 位置
+		* @param volume 体积
+		* @param anchor 锚点
+		*/
+		static void setTexture2DScale9Vertices(SimpleScale9Vertex* scale9Vertex, const math::Vector3& position, const math::Volume& volume, const math::Vector3& anchor, const sys::CSSMargin& margin);
 	};
 }

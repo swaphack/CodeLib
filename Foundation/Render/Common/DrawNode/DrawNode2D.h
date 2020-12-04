@@ -54,6 +54,10 @@ namespace render
 		*/
 		void onDrawNode2DColorChange();
 		/**
+		*	纹理改变
+		*/
+		void onDrawNode2DTextureChange();
+		/**
 		*	绘制矩形
 		*/
 		void drawRect();

@@ -77,4 +77,26 @@ namespace render
 
 		const RectVertex* getCubMapFaceVertex(CubeFace face) const;
 	};
+
+	// 9宫格 复用点信息
+	struct SimpleScale9Vertex
+	{
+		float vertices[48];
+		float colors[64];
+		float uvs[32];
+		uint32_t indices[54];
+	public:
+		SimpleScale9Vertex();
+	public:
+		// 从底部开始计算
+		void setLayerPoints0(const math::Vector3& p0, const math::Vector3& p1, const math::Vector3& p2, const math::Vector3& p3);
+		void setLayerPoints1(const math::Vector3& p0, const math::Vector3& p1, const math::Vector3& p2, const math::Vector3& p3);
+		void setLayerPoints2(const math::Vector3& p0, const math::Vector3& p1, const math::Vector3& p2, const math::Vector3& p3);
+		void setLayerPoints3(const math::Vector3& p0, const math::Vector3& p1, const math::Vector3& p2, const math::Vector3& p3);
+		// 从底部开始计算
+		void setLayerUVs0(const math::Vector2& p0, const math::Vector2& p1, const math::Vector2& p2, const math::Vector2& p3);
+		void setLayerUVs1(const math::Vector2& p0, const math::Vector2& p1, const math::Vector2& p2, const math::Vector2& p3);
+		void setLayerUVs2(const math::Vector2& p0, const math::Vector2& p1, const math::Vector2& p2, const math::Vector2& p3);
+		void setLayerUVs3(const math::Vector2& p0, const math::Vector2& p1, const math::Vector2& p2, const math::Vector2& p3);
+	};
 }

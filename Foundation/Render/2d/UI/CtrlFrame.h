@@ -32,7 +32,7 @@ namespace render
 		// 是否垂直翻转
 		bool isFlipY();
 	protected:
-		void updateCtrlFrameMeshData();
+		virtual void updateCtrlFrameMeshData();
 	protected:
 		// 是否水平翻转
 		bool _bFlipX = false;

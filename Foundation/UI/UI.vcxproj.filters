@@ -92,6 +92,9 @@
     <ClInclude Include="Loader\2dLoader\EditTextLoader.h">
       <Filter>Loader\2dLoader</Filter>
     </ClInclude>
+    <ClInclude Include="Loader\2dLoader\Scale9ImageLoader.h">
+      <Filter>Loader\2dLoader</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Display">
@@ -175,6 +178,9 @@
       <Filter>Loader\2dLoader</Filter>
     </ClCompile>
     <ClCompile Include="Loader\2dLoader\EditTextLoader.cpp">
+      <Filter>Loader\2dLoader</Filter>
+    </ClCompile>
+    <ClCompile Include="Loader\2dLoader\Scale9ImageLoader.cpp">
       <Filter>Loader\2dLoader</Filter>
     </ClCompile>
   </ItemGroup>

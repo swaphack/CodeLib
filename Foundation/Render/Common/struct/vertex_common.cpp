@@ -236,3 +236,161 @@ const render::RectVertex* render::CubeVertex::getCubMapFaceVertex(CubeFace face)
 	}
 	return nullptr;
 }
+
+//////////////////////////////////////////////////////////////////////////
+render::SimpleScale9Vertex::SimpleScale9Vertex()
+{
+	memset(vertices, 0, 48 * sizeof(float));
+	memset(uvs, 0, 32 * sizeof(float));
+	memset(indices, 0, 54 * sizeof(uint32_t));
+
+	for (int i = 0; i < 64; i++)
+	{
+		colors[i] = 1;
+	}
+
+	uint32_t index[54] = {
+		0,1,5,
+		0,5,4,
+		1,2,6,
+		1,6,5,
+		2,3,7,
+		2,7,6,
+		4,5,9,
+		4,9,8,
+		5,6,10,
+		5,10,9,
+		6,7,11,
+		6,11,10,
+		8,9,13,
+		8,13,12,
+		9,10,14,
+		9,14,13,
+		10,11,15,
+		10,15,14
+	};
+	
+	memcpy(indices, index, 54 * sizeof(uint32_t));
+}
+
+void render::SimpleScale9Vertex::setLayerPoints0(const math::Vector3& p0, const math::Vector3& p1, const math::Vector3& p2, const math::Vector3& p3)
+{
+	int index = 0;
+	memcpy(vertices + index, p0.getValue(), p0.getSize());
+
+	index = 3;
+	memcpy(vertices + index, p1.getValue(), p1.getSize());
+
+	index = 6;
+	memcpy(vertices + index, p2.getValue(), p2.getSize());
+
+	index = 9;
+	memcpy(vertices + index, p3.getValue(), p3.getSize());
+}
+
+void render::SimpleScale9Vertex::setLayerPoints1(const math::Vector3& p0, const math::Vector3& p1, const math::Vector3& p2, const math::Vector3& p3)
+{
+	int index = 12;
+	memcpy(vertices + index, p0.getValue(), p0.getSize());
+
+	index = 15;
+	memcpy(vertices + index, p1.getValue(), p1.getSize());
+
+	index = 18;
+	memcpy(vertices + index, p2.getValue(), p2.getSize());
+
+	index = 21;
+	memcpy(vertices + index, p3.getValue(), p3.getSize());
+}
+
+void render::SimpleScale9Vertex::setLayerPoints2(const math::Vector3& p0, const math::Vector3& p1, const math::Vector3& p2, const math::Vector3& p3)
+{
+	int index = 24;
+	memcpy(vertices + index, p0.getValue(), p0.getSize());
+
+	index = 27;
+	memcpy(vertices + index, p1.getValue(), p1.getSize());
+
+	index = 30;
+	memcpy(vertices + index, p2.getValue(), p2.getSize());
+
+	index = 33;
+	memcpy(vertices + index, p3.getValue(), p3.getSize());
+}
+
+void render::SimpleScale9Vertex::setLayerPoints3(const math::Vector3& p0, const math::Vector3& p1, const math::Vector3& p2, const math::Vector3& p3)
+{
+	int index = 36;
+	memcpy(vertices + index, p0.getValue(), p0.getSize());
+
+	index = 39;
+	memcpy(vertices + index, p1.getValue(), p1.getSize());
+
+	index = 42;
+	memcpy(vertices + index, p2.getValue(), p2.getSize());
+
+	index = 45;
+	memcpy(vertices + index, p3.getValue(), p3.getSize());
+}
+
+void render::SimpleScale9Vertex::setLayerUVs0(const math::Vector2& p0, const math::Vector2& p1, const math::Vector2& p2, const math::Vector2& p3)
+{
+	int index = 0;
+	memcpy(uvs + index, p0.getValue(), p0.getSize());
+
+	index = 2;
+	memcpy(uvs + index, p1.getValue(), p1.getSize());
+
+	index = 4;
+	memcpy(uvs + index, p2.getValue(), p2.getSize());
+
+	index = 6;
+	memcpy(uvs + index, p3.getValue(), p3.getSize());
+}
+
+void render::SimpleScale9Vertex::setLayerUVs1(const math::Vector2& p0, const math::Vector2& p1, const math::Vector2& p2, const math::Vector2& p3)
+{
+	int index = 8;
+	memcpy(uvs + index, p0.getValue(), p0.getSize());
+
+	index = 10;
+	memcpy(uvs + index, p1.getValue(), p1.getSize());
+
+	index = 12;
+	memcpy(uvs + index, p2.getValue(), p2.getSize());
+
+	index = 14;
+	memcpy(uvs + index, p3.getValue(), p3.getSize());
+}
+
+void render::SimpleScale9Vertex::setLayerUVs2(const math::Vector2& p0, const math::Vector2& p1, const math::Vector2& p2, const math::Vector2& p3)
+{
+	int index = 16;
+	memcpy(uvs + index, p0.getValue(), p0.getSize());
+
+	index = 18;
+	memcpy(uvs + index, p1.getValue(), p1.getSize());
+
+	index = 20;
+	memcpy(uvs + index, p2.getValue(), p2.getSize());
+
+	index = 22;
+	memcpy(uvs + index, p3.getValue(), p3.getSize());
+}
+
+void render::SimpleScale9Vertex::setLayerUVs3(const math::Vector2& p0, const math::Vector2& p1, const math::Vector2& p2, const math::Vector2& p3)
+{
+	int index = 24;
+	memcpy(uvs + index, p0.getValue(), p0.getSize());
+
+	index = 26;
+	memcpy(uvs + index, p1.getValue(), p1.getSize());
+
+	index = 28;
+	memcpy(uvs + index, p2.getValue(), p2.getSize());
+
+	index = 30;
+	memcpy(uvs + index, p3.getValue(), p3.getSize());
+}
+
+

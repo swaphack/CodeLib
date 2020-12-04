@@ -18,22 +18,16 @@ CtrlText::~CtrlText()
 
 bool CtrlText::init()
 {
-	if (!CtrlFrame::init())
+	if (!CtrlWidget::init())
 	{
 		return false;
 	}
 
-	_notify->removeListens(NodeNotifyType::BODY);
-	_notify->removeListens(NodeNotifyType::TEXTURE);
-
-	_notify->addListen(NodeNotifyType::BODY, [&](){
-		this->calRealRectPoints();
-		this->onCtrlWidgetBodyChange();
-
+	_notify->addListen(NodeNotifyType::BODY, [this](){
 		onTextChange();
 	});
 
-	_notify->addListen(NodeNotifyType::TEXT, [&](){
+	_notify->addListen(NodeNotifyType::TEXT, [this](){
 
 		this->onTextChange();
 	});	

@@ -612,6 +612,9 @@
     <ClCompile Include="Common\DrawNode\DrawBoxProtocol.cpp">
       <Filter>Common\DrawNode</Filter>
     </ClCompile>
+    <ClCompile Include="2d\UI\CtrlScale9Image.cpp">
+      <Filter>2d\UI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Common\Node\import.h">
@@ -1400,6 +1403,9 @@
     </ClInclude>
     <ClInclude Include="Common\DrawNode\DrawBoxProtocol.h">
       <Filter>Common\DrawNode</Filter>
+    </ClInclude>
+    <ClInclude Include="2d\UI\CtrlScale9Image.h">
+      <Filter>2d\UI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

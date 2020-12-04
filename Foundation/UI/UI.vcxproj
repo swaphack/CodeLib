@@ -90,6 +90,7 @@
     <ClInclude Include="Loader\2dLoader\import.h" />
     <ClInclude Include="Loader\2dLoader\LayoutLoader.h" />
     <ClInclude Include="Loader\2dLoader\macros.h" />
+    <ClInclude Include="Loader\2dLoader\Scale9ImageLoader.h" />
     <ClInclude Include="Loader\2dLoader\ScrollViewLoader.h" />
     <ClInclude Include="Loader\2dLoader\TextLoader.h" />
     <ClInclude Include="Loader\2dLoader\WidgetLoader.h" />
@@ -116,6 +117,7 @@
     <ClCompile Include="Loader\2dLoader\FileLoader.cpp" />
     <ClCompile Include="Loader\2dLoader\ImageLoader.cpp" />
     <ClCompile Include="Loader\2dLoader\LayoutLoader.cpp" />
+    <ClCompile Include="Loader\2dLoader\Scale9ImageLoader.cpp" />
     <ClCompile Include="Loader\2dLoader\ScrollViewLoader.cpp" />
     <ClCompile Include="Loader\2dLoader\TextLoader.cpp" />
     <ClCompile Include="Loader\2dLoader\WidgetLoader.cpp" />

@@ -53,7 +53,6 @@ bool CtrlMedia::init()
 		if (_ctrlFrame)
 		{
 			_ctrlFrame->setVolume(this->getWidth(), this->getHeight());
-
 			_ctrlFrame->setAnchorPoint(this->getAnchorPoint());
 		}
 	});

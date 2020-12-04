@@ -21,6 +21,8 @@ private:
 	void testPointSprite();
 
 	void testImages();
+
+	void testScale9Image();
 private:
 	void onTouchBegin(Node* node, float x, float y, bool include);
 	void onTouchMove(Node* node, float x, float y, bool include);
