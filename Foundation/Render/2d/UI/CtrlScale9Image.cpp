@@ -83,7 +83,7 @@ const sys::CSSMargin& render::CtrlScale9Image::getMargin() const
 
 void render::CtrlScale9Image::onScale9BodyChange()
 {
-	VertexTool::setTexture2DScale9Vertices(&_scale9Vertex, this->getPosition(), this->getVolume(), this->getAnchorPoint(), _scale9Margin);
+	VertexTool::setTexture2DScale9Vertices(&_scale9Vertex, math::Vector3(), this->getVolume(), this->getAnchorPoint(), _scale9Margin);
 
 	updateScale9ImageMeshData();
 }
