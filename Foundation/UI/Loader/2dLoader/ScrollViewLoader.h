@@ -5,7 +5,7 @@
 
 namespace ui
 {
-	// ͼƬ
+	// 滑动
 	class ScrollViewLoader : public LayoutLoader
 	{
 	public:

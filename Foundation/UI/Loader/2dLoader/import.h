@@ -7,6 +7,10 @@
 #include "TextLoader.h"
 #include "ButtonLoader.h"
 #include "EditTextLoader.h"
-#include "ScrollViewLoader.h"
 #include "Scale9ImageLoader.h"
+
+
+#include "ScrollViewLoader.h"
+#include "ListViewLoader.h"
+
 #include "FileLoader.h"

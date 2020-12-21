@@ -95,6 +95,9 @@
     <ClInclude Include="Loader\2dLoader\Scale9ImageLoader.h">
       <Filter>Loader\2dLoader</Filter>
     </ClInclude>
+    <ClInclude Include="Loader\2dLoader\ListViewLoader.h">
+      <Filter>Loader\2dLoader</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Display">
@@ -120,6 +123,9 @@
     </Filter>
     <Filter Include="LayoutExtension">
       <UniqueIdentifier>{95efb6b8-41eb-4349-90da-9fc35b72c86e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Loader\BaseLoader">
+      <UniqueIdentifier>{57bc5bce-bc86-4cee-a08f-f941055a9d54}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -181,6 +187,9 @@
       <Filter>Loader\2dLoader</Filter>
     </ClCompile>
     <ClCompile Include="Loader\2dLoader\Scale9ImageLoader.cpp">
+      <Filter>Loader\2dLoader</Filter>
+    </ClCompile>
+    <ClCompile Include="Loader\2dLoader\ListViewLoader.cpp">
       <Filter>Loader\2dLoader</Filter>
     </ClCompile>
   </ItemGroup>

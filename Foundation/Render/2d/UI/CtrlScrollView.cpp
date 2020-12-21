@@ -50,20 +50,22 @@ CtrlScrollView::~CtrlScrollView()
 
 }
 
-void CtrlScrollView::setScrollDirection(ScrollDirection direction)
+bool render::CtrlScrollView::init()
 {
-	if (_scrollDirection != direction)
+	if (!CtrlLayout::init())
 	{
-		_scrollDirection = direction;
-		initItems();
-		initContent();
+		return false;
 	}
+
+	_notify->addListen(NodeNotifyType::GEOMETRY, [this]() {
+		this->initItems();
+		this->initContent();
+	});
+
+	return true;
 }
 
-ScrollDirection CtrlScrollView::getScrollDirection()
-{
-	return _scrollDirection;
-}
+
 
 void CtrlScrollView::addItem(CtrlWidget* item, int zOrder)
 {
@@ -72,7 +74,7 @@ void CtrlScrollView::addItem(CtrlWidget* item, int zOrder)
 		return;
 	}
 	
-	this->addItem(item, _itemSize, zOrder);
+	this->addItem(item, item->getSize(), zOrder);
 }
 
 void CtrlScrollView::addItem(CtrlWidget* item, const math::Size& size, int zOrder)
@@ -82,13 +84,18 @@ void CtrlScrollView::addItem(CtrlWidget* item, const math::Size& size, int zOrde
 		return;
 	}
 
-	assert(size.getWidth() != 0 && size.getHeight() != 0);
-	
-	ScrollItem* pScrollItem = ScrollItem::create(item, size);
+	auto itemSize = item->getSize();
+
+	if (size.getWidth() != 0 || size.getHeight() != 0)
+	{
+		itemSize = size;
+	}	
+
+	ScrollItem* pScrollItem = ScrollItem::create(item, itemSize);
 	_content->addWidget(pScrollItem, zOrder);
 	_itemWidgets.push_back(pScrollItem);
 
-	initItems();
+	notify(NodeNotifyType::GEOMETRY);
 }
 
 void CtrlScrollView::removeItem(CtrlWidget* item)
@@ -110,7 +117,7 @@ void CtrlScrollView::removeItem(CtrlWidget* item)
 		iter++;
 	}
 
-	initItems();
+	notify(NodeNotifyType::GEOMETRY);
 }
 
 void CtrlScrollView::removeAllItems()
@@ -123,23 +130,27 @@ void CtrlScrollView::removeAllItems()
 	}
 
 	_itemWidgets.clear();
-	initItems();
+	notify(NodeNotifyType::GEOMETRY);
 }
 
-
-void CtrlScrollView::setItemSize(const math::Size& size)
+bool render::CtrlScrollView::isHorizontalScroll() const
 {
-	_itemSize = size;
+	return _bHorizontalScroll;
 }
 
-void CtrlScrollView::setItemSize(float width, float height)
+void render::CtrlScrollView::setHorizontalScroll(bool scroll)
 {
-	_itemSize.set(width, height);
+	_bHorizontalScroll = scroll;
 }
 
-const math::Size& CtrlScrollView::getItemSize()
+bool render::CtrlScrollView::isVerticalScroll() const
 {
-	return _itemSize;
+	return _bVerticalScroll;
+}
+
+void render::CtrlScrollView::setVerticalScroll(bool scroll)
+{
+	_bVerticalScroll = scroll;
 }
 
 void render::CtrlScrollView::addWidget(CtrlWidget* item)
@@ -169,10 +180,12 @@ bool CtrlScrollView::onTouchBegan(float x, float y, bool include)
 	return true;
 }
 
-bool CtrlScrollView::onTouchMoved(float x, float y, bool include)
+bool render::CtrlScrollView::onTouchMoved(float x, float y, bool include)
 {
+	if (!_bHorizontalScroll && !_bVerticalScroll) return false;
+
 	math::Vector2 delta = math::Vector2(x, y);
-	delta-=_touchPosition;
+	delta -= _touchPosition;
 
 	float offX = -getAnchorPoint().getX() * getWidth();
 	float offY = -getAnchorPoint().getY() * getHeight();
@@ -182,46 +195,23 @@ bool CtrlScrollView::onTouchMoved(float x, float y, bool include)
 	float min = 0;
 	float max = 0;
 
-	switch (_scrollDirection)
-	{
-	case ScrollDirection::HORIZONTAL_LEFT_TO_RIGHT:
+	if (_bHorizontalScroll)
 	{
 		pos.setX(pos.getX() + delta.getX());
 		min = getWidth() - _content->getWidth() + offX;
 		max = 0 + offX;
 		if (pos.getX() < min) pos.setX(min);
 		if (pos.getX() > max) pos.setX(max);
-		break;
 	}
-	case ScrollDirection::HORIZONTAL_RIGHT_TO_LEFT:
-	{
-		pos.setX(pos.getX() + delta.getX());
-		min = getWidth() - _content->getWidth() + offX;
-		max = 0 + offX;
-		if (pos.getX() < min) pos.setX(min);
-		if (pos.getX() > max) pos.setX(max);
-		break;
-	}
-	case ScrollDirection::VERTICAL_TOP_TO_BOTTOM:
+	
+	if (_bVerticalScroll)
 	{
 		pos.setY(pos.getY() + delta.getY());
+
 		min = getHeight() - _content->getHeight() + offY;
 		max = 0 + offY;
 		if (pos.getY() < min) pos.setY(min);
 		if (pos.getY() > max) pos.setY(max);
-		break;
-	}
-	case ScrollDirection::VERTICAL_BOTTOM_TO_TOP:
-	{
-		pos.setY(pos.getY() + delta.getY());
-		min = getHeight() - _content->getHeight() + offY;
-		max = 0 + offY;
-		if (pos.getY() < min) pos.setY(min);
-		if (pos.getY() > max) pos.setY(max);
-		break;
-	}
-	default:
-		break;
 	}
 
 	_content->setPosition(pos);
@@ -231,6 +221,7 @@ bool CtrlScrollView::onTouchMoved(float x, float y, bool include)
 	return true;
 }
 
+
 bool CtrlScrollView::onTouchEnded(float x, float y, bool include)
 {
 	return true;
@@ -238,96 +229,29 @@ bool CtrlScrollView::onTouchEnded(float x, float y, bool include)
 
 void CtrlScrollView::initItems()
 {
-	if (_scrollDirection == ScrollDirection::NONE)
-	{
-		return;
-	}
-	if (_itemWidgets.size() == 0)
-	{
-		return;
-	}
-	float posX = 0;
-	float posY = 0;
-
-	switch (_scrollDirection)
-	{
-	case ScrollDirection::HORIZONTAL_LEFT_TO_RIGHT:
-	{
-		std::vector<CtrlWidget*>::iterator iter = _itemWidgets.begin();
-		while (iter != _itemWidgets.end())
-		{
-			ScrollItem* pItem = static_cast<ScrollItem*>(*iter);
-			pItem->setPosition(posX, posY);
-			posX += pItem->getWidth();
-			iter++;
-		}
-		_content->setVolume(abs(posX), getHeight());
-		break;
-	}
-	case ScrollDirection::HORIZONTAL_RIGHT_TO_LEFT:
-	{
-		std::vector<CtrlWidget*>::reverse_iterator iter = _itemWidgets.rbegin();
-		while (iter != _itemWidgets.rend())
-		{
-			ScrollItem* pItem = static_cast<ScrollItem*>(*iter);
-			pItem->setPosition(posX, posY);
-			posX += pItem->getWidth();
-			iter++;
-		}
-		_content->setVolume(abs(posX), getHeight());
-		break;
-	}
-	case ScrollDirection::VERTICAL_TOP_TO_BOTTOM:
-	{
-		std::vector<CtrlWidget*>::iterator iter = _itemWidgets.begin();
-		while (iter != _itemWidgets.end())
-		{
-			ScrollItem* pItem = static_cast<ScrollItem*>(*iter);
-			pItem->setPosition(posX, posY);
-			posY += pItem->getHeight();
-			iter++;
-		}
-		_content->setVolume(getWidth(), abs(posY));
-		break;
-	}
-	case ScrollDirection::VERTICAL_BOTTOM_TO_TOP:
-	{
-		std::vector<CtrlWidget*>::reverse_iterator iter = _itemWidgets.rbegin();
-		while (iter != _itemWidgets.rend())
-		{
-			ScrollItem* pItem = static_cast<ScrollItem*>(*iter);
-			pItem->setPosition(posX, posY);
-			posY += pItem->getHeight();
-			iter++;
-		}
-		_content->setVolume(getWidth(), abs(posY));
-		break;
-	}
-	default:
-		break;
-	}
+	
 }
 
 void CtrlScrollView::initContent()
 {
-	float offX = -getAnchorPoint().getX() * getWidth();
-	float offY = -getAnchorPoint().getY() * getHeight();
+	
+}
 
-	switch (_scrollDirection)
+void CtrlScrollView::setInnerSize(const math::Size& size)
+{
+	if (_content != nullptr)
 	{
-	case ScrollDirection::HORIZONTAL_LEFT_TO_RIGHT:
-		_content->setPosition(0 + offX, 0 + offY);
-		break;
-	case ScrollDirection::HORIZONTAL_RIGHT_TO_LEFT:
-		_content->setPosition(getWidth() - _content->getWidth() + offX, 0 + offY);
-		break;
-	case ScrollDirection::VERTICAL_TOP_TO_BOTTOM:
-		_content->setPosition(0 + offX, getHeight() - _content->getHeight() + offY);
-		break;
-	case ScrollDirection::VERTICAL_BOTTOM_TO_TOP:
-		_content->setPosition(0 + offX, 0 + offY);
-		break;
-	default:
-		break;
+		_content->setVolume(size);
 	}
+}
+
+math::Size CtrlScrollView::getInnerSize()
+{
+	if (_content != nullptr) return _content->getSize();
+	else return math::Size();
+}
+
+const CtrlLayout* CtrlScrollView::getInner() const
+{
+	return _content;
 }

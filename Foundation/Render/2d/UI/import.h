@@ -11,8 +11,10 @@
 #include "CtrlEditBox.h"
 #include "CtrlEditText.h"
 
-
-#include "CtrlScrollView.h"
-
 #include "CtrlStencil.h"
 #include "CtrlScale9Image.h"
+
+#include "CtrlScrollView.h"
+#include "CtrlListView.h"
+#include "CtrlGridView.h"
+#include "CtrlMixGridView.h"

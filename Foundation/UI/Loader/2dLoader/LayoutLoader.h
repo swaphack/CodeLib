@@ -19,22 +19,4 @@ namespace ui
 	public:
 		INIT_LOADER_WIDGET(Layout, render::CtrlLayout, ELEMENT_NAME_LAYOUT);
 	};
-
-	/*
-	class HorizontalLayout;
-	// 水平布局
-	class HLayoutLoader : public LayoutLoader
-	{
-	public:
-		INIT_LOADER_LAYOUTITEM(HorizontalLayout, ELEMENT_NAME_HLAYOUT);
-	};
-
-	class VerticalLayout;
-	// 水平布局
-	class VLayoutLoader : public LayoutLoader
-	{
-	public:
-		INIT_LOADER_LAYOUTITEM(VerticalLayout, ELEMENT_NAME_VLAYOUT);
-	};
-	*/
 }

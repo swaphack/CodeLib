@@ -82,9 +82,12 @@
     <ClCompile Include="2d\UI\CtrlEditBox.cpp" />
     <ClCompile Include="2d\UI\CtrlEditText.cpp" />
     <ClCompile Include="2d\UI\CtrlFrame.cpp" />
+    <ClCompile Include="2d\UI\CtrlGridView.cpp" />
     <ClCompile Include="2d\UI\CtrlImage.cpp" />
     <ClCompile Include="2d\UI\CtrlLayout.cpp" />
+    <ClCompile Include="2d\UI\CtrlListView.cpp" />
     <ClCompile Include="2d\UI\CtrlMask.cpp" />
+    <ClCompile Include="2d\UI\CtrlMixGridView.cpp" />
     <ClCompile Include="2d\UI\CtrlScale9Image.cpp" />
     <ClCompile Include="2d\UI\CtrlScrollView.cpp" />
     <ClCompile Include="2d\UI\CtrlStencil.cpp" />
@@ -295,9 +298,12 @@
     <ClInclude Include="2d\UI\CtrlEditBox.h" />
     <ClInclude Include="2d\UI\CtrlEditText.h" />
     <ClInclude Include="2d\UI\CtrlFrame.h" />
+    <ClInclude Include="2d\UI\CtrlGridView.h" />
     <ClInclude Include="2d\UI\CtrlImage.h" />
     <ClInclude Include="2d\UI\CtrlLayout.h" />
+    <ClInclude Include="2d\UI\CtrlListView.h" />
     <ClInclude Include="2d\UI\CtrlMask.h" />
+    <ClInclude Include="2d\UI\CtrlMixGridView.h" />
     <ClInclude Include="2d\UI\CtrlScale9Image.h" />
     <ClInclude Include="2d\UI\CtrlScrollView.h" />
     <ClInclude Include="2d\UI\CtrlStencil.h" />

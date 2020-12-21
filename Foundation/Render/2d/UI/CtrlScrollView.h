@@ -6,20 +6,6 @@
 
 namespace render
 {
-	// 滑动方向
-	enum class ScrollDirection
-	{
-		NONE = -1,
-		// 水平从左往右
-		HORIZONTAL_LEFT_TO_RIGHT,
-		// 水平从右往左
-		HORIZONTAL_RIGHT_TO_LEFT,
-		// 水平从上往下
-		VERTICAL_TOP_TO_BOTTOM,
-		// 水平从下往上
-		VERTICAL_BOTTOM_TO_TOP,
-	};
-
 	class ScrollItem : public CtrlWidget
 	{
 	public:
@@ -40,18 +26,25 @@ namespace render
 		CtrlScrollView();
 		virtual ~CtrlScrollView();
 	public:
+		virtual bool init();
+	public:
 		/**
-		*	设置滑动方向
-		*/ 
-		void setScrollDirection(ScrollDirection direction);
+		*	设置内部大小
+		*/
+		void setInnerSize(const math::Size& size);
 		/**
-		*	获取滑动方向
-		*/ 
-		ScrollDirection getScrollDirection();
+		*	内部大小
+		*/
+		math::Size getInnerSize();
+		/**
+		*	内部布局
+		*/
+		const CtrlLayout* getInner() const;
+	public:
 		/**
 		*	添加一个项
 		*/  
-		void addItem(CtrlWidget* item, int zOrder = 0);
+		virtual void addItem(CtrlWidget* item, int zOrder = 0);
 		/**
 		*	添加一个项, 并设置大小
 		*/
@@ -64,18 +57,23 @@ namespace render
 		*	移除所有项
 		*/ 
 		void removeAllItems();
+	public:
 		/**
-		*	设置项的大小
-		*/ 
-		void setItemSize(const math::Size& size);
-		/**
-		*	设置项的大小
+		*	水平方向是否可以滑动
 		*/
-		void setItemSize(float width, float height);
+		bool isHorizontalScroll() const;
 		/**
-		*	获取设置项的大小
-		*/ 
-		const math::Size& getItemSize();
+		*	设置水平方向是否可以滑动
+		*/
+		void setHorizontalScroll(bool scroll);
+		/**
+		*	垂直方向是否可以滑动
+		*/
+		bool isVerticalScroll() const;
+		/**
+		*	设置水平方向是否可以滑动
+		*/
+		void setVerticalScroll(bool scroll);
 	public:// 重写
 		virtual void addWidget(CtrlWidget* item);
 		virtual void addWidget(CtrlWidget* item, int zOrder);
@@ -92,15 +90,16 @@ namespace render
 		// 初始化管理项
 		virtual void initContent();
 	protected:
-		// 滑动方向
-		ScrollDirection _scrollDirection = ScrollDirection::HORIZONTAL_LEFT_TO_RIGHT;
 		// 管理所有项的位置
 		CtrlLayout* _content = nullptr;
 		// 项
 		std::vector<CtrlWidget*> _itemWidgets;
 		// 点击位置
 		math::Vector2 _touchPosition;
-		// 项的大小
-		math::Size _itemSize;
+		
+		// 垂直方向是否可以滑动
+		bool _bHorizontalScroll = true;
+		// 水平方向是否可以滑动
+		bool _bVerticalScroll = true;
 	};
 }

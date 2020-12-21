@@ -5,12 +5,12 @@
 namespace ui
 {
 	// 方向
-	enum SpacerOrientation
+	enum class SpacerOrientation
 	{
 		// 水平
-		ESO_Horizontal,
+		Horizontal,
 		// 垂直
-		ESO_Vertial,
+		Vertial,
 	};
 
 	/**

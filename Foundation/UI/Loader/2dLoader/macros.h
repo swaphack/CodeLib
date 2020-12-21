@@ -11,6 +11,8 @@ namespace ui
 #define ELEMENT_NAME_TEXT			"Text"
 #define ELEMENT_NAME_BUTTON			"Button"
 #define ELEMENT_NAME_EDITTEXT		"EditText"
-#define ELEMENT_NAME_SCROLLVIEW		"ScrollView"
 #define ELEMENT_NAME_FILE			"File"
+
+#define ELEMENT_NAME_SCROLLVIEW		"ScrollView"
+#define ELEMENT_NAME_LISTVIEW		"ListView"
 }
