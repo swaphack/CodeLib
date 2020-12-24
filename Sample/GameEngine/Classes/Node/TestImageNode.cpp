@@ -2,10 +2,11 @@
 #include "mathlib.h"
 #include "system.h"
 #include "Utility.h"
+#include "ui.h"
 using namespace sys;
 using namespace render;
 using namespace math;
-
+using namespace ui;
 TestImageNode::TestImageNode()
 {
 

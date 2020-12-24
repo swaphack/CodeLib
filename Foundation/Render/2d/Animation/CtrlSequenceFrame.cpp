@@ -1,5 +1,4 @@
 #include "CtrlSequenceFrame.h"
-#include "2d/UI/CtrlFrame.h"
 #include "Common/Texture/TextureCache.h"
 #include "Common/Texture/Texture2D.h"
 
@@ -26,19 +25,7 @@ bool CtrlSequenceFrame::init()
 
 		if (texture == nullptr) return;
 
-		if (_ctrlFrame)
-		{
-			_ctrlFrame->setTextureWithRect(texture);
-		}
-	});
-
-	_notify->addListen(NodeNotifyType::BODY, [&](){
-		if (_ctrlFrame)
-		{
-			_ctrlFrame->setVolume(this->getWidth(), this->getHeight());
-
-			_ctrlFrame->setAnchorPoint(this->getAnchorPoint());
-		}
+		this->setTextureWithRect(texture);
 	});
 
 	return true;

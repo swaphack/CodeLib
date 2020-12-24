@@ -24,6 +24,6 @@ bool ue::MainWindow::init()
 
 void ue::MainWindow::setUIFile(const std::string& config)
 {
-	_viewLayout->setFilePath(config);
 	_viewLayout->autoResize();
+	_viewLayout->setFilePath(config);
 }

@@ -58,7 +58,7 @@ namespace ue
 		/**
 		*	更新目录栏
 		*/
-		void updateRootList(ui::Layout* layout, const DirDetail& detail, int layer = 0);
+		void updateRootList(ui::CtrlListView* layout, const DirDetail& detail, int layer = 0);
 	private:
 		/**
 		*	改变对折信息
@@ -72,27 +72,21 @@ namespace ue
 		/**
 		*	创建目录名字
 		*/
-		ui::LayoutItem* createDirItem(int top, int height, const std::string& name, const std::string& fullpath);
+		ui::CtrlButton* createDirItem(int height, const std::string& name, const std::string& fullpath);
 		/**
 		*	创建文件名字
 		*/
-		ui::LayoutItem* createFileItem(int top, int height, const std::string& name);
-		/**
-		*	创建项
-		*/
-		ui::LayoutItem* createRootItem(int top, int height, bool isDir, const std::string& name, const std::string& fullpath);
+		ui::CtrlButton* createFileItem(int height, const std::string& name, const std::string& fullpath);
 	private:
 		const float CONST_OFFSET_Y = 5;
-		const float CONST_ITEM_HEIGHT = 30;
+		const float CONST_ITEM_HEIGHT = 35;
 		// 根目录
 		std::string _root;
 		// 目录信息
 		DirDetail _dirDetail;
-		// 距离顶点位置
-		float _top = 0;
 		// 对折信息
 		std::map<std::string, bool> _dirFoldInfo;
 
-		std::map<std::string, ui::LayoutItem*> _dirItems;
+		ui::CtrlListView* _directory = nullptr;
 	};
 }

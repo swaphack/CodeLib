@@ -2,7 +2,7 @@
 
 #include "WidgetProperty.h"
 #include "Layout/LayoutItem.h"
-#include "Layout/Layout.h"
+#include "UI/CtrlWidget.h"
 #include "system.h"
 #include "render.h"
 
@@ -21,14 +21,15 @@ namespace ui
 		bool save(tinyxml2::XMLElement* pXmlNode, bool clean = true);
 		// 解析节点的名称
 		virtual std::string getName() = 0;
-		// 设置布局节点
-		void setLayoutItem(LayoutItem* item);
 		// 设置ui节点
-		void setWidget(render::CtrlWidget* node);
-		// 获取布局
-		LayoutItem* getLayoutItem();
+		void setWidget(CtrlWidget* node);
 		// 获取控件
-		render::CtrlWidget* getWidget();
+		CtrlWidget* getWidget();
+
+		void setLayoutItem(LayoutItem* item);
+
+		LayoutItem* getLayoutItem();
+
 		/**
 		*	默认字体
 		*/
@@ -52,7 +53,8 @@ namespace ui
 		// 节点属性
 		WidgetProperty* _nodeProperty;
 	protected:
-		render::CtrlWidget* _node = nullptr;
+		CtrlWidget* _node = nullptr;
+
 		LayoutItem* _layoutItem = nullptr;
 		// 默认字体
 		std::string _defaultFontPath;

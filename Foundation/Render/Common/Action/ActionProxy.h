@@ -7,12 +7,14 @@ namespace render
 	class Node;
 	class Action;
 
-	class ActionProxy
+	class ActionProxy : public sys::Object
 	{
 	public:
-		ActionProxy(Node* target);
+		ActionProxy();
 		~ActionProxy();
 	public:
+		void setTarget(Node* target);
+		Node* getTarget();
 		// 执行动作
 		Action* runAction(Action* handler);
 		// 停止动作
@@ -29,6 +31,6 @@ namespace render
 		void stopAllActions();
 	private:
 		// 对象
-		Node* _target;
+		Node* _target = nullptr;
 	};
 }

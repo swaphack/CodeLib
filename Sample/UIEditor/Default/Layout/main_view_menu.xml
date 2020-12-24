@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <root width="1024" height="768" layout="1" fontPath="Default/Font/font_3.ttf">
 	<Layout name="main" showMask="0" maskColor="0,0,0,125" margin="0,0,0,0" size="100%,100%">
-  		<Button name="file" text="File" anchorPoint="0.5,0.5" fontSize="28" textColor="0,0,0" margin="0,0,0,15" marginState="1,0,1,1" size="50,50"/>
-		<Button name="edit" text="Edit" anchorPoint="0.5,0.5" fontSize="28" textColor="0,0,0" margin="0,0,0,80" marginState="1,0,1,1" size="50,50"/>
+		<ListView direction="0" size="100%,100%">
+  			<Button name="file" text="File" fontSize="28" textColor="0,0,0" size="100,100%"/>
+			<Button name="edit" text="Edit" fontSize="28" textColor="0,0,0" size="100,100%"/>
+		</ListView>
   	</Layout>
 </root>

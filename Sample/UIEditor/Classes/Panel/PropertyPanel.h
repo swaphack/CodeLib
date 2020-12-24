@@ -37,39 +37,39 @@ namespace ue
 		virtual void initText();
 	private:
 		// 目标
-		ui::LayoutItem* m_pTargetItem = nullptr;
+		ui::CtrlWidget* m_pTargetItem = nullptr;
 		// 类型
-		render::CtrlText* m_pTextType = nullptr;
+		ui::CtrlText* m_pTextType = nullptr;
 		// 名称
-		render::CtrlEditText* m_pEditTextName = nullptr;
+		ui::CtrlEditText* m_pEditTextName = nullptr;
 
 		// 描点
-		render::CtrlEditText* m_pEditAnchorPointX = nullptr;
-		render::CtrlEditText* m_pEditAnchorPointY = nullptr;
+		ui::CtrlEditText* m_pEditAnchorPointX = nullptr;
+		ui::CtrlEditText* m_pEditAnchorPointY = nullptr;
 		// 面积
-		render::CtrlEditText* m_pEditSizeW = nullptr;
-		render::CtrlEditText* m_pEditSizeH = nullptr;
+		ui::CtrlEditText* m_pEditSizeW = nullptr;
+		ui::CtrlEditText* m_pEditSizeH = nullptr;
 		// 缩放
-		render::CtrlEditText* m_pEditScaleX = nullptr;
-		render::CtrlEditText* m_pEditScaleY = nullptr;
+		ui::CtrlEditText* m_pEditScaleX = nullptr;
+		ui::CtrlEditText* m_pEditScaleY = nullptr;
 		// 坐标
-		render::CtrlEditText* m_pEditPosX = nullptr;
-		render::CtrlEditText* m_pEditPosY = nullptr;
+		ui::CtrlEditText* m_pEditPosX = nullptr;
+		ui::CtrlEditText* m_pEditPosY = nullptr;
 		// 旋转
-		render::CtrlEditText* m_pEditRotateZ = nullptr;
+		ui::CtrlEditText* m_pEditRotateZ = nullptr;
 
-		render::CtrlButton* m_pBtnMarginTop = nullptr;
-		render::CtrlButton* m_pBtnMarginRight = nullptr;
-		render::CtrlButton* m_pBtnMarginBottom = nullptr;
-		render::CtrlButton* m_pBtnMarginLeft = nullptr;
+		ui::CtrlButton* m_pBtnMarginTop = nullptr;
+		ui::CtrlButton* m_pBtnMarginRight = nullptr;
+		ui::CtrlButton* m_pBtnMarginBottom = nullptr;
+		ui::CtrlButton* m_pBtnMarginLeft = nullptr;
 
 		// 边距
-		render::CtrlEditText* m_pEditTopValue = nullptr;
-		render::CtrlEditText* m_pEditRightValue = nullptr;
-		render::CtrlEditText* m_pEditBottomValue = nullptr;
-		render::CtrlEditText* m_pEditLeftValue = nullptr;
+		ui::CtrlEditText* m_pEditTopValue = nullptr;
+		ui::CtrlEditText* m_pEditRightValue = nullptr;
+		ui::CtrlEditText* m_pEditBottomValue = nullptr;
+		ui::CtrlEditText* m_pEditLeftValue = nullptr;
 
-		render::CtrlEditText* m_pEditWidthValue = nullptr;
-		render::CtrlEditText* m_pEditHeightValue = nullptr;
+		ui::CtrlEditText* m_pEditWidthValue = nullptr;
+		ui::CtrlEditText* m_pEditHeightValue = nullptr;
 	};
 }

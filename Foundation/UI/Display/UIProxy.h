@@ -1,13 +1,12 @@
 #pragma once
 
-#include "Layout/macros.h"
 #include "render.h"
+#include "Layout/macros.h"
 
 namespace ui
 {
 	class IElement;
-	class Layout;
-	class LayoutItem;
+	class CtrlWidget;
 
 	// ui加载
 	class UIProxy
@@ -20,11 +19,11 @@ namespace ui
 		/**
 		*	加载ui配置文件
 		*/
-		Layout* loadFile(const std::string& filepath);
+		CtrlWidget* loadFile(const std::string& filepath, const math::Size& size);
 		/**
 		*	保存ui配置文件
 		*/
-		bool saveFile(Layout* layout, const std::string& filepath, const math::Size& designSize);
+		bool saveFile(CtrlWidget* CtrlWidget, const std::string& filepath, const math::Size& designSize);
 		/**
 		*	注册节点解析
 		*/
@@ -66,16 +65,16 @@ namespace ui
 	protected:
 		//////////////////////////////////////////////////////////////////////////
 		// 加载单一节点
-		LayoutItem* initLayoutItem(tinyxml2::XMLElement* xmlNode);
+		CtrlWidget* initWidget(tinyxml2::XMLElement* xmlNode);
 		// 加载布局
-		bool loadLayout(Layout* pLayout, tinyxml2::XMLElement* xmlNode);
+		bool loadWidget(CtrlWidget* pCtrlWidget, tinyxml2::XMLElement* xmlNode);
 		// 加载根元素
-		Layout* loadRoot(tinyxml2::XMLElement* xmlNode);
+		CtrlWidget* loadRoot(tinyxml2::XMLElement* xmlNode, const math::Size& size);
 		//////////////////////////////////////////////////////////////////////////
 		// 保存布局
-		bool saveLayoutItem(LayoutItem* item, tinyxml2::XMLElement* xmlNode);
+		bool saveWidget(CtrlWidget* item, tinyxml2::XMLElement* xmlNode);
 		// 保存根元素
-		bool saveRoot(Layout* layout, tinyxml2::XMLDocument* document);
+		bool saveRoot(CtrlWidget* layout, tinyxml2::XMLDocument* document);
 	private:
 		typedef std::map<std::string, IElement*> ElementParsers;
 		// 节点解析集合

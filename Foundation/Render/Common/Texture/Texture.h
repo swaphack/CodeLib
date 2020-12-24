@@ -22,8 +22,8 @@ namespace render
 	{
 	public:
 		// ÎÆÀíµ¥Ôª ActiveTextureName::TEXTURE0 + unit
-		TextureMinFilter minFilter = TextureMinFilter::LINEAR;
-		TextureMagFilter magFilter = TextureMagFilter::LINEAR;
+		TextureMinFilter minFilter = TextureMinFilter::NEAREST;
+		TextureMagFilter magFilter = TextureMagFilter::NEAREST;
 		TextureWrapMode wrapS = TextureWrapMode::CLAMP_TO_EDGE;
 		TextureWrapMode wrapT = TextureWrapMode::CLAMP_TO_EDGE;
 		TextureWrapMode wrapR = TextureWrapMode::CLAMP_TO_EDGE;

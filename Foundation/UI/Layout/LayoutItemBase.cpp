@@ -1,4 +1,5 @@
 #include "LayoutItemBase.h"
+#include "UI/CtrlWidget.h"
 
 ui::LayoutItemBase::LayoutItemBase()
 {
@@ -14,12 +15,12 @@ void ui::LayoutItemBase::setWidgetName(const std::string& name)
 	m_strWidgetName = name;
 }
 
-const std::string& ui::LayoutItemBase::getWdigetName() const
+const std::string& ui::LayoutItemBase::getWidgetName() const
 {
 	return m_strWidgetName;
 }
 
-void ui::LayoutItemBase::setWidget(render::CtrlWidget* widget)
+void ui::LayoutItemBase::setWidget(CtrlWidget* widget)
 {
 	if (widget == nullptr)
 	{
@@ -28,42 +29,9 @@ void ui::LayoutItemBase::setWidget(render::CtrlWidget* widget)
 	m_pWidget = widget;
 }
 
-render::CtrlWidget* ui::LayoutItemBase::getWidget() const
+ui::CtrlWidget* ui::LayoutItemBase::getWidget() const
 {
 	return m_pWidget;
-}
-
-void ui::LayoutItemBase::setBoxVisible(bool bVisible)
-{
-	if (m_pWidget)
-	{
-		m_pWidget->setBoxVisible(bVisible);
-	}
-}
-
-void ui::LayoutItemBase::setBoxLineWidth(float width)
-{
-	if (m_pWidget)
-	{
-		m_pWidget->setBoxWidth(width);
-	}
-}
-
-void ui::LayoutItemBase::setBoxLineColor(const phy::Color4B& color)
-{
-	if (m_pWidget)
-	{
-		m_pWidget->setBoxColor(color);
-	}
-}
-
-bool ui::LayoutItemBase::containPoint(float x, float y)
-{
-	if (m_pWidget)
-	{
-		return m_pWidget->containTouchPoint(x, y);
-	}
-	return false;
 }
 
 void ui::LayoutItemBase::autoResize()
@@ -87,12 +55,11 @@ void ui::LayoutItemBase::resize(const math::Size& size)
 	m_sParentSize = size;
 }
 
-const render::RectPoints* ui::LayoutItemBase::getRectPoints() const
+void ui::LayoutItemBase::refresh()
 {
-	if (getWidget() == nullptr)
+	if (m_pWidget != nullptr)
 	{
-		return nullptr;
+		m_pWidget->refreshLayout();
 	}
-	
-	return &getWidget()->getRealRectVertex();
 }
+

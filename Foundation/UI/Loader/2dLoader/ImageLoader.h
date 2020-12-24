@@ -15,6 +15,6 @@ namespace ui
 
 		virtual void saveAttributes();
 	public:
-		INIT_LOADER_WIDGET(LayoutItem, render::CtrlImage, ELEMENT_NAME_IMAGE);
+		INIT_LOADER_WIDGET(LayoutItem, CtrlImage, ELEMENT_NAME_IMAGE);
 	};
 }

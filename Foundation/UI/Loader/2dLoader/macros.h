@@ -15,4 +15,5 @@ namespace ui
 
 #define ELEMENT_NAME_SCROLLVIEW		"ScrollView"
 #define ELEMENT_NAME_LISTVIEW		"ListView"
+#define ELEMENT_NAME_GRIDVIEW		"GridView"
 }

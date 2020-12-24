@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <root width="1024" height="768" layout="1" fontPath="Default/Font/font_3.ttf">
   <Layout showMask="1" maskColor="255,255,255,180" margin="0,0,0,0" size="100%,100%"> 
-  		<Button name="widget" text="Widget" anchorPoint="0.5,0.5" fontSize="24" textColor="255,255,255" margin="15,0,0,10" marginState="1,0,0,1" size="80,50"/>
-		<Button name="text" text="Text" anchorPoint="0.5,0.5" fontSize="24" textColor="255,255,255" margin="15,0,0,90" marginState="1,0,0,1" size="80,50"/>
-		<Button name="image" text="Image" anchorPoint="0.5,0.5" fontSize="24" textColor="255,255,255" margin="15,0,0,170" marginState="1,0,0,1" size="80,50"/>
+  		<GridView direction="2" useItemSize="1" itemSize="80,50" size="100%,100%">
+  			<Button name="widget" text="Widget" fontSize="24" textColor="255,255,255" />
+			<Button name="text" text="Text" fontSize="24" textColor="255,255,255" />
+			<Button name="image" text="Image" fontSize="24" textColor="255,255,255" />
+		</GridView>
   </Layout>
 </root>

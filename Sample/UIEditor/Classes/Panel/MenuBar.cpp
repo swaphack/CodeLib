@@ -11,18 +11,18 @@ ue::MenuBar::~MenuBar()
 
 void ue::MenuBar::initUI()
 {
-	auto item = m_pLayout->findItemByName("file");
-	if (item)
+	if (m_pRootWidget == nullptr) return;
+	ui::CtrlWidget* item = nullptr;
+	if (m_pRootWidget->findWidgetByName("file", item))
 	{
-		item->getWidget()->addClickFunc([item](render::Node* node) {
+		item->addClickFunc([item](render::Node* node) {
 			showWithTarget<PopMenu>(item, sys::CSSDirection::Bottom);
 		});
 	}
 
-	item = m_pLayout->findItemByName("edit");
-	if (item)
+	if (m_pRootWidget->findWidgetByName("edit", item))
 	{
-		item->getWidget()->addClickFunc([item](render::Node* node) {
+		item->addClickFunc([item](render::Node* node) {
 			showWithTarget<PopMenu>(item, sys::CSSDirection::Bottom);
 		});
 	}

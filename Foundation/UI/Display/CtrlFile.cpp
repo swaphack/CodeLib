@@ -1,6 +1,5 @@
 #include "CtrlFile.h"
 #include "UIProxy.h"
-#include "Layout/Layout.h"
 
 using namespace ui;
 
@@ -13,8 +12,6 @@ CtrlFile::CtrlFile()
 CtrlFile::~CtrlFile()
 {
 	render::RenderApplication::getInstance()->removeWndProtocol(this);
-
-	SAFE_RELEASE(m_pLayout);
 }
 
 bool ui::CtrlFile::init()
@@ -23,25 +20,12 @@ bool ui::CtrlFile::init()
 	{
 		return false;
 	}
-	
-	_notify->addListen(render::NodeNotifyType::BODY, [this]() {
-		math::Size size = this->getSize();
-		if (m_pLayout)
-		{
-			m_pLayout->resize(size);
-		}
-	});
 
 	return true;
 }
 
 void CtrlFile::show()
 {
-	if (m_pLayout == nullptr)
-	{
-		return;
-	}
-
 	initUI();
 	initText();
 	initEvent();
@@ -69,17 +53,12 @@ void ui::CtrlFile::save()
 
 void ui::CtrlFile::saveTo(const std::string& filepath)
 {
-	UIProxy::getInstance()->saveFile(m_pLayout, filepath, m_sViewSize);
+	UIProxy::getInstance()->saveFile(this, filepath, m_sViewSize);
 }
 
 LayoutDirection CtrlFile::getLayoutDirection()
 {
 	return m_eLayoutDirection;
-}
-
-Layout* CtrlFile::getLayout()
-{
-	return m_pLayout;
 }
 
 void ui::CtrlFile::setRootView(bool root)
@@ -112,25 +91,20 @@ bool CtrlFile::loadFile()
 	{
 		return false;
 	}
-	Layout* pLayout = UIProxy::getInstance()->loadFile(fullpath);
-	if (pLayout == nullptr)
+	auto widget = UIProxy::getInstance()->loadFile(fullpath, this->getSize());
+	if (widget == nullptr)
 	{
 		return false;
 	}
-	if (m_pLayout && m_pLayout->getWidget())
-	{
-		m_pLayout->getWidget()->removeFromParent();
-	}
-	SAFE_RELEASE(m_pLayout);
-	SAFE_RETAIN(pLayout);
 
-	m_pLayout = pLayout;
 	m_sViewSize = UIProxy::getInstance()->getDesignSize();
 	m_eLayoutDirection = UIProxy::getInstance()->getDesignDirection();
 
-	if (m_pLayout->getWidget())
+	m_pRootWidget = widget;
+	this->removeAllWidgets();
+	if (widget)
 	{
-		this->addWidget(m_pLayout->getWidget());
+		this->addWidget(widget);
 	}
 
 	return true;
@@ -167,10 +141,7 @@ void CtrlFile::autoResize()
 	}
 
 	this->setVolume(viewSize);
-	if (m_pLayout)
-	{
-		m_pLayout->resize(viewSize);
-	}
+	//this->broadcastBodyChange();
 }
 
 const math::Size& ui::CtrlFile::getViewSize()

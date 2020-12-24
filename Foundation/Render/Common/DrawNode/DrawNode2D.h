@@ -9,15 +9,16 @@ namespace render
 	/**
 	*	2d绘制
 	*/
-	class DrawNode2D : public DrawNode, public DrawBoxProtocol
+	class DrawNode2D : 
+		public DrawNode, 
+		public DrawBoxProtocol
+
 	{
 	public:
 		DrawNode2D();
 		virtual ~DrawNode2D();
 	public:
 		virtual bool init();
-	public:
-		
 	public:
 		/**
 		*	是否显示网格

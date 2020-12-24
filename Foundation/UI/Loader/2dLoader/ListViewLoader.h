@@ -4,7 +4,6 @@
 
 namespace ui
 {
-	class Layout;
 	// 列表
 	class ListViewLoader : public ScrollViewLoader
 	{
@@ -17,6 +16,6 @@ namespace ui
 		// 保存属性
 		virtual void saveAttributes();
 	public:
-		INIT_LOADER_WIDGET(Layout, render::CtrlListView, ELEMENT_NAME_LISTVIEW);
+		INIT_LOADER_WIDGET(LayoutItem, CtrlListView, ELEMENT_NAME_LISTVIEW);
 	};
 }

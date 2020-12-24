@@ -14,14 +14,13 @@ namespace ui
 public:\
 	virtual std::string getName() { return NAME; }\
 	TW* getCastWidget() { return getWidget()->as<TW>(); }\
-	TL* getCastLayoutItem() { return getLayoutItem()->as<TL>(); } \
 	virtual void initLayoutItem() { _layoutItem = CREATE_OBJECT(TL);  } \
 	virtual void initWidget() { _node = CREATE_NODE(TW);  }
 
 	// 获取当前节点：子类会隐藏父类同名函数
 #define GET_WIDGET getCastWidget()
 	// 获取当前布局项：子类会隐藏父类同名函数
-#define GET_LAYOUTITEM getCastLayoutItem()
+#define GET_LAYOUTITEM getLayoutItem()
 //////////////////////////////////////////////////////////////////////////
 	// LOAD  ATTRIBUTE
 	/**

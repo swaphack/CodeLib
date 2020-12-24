@@ -1,9 +1,11 @@
 #include "TestUINode.h"
 #include "system.h"
 #include "Utility.h"
+#include "ui.h"
 
 using namespace sys;
 using namespace render;
+using namespace ui;
 
 TestUINode::TestUINode()
 {
@@ -67,7 +69,7 @@ void TestUINode::testEditBox()
 void TestUINode::testSequenceFrame()
 {
 	CtrlSequenceFrame* pSequenceFrame = CREATE_NODE(CtrlSequenceFrame);
-	Utility::loadDefaultShader(pSequenceFrame->getAnimationFrame());
+	Utility::loadDefaultShader(pSequenceFrame);
 	pSequenceFrame->setVolume(1024, 768);
 	pSequenceFrame->setFrameImagePath("Resource/Role/1/20%d.png", 8);
 	pSequenceFrame->setPosition(512, 384, 0);
@@ -129,7 +131,7 @@ void TestUINode::onKeyBoardRole(render::Node* node, sys::BoardKey key, sys::Butt
 	{
 		DirectionAction* pConfig = &ActionConfigs[index];
 
-		pRole->getAnimationFrame()->setFlipX(pConfig->bFlipX);
+		pRole->setFlipX(pConfig->bFlipX);
 		pRole->setFrameImagePath(pConfig->path, pConfig->count);
 	}
 }
@@ -163,7 +165,6 @@ void TestUINode::testScrollView()
 	pScrollView->setClip(true);
 	pScrollView->setPosition(512, 384);
 	pScrollView->setVolume(200, 600);
-	pScrollView->setItemSize(200, 200);
 	this->addChild(pScrollView);
 
 	for (int i = 0; i < 10; i++)
@@ -174,7 +175,7 @@ void TestUINode::testScrollView()
 		pScrollView->addWidget(pImage);
 	}
 
-	pScrollView->setScrollDirection(ScrollDirection::VERTICAL_TOP_TO_BOTTOM);
+	//pScrollView->setScrollDirection(ScrollDirection::VERTICAL_TOP_TO_BOTTOM);
 }
 
 void TestUINode::testMask()
@@ -272,7 +273,7 @@ void TestUINode::testImage()
 
 void TestUINode::testButton()
 {
-	auto pBtn = CREATE_NODE(render::CtrlButton);
+	auto pBtn = CREATE_NODE(ui::CtrlButton);
 	pBtn->setFontSize(32);
 	pBtn->setAnchorPoint(0.5f, 0.5f);
 	pBtn->setPosition(512, 384);

@@ -57,21 +57,6 @@
     <ClCompile Include="Common\Action\ExtAction.cpp">
       <Filter>Common\Action</Filter>
     </ClCompile>
-    <ClCompile Include="2d\UI\CtrlEditBox.cpp">
-      <Filter>2d\UI</Filter>
-    </ClCompile>
-    <ClCompile Include="2d\UI\CtrlFrame.cpp">
-      <Filter>2d\UI</Filter>
-    </ClCompile>
-    <ClCompile Include="2d\UI\CtrlImage.cpp">
-      <Filter>2d\UI</Filter>
-    </ClCompile>
-    <ClCompile Include="2d\UI\CtrlScrollView.cpp">
-      <Filter>2d\UI</Filter>
-    </ClCompile>
-    <ClCompile Include="2d\UI\CtrlText.cpp">
-      <Filter>2d\UI</Filter>
-    </ClCompile>
     <ClCompile Include="2d\Animation\CtrlAnimation.cpp">
       <Filter>2d\Animation</Filter>
     </ClCompile>
@@ -204,12 +189,6 @@
     <ClCompile Include="Common\Shader\ShaderProgramUniform.cpp">
       <Filter>Common\Shader</Filter>
     </ClCompile>
-    <ClCompile Include="2d\UI\CtrlLayout.cpp">
-      <Filter>2d\UI</Filter>
-    </ClCompile>
-    <ClCompile Include="2d\UI\CtrlWidget.cpp">
-      <Filter>2d\UI</Filter>
-    </ClCompile>
     <ClCompile Include="Common\DrawNode\DrawNode.cpp">
       <Filter>Common\DrawNode</Filter>
     </ClCompile>
@@ -218,9 +197,6 @@
     </ClCompile>
     <ClCompile Include="Common\DrawNode\DrawProtocol.cpp">
       <Filter>Common\DrawNode</Filter>
-    </ClCompile>
-    <ClCompile Include="2d\UI\TextProtocol.cpp">
-      <Filter>2d\UI</Filter>
     </ClCompile>
     <ClCompile Include="Common\Action\ActionProtocol.cpp">
       <Filter>Common\Action</Filter>
@@ -257,9 +233,6 @@
     </ClCompile>
     <ClCompile Include="Common\Fragment\FragmentHandle.cpp">
       <Filter>Common\Fragment</Filter>
-    </ClCompile>
-    <ClCompile Include="2d\UI\CtrlStencil.cpp">
-      <Filter>2d\UI</Filter>
     </ClCompile>
     <ClCompile Include="Common\Transform\Transform.cpp">
       <Filter>Common\Transform</Filter>
@@ -600,29 +573,14 @@
     <ClCompile Include="Common\View\ViewPort.cpp">
       <Filter>Common\View</Filter>
     </ClCompile>
-    <ClCompile Include="2d\UI\CtrlMask.cpp">
-      <Filter>2d\UI</Filter>
-    </ClCompile>
-    <ClCompile Include="2d\UI\CtrlButton.cpp">
-      <Filter>2d\UI</Filter>
-    </ClCompile>
-    <ClCompile Include="2d\UI\CtrlEditText.cpp">
-      <Filter>2d\UI</Filter>
-    </ClCompile>
     <ClCompile Include="Common\DrawNode\DrawBoxProtocol.cpp">
       <Filter>Common\DrawNode</Filter>
     </ClCompile>
-    <ClCompile Include="2d\UI\CtrlScale9Image.cpp">
-      <Filter>2d\UI</Filter>
+    <ClCompile Include="2d\Base\DrawTexture2D.cpp">
+      <Filter>2d\Base</Filter>
     </ClCompile>
-    <ClCompile Include="2d\UI\CtrlListView.cpp">
-      <Filter>2d\UI</Filter>
-    </ClCompile>
-    <ClCompile Include="2d\UI\CtrlGridView.cpp">
-      <Filter>2d\UI</Filter>
-    </ClCompile>
-    <ClCompile Include="2d\UI\CtrlMixGridView.cpp">
-      <Filter>2d\UI</Filter>
+    <ClCompile Include="Common\Node\NotifyCenter.cpp">
+      <Filter>Common\Node</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -745,27 +703,6 @@
     </ClInclude>
     <ClInclude Include="Common\Action\ExtAction.h">
       <Filter>Common\Action</Filter>
-    </ClInclude>
-    <ClInclude Include="2d\UI\CtrlEditBox.h">
-      <Filter>2d\UI</Filter>
-    </ClInclude>
-    <ClInclude Include="2d\UI\CtrlFrame.h">
-      <Filter>2d\UI</Filter>
-    </ClInclude>
-    <ClInclude Include="2d\UI\CtrlImage.h">
-      <Filter>2d\UI</Filter>
-    </ClInclude>
-    <ClInclude Include="2d\UI\CtrlScrollView.h">
-      <Filter>2d\UI</Filter>
-    </ClInclude>
-    <ClInclude Include="2d\UI\CtrlText.h">
-      <Filter>2d\UI</Filter>
-    </ClInclude>
-    <ClInclude Include="2d\UI\import.h">
-      <Filter>2d\UI</Filter>
-    </ClInclude>
-    <ClInclude Include="2d\UI\macros.h">
-      <Filter>2d\UI</Filter>
     </ClInclude>
     <ClInclude Include="2d\Animation\CtrlAnimation.h">
       <Filter>2d\Animation</Filter>
@@ -936,12 +873,6 @@
     <ClInclude Include="Common\Shader\ShaderProgramUniform.h">
       <Filter>Common\Shader</Filter>
     </ClInclude>
-    <ClInclude Include="2d\UI\CtrlLayout.h">
-      <Filter>2d\UI</Filter>
-    </ClInclude>
-    <ClInclude Include="2d\UI\CtrlWidget.h">
-      <Filter>2d\UI</Filter>
-    </ClInclude>
     <ClInclude Include="Common\Fragment\import.h">
       <Filter>Common\Fragment</Filter>
     </ClInclude>
@@ -953,9 +884,6 @@
     </ClInclude>
     <ClInclude Include="Common\DrawNode\DrawProtocol.h">
       <Filter>Common\DrawNode</Filter>
-    </ClInclude>
-    <ClInclude Include="2d\UI\TextProtocol.h">
-      <Filter>2d\UI</Filter>
     </ClInclude>
     <ClInclude Include="Common\Action\ActionProtocol.h">
       <Filter>Common\Action</Filter>
@@ -992,9 +920,6 @@
     </ClInclude>
     <ClInclude Include="Common\Fragment\FragmentHandle.h">
       <Filter>Common\Fragment</Filter>
-    </ClInclude>
-    <ClInclude Include="2d\UI\CtrlStencil.h">
-      <Filter>2d\UI</Filter>
     </ClInclude>
     <ClInclude Include="Common\Transform\Transform.h">
       <Filter>Common\Transform</Filter>
@@ -1401,29 +1326,17 @@
     <ClInclude Include="Common\View\ViewPort.h">
       <Filter>Common\View</Filter>
     </ClInclude>
-    <ClInclude Include="2d\UI\CtrlMask.h">
-      <Filter>2d\UI</Filter>
-    </ClInclude>
-    <ClInclude Include="2d\UI\CtrlButton.h">
-      <Filter>2d\UI</Filter>
-    </ClInclude>
-    <ClInclude Include="2d\UI\CtrlEditText.h">
-      <Filter>2d\UI</Filter>
-    </ClInclude>
     <ClInclude Include="Common\DrawNode\DrawBoxProtocol.h">
       <Filter>Common\DrawNode</Filter>
     </ClInclude>
-    <ClInclude Include="2d\UI\CtrlScale9Image.h">
-      <Filter>2d\UI</Filter>
+    <ClInclude Include="2d\Base\DrawTexture2D.h">
+      <Filter>2d\Base</Filter>
     </ClInclude>
-    <ClInclude Include="2d\UI\CtrlListView.h">
-      <Filter>2d\UI</Filter>
+    <ClInclude Include="2d\Base\import.h">
+      <Filter>2d\Base</Filter>
     </ClInclude>
-    <ClInclude Include="2d\UI\CtrlGridView.h">
-      <Filter>2d\UI</Filter>
-    </ClInclude>
-    <ClInclude Include="2d\UI\CtrlMixGridView.h">
-      <Filter>2d\UI</Filter>
+    <ClInclude Include="Common\Node\NotifyCenter.h">
+      <Filter>Common\Node</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1483,9 +1396,6 @@
     </Filter>
     <Filter Include="2d">
       <UniqueIdentifier>{393be6e1-62a4-4a86-989e-db31f9a3a3e3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="2d\UI">
-      <UniqueIdentifier>{96321678-d993-4d34-8a32-ac33f162b0c3}</UniqueIdentifier>
     </Filter>
     <Filter Include="2d\Animation">
       <UniqueIdentifier>{91b9cdf2-865f-40ac-ae8f-a0605a0fa54e}</UniqueIdentifier>
@@ -1552,6 +1462,9 @@
     </Filter>
     <Filter Include="2d\Primitive">
       <UniqueIdentifier>{9a6a8e52-d6ec-44a8-8729-a8a1c5a7f8db}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2d\Base">
+      <UniqueIdentifier>{cd728e4f-5380-44e1-9b70-a1af70ffbc9b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

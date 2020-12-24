@@ -20,7 +20,7 @@ namespace ue
 		/**
 		*	获取取消选中
 		*/
-		ui::LayoutItem* getSelectedTarget() const;
+		ui::CtrlWidget* getSelectedTarget() const;
 		/**
 		*	设置设计文件
 		*/
@@ -55,19 +55,19 @@ namespace ue
 		/**
 		*	点击最前面的组件
 		*/
-		bool touchFrontWidget(ui::LayoutItem* layoutItem,float x, float y);
+		bool touchFrontWidget(ui::CtrlWidget* widget,float x, float y);
 	protected:
 		void saveFile();
 		void reloadFile();
 	protected:
 		// 设计文件
-		ui::LayoutItem* m_pUIFile = nullptr;
+		ui::CtrlWidget* m_pUIFile = nullptr;
 		// 是否选中
 		bool m_bSelected = false;
 		// 选中对象
-		ui::LayoutItem* m_pSelectedTarget = nullptr;
+		ui::CtrlWidget* m_pSelectedTarget = nullptr;
 
-		ui::Layout* m_pViewScene = nullptr;
+		ui::CtrlWidget* m_pViewScene = nullptr;
 
 		std::string m_strFileName;
 	};

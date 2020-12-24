@@ -5,17 +5,23 @@
 #include "../Node/Node.h"
 using namespace render;
 
-ActionProxy::ActionProxy(Node* target)
+ActionProxy::ActionProxy()
 {
-	SAFE_RETAIN(target);
-	_target = target;
 }
 
 ActionProxy::~ActionProxy()
 {
 	this->stopAllActions();
+}
 
-	SAFE_RELEASE(_target);
+void render::ActionProxy::setTarget(Node* target)
+{
+	_target = target;
+}
+
+Node* render::ActionProxy::getTarget()
+{
+	return nullptr;
 }
 
 Action* ActionProxy::runAction(Action* handler)

@@ -4,7 +4,6 @@
 
 namespace ui
 {
-	class Layout;
 	// 布局
 	class LayoutLoader : public WidgetLoader
 	{
@@ -17,6 +16,6 @@ namespace ui
 		// 保存属性
 		virtual void saveAttributes();
 	public:
-		INIT_LOADER_WIDGET(Layout, render::CtrlLayout, ELEMENT_NAME_LAYOUT);
+		INIT_LOADER_WIDGET(LayoutItem, CtrlLayout, ELEMENT_NAME_LAYOUT);
 	};
 }

@@ -1,0 +1,69 @@
+#pragma once
+
+#include "CtrlWidget.h"
+
+namespace ui
+{
+	class CtrlImage;
+	class CtrlMask;
+
+	class CtrlLayout : public CtrlWidget
+	{
+	public:
+		CtrlLayout();
+		virtual ~CtrlLayout();
+	public:
+		virtual bool init();
+	public:
+		/**
+		*	ÉèÖÃ±³¾°ÑÕÉ«
+		*/
+		void setBackgroundColor(const phy::Color4B& color);
+		/**
+		*	±³¾°ÑÕÉ«
+		*/
+		const phy::Color4B& getBackgroundColor() const;
+		/**
+		*	ÉèÖÃ±³¾°Í¼Æ¬
+		*/
+		void setBackgroundImagePath(const std::string& filepath);
+		/**
+		*	±³¾°Í¼Æ¬
+		*/
+		const std::string& getBackgroundImagePath() const;
+		/**
+		*	±³¾°Í¼Æ¬
+		*/
+		CtrlImage* getBackgroundImage() const;
+		/**
+		*	±³¾°ÑÕÉ«
+		*/
+		CtrlMask* getBackgroundMask() const;
+		/**
+		*	ÉèÖÃ±³¾°Í¼Æ¬ÊÇ·ñ¿É¼û
+		*/
+		void setBackgroudImageVisible(bool bVisible);
+		/**
+		*	±³¾°Í¼Æ¬ÊÇ·ñ¿É¼û
+		*/
+		bool isBackgroudImageVisible() const;
+		/**
+		*	ÉèÖÃ±³¾°ÑÕÉ«ÊÇ·ñ¿É¼û
+		*/
+		void setBackgroudMaskVisible(bool bVisible);
+		/**
+		*	±³¾°ÑÕÉ«ÊÇ·ñ¿É¼û
+		*/
+		bool isBackgroudMaskVisible() const;
+	private:
+		/**
+		*	±³¾°Í¼Æ¬
+		*/
+		CtrlImage* _backgroundImage = nullptr;
+		/**
+		*	±³¾°ÑÕÉ«
+		*/
+		CtrlMask* _backgroundMask = nullptr;
+		
+	};
+}

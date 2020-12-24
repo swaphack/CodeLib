@@ -11,7 +11,7 @@ namespace render
 	class TouchProxy : public sys::Object
 	{
 	public:
-		TouchProxy(Node* target);
+		TouchProxy();
 		virtual ~TouchProxy();
 	public:
 		// 作用对象

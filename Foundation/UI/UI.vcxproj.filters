@@ -5,9 +5,6 @@
     <ClInclude Include="Display\import.h">
       <Filter>Display</Filter>
     </ClInclude>
-    <ClInclude Include="Layout\Layout.h">
-      <Filter>Layout</Filter>
-    </ClInclude>
     <ClInclude Include="Layout\LayoutItem.h">
       <Filter>Layout</Filter>
     </ClInclude>
@@ -53,24 +50,6 @@
     <ClInclude Include="Layout\LayoutItemBase.h">
       <Filter>Layout</Filter>
     </ClInclude>
-    <ClInclude Include="LayoutExtension\LayoutWidgetItem.h">
-      <Filter>LayoutExtension</Filter>
-    </ClInclude>
-    <ClInclude Include="LayoutExtension\LayoutEx.h">
-      <Filter>LayoutExtension</Filter>
-    </ClInclude>
-    <ClInclude Include="LayoutExtension\LayoutItemEx.h">
-      <Filter>LayoutExtension</Filter>
-    </ClInclude>
-    <ClInclude Include="LayoutExtension\LayoutSpacerItem.h">
-      <Filter>LayoutExtension</Filter>
-    </ClInclude>
-    <ClInclude Include="LayoutExtension\import.h">
-      <Filter>LayoutExtension</Filter>
-    </ClInclude>
-    <ClInclude Include="LayoutExtension\macros.h">
-      <Filter>LayoutExtension</Filter>
-    </ClInclude>
     <ClInclude Include="Layout\macros.h">
       <Filter>Layout</Filter>
     </ClInclude>
@@ -98,6 +77,63 @@
     <ClInclude Include="Loader\2dLoader\ListViewLoader.h">
       <Filter>Loader\2dLoader</Filter>
     </ClInclude>
+    <ClInclude Include="UI\CtrlButton.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\CtrlEditBox.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\CtrlEditText.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\CtrlGridView.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\CtrlImage.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\CtrlLayout.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\CtrlListView.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\CtrlMask.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\CtrlMixGridView.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\CtrlScale9Image.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\CtrlScrollView.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\CtrlStencil.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\CtrlText.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\CtrlWidget.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\import.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\macros.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\TextProtocol.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\AutoResizeProtocol.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Loader\2dLoader\GridViewLoader.h">
+      <Filter>Loader\2dLoader</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Display">
@@ -121,11 +157,11 @@
     <Filter Include="Loader\ElementWidget">
       <UniqueIdentifier>{df846a21-11b3-4d6f-a429-78226fcd4e66}</UniqueIdentifier>
     </Filter>
-    <Filter Include="LayoutExtension">
-      <UniqueIdentifier>{95efb6b8-41eb-4349-90da-9fc35b72c86e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Loader\BaseLoader">
       <UniqueIdentifier>{57bc5bce-bc86-4cee-a08f-f941055a9d54}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI">
+      <UniqueIdentifier>{bcd4ed77-911c-4562-a05c-07641db5c057}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -153,23 +189,8 @@
     <ClCompile Include="Display\UIProxy.cpp">
       <Filter>Display</Filter>
     </ClCompile>
-    <ClCompile Include="Layout\Layout.cpp">
-      <Filter>Layout</Filter>
-    </ClCompile>
     <ClCompile Include="Layout\LayoutItemBase.cpp">
       <Filter>Layout</Filter>
-    </ClCompile>
-    <ClCompile Include="LayoutExtension\LayoutEx.cpp">
-      <Filter>LayoutExtension</Filter>
-    </ClCompile>
-    <ClCompile Include="LayoutExtension\LayoutItemEx.cpp">
-      <Filter>LayoutExtension</Filter>
-    </ClCompile>
-    <ClCompile Include="LayoutExtension\LayoutSpacerItem.cpp">
-      <Filter>LayoutExtension</Filter>
-    </ClCompile>
-    <ClCompile Include="LayoutExtension\LayoutWidgetItem.cpp">
-      <Filter>LayoutExtension</Filter>
     </ClCompile>
     <ClCompile Include="Loader\2dLoader\FileLoader.cpp">
       <Filter>Loader\2dLoader</Filter>
@@ -190,6 +211,54 @@
       <Filter>Loader\2dLoader</Filter>
     </ClCompile>
     <ClCompile Include="Loader\2dLoader\ListViewLoader.cpp">
+      <Filter>Loader\2dLoader</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\CtrlButton.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\CtrlEditBox.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\CtrlEditText.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\CtrlGridView.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\CtrlImage.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\CtrlLayout.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\CtrlListView.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\CtrlMask.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\CtrlMixGridView.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\CtrlScale9Image.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\CtrlScrollView.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\CtrlStencil.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\CtrlText.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\CtrlWidget.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\TextProtocol.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Loader\2dLoader\GridViewLoader.cpp">
       <Filter>Loader\2dLoader</Filter>
     </ClCompile>
   </ItemGroup>

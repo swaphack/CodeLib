@@ -12,12 +12,10 @@ ui::ScrollViewLoader::~ScrollViewLoader()
 
 void ui::ScrollViewLoader::parseAttributes()
 {
-	
-
-	WidgetLoader::parseAttributes();
+	LayoutLoader::parseAttributes();
 }
 
 void ui::ScrollViewLoader::saveAttributes()
 {
-	WidgetLoader::saveAttributes();
+	LayoutLoader::saveAttributes();
 }

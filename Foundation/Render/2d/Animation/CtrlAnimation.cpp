@@ -1,5 +1,4 @@
 #include "CtrlAnimation.h"
-#include "2d/UI/CtrlFrame.h"
 #include "Audio/CtrlAudioSource.h"
 #include "Common/Action/import.h"
 
@@ -11,8 +10,6 @@ CtrlAnimation::CtrlAnimation()
 , _frame(0)
 , _duration(0)
 {
-	_ctrlFrame = CREATE_NODE(CtrlFrame);
-	this->addChild(_ctrlFrame);
 }
 
 CtrlAnimation::~CtrlAnimation()
@@ -21,7 +18,7 @@ CtrlAnimation::~CtrlAnimation()
 
 bool CtrlAnimation::init()
 {
-	if (!CtrlWidget::init())
+	if (!DrawTexture2D::init())
 	{
 		return false;
 	}
@@ -70,11 +67,6 @@ void CtrlAnimation::setFrame(int frame)
 int CtrlAnimation::getFrame()
 {
 	return static_cast<int>(_frame);
-}
-
-CtrlFrame* CtrlAnimation::getAnimationFrame()
-{
-	return _ctrlFrame;
 }
 
 void render::CtrlAnimation::registerScheduler()

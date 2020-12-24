@@ -22,9 +22,9 @@ void ue::PanelEvent::setDesignFile(const std::string& filepath)
 	this->dispatchEvent(PANEL_SELECT_DESIGN_FILE, (void*)filepath.c_str());
 }
 
-void ue::PanelEvent::setSelectNode(ui::LayoutItem* node)
+void ue::PanelEvent::setSelectNode(ui::CtrlWidget* node)
 {
-	this->dispatchEvent(PANEL_SELECT_LAYTOUT_ITEM, node);
+	this->dispatchEvent(PANEL_SELECT_WIDGET, node);
 }
 
 void ue::PanelEvent::saveFile()

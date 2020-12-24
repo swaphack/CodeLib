@@ -1,5 +1,5 @@
 #include "LayoutItem.h"
-#include "Layout.h"
+#include "UI/CtrlWidget.h"
 
 using namespace ui;
 
@@ -11,9 +11,25 @@ LayoutItem::~LayoutItem()
 {
 }
 
+LayoutItem* ui::LayoutItem::create()
+{
+	sys::CSSSize size;
+	size.setWidth(sys::NumberType::Percent, ONE_HUNDRED);
+	size.setHeight(sys::NumberType::Percent, ONE_HUNDRED);
+	LayoutItem* sInstance = CREATE_OBJECT(ui::LayoutItem);
+	sInstance->setMargin(0, 0, 0, 0);
+	sInstance->setLeftMargin(0);
+	sInstance->setSize(size);
+	sInstance->retain();
+
+	return sInstance;
+}
+
 void ui::LayoutItem::setMargin(const sys::CSSMargin& margin)
 {
 	m_sMargin = margin;
+
+	this->refresh();
 }
 
 const sys::CSSMargin& ui::LayoutItem::getMargin() const
@@ -26,9 +42,21 @@ sys::CSSMargin& ui::LayoutItem::getMargin()
 	return m_sMargin;
 }
 
+void ui::LayoutItem::setMarginState(bool left, bool right, bool top, bool bottom)
+{
+	m_sMarginState.Left = left;
+	m_sMarginState.Right = right;
+	m_sMarginState.Top = top;
+	m_sMarginState.Bottom = bottom;
+
+	this->refresh();
+}
+
 void ui::LayoutItem::setMarginState(const MarginState& state)
 {
 	m_sMarginState = state;
+
+	this->refresh();
 }
 
 const MarginState& ui::LayoutItem::getMarginState() const
@@ -44,6 +72,8 @@ MarginState& ui::LayoutItem::getMarginState()
 void ui::LayoutItem::setSize(const sys::CSSSize& size)
 {
 	m_sSize = size;
+
+	this->refresh();
 }
 
 const sys::CSSSize& ui::LayoutItem::getSize() const
@@ -54,6 +84,95 @@ const sys::CSSSize& ui::LayoutItem::getSize() const
 sys::CSSSize& ui::LayoutItem::getSize()
 {
 	return m_sSize;
+}
+
+void ui::LayoutItem::setMargin(float top, float right, float bottom, float left)
+{
+	this->setLeftMargin(left);
+	this->setRightMargin(right);
+	this->setTopMargin(top);
+	this->setBottomMargin(bottom);
+}
+
+void ui::LayoutItem::setLeftMargin(float offset, bool enable)
+{
+	m_sMarginState.Left = enable;
+	m_sMargin.setLeft(sys::NumberType::Fixed, offset);
+
+	this->refresh();
+}
+
+void ui::LayoutItem::setRightMargin(float offset, bool enable)
+{
+	m_sMarginState.Right = enable;
+	m_sMargin.setRight(sys::NumberType::Fixed, offset);
+
+	this->refresh();
+}
+
+void ui::LayoutItem::setTopMargin(float offset, bool enable)
+{
+	m_sMarginState.Top = enable;
+	m_sMargin.setTop(sys::NumberType::Fixed, offset);
+
+	this->refresh();
+}
+
+void ui::LayoutItem::setBottomMargin(float offset, bool enable)
+{
+	m_sMarginState.Bottom = enable;
+	m_sMargin.setBottom(sys::NumberType::Fixed, offset);
+
+	this->refresh();
+}
+
+void ui::LayoutItem::unsetLeftMargin()
+{
+	m_sMarginState.Left = false;
+
+	this->refresh();
+}
+
+void ui::LayoutItem::unsetRightMargin()
+{
+	m_sMarginState.Right = false;
+
+	this->refresh();
+}
+
+void ui::LayoutItem::unsetTopMargin()
+{
+	m_sMarginState.Top = false;
+
+	this->refresh();
+}
+
+void ui::LayoutItem::unsetBottomMargin()
+{
+	m_sMarginState.Bottom = false;
+
+	this->refresh();
+}
+
+void ui::LayoutItem::unsetMarginState()
+{
+	m_sMarginState = ui::MarginState();
+
+	this->refresh();
+}
+
+void ui::LayoutItem::setWidth(float value)
+{
+	m_sSize.setWidth(sys::NumberType::Fixed, value);
+
+	this->refresh();
+}
+
+void ui::LayoutItem::setHeight(float value)
+{
+	m_sSize.setHeight(sys::NumberType::Fixed, value);
+
+	this->refresh();
 }
 
 bool LayoutItem::copy(LayoutItem* item)
@@ -173,15 +292,10 @@ void LayoutItem::resize(const math::Size& size)
 	m_pWidget->setPosition(x, y);
 }
 
-
-
-void ui::LayoutItem::addWidget(render::CtrlWidget* widget)
+void ui::LayoutItem::setWidget(CtrlWidget* widget)
 {
-	if (widget == nullptr || this->getWidget() == nullptr)
-	{
-		return;
-	}
+	m_pWidget = widget;
 
-	this->getWidget()->addWidget(widget);
+	this->refresh();
 }
 

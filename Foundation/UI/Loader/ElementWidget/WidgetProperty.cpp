@@ -219,16 +219,6 @@ void ui::WidgetProperty::setAttribute(const std::string& name, const sys::CSSSiz
 	setAttribute(name, str);
 }
 
-void WidgetProperty::setAttribute(const std::string& name, const SizePolicy& value)
-{
-	if (name.empty())
-	{
-		return;
-	}
-	std::string str = getCString("%d,%d", value.width, value.height);
-	setAttribute(name, str);
-}
-
 void ui::WidgetProperty::setAttribute(const std::string& name, const MarginState& value)
 {
 	if (name.empty())
@@ -567,29 +557,6 @@ bool WidgetProperty::getAttribute(const std::string& name, render::BlendParam& d
 	int dest = atoi(params[1].getString());
 
 	defaultValue = render::BlendParam((BlendingFactorSrc)src, (BlendingFactorDest)dest);
-
-	return true;
-}
-
-bool WidgetProperty::getAttribute(const std::string& name, SizePolicy& defaultValue)
-{
-	const std::string& value = getAttribute(name);
-	if (value.empty())
-	{
-		return false;
-	}
-
-	sys::String val = value;
-	std::vector<sys::String> params;
-
-	val.split(",", params);
-
-	if (params.size() != 2)
-	{
-		return false;
-	}
-
-	defaultValue = SizePolicy((SizeType)atoi(params[0].getString()), (SizeType)atoi(params[1].getString()));
 
 	return true;
 }

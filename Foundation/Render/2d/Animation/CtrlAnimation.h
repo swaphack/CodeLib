@@ -1,6 +1,6 @@
 #pragma once
 
-#include "2d/UI/CtrlWidget.h"
+#include "2d/Base/DrawTexture2D.h"
 #include "Common/Action/SchedulerProtocol.h"
 
 namespace render
@@ -9,7 +9,7 @@ namespace render
 
 	// 动画控件
 	class CtrlAnimation : 
-		public CtrlWidget,
+		public DrawTexture2D,
 		public SchedulerProtocol
 	{
 	public:
@@ -45,10 +45,6 @@ namespace render
 		*	获取当前帧
 		*/ 
 		int getFrame();
-		/**
-		*	获取当前动画
-		*/ 
-		CtrlFrame* getAnimationFrame();
 	protected:
 		/**
 		*	添加定时器
@@ -62,9 +58,6 @@ namespace render
 		*	定时更新事件
 		*/
 		virtual void update(float interval);
-	protected:
-		// 图片帧
-		CtrlFrame* _ctrlFrame = nullptr;
 	private:
 		// 速度系数
 		float _speedRatio;

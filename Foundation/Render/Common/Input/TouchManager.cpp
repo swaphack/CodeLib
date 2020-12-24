@@ -61,8 +61,12 @@ void TouchManager::onTouchBegan(float x, float y)
 	// 转化为opengl（0，1）会有误差,所以采用实际大小
 // 	x = x / Tool::getGLViewSize().width;
 // 	y = y / Tool::getGLViewSize().height;
-	auto it = _touchProtocols.rbegin();
-	while (it != _touchProtocols.rend())
+
+	_touchTemp.clear();
+	_touchTemp.assign(_touchProtocols.begin(), _touchProtocols.end());
+
+	auto it = _touchTemp.rbegin();
+	while (it != _touchTemp.rend())
 	{
 		if ((*it)->isTouchEnabled())
 		{
@@ -80,8 +84,8 @@ void TouchManager::onTouchBegan(float x, float y)
 
 void TouchManager::onTouchMoved(float x, float y)
 {
-	auto it = _touchProtocols.rbegin();
-	while (it != _touchProtocols.rend())
+	auto it = _touchTemp.rbegin();
+	while (it != _touchTemp.rend())
 	{
 		if ((*it)->isTouchEnabled())
 		{
@@ -99,9 +103,9 @@ void TouchManager::onTouchMoved(float x, float y)
 
 void TouchManager::onTouchEnded(float x, float y)
 {
-	auto it = _touchProtocols.rbegin();
+	auto it = _touchTemp.rbegin();
 	bool ret = false;
-	while (it != _touchProtocols.rend())
+	while (it != _touchTemp.rend())
 	{
 		if ((*it)->isTouchEnabled())
 		{

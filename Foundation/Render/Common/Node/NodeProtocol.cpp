@@ -226,7 +226,7 @@ void BodyProtocol::setAnchorPoint(const math::Vector2& anchor)
 	onBodyChange();
 }
 
-const math::Vector3& BodyProtocol::getAnchorPoint()
+const math::Vector3& BodyProtocol::getAnchorPoint() const
 {
 	return _anchor;
 }
@@ -255,7 +255,7 @@ void BodyProtocol::setVolume(const math::Size& size)
 	onBodyChange();
 }
 
-const math::Volume& BodyProtocol::getVolume()
+const math::Volume& BodyProtocol::getVolume() const
 {
 	return _volume;
 }
@@ -278,17 +278,17 @@ void BodyProtocol::setDepth(float d)
 	onBodyChange();
 }
 
-float BodyProtocol::getWidth()
+float BodyProtocol::getWidth() const
 {
 	return _volume.getWidth();
 }
 
-float BodyProtocol::getHeight()
+float BodyProtocol::getHeight() const
 {
 	return _volume.getHeight();
 }
 
-float BodyProtocol::getDepth()
+float BodyProtocol::getDepth() const
 {
 	return _volume.getDepth();
 }
@@ -298,7 +298,7 @@ math::Size BodyProtocol::getSize()
 	return math::Size(_volume.getWidth(), _volume.getHeight());
 }
 
-float render::BodyProtocol::getAnchorPointX()
+float render::BodyProtocol::getAnchorPointX() const
 {
 	return _anchor.getX();
 }
@@ -310,7 +310,7 @@ void render::BodyProtocol::setAnchorPointX(float value)
 	onBodyChange();
 }
 
-float render::BodyProtocol::getAnchorPointY()
+float render::BodyProtocol::getAnchorPointY() const
 {
 	return _anchor.getY();
 }
@@ -322,7 +322,7 @@ void render::BodyProtocol::setAnchorPointY(float value)
 	onBodyChange();
 }
 
-float render::BodyProtocol::getAnchorPointZ()
+float render::BodyProtocol::getAnchorPointZ() const
 {
 	return _anchor.getZ();
 }

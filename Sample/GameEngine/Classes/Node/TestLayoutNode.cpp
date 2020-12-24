@@ -33,14 +33,14 @@ void TestLayoutNode::testLayout()
 
 void TestLayoutNode::testLayouts()
 {
-	render::CtrlLayout* pLayout = CREATE_NODE(render::CtrlLayout);
+	ui::CtrlLayout* pLayout = CREATE_NODE(ui::CtrlLayout);
 	pLayout->setAnchorPoint(0, 0);
 	pLayout->setPosition(0, 0);
 	pLayout->setVolume(1027, 768);
 
 	this->addChild(pLayout);
 
-	auto pChildLayout = CREATE_NODE(render::CtrlLayout);
+	auto pChildLayout = CREATE_NODE(ui::CtrlLayout);
 	pLayout->setAnchorPoint(1, 1);
 	pLayout->setPosition(1024, 768);
 	pLayout->setVolume(500, 500);

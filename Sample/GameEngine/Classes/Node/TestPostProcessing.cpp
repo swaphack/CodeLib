@@ -1,6 +1,7 @@
 #include "TestPostProcessing.h"
 #include "Utility.h"
 #include "system.h"
+#include "ui.h"
 
 TestPostProcessing::TestPostProcessing()
 {
@@ -27,7 +28,7 @@ void TestPostProcessing::testFramePostProcessing()
 
 	std::string filepath = "Resource/Image/world.jpg";
 
-	render::CtrlImage* pImage = CREATE_NODE(render::CtrlImage);
+	ui::CtrlImage* pImage = CREATE_NODE(ui::CtrlImage);
 	pImage->setImagePath(filepath);
 	pImage->setAnchorPoint(0, 0);
 	pImage->setPosition(100, 100);
@@ -63,7 +64,7 @@ void TestPostProcessing::testImage()
 
 	std::string filepath = "Resource/Image/world_texture.jpg";
 
-	render::CtrlImage* pImage = CREATE_NODE(render::CtrlImage);
+	ui::CtrlImage* pImage = CREATE_NODE(ui::CtrlImage);
 	pImage->setImagePath(filepath);
 	pImage->setAnchorPoint(math::Vector2());
 	pImage->setVolume(frameSize.getWidth(), frameSize.getHeight());

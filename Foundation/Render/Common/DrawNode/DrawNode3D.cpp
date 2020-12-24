@@ -43,8 +43,14 @@ bool render::DrawNode3D::containTouchPoint(float x, float y)
 {
 	math::Vector3 point(x, y);
 
-
-	return _realBoxVertex.containPointByPolygon(x, y);
+	math::Vector3 localPoint = _worldInverseMatrix * point;
+	// ´ý²¹³ä
+	return localPoint.getX() >= -getAnchorPointX() * getWidth()
+		&& localPoint.getX() <= (1-getAnchorPointX()) * getWidth()
+		&& localPoint.getY() >= -getAnchorPointY() * getHeight()
+		&& localPoint.getY() <= (1 - getAnchorPointY()) * getHeight()
+		&& localPoint.getZ() >= -getAnchorPointZ() * getDepth()
+		&& localPoint.getZ() <= (1 - getAnchorPointZ()) * getDepth();
 }
 
 void render::DrawNode3D::calBoxData()

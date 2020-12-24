@@ -12,7 +12,6 @@ IElement::~IElement()
 	SAFE_DELETE(_nodeProperty);
 
 	SAFE_RELEASE(_node);
-	SAFE_RELEASE(_layoutItem);
 }
 
 bool IElement::load(tinyxml2::XMLElement* pXmlNode, bool clean/* = true*/)
@@ -22,7 +21,6 @@ bool IElement::load(tinyxml2::XMLElement* pXmlNode, bool clean/* = true*/)
 		return false;
 	}
 
-	this->setLayoutItem(nullptr);
 	this->setWidget(nullptr);
 	if (clean)
 	{
@@ -44,10 +42,10 @@ bool IElement::load(tinyxml2::XMLElement* pXmlNode, bool clean/* = true*/)
 	this->parseAttributes();
 
 	_nodeProperty->setName(pXmlNode->Name());
-	if (getLayoutItem())
+	if (_layoutItem && _node)
 	{
-		getLayoutItem()->setWidgetName(pXmlNode->Name());
-		getLayoutItem()->setWidget(getWidget());
+		_layoutItem->setWidgetName(pXmlNode->Name());
+		_node->setLayoutItem(_layoutItem);
 	}
 
 	return true;
@@ -91,30 +89,24 @@ WidgetProperty* IElement::getNodeProperty()
 	return _nodeProperty;
 }
 
-void IElement::setWidget(render::CtrlWidget* node)
+void IElement::setWidget(CtrlWidget* node)
 {
-	//SAFE_RETAIN(node);
-	//SAFE_RELEASE(_node);
-
 	_node = node;
 }
 
-void IElement::setLayoutItem(LayoutItem* item)
+ui::CtrlWidget* ui::IElement::getWidget()
 {
-	//SAFE_RETAIN(item);
-	//SAFE_RELEASE(_layoutItem);
+	return _node;
+}
 
+void ui::IElement::setLayoutItem(LayoutItem* item)
+{
 	_layoutItem = item;
 }
 
 LayoutItem* ui::IElement::getLayoutItem()
 {
 	return _layoutItem;
-}
-
-render::CtrlWidget* ui::IElement::getWidget()
-{
-	return _node;
 }
 
 const std::string& ui::IElement::getFontPath()

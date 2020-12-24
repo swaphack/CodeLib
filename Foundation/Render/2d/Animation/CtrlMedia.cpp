@@ -1,5 +1,4 @@
 #include "CtrlMedia.h"
-#include "../UI/CtrlFrame.h"
 #include "Common/Texture/Texture2D.h"
 #include "Audio/CtrlAudioSourceClip.h"
 #include "system.h"
@@ -37,23 +36,12 @@ bool CtrlMedia::init()
 		Texture2D* texture = getNextTexture();
 		if (texture)
 		{
-			if (_ctrlFrame)
-			{
-				_ctrlFrame->setTextureWithRect(texture);
-			}
+			this->setTextureWithRect(texture);
 		}
 		sys::AudioDetail* audio = _media->getNextAudio();
 		if (audio && audio->getData())
 		{
 			_ctrlAudio->loadAudioClip(audio);
-		}
-	});
-
-	_notify->addListen(NodeNotifyType::BODY, [&](){
-		if (_ctrlFrame)
-		{
-			_ctrlFrame->setVolume(this->getWidth(), this->getHeight());
-			_ctrlFrame->setAnchorPoint(this->getAnchorPoint());
 		}
 	});
 
@@ -114,7 +102,7 @@ void CtrlMedia::loadFromURL(const std::string& url, bool defaultSize)
 	if (defaultSize)
 	{
 		this->setVolume(static_cast<float>(_media->getWidth()), static_cast<float>(_media->getHeight()));
-		_ctrlFrame->setVolume(this->getWidth(), this->getHeight());
+		this->setVolume(this->getWidth(), this->getHeight());
 	}
 }	
 

@@ -8,7 +8,7 @@ namespace ue
 	// 选择布局文件
 #define PANEL_SELECT_DESIGN_FILE "PANEL_SELECT_DESIGN_FILE"
 	// 选中布局项
-#define PANEL_SELECT_LAYTOUT_ITEM "PANEL_SELECT_LAYTOUT_ITEM"
+#define PANEL_SELECT_WIDGET "PANEL_SELECT_WIDGET"
 	// 保存文件
 #define PANEL_SAVE_FILE "PANEL_SAVE_FILE"
 
@@ -33,7 +33,7 @@ namespace ue
 		/**
 		*	派发涉及文件
 		*/
-		void setSelectNode(ui::LayoutItem* node);
+		void setSelectNode(ui::CtrlWidget* node);
 		/**
 		*	保存文件
 		*/

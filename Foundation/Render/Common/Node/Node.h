@@ -3,6 +3,7 @@
 #include "system.h"
 #include "Notify.h"
 #include "NodeProtocol.h"
+#include "NotifyCenter.h"
 #include <vector>
 
 namespace render
@@ -134,7 +135,8 @@ namespace render
 		// 逆转空间矩阵
 		virtual void endUpdateTranform();
 	public:
-		void addNotify(NodeNotifyType id, const NotifyDelegate& func);
+		// 添加事件监听
+		void addNotifyListener(NodeNotifyType id, const NotifyDelegate& func);
 		// 将事件通知给所有节点
 		void notifyToAll(NodeNotifyType id);
 		// 将事件通知给节点
@@ -183,14 +185,16 @@ namespace render
 		// 是否和父节点关联
 		bool _bRelativeToParent = false;
 		// 通知
-		Notify<NodeNotifyType>* _notify;
+		NodeNotify* _notify = nullptr;
 		// 相对于父节点的矩阵
 		math::Matrix4x4 _localMatrix;
 		// 逆矩阵
 		math::Matrix4x4 _localInverseMatrix;
 		// 实际在世界坐标系中的矩阵
 		math::Matrix4x4 _worldMatrix;
-	private:
+		// 实际在世界坐标系中的逆矩阵
+		math::Matrix4x4 _worldInverseMatrix;
+	protected:
 		// 动作代理
 		ActionProxy* _actionProxy;
 		// 触摸代理

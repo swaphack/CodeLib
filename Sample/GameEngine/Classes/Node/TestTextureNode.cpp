@@ -19,7 +19,7 @@ void TestTextureNode::initNodes()
 
 void TestTextureNode::testMultiTexture()
 {
-	CtrlFrame* pFrame = CREATE_NODE(CtrlFrame);
+	DrawTexture2D* pFrame = CREATE_NODE(DrawTexture2D);
 	pFrame->setPosition(0, 0);
 	pFrame->setAnchorPoint(0, 0);
 	pFrame->setVolume(300, 300);

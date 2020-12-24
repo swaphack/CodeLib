@@ -15,18 +15,14 @@ const char* ue::SinglePanel::getPanelPath()
 	return nullptr;
 }
 
-void ue::SinglePanel::updatePosition(const ui::LayoutItem* item, sys::CSSDirection eDir)
+void ue::SinglePanel::updatePosition(const ui::CtrlWidget* item, sys::CSSDirection eDir)
 {
 	if(item == nullptr)
 	{
 		return;
 	}
 
-	auto pRectPoints = item->getRectPoints();
-	if (pRectPoints == nullptr)
-	{
-		return;
-	}
+	auto pRectPoints = &item->getRectVertex();
 
 	if (eDir == sys::CSSDirection::Top)
 	{
@@ -59,7 +55,7 @@ void ue::SinglePanel::show()
 	render::RenderApplication::getInstance()->getCanvas()->getCurScene()->addChild(this);
 }
 
-void ue::SinglePanel::showWithTarget(const ui::LayoutItem* item, sys::CSSDirection eDir)
+void ue::SinglePanel::showWithTarget(const ui::CtrlWidget* item, sys::CSSDirection eDir)
 {
 	this->updatePosition(item, eDir);
 	this->show();
@@ -85,9 +81,8 @@ void ue::SinglePanel::setPositionLeftTop(const math::Vector2& pos)
 	state.Top = true;
 	state.Left = true;
 
-	_body->setMargin(margin);
-	_body->setMarginState(state);
-	this->autoResize();
+	getLayoutItem()->setMargin(margin);
+	getLayoutItem()->setMarginState(state);
 }
 
 void ue::SinglePanel::setPositionRightTop(const math::Vector2& pos)
@@ -105,9 +100,8 @@ void ue::SinglePanel::setPositionRightTop(const math::Vector2& pos)
 	state.Top = true;
 	state.Right = true;
 
-	_body->setMargin(margin);
-	_body->setMarginState(state);
-	this->autoResize();
+	getLayoutItem()->setMargin(margin);
+	getLayoutItem()->setMarginState(state);
 }
 
 void ue::SinglePanel::setPositionLeftBottom(const math::Vector2& pos)
@@ -125,9 +119,8 @@ void ue::SinglePanel::setPositionLeftBottom(const math::Vector2& pos)
 	state.Bottom = true;
 	state.Left = true;
 
-	_body->setMargin(margin);
-	_body->setMarginState(state);
-	this->autoResize();
+	getLayoutItem()->setMargin(margin);
+	getLayoutItem()->setMarginState(state);
 }
 
 void ue::SinglePanel::setPositionRightBottom(const math::Vector2& pos)
@@ -145,26 +138,25 @@ void ue::SinglePanel::setPositionRightBottom(const math::Vector2& pos)
 	state.Bottom = true;
 	state.Right = true;
 
-	_body->setMargin(margin);
-	_body->setMarginState(state);
-	this->autoResize();
+	getLayoutItem()->setMargin(margin);
+	getLayoutItem()->setMarginState(state);
 }
 
 bool ue::SinglePanel::onTouchBegan(float x, float y, bool include)
 {
-	if (!_body->containPoint(x, y))
-	{
-		close();
-	}
-	return false;
+	return include;
 }
 
 bool ue::SinglePanel::onTouchMoved(float x, float y, bool include)
 {
-	return false;
+	return include;
 }
 
 bool ue::SinglePanel::onTouchEnded(float x, float y, bool include)
 {
+	if (!_body->containTouchPoint(x, y))
+	{
+		close();
+	}
 	return false;
 }

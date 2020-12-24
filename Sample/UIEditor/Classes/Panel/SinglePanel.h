@@ -20,7 +20,7 @@ namespace ue
 		/**
 		*	更新位置
 		*/
-		void updatePosition(const ui::LayoutItem* item, sys::CSSDirection eDir);
+		void updatePosition(const ui::CtrlWidget* item, sys::CSSDirection eDir);
 	public:
 		/**
 		*	显示
@@ -29,7 +29,7 @@ namespace ue
 		/**
 		*	显示
 		*/
-		void showWithTarget(const ui::LayoutItem* item, sys::CSSDirection eDir);
+		void showWithTarget(const ui::CtrlWidget* item, sys::CSSDirection eDir);
 		/**
 		*	关闭
 		*/
@@ -66,6 +66,6 @@ namespace ue
 		virtual bool onTouchEnded(float x, float y, bool include);
 	protected:
 		// 主体
-		ui::Layout* _body = nullptr;
+		ui::CtrlWidget* _body = nullptr;
 	};
 }

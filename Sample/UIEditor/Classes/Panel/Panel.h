@@ -43,31 +43,17 @@ namespace ue
 		/**
 		*	创建控件
 		*/
-		static ui::LayoutItem* createIteam();
-		/**
-		*	创建控件
-		*/
-		template<typename T, typename = std::enable_if<std::is_base_of<render::CtrlWidget, T>::value, T>::type>
-		static ui::LayoutItem* createIteam()
+		template<typename T, typename = std::enable_if<std::is_base_of<ui::CtrlWidget, T>::value, T>::type>
+		static T* createWidget()
 		{
-			auto pItem = createIteam();
-			if (pItem == nullptr)
-			{
-				return nullptr;
-			}
-
 			auto pNode = CREATE_NODE(T);
-			if (pNode != nullptr)
-			{
-				pItem->setWidget(pNode);
-			}
 
-			return pItem;
+			return pNode;
 		}
 		/**
 		*	创建文件
 		*/
-		static ui::LayoutItem* createUIFile(const std::string& filepath);
+		ui::CtrlWidget* createUIFile(const std::string& filepath);
 		/**
 		*	创建文件面板
 		*/
@@ -87,7 +73,7 @@ namespace ue
 		*	创建面板
 		*/
 		template<typename T, typename = std::enable_if<std::is_base_of<SinglePanel, T>::value, T>::type>
-		static T* showWithTarget(const ui::LayoutItem* item, sys::CSSDirection eDir)
+		static T* showWithTarget(const ui::CtrlWidget* item, sys::CSSDirection eDir)
 		{
 			auto pFile = CREATE_NODE(T);
 			pFile->setRootView(true);

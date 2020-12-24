@@ -103,17 +103,17 @@ namespace render
 		// 设置锚点
 		void setAnchorPoint(const math::Vector2& anchor);
 		// 获取锚点
-		const math::Vector3& getAnchorPoint();
+		const math::Vector3& getAnchorPoint()  const;
 		// 获取锚点
-		float getAnchorPointX();
+		float getAnchorPointX() const;
 		// 设置锚点
 		void setAnchorPointX(float value);
 		// 获取锚点
-		float getAnchorPointY();
+		float getAnchorPointY() const;
 		// 设置锚点
 		void setAnchorPointY(float value);
 		// 获取锚点
-		float getAnchorPointZ();
+		float getAnchorPointZ() const;
 		// 设置锚点
 		void setAnchorPointZ(float value);
 		// 设置宽度
@@ -131,13 +131,13 @@ namespace render
 		// 设置面积，默认深度
 		void setVolume(const math::Size& size);
 		// 获取宽度
-		float getWidth();
+		float getWidth() const;
 		// 获取高度
-		float getHeight();
+		float getHeight() const;
 		// 获取深度
-		float getDepth();
+		float getDepth() const;
 		// 获取体积
-		const math::Volume& getVolume();
+		const math::Volume& getVolume() const;
 		// 获取面积
 		math::Size getSize();
 	public:

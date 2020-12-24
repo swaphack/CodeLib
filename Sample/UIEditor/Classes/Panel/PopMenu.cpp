@@ -12,20 +12,42 @@ ue::PopMenu::~PopMenu()
 
 void ue::PopMenu::initUI()
 {
-	m_pLayout->findItemByName("body", _body);
-
-	render::CtrlWidget* item = nullptr;
-	if (m_pLayout->findWidgetByName("openFile", item))
+	if (m_pRootWidget->findWidgetByName("body", _body))
 	{
-		item->addClickFunc([](render::Node* node) {
+		_body->addClickFunc([this](render::Node* node) {
 			//OpenFilePanel* panel = showWithTarget<OpenFilePanel>();
+			this->close();
 		});
 	}
 
-	if (m_pLayout->findWidgetByName("saveFile", item))
+	ui::CtrlWidget* item = nullptr;
+	if (m_pRootWidget->findWidgetByName("openFile", item))
 	{
-		item->addClickFunc([](render::Node* node) {
+		item->addClickFunc([this](render::Node* node) {
+			//OpenFilePanel* panel = showWithTarget<OpenFilePanel>();
+			this->close();
+		});
+	}
+
+	if (m_pRootWidget->findWidgetByName("saveFile", item))
+	{
+		item->addClickFunc([this](render::Node* node) {
 			G_PANELEVT->saveFile();
+			this->close();
+		});
+	}
+
+	if (m_pRootWidget->findWidgetByName("closeFile", item))
+	{
+		item->addClickFunc([this](render::Node* node) {
+			this->close();
+		});
+	}
+
+	if (m_pRootWidget->findWidgetByName("quitApp", item))
+	{
+		item->addClickFunc([this](render::Node* node) {
+			this->close();
 		});
 	}
 }

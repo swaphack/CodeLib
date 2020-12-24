@@ -23,19 +23,25 @@ void UIProxy::init()
 	this->registerElementParser(ELEMENT_NAME_SCALE9_IMAGE, new Scale9ImageLoader());
 	this->registerElementParser(ELEMENT_NAME_SCROLLVIEW, new ScrollViewLoader());
 	this->registerElementParser(ELEMENT_NAME_LISTVIEW, new ListViewLoader());
+	this->registerElementParser(ELEMENT_NAME_GRIDVIEW, new GridViewLoader());
 
 	this->registerElementParser(ELEMENT_NAME_FILE, new FileLoader());
 }
 
 // 获取控件名称
-std::string getLayoutItemName(LayoutItem* item)
+std::string getLayoutItemName(CtrlWidget* item)
 {
 	if (item == nullptr)
 	{
 		return "";
 	}
 
-	return item->getWdigetName();
+	if (item->getLayoutItem() == nullptr)
+	{
+		return "";
+	}
+
+	return item->getLayoutItem()->getWidgetName();
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -61,7 +67,7 @@ UIProxy* UIProxy::getInstance()
 	return s_UIProxy;
 }
 
-Layout* UIProxy::loadFile(const std::string& filepath)
+CtrlWidget* UIProxy::loadFile(const std::string& filepath, const math::Size& size)
 {
 	if (filepath.empty())
 	{
@@ -80,7 +86,7 @@ Layout* UIProxy::loadFile(const std::string& filepath)
 		return nullptr;
 	}
 
-	Layout* pLayout = loadRoot(root);
+	CtrlWidget* pLayout = loadRoot(root, size);
 	if (pLayout == nullptr)
 	{
 		return nullptr;
@@ -89,7 +95,7 @@ Layout* UIProxy::loadFile(const std::string& filepath)
 	return pLayout;
 }
 
-bool UIProxy::saveFile(Layout* layout, const std::string& filepath, const math::Size& designSize)
+bool UIProxy::saveFile(CtrlWidget* layout, const std::string& filepath, const math::Size& designSize)
 {
 	if (layout == nullptr || filepath.empty())
 	{
@@ -184,7 +190,7 @@ IElement* UIProxy::getElement(const std::string& name)
 	return _elementParsers[name];
 }
 
-LayoutItem* UIProxy::initLayoutItem(tinyxml2::XMLElement* xmlNode)
+CtrlWidget* UIProxy::initWidget(tinyxml2::XMLElement* xmlNode)
 {
 	if (xmlNode == nullptr)
 	{
@@ -208,29 +214,28 @@ LayoutItem* UIProxy::initLayoutItem(tinyxml2::XMLElement* xmlNode)
 	{
 		return nullptr;
 	}
-	return element->getLayoutItem();
+	return element->getWidget();
 }
 
-bool UIProxy::loadLayout(Layout* pLayout, tinyxml2::XMLElement* xmlNode)
+bool UIProxy::loadWidget(CtrlWidget* pLayout, tinyxml2::XMLElement* xmlNode)
 {
 	if (pLayout == nullptr || xmlNode == nullptr)
 	{
 		return false;
 	}
 
-	LayoutItem* childItem = nullptr;
+	CtrlWidget* childItem = nullptr;
 	tinyxml2::XMLElement* childNode = xmlNode;
 	while (childNode)
 	{
-		childItem = initLayoutItem(childNode);
+		childItem = initWidget(childNode);
 		if (childItem)
 		{
-			pLayout->addItemWithWidget(childItem);
-
-			Layout* childLayout = childItem->as<Layout>();
-			if (childNode->FirstChild() && childLayout)
+			childItem->resize(pLayout->getSize());
+			pLayout->addWidget(childItem);
+			if (childNode->FirstChild())
 			{
-				loadLayout(childLayout, childNode->FirstChildElement());
+				loadWidget(childItem, childNode->FirstChildElement());
 			}
 		}
 		childNode = childNode->NextSiblingElement();
@@ -239,7 +244,7 @@ bool UIProxy::loadLayout(Layout* pLayout, tinyxml2::XMLElement* xmlNode)
 	return true;
 }
 
-Layout* UIProxy::loadRoot(tinyxml2::XMLElement* xmlNode)
+CtrlWidget* UIProxy::loadRoot(tinyxml2::XMLElement* xmlNode, const math::Size& size)
 {
 	if (xmlNode == nullptr)
 	{
@@ -251,9 +256,6 @@ Layout* UIProxy::loadRoot(tinyxml2::XMLElement* xmlNode)
 
 	_designSize.setWidth(width);
 	_designSize.setHeight(height);
-
-	width = _designSize.getWidth();
-	height = _designSize.getHeight();
 
 	_designDirection = (LayoutDirection)xmlNode->IntAttribute(LAYOUT_DIRECTION);
 	if (xmlNode->Attribute(LAYOUT_FONT_PATH))
@@ -267,24 +269,18 @@ Layout* UIProxy::loadRoot(tinyxml2::XMLElement* xmlNode)
 		return nullptr;
 	}
 
-	LayoutItem* pRootItem = initLayoutItem(firstChild);
-	if (pRootItem == nullptr)
+	CtrlWidget* pWidget = initWidget(firstChild);
+	if (pWidget == nullptr)
 	{// 空节点
 		return nullptr;
 	}
+	pWidget->resize(size);
+	loadWidget(pWidget, firstChild->FirstChildElement());
 
-	Layout* pLayout = pRootItem->as<Layout>();
-	if (pLayout == nullptr)
-	{// 非布局节点
-		return nullptr;
-	}
-
-	loadLayout(pLayout, firstChild->FirstChildElement());
-
-	return pLayout;
+	return pWidget;
 }
 
-bool UIProxy::saveLayoutItem(LayoutItem* item, tinyxml2::XMLElement* xmlNode)
+bool UIProxy::saveWidget(CtrlWidget* item, tinyxml2::XMLElement* xmlNode)
 {
 	if (item == nullptr || xmlNode == nullptr)
 	{
@@ -302,25 +298,20 @@ bool UIProxy::saveLayoutItem(LayoutItem* item, tinyxml2::XMLElement* xmlNode)
 	{
 		return false;
 	}
-
-	pElement->setLayoutItem(item);
-	pElement->setWidget(item->getWidget());
+	pElement->setLayoutItem(item->getLayoutItem());
+	pElement->setWidget(item);
 	pElement->save(xmlNode);
 
-	LayoutLoader* pLoader = pElement->as<LayoutLoader>();
+	WidgetLoader* pLoader = pElement->as<WidgetLoader>();
 	if (pLoader == nullptr)
 	{
 		return true;
 	}
 
-	Layout* layout = item->as<Layout>();
-	if (layout == nullptr)
-	{
-		return true;
-	}
+	auto widgets = item->getAllWidgets();
 
-	std::vector<LayoutItem*>::const_iterator iter = layout->getAllItems().begin();
-	while (iter != layout->getAllItems().end())
+	auto iter = widgets.begin();
+	while (iter != widgets.end())
 	{
 		tinyxml2::XMLElement* pChildNode = nullptr;
 
@@ -330,7 +321,8 @@ bool UIProxy::saveLayoutItem(LayoutItem* item, tinyxml2::XMLElement* xmlNode)
 			continue;
 		}
 		pChildNode = xmlNode->GetDocument()->NewElement(wName.c_str());
-		this->saveLayoutItem(*iter, pChildNode);
+
+		this->saveWidget(*iter, pChildNode);
 
 		xmlNode->InsertEndChild(pChildNode);
 		iter++;
@@ -339,7 +331,7 @@ bool UIProxy::saveLayoutItem(LayoutItem* item, tinyxml2::XMLElement* xmlNode)
 	return true;
 }
 
-bool UIProxy::saveRoot(Layout* layout, tinyxml2::XMLDocument* document)
+bool UIProxy::saveRoot(CtrlWidget* layout, tinyxml2::XMLDocument* document)
 {
 	if (layout == nullptr || document == nullptr)
 	{
@@ -355,5 +347,5 @@ bool UIProxy::saveRoot(Layout* layout, tinyxml2::XMLDocument* document)
 
 	tinyxml2::XMLElement* pChildNode = document->NewElement(ELEMENT_NAME_LAYOUT);
 	pRootNode->InsertEndChild(pChildNode);
-	return saveLayoutItem(layout, pChildNode);
+	return saveWidget(layout, pChildNode);
 }

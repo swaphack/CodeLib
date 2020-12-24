@@ -126,10 +126,10 @@ bool FT_LABEL::load(const TextDefine& textDefine, LabelStream* stream)
 
 	uint32_t rect_width = 0;
 	uint32_t rect_height = 0;
-	bool bFixedWidth = stream->isFixWidth();
+	bool bFixedWidth = stream->isFixedWidth();
 	if (bFixedWidth)
 	{
-		rect_width = stream->getFixWidth();
+		rect_width = stream->getFixedWidth();
 	}
 	rect_height = stream->getLineHeight();
 
@@ -342,7 +342,7 @@ void FT_LABEL::writeStream(uint64_t ch, LabelStream* stream, const phy::Color3B&
 {
 	if (ch == '\n')
 	{
-		if (stream->isFixWidth())
+		if (stream->isFixedWidth())
 		{
 			stream->writeEndLine();
 		}
@@ -410,7 +410,7 @@ void FT_LABEL::writeStream(uint64_t ch, LabelStream* stream, const phy::Color3B&
 	}
 	deltaY = deltaY < 0 ? 0 : deltaY;
 
-	if (stream->isFixWidth())
+	if (stream->isFixedWidth())
 	{
 		stream->writeMultiLineBlock(charWidth, height, (char*)pBuf, deltaY);
 	}
@@ -425,7 +425,7 @@ LabelStream::LabelStream()
 :_offsetX(0)
 , _offsetY(0)
 , _lineHeight(0)
-, _fixWidth(0)
+, _fixedWidth(0)
 {
 
 }
@@ -462,7 +462,7 @@ void LabelStream::writeMultiLineBlock(int width, int height, const char* buffer,
 	int realWidth = width * RGBA_PIXEL_UNIT;
 	int realHeight = getLineHeight();
 
-	if (_offsetX + realWidth > getFixWidth())
+	if (_offsetX + realWidth > getFixedWidth())
 	{
 		this->writeSpaceLine();
 	}
@@ -478,7 +478,7 @@ void LabelStream::writeMultiLineBlock(int width, int height, const char* buffer,
 
 void LabelStream::writeEndLine()
 {
-	if (isFixWidth() == false)
+	if (isFixedWidth() == false)
 	{
 		return;
 	}
@@ -491,7 +491,7 @@ void LabelStream::writeEndLine()
 
 void LabelStream::writeSpaceLine()
 {
-	if (isFixWidth() == false)
+	if (isFixedWidth() == false)
 	{
 		return;
 	}
@@ -508,7 +508,7 @@ void LabelStream::endStream()
 
 void LabelStream::format(HorizontalAlignment ha)
 {
-	if (_lineWidthStack.empty() || isFixWidth() == false)
+	if (_lineWidthStack.empty() || isFixedWidth() == false)
 	{
 		return;
 	}
@@ -529,7 +529,7 @@ void LabelStream::format(HorizontalAlignment ha)
 		for (int i = 0; i < count; i++)
 		{
 			width = _lineWidthStack.top();
-			offsetX = (getFixWidth() - width) * 0.5f;
+			offsetX = (getFixedWidth() - width) * 0.5f;
 			offsetX -= offsetX % 4;
 			if (offsetX < 0)
 			{
@@ -544,7 +544,7 @@ void LabelStream::format(HorizontalAlignment ha)
 		for (int i = 0; i < count; i++)
 		{
 			width = _lineWidthStack.top();
-			offsetX = getFixWidth() - width;
+			offsetX = getFixedWidth() - width;
 			moveBlock(0, i * getLineHeight(), width, getLineHeight(), offsetX, i * getLineHeight());
 			_lineWidthStack.pop();
 		}
@@ -561,19 +561,34 @@ uint32_t LabelStream::getLineHeight() const
 	return _lineHeight;
 }
 
-bool LabelStream::isFixWidth()
+bool LabelStream::isFixedWidth()
 {
-	return _fixWidth != 0;
+	return _fixedWidth != 0;
 }
 
-uint32_t LabelStream::getFixWidth()
+bool sys::LabelStream::isFixedHeight()
 {
-	return _fixWidth;
+	return _fixedHeight != 0;
 }
 
-void LabelStream::setFixWidth(uint32_t width)
+uint32_t LabelStream::getFixedWidth()
 {
-	_fixWidth = width;
+	return _fixedWidth;
+}
+
+void sys::LabelStream::setFixedHeight(uint32_t height)
+{
+	_fixedHeight = height;
+}
+
+uint32_t sys::LabelStream::getFixedHeight()
+{
+	return _fixedHeight;
+}
+
+void LabelStream::setFixedWidth(uint32_t width)
+{
+	_fixedWidth = width;
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -589,10 +604,15 @@ LabelImage::~LabelImage()
 
 bool LabelImage::load(const TextDefine& textDefine)
 {
-	uint32_t fixeWidth = (uint32_t)textDefine.width * RGBA_PIXEL_UNIT;
-	if (fixeWidth > 0)
+	uint32_t fixedWidth = (uint32_t)textDefine.width * RGBA_PIXEL_UNIT;
+	if (fixedWidth > 0)
 	{
-		_stream->setFixWidth(fixeWidth);
+		_stream->setFixedWidth(fixedWidth);
+	}
+	uint32_t fixedHeight = (uint32_t)textDefine.width;
+	if (fixedHeight > 0)
+	{
+		_stream->setFixedHeight(fixedHeight);
 	}
 	FT_LABEL* label = new FT_LABEL();
 	if (!label->load(textDefine, _stream))
@@ -602,7 +622,7 @@ bool LabelImage::load(const TextDefine& textDefine)
 	}
 	SAFE_DELETE(label);
 
-	if (_stream->isFixWidth())
+	if (_stream->isFixedWidth())
 	{
 		_stream->format(textDefine.horizontalAlignment);
 	}

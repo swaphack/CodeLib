@@ -15,6 +15,6 @@ namespace ui
 
 		virtual void saveAttributes();
 	public:
-		INIT_LOADER_WIDGET(LayoutItem, render::CtrlButton, ELEMENT_NAME_BUTTON);
+		INIT_LOADER_WIDGET(LayoutItem, CtrlButton, ELEMENT_NAME_BUTTON);
 	};
 }

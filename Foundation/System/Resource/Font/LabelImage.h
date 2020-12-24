@@ -25,12 +25,18 @@ namespace sys
 	public:
 		// 重置游标
 		void resetOffset();
-
-		void setFixWidth(uint32_t width);
-		uint32_t getFixWidth();
 		// 固定宽度
-		bool isFixWidth();
+		void setFixedWidth(uint32_t width);
+		uint32_t getFixedWidth();
 
+		// 固定宽度
+		void setFixedHeight(uint32_t height);
+		uint32_t getFixedHeight();
+
+		// 固定宽度
+		bool isFixedWidth();
+		// 固定宽度
+		bool isFixedHeight();
 		// 行高
 		uint32_t getLineHeight() const;
 		void setLineHeight(uint32_t val);
@@ -49,14 +55,16 @@ namespace sys
 		void format(HorizontalAlignment ha);
 	private:
 		// 写入开始的位置x
-		int32_t _offsetX;
+		int32_t _offsetX = 0;
 		// 写入开始的位置y
-		int32_t _offsetY;
+		int32_t _offsetY = 0;
 		// 行高
-		uint32_t _lineHeight;
+		uint32_t _lineHeight = 0;
 		// 固定宽度
-		uint32_t _fixWidth;
-
+		uint32_t _fixedWidth = 0;
+		// 固定高度
+		uint32_t _fixedHeight = 0;
+		// 横坐标宽偏移
 		std::stack<int> _lineWidthStack;
 	};
 

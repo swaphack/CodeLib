@@ -1,8 +1,10 @@
 #include "TestTextNode.h"
 #include "system.h"
+#include "ui.h"
 
 using namespace sys;
 using namespace render;
+using namespace ui;
 
 TestTextNode::TestTextNode()
 {

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<root width="1024" height="768" layout="1" fontPath="Default/Font/font_3.ttf">
+	<Layout name="body" showMask="1" maskColor="180,180,180,125" margin="1,0,1,1" size="200,100%">
+		<ListView direction="0" size="100%,100%">
+			<Text name="1213" text="Type1" size="60,100%" fontSize="22" textColor="255,255,255" />
+			<Text name="1212" text="Type2" size="60,100%" fontSize="22" textColor="255,255,255" />
+		</ListView>
+	</Layout>
+</root>

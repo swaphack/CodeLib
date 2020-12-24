@@ -3,6 +3,7 @@
 #include "system.h"
 #include "render.h"
 #include "Layout/macros.h"
+#include "UI/CtrlWidget.h"
 
 namespace ui
 {
@@ -10,7 +11,9 @@ namespace ui
 	/**
 	*	界面显示
 	*/
-	class CtrlFile : public render::CtrlWidget, public render::WindowProtocol
+	class CtrlFile : 
+		public CtrlWidget, 
+		public render::WindowProtocol
 	{
 	public:
 		CtrlFile();
@@ -48,11 +51,6 @@ namespace ui
 		*	获取布局方向
 		*/
 		LayoutDirection getLayoutDirection();
-		/**
-		*	获取布局
-		*/
-		Layout* getLayout();
-
 	public:
 		/**
 		*	是否是根视图
@@ -87,17 +85,16 @@ namespace ui
 		*	初始化文本
 		*/
 		virtual void initText();
-		
 	protected:
 		// 文件路径
 		std::string m_strFilePath;
-		// 布局
-		Layout* m_pLayout = nullptr;
 		// 布局方向
 		LayoutDirection m_eLayoutDirection = LayoutDirection::NONE;
 		// 窗口界面大小
 		math::Size m_sViewSize;
 		// 是否根视图
 		bool m_bRootView = false;
+		// 根节点
+		ui::CtrlWidget* m_pRootWidget = nullptr;
 	};
 }

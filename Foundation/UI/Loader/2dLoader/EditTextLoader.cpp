@@ -8,6 +8,8 @@
 #define PROPERTY_FONTSIZE	"fontSize"
 #define PROPERTY_TEXTCOLOR	"textColor"
 #define PROPERTY_PLACEHOLDERCOLOR	"placeholderColor"
+#define PROPERTY_HORIZONTAL	"horizontal"
+#define PROPERTY_VERTICAL	"vertical"
 
 #define PROPERTY_MULTILINE	"multiLine"
 
@@ -30,6 +32,9 @@ void ui::EditTextLoader::parseAttributes()
 	float fontSize = 0;
 	bool multiLine = false;
 
+	int horizontal = 1;
+	int vertical = 1;
+
 	LOAD_WIDGET_ATTRIBUTE(PROPERTY_TEXT, setString, text);
 	LOAD_WIDGET_ATTRIBUTE(PROPERTY_PLACEHOLDER, setPlaceholder, tips);
 
@@ -40,6 +45,9 @@ void ui::EditTextLoader::parseAttributes()
 	LOAD_WIDGET_ATTRIBUTE(PROPERTY_FONTSIZE, setFontSize, fontSize);
 
 	LOAD_WIDGET_ATTRIBUTE(PROPERTY_MULTILINE, setMultiLine, multiLine);
+
+	LOAD_WIDGET_CAST_ATTRIBUTE(PROPERTY_HORIZONTAL, setHorizontalAlignment, horizontal, sys::HorizontalAlignment);
+	LOAD_WIDGET_CAST_ATTRIBUTE(PROPERTY_VERTICAL, setVerticalAlignment, vertical, sys::VerticalAlignment);
 
 	if (fontpath.empty())
 	{
@@ -63,4 +71,7 @@ void ui::EditTextLoader::saveAttributes()
 	SAVE_WIDGET_ATTRIBUTE(PROPERTY_FONTSIZE, getFontSize);
 
 	SAVE_WIDGET_ATTRIBUTE(PROPERTY_MULTILINE, isMultiLine);
+
+	SAVE_WIDGET_CAST_ATTRIBUTE(PROPERTY_HORIZONTAL, getHorizontalAlignment, int);
+	SAVE_WIDGET_CAST_ATTRIBUTE(PROPERTY_VERTICAL, getVerticalAlignment, int);
 }

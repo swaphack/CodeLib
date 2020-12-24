@@ -4,9 +4,8 @@
 using namespace render;
 
 
-TouchProxy::TouchProxy(Node* target)
-:_target(target)
-, _bTouchEnabled(false)
+TouchProxy::TouchProxy()
+:_bTouchEnabled(false)
 {
 	G_TOUCHMANAGER->addTouch(this);
 }

@@ -5,6 +5,7 @@
 #include <algorithm>
 #include "Graphic/import.h"
 #include "Common/View/Camera.h"
+#include "NotifyCenter.h"
 using namespace render;
 
 //////////////////////////////////////////////////////////////////////////
@@ -22,15 +23,15 @@ Node::Node()
 {
 	this->setVisible(true);
 
-	_notify = new Notify<NodeNotifyType>;
+	_notify = G_NOTIFYCENTER->alloct(this);
 }
 
 Node::~Node()
 {
 	this->removeAllChildren();
-	SAFE_DELETE(_actionProxy);
-	SAFE_DELETE(_touchProxy);
-	SAFE_DELETE(_notify);
+	SAFE_RELEASE(_actionProxy);
+	SAFE_RELEASE(_touchProxy);
+	G_NOTIFYCENTER->release(this);
 }
 
 bool Node::init()
@@ -232,7 +233,9 @@ ActionProxy* Node::getActionProxy()
 {
 	if (_actionProxy == nullptr)
 	{
-		_actionProxy = new ActionProxy(this);
+		_actionProxy = CREATE_OBJECT(ActionProxy);
+		_actionProxy->setTarget(this);
+		_actionProxy->retain();
 	}
 	return _actionProxy;
 }
@@ -251,7 +254,9 @@ TouchProxy* Node::getTouchProxy()
 {
 	if (_touchProxy == nullptr)
 	{
-		_touchProxy = new TouchProxy(this);
+		_touchProxy = CREATE_OBJECT(TouchProxy);
+		_touchProxy->setTarget(this);
+		_touchProxy->retain();
 	}
 	return _touchProxy;
 }
@@ -374,6 +379,8 @@ void Node::calRealSpaceByMatrix()
 	{
 		_worldMatrix = _localMatrix;
 	}
+
+	_worldInverseMatrix = _worldMatrix.getInverse();
 }
 
 void Node::onSpaceChange()
@@ -487,7 +494,7 @@ void Node::notify(NodeNotifyType id)
 	setDirty(true);
 }
 
-void render::Node::addNotify(NodeNotifyType id, const NotifyDelegate& handler)
+void render::Node::addNotifyListener(NodeNotifyType id, const NotifyDelegate& handler)
 {
 	_notify->addListen(id, handler);
 }

@@ -53,6 +53,7 @@ bool ue::DirectoryPanel::init()
 
 void ue::DirectoryPanel::initUI()
 {
+	m_pRootWidget->findWidgetByName("directory", _directory);
 	this->setDirectory("H:/Github/CodeLib/Sample/UIEditor/Resource/");
 }
 
@@ -76,16 +77,12 @@ void ue::DirectoryPanel::setDirectory(const std::string& root)
 
 void ue::DirectoryPanel::updateRootPanel()
 {
-	this->getLayout()->removeAllItems();
-	this->getLayout()->getWidget()->removeAllWidgets();
+	_directory->removeAllItems();
 
-	_top = 0;
-	this->updateRootList(this->getLayout(), _dirDetail);
-
-	this->getLayout()->autoResize();
+	this->updateRootList(_directory, _dirDetail);
 }
 
-void ue::DirectoryPanel::updateRootList(ui::Layout* layout, const DirDetail& detail, int layer)
+void ue::DirectoryPanel::updateRootList(ui::CtrlListView* layout, const DirDetail& detail, int layer)
 {
 	if (layout == nullptr)
 	{
@@ -101,12 +98,13 @@ void ue::DirectoryPanel::updateRootList(ui::Layout* layout, const DirDetail& det
 
 	std::string fullpath = std::string(layer + 1, ' ') + detail.name;
 
-	auto pItem = createRootItem(_top, CONST_ITEM_HEIGHT, true, fullpath, detail.fullpath);
+	float height = 0;
+
+	auto pItem = createDirItem(CONST_ITEM_HEIGHT, fullpath, detail.fullpath);
 	if (pItem)
 	{
-		pItem->getCastWidget<render::CtrlButton>()->setSelect(isFolded);
-		layout->addItemWithWidget(pItem);
-		_top += CONST_ITEM_HEIGHT + CONST_OFFSET_Y;
+		pItem->setSelectState(isFolded);
+		layout->addItem(pItem);
 	}
 	
 	// нд╪Ч
@@ -120,131 +118,78 @@ void ue::DirectoryPanel::updateRootList(ui::Layout* layout, const DirDetail& det
 
 		for (auto item : detail.files)
 		{
-			auto pItem = createRootItem(_top, CONST_ITEM_HEIGHT, false, std::string(layer + 2, ' ') + item, detail.fullpath + "/" + item);
+			auto pItem = createFileItem(CONST_ITEM_HEIGHT, std::string(layer + 2, ' ') + item, detail.fullpath + "/" + item);
 			if (pItem)
 			{
-				layout->addItemWithWidget(pItem);
-				_top += CONST_ITEM_HEIGHT + CONST_OFFSET_Y;
+				layout->addItem(pItem);
 			}
 		}
 	}
 }
 
-ui::LayoutItem* ue::DirectoryPanel::createDirItem(int top, int height, const std::string& name, const std::string& fullpath)
+ui::CtrlButton* ue::DirectoryPanel::createDirItem(int height, const std::string& name, const std::string& fullpath)
 {
-	auto pItem = createIteam<render::CtrlButton>();
-	if (pItem == nullptr)
+	auto pWidget = createWidget<ui::CtrlButton>();
+	if (pWidget == nullptr)
 	{
 		return nullptr;
 	}
 
-	pItem->getMarginState().Left = true;
-	pItem->getMarginState().Right = true;
-	pItem->getMarginState().Top = true;
+	auto pItem = pWidget->getLayoutItem();
 
-	pItem->getMargin().setLeft(sys::NumberType::Fixed, 0);
-	pItem->getMargin().setRight(sys::NumberType::Fixed, 0);
-	pItem->getMargin().setTop(sys::NumberType::Fixed, top);
-
-
+	pItem->setMargin(2, 2, 2, 2);
 	pItem->getSize().setWidth(sys::NumberType::Percent, ONE_HUNDRED);
 	pItem->getSize().setHeight(sys::NumberType::Fixed, height);
 
-	auto pWidget = pItem->getCastWidget<render::CtrlButton>();
 	if (pWidget)
 	{
 		pWidget->setNormalImage("Default/Image/dir_bg.png");
 		pWidget->setSelectedImage("Default/Image/dir_bg_2.png");
-		pWidget->setAnchorPoint(0.5f, 0.5f);
 		pWidget->setTextColor(phy::Color3B(255, 255, 255));
 		pWidget->setFontSize(24);
 		pWidget->setFontPath("Default/Font/font_3.ttf");
 		pWidget->setString(name);
 		pWidget->getTextControl()->setHorizontalAlignment(sys::HorizontalAlignment::LEFT);
-		pWidget->getTextControl()->setVerticalAlignment(sys::VerticalAlignment::MIDDLE);
+		pWidget->getTextControl()->setVerticalAlignment(sys::VerticalAlignment::BOTTOM);
+		pWidget->addClickFunc([this, fullpath](CtrlWidget*) {
+			this->onChangeFoldState(fullpath);
+			this->updateRootPanel();
+		});
 	}
-	return pItem;
+	return pWidget;
 }
 
-ui::LayoutItem* ue::DirectoryPanel::createFileItem(int top, int height, const std::string& name)
+ui::CtrlButton* ue::DirectoryPanel::createFileItem(int height, const std::string& name, const std::string& fullpath)
 {
-	auto pItem = createIteam<render::CtrlButton>();
-	if (pItem == nullptr)
+	auto pWidget = createWidget<ui::CtrlButton>();
+	if (pWidget == nullptr)
 	{
 		return nullptr;
 	}
 
-	pItem->getMarginState().Left = true;
-	pItem->getMarginState().Right = true;
-	pItem->getMarginState().Top = true;
+	auto pItem = pWidget->getLayoutItem();
 
-	pItem->getMargin().setLeft(sys::NumberType::Fixed, 0);
-	pItem->getMargin().setRight(sys::NumberType::Fixed, 0);
-	pItem->getMargin().setTop(sys::NumberType::Fixed, top);
-
+	pItem->setMargin(2, 2, 2, 2);
 	pItem->getSize().setWidth(sys::NumberType::Percent, ONE_HUNDRED);
 	pItem->getSize().setHeight(sys::NumberType::Fixed, height);
 
-	auto pWidget = pItem->getCastWidget<render::CtrlButton>();
 	if (pWidget)
 	{
 		pWidget->setNormalImage("Default/Image/file_bg.png");
 		pWidget->setSelectedImage("Default/Image/file_bg_2.png");
-		pWidget->setAnchorPoint(0.5f, 0.5f);
 		pWidget->setTextColor(phy::Color3B(0, 0, 0));
 		pWidget->setFontSize(24);
 		pWidget->setFontPath("Default/Font/font_3.ttf");
 		pWidget->setString(name);
 		pWidget->getTextControl()->setHorizontalAlignment(sys::HorizontalAlignment::LEFT);
-		pWidget->getTextControl()->setVerticalAlignment(sys::VerticalAlignment::MIDDLE);
-	}
-	
-	return pItem;
-}
+		pWidget->getTextControl()->setVerticalAlignment(sys::VerticalAlignment::BOTTOM);
 
-ui::LayoutItem* ue::DirectoryPanel::createRootItem(int top, int height, bool isDir, const std::string& name, const std::string& fullpath)
-{
-	ui::LayoutItem* item = nullptr;
-	auto it = _dirItems.find(fullpath);
-	if (it != _dirItems.end())
-	{
-		item = it->second;
-	}
-	if (item == nullptr)
-	{
-		if (isDir)
-		{
-			item = createDirItem(top, height, name, fullpath);
-		}
-		else
-		{
-			item = createFileItem(top, height, name);
-		}
-		if (item)
-		{
-			SAFE_RETAIN(item);
-			SAFE_RETAIN(item->getWidget());
-			_dirItems.insert(std::make_pair(fullpath, item));
-		}
-	}
-	item->getMargin().setTop(sys::NumberType::Fixed, top);
-	if (isDir)
-	{
-		item->getWidget()->removeAllClickFuncs();
-		item->getWidget()->addClickFunc([this, fullpath](CtrlWidget*) {
-			this->onChangeFoldState(fullpath);
-			this->updateRootPanel();
-		});
-	}
-	else
-	{
-		item->getWidget()->removeAllClickFuncs();
-		item->getWidget()->addClickFunc([fullpath](CtrlWidget*) {
+		pWidget->addClickFunc([this, fullpath](CtrlWidget*) {
 			G_PANELEVT->setDesignFile(fullpath);
 		});
 	}
-
-	return item;
+	
+	return pWidget;
 }
 
 void ue::DirectoryPanel::onChangeFoldState(const std::string& name)

@@ -60,7 +60,7 @@ void ue::DesignPanel::unselectTarget()
 	}
 }
 
-ui::LayoutItem* ue::DesignPanel::getSelectedTarget() const
+ui::CtrlWidget* ue::DesignPanel::getSelectedTarget() const
 {
 	return m_pSelectedTarget;
 }
@@ -77,21 +77,19 @@ void ue::DesignPanel::setDesignFile(const std::string& filepath)
 
 	m_strFileName = filepath;
 
-	m_pViewScene->removeAllItems();
-	m_pViewScene->getWidget()->removeAllWidgets();
+	m_pViewScene->removeAllWidgets();
 
 	/*filepath = "Resource/Layout/main.xml";*/
 	m_pUIFile = createUIFile(filepath);
 	if (m_pUIFile)
 	{
-		m_pViewScene->addItemWithWidget(m_pUIFile);
-		m_pViewScene->autoResize();
+		m_pViewScene->addWidget(m_pUIFile);
 	}
 }
 
 void ue::DesignPanel::initUI()
 {
-	m_pLayout->findItemByName("viewScene", m_pViewScene);
+	m_pRootWidget->findWidgetByName("viewScene", m_pViewScene);
 }
 
 void ue::DesignPanel::initEvent()
@@ -109,14 +107,10 @@ bool ue::DesignPanel::onTouchBegan(float x, float y, bool include)
 	{
 		return true;
 	}
-	render::CtrlWidget* pFileWiget = m_pUIFile->getWidget();
-	if (pFileWiget)
+	ui::CtrlFile* pFile = m_pUIFile->as<ui::CtrlFile>();
+	if (pFile)
 	{
-		ui::CtrlFile* pFile = pFileWiget->as<ui::CtrlFile>();
-		if (pFile)
-		{
-			touchFrontWidget(pFile->getLayout(), x, y);
-		}
+		touchFrontWidget(pFile, x, y);
 	}
 
 	G_PANELEVT->setSelectNode(m_pSelectedTarget);
@@ -134,47 +128,44 @@ bool ue::DesignPanel::onTouchEnded(float x, float y, bool include)
 	return true;
 }
 
-bool ue::DesignPanel::touchFrontWidget(ui::LayoutItem* layoutItem, float x, float y)
+bool ue::DesignPanel::touchFrontWidget(ui::CtrlWidget* widget, float x, float y)
 {
-	if (layoutItem == nullptr)
+	if (widget == nullptr)
 	{
 		return false;
 	}
 
 	bool contain = false;
-	if (layoutItem->is<ui::Layout>())
+	const auto& vecWidgets = widget->getAllWidgets();
+	int nChildCount = vecWidgets.size();
+	if (nChildCount > 0)
 	{
-		auto layout = layoutItem->as<ui::Layout>();
-		int nChildCount = layout->getAllItems().size();
-		if (nChildCount > 0)
+		for (int i = nChildCount - 1; i >= 0; i--)
 		{
-			for (int i = nChildCount - 1; i >= 0; i--)
+			if (touchFrontWidget(vecWidgets[i], x, y))
 			{
-				if (touchFrontWidget(layout->getItem(i), x, y))
-				{
-					contain = true;
-					return true;
-				}
+				contain = true;
+				return true;
 			}
 		}
 	}
 
 	if (!contain)
 	{
-		if (!layoutItem->containPoint(x, y))
+		if (!widget->containTouchPoint(x, y))
 		{
 			return false;
 		}
 		if (m_pSelectedTarget == nullptr)
 		{
-			m_pSelectedTarget = layoutItem;
-			layoutItem->setBoxLineWidth(1.0f);
-			layoutItem->setBoxLineColor(phy::Color4B(255, 255, 255, 255));
-			layoutItem->setBoxVisible(true);
+			m_pSelectedTarget = widget;
+			widget->setBoxWidth(1.0f);
+			widget->setBoxColor(phy::Color4B(255, 255, 255, 255));
+			widget->setBoxVisible(true);
 		}
 		else
 		{
-			if (m_pSelectedTarget == layoutItem)
+			if (m_pSelectedTarget == widget)
 			{
 				m_pSelectedTarget->setBoxVisible(false);
 				m_pSelectedTarget = nullptr;
@@ -182,7 +173,7 @@ bool ue::DesignPanel::touchFrontWidget(ui::LayoutItem* layoutItem, float x, floa
 			else
 			{
 				m_pSelectedTarget->setBoxVisible(false);
-				m_pSelectedTarget = layoutItem;
+				m_pSelectedTarget = widget;
 				m_pSelectedTarget->setBoxVisible(true);
 			}
 		}
@@ -193,7 +184,7 @@ bool ue::DesignPanel::touchFrontWidget(ui::LayoutItem* layoutItem, float x, floa
 
 void ue::DesignPanel::saveFile()
 {
-	auto pFile = m_pUIFile->getCastWidget<ui::CtrlFile>();
+	auto pFile = m_pUIFile->as<ui::CtrlFile>();
 	if (pFile)
 	{
 		pFile->save();

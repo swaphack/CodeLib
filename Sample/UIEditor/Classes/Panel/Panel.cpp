@@ -48,30 +48,13 @@ bool ue::Panel::onTouchEnded(float x, float y, bool include)
 	return false;
 }
 
-ui::LayoutItem* ue::Panel::createIteam()
+ui::CtrlWidget* ue::Panel::createUIFile(const std::string& filepath)
 {
-	sys::CSSSize size;
-	size.setWidth(sys::NumberType::Percent, ONE_HUNDRED);
-	size.setHeight(sys::NumberType::Percent, ONE_HUNDRED);
-	auto layoutItem = CREATE_OBJECT(ui::LayoutItem);
-	layoutItem->setSize(size);
-	return layoutItem;
-}
-
-ui::LayoutItem* ue::Panel::createUIFile(const std::string& filepath)
-{
-	auto pItem = createIteam();
-	if (pItem == nullptr)
-	{
-		return nullptr;
-	}
-
 	auto pFile = CREATE_NODE(ui::CtrlFile);
 	if (pFile)
 	{
 		pFile->setFilePath(filepath);
-		pItem->setWidget(pFile);
 	}
 
-	return pItem;
+	return pFile;
 }

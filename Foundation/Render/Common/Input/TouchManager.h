@@ -26,6 +26,8 @@ namespace render
 		void onTouchEnded(float x, float y);
 	private:
 		std::vector<TouchProxy*> _touchProtocols;
+
+		std::vector<TouchProxy*> _touchTemp;
 	};
 
 	#define G_TOUCHMANAGER sys::Instance<TouchManager>::getInstance()

@@ -5,7 +5,6 @@
 #include <string>
 #include "render.h"
 #include "Layout/macros.h"
-#include "LayoutExtension/macros.h"
 
 namespace ui
 {
@@ -45,7 +44,6 @@ namespace ui
 		void setAttribute(const std::string& name, const sys::CSSMargin& value);
 		void setAttribute(const std::string& name, const sys::CSSSize& value);
 		void setAttribute(const std::string& name, const render::BlendParam& value);
-		void setAttribute(const std::string& name, const SizePolicy& value);
 		void setAttribute(const std::string& name, const MarginState& value);
 
 // 		template<typename T>
@@ -73,7 +71,6 @@ namespace ui
 		bool getAttribute(const std::string& name, sys::CSSMargin& defaultValue);
 		bool getAttribute(const std::string& name, sys::CSSSize& defaultValue);
 		bool getAttribute(const std::string& name, render::BlendParam& defaultValue);
-		bool getAttribute(const std::string& name, SizePolicy& defaultValue);
 		bool getAttribute(const std::string& name, MarginState& defaultValue);
 
 // 		template<typename T>

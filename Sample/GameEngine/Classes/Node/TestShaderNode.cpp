@@ -1,8 +1,10 @@
 #include "TestShaderNode.h"
 #include "mathlib.h"
 #include "Utility.h"
+#include "ui.h"
 using namespace render;
 using namespace math;
+using namespace ui;
 
 TestShaderNode::TestShaderNode()
 {

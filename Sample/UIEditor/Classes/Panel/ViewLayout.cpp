@@ -15,7 +15,7 @@ ue::ViewLayout::~ViewLayout()
 
 void ue::ViewLayout::initUI()
 {
-	m_pLayout->findWidgetByName("DesignPanel", m_pDesignPanel);
+	m_pRootWidget->findWidgetByName("DesignPanel", m_pDesignPanel);
 }
 
 void ue::ViewLayout::initEvent()
