@@ -582,6 +582,9 @@
     <ClCompile Include="Common\Node\NotifyCenter.cpp">
       <Filter>Common\Node</Filter>
     </ClCompile>
+    <ClCompile Include="2d\Base\DrawScale9Texture2D.cpp">
+      <Filter>2d\Base</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Common\Node\import.h">
@@ -1337,6 +1340,9 @@
     </ClInclude>
     <ClInclude Include="Common\Node\NotifyCenter.h">
       <Filter>Common\Node</Filter>
+    </ClInclude>
+    <ClInclude Include="2d\Base\DrawScale9Texture2D.h">
+      <Filter>2d\Base</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -74,6 +74,7 @@
     <ClCompile Include="2d\Animation\CtrlAnimation.cpp" />
     <ClCompile Include="2d\Animation\CtrlMedia.cpp" />
     <ClCompile Include="2d\Animation\CtrlSequenceFrame.cpp" />
+    <ClCompile Include="2d\Base\DrawScale9Texture2D.cpp" />
     <ClCompile Include="2d\Base\DrawTexture2D.cpp" />
     <ClCompile Include="2d\Primitive\CoordinateSystem.cpp" />
     <ClCompile Include="2d\Primitive\Mask.cpp" />
@@ -274,6 +275,7 @@
     <ClInclude Include="2d\Animation\CtrlSequenceFrame.h" />
     <ClInclude Include="2d\Animation\import.h" />
     <ClInclude Include="2d\Animation\macros.h" />
+    <ClInclude Include="2d\Base\DrawScale9Texture2D.h" />
     <ClInclude Include="2d\Base\DrawTexture2D.h" />
     <ClInclude Include="2d\Base\import.h" />
     <ClInclude Include="2d\import.h" />

@@ -1,11 +1,11 @@
 #pragma once
 
-#include "ImageLoader.h"
+#include "WidgetLoader.h"
 
 namespace ui
 {
 	// ͼƬ
-	class Scale9ImageLoader : public ImageLoader
+	class Scale9ImageLoader : public WidgetLoader
 	{
 	public:
 		Scale9ImageLoader();

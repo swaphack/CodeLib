@@ -13,6 +13,8 @@ using namespace render;
 
 ui::CtrlScale9Image::CtrlScale9Image()
 {
+	_texture2D = CREATE_NODE(render::DrawScale9Texture2D);
+	this->addChild(_texture2D);
 }
 
 ui::CtrlScale9Image::~CtrlScale9Image()
@@ -25,101 +27,49 @@ bool ui::CtrlScale9Image::init()
 	{
 		return false;
 	}
-	_notify->addListen(NodeNotifyType::BODY, [this]() {
-		this->onScale9BodyChange();
-	});
 
-	_notify->addListen(NodeNotifyType::GEOMETRY, [this]() {
-		this->onScale9BodyChange();
-		this->onScale9ImageChange();
-	});
-	_notify->addListen(NodeNotifyType::TEXTURE, [this]() {
-		this->onScale9ImageChange();
+	_notify->addListen(NodeNotifyType::BODY, [this]() {
+		_texture2D->setVolume(this->getVolume());
+		_texture2D->setAnchorPoint(this->getAnchorPoint());
 	});
 
 	return true;
 }
 
-void ui::CtrlScale9Image::setMarginLeft(float value)
+void ui::CtrlScale9Image::setImagePath(const std::string& path)
 {
-	_scale9Margin.setLeft(sys::NumberType::Fixed, value);
-	this->notify(NodeNotifyType::GEOMETRY);
+	_imageDefine.setFilePath(path);
+
+	_texture2D->setTextureWithRect(path);
 }
 
-void ui::CtrlScale9Image::setMarginRight(float value)
+void ui::CtrlScale9Image::loadImage(const std::string& path)
 {
-	_scale9Margin.setRight(sys::NumberType::Fixed, value);
-	this->notify(NodeNotifyType::GEOMETRY);
+	_imageDefine.setFilePath(path);
+	_texture2D->setTexture(path);
 }
 
-void ui::CtrlScale9Image::setMarginTop(float value)
+void ui::CtrlScale9Image::loadTexture(const render::Texture* texture)
 {
-	_scale9Margin.setTop(sys::NumberType::Fixed, value);
-	this->notify(NodeNotifyType::GEOMETRY);
+	_texture2D->setTextureWithRect(texture);
 }
 
-void ui::CtrlScale9Image::setMarginBottom(float value)
+const std::string& ui::CtrlScale9Image::getImagePath()
 {
-	_scale9Margin.setBottom(sys::NumberType::Fixed, value);
-	this->notify(NodeNotifyType::GEOMETRY);
+	return _imageDefine.filepath;
 }
 
 void ui::CtrlScale9Image::setMargin(float top, float right, float bottom, float left)
 {
-	_scale9Margin.setLeft(sys::NumberType::Fixed, left);
-	_scale9Margin.setRight(sys::NumberType::Fixed, right);
-	_scale9Margin.setTop(sys::NumberType::Fixed, top);
-	_scale9Margin.setBottom(sys::NumberType::Fixed, bottom);
-	this->notify(NodeNotifyType::GEOMETRY);
+	_texture2D->setMargin(top, right, bottom, left);
 }
 
 void ui::CtrlScale9Image::setMargin(const sys::CSSMargin& margin)
 {
-	_scale9Margin = margin;
-	this->notify(NodeNotifyType::GEOMETRY);
+	_texture2D->setMargin(margin);
 }
 
 const sys::CSSMargin& ui::CtrlScale9Image::getMargin() const
 {
-	return _scale9Margin;
-}
-
-void ui::CtrlScale9Image::onScale9BodyChange()
-{
-	VertexTool::setTexture2DScale9Vertices(&_scale9Vertex, math::Vector3(), this->getVolume(), this->getAnchorPoint(), _scale9Margin);
-
-	updateScale9ImageMeshData();
-}
-
-void ui::CtrlScale9Image::onScale9ImageChange()
-{
-	if (getTexture() != nullptr)
-	{
-		VertexTool::setTexture2DScale9Coords(&_scale9Vertex, math::Size(getTexture()->getWidth(), getTexture()->getHeight()), _scale9Margin);
-		updateScale9ImageMeshData();
-	}
-}
-
-void ui::CtrlScale9Image::updateScale9ImageMeshData()
-{
-	auto pMesh = getMesh();
-	if (pMesh)
-	{
-		float uvs[32] = { 0 };
-		memcpy(uvs, _scale9Vertex.uvs, sizeof(uvs));
-
-		pMesh->getMeshDetail()->setVertices(16, _scale9Vertex.vertices, 3);
-		pMesh->getMeshDetail()->setColors(16, _scale9Vertex.colors, 4);
-		pMesh->getMeshDetail()->setUVs(16, uvs, 2);
-
-		if (getTexture() != nullptr)
-		{
-			pMesh->getMeshDetail()->setIndices(54, _scale9Vertex.indices);
-		}
-		else
-		{
-			pMesh->getMeshDetail()->setIndices(0, nullptr);
-		}
-	}
-	this->updateMeshData();
+	return _texture2D->getMargin();
 }

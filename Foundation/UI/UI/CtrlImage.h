@@ -43,7 +43,7 @@ namespace ui
 		void setFlipY(bool status);
 		// 是否垂直翻转
 		bool isFlipY();
-	private:
+	protected:
 		// 图片结构
 		sys::ImageDefine _imageDefine;
 		// 2d纹理

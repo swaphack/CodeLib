@@ -7,7 +7,7 @@ namespace ui
 	/**
 	*	九宫格图片
 	*/
-	class CtrlScale9Image : public CtrlImage
+	class CtrlScale9Image : public CtrlWidget
 	{
 	public:
 		CtrlScale9Image();
@@ -16,21 +16,21 @@ namespace ui
 		virtual bool init();
 	public:
 		/**
-		*	左白边
+		*	设置图片路径
 		*/
-		void setMarginLeft(float value);
+		void setImagePath(const std::string& path);
 		/**
-		*	右白边
+		*	加载图片
 		*/
-		void setMarginRight(float value);
+		void loadImage(const std::string& path);
 		/**
-		*	顶白边
+		*	加载纹理
 		*/
-		void setMarginTop(float value);
+		void loadTexture(const render::Texture* texture);
 		/**
-		*	底白边
+		*	获取图片路径
 		*/
-		void setMarginBottom(float value);
+		const std::string& getImagePath();
 		/**
 		*	白边
 		*/
@@ -43,18 +43,11 @@ namespace ui
 		*	白边
 		*/
 		const sys::CSSMargin& getMargin() const;
-	protected:
-		void onScale9BodyChange();
-		void onScale9ImageChange();
-		virtual void updateScale9ImageMeshData();
+
 	private:
-		/**
-		*	白边参数
-		*/
-		sys::CSSMargin _scale9Margin;
-		/**
-		*	顶点信息
-		*/
-		render::SimpleScale9Vertex _scale9Vertex;
+		// 图片结构
+		sys::ImageDefine _imageDefine;
+		// 2d纹理
+		render::DrawScale9Texture2D* _texture2D = nullptr;
 	};
 }

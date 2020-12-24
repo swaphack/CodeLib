@@ -84,6 +84,7 @@ void ue::DesignPanel::setDesignFile(const std::string& filepath)
 	if (m_pUIFile)
 	{
 		m_pViewScene->addWidget(m_pUIFile);
+		m_pUIFile->refreshLayout();
 	}
 }
 
