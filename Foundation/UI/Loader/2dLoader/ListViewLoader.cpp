@@ -15,10 +15,10 @@ ui::ListViewLoader::~ListViewLoader()
 
 void ui::ListViewLoader::parseAttributes()
 {
-	int eDir;
-	math::Size itemSize;
-	bool useItemSize;
-	bool showInCenter;
+	int eDir = 0;
+	sys::CSSSize itemSize;
+	bool useItemSize = false;
+	bool showInCenter = false;
 
 	LOAD_WIDGET_CAST_ATTRIBUTE(PROPERTY_DIRECTION, setScrollDirection, eDir, ui::ScrollDirection);
 	LOAD_WIDGET_ATTRIBUTE(PROPERTY_ITEMSIZE, setItemSize, itemSize);

@@ -15,13 +15,13 @@ namespace ui
 		virtual ~ScrollItem();
 	public:
 		// 添加项
-		void addItem(CtrlWidget* node, const math::Size& size);
+		void addItem(CtrlWidget* node, const sys::CSSSize& size);
 
 		void setScrollView(CtrlScrollView* view);
 
 		const CtrlScrollView* getScrollView() const;
 	public:
-		static ScrollItem* create(CtrlWidget* node, const math::Size& size, CtrlScrollView* view);
+		static ScrollItem* create(CtrlWidget* node, const sys::CSSSize& size, CtrlScrollView* view);
 	private:
 		CtrlScrollView* _relativeView = nullptr;
 	};
@@ -56,6 +56,10 @@ namespace ui
 		*	添加一个项, 并设置大小
 		*/
 		void addItem(CtrlWidget* item, const math::Size& size, int zOrder = 0);
+		/**
+		*	添加一个项, 并设置大小
+		*/
+		void addItem(CtrlWidget* item, const sys::CSSSize& size, int zOrder = 0);
 		/**
 		*	移除一个项
 		*/ 

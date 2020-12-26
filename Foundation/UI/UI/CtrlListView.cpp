@@ -31,7 +31,7 @@ ui::ScrollDirection ui::CtrlListView::getScrollDirection()
 	return _scrollDirection;
 }
 
-void ui::CtrlListView::setItemSize(const math::Size& size)
+void ui::CtrlListView::setItemSize(const sys::CSSSize& size)
 {
 	_itemSize = size;
 
@@ -40,10 +40,11 @@ void ui::CtrlListView::setItemSize(const math::Size& size)
 
 void ui::CtrlListView::setItemSize(float width, float height)
 {
-	_itemSize.set(width, height);
+	_itemSize.setWidth(sys::NumberType::Fixed, width);
+	_itemSize.setHeight(sys::NumberType::Fixed, height);
 }
 
-const math::Size& ui::CtrlListView::getItemSize()
+const sys::CSSSize& ui::CtrlListView::getItemSize()
 {
 	return _itemSize;
 }

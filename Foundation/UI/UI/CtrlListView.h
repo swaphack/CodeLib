@@ -37,7 +37,7 @@ namespace ui
 		/**
 		*	设置项的大小
 		*/
-		void setItemSize(const math::Size& size);
+		void setItemSize(const sys::CSSSize& size);
 		/**
 		*	设置项的大小
 		*/
@@ -45,7 +45,7 @@ namespace ui
 		/**
 		*	获取设置项的大小
 		*/
-		const math::Size& getItemSize();
+		const sys::CSSSize& getItemSize();
 		/**
 		*	是否使用配置大小
 		*/
@@ -78,7 +78,7 @@ namespace ui
 		// 滑动方向
 		ScrollDirection _scrollDirection = ScrollDirection::HORIZONTAL_LEFT_TO_RIGHT;
 		// 项的大小
-		math::Size _itemSize;
+		sys::CSSSize _itemSize;
 		// 是否使用设置的大小
 		bool _useItemSize = false;
 

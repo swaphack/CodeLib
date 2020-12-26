@@ -16,7 +16,7 @@ ScrollItem::~ScrollItem()
 
 }
 
-void ScrollItem::addItem(CtrlWidget* node, const math::Size& size)
+void ScrollItem::addItem(CtrlWidget* node, const sys::CSSSize& size)
 {
 	if (node == nullptr)
 	{
@@ -26,18 +26,10 @@ void ScrollItem::addItem(CtrlWidget* node, const math::Size& size)
 	this->addWidget(node);
 
 	auto pLayoutItem = node->getLayoutItem();
+	pLayoutItem->setSize(size);
 	this->setLayoutItem(pLayoutItem);
 
 	node->resetLayoutItem();
-
-	this->setVolume(size.getWidth(), size.getHeight());
-	/*
-	this->resize(size);
-
-	this->addNotify(NodeNotifyType::BODY, [this, node]() {
-		node->resize(this->getSize());
-	});
-	*/
 }
 
 void ui::ScrollItem::setScrollView(CtrlScrollView* view)
@@ -50,7 +42,7 @@ const CtrlScrollView* ui::ScrollItem::getScrollView() const
 	return _relativeView;
 }
 
-ScrollItem* ScrollItem::create(CtrlWidget* node, const math::Size& size, CtrlScrollView* view)
+ScrollItem* ScrollItem::create(CtrlWidget* node, const sys::CSSSize& size, CtrlScrollView* view)
 {
 	ScrollItem* item = CREATE_NODE(ScrollItem);
 	if (item)
@@ -115,14 +107,16 @@ void CtrlScrollView::addItem(CtrlWidget* item, const math::Size& size, int zOrde
 		return;
 	}
 
-	auto itemSize = item->getSize();
+	sys::CSSSize layoutSize;
+	layoutSize.setWidth(sys::NumberType::Fixed, size.getWidth());
+	layoutSize.setHeight(sys::NumberType::Fixed, size.getHeight());
 
-	if (size.getWidth() != 0 || size.getHeight() != 0)
-	{
-		itemSize = size;
-	}	
+	addItem(item, layoutSize, zOrder);
+}
 
-	ScrollItem* pScrollItem = ScrollItem::create(item, itemSize, this);
+void ui::CtrlScrollView::addItem(CtrlWidget* item, const sys::CSSSize& size, int zOrder)
+{
+	ScrollItem* pScrollItem = ScrollItem::create(item, size, this);
 	_content->addWidget(pScrollItem, zOrder);
 	_scrollItems.push_back(pScrollItem);
 
