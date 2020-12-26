@@ -28,9 +28,6 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Tool", "Foundation\Tool\Tool.vcxproj", "{055E992E-F80D-453D-A9C8-EB12CEC1267D}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "UIEditor", "Sample\UIEditor\UIEditor.vcxproj", "{5D1F43C1-6B0E-4888-BFEE-8BA3A01E83B3}"
-	ProjectSection(ProjectDependencies) = postProject
-		{0AD3E54A-11CD-49AD-BD43-6609FE7122A4} = {0AD3E54A-11CD-49AD-BD43-6609FE7122A4}
-	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

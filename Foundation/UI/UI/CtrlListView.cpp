@@ -183,7 +183,7 @@ void ui::CtrlListView::addItem(CtrlWidget* item, int zOrder)
 	}
 	else
 	{
-		CtrlScrollView::addItem(item, item->getSize(), zOrder);
+		CtrlScrollView::addItem(item, item->getLayoutItem()->getSize(), zOrder);
 	}
 }
 
