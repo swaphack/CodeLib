@@ -2,17 +2,17 @@
 <root width="1024" height="768" layout="1" fontPath="Default/Font/font_3.ttf">
   <Layout showMask="1" maskColor="200,200,200,180" size="100%,100%"> 
   		<GridView direction="2" size="100%,100%" useItemSize="1" itemSize="100,100">
-  			<Button name="widget" normalImage="Default/Image/control_widget.png" horizontal="1" vertical="2" text="Widget" fontSize="24" textColor="0,0,0" />
-			<Button name="text" normalImage="Default/Image/control_text.png" horizontal="1" vertical="2" text="Text" fontSize="24" textColor="0,0,0" />
-			<Button name="image" normalImage="Default/Image/control_image.png" horizontal="1" vertical="2" text="Image" fontSize="24" textColor="0,0,0" />
-			<Button name="editText" normalImage="Default/Image/control_editText.png" horizontal="1" vertical="2" text="EditText" fontSize="24" textColor="0,0,0" />
-			<Button name="button" normalImage="Default/Image/control_button.png" horizontal="1" vertical="2" text="Button" fontSize="24" textColor="0,0,0" />
+  			<Button name="widget" anchorPoint="0.5,0.5,0.5" normalImage="Default/Image/control_widget.png" horizontal="1" vertical="2" text="Widget" fontSize="24" textColor="0,0,0" />
+			<Button name="text" anchorPoint="0.5,0.5,0.5" normalImage="Default/Image/control_text.png" horizontal="1" vertical="2" text="Text" fontSize="24" textColor="0,0,0" />
+			<Button name="image" anchorPoint="0.5,0.5,0.5" normalImage="Default/Image/control_image.png" horizontal="1" vertical="2" text="Image" fontSize="24" textColor="0,0,0" />
+			<Button name="editText" anchorPoint="0.5,0.5,0.5" normalImage="Default/Image/control_editText.png" horizontal="1" vertical="2" text="EditText" fontSize="24" textColor="0,0,0" />
+			<Button name="button" anchorPoint="0.5,0.5,0.5" normalImage="Default/Image/control_button.png" horizontal="1" vertical="2" text="Button" fontSize="24" textColor="0,0,0" />
 
-			<Button name="layout" normalImage="Default/Image/control_layout.png" horizontal="1" vertical="2" text="Layout" fontSize="24" textColor="0,0,0" />
+			<Button name="layout" anchorPoint="0.5,0.5,0.5" normalImage="Default/Image/control_layout.png" horizontal="1" vertical="2" text="Layout" fontSize="24" textColor="0,0,0" />
 			
-			<Button name="scrollView" normalImage="Default/Image/control_scrollView.png"  horizontal="1" vertical="2" text="ScrollView" fontSize="24" textColor="0,0,0" />
-			<Button name="listView" normalImage="Default/Image/control_listView.png" horizontal="1" vertical="2" text="ListView" fontSize="24" textColor="0,0,0" />
-			<Button name="gridView" normalImage="Default/Image/control_gridView.png" horizontal="1" vertical="2" text="GridView" fontSize="24" textColor="0,0,0" />
+			<Button name="scrollView" anchorPoint="0.5,0.5,0.5" normalImage="Default/Image/control_scrollView.png"  horizontal="1" vertical="2" text="ScrollView" fontSize="24" textColor="0,0,0" />
+			<Button name="listView" anchorPoint="0.5,0.5,0.5" normalImage="Default/Image/control_listView.png" horizontal="1" vertical="2" text="ListView" fontSize="24" textColor="0,0,0" />
+			<Button name="gridView" anchorPoint="0.5,0.5,0.5" normalImage="Default/Image/control_gridView.png" horizontal="1" vertical="2" text="GridView" fontSize="24" textColor="0,0,0" />
 			
 		</GridView>
   </Layout>
