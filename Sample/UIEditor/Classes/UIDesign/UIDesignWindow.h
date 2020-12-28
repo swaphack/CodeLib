@@ -1,18 +1,18 @@
 #pragma once
 
-#include "Panel.h"
+#include "Panel/Panel.h"
 
 namespace ue
 {
-	class DesignPanel;
-	class PropertyPanel;
+	class UIDesignView;
+	class UIDesignProperty;
 
 	// 视图布局
-	class ViewLayout : public Panel
+	class UIDesignWindow : public Panel
 	{
 	public:
-		ViewLayout();
-		virtual ~ViewLayout();
+		UIDesignWindow();
+		virtual ~UIDesignWindow();
 	protected:
 		/**
 		*	初始化
@@ -41,6 +41,6 @@ namespace ue
 		virtual bool onTouchEnded(float x, float y, bool include);
 	private:
 		// 设计面板
-		DesignPanel* m_pDesignPanel = nullptr;
+		UIDesignView* m_pDesignPanel = nullptr;
 	};
 }

@@ -1,17 +1,22 @@
 #pragma once
 
-#include "Panel.h"
+#include "Panel/SinglePanel.h"
 
 namespace ue
 {
-	// 控件栏
-	class ControlPanel : public Panel
+	/**
+	*  打开文件面板
+	*/
+	class FileSystemWindow : public SinglePanel
 	{
 	public:
-		ControlPanel();
-		virtual ~ControlPanel();
+		FileSystemWindow ();
+		virtual ~FileSystemWindow ();
 	public:
-		virtual bool init();
+		/**
+		*	文件路径
+		*/
+		virtual const char* getPanelPath();
 	protected:
 		/**
 		*	初始化
@@ -25,6 +30,6 @@ namespace ue
 		*	初始化文本
 		*/
 		virtual void initText();
-	public:
+
 	};
 }

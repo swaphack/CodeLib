@@ -22,41 +22,43 @@
     <ClCompile Include="Classes\Config\IDEConfig.cpp" />
     <ClCompile Include="Classes\Config\import.h" />
     <ClCompile Include="Classes\Config\ProjectConfig.cpp" />
-    <ClCompile Include="Classes\Panel\DesignPanel.cpp" />
-    <ClCompile Include="Classes\Panel\DirectoryPanel.cpp" />
-    <ClCompile Include="Classes\Panel\DocumentPanel.cpp" />
-    <ClCompile Include="Classes\Panel\MenuBar.cpp" />
-    <ClCompile Include="Classes\Panel\OpenFilePanel.cpp" />
-    <ClCompile Include="Classes\Panel\PopMenu.cpp" />
-    <ClCompile Include="Classes\Panel\PropertyPanel.cpp" />
     <ClCompile Include="Classes\Panel\Panel.cpp" />
     <ClCompile Include="Classes\Panel\PanelEvent.cpp" />
     <ClCompile Include="Classes\Panel\SinglePanel.cpp" />
-    <ClCompile Include="Classes\Panel\ViewLayout.cpp" />
-    <ClCompile Include="Classes\Panel\ControlPanel.cpp" />
+    <ClCompile Include="Classes\UIDesign\UIDesignPopMenu.cpp" />
+    <ClCompile Include="Classes\UIDesign\UIDesignMenuBar.cpp" />
+    <ClCompile Include="Classes\UIDesign\UIDesignView.cpp" />
+    <ClCompile Include="Classes\UIDesign\UIDesignDirectory.cpp" />
+    <ClCompile Include="Classes\UIDesign\UIDesignDocument.cpp" />
+    <ClCompile Include="Classes\UIDesign\UIDesignProperty.cpp" />
+    <ClCompile Include="Classes\UIDesign\UIDesignWidget.cpp" />
+    <ClCompile Include="Classes\UIDesign\UIDesignWindow.cpp" />
     <ClCompile Include="Classes\UIEditorApplication.cpp" />
     <ClCompile Include="Classes\main.cpp" />
+    <ClCompile Include="Classes\UIHelper\FileSystemWindow.cpp" />
     <ClCompile Include="Classes\Window\MainWindow.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Classes\Config\Config.h" />
     <ClInclude Include="Classes\Config\IDEConfig.h" />
     <ClInclude Include="Classes\Config\ProjectConfig.h" />
-    <ClInclude Include="Classes\Panel\DesignPanel.h" />
-    <ClInclude Include="Classes\Panel\DirectoryPanel.h" />
-    <ClInclude Include="Classes\Panel\DocumentPanel.h" />
-    <ClInclude Include="Classes\Panel\OpenFilePanel.h" />
-    <ClInclude Include="Classes\Panel\PanelEvent.h" />
     <ClInclude Include="Classes\Panel\import.h" />
     <ClInclude Include="Classes\Panel\macros.h" />
-    <ClInclude Include="Classes\Panel\PopMenu.h" />
-    <ClInclude Include="Classes\Panel\PropertyPanel.h" />
     <ClInclude Include="Classes\Panel\Panel.h" />
+    <ClInclude Include="Classes\Panel\PanelEvent.h" />
     <ClInclude Include="Classes\Panel\SinglePanel.h" />
-    <ClInclude Include="Classes\Panel\ViewLayout.h" />
-    <ClInclude Include="Classes\Panel\MenuBar.h" />
-    <ClInclude Include="Classes\Panel\ControlPanel.h" />
+    <ClInclude Include="Classes\UIDesign\import.h" />
+    <ClInclude Include="Classes\UIDesign\UIDesignPopMenu.h" />
+    <ClInclude Include="Classes\UIDesign\UIDesignMenuBar.h" />
+    <ClInclude Include="Classes\UIDesign\UIDesignView.h" />
+    <ClInclude Include="Classes\UIDesign\UIDesignDirectory.h" />
+    <ClInclude Include="Classes\UIDesign\UIDesignDocument.h" />
+    <ClInclude Include="Classes\UIDesign\UIDesignProperty.h" />
+    <ClInclude Include="Classes\UIDesign\UIDesignWidget.h" />
+    <ClInclude Include="Classes\UIDesign\UIDesignWindow.h" />
     <ClInclude Include="Classes\UIEditorApplication.h" />
+    <ClInclude Include="Classes\UIHelper\FileSystemWindow.h" />
+    <ClInclude Include="Classes\UIHelper\import.h" />
     <ClInclude Include="Classes\Window\MainWindow.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
@@ -130,7 +132,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>../../Foundation/Math/;../../Foundation/Algorithm/;../../Foundation/System/;../../Foundation/Render/;../../Foundation/Tool/;../../Foundation/Physics/;../../Foundation/UI/;../../Lib/include/;../../Lib/include/fbx/;../../Lib/include/tinyxml2;../../Lib/include/freetype/;/Classes/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../Foundation/Math/;../../Foundation/Algorithm/;../../Foundation/System/;../../Foundation/Render/;../../Foundation/Tool/;../../Foundation/Physics/;../../Foundation/UI/;../../Lib/include/;../../Lib/include/fbx/;../../Lib/include/tinyxml2;../../Lib/include/freetype/;$(ProjectDir)/Classes/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

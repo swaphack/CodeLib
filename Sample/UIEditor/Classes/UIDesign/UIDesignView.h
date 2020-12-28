@@ -1,15 +1,15 @@
 #pragma once
 
-#include "Panel.h"
+#include "Panel/Panel.h"
 
 namespace ue
 {
 	// …Ëº∆¿∏
-	class DesignPanel : public Panel
+	class UIDesignView : public Panel
 	{
 	public:
-		DesignPanel();
-		virtual ~DesignPanel();
+		UIDesignView();
+		virtual ~UIDesignView();
 	public:
 		virtual bool init();
 	public:

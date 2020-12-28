@@ -1,15 +1,17 @@
 #pragma once
 
-#include "Panel.h"
+#include "Panel/Panel.h"
 
 namespace ue
 {
-	// 菜单栏
-	class MenuBar : public Panel
+	// 控件栏
+	class UIDesignWidget : public Panel
 	{
 	public:
-		MenuBar();
-		virtual ~MenuBar();
+		UIDesignWidget();
+		virtual ~UIDesignWidget();
+	public:
+		virtual bool init();
 	protected:
 		/**
 		*	初始化
@@ -23,5 +25,6 @@ namespace ue
 		*	初始化文本
 		*/
 		virtual void initText();
+	public:
 	};
 }

@@ -2,10 +2,10 @@
 
 namespace ue
 {
-#define PANEL_NAME_VIEWLAYOUT "ViewLayout"
-#define PANEL_NAME_MENUBAR "MenuBar"
-#define PANEL_NAME_CONTROL "ControlPanel"
-#define PANEL_NAME_DIRECTORY "DirectoryPanel"
-#define PANEL_NAME_DESIGN "DesignPanel"
-#define PANEL_NAME_PROPERTY "PropertyPanel"
+#define UI_DESIGN_WINDOW "UIDesignWindow"
+#define UI_DESIGN_VIEW "UIDesignView"
+#define UI_DESIGN_MENUBAR "UIDesignMenuBar"
+#define UI_DESIGN_WIDGET "UIDesignWidget"
+#define UI_DESIGN_DIRECTORY "UIDesignDirectory"
+#define UI_DESIGN_PROPERTY "UIDesignProperty"
 }

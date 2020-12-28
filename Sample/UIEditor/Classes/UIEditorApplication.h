@@ -15,7 +15,9 @@ namespace ue
 	public:
 		virtual void show();
 	private:
+		// 开发环境配置
 		IDEConfig _ideConfig;
+		// 工程配置
 		ProjectConfig _projectConfig;
 	};
 }

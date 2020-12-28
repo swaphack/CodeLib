@@ -1,17 +1,17 @@
 #pragma once
 
-#include "SinglePanel.h"
+#include "Panel/SinglePanel.h"
 
 namespace ue
 {
 	/**
 	*	弹出菜单
 	*/
-	class PopMenu : public SinglePanel
+	class UIDesignPopMenu : public SinglePanel
 	{
 	public:
-		PopMenu();
-		virtual ~PopMenu();
+		UIDesignPopMenu();
+		virtual ~UIDesignPopMenu();
 	public:
 		/**
 		*	文件路径

@@ -1,17 +1,17 @@
 #pragma once
 
-#include "Panel.h"
+#include "Panel/Panel.h"
 
 namespace ue
 {
 	/**
 	*	获取文档面板
 	*/
-	class DocumentPanel : public Panel
+	class UIDesignDocument : public Panel
 	{
 	public:
-		DocumentPanel();
-		virtual ~DocumentPanel();
+		UIDesignDocument();
+		virtual ~UIDesignDocument();
 	public:
 		virtual bool init();
 	public:

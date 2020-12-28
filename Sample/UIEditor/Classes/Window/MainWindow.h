@@ -4,7 +4,7 @@
 
 namespace ue
 {
-	class ViewLayout;
+	class UIDesignWindow;
 
 	// Ö÷´°Ìå
 	class MainWindow : public render::Scene
@@ -20,7 +20,7 @@ namespace ue
 		*/
 		void setUIFile(const std::string& config);
 	private:
-		ViewLayout* _viewLayout = nullptr;
+		UIDesignWindow* _viewLayout = nullptr;
 	};
 }
 

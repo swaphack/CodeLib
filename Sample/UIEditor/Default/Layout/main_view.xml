@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <root width="1024" height="768" layout="1" fontPath="Default/Font/font_3.ttf">
 	<Layout showMask="1" maskColor="255,255,255,125" margin="0,0,0,0" size="100%,100%">  
-		<MenuBar name="MenuBar" filepath="Default/Layout/main_view_menu.xml" margin="0,0,0,0" marginState="1,1,0,1" size="0,40"/>
+		<UIDesignMenuBar name="MenuBar" filepath="Default/Layout/main_view_menu.xml" margin="0,0,0,0" marginState="1,1,0,1" size="0,40"/>
 		<Layout margin="40,0,0,0" marginState="1,1,1,1">
-			<Layout margin="0,0,0,0" marginState="1,0,1,1" size="320,0">
-				<ControlPanel name="ControlPanel" filepath="Default/Layout/main_view_control.xml" margin="0,0,0,0" marginState="1,1,0,1" size="100%,50%"/>
-				<DirectoryPanel name="DirectoryPanel" filepath="Default/Layout/main_view_directory.xml" margin="0,0,0,0" marginState="0,1,1,1" size="100%,50%"/>
+			<Layout margin="0,0,0,0" marginState="1,0,1,1" size="300,0">
+				<UIDesignWidget name="DesignWidget" filepath="Default/Layout/main_view_control.xml" margin="0,0,0,0" marginState="1,1,0,1" size="100%,50%"/>
+				<UIDesignDirectory name="DesignDirectory" filepath="Default/Layout/main_view_directory.xml" margin="0,0,0,0" marginState="0,1,1,1" size="100%,50%"/>
 			</Layout>
-			<DesignPanel name="DesignPanel" filepath="Default/Layout/main_view_scene.xml" margin="0,280,0,320" marginState="1,1,1,1"/>
-			<PropertyPanel name="PropertyPanel" filepath="Default/Layout/main_view_property2.xml" margin="0,0,0,0" marginState="1,1,1,0" size="280,0"/>
+			<UIDesignView name="DesignView" filepath="Default/Layout/main_view_scene.xml" margin="0,280,0,300" marginState="1,1,1,1"/>
+			<UIDesignProperty name="DesignProperty" filepath="Default/Layout/main_view_property2.xml" margin="0,0,0,0" marginState="1,1,1,0" size="280,0"/>
 		</Layout>
 	</Layout>
 </root>

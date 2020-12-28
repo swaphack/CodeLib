@@ -1,9 +1,9 @@
 #include "MainWindow.h"
-#include "../Panel/import.h"
+#include "UIDesign/import.h"
 
 ue::MainWindow::MainWindow()
 {
-	_viewLayout = CREATE_NODE(ViewLayout);
+	_viewLayout = CREATE_NODE(UIDesignWindow);
 	this->addChild(_viewLayout);
 }
 

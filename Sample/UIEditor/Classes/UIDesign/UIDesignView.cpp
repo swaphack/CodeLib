@@ -1,15 +1,15 @@
-#include "DesignPanel.h"
-#include "PanelEvent.h"
-ue::DesignPanel::DesignPanel()
+#include "UIDesignView.h"
+#include "Panel/PanelEvent.h"
+ue::UIDesignView::UIDesignView()
 {
 	this->setTouchEnable(true);
 }
 
-ue::DesignPanel::~DesignPanel()
+ue::UIDesignView::~UIDesignView()
 {
 }
 
-bool ue::DesignPanel::init()
+bool ue::UIDesignView::init()
 {
 	if (!Panel::init())
 	{
@@ -51,7 +51,7 @@ bool ue::DesignPanel::init()
 	return true;
 }
 
-void ue::DesignPanel::unselectTarget()
+void ue::UIDesignView::unselectTarget()
 {
 	if (m_pSelectedTarget != nullptr)
 	{
@@ -60,12 +60,12 @@ void ue::DesignPanel::unselectTarget()
 	}
 }
 
-ui::CtrlWidget* ue::DesignPanel::getSelectedTarget() const
+ui::CtrlWidget* ue::UIDesignView::getSelectedTarget() const
 {
 	return m_pSelectedTarget;
 }
 
-void ue::DesignPanel::setDesignFile(const std::string& filepath)
+void ue::UIDesignView::setDesignFile(const std::string& filepath)
 {
 	if (m_pViewScene == nullptr)
 	{
@@ -88,21 +88,21 @@ void ue::DesignPanel::setDesignFile(const std::string& filepath)
 	}
 }
 
-void ue::DesignPanel::initUI()
+void ue::UIDesignView::initUI()
 {
 	m_pRootWidget->findWidgetByName("viewScene", m_pViewScene);
 }
 
-void ue::DesignPanel::initEvent()
+void ue::UIDesignView::initEvent()
 {
 
 }
 
-void ue::DesignPanel::initText()
+void ue::UIDesignView::initText()
 {
 }
 
-bool ue::DesignPanel::onTouchBegan(float x, float y, bool include)
+bool ue::UIDesignView::onTouchBegan(float x, float y, bool include)
 {
 	if (m_pUIFile == nullptr)
 	{
@@ -119,17 +119,17 @@ bool ue::DesignPanel::onTouchBegan(float x, float y, bool include)
 	return true;
 }
 
-bool ue::DesignPanel::onTouchMoved(float x, float y, bool include)
+bool ue::UIDesignView::onTouchMoved(float x, float y, bool include)
 {
 	return true;
 }
 
-bool ue::DesignPanel::onTouchEnded(float x, float y, bool include)
+bool ue::UIDesignView::onTouchEnded(float x, float y, bool include)
 {
 	return true;
 }
 
-bool ue::DesignPanel::touchFrontWidget(ui::CtrlWidget* widget, float x, float y)
+bool ue::UIDesignView::touchFrontWidget(ui::CtrlWidget* widget, float x, float y)
 {
 	if (widget == nullptr)
 	{
@@ -183,7 +183,7 @@ bool ue::DesignPanel::touchFrontWidget(ui::CtrlWidget* widget, float x, float y)
 	return true;
 }
 
-void ue::DesignPanel::saveFile()
+void ue::UIDesignView::saveFile()
 {
 	auto pFile = m_pUIFile->as<ui::CtrlFile>();
 	if (pFile)
@@ -192,7 +192,7 @@ void ue::DesignPanel::saveFile()
 	}
 }
 
-void ue::DesignPanel::reloadFile()
+void ue::UIDesignView::reloadFile()
 {
 	this->setDesignFile(m_strFileName);
 }

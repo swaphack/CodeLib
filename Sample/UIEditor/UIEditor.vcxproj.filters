@@ -17,6 +17,12 @@
     <Filter Include="Classes\Config">
       <UniqueIdentifier>{abb1c7f7-3b08-43c3-a3e2-0bb026852252}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Classes\UIDesign">
+      <UniqueIdentifier>{ad788e4b-e0d5-4c42-aa4e-a15dc4983c34}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\UIHelper">
+      <UniqueIdentifier>{717eb2d1-22ad-4396-9e40-8da7715a8af7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Classes\main.cpp">
@@ -28,40 +34,10 @@
     <ClCompile Include="Classes\Window\MainWindow.cpp">
       <Filter>Classes\Window</Filter>
     </ClCompile>
-    <ClCompile Include="Classes\Panel\ViewLayout.cpp">
-      <Filter>Classes\Panel</Filter>
-    </ClCompile>
-    <ClCompile Include="Classes\Panel\DesignPanel.cpp">
-      <Filter>Classes\Panel</Filter>
-    </ClCompile>
-    <ClCompile Include="Classes\Panel\MenuBar.cpp">
-      <Filter>Classes\Panel</Filter>
-    </ClCompile>
-    <ClCompile Include="Classes\Panel\PropertyPanel.cpp">
-      <Filter>Classes\Panel</Filter>
-    </ClCompile>
     <ClCompile Include="Classes\Panel\Panel.cpp">
       <Filter>Classes\Panel</Filter>
     </ClCompile>
-    <ClCompile Include="Classes\Panel\DirectoryPanel.cpp">
-      <Filter>Classes\Panel</Filter>
-    </ClCompile>
-    <ClCompile Include="Classes\Panel\PopMenu.cpp">
-      <Filter>Classes\Panel</Filter>
-    </ClCompile>
-    <ClCompile Include="Classes\Panel\PanelEvent.cpp">
-      <Filter>Classes\Panel</Filter>
-    </ClCompile>
-    <ClCompile Include="Classes\Panel\DocumentPanel.cpp">
-      <Filter>Classes\Panel</Filter>
-    </ClCompile>
     <ClCompile Include="Classes\Panel\SinglePanel.cpp">
-      <Filter>Classes\Panel</Filter>
-    </ClCompile>
-    <ClCompile Include="Classes\Panel\OpenFilePanel.cpp">
-      <Filter>Classes\Panel</Filter>
-    </ClCompile>
-    <ClCompile Include="Classes\Panel\ControlPanel.cpp">
       <Filter>Classes\Panel</Filter>
     </ClCompile>
     <ClCompile Include="Classes\Config\ProjectConfig.cpp">
@@ -72,6 +48,36 @@
     </ClCompile>
     <ClCompile Include="Classes\Config\import.h">
       <Filter>Classes\Config</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\UIDesign\UIDesignWindow.cpp">
+      <Filter>Classes\UIDesign</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\UIHelper\FileSystemWindow.cpp">
+      <Filter>Classes\UIHelper</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\UIDesign\UIDesignView.cpp">
+      <Filter>Classes\UIDesign</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\UIDesign\UIDesignDirectory.cpp">
+      <Filter>Classes\UIDesign</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\UIDesign\UIDesignDocument.cpp">
+      <Filter>Classes\UIDesign</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\UIDesign\UIDesignProperty.cpp">
+      <Filter>Classes\UIDesign</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\UIDesign\UIDesignWidget.cpp">
+      <Filter>Classes\UIDesign</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\UIDesign\UIDesignMenuBar.cpp">
+      <Filter>Classes\UIDesign</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\UIDesign\UIDesignPopMenu.cpp">
+      <Filter>Classes\UIDesign</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Panel\PanelEvent.cpp">
+      <Filter>Classes\Panel</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -84,43 +90,13 @@
     <ClInclude Include="Classes\Panel\import.h">
       <Filter>Classes\Panel</Filter>
     </ClInclude>
-    <ClInclude Include="Classes\Panel\MenuBar.h">
-      <Filter>Classes\Panel</Filter>
-    </ClInclude>
     <ClInclude Include="Classes\Panel\macros.h">
-      <Filter>Classes\Panel</Filter>
-    </ClInclude>
-    <ClInclude Include="Classes\Panel\ViewLayout.h">
-      <Filter>Classes\Panel</Filter>
-    </ClInclude>
-    <ClInclude Include="Classes\Panel\PropertyPanel.h">
-      <Filter>Classes\Panel</Filter>
-    </ClInclude>
-    <ClInclude Include="Classes\Panel\DesignPanel.h">
       <Filter>Classes\Panel</Filter>
     </ClInclude>
     <ClInclude Include="Classes\Panel\Panel.h">
       <Filter>Classes\Panel</Filter>
     </ClInclude>
-    <ClInclude Include="Classes\Panel\DirectoryPanel.h">
-      <Filter>Classes\Panel</Filter>
-    </ClInclude>
-    <ClInclude Include="Classes\Panel\PopMenu.h">
-      <Filter>Classes\Panel</Filter>
-    </ClInclude>
-    <ClInclude Include="Classes\Panel\PanelEvent.h">
-      <Filter>Classes\Panel</Filter>
-    </ClInclude>
-    <ClInclude Include="Classes\Panel\DocumentPanel.h">
-      <Filter>Classes\Panel</Filter>
-    </ClInclude>
     <ClInclude Include="Classes\Panel\SinglePanel.h">
-      <Filter>Classes\Panel</Filter>
-    </ClInclude>
-    <ClInclude Include="Classes\Panel\OpenFilePanel.h">
-      <Filter>Classes\Panel</Filter>
-    </ClInclude>
-    <ClInclude Include="Classes\Panel\ControlPanel.h">
       <Filter>Classes\Panel</Filter>
     </ClInclude>
     <ClInclude Include="Classes\Config\Config.h">
@@ -131,6 +107,42 @@
     </ClInclude>
     <ClInclude Include="Classes\Config\IDEConfig.h">
       <Filter>Classes\Config</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\UIDesign\import.h">
+      <Filter>Classes\UIDesign</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\UIDesign\UIDesignWindow.h">
+      <Filter>Classes\UIDesign</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\UIHelper\FileSystemWindow.h">
+      <Filter>Classes\UIHelper</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\UIHelper\import.h">
+      <Filter>Classes\UIHelper</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\UIDesign\UIDesignView.h">
+      <Filter>Classes\UIDesign</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\UIDesign\UIDesignDirectory.h">
+      <Filter>Classes\UIDesign</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\UIDesign\UIDesignDocument.h">
+      <Filter>Classes\UIDesign</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\UIDesign\UIDesignProperty.h">
+      <Filter>Classes\UIDesign</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\UIDesign\UIDesignWidget.h">
+      <Filter>Classes\UIDesign</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\UIDesign\UIDesignMenuBar.h">
+      <Filter>Classes\UIDesign</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\UIDesign\UIDesignPopMenu.h">
+      <Filter>Classes\UIDesign</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Panel\PanelEvent.h">
+      <Filter>Classes\Panel</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

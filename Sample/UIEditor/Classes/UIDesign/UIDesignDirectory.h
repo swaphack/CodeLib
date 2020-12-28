@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Panel.h"
+#include "Panel/Panel.h"
 
 namespace ue
 {
@@ -25,11 +25,11 @@ namespace ue
 		void clear();
 	};
 	// Ä¿Â¼À¸
-	class DirectoryPanel : public Panel
+	class UIDesignDirectory : public Panel
 	{
 	public:
-		DirectoryPanel();
-		virtual ~DirectoryPanel();
+		UIDesignDirectory();
+		virtual ~UIDesignDirectory();
 	public:
 		virtual bool init();
 	protected:

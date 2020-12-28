@@ -1,16 +1,16 @@
-#include "PropertyPanel.h"
-#include "PanelEvent.h"
+#include "UIDesignProperty.h"
+#include "Panel/PanelEvent.h"
 
-ue::PropertyPanel::PropertyPanel()
+ue::UIDesignProperty::UIDesignProperty()
 {
 }
 
-ue::PropertyPanel::~PropertyPanel()
+ue::UIDesignProperty::~UIDesignProperty()
 {
 	G_KEYBOARDMANAGER->removeTargetAllEvents(this);
 }
 
-bool ue::PropertyPanel::init()
+bool ue::UIDesignProperty::init()
 {
 	if (!Panel::init())
 	{
@@ -29,7 +29,7 @@ bool ue::PropertyPanel::init()
 	return true;
 }
 
-void ue::PropertyPanel::loadProperty()
+void ue::UIDesignProperty::loadProperty()
 {
 	if (m_pTargetItem == nullptr || m_pTargetItem->getLayoutItem() == nullptr)
 	{
@@ -145,7 +145,7 @@ void ue::PropertyPanel::loadProperty()
 	}
 }
 
-void ue::PropertyPanel::saveProperty()
+void ue::UIDesignProperty::saveProperty()
 {
 	if (m_pTargetItem == nullptr || m_pTargetItem->getLayoutItem() == nullptr)
 	{
@@ -273,7 +273,7 @@ void ue::PropertyPanel::saveProperty()
 	this->loadProperty();
 }
 
-void ue::PropertyPanel::initUI()
+void ue::UIDesignProperty::initUI()
 {
 	m_pRootWidget->findWidgetByName("TypeText", m_pTextType);
 	m_pRootWidget->findWidgetByName("NameText", m_pEditTextName);
@@ -335,7 +335,7 @@ void ue::PropertyPanel::initUI()
 	}
 }
 
-void ue::PropertyPanel::initEvent()
+void ue::UIDesignProperty::initEvent()
 {
 	G_KEYBOARDMANAGER->addKeyboardFunc(this, this, [this](Node* object, sys::BoardKey key, sys::ButtonStatus status){
 		if (this != object)
@@ -350,6 +350,6 @@ void ue::PropertyPanel::initEvent()
 	});
 }
 
-void ue::PropertyPanel::initText()
+void ue::UIDesignProperty::initText()
 {
 }

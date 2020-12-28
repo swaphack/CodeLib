@@ -1,6 +1,6 @@
-#include "DirectoryPanel.h"
+#include "UIDesignDirectory.h"
 #include "render.h"
-#include "PanelEvent.h"
+#include "Panel/PanelEvent.h"
 
 void ue::DirDetail::setRoot(const std::string& root)
 {
@@ -33,16 +33,16 @@ void ue::DirDetail::clear()
 }
 
 
-ue::DirectoryPanel::DirectoryPanel()
+ue::UIDesignDirectory::UIDesignDirectory()
 {
 
 }
 
-ue::DirectoryPanel::~DirectoryPanel()
+ue::UIDesignDirectory::~UIDesignDirectory()
 {
 }
 
-bool ue::DirectoryPanel::init()
+bool ue::UIDesignDirectory::init()
 {
 	if (!Panel::init())
 	{
@@ -51,22 +51,22 @@ bool ue::DirectoryPanel::init()
 	return true;
 }
 
-void ue::DirectoryPanel::initUI()
+void ue::UIDesignDirectory::initUI()
 {
 	m_pRootWidget->findWidgetByName("directory", _directory);
 	this->setDirectory("H:/Github/CodeLib/Sample/UIEditor/Resource/");
 }
 
-void ue::DirectoryPanel::initEvent()
+void ue::UIDesignDirectory::initEvent()
 {
 }
 
-void ue::DirectoryPanel::initText()
+void ue::UIDesignDirectory::initText()
 {
 
 }
 
-void ue::DirectoryPanel::setDirectory(const std::string& root)
+void ue::UIDesignDirectory::setDirectory(const std::string& root)
 {
 	_root = root;
 
@@ -75,14 +75,14 @@ void ue::DirectoryPanel::setDirectory(const std::string& root)
 	this->updateRootPanel();
 }
 
-void ue::DirectoryPanel::updateRootPanel()
+void ue::UIDesignDirectory::updateRootPanel()
 {
 	_directory->removeAllItems();
 
 	this->updateRootList(_directory, _dirDetail);
 }
 
-void ue::DirectoryPanel::updateRootList(ui::CtrlListView* layout, const DirDetail& detail, int layer)
+void ue::UIDesignDirectory::updateRootList(ui::CtrlListView* layout, const DirDetail& detail, int layer)
 {
 	if (layout == nullptr)
 	{
@@ -127,7 +127,7 @@ void ue::DirectoryPanel::updateRootList(ui::CtrlListView* layout, const DirDetai
 	}
 }
 
-ui::CtrlButton* ue::DirectoryPanel::createDirItem(int height, const std::string& name, const std::string& fullpath)
+ui::CtrlButton* ue::UIDesignDirectory::createDirItem(int height, const std::string& name, const std::string& fullpath)
 {
 	auto pWidget = createWidget<ui::CtrlButton>();
 	if (pWidget == nullptr)
@@ -159,7 +159,7 @@ ui::CtrlButton* ue::DirectoryPanel::createDirItem(int height, const std::string&
 	return pWidget;
 }
 
-ui::CtrlButton* ue::DirectoryPanel::createFileItem(int height, const std::string& name, const std::string& fullpath)
+ui::CtrlButton* ue::UIDesignDirectory::createFileItem(int height, const std::string& name, const std::string& fullpath)
 {
 	auto pWidget = createWidget<ui::CtrlButton>();
 	if (pWidget == nullptr)
@@ -192,7 +192,7 @@ ui::CtrlButton* ue::DirectoryPanel::createFileItem(int height, const std::string
 	return pWidget;
 }
 
-void ue::DirectoryPanel::onChangeFoldState(const std::string& name)
+void ue::UIDesignDirectory::onChangeFoldState(const std::string& name)
 {
 	auto it = _dirFoldInfo.find(name);
 	if (it != _dirFoldInfo.end())
@@ -205,7 +205,7 @@ void ue::DirectoryPanel::onChangeFoldState(const std::string& name)
 	}
 }
 
-bool ue::DirectoryPanel::isDirFolded(const std::string& name)
+bool ue::UIDesignDirectory::isDirFolded(const std::string& name)
 {
 	auto it = _dirFoldInfo.find(name);
 

@@ -3,6 +3,7 @@
 #include "render.h"
 #include "ui.h"
 #include "Panel/import.h"
+#include "UIDesign/import.h"
 
 #define IDE_CONFIG_FILEPATH "Default/ide.xml"
 
@@ -12,11 +13,11 @@ using namespace render;
 
 ue::UIEditorApplication::UIEditorApplication()
 {
-	ui::UIProxy::getInstance()->registerElementParser(PANEL_NAME_MENUBAR, new ui::TFileLoader<MenuBar>());
-	ui::UIProxy::getInstance()->registerElementParser(PANEL_NAME_CONTROL, new ui::TFileLoader<ControlPanel>());
-	ui::UIProxy::getInstance()->registerElementParser(PANEL_NAME_DIRECTORY, new ui::TFileLoader<DirectoryPanel>());
-	ui::UIProxy::getInstance()->registerElementParser(PANEL_NAME_DESIGN, new ui::TFileLoader<DesignPanel>());
-	ui::UIProxy::getInstance()->registerElementParser(PANEL_NAME_PROPERTY, new ui::TFileLoader<PropertyPanel>());
+	ui::UIProxy::getInstance()->registerElementParser(UI_DESIGN_MENUBAR, new ui::TFileLoader<UIDesignMenuBar>());
+	ui::UIProxy::getInstance()->registerElementParser(UI_DESIGN_WIDGET, new ui::TFileLoader<UIDesignWidget>());
+	ui::UIProxy::getInstance()->registerElementParser(UI_DESIGN_DIRECTORY, new ui::TFileLoader<UIDesignDirectory>());
+	ui::UIProxy::getInstance()->registerElementParser(UI_DESIGN_VIEW, new ui::TFileLoader<UIDesignView>());
+	ui::UIProxy::getInstance()->registerElementParser(UI_DESIGN_PROPERTY, new ui::TFileLoader<UIDesignProperty>());
 	
 	_ideConfig.loadXml(IDE_CONFIG_FILEPATH);
 
