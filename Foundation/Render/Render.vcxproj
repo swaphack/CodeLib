@@ -161,7 +161,7 @@
     <ClCompile Include="Common\Input\KeyChar.cpp" />
     <ClCompile Include="Common\Input\MouseManager.cpp" />
     <ClCompile Include="Common\Input\TouchManager.cpp" />
-    <ClCompile Include="Common\Input\TouchProxy.cpp" />
+    <ClCompile Include="Common\Input\TouchProtocol.cpp" />
     <ClCompile Include="Common\Material\Material.cpp" />
     <ClCompile Include="Common\Material\Materials.cpp" />
     <ClCompile Include="Common\Mesh\Mesh.cpp" />
@@ -387,7 +387,7 @@
     <ClInclude Include="Common\Input\MouseManager.h" />
     <ClInclude Include="Common\Input\TouchDelegate.h" />
     <ClInclude Include="Common\Input\TouchManager.h" />
-    <ClInclude Include="Common\Input\TouchProxy.h" />
+    <ClInclude Include="Common\Input\TouchProtocol.h" />
     <ClInclude Include="Common\macros.h" />
     <ClInclude Include="Common\Material\import.h" />
     <ClInclude Include="Common\Material\Material.h" />

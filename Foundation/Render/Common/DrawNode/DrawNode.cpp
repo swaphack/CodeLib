@@ -182,7 +182,6 @@ void DrawNode::onDraw()
 		DrawMode mode = _mesh->getDrawMode();
 		if (isTessilationEnable())
 		{
-			//uint32_t nVerticeCount = _mesh->getMeshDetail()->getVertices().getLength();
 			this->updateTessilation();
 			_mesh->setDrawMode(DrawMode::PATCHES);
 		}

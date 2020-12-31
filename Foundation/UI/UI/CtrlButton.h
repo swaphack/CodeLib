@@ -124,11 +124,6 @@ namespace ui
 		*	点击缩放
 		*/
 		float getTouchScale() const;
-	protected:
-		// 触摸处理
-		virtual bool onTouchBegan(float x, float y, bool include);
-		virtual bool onTouchMoved(float x, float y, bool include);
-		virtual bool onTouchEnded(float x, float y, bool include);
 	private:
 		struct ButtonImage
 		{

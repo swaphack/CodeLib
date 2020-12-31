@@ -2,12 +2,31 @@
 
 ue::SinglePanel::SinglePanel()
 {
-
-	this->setTouchEnable(true);
+	this->setTouchEnabled(true);
 }
 
 ue::SinglePanel::~SinglePanel()
 {
+}
+
+bool ue::SinglePanel::init()
+{
+	if (!Panel::init())
+	{
+		return false;
+	}
+
+	this->addTouchFunc(render::TouchType::UP, [this](const math::Vector2& touchPoint, bool include) {
+		if (include)
+		{
+			if (!_body->containTouchPoint(touchPoint))
+			{
+				close();
+			}
+		}
+	});
+
+	return true;
 }
 
 const char* ue::SinglePanel::getPanelPath()
@@ -140,23 +159,4 @@ void ue::SinglePanel::setPositionRightBottom(const math::Vector2& pos)
 
 	getLayoutItem()->setMargin(margin);
 	getLayoutItem()->setMarginState(state);
-}
-
-bool ue::SinglePanel::onTouchBegan(float x, float y, bool include)
-{
-	return include;
-}
-
-bool ue::SinglePanel::onTouchMoved(float x, float y, bool include)
-{
-	return include;
-}
-
-bool ue::SinglePanel::onTouchEnded(float x, float y, bool include)
-{
-	if (!_body->containTouchPoint(x, y))
-	{
-		close();
-	}
-	return false;
 }

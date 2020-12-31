@@ -12,6 +12,9 @@ namespace ue
 	public:
 		SinglePanel();
 		virtual ~SinglePanel();
+
+	public:
+		virtual bool init();
 	public:
 		/**
 		*	面板配置路径
@@ -51,19 +54,6 @@ namespace ue
 		*	设置主体位置
 		*/
 		void setPositionRightBottom(const math::Vector2& pos);
-	protected: // 点击
-		/**
-		*	点击屏幕
-		*/
-		virtual bool onTouchBegan(float x, float y, bool include);
-		/**
-		*	在屏幕上滑动
-		*/
-		virtual bool onTouchMoved(float x, float y, bool include);
-		/**
-		*	离开屏幕
-		*/
-		virtual bool onTouchEnded(float x, float y, bool include);
 	protected:
 		// 主体
 		ui::CtrlWidget* _body = nullptr;

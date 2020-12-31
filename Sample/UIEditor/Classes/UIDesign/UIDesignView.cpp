@@ -2,7 +2,7 @@
 #include "Panel/PanelEvent.h"
 ue::UIDesignView::UIDesignView()
 {
-	this->setTouchEnable(true);
+	this->setTouchEnabled(true);
 }
 
 ue::UIDesignView::~UIDesignView()
@@ -36,7 +36,7 @@ bool ue::UIDesignView::init()
 	});
 
 
-	G_KEYBOARDMANAGER->addKeyboardFunc(this, this, [this](Node* object, sys::BoardKey key, sys::ButtonStatus status) {
+	G_KEYBOARDMANAGER->addKeyboardFunc(this, this, [this](sys::BoardKey key, sys::ButtonStatus status) {
 		if (!G_KEYCHAR->isControlEnabled())
 		{
 			return;
@@ -48,6 +48,20 @@ bool ue::UIDesignView::init()
 			else if (key == sys::BoardKey::KR) reloadFile();
 		}
 	});
+
+	this->addTouchFunc(render::TouchType::UP, [this](const math::Vector2& touchPoint, bool include) {
+		if (m_pUIFile == nullptr) return;
+
+		ui::CtrlFile* pFile = m_pUIFile->as<ui::CtrlFile>();
+		if (pFile)
+		{
+			touchFrontWidget(pFile, touchPoint);
+		}
+
+		G_PANELEVT->setSelectNode(m_pSelectedTarget);
+	});
+
+
 	return true;
 }
 
@@ -102,34 +116,7 @@ void ue::UIDesignView::initText()
 {
 }
 
-bool ue::UIDesignView::onTouchBegan(float x, float y, bool include)
-{
-	if (m_pUIFile == nullptr)
-	{
-		return true;
-	}
-	ui::CtrlFile* pFile = m_pUIFile->as<ui::CtrlFile>();
-	if (pFile)
-	{
-		touchFrontWidget(pFile, x, y);
-	}
-
-	G_PANELEVT->setSelectNode(m_pSelectedTarget);
-
-	return true;
-}
-
-bool ue::UIDesignView::onTouchMoved(float x, float y, bool include)
-{
-	return true;
-}
-
-bool ue::UIDesignView::onTouchEnded(float x, float y, bool include)
-{
-	return true;
-}
-
-bool ue::UIDesignView::touchFrontWidget(ui::CtrlWidget* widget, float x, float y)
+bool ue::UIDesignView::touchFrontWidget(ui::CtrlWidget* widget, const math::Vector2& touchPoint)
 {
 	if (widget == nullptr)
 	{
@@ -143,7 +130,7 @@ bool ue::UIDesignView::touchFrontWidget(ui::CtrlWidget* widget, float x, float y
 	{
 		for (int i = nChildCount - 1; i >= 0; i--)
 		{
-			if (touchFrontWidget(vecWidgets[i], x, y))
+			if (touchFrontWidget(vecWidgets[i], touchPoint))
 			{
 				contain = true;
 				return true;
@@ -153,7 +140,7 @@ bool ue::UIDesignView::touchFrontWidget(ui::CtrlWidget* widget, float x, float y
 
 	if (!contain)
 	{
-		if (!widget->containTouchPoint(x, y))
+		if (!widget->containTouchPoint(touchPoint))
 		{
 			return false;
 		}

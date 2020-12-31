@@ -1,6 +1,5 @@
 #pragma once
 
-#include "Common/Node/Node.h"
 #include "TouchDelegate.h"
 #include <map>
 #include <vector>
@@ -8,16 +7,11 @@
 
 namespace render
 {
-	class TouchProxy : public sys::Object
+	class TouchProtocol
 	{
 	public:
-		TouchProxy();
-		virtual ~TouchProxy();
-	public:
-		// 作用对象
-		void setTarget(Node* target);
-		// 作用对象
-		Node* getTarget();
+		TouchProtocol();
+		virtual ~TouchProtocol();
 	public:
 		// 设置可点击性
 		void setTouchEnabled(bool status);
@@ -25,14 +19,21 @@ namespace render
 		bool isTouchEnabled();
 	public:
 		// 设置吞噬点击
-		void setSwallowTouch(bool status);
+		void setTouchSwallowed(bool status);
 		// 是否吞噬点击
-		bool isSwallowTouch();
+		bool isTouchSwallowed();
+	public:
+		// 是否点击点落在改节点上,须重写
+		virtual bool containTouchPoint(const math::Vector2& touchPoint);
+		// 吞噬处理,须重写
+		virtual void doSwallowTouchEvent(TouchType type, const math::Vector2& touchPoint, bool include = true);
+		// 非吞噬处理,须重写
+		virtual void doNotSwallowTouchEvent(TouchType type, const math::Vector2& touchPoint, bool include = true);
 	public:
 		// 触摸处理
-		virtual bool onTouchBegan(float x, float y);
-		virtual bool onTouchMoved(float x, float y);
-		virtual bool onTouchEnded(float x, float y);
+		virtual bool onTouchBegan(const math::Vector2& touchPoint);
+		virtual bool onTouchMoved(const math::Vector2& touchPoint);
+		virtual bool onTouchEnded(const math::Vector2& touchPoint);
 	public:
 		// 添加触摸事件
 		void addTouchDelegate(TouchType type, sys::Object* object, TOUCH_DELEGATE_HANDLER handler);
@@ -49,14 +50,14 @@ namespace render
 		void removeAllTouchFuncs();
 	protected:
 		// 派发触摸事件
-		void dispatchTouchEvent(TouchType type, float x, float y, bool include = true);
+		void dispatchTouchEvent(TouchType type, const math::Vector2& touchPoint, bool include = true);
+		// 派发吞噬事件
+		void dispatchSwallowEvent(TouchType type, const math::Vector2& touchPoint, bool include = true);
 	private:
-		// 作用对象
-		Node* _target = nullptr;
 		//可点击
 		bool _bTouchEnabled = false;
 		// 吞噬点击
-		bool _bSwallowTouch = true;
+		bool _bTouchSwallowed = false;
 		// 是否点击到
 		bool _bIncludeTouch = false;
 

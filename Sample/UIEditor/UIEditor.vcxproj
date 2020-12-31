@@ -25,6 +25,7 @@
     <ClCompile Include="Classes\Panel\Panel.cpp" />
     <ClCompile Include="Classes\Panel\PanelEvent.cpp" />
     <ClCompile Include="Classes\Panel\SinglePanel.cpp" />
+    <ClCompile Include="Classes\UIDesign\UIDesignTree.cpp" />
     <ClCompile Include="Classes\UIDesign\UIDesignPopMenu.cpp" />
     <ClCompile Include="Classes\UIDesign\UIDesignMenuBar.cpp" />
     <ClCompile Include="Classes\UIDesign\UIDesignView.cpp" />
@@ -43,11 +44,12 @@
     <ClInclude Include="Classes\Config\IDEConfig.h" />
     <ClInclude Include="Classes\Config\ProjectConfig.h" />
     <ClInclude Include="Classes\Panel\import.h" />
-    <ClInclude Include="Classes\Panel\macros.h" />
     <ClInclude Include="Classes\Panel\Panel.h" />
     <ClInclude Include="Classes\Panel\PanelEvent.h" />
     <ClInclude Include="Classes\Panel\SinglePanel.h" />
     <ClInclude Include="Classes\UIDesign\import.h" />
+    <ClInclude Include="Classes\UIDesign\macros.h" />
+    <ClInclude Include="Classes\UIDesign\UIDesignTree.h" />
     <ClInclude Include="Classes\UIDesign\UIDesignPopMenu.h" />
     <ClInclude Include="Classes\UIDesign\UIDesignMenuBar.h" />
     <ClInclude Include="Classes\UIDesign\UIDesignView.h" />

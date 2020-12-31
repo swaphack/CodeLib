@@ -1,6 +1,6 @@
 #pragma once
 
-#include "TouchProxy.h"
+#include "TouchProtocol.h"
 #include "TouchManager.h"
 
 #include "KeyboardDelegate.h"

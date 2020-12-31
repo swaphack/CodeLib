@@ -226,18 +226,18 @@ void TestUINode::testImage()
 	pImage->setVolume(500, 500);
 	pImage->setRotation(0, 0, 45);
 	pImage->setPosition(math::Vector2(500, 500));
-	pImage->getTouchProxy()->setSwallowTouch(false);
-	pImage->getTouchProxy()->addTouchFunc(TouchType::DOWN, [](Node* node, float x, float y, bool include) 
+	pImage->setTouchSwallowed(false);
+	pImage->addTouchFunc(TouchType::DOWN, [&](const math::Vector2& touchPoint, bool include)
 	{
-		node->as<CtrlImage>()->setBoxVisible(true);
+		pImage->setBoxVisible(true);
 	});
-	pImage->getTouchProxy()->addTouchFunc(TouchType::ON, [](Node* node, float x, float y, bool include)
+	pImage->addTouchFunc(TouchType::ON, [&](const math::Vector2& touchPoint, bool include)
 	{
-		node->as<CtrlImage>()->setBoxVisible(true);
+		pImage->setBoxVisible(true);
 	});
-	pImage->getTouchProxy()->addTouchFunc(TouchType::UP, [](Node* node, float x, float y, bool include)
+	pImage->addTouchFunc(TouchType::UP, [&](const math::Vector2& touchPoint, bool include)
 	{
-		node->as<CtrlImage>()->setBoxVisible(false);
+		pImage->setBoxVisible(false);
 	});
 	Utility::loadDefaultShader(pImage);
 	this->addChild(pImage);
@@ -251,20 +251,20 @@ void TestUINode::testImage()
 		pImage->setVolume(500, 500);
 		pImage->setRotation(0, 0, 15);
 		pImage->setPosition(math::Vector2(10, 10));
-		pImage->getTouchProxy()->setSwallowTouch(false);
-		pImage->getTouchProxy()->addTouchFunc(TouchType::DOWN, [](Node* node, float x, float y, bool include)
+		pImage->setTouchSwallowed(false);
+		pImage->addTouchFunc(TouchType::DOWN, [pImage](const math::Vector2& touchPoint, bool include)
 		{
-			node->as<CtrlImage>()->setRectVisible(include);
+				pImage->setBoxVisible(include);
 		});
-		pImage->getTouchProxy()->addTouchFunc(TouchType::ON, [](Node* node, float x, float y, bool include)
+		pImage->addTouchFunc(TouchType::ON, [pImage](const math::Vector2& touchPoint, bool include)
 		{
-			node->as<CtrlImage>()->setRectVisible(include);
+				pImage->setBoxVisible(include);
 		});
-		pImage->getTouchProxy()->addTouchFunc(TouchType::UP, [](Node* node, float x, float y, bool include)
+		pImage->addTouchFunc(TouchType::UP, [pImage](const math::Vector2& touchPoint, bool include)
 		{
-			node->as<CtrlImage>()->setRectVisible(include);
+			pImage->setBoxVisible(include);
 		});
-		Utility::updateNodeShader(pImage);
+		Utility::loadDefaultShader(pImage);
 		parent->addChild(pImage);
 		parent = pImage;
 	}

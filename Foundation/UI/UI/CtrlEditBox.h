@@ -45,9 +45,6 @@ namespace ui
 		// ÒÆ³ı¼üÅÌ¼àÌıÎ¯ÍĞ
 		void removeKeyboardDelegate();
 	protected:
-		// µã»÷ÆÁÄ»
-		virtual bool onTouchBegan(float x, float y, bool include);
-	protected:
 		void onKeyBoardInput(Node* node, sys::BoardKey key, sys::ButtonStatus type);
 	private:
 		// ¼üÅÌÊÇ·ñ¿ÉÓÃ

@@ -101,16 +101,16 @@ void TestImageNode::testMoveImage()
 	pImage->setPosition(512, 384, 0);
 	this->addChild(pImage);
 
-	pImage->getTouchProxy()->addTouchDelegate(TouchType::DOWN, this, TOUCH_DELEGATTE_SELECTOR(TestImageNode::onTouchBegin));
+	pImage->addTouchDelegate(TouchType::DOWN, this, TOUCH_DELEGATTE_SELECTOR(TestImageNode::onTouchBegin));
 
-	pImage->getTouchProxy()->addTouchDelegate(TouchType::ON, this, TOUCH_DELEGATTE_SELECTOR(TestImageNode::onTouchMove));
+	pImage->addTouchDelegate(TouchType::ON, this, TOUCH_DELEGATTE_SELECTOR(TestImageNode::onTouchMove));
 
-	pImage->getTouchProxy()->addTouchDelegate(TouchType::UP, this, TOUCH_DELEGATTE_SELECTOR(TestImageNode::onTouchEnd));
+	pImage->addTouchDelegate(TouchType::UP, this, TOUCH_DELEGATTE_SELECTOR(TestImageNode::onTouchEnd));
 
 	G_KEYBOARDMANAGER->addKeyboardDelegate(this, pImage, KEYBOARD_DELEGATE_SELECTOR(TestImageNode::onKeyBoard));
 }
 
-void TestImageNode::onTouchBegin(Node* node, float x, float y, bool include)
+void TestImageNode::onTouchBegin(Node* node, const math::Vector2& touchPoint, bool include)
 {
 	CtrlImage* pNode = node->as<CtrlImage>();
 	if (pNode == nullptr)
@@ -120,12 +120,12 @@ void TestImageNode::onTouchBegin(Node* node, float x, float y, bool include)
 
 	std::vector<math::Vector3>* pAry = new std::vector<math::Vector3>(2);
 	(*pAry)[0].set(pNode->getPositionX(), pNode->getPositionY());
-	(*pAry)[1].set(x, y);
+	(*pAry)[1] = touchPoint;
 
 	pNode->setUserData(pAry);
 }
 
-void TestImageNode::onTouchMove(Node* node, float x, float y, bool include)
+void TestImageNode::onTouchMove(Node* node, const math::Vector2& touchPoint, bool include)
 {
 	CtrlImage* pNode = node->as<CtrlImage>();
 	if (pNode == nullptr)
@@ -134,10 +134,10 @@ void TestImageNode::onTouchMove(Node* node, float x, float y, bool include)
 	}
 
 	std::vector<math::Vector3>* pAry = static_cast<std::vector<math::Vector3>*>(pNode->getUserData());
-	pNode->setPosition((*pAry)[0].getX() + x - (*pAry)[1].getX(), (*pAry)[0].getY() + y - (*pAry)[1].getY(), 0);
+	pNode->setPosition((*pAry)[0].getX() + touchPoint.getX() - (*pAry)[1].getX(), (*pAry)[0].getY() + touchPoint.getY() - (*pAry)[1].getY(), 0);
 }
 
-void TestImageNode::onTouchEnd(Node* node, float x, float y, bool include)
+void TestImageNode::onTouchEnd(Node* node, const math::Vector2& touchPoint, bool include)
 {
 	CtrlImage* pNode = node->as<CtrlImage>();
 	if (pNode == nullptr)
@@ -197,7 +197,7 @@ void TestImageNode::testPixelImage()
 	this->addChild(pCtrlText);
 
 	//pImage->setUserData(pCtrlText);
-	pImage->getTouchProxy()->addTouchDelegate(TouchType::ON, this, TOUCH_DELEGATTE_SELECTOR(TestImageNode::onTouchImage));
+	pImage->addTouchDelegate(TouchType::ON, this, TOUCH_DELEGATTE_SELECTOR(TestImageNode::onTouchImage));
 }
 
 void TestImageNode::testPointSprite()
@@ -260,17 +260,14 @@ void TestImageNode::testScale9Image()
 		pChild->setImagePath(filepath);
 		pChild->setAnchorPoint(0.0f, 0.0f);
 		pChild->setVolume(400, 400);
-		pChild->setMarginLeft(50);
-		pChild->setMarginRight(50);
-		pChild->setMarginTop(50);
-		pChild->setMarginBottom(50);
+		pChild->setMargin(50, 50, 50, 50);
 		this->addChild(pChild);
 	}
 
 	//Utility::loadDefaultShader(pChild);
 }
 
-void TestImageNode::onTouchImage(Node* node, float x, float y, bool include)
+void TestImageNode::onTouchImage(Node* node, const math::Vector2& touchPoint, bool include)
 {
 	CtrlImage* pImage = node->as<CtrlImage>();
 	if (pImage == nullptr)
@@ -283,7 +280,7 @@ void TestImageNode::onTouchImage(Node* node, float x, float y, bool include)
 		return;
 	}
 
-	phy::Color4B color = Pixel::readPixelColor(x, y);
+	phy::Color4B color = Pixel::readPixelColor(touchPoint.getX(), touchPoint.getY());
 	pText->setString(getCString("##%02x%02x%02x%02x", color[0], color[1], color[2], color[3]));
 	pText->setColor(color);
 }

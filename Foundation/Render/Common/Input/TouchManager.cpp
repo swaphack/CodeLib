@@ -1,5 +1,6 @@
 #include "TouchManager.h"
-#include "TouchProxy.h"
+#include "TouchProtocol.h"
+#include "Common/Node/Node.h"
 using namespace render;
 
 TouchManager::TouchManager()
@@ -9,114 +10,37 @@ TouchManager::TouchManager()
 
 TouchManager::~TouchManager()
 {
-	this->removeAllTouches();
 }
 
-void TouchManager::addTouch(TouchProxy* protocol)
+void render::TouchManager::setRoot(Node* protocol)
 {
-	if (protocol == nullptr)
-	{
-		return;
-	}
-
-	std::vector<TouchProxy*>::iterator it = _touchProtocols.begin();
-	while (it != _touchProtocols.end())
-	{
-		if ((*it) == protocol)
-		{
-			return;
-		}
-		it++;
-	}
-
-	_touchProtocols.push_back(protocol);
+	_root = protocol;
 }
 
-void TouchManager::removeTouch(TouchProxy* protocol)
-{
-	if (protocol == nullptr)
-	{
-		return;
-	}
-
-	std::vector<TouchProxy*>::iterator it = _touchProtocols.begin();
-	while (it != _touchProtocols.end())
-	{
-		if ((*it) == protocol)
-		{
-			_touchProtocols.erase(it);
-			break;
-		}
-		it++;
-	}
-}
-
-void TouchManager::removeAllTouches()
-{
-	_touchProtocols.clear();
-}
-
-void TouchManager::onTouchBegan(float x, float y)
+void TouchManager::onTouchBegan(const math::Vector2& touchPoint)
 {
 	// 转化为opengl（0，1）会有误差,所以采用实际大小
 // 	x = x / Tool::getGLViewSize().width;
 // 	y = y / Tool::getGLViewSize().height;
 
-	_touchTemp.clear();
-	_touchTemp.assign(_touchProtocols.begin(), _touchProtocols.end());
-
-	auto it = _touchTemp.rbegin();
-	while (it != _touchTemp.rend())
+	if (_root != nullptr)
 	{
-		if ((*it)->isTouchEnabled())
-		{
-			if ((*it)->onTouchBegan(x, y))
-			{
-				if ((*it)->isSwallowTouch())
-				{
-					break;
-				}
-			}
-		}
-		it++;
+		_root->onTouchBegan(touchPoint);
 	}
 }
 
-void TouchManager::onTouchMoved(float x, float y)
+void TouchManager::onTouchMoved(const math::Vector2& touchPoint)
 {
-	auto it = _touchTemp.rbegin();
-	while (it != _touchTemp.rend())
+	if (_root != nullptr)
 	{
-		if ((*it)->isTouchEnabled())
-		{
-			if ((*it)->onTouchMoved(x, y))
-			{
-				if ((*it)->isSwallowTouch())
-				{
-					break;
-				}
-			}
-		}
-		it++;
+		_root->onTouchMoved(touchPoint);
 	}
 }
 
-void TouchManager::onTouchEnded(float x, float y)
+void TouchManager::onTouchEnded(const math::Vector2& touchPoint)
 {
-	auto it = _touchTemp.rbegin();
-	bool ret = false;
-	while (it != _touchTemp.rend())
+	if (_root != nullptr)
 	{
-		if ((*it)->isTouchEnabled())
-		{
-			if ((*it)->onTouchEnded(x, y))
-			{
-				if ((*it)->isSwallowTouch())
-				{
-					break;
-				}
-			}
-		}
-		it++;
+		_root->onTouchEnded(touchPoint);
 	}
 }

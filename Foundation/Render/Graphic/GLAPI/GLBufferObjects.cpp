@@ -839,7 +839,7 @@ void render::GLBufferObjects::setVertexAttrib(uint32_t index, int16_t v0)
 
 uint32_t render::GLBufferObjects::genBuffer()
 {
-	uint32_t id;
+	uint32_t id = 0;
 	genBuffers(1, &id);
 	return id;
 }
@@ -856,14 +856,14 @@ void render::GLBufferObjects::setNamedBufferStorage(uint32_t buffer, ptrdiff_t s
 
 uint32_t render::GLBufferObjects::createBuffer()
 {
-	uint32_t id;
+	uint32_t id = 0;
 	createBuffers(1, &id);
 	return id;
 }
 
 uint32_t render::GLBufferObjects::createVertexArray()
 {
-	uint32_t id;
+	uint32_t id = 0;
 	createVertexArrays(1, &id);
 	return id;
 }

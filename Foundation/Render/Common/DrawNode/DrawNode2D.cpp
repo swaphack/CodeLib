@@ -26,6 +26,11 @@ bool render::DrawNode2D::init()
 		onDrawNode2DBodyChange();
 	});
 
+	// 添加属性改变监听
+	_notify->addListen(NodeNotifyType::SPACE, [this]() {
+		calRealRectPoints();
+	});
+
 	_notify->addListen(NodeNotifyType::COLOR, [this]() {
 		this->onDrawNode2DColorChange();
 	});
@@ -59,7 +64,7 @@ const render::RectPoints& render::DrawNode2D::getRealRectVertex() const
 
 #include "Common/View/Camera.h"
 
-bool render::DrawNode2D::containTouchPoint(float x, float y)
+bool render::DrawNode2D::containTouchPoint(const math::Vector2& touchPoint)
 {
 	/*
 	math::Matrix4x4 projMat = Camera::getMainCamera()->getProjectMatrix();
@@ -76,7 +81,7 @@ bool render::DrawNode2D::containTouchPoint(float x, float y)
 
 	return rectPoint.containPointByPolygon(x, y);
 	*/
-	return _realRectPoints.containPointByPolygon(x, y);
+	return _realRectPoints.containPointByPolygon(touchPoint.getX(), touchPoint.getY());
 }
 
 void render::DrawNode2D::calRealRectPoints()

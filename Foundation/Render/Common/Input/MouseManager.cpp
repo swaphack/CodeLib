@@ -98,7 +98,7 @@ void render::MouseManager::onDispatchScrolleEvent(sys::ScrollEvent evt, float pa
 	{
 		for (auto item1 : item0.second)
 		{
-			item1.second(item1.first, evt, param);
+			item1.second(evt, param);
 		}
 	}
 }
@@ -202,13 +202,13 @@ void render::MouseManager::removeTargetAllEvents(sys::Object* target)
 	}
 }
 
-void render::MouseManager::onDispatchButtonEvent(sys::MouseKey key, sys::ButtonStatus status, float x, float y)
+void render::MouseManager::onDispatchButtonEvent(sys::MouseKey key, sys::ButtonStatus status, const math::Vector2& touchPoint)
 {
 	for (auto item0 : _mouseButtonDelegates)
 	{
 		for (auto item1 : item0.second)
 		{
-			((item0.first)->*(item1.second))(item1.first, key, status, x, y);
+			((item0.first)->*(item1.second))(item1.first, key, status, touchPoint);
 		}
 	}
 
@@ -216,7 +216,7 @@ void render::MouseManager::onDispatchButtonEvent(sys::MouseKey key, sys::ButtonS
 	{
 		for (auto item1 : item0.second)
 		{
-			item1.second(item1.first, key, status, x, y);
+			item1.second(key, status, touchPoint);
 		}
 	}
 }

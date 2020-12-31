@@ -17,11 +17,12 @@ CtrlEditBox::~CtrlEditBox()
 
 void CtrlEditBox::setKeyboardEnable(bool status)
 {
+	/*
 	if (_keyboardEnabled == status)
 	{
 		return;
 	}
-
+	*/
 	_keyboardEnabled = status;
 
 	if (_keyboardEnabled)
@@ -72,15 +73,6 @@ void CtrlEditBox::removeKeyboardDelegate()
 	G_KEYBOARDMANAGER->removeKeyboardDelegate(this, this);
 }
 
-bool ui::CtrlEditBox::onTouchBegan(float x, float y, bool include)
-{
-	bool bEnable = !_keyboardEnabled;
-
-	this->setKeyboardEnable(bEnable);
-
-	return true;
-}
-
 void CtrlEditBox::onKeyBoardInput(Node* node, sys::BoardKey key, sys::ButtonStatus type)
 {
 	if (node != this)
@@ -101,6 +93,18 @@ bool ui::CtrlEditBox::init()
 	{
 		return false;
 	}
+
+	this->addTouchFunc(render::TouchType::DOWN, [this](const math::Vector2& touchPoint, bool include) {
+		this->setKeyboardEnable(false);
+	});
+
+	this->addTouchFunc(render::TouchType::UP, [this](const math::Vector2& touchPoint, bool include) {
+		if (include)
+		{
+			bool bEnable = !isKeyboardEnable();
+			this->setKeyboardEnable(bEnable);
+		}
+	});
 
 	this->addKeyboardDelegate();
 

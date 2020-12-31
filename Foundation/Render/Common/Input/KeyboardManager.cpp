@@ -112,16 +112,19 @@ void KeyboardManager::onDispatchButtonEvent(sys::BoardKey key, sys::ButtonStatus
 	if (key == sys::BoardKey::KSHIFT)
 	{
 		G_KEYCHAR->setShiftEnable(type == sys::ButtonStatus::BUTTON_DOWN);
+		return;
 	}
 
 	if (key == sys::BoardKey::KCONTROL)
 	{
 		G_KEYCHAR->setControlEnable(type == sys::ButtonStatus::BUTTON_DOWN);
+		return;
 	}
 
 	if (key == sys::BoardKey::KMENU)
 	{
 		G_KEYCHAR->setAltEnable(type == sys::ButtonStatus::BUTTON_DOWN);
+		return;
 	}
 
 	if (type == sys::ButtonStatus::BUTTON_DOWN)
@@ -141,7 +144,7 @@ void KeyboardManager::onDispatchButtonEvent(sys::BoardKey key, sys::ButtonStatus
 	{
 		for (auto item1 : item0.second)
 		{
-			item1.second(item1.first, key, type);
+			item1.second(key, type);
 		}
 	}
 }

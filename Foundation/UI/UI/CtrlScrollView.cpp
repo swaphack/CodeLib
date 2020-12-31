@@ -1,5 +1,4 @@
 #include "CtrlScrollView.h"
-#include "Common/Input/TouchProxy.h"
 #include "Common/Input/TouchManager.h"
 #include "Layout/LayoutItem.h"
 #include <cassert>
@@ -61,6 +60,8 @@ CtrlScrollView::CtrlScrollView()
 	_content = CREATE_NODE(CtrlLayout);
 	_content->getLayoutItem()->unsetMarginState();
 	CtrlWidget::addWidget(_content, 0);
+
+	this->setTouchSwallowed(true);
 }
 
 CtrlScrollView::~CtrlScrollView()
@@ -84,6 +85,51 @@ bool ui::CtrlScrollView::init()
 		this->initItems();
 		this->initContent();
 	});
+
+
+	this->addTouchFunc(render::TouchType::DOWN, [this](const math::Vector2& touchPoint, bool include) {
+
+		_touchPosition = touchPoint;
+
+	});
+	this->addTouchFunc(render::TouchType::ON, [this](const math::Vector2& touchPoint, bool include) {
+		if (!_bHorizontalScroll && !_bVerticalScroll) return;
+
+		math::Vector2 delta = touchPoint;
+		delta -= _touchPosition;
+
+		float offX = -getAnchorPoint().getX() * getWidth();
+		float offY = -getAnchorPoint().getY() * getHeight();
+
+		math::Vector3 pos = _content->getPosition();
+
+		float min = 0;
+		float max = 0;
+
+		if (_bHorizontalScroll)
+		{
+			pos.setX(pos.getX() + delta.getX());
+			min = getWidth() - _content->getWidth() + offX;
+			max = 0 + offX;
+			if (pos.getX() < min) pos.setX(min);
+			if (pos.getX() > max) pos.setX(max);
+		}
+
+		if (_bVerticalScroll)
+		{
+			pos.setY(pos.getY() + delta.getY());
+
+			min = getHeight() - _content->getHeight() + offY;
+			max = 0 + offY;
+			if (pos.getY() < min) pos.setY(min);
+			if (pos.getY() > max) pos.setY(max);
+		}
+
+		_content->setPosition(pos);
+
+		_touchPosition = touchPoint;
+	});
+
 
 	return true;
 }
@@ -197,60 +243,6 @@ void ui::CtrlScrollView::removeWidget(CtrlWidget* item)
 void ui::CtrlScrollView::removeAllWidgets()
 {
 	this->removeAllItems();
-}
-
-bool CtrlScrollView::onTouchBegan(float x, float y, bool include)
-{
-	_touchPosition.set(x, y);
-
-	return true;
-}
-
-bool ui::CtrlScrollView::onTouchMoved(float x, float y, bool include)
-{
-	if (!_bHorizontalScroll && !_bVerticalScroll) return false;
-
-	math::Vector2 delta = math::Vector2(x, y);
-	delta -= _touchPosition;
-
-	float offX = -getAnchorPoint().getX() * getWidth();
-	float offY = -getAnchorPoint().getY() * getHeight();
-
-	math::Vector3 pos = _content->getPosition();
-
-	float min = 0;
-	float max = 0;
-
-	if (_bHorizontalScroll)
-	{
-		pos.setX(pos.getX() + delta.getX());
-		min = getWidth() - _content->getWidth() + offX;
-		max = 0 + offX;
-		if (pos.getX() < min) pos.setX(min);
-		if (pos.getX() > max) pos.setX(max);
-	}
-	
-	if (_bVerticalScroll)
-	{
-		pos.setY(pos.getY() + delta.getY());
-
-		min = getHeight() - _content->getHeight() + offY;
-		max = 0 + offY;
-		if (pos.getY() < min) pos.setY(min);
-		if (pos.getY() > max) pos.setY(max);
-	}
-
-	_content->setPosition(pos);
-
-	_touchPosition = math::Vector2(x, y);
-
-	return true;
-}
-
-
-bool CtrlScrollView::onTouchEnded(float x, float y, bool include)
-{
-	return true;
 }
 
 void CtrlScrollView::initItems()

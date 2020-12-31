@@ -13,6 +13,8 @@ namespace ue
 	public:
 		UIDesignWindow();
 		virtual ~UIDesignWindow();
+	public:
+		virtual bool init();
 	protected:
 		/**
 		*	初始化
@@ -26,19 +28,6 @@ namespace ue
 		*	初始化文本
 		*/
 		virtual void initText();
-	protected:
-		/**
-		*	点击屏幕
-		*/
-		virtual bool onTouchBegan(float x, float y, bool include);
-		/**
-		*	在屏幕上滑动
-		*/
-		virtual bool onTouchMoved(float x, float y, bool include);
-		/**
-		*	离开屏幕
-		*/
-		virtual bool onTouchEnded(float x, float y, bool include);
 	private:
 		// 设计面板
 		UIDesignView* m_pDesignPanel = nullptr;

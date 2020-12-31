@@ -38,6 +38,16 @@ bool ui::CtrlWidget::init()
 		pDepthTest->setEnabled(false);
 	}
 
+	this->addTouchFunc(render::TouchType::UP, [this](const math::Vector2& touchPoint, bool include) {
+		if (include)
+		{
+			for (auto item : _clickFuncs)
+			{
+				item(this);
+			}
+		}
+	});
+
 	return true; 
 }
 
@@ -201,36 +211,6 @@ void ui::CtrlWidget::resize(const math::Size& size)
 	}
 }
 
-bool ui::CtrlWidget::isTouchEnable()
-{
-	if (getTouchProxy() == nullptr)
-	{
-		return false;
-	}
-	return getTouchProxy()->isTouchEnabled();
-}
-
-void ui::CtrlWidget::setTouchEnable(bool bEnabled)
-{
-	if (bEnabled)
-	{
-		if (_touchProxy == nullptr)
-		{
-			getTouchProxy()->setTouchEnabled(bEnabled);
-			getTouchProxy()->addTouchDelegate(TouchType::DOWN, this, TOUCH_DELEGATTE_SELECTOR(CtrlWidget::onBeginTouch));
-			getTouchProxy()->addTouchDelegate(TouchType::ON, this, TOUCH_DELEGATTE_SELECTOR(CtrlWidget::onMoveTouch));
-			getTouchProxy()->addTouchDelegate(TouchType::UP, this, TOUCH_DELEGATTE_SELECTOR(CtrlWidget::onEndTouch));
-		}
-	}
-	else if (_touchProxy)
-	{
-		getTouchProxy()->removeAllTouchDelegates();
-		getTouchProxy()->setTouchEnabled(false);
-		SAFE_RELEASE(_touchProxy);
-		_touchProxy = nullptr;
-	}
-}
-
 void ui::CtrlWidget::addClickFunc(const ClickWidgetFunc& func)
 {
 	_clickFuncs.push_back(func);
@@ -241,61 +221,30 @@ void ui::CtrlWidget::removeAllClickFuncs()
 	_clickFuncs.clear();
 }
 
-void ui::CtrlWidget::onBeginTouch(Node* node, float x, float y, bool include)
+void ui::CtrlWidget::doSwallowTouchEvent(render::TouchType type, const math::Vector2& touchPoint, bool include)
 {
-	if (node != this)
+	if (isClip())
 	{
-		return;
+		for (auto item : _children)
+		{
+			if (type == TouchType::DOWN) item->onTouchBegan(touchPoint);
+			else if (type == TouchType::ON) item->onTouchMoved(touchPoint);
+			else if (type == TouchType::UP) item->onTouchEnded(touchPoint);
+		}
 	}
-
-	onTouchBegan(x, y, include);
 }
 
-void ui::CtrlWidget::onMoveTouch(Node* node, float x, float y, bool include)
+void ui::CtrlWidget::doNotSwallowTouchEvent(render::TouchType type, const math::Vector2& touchPoint, bool include)
 {
-	if (node != this)
+	if (!isClip())
 	{
-		return;
+		for (auto item : _children)
+		{
+			if (type == TouchType::DOWN) item->onTouchBegan(touchPoint);
+			else if (type == TouchType::ON) item->onTouchMoved(touchPoint);
+			else if (type == TouchType::UP) item->onTouchEnded(touchPoint);
+		}
 	}
-
-	onTouchMoved(x, y, include);
-}
-
-void ui::CtrlWidget::onEndTouch(Node* node, float x, float y, bool include)
-{
-	if (node != this)
-	{
-		return;
-	}
-
-	onTouchEnded(x, y, include);
-}
-
-bool ui::CtrlWidget::onTouchBegan(float x, float y, bool include) 
-{ 
-	return include;
-}
-
-bool ui::CtrlWidget::onTouchMoved(float x, float y, bool include) 
-{ 
-	if (!include)
-	{
-		return false;
-	}
-	return true;
-}
-
-bool ui::CtrlWidget::onTouchEnded(float x, float y, bool include) 
-{ 
-	if (!include)
-	{
-		return false;
-	}
-	for (auto item : _clickFuncs)
-	{
-		item(this);
-	}
-	return true;
 }
 
 void ui::CtrlWidget::onCtrlWidgetBodyChange()

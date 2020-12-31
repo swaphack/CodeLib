@@ -40,22 +40,9 @@ namespace ue
 		virtual void initText();
 	protected:
 		/**
-		*	点击屏幕
-		*/
-		virtual bool onTouchBegan(float x, float y, bool include);
-		/**
-		*	在屏幕上滑动
-		*/
-		virtual bool onTouchMoved(float x, float y, bool include);
-		/**
-		*	离开屏幕
-		*/
-		virtual bool onTouchEnded(float x, float y, bool include);
-	protected:
-		/**
 		*	点击最前面的组件
 		*/
-		bool touchFrontWidget(ui::CtrlWidget* widget,float x, float y);
+		bool touchFrontWidget(ui::CtrlWidget* widget, const math::Vector2& touchPoint);
 	protected:
 		void saveFile();
 		void reloadFile();

@@ -39,9 +39,9 @@ bool render::DrawNode3D::init()
 	return true;
 }
 
-bool render::DrawNode3D::containTouchPoint(float x, float y)
+bool render::DrawNode3D::containTouchPoint(const math::Vector2& touchPoint)
 {
-	math::Vector3 point(x, y);
+	math::Vector3 point(touchPoint.getX(), touchPoint.getY());
 
 	math::Vector3 localPoint = _worldInverseMatrix * point;
 	// ´ý²¹³ä

@@ -337,11 +337,7 @@ void ue::UIDesignProperty::initUI()
 
 void ue::UIDesignProperty::initEvent()
 {
-	G_KEYBOARDMANAGER->addKeyboardFunc(this, this, [this](Node* object, sys::BoardKey key, sys::ButtonStatus status){
-		if (this != object)
-		{
-			return;
-		}
+	G_KEYBOARDMANAGER->addKeyboardFunc(this, this, [this](sys::BoardKey key, sys::ButtonStatus status){
 
 		if (key == sys::BoardKey::KRETURN)
 		{

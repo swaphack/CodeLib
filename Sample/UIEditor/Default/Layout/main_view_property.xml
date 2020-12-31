@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <root width="1024" height="768" layout="1" fontPath="Default/Font/font_3.ttf">
 	<Layout name="body" showMask="1" maskColor="180,180,180,125" margin="1,1,1,1" size="100%,100%">
-		<ListView direction="2" margin="1,1,1,1" size="100%,100%">
+		<ListView direction="2" margin="1,1,1,1" size="100%,100%" clip="1" verticalScroll="1" enableTouch="1">
 			<ListView direction="0" size="100%,35">
 				<Text text="Type" size="50,100%"  fontSize="22" textColor="255,255,255" />
-				<ListView size="180,100%" showMask="1" maskColor="0,0,0,125">
+				<ListView size="180,100%" showMask="1" maskColor="100,100,100,125">
 					<Text name="TypeText" size="100%,100%" text="4545454dsfajk" horizontal="0" fontSize="22" textColor="255,255,255" />
 				</ListView>
 			</ListView>

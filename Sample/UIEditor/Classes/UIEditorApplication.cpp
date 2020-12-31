@@ -12,13 +12,7 @@
 using namespace render;
 
 ue::UIEditorApplication::UIEditorApplication()
-{
-	ui::UIProxy::getInstance()->registerElementParser(UI_DESIGN_MENUBAR, new ui::TFileLoader<UIDesignMenuBar>());
-	ui::UIProxy::getInstance()->registerElementParser(UI_DESIGN_WIDGET, new ui::TFileLoader<UIDesignWidget>());
-	ui::UIProxy::getInstance()->registerElementParser(UI_DESIGN_DIRECTORY, new ui::TFileLoader<UIDesignDirectory>());
-	ui::UIProxy::getInstance()->registerElementParser(UI_DESIGN_VIEW, new ui::TFileLoader<UIDesignView>());
-	ui::UIProxy::getInstance()->registerElementParser(UI_DESIGN_PROPERTY, new ui::TFileLoader<UIDesignProperty>());
-	
+{	
 	_ideConfig.loadXml(IDE_CONFIG_FILEPATH);
 
 	_projectConfig.loadXml(PROJECT_CONFIG_FILEPATH);

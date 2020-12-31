@@ -1,5 +1,4 @@
 #include "Node.h"
-#include "Common/Input/TouchProxy.h"
 #include "Common/Action/ActionProxy.h"
 #include "Common/Tool/Tool.h"
 #include <algorithm>
@@ -19,7 +18,6 @@ Node::Node()
 ,_actionProxy(nullptr)
 , _bRelativeToParent(true)
 , _zOrder(0)
-, _touchProxy(nullptr)
 {
 	this->setVisible(true);
 
@@ -30,7 +28,6 @@ Node::~Node()
 {
 	this->removeAllChildren();
 	SAFE_RELEASE(_actionProxy);
-	SAFE_RELEASE(_touchProxy);
 	G_NOTIFYCENTER->release(this);
 }
 
@@ -250,17 +247,6 @@ void Node::setRelativeWithParent(bool status)
 	_bRelativeToParent = status;
 }
 
-TouchProxy* Node::getTouchProxy()
-{
-	if (_touchProxy == nullptr)
-	{
-		_touchProxy = CREATE_OBJECT(TouchProxy);
-		_touchProxy->setTarget(this);
-		_touchProxy->retain();
-	}
-	return _touchProxy;
-}
-
 void Node::draw()
 {
 
@@ -353,7 +339,7 @@ void Node::calSpaceData()
 
 	calRealSpaceByMatrix();
 
-	calDirectionWithRotate();
+	//calDirectionWithRotate();
 }
 
 void Node::calRealSpaceByMatrix()
@@ -386,13 +372,6 @@ void Node::calRealSpaceByMatrix()
 void Node::onSpaceChange()
 {
 	this->notifyToAll(NodeNotifyType::SPACE);
-	/*
-	this->notify(NodeNotifyType::SPACE);
-	for (auto item : _children)
-	{
-		item->notify(NodeNotifyType::SPACE);
-	}
-	*/
 }
 
 void Node::onBodyChange()
@@ -425,6 +404,28 @@ math::Vector3 render::Node::convertWorldPostitionToLocal(const math::Vector3& po
 math::Vector3 render::Node::convertLocalPostitionToWorld(const math::Vector3& point)
 {
 	return math::Matrix4x4::transpose(point, _worldMatrix);
+}
+
+void render::Node::doSwallowTouchEvent(TouchType type, const math::Vector2& touchPoint, bool include)
+{
+	/*
+	for (auto item : _children)
+	{
+		if (type == TouchType::DOWN) item->onTouchBegan(touchPoint);
+		else if (type == TouchType::ON) item->onTouchMoved(touchPoint);
+		else if (type == TouchType::UP) item->onTouchEnded(touchPoint);
+	}
+	*/
+}
+
+void render::Node::doNotSwallowTouchEvent(TouchType type, const math::Vector2& touchPoint, bool include)
+{
+	for (auto item : _children)
+	{
+		if (type == TouchType::DOWN) item->onTouchBegan(touchPoint);
+		else if (type == TouchType::ON) item->onTouchMoved(touchPoint);
+		else if (type == TouchType::UP) item->onTouchEnded(touchPoint);
+	}
 }
 
 void render::Node::setSkipDraw(bool status)

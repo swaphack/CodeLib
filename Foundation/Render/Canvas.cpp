@@ -26,16 +26,17 @@ void Canvas::draw()
 	_view->applyConfig();
 	_view->updateView();
 
-	Camera* mainCamera = Camera::getMainCamera();
+	auto mainCamera = Camera::getMainCamera();
 	if (mainCamera)
 	{
 		mainCamera->visit();
 	}
 
-	auto pTop = getCurScene();
-	if (pTop)
+	auto top = getCurScene();
+	if (top)
 	{
-		pTop->visit();
+		G_TOUCHMANAGER->setRoot(top);
+		top->visit();
 	}
 
 	//GLRender::flush();

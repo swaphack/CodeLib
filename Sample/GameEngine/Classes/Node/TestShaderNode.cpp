@@ -158,24 +158,12 @@ void TestShaderNode::testSphereModelShader()
 	Utility::loadShaderVF(pModel, "Shader/material/material_texture.vs", "Shader/material/material_texture.fs");
 	Utility::runRotateAction(pModel);
 
-	pModel->getTouchProxy()->addTouchFunc(render::TouchType::DOWN, [](Node* node, float x, float y, bool include) {
-		auto sphere = node->as<render::Sphere>();
-		if (sphere == nullptr)
-		{
-			return;
-		}
-
-		sphere->setBoxVisible(true);
+	pModel->addTouchFunc(render::TouchType::DOWN, [&](const math::Vector2& touchPoint, bool include) {
+		pModel->setBoxVisible(true);
 	});
 
-	pModel->getTouchProxy()->addTouchFunc(render::TouchType::UP, [](Node* node, float x, float y, bool include) {
-		auto sphere = node->as<render::Sphere>();
-		if (sphere == nullptr)
-		{
-			return;
-		}
-
-		sphere->setBoxVisible(false);
+	pModel->addTouchFunc(render::TouchType::UP, [&](const math::Vector2& touchPoint, bool include) {
+		pModel->setBoxVisible(false);
 	});
 }
 

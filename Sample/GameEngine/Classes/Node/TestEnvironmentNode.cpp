@@ -119,12 +119,7 @@ void TestEnvironmentNode::testCamera()
 	//pCamera->setPositionY(pCamera->getPositionY() + 100);
 	//pCamera->setRotationX(pCamera->getRotationX() - 30);
 
-	G_KEYBOARDMANAGER->addKeyboardFunc(this, pCamera, [&](Node* object, sys::BoardKey key, sys::ButtonStatus type) {
-		auto camera = object->as<Camera>();
-		if (camera == nullptr)
-		{
-			return;
-		}
+	G_KEYBOARDMANAGER->addKeyboardFunc(this, pCamera, [&](sys::BoardKey key, sys::ButtonStatus type) {
 
 		if (type == sys::ButtonStatus::BUTTON_DOWN)
 		{
@@ -149,54 +144,48 @@ void TestEnvironmentNode::testCamera()
 		}
 		else if (key == sys::BoardKey::KA)
 		{
-			camera->setPosition(camera->getPosition() - _spaceSpeed * camera->getRight());
+			pCamera->setPosition(pCamera->getPosition() - _spaceSpeed * pCamera->getRight());
 		}
 		else if (key == sys::BoardKey::KD)
 		{
-			camera->setPosition(camera->getPosition() + _spaceSpeed * camera->getRight());
+			pCamera->setPosition(pCamera->getPosition() + _spaceSpeed * pCamera->getRight());
 		}
 		else if (key == sys::BoardKey::KW)
 		{
-			camera->setPosition(camera->getPosition() - _spaceSpeed * camera->getFront());
+			pCamera->setPosition(pCamera->getPosition() - _spaceSpeed * pCamera->getFront());
 		}
 		else if (key == sys::BoardKey::KS)
 		{
-			camera->setPosition(camera->getPosition() + _spaceSpeed * camera->getFront());
+			pCamera->setPosition(pCamera->getPosition() + _spaceSpeed * pCamera->getFront());
 		}
 		else if (key == sys::BoardKey::KQ)
 		{
-			camera->setPosition(camera->getPosition() - _spaceSpeed * camera->getUp());
+			pCamera->setPosition(pCamera->getPosition() - _spaceSpeed * pCamera->getUp());
 		}
 		else if (key == sys::BoardKey::KE)
 		{
-			camera->setPosition(camera->getPosition() + _spaceSpeed * camera->getUp());
+			pCamera->setPosition(pCamera->getPosition() + _spaceSpeed * pCamera->getUp());
 		}
 		else if (key == sys::BoardKey::KL)
 		{
-			camera->setRotationY(camera->getRotationY() - _spaceSpeed);
+			pCamera->setRotationY(pCamera->getRotationY() - _spaceSpeed);
 		}
 		else if (key == sys::BoardKey::KJ)
 		{
-			camera->setRotationY(camera->getRotationY() + _spaceSpeed);
+			pCamera->setRotationY(pCamera->getRotationY() + _spaceSpeed);
 		}
 		else if (key == sys::BoardKey::KK)
 		{
-			camera->setRotationX(camera->getRotationX() + _spaceSpeed);
+			pCamera->setRotationX(pCamera->getRotationX() + _spaceSpeed);
 		}
 		else if (key == sys::BoardKey::KI)
 		{
-			camera->setRotationX(camera->getRotationX() - _spaceSpeed);
+			pCamera->setRotationX(pCamera->getRotationX() - _spaceSpeed);
 		}
 	});
 
 	
-	G_MOUSEMANAGER->addMouseScrollFunc(this, pCamera, [&](Node* object, sys::ScrollEvent evt, float param) {
-		auto camera = object->as<Camera>();
-		if (camera == nullptr)
-		{
-			return;
-		}
-
+	G_MOUSEMANAGER->addMouseScrollFunc(this, pCamera, [&](sys::ScrollEvent evt, float param) {
 		if (_scrollEvt != evt)
 		{
 			_mouseScroll = 1;
@@ -212,26 +201,26 @@ void TestEnvironmentNode::testCamera()
 
 		float value = param * _mouseScroll;
 
-		float zNear = camera->getViewParameter().zNear;
-		float zFar = camera->getViewParameter().zFar;
+		float zNear = pCamera->getViewParameter().zNear;
+		float zFar = pCamera->getViewParameter().zFar;
 		if (zFar + value <= zNear)
 		{
 			return;
 		}
 		if (_viewType == 0)
 		{
-			if (camera->getDimensions() == DimensionsType::THREE)
+			if (pCamera->getDimensions() == DimensionsType::THREE)
 			{
 				if (zNear + value <= 0)
 				{
 					return;
 				}
 			}
-			camera->setViewDistance(zNear + value, zFar);
+			pCamera->setViewDistance(zNear + value, zFar);
 		}
 		else
 		{
-			camera->setViewDistance(zNear, zFar + value);
+			pCamera->setViewDistance(zNear, zFar + value);
 		}
 	});
 }

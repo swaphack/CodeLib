@@ -11,8 +11,7 @@ namespace ui
 	*	UI控件基类
 	*/
 	class CtrlWidget : 
-		public render::DrawNode2D,
-		public render::TouchProtocol
+		public render::DrawNode2D
 	{
 	public:
 		// 点击处理函数
@@ -90,14 +89,6 @@ namespace ui
 		void resize(const math::Size& size);
 	public:
 		/**
-		*	是否可点击
-		*/
-		bool isTouchEnable();
-		/**
-		*	设置是否可点击
-		*/
-		void setTouchEnable(bool bEnabled);
-		/**
 		*	添加点击事件
 		*/
 		void addClickFunc(const ClickWidgetFunc& func);
@@ -106,31 +97,10 @@ namespace ui
 		*/
 		void removeAllClickFuncs();
 	protected:
-		/**
-		*	点击屏幕
-		*/
-		void onBeginTouch(Node* node, float x, float y, bool include);
-		/**
-		*	按住不松手
-		*/
-		void onMoveTouch(Node* node, float x, float y, bool include);
-		/**
-		*	放开
-		*/
-		void onEndTouch(Node* node, float x, float y, bool include);
-	protected:
-		/**
-		*	点击屏幕
-		*/
-		virtual bool onTouchBegan(float x, float y, bool include);
-		/**
-		*	在屏幕上滑动
-		*/
-		virtual bool onTouchMoved(float x, float y, bool include);
-		/**
-		*	离开屏幕
-		*/
-		virtual bool onTouchEnded(float x, float y, bool include);
+		// 吞噬处理,须重写
+		virtual void doSwallowTouchEvent(render::TouchType type, const math::Vector2& touchPoint, bool include = true);
+		// 非吞噬处理,须重写
+		virtual void doNotSwallowTouchEvent(render::TouchType type, const math::Vector2& touchPoint, bool include = true);
 	public:
 		/**
 		*	是否裁剪

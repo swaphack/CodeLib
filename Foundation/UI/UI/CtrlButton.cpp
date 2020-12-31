@@ -16,7 +16,7 @@ ui::CtrlButton::CtrlButton()
 	_btnText->setVerticalAlignment(sys::VerticalAlignment::MIDDLE);
 	this->addProtectedWidget(_btnText);
 
-	this->setTouchEnable(true);
+	this->setTouchEnabled(true);
 }
 
 ui::CtrlButton::~CtrlButton()
@@ -29,11 +29,20 @@ bool ui::CtrlButton::init()
 	{
 		return false;
 	}
-	/*
-	this->addNotifyListener(render::NodeNotifyType::BODY, [this]() {
-		_btnText->setPosition(math::Vector2());
+	this->addTouchFunc(render::TouchType::DOWN, [this](const math::Vector2& touchPoint, bool include) {
+		if (include)
+		{
+			this->setScale(_touchScale);
+		}
 	});
-	*/
+
+	this->addTouchFunc(render::TouchType::UP, [this](const math::Vector2& touchPoint, bool include) {
+		if (include)
+		{
+
+			this->setScale(1.0f);
+		}
+	});
 	return true;
 }
 
@@ -164,43 +173,4 @@ void ui::CtrlButton::setTouchScale(float scale)
 float ui::CtrlButton::getTouchScale() const 
 { 
 	return _touchScale; 
-}
-
-bool ui::CtrlButton::onTouchBegan(float x, float y, bool include)
-{
-	if (!CtrlWidget::onTouchBegan(x, y, include))
-	{
-		return false;
-	}
-	this->setScale(_touchScale);
-	return include;
-}
-
-bool ui::CtrlButton::onTouchMoved(float x, float y, bool include)
-{
-	if (!include)
-	{
-		return false;
-	}
-
-	if (!CtrlWidget::onTouchMoved(x, y, include))
-	{
-		return false;
-	}
-	this->setScale(_touchScale);
-	return include;
-}
-
-bool ui::CtrlButton::onTouchEnded(float x, float y, bool include)
-{
-	if (!include)
-	{
-		return false;
-	}
-	if (!CtrlWidget::onTouchEnded(x, y, include))
-	{
-		return false;
-	}
-	this->setScale(1.0f);
-	return include;
 }

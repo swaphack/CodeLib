@@ -47,7 +47,7 @@ namespace render
 		void removeTargetAllEvents(sys::Object* target);
 	public:
 		// 派发接收到的按钮事件
-		void onDispatchButtonEvent(sys::MouseKey key, sys::ButtonStatus status, float x, float y);
+		void onDispatchButtonEvent(sys::MouseKey key, sys::ButtonStatus status, const math::Vector2& touchPoint);
 	private:
 		// 鼠标滚轮事件委托集
 		std::map<sys::Object*, std::map<Node*, MOUSE_SCROLL_DELEGATE_HANDLER>> _mouseScrollDelegates;

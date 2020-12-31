@@ -4,12 +4,12 @@
 #include "Notify.h"
 #include "NodeProtocol.h"
 #include "NotifyCenter.h"
+#include "Common/Input/TouchProtocol.h"
 #include <vector>
 
 namespace render
 {
 	class ActionProxy;
-	class TouchProxy;
 
 	/**
 	glLoadIdentity();
@@ -33,7 +33,8 @@ namespace render
 		public sys::DirtyProtocol,
 		public SpaceProtocol,
 		public BodyProtocol,
-		public DirectionProtocol
+		public DirectionProtocol,
+		public TouchProtocol
 	{
 	public:
 		Node();
@@ -116,9 +117,6 @@ namespace render
 		// 设置是否和父节点关联
 		void setRelativeWithParent(bool status);
 	public:
-		// 获取触摸代理
-		TouchProxy* getTouchProxy();
-	public:
 		// 世界矩阵
 		const math::Matrix4x4& getWorldMatrix() const;
 		// 相对父节点的矩阵
@@ -127,8 +125,13 @@ namespace render
 		math::Vector3 convertWorldPostitionToLocal(const math::Vector3& point);
 		// 将本地坐标转化为世界坐标
 		math::Vector3 convertLocalPostitionToWorld(const math::Vector3& point);
+	protected:
 		// 是否点击点落在改节点上
 		virtual bool containTouchPoint(float x, float y) { return false; }
+		// 吞噬处理,须重写
+		virtual void doSwallowTouchEvent(TouchType type, const math::Vector2& touchPoint, bool include = true);
+		// 非吞噬处理,须重写
+		virtual void doNotSwallowTouchEvent(TouchType type, const math::Vector2& touchPoint, bool include = true);
 	protected:
 		// 更新空间矩阵
 		virtual void startUpdateTranform();
@@ -196,9 +199,7 @@ namespace render
 		math::Matrix4x4 _worldInverseMatrix;
 	protected:
 		// 动作代理
-		ActionProxy* _actionProxy;
-		// 触摸代理
-		TouchProxy* _touchProxy;
+		ActionProxy* _actionProxy = nullptr;
 		
 	};
 

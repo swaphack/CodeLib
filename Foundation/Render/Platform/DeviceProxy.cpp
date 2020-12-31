@@ -25,9 +25,11 @@ void DeviceProxy::onMouseButtonHandler(sys::MouseKey key, sys::ButtonStatus type
 	_lastMouseKey = key;
 	_lastMouseButtonStatus = type;
 
-	processMouseTouchEvent(key, type, xx, yy);
+	math::Vector2 touchPoint(xx, yy);
+
+	processMouseTouchEvent(key, type, touchPoint);
 	
-	processMouseButtonEvent(key, type, xx, yy);
+	processMouseButtonEvent(key, type, touchPoint);
 }
 
 void DeviceProxy::onMouseMoveHandler(float x, float y)
@@ -35,17 +37,19 @@ void DeviceProxy::onMouseMoveHandler(float x, float y)
 	math::Volume size = Tool::getGLViewSize();
 	float xx = x;
 	float yy = size.getHeight() - y;
+
+	math::Vector2 touchPoint(xx, yy);
 	
 	if (_lastMouseButtonStatus == sys::ButtonStatus::BUTTON_DOWN)
 	{
-		G_MOUSEMANAGER->onDispatchButtonEvent(_lastMouseKey, _lastMouseButtonStatus, xx, yy);
+		G_MOUSEMANAGER->onDispatchButtonEvent(_lastMouseKey, _lastMouseButtonStatus, touchPoint);
 	}
 
 	if (_lastMouseKey == sys::MouseKey::LEFTBUTTON
 		&& _lastMouseButtonStatus == sys::ButtonStatus::BUTTON_DOWN)
 	{
 		math::Volume size = Tool::getGLViewSize();
-		G_TOUCHMANAGER->onTouchMoved(xx, yy);
+		G_TOUCHMANAGER->onTouchMoved(touchPoint);
 	}
 }
 
@@ -54,7 +58,7 @@ void render::DeviceProxy::onMouseScrollHandler(sys::ScrollEvent evt, float param
 	G_MOUSEMANAGER->onDispatchScrolleEvent(evt, param);
 }
 
-void render::DeviceProxy::processMouseTouchEvent(sys::MouseKey key, sys::ButtonStatus type, float x, float y)
+void render::DeviceProxy::processMouseTouchEvent(sys::MouseKey key, sys::ButtonStatus type, const math::Vector2& touchPoint)
 {
 	if (key != sys::MouseKey::LEFTBUTTON)
 	{
@@ -63,17 +67,17 @@ void render::DeviceProxy::processMouseTouchEvent(sys::MouseKey key, sys::ButtonS
 
 	if (type == sys::ButtonStatus::BUTTON_DOWN)
 	{
-		G_TOUCHMANAGER->onTouchBegan(x, y);
+		G_TOUCHMANAGER->onTouchBegan(touchPoint);
 	}
 	else if (type == sys::ButtonStatus::BUTTON_UP)
 	{
-		G_TOUCHMANAGER->onTouchEnded(x, y);
+		G_TOUCHMANAGER->onTouchEnded(touchPoint);
 	}
 }
 
-void render::DeviceProxy::processMouseButtonEvent(sys::MouseKey key, sys::ButtonStatus type, float x, float y)
+void render::DeviceProxy::processMouseButtonEvent(sys::MouseKey key, sys::ButtonStatus type, const math::Vector2& touchPoint)
 {
-	G_MOUSEMANAGER->onDispatchButtonEvent(key, type, x, y);
+	G_MOUSEMANAGER->onDispatchButtonEvent(key, type, touchPoint);
 }
 
 void DeviceProxy::onKeyBoardButtonHandler(sys::BoardKey key, sys::ButtonStatus type)

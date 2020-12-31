@@ -178,18 +178,13 @@ void TestLightingNode::testCubeModel()
 
 	//Utility::runRotateAction(pModel);
 
-	pModel->getTouchProxy()->addTouchFunc(render::TouchType::DOWN, [](render::Node* node, float x, float y, bool include) {
+	pModel->addTouchFunc(render::TouchType::DOWN, [&](const math::Vector2& touchPoint, bool include) {
 		if (!include)
 		{
 			return;
 		}
-		auto cube = node->as<render::MultiFaceCube>();
-		if (cube == nullptr)
-		{
-			return;
-		}
 
-		cube->setBoxVisible(!cube->isBoxVisible());
+		pModel->setBoxVisible(!pModel->isBoxVisible());
 	});
 }
 

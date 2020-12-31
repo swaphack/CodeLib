@@ -9,6 +9,8 @@ using namespace ui;
 #define PROPERTY_ROTATION		"rotation"
 #define PROPERTY_MARGIN			"margin"
 #define PROPERTY_MARGIN_STATE	"marginState"
+#define PROPERTY_CLIP	"clip"
+#define PROPERTY_TOUCH_ENABLE	"enableTouch"
 
 /*
 #define PROPERTY_MINSIZE		"minsize"
@@ -38,6 +40,8 @@ void WidgetLoader::parseAttributes()
 	sys::CSSSize size;
 
 	MarginState marginState;
+	bool bClip = false;
+	bool bEnableTouch = false;
 
 	getWidget()->setAnchorPoint(0, 0);
 
@@ -50,6 +54,8 @@ void WidgetLoader::parseAttributes()
 	LOAD_WIDGET_ATTRIBUTE(PROPERTY_ANCHOR, setAnchorPoint, anchor);
 	LOAD_WIDGET_ATTRIBUTE(PROPERTY_SCALE, setScale, scale);
 	LOAD_WIDGET_ATTRIBUTE(PROPERTY_ROTATION, setRotation, rotation);
+	LOAD_WIDGET_ATTRIBUTE(PROPERTY_CLIP, setClip, bClip);
+	LOAD_WIDGET_ATTRIBUTE(PROPERTY_TOUCH_ENABLE, setTouchEnabled, bEnableTouch);
 }
 
 void WidgetLoader::saveAttributes()
@@ -63,6 +69,7 @@ void WidgetLoader::saveAttributes()
 	SAVE_WIDGET_ATTRIBUTE(PROPERTY_ANCHOR, getAnchorPoint);
 	SAVE_WIDGET_ATTRIBUTE(PROPERTY_SCALE, getScale);
 	SAVE_WIDGET_ATTRIBUTE(PROPERTY_ROTATION, getRotation);
-
+	SAVE_WIDGET_ATTRIBUTE(PROPERTY_CLIP, isClip);
+	SAVE_WIDGET_ATTRIBUTE(PROPERTY_TOUCH_ENABLE, isTouchEnabled);
 
 }

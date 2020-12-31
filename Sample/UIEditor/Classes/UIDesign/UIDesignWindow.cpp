@@ -4,13 +4,31 @@
 
 ue::UIDesignWindow::UIDesignWindow()
 {
-	this->setTouchEnable(true);
+	this->setTouchEnabled(true);
 	this->setRootView(true);
 }
 
 ue::UIDesignWindow::~UIDesignWindow()
 {
 
+}
+
+bool ue::UIDesignWindow::init()
+{
+	if (!Panel::init())
+		return false;
+
+	this->addTouchFunc(render::TouchType::UP, [this](const math::Vector2& touchPoint, bool include) {
+		if (m_pDesignPanel)
+		{
+			if (!m_pDesignPanel->containTouchPoint(touchPoint))
+			{
+				m_pDesignPanel->unselectTarget();
+			}
+		}
+	});
+
+	return true;
 }
 
 void ue::UIDesignWindow::initUI()
@@ -25,27 +43,4 @@ void ue::UIDesignWindow::initEvent()
 
 void ue::UIDesignWindow::initText()
 {
-}
-
-bool ue::UIDesignWindow::onTouchBegan(float x, float y, bool include)
-{
-	if (m_pDesignPanel)
-	{
-		if (!m_pDesignPanel->containTouchPoint(x, y))
-		{
-			m_pDesignPanel->unselectTarget();
-		}
-	}
-
-	return false;
-}
-
-bool ue::UIDesignWindow::onTouchMoved(float x, float y, bool include)
-{
-	return false;
-}
-
-bool ue::UIDesignWindow::onTouchEnded(float x, float y, bool include)
-{
-	return false;
 }

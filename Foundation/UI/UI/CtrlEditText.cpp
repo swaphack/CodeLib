@@ -28,7 +28,7 @@ CtrlEditText::CtrlEditText()
 	_ctrlCursor->getLayoutItem()->setWidth(2);
 	this->addProtectedWidget(_ctrlCursor);
 
-	this->setTouchEnable(true);
+	this->setTouchEnabled(true);
 }
 
 CtrlEditText::~CtrlEditText()
@@ -253,6 +253,7 @@ void ui::CtrlEditText::showCursor()
 	);
 	auto pForeverAction = RepeateForeverAction::create(pSequenceAction);
 
+	_ctrlCursor->getActionProxy()->stopAllActions();
 	_ctrlCursor->getActionProxy()->runAction(pForeverAction);
 }
 

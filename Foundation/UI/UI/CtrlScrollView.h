@@ -91,11 +91,6 @@ namespace ui
 		virtual void removeWidget(CtrlWidget* item);
 		virtual void removeAllWidgets();
 	protected:
-		// 触摸处理
-		virtual bool onTouchBegan(float x, float y, bool include);
-		virtual bool onTouchMoved(float x, float y, bool include);
-		virtual bool onTouchEnded(float x, float y, bool include);
-	protected:
 		// 初始化滑动项
 		virtual void initItems();
 		// 初始化管理项
@@ -109,8 +104,8 @@ namespace ui
 		math::Vector2 _touchPosition;
 		
 		// 垂直方向是否可以滑动
-		bool _bHorizontalScroll = true;
+		bool _bHorizontalScroll = false;
 		// 水平方向是否可以滑动
-		bool _bVerticalScroll = true;
+		bool _bVerticalScroll = false;
 	};
 }
