@@ -20,10 +20,8 @@ bool CtrlSequenceFrame::init()
 {
 	CtrlAnimation::init();
 
-	_notify->addListen(NodeNotifyType::ANIMATION, [&](){
+	addNotifyListener(NodeNotifyType::ANIMATION, [&](){
 		Texture2D* texture = getNextTexture();
-
-		if (texture == nullptr) return;
 
 		this->setTextureWithRect(texture);
 	});

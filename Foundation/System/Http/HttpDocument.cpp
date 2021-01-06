@@ -3,7 +3,7 @@
 #include "HttpTime.h"
 #include "Type/String.h"
 
-#include "DateTime/Time.h"
+#include "Time/DateTime.h"
 #include "Stream/StringStream.h"
 
 #define STATUS_KEY_VALUE_SIGN " "
@@ -157,7 +157,7 @@ void HttpDocument::setHeader(const std::string& key, const std::string& value)
 	_headerSection[key] = value;
 }
 
-void HttpDocument::setDateHeader(const std::string& key, Time* value)
+void HttpDocument::setDateHeader(const std::string& key, DateTime* value)
 {
 	std::string strTime = HttpTime::getRFC822Time(value);
 

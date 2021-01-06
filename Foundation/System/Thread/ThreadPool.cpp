@@ -35,7 +35,7 @@ ThreadPool* ThreadPool::getInstance()
 	return s_ThreadPool;
 }
 
-Thread* ThreadPool::createThread(std::function<void()> handler)
+Thread* ThreadPool::createThread(const std::function<void()>& handler)
 {
 	Thread* pThread = new Thread();
 	pThread->start(handler);

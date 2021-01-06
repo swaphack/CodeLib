@@ -58,21 +58,27 @@ namespace render
 		void removeChild(Node* node);
 		// 移除所有子节点
 		void removeAllChildren();
-		// 根据id获取字节点
+		// 根据id获取子节点
 		Node* getChildByID(long id) const;
 	public:
 		// 设置标签
 		void setTag(int tag);
 		// 获取标签
 		int getTag() const;
-		// 根据标签获取字节点
+		// 根据标签获取子节点
 		Node* getChildByTag(int tag) const;
 	public:
-		// 根据名称获取字节点
+		// 根据名称获取子节点
 		Node* getChildByName(const std::string& name) const;
 	public:
 		// 获取第一个子节点
 		Node* getFirstChild() const;
+		// 按照索引查找子节点
+		Node* getChildByIndex(int index) const;
+		// 子节点所在索引
+		int indexOfChild(const Node* node) const;
+		// 是否是目标的后代节点
+		bool isDescendantsOf(const Node* parent) const;
 	public:
 		// 设置数据
 		void setUserData(void* data);
@@ -125,13 +131,17 @@ namespace render
 		math::Vector3 convertWorldPostitionToLocal(const math::Vector3& point);
 		// 将本地坐标转化为世界坐标
 		math::Vector3 convertLocalPostitionToWorld(const math::Vector3& point);
+	public:
+		// 是否点击点落在改节点上
+		virtual bool containTouchPoint(const math::Vector2& touchPoint);
 	protected:
 		// 是否点击点落在改节点上
-		virtual bool containTouchPoint(float x, float y) { return false; }
-		// 吞噬处理,须重写
-		virtual void doSwallowTouchEvent(TouchType type, const math::Vector2& touchPoint, bool include = true);
-		// 非吞噬处理,须重写
-		virtual void doNotSwallowTouchEvent(TouchType type, const math::Vector2& touchPoint, bool include = true);
+		virtual bool containPoint(const math::Vector2& touchPoint);
+	public:
+		virtual bool isInFrontOf(const TouchProtocol* target) const;
+	protected:
+		// 在目标节点的前方
+		bool isInFrontOfNode(const Node* target) const;
 	protected:
 		// 更新空间矩阵
 		virtual void startUpdateTranform();

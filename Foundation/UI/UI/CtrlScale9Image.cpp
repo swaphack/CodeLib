@@ -28,7 +28,7 @@ bool ui::CtrlScale9Image::init()
 		return false;
 	}
 
-	_notify->addListen(NodeNotifyType::BODY, [this]() {
+	addNotifyListener(NodeNotifyType::BODY, [this]() {
 		_texture2D->setVolume(this->getVolume());
 		_texture2D->setAnchorPoint(this->getAnchorPoint());
 	});

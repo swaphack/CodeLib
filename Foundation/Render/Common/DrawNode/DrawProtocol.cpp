@@ -33,19 +33,19 @@ void ColorProtocol::setColor(uint8_t r, uint8_t g, uint8_t b, uint8_t a)
 
 void render::ColorProtocol::setColor(float r, float g, float b)
 {
-	_color[0] = r * COLOR_FLOAT_VALUE;
-	_color[1] = g * COLOR_FLOAT_VALUE;
-	_color[2] = b * COLOR_FLOAT_VALUE;
+	_color[0] = (uint8_t)(r * COLOR_FLOAT_VALUE);
+	_color[1] = (uint8_t)(g * COLOR_FLOAT_VALUE);
+	_color[2] = (uint8_t)(b * COLOR_FLOAT_VALUE);
 
 	onColorChange();
 }
 
 void render::ColorProtocol::setColor(float r, float g, float b, float a)
 {
-	_color[0] = r * COLOR_FLOAT_VALUE;
-	_color[1] = g * COLOR_FLOAT_VALUE;
-	_color[2] = b * COLOR_FLOAT_VALUE;
-	_color[3] = a * COLOR_FLOAT_VALUE;
+	_color[0] = (uint8_t)(r * COLOR_FLOAT_VALUE);
+	_color[1] = (uint8_t)(g * COLOR_FLOAT_VALUE);
+	_color[2] = (uint8_t)(b * COLOR_FLOAT_VALUE);
+	_color[3] = (uint8_t)(a * COLOR_FLOAT_VALUE);
 	onColorChange();
 }
 

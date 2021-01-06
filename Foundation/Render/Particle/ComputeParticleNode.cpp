@@ -48,7 +48,7 @@ bool render::ComputeParticleNode::init()
 		return false;
 	}
 
-	_notify->addListen(NodeNotifyType::SPACE, [this]() 
+	addNotifyListener(NodeNotifyType::SPACE, [this]() 
 	{
 		this->updateParticleParameter();
 	});

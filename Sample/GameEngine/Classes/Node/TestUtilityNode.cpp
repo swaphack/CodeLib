@@ -22,7 +22,7 @@ void TestUtilityNode::initNodes()
 
 void TestUtilityNode::testString()
 {
-	Time* t = Time::getNow();
+	DateTime* t = DateTime::getNow();
 	PRINT("%d-%d-%d %02d:%02d:%02d\n", t->getYear(), t->getMonth(), t->getMonthDay(), t->getHour(), t->getMinute(), t->getSecond());
 
 	const std::string& data = "{json; big; none}";

@@ -1,35 +1,35 @@
-#include "Time.h"
+#include "DateTime.h"
 
 using namespace sys;
 
-Time* Time::s_now = nullptr;
-Time* Time::s_gm = nullptr;
+DateTime* DateTime::s_now = nullptr;
+DateTime* DateTime::s_gm = nullptr;
 
-Time::Time()
+DateTime::DateTime()
 {
 	this->setTime(getNowTimeStamp());
 }
 
-Time::Time(time_t tt)
+DateTime::DateTime(time_t tt)
 {
 	this->setTime(tt);
 }
 
-Time::Time(struct tm* stm)
+DateTime::DateTime(struct tm* stm)
 {
 	this->setTime(stm);
 }
 
-Time::~Time()
+DateTime::~DateTime()
 {
 
 }
 
-Time* Time::getNow()
+DateTime* DateTime::getNow()
 {
 	if (s_now == nullptr)
 	{
-		s_now = new Time();
+		s_now = new DateTime();
 	}
 
 	time_t now = 0;
@@ -45,11 +45,11 @@ Time* Time::getNow()
 	return s_now;
 }
 
-Time* Time::getGM()
+DateTime* DateTime::getGM()
 {
 	if (s_gm == nullptr)
 	{
-		s_gm = new Time();
+		s_gm = new DateTime();
 	}
 
 	time_t now = 0;
@@ -65,7 +65,7 @@ Time* Time::getGM()
 	return s_gm;
 }
 
-time_t Time::getNowTimeStamp()
+time_t DateTime::getNowTimeStamp()
 {
 	time_t now;
 	time(&now);
@@ -73,7 +73,7 @@ time_t Time::getNowTimeStamp()
 	return now;
 }
 
-time_t Time::getGMTimeStamp()
+time_t DateTime::getGMTimeStamp()
 {
 	time_t now;
 	gmtime(&now);
@@ -81,37 +81,37 @@ time_t Time::getGMTimeStamp()
 	return now;
 }
 
-void Time::addSecond(int32_t val)
+void DateTime::addSecond(int32_t val)
 {
 	_tm.tm_sec += val;
 	this->resetTime();
 }
 
-void Time::addMinute(int32_t val)
+void DateTime::addMinute(int32_t val)
 {
 	_tm.tm_min += val;
 	this->resetTime();
 }
 
-void Time::addHour(int32_t val)
+void DateTime::addHour(int32_t val)
 {
 	_tm.tm_hour += val;
 	this->resetTime();
 }
 
-void Time::addDay(int32_t val)
+void DateTime::addDay(int32_t val)
 {
 	_tm.tm_yday += val;
 	this->resetTime();
 }
 
-void Time::addYear(int32_t val)
+void DateTime::addYear(int32_t val)
 {
 	_tm.tm_year += val;
 	this->resetTime();
 }
 
-void Time::setTime(struct tm* stm)
+void DateTime::setTime(struct tm* stm)
 {
 	if (stm == nullptr)
 	{
@@ -128,18 +128,18 @@ void Time::setTime(struct tm* stm)
 	_tm.tm_sec = stm->tm_sec;
 }
 
-void Time::setTime(time_t tt)
+void DateTime::setTime(time_t tt)
 {
 	localtime_s(&_tm, &tt);
 }
 
-time_t Time::getTimeStamp()
+time_t DateTime::getTimeStamp()
 {
 	time_t tt = mktime(&_tm);
 	return tt;
 }
 
-void Time::setTime(Time* time)
+void DateTime::setTime(DateTime* time)
 {
 	if (time == nullptr)
 	{
@@ -149,7 +149,7 @@ void Time::setTime(Time* time)
 	this->setTime(time->getTimeStamp());
 }
 
-void Time::resetTime()
+void DateTime::resetTime()
 {
 	time_t tt = mktime(&_tm);
 	localtime_s(&_tm, &tt);

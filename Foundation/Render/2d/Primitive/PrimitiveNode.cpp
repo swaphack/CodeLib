@@ -22,7 +22,7 @@ bool render::PrimitiveNode::init()
 		return false;
 	}
 
-	_notify->addListen(NodeNotifyType::GEOMETRY, [this]() {
+	addNotifyListener(NodeNotifyType::GEOMETRY, [this]() {
 		this->onPrimitiveChange();
 	});
 

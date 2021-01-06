@@ -22,8 +22,6 @@ namespace render
 		MODEL,
 		// 动作帧数改变
 		ANIMATION,
-		// 界面
-		USER_INTERFACE,
 		// 音效
 		AUDIO,
 		// 几何
@@ -32,8 +30,6 @@ namespace render
 		TEXT,
 		// 颜色
 		COLOR,
-		// 粒子
-		PARTICLE,
 		// 视窗改变
 		VIEWSIZE,
 		// 文件改变

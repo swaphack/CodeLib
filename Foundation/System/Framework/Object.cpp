@@ -38,6 +38,10 @@ void Object::release()
 	{
 		this->dispose();
 	}
+	else if (this->_bAutoRelease)
+	{
+		G_AUTORELEASEPOOL->setCheckState(true);
+	}
 }
 
 void Object::dispose()

@@ -18,7 +18,7 @@ DeviceProxy::~DeviceProxy()
 
 void DeviceProxy::onMouseButtonHandler(sys::MouseKey key, sys::ButtonStatus type, float x, float y)
 {
-	math::Volume size = Tool::getGLViewSize();
+	const math::Volume& size = Tool::getGLViewSize();
 	float xx = x;
 	float yy = size.getHeight() - y;
 
@@ -34,7 +34,8 @@ void DeviceProxy::onMouseButtonHandler(sys::MouseKey key, sys::ButtonStatus type
 
 void DeviceProxy::onMouseMoveHandler(float x, float y)
 {
-	math::Volume size = Tool::getGLViewSize();
+	const math::Volume& size = Tool::getGLViewSize();
+
 	float xx = x;
 	float yy = size.getHeight() - y;
 
@@ -48,7 +49,6 @@ void DeviceProxy::onMouseMoveHandler(float x, float y)
 	if (_lastMouseKey == sys::MouseKey::LEFTBUTTON
 		&& _lastMouseButtonStatus == sys::ButtonStatus::BUTTON_DOWN)
 	{
-		math::Volume size = Tool::getGLViewSize();
 		G_TOUCHMANAGER->onTouchMoved(touchPoint);
 	}
 }

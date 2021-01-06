@@ -31,6 +31,11 @@ math::Matrix3x3::Matrix3x3(const SquareMatrix3& mat)
 	this->assign(mat.getValue());
 }
 
+math::Matrix3x3::Matrix3x3(const SquareMatrix<float, 3>& mat)
+{
+	this->assign(mat.getValue());
+}
+
 math::Matrix3x3::Matrix3x3(const Matrix3x3& mat)
 {
 	this->assign(mat.getValue());
@@ -42,6 +47,24 @@ math::Matrix3x3& math::Matrix3x3::operator=(const Matrix3x3& mat)
 
 	return *this;
 
+}
+
+Matrix3x3 math::Matrix3x3::operator*(const Matrix3x3& mat)
+{
+	float value[9] = { 0 };
+	value[0] = getValue(0) * mat.getValue(0) + getValue(1) * mat.getValue(3) + getValue(2) * mat.getValue(6);
+	value[1] = getValue(0) * mat.getValue(1) + getValue(1) * mat.getValue(4) + getValue(2) * mat.getValue(7);
+	value[2] = getValue(0) * mat.getValue(2) + getValue(1) * mat.getValue(5) + getValue(2) * mat.getValue(8);
+
+	value[3] = getValue(3) * mat.getValue(0) + getValue(4) * mat.getValue(3) + getValue(5) * mat.getValue(6);
+	value[4] = getValue(3) * mat.getValue(1) + getValue(4) * mat.getValue(4) + getValue(5) * mat.getValue(7);
+	value[5] = getValue(3) * mat.getValue(2) + getValue(4) * mat.getValue(5) + getValue(5) * mat.getValue(8);
+
+	value[6] = getValue(6) * mat.getValue(0) + getValue(7) * mat.getValue(3) + getValue(8) * mat.getValue(6);
+	value[7] = getValue(6) * mat.getValue(1) + getValue(7) * mat.getValue(4) + getValue(8) * mat.getValue(7);
+	value[8] = getValue(6) * mat.getValue(2) + getValue(7) * mat.getValue(5) + getValue(8) * mat.getValue(8);
+
+	return Matrix3x3(value);
 }
 
 math::Matrix3x3::Matrix3x3(const float* value)

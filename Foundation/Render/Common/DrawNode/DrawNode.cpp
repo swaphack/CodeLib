@@ -40,7 +40,7 @@ bool render::DrawNode::init()
 		return false;
 	}
 
-	_notify->addListen(NodeNotifyType::COLOR, [this]() {
+	addNotifyListener(NodeNotifyType::COLOR, [this]() {
 		this->onDrawNodeColorChange();
 	});
 

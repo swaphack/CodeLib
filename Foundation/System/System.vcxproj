@@ -99,8 +99,6 @@
     <ClInclude Include="DataBase\IDataSheet.h" />
     <ClInclude Include="DataBase\IDBString.h" />
     <ClInclude Include="DataBase\import.h" />
-    <ClInclude Include="DateTime\import.h" />
-    <ClInclude Include="DateTime\Time.h" />
     <ClInclude Include="Device\Console.h" />
     <ClInclude Include="Device\DeviceImpl.h" />
     <ClInclude Include="Device\IConsoleImpl.h" />
@@ -227,6 +225,9 @@
     <ClInclude Include="Thread\Thread.h" />
     <ClInclude Include="Thread\Threading.h" />
     <ClInclude Include="Thread\ThreadPool.h" />
+    <ClInclude Include="Time\DateTime.h" />
+    <ClInclude Include="Time\import.h" />
+    <ClInclude Include="Time\TimeClock.h" />
     <ClInclude Include="Type\Bit.h" />
     <ClInclude Include="Type\import.h" />
     <ClInclude Include="Type\String.h" />
@@ -248,7 +249,6 @@
     <ClCompile Include="CSS\CSSSpace.cpp" />
     <ClCompile Include="DataBase\DataRecord.cpp" />
     <ClCompile Include="DataBase\DataSheet.cpp" />
-    <ClCompile Include="DateTime\Time.cpp" />
     <ClCompile Include="Device\Console.cpp" />
     <ClCompile Include="Device\ConsoleListener.cpp" />
     <ClCompile Include="Device\DeviceImpl.cpp" />
@@ -335,6 +335,8 @@
     <ClCompile Include="Thread\Thread.cpp" />
     <ClCompile Include="Thread\Threading.cpp" />
     <ClCompile Include="Thread\ThreadPool.cpp" />
+    <ClCompile Include="Time\DateTime.cpp" />
+    <ClCompile Include="Time\TimeClock.cpp" />
     <ClCompile Include="Type\Bit.cpp" />
     <ClCompile Include="Type\String.cpp" />
   </ItemGroup>

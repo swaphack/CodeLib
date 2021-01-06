@@ -24,8 +24,8 @@ namespace render
 		*	ÊÇ·ñÏÔÊ¾¾ØÐÎ¿ò
 		*/
 		bool isBoxVisible() const;
-	public:
-		virtual bool containTouchPoint(float x, float y);
+	protected:
+		virtual bool containPoint(float x, float y);
 	protected:
 		void calBoxData();
 		/**

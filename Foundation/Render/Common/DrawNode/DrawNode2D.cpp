@@ -21,21 +21,21 @@ bool render::DrawNode2D::init()
 		return false;
 	}
 	// 添加属性改变监听
-	_notify->addListen(NodeNotifyType::BODY, [this]() {
+	addNotifyListener(NodeNotifyType::BODY, [this]() {
 		calRealRectPoints();
 		onDrawNode2DBodyChange();
 	});
 
 	// 添加属性改变监听
-	_notify->addListen(NodeNotifyType::SPACE, [this]() {
+	addNotifyListener(NodeNotifyType::SPACE, [this]() {
 		calRealRectPoints();
 	});
 
-	_notify->addListen(NodeNotifyType::COLOR, [this]() {
+	addNotifyListener(NodeNotifyType::COLOR, [this]() {
 		this->onDrawNode2DColorChange();
 	});
 
-	_notify->addListen(NodeNotifyType::TEXTURE, [this]() {
+	addNotifyListener(NodeNotifyType::TEXTURE, [this]() {
 		this->onDrawNode2DTextureChange();
 	});
 
@@ -64,34 +64,22 @@ const render::RectPoints& render::DrawNode2D::getRealRectVertex() const
 
 #include "Common/View/Camera.h"
 
-bool render::DrawNode2D::containTouchPoint(const math::Vector2& touchPoint)
+bool render::DrawNode2D::containPoint(const math::Vector2& touchPoint)
 {
-	/*
-	math::Matrix4x4 projMat = Camera::getMainCamera()->getProjectMatrix();
-	math::Matrix4x4 viewMat = Camera::getMainCamera()->getViewMatrix();
-	math::Matrix4x4 modelMat = getWorldMatrix();
+	math::Vector3 localPosition = this->convertWorldPostitionToLocal(touchPoint);
+	return _rectPoints.containPointByPolygon(localPosition.getX(), localPosition.getY());
 
-	math::Matrix4x4 mvpMat = projMat * viewMat * modelMat;
-
-	render::RectPoints rectPoint;
-	rectPoint.leftDown = math::Matrix4x4::transpose(_realRectPoints.leftDown, mvpMat);
-	rectPoint.rightDown = math::Matrix4x4::transpose(_realRectPoints.rightDown, mvpMat);
-	rectPoint.rightUp = math::Matrix4x4::transpose(_realRectPoints.rightUp, mvpMat);
-	rectPoint.leftUp = math::Matrix4x4::transpose(_realRectPoints.leftUp, mvpMat);
-
-	return rectPoint.containPointByPolygon(x, y);
-	*/
-	return _realRectPoints.containPointByPolygon(touchPoint.getX(), touchPoint.getY());
+	//return _realRectPoints.containPointByPolygon(touchPoint.getX(), touchPoint.getY());
 }
 
 void render::DrawNode2D::calRealRectPoints()
 {
 	Tool::calRect(math::Vector3(), _volume, _anchor, _rectPoints);
 
-	_realRectPoints.leftDown = this->convertLocalPostitionToWorld(_rectPoints.leftDown);
-	_realRectPoints.rightDown = this->convertLocalPostitionToWorld(_rectPoints.rightDown);
-	_realRectPoints.rightUp = this->convertLocalPostitionToWorld(_rectPoints.rightUp);
-	_realRectPoints.leftUp = this->convertLocalPostitionToWorld(_rectPoints.leftUp);
+	//_realRectPoints.leftDown = this->convertLocalPostitionToWorld(_rectPoints.leftDown);
+	//_realRectPoints.rightDown = this->convertLocalPostitionToWorld(_rectPoints.rightDown);
+	//_realRectPoints.rightUp = this->convertLocalPostitionToWorld(_rectPoints.rightUp);
+	//_realRectPoints.leftUp = this->convertLocalPostitionToWorld(_rectPoints.leftUp);
 }
 
 void render::DrawNode2D::onDrawNode2DBodyChange()

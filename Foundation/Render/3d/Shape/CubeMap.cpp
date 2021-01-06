@@ -23,11 +23,11 @@ bool render::CubeMap::init()
 		return false;
 	}
 
-	_notify->addListen(NodeNotifyType::TEXTURE, [this]() {
+	addNotifyListener(NodeNotifyType::TEXTURE, [this]() {
 		this->onImageChanged();
 	});
 
-	_notify->addListen(NodeNotifyType::BODY, [this]() {
+	addNotifyListener(NodeNotifyType::BODY, [this]() {
 		this->onCubeMapBodyChanged();
 	});
 

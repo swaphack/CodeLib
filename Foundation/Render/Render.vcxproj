@@ -166,6 +166,7 @@
     <ClCompile Include="Common\Material\Materials.cpp" />
     <ClCompile Include="Common\Mesh\Mesh.cpp" />
     <ClCompile Include="Common\Mesh\Meshes.cpp" />
+    <ClCompile Include="Common\Node\ComputeQueue.cpp" />
     <ClCompile Include="Common\Node\Node.cpp" />
     <ClCompile Include="Common\Node\NodeProtocol.cpp" />
     <ClCompile Include="Common\Node\NotifyCenter.cpp" />
@@ -395,6 +396,7 @@
     <ClInclude Include="Common\Mesh\import.h" />
     <ClInclude Include="Common\Mesh\Mesh.h" />
     <ClInclude Include="Common\Mesh\Meshes.h" />
+    <ClInclude Include="Common\Node\ComputeQueue.h" />
     <ClInclude Include="Common\Node\import.h" />
     <ClInclude Include="Common\Node\Node.h" />
     <ClInclude Include="Common\Node\NodeProtocol.h" />

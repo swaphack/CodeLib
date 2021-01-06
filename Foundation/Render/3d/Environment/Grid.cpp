@@ -20,7 +20,7 @@ bool render::Grid::init()
 		return false;
 	}
 
-	_notify->addListen(NodeNotifyType::GEOMETRY, [this]() {
+	addNotifyListener(NodeNotifyType::GEOMETRY, [this]() {
 		this->onGridChange();
 	});
 

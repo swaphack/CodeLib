@@ -26,7 +26,7 @@ bool render::DrawNode3D::init()
 		return false;
 	}
 
-	_notify->addListen(NodeNotifyType::BODY, [this]() {
+	addNotifyListener(NodeNotifyType::BODY, [this]() {
 		this->calBoxData();
 		});
 
@@ -39,8 +39,9 @@ bool render::DrawNode3D::init()
 	return true;
 }
 
-bool render::DrawNode3D::containTouchPoint(const math::Vector2& touchPoint)
+bool render::DrawNode3D::containPoint(const math::Vector2& touchPoint)
 {
+	/*
 	math::Vector3 point(touchPoint.getX(), touchPoint.getY());
 
 	math::Vector3 localPoint = _worldInverseMatrix * point;
@@ -51,6 +52,10 @@ bool render::DrawNode3D::containTouchPoint(const math::Vector2& touchPoint)
 		&& localPoint.getY() <= (1 - getAnchorPointY()) * getHeight()
 		&& localPoint.getZ() >= -getAnchorPointZ() * getDepth()
 		&& localPoint.getZ() <= (1 - getAnchorPointZ()) * getDepth();
+
+	*/
+
+	return false;
 }
 
 void render::DrawNode3D::calBoxData()

@@ -25,7 +25,7 @@ bool CtrlMedia::init()
 	_ctrlAudio = CREATE_NODE(CtrlAudioSourceClip);
 	this->addChild(_ctrlAudio);
 
-	_notify->addListen(NodeNotifyType::ANIMATION, [&](){
+	addNotifyListener(NodeNotifyType::ANIMATION, [&](){
 		if (_media == nullptr)
 		{
 			return;

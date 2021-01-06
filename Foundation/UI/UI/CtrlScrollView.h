@@ -49,6 +49,15 @@ namespace ui
 		const CtrlLayout* getInner() const;
 	public:
 		/**
+		*	移动系数
+		*/
+		void setMovingMultiple(float value);
+		/**
+		*	移动系数
+		*/
+		float getMovingMultiple() const;
+	public:
+		/**
 		*	添加一个项
 		*/  
 		virtual void addItem(CtrlWidget* item, int zOrder = 0);
@@ -107,5 +116,7 @@ namespace ui
 		bool _bHorizontalScroll = false;
 		// 水平方向是否可以滑动
 		bool _bVerticalScroll = false;
+		// 移动系数
+		float _movingMultiple = 20;
 	};
 }

@@ -27,7 +27,7 @@ bool render::PointSprite::init()
 
 	_notify->removeListens(NodeNotifyType::GEOMETRY);
 
-	_notify->addListen(NodeNotifyType::GEOMETRY, [this]() {
+	addNotifyListener(NodeNotifyType::GEOMETRY, [this]() {
 		this->updatePointSprite();
 		this->onPrimitiveChange();
 	});

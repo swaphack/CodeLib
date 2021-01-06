@@ -96,11 +96,6 @@ namespace ui
 		*	移除所有点击事件
 		*/
 		void removeAllClickFuncs();
-	protected:
-		// 吞噬处理,须重写
-		virtual void doSwallowTouchEvent(render::TouchType type, const math::Vector2& touchPoint, bool include = true);
-		// 非吞噬处理,须重写
-		virtual void doNotSwallowTouchEvent(render::TouchType type, const math::Vector2& touchPoint, bool include = true);
 	public:
 		/**
 		*	是否裁剪
@@ -153,10 +148,6 @@ namespace ui
 		std::vector<CtrlWidget*> _protectedWidgets;
 		// 控件
 		std::vector<CtrlWidget*> _widgets;
-		/**
-		*	是否裁剪
-		*/
-		bool _bClip = false;
 		/**
 		*	裁剪区域
 		*/

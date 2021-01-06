@@ -24,6 +24,8 @@ namespace sys
 		void clear();
 		// 检查自动释放池
 		void checkAutoRelease();
+		// 设置检查池
+		void setCheckState(bool checked);
 	public:
 		void startThread(const std::function<void()>& func);
 		void endThread();
@@ -31,6 +33,8 @@ namespace sys
 		std::set<Object*> _objects;
 		// 线程数
 		uint32_t _threadCount = 0;
+		// 检查池
+		bool _bCheckPool = false;
 	};
 
 	#define G_AUTORELEASEPOOL Instance<AutoReleasePool>::getInstance()

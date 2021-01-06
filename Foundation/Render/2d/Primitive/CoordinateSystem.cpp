@@ -21,7 +21,7 @@ bool render::CoordinateSystem::init()
 
 	this->setDrawMode(DrawMode::LINES);
 
-	_notify->addListen(NodeNotifyType::SPACE, [this]() {
+	addNotifyListener(NodeNotifyType::SPACE, [this]() {
 		this->onCoordianteSystemBodyChange();
 	});
 	return true;

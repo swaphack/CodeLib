@@ -109,10 +109,12 @@ namespace math
 			//printf("%d, %d, %dn", index, Width, Height);
 			assert(index >= 0 && index < getLength());
 
-			int i = index / Width;
-			int j = index % Width;
+			T* head = (T*)_values;
 
-			return getValue(i, j);
+			return head[index];
+			//int i = index / Width;
+			//int j = index % Width;
+			//return getValue(i, j);
 		}
 
 		/**

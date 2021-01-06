@@ -13,8 +13,12 @@ Thread::~Thread()
 {
 }
 
-void Thread::start(std::function<void()> handler)
+void Thread::start(const std::function<void()>& handler)
 {
+	if (handler == nullptr)
+	{
+		return;
+	}
 	m_pThread = std::thread([=](){
 		do
 		{

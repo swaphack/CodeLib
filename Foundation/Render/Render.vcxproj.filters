@@ -585,6 +585,9 @@
     <ClCompile Include="Common\Input\TouchProtocol.cpp">
       <Filter>Common\Input</Filter>
     </ClCompile>
+    <ClCompile Include="Common\Node\ComputeQueue.cpp">
+      <Filter>Common\Node</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Common\Node\import.h">
@@ -1343,6 +1346,9 @@
     </ClInclude>
     <ClInclude Include="Common\Input\TouchProtocol.h">
       <Filter>Common\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Node\ComputeQueue.h">
+      <Filter>Common\Node</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

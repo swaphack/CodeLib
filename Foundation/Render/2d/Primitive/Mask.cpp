@@ -18,11 +18,11 @@ bool render::Mask::init()
 		return false;
 	}
 
-	_notify->addListen(NodeNotifyType::BODY, [this]() {
+	addNotifyListener(NodeNotifyType::BODY, [this]() {
 		this->onMaskBodyChange();
 	});
 
-	_notify->addListen(NodeNotifyType::COLOR, [this]() {
+	addNotifyListener(NodeNotifyType::COLOR, [this]() {
 		this->onMaskBodyChange();
 	});
 

@@ -8,7 +8,7 @@
 namespace sys
 {
 	class StringStream;
-	class Time;
+	class DateTime;
 	/*
 	HTTP响应由三个部分组成，分别是：状态行、消息报头、响应正文
 
@@ -72,7 +72,7 @@ namespace sys
 		// 设置报头参数
 		void setHeader(const std::string& key, const std::string& value);
 		// 时间格式报头参数
-		void setDateHeader(const std::string& key, Time* value);
+		void setDateHeader(const std::string& key, DateTime* value);
 		// 整形格式报头参数
 		void setIntegerHeader(const std::string& key, int32_t value);
 

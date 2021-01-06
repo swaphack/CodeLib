@@ -38,7 +38,7 @@ void TestTextNode::testTimeText()
 	CallFuncN* pCallFunc = CREATE_ACTION(CallFuncN);
 	pCallFunc->setFunc([](sys::Object* sender){
 		char strVal[255] = {};
-		Time* t = Time::getNow();
+		DateTime* t = DateTime::getNow();
 		sprintf(strVal, "%d-%d-%d %02d:%02d:%02d\n", t->getYear(), t->getMonth(), t->getMonthDay(), t->getHour(), t->getMinute(), t->getSecond());
 		((CtrlText*)sender)->setString(strVal);
 	});

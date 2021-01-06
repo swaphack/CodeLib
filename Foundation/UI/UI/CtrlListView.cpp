@@ -19,14 +19,10 @@ bool ui::CtrlListView::init()
 
 	this->removeTouchFunc(render::TouchType::ON);
 	this->addTouchFunc(render::TouchType::ON, [this](const math::Vector2& touchPoint, bool include) {
-
 		math::Vector2 delta = touchPoint;
 		delta -= _touchPosition;
 
-		delta *= 50;
-
-		float offX = -getAnchorPoint().getX() * getWidth();
-		float offY = -getAnchorPoint().getY() * getHeight();
+		delta *= getMovingMultiple();
 
 		math::Vector3 pos = _content->getPosition();
 
@@ -38,8 +34,17 @@ bool ui::CtrlListView::init()
 			if (!_bHorizontalScroll) return;
 
 			pos.setX(pos.getX() + delta.getX());
-			min = getWidth() - _content->getWidth() + offX;
-			max = 0 + offX;
+			if (getWidth() > _content->getWidth())
+			{
+				min = 0;
+				max = 0;
+			}
+			else
+			{
+				min = getWidth() - _content->getWidth();
+				max = 0;
+			}
+
 			if (pos.getX() < min) pos.setX(min);
 			if (pos.getX() > max) pos.setX(max);
 		}
@@ -48,8 +53,16 @@ bool ui::CtrlListView::init()
 			if (!_bHorizontalScroll) return;
 
 			pos.setX(pos.getX() + delta.getX());
-			min = getWidth() - _content->getWidth() + offX;
-			max = 0 + offX;
+			if (getWidth() > _content->getWidth())
+			{
+				min = getWidth()-_content->getWidth();
+				max = getWidth()-_content->getWidth();
+			}
+			else
+			{
+				min = getWidth() - _content->getWidth();
+				max = 0;
+			}
 			if (pos.getX() < min) pos.setX(min);
 			if (pos.getX() > max) pos.setX(max);
 		}
@@ -58,8 +71,16 @@ bool ui::CtrlListView::init()
 			if (!_bVerticalScroll) return;
 
 			pos.setY(pos.getY() + delta.getY());
-			min = getHeight() - _content->getHeight() + offY;
-			max = 0 + offY;
+			if (getHeight() > _content->getHeight())
+			{
+				min = getHeight() - _content->getHeight();
+				max = getHeight() - _content->getHeight();
+			}
+			else
+			{
+				min = getHeight() - _content->getHeight();
+				max = 0;
+			}
 			if (pos.getY() < min) pos.setY(min);
 			if (pos.getY() > max) pos.setY(max);
 		}
@@ -68,14 +89,24 @@ bool ui::CtrlListView::init()
 			if (!_bVerticalScroll) return;
 
 			pos.setY(pos.getY() + delta.getY());
-			min = getHeight() - _content->getHeight() + offY;
-			max = 0 + offY;
+			if (getHeight() > _content->getHeight())
+			{
+				min = 0;
+				max = 0;
+			}
+			else
+			{
+				min = getHeight() - _content->getHeight();
+				max = 0;
+			}
 			if (pos.getY() < min) pos.setY(min);
 			if (pos.getY() > max) pos.setY(max);
 		}
 
 		_content->getActionProxy()->stopAllActions();
-		_content->getActionProxy()->runAction(render::MoveToAction::create(0.05f, pos));
+		_content->getActionProxy()->runAction(render::MoveToAction::create(0.5f, pos));
+
+		//_content->setPosition(pos);
 
 		_touchPosition = touchPoint;
 	});

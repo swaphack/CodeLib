@@ -5,6 +5,9 @@
 #include "Graphic/import.h"
 #include "Common/View/Camera.h"
 #include "NotifyCenter.h"
+#include "Common/Action/import.h"
+#include "ComputeQueue.h"
+
 using namespace render;
 
 //////////////////////////////////////////////////////////////////////////
@@ -29,16 +32,17 @@ Node::~Node()
 	this->removeAllChildren();
 	SAFE_RELEASE(_actionProxy);
 	G_NOTIFYCENTER->release(this);
+	G_COMPUTEQUEUE->remove(this);
 }
 
 bool Node::init()
 {
 	// 添加属性改变监听
-	_notify->addListen(NodeNotifyType::SPACE, [&](){
+	addNotifyListener(NodeNotifyType::SPACE, [&](){
 		calSpaceData(); 
 	});
 
-	_notify->addListen(NodeNotifyType::NODE, [&](){ 
+	addNotifyListener(NodeNotifyType::NODE, [&](){ 
 		this->sortChildren();
 	});
 
@@ -180,6 +184,47 @@ Node* Node::getFirstChild() const
 	return _children.front();
 }
 
+Node* render::Node::getChildByIndex(int index) const
+{
+	if (index < 0 || index >= _children.size())
+	{
+		return nullptr;
+	}
+	return _children[index];
+}
+
+int render::Node::indexOfChild(const Node* node) const
+{
+	if (node == nullptr)
+	{
+		return -1;
+	}
+	for (size_t i = 0; i < _children.size(); i++)
+	{
+		if (_children[i] == node)
+		{
+			return i;
+		}
+	}
+	return -1;
+}
+
+bool render::Node::isDescendantsOf(const Node* parent) const
+{
+	const Node* temp = this;
+	while (temp->getParent() != nullptr)
+	{
+		if (temp == parent)
+		{
+			return true;
+		}
+
+		temp = temp->getParent();
+	}
+
+	return false;
+}
+
 // void Node::foreachChild(std::function<void(Node*)> handler)
 // {
 // 	std::vector<Object*>::iterator iter = _children.begin();
@@ -250,6 +295,83 @@ void Node::setRelativeWithParent(bool status)
 void Node::draw()
 {
 
+}
+
+bool render::Node::containTouchPoint(const math::Vector2& touchPoint)
+{ 
+	auto parent = this->getParent();
+	while (parent != nullptr)
+	{
+		if (parent->isClippingEnabled())
+		{
+			if (!parent->containPoint(touchPoint))
+			{
+				return false;
+			}
+		}
+		parent = parent->getParent();
+	}
+
+	return containPoint(touchPoint);
+}
+
+bool render::Node::isInFrontOf(const TouchProtocol* target) const
+{
+	return isInFrontOfNode(dynamic_cast<const Node*>(target));
+}
+
+bool render::Node::isInFrontOfNode(const Node* target) const
+{
+	if (target == nullptr || target->getParent() == nullptr)
+	{
+		return true;
+	}
+	if (this->getParent() == nullptr)
+	{
+		return false;
+	}
+
+	// 从根节点开始比较两个位置关系
+
+	std::vector<Node*> vecNodeInfo1;
+	std::vector<Node*> vecNodeInfo2;
+
+	const Node* temp = this;
+	while (temp->getParent() != nullptr)
+	{
+		vecNodeInfo1.insert(vecNodeInfo1.begin(), temp->getParent());
+
+		temp = temp->getParent();
+	}
+
+	temp = target;
+	while (temp->getParent() != nullptr)
+	{
+		vecNodeInfo2.insert(vecNodeInfo2.begin(), temp->getParent());
+
+		temp = temp->getParent();
+	}
+
+	int len = MIN(vecNodeInfo1.size(), vecNodeInfo2.size());
+
+	for (int i = 0; i < len; i++)
+	{
+		if (vecNodeInfo1[i] != vecNodeInfo2[i])
+		{
+			if (i == 0) return false;
+
+			int index1 = vecNodeInfo1[i - 1]->indexOfChild(vecNodeInfo1[i]);
+			int index2 = vecNodeInfo2[i - 1]->indexOfChild(vecNodeInfo2[i]);
+			return index1 > index2;
+		}
+	}
+	// 较短节点链是较长节点链的父节点
+	return len == vecNodeInfo1.size();
+}
+
+bool render::Node::containPoint(const math::Vector2& touchPoint)
+{
+	return false;
 }
 
 void Node::startUpdateTranform()
@@ -349,29 +471,32 @@ void Node::calRealSpaceByMatrix()
 	math::SquareMatrix4 sm = _localMatrix;
 	_localInverseMatrix = sm.getInverse();
 
-	if (this->getParent() != nullptr)
-	{
-		if (this->isRelativeWithParent())
+	//G_COMPUTEQUEUE->pushBack(this, [this]() {
+		if (this->getParent() != nullptr)
 		{
-			math::Matrix4x4 mat = this->getParent()->getWorldMatrix();
-			_worldMatrix = _localMatrix * mat;
+			if (this->isRelativeWithParent())
+			{
+				const math::Matrix4x4& mat = this->getParent()->getWorldMatrix();
+				_worldMatrix = _localMatrix * mat;
+			}
+			else
+			{
+				_worldMatrix = _localMatrix;
+			}
 		}
 		else
 		{
 			_worldMatrix = _localMatrix;
 		}
-	}
-	else
-	{
-		_worldMatrix = _localMatrix;
-	}
+	//});
 
-	_worldInverseMatrix = _worldMatrix.getInverse();
+	//_worldInverseMatrix = _worldMatrix.getInverse();
 }
 
 void Node::onSpaceChange()
 {
 	this->notifyToAll(NodeNotifyType::SPACE);
+	//this->notify(NodeNotifyType::SPACE);
 }
 
 void Node::onBodyChange()
@@ -404,28 +529,6 @@ math::Vector3 render::Node::convertWorldPostitionToLocal(const math::Vector3& po
 math::Vector3 render::Node::convertLocalPostitionToWorld(const math::Vector3& point)
 {
 	return math::Matrix4x4::transpose(point, _worldMatrix);
-}
-
-void render::Node::doSwallowTouchEvent(TouchType type, const math::Vector2& touchPoint, bool include)
-{
-	/*
-	for (auto item : _children)
-	{
-		if (type == TouchType::DOWN) item->onTouchBegan(touchPoint);
-		else if (type == TouchType::ON) item->onTouchMoved(touchPoint);
-		else if (type == TouchType::UP) item->onTouchEnded(touchPoint);
-	}
-	*/
-}
-
-void render::Node::doNotSwallowTouchEvent(TouchType type, const math::Vector2& touchPoint, bool include)
-{
-	for (auto item : _children)
-	{
-		if (type == TouchType::DOWN) item->onTouchBegan(touchPoint);
-		else if (type == TouchType::ON) item->onTouchMoved(touchPoint);
-		else if (type == TouchType::UP) item->onTouchEnded(touchPoint);
-	}
 }
 
 void render::Node::setSkipDraw(bool status)

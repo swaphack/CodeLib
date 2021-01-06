@@ -6,22 +6,22 @@
 namespace sys
 {
 	// 时间
-	class Time
+	class DateTime
 	{
 	public:
-		Time();
-		Time(time_t tt);
-		Time(struct tm* stm);
-		~Time();
+		DateTime();
+		DateTime(time_t tt);
+		DateTime(struct tm* stm);
+		~DateTime();
 	public:
 		// 起始计算年份
 		static const int32_t StartYear = 1900;
 		// 实际月份索引
 		static const int32_t IndexOfMonth = 1;
 		// 获取本地当前时间,不用释放
-		static Time* getNow();
+		static DateTime* getNow();
 		// 获取格林时间,不用释放
-		static Time* getGM();
+		static DateTime* getGM();
 		// 获取本地当前时间戳
 		static time_t getNowTimeStamp();
 		// 获取本地当前时间戳
@@ -57,7 +57,7 @@ namespace sys
 		// 由时间格式设置
 		void setTime(struct tm* stm);
 		// 设置时间
-		void setTime(Time* time);
+		void setTime(DateTime* time);
 		// 获取时间戳
 		time_t getTimeStamp();
 	protected:
@@ -67,8 +67,8 @@ namespace sys
 		tm _tm;
 	private:
 		// 本地时间
-		static Time* s_now;
+		static DateTime* s_now;
 		// 格林时间
-		static Time* s_gm;
+		static DateTime* s_gm;
 	};
 }

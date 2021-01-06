@@ -26,7 +26,7 @@ bool render::PostProcessingNode::init()
 		return false;
 	}
 
-	_notify->addListen(NodeNotifyType::BODY, [this]() {
+	addNotifyListener(NodeNotifyType::BODY, [this]() {
 		this->updateTextureSize();
 	});
 

@@ -26,7 +26,7 @@ bool render::PixelPostProcessingNode::init()
 		return false;
 	}
 
-	_notify->addListen(NodeNotifyType::BODY, [this]() {
+	addNotifyListener(NodeNotifyType::BODY, [this]() {
 		Tool::calRect(math::Vector3(), _volume, _anchor, _rectPoints);
 		this->updateTextureSize();
 	});

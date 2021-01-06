@@ -35,7 +35,7 @@ bool render::SpotLight::init()
 		return false;
 	}
 
-	_notify->addListen(NodeNotifyType::SPACE, [this]() {
+	addNotifyListener(NodeNotifyType::SPACE, [this]() {
 		math::Quaternion q = math::Quaternion::rotate(getRotation());
 		_lightDirection[0] = q.getX() / q.getW();
 		_lightDirection[1] = q.getY() / q.getW();

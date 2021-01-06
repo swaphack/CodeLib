@@ -35,18 +35,21 @@ bool DrawScale9Texture2D::init()
 		pBlend->setEnabled(true);
 	}
 
-	_notify->addListen(NodeNotifyType::BODY, [this]() {
+	addNotifyListener(NodeNotifyType::BODY, [this]() {
 		onScale9BodyChange();
-		});
+		updateScale9ImageMeshData();
+	});
 
-	_notify->addListen(NodeNotifyType::TEXTURE, [this]() {
+	addNotifyListener(NodeNotifyType::TEXTURE, [this]() {
 		this->onScale9ImageChange();
+		updateScale9ImageMeshData();
 	});
 
 
-	_notify->addListen(NodeNotifyType::GEOMETRY, [this]() {
+	addNotifyListener(NodeNotifyType::GEOMETRY, [this]() {
 		this->onScale9BodyChange();
 		this->onScale9ImageChange();
+		updateScale9ImageMeshData();
 	});
 
 	return true;
@@ -55,8 +58,6 @@ bool DrawScale9Texture2D::init()
 void DrawScale9Texture2D::onScale9BodyChange()
 {
 	VertexTool::setTexture2DScale9Vertices(&_scale9Vertex, math::Vector3(), this->getVolume(), this->getAnchorPoint(), _scale9Margin);
-
-	updateScale9ImageMeshData();
 }
 
 void DrawScale9Texture2D::onScale9ImageChange()
@@ -64,7 +65,6 @@ void DrawScale9Texture2D::onScale9ImageChange()
 	if (getTexture() != nullptr)
 	{
 		VertexTool::setTexture2DScale9Coords(&_scale9Vertex, math::Size(getTexture()->getWidth(), getTexture()->getHeight()), _scale9Margin);
-		updateScale9ImageMeshData();
 	}
 }
 

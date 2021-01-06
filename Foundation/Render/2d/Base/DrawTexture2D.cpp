@@ -35,11 +35,11 @@ bool DrawTexture2D::init()
 		pBlend->setEnabled(true);
 	}
 
-	_notify->addListen(NodeNotifyType::BODY, [this]() {
+	addNotifyListener(NodeNotifyType::BODY, [this]() {
 		updateTexture2DMeshData();
 	});
 
-	_notify->addListen(NodeNotifyType::TEXTURE, [this]() {
+	addNotifyListener(NodeNotifyType::TEXTURE, [this]() {
 		this->updateTexture2DMeshData();
 	});
 

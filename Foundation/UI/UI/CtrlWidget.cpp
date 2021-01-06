@@ -26,7 +26,7 @@ bool ui::CtrlWidget::init()
 	}
 
 	// 添加属性改变监听
-	_notify->addListen(NodeNotifyType::BODY, [this]() {
+	addNotifyListener(NodeNotifyType::BODY, [this]() {
 		onCtrlWidgetBodyChange();
 
 		broadcastBodyChange();
@@ -51,19 +51,9 @@ bool ui::CtrlWidget::init()
 	return true; 
 }
 
-void ui::CtrlWidget::setClip(bool bClip)
-{
-	_bClip = bClip;
-}
-
-bool ui::CtrlWidget::isClip()
-{
-	return _bClip;
-}
-
 void ui::CtrlWidget::beforeDrawNode()
 {
-	if (_bClip)
+	if (isClippingEnabled())
 	{
 		GLState::enable(EnableMode::SCISSOR_TEST);
 		GLState::setScissor(_clipRect.getX(), _clipRect.getY(), _clipRect.getWidth(), _clipRect.getHeight());
@@ -76,7 +66,7 @@ void ui::CtrlWidget::afterDrawNode()
 
 	this->drawRect();
 
-	if (_bClip)
+	if (isClippingEnabled())
 	{
 		GLState::disable(EnableMode::SCISSOR_TEST);
 	}
@@ -219,32 +209,6 @@ void ui::CtrlWidget::addClickFunc(const ClickWidgetFunc& func)
 void ui::CtrlWidget::removeAllClickFuncs()
 {
 	_clickFuncs.clear();
-}
-
-void ui::CtrlWidget::doSwallowTouchEvent(render::TouchType type, const math::Vector2& touchPoint, bool include)
-{
-	if (isClip())
-	{
-		for (auto item : _children)
-		{
-			if (type == TouchType::DOWN) item->onTouchBegan(touchPoint);
-			else if (type == TouchType::ON) item->onTouchMoved(touchPoint);
-			else if (type == TouchType::UP) item->onTouchEnded(touchPoint);
-		}
-	}
-}
-
-void ui::CtrlWidget::doNotSwallowTouchEvent(render::TouchType type, const math::Vector2& touchPoint, bool include)
-{
-	if (!isClip())
-	{
-		for (auto item : _children)
-		{
-			if (type == TouchType::DOWN) item->onTouchBegan(touchPoint);
-			else if (type == TouchType::ON) item->onTouchMoved(touchPoint);
-			else if (type == TouchType::UP) item->onTouchEnded(touchPoint);
-		}
-	}
 }
 
 void ui::CtrlWidget::onCtrlWidgetBodyChange()

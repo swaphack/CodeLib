@@ -21,12 +21,12 @@ bool CtrlAudioSpeaker::init()
 		return false;
 	}
 
-	_notify->addListen(NodeNotifyType::SPACE, [this](){
+	addNotifyListener(NodeNotifyType::SPACE, [this](){
 		_speekSettings.pos = this->getPosition();
 		updateSpeaker();
 	});
 
-	_notify->addListen(NodeNotifyType::AUDIO, [this](){
+	addNotifyListener(NodeNotifyType::AUDIO, [this](){
 		updateSpeaker();
 	});
 

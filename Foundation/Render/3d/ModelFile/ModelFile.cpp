@@ -20,7 +20,7 @@ bool render::ModelFile::init()
 		return false;
 	}
 
-	_notify->addListen(NodeNotifyType::MODEL, [this]() {
+	addNotifyListener(NodeNotifyType::MODEL, [this]() {
 		_bloadedModel = true;
 		this->updateMeshData();
 	});

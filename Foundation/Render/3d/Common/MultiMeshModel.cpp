@@ -21,7 +21,7 @@ bool render::MultiMeshModel::init()
 		return false;
 	}
 
-	_notify->addListen(NodeNotifyType::BODY, [this]() {
+	addNotifyListener(NodeNotifyType::BODY, [this]() {
 		this->calBoxData();
 		});
 
@@ -44,7 +44,7 @@ bool render::MultiMeshModel::isBoxVisible() const
 	return _bBoxVisible;
 }
 
-bool render::MultiMeshModel::containTouchPoint(float x, float y)
+bool render::MultiMeshModel::containPoint(float x, float y)
 {
 	return _realBoxVertex.containPointByPolygon(x, y);
 }

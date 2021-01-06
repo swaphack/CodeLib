@@ -5,7 +5,7 @@
 
 namespace sys
 {
-	class Time;
+	class DateTime;
 
 	/*
 	Sun, 06 Nov 1994 08:49:37 GMT  ; RFC 822, updated by RFC 1123
@@ -25,12 +25,12 @@ namespace sys
 		static const char*	TIME_MONTH[12];
 	public:
 		// 获取 RFC 822 时间格式
-		static std::string getRFC822Time(Time* time);
+		static std::string getRFC822Time(DateTime* time);
 
 		// 获取 RFC 822 时间格式
-		static std::string getRFC850Time(Time* time);
+		static std::string getRFC850Time(DateTime* time);
 
 		// 获取 RFC 822 时间格式
-		static std::string getANSITime(Time* time);
+		static std::string getANSITime(DateTime* time);
 	};
 }

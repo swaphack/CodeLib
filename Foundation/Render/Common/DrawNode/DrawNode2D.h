@@ -40,7 +40,7 @@ namespace render
 		/**
 		*	坐标是否在当前对象内
 		*/
-		virtual bool containTouchPoint(const math::Vector2& touchPoint);
+		virtual bool containPoint(const math::Vector2& touchPoint);
 	protected:
 		/**
 		*	计算实际矩形框坐标

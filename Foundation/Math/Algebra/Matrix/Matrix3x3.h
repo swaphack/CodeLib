@@ -18,6 +18,7 @@ namespace math
 		Matrix3x3(const Vector3& row0, const Vector3& row1, const Vector3& row2);
 		Matrix3x3(const Matrix3x3& mat);
 		Matrix3x3(const SquareMatrix3& mat);
+		Matrix3x3(const SquareMatrix<float, 3>& mat);
 		Matrix3x3(const Matrix4x4& mat);
 		virtual ~Matrix3x3();
 	public:
@@ -47,6 +48,8 @@ namespace math
 	public:
 		Matrix3x3& operator=(const Matrix4x4& mat);
 		Matrix3x3& operator=(const Matrix3x3& mat);
+
+		Matrix3x3 operator*(const Matrix3x3& mat);
 
 		operator SquareMatrix3();
 	};

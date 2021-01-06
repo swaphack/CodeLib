@@ -26,7 +26,7 @@ bool render::ShadowMapping::init()
 	{
 		return false;
 	}
-	_notify->addListen(NodeNotifyType::BODY, [this]() {
+	addNotifyListener(NodeNotifyType::BODY, [this]() {
 		this->updateShadowMapping();
 	});
 	this->setTexture(_texture);
@@ -84,7 +84,7 @@ void render::ShadowMapping::beforeDrawNode()
 
 void render::ShadowMapping::draw()
 {
-	//_texture->saveToPNG(getCString("%ld.png", sys::Time::getNowTimeStamp()), TextureExternalFormat::DEPTH_COMPONENT);
+	//_texture->saveToPNG(getCString("%ld.png", sys::DateTime::getNowTimeStamp()), TextureExternalFormat::DEPTH_COMPONENT);
 	this->broadcastFunc([this](Node* node) {
 		if (node == nullptr || node == this)
 		{

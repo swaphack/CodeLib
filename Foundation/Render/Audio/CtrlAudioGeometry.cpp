@@ -34,17 +34,17 @@ bool CtrlAudioGeometry::init()
 		return false;
 	}
 
-	_notify->addListen(NodeNotifyType::SPACE, [this](){
+	addNotifyListener(NodeNotifyType::SPACE, [this](){
 		_geometryBody.position = this->getPosition();
 		_geometryBody.scale = this->getScale();
 		onGeometryChange();
 	});
 
-	_notify->addListen(NodeNotifyType::BODY, [this]() {
+	addNotifyListener(NodeNotifyType::BODY, [this]() {
 		onPolygonsChange();
 	});
 
-	_notify->addListen(NodeNotifyType::AUDIO, [this](){
+	addNotifyListener(NodeNotifyType::AUDIO, [this](){
 		onGeometryChange();
 	});
 
@@ -339,15 +339,15 @@ bool CtrlAudioGeometryPolygon::init()
 		return false;
 	}
 
-	_notify->addListen(NodeNotifyType::SPACE, [this](){
+	addNotifyListener(NodeNotifyType::SPACE, [this](){
 		this->onPolygonChange();
 	});
 
-	_notify->addListen(NodeNotifyType::AUDIO, [this](){
+	addNotifyListener(NodeNotifyType::AUDIO, [this](){
 		this->onAttributeChange();
 	});
 
-	_notify->addListen(NodeNotifyType::GEOMETRY, [this](){
+	addNotifyListener(NodeNotifyType::GEOMETRY, [this](){
 		this->onPolygonChange();
 	});
 

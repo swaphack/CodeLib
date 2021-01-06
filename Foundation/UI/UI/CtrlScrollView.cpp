@@ -76,12 +76,12 @@ bool ui::CtrlScrollView::init()
 		return false;
 	}
 
-	_notify->addListen(NodeNotifyType::GEOMETRY, [this]() {
+	addNotifyListener(NodeNotifyType::GEOMETRY, [this]() {
 		this->initItems();
 		this->initContent();
 	});
 
-	_notify->addListen(NodeNotifyType::BODY, [this]() {
+	addNotifyListener(NodeNotifyType::BODY, [this]() {
 		this->initItems();
 		this->initContent();
 	});
@@ -97,6 +97,8 @@ bool ui::CtrlScrollView::init()
 
 		math::Vector2 delta = touchPoint;
 		delta -= _touchPosition;
+
+		delta *= getMovingMultiple();
 
 		float offX = -getAnchorPoint().getX() * getWidth();
 		float offY = -getAnchorPoint().getY() * getHeight();
@@ -272,4 +274,14 @@ math::Size CtrlScrollView::getInnerSize()
 const CtrlLayout* CtrlScrollView::getInner() const
 {
 	return _content;
+}
+
+void ui::CtrlScrollView::setMovingMultiple(float value)
+{
+	_movingMultiple = value;
+}
+
+float ui::CtrlScrollView::getMovingMultiple() const
+{
+	return _movingMultiple;
 }

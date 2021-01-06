@@ -15,20 +15,16 @@ Mutex::~Mutex()
 void Mutex::lock(const std::string& msg)
 {
 	m_pLock.lock();
-	//PRINT(msg.c_str());
 }
 
 bool Mutex::tryLock(const std::string& msg)
 {
-	bool bRet = m_pLock.try_lock();
-	//PRINT(msg.c_str());
-	return bRet;
+	return m_pLock.try_lock();
 }
 
 void Mutex::unlock(const std::string& msg)
 {
 	m_pLock.unlock();
-	//PRINT(msg.c_str());
 }
 
 //////////////////////////////////////////////////////////////////////////

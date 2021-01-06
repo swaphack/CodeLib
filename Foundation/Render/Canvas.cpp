@@ -22,6 +22,8 @@ Canvas::~Canvas()
 
 void Canvas::draw()
 {
+	sys::TimeClock::startRecord();
+
 	_view->initViewPort();
 	_view->applyConfig();
 	_view->updateView();
@@ -35,11 +37,10 @@ void Canvas::draw()
 	auto top = getCurScene();
 	if (top)
 	{
-		G_TOUCHMANAGER->setRoot(top);
 		top->visit();
 	}
 
-	//GLRender::flush();
+	sys::TimeClock::record();
 }
 
 void Canvas::update(float interval)

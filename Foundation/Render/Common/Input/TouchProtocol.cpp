@@ -1,5 +1,6 @@
 #include "TouchProtocol.h"
 #include "Common/Node/Node.h"
+#include "TouchManager.h"
 
 using namespace render;
 
@@ -13,11 +14,26 @@ TouchProtocol::~TouchProtocol()
 {
 	this->removeAllTouchDelegates();
 	this->removeAllTouchFuncs();
+
+	this->setTouchEnabled(false);
 }
 
 void TouchProtocol::setTouchEnabled(bool status)
 {
+	if (_bTouchEnabled == status)
+	{
+		return;
+	}
+
 	_bTouchEnabled = status;
+	if (status)
+	{
+		G_TOUCHMANAGER->addTarget(this);
+	}
+	else
+	{
+		G_TOUCHMANAGER->removeTarget(this);
+	}
 }
 
 bool TouchProtocol::isTouchEnabled()
@@ -35,28 +51,33 @@ bool render::TouchProtocol::isTouchSwallowed()
 	return _bTouchSwallowed;
 }
 
+void render::TouchProtocol::setClippingEnabled(bool status)
+{
+	_bClippingEnabled = status;
+}
+
+bool render::TouchProtocol::isClippingEnabled()
+{
+	return _bClippingEnabled;
+}
+
 bool render::TouchProtocol::containTouchPoint(const math::Vector2& touchPoint)
 {
 	return false;
 }
 
-void render::TouchProtocol::doSwallowTouchEvent(TouchType type, const math::Vector2& touchPoint, bool include)
+bool render::TouchProtocol::isInFrontOf(const TouchProtocol* target) const
 {
-}
-
-void render::TouchProtocol::doNotSwallowTouchEvent(TouchType type, const math::Vector2& touchPoint, bool include)
-{
+	return false;
 }
 
 bool TouchProtocol::onTouchBegan(const math::Vector2& touchPoint)
 {
 	if (!isTouchEnabled())
 	{
-		dispatchSwallowEvent(TouchType::DOWN, touchPoint, false);
 		return false;
 	}
 	bool include = this->containTouchPoint(touchPoint);
-	_bIncludeTouch = include;
 
 	dispatchTouchEvent(TouchType::DOWN, touchPoint, include);
 
@@ -66,12 +87,6 @@ bool TouchProtocol::onTouchBegan(const math::Vector2& touchPoint)
 bool TouchProtocol::onTouchMoved(const math::Vector2& touchPoint)
 {
 	if (!isTouchEnabled())
-	{
-		dispatchSwallowEvent(TouchType::ON, touchPoint, false);
-		return false;
-	}
-
-	if (!_bIncludeTouch)
 	{
 		return false;
 	}
@@ -87,11 +102,8 @@ bool TouchProtocol::onTouchEnded(const math::Vector2& touchPoint)
 {
 	if (!isTouchEnabled())
 	{
-		dispatchSwallowEvent(TouchType::UP, touchPoint, false);
 		return false;
 	}
-
-	_bIncludeTouch = false;
 
 	bool include = this->containTouchPoint(touchPoint);
 
@@ -105,7 +117,7 @@ void TouchProtocol::addTouchDelegate(TouchType type, sys::Object* object, TOUCH_
 	TouchDelegate del;
 	del.first = object;
 	del.second = handler;
-	_touchDelegates[type] = del;
+	_touchDelegates[type].push_back(del);
 }
 
 void TouchProtocol::removeTouchDelegate(TouchType type)
@@ -129,7 +141,7 @@ void render::TouchProtocol::addTouchFunc(TouchType type, TouchFunc func)
 	{
 		return;
 	}
-	_touchFuncs[type] = func;
+	_touchFuncs[type].push_back(func);
 }
 
 void render::TouchProtocol::removeTouchFunc(TouchType type)
@@ -153,28 +165,20 @@ void TouchProtocol::dispatchTouchEvent(TouchType type, const math::Vector2& touc
 	auto it0 = _touchDelegates.find(type);
 	if (it0 != _touchDelegates.end())
 	{
-		auto item = _touchDelegates[type];
-		((item.first)->*(item.second))(dynamic_cast<render::Node*>(this), touchPoint, include);
+		const auto& items = _touchDelegates[type];
+		for (const auto& item : items)
+		{
+			((item.first)->*(item.second))(dynamic_cast<render::Node*>(this), touchPoint, include);
+		}
 	}
 
 	auto it1 = _touchFuncs.find(type);
 	if (it1 != _touchFuncs.end())
 	{
-		auto item = _touchFuncs[type];
-		item(touchPoint, include);
+		const auto& items = _touchFuncs[type];
+		for (const auto& item : items)
+		{
+			item(touchPoint, include);
+		}
 	}	
-
-	dispatchSwallowEvent(type, touchPoint, include);
-}
-
-void render::TouchProtocol::dispatchSwallowEvent(TouchType type, const math::Vector2& touchPoint, bool include)
-{
-	if (isTouchSwallowed() && include)
-	{
-		doSwallowTouchEvent(type, touchPoint, true);
-	}
-	else
-	{
-		doNotSwallowTouchEvent(type, touchPoint, include);
-	}
 }

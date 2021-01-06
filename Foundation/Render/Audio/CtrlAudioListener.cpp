@@ -32,13 +32,13 @@ bool CtrlAudioListener::init()
 
 	_listenerID = s_ListenerCount++;
 
-	_notify->addListen(NodeNotifyType::SPACE, [this](){
+	addNotifyListener(NodeNotifyType::SPACE, [this](){
 		math::Matrix4x4 mat = this->getWorldMatrix();
 		_listenerBody.position = mat.getPosition();
 		updateListener();
 	});
 
-	_notify->addListen(NodeNotifyType::AUDIO, [this](){
+	addNotifyListener(NodeNotifyType::AUDIO, [this](){
 		updateListener();
 	});
 

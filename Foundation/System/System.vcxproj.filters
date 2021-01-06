@@ -67,9 +67,6 @@
     <Filter Include="IO">
       <UniqueIdentifier>{a8e455b0-2257-4e94-8aae-2821f255f81b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="DateTime">
-      <UniqueIdentifier>{2a110e07-2796-4c92-95c6-ae98387bf92b}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Framework\Workflow">
       <UniqueIdentifier>{80bf64e0-e269-48d9-80a1-4284c28a7522}</UniqueIdentifier>
     </Filter>
@@ -87,6 +84,9 @@
     </Filter>
     <Filter Include="Event">
       <UniqueIdentifier>{0d517976-7d2f-4286-b3d0-73b67baaea08}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Time">
+      <UniqueIdentifier>{2a110e07-2796-4c92-95c6-ae98387bf92b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -409,12 +409,6 @@
     <ClInclude Include="IO\import.h">
       <Filter>IO</Filter>
     </ClInclude>
-    <ClInclude Include="DateTime\Time.h">
-      <Filter>DateTime</Filter>
-    </ClInclude>
-    <ClInclude Include="DateTime\import.h">
-      <Filter>DateTime</Filter>
-    </ClInclude>
     <ClInclude Include="Text\CharsetHelper.h">
       <Filter>Text</Filter>
     </ClInclude>
@@ -579,6 +573,15 @@
     </ClInclude>
     <ClInclude Include="Text\VectorConvert.h">
       <Filter>Text</Filter>
+    </ClInclude>
+    <ClInclude Include="Time\DateTime.h">
+      <Filter>Time</Filter>
+    </ClInclude>
+    <ClInclude Include="Time\import.h">
+      <Filter>Time</Filter>
+    </ClInclude>
+    <ClInclude Include="Time\TimeClock.h">
+      <Filter>Time</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -774,9 +777,6 @@
     <ClCompile Include="IO\File.cpp">
       <Filter>IO</Filter>
     </ClCompile>
-    <ClCompile Include="DateTime\Time.cpp">
-      <Filter>DateTime</Filter>
-    </ClCompile>
     <ClCompile Include="Text\CharsetHelper.cpp">
       <Filter>Text</Filter>
     </ClCompile>
@@ -896,6 +896,12 @@
     </ClCompile>
     <ClCompile Include="Text\VectorConvert.cpp">
       <Filter>Text</Filter>
+    </ClCompile>
+    <ClCompile Include="Time\DateTime.cpp">
+      <Filter>Time</Filter>
+    </ClCompile>
+    <ClCompile Include="Time\TimeClock.cpp">
+      <Filter>Time</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -20,7 +20,7 @@ namespace sys
 		template<class _Fn, class... _Args>
 		void startWithParams(_Fn&& handler, _Args&&... _Ax);
 		// Ö´ĞĞ
-		void start(std::function<void()> handler);
+		void start(const std::function<void()>& handler);
 		// °şÀëÖ´ĞĞ
 		bool detach();
 		// ¶ÂÈûÖ´ĞĞ

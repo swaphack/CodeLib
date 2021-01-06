@@ -24,6 +24,8 @@ void AutoReleasePool::addObject( Object* object )
 	}
 
 	_objects.insert(object);
+
+	setCheckState(true);
 }
 
 void AutoReleasePool::removeObject( Object* object )
@@ -47,6 +49,10 @@ void AutoReleasePool::checkAutoRelease()
 	{
 		return;
 	}
+
+	if (!_bCheckPool) return;
+	_bCheckPool = false;
+
 	std::vector<Object*> removeObjects;
 
 	std::set<Object*>::iterator it = _objects.begin();
@@ -67,6 +73,11 @@ void AutoReleasePool::checkAutoRelease()
 		(*roIter)->dispose();
 		roIter++;
 	}
+}
+
+void sys::AutoReleasePool::setCheckState(bool checked)
+{
+	_bCheckPool = checked;
 }
 
 void AutoReleasePool::startThread(const std::function<void()>& func)

@@ -190,18 +190,41 @@ void Matrix4x4::setRotationByLine(const Vector3& src, const Vector3& dest, float
 
 Matrix4x1 Matrix4x4::operator*(const Matrix4x1& mat)
 {
-	Matrix<float, 4, 4> mat0(*this);
-	Matrix<float, 4, 4> mat1;
-	mat1.setColumn(0, mat.getValue());
-	Matrix4x4 mat2 = mat0 * mat1;
-	return Matrix4x1(mat1[0], mat1[4], mat1[8], mat1[12]);
+	float value[4] = { 0 };
+	value[0] = getValue(0) * mat.getValue(0) + getValue(1) * mat.getValue(1) + getValue(2) * mat.getValue(2) + getValue(3) * mat.getValue(3);
+	value[1] = getValue(4) * mat.getValue(0) + getValue(5) * mat.getValue(1) + getValue(6) * mat.getValue(2) + getValue(7) * mat.getValue(3);
+	value[2] = getValue(8) * mat.getValue(0) + getValue(9) * mat.getValue(1) + getValue(10) * mat.getValue(2) + getValue(11) * mat.getValue(3);
+	value[3] = getValue(12) * mat.getValue(0) + getValue(13) * mat.getValue(1) + getValue(14) * mat.getValue(2) + getValue(15) * mat.getValue(3);
+
+	return Matrix4x1(value);
 }
 
 Matrix4x4 Matrix4x4::operator*(const Matrix4x4& mat)
 {
-	Matrix<float, 4, 4> mat0(*this);
-	Matrix<float, 4, 4> mat1(mat.getValue());
-	return Matrix4x4(mat0 * mat1);
+	float value[16] = { 0 };
+	value[0] = getValue(0) * mat.getValue(0) + getValue(1) * mat.getValue(4) + getValue(2) * mat.getValue(8) + getValue(3) * mat.getValue(12);
+	value[1] = getValue(0) * mat.getValue(1) + getValue(1) * mat.getValue(5) + getValue(2) * mat.getValue(9) + getValue(3) * mat.getValue(13);
+	value[2] = getValue(0) * mat.getValue(2) + getValue(1) * mat.getValue(6) + getValue(2) * mat.getValue(10) + getValue(3) * mat.getValue(14);
+	value[3] = getValue(0) * mat.getValue(3) + getValue(1) * mat.getValue(7) + getValue(2) * mat.getValue(11) + getValue(3) * mat.getValue(15);
+
+	value[4] = getValue(4) * mat.getValue(0) + getValue(5) * mat.getValue(4) + getValue(6) * mat.getValue(8) + getValue(7) * mat.getValue(12);
+	value[5] = getValue(4) * mat.getValue(1) + getValue(5) * mat.getValue(5) + getValue(6) * mat.getValue(9) + getValue(7) * mat.getValue(13);
+	value[6] = getValue(4) * mat.getValue(2) + getValue(5) * mat.getValue(6) + getValue(6) * mat.getValue(10) + getValue(7) * mat.getValue(14);
+	value[7] = getValue(4) * mat.getValue(3) + getValue(5) * mat.getValue(7) + getValue(6) * mat.getValue(11) + getValue(7) * mat.getValue(15);
+
+	value[8] = getValue(8) * mat.getValue(0) + getValue(9) * mat.getValue(4) + getValue(10) * mat.getValue(8) + getValue(11) * mat.getValue(12);
+	value[9] = getValue(8) * mat.getValue(1) + getValue(9) * mat.getValue(5) + getValue(10) * mat.getValue(9) + getValue(11) * mat.getValue(13);
+	value[10] = getValue(8) * mat.getValue(2) + getValue(9) * mat.getValue(6) + getValue(10) * mat.getValue(10) + getValue(11) * mat.getValue(14);
+	value[11] = getValue(8) * mat.getValue(3) + getValue(9) * mat.getValue(7) + getValue(10) * mat.getValue(11) + getValue(11) * mat.getValue(15);
+
+	value[12] = getValue(12) * mat.getValue(0) + getValue(13) * mat.getValue(4) + getValue(14) * mat.getValue(8) + getValue(15) * mat.getValue(12);
+	value[13] = getValue(12) * mat.getValue(1) + getValue(13) * mat.getValue(5) + getValue(14) * mat.getValue(9) + getValue(15) * mat.getValue(13);
+	value[14] = getValue(12) * mat.getValue(2) + getValue(13) * mat.getValue(6) + getValue(14) * mat.getValue(10) + getValue(15) * mat.getValue(14);
+	value[15] = getValue(12) * mat.getValue(3) + getValue(13) * mat.getValue(7) + getValue(14) * mat.getValue(11) + getValue(15) * mat.getValue(15);
+
+
+	
+	return Matrix4x4(value);
 }
 
 Vector3 Matrix4x4::getEularAngle() const
@@ -252,6 +275,11 @@ math::Matrix4x4::Matrix4x4(const Matrix<float, 4, 4>& mat)
 }
 
 math::Matrix4x4::Matrix4x4(const SquareMatrix4& mat)
+{
+	this->assign(mat.getValue());
+}
+
+math::Matrix4x4::Matrix4x4(const SquareMatrix<float, 4>& mat)
 {
 	this->assign(mat.getValue());
 }

@@ -21,7 +21,7 @@ bool CtrlAudioSource3D::init()
 		return false;
 	}
 
-	_notify->addListen(NodeNotifyType::SPACE, [this](){
+	addNotifyListener(NodeNotifyType::SPACE, [this](){
 		FMOD_VECTOR pos;
 		FMOD_VECTOR vel;
 

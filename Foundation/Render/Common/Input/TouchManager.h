@@ -1,11 +1,11 @@
 #pragma once
 
 #include "system.h"
-#include <vector>
+#include <list>
 
 namespace render
 {
-	class Node;
+	class TouchProtocol;
 
 	// 触摸管理
 	class TouchManager 
@@ -15,13 +15,16 @@ namespace render
 		virtual ~TouchManager();
 	public:
 		// 添加触摸代理
-		void setRoot(Node* protocol);
-
+		void addTarget(TouchProtocol* target);
+		void removeTarget(TouchProtocol* target);
+	public:
 		void onTouchBegan(const math::Vector2& touchPoint);
 		void onTouchMoved(const math::Vector2& touchPoint);
 		void onTouchEnded(const math::Vector2& touchPoint);
 	private:
-		Node* _root = nullptr;
+
+		std::vector<TouchProtocol*> _targets;
+		std::vector<TouchProtocol*> _temps;
 	};
 
 	#define G_TOUCHMANAGER sys::Instance<TouchManager>::getInstance()

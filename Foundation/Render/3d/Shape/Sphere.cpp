@@ -23,7 +23,7 @@ bool render::Sphere::init()
 		return false;
 	}
 
-	_notify->addListen(NodeNotifyType::GEOMETRY, [this]() {
+	addNotifyListener(NodeNotifyType::GEOMETRY, [this]() {
 		updateSphere();
 	});
 

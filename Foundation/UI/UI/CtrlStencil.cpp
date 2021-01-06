@@ -102,7 +102,7 @@ void ui::CtrlStencil::afterDrawNode()
 	render::GLState::disable(EnableMode::STENCIL_TEST);
 	render::GLState::setStencilMask(0x0);
 
-	if (_bClip)
+	if (isClippingEnabled())
 	{
 		render::GLState::disable(EnableMode::SCISSOR_TEST);
 	}

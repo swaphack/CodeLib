@@ -18,7 +18,7 @@ namespace render
 		// 务必调用，包含属性修改时通知
 		virtual bool init();
 	public:
-		virtual bool containTouchPoint(const math::Vector2& touchPoint);
+		virtual bool containPoint(const math::Vector2& touchPoint);
 	protected:
 		void calBoxData();
 		/**

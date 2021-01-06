@@ -36,11 +36,11 @@ bool Camera::init()
 
 	this->setZDirection(DirectionProtocol::ZDirectionType::INSIDE);
 
-	_notify->addListen(NodeNotifyType::VIEWSIZE, [this](){
+	addNotifyListener(NodeNotifyType::VIEWSIZE, [this](){
 		this->updateViewPort();
 	});
 
-	_notify->addListen(NodeNotifyType::SPACE, [this]() {
+	addNotifyListener(NodeNotifyType::SPACE, [this]() {
 		this->onCameraSpaceChange();
 	});
 

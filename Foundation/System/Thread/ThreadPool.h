@@ -21,7 +21,7 @@ namespace sys
 	public:
 		static ThreadPool* getInstance();
 		// 创建一个不带参数的线程
-		Thread* createThread(std::function<void()> handler);
+		Thread* createThread(const std::function<void()>& handler);
 
 		// 创建一个带参数的线程
 		template<class _Fn, class... _Args>

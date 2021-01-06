@@ -17,7 +17,7 @@ bool render::PariticleNode::init()
 		return false;
 	}
 
-	_notify->addListen(NodeNotifyType::PARTICLE, [this]() {
+	addNotifyListener(NodeNotifyType::GEOMETRY, [this]() {
 		this->updateParticleParameter();
 	});
 
@@ -55,7 +55,7 @@ void render::PariticleNode::unregisterScheduler()
 
 void render::PariticleNode::onPariticleChange()
 {
-	this->notify(NodeNotifyType::PARTICLE);
+	this->notify(NodeNotifyType::GEOMETRY);
 }
 
 void render::PariticleNode::updateParticleParameter()

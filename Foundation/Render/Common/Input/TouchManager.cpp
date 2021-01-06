@@ -12,9 +12,27 @@ TouchManager::~TouchManager()
 {
 }
 
-void render::TouchManager::setRoot(Node* protocol)
+void render::TouchManager::addTarget(TouchProtocol* target)
 {
-	_root = protocol;
+	if (target == nullptr)
+	{
+		return;
+	}
+	_targets.push_back(target);
+}
+
+void render::TouchManager::removeTarget(TouchProtocol* target)
+{
+	if (target == nullptr)
+	{
+		return;
+	}
+
+	auto it = std::find(_targets.begin(), _targets.end(), target);
+	if (it != _targets.end())
+	{
+		_targets.erase(it);
+	}
 }
 
 void TouchManager::onTouchBegan(const math::Vector2& touchPoint)
@@ -23,24 +41,50 @@ void TouchManager::onTouchBegan(const math::Vector2& touchPoint)
 // 	x = x / Tool::getGLViewSize().width;
 // 	y = y / Tool::getGLViewSize().height;
 
-	if (_root != nullptr)
+	_temps.clear();
+
+	for (auto item : _targets)
 	{
-		_root->onTouchBegan(touchPoint);
+		if (item->containTouchPoint(touchPoint))
+		{
+			_temps.push_back(item);
+		}
+		else
+		{
+			item->dispatchTouchEvent(TouchType::DOWN, touchPoint, false);
+		}
+	}
+
+	// 判断两对象的优先级
+	std::sort(_temps.begin(), _temps.end(), [](const TouchProtocol* a, const TouchProtocol* b)
+	{
+		return a->isInFrontOf(b);
+	});
+
+	for (auto item : _temps)
+	{
+		//item->onTouchBegan(touchPoint);
+		item->dispatchTouchEvent(TouchType::DOWN, touchPoint, true);
+		// 吞噬点击
+		if (item->isTouchSwallowed())
+		{
+			break;
+		}
 	}
 }
 
 void TouchManager::onTouchMoved(const math::Vector2& touchPoint)
 {
-	if (_root != nullptr)
+	for (auto item : _temps)
 	{
-		_root->onTouchMoved(touchPoint);
+		item->onTouchMoved(touchPoint);
 	}
 }
 
 void TouchManager::onTouchEnded(const math::Vector2& touchPoint)
 {
-	if (_root != nullptr)
+	for (auto item : _temps)
 	{
-		_root->onTouchEnded(touchPoint);
+		item->onTouchEnded(touchPoint);
 	}
 }
