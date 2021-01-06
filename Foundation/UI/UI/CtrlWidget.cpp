@@ -213,13 +213,16 @@ void ui::CtrlWidget::removeAllClickFuncs()
 
 void ui::CtrlWidget::onCtrlWidgetBodyChange()
 {
-	float x0 = _realRectPoints.leftDown.getX();
-	float y0 = _realRectPoints.leftDown.getY();
-	float x1 = _realRectPoints.rightDown.getX();
-	float y1 = _realRectPoints.leftUp.getY();
+	if (isClippingEnabled())
+	{
+		float x0 = _realRectPoints.leftDown.getX();
+		float y0 = _realRectPoints.leftDown.getY();
+		float x1 = _realRectPoints.rightDown.getX();
+		float y1 = _realRectPoints.leftUp.getY();
 
-	_clipRect.setOrigin(x0, y0);
-	_clipRect.setSize(x1 - x0, y1 - y0);
+		_clipRect.setOrigin(x0, y0);
+		_clipRect.setSize(x1 - x0, y1 - y0);
+	}
 }
 
 void ui::CtrlWidget::broadcastBodyChange()

@@ -96,15 +96,6 @@ namespace ui
 		*	移除所有点击事件
 		*/
 		void removeAllClickFuncs();
-	public:
-		/**
-		*	是否裁剪
-		*/
-		void setClip(bool bClip);
-		/**
-		*	是否裁剪
-		*/
-		bool isClip();
 	protected:
 		virtual void beforeDrawNode();
 		/**

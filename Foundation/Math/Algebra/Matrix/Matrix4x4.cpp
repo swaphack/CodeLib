@@ -479,11 +479,8 @@ math::Matrix4x4 math::Matrix4x4::getTSR(const Vector3& translate, const Vector3&
 
 Vector3 math::Matrix4x4::transpose(const Vector3& src, const Matrix4x4& mat)
 {
-	//printf("%s\n", mat.toString().c_str());
-
 	Matrix1x4 srcMatrix(src);
 	Matrix1x4 result = srcMatrix * mat;
-	//printf("%s\n", result.toString().c_str());
 	Vector3 pos = (Vector3)result;
 	return pos;
 }

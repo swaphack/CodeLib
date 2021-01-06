@@ -76,10 +76,13 @@ void render::DrawNode2D::calRealRectPoints()
 {
 	Tool::calRect(math::Vector3(), _volume, _anchor, _rectPoints);
 
-	//_realRectPoints.leftDown = this->convertLocalPostitionToWorld(_rectPoints.leftDown);
-	//_realRectPoints.rightDown = this->convertLocalPostitionToWorld(_rectPoints.rightDown);
-	//_realRectPoints.rightUp = this->convertLocalPostitionToWorld(_rectPoints.rightUp);
-	//_realRectPoints.leftUp = this->convertLocalPostitionToWorld(_rectPoints.leftUp);
+	if (isClippingEnabled())
+	{
+		_realRectPoints.leftDown = this->convertLocalPostitionToWorld(_rectPoints.leftDown);
+		_realRectPoints.rightDown = this->convertLocalPostitionToWorld(_rectPoints.rightDown);
+		_realRectPoints.rightUp = this->convertLocalPostitionToWorld(_rectPoints.rightUp);
+		_realRectPoints.leftUp = this->convertLocalPostitionToWorld(_rectPoints.leftUp);
+	}	
 }
 
 void render::DrawNode2D::onDrawNode2DBodyChange()
