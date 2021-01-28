@@ -53,7 +53,8 @@ void ui::CtrlFile::save()
 
 void ui::CtrlFile::saveTo(const std::string& filepath)
 {
-	UIProxy::getInstance()->saveFile(this, filepath, m_sViewSize);
+	if (m_pRootWidget == nullptr) return;
+	UIProxy::getInstance()->saveFile(m_pRootWidget, filepath, m_sViewSize);
 }
 
 LayoutDirection CtrlFile::getLayoutDirection()
