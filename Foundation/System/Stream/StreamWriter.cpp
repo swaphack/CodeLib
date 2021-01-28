@@ -53,6 +53,18 @@ void sys::StreamWriter::writeData(const void* data, uint32_t size)
 	setCursorAndLength(getCursor() + size);
 }
 
+void sys::StreamWriter::writeString(const char* data, uint32_t size)
+{
+	while (getCursor() + size > this->getCapacity())
+	{
+		this->realloct(size + this->getCursor() + 1);
+	}
+
+	memcpy(getPtr(), data, size);
+
+	setCursorAndLength(getCursor() + size);
+}
+
 void StreamWriter::writeUInt16( uint16_t data )
 {
 	this->write<uint16_t>(data);

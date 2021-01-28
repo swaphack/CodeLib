@@ -15,22 +15,22 @@ namespace sys
 		StreamWriter(const void* data, size_t size);
 		virtual ~StreamWriter();
 	public:
-		void writeInt8(char data);
-		void writeUInt8(uint8_t data);
-		void writeInt16(int16_t data);
-		void writeUInt16(uint16_t data);
-		void writeInt32(int32_t data);
-		void writeUInt32(uint32_t data);
-		void writeInt64(int64_t data);
-		void writeUInt64(uint64_t data);
-		void writeFloat(float data);
-		void writeDouble(double data);
-		void writeData(const void* data, uint32_t size);
-		void writeString(const char* data, uint32_t size);
-		void writeString(const std::string& data);
+		virtual void writeInt8(char data);
+		virtual void writeUInt8(uint8_t data);
+		virtual void writeInt16(int16_t data);
+		virtual void writeUInt16(uint16_t data);
+		virtual void writeInt32(int32_t data);
+		virtual void writeUInt32(uint32_t data);
+		virtual void writeInt64(int64_t data);
+		virtual void writeUInt64(uint64_t data);
+		virtual void writeFloat(float data);
+		virtual void writeDouble(double data);
+		virtual void writeData(const void* data, uint32_t size);
+		virtual void writeString(const char* data, uint32_t size);
+		virtual void writeString(const std::string& data);
 	public:
 		template<typename T>
-		void write(T data);
+		void write(const T& data);
 
 		void setCursorAndLength(size_t pos);
 	private:
@@ -38,7 +38,7 @@ namespace sys
 	};
 
 	template<typename T>
-	void StreamWriter::write( T data )
+	void StreamWriter::write(const T& data )
 	{
 		while ((int32_t)(getCursor() + sizeof(data)) > this->getCapacity())
 		{

@@ -44,7 +44,7 @@ namespace render
 	protected:
 		CtrlAudioGeometryPolygon* addPolygon(const std::vector<math::Vector3>& vertexes);
 		CtrlAudioGeometryPolygon* addPolygon(const RectPoints& vertexes);
-		const RectPoints& getRectVertex(int i);
+		const RectPoints& getLocalRectVertex(int i);
 		void onGeometryChange();
 		void onPolygonsChange();
 	private:

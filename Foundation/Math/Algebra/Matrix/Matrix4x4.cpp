@@ -365,6 +365,12 @@ math::Matrix4x4::operator SquareMatrix4()
 {
 	return SquareMatrix4(*this);
 }
+/*
+Matrix4x4 math::Matrix4x4::getInverse()
+{
+	float value[16] = { 0 };
+}
+*/
 
 math::Matrix4x4 math::Matrix4x4::ortho(float left, float right, float bottom, float top,
 	float znear, float zfar)

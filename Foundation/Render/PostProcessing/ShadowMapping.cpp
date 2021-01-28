@@ -123,8 +123,8 @@ void render::ShadowMapping::afterDrawNode()
 
 void render::ShadowMapping::updateShadowMapping()
 {
-	int width = _rectPoints.getWidth();
-	int height = _rectPoints.getHeight();
+	int width = _localRectPoints.getWidth();
+	int height = _localRectPoints.getHeight();
 	if (width == 0 || height == 0)
 	{
 		return;

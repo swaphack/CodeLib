@@ -41,7 +41,7 @@ void ue::SinglePanel::updatePosition(const ui::CtrlWidget* item, sys::CSSDirecti
 		return;
 	}
 
-	auto pRectPoints = &item->getRectVertex();
+	auto pRectPoints = &item->getLocalRectVertex();
 
 	if (eDir == sys::CSSDirection::Top)
 	{

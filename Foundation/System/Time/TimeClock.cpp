@@ -115,7 +115,7 @@ void sys::TimeClock::record()
 {
 	auto time = *getNow();
 
-	PRINT("Different Time %lld\n", time - _recordTime);
+	//PRINT("Different Time %lld\n", time - _recordTime);
 
 	_recordTime = time;
 }

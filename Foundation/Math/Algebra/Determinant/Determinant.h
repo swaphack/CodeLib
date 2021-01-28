@@ -121,7 +121,6 @@ namespace math
 		{
 			assert(i >= 0 && j >= 0 && i < Order && j < Order);
 
-			//int order = getOrder() - 1;
 			Determinant<Order - 1> det;
 			int dn = 0;
 			int dm = 0;
@@ -174,40 +173,12 @@ namespace math
 
 			return count;
 		}
-
-		/*
-		float getMagnitude()
-		{
-			assert(getOrder() > 0);
-			if (getOrder() == 1)
-			{
-				return _values[0][0];
-			}
-			else if (getOrder() == 2)
-			{
-				return _values[0][0] * _values[1][1] - _values[0][1] * _values[1][0];
-			}
-			else
-			{
-				float mag = 0;
-				for (int i = 0; i < getOrder(); i++)
-				{
-					int len = getOrder() - 1;
-					int x = 0;
-					Determinant<Order - 1> det = getMinor(0, i);
-					float k = getValue((int)0, i) * det.getMagnitude() * powf(-1.0f, i);
-					mag += k;
-				}
-
-				return mag;
-			}
-		}
-		*/
 	};
 
 	typedef Determinant<1> Determinant1;
 	typedef Determinant<2> Determinant2;
 	typedef Determinant<3> Determinant3;
+	typedef Determinant<4> Determinant4;
 
 	static float getDetMagnitude(const Determinant1& value)
 	{
@@ -216,7 +187,15 @@ namespace math
 
 	static float getDetMagnitude(const Determinant2& value)
 	{
-		return value.getValue(0) * value.getValue(3) - value.getValue(1) * value.getValue(2);
+		return value.getValue(0) * value.getValue(3) 
+			- value.getValue(1) * value.getValue(2);
+	}
+
+	static float getDetMagnitude(const Determinant3& value)
+	{
+		return value.getValue(0) * (value.getValue(4) * value.getValue(8) - value.getValue(5) * value.getValue(7))
+			- value.getValue(1) * (value.getValue(3) * value.getValue(8) - value.getValue(5) * value.getValue(6))
+			+ value.getValue(2) * (value.getValue(3) * value.getValue(7) - value.getValue(4) * value.getValue(6));
 	}
 
 	template <const int N>

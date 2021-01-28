@@ -30,13 +30,13 @@ namespace render
 		bool isMeshVisible() const;
 	public:
 		/**
-		*	获取矩形框
+		*	获取本地矩形框
 		*/
-		const RectPoints& getRectVertex() const;
+		const RectPoints& getLocalRectVertex() const;
 		/**
-		*	获取实际矩形框
+		*	获取世界矩形框
 		*/
-		const RectPoints& getRealRectVertex() const;
+		const RectPoints& getWorldRectVertex() const;
 		/**
 		*	坐标是否在当前对象内
 		*/
@@ -71,10 +71,10 @@ namespace render
 	protected:
 		// 是否显示网格
 		bool _bMeshVisible = false;
-		// 矩形框
-		RectPoints _rectPoints;
-		// 实际矩形框
-		RectPoints _realRectPoints;
+		// 本地矩形框
+		RectPoints _localRectPoints;
+		// 世界矩形框
+		RectPoints _worldRectPoints;
 		// 矩形坐标
 		RectVertex _rectVertex;
 	};

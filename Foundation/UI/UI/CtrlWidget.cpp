@@ -215,10 +215,10 @@ void ui::CtrlWidget::onCtrlWidgetBodyChange()
 {
 	if (isClippingEnabled())
 	{
-		float x0 = _realRectPoints.leftDown.getX();
-		float y0 = _realRectPoints.leftDown.getY();
-		float x1 = _realRectPoints.rightDown.getX();
-		float y1 = _realRectPoints.leftUp.getY();
+		float x0 = _worldRectPoints.leftDown.getX();
+		float y0 = _worldRectPoints.leftDown.getY();
+		float x1 = _worldRectPoints.rightDown.getX();
+		float y1 = _worldRectPoints.leftUp.getY();
 
 		_clipRect.setOrigin(x0, y0);
 		_clipRect.setSize(x1 - x0, y1 - y0);

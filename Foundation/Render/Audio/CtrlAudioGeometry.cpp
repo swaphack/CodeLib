@@ -266,7 +266,7 @@ void CtrlAudioGeometry::onPolygonsChange()
 	for (int i = 0; i < (int)CubeFace::MAX; i++)
 	{
 		CtrlAudioGeometryPolygon* polygon = getPolygon((CubeFace)i);
-		RectPoints rectVertex = getRectVertex(i);
+		RectPoints rectVertex = getLocalRectVertex(i);
 		if (polygon == nullptr)
 		{
 			this->addPolygon(rectVertex);
@@ -278,7 +278,7 @@ void CtrlAudioGeometry::onPolygonsChange()
 	}
 }
 
-const RectPoints& CtrlAudioGeometry::getRectVertex(int i)
+const RectPoints& CtrlAudioGeometry::getLocalRectVertex(int i)
 {
 	if (i < 0 || i >= (int)CubeFace::MAX)
 	{

@@ -490,7 +490,10 @@ void Node::calRealSpaceByMatrix()
 		}
 	//});
 
-	//_worldInverseMatrix = _worldMatrix.getInverse();
+	//if (isClippingEnabled())
+	{
+		_worldInverseMatrix = _worldMatrix.getInverse();
+	}
 }
 
 void Node::onSpaceChange()
@@ -521,9 +524,7 @@ const math::Matrix4x4& Node::getLocalMatrix() const
 
 math::Vector3 render::Node::convertWorldPostitionToLocal(const math::Vector3& point)
 {
-	math::Matrix4x4 mat = _worldMatrix.getInverse();
-
-	return math::Matrix4x4::transpose(point, mat);
+	return math::Matrix4x4::transpose(point, _worldInverseMatrix);
 }
 
 math::Vector3 render::Node::convertLocalPostitionToWorld(const math::Vector3& point)
@@ -540,6 +541,7 @@ bool render::Node::isSkipDraw() const
 {
 	return _bSkipDraw;
 }
+
 
 void render::Node::updateNode()
 {

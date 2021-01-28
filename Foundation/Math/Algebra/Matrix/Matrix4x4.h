@@ -132,6 +132,9 @@ namespace math
 
 		operator SquareMatrix4();
 	public:
+		// Äæ¾ØÕó
+		//Matrix4x4 getInverse();
+	public:
 		//--------------------------------------------------------------------------------
 		// set a ortho (right hand)
 		// (left, right, bottom, top, near, far)

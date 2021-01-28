@@ -52,14 +52,14 @@ bool render::DrawNode2D::isMeshVisible() const
 	return _bMeshVisible;
 }
 
-const render::RectPoints& render::DrawNode2D::getRectVertex() const
+const render::RectPoints& render::DrawNode2D::getLocalRectVertex() const
 {
-	return _rectPoints;
+	return _localRectPoints;
 }
 
-const render::RectPoints& render::DrawNode2D::getRealRectVertex() const
+const render::RectPoints& render::DrawNode2D::getWorldRectVertex() const
 {
-	return _realRectPoints;
+	return _worldRectPoints;
 }
 
 #include "Common/View/Camera.h"
@@ -67,21 +67,21 @@ const render::RectPoints& render::DrawNode2D::getRealRectVertex() const
 bool render::DrawNode2D::containPoint(const math::Vector2& touchPoint)
 {
 	math::Vector3 localPosition = this->convertWorldPostitionToLocal(touchPoint);
-	return _rectPoints.containPointByPolygon(localPosition.getX(), localPosition.getY());
+	return _localRectPoints.containPointByPolygon(localPosition.getX(), localPosition.getY());
 
 	//return _realRectPoints.containPointByPolygon(touchPoint.getX(), touchPoint.getY());
 }
 
 void render::DrawNode2D::calRealRectPoints()
 {
-	Tool::calRect(math::Vector3(), _volume, _anchor, _rectPoints);
+	Tool::calRect(math::Vector3(), _volume, _anchor, _localRectPoints);
 
 	if (isClippingEnabled())
 	{
-		_realRectPoints.leftDown = this->convertLocalPostitionToWorld(_rectPoints.leftDown);
-		_realRectPoints.rightDown = this->convertLocalPostitionToWorld(_rectPoints.rightDown);
-		_realRectPoints.rightUp = this->convertLocalPostitionToWorld(_rectPoints.rightUp);
-		_realRectPoints.leftUp = this->convertLocalPostitionToWorld(_rectPoints.leftUp);
+		_worldRectPoints.leftDown = this->convertLocalPostitionToWorld(_localRectPoints.leftDown);
+		_worldRectPoints.rightDown = this->convertLocalPostitionToWorld(_localRectPoints.rightDown);
+		_worldRectPoints.rightUp = this->convertLocalPostitionToWorld(_localRectPoints.rightUp);
+		_worldRectPoints.leftUp = this->convertLocalPostitionToWorld(_localRectPoints.leftUp);
 	}	
 }
 
@@ -126,10 +126,10 @@ void render::DrawNode2D::drawRect()
 	GLState::setLineWidth(_boxWidth);
 
 	GLVertex::beginMode(ShapeMode::LINE_LOOP);
-	GLVertex::setVertex(_rectPoints.leftDown);
-	GLVertex::setVertex(_rectPoints.rightDown);
-	GLVertex::setVertex(_rectPoints.rightUp);
-	GLVertex::setVertex(_rectPoints.leftUp);
+	GLVertex::setVertex(_localRectPoints.leftDown);
+	GLVertex::setVertex(_localRectPoints.rightDown);
+	GLVertex::setVertex(_localRectPoints.rightUp);
+	GLVertex::setVertex(_localRectPoints.leftUp);
 	GLVertex::endMode();
 }
 
