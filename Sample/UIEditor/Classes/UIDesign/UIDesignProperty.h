@@ -37,7 +37,7 @@ namespace ue
 		virtual void initText();
 	private:
 		// 目标
-		ui::CtrlWidget* m_pTargetItem = nullptr;
+		render::Node* m_pTargetItem = nullptr;
 		// 类型
 		ui::CtrlText* m_pTextType = nullptr;
 		// 名称

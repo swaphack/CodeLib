@@ -24,6 +24,7 @@ namespace ue
 		// 清空
 		void clear();
 	};
+
 	// 目录栏
 	class UIDesignDirectory : public Panel
 	{
@@ -87,6 +88,6 @@ namespace ue
 		// 对折信息
 		std::map<std::string, bool> _dirFoldInfo;
 
-		ui::CtrlListView* _directory = nullptr;
+		ui::CtrlListView* _listview = nullptr;
 	};
 }

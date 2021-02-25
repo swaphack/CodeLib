@@ -53,7 +53,7 @@ bool ue::UIDesignDirectory::init()
 
 void ue::UIDesignDirectory::initUI()
 {
-	m_pRootWidget->findWidgetByName("directory", _directory);
+	m_pRootWidget->findWidgetByName("directory", _listview);
 	this->setDirectory("H:/Github/CodeLib/Sample/UIEditor/Resource/");
 }
 
@@ -77,9 +77,10 @@ void ue::UIDesignDirectory::setDirectory(const std::string& root)
 
 void ue::UIDesignDirectory::updateRootPanel()
 {
-	_directory->removeAllItems();
+	_listview->removeAllItems();
+	_dirFoldInfo.clear();
 
-	this->updateRootList(_directory, _dirDetail);
+	this->updateRootList(_listview, _dirDetail);
 }
 
 void ue::UIDesignDirectory::updateRootList(ui::CtrlListView* layout, const DirDetail& detail, int layer)
@@ -97,8 +98,6 @@ void ue::UIDesignDirectory::updateRootList(ui::CtrlListView* layout, const DirDe
 	bool isFolded = isDirFolded(detail.fullpath);
 
 	std::string fullpath = std::string(layer + 1, ' ') + detail.name;
-
-	float height = 0;
 
 	auto pItem = createDirItem(CONST_ITEM_HEIGHT, fullpath, detail.fullpath);
 	if (pItem)

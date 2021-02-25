@@ -35,6 +35,26 @@ bool ue::UIDesignView::init()
 		}
 	});
 
+	G_PANELEVT->addEventListener(PANEL_SELECT_NODE_TREE, this, [this](const sys::Event* evt) {
+		if (evt && evt->getUserData())
+		{
+			std::vector<int> vecIndex = *((std::vector<int>*)evt->getUserData());
+
+			ui::CtrlWidget* pTarget = nullptr;
+			render::Node* pTemp = m_pUIFile;
+			for (size_t i = 0; i < vecIndex.size(); i++)
+			{
+				if (pTemp == nullptr) return;
+				pTemp = pTemp->getChildByIndex(vecIndex[i]);
+			}
+
+			if (pTemp)
+			{
+				this->setSelectTarget(dynamic_cast<ui::CtrlWidget*>(pTemp));
+			}
+		}
+	});
+
 
 	G_KEYBOARDMANAGER->addKeyboardFunc(this, this, [this](sys::BoardKey key, sys::ButtonStatus status) {
 		if (!G_KEYCHAR->isControlEnabled())
@@ -74,6 +94,36 @@ void ue::UIDesignView::unselectTarget()
 	}
 }
 
+void ue::UIDesignView::selectTarget(ui::CtrlWidget* target)
+{
+	if (target == nullptr) return;
+
+	m_pSelectedTarget = target;
+	target->setBoxWidth(1.0f);
+	target->setBoxColor(phy::Color4B(255, 255, 255, 255));
+	target->setBoxVisible(true);
+}
+
+void ue::UIDesignView::setSelectTarget(ui::CtrlWidget* target)
+{
+	if (m_pSelectedTarget == nullptr)
+	{
+		selectTarget(target);
+	}
+	else
+	{
+		if (m_pSelectedTarget == target)
+		{
+			unselectTarget();
+		}
+		else
+		{
+			unselectTarget();
+			selectTarget(target);
+		}
+	}
+}
+
 ui::CtrlWidget* ue::UIDesignView::getSelectedTarget() const
 {
 	return m_pSelectedTarget;
@@ -98,6 +148,7 @@ void ue::UIDesignView::setDesignFile(const std::string& filepath)
 	if (m_pUIFile)
 	{
 		m_pViewScene->addWidget(m_pUIFile);
+		G_PANELEVT->setRoot(m_pUIFile);
 		m_pUIFile->refreshLayout();
 	}
 }
@@ -144,27 +195,7 @@ bool ue::UIDesignView::touchFrontWidget(ui::CtrlWidget* widget, const math::Vect
 		{
 			return false;
 		}
-		if (m_pSelectedTarget == nullptr)
-		{
-			m_pSelectedTarget = widget;
-			widget->setBoxWidth(1.0f);
-			widget->setBoxColor(phy::Color4B(255, 255, 255, 255));
-			widget->setBoxVisible(true);
-		}
-		else
-		{
-			if (m_pSelectedTarget == widget)
-			{
-				m_pSelectedTarget->setBoxVisible(false);
-				m_pSelectedTarget = nullptr;
-			}
-			else
-			{
-				m_pSelectedTarget->setBoxVisible(false);
-				m_pSelectedTarget = widget;
-				m_pSelectedTarget->setBoxVisible(true);
-			}
-		}
+		setSelectTarget(widget);
 	}
 
 	return true;

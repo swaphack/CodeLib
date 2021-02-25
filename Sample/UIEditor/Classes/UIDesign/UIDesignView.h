@@ -18,6 +18,10 @@ namespace ue
 		*/
 		void unselectTarget();
 		/**
+		*	设置选中项
+		*/
+		void setSelectTarget(ui::CtrlWidget* target);
+		/**
 		*	获取取消选中
 		*/
 		ui::CtrlWidget* getSelectedTarget() const;
@@ -43,6 +47,10 @@ namespace ue
 		*	点击最前面的组件
 		*/
 		bool touchFrontWidget(ui::CtrlWidget* widget, const math::Vector2& touchPoint);
+		/**
+		*	选中
+		*/
+		void selectTarget(ui::CtrlWidget* target);
 	protected:
 		void saveFile();
 		void reloadFile();

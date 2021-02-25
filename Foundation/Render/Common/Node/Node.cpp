@@ -174,6 +174,11 @@ Node* Node::getChildByName(const std::string& name) const
 	return nullptr;
 }
 
+int Node::getChildrenCount() const
+{
+	return _children.size();
+}
+
 Node* Node::getFirstChild() const
 {
 	if (_children.size() == 0)

@@ -71,6 +71,8 @@ namespace render
 		// 根据名称获取子节点
 		Node* getChildByName(const std::string& name) const;
 	public:
+		// 获取子节点个数
+		int getChildrenCount() const;
 		// 获取第一个子节点
 		Node* getFirstChild() const;
 		// 按照索引查找子节点

@@ -65,6 +65,6 @@ namespace ue
 		// ∂‘’€–≈œ¢
 		std::map<std::string, bool> _dirFoldInfo;
 
-		ui::CtrlListView* _directory = nullptr;
+		ui::CtrlListView* _listview = nullptr;
 	};
 }

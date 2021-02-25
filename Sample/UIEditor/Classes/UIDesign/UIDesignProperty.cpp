@@ -20,7 +20,7 @@ bool ue::UIDesignProperty::init()
 	G_PANELEVT->addEventListener(PANEL_SELECT_WIDGET, this, [this](const sys::Event* evt) {
 		if (evt)
 		{
-			m_pTargetItem = (ui::CtrlWidget*)evt->getUserData();
+			m_pTargetItem = (render::Node*)evt->getUserData();
 			this->loadProperty();
 		}
 	});
@@ -31,11 +31,10 @@ bool ue::UIDesignProperty::init()
 
 void ue::UIDesignProperty::loadProperty()
 {
-	if (m_pTargetItem == nullptr || m_pTargetItem->getLayoutItem() == nullptr)
+	if (m_pTargetItem == nullptr)
 	{
 		return;
 	}
-	auto layoutItem = m_pTargetItem->getLayoutItem();
 
 	if (m_pTextType)
 	{
@@ -90,6 +89,11 @@ void ue::UIDesignProperty::loadProperty()
 	{
 		m_pEditRotateZ->setString(getCString("%0.2f", m_pTargetItem->getRotationZ()));
 	}
+
+	auto pWidget = dynamic_cast<ui::CtrlWidget*>(m_pTargetItem);
+	if (pWidget == nullptr) return;
+
+	auto layoutItem = pWidget->getLayoutItem();
 
 	if (m_pBtnMarginTop)
 	{
@@ -147,11 +151,10 @@ void ue::UIDesignProperty::loadProperty()
 
 void ue::UIDesignProperty::saveProperty()
 {
-	if (m_pTargetItem == nullptr || m_pTargetItem->getLayoutItem() == nullptr)
+	if (m_pTargetItem == nullptr)
 	{
 		return;
 	}
-	auto playoutItem = m_pTargetItem->getLayoutItem();
 
 	if (m_pEditTextName)
 	{
@@ -206,69 +209,74 @@ void ue::UIDesignProperty::saveProperty()
 		m_pTargetItem->setRotationZ(value);
 	}
 
+	auto pWidget = dynamic_cast<ui::CtrlWidget*>(m_pTargetItem);
+	if (pWidget == nullptr) return;
+
+	auto layoutItem = pWidget->getLayoutItem();
+
 	if (m_pBtnMarginTop)
 	{
-		playoutItem->getMarginState().Top = m_pBtnMarginTop->isSelected();
+		layoutItem->getMarginState().Top = m_pBtnMarginTop->isSelected();
 	}
 
 	if (m_pBtnMarginRight)
 	{
-		playoutItem->getMarginState().Right = m_pBtnMarginRight->isSelected();
+		layoutItem->getMarginState().Right = m_pBtnMarginRight->isSelected();
 	}
 
 	if (m_pBtnMarginBottom)
 	{
-		playoutItem->getMarginState().Bottom = m_pBtnMarginBottom->isSelected();
+		layoutItem->getMarginState().Bottom = m_pBtnMarginBottom->isSelected();
 	}
 
 	if (m_pBtnMarginLeft)
 	{
-		playoutItem->getMarginState().Left = m_pBtnMarginLeft->isSelected();
+		layoutItem->getMarginState().Left = m_pBtnMarginLeft->isSelected();
 	}
 
 	if (m_pEditTopValue)
 	{
 		std::string strText = m_pEditTopValue->getString();
 		sys::CSSNumber number = sys::CSSNumber::load(strText);
-		playoutItem->getMargin().setTop(number);
+		layoutItem->getMargin().setTop(number);
 	}
 
 	if (m_pEditRightValue)
 	{
 		std::string strText = m_pEditRightValue->getString();
 		sys::CSSNumber number = sys::CSSNumber::load(strText);
-		playoutItem->getMargin().setRight(number);
+		layoutItem->getMargin().setRight(number);
 	}
 
 	if (m_pEditBottomValue)
 	{
 		std::string strText = m_pEditBottomValue->getString();
 		sys::CSSNumber number = sys::CSSNumber::load(strText);
-		playoutItem->getMargin().setBottom(number);
+		layoutItem->getMargin().setBottom(number);
 	}
 
 	if (m_pEditLeftValue)
 	{
 		std::string strText = m_pEditLeftValue->getString();
 		sys::CSSNumber number = sys::CSSNumber::load(strText);
-		playoutItem->getMargin().setLeft(number);
+		layoutItem->getMargin().setLeft(number);
 	}
 
 	if (m_pEditWidthValue)
 	{
 		std::string strText = m_pEditWidthValue->getString();
 		sys::CSSNumber number = sys::CSSNumber::load(strText);
-		playoutItem->getSize().setWidth(number);
+		layoutItem->getSize().setWidth(number);
 	}
 
 	if (m_pEditHeightValue)
 	{
 		std::string strText = m_pEditHeightValue->getString();
 		sys::CSSNumber number = sys::CSSNumber::load(strText);
-		playoutItem->getSize().setHeight(number);
+		layoutItem->getSize().setHeight(number);
 	}
 
-	playoutItem->refresh();
+	layoutItem->refresh();
 
 	this->loadProperty();
 }
