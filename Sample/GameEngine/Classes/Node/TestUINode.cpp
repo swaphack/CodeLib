@@ -143,7 +143,7 @@ void TestUINode::testScissor()
 	//pLayout->getBackgroundImage()->setVisible(false);
  	pLayout->setBackgroundImagePath("Resource/Image/1.jpg");
  	Utility::loadDefaultShader(pLayout->getBackgroundImage());
-	pLayout->setClip(true);
+	pLayout->setClippingEnabled(true);
 	pLayout->setVolume(400, 400, 0);
 	pLayout->setPosition(400, 400);
 	this->addChild(pLayout);
@@ -162,7 +162,7 @@ void TestUINode::testScrollView()
 	CtrlScrollView* pScrollView = CREATE_NODE(CtrlScrollView);
 	pScrollView->getBackgroundImage()->setVisible(false);
 	pScrollView->getBackgroundMask()->setVisible(false);
-	pScrollView->setClip(true);
+	pScrollView->setClippingEnabled(true);
 	pScrollView->setPosition(512, 384);
 	pScrollView->setVolume(200, 600);
 	this->addChild(pScrollView);

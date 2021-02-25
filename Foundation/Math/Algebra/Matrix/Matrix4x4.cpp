@@ -365,12 +365,139 @@ math::Matrix4x4::operator SquareMatrix4()
 {
 	return SquareMatrix4(*this);
 }
-/*
+
 Matrix4x4 math::Matrix4x4::getInverse()
 {
-	float value[16] = { 0 };
+	float inv[16], invOut[16], det;
+    int i;
+	
+	
+
+    inv[0] = (*this)[5]  * (*this)[10] * (*this)[15] - 
+             (*this)[5]  * (*this)[11] * (*this)[14] - 
+             (*this)[9]  * (*this)[6]  * (*this)[15] + 
+             (*this)[9]  * (*this)[7]  * (*this)[14] +
+             (*this)[13] * (*this)[6]  * (*this)[11] - 
+             (*this)[13] * (*this)[7]  * (*this)[10];
+
+    inv[4] = -(*this)[4]  * (*this)[10] * (*this)[15] + 
+              (*this)[4]  * (*this)[11] * (*this)[14] + 
+              (*this)[8]  * (*this)[6]  * (*this)[15] - 
+              (*this)[8]  * (*this)[7]  * (*this)[14] - 
+              (*this)[12] * (*this)[6]  * (*this)[11] + 
+              (*this)[12] * (*this)[7]  * (*this)[10];
+
+    inv[8] = (*this)[4]  * (*this)[9] * (*this)[15] - 
+             (*this)[4]  * (*this)[11] * (*this)[13] - 
+             (*this)[8]  * (*this)[5] * (*this)[15] + 
+             (*this)[8]  * (*this)[7] * (*this)[13] + 
+             (*this)[12] * (*this)[5] * (*this)[11] - 
+             (*this)[12] * (*this)[7] * (*this)[9];
+
+    inv[12] = -(*this)[4]  * (*this)[9] * (*this)[14] + 
+               (*this)[4]  * (*this)[10] * (*this)[13] +
+               (*this)[8]  * (*this)[5] * (*this)[14] - 
+               (*this)[8]  * (*this)[6] * (*this)[13] - 
+               (*this)[12] * (*this)[5] * (*this)[10] + 
+               (*this)[12] * (*this)[6] * (*this)[9];
+
+    inv[1] = -(*this)[1]  * (*this)[10] * (*this)[15] + 
+              (*this)[1]  * (*this)[11] * (*this)[14] + 
+              (*this)[9]  * (*this)[2] * (*this)[15] - 
+              (*this)[9]  * (*this)[3] * (*this)[14] - 
+              (*this)[13] * (*this)[2] * (*this)[11] + 
+              (*this)[13] * (*this)[3] * (*this)[10];
+
+    inv[5] = (*this)[0]  * (*this)[10] * (*this)[15] - 
+             (*this)[0]  * (*this)[11] * (*this)[14] - 
+             (*this)[8]  * (*this)[2] * (*this)[15] + 
+             (*this)[8]  * (*this)[3] * (*this)[14] + 
+             (*this)[12] * (*this)[2] * (*this)[11] - 
+             (*this)[12] * (*this)[3] * (*this)[10];
+
+    inv[9] = -(*this)[0]  * (*this)[9] * (*this)[15] + 
+              (*this)[0]  * (*this)[11] * (*this)[13] + 
+              (*this)[8]  * (*this)[1] * (*this)[15] - 
+              (*this)[8]  * (*this)[3] * (*this)[13] - 
+              (*this)[12] * (*this)[1] * (*this)[11] + 
+              (*this)[12] * (*this)[3] * (*this)[9];
+
+    inv[13] = (*this)[0]  * (*this)[9] * (*this)[14] - 
+              (*this)[0]  * (*this)[10] * (*this)[13] - 
+              (*this)[8]  * (*this)[1] * (*this)[14] + 
+              (*this)[8]  * (*this)[2] * (*this)[13] + 
+              (*this)[12] * (*this)[1] * (*this)[10] - 
+              (*this)[12] * (*this)[2] * (*this)[9];
+
+    inv[2] = (*this)[1]  * (*this)[6] * (*this)[15] - 
+             (*this)[1]  * (*this)[7] * (*this)[14] - 
+             (*this)[5]  * (*this)[2] * (*this)[15] + 
+             (*this)[5]  * (*this)[3] * (*this)[14] + 
+             (*this)[13] * (*this)[2] * (*this)[7] - 
+             (*this)[13] * (*this)[3] * (*this)[6];
+
+    inv[6] = -(*this)[0]  * (*this)[6] * (*this)[15] + 
+              (*this)[0]  * (*this)[7] * (*this)[14] + 
+              (*this)[4]  * (*this)[2] * (*this)[15] - 
+              (*this)[4]  * (*this)[3] * (*this)[14] - 
+              (*this)[12] * (*this)[2] * (*this)[7] + 
+              (*this)[12] * (*this)[3] * (*this)[6];
+
+    inv[10] = (*this)[0]  * (*this)[5] * (*this)[15] - 
+              (*this)[0]  * (*this)[7] * (*this)[13] - 
+              (*this)[4]  * (*this)[1] * (*this)[15] + 
+              (*this)[4]  * (*this)[3] * (*this)[13] + 
+              (*this)[12] * (*this)[1] * (*this)[7] - 
+              (*this)[12] * (*this)[3] * (*this)[5];
+
+    inv[14] = -(*this)[0]  * (*this)[5] * (*this)[14] + 
+               (*this)[0]  * (*this)[6] * (*this)[13] + 
+               (*this)[4]  * (*this)[1] * (*this)[14] - 
+               (*this)[4]  * (*this)[2] * (*this)[13] - 
+               (*this)[12] * (*this)[1] * (*this)[6] + 
+               (*this)[12] * (*this)[2] * (*this)[5];
+
+    inv[3] = -(*this)[1] * (*this)[6] * (*this)[11] + 
+              (*this)[1] * (*this)[7] * (*this)[10] + 
+              (*this)[5] * (*this)[2] * (*this)[11] - 
+              (*this)[5] * (*this)[3] * (*this)[10] - 
+              (*this)[9] * (*this)[2] * (*this)[7] + 
+              (*this)[9] * (*this)[3] * (*this)[6];
+
+    inv[7] = (*this)[0] * (*this)[6] * (*this)[11] - 
+             (*this)[0] * (*this)[7] * (*this)[10] - 
+             (*this)[4] * (*this)[2] * (*this)[11] + 
+             (*this)[4] * (*this)[3] * (*this)[10] + 
+             (*this)[8] * (*this)[2] * (*this)[7] - 
+             (*this)[8] * (*this)[3] * (*this)[6];
+
+    inv[11] = -(*this)[0] * (*this)[5] * (*this)[11] + 
+               (*this)[0] * (*this)[7] * (*this)[9] + 
+               (*this)[4] * (*this)[1] * (*this)[11] - 
+               (*this)[4] * (*this)[3] * (*this)[9] - 
+               (*this)[8] * (*this)[1] * (*this)[7] + 
+               (*this)[8] * (*this)[3] * (*this)[5];
+
+    inv[15] = (*this)[0] * (*this)[5] * (*this)[10] - 
+              (*this)[0] * (*this)[6] * (*this)[9] - 
+              (*this)[4] * (*this)[1] * (*this)[10] + 
+              (*this)[4] * (*this)[2] * (*this)[9] + 
+              (*this)[8] * (*this)[1] * (*this)[6] - 
+              (*this)[8] * (*this)[2] * (*this)[5];
+
+    det = (*this)[0] * inv[0] + (*this)[1] * inv[4] + (*this)[2] * inv[8] + (*this)[3] * inv[12];
+
+    if (det == 0)
+        return Matrix4x4();
+
+    det = 1.0 / det;
+
+    for (i = 0; i < 16; i++)
+        invOut[i] = inv[i] * det;
+	
+	return Matrix4x4(invOut);
 }
-*/
+
 
 math::Matrix4x4 math::Matrix4x4::ortho(float left, float right, float bottom, float top,
 	float znear, float zfar)

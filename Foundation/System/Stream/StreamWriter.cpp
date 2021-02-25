@@ -100,11 +100,6 @@ void StreamWriter::writeDouble( double data )
 	this->write<double>(data);
 }
 
-void StreamWriter::writeString(const char* data, size_t size)
-{
-	this->writeData(data, size);
-}
-
 void StreamWriter::writeString(const std::string& data)
 {
 	this->writeInt32(data.size());
