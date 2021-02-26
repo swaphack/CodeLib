@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <root width="1024" height="768" layout="1" fontPath="Resource/Font/font_3.ttf">
     <Layout anchorPoint="0.000000,0.000000,0.000000" imagePath="1" margin="0.00,0.00,0.00,0.00" marginState="0,0,0,0" maskColor="0,0,0,255" name="UIMain" rotation="0.000000,0.000000,0.000000" scale="1.000000,1.000000,1.000000" showImage="0" showMask="1" size="100.00%,100.00%">
-    	<ListView margin="0.00,0.00,0.00,0.00" marginState="0,0,1,1" size="300,200" itemSize="100,40" direction="3">
+    	<ListView name="listview" margin="0.00,0.00,0.00,0.00" marginState="0,0,1,1" size="300,200" itemSize="100,40" direction="3">
         	<Text anchorPoint="0.000000,0.000000,0.500000" fontSize="24.000000" name="text" size="100.00,50.00" text="Name1" textColor="255,255,255"/>
         	<Text anchorPoint="0.000000,0.000000,0.500000" fontSize="24.000000" name="text" size="100.00,50.00" text="Name2" textColor="255,255,255"/>
         	<Text anchorPoint="0.000000,0.000000,0.500000" fontSize="24.000000" name="text" size="100.00,50.00" text="Name3" textColor="255,255,255"/>
