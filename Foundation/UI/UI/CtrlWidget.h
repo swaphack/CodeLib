@@ -90,7 +90,7 @@ namespace ui
 		/**
 		*	布局信息
 		*/
-		LayoutItem* getLayoutItem();
+		LayoutItem* getLayoutItem() const;
 		/**
 		*	布局信息
 		*/

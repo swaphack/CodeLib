@@ -146,7 +146,7 @@ ui::CtrlButton* ue::UIDesignDirectory::createDirItem(int height, const std::stri
 		pWidget->setNormalImage("Default/Image/dir_bg.png");
 		pWidget->setSelectedImage("Default/Image/dir_bg_2.png");
 		pWidget->setTextColor(phy::Color3B(255, 255, 255));
-		pWidget->setFontSize(24);
+		pWidget->setFontSize(CONST_ITEM_HEIGHT);
 		pWidget->setFontPath("Default/Font/font_3.ttf");
 		pWidget->setString(name);
 		pWidget->getTextControl()->setHorizontalAlignment(sys::HorizontalAlignment::LEFT);
@@ -178,7 +178,7 @@ ui::CtrlButton* ue::UIDesignDirectory::createFileItem(int height, const std::str
 		pWidget->setNormalImage("Default/Image/file_bg.png");
 		pWidget->setSelectedImage("Default/Image/file_bg_2.png");
 		pWidget->setTextColor(phy::Color3B(0, 0, 0));
-		pWidget->setFontSize(24);
+		pWidget->setFontSize(CONST_ITEM_HEIGHT);
 		pWidget->setFontPath("Default/Font/font_3.ttf");
 		pWidget->setString(name);
 		pWidget->getTextControl()->setHorizontalAlignment(sys::HorizontalAlignment::LEFT);

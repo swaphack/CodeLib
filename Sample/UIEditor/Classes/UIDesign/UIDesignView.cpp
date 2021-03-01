@@ -45,6 +45,7 @@ bool ue::UIDesignView::init()
 			for (size_t i = 0; i < vecIndex.size(); i++)
 			{
 				if (pTemp == nullptr) return;
+				//pTemp = ui::UIProxy::getChildByIndex(pTemp, vecIndex[i]);
 				pTemp = pTemp->getChildByIndex(vecIndex[i]);
 			}
 
@@ -77,8 +78,6 @@ bool ue::UIDesignView::init()
 		{
 			touchFrontWidget(pFile, touchPoint);
 		}
-
-		G_PANELEVT->setSelectNode(m_pSelectedTarget);
 	});
 
 
@@ -92,6 +91,9 @@ void ue::UIDesignView::unselectTarget()
 		m_pSelectedTarget->setBoxVisible(false);
 		m_pSelectedTarget = nullptr;
 	}
+
+
+	G_PANELEVT->setSelectNode(nullptr);
 }
 
 void ue::UIDesignView::selectTarget(ui::CtrlWidget* target)
@@ -99,9 +101,11 @@ void ue::UIDesignView::selectTarget(ui::CtrlWidget* target)
 	if (target == nullptr) return;
 
 	m_pSelectedTarget = target;
-	target->setBoxWidth(1.0f);
-	target->setBoxColor(phy::Color4B(255, 255, 255, 255));
+	target->setBoxWidth(2.0f);
+	target->setBoxColor(phy::Color4B(255, 0, 0, 255));
 	target->setBoxVisible(true);
+
+	G_PANELEVT->setSelectNode(target);
 }
 
 void ue::UIDesignView::setSelectTarget(ui::CtrlWidget* target)
@@ -136,8 +140,7 @@ void ue::UIDesignView::setDesignFile(const std::string& filepath)
 		return;
 	}
 
-	m_pSelectedTarget = nullptr;
-	G_PANELEVT->setSelectNode(m_pSelectedTarget);
+	unselectTarget();
 
 	m_strFileName = filepath;
 

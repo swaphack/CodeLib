@@ -2,7 +2,7 @@
 
 #include "render.h"
 #include "Layout/macros.h"
-
+#include "Layout/LayoutItem.h"
 namespace ui
 {
 	class IElement;
@@ -53,6 +53,25 @@ namespace ui
 		*	设置默认字体
 		*/
 		void setFontPath(const std::string& fontPath);
+	public:
+		/**
+		*	获取布局
+		*/ 
+		static ui::LayoutItem* getLayoutItem(ui::CtrlWidget* item);
+
+		/**
+		*	获取控件名称
+		*/  
+		static std::string getLayoutItemName(ui::CtrlWidget* item);
+
+		/**
+		*	获取子节点
+		*/ 
+		static render::Node* getChildByIndex(render::Node* node, int index);
+		/**
+		*	获取可视子节点
+		*/
+		static bool getVisibleChildren(const render::Node* node, std::vector<render::Node*>& children);
 	protected:
 		/**
 		*	初始化

@@ -41,10 +41,12 @@ bool IElement::load(tinyxml2::XMLElement* pXmlNode, bool clean/* = true*/)
 
 	this->parseAttributes();
 
-	_nodeProperty->setName(pXmlNode->Name());
+	std::string name = pXmlNode->Name();
+
+	_nodeProperty->setName(name);
 	if (_layoutItem && _node)
 	{
-		_layoutItem->setWidgetName(pXmlNode->Name());
+		_layoutItem->setWidgetName(name);
 		_node->setLayoutItem(_layoutItem);
 	}
 

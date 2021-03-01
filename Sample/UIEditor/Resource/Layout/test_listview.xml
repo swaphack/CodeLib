@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <root width="1024" height="768" layout="1" fontPath="Resource/Font/font_3.ttf">
-    <Layout anchorPoint="0.000000,0.000000,0.000000" imagePath="1" margin="0.00,0.00,0.00,0.00" marginState="0,0,0,0" maskColor="0,0,0,255" name="UIMain" rotation="0.000000,0.000000,0.000000" scale="1.000000,1.000000,1.000000" showImage="0" showMask="1" size="100.00%,100.00%">
-    	<ListView name="listview" margin="0.00,0.00,0.00,0.00" marginState="0,0,1,1" size="300,200" itemSize="100,40" direction="3">
-        	<Text anchorPoint="0.000000,0.000000,0.500000" fontSize="24.000000" name="text" size="100.00,50.00" text="Name1" textColor="255,255,255"/>
-        	<Text anchorPoint="0.000000,0.000000,0.500000" fontSize="24.000000" name="text" size="100.00,50.00" text="Name2" textColor="255,255,255"/>
-        	<Text anchorPoint="0.000000,0.000000,0.500000" fontSize="24.000000" name="text" size="100.00,50.00" text="Name3" textColor="255,255,255"/>
-    	</ListView>
+    <Layout anchorPoint="0.000000,0.000000,0.000000" clip="0" enableTouch="0" imagePath="1" margin="0.00,0.00,0.00,0.00" marginState="0,0,0,0" maskColor="0,0,0,255" name="UIMain" rotation="0.000000,0.000000,0.000000" scale="1.000000,1.000000,1.000000" showImage="0" showMask="1" size="100.00%,100.00%">
+        <ListView anchorPoint="0.000000,0.000000,0.000000" center="0" clip="0" direction="3" enableTouch="0" horizontalScroll="0" imagePath="1" itemSize="100.00,40.00" margin="0.00,0.00,0.00,0.00" marginState="1,0,0,1" maskColor="125,125,125,125" moveMultiple="20.000000" name="listview" rotation="0.000000,0.000000,0.000000" scale="1.000000,1.000000,1.000000" showImage="0" showMask="0" size="300.00,200.00" useItemSize="0">
+            <Text anchorPoint="0.000000,0.000000,0.500000" clip="0" enableTouch="0" fontPath="Resource/Font/font_3.ttf" fontSize="24.000000" horizontal="1" margin="0.00,0.00,0.00,0.00" marginState="0,0,1,0" name="text" rotation="0.000000,0.000000,0.000000" scale="1.000000,1.000000,1.000000" size="100.00,50.00" text="Name1" textColor="255,255,255" vertical="1"/>
+            <Text anchorPoint="0.000000,0.000000,0.500000" clip="0" enableTouch="0" fontPath="Resource/Font/font_3.ttf" fontSize="24.000000" horizontal="1" margin="0.00,0.00,50.00,0.00" marginState="0,0,1,0" name="text" rotation="0.000000,0.000000,0.000000" scale="1.000000,1.000000,1.000000" size="100.00,50.00" text="Name2" textColor="255,255,255" vertical="1"/>
+            <Text anchorPoint="0.000000,0.000000,0.500000" clip="0" enableTouch="0" fontPath="Resource/Font/font_3.ttf" fontSize="24.000000" horizontal="1" margin="0.00,0.00,100.00,0.00" marginState="0,0,1,0" name="text" rotation="0.000000,0.000000,0.000000" scale="1.000000,1.000000,1.000000" size="100.00,50.00" text="Name3" textColor="255,255,255" vertical="1"/>
+        </ListView>
     </Layout>
 </root>

@@ -93,7 +93,7 @@ void ue::UIDesignProperty::loadProperty()
 	auto pWidget = dynamic_cast<ui::CtrlWidget*>(m_pTargetItem);
 	if (pWidget == nullptr) return;
 
-	auto layoutItem = pWidget->getLayoutItem();
+	auto layoutItem = ui::UIProxy::getLayoutItem(pWidget);
 
 	if (m_pBtnMarginTop)
 	{
@@ -212,7 +212,7 @@ void ue::UIDesignProperty::saveProperty()
 	auto pWidget = dynamic_cast<ui::CtrlWidget*>(m_pTargetItem);
 	if (pWidget == nullptr) return;
 
-	auto layoutItem = pWidget->getLayoutItem();
+	auto layoutItem = ui::UIProxy::getLayoutItem(pWidget);
 
 	if (m_pBtnMarginTop)
 	{

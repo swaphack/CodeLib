@@ -80,7 +80,7 @@ namespace ue
 		ui::CtrlButton* createFileItem(int height, const std::string& name, const std::string& fullpath);
 	private:
 		const float CONST_OFFSET_Y = 5;
-		const float CONST_ITEM_HEIGHT = 35;
+		const float CONST_ITEM_HEIGHT = 20;
 		// 根目录
 		std::string _root;
 		// 目录信息

@@ -164,6 +164,10 @@ void CtrlScrollView::addItem(CtrlWidget* item, const math::Size& size, int zOrde
 
 void ui::CtrlScrollView::addItem(CtrlWidget* item, const sys::CSSSize& size, int zOrder)
 {
+	if (item == nullptr)
+	{
+		return;
+	}
 	ScrollItem* pScrollItem = ScrollItem::create(item, size, this);
 	_content->addWidget(pScrollItem, zOrder);
 	_scrollItems.push_back(pScrollItem);
@@ -219,7 +223,10 @@ ui::CtrlWidget* ui::CtrlScrollView::getItemByIndex(int index) const
 		return nullptr;
 	}
 
-	return _scrollItems.at(index)->getFirstWidget();
+	auto pScrollItem = _scrollItems.at(index);
+	if (pScrollItem == nullptr) return nullptr;
+
+	return pScrollItem->getFirstWidget();
 }
 
 bool ui::CtrlScrollView::isHorizontalScroll() const

@@ -203,7 +203,7 @@ void ui::CtrlWidget::resetLayoutItem()
 	this->setLayoutItem(layoutItem);
 }
 
-ui::LayoutItem* ui::CtrlWidget::getLayoutItem()
+ui::LayoutItem* ui::CtrlWidget::getLayoutItem() const
 {
 	return _layoutItem;
 }

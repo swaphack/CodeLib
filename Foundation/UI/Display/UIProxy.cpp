@@ -14,7 +14,7 @@ using namespace ui;
 void UIProxy::init()
 {
 
-	this->registerElementParser(ELEMENT_NAME_WIDGET, new TextLoader());
+	this->registerElementParser(ELEMENT_NAME_WIDGET, new WidgetLoader());
 	this->registerElementParser(ELEMENT_NAME_LAYOUT, new LayoutLoader());
 	this->registerElementParser(ELEMENT_NAME_IMAGE, new ImageLoader());
 	this->registerElementParser(ELEMENT_NAME_TEXT, new TextLoader());
@@ -26,22 +26,6 @@ void UIProxy::init()
 	this->registerElementParser(ELEMENT_NAME_GRIDVIEW, new GridViewLoader());
 
 	this->registerElementParser(ELEMENT_NAME_FILE, new FileLoader());
-}
-
-// 获取控件名称
-std::string getLayoutItemName(CtrlWidget* item)
-{
-	if (item == nullptr)
-	{
-		return "";
-	}
-
-	if (item->getLayoutItem() == nullptr)
-	{
-		return "";
-	}
-
-	return item->getLayoutItem()->getWidgetName();
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -180,6 +164,84 @@ void ui::UIProxy::setFontPath(const std::string& fontPath)
 	_defaultFontPath = fontPath;
 }
 
+ui::LayoutItem* ui::UIProxy::getLayoutItem(ui::CtrlWidget* item)
+{
+	if (item == nullptr) return nullptr;
+	if (item->getParent() != nullptr)
+	{
+		ui::ScrollItem* pItem = item->getParent()->as<ui::ScrollItem>();
+		if (pItem != nullptr) return pItem->getLayoutItem();
+	}
+	
+	return item->getLayoutItem();
+}
+
+std::string ui::UIProxy::getLayoutItemName(ui::CtrlWidget* item)
+{
+	if (item == nullptr) return "";
+
+	auto pLayoutItem = getLayoutItem(item);
+	if (pLayoutItem == nullptr) return "";
+	return pLayoutItem->getWidgetName();
+}
+
+render::Node* ui::UIProxy::getChildByIndex(render::Node* node, int index)
+{
+	if (node == nullptr) return nullptr;
+
+	std::vector<render::Node*> children;
+	if (!getVisibleChildren(node, children))
+	{
+		return nullptr;
+	}
+
+	if (index < 0 || index >= children.size())
+	{
+		return nullptr;
+	}
+
+	return children.at(index);
+}
+
+bool ui::UIProxy::getVisibleChildren(const render::Node* node, std::vector<render::Node*>& children)
+{
+	if (node == nullptr) return false;
+
+	render::Node* pNode = (render::Node*)(node);
+
+	auto pScrollView = dynamic_cast<ui::CtrlScrollView*>(pNode);
+	if (pScrollView)
+	{
+		int count = pScrollView->getItemCount();
+		for (int i = 0; i < count; i++)
+		{
+			children.push_back(pScrollView->getItemByIndex(i));
+		}
+
+		return true;
+	}
+
+	auto pWidget = dynamic_cast<ui::CtrlWidget*>(pNode);
+	if (pWidget)
+	{
+		int count = pWidget->getWidgetCount();
+		for (int i = 0; i < count; i++)
+		{
+			children.push_back(pWidget->getWidgetByIndex(i));
+		}
+
+		return true;
+	}
+
+	int count = pNode->getChildrenCount();
+	for (int i = 0; i < count; i++)
+	{
+		children.push_back(pScrollView->getChildByIndex(i));
+	}
+
+	return true;
+}
+
 IElement* UIProxy::getElement(const std::string& name)
 {
 	if (_elementParsers.find(name) == _elementParsers.end())
@@ -287,7 +349,7 @@ bool UIProxy::saveWidget(CtrlWidget* item, tinyxml2::XMLElement* xmlNode)
 		return false;
 	}
 
-	const std::string& name = getLayoutItemName(item);
+	std::string name = getLayoutItemName(item);
 	if (name.empty())
 	{
 		return false;
@@ -298,8 +360,10 @@ bool UIProxy::saveWidget(CtrlWidget* item, tinyxml2::XMLElement* xmlNode)
 	{
 		return false;
 	}
-	pElement->setLayoutItem(item->getLayoutItem());
+
+	pElement->setLayoutItem(getLayoutItem(item));
 	pElement->setWidget(item);
+
 	pElement->save(xmlNode);
 
 	WidgetLoader* pLoader = pElement->as<WidgetLoader>();
@@ -308,21 +372,35 @@ bool UIProxy::saveWidget(CtrlWidget* item, tinyxml2::XMLElement* xmlNode)
 		return true;
 	}
 
-	auto widgets = item->getAllWidgets();
+	if (!item->is<CtrlWidget>()) return true;
 
-	auto iter = widgets.begin();
-	while (iter != widgets.end())
+	std::vector<render::Node*> children;
+
+	if (!getVisibleChildren(item, children))
+	{
+		return true;
+	}
+
+	auto iter = children.begin();
+	while (iter != children.end())
 	{
 		tinyxml2::XMLElement* pChildNode = nullptr;
 
-		std::string wName = getLayoutItemName(*iter);
+		auto pWidget = dynamic_cast<CtrlWidget*>(*iter);
+		if (pWidget == nullptr)
+		{
+			iter++;
+			continue;
+		}
+		std::string wName = getLayoutItemName(pWidget);
 		if (wName.empty())
 		{
+			iter++;
 			continue;
 		}
 		pChildNode = xmlNode->GetDocument()->NewElement(wName.c_str());
 
-		this->saveWidget(*iter, pChildNode);
+		this->saveWidget(pWidget, pChildNode);
 
 		xmlNode->InsertEndChild(pChildNode);
 		iter++;
