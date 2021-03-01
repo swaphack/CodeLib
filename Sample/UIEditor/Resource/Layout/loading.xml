@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <root width="1024" height="768" layout="1" fontPath="Resource/Font/font_3.ttf">
-    <Layout anchorPoint="0.000000,0.000000,0.000000" imagePath="1" margin="0.00,0.00,0.00,0.00" marginState="0,0,0,0" maskColor="0,0,0,255" name="UIMain" rotation="0.000000,0.000000,0.000000" scale="1.000000,1.000000,1.000000" showImage="0" showMask="1" size="100.00%,100.00%">
-        <Scale9Image anchorPoint="0.000000,0.000000,0.500000" filepath="Resource/Image/button.png" margin="5.00,5.00,5.00,5.00" marginState="1,1,1,1" name="scale9Image" scale9Margin="10.00,30.00,10.00,30.00" size="300.00,300.00"/>
-        <Image anchorPoint="0.000000,0.000000,0.500000" filepath="Resource/Image/ExampleDiffuseAmbientLighting.png" margin="5.00,5.00,5.00,5.00" marginState="1,1,0,0" name="image" size="300.00,300.00"/>
+    <Layout anchorPoint="0.000000,0.000000,0.000000" clip="0" enableTouch="0" imagePath="1" margin="0.00,0.00,0.00,0.00" marginState="0,0,0,0" maskColor="0,0,0,255" name="UIMain" rotation="0.000000,0.000000,0.000000" scale="1.000000,1.000000,1.000000" showImage="0" showMask="1" size="100.00%,100.00%">
+        <Scale9Image anchorPoint="0.000000,0.000000,0.500000" clip="0" color="255,255,255,255" enableTouch="0" filepath="Resource/Image/button.png" margin="5.00,5.00,5.00,5.00" marginState="0,0,0,1" name="scale9Image" rotation="0.000000,0.000000,0.000000" scale="1.000000,1.000000,1.000000" scale9Margin="10.00,30.00,10.00,30.00" size="300.00,300.00"/>
+        <Image anchorPoint="0.000000,0.000000,0.500000" clip="0" color="255,255,255,255" enableTouch="0" filepath="Resource/Image/ExampleDiffuseAmbientLighting.png" flipX="0" flipY="0" margin="5.00,5.00,5.00,5.00" marginState="1,1,0,0" name="image" rotation="0.000000,0.000000,0.000000" scale="1.000000,1.000000,1.000000" size="300.00,300.00"/>
     </Layout>
 </root>

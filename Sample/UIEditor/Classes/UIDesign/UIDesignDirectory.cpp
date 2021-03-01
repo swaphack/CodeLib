@@ -72,13 +72,14 @@ void ue::UIDesignDirectory::setDirectory(const std::string& root)
 
 	_dirDetail.setRoot(root);
 
-	this->updateRootPanel();
+	this->updateRootPanel(true);
 }
 
-void ue::UIDesignDirectory::updateRootPanel()
+void ue::UIDesignDirectory::updateRootPanel(bool cleanFold)
 {
 	_listview->removeAllItems();
-	_dirFoldInfo.clear();
+	if (cleanFold)
+		_dirFoldInfo.clear();
 
 	this->updateRootList(_listview, _dirDetail);
 }
@@ -152,7 +153,7 @@ ui::CtrlButton* ue::UIDesignDirectory::createDirItem(int height, const std::stri
 		pWidget->getTextControl()->setVerticalAlignment(sys::VerticalAlignment::BOTTOM);
 		pWidget->addClickFunc([this, fullpath](CtrlWidget*) {
 			this->onChangeFoldState(fullpath);
-			this->updateRootPanel();
+			this->updateRootPanel(false);
 		});
 	}
 	return pWidget;

@@ -9,7 +9,6 @@
 #include "UIDesignProperty.h"
 #include "UIDesignDirectory.h"
 #include "UIDesignWindow.h"
-#include "UIDesignTree.h"
 #include "UIDesignNodeTree.h"
 
 #include "UIDesignPopMenu.h"

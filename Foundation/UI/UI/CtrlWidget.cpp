@@ -38,7 +38,7 @@ bool ui::CtrlWidget::init()
 		pDepthTest->setEnabled(false);
 	}
 
-	this->addTouchFunc(render::TouchType::UP, [this](const math::Vector2& touchPoint, bool include) {
+	this->addTouchFunc(render::TouchType::ENDED, [this](const math::Vector2& touchPoint, bool include) {
 		if (include)
 		{
 			for (auto item : _clickFuncs)
@@ -168,6 +168,21 @@ void ui::CtrlWidget::removeFromParent()
 	}
 
 	this->setParent(nullptr);
+}
+
+int ui::CtrlWidget::getWidgetCount() const
+{
+	return _widgets.size();
+}
+
+ui::CtrlWidget* ui::CtrlWidget::getWidgetByIndex(int index) const
+{
+	if (index < 0 || index >= _widgets.size())
+	{
+		return nullptr;
+	}
+
+	return _widgets.at(index);
 }
 
 void ui::CtrlWidget::setLayoutItem(LayoutItem* item)

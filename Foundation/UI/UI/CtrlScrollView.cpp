@@ -87,12 +87,12 @@ bool ui::CtrlScrollView::init()
 	});
 
 
-	this->addTouchFunc(render::TouchType::DOWN, [this](const math::Vector2& touchPoint, bool include) {
+	this->addTouchFunc(render::TouchType::BEGAN, [this](const math::Vector2& touchPoint, bool include) {
 
 		_touchPosition = touchPoint;
 
 	});
-	this->addTouchFunc(render::TouchType::ON, [this](const math::Vector2& touchPoint, bool include) {
+	this->addTouchFunc(render::TouchType::MOVED, [this](const math::Vector2& touchPoint, bool include) {
 		if (!_bHorizontalScroll && !_bVerticalScroll) return;
 
 		math::Vector2 delta = touchPoint;
@@ -205,6 +205,21 @@ void CtrlScrollView::removeAllItems()
 
 	_scrollItems.clear();
 	notify(NodeNotifyType::GEOMETRY);
+}
+
+int ui::CtrlScrollView::getItemCount() const
+{
+	return _scrollItems.size();
+}
+
+ui::CtrlWidget* ui::CtrlScrollView::getItemByIndex(int index) const
+{
+	if (index < 0 || index > getItemCount())
+	{
+		return nullptr;
+	}
+
+	return _scrollItems.at(index)->getFirstWidget();
 }
 
 bool ui::CtrlScrollView::isHorizontalScroll() const

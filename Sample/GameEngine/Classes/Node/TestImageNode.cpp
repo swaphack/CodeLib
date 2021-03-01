@@ -101,11 +101,11 @@ void TestImageNode::testMoveImage()
 	pImage->setPosition(512, 384, 0);
 	this->addChild(pImage);
 
-	pImage->addTouchDelegate(TouchType::DOWN, this, TOUCH_DELEGATTE_SELECTOR(TestImageNode::onTouchBegin));
+	pImage->addTouchDelegate(TouchType::BEGAN, this, TOUCH_DELEGATTE_SELECTOR(TestImageNode::onTouchBegin));
 
-	pImage->addTouchDelegate(TouchType::ON, this, TOUCH_DELEGATTE_SELECTOR(TestImageNode::onTouchMove));
+	pImage->addTouchDelegate(TouchType::MOVED, this, TOUCH_DELEGATTE_SELECTOR(TestImageNode::onTouchMove));
 
-	pImage->addTouchDelegate(TouchType::UP, this, TOUCH_DELEGATTE_SELECTOR(TestImageNode::onTouchEnd));
+	pImage->addTouchDelegate(TouchType::ENDED, this, TOUCH_DELEGATTE_SELECTOR(TestImageNode::onTouchEnd));
 
 	G_KEYBOARDMANAGER->addKeyboardDelegate(this, pImage, KEYBOARD_DELEGATE_SELECTOR(TestImageNode::onKeyBoard));
 }
@@ -197,7 +197,7 @@ void TestImageNode::testPixelImage()
 	this->addChild(pCtrlText);
 
 	//pImage->setUserData(pCtrlText);
-	pImage->addTouchDelegate(TouchType::ON, this, TOUCH_DELEGATTE_SELECTOR(TestImageNode::onTouchImage));
+	pImage->addTouchDelegate(TouchType::MOVED, this, TOUCH_DELEGATTE_SELECTOR(TestImageNode::onTouchImage));
 }
 
 void TestImageNode::testPointSprite()

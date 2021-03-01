@@ -18,7 +18,7 @@ bool ue::UIDesignWindow::init()
 	if (!Panel::init())
 		return false;
 
-	this->addTouchFunc(render::TouchType::UP, [this](const math::Vector2& touchPoint, bool include) {
+	this->addTouchFunc(render::TouchType::ENDED, [this](const math::Vector2& touchPoint, bool include) {
 		if (m_pDesignPanel)
 		{
 			if (!m_pDesignPanel->containTouchPoint(touchPoint))

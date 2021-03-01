@@ -38,6 +38,7 @@ namespace render
 		virtual bool onTouchBegan(const math::Vector2& touchPoint);
 		virtual bool onTouchMoved(const math::Vector2& touchPoint);
 		virtual bool onTouchEnded(const math::Vector2& touchPoint);
+		virtual void onTouchCanceled(const math::Vector2& touchPoint);
 	public:
 		// Ìí¼Ó´¥ÃþÊÂ¼þ
 		void addTouchDelegate(TouchType type, sys::Object* object, TOUCH_DELEGATE_HANDLER handler);

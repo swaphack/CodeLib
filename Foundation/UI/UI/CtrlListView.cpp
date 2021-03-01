@@ -17,8 +17,8 @@ bool ui::CtrlListView::init()
 		return false;
 	}
 
-	this->removeTouchFunc(render::TouchType::ON);
-	this->addTouchFunc(render::TouchType::ON, [this](const math::Vector2& touchPoint, bool include) {
+	this->removeTouchFunc(render::TouchType::MOVED);
+	this->addTouchFunc(render::TouchType::MOVED, [this](const math::Vector2& touchPoint, bool include) {
 		math::Vector2 delta = touchPoint;
 		delta -= _touchPosition;
 

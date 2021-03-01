@@ -55,7 +55,7 @@ namespace ue
 		/**
 		*	更新目录栏
 		*/
-		void updateRootPanel();
+		void updateRootPanel(bool cleanFold = false);
 		/**
 		*	更新目录栏
 		*/

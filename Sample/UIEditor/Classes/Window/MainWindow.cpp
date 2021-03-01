@@ -13,7 +13,6 @@ ue::MainWindow::MainWindow()
 	proxy->registerElementParser(UI_DESIGN_DIRECTORY, new ui::TFileLoader<UIDesignDirectory>());
 	proxy->registerElementParser(UI_DESIGN_VIEW, new ui::TFileLoader<UIDesignView>());
 	proxy->registerElementParser(UI_DESIGN_PROPERTY, new ui::TFileLoader<UIDesignProperty>());
-	proxy->registerElementParser(UI_DESIGN_TREE, new ui::TFileLoader<UIDesignTree>());
 	proxy->registerElementParser(UI_DESIGN_NODE_TREE, new ui::TFileLoader<UIDesignNodeTree>());
 }
 

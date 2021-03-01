@@ -78,8 +78,15 @@ bool TouchProtocol::onTouchBegan(const math::Vector2& touchPoint)
 		return false;
 	}
 	bool include = this->containTouchPoint(touchPoint);
-
-	dispatchTouchEvent(TouchType::DOWN, touchPoint, include);
+	if (include)
+	{
+		dispatchTouchEvent(TouchType::BEGAN, touchPoint, include);
+	}
+	else
+	{
+		onTouchCanceled(touchPoint);
+	}
+	
 
 	return include;
 }
@@ -92,8 +99,14 @@ bool TouchProtocol::onTouchMoved(const math::Vector2& touchPoint)
 	}
 
 	bool include = this->containTouchPoint(touchPoint);
-
-	dispatchTouchEvent(TouchType::ON, touchPoint, include);
+	if (include)
+	{
+		dispatchTouchEvent(TouchType::MOVED, touchPoint, include);
+	}
+	else
+	{
+		onTouchCanceled(touchPoint);
+	}
 
 	return include;
 }
@@ -106,10 +119,26 @@ bool TouchProtocol::onTouchEnded(const math::Vector2& touchPoint)
 	}
 
 	bool include = this->containTouchPoint(touchPoint);
-
-	dispatchTouchEvent(TouchType::UP, touchPoint, include);
+	if (include)
+	{
+		dispatchTouchEvent(TouchType::ENDED, touchPoint, include);
+	}
+	else
+	{
+		onTouchCanceled(touchPoint);
+	}
 
 	return include;
+}
+
+void TouchProtocol::onTouchCanceled(const math::Vector2& touchPoint)
+{
+	if (!isTouchEnabled())
+	{
+		return;
+	}
+
+	dispatchTouchEvent(TouchType::CANCELED, touchPoint, false);
 }
 
 void TouchProtocol::addTouchDelegate(TouchType type, sys::Object* object, TOUCH_DELEGATE_HANDLER handler)

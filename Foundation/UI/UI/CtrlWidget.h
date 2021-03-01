@@ -70,6 +70,14 @@ namespace ui
 		*	从父节点移除
 		*/
 		virtual void removeFromParent();
+		/**
+		*	获取控件个数
+		*/
+		int getWidgetCount() const;
+		/**
+		*	按照索引获取控件
+		*/
+		CtrlWidget* getWidgetByIndex(int index) const;
 	public:
 		/**
 		*	布局信息

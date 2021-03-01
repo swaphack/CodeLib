@@ -11,10 +11,11 @@ namespace render
 	// 触摸类型
 	enum class TouchType
 	{
-		NONE,	// 未触摸
-		DOWN,	// 按下	
-		ON,		// 按住不放
-		UP,		// 放手
+		NONE,		// 未触摸
+		BEGAN,		// 按下	
+		MOVED,		// 按住不放
+		ENDED,		// 放手
+		CANCELED,	// 取消
 	};
 
 	typedef void (sys::Object::*TOUCH_DELEGATE_HANDLER)(render::Node* node, const math::Vector2& touchPoint, bool include);

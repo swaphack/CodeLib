@@ -9,6 +9,5 @@ namespace ue
 #define UI_DESIGN_DIRECTORY "UIDesignDirectory"
 #define UI_DESIGN_PROPERTY "UIDesignProperty"
 #define UI_DESIGN_PROPERTY "UIDesignProperty"
-#define UI_DESIGN_TREE "UIDesignTree"
 #define UI_DESIGN_NODE_TREE "UIDesignNodeTree"
 }

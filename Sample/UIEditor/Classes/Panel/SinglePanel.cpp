@@ -16,7 +16,7 @@ bool ue::SinglePanel::init()
 		return false;
 	}
 
-	this->addTouchFunc(render::TouchType::UP, [this](const math::Vector2& touchPoint, bool include) {
+	this->addTouchFunc(render::TouchType::ENDED, [this](const math::Vector2& touchPoint, bool include) {
 		if (include)
 		{
 			if (!_body->containTouchPoint(touchPoint))

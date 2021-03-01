@@ -79,9 +79,6 @@
     <ClCompile Include="Classes\Panel\PanelEvent.cpp">
       <Filter>Classes\Panel</Filter>
     </ClCompile>
-    <ClCompile Include="Classes\UIDesign\UIDesignTree.cpp">
-      <Filter>Classes\UIDesign</Filter>
-    </ClCompile>
     <ClCompile Include="Classes\UIDesign\UIDesignNodeTree.cpp">
       <Filter>Classes\UIDesign</Filter>
     </ClCompile>
@@ -146,9 +143,6 @@
     </ClInclude>
     <ClInclude Include="Classes\Panel\PanelEvent.h">
       <Filter>Classes\Panel</Filter>
-    </ClInclude>
-    <ClInclude Include="Classes\UIDesign\UIDesignTree.h">
-      <Filter>Classes\UIDesign</Filter>
     </ClInclude>
     <ClInclude Include="Classes\UIDesign\macros.h">
       <Filter>Classes\UIDesign</Filter>

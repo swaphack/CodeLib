@@ -69,7 +69,7 @@ bool ue::UIDesignView::init()
 		}
 	});
 
-	this->addTouchFunc(render::TouchType::UP, [this](const math::Vector2& touchPoint, bool include) {
+	this->addTouchFunc(render::TouchType::ENDED, [this](const math::Vector2& touchPoint, bool include) {
 		if (m_pUIFile == nullptr) return;
 
 		ui::CtrlFile* pFile = m_pUIFile->as<ui::CtrlFile>();

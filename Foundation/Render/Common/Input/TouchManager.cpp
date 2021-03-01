@@ -37,10 +37,6 @@ void render::TouchManager::removeTarget(TouchProtocol* target)
 
 void TouchManager::onTouchBegan(const math::Vector2& touchPoint)
 {
-	// 转化为opengl（0，1）会有误差,所以采用实际大小
-// 	x = x / Tool::getGLViewSize().width;
-// 	y = y / Tool::getGLViewSize().height;
-
 	_temps.clear();
 
 	for (auto item : _targets)
@@ -51,7 +47,7 @@ void TouchManager::onTouchBegan(const math::Vector2& touchPoint)
 		}
 		else
 		{
-			item->dispatchTouchEvent(TouchType::DOWN, touchPoint, false);
+			item->dispatchTouchEvent(TouchType::BEGAN, touchPoint, false);
 		}
 	}
 
@@ -64,7 +60,7 @@ void TouchManager::onTouchBegan(const math::Vector2& touchPoint)
 	for (auto item : _temps)
 	{
 		//item->onTouchBegan(touchPoint);
-		item->dispatchTouchEvent(TouchType::DOWN, touchPoint, true);
+		item->dispatchTouchEvent(TouchType::BEGAN, touchPoint, true);
 		// 吞噬点击
 		if (item->isTouchSwallowed())
 		{

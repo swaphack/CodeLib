@@ -77,6 +77,14 @@ namespace ui
 		*	移除所有项
 		*/ 
 		void removeAllItems();
+		/**
+		*	获取控件个数
+		*/
+		int getItemCount() const;
+		/**
+		*	按照索引获取控件
+		*/
+		CtrlWidget* getItemByIndex(int index) const;
 	public:
 		/**
 		*	水平方向是否可以滑动
