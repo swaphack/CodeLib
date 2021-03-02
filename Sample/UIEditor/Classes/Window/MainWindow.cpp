@@ -14,6 +14,7 @@ ue::MainWindow::MainWindow()
 	proxy->registerElementParser(UI_DESIGN_VIEW, new ui::TFileLoader<UIDesignView>());
 	proxy->registerElementParser(UI_DESIGN_PROPERTY, new ui::TFileLoader<UIDesignProperty>());
 	proxy->registerElementParser(UI_DESIGN_NODE_TREE, new ui::TFileLoader<UIDesignNodeTree>());
+	proxy->registerElementParser(UI_DESIGN_MASK, new ui::TFileLoader<UIDesignMask>());
 }
 
 ue::MainWindow::~MainWindow()

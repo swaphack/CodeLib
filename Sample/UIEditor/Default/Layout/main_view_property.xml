@@ -3,125 +3,126 @@
 	<Layout name="body" showMask="1" maskColor="180,180,180,125" margin="1,1,1,1" size="100%,100%">
 		<ListView direction="2" margin="1,1,1,1" size="100%,100%" clip="1" moveMultiple="80" verticalScroll="1" enableTouch="1">
 			<ListView direction="0" size="100%,35">
-				<Text text="Type" size="50,100%"  fontSize="22" textColor="255,255,255" />
+				<Text text="Type" size="50,100%" fontSize="20" textColor="255,255,255" />
 				<ListView size="180,100%" showMask="1" maskColor="100,100,100,125">
-					<Text name="TypeText" size="100%,100%" text="4545454dsfajk" horizontal="0" fontSize="22" textColor="255,255,255" />
+					<Text name="TypeText" size="100%,100%" text="4545454dsfajk" horizontal="0" fontSize="20" textColor="255,255,255" />
 				</ListView>
 			</ListView>
 			<ListView direction="0" size="100%,35">
-				<Text text="Name" size="50,100%"  fontSize="22" textColor="255,255,255" />
+				<Text text="Name" size="50,100%"  fontSize="20" textColor="255,255,255" />
 				<ListView size="180,100%" showMask="1" maskColor="0,0,0,125">
-					<EditText name="NameText" size="100%,100%" horizontal="0" text="4545454dsfajk" fontSize="22" textColor="255,255,255" />
+					<EditText name="NameText" size="100%,100%" horizontal="0" text="4545454dsfajk" fontSize="20" textColor="255,255,255" />
 				</ListView>
 			</ListView>
-			<ListView direction="2" size="100%,60">
-				<Text text="AnchorPoint" horizontal="0" size="100%,30"  fontSize="20" textColor="255,255,255" />
+			<ListView direction="2" size="100%,50">
+				<Text text="AnchorPoint" horizontal="0" size="100%,20"  fontSize="18" textColor="255,255,255" />
 				<ListView direction="0" size="100%,30">
 					<ListView size="45%,30" showMask="1" maskColor="0,0,0,125">
-						<EditText name="AnchorPointX" text="0.5" size="100%,100%"  fontSize="22" textColor="255,255,255" />
+						<EditText name="AnchorPointX" text="0.5" size="100%,100%"  fontSize="20" textColor="255,255,255" />
 					</ListView>
 					<ListView size="45%,30" showMask="1" maskColor="0,0,0,125">
-						<EditText name="AnchorPointY" text="0.5" size="100%,100%"  fontSize="22" textColor="255,255,255" />
+						<EditText name="AnchorPointY" text="0.5" size="100%,100%"  fontSize="20" textColor="255,255,255" />
 					</ListView>
 				</ListView>
 			</ListView>
-			<ListView direction="2" size="100%,60">
-				<Text text="Size" horizontal="0" size="100%,30"  fontSize="20" textColor="255,255,255" />
+			<ListView direction="2" size="100%,50">
+				<Text text="Size" horizontal="0" size="100%,20"  fontSize="18" textColor="255,255,255" />
 				<ListView direction="0" size="100%,30">
 					<ListView size="45%,30" showMask="1" maskColor="0,0,0,125">
-						<EditText name="Width" text="0.5" size="100%,100%"  fontSize="22" textColor="255,255,255" />
+						<EditText name="Width" text="0.5" size="100%,100%"  fontSize="20" textColor="255,255,255" />
 					</ListView>
 					<ListView size="45%,30" showMask="1" maskColor="0,0,0,125">
-						<EditText name="Height" text="0.5" size="100%,100%"  fontSize="22" textColor="255,255,255" />
+						<EditText name="Height" text="0.5" size="100%,100%"  fontSize="20" textColor="255,255,255" />
 					</ListView>
 				</ListView>
 			</ListView>
-			<ListView direction="2" size="100%,60">
-				<Text text="Scale" horizontal="0" size="100%,30"  fontSize="20" textColor="255,255,255" />
+			<ListView direction="2" size="100%,50">
+				<Text text="Scale" horizontal="0" size="100%,20"  fontSize="18" textColor="255,255,255" />
 				<ListView direction="0" size="100%,30">
 					<ListView size="45%,30" showMask="1" maskColor="0,0,0,125">
-						<EditText name="ScaleX" text="0.5" size="100%,100%"  fontSize="22" textColor="255,255,255" />
+						<EditText name="ScaleX" text="0.5" size="100%,100%"  fontSize="20" textColor="255,255,255" />
 					</ListView>
 					<ListView size="45%,30" showMask="1" maskColor="0,0,0,125">
-						<EditText name="ScaleY" text="0.5" size="100%,100%"  fontSize="22" textColor="255,255,255" />
+						<EditText name="ScaleY" text="0.5" size="100%,100%"  fontSize="20" textColor="255,255,255" />
 					</ListView>
 				</ListView>
 			</ListView>
-			<ListView direction="2" size="100%,60">
-				<Text text="Position" horizontal="0" size="100%,30"  fontSize="20" textColor="255,255,255" />
+			<ListView direction="2" size="100%,50">
+				<Text text="Position" horizontal="0" size="100%,20"  fontSize="18" textColor="255,255,255" />
 				<ListView direction="0" size="100%,30">
 					<ListView size="45%,30" showMask="1" maskColor="0,0,0,125">
-						<EditText name="PosX" text="0.5" size="100%,100%"  fontSize="22" textColor="255,255,255" />
+						<EditText name="PosX" text="0.5" size="100%,100%"  fontSize="20" textColor="255,255,255" />
 					</ListView>
 					<ListView size="45%,30" showMask="1" maskColor="0,0,0,125">
-						<EditText name="PosY" text="0.5" size="100%,100%"  fontSize="22" textColor="255,255,255" />
+						<EditText name="PosY" text="0.5" size="100%,100%"  fontSize="20" textColor="255,255,255" />
 					</ListView>
 				</ListView>
 			</ListView>
-			<ListView direction="2" size="100%,60">
-				<Text text="Rotation" horizontal="0" size="100%,30"  fontSize="20" textColor="255,255,255" />
+			<ListView direction="2" size="100%,50">
+				<Text text="Rotation" horizontal="0" size="100%,20"  fontSize="18" textColor="255,255,255" />
 				<ListView size="45%,30" showMask="1" maskColor="0,0,0,125">
-					<EditText name="RotationZ" text="0" size="100%,100%"  fontSize="22" textColor="255,255,255" />
+					<EditText name="RotationZ" text="0" size="100%,100%"  fontSize="20" textColor="255,255,255" />
 				</ListView>
 			</ListView>
-			<ListView direction="2" size="250,200">
-				<Text text="========================" size="100%,50" fontSize="20" textColor="255,255,255" />
-				<ListView direction="2" size="100%,150" showMask="1" maskColor="0,0,0,200">
-					<ListView direction="0" size="100%,50" center="1">
+			<Widget size="100%,5"/>
+			<ListView direction="2" size="100%,150">
+				<ListView direction="2" size="100%,100%" showMask="1" maskColor="150,150,150,200">
+					<ListView direction="0" size="100%,33%" center="1">
 						<Button name="MarginTop" normalImage="Default/Image/arrow_black.png" selectedImage="Default/Image/arrow_red.png" size="39,41"/>
 					</ListView>
-					<ListView direction="0" size="100%,50">
-						<ListView direction="0" size="50%,50">
+					<ListView direction="0" size="100%,33%">
+						<ListView direction="0" size="50%,100%">
 							<Button name="MarginLeft" normalImage="Default/Image/arrow_black.png" selectedImage="Default/Image/arrow_red.png" size="39,41" rotation="0,0,-90" anchorPoint="0.5,0.5,0"/>
 						</ListView>
-						<ListView direction="1" size="50%,50">
+						<ListView direction="1" size="50%,100%">
 							<Button name="MarginRight" normalImage="Default/Image/arrow_black.png" selectedImage="Default/Image/arrow_red.png" size="39,41" rotation="0,0,90" anchorPoint="0.5,0.5,0"/>
 						</ListView>
 					</ListView>
-					<ListView direction="0" size="100%,50" center="1">
+					<ListView direction="0" size="100%,33%" center="1">
 						<Button name="MarginBottom" normalImage="Default/Image/arrow_black.png" selectedImage="Default/Image/arrow_red.png" size="39,41" rotation="0,0,180" anchorPoint="0.5,0.5,0"/>
 					</ListView>
 				</ListView>
 			</ListView>
-			<ListView direction="2" size="250,120">
-				<ListView direction="0" size="100%,40" center="1">
-					<Text text="Top" size="55,100%"  fontSize="20" textColor="255,255,255" />
+			<Widget size="100%,5"/>
+			<ListView direction="2" size="250,90">
+				<ListView direction="0" size="100%,33%" center="1">
+					<Text text="Top" size="55,100%"  fontSize="18" textColor="255,255,255" />
 					<ListView size="55,100%" showMask="1" maskColor="0,0,0,125">
-						<EditText name="TopValue" text="0" size="100%,100%" horizontal="1" vertical="1"  fontSize="22" textColor="255,255,255" />
+						<EditText name="TopValue" text="0" size="100%,100%" horizontal="0" vertical="1"  fontSize="20" textColor="255,255,255" />
 					</ListView>
 				</ListView>
-				<ListView direction="0" size="100%,40">
-					<ListView direction="0" size="50%,40">
-						<Text text="Left" size="55,100%"  fontSize="20" textColor="255,255,255" />
+				<ListView direction="0" size="100%,33%">
+					<ListView direction="0" size="50%,100%">
+						<Text text="Left" size="55,100%"  fontSize="18" textColor="255,255,255" />
 						<ListView size="55,100%" showMask="1" maskColor="0,0,0,125">
-							<EditText name="LeftValue" text="0" size="100%,100%" horizontal="1" vertical="1" fontSize="22" textColor="255,255,255" />
+							<EditText name="LeftValue" text="0" size="100%,100%" horizontal="0" vertical="1" fontSize="20" textColor="255,255,255" />
 						</ListView>
 					</ListView>
-					<ListView direction="0" size="50%,40">
-						<Text text="Right" size="55,100%"  fontSize="20" textColor="255,255,255" />
+					<ListView direction="0" size="50%,100%">
+						<Text text="Right" size="55,100%"  fontSize="18" textColor="255,255,255" />
 						<ListView size="55,100%" showMask="1" maskColor="0,0,0,125">
-							<EditText name="RightValue" text="0" size="100%,100%" horizontal="1" vertical="1" fontSize="22" textColor="255,255,255" />
+							<EditText name="RightValue" text="0" size="100%,100%" horizontal="0" vertical="1" fontSize="20" textColor="255,255,255" />
 						</ListView>
 					</ListView>
 				</ListView>
-				<ListView direction="0" size="100%,40" center="1">
-					<Text text="Bottom" size="55,100%"  fontSize="20" textColor="255,255,255" />
+				<ListView direction="0" size="100%,33%" center="1">
+					<Text text="Bottom" size="55,100%"  fontSize="18" textColor="255,255,255" />
 					<ListView size="55,100%" showMask="1" maskColor="0,0,0,125">
-						<EditText name="BottomValue" text="0" size="100%,100%" horizontal="1" vertical="1" fontSize="22" textColor="255,255,255" />
+						<EditText name="BottomValue" text="0" size="100%,100%" horizontal="0" vertical="1" fontSize="20" textColor="255,255,255" />
 					</ListView>
 				</ListView>
 			</ListView>
-			<ListView direction="0" size="300,40">
-				<ListView direction="0" size="50%,40">
-					<Text text="Width" size="55,100%"  fontSize="20" textColor="255,255,255" />
+			<ListView direction="0" size="300,30">
+				<ListView direction="0" size="50%,30">
+					<Text text="Width" size="55,100%"  fontSize="18" textColor="255,255,255" />
 					<ListView size="80,100%" showMask="1" maskColor="0,0,0,125">
-						<EditText name="WidthValue" text="0" size="100%,100%" horizontal="1" vertical="1" fontSize="22" textColor="255,255,255" />
+						<EditText name="WidthValue" text="0" size="100%,100%" vertical="1" fontSize="20" textColor="255,255,255" />
 					</ListView>
 				</ListView>
-				<ListView direction="0" size="50%,40">
-					<Text text="Height" size="55,100%"  fontSize="20" textColor="255,255,255" />
+				<ListView direction="0" size="50%,30">
+					<Text text="Height" size="55,100%"  fontSize="18" textColor="255,255,255" />
 					<ListView size="80,100%" showMask="1" maskColor="0,0,0,125">
-						<EditText name="HeightValue" text="0" size="100%,100%"  fontSize="22" textColor="255,255,255" />
+						<EditText name="HeightValue" text="0" size="100%,100%"  fontSize="20" textColor="255,255,255" />
 					</ListView>
 				</ListView>
 			</ListView>

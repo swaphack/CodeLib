@@ -38,15 +38,17 @@ bool ui::CtrlWidget::init()
 		pDepthTest->setEnabled(false);
 	}
 
-	this->addTouchFunc(render::TouchType::ENDED, [this](const math::Vector2& touchPoint, bool include) {
-		if (include)
+	this->addTouchFunc(render::TouchType::ENDED, [this](const math::Vector2& touchPoint) {
+		for (auto item : _clickFuncs)
 		{
-			for (auto item : _clickFuncs)
-			{
-				item(this);
-			}
+			item(this);
 		}
 	});
+	/*
+	this->addTouchFunc(render::TouchType::CANCELED, [this](const math::Vector2& touchPoint) {
+		_clickFuncs.clear();
+	});
+	*/
 
 	return true; 
 }

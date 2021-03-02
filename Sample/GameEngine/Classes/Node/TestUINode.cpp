@@ -227,15 +227,19 @@ void TestUINode::testImage()
 	pImage->setRotation(0, 0, 45);
 	pImage->setPosition(math::Vector2(500, 500));
 	pImage->setTouchSwallowed(false);
-	pImage->addTouchFunc(TouchType::BEGAN, [&](const math::Vector2& touchPoint, bool include)
+	pImage->addTouchFunc(TouchType::BEGAN, [&](const math::Vector2& touchPoint)
 	{
 		pImage->setBoxVisible(true);
 	});
-	pImage->addTouchFunc(TouchType::MOVED, [&](const math::Vector2& touchPoint, bool include)
+	pImage->addTouchFunc(TouchType::MOVED, [&](const math::Vector2& touchPoint)
 	{
 		pImage->setBoxVisible(true);
 	});
-	pImage->addTouchFunc(TouchType::ENDED, [&](const math::Vector2& touchPoint, bool include)
+	pImage->addTouchFunc(TouchType::ENDED, [&](const math::Vector2& touchPoint)
+	{
+		pImage->setBoxVisible(false);
+	});
+	pImage->addTouchFunc(TouchType::CANCELED, [&](const math::Vector2& touchPoint)
 	{
 		pImage->setBoxVisible(false);
 	});

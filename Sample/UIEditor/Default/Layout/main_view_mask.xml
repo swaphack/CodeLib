@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<root width="1024" height="768" layout="1" fontPath="Default/Font/font_3.ttf">
+  <Layout name="main" showMask="0" maskColor="0,0,0,0" size="100%,100%" enableTouch="1"> 
+  </Layout>
+</root>

@@ -178,12 +178,7 @@ void TestLightingNode::testCubeModel()
 
 	//Utility::runRotateAction(pModel);
 
-	pModel->addTouchFunc(render::TouchType::BEGAN, [&](const math::Vector2& touchPoint, bool include) {
-		if (!include)
-		{
-			return;
-		}
-
+	pModel->addTouchFunc(render::TouchType::BEGAN, [&](const math::Vector2& touchPoint) {
 		pModel->setBoxVisible(!pModel->isBoxVisible());
 	});
 }

@@ -82,6 +82,9 @@
     <ClCompile Include="Classes\UIDesign\UIDesignNodeTree.cpp">
       <Filter>Classes\UIDesign</Filter>
     </ClCompile>
+    <ClCompile Include="Classes\UIDesign\UIDesignMask.cpp">
+      <Filter>Classes\UIDesign</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Classes\UIEditorApplication.h">
@@ -148,6 +151,9 @@
       <Filter>Classes\UIDesign</Filter>
     </ClInclude>
     <ClInclude Include="Classes\UIDesign\UIDesignNodeTree.h">
+      <Filter>Classes\UIDesign</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\UIDesign\UIDesignMask.h">
       <Filter>Classes\UIDesign</Filter>
     </ClInclude>
   </ItemGroup>

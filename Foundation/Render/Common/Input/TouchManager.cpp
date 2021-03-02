@@ -45,10 +45,6 @@ void TouchManager::onTouchBegan(const math::Vector2& touchPoint)
 		{
 			_temps.push_back(item);
 		}
-		else
-		{
-			item->dispatchTouchEvent(TouchType::BEGAN, touchPoint, false);
-		}
 	}
 
 	// 判断两对象的优先级
@@ -59,12 +55,13 @@ void TouchManager::onTouchBegan(const math::Vector2& touchPoint)
 
 	for (auto item : _temps)
 	{
-		//item->onTouchBegan(touchPoint);
-		item->dispatchTouchEvent(TouchType::BEGAN, touchPoint, true);
-		// 吞噬点击
-		if (item->isTouchSwallowed())
+		if (item->onTouchBegan(touchPoint))
 		{
-			break;
+			// 吞噬点击
+			if (item->isTouchSwallowed())
+			{
+				break;
+			}
 		}
 	}
 }

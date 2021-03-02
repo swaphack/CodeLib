@@ -11,5 +11,7 @@
 #include "UIDesignWindow.h"
 #include "UIDesignNodeTree.h"
 
+#include "UIDesignMask.h"
+
 #include "UIDesignPopMenu.h"
 #include "UIDesignMenuBar.h"

@@ -10,4 +10,5 @@ namespace ue
 #define UI_DESIGN_PROPERTY "UIDesignProperty"
 #define UI_DESIGN_PROPERTY "UIDesignProperty"
 #define UI_DESIGN_NODE_TREE "UIDesignNodeTree"
+#define UI_DESIGN_MASK "UIDesignMask"
 }

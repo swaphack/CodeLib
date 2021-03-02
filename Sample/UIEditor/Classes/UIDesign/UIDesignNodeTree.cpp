@@ -182,7 +182,7 @@ ui::CtrlButton* ue::UIDesignNodeTree::createHasChildrenNode(int height, const st
 				vecIndex.push_back(index);
 			}
 			std::reverse(vecIndex.begin(), vecIndex.end());
-			G_PANELEVT->setSelectNodeTree(vecIndex);
+			G_PANELEVT->setSelectTreeNode(vecIndex);
 
 			this->onChangeFoldState(node);
 			this->updateRootPanel();
@@ -226,7 +226,7 @@ ui::CtrlButton* ue::UIDesignNodeTree::createNoChildrenNode(int height, const std
 				vecIndex.push_back(index);
 			}
 			std::reverse(vecIndex.begin(), vecIndex.end());
-			G_PANELEVT->setSelectNodeTree(vecIndex);
+			G_PANELEVT->setSelectTreeNode(vecIndex);
 		});
 	}
 

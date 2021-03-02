@@ -55,7 +55,7 @@ namespace render
 		void removeAllTouchFuncs();
 	public:
 		// 派发触摸事件
-		void dispatchTouchEvent(TouchType type, const math::Vector2& touchPoint, bool include = true);
+		void dispatchTouchEvent(TouchType type, const math::Vector2& touchPoint);
 	private:
 		//可点击
 		bool _bTouchEnabled = false;

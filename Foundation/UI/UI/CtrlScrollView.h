@@ -85,6 +85,10 @@ namespace ui
 		*	按照索引获取控件
 		*/
 		CtrlWidget* getItemByIndex(int index) const;
+		/**
+		*	按照索引获取控件
+		*/
+		CtrlWidget* findItemByName(const std::string& name) const;
 	public:
 		/**
 		*	水平方向是否可以滑动

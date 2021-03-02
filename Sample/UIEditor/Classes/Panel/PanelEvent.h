@@ -9,12 +9,14 @@ namespace ue
 #define PANEL_SELECT_DESIGN_FILE "PANEL_SELECT_DESIGN_FILE"
 	// 选中根节点
 #define PANEL_SELECT_ROOT "PANEL_SELECT_ROOT"
-	// 选中布局项
-#define PANEL_SELECT_WIDGET "PANEL_SELECT_WIDGET"
+	// 选中视图控件项
+#define PANEL_SELECT_VIEW_WIDGET "PANEL_SELECT_VIEW_WIDGET"
 	// 选中树节点
 #define PANEL_SELECT_NODE_TREE "PANEL_SELECT_NODE_TREE"
 	// 保存文件
 #define PANEL_SAVE_FILE "PANEL_SAVE_FILE"
+	// 选中控件项
+#define PANEL_SELECT_CONTROL_WIDGET "PANEL_SELECT_CONTROL_WIDGET"
 
 	/**
 	*	事件中心
@@ -39,13 +41,17 @@ namespace ue
 		*/
 		void setSelectNode(render::Node* node);
 		/**
-		*	派发选中节点数
+		*	派发选中节点树节点
 		*/
-		void setSelectNodeTree(const std::vector<int>& vecIndex);
+		void setSelectTreeNode(const std::vector<int>& vecIndex);
 		/**
 		*	派发根节点
 		*/
 		void setRoot(render::Node* node);
+		/**
+		*	派发选中控件数
+		*/
+		void setSelectControlWidget(render::Node* node);
 		/**
 		*	保存文件
 		*/

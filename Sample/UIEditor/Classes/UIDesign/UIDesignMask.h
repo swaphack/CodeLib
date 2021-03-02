@@ -4,14 +4,18 @@
 
 namespace ue
 {
-	// 控件栏
-	class UIDesignWidget : public Panel
+	/**
+	*	遮罩层，用于处理事件
+	*/
+	class UIDesignMask : public Panel
 	{
 	public:
-		UIDesignWidget();
-		virtual ~UIDesignWidget();
+		UIDesignMask();
+		virtual ~UIDesignMask();
 	public:
 		virtual bool init();
+	public:
+
 	protected:
 		/**
 		*	初始化
@@ -25,7 +29,10 @@ namespace ue
 		*	初始化文本
 		*/
 		virtual void initText();
-	public:
-		ui::CtrlGridView* _gridView = nullptr;
+	private:
+		ui::CtrlLayout* m_pMainLayout = nullptr;
+
+		math::Vector2 m_pTempPosition;
+		ui::CtrlImage* m_pCloneWidget = nullptr;
 	};
 }

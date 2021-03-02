@@ -80,7 +80,7 @@ bool TouchProtocol::onTouchBegan(const math::Vector2& touchPoint)
 	bool include = this->containTouchPoint(touchPoint);
 	if (include)
 	{
-		dispatchTouchEvent(TouchType::BEGAN, touchPoint, include);
+		dispatchTouchEvent(TouchType::BEGAN, touchPoint);
 	}
 	else
 	{
@@ -101,7 +101,7 @@ bool TouchProtocol::onTouchMoved(const math::Vector2& touchPoint)
 	bool include = this->containTouchPoint(touchPoint);
 	if (include)
 	{
-		dispatchTouchEvent(TouchType::MOVED, touchPoint, include);
+		dispatchTouchEvent(TouchType::MOVED, touchPoint);
 	}
 	else
 	{
@@ -121,7 +121,7 @@ bool TouchProtocol::onTouchEnded(const math::Vector2& touchPoint)
 	bool include = this->containTouchPoint(touchPoint);
 	if (include)
 	{
-		dispatchTouchEvent(TouchType::ENDED, touchPoint, include);
+		dispatchTouchEvent(TouchType::ENDED, touchPoint);
 	}
 	else
 	{
@@ -138,7 +138,7 @@ void TouchProtocol::onTouchCanceled(const math::Vector2& touchPoint)
 		return;
 	}
 
-	dispatchTouchEvent(TouchType::CANCELED, touchPoint, false);
+	dispatchTouchEvent(TouchType::CANCELED, touchPoint);
 }
 
 void TouchProtocol::addTouchDelegate(TouchType type, sys::Object* object, TOUCH_DELEGATE_HANDLER handler)
@@ -189,7 +189,7 @@ void render::TouchProtocol::removeAllTouchFuncs()
 	_touchFuncs.clear();
 }
 
-void TouchProtocol::dispatchTouchEvent(TouchType type, const math::Vector2& touchPoint, bool include)
+void TouchProtocol::dispatchTouchEvent(TouchType type, const math::Vector2& touchPoint)
 {
 	auto it0 = _touchDelegates.find(type);
 	if (it0 != _touchDelegates.end())
@@ -197,7 +197,7 @@ void TouchProtocol::dispatchTouchEvent(TouchType type, const math::Vector2& touc
 		const auto& items = _touchDelegates[type];
 		for (const auto& item : items)
 		{
-			((item.first)->*(item.second))(dynamic_cast<render::Node*>(this), touchPoint, include);
+			((item.first)->*(item.second))(dynamic_cast<render::Node*>(this), touchPoint);
 		}
 	}
 
@@ -207,7 +207,7 @@ void TouchProtocol::dispatchTouchEvent(TouchType type, const math::Vector2& touc
 		const auto& items = _touchFuncs[type];
 		for (const auto& item : items)
 		{
-			item(touchPoint, include);
+			item(touchPoint);
 		}
 	}	
 }

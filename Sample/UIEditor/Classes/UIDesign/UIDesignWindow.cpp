@@ -17,8 +17,8 @@ bool ue::UIDesignWindow::init()
 {
 	if (!Panel::init())
 		return false;
-
-	this->addTouchFunc(render::TouchType::ENDED, [this](const math::Vector2& touchPoint, bool include) {
+	/*
+	this->addTouchFunc(render::TouchType::ENDED, [this](const math::Vector2& touchPoint) {
 		if (m_pDesignPanel)
 		{
 			if (!m_pDesignPanel->containTouchPoint(touchPoint))
@@ -27,13 +27,13 @@ bool ue::UIDesignWindow::init()
 			}
 		}
 	});
-
+	*/
 	return true;
 }
 
 void ue::UIDesignWindow::initUI()
 {
-	m_pRootWidget->findWidgetByName("UIDesignView", m_pDesignPanel);
+	m_pRootWidget->findWidgetByName("DesignView", m_pDesignPanel);
 }
 
 void ue::UIDesignWindow::initEvent()

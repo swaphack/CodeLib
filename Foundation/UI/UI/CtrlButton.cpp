@@ -29,22 +29,15 @@ bool ui::CtrlButton::init()
 	{
 		return false;
 	}
-	this->addTouchFunc(render::TouchType::BEGAN, [this](const math::Vector2& touchPoint, bool include) {
-		if (include)
-		{
-			this->setScale(_touchScale);
-		}
+	this->addTouchFunc(render::TouchType::BEGAN, [this](const math::Vector2& touchPoint) {
+		this->setScale(_touchScale);
 	});
 
-	this->addTouchFunc(render::TouchType::ENDED, [this](const math::Vector2& touchPoint, bool include) {
-		if (include)
-		{
-
-			this->setScale(1.0f);
-		}
+	this->addTouchFunc(render::TouchType::ENDED, [this](const math::Vector2& touchPoint) {
+		this->setScale(1.0f);
 	});
 
-	this->addTouchFunc(render::TouchType::CANCELED, [this](const math::Vector2& touchPoint, bool include) {
+	this->addTouchFunc(render::TouchType::CANCELED, [this](const math::Vector2& touchPoint) {
 		this->setScale(1.0f);
 	});
 	return true;

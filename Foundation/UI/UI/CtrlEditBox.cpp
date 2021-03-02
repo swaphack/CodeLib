@@ -94,16 +94,17 @@ bool ui::CtrlEditBox::init()
 		return false;
 	}
 
-	this->addTouchFunc(render::TouchType::BEGAN, [this](const math::Vector2& touchPoint, bool include) {
+	this->addTouchFunc(render::TouchType::BEGAN, [this](const math::Vector2& touchPoint) {
 		this->setKeyboardEnable(false);
 	});
 
-	this->addTouchFunc(render::TouchType::ENDED, [this](const math::Vector2& touchPoint, bool include) {
-		if (include)
-		{
-			bool bEnable = !isKeyboardEnable();
-			this->setKeyboardEnable(bEnable);
-		}
+	this->addTouchFunc(render::TouchType::ENDED, [this](const math::Vector2& touchPoint) {
+		bool bEnable = !isKeyboardEnable();
+		this->setKeyboardEnable(bEnable);
+	});
+
+	this->addTouchFunc(render::TouchType::CANCELED, [this](const math::Vector2& touchPoint) {
+		this->setKeyboardEnable(false);
 	});
 
 	this->addKeyboardDelegate();
