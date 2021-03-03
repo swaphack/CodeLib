@@ -44,9 +44,9 @@ const CtrlScrollView* ui::ScrollItem::getScrollView() const
 void ui::ScrollItem::removeWidget(CtrlWidget* item)
 {
 	if (item == nullptr || _relativeView == nullptr) return;
-	if (this->indexOfChild(item) == -1) return;
+	if (this->indexOfChild(item) != 0) return;
 
-	_relativeView->removeWidget(this);
+	_relativeView->removeWidget(item);
 }
 
 ScrollItem* ScrollItem::create(CtrlWidget* node, const sys::CSSSize& size, CtrlScrollView* view)
@@ -195,8 +195,8 @@ void CtrlScrollView::removeItem(CtrlWidget* item)
 	{
 		if ((*iter)->getFirstChild() == item)
 		{
+			_content->removeWidget(*iter);
 			_scrollItems.erase(iter);
-			_content->removeChild(*iter);
 			break;
 		}
 		iter++;
