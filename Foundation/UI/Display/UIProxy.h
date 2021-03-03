@@ -11,6 +11,7 @@ namespace ui
 	// ui加载
 	class UIProxy
 	{
+		typedef std::function<ui::CtrlWidget* (const std::string& name)> CreateWidgetFunc;
 	private:
 		UIProxy();
 		virtual ~UIProxy();
@@ -24,6 +25,7 @@ namespace ui
 		*	保存ui配置文件
 		*/
 		bool saveFile(CtrlWidget* CtrlWidget, const std::string& filepath, const math::Size& designSize);
+	public:
 		/**
 		*	注册节点解析
 		*/
@@ -36,6 +38,24 @@ namespace ui
 		*	移除所有节点解析
 		*/
 		void removeAllElementParsers();
+	public:
+		/**
+		*	注册节点解析
+		*/
+		void registerWidgetCreator(const std::string& creatorName, const CreateWidgetFunc& func);
+		/**
+		*	注销节点解析
+		*/
+		void unregisterWidgetCreator(const std::string& creatorName);
+		/**
+		*	移除所有节点解析
+		*/
+		void removeAllWidgetCreators();
+		/**
+		*	创建控件
+		*/
+		ui::CtrlWidget* createWidget(const std::string& widgetName);
+	public:
 		/**
 		*	设计大小
 		*/
@@ -96,8 +116,12 @@ namespace ui
 		bool saveRoot(CtrlWidget* layout, tinyxml2::XMLDocument* document);
 	private:
 		typedef std::map<std::string, IElement*> ElementParsers;
+		typedef std::map<std::string, CreateWidgetFunc> WidgetCreators;
+
 		// 节点解析集合
 		ElementParsers _elementParsers;
+		// 控件创建集合
+		WidgetCreators _widgetCreators;
 		// 设计大小
 		math::Size _designSize;
 		// 布局方向

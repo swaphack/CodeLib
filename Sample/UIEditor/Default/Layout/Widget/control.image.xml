@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<root width="1024" height="768" layout="1" fontPath="Resource/Font/font_3.ttf">
+	<Image anchorPoint="0.500000,0.500000,0.500000" clip="0" color="255,255,255,255" enableTouch="0" flipX="0" flipY="0" margin="200.00,0.00,0.00,0.00" marginState="1,1,0,1" name="Image" rotation="0.000000,0.000000,0.000000" scale="1.000000,1.000000,1.000000" size="100.00,100.00" filepath="Default/Image/control_widget.png"/>
+</root>

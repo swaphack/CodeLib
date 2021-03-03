@@ -210,7 +210,7 @@ void CtrlScrollView::removeAllItems()
 	std::vector<ScrollItem*>::iterator iter = _scrollItems.begin();
 	while (iter != _scrollItems.end())
 	{
-		(*iter)->removeAllWidgets();
+		//(*iter)->removeAllWidgets();
 		(*iter)->removeFromParent();
 		iter++;
 	}

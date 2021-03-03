@@ -33,16 +33,27 @@ bool ue::UIDesignMask::init()
 			}
 
 			if (m_pCloneWidget != nullptr) 
+			{
 				m_pCloneWidget->removeFromParent();
+			}
+
 			if (m_pMainLayout)
 			{
-				m_pCloneWidget = render::createNode<ui::CtrlImage>();
-				m_pCloneWidget->getLayoutItem()->setName("image");
-				m_pCloneWidget->getLayoutItem()->setWidgetName(ELEMENT_NAME_IMAGE);
-				m_pCloneWidget->getLayoutItem()->setWidth(100);
-				m_pCloneWidget->getLayoutItem()->setHeight(100);
-				m_pCloneWidget->getLayoutItem()->setMargin(0, 0, 0, 0);
-				m_pCloneWidget->setImagePath(pNode->getNormalImage());
+				std::string name = pNode->getString();
+				m_pCloneWidget = ui::UIProxy::getInstance()->createWidget(name);
+				if (m_pCloneWidget == nullptr)
+				{
+					return;
+				}
+				auto pLayoutItem = m_pCloneWidget->getLayoutItem();
+				if (pLayoutItem)
+				{
+					pLayoutItem->setName(name);
+					pLayoutItem->setWidgetName(name);
+					pLayoutItem->setWidth(100);
+					pLayoutItem->setHeight(100);
+					pLayoutItem->setMargin(0, 0, 0, 0);
+				}
 				m_pCloneWidget->setPosition(m_pTempPosition);
 				m_pMainLayout->addWidget(m_pCloneWidget);
 			}

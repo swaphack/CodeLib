@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<root width="1024" height="768" layout="1" fontPath="Resource/Font/font_3.ttf">
+	<Button anchorPoint="0.500000,0.500000,0.500000" normalImage="Default/Image/control_widget.png" clip="0" enableTouch="1" fontPath="Resource/Font/font_3.ttf" fontSize="0.000000" horizontal="1" margin="400.00,0.00,0.00,0.00" marginState="1,1,0,1" name="Button" rotation="0.000000,0.000000,0.000000" scale="1.000000,1.000000,1.000000" size="100.00,100.00" textColor="0,0,0" vertical="1"/>
+</root>

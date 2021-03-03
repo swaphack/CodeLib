@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<root width="1024" height="768" layout="1" fontPath="Resource/Font/font_3.ttf">
+	<Layout anchorPoint="0.000000,0.000000,0.000000" clip="0" enableTouch="0" imagePath="1" margin="0.00,0.00,0.00,0.00" marginState="0,0,0,0" maskColor="200,200,200,255" name="Layout" rotation="0.000000,0.000000,0.000000" scale="1.000000,1.000000,1.000000" showImage="0" showMask="1" size="100.00,100.00" />
+</root>

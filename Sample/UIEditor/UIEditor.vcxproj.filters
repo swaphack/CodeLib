@@ -85,6 +85,9 @@
     <ClCompile Include="Classes\UIDesign\UIDesignMask.cpp">
       <Filter>Classes\UIDesign</Filter>
     </ClCompile>
+    <ClCompile Include="Classes\Config\WidgetConfig.cpp">
+      <Filter>Classes\Config</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Classes\UIEditorApplication.h">
@@ -155,6 +158,9 @@
     </ClInclude>
     <ClInclude Include="Classes\UIDesign\UIDesignMask.h">
       <Filter>Classes\UIDesign</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Config\WidgetConfig.h">
+      <Filter>Classes\Config</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

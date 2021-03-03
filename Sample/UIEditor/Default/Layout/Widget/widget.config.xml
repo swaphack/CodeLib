@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<root>
+	<Item name="Button" control="Default/Layout/Widget/control.button.xml" property="Default/Layout/Widget/property.button.xml" />
+	<Item name="EditText" control="Default/Layout/Widget/control.edittext.xml" property="Default/Layout/Widget/property.edittext.xml" />
+	<Item name="GridView" control="Default/Layout/Widget/control.gridview.xml" property="Default/Layout/Widget/property.gridview.xml" />
+	<Item name="Image" control="Default/Layout/Widget/control.image.xml" property="Default/Layout/Widget/property.image.xml" />
+	<Item name="Layout" control="Default/Layout/Widget/control.layout.xml" property="Default/Layout/Widget/property.layout.xml" />
+	<Item name="ListView" control="Default/Layout/Widget/control.listview.xml" property="Default/Layout/Widget/property.listview.xml" />
+	<Item name="ScrollView" control="Default/Layout/Widget/control.scrollview.xml" property="Default/Layout/Widget/property.scrollview.xml" />
+	<Item name="Text" control="Default/Layout/Widget/control.text.xml" property="Default/Layout/Widget/property.text.xml" />
+	<Item name="Widget" control="Default/Layout/Widget/control.widget.xml" property="Default/Layout/Widget/property.widget.xml" />
+</root>

@@ -33,6 +33,6 @@ namespace ue
 		ui::CtrlLayout* m_pMainLayout = nullptr;
 
 		math::Vector2 m_pTempPosition;
-		ui::CtrlImage* m_pCloneWidget = nullptr;
+		ui::CtrlWidget* m_pCloneWidget = nullptr;
 	};
 }

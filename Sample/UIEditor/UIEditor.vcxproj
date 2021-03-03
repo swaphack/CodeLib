@@ -22,6 +22,7 @@
     <ClCompile Include="Classes\Config\IDEConfig.cpp" />
     <ClCompile Include="Classes\Config\import.h" />
     <ClCompile Include="Classes\Config\ProjectConfig.cpp" />
+    <ClCompile Include="Classes\Config\WidgetConfig.cpp" />
     <ClCompile Include="Classes\Panel\Panel.cpp" />
     <ClCompile Include="Classes\Panel\PanelEvent.cpp" />
     <ClCompile Include="Classes\Panel\SinglePanel.cpp" />
@@ -44,6 +45,7 @@
     <ClInclude Include="Classes\Config\Config.h" />
     <ClInclude Include="Classes\Config\IDEConfig.h" />
     <ClInclude Include="Classes\Config\ProjectConfig.h" />
+    <ClInclude Include="Classes\Config\WidgetConfig.h" />
     <ClInclude Include="Classes\Panel\import.h" />
     <ClInclude Include="Classes\Panel\Panel.h" />
     <ClInclude Include="Classes\Panel\PanelEvent.h" />

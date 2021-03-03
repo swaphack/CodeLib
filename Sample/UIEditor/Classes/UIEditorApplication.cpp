@@ -30,6 +30,7 @@ void ue::UIEditorApplication::show()
 
 	MainWindow* pWindow = CREATE_NODE(MainWindow);
 	pWindow->setUIFile(_ideConfig.getIDE().Design);
+	pWindow->setWidgetFile(_ideConfig.getIDE().Control);
 	getCanvas()->pushScene(pWindow);
 
 	std::string filepath = _projectConfig.getRecent().getFile(0);

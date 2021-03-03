@@ -24,7 +24,6 @@ void UIProxy::init()
 	this->registerElementParser(ELEMENT_NAME_SCROLLVIEW, new ScrollViewLoader());
 	this->registerElementParser(ELEMENT_NAME_LISTVIEW, new ListViewLoader());
 	this->registerElementParser(ELEMENT_NAME_GRIDVIEW, new GridViewLoader());
-
 	this->registerElementParser(ELEMENT_NAME_FILE, new FileLoader());
 }
 
@@ -142,6 +141,52 @@ void UIProxy::removeAllElementParsers()
 	}
 
 	_elementParsers.clear();
+}
+
+void ui::UIProxy::registerWidgetCreator(const std::string& creatorName, const CreateWidgetFunc& func)
+{
+	if (creatorName.empty() || func == NULL)
+	{
+		return;
+	}
+
+	unregisterWidgetCreator(creatorName);
+
+	_widgetCreators[creatorName] = func;
+}
+
+void ui::UIProxy::unregisterWidgetCreator(const std::string& creatorName)
+{
+	if (creatorName.empty())
+	{
+		return;
+	}
+
+	WidgetCreators::const_iterator iter = _widgetCreators.find(creatorName);
+	if (iter == _widgetCreators.end())
+	{
+		return;
+	}
+	_widgetCreators.erase(iter);
+}
+
+void ui::UIProxy::removeAllWidgetCreators()
+{
+	_widgetCreators.clear();
+}
+
+ui::CtrlWidget* ui::UIProxy::createWidget(const std::string& widgetName)
+{
+	for (auto item : _widgetCreators)
+	{
+		auto pWidget = item.second(widgetName);
+		if (pWidget != nullptr)
+		{
+			return pWidget;
+		}
+	}
+
+	return nullptr;
 }
 
 const math::Size& UIProxy::getDesignSize() const

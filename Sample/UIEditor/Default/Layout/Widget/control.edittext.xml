@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<root width="1024" height="768" layout="1" fontPath="Resource/Font/font_3.ttf">
+	<EditText anchorPoint="0.500000,0.500000,0.500000" clip="0" enableTouch="1" fontPath="Resource/Font/font_3.ttf" fontSize="18.000000" horizontal="0" margin="300.00,0.00,0.00,0.00" marginState="1,1,0,1" multiLine="0" name="EditText" placeholderColor="0,0,0" rotation="0.000000,0.000000,0.000000" scale="1.000000,1.000000,1.000000" size="100.00,100.00" textColor="255,255,255" vertical="1" text="EditText"/>
+</root>

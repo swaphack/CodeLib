@@ -2,6 +2,7 @@
 <root>
 	<IDE>
 		<Design>Default/Layout/main_view.xml</Design>
+		<Control>Default/Layout/Widget/widget.config.xml</Control>
 	</IDE>
 	<Text>
 		<FontPath>Default/Font/font_3.ttf</FontPath>

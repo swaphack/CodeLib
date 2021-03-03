@@ -32,6 +32,12 @@ void ue::IDEConfig::loadXml(const std::string& filepath)
 		{
 			_ide.Design = child->GetText();
 		}
+
+		child = element->FirstChildElement("Control");
+		if (child && child->GetText())
+		{
+			_ide.Control = child->GetText();
+		}
 	}
 	element = _helper.getElement("Text");
 	if (element)

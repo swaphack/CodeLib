@@ -15,7 +15,14 @@ namespace ue
 	public:
 		struct IDESetting
 		{
+			/// <summary>
+			/// 设计界面
+			/// </summary>
 			std::string Design;
+			/// <summary>
+			/// 控件配置
+			/// </summary>
+			std::string Control;
 		};
 		/// <summary>
 		/// 文本配置
