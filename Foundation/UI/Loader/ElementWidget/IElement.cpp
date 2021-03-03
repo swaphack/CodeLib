@@ -67,7 +67,8 @@ bool IElement::save(tinyxml2::XMLElement* pXmlNode, bool clean/* = true*/)
 
 	this->saveAttributes();
 
-	pXmlNode->SetName(getNodeProperty()->getName().c_str());
+	pXmlNode->SetName(_layoutItem->getWidgetName().c_str());
+	//pXmlNode->SetName(getNodeProperty()->getName().c_str());
 
 	Attributes::const_iterator iterFirst = getNodeProperty()->getAttributeBegin();
 	Attributes::const_iterator iterEnd = getNodeProperty()->getAttributeEnd();

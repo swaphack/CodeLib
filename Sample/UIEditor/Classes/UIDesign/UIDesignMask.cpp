@@ -1,5 +1,6 @@
 #include "UIDesignMask.h"
 #include "Panel/PanelEvent.h"
+#include "UIDesignView.h"
 
 ue::UIDesignMask::UIDesignMask()
 {
@@ -36,6 +37,11 @@ bool ue::UIDesignMask::init()
 			if (m_pMainLayout)
 			{
 				m_pCloneWidget = render::createNode<ui::CtrlImage>();
+				m_pCloneWidget->getLayoutItem()->setName("image");
+				m_pCloneWidget->getLayoutItem()->setWidgetName(ELEMENT_NAME_IMAGE);
+				m_pCloneWidget->getLayoutItem()->setWidth(100);
+				m_pCloneWidget->getLayoutItem()->setHeight(100);
+				m_pCloneWidget->getLayoutItem()->setMargin(0, 0, 0, 0);
 				m_pCloneWidget->setImagePath(pNode->getNormalImage());
 				m_pCloneWidget->setPosition(m_pTempPosition);
 				m_pMainLayout->addWidget(m_pCloneWidget);
@@ -74,14 +80,37 @@ void ue::UIDesignMask::initEvent()
 
 		m_pMainLayout->addTouchFunc(render::TouchType::ENDED, [this](const math::Vector2& touchPoint) {
 			if (m_pCloneWidget != nullptr)
-				m_pCloneWidget->removeFromParent();
-			m_pCloneWidget = nullptr;
+			{
+				auto pViewPanel = G_PANELEVT->getViewPanel();
+				if (pViewPanel != nullptr)
+				{
+					auto pRoot = pViewPanel->getUIRoot();
+					if (pViewPanel)
+					{
+						touchFrontWidget(pViewPanel, touchPoint, [this, pViewPanel](ui::CtrlWidget* widget) {
+							m_pCloneWidget->retain();
+							m_pCloneWidget->removeFromParent();
+							widget->addWidget(m_pCloneWidget);
+							m_pCloneWidget = nullptr;
+							pViewPanel->saveAndReload();
+						});
+					}
+				}
+
+				if (m_pCloneWidget != nullptr)
+				{
+					m_pCloneWidget->removeFromParent();
+					m_pCloneWidget = nullptr;
+				}
+			}
 		});
 
 		m_pMainLayout->addTouchFunc(render::TouchType::CANCELED, [this](const math::Vector2& touchPoint) {
 			if (m_pCloneWidget != nullptr)
+			{
 				m_pCloneWidget->removeFromParent();
-			m_pCloneWidget = nullptr;
+				m_pCloneWidget = nullptr;
+			}
 		});
 	}
 }

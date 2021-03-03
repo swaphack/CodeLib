@@ -33,6 +33,37 @@ void ue::Panel::initText()
 {
 }
 
+bool ue::Panel::touchFrontWidget(ui::CtrlWidget* widget, const math::Vector2& touchPoint, const FrontWidgetFunc& func)
+{
+	if (widget == nullptr || func == nullptr) return false;
+
+	bool contain = false;
+	const auto& vecWidgets = widget->getAllWidgets();
+	int nChildCount = vecWidgets.size();
+	if (nChildCount > 0)
+	{
+		for (int i = nChildCount - 1; i >= 0; i--)
+		{
+			if (touchFrontWidget(vecWidgets[i], touchPoint, func))
+			{
+				contain = true;
+				return true;
+			}
+		}
+	}
+
+	if (!contain)
+	{
+		if (!widget->containTouchPoint(touchPoint))
+		{
+			return false;
+		}
+		func(widget);
+	}
+
+	return true;
+}
+
 ui::CtrlWidget* ue::Panel::createUIFile(const std::string& filepath)
 {
 	auto pFile = CREATE_NODE(ui::CtrlFile);

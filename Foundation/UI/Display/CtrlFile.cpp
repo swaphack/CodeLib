@@ -46,6 +46,11 @@ const std::string& CtrlFile::getFilePath()
 	return m_strFilePath;
 }
 
+void ui::CtrlFile::reload()
+{
+	setFilePath(m_strFilePath);
+}
+
 void ui::CtrlFile::save()
 {
 	this->saveTo(m_strFilePath);

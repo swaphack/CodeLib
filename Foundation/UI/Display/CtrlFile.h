@@ -35,6 +35,10 @@ namespace ui
 		*/
 		const std::string& getFilePath();
 		/**
+		*	重新加载
+		*/
+		void reload();
+		/**
 		*	保存
 		*/
 		void save();

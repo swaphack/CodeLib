@@ -14,19 +14,32 @@ namespace ui
 		ScrollItem();
 		virtual ~ScrollItem();
 	public:
-		// 添加项
+		/**
+		*	添加项
+		*/ 
 		void addItem(CtrlWidget* node, const sys::CSSSize& size);
-
+		/**
+		*	设置滑动视图
+		*/
 		void setScrollView(CtrlScrollView* view);
-
+		/**
+		*	设置滑动视图
+		*/
 		const CtrlScrollView* getScrollView() const;
+		/**
+		*	重写移除
+		*/
+		virtual void removeWidget(CtrlWidget* item);
 	public:
 		static ScrollItem* create(CtrlWidget* node, const sys::CSSSize& size, CtrlScrollView* view);
 	private:
+		/**
+		*	设置滑动视图
+		*/
 		CtrlScrollView* _relativeView = nullptr;
 	};
 
-	// 滑动
+	// 滑动视图
 	class CtrlScrollView : public CtrlLayout
 	{
 	public:

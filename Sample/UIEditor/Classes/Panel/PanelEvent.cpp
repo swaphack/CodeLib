@@ -1,4 +1,6 @@
 #include "PanelEvent.h"
+#include "UIDesign/UIDesignView.h"
+#include "UIDesign/UIDesignNodeTree.h"
 
 ue::PanelEvent::PanelEvent()
 {
@@ -45,4 +47,24 @@ void ue::PanelEvent::setSelectControlWidget(render::Node* node)
 void ue::PanelEvent::saveFile()
 {
 	this->dispatchEvent(PANEL_SAVE_FILE, nullptr);
+}
+
+void ue::PanelEvent::setViewPanel(UIDesignView* panel)
+{
+	m_pDesignView = panel;
+}
+
+ue::UIDesignView* ue::PanelEvent::getViewPanel() const
+{
+	return m_pDesignView;
+}
+
+void ue::PanelEvent::setNodeTreePanel(UIDesignNodeTree* panel)
+{
+	m_pDesignNodeTree = panel;
+}
+
+ue::UIDesignNodeTree* ue::PanelEvent::getNodeTreePanel() const
+{
+	return m_pDesignNodeTree;
 }

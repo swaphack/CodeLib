@@ -3,10 +3,12 @@
 
 ue::UIDesignNodeTree::UIDesignNodeTree()
 {
+	G_PANELEVT->setNodeTreePanel(this);
 }
 
 ue::UIDesignNodeTree::~UIDesignNodeTree()
 {
+	G_PANELEVT->setNodeTreePanel(nullptr);
 }
 
 bool ue::UIDesignNodeTree::init()

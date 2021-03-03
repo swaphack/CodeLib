@@ -162,11 +162,14 @@ void ui::CtrlWidget::removeFromParent()
 
 	if (this->getParent()->is<CtrlWidget>())
 	{
-		this->getParent()->as<CtrlWidget>()->removeWidget(this);
+		auto pParent = static_cast<CtrlWidget*>(this->getParent());
+		pParent->removeWidget(this);
 	}
 	else if (this->getParent()->is<Node>())
 	{
-		this->getParent()->as<Node>()->removeChild(this);
+		auto pParent = static_cast<Node*>(this->getParent());
+
+		pParent->removeChild(this);
 	}
 
 	this->setParent(nullptr);

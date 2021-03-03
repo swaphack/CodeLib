@@ -1,12 +1,15 @@
 #include "UIDesignView.h"
 #include "Panel/PanelEvent.h"
+
 ue::UIDesignView::UIDesignView()
 {
+	G_PANELEVT->setViewPanel(this);
 	this->setTouchEnabled(true);
 }
 
 ue::UIDesignView::~UIDesignView()
 {
+	G_PANELEVT->setViewPanel(nullptr);
 }
 
 bool ue::UIDesignView::init()
@@ -45,7 +48,6 @@ bool ue::UIDesignView::init()
 			for (size_t i = 0; i < vecIndex.size(); i++)
 			{
 				if (pTemp == nullptr) return;
-				//pTemp = ui::UIProxy::getChildByIndex(pTemp, vecIndex[i]);
 				pTemp = pTemp->getChildByIndex(vecIndex[i]);
 			}
 
@@ -58,6 +60,18 @@ bool ue::UIDesignView::init()
 
 
 	G_KEYBOARDMANAGER->addKeyboardFunc(this, this, [this](sys::BoardKey key, sys::ButtonStatus status) {
+		if (key == sys::BoardKey::KDELETE)
+		{// É¾³ý
+			if (m_pSelectedTarget != nullptr)
+			{
+				m_pSelectedTarget->removeFromParent();
+				m_pSelectedTarget = nullptr;
+				this->saveAndReload();
+			}
+			return;
+		}
+
+
 		if (!G_KEYCHAR->isControlEnabled())
 		{
 			return;
@@ -76,7 +90,9 @@ bool ue::UIDesignView::init()
 		ui::CtrlFile* pFile = m_pUIFile->as<ui::CtrlFile>();
 		if (pFile)
 		{
-			touchFrontWidget(pFile, touchPoint);
+			touchFrontWidget(pFile, touchPoint, [this](ui::CtrlWidget* widget) {
+				setSelectTarget(widget);
+			});
 		}
 	});
 
@@ -156,6 +172,17 @@ void ue::UIDesignView::setDesignFile(const std::string& filepath)
 	}
 }
 
+ui::CtrlWidget* ue::UIDesignView::getUIRoot() const
+{
+	return m_pUIFile;
+}
+
+void ue::UIDesignView::saveAndReload()
+{
+	this->saveFile();
+	this->reloadFile();
+}
+
 void ue::UIDesignView::initUI()
 {
 	m_pRootWidget->findWidgetByName("viewScene", m_pViewScene);
@@ -170,42 +197,13 @@ void ue::UIDesignView::initText()
 {
 }
 
-bool ue::UIDesignView::touchFrontWidget(ui::CtrlWidget* widget, const math::Vector2& touchPoint)
-{
-	if (widget == nullptr)
-	{
-		return false;
-	}
-
-	bool contain = false;
-	const auto& vecWidgets = widget->getAllWidgets();
-	int nChildCount = vecWidgets.size();
-	if (nChildCount > 0)
-	{
-		for (int i = nChildCount - 1; i >= 0; i--)
-		{
-			if (touchFrontWidget(vecWidgets[i], touchPoint))
-			{
-				contain = true;
-				return true;
-			}
-		}
-	}
-
-	if (!contain)
-	{
-		if (!widget->containTouchPoint(touchPoint))
-		{
-			return false;
-		}
-		setSelectTarget(widget);
-	}
-
-	return true;
-}
-
 void ue::UIDesignView::saveFile()
 {
+	if (m_pUIFile == nullptr)
+	{
+		return;
+	}
+		
 	auto pFile = m_pUIFile->as<ui::CtrlFile>();
 	if (pFile)
 	{

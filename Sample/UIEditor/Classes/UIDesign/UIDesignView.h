@@ -29,6 +29,14 @@ namespace ue
 		*	设置设计文件
 		*/
 		void setDesignFile(const std::string& filepath);
+		/**
+		*	获取ui设计文件根节点
+		*/
+		ui::CtrlWidget* getUIRoot() const;
+		/**
+		*	保存并重新加载界面
+		*/
+		void saveAndReload();
 	protected:
 		/**
 		*	初始化
@@ -43,10 +51,6 @@ namespace ue
 		*/
 		virtual void initText();
 	protected:
-		/**
-		*	点击最前面的组件
-		*/
-		bool touchFrontWidget(ui::CtrlWidget* widget, const math::Vector2& touchPoint);
 		/**
 		*	选中
 		*/

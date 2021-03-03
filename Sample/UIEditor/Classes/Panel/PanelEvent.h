@@ -18,6 +18,9 @@ namespace ue
 	// 选中控件项
 #define PANEL_SELECT_CONTROL_WIDGET "PANEL_SELECT_CONTROL_WIDGET"
 
+	class UIDesignView;
+	class UIDesignNodeTree;
+
 	/**
 	*	事件中心
 	*/
@@ -56,6 +59,32 @@ namespace ue
 		*	保存文件
 		*/
 		void saveFile();
+	public:
+		/**
+		*	文件界面视图
+		*/
+		void setViewPanel(UIDesignView* panel);
+		/**
+		*	文件界面视图
+		*/
+		UIDesignView* getViewPanel() const;
+		/**
+		*	节点树
+		*/
+		void setNodeTreePanel(UIDesignNodeTree* panel);
+		/**
+		*	节点树
+		*/
+		UIDesignNodeTree* getNodeTreePanel() const;
+	private:
+		/**
+		*	文件界面视图
+		*/
+		UIDesignView* m_pDesignView = nullptr;
+		/**
+		*	节点树
+		*/
+		UIDesignNodeTree* m_pDesignNodeTree = nullptr;
 	};
 
 #define G_PANELEVT sys::Instance<PanelEvent>::getInstance()

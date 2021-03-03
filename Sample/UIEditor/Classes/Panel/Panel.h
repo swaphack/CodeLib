@@ -4,6 +4,7 @@
 
 namespace ue
 {
+	typedef std::function<void(ui::CtrlWidget* frontWidget)> FrontWidgetFunc;
 
 	// 面板
 	class Panel : public ui::CtrlFile
@@ -26,6 +27,11 @@ namespace ue
 		*	初始化文本
 		*/
 		virtual void initText();
+	protected:
+		/**
+		*	点击最前面的组件
+		*/
+		bool touchFrontWidget(ui::CtrlWidget* widget, const math::Vector2& touchPoint, const FrontWidgetFunc& func);
 	protected:
 		/**
 		*	创建控件
