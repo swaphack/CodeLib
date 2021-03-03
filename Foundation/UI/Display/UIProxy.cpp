@@ -189,6 +189,52 @@ ui::CtrlWidget* ui::UIProxy::createWidget(const std::string& widgetName)
 	return nullptr;
 }
 
+void ui::UIProxy::registerWidgetPropertyCreator(const std::string& creatorName, const CreateWidgetFunc& func)
+{
+	if (creatorName.empty() || func == NULL)
+	{
+		return;
+	}
+
+	unregisterWidgetPropertyCreator(creatorName);
+
+	_widgetPropertyCreators[creatorName] = func;
+}
+
+void ui::UIProxy::unregisterWidgetPropertyCreator(const std::string& creatorName)
+{
+	if (creatorName.empty())
+	{
+		return;
+	}
+
+	WidgetCreators::const_iterator iter = _widgetPropertyCreators.find(creatorName);
+	if (iter == _widgetPropertyCreators.end())
+	{
+		return;
+	}
+	_widgetPropertyCreators.erase(iter);
+}
+
+void ui::UIProxy::removeAllWidgetPropertyCreators()
+{
+	_widgetPropertyCreators.clear();
+}
+
+ui::CtrlWidget* ui::UIProxy::createWidgetProperty(const std::string& widgetName)
+{
+	for (auto item : _widgetPropertyCreators)
+	{
+		auto pWidget = item.second(widgetName);
+		if (pWidget != nullptr)
+		{
+			return pWidget;
+		}
+	}
+
+	return nullptr;
+}
+
 const math::Size& UIProxy::getDesignSize() const
 {
 	return _designSize;

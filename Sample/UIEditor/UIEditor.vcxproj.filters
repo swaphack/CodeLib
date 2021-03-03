@@ -23,6 +23,9 @@
     <Filter Include="Classes\UIHelper">
       <UniqueIdentifier>{717eb2d1-22ad-4396-9e40-8da7715a8af7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Classes\UIProperty">
+      <UniqueIdentifier>{851885bf-f225-4510-a46e-949cb9416fa7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Classes\main.cpp">
@@ -87,6 +90,36 @@
     </ClCompile>
     <ClCompile Include="Classes\Config\WidgetConfig.cpp">
       <Filter>Classes\Config</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\UIProperty\UIPropertyWidget.cpp">
+      <Filter>Classes\UIProperty</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\UIProperty\UIPropertyProtocol.cpp">
+      <Filter>Classes\UIProperty</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\UIProperty\UIPropertyButton.cpp">
+      <Filter>Classes\UIProperty</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\UIProperty\UIPropertyEditText.cpp">
+      <Filter>Classes\UIProperty</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\UIProperty\UIPropertyGridView.cpp">
+      <Filter>Classes\UIProperty</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\UIProperty\UIPropertyImage.cpp">
+      <Filter>Classes\UIProperty</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\UIProperty\UIPropertyLayout.cpp">
+      <Filter>Classes\UIProperty</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\UIProperty\UIPropertyListView.cpp">
+      <Filter>Classes\UIProperty</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\UIProperty\UIPropertyScrollView.cpp">
+      <Filter>Classes\UIProperty</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\UIProperty\UIPropertyText.cpp">
+      <Filter>Classes\UIProperty</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -161,6 +194,39 @@
     </ClInclude>
     <ClInclude Include="Classes\Config\WidgetConfig.h">
       <Filter>Classes\Config</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\UIProperty\UIPropertyWidget.h">
+      <Filter>Classes\UIProperty</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\UIProperty\UIPropertyProtocol.h">
+      <Filter>Classes\UIProperty</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\UIProperty\import.h">
+      <Filter>Classes\UIProperty</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\UIProperty\UIPropertyButton.h">
+      <Filter>Classes\UIProperty</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\UIProperty\UIPropertyEditText.h">
+      <Filter>Classes\UIProperty</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\UIProperty\UIPropertyGridView.h">
+      <Filter>Classes\UIProperty</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\UIProperty\UIPropertyImage.h">
+      <Filter>Classes\UIProperty</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\UIProperty\UIPropertyLayout.h">
+      <Filter>Classes\UIProperty</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\UIProperty\UIPropertyListView.h">
+      <Filter>Classes\UIProperty</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\UIProperty\UIPropertyScrollView.h">
+      <Filter>Classes\UIProperty</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\UIProperty\UIPropertyText.h">
+      <Filter>Classes\UIProperty</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

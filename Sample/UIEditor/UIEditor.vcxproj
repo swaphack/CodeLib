@@ -39,6 +39,16 @@
     <ClCompile Include="Classes\UIEditorApplication.cpp" />
     <ClCompile Include="Classes\main.cpp" />
     <ClCompile Include="Classes\UIHelper\FileSystemWindow.cpp" />
+    <ClCompile Include="Classes\UIProperty\UIPropertyButton.cpp" />
+    <ClCompile Include="Classes\UIProperty\UIPropertyEditText.cpp" />
+    <ClCompile Include="Classes\UIProperty\UIPropertyGridView.cpp" />
+    <ClCompile Include="Classes\UIProperty\UIPropertyImage.cpp" />
+    <ClCompile Include="Classes\UIProperty\UIPropertyLayout.cpp" />
+    <ClCompile Include="Classes\UIProperty\UIPropertyListView.cpp" />
+    <ClCompile Include="Classes\UIProperty\UIPropertyProtocol.cpp" />
+    <ClCompile Include="Classes\UIProperty\UIPropertyScrollView.cpp" />
+    <ClCompile Include="Classes\UIProperty\UIPropertyText.cpp" />
+    <ClCompile Include="Classes\UIProperty\UIPropertyWidget.cpp" />
     <ClCompile Include="Classes\Window\MainWindow.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -65,6 +75,17 @@
     <ClInclude Include="Classes\UIEditorApplication.h" />
     <ClInclude Include="Classes\UIHelper\FileSystemWindow.h" />
     <ClInclude Include="Classes\UIHelper\import.h" />
+    <ClInclude Include="Classes\UIProperty\import.h" />
+    <ClInclude Include="Classes\UIProperty\UIPropertyButton.h" />
+    <ClInclude Include="Classes\UIProperty\UIPropertyEditText.h" />
+    <ClInclude Include="Classes\UIProperty\UIPropertyGridView.h" />
+    <ClInclude Include="Classes\UIProperty\UIPropertyImage.h" />
+    <ClInclude Include="Classes\UIProperty\UIPropertyLayout.h" />
+    <ClInclude Include="Classes\UIProperty\UIPropertyListView.h" />
+    <ClInclude Include="Classes\UIProperty\UIPropertyProtocol.h" />
+    <ClInclude Include="Classes\UIProperty\UIPropertyScrollView.h" />
+    <ClInclude Include="Classes\UIProperty\UIPropertyText.h" />
+    <ClInclude Include="Classes\UIProperty\UIPropertyWidget.h" />
     <ClInclude Include="Classes\Window\MainWindow.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

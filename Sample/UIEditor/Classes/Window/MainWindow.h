@@ -30,6 +30,10 @@ namespace ue
 		*	创建控件
 		*/
 		ui::CtrlWidget* createWidget(const std::string& widgetName);
+		/**
+		*	创建控件属性
+		*/
+		ui::CtrlWidget* createWidgetProperty(const std::string& widgetName);
 	private:
 		UIDesignWindow* _viewLayout = nullptr;
 

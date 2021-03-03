@@ -17,6 +17,7 @@ ue::MainWindow::MainWindow()
 	proxy->registerElementParser(UI_DESIGN_MASK, new ui::TFileLoader<UIDesignMask>());
 
 	proxy->registerWidgetCreator(UI_DESIGN_WIDGET_CREATOR, [this](const std::string& name) { return this->createWidget(name); });
+	proxy->registerWidgetPropertyCreator(UI_DESIGN_WIDGET_CREATOR, [this](const std::string& name) { return this->createWidgetProperty(name); });
 }
 
 ue::MainWindow::~MainWindow()
@@ -54,6 +55,23 @@ ui::CtrlWidget* ue::MainWindow::createWidget(const std::string& widgetName)
 	}
 
 	auto pRoot = ui::UIProxy::getInstance()->loadFile(pSetting->ControlFilepath, this->getSize());
+	if (pRoot == nullptr)
+	{
+		return nullptr;
+	}
+
+	return pRoot;
+}
+
+ui::CtrlWidget* ue::MainWindow::createWidgetProperty(const std::string& widgetName)
+{
+	auto pSetting = _widgetConfig.getWidget(widgetName);
+	if (pSetting == nullptr)
+	{
+		return nullptr;
+	}
+
+	auto pRoot = ui::UIProxy::getInstance()->loadFile(pSetting->PropertyFilepath, this->getSize());
 	if (pRoot == nullptr)
 	{
 		return nullptr;

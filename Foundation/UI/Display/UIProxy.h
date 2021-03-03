@@ -57,6 +57,23 @@ namespace ui
 		ui::CtrlWidget* createWidget(const std::string& widgetName);
 	public:
 		/**
+		*	注册控件属性
+		*/
+		void registerWidgetPropertyCreator(const std::string& creatorName, const CreateWidgetFunc& func);
+		/**
+		*	注销控件属性
+		*/
+		void unregisterWidgetPropertyCreator(const std::string& creatorName);
+		/**
+		*	移除所有控件属性
+		*/
+		void removeAllWidgetPropertyCreators();
+		/**
+		*	创建控件属性
+		*/
+		ui::CtrlWidget* createWidgetProperty(const std::string& widgetName);
+	public:
+		/**
 		*	设计大小
 		*/
 		const math::Size& getDesignSize() const;
@@ -117,11 +134,14 @@ namespace ui
 	private:
 		typedef std::map<std::string, IElement*> ElementParsers;
 		typedef std::map<std::string, CreateWidgetFunc> WidgetCreators;
+		typedef std::map<std::string, CreateWidgetFunc> WidgetPropertyCreators;
 
 		// 节点解析集合
 		ElementParsers _elementParsers;
 		// 控件创建集合
 		WidgetCreators _widgetCreators;
+		// 控件属性创建集合
+		WidgetPropertyCreators _widgetPropertyCreators;
 		// 设计大小
 		math::Size _designSize;
 		// 布局方向

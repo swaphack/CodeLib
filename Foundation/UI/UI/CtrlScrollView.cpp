@@ -2,6 +2,8 @@
 #include "Common/Input/TouchManager.h"
 #include "Layout/LayoutItem.h"
 #include <cassert>
+#include "Loader/2dLoader/macros.h"
+
 using namespace ui;
 using namespace render;
 
@@ -66,6 +68,7 @@ ScrollItem* ScrollItem::create(CtrlWidget* node, const sys::CSSSize& size, CtrlS
 CtrlScrollView::CtrlScrollView()
 {
 	_content = CREATE_NODE(CtrlLayout);
+	_content->getLayoutItem()->setWidgetName(ELEMENT_NAME_LAYOUT);
 	_content->getLayoutItem()->unsetMarginState();
 	CtrlWidget::addWidget(_content, 0);
 
@@ -143,8 +146,6 @@ bool ui::CtrlScrollView::init()
 
 	return true;
 }
-
-
 
 void CtrlScrollView::addItem(CtrlWidget* item, int zOrder)
 {

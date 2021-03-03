@@ -1,5 +1,6 @@
 #include "UIDesignProperty.h"
 #include "Panel/PanelEvent.h"
+#include "UIProperty/import.h"
 
 ue::UIDesignProperty::UIDesignProperty()
 {
@@ -17,330 +18,86 @@ bool ue::UIDesignProperty::init()
 		return false;
 	}
 
+	m_mapWidgetPropertyProtocol[ELEMENT_NAME_WIDGET] = new UIPropertyWidget();
+	m_mapWidgetPropertyProtocol[ELEMENT_NAME_LAYOUT] = new UIPropertyLayout();
+	m_mapWidgetPropertyProtocol[ELEMENT_NAME_IMAGE] = new UIPropertyWidget();
+	//m_mapWidgetPropertyProtocol[ELEMENT_NAME_SCALE9_IMAGE] = new UIPropertyWidget();
+	m_mapWidgetPropertyProtocol[ELEMENT_NAME_TEXT] = new UIPropertyText();
+	m_mapWidgetPropertyProtocol[ELEMENT_NAME_BUTTON] = new UIPropertyButton();
+	m_mapWidgetPropertyProtocol[ELEMENT_NAME_EDITTEXT] = new UIPropertyEditText();
+	//m_mapWidgetPropertyProtocol[ELEMENT_NAME_FILE] = new UIPropertyWidget();
+	m_mapWidgetPropertyProtocol[ELEMENT_NAME_SCROLLVIEW] = new UIPropertyScrollView();
+	m_mapWidgetPropertyProtocol[ELEMENT_NAME_LISTVIEW] = new UIPropertyListView();
+	m_mapWidgetPropertyProtocol[ELEMENT_NAME_GRIDVIEW] = new UIPropertyGridView();
+
 	G_PANELEVT->addEventListener(PANEL_SELECT_VIEW_WIDGET, this, [this](const sys::Event* evt) {
 		if (evt)
 		{
-			m_pTargetItem = (render::Node*)evt->getUserData();
-			this->loadProperty();
+			auto pWidget = (ui::CtrlWidget*)evt->getUserData();
+			this->loadWidget(pWidget);
 		}
-	});
+ 	});
 
 
 	return true;
 }
 
-void ue::UIDesignProperty::loadProperty()
+void ue::UIDesignProperty::loadWidget(ui::CtrlWidget* pWidget)
 {
-	if (m_pTargetItem == nullptr)
+	if (pWidget == nullptr || m_pListProperty == nullptr)
 	{
 		return;
 	}
 
-	if (m_pTextType)
-	{
-		sys::String typeName(typeid(*m_pTargetItem).name());
-		int nIndex = typeName.findLastOf(":");
-		if (nIndex >= 0)
-		{
-			typeName = typeName.subString(nIndex + 1, typeName.getSize() - nIndex);
-		}
-		m_pTextType->setString(typeName.getString());
-	}
-	if (m_pEditTextName)
-	{
-		m_pEditTextName->setString(m_pTargetItem->getName());
-	}
-	if (m_pEditAnchorPointX)
-	{
-		m_pEditAnchorPointX->setString(getCString("%0.2f", m_pTargetItem->getAnchorPointX()));
-	}
-	if (m_pEditAnchorPointY)
-	{
-		m_pEditAnchorPointY->setString(getCString("%0.2f", m_pTargetItem->getAnchorPointY()));
-	}
-	if (m_pEditSizeW)
-	{
-		m_pEditSizeW->setString(getCString("%0.2f", m_pTargetItem->getWidth()));
-	}
-	if (m_pEditSizeH)
-	{
-		m_pEditSizeH->setString(getCString("%0.2f", m_pTargetItem->getHeight()));
-	}
-
-	if (m_pEditScaleX)
-	{
-		m_pEditScaleX->setString(getCString("%0.2f", m_pTargetItem->getScaleX()));
-	}
-	if (m_pEditScaleY)
-	{
-		m_pEditScaleY->setString(getCString("%0.2f", m_pTargetItem->getScaleY()));
-	}
-
-	if (m_pEditPosX)
-	{
-		m_pEditPosX->setString(getCString("%0.2f", m_pTargetItem->getPositionX()));
-	}
-	if (m_pEditPosY)
-	{
-		m_pEditPosY->setString(getCString("%0.2f", m_pTargetItem->getPositionY()));
-	}
-
-	if (m_pEditRotateZ)
-	{
-		m_pEditRotateZ->setString(getCString("%0.2f", m_pTargetItem->getRotationZ()));
-	}
-
-	auto pWidget = dynamic_cast<ui::CtrlWidget*>(m_pTargetItem);
-	if (pWidget == nullptr) return;
-
-	auto layoutItem = ui::UIProxy::getLayoutItem(pWidget);
-
-	if (m_pBtnMarginTop)
-	{
-		m_pBtnMarginTop->setSelectState(layoutItem->getMarginState().Top);
-	}
-
-	if (m_pBtnMarginRight)
-	{
-		m_pBtnMarginRight->setSelectState(layoutItem->getMarginState().Right);
-	}
-
-	if (m_pBtnMarginBottom)
-	{
-		m_pBtnMarginBottom->setSelectState(layoutItem->getMarginState().Bottom);
-	}
-
-	if (m_pBtnMarginLeft)
-	{
-		m_pBtnMarginLeft->setSelectState(layoutItem->getMarginState().Left);
-	}
-
-	const sys::CSSMargin& margin = layoutItem->getMargin();
-	const sys::CSSSize& size = layoutItem->getSize();
-
-	if (m_pEditTopValue)
-	{
-		m_pEditTopValue->setString(margin.getTop().toString(2));
-	}
-
-	if (m_pEditRightValue)
-	{
-		m_pEditRightValue->setString(margin.getRight().toString(2));
-	}
-
-	if (m_pEditBottomValue)
-	{
-		m_pEditBottomValue->setString(margin.getBottom().toString(2));
-	}
-
-	if (m_pEditLeftValue)
-	{
-		m_pEditLeftValue->setString(margin.getLeft().toString(2));
-	}
-
-	if (m_pEditWidthValue)
-	{
-		m_pEditWidthValue->setString(size.getWidth().toString(2));
-	}
-
-	if (m_pEditHeightValue)
-	{
-		m_pEditHeightValue->setString(size.getHeight().toString(2));
-	}
-}
-
-void ue::UIDesignProperty::saveProperty()
-{
-	if (m_pTargetItem == nullptr)
+	std::string name = ui::UIProxy::getLayoutItemName(pWidget);
+	if (name.empty())
 	{
 		return;
 	}
 
-	if (m_pEditTextName)
+	auto it = m_mapWidgetPropertyProtocol.find(name);
+	if (it == m_mapWidgetPropertyProtocol.end())
 	{
-		m_pTargetItem->setName(m_pEditTextName->getString());
-	}
-	if (m_pEditAnchorPointX)
-	{
-		float value = atof(m_pEditAnchorPointX->getString().c_str());
-		m_pTargetItem->setAnchorPointX(value);
-	}
-	if (m_pEditAnchorPointY)
-	{
-		float value = atof(m_pEditAnchorPointY->getString().c_str());
-		m_pTargetItem->setAnchorPointY(value);
-	}
-	if (m_pEditSizeW)
-	{
-		float value = atof(m_pEditSizeW->getString().c_str());
-		m_pTargetItem->setWidth(value);
-	}
-	if (m_pEditSizeH)
-	{
-		float value = atof(m_pEditSizeH->getString().c_str());
-		m_pTargetItem->setHeight(value);
+		return;
 	}
 
-	if (m_pEditScaleX)
+	auto pHelper = it->second;
+	if (pHelper == nullptr)
 	{
-		float value = atof(m_pEditScaleX->getString().c_str());
-		m_pTargetItem->setScaleX(value);
-	}
-	if (m_pEditScaleY)
-	{
-		float value = atof(m_pEditScaleY->getString().c_str());
-		m_pTargetItem->setScaleY(value);
+		return;
 	}
 
-	if (m_pEditPosX)
+	if (m_pCurUIProperty == pHelper)
 	{
-		float value = atof(m_pEditPosX->getString().c_str());
-		m_pTargetItem->setPositionX(value);
-	}
-	if (m_pEditPosY)
-	{
-		float value = atof(m_pEditPosY->getString().c_str());
-		m_pTargetItem->setPositionY(value);
+		m_pCurUIProperty->setTarget(m_pTargetItem);
+		m_pCurUIProperty->readWidgetProperty();
+		return;
 	}
 
-	if (m_pEditRotateZ)
+	m_pCurUIProperty = pHelper;
+
+	auto pUIFile = ui::UIProxy::getInstance()->createWidgetProperty(name);
+	if (pUIFile == nullptr)
 	{
-		float value = atof(m_pEditRotateZ->getString().c_str());
-		m_pTargetItem->setRotationZ(value);
+		return;
 	}
 
-	auto pWidget = dynamic_cast<ui::CtrlWidget*>(m_pTargetItem);
-	if (pWidget == nullptr) return;
+	m_pUIFile = pUIFile;
 
-	auto layoutItem = ui::UIProxy::getLayoutItem(pWidget);
+	m_pListProperty->removeAllItems();
+	m_pListProperty->addItem(m_pUIFile);
 
-	if (m_pBtnMarginTop)
-	{
-		layoutItem->getMarginState().Top = m_pBtnMarginTop->isSelected();
-	}
+	m_pTargetItem = pWidget;
 
-	if (m_pBtnMarginRight)
-	{
-		layoutItem->getMarginState().Right = m_pBtnMarginRight->isSelected();
-	}
-
-	if (m_pBtnMarginBottom)
-	{
-		layoutItem->getMarginState().Bottom = m_pBtnMarginBottom->isSelected();
-	}
-
-	if (m_pBtnMarginLeft)
-	{
-		layoutItem->getMarginState().Left = m_pBtnMarginLeft->isSelected();
-	}
-
-	if (m_pEditTopValue)
-	{
-		std::string strText = m_pEditTopValue->getString();
-		sys::CSSNumber number = sys::CSSNumber::load(strText);
-		layoutItem->getMargin().setTop(number);
-	}
-
-	if (m_pEditRightValue)
-	{
-		std::string strText = m_pEditRightValue->getString();
-		sys::CSSNumber number = sys::CSSNumber::load(strText);
-		layoutItem->getMargin().setRight(number);
-	}
-
-	if (m_pEditBottomValue)
-	{
-		std::string strText = m_pEditBottomValue->getString();
-		sys::CSSNumber number = sys::CSSNumber::load(strText);
-		layoutItem->getMargin().setBottom(number);
-	}
-
-	if (m_pEditLeftValue)
-	{
-		std::string strText = m_pEditLeftValue->getString();
-		sys::CSSNumber number = sys::CSSNumber::load(strText);
-		layoutItem->getMargin().setLeft(number);
-	}
-
-	if (m_pEditWidthValue)
-	{
-		std::string strText = m_pEditWidthValue->getString();
-		sys::CSSNumber number = sys::CSSNumber::load(strText);
-		layoutItem->getSize().setWidth(number);
-	}
-
-	if (m_pEditHeightValue)
-	{
-		std::string strText = m_pEditHeightValue->getString();
-		sys::CSSNumber number = sys::CSSNumber::load(strText);
-		layoutItem->getSize().setHeight(number);
-	}
-
-	layoutItem->refresh();
-
-	this->loadProperty();
+	m_pCurUIProperty->initPropertyUI(m_pUIFile);
+	m_pCurUIProperty->setTarget(m_pTargetItem);
+	m_pCurUIProperty->readWidgetProperty();
 }
+
 
 void ue::UIDesignProperty::initUI()
 {
-	m_pRootWidget->findWidgetByName("TypeText", m_pTextType);
-	m_pRootWidget->findWidgetByName("NameText", m_pEditTextName);
-	m_pRootWidget->findWidgetByName("AnchorPointX", m_pEditAnchorPointX);
-	m_pRootWidget->findWidgetByName("AnchorPointY", m_pEditAnchorPointY);
-	m_pRootWidget->findWidgetByName("Width", m_pEditSizeW);
-	m_pRootWidget->findWidgetByName("Height", m_pEditSizeH);
-	m_pRootWidget->findWidgetByName("ScaleX", m_pEditScaleX);
-	m_pRootWidget->findWidgetByName("ScaleY", m_pEditScaleY);
-	
-	m_pRootWidget->findWidgetByName("PosX", m_pEditPosX);
-	m_pRootWidget->findWidgetByName("PosY", m_pEditPosY);
-	
-	m_pRootWidget->findWidgetByName("RotationZ", m_pEditRotateZ);
-	
-	m_pRootWidget->findWidgetByName("MarginTop", m_pBtnMarginTop);
-	m_pRootWidget->findWidgetByName("MarginRight", m_pBtnMarginRight);
-	m_pRootWidget->findWidgetByName("MarginBottom", m_pBtnMarginBottom);
-	m_pRootWidget->findWidgetByName("MarginLeft", m_pBtnMarginLeft);
-	
-	m_pRootWidget->findWidgetByName("TopValue", m_pEditTopValue);
-	m_pRootWidget->findWidgetByName("RightValue", m_pEditRightValue);
-	m_pRootWidget->findWidgetByName("BottomValue", m_pEditBottomValue);
-	m_pRootWidget->findWidgetByName("LeftValue", m_pEditLeftValue);
-	
-	m_pRootWidget->findWidgetByName("WidthValue", m_pEditWidthValue);
-	m_pRootWidget->findWidgetByName("HeightValue", m_pEditHeightValue);
-
-	if (m_pBtnMarginTop)
-	{
-		m_pBtnMarginTop->addClickFunc([this](CtrlWidget* target) {
-			m_pBtnMarginTop->setSelectState(!m_pBtnMarginTop->isSelected());
-			this->saveProperty();
-		});
-	}
-
-	if (m_pBtnMarginRight)
-	{
-		m_pBtnMarginRight->addClickFunc([this](CtrlWidget* target) {
-			m_pBtnMarginRight->setSelectState(!m_pBtnMarginRight->isSelected());
-			this->saveProperty();
-		});
-	}
-
-	if (m_pBtnMarginBottom)
-	{
-		m_pBtnMarginBottom->addClickFunc([this](CtrlWidget* target) {
-			m_pBtnMarginBottom->setSelectState(!m_pBtnMarginBottom->isSelected());
-			this->saveProperty();
-		});
-	}
-
-	if (m_pBtnMarginLeft)
-	{
-		m_pBtnMarginLeft->addClickFunc([this](CtrlWidget* target) {
-			m_pBtnMarginLeft->setSelectState(!m_pBtnMarginLeft->isSelected());
-			this->saveProperty();
-		});
-	}
+	m_pRootWidget->findWidgetByName("property", m_pListProperty);
 }
 
 void ue::UIDesignProperty::initEvent()
@@ -349,7 +106,7 @@ void ue::UIDesignProperty::initEvent()
 
 		if (key == sys::BoardKey::KRETURN)
 		{
-			this->saveProperty();
+			m_pCurUIProperty->writeWidgetProperty();
 		}
 	});
 }
