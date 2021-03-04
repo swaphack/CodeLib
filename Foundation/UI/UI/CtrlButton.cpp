@@ -12,8 +12,8 @@ ui::CtrlButton::CtrlButton()
 	_btnText = CREATE_NODE(CtrlText);
 	_btnText->setAnchorPoint(0.5f, 0.5f);
 	_btnText->setName("button_text");
-	_btnText->setHorizontalAlignment(sys::HorizontalAlignment::CENTER);
-	_btnText->setVerticalAlignment(sys::VerticalAlignment::MIDDLE);
+	_btnText->setTextHorizontalAlignment(sys::HorizontalAlignment::CENTER);
+	_btnText->setTextVerticalAlignment(sys::VerticalAlignment::MIDDLE);
 	this->addProtectedWidget(_btnText);
 
 	this->setTouchEnabled(true);
@@ -81,22 +81,22 @@ const phy::Color3B& ui::CtrlButton::getTextColor() const
 
 void ui::CtrlButton::setTextHorizontalAlignment(sys::HorizontalAlignment alignment)
 {
-	_btnText->setHorizontalAlignment(alignment);
+	_btnText->setTextHorizontalAlignment(alignment);
 }
 
 sys::HorizontalAlignment ui::CtrlButton::getTextHorizontalAlignment() const
 {
-	return _btnText->getHorizontalAlignment();
+	return _btnText->getTextHorizontalAlignment();
 }
 
 void ui::CtrlButton::setTextVerticalAlignment(sys::VerticalAlignment alignment)
 {
-	_btnText->setVerticalAlignment(alignment);
+	_btnText->setTextVerticalAlignment(alignment);
 }
 
 sys::VerticalAlignment ui::CtrlButton::getTextVerticalAlignment() const
 {
-	return _btnText->getVerticalAlignment();
+	return _btnText->getTextVerticalAlignment();
 }
 
 ui::CtrlText* ui::CtrlButton::getTextControl() const

@@ -13,11 +13,11 @@ using namespace render;
 CtrlEditText::CtrlEditText()
 {
 	_ctrlTextPlaceholder = CREATE_NODE(CtrlText);
-	_ctrlTextPlaceholder->setHorizontalAlignment(sys::HorizontalAlignment::LEFT);
+	_ctrlTextPlaceholder->setTextHorizontalAlignment(sys::HorizontalAlignment::LEFT);
 	this->addProtectedWidget(_ctrlTextPlaceholder);
 
 	_ctrlText = CREATE_NODE(CtrlText);
-	_ctrlText->setHorizontalAlignment(sys::HorizontalAlignment::LEFT);
+	_ctrlText->setTextHorizontalAlignment(sys::HorizontalAlignment::LEFT);
 	this->addProtectedWidget(_ctrlText);
 
 	Texture2D* pTexture = G_TEXTURE_CACHE->createTexture2D(phy::Color4B(255, 255, 255, 255));
@@ -78,12 +78,12 @@ bool ui::CtrlEditText::init()
 	return true;
 }
 
-void ui::CtrlEditText::setPlaceholder(const std::string& text)
+void ui::CtrlEditText::setPlaceholderString(const std::string& text)
 {
 	_ctrlTextPlaceholder->setString(text);
 }
 
-const std::string& ui::CtrlEditText::getPlaceholder() const
+const std::string& ui::CtrlEditText::getPlaceholderString() const
 {
 	return _ctrlTextPlaceholder->getString();
 }
@@ -149,26 +149,26 @@ bool ui::CtrlEditText::isMultiLine() const
 	return _multiLine;
 }
 
-void ui::CtrlEditText::setHorizontalAlignment(sys::HorizontalAlignment alignment)
+void ui::CtrlEditText::setTextHorizontalAlignment(sys::HorizontalAlignment alignment)
 {
-	_ctrlText->setHorizontalAlignment(alignment);
-	_ctrlTextPlaceholder->setHorizontalAlignment(alignment);
+	_ctrlText->setTextHorizontalAlignment(alignment);
+	_ctrlTextPlaceholder->setTextHorizontalAlignment(alignment);
 }
 
-sys::HorizontalAlignment ui::CtrlEditText::getHorizontalAlignment() const
+sys::HorizontalAlignment ui::CtrlEditText::getTextHorizontalAlignment() const
 {
-	return _ctrlText->getHorizontalAlignment();
+	return _ctrlText->getTextHorizontalAlignment();
 }
 
-void ui::CtrlEditText::setVerticalAlignment(sys::VerticalAlignment alignment)
+void ui::CtrlEditText::setTextVerticalAlignment(sys::VerticalAlignment alignment)
 {
-	_ctrlText->setVerticalAlignment(alignment);
-	_ctrlTextPlaceholder->setVerticalAlignment(alignment);
+	_ctrlText->setTextVerticalAlignment(alignment);
+	_ctrlTextPlaceholder->setTextVerticalAlignment(alignment);
 }
 
-sys::VerticalAlignment ui::CtrlEditText::getVerticalAlignment() const
+sys::VerticalAlignment ui::CtrlEditText::getTextVerticalAlignment() const
 {
-	return _ctrlText->getVerticalAlignment();
+	return _ctrlText->getTextVerticalAlignment();
 }
 
 float ui::CtrlEditText::getCursorFlashTime() const

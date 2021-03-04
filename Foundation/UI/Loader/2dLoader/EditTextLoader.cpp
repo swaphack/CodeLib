@@ -36,7 +36,7 @@ void ui::EditTextLoader::parseAttributes()
 	int vertical = 1;
 
 	LOAD_WIDGET_ATTRIBUTE(PROPERTY_TEXT, setString, text);
-	LOAD_WIDGET_ATTRIBUTE(PROPERTY_PLACEHOLDER, setPlaceholder, tips);
+	LOAD_WIDGET_ATTRIBUTE(PROPERTY_PLACEHOLDER, setPlaceholderString, tips);
 
 	LOAD_WIDGET_ATTRIBUTE(PROPERTY_TEXTCOLOR, setTextColor, color);
 	LOAD_WIDGET_ATTRIBUTE(PROPERTY_PLACEHOLDERCOLOR, setPlaceholderTextColor, tipsColor);
@@ -46,8 +46,8 @@ void ui::EditTextLoader::parseAttributes()
 
 	LOAD_WIDGET_ATTRIBUTE(PROPERTY_MULTILINE, setMultiLine, multiLine);
 
-	LOAD_WIDGET_CAST_ATTRIBUTE(PROPERTY_HORIZONTAL, setHorizontalAlignment, horizontal, sys::HorizontalAlignment);
-	LOAD_WIDGET_CAST_ATTRIBUTE(PROPERTY_VERTICAL, setVerticalAlignment, vertical, sys::VerticalAlignment);
+	LOAD_WIDGET_CAST_ATTRIBUTE(PROPERTY_HORIZONTAL, setTextHorizontalAlignment, horizontal, sys::HorizontalAlignment);
+	LOAD_WIDGET_CAST_ATTRIBUTE(PROPERTY_VERTICAL, setTextVerticalAlignment, vertical, sys::VerticalAlignment);
 
 	if (fontpath.empty())
 	{
@@ -62,7 +62,7 @@ void ui::EditTextLoader::saveAttributes()
 	WidgetLoader::saveAttributes();
 
 	SAVE_WIDGET_ATTRIBUTE(PROPERTY_TEXT, getString);
-	SAVE_WIDGET_ATTRIBUTE(PROPERTY_PLACEHOLDER, getPlaceholder);
+	SAVE_WIDGET_ATTRIBUTE(PROPERTY_PLACEHOLDER, getPlaceholderString);
 
 	SAVE_WIDGET_ATTRIBUTE(PROPERTY_TEXTCOLOR, getTextColor);
 	SAVE_WIDGET_ATTRIBUTE(PROPERTY_PLACEHOLDERCOLOR, getPlaceholderTextColor);
@@ -72,6 +72,6 @@ void ui::EditTextLoader::saveAttributes()
 
 	SAVE_WIDGET_ATTRIBUTE(PROPERTY_MULTILINE, isMultiLine);
 
-	SAVE_WIDGET_CAST_ATTRIBUTE(PROPERTY_HORIZONTAL, getHorizontalAlignment, int);
-	SAVE_WIDGET_CAST_ATTRIBUTE(PROPERTY_VERTICAL, getVerticalAlignment, int);
+	SAVE_WIDGET_CAST_ATTRIBUTE(PROPERTY_HORIZONTAL, getTextHorizontalAlignment, int);
+	SAVE_WIDGET_CAST_ATTRIBUTE(PROPERTY_VERTICAL, getTextVerticalAlignment, int);
 }

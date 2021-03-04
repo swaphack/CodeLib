@@ -24,5 +24,12 @@ namespace ue
 		*/
 		virtual void writeWidgetProperty();
 	private:
+		ui::CtrlEditText* m_pFontText = nullptr;
+		ui::CtrlEditText* m_pFontPlaceholderText = nullptr;
+		ui::CtrlEditText* m_pFontPath = nullptr;
+		ui::CtrlEditText* m_pFontSize = nullptr;
+		ui::CtrlEditText* m_pFontHorizontalType = nullptr;
+		ui::CtrlEditText* m_pFontVerticalType = nullptr;
+		ui::CtrlButton* m_pMultiLine = nullptr;
 	};
 }

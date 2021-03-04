@@ -10,21 +10,21 @@ ue::UIPropertyGridView::~UIPropertyGridView()
 
 void ue::UIPropertyGridView::initPropertyUI(ui::CtrlWidget* root)
 {
-	UIPropertyScrollView::initPropertyUI(root);
+	UIPropertyListView::initPropertyUI(root);
 
 
 }
 
 void ue::UIPropertyGridView::readWidgetProperty()
 {
-	UIPropertyScrollView::readWidgetProperty();
+	UIPropertyListView::readWidgetProperty();
 
 
 }
 
 void ue::UIPropertyGridView::writeWidgetProperty()
 {
-	UIPropertyScrollView::readWidgetProperty();
+	UIPropertyListView::readWidgetProperty();
 
 
 }

@@ -149,8 +149,8 @@ ui::CtrlButton* ue::UIDesignDirectory::createDirItem(int height, const std::stri
 		pWidget->setFontSize(CONST_ITEM_HEIGHT);
 		pWidget->setFontPath("Default/Font/font_3.ttf");
 		pWidget->setString(name);
-		pWidget->getTextControl()->setHorizontalAlignment(sys::HorizontalAlignment::LEFT);
-		pWidget->getTextControl()->setVerticalAlignment(sys::VerticalAlignment::BOTTOM);
+		pWidget->getTextControl()->setTextHorizontalAlignment(sys::HorizontalAlignment::LEFT);
+		pWidget->getTextControl()->setTextVerticalAlignment(sys::VerticalAlignment::BOTTOM);
 		pWidget->addClickFunc([this, fullpath](CtrlWidget*) {
 			this->onChangeFoldState(fullpath);
 			this->updateRootPanel(false);
@@ -181,8 +181,8 @@ ui::CtrlButton* ue::UIDesignDirectory::createFileItem(int height, const std::str
 		pWidget->setFontSize(CONST_ITEM_HEIGHT);
 		pWidget->setFontPath("Default/Font/font_3.ttf");
 		pWidget->setString(name);
-		pWidget->getTextControl()->setHorizontalAlignment(sys::HorizontalAlignment::LEFT);
-		pWidget->getTextControl()->setVerticalAlignment(sys::VerticalAlignment::BOTTOM);
+		pWidget->getTextControl()->setTextHorizontalAlignment(sys::HorizontalAlignment::LEFT);
+		pWidget->getTextControl()->setTextVerticalAlignment(sys::VerticalAlignment::BOTTOM);
 
 		pWidget->addClickFunc([this, fullpath](CtrlWidget*) {
 			G_PANELEVT->setDesignFile(fullpath);

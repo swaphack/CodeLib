@@ -24,5 +24,10 @@ namespace ue
 		*/
 		virtual void writeWidgetProperty();
 	private:
+		ui::CtrlEditText* m_pScrollDirection = nullptr;
+		ui::CtrlEditText* m_pWidthValue = nullptr;
+		ui::CtrlEditText* m_pHeightValue = nullptr;
+		ui::CtrlButton* m_pUseItemSize = nullptr;
+		ui::CtrlButton* m_pShowInCenter = nullptr;
 	};
 }

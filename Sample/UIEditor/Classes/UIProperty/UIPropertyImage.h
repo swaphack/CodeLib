@@ -24,5 +24,8 @@ namespace ue
 		*/
 		virtual void writeWidgetProperty();
 	private:
+		ui::CtrlButton* m_pFilepath = nullptr;
+		ui::CtrlButton* m_pReverseX = nullptr;
+		ui::CtrlButton* m_pReverseY = nullptr;
 	};
 }

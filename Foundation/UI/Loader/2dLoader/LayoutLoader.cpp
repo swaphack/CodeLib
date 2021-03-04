@@ -2,7 +2,6 @@
 
 using namespace ui;
 
-#define PROPERTY_MARGIN			"margin"
 #define PROPERTY_IMAGE_SHOW		"showImage"
 #define PROPERTY_MASK_SHOW		"showMask"
 #define PROPERTY_MASK_COLOR		"maskColor"
@@ -25,7 +24,6 @@ void LayoutLoader::parseAttributes()
 	std::string bgImagePath;
 	phy::Color4B bgMaskColor = phy::Color4B(0,0,0,255);
 
-	LOAD_LAYOUTITEM_ATTRIBUTE(PROPERTY_MARGIN, setMargin, margin);
 	LOAD_WIDGET_ATTRIBUTE(PROPERTY_IMAGE_SHOW, setBackgroudImageVisible, showBgImage);
 	LOAD_WIDGET_ATTRIBUTE(PROPERTY_MASK_SHOW, setBackgroudMaskVisible, showBgMask);
 	LOAD_WIDGET_STRING_ATTRIBUTE(PROPERTY_IMAGE_PATH, setBackgroundImagePath, bgImagePath);
@@ -38,7 +36,6 @@ void LayoutLoader::saveAttributes()
 {
 	WidgetLoader::saveAttributes();
 
-	SAVE_LAYOUTITEM_ATTRIBUTE(PROPERTY_MARGIN, getMargin);
 	SAVE_WIDGET_ATTRIBUTE(PROPERTY_IMAGE_SHOW, isBackgroudImageVisible);
 	SAVE_WIDGET_ATTRIBUTE(PROPERTY_MASK_SHOW, isBackgroudMaskVisible);
 	SAVE_WIDGET_ATTRIBUTE(PROPERTY_IMAGE_PATH, getBackgroundImage);

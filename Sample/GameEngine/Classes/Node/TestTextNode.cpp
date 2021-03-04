@@ -30,7 +30,7 @@ void TestTextNode::testTimeText()
 	pCtrlText->setScale(1);
 	pCtrlText->setString("hafkdfjkldafd");
 	pCtrlText->setPosition(522, 600, 0);
-	pCtrlText->setVerticalAlignment(VerticalAlignment::MIDDLE);
+	pCtrlText->setTextVerticalAlignment(VerticalAlignment::MIDDLE);
 	pCtrlText->setTextColor(phy::Color3B(255, 255, 255));
 	this->addChild(pCtrlText);
 
@@ -59,8 +59,8 @@ void TestTextNode::testTimeText()
 void TestTextNode::testChineseText()
 {
 	CtrlText* pCtrlText = CREATE_NODE(CtrlText);
-	pCtrlText->setHorizontalAlignment(HorizontalAlignment::CENTER);
-	pCtrlText->setVerticalAlignment(VerticalAlignment::MIDDLE);
+	pCtrlText->setTextHorizontalAlignment(HorizontalAlignment::CENTER);
+	pCtrlText->setTextVerticalAlignment(VerticalAlignment::MIDDLE);
 	pCtrlText->setFontPath("Resource/Font/font_2.ttf");
 	pCtrlText->setFontSize(58);
 	pCtrlText->setScale(1);

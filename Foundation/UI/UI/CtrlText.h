@@ -71,19 +71,19 @@ namespace ui
 		/**
 		*	设置文本水平对齐方式
 		*/  
-		void setHorizontalAlignment(sys::HorizontalAlignment alignment);
+		void setTextHorizontalAlignment(sys::HorizontalAlignment alignment);
 		/**
 		*	获取文本水平对齐方式
 		*/ 
-		sys::HorizontalAlignment getHorizontalAlignment() const;
+		sys::HorizontalAlignment getTextHorizontalAlignment() const;
 		/**
 		*	设置文本垂直对齐方式
 		*/  
-		void setVerticalAlignment(sys::VerticalAlignment alignment);
+		void setTextVerticalAlignment(sys::VerticalAlignment alignment);
 		/**
 		*	获取文本垂直对齐方式
 		*/ 
-		sys::VerticalAlignment getVerticalAlignment() const;
+		sys::VerticalAlignment getTextVerticalAlignment() const;
 		/**
 		*	设置显示区域
 		*/ 

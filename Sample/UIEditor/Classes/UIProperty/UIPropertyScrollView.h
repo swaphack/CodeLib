@@ -24,5 +24,8 @@ namespace ue
 		*/
 		virtual void writeWidgetProperty();
 	private:
+		ui::CtrlButton* m_pHorizontalScroll = nullptr;
+		ui::CtrlButton* m_pVerticalScroll = nullptr;
+		ui::CtrlEditText* m_pMoveMultiple = nullptr;
 	};
 }

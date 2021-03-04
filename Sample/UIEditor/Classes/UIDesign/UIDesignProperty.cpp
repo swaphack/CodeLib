@@ -20,7 +20,7 @@ bool ue::UIDesignProperty::init()
 
 	m_mapWidgetPropertyProtocol[ELEMENT_NAME_WIDGET] = new UIPropertyWidget();
 	m_mapWidgetPropertyProtocol[ELEMENT_NAME_LAYOUT] = new UIPropertyLayout();
-	m_mapWidgetPropertyProtocol[ELEMENT_NAME_IMAGE] = new UIPropertyWidget();
+	m_mapWidgetPropertyProtocol[ELEMENT_NAME_IMAGE] = new UIPropertyImage();
 	//m_mapWidgetPropertyProtocol[ELEMENT_NAME_SCALE9_IMAGE] = new UIPropertyWidget();
 	m_mapWidgetPropertyProtocol[ELEMENT_NAME_TEXT] = new UIPropertyText();
 	m_mapWidgetPropertyProtocol[ELEMENT_NAME_BUTTON] = new UIPropertyButton();

@@ -1,10 +1,10 @@
 #pragma once
 
-#include "UIPropertyScrollView.h"
+#include "UIPropertyListView.h"
 
 namespace ue
 {
-	class UIPropertyGridView : public UIPropertyScrollView
+	class UIPropertyGridView : public UIPropertyListView
 	{
 	public:
 		UIPropertyGridView();

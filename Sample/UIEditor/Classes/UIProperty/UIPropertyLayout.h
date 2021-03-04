@@ -24,5 +24,8 @@ namespace ue
 		*/
 		virtual void writeWidgetProperty();
 	private:
+		ui::CtrlButton* m_pShowImage = nullptr;
+		ui::CtrlButton* m_pShowMask = nullptr;
+		ui::CtrlEditText* m_pImagePath = nullptr;
 	};
 }

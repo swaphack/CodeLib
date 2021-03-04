@@ -5,6 +5,7 @@
 
 namespace ue
 {
+
 	class UIPropertyWidget : public UIPropertyProtocol
 	{
 	public:

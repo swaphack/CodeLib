@@ -43,7 +43,7 @@ namespace render
 		* @param bFlipY 是否垂直翻转
 		* @param outUVs[8] 纹理数据
 		*/
-		static void setTexture2DFlip(float* uvs, bool bFlipX, bool bFlipY);
+		static void setTexture2DFlip(float(*uvs)[8], bool bFlipX, bool bFlipY);
 
 		/**
 		*

@@ -61,28 +61,28 @@ namespace ui
 		/**
 		*	设置文本水平对齐方式
 		*/
-		void setHorizontalAlignment(sys::HorizontalAlignment alignment);
+		void setTextHorizontalAlignment(sys::HorizontalAlignment alignment);
 		/**
 		*	获取文本水平对齐方式
 		*/
-		sys::HorizontalAlignment getHorizontalAlignment() const;
+		sys::HorizontalAlignment getTextHorizontalAlignment() const;
 		/**
 		*	设置文本垂直对齐方式
 		*/
-		void setVerticalAlignment(sys::VerticalAlignment alignment);
+		void setTextVerticalAlignment(sys::VerticalAlignment alignment);
 		/**
 		*	获取文本垂直对齐方式
 		*/
-		sys::VerticalAlignment getVerticalAlignment() const;
+		sys::VerticalAlignment getTextVerticalAlignment() const;
 	public:
 		/**
 		*	设置提示文本
 		*/
-		void setPlaceholder(const std::string& text);
+		void setPlaceholderString(const std::string& text);
 		/**
 		*	提示文本
 		*/
-		const std::string& getPlaceholder() const;
+		const std::string& getPlaceholderString() const;
 		/**
 		*	设置占位颜色
 		*/

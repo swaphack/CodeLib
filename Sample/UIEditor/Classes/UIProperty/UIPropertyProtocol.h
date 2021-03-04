@@ -11,6 +11,20 @@ namespace ue
 {
 	class UIPropertyProtocol
 	{
+
+
+
+#define ADD_CLICK_FUNC(btn, Type, func)\
+if (btn) { \
+	btn->addClickFunc([this](ui::CtrlWidget*) {\
+		if (m_pTarget == nullptr) return; \
+		auto pType = m_pTarget->as<Type>(); \
+		if (pType == nullptr) return;\
+		btn->setSelectState(!btn->isSelected()); \
+		pType->func(btn->isSelected());\
+	});\
+}\
+
 	public:
 		virtual ~UIPropertyProtocol() {}
 	public:
@@ -37,4 +51,6 @@ namespace ue
 	protected:
 		ui::CtrlWidget* m_pTarget = nullptr;
 	};
+
+
 }

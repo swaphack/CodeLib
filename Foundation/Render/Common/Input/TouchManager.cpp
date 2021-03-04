@@ -45,6 +45,10 @@ void TouchManager::onTouchBegan(const math::Vector2& touchPoint)
 		{
 			_temps.push_back(item);
 		}
+		else
+		{
+			item->onTouchCanceled(touchPoint);
+		}
 	}
 
 	// 判断两对象的优先级

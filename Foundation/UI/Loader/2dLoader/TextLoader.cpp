@@ -43,8 +43,8 @@ void TextLoader::parseAttributes()
 	LOAD_WIDGET_ATTRIBUTE(PROPERTY_FONTSIZE, setFontSize, fontSize);
 	LOAD_WIDGET_STRING_ATTRIBUTE(PROPERTY_TEXT, setString, text);
 
-	LOAD_WIDGET_CAST_ATTRIBUTE(PROPERTY_HORIZONTAL, setHorizontalAlignment, horizontal, sys::HorizontalAlignment);
-	LOAD_WIDGET_CAST_ATTRIBUTE(PROPERTY_VERTICAL, setVerticalAlignment, vertical, sys::VerticalAlignment);
+	LOAD_WIDGET_CAST_ATTRIBUTE(PROPERTY_HORIZONTAL, setTextHorizontalAlignment, horizontal, sys::HorizontalAlignment);
+	LOAD_WIDGET_CAST_ATTRIBUTE(PROPERTY_VERTICAL, setTextVerticalAlignment, vertical, sys::VerticalAlignment);
 	//LOAD_WIDGET_ATTRIBUTE(PROPERTY_DIMENSIONS, setDimensions, size);
 
 	if (fontpath.empty())
@@ -66,7 +66,7 @@ void TextLoader::saveAttributes()
 	SAVE_WIDGET_ATTRIBUTE(PROPERTY_FONTSIZE, getFontSize);
 	SAVE_WIDGET_ATTRIBUTE(PROPERTY_TEXT, getString);
 
-	SAVE_WIDGET_CAST_ATTRIBUTE(PROPERTY_HORIZONTAL, getHorizontalAlignment, int);
-	SAVE_WIDGET_CAST_ATTRIBUTE(PROPERTY_VERTICAL, getVerticalAlignment, int);
+	SAVE_WIDGET_CAST_ATTRIBUTE(PROPERTY_HORIZONTAL, getTextHorizontalAlignment, int);
+	SAVE_WIDGET_CAST_ATTRIBUTE(PROPERTY_VERTICAL, getTextVerticalAlignment, int);
 	//SAVE_WIDGET_ATTRIBUTE(PROPERTY_DIMENSIONS, getDimensions);
 }

@@ -14,8 +14,8 @@ CtrlText::CtrlText()
 	_texture2D = CREATE_NODE(render::DrawTexture2D);
 	this->addChild(_texture2D);
 
-	this->setHorizontalAlignment(sys::HorizontalAlignment::CENTER);
-	this->setVerticalAlignment(sys::VerticalAlignment::MIDDLE);
+	this->setTextHorizontalAlignment(sys::HorizontalAlignment::CENTER);
+	this->setTextVerticalAlignment(sys::VerticalAlignment::MIDDLE);
 }
 
 CtrlText::~CtrlText()
@@ -108,26 +108,26 @@ void CtrlText::setString(const std::string& text)
 	this->notify(render::NodeNotifyType::TEXT);
 }
 
-void CtrlText::setHorizontalAlignment(sys::HorizontalAlignment alignment)
+void CtrlText::setTextHorizontalAlignment(sys::HorizontalAlignment alignment)
 {
 	_textDefine.horizontalAlignment = alignment;
 
 	this->notify(render::NodeNotifyType::TEXT);
 }
 
-sys::HorizontalAlignment CtrlText::getHorizontalAlignment() const
+sys::HorizontalAlignment CtrlText::getTextHorizontalAlignment() const
 {
 	return _textDefine.horizontalAlignment;
 }
 
-void CtrlText::setVerticalAlignment(sys::VerticalAlignment alignment)
+void CtrlText::setTextVerticalAlignment(sys::VerticalAlignment alignment)
 {
 	_textDefine.verticalAlignment = alignment;
 
 	this->notify(render::NodeNotifyType::TEXT);
 }
 
-sys::VerticalAlignment CtrlText::getVerticalAlignment() const
+sys::VerticalAlignment CtrlText::getTextVerticalAlignment() const
 {
 	return _textDefine.verticalAlignment;
 }

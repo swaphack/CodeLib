@@ -172,8 +172,8 @@ ui::CtrlButton* ue::UIDesignNodeTree::createHasChildrenNode(int height, const st
 		pWidget->setFontSize(CONST_ITEM_HEIGHT);
 		pWidget->setFontPath("Default/Font/font_3.ttf");
 		pWidget->setString(name);
-		pWidget->getTextControl()->setHorizontalAlignment(sys::HorizontalAlignment::LEFT);
-		pWidget->getTextControl()->setVerticalAlignment(sys::VerticalAlignment::BOTTOM);
+		pWidget->getTextControl()->setTextHorizontalAlignment(sys::HorizontalAlignment::LEFT);
+		pWidget->getTextControl()->setTextVerticalAlignment(sys::VerticalAlignment::BOTTOM);
 		pWidget->addClickFunc([this, node](CtrlWidget*) {
 			std::vector<int> vecIndex;
 			auto pTemp = node;
@@ -215,8 +215,8 @@ ui::CtrlButton* ue::UIDesignNodeTree::createNoChildrenNode(int height, const std
 		pWidget->setFontSize(CONST_ITEM_HEIGHT);
 		pWidget->setFontPath("Default/Font/font_3.ttf");
 		pWidget->setString(name);
-		pWidget->getTextControl()->setHorizontalAlignment(sys::HorizontalAlignment::LEFT);
-		pWidget->getTextControl()->setVerticalAlignment(sys::VerticalAlignment::BOTTOM);
+		pWidget->getTextControl()->setTextHorizontalAlignment(sys::HorizontalAlignment::LEFT);
+		pWidget->getTextControl()->setTextVerticalAlignment(sys::VerticalAlignment::BOTTOM);
 
 		pWidget->addClickFunc([this, node](CtrlWidget*) {
 			std::vector<int> vecIndex;

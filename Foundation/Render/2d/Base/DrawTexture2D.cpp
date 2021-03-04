@@ -119,7 +119,9 @@ void DrawTexture2D::updateTexture2DMeshData()
 	{
 		float uvs[8] = { 0 };
 		memcpy(uvs, _rectVertex.uvs, sizeof(uvs));
-		render::VertexTool::setTexture2DFlip(uvs, _bFlipX, _bFlipY);
+
+		float (*arrPtr)[8] = &uvs;
+		render::VertexTool::setTexture2DFlip(&uvs, _bFlipX, _bFlipY);
 
 		pMesh->getMeshDetail()->setVertices(4, _rectVertex.vertices, 3);
 		pMesh->getMeshDetail()->setColors(4, _rectVertex.colors, 4);
