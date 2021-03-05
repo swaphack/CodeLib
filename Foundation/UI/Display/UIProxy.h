@@ -12,6 +12,8 @@ namespace ui
 	class UIProxy
 	{
 		typedef std::function<ui::CtrlWidget* (const std::string& name)> CreateWidgetFunc;
+
+		typedef std::function<IElement* ()> CreateElementFunc;
 	private:
 		UIProxy();
 		virtual ~UIProxy();
@@ -29,7 +31,7 @@ namespace ui
 		/**
 		*	注册节点解析
 		*/
-		void registerElementParser(const std::string& name, IElement* parser);
+		void registerElementParser(const std::string& name, const CreateElementFunc& func);
 		/**
 		*	注销节点解析
 		*/
@@ -132,7 +134,7 @@ namespace ui
 		// 保存根元素
 		bool saveRoot(CtrlWidget* layout, tinyxml2::XMLDocument* document);
 	private:
-		typedef std::map<std::string, IElement*> ElementParsers;
+		typedef std::map<std::string, CreateElementFunc> ElementParsers;
 		typedef std::map<std::string, CreateWidgetFunc> WidgetCreators;
 		typedef std::map<std::string, CreateWidgetFunc> WidgetPropertyCreators;
 

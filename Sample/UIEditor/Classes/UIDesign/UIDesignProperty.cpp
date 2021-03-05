@@ -9,6 +9,16 @@ ue::UIDesignProperty::UIDesignProperty()
 ue::UIDesignProperty::~UIDesignProperty()
 {
 	G_KEYBOARDMANAGER->removeTargetAllEvents(this);
+
+	for (auto& item : m_mapWidgetPropertyProtocol)
+	{
+		delete item.second;
+	}
+
+	for (auto& item : m_mapUIFile)
+	{
+		delete item.second;
+	}
 }
 
 bool ue::UIDesignProperty::init()
@@ -55,41 +65,39 @@ void ue::UIDesignProperty::loadWidget(ui::CtrlWidget* pWidget)
 		return;
 	}
 
-	auto it = m_mapWidgetPropertyProtocol.find(name);
-	if (it == m_mapWidgetPropertyProtocol.end())
+	auto pUIProperty = getUIProperty(name);
+	if (pUIProperty == nullptr)
 	{
 		return;
 	}
 
-	auto pHelper = it->second;
-	if (pHelper == nullptr)
-	{
-		return;
-	}
-
-	if (m_pCurUIProperty == pHelper)
+	if (m_pCurUIProperty == pUIProperty)
 	{
 		m_pCurUIProperty->setTarget(m_pTargetItem);
 		m_pCurUIProperty->readWidgetProperty();
 		return;
 	}
 
-	m_pCurUIProperty = pHelper;
+	m_pCurUIProperty = pUIProperty;
 
-	auto pUIFile = ui::UIProxy::getInstance()->createWidgetProperty(name);
+	auto pUIFile = getUIWidget(name);
 	if (pUIFile == nullptr)
 	{
 		return;
 	}
 
-	m_pUIFile = pUIFile;
+	if (m_pCurUIFile != pUIFile)
+	{
+		m_pCurUIFile = pUIFile;
 
-	m_pListProperty->removeAllItems();
-	m_pListProperty->addItem(m_pUIFile);
+		m_pListProperty->removeAllItems();
+		m_pListProperty->addItem(m_pCurUIFile);
+	}
+
 
 	m_pTargetItem = pWidget;
 
-	m_pCurUIProperty->initPropertyUI(m_pUIFile);
+	m_pCurUIProperty->initPropertyUI(m_pCurUIFile);
 	m_pCurUIProperty->setTarget(m_pTargetItem);
 	m_pCurUIProperty->readWidgetProperty();
 }
@@ -113,4 +121,31 @@ void ue::UIDesignProperty::initEvent()
 
 void ue::UIDesignProperty::initText()
 {
+}
+
+ue::UIPropertyProtocol* ue::UIDesignProperty::getUIProperty(const std::string& name)
+{
+	auto it = m_mapWidgetPropertyProtocol.find(name);
+	if (it == m_mapWidgetPropertyProtocol.end())
+	{
+		return nullptr;
+	}
+	return it->second;
+}
+
+ui::CtrlWidget* ue::UIDesignProperty::getUIWidget(const std::string& name)
+{
+	auto it = m_mapUIFile.find(name);
+	if (it == m_mapUIFile.end())
+	{
+		auto pWidgetProperty = ui::UIProxy::getInstance()->createWidgetProperty(name);
+		if (pWidgetProperty == nullptr)
+		{
+			return nullptr;
+		}
+		pWidgetProperty->retain();
+		m_mapUIFile[name] = pWidgetProperty;
+		return pWidgetProperty;
+	}
+	return it->second;
 }

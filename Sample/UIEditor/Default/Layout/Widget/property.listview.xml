@@ -10,6 +10,7 @@
 						<EditText name="ScrollDirection" size="100%,100%" horizontal="0" text="1" fontSize="20" textColor="255,255,255" />
 					</ListView>
 				</ListView>
+				<Widget size="100%,2"/>
 				<ListView direction="0" size="300,30">
 					<ListView direction="0" size="50%,30">
 						<Text text="Width" size="55,100%"  fontSize="18" textColor="255,255,255" />

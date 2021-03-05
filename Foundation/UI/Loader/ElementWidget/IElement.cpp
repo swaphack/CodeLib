@@ -10,8 +10,6 @@ IElement::IElement()
 IElement::~IElement()
 {
 	SAFE_DELETE(_nodeProperty);
-
-	SAFE_RELEASE(_node);
 }
 
 bool IElement::load(tinyxml2::XMLElement* pXmlNode, bool clean/* = true*/)

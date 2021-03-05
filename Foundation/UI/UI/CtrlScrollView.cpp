@@ -177,9 +177,10 @@ void ui::CtrlScrollView::addItem(CtrlWidget* item, const sys::CSSSize& size, int
 	{
 		return;
 	}
-	ScrollItem* pScrollItem = ScrollItem::create(item, size, this);
-	_content->addWidget(pScrollItem, zOrder);
-	_scrollItems.push_back(pScrollItem);
+	//ScrollItem* pScrollItem = ScrollItem::create(item, size, this);
+	item->getLayoutItem()->setSize(size);
+	_content->addWidget(item, zOrder);
+	_scrollWidgets.push_back(item);
 
 	notify(NodeNotifyType::GEOMETRY);
 }
@@ -191,13 +192,13 @@ void CtrlScrollView::removeItem(CtrlWidget* item)
 		return;
 	}
 	
-	std::vector<ScrollItem*>::iterator iter = _scrollItems.begin();
-	while (iter != _scrollItems.end())
+	auto iter = _scrollWidgets.begin();
+	while (iter != _scrollWidgets.end())
 	{
-		if ((*iter)->getFirstChild() == item)
+		if ((*iter) == item)
 		{
 			_content->removeWidget(*iter);
-			_scrollItems.erase(iter);
+			_scrollWidgets.erase(iter);
 			break;
 		}
 		iter++;
@@ -208,21 +209,21 @@ void CtrlScrollView::removeItem(CtrlWidget* item)
 
 void CtrlScrollView::removeAllItems()
 {
-	std::vector<ScrollItem*>::iterator iter = _scrollItems.begin();
-	while (iter != _scrollItems.end())
+	auto iter = _scrollWidgets.begin();
+	while (iter != _scrollWidgets.end())
 	{
 		//(*iter)->removeAllWidgets();
 		(*iter)->removeFromParent();
 		iter++;
 	}
 
-	_scrollItems.clear();
+	_scrollWidgets.clear();
 	notify(NodeNotifyType::GEOMETRY);
 }
 
 int ui::CtrlScrollView::getItemCount() const
 {
-	return _scrollItems.size();
+	return _scrollWidgets.size();
 }
 
 ui::CtrlWidget* ui::CtrlScrollView::getItemByIndex(int index) const
@@ -232,17 +233,17 @@ ui::CtrlWidget* ui::CtrlScrollView::getItemByIndex(int index) const
 		return nullptr;
 	}
 
-	auto pScrollItem = _scrollItems.at(index);
+	auto pScrollItem = _scrollWidgets.at(index);
 	if (pScrollItem == nullptr) return nullptr;
 
-	return pScrollItem->getFirstWidget();
+	return pScrollItem;
 }
 
 CtrlWidget* ui::CtrlScrollView::findItemByName(const std::string& name) const
 {
-	for (size_t i = 0; i < _scrollItems.size(); i++)
+	for (size_t i = 0; i < _scrollWidgets.size(); i++)
 	{
-		auto pWidget = _scrollItems.at(i)->getFirstWidget();
+		auto pWidget = _scrollWidgets.at(i);
 		if (pWidget->getName() == name)
 		{
 			return pWidget;

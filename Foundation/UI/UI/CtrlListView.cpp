@@ -166,7 +166,7 @@ void ui::CtrlListView::setShowInCenter(bool bCenter)
 
 void ui::CtrlListView::initItems()
 {
-	if (_scrollItems.size() == 0)
+	if (_scrollWidgets.size() == 0)
 	{
 		return;
 	}
@@ -175,10 +175,10 @@ void ui::CtrlListView::initItems()
 
 	if (_scrollDirection == ScrollDirection::HORIZONTAL_LEFT_TO_RIGHT)
 	{
-		std::vector<ScrollItem*>::iterator iter = _scrollItems.begin();
-		while (iter != _scrollItems.end())
+		auto iter = _scrollWidgets.begin();
+		while (iter != _scrollWidgets.end())
 		{
-			ScrollItem* pItem = *iter;
+			ui::CtrlWidget* pItem = *iter;
 			pItem->getLayoutItem()->unsetRightMargin();
 			pItem->getLayoutItem()->setLeftMargin(posX);
 			posX += pItem->getWidth();
@@ -188,10 +188,10 @@ void ui::CtrlListView::initItems()
 	}
 	else if (_scrollDirection == ScrollDirection::HORIZONTAL_RIGHT_TO_LEFT)
 	{
-		std::vector<ScrollItem*>::iterator iter = _scrollItems.begin();
-		while (iter != _scrollItems.end())
+		auto iter = _scrollWidgets.begin();
+		while (iter != _scrollWidgets.end())
 		{
-			ScrollItem* pItem = *iter;
+			ui::CtrlWidget* pItem = *iter;
 			pItem->getLayoutItem()->unsetLeftMargin();
 			pItem->getLayoutItem()->setRightMargin(posX);
 			posX += pItem->getWidth();
@@ -201,10 +201,10 @@ void ui::CtrlListView::initItems()
 	}
 	else if (_scrollDirection == ScrollDirection::VERTICAL_TOP_TO_BOTTOM)
 	{
-		std::vector<ScrollItem*>::iterator iter = _scrollItems.begin();
-		while (iter != _scrollItems.end())
+		auto iter = _scrollWidgets.begin();
+		while (iter != _scrollWidgets.end())
 		{
-			ScrollItem* pItem = *iter;
+			ui::CtrlWidget* pItem = *iter;
 			pItem->getLayoutItem()->unsetBottomMargin();
 			pItem->getLayoutItem()->setTopMargin(posY);
 			posY += pItem->getHeight();
@@ -214,10 +214,10 @@ void ui::CtrlListView::initItems()
 	}
 	else if (_scrollDirection == ScrollDirection::VERTICAL_BOTTOM_TO_TOP)
 	{
-		std::vector<ScrollItem*>::iterator iter = _scrollItems.begin();
-		while (iter != _scrollItems.end())
+		auto iter = _scrollWidgets.begin();
+		while (iter != _scrollWidgets.end())
 		{
-			ScrollItem* pItem = *iter;
+			ui::CtrlWidget* pItem = *iter;
 			pItem->getLayoutItem()->unsetTopMargin();
 			pItem->getLayoutItem()->setBottomMargin(posY);
 			posY += pItem->getHeight();

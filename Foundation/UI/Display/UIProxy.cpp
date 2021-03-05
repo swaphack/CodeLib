@@ -14,17 +14,17 @@ using namespace ui;
 void UIProxy::init()
 {
 
-	this->registerElementParser(ELEMENT_NAME_WIDGET, new WidgetLoader());
-	this->registerElementParser(ELEMENT_NAME_LAYOUT, new LayoutLoader());
-	this->registerElementParser(ELEMENT_NAME_IMAGE, new ImageLoader());
-	this->registerElementParser(ELEMENT_NAME_TEXT, new TextLoader());
-	this->registerElementParser(ELEMENT_NAME_BUTTON, new ButtonLoader());
-	this->registerElementParser(ELEMENT_NAME_EDITTEXT, new EditTextLoader());
-	this->registerElementParser(ELEMENT_NAME_SCALE9_IMAGE, new Scale9ImageLoader());
-	this->registerElementParser(ELEMENT_NAME_SCROLLVIEW, new ScrollViewLoader());
-	this->registerElementParser(ELEMENT_NAME_LISTVIEW, new ListViewLoader());
-	this->registerElementParser(ELEMENT_NAME_GRIDVIEW, new GridViewLoader());
-	this->registerElementParser(ELEMENT_NAME_FILE, new FileLoader());
+	this->registerElementParser(ELEMENT_NAME_WIDGET, []() { return new WidgetLoader(); });
+	this->registerElementParser(ELEMENT_NAME_LAYOUT, []() { return new LayoutLoader(); });
+	this->registerElementParser(ELEMENT_NAME_IMAGE, []() { return new ImageLoader(); });
+	this->registerElementParser(ELEMENT_NAME_TEXT, []() { return new TextLoader(); });
+	this->registerElementParser(ELEMENT_NAME_BUTTON, []() { return new ButtonLoader(); });
+	this->registerElementParser(ELEMENT_NAME_EDITTEXT, []() { return new EditTextLoader(); });
+	this->registerElementParser(ELEMENT_NAME_SCALE9_IMAGE, []() { return new Scale9ImageLoader(); });
+	this->registerElementParser(ELEMENT_NAME_SCROLLVIEW, []() { return new ScrollViewLoader(); });
+	this->registerElementParser(ELEMENT_NAME_LISTVIEW, []() { return new ListViewLoader(); });
+	this->registerElementParser(ELEMENT_NAME_GRIDVIEW, []() { return new GridViewLoader(); });
+	this->registerElementParser(ELEMENT_NAME_FILE, []() { return new FileLoader(); });
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -102,16 +102,16 @@ bool UIProxy::saveFile(CtrlWidget* layout, const std::string& filepath, const ma
 	return result;
 }
 
-void UIProxy::registerElementParser(const std::string& name, IElement* parser)
+void UIProxy::registerElementParser(const std::string& name, const CreateElementFunc& func)
 {
-	if (name.empty() || parser == NULL)
+	if (name.empty() || func == nullptr)
 	{
 		return;
 	}
 
 	unregisterElementParser(name);
 
-	_elementParsers[name] = parser;
+	_elementParsers[name] = func;
 }
 
 void UIProxy::unregisterElementParser(const std::string& name)
@@ -127,7 +127,6 @@ void UIProxy::unregisterElementParser(const std::string& name)
 		return;
 	}
 
-	delete iter->second;
 	_elementParsers.erase(iter);
 }
 
@@ -136,7 +135,6 @@ void UIProxy::removeAllElementParsers()
 	ElementParsers::const_iterator iter = _elementParsers.begin();
 	while (iter != _elementParsers.end())
 	{
-		delete iter->second;
 		iter++;
 	}
 
@@ -258,12 +256,6 @@ void ui::UIProxy::setFontPath(const std::string& fontPath)
 ui::LayoutItem* ui::UIProxy::getLayoutItem(ui::CtrlWidget* item)
 {
 	if (item == nullptr) return nullptr;
-	if (item->getParent() != nullptr)
-	{
-		ui::ScrollItem* pItem = item->getParent()->as<ui::ScrollItem>();
-		if (pItem != nullptr) return pItem->getLayoutItem();
-	}
-	
 	return item->getLayoutItem();
 }
 
@@ -335,12 +327,18 @@ bool ui::UIProxy::getVisibleChildren(const render::Node* node, std::vector<rende
 
 IElement* UIProxy::getElement(const std::string& name)
 {
-	if (_elementParsers.find(name) == _elementParsers.end())
+	auto it = _elementParsers.find(name);
+	if (it == _elementParsers.end())
 	{
 		return nullptr;
 	}
 
-	return _elementParsers[name];
+	if (it->second == nullptr)
+	{
+		return nullptr;
+	}
+
+	return it->second();
 }
 
 CtrlWidget* UIProxy::initWidget(tinyxml2::XMLElement* xmlNode)
@@ -350,12 +348,7 @@ CtrlWidget* UIProxy::initWidget(tinyxml2::XMLElement* xmlNode)
 		return nullptr;
 	}
 
-	ElementParsers::const_iterator iter = _elementParsers.find(xmlNode->Name());
-	if (iter == _elementParsers.end())
-	{
-		return nullptr;
-	}
-	IElement* element = iter->second;
+	IElement* element = getElement(xmlNode->Name());
 
 	if (element == nullptr)
 	{
@@ -367,7 +360,11 @@ CtrlWidget* UIProxy::initWidget(tinyxml2::XMLElement* xmlNode)
 	{
 		return nullptr;
 	}
-	return element->getWidget();
+	auto pWidget = element->getWidget();
+
+	delete element;
+
+	return pWidget;
 }
 
 bool UIProxy::loadWidget(CtrlWidget* pLayout, tinyxml2::XMLElement* xmlNode)

@@ -133,7 +133,7 @@ namespace ui
 		// 管理所有项的位置
 		CtrlLayout* _content = nullptr;
 		// 项
-		std::vector<ScrollItem*> _scrollItems;
+		std::vector<ui::CtrlWidget*> _scrollWidgets;
 		// 点击位置
 		math::Vector2 _touchPosition;
 		

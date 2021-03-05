@@ -19,7 +19,7 @@ bool ui::CtrlGridView::init()
 
 void ui::CtrlGridView::initItems()
 {
-	if (_scrollItems.size() == 0)
+	if (_scrollWidgets.size() == 0)
 	{
 		return;
 	}
@@ -30,10 +30,10 @@ void ui::CtrlGridView::initItems()
 
 	if (_scrollDirection == ScrollDirection::HORIZONTAL_LEFT_TO_RIGHT)
 	{
-		std::vector<ScrollItem*>::iterator iter = _scrollItems.begin();
-		while (iter != _scrollItems.end())
+		auto iter = _scrollWidgets.begin();
+		while (iter != _scrollWidgets.end())
 		{
-			ScrollItem* pItem = *iter;
+			ui::CtrlWidget* pItem = *iter;
 
 			if (pItem->getWidth() > maxValue.getX()) maxValue.setX(pItem->getWidth());
 			if (pItem->getHeight() > maxValue.getY()) maxValue.setY(pItem->getHeight());
@@ -56,10 +56,10 @@ void ui::CtrlGridView::initItems()
 	}
 	else if (_scrollDirection == ScrollDirection::HORIZONTAL_RIGHT_TO_LEFT)
 	{
-		std::vector<ScrollItem*>::iterator iter = _scrollItems.begin();
-		while (iter != _scrollItems.end())
+		auto iter = _scrollWidgets.begin();
+		while (iter != _scrollWidgets.end())
 		{
-			ScrollItem* pItem = *iter;
+			ui::CtrlWidget* pItem = *iter;
 			if (pItem->getWidth() > maxValue.getX()) maxValue.setX(pItem->getWidth());
 			if (pItem->getHeight() > maxValue.getY()) maxValue.setY(pItem->getHeight());
 
@@ -84,10 +84,10 @@ void ui::CtrlGridView::initItems()
 	}
 	else if (_scrollDirection == ScrollDirection::VERTICAL_TOP_TO_BOTTOM)
 	{
-		std::vector<ScrollItem*>::iterator iter = _scrollItems.begin();
-		while (iter != _scrollItems.end())
+		auto iter = _scrollWidgets.begin();
+		while (iter != _scrollWidgets.end())
 		{
-			ScrollItem* pItem = *iter;
+			ui::CtrlWidget* pItem = *iter;
 			if (pItem->getWidth() > maxValue.getX()) maxValue.setX(pItem->getWidth());
 			if (pItem->getHeight() > maxValue.getY()) maxValue.setY(pItem->getHeight());
 
@@ -111,10 +111,10 @@ void ui::CtrlGridView::initItems()
 	}
 	else if (_scrollDirection == ScrollDirection::VERTICAL_BOTTOM_TO_TOP)
 	{
-		std::vector<ScrollItem*>::iterator iter = _scrollItems.begin();
-		while (iter != _scrollItems.end())
+		auto iter = _scrollWidgets.begin();
+		while (iter != _scrollWidgets.end())
 		{
-			ScrollItem* pItem = *iter;
+			ui::CtrlWidget* pItem = *iter;
 			if (pItem->getWidth() > maxValue.getX()) maxValue.setX(pItem->getWidth());
 			if (pItem->getHeight() > maxValue.getY()) maxValue.setY(pItem->getHeight());
 
