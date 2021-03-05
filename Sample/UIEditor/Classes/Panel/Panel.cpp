@@ -58,7 +58,23 @@ bool ue::Panel::touchFrontWidget(ui::CtrlWidget* widget, const math::Vector2& to
 		{
 			return false;
 		}
-		func(widget);
+
+		auto pParent = widget->getParent();
+		if (pParent)
+		{
+			if (pParent->is<ui::CtrlScrollView>())
+			{
+				func(static_cast<ui::CtrlWidget*>(pParent));
+			}
+			else
+			{
+				func(widget);
+			}
+		}
+		else
+		{
+			func(widget);
+		}
 	}
 
 	return true;

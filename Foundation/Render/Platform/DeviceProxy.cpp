@@ -49,7 +49,7 @@ void DeviceProxy::onMouseMoveHandler(float x, float y)
 	if (_lastMouseKey == sys::MouseKey::LEFTBUTTON
 		&& _lastMouseButtonStatus == sys::ButtonStatus::BUTTON_DOWN)
 	{
-		G_TOUCHMANAGER->onTouchMoved(touchPoint);
+		G_TOUCHMANAGER->addMovedTouchPoint(touchPoint);
 	}
 }
 
@@ -67,11 +67,11 @@ void render::DeviceProxy::processMouseTouchEvent(sys::MouseKey key, sys::ButtonS
 
 	if (type == sys::ButtonStatus::BUTTON_DOWN)
 	{
-		G_TOUCHMANAGER->onTouchBegan(touchPoint);
+		G_TOUCHMANAGER->addBeganTouchPoint(touchPoint);
 	}
 	else if (type == sys::ButtonStatus::BUTTON_UP)
 	{
-		G_TOUCHMANAGER->onTouchEnded(touchPoint);
+		G_TOUCHMANAGER->addEndedTouchPoint(touchPoint);
 	}
 }
 

@@ -56,6 +56,8 @@ void RenderApplication::update()
 		_canvas->draw();
 	}
 
+	G_TOUCHMANAGER->process();
+
 	checkAutoRealsePool();
 }
 

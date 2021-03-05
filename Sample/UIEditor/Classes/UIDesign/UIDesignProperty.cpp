@@ -70,6 +70,7 @@ void ue::UIDesignProperty::loadWidget(ui::CtrlWidget* pWidget)
 	{
 		return;
 	}
+	m_pTargetItem = pWidget;
 
 	if (m_pCurUIProperty == pUIProperty)
 	{
@@ -93,9 +94,6 @@ void ue::UIDesignProperty::loadWidget(ui::CtrlWidget* pWidget)
 		m_pListProperty->removeAllItems();
 		m_pListProperty->addItem(m_pCurUIFile);
 	}
-
-
-	m_pTargetItem = pWidget;
 
 	m_pCurUIProperty->initPropertyUI(m_pCurUIFile);
 	m_pCurUIProperty->setTarget(m_pTargetItem);
