@@ -72,7 +72,7 @@ CtrlScrollView::CtrlScrollView()
 	_content->getLayoutItem()->unsetMarginState();
 	CtrlWidget::addWidget(_content, 0);
 
-	this->setTouchSwallowed(true);
+	//this->setTouchSwallowed(true);
 }
 
 CtrlScrollView::~CtrlScrollView()
