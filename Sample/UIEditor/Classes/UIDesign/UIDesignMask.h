@@ -29,6 +29,8 @@ namespace ue
 		*	初始化文本
 		*/
 		virtual void initText();
+	protected:
+		ui::CtrlWidget* createWidget(const std::string& name);
 	private:
 		ui::CtrlLayout* m_pMainLayout = nullptr;
 

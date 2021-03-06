@@ -39,22 +39,16 @@ bool ue::UIDesignMask::init()
 
 			if (m_pMainLayout)
 			{
+				ui::CtrlImage* pImage = render::createNode<ui::CtrlImage>();
+				if (pImage == nullptr) return;
+				pImage->setImagePath(pNode->getNormalImage());
+				pImage->setPosition(m_pTempPosition);
+
+
 				std::string name = pNode->getString();
-				m_pCloneWidget = ui::UIProxy::getInstance()->createWidget(name);
-				if (m_pCloneWidget == nullptr)
-				{
-					return;
-				}
-				auto pLayoutItem = m_pCloneWidget->getLayoutItem();
-				if (pLayoutItem)
-				{
-					pLayoutItem->setName(name);
-					pLayoutItem->setWidgetName(name);
-					pLayoutItem->setWidth(100);
-					pLayoutItem->setHeight(100);
-					pLayoutItem->setMargin(0, 0, 0, 0);
-				}
-				m_pCloneWidget->setPosition(m_pTempPosition);
+				pImage->setName(name);
+
+				m_pCloneWidget = pImage;
 				m_pMainLayout->addWidget(m_pCloneWidget);
 			}
 		}
@@ -99,9 +93,10 @@ void ue::UIDesignMask::initEvent()
 					if (pViewPanel)
 					{
 						touchFrontWidget(pViewPanel, touchPoint, [this, pViewPanel](ui::CtrlWidget* widget) {
-							m_pCloneWidget->retain();
+							auto pWidget = createWidget(m_pCloneWidget->getName());
+							widget->addWidget(pWidget);
+
 							m_pCloneWidget->removeFromParent();
-							widget->addWidget(m_pCloneWidget);
 							m_pCloneWidget = nullptr;
 							pViewPanel->saveAndReload();
 						});
@@ -128,4 +123,24 @@ void ue::UIDesignMask::initEvent()
 
 void ue::UIDesignMask::initText()
 {
+}
+
+ui::CtrlWidget* ue::UIDesignMask::createWidget(const std::string& name)
+{
+	auto pCloneWidget = ui::UIProxy::getInstance()->createWidget(name);
+	if (pCloneWidget == nullptr)
+	{
+		return nullptr;
+	}
+	auto pLayoutItem = pCloneWidget->getLayoutItem();
+	if (pLayoutItem)
+	{
+		pLayoutItem->setName(name);
+		pLayoutItem->setWidgetName(name);
+		pLayoutItem->setWidth(100);
+		pLayoutItem->setHeight(100);
+		pLayoutItem->setMargin(0, 0, 0, 0);
+	}
+
+	return pCloneWidget;
 }

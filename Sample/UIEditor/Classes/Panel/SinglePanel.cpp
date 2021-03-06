@@ -3,6 +3,7 @@
 ue::SinglePanel::SinglePanel()
 {
 	this->setTouchEnabled(true);
+	this->setTouchSwallowed(true);
 }
 
 ue::SinglePanel::~SinglePanel()

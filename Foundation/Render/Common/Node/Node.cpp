@@ -364,11 +364,11 @@ bool render::Node::isInFrontOfNode(const Node* target) const
 	{
 		if (vecNodeInfo1[i] != vecNodeInfo2[i])
 		{
-			return vecNodeInfo1[i] < vecNodeInfo2[i];
+			return vecNodeInfo1[i] > vecNodeInfo2[i];
 		}
 	}
 	// 较短节点链是较长节点链的父节点
-	return len == vecNodeInfo1.size();
+	return len == vecNodeInfo2.size();
 }
 
 bool render::Node::containPoint(const math::Vector2& touchPoint)

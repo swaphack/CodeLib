@@ -73,6 +73,54 @@ void render::TouchManager::addTouchInfo(TouchType type, const math::Vector2& tou
 
 void render::TouchManager::process()
 {
+	if (_waitAddTouches.empty())
+	{
+		return;
+	}
+	/*
+	if (_waitAddTouches[0].type != TouchType::BEGAN)
+	{// 开始不是began，移除所有直到began开始
+		auto it = _waitAddTouches.begin();
+		do
+		{
+			if ((*it).type != TouchType::BEGAN)
+			{
+				it = _waitAddTouches.erase(it);
+			}
+			else
+			{
+				break;
+			}
+		} while (!_waitAddTouches.empty());
+	}
+
+	std::vector<TouchSlotInfo> touchInfos;
+	auto it = _waitAddTouches.begin();
+	do
+	{// 获取一个完整的点击操作
+		touchInfos.push_back(*it);
+
+		if ((*it).type == TouchType::ENDED)
+		{			
+			break;
+		}
+		it++;
+	} while (!_waitAddTouches.empty());
+
+	if (!touchInfos.empty()) return;
+
+	int size = touchInfos.size();
+	if (touchInfos[size - 1].type != TouchType::ENDED)
+	{
+		return;
+	}
+
+	for (size_t i = 0; i < size; i++)
+	{
+		_waitAddTouches.erase(_waitAddTouches.begin());
+	}
+	*/
+
 	std::vector<TouchSlotInfo> touchInfos = _waitAddTouches;
 	_waitAddTouches.clear();
 
@@ -133,6 +181,12 @@ void TouchManager::onTouchMoved(const math::Vector2& touchPoint)
 	for (auto item : _temps)
 	{
 		item->onTouchMoved(touchPoint);
+
+		// 吞噬点击
+		if (item->isTouchSwallowed())
+		{
+			break;
+		}
 	}
 }
 
@@ -141,5 +195,11 @@ void TouchManager::onTouchEnded(const math::Vector2& touchPoint)
 	for (auto item : _temps)
 	{
 		item->onTouchEnded(touchPoint);
+
+		// 吞噬点击
+		if (item->isTouchSwallowed())
+		{
+			break;
+		}
 	}
 }
