@@ -14,7 +14,7 @@ void ue::UIPropertyScrollView::initPropertyUI(ui::CtrlWidget* root)
 	{
 		return;
 	}
-	UIPropertyWidget::initPropertyUI(root);
+	UIPropertyLayout::initPropertyUI(root);
 
 	root->findWidgetByName("HorizontalScroll", m_pHorizontalScroll);
 	root->findWidgetByName("VerticalScroll", m_pVerticalScroll);
@@ -31,7 +31,7 @@ void ue::UIPropertyScrollView::readWidgetProperty()
 		return;
 	}
 
-	UIPropertyWidget::readWidgetProperty();
+	UIPropertyLayout::readWidgetProperty();
 
 	auto pScrollView = m_pTarget->as<ui::CtrlScrollView>();
 	if (pScrollView == nullptr)
@@ -88,5 +88,5 @@ void ue::UIPropertyScrollView::writeWidgetProperty()
 	}
 
 
-	UIPropertyWidget::writeWidgetProperty();
+	UIPropertyLayout::writeWidgetProperty();
 }

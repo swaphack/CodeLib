@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <root width="1024" height="768" layout="1" fontPath="Default/Font/font_3.ttf">
 	<Layout name="body" showMask="1" maskColor="180,180,180,125" marginState="1,1,1,1" size="100%,100%">
-		<ListView name="property" direction="2" marginState="1,1,1,1" size="100%,100%" clip="1" moveMultiple="80" verticalScroll="1" enableTouch="1">
+		<ListView name="property" direction="2" marginState="1,1,1,1" size="100%,100%" clip="1" moveMultiple="5" verticalScroll="1" enableTouch="1">
 			<ListView direction="0" size="100%,35">
 				<Text text="Type" size="50,100%" fontSize="20" textColor="255,255,255" />
 				<ListView size="180,100%" showMask="1" maskColor="100,100,100,125">

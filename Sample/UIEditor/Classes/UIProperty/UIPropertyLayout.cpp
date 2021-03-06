@@ -19,6 +19,7 @@ void ue::UIPropertyLayout::initPropertyUI(ui::CtrlWidget* root)
 
 	root->findWidgetByName("ShowImage", m_pShowImage);
 	root->findWidgetByName("ShowMask", m_pShowMask);
+	root->findWidgetByName("MaskColor", m_pMaskColor);
 	root->findWidgetByName("ImagePath", m_pImagePath);
 
 	ADD_CLICK_FUNC(m_pShowImage, ui::CtrlLayout, setBackgroudImageVisible);
@@ -49,7 +50,14 @@ void ue::UIPropertyLayout::readWidgetProperty()
 	{
 		m_pImagePath->setString(pLayout->getBackgroundImagePath());
 	}
+	if (m_pMaskColor)
+	{
+		phy::Color4B color = pLayout->getBackgroundColor();
+		std::string text;
+		sys::ColorConvert::convertToText(color, text);
 
+		m_pMaskColor->setString(text);
+	}
 }
 
 void ue::UIPropertyLayout::writeWidgetProperty()
@@ -74,6 +82,13 @@ void ue::UIPropertyLayout::writeWidgetProperty()
 	if (m_pImagePath)
 	{
 		pLayout->setBackgroundImagePath(m_pImagePath->getString());
+	}
+
+	if (m_pMaskColor)
+	{
+		phy::Color4B color(255, 255, 255, 255);
+		sys::ColorConvert::convertToColor(m_pMaskColor->getString(), color);
+		pLayout->setBackgroundColor(color);
 	}
 
 

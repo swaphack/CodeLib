@@ -338,21 +338,22 @@ bool render::Node::isInFrontOfNode(const Node* target) const
 
 	// 从根节点开始比较两个位置关系
 
-	std::vector<Node*> vecNodeInfo1;
-	std::vector<Node*> vecNodeInfo2;
+	std::vector<int> vecNodeInfo1;
+	std::vector<int> vecNodeInfo2;
 
 	const Node* temp = this;
 	while (temp->getParent() != nullptr)
 	{
-		vecNodeInfo1.insert(vecNodeInfo1.begin(), temp->getParent());
-
+		int index = temp->getParent()->indexOfChild(temp);
+		vecNodeInfo1.insert(vecNodeInfo1.begin(), index);
 		temp = temp->getParent();
 	}
 
 	temp = target;
 	while (temp->getParent() != nullptr)
 	{
-		vecNodeInfo2.insert(vecNodeInfo2.begin(), temp->getParent());
+		int index = temp->getParent()->indexOfChild(temp);
+		vecNodeInfo2.insert(vecNodeInfo2.begin(), index);
 
 		temp = temp->getParent();
 	}
@@ -363,11 +364,7 @@ bool render::Node::isInFrontOfNode(const Node* target) const
 	{
 		if (vecNodeInfo1[i] != vecNodeInfo2[i])
 		{
-			if (i == 0) return false;
-
-			int index1 = vecNodeInfo1[i - 1]->indexOfChild(vecNodeInfo1[i]);
-			int index2 = vecNodeInfo2[i - 1]->indexOfChild(vecNodeInfo2[i]);
-			return index1 > index2;
+			return vecNodeInfo1[i] < vecNodeInfo2[i];
 		}
 	}
 	// 较短节点链是较长节点链的父节点

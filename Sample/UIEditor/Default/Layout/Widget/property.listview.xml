@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <root width="1024" height="768" layout="1" fontPath="Resource/Font/font_3.ttf">
 	<Layout name="body" showMask="1" maskColor="180,180,180,125" marginState="1,1,1,1" size="100%,100%">
-		<ListView direction="2" marginState="1,1,1,1" size="100%,100%" clip="1" moveMultiple="80" verticalScroll="1" enableTouch="1">
-			<File filepath="Default/Layout/Widget/property.scrollview.xml" marginState="1,1,0,1" size="100%,720"/>
-			<ListView direction="2" marginState="1,1,0,1" clip="0" size="100%,200">
-				<Text text="=>ListView" size="100%,25"  fontSize="25" textColor="100,0,0" horizontal="0" />
+		<ListView direction="2" marginState="1,1,1,1" size="100%,100%" clip="1" moveMultiple="5" verticalScroll="1" enableTouch="1">
+			<File filepath="Default/Layout/Widget/property.scrollview.xml" marginState="1,1,0,1" size="100%,950"/>
+			<ListView direction="2" marginState="1,1,0,1" margin="0,5,0,5" clip="0" size="100%,200">
+				<Text text="[ListView Property]" size="100%,22"  fontSize="20" textColor="100,0,0" horizontal="0" />
 				<Widget size="100%,2"/>
 				<ListView direction="0" size="100%,35">
 					<Text text="Direction" size="80,100%"  fontSize="20" textColor="255,255,255" />

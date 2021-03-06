@@ -142,6 +142,6 @@ namespace ui
 		// 水平方向是否可以滑动
 		bool _bVerticalScroll = false;
 		// 移动系数
-		float _movingMultiple = 20;
+		float _movingMultiple = 2;
 	};
 }
