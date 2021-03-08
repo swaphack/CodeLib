@@ -3,6 +3,8 @@
 #include "system.h"
 #include "TouchDelegate.h"
 #include <list>
+#include <vector>
+#include <set>
 
 namespace render
 {
@@ -40,7 +42,7 @@ namespace render
 
 			TouchSlotInfo() {}
 		};
-		std::vector<TouchProtocol*> _targets;
+		std::set<TouchProtocol*> _targets;
 		std::vector<TouchProtocol*> _temps;
 		// ´ýÌí¼Óµã»÷
 		std::vector<TouchSlotInfo> _waitAddTouches;

@@ -4,7 +4,7 @@
 ue::MainWindow::MainWindow()
 {
 	_viewLayout = CREATE_NODE(UIDesignWindow);
-	this->addChild(_viewLayout);
+	this->addChild(_viewLayout, 0);
 
 	auto proxy = ui::UIProxy::getInstance();
 

@@ -7,6 +7,8 @@
 #include "NotifyCenter.h"
 #include "Common/Action/import.h"
 #include "ComputeQueue.h"
+#include "Common/Scene/Scene.h"
+#include "Canvas.h"
 
 using namespace render;
 
@@ -68,6 +70,26 @@ void Node::removeFromParent()
 	this->getParent()->removeChild(this);
 }
 
+void render::Node::setScene(Scene* scene)
+{
+	_scene = scene;
+}
+
+void render::Node::setAllScene(Scene* scene)
+{
+	for (auto it = _children.begin(); it != _children.end(); it++)
+	{
+		(*it)->setAllScene(scene);
+	}
+
+	this->setScene(scene);
+}
+
+Scene* render::Node::getScene() const
+{
+	return _scene;
+}
+
 void Node::addChild( Node* node )
 {
 	this->addChild(node, 0);
@@ -87,6 +109,8 @@ void render::Node::addChild(Node* node, int zOrder)
 	SAFE_RETAIN(node);
 	_children.push_back(node);
 
+	node->setAllScene(getScene());
+
 	onChildrenChange();
 }
 
@@ -100,6 +124,7 @@ void Node::removeChild( Node* node )
 	}
 
 	node->setParent(nullptr);
+	node->setAllScene(nullptr);
 
 	SAFE_RELEASE(node);
 	auto it = std::find(_children.begin(), _children.end(), node);
@@ -304,6 +329,14 @@ void Node::draw()
 
 bool render::Node::containTouchPoint(const math::Vector2& touchPoint)
 { 
+	if (!isVisible() || this->isSkipDraw())
+		return false;
+
+	if (getScene() != Canvas::getInstance()->getCurScene())
+	{
+		return false;
+	}
+
 	auto parent = this->getParent();
 	while (parent != nullptr)
 	{
@@ -314,6 +347,7 @@ bool render::Node::containTouchPoint(const math::Vector2& touchPoint)
 				return false;
 			}
 		}
+
 		parent = parent->getParent();
 	}
 
@@ -367,6 +401,7 @@ bool render::Node::isInFrontOfNode(const Node* target) const
 			return vecNodeInfo1[i] > vecNodeInfo2[i];
 		}
 	}
+
 	// 较短节点链是较长节点链的父节点
 	return len == vecNodeInfo2.size();
 }
@@ -543,7 +578,6 @@ bool render::Node::isSkipDraw() const
 {
 	return _bSkipDraw;
 }
-
 
 void render::Node::updateNode()
 {

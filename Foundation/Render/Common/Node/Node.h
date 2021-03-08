@@ -10,6 +10,7 @@
 namespace render
 {
 	class ActionProxy;
+	class Scene;
 
 	/**
 	glLoadIdentity();
@@ -50,10 +51,17 @@ namespace render
 		// 从父节点移除
 		virtual void removeFromParent();
 	public:
+		// 设置所属场景
+		void setScene(Scene* scene);
+		// 设置所属场景
+		void setAllScene(Scene* scene);
+		// 获取场景
+		Scene* getScene() const;
+	public:
 		// 添加子节点
-		void addChild(Node* node);
+		virtual void addChild(Node* node);
 		// 添加子节点
-		void addChild(Node* node, int zOrder);
+		virtual void addChild(Node* node, int zOrder);
 		// 移除子节点
 		void removeChild(Node* node);
 		// 移除所有子节点
@@ -209,6 +217,8 @@ namespace render
 		math::Matrix4x4 _worldMatrix;
 		// 实际在世界坐标系中的逆矩阵
 		math::Matrix4x4 _worldInverseMatrix;
+		// 场景
+		Scene* _scene = nullptr;
 	protected:
 		// 动作代理
 		ActionProxy* _actionProxy = nullptr;

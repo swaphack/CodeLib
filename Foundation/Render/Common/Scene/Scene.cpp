@@ -34,3 +34,9 @@ void Scene::visit()
 
 	this->drawNode();
 }
+
+void render::Scene::addChild(Node* node, int zOrder)
+{
+	Node::addChild(node, zOrder);
+	node->setAllScene(this);
+}

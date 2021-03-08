@@ -18,7 +18,8 @@ void render::TouchManager::addTarget(TouchProtocol* target)
 	{
 		return;
 	}
-	_targets.push_back(target);
+
+	_targets.insert(target);
 }
 
 void render::TouchManager::removeTarget(TouchProtocol* target)
@@ -30,7 +31,7 @@ void render::TouchManager::removeTarget(TouchProtocol* target)
 
 	if (!_targets.empty())
 	{
-		auto it = std::find(_targets.begin(), _targets.end(), target);
+		auto it = _targets.find(target);
 		if (it != _targets.end())
 		{
 			_targets.erase(it);

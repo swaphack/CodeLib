@@ -69,7 +69,7 @@ void ue::SinglePanel::updatePosition(const ui::CtrlWidget* item, sys::CSSDirecti
 
 void ue::SinglePanel::show()
 {
-	render::RenderApplication::getInstance()->getCanvas()->getCurScene()->addChild(this);
+	render::Canvas::getInstance()->getCurScene()->addChild(this, 0);
 }
 
 void ue::SinglePanel::showWithTarget(const ui::CtrlWidget* item, sys::CSSDirection eDir)
