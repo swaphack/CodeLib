@@ -28,7 +28,6 @@
     <ClCompile Include="Classes\Panel\SinglePanel.cpp" />
     <ClCompile Include="Classes\UIDesign\UIDesignMask.cpp" />
     <ClCompile Include="Classes\UIDesign\UIDesignNodeTree.cpp" />
-    <ClCompile Include="Classes\UIDesign\UIDesignPopMenu.cpp" />
     <ClCompile Include="Classes\UIDesign\UIDesignMenuBar.cpp" />
     <ClCompile Include="Classes\UIDesign\UIDesignView.cpp" />
     <ClCompile Include="Classes\UIDesign\UIDesignDirectory.cpp" />
@@ -38,13 +37,15 @@
     <ClCompile Include="Classes\UIDesign\UIDesignWindow.cpp" />
     <ClCompile Include="Classes\UIEditorApplication.cpp" />
     <ClCompile Include="Classes\main.cpp" />
-    <ClCompile Include="Classes\UIHelper\FileSystemWindow.cpp" />
+    <ClCompile Include="Classes\UIHelper\File.cpp" />
+    <ClCompile Include="Classes\UIHelper\Menu.cpp" />
     <ClCompile Include="Classes\UIProperty\UIPropertyButton.cpp" />
     <ClCompile Include="Classes\UIProperty\UIPropertyEditText.cpp" />
     <ClCompile Include="Classes\UIProperty\UIPropertyGridView.cpp" />
     <ClCompile Include="Classes\UIProperty\UIPropertyImage.cpp" />
     <ClCompile Include="Classes\UIProperty\UIPropertyLayout.cpp" />
     <ClCompile Include="Classes\UIProperty\UIPropertyListView.cpp" />
+    <ClCompile Include="Classes\UIProperty\UIPropertyNode.cpp" />
     <ClCompile Include="Classes\UIProperty\UIPropertyProtocol.cpp" />
     <ClCompile Include="Classes\UIProperty\UIPropertyScrollView.cpp" />
     <ClCompile Include="Classes\UIProperty\UIPropertyText.cpp" />
@@ -64,7 +65,6 @@
     <ClInclude Include="Classes\UIDesign\macros.h" />
     <ClInclude Include="Classes\UIDesign\UIDesignMask.h" />
     <ClInclude Include="Classes\UIDesign\UIDesignNodeTree.h" />
-    <ClInclude Include="Classes\UIDesign\UIDesignPopMenu.h" />
     <ClInclude Include="Classes\UIDesign\UIDesignMenuBar.h" />
     <ClInclude Include="Classes\UIDesign\UIDesignView.h" />
     <ClInclude Include="Classes\UIDesign\UIDesignDirectory.h" />
@@ -73,8 +73,9 @@
     <ClInclude Include="Classes\UIDesign\UIDesignWidget.h" />
     <ClInclude Include="Classes\UIDesign\UIDesignWindow.h" />
     <ClInclude Include="Classes\UIEditorApplication.h" />
-    <ClInclude Include="Classes\UIHelper\FileSystemWindow.h" />
+    <ClInclude Include="Classes\UIHelper\File.h" />
     <ClInclude Include="Classes\UIHelper\import.h" />
+    <ClInclude Include="Classes\UIHelper\Menu.h" />
     <ClInclude Include="Classes\UIProperty\import.h" />
     <ClInclude Include="Classes\UIProperty\UIPropertyButton.h" />
     <ClInclude Include="Classes\UIProperty\UIPropertyEditText.h" />
@@ -82,6 +83,7 @@
     <ClInclude Include="Classes\UIProperty\UIPropertyImage.h" />
     <ClInclude Include="Classes\UIProperty\UIPropertyLayout.h" />
     <ClInclude Include="Classes\UIProperty\UIPropertyListView.h" />
+    <ClInclude Include="Classes\UIProperty\UIPropertyNode.h" />
     <ClInclude Include="Classes\UIProperty\UIPropertyProtocol.h" />
     <ClInclude Include="Classes\UIProperty\UIPropertyScrollView.h" />
     <ClInclude Include="Classes\UIProperty\UIPropertyText.h" />

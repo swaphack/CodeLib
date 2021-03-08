@@ -26,7 +26,7 @@ namespace ue
 	private:
 		ui::CtrlButton* m_pShowImage = nullptr;
 		ui::CtrlButton* m_pShowMask = nullptr;
-		ui::CtrlEditText* m_pImagePath = nullptr;
+		ui::CtrlButton* m_pImagePath = nullptr;
 		ui::CtrlEditText* m_pMaskColor = nullptr;
 	};
 }

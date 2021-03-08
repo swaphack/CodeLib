@@ -1,4 +1,5 @@
 #include "UIPropertyWidget.h"
+#include "UIHelper/File.h"
 
 ue::UIPropertyWidget::UIPropertyWidget()
 {
@@ -15,19 +16,7 @@ void ue::UIPropertyWidget::initPropertyUI(ui::CtrlWidget* root)
 		return;
 	}
 
-	root->findWidgetByName("TypeText", m_pTextType);
-	root->findWidgetByName("NameText", m_pEditTextName);
-	root->findWidgetByName("AnchorPointX", m_pEditAnchorPointX);
-	root->findWidgetByName("AnchorPointY", m_pEditAnchorPointY);
-	root->findWidgetByName("Width", m_pEditSizeW);
-	root->findWidgetByName("Height", m_pEditSizeH);
-	root->findWidgetByName("ScaleX", m_pEditScaleX);
-	root->findWidgetByName("ScaleY", m_pEditScaleY);
-
-	root->findWidgetByName("PosX", m_pEditPosX);
-	root->findWidgetByName("PosY", m_pEditPosY);
-
-	root->findWidgetByName("RotationZ", m_pEditRotateZ);
+	ue::UIPropertyNode::initPropertyUI(root);
 
 	root->findWidgetByName("MarginTop", m_pBtnMarginTop);
 	root->findWidgetByName("MarginRight", m_pBtnMarginRight);
@@ -81,59 +70,9 @@ void ue::UIPropertyWidget::readWidgetProperty()
 	{
 		return;
 	}
-	if (m_pTextType)
-	{
-		sys::String typeName(typeid(*m_pTarget).name());
-		int nIndex = typeName.findLastOf(":");
-		if (nIndex >= 0)
-		{
-			typeName = typeName.subString(nIndex + 1, typeName.getSize() - nIndex);
-		}
-		m_pTextType->setString(typeName.getString());
-	}
-	if (m_pEditTextName)
-	{
-		m_pEditTextName->setString(m_pTarget->getName());
-	}
-	if (m_pEditAnchorPointX)
-	{
-		m_pEditAnchorPointX->setString(getCString("%0.2f", m_pTarget->getAnchorPointX()));
-	}
-	if (m_pEditAnchorPointY)
-	{
-		m_pEditAnchorPointY->setString(getCString("%0.2f", m_pTarget->getAnchorPointY()));
-	}
-	if (m_pEditSizeW)
-	{
-		m_pEditSizeW->setString(getCString("%0.2f", m_pTarget->getWidth()));
-	}
-	if (m_pEditSizeH)
-	{
-		m_pEditSizeH->setString(getCString("%0.2f", m_pTarget->getHeight()));
-	}
 
-	if (m_pEditScaleX)
-	{
-		m_pEditScaleX->setString(getCString("%0.2f", m_pTarget->getScaleX()));
-	}
-	if (m_pEditScaleY)
-	{
-		m_pEditScaleY->setString(getCString("%0.2f", m_pTarget->getScaleY()));
-	}
 
-	if (m_pEditPosX)
-	{
-		m_pEditPosX->setString(getCString("%0.2f", m_pTarget->getPositionX()));
-	}
-	if (m_pEditPosY)
-	{
-		m_pEditPosY->setString(getCString("%0.2f", m_pTarget->getPositionY()));
-	}
-
-	if (m_pEditRotateZ)
-	{
-		m_pEditRotateZ->setString(getCString("%0.2f", m_pTarget->getRotationZ()));
-	}
+	ue::UIPropertyNode::readWidgetProperty();
 
 	auto layoutItem = ui::UIProxy::getLayoutItem(m_pTarget);
 	if (layoutItem == nullptr)
@@ -202,58 +141,7 @@ void ue::UIPropertyWidget::writeWidgetProperty()
 		return;
 	}
 
-	if (m_pEditTextName)
-	{
-		m_pTarget->setName(m_pEditTextName->getString());
-	}
-	if (m_pEditAnchorPointX)
-	{
-		float value = atof(m_pEditAnchorPointX->getString().c_str());
-		m_pTarget->setAnchorPointX(value);
-	}
-	if (m_pEditAnchorPointY)
-	{
-		float value = atof(m_pEditAnchorPointY->getString().c_str());
-		m_pTarget->setAnchorPointY(value);
-	}
-	if (m_pEditSizeW)
-	{
-		float value = atof(m_pEditSizeW->getString().c_str());
-		m_pTarget->setWidth(value);
-	}
-	if (m_pEditSizeH)
-	{
-		float value = atof(m_pEditSizeH->getString().c_str());
-		m_pTarget->setHeight(value);
-	}
-
-	if (m_pEditScaleX)
-	{
-		float value = atof(m_pEditScaleX->getString().c_str());
-		m_pTarget->setScaleX(value);
-	}
-	if (m_pEditScaleY)
-	{
-		float value = atof(m_pEditScaleY->getString().c_str());
-		m_pTarget->setScaleY(value);
-	}
-
-	if (m_pEditPosX)
-	{
-		float value = atof(m_pEditPosX->getString().c_str());
-		m_pTarget->setPositionX(value);
-	}
-	if (m_pEditPosY)
-	{
-		float value = atof(m_pEditPosY->getString().c_str());
-		m_pTarget->setPositionY(value);
-	}
-
-	if (m_pEditRotateZ)
-	{
-		float value = atof(m_pEditRotateZ->getString().c_str());
-		m_pTarget->setRotationZ(value);
-	}
+	
 
 	auto layoutItem = ui::UIProxy::getLayoutItem(m_pTarget);
 
@@ -321,5 +209,39 @@ void ue::UIPropertyWidget::writeWidgetProperty()
 
 	layoutItem->refresh();
 
+	ue::UIPropertyNode::writeWidgetProperty();
+
 	this->readWidgetProperty();
+}
+
+void ue::UIPropertyWidget::addSelectImageFile(ui::CtrlButton* btn)
+{
+	if (btn == nullptr) return;
+
+	std::vector<std::string> vecFormat;
+	vecFormat.push_back(IMAGE_FORMAT_PNG);
+	vecFormat.push_back(IMAGE_FORMAT_JPG);
+
+	File* pFile = Panel::show<File>();
+	pFile->setFileFormat(vecFormat);
+	pFile->setSelectFileFunc([this, btn](const std::string& filepath) {
+		btn->setNormalImage(filepath);
+		saveProperty();
+	});
+}
+
+void ue::UIPropertyWidget::addSelectImageFile(ui::CtrlImage* image)
+{
+	if (image == nullptr) return;
+
+	std::vector<std::string> vecFormat;
+	vecFormat.push_back(IMAGE_FORMAT_PNG);
+	vecFormat.push_back(IMAGE_FORMAT_JPG);
+
+	File* pFile = Panel::show<File>();
+	pFile->setFileFormat(vecFormat);
+	pFile->setSelectFileFunc([this, image](const std::string& filepath) {
+		image->loadImage(filepath);
+		saveProperty();
+	});
 }

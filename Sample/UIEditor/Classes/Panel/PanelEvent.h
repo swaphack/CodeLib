@@ -5,8 +5,8 @@
 
 namespace ue
 {
-	// 选择布局文件
-#define PANEL_SELECT_DESIGN_FILE "PANEL_SELECT_DESIGN_FILE"
+	// 选择文件
+#define PANEL_SELECT_FILE "PANEL_SELECT_FILE"
 	// 选中根节点
 #define PANEL_SELECT_ROOT "PANEL_SELECT_ROOT"
 	// 选中视图控件项
@@ -36,9 +36,9 @@ namespace ue
 		void dispatchEvent(const std::string& name, void* userData);
 	public:// 事件派发
 		/**
-		*	派发设计文件
+		*	派发选中文件
 		*/
-		void setDesignFile(const std::string& filepath);
+		void setSelectFile(const std::string& filepath);
 		/**
 		*	派发选中节点
 		*/

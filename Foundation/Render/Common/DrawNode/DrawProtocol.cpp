@@ -107,6 +107,7 @@ uint8_t OpacityProtocol::getOpacity()
 //////////////////////////////////////////////////////////////////////////
 BlendProtocol::BlendProtocol()
 {
+	this->setBlend(BlendingFactorSrc::SRC_ALPHA, BlendingFactorDest::ONE_MINUS_SRC_ALPHA);
 }
 
 BlendProtocol::~BlendProtocol()

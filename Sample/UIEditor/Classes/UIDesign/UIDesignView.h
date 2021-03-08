@@ -28,7 +28,7 @@ namespace ue
 		/**
 		*	设置设计文件
 		*/
-		void setDesignFile(const std::string& filepath);
+		void setSelectFile(const std::string& filepath);
 		/**
 		*	获取ui设计文件根节点
 		*/

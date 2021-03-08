@@ -237,8 +237,8 @@ void ui::CtrlWidget::onCtrlWidgetBodyChange()
 	{
 		float x0 = _worldRectPoints.leftDown.getX();
 		float y0 = _worldRectPoints.leftDown.getY();
-		float x1 = _worldRectPoints.rightDown.getX();
-		float y1 = _worldRectPoints.leftUp.getY();
+		float x1 = _worldRectPoints.rightUp.getX();
+		float y1 = _worldRectPoints.rightUp.getY();
 
 		_clipRect.setOrigin(x0, y0);
 		_clipRect.setSize(x1 - x0, y1 - y0);

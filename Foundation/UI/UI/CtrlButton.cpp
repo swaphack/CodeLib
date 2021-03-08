@@ -129,7 +129,7 @@ bool ui::CtrlButton::isSelected() const
 void ui::CtrlButton::setNormalImage(const std::string& filepath)
 {
 	_btnImagePath.normal = filepath;
-	_btnImage->setImagePath(filepath);
+	_btnImage->loadImage(filepath);
 }
 
 const std::string& ui::CtrlButton::getNormalImage() const

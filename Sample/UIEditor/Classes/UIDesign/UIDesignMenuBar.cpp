@@ -1,5 +1,5 @@
 #include "UIDesignMenuBar.h"
-#include "UIDesignPopMenu.h"
+#include "UIHelper/Menu.h"
 
 ue::UIDesignMenuBar::UIDesignMenuBar()
 {
@@ -16,14 +16,14 @@ void ue::UIDesignMenuBar::initUI()
 	if (m_pRootWidget->findWidgetByName("file", item))
 	{
 		item->addClickFunc([item](render::Node* node) {
-			showWithTarget<UIDesignPopMenu>(item, sys::CSSDirection::Bottom);
+			Panel::showWithTarget<Menu>(item, sys::CSSDirection::Bottom);
 		});
 	}
 
 	if (m_pRootWidget->findWidgetByName("edit", item))
 	{
 		item->addClickFunc([item](render::Node* node) {
-			showWithTarget<UIDesignPopMenu>(item, sys::CSSDirection::Bottom);
+			Panel::showWithTarget<Menu>(item, sys::CSSDirection::Bottom);
 		});
 	}
 }

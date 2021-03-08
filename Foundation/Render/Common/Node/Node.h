@@ -228,7 +228,7 @@ namespace render
 
 #define CREATE_NODE(NODE_TYPE) render::createNode<NODE_TYPE>()
 
-	template<typename T, typename = std::enable_if<std::is_base_of<Node, T>::value, T>::type>
+	template<typename T, typename = std::enable_if<std::is_base_of<render::Node, T>::value, T>::type>
 	T* createNode()
 	{
 		T* temp = new T();

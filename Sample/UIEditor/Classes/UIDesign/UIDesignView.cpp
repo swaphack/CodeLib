@@ -18,7 +18,7 @@ bool ue::UIDesignView::init()
 	{
 		return false;
 	}
-	G_PANELEVT->addEventListener(PANEL_SELECT_DESIGN_FILE, this, [this](const sys::Event* evt) {
+	G_PANELEVT->addEventListener(PANEL_SELECT_FILE, this, [this](const sys::Event* evt) {
 		if (evt)
 		{
 			std::string filepath = (char*)evt->getUserData();
@@ -27,7 +27,7 @@ bool ue::UIDesignView::init()
 			int index = filepath.find_last_of(".xml");
 			if (index == filepath.size() - 1)
 			{
-				this->setDesignFile(filepath);
+				this->setSelectFile(filepath);
 			}
 		}
 	});
@@ -149,7 +149,7 @@ ui::CtrlWidget* ue::UIDesignView::getSelectedTarget() const
 	return m_pSelectedTarget;
 }
 
-void ue::UIDesignView::setDesignFile(const std::string& filepath)
+void ue::UIDesignView::setSelectFile(const std::string& filepath)
 {
 	if (m_pViewScene == nullptr)
 	{
@@ -213,6 +213,6 @@ void ue::UIDesignView::saveFile()
 
 void ue::UIDesignView::reloadFile()
 {
-	this->setDesignFile(m_strFileName);
+	this->setSelectFile(m_strFileName);
 }
 

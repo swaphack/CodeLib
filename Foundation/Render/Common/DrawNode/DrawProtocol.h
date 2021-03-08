@@ -59,7 +59,7 @@ namespace render
 	// »ìºÏ²ÎÊý
 	struct BlendParam
 	{
-		BlendingFactorSrc src = BlendingFactorSrc::ONE;
+		BlendingFactorSrc src = BlendingFactorSrc::SRC_ALPHA;
 		BlendingFactorDest dest = BlendingFactorDest::ONE_MINUS_SRC_ALPHA;
 
 		BlendParam();

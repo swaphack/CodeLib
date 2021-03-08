@@ -20,6 +20,7 @@ namespace render
 	class DrawNode : 
 		public Node, 
 		public ColorProtocol,
+		public BlendProtocol,
 		public TessilationProtocol
 	{
 	public:
@@ -122,6 +123,10 @@ namespace render
 		virtual void onColorChange();
 
 		void onDrawNodeColorChange();
+		/**
+		*	混合改变
+		*/
+		virtual void onBlendChange();
 	protected:
 		// 材质
 		Material* _material = nullptr;

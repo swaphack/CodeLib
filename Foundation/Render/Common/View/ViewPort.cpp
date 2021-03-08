@@ -90,6 +90,7 @@ void ViewPort::applyConfig()
 	GLState::setDepthFunc(DepthFunction::LEQUAL);
 
 	GLState::enable(EnableMode::STENCIL_TEST);
+	GLState::enable(EnableMode::ALPHA_TEST);
 
 	GLFixedFunction::setShadeModel(ShadingModel::SMOOTH);
 	GLState::setPerspectiveCorrectionHint(HintMode::NICEST);

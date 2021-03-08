@@ -7,11 +7,11 @@ namespace ue
 	/**
 	*	弹出菜单
 	*/
-	class UIDesignPopMenu : public SinglePanel
+	class Menu : public SinglePanel
 	{
 	public:
-		UIDesignPopMenu();
-		virtual ~UIDesignPopMenu();
+		Menu();
+		virtual ~Menu();
 	public:
 		/**
 		*	文件路径

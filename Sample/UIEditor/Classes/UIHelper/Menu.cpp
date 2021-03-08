@@ -1,16 +1,16 @@
-#include "UIDesignPopMenu.h"
-#include "UIHelper/FileSystemWindow.h"
+#include "Menu.h"
+#include "File.h"
 #include "Panel/PanelEvent.h"
 
-ue::UIDesignPopMenu::UIDesignPopMenu()
+ue::Menu::Menu()
 {
 }
 
-ue::UIDesignPopMenu::~UIDesignPopMenu()
+ue::Menu::~Menu()
 {
 }
 
-void ue::UIDesignPopMenu::initUI()
+void ue::Menu::initUI()
 {
 	if (m_pRootWidget->findWidgetByName("body", _body))
 	{
@@ -52,15 +52,15 @@ void ue::UIDesignPopMenu::initUI()
 	}
 }
 
-void ue::UIDesignPopMenu::initEvent()
+void ue::Menu::initEvent()
 {
 }
 
-void ue::UIDesignPopMenu::initText()
+void ue::Menu::initText()
 {
 }
 
-const char* ue::UIDesignPopMenu::getPanelPath()
+const char* ue::Menu::getPanelPath()
 {
-	return "Default/Layout/pop_menu.xml";
+	return "Default/Layout/ui_menu.xml";
 }

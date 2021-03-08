@@ -55,9 +55,6 @@
     <ClCompile Include="Classes\UIDesign\UIDesignWindow.cpp">
       <Filter>Classes\UIDesign</Filter>
     </ClCompile>
-    <ClCompile Include="Classes\UIHelper\FileSystemWindow.cpp">
-      <Filter>Classes\UIHelper</Filter>
-    </ClCompile>
     <ClCompile Include="Classes\UIDesign\UIDesignView.cpp">
       <Filter>Classes\UIDesign</Filter>
     </ClCompile>
@@ -74,9 +71,6 @@
       <Filter>Classes\UIDesign</Filter>
     </ClCompile>
     <ClCompile Include="Classes\UIDesign\UIDesignMenuBar.cpp">
-      <Filter>Classes\UIDesign</Filter>
-    </ClCompile>
-    <ClCompile Include="Classes\UIDesign\UIDesignPopMenu.cpp">
       <Filter>Classes\UIDesign</Filter>
     </ClCompile>
     <ClCompile Include="Classes\Panel\PanelEvent.cpp">
@@ -121,6 +115,15 @@
     <ClCompile Include="Classes\UIProperty\UIPropertyText.cpp">
       <Filter>Classes\UIProperty</Filter>
     </ClCompile>
+    <ClCompile Include="Classes\UIHelper\File.cpp">
+      <Filter>Classes\UIHelper</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\UIHelper\Menu.cpp">
+      <Filter>Classes\UIHelper</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\UIProperty\UIPropertyNode.cpp">
+      <Filter>Classes\UIProperty</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Classes\UIEditorApplication.h">
@@ -153,9 +156,6 @@
     <ClInclude Include="Classes\UIDesign\UIDesignWindow.h">
       <Filter>Classes\UIDesign</Filter>
     </ClInclude>
-    <ClInclude Include="Classes\UIHelper\FileSystemWindow.h">
-      <Filter>Classes\UIHelper</Filter>
-    </ClInclude>
     <ClInclude Include="Classes\UIHelper\import.h">
       <Filter>Classes\UIHelper</Filter>
     </ClInclude>
@@ -175,9 +175,6 @@
       <Filter>Classes\UIDesign</Filter>
     </ClInclude>
     <ClInclude Include="Classes\UIDesign\UIDesignMenuBar.h">
-      <Filter>Classes\UIDesign</Filter>
-    </ClInclude>
-    <ClInclude Include="Classes\UIDesign\UIDesignPopMenu.h">
       <Filter>Classes\UIDesign</Filter>
     </ClInclude>
     <ClInclude Include="Classes\Panel\PanelEvent.h">
@@ -226,6 +223,15 @@
       <Filter>Classes\UIProperty</Filter>
     </ClInclude>
     <ClInclude Include="Classes\UIProperty\UIPropertyText.h">
+      <Filter>Classes\UIProperty</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\UIHelper\File.h">
+      <Filter>Classes\UIHelper</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\UIHelper\Menu.h">
+      <Filter>Classes\UIHelper</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\UIProperty\UIPropertyNode.h">
       <Filter>Classes\UIProperty</Filter>
     </ClInclude>
   </ItemGroup>

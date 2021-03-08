@@ -25,7 +25,7 @@ void ue::UIPropertyEditText::initPropertyUI(ui::CtrlWidget* root)
 	root->findWidgetByName("FontVerticalType", m_pFontVerticalType);
 	root->findWidgetByName("MultiLine", m_pMultiLine);
 
-	ADD_CLICK_FUNC(m_pMultiLine, ui::CtrlEditText, setMultiLine);
+	ADD_TOGGLE_FUNC(m_pMultiLine, ui::CtrlEditText, setMultiLine);
 }
 
 void ue::UIPropertyEditText::readWidgetProperty()

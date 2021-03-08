@@ -20,6 +20,7 @@ bool render::DrawNode2D::init()
 	{
 		return false;
 	}
+
 	// 添加属性改变监听
 	addNotifyListener(NodeNotifyType::BODY, [this]() {
 		calRealRectPoints();

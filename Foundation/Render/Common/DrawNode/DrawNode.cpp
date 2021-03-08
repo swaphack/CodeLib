@@ -8,6 +8,8 @@
 #include "DrawTextureCache.h"
 #include "macros.h"
 #include "UniformShaderApply.h"
+#include "FragmentOperator.h"
+#include "Common/Fragment/import.h"
 
 using namespace render;
 
@@ -38,6 +40,14 @@ bool render::DrawNode::init()
 	if (!Node::init())
 	{
 		return false;
+	}
+
+
+
+	FragmentBlend* pBlend = this->getFragOperator()->getHandle<FragmentBlend>();
+	if (pBlend)
+	{
+		pBlend->setEnabled(true);
 	}
 
 	addNotifyListener(NodeNotifyType::COLOR, [this]() {
@@ -280,4 +290,15 @@ void render::DrawNode::onColorChange()
 void render::DrawNode::onDrawNodeColorChange()
 {
 	_material->getMaterialDetail()->setEmissionByte(_color[0], _color[1], _color[2], _color[3]);
+}
+
+void render::DrawNode::onBlendChange()
+{
+	FragmentBlend* pBlend = this->getFragOperator()->getHandle<FragmentBlend>();
+	if (pBlend)
+	{
+		pBlend->setBlendFactor(_blendParam.src, _blendParam.dest);
+
+		pBlend->setBlendColor(_blendColor);
+	}
 }

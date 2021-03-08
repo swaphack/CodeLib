@@ -1,6 +1,5 @@
 #include "UIDesignWindow.h"
 #include "UIDesignView.h"
-#include "UIDesignPopMenu.h"
 
 ue::UIDesignWindow::UIDesignWindow()
 {
@@ -17,17 +16,6 @@ bool ue::UIDesignWindow::init()
 {
 	if (!Panel::init())
 		return false;
-	/*
-	this->addTouchFunc(render::TouchType::ENDED, [this](const math::Vector2& touchPoint) {
-		if (m_pDesignPanel)
-		{
-			if (!m_pDesignPanel->containTouchPoint(touchPoint))
-			{
-				m_pDesignPanel->unselectTarget();
-			}
-		}
-	});
-	*/
 	return true;
 }
 

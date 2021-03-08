@@ -27,7 +27,9 @@ void ue::UIPropertyButton::initPropertyUI(ui::CtrlWidget* root)
 	root->findWidgetByName("SelectedImagePath", m_pSelectedImagePath);
 	root->findWidgetByName("DisabledImagePath", m_pDisabledImagePath);
 
-
+	ADD_SELECT_IMAGE_FUNC(m_pNormalImagePath);
+	ADD_SELECT_IMAGE_FUNC(m_pSelectedImagePath);
+	ADD_SELECT_IMAGE_FUNC(m_pDisabledImagePath);
 }
 
 void ue::UIPropertyButton::readWidgetProperty()
@@ -67,6 +69,21 @@ void ue::UIPropertyButton::readWidgetProperty()
 	if (m_pFontVerticalType)
 	{
 		m_pFontVerticalType->setString(getCString("%d", (int)pButton->getTextVerticalAlignment()));
+	}
+
+	if (m_pNormalImagePath)
+	{
+		m_pNormalImagePath->setNormalImage(pButton->getNormalImage());
+	}
+
+	if (m_pSelectedImagePath)
+	{
+		m_pSelectedImagePath->setNormalImage(pButton->getSelectedImage());
+	}
+
+	if (m_pDisabledImagePath)
+	{
+		m_pDisabledImagePath->setNormalImage(pButton->getDisabledImage());
 	}
 }
 
@@ -109,6 +126,21 @@ void ue::UIPropertyButton::writeWidgetProperty()
 	{
 		int value = atoi(m_pFontVerticalType->getString().c_str());
 		pButton->setTextVerticalAlignment((sys::VerticalAlignment)value);
+	}
+
+	if (m_pNormalImagePath)
+	{
+		pButton->setNormalImage(m_pNormalImagePath->getNormalImage());
+	}
+
+	if (m_pSelectedImagePath)
+	{
+		pButton->setSelectedImage(m_pSelectedImagePath->getNormalImage());
+	}
+
+	if (m_pDisabledImagePath)
+	{
+		pButton->setDisabledImage(m_pDisabledImagePath->getNormalImage());
 	}
 
 	UIPropertyWidget::writeWidgetProperty();

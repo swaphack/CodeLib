@@ -29,12 +29,6 @@ bool DrawTexture2D::init()
 		return false;
 	}
 
-	FragmentBlend* pBlend = this->getFragOperator()->getHandle<FragmentBlend>();
-	if (pBlend)
-	{
-		pBlend->setEnabled(true);
-	}
-
 	addNotifyListener(NodeNotifyType::BODY, [this]() {
 		updateTexture2DMeshData();
 	});
@@ -99,17 +93,6 @@ void DrawTexture2D::setFlipY(bool status)
 bool DrawTexture2D::isFlipY()
 {
 	return _bFlipY;
-}
-
-void render::DrawTexture2D::onBlendChange()
-{
-	FragmentBlend* pBlend = this->getFragOperator()->getHandle<FragmentBlend>();
-	if (pBlend)
-	{
-		pBlend->setBlendFactor(_blendParam.src, _blendParam.dest);
-
-		pBlend->setBlendColor(_blendColor);
-	}
 }
 
 void DrawTexture2D::updateTexture2DMeshData()

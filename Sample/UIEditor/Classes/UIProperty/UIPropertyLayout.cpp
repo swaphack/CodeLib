@@ -22,8 +22,10 @@ void ue::UIPropertyLayout::initPropertyUI(ui::CtrlWidget* root)
 	root->findWidgetByName("MaskColor", m_pMaskColor);
 	root->findWidgetByName("ImagePath", m_pImagePath);
 
-	ADD_CLICK_FUNC(m_pShowImage, ui::CtrlLayout, setBackgroudImageVisible);
-	ADD_CLICK_FUNC(m_pShowMask, ui::CtrlLayout, setBackgroudMaskVisible);
+	ADD_TOGGLE_FUNC(m_pShowImage, ui::CtrlLayout, setBackgroudImageVisible);
+	ADD_TOGGLE_FUNC(m_pShowMask, ui::CtrlLayout, setBackgroudMaskVisible);
+
+	ADD_SELECT_IMAGE_FUNC(m_pImagePath);
 }
 
 void ue::UIPropertyLayout::readWidgetProperty()
@@ -48,7 +50,7 @@ void ue::UIPropertyLayout::readWidgetProperty()
 	}
 	if (m_pImagePath)
 	{
-		m_pImagePath->setString(pLayout->getBackgroundImagePath());
+		m_pImagePath->setNormalImage(pLayout->getBackgroundImagePath());
 	}
 	if (m_pMaskColor)
 	{
@@ -81,7 +83,7 @@ void ue::UIPropertyLayout::writeWidgetProperty()
 
 	if (m_pImagePath)
 	{
-		pLayout->setBackgroundImagePath(m_pImagePath->getString());
+		pLayout->setBackgroundImagePath(m_pImagePath->getNormalImage());
 	}
 
 	if (m_pMaskColor)

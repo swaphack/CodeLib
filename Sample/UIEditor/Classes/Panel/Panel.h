@@ -32,7 +32,7 @@ namespace ue
 		*	点击最前面的组件
 		*/
 		bool touchFrontWidget(ui::CtrlWidget* widget, const math::Vector2& touchPoint, const FrontWidgetFunc& func);
-	protected:
+	public:
 		/**
 		*	创建控件
 		*/

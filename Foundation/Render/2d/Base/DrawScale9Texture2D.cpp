@@ -29,12 +29,6 @@ bool DrawScale9Texture2D::init()
 		return false;
 	}
 
-	FragmentBlend* pBlend = this->getFragOperator()->getHandle<FragmentBlend>();
-	if (pBlend)
-	{
-		pBlend->setEnabled(true);
-	}
-
 	addNotifyListener(NodeNotifyType::BODY, [this]() {
 		onScale9BodyChange();
 		updateScale9ImageMeshData();
@@ -141,17 +135,6 @@ void DrawScale9Texture2D::setMargin(const sys::CSSMargin& margin)
 const sys::CSSMargin& DrawScale9Texture2D::getMargin() const
 {
 	return _scale9Margin;
-}
-
-void render::DrawScale9Texture2D::onBlendChange()
-{
-	FragmentBlend* pBlend = this->getFragOperator()->getHandle<FragmentBlend>();
-	if (pBlend)
-	{
-		pBlend->setBlendFactor(_blendParam.src, _blendParam.dest);
-
-		pBlend->setBlendColor(_blendColor);
-	}
 }
 
 void DrawScale9Texture2D::updateScale9ImageMeshData()

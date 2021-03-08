@@ -80,7 +80,10 @@ void ue::SinglePanel::showWithTarget(const ui::CtrlWidget* item, sys::CSSDirecti
 
 void ue::SinglePanel::close()
 {
-	this->removeFromParent();
+	this->getActionProxy()->runAction(render::SequenceAction::create(
+		render::DelayAction::create(1),
+		render::CallFunc::create([this]() { this->removeFromParent(); })
+	));
 }
 
 void ue::SinglePanel::setPositionLeftTop(const math::Vector2& pos)

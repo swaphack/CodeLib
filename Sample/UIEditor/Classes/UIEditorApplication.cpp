@@ -34,6 +34,6 @@ void ue::UIEditorApplication::show()
 	getCanvas()->pushScene(pWindow);
 
 	std::string filepath = _projectConfig.getRecent().getFile(0);
-	G_PANELEVT->setDesignFile(filepath);
+	G_PANELEVT->setSelectFile(filepath);
 }
 

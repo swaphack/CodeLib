@@ -19,9 +19,9 @@ void ue::PanelEvent::dispatchEvent(const std::string& name, void* userData)
 	this->dispatch(&evt);
 }
 
-void ue::PanelEvent::setDesignFile(const std::string& filepath)
+void ue::PanelEvent::setSelectFile(const std::string& filepath)
 {
-	this->dispatchEvent(PANEL_SELECT_DESIGN_FILE, (void*)filepath.c_str());
+	this->dispatchEvent(PANEL_SELECT_FILE, (void*)filepath.c_str());
 }
 
 void ue::PanelEvent::setSelectNode(render::Node* node)

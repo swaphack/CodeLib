@@ -9,7 +9,6 @@ namespace ue
 	public:
 		UIPropertyImage();
 		virtual ~UIPropertyImage();
-
 	public:
 		/**
 		*	³õÊ¼»¯¿Ø¼þ

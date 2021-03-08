@@ -28,10 +28,10 @@ void sys::ImageDefine::setFilePath(const std::string& _filename)
 	std::string strFormat = filepath.substr(idx, filepath.size() - idx);
 	std::transform(strFormat.begin(), strFormat.end(), strFormat.begin(), ::tolower);
 
-	if (strFormat == "png") this->format = ImageFormat::PNG;
-	else if (strFormat == "jpg") this->format = ImageFormat::JPEG;
-	else if (strFormat == "tga") this->format = ImageFormat::TARGA;
-	else if (strFormat == "bmp") this->format = ImageFormat::BMP;
-	else if (strFormat == "tif") this->format = ImageFormat::TIFF;
+	if (strFormat == IMAGE_FORMAT_PNG) this->format = ImageFormat::PNG;
+	else if (strFormat == IMAGE_FORMAT_JPG) this->format = ImageFormat::JPEG;
+	else if (strFormat == IMAGE_FORMAT_TGA) this->format = ImageFormat::TARGA;
+	else if (strFormat == IMAGE_FORMAT_BMP) this->format = ImageFormat::BMP;
+	else if (strFormat == IMAGE_FORMAT_TIF) this->format = ImageFormat::TIFF;
 	else this->format = ImageFormat::NONE;
 }

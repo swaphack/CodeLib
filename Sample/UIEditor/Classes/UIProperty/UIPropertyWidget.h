@@ -1,13 +1,20 @@
 #pragma once
 
 #include "ui.h"
-#include "UIPropertyProtocol.h"
+#include "UIPropertyNode.h"
 
 namespace ue
 {
 
-	class UIPropertyWidget : public UIPropertyProtocol
+	class UIPropertyWidget : public UIPropertyNode
 	{
+	public:
+// 选择图片
+#define ADD_SELECT_IMAGE_FUNC(widget)\
+if (widget) {\
+	widget->addClickFunc([this](ui::CtrlWidget*) { addSelectImageFile(widget); }); \
+} \
+
 	public:
 		UIPropertyWidget();
 		virtual ~UIPropertyWidget();
@@ -25,27 +32,16 @@ namespace ue
 		*	保存控件属性
 		*/
 		virtual void writeWidgetProperty();
+	public:
+		/**
+		*	选择文件
+		*/
+		void addSelectImageFile(ui::CtrlButton* btn);
+		/**
+		*	选择文件
+		*/
+		void addSelectImageFile(ui::CtrlImage* image);
 	private:
-		// 类型
-		ui::CtrlText* m_pTextType = nullptr;
-		// 名称
-		ui::CtrlEditText* m_pEditTextName = nullptr;
-
-		// 描点
-		ui::CtrlEditText* m_pEditAnchorPointX = nullptr;
-		ui::CtrlEditText* m_pEditAnchorPointY = nullptr;
-		// 面积
-		ui::CtrlEditText* m_pEditSizeW = nullptr;
-		ui::CtrlEditText* m_pEditSizeH = nullptr;
-		// 缩放
-		ui::CtrlEditText* m_pEditScaleX = nullptr;
-		ui::CtrlEditText* m_pEditScaleY = nullptr;
-		// 坐标
-		ui::CtrlEditText* m_pEditPosX = nullptr;
-		ui::CtrlEditText* m_pEditPosY = nullptr;
-		// 旋转
-		ui::CtrlEditText* m_pEditRotateZ = nullptr;
-
 		ui::CtrlButton* m_pBtnMarginTop = nullptr;
 		ui::CtrlButton* m_pBtnMarginRight = nullptr;
 		ui::CtrlButton* m_pBtnMarginBottom = nullptr;

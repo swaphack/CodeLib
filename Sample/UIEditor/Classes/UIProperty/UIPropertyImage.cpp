@@ -1,4 +1,5 @@
 #include "UIPropertyImage.h"
+#include "UIHelper/File.h"
 
 ue::UIPropertyImage::UIPropertyImage()
 {
@@ -21,8 +22,10 @@ void ue::UIPropertyImage::initPropertyUI(ui::CtrlWidget* root)
 	root->findWidgetByName("ReverseY", m_pReverseY);
 
 
-	ADD_CLICK_FUNC(m_pReverseX, ui::CtrlImage, setFlipX);
-	ADD_CLICK_FUNC(m_pReverseY, ui::CtrlImage, setFlipY);
+	ADD_TOGGLE_FUNC(m_pReverseX, ui::CtrlImage, setFlipX);
+	ADD_TOGGLE_FUNC(m_pReverseY, ui::CtrlImage, setFlipY);
+
+	ADD_SELECT_IMAGE_FUNC(m_pFilepath);
 }
 
 void ue::UIPropertyImage::readWidgetProperty()
@@ -64,7 +67,7 @@ void ue::UIPropertyImage::writeWidgetProperty()
 
 	if (m_pFilepath)
 	{
-		pImage->setImagePath(m_pFilepath->getNormalImage());
+		pImage->loadImage(m_pFilepath->getNormalImage());
 	}
 
 	if (m_pReverseX)

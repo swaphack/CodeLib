@@ -23,8 +23,8 @@ void ue::UIPropertyListView::initPropertyUI(ui::CtrlWidget* root)
 	root->findWidgetByName("UseItemSize", m_pUseItemSize);
 	root->findWidgetByName("ShowInCenter", m_pShowInCenter);
 
-	ADD_CLICK_FUNC(m_pUseItemSize, ui::CtrlListView, setUseItemSize);
-	ADD_CLICK_FUNC(m_pShowInCenter, ui::CtrlListView, setShowInCenter);
+	ADD_TOGGLE_FUNC(m_pUseItemSize, ui::CtrlListView, setUseItemSize);
+	ADD_TOGGLE_FUNC(m_pShowInCenter, ui::CtrlListView, setShowInCenter);
 }
 
 void ue::UIPropertyListView::readWidgetProperty()

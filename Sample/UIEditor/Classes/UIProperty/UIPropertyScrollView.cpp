@@ -20,8 +20,8 @@ void ue::UIPropertyScrollView::initPropertyUI(ui::CtrlWidget* root)
 	root->findWidgetByName("VerticalScroll", m_pVerticalScroll);
 	root->findWidgetByName("MoveMultiple", m_pMoveMultiple);
 
-	ADD_CLICK_FUNC(m_pHorizontalScroll, ui::CtrlScrollView, setHorizontalScroll);
-	ADD_CLICK_FUNC(m_pVerticalScroll, ui::CtrlScrollView, setVerticalScroll);
+	ADD_TOGGLE_FUNC(m_pHorizontalScroll, ui::CtrlScrollView, setHorizontalScroll);
+	ADD_TOGGLE_FUNC(m_pVerticalScroll, ui::CtrlScrollView, setVerticalScroll);
 }
 
 void ue::UIPropertyScrollView::readWidgetProperty()

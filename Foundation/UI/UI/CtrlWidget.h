@@ -45,7 +45,7 @@ namespace ui
 		/**
 		*	根据名字查找控件
 		*/
-		template<typename T, typename = std::enable_if<std::is_base_of<CtrlWidget, T>::value, T>::type>
+		template<typename T, typename = std::enable_if<std::is_base_of<ui::CtrlWidget, T>::value, T>::type>
 		bool findWidgetByName(const std::string& name, T* &target)
 		{
 			auto pWidget = findWidgetByName(name);

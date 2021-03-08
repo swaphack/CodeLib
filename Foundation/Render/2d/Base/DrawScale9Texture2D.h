@@ -9,8 +9,7 @@ namespace render
 {
 	// 帧图片，默认逆时针绘制
 	class DrawScale9Texture2D :
-		public DrawNode2D,
-		public BlendProtocol
+		public DrawNode2D
 	{
 	public:
 		DrawScale9Texture2D();
@@ -42,11 +41,6 @@ namespace render
 		*	白边
 		*/
 		const sys::CSSMargin& getMargin() const;
-	protected:
-		/**
-		*	混合改变
-		*/
-		virtual void onBlendChange();
 	protected:
 		void onScale9BodyChange();
 		void onScale9ImageChange();

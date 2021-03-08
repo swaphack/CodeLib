@@ -2,70 +2,9 @@
 <root width="1024" height="768" layout="1" fontPath="Resource/Font/font_3.ttf">
 	<Layout name="body" showMask="1" maskColor="180,180,180,125" marginState="1,1,1,1" size="100%,100%">
 		<ListView direction="2" marginState="1,1,1,1" margin="0,5,0,5" size="100%,100%" clip="1" moveMultiple="5" verticalScroll="1" enableTouch="1">
-			<ListView direction="0" size="100%,35">
-				<Text text="Type" size="50,100%" fontSize="20" textColor="255,255,255" />
-				<ListView size="180,100%" showMask="1" maskColor="100,100,100,125">
-					<Text name="TypeText" size="100%,100%" text="4545454dsfajk" horizontal="0" fontSize="20" textColor="255,255,255" />
-				</ListView>
-			</ListView>
-			<ListView direction="0" size="100%,35">
-				<Text text="Name" size="50,100%"  fontSize="20" textColor="255,255,255" />
-				<ListView size="180,100%" showMask="1" maskColor="0,0,0,125">
-					<EditText name="NameText" size="100%,100%" horizontal="0" text="4545454dsfajk" fontSize="20" textColor="255,255,255" />
-				</ListView>
-			</ListView>
+			<File filepath="Default/Layout/Widget/property.node.xml" marginState="1,1,0,1" size="100%,400"/>
+			<ListView direction="2" marginState="1,1,0,1" margin="0,5,0,5" clip="0" size="100%,300">
 			<Text text="[Widget Property]" size="100%,22"  fontSize="20" textColor="100,0,0" horizontal="0" />
-			<ListView direction="2" size="100%,50">
-				<Text text="AnchorPoint" horizontal="0" size="100%,20"  fontSize="18" textColor="255,255,255" />
-				<ListView direction="0" size="100%,30">
-					<ListView size="45%,30" showMask="1" maskColor="0,0,0,125">
-						<EditText name="AnchorPointX" text="0.5" size="100%,100%"  fontSize="20" textColor="255,255,255" />
-					</ListView>
-					<ListView size="45%,30" showMask="1" maskColor="0,0,0,125">
-						<EditText name="AnchorPointY" text="0.5" size="100%,100%"  fontSize="20" textColor="255,255,255" />
-					</ListView>
-				</ListView>
-			</ListView>
-			<ListView direction="2" size="100%,50">
-				<Text text="Size" horizontal="0" size="100%,20"  fontSize="18" textColor="255,255,255" />
-				<ListView direction="0" size="100%,30">
-					<ListView size="45%,30" showMask="1" maskColor="0,0,0,125">
-						<EditText name="Width" text="0.5" size="100%,100%"  fontSize="20" textColor="255,255,255" />
-					</ListView>
-					<ListView size="45%,30" showMask="1" maskColor="0,0,0,125">
-						<EditText name="Height" text="0.5" size="100%,100%"  fontSize="20" textColor="255,255,255" />
-					</ListView>
-				</ListView>
-			</ListView>
-			<ListView direction="2" size="100%,50">
-				<Text text="Scale" horizontal="0" size="100%,20"  fontSize="18" textColor="255,255,255" />
-				<ListView direction="0" size="100%,30">
-					<ListView size="45%,30" showMask="1" maskColor="0,0,0,125">
-						<EditText name="ScaleX" text="0.5" size="100%,100%"  fontSize="20" textColor="255,255,255" />
-					</ListView>
-					<ListView size="45%,30" showMask="1" maskColor="0,0,0,125">
-						<EditText name="ScaleY" text="0.5" size="100%,100%"  fontSize="20" textColor="255,255,255" />
-					</ListView>
-				</ListView>
-			</ListView>
-			<ListView direction="2" size="100%,50">
-				<Text text="Position" horizontal="0" size="100%,20"  fontSize="18" textColor="255,255,255" />
-				<ListView direction="0" size="100%,30">
-					<ListView size="45%,30" showMask="1" maskColor="0,0,0,125">
-						<EditText name="PosX" text="0.5" size="100%,100%"  fontSize="20" textColor="255,255,255" />
-					</ListView>
-					<ListView size="45%,30" showMask="1" maskColor="0,0,0,125">
-						<EditText name="PosY" text="0.5" size="100%,100%"  fontSize="20" textColor="255,255,255" />
-					</ListView>
-				</ListView>
-			</ListView>
-			<ListView direction="2" size="100%,50">
-				<Text text="Rotation" horizontal="0" size="100%,20"  fontSize="18" textColor="255,255,255" />
-				<ListView size="45%,30" showMask="1" maskColor="0,0,0,125">
-					<EditText name="RotationZ" text="0" size="100%,100%"  fontSize="20" textColor="255,255,255" />
-				</ListView>
-			</ListView>
-			<Widget size="100%,5"/>
 			<ListView direction="2" size="100%,150">
 				<ListView direction="2" size="100%,100%" showMask="1" maskColor="150,150,150,200">
 					<ListView direction="0" size="100%,33%" center="1">
@@ -127,6 +66,7 @@
 					</ListView>
 				</ListView>
 			</ListView>
+		</ListView>
 		</ListView>
 	</Layout>
 </root>

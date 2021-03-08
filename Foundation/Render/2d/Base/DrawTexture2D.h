@@ -9,8 +9,7 @@ namespace render
 {
 	// 帧图片，默认逆时针绘制
 	class DrawTexture2D : 
-		public DrawNode2D,
-		public BlendProtocol
+		public DrawNode2D
 	{
 	public:
 		DrawTexture2D();
@@ -30,11 +29,6 @@ namespace render
 		void setFlipY(bool status);
 		// 是否垂直翻转
 		bool isFlipY();
-	protected:
-		/**
-		*	混合改变
-		*/
-		virtual void onBlendChange();
 	protected:
 		virtual void updateTexture2DMeshData();
 	protected:

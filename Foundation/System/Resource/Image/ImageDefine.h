@@ -16,6 +16,12 @@ namespace sys
 		TIFF,	// tif
 	};
 
+#define IMAGE_FORMAT_PNG "png"
+#define IMAGE_FORMAT_JPG "jpg"
+#define IMAGE_FORMAT_TGA "tga"
+#define IMAGE_FORMAT_BMP "bmp"
+#define IMAGE_FORMAT_TIF "tif"
+
 	// 图片数据描述结构
 	struct ImageDefine
 	{
