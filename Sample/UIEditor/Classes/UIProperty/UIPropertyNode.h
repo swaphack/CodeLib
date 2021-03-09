@@ -61,5 +61,7 @@ if (btn) { \
 		ui::CtrlEditText* m_pEditPosY = nullptr;
 		// Ðý×ª
 		ui::CtrlEditText* m_pEditRotateZ = nullptr;
+
+		ui::CtrlButton* m_pTouchState = nullptr;
 	};
 }

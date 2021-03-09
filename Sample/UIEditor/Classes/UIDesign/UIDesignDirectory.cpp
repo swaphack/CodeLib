@@ -20,7 +20,7 @@ void ue::DirDetail::setRoot(const std::string& root)
 		for (const auto& item : dir.getSubDirs())
 		{
 			DirDetail subDir;
-			subDir.setRoot(root + item);
+			subDir.setRoot(root + "/" + item);
 			subDirs.push_back(subDir);
 		}
 	}

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <root width="1024" height="768" layout="1" fontPath="Default/Font/font_3.ttf">
   <Layout name="body" showMask="1" maskColor="0,0,0,100" margin="0,0,0,0" size="100%,100%"> 
-  	<ListView direction="2" center="1" size="300,600" margin="5,30%,5,30%" marginState="1,1,1,1" useItemSize="1" itemSize="40%,32">
+  	<ListView direction="2" center="1" size="300,600" margin="5,30%,5,30%" marginState="1,1,0,1" useItemSize="1" itemSize="40%,32">
 		<UIDesignDirectory name="DesignDirectory" filepath="Default/Layout/main_view_directory.xml" size="100%, 100%" margin="0,0,0,0" marginState="0,1,1,1"/>
 	</ListView>
   </Layout>

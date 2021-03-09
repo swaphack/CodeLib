@@ -5,6 +5,8 @@
 
 using namespace render;
 
+int ui::CtrlWidget::s_nScissorCount = 0;
+
 ui::CtrlWidget::CtrlWidget()
 {
 	this->resetLayoutItem();
@@ -24,6 +26,11 @@ bool ui::CtrlWidget::init()
 	{
 		return false;
 	}
+
+	// 添加属性改变监听
+	addNotifyListener(NodeNotifyType::SPACE, [this]() {
+		onCtrlWidgetBodyChange();
+	});
 
 	// 添加属性改变监听
 	addNotifyListener(NodeNotifyType::BODY, [this]() {
@@ -57,8 +64,14 @@ void ui::CtrlWidget::beforeDrawNode()
 {
 	if (isClippingEnabled())
 	{
-		GLState::enable(EnableMode::SCISSOR_TEST);
+		if (s_nScissorCount == 0)
+		{
+			GLState::enable(EnableMode::SCISSOR_TEST);
+		}
+
 		GLState::setScissor(_clipRect.getX(), _clipRect.getY(), _clipRect.getWidth(), _clipRect.getHeight());
+		
+		s_nScissorCount++;
 	}
 }
 
@@ -70,7 +83,14 @@ void ui::CtrlWidget::afterDrawNode()
 
 	if (isClippingEnabled())
 	{
-		GLState::disable(EnableMode::SCISSOR_TEST);
+		if (s_nScissorCount > 0)
+		{
+			s_nScissorCount--;
+			if (s_nScissorCount == 0)
+			{
+				GLState::disable(EnableMode::SCISSOR_TEST);
+			}
+		}
 	}
 }
 

@@ -22,10 +22,6 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "third_party", "Third_Party\third_party\third_party.vcxproj", "{68E2B6B4-B5D8-4CED-9126-EA4C6C95E5AD}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "UI", "Foundation\UI\UI.vcxproj", "{0AD3E54A-11CD-49AD-BD43-6609FE7122A4}"
-	ProjectSection(ProjectDependencies) = postProject
-		{BEAC5C99-0F40-47AE-8093-1B5F8C5FF6BA} = {BEAC5C99-0F40-47AE-8093-1B5F8C5FF6BA}
-		{340633A3-0EC6-4B8A-A2CE-6F701A18666C} = {340633A3-0EC6-4B8A-A2CE-6F701A18666C}
-	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Math", "Foundation\Math\Math.vcxproj", "{D1634C1B-6654-4995-A862-67D58DEDFC72}"
 EndProject

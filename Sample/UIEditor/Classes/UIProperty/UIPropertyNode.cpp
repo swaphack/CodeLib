@@ -19,6 +19,7 @@ void ue::UIPropertyNode::initPropertyUI(ui::CtrlWidget* root)
 	root->findWidgetByName("NameText", m_pEditName);
 	root->findWidgetByName("TagText", m_pEditTag);
 	root->findWidgetByName("VisibleState", m_pVisibleState);
+	root->findWidgetByName("TouchState", m_pTouchState);
 
 	root->findWidgetByName("AnchorPointX", m_pEditAnchorPointX);
 	root->findWidgetByName("AnchorPointY", m_pEditAnchorPointY);
@@ -33,6 +34,7 @@ void ue::UIPropertyNode::initPropertyUI(ui::CtrlWidget* root)
 	root->findWidgetByName("RotationZ", m_pEditRotateZ);
 
 	ADD_TOGGLE_FUNC(m_pVisibleState, ui::CtrlWidget, setVisible);
+	ADD_TOGGLE_FUNC(m_pTouchState, ui::CtrlWidget, setTouchEnabled);
 }
 
 void ue::UIPropertyNode::readWidgetProperty()
@@ -64,6 +66,11 @@ void ue::UIPropertyNode::readWidgetProperty()
 	if (m_pVisibleState)
 	{
 		m_pVisibleState->setSelectState(m_pTarget->isVisible());
+	}
+
+	if (m_pTouchState)
+	{
+		m_pTouchState->setSelectState(m_pTarget->isTouchEnabled());
 	}
 
 
@@ -129,6 +136,11 @@ void ue::UIPropertyNode::writeWidgetProperty()
 	if (m_pVisibleState)
 	{
 		m_pTarget->setVisible(m_pVisibleState->isSelected());
+	}
+
+	if (m_pTouchState)
+	{
+		m_pTarget->setTouchEnabled(m_pTouchState->isSelected());
 	}
 
 	if (m_pEditAnchorPointX)

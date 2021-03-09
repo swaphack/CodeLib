@@ -159,5 +159,9 @@ namespace ui
 		*	布局信息
 		*/
 		LayoutItem* _layoutItem = nullptr;
+		/**
+		*	裁剪数量
+		*/
+		static int s_nScissorCount;
 	};
 }

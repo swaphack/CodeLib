@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <root width="1024" height="768" layout="1" fontPath="Resource/Font/font_3.ttf">
 	<Layout name="body" showMask="1" maskColor="180,180,180,125" marginState="1,1,1,1" size="100%,100%">
-		<ListView direction="2" marginState="1,1,1,1" margin="0,5,0,5" size="100%,100%" clip="1" moveMultiple="5" verticalScroll="1" enableTouch="1">
+		<ListView direction="2" marginState="1,1,1,1" margin="0,5,0,5" size="100%,100%" clip="0" moveMultiple="5" verticalScroll="1" enableTouch="1">
 			<ListView direction="0" size="100%,35">
 				<Text text="Type" size="50,100%" fontSize="20" textColor="255,255,255" />
 				<ListView size="180,100%" showMask="1" maskColor="100,100,100,125">
@@ -10,13 +10,13 @@
 			</ListView>
 			<ListView direction="0" size="100%,35">
 				<Text text="Name" size="50,100%"  fontSize="20" textColor="255,255,255" />
-				<ListView size="180,100%" showMask="1" maskColor="0,0,0,125">
+				<ListView size="180,100%" showMask="1" maskColor="0,0,0,125" marginState="1,1,1,1" margin="2,0,2,0">
 					<EditText name="NameText" size="100%,100%" horizontal="0" text="4545454dsfajk" fontSize="20" textColor="255,255,255" />
 				</ListView>
 			</ListView>
 			<ListView direction="0" size="100%,35">
 				<Text text="Tag" size="50,100%"  fontSize="20" textColor="255,255,255" />
-				<ListView size="180,100%" showMask="1" maskColor="0,0,0,125">
+				<ListView size="180,100%" showMask="1" maskColor="0,0,0,125" marginState="1,1,1,1" margin="2,0,2,0">
 					<EditText name="TagText" size="100%,100%" horizontal="0" text="4545454dsfajk" fontSize="20" textColor="255,255,255" />
 				</ListView>
 			</ListView>
@@ -25,6 +25,13 @@
 				<Text text="Show" size="80,100%"  fontSize="20" textColor="255,255,255" />
 				<ListView size="20,20" showMask="1" maskColor="0,0,0,125">
 					<Button name="VisibleState" normalImage="Default/Image/property_unselect.png" selectedImage="Default/Image/property_selected.png" size="100%,100%" />
+				</ListView>
+			</ListView>
+			<Widget size="100%,2"/>
+			<ListView direction="0" size="100%,30">
+				<Text text="Touch" size="80,100%"  fontSize="20" textColor="255,255,255" />
+				<ListView size="20,20" showMask="1" maskColor="0,0,0,125">
+					<Button name="TouchState" normalImage="Default/Image/property_unselect.png" selectedImage="Default/Image/property_selected.png" size="100%,100%" />
 				</ListView>
 			</ListView>
 			<ListView direction="2" size="100%,50">
@@ -77,7 +84,6 @@
 					<EditText name="RotationZ" text="0" size="100%,100%"  fontSize="20" textColor="255,255,255" />
 				</ListView>
 			</ListView>
-			<Widget size="100%,5"/>
 		</ListView>
 	</Layout>
 </root>

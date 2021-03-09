@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <root width="1024" height="768" layout="1" fontPath="Resource/Font/font_3.ttf">
 	<Layout name="body" showMask="1" maskColor="180,180,180,125" marginState="1,1,1,1" size="100%,100%">
-		<ListView direction="2" marginState="1,1,1,1" size="100%,100%" clip="1" moveMultiple="5" verticalScroll="1" enableTouch="1">
-			<File filepath="Default/Layout/Widget/property.widget.xml" marginState="1,1,0,1" size="100%,700"/>
+		<ListView direction="2" marginState="1,1,1,1" size="100%,100%" clip="0" moveMultiple="5" verticalScroll="1" enableTouch="1">
+			<File filepath="Default/Layout/Widget/property.widget.xml" marginState="1,1,0,1" size="100%,730"/>
 			<ListView direction="2" marginState="1,1,0,1" margin="0,5,0,5" clip="0" size="100%,190">
 				<Text text="[Image Property]" size="100%,22"  fontSize="20" textColor="100,0,0" horizontal="0" />
 				<Widget size="100%,2"/>

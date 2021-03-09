@@ -26,7 +26,12 @@ void ue::File::setFileFormat(const std::vector<std::string>& vecFormat)
 
 void ue::File::initUI()
 {
-	m_pRootWidget->findWidgetByName("body", _body);
+	if (m_pRootWidget->findWidgetByName("body", _body))
+	{
+		_body->addClickFunc([this](render::Node* node) {
+			this->close();
+		});
+	}
 }
 
 void ue::File::initEvent()
