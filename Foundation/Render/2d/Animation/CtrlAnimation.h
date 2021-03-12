@@ -9,17 +9,13 @@ namespace render
 
 	// 动画控件
 	class CtrlAnimation : 
-		public DrawTexture2D,
-		public SchedulerProtocol
+		public DrawTexture2D
 	{
 	public:
 		CtrlAnimation();
 		virtual ~CtrlAnimation();
 	public:
 		virtual bool init();
-	public:
-		// 定时更新事件,不要修改
-		void updateAnimation(float interval);
 	public:
 		/**
 		*	设置速度系数
@@ -46,14 +42,6 @@ namespace render
 		*/ 
 		int getFrame();
 	protected:
-		/**
-		*	添加定时器
-		*/
-		virtual void registerScheduler();
-		/**
-		*	移除定时器
-		*/
-		virtual void unregisterScheduler();
 		/**
 		*	定时更新事件
 		*/

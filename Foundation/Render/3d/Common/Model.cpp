@@ -18,6 +18,6 @@ bool render::Model::init()
 	{
 		return false;
 	}
-	return false;
+	return true;
 }
 

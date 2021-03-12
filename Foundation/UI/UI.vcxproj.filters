@@ -134,6 +134,9 @@
     <ClInclude Include="Loader\2dLoader\GridViewLoader.h">
       <Filter>Loader\2dLoader</Filter>
     </ClInclude>
+    <ClInclude Include="UI\CtrlTableView.h">
+      <Filter>UI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Display">
@@ -260,6 +263,9 @@
     </ClCompile>
     <ClCompile Include="Loader\2dLoader\GridViewLoader.cpp">
       <Filter>Loader\2dLoader</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\CtrlTableView.cpp">
+      <Filter>UI</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

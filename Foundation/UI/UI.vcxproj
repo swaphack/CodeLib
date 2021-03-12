@@ -109,6 +109,7 @@
     <ClInclude Include="UI\CtrlScale9Image.h" />
     <ClInclude Include="UI\CtrlScrollView.h" />
     <ClInclude Include="UI\CtrlStencil.h" />
+    <ClInclude Include="UI\CtrlTableView.h" />
     <ClInclude Include="UI\CtrlText.h" />
     <ClInclude Include="UI\CtrlWidget.h" />
     <ClInclude Include="UI\import.h" />
@@ -145,6 +146,7 @@
     <ClCompile Include="UI\CtrlScale9Image.cpp" />
     <ClCompile Include="UI\CtrlScrollView.cpp" />
     <ClCompile Include="UI\CtrlStencil.cpp" />
+    <ClCompile Include="UI\CtrlTableView.cpp" />
     <ClCompile Include="UI\CtrlText.cpp" />
     <ClCompile Include="UI\CtrlWidget.cpp" />
     <ClCompile Include="UI\TextProtocol.cpp" />

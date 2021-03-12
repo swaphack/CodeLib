@@ -35,11 +35,11 @@ namespace render
 		/**
 		*	添加定时器
 		*/ 
-		virtual void registerScheduler();
+		virtual void scheduleUpdate();
 		/**
 		*	移除定时器
 		*/ 
-		virtual void unregisterScheduler();
+		virtual void unscheduleUpdate();
 	protected:
 		/**
 		*	获取定时器

@@ -63,21 +63,33 @@ const render::RectPoints& render::DrawNode2D::getWorldRectVertex() const
 	return _worldRectPoints;
 }
 
-#include "Common/View/Camera.h"
-
 bool render::DrawNode2D::containPoint(const math::Vector2& touchPoint)
 {
 	math::Vector3 localPosition = this->convertWorldPostitionToLocal(touchPoint);
 	return _localRectPoints.containPointByPolygon(localPosition.getX(), localPosition.getY());
+}
 
-	//return _realRectPoints.containPointByPolygon(touchPoint.getX(), touchPoint.getY());
+bool render::DrawNode2D::isInRangeOf(const DrawNode2D* node)
+{
+	if (node == nullptr)
+	{
+		return false;
+	}
+
+	float x = node->getWorldRectVertex().leftDown.getX();
+	float y = node->getWorldRectVertex().leftDown.getY();
+
+	float w = node->getWorldRectVertex().rightUp.getX() - node->getWorldRectVertex().leftDown.getX();
+	float h = node->getWorldRectVertex().rightUp.getY() - node->getWorldRectVertex().leftDown.getY();
+
+	return _worldRectPoints.isPartInRangeOfRect(x, y, w, h);
 }
 
 void render::DrawNode2D::calRealRectPoints()
 {
 	Tool::calRect(math::Vector3(), _volume, _anchor, _localRectPoints);
 
-	if (isClippingEnabled())
+	//if (isClippingEnabled())
 	{
 		_worldRectPoints.leftDown = this->convertLocalPostitionToWorld(_localRectPoints.leftDown);
 		_worldRectPoints.rightDown = this->convertLocalPostitionToWorld(_localRectPoints.rightDown);

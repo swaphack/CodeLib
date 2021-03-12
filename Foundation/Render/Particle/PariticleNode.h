@@ -13,8 +13,7 @@ namespace render
 	*/
 	class PariticleNode :
 		public Node,
-		public ParticleProtocol,
-		public SchedulerProtocol
+		public ParticleProtocol
 	{
 	public:
 		PariticleNode();
@@ -30,14 +29,6 @@ namespace render
 		*/ 
 		float getPassedTime() const;
 	protected:
-		/**
-		*	添加定时器
-		*/
-		virtual void registerScheduler();
-		/**
-		*	移除定时器
-		*/
-		virtual void unregisterScheduler();
 		/**
 		*	粒子配置改变时
 		*/

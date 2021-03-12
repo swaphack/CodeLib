@@ -41,6 +41,10 @@ namespace render
 		*	坐标是否在当前对象内
 		*/
 		virtual bool containPoint(const math::Vector2& touchPoint);
+		/**
+		*	是否在节点的范围内
+		*/
+		virtual bool isInRangeOf(const DrawNode2D* node);
 	protected:
 		/**
 		*	计算实际矩形框坐标

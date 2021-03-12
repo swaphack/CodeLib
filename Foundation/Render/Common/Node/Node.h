@@ -5,6 +5,7 @@
 #include "NodeProtocol.h"
 #include "NotifyCenter.h"
 #include "Common/Input/TouchProtocol.h"
+#include "Common/Action/SchedulerProtocol.h"
 #include <vector>
 
 namespace render
@@ -35,7 +36,8 @@ namespace render
 		public SpaceProtocol,
 		public BodyProtocol,
 		public DirectionProtocol,
-		public TouchProtocol
+		public TouchProtocol,
+		public SchedulerProtocol
 	{
 	public:
 		Node();
@@ -127,6 +129,18 @@ namespace render
 	public:
 		// 获取动作代理
 		ActionProxy* getActionProxy();
+		/**
+		*	开启定时器
+		*/
+		virtual void scheduleUpdate();
+		/**
+		*	关闭定时器
+		*/
+		virtual void unscheduleUpdate();
+		/**
+		*	定时更新
+		*/
+		virtual void update(float dt);
 	public:
 		// 是否和父节点关联
 		bool isRelativeWithParent();

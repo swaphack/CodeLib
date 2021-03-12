@@ -28,12 +28,18 @@ bool RectPoints::containPointByArea(float x, float y)
 	return bRet;
 }
 
-math::Vector3 RectPoints::getAnchorByPoint(float x, float y)
+math::Vector3 RectPoints::getAnchorPointByPosition(float x, float y)
 {
-	float xx = (x - leftUp.getX()) / (rightUp.getX() - leftUp.getX());
-	float yy = (y - leftUp.getY()) / (leftUp.getY() - leftDown.getY());
+	float xx = (x - leftDown.getX()) / (rightUp.getX() - leftDown.getX());
+	float yy = (y - leftDown.getY()) / (rightUp.getY() - leftDown.getY());
 
 	return math::Vector3(xx, yy);
+}
+
+bool render::RectPoints::isAllInRangeOfRect(float x, float y, float w, float h)
+{
+	return leftDown.getX() >= x && leftDown.getY() >= y
+		&& rightUp.getX() <= (x + w) && rightUp.getY() <= (y + h);
 }
 
 bool RectPoints::containPointByPolygon(float x, float y)
@@ -54,10 +60,16 @@ float RectPoints::getArea(const math::Vector3& p1, const math::Vector3& p2, cons
 	math::Vector3 v2 = p3 - p1;
 
 	return 0.5f * math::Vector3::dot(v1, v2);
-	/*
-	double s = 0.5 * (p1.getX() * p2.getY() + p2.getX() * p3.getY() + p3.getX() * p1.getY() - p1.getX() * p3.getY() - p2.getX() * p1.getY() - p3.getX() * p2.getY());
-	return abs(s);
-	*/
+}
+
+bool render::RectPoints::isPartInRangeOfRect(float x, float y, float w, float h)
+{
+	float width = x + w;
+	float height = y + h;
+	return (leftDown.getX() >= x && leftDown.getX() >= width)
+		|| (leftDown.getY() >= y && leftDown.getY() >= height)
+		|| (rightUp.getX() >= x && rightUp.getX() >= width)
+		|| (rightUp.getY() >= y && rightUp.getY() >= height);
 }
 
 float render::RectPoints::getX()

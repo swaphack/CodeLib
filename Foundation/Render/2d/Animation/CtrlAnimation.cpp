@@ -23,17 +23,9 @@ bool CtrlAnimation::init()
 		return false;
 	}
 
-	_scheduler->setTarget(this);
-	_scheduler->setHandler([this](float dt) {
-		this->updateAnimation(dt);
-		});
+	scheduleUpdate();
 
 	return true;
-}
-
-void render::CtrlAnimation::updateAnimation(float interval)
-{
-	this->update(interval);
 }
 
 void CtrlAnimation::setSpeedRatio(float ratio)
@@ -67,18 +59,6 @@ void CtrlAnimation::setFrame(int frame)
 int CtrlAnimation::getFrame()
 {
 	return static_cast<int>(_frame);
-}
-
-void render::CtrlAnimation::registerScheduler()
-{
-	this->unregisterScheduler();
-
-	this->getActionProxy()->runAction(getScheduler());
-}
-
-void render::CtrlAnimation::unregisterScheduler()
-{
-	this->getActionProxy()->stopAction(getScheduler());
 }
 
 void CtrlAnimation::update(float interval)

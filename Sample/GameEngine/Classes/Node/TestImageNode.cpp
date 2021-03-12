@@ -110,7 +110,7 @@ void TestImageNode::testMoveImage()
 	G_KEYBOARDMANAGER->addKeyboardDelegate(this, pImage, KEYBOARD_DELEGATE_SELECTOR(TestImageNode::onKeyBoard));
 }
 
-void TestImageNode::onTouchBegin(Node* node, const math::Vector2& touchPoint, bool include)
+void TestImageNode::onTouchBegin(Node* node, const math::Vector2& touchPoint)
 {
 	CtrlImage* pNode = node->as<CtrlImage>();
 	if (pNode == nullptr)
@@ -125,7 +125,7 @@ void TestImageNode::onTouchBegin(Node* node, const math::Vector2& touchPoint, bo
 	pNode->setUserData(pAry);
 }
 
-void TestImageNode::onTouchMove(Node* node, const math::Vector2& touchPoint, bool include)
+void TestImageNode::onTouchMove(Node* node, const math::Vector2& touchPoint)
 {
 	CtrlImage* pNode = node->as<CtrlImage>();
 	if (pNode == nullptr)
@@ -137,7 +137,7 @@ void TestImageNode::onTouchMove(Node* node, const math::Vector2& touchPoint, boo
 	pNode->setPosition((*pAry)[0].getX() + touchPoint.getX() - (*pAry)[1].getX(), (*pAry)[0].getY() + touchPoint.getY() - (*pAry)[1].getY(), 0);
 }
 
-void TestImageNode::onTouchEnd(Node* node, const math::Vector2& touchPoint, bool include)
+void TestImageNode::onTouchEnd(Node* node, const math::Vector2& touchPoint)
 {
 	CtrlImage* pNode = node->as<CtrlImage>();
 	if (pNode == nullptr)
@@ -267,7 +267,7 @@ void TestImageNode::testScale9Image()
 	//Utility::loadDefaultShader(pChild);
 }
 
-void TestImageNode::onTouchImage(Node* node, const math::Vector2& touchPoint, bool include)
+void TestImageNode::onTouchImage(Node* node, const math::Vector2& touchPoint)
 {
 	CtrlImage* pImage = node->as<CtrlImage>();
 	if (pImage == nullptr)

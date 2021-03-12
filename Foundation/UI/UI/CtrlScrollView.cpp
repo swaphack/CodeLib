@@ -139,7 +139,7 @@ bool ui::CtrlScrollView::init()
 		}
 
 		_content->setPosition(pos);
-
+		
 		_touchPosition = touchPoint;
 	});
 

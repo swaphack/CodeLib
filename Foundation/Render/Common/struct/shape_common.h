@@ -25,9 +25,12 @@ namespace render
 		bool containPointByArea(float x, float y);
 		// 多边形法判断
 		bool containPointByPolygon(float x, float y);
-		//  获取点坐在的锚点位置
-		math::Vector3 getAnchorByPoint(float x, float y);
-
+		//  获取点所在的锚点位置
+		math::Vector3 getAnchorPointByPosition(float x, float y);
+		// 是否全部在范围内
+		bool isAllInRangeOfRect(float x, float y, float w, float h);
+		// 是否在范围内
+		bool isPartInRangeOfRect(float x, float y, float w, float h);
 	public: 
 		float getX();
 		float getY();

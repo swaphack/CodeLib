@@ -16,6 +16,9 @@ namespace render
 		void visit();
 	public:
 		// 添加子节点
+		virtual void addChild(Node* node);
+
+		// 添加子节点
 		virtual void addChild(Node* node, int zOrder);
 	};
 }

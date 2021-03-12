@@ -25,6 +25,7 @@ Node::Node()
 , _zOrder(0)
 {
 	this->setVisible(true);
+	
 
 	_notify = G_NOTIFYCENTER->alloct(this);
 }
@@ -47,6 +48,9 @@ bool Node::init()
 	addNotifyListener(NodeNotifyType::NODE, [&](){ 
 		this->sortChildren();
 	});
+
+	_scheduler->setTarget(this);
+	_scheduler->setHandler([this](float dt) { this->update(dt); });
 
 	return true;
 }
@@ -310,6 +314,20 @@ ActionProxy* Node::getActionProxy()
 		_actionProxy->retain();
 	}
 	return _actionProxy;
+}
+
+void render::Node::scheduleUpdate()
+{
+	this->getActionProxy()->runAction(getScheduler());
+}
+
+void render::Node::unscheduleUpdate()
+{
+	this->getActionProxy()->stopAction(getScheduler());
+}
+
+void render::Node::update(float dt)
+{
 }
 
 bool Node::isRelativeWithParent()

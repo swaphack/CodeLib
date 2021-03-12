@@ -24,11 +24,11 @@ private:
 
 	void testScale9Image();
 private:
-	void onTouchBegin(Node* node, const math::Vector2& touchPoint, bool include);
-	void onTouchMove(Node* node, const math::Vector2& touchPoint, bool include);
-	void onTouchEnd(Node* node, const math::Vector2& touchPoint, bool include);
+	void onTouchBegin(Node* node, const math::Vector2& touchPoint);
+	void onTouchMove(Node* node, const math::Vector2& touchPoin);
+	void onTouchEnd(Node* node, const math::Vector2& touchPoint);
 	void onKeyBoard(Node* node, sys::BoardKey key, sys::ButtonStatus type);
 
 
-	void onTouchImage(Node* node, const math::Vector2& touchPoint, bool include);
+	void onTouchImage(Node* node, const math::Vector2& touchPoint);
 };

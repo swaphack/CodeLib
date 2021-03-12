@@ -9,13 +9,13 @@ render::SchedulerProtocol::SchedulerProtocol()
 
 render::SchedulerProtocol::~SchedulerProtocol()
 {
-	this->unregisterScheduler();
+	this->unscheduleUpdate();
 	SAFE_RELEASE(_scheduler);
 }
 
 void render::SchedulerProtocol::start()
 {
-	this->registerScheduler();
+	this->scheduleUpdate();
 }
 
 void render::SchedulerProtocol::pause()
@@ -36,7 +36,7 @@ void render::SchedulerProtocol::resume()
 
 void render::SchedulerProtocol::stop()
 {
-	this->unregisterScheduler();
+	this->unscheduleUpdate();
 }
 
 render::Scheduler* render::SchedulerProtocol::getScheduler() const
@@ -44,11 +44,11 @@ render::Scheduler* render::SchedulerProtocol::getScheduler() const
 	return _scheduler;
 }
 
-void render::SchedulerProtocol::registerScheduler()
+void render::SchedulerProtocol::scheduleUpdate()
 {
 }
 
-void render::SchedulerProtocol::unregisterScheduler()
+void render::SchedulerProtocol::unscheduleUpdate()
 {
 }
 
