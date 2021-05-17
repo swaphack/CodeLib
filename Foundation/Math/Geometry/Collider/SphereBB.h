@@ -42,6 +42,10 @@ namespace math
 		*	是否包含点
 		*/
 		virtual bool contains(const Vector3& point);
+		/**
+		*	是否与射线相交
+		*/
+		virtual bool hitRay(const Ray& ray) const;
 	protected:
 		// 半径
 		float _radius = 0;

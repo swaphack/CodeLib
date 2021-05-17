@@ -6,6 +6,8 @@ namespace render
 {
 	class Texture2D;
 	class ShaderProgram;
+	class Light;
+	class Scene;
 
 	/**
 	*	阴影
@@ -20,22 +22,10 @@ namespace render
 	public:
 		virtual bool init();
 	public:
-		/**
-		*	投影阴影着色器
-		*/
-		void setCastShaderProgram(ShaderProgram* program);
-		/**
-		*	接受阴影着色器
-		*/
-		void setReceiveLightShaderProgram(ShaderProgram* program);
-		/**
-		*	绘制着色器
-		*/
-		void setRenderShaderProgram(ShaderProgram* program);
-	public:
-		virtual void beforeDrawNode();
-		virtual void draw();
-		virtual void afterDrawNode();
+		// 开始产生阴影
+		void beginCastShadow(Node* light, Scene* root, const std::set<Node*>& castShadowNodes);
+		// 开始渲染阴影
+		void beginRenderShadow();
 	protected:
 		void updateShadowMapping();
 	private:
@@ -47,11 +37,6 @@ namespace render
 		*	隐藏节点，不生成阴影
 		*/
 		std::set<Node*> _setHideNode;
-		// 记录阴影着色器
-		ShaderProgram* _castShaderProgram = nullptr;
-		// 绘制着色器
-		ShaderProgram* _renderShaderProgram = nullptr;
-		// 绘制着色器
-		ShaderProgram* _receiveLightShaderProgram = nullptr;
+		
 	};
 }

@@ -11,14 +11,14 @@ namespace math
 	{
 	public:
 		Circle();
-		Circle(const Vector2& position, float radius);
+		Circle(const Vector3& position, float radius);
 		Circle(const Circle& circle);
 		virtual ~Circle();
 	public:
 		/**
-		*	圆形
+		*	位置
 		*/
-		const Vector2& getPosition() const;
+		const Vector3& getPosition() const;
 		/**
 		*	半径
 		*/
@@ -27,12 +27,12 @@ namespace math
 		/**
 		*	是否包含点
 		*/
-		bool contains(const Vector2& point);
+		bool contains(const Vector3& point);
 	private:
 		/**
 		*	原点坐标
 		*/
-		Vector2 _position;
+		Vector3 _position;
 		/**
 		*	半径
 		*/

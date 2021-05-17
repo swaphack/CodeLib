@@ -78,3 +78,10 @@ void OBB::operator=(const OBB& obb)
 	this->_volume = obb._volume;
 	this->_rotation = obb._rotation;
 }
+
+bool math::OBB::hitRay(const Ray& ray) const
+{
+
+
+	return false;
+}

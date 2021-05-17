@@ -118,6 +118,7 @@
     <ClInclude Include="Basic\Collection\NodeCache.h" />
     <ClInclude Include="Basic\Collection\Tree.h" />
     <ClInclude Include="Basic\Collection\TreeNode.h" />
+    <ClInclude Include="Basic\Compare.h" />
     <ClInclude Include="Basic\EndPoint.h" />
     <ClInclude Include="Basic\import.h" />
     <ClInclude Include="Basic\Interval.h" />
@@ -152,7 +153,6 @@
     <ClInclude Include="Function\MultivariateLinearFunction.h" />
     <ClInclude Include="Function\MultiPowerFunction.h" />
     <ClInclude Include="Function\Range.h" />
-    <ClInclude Include="Geometry\2d\Circle.h" />
     <ClInclude Include="Geometry\2d\import.h" />
     <ClInclude Include="Geometry\2d\Line2d.h" />
     <ClInclude Include="Geometry\2d\LineSegment2d.h" />
@@ -160,7 +160,6 @@
     <ClInclude Include="Geometry\2d\Polygon.h" />
     <ClInclude Include="Geometry\2d\Rect.h" />
     <ClInclude Include="Geometry\2d\Size.h" />
-    <ClInclude Include="Geometry\2d\Triangle.h" />
     <ClInclude Include="Geometry\3d\Cuboids.h" />
     <ClInclude Include="Geometry\3d\import.h" />
     <ClInclude Include="Geometry\3d\Line3d.h" />
@@ -173,7 +172,9 @@
     <ClInclude Include="Geometry\3d\Volume.h" />
     <ClInclude Include="Geometry\base\import.h" />
     <ClInclude Include="Geometry\base\macros.h" />
+    <ClInclude Include="Geometry\base\Physics.h" />
     <ClInclude Include="Geometry\base\Points.h" />
+    <ClInclude Include="Geometry\base\Ray.h" />
     <ClInclude Include="Geometry\Collider\AABB.h" />
     <ClInclude Include="Geometry\Collider\BoundingBox.h" />
     <ClInclude Include="Geometry\Collider\import.h" />
@@ -182,6 +183,11 @@
     <ClInclude Include="Geometry\common.h" />
     <ClInclude Include="Geometry\GeometryUtiity.h" />
     <ClInclude Include="Geometry\import.h" />
+    <ClInclude Include="Geometry\shape\Circle.h" />
+    <ClInclude Include="Geometry\shape\import.h" />
+    <ClInclude Include="Geometry\shape\Line.h" />
+    <ClInclude Include="Geometry\shape\Rectangle.h" />
+    <ClInclude Include="Geometry\shape\Triangle.h" />
     <ClInclude Include="mathlib.h" />
     <ClInclude Include="Number\Complex.h" />
     <ClInclude Include="Number\Decimal.h" />
@@ -250,7 +256,6 @@
     <ClCompile Include="Function\Elementary\LogarithmicFunction.cpp" />
     <ClCompile Include="Function\Elementary\PowerFunction.cpp" />
     <ClCompile Include="Function\Elementary\TrigonometricFunction.cpp" />
-    <ClCompile Include="Geometry\2d\Circle.cpp" />
     <ClCompile Include="Geometry\2d\Line2d.cpp" />
     <ClCompile Include="Geometry\2d\LineSegment2d.cpp" />
     <ClCompile Include="Geometry\2d\Polar2d.cpp" />
@@ -262,12 +267,18 @@
     <ClCompile Include="Geometry\3d\Plane.cpp" />
     <ClCompile Include="Geometry\3d\Polar3d.cpp" />
     <ClCompile Include="Geometry\3d\Volume.cpp" />
+    <ClCompile Include="Geometry\base\Physics.cpp" />
     <ClCompile Include="Geometry\base\Points.cpp" />
+    <ClCompile Include="Geometry\base\Ray.cpp" />
     <ClCompile Include="Geometry\Collider\AABB.cpp" />
     <ClCompile Include="Geometry\Collider\BoundingBox.cpp" />
     <ClCompile Include="Geometry\Collider\OBB.cpp" />
     <ClCompile Include="Geometry\Collider\SphereBB.cpp" />
     <ClCompile Include="Geometry\GeometryUtiity.cpp" />
+    <ClCompile Include="Geometry\shape\Circle.cpp" />
+    <ClCompile Include="Geometry\shape\Line.cpp" />
+    <ClCompile Include="Geometry\shape\Rectangle.cpp" />
+    <ClCompile Include="Geometry\shape\Triangle.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Number\Complex.cpp" />
     <ClCompile Include="Number\Decimal.cpp" />

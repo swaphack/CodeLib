@@ -110,6 +110,24 @@
     <ClInclude Include="Map\Base\CombineSlots.h">
       <Filter>Map\Base</Filter>
     </ClInclude>
+    <ClInclude Include="Mesh\ReduceAlgorithm.h">
+      <Filter>Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="Mesh\ProgressiveMeshAlgorithm.h">
+      <Filter>Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="Mesh\TriangleMesh.h">
+      <Filter>Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="Mesh\macros.h">
+      <Filter>Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="Mesh\Index.h">
+      <Filter>Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="Mesh\import.h">
+      <Filter>Mesh</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Sort">
@@ -132,6 +150,9 @@
     </Filter>
     <Filter Include="Map\Samples">
       <UniqueIdentifier>{84b747df-74e3-4dfe-b9b8-ae434ef2fa32}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Mesh">
+      <UniqueIdentifier>{a122c2b3-274c-4e68-bcdc-b084a6361702}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -189,6 +210,15 @@
     </ClCompile>
     <ClCompile Include="Map\Creator\WFCAlgorithm.cpp">
       <Filter>Map\Creator</Filter>
+    </ClCompile>
+    <ClCompile Include="Mesh\ProgressiveMeshAlgorithm.cpp">
+      <Filter>Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="Mesh\TriangleMesh.cpp">
+      <Filter>Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="Mesh\Index.cpp">
+      <Filter>Mesh</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

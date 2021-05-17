@@ -516,7 +516,7 @@ void Node::calSpaceData()
 
 	calRealSpaceByMatrix();
 
-	//calDirectionWithRotate();
+	calDirectionWithRotate();
 }
 
 void Node::calRealSpaceByMatrix()

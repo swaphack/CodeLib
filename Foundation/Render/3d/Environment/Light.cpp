@@ -1,7 +1,7 @@
 #include "Light.h"
 #include "Graphic/GLAPI/import.h"
 #include "Environment.h"
-
+#include "PostProcessing/ShadowMapping.h"
 #include "mathlib.h"
 
 using namespace render;

@@ -73,6 +73,9 @@
     <Filter Include="Algebra\Quaternion">
       <UniqueIdentifier>{7d7b407e-ac3b-49a9-8eff-c4dc936c0449}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Geometry\shape">
+      <UniqueIdentifier>{5291586d-4512-4168-8177-31c9a9df863f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Geometry\2d\Rect.h">
@@ -436,12 +439,6 @@
     <ClInclude Include="Geometry\Collider\SphereBB.h">
       <Filter>Geometry\Collider</Filter>
     </ClInclude>
-    <ClInclude Include="Geometry\2d\Triangle.h">
-      <Filter>Geometry\2d</Filter>
-    </ClInclude>
-    <ClInclude Include="Geometry\2d\Circle.h">
-      <Filter>Geometry\2d</Filter>
-    </ClInclude>
     <ClInclude Include="Geometry\2d\Polygon.h">
       <Filter>Geometry\2d</Filter>
     </ClInclude>
@@ -471,6 +468,30 @@
     </ClInclude>
     <ClInclude Include="Algebra\Coordinate\CurvilinearCoordinateSystem.h">
       <Filter>Algebra\Coordinate</Filter>
+    </ClInclude>
+    <ClInclude Include="Geometry\base\Ray.h">
+      <Filter>Geometry\base</Filter>
+    </ClInclude>
+    <ClInclude Include="Geometry\base\Physics.h">
+      <Filter>Geometry\base</Filter>
+    </ClInclude>
+    <ClInclude Include="Geometry\shape\Triangle.h">
+      <Filter>Geometry\shape</Filter>
+    </ClInclude>
+    <ClInclude Include="Geometry\shape\Circle.h">
+      <Filter>Geometry\shape</Filter>
+    </ClInclude>
+    <ClInclude Include="Geometry\shape\import.h">
+      <Filter>Geometry\shape</Filter>
+    </ClInclude>
+    <ClInclude Include="Geometry\shape\Rectangle.h">
+      <Filter>Geometry\shape</Filter>
+    </ClInclude>
+    <ClInclude Include="Geometry\shape\Line.h">
+      <Filter>Geometry\shape</Filter>
+    </ClInclude>
+    <ClInclude Include="Basic\Compare.h">
+      <Filter>Basic</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -685,9 +706,6 @@
     <ClCompile Include="Geometry\Collider\SphereBB.cpp">
       <Filter>Geometry\Collider</Filter>
     </ClCompile>
-    <ClCompile Include="Geometry\2d\Circle.cpp">
-      <Filter>Geometry\2d</Filter>
-    </ClCompile>
     <ClCompile Include="Geometry\3d\Cuboids.cpp">
       <Filter>Geometry\3d</Filter>
     </ClCompile>
@@ -702,6 +720,24 @@
     </ClCompile>
     <ClCompile Include="Algebra\Coordinate\CartesianCoordinateSystem4D.cpp">
       <Filter>Algebra\Coordinate</Filter>
+    </ClCompile>
+    <ClCompile Include="Geometry\base\Ray.cpp">
+      <Filter>Geometry\base</Filter>
+    </ClCompile>
+    <ClCompile Include="Geometry\base\Physics.cpp">
+      <Filter>Geometry\base</Filter>
+    </ClCompile>
+    <ClCompile Include="Geometry\shape\Circle.cpp">
+      <Filter>Geometry\shape</Filter>
+    </ClCompile>
+    <ClCompile Include="Geometry\shape\Triangle.cpp">
+      <Filter>Geometry\shape</Filter>
+    </ClCompile>
+    <ClCompile Include="Geometry\shape\Rectangle.cpp">
+      <Filter>Geometry\shape</Filter>
+    </ClCompile>
+    <ClCompile Include="Geometry\shape\Line.cpp">
+      <Filter>Geometry\shape</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

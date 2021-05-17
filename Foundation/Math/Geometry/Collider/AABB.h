@@ -81,6 +81,11 @@ namespace math
 		*	重载=
 		*/
 		void operator=(const AABB& aabb);
+	public:
+		/**
+		*	是否与射线相交
+		*/
+		virtual bool hitRay(const Ray& ray) const;
 	private:
 		// 面积
 		Vector3 _volume;

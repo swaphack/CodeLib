@@ -176,5 +176,85 @@ namespace math
 
 			return true;
 		}
+
+		/**
+		*	获取凸多边形
+		*/
+		static bool createConvexPolygon(const std::vector<math::Vector2>& inPoints, std::vector<math::Vector2>& outPoints)
+		{
+			if (inPoints.size() < 3)
+			{
+				return false;
+			}
+
+			std::vector<math::Vector2> points = inPoints;
+
+			std::sort(points.begin(), points.end(), [](const math::Vector2& a, const math::Vector2& b) {
+				if (a.getX() == b.getX())
+				{
+					return a.getY() > b.getY();
+				}
+				else
+				{
+					return a.getX() < b.getX();
+				}
+
+			});
+
+			auto upList = std::vector<math::Vector2>();
+			upList.push_back(points[0]);
+			upList.push_back(points[1]);
+
+			for (int i = 2; i < points.size(); i++)
+			{
+				upList.push_back(points[i]);
+				while (upList.size() >= 3)
+				{
+					auto a = upList[upList.size() - 3];
+					auto b = upList[upList.size() - 2];
+					auto c = upList[upList.size() - 1];
+
+					if (Vector2::getPointPosition(c, a, b) != 1)
+					{
+						upList.erase(upList.begin() + upList.size() - 2);
+					}
+					else
+					{
+						break;
+					}
+				}
+			}
+
+			auto lowerList = std::vector<math::Vector2>();
+			lowerList.push_back(points[points.size() - 1]);
+			lowerList.push_back(points[points.size() - 2]);
+
+			for (int i = points.size() - 3; i >= 0; i--)
+			{
+				lowerList.push_back(points[i]);
+				while (lowerList.size() >= 3)
+				{
+					auto a = lowerList[lowerList.size() - 3];
+					auto b = lowerList[lowerList.size() - 2];
+					auto c = lowerList[lowerList.size() - 1];
+					if (Vector2::getPointPosition(c, a, b) != 1)
+					{
+						lowerList.erase(lowerList.begin() + lowerList.size() - 2);
+					}
+					else
+					{
+						break;
+					}
+				}
+			}
+
+			lowerList.erase(lowerList.begin());
+			lowerList.erase(lowerList.begin() + lowerList.size() - 1);
+
+			outPoints.insert(outPoints.end(), upList.begin(), upList.end());
+			outPoints.insert(outPoints.end(), lowerList.begin(), lowerList.end());
+
+			return outPoints.size() > 3;
+		}
 	};
 }

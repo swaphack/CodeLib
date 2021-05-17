@@ -32,3 +32,8 @@ bool math::BoundingBox::contains(const Vector3& point)
 {
 	return false;
 }
+
+bool math::BoundingBox::hitRay(const Ray& ray) const
+{
+	return false;
+}

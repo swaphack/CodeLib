@@ -159,6 +159,7 @@
     <ClInclude Include="Platform\Windows\import.h" />
     <ClInclude Include="Platform\Windows\Window.h" />
     <ClInclude Include="Process\Pipe.h" />
+    <ClInclude Include="Record\OperateRecord.h" />
     <ClInclude Include="Resource\extensions.h" />
     <ClInclude Include="Resource\Font\ILabelLoader.h" />
     <ClInclude Include="Resource\Font\LabelImage.h" />
@@ -291,6 +292,7 @@
     <ClCompile Include="Net\Socket.cpp" />
     <ClCompile Include="Net\EndPoint.cpp" />
     <ClCompile Include="Platform\Windows\Window.cpp" />
+    <ClCompile Include="Record\OperateRecord.cpp" />
     <ClCompile Include="Resource\Font\LabelImage.cpp" />
     <ClCompile Include="Resource\Image\ImageBMP.cpp" />
     <ClCompile Include="Resource\Image\ImageDefine.cpp" />

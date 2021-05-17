@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Algebra/import.h"
-
+#include "Geometry/base/Ray.h"
 #include <cstdint>
 
 namespace math
@@ -33,6 +33,11 @@ namespace math
 		*	是否包含点
 		*/
 		virtual bool contains(const Vector3& point);
+	public:
+		/**
+		*	是否与射线相交
+		*/
+		virtual bool hitRay(const Ray& ray) const;
 	protected:
 		// 中心点
 		Vector3 _center;

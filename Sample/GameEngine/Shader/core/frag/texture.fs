@@ -1,15 +1,13 @@
 struct Texture
 {
-	sampler2D texture0;
-	sampler2D texture1;
-	sampler2D texture2;
-	/*
-	sampler2D texture3;
-	sampler2D texture4;
-	sampler2D texture5;
-	sampler2D texture6;
+	sampler2D texture0; // ambient
+	sampler2D texture1; // diffuse
+	sampler2D texture2; // specular
+	sampler2D texture3; // alpha
+	sampler2D texture4; // bump
+	sampler2D texture5; // normal
+	sampler2D texture6; // shadow
 	sampler2D texture7;
-	*/
 };
 
 struct Texture3D

@@ -119,7 +119,8 @@ void TestEnvironmentNode::testCamera()
 	//pCamera->setPositionY(pCamera->getPositionY() + 100);
 	//pCamera->setRotationX(pCamera->getRotationX() - 30);
 
-	G_KEYBOARDMANAGER->addKeyboardFunc(this, pCamera, [&](sys::BoardKey key, sys::ButtonStatus type) {
+	G_KEYBOARDMANAGER->addKeyboardFunc(this, pCamera, [this](sys::BoardKey key, sys::ButtonStatus type) {
+		Camera* pCamera = Camera::getMainCamera();
 
 		if (type == sys::ButtonStatus::BUTTON_DOWN)
 		{
@@ -185,7 +186,9 @@ void TestEnvironmentNode::testCamera()
 	});
 
 	
-	G_MOUSEMANAGER->addMouseScrollFunc(this, pCamera, [&](sys::ScrollEvent evt, float param) {
+	G_MOUSEMANAGER->addMouseScrollFunc(this, pCamera, [this](sys::ScrollEvent evt, float param) {
+		Camera* pCamera = Camera::getMainCamera();
+
 		if (_scrollEvt != evt)
 		{
 			_mouseScroll = 1;

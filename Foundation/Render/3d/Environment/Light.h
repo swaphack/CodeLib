@@ -5,6 +5,8 @@
 
 namespace render
 {
+	class ShadowMapping;
+
 	// 光源
 	class Light : public Node
 	{
@@ -19,8 +21,6 @@ namespace render
 		LightName getLightName();
 		// 光源索引
 		int getLightIndex();
-
-
 	public:
 		virtual void draw();
 		virtual bool init();
@@ -43,7 +43,13 @@ namespace render
 		const float* getSpecular();
 	protected:
 		friend class Environment;
+		// 光源索引
 		void setLightIndex(int index);
+	protected:
+		// 长生阴影
+		void generateShadow();
+		// 渲染阴影
+		void renderShadow();
 	protected:
 		// 颜色
 		float _lightColor[4];
@@ -55,5 +61,7 @@ namespace render
 		float _lightSpecular[4];
 		// 光源索引
 		int _lightIndex = 0;
+		// 阴影
+		ShadowMapping* _shadowMapping = nullptr;
 	};
 }

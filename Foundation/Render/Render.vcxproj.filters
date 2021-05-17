@@ -588,6 +588,9 @@
     <ClCompile Include="Common\Node\ComputeQueue.cpp">
       <Filter>Common\Node</Filter>
     </ClCompile>
+    <ClCompile Include="3d\Map\LSystem.cpp">
+      <Filter>3d\Map</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Common\Node\import.h">
@@ -703,9 +706,6 @@
     </ClInclude>
     <ClInclude Include="Common\DrawNode\import.h">
       <Filter>Common\DrawNode</Filter>
-    </ClInclude>
-    <ClInclude Include="3d\Common\Ray.h">
-      <Filter>3d\Common</Filter>
     </ClInclude>
     <ClInclude Include="Common\Action\ExtAction.h">
       <Filter>Common\Action</Filter>
@@ -1349,6 +1349,18 @@
     </ClInclude>
     <ClInclude Include="Common\Node\ComputeQueue.h">
       <Filter>Common\Node</Filter>
+    </ClInclude>
+    <ClInclude Include="3d\Map\Tree.h">
+      <Filter>3d\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="3d\Map\MapCreator.h">
+      <Filter>3d\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="3d\Map\common.h">
+      <Filter>3d\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="3d\Map\LSystem.h">
+      <Filter>3d\Map</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

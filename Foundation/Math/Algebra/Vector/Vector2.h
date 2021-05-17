@@ -87,7 +87,11 @@ namespace math
 		*	a x b = n |a||b|sin<a, b>
 		*	长度等于围成平行四边形的面积
 		*/
-		static Vector2 cross(const Vector2& vector0, const Vector2& vector1);
+		//static Vector2 cross(const Vector2& vector0, const Vector2& vector1);
+		/**
+		*	叉积
+		*/
+		static float cross(const Vector2& vector0, const Vector2& vector1);
 		/**
 		*	距离
 		*/
@@ -112,6 +116,10 @@ namespace math
 		*	三点共线
 		*/
 		static bool isThreePointsOnSameLine(const Vector2& point0, const Vector2& point1, const Vector2& point2);
+		/**
+		*	在平面上，获取点与线的位置关系 返回结果：-1左边，0线上，1右边
+		*/
+		static int getPointPosition(const math::Vector2& point, const math::Vector2& src, const math::Vector2& dest);
 	};
 
 	static inline Vector2 operator*(float k, const Vector2& value)

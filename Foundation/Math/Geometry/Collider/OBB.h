@@ -70,8 +70,13 @@ namespace math
 		*	重载=
 		*/
 		void operator=(const OBB& obb);
+	public:
+		/**
+		*	是否与射线相交
+		*/
+		virtual bool hitRay(const Ray& ray) const;
 	protected:
-		// 面积
+		// 体积
 		Vector3 _volume;
 		// 旋转角度
 		Vector3 _rotation;

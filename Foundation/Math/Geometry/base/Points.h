@@ -4,6 +4,7 @@
 
 namespace math
 {
+	// µã¼¯ºÏ
 	template<typename T, const int Length>
 	struct Points : public Array<T, Length>
 	{
@@ -15,6 +16,6 @@ namespace math
 		}
 		virtual ~Points() {}
 	public:
-
 	};
+
 }

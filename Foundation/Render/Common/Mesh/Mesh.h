@@ -121,7 +121,7 @@ namespace render
 		*/
 		bool _bComputeNormal = false;
 		/**
-		*	是否计算七县
+		*	是否计算切线
 		*/
 		bool _bComputeTangent = false;
 	};

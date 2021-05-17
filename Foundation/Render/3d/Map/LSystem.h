@@ -2,10 +2,13 @@
 
 namespace render
 {
-	class Ray
+	class LSystem
 	{
 	public:
-	protected:
+		LSystem();
+		~LSystem();
+
 	private:
+
 	};
 }

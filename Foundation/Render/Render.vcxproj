@@ -92,6 +92,7 @@
     <ClCompile Include="3d\Environment\PointLight.cpp" />
     <ClCompile Include="3d\Environment\SkyBox.cpp" />
     <ClCompile Include="3d\Environment\SpotLight.cpp" />
+    <ClCompile Include="3d\Map\LSystem.cpp" />
     <ClCompile Include="3d\ModelFile\Model3DS.cpp" />
     <ClCompile Include="3d\ModelFile\ModelFbx.cpp" />
     <ClCompile Include="3d\ModelFile\ModelFile.cpp" />
@@ -286,7 +287,6 @@
     <ClInclude Include="2d\Primitive\import.h" />
     <ClInclude Include="2d\Primitive\PrimitiveNode.h" />
     <ClInclude Include="3d\Common\MultiMeshModel.h" />
-    <ClInclude Include="3d\Common\Ray.h" />
     <ClInclude Include="3d\Common\Model.h" />
     <ClInclude Include="3d\Common\import.h" />
     <ClInclude Include="3d\Environment\ClipPlane.h" />
@@ -302,8 +302,12 @@
     <ClInclude Include="3d\Environment\import.h" />
     <ClInclude Include="3d\import.h" />
     <ClInclude Include="3d\macros.h" />
+    <ClInclude Include="3d\Map\common.h" />
+    <ClInclude Include="3d\Map\LSystem.h" />
     <ClInclude Include="3d\Map\macros.h" />
+    <ClInclude Include="3d\Map\MapCreator.h" />
     <ClInclude Include="3d\Map\Terrian.h" />
+    <ClInclude Include="3d\Map\Tree.h" />
     <ClInclude Include="3d\ModelFile\import.h" />
     <ClInclude Include="3d\ModelFile\Model3DS.h" />
     <ClInclude Include="3d\ModelFile\ModelFbx.h" />

@@ -124,13 +124,18 @@ float Vector2::dot(const Vector2& vector0, const Vector2& vector1)
 {
 	return vector0.getX() * vector1.getX() + vector0.getY() * vector1.getY();
 }
-
+/*
 Vector2 Vector2::cross(const Vector2& vector0, const Vector2& vector1)
 {
 	float x = vector0.getX() * vector1.getY();
 	float y = -vector0.getY() * vector1.getX();
 
 	return Vector2(x, y);
+}
+*/
+float Vector2::cross(const Vector2& vector0, const Vector2& vector1)
+{
+	return vector0.getX() * vector1.getY() - vector0.getY() * vector1.getX();
 }
 
 float Vector2::distance(const Vector2& point0, const Vector2& point1)
@@ -220,6 +225,17 @@ bool Vector2::isThreePointsOnSameLine(const Vector2& point0, const Vector2& poin
 	det.setRow(1, v1);
 
 	return getDetMagnitude(det) == 0;
+}
+
+int math::Vector2::getPointPosition(const math::Vector2& point, const math::Vector2& src, const math::Vector2& dest)
+{
+	math::Vector2 p0 = dest - src;
+	math::Vector2 p1 = point - src;
+
+	int ret = math::Vector2::cross(p0, p1);
+	if (ret == 0) return 0;
+	else if (ret > 0) return -1;
+	else return 1;
 }
 
 math::Vector2::~Vector2()

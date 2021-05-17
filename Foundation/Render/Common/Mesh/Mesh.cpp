@@ -102,7 +102,7 @@ void render::Mesh::drawWithBufferObject()
 
 	if (nVerticeSize == 0)
 	{
-		PRINT("Mesh Vertice is NULL\n");
+		//PRINT("Mesh Vertice is NULL\n");
 		return;
 	}
 
@@ -134,7 +134,7 @@ void render::Mesh::drawWithClientArray()
 	const sys::MeshMemoryData& vertices = _detail->getVertices();
 	if (vertices.getLength() == 0)
 	{
-		PRINT("Mesh Vertice is NULL\n");
+		//PRINT("Mesh Vertice is NULL\n");
 		return;
 	}
 

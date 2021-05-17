@@ -4,6 +4,8 @@ namespace math
 {
 	/**
 	*	可变长数组
+	*	Length 可变长数组的长度
+	*	Sizes 每组数组的长度
 	*/
 	template<typename T, const int Length, int... Sizes>
 	class VariableLengthArray

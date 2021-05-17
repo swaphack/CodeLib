@@ -88,6 +88,9 @@
     <Filter Include="Time">
       <UniqueIdentifier>{2a110e07-2796-4c92-95c6-ae98387bf92b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Record">
+      <UniqueIdentifier>{bf8cd5e1-7e35-4b74-9d5d-dcac32970b0f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Base\import.h">
@@ -583,6 +586,9 @@
     <ClInclude Include="Time\TimeClock.h">
       <Filter>Time</Filter>
     </ClInclude>
+    <ClInclude Include="Record\OperateRecord.h">
+      <Filter>Record</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Framework\Application.cpp">
@@ -902,6 +908,9 @@
     </ClCompile>
     <ClCompile Include="Time\TimeClock.cpp">
       <Filter>Time</Filter>
+    </ClCompile>
+    <ClCompile Include="Record\OperateRecord.cpp">
+      <Filter>Record</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

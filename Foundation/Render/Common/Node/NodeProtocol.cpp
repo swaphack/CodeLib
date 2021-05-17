@@ -374,11 +374,11 @@ void render::DirectionProtocol::setZDirection(ZDirectionType type)
 
 	if (type == ZDirectionType::INSIDE)
 	{
-		_front = math::Vector3(0, 0, -1);
+		_defaultFront = math::Vector3(0, 0, -1);
 	}
 	else
 	{
-		_front = math::Vector3(0, 0, 1);
+		_defaultFront = math::Vector3(0, 0, 1);
 	}
 }
 

@@ -221,6 +221,7 @@ void Utility::initShaderAttrib()
 	G_UNIFORMSHADERAPPLY->addUniform(MaterialUniformType::MATERIAL_TEXTURE_BUMP, "material.texBump");
 	G_UNIFORMSHADERAPPLY->addUniform(MaterialUniformType::MATERIAL_TEXTURE_DIFFUSE, "material.texDiffuse");
 	G_UNIFORMSHADERAPPLY->addUniform(MaterialUniformType::MATERIAL_TEXTURE_SPECULAR, "material.texSpecular");
+	G_UNIFORMSHADERAPPLY->addUniform(MaterialUniformType::MATERIAL_TEXTURE_SHADOW, "material.texShadow");
 	G_UNIFORMSHADERAPPLY->addUniform(MaterialUniformType::MATERIAL_SHININESS, "material.shininess");
 	G_UNIFORMSHADERAPPLY->addUniform(MaterialUniformType::MATERIAL_STRENGTH, "material.strength");
 	
@@ -237,9 +238,14 @@ void Utility::initShaderAttrib()
 	G_UNIFORMSHADERAPPLY->addUniform(EnvUniformType::LIGHT_COUNT, "env.lightCount");
 	G_UNIFORMSHADERAPPLY->addUniform(EnvUniformType::POINT_SIZE, "env.pointSize");
 
-	G_UNIFORMSHADERAPPLY->addUniform(TextureUniformType::TEXTURE0, "tex.texture0");
+	G_UNIFORMSHADERAPPLY->addUniform(TextureUniformType::TEXTURE0, "tex.texture0"); 
 	G_UNIFORMSHADERAPPLY->addUniform(TextureUniformType::TEXTURE1, "tex.texture1");
 	G_UNIFORMSHADERAPPLY->addUniform(TextureUniformType::TEXTURE2, "tex.texture2");
+	G_UNIFORMSHADERAPPLY->addUniform(TextureUniformType::TEXTURE3, "tex.texture3");
+	G_UNIFORMSHADERAPPLY->addUniform(TextureUniformType::TEXTURE4, "tex.texture4");
+	G_UNIFORMSHADERAPPLY->addUniform(TextureUniformType::TEXTURE5, "tex.texture5");
+	G_UNIFORMSHADERAPPLY->addUniform(TextureUniformType::TEXTURE6, "tex.texture6");
+	G_UNIFORMSHADERAPPLY->addUniform(TextureUniformType::TEXTURE7, "tex.texture7");
 
 	/*
 		mat->addUniform(UniformType::TEXTURE3, "texture.texture3");

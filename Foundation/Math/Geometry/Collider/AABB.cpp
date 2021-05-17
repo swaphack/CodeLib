@@ -138,3 +138,38 @@ void AABB::operator=(const AABB& aabb)
 	_center = aabb._center;
 	_volume = aabb._volume;
 }
+
+bool AABB::hitRay(const Ray& ray) const
+{
+	float dmin = INT_MIN;
+	float dmax = INT_MAX;
+
+	const math::Vector3& srcPoint = ray.getSrcPoint();
+	const math::Vector3& direction = ray.getDirection();
+
+	float t1x = (_minPos.getX() - srcPoint.getX()) / direction.getX();
+	float t2x = (_maxPos.getX() - srcPoint.getX()) / direction.getX();
+
+	float min = MIN(t1x, t2x);
+	float max = MAX(t1x, t2x);
+	if (dmin < min) dmin = min;
+	if (dmax > max) dmax = max;
+
+	float t1y = (_minPos.getY() - srcPoint.getY()) / direction.getY();
+	float t2y = (_maxPos.getY() - srcPoint.getY()) / direction.getY();
+
+	min = MIN(t1y, t2y);
+	max = MAX(t1y, t2y);
+	if (dmin < min) dmin = min;
+	if (dmax > max) dmax = max;
+
+	float t1z = (_minPos.getZ() - srcPoint.getZ()) / direction.getZ();
+	float t2z = (_maxPos.getZ() - srcPoint.getZ()) / direction.getZ();
+
+	min = MIN(t1z, t2z);
+	max = MAX(t1z, t2z);
+	if (dmin < min) dmin = min;
+	if (dmax > max) dmax = max;
+
+	return dmin < dmax;
+}

@@ -14,7 +14,7 @@ TestLightingNode::~TestLightingNode()
 
 void TestLightingNode::initNodes()
 {
-	this->addGround();
+	//this->addGround();
 
 	//this->addSun();
 
@@ -130,10 +130,9 @@ void TestLightingNode::addGround()
 
 	pModel->setShaderProgramFunc([](render::ShaderProgram* program) {
 		auto gamma = program->getUniform("env.gamma");
-		if (gamma) gamma->setValue(5.0f);
+		if (gamma) gamma->setValue(2.2f);
 	});
 
-	/*
 	render::MoveByAction* pAction0 = render::CREATE_ACTION(render::MoveByAction);
 	pAction0->setDifferentPosition(math::Vector3(0, 0, 600));
 	pAction0->setDuration(10);
@@ -155,8 +154,6 @@ void TestLightingNode::addGround()
 	pAction4->addAction(pAction3);
 
 	pModel->getActionProxy()->runAction(render::RepeateForeverAction::create(pAction4));
-
-	*/
 }
 
 void TestLightingNode::testCubeModel()
@@ -202,7 +199,7 @@ void TestLightingNode::testShadow()
 		render::Cube* pModel = CREATE_NODE(render::Cube);
 		pModel->setSupportLight(true);
 		pModel->setCastShadow(true);
-		pModel->setRecieveShadow(i % 2 == 0);
+		pModel->setRecieveShadow(false);
 		pModel->setTexture(filepath);
 		pModel->setColor(0.5f, 0.5f, 0.5f);
 		pModel->setAnchorPoint(math::Vector3(0.5f, 0.5f, 0.5f));
@@ -215,20 +212,30 @@ void TestLightingNode::testShadow()
 
 	this->addChild(pShadowNode);
 
-	/*
-	for (int i = 0; i < 6; i++)
 	{
-		render::Cube* pModel = CREATE_NODE(render::Cube);
-		pModel->setTexture(filepath);
-		pModel->setColor(0.5f, 0.5f, 0.5f);
-		pModel->setAnchorPoint(math::Vector3(0.5f, 0.5f, 0.5f));
-		pModel->setPosition(400 + i * 70, 200 + i * 70, 10);
-		pModel->setVolume(100, 100, 100);
-		//Utility::loadShaderVF(pModel, "Shader/material/material_dirlight_shadow.vs", "Shader/material/material_dirlight_shadow.fs");
-		Utility::loadShaderVF(pModel, "Shader/material/material_texture.vs", "Shader/material/material_texture.fs");
+		std::string filepath = "Resource/Image/ground.jpg";
 
-		this->addChild(pModel);
+		render::Plane* pModel = CREATE_NODE(render::Plane);
+		pModel->setSupportLight(true);
+		pModel->setSupportMultiLight(true);
+		pModel->setRecieveShadow(true);
+		pModel->setCastShadow(false);
+		pModel->setTexture(filepath);
+		pModel->setColor(1.0f, 0.5f, 1.0f);
+		pModel->setAnchorPoint(math::Vector3(0.5f, 0.5f, 0.5f));
+		pModel->setPosition(512, 384, -1000);
+		pModel->setRotation(0, 0, 0);
+		pModel->setVolume(10240, 7680);
+		pModel->getMaterial()->getMaterialDetail()->setSpecularShiness(32);
+		pModel->getMaterial()->getMaterialDetail()->setSpecularStrength(2);
+		//Utility::loadShaderVF(pModel, "Shader/material/material_normal_map.vs", "Shader/material/material_normal_map.fs");
+		//Utility::loadShaderVF(pModel, "Shader/material/material_single_light.vs", "Shader/material/material_multi_lights.fs");
+		pShadowNode->addChild(pModel);
+
+		pModel->setShaderProgramFunc([](render::ShaderProgram* program) {
+			auto gamma = program->getUniform("env.gamma");
+			if (gamma) gamma->setValue(2.2f);
+		});
 	}
-	*/
 }
 

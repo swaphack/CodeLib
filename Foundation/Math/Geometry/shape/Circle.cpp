@@ -9,7 +9,7 @@ Circle::Circle()
 
 }
 
-Circle::Circle(const Vector2& position, float radius)
+Circle::Circle(const Vector3& position, float radius)
 {
 	this->_position = position;
 	this->_radius = radius;
@@ -26,7 +26,7 @@ Circle::~Circle()
 
 }
 
-const Vector2& Circle::getPosition() const
+const Vector3& Circle::getPosition() const
 {
 	return _position;
 }
@@ -36,7 +36,7 @@ float Circle::getRadius() const
 	return _radius;
 }
 
-bool Circle::contains(const Vector2& point)
+bool Circle::contains(const Vector3& point)
 {
-	return pow(point.getX() - _position.getX(), 2) + pow(point.getY() - _position.getY(), 2) <= pow(_radius, 2);
+	return point.getMagnitudeSqr() <= pow(_radius, 2);
 }

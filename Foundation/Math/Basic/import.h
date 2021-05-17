@@ -8,3 +8,6 @@
 #include "EndPoint.h"
 #include "Interval.h"
 #include "Tool.h"
+
+
+#include "Compare.h"

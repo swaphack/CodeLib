@@ -3,6 +3,7 @@
 #include "Common/Shader/ShaderProgram.h"
 #include "Common/Texture/Texture2D.h"
 #include "Common/FrameRender/import.h"
+#include "Common/View/Camera.h"
 #include "Graphic/import.h"
 #include "3d/Common/Model.h"
 
@@ -15,9 +16,6 @@ render::ShadowMapping::ShadowMapping()
 render::ShadowMapping::~ShadowMapping()
 {
 	SAFE_RELEASE(_texture);
-	SAFE_RELEASE(_castShaderProgram);
-	SAFE_RELEASE(_renderShaderProgram);
-	SAFE_RELEASE(_receiveLightShaderProgram);
 }
 
 bool render::ShadowMapping::init()
@@ -33,58 +31,19 @@ bool render::ShadowMapping::init()
 	return true;
 }
 
-void render::ShadowMapping::setCastShaderProgram(ShaderProgram* program)
+void render::ShadowMapping::beginCastShadow(Node* light, Scene* root, const std::set<Node*>& castShadowNodes)
 {
-	SAFE_RELEASE(_castShaderProgram);
-	SAFE_RETAIN(program);
-	_castShaderProgram = program;
+	auto pCamera = Camera::getMainCamera();
+	GLState::setViewport(0, 0, getWidth(), getHeight());
+	_frameBuffer->bindFrameBuffer();
+
+
+
+	_frameBuffer->unbindFrameBuffer();
 }
 
-void render::ShadowMapping::setRenderShaderProgram(ShaderProgram* program)
+void render::ShadowMapping::beginRenderShadow()
 {
-	SAFE_RELEASE(_renderShaderProgram);
-	SAFE_RETAIN(program);
-	_renderShaderProgram = program;
-}
-
-void render::ShadowMapping::setReceiveLightShaderProgram(ShaderProgram* program)
-{
-	SAFE_RELEASE(_receiveLightShaderProgram);
-	SAFE_RETAIN(program);
-	_receiveLightShaderProgram = program;
-}
-
-void render::ShadowMapping::beforeDrawNode()
-{
-	this->broadcastFunc([this](Node* node) {
-		if (node == nullptr || node == this)
-		{
-			return;
-		}
-		if (node->is<Model>())
-		{
-			auto pDrawNode = node->as<Model>();
-			if (!pDrawNode->isCastShadow())
-			{
-				if (pDrawNode->isVisible())
-				{
-					pDrawNode->setSkipDraw(true);
-					_setHideNode.insert(pDrawNode);
-				}
-			}
-			else
-			{
-				pDrawNode->setShaderProgram(_castShaderProgram);
-			}
-			pDrawNode->setShadowTexture(nullptr);
-		}
-	}, true);
-	FrameBufferNode::beforeDrawNode();
-}
-
-void render::ShadowMapping::draw()
-{
-	//_texture->saveToPNG(getCString("%ld.png", sys::DateTime::getNowTimeStamp()), TextureExternalFormat::DEPTH_COMPONENT);
 	this->broadcastFunc([this](Node* node) {
 		if (node == nullptr || node == this)
 		{
@@ -98,10 +57,6 @@ void render::ShadowMapping::draw()
 				pDrawNode->setShadowTexture(_texture);
 				pDrawNode->setShaderProgram(_receiveLightShaderProgram);
 			}
-			else
-			{
-				pDrawNode->setShaderProgram(_renderShaderProgram);
-			}
 
 			auto it = _setHideNode.find(pDrawNode);
 			if (it != _setHideNode.end())
@@ -112,13 +67,6 @@ void render::ShadowMapping::draw()
 	}, true);
 
 	_setHideNode.clear();
-
-	DrawNode2D::onDraw();
-}
-
-void render::ShadowMapping::afterDrawNode()
-{
-	this->drawAllChildren();
 }
 
 void render::ShadowMapping::updateShadowMapping()
@@ -134,16 +82,20 @@ void render::ShadowMapping::updateShadowMapping()
 	_texture->setWidth(width);
 	_texture->setHeight(height);
 
-	_frameBuffer->bindFrameBuffer();
-
 	GLState::enable((EnableMode)_texture->getTextureTarget());
 
 	_texture->bindTexture();
 	_texture->setTextureStorage(1, TextureInternalSizedFormat::DEPTH_COMPONENT32, width, height);
-	//_texture->setTexParameter(TextureParameter::TEXTURE_COMPARE_MODE, GL_COMPARE_REF_TO_TEXTURE);
-	//_texture->setTexParameter(TextureParameter::TEXTURE_COMPARE_FUNC, GL_LEQUAL);
+	_texture->setTexParameter(TextureParameter::TEXTURE_COMPARE_MODE, GL_COMPARE_REF_TO_TEXTURE);
+	_texture->setTexParameter(TextureParameter::TEXTURE_COMPARE_FUNC, GL_LEQUAL);
+	_texture->setTexParameter(TextureParameter::DEPTH_TEXTURE_MODE, GL_LUMINANCE);
+
 	_texture->applyTextureSetting();
+	_frameBuffer->bindFrameBuffer();
 	_frameBuffer->setTexture2D(FrameBufferAttachment::DEPTH_ATTACHMENT, _texture->getTextureID(), 0);
+
+	GLRender::setDrawBuffer(DrawBufferMode::NONE);
+	GLRender::setReadBuffer(ReadBufferMode::NONE);
 
 	GLDebug::showError();
 
@@ -154,9 +106,6 @@ void render::ShadowMapping::updateShadowMapping()
 		PRINT("Frame Buffer is not Complete!\n");
 		return;
 	}
-
-	GLRender::setDrawBuffer(DrawBufferMode::NONE);
-	//GLRender::setReadBuffer(ReadBufferMode::NONE);
 
 	_frameBuffer->unbindFrameBuffer();
 	GLDebug::showError();

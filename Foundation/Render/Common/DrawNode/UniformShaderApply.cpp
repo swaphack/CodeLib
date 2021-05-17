@@ -474,7 +474,8 @@ void render::UniformShaderApply::updateTexturesUnifromValue(ShaderProgram* progr
 				continue;
 			}
 		}
-		if (item.first == TextureUniformType::TEXTURE0)
+		TextureUniformType textureID = item.first;
+		if (textureID == TextureUniformType::TEXTURE0)
 		{
 			auto pTexture = textureCache->getTexture(pDetail->getAmbientTextureMap());
 			if (pTexture == nullptr)
@@ -485,11 +486,11 @@ void render::UniformShaderApply::updateTexturesUnifromValue(ShaderProgram* progr
 			{
 				pTexture->activeTexture(ActiveTextureName::TEXTURE0);
 				pTexture->bindTexture();
-				pTexture->enableTextureWithSampler(0);
-				pUniform->setValue(0);
+				pTexture->enableTextureWithSampler((int)textureID);
+				pUniform->setValue((int)textureID);
 			}
 		}
-		else if (item.first == TextureUniformType::TEXTURE1)
+		else if (textureID == TextureUniformType::TEXTURE1)
 		{
 			auto pTexture = textureCache->getTexture(pDetail->getDiffuseTextureMap());
 			if (pTexture == nullptr)
@@ -500,13 +501,13 @@ void render::UniformShaderApply::updateTexturesUnifromValue(ShaderProgram* progr
 			{
 				pTexture->activeTexture(ActiveTextureName::TEXTURE1);
 				pTexture->bindTexture();
-				pTexture->enableTextureWithSampler(1);
-				pUniform->setValue(1);
+				pTexture->enableTextureWithSampler((int)textureID);
+				pUniform->setValue((int)textureID);
 			}
 
 			GLDebug::showError();
 		}
-		else if (item.first == TextureUniformType::TEXTURE2)
+		else if (textureID == TextureUniformType::TEXTURE2)
 		{
 			auto pTexture = textureCache->getTexture(pDetail->getSpecularTextureMap());
 			if (pTexture == nullptr)
@@ -517,8 +518,68 @@ void render::UniformShaderApply::updateTexturesUnifromValue(ShaderProgram* progr
 			{
 				pTexture->activeTexture(ActiveTextureName::TEXTURE2);
 				pTexture->bindTexture();
-				pTexture->enableTextureWithSampler(2);
-				pUniform->setValue(2);
+				pTexture->enableTextureWithSampler((int)textureID);
+				pUniform->setValue((int)textureID);
+			}
+		}
+		else if (textureID == TextureUniformType::TEXTURE3)
+		{
+			auto pTexture = textureCache->getTexture(pDetail->getAlphaTextureMap());
+			if (pTexture == nullptr)
+			{
+				pTexture = Texture2D::getEmptyTexture();
+			}
+			if (pTexture)
+			{
+				pTexture->activeTexture(ActiveTextureName::TEXTURE3);
+				pTexture->bindTexture();
+				pTexture->enableTextureWithSampler((int)textureID);
+				pUniform->setValue((int)textureID);
+			}
+		}
+		else if (textureID == TextureUniformType::TEXTURE4)
+		{
+			auto pTexture = textureCache->getTexture(pDetail->getBumpTextureMap());
+			if (pTexture == nullptr)
+			{
+				pTexture = Texture2D::getEmptyTexture();
+			}
+			if (pTexture)
+			{
+				pTexture->activeTexture(ActiveTextureName::TEXTURE4);
+				pTexture->bindTexture();
+				pTexture->enableTextureWithSampler((int)textureID);
+				pUniform->setValue((int)textureID);
+			}
+		}
+		else if (textureID == TextureUniformType::TEXTURE5)
+		{
+			auto pTexture = textureCache->getTexture(pDetail->getNormalTextureMap());
+			if (pTexture == nullptr)
+			{
+				pTexture = Texture2D::getEmptyTexture();
+			}
+			if (pTexture)
+			{
+				pTexture->activeTexture(ActiveTextureName::TEXTURE5);
+				pTexture->bindTexture();
+				pTexture->enableTextureWithSampler((int)textureID);
+				pUniform->setValue((int)textureID);
+			}
+		}
+		else if (textureID == TextureUniformType::TEXTURE6)
+		{
+			auto pTexture = textureCache->getTexture(pDetail->getShadowTextureMap());
+			if (pTexture == nullptr)
+			{
+				pTexture = Texture2D::getEmptyTexture();
+			}
+			if (pTexture)
+			{
+				pTexture->activeTexture(ActiveTextureName::TEXTURE6);
+				pTexture->bindTexture();
+				pTexture->enableTextureWithSampler((int)textureID);
+				pUniform->setValue((int)textureID);
 			}
 		}
 	}
