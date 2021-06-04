@@ -92,8 +92,10 @@
     <ClInclude Include="Algebra\Matrix\Matrix4x4.h" />
     <ClInclude Include="Algebra\Matrix\Matrixi.h" />
     <ClInclude Include="Algebra\Matrix\SquareMatrix.h" />
+    <ClInclude Include="Algebra\Polynomial\CubicPolynomial.h" />
     <ClInclude Include="Algebra\Polynomial\import.h" />
     <ClInclude Include="Algebra\Polynomial\Polynomial.h" />
+    <ClInclude Include="Algebra\Polynomial\QuadraticPolynomial.h" />
     <ClInclude Include="Algebra\Polynomial\UnaryPolynomial.h" />
     <ClInclude Include="Algebra\Quaternion\import.h" />
     <ClInclude Include="Algebra\Quaternion\Quaternion.h" />
@@ -201,6 +203,11 @@
     <ClInclude Include="Number\Number.h" />
     <ClInclude Include="Number\Rational.h" />
     <ClInclude Include="Number\Real.h" />
+    <ClInclude Include="ProbabilityAndStatistics\import.h" />
+    <ClInclude Include="ProbabilityAndStatistics\Probability\import.h" />
+    <ClInclude Include="ProbabilityAndStatistics\Probability\Probability.h" />
+    <ClInclude Include="ProbabilityAndStatistics\Probability\ProbabilityDensity.h" />
+    <ClInclude Include="ProbabilityAndStatistics\Statistics\import.h" />
     <ClInclude Include="Set\Element.h" />
     <ClInclude Include="Set\import.h" />
     <ClInclude Include="Set\Set.h" />
@@ -220,7 +227,9 @@
     <ClCompile Include="Algebra\Matrix\Matrix4x1.cpp" />
     <ClCompile Include="Algebra\Matrix\Matrix4x4.cpp" />
     <ClCompile Include="Algebra\Matrix\Matrixi.cpp" />
+    <ClCompile Include="Algebra\Polynomial\CubicPolynomial.cpp" />
     <ClCompile Include="Algebra\Polynomial\Polynomial.cpp" />
+    <ClCompile Include="Algebra\Polynomial\QuadraticPolynomial.cpp" />
     <ClCompile Include="Algebra\Polynomial\UnaryPolynomial.cpp" />
     <ClCompile Include="Algebra\Quaternion\Quaternion.cpp" />
     <ClCompile Include="Algebra\Vector\Vector2.cpp" />

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Algebra/import.h"
+#include "Line3d.h"
 
 namespace math
 {
@@ -36,12 +37,24 @@ namespace math
 		/**
 		*	法线
 		*/
-		const Vector3& normal() const;
+		const Vector3& getNormal() const;
 	public:
 		/**
 		*	点到平面的距离
 		*/
 		float getDistanceWithPoint(const Vector3& point);
+		/**
+		*	直线与到平面的交点
+		*/
+		bool getIntersectPointWithLine(const Line3d& line, Vector3& point);
+		/**
+		*	与平面的交线
+		*/
+		bool getIntersectLineWithPlane(const Plane& plane, Line3d& line);
+		/**
+		*	与两平面的交点
+		*/
+		bool getIntersectPointWithTwoPlanes(const Plane& plane1, const Plane& plane2, Vector3& point);
 	protected:
 		float _paramA = 0;
 		float _paramB = 0;

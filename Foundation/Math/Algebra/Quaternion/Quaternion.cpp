@@ -49,12 +49,17 @@ Quaternion Quaternion::conjugate() const
 
 Quaternion Quaternion::inverse() const
 {
-	return Quaternion(getW(), -getX(), -getY(), -getZ());
+	return conjugate() / getMagnitudeSqr();
 }
 
 float Quaternion::getMagnitude() const
 {
-	return pow(getX(), 2) + pow(getY(), 2) + pow(getZ(), 2);
+	return sqrtf(powf(getX(), 2) + powf(getY(), 2) + powf(getZ(), 2));
+}
+
+float math::Quaternion::getMagnitudeSqr() const
+{
+	return powf(getX(), 2) + powf(getY(), 2) + powf(getZ(), 2);
 }
 
 void Quaternion::normalize()
@@ -67,7 +72,7 @@ void Quaternion::normalize()
 	setZ(getZ() / len);
 }
 
-Quaternion Quaternion::operator*(const Quaternion& quaternion)
+Quaternion Quaternion::operator*(const Quaternion& quaternion) const
 {
 	float qw = getW()*quaternion.getW() - getX()*quaternion.getX() - getY()*quaternion.getY() - getZ()*quaternion.getZ();
 	float qx = getW()*quaternion.getX() + getX()*quaternion.getW() + getY()*quaternion.getZ() - getZ()*quaternion.getY();
@@ -75,6 +80,20 @@ Quaternion Quaternion::operator*(const Quaternion& quaternion)
 	float qz = getW()*quaternion.getZ() + getZ()*quaternion.getW() + getX()*quaternion.getY() - getY()*quaternion.getX();
 
 	return Quaternion(qw, qx, qy, qz);
+}
+
+Quaternion Quaternion::operator-(const Quaternion& quaternion) const
+{
+	math::Quaternion inverse = this->inverse();
+	math::Quaternion qd = inverse * quaternion;
+
+	return qd;
+}
+
+Quaternion Quaternion::operator*(float k) const
+{
+	Quaternion q(k * getW(), k * getX(), k * getY(), k * getZ());
+	return q;
 }
 
 Quaternion::operator Matrix4x4()
@@ -130,14 +149,17 @@ Quaternion Quaternion::rotate(const Vector3& vector, float angle)
 {
 	float radian = ANGLE_TO_RADIAN(angle) * 0.5f;
 
-	float len = vector.getLength();
+	float len = vector.getMagnitude();
 
 	assert(len != 0);
 
-	float w = cos(radian);
-	float x = sin(radian) * vector.getX() / len;
-	float y = sin(radian) * vector.getY() / len;
-	float z = sin(radian) * vector.getZ() / len;
+	float cosR = cos(radian);
+	float sinR = sin(radian);
+
+	float w = cosR;
+	float x = sinR * vector.getX() / len;
+	float y = sinR * vector.getY() / len;
+	float z = sinR * vector.getZ() / len;
 
 	return Quaternion(w, x, y, z);
 }
@@ -153,10 +175,19 @@ Quaternion Quaternion::rotate(float roll, float pitch, float yaw)
 	float ay = ANGLE_TO_RADIAN(pitch) * 0.5f;
 	float az = ANGLE_TO_RADIAN(yaw) * 0.5f;
 
-	float w = cos(ax) * cos(ay) * cos(az) + sin(ax)* sin(ay) * sin(az);
-	float x = sin(ax) * cos(ay) * cos(az) - cos(ax)* sin(ay) * sin(az);
-	float y = cos(ax) * sin(ay) * cos(az) + sin(ax)* cos(ay) * sin(az);
-	float z = cos(ax) * cos(ay) * sin(az) - sin(ax)* sin(ay) * cos(az);
+	float cosAx = cos(ax);
+	float sinAx = cos(ax);
+
+	float cosAy = cos(ay);
+	float sinAy = cos(ay);
+
+	float cosAz = cos(az);
+	float sinAz = cos(az);
+
+	float w = cosAx * cosAy * cosAz + sinAx* sinAy * sinAz;
+	float x = sinAx * cosAy * cosAz - cosAx* sinAy * sinAz;
+	float y = cosAx * sinAy * cosAz + sinAx* cosAy * sinAz;
+	float z = cosAx * cosAy * sinAz - sinAx* sinAy * cosAz;
 
 	return Quaternion(w, x, y, z);
 }
@@ -190,7 +221,7 @@ Vector3 Quaternion::euler(const Quaternion& quaternion)
 	float z;
 
 	// 万向锁, 南北极±90°
-	double test = quaternion.getX() * quaternion.getY() + quaternion.getZ() * quaternion.getW();
+	float test = quaternion.getX() * quaternion.getY() + quaternion.getZ() * quaternion.getW();
 	if (test > 0.499f) { // singularity at north pole
 		x = 2 * atan2(quaternion.getX(), quaternion.getW());
 		y = M_PI * 0.5f;
@@ -203,9 +234,9 @@ Vector3 Quaternion::euler(const Quaternion& quaternion)
 	}
 	else
 	{
-		x = atan2(2 * (quaternion.getW() * quaternion.getX() + quaternion.getY() * quaternion.getZ()), (1 - 2 * (pow(quaternion.getX(), 2) + pow(quaternion.getY(), 2))));
-		y = asin(2 * (quaternion.getW() * quaternion.getY() - quaternion.getX() * quaternion.getZ()));
-		z = atan2(2 * (quaternion.getW() * quaternion.getZ() + quaternion.getX() * quaternion.getY()), (1 - 2 * (pow(quaternion.getY(), 2) + pow(quaternion.getZ(), 2))));
+		x = atan2f(2 * (quaternion.getW() * quaternion.getX() + quaternion.getY() * quaternion.getZ()), (1 - 2 * (pow(quaternion.getX(), 2) + pow(quaternion.getY(), 2))));
+		y = asinf(2 * (quaternion.getW() * quaternion.getY() - quaternion.getX() * quaternion.getZ()));
+		z = atan2f(2 * (quaternion.getW() * quaternion.getZ() + quaternion.getX() * quaternion.getY()), (1 - 2 * (pow(quaternion.getY(), 2) + pow(quaternion.getZ(), 2))));
 	}
 	return Vector3(RADIAN_TO_ANGLE(x), RADIAN_TO_ANGLE(y), RADIAN_TO_ANGLE(z));
 }
@@ -253,8 +284,22 @@ math::Quaternion math::Quaternion::normalize(const Quaternion& quaternion)
 	return Quaternion(quaternion.getW(), quaternion.getX() / len, quaternion.getY() / len, quaternion.getZ() / len);
 }
 
+float math::Quaternion::dot(const Quaternion& src, const Quaternion& dest)
+{
+	return src.getW() * dest.getW() + src.getX() * dest.getX() + src.getY() * dest.getY() + src.getZ() * dest.getZ();
+}
+
 math::Vector3 math::Quaternion::eulerAngle() const
 {
 	return euler(*this);
 }
 
+math::Vector3 math::Quaternion::vector() const
+{
+	return math::Vector3(getX(), getY(), getZ());
+}
+
+float math::Quaternion::radian() const
+{
+	return 2 * atan2f(vector().getMagnitude(), getW());
+}

@@ -144,7 +144,7 @@ bool AABB::hitRay(const Ray& ray) const
 	float dmin = INT_MIN;
 	float dmax = INT_MAX;
 
-	const math::Vector3& srcPoint = ray.getSrcPoint();
+	const math::Vector3& srcPoint = ray.getPoint();
 	const math::Vector3& direction = ray.getDirection();
 
 	float t1x = (_minPos.getX() - srcPoint.getX()) / direction.getX();

@@ -11,17 +11,26 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Light\Color.h" />
-    <ClInclude Include="Light\Color3.h" />
-    <ClInclude Include="Light\Color4.h" />
-    <ClInclude Include="Light\import.h" />
-    <ClInclude Include="Light\macros.h" />
+    <ClInclude Include="ClassicalMechanics\import.h" />
+    <ClInclude Include="ClassicalMechanics\MassHelper.h" />
+    <ClInclude Include="Definition\import.h" />
+    <ClInclude Include="Definition\SIUnit.h" />
+    <ClInclude Include="Electromagnetism\import.h" />
+    <ClInclude Include="Electromagnetism\Optics\Color.h" />
+    <ClInclude Include="Electromagnetism\Optics\Color3.h" />
+    <ClInclude Include="Electromagnetism\Optics\Color4.h" />
+    <ClInclude Include="Electromagnetism\Optics\import.h" />
+    <ClInclude Include="Electromagnetism\Optics\macros.h" />
     <ClInclude Include="physicslib.h" />
+    <ClInclude Include="QuantumMechanics\import.h" />
+    <ClInclude Include="Relativity\import.h" />
+    <ClInclude Include="TSM\import.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Light\Color.cpp" />
-    <ClCompile Include="Light\Color3.cpp" />
-    <ClCompile Include="Light\Color4.cpp" />
+    <ClCompile Include="Definition\SIUnit.cpp" />
+    <ClCompile Include="Electromagnetism\Optics\Color.cpp" />
+    <ClCompile Include="Electromagnetism\Optics\Color3.cpp" />
+    <ClCompile Include="Electromagnetism\Optics\Color4.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

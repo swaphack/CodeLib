@@ -27,6 +27,65 @@ float Tool::getGLViewHeight()
 	return GL_VIEW_SIZE.getHeight();
 }
 
+float render::Tool::getHorizontalProjectDistance(float angle)
+{
+	float radin = ANGLE_TO_RADIAN(angle);
+	float tanR = tanf(radin);
+	if (tanR == 0) return 0;
+	return 1.0f / tanR;
+}
+
+float render::Tool::getVerticalAngle(float projDistance, float wDivh)
+{
+	if (projDistance == 0) return 0;
+	return 2 * atanf(wDivh / projDistance);
+}
+
+float render::Tool::getLinearInterpolation(float a, float b, float t)
+{
+	return a*t + b*(1-t);
+}
+
+math::Vector3 render::Tool::getSphericalLinearInterpolation(const math::Vector3& src, const math::Vector3& dest, float t)
+{
+	math::Vector3 v1;
+	math::Vector3 v2;
+
+	v1 = math::Vector3::normalize(src);
+	v2 = math::Vector3::normalize(dest);
+
+	float sinR = math::Vector3::sinValue(v1, v2);
+	float radian = math::Vector3::getRadian(v1, v2);
+
+	if (sinR == 0) return src;
+
+	return sinf((1.0f - t) * radian) / sinR * src + sinf(t * radian) / sinR * dest;
+}
+
+math::Quaternion render::Tool::getSphericalLinearInterpolation(const math::Quaternion& src, const math::Quaternion& dest, float t)
+{
+	math::Quaternion v1;
+	math::Quaternion v2;
+
+	v1 = math::Quaternion::normalize(src);
+	v2 = math::Quaternion::normalize(dest);
+
+	if (math::Quaternion::dot(v1, v2) < 0)
+	{
+		v2 = -1 * v2;
+	}
+
+	math::Quaternion qd = v1 - v2;
+
+	float radian = qd.radian();
+
+	float sinR = sinf(radian);
+
+	if (sinR == 0) return src;
+
+	return sinf((1.0f - t) * radian) / sinR * src + sinf(t * radian) / sinR * dest;
+}
+
 math::Vector3 Tool::convertToRadian(const math::Vector3& src)
 {
 	float x = ANGLE_TO_RADIAN(src.getX());

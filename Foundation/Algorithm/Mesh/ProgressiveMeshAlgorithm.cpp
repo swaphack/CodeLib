@@ -81,10 +81,10 @@ bool alg::ProgressiveMeshAlgorithm::reduceMesh(const TriangleMesh& inData, Trian
 		}
 	}
 
-
+	return false;
 }
 
 void alg::ProgressiveMeshAlgorithm::cleanUp()
 {
-	_triangleEdgeInfos.clear();
+	_triangleVertexInfos.clear();
 }

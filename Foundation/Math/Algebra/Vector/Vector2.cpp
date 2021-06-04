@@ -232,7 +232,7 @@ int math::Vector2::getPointPosition(const math::Vector2& point, const math::Vect
 	math::Vector2 p0 = dest - src;
 	math::Vector2 p1 = point - src;
 
-	int ret = math::Vector2::cross(p0, p1);
+	float ret = math::Vector2::cross(p0, p1);
 	if (ret == 0) return 0;
 	else if (ret > 0) return -1;
 	else return 1;

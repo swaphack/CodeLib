@@ -2,6 +2,8 @@
 #include "Basic/base.h"
 #include "Algebra/Vector/Vector2.h"
 #include "Algebra/Vector/Vector3.h"
+#include "Algebra/Polynomial/CubicPolynomial.h"
+#include "Algebra/Determinant/Determinant.h"
 
 math::CartesianCoordinateSystem3D::CartesianCoordinateSystem3D()
 {
@@ -181,4 +183,88 @@ math::CartesianCoordinateSystem3D math::CartesianCoordinateSystem3D::createAxono
 	}
 
 	return createAxonometric(ratio, angle);
+}
+
+math::CartesianCoordinateSystem3D math::CartesianCoordinateSystem3D::createWithPoints(const std::vector<Vector3>& points)
+{
+	int count = points.size();
+	math::CartesianCoordinateSystem3D ccs;
+
+	math::Vector3 m;
+	for (int i = 0; i < count; i++)
+	{
+		m += points[i];
+	}
+	m /= count;
+
+	float a, b, c, d, e, f;
+	a = b = c = d = e = f = 0.0f;
+	for (int i = 0; i < count; i++)
+	{
+		a += powf(points[i].getX() - m.getX(), 2);
+		b += powf(points[i].getY() - m.getY(), 2);
+		c += powf(points[i].getZ() - m.getZ(), 2);
+
+		d += (points[i].getX() - m.getX()) * (points[i].getY() - m.getY());
+		e += (points[i].getX() - m.getX()) * (points[i].getZ() - m.getZ());
+		f += (points[i].getY() - m.getY()) * (points[i].getZ() - m.getZ());
+	}
+
+	a /= count; b /= count; c /= count; d /= count; e /= count; f /= count;
+
+	float da = -1;
+	float db = (a + b + c);
+	float dc = f * f + d * d + e * e -(a * b + a * c + b * c);
+	float dd = a * b * c + 2 * d * e * f - (a * f * f + b * e * e + c * d * d);
+
+	CubicPolynomial cubicPoly(da, db, dc, dd);
+	std::vector<Complex> result = cubicPoly.getEquationSolution();
+	if (result.size() != 3)
+	{
+		return ccs;
+	}
+
+	for (int i = 0; i < 3; i++)
+	{
+		if (result[i].getImz() != 0)
+		{
+			return ccs;
+		}
+	}
+
+	float l1 = result[0].getRez();
+	float l2 = result[1].getRez();
+	float l3 = result[2].getRez();
+
+	math::Determinant3 m1(math::Array2D<float, 3, 3>(
+		a - l1,	d,		e,
+		d,		b-l1,	f,
+		e,		f,		c-l1));
+
+	math::Determinant3 m2(math::Array2D<float, 3, 3>(
+		a - l2,	d,		e,
+		d,		b - l2, f,
+		e,		f,		c - l2));
+
+	math::Determinant3 m3(math::Array2D<float, 3, 3>(
+		a - l3,	d,		e,
+		d,		b - l3, f,
+		e,		f,		c - l3));
+
+	Array<float, 3> v(0, 0, 0);
+	Vector3 o1 = m1.getSolution(v);
+	Vector3 o2 = m2.getSolution(v);
+	Vector3 o3 = m3.getSolution(v);
+
+	o1.normalize(); o2.normalize(); o3.normalize();
+
+	Array<float, 4> v1(o1);
+	Array<float, 4> v2(o2);
+	Array<float, 4> v3(o3);
+
+	ccs.setColumn(0, v1);
+	ccs.setColumn(1, v2);
+	ccs.setColumn(2, v3);
+
+	return ccs;
 }

@@ -78,7 +78,7 @@ namespace math
 
 			for (int i = 0; i < getOrder(); i++)
 			{
-				det[row * getOrder() + i] = k;
+				det[row * getOrder() + i] *= k;
 			}
 
 			return det;
@@ -146,6 +146,26 @@ namespace math
 
 			return det;
 		}
+		/**
+		*	行列式的解 
+		*	value 行列式的值
+		*/
+		Array<float, Order> getSolution(const Array<float, Order>& value) const
+		{
+			Array<float, Order> root;
+			float detMag = getDetMagnitude(*this);
+			if (detMag == 0) return root;
+
+			for (int i = 0; i < Order; i++)
+			{
+				Determinant<Order> det(*this);
+				det.setColumn(i, value);
+				root.setValue(i, getDetMagnitude(det) / detMag);
+			}
+
+			return root;
+		}
+
 	public:
 		/**
 		*	获取逆序数

@@ -64,7 +64,7 @@ float Plane::getParamC() const
 	return _paramC;
 }
 
-const Vector3& Plane::normal() const
+const Vector3& Plane::getNormal() const
 {
 	return _normal;
 }
@@ -80,4 +80,66 @@ float Plane::getDistanceWithPoint(const Vector3& point)
 	float b = sqrt(pow(_paramA, 2) + pow(_paramB, 2) + pow(_paramC, 2));
 
 	return a / b;
+}
+
+bool math::Plane::getIntersectPointWithLine(const Line3d& line, Vector3& point)
+{
+	float delta = Vector3::dot(_normal, line.getDirection());
+	if (delta == 0)
+	{// 与平面平行
+		return false;
+	}
+
+	float t = -(Vector3::dot(_normal, line.getPoint()) + _paramD) / delta;
+	if (t == 0)
+	{// 在平面上
+		return false;
+	}
+	point = line.getPoint() + t * line.getDirection();
+
+	return true;
+}
+
+bool math::Plane::getIntersectLineWithPlane(const Plane& plane, Line3d& line)
+{
+	Vector3 direction = Vector3::cross(this->getNormal(), plane.getNormal());
+
+	Matrix3x3 mat;
+	mat.setRow(0, math::Vector3(getParamA(), getParamB(), getParamC()));
+	mat.setRow(1, math::Vector3(plane.getParamA(), plane.getParamB(), plane.getParamC()));
+	mat.setRow(2, direction);
+
+	float det = mat.getDetValue();
+	if (det == 0)
+	{
+		return false;
+	}
+
+	Matrix3x3 inverse = mat.getInverse();
+
+	Vector3 point = inverse * Vector3(-getParamD(), -plane.getParamD(), 0);
+
+	line = Line3d(point, direction);
+
+	return true;
+}
+
+bool math::Plane::getIntersectPointWithTwoPlanes(const Plane& plane1, const Plane& plane2, Vector3& point)
+{
+	Matrix3x3 mat;
+	mat.setRow(0, math::Vector3(getParamA(), getParamB(), getParamC()));
+	mat.setRow(1, math::Vector3(plane1.getParamA(), plane1.getParamB(), plane1.getParamC()));
+	mat.setRow(2, math::Vector3(plane2.getParamA(), plane2.getParamB(), plane2.getParamC()));
+
+	float det = mat.getDetValue();
+	if (det == 0)
+	{
+		return false;
+	}
+
+	Matrix3x3 inverse = mat.getInverse();
+
+	point = inverse * Vector3(-getParamD(), -plane1.getParamD(), -plane2.getParamD());
+
+	return false;
 }

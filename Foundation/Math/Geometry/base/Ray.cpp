@@ -3,7 +3,7 @@
 using namespace math;
 
 math::Ray::Ray(const Vector3& srcPoint, const Vector3& direction)
-:_srcPoint(srcPoint)
+:_point(srcPoint)
 ,_direction(direction)
 {
 }
@@ -12,14 +12,14 @@ math::Ray::~Ray()
 {
 }
 
-void math::Ray::setSrcPoint(const Vector3& srcPoint)
+void math::Ray::setPoint(const Vector3& srcPoint)
 {
-	_srcPoint = srcPoint;
+	_point = srcPoint;
 }
 
-const Vector3& math::Ray::getSrcPoint() const
+const Vector3& math::Ray::getPoint() const
 {
-	return _srcPoint;
+	return _point;
 }
 
 void math::Ray::setDirection(const Vector3& direction)

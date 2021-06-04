@@ -31,7 +31,7 @@ namespace math
 			float len = 0;
 			for (int i = 0; i < Length; i++)
 			{
-				len += pow(base::getValue(i), 2);
+				len += powf(base::getValue(i), 2);
 			}
 
 			return sqrt(len);
@@ -45,7 +45,7 @@ namespace math
 			float len = 0;
 			for (int i = 0; i < Length; i++)
 			{
-				len += pow(base::getValue(i), 2);
+				len += powf(base::getValue(i), 2);
 			}
 
 			return len;

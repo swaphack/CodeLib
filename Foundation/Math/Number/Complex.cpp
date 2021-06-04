@@ -130,3 +130,46 @@ void Complex::reset()
 	setImz(0);
 }
 
+math::Complex::operator Matrix2x2()
+{
+	Matrix2x2 mat(getRez(), -getImz(), getImz(), getRez());
+
+	return mat;
+}
+
+Complex math::Complex::toComplex(float value)
+{
+	return Complex(value, 0);
+}
+
+Complex math::Complex::sqrtToComplex(float value)
+{
+	if (value < 0)
+	{
+		return Complex(0, sqrtf(-value));
+	}
+	else
+	{
+		return Complex(sqrtf(value), 0);
+	}
+}
+
+std::vector<Complex> math::Complex::squareRootOf(const Complex& value, int count)
+{
+	float theta = atan2(value.getImz(), value.getRez());
+	float mag = value.getMagnitude();
+	float r = powf(mag, 1.0f / count);
+
+	std::vector<Complex> result;
+
+	for (int i = 0; i < count; i++)
+	{
+		float radian = (theta + 2.0f * i * M_PI) / count;
+		Complex c(r * cosf(radian), r * sinf(radian));
+		result.push_back(c);
+
+	}
+
+	return result;
+}
+

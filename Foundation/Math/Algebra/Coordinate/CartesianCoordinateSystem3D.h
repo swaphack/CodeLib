@@ -2,7 +2,7 @@
 
 #include "CartesianCoordinateSystem.h"
 #include "Algebra/Vector/Vector3.h"
-
+#include <vector>
 namespace math
 {
 	/**
@@ -58,5 +58,10 @@ namespace math
 		*	轴测变换
 		*/
 		static CartesianCoordinateSystem3D createAxonometric(Axonometric eType);
+	public:
+		/**
+		*	创建3d坐标系，使用统计学的主量分析
+		*/
+		static CartesianCoordinateSystem3D createWithPoints(const std::vector<Vector3>& points);
 	};
 }

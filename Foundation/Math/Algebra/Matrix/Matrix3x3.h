@@ -50,6 +50,7 @@ namespace math
 		Matrix3x3& operator=(const Matrix3x3& mat);
 
 		Matrix3x3 operator*(const Matrix3x3& mat);
+		Vector3 operator*(const Vector3& v);
 
 		operator SquareMatrix3();
 	};

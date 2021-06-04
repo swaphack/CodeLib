@@ -490,7 +490,7 @@ Matrix4x4 math::Matrix4x4::getInverse()
     if (det == 0)
         return Matrix4x4();
 
-    det = 1.0 / det;
+    det = 1.0f / det;
 
     for (i = 0; i < 16; i++)
         invOut[i] = inv[i] * det;
@@ -558,7 +558,7 @@ math::Matrix4x4 math::Matrix4x4::perspective(float fovyInDegrees, float aspectRa
 {
 	float ymax, xmax;
 	//float temp, temp2, temp3, temp4;
-	ymax = znear * tanf(fovyInDegrees * M_PI / 360.0);
+	ymax = znear * tanf(fovyInDegrees * M_PI / 360.0f);
 	// ymin = -ymax;
 	// xmin = -ymax * aspectRatio;
 	xmax = ymax * aspectRatio;

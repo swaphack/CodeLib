@@ -38,16 +38,23 @@ namespace math
 		/**
 		*	行系数
 		*/
-		ArrayF<Count + 1> getRow(int nRow)
+		Array<float, Count + 1> getRow(int nRow)
 		{
 			return _systemMatrix.getRow(nRow);
 		}
 		/**
 		*	列系数
 		*/
-		ArrayF<Count + 1> getColumn(int nRow)
+		Array<float, Count + 1> getColumn(int nColumn)
 		{
-			return _systemMatrix.getColumn(nRow);
+			return _systemMatrix.getColumn(nColumn);
+		}
+		/**
+		*	设置列系数
+		*/
+		void setColumn(int nColumn, const Array<float, Count + 1>& value)
+		{
+			return _systemMatrix.setColumn(nColumn, value);
 		}
 		/**
 		*	坐标系矩阵

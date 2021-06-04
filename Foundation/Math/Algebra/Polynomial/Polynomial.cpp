@@ -16,7 +16,7 @@ PolynomialTerm::PolynomialTerm(const PolynomialTerm& term)
 }
 
 
-PolynomialTerm::PolynomialTerm(float coefficient, const std::map<int, float>& exponentials)
+PolynomialTerm::PolynomialTerm(float coefficient, const std::map<int, int>& exponentials)
 {
 	this->setCoefficient(coefficient);
 	this->setExponentials(exponentials);
@@ -72,7 +72,7 @@ bool PolynomialTerm::operator==(const PolynomialTerm& value)
 PolynomialTerm PolynomialTerm::operator*(const PolynomialTerm& value)
 {
 	float k = getCoefficient() * value.getCoefficient();
-	std::map<int, float> mapTerm = value.getExponentials();
+	std::map<int, int> mapTerm = value.getExponentials();
 	for (auto item : _mapExponentials)
 	{
 		if (mapTerm.find(item.first) == mapTerm.end())
@@ -136,7 +136,7 @@ uint32_t getSDBMHash(const char *str)
 int PolynomialTerm::generateID()
 {
 	std::vector<int> vecID;
-	std::map<int, float> exponentials = getExponentials();
+	std::map<int, int> exponentials = getExponentials();
 	for (auto item : exponentials)
 	{	
 		vecID.push_back(item.first);
@@ -158,6 +158,11 @@ int PolynomialTerm::generateID()
 	return getSDBMHash(value.c_str());
 }
 
+void math::PolynomialTerm::setID(int id)
+{
+	_id = id;
+}
+
 int PolynomialTerm::getID() const
 {
 	return _id;
@@ -173,12 +178,12 @@ void PolynomialTerm::setCoefficient(float value)
 	_coefficient = value;
 }
 
-const std::map<int, float>& PolynomialTerm::getExponentials() const
+const std::map<int, int>& PolynomialTerm::getExponentials() const
 {
 	return _mapExponentials;
 }
 
-void PolynomialTerm::setExponentials(const std::map<int, float>& value)
+void PolynomialTerm::setExponentials(const std::map<int, int>& value)
 {
 	_mapExponentials = value;
 	_id = this->generateID();
@@ -249,6 +254,11 @@ const std::map<int, PolynomialTerm>& Polynomial::getTerms() const
 	return _mapTerm;
 }
 
+void math::Polynomial::removeAllTerms()
+{
+	_mapTerm.clear();
+}
+
 PolynomialTerm Polynomial::getTerm(int id)
 {
 	if (_mapTerm.find(id) == _mapTerm.end())
@@ -256,6 +266,11 @@ PolynomialTerm Polynomial::getTerm(int id)
 		return PolynomialTerm();
 	}
 	return _mapTerm[id];
+}
+
+void math::Polynomial::addTerm(const PolynomialTerm& term)
+{
+	_mapTerm[term.getID()] = term;
 }
 
 Polynomial Polynomial::operator+(const Polynomial& value)

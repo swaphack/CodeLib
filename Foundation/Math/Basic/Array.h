@@ -44,6 +44,16 @@ namespace math
 		{
 			*this = vec;
 		}
+		Array(const Array<T, Length - 1>& vec)
+		{
+			if (Length - 1 == 0)
+				return;
+			for (int i = 0; i < Length - 1; i++)
+			{
+				_values[i] = vec[i];
+			}
+			_values[Length - 1] = 0;
+		}
 		virtual ~Array()
 		{
 		}
@@ -177,7 +187,4 @@ namespace math
 		*/
 		T _values[Length];
 	};
-
-	template<const int Order>
-	class ArrayF : public Array<float, Order> {};
 }

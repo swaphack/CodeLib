@@ -45,7 +45,7 @@ bool alg::TriangleIndex::isAllEdgeLinkToOtherTriangle()
 
 bool alg::TriangleIndex::hasSameEdge(const TriangleIndex& target, std::vector<LineIndex>& outEdges)
 {
-
+	return false;
 }
 
 void alg::TriangleIndex::sort(const TriangleIndex& target, TriangleIndex& outData)

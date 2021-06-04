@@ -30,13 +30,19 @@ Vector3::Vector3(const Vector3& vector)
 	this->setX(vector.getX());
 	this->setY(vector.getY());
 	this->setZ(vector.getZ());
-
 }
 
 Vector3::Vector3(const Vector& vector)
 {
 	assert(vector.getLength() == getLength());
 
+	this->setX(vector[0]);
+	this->setY(vector[1]);
+	this->setZ(vector[2]);
+}
+
+Vector3::Vector3(const Array<float, 3>& vector)
+{
 	this->setX(vector[0]);
 	this->setY(vector[1]);
 	this->setZ(vector[2]);
@@ -194,12 +200,19 @@ Vector3 Vector3::cross(const Vector3& vector0, const Vector3& vector1)
 	return Vector3(x,y,z);
 }
 
+float math::Vector3::getRadian(const Vector3& vector0, const Vector3& vector1)
+{
+	float radian = acosf(cosValue(vector0, vector1));
+
+	return radian;
+}
+
 float Vector3::distance(const Vector3& point0, const Vector3& point1)
 {
 	return (point1 - point0).getMagnitude();
 }
 
-float Vector3::cosAngle(const Vector3& vector0, const Vector3& vector1)
+float Vector3::cosValue(const Vector3& vector0, const Vector3& vector1)
 {
 	float a = vector0.getMagnitude();
 	float b = vector1.getMagnitude();
@@ -264,7 +277,7 @@ Vector3 Vector3::rotationByLine(const Vector3& src, const Vector3& dest, float r
 	return Vector3(ret[0] / w, ret[1] / w, ret[2] / w);
 }
 
-float Vector3::sinAngle(const Vector3& vector0, const Vector3& vector1)
+float Vector3::sinValue(const Vector3& vector0, const Vector3& vector1)
 {
 	float a = vector0.getMagnitude();
 	float b = vector1.getMagnitude();

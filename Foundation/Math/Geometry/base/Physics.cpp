@@ -29,7 +29,7 @@ bool math::Physics::raycast(const Ray& ray, const std::vector<math::Vector3>& pl
 	}
 
 	Plane plane(planePoints[0], planePoints[1], planePoints[2]);
-	math::Vector3 normal = plane.normal();
+	math::Vector3 normal = plane.getNormal();
 
 	float dmin = INT_MIN;
 	float dmax = INT_MAX;
@@ -75,7 +75,7 @@ int math::Physics::getRayPosition(const Ray& ray, const Plane& plane, float& a, 
 	b = 0;
 	c = 0;
 
-	const Vector3& srcPoint = ray.getSrcPoint();
+	const Vector3& srcPoint = ray.getPoint();
 	const Vector3& direction = ray.getDirection();
 
 	a = -(plane.getParamA() * srcPoint.getX() + plane.getParamB() * srcPoint.getY() + plane.getParamC() * srcPoint.getZ() + plane.getParamD());

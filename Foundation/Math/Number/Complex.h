@@ -2,7 +2,8 @@
 
 #include "Number.h"
 #include "Basic/base.h"
-
+#include "Algebra/Matrix/Matrix2x2.h"
+#include <vector>
 namespace math
 {
 	/**
@@ -54,5 +55,28 @@ namespace math
 		*	重置
 		*/
 		void reset();
+	public:
+		/**
+		*	矩阵
+		*/
+		operator Matrix2x2();
+	public:
+		/**
+		*	转为复数
+		*/
+		static Complex toComplex(float value);
+		/**
+		*	平方根转为复数
+		*/
+		static Complex sqrtToComplex(float value);
+		/**
+		*	复数开根号
+		*/
+		static std::vector<Complex> squareRootOf(const Complex& value, int count);
 	};
+
+	static inline Complex operator*(float k, const Complex& value)
+	{
+		return value * k;
+	}
 }

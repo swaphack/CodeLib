@@ -29,20 +29,20 @@ namespace math
 		/**
 		*	复制元素
 		*/
-		virtual Vector2& operator=(const Vector2& vec);
+		Vector2& operator=(const Vector2& vec);
 		/**
 		*	复制元素
 		*/
-		virtual Vector2& operator=(const Vector3& vec);
+		Vector2& operator=(const Vector3& vec);
 	public:
 		/**
 		*	相加
 		*/
-		virtual Vector2 operator+(const Vector2& vec) const;
+		Vector2 operator+(const Vector2& vec) const;
 		/**
 		*	相减
 		*/
-		virtual Vector2 operator-(const Vector2& vec) const;
+		Vector2 operator-(const Vector2& vec) const;
 		/**
 		*	相乘
 		*/
@@ -54,11 +54,11 @@ namespace math
 		/**
 		*	相加
 		*/
-		virtual Vector2& operator+=(const Vector2& vec);
+		Vector2& operator+=(const Vector2& vec);
 		/**
 		*	相减
 		*/
-		virtual Vector2& operator-=(const Vector2& vec);
+		Vector2& operator-=(const Vector2& vec);
 		/**
 		*	相乘
 		*/

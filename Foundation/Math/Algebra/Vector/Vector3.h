@@ -17,6 +17,7 @@ namespace math
 		Vector3(const Vector& vector);
 		Vector3(const Vector2& vector);
 		Vector3(const Vector3& vector);
+		Vector3(const Array<float, 3>& vector);
 		virtual ~Vector3();
 	public:
 		CREATE_INDEX_VALUE(X, 0, float);
@@ -83,19 +84,19 @@ namespace math
 		/**
 		*	相加
 		*/
-		virtual Vector3& operator+=(const Vector3& vec);
+		Vector3& operator+=(const Vector3& vec);
 		/**
 		*	相减
 		*/
-		virtual Vector3& operator-=(const Vector3& vec);
+		Vector3& operator-=(const Vector3& vec);
 		/**
 		*	相乘
 		*/
-		virtual Vector3& operator*=(const Vector3& vec);
+		Vector3& operator*=(const Vector3& vec);
 		/**
 		*	相除
 		*/
-		virtual Vector3& operator/=(const Vector3& vec);
+		Vector3& operator/=(const Vector3& vec);
 		/**
 		*	相乘
 		*/
@@ -126,13 +127,17 @@ namespace math
 		*/
 		static Vector3 cross(const Vector3& vector0, const Vector3& vector1);
 		/**
+		*	vector1和vector0的夹角的弧度
+		*/
+		static float getRadian(const Vector3& vector0, const Vector3& vector1);
+		/**
 		*	vector1和vector0的夹角余弦值
 		*/
-		static float cosAngle(const Vector3& vector0, const Vector3& vector1);
+		static float cosValue(const Vector3& vector0, const Vector3& vector1);
 		/**
 		*	vector1和vector0的夹角正弦值(0,PI)
 		*/
-		static float sinAngle(const Vector3& vector0, const Vector3& vector1);
+		static float sinValue(const Vector3& vector0, const Vector3& vector1);
 		/**
 		*	两点间的距离
 		*/

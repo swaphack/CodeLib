@@ -190,9 +190,9 @@ void TestLightingNode::testShadow()
 	pShadowNode->setAnchorPoint(0.5, 0.5f);
 
 	Utility::loadShaderVF(pShadowNode, "Shader/texture/texture.vs", "Shader/texture/texture.fs");
-	pShadowNode->setCastShaderProgram(G_SHANDER->createVertexFragmentProgram("Shader/light/simple_record_shadow.vs", "Shader/light/simple_record_shadow.fs"));
-	pShadowNode->setRenderShaderProgram(G_SHANDER->createVertexFragmentProgram("Shader/material/material_single_light.vs", "Shader/material/material_single_light.fs"));
-	pShadowNode->setReceiveLightShaderProgram(G_SHANDER->createVertexFragmentProgram("Shader/light/material_dirlight_shadow.vs", "Shader/light/material_dirlight_shadow.fs"));
+	//pShadowNode->setCastShaderProgram(G_SHANDER->createVertexFragmentProgram("Shader/light/simple_record_shadow.vs", "Shader/light/simple_record_shadow.fs"));
+	//pShadowNode->setRenderShaderProgram(G_SHANDER->createVertexFragmentProgram("Shader/material/material_single_light.vs", "Shader/material/material_single_light.fs"));
+	//pShadowNode->setReceiveLightShaderProgram(G_SHANDER->createVertexFragmentProgram("Shader/light/material_dirlight_shadow.vs", "Shader/light/material_dirlight_shadow.fs"));
 
 	for (int i = 0 ; i < 6; i ++)
 	{

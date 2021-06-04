@@ -48,6 +48,10 @@ namespace math
 		*	是否相交
 		*/
 		bool isIntersect(const Line3d& line);
+		/**
+		*	求两直线的交点
+		*/
+		bool getIntersectPoint(const Line3d& line, Vector3& point);
 	private:
 		/**
 		* 点

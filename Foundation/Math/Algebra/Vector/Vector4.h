@@ -33,29 +33,29 @@ namespace math
 		/**
 		*	复制元素
 		*/
-		virtual Vector4& operator=(const Vector4& vec);
+		Vector4& operator=(const Vector4& vec);
 		/**
 		*	复制元素
 		*/
-		virtual Vector4& operator=(const Vector3& vec);
+		Vector4& operator=(const Vector3& vec);
 	public:
 		/**
 		*	相加
 		*/
-		virtual Vector4 operator+(const Vector4& vec) const;
+		Vector4 operator+(const Vector4& vec) const;
 		/**
 		*	相减
 		*/
-		virtual Vector4 operator-(const Vector4& vec) const;
+		Vector4 operator-(const Vector4& vec) const;
 		/**
 		*	相乘
 		*/
-		virtual Vector4 operator*(const Vector4& vec) const;
+		Vector4 operator*(const Vector4& vec) const;
 
 		/**
 		*	相乘
 		*/
-		virtual Vector4 operator*(float k) const;
+		Vector4 operator*(float k) const;
 	};
 
 	static inline Vector4 operator*(float k, const Vector4& value)

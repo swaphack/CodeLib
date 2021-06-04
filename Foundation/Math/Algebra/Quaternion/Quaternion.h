@@ -71,6 +71,10 @@ namespace math
 		*/
 		float getMagnitude() const;
 		/**
+		*	模的平方
+		*/
+		float getMagnitudeSqr() const;
+		/**
 		*	单位化
 		*/
 		void normalize();
@@ -78,11 +82,27 @@ namespace math
 		*	获取角度
 		*/
 		math::Vector3 eulerAngle() const;
+		/**
+		*	获取虚部值
+		*/
+		math::Vector3 vector() const;
+		/**
+		*	虚部与实部的夹角
+		*/
+		float radian() const;
 	public:
 		/**
-		*	相等
+		*	相乘
 		*/
-		virtual Quaternion operator*(const Quaternion& quaternion);
+		Quaternion operator*(const Quaternion& quaternion) const;
+		/**
+		*	差值
+		*/
+		Quaternion operator-(const Quaternion& quaternion) const;
+		/**
+		*	差值
+		*/
+		Quaternion operator*(float k) const;
 		/**
 		*	转换为矩阵
 		*/
@@ -120,5 +140,14 @@ namespace math
 		*	标准化
 		*/
 		static Quaternion normalize(const Quaternion& quaternion);
+		/**
+		*	点积
+		*/
+		static float dot(const Quaternion& src, const Quaternion& dest);
 	};
+
+	static inline Quaternion operator*(float k, const Quaternion& src)
+	{
+		return src * k;
+	}
 }

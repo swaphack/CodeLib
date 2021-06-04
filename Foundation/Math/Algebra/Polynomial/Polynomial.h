@@ -6,13 +6,27 @@
 namespace math
 {
 	/**
+	*	未知数类型
+	*/
+	class PolynomialTermUnknowID
+	{
+	public:
+		static const int UnknowA = 1;
+		static const int UnknowB = 2;
+		static const int UnknowC = 3;
+
+		static const int UnknowX = 24;
+		static const int UnknowY = 25;
+		static const int UnknowZ = 26;
+	};
+	/**
 	*	多项式的项
 	*/
 	struct PolynomialTerm
 	{
 	public:
 		PolynomialTerm();
-		PolynomialTerm(float coefficient, const std::map<int, float>& exponentials);
+		PolynomialTerm(float coefficient, const std::map<int, int>& exponentials);
 		PolynomialTerm(const PolynomialTerm& term);
 		~PolynomialTerm();
 	public:
@@ -47,16 +61,20 @@ namespace math
 		/**
 		*	项的元
 		*/
-		const std::map<int, float>& getExponentials() const;
+		const std::map<int, int>& getExponentials() const;
 		/**
 		*	项的元
 		*/
-		void setExponentials(const std::map<int, float>& value);
+		void setExponentials(const std::map<int, int>& value);
 	protected:
 		/**
 		*	生成项的id
 		*/
 		int generateID();
+		/**
+		*	设置的id
+		*/
+		void setID(int id);
 	protected:
 		/**
 		*	编号
@@ -69,7 +87,7 @@ namespace math
 		/**
 		*	项的元
 		*/
-		std::map<int, float> _mapExponentials;
+		std::map<int, int> _mapExponentials;
 	};
 
 	// 多项式
@@ -96,7 +114,7 @@ namespace math
 		/**
 		*	添加项
 		*/
-		int addTerm(const PolynomialTerm& term);
+		void addTerm(const PolynomialTerm& term);
 		/**
 		*	移除项
 		*/
@@ -113,6 +131,10 @@ namespace math
 		*	获取所有项
 		*/
 		const std::map<int, PolynomialTerm>& getTerms() const;
+		/**
+		*	移除所有项
+		*/
+		void removeAllTerms();
 	public:
 		/**
 		*	相加

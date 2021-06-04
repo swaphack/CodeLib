@@ -25,7 +25,7 @@ namespace alg
 		*/
 		bool reduceMesh(const std::vector<math::Triangle>& inData, std::vector<math::Triangle>& outData);
 		/**
-		*	减面
+		*	减面 未完成
 		*/
 		bool reduceMesh(const TriangleMesh& inData, TriangleMesh& outData);
 	protected:
@@ -37,11 +37,11 @@ namespace alg
 		/**
 		*	三角形的三个边与其他三角形共边的情况
 		*/
-		std::map<int, TriangleEdge> _triangleEdgeInfos;
+		//std::map<int, TriangleEdge> _triangleEdgeInfos;
 
 		/**
 		*	每个顶点关联的三角形
 		*/
-		std::map<math::Vector3, std::set<int>> _triangleEdgeInfos;
+		std::map<math::Vector3, std::set<int>> _triangleVertexInfos;
 	};
 }

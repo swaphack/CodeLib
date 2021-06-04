@@ -2,6 +2,19 @@
 #include "Light.h"
 #include "Common/Shader/ShaderProgram.h"
 
+
+
+
+render::ShadowShader::ShadowShader()
+{}
+
+render::ShadowShader::~ShadowShader()
+{
+	SAFE_RELEASE(castShaderProgram);
+	SAFE_RELEASE(renderShaderProgram);
+	SAFE_RELEASE(receiveLightShaderProgram);
+}
+
 render::Environment::Environment()
 {
 
@@ -123,7 +136,7 @@ void render::Environment::setCastShaderProgram(ShaderProgram* program)
 
 void render::Environment::setRenderShaderProgram(ShaderProgram* program)
 {
-	SAFE_RELEASE(_renderShaderProgram);
+	SAFE_RELEASE(_shadowShader.renderShaderProgram);
 	SAFE_RETAIN(program);
 	_shadowShader.renderShaderProgram = program;
 }
@@ -134,4 +147,3 @@ void render::Environment::setReceiveLightShaderProgram(ShaderProgram* program)
 	SAFE_RETAIN(program);
 	_shadowShader.receiveLightShaderProgram = program;
 }
-

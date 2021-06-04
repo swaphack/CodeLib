@@ -7,6 +7,7 @@ namespace render
 {
 	class ShaderProgram;
 	class Light;
+	class Node;
 
 	// 阴影着色器
 	struct ShadowShader
@@ -15,15 +16,12 @@ namespace render
 		ShaderProgram* castShaderProgram = nullptr;
 		// 绘制着色器
 		ShaderProgram* renderShaderProgram = nullptr;
+		// 接受光源着色器
+		ShaderProgram* receiveLightShaderProgram = nullptr;
 
-		ShadowShader() 
-		{}
+		ShadowShader();
 
-		~ShadowShader()
-		{
-			SAFE_RELEASE(castShaderProgram);
-			SAFE_RELEASE(renderShaderProgram);
-		}
+		~ShadowShader();
 	};
 
 	class Environment : public sys::Object

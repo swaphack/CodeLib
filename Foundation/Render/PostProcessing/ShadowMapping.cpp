@@ -55,7 +55,7 @@ void render::ShadowMapping::beginRenderShadow()
 			if (pDrawNode->isRecieveShadow())
 			{
 				pDrawNode->setShadowTexture(_texture);
-				pDrawNode->setShaderProgram(_receiveLightShaderProgram);
+				//pDrawNode->setShaderProgram(_receiveLightShaderProgram);
 			}
 
 			auto it = _setHideNode.find(pDrawNode);

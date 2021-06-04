@@ -67,6 +67,15 @@ Matrix3x3 math::Matrix3x3::operator*(const Matrix3x3& mat)
 	return Matrix3x3(value);
 }
 
+Vector3 math::Matrix3x3::operator*(const Vector3& v)
+{
+	float x = getValue(0) * v.getValue(0) + getValue(1) * v.getValue(1) + getValue(2) * v.getValue(2);
+	float y = getValue(3) * v.getValue(0) + getValue(4) * v.getValue(1) + getValue(5) * v.getValue(2);
+	float z = getValue(6) * v.getValue(0) + getValue(7) * v.getValue(1) + getValue(8) * v.getValue(2);
+
+	return Vector3(x, y, z);
+}
+
 math::Matrix3x3::Matrix3x3(const float* value)
 {
 	this->assign(value);

@@ -16,13 +16,12 @@ namespace math
 		{
 		public:
 			UnaryPolynomialTerm() {}
-			UnaryPolynomialTerm(float coefficient, float exponential)
+			UnaryPolynomialTerm(float coefficient, int exponential)
 			{
 				this->setCoefficient(coefficient);
-				std::map<int, float> exponentials;
-				exponentials.insert(std::make_pair(1, exponential));
+				std::map<int, int> exponentials;
+				exponentials.insert(std::make_pair(PolynomialTermUnknowID::UnknowX, exponential));
 				this->setExponentials(exponentials);
-
 			}
 			UnaryPolynomialTerm(const UnaryPolynomialTerm& value)
 			{
@@ -37,18 +36,31 @@ namespace math
 					return 0;
 				}
 
-				return _mapExponentials.begin()->first;
+				return _mapExponentials.begin()->second;
 			}
 		};
 	public:
 		UnaryPolynomial();
-		UnaryPolynomial(const std::map<float, float>& mapTerm);
+		UnaryPolynomial(const std::map<float, int>& mapTerm);
 		UnaryPolynomial(const UnaryPolynomial& value);
+		/**
+		*	最高次数
+		*/
+		UnaryPolynomial(int order);
 		virtual~UnaryPolynomial();
 	public:
 		/**
 		*	次数
 		*/
 		int getOrder();
+	public:
+		/**
+		*	设置项
+		*/
+		void setTerm(float coefficient, int exponential);
+		/**
+		*	获取指定幂指数的系数
+		*/
+		float getCoefficient(int exponential);
 	};
 }

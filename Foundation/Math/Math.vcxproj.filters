@@ -76,6 +76,15 @@
     <Filter Include="Geometry\shape">
       <UniqueIdentifier>{5291586d-4512-4168-8177-31c9a9df863f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ProbabilityAndStatistics">
+      <UniqueIdentifier>{e4c697fd-e2c2-4509-a348-4197b352d8ba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ProbabilityAndStatistics\Probability">
+      <UniqueIdentifier>{7d2f213d-7cf5-48cb-b147-b8acc077d001}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ProbabilityAndStatistics\Statistics">
+      <UniqueIdentifier>{f708168e-0b37-4023-b952-a62924f7fd05}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Geometry\2d\Rect.h">
@@ -493,6 +502,27 @@
     <ClInclude Include="Basic\Compare.h">
       <Filter>Basic</Filter>
     </ClInclude>
+    <ClInclude Include="Algebra\Polynomial\QuadraticPolynomial.h">
+      <Filter>Algebra\Polynomial</Filter>
+    </ClInclude>
+    <ClInclude Include="Algebra\Polynomial\CubicPolynomial.h">
+      <Filter>Algebra\Polynomial</Filter>
+    </ClInclude>
+    <ClInclude Include="ProbabilityAndStatistics\import.h">
+      <Filter>ProbabilityAndStatistics</Filter>
+    </ClInclude>
+    <ClInclude Include="ProbabilityAndStatistics\Statistics\import.h">
+      <Filter>ProbabilityAndStatistics\Statistics</Filter>
+    </ClInclude>
+    <ClInclude Include="ProbabilityAndStatistics\Probability\import.h">
+      <Filter>ProbabilityAndStatistics\Probability</Filter>
+    </ClInclude>
+    <ClInclude Include="ProbabilityAndStatistics\Probability\Probability.h">
+      <Filter>ProbabilityAndStatistics\Probability</Filter>
+    </ClInclude>
+    <ClInclude Include="ProbabilityAndStatistics\Probability\ProbabilityDensity.h">
+      <Filter>ProbabilityAndStatistics\Probability</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
@@ -738,6 +768,12 @@
     </ClCompile>
     <ClCompile Include="Geometry\shape\Line.cpp">
       <Filter>Geometry\shape</Filter>
+    </ClCompile>
+    <ClCompile Include="Algebra\Polynomial\QuadraticPolynomial.cpp">
+      <Filter>Algebra\Polynomial</Filter>
+    </ClCompile>
+    <ClCompile Include="Algebra\Polynomial\CubicPolynomial.cpp">
+      <Filter>Algebra\Polynomial</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
