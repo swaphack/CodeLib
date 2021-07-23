@@ -9,6 +9,7 @@
 
 namespace math
 {
+	class CompoundProposition;
 	/**
 	*	µÈ¼ÛÀý×Ó
 	*/

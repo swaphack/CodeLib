@@ -1,2 +1,0 @@
-H:\Github\CodeLib\Debug\Physics.pdb
-H:\Github\CodeLib\Foundation\Physics\Debug\Physics.pdb

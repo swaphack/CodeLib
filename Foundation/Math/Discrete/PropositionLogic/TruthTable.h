@@ -13,9 +13,6 @@ namespace math
 	class TruthTable
 	{
 	public:
-		TruthTable();
-		~TruthTable();
-	public:
 		/**
 		*	用一组数据测试结果
 		*/

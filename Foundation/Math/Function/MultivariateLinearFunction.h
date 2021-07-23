@@ -10,7 +10,7 @@ namespace math
 	class MultivariateLinearFunction : public Function
 	{
 	public:
-		Function()
+		MultivariateLinearFunction()
 		{
 			memset(_values, 0, Length * sizeof(T));
 		}

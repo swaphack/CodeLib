@@ -6,13 +6,13 @@
 namespace alg
 {
 	/**
-	*	三角形网格
+	*	网格
 	*/
-	struct TriangleMesh
+	struct Mesh
 	{
 	public:
-		TriangleMesh();
-		virtual ~TriangleMesh();
+		Mesh();
+		virtual ~Mesh();
 	public:
 		/**
 		*	由三角形坐标初始化
@@ -36,7 +36,7 @@ namespace alg
 		bool toTriangles(std::vector<math::Triangle>& data);
 	protected:
 		/**
-		*	转化为顶点 
+		*	三角形转化为顶点 
 		*/
 		bool convertToVertices(const std::vector<math::Triangle>& data, std::vector<math::Vector3>& vertices, std::vector<int>& indices);
 	private:

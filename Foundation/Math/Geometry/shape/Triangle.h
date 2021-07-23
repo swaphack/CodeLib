@@ -2,7 +2,7 @@
 
 #include "Algebra/import.h"
 #include "Geometry/base/Points.h"
-#include "Line.h"
+#include "Geometry/3d/LineSegment3d.h"
 
 namespace math
 {
@@ -24,6 +24,28 @@ namespace math
 		/*
 		*	是否有共边
 		*/
-		bool hasSameEdge(const Triangle& target, Line& side);
+		bool hasSameEdge(const Triangle& target, LineSegment3d& side);
+
+		/*
+		*	重心 中线交点
+		*/
+		Vector3 getCentreOfGravity() const;
+		/*
+		*	内心
+		*/
+		Vector3 getInCenter() const;
+		/*
+		*	外心
+		*/
+		Vector3 getCircumcenter() const;
+		/*
+		*	外心
+		*/
+		Vector3 getCircumcenter2d() const;
+	public:
+		/**
+		*	获取法线
+		*/
+		Vector3 getNormal();
 	};
 }

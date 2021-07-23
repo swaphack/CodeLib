@@ -56,6 +56,8 @@ namespace math
 		*	ПаіЛ
 		*/
 		Vector4 operator*(float k) const;
+	public:
+		operator Vector3();
 	};
 
 	static inline Vector4 operator*(float k, const Vector4& value)

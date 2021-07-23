@@ -127,7 +127,9 @@
     <ClInclude Include="Basic\Boundary.h" />
     <ClInclude Include="Basic\Tool.h" />
     <ClInclude Include="Basic\VariableLengthArray.h" />
+    <ClInclude Include="Discrete\import.h" />
     <ClInclude Include="Discrete\ManyValuedLogic\FuzzyProposition.h" />
+    <ClInclude Include="Discrete\ManyValuedLogic\import.h" />
     <ClInclude Include="Discrete\ManyValuedLogic\ManyValuedProposition.h" />
     <ClInclude Include="Discrete\PropositionLogic\BooleanProposition.h" />
     <ClInclude Include="Discrete\PropositionLogic\CompoundProposition.h" />
@@ -152,6 +154,7 @@
     <ClInclude Include="Function\Elementary\PowerFunction.h" />
     <ClInclude Include="Function\Elementary\TrigonometricFunction.h" />
     <ClInclude Include="Function\Function.h" />
+    <ClInclude Include="Function\import.h" />
     <ClInclude Include="Function\MultivariateLinearFunction.h" />
     <ClInclude Include="Function\MultiPowerFunction.h" />
     <ClInclude Include="Function\Range.h" />
@@ -187,7 +190,6 @@
     <ClInclude Include="Geometry\import.h" />
     <ClInclude Include="Geometry\shape\Circle.h" />
     <ClInclude Include="Geometry\shape\import.h" />
-    <ClInclude Include="Geometry\shape\Line.h" />
     <ClInclude Include="Geometry\shape\Rectangle.h" />
     <ClInclude Include="Geometry\shape\Triangle.h" />
     <ClInclude Include="mathlib.h" />
@@ -285,7 +287,6 @@
     <ClCompile Include="Geometry\Collider\SphereBB.cpp" />
     <ClCompile Include="Geometry\GeometryUtiity.cpp" />
     <ClCompile Include="Geometry\shape\Circle.cpp" />
-    <ClCompile Include="Geometry\shape\Line.cpp" />
     <ClCompile Include="Geometry\shape\Rectangle.cpp" />
     <ClCompile Include="Geometry\shape\Triangle.cpp" />
     <ClCompile Include="main.cpp" />

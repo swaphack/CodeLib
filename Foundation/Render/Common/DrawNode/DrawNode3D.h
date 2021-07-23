@@ -9,7 +9,9 @@ namespace render
 	/**
 	*	3dªÊ÷∆
 	*/
-	class DrawNode3D : public DrawNode, public DrawBoxProtocol
+	class DrawNode3D : 
+		public DrawNode, 
+		public DrawBoxProtocol
 	{
 	public:
 		DrawNode3D();

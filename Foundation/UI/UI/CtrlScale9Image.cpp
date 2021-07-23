@@ -73,3 +73,8 @@ const sys::CSSMargin& ui::CtrlScale9Image::getMargin() const
 {
 	return _texture2D->getMargin();
 }
+
+render::DrawScale9Texture2D* ui::CtrlScale9Image::getRenderNode() const
+{
+	return _texture2D;
+}

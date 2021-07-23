@@ -150,14 +150,6 @@ void render::Mesh::drawWithClientArray()
 	const sys::MeshMemoryData& tangents = _detail->getTangents();
 	const sys::MeshMemoryData& bitangents = _detail->getBitangents();
 
-	
-	/*
-	if (colors.getLength() == 0 && texcoords.getLength() == 0)
-	{
-		PRINT("Mesh Color or UI is NULL\n");
-		return;
-	}
-	*/
 	if (vertices.getLength() > 0)
 	{
 		GLClientArrays::enableClientState(ClientArrayType::VERTEX_ARRAY);
@@ -224,7 +216,6 @@ void render::Mesh::updateBufferData()
 	uint32_t nVerticeSize = _detail->getVertices().getSize();
 	if (nVerticeSize == 0)
 	{
-		//PRINT("Mesh Vertice is NULL\n");
 		return;
 	}
 
@@ -233,14 +224,6 @@ void render::Mesh::updateBufferData()
 	uint32_t nNormalSize = _detail->getNormals().getSize();
 	uint32_t nTangentSize = _detail->getTangents().getSize();
 	uint32_t nBitangentSize = _detail->getBitangents().getSize();
-
-	/*
-	if (nColorSize == 0 && nUVSize == 0)
-	{
-		PRINT("Mesh Color or UI is NULL\n");
-		return;
-	}
-	*/
 
 	_vertexBuffer->bindBuffer();
 
@@ -365,13 +348,6 @@ void render::Mesh::initDetailTangentData()
 	float* tangents = (float*)getMeshDetail()->createTangents(nLength, sizeof(float), 3);
 	this->calTrianglesVertexTangent(getMeshDetail()->getVertices(), getMeshDetail()->getUVs(), getMeshDetail()->getIndices(), tangents);
 }
-
-class mycompare {
-public:
-	bool operator()(const math::Vector3& _Left, const math::Vector3& _Right)const {
-		return _Left.toString() < _Right.toString();
-	}
-};
 
 void render::Mesh::calTrianglesVertexNormal(const sys::MeshMemoryData& vertices, const sys::MeshMemoryData& indices, float* normals)
 {

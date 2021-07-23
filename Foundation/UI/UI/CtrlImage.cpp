@@ -74,3 +74,8 @@ bool CtrlImage::isFlipY()
 {
 	return _texture2D->isFlipY();
 }
+
+render::DrawTexture2D* CtrlImage::getRenderNode() const
+{ 
+	return _texture2D; 
+}

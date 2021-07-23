@@ -34,6 +34,37 @@ namespace math
 	}
 
 	/**
+	*	对点进行排序
+	*	左下角到右上角
+	*/
+	static inline int CompareVec2(const Vector2& a, const Vector2& b)
+	{
+		int ret0 = CompareFloat(a.getX(), b.getX());
+		int ret1 = CompareFloat(a.getX(), b.getX());
+
+		if (ret0 == -1) return true;
+		else if (ret0 == 1) return false;
+		else return ret1 == -1;
+	}
+
+	/**
+	*	对点进行排序
+	*	左下角到右上角
+	*/
+	static inline int CompareVec3(const Vector3& a, const Vector3& b)
+	{
+		int ret0 = CompareFloat(a.getX(), b.getX());
+		int ret1 = CompareFloat(a.getY(), b.getY());
+		int ret2 = CompareFloat(a.getZ(), b.getZ());
+
+		if (ret0 == -1) return true;
+		else if (ret0 == 1) return false;
+		else if (ret1 == -1) return true;
+		else if (ret1 == 1) return false;
+		else return ret2 == -1;
+	}
+
+	/**
 	*	对点进行排序的规则
 	*	左下角到右上角
 	*/
@@ -41,12 +72,7 @@ namespace math
 	{
 		bool operator()(const Vector2& a, const Vector2& b) const
 		{
-			int ret0 = CompareFloat(a.getX(), b.getX());
-			int ret1 = CompareFloat(a.getX(), b.getX());
-
-			if (ret0 == -1) return true;
-			else if (ret0 == 1) return false;
-			else return ret1 == -1;
+			return CompareVec2(a, b);
 		}
 	};
 
@@ -58,15 +84,7 @@ namespace math
 	{
 		bool operator()(const Vector3& a, const Vector3& b)const
 		{
-			int ret0 = CompareFloat(a.getX(), b.getX());
-			int ret1 = CompareFloat(a.getY(), b.getY());
-			int ret2 = CompareFloat(a.getZ(), b.getZ());
-
-			if (ret0 == -1) return true;
-			else if (ret0 == 1) return false;
-			else if (ret1 == -1) return true;
-			else if (ret1 == 1) return false;
-			else return ret2 == -1;
+			return CompareVec3(a, b);
 		}
 	};
 }

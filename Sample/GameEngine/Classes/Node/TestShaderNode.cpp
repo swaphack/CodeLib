@@ -18,8 +18,9 @@ TestShaderNode::~TestShaderNode()
 
 void TestShaderNode::initNodes()
 {
-	/*
 	this->addLight();
+	/*
+	
 	//this->testImageShader();
 	//this->testClipShader();
 	this->testFbxModelShader();
@@ -283,17 +284,17 @@ void TestShaderNode::testTessellation()
 	std::string filepath = "Resource/Image/world.jpg";
 
 	CtrlImage* pImage = CREATE_NODE(CtrlImage);
+	pImage->setName("Tess");
 	pImage->setImagePath(filepath);
 	pImage->setAnchorPoint(Vector2(0.5f, 0.5f));
 	pImage->setVolume(800, 600);
 	pImage->setPosition(Vector2(512, 384));
 	this->addChild(pImage);
 	/*
-	Utility::loadShaderVF(pImage,
+	Utility::loadShaderVF(pImage->getRenderNode(),
 		"Shader/texture/texture.vs",
 		"Shader/texture/texture.fs");
 	*/
-
 	float innerValue[2] = { 8, 0};
 	float outerValue[4] = { 10,10,10,0 };
 	pImage->setEnableTessilation(true);
@@ -301,9 +302,11 @@ void TestShaderNode::testTessellation()
 	pImage->setTessInnerLevel(innerValue);
 	pImage->setTessOuterLevel(outerValue);
 
-	if (false)
+	pImage->getRenderNode()->getMesh()->setDrawMode(DrawMode::LINES);
+
+	if (true)
 	{
-		Utility::loadShaderVTGF(pImage,
+		Utility::loadShaderVTGF(pImage->getRenderNode(),
 			"Shader/tess/line_strip.vs",
 			"Shader/tess/line_strip.tcs",
 			"Shader/tess/line_strip.tes",
@@ -312,7 +315,7 @@ void TestShaderNode::testTessellation()
 	}
 	else
 	{
-		Utility::loadShaderVTGF(pImage,
+		Utility::loadShaderVTGF(pImage->getRenderNode(),
 			"Shader/tess/triangles.vs",
 			"Shader/tess/triangles.tcs",
 			"Shader/tess/triangles.tes",

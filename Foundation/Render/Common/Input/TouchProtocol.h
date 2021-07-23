@@ -8,6 +8,8 @@
 namespace render
 {
 	class Node;
+	class Camera;
+	class Scene;
 
 	class TouchProtocol
 	{
@@ -66,5 +68,34 @@ namespace render
 
 		std::map<TouchType, std::vector<TouchDelegate>> _touchDelegates;
 		std::map<TouchType, std::vector<TouchFunc>> _touchFuncs;
+	};
+
+
+
+	// 绘制
+	class DrawNodeProtocol
+	{
+	public:
+		DrawNodeProtocol();
+		virtual ~DrawNodeProtocol();
+	public:
+		/**
+		*	设置摄像机
+		*/
+		void setCamera(const Camera* camera);
+		/**
+		*	获取摄像机
+		*/
+		Camera* getCamera() const;
+	public:
+		// 设置所属场景
+		void setScene(Scene* scene);
+		// 获取场景
+		Scene* getScene() const;
+	protected:
+		// 所属摄像机
+		Camera* _camera = nullptr;
+		// 场景
+		Scene* _scene = nullptr;
 	};
 }

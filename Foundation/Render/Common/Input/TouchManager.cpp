@@ -1,6 +1,7 @@
 #include "TouchManager.h"
 #include "TouchProtocol.h"
 #include "Common/Node/Node.h"
+#include "Common/Tool/Tool.h"
 using namespace render;
 
 TouchManager::TouchManager()
@@ -67,7 +68,7 @@ void render::TouchManager::addTouchInfo(TouchType type, const math::Vector2& tou
 {
 	TouchSlotInfo info;
 	info.type = type;
-	info.touchPoint = touchPoint;
+	info.touchPoint = touchPoint - math::Vector2(0.5f * Tool::getGLViewWidth(), 0.5f * Tool::getGLViewHeight());
 
 	_waitAddTouches.push_back(info);
 }

@@ -117,7 +117,7 @@ void ue::UIDesignView::selectTarget(ui::CtrlWidget* target)
 	if (target == nullptr) return;
 
 	m_pSelectedTarget = target;
-	target->setBoxWidth(2.0f);
+	target->setBoxLineWidth(2.0f);
 	target->setBoxColor(phy::Color4B(255, 0, 0, 255));
 	target->setBoxVisible(true);
 

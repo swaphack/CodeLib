@@ -18,7 +18,7 @@ bool TruthTable::testResult(CompoundProposition* proposition, const std::map<uin
 		auto it = idValue.find(pp->getLogicID());
 		if (it != idValue.end())
 		{
-			pp->setResult(it->second ? PropositionResult::TRUE : PropositionResult::FALSE);
+			pp->setResult(it->second ? PropositionResult::EPR_TRUE : PropositionResult::EPR_FALSE);
 		}
 		else
 		{

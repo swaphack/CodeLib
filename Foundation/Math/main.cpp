@@ -1,6 +1,4 @@
-#include "Algebra/import.h"
-#include "Geometry/import.h"
-#include "Discrete/PropositionLogic/import.h"
+#include "mathlib.h"
 #include <iostream>
 
 using namespace math;
@@ -62,8 +60,8 @@ void testMatrix()
 void testInference()
 {
 	// !(a->b)
-	auto a = Proposition::create<PrimaryProposition>(1, PropositionResult::TRUE);
-	auto b = Proposition::create<PrimaryProposition>(2, PropositionResult::TRUE);
+	auto a = Proposition::create<PrimaryProposition>(1, PropositionResult::EPR_TRUE);
+	auto b = Proposition::create<PrimaryProposition>(2, PropositionResult::EPR_TRUE);
 
 	auto c = Proposition::create<ImplicateProposition>(a, b);
 	auto d = Proposition::create<NegativeProposition>(c);
@@ -76,13 +74,24 @@ void testInference()
 	int sdfs = 0;
 }
 
+void testPolygon()
+{
+	std::vector<math::Vector2> points;
+	points.push_back(math::Vector2(0, 0));
+	points.push_back(math::Vector2(1, 0));
+	points.push_back(math::Vector2(1, 1));
+	points.push_back(math::Vector2(0, 1));
+	auto polygon = math::Polygon<4>(&points[0]);
+
+	bool result = polygon.contains(math::Vector2(0.9f, 0.5f));
+
+	int a = 1;
+
+}
+
 
 int main(int argc, char** argv)
 {
-	int a = 1;
-	math::CartesianCoordinateSystem3D system;
-	system.loadIdentity();
-
-	math::Array2D<float, 2, 2> value(1.0f, 3.0f, 4.0f, 5.0f);
+	testPolygon();
 	return 0;
 }

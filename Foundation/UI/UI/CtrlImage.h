@@ -43,6 +43,8 @@ namespace ui
 		void setFlipY(bool status);
 		// 是否垂直翻转
 		bool isFlipY();
+		// 获取渲染节点
+		render::DrawTexture2D* getRenderNode() const;
 	protected:
 		// 图片结构
 		sys::ImageDefine _imageDefine;

@@ -104,8 +104,10 @@ namespace ui
 		*	颜色
 		*/ 
 		const phy::Color3B& getTextColor() const;
-
-		const render::DrawTexture2D* getRender() const;
+		/**
+		*	获取渲染节点
+		*/
+		const render::DrawTexture2D* getRenderNode() const;
 	protected:
 		/**
 		*	文字图片信息

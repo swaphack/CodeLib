@@ -6,22 +6,21 @@ using namespace math;
 
 Line2d::Line2d(const Vector2& src, const Vector2& dest)
 {
-	float a = dest.getY() - src.getY();
-	float b = src.getX() - dest.getX();
-	float c = sqrt(_paramA * src.getX() + _paramB * src.getY());
+	Matrix2x2 a(src.getX(), src.getY(), dest.getX(), dest.getY());
 
-	if (c > 0)
+	float det = getDetMagnitude(a);
+	if (det == 0)
 	{
-		a /= c; c /= c; c = -a * src.getX() - b * src.getY();
+		_paramA = 1;
+		_paramB = 0;
+		_paramC = src.getX();
 	}
 	else
 	{
-		a = 0; b = 1; c = -src.getX();
+		_paramA = - (dest.getY() - src.getY()) / (dest.getX() - src.getY());
+		_paramB = 1;
+		_paramC = -src.getX() * _paramA - src.getY();
 	}
-
-	_paramA = a;
-	_paramB = b;
-	_paramC = c;
 
 	_normal = Vector2(_paramA, _paramB);
 	_direction = dest - src;

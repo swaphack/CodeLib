@@ -43,7 +43,7 @@ float render::Tool::getVerticalAngle(float projDistance, float wDivh)
 
 float render::Tool::getLinearInterpolation(float a, float b, float t)
 {
-	return a*t + b*(1-t);
+	return a * t + b * (1 - t);
 }
 
 math::Vector3 render::Tool::getSphericalLinearInterpolation(const math::Vector3& src, const math::Vector3& dest, float t)
@@ -117,7 +117,7 @@ math::Vector3 Tool::convertToAngle(const math::Vector3& src)
 	float y = RADIAN_TO_ANGLE(src.getY());
 	float z = RADIAN_TO_ANGLE(src.getZ());
 
-	return math::Vector3(x,y,z);
+	return math::Vector3(x, y, z);
 }
 
 void Tool::convertToAngle(const math::Vector3& src, math::Vector3& dest)
@@ -155,7 +155,7 @@ void Tool::convertToOGLPoisition(const math::Vector3& src, math::Vector3& dest)
 
 void Tool::convertToOGLPoisition(float* inPos, float* outPos)
 {
- 	const math::Volume& volume = GL_VIEW_SIZE;
+	const math::Volume& volume = GL_VIEW_SIZE;
 
 	outPos[0] = inPos[0] / volume.getDepth();
 	outPos[1] = inPos[1] / volume.getDepth();
@@ -207,11 +207,11 @@ math::Vector3 Tool::getRotationPosition(const math::Vector3& vector, const math:
 		+ vector.getY() * cosx * cosz
 		+ vector.getZ() * (siny * sinz - sinx * cosy * cosz);
 
-	float z = vector.getX() * (-cosx* siny)
+	float z = vector.getX() * (-cosx * siny)
 		+ vector.getY() * sinx
 		+ vector.getZ() * cosx * cosy;
 
-	return math::Vector3(x,y,z);
+	return math::Vector3(x, y, z);
 }
 
 void Tool::calNormal(const math::Vector3& p1, const math::Vector3& p2, const math::Vector3& p3, math::Vector3& normal)
@@ -219,18 +219,18 @@ void Tool::calNormal(const math::Vector3& p1, const math::Vector3& p2, const mat
 	float a, b, c;
 	float r;
 
-	float x1 = p2.getX() - p1.getX(); 
-	float y1 = p2.getY() - p1.getY(); 
+	float x1 = p2.getX() - p1.getX();
+	float y1 = p2.getY() - p1.getY();
 	float z1 = p2.getZ() - p1.getZ();
 
-	float x2 = p3.getX() - p1.getX(); 
-	float y2 = p3.getY() - p1.getY(); 
+	float x2 = p3.getX() - p1.getX();
+	float y2 = p3.getY() - p1.getY();
 	float z2 = p3.getZ() - p1.getZ();
 
 	a = y1 * z2 - y2 * z1;
 	b = x2 * z1 - x1 * z2;
 	c = x1 * y2 - x2 * y1;
-	r = sqrt(a * a + b* b + c * c);
+	r = sqrt(a * a + b * b + c * c);
 
 	assert(r != 0);
 

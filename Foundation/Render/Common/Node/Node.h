@@ -11,7 +11,6 @@
 namespace render
 {
 	class ActionProxy;
-	class Scene;
 
 	/**
 	glLoadIdentity();
@@ -37,7 +36,8 @@ namespace render
 		public BodyProtocol,
 		public DirectionProtocol,
 		public TouchProtocol,
-		public SchedulerProtocol
+		public SchedulerProtocol,
+		public DrawNodeProtocol
 	{
 	public:
 		Node();
@@ -52,13 +52,8 @@ namespace render
 		Node* getParent() const;
 		// 从父节点移除
 		virtual void removeFromParent();
-	public:
-		// 设置所属场景
-		void setScene(Scene* scene);
-		// 设置所属场景
-		void setAllScene(Scene* scene);
-		// 获取场景
-		Scene* getScene() const;
+		// 设置场景
+		void setChildrenScene(Scene* scene);
 	public:
 		// 添加子节点
 		virtual void addChild(Node* node);
@@ -152,9 +147,9 @@ namespace render
 		// 相对父节点的矩阵
 		const math::Matrix4x4& getLocalMatrix() const;
 		// 将世界坐标转化为本地坐标
-		math::Vector3 convertWorldPostitionToLocal(const math::Vector3& point);
+		math::Vector3 convertWorldPostitionToLocal(const math::Vector3& point) const;
 		// 将本地坐标转化为世界坐标
-		math::Vector3 convertLocalPostitionToWorld(const math::Vector3& point);
+		math::Vector3 convertLocalPostitionToWorld(const math::Vector3& point) const;
 	public:
 		// 是否点击点落在改节点上
 		virtual bool containTouchPoint(const math::Vector2& touchPoint);
@@ -231,8 +226,6 @@ namespace render
 		math::Matrix4x4 _worldMatrix;
 		// 实际在世界坐标系中的逆矩阵
 		math::Matrix4x4 _worldInverseMatrix;
-		// 场景
-		Scene* _scene = nullptr;
 	protected:
 		// 动作代理
 		ActionProxy* _actionProxy = nullptr;

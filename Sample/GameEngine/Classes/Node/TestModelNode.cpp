@@ -18,14 +18,14 @@ TestModelNode::~TestModelNode()
 void TestModelNode::initNodes()
 {
 	addLight();
-	this->testCubeModel();
-	//this->testSphereModel();
+	//this->testCubeModel();
+	this->testSphereModel();
 	//this->testCubeMap();
 	//this->testObj();
 
 	//this->testObj();
 	//this->test3ds();
-	this->testFbx();
+	//this->testFbx();
 }
 
 void TestModelNode::testCubeModel()

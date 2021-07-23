@@ -13,6 +13,5 @@ namespace math
 	public:
 	protected:
 	private:
-		T
 	};
 }

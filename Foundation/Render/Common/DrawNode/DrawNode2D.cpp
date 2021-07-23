@@ -136,7 +136,7 @@ void render::DrawNode2D::drawRect()
 		return;
 	}
 	GLVertex::setColor(_boxColor);
-	GLState::setLineWidth(_boxWidth);
+	GLState::setLineWidth(_boxLineWidth);
 
 	GLVertex::beginMode(ShapeMode::LINE_LOOP);
 	GLVertex::setVertex(_localRectPoints.leftDown);

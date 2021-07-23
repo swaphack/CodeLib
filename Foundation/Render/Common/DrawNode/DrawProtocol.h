@@ -3,11 +3,12 @@
 #include <cstdint>
 
 #include "system.h"
-
 #include "Graphic/GLAPI/macros.h"
 
 namespace render
 {
+	class Camera;
+
 	// 用于颜色设置
 	class ColorProtocol
 	{

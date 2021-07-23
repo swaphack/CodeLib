@@ -116,17 +116,41 @@
     <ClInclude Include="Mesh\ProgressiveMeshAlgorithm.h">
       <Filter>Mesh</Filter>
     </ClInclude>
-    <ClInclude Include="Mesh\TriangleMesh.h">
-      <Filter>Mesh</Filter>
-    </ClInclude>
     <ClInclude Include="Mesh\macros.h">
-      <Filter>Mesh</Filter>
-    </ClInclude>
-    <ClInclude Include="Mesh\Index.h">
       <Filter>Mesh</Filter>
     </ClInclude>
     <ClInclude Include="Mesh\import.h">
       <Filter>Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="Mesh\Base\Index.h">
+      <Filter>Mesh\Bae</Filter>
+    </ClInclude>
+    <ClInclude Include="Mesh\Base\Mesh.h">
+      <Filter>Mesh\Bae</Filter>
+    </ClInclude>
+    <ClInclude Include="Mesh\Base\MeshEdge.h">
+      <Filter>Mesh\Bae</Filter>
+    </ClInclude>
+    <ClInclude Include="Mesh\Base\MeshPolygon.h">
+      <Filter>Mesh\Bae</Filter>
+    </ClInclude>
+    <ClInclude Include="Mesh\Base\MeshTriangle.h">
+      <Filter>Mesh\Bae</Filter>
+    </ClInclude>
+    <ClInclude Include="Mesh\Base\MeshVertex.h">
+      <Filter>Mesh\Bae</Filter>
+    </ClInclude>
+    <ClInclude Include="Mesh\Base\macros.h">
+      <Filter>Mesh\Bae</Filter>
+    </ClInclude>
+    <ClInclude Include="Mesh\Base\import.h">
+      <Filter>Mesh\Bae</Filter>
+    </ClInclude>
+    <ClInclude Include="Mesh\Base\PointSet.h">
+      <Filter>Mesh\Bae</Filter>
+    </ClInclude>
+    <ClInclude Include="Mesh\Base\MeshProtocol.h">
+      <Filter>Mesh\Bae</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -153,6 +177,9 @@
     </Filter>
     <Filter Include="Mesh">
       <UniqueIdentifier>{a122c2b3-274c-4e68-bcdc-b084a6361702}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Mesh\Bae">
+      <UniqueIdentifier>{8155fd8c-0f07-4684-a7f5-4db5e4302fef}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -214,11 +241,29 @@
     <ClCompile Include="Mesh\ProgressiveMeshAlgorithm.cpp">
       <Filter>Mesh</Filter>
     </ClCompile>
-    <ClCompile Include="Mesh\TriangleMesh.cpp">
-      <Filter>Mesh</Filter>
+    <ClCompile Include="Mesh\Base\Index.cpp">
+      <Filter>Mesh\Bae</Filter>
     </ClCompile>
-    <ClCompile Include="Mesh\Index.cpp">
-      <Filter>Mesh</Filter>
+    <ClCompile Include="Mesh\Base\Mesh.cpp">
+      <Filter>Mesh\Bae</Filter>
+    </ClCompile>
+    <ClCompile Include="Mesh\Base\MeshEdge.cpp">
+      <Filter>Mesh\Bae</Filter>
+    </ClCompile>
+    <ClCompile Include="Mesh\Base\MeshPolygon.cpp">
+      <Filter>Mesh\Bae</Filter>
+    </ClCompile>
+    <ClCompile Include="Mesh\Base\MeshTriangle.cpp">
+      <Filter>Mesh\Bae</Filter>
+    </ClCompile>
+    <ClCompile Include="Mesh\Base\MeshVertex.cpp">
+      <Filter>Mesh\Bae</Filter>
+    </ClCompile>
+    <ClCompile Include="Mesh\Base\PointSet.cpp">
+      <Filter>Mesh\Bae</Filter>
+    </ClCompile>
+    <ClCompile Include="Mesh\Base\MeshProtocol.cpp">
+      <Filter>Mesh\Bae</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

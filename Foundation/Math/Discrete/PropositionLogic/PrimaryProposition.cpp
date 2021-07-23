@@ -39,7 +39,7 @@ Proposition* PrimaryProposition::deepClone()
 
 bool PrimaryProposition::isTrue()
 {
-	return getResult() == PropositionResult::TRUE;
+	return getResult() == PropositionResult::EPR_TRUE;
 }
 
 PrimaryProposition& PrimaryProposition::operator=(const PrimaryProposition& value)

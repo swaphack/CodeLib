@@ -12,7 +12,7 @@ TestEnvironmentNode::~TestEnvironmentNode()
 
 void TestEnvironmentNode::initNodes()
 {
-	this->addGrid();
+	//this->addGrid();
 
 	this->testCamera();
 
@@ -144,27 +144,27 @@ void TestEnvironmentNode::testCamera()
 			_mouseScroll = 1;
 		}
 		else if (key == sys::BoardKey::KA)
-		{
+		{// 左边
 			pCamera->setPosition(pCamera->getPosition() - _spaceSpeed * pCamera->getRight());
 		}
 		else if (key == sys::BoardKey::KD)
-		{
+		{// 右边
 			pCamera->setPosition(pCamera->getPosition() + _spaceSpeed * pCamera->getRight());
 		}
 		else if (key == sys::BoardKey::KW)
-		{
+		{// 前面
 			pCamera->setPosition(pCamera->getPosition() - _spaceSpeed * pCamera->getFront());
 		}
 		else if (key == sys::BoardKey::KS)
-		{
+		{// 后面
 			pCamera->setPosition(pCamera->getPosition() + _spaceSpeed * pCamera->getFront());
 		}
 		else if (key == sys::BoardKey::KQ)
-		{
+		{// 下面
 			pCamera->setPosition(pCamera->getPosition() - _spaceSpeed * pCamera->getUp());
 		}
 		else if (key == sys::BoardKey::KE)
-		{
+		{// 上面
 			pCamera->setPosition(pCamera->getPosition() + _spaceSpeed * pCamera->getUp());
 		}
 		else if (key == sys::BoardKey::KL)
@@ -253,15 +253,17 @@ void TestEnvironmentNode::addCoordinate()
 {
 	render::Mask* pMask = CREATE_NODE(render::Mask);
 	pMask->setColor(phy::Color4B(255, 255, 255, 255));
-	pMask->setVolume(100, 100, -100);
-	Utility::loadShaderVF(pMask, "Shader/geometry/draw_triangle.vs", "Shader/geometry/draw_triangle.fs");
+	pMask->setVolume(100, 100, 0);
+	pMask->setPosition(0, 0, 0);
+	//Utility::loadShaderVF(pMask, "Shader/geometry/draw_triangle.vs", "Shader/geometry/draw_triangle.fs");
 	this->addChild(pMask);
 
 	render::CoordinateSystem* pCoordSystem = CREATE_NODE(render::CoordinateSystem);
 	pCoordSystem->setVolume(100, 100, 100);
 	pCoordSystem->setPointSize(5);
-	Utility::loadShaderVF(pCoordSystem, "Shader/geometry/draw_coordinate_system.vs","Shader/geometry/draw_coordinate_system.fs");
-	this->addChild(pCoordSystem);
+	pCoordSystem->setPosition(-100, -100, -100);
+	//Utility::loadShaderVF(pCoordSystem, "Shader/geometry/draw_coordinate_system.vs","Shader/geometry/draw_coordinate_system.fs");
+	pMask->addChild(pCoordSystem);
 }
 
 void TestEnvironmentNode::testMatrix()

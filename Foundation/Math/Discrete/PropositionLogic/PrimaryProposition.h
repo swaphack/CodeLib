@@ -13,11 +13,11 @@ namespace math
 		/**
 		*	假
 		*/
-		FALSE,
+		EPR_FALSE,
 		/**
 		*	真
 		*/
-		TRUE,
+		EPR_TRUE,
 	};
 
 	/**
@@ -34,7 +34,7 @@ namespace math
 		/**
 		*	命题结果
 		*/
-		CREATE_CLASS_MEMBER_WITH_DEFAULT(PropositionResult, Result, PropositionResult::TRUE);
+		CREATE_CLASS_MEMBER_WITH_DEFAULT(PropositionResult, Result, PropositionResult::EPR_TRUE);
 	public:
 		/**
 		*	是否为真

@@ -8,6 +8,7 @@ namespace math
 	template<typename T, const int Length>
 	struct Points : public Array<T, Length>
 	{
+		typedef Array<T, Length> base;
 	public:
 		Points(){}
 		Points(const T* value)
@@ -16,6 +17,19 @@ namespace math
 		}
 		virtual ~Points() {}
 	public:
+		/**
+		*	°üº¬¶¥µã
+		*/
+		bool containsVertex(const T& value)
+		{
+			for (int i = 0; i < Length; i++)
+			{
+				if (base::getValue(i) == value)
+				{
+					return true;
+				}
+			}
+		}
 	};
 
 }

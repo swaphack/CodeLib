@@ -13,12 +13,13 @@ namespace render
 	class ShaderProgram;
 	class Texture;
 	class DrawTextureCache;
+	class Camera;
 
 	/**
 	*	绘制节点
 	*/
-	class DrawNode : 
-		public Node, 
+	class DrawNode :
+		public Node,
 		public ColorProtocol,
 		public BlendProtocol,
 		public TessilationProtocol
@@ -120,8 +121,13 @@ namespace render
 		*/
 		virtual void updateMeshData();
 	protected:
+		/**
+		*	颜色改变
+		*/
 		virtual void onColorChange();
-
+		/**
+		*	当前接点的颜色改变
+		*/
 		void onDrawNodeColorChange();
 		/**
 		*	混合改变

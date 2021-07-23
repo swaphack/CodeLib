@@ -61,7 +61,7 @@ bool ui::CtrlEditText::init()
 	}
 
 	_ctrlText->addNotifyListener(NodeNotifyType::TEXT, [this]() {
-		_ctrlCursor->getLayoutItem()->setLeftMargin(_ctrlText->getRender()->getWidth() + 1);
+		_ctrlCursor->getLayoutItem()->setLeftMargin(_ctrlText->getRenderNode()->getWidth() + 1);
 		_ctrlCursor->refreshLayout();
 	});
 

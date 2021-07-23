@@ -41,6 +41,7 @@ bool render::DrawNode3D::init()
 
 bool render::DrawNode3D::containPoint(const math::Vector2& touchPoint)
 {
+	//Camera::getMainCamera()
 	/*
 	math::Vector3 point(touchPoint.getX(), touchPoint.getY());
 
@@ -90,7 +91,7 @@ void render::DrawNode3D::drawBox()
 		return;
 	}
 	GLVertex::setColor(_boxColor);
-	GLState::setLineWidth(_boxWidth);
+	GLState::setLineWidth(_boxLineWidth);
 
 	GLVertex::beginMode(ShapeMode::LINE_LOOP);
 	GLVertex::setVertex(_boxVertex.front.leftDown);

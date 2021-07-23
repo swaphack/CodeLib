@@ -1,6 +1,8 @@
 #include "TouchProtocol.h"
 #include "Common/Node/Node.h"
 #include "TouchManager.h"
+#include "Common/View/Camera.h"
+#include "Common/Scene/Scene.h"
 
 using namespace render;
 
@@ -210,4 +212,34 @@ void TouchProtocol::dispatchTouchEvent(TouchType type, const math::Vector2& touc
 			item(touchPoint);
 		}
 	}	
+}
+
+//////////////////////////////////////////////////////////////////////////
+render::DrawNodeProtocol::DrawNodeProtocol()
+{
+}
+
+render::DrawNodeProtocol::~DrawNodeProtocol()
+{
+
+}
+
+void render::DrawNodeProtocol::setCamera(const Camera* camera)
+{
+	_camera = (Camera*)camera;
+}
+
+Camera* render::DrawNodeProtocol::getCamera() const
+{
+	return _camera;
+}
+
+void render::DrawNodeProtocol::setScene(Scene* scene)
+{
+	_scene = scene;
+}
+
+Scene* render::DrawNodeProtocol::getScene() const
+{
+	return _scene;
 }

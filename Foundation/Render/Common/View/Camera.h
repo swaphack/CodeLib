@@ -6,7 +6,10 @@
 
 namespace render
 {
-	// 摄像机
+	/**
+	*	摄像机
+	*	投影矩阵[-1, 1]
+	*/
 	class Camera : public Node
 	{
 	public:
@@ -55,6 +58,9 @@ namespace render
 		math::Matrix4x4 lookAtCenter();
 		// 中心点位置
 		math::Vector3 getCenterPosition();
+	public:
+		// 获取射线
+		math::Ray getRayFromScreenPoint(const math::Vector2& screenPoint) const;
 	public:
 		// 更新空间位置
 		virtual void visit();

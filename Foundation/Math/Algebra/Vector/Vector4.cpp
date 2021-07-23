@@ -16,12 +16,12 @@ Vector4::Vector4(const Vector4& vector)
 
 Vector4::Vector4(const Vector3& vector)
 {
-	this->set(vector.getX(), vector.getY(), vector.getZ());
+	this->set(vector.getX(), vector.getY(), vector.getZ(), 1);
 }
 
 Vector4::Vector4(const Vector2& vector)
 {
-	this->set(vector.getX(), vector.getY());
+	this->set(vector.getX(), vector.getY(), 0, 1);
 }
 
 Vector4::Vector4(const Vector& vector)
@@ -111,4 +111,16 @@ math::Vector4::~Vector4()
 math::Vector4 math::Vector4::operator*(float k) const
 {
 	return math::Vector4(k * this->getX(), k * this->getY(), k * this->getZ(), k * this->getW());
+}
+
+math::Vector4::operator math::Vector3()
+{
+	float w = (*this)[3];
+
+	assert(w != 0);
+
+	float x = (*this)[0] / w;
+	float y = (*this)[1] / w;
+	float z = (*this)[2] / w;
+	return Vector3(x, y, z);
 }

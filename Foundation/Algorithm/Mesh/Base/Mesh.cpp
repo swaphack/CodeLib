@@ -1,17 +1,17 @@
-#include "TriangleMesh.h"
+#include "Mesh.h"
 #include "macros.h"
 #include <map>
 #include <set>
 
-alg::TriangleMesh::TriangleMesh()
+alg::Mesh::Mesh()
 {
 }
 
-alg::TriangleMesh::~TriangleMesh()
+alg::Mesh::~Mesh()
 {
 }
 
-bool alg::TriangleMesh::initWithTriangles(const std::vector<math::Triangle>& data)
+bool alg::Mesh::initWithTriangles(const std::vector<math::Triangle>& data)
 {
 	std::vector<math::Vector3> vertices;
 	std::vector<int> indices;
@@ -24,7 +24,7 @@ bool alg::TriangleMesh::initWithTriangles(const std::vector<math::Triangle>& dat
 	return initWithVertices(vertices, indices);
 }
 
-bool alg::TriangleMesh::initWithVertices(const std::vector<math::Vector3>& vertices, const std::vector<int>& indices)
+bool alg::Mesh::initWithVertices(const std::vector<math::Vector3>& vertices, const std::vector<int>& indices)
 {
 	_vertices = vertices;
 	_indices = indices;
@@ -32,17 +32,17 @@ bool alg::TriangleMesh::initWithVertices(const std::vector<math::Vector3>& verti
 	return true;
 }
 
-const std::vector<math::Vector3>& alg::TriangleMesh::getVertices() const
+const std::vector<math::Vector3>& alg::Mesh::getVertices() const
 {
 	return _vertices;
 }
 
-const std::vector<int>& alg::TriangleMesh::getIndices() const
+const std::vector<int>& alg::Mesh::getIndices() const
 {
 	return _indices;
 }
 
-bool alg::TriangleMesh::toTriangles(std::vector<math::Triangle>& data)
+bool alg::Mesh::toTriangles(std::vector<math::Triangle>& data)
 {
 	if (_vertices.size() < TRIANGLE_INDEX_COUNT || _indices.size() < TRIANGLE_INDEX_COUNT)
 	{
@@ -75,7 +75,7 @@ bool alg::TriangleMesh::toTriangles(std::vector<math::Triangle>& data)
 	return data.size() > 0;
 }
 
-bool alg::TriangleMesh::convertToVertices(const std::vector<math::Triangle>& data, std::vector<math::Vector3>& vertices, std::vector<int>& indices)
+bool alg::Mesh::convertToVertices(const std::vector<math::Triangle>& data, std::vector<math::Vector3>& vertices, std::vector<int>& indices)
 {
 	if (data.size() == 0)
 	{

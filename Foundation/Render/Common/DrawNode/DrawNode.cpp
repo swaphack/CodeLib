@@ -10,6 +10,7 @@
 #include "UniformShaderApply.h"
 #include "FragmentOperator.h"
 #include "Common/Fragment/import.h"
+#include "Common/View/Camera.h"
 
 using namespace render;
 
@@ -26,6 +27,8 @@ DrawNode::DrawNode()
 
 	_textureCache = CREATE_OBJECT(DrawTextureCache);
 	SAFE_RETAIN(_textureCache);
+
+	this->setCamera(Camera::getMainCamera());
 }
 
 DrawNode::~DrawNode()
@@ -41,8 +44,6 @@ bool render::DrawNode::init()
 	{
 		return false;
 	}
-
-
 
 	FragmentBlend* pBlend = this->getFragOperator()->getHandle<FragmentBlend>();
 	if (pBlend)

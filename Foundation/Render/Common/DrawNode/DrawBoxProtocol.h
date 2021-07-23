@@ -29,17 +29,17 @@ namespace render
 		/**
 		*	矩形框宽度
 		*/
-		float getBoxWidth() const;
+		float getBoxLineWidth() const;
 		/**
 		*	矩形框宽度
 		*/
-		void setBoxWidth(float width);
+		void setBoxLineWidth(float width);
 	protected:
 		// 是否显示矩形框
 		bool _bBoxVisible = false;
 		// 矩形框颜色
 		phy::Color4B _boxColor = phy::Color4B(255, 255, 255, 255);
 		// 矩形框宽度
-		float _boxWidth = 1;
+		float _boxLineWidth = 1;
 	};
 }

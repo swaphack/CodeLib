@@ -28,12 +28,12 @@ const phy::Color4B& render::DrawBoxProtocol::getBoxColor() const
 	return _boxColor;
 }
 
-float render::DrawBoxProtocol::getBoxWidth() const
+float render::DrawBoxProtocol::getBoxLineWidth() const
 {
-	return _boxWidth;
+	return _boxLineWidth;
 }
 
-void render::DrawBoxProtocol::setBoxWidth(float width)
+void render::DrawBoxProtocol::setBoxLineWidth(float width)
 {
-	_boxWidth = width;
+	_boxLineWidth = width;
 }

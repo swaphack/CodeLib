@@ -43,5 +43,5 @@ void render::Scene::addChild(Node* node)
 void render::Scene::addChild(Node* node, int zOrder)
 {
 	Node::addChild(node, zOrder);
-	node->setAllScene(this);
+	node->setChildrenScene(this);
 }

@@ -123,8 +123,9 @@ namespace math
 		*/
 		void setShearZ(float radianX);
 	public:
-		Matrix4x1 operator*(const Matrix4x1& mat);
-		Matrix4x4 operator*(const Matrix4x4& mat);
+		Matrix4x1 operator*(const Matrix4x1& mat) const;
+		Vector4 operator*(const Vector4& mat) const;
+		Matrix4x4 operator*(const Matrix4x4& mat) const;
 		Matrix4x4& operator=(const Matrix4x4& mat);
 		Matrix4x4& operator=(const Matrix4x1& mat);
 		Matrix4x4& operator=(const Matrix<float, 4, 4>& mat);

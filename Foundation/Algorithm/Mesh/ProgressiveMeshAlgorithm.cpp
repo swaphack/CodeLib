@@ -1,8 +1,8 @@
 #include "ProgressiveMeshAlgorithm.h"
-#include "Index.h"
 #include "macros.h"
 #include <map>
 
+/*
 alg::ProgressiveMeshAlgorithm::ProgressiveMeshAlgorithm()
 {
 }
@@ -18,13 +18,13 @@ bool alg::ProgressiveMeshAlgorithm::reduceMesh(const std::vector<math::Triangle>
 		return false;
 	}
 
-	TriangleMesh inMeshData;
+	Mesh inMeshData;
 	if (!inMeshData.initWithTriangles(inData))
 	{
 		return false;
 	}
 
-	TriangleMesh outMeshData;
+	Mesh outMeshData;
 
 	if (!reduceMesh(inMeshData, outMeshData))
 	{
@@ -45,7 +45,7 @@ struct CompareLineIndex
 
 
 
-bool alg::ProgressiveMeshAlgorithm::reduceMesh(const TriangleMesh& inData, TriangleMesh& outData)
+bool alg::ProgressiveMeshAlgorithm::reduceMesh(const Mesh& inData, Mesh& outData)
 {
 	this->cleanUp();
 
@@ -88,3 +88,5 @@ void alg::ProgressiveMeshAlgorithm::cleanUp()
 {
 	_triangleVertexInfos.clear();
 }
+
+*/

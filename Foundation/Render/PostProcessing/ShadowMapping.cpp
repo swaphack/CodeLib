@@ -33,7 +33,11 @@ bool render::ShadowMapping::init()
 
 void render::ShadowMapping::beginCastShadow(Node* light, Scene* root, const std::set<Node*>& castShadowNodes)
 {
-	auto pCamera = Camera::getMainCamera();
+	auto pCamera = this->getCamera();
+	if (pCamera == nullptr)
+	{
+		return;
+	}
 	GLState::setViewport(0, 0, getWidth(), getHeight());
 	_frameBuffer->bindFrameBuffer();
 

@@ -19,7 +19,7 @@ TestImageNode::~TestImageNode()
 
 void TestImageNode::initNodes()
 {
-	testScale9Image();
+	testGrayImage();
 	//testPointSprite();
 }
 
@@ -57,6 +57,20 @@ void TestImageNode::testImage()
 
 		this->addChild(pImage);
 	}
+}
+
+void TestImageNode::testGrayImage()
+{
+	std::string filepath = "Resource/Image/image_skin_brand_0.png";
+
+	CtrlImage* pImage = CREATE_NODE(CtrlImage);
+	pImage->setImagePath(filepath);
+	pImage->setAnchorPoint(0.5f, 0.5f);
+	pImage->setPosition(512, 384);
+	pImage->setVolume(512, 384);
+	Utility::loadShaderVF(pImage->getRenderNode(), "Shader/texture/texture.vs", "Shader/texture/texture_gray.fs");
+
+	this->addChild(pImage);
 }
 
 void TestImageNode::testDifferentImages()

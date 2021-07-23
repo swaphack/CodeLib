@@ -18,6 +18,7 @@ Camera::Camera()
 
 	_viewParameter2D.zNear = -50000;
 	_viewParameter2D.zFar = 50000;
+
 	_viewParameter3D.zNear = 0.1f;
 	_viewParameter2D.zFar = 1000000;
 }
@@ -49,18 +50,18 @@ bool Camera::init()
 
 void Camera::setViewPort(float left, float right, float bottom, float top)
 {
+	float w = 0.5f * (left + right);
+	float h = 0.5f * (bottom + top);
+
 	//if (getDimensions() == CameraDimensions::TWO)
 	{
-		_viewParameter2D.xLeft = left;
-		_viewParameter2D.xRight = right;
-		_viewParameter2D.yBottom = bottom;
-		_viewParameter2D.yTop = top;
+		_viewParameter2D.xLeft = -w;
+		_viewParameter2D.xRight = w;
+		_viewParameter2D.yBottom = -h;
+		_viewParameter2D.yTop = h;
 	}
 	//else
 	{
-		float w = 0.5f * (left + right);
-		float h = 0.5f * (bottom + top);
-
 		_viewParameter3D.xLeft = -w;
 		_viewParameter3D.xRight = w;
 		_viewParameter3D.yBottom = -h;
@@ -271,6 +272,37 @@ math::Vector3 render::Camera::getCenterPosition()
 	}
 
 	return center;
+}
+
+math::Ray render::Camera::getRayFromScreenPoint(const math::Vector2& screenPoint) const
+{
+	math::Matrix4x4 invMat = (getProjectMatrix() * getViewMatrix()).getInverse();
+	math::Vector3 pos = this->convertLocalPostitionToWorld(this->getPosition());
+	math::Vector3 dir;
+	float w;
+	float h;
+	if (getDimensions() == DimensionsType::TWO)
+	{
+		w = _viewParameter2D.xRight - _viewParameter2D.xLeft;
+		h = _viewParameter2D.yTop - _viewParameter2D.yBottom;
+	}
+	else if (getDimensions() == DimensionsType::THREE)
+	{
+		w = 0.5f * (_viewParameter3D.xRight - _viewParameter3D.xLeft);
+		h = 0.5f * (_viewParameter3D.yTop - _viewParameter3D.yBottom);
+	}
+
+	math::Vector4 nearVec = math::Vector4((screenPoint.getX() - w) / w, (screenPoint.getY() - h) / h, -1, 1.0f);
+	math::Vector4 farVec = math::Vector4((screenPoint.getX() - w) / w, (screenPoint.getY() - h) / h, 1, 1.0f);
+
+	math::Vector4 nearResult = invMat * nearVec;
+	math::Vector4 farResult = invMat * farVec;
+	nearResult /= nearResult.getW();
+	farResult /= farResult.getW();
+
+	dir = farResult - nearResult;
+	
+	return math::Ray(pos, dir);
 }
 
 void render::Camera::updateViewPort()

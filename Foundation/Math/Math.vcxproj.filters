@@ -496,9 +496,6 @@
     <ClInclude Include="Geometry\shape\Rectangle.h">
       <Filter>Geometry\shape</Filter>
     </ClInclude>
-    <ClInclude Include="Geometry\shape\Line.h">
-      <Filter>Geometry\shape</Filter>
-    </ClInclude>
     <ClInclude Include="Basic\Compare.h">
       <Filter>Basic</Filter>
     </ClInclude>
@@ -522,6 +519,15 @@
     </ClInclude>
     <ClInclude Include="ProbabilityAndStatistics\Probability\ProbabilityDensity.h">
       <Filter>ProbabilityAndStatistics\Probability</Filter>
+    </ClInclude>
+    <ClInclude Include="Discrete\import.h">
+      <Filter>Discrete</Filter>
+    </ClInclude>
+    <ClInclude Include="Discrete\ManyValuedLogic\import.h">
+      <Filter>Discrete\ManyValuedLogic</Filter>
+    </ClInclude>
+    <ClInclude Include="Function\import.h">
+      <Filter>Function</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -764,9 +770,6 @@
       <Filter>Geometry\shape</Filter>
     </ClCompile>
     <ClCompile Include="Geometry\shape\Rectangle.cpp">
-      <Filter>Geometry\shape</Filter>
-    </ClCompile>
-    <ClCompile Include="Geometry\shape\Line.cpp">
       <Filter>Geometry\shape</Filter>
     </ClCompile>
     <ClCompile Include="Algebra\Polynomial\QuadraticPolynomial.cpp">

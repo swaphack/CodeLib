@@ -12,6 +12,8 @@ protected:
 private:
 	void testImage();
 
+	void testGrayImage();
+
 	void testDifferentImages();
 
 	void testMoveImage();

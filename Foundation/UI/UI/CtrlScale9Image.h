@@ -43,7 +43,10 @@ namespace ui
 		*	白边
 		*/
 		const sys::CSSMargin& getMargin() const;
-
+		/**
+		*	获取渲染节点
+		*/ 
+		render::DrawScale9Texture2D* getRenderNode() const;
 	private:
 		// 图片结构
 		sys::ImageDefine _imageDefine;

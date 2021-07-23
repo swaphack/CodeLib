@@ -168,7 +168,9 @@ namespace math
 		*	由a,b,c构成平行六面体体积
 		*/
 		static float calTripleProduct(const Vector3& vector0, const Vector3& vector1, const Vector3& vector2);
-
+		/**
+		*	单位化
+		*/
 		static Vector3 normalize(const Vector3& vector);
 	};
 

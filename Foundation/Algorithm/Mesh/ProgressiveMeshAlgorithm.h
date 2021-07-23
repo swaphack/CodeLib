@@ -6,7 +6,7 @@
 
 #include "mathlib.h"
 
-#include "TriangleMesh.h"
+#include "Base/import.h"
 
 namespace alg
 {
@@ -27,7 +27,7 @@ namespace alg
 		/**
 		*	减面 未完成
 		*/
-		bool reduceMesh(const TriangleMesh& inData, TriangleMesh& outData);
+		bool reduceMesh(const Mesh& inData, Mesh& outData);
 	protected:
 		/**
 		*	清空
@@ -42,6 +42,6 @@ namespace alg
 		/**
 		*	每个顶点关联的三角形
 		*/
-		std::map<math::Vector3, std::set<int>> _triangleVertexInfos;
+		std::map<math::Vector3, std::set<int>, math::CompareVector3> _triangleVertexInfos;
 	};
 }

@@ -73,25 +73,14 @@ void Node::removeFromParent()
 
 	this->getParent()->removeChild(this);
 }
-
-void render::Node::setScene(Scene* scene)
-{
-	_scene = scene;
-}
-
-void render::Node::setAllScene(Scene* scene)
+void render::Node::setChildrenScene(Scene* scene)
 {
 	for (auto it = _children.begin(); it != _children.end(); it++)
 	{
-		(*it)->setAllScene(scene);
+		(*it)->setChildrenScene(scene);
 	}
 
 	this->setScene(scene);
-}
-
-Scene* render::Node::getScene() const
-{
-	return _scene;
 }
 
 void Node::addChild( Node* node )
@@ -113,7 +102,7 @@ void render::Node::addChild(Node* node, int zOrder)
 	SAFE_RETAIN(node);
 	_children.push_back(node);
 
-	node->setAllScene(getScene());
+	node->setChildrenScene(getScene());
 
 	onChildrenChange();
 }
@@ -128,7 +117,7 @@ void Node::removeChild( Node* node )
 	}
 
 	node->setParent(nullptr);
-	node->setAllScene(nullptr);
+	node->setChildrenScene(nullptr);
 
 	SAFE_RELEASE(node);
 	auto it = std::find(_children.begin(), _children.end(), node);
@@ -577,12 +566,12 @@ const math::Matrix4x4& Node::getLocalMatrix() const
 	return _localMatrix;
 }
 
-math::Vector3 render::Node::convertWorldPostitionToLocal(const math::Vector3& point)
+math::Vector3 render::Node::convertWorldPostitionToLocal(const math::Vector3& point) const
 {
 	return math::Matrix4x4::transpose(point, _worldInverseMatrix);
 }
 
-math::Vector3 render::Node::convertLocalPostitionToWorld(const math::Vector3& point)
+math::Vector3 render::Node::convertLocalPostitionToWorld(const math::Vector3& point) const
 {
 	return math::Matrix4x4::transpose(point, _worldMatrix);
 }

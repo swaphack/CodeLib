@@ -188,7 +188,7 @@ void Matrix4x4::setRotationByLine(const Vector3& src, const Vector3& dest, float
 	(*this)[15] = 1;
 }
 
-Matrix4x1 Matrix4x4::operator*(const Matrix4x1& mat)
+Matrix4x1 Matrix4x4::operator*(const Matrix4x1& mat) const
 {
 	float value[4] = { 0 };
 	value[0] = getValue(0) * mat.getValue(0) + getValue(1) * mat.getValue(1) + getValue(2) * mat.getValue(2) + getValue(3) * mat.getValue(3);
@@ -199,7 +199,17 @@ Matrix4x1 Matrix4x4::operator*(const Matrix4x1& mat)
 	return Matrix4x1(value);
 }
 
-Matrix4x4 Matrix4x4::operator*(const Matrix4x4& mat)
+Vector4 Matrix4x4::operator*(const Vector4& mat) const
+{
+	float x = getValue(0) * mat.getValue(0) + getValue(1) * mat.getValue(1) + getValue(2) * mat.getValue(2) + getValue(3) * mat.getValue(3);
+	float y = getValue(4) * mat.getValue(0) + getValue(5) * mat.getValue(1) + getValue(6) * mat.getValue(2) + getValue(7) * mat.getValue(3);
+	float z = getValue(8) * mat.getValue(0) + getValue(9) * mat.getValue(1) + getValue(10) * mat.getValue(2) + getValue(11) * mat.getValue(3);
+	float w = getValue(12) * mat.getValue(0) + getValue(13) * mat.getValue(1) + getValue(14) * mat.getValue(2) + getValue(15) * mat.getValue(3);
+
+	return Vector4(x, y, z, w);
+}
+
+Matrix4x4 Matrix4x4::operator*(const Matrix4x4& mat) const
 {
 	float value[16] = { 0 };
 	value[0] = getValue(0) * mat.getValue(0) + getValue(1) * mat.getValue(4) + getValue(2) * mat.getValue(8) + getValue(3) * mat.getValue(12);

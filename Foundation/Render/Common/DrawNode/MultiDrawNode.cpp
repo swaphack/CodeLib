@@ -7,6 +7,7 @@
 #include "DrawTextureCache.h"
 #include "UniformShaderApply.h"
 #include "Common/Shader/ShaderProgram.h"
+#include "Common/View/Camera.h"
 
 using namespace render;
 
@@ -23,6 +24,8 @@ MultiDrawNode::MultiDrawNode()
 
 	_textureCache = CREATE_OBJECT(DrawTextureCache);
 	SAFE_RETAIN(_textureCache);
+
+	this->setCamera(Camera::getMainCamera());
 }
 
 MultiDrawNode::~MultiDrawNode()
