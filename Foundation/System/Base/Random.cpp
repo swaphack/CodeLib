@@ -47,6 +47,11 @@ uint32_t Random::getNumber(uint32_t maxValue)
 	return (uint32_t)(getNumber0_1() * maxValue);
 }
 
+int32_t sys::Random::getNumber(int32_t maxValue)
+{
+	return (int32_t)(getNumber0_1() * maxValue);
+}
+
 int32_t Random::getNumber(int32_t minValue, int32_t maxValue)
 {
 	return (int32_t)getNumber((float)minValue, (float)maxValue);

@@ -25,27 +25,26 @@ namespace math
 		*	是否有共边
 		*/
 		bool hasSameEdge(const Triangle& target, LineSegment3d& side);
-
+	public:
 		/*
 		*	重心 中线交点
 		*/
-		Vector3 getCentreOfGravity() const;
+		static Vector3 getCentreOfGravity(const Vector3& p0, const Vector3& p1, const Vector3& p2);
 		/*
 		*	内心
 		*/
-		Vector3 getInCenter() const;
+		static Vector3 getInCenter(const Vector3& p0, const Vector3& p1, const Vector3& p2);
 		/*
 		*	外心
 		*/
-		Vector3 getCircumcenter() const;
+		static Vector3 getCircumcenter(const Vector3& p0, const Vector3& p1, const Vector3& p2);
 		/*
 		*	外心
 		*/
-		Vector3 getCircumcenter2d() const;
-	public:
+		static Vector3 getCircumcenter2d(const Vector3& p0, const Vector3& p1, const Vector3& p2);
 		/**
 		*	获取法线
 		*/
-		Vector3 getNormal();
+		static Vector3 getNormal(const Vector3& p0, const Vector3& p1, const Vector3& p2);
 	};
 }

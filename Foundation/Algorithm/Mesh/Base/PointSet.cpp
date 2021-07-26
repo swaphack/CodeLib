@@ -11,6 +11,24 @@ alg::PointSet::PointSet()
 
 alg::PointSet::~PointSet()
 {
+	this->cleanup();
+}
+
+alg::PointSet* alg::PointSet::create(int count, int width, int height)
+{
+	if (count <= 0 || width <= 0 || height <= 0) return nullptr;
+
+	std::vector<math::Vector3> points;
+	for (size_t i = 0; i < count; i++)
+	{
+		math::Vector3 point(sys::Random::getNumber(width), sys::Random::getNumber(height));
+		points.push_back(point);
+	}
+
+	auto item = CREATE_OBJECT(PointSet);
+	item->setPoints(points);
+
+	return item;
 }
 
 void alg::PointSet::setPoints(const std::vector<math::Vector3>& points)
@@ -42,7 +60,10 @@ alg::MeshVertex* alg::PointSet::createVertex(const math::Vector3& point0)
 		return it->second;
 	}
 
-	auto item = new MeshVertex(point0);
+	auto item = CREATE_OBJECT(MeshVertex);
+	item->setPosition(point0);
+	SAFE_RETAIN(item);
+
 	_meshVertexes[key] = item;
 
 	return item;
@@ -58,10 +79,7 @@ void alg::PointSet::removeVertex(MeshVertex* pVertex)
 	{
 		if (item.second == pVertex)
 		{
-			if (pVertex->RetainCount == 1)
-			{
-				_meshVertexes.erase(item.first);
-			}
+			_meshVertexes.erase(item.first);
 			SAFE_RELEASE(pVertex);
 			break;
 		}
@@ -70,16 +88,31 @@ void alg::PointSet::removeVertex(MeshVertex* pVertex)
 
 alg::MeshEdge* alg::PointSet::createEdge(int idx0, int idx1)
 {
-	auto pointA = getPoint(idx0);
-	auto pointB = getPoint(idx1);
-	if (pointA == nullptr || pointB == nullptr) return nullptr;
+	auto pVertex0 = createVertex(idx0);
+	auto pVertex1 = createVertex(idx1);
 
-	return createEdge(*pointA, *pointB);
+	if (pVertex0 == nullptr || pVertex1 == nullptr) 
+		return nullptr;
+
+	return createEdge(pVertex0, pVertex1);
 }
 
 alg::MeshEdge* alg::PointSet::createEdge(const math::Vector3& point0, const math::Vector3& point1)
 {
-	std::string key = point0.toString() + "-" + point1.toString();
+	auto pVertex0 = createVertex(point0);
+	auto pVertex1 = createVertex(point1);
+
+	return createEdge(pVertex0, pVertex1);
+}
+
+alg::MeshEdge* alg::PointSet::createEdge(const MeshVertex* pVertex0, const MeshVertex* pVertex1)
+{
+	if (pVertex0 == nullptr || pVertex1 == nullptr)
+	{
+		return nullptr;
+	}
+
+	std::string key = pVertex0->getPosition().toString() + "-" + pVertex1->getPosition().toString();
 
 	auto it = _meshEdges.find(key);
 	if (it != _meshEdges.end())
@@ -88,7 +121,9 @@ alg::MeshEdge* alg::PointSet::createEdge(const math::Vector3& point0, const math
 		return it->second;
 	}
 
-	auto item = new MeshEdge(point0, point1);
+	auto item = CREATE_OBJECT(MeshEdge);
+	item->setVertexes(pVertex0, pVertex1);
+	SAFE_RETAIN(item);
 	_meshEdges[key] = item;
 
 	return item;
@@ -163,12 +198,42 @@ void alg::PointSet::removeTriangle(MeshTriangle* pTriangle)
 
 alg::MeshPolygon* alg::PointSet::createPolygon(const std::vector<int>& vecIndices)
 {
-	return nullptr;
+	std::vector<math::Vector3> points;
+	for (auto item : vecIndices)
+	{
+		auto point = getPoint(item);
+		if (point != nullptr)
+		{
+			points.push_back(*point);
+		}
+	}
+	return createPolygon(points);
 }
 
 alg::MeshPolygon* alg::PointSet::createPolygon(const std::vector<math::Vector3>& vecPoints)
 {
-	return nullptr;
+	std::string key;
+	for (auto item : vecPoints)
+	{
+		key += item.toString() + ",";
+	}
+
+	if (key.size() > 0)
+	{
+		key = key.substr(0, key.size() - 1);
+	}
+
+	auto it = _meshPolygons.find(key);
+	if (it != _meshPolygons.end())
+	{
+		SAFE_RETAIN(it->second);
+		return it->second;
+	}
+
+	auto item = new MeshPolygon(vecPoints);
+	_meshPolygons[key] = item;
+
+	return item;
 }
 
 void alg::PointSet::removePolygon(MeshPolygon* pPolygon)
@@ -189,10 +254,10 @@ void alg::PointSet::removePolygon(MeshPolygon* pPolygon)
 
 void alg::PointSet::cleanup()
 {
-	for (auto item : _meshVertexes) delete item.second;
-	for (auto item : _meshEdges) delete item.second;
-	for (auto item : _meshTriangles) delete item.second;
-	for (auto item : _meshPolygons) delete item.second;
+	for (auto item : _meshVertexes) SAFE_RELEASE(item.second);
+	for (auto item : _meshEdges) SAFE_RELEASE(item.second);
+	for (auto item : _meshTriangles) SAFE_RELEASE(item.second);
+	for (auto item : _meshPolygons) SAFE_RELEASE(item.second);
 
 	_vertices.clear();
 	_meshVertexes.clear();

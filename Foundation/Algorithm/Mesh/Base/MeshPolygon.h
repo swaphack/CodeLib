@@ -16,15 +16,22 @@ namespace alg
 	class MeshPolygon : public MeshProtocol
 	{
 	public:
+		MeshPolygon();
 		MeshPolygon(const std::vector<math::Vector3>& points);
-		MeshPolygon(PointSet* pointSet, const std::vector<math::Vector3>& points);
-		MeshPolygon(PointSet* pointSet, const std::vector<int>& indices);
+		MeshPolygon(const std::vector<MeshVertex*>& vertexes);
 		virtual ~MeshPolygon();
+	public:
+		static MeshPolygon* create(const std::vector<math::Vector3>& points);
+		static MeshPolygon* create(const std::vector<MeshVertex*>& vertexes);
 	public:
 		/**
 		*	设置顶点
 		*/
-		void setVertexes(std::vector<MeshVertex*>& vertexes);
+		void setVertexes(const std::vector<math::Vector3>& points);
+		/**
+		*	设置顶点
+		*/
+		void setVertexes(const std::vector<MeshVertex*>& vertexes);
 	public:
 		/**
 		*	是否包含顶点

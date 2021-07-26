@@ -19,16 +19,28 @@ namespace alg
 #define EDGE_VERTEX_COUNT 2
 
 	public:
+		MeshEdge();
 		MeshEdge(const math::Vector3& pointA, const math::Vector3& pointB);
 		MeshEdge(const MeshVertex* pVertexA, const MeshVertex* pVertexB);
-		MeshEdge(PointSet* pointSet, const math::Vector3& pointA, const math::Vector3& pointB);
-		MeshEdge(PointSet* pointSet, int idx0, int idx1);
 		virtual ~MeshEdge();
+	public:
+		/**
+		*	创建多边形
+		*/
+		static MeshEdge* create(const math::Vector3& pointA, const math::Vector3& pointB);
+		/**
+		*	创建多边形
+		*/
+		static MeshEdge* create(const MeshVertex* pVertexA, const MeshVertex* pVertexB);
 	public:
 		/**
 		*	设置顶点
 		*/
-		void setVertexes(MeshVertex* pVertexA, MeshVertex* pVertexB);
+		void setVertexes(const math::Vector3& pointA, const math::Vector3& pointB);
+		/**
+		*	设置顶点
+		*/
+		void setVertexes(const MeshVertex* pVertexA, const MeshVertex* pVertexB);
 	public:
 		/**
 		*	是否包含顶点
@@ -42,7 +54,7 @@ namespace alg
 		/**
 		*	添加共边三角形
 		*/
-		void addSharedPointTriangle(MeshTriangle* edge);
+		void addSharedPointTriangle(const MeshTriangle* edge);
 		/**
 		*	移除共边三角形
 		*/

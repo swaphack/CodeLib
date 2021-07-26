@@ -138,7 +138,6 @@
     <ClCompile Include="Mesh\Base\Mesh.cpp" />
     <ClCompile Include="Mesh\Base\MeshEdge.cpp" />
     <ClCompile Include="Mesh\Base\MeshPolygon.cpp" />
-    <ClCompile Include="Mesh\Base\MeshProtocol.cpp" />
     <ClCompile Include="Mesh\Base\MeshTriangle.cpp" />
     <ClCompile Include="Mesh\Base\MeshVertex.cpp" />
     <ClCompile Include="Mesh\Base\PointSet.cpp" />

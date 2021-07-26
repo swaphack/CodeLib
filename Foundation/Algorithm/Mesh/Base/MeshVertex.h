@@ -16,9 +16,11 @@ namespace alg
 	class MeshVertex : public MeshProtocol
 	{
 	public:
+		MeshVertex();
 		MeshVertex(const math::Vector3& position);
-		MeshVertex(PointSet* pointSet, const math::Vector3& position);
 		virtual ~MeshVertex();
+	public:
+		static MeshVertex* create(const math::Vector3& position);
 	public:
 		/**
 		*	Œª÷√

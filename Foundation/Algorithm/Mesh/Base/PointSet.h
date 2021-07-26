@@ -14,11 +14,16 @@ namespace alg
 	/**
 	*	点集合
 	*/
-	class PointSet
+	class PointSet : public sys::Object
 	{
 	public:
 		PointSet();
-		~PointSet();
+		virtual ~PointSet();
+	public:
+		/**
+		*	创建点集
+		*/
+		static PointSet* create(int count, int width, int height);
 	public:
 		/**
 		*	设置顶点
@@ -50,6 +55,10 @@ namespace alg
 		*	创建边
 		*/
 		MeshEdge* createEdge(const math::Vector3& point0, const math::Vector3& point1);
+		/**
+		*	创建边
+		*/
+		MeshEdge* createEdge(const MeshVertex* pVertex0, const MeshVertex* pVertex1);
 		/**
 		*	移除边
 		*/

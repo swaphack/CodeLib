@@ -2,46 +2,17 @@
 #include "MeshVertex.h"
 #include "PointSet.h"
 
+alg::MeshPolygon::MeshPolygon()
+{
+}
+
 alg::MeshPolygon::MeshPolygon(const std::vector<math::Vector3>& points)
 {
-	std::vector<MeshVertex*> vertexes;
-
-	for (auto item : points)
-	{
-		auto pVertex = new MeshVertex(item);
-		if (pVertex) vertexes.push_back(pVertex);
-	}
-
-	this->setVertexes(vertexes);
+	this->setVertexes(points);
 }
 
-alg::MeshPolygon::MeshPolygon(PointSet* pointSet, const std::vector<math::Vector3>& points)
+alg::MeshPolygon::MeshPolygon(const std::vector<MeshVertex*>& vertexes)
 {
-	ASSERT(pointSet != nullptr);
-	this->setPointSet(pointSet);
-
-	std::vector<MeshVertex*> vertexes;
-	for (auto item : points)
-	{
-		auto pVertex = pointSet->createVertex(item);
-		if (pVertex) vertexes.push_back(pVertex);
-	}
-
-	this->setVertexes(vertexes);
-}
-
-alg::MeshPolygon::MeshPolygon(PointSet* pointSet, const std::vector<int>& indices)
-{
-	ASSERT(pointSet != nullptr);
-	this->setPointSet(pointSet);
-
-	std::vector<MeshVertex*> vertexes;
-	for (auto item : indices)
-	{
-		auto pVertex = pointSet->createVertex(item);
-		if (pVertex) vertexes.push_back(pVertex);
-	}
-
 	this->setVertexes(vertexes);
 }
 
@@ -53,7 +24,34 @@ alg::MeshPolygon::~MeshPolygon()
 	}
 }
 
-void alg::MeshPolygon::setVertexes(std::vector<MeshVertex*>& vertexes)
+alg::MeshPolygon* alg::MeshPolygon::create(const std::vector<math::Vector3>& points)
+{
+	auto item = CREATE_OBJECT(MeshPolygon);
+	item->setVertexes(points);
+	return item;
+}
+
+alg::MeshPolygon* alg::MeshPolygon::create(const std::vector<MeshVertex*>& vertexes)
+{
+	auto item = CREATE_OBJECT(MeshPolygon);
+	item->setVertexes(vertexes);
+	return item;
+}
+
+void alg::MeshPolygon::setVertexes(const std::vector<math::Vector3>& points)
+{
+	std::vector<MeshVertex*> vertexes;
+
+	for (auto item : points)
+	{
+		auto pVertex = MeshVertex::create(item);
+		if (pVertex) vertexes.push_back(pVertex);
+	}
+
+	this->setVertexes(vertexes);
+}
+
+void alg::MeshPolygon::setVertexes(const std::vector<MeshVertex*>& vertexes)
 {
 	for (auto item : vertexes)
 	{
@@ -64,9 +62,6 @@ void alg::MeshPolygon::setVertexes(std::vector<MeshVertex*>& vertexes)
 		SAFE_RELEASE(item);
 	}
 	_vertexes = vertexes;
-	std::sort(_vertexes.begin(), _vertexes.end(), [](const MeshVertex* a, const MeshVertex* b) {
-		return math::CompareVec3(a->getPosition(), b->getPosition());
-	});
 }
 
 bool alg::MeshPolygon::containVertex(const MeshVertex* pVertex) const

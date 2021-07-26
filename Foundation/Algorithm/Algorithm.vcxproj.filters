@@ -181,6 +181,9 @@
     <Filter Include="Mesh\Bae">
       <UniqueIdentifier>{8155fd8c-0f07-4684-a7f5-4db5e4302fef}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Mesh\Core">
+      <UniqueIdentifier>{3ccbf977-430f-4872-b255-57d2001c2c76}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
@@ -260,9 +263,6 @@
       <Filter>Mesh\Bae</Filter>
     </ClCompile>
     <ClCompile Include="Mesh\Base\PointSet.cpp">
-      <Filter>Mesh\Bae</Filter>
-    </ClCompile>
-    <ClCompile Include="Mesh\Base\MeshProtocol.cpp">
       <Filter>Mesh\Bae</Filter>
     </ClCompile>
   </ItemGroup>

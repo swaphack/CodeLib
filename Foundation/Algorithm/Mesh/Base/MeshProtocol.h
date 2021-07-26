@@ -12,21 +12,7 @@ namespace alg
 	class MeshProtocol : public sys::Object
 	{
 	public:
-		MeshProtocol();
-		virtual ~MeshProtocol();
-	public:
-		/**
-		*	所属点集合
-		*/
-		void setPointSet(PointSet* pointSet);
-		/**
-		*	所属点集合
-		*/
-		PointSet* getPointSet() const;
-	protected:
-		/**
-		*	所属点集合
-		*/
-		PointSet* _pointSet = nullptr;
+		MeshProtocol() {}
+		virtual ~MeshProtocol() {}
 	};
 }

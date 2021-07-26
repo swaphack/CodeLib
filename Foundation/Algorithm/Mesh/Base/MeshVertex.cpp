@@ -1,16 +1,12 @@
 #include "MeshVertex.h"
 #include "MeshEdge.h"
 
-alg::MeshVertex::MeshVertex(const math::Vector3& position)
+alg::MeshVertex::MeshVertex()
 {
-	_position = position;
 }
 
-alg::MeshVertex::MeshVertex(PointSet* pointSet, const math::Vector3& position)
+alg::MeshVertex::MeshVertex(const math::Vector3& position)
 {
-	ASSERT(pointSet != nullptr);
-
-	this->setPointSet(pointSet);
 	_position = position;
 }
 
@@ -20,6 +16,13 @@ alg::MeshVertex::~MeshVertex()
 	{
 		SAFE_RELEASE(item);
 	}
+}
+
+alg::MeshVertex* alg::MeshVertex::create(const math::Vector3& position)
+{
+	auto pVertex = CREATE_OBJECT(MeshVertex);
+	pVertex->setPosition(position);
+	return pVertex;
 }
 
 void alg::MeshVertex::setPosition(const math::Vector3& position)

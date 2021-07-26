@@ -74,41 +74,41 @@ bool math::Triangle::hasSameEdge(const Triangle& target, LineSegment3d& side)
 	return false;
 }
 
-Vector3 math::Triangle::getCentreOfGravity() const
+Vector3 math::Triangle::getCentreOfGravity(const Vector3& p0, const Vector3& p1, const Vector3& p2)
 {
-	return 1.0f / 3.0f * (getPoint0() + getPoint1() + getPoint2());
+	return 1.0f / 3.0f * (p0 + p1 + p2);
 }
 
-Vector3 math::Triangle::getInCenter() const
+Vector3 math::Triangle::getInCenter(const Vector3& p0, const Vector3& p1, const Vector3& p2)
 {
-	float a = Vector3::distance(getPoint1(), getPoint2());
-	float b = Vector3::distance(getPoint0(), getPoint2());
-	float c = Vector3::distance(getPoint0(), getPoint1());
+	float a = Vector3::distance(p1, p2);
+	float b = Vector3::distance(p0, p2);
+	float c = Vector3::distance(p0, p1);
 
 	float d = a + b + c;
 	if (d == 0) return Vector3();
 
-	float x = getPoint0().getX() * a + getPoint1().getX() * b + getPoint2().getX() * c;
-	float y = getPoint0().getY() * a + getPoint1().getY() * b + getPoint2().getY() * c;
-	float z = getPoint0().getZ() * a + getPoint1().getZ() * b + getPoint2().getZ() * c;
+	float x = p0.getX() * a + p1.getX() * b + p2.getX() * c;
+	float y = p0.getY() * a + p1.getY() * b + p2.getY() * c;
+	float z = p0.getZ() * a + p1.getZ() * b + p2.getZ() * c;
 
 	return Vector3(x / d, y / d, z / d);
 }
 
-Vector3 math::Triangle::getCircumcenter() const
+Vector3 math::Triangle::getCircumcenter(const Vector3& p0, const Vector3& p1, const Vector3& p2)
 {
-	float a = Vector3::distance(getPoint1(), getPoint2());
-	float b = Vector3::distance(getPoint0(), getPoint2());
-	float c = Vector3::distance(getPoint0(), getPoint1());
+	float a = Vector3::distance(p1, p2);
+	float b = Vector3::distance(p0, p2);
+	float c = Vector3::distance(p0, p1);
 
-	Vector3 v12 = getPoint0() - getPoint1();
-	Vector3 v21 = getPoint1() - getPoint0();
+	Vector3 v12 = p0 - p1;
+	Vector3 v21 = p1 - p0;
 	
-	Vector3 v23 = getPoint1() - getPoint2();
-	Vector3 v32 = getPoint2() - getPoint1();
+	Vector3 v23 = p1 - p2;
+	Vector3 v32 = p2 - p1;
 
-	Vector3 v13 = getPoint0() - getPoint2();
-	Vector3 v31 = getPoint2() - getPoint1();
+	Vector3 v13 = p0 - p2;
+	Vector3 v31 = p2 - p1;
 
 	float d = 2 * Vector3::cross(v12, v23).getMagnitudeSqr();
 	if (d == 0) return Vector3();
@@ -117,30 +117,30 @@ Vector3 math::Triangle::getCircumcenter() const
 	float beta = v13.getMagnitudeSqr() * Vector3::dot(v21, v23) / d;
 	float gamma = v12.getMagnitudeSqr() * Vector3::dot(v31, v32) / d;
 
-	return alpha * getPoint0() + beta * getPoint1() + gamma * getPoint2();
+	return alpha * p0 + beta * p1 + gamma * p2;
 }
 
-Vector3 math::Triangle::getCircumcenter2d() const
+Vector3 math::Triangle::getCircumcenter2d(const Vector3& p0, const Vector3& p1, const Vector3& p2)
 {
 	float dA, dB, dC, aux1, aux2, div;
 
-	dA = getPoint0().getMagnitudeSqr();
-	dB = getPoint1().getMagnitudeSqr();
-	dC = getPoint2().getMagnitudeSqr();
+	dA = p0.getMagnitudeSqr();
+	dB = p1.getMagnitudeSqr();
+	dC = p2.getMagnitudeSqr();
 
-	aux1 = (dA * (getPoint2().getY() - getPoint1().getY()) + dB * (getPoint0().getY() - getPoint2().getY()) + dC * (getPoint1().getY() - getPoint0().getY()));
-	aux2 = -(dA * (getPoint2().getX() - getPoint1().getX()) + dB * (getPoint0().getX() - getPoint2().getX()) + dC * (getPoint1().getX() - getPoint0().getX()));
-	div = (2 * (getPoint0().getX() * (getPoint2().getY() - getPoint1().getY()) + getPoint1().getX() * (getPoint0().getY() - getPoint2().getY()) + getPoint2().getX() * (getPoint1().getY() - getPoint0().getY())));
+	aux1 = (dA * (p2.getY() - p1.getY()) + dB * (p0.getY() - p2.getY()) + dC * (p1.getY() - p0.getY()));
+	aux2 = -(dA * (p2.getX() - p1.getX()) + dB * (p0.getX() - p2.getX()) + dC * (p1.getX() - p0.getX()));
+	div = (2 * (p0.getX() * (p2.getY() - p1.getY()) + p1.getX() * (p0.getY() - p2.getY()) + p2.getX() * (p1.getY() - p0.getY())));
 
 	if (div == 0) return Vector3();
 
 	return Vector3(aux1 / div, aux2 / div);
 }
 
-math::Vector3 math::Triangle::getNormal()
+math::Vector3 math::Triangle::getNormal(const Vector3& p0, const Vector3& p1, const Vector3& p2)
 {
-	Vector3 v0 = this->getPoint1() - this->getPoint0();
-	Vector3 v1 = this->getPoint2() - this->getPoint0();
+	Vector3 v0 = p1 - p0;
+	Vector3 v1 = p2 - p0;
 
 	return Vector3::cross(v0, v1);
 }

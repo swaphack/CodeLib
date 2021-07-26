@@ -3,36 +3,22 @@
 #include "MeshEdge.h"
 #include "PointSet.h"
 
+alg::MeshTriangle::MeshTriangle()
+{
+	for (size_t i = 0; i < TRIANGLE_VERTEX_AND_EDGE_COUNT; i++)
+	{
+		_vertexes[i] = nullptr;
+		_edges[i] = nullptr;
+	}
+}
+
 alg::MeshTriangle::MeshTriangle(const math::Vector3& pointA, const math::Vector3& pointB, const math::Vector3& pointC)
 {
-	auto pVertexA = new MeshVertex(pointA);
-	auto pVertexB = new MeshVertex(pointB);
-	auto pVertexC = new MeshVertex(pointC);
-
-	this->setVertexes(pVertexA, pVertexB, pVertexC);
+	this->setVertexes(pointA, pointB, pointC);
 }
 
-alg::MeshTriangle::MeshTriangle(PointSet* pointSet, const math::Vector3& pointA, const math::Vector3& pointB, const math::Vector3& pointC)
+alg::MeshTriangle::MeshTriangle(const MeshVertex* pVertexA, const MeshVertex* pVertexB, const MeshVertex* pVertexC)
 {
-	ASSERT(pointSet != nullptr);
-	this->setPointSet(pointSet);
-
-	auto pVertexA = pointSet->createVertex(pointA);
-	auto pVertexB = pointSet->createVertex(pointB);
-	auto pVertexC = pointSet->createVertex(pointC);
-
-	this->setVertexes(pVertexA, pVertexB, pVertexC);
-}
-
-alg::MeshTriangle::MeshTriangle(PointSet* pointSet, int idx0, int idx1, int idx2)
-{
-	ASSERT(pointSet != nullptr);
-	this->setPointSet(pointSet);
-
-	auto pVertexA = pointSet->createVertex(idx0);
-	auto pVertexB = pointSet->createVertex(idx1);
-	auto pVertexC = pointSet->createVertex(idx2);
-
 	this->setVertexes(pVertexA, pVertexB, pVertexC);
 }
 
@@ -49,13 +35,26 @@ alg::MeshTriangle::~MeshTriangle()
 	}
 }
 
-void alg::MeshTriangle::setVertexes(MeshVertex* pVertexA, MeshVertex* pVertexB, MeshVertex* pVertexC)
+void alg::MeshTriangle::setVertexes(const math::Vector3& pointA, const math::Vector3& pointB, const math::Vector3& pointC)
+{
+	auto pVertexA = MeshVertex::create(pointA);
+	auto pVertexB = MeshVertex::create(pointB);
+	auto pVertexC = MeshVertex::create(pointC);
+
+	this->setVertexes(pVertexA, pVertexB, pVertexC);
+}
+
+void alg::MeshTriangle::setVertexes(const MeshVertex* pVertexA, const MeshVertex* pVertexB, const MeshVertex* pVertexC)
 {
 	if (pVertexA == nullptr || pVertexB == nullptr || pVertexC == nullptr) return;
 
-	SAFE_RETAIN(pVertexA);
-	SAFE_RETAIN(pVertexB);
-	SAFE_RETAIN(pVertexC);
+	auto pA = (MeshVertex*)pVertexA;
+	auto pB = (MeshVertex*)pVertexB;
+	auto pC = (MeshVertex*)pVertexC;
+
+	SAFE_RETAIN(pA);
+	SAFE_RETAIN(pB);
+	SAFE_RETAIN(pC);
 
 	for (auto item : _vertexes)
 	{
@@ -67,37 +66,35 @@ void alg::MeshTriangle::setVertexes(MeshVertex* pVertexA, MeshVertex* pVertexB, 
 		SAFE_RELEASE(item);
 	}
 
-	_vertexes[0] = pVertexA;
-	_vertexes[1] = pVertexB;
-	_vertexes[2] = pVertexC;
+	_vertexes[0] = pA;
+	_vertexes[1] = pB;
+	_vertexes[2] = pC;
 
-	std::sort(_vertexes.begin(), _vertexes.end(), [](const MeshVertex* a, const MeshVertex* b) {
-		return math::CompareVec3(a->getPosition(), b->getPosition());
-	});
+	auto pEdgeA = MeshEdge::create(_vertexes[0], _vertexes[1]);
+	auto pEdgeB = MeshEdge::create(_vertexes[1], _vertexes[2]);
+	auto pEdgeC = MeshEdge::create(_vertexes[2], _vertexes[0]);
 
-	if (getPointSet() != nullptr)
-	{
-		auto pEdgeA = getPointSet()->createEdge(_vertexes[0]->getPosition(), _vertexes[1]->getPosition());
-		auto pEdgeB = getPointSet()->createEdge(_vertexes[1]->getPosition(), _vertexes[2]->getPosition());
-		auto pEdgeC = getPointSet()->createEdge(_vertexes[2]->getPosition(), _vertexes[0]->getPosition());
-
-		this->setEdges(pEdgeA, pEdgeB, pEdgeC);
-	}
-	else
-	{
-		auto pEdgeA = new MeshEdge(_vertexes[0]->getPosition(), _vertexes[1]->getPosition());
-		auto pEdgeB = new MeshEdge(_vertexes[1]->getPosition(), _vertexes[2]->getPosition());
-		auto pEdgeC = new MeshEdge(_vertexes[2]->getPosition(), _vertexes[0]->getPosition());
-
-		this->setEdges(pEdgeA, pEdgeB, pEdgeC);
-	}
+	this->setEdges(pEdgeA, pEdgeB, pEdgeC);
 }
 
-void alg::MeshTriangle::setEdges(MeshEdge* pEdgeA, MeshEdge* pEdgeB, MeshEdge* pEdgeC)
+void alg::MeshTriangle::setEdges(const MeshEdge* pEdgeA, const MeshEdge* pEdgeB, const MeshEdge* pEdgeC)
 {
-	_edges[0] = pEdgeA;
-	_edges[1] = pEdgeB;
-	_edges[2] = pEdgeC;
+	auto pA = (MeshEdge*)pEdgeA;
+	auto pB = (MeshEdge*)pEdgeB;
+	auto pC = (MeshEdge*)pEdgeC;
+
+	SAFE_RETAIN(pA);
+	SAFE_RETAIN(pB);
+	SAFE_RETAIN(pC);
+
+	for (auto item : _edges)
+	{
+		SAFE_RELEASE(item);
+	}
+
+	_edges[0] = pA;
+	_edges[1] = pB;
+	_edges[2] = pC;
 }
 
 bool alg::MeshTriangle::containVertex(const MeshVertex* pVertex) const
