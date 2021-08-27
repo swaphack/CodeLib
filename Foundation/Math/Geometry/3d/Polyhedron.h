@@ -3,6 +3,7 @@
 #include <cstdint>
 #include "Algebra/import.h"
 #include "Basic/VariableLengthArray.h"
+#include "Geometry/GeometryUtiity.h"
 
 namespace math
 {
@@ -39,9 +40,9 @@ namespace math
 
 			for (int32_t i = 0; i < Length; i++)
 			{
-				pxoy = Surface::projectOnXOY(this->getValue(i));
-				pyoz = Surface::projectOnYOZ(this->getValue(i));
-				pxoz = Surface::projectOnXOZ(this->getValue(i));
+				pxoy = GeometryUtiity::projectSurfaceOnXOY(this->getValue(i));
+				pyoz = GeometryUtiity::projectSurfaceOnYOZ(this->getValue(i));
+				pxoz = GeometryUtiity::projectSurfaceOnXOZ(this->getValue(i));
 
 				if (pxoy.contains(pxy) || pyoz.contains(pyz) || pyoz.contains(pxz))
 				{

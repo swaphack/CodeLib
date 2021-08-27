@@ -57,6 +57,12 @@ Vector3& Vector3::operator=(const Vector3& vec)
 	return *this;
 }
 
+Vector3 math::Vector3::operator=(const Vector3& vec) const
+{
+	Vector3 value(vec);
+	return value;
+}
+
 Vector3 Vector3::operator+(const Vector3& vec) const
 {
 	return Vector3(getX() + vec.getX(), getY() + vec.getY(), getZ() + vec.getZ());
@@ -160,6 +166,7 @@ bool Vector3::operator==(const Vector3& vec) const
 	return getX() == vec.getX() && getY() == vec.getY() && getZ() == vec.getZ();
 }
 
+/*
 Vector3& Vector3::operator=(const Vector2& vec)
 {
 	setX(vec.getX());
@@ -167,6 +174,7 @@ Vector3& Vector3::operator=(const Vector2& vec)
 
 	return *this;
 }
+*/
 
 bool Vector3::operator!=(const Vector3& vec) const
 {
@@ -292,7 +300,7 @@ float Vector3::sinValue(const Vector3& vector0, const Vector3& vector1)
 	return getDetMagnitude(det) / (a * b);
 }
 
-bool Vector3::isThreePointsOnSameLine(const Vector3& point0, const Vector3& point1, const Vector3& point2)
+bool Vector3::isThreePointsCollinear(const Vector3& point0, const Vector3& point1, const Vector3& point2)
 {
 	Vector3 v0 = point2 - point0;
 	Vector3 v1 = point2 - point1;

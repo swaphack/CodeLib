@@ -17,5 +17,5 @@ ExponentialFunction::ExponentialFunction(float exp)
 
 Decimal ExponentialFunction::getValue(const Decimal& var)
 {
-	return powl(getExp(), var);
+	return (double)powl((long double)getExp(), (long double)var);
 }

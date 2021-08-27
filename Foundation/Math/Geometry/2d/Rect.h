@@ -49,29 +49,45 @@ namespace math
 		/**
 		*	包含点
 		*/
-		bool contains(float x, float y);
+		bool contains(float x, float y) const;
 		/**
 		*	包含点
 		*/
-		bool contains(const Vector2& point);
+		bool contains(const Vector2& point) const;
+		/**
+		*	包含点
+		*/
+		bool contains(const Vector3& point) const;
+		/**
+		*	包含点
+		*/
+		bool includes(float x, float y) const;
+		/**
+		*	包含点
+		*/
+		bool includes(const Vector2& point) const;
+		/**
+		*	包含点
+		*/
+		bool includes(const Vector3& point) const;
 		/**
 		*	框相交
 		*/
-		bool intersect(float x, float y, float w, float h);
+		bool intersect(float x, float y, float w, float h) const;
 		/**
 		*	框相交
 		*/
-		bool intersect(const Rect& rect);
+		bool intersect(const Rect& rect) const;
 
 		/**
 		*	并集
 		*/
-		Rect unionRect(const Rect& rect);
+		Rect unionRect(const Rect& rect) const;
 
 		/**
 		*	交集
 		*/
-		Rect intersectRect(const Rect& rect);
+		Rect intersectRect(const Rect& rect) const;
 	public:
 		Rect& operator=(const Rect& rect);
 	protected:

@@ -2,6 +2,7 @@
 
 #include <set>
 #include <cstdint>
+#include <map>
 
 #include "Set.h"
 
@@ -76,7 +77,7 @@ namespace math
 		/**
 		*	是否为空
 		*/
-		virtual bool isNone() const
+		virtual bool isEmpty() const
 		{
 			return _elements.empty();
 		}
@@ -85,7 +86,7 @@ namespace math
 		*	是否是目标的子集
 		*	当前集合所有元素都在集合 value 中
 		*/
-		bool isSubSetEqual(const FiniteSet& value) const
+		bool isSubSetOrEqual(const FiniteSet& value) const
 		{
 			if (this->getCount() > value.getCount())
 			{
@@ -114,7 +115,7 @@ namespace math
 				return false;
 			}
 
-			if (this->isSubSetEqual(value))
+			if (this->isSubSetOrEqual(value))
 			{
 				return this->getCount() != value.getCount();
 			}
@@ -126,9 +127,9 @@ namespace math
 		*	是否是目标的超集
 		*	集合 value 中所有元素都在当前集合
 		*/
-		bool isSupSetEqual(const FiniteSet& value) const
+		bool isSupSetOrEqual(const FiniteSet& value) const
 		{
-			return value.isSubSetEqual(*this);
+			return value.isSubSetOrEqual(*this);
 		}
 		/**
 		*	真超集
@@ -142,7 +143,7 @@ namespace math
 		/**
 		*	并集
 		*/
-		FiniteSet unionAll(const FiniteSet& value) const
+		FiniteSet getUnionSet(const FiniteSet& value) const
 		{
 			FiniteSet set = *this;
 			auto values = value.getAllElements();
@@ -158,7 +159,7 @@ namespace math
 		/**
 		*	交集
 		*/
-		FiniteSet intersect(const FiniteSet& value) const
+		FiniteSet getIntersectSet(const FiniteSet& value) const
 		{
 			FiniteSet set;
 			auto values = value.getAllElements();
@@ -175,11 +176,11 @@ namespace math
 		*	补集
 		*	排除包含目标的元素
 		*/
-		FiniteSet complementary(const FiniteSet& value) const
+		FiniteSet getComplementarySet(const FiniteSet& value) const
 		{
 			FiniteSet set = *this;
 			auto values = value.getAllElements();
-			for (auto& item : values)
+			for (const auto& item : values)
 			{
 				if (this->contains(item))
 				{
@@ -192,12 +193,31 @@ namespace math
 		*	后继集
 		*	排除包含目标的元素
 		*/
-		FiniteSet successor() const
+		FiniteSet getSuccessor() const
 		{
 			FiniteSet outter = *this;
 			FiniteSet set = *this;
 			outter.addElement(set);
 			return set;
+		}
+
+
+		typedef std::pair<T, T> TUPLE2;
+		/**
+		*	笛卡尔积
+		*/
+		FiniteSet<TUPLE2> getCartesianProduct(const FiniteSet& target)
+		{
+			FiniteSet<TUPLE2> values;
+			for (auto item0 : _elements)
+			{
+				for (auto item1 : target.getAllElements())
+				{
+					values.addElement(TUPLE(item0, item1));
+				}
+			}
+
+			return values;
 		}
 	public:
 		FiniteSet operator+(const T& value) const
@@ -236,7 +256,7 @@ namespace math
 		}
 		bool operator==(const FiniteSet& value) const
 		{
-			if (this->isSubSetEqual(value) && value.isSubSetEqual(*this))
+			if (this->isSubSetOrEqual(value) && value.isSubSetOrEqual(*this))
 			{
 				return true;
 			}
@@ -245,7 +265,7 @@ namespace math
 		}
 		bool operator!=(const FiniteSet& value) const
 		{
-			if (!this->isSubSetEqual(value) || !value.isSubSetEqual(*this))
+			if (!this->isSubSetOrEqual(value) || !value.isSubSetOrEqual(*this))
 			{
 				return true;
 			}

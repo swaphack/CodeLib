@@ -1,30 +1,30 @@
-#include "QuadraticPolynomial.h"
+#include "UnaryQuadraticPolynomial.h"
 
-math::QuadraticPolynomial::QuadraticPolynomial()
+math::UnaryQuadraticPolynomial::UnaryQuadraticPolynomial()
 {
 	this->setCoefficient(1, 1, 1);
 }
 
-math::QuadraticPolynomial::QuadraticPolynomial(float b, float c)
+math::UnaryQuadraticPolynomial::UnaryQuadraticPolynomial(float b, float c)
 {
 	this->setCoefficient(b, c);
 }
 
-math::QuadraticPolynomial::QuadraticPolynomial(float a, float b, float c)
+math::UnaryQuadraticPolynomial::UnaryQuadraticPolynomial(float a, float b, float c)
 {
 	this->setCoefficient(a, b, c);
 }
 
-math::QuadraticPolynomial::~QuadraticPolynomial()
+math::UnaryQuadraticPolynomial::~UnaryQuadraticPolynomial()
 {
 }
 
-void math::QuadraticPolynomial::setCoefficient(float b, float c)
+void math::UnaryQuadraticPolynomial::setCoefficient(float b, float c)
 {
 	this->setCoefficient(1, b, c);
 }
 
-void math::QuadraticPolynomial::setCoefficient(float a, float b, float c)
+void math::UnaryQuadraticPolynomial::setCoefficient(float a, float b, float c)
 {
 	this->removeAllTerms();
 	this->setTerm(a, 2);
@@ -32,7 +32,7 @@ void math::QuadraticPolynomial::setCoefficient(float a, float b, float c)
 	this->setTerm(c, 0);
 }
 
-std::vector<math::Complex> math::QuadraticPolynomial::getEquationSolution()
+std::vector<math::Complex> math::UnaryQuadraticPolynomial::getEquationSolution()
 {
 	float a = getCoefficient(2);
 	float b = getCoefficient(1);

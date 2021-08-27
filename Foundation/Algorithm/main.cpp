@@ -1,8 +1,34 @@
 #include "Sort/Sort.h"
+#include "Mesh/import.h"
+
 #include <vector>
 
 using namespace alg;
 
+void testMesh()
+{
+	float width = 100;
+	float height = 100;
+	int count = 50;
+
+	math::RectPoints rect(
+		math::Vector3(),
+		math::Vector3(width, 0),
+		math::Vector3(width, height),
+		math::Vector3(0, height));
+
+	std::vector<math::Vector3> points;
+	for (int i = 0; i < count; i++)
+	{
+		math::Vector3 point(sys::Random::getNumber(0.0f, width), sys::Random::getNumber(0.0f, height));
+		points.push_back(point);
+	}
+
+	Delaunay delaunay;
+	Voronoi voronoi;
+	std::vector<math::TrianglePoints> setTriangles = delaunay.createWithBowyerWatson(rect, points);
+	std::vector<math::Polygon> setPolygon = voronoi.createWithRect(rect, &delaunay);
+}
 
 int main(int argc, char** argv)
 {

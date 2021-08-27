@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Algebra/Vector/Vector2.h"
+#include "Algebra/Vector/Vector3.h"
 #include "Geometry/base/Points.h"
 
 namespace math
@@ -10,6 +11,7 @@ namespace math
 	public:
 		LineSegment2d();
 		LineSegment2d(Vector2 src, Vector2 dest);
+		LineSegment2d(Vector3 src, Vector3 dest);
 	public:
 		CREATE_INDEX_VALUE(Src, 0, Vector2);
 		CREATE_INDEX_VALUE(Dest, 1, Vector2);
@@ -25,6 +27,6 @@ namespace math
 		/**
 		*	两向量是否相交
 		*/
-		bool intersects(const LineSegment2d& line, Vector2& point);
+		bool intersects(const LineSegment2d& line, Vector2& point) const;
 	};
 }

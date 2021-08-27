@@ -201,7 +201,7 @@ namespace alg
 						return false;
 					}
 
-					if (target == -1 || count > it->second.size())
+					if (target == -1 || count > (int)(it->second.size()))
 					{
 						target = item.first;
 						count = it->second.size();

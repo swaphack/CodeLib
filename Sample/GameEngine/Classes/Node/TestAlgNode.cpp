@@ -16,7 +16,7 @@ void TestAlgNode::initNodes()
 {
 	//this->testMeshMapFindPath();
 
-	this->testWFCCreateMap();
+	this->testDelaunay();
 }
 
 void TestAlgNode::testRayMapFindPath()
@@ -133,5 +133,63 @@ void TestAlgNode::testWFCCreateMap()
 	{
 		return;
 	}
+}
+
+void TestAlgNode::testDelaunay()
+{
+	float width = 100;
+	float height = 100;
+	
+	int horizontal = 10;
+	int vertical = 10;
+
+	float perWidth = width / horizontal;
+	float perHeight = height / vertical;
+
+	int totalCount = horizontal * vertical;
+	std::vector<math::Vector3> points;
+	for (size_t i = 0; i < totalCount; i++)
+	{
+		int row = i / vertical;
+		int column = i % horizontal;
+
+		math::Vector3 point;
+		point.setX(sys::Random::getNumber(column * perWidth, (column + 1) * perWidth));
+		point.setY(sys::Random::getNumber(row * perHeight, (row + 1) * perHeight));
+		points.push_back(point);
+	}
+
+	math::RectPoints rectPoints;
+	rectPoints.setLeftBottom(math::Vector3());
+	rectPoints.setRightBottom(math::Vector3(width, 0));
+	rectPoints.setRightTop(math::Vector3(width, height));
+	rectPoints.setLeftTop(math::Vector3(0, height));
+
+	math::Rect rect = (math::Rect)rectPoints;
+
+	alg::Delaunay delaunay;
+	alg::Voronoi voronoi;
+
+	auto triagles = delaunay.createWithBowyerWatson(rectPoints, points);
+	//auto polygons = voronoi.createWithRect(rect, &delaunay);
+
+	render::PrimitiveNode* pNode = CREATE_NODE(render::PrimitiveNode);
+	pNode->setDrawMode(DrawMode::TRIANGLES);
+	pNode->setPosition(512, 384, 0);
+	pNode->setPointSize(10);
+
+	for (auto triangle : triagles)
+	{
+		for (size_t i = 0; i < 3; i++)
+		{
+			phy::Color4B color;
+			color.setRed(sys::Random::getNumber(0, 256));
+			color.setGreen(sys::Random::getNumber(0, 256));
+			color.setBlue(sys::Random::getNumber(0, 256));
+			pNode->appendPoint(triangle.getValue(i), color);
+		}
+	}
+
+	this->addChild(pNode);
 }
 

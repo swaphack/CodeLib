@@ -23,7 +23,12 @@ Vector2::Vector2(const Vector2& point)
 {
 	this->setX(point.getX());
 	this->setY(point.getY());
+}
 
+Vector2::Vector2(const Vector3& point)
+{
+	this->setX(point.getX());
+	this->setY(point.getY());
 }
 
 Vector2::Vector2(const Vector<float, 2>& vector)
@@ -215,7 +220,7 @@ float Vector2::getRotateAngle(const Vector2& vector0, const Vector2& vector1)
 	return degreeVal;
 }
 
-bool Vector2::isThreePointsOnSameLine(const Vector2& point0, const Vector2& point1, const Vector2& point2)
+bool Vector2::isThreePointsCollinear(const Vector2& point0, const Vector2& point1, const Vector2& point2)
 {
 	Vector2 v0 = point2 - point0;
 	Vector2 v1 = point2 - point1;

@@ -30,19 +30,19 @@ namespace math
 		/**
 		*	是否包含点
 		*/
-		bool contains(const Vector3& point);
+		bool contains(const Vector3& point) const;
 		/**
 		*	是否包含线段
 		*/
-		bool contains(const LineSegment3d& line);
+		bool contains(const LineSegment3d& line) const;
 		/**
 		*	线段是否相交
 		*/
-		bool intersects(const LineSegment3d& line, Vector3& point);
+		bool intersects(const LineSegment3d& line, Vector3& point) const;
 		/**
 		*	到线段的最近点
 		*/
-		Vector3 closestPoint(const Vector3& point);
+		Vector3 closestPoint(const Vector3& point) const;
 	public:
 		/**
 		*	点到直线的距离

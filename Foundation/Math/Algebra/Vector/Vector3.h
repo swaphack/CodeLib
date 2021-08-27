@@ -51,28 +51,28 @@ namespace math
 		/**
 		*	复制元素
 		*/
-		virtual Vector3& operator=(const Vector3& vec);
+		Vector3& operator=(const Vector3& vec);
 		/**
 		*	复制元素
 		*/
-		virtual Vector3& operator=(const Vector2& vec);
+		Vector3 operator=(const Vector3& vec) const;
 	public:
 		/**
 		*	相加
 		*/
-		virtual Vector3 operator+(const Vector3& vec) const;
+		Vector3 operator+(const Vector3& vec) const;
 		/**
 		*	相减
 		*/
-		virtual Vector3 operator-(const Vector3& vec) const;
+		Vector3 operator-(const Vector3& vec) const;
 		/**
 		*	相乘
 		*/
-		virtual Vector3 operator*(const Vector3& vec) const;
+		Vector3 operator*(const Vector3& vec) const;
 		/**
 		*	相除
 		*/
-		virtual Vector3 operator/(const Vector3& vec) const;
+		Vector3 operator/(const Vector3& vec) const;
 		/**
 		*	相乘
 		*/
@@ -149,7 +149,7 @@ namespace math
 		/**
 		*	三点共线
 		*/
-		static bool isThreePointsOnSameLine(const Vector3& point0, const Vector3& point1, const Vector3& point2);
+		static bool isThreePointsCollinear(const Vector3& point0, const Vector3& point1, const Vector3& point2);
 		/**
 		*	三向量共面
 		*/

@@ -9,22 +9,22 @@ namespace math
 	/**
 	*	三角形
 	*/
-	struct Triangle : public Points<Vector3, 3>
+	struct TrianglePoints : public Points<Vector3, 3>
 	{
 	public:
-		Triangle();
-		Triangle(const Vector3& p0, const Vector3& p1, const Vector3& p2);
-		Triangle(const Vector3* points);
-		virtual ~Triangle();
+		TrianglePoints();
+		TrianglePoints(const Vector3& p0, const Vector3& p1, const Vector3& p2);
+		TrianglePoints(const Vector3* points);
+		virtual ~TrianglePoints();
 	public:
 		CREATE_INDEX_VALUE(Point0, 0, Vector3);
 		CREATE_INDEX_VALUE(Point1, 1, Vector3);
-		CREATE_INDEX_VALUE(Point2, 3, Vector3);
+		CREATE_INDEX_VALUE(Point2, 2, Vector3);
 	public:
 		/*
 		*	是否有共边
 		*/
-		bool hasSameEdge(const Triangle& target, LineSegment3d& side);
+		bool hasSameEdge(const TrianglePoints& target, LineSegment3d& side);
 	public:
 		/*
 		*	重心 中线交点
@@ -35,11 +35,11 @@ namespace math
 		*/
 		static Vector3 getInCenter(const Vector3& p0, const Vector3& p1, const Vector3& p2);
 		/*
-		*	外心
+		*	外心3d
 		*/
 		static Vector3 getCircumcenter(const Vector3& p0, const Vector3& p1, const Vector3& p2);
 		/*
-		*	外心
+		*	外心2d
 		*/
 		static Vector3 getCircumcenter2d(const Vector3& p0, const Vector3& p1, const Vector3& p2);
 		/**

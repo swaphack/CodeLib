@@ -43,11 +43,11 @@ bool TestMainScene::init()
 
 	//this->addChild(CREATE_NODE(TestImageNode));
 
-	//this->addChild(CREATE_NODE(TestMeshNode));
+	this->addChild(CREATE_NODE(TestMeshNode));
 
 	//this->addChild(CREATE_NODE(TestMathNode));
 
-	//this->addChild(CREATE_NODE(TestAlgNode));
+	this->addChild(CREATE_NODE(TestAlgNode));
 
 	return true;
 }

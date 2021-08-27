@@ -36,7 +36,7 @@ float Circle::getRadius() const
 	return _radius;
 }
 
-bool Circle::contains(const Vector3& point)
+bool Circle::contains(const Vector3& point) const
 {
-	return point.getMagnitudeSqr() <= pow(_radius, 2);
+	return (point - _position).getSqrMagnitude() < pow(_radius, 2);
 }

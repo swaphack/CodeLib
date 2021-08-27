@@ -20,6 +20,11 @@ Decimal::Decimal(double value)
 	*this = value;
 }
 
+math::Decimal::Decimal(long double value)
+{
+	*this = value;
+}
+
 Decimal::Decimal(const Decimal& value)
 {
 	*this = value;
@@ -31,11 +36,6 @@ Decimal::Decimal(const Integer& value)
 }
 
 Decimal::Decimal(const Fraction& value)
-{
-	*this = value;
-}
-
-Decimal::Decimal(long double value)
 {
 	*this = value;
 }
@@ -88,6 +88,15 @@ Decimal& Decimal::operator*=(const Decimal& value)
 	return *this;
 }
 
+Decimal& math::Decimal::operator/=(const Decimal& value)
+{
+	assert(value.value() != 0);
+
+	_value = _value / value.value();
+
+	return *this;
+}
+
 bool Decimal::operator>(const Decimal& value) const
 {
 	return _value > value.value();
@@ -131,6 +140,12 @@ Decimal& Decimal::operator=(double value)
 	return *this;
 }
 
+Decimal& math::Decimal::operator=(long double value)
+{
+	_value = (double)value;
+	return *this;
+}
+
 Decimal& Decimal::operator=(const Decimal& value)
 {
 	_value = value.value();
@@ -149,15 +164,14 @@ Decimal& Decimal::operator=(const Fraction& value)
 	return *this;
 }
 
-Decimal& Decimal::operator=(long double value)
-{
-	_value = value;
-	return *this;
-}
-
-long double Decimal::value() const
+double math::Decimal::value() const
 {
 	return _value;
+}
+
+math::Decimal::operator int() const
+{
+	return (int)_value;
 }
 
 Decimal::operator float() const
@@ -170,14 +184,14 @@ Decimal::operator double() const
 	return (double)_value;
 }
 
+math::Decimal::operator long double() const
+{
+	return (long double)_value;
+}
+
 Decimal::operator Integer() const
 {
 	return Integer((int64_t)floor(_value));
-}
-
-Decimal::operator long double() const
-{
-	return _value;
 }
 
 

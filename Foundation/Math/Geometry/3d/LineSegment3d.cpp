@@ -24,7 +24,7 @@ Vector3 LineSegment3d::getVector() const
 	return getDest() - getSrc();
 }
 
-bool LineSegment3d::contains(const Vector3& point)
+bool LineSegment3d::contains(const Vector3& point) const
 {
 	Vector3 p = getVector();
 	Cuboids cuboids(getSrc(), p);
@@ -44,12 +44,12 @@ bool LineSegment3d::contains(const Vector3& point)
 	return false;
 }
 
-bool LineSegment3d::contains(const LineSegment3d& line)
+bool LineSegment3d::contains(const LineSegment3d& line) const
 {
 	return this->contains(line.getSrc()) && this->contains(line.getDest());
 }
 
-bool LineSegment3d::intersects(const LineSegment3d& line, Vector3& point)
+bool LineSegment3d::intersects(const LineSegment3d& line, Vector3& point) const
 {
 	Vector3 v0 = getSrc() - line.getSrc();
 	Vector3 v1 = getDest() - getSrc();
@@ -67,7 +67,7 @@ bool LineSegment3d::intersects(const LineSegment3d& line, Vector3& point)
 	return true;
 }
 
-Vector3 LineSegment3d::closestPoint(const Vector3& point)
+Vector3 LineSegment3d::closestPoint(const Vector3& point) const
 {
 	Vector3 src = getSrc();
 	Vector3 dest = getDest();

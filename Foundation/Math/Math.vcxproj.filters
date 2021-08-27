@@ -175,9 +175,6 @@
     <ClInclude Include="Basic\Interval.h">
       <Filter>Basic</Filter>
     </ClInclude>
-    <ClInclude Include="Basic\EndPoint.h">
-      <Filter>Basic</Filter>
-    </ClInclude>
     <ClInclude Include="Number\Real.h">
       <Filter>Number</Filter>
     </ClInclude>
@@ -484,7 +481,7 @@
     <ClInclude Include="Geometry\base\Physics.h">
       <Filter>Geometry\base</Filter>
     </ClInclude>
-    <ClInclude Include="Geometry\shape\Triangle.h">
+    <ClInclude Include="Geometry\shape\TrianglePoints.h">
       <Filter>Geometry\shape</Filter>
     </ClInclude>
     <ClInclude Include="Geometry\shape\Circle.h">
@@ -493,16 +490,16 @@
     <ClInclude Include="Geometry\shape\import.h">
       <Filter>Geometry\shape</Filter>
     </ClInclude>
-    <ClInclude Include="Geometry\shape\Rectangle.h">
+    <ClInclude Include="Geometry\shape\RectPoints.h">
       <Filter>Geometry\shape</Filter>
     </ClInclude>
     <ClInclude Include="Basic\Compare.h">
       <Filter>Basic</Filter>
     </ClInclude>
-    <ClInclude Include="Algebra\Polynomial\QuadraticPolynomial.h">
+    <ClInclude Include="Algebra\Polynomial\UnaryQuadraticPolynomial.h">
       <Filter>Algebra\Polynomial</Filter>
     </ClInclude>
-    <ClInclude Include="Algebra\Polynomial\CubicPolynomial.h">
+    <ClInclude Include="Algebra\Polynomial\UnaryCubicPolynomial.h">
       <Filter>Algebra\Polynomial</Filter>
     </ClInclude>
     <ClInclude Include="ProbabilityAndStatistics\import.h">
@@ -528,6 +525,22 @@
     </ClInclude>
     <ClInclude Include="Function\import.h">
       <Filter>Function</Filter>
+    </ClInclude>
+    <ClInclude Include="Basic\Threshold.h">
+      <Filter>Basic</Filter>
+    </ClInclude>
+    <ClInclude Include="Basic\Intervals.h">
+      <Filter>Basic</Filter>
+    </ClInclude>
+    <ClInclude Include="Number\BigNumber.h" />
+    <ClInclude Include="Algebra\Polynomial\UnaryQuarticPolynomial.h">
+      <Filter>Algebra\Polynomial</Filter>
+    </ClInclude>
+    <ClInclude Include="Algebra\Determinant\EchelonFormDeterminant.h">
+      <Filter>Algebra\Determinant</Filter>
+    </ClInclude>
+    <ClInclude Include="Geometry\shape\PolygonPoints.h">
+      <Filter>Geometry\shape</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -555,12 +568,6 @@
     </ClCompile>
     <ClCompile Include="Number\Nature.cpp">
       <Filter>Number</Filter>
-    </ClCompile>
-    <ClCompile Include="Basic\Interval.cpp">
-      <Filter>Basic</Filter>
-    </ClCompile>
-    <ClCompile Include="Basic\EndPoint.cpp">
-      <Filter>Basic</Filter>
     </ClCompile>
     <ClCompile Include="Number\Real.cpp">
       <Filter>Number</Filter>
@@ -766,17 +773,24 @@
     <ClCompile Include="Geometry\shape\Circle.cpp">
       <Filter>Geometry\shape</Filter>
     </ClCompile>
-    <ClCompile Include="Geometry\shape\Triangle.cpp">
+    <ClCompile Include="Geometry\shape\TrianglePoints.cpp">
       <Filter>Geometry\shape</Filter>
     </ClCompile>
-    <ClCompile Include="Geometry\shape\Rectangle.cpp">
+    <ClCompile Include="Geometry\shape\RectPoints.cpp">
       <Filter>Geometry\shape</Filter>
     </ClCompile>
-    <ClCompile Include="Algebra\Polynomial\QuadraticPolynomial.cpp">
+    <ClCompile Include="Algebra\Polynomial\UnaryQuadraticPolynomial.cpp">
       <Filter>Algebra\Polynomial</Filter>
     </ClCompile>
-    <ClCompile Include="Algebra\Polynomial\CubicPolynomial.cpp">
+    <ClCompile Include="Algebra\Polynomial\UnaryCubicPolynomial.cpp">
       <Filter>Algebra\Polynomial</Filter>
+    </ClCompile>
+    <ClCompile Include="Number\BigNumber.cpp" />
+    <ClCompile Include="Algebra\Polynomial\UnaryQuarticPolynomial.cpp">
+      <Filter>Algebra\Polynomial</Filter>
+    </ClCompile>
+    <ClCompile Include="Geometry\2d\Polygon.cpp">
+      <Filter>Geometry\2d</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

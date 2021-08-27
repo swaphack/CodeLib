@@ -278,7 +278,7 @@ FT_CHAR_DATA* FT_LABEL::loadChar(uint64_t ch, int fontSize)
 
 	if (data->deltaY < 0)
 	{
-		int a = 1;
+		PRINT("Error: deltaY value is < 0");
 	}
 
 	return data;

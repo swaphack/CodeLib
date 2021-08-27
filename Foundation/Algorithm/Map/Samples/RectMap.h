@@ -50,7 +50,7 @@ namespace alg
 					{
 
 						auto pCell = this->createCell();
-						pCell->setPosition(math::Vector2(i, j));
+						pCell->setPosition(math::Vector2(static_cast<float>(i), static_cast<float>(j)));
 
 						uint32_t nIndex = pCell->getMapObjectID();
 						int32_t left = nIndex - 1;

@@ -6,27 +6,26 @@ using namespace math;
 
 Line2d::Line2d(const Vector2& src, const Vector2& dest)
 {
-	Matrix2x2 a(src.getX(), src.getY(), dest.getX(), dest.getY());
-
-	float det = getDetMagnitude(a);
-	if (det == 0)
-	{
-		_paramA = 1;
-		_paramB = 0;
-		_paramC = src.getX();
-	}
-	else
-	{
-		_paramA = - (dest.getY() - src.getY()) / (dest.getX() - src.getY());
-		_paramB = 1;
-		_paramC = -src.getX() * _paramA - src.getY();
-	}
-
-	_normal = Vector2(_paramA, _paramB);
-	_direction = dest - src;
+	this->set(src, dest);
 }
 
 Line2d::Line2d(float a, float b, float c)
+{
+	this->set(a, b, c);
+}
+
+Line2d::Line2d(const Line2d& line)
+{
+	this->set(line);
+	
+}
+
+math::Line2d::Line2d(const LineSegment2d& lineSeg)
+{
+	this->set(lineSeg);
+}
+
+void math::Line2d::set(float a, float b, float c)
 {
 	assert(a != 0 || b != 0);
 
@@ -38,7 +37,29 @@ Line2d::Line2d(float a, float b, float c)
 	_direction = Vector2(_paramA, -_paramB);
 }
 
-Line2d::Line2d(const Line2d& line)
+void math::Line2d::set(const Vector2& src, const Vector2& dest)
+{
+	Matrix2x2 a(src.getX(), src.getY(), dest.getX(), dest.getY());
+
+	float det = getDetMagnitude(a);
+	if (det == 0)
+	{
+		_paramA = 1;
+		_paramB = 0;
+		_paramC = src.getX();
+	}
+	else
+	{
+		_paramA = -(dest.getY() - src.getY()) / (dest.getX() - src.getY());
+		_paramB = 1;
+		_paramC = -src.getX() * _paramA - src.getY();
+	}
+
+	_normal = Vector2(_paramA, _paramB);
+	_direction = dest - src;
+}
+
+void math::Line2d::set(const Line2d& line)
 {
 	_paramA = line.getParamA();
 	_paramB = line.getParamB();
@@ -46,6 +67,11 @@ Line2d::Line2d(const Line2d& line)
 
 	_normal = line.getNormal();
 	_direction = line.getDirection();
+}
+
+void math::Line2d::set(const LineSegment2d& lineSeg)
+{
+	this->set(lineSeg.getSrc(), lineSeg.getDest());
 }
 
 const Vector2& Line2d::getNormal() const

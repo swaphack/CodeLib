@@ -174,7 +174,13 @@ namespace math
 				stream << ",";
 			}
 
-			return stream.str();
+			std::string value = stream.str();
+			if (value.size() > 0)
+			{
+				value = value.substr(0, value.size() - 1);
+			}
+
+			return value;
 		}
 	protected:
 		T* getPtr()

@@ -30,7 +30,7 @@ namespace math
 		/**
 		*	是否为空
 		*/
-		virtual bool isNone() const
+		virtual bool isEmpty() const
 		{
 			return true;
 		}
@@ -38,7 +38,7 @@ namespace math
 		*	子集
 		*	当前集合所有元素都在集合 value 中
 		*/
-		bool isSubSetEqual(const Set& value) const
+		bool isSubSetOrEqual(const Set& value) const
 		{
 			return true;
 		}
@@ -54,7 +54,7 @@ namespace math
 		*	超集
 		*	集合 value 中所有元素都在当前集合
 		*/
-		bool isSupSetEqual(const Set& value) const
+		bool isSupSetOrEqual(const Set& value) const
 		{
 			return false;
 		}
@@ -69,14 +69,14 @@ namespace math
 		/**
 		*	并集
 		*/
-		Set unionAll(const Set& value) const
+		Set getUnionSet(const Set& value) const
 		{
 			return value;
 		}
 		/**
 		*	交集
 		*/
-		Set intersect(const Set& value) const
+		Set getIntersectSet(const Set& value) const
 		{
 			return *this;
 		}
@@ -84,14 +84,20 @@ namespace math
 		*	补集
 		*	排除包含目标的元素
 		*/
-		Set complementary(const Set& value) const
+		Set getComplementarySet(const Set& value) const
 		{
 			return *this;
 		}
 		/**
-		*	后继集
+		*	后继
+		* 
+		*	后继函数S是取得下一个序数
+		*	S(a) = a U {a}
+		* 
+		*	a + 0 = a
+		*	a + S(b) = S(a+b)
 		*/
-		Set successor() const
+		Set getSuccessor() const
 		{
 			return *this;
 		}

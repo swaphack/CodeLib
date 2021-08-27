@@ -8,10 +8,9 @@ namespace math
 		template<typename T>
 		static void swap(T& a, T& b)
 		{
-			T c;
-			c = a;
-			a = b;
-			b = a;
+			a = a + b;
+			b = a - b;
+			a = a - b;
 		}
 
 		template<typename T>
@@ -19,15 +18,11 @@ namespace math
 		{
 			T _min = min;
 			T _max = max;
-			if (_min < _max)
-			{
-				T c = _min;
-				_min = _max;
-				_max = _min;
-			}
 
-			if (value < _min) value = _min;
-			if (value > _max) value = _max;
+			if (_min < _max) swap<T>(_min, _max);
+
+			value = MIN(value, _min);
+			value = MAX(value, _max);
 
 			return value;
 		}

@@ -1,6 +1,5 @@
 #pragma once
 
 #include "macros.h"
-#include "Index.h"
-#include "TriangleMesh.h"
-#include "ProgressiveMeshAlgorithm.h"
+#include "Base/import.h"
+#include "Core/import.h"

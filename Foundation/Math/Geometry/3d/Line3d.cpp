@@ -111,7 +111,7 @@ bool math::Line3d::getIntersectPoint(const Line3d& line, Vector3& point)
 	Vector3 v1 = Vector3::normalize(this->_direction);
 	Vector3 v2 = Vector3::normalize(line.getDirection());
 
-	float delta = v1.getMagnitudeSqr() * v2.getMagnitudeSqr() - powf(Vector3::dot(v1, v2), 2);
+	float delta = v1.getSqrMagnitude() * v2.getSqrMagnitude() - powf(Vector3::dot(v1, v2), 2);
 
 	if (delta == 0)
 	{// Æ½ÐÐ
@@ -120,7 +120,7 @@ bool math::Line3d::getIntersectPoint(const Line3d& line, Vector3& point)
 
 
 	float s1 = 1.0f / delta * (
-			v2.getMagnitudeSqr() * Vector3::dot(line.getPoint() - this->getPoint(), v1)
+			v2.getSqrMagnitude() * Vector3::dot(line.getPoint() - this->getPoint(), v1)
 			+ Vector3::dot(v1, v2) * Vector3::dot(this->getPoint() - line.getPoint(), v2)
 		);
 

@@ -234,6 +234,40 @@ namespace math
 		}
 	public:
 		/**
+		*	Ìæ»»ÁĞ
+		*/
+		void replaceColumn(int src, int dest)
+		{
+			assert(src >= 0 && src < Width);
+			assert(dest >= 0 && dest < Width);
+
+			for (int i = 0; i < Height; i++)
+			{
+				T value0 = getValue(i, src);
+				T value1 = getValue(i, dest);
+				setValue(i, src, value1);
+				setValue(i, dest, value0);
+			}
+		}
+
+		/**
+		*	Ìæ»»ĞĞ
+		*/
+		void replaceRow(int src, int dest)
+		{
+			assert(src >= 0 && src < Height);
+			assert(dest >= 0 && dest < Height);
+
+			for (int i = 0; i < Width; i++)
+			{
+				T value0 = getValue(src, i);
+				T value1 = getValue(dest, i);
+				setValue(src, i, value1);
+				setValue(dest, i, value0);
+			}
+		}
+	public:
+		/**
 		*	»ñÈ¡×ªÖÃ¾ØÕó
 		*/
 		Array2D transpose() const

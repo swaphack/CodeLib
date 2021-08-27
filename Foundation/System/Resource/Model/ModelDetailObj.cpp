@@ -4,6 +4,7 @@
 #include "IO/Directory.h"
 #include "MaterialDetail.h"
 #include "MeshDetail.h"
+#include "Base/macros.h"
 
 using namespace sys;
 
@@ -104,7 +105,7 @@ bool ModelDetailObj::load(const std::string& fullpath)
 				nMatID = it->second;
 				if (nMatID == 0)
 				{
-					int a = 1;
+					PRINT("Error: Material ID is 0 ");
 				}
 			}
 

@@ -47,7 +47,7 @@ Attribute3DSettings CtrlAudioSource3D::get3DAttributes()
 	return _3dSettings;
 }
 
-void CtrlAudioSource3D::set3DMinMaxDistance(const math::Interval& distance)
+void CtrlAudioSource3D::set3DMinMaxDistance(const math::FloatInterval& distance)
 {
 	float min = distance.getMinValue();
 	float max = distance.getMaxValue();
@@ -55,14 +55,14 @@ void CtrlAudioSource3D::set3DMinMaxDistance(const math::Interval& distance)
 	AUDIO_SET_FUNC(_channel, set3DMinMaxDistance, min, max);
 }
 
-math::Interval CtrlAudioSource3D::get3DMinMaxDistance()
+math::FloatInterval CtrlAudioSource3D::get3DMinMaxDistance()
 {
 	float min;
 	float max;
 
 	AUDIO_DO_FUNC(_channel, get3DMinMaxDistance, &min, &max);
 
-	math::Interval range(min, max);
+	math::FloatInterval range(min, max);
 
 	return range;
 }

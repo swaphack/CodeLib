@@ -21,10 +21,6 @@ namespace math
 		{
 			this->assign(val);
 		}
-		Determinant(const Array2D<float, Order, Order>& val)
-		{
-			this->assign(val.getValue());
-		}
 		Determinant(const Determinant& det)
 		{
 			this->assign(det.getValue());
@@ -70,28 +66,60 @@ namespace math
 		/**
 		*	相乘
 		*/
-		Determinant mul(float k, int row)
+		void scaleRow(int row, float k)
 		{
-			assert(row < getOrder());
-
-			Determinant det;
+			assert(row >= 0 && row < getOrder());
 
 			for (int i = 0; i < getOrder(); i++)
 			{
-				det[row * getOrder() + i] *= k;
+				int index = row * getOrder() + i;
+				base::setValue(index, base::getValue(index) * k);
 			}
-
-			return det;
 		}
 		/**
 		*	相加
+		*	将两行相加的值放在第一行
 		*/
-		Determinant add(const Determinant& det, int row)
+		void addTwoRows(int row0, int row1)
+		{
+			assert(row0 >= 0 && row0 < getOrder());
+			assert(row1 >= 0 && row1 < getOrder());
+
+			for (int i = 0; i < getOrder(); i++)
+			{
+				int index0 = row0 * getOrder() + i;
+				int index1 = row1 * getOrder() + i;
+
+				base::setValue(index0, base::getValue(index0) + base::getValue(index1));
+			}
+		}
+		/**
+		*	相减
+		*	将两行相减的值放在第一行
+		*/
+		void subTwoRows(int row0, int row1)
+		{
+			assert(row0 >= 0 && row0 < getOrder());
+			assert(row1 >= 0 && row1 < getOrder());
+
+			for (int i = 0; i < getOrder(); i++)
+			{
+				int index0 = row0 * getOrder() + i;
+				int index1 = row1 * getOrder() + i;
+
+				base::setValue(index0, base::getValue(index0) - base::getValue(index1));
+			}
+		}
+	public:
+		/**
+		*	相加
+		*/
+		Determinant addWithRow(const Determinant& det, int row)
 		{
 			assert(det.getOrder() != this->getOrder());
 			int order = getOrder();
-			Determinant target(order);
 
+			Determinant target(order);
 			for (int i = 0; i < order; i++)
 			{
 				if (i == row)
@@ -162,10 +190,8 @@ namespace math
 				det.setColumn(i, value);
 				root.setValue(i, getDetMagnitude(det) / detMag);
 			}
-
 			return root;
 		}
-
 	public:
 		/**
 		*	获取逆序数

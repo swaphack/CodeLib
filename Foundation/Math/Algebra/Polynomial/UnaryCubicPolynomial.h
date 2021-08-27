@@ -6,16 +6,16 @@
 namespace math
 {
 	/**
-	*	一元二次多项式
+	*	一元三次多项式
 	*	ax^3 + bx^2 + cx + d
 	*/
-	class CubicPolynomial : public UnaryPolynomial
+	class UnaryCubicPolynomial : public UnaryPolynomial
 	{
 	public:
-		CubicPolynomial();
-		CubicPolynomial(float b, float c, float d);
-		CubicPolynomial(float a, float b, float c, float d);
-		virtual ~CubicPolynomial();
+		UnaryCubicPolynomial();
+		UnaryCubicPolynomial(float b, float c, float d);
+		UnaryCubicPolynomial(float a, float b, float c, float d);
+		virtual ~UnaryCubicPolynomial();
 	public:
 		/**
 		*	设置系数

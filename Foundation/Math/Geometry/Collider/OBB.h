@@ -12,17 +12,17 @@ namespace math
 	*	oriented bounding box(方向矩形边界框)
 	*	
 	*/
-	struct OBB : public BoundingBox
+	class OBB : public BoundingBox
 	{
 	public:
 		/**
 		*	构造
 		*/
-		OBB(const Vector3& center, const Vector3& size, const Vector3& rotation);
+		OBB(const Vector3& center, const Vector3& volume, const Vector3& rotation);
 		/**
 		*	构造
 		*/
-		OBB(const Vector3& center, const Vector3& size);
+		OBB(const Vector3& center, const Vector3& volume);
 	public:
 		/**
 		*	体积

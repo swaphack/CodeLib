@@ -15,4 +15,6 @@ private:
 	void testMeshMapFindPath();
 
 	void testWFCCreateMap();
+
+	void testDelaunay();
 };

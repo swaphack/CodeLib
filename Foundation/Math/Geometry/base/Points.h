@@ -20,7 +20,7 @@ namespace math
 		/**
 		*	°üº¬¶¥µã
 		*/
-		bool containsVertex(const T& value)
+		bool hasVertex(const T& value)
 		{
 			for (int i = 0; i < Length; i++)
 			{

@@ -55,7 +55,7 @@ void TestAudioNode::testAudio3D()
 
 	CtrlAudioSource3D* pSrcAudio = CREATE_NODE(CtrlAudioSource3D);
 	pSrcAudio->loadDataFromFile("Resource/Audio/city_castle.mp3");
-	pSrcAudio->set3DMinMaxDistance({ 0.5f, 10000 });
+	pSrcAudio->set3DMinMaxDistance(math::FloatInterval( 0.5f, 10000 ));
 	pSrcAudio->setPosition(100, 50, 0);
 	pSrcAudio->setVelocity({ 0, 0, 0 });
 	pSrcAudio->setMusicVolume(100);

@@ -51,6 +51,10 @@ namespace render
 		*/
 		void appendPoint(const PrimitiveVertex& vertex);
 		/**
+		*	设置坐标点
+		*/
+		void appendPoints(const std::vector<math::Vector3>& points, const phy::Color4B& color);
+		/**
 		*	移除所有点坐标
 		*/
 		void removeAllPoints();

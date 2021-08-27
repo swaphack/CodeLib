@@ -9,7 +9,7 @@ namespace math
 	/**
 	*	АќЮЇКа
 	*/
-	struct BoundingBox
+	class BoundingBox
 	{
 	public:
 		BoundingBox();

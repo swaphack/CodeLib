@@ -1,20 +1,20 @@
-#include "Triangle.h"
+#include "TrianglePoints.h"
 #include <algorithm>
 
 using namespace math;
 
-math::Triangle::Triangle()
+math::TrianglePoints::TrianglePoints()
 {
 }
 
-math::Triangle::Triangle(const Vector3& p0, const Vector3& p1, const Vector3& p2)
+math::TrianglePoints::TrianglePoints(const Vector3& p0, const Vector3& p1, const Vector3& p2)
 {
 	this->setPoint0(p0);
 	this->setPoint1(p1);
 	this->setPoint2(p2);
 }
 
-math::Triangle::Triangle(const Vector3* points)
+math::TrianglePoints::TrianglePoints(const Vector3* points)
 {
 	if (points == nullptr)
 	{
@@ -23,11 +23,11 @@ math::Triangle::Triangle(const Vector3* points)
 	this->assign(points);
 }
 
-math::Triangle::~Triangle()
+math::TrianglePoints::~TrianglePoints()
 {
 }
 
-bool math::Triangle::hasSameEdge(const Triangle& target, LineSegment3d& side)
+bool math::TrianglePoints::hasSameEdge(const TrianglePoints& target, LineSegment3d& side)
 {
 	std::vector<Vector3> points;
 
@@ -74,12 +74,12 @@ bool math::Triangle::hasSameEdge(const Triangle& target, LineSegment3d& side)
 	return false;
 }
 
-Vector3 math::Triangle::getCentreOfGravity(const Vector3& p0, const Vector3& p1, const Vector3& p2)
+Vector3 math::TrianglePoints::getCentreOfGravity(const Vector3& p0, const Vector3& p1, const Vector3& p2)
 {
 	return 1.0f / 3.0f * (p0 + p1 + p2);
 }
 
-Vector3 math::Triangle::getInCenter(const Vector3& p0, const Vector3& p1, const Vector3& p2)
+Vector3 math::TrianglePoints::getInCenter(const Vector3& p0, const Vector3& p1, const Vector3& p2)
 {
 	float a = Vector3::distance(p1, p2);
 	float b = Vector3::distance(p0, p2);
@@ -95,7 +95,7 @@ Vector3 math::Triangle::getInCenter(const Vector3& p0, const Vector3& p1, const 
 	return Vector3(x / d, y / d, z / d);
 }
 
-Vector3 math::Triangle::getCircumcenter(const Vector3& p0, const Vector3& p1, const Vector3& p2)
+Vector3 math::TrianglePoints::getCircumcenter(const Vector3& p0, const Vector3& p1, const Vector3& p2)
 {
 	float a = Vector3::distance(p1, p2);
 	float b = Vector3::distance(p0, p2);
@@ -110,23 +110,23 @@ Vector3 math::Triangle::getCircumcenter(const Vector3& p0, const Vector3& p1, co
 	Vector3 v13 = p0 - p2;
 	Vector3 v31 = p2 - p1;
 
-	float d = 2 * Vector3::cross(v12, v23).getMagnitudeSqr();
+	float d = 2 * Vector3::cross(v12, v23).getSqrMagnitude();
 	if (d == 0) return Vector3();
 
-	float alpha = v23.getMagnitudeSqr() * Vector3::dot(v12, v13) / d;
-	float beta = v13.getMagnitudeSqr() * Vector3::dot(v21, v23) / d;
-	float gamma = v12.getMagnitudeSqr() * Vector3::dot(v31, v32) / d;
+	float alpha = v23.getSqrMagnitude() * Vector3::dot(v12, v13) / d;
+	float beta = v13.getSqrMagnitude() * Vector3::dot(v21, v23) / d;
+	float gamma = v12.getSqrMagnitude() * Vector3::dot(v31, v32) / d;
 
 	return alpha * p0 + beta * p1 + gamma * p2;
 }
 
-Vector3 math::Triangle::getCircumcenter2d(const Vector3& p0, const Vector3& p1, const Vector3& p2)
+Vector3 math::TrianglePoints::getCircumcenter2d(const Vector3& p0, const Vector3& p1, const Vector3& p2)
 {
 	float dA, dB, dC, aux1, aux2, div;
 
-	dA = p0.getMagnitudeSqr();
-	dB = p1.getMagnitudeSqr();
-	dC = p2.getMagnitudeSqr();
+	dA = p0.getSqrMagnitude();
+	dB = p1.getSqrMagnitude();
+	dC = p2.getSqrMagnitude();
 
 	aux1 = (dA * (p2.getY() - p1.getY()) + dB * (p0.getY() - p2.getY()) + dC * (p1.getY() - p0.getY()));
 	aux2 = -(dA * (p2.getX() - p1.getX()) + dB * (p0.getX() - p2.getX()) + dC * (p1.getX() - p0.getX()));
@@ -137,10 +137,12 @@ Vector3 math::Triangle::getCircumcenter2d(const Vector3& p0, const Vector3& p1, 
 	return Vector3(aux1 / div, aux2 / div);
 }
 
-math::Vector3 math::Triangle::getNormal(const Vector3& p0, const Vector3& p1, const Vector3& p2)
+math::Vector3 math::TrianglePoints::getNormal(const Vector3& p0, const Vector3& p1, const Vector3& p2)
 {
 	Vector3 v0 = p1 - p0;
 	Vector3 v1 = p2 - p0;
 
-	return Vector3::cross(v0, v1);
+	Vector3 value = Vector3::cross(v0, v1);
+	value.normalize();
+	return value;
 }

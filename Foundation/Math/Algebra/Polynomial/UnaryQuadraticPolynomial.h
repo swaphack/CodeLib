@@ -9,13 +9,13 @@ namespace math
 	*	一元二次多项式
 	*	ax^2 + bx + c
 	*/
-	class QuadraticPolynomial : public UnaryPolynomial
+	class UnaryQuadraticPolynomial : public UnaryPolynomial
 	{
 	public:
-		QuadraticPolynomial();
-		QuadraticPolynomial(float b, float c);
-		QuadraticPolynomial(float a, float b, float c);
-		virtual ~QuadraticPolynomial();
+		UnaryQuadraticPolynomial();
+		UnaryQuadraticPolynomial(float b, float c);
+		UnaryQuadraticPolynomial(float a, float b, float c);
+		virtual ~UnaryQuadraticPolynomial();
 	public:
 		/**
 		*	设置系数

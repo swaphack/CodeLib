@@ -9,15 +9,22 @@ namespace math
 	class Magma
 	{
 	public:
-		virtual Magma doOperatorAdd(const Magma& a) const 
+		Magma()
+		{
+
+		}
+		Magma(const Magma& value)
+		{
+
+		}
+	public:
+		/**
+		*	a属于S, b属于S, a*b属于S
+		*/
+		Magma doOperatorMulti(const Magma& a) const 
 		{ 
 			return Magma(); 
 		};
-	public:
-		virtual bool operator==(const Magma& a) 
-		{ 
-			return true; 
-		}
 	};
 
 	/**
@@ -28,12 +35,31 @@ namespace math
 	class Semigroup : public Magma
 	{
 	public:
-		/**
-		*	结合律
-		*/
-		virtual bool doGroupAssociative(const Semigroup& a, const Semigroup& b)
+		Semigroup()
 		{
-			return this->doOperatorAdd(a).doOperatorAdd(b) == this->doOperatorAdd(a.doOperatorAdd(b));
+
+		}
+		Semigroup(const Magma& value)
+		{
+
+		}
+		Semigroup(const Semigroup& value)
+		{
+
+		}
+	public:
+		/**
+		*	结合
+		*	(a*b)*c=a*(b*c)
+		*/
+		Semigroup doOperatorAssociative(const Semigroup& a, const Semigroup& b)
+		{
+			return this->doOperatorMulti(a).doOperatorMulti(b);
+		}
+
+		bool equal(const Semigroup& a)
+		{
+			return false;
 		}
 	};
 
@@ -45,12 +71,40 @@ namespace math
 	class Monoid : public Semigroup
 	{
 	public:
+		Monoid()
+		{
+
+		}
+		Monoid(const Monoid& value)
+		{
+
+		}
+	public:
 		/**
 		*	单位元
+		*	a*b=e
 		*/
-		virtual Monoid identity();
-	protected:
-	private:
+		static Monoid getUnit()
+		{
+			static Monoid sUnit;
+			return sUnit;
+		}
+	public:
+		/**
+		*	除以
+		*/
+		Monoid doOperatorDivide(const Monoid& a) const
+		{
+			return Monoid();
+		};
+		/**
+		*	倒数
+		*	e / a
+		*/
+		Monoid getReciprocal() const
+		{
+			return getUnit().doOperatorDivide(*this);
+		}
 	};
 
 	/**
@@ -65,12 +119,31 @@ namespace math
 	class Group : public Monoid
 	{
 	public:
+		Group()
+		{
+
+		}
+	public:
+		static Group getZero()
+		{
+			static Group sGroup;
+			return sGroup;
+		}
+	public:
+		/**
+		*	减去
+		*/
+		Group doOperatorSub(const Group& a) const
+		{
+			return Group();
+		};
 		/**
 		*	逆元
 		*/
-		virtual Group reverse() const { return Group(); }
-	protected:
-	private:
+		Group getNegative() const
+		{
+			return getZero().doOperatorSub(*this);
+		}
 	};
 
 	/**
@@ -81,9 +154,31 @@ namespace math
 	class AbelianGroup : public Group
 	{
 	public:
-		bool doGroupCommutative(const AbelianGroup& a)
+		AbelianGroup()
 		{
-			return this->doOperatorAdd(a) == a.doOperatorAdd(*this);
+
+		}
+		AbelianGroup(const Magma& value)
+		{
+
+		}
+		AbelianGroup(const AbelianGroup& value)
+		{
+
+		}
+	public:
+		/**
+		*	交换律
+		*	a*b = b*a
+		*/
+		AbelianGroup doGroupCommutative(const AbelianGroup& a) const
+		{
+			return this->doOperatorMulti(a);
+		}
+
+		bool equal(const Semigroup& a) const
+		{
+			return false;
 		}
 	};
 }

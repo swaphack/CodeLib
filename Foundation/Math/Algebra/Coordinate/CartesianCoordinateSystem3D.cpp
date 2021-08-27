@@ -2,7 +2,7 @@
 #include "Basic/base.h"
 #include "Algebra/Vector/Vector2.h"
 #include "Algebra/Vector/Vector3.h"
-#include "Algebra/Polynomial/CubicPolynomial.h"
+#include "Algebra/Polynomial/UnaryCubicPolynomial.h"
 #include "Algebra/Determinant/Determinant.h"
 
 math::CartesianCoordinateSystem3D::CartesianCoordinateSystem3D()
@@ -26,7 +26,7 @@ void math::CartesianCoordinateSystem3D::loadIdentity()
 math::CartesianCoordinateSystem3D math::CartesianCoordinateSystem3D::create(const Vector3& point, const Vector3& vector, Axis3D eAxis)
 {
 	math::CartesianCoordinateSystem3D system;
-	if (vector.getMagnitudeSqr() == 0) 
+	if (vector.getSqrMagnitude() == 0) 
 	{// 0 œÚ¡ø
 		return system;
 	}
@@ -217,7 +217,7 @@ math::CartesianCoordinateSystem3D math::CartesianCoordinateSystem3D::createWithP
 	float dc = f * f + d * d + e * e -(a * b + a * c + b * c);
 	float dd = a * b * c + 2 * d * e * f - (a * f * f + b * e * e + c * d * d);
 
-	CubicPolynomial cubicPoly(da, db, dc, dd);
+	UnaryCubicPolynomial cubicPoly(da, db, dc, dd);
 	std::vector<Complex> result = cubicPoly.getEquationSolution();
 	if (result.size() != 3)
 	{
@@ -236,20 +236,30 @@ math::CartesianCoordinateSystem3D math::CartesianCoordinateSystem3D::createWithP
 	float l2 = result[1].getRez();
 	float l3 = result[2].getRez();
 
-	math::Determinant3 m1(math::Array2D<float, 3, 3>(
+	float val0[] = 
+	{
 		a - l1,	d,		e,
-		d,		b-l1,	f,
-		e,		f,		c-l1));
+		d,		b - l1,	f,
+		e,		f,		c - l1 
+	};
+	math::Determinant3 m1(val0);
 
-	math::Determinant3 m2(math::Array2D<float, 3, 3>(
+	float val1[] = 
+	{
 		a - l2,	d,		e,
 		d,		b - l2, f,
-		e,		f,		c - l2));
+		e,		f,		c - l2 
+	};
+	math::Determinant3 m2(val1);
 
-	math::Determinant3 m3(math::Array2D<float, 3, 3>(
+	float val2[] = 
+	{
 		a - l3,	d,		e,
 		d,		b - l3, f,
-		e,		f,		c - l3));
+		e,		f,		c - l3
+	};
+
+	math::Determinant3 m3(val2);
 
 	Array<float, 3> v(0, 0, 0);
 	Vector3 o1 = m1.getSolution(v);

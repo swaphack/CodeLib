@@ -9,7 +9,7 @@ namespace math
 	/**
 	*	ЧђАќЮЇКа
 	*/
-	struct SphereBB : public BoundingBox
+	class SphereBB : public BoundingBox
 	{
 	public:
 		/**

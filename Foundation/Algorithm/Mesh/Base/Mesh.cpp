@@ -11,7 +11,7 @@ alg::Mesh::~Mesh()
 {
 }
 
-bool alg::Mesh::initWithTriangles(const std::vector<math::Triangle>& data)
+bool alg::Mesh::initWithTriangles(const std::vector<math::TrianglePoints>& data)
 {
 	std::vector<math::Vector3> vertices;
 	std::vector<int> indices;
@@ -42,7 +42,7 @@ const std::vector<int>& alg::Mesh::getIndices() const
 	return _indices;
 }
 
-bool alg::Mesh::toTriangles(std::vector<math::Triangle>& data)
+bool alg::Mesh::toTriangles(std::vector<math::TrianglePoints>& data)
 {
 	if (_vertices.size() < TRIANGLE_INDEX_COUNT || _indices.size() < TRIANGLE_INDEX_COUNT)
 	{
@@ -61,7 +61,7 @@ bool alg::Mesh::toTriangles(std::vector<math::Triangle>& data)
 
 	for (size_t i = 0; i < triangleCount; i+= TRIANGLE_INDEX_COUNT)
 	{
-		math::Triangle triangle;
+		math::TrianglePoints triangle;
 		for (size_t j = 0; j < triangle.getLength();  j++)
 		{
 			int index = _indices[i * TRIANGLE_INDEX_COUNT + j];
@@ -75,7 +75,7 @@ bool alg::Mesh::toTriangles(std::vector<math::Triangle>& data)
 	return data.size() > 0;
 }
 
-bool alg::Mesh::convertToVertices(const std::vector<math::Triangle>& data, std::vector<math::Vector3>& vertices, std::vector<int>& indices)
+bool alg::Mesh::convertToVertices(const std::vector<math::TrianglePoints>& data, std::vector<math::Vector3>& vertices, std::vector<int>& indices)
 {
 	if (data.size() == 0)
 	{

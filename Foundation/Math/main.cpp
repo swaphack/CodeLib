@@ -81,7 +81,7 @@ void testPolygon()
 	points.push_back(math::Vector2(1, 0));
 	points.push_back(math::Vector2(1, 1));
 	points.push_back(math::Vector2(0, 1));
-	auto polygon = math::Polygon<4>(&points[0]);
+	auto polygon = math::Polygon(points);
 
 	bool result = polygon.contains(math::Vector2(0.9f, 0.5f));
 

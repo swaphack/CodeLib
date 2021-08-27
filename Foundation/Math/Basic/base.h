@@ -83,6 +83,14 @@ public:\
 	void set##Name(Type val) { VectorName[Index] = val; }
 #endif
 
+	/**
+	* 
+	*	type绝对不能为以下类型：
+	*	char、signed char、unsigned char
+	*	short、unsigned short
+	*	signed short、short int、signed short int、unsigned short int
+	*	float
+	*/
 	template<typename T>
 	void GET_VA_ARG(T& value, va_list& ap)
 	{
@@ -94,11 +102,13 @@ public:\
 			|| strcmp(name, typeid(unsigned short).name()) == 0
 			|| strcmp(name, typeid(signed short).name()) == 0)
 		{
-			value = (T)va_arg(ap, int);
+			int tmp = va_arg(ap, int);
+			value = (T)tmp;
 		}
 		else if (strcmp(name, typeid(float).name()) == 0)
 		{
-			value = (T)va_arg(ap, double);
+			double tmp = va_arg(ap, double);
+			value = (T)tmp;
 		}
 		else
 		{

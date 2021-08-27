@@ -73,7 +73,7 @@ namespace math
 		/**
 		*	模的平方
 		*/
-		float getMagnitudeSqr() const;
+		float getSqrMagnitude() const;
 		/**
 		*	单位化
 		*/

@@ -2,7 +2,7 @@
 
 #include <cstdlib>
 #include "Algebra/import.h"
-
+#include "Geometry/GeometryUtiity.h"
 namespace math
 {
 	/**
@@ -51,9 +51,9 @@ namespace math
 			Vector2 pyz(point.getY(), point.getZ());
 			Vector2 pxz(point.getX(), point.getZ());
 
-			Polygon pxoy = Surface::projectOnXOY(*this);
-			Polygon pyoz = Surface::projectOnXOY(*this);
-			Polygon pxoz = Surface::projectOnXOY(*this);
+			Polygon pxoy(GeometryUtiity::projectSurfaceOnXOY(*this));
+			Polygon pyoz(GeometryUtiity::projectSurfaceOnYOZ(*this));
+			Polygon pxoz(GeometryUtiity::projectSurfaceOnXOZ(*this));
 
 			if (pxoy.contains(pxy) || pyoz.contains(pyz) || pyoz.contains(pxz))
 			{
@@ -68,197 +68,6 @@ namespace math
 		Surface& operator=(const Surface& surface)
 		{
 			this->assign(surface.getValue());
-		}
-	public:
-		/**
-		*	是否是标准的多边形，顶点数大于等于3,并且相邻不存在共线的情况
-		*	且共面
-		*/
-		static bool isStandard(const Surface& surface)
-		{
-			if (surface.getLength() < 3)
-			{
-				return false;
-			}
-
-			int32_t lineCount = surface.getLength();
-			for (int32_t i = 0; i < lineCount; i++)
-			{
-				// 邻边的向量
-				Vector3 l0 = surface[(i + 1) % lineCount] - surface[i % lineCount];
-				Vector3 l1 = surface[(i + 2) % lineCount] - surface[(i + 1) % lineCount];
-				Vector3 l2 = surface[(i + 3) % lineCount] - surface[(i + 2) % lineCount];
-				// 两向量所在平面的法向量
-				Vector3 n0 = Vector3::cross(l0, l1);
-				Vector3 n1 = Vector3::cross(l1, l2);
-				if (Vector3::dot(n0, n1) != 0)
-				{ // 法向量不共线
-					return false;
-				}
-				if (n0.getX() * n1.getX() < 0)
-				{// 法向量不同向
-					return false;
-				}
-			}
-
-			return true;
-		}
-		/**
-		*	是否是凸多边形
-		*/
-		static bool isConvex(const Surface& surface)
-		{
-			if (!isStandard(surface))
-			{
-				return false;
-			}
-			/*
-			int32_t lineCount = surface.getLength() - 2;
-			int32_t lastDirection = -1;
-			for (int32_t i = 0; i < lineCount; i++)
-			{
-				Vector3 l0 = surface[(i + 1) % lineCount] - surface[i % lineCount];
-				Vector3 l1 = surface[(i + 2) % lineCount] - surface[(i + 1) % lineCount];
-
-				int32_t direction = Vector3::direction(l1, l0);
-				if (lastDirection == -1)
-				{
-					lastDirection = direction;
-				}
-				else if (direction != lastDirection)
-				{
-					return false;
-				}
-			}
-
-			return true;
-			*/
-			return false;
-		}
-		/**
-		*	点与平面是否共面
-		*/
-		static bool isCoplanar(const Surface& surface, const Vector3& point)
-		{
-			if (!isStandard(surface))
-			{
-				return false;
-			}
-			int32_t lineCount = surface.getLength();
-			// 邻边的向量
-			Vector3 l0 = surface[1] - surface[0];
-			Vector3 l1 = surface[2] - surface[1];
-			Vector3 l2 = point - surface[2];
-			// 法向量
-			Vector3 n0 = Vector3::cross(l0, l1);
-			Vector3 n1 = Vector3::cross(l1, l2);
-			if (Vector3::dot(n0, n1) != 0)
-			{ // 法向量不共线
-				return false;
-			}
-			if (n0.getX() * n1.getX() < 0)
-			{// 法向量不同向
-				return false;
-			}
-
-			return true;
-		}
-		/**
-		*	四点是否共面
-		*/
-		static bool canMakeCoplanar(const Vector3& point0, const Vector3& point1, const Vector3& point2,
-			const Vector3& point3)
-		{
-			// 邻边的向量
-			Vector3 l0 = point1 - point0;
-			Vector3 l1 = point2 - point1;
-			Vector3 l2 = point3 - point2;
-
-			if (Vector3::isThreePointsOnSameLine(point0, point1, point2))
-			{ // 相邻共线，构成不了平面
-				return false;
-			}
-
-			// 法向量
-			Vector3 n0 = Vector3::cross(l0, l1);
-			Vector3 n1 = Vector3::cross(l1, l2);
-			if (Vector3::dot(n0, n1) != 0)
-			{ // 法向量不共线
-				return false;
-			}
-			if (n0.getX() * n1.getX() < 0)
-			{// 法向量不同向
-				return false;
-			}
-
-			return true;
-		}
-		/**
-		*	投影到xoy面
-		*/
-		static Polygon<Length> projectOnXOY(const Surface& surface)
-		{
-			int32_t count = surface.getLength();
-			// 投影坐标计算
-			Vector2* ps = new Vector2[count];
-			for (int32_t i = 0; i < count; i++)
-			{
-				float x = surface[i].getX();
-				float y = surface[i].getY();
-				ps[i].setX(x);
-				ps[i].setY(y);
-			}
-
-			// 投影
-			Polygon<Length> polygon(ps);
-			delete[] ps;
-
-			return polygon;
-		}
-		/**
-		*	投影到yoz面
-		*/
-		static Polygon<Length> projectOnYOZ(const Surface& surface)
-		{
-			int32_t count = surface.getLength();
-			// 投影坐标计算
-			Vector2* ps = new Vector2[count];
-			for (int32_t i = 0; i < count; i++)
-			{
-				float x = surface[i].getX();
-				float y = surface[i].getY();
-				ps[i].setX(x);
-				ps[i].setY(y);
-			}
-
-			// 投影
-			Polygon<Length> polygon(ps);
-			delete[] ps;
-
-			return polygon;
-		}
-		/**
-		*	投影到xoz面
-		*/
-		static Polygon<Length> projectOnXOZ(const Surface& surface)
-		{
-			int32_t count = surface.getLength();
-			// 投影坐标计算
-			Vector2* ps = new Vector2[count];
-			for (int32_t i = 0; i < count; i++)
-			{
-				float x = surface[i].getX();
-				float y = surface[i].getZ();
-
-				ps[i].setX(x);
-				ps[i].setY(y);
-			}
-
-			// 投影
-			Polygon<Length> polygon(ps);
-			delete[] ps;
-
-			return polygon;
 		}
 	};
 }

@@ -49,7 +49,7 @@ Quaternion Quaternion::conjugate() const
 
 Quaternion Quaternion::inverse() const
 {
-	return conjugate() / getMagnitudeSqr();
+	return conjugate() / getSqrMagnitude();
 }
 
 float Quaternion::getMagnitude() const
@@ -57,7 +57,7 @@ float Quaternion::getMagnitude() const
 	return sqrtf(powf(getX(), 2) + powf(getY(), 2) + powf(getZ(), 2));
 }
 
-float math::Quaternion::getMagnitudeSqr() const
+float math::Quaternion::getSqrMagnitude() const
 {
 	return powf(getX(), 2) + powf(getY(), 2) + powf(getZ(), 2);
 }

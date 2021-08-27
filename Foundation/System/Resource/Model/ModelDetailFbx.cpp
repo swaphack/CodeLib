@@ -518,7 +518,7 @@ void handMaterialTexture(ModelDetailFbx* file, FbxSurfaceMaterial* mat, int text
 					}
 					else
 					{
-						int a = 1;
+						PRINT("Error: Texture Count is > 2 ");
 					}
 				}
 			}

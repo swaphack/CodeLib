@@ -110,12 +110,6 @@
     <ClInclude Include="Map\Base\CombineSlots.h">
       <Filter>Map\Base</Filter>
     </ClInclude>
-    <ClInclude Include="Mesh\ReduceAlgorithm.h">
-      <Filter>Mesh</Filter>
-    </ClInclude>
-    <ClInclude Include="Mesh\ProgressiveMeshAlgorithm.h">
-      <Filter>Mesh</Filter>
-    </ClInclude>
     <ClInclude Include="Mesh\macros.h">
       <Filter>Mesh</Filter>
     </ClInclude>
@@ -151,6 +145,27 @@
     </ClInclude>
     <ClInclude Include="Mesh\Base\MeshProtocol.h">
       <Filter>Mesh\Bae</Filter>
+    </ClInclude>
+    <ClInclude Include="Mesh\Core\Delaunay.h">
+      <Filter>Mesh\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Mesh\Core\Voronoi.h">
+      <Filter>Mesh\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Mesh\Base\MeshPolygonEdge.h">
+      <Filter>Mesh\Bae</Filter>
+    </ClInclude>
+    <ClInclude Include="Mesh\Core\import.h">
+      <Filter>Mesh\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Mesh\Core\QuadricErrorMetrics.h">
+      <Filter>Mesh\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Mesh\Core\ProgressiveMeshes.h">
+      <Filter>Mesh\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Mesh\Core\PolygonReduction.h">
+      <Filter>Mesh\Core</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -241,9 +256,6 @@
     <ClCompile Include="Map\Creator\WFCAlgorithm.cpp">
       <Filter>Map\Creator</Filter>
     </ClCompile>
-    <ClCompile Include="Mesh\ProgressiveMeshAlgorithm.cpp">
-      <Filter>Mesh</Filter>
-    </ClCompile>
     <ClCompile Include="Mesh\Base\Index.cpp">
       <Filter>Mesh\Bae</Filter>
     </ClCompile>
@@ -264,6 +276,24 @@
     </ClCompile>
     <ClCompile Include="Mesh\Base\PointSet.cpp">
       <Filter>Mesh\Bae</Filter>
+    </ClCompile>
+    <ClCompile Include="Mesh\Core\Delaunay.cpp">
+      <Filter>Mesh\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Mesh\Core\Voronoi.cpp">
+      <Filter>Mesh\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Mesh\Base\MeshPolygonEdge.cpp">
+      <Filter>Mesh\Bae</Filter>
+    </ClCompile>
+    <ClCompile Include="Mesh\Core\ProgressiveMeshes.cpp">
+      <Filter>Mesh\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Mesh\Core\QuadricErrorMetrics.cpp">
+      <Filter>Mesh\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Mesh\Core\PolygonReduction.cpp">
+      <Filter>Mesh\Core</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

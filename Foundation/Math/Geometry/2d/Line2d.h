@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Algebra/import.h"
+#include "LineSegment2d.h"
 
 namespace math
 {
@@ -35,6 +36,12 @@ namespace math
 		*/
 		Line2d(const Vector2& src, const Vector2& dest);
 		Line2d(const Line2d& line);
+		Line2d(const LineSegment2d& lineSeg);
+	public:
+		void set(float a, float b, float c);
+		void set(const Vector2& src, const Vector2& dest);
+		void set(const Line2d& line);
+		void set(const LineSegment2d& lineSeg);
 	public:
 		float getParamA() const;
 		float getParamB() const;

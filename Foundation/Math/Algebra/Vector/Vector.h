@@ -39,7 +39,7 @@ namespace math
 		/**
 		*	向量的模平方
 		*/
-		float getMagnitudeSqr() const
+		float getSqrMagnitude() const
 
 		{
 			float len = 0;

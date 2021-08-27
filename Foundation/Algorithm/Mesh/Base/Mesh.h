@@ -17,7 +17,7 @@ namespace alg
 		/**
 		*	由三角形坐标初始化
 		*/
-		bool initWithTriangles(const std::vector<math::Triangle>& data);
+		bool initWithTriangles(const std::vector<math::TrianglePoints>& data);
 		/**
 		*	由顶点坐标初始化
 		*/
@@ -33,12 +33,12 @@ namespace alg
 		/**
 		*	转化成三角形数据
 		*/
-		bool toTriangles(std::vector<math::Triangle>& data);
+		bool toTriangles(std::vector<math::TrianglePoints>& data);
 	protected:
 		/**
 		*	三角形转化为顶点 
 		*/
-		bool convertToVertices(const std::vector<math::Triangle>& data, std::vector<math::Vector3>& vertices, std::vector<int>& indices);
+		bool convertToVertices(const std::vector<math::TrianglePoints>& data, std::vector<math::Vector3>& vertices, std::vector<int>& indices);
 	private:
 		/**
 		*	顶点坐标

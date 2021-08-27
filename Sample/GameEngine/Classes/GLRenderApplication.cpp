@@ -16,7 +16,7 @@ GLRenderApplication::~GLRenderApplication()
 
 void GLRenderApplication::show()
 {
-	DimensionsType eType = DimensionsType::THREE;
+	DimensionsType eType = DimensionsType::TWO;
 	Camera::getMainCamera()->setDimensions(eType);
 
 	getCanvas()->pushScene(CREATE_NODE(TestMainScene));

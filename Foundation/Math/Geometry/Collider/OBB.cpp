@@ -8,8 +8,8 @@ OBB::OBB(const Vector3& center, const Vector3& volume, const Vector3& rotation)
 	this->set(center, volume, rotation);
 }
 
-OBB::OBB(const Vector3& center, const Vector3& size)
-:OBB(center, size, Vector3())
+OBB::OBB(const Vector3& center, const Vector3& volume)
+:OBB(center, volume, Vector3())
 {
 }
 

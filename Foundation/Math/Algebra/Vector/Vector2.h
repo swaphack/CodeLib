@@ -15,6 +15,7 @@ namespace math
 		Vector2(float x, float y);
 		Vector2(const Vector<float, 2>& vector);
 		Vector2(const Vector2& point);
+		Vector2(const Vector3& point);
 		virtual ~Vector2();
 	public:
 		CREATE_INDEX_VALUE(X, 0, float);
@@ -115,7 +116,7 @@ namespace math
 		/**
 		*	三点共线
 		*/
-		static bool isThreePointsOnSameLine(const Vector2& point0, const Vector2& point1, const Vector2& point2);
+		static bool isThreePointsCollinear(const Vector2& point0, const Vector2& point1, const Vector2& point2);
 		/**
 		*	在平面上，获取点与线的位置关系 返回结果：-1左边，0线上，1右边
 		*/

@@ -5,8 +5,9 @@
 #include "base.h"
 
 #include "Boundary.h"
-#include "EndPoint.h"
+#include "Threshold.h"
 #include "Interval.h"
+#include "Intervals.h"
 #include "Tool.h"
 
 

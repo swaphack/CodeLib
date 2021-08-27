@@ -10,7 +10,7 @@ namespace math
 	*	AABBÅö×²ºÐ
 	*	axially aligned bounding box(Öá¶ÔÆë¾ØÐÎ±ß½ç¿ò)
 	*/
-	struct AABB : public BoundingBox
+	class AABB : public BoundingBox
 	{
 	public:
 		/**

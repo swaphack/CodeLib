@@ -78,6 +78,14 @@ void render::PrimitiveNode::appendPoint(const PrimitiveVertex& vertex)
 	notify(NodeNotifyType::GEOMETRY);
 }
 
+void render::PrimitiveNode::appendPoints(const std::vector<math::Vector3>& points, const phy::Color4B& color)
+{
+	for (size_t i = 0; i < points.size(); i++)
+	{
+		this->appendPoint(points[i], color);
+	}
+}
+
 void render::PrimitiveNode::setPointSize(float size)
 {
 	_pointSize = size;

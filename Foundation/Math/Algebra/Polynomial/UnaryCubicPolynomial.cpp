@@ -1,30 +1,30 @@
-#include "CubicPolynomial.h"
+#include "UnaryCubicPolynomial.h"
 
-math::CubicPolynomial::CubicPolynomial()
+math::UnaryCubicPolynomial::UnaryCubicPolynomial()
 {
 	this->setCoefficient(1, 1, 1, 1);
 }
 
-math::CubicPolynomial::CubicPolynomial(float b, float c, float d)
+math::UnaryCubicPolynomial::UnaryCubicPolynomial(float b, float c, float d)
 {
 	this->setCoefficient(b, c, d);
 }
 
-math::CubicPolynomial::CubicPolynomial(float a, float b, float c, float d)
+math::UnaryCubicPolynomial::UnaryCubicPolynomial(float a, float b, float c, float d)
 {
 	this->setCoefficient(a, b, c, d);
 }
 
-math::CubicPolynomial::~CubicPolynomial()
+math::UnaryCubicPolynomial::~UnaryCubicPolynomial()
 {
 }
 
-void math::CubicPolynomial::setCoefficient(float b, float c, float d)
+void math::UnaryCubicPolynomial::setCoefficient(float b, float c, float d)
 {
 	this->setCoefficient(1, b, c, d);
 }
 
-void math::CubicPolynomial::setCoefficient(float a, float b, float c, float d)
+void math::UnaryCubicPolynomial::setCoefficient(float a, float b, float c, float d)
 {
 
 	this->removeAllTerms();
@@ -34,7 +34,7 @@ void math::CubicPolynomial::setCoefficient(float a, float b, float c, float d)
 	this->setTerm(d, 0);
 }
 
-std::vector<math::Complex> math::CubicPolynomial::getEquationSolution()
+std::vector<math::Complex> math::UnaryCubicPolynomial::getEquationSolution()
 {
 	float a = getCoefficient(3);
 	float b = getCoefficient(2);

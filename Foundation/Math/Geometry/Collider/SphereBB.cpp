@@ -29,12 +29,12 @@ void math::SphereBB::set(const Vector3& center, float radius)
 
 bool math::SphereBB::contains(const Vector2& point)
 {
-	return (this->_center - point).getMagnitudeSqr() <= powf(this->_radius, 2);
+	return (this->_center - point).getSqrMagnitude() <= powf(this->_radius, 2);
 }
 
 bool math::SphereBB::contains(const Vector3& point)
 {
-	return (this->_center - point).getMagnitudeSqr() <= powf(this->_radius, 2);
+	return (this->_center - point).getSqrMagnitude() <= powf(this->_radius, 2);
 }
 
 bool math::SphereBB::hitRay(const Ray& ray) const
@@ -42,11 +42,11 @@ bool math::SphereBB::hitRay(const Ray& ray) const
 	const auto& srcPoint = ray.getPoint();
 	const auto& direction = ray.getDirection();
 
-	float a = direction.getMagnitudeSqr();
+	float a = direction.getSqrMagnitude();
 	float b = 2 * direction.getX() * (srcPoint.getX() - _center.getX())
 		+ 2 * direction.getY() * (srcPoint.getY() - _center.getY())
 		+ 2 * direction.getZ() * (srcPoint.getZ() - _center.getZ());
-	float c = _center.getMagnitudeSqr() + srcPoint.getMagnitudeSqr()
+	float c = _center.getSqrMagnitude() + srcPoint.getSqrMagnitude()
 		- 2 * (_center.getX() * srcPoint.getX() + _center.getY() * srcPoint.getY() + _center.getZ() * srcPoint.getZ())
 		- powf(this->_radius, 2);
 

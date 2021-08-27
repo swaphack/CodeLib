@@ -46,7 +46,8 @@ namespace math
 		Decimal& operator=(const Integer& value);
 		Decimal& operator=(const Fraction& value);
 	public:
-		long double value() const;
+		double value() const;
+		operator int() const;
 		operator float() const;
 		operator double() const;
 		operator long double() const;

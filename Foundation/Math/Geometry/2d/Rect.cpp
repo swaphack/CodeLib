@@ -38,7 +38,7 @@ float Rect::getMaxX() const
 
 float Rect::getMinX() const
 {
-	return _origin.getX();
+	return getX();
 }
 
 float Rect::getHeight() const
@@ -75,29 +75,50 @@ void Rect::set(const Vector2& origin, const Size& size)
 	_size = size;
 }
 
-bool Rect::contains(const Vector2& point)
-{
-	return contains(point.getX(), point.getY());
-}
-
-bool Rect::contains(float x, float y)
+bool Rect::contains(float x, float y) const
 {
 	return (x >= getMinX() && x <= getMaxX())
 		&& (y >= getMinY() && y <= getMaxY());
 }
 
-bool Rect::intersect(const Rect& rect)
+bool Rect::contains(const Vector2& point) const
+{
+	return contains(point.getX(), point.getY());
+}
+
+bool math::Rect::contains(const Vector3& point) const
+{
+	return contains(point.getX(), point.getY());
+}
+
+bool math::Rect::includes(float x, float y) const
+{
+	return (x > getMinX() && x < getMaxX())
+		&& (y > getMinY() && y < getMaxY());
+}
+
+bool math::Rect::includes(const Vector2& point) const
+{
+	return includes(point.getX(), point.getY());
+}
+
+bool math::Rect::includes(const Vector3& point) const
+{
+	return includes(point.getX(), point.getY());
+}
+
+bool Rect::intersect(const Rect& rect) const
 {
 	return intersect(rect.getX(), rect.getY(), rect.getWidth(), rect.getHeight());
 }
 
-bool Rect::intersect(float x, float y, float w, float h)
+bool Rect::intersect(float x, float y, float w, float h) const
 {
 	return !(getMaxX() < x || x + w < getMinX() ||
 		getMaxY() < y || y + h < getMinY());
 }
 
-Rect Rect::intersectRect(const Rect& rect)
+Rect Rect::intersectRect(const Rect& rect) const
 {
 	if (!intersect(rect))
 	{
@@ -115,7 +136,7 @@ Rect Rect::intersectRect(const Rect& rect)
 	return Rect(x0, y0, x1 - x0, y1 - y0);
 }
 
-Rect Rect::unionRect(const Rect& rect)
+Rect Rect::unionRect(const Rect& rect) const
 {
 	Rect* pRect = &(Rect&)rect;
 

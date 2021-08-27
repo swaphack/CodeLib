@@ -9,6 +9,11 @@ alg::PointSet::PointSet()
 {
 }
 
+alg::PointSet::PointSet(const std::vector<math::Vector3>& points)
+{
+	this->setPoints(points);
+}
+
 alg::PointSet::~PointSet()
 {
 	this->cleanup();
@@ -26,6 +31,7 @@ alg::PointSet* alg::PointSet::create(int count, int width, int height)
 	}
 
 	auto item = CREATE_OBJECT(PointSet);
+	SAFE_RETAIN(item);
 	item->setPoints(points);
 
 	return item;
@@ -33,18 +39,26 @@ alg::PointSet* alg::PointSet::create(int count, int width, int height)
 
 void alg::PointSet::setPoints(const std::vector<math::Vector3>& points)
 {
-	_vertices = points;
+	for (auto item : points)
+	{
+		this->createVertex(item);
+	}
 }
 
-const math::Vector3* alg::PointSet::getPoint(int idx) const
+const math::Vector3* alg::PointSet::getPosition(int idx) const
 {
 	if (idx < 0 || idx >= _vertices.size()) return nullptr;
 	return &_vertices[idx];
 }
 
+int alg::PointSet::getPointCount() const
+{
+	return _vertices.size();
+}
+
 alg::MeshVertex* alg::PointSet::createVertex(int idx0)
 {
-	auto point = getPoint(idx0);
+	auto point = getPosition(idx0);
 	if (point == nullptr) return nullptr;
 
 	return createVertex(*point);
@@ -53,6 +67,7 @@ alg::MeshVertex* alg::PointSet::createVertex(int idx0)
 alg::MeshVertex* alg::PointSet::createVertex(const math::Vector3& point0)
 {
 	std::string key = point0.toString();
+
 	auto it = _meshVertexes.find(key);
 	if (it != _meshVertexes.end())
 	{
@@ -61,9 +76,11 @@ alg::MeshVertex* alg::PointSet::createVertex(const math::Vector3& point0)
 	}
 
 	auto item = CREATE_OBJECT(MeshVertex);
-	item->setPosition(point0);
 	SAFE_RETAIN(item);
-
+	item->setKey(key);
+	item->setPointSet(this);
+	item->setPosition(point0);
+	_vertices.push_back(point0);
 	_meshVertexes[key] = item;
 
 	return item;
@@ -84,6 +101,11 @@ void alg::PointSet::removeVertex(MeshVertex* pVertex)
 			break;
 		}
 	}
+}
+
+const std::map<std::string, alg::MeshVertex*>& alg::PointSet::getVertexes() const
+{
+	return _meshVertexes;
 }
 
 alg::MeshEdge* alg::PointSet::createEdge(int idx0, int idx1)
@@ -112,7 +134,7 @@ alg::MeshEdge* alg::PointSet::createEdge(const MeshVertex* pVertex0, const MeshV
 		return nullptr;
 	}
 
-	std::string key = pVertex0->getPosition().toString() + "-" + pVertex1->getPosition().toString();
+	std::string key = getKey(pVertex0, pVertex1);
 
 	auto it = _meshEdges.find(key);
 	if (it != _meshEdges.end())
@@ -122,8 +144,10 @@ alg::MeshEdge* alg::PointSet::createEdge(const MeshVertex* pVertex0, const MeshV
 	}
 
 	auto item = CREATE_OBJECT(MeshEdge);
-	item->setVertexes(pVertex0, pVertex1);
 	SAFE_RETAIN(item);
+	item->setKey(key);
+	item->setPointSet(this);
+	item->setVertexes(pVertex0, pVertex1);
 	_meshEdges[key] = item;
 
 	return item;
@@ -135,33 +159,46 @@ void alg::PointSet::removeEdge(MeshEdge* pEdge)
 	{
 		return;
 	}
-	for (auto item : _meshEdges)
+	
+	auto key = getKey(pEdge->getVertex(0), pEdge->getVertex(1));
+	auto it = _meshEdges.find(key);
+	if (it != _meshEdges.end())
 	{
-		if (item.second == pEdge)
-		{
-			if (pEdge->RetainCount == 1)
-			{
-				_meshEdges.erase(item.first);
-			}
-			SAFE_RELEASE(pEdge);
-			break;
-		}
+		_meshEdges.erase(it);
+		SAFE_RELEASE(pEdge);
+	}
+	else
+	{
+		PRINT("Error: no exist edge %s", key.c_str());
 	}
 }
 
 alg::MeshTriangle* alg::PointSet::createTriangle(int idx0, int idx1, int idx2)
 {
-	auto pointA = getPoint(idx0);
-	auto pointB = getPoint(idx1);
-	auto pointC = getPoint(idx2);
-	if (pointA == nullptr || pointB == nullptr || pointC == nullptr) return nullptr;
+	auto pVertexA = createVertex(idx0);
+	auto pVertexB = createVertex(idx1);
+	auto pVertexC = createVertex(idx2);
+	if (pVertexA == nullptr || pVertexB == nullptr || pVertexC == nullptr) return nullptr;
 
-	return createTriangle(*pointA, *pointB, *pointC);
+	return createTriangle(pVertexA, pVertexB, pVertexC);
 }
 
 alg::MeshTriangle* alg::PointSet::createTriangle(const math::Vector3& point0, const math::Vector3& point1, const math::Vector3& point2)
 {
-	std::string key = point0.toString() + "-" + point1.toString() + "-" + point2.toString();
+	auto pVertexA = createVertex(point0);
+	auto pVertexB = createVertex(point1);
+	auto pVertexC = createVertex(point2);
+	if (pVertexA == nullptr || pVertexB == nullptr || pVertexC == nullptr) return nullptr;
+
+	return createTriangle(pVertexA, pVertexB, pVertexC);
+}
+
+alg::MeshTriangle* alg::PointSet::createTriangle(const MeshVertex* pVertex0, const MeshVertex* pVertex1, const MeshVertex* pVertex2)
+{
+	if (pVertex0 == nullptr || pVertex1 == nullptr || pVertex2 == nullptr) return nullptr;
+
+
+	std::string key = getKey(pVertex0, pVertex1, pVertex2);
 
 	auto it = _meshTriangles.find(key);
 	if (it != _meshTriangles.end())
@@ -170,10 +207,21 @@ alg::MeshTriangle* alg::PointSet::createTriangle(const math::Vector3& point0, co
 		return it->second;
 	}
 
-	auto item = new MeshTriangle(point0, point1, point2);
+	auto item = CREATE_OBJECT(MeshTriangle);
+	SAFE_RETAIN(item);
+	item->setKey(key);
+	item->setPointSet(this);
+	item->setVertexes(pVertex0, pVertex1, pVertex2);
 	_meshTriangles[key] = item;
 
 	return item;
+}
+
+alg::MeshTriangle* alg::PointSet::createTriangle(const std::vector<MeshVertex*>& vertexes)
+{
+	if (vertexes.size() < 3) return nullptr;
+
+	return createTriangle(vertexes[0], vertexes[1], vertexes[2]);
 }
 
 void alg::PointSet::removeTriangle(MeshTriangle* pTriangle)
@@ -182,46 +230,75 @@ void alg::PointSet::removeTriangle(MeshTriangle* pTriangle)
 	{
 		return;
 	}
-	for (auto item : _meshTriangles)
+	auto key = getKey(pTriangle->getVertex(0), pTriangle->getVertex(1), pTriangle->getVertex(2));
+	pTriangle->decompose();
+	auto it = _meshTriangles.find(key);
+	if (it != _meshTriangles.end())
 	{
-		if (item.second == pTriangle)
-		{
-			if (pTriangle->RetainCount == 1)
-			{
-				_meshTriangles.erase(item.first);
-			}
-			SAFE_RELEASE(pTriangle);
-			break;
-		}
+		SAFE_RELEASE(pTriangle);
+		_meshTriangles.erase(it);
 	}
+	else
+	{
+		PRINT("Error: no exist triangle %s", key.c_str());
+	}
+}
+
+const std::map<std::string, alg::MeshTriangle*>& alg::PointSet::getTriangles() const
+{
+	return _meshTriangles;
+}
+
+bool alg::PointSet::containTriangle(const math::Vector3& point0, const math::Vector3& point1, const math::Vector3& point2) const
+{
+	auto key = getKey(point0, point1, point2);
+
+	auto it = _meshTriangles.find(key);
+	return it != _meshTriangles.end();
+}
+
+bool alg::PointSet::containTriangle(const MeshVertex* vertex0, const MeshVertex* vertex1, const MeshVertex* vertex2) const
+{
+	if (vertex0 == nullptr || vertex1 == nullptr || vertex2 == nullptr)
+		return false;
+
+	auto key = getKey(vertex0, vertex1, vertex2);
+
+	auto it = _meshTriangles.find(key);
+	return it != _meshTriangles.end();
 }
 
 alg::MeshPolygon* alg::PointSet::createPolygon(const std::vector<int>& vecIndices)
 {
-	std::vector<math::Vector3> points;
+	std::vector<alg::MeshVertex*> vertexes;
 	for (auto item : vecIndices)
 	{
-		auto point = getPoint(item);
+		auto point = createVertex(item);
 		if (point != nullptr)
 		{
-			points.push_back(*point);
+			vertexes.push_back(point);
 		}
 	}
-	return createPolygon(points);
+	return createPolygon(vertexes);
 }
 
 alg::MeshPolygon* alg::PointSet::createPolygon(const std::vector<math::Vector3>& vecPoints)
 {
-	std::string key;
+	std::vector<alg::MeshVertex*> vertexes;
 	for (auto item : vecPoints)
 	{
-		key += item.toString() + ",";
+		auto point = createVertex(item);
+		if (point != nullptr)
+		{
+			vertexes.push_back(point);
+		}
 	}
+	return createPolygon(vertexes);
+}
 
-	if (key.size() > 0)
-	{
-		key = key.substr(0, key.size() - 1);
-	}
+alg::MeshPolygon* alg::PointSet::createPolygon(const std::vector<MeshVertex* >& vecVertexes)
+{
+	std::string key = getKey(vecVertexes);
 
 	auto it = _meshPolygons.find(key);
 	if (it != _meshPolygons.end())
@@ -230,7 +307,11 @@ alg::MeshPolygon* alg::PointSet::createPolygon(const std::vector<math::Vector3>&
 		return it->second;
 	}
 
-	auto item = new MeshPolygon(vecPoints);
+	auto item = CREATE_OBJECT(MeshPolygon);
+	SAFE_RETAIN(item);
+	item->setKey(key);
+	item->setPointSet(this);
+	item->setVertexes(vecVertexes);
 	_meshPolygons[key] = item;
 
 	return item;
@@ -264,4 +345,93 @@ void alg::PointSet::cleanup()
 	_meshEdges.clear();
 	_meshTriangles.clear();
 	_meshPolygons.clear();
+}
+
+std::string alg::PointSet::getKey(const MeshVertex* pVertex)
+{
+	std::vector<MeshVertex*> vecVertex;
+	if (pVertex) vecVertex.push_back((MeshVertex*)pVertex);
+	return getKey(vecVertex);
+}
+
+std::string alg::PointSet::getKey(const MeshVertex* pVertex0, const MeshVertex* pVertex1)
+{
+	std::vector<MeshVertex*> vecVertex;
+	if (pVertex0) vecVertex.push_back((MeshVertex*)pVertex0);
+	if (pVertex1) vecVertex.push_back((MeshVertex*)pVertex1);
+	return getKey(vecVertex);
+}
+
+std::string alg::PointSet::getKey(const MeshVertex* pVertex0, const MeshVertex* pVertex1, const MeshVertex* pVertex2)
+{
+	std::vector<MeshVertex*> vecVertex;
+	if (pVertex0) vecVertex.push_back((MeshVertex*)pVertex0);
+	if (pVertex1) vecVertex.push_back((MeshVertex*)pVertex1);
+	if (pVertex2) vecVertex.push_back((MeshVertex*)pVertex2);
+	return getKey(vecVertex);
+}
+
+std::string alg::PointSet::getKey(const std::vector<MeshVertex*>& vecVertex)
+{
+	std::vector<math::Vector3> vecPoint;
+	for (auto item : vecVertex)
+	{
+		if (item)
+		{
+			vecPoint.push_back(item->getPosition());
+		}
+	}
+
+	return getKey(vecPoint);
+}
+
+std::string alg::PointSet::getKey(const math::Vector3& point)
+{
+	std::vector<math::Vector3> vecPoint;
+	vecPoint.push_back(point);
+	return getKey(vecPoint);
+}
+
+std::string alg::PointSet::getKey(const math::Vector3& point0, const math::Vector3& point1)
+{
+	std::vector<math::Vector3> vecPoint;
+	vecPoint.push_back(point0);
+	vecPoint.push_back(point1);
+	return getKey(vecPoint);
+}
+
+std::string alg::PointSet::getKey(const math::Vector3& point0, const math::Vector3& point1, const math::Vector3& point2)
+{
+	std::vector<math::Vector3> vecPoint;
+	vecPoint.push_back(point0);
+	vecPoint.push_back(point1);
+	vecPoint.push_back(point2);
+	return getKey(vecPoint);
+}
+
+std::string alg::PointSet::getKey(const std::vector<math::Vector3>& points)
+{
+	std::vector<std::string> data;
+	for (auto item : points)
+	{
+		std::string value = item.toString();
+		if (!value.empty())
+		{
+			data.push_back(value);
+		}
+	}
+	std::sort(data.begin(), data.end(), [](const std::string& a, const std::string& b) { return a < b; });
+
+	std::string key;
+	for (size_t i = 0; i < data.size(); i++)
+	{
+		key += data[i] + "-";
+	}
+
+	if (key.size() > 0)
+	{
+		key = key.substr(0, key.size() - 1);
+	}
+
+	return key;
 }

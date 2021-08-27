@@ -7,4 +7,5 @@
 #include "PointSet.h"
 #include "Mesh.h"
 
+#include "MeshPolygonEdge.h"
 #include "Index.h"

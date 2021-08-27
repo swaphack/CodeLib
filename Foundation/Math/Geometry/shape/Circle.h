@@ -27,7 +27,7 @@ namespace math
 		/**
 		*	是否包含点
 		*/
-		bool contains(const Vector3& point);
+		bool contains(const Vector3& point) const;
 	private:
 		/**
 		*	原点坐标
