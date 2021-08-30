@@ -36,9 +36,29 @@ int math::Polygon::getPointCount() const
 	return _points.size();
 }
 
+const math::Vector3& math::Polygon::getPoint(int index) const
+{
+	assert(index >= 0 && index < getPointCount());
+
+	return _points[index];
+}
+
+math::Vector3& math::Polygon::getPoint(int index)
+{
+	assert(index >= 0 && index < getPointCount());
+
+	return _points[index];
+}
+
 void math::Polygon::setPoints(const std::vector<math::Vector3>& points)
 {
 	_points = points;
+}
+
+void math::Polygon::setPoint(int index, const math::Vector3& point)
+{
+	assert(index >= 0 && index < getPointCount());
+	_points[index] = point;
 }
 
 bool math::Polygon::contains(const Vector2& point)

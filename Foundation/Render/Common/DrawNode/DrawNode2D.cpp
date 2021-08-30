@@ -107,12 +107,10 @@ void render::DrawNode2D::onDrawNode2DBodyChange()
 
 void render::DrawNode2D::onDrawNode2DColorChange()
 {
-	phy::Color4F color;
-	convertColor4BTo4F(getColor(), color);
-	_rectVertex.setLeftDownColor(color);
-	_rectVertex.setRightDownColor(color);
-	_rectVertex.setRightUpColor(color);
-	_rectVertex.setLeftUpColor(color);
+	_rectVertex.setLeftDownColor(_color);
+	_rectVertex.setRightDownColor(_color);
+	_rectVertex.setRightUpColor(_color);
+	_rectVertex.setLeftUpColor(_color);
 
 	updateDrawNode2DMesh();
 }

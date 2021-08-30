@@ -423,6 +423,28 @@ bool WidgetProperty::getAttribute(const std::string& name, phy::Color4B& default
 	return sys::ColorConvert::convertToColor(text, defaultValue);
 }
 
+bool ui::WidgetProperty::getAttribute(const std::string& name, phy::Color3F& defaultValue)
+{
+	const std::string& text = getAttribute(name);
+	if (text.empty())
+	{
+		return false;
+	}
+
+	return sys::ColorConvert::convertToColor(text, defaultValue);
+}
+
+bool ui::WidgetProperty::getAttribute(const std::string& name, phy::Color4F& defaultValue)
+{
+	const std::string& text = getAttribute(name);
+	if (text.empty())
+	{
+		return false;
+	}
+
+	return sys::ColorConvert::convertToColor(text, defaultValue);
+}
+
 bool WidgetProperty::getAttribute(const std::string& name, math::Size& defaultValue)
 {
 	const std::string& value = getAttribute(name);
@@ -621,6 +643,28 @@ bool ui::WidgetProperty::getAttribute(const std::string& name, phy::Color3B& def
 }
 
 void ui::WidgetProperty::setAttribute(const std::string& name, const phy::Color3B& value)
+{
+	if (name.empty())
+	{
+		return;
+	}
+	std::string str;
+	sys::ColorConvert::convertToText(value, str);
+	setAttribute(name, str);
+}
+
+void ui::WidgetProperty::setAttribute(const std::string& name, const phy::Color4F& value)
+{
+	if (name.empty())
+	{
+		return;
+	}
+	std::string str;
+	sys::ColorConvert::convertToText(value, str);
+	setAttribute(name, str);
+}
+
+void ui::WidgetProperty::setAttribute(const std::string& name, const phy::Color3F& value)
 {
 	if (name.empty())
 	{

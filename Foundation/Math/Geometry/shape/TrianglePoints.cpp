@@ -14,6 +14,15 @@ math::TrianglePoints::TrianglePoints(const Vector3& p0, const Vector3& p1, const
 	this->setPoint2(p2);
 }
 
+math::TrianglePoints::TrianglePoints(const std::vector<Vector3>& points)
+{
+	assert(points.size() == 3);
+
+	this->setPoint0(points[0]);
+	this->setPoint1(points[1]);
+	this->setPoint2(points[2]);
+}
+
 math::TrianglePoints::TrianglePoints(const Vector3* points)
 {
 	if (points == nullptr)

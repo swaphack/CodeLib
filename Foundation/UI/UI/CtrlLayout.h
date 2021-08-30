@@ -22,7 +22,7 @@ namespace ui
 		/**
 		*	±≥æ∞—’…´
 		*/
-		const phy::Color4B& getBackgroundColor() const;
+		phy::Color4B getBackgroundColor() const;
 		/**
 		*	…Ë÷√±≥æ∞Õº∆¨
 		*/

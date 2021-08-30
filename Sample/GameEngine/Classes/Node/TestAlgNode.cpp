@@ -1,6 +1,7 @@
 #include "TestAlgNode.h"
 #include "system.h"
 #include "algorithm.h"
+#include "Utility.h"
 
 TestAlgNode::TestAlgNode()
 {
@@ -137,11 +138,11 @@ void TestAlgNode::testWFCCreateMap()
 
 void TestAlgNode::testDelaunay()
 {
-	float width = 100;
-	float height = 100;
+	float width = 1000;
+	float height = 700;
 	
-	int horizontal = 10;
-	int vertical = 10;
+	int horizontal = 1;
+	int vertical = 1;
 
 	float perWidth = width / horizontal;
 	float perHeight = height / vertical;
@@ -171,25 +172,68 @@ void TestAlgNode::testDelaunay()
 	alg::Voronoi voronoi;
 
 	auto triagles = delaunay.createWithBowyerWatson(rectPoints, points);
-	//auto polygons = voronoi.createWithRect(rect, &delaunay);
+	auto polygons = voronoi.createWithRect(rect, &delaunay);
 
+	//drawTriangles(triagles);
+	drawPolygons(polygons);
+}
+
+void TestAlgNode::drawTriangles(const std::vector<math::TrianglePoints>& vecTrianglePoints)
+{
 	render::PrimitiveNode* pNode = CREATE_NODE(render::PrimitiveNode);
 	pNode->setDrawMode(DrawMode::TRIANGLES);
-	pNode->setPosition(512, 384, 0);
+	pNode->setPosition(-500, -350, 0);
 	pNode->setPointSize(10);
 
-	for (auto triangle : triagles)
+	for (auto triangle : vecTrianglePoints)
 	{
 		for (size_t i = 0; i < 3; i++)
 		{
-			phy::Color4B color;
-			color.setRed(sys::Random::getNumber(0, 256));
-			color.setGreen(sys::Random::getNumber(0, 256));
-			color.setBlue(sys::Random::getNumber(0, 256));
+			phy::Color4F color;
+			color.setRed(sys::Random::getNumber(0.45f, 0.65f));
+			color.setGreen(sys::Random::getNumber(0.45f, 0.65f));
+			color.setBlue(sys::Random::getNumber(0.45f, 0.65f));
+			color.setAlpha(1.0f);
 			pNode->appendPoint(triangle.getValue(i), color);
 		}
 	}
+	Utility::loadShaderVF(pNode, "Shader/geometry/draw_primitive.vs", "Shader/geometry/draw_primitive.fs");
+	this->addChild(pNode);
+}
 
+void TestAlgNode::drawPolygons(const std::vector<math::Polygon>& vecPolygons)
+{
+	int i = vecPolygons.size();
+	for (auto polygon : vecPolygons)
+	{
+		drawPolygon(polygon);
+		i--;
+		if (i == 0) break;
+	}
+}
+
+void TestAlgNode::drawPolygon(const math::Polygon& polygon)
+{
+	if (polygon.getPointCount() < 3) return;
+
+	render::PrimitiveNode* pNode = CREATE_NODE(render::PrimitiveNode);
+	pNode->setDrawMode(DrawMode::POINTS);
+	pNode->setDrawMode(DrawMode::POLYGON);
+	pNode->setPosition(-500, -350, 0);
+	pNode->setPointSize(2);
+
+	phy::Color4F color;
+	color.setRed(sys::Random::getNumber(0.75f, 1.0f));
+	color.setGreen(sys::Random::getNumber(0.75f, 1.0f));
+	color.setBlue(sys::Random::getNumber(0.75f, 1.0f));
+	color.setAlpha(1.0f);
+
+	for (auto point : polygon.getPoints())
+	{
+		pNode->appendPoint(point, color);
+	}
+
+	Utility::loadShaderVF(pNode, "Shader/geometry/draw_primitive.vs", "Shader/geometry/draw_primitive.fs");
 	this->addChild(pNode);
 }
 

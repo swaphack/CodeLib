@@ -290,7 +290,7 @@ void render::DrawNode::onColorChange()
 
 void render::DrawNode::onDrawNodeColorChange()
 {
-	_material->getMaterialDetail()->setEmissionByte(_color[0], _color[1], _color[2], _color[3]);
+	_material->getMaterialDetail()->setEmission(_color[0], _color[1], _color[2], _color[3]);
 }
 
 void render::DrawNode::onBlendChange()

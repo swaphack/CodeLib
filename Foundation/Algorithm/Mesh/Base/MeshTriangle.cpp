@@ -228,6 +228,27 @@ std::vector<alg::MeshVertex*> alg::MeshTriangle::getOrderVertexes(const MeshVert
 	return vertexes;
 }
 
+std::vector<math::Vector3> alg::MeshTriangle::getOrderdPositions(bool bClockWise) const
+{
+	bool bClockWiseOrder = math::GeometryUtiity::isClockWise(this->getPosition(0), this->getPosition(1), this->getPosition(2));
+
+	std::vector<math::Vector3> cwIndices;
+	std::vector<math::Vector3> ccwIndices;
+
+	if (bClockWiseOrder)
+	{
+		cwIndices.push_back(this->getPosition(0)); cwIndices.push_back(this->getPosition(1)); cwIndices.push_back(this->getPosition(2));
+		ccwIndices.push_back(this->getPosition(0)); ccwIndices.push_back(this->getPosition(2)); ccwIndices.push_back(this->getPosition(1));
+	}
+	else
+	{
+		ccwIndices.push_back(this->getPosition(0)); ccwIndices.push_back(this->getPosition(1)); ccwIndices.push_back(this->getPosition(2));
+		cwIndices.push_back(this->getPosition(0)); cwIndices.push_back(this->getPosition(2)); cwIndices.push_back(this->getPosition(1));
+	}
+	
+	return bClockWise ? cwIndices : ccwIndices;
+}
+
 const alg::MeshEdge* alg::MeshTriangle::getEdge(int index) const
 {
 	if (index < 0 || index >= TRIANGLE_VERTEX_AND_EDGE_COUNT) return nullptr;

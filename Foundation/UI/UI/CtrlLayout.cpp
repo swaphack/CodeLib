@@ -41,9 +41,11 @@ void ui::CtrlLayout::setBackgroundColor(const phy::Color4B& color)
 	_backgroundMask->setColor(color);
 }
 
-const phy::Color4B& ui::CtrlLayout::getBackgroundColor() const
+phy::Color4B ui::CtrlLayout::getBackgroundColor() const
 {
-	return _backgroundMask->getColor();
+	phy::Color4B color;
+	convertColor4FTo4B(_backgroundMask->getColor(), color);
+	return color;
 }
 
 void ui::CtrlLayout::setBackgroundImagePath(const std::string& filepath)

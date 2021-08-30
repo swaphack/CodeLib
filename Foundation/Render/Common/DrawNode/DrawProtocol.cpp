@@ -3,7 +3,7 @@
 using namespace render;
 
 ColorProtocol::ColorProtocol()
-	: _color(phy::Color4B(255, 255, 255, 255))
+	: _color(phy::Color4F(1.0f, 1.0f, 1.0f, 1.0f))
 {
 
 }
@@ -24,6 +24,24 @@ void ColorProtocol::setColor(uint8_t r, uint8_t g, uint8_t b)
 
 void ColorProtocol::setColor(uint8_t r, uint8_t g, uint8_t b, uint8_t a)
 {
+	_color[0] = r / COLOR_FLOAT_VALUE;
+	_color[1] = g / COLOR_FLOAT_VALUE;
+	_color[2] = b / COLOR_FLOAT_VALUE;
+	_color[3] = a / COLOR_FLOAT_VALUE;
+	onColorChange();
+}
+
+void render::ColorProtocol::setColor(float r, float g, float b)
+{
+	_color[0] = r;
+	_color[1] = g;
+	_color[2] = b;
+
+	onColorChange();
+}
+
+void render::ColorProtocol::setColor(float r, float g, float b, float a)
+{
 	_color[0] = r;
 	_color[1] = g;
 	_color[2] = b;
@@ -31,53 +49,30 @@ void ColorProtocol::setColor(uint8_t r, uint8_t g, uint8_t b, uint8_t a)
 	onColorChange();
 }
 
-void render::ColorProtocol::setColor(float r, float g, float b)
-{
-	_color[0] = (uint8_t)(r * COLOR_FLOAT_VALUE);
-	_color[1] = (uint8_t)(g * COLOR_FLOAT_VALUE);
-	_color[2] = (uint8_t)(b * COLOR_FLOAT_VALUE);
-
-	onColorChange();
-}
-
-void render::ColorProtocol::setColor(float r, float g, float b, float a)
-{
-	_color[0] = (uint8_t)(r * COLOR_FLOAT_VALUE);
-	_color[1] = (uint8_t)(g * COLOR_FLOAT_VALUE);
-	_color[2] = (uint8_t)(b * COLOR_FLOAT_VALUE);
-	_color[3] = (uint8_t)(a * COLOR_FLOAT_VALUE);
-	onColorChange();
-}
-
 void ColorProtocol::setColor(const phy::Color4B& color)
 {
-	_color = color;
-
+	phy::convertColor4BTo4F(color, _color);
 	onColorChange();
 }
 
 void ColorProtocol::setColor(const phy::Color3B& color)
 {
-	_color = color;
-
+	phy::convertColor4BTo4F(color, _color);
 	onColorChange();
 }
 
 void render::ColorProtocol::setColor(const phy::Color4F& color)
 {
-	phy::Color4B c;
-	phy::convertColor4FTo4B(color, c);
-	this->setColor(c);
+	_color = color;
+	onColorChange();
 }
 
 void render::ColorProtocol::setColor(const phy::Color3F& color)
 {
-	phy::Color3B c;
-	phy::convertColor3FTo3B(color, c);
-	this->setColor(c);
+	this->setColor(color.getRed(), color.getGreen(), color.getBlue());
 }
 
-const phy::Color4B& ColorProtocol::getColor() const
+const phy::Color4F& ColorProtocol::getColor() const
 {
 	return _color;
 }

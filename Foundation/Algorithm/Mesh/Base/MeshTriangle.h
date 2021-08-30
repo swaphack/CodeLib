@@ -67,6 +67,10 @@ namespace alg
 		*	获取排序后的顶点顺序
 		*/
 		std::vector<MeshVertex*> getOrderVertexes(const MeshVertex* pFirstVertex = nullptr, bool bClockWise = true) const;
+		/**
+		*	获取排序后的顶点顺序
+		*/
+		std::vector<math::Vector3> getOrderdPositions(bool bClockWise = true) const;
 	public:
 		/**
 		*	设置边

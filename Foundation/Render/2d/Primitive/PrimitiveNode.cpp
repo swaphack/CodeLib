@@ -33,13 +33,13 @@ void render::PrimitiveNode::onPrimitiveChange()
 {
 	int nVertexCount = _vertexes.size();
 	auto pVertice = (float*)getMesh()->getMeshDetail()->createVertices(nVertexCount, sizeof(float), 3);
-	auto pColor = (uint8_t*)getMesh()->getMeshDetail()->createColors(nVertexCount, sizeof(uint8_t), 4);
+	auto pColor = (float*)getMesh()->getMeshDetail()->createColors(nVertexCount, sizeof(float), 4);
 	auto indice = (uint32_t*)getMesh()->getMeshDetail()->createIndices(nVertexCount, sizeof(uint32_t), 1);
 
 	for (int i = 0; i < nVertexCount; i++)
 	{
 		memcpy(pVertice + i * 3, _vertexes[i].point.getValue(), 3 * sizeof(float));
-		memcpy(pColor + i * 4, &_vertexes[i].color, 4 * sizeof(uint8_t));
+		memcpy(pColor + i * 4, &_vertexes[i].color, 4 * sizeof(float));
 		memcpy(indice + i, &i, sizeof(uint32_t));
 	}
 
@@ -58,7 +58,7 @@ DrawMode PrimitiveNode::getDrawMode()
 
 void PrimitiveNode::appendPoint(const math::Vector3& point)
 {
-	this->appendPoint(point, phy::Color4B(255, 255, 255, 255));
+	this->appendPoint(point, phy::Color4F(1.0f, 1.0f, 1.0f, 1.0f));
 }
 
 void PrimitiveNode::removeAllPoints()
@@ -67,7 +67,7 @@ void PrimitiveNode::removeAllPoints()
 	notify(NodeNotifyType::GEOMETRY);
 }
 
-void render::PrimitiveNode::appendPoint(const math::Vector3& point, const phy::Color4B& color)
+void render::PrimitiveNode::appendPoint(const math::Vector3& point, const phy::Color4F& color)
 {
 	this->appendPoint(PrimitiveVertex(point, color));
 }
@@ -78,7 +78,7 @@ void render::PrimitiveNode::appendPoint(const PrimitiveVertex& vertex)
 	notify(NodeNotifyType::GEOMETRY);
 }
 
-void render::PrimitiveNode::appendPoints(const std::vector<math::Vector3>& points, const phy::Color4B& color)
+void render::PrimitiveNode::appendPoints(const std::vector<math::Vector3>& points, const phy::Color4F& color)
 {
 	for (size_t i = 0; i < points.size(); i++)
 	{

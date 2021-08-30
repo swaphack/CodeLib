@@ -37,22 +37,6 @@ std::vector<alg::MeshPolygonEdge*>* alg::MeshPolygonEdge::getPolygonEdges(MeshVe
     return &it->second;
 }
 
-/**
-*   添加共顶点边
-*/
-
-
-/**
-*   关联
-*/
-
-
-/// <summary>
-/// 获取构成凸包的边
-/// </summary>
-/// <param name="endPoint"></param>
-/// <returns></returns>
-
 alg::MeshPolygonEdge* alg::MeshPolygonEdge::getConvexPolygonEdge(MeshVertex* endPoint)
 {
     if (endPoint == nullptr) return nullptr;
@@ -70,9 +54,8 @@ alg::MeshPolygonEdge* alg::MeshPolygonEdge::getConvexPolygonEdge(MeshVertex* end
             auto e0 = item->getEdge()->getOtherPoint(endPoint);
             if (e0 != nullptr)
             {
-                auto line = math::Line2d(startPoint->getPosition(), endPoint->getPosition());
-                // 剔除另一端不满足的点
-                if (line.getPointPositionType(math::Vector2(e0->getPosition())) == math::PointAndLinePosition2DType::EXLUDE_RIGHT)
+                // 是否顺时针
+                if (math::GeometryUtiity::isClockWise(startPoint->getPosition(), endPoint->getPosition(), e0->getPosition()))
                 {
                     sharedEdges.push_back(item);
                 }
@@ -117,10 +100,6 @@ void alg::MeshPolygonEdge::_addSharedPointEdge(MeshVertex* point, MeshPolygonEdg
     if (point == nullptr || polygonEdge == nullptr) return;
     _sharedPointEdges[point].push_back(polygonEdge);
 }
-
-/**
-*   创建多边形边
-*/
 
 std::map<alg::MeshEdge*, alg::MeshPolygonEdge*> alg::MeshPolygonEdge::createPolygonEdges(const std::set<MeshEdge*>& edges)
 {

@@ -44,13 +44,13 @@ bool render::RectPoints::isAllInRangeOfRect(float x, float y, float w, float h)
 
 bool RectPoints::containPointByPolygon(float x, float y)
 {
-	math::Vector2 nvec[4];
-	nvec[0] = math::Vector2(leftDown.getX(), leftDown.getY());
-	nvec[1] = math::Vector2(rightDown.getX(), rightDown.getY());
-	nvec[2] = math::Vector2(rightUp.getX(), rightUp.getY());
-	nvec[3] = math::Vector2(leftUp.getX(), leftUp.getY());
+	std::vector<math::Vector2> vecPoints;
+	vecPoints.push_back(math::Vector2(leftDown.getX(), leftDown.getY()));
+	vecPoints.push_back(math::Vector2(rightDown.getX(), rightDown.getY()));
+	vecPoints.push_back(math::Vector2(rightUp.getX(), rightUp.getY()));
+	vecPoints.push_back(math::Vector2(leftUp.getX(), leftUp.getY()));
 
-	math::PolygonPoints<4> p(nvec);
+	math::Polygon p(vecPoints);
 	return p.contains(math::Vector2(x, y));
 }
 

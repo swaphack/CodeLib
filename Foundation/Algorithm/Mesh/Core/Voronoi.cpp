@@ -58,10 +58,6 @@ std::vector<math::Polygon> alg::Voronoi::createWithRect(const math::Rect& rect, 
 	}
 
 	std::set<MeshEdge*> allEdges;
-	for(auto item : rectEdges)
-	{
-		allEdges.insert(item);
-	}
 
 	for (auto item : voronoiEdges)
 	{
@@ -100,11 +96,13 @@ std::vector<math::Polygon> alg::Voronoi::createWithRect(const math::Rect& rect, 
         }
         if (insetctPoints.size() == 2)
         {
+            _pointSet->removeEdge(edge);
             allEdges.erase(edge);
             allEdges.insert(_pointSet->createEdge(insetctPoints[0], insetctPoints[1]));
         }
         else if (insetctPoints.size() == 1 && otherPoints.size() == 1)
         {
+            _pointSet->removeEdge(edge);
             allEdges.erase(edge);
             allEdges.insert(_pointSet->createEdge(insetctPoints[0], otherPoints[0]));
         }
@@ -114,13 +112,17 @@ std::vector<math::Polygon> alg::Voronoi::createWithRect(const math::Rect& rect, 
             if (!rect.contains(edge->getPosition(0))
                 && !rect.contains(edge->getPosition(1)))
             {
+                _pointSet->removeEdge(edge);
                 allEdges.erase(edge);
                 continue;
             }
         }
     }
+
+    // 交点处理
     for (auto item : allIntersectPoints)
     {
+        // 对点进行排序
         std::vector<math::Vector3> edgePoints;
         edgePoints.insert(edgePoints.end(), item.second.begin(), item.second.end());
         std::sort(edgePoints.begin(), edgePoints.end(), [](const math::Vector3& a, const math::Vector3& b) { return math::CompareVec3(a, b); });
@@ -159,15 +161,15 @@ std::vector<math::Polygon> alg::Voronoi::createWithRect(const math::Rect& rect, 
         allEdges.erase(item.first);
     }
 
-    // 从左下角开始查找
+    // 转成多边形的边
     std::map<MeshEdge*, MeshPolygonEdge*> polygonEdges = MeshPolygonEdge::createPolygonEdges(allEdges);
     if (polygonEdges.size() == 0)
     {
         return polygons;
     }
 
+    // 转成多边形
     std::set<std::string> keys;
-
     for(auto item : polygonEdges)
     {
         auto polygon = MeshPolygonEdge::getConvexPolygon(item.second);
@@ -181,7 +183,12 @@ std::vector<math::Polygon> alg::Voronoi::createWithRect(const math::Rect& rect, 
             if (it == keys.end())
             {
                 keys.insert(key);
-                polygons.push_back(polygon);
+                std::vector<math::Vector3> outPoints;
+                if (math::GeometryUtiity::createConvexPolygon(vecPoint, outPoints))
+                {// 逆时针
+                    std::reverse(outPoints.begin(), outPoints.end());
+                    polygons.push_back(outPoints);
+                }
             }
         }
     }

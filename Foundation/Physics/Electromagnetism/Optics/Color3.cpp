@@ -2,6 +2,9 @@
 #include "macros.h"
 phy::Color3B::Color3B()
 {
+	this->setRed(255);
+	this->setGreen(255);
+	this->setBlue(255);
 }
 
 phy::Color3B::Color3B(uint8_t r, uint8_t g, uint8_t b)

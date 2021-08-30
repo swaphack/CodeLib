@@ -39,6 +39,8 @@ namespace ui
 		void setAttribute(const std::string& name, const math::Vector2& value);
 		void setAttribute(const std::string& name, const phy::Color4B& value);
 		void setAttribute(const std::string& name, const phy::Color3B& value);
+		void setAttribute(const std::string& name, const phy::Color4F& value);
+		void setAttribute(const std::string& name, const phy::Color3F& value);
 		void setAttribute(const std::string& name, const math::Size& value);
 		void setAttribute(const std::string& name, const math::Rect& value);
 		void setAttribute(const std::string& name, const sys::CSSMargin& value);
@@ -66,6 +68,8 @@ namespace ui
 		bool getAttribute(const std::string& name, math::Vector2& defaultValue);
 		bool getAttribute(const std::string& name, phy::Color3B& defaultValue);
 		bool getAttribute(const std::string& name, phy::Color4B& defaultValue);
+		bool getAttribute(const std::string& name, phy::Color3F& defaultValue);
+		bool getAttribute(const std::string& name, phy::Color4F& defaultValue);
 		bool getAttribute(const std::string& name, math::Size& defaultValue);
 		bool getAttribute(const std::string& name, math::Rect& defaultValue);
 		bool getAttribute(const std::string& name, sys::CSSMargin& defaultValue);

@@ -19,48 +19,31 @@ math::Vector2 math::LineSegment2d::getVector() const
 bool math::LineSegment2d::intersects(const LineSegment2d& line, Vector2& point) const
 {
 	Vector2 srcVec = this->getVector();
+	Vector2 srcVec0 = line.getSrc() - this->getSrc();
+	Vector2 srcVec1 = line.getDest() - this->getSrc();
+
+	float d0 = Vector2::cross(srcVec, srcVec0);
+	float d1 = Vector2::cross(srcVec, srcVec1);
+
+	if (d0 * d1 >= 0) return false;
+
 	Vector2 destVec = line.getVector();
+	Vector2 destVec0 = this->getSrc() - line.getSrc();
+	Vector2 destVec1 = this->getDest() - line.getSrc();
 
-	float val0[] = { srcVec.getX(), srcVec.getY(), destVec.getX(), destVec.getY() };
-	math::Determinant2 det(val0);
-	float value = getDetMagnitude(det);
-	if (value == 0)
-	{
-		return false;
-	}
+	float d2 = Vector2::cross(destVec, destVec0);
+	float d3 = Vector2::cross(destVec, destVec1);
 
-	Vector2 diffVec = line.getSrc() - this->getSrc();
+	if (d2 * d3 >= 0) return false;
 
-	float val1[] = 
-	{
-		diffVec.getX(),
-		diffVec.getY(),
-		destVec.getX(),
-		destVec.getY() 
-	};
+	float t = Vector2::cross(destVec0, destVec) / Vector2::cross(destVec, srcVec);
 
-	float val2[] =
-	{
-		srcVec.getX(),
-		srcVec.getY(),
-		diffVec.getX(),
-		diffVec.getY()
-	};
+	float dx = t * (this->getDest().getX() - this->getSrc().getX());
+	float dy = t * (this->getDest().getY() - this->getSrc().getY());
 
-	math::Determinant2 det1(val1);
-	math::Determinant2 det2(val2);
-	
-	float sp = getDetMagnitude(det1) / value;
-	float sq = getDetMagnitude(det2) / value;
+	point = this->getSrc() + Vector2(dx, dy);
 
-	if (sp >= 0 && sp <= 1 && sq >= 0 && sq < 1)
-	{
-		point.setX(getSrc().getX() + sp * srcVec.getX());
-		point.setY(getSrc().getY() + sp * srcVec.getY());
-		return true;
-	}
-
-	return false;
+	return true;
 }
 
 math::LineSegment2d::LineSegment2d(Vector2 src, Vector2 dest)

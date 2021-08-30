@@ -33,13 +33,13 @@ void render::CoordinateSystem::onCoordianteSystemBodyChange()
 	Tool::calCube(getPosition(), getVolume(), getAnchorPoint(), cube);
 
 	this->removeAllPoints();
-	this->appendPoint(cube.back.leftDown, phy::Color4B(255, 255, 255));
-	this->appendPoint(cube.back.rightDown, phy::Color4B(255, 255, 255));
+	this->appendPoint(cube.back.leftDown);
+	this->appendPoint(cube.back.rightDown);
 
-	this->appendPoint(cube.back.leftDown, phy::Color4B(255, 255, 255));
-	this->appendPoint(cube.back.leftUp, phy::Color4B(255, 255, 255));
+	this->appendPoint(cube.back.leftDown);
+	this->appendPoint(cube.back.leftUp);
 
-	this->appendPoint(cube.back.leftDown, phy::Color4B(255, 255, 255));
-	this->appendPoint(cube.front.rightDown, phy::Color4B(255, 255, 255));
+	this->appendPoint(cube.back.leftDown);
+	this->appendPoint(cube.front.rightDown);
 }
 

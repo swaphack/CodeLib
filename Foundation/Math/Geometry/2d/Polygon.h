@@ -31,9 +31,21 @@ namespace math
 		*/
 		int getPointCount() const;
 		/**
+		*	获取坐标
+		*/
+		const math::Vector3& getPoint(int index) const;
+		/**
+		*	获取坐标
+		*/
+		math::Vector3& getPoint(int index);
+		/**
 		*	设置顶点坐标
 		*/
 		void setPoints(const std::vector<math::Vector3>& points);
+		/**
+		*	设置顶点坐标
+		*/
+		void setPoint(int index, const math::Vector3& point);
 		/**
 		*	是否包含点
 		*/

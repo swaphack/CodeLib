@@ -14,6 +14,7 @@ namespace math
 	public:
 		TrianglePoints();
 		TrianglePoints(const Vector3& p0, const Vector3& p1, const Vector3& p2);
+		TrianglePoints(const std::vector<Vector3>& points);
 		TrianglePoints(const Vector3* points);
 		virtual ~TrianglePoints();
 	public:

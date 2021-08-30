@@ -33,12 +33,12 @@ namespace render
 		// 设置颜色
 		void setColor(const phy::Color3F& color);
 		// 获取颜色
-		const phy::Color4B& getColor() const;
+		const phy::Color4F& getColor() const;
 	protected:
 		virtual void onColorChange() {};
 	protected:
 		// 混合
-		phy::Color4B _color;
+		phy::Color4F _color;
 	};
 
 	// 不透明度设置

@@ -51,10 +51,7 @@ std::vector<math::TrianglePoints> alg::Delaunay::createWithBowyerWatson(const st
 		if (it == keys.end())
 		{
 			keys.insert(key);
-			triangles.push_back(math::TrianglePoints(
-				item.second->getPosition(0),
-				item.second->getPosition(1),
-				item.second->getPosition(2)));
+			triangles.push_back(math::TrianglePoints(item.second->getOrderdPositions(false)));
 		}
 	}
 
@@ -100,10 +97,8 @@ std::vector<math::TrianglePoints> alg::Delaunay::createWithBowyerWatson(const ma
 		if (it == keys.end())
 		{
 			keys.insert(key);
-			triangles.push_back(math::TrianglePoints(
-				item.second->getPosition(0),
-				item.second->getPosition(1),
-				item.second->getPosition(2)));
+
+			triangles.push_back(math::TrianglePoints(item.second->getOrderdPositions(false)));
 		}
 	}
 
