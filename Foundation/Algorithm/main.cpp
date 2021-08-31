@@ -26,8 +26,13 @@ void testMesh()
 
 	Delaunay delaunay;
 	Voronoi voronoi;
-	std::vector<math::TrianglePoints> setTriangles = delaunay.createWithBowyerWatson(rect, points);
-	std::vector<math::Polygon> setPolygon = voronoi.createWithRect(rect, &delaunay);
+	auto triangles = delaunay.createWithBowyerWatson(rect, points);
+
+	std::vector<math::Polygon> polygons;
+	std::vector<math::LineSegment2d> lineSegments;
+	if (voronoi.createWithRect(rect, &delaunay, polygons, lineSegments))
+	{
+	}
 }
 
 int main(int argc, char** argv)

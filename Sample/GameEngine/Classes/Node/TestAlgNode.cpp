@@ -136,16 +136,16 @@ void TestAlgNode::testWFCCreateMap()
 	}
 }
 
+const float ALG_WIDTH = 1000;
+const float ALG_HEIGHT = 700;
+
 void TestAlgNode::testDelaunay()
 {
-	float width = 1000;
-	float height = 700;
-	
-	int horizontal = 1;
-	int vertical = 1;
+	int horizontal = 10;
+	int vertical = 10;
 
-	float perWidth = width / horizontal;
-	float perHeight = height / vertical;
+	float perWidth = ALG_WIDTH / horizontal;
+	float perHeight = ALG_HEIGHT / vertical;
 
 	int totalCount = horizontal * vertical;
 	std::vector<math::Vector3> points;
@@ -162,9 +162,9 @@ void TestAlgNode::testDelaunay()
 
 	math::RectPoints rectPoints;
 	rectPoints.setLeftBottom(math::Vector3());
-	rectPoints.setRightBottom(math::Vector3(width, 0));
-	rectPoints.setRightTop(math::Vector3(width, height));
-	rectPoints.setLeftTop(math::Vector3(0, height));
+	rectPoints.setRightBottom(math::Vector3(ALG_WIDTH, 0));
+	rectPoints.setRightTop(math::Vector3(ALG_WIDTH, ALG_HEIGHT));
+	rectPoints.setLeftTop(math::Vector3(0, ALG_HEIGHT));
 
 	math::Rect rect = (math::Rect)rectPoints;
 
@@ -172,17 +172,22 @@ void TestAlgNode::testDelaunay()
 	alg::Voronoi voronoi;
 
 	auto triagles = delaunay.createWithBowyerWatson(rectPoints, points);
-	auto polygons = voronoi.createWithRect(rect, &delaunay);
-
 	//drawTriangles(triagles);
-	drawPolygons(polygons);
+
+	std::vector<math::Polygon> polygons;
+	std::vector<math::LineSegment2d> lineSegments;
+	if (voronoi.createWithRect(rect, &delaunay, polygons, lineSegments))
+	{
+		drawPolygons(polygons);
+	}	
+	drawSegments(lineSegments);
 }
 
 void TestAlgNode::drawTriangles(const std::vector<math::TrianglePoints>& vecTrianglePoints)
 {
 	render::PrimitiveNode* pNode = CREATE_NODE(render::PrimitiveNode);
 	pNode->setDrawMode(DrawMode::TRIANGLES);
-	pNode->setPosition(-500, -350, 0);
+	pNode->setPosition(10, 10);
 	pNode->setPointSize(10);
 
 	for (auto triangle : vecTrianglePoints)
@@ -217,9 +222,9 @@ void TestAlgNode::drawPolygon(const math::Polygon& polygon)
 	if (polygon.getPointCount() < 3) return;
 
 	render::PrimitiveNode* pNode = CREATE_NODE(render::PrimitiveNode);
+	pNode->setPosition(10, 10);
 	pNode->setDrawMode(DrawMode::POINTS);
 	pNode->setDrawMode(DrawMode::POLYGON);
-	pNode->setPosition(-500, -350, 0);
 	pNode->setPointSize(2);
 
 	phy::Color4F color;
@@ -231,6 +236,29 @@ void TestAlgNode::drawPolygon(const math::Polygon& polygon)
 	for (auto point : polygon.getPoints())
 	{
 		pNode->appendPoint(point, color);
+	}
+
+	Utility::loadShaderVF(pNode, "Shader/geometry/draw_primitive.vs", "Shader/geometry/draw_primitive.fs");
+	this->addChild(pNode);
+}
+
+void TestAlgNode::drawSegments(const std::vector<math::LineSegment2d>& vecSegments)
+{
+	render::PrimitiveNode* pNode = CREATE_NODE(render::PrimitiveNode);
+	pNode->setPosition(10, 10);
+	pNode->setDrawMode(DrawMode::LINES);
+	pNode->setPointSize(4);
+
+	phy::Color4F color;
+	color.setRed(1.0f);
+	color.setGreen(1.0f);
+	color.setBlue(1.0f);
+	color.setAlpha(1.0f);
+
+	for (auto segment : vecSegments)
+	{
+		pNode->appendPoint(segment.getSrc(), color);
+		pNode->appendPoint(segment.getDest(), color);
 	}
 
 	Utility::loadShaderVF(pNode, "Shader/geometry/draw_primitive.vs", "Shader/geometry/draw_primitive.fs");

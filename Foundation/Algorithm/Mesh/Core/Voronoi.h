@@ -27,7 +27,9 @@ namespace alg
 		/**
 		*	生成多边形
 		*/
-		std::vector<math::Polygon> createWithRect(const math::Rect& rect, Delaunay* delaunay);
+		bool createWithRect(const math::Rect& rect, Delaunay* delaunay, 
+			std::vector<math::Polygon>& polygons, 
+			std::vector<math::LineSegment2d>& lineSegments);
 		/**
 		*	点集
 		*/

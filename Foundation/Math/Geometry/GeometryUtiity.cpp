@@ -238,7 +238,7 @@ bool math::GeometryUtiity::createConvexPolygon(const std::vector<math::Vector3>&
 	outPoints.insert(outPoints.end(), upList.begin(), upList.end());
 	outPoints.insert(outPoints.end(), lowerList.begin(), lowerList.end());
 
-	return outPoints.size() > 3;
+	return outPoints.size() >= 3;
 }
 
 bool math::GeometryUtiity::isStandardSurface(const std::vector<math::Vector3>& surface)

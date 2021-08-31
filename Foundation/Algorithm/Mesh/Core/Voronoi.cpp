@@ -10,12 +10,13 @@ alg::Voronoi::~Voronoi()
     SAFE_DELETE(_pointSet);
 }
 
-std::vector<math::Polygon> alg::Voronoi::createWithRect(const math::Rect& rect, Delaunay* delaunay)
+bool alg::Voronoi::createWithRect(const math::Rect& rect, Delaunay* delaunay,
+    std::vector<math::Polygon>& polygons,
+    std::vector<math::LineSegment2d>& lineSegments)
 {
-	std::vector<math::Polygon> polygons;
 	if (delaunay == nullptr || delaunay->getPointSet() == nullptr)
 	{
-		return polygons;
+		return false;
 	}
 
     SAFE_DELETE(_pointSet);
@@ -24,7 +25,7 @@ std::vector<math::Polygon> alg::Voronoi::createWithRect(const math::Rect& rect, 
 	std::set<alg::MeshEdge*> voronoiEdges = generateEdgesMeshTriangle(delaunay->getPointSet()->getTriangles());
 	if (voronoiEdges.size() == 0)
 	{
-		return polygons;
+		return false;
 	}
 	std::set<MeshEdge*> rectEdges;
 	rectEdges.insert(_pointSet->createEdge(math::Vector3(rect.getMinX(), rect.getMinY()), math::Vector3(rect.getMaxX(), rect.getMinY())));
@@ -83,14 +84,14 @@ std::vector<math::Polygon> alg::Voronoi::createWithRect(const math::Rect& rect, 
                 allIntersectPoints[item].push_back(intersectPoint);
 
                 auto line = math::Line2d(lineSeg0);
-                // 剔除另一端不满足的点
-                if (line.getPointPositionType(math::Vector2(edge->getPosition(0))) == math::PointAndLinePosition2DType::EXLUDE_RIGHT)
+                // 框内的点
+                if (rect.contains(edge->getPosition(0)))
                 {
-                    otherPoints.push_back(edge->getPosition(1));
+                    otherPoints.push_back(edge->getPosition(0));
                 }
                 else
                 {
-                    otherPoints.push_back(edge->getPosition(0));
+                    otherPoints.push_back(edge->getPosition(1));
                 }
             }
         }
@@ -165,13 +166,14 @@ std::vector<math::Polygon> alg::Voronoi::createWithRect(const math::Rect& rect, 
     std::map<MeshEdge*, MeshPolygonEdge*> polygonEdges = MeshPolygonEdge::createPolygonEdges(allEdges);
     if (polygonEdges.size() == 0)
     {
-        return polygons;
+        return false;
     }
 
     // 转成多边形
     std::set<std::string> keys;
     for(auto item : polygonEdges)
     {
+        lineSegments.push_back(math::LineSegment2d(item.first->getPosition(0), item.first->getPosition(1)));
         auto polygon = MeshPolygonEdge::getConvexPolygon(item.second);
         int count = polygon.getPointCount();
         if (count > 2)
@@ -193,7 +195,7 @@ std::vector<math::Polygon> alg::Voronoi::createWithRect(const math::Rect& rect, 
         }
     }
 
-	return polygons;
+	return true;
 }
 
 alg::PointSet* alg::Voronoi::getPointSet()

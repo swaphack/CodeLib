@@ -21,4 +21,6 @@ private:
 	void drawTriangles(const std::vector<math::TrianglePoints>& vecTrianglePoints);
 	void drawPolygons(const std::vector<math::Polygon>& vecPolygons);
 	void drawPolygon(const math::Polygon& polygon);
+
+	void drawSegments(const std::vector<math::LineSegment2d>& vecSegments);
 };
