@@ -86,6 +86,15 @@ void render::PrimitiveNode::appendPoints(const std::vector<math::Vector3>& point
 	}
 }
 
+void render::PrimitiveNode::appendPoints(int count, const math::Vector3* points, const phy::Color4F& color)
+{
+	if (points == nullptr) return;
+	for (int i = 0; i < count; i++)
+	{
+		this->appendPoint(points[i], color);
+	}
+}
+
 void render::PrimitiveNode::setPointSize(float size)
 {
 	_pointSize = size;

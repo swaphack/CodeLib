@@ -192,6 +192,7 @@
     <ClInclude Include="Geometry\GeometryUtiity.h" />
     <ClInclude Include="Geometry\import.h" />
     <ClInclude Include="Geometry\shape\Circle.h" />
+    <ClInclude Include="Geometry\shape\CubePoints.h" />
     <ClInclude Include="Geometry\shape\import.h" />
     <ClInclude Include="Geometry\shape\PolygonPoints.h" />
     <ClInclude Include="Geometry\shape\RectPoints.h" />
@@ -292,6 +293,7 @@
     <ClCompile Include="Geometry\Collider\SphereBB.cpp" />
     <ClCompile Include="Geometry\GeometryUtiity.cpp" />
     <ClCompile Include="Geometry\shape\Circle.cpp" />
+    <ClCompile Include="Geometry\shape\CubePoints.cpp" />
     <ClCompile Include="Geometry\shape\RectPoints.cpp" />
     <ClCompile Include="Geometry\shape\TrianglePoints.cpp" />
     <ClCompile Include="main.cpp" />

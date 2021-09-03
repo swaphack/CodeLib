@@ -13,6 +13,7 @@
 #include "PostProcessing/import.h"
 
 #include "Particle/import.h"
+#include "Box/import.h"
 
 #include "Canvas.h"
 #include "RenderApplication.h"

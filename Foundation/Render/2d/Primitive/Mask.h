@@ -1,7 +1,6 @@
 #pragma once
 
 #include "PrimitiveNode.h"
-
 namespace render
 {
 	// узуж
@@ -14,6 +13,5 @@ namespace render
 		virtual bool init();
 	protected:
 		void onMaskBodyChange();
-	protected:
 	};
 }

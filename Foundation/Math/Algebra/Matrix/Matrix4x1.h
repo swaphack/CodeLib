@@ -17,6 +17,6 @@ namespace math
 		Matrix4x1(const float* value);
 		virtual ~Matrix4x1();
 	public:
-		operator Vector3();
+		operator Vector3() const;
 	};
 }

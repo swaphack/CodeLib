@@ -29,11 +29,11 @@ namespace ui
 		/**
 		*	设置滑动方向
 		*/
-		void setScrollDirection(ScrollDirection direction);
+		void setDirection(ScrollDirection direction);
 		/**
 		*	获取滑动方向
 		*/
-		ScrollDirection getScrollDirection();
+		ScrollDirection getDirection();
 		/**
 		*	设置项的大小
 		*/

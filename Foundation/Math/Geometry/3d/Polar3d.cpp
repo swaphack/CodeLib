@@ -101,7 +101,7 @@ bool Polar3d::operator!=(const Polar3d& polar)
 	return polar.getRadianX() != getRadianX() || polar.getRadianZ() != getRadianZ() || polar.getRadius() != getRadius();
 }
 
-Polar3d::operator Vector3()
+Polar3d::operator Vector3() const
 {
 	float x = getRadius() * sin(getRadianX()) * cos(getRadianZ());
 	float y = getRadius() * sin(getRadianX()) * sin(getRadianZ());

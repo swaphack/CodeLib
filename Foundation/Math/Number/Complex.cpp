@@ -130,7 +130,7 @@ void Complex::reset()
 	setImz(0);
 }
 
-math::Complex::operator Matrix2x2()
+math::Complex::operator Matrix2x2() const
 {
 	Matrix2x2 mat(getRez(), -getImz(), getImz(), getRez());
 

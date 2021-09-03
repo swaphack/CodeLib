@@ -111,7 +111,7 @@ Texture2D* TextureCache::createTexture2D(const sys::ImageDefine& imageDefine)
 
 	Texture2D* texture2D = CREATE_OBJECT(Texture2D);
 	texture2D->load(image);
-	addTexture2D(imageDefine.filepath.c_str(), texture2D);
+	addTexture2D(imageDefine.filepath, texture2D);
 
 	SAFE_DELETE(image);
 

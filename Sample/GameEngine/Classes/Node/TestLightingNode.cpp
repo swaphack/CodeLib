@@ -172,12 +172,6 @@ void TestLightingNode::testCubeModel()
 	//Utility::loadShaderVF(pModel, "Shader/texture/texture.vs", "Shader/texture/texture.fs");
 	Utility::loadShaderVF(pModel, "Shader/material/material_single_light.vs", "Shader/material/material_single_light.fs");
 	this->addChild(pModel);
-
-	//Utility::runRotateAction(pModel);
-
-	pModel->addTouchFunc(render::TouchType::BEGAN, [&](const math::Vector2& touchPoint) {
-		pModel->setBoxVisible(!pModel->isBoxVisible());
-	});
 }
 
 void TestLightingNode::testShadow()

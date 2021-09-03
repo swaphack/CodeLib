@@ -46,7 +46,7 @@ namespace ui
 		/**
 		*	获取渲染节点
 		*/ 
-		render::DrawScale9Texture2D* getRenderNode() const;
+		virtual render::DrawNode2D* getRenderNode();
 	private:
 		// 图片结构
 		sys::ImageDefine _imageDefine;

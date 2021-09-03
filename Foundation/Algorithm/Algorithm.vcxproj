@@ -96,7 +96,6 @@
     <ClInclude Include="Map\Samples\MeshMap.h" />
     <ClInclude Include="Map\Samples\PointMap.h" />
     <ClInclude Include="Map\Samples\RayMap.h" />
-    <ClInclude Include="Map\Voronoi.h" />
     <ClInclude Include="Mesh\Base\import.h" />
     <ClInclude Include="Mesh\Base\Index.h" />
     <ClInclude Include="Mesh\Base\macros.h" />

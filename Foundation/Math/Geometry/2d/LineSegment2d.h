@@ -10,8 +10,8 @@ namespace math
 	{
 	public:
 		LineSegment2d();
-		LineSegment2d(Vector2 src, Vector2 dest);
-		LineSegment2d(Vector3 src, Vector3 dest);
+		LineSegment2d(const Vector2& src, const Vector2& dest);
+		LineSegment2d(const Vector3& src, const Vector3& dest);
 	public:
 		CREATE_INDEX_VALUE(Src, 0, Vector2);
 		CREATE_INDEX_VALUE(Dest, 1, Vector2);

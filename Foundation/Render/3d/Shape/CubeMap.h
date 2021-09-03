@@ -28,10 +28,8 @@ namespace render
 		void setBackTexture(const std::string& filepath);
 	protected:
 		void onImageChanged();
-		virtual void onCubeMapBodyChanged();
+		virtual void updateDrawNode3DMesh();
 	protected:
-		// ×ø±ê
-		CubeVertex _cubePosition;
 		// ÎÆÀí
 		TextureCubeMap* _texCubeMap = nullptr;
 

@@ -1,5 +1,5 @@
 #pragma once
 
-#include "CtrlAnimation.h"
-#include "CtrlSequenceFrame.h"
-#include "CtrlMedia.h"
+#include "Animation.h"
+#include "SequenceFrame.h"
+#include "Media.h"

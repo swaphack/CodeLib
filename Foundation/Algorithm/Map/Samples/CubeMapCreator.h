@@ -9,7 +9,7 @@ namespace alg
 {
 	namespace map
 	{
-		// 二维方位
+		// 三维方位
 		enum class CubeModuleDirection
 		{
 			LEFT,
@@ -29,11 +29,11 @@ namespace alg
 			/**
 			*	设置方位插槽
 			*/
-			void setDirectionSlot(CubeModuleDirection eDirection, uint32_t slotIndex);
+			void setSlot(CubeModuleDirection eDirection, uint32_t slotIndex);
 			/**
 			*	获取方位插槽
 			*/
-			uint32_t getDirectionSlot(CubeModuleDirection eDirection);
+			uint32_t getSlot(CubeModuleDirection eDirection);
 			/**
 			*	设置左方位插槽
 			*/

@@ -155,6 +155,10 @@ namespace render
 		*/
 		const TextureSetting& getTextureSetting() const;
 		/**
+		*	Œ∆¿Ì≈‰÷√
+		*/
+		TextureSetting& getTextureSetting();
+		/**
 		*	”¶”√≈‰÷√
 		*/
 		void applyTextureSettingWithSampler();

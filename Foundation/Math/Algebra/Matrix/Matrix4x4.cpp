@@ -371,12 +371,12 @@ math::Matrix4x4& math::Matrix4x4::operator=(const Matrix4x1& mat)
 	return *this;
 }
 
-math::Matrix4x4::operator SquareMatrix4()
+math::Matrix4x4::operator SquareMatrix4() const
 {
 	return SquareMatrix4(*this);
 }
 
-Matrix4x4 math::Matrix4x4::getInverse()
+Matrix4x4 math::Matrix4x4::getInverse() const
 {
 	float inv[16], invOut[16], det;
     int i;

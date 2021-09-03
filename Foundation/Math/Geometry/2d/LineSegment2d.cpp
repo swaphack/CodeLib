@@ -46,13 +46,13 @@ bool math::LineSegment2d::intersects(const LineSegment2d& line, Vector2& point) 
 	return true;
 }
 
-math::LineSegment2d::LineSegment2d(Vector2 src, Vector2 dest)
+math::LineSegment2d::LineSegment2d(const Vector2& src, const Vector2& dest)
 {
 	this->setSrc(src);
 	this->setDest(dest);
 }
 
-math::LineSegment2d::LineSegment2d(Vector3 src, Vector3 dest)
+math::LineSegment2d::LineSegment2d(const Vector3& src, const Vector3& dest)
 {
 	this->setSrc(src);
 	this->setDest(dest);

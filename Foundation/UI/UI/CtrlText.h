@@ -107,7 +107,7 @@ namespace ui
 		/**
 		*	获取渲染节点
 		*/
-		const render::DrawTexture2D* getRenderNode() const;
+		virtual render::DrawNode2D* getRenderNode();
 	protected:
 		/**
 		*	文字图片信息

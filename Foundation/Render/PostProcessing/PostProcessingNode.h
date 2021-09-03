@@ -1,7 +1,7 @@
 #pragma once
 
 #include "FrameBufferNode.h"
-#include "Common/struct/shape_common.h"
+
 namespace render
 {
 	class Texture2D;

@@ -1,5 +1,6 @@
 #include "Mask.h"
 #include "Graphic/import.h"
+#include "Common/Tool/VertexTool.h"
 using namespace render;
 
 Mask::Mask()
@@ -33,12 +34,15 @@ bool render::Mask::init()
 
 void render::Mask::onMaskBodyChange()
 {
-	this->removeAllPoints();
-	this->appendPoint(_localRectPoints.leftDown, getColor());
-	this->appendPoint(_localRectPoints.rightDown, getColor());
-	this->appendPoint(_localRectPoints.rightUp, getColor());
+	render::RectVertex rectVertex;
+	render::VertexTool::setTexture2DVertices(&rectVertex, math::Vector3(), _volume, _anchor);
 
-	this->appendPoint(_localRectPoints.leftDown, getColor());
-	this->appendPoint(_localRectPoints.rightUp, getColor());
-	this->appendPoint(_localRectPoints.leftUp, getColor());
+	this->removeAllPoints();
+	this->appendPoint(rectVertex.getLeftBottomPosition(), getColor());
+	this->appendPoint(rectVertex.getRightBottomPosition(), getColor());
+	this->appendPoint(rectVertex.getRightTopPosition(), getColor());
+
+	this->appendPoint(rectVertex.getLeftBottomPosition(), getColor());
+	this->appendPoint(rectVertex.getRightTopPosition(), getColor());
+	this->appendPoint(rectVertex.getLeftTopPosition(), getColor());
 }

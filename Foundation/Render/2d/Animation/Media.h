@@ -1,6 +1,6 @@
 #pragma once
 
-#include "CtrlAnimation.h"
+#include "Animation.h"
 
 namespace sys
 {
@@ -10,14 +10,15 @@ namespace sys
 namespace render
 {
 	class Texture2D;
+	class DrawTexture2D;
 	class CtrlAudioSourceClip;
 
 	// 媒体（包含图像和声音）
-	class CtrlMedia : public CtrlAnimation
+	class Media : public Animation
 	{
 	public:
-		CtrlMedia();
-		virtual ~CtrlMedia();
+		Media();
+		virtual ~Media();
 	public:
 		virtual bool init();
 	public:
@@ -42,5 +43,6 @@ namespace render
 		sys::MediaDetail* _media;
 		// 音效
 		CtrlAudioSourceClip* _ctrlAudio;
+		DrawTexture2D* _drawNode = nullptr;
 	};
 }

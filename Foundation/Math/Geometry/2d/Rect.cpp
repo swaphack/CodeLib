@@ -13,6 +13,12 @@ Rect::Rect(const Vector2& orgin, const Size& size)
 	_size = size;
 }
 
+Rect::Rect(const Vector2& orgin, const Vector2& size)
+{
+	_origin = orgin;
+	_size = size;
+}
+
 Rect::Rect(float x, float y, float w, float h)
 {
 	_origin.setX(x);
@@ -91,6 +97,14 @@ bool math::Rect::contains(const Vector3& point) const
 	return contains(point.getX(), point.getY());
 }
 
+bool math::Rect::contains(const Rect& rect) const
+{
+	return getMaxX() >= rect.getWidth()
+		&& getMinX() <= rect.getMinX()
+		&& getMaxY() >= rect.getHeight()
+		&& getMinY() <= rect.getMinY();
+}
+
 bool math::Rect::includes(float x, float y) const
 {
 	return (x > getMinX() && x < getMaxX())
@@ -107,20 +121,17 @@ bool math::Rect::includes(const Vector3& point) const
 	return includes(point.getX(), point.getY());
 }
 
-bool Rect::intersect(const Rect& rect) const
+bool math::Rect::includes(const Rect& rect) const
 {
-	return intersect(rect.getX(), rect.getY(), rect.getWidth(), rect.getHeight());
-}
-
-bool Rect::intersect(float x, float y, float w, float h) const
-{
-	return !(getMaxX() < x || x + w < getMinX() ||
-		getMaxY() < y || y + h < getMinY());
+	return getMaxX() > rect.getWidth() 
+		&& getMinX() < rect.getMinX()
+		&& getMaxY() > rect.getHeight() 
+		&& getMinY() < rect.getMinY();
 }
 
 Rect Rect::intersectRect(const Rect& rect) const
 {
-	if (!intersect(rect))
+	if (!isOverlap(rect))
 	{
 		return Rect();
 	}
@@ -146,6 +157,19 @@ Rect Rect::unionRect(const Rect& rect) const
 	float y1 = this->getMaxY() > pRect->getMaxY() ? this->getMaxY() : pRect->getMaxY();
 
 	return Rect(x0, y0, x1 - x0, y1 - y0);
+}
+
+bool math::Rect::isOverlap(const Rect& rect) const
+{
+	return (getMinX() >= rect.getMinX() && getMinX() >= rect.getMaxX())
+		|| (getMinY() >= rect.getMinY() && getMinY() >= rect.getMaxY())
+		|| (getMinX() >= rect.getMinX() && getMaxX() >= rect.getMaxX())
+		|| (getMaxX() >= rect.getMinY() && getMaxY() >= rect.getMaxY());
+}
+
+math::Vector3 math::Rect::getAnchorPointByPosition(float x, float y)
+{
+	return math::Vector3();
 }
 
 Rect& Rect::operator=(const Rect& rect)

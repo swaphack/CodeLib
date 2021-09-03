@@ -56,9 +56,9 @@ namespace sys
 		*/
 		static void startRecord();
 		/**
-		*	记录
+		*	记录时差
 		*/
-		static void record();
+		static uint64_t getDifferenceOfRecordTime();
 		/**
 		*	结束记录
 		*/
@@ -66,7 +66,9 @@ namespace sys
 	private:
 		// 总毫秒数
 		timeb _timeColock;
-
+		// 记录时间
 		static TimeClock _recordTime;
+		// 时差
+		static uint64_t _recordDiffTime;
 	};
 }

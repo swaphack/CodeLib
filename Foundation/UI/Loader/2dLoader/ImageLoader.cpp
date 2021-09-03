@@ -28,7 +28,7 @@ void ImageLoader::parseAttributes()
 	uint8_t opacity = 255;
 	render::BlendParam blend;
 
-	LOAD_WIDGET_ATTRIBUTE(PROPERTY_COLOR, setColor, color);
+	//LOAD_WIDGET_ATTRIBUTE(PROPERTY_COLOR, setColor, color);
 	//LOAD_WIDGET_ATTRIBUTE(PROPERTY_BLEND, setBlend, blend);
 	LOAD_WIDGET_STRING_ATTRIBUTE(PROPERTY_PATH, loadImage, filepath);
 	LOAD_WIDGET_ATTRIBUTE(PROPERTY_FLIPX, setFlipX, bFlipX);
@@ -41,7 +41,7 @@ void ImageLoader::saveAttributes()
 {
 	WidgetLoader::saveAttributes();
 
-	SAVE_WIDGET_ATTRIBUTE(PROPERTY_COLOR, getColor);
+	//SAVE_WIDGET_ATTRIBUTE(PROPERTY_COLOR, getColor);
 	//SAVE_WIDGET_ATTRIBUTE(PROPERTY_BLEND, getBlend);
 	SAVE_WIDGET_ATTRIBUTE(PROPERTY_PATH, getImagePath);
 	SAVE_WIDGET_ATTRIBUTE(PROPERTY_FLIPX, isFlipX);

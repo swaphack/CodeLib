@@ -71,9 +71,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="2d\Animation\CtrlAnimation.cpp" />
-    <ClCompile Include="2d\Animation\CtrlMedia.cpp" />
-    <ClCompile Include="2d\Animation\CtrlSequenceFrame.cpp" />
+    <ClCompile Include="2d\Animation\Animation.cpp" />
+    <ClCompile Include="2d\Animation\Media.cpp" />
+    <ClCompile Include="2d\Animation\SequenceFrame.cpp" />
     <ClCompile Include="2d\Base\DrawScale9Texture2D.cpp" />
     <ClCompile Include="2d\Base\DrawTexture2D.cpp" />
     <ClCompile Include="2d\Primitive\CoordinateSystem.cpp" />
@@ -111,6 +111,8 @@
     <ClCompile Include="Audio\CtrlAudioSourceClip.cpp" />
     <ClCompile Include="Audio\CtrlAudioSpeaker.cpp" />
     <ClCompile Include="Audio\macros.cpp" />
+    <ClCompile Include="Box\BoxDraw.cpp" />
+    <ClCompile Include="Box\BoxDrawProtocol.cpp" />
     <ClCompile Include="Canvas.cpp" />
     <ClCompile Include="Common\Action\Action.cpp" />
     <ClCompile Include="Common\Action\ActionManager.cpp" />
@@ -137,7 +139,6 @@
     <ClCompile Include="Common\DrawNode\DrawNode2D.cpp" />
     <ClCompile Include="Common\DrawNode\DrawNode3D.cpp" />
     <ClCompile Include="Common\DrawNode\DrawProtocol.cpp" />
-    <ClCompile Include="Common\DrawNode\DrawBoxProtocol.cpp" />
     <ClCompile Include="Common\DrawNode\DrawTextureCache.cpp" />
     <ClCompile Include="Common\DrawNode\FragmentOperator.cpp" />
     <ClCompile Include="Common\DrawNode\MultiDrawNode.cpp" />
@@ -195,7 +196,6 @@
     <ClCompile Include="Common\Shader\VertexShaderProgram.cpp" />
     <ClCompile Include="Common\Shader\VertexShader.cpp" />
     <ClCompile Include="Common\struct\enum_common.cpp" />
-    <ClCompile Include="Common\struct\shape_common.cpp" />
     <ClCompile Include="Common\struct\vertex_common.cpp" />
     <ClCompile Include="Common\TBO\TextureBufferObject.cpp" />
     <ClCompile Include="Common\Texture\Sampler.cpp" />
@@ -271,10 +271,10 @@
     <ClCompile Include="RenderApplication.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="2d\Animation\CtrlAnimation.h" />
-    <ClInclude Include="2d\Animation\CtrlFluid.h" />
-    <ClInclude Include="2d\Animation\CtrlMedia.h" />
-    <ClInclude Include="2d\Animation\CtrlSequenceFrame.h" />
+    <ClInclude Include="2d\Animation\Animation.h" />
+    <ClInclude Include="2d\Animation\Fluid.h" />
+    <ClInclude Include="2d\Animation\Media.h" />
+    <ClInclude Include="2d\Animation\SequenceFrame.h" />
     <ClInclude Include="2d\Animation\import.h" />
     <ClInclude Include="2d\Animation\macros.h" />
     <ClInclude Include="2d\Base\DrawScale9Texture2D.h" />
@@ -330,6 +330,9 @@
     <ClInclude Include="Audio\CtrlAudioSpeaker.h" />
     <ClInclude Include="Audio\import.h" />
     <ClInclude Include="Audio\macros.h" />
+    <ClInclude Include="Box\BoxDraw.h" />
+    <ClInclude Include="Box\BoxDrawProtocol.h" />
+    <ClInclude Include="Box\import.h" />
     <ClInclude Include="Canvas.h" />
     <ClInclude Include="Common\Action\Action.h" />
     <ClInclude Include="Common\Action\ActionManager.h" />
@@ -358,7 +361,6 @@
     <ClInclude Include="Common\DrawNode\DrawNode2D.h" />
     <ClInclude Include="Common\DrawNode\DrawNode3D.h" />
     <ClInclude Include="Common\DrawNode\DrawProtocol.h" />
-    <ClInclude Include="Common\DrawNode\DrawBoxProtocol.h" />
     <ClInclude Include="Common\DrawNode\DrawTextureCache.h" />
     <ClInclude Include="Common\DrawNode\FragmentOperator.h" />
     <ClInclude Include="Common\DrawNode\macros.h" />
@@ -435,7 +437,6 @@
     <ClInclude Include="Common\Shader\VertexShader.h" />
     <ClInclude Include="Common\struct\enum_common.h" />
     <ClInclude Include="Common\struct\import.h" />
-    <ClInclude Include="Common\struct\shape_common.h" />
     <ClInclude Include="Common\struct\vertex_common.h" />
     <ClInclude Include="Common\TBO\import.h" />
     <ClInclude Include="Common\TBO\TextureBufferObject.h" />

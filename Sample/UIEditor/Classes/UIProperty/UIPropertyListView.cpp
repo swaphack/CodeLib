@@ -41,7 +41,7 @@ void ue::UIPropertyListView::readWidgetProperty()
 
 	if (m_pScrollDirection)
 	{
-		m_pScrollDirection->setString(getCString("%d", (int)pListView->getScrollDirection()));
+		m_pScrollDirection->setString(getCString("%d", (int)pListView->getDirection()));
 	}
 
 	if (m_pWidthValue)
@@ -79,7 +79,7 @@ void ue::UIPropertyListView::writeWidgetProperty()
 	if (m_pScrollDirection)
 	{
 		int value = atoi(m_pScrollDirection->getString().c_str());
-		pListView->setScrollDirection((ui::ScrollDirection)value);
+		pListView->setDirection((ui::ScrollDirection)value);
 	}
 
 	sys::CSSSize size;

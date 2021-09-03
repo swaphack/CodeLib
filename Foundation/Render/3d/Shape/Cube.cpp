@@ -20,17 +20,11 @@ bool render::Cube::init()
 		return false;
 	}
 
-	addNotifyListener(NodeNotifyType::BODY, [this]() {
-		this->onCubeBodyChanged();
-	});
-
 	return true;
 }
 
-void render::Cube::onCubeBodyChanged()
+void render::Cube::updateDrawNode3DMesh()
 {
-	VertexTool::setTexture3DVertices(&_cubePosition, math::Vector3(), _volume, _anchor);
-
 	float vertices[24 * 3] = { 0 };
 	float uvs[24 * 2] = { 0 };
 	float colors[24 * 4] = { 1 };
@@ -38,7 +32,7 @@ void render::Cube::onCubeBodyChanged()
 
 	for (int i = 0; i < (int)CubeFace::MAX; i++)
 	{
-		const auto* pRectVertex = _cubePosition.getFaceVertex((CubeFace)i);
+		const auto* pRectVertex = _cubeVertex.getFaceVertex((CubeFace)i);
 		if (!pRectVertex)
 		{
 			continue;

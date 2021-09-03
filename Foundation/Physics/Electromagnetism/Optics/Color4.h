@@ -20,6 +20,7 @@ namespace phy
 		CREATE_INDEX_VALUE(Alpha, 3, uint8_t);
 	public:
 		Color4B& operator=(const Color4B& value);
+		operator Color3B() const;
 	public:
 		void adjust();
 	};

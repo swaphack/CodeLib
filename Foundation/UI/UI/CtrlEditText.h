@@ -17,6 +17,8 @@ namespace ui
 		virtual ~CtrlEditText();
 	public:
 		virtual bool init();
+		// 获取渲染节点
+		virtual render::DrawNode2D* getRenderNode();
 	public:
 		/**
 		*	设置文本

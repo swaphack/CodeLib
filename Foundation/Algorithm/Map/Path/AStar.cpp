@@ -108,6 +108,10 @@ bool alg::map::AStar::findWay(const MapProtocol* map, uint32_t srcIndex, uint32_
 		}
 
 		auto parent = getAStartNode(nParentIndex);
+		if (parent == nullptr)
+		{
+			return false;
+		}
 		// 填充数据到待查询的节点
 		for (auto item : neighbors)
 		{

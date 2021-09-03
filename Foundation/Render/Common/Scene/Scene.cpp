@@ -2,6 +2,7 @@
 #include "Common/View/import.h"
 #include "Graphic/import.h"
 #include "Common/Tool/Tool.h"
+#include "Box/BoxDraw.h"
 
 using namespace render;
 
@@ -21,16 +22,17 @@ bool Scene::init()
 	{
 		return false;
 	}
-
+	BoxDraw* box = CREATE_NODE(BoxDraw);
+	this->addChild(box, INT_MAX);
 	return true;
 }
 
 void Scene::visit()
 {
-	this->updateNode();
-
 	// Ä£ÐÍ¾ØÕó
 	GLMatrix::applyModelView();
+
+	this->updateNode();
 
 	this->drawNode();
 }

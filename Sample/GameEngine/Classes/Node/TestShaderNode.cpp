@@ -158,18 +158,6 @@ void TestShaderNode::testSphereModelShader()
 
 	Utility::loadShaderVF(pModel, "Shader/material/material_texture.vs", "Shader/material/material_texture.fs");
 	Utility::runRotateAction(pModel);
-
-	pModel->addTouchFunc(render::TouchType::BEGAN, [&](const math::Vector2& touchPoint) {
-		pModel->setBoxVisible(true);
-	});
-
-	pModel->addTouchFunc(render::TouchType::ENDED, [&](const math::Vector2& touchPoint) {
-		pModel->setBoxVisible(false);
-	});
-
-	pModel->addTouchFunc(render::TouchType::CANCELED, [&](const math::Vector2& touchPoint) {
-		pModel->setBoxVisible(false);
-	});
 }
 
 void TestShaderNode::test3dsModelShader()
@@ -259,7 +247,7 @@ void TestShaderNode::testClipShader()
 	std::string textureClipVertexPath = "Shader/clip.vs";
 
 	VertexFragmentShaderProgram* pProgram = CREATE_OBJECT(VertexFragmentShaderProgram);
-	pProgram->loadVertexAndFragmentShader(textureClipVertexPath, Utility::texture3dFragmentPath);
+	pProgram->loadVertexAndFragmentShader(textureClipVertexPath, "Shader/texture/texture.fs");
 	pProgram->link();
 
 
@@ -297,10 +285,10 @@ void TestShaderNode::testTessellation()
 	*/
 	float innerValue[2] = { 8, 0};
 	float outerValue[4] = { 10,10,10,0 };
-	pImage->setEnableTessilation(true);
-	pImage->setTessVerticeCount(3);
-	pImage->setTessInnerLevel(innerValue);
-	pImage->setTessOuterLevel(outerValue);
+	pImage->getRenderNode()->setEnableTessilation(true);
+	pImage->getRenderNode()->setTessVerticeCount(3);
+	pImage->getRenderNode()->setTessInnerLevel(innerValue);
+	pImage->getRenderNode()->setTessOuterLevel(outerValue);
 
 	pImage->getRenderNode()->getMesh()->setDrawMode(DrawMode::LINES);
 

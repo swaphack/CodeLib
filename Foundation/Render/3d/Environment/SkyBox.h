@@ -18,6 +18,6 @@ namespace render
 		virtual void beforeDrawNode();
 		virtual void afterDrawNode();
 	protected:
-		virtual void onCubeMapBodyChanged();
+		virtual void updateDrawNode3DMesh();
 	};
 }

@@ -1,18 +1,21 @@
 #pragma once
 
-#include "CtrlAnimation.h"
+#include "Animation.h"
 
 #include <string>
 
 namespace render
 {
 	class Texture2D;
+	class DrawNode;
+	class DrawTexture2D;
+
 	// 序列帧
-	class CtrlSequenceFrame : public CtrlAnimation
+	class SequenceFrame : public Animation
 	{
 	public:
-		CtrlSequenceFrame();
-		virtual ~CtrlSequenceFrame();
+		SequenceFrame();
+		virtual ~SequenceFrame();
 	public:
 		virtual bool init();
 
@@ -30,6 +33,18 @@ namespace render
 		*	获取序列帧图片张数
 		*/
 		int getFrameImageCount();
+		// 设置水平翻转
+		void setFlipX(bool status);
+		// 是否水平翻转
+		bool isFlipX();
+		// 设置垂直翻转
+		void setFlipY(bool status);
+		// 是否垂直翻转
+		bool isFlipY();
+		/**
+		*	渲染节点
+		*/
+		DrawNode* getRenderNode();
 	protected:
 		/**
 		*	下一帧纹理
@@ -44,5 +59,7 @@ namespace render
 		*	图片张数
 		*/
 		int _frameImageCount = 0;
+	private:
+		DrawTexture2D* _drawNode = nullptr;
 	};
 }

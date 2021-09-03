@@ -57,13 +57,13 @@
     <ClCompile Include="Common\Action\ExtAction.cpp">
       <Filter>Common\Action</Filter>
     </ClCompile>
-    <ClCompile Include="2d\Animation\CtrlAnimation.cpp">
+    <ClCompile Include="2d\Animation\Animation.cpp">
       <Filter>2d\Animation</Filter>
     </ClCompile>
-    <ClCompile Include="2d\Animation\CtrlSequenceFrame.cpp">
+    <ClCompile Include="2d\Animation\SequenceFrame.cpp">
       <Filter>2d\Animation</Filter>
     </ClCompile>
-    <ClCompile Include="2d\Animation\CtrlMedia.cpp">
+    <ClCompile Include="2d\Animation\Media.cpp">
       <Filter>2d\Animation</Filter>
     </ClCompile>
     <ClCompile Include="3d\Common\Model.cpp">
@@ -77,9 +77,6 @@
     </ClCompile>
     <ClCompile Include="Common\Texture\TextureCache.cpp">
       <Filter>Common\Texture</Filter>
-    </ClCompile>
-    <ClCompile Include="Common\struct\shape_common.cpp">
-      <Filter>Common\struct</Filter>
     </ClCompile>
     <ClCompile Include="Common\Shader\Shader.cpp">
       <Filter>Common\Shader</Filter>
@@ -570,9 +567,6 @@
     <ClCompile Include="Common\View\ViewPort.cpp">
       <Filter>Common\View</Filter>
     </ClCompile>
-    <ClCompile Include="Common\DrawNode\DrawBoxProtocol.cpp">
-      <Filter>Common\DrawNode</Filter>
-    </ClCompile>
     <ClCompile Include="2d\Base\DrawTexture2D.cpp">
       <Filter>2d\Base</Filter>
     </ClCompile>
@@ -590,6 +584,12 @@
     </ClCompile>
     <ClCompile Include="3d\Map\LSystem.cpp">
       <Filter>3d\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="Box\BoxDraw.cpp">
+      <Filter>Box</Filter>
+    </ClCompile>
+    <ClCompile Include="Box\BoxDrawProtocol.cpp">
+      <Filter>Box</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -710,13 +710,13 @@
     <ClInclude Include="Common\Action\ExtAction.h">
       <Filter>Common\Action</Filter>
     </ClInclude>
-    <ClInclude Include="2d\Animation\CtrlAnimation.h">
+    <ClInclude Include="2d\Animation\Animation.h">
       <Filter>2d\Animation</Filter>
     </ClInclude>
-    <ClInclude Include="2d\Animation\CtrlFluid.h">
+    <ClInclude Include="2d\Animation\Fluid.h">
       <Filter>2d\Animation</Filter>
     </ClInclude>
-    <ClInclude Include="2d\Animation\CtrlSequenceFrame.h">
+    <ClInclude Include="2d\Animation\SequenceFrame.h">
       <Filter>2d\Animation</Filter>
     </ClInclude>
     <ClInclude Include="2d\Animation\import.h">
@@ -725,7 +725,7 @@
     <ClInclude Include="2d\Animation\macros.h">
       <Filter>2d\Animation</Filter>
     </ClInclude>
-    <ClInclude Include="2d\Animation\CtrlMedia.h">
+    <ClInclude Include="2d\Animation\Media.h">
       <Filter>2d\Animation</Filter>
     </ClInclude>
     <ClInclude Include="3d\Common\Model.h">
@@ -751,9 +751,6 @@
       <Filter>Common\struct</Filter>
     </ClInclude>
     <ClInclude Include="Common\struct\import.h">
-      <Filter>Common\struct</Filter>
-    </ClInclude>
-    <ClInclude Include="Common\struct\shape_common.h">
       <Filter>Common\struct</Filter>
     </ClInclude>
     <ClInclude Include="Common\Shader\import.h">
@@ -1329,9 +1326,6 @@
     <ClInclude Include="Common\View\ViewPort.h">
       <Filter>Common\View</Filter>
     </ClInclude>
-    <ClInclude Include="Common\DrawNode\DrawBoxProtocol.h">
-      <Filter>Common\DrawNode</Filter>
-    </ClInclude>
     <ClInclude Include="2d\Base\DrawTexture2D.h">
       <Filter>2d\Base</Filter>
     </ClInclude>
@@ -1361,6 +1355,15 @@
     </ClInclude>
     <ClInclude Include="3d\Map\LSystem.h">
       <Filter>3d\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="Box\BoxDraw.h">
+      <Filter>Box</Filter>
+    </ClInclude>
+    <ClInclude Include="Box\BoxDrawProtocol.h">
+      <Filter>Box</Filter>
+    </ClInclude>
+    <ClInclude Include="Box\import.h">
+      <Filter>Box</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1489,6 +1492,9 @@
     </Filter>
     <Filter Include="2d\Base">
       <UniqueIdentifier>{cd728e4f-5380-44e1-9b70-a1af70ffbc9b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Box">
+      <UniqueIdentifier>{73158dde-99e6-4ace-a2cb-d61fa18e96c0}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

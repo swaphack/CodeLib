@@ -50,11 +50,11 @@ namespace ui
 		/**
 		*	窗口界面大小
 		*/
-		const math::Size& getViewSize();
+		const math::Size& getViewSize() const;
 		/**
 		*	获取布局方向
 		*/
-		LayoutDirection getLayoutDirection();
+		LayoutDirection getLayoutDirection() const;
 	public:
 		/**
 		*	是否是根视图

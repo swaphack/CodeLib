@@ -31,16 +31,11 @@ void Canvas::draw()
 	auto mainCamera = Camera::getMainCamera();
 	if (mainCamera)
 	{
-		mainCamera->visit();
+		auto curScene = getCurScene();
+		mainCamera->drawScene(curScene);
 	}
 
-	auto top = getCurScene();
-	if (top)
-	{
-		top->visit();
-	}
-
-	sys::TimeClock::record();
+	sys::TimeClock::endRecord();
 }
 
 void Canvas::update(float interval)

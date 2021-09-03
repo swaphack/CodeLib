@@ -45,6 +45,8 @@ namespace render
 	public:
 		// 务必调用，包含属性修改时通知
 		virtual bool init();
+		// 遍历和绘制
+		virtual void visit();
 	public:
 		// 设置父节点
 		void setParent(Node* node);
@@ -112,9 +114,9 @@ namespace render
 	public:
 		// 绘制节点 矩阵变换->测试和预处理->绘制当前界面
 		virtual void drawNode();
-
+		// 绘制前
 		virtual void beforeDrawNode();
-
+		// 绘制后
 		virtual void afterDrawNode();
 	protected:
 		// 绘制,重写

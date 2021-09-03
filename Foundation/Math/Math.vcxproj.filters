@@ -542,6 +542,9 @@
     <ClInclude Include="Geometry\shape\PolygonPoints.h">
       <Filter>Geometry\shape</Filter>
     </ClInclude>
+    <ClInclude Include="Geometry\shape\CubePoints.h">
+      <Filter>Geometry\shape</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
@@ -791,6 +794,9 @@
     </ClCompile>
     <ClCompile Include="Geometry\2d\Polygon.cpp">
       <Filter>Geometry\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="Geometry\shape\CubePoints.cpp">
+      <Filter>Geometry\shape</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

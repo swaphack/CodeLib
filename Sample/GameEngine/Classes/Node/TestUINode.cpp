@@ -19,17 +19,25 @@ TestUINode::~TestUINode()
 
 void TestUINode::initNodes()
 {
-	//this->testScissor();
+	//this->testMask();
 
+	//this->testScissor();
+	
 	//this->testScrollView();
 
+	this->testListView();
+	
 	//this->testStencil();
 
 	//this->testSequenceFrame();
 
 	//this->testImage();
-
-	this->testButton();
+	
+	//this->testButton();
+	//
+	//this->testWidget();
+	
+	//this->testText();
 }
 
 void TestUINode::testEditBox()
@@ -40,7 +48,8 @@ void TestUINode::testEditBox()
 	pCtrlText->setFontPath("Resource/Font/font_3.ttf");
 	pCtrlText->setFontSize(58);
 	pCtrlText->setAnchorPoint(0.0f, 0.0f, 0.0f);
-	pCtrlText->setColor(phy::Color4B(125, 80, 255, 255));
+	pCtrlText->setTextColor(phy::Color3B(125, 80, 255));
+	Utility::loadDefaultShader(pCtrlText);
 
 	pEditLabel->setPosition(512, 384, 0);
 	pEditLabel->setAnchorPoint(0.0f, 0.0f, 0.0f);
@@ -62,18 +71,20 @@ void TestUINode::testEditBox()
 			PRINT("Input Text %s\n", pNode->getString().c_str());
 		}
 	});
-
+	Utility::loadDefaultShader(pEditLabel->getTextControl());
 	this->addChild(pEditLabel);
 }
 
 void TestUINode::testSequenceFrame()
 {
-	CtrlSequenceFrame* pSequenceFrame = CREATE_NODE(CtrlSequenceFrame);
-	Utility::loadDefaultShader(pSequenceFrame);
+	SequenceFrame* pSequenceFrame = CREATE_NODE(SequenceFrame);
 	pSequenceFrame->setVolume(1024, 768);
 	pSequenceFrame->setFrameImagePath("Resource/Role/1/20%d.png", 8);
 	pSequenceFrame->setPosition(512, 384, 0);
 	pSequenceFrame->setFrameRate(1.0f / 10);
+
+	Utility::loadDefaultShader(pSequenceFrame->getRenderNode());
+
 	pSequenceFrame->start();
 
 	this->addChild(pSequenceFrame);
@@ -87,7 +98,7 @@ void TestUINode::onKeyBoardRole(render::Node* node, sys::BoardKey key, sys::Butt
 		return;
 	}
 
-	CtrlSequenceFrame* pRole = node->as<CtrlSequenceFrame>();
+	SequenceFrame* pRole = node->as<SequenceFrame>();
 	if (pRole == nullptr)
 	{
 		return;
@@ -110,19 +121,19 @@ void TestUINode::onKeyBoardRole(render::Node* node, sys::BoardKey key, sys::Butt
 
 	int index = 0;
 
-	if (key == BoardKey::KUP)
+	if (key == BoardKey::KW)
 	{
 		index = 0;
 	}
-	else if (key == BoardKey::KDOWN)
+	else if (key == BoardKey::KS)
 	{
 		index = 1;
 	}
-	else if (key == BoardKey::KLEFT)
+	else if (key == BoardKey::KA)
 	{
 		index = 2;
 	}
-	else if (key == BoardKey::KRIGHT)
+	else if (key == BoardKey::KD)
 	{
 		index = 3;
 	}
@@ -140,18 +151,18 @@ void TestUINode::testScissor()
 {
 	CtrlLayout* pLayout = CREATE_NODE(CtrlLayout);
  	pLayout->getBackgroundMask()->setVisible(false);
-	//pLayout->getBackgroundImage()->setVisible(false);
+	pLayout->getBackgroundImage()->setVisible(true);
  	pLayout->setBackgroundImagePath("Resource/Image/1.jpg");
  	Utility::loadDefaultShader(pLayout->getBackgroundImage());
 	pLayout->setClippingEnabled(true);
-	pLayout->setVolume(400, 400, 0);
-	pLayout->setPosition(400, 400);
+	pLayout->setVolume(200, 400, 0);
+	pLayout->setPosition(200, 200);
 	this->addChild(pLayout);
 
 
 	CtrlImage* pImage = CREATE_NODE(CtrlImage);
 	pImage->setImagePath("Resource/Image/sqi.png");
-	pImage->setVolume(200, 200, 0);
+	pImage->setVolume(200, 400, 0);
 	pImage->setScale(1, 1, 1);
 	Utility::loadDefaultShader(pImage);
 	pLayout->addWidget(pImage, 3);
@@ -161,10 +172,17 @@ void TestUINode::testScrollView()
 {
 	CtrlScrollView* pScrollView = CREATE_NODE(CtrlScrollView);
 	pScrollView->getBackgroundImage()->setVisible(false);
+	pScrollView->getBackgroundImage()->setImagePath("Resource/Image/sqi.png");
+
 	pScrollView->getBackgroundMask()->setVisible(false);
+	pScrollView->getBackgroundMask()->setColor(phy::Color4B(255,255,255,255));
+	pScrollView->getBackgroundMask()->setVolume(200, 600);
 	pScrollView->setClippingEnabled(true);
-	pScrollView->setPosition(512, 384);
-	pScrollView->setVolume(200, 600);
+	pScrollView->setPosition(600, 200);
+	pScrollView->setVolume(200, 400);
+
+	Utility::loadPrimitiveShader(pScrollView->getBackgroundImage());
+	Utility::loadPrimitiveShader(pScrollView->getBackgroundMask());
 	this->addChild(pScrollView);
 
 	for (int i = 0; i < 10; i++)
@@ -172,10 +190,39 @@ void TestUINode::testScrollView()
 		CtrlImage* pImage = CREATE_NODE(CtrlImage);
 		pImage->setImagePath("Resource/Image/sqi.png");
 		pImage->setVolume(200, 200, 0);
-		pScrollView->addWidget(pImage);
+		Utility::loadDefaultShader(pImage);
+		pScrollView->addItem(pImage);
 	}
+}
 
-	//pScrollView->setScrollDirection(ScrollDirection::VERTICAL_TOP_TO_BOTTOM);
+void TestUINode::testListView()
+{
+	CtrlListView* pListView = CREATE_NODE(CtrlListView);
+	pListView->getBackgroundImage()->setVisible(false);
+	pListView->getBackgroundImage()->setImagePath("Resource/Image/sqi.png");
+
+	pListView->getBackgroundMask()->setVisible(true);
+	pListView->getBackgroundMask()->setColor(phy::Color4B(120, 120, 120, 180));
+	pListView->getBackgroundMask()->setVolume(200, 600);
+	pListView->setHorizontalScroll(true);
+	pListView->setMovingMultiple(20.0f);
+	pListView->setClippingEnabled(true);
+	pListView->setTouchEnabled(true);
+	pListView->setPosition(200, 200);
+	pListView->setVolume(200, 400);
+
+	Utility::loadPrimitiveShader(pListView->getBackgroundImage());
+	Utility::loadPrimitiveShader(pListView->getBackgroundMask());
+	this->addChild(pListView);
+
+	for (int i = 0; i < 10; i++)
+	{
+		CtrlImage* pImage = CREATE_NODE(CtrlImage);
+		pImage->setImagePath("Resource/Image/sqi.png");
+		pImage->setVolume(200, 200, 0);
+		Utility::loadDefaultShader(pImage);
+		pListView->addItem(pImage);
+	}
 }
 
 void TestUINode::testMask()
@@ -185,6 +232,7 @@ void TestUINode::testMask()
 	pMask->setPosition(0, 0, 0.0f);
 	pMask->setVolume(1024, 768, 0);
 	pMask->setColor(phy::Color4B(120, 120, 120, 125));
+	Utility::loadPrimitiveShader(pMask);
 	this->addChild(pMask);
 }
 
@@ -201,8 +249,9 @@ void TestUINode::testStencil()
 	pMask->setPosition(0, 0, 0.0f);
 	pMask->setVolume(400, 400, 0);
 	pMask->setColor(phy::Color4B(255, 255, 255, 255));
+	Utility::loadDefaultShader(pMask);
 	pStencil->addChild(pMask);
-	//pStencil->setStencilNode(pMask);
+	pStencil->setStencilNode(pMask);
 
 	CtrlImage* pImage = CREATE_NODE(CtrlImage);
 	pImage->setImagePath("Resource/Image/sqi.png");
@@ -226,23 +275,6 @@ void TestUINode::testImage()
 	pImage->setVolume(500, 500);
 	pImage->setRotation(0, 0, 45);
 	pImage->setPosition(math::Vector2(500, 500));
-	pImage->setTouchSwallowed(false);
-	pImage->addTouchFunc(TouchType::BEGAN, [&](const math::Vector2& touchPoint)
-	{
-		pImage->setBoxVisible(true);
-	});
-	pImage->addTouchFunc(TouchType::MOVED, [&](const math::Vector2& touchPoint)
-	{
-		pImage->setBoxVisible(true);
-	});
-	pImage->addTouchFunc(TouchType::ENDED, [&](const math::Vector2& touchPoint)
-	{
-		pImage->setBoxVisible(false);
-	});
-	pImage->addTouchFunc(TouchType::CANCELED, [&](const math::Vector2& touchPoint)
-	{
-		pImage->setBoxVisible(false);
-	});
 	Utility::loadDefaultShader(pImage);
 	this->addChild(pImage);
 	/*
@@ -285,8 +317,39 @@ void TestUINode::testButton()
 	pBtn->setString("dsfsdfsa");
 	pBtn->setTextColor(phy::Color3B(255,255,255));
 	pBtn->setFontPath("Resource/Font/font_3.ttf");
-
 	pBtn->setNormalImage("Resource/Image/sqi.png");
-
+	Utility::loadDefaultShader(pBtn->getTextControl());
+	Utility::loadDefaultShader(pBtn->getImageControl());
 	this->addChild(pBtn);
+}
+
+void TestUINode::testWidget()
+{
+	auto pWidget = CREATE_NODE(ui::CtrlWidget);
+	pWidget->setBoxVisible(true);
+	pWidget->setAnchorPoint(0.5f, 0.5f);
+	pWidget->setPosition(512, 384);
+	pWidget->setVolume(200, 100);
+	pWidget->setRotationZ(45);
+
+	this->addChild(pWidget);
+}
+
+void TestUINode::testText()
+{
+	auto pText = CREATE_NODE(ui::CtrlText);
+	pText->setBoxVisible(false);
+	pText->setTextHorizontalAlignment(HorizontalAlignment::CENTER);
+	pText->setTextVerticalAlignment(VerticalAlignment::MIDDLE);
+	pText->setAnchorPoint(0.0f, 1.0f);
+	pText->setPosition(0, 768);
+	pText->setVolume(400, 100);
+	pText->setString("dsfsdfsa");
+	pText->setTextColor(phy::Color3B(255, 255, 255));
+	pText->setFontPath("Resource/Font/font_3.ttf");
+	pText->setFontSize(58);
+	pText->setDimensions(400, 100);
+	Utility::loadDefaultShader(pText);
+
+	this->addChild(pText);
 }

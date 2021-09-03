@@ -62,7 +62,7 @@ void ui::CtrlFile::saveTo(const std::string& filepath)
 	UIProxy::getInstance()->saveFile(m_pRootWidget, filepath, m_sViewSize);
 }
 
-LayoutDirection CtrlFile::getLayoutDirection()
+LayoutDirection CtrlFile::getLayoutDirection() const
 {
 	return m_eLayoutDirection;
 }
@@ -158,7 +158,7 @@ void CtrlFile::autoResize()
 	}
 }
 
-const math::Size& ui::CtrlFile::getViewSize()
+const math::Size& ui::CtrlFile::getViewSize() const
 {
 	return m_sViewSize;
 }

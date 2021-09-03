@@ -31,64 +31,80 @@ RectVertex::RectVertex()
 	}
 }
 
-void RectVertex::setLeftDownPoint(const math::Vector3& point)
+void RectVertex::setLeftBottomPosition(const math::Vector3& point)
 {
 	int index = 0;
 	memcpy(vertices + index, point.getValue(), point.getSize());
 }
 
-void RectVertex::setRightDownPoint(const math::Vector3& point)
+math::Vector3 render::RectVertex::getLeftBottomPosition() const
+{ 
+	return math::Vector3(vertices); 
+}
+
+void RectVertex::setRightBottomPosition(const math::Vector3& point)
 {
 	int index = 3;
 	memcpy(vertices + index, point.getValue(), point.getSize());
 }
 
-void RectVertex::setRightUpPoint(const math::Vector3& point)
+math::Vector3 render::RectVertex::getRightBottomPosition() const
+{ 
+	return math::Vector3(vertices + 3); 
+}
+
+void RectVertex::setRightTopPosition(const math::Vector3& point)
 {
 	int index = 6;
 	memcpy(vertices + index, point.getValue(), point.getSize());
 }
 
-void RectVertex::setLeftUpPoint(const math::Vector3& point)
+math::Vector3 render::RectVertex::getRightTopPosition() const
+{ 
+	return math::Vector3(vertices + 6);
+}
+
+void RectVertex::setLeftTopPosition(const math::Vector3& point)
 {
 	int index = 9;
 	memcpy(vertices + index, point.getValue(), point.getSize());
 }
 
+math::Vector3 render::RectVertex::getLeftTopPosition() const
+{ 
+	return math::Vector3(vertices + 9); 
+}
+
 void RectVertex::setLeftDownColor(const phy::Color4F& color)
 {
 	int index = 0;
-	colors[index + 0] = color[0];
-	colors[index + 1] = color[1];
-	colors[index + 2] = color[2];
-	colors[index + 3] = color[3];
+	memcpy(colors + index, color.getValue(), color.getSize());
 }
 
 void RectVertex::setRightDownColor(const phy::Color4F& color)
 {
 	int index = 4;
-	colors[index + 0] = color[0];
-	colors[index + 1] = color[1];
-	colors[index + 2] = color[2];
-	colors[index + 3] = color[3];
+	memcpy(colors + index, color.getValue(), color.getSize());
 }
 
 void RectVertex::setRightUpColor(const phy::Color4F& color)
 {
 	int index = 8;
-	colors[index + 0] = color[0];
-	colors[index + 1] = color[1];
-	colors[index + 2] = color[2];
-	colors[index + 3] = color[3];
+	memcpy(colors + index, color.getValue(), color.getSize());
 }
 
 void RectVertex::setLeftUpColor(const phy::Color4F& color)
 {
 	int index = 12;
-	colors[index + 0] = color[0];
-	colors[index + 1] = color[1];
-	colors[index + 2] = color[2];
-	colors[index + 3] = color[3];
+	memcpy(colors + index, color.getValue(), color.getSize());
+}
+
+void render::RectVertex::setColor(const phy::Color4F& color)
+{
+	memcpy(colors + 0, color.getValue(), color.getSize());
+	memcpy(colors + 4, color.getValue(), color.getSize());
+	memcpy(colors + 8, color.getValue(), color.getSize());
+	memcpy(colors + 12, color.getValue(), color.getSize());
 }
 
 void RectVertex::setLeftDownUV(const math::Vector2& point)
@@ -115,6 +131,24 @@ void RectVertex::setLeftUpUV(const math::Vector2& point)
 	memcpy(uvs + index, point.getValue(), point.getSize());
 }
 
+void render::RectVertex::toTriangles(std::vector<math::TrianglePoints>& trianglePoints) const
+{
+	trianglePoints.push_back(math::TrianglePoints(getLeftBottomPosition(), getRightBottomPosition(), getRightTopPosition()));
+	trianglePoints.push_back(math::TrianglePoints(getLeftBottomPosition(), getRightTopPosition(), getLeftTopPosition()));
+}
+
+render::RectVertex::operator math::Polygon() const
+{
+	std::vector<math::Vector3> points;
+	points.push_back(getLeftBottomPosition());
+	points.push_back(getRightBottomPosition());
+	points.push_back(getRightTopPosition());
+	points.push_back(getLeftTopPosition());
+
+	math::Polygon polygon(points);
+	return polygon;
+}
+
 //////////////////////////////////////////////////////////////////////////
 
 CubeVertex::CubeVertex()
@@ -122,63 +156,60 @@ CubeVertex::CubeVertex()
 	
 }
 
-void CubeVertex::setFrontLeftDownPosition(const math::Vector3& point)
+void CubeVertex::setFrontLeftBottomPosition(const math::Vector3& point)
 {
-	front.setLeftDownPoint(point);
-	left.setRightDownPoint(point);
-	bottom.setLeftUpPoint(point);
+	front.setLeftBottomPosition(point);
+	left.setRightBottomPosition(point);
+	bottom.setLeftTopPosition(point);
 }
 
-void CubeVertex::setFrontRightDownPosition(const math::Vector3& point)
+void CubeVertex::setFrontRightButtomPosition(const math::Vector3& point)
 {
-	front.setRightDownPoint(point);
-	right.setLeftDownPoint(point);
-	bottom.setRightUpPoint(point);
+	front.setRightBottomPosition(point);
+	right.setLeftBottomPosition(point);
+	bottom.setRightTopPosition(point);
 }
 
-void CubeVertex::setFrontRightUpPosition(const math::Vector3& point)
+void CubeVertex::setFrontRightTopPosition(const math::Vector3& point)
 {
-	front.setRightUpPoint(point);
-	right.setLeftUpPoint(point);
-	top.setRightDownPoint(point);
+	front.setRightTopPosition(point);
+	right.setLeftTopPosition(point);
+	top.setRightBottomPosition(point);
 }
 
-void CubeVertex::setFrontLeftUpPosition(const math::Vector3& point)
+void CubeVertex::setFrontLeftTopPosition(const math::Vector3& point)
 {
-	front.setLeftUpPoint(point);
-	left.setRightUpPoint(point);
-	top.setLeftDownPoint(point);
+	front.setLeftTopPosition(point);
+	left.setRightTopPosition(point);
+	top.setLeftBottomPosition(point);
 }
 
-void CubeVertex::setBackLeftDownPosition(const math::Vector3& point)
+void CubeVertex::setBackLeftBottomPosition(const math::Vector3& point)
 {
-	back.setLeftDownPoint(point);
-	right.setRightDownPoint(point);
-
-	bottom.setRightDownPoint(point);
+	back.setLeftBottomPosition(point);
+	right.setRightBottomPosition(point);
+	bottom.setRightBottomPosition(point);
 }
 
-void CubeVertex::setBackRightDownPosition(const math::Vector3& point)
+void CubeVertex::setBackRightBottomPosition(const math::Vector3& point)
 {
-	back.setRightDownPoint(point);
-	left.setLeftDownPoint(point);
-
-	bottom.setLeftDownPoint(point);
+	back.setRightBottomPosition(point);
+	left.setLeftBottomPosition(point);
+	bottom.setLeftBottomPosition(point);
 }
 
-void CubeVertex::setBackRightUpPosition(const math::Vector3& point)
+void CubeVertex::setBackRightTopPosition(const math::Vector3& point)
 {
-	back.setRightUpPoint(point);
-	left.setLeftUpPoint(point);
-	top.setLeftUpPoint(point);
+	back.setRightTopPosition(point);
+	left.setLeftTopPosition(point);
+	top.setLeftTopPosition(point);
 }
 
-void CubeVertex::setBackLeftUpPosition(const math::Vector3& point)
+void CubeVertex::setBackLeftTopPosition(const math::Vector3& point)
 {
-	back.setLeftUpPoint(point);
-	right.setRightUpPoint(point);
-
-	top.setRightUpPoint(point);
+	back.setLeftTopPosition(point);
+	right.setRightTopPosition(point);
+	top.setRightTopPosition(point);
 }
 
 const RectVertex* render::CubeVertex::getFaceVertex(CubeFace face) const

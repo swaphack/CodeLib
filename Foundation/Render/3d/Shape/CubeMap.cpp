@@ -27,10 +27,6 @@ bool render::CubeMap::init()
 		this->onImageChanged();
 	});
 
-	addNotifyListener(NodeNotifyType::BODY, [this]() {
-		this->onCubeMapBodyChanged();
-	});
-
 	return true;
 }
 
@@ -82,19 +78,16 @@ void render::CubeMap::onImageChanged()
 	this->setTexture(_texCubeMap);
 }
 
-void render::CubeMap::onCubeMapBodyChanged()
+void render::CubeMap::updateDrawNode3DMesh()
 {
-	VertexTool::setTexture3DVertices(&_cubePosition, math::Vector3(), _volume, _anchor);
-
 	float vertices[36 * 3] = { 0 };
 	float normals[36 * 3] = { 0 };
 	uint32_t indices[36] = { 0 };
-	
 
 	for (int i = 0; i < (int)CubeFace::MAX; i++)
 	{
 		CubeFace face = (CubeFace)i;
-		const auto* pRectVertex = _cubePosition.getCubMapFaceVertex(face);
+		const auto* pRectVertex = _cubeVertex.getCubMapFaceVertex(face);
 		if (!pRectVertex)
 		{
 			continue;
@@ -131,7 +124,6 @@ void render::CubeMap::onCubeMapBodyChanged()
 		pMesh->getMeshDetail()->setNormals(36, normals, 3);
 		pMesh->getMeshDetail()->setIndices(36, indices, 1);
 	}
-
 
 	this->updateMeshData();
 }

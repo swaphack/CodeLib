@@ -34,7 +34,11 @@ namespace render
 		/**
 		*	获取纹理
 		*/
-		Texture* getTexture(const std::string& name) const;
+		const Texture* getTexture(const std::string& name) const;
+		/**
+		*	获取纹理
+		*/
+		Texture* getTexture(const std::string& name);
 	private:
 		// 图片纹理
 		std::map<std::string, Texture*> _textures;

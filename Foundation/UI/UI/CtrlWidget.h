@@ -11,7 +11,8 @@ namespace ui
 	*	UI控件基类
 	*/
 	class CtrlWidget : 
-		public render::DrawNode2D
+		public render::Node,
+		public render::Box2DDrawProtocol
 	{
 	public:
 		// 点击处理函数
@@ -21,6 +22,15 @@ namespace ui
 		virtual ~CtrlWidget();
 	public:
 		virtual bool init();
+		/**
+		*	渲染节点
+		*/
+		virtual render::DrawNode2D* getRenderNode();
+	public:
+		/**
+		*	坐标是否在当前对象内
+		*/
+		virtual bool containPoint(const math::Vector2& touchPoint);
 	public:
 		/**
 		*	添加控件

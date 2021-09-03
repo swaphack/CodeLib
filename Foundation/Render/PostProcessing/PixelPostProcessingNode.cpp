@@ -1,6 +1,7 @@
 #include "PixelPostProcessingNode.h"
 #include "Common/Texture/Texture2D.h"
 #include "Graphic/import.h"
+#include "Common/Tool/VertexTool.h"
 #include "Common/Tool/Tool.h"
 #include "Common/Material/import.h"
 #include "Common/Mesh/import.h"
@@ -27,7 +28,6 @@ bool render::PixelPostProcessingNode::init()
 	}
 
 	addNotifyListener(NodeNotifyType::BODY, [this]() {
-		Tool::calRect(math::Vector3(), _volume, _anchor, _localRectPoints);
 		this->updateTextureSize();
 	});
 
@@ -67,12 +67,10 @@ void render::PixelPostProcessingNode::afterDrawNode()
 
 void render::PixelPostProcessingNode::updateTextureSize()
 {
-	float vertices[] = {
-		_localRectPoints.leftDown.getX(),_localRectPoints.leftDown.getY(),
-		_localRectPoints.rightDown.getX(),_localRectPoints.rightDown.getY(),
-		_localRectPoints.rightUp.getX(),_localRectPoints.rightUp.getY(),
-		_localRectPoints.leftUp.getX(),_localRectPoints.leftUp.getY(),
-	};
+	render::RectVertex rectVertex;
+	render::VertexTool::setTexture2DVertices(&rectVertex, math::Vector3(), _volume, _anchor);
+
+	float* vertices = rectVertex.vertices;
 
 	float uvs[] = {
 		0,0,

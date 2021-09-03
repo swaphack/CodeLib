@@ -17,8 +17,8 @@ namespace math
 		Matrix1x4(const Vector3& vector, float w);
 		virtual ~Matrix1x4();
 	public:
-		operator Vector3();
+		operator Vector3() const;
 
-		Matrix1x4 operator*(const Matrix4x4& mat);
+		Matrix1x4 operator*(const Matrix4x4& mat) const;
 	};
 }

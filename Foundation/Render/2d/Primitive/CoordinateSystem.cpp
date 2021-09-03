@@ -1,5 +1,5 @@
 #include "CoordinateSystem.h"
-#include "Common/Tool/Tool.h"
+#include "Common/Tool/VertexTool.h"
 #include "physicslib.h"
 
 render::CoordinateSystem::CoordinateSystem()
@@ -29,17 +29,17 @@ bool render::CoordinateSystem::init()
 
 void render::CoordinateSystem::onCoordianteSystemBodyChange()
 {
-	CubePoints cube;
-	Tool::calCube(getPosition(), getVolume(), getAnchorPoint(), cube);
+	render::CubeVertex cube;
+	VertexTool::setTexture3DVertices(&cube, getPosition(), getVolume(), getAnchorPoint());
 
 	this->removeAllPoints();
-	this->appendPoint(cube.back.leftDown);
-	this->appendPoint(cube.back.rightDown);
+	this->appendPoint(cube.front.getLeftBottomPosition());
+	this->appendPoint(cube.front.getRightBottomPosition());
 
-	this->appendPoint(cube.back.leftDown);
-	this->appendPoint(cube.back.leftUp);
+	this->appendPoint(cube.front.getLeftBottomPosition());
+	this->appendPoint(cube.front.getLeftTopPosition());
 
-	this->appendPoint(cube.back.leftDown);
-	this->appendPoint(cube.front.rightDown);
+	this->appendPoint(cube.front.getLeftBottomPosition());
+	this->appendPoint(cube.back.getRightBottomPosition());
 }
 

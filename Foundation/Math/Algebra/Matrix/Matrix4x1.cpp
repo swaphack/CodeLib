@@ -40,7 +40,7 @@ Matrix4x1::Matrix4x1(float x, float y, float z, float w)
 	(*this)[3] = w;
 }
 
-Matrix4x1::operator Vector3()
+Matrix4x1::operator Vector3() const
 {
 	float w = (*this)[3];
 

@@ -10,15 +10,6 @@ namespace math
 	*/
 	struct Cuboids
 	{
-	protected:
-		/**
-		*	起点坐标
-		*/
-		Vector3 _origin;
-		/**
-		*	大小
-		*/
-		Volume _size;
 	public:
 		Cuboids();
 		Cuboids(const Vector3& origin, const Volume& size);
@@ -59,5 +50,14 @@ namespace math
 		bool intersect(const Cuboids& cuboids);
 	public:
 		Cuboids& operator=(const Cuboids& cuboids);
+	private:
+		/**
+		*	起点坐标
+		*/
+		Vector3 _origin;
+		/**
+		*	大小
+		*/
+		Volume _size;
 	};
 }

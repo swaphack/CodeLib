@@ -59,7 +59,7 @@ namespace math
 		/**
 		*	¾ØÕó
 		*/
-		operator Matrix2x2();
+		operator Matrix2x2() const;
 	public:
 		/**
 		*	×ªÎª¸´Êı

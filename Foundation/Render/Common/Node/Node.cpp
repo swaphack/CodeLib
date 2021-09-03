@@ -25,7 +25,6 @@ Node::Node()
 , _zOrder(0)
 {
 	this->setVisible(true);
-	
 
 	_notify = G_NOTIFYCENTER->alloct(this);
 }
@@ -53,6 +52,12 @@ bool Node::init()
 	_scheduler->setHandler([this](float dt) { this->update(dt); });
 
 	return true;
+}
+
+void render::Node::visit()
+{
+	this->updateNode();
+	this->drawNode();
 }
 
 void Node::setParent( Node* node )
@@ -85,7 +90,7 @@ void render::Node::setChildrenScene(Scene* scene)
 
 void Node::addChild( Node* node )
 {
-	this->addChild(node, 0);
+	Node::addChild(node, 0);
 }
 
 void render::Node::addChild(Node* node, int zOrder)

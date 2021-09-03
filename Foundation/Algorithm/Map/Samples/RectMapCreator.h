@@ -27,11 +27,11 @@ namespace alg
 			/**
 			*	设置方位插槽
 			*/
-			void setDirectionSlot(RectModuleDirection eDirection, uint32_t slotIndex);
+			void setSlot(RectModuleDirection eDirection, uint32_t slotIndex);
 			/**
 			*	获取方位插槽
 			*/
-			uint32_t getDirectionSlot(RectModuleDirection eDirection);
+			uint32_t getSlot(RectModuleDirection eDirection);
 			/**
 			*	设置左方位插槽
 			*/
@@ -65,7 +65,7 @@ namespace alg
 			/**
 			*	获取指定方向的插槽信息
 			*/
-			bool getDirectionSlots(const MapCell* cell, RectModuleDirection dir, CombineSlots& slots) const
+			bool getSlots(const MapCell* cell, RectModuleDirection dir, CombineSlots& slots) const
 			{
 				if (cell == nullptr)
 				{
@@ -141,7 +141,7 @@ namespace alg
 					
 					if (pLeftCell != nullptr && pLeftCell->getModuldeID() > 0)
 					{// 左边
-						getDirectionSlots(pLeftCell, RectModuleDirection::LEFT, slots);
+						getSlots(pLeftCell, RectModuleDirection::LEFT, slots);
 						
 					}
 				}
@@ -150,7 +150,7 @@ namespace alg
 					auto pRightCell = map->getCell(nIndex + 1);
 					if (pRightCell != nullptr && pRightCell->getModuldeID() > 0)
 					{// 右边
-						getDirectionSlots(pRightCell, RectModuleDirection::RIGHT, slots);
+						getSlots(pRightCell, RectModuleDirection::RIGHT, slots);
 					}
 				}
 				if (i > 0)
@@ -158,7 +158,7 @@ namespace alg
 					auto pDownCell = map->getCell(nIndex - Width);
 					if (pDownCell != nullptr && pDownCell->getModuldeID() > 0)
 					{// 右边
-						getDirectionSlots(pDownCell, RectModuleDirection::DOWN, slots);
+						getSlots(pDownCell, RectModuleDirection::DOWN, slots);
 					}
 				}
 
@@ -167,7 +167,7 @@ namespace alg
 					auto pUpCell = map->getCell(nIndex + Width);
 					if (pUpCell != nullptr && pUpCell->getModuldeID() > 0)
 					{// 右边
-						getDirectionSlots(pUpCell, RectModuleDirection::UP, slots);
+						getSlots(pUpCell, RectModuleDirection::UP, slots);
 					}
 				}
 				return true;
@@ -205,8 +205,8 @@ namespace alg
 					auto pLeftModule = mapModule[minIndex];
 					auto pRightModule = mapModule[maxIndex];
 
-					if (base::getMapAssets()->hasRelation(pLeftModule->getDirectionSlot(RectModuleDirection::RIGHT),
-						pRightModule->getDirectionSlot(RectModuleDirection::LEFT)))
+					if (base::getMapAssets()->hasRelation(pLeftModule->getSlot(RectModuleDirection::RIGHT),
+						pRightModule->getSlot(RectModuleDirection::LEFT)))
 					{
 						return true;
 					}
@@ -221,8 +221,8 @@ namespace alg
 					auto pBottomModule = mapModule[minIndex];
 					auto pTopModule = mapModule[maxIndex];
 
-					if (base::getMapAssets()->hasRelation(pBottomModule->getDirectionSlot(RectModuleDirection::UP),
-						pTopModule->getDirectionSlot(RectModuleDirection::DOWN)))
+					if (base::getMapAssets()->hasRelation(pBottomModule->getSlot(RectModuleDirection::UP),
+						pTopModule->getSlot(RectModuleDirection::DOWN)))
 					{
 						return true;
 					}

@@ -80,13 +80,29 @@ float sys::CSSNumber::getValue() const
 float sys::CSSNumber::getRealValue() const
 {
 	if (isFixedValue()) return _value;
-	else return _value * PERCENT_ONE;
+	else if(isPercentValue()) return _value * PERCENT_ONE;
+	return _value;
 }
 
 float sys::CSSNumber::getRealValue(float value) const
 {
 	if (isFixedValue()) return _value;
-	else return value * _value * PERCENT_ONE;
+	else if (isPercentValue()) return value * _value * PERCENT_ONE;
+	return value;
+}
+
+float sys::CSSNumber::getRealValueWithDefault(float defaultValue) const
+{
+	if (isFixedValue()) return _value;
+	else if (isPercentValue()) return _value * PERCENT_ONE;
+	return defaultValue;
+}
+
+float sys::CSSNumber::getRealValueWithDefault(float value, float defaultValue) const
+{
+	if (isFixedValue()) return _value;
+	else if (isPercentValue()) return value * _value * PERCENT_ONE;
+	return defaultValue;
 }
 
 void sys::CSSNumber::setValue(float value)
@@ -146,6 +162,11 @@ sys::CSSNumber sys::CSSNumber::load(const std::string& text)
 	}
 
 	return value;
+}
+
+bool sys::CSSNumber::isRelativeType() const
+{
+	return isFixedValue() || isPercentValue();
 }
 
 bool sys::CSSNumber::isFixedValue() const

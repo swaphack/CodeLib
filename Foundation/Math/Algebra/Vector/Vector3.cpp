@@ -181,6 +181,11 @@ bool Vector3::operator!=(const Vector3& vec) const
 	return getX() != vec.getX() || getY() != vec.getY() || getZ() != vec.getZ();
 }
 
+Vector3::operator Vector2() const
+{
+	return Vector2(getX(), getY());
+}
+
 void Vector3::set(float x, float y, float z)
 {
 	setX(x);
@@ -240,7 +245,7 @@ float Vector3::project(const Vector3& vector0, const Vector3& vector1)
 	return Vector3::dot(vector1, vector0) / l0;
 }
 
-Vector3 Vector3::tranlate(const Vector3& vector)
+Vector3 Vector3::tranlate(const Vector3& vector) const
 {
 	Matrix4x4 mat;
 	mat.setTranslate(vector);
@@ -252,7 +257,7 @@ Vector3 Vector3::tranlate(const Vector3& vector)
 	return Vector3(ret[0] / w, ret[1] / w, ret[2] / w);
 }
 
-Vector3 Vector3::scale(const Vector3& vector)
+Vector3 Vector3::scale(const Vector3& vector) const
 {
 	Matrix4x4 mat;
 	mat.setScale(vector);
@@ -263,7 +268,7 @@ Vector3 Vector3::scale(const Vector3& vector)
 	return Vector3(ret[0] / w, ret[1] / w, ret[2] / w);
 }
 
-Vector3 Vector3::rotationByAxis(const Vector3& vector, float radian)
+Vector3 Vector3::rotationByAxis(const Vector3& vector, float radian) const
 {
 	Matrix4x4 mat;
 	mat.setRotationByAxis(vector, radian);
@@ -274,7 +279,7 @@ Vector3 Vector3::rotationByAxis(const Vector3& vector, float radian)
 	return Vector3(ret[0] / w, ret[1] / w, ret[2] / w);
 }
 
-Vector3 Vector3::rotationByLine(const Vector3& src, const Vector3& dest, float radian)
+Vector3 Vector3::rotationByLine(const Vector3& src, const Vector3& dest, float radian) const
 {
 	Matrix4x4 mat;
 	mat.setRotationByLine(src, dest, radian);

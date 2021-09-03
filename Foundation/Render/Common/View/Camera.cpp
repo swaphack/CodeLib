@@ -129,9 +129,10 @@ DimensionsType Camera::getDimensions() const
 {
 	return _dimensions;
 }
-
-void render::Camera::drawNode()
+void render::Camera::updateCameraView()
 {
+	GLMatrix::applyProjection();
+
 	GLDebug::showError();
 	this->startUpdateTranform();
 	GLDebug::showError();
@@ -146,12 +147,19 @@ void Camera::setDimensions(DimensionsType d)
 	_dimensions = d;
 }
 
+void render::Camera::drawScene(Node* scene)
+{
+	this->visit();
+	if (scene == nullptr) return;
+	scene->visit();
+}
+
 void Camera::visit()
 {
 	this->updateNode();
-
-	GLMatrix::applyProjection();
 	
+	this->updateCameraView();
+
 	this->drawNode();
 }
 

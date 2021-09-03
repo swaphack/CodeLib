@@ -50,7 +50,18 @@ void render::DrawTextureCache::removeAllTextures()
 	_textures.clear();
 }
 
-render::Texture* render::DrawTextureCache::getTexture(const std::string& name) const
+const render::Texture* render::DrawTextureCache::getTexture(const std::string& name) const
+{
+	auto it = _textures.find(name);
+	if (it == _textures.end())
+	{
+		return nullptr;
+	}
+
+	return it->second;
+}
+
+render::Texture* render::DrawTextureCache::getTexture(const std::string& name)
 {
 	auto it = _textures.find(name);
 	if (it == _textures.end())

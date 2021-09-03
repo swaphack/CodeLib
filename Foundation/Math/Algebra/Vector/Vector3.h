@@ -30,19 +30,19 @@ namespace math
 		/**
 		*	平移
 		*/
-		Vector3 tranlate(const Vector3& vector);
+		Vector3 tranlate(const Vector3& vector) const;
 		/**
 		*	缩放
 		*/
-		Vector3 scale(const Vector3& vector);
+		Vector3 scale(const Vector3& vector) const;
 		/**
 		*	绕轴旋转
 		*/
-		Vector3 rotationByAxis(const Vector3& vector, float radian);
+		Vector3 rotationByAxis(const Vector3& vector, float radian) const;
 		/**
 		*	绕轴线段旋转度数
 		*/
-		Vector3 rotationByLine(const Vector3& src, const Vector3& dest, float radian);
+		Vector3 rotationByLine(const Vector3& src, const Vector3& dest, float radian) const;
 	public:
 		/**
 		*	单位化
@@ -114,6 +114,10 @@ namespace math
 		*	不相等
 		*/
 		bool operator!=(const Vector3& vec) const;
+		/**
+		*	转为2维
+		*/
+		operator Vector2() const;
 	public:
 		/**
 		*	向量点积

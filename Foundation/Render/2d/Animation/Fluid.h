@@ -1,16 +1,16 @@
 #pragma onc
 
-#include "CtrlAnimation.h"
+#include "Animation.h"
 #include <map>
 
 namespace render
 {
 	// Á÷Ìå
-	class CtrlFluid : public CtrlAnimation
+	class Fluid : public Animation
 	{
 	public:
-		CtrlFluid();
-		virtual ~CtrlFluid();
+		Fluid();
+		virtual ~Fluid();
 	public:
 
 	protected:

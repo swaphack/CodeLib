@@ -25,12 +25,6 @@ Vector2::Vector2(const Vector2& point)
 	this->setY(point.getY());
 }
 
-Vector2::Vector2(const Vector3& point)
-{
-	this->setX(point.getX());
-	this->setY(point.getY());
-}
-
 Vector2::Vector2(const Vector<float, 2>& vector)
 {
 	this->setX(vector[0]);

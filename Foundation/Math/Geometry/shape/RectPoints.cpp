@@ -28,7 +28,21 @@ math::RectPoints::~RectPoints()
 {
 }
 
-math::RectPoints::operator math::Rect()
+void math::RectPoints::setVertices(const float* vertices)
+{
+	if (vertices == nullptr) return;
+
+	std::vector<Vector3> points;
+	for (size_t i = 0; i < getLength(); i++)
+	{
+		Vector3 vertice;
+		vertice.assign(vertices + i * 3);
+		points.push_back(vertice);
+	}
+	this->assign(&points[0]);
+}
+
+math::RectPoints::operator math::Rect() const
 {
 	Vector2 origin(this->getLeftBottom());
 	Size size(

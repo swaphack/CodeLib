@@ -1,8 +1,8 @@
 #pragma once
 
 #include "Common/DrawNode/MultiDrawNode.h"
-#include "Common/struct/shape_common.h"
 #include "3d/Environment/LightProtocol.h"
+#include "Common/struct/vertex_common.h"
 
 namespace render
 {
@@ -15,36 +15,21 @@ namespace render
 		virtual ~MultiMeshModel();
 	public:
 		virtual bool init();
-	public:
-		/**
-		*	是否显示矩形框
-		*/
-		void setBoxVisible(bool bVisible);
-		/**
-		*	是否显示矩形框
-		*/
-		bool isBoxVisible() const;
-	protected:
-		virtual bool containPoint(float x, float y);
-	protected:
-		void calBoxData();
-		/**
-		*	绘制模型框
-		*/
-		void drawBox();
 	protected:
 		/**
-		*	绘制
+		*	body发生改变
+		*/
+		void onMultiDrawNodeBodyChange();
+		/**
+		*	更新网格
+		*/
+		virtual void updateMultiDrawNode3DMesh();
+		/**
+		*	绘制结束后
 		*/
 		virtual void afterDrawNode();
-	private:
-		/**
-		*	是否显示矩形框
-		*/
-		bool _bBoxVisible = false;
-		// 模型框
-		CubePoints _boxVertex;
-		// 实际模型框
-		CubePoints _realBoxVertex;
+	protected:
+		// 顶点信息
+		CubeVertex _cubeVertex;
 	};
 }

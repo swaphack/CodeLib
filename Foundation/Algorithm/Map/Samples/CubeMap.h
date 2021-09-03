@@ -8,7 +8,7 @@ namespace alg
 	namespace map
 	{
 		/**
-		*	二维地图
+		*	三维地图
 		*
 		*			 y
 		*			|

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "CtrlWidget.h"
+#include "render.h"
 
 namespace ui
 {
@@ -14,7 +14,7 @@ namespace ui
 	/**
 	*	模板
 	*/
-	class CtrlStencil : public CtrlWidget
+	class CtrlStencil : public render::DrawNode
 	{
 	public:
 		CtrlStencil();
@@ -28,7 +28,7 @@ namespace ui
 		/**
 		*	设置模板节点
 		*/
-		void setStencilNode(Node* node);
+		void setStencilNode(render::Node* node);
 		/**
 		*	设置模板显示模式
 		*/

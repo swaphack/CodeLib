@@ -1,7 +1,6 @@
 #pragma once
 
 #include "Common/DrawNode/DrawNode2D.h"
-#include "Common/struct/shape_common.h"
 
 namespace render
 {
@@ -23,8 +22,6 @@ namespace render
 	protected:
 		void updateTextureSize();
 	private:
-		// 矩形框
-		RectPoints _localRectPoints;
 		/**
 		*	界面纹理
 		*/

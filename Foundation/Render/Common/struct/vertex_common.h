@@ -32,20 +32,30 @@ namespace render
 	public:
 		RectVertex();
 	public:
-		void setLeftDownPoint(const math::Vector3& point);
-		void setRightDownPoint(const math::Vector3& point);
-		void setRightUpPoint(const math::Vector3& point);
-		void setLeftUpPoint(const math::Vector3& point);
+		void setLeftBottomPosition(const math::Vector3& point);
+		math::Vector3 getLeftBottomPosition() const;
+		void setRightBottomPosition(const math::Vector3& point);
+		math::Vector3 getRightBottomPosition() const;
+		void setRightTopPosition(const math::Vector3& point);
+		math::Vector3 getRightTopPosition() const;
+		void setLeftTopPosition(const math::Vector3& point);
+		math::Vector3 getLeftTopPosition() const;
 
 		void setLeftDownColor(const phy::Color4F& color);
 		void setRightDownColor(const phy::Color4F& color);
 		void setRightUpColor(const phy::Color4F& color);
 		void setLeftUpColor(const phy::Color4F& color);
 
+		void setColor(const phy::Color4F& color);
+
 		void setLeftDownUV(const math::Vector2& point);
 		void setRightDownUV(const math::Vector2& point);
 		void setRightUpUV(const math::Vector2& point);
 		void setLeftUpUV(const math::Vector2& point);
+	public:
+		void toTriangles(std::vector<math::TrianglePoints>& trianglePoints) const;
+
+		operator math::Polygon() const;
 	};
 
 	// 立方体顶点信息
@@ -63,15 +73,15 @@ namespace render
 	public:
 		CubeVertex();
 	public:
-		void setFrontLeftDownPosition(const math::Vector3& point);
-		void setFrontRightDownPosition(const math::Vector3& point);
-		void setFrontRightUpPosition(const math::Vector3& point);
-		void setFrontLeftUpPosition(const math::Vector3& point);
+		void setFrontLeftBottomPosition(const math::Vector3& point);
+		void setFrontRightButtomPosition(const math::Vector3& point);
+		void setFrontRightTopPosition(const math::Vector3& point);
+		void setFrontLeftTopPosition(const math::Vector3& point);
 
-		void setBackLeftDownPosition(const math::Vector3& point);
-		void setBackRightDownPosition(const math::Vector3& point);
-		void setBackRightUpPosition(const math::Vector3& point);
-		void setBackLeftUpPosition(const math::Vector3& point);
+		void setBackLeftBottomPosition(const math::Vector3& point);
+		void setBackRightBottomPosition(const math::Vector3& point);
+		void setBackRightTopPosition(const math::Vector3& point);
+		void setBackLeftTopPosition(const math::Vector3& point);
 
 		const RectVertex* getFaceVertex(CubeFace face) const;
 

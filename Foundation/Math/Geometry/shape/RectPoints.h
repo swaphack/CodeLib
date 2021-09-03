@@ -22,6 +22,8 @@ namespace math
 		CREATE_INDEX_VALUE(RightTop, 2, Vector3);
 		CREATE_INDEX_VALUE(LeftTop, 3, Vector3);
 	public:
-		operator Rect();
+		void setVertices(const float* vertices);
+	public:
+		operator Rect() const;
 	};
 }

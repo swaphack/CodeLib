@@ -17,9 +17,6 @@
     <ClInclude Include="Struct\OneToOneDoubleRelationship.h">
       <Filter>Struct</Filter>
     </ClInclude>
-    <ClInclude Include="Map\Voronoi.h">
-      <Filter>Map</Filter>
-    </ClInclude>
     <ClInclude Include="Map\import.h">
       <Filter>Map</Filter>
     </ClInclude>

@@ -41,6 +41,8 @@ void RenderApplication::update()
 		_lastClock = clock();
 	}
 
+	G_TOUCHMANAGER->process();
+
 	long nowClock = clock();
 
 	float interval = (float)(nowClock - _lastClock) / CLOCKS_PER_SEC;
@@ -55,8 +57,6 @@ void RenderApplication::update()
 		// 避免双缓区存产生抖动
 		_canvas->draw();
 	}
-
-	G_TOUCHMANAGER->process();
 
 	checkAutoRealsePool();
 }

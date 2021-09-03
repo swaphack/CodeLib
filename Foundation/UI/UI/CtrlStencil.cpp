@@ -16,7 +16,7 @@ ui::CtrlStencil::~CtrlStencil()
 
 bool ui::CtrlStencil::init()
 {
-	if (!CtrlWidget::init())
+	if (!render::DrawNode::init())
 	{
 		return false;
 	}
@@ -56,7 +56,7 @@ void ui::CtrlStencil::setStencilMode(StencilMode mode)
 
 void ui::CtrlStencil::beforeDrawNode()
 {
-	CtrlWidget::beforeDrawNode();
+	DrawNode::beforeDrawNode();
 }
 
 void ui::CtrlStencil::afterDrawNode()
@@ -108,7 +108,5 @@ void ui::CtrlStencil::afterDrawNode()
 	}
 
 	render::GLState::disable(EnableMode::STENCIL_TEST);
-
-	this->drawRect();
 }
 

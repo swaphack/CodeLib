@@ -13,7 +13,8 @@ namespace render
 		virtual ~Scene();
 	public:
 		virtual bool init();
-		void visit();
+		// 遍历和绘制场景
+		virtual void visit();
 	public:
 		// 添加子节点
 		virtual void addChild(Node* node);

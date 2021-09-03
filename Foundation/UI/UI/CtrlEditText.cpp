@@ -78,6 +78,21 @@ bool ui::CtrlEditText::init()
 	return true;
 }
 
+render::DrawNode2D* ui::CtrlEditText::getRenderNode()
+{
+	if (_ctrlText == nullptr || _ctrlTextPlaceholder == nullptr) 
+		return nullptr;
+
+	if (_ctrlText->getString() != "")
+	{
+		return _ctrlText->getRenderNode();
+	}
+	else
+	{
+		return _ctrlTextPlaceholder->getRenderNode();
+	}
+}
+
 void ui::CtrlEditText::setPlaceholderString(const std::string& text)
 {
 	_ctrlTextPlaceholder->setString(text);

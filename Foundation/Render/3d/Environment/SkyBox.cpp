@@ -34,16 +34,14 @@ void render::SkyBox::afterDrawNode()
 	Model::afterDrawNode();
 }
 
-void render::SkyBox::onCubeMapBodyChanged()
+void render::SkyBox::updateDrawNode3DMesh()
 {
-	VertexTool::setTexture3DVertices(&_cubePosition, math::Vector3(), _volume, _anchor);
-
 	float vertices[24 * 3] = { 0 };
 	uint32_t indices[36] = { 0 };
 
 	for (int i = 0; i < (int)CubeFace::MAX; i++)
 	{
-		const auto* pRectVertex = _cubePosition.getCubMapFaceVertex((CubeFace)i);
+		const auto* pRectVertex = _cubeVertex.getCubMapFaceVertex((CubeFace)i);
 		if (!pRectVertex)
 		{
 			continue;

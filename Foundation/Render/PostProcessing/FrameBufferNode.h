@@ -1,7 +1,6 @@
 #pragma once
 
 #include "Common/DrawNode/DrawNode2D.h"
-#include "Common/struct/shape_common.h"
 
 namespace render
 {

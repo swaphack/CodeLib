@@ -100,13 +100,13 @@ namespace math
 		*/
 		Quaternion operator-(const Quaternion& quaternion) const;
 		/**
-		*	差值
+		*	缩放
 		*/
 		Quaternion operator*(float k) const;
 		/**
 		*	转换为矩阵
 		*/
-		operator Matrix4x4();
+		operator Matrix4x4() const;
 	public:
 		/**
 		*	绕轴vector旋转angle得到的四元数

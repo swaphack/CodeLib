@@ -39,6 +39,11 @@ phy::Color4B& phy::Color4B::operator=(const Color4B& value)
 	return *this;
 }
 
+phy::Color4B::operator phy::Color3B() const
+{
+	return Color3B(getRed(), getGreen(), getBlue());
+}
+
 void phy::Color4B::adjust()
 {
 	ADJUST_DURATION_VALUE_RANGE(_values[0], 0, COLOR_UCHAR_VALUE_MAX, COLOR_UCHAR_VALUE_MAX);

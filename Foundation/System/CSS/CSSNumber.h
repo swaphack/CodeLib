@@ -38,6 +38,10 @@ namespace sys
 		static CSSNumber load(const std::string& text);
 	public:
 		/**
+		*	是否是关联类型
+		*/
+		bool isRelativeType() const;
+		/**
 		*	是否是固定值
 		*/
 		bool isFixedValue() const;
@@ -74,9 +78,17 @@ namespace sys
 		*	获取实际值
 		*/
 		float getRealValue(float value) const;
+		/**
+		*	获取实际值
+		*/
+		float getRealValueWithDefault(float defaultValue) const;
+		/**
+		*	获取实际值
+		*/
+		float getRealValueWithDefault(float value, float defaultValue) const;
 	private:
 		// 类型
-		NumberType _type = NumberType::Fixed;
+		NumberType _type = NumberType::None;
 		// 值
 		float _value = 0;
 	};

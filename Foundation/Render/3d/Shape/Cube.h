@@ -7,7 +7,7 @@ namespace render
 {
 	class Texture2D;
 	/**
-	*	立方体，采用立方体纹理
+	*	立方体
 	*/
 	class Cube : public Model
 	{
@@ -17,9 +17,6 @@ namespace render
 	public:
 		virtual bool init();
 	protected:
-		void onCubeBodyChanged();
-	private:
-		// 坐标
-		CubeVertex _cubePosition;
+		virtual void updateDrawNode3DMesh();
 	};
 }

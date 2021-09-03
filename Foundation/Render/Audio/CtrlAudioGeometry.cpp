@@ -1,7 +1,7 @@
 #include "CtrlAudioGeometry.h"
 #include "AudioManager.h"
 #include "2d/Primitive/PrimitiveNode.h"
-#include "Common/Tool/Tool.h"
+#include "Common/Tool/VertexTool.h"
 
 #define MAX_POLYGON_COUNT 1
 #define POLYGON_INDEX 0
@@ -209,7 +209,7 @@ CtrlAudioGeometryPolygon* CtrlAudioGeometry::addPolygon(const std::vector<math::
 	return polygon;
 }
 
-CtrlAudioGeometryPolygon* CtrlAudioGeometry::addPolygon(const RectPoints& vertexes)
+CtrlAudioGeometryPolygon* CtrlAudioGeometry::addPolygon(const math::RectPoints& vertexes)
 {
 	if (_geometry == nullptr)
 	{
@@ -262,11 +262,11 @@ void CtrlAudioGeometry::onPolygonsChange()
 	math::Matrix4x4 mat = this->getWorldMatrix();
 	math::Vector3 position = mat.getPosition();
 	math::Volume volume = this->getVolume();
-	Tool::calCube(position, volume, getAnchorPoint(), _cubeVertex);
+	render::VertexTool::setTexture3DVertices(&_cubeVertex, position, volume, getAnchorPoint());
 	for (int i = 0; i < (int)CubeFace::MAX; i++)
 	{
 		CtrlAudioGeometryPolygon* polygon = getPolygon((CubeFace)i);
-		RectPoints rectVertex = getLocalRectVertex(i);
+		math::RectPoints rectVertex = getLocalRectVertex(i);
 		if (polygon == nullptr)
 		{
 			this->addPolygon(rectVertex);
@@ -278,38 +278,40 @@ void CtrlAudioGeometry::onPolygonsChange()
 	}
 }
 
-const RectPoints& CtrlAudioGeometry::getLocalRectVertex(int i)
+math::RectPoints CtrlAudioGeometry::getLocalRectVertex(int i)
 {
+	math::RectPoints rectPoints;
 	if (i < 0 || i >= (int)CubeFace::MAX)
 	{
-		return _cubeVertex.front;
+		rectPoints.setVertices(_cubeVertex.front.vertices);
+		return rectPoints;
 	}
 	CubeFace face = (CubeFace)i;
 	switch (face)
 	{
 	case render::CubeFace::FRONT:
-		return _cubeVertex.front;
+		rectPoints.setVertices(_cubeVertex.front.vertices);
 		break;
 	case render::CubeFace::BACK:
-		return _cubeVertex.back;
+		rectPoints.setVertices(_cubeVertex.back.vertices);
 		break;
 	case render::CubeFace::LEFT:
-		return _cubeVertex.left;
+		rectPoints.setVertices(_cubeVertex.left.vertices);
 		break;
 	case render::CubeFace::RIGHT:
-		return _cubeVertex.right;
+		rectPoints.setVertices(_cubeVertex.right.vertices);
 		break;
 	case render::CubeFace::TOP:
-		return _cubeVertex.top;
+		rectPoints.setVertices(_cubeVertex.top.vertices);
 		break;
 	case render::CubeFace::BOTTOM:
-		return _cubeVertex.bottom;
+		rectPoints.setVertices(_cubeVertex.bottom.vertices);
 		break;
 	default:
 		break;
 	}
 
-	return _cubeVertex.front;
+	return rectPoints;
 }
 
 
@@ -444,13 +446,13 @@ bool CtrlAudioGeometryPolygon::setVertexes(const std::vector<math::Vector3>& ver
 	return true;
 }
 
-bool CtrlAudioGeometryPolygon::setVertexes(const RectPoints& vertexes)
+bool CtrlAudioGeometryPolygon::setVertexes(const math::RectPoints& vertexes)
 {
 	_vertexes.clear();
-	_vertexes.push_back(vertexes.leftDown);
-	_vertexes.push_back(vertexes.rightDown);
-	_vertexes.push_back(vertexes.rightUp);
-	_vertexes.push_back(vertexes.leftUp);
+	_vertexes.push_back(vertexes.getLeftBottom());
+	_vertexes.push_back(vertexes.getRightBottom());
+	_vertexes.push_back(vertexes.getRightTop());
+	_vertexes.push_back(vertexes.getLeftTop());
 	this->notify(NodeNotifyType::GEOMETRY);
 	return true;
 }

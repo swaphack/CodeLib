@@ -131,10 +131,10 @@ namespace math
 		Matrix4x4& operator=(const Matrix<float, 4, 4>& mat);
 		Matrix4x4& operator=(const Matrix3x3& mat);
 
-		operator SquareMatrix4();
+		operator SquareMatrix4() const;
 	public:
 		// Äæ¾ØÕó
-		Matrix4x4 getInverse();
+		Matrix4x4 getInverse() const;
 	public:
 		//--------------------------------------------------------------------------------
 		// set a ortho (right hand)

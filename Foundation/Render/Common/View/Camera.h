@@ -6,6 +6,8 @@
 
 namespace render
 {
+	class Scene;
+
 	/**
 	*	摄像机
 	*	投影矩阵[-1, 1]
@@ -28,7 +30,7 @@ namespace render
 		// 获取维度
 		DimensionsType getDimensions() const;
 		// 绘制节点
-		virtual void drawNode();
+		void updateCameraView();
 	public:
 		// 设置视窗参数
 		void setViewPort(float left, float right, float bottom, float top);
@@ -62,6 +64,8 @@ namespace render
 		// 获取射线
 		math::Ray getRayFromScreenPoint(const math::Vector2& screenPoint) const;
 	public:
+		// 绘制场景
+		void drawScene(Node* scene);
 		// 更新空间位置
 		virtual void visit();
 	protected:

@@ -196,7 +196,9 @@ void LayoutItem::resize(const math::Size& size)
 		return;
 	}
 
-	float sizeW = size.getWidth(), sizeH = size.getHeight();
+	float parentSizeW = size.getWidth(), parentSizeH = size.getHeight();
+	float selfSizeW = m_pWidget->getWidth(), selfSizeH = m_pWidget->getHeight();
+	float selfPosX = m_pWidget->getPositionX(), selfPosY = m_pWidget->getPositionY();
 
 	const auto& left = m_sMargin.getLeft();
 	const auto& right = m_sMargin.getRight();
@@ -206,43 +208,28 @@ void LayoutItem::resize(const math::Size& size)
 	const auto& width = m_sSize.getWidth();
 	const auto& height = m_sSize.getHeight();
 
-	float leftX = 0, rightX = 0, topY = 0, bottomY = 0, widthX = 0, heightY = 0;
+	float leftX = 0, rightX = 0, topY = 0, bottomY = 0;
 
-	leftX = left.getRealValue(sizeW);
+	leftX = left.getRealValueWithDefault(parentSizeW, selfPosX);
+	rightX = right.getRealValueWithDefault(parentSizeW, 0);
+	topY = top.getRealValueWithDefault(parentSizeH, 0);
+	bottomY = bottom.getRealValueWithDefault(parentSizeH, selfPosY);
 
-	bottomY = bottom.getRealValue(sizeH);
+	float widthX = 0, heightY = 0;
+	widthX = width.getRealValueWithDefault(parentSizeW, selfSizeW);
+	heightY = height.getRealValueWithDefault(parentSizeH, selfSizeH);
 
-	rightX = right.getRealValue(sizeW);
-
-	topY = top.getRealValue(sizeH);
-
-	if (width.getRealValue() != 0) 
-	{
-		widthX = width.getRealValue(sizeW);
-	}
-
-	if (height.getRealValue() != 0)
-	{
-		heightY = height.getRealValue(sizeH);
-	}
-
+	// Ë®Æ½
 	float x = 0, y = 0, w = 0, h = 0;
 	if (getMarginState().Left)
 	{
 		x = leftX;
 
-		if (getMarginState().Right)
-		{
-			w = sizeW - x - rightX;
-		}
-		else
-		{
-			w = widthX;
-		}
+		w = getMarginState().Right ? (parentSizeW - x - rightX) : widthX;
 	}
 	else if (getMarginState().Right)
 	{
-		x = sizeW - rightX - widthX;
+		x = parentSizeW - rightX - widthX;
 		w = widthX;
 	}
 	else
@@ -251,22 +238,16 @@ void LayoutItem::resize(const math::Size& size)
 		w = widthX;
 	}
 
+	// ´¹Ö±
 	if (getMarginState().Bottom)
 	{
 		y = bottomY;
 
-		if (getMarginState().Top)
-		{
-			h = sizeH - y - topY;
-		}
-		else
-		{
-			h = heightY;
-		}
+		h = getMarginState().Top ? (parentSizeH - y - topY) : heightY;
 	}
 	else if (getMarginState().Top)
 	{
-		y = sizeH - topY - heightY;
+		y = parentSizeH - topY - heightY;
 		h = heightY;
 	}
 	else
@@ -278,18 +259,21 @@ void LayoutItem::resize(const math::Size& size)
 	if (w < 0) w = 0;
 	if (h < 0) h = 0;
 
-	x += w * m_pWidget->getAnchorPointX();
-	y += h * m_pWidget->getAnchorPointY();
-
 	auto pParent = m_pWidget->getParent();
-	if (pParent)
+	if (left.isRelativeType())
 	{
-		x -= pParent->getAnchorPointX() * size.getWidth();
-		y -= pParent->getAnchorPointY() * size.getHeight();
+		x += w * m_pWidget->getAnchorPointX();
+		if (pParent) x -= pParent->getAnchorPointX() * size.getWidth();
+	}
+	
+	if (right.isRelativeType())
+	{
+		y += h * m_pWidget->getAnchorPointY();
+		if (pParent) y -= pParent->getAnchorPointY() * size.getHeight();
 	}
 
-	m_pWidget->setVolume(w, h);
 	m_pWidget->setPosition(x, y);
+	m_pWidget->setVolume(w, h);
 }
 
 void ui::LayoutItem::setWidget(CtrlWidget* widget)

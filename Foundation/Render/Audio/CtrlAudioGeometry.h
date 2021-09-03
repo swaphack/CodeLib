@@ -3,7 +3,7 @@
 #include "macros.h"
 #include "AudioProtocol.h"
 #include "Common/struct/enum_common.h"
-#include "Common/struct/shape_common.h"
+#include "Common/struct/vertex_common.h"
 
 namespace render
 {
@@ -43,8 +43,8 @@ namespace render
 		CtrlAudioGeometryPolygon* getPolygon(CubeFace face);
 	protected:
 		CtrlAudioGeometryPolygon* addPolygon(const std::vector<math::Vector3>& vertexes);
-		CtrlAudioGeometryPolygon* addPolygon(const RectPoints& vertexes);
-		const RectPoints& getLocalRectVertex(int i);
+		CtrlAudioGeometryPolygon* addPolygon(const math::RectPoints & vertexes);
+		math::RectPoints getLocalRectVertex(int i);
 		void onGeometryChange();
 		void onPolygonsChange();
 	private:
@@ -59,7 +59,7 @@ namespace render
 		// 六面
 		CtrlAudioGeometryPolygon* _polygons[(uint8_t)CubeFace::MAX];
 		// 立方体顶点
-		CubePoints _cubeVertex;
+		render::CubeVertex _cubeVertex;
 	};
 
 	//////////////////////////////////////////////////////////////////////////
@@ -88,7 +88,7 @@ namespace render
 		// 设置顶点
 		bool setVertexes(const math::Vector3* vertexes, int numvertices);
 		bool setVertexes(const std::vector<math::Vector3>& vertexes);
-		bool setVertexes(const RectPoints& vertexes);
+		bool setVertexes(const math::RectPoints& vertexes);
 		// 添加顶点
 		bool updateVertex(int index, const math::Vector3& vertex);
 	protected:

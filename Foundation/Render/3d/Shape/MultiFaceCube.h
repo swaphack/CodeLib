@@ -34,9 +34,6 @@ namespace render
 	protected:
 		virtual void initBufferObject();
 
-		void onMultiFaceCubeBodyChanged();
-	private:
-		// зјБъ
-		CubeVertex _cubePosition;
+		virtual void updateMultiDrawNode3DMesh();
 	};
 }

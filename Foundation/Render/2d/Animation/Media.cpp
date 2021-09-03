@@ -1,26 +1,31 @@
-#include "CtrlMedia.h"
+#include "Media.h"
 #include "Common/Texture/Texture2D.h"
 #include "Audio/CtrlAudioSourceClip.h"
+#include "2d/Base/DrawTexture2D.h"
 #include "system.h"
+
 using namespace render;
 
-CtrlMedia::CtrlMedia()
+Media::Media()
 :_media(nullptr)
 {
 
 }
 
-CtrlMedia::~CtrlMedia()
+Media::~Media()
 {
 	SAFE_DELETE(_media);
 }
 
-bool CtrlMedia::init()
+bool Media::init()
 {
-	if (!CtrlAnimation::init())
+	if (!Animation::init())
 	{
 		return false;
 	}
+
+	_drawNode = CREATE_NODE(DrawTexture2D);
+	this->addChild(_drawNode);
 
 	_ctrlAudio = CREATE_NODE(CtrlAudioSourceClip);
 	this->addChild(_ctrlAudio);
@@ -36,7 +41,7 @@ bool CtrlMedia::init()
 		Texture2D* texture = getNextTexture();
 		if (texture)
 		{
-			this->setTextureWithRect(texture);
+			_drawNode->setTextureWithRect(texture);
 		}
 		sys::AudioDetail* audio = _media->getNextAudio();
 		if (audio && audio->getData())
@@ -48,43 +53,43 @@ bool CtrlMedia::init()
 	return true;
 }
 
-void CtrlMedia::start()
+void Media::start()
 {
-	CtrlAnimation::start();
+	Animation::start();
 	if (_ctrlAudio)
 	{
 		_ctrlAudio->setPaused(false);
 	}
 }
 
-void CtrlMedia::pause()
+void Media::pause()
 {
-	CtrlAnimation::pause();
+	Animation::pause();
 	if (_ctrlAudio)
 	{
 		_ctrlAudio->setPaused(true);
 	}
 }
 
-void CtrlMedia::resume()
+void Media::resume()
 {
-	CtrlAnimation::resume();
+	Animation::resume();
 	if (_ctrlAudio)
 	{
 		_ctrlAudio->setPaused(true);
 	}
 }
 
-void CtrlMedia::stop()
+void Media::stop()
 {
-	CtrlAnimation::stop();
+	Animation::stop();
 	if (_ctrlAudio)
 	{
 		_ctrlAudio->stop();
 	}
 }
 
-void CtrlMedia::loadFromURL(const std::string& url, bool defaultSize)
+void Media::loadFromURL(const std::string& url, bool defaultSize)
 {
 	_filepath = url;
 
@@ -106,7 +111,7 @@ void CtrlMedia::loadFromURL(const std::string& url, bool defaultSize)
 	}
 }	
 
-Texture2D* CtrlMedia::getNextTexture()
+Texture2D* Media::getNextTexture()
 {
 	if (_media == nullptr)
 	{

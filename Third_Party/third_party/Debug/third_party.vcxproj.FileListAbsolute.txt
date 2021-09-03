@@ -1,4 +1,2 @@
 F:\github\CodeLib\Debug\third_party.pdb
 F:\github\CodeLib\Third_Party\third_party\Debug\third_party.pdb
-H:\Github\CodeLib\Debug\third_party.pdb
-H:\Github\CodeLib\Third_Party\third_party\Debug\third_party.pdb

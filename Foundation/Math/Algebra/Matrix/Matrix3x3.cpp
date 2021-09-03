@@ -49,7 +49,7 @@ math::Matrix3x3& math::Matrix3x3::operator=(const Matrix3x3& mat)
 
 }
 
-Matrix3x3 math::Matrix3x3::operator*(const Matrix3x3& mat)
+Matrix3x3 math::Matrix3x3::operator*(const Matrix3x3& mat) const
 {
 	float value[9] = { 0 };
 	value[0] = getValue(0) * mat.getValue(0) + getValue(1) * mat.getValue(3) + getValue(2) * mat.getValue(6);
@@ -67,7 +67,7 @@ Matrix3x3 math::Matrix3x3::operator*(const Matrix3x3& mat)
 	return Matrix3x3(value);
 }
 
-Vector3 math::Matrix3x3::operator*(const Vector3& v)
+Vector3 math::Matrix3x3::operator*(const Vector3& v) const
 {
 	float x = getValue(0) * v.getValue(0) + getValue(1) * v.getValue(1) + getValue(2) * v.getValue(2);
 	float y = getValue(3) * v.getValue(0) + getValue(4) * v.getValue(1) + getValue(5) * v.getValue(2);
@@ -119,7 +119,7 @@ void math::Matrix3x3::setShear(float radianX, float radianY)
 	(*this)[3] = -tanY;
 }
 
-math::Matrix3x3::operator SquareMatrix3()
+math::Matrix3x3::operator SquareMatrix3() const
 {
 	return SquareMatrix3(*this);
 }

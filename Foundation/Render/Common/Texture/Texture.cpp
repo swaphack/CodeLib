@@ -121,6 +121,11 @@ const TextureSetting& render::Texture::getTextureSetting() const
 	return _textureSettings;
 }
 
+TextureSetting& render::Texture::getTextureSetting()
+{
+	return _textureSettings;
+}
+
 void render::Texture::applyTextureSettingWithSampler()
 {
 	if (_sampler == nullptr)

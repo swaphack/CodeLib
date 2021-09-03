@@ -12,6 +12,7 @@ namespace math
 	public:
 		Size();
 		Size(float w, float h);
+		Size(const Vector2& size);
 		Size(const Size& size);
 		virtual ~Size();
 	public:
@@ -19,5 +20,7 @@ namespace math
 		CREATE_INDEX_VALUE(Height, 1, float);
 
 		void set(float w, float h);
+	public:
+		operator Vector2()  const;
 	};
 }

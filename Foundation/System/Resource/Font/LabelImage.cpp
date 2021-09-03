@@ -149,6 +149,8 @@ bool FT_LABEL::load(const TextDefine& textDefine, LabelStream* stream)
 				offset_width = 0;
 				rect_height += stream->getLineHeight();
 			}
+			ptr++;
+			offset++;
 			continue;
 		}
 		FT_CHAR_DATA* data = getCharData(ch);

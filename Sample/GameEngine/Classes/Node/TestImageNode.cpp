@@ -38,7 +38,6 @@ void TestImageNode::testImage()
 		pImage->setVolume(frameSize);
 		
 		Utility::loadShaderVF(pImage, "Shader/texture/texture.vs", "Shader/texture/texture.fs");
-		Utility::loadDefaultShader(pImage);
 
 		this->addChild(pImage);
 	}
@@ -53,7 +52,6 @@ void TestImageNode::testImage()
 		pImage->setPosition(512, 384);
 		pImage->setVolume(512, 384);
 		Utility::loadShaderVF(pImage, "Shader/texture/texture.vs", "Shader/texture/texture.fs");
-		Utility::loadDefaultShader(pImage);
 
 		this->addChild(pImage);
 	}
@@ -207,7 +205,7 @@ void TestImageNode::testPixelImage()
 	pCtrlText->setFontSize(58);
 	pCtrlText->setString("点击后移动鼠标，改变颜色");
 	pCtrlText->setPosition(100, 100, 0);
-	pCtrlText->setColor(phy::Color4B(255, 255, 255, 255));
+	pCtrlText->setTextColor(phy::Color3B(255, 255, 255));
 	this->addChild(pCtrlText);
 
 	//pImage->setUserData(pCtrlText);
@@ -249,7 +247,7 @@ void TestImageNode::testImages()
 		pChild->setVolume(200, 200);
 		this->addChild(pChild);
 
-		Utility::loadDefaultShader(pChild);
+		Utility::loadShaderVF(pChild, "Shader/texture/texture.vs", "Shader/texture/texture.fs");
 	}
 
 }
@@ -296,5 +294,5 @@ void TestImageNode::onTouchImage(Node* node, const math::Vector2& touchPoint)
 
 	phy::Color4B color = Pixel::readPixelColor(touchPoint.getX(), touchPoint.getY());
 	pText->setString(getCString("##%02x%02x%02x%02x", color[0], color[1], color[2], color[3]));
-	pText->setColor(color);
+	pText->setTextColor(color);
 }

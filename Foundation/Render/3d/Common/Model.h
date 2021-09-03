@@ -1,8 +1,8 @@
 #pragma once
 
 #include "Common/DrawNode/DrawNode3D.h"
-#include "Common/struct/shape_common.h"
 #include "3d/Environment/LightProtocol.h"
+#include "Common/struct/vertex_common.h"
 #include <map>
 #include <string>
 
@@ -27,6 +27,10 @@ namespace render
 	public:
 		// 务必调用，包含属性修改时通知
 		virtual bool init();
-	
+	protected:
+		// 本地立方体框
+		render::CubeVertex _localRectVertex;
+		// 世界立方体框
+		render::CubeVertex _worldRectVertex;
 	};
 }

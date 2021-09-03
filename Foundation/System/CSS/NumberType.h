@@ -8,6 +8,10 @@ namespace sys
 	enum class NumberType
 	{
 		/**
+		*	无关联
+		*/
+		None = -1,
+		/**
 		*	固定
 		*/
 		Fixed,

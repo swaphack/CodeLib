@@ -7,6 +7,7 @@
 #include "Common/Shader/import.h"
 #include "Graphic/import.h"
 #include "Common/Tool/Tool.h"
+#include "Common/Tool/VertexTool.h"
 
 render::PostProcessingNode::PostProcessingNode()
 {
@@ -37,8 +38,11 @@ bool render::PostProcessingNode::init()
 
 void render::PostProcessingNode::updateTextureSize()
 {
-	int width = _localRectPoints.getWidth();
-	int height = _localRectPoints.getHeight();
+	render::RectVertex rectVertex;
+	render::VertexTool::setTexture2DVertices(&rectVertex, math::Vector3(), _volume, _anchor);
+
+	int width = rectVertex.getRightTopPosition().getX() - rectVertex.getLeftBottomPosition().getX();
+	int height = rectVertex.getRightTopPosition().getY() - rectVertex.getLeftBottomPosition().getY();
 	if (width == 0 || height == 0)
 	{
 		return;

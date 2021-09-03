@@ -18,6 +18,8 @@ private:
 
 	void testScrollView();
 
+	void testListView();
+
 	void testMask();
 
 	void testStencil();
@@ -25,6 +27,10 @@ private:
 	void testImage();
 
 	void testButton();
+
+	void testWidget();
+
+	void testText();
 private:
 
 	void onKeyBoardRole(render::Node* node, sys::BoardKey key, sys::ButtonStatus type);

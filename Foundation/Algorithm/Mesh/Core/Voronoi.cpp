@@ -4,6 +4,7 @@
 
 alg::Voronoi::Voronoi()
 {
+    _pointSet = new PointSet();
 }
 alg::Voronoi::~Voronoi()
 {
@@ -18,9 +19,7 @@ bool alg::Voronoi::createWithRect(const math::Rect& rect, Delaunay* delaunay,
 	{
 		return false;
 	}
-
-    SAFE_DELETE(_pointSet);
-    _pointSet = new PointSet();
+    _pointSet->cleanup();
 
 	std::set<alg::MeshEdge*> voronoiEdges = generateEdgesMeshTriangle(delaunay->getPointSet()->getTriangles());
 	if (voronoiEdges.size() == 0)

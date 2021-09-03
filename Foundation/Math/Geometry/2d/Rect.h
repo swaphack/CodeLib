@@ -15,7 +15,8 @@ namespace math
 	public:
 		Rect();
 		Rect(float x, float y, float w, float h);
-		Rect(const Vector2& origin, const Size& size);
+		Rect(const Vector2& orgin, const Size& size);
+		Rect(const Vector2& orgin, const Vector2& size);
 		virtual ~Rect();
 	public:
 		float getX() const;
@@ -61,6 +62,10 @@ namespace math
 		/**
 		*	包含点
 		*/
+		bool contains(const Rect& rect) const;
+		/**
+		*	包含点
+		*/
 		bool includes(float x, float y) const;
 		/**
 		*	包含点
@@ -70,14 +75,11 @@ namespace math
 		*	包含点
 		*/
 		bool includes(const Vector3& point) const;
+
 		/**
-		*	框相交
+		*	包含框 框在内部
 		*/
-		bool intersect(float x, float y, float w, float h) const;
-		/**
-		*	框相交
-		*/
-		bool intersect(const Rect& rect) const;
+		bool includes(const Rect& rect) const;
 
 		/**
 		*	并集
@@ -88,6 +90,14 @@ namespace math
 		*	交集
 		*/
 		Rect intersectRect(const Rect& rect) const;
+		/**
+		*	部分重叠
+		*/
+		bool isOverlap(const Rect& rect) const;
+		/**
+		*	获取点所在的锚点位置
+		*/  
+		math::Vector3 getAnchorPointByPosition(float x, float y);
 	public:
 		Rect& operator=(const Rect& rect);
 	protected:

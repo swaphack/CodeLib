@@ -12,15 +12,17 @@ TestEnvironmentNode::~TestEnvironmentNode()
 
 void TestEnvironmentNode::initNodes()
 {
-	//this->addGrid();
+	this->addGrid();
 
 	this->testCamera();
 
+	this->addFPS();
+
 	//this->init3DSkyBox();
 
-	this->testMatrix();
+	//this->testMatrix();
 
-	this->addCoordinate();
+	//this->addCoordinate();
 }
 
 void TestEnvironmentNode::init3DSkyBox()
@@ -235,18 +237,14 @@ void TestEnvironmentNode::addGrid()
 	pGrid->setVolume(10240, 0, 10240);
 	pGrid->setGridWidth(100);
 	pGrid->setPosition(512, 384);
-	//pGrid->setRotationX(90);
+	if (Camera::getMainCamera()->getDimensions() == DimensionsType::TWO)
+	{
+		pGrid->setRotationX(90);
+	}
 
 	Utility::loadShaderVGF(pGrid, "Shader/geometry/draw_line.vs", "Shader/geometry/draw_line.gs", "Shader/geometry/draw_line.fs");
 
 	this->addChild(pGrid);
-
-	RotateByAction* pRotateByAction = CREATE_ACTION(RotateByAction);
-	pRotateByAction->setDifferentRotation(360, 0, 0);
-	pRotateByAction->setDuration(5);
-
-	RepeateForeverAction* pRepeateAction = CREATE_ACTION(RepeateForeverAction);
-	pRepeateAction->setAction(pRotateByAction);
 }
 
 void TestEnvironmentNode::addCoordinate()
@@ -286,4 +284,41 @@ void TestEnvironmentNode::testMultiPort()
 {
 	math::Size size = Canvas::getInstance()->getView()->getViewSize();
 	Canvas::getInstance()->setViewPort(0, 0, size.getWidth() * 0.5f, size.getHeight() * 0.5f);
+}
+
+void TestEnvironmentNode::addFPS()
+{
+	ui::CtrlText* pCtrlText = CREATE_NODE(ui::CtrlText);
+	pCtrlText->setVolume(100, 50);
+	pCtrlText->setDimensions(100, 50);
+	pCtrlText->setFontPath("Resource/Font/font_3.ttf");
+	pCtrlText->setFontSize(22);
+	pCtrlText->setScale(1);
+	pCtrlText->setPosition(0, 0, 0);
+	pCtrlText->setAnchorPoint(0, 0, 0);
+	pCtrlText->setTextHorizontalAlignment(sys::HorizontalAlignment::LEFT);
+	pCtrlText->setTextVerticalAlignment(sys::VerticalAlignment::TOP);
+	pCtrlText->setTextColor(phy::Color3B(255, 255, 255));
+	Utility::loadDefaultShader(pCtrlText);
+	this->addChild(pCtrlText);
+
+	CallFuncN* pCallFunc = CREATE_ACTION(CallFuncN);
+	pCallFunc->setFunc([](sys::Object* sender) {
+		char strVal[255] = {};
+		uint64_t diffTime = sys::TimeClock::getDifferenceOfRecordTime();
+		sprintf(strVal, "FPS %d", diffTime);
+		((ui::CtrlText*)sender)->setString(strVal);
+	});
+
+	DelayAction* pDelayAction = CREATE_ACTION(DelayAction);
+	pDelayAction->setDuration(1);
+
+	SequenceAction* pSequenceAction = CREATE_ACTION(SequenceAction);
+	pSequenceAction->addAction(pCallFunc);
+	pSequenceAction->addAction(pDelayAction);
+
+	RepeateForeverAction* pRepeateForeverAction = CREATE_ACTION(RepeateForeverAction);
+	pRepeateForeverAction->setAction(pSequenceAction);
+
+	pCtrlText->getActionProxy()->runAction(pRepeateForeverAction);
 }

@@ -19,7 +19,7 @@ void ui::Scale9ImageLoader::parseAttributes()
 	phy::Color4B color;
 
 	LOAD_WIDGET_ATTRIBUTE(PROPERTY_SCALE9_MARGIN, setMargin, margin);
-	LOAD_WIDGET_ATTRIBUTE(PROPERTY_COLOR, setColor, color);
+	//LOAD_WIDGET_ATTRIBUTE(PROPERTY_COLOR, setColor, color);
 	//LOAD_WIDGET_ATTRIBUTE(PROPERTY_BLEND, setBlend, blend);
 	LOAD_WIDGET_STRING_ATTRIBUTE(PROPERTY_PATH, setImagePath, filepath);
 
@@ -29,7 +29,7 @@ void ui::Scale9ImageLoader::parseAttributes()
 void ui::Scale9ImageLoader::saveAttributes()
 {
 	SAVE_WIDGET_ATTRIBUTE(PROPERTY_SCALE9_MARGIN, getMargin);
-	SAVE_WIDGET_ATTRIBUTE(PROPERTY_COLOR, getColor);
+	//SAVE_WIDGET_ATTRIBUTE(PROPERTY_COLOR, getColor);
 	//SAVE_WIDGET_ATTRIBUTE(PROPERTY_BLEND, getBlend);
 	SAVE_WIDGET_ATTRIBUTE(PROPERTY_PATH, getImagePath);
 

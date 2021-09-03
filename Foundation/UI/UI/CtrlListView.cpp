@@ -114,14 +114,14 @@ bool ui::CtrlListView::init()
 	return true;
 }
 
-void ui::CtrlListView::setScrollDirection(ScrollDirection direction)
+void ui::CtrlListView::setDirection(ScrollDirection direction)
 {
 	_scrollDirection = direction;
 
 	notify(NodeNotifyType::GEOMETRY);
 }
 
-ui::ScrollDirection ui::CtrlListView::getScrollDirection()
+ui::ScrollDirection ui::CtrlListView::getDirection()
 {
 	return _scrollDirection;
 }

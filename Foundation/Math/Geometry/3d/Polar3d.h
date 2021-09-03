@@ -33,6 +33,6 @@ namespace math
 		virtual bool operator==(const Polar3d& polar);
 		virtual bool operator!=(const Polar3d& polar);
 	public:
-		operator Vector3();
+		operator Vector3() const;
 	};
 }

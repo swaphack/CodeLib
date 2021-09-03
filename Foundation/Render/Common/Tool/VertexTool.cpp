@@ -29,16 +29,16 @@ void VertexTool::setTexture2DVertices(RectVertex* texRect, const math::Vector3& 
 	float y1 = position.getY() + volume.getHeight() * (1 - anchor.getY());
 
 	// left down
-	texRect->setLeftDownPoint(math::Vector3(x0, y0, position.getZ()));
+	texRect->setLeftBottomPosition(math::Vector3(x0, y0, position.getZ()));
 
 	// right down
-	texRect->setRightDownPoint(math::Vector3(x1, y0, position.getZ()));
+	texRect->setRightBottomPosition(math::Vector3(x1, y0, position.getZ()));
 
 	// right up
-	texRect->setRightUpPoint(math::Vector3(x1, y1, position.getZ()));
+	texRect->setRightTopPosition(math::Vector3(x1, y1, position.getZ()));
 
 	// left up
-	texRect->setLeftUpPoint(math::Vector3(x0, y1, position.getZ()));
+	texRect->setLeftTopPosition(math::Vector3(x0, y1, position.getZ()));
 }
 
 void VertexTool::setTexture3DVertices(CubeVertex* texcube, const math::Vector3& position, const math::Volume& volume, const math::Vector3& anchor)
@@ -56,30 +56,30 @@ void VertexTool::setTexture3DVertices(CubeVertex* texcube, const math::Vector3& 
 	//------ front ------
 
 	// left down
-	texcube->setFrontLeftDownPosition(math::Vector3(x0, y0, z0));
+	texcube->setFrontLeftBottomPosition(math::Vector3(x0, y0, z0));
 
 	// right down
-	texcube->setFrontRightDownPosition(math::Vector3(x1, y0, z0));
+	texcube->setFrontRightButtomPosition(math::Vector3(x1, y0, z0));
 
 	// right up
-	texcube->setFrontRightUpPosition(math::Vector3(x1, y1, z0));
+	texcube->setFrontRightTopPosition(math::Vector3(x1, y1, z0));
 
 	// left up
-	texcube->setFrontLeftUpPosition(math::Vector3(x0, y1, z0));
+	texcube->setFrontLeftTopPosition(math::Vector3(x0, y1, z0));
 
 	//------ back ------
 
 	// left down
-	texcube->setBackLeftDownPosition(math::Vector3(x1, y0, z1));
+	texcube->setBackLeftBottomPosition(math::Vector3(x1, y0, z1));
 
 	// right down
-	texcube->setBackRightDownPosition(math::Vector3(x0, y0, z1));
+	texcube->setBackRightBottomPosition(math::Vector3(x0, y0, z1));
 
 	// right up
-	texcube->setBackRightUpPosition(math::Vector3(x0, y1, z1));
+	texcube->setBackRightTopPosition(math::Vector3(x0, y1, z1));
 
 	// left up
-	texcube->setBackLeftUpPosition(math::Vector3(x1, y1, z1));
+	texcube->setBackLeftTopPosition(math::Vector3(x1, y1, z1));
 }
 
 void render::VertexTool::setTexture2DFlip(float(*uvs)[8], bool bFlipX, bool bFlipY)

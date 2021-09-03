@@ -23,10 +23,6 @@ bool MultiFaceCube::init()
 		return false;
 	}
 
-	addNotifyListener(NodeNotifyType::BODY, [this](){
-		onMultiFaceCubeBodyChanged();
-	});
-
 	return true;
 }
 
@@ -92,16 +88,14 @@ void render::MultiFaceCube::initBufferObject()
 
 		CubeFace face = (CubeFace)i;
 
-		pMesh->setUVs(4, _cubePosition.getFaceVertex((CubeFace)i)->uvs, 2);
-		pMesh->setIndices(6, _cubePosition.getFaceVertex((CubeFace)i)->indices, 1);
-		pMesh->setColors(4, _cubePosition.getFaceVertex((CubeFace)i)->colors, 4);
+		pMesh->setUVs(4, _cubeVertex.getFaceVertex((CubeFace)i)->uvs, 2);
+		pMesh->setIndices(6, _cubeVertex.getFaceVertex((CubeFace)i)->indices, 1);
+		pMesh->setColors(4, _cubeVertex.getFaceVertex((CubeFace)i)->colors, 4);
 	}
 }
 
-void render::MultiFaceCube::onMultiFaceCubeBodyChanged()
+void render::MultiFaceCube::updateMultiDrawNode3DMesh()
 {
-	VertexTool::setTexture3DVertices(&_cubePosition, math::Vector3(), _volume, _anchor);
-
 	for (int i = 0; i < (int)CubeFace::MAX; i++)
 	{
 		std::string name = CubeFaceString[i];
@@ -111,7 +105,7 @@ void render::MultiFaceCube::onMultiFaceCubeBodyChanged()
 			return;
 		}
 		CubeFace face = (CubeFace)i;
-		pMesh->getMeshDetail()->setVertices(4, _cubePosition.getFaceVertex(face)->vertices, 3);
+		pMesh->getMeshDetail()->setVertices(4, _cubeVertex.getFaceVertex(face)->vertices, 3);
 	}
 
 	this->updateMeshData();

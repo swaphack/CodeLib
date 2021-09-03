@@ -3,6 +3,7 @@
 #include "Base/macros.h"
 
 sys::TimeClock sys::TimeClock::_recordTime = sys::TimeClock();
+uint64_t sys::TimeClock::_recordDiffTime = 0;
 
 sys::TimeClock::TimeClock()
 {
@@ -111,15 +112,15 @@ void sys::TimeClock::startRecord()
 	_recordTime = *getNow();
 }
 
-void sys::TimeClock::record()
+uint64_t sys::TimeClock::getDifferenceOfRecordTime()
 {
-	auto time = *getNow();
-
-	//PRINT("Different Time %lld\n", time - _recordTime);
-
-	_recordTime = time;
+	return _recordDiffTime;
 }
 
 void sys::TimeClock::endRecord()
 {
+	auto time = *getNow();
+
+	_recordDiffTime = time - _recordTime;
+	_recordTime = time;
 }

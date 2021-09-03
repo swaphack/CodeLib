@@ -138,7 +138,7 @@ bool Polar2d::operator!=(const Polar2d& polar)
 	return polar.getRadian() != getRadian() || polar.getRadius() != getRadius();
 }
 
-Polar2d::operator Vector2()
+Polar2d::operator Vector2() const
 {
 	return Vector2(getRadius() * cos(getRadian()), getRadian()* sin(getRadian()));
 }

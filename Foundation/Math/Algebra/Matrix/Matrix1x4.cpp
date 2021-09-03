@@ -40,7 +40,7 @@ Matrix1x4::Matrix1x4(float x, float y, float z, float w)
 	(*this)[3] = w;
 }
 
-Matrix1x4::operator Vector3()
+Matrix1x4::operator Vector3() const
 {
 	float w = (*this)[3];
 
@@ -57,7 +57,7 @@ math::Matrix1x4::~Matrix1x4()
 
 }
 
-math::Matrix1x4 math::Matrix1x4::operator*(const math::Matrix4x4& mat)
+math::Matrix1x4 math::Matrix1x4::operator*(const math::Matrix4x4& mat) const
 {
 	Matrix<float, 4, 4> mat0;
 	mat0.setRow(0, this->getValue());

@@ -39,30 +39,30 @@ void ue::SinglePanel::updatePosition(const ui::CtrlWidget* item, sys::CSSDirecti
 		return;
 	}
 
-	auto pRectPoints = &item->getLocalRectVertex();
+	auto pRectPoints = &item->getBoxVertex();
 
 	if (eDir == sys::CSSDirection::Top)
 	{
-		float x = pRectPoints->leftUp.getX();
-		float y = pRectPoints->leftUp.getY();
+		float x = pRectPoints->getLeftTop().getX();
+		float y = pRectPoints->getLeftTop().getY();
 		this->setPositionLeftBottom(math::Vector2(x, y));
 	}
 	else if (eDir == sys::CSSDirection::Right)
 	{
-		float x = pRectPoints->rightUp.getX();
-		float y = render::Tool::getGLViewHeight() - pRectPoints->rightUp.getY();
+		float x = pRectPoints->getRightBottom().getX();
+		float y = render::Tool::getGLViewHeight() - pRectPoints->getRightBottom().getY();
 		this->setPositionLeftTop(math::Vector2(x, y));
 	}
 	else if (eDir == sys::CSSDirection::Bottom)
 	{
-		float x = pRectPoints->leftDown.getX();
-		float y = render::Tool::getGLViewHeight() - pRectPoints->leftDown.getY();
+		float x = pRectPoints->getLeftBottom().getX();
+		float y = render::Tool::getGLViewHeight() - pRectPoints->getLeftBottom().getY();
 		this->setPositionLeftTop(math::Vector2(x, y));
 	}
 	else if (eDir == sys::CSSDirection::Left)
 	{
-		float x = render::Tool::getGLViewWidth() - pRectPoints->leftUp.getX();
-		float y = render::Tool::getGLViewHeight() - pRectPoints->leftUp.getY();
+		float x = render::Tool::getGLViewWidth() - pRectPoints->getLeftTop().getX();
+		float y = render::Tool::getGLViewHeight() - pRectPoints->getLeftTop().getY();
 		this->setPositionRightTop(math::Vector2(x, y));
 	}
 }

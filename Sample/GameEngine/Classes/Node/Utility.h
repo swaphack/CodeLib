@@ -1,13 +1,19 @@
 #pragma once
 
 #include "render.h"
+#include "ui.h"
 
 class Utility
 {
 public:
+	static void loadPrimitiveShader(render::DrawNode* node);
+	static void loadPrimitiveShader(ui::CtrlWidget* node);
+
 	static void loadDefaultShader(render::DrawNode* node);
+	static void loadDefaultShader(ui::CtrlWidget* node);
 	static void loadDefaultShader(render::MultiDrawNode* node);
 
+	static void loadShaderVF(ui::CtrlWidget* node, const std::string& vpath, const std::string& fpath);
 	static void loadShaderVF(render::DrawNode* node, const std::string& vpath, const std::string& fpath);
 	static void loadShaderVTF(render::DrawNode* node, const std::string& vpath, const std::string& tepath, const std::string& fpath);
 	static void loadShaderVTF(render::DrawNode* node, const std::string& vpath, const std::string& tcpath, const std::string& tepath, const std::string& fpath);
@@ -34,7 +40,5 @@ protected:
 
 	static void loadShaderVF(render::Materials* mats, const std::string& vpath, const std::string& fpath);
 public:
-	static std::string texture3dVertexPath;
-	static std::string texture3dFragmentPath;
 	static bool bInitShaderAttrib;
 };

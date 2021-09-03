@@ -96,7 +96,7 @@ Quaternion Quaternion::operator*(float k) const
 	return q;
 }
 
-Quaternion::operator Matrix4x4()
+Quaternion::operator Matrix4x4() const
 {
 	/*
 	float a = (*this)[0];

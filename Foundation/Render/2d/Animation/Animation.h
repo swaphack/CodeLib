@@ -1,19 +1,17 @@
 #pragma once
 
-#include "2d/Base/DrawTexture2D.h"
+#include "Common/Node/Node.h"
 #include "Common/Action/SchedulerProtocol.h"
 
 namespace render
 {
-	class CtrlFrame;
-
 	// ¶¯»­¿Ø¼þ
-	class CtrlAnimation : 
-		public DrawTexture2D
+	class Animation : 
+		public Node
 	{
 	public:
-		CtrlAnimation();
-		virtual ~CtrlAnimation();
+		Animation();
+		virtual ~Animation();
 	public:
 		virtual bool init();
 	public:

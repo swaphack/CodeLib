@@ -18,13 +18,15 @@ TestTextNode::~TestTextNode()
 
 void TestTextNode::initNodes()
 {
-	this->testTimeText();
+	//this->testTimeText();
 	this->testChineseText();
 }
 
 void TestTextNode::testTimeText()
 {
 	CtrlText* pCtrlText = CREATE_NODE(CtrlText);
+	pCtrlText->setVolume(200, 400);
+	pCtrlText->setDimensions(300, 0);
 	pCtrlText->setFontPath("Resource/Font/font_3.ttf");
 	pCtrlText->setFontSize(58);
 	pCtrlText->setScale(1);
@@ -66,6 +68,7 @@ void TestTextNode::testChineseText()
 	pCtrlText->setScale(1);
 	pCtrlText->setString("中华 fdsaf545放大发人民共和国");
 	pCtrlText->setPosition(512, 384, 0);
+	pCtrlText->setVolume(300, 0);
 	pCtrlText->setDimensions(300, 0);
 	pCtrlText->setTextColor(phy::Color3B(125, 0, 0));
 	this->addChild(pCtrlText);

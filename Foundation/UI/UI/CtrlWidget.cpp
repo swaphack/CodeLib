@@ -22,7 +22,7 @@ ui::CtrlWidget::~CtrlWidget()
 
 bool ui::CtrlWidget::init()
 {
-	if (!DrawNode2D::init())
+	if (!Node::init())
 	{
 		return false;
 	}
@@ -39,12 +39,6 @@ bool ui::CtrlWidget::init()
 		broadcastBodyChange();
 	});
 
-	FragmentDepthTest* pDepthTest = this->getFragOperator()->getHandle<FragmentDepthTest>();
-	if (pDepthTest)
-	{
-		pDepthTest->setEnabled(false);
-	}
-
 	this->addTouchFunc(render::TouchType::ENDED, [this](const math::Vector2& touchPoint) {
 		for (auto item : _clickFuncs)
 		{
@@ -58,6 +52,17 @@ bool ui::CtrlWidget::init()
 	*/
 
 	return true; 
+}
+
+render::DrawNode2D* ui::CtrlWidget::getRenderNode()
+{
+	return nullptr;
+}
+
+bool ui::CtrlWidget::containPoint(const math::Vector2& touchPoint)
+{
+	math::Polygon rect = _worldRectVertex;
+	return rect.contains(touchPoint);
 }
 
 void ui::CtrlWidget::beforeDrawNode()
@@ -78,8 +83,6 @@ void ui::CtrlWidget::beforeDrawNode()
 void ui::CtrlWidget::afterDrawNode()
 {
 	this->drawAllChildren();
-
-	this->drawRect();
 
 	if (isClippingEnabled())
 	{
@@ -107,7 +110,6 @@ void ui::CtrlWidget::addWidget(CtrlWidget* widget, int zOrder)
 	}
 
 	_widgets.push_back(widget);
-
 	this->addChild(widget, zOrder);
 }
 
@@ -253,16 +255,20 @@ void ui::CtrlWidget::removeAllClickFuncs()
 
 void ui::CtrlWidget::onCtrlWidgetBodyChange()
 {
-	if (isClippingEnabled())
-	{
-		float x0 = _worldRectPoints.leftDown.getX();
-		float y0 = _worldRectPoints.leftDown.getY();
-		float x1 = _worldRectPoints.rightUp.getX();
-		float y1 = _worldRectPoints.rightUp.getY();
+	VertexTool::setTexture2DVertices(&_localRectVertex, math::Vector3(), _volume, _anchor);
 
-		_clipRect.setOrigin(x0, y0);
-		_clipRect.setSize(x1 - x0, y1 - y0);
-	}
+	_worldRectVertex.setLeftBottomPosition(this->convertLocalPostitionToWorld(_localRectVertex.getLeftBottomPosition()));
+	_worldRectVertex.setRightBottomPosition(this->convertLocalPostitionToWorld(_localRectVertex.getRightBottomPosition()));
+	_worldRectVertex.setRightTopPosition(this->convertLocalPostitionToWorld(_localRectVertex.getRightTopPosition()));
+	_worldRectVertex.setLeftTopPosition(this->convertLocalPostitionToWorld(_localRectVertex.getLeftTopPosition()));
+
+	setBoxVertices(_worldRectVertex);
+
+	math::Vector2 pos0 = _worldRectVertex.getLeftBottomPosition();
+	math::Vector2 pos1 = _worldRectVertex.getRightTopPosition();
+
+	_clipRect.setOrigin(pos0 + 0.5f * math::Vector2(Tool::getGLViewWidth(), Tool::getGLViewHeight()));
+	_clipRect.setSize(pos1 - pos0);
 }
 
 void ui::CtrlWidget::broadcastBodyChange()

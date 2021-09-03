@@ -1,10 +1,10 @@
-#include "CtrlAnimation.h"
+#include "Animation.h"
 #include "Audio/CtrlAudioSource.h"
 #include "Common/Action/import.h"
 
 using namespace render;
 
-CtrlAnimation::CtrlAnimation()
+Animation::Animation()
 :_speedRatio(1.0f)
 , _frameRate(1.0f)
 , _frame(0)
@@ -12,13 +12,13 @@ CtrlAnimation::CtrlAnimation()
 {
 }
 
-CtrlAnimation::~CtrlAnimation()
+Animation::~Animation()
 {
 }
 
-bool CtrlAnimation::init()
+bool Animation::init()
 {
-	if (!DrawTexture2D::init())
+	if (!Node::init())
 	{
 		return false;
 	}
@@ -28,27 +28,27 @@ bool CtrlAnimation::init()
 	return true;
 }
 
-void CtrlAnimation::setSpeedRatio(float ratio)
+void Animation::setSpeedRatio(float ratio)
 {
 	_speedRatio = ratio;
 }
 
-float CtrlAnimation::getSpeedRatio()
+float Animation::getSpeedRatio()
 {
 	return _speedRatio;
 }
 
-void CtrlAnimation::setFrameRate(float ratio)
+void Animation::setFrameRate(float ratio)
 {
 	_frameRate = ratio;
 }
 
-float CtrlAnimation::getFrameRate()
+float Animation::getFrameRate()
 {
 	return _frameRate;
 }
 
-void CtrlAnimation::setFrame(int frame)
+void Animation::setFrame(int frame)
 {
 	_frame = static_cast<float>(frame);
 	_duration = 0;
@@ -56,12 +56,12 @@ void CtrlAnimation::setFrame(int frame)
 	this->notify(NodeNotifyType::ANIMATION);
 }
 
-int CtrlAnimation::getFrame()
+int Animation::getFrame()
 {
 	return static_cast<int>(_frame);
 }
 
-void CtrlAnimation::update(float interval)
+void Animation::update(float interval)
 {
 	_duration += interval * getSpeedRatio();
 	if (_duration > getFrameRate())

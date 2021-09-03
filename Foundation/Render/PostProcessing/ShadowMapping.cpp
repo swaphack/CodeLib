@@ -4,6 +4,7 @@
 #include "Common/Texture/Texture2D.h"
 #include "Common/FrameRender/import.h"
 #include "Common/View/Camera.h"
+#include "Common/Tool/VertexTool.h"
 #include "Graphic/import.h"
 #include "3d/Common/Model.h"
 
@@ -75,8 +76,11 @@ void render::ShadowMapping::beginRenderShadow()
 
 void render::ShadowMapping::updateShadowMapping()
 {
-	int width = _localRectPoints.getWidth();
-	int height = _localRectPoints.getHeight();
+	render::RectVertex rectVertex;
+	render::VertexTool::setTexture2DVertices(&rectVertex, math::Vector3(), _volume, _anchor);
+
+	int width = rectVertex.getRightTopPosition().getX() - rectVertex.getLeftBottomPosition().getX();
+	int height = rectVertex.getRightTopPosition().getY() - rectVertex.getLeftBottomPosition().getY();
 	if (width == 0 || height == 0)
 	{
 		return;

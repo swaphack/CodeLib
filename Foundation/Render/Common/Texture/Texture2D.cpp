@@ -54,9 +54,9 @@ void render::Texture2D::setTextureImage(int level, TextureInternalSizedFormat in
 void render::Texture2D::load(const phy::Color4B& color)
 {
 	TextureSetting setting;
-	setting.wrapS = TextureWrapMode::REPEAT;
-	setting.wrapT = TextureWrapMode::REPEAT;
-	setting.wrapR = TextureWrapMode::REPEAT;
+	//setting.wrapS = TextureWrapMode::REPEAT;
+	//setting.wrapT = TextureWrapMode::REPEAT;
+	//setting.wrapR = TextureWrapMode::REPEAT;
 
 	this->setTextureSetting(setting);
 	GLDebug::showError();

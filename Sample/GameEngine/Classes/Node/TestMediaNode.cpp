@@ -20,7 +20,7 @@ void TestMediaNode::initNodes()
 void TestMediaNode::testMedia()
 {
 	std::string url2 = "Resource/Video/1.flv";
-	CtrlMedia* pMedia = CREATE_NODE(CtrlMedia);
+	Media* pMedia = CREATE_NODE(Media);
 	pMedia->loadFromURL(url2);
 	pMedia->setVolume(512, 384);
 	pMedia->setPosition(0, 0);

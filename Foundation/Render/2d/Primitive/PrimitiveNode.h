@@ -55,6 +55,10 @@ namespace render
 		*/
 		void appendPoints(const std::vector<math::Vector3>& points, const phy::Color4F& color);
 		/**
+		*	设置坐标点
+		*/
+		void appendPoints(int count, const math::Vector3* points, const phy::Color4F& color);
+		/**
 		*	移除所有点坐标
 		*/
 		void removeAllPoints();

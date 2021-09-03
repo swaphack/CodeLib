@@ -22,6 +22,8 @@ protected:
 	void testMatrix();
 
 	void testMultiPort();
+
+	void addFPS();
 private:
 	int _viewType = 0;
 

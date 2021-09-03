@@ -18,7 +18,7 @@ namespace render
 
 
 	/**
-	*	绘制节点
+	*	多网格节点
 	*/
 	class MultiDrawNode : 
 		public Node,

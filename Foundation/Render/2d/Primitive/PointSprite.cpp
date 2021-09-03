@@ -5,6 +5,7 @@
 #include "Common/Texture/Texture2D.h"
 #include "Common/Texture/TextureCache.h"
 #include "Graphic/import.h"
+#include "Common/Tool/VertexTool.h"
 
 render::PointSprite::PointSprite()
 {
@@ -49,8 +50,11 @@ int render::PointSprite::getSpriteCount() const
 
 void render::PointSprite::updatePointSprite()
 {
-	math::Vector3 leftDown = _localRectPoints.leftDown;
-	math::Vector3 rightUp = _localRectPoints.rightUp;
+	render::RectVertex rectVertex;
+	render::VertexTool::setTexture2DVertices(&rectVertex, math::Vector3(), _volume, _anchor);
+
+	math::Vector3 leftDown = rectVertex.getLeftBottomPosition();
+	math::Vector3 rightUp = rectVertex.getRightTopPosition();
 
 	this->removeAllPoints();
 

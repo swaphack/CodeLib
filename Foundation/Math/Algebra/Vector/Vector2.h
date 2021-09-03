@@ -15,7 +15,6 @@ namespace math
 		Vector2(float x, float y);
 		Vector2(const Vector<float, 2>& vector);
 		Vector2(const Vector2& point);
-		Vector2(const Vector3& point);
 		virtual ~Vector2();
 	public:
 		CREATE_INDEX_VALUE(X, 0, float);

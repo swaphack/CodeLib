@@ -4,6 +4,7 @@
 
 alg::Delaunay::Delaunay()
 {
+	_pointSet = new PointSet();
 }
 alg::Delaunay::~Delaunay()
 {
@@ -21,8 +22,8 @@ std::vector<math::TrianglePoints> alg::Delaunay::createWithBowyerWatson(const st
 		return math::CompareVec3(a, b);
 	});
 
-	SAFE_DELETE(_pointSet);
-	_pointSet = new PointSet(points);
+	_pointSet->cleanup();
+	_pointSet->setPoints(points);
 
 	std::set<MeshTriangle*> meshTriangles;
 	auto superTriangle = initSuperTriangle();
