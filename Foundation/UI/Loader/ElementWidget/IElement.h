@@ -16,7 +16,7 @@ namespace ui
 		virtual ~IElement();
 	public:
 		// 加载节点
-		bool load(tinyxml2::XMLElement* pXmlNode, bool clean = true);
+		bool load(tinyxml2::XMLElement* pXmlNode, const math::Size& parentSize, bool clean = true);
 		// 保存节点
 		bool save(tinyxml2::XMLElement* pXmlNode, bool clean = true);
 		// 解析节点的名称
@@ -29,7 +29,6 @@ namespace ui
 		void setLayoutItem(LayoutItem* item);
 
 		LayoutItem* getLayoutItem();
-
 		/**
 		*	默认字体
 		*/
@@ -38,6 +37,14 @@ namespace ui
 		*	设置默认字体
 		*/
 		void setFontPath(const std::string& fontPath);
+		/**
+		*	默认字体
+		*/
+		const math::Size& getParentSize() const;
+		/**
+		*	设置默认字体
+		*/
+		void setParentSize(const math::Size& size);
 	protected:
 		// 属性
 		WidgetProperty* getNodeProperty();
@@ -53,10 +60,13 @@ namespace ui
 		// 节点属性
 		WidgetProperty* _nodeProperty;
 	protected:
+		// ui控件
 		CtrlWidget* _node = nullptr;
-
+		// 布局配置
 		LayoutItem* _layoutItem = nullptr;
 		// 默认字体
 		std::string _defaultFontPath;
+		// 父节点大小
+		math::Size _parentSize;
 	};
 }

@@ -56,6 +56,8 @@ void WidgetLoader::parseAttributes()
 	LOAD_WIDGET_ATTRIBUTE(PROPERTY_ROTATION, setRotation, rotation);
 	LOAD_WIDGET_ATTRIBUTE(PROPERTY_CLIP, setClippingEnabled, bClip);
 	LOAD_WIDGET_ATTRIBUTE(PROPERTY_TOUCH_ENABLE, setTouchEnabled, bEnableTouch);
+
+	this->getLayoutItem()->resize(getParentSize());
 }
 
 void WidgetLoader::saveAttributes()

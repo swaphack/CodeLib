@@ -341,7 +341,7 @@ IElement* UIProxy::getElement(const std::string& name)
 	return it->second();
 }
 
-CtrlWidget* UIProxy::initWidget(tinyxml2::XMLElement* xmlNode)
+CtrlWidget* UIProxy::initWidget(tinyxml2::XMLElement* xmlNode, const math::Size& parentSize)
 {
 	if (xmlNode == nullptr)
 	{
@@ -356,7 +356,7 @@ CtrlWidget* UIProxy::initWidget(tinyxml2::XMLElement* xmlNode)
 	}
 
 	element->setFontPath(_defaultFontPath);
-	if (!element->load(xmlNode))
+	if (!element->load(xmlNode, parentSize))
 	{
 		return nullptr;
 	}
@@ -378,10 +378,9 @@ bool UIProxy::loadWidget(CtrlWidget* pLayout, tinyxml2::XMLElement* xmlNode)
 	tinyxml2::XMLElement* childNode = xmlNode;
 	while (childNode)
 	{
-		childItem = initWidget(childNode);
+		childItem = initWidget(childNode, pLayout->getSize());
 		if (childItem)
 		{
-			childItem->resize(pLayout->getSize());
 			pLayout->addWidget(childItem);
 			if (childNode->FirstChild())
 			{
@@ -419,12 +418,11 @@ CtrlWidget* UIProxy::loadRoot(tinyxml2::XMLElement* xmlNode, const math::Size& s
 		return nullptr;
 	}
 
-	CtrlWidget* pWidget = initWidget(firstChild);
+	CtrlWidget* pWidget = initWidget(firstChild, size);
 	if (pWidget == nullptr)
 	{// ¿Õ½Úµã
 		return nullptr;
 	}
-	pWidget->resize(size);
 	loadWidget(pWidget, firstChild->FirstChildElement());
 
 	return pWidget;

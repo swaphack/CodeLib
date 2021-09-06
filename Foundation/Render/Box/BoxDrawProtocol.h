@@ -67,6 +67,8 @@ namespace render
 		*	盒子顶点
 		*/
 		void setBoxVertices(const render::RectVertex& rectVertex);
+
+		const render::RectVertex& getLocalRectVertex() const;
 	protected:
 		// 本地矩形框
 		render::RectVertex _localRectVertex;

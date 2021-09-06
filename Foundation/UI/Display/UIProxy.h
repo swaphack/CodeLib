@@ -123,7 +123,7 @@ namespace ui
 	protected:
 		//////////////////////////////////////////////////////////////////////////
 		// 加载单一节点
-		CtrlWidget* initWidget(tinyxml2::XMLElement* xmlNode);
+		CtrlWidget* initWidget(tinyxml2::XMLElement* xmlNode, const math::Size& parentSize);
 		// 加载布局
 		bool loadWidget(CtrlWidget* pCtrlWidget, tinyxml2::XMLElement* xmlNode);
 		// 加载根元素

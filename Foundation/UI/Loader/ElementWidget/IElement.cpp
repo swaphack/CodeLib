@@ -12,7 +12,7 @@ IElement::~IElement()
 	SAFE_DELETE(_nodeProperty);
 }
 
-bool IElement::load(tinyxml2::XMLElement* pXmlNode, bool clean/* = true*/)
+bool IElement::load(tinyxml2::XMLElement* pXmlNode, const math::Size& parentSize, bool clean/* = true*/)
 {
 	if (pXmlNode == nullptr)
 	{
@@ -37,16 +37,17 @@ bool IElement::load(tinyxml2::XMLElement* pXmlNode, bool clean/* = true*/)
 	initLayoutItem();
 	initWidget();
 
-	this->parseAttributes();
+	this->setParentSize(parentSize);
 
 	std::string name = pXmlNode->Name();
-
 	_nodeProperty->setName(name);
 	if (_layoutItem && _node)
 	{
 		_layoutItem->setWidgetName(name);
 		_node->setLayoutItem(_layoutItem);
 	}
+
+	this->parseAttributes();
 
 	return true;
 }
@@ -83,6 +84,16 @@ bool IElement::save(tinyxml2::XMLElement* pXmlNode, bool clean/* = true*/)
 void ui::IElement::setFontPath(const std::string& fontPath)
 {
 	_defaultFontPath = fontPath;
+}
+
+const math::Size& ui::IElement::getParentSize() const
+{
+	return _parentSize;
+}
+
+void ui::IElement::setParentSize(const math::Size& size)
+{
+	_parentSize = size;
 }
 
 WidgetProperty* IElement::getNodeProperty()

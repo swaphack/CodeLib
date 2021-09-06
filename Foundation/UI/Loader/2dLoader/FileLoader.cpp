@@ -14,9 +14,9 @@ void ui::FileLoader::parseAttributes()
 {
 	std::string filepath;
 
-	LOAD_WIDGET_ATTRIBUTE(PROPERTY_FILE_PATH, setFilePath, filepath);
-
 	WidgetLoader::parseAttributes();
+
+	LOAD_WIDGET_ATTRIBUTE(PROPERTY_FILE_PATH, setFilePath, filepath);
 }
 
 void ui::FileLoader::saveAttributes()

@@ -95,6 +95,11 @@ void render::Box2DDrawProtocol::setBoxVertices(const render::RectVertex& rectVer
 	rectVertex.toTriangles(_boxPoints);
 }
 
+const render::RectVertex& render::Box2DDrawProtocol::getLocalRectVertex() const
+{
+	return _localRectVertex;
+}
+
 /////////////////////////////////////////////////////////////////////////
 render::Box3DDrawProtocol::Box3DDrawProtocol()
 {

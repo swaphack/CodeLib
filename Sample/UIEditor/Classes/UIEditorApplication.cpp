@@ -29,9 +29,10 @@ void ue::UIEditorApplication::show()
 	Camera::getMainCamera()->setDimensions(eType);
 
 	MainWindow* pWindow = CREATE_NODE(MainWindow);
+	getCanvas()->pushScene(pWindow);
+
 	pWindow->setUIFile(_ideConfig.getIDE().Design);
 	pWindow->setWidgetFile(_ideConfig.getIDE().Control);
-	getCanvas()->pushScene(pWindow);
 
 	std::string filepath = _projectConfig.getRecent().getFile(0);
 	G_PANELEVT->setSelectFile(filepath);

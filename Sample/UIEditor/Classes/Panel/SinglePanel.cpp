@@ -39,30 +39,30 @@ void ue::SinglePanel::updatePosition(const ui::CtrlWidget* item, sys::CSSDirecti
 		return;
 	}
 
-	auto pRectPoints = &item->getBoxVertex();
+	auto pRectPoints = &item->getLocalRectVertex();
 
 	if (eDir == sys::CSSDirection::Top)
 	{
-		float x = pRectPoints->getLeftTop().getX();
-		float y = pRectPoints->getLeftTop().getY();
+		float x = pRectPoints->getLeftTopPosition().getX();
+		float y = pRectPoints->getLeftTopPosition().getY();
 		this->setPositionLeftBottom(math::Vector2(x, y));
 	}
 	else if (eDir == sys::CSSDirection::Right)
 	{
-		float x = pRectPoints->getRightBottom().getX();
-		float y = render::Tool::getGLViewHeight() - pRectPoints->getRightBottom().getY();
+		float x = pRectPoints->getRightBottomPosition().getX();
+		float y = render::Tool::getGLViewHeight() - pRectPoints->getRightBottomPosition().getY();
 		this->setPositionLeftTop(math::Vector2(x, y));
 	}
 	else if (eDir == sys::CSSDirection::Bottom)
 	{
-		float x = pRectPoints->getLeftBottom().getX();
-		float y = render::Tool::getGLViewHeight() - pRectPoints->getLeftBottom().getY();
+		float x = pRectPoints->getLeftBottomPosition().getX();
+		float y = render::Tool::getGLViewHeight() - pRectPoints->getLeftBottomPosition().getY();
 		this->setPositionLeftTop(math::Vector2(x, y));
 	}
 	else if (eDir == sys::CSSDirection::Left)
 	{
-		float x = render::Tool::getGLViewWidth() - pRectPoints->getLeftTop().getX();
-		float y = render::Tool::getGLViewHeight() - pRectPoints->getLeftTop().getY();
+		float x = render::Tool::getGLViewWidth() - pRectPoints->getLeftTopPosition().getX();
+		float y = render::Tool::getGLViewHeight() - pRectPoints->getLeftTopPosition().getY();
 		this->setPositionRightTop(math::Vector2(x, y));
 	}
 }

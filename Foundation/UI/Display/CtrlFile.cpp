@@ -134,17 +134,14 @@ void CtrlFile::initText()
 
 void CtrlFile::autoResize()
 {
-	bool center = false;
 	math::Size viewSize;
 	if (this->isRootView() || !this->isRelativeWithParent())
 	{
 		viewSize.set(render::Tool::getGLViewWidth(), render::Tool::getGLViewHeight());
-		center = true;
 	}
 	else if (this->getParent() == nullptr)
 	{
 		viewSize.set(render::Tool::getGLViewWidth(), render::Tool::getGLViewHeight());
-		center = true;
 	}
 	else
 	{
@@ -152,10 +149,6 @@ void CtrlFile::autoResize()
 	}
 
 	this->setVolume(viewSize);
-	if (center)
-	{
-		this->setPosition(-0.5f * viewSize);
-	}
 }
 
 const math::Size& ui::CtrlFile::getViewSize() const
