@@ -1,6 +1,6 @@
 #include "CtrlWidget.h"
 #include "Layout/LayoutItem.h"
-
+#include "Common/View/Cameras.h"
 #define PROTECTED_ZORDER -999
 
 using namespace render;
@@ -50,13 +50,16 @@ bool ui::CtrlWidget::init()
 		_clickFuncs.clear();
 	});
 	*/
-
+	this->setCamera(G_CAMERAS->getCamera2D());
 	return true; 
 }
 
-render::DrawNode2D* ui::CtrlWidget::getRenderNode()
+void ui::CtrlWidget::setTexShaderProgram(render::ShaderProgram* shaderProgram)
 {
-	return nullptr;
+}
+
+void ui::CtrlWidget::setColorShaderProgram(render::ShaderProgram* shaderProgram)
+{
 }
 
 bool ui::CtrlWidget::containPoint(const math::Vector2& touchPoint)

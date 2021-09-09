@@ -1,6 +1,7 @@
 #pragma once
 
 #include "CtrlImage.h"
+#include <3d/Environment/Environment.h>
 
 namespace ui
 {
@@ -43,10 +44,24 @@ namespace ui
 		*	白边
 		*/
 		const sys::CSSMargin& getMargin() const;
+	public:
 		/**
-		*	获取渲染节点
-		*/ 
-		virtual render::DrawNode2D* getRenderNode();
+		*	设置着色器
+		*/
+		virtual void setTexShaderProgram(render::ShaderProgram* shaderProgram);
+		/**
+		*	渲染节点
+		*/
+		render::DrawScale9Texture2D* getRenderNode() const;
+	public:
+		// 图片颜色
+		void setImageColor(const phy::Color4B& color);
+		// 图片颜色
+		phy::Color4B getImageColor() const;
+		// 图片混合方式
+		void setImageBlend(const render::BlendParam& blend);
+		// 图片混合方式
+		const render::BlendParam& getImageBlend() const;
 	private:
 		// 图片结构
 		sys::ImageDefine _imageDefine;

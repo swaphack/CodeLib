@@ -163,7 +163,7 @@ void CubeVertex::setFrontLeftBottomPosition(const math::Vector3& point)
 	bottom.setLeftTopPosition(point);
 }
 
-void CubeVertex::setFrontRightButtomPosition(const math::Vector3& point)
+void CubeVertex::setFrontRightBottomPosition(const math::Vector3& point)
 {
 	front.setRightBottomPosition(point);
 	right.setLeftBottomPosition(point);

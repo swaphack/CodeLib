@@ -27,10 +27,5 @@ namespace render
 	public:
 		// 务必调用，包含属性修改时通知
 		virtual bool init();
-	protected:
-		// 本地立方体框
-		render::CubeVertex _localRectVertex;
-		// 世界立方体框
-		render::CubeVertex _worldRectVertex;
 	};
 }

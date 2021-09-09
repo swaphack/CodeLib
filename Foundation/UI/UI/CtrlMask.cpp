@@ -28,9 +28,12 @@ bool ui::CtrlMask::init()
 	return true;
 }
 
-render::DrawNode2D* ui::CtrlMask::getRenderNode()
+void ui::CtrlMask::setColorShaderProgram(render::ShaderProgram* shaderProgram)
 {
-	return _maskNode;
+	if (_maskNode)
+	{
+		_maskNode->setShaderProgram(shaderProgram);
+	}
 }
 
 void ui::CtrlMask::onColorChange()

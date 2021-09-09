@@ -69,6 +69,8 @@ LayoutDirection CtrlFile::getLayoutDirection() const
 
 void ui::CtrlFile::setRootView(bool root)
 {
+	if (m_bRootView == root) return;
+
 	m_bRootView = root;
 	if (root)
 	{
@@ -88,8 +90,6 @@ bool ui::CtrlFile::isRootView() const
 void CtrlFile::onWindowSizeChange(const math::Size& inputSize)
 {
 	this->setVolume(inputSize);
-
-	this->setPosition(-0.5f * inputSize);
 }
 
 bool CtrlFile::loadFile()

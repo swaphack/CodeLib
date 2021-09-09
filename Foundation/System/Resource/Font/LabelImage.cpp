@@ -104,7 +104,7 @@ FT_LABEL::~FT_LABEL()
 
 bool FT_LABEL::load(const TextDefine& textDefine, LabelStream* stream)
 {
-	if (!this->initFT(textDefine.filepath.c_str(), (int)textDefine.fontSize, textDefine.border))
+	if (!this->initFT(textDefine.filepath, (int)textDefine.fontSize, textDefine.border))
 	{
 		return false;
 	}

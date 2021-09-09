@@ -74,7 +74,7 @@ namespace render
 		CubeVertex();
 	public:
 		void setFrontLeftBottomPosition(const math::Vector3& point);
-		void setFrontRightButtomPosition(const math::Vector3& point);
+		void setFrontRightBottomPosition(const math::Vector3& point);
 		void setFrontRightTopPosition(const math::Vector3& point);
 		void setFrontLeftTopPosition(const math::Vector3& point);
 

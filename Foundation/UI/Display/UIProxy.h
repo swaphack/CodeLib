@@ -8,6 +8,23 @@ namespace ui
 	class IElement;
 	class CtrlWidget;
 
+	// ui纹理着色器路径
+	struct UITexShader
+	{
+		// 顶点着色器
+		std::string vertex;
+		// 片元着色器
+		std::string fragment;
+	};
+	// ui颜色着色器路径
+	struct UIColorShader
+	{
+		// 顶点着色器
+		std::string vertex;
+		// 片元着色器
+		std::string fragment;
+	};
+
 	// ui加载
 	class UIProxy
 	{
@@ -27,6 +44,15 @@ namespace ui
 		*	保存ui配置文件
 		*/
 		bool saveFile(CtrlWidget* CtrlWidget, const std::string& filepath, const math::Size& designSize);
+	public:
+		/**
+		*	设置纹理着色器路径
+		*/
+		void setTexShader(const std::string& vertexShader, const std::string& fragmentShader);
+		/**
+		*	设置颜色着色器路径
+		*/
+		void setColorShader(const std::string& vertexShader, const std::string& fragmentShader);
 	public:
 		/**
 		*	注册节点解析
@@ -150,7 +176,11 @@ namespace ui
 		LayoutDirection _designDirection;
 		// 默认字体
 		std::string _defaultFontPath;
+		// 纹理着色器路径
+		UITexShader _texShader;
+		// 颜色着色器路径
+		UITexShader _colorShader;
 	}; 
 
-	#define G_UIPROXY UIProxy::getInstance()
+	#define G_UIPROXY ui::UIProxy::getInstance()
 }

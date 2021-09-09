@@ -20,6 +20,10 @@ namespace ui
 		virtual ~CtrlButton();
 	public:
 		virtual bool init();
+		/**
+		*	设置着色器
+		*/
+		virtual void setTexShaderProgram(render::ShaderProgram* shaderProgram);
 	public:
 		/**
 		*	设置文本

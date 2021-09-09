@@ -591,6 +591,15 @@
     <ClCompile Include="Box\BoxDrawProtocol.cpp">
       <Filter>Box</Filter>
     </ClCompile>
+    <ClCompile Include="Common\View\Camera2D.cpp">
+      <Filter>Common\View</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\View\Camera3D.cpp">
+      <Filter>Common\View</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\View\Cameras.cpp">
+      <Filter>Common\View</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Common\Node\import.h">
@@ -1364,6 +1373,15 @@
     </ClInclude>
     <ClInclude Include="Box\import.h">
       <Filter>Box</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\View\Camera2D.h">
+      <Filter>Common\View</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\View\Camera3D.h">
+      <Filter>Common\View</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\View\Cameras.h">
+      <Filter>Common\View</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

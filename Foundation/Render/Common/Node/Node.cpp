@@ -51,6 +51,8 @@ bool Node::init()
 	_scheduler->setTarget(this);
 	_scheduler->setHandler([this](float dt) { this->update(dt); });
 
+	this->setCamera(G_CAMERAS->getCamera3D());
+
 	return true;
 }
 

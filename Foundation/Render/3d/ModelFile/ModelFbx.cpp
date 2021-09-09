@@ -30,25 +30,22 @@ bool ModelFbx::load(const std::string& filepath)
 	return true;
 }
 
-bool render::ModelFbx::loadAsyn(const std::string& filepath, const std::function<void(Node*)>& callback)
+bool render::ModelFbx::loadAsyn(const std::string& filepath, const LoadedModelCallback& func)
 {
 	std::string fullpath = G_FILEPATH->getFilePath(filepath);
 	if (fullpath.empty())
 	{
 		return false;
 	}
-	this->startThread([this, fullpath, callback]() {
+	this->setAsynLoadedCallback(func);
+	this->startThread([fullpath, this]() {
 		sys::ModelDetailFbx* pFile = sys::Loader::loadModel<sys::ModelDetailFbx>(fullpath);
 		if (!pFile)
 		{
 			return;
 		}
 		this->setModelData(pFile);
-		SAFE_DELETE(pFile);
-		if (callback)
-		{
-			callback(this);
-		}
+		SAFE_RELEASE(pFile);
 	});
 
 	return true;

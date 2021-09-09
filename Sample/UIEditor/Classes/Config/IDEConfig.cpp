@@ -11,6 +11,11 @@ const ue::IDEConfig::IDESetting& ue::IDEConfig::getIDE() const
 	return _ide;
 }
 
+const ue::IDEConfig::ShaderSetting& ue::IDEConfig::getShader() const
+{
+	return _shader;
+}
+
 void ue::IDEConfig::Dispose()
 {
 }
@@ -39,6 +44,33 @@ void ue::IDEConfig::loadXml(const std::string& filepath)
 			_ide.Control = child->GetText();
 		}
 	}
+	element = _helper.getElement("Shader");
+	if (element)
+	{
+		auto child = element->FirstChildElement("TexVertex");
+		if (child && child->GetText())
+		{
+			_shader.TexVertex = child->GetText();
+		}
+
+		child = element->FirstChildElement("TexFragment");
+		if (child && child->GetText())
+		{
+			_shader.TexFragment = child->GetText();
+		}
+		child = element->FirstChildElement("ColorVertex");
+		if (child && child->GetText())
+		{
+			_shader.ColorVertex = child->GetText();
+		}
+
+		child = element->FirstChildElement("ColorFragment");
+		if (child && child->GetText())
+		{
+			_shader.ColorFragment = child->GetText();
+		}
+	}
+
 	element = _helper.getElement("Text");
 	if (element)
 	{

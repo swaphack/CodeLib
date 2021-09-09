@@ -188,6 +188,13 @@ void Matrix4x4::setRotationByLine(const Vector3& src, const Vector3& dest, float
 	(*this)[15] = 1;
 }
 
+Vector3 math::Matrix4x4::getEularAngle() const
+{
+	Vector3 radian = getEularRadian();
+	radian *= 180 / M_PI;
+	return radian;
+}
+
 Matrix4x1 Matrix4x4::operator*(const Matrix4x1& mat) const
 {
 	float value[4] = { 0 };
@@ -237,7 +244,7 @@ Matrix4x4 Matrix4x4::operator*(const Matrix4x4& mat) const
 	return Matrix4x4(value);
 }
 
-Vector3 Matrix4x4::getEularAngle() const
+Vector3 Matrix4x4::getEularRadian() const
 {
 	float r11 = getValue(0, 0);
 	float r12 = getValue(0, 1);

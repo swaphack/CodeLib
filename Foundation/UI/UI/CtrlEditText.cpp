@@ -78,19 +78,11 @@ bool ui::CtrlEditText::init()
 	return true;
 }
 
-render::DrawNode2D* ui::CtrlEditText::getRenderNode()
+void ui::CtrlEditText::setTexShaderProgram(render::ShaderProgram* shaderProgram)
 {
-	if (_ctrlText == nullptr || _ctrlTextPlaceholder == nullptr) 
-		return nullptr;
-
-	if (_ctrlText->getString() != "")
-	{
-		return _ctrlText->getRenderNode();
-	}
-	else
-	{
-		return _ctrlTextPlaceholder->getRenderNode();
-	}
+	if (_ctrlCursor) _ctrlCursor->setTexShaderProgram(shaderProgram);
+	if (_ctrlText) _ctrlText->setTexShaderProgram(shaderProgram);
+	if (_ctrlTextPlaceholder) _ctrlTextPlaceholder->setTexShaderProgram(shaderProgram);
 }
 
 void ui::CtrlEditText::setPlaceholderString(const std::string& text)

@@ -67,7 +67,7 @@ String String::operator+(const String& value)
 String String::operator+(const std::string& value)
 {
 	String temp = *this;
-	temp.concat(value.c_str());
+	temp.concat(value);
 
 	return temp;
 }

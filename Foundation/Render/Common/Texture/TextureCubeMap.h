@@ -4,7 +4,7 @@
 
 namespace render
 {
-	// 立方体纹理映射 与二位数组纹理等价
+	// 立方体纹理映射 与二维数组纹理等价
 	class TextureCubeMap : public Texture
 	{
 	public:

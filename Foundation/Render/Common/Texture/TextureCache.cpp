@@ -41,7 +41,7 @@ void TextureCache::removeTexture(Texture* texture)
 	auto iter = _textures.find(texture->getTextureID());
 	if (iter != _textures.end())
 	{
-		SAFE_DELETE(iter->second);
+		SAFE_RELEASE(iter->second);
 		_textures.erase(iter);
 	}
 }
@@ -72,7 +72,6 @@ void TextureCache::removeAllTextures()
 		SAFE_RELEASE(iter->second);
 		iter++;
 	}
-
 	_texture2Ds.clear();
 }
 

@@ -100,6 +100,7 @@ void render::Texture::enableTextureWithSampler(uint32_t unit)
 	this->bindSampler(unit);
 	GLDebug::showError();
 	this->bindTexture();
+	GLDebug::showError();
 }
 
 void render::Texture::enableTexture(uint32_t unit)
@@ -352,10 +353,13 @@ void render::Texture::initTexture()
 
 void render::Texture::releaseTexture()
 {
-	GLTexture::deleteTexture(_textureID);
-	_textureID = 0;
+	if (_textureID != 0)
+	{
+		GLTexture::deleteTexture(_textureID);
+		_textureID = 0;
 
-	G_TEXTURE_CACHE->removeTexture(this);
+		G_TEXTURE_CACHE->removeTexture(this);
+	}
 }
 
 void render::Texture::setDepth(uint32_t val)

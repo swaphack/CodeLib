@@ -10,6 +10,8 @@ out vec3 fragPosition;
 void main()
 {
 	vec4 pos = vec4(v_position, 1.0);
-	gl_Position = matrix.project * matrix.view * pos;
-    fragPosition = normalize(v_position);
+	//pos = matrix.project * matrix.view * pos;
+	pos = getMVP(matrix) * pos;
+    fragPosition = v_position;
+    gl_Position = pos.xyzw;
 }

@@ -36,6 +36,22 @@ bool ui::CtrlLayout::init()
 	return true;
 }
 
+void ui::CtrlLayout::setTexShaderProgram(render::ShaderProgram* shaderProgram)
+{
+	if (_backgroundImage)
+	{
+		_backgroundImage->setTexShaderProgram(shaderProgram);
+	}
+}
+
+void ui::CtrlLayout::setColorShaderProgram(render::ShaderProgram* shaderProgram)
+{
+	if (_backgroundMask)
+	{
+		_backgroundMask->setColorShaderProgram(shaderProgram);
+	}
+}
+
 void ui::CtrlLayout::setBackgroundColor(const phy::Color4B& color)
 {
 	_backgroundMask->setColor(color);

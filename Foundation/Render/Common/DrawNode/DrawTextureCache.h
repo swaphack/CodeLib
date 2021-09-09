@@ -22,7 +22,7 @@ namespace render
 		/**
 		*	添加纹理
 		*/
-		void addTexture(const std::string& name, const Texture* id);
+		void addTexture(const std::string& name, const Texture* texture, const std::string& fullpath = "");
 		/**
 		*	移除纹理
 		*/
@@ -40,7 +40,20 @@ namespace render
 		*/
 		Texture* getTexture(const std::string& name);
 	private:
-		// 图片纹理
-		std::map<std::string, Texture*> _textures;
+		struct TextureInfo
+		{
+			std::string name;
+			std::string fullpath;
+			int refCount = 0;
+			Texture* texture = nullptr;
+			// 增加引用次数
+			void increase();
+			// 减少引用次数
+			void descrease();
+			// 释放
+			void dispose();
+		};
+		// 图片引用次数
+		std::map<std::string, TextureInfo> _textureInfos;
 	};
 }

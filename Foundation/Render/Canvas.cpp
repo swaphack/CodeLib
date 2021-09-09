@@ -1,5 +1,4 @@
 #include "Canvas.h"
-
 using namespace render;
 
 Canvas* render::Canvas::_sCanvas = nullptr;
@@ -22,20 +21,12 @@ Canvas::~Canvas()
 
 void Canvas::draw()
 {
-	sys::TimeClock::startRecord();
-
 	_view->initViewPort();
 	_view->applyConfig();
 	_view->updateView();
 
-	auto mainCamera = Camera::getMainCamera();
-	if (mainCamera)
-	{
-		auto curScene = getCurScene();
-		mainCamera->drawScene(curScene);
-	}
-
-	sys::TimeClock::endRecord();
+	auto curScene = getCurScene();
+	G_CAMERAS->drawScene(curScene);
 }
 
 void Canvas::update(float interval)
@@ -58,11 +49,7 @@ void Canvas::setViewPort(float x, float y, float width, float height)
 		pTop->notifyToAll(NodeNotifyType::SPACE);
 	}
 
-	auto pCamera = Camera::getMainCamera();
-	if (pCamera)
-	{
-		pCamera->setViewPort(x, x + width, y, y + height);
-	}
+	G_CAMERAS->setViewPort(x, x + width, y, y + height);
 
 	Tool::setGLViewSize(width, height);
 }

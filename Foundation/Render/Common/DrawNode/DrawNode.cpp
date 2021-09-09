@@ -27,8 +27,6 @@ DrawNode::DrawNode()
 
 	_textureCache = CREATE_OBJECT(DrawTextureCache);
 	SAFE_RETAIN(_textureCache);
-
-	this->setCamera(Camera::getMainCamera());
 }
 
 DrawNode::~DrawNode()
@@ -99,54 +97,63 @@ render::Mesh* render::DrawNode::getMesh()
 void render::DrawNode::setTexture(const std::string& fullpath)
 {
 	_material->getMaterialDetail()->setAmbientTextureMap(MAT_TEXTURE_NAME);
+	_textureCache->removeTexture(MAT_TEXTURE_NAME);
 	_textureCache->addTexture(MAT_TEXTURE_NAME, fullpath);
 }
 
 void render::DrawNode::setTexture(const Texture* texture)
 {
 	_material->getMaterialDetail()->setAmbientTextureMap(MAT_TEXTURE_NAME);
+	_textureCache->removeTexture(MAT_TEXTURE_NAME);
 	_textureCache->addTexture(MAT_TEXTURE_NAME, texture);
 }
 
 void render::DrawNode::setAmbientTexture(const std::string& fullpath)
 {
 	_material->getMaterialDetail()->setAmbientTextureMap(MAT_TEXTURE_NAME);
+	_textureCache->removeTexture(MAT_TEXTURE_NAME);
 	_textureCache->addTexture(MAT_TEXTURE_NAME, fullpath);
 }
 
 void render::DrawNode::setDiffuseTexture(const std::string& fullpath)
 {
 	_material->getMaterialDetail()->setDiffuseTextureMap(MAT_TEXTURE_DIFFUSE);
+	_textureCache->removeTexture(MAT_TEXTURE_DIFFUSE);
 	_textureCache->addTexture(MAT_TEXTURE_DIFFUSE, fullpath);
 }
 
 void render::DrawNode::setSpecularTexture(const std::string& fullpath)
 {
 	_material->getMaterialDetail()->setSpecularTextureMap(MAT_TEXTURE_SPECULAR);
+	_textureCache->removeTexture(MAT_TEXTURE_SPECULAR);
 	_textureCache->addTexture(MAT_TEXTURE_SPECULAR, fullpath);
 }
 
 void render::DrawNode::setAlphaTexture(const std::string& fullpath)
 {
 	_material->getMaterialDetail()->setAlphaTextureMap(MAT_TEXTURE_ALPHA);
+	_textureCache->removeTexture(MAT_TEXTURE_ALPHA);
 	_textureCache->addTexture(MAT_TEXTURE_ALPHA, fullpath);
 }
 
 void render::DrawNode::setBumpTexture(const std::string& fullpath)
 {
 	_material->getMaterialDetail()->setBumpTextureMap(MAT_TEXTURE_BUMP);
+	_textureCache->removeTexture(MAT_TEXTURE_BUMP);
 	_textureCache->addTexture(MAT_TEXTURE_BUMP, fullpath);
 }
 
 void render::DrawNode::setNormalTexture(const std::string& fullpath)
 {
 	_material->getMaterialDetail()->setNormalTextureMap(MAT_TEXTURE_NORMAL);
+	_textureCache->removeTexture(MAT_TEXTURE_NORMAL);
 	_textureCache->addTexture(MAT_TEXTURE_NORMAL, fullpath);
 }
 
 void render::DrawNode::setShadowTexture(const Texture* texture)
 {
 	_material->getMaterialDetail()->setShadowTextureMap(MAT_TEXTURE_SHADOW);
+	_textureCache->removeTexture(MAT_TEXTURE_SHADOW);
 	_textureCache->addTexture(MAT_TEXTURE_SHADOW, texture);
 }
 

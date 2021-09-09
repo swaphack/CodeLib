@@ -74,7 +74,37 @@ const sys::CSSMargin& ui::CtrlScale9Image::getMargin() const
 	return _texture2D->getMargin();
 }
 
-render::DrawNode2D* ui::CtrlScale9Image::getRenderNode()
+void ui::CtrlScale9Image::setTexShaderProgram(render::ShaderProgram* shaderProgram)
+{
+	if (_texture2D)
+	{
+		_texture2D->setShaderProgram(shaderProgram);
+	}
+}
+
+render::DrawScale9Texture2D* ui::CtrlScale9Image::getRenderNode() const
 {
 	return _texture2D;
+}
+
+void ui::CtrlScale9Image::setImageColor(const phy::Color4B& color)
+{
+	_texture2D->setColor(color);
+}
+
+phy::Color4B ui::CtrlScale9Image::getImageColor() const
+{
+	phy::Color4B color;
+	phy::convertColor4FTo4B(_texture2D->getColor(), color);
+	return color;
+}
+
+void ui::CtrlScale9Image::setImageBlend(const render::BlendParam& blend)
+{
+	_texture2D->setBlend(blend);
+}
+
+const render::BlendParam& ui::CtrlScale9Image::getImageBlend() const
+{
+	return _texture2D->getBlend();
 }

@@ -45,5 +45,5 @@ void HttpResponse::makeMessage()
 {
 	std::string data;
 	_document->save(data);
-	this->setMessage(data.c_str(), data.size());
+	this->setMessage(data, data.size());
 }

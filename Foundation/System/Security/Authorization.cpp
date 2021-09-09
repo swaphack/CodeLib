@@ -15,7 +15,7 @@ bool Authorization::isRemoteEnable(const std::string& url, int32_t port)
 		return false;
 	}
 
-	Client* pClient = new Client(url.c_str(), port);
+	Client* pClient = new Client(url, port);
 	if (!pClient && !pClient->connect())
 	{
 		return false;

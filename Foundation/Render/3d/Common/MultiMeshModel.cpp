@@ -3,6 +3,7 @@
 #include "Common/DrawNode/import.h"
 #include "Common/Tool/VertexTool.h"
 #include "Common/Fragment/import.h"
+#include "Common/View/Cameras.h"
 
 render::MultiMeshModel::MultiMeshModel()
 {
@@ -31,6 +32,7 @@ bool render::MultiMeshModel::init()
 		onMultiDrawNodeBodyChange();
 	});
 
+	this->setCamera(G_CAMERAS->getCamera3D());
 	return true;
 }
 

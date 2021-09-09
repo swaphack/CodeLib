@@ -64,7 +64,7 @@ std::string LocalResource::getFullPath(const std::string& filename)
 	{
 		fullpath = _url + filename;
 
-		if (!File::exists(fullpath.c_str()))
+		if (!File::exists(fullpath))
 		{
 			fullpath = "";
 		}

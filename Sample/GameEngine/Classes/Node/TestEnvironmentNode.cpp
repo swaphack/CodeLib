@@ -16,13 +16,9 @@ void TestEnvironmentNode::initNodes()
 
 	this->testCamera();
 
-	this->addFPS();
-
-	//this->init3DSkyBox();
+	this->init3DSkyBox();
 
 	//this->testMatrix();
-
-	//this->addCoordinate();
 }
 
 void TestEnvironmentNode::init3DSkyBox()
@@ -35,33 +31,24 @@ void TestEnvironmentNode::init3DSkyBox()
 	pSkyBox->setTopTexture("Resource/skybox/top.jpg");
 	pSkyBox->setBottomTexture("Resource/skybox/bottom.jpg");
 
-	//pSkyBox->setScale(0.25f);
-	pSkyBox->setVolume(1024, 1024, 1024);
-	pSkyBox->setPosition(0, 0, 0);
+	pSkyBox->setScale(100.0f);
+	pSkyBox->setVolume(2048, 2048, 2048);
+	pSkyBox->setPosition(512, 384, 0);
 	pSkyBox->setAnchorPoint(0.5f, 0.5f, 0.5f);
 	this->addChild(pSkyBox);
 
 	Utility::loadShaderVF(pSkyBox, "Shader/env/skybox.vs", "Shader/env/skybox.fs");
-	
-	pSkyBox->setShaderProgramFunc([](ShaderProgram* program) {
+	/*
+	pSkyBox->setShaderProgramFunc([pSkyBox](ShaderProgram* program) {
 		auto pUniform = program->getUniform("matrix.view");
 		if (pUniform)
 		{
-			math::Matrix4x4 viewMat = Camera::getMainCamera()->getViewMatrix();
+			math::Matrix4x4 viewMat = pSkyBox->getCamera()->getViewMatrix();
 			math::Matrix4x4 mat = math::Matrix3x3(viewMat);
-			pUniform->setMatrix4(mat);
+			pUniform->setMatrix4x4(mat);
 		}
 	});
-
-	RotateByAction* pRotateByAction = CREATE_ACTION(RotateByAction);
-	pRotateByAction->setDifferentRotation(0, 180, 0);
-	pRotateByAction->setDuration(20);
-
-	RepeateForeverAction* pRepeateAction = CREATE_ACTION(RepeateForeverAction);
-	pRepeateAction->setAction(pRotateByAction);
-
-	//pSkyBox->getActionProxy()->runAction(pRepeateAction);
-
+	*/
 }
 
 void TestEnvironmentNode::init2DSkyBox()
@@ -82,13 +69,13 @@ void TestEnvironmentNode::init2DSkyBox()
 
 	Utility::loadShaderVF(pSkyBox, "Shader/texture/texture.vs", "Shader/texture/texture.fs");
 
-	pSkyBox->setShaderProgramFunc([](ShaderProgram* program) {
+	pSkyBox->setShaderProgramFunc([pSkyBox](ShaderProgram* program) {
 		auto pUniform = program->getUniform("matrix.view");
 		if (pUniform)
 		{
-			math::Matrix4x4 viewMat = Camera::getMainCamera()->getViewMatrix();
+			math::Matrix4x4 viewMat = pSkyBox->getCamera()->getViewMatrix();
 			math::Matrix4x4 Mat = math::Matrix3x3(viewMat);
-			pUniform->setMatrix4(Mat);
+			pUniform->setMatrix4x4(Mat);
 		}
 	});
 
@@ -103,26 +90,10 @@ void TestEnvironmentNode::init2DSkyBox()
 }
 void TestEnvironmentNode::testCamera()
 {
-	Camera* pCamera = Camera::getMainCamera();
-
-	auto size = Tool::getGLViewSize();
-	if (pCamera->getDimensions() == DimensionsType::THREE)
-	{
-		auto size = Tool::getGLViewSize();
-		float d = sqrt(powf(size.getWidth(), 2) + powf(size.getHeight(), 2));
-		pCamera->setViewDistance(d - 200, d * 100);
-		pCamera->setPosition(size.getWidth() * 0.5f, size.getHeight() * 0.5f, d);
-	}
-	else
-	{
-		pCamera->setPositionZ(size.getWidth() * 0.25f);
-	}
-
-	//pCamera->setPositionY(pCamera->getPositionY() + 100);
-	//pCamera->setRotationX(pCamera->getRotationX() - 30);
+	Camera* pCamera = G_CAMERAS->getCamera3D();
 
 	G_KEYBOARDMANAGER->addKeyboardFunc(this, pCamera, [this](sys::BoardKey key, sys::ButtonStatus type) {
-		Camera* pCamera = Camera::getMainCamera();
+		Camera* pCamera = G_CAMERAS->getCamera3D();
 
 		if (type == sys::ButtonStatus::BUTTON_DOWN)
 		{
@@ -155,11 +126,11 @@ void TestEnvironmentNode::testCamera()
 		}
 		else if (key == sys::BoardKey::KW)
 		{// 前面
-			pCamera->setPosition(pCamera->getPosition() - _spaceSpeed * pCamera->getFront());
+			pCamera->setPosition(pCamera->getPosition() + _spaceSpeed * pCamera->getFront());
 		}
 		else if (key == sys::BoardKey::KS)
 		{// 后面
-			pCamera->setPosition(pCamera->getPosition() + _spaceSpeed * pCamera->getFront());
+			pCamera->setPosition(pCamera->getPosition() - _spaceSpeed * pCamera->getFront());
 		}
 		else if (key == sys::BoardKey::KQ)
 		{// 下面
@@ -185,11 +156,19 @@ void TestEnvironmentNode::testCamera()
 		{
 			pCamera->setRotationX(pCamera->getRotationX() - _spaceSpeed);
 		}
+		else if (key == sys::BoardKey::KU)
+		{
+			pCamera->setRotationZ(pCamera->getRotationZ() + _spaceSpeed);
+		}
+		else if (key == sys::BoardKey::KO)
+		{
+			pCamera->setRotationZ(pCamera->getRotationZ() - _spaceSpeed);
+		}
 	});
 
 	
 	G_MOUSEMANAGER->addMouseScrollFunc(this, pCamera, [this](sys::ScrollEvent evt, float param) {
-		Camera* pCamera = Camera::getMainCamera();
+		Camera* pCamera = G_CAMERAS->getCamera3D();
 
 		if (_scrollEvt != evt)
 		{
@@ -237,7 +216,7 @@ void TestEnvironmentNode::addGrid()
 	pGrid->setVolume(10240, 0, 10240);
 	pGrid->setGridWidth(100);
 	pGrid->setPosition(512, 384);
-	if (Camera::getMainCamera()->getDimensions() == DimensionsType::TWO)
+	if (pGrid->getCamera()->getDimensions() == DimensionsType::TWO)
 	{
 		pGrid->setRotationX(90);
 	}
@@ -245,23 +224,6 @@ void TestEnvironmentNode::addGrid()
 	Utility::loadShaderVGF(pGrid, "Shader/geometry/draw_line.vs", "Shader/geometry/draw_line.gs", "Shader/geometry/draw_line.fs");
 
 	this->addChild(pGrid);
-}
-
-void TestEnvironmentNode::addCoordinate()
-{
-	render::Mask* pMask = CREATE_NODE(render::Mask);
-	pMask->setColor(phy::Color4B(255, 255, 255, 255));
-	pMask->setVolume(100, 100, 0);
-	pMask->setPosition(0, 0, 0);
-	//Utility::loadShaderVF(pMask, "Shader/geometry/draw_triangle.vs", "Shader/geometry/draw_triangle.fs");
-	this->addChild(pMask);
-
-	render::CoordinateSystem* pCoordSystem = CREATE_NODE(render::CoordinateSystem);
-	pCoordSystem->setVolume(100, 100, 100);
-	pCoordSystem->setPointSize(5);
-	pCoordSystem->setPosition(-100, -100, -100);
-	//Utility::loadShaderVF(pCoordSystem, "Shader/geometry/draw_coordinate_system.vs","Shader/geometry/draw_coordinate_system.fs");
-	pMask->addChild(pCoordSystem);
 }
 
 void TestEnvironmentNode::testMatrix()
@@ -284,41 +246,4 @@ void TestEnvironmentNode::testMultiPort()
 {
 	math::Size size = Canvas::getInstance()->getView()->getViewSize();
 	Canvas::getInstance()->setViewPort(0, 0, size.getWidth() * 0.5f, size.getHeight() * 0.5f);
-}
-
-void TestEnvironmentNode::addFPS()
-{
-	ui::CtrlText* pCtrlText = CREATE_NODE(ui::CtrlText);
-	pCtrlText->setVolume(100, 50);
-	pCtrlText->setDimensions(100, 50);
-	pCtrlText->setFontPath("Resource/Font/font_3.ttf");
-	pCtrlText->setFontSize(22);
-	pCtrlText->setScale(1);
-	pCtrlText->setPosition(0, 0, 0);
-	pCtrlText->setAnchorPoint(0, 0, 0);
-	pCtrlText->setTextHorizontalAlignment(sys::HorizontalAlignment::LEFT);
-	pCtrlText->setTextVerticalAlignment(sys::VerticalAlignment::TOP);
-	pCtrlText->setTextColor(phy::Color3B(255, 255, 255));
-	Utility::loadDefaultShader(pCtrlText);
-	this->addChild(pCtrlText);
-
-	CallFuncN* pCallFunc = CREATE_ACTION(CallFuncN);
-	pCallFunc->setFunc([](sys::Object* sender) {
-		char strVal[255] = {};
-		uint64_t diffTime = sys::TimeClock::getDifferenceOfRecordTime();
-		sprintf(strVal, "FPS %d", diffTime);
-		((ui::CtrlText*)sender)->setString(strVal);
-	});
-
-	DelayAction* pDelayAction = CREATE_ACTION(DelayAction);
-	pDelayAction->setDuration(1);
-
-	SequenceAction* pSequenceAction = CREATE_ACTION(SequenceAction);
-	pSequenceAction->addAction(pCallFunc);
-	pSequenceAction->addAction(pDelayAction);
-
-	RepeateForeverAction* pRepeateForeverAction = CREATE_ACTION(RepeateForeverAction);
-	pRepeateForeverAction->setAction(pSequenceAction);
-
-	pCtrlText->getActionProxy()->runAction(pRepeateForeverAction);
 }

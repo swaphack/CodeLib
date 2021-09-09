@@ -59,7 +59,7 @@ void VertexTool::setTexture3DVertices(CubeVertex* texcube, const math::Vector3& 
 	texcube->setFrontLeftBottomPosition(math::Vector3(x0, y0, z0));
 
 	// right down
-	texcube->setFrontRightButtomPosition(math::Vector3(x1, y0, z0));
+	texcube->setFrontRightBottomPosition(math::Vector3(x1, y0, z0));
 
 	// right up
 	texcube->setFrontRightTopPosition(math::Vector3(x1, y1, z0));

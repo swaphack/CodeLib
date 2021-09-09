@@ -18,11 +18,6 @@ namespace render
 		Camera();
 		virtual ~Camera();
 	public:
-		// 主摄像机
-		static Camera* getMainCamera();
-		// 主摄像机
-		static void setMainCamera(Camera* camera);
-	public:
 		virtual bool init();
 	public:
 		// 设置维度
@@ -38,17 +33,9 @@ namespace render
 		void setViewDistance(float zNear, float zFar);
 		// 获取视窗参数
 		const ViewParameter& getViewParameter() const;
-		// 获取视窗参数
-		const ViewParameter& get2DViewParameter() const;
-		// 获取视窗参数
-		const ViewParameter& get3DViewParameter() const;
 	public:
 		// 投影矩阵
 		const math::Matrix4x4& getProjectMatrix() const;
-		// 投影矩阵
-		const math::Matrix4x4& getProjectMatrix2D() const;
-		// 投影矩阵
-		const math::Matrix4x4& getProjectMatrix3D() const;
 		// 视图矩阵
 		const math::Matrix4x4& getViewMatrix() const;
 	public:
@@ -79,19 +66,13 @@ namespace render
 
 		void onCameraSpaceChange();
 	protected:
-		// 主摄像头
-		static Camera* _mainCamera;
 		// 维度
 		DimensionsType _dimensions = DimensionsType::TWO;
 		// 投影矩阵
-		math::Matrix4x4 _projectMatrix2D;
-		// 投影矩阵
-		math::Matrix4x4 _projectMatrix3D;
+		math::Matrix4x4 _projectMatrix;
 		// 视图矩阵
 		math::Matrix4x4 _viewMatrix;
 		// 2d视野参数
-		ViewParameter _viewParameter2D;
-		// 3D视野参数
-		ViewParameter _viewParameter3D;
+		ViewParameter _viewParameter;
 	};
 }

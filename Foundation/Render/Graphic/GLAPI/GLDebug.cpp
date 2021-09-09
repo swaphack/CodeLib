@@ -10,10 +10,11 @@ using namespace render;
 void GLDebug::showError()
 {
 	int errID = glGetError();
-	if (errID != 0)
+	if (errID == 0)
 	{
-		PRINT("OpenGL Error=============\n");
+		return;
 	}
+	PRINT("OpenGL Error=============\n");
 	SHOW_ERROR_CODE(errID, GL_INVALID_ENUM, GL_INVALID_ENUM);
 	SHOW_ERROR_CODE(errID, GL_INVALID_VALUE, GL_INVALID_VALUE);
 	SHOW_ERROR_CODE(errID, GL_INVALID_OPERATION, GL_INVALID_OPERATION);

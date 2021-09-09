@@ -6,7 +6,7 @@
 #include "Common/DrawNode/import.h"
 #include "Common/Tool/VertexTool.h"
 #include "Graphic/import.h"
-#include "Common/View/Camera.h"
+#include "Common/View/Cameras.h"
 #include "Common/Texture/Texture2D.h"
 
 render::DrawNode3D::DrawNode3D()
@@ -45,6 +45,8 @@ bool render::DrawNode3D::init()
 	addNotifyListener(NodeNotifyType::COLOR, [this]() {
 		this->onDrawNode3DColorChange();
 	});
+
+	this->setCamera(G_CAMERAS->getCamera3D());
 
 	return true;
 }

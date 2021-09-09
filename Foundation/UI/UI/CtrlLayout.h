@@ -14,6 +14,14 @@ namespace ui
 		virtual ~CtrlLayout();
 	public:
 		virtual bool init();
+		/**
+		*	设置着色器
+		*/
+		virtual void setTexShaderProgram(render::ShaderProgram* shaderProgram);
+		/**
+		*	设置着色器
+		*/
+		virtual void setColorShaderProgram(render::ShaderProgram* shaderProgram);
 	public:
 		/**
 		*	设置背景颜色

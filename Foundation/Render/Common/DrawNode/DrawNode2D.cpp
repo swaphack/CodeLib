@@ -3,6 +3,7 @@
 #include "Graphic/import.h"
 #include "Common/Mesh/import.h"
 #include "Common/Texture/Texture2D.h"
+#include "Common/View/Cameras.h"
 
 render::DrawNode2D::DrawNode2D()
 {
@@ -33,7 +34,7 @@ bool render::DrawNode2D::init()
 	addNotifyListener(NodeNotifyType::TEXTURE, [this]() {
 		this->onDrawNode2DTextureChange();
 	});
-
+	this->setCamera(G_CAMERAS->getCamera2D());
 	return true;
 }
 

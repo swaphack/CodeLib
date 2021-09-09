@@ -17,7 +17,7 @@ TestModelNode::~TestModelNode()
 
 void TestModelNode::initNodes()
 {
-	addLight();
+	//addLight();
 	//this->testCubeModel();
 	this->testSphereModel();
 	//this->testCubeMap();
@@ -143,14 +143,15 @@ void TestModelNode::testFog()
 
 void TestModelNode::test3ds()
 {
+	std::string filename = "Resource/Model/3DS/Bld_38.3ds";
 	Model3DS* pModel = CREATE_NODE(Model3DS);
-	pModel->load("Resource/Model/3DS/Bld_38.3ds");
+	pModel->loadAsyn(filename, [](render::ModelFile* node) {
+		Utility::loadShaderVF(node, "Shader/material/material_texture.vs", "Shader/material/material_texture.fs");
+	});
 	pModel->setScale(100);
 	pModel->setPosition(500, 500, 0);
 	pModel->setVolume(400, 400, 400);
 	this->addChild(pModel);
-
-	Utility::loadShaderVF(pModel, "Shader/material/material_texture.vs", "Shader/material/material_one_texture_light.fs");
 
 	RotateByAction* pRotateByAction = CREATE_ACTION(RotateByAction);
 	pRotateByAction->setDifferentRotation(180, 180, 0);
@@ -168,13 +169,13 @@ void TestModelNode::testObj()
 	std::string filename = "Resource/Model/Obj/Skull_v3_L2/12140_Skull_v3_L2.obj";
 
 	ModelObj* pModel = CREATE_NODE(ModelObj);
-	pModel->load(filename);
+	pModel->loadAsyn(filename, [](render::ModelFile* node) {
+		Utility::loadShaderVF(node, "Shader/material/material_texture.vs", "Shader/material/material_texture.fs");
+	});
 	pModel->setScale(50);
-	pModel->setPosition(512, 384, 0);
+	pModel->setPosition(1024, 768, 0);
 	pModel->setVolume(400, 400, 400);
 	this->addChild(pModel);
-
-	Utility::loadShaderVF(pModel, "Shader/texture/texture.vs", "Shader/texture/texture.fs");
 
 	RotateByAction* pRotateByAction = CREATE_ACTION(RotateByAction);
 	pRotateByAction->setDifferentRotation(180, 180, 0);
@@ -183,19 +184,22 @@ void TestModelNode::testObj()
 	RepeateForeverAction* pRepeateAction = CREATE_ACTION(RepeateForeverAction);
 	pRepeateAction->setAction(pRotateByAction);
 
-	pModel->getActionProxy()->runAction(pRepeateAction);
+	//pModel->getActionProxy()->runAction(pRepeateAction);
 }
 
 void TestModelNode::testFbx()
 {
+	std::string filename = "Resource/Model/fbx/LANCER_EVOLUTION/LANCEREVOX.FBX";
 	ModelFbx* pModel = CREATE_NODE(ModelFbx);
-	pModel->load("Resource/Model/fbx/LANCER_EVOLUTION/LANCEREVOX.FBX");
-	pModel->setScale(200);
+	pModel->setBoxVisible(true);
+	pModel->loadAsyn(filename, [](render::ModelFile* node) {
+		Utility::loadShaderVF(node, "Shader/material/material_texture.vs", "Shader/material/material_texture.fs");
+	});
+	pModel->setScale(1);
 	pModel->setPosition(512, 384);
-	pModel->setRotation(90, 0, 90);
+	pModel->setRotation(0, 0, 0);
+	pModel->setVolume(100, 100, 100);
 	this->addChild(pModel);
-
-	Utility::loadShaderVF(pModel, "Shader/texture/texture.vs", "Shader/texture/texture.fs");
 
 	RotateByAction* pRotateByAction = CREATE_ACTION(RotateByAction);
 	pRotateByAction->setDifferentRotation(0, 180, 0);
@@ -209,7 +213,7 @@ void TestModelNode::testFbx()
 
 void TestModelNode::testCamera()
 {
-	Camera* camera = Camera::getMainCamera();
+	Camera* camera = this->getCamera();
 	G_KEYBOARDMANAGER->addKeyboardDelegate(this, camera, KEYBOARD_DELEGATE_SELECTOR(TestModelNode::onKeyBoardCamera));
 }
 

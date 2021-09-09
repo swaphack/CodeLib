@@ -112,14 +112,6 @@ render::Box3DDrawProtocol::~Box3DDrawProtocol()
 }
 void render::Box3DDrawProtocol::setBoxVertices(const render::CubeVertex& cubeVertex)
 {
-	math::RectPoints front;
-	math::RectPoints back;
-
-	front.setVertices(cubeVertex.front.vertices);
-	front.setVertices(cubeVertex.back.vertices);
-
-	_boxVertex.setPoints(front, back);
-
 	_boxPoints.clear();
 	cubeVertex.front.toTriangles(_boxPoints);
 	cubeVertex.back.toTriangles(_boxPoints);
@@ -127,6 +119,10 @@ void render::Box3DDrawProtocol::setBoxVertices(const render::CubeVertex& cubeVer
 	cubeVertex.right.toTriangles(_boxPoints);
 	cubeVertex.top.toTriangles(_boxPoints);
 	cubeVertex.bottom.toTriangles(_boxPoints);
+}
+const render::CubeVertex& render::Box3DDrawProtocol::getLocalCubeVertex() const
+{
+	return _localCubeVertex;
 }
 /*
 void render::Box3DDrawProtocol::drawBox()

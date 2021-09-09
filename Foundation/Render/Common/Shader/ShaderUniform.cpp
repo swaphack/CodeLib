@@ -93,17 +93,17 @@ void ShaderUniform::setValue(int32_t v0, int32_t v1, int32_t v2, int32_t v3)
 	GLShader::setUniformValue(getUniformID(), v0, v1, v2, v3);
 }
 
-void ShaderUniform::setMatrix2(int count, bool transpose, const float* value)
+void ShaderUniform::setMatrix2x2(int count, bool transpose, const float* value)
 {
 	GLShader::setUniformMatrix2(getUniformID(), count, transpose, value);
 }
 
-void ShaderUniform::setMatrix3(int count, bool transpose, const float* value)
+void ShaderUniform::setMatrix3x3(int count, bool transpose, const float* value)
 {
 	GLShader::setUniformMatrix3(getUniformID(), count, transpose, value);
 }
 
-void ShaderUniform::setMatrix4(int count, bool transpose, const float* value)
+void ShaderUniform::setMatrix4x4(int count, bool transpose, const float* value)
 {
 	GLShader::setUniformMatrix4(getUniformID(), count, transpose, value);
 }
@@ -123,48 +123,48 @@ void render::ShaderUniform::setValue(uint32_t v0)
 	GLShader::setUniformValue(getUniformID(), (int32_t)v0);
 }
 
-void render::ShaderUniform::setMatrix2(bool transpose, const float* value)
+void render::ShaderUniform::setMatrix2x2(bool transpose, const float* value)
 {
-	this->setMatrix2(1, transpose, value);
+	this->setMatrix2x2(1, transpose, value);
 }
 
-void render::ShaderUniform::setMatrix3(const float* value)
+void render::ShaderUniform::setMatrix3x3(const float* value)
 {
-	this->setMatrix3(false, value);
+	this->setMatrix3x3(false, value);
 }
 
-void render::ShaderUniform::setMatrix4(const math::Matrix4x4& value)
+void render::ShaderUniform::setMatrix4x4(const math::Matrix4x4& value)
 {
-	this->setMatrix4(value.getValue());
+	this->setMatrix4x4(value.getValue());
 }
 
-void render::ShaderUniform::setMatrix4(const float* value)
+void render::ShaderUniform::setMatrix4x4(const float* value)
 {
-	this->setMatrix4(false, value);
+	this->setMatrix4x4(false, value);
 }
 
-void render::ShaderUniform::setMatrix2(const math::Matrix2x2& value)
+void render::ShaderUniform::setMatrix2x2(const math::Matrix2x2& value)
 {
-	this->setMatrix2(value.getValue());
+	this->setMatrix2x2(value.getValue());
 }
 
-void render::ShaderUniform::setMatrix3(const math::Matrix3x3& value)
+void render::ShaderUniform::setMatrix3x3(const math::Matrix3x3& value)
 {
-	this->setMatrix3(value.getValue());
+	this->setMatrix3x3(value.getValue());
 }
 
-void render::ShaderUniform::setMatrix3(bool transpose, const float* value)
+void render::ShaderUniform::setMatrix3x3(bool transpose, const float* value)
 {
-	this->setMatrix3(1, transpose, value);
+	this->setMatrix3x3(1, transpose, value);
 }
 
-void render::ShaderUniform::setMatrix4(bool transpose, const float* value)
+void render::ShaderUniform::setMatrix4x4(bool transpose, const float* value)
 {
-	this->setMatrix4(1, transpose, value);
+	this->setMatrix4x4(1, transpose, value);
 }
 
-void render::ShaderUniform::setMatrix2(const float* value)
+void render::ShaderUniform::setMatrix2x2(const float* value)
 {
-	this->setMatrix2(false, value);
+	this->setMatrix2x2(false, value);
 }
 

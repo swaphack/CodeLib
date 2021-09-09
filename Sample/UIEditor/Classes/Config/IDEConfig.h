@@ -7,72 +7,60 @@
 
 namespace ue
 {
-	/// <summary>
-	/// ide 配置
-	/// </summary>
+	// ide 配置
 	class IDEConfig : public Config
 	{
 	public:
 		struct IDESetting
 		{
-			/// <summary>
-			/// 设计界面
-			/// </summary>
+			// 设计界面
 			std::string Design;
-			/// <summary>
-			/// 控件配置
-			/// </summary>
+			// 控件配置
 			std::string Control;
 		};
-		/// <summary>
-		/// 文本配置
-		/// </summary>
+
+		struct ShaderSetting
+		{
+			// 纹理顶点着色器
+			std::string TexVertex;
+			// 纹理片元着色器
+			std::string TexFragment;
+			// 颜色顶点着色器
+			std::string ColorVertex;
+			// 颜色片元着色器
+			std::string ColorFragment;
+		};
+
 		struct TextSetting
 		{
 		public:
-			/// <summary>
-			/// 字体
-			/// </summary>
+			// 字体
 			std::string FontPath;
-			/// <summary>
-			/// 字号
-			/// </summary>
+			// 字号
 			int FontSize = 0;
-			/// <summary>
-			/// 颜色
-			/// </summary>
+			//颜色
 			phy::Color3B TextColor;
 		};
 	public:
-		/// <summary>
-		/// 文本配置
-		/// </summary>
+		// 文本配置
 		const TextSetting& getText() const;
-		/// <summary>
-		/// ide配置文件
-		/// </summary>
-		/// <returns></returns>
+		// ide配置文件
 		const IDESetting& getIDE() const;
+		// 着色器配置
+		const ShaderSetting& getShader() const;
 	public:
-		/// <summary>
-		/// 加载配置
-		/// </summary>
-		/// <param name="filepath"></param>
+		// 加载配置
 		void loadXml(const std::string& filepath);
 
 		virtual void Dispose();
 	private:
-		/// <summary>
-		/// xml工具
-		/// </summary>
+		// xml工具
 		tool::XmlHelper _helper;
-		/// <summary>
-		/// 文本 配置
-		/// </summary>
+		// 文本 配置
 		TextSetting _text;
-		/// <summary>
-		/// ide 配置
-		/// </summary>
+		// 着色器配置
+		ShaderSetting _shader;
+		// ide 配置
 		IDESetting _ide;
 	};
 }

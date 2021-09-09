@@ -30,7 +30,7 @@ bool render::CoordinateSystem::init()
 void render::CoordinateSystem::onCoordianteSystemBodyChange()
 {
 	render::CubeVertex cube;
-	VertexTool::setTexture3DVertices(&cube, getPosition(), getVolume(), getAnchorPoint());
+	VertexTool::setTexture3DVertices(&cube, math::Vector3(), getVolume(), getAnchorPoint());
 
 	this->removeAllPoints();
 	this->appendPoint(cube.front.getLeftBottomPosition());

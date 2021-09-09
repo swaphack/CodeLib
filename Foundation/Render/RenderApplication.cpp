@@ -36,6 +36,8 @@ void RenderApplication::init()
 
 void RenderApplication::update()
 {
+	sys::TimeClock::startRecord();
+
 	if (_lastClock == INVALID_CLOCK)
 	{
 		_lastClock = clock();
@@ -59,6 +61,8 @@ void RenderApplication::update()
 	}
 
 	checkAutoRealsePool();
+
+	sys::TimeClock::endRecord();
 }
 
 void RenderApplication::dispose()

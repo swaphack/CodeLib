@@ -1,13 +1,13 @@
 #pragma once
 
-#include "Common/DrawNode/DrawNode.h"
+#include "Common/DrawNode/DrawNode3D.h"
 
 namespace render
 {
 	/**
 	*	Íø¸ñ
 	*/
-	class Grid : public DrawNode
+	class Grid : public DrawNode3D
 	{
 	public:
 		Grid();

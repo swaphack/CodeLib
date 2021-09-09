@@ -25,7 +25,7 @@ std::string Console::readLine()
 
 		line.append(1, ch);
 	}
-	return line.c_str();
+	return line;
 }
 
 char Console::readChar()

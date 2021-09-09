@@ -75,7 +75,37 @@ bool CtrlImage::isFlipY()
 	return _texture2D->isFlipY();
 }
 
-render::DrawNode2D* CtrlImage::getRenderNode()
-{ 
-	return _texture2D; 
+void ui::CtrlImage::setImageColor(const phy::Color4B& color)
+{
+	_texture2D->setColor(color);
+}
+
+phy::Color4B ui::CtrlImage::getImageColor() const
+{
+	phy::Color4B color;
+	phy::convertColor4FTo4B(_texture2D->getColor(), color);
+	return color;
+}
+
+void ui::CtrlImage::setImageBlend(const render::BlendParam& blend)
+{
+	_texture2D->setBlend(blend);
+}
+
+const render::BlendParam& ui::CtrlImage::getImageBlend() const
+{
+	return _texture2D->getBlend();
+}
+
+void ui::CtrlImage::setTexShaderProgram(ShaderProgram* shaderProgram)
+{
+	if (_texture2D)
+	{
+		_texture2D->setShaderProgram(shaderProgram);
+	}
+}
+
+render::DrawTexture2D* ui::CtrlImage::getRenderNode() const
+{
+	return _texture2D;
 }

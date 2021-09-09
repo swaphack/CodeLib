@@ -17,13 +17,9 @@ protected:
 
 	void addGrid();
 
-	void addCoordinate();
-
 	void testMatrix();
 
 	void testMultiPort();
-
-	void addFPS();
 private:
 	int _viewType = 0;
 

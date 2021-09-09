@@ -3,6 +3,11 @@
 #include "render.h"
 #include "AutoResizeProtocol.h"
 
+namespace render
+{
+	class ShaderProgram;
+}
+
 namespace ui
 {
 	class LayoutItem;
@@ -23,9 +28,13 @@ namespace ui
 	public:
 		virtual bool init();
 		/**
-		*	渲染节点
+		*	设置着色器
 		*/
-		virtual render::DrawNode2D* getRenderNode();
+		virtual void setTexShaderProgram(render::ShaderProgram* shaderProgram);
+		/**
+		*	设置着色器
+		*/
+		virtual void setColorShaderProgram(render::ShaderProgram* shaderProgram);
 	public:
 		/**
 		*	坐标是否在当前对象内

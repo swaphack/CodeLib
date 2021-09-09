@@ -2,6 +2,7 @@
 #include "Graphic/import.h"
 #include "Common/Tool/Tool.h"
 #include "Common/Mesh/Mesh.h"
+#include "Common/View/Cameras.h"
 
 render::Grid::Grid()
 {
@@ -15,7 +16,7 @@ render::Grid::~Grid()
 
 bool render::Grid::init()
 {
-	if (!DrawNode::init())
+	if (!DrawNode3D::init())
 	{
 		return false;
 	}
@@ -23,7 +24,6 @@ bool render::Grid::init()
 	addNotifyListener(NodeNotifyType::GEOMETRY, [this]() {
 		this->onGridChange();
 	});
-
 	return true;
 }
 

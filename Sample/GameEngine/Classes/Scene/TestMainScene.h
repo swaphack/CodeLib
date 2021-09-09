@@ -9,5 +9,8 @@ public:
 	virtual ~TestMainScene();
 public:
 	virtual bool init();
+protected:
+	void initNodes();
+	void initEnv();
 };
 

@@ -10,7 +10,8 @@ namespace render
 namespace ui
 {
 	// 图片
-	class CtrlImage : public CtrlWidget
+	class CtrlImage : 
+		public CtrlWidget
 	{
 	public:
 		CtrlImage();
@@ -34,7 +35,7 @@ namespace ui
 		*	获取图片路径
 		*/ 
 		const std::string& getImagePath();
-
+	public:
 		// 设置水平翻转
 		void setFlipX(bool status);
 		// 是否水平翻转
@@ -43,8 +44,24 @@ namespace ui
 		void setFlipY(bool status);
 		// 是否垂直翻转
 		bool isFlipY();
-		// 获取渲染节点
-		virtual render::DrawNode2D* getRenderNode();
+	public:
+		// 图片颜色
+		void setImageColor(const phy::Color4B& color);
+		// 图片颜色
+		phy::Color4B getImageColor() const;
+		// 图片混合方式
+		void setImageBlend(const render::BlendParam& blend);
+		// 图片混合方式
+		const render::BlendParam& getImageBlend() const;
+	public:
+		/**
+		*	设置着色器
+		*/
+		virtual void setTexShaderProgram(render::ShaderProgram* shaderProgram);
+		/**
+		*	渲染节点
+		*/
+		render::DrawTexture2D* getRenderNode() const;
 	protected:
 		// 图片结构
 		sys::ImageDefine _imageDefine;

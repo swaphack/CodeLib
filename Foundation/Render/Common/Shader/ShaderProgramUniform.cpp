@@ -23,17 +23,17 @@ uint32_t render::ShaderProgramUniform::getProgramUniformID()
 	return _programUniformID;
 }
 
-void render::ShaderProgramUniform::setMatrix2(int count, const float* value)
+void render::ShaderProgramUniform::setMatrix2x2(int count, const float* value)
 {
 	GLShader::setProgramUniformMatrix2(getProgramID(), getProgramUniformID(), count, value);
 }
 
-void render::ShaderProgramUniform::setMatrix3(int count, const float* value)
+void render::ShaderProgramUniform::setMatrix3x3(int count, const float* value)
 {
 	GLShader::setProgramUniformMatrix2(getProgramID(), getProgramUniformID(), count, value);
 }
 
-void render::ShaderProgramUniform::setMatrix4(int count, const float* value)
+void render::ShaderProgramUniform::setMatrix4x4(int count, const float* value)
 {
 	GLShader::setProgramUniformMatrix4(getProgramID(), getProgramUniformID(), count, value);
 }

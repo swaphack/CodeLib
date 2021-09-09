@@ -24,7 +24,7 @@ bool CtrlAudioSource::loadDataFromFile(const std::string& filepath)
 		return false;
 	}
 
-	std::string fullpath = G_FILEPATH->getFilePath(filepath.c_str());
+	std::string fullpath = G_FILEPATH->getFilePath(filepath);
 	if (fullpath.empty())
 	{
 		return false;

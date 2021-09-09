@@ -82,9 +82,13 @@ namespace math
 		*/
 		void setRotationByLine(const Vector3& src, const Vector3& dest, float radian);
 		/**
-		*	欧拉角
+		*	欧拉角 角度
 		*/
 		Vector3 getEularAngle() const;
+		/**
+		*	欧拉角 幅度
+		*/
+		Vector3 getEularRadian() const;
 		/**
 		*	位置
 		*/

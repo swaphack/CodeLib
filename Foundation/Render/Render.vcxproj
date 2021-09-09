@@ -220,6 +220,9 @@
     <ClCompile Include="Common\VAO\VertexAttrib.cpp" />
     <ClCompile Include="Common\VAO\VertexAttribPointer.cpp" />
     <ClCompile Include="Common\View\Camera.cpp" />
+    <ClCompile Include="Common\View\Camera2D.cpp" />
+    <ClCompile Include="Common\View\Camera3D.cpp" />
+    <ClCompile Include="Common\View\Cameras.cpp" />
     <ClCompile Include="Common\View\MultiSampling.cpp" />
     <ClCompile Include="Common\View\ViewPort.cpp" />
     <ClCompile Include="Common\XFB\TransformFeedback.cpp" />
@@ -466,6 +469,9 @@
     <ClInclude Include="Common\VAO\VertexAttrib.h" />
     <ClInclude Include="Common\VAO\VertexAttribPointer.h" />
     <ClInclude Include="Common\View\Camera.h" />
+    <ClInclude Include="Common\View\Camera2D.h" />
+    <ClInclude Include="Common\View\Camera3D.h" />
+    <ClInclude Include="Common\View\Cameras.h" />
     <ClInclude Include="Common\View\DimensionsType.h" />
     <ClInclude Include="Common\View\import.h" />
     <ClInclude Include="Common\View\MultiSampling.h" />

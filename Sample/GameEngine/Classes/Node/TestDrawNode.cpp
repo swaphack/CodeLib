@@ -44,12 +44,12 @@ void TestDrawNode::testDrawNode()
 	Utility::loadShaderVF(pDrawNode, "Shader/geometry/draw_primitive.vs", "Shader/geometry/draw_primitive.fs");
 	this->addChild(pDrawNode);
 
-	auto vector = pDrawNode->getPosition() - Camera::getMainCamera()->getPosition();
+	auto vector = pDrawNode->getPosition() - pDrawNode->getCamera()->getPosition();
 
 	auto pAction = CREATE_ACTION(CallFunc);
 	pAction->setFunc([pDrawNode, vector]() {
-		auto cameraPos = Camera::getMainCamera()->getPosition();
-		auto cameraRotate = Camera::getMainCamera()->getRotation();
+		auto cameraPos = pDrawNode->getCamera()->getPosition();
+		auto cameraRotate = pDrawNode->getCamera()->getRotation();
 		math::Vector3 cameraRadian = Tool::convertToRadian(cameraRotate);
 		math::Matrix4x4 mat; 
 		mat.setRotate(1.0f * cameraRadian);

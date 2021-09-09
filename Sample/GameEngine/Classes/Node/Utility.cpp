@@ -17,63 +17,49 @@ bool Utility::bInitShaderAttrib = false;
 void Utility::loadDefaultShader(render::DrawNode* node)
 {
 	if (node == nullptr) return;
-	loadShaderVF(node->getMaterial(), textureVertexPath, textureFragmentPath);
+	loadShaderVF(node, textureVertexPath, textureFragmentPath);
 }
 
 void Utility::loadPrimitiveShader(render::DrawNode* node)
 {
 	if (node == nullptr) return;
-	loadShaderVF(node->getMaterial(), primitiveVertexPath, primitiveFragmentPath);
+	loadShaderVF(node, primitiveVertexPath, primitiveFragmentPath);
 }
 
 void Utility::loadPrimitiveShader(ui::CtrlWidget* node)
 {
 	if (node == nullptr) return;
-	loadShaderVF(node->getRenderNode(), primitiveVertexPath, primitiveFragmentPath);
+	ShaderProgram* pProgram = G_SHANDER->createVertexFragmentProgram(primitiveVertexPath, primitiveFragmentPath);
+	if (pProgram == nullptr)
+	{
+		return;
+	}
+	node->setColorShaderProgram(pProgram);
+
+	initShaderAttrib();
 }
 
 void Utility::loadDefaultShader(ui::CtrlWidget* node)
 {
 	if (node == nullptr) return;
-	loadDefaultShader(node->getRenderNode());
+	ShaderProgram* pProgram = G_SHANDER->createVertexFragmentProgram(textureVertexPath, textureFragmentPath);
+	if (pProgram == nullptr)
+	{
+		return;
+	}
+	node->setTexShaderProgram(pProgram);
+
+	initShaderAttrib();
 }
 
 void Utility::loadDefaultShader(render::MultiDrawNode* node)
 {
-	loadShaderVF(node->getMaterials(), textureVertexPath, textureFragmentPath);
-}
-
-void Utility::loadShaderVF(ui::CtrlWidget* node, const std::string& vpath, const std::string& fpath)
-{
-	if (node == nullptr) return;
-
-	loadShaderVF(node->getRenderNode(), vpath, fpath);
+	loadShaderVF(node, textureVertexPath, textureFragmentPath);
 }
 
 void Utility::loadShaderVF(render::DrawNode* node, const std::string& vpath, const std::string& fpath)
 {
-	if (node == nullptr) return;
-
-	loadShaderVF(node->getMaterial(), vpath, fpath);
-}
-
-void Utility::loadShaderVTF(render::DrawNode* node, const std::string& vpath, const std::string& tepath, const std::string& fpath)
-{
-	if (node == nullptr) return;
-
-	loadShaderVTF(node->getMaterial(), vpath, tepath, fpath);
-}
-
-void Utility::loadShaderVTF(render::DrawNode* node, const std::string& vpath, const std::string& tcpath, const std::string& tepath, const std::string& fpath)
-{
-	if (node == nullptr) return;
-
-	loadShaderVTF(node->getMaterial(), vpath, tcpath, tepath, fpath);
-}
-
-void Utility::loadShaderVF(render::Material* mat, const std::string& vpath, const std::string& fpath)
-{
-	if (mat == nullptr)
+	if (node == nullptr)
 	{
 		return;
 	}
@@ -82,14 +68,14 @@ void Utility::loadShaderVF(render::Material* mat, const std::string& vpath, cons
 	{
 		return;
 	}
-	mat->setShaderProgram(pProgram);
+	node->setShaderProgram(pProgram);
 
 	initShaderAttrib();
 }
 
-void Utility::loadShaderVTF(render::Material* mat, const std::string& vpath, const std::string& tepath, const std::string& fpath)
+void Utility::loadShaderVTF(render::DrawNode* node, const std::string& vpath, const std::string& tepath, const std::string& fpath)
 {
-	if (mat == nullptr)
+	if (node == nullptr)
 	{
 		return;
 	}
@@ -98,14 +84,14 @@ void Utility::loadShaderVTF(render::Material* mat, const std::string& vpath, con
 	{
 		return;
 	}
-	mat->setShaderProgram(pProgram);
+	node->setShaderProgram(pProgram);
 
 	initShaderAttrib();
 }
 
-void Utility::loadShaderVTF(render::Material* mat, const std::string& vpath, const std::string& tcpath, const std::string& tepath, const std::string& fpath)
+void Utility::loadShaderVTF(render::DrawNode* node, const std::string& vpath, const std::string& tcpath, const std::string& tepath, const std::string& fpath)
 {
-	if (mat == nullptr)
+	if (node == nullptr)
 	{
 		return;
 	}
@@ -114,7 +100,23 @@ void Utility::loadShaderVTF(render::Material* mat, const std::string& vpath, con
 	{
 		return;
 	}
-	mat->setShaderProgram(pProgram);
+	node->setShaderProgram(pProgram);
+
+	initShaderAttrib();
+}
+
+void Utility::loadShaderVF(ui::CtrlWidget* node, const std::string& vpath, const std::string& fpath)
+{
+	if (node == nullptr)
+	{
+		return;
+	}
+	ShaderProgram* pProgram = G_SHANDER->createVertexTessFragmentProgram(vpath, vpath, fpath);
+	if (pProgram == nullptr)
+	{
+		return;
+	}
+	node->setTexShaderProgram(pProgram);
 
 	initShaderAttrib();
 }
@@ -123,33 +125,19 @@ void Utility::loadShaderVF(render::MultiDrawNode* node, const std::string& vpath
 {
 	if (node == nullptr) return;
 
-	loadShaderVF(node->getMaterials(), vpath, fpath);
+	ShaderProgram* pProgram = G_SHANDER->createVertexFragmentProgram(vpath, fpath);
+	if (pProgram == nullptr)
+	{
+		return;
+	}
+	node->setShaderProgram(pProgram);
+
+	initShaderAttrib();
 }
 
 void Utility::loadShaderVGF(render::DrawNode* node, const std::string& vpath, const std::string& gpath, const std::string& fpath)
 {
-	if (node == nullptr) return;
-
-	loadShaderVGF(node->getMaterial(), vpath, gpath, fpath);
-}
-
-void Utility::loadShaderVTGF(render::DrawNode* node, const std::string& vpath, const std::string& tepath, const std::string& gpath, const std::string& fpath)
-{
-	if (node == nullptr) return;
-
-	loadShaderVTGF(node->getMaterial(), vpath, tepath, gpath, fpath);
-}
-
-void Utility::loadShaderVTGF(render::DrawNode* node, const std::string& vpath, const std::string& tcpath, const std::string& tepath, const std::string& gpath, const std::string& fpath)
-{
-	if (node == nullptr) return;
-
-	loadShaderVTGF(node->getMaterial(), vpath, tcpath, tepath, gpath, fpath);
-}
-
-void Utility::loadShaderVGF(render::Material* mat, const std::string& vpath, const std::string& gpath, const std::string& fpath)
-{
-	if (mat == nullptr)
+	if (node == nullptr)
 	{
 		return;
 	}
@@ -158,14 +146,14 @@ void Utility::loadShaderVGF(render::Material* mat, const std::string& vpath, con
 	{
 		return;
 	}
-	mat->setShaderProgram(pProgram);
+	node->setShaderProgram(pProgram);
 
 	initShaderAttrib();
 }
 
-void Utility::loadShaderVTGF(render::Material* mat, const std::string& vpath, const std::string& tepath, const std::string& gpath, const std::string& fpath)
+void Utility::loadShaderVTGF(render::DrawNode* node, const std::string& vpath, const std::string& tepath, const std::string& gpath, const std::string& fpath)
 {
-	if (mat == nullptr)
+	if (node == nullptr)
 	{
 		return;
 	}
@@ -174,14 +162,14 @@ void Utility::loadShaderVTGF(render::Material* mat, const std::string& vpath, co
 	{
 		return;
 	}
-	mat->setShaderProgram(pProgram);
+	node->setShaderProgram(pProgram);
 
 	initShaderAttrib();
 }
 
-void Utility::loadShaderVTGF(render::Material* mat, const std::string& vpath, const std::string& tcpath, const std::string& tepath, const std::string& gpath, const std::string& fpath)
+void Utility::loadShaderVTGF(render::DrawNode* node, const std::string& vpath, const std::string& tcpath, const std::string& tepath, const std::string& gpath, const std::string& fpath)
 {
-	if (mat == nullptr)
+	if (node == nullptr)
 	{
 		return;
 	}
@@ -190,13 +178,8 @@ void Utility::loadShaderVTGF(render::Material* mat, const std::string& vpath, co
 	{
 		return;
 	}
-	mat->setShaderProgram(pProgram);
+	node->setShaderProgram(pProgram);
 
-	initShaderAttrib();
-}
-
-void Utility::initShaderAttrib(render::DrawNode* node)
-{
 	initShaderAttrib();
 }
 
@@ -291,15 +274,6 @@ void Utility::initShaderAttrib()
 	*/
 }
 
-void Utility::initShaderAttrib(render::MultiDrawNode* node)
-{
-	if (node == nullptr)
-	{
-		return;
-	}
-	initShaderAttrib();
-}
-
 void Utility::runRotateAction(render::Node* node)
 {
 	if (node == nullptr)
@@ -314,24 +288,4 @@ void Utility::runRotateAction(render::Node* node)
 	pRepeateAction->setAction(pRotateByAction);
 
 	node->getActionProxy()->runAction(pRepeateAction);
-}
-
-void Utility::loadShaderVF(render::Materials* mats, const std::string& vpath, const std::string& fpath)
-{
-	if (mats == nullptr)
-	{
-		return;
-	}
-	ShaderProgram* pProgram = G_SHANDER->createVertexFragmentProgram(vpath, fpath);
-	if (pProgram == nullptr)
-	{
-		return;
-	}
-	for (auto item : mats->getMaterials())
-	{
-		item.second->setShaderProgram(pProgram);
-	}
-
-	initShaderAttrib();
-
 }

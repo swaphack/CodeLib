@@ -43,6 +43,18 @@ bool ui::CtrlButton::init()
 	return true;
 }
 
+void ui::CtrlButton::setTexShaderProgram(render::ShaderProgram* shaderProgram)
+{
+	if (_btnText)
+	{
+		_btnText->setTexShaderProgram(shaderProgram);
+	}
+	if (_btnImage)
+	{
+		_btnImage->setTexShaderProgram(shaderProgram);
+	}
+}
+
 void ui::CtrlButton::setString(const std::string& text)
 {
 	TextProtocol::setString(text);

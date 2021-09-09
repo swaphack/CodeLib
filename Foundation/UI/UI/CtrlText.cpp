@@ -161,7 +161,15 @@ const phy::Color3B& ui::CtrlText::getTextColor() const
 	return _textDefine.color;
 }
 
-render::DrawNode2D* ui::CtrlText::getRenderNode()
+void ui::CtrlText::setTexShaderProgram(render::ShaderProgram* shaderProgram)
+{
+	if (_texture2D)
+	{
+		_texture2D->setShaderProgram(shaderProgram);
+	}
+}
+
+render::DrawTexture2D* ui::CtrlText::getRenderNode() const
 {
 	return _texture2D;
 }

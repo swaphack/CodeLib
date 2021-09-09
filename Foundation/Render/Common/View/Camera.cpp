@@ -2,11 +2,9 @@
 
 #include "Common/Tool/import.h"
 #include "Graphic/import.h"
+#include "Camera3D.h"
 
 using namespace render;
-
-//////////////////////////////////////////////////////////////////////////
-Camera* Camera::_mainCamera = nullptr;
 
 Camera::Camera()
 {
@@ -16,11 +14,8 @@ Camera::Camera()
 
 	_scale.set(1.0f, 1.0f, 1.0f);
 
-	_viewParameter2D.zNear = -50000;
-	_viewParameter2D.zFar = 50000;
-
-	_viewParameter3D.zNear = 0.1f;
-	_viewParameter2D.zFar = 1000000;
+	this->setDimensions(DimensionsType::THREE);
+	this->setViewDistance(0.1f, 1000000);
 }
 
 Camera::~Camera()
@@ -53,76 +48,25 @@ void Camera::setViewPort(float left, float right, float bottom, float top)
 	float w = 0.5f * (left + right);
 	float h = 0.5f * (bottom + top);
 
-	//if (getDimensions() == CameraDimensions::TWO)
-	{
-		_viewParameter2D.xLeft = -w;
-		_viewParameter2D.xRight = w;
-		_viewParameter2D.yBottom = -h;
-		_viewParameter2D.yTop = h;
-	}
-	//else
-	{
-		_viewParameter3D.xLeft = -w;
-		_viewParameter3D.xRight = w;
-		_viewParameter3D.yBottom = -h;
-		_viewParameter3D.yTop = h;
-	}
+	_viewParameter.xLeft = -w;
+	_viewParameter.xRight = w;
+	_viewParameter.yBottom = -h;
+	_viewParameter.yTop = h;
 
 	this->notify(NodeNotifyType::VIEWSIZE);
 }
 
 void render::Camera::setViewDistance(float zNear, float zFar)
 {
-	//if (getDimensions() == CameraDimensions::TWO)
-	{
-		_viewParameter2D.zNear = zNear;
-		_viewParameter2D.zFar = zFar;
-	}
-	//else
-	{
-		_viewParameter3D.zNear = zNear;
-		_viewParameter3D.zFar = zFar;
-	}
+	_viewParameter.zNear = zNear;
+	_viewParameter.zFar = zFar;
+
 	this->notify(NodeNotifyType::VIEWSIZE);
-}
-
-const render::ViewParameter& render::Camera::get2DViewParameter() const
-{
-	return _viewParameter2D;
-}
-
-const render::ViewParameter& render::Camera::get3DViewParameter() const
-{
-	return _viewParameter3D;
 }
 
 const ViewParameter& Camera::getViewParameter()const
 {
-	if (getDimensions() == DimensionsType::TWO)
-	{
-		return _viewParameter2D;
-	}
-	else
-	{
-		return _viewParameter3D;
-	}
-}
-
-Camera* Camera::getMainCamera()
-{
-	if (_mainCamera == nullptr)
-	{
-		_mainCamera = CREATE_NODE(Camera);
-		SAFE_RETAIN(_mainCamera);
-	}
-	return _mainCamera;
-}
-
-void Camera::setMainCamera(Camera* camera)
-{
-	SAFE_RELEASE(_mainCamera);
-	SAFE_RETAIN(camera);
-	_mainCamera = camera;
+	return _viewParameter;
 }
 
 DimensionsType Camera::getDimensions() const
@@ -144,7 +88,12 @@ void render::Camera::updateCameraView()
 
 void Camera::setDimensions(DimensionsType d)
 {
+	if (_dimensions == d)
+		return;
+
 	_dimensions = d;
+
+	this->notify(NodeNotifyType::VIEWSIZE);
 }
 
 void render::Camera::drawScene(Node* scene)
@@ -165,35 +114,13 @@ void Camera::visit()
 
 void Camera::updateView()
 {
-	if (getDimensions() == DimensionsType::TWO)
-	{
-		GLMatrix::loadOrtho(
-			_viewParameter2D.xLeft,
-			_viewParameter2D.xRight,
-			_viewParameter2D.yBottom,
-			_viewParameter2D.yTop,
-			_viewParameter2D.zNear,
-			_viewParameter2D.zFar);
-	}
-	else if (getDimensions() == DimensionsType::THREE)
-	{
-		GLMatrix::loadFrustum(
-			_viewParameter3D.xLeft,
-			_viewParameter3D.xRight,
-			_viewParameter3D.yBottom,
-			_viewParameter3D.yTop,
-			_viewParameter3D.zNear,
-			_viewParameter3D.zFar);
-	}
-
-	GLDebug::showError();
 }
 
 void Camera::startUpdateTranform()
 {
 	//PRINT("%s\n", _worldMatrix.toString().c_str());
 	GLMatrix::loadIdentity();
-
+	
 	GLMatrix::multMatrix(_worldMatrix);
 
 	GLDebug::showError();
@@ -206,24 +133,7 @@ void Camera::endUpdateTranform()
 
 const math::Matrix4x4& render::Camera::getProjectMatrix() const
 {
-	if (getDimensions() == DimensionsType::TWO)
-	{
-		return _projectMatrix2D;
-	}
-	else
-	{
-		return _projectMatrix3D;
-	}
-}
-
-const math::Matrix4x4& render::Camera::getProjectMatrix2D() const
-{
-	return _projectMatrix2D;
-}
-
-const math::Matrix4x4& render::Camera::getProjectMatrix3D() const
-{
-	return _projectMatrix3D;
+	return _projectMatrix;
 }
 
 const math::Matrix4x4& render::Camera::getViewMatrix() const
@@ -238,15 +148,15 @@ math::Matrix4x4 render::Camera::getProjectMatrix(float znear, float zfar)
 	if (getDimensions() == DimensionsType::TWO)
 	{
 		matrix = math::Matrix4x4::ortho(
-			_viewParameter2D.xLeft, _viewParameter2D.xRight,
-			_viewParameter2D.yBottom, _viewParameter2D.yTop,
+			_viewParameter.xLeft, _viewParameter.xRight,
+			_viewParameter.yBottom, _viewParameter.yTop,
 			znear, zfar);
 	}
 	else if (getDimensions() == DimensionsType::THREE)
 	{
 		matrix = math::Matrix4x4::frustum(
-			_viewParameter3D.xLeft, _viewParameter3D.xRight,
-			_viewParameter3D.yBottom, _viewParameter3D.yTop,
+			_viewParameter.xLeft, _viewParameter.xRight,
+			_viewParameter.yBottom, _viewParameter.yTop,
 			znear, zfar);
 	}
 
@@ -256,7 +166,7 @@ math::Matrix4x4 render::Camera::getProjectMatrix(float znear, float zfar)
 math::Matrix4x4 render::Camera::lookAt(const math::Vector3& position)
 {
 	math::Vector3 pos = _worldMatrix.getPosition();
-	math::Matrix4x4 mat = math::Matrix4x4::lookAt(pos, position, math::Vector3(0, 1, 0));
+	math::Matrix4x4 mat = math::Matrix4x4::lookAt(pos, position, this->getUp());
 	return mat;
 }
 
@@ -268,16 +178,8 @@ math::Matrix4x4 render::Camera::lookAtCenter()
 math::Vector3 render::Camera::getCenterPosition()
 {
 	math::Vector3 center;
-	if (getDimensions() == DimensionsType::TWO)
-	{
-		center.setX(0.5f * (_viewParameter2D.xLeft + _viewParameter2D.xRight));
-		center.setY(0.5f * (_viewParameter2D.yBottom + _viewParameter2D.yTop));
-	}
-	else
-	{
-		center.setX(0.5f * (_viewParameter3D.xLeft + _viewParameter3D.xRight));
-		center.setY(0.5f * (_viewParameter3D.yBottom + _viewParameter3D.yTop));
-	}
+	center.setX(0.5f * (_viewParameter.xLeft + _viewParameter.xRight));
+	center.setY(0.5f * (_viewParameter.yBottom + _viewParameter.yTop));
 
 	return center;
 }
@@ -287,17 +189,17 @@ math::Ray render::Camera::getRayFromScreenPoint(const math::Vector2& screenPoint
 	math::Matrix4x4 invMat = (getProjectMatrix() * getViewMatrix()).getInverse();
 	math::Vector3 pos = this->convertLocalPostitionToWorld(this->getPosition());
 	math::Vector3 dir;
-	float w;
-	float h;
+	float w = 1;
+	float h = 1;
 	if (getDimensions() == DimensionsType::TWO)
 	{
-		w = _viewParameter2D.xRight - _viewParameter2D.xLeft;
-		h = _viewParameter2D.yTop - _viewParameter2D.yBottom;
+		w = _viewParameter.xRight - _viewParameter.xLeft;
+		h = _viewParameter.yTop - _viewParameter.yBottom;
 	}
 	else if (getDimensions() == DimensionsType::THREE)
 	{
-		w = 0.5f * (_viewParameter3D.xRight - _viewParameter3D.xLeft);
-		h = 0.5f * (_viewParameter3D.yTop - _viewParameter3D.yBottom);
+		w = 0.5f * (_viewParameter.xRight - _viewParameter.xLeft);
+		h = 0.5f * (_viewParameter.yTop - _viewParameter.yBottom);
 	}
 
 	math::Vector4 nearVec = math::Vector4((screenPoint.getX() - w) / w, (screenPoint.getY() - h) / h, -1, 1.0f);
@@ -315,35 +217,15 @@ math::Ray render::Camera::getRayFromScreenPoint(const math::Vector2& screenPoint
 
 void render::Camera::updateViewPort()
 {
-	//if (getDimensions() == DimensionsType::TWO)
-	{
-		_projectMatrix2D = math::Matrix4x4::ortho(
-			_viewParameter2D.xLeft, _viewParameter2D.xRight,
-			_viewParameter2D.yBottom, _viewParameter2D.yTop,
-			_viewParameter2D.zNear, _viewParameter2D.zFar);
-	}
-	//else if (getDimensions() == DimensionsType::THREE)
-	{
-		_projectMatrix3D = math::Matrix4x4::frustum(
-			_viewParameter3D.xLeft, _viewParameter3D.xRight,
-			_viewParameter3D.yBottom, _viewParameter3D.yTop,
-			_viewParameter3D.zNear, _viewParameter3D.zFar);
-	}
-	GLDebug::showError();
 }
 
 void render::Camera::onCameraSpaceChange()
 {
 	math::Matrix4x4 mat;
-	math::Vector3 pos = _position * -1;
-	math::Matrix4x4::getRST(_obRotation, _scale, pos, mat);
-	if (this->getParent() == nullptr || !this->isRelativeWithParent())
-	{
-		_viewMatrix = mat;
-	}
-	else
-	{
-		_viewMatrix = mat * this->getParent()->getWorldMatrix();
-	}
+	math::Vector3 pos = _worldMatrix.getPosition();
+	math::Vector3 rotate = _worldMatrix.getEularRadian();
+	pos *= -1.0f;
+	math::Matrix4x4::getRST(rotate, math::Vector3(1,1,1), pos, mat);
+	_viewMatrix = mat;
 }
 

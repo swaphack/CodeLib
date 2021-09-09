@@ -104,10 +104,15 @@ namespace ui
 		*	颜色
 		*/ 
 		const phy::Color3B& getTextColor() const;
+	public:
 		/**
-		*	获取渲染节点
+		*	设置着色器
 		*/
-		virtual render::DrawNode2D* getRenderNode();
+		virtual void setTexShaderProgram(render::ShaderProgram* shaderProgram);
+		/**
+		*	渲染节点
+		*/
+		render::DrawTexture2D* getRenderNode()  const;
 	protected:
 		/**
 		*	文字图片信息

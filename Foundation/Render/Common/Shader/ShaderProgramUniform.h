@@ -56,9 +56,9 @@ namespace render
 		void setValue3(int count, const uint32_t* value);
 		void setValue4(int count, const uint32_t* value);
 
-		void setMatrix2(int count, const float* value);
-		void setMatrix3(int count, const float* value);
-		void setMatrix4(int count, const float* value);
+		void setMatrix2x2(int count, const float* value);
+		void setMatrix3x3(int count, const float* value);
+		void setMatrix4x4(int count, const float* value);
 
 		void setMatrix2x3(int count, bool transpose, const float* value);
 		void setMatrix3x2(int count, bool transpose, const float* value);

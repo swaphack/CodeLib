@@ -89,8 +89,12 @@ namespace render
 		*	盒子顶点
 		*/
 		void setBoxVertices(const render::CubeVertex& cubeVertex);
+
+		const render::CubeVertex& getLocalCubeVertex() const;
 	protected:
 		// 本地矩形框
-		math::CubePoints _boxVertex;
+		render::CubeVertex _localCubeVertex;
+		// 世界矩形框
+		render::CubeVertex _worldCubeVertex;
 	};
 }

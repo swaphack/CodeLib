@@ -47,27 +47,27 @@ namespace render
 		void setValue(int32_t v0, int32_t v1, int32_t v2);
 		void setValue(int32_t v0, int32_t v1, int32_t v2, int32_t v3);
 		// 2*2
-		void setMatrix2(int count, bool transpose, const float* value);
+		void setMatrix2x2(int count, bool transpose, const float* value);
 		// 3*3
-		void setMatrix3(int count, bool transpose, const float* value);
+		void setMatrix3x3(int count, bool transpose, const float* value);
 		// 4*4
-		void setMatrix4(int count, bool transpose, const float* value);
+		void setMatrix4x4(int count, bool transpose, const float* value);
 		// 2*2
-		void setMatrix2(bool transpose, const float* value);
+		void setMatrix2x2(bool transpose, const float* value);
 		// 3*3
-		void setMatrix3(bool transpose, const float* value);
+		void setMatrix3x3(bool transpose, const float* value);
 		// 4*4
-		void setMatrix4(bool transpose, const float* value);
+		void setMatrix4x4(bool transpose, const float* value);
 		// 2*2
-		void setMatrix2(const float* value);
+		void setMatrix2x2(const float* value);
 		// 3*3
-		void setMatrix3(const float* value);
+		void setMatrix3x3(const float* value);
 		// 4*4
-		void setMatrix4(const float* value);
+		void setMatrix4x4(const float* value);
 
-		void setMatrix2(const math::Matrix2x2& value);
-		void setMatrix3(const math::Matrix3x3& value);
-		void setMatrix4(const math::Matrix4x4& value);
+		void setMatrix2x2(const math::Matrix2x2& value);
+		void setMatrix3x3(const math::Matrix3x3& value);
+		void setMatrix4x4(const math::Matrix4x4& value);
 	private:
 		uint32_t _uniformID = 0;
 	};

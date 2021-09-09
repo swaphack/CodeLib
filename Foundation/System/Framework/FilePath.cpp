@@ -23,12 +23,14 @@ std::string FilePath::getFilePath(const std::string& filename, bool bIngoreEmpty
 	{
 		return "";
 	}
-	
-	std::map<std::string, std::string>::iterator it = _filePathCache.find(filename);
-
-	if (it != _filePathCache.end())
+	if (_filePathCache.size() != 0)
 	{
-		return it->second.c_str();
+		auto it = _filePathCache.find(filename);
+
+		if (it != _filePathCache.end())
+		{
+			return it->second;
+		}
 	}
 
 	std::string fullpath;
@@ -48,8 +50,8 @@ std::string FilePath::getFilePath(const std::string& filename, bool bIngoreEmpty
 		fullpath += filename;
 		if (File::exists(fullpath))
 		{
-			_filePathCache[filename] = fullpath;
-			return _filePathCache[filename];
+			_filePathCache.insert(std::make_pair(filename, fullpath));
+			return fullpath;
 		}
 		it2++;
 	}

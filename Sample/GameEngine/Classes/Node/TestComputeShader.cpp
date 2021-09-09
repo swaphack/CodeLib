@@ -40,11 +40,11 @@ void TestComputeShader::testParticleNode()
 		auto pNode = node->as<render::ComputeParticleNode>();
 
 		auto project = program->getUniform("matrix.project");
-		if (project) project->setMatrix4(render::Camera::getMainCamera()->getProjectMatrix().getValue());
+		if (project) project->setMatrix4x4(node->getCamera()->getProjectMatrix().getValue());
 		auto view = program->getUniform("matrix.view");
-		if (view) project->setMatrix4(render::Camera::getMainCamera()->getViewMatrix().getValue());
+		if (view) project->setMatrix4x4(node->getCamera()->getViewMatrix().getValue());
 		auto model = program->getUniform("matrix.model");
-		if (model) project->setMatrix4(node->getWorldMatrix().getValue());
+		if (model) project->setMatrix4x4(node->getWorldMatrix().getValue());
 		/*
 		auto position = program->getAttrib("v_position");
 		if (position)

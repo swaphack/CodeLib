@@ -42,14 +42,14 @@ void TestParticleNode::testCollideParticle()
 	GLDebug::showError();
 
 	pUpdateFeedback->func = [&](Node* ps, ShaderProgram* sp) {
-		const math::Matrix4x4& proMat = Camera::getMainCamera()->getProjectMatrix();
+		const math::Matrix4x4& proMat = ps->getCamera()->getProjectMatrix();
 		const math::Matrix4x4& modelMat = ps->getWorldMatrix();
 
 		ShaderUniform* pUniform = sp->getUniform("matrix.project");
-		if (pUniform) pUniform->setMatrix4(proMat);
+		if (pUniform) pUniform->setMatrix4x4(proMat);
 
 		pUniform = sp->getUniform("matrix.model");
-		if (pUniform) pUniform->setMatrix4(modelMat);
+		if (pUniform) pUniform->setMatrix4x4(modelMat);
 
 		pUniform = sp->getUniform("triangleCount");
 		if (pUniform) pUniform->setValue(particleNode->getParticleCount() / 3);
@@ -88,14 +88,14 @@ void TestParticleNode::testCollideParticle()
 	GLDebug::showError();
 
 	pRenderFeedback->func = [](Node* ps, ShaderProgram* sp) {
-		const math::Matrix4x4& proMat = Camera::getMainCamera()->getProjectMatrix();
+		const math::Matrix4x4& proMat = ps->getCamera()->getProjectMatrix();
 		const math::Matrix4x4& modelMat = ps->getWorldMatrix();
 
 		ShaderUniform* pUniform = sp->getUniform("matrix.project");
-		if (pUniform) pUniform->setMatrix4(proMat);
+		if (pUniform) pUniform->setMatrix4x4(proMat);
 
 		pUniform = sp->getUniform("matrix.model");
-		if (pUniform) pUniform->setMatrix4(modelMat);
+		if (pUniform) pUniform->setMatrix4x4(modelMat);
 	};
 	GLDebug::showError();
 

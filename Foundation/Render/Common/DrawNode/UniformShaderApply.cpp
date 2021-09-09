@@ -272,19 +272,19 @@ void render::UniformShaderApply::updateMatrixUniformValue(Node* node, ShaderProg
 		}
 		if (item.first == MatrixUniformType::PROJECT_MATRIX)
 		{
-			pUniform->setMatrix4(projMat);
+			pUniform->setMatrix4x4(projMat);
 		}
 		else if (item.first == MatrixUniformType::VIEW_MATRIX)
 		{
-			pUniform->setMatrix4(viewMat);
+			pUniform->setMatrix4x4(viewMat);
 		}
 		else if (item.first == MatrixUniformType::MODEL_MATRIX)
 		{
-			pUniform->setMatrix4(modelMat);
+			pUniform->setMatrix4x4(modelMat);
 		}
 		else if (item.first == MatrixUniformType::NORMAL_MATRIX)
 		{
-			pUniform->setMatrix3(normalMat);
+			pUniform->setMatrix3x3(normalMat);
 		}
 
 		GLDebug::showError();
@@ -329,7 +329,7 @@ void render::UniformShaderApply::updateMaterialUniformValue(ShaderProgram* progr
 		else if (item.first == MaterialUniformType::MATERIAL_TEXTURE)
 		{
 			auto pTexture = textureCache->getTexture(pDetail->getAmbientTextureMap());
-			if (pTexture == nullptr)
+			if (pTexture == nullptr || !pTexture->isValid())
 			{
 				pTexture = Texture2D::getEmptyTexture();
 			}
@@ -345,7 +345,7 @@ void render::UniformShaderApply::updateMaterialUniformValue(ShaderProgram* progr
 		else if (item.first == MaterialUniformType::MATERIAL_TEXTURE_DIFFUSE)
 		{
 			auto pTexture = textureCache->getTexture(pDetail->getDiffuseTextureMap());
-			if (pTexture == nullptr)
+			if (pTexture == nullptr || !pTexture->isValid())
 			{
 				pTexture = Texture2D::getEmptyTexture();
 			}
@@ -361,7 +361,7 @@ void render::UniformShaderApply::updateMaterialUniformValue(ShaderProgram* progr
 		else if (item.first == MaterialUniformType::MATERIAL_TEXTURE_SPECULAR)
 		{
 			auto pTexture = textureCache->getTexture(pDetail->getSpecularTextureMap());
-			if (pTexture == nullptr)
+			if (pTexture == nullptr || !pTexture->isValid())
 			{
 				pTexture = Texture2D::getEmptyTexture();
 			}
@@ -377,7 +377,7 @@ void render::UniformShaderApply::updateMaterialUniformValue(ShaderProgram* progr
 		else if (item.first == MaterialUniformType::MATERIAL_TEXTURE_ALPHA)
 		{
 			auto pTexture = textureCache->getTexture(pDetail->getAlphaTextureMap());
-			if (pTexture == nullptr)
+			if (pTexture == nullptr || !pTexture->isValid())
 			{
 				pTexture = Texture2D::getEmptyTexture();
 			}
@@ -393,7 +393,7 @@ void render::UniformShaderApply::updateMaterialUniformValue(ShaderProgram* progr
 		else if (item.first == MaterialUniformType::MATERIAL_TEXTURE_BUMP)
 		{
 			auto pTexture = textureCache->getTexture(pDetail->getBumpTextureMap());
-			if (pTexture == nullptr)
+			if (pTexture == nullptr || !pTexture->isValid())
 			{
 				pTexture = Texture2D::getEmptyTexture();
 			}
@@ -409,7 +409,7 @@ void render::UniformShaderApply::updateMaterialUniformValue(ShaderProgram* progr
 		else if (item.first == MaterialUniformType::MATERIAL_TEXTURE_NORMAL)
 		{
 			auto pTexture = textureCache->getTexture(pDetail->getNormalTextureMap());
-			if (pTexture == nullptr)
+			if (pTexture == nullptr || !pTexture->isValid())
 			{
 				pTexture = Texture2D::getEmptyTexture();
 			}
@@ -425,7 +425,7 @@ void render::UniformShaderApply::updateMaterialUniformValue(ShaderProgram* progr
 		else if (item.first == MaterialUniformType::MATERIAL_TEXTURE_SHADOW)
 		{
 			auto pTexture = textureCache->getTexture(pDetail->getShadowTextureMap());
-			if (pTexture == nullptr)
+			if (pTexture == nullptr || !pTexture->isValid())
 			{
 				pTexture = Texture2D::getEmptyTexture();
 			}
@@ -478,7 +478,7 @@ void render::UniformShaderApply::updateTexturesUnifromValue(ShaderProgram* progr
 		if (textureID == TextureUniformType::TEXTURE0)
 		{
 			auto pTexture = textureCache->getTexture(pDetail->getAmbientTextureMap());
-			if (pTexture == nullptr)
+			if (pTexture == nullptr || !pTexture->isValid())
 			{
 				pTexture = Texture2D::getEmptyTexture();
 			}
@@ -493,7 +493,7 @@ void render::UniformShaderApply::updateTexturesUnifromValue(ShaderProgram* progr
 		else if (textureID == TextureUniformType::TEXTURE1)
 		{
 			auto pTexture = textureCache->getTexture(pDetail->getDiffuseTextureMap());
-			if (pTexture == nullptr)
+			if (pTexture == nullptr || !pTexture->isValid())
 			{
 				pTexture = Texture2D::getEmptyTexture();
 			}
@@ -510,7 +510,7 @@ void render::UniformShaderApply::updateTexturesUnifromValue(ShaderProgram* progr
 		else if (textureID == TextureUniformType::TEXTURE2)
 		{
 			auto pTexture = textureCache->getTexture(pDetail->getSpecularTextureMap());
-			if (pTexture == nullptr)
+			if (pTexture == nullptr || !pTexture->isValid())
 			{
 				pTexture = Texture2D::getEmptyTexture();
 			}
@@ -525,7 +525,7 @@ void render::UniformShaderApply::updateTexturesUnifromValue(ShaderProgram* progr
 		else if (textureID == TextureUniformType::TEXTURE3)
 		{
 			auto pTexture = textureCache->getTexture(pDetail->getAlphaTextureMap());
-			if (pTexture == nullptr)
+			if (pTexture == nullptr || !pTexture->isValid())
 			{
 				pTexture = Texture2D::getEmptyTexture();
 			}
@@ -540,7 +540,7 @@ void render::UniformShaderApply::updateTexturesUnifromValue(ShaderProgram* progr
 		else if (textureID == TextureUniformType::TEXTURE4)
 		{
 			auto pTexture = textureCache->getTexture(pDetail->getBumpTextureMap());
-			if (pTexture == nullptr)
+			if (pTexture == nullptr || !pTexture->isValid())
 			{
 				pTexture = Texture2D::getEmptyTexture();
 			}
@@ -555,7 +555,7 @@ void render::UniformShaderApply::updateTexturesUnifromValue(ShaderProgram* progr
 		else if (textureID == TextureUniformType::TEXTURE5)
 		{
 			auto pTexture = textureCache->getTexture(pDetail->getNormalTextureMap());
-			if (pTexture == nullptr)
+			if (pTexture == nullptr || !pTexture->isValid())
 			{
 				pTexture = Texture2D::getEmptyTexture();
 			}
@@ -570,7 +570,7 @@ void render::UniformShaderApply::updateTexturesUnifromValue(ShaderProgram* progr
 		else if (textureID == TextureUniformType::TEXTURE6)
 		{
 			auto pTexture = textureCache->getTexture(pDetail->getShadowTextureMap());
-			if (pTexture == nullptr)
+			if (pTexture == nullptr || !pTexture->isValid())
 			{
 				pTexture = Texture2D::getEmptyTexture();
 			}
@@ -1019,12 +1019,12 @@ void render::UniformShaderApply::updateNearestLightUniformValue(Node* node, Shad
 			if (bSupportShadow)
 			{
 				math::Matrix4x4 lightMatrix;
-				math::Matrix4x4 lightProject = node->getCamera()->getProjectMatrix(0.1f, node->getCamera()->getViewParameter().zFar);
+				math::Matrix4x4 lightProject = node->getCamera()->getProjectMatrix(node->getCamera()->getViewParameter().zNear, node->getCamera()->getViewParameter().zFar);
 				math::Vector3 center = node->getCamera()->getCenterPosition();
 				math::Matrix4x4 lightView = math::Matrix4x4::lookAt(lightPos, center, math::Vector3(0, 1, 0));
 				lightMatrix = lightProject * lightView;
 
-				pUniform->setMatrix4(1, lightMatrix.getValue());
+				pUniform->setMatrix4x4(1, lightMatrix.getValue());
 			}
 		}
 		GLDebug::showError();
@@ -1175,11 +1175,11 @@ void render::UniformShaderApply::updateAllLightsUniformValue(Node* node, ShaderP
 				if (bSupportShadow)
 				{
 					math::Matrix4x4 lightMatrix;
-					math::Matrix4x4 lightProject = node->getCamera()->getProjectMatrix(0.1f, node->getCamera()->getViewParameter().zFar);
+					math::Matrix4x4 lightProject = node->getCamera()->getProjectMatrix(node->getCamera()->getViewParameter().zNear, node->getCamera()->getViewParameter().zFar);
 					math::Vector3 center = node->getCamera()->getCenterPosition();
 					math::Matrix4x4 lightView = math::Matrix4x4::lookAt(lightPos, center, math::Vector3(0, 1, 0));
 					lightMatrix = lightProject * lightView;
-					pUniform->setMatrix4(1, lightMatrix.getValue());
+					pUniform->setMatrix4x4(1, lightMatrix.getValue());
 				}
 			}
 			GLDebug::showError();

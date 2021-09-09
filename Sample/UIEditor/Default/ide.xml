@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <root>
 	<IDE>
-		<Design>Default/Layout/ui_test.xml</Design>
+		<Design>Default/Layout/main_view.xml</Design>
 		<Control>Default/Layout/Widget/widget.config.xml</Control>
 	</IDE>
+	<Shader>
+		<TexVertex>Default/Shader/ui_texture.vs</TexVertex>
+		<TexFragment>Default/Shader/ui_texture.fs</TexFragment>
+		<ColorVertex>Default/Shader/ui_color.vs</ColorVertex>
+		<ColorFragment>Default/Shader/ui_color.fs</ColorFragment>
+	</Shader>
 	<Text>
 		<FontPath>Default/Font/font_3.ttf</FontPath>
 		<FontSize>24</FontSize>

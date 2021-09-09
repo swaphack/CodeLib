@@ -238,26 +238,35 @@ void render::Mesh::updateBufferData()
 		_vertexBuffer->setBufferSubData(nOffset, nVerticeSize, _detail->getVertices().getPtr());
 		nOffset += nVerticeSize;
 	}
+
+	GLDebug::showError();
 	if (nColorSize > 0)
 	{
 		_vertexBuffer->setBufferSubData(nOffset, nColorSize, _detail->getColors().getPtr());
 		nOffset += nColorSize;
 	}
+
+	GLDebug::showError();
 	if (nUVSize > 0)
 	{
 		_vertexBuffer->setBufferSubData(nOffset, nUVSize, _detail->getUVs().getPtr());
 		nOffset += nUVSize;
 	}
+
+	GLDebug::showError();
 	if (nNormalSize > 0)
 	{
 		_vertexBuffer->setBufferSubData(nOffset, nNormalSize, _detail->getNormals().getPtr());
 		nOffset += nNormalSize;
 	}
+
+	GLDebug::showError();
 	if (nTangentSize > 0)
 	{
 		_vertexBuffer->setBufferSubData(nOffset, nTangentSize, _detail->getTangents().getPtr());
 		nOffset += nTangentSize;
 	}
+	GLDebug::showError();
 	if (nBitangentSize > 0)
 	{
 		_vertexBuffer->setBufferSubData(nOffset, nBitangentSize, _detail->getBitangents().getPtr());

@@ -32,7 +32,7 @@ bool RemoteResource::loadFileData(const std::string& filename, GetDataCallback h
 	}
 
 	std::string data;
-	if (getCacheData(fullpath.c_str(), data))
+	if (getCacheData(fullpath, data))
 	{
 		if (handler)
 		{

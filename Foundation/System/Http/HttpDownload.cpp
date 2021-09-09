@@ -230,7 +230,7 @@ Client* HttpDownload::initClient(const std::string& url)
 
 void HttpDownload::parseHttpURL(const std::string& url, std::string& ip, int32_t& port, std::string& filepath, std::string& values)
 {
-	String content = url.c_str();
+	String content = url;
 	String low = content.toLower();
 	if (!low.startWith(HttpConstant::HTTP_HTTP) && !low.startWith(HttpConstant::HTTP_HTTPS))
 	{

@@ -31,3 +31,11 @@ uint32_t CountTask::getCount()
 	return m_nCount;
 }
 
+sys::OnceTask::OnceTask()
+{
+	this->setCount(1);
+}
+
+sys::OnceTask::~OnceTask()
+{
+}

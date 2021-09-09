@@ -23,7 +23,7 @@ void WindowImpl::initWindow(const std::string& title, float width, float height,
 
 std::string WindowImpl::getTitle()
 {
-	return _title.c_str();
+	return _title;
 }
 
 float WindowImpl::getHeight()

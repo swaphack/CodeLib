@@ -122,5 +122,6 @@ void sys::TimeClock::endRecord()
 	auto time = *getNow();
 
 	_recordDiffTime = time - _recordTime;
+	//PRINTLN("Different Time : %d", (int32_t)_recordDiffTime);
 	_recordTime = time;
 }

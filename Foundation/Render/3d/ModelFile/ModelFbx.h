@@ -15,6 +15,6 @@ namespace render
 		virtual ~ModelFbx();
 	public:
 		bool load(const std::string& filepath);
-		bool loadAsyn(const std::string& filepath, const std::function<void(Node*)>& callback = nullptr);
+		bool loadAsyn(const std::string& filepath, const LoadedModelCallback& func = nullptr);
 	};
 }

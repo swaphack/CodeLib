@@ -2,7 +2,7 @@
 
 #include "Shader/core/frag/texture.fs"
 
-uniform Texture3D tex;
+uniform TextureCube tex;
 
 in vec3 fragPosition;
 

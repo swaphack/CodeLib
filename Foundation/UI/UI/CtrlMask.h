@@ -17,9 +17,9 @@ namespace ui
 	public:
 		virtual bool init();
 		/**
-		*	渲染节点
+		*	设置着色器
 		*/
-		virtual render::DrawNode2D* getRenderNode();
+		virtual void setColorShaderProgram(render::ShaderProgram* shaderProgram);
 	protected:
 		virtual void onColorChange();
 	private:
