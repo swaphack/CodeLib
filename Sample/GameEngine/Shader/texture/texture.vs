@@ -6,6 +6,7 @@
 uniform Matrix matrix;
 
 out vec2 fragTexcoord;
+out vec4 fragColor;
 
 void main()
 {
@@ -14,4 +15,5 @@ void main()
 	gl_Position = getMVP(matrix) * pos;
 
 	fragTexcoord = v_texcoord;
+	fragColor = v_color;
 }

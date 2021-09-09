@@ -19,13 +19,13 @@ void TestModelNode::initNodes()
 {
 	//addLight();
 	//this->testCubeModel();
-	this->testSphereModel();
+	//this->testSphereModel();
 	//this->testCubeMap();
 	//this->testObj();
 
 	//this->testObj();
 	//this->test3ds();
-	//this->testFbx();
+	this->testFbx();
 }
 
 void TestModelNode::testCubeModel()
@@ -192,14 +192,18 @@ void TestModelNode::testFbx()
 	std::string filename = "Resource/Model/fbx/LANCER_EVOLUTION/LANCEREVOX.FBX";
 	ModelFbx* pModel = CREATE_NODE(ModelFbx);
 	pModel->setBoxVisible(true);
+	//pModel->load(filename);
 	pModel->loadAsyn(filename, [](render::ModelFile* node) {
-		Utility::loadShaderVF(node, "Shader/material/material_texture.vs", "Shader/material/material_texture.fs");
+		Utility::loadDefaultShader(node);
 	});
-	pModel->setScale(1);
+
+	pModel->setScale(100);
 	pModel->setPosition(512, 384);
 	pModel->setRotation(0, 0, 0);
-	pModel->setVolume(100, 100, 100);
+	pModel->setVolume(2, 4, 3);
 	this->addChild(pModel);
+
+	//Utility::loadDefaultShader(pModel);
 
 	RotateByAction* pRotateByAction = CREATE_ACTION(RotateByAction);
 	pRotateByAction->setDifferentRotation(0, 180, 0);
