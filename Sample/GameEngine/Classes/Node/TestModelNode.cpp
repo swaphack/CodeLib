@@ -192,6 +192,7 @@ void TestModelNode::testFbx()
 	std::string filename = "Resource/Model/fbx/LANCER_EVOLUTION/LANCEREVOX.FBX";
 	ModelFbx* pModel = CREATE_NODE(ModelFbx);
 	pModel->setBoxVisible(true);
+	pModel->setBoxLineWidth(5);
 	//pModel->load(filename);
 	pModel->loadAsyn(filename, [](render::ModelFile* node) {
 		Utility::loadDefaultShader(node);
@@ -199,14 +200,14 @@ void TestModelNode::testFbx()
 
 	pModel->setScale(100);
 	pModel->setPosition(512, 384);
-	pModel->setRotation(0, 0, 0);
-	pModel->setVolume(2, 4, 3);
+	pModel->setRotation(90, 0, 0);
+	pModel->setVolume(10, 10, 10);
 	this->addChild(pModel);
 
 	//Utility::loadDefaultShader(pModel);
 
 	RotateByAction* pRotateByAction = CREATE_ACTION(RotateByAction);
-	pRotateByAction->setDifferentRotation(0, 180, 0);
+	pRotateByAction->setDifferentRotation(0, 0, 180);
 	pRotateByAction->setDuration(4);
 
 	RepeateForeverAction* pRepeateAction = CREATE_ACTION(RepeateForeverAction);
