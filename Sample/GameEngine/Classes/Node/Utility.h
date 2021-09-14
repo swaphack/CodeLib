@@ -5,14 +5,18 @@
 
 class Utility
 {
-public:
+public:// Í¼Ôª
 	static void loadPrimitiveShader(render::DrawNode* node);
 	static void loadPrimitiveShader(ui::CtrlWidget* node);
-
+	static void loadPrimitiveShader(render::MultiDrawNode* node);
+public: // ÎÆÀí
 	static void loadDefaultShader(render::DrawNode* node);
 	static void loadDefaultShader(ui::CtrlWidget* node);
 	static void loadDefaultShader(render::MultiDrawNode* node);
-
+public: // ²ÄÖÊ
+	static void loadMaterialShader(render::DrawNode* node);
+	static void loadMaterialShader(render::MultiDrawNode* node);
+public:
 	static void loadShaderVF(ui::CtrlWidget* node, const std::string& vpath, const std::string& fpath);
 	static void loadShaderVF(render::MultiDrawNode* node, const std::string& vpath, const std::string& fpath);
 

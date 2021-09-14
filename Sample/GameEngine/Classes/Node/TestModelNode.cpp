@@ -146,11 +146,11 @@ void TestModelNode::test3ds()
 	std::string filename = "Resource/Model/3DS/Bld_38.3ds";
 	Model3DS* pModel = CREATE_NODE(Model3DS);
 	pModel->loadAsyn(filename, [](render::ModelFile* node) {
-		Utility::loadShaderVF(node, "Shader/material/material_texture.vs", "Shader/material/material_texture.fs");
+		Utility::loadPrimitiveShader(node);
 	});
 	pModel->setScale(100);
-	pModel->setPosition(500, 500, 0);
-	pModel->setVolume(400, 400, 400);
+	pModel->setPosition(512, 384, 0);
+	pModel->setVolume(10, 10, 10);
 	this->addChild(pModel);
 
 	RotateByAction* pRotateByAction = CREATE_ACTION(RotateByAction);
@@ -170,11 +170,11 @@ void TestModelNode::testObj()
 
 	ModelObj* pModel = CREATE_NODE(ModelObj);
 	pModel->loadAsyn(filename, [](render::ModelFile* node) {
-		Utility::loadShaderVF(node, "Shader/material/material_texture.vs", "Shader/material/material_texture.fs");
+		Utility::loadDefaultShader(node);
 	});
 	pModel->setScale(50);
-	pModel->setPosition(1024, 768, 0);
-	pModel->setVolume(400, 400, 400);
+	pModel->setPosition(512, 384, 0);
+	pModel->setVolume(10, 10, 10);
 	this->addChild(pModel);
 
 	RotateByAction* pRotateByAction = CREATE_ACTION(RotateByAction);
@@ -189,11 +189,13 @@ void TestModelNode::testObj()
 
 void TestModelNode::testFbx()
 {
+	//render::BoxDraw::getInstance()->getRenderNode()->setDrawMode(DrawMode::POINTS);
 	std::string filename = "Resource/Model/fbx/LANCER_EVOLUTION/LANCEREVOX.FBX";
 	ModelFbx* pModel = CREATE_NODE(ModelFbx);
 	pModel->setBoxVisible(true);
 	pModel->setBoxLineWidth(5);
 	//pModel->load(filename);
+
 	pModel->loadAsyn(filename, [](render::ModelFile* node) {
 		Utility::loadDefaultShader(node);
 	});
@@ -201,7 +203,7 @@ void TestModelNode::testFbx()
 	pModel->setScale(100);
 	pModel->setPosition(512, 384);
 	pModel->setRotation(90, 0, 0);
-	pModel->setVolume(10, 10, 10);
+	pModel->setVolume(2, 4, 2);
 	this->addChild(pModel);
 
 	//Utility::loadDefaultShader(pModel);

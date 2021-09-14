@@ -650,9 +650,19 @@ void Node::notify(NodeNotifyType id)
 	setDirty(true);
 }
 
-void render::Node::addNotifyListener(NodeNotifyType id, const NotifyDelegate& handler)
+void render::Node::addNotifyListener(NodeNotifyType id, const NotifyDelegate& func)
 {
-	_notify->addListen(id, handler);
+	_notify->addListen(id, func);
+}
+
+void render::Node::addNotifyListener(NodeNotifyType id, void* target, const NotifyDelegate& func)
+{
+	_notify->addTargetListen(id, target, func);
+}
+
+void render::Node::removeNotifyListener(NodeNotifyType id, void* target)
+{
+	_notify->removeTargetListen(id, target);
 }
 
 void render::Node::notifyToAll(NodeNotifyType id)

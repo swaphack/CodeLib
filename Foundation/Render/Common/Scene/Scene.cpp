@@ -23,16 +23,18 @@ bool Scene::init()
 	{
 		return false;
 	}
-	BoxDraw* box = CREATE_NODE(BoxDraw);
-	this->addChild(box, INT_MAX);
+
+	Camera3D* camera3D = CREATE_NODE(Camera3D);
+	this->addChild(camera3D, INT_MAX);
+	G_CAMERAS->setCamera3D(camera3D);
 
 	Camera2D* camera2D = CREATE_NODE(Camera2D);
 	this->addChild(camera2D, INT_MAX);
 	G_CAMERAS->setCamera2D(camera2D);
 
-	Camera3D* camera3D = CREATE_NODE(Camera3D);
-	this->addChild(camera3D, INT_MAX);
-	G_CAMERAS->setCamera3D(camera3D);
+	BoxDraw* box = CREATE_NODE(BoxDraw);
+	this->addChild(box, INT_MAX);
+
 
 	return true;
 }

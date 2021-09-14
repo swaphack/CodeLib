@@ -9,6 +9,7 @@ int ui::CtrlWidget::s_nScissorCount = 0;
 
 ui::CtrlWidget::CtrlWidget()
 {
+	this->setBoxNode(this);
 	this->resetLayoutItem();
 }
 
@@ -29,7 +30,7 @@ bool ui::CtrlWidget::init()
 
 	// 添加属性改变监听
 	addNotifyListener(NodeNotifyType::SPACE, [this]() {
-		onCtrlWidgetBodyChange();
+		onCtrlWidgetWorldBodyChange();
 	});
 
 	// 添加属性改变监听
@@ -260,6 +261,11 @@ void ui::CtrlWidget::onCtrlWidgetBodyChange()
 {
 	VertexTool::setTexture2DVertices(&_localRectVertex, math::Vector3(), _volume, _anchor);
 
+	onCtrlWidgetWorldBodyChange();
+}
+
+void ui::CtrlWidget::onCtrlWidgetWorldBodyChange()
+{
 	_worldRectVertex.setLeftBottomPosition(this->convertLocalPostitionToWorld(_localRectVertex.getLeftBottomPosition()));
 	_worldRectVertex.setRightBottomPosition(this->convertLocalPostitionToWorld(_localRectVertex.getRightBottomPosition()));
 	_worldRectVertex.setRightTopPosition(this->convertLocalPostitionToWorld(_localRectVertex.getRightTopPosition()));

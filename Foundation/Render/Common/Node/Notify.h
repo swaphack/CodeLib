@@ -64,15 +64,48 @@ namespace render
 			}
 			_notifyEvent[k].push_back(handler);
 		}
-		// 移除某一类型的监听
-		void removeListens(T k)
+		// 添加监听
+		void addTargetListen(T k, void* target, NotifyDelegate handler)
 		{
-			if (_notifyEvent.find(k) == _notifyEvent.end())
+			if (handler == nullptr || target == nullptr)
 			{
 				return;
 			}
 
-			_notifyEvent.erase(k);
+			auto it = _notifyTargetEvent.find(k);
+			if (it == _notifyTargetEvent.end())
+			{
+				_notifyTargetEvent.insert(std::make_pair(k, std::map<void*, NotifyDelegate>()));
+			}
+			_notifyTargetEvent[k][target] = handler;
+		}
+
+		// 移除某一类型的监听
+		void removeTargetListen(T k, void* target)
+		{
+			if (target == nullptr) return;
+			auto it = _notifyTargetEvent.find(k);
+			if (it != _notifyTargetEvent.end())
+			{
+				auto it1 = it->second.find(target);
+				if (it1 != it->second.end())
+				{
+					it->second.erase(it1);
+				}
+			}
+		}
+
+		// 移除某一类型的监听
+		void removeListens(T k)
+		{
+			if (_notifyEvent.find(k) != _notifyEvent.end())
+			{
+				_notifyEvent.erase(k);
+			}
+			if (_notifyTargetEvent.find(k) != _notifyTargetEvent.end())
+			{
+				_notifyTargetEvent.erase(k);
+			}
 		}
 		// 添加标记
 		void addMark(T k)
@@ -105,28 +138,39 @@ namespace render
 		// 执行
 		void run(T k)
 		{
-			if (_notifyEvent.find(k) == _notifyEvent.end())
+			if (_notifyEvent.find(k) != _notifyEvent.end())
 			{
-				return;
+				auto iter = _notifyEvent[k].begin();
+				while (iter != _notifyEvent[k].end())
+				{
+					(*iter)();
+					iter++;
+				}
 			}
-
-			std::vector<NotifyDelegate>::iterator iter = _notifyEvent[k].begin();
-			while (iter != _notifyEvent[k].end())
+			if (_notifyTargetEvent.find(k) != _notifyTargetEvent.end())
 			{
-				(*iter)();
-				iter++;
+				for (auto item : _notifyTargetEvent[k])
+				{
+					item.second();
+				}
 			}
+			
 		}
 		// 清空
 		void clear()
 		{
+			_notifyTargetEvent.clear();
 			_notifyEvent.clear();
 			_notifyMark.clear();
 		}
 	private:
 		typedef std::map<T, std::vector<NotifyDelegate>> NotifyEvent;
+		typedef std::map<T, std::map<void*, NotifyDelegate>> NotifyTargetEvent;
+
 		// 推送事件
 		NotifyEvent _notifyEvent;
+		// 推送事件
+		NotifyTargetEvent _notifyTargetEvent;
 		// 需要修改的标记
 		std::set<T> _notifyMark;
 	};

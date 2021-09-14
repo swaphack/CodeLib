@@ -19,7 +19,8 @@ bool TestMainScene::init()
 		return false;
 	}
 
-	Utility::loadPrimitiveShader(render::BoxDraw::getInstance()->getRenderNode());
+	Utility::loadPrimitiveShader(render::BoxDraw::getInstance()->getRenderNode2d());
+	Utility::loadPrimitiveShader(render::BoxDraw::getInstance()->getRenderNode3d());
 
 	this->initNodes();
 	this->initEnv();
@@ -39,7 +40,7 @@ void TestMainScene::initNodes()
 	//this->addChild(CREATE_NODE(TestMediaNode));
 	//this->addChild(CREATE_NODE(TestFragmentNode));
 	//this->addChild(CREATE_NODE(TestDrawNode));
-	//this->addChild(CREATE_NODE(TestUINode));
+	this->addChild(CREATE_NODE(TestUINode));
 	//
 	//this->addChild(CREATE_NODE(TestParticleNode));
 	//

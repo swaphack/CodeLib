@@ -33,6 +33,10 @@ namespace render
 		*	形状改变
 		*/
 		void onModelFileBodyChange();
+		/**
+		*	形状改变
+		*/
+		void onModelFileWorldBodyChange();
 	protected:
 		bool _bloadedModel = false;
 		// 模型数据

@@ -9,7 +9,7 @@ render::BoxDrawProtocol::BoxDrawProtocol()
 
 render::BoxDrawProtocol::~BoxDrawProtocol()
 {
-
+	this->setBoxVisible(false);
 }
 
 void render::BoxDrawProtocol::setBoxVisible(bool bVisible)
@@ -56,15 +56,30 @@ void render::BoxDrawProtocol::setBoxLineWidth(float width)
 	_boxLineWidth = width;
 }
 
+render::BoxDrawType render::BoxDrawProtocol::getBoxDrawType() const
+{
+	return _boxDrawType;
+}
+
+render::Node* render::BoxDrawProtocol::getBoxNode() const
+{
+	return m_pBoxNode;
+}
+
 void render::BoxDrawProtocol::getBoxPoints(std::vector<math::TrianglePoints>& vecPoints) const
 {
 	vecPoints = _boxPoints;
 }
 
+void render::BoxDrawProtocol::setBoxNode(render::Node* node)
+{
+	m_pBoxNode = node;
+}
+
 /////////////////////////////////////////////////////////////////////////
 render::Box2DDrawProtocol::Box2DDrawProtocol()
 {
-
+	_boxDrawType = BoxDrawType::TWO;
 }
 
 render::Box2DDrawProtocol::~Box2DDrawProtocol()
@@ -103,7 +118,7 @@ const render::RectVertex& render::Box2DDrawProtocol::getLocalRectVertex() const
 /////////////////////////////////////////////////////////////////////////
 render::Box3DDrawProtocol::Box3DDrawProtocol()
 {
-
+	_boxDrawType = BoxDrawType::THREE;
 }
 
 render::Box3DDrawProtocol::~Box3DDrawProtocol()

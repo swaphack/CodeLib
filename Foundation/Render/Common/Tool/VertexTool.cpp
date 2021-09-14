@@ -47,11 +47,11 @@ void VertexTool::setTexture3DVertices(CubeVertex* texcube, const math::Vector3& 
 
 	float x0 = position.getX() - volume.getWidth() * anchor.getX();
 	float y0 = position.getY() - volume.getHeight() * anchor.getY();
-	float z0 = position.getZ() + volume.getDepth() * (1 - anchor.getZ());
+	float z0 = position.getZ() - volume.getDepth() * anchor.getZ();
 
 	float x1 = position.getX() + volume.getWidth() * (1 - anchor.getX());
 	float y1 = position.getY() + volume.getHeight() * (1 - anchor.getY());
-	float z1 = position.getZ() - volume.getDepth() * anchor.getZ();
+	float z1 = position.getZ() + volume.getDepth() * (1 - anchor.getZ());
 
 	//------ front ------
 

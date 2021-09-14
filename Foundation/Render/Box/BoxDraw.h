@@ -34,12 +34,20 @@ namespace render
 		*/ 
 		virtual void updateNode(); 
 		/**
-		*	渲染节点
+		*	2d渲染节点
 		*/
-		render::DrawNode* getRenderNode();
+		render::PrimitiveNode* getRenderNode2d();
+		/**
+		*	3d渲染节点
+		*/
+		render::PrimitiveNode* getRenderNode3d();
+	protected:
+		void onBoxChanged();
 	private:
 		// 绘制节点
-		PrimitiveNode* _drawNode = nullptr;
+		PrimitiveNode* _drawNode2d = nullptr;
+		// 绘制节点
+		PrimitiveNode* _drawNode3d = nullptr;
 		// 盒子
 		std::set<BoxDrawProtocol*> _boxes;
 	};

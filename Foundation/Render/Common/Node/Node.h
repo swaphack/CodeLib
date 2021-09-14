@@ -171,6 +171,10 @@ namespace render
 	public:
 		// 添加事件监听
 		void addNotifyListener(NodeNotifyType id, const NotifyDelegate& func);
+		// 添加事件监听
+		void addNotifyListener(NodeNotifyType id, void* target, const NotifyDelegate& func);
+		// 移除事件监听
+		void removeNotifyListener(NodeNotifyType id, void* target);
 		// 将事件通知给所有节点
 		void notifyToAll(NodeNotifyType id);
 		// 将事件通知给节点

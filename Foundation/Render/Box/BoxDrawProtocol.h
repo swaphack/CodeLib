@@ -5,6 +5,12 @@
 
 namespace render
 {
+	enum class BoxDrawType
+	{
+		TWO,
+		THREE,
+	};
+	class Node;
 	/**
 	*	绘制包围盒
 	*/
@@ -38,11 +44,21 @@ namespace render
 		*	矩形框宽度
 		*/
 		void setBoxLineWidth(float width);
+		/**
+		*	矩形框宽度
+		*/
+		BoxDrawType getBoxDrawType() const;
+		/**
+		*	节点
+		*/
+		render::Node* getBoxNode() const;
 	public:
 		/**
 		*	盒子顶点
 		*/
 		void getBoxPoints(std::vector<math::TrianglePoints>& vecPoints) const;
+	protected:
+		void setBoxNode(render::Node* node);
 	protected:
 		// 是否显示框
 		bool _bBoxVisible = false;
@@ -52,6 +68,10 @@ namespace render
 		float _boxLineWidth = 1;
 		// 三角形
 		std::vector<math::TrianglePoints> _boxPoints;
+		// 盒子渲染类型
+		BoxDrawType _boxDrawType = BoxDrawType::THREE;
+		// 节点
+		render::Node* m_pBoxNode = nullptr;
 	};
 
 	/**

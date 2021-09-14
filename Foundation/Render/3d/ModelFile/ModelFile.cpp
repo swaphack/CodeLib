@@ -6,7 +6,7 @@
 
 render::ModelFile::ModelFile()
 {
-
+	this->setBoxNode(this);
 }
 
 render::ModelFile::~ModelFile()
@@ -20,6 +20,10 @@ bool render::ModelFile::init()
 	{
 		return false;
 	}
+	// 添加属性改变监听
+	addNotifyListener(NodeNotifyType::BODY, [this]() {
+		onModelFileBodyChange();
+	});
 
 	addNotifyListener(NodeNotifyType::MODEL, [this]() {
 		onLoadModelDetail();
@@ -27,7 +31,7 @@ bool render::ModelFile::init()
 	});
 
 	addNotifyListener(NodeNotifyType::SPACE, [this]() {
-		onModelFileBodyChange();
+		onModelFileWorldBodyChange();
 	});
 
 	return true;
@@ -88,7 +92,11 @@ void render::ModelFile::onLoadModelDetail()
 void render::ModelFile::onModelFileBodyChange()
 {
 	render::VertexTool::setTexture3DVertices(&_localCubeVertex, math::Vector3(), _volume, _anchor);
+	onModelFileWorldBodyChange();
+}
 
+void render::ModelFile::onModelFileWorldBodyChange()
+{
 	_worldCubeVertex.setFrontLeftBottomPosition(this->convertLocalPostitionToWorld(_localCubeVertex.front.getLeftBottomPosition()));
 	_worldCubeVertex.setFrontRightBottomPosition(this->convertLocalPostitionToWorld(_localCubeVertex.front.getRightBottomPosition()));
 	_worldCubeVertex.setFrontRightTopPosition(this->convertLocalPostitionToWorld(_localCubeVertex.front.getRightTopPosition()));

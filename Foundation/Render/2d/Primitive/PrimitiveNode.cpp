@@ -39,7 +39,7 @@ void render::PrimitiveNode::onPrimitiveChange()
 	for (int i = 0; i < nVertexCount; i++)
 	{
 		memcpy(pVertice + i * 3, _vertexes[i].point.getValue(), 3 * sizeof(float));
-		memcpy(pColor + i * 4, &_vertexes[i].color, 4 * sizeof(float));
+		memcpy(pColor + i * 4, _vertexes[i].color.getValue(), 4 * sizeof(float));
 		memcpy(indice + i, &i, sizeof(uint32_t));
 	}
 

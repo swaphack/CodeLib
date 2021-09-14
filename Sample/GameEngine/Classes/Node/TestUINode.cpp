@@ -25,7 +25,7 @@ void TestUINode::initNodes()
 	
 	//this->testScrollView();
 
-	this->testListView();
+	//this->testListView();
 	
 	//this->testStencil();
 
@@ -35,7 +35,7 @@ void TestUINode::initNodes()
 	
 	//this->testButton();
 	//
-	//this->testWidget();
+	this->testWidget();
 	
 	//this->testText();
 }

@@ -10,15 +10,12 @@ std::string primitiveVertexPath = "Shader/geometry/draw_primitive.vs";
 
 std::string primitiveFragmentPath = "Shader/geometry/draw_primitive.fs";
 
+std::string materialVertexPath = "Shader/material/material_texture.vs";
+
+std::string materialFragmentPath = "Shader/material/material_texture.fs";
+
 
 bool Utility::bInitShaderAttrib = false;
-
-
-void Utility::loadDefaultShader(render::DrawNode* node)
-{
-	if (node == nullptr) return;
-	loadShaderVF(node, textureVertexPath, textureFragmentPath);
-}
 
 void Utility::loadPrimitiveShader(render::DrawNode* node)
 {
@@ -39,6 +36,19 @@ void Utility::loadPrimitiveShader(ui::CtrlWidget* node)
 	initShaderAttrib();
 }
 
+void Utility::loadPrimitiveShader(render::MultiDrawNode* node)
+{
+	if (node == nullptr) return;
+
+	loadShaderVF(node, primitiveVertexPath, primitiveFragmentPath);
+}
+
+void Utility::loadDefaultShader(render::DrawNode* node)
+{
+	if (node == nullptr) return;
+	loadShaderVF(node, textureVertexPath, textureFragmentPath);
+}
+
 void Utility::loadDefaultShader(ui::CtrlWidget* node)
 {
 	if (node == nullptr) return;
@@ -54,7 +64,50 @@ void Utility::loadDefaultShader(ui::CtrlWidget* node)
 
 void Utility::loadDefaultShader(render::MultiDrawNode* node)
 {
+	if (node == nullptr) return;
 	loadShaderVF(node, textureVertexPath, textureFragmentPath);
+}
+
+void Utility::loadMaterialShader(render::DrawNode* node)
+{
+	if (node == nullptr) return;
+	loadShaderVF(node, materialVertexPath, materialFragmentPath);
+}
+
+void Utility::loadMaterialShader(render::MultiDrawNode* node)
+{
+	if (node == nullptr) return;
+	loadShaderVF(node, materialVertexPath, materialFragmentPath);
+}
+
+void Utility::loadShaderVF(ui::CtrlWidget* node, const std::string& vpath, const std::string& fpath)
+{
+	if (node == nullptr)
+	{
+		return;
+	}
+	ShaderProgram* pProgram = G_SHANDER->createVertexTessFragmentProgram(vpath, vpath, fpath);
+	if (pProgram == nullptr)
+	{
+		return;
+	}
+	node->setTexShaderProgram(pProgram);
+
+	initShaderAttrib();
+}
+
+void Utility::loadShaderVF(render::MultiDrawNode* node, const std::string& vpath, const std::string& fpath)
+{
+	if (node == nullptr) return;
+
+	ShaderProgram* pProgram = G_SHANDER->createVertexFragmentProgram(vpath, fpath);
+	if (pProgram == nullptr)
+	{
+		return;
+	}
+	node->setShaderProgram(pProgram);
+
+	initShaderAttrib();
 }
 
 void Utility::loadShaderVF(render::DrawNode* node, const std::string& vpath, const std::string& fpath)
@@ -96,36 +149,6 @@ void Utility::loadShaderVTF(render::DrawNode* node, const std::string& vpath, co
 		return;
 	}
 	ShaderProgram* pProgram = G_SHANDER->createVertexTessFragmentProgram(vpath, tcpath, tepath, fpath);
-	if (pProgram == nullptr)
-	{
-		return;
-	}
-	node->setShaderProgram(pProgram);
-
-	initShaderAttrib();
-}
-
-void Utility::loadShaderVF(ui::CtrlWidget* node, const std::string& vpath, const std::string& fpath)
-{
-	if (node == nullptr)
-	{
-		return;
-	}
-	ShaderProgram* pProgram = G_SHANDER->createVertexTessFragmentProgram(vpath, vpath, fpath);
-	if (pProgram == nullptr)
-	{
-		return;
-	}
-	node->setTexShaderProgram(pProgram);
-
-	initShaderAttrib();
-}
-
-void Utility::loadShaderVF(render::MultiDrawNode* node, const std::string& vpath, const std::string& fpath)
-{
-	if (node == nullptr) return;
-
-	ShaderProgram* pProgram = G_SHANDER->createVertexFragmentProgram(vpath, fpath);
 	if (pProgram == nullptr)
 	{
 		return;
