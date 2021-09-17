@@ -46,6 +46,9 @@
       <AdditionalIncludeDirectories>../System/;../../Lib/include/freetype/;../../Lib/include/;../../Lib/include/fbx;../Physics/;../Math/;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <BrowseInformation>true</BrowseInformation>
       <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>false</MinimalRebuild>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <EnableParallelCodeGeneration>true</EnableParallelCodeGeneration>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -81,6 +84,7 @@
     <ClCompile Include="2d\Primitive\PointSprite.cpp" />
     <ClCompile Include="2d\Primitive\PrimitiveNode.cpp" />
     <ClCompile Include="3d\Common\Model.cpp" />
+    <ClCompile Include="3d\Common\ModelFile.cpp" />
     <ClCompile Include="3d\Common\MultiMeshModel.cpp" />
     <ClCompile Include="3d\Environment\ClipPlane.cpp" />
     <ClCompile Include="3d\Environment\DirectionLight.cpp" />
@@ -95,7 +99,6 @@
     <ClCompile Include="3d\Map\LSystem.cpp" />
     <ClCompile Include="3d\ModelFile\Model3DS.cpp" />
     <ClCompile Include="3d\ModelFile\ModelFbx.cpp" />
-    <ClCompile Include="3d\ModelFile\ModelFile.cpp" />
     <ClCompile Include="3d\ModelFile\ModelObj.cpp" />
     <ClCompile Include="3d\Shape\Cube.cpp" />
     <ClCompile Include="3d\Shape\CubeMap.cpp" />
@@ -172,6 +175,11 @@
     <ClCompile Include="Common\Node\Node.cpp" />
     <ClCompile Include="Common\Node\NodeProtocol.cpp" />
     <ClCompile Include="Common\Node\NotifyCenter.cpp" />
+    <ClCompile Include="Common\Scene\Camera.cpp" />
+    <ClCompile Include="Common\Scene\Camera2D.cpp" />
+    <ClCompile Include="Common\Scene\Camera3D.cpp" />
+    <ClCompile Include="Common\Scene\Cameras.cpp" />
+    <ClCompile Include="Common\Scene\DebugDraw.cpp" />
     <ClCompile Include="Common\Scene\Scene.cpp" />
     <ClCompile Include="Common\ShaderDocument\ShaderDocument.cpp" />
     <ClCompile Include="Common\ShaderDocument\ShaderParameter.cpp" />
@@ -219,10 +227,6 @@
     <ClCompile Include="Common\VAO\VertexArrayObject.cpp" />
     <ClCompile Include="Common\VAO\VertexAttrib.cpp" />
     <ClCompile Include="Common\VAO\VertexAttribPointer.cpp" />
-    <ClCompile Include="Common\View\Camera.cpp" />
-    <ClCompile Include="Common\View\Camera2D.cpp" />
-    <ClCompile Include="Common\View\Camera3D.cpp" />
-    <ClCompile Include="Common\View\Cameras.cpp" />
     <ClCompile Include="Common\View\MultiSampling.cpp" />
     <ClCompile Include="Common\View\ViewPort.cpp" />
     <ClCompile Include="Common\XFB\TransformFeedback.cpp" />
@@ -289,6 +293,7 @@
     <ClInclude Include="2d\Primitive\PointSprite.h" />
     <ClInclude Include="2d\Primitive\import.h" />
     <ClInclude Include="2d\Primitive\PrimitiveNode.h" />
+    <ClInclude Include="3d\Common\ModelFile.h" />
     <ClInclude Include="3d\Common\MultiMeshModel.h" />
     <ClInclude Include="3d\Common\Model.h" />
     <ClInclude Include="3d\Common\import.h" />
@@ -314,7 +319,6 @@
     <ClInclude Include="3d\ModelFile\import.h" />
     <ClInclude Include="3d\ModelFile\Model3DS.h" />
     <ClInclude Include="3d\ModelFile\ModelFbx.h" />
-    <ClInclude Include="3d\ModelFile\ModelFile.h" />
     <ClInclude Include="3d\ModelFile\ModelObj.h" />
     <ClInclude Include="3d\Shape\Cube.h" />
     <ClInclude Include="3d\Shape\CubeMap.h" />
@@ -411,6 +415,12 @@
     <ClInclude Include="Common\Node\NodeProtocol.h" />
     <ClInclude Include="Common\Node\Notify.h" />
     <ClInclude Include="Common\Node\NotifyCenter.h" />
+    <ClInclude Include="Common\Scene\Camera.h" />
+    <ClInclude Include="Common\Scene\Camera2D.h" />
+    <ClInclude Include="Common\Scene\Camera3D.h" />
+    <ClInclude Include="Common\Scene\Cameras.h" />
+    <ClInclude Include="Common\Scene\DebugDraw.h" />
+    <ClInclude Include="Common\Scene\DimensionsType.h" />
     <ClInclude Include="Common\Scene\import.h" />
     <ClInclude Include="Common\Scene\Scene.h" />
     <ClInclude Include="Common\ShaderDocument\import.h" />
@@ -468,11 +478,6 @@
     <ClInclude Include="Common\VAO\VertexArrayObject.h" />
     <ClInclude Include="Common\VAO\VertexAttrib.h" />
     <ClInclude Include="Common\VAO\VertexAttribPointer.h" />
-    <ClInclude Include="Common\View\Camera.h" />
-    <ClInclude Include="Common\View\Camera2D.h" />
-    <ClInclude Include="Common\View\Camera3D.h" />
-    <ClInclude Include="Common\View\Cameras.h" />
-    <ClInclude Include="Common\View\DimensionsType.h" />
     <ClInclude Include="Common\View\import.h" />
     <ClInclude Include="Common\View\MultiSampling.h" />
     <ClInclude Include="Common\View\ViewPort.h" />

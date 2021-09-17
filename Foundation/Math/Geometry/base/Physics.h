@@ -2,6 +2,7 @@
 #include "Geometry/base/Ray.h"
 #include "Geometry/Collider/BoundingBox.h"
 #include "Geometry/3d/Plane.h"
+#include "Geometry/shape/TrianglePoints.h"
 
 namespace math
 {
@@ -21,9 +22,9 @@ namespace math
 		*/
 		static bool raycast(const Ray& ray, const Plane& plane);
 		/**
-		*	平面多边形
+		*	三角形
 		*/
-		static bool raycast(const Ray& ray, const std::vector<math::Vector3>& planePoints);
+		static bool raycast(const Ray& ray, const math::TrianglePoints& points, math::Vector3& point);
 		/**
 		*	计算反射角
 		*/

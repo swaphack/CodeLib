@@ -19,6 +19,11 @@ namespace render
 	public:
 		// 务必调用，包含属性修改时通知
 		virtual bool init();
+
+		/**
+		*	坐标是否在当前对象内
+		*/
+		virtual bool containPoint(const math::Vector2& touchPoint);
 	public:
 		// 设置模型数据
 		void setModelData(sys::ModelDetail* detail);
@@ -28,15 +33,6 @@ namespace render
 		virtual void onDraw();
 		// 加载模型数据
 		void onLoadModelDetail();
-	protected:
-		/**
-		*	形状改变
-		*/
-		void onModelFileBodyChange();
-		/**
-		*	形状改变
-		*/
-		void onModelFileWorldBodyChange();
 	protected:
 		bool _bloadedModel = false;
 		// 模型数据

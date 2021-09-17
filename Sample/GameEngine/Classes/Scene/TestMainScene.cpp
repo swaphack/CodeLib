@@ -19,8 +19,8 @@ bool TestMainScene::init()
 		return false;
 	}
 
-	Utility::loadPrimitiveShader(render::BoxDraw::getInstance()->getRenderNode2d());
-	Utility::loadPrimitiveShader(render::BoxDraw::getInstance()->getRenderNode3d());
+	Utility::loadPrimitiveShader(G_BOXDRAW->getRenderNode2d());
+	Utility::loadPrimitiveShader(G_BOXDRAW->getRenderNode3d());
 
 	this->initNodes();
 	this->initEnv();

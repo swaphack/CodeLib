@@ -134,10 +134,6 @@ namespace ui
 		*	形状改变
 		*/
 		void onCtrlWidgetBodyChange();
-		/**
-		*	形状改变
-		*/
-		void onCtrlWidgetWorldBodyChange();
 	public:
 		/**
 		*	通知子节点形状改变

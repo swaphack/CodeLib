@@ -3,7 +3,7 @@
 #include "Common/Tool/Tool.h"
 #include <algorithm>
 #include "Graphic/import.h"
-#include "Common/View/Camera.h"
+#include "Common/Scene/Camera.h"
 #include "NotifyCenter.h"
 #include "Common/Action/import.h"
 #include "ComputeQueue.h"

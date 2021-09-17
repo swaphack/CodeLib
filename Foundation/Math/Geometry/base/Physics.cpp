@@ -12,7 +12,10 @@ bool math::Physics::raycast(const Ray& ray, const Plane& plane)
 	float c = 0;
 
 	int d = getRayPosition(ray, plane, a, b, c);
-	if (d == -1) return false;
+	if (d == -1) 
+	{
+		return false;
+	}
 	else if (d == 0)
 	{
 		if (a > 0) return false;
@@ -21,47 +24,55 @@ bool math::Physics::raycast(const Ray& ray, const Plane& plane)
 	return true;
 }
 
-bool math::Physics::raycast(const Ray& ray, const std::vector<math::Vector3>& planePoints)
+bool math::Physics::raycast(const Ray& ray, const math::TrianglePoints& points, math::Vector3& point)
 {
-	if (planePoints.size() < 3)
-	{
-		return false;
-	}
 
-	Plane plane(planePoints[0], planePoints[1], planePoints[2]);
-	math::Vector3 normal = plane.getNormal();
+    math::Vector3 e1 = points[1] - points[0];
+    math::Vector3 e2 = points[2] - points[1];
 
-	float dmin = INT_MIN;
-	float dmax = INT_MAX;
+    //Begin calculating determinant - also used to calculate u parameter
+    math::Vector3 p = math::Vector3::cross(ray.getDirection(), e2);
+    //if determinant is near zero, ray lies in plane of triangle
+    double det = math::Vector3::dot(e1, p);
+    //NOT CULLING
+    if (det > -EPSILON && det < EPSILON)
+    {
+        return false;
+    }
+    double inv_det = 1.f / det;
 
-	for (size_t i = 0; i < planePoints.size() - 2; i++)
-	{
-		math::Vector3 p0 = planePoints[0 + i];
-		math::Vector3 p1 = planePoints[1 + i];
-		math::Vector3 p3 = p0 + normal;
+    //calculate distance from V1 to ray origin
+    math::Vector3 t = ray.getPoint() - points[0];
 
-		Plane newPlane(p0, p1, p3);
+    //Calculate u parameter and test bound
+    double u = math::Vector3::dot(t, p) * inv_det;
+    //The intersection lies outside of the triangle
+    if (u < 0.f || u > 1.f)
+    {
+        return false;
+    }
 
-		float a = 0;
-		float b = 0;
-		float c = 0;
-		int ret = getRayPosition(ray, newPlane, a, b, c);
+    //Prepare to test v parameter
+    math::Vector3 q = math::Vector3::cross(t, e1);
+    //Calculate V parameter and test bound
+    double v = math::Vector3::dot(ray.getDirection(), q) * inv_det;
 
-		if (b > 0 && c < dmax)
-		{
-			dmax = c;
-		}
-		if (b < 0 && c > dmin)
-		{
-			dmin = c;
-		}
-		if (dmin > dmax)
-		{
-			return false;
-		}
-	}
+    //The intersection lies outside of the triangle
+    if (v < 0.f || u + v  > 1.f)
+    {
+        return false;
+    }
 
-	return true;
+    double k = math::Vector3::dot(e2, q) * inv_det;
+
+    //ray intersection
+    if (k > EPSILON)
+    {
+        point = ray.getPoint() + ray.getDirection() * k;
+        return true;
+    }
+
+    return false;
 }
 
 math::Vector3 math::Physics::reflect(const math::Vector3& light, const math::Vector3& normal)

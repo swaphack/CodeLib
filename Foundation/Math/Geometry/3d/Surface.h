@@ -8,10 +8,8 @@ namespace math
 	/**
 	*	±Ì√Ê
 	*/
-	template<typename T,
-		const int Length,
-		typename = std::enable_if<std::is_base_of<math::Vector3, T>::value, T>::type>
-	struct Surface : public Array<T, Length>
+	template<const int Length>
+	struct Surface : public Array<math::Vector3, Length>
 	{
 	public:
 		Surface() {}
@@ -19,9 +17,13 @@ namespace math
 		{
 			this->assign(surface.getValue());
 		}
-		Surface(const T* poins)
+		Surface(const std::vector<math::Vector3>& points)
 		{
-			this->assign(poins);
+			this->assign(&points[0]);
+		}
+		Surface(const math::Vector3* points)
+		{
+			this->assign(points);
 		}
 
 		virtual ~Surface() {}

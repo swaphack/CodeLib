@@ -2,7 +2,7 @@
 #include "mathlib.h"
 #include "Graphic/import.h"
 #include "Environment.h"
-#include "Common/View/Camera.h"
+#include "Common/Scene/Camera.h"
 #include "Light.h"
 #include "Common/Node/Node.h"
 #include "Common/Shader/import.h"

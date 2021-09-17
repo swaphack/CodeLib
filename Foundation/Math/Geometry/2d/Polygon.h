@@ -4,6 +4,7 @@
 #include "LineSegment2d.h"
 #include "Line2d.h"
 #include "Geometry/base/Points.h"
+#include "Geometry/base/Ray.h"
 #include <cstdint>
 #include "Basic/base.h"
 
@@ -67,6 +68,10 @@ namespace math
 		*	是否与多边形相交
 		*/
 		bool intersects(const Polygon& polygon);
+		/**
+		*	是否与射线相交
+		*/
+		bool rayHit(const Ray& ray, math::Vector3& point);
 	public:
 		/**
 		*	重载=

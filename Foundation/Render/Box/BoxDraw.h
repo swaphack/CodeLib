@@ -4,7 +4,6 @@
 
 namespace render
 {
-	class DrawNode;
 	class BoxDrawProtocol;
 	class PrimitiveNode;
 	/**
@@ -30,10 +29,6 @@ namespace render
 		void removeBox(BoxDrawProtocol* box);
 	public:
 		/**
-		*	更新节点
-		*/ 
-		virtual void updateNode(); 
-		/**
 		*	2d渲染节点
 		*/
 		render::PrimitiveNode* getRenderNode2d();
@@ -51,4 +46,6 @@ namespace render
 		// 盒子
 		std::set<BoxDrawProtocol*> _boxes;
 	};
+
+#define G_BOXDRAW render::BoxDraw::getInstance()
 }

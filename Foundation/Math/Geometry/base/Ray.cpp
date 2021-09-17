@@ -31,3 +31,8 @@ const Vector3& math::Ray::getDirection() const
 {
 	return _direction;
 }
+
+Vector3 math::Ray::getDestPoint(float scaler) const
+{
+	return _point + scaler * _direction;
+}

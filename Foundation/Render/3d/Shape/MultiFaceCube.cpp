@@ -88,9 +88,9 @@ void render::MultiFaceCube::initBufferObject()
 
 		CubeFace face = (CubeFace)i;
 
-		pMesh->setUVs(4, _cubeVertex.getFaceVertex((CubeFace)i)->uvs, 2);
-		pMesh->setIndices(6, _cubeVertex.getFaceVertex((CubeFace)i)->indices, 1);
-		pMesh->setColors(4, _cubeVertex.getFaceVertex((CubeFace)i)->colors, 4);
+		pMesh->setUVs(4, _localCubeVertex.getFaceVertex((CubeFace)i)->uvs, 2);
+		pMesh->setIndices(6, _localCubeVertex.getFaceVertex((CubeFace)i)->indices, 1);
+		pMesh->setColors(4, _localCubeVertex.getFaceVertex((CubeFace)i)->colors, 4);
 	}
 }
 
@@ -105,7 +105,7 @@ void render::MultiFaceCube::updateMultiDrawNode3DMesh()
 			return;
 		}
 		CubeFace face = (CubeFace)i;
-		pMesh->getMeshDetail()->setVertices(4, _cubeVertex.getFaceVertex(face)->vertices, 3);
+		pMesh->getMeshDetail()->setVertices(4, _localCubeVertex.getFaceVertex(face)->vertices, 3);
 	}
 
 	this->updateMeshData();

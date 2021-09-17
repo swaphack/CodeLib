@@ -161,6 +161,7 @@
     <ClInclude Include="Function\MultivariateLinearFunction.h" />
     <ClInclude Include="Function\MultiPowerFunction.h" />
     <ClInclude Include="Function\Range.h" />
+    <ClInclude Include="Geometry\2d\Circle.h" />
     <ClInclude Include="Geometry\2d\import.h" />
     <ClInclude Include="Geometry\2d\Line2d.h" />
     <ClInclude Include="Geometry\2d\LineSegment2d.h" />
@@ -191,7 +192,6 @@
     <ClInclude Include="Geometry\common.h" />
     <ClInclude Include="Geometry\GeometryUtiity.h" />
     <ClInclude Include="Geometry\import.h" />
-    <ClInclude Include="Geometry\shape\Circle.h" />
     <ClInclude Include="Geometry\shape\CubePoints.h" />
     <ClInclude Include="Geometry\shape\import.h" />
     <ClInclude Include="Geometry\shape\PolygonPoints.h" />
@@ -272,6 +272,7 @@
     <ClCompile Include="Function\Elementary\LogarithmicFunction.cpp" />
     <ClCompile Include="Function\Elementary\PowerFunction.cpp" />
     <ClCompile Include="Function\Elementary\TrigonometricFunction.cpp" />
+    <ClCompile Include="Geometry\2d\Circle.cpp" />
     <ClCompile Include="Geometry\2d\Line2d.cpp" />
     <ClCompile Include="Geometry\2d\LineSegment2d.cpp" />
     <ClCompile Include="Geometry\2d\Polar2d.cpp" />
@@ -292,7 +293,6 @@
     <ClCompile Include="Geometry\Collider\OBB.cpp" />
     <ClCompile Include="Geometry\Collider\SphereBB.cpp" />
     <ClCompile Include="Geometry\GeometryUtiity.cpp" />
-    <ClCompile Include="Geometry\shape\Circle.cpp" />
     <ClCompile Include="Geometry\shape\CubePoints.cpp" />
     <ClCompile Include="Geometry\shape\RectPoints.cpp" />
     <ClCompile Include="Geometry\shape\TrianglePoints.cpp" />

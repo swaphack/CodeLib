@@ -3,6 +3,7 @@
 #include "Common/Tool/import.h"
 #include "Graphic/import.h"
 #include "Camera3D.h"
+#include "DebugDraw.h"
 
 using namespace render;
 
@@ -29,6 +30,14 @@ bool Camera::init()
 	{
 		return false;
 	}
+
+	_viewShapeDraw = CREATE_NODE(DebugDraw);
+	_viewShapeDraw->setCamera(this);
+	this->addChild(_viewShapeDraw, INT_MAX);
+
+	_debugDraw = CREATE_NODE(DebugDraw);
+	_debugDraw->setCamera(this);
+	this->addChild(_debugDraw, INT_MAX);
 
 	this->setZDirection(DirectionProtocol::ZDirectionType::INSIDE);
 
@@ -107,7 +116,7 @@ void Camera::visit()
 {
 	this->updateNode();
 	
-	this->updateCameraView();
+	//this->updateCameraView();
 
 	this->drawNode();
 }
@@ -183,40 +192,102 @@ math::Vector3 render::Camera::getCenterPosition()
 
 	return center;
 }
-
-math::Ray render::Camera::getRayFromScreenPoint(const math::Vector2& screenPoint) const
+render::DebugDraw* render::Camera::getDebugDraw() const
+{
+	return _debugDraw;
+}
+void render::Camera::setViewDrawVisible(bool bVisible)
+{
+	if (_viewShapeDraw)
+	{
+		_viewShapeDraw->setVisible(bVisible);
+	}
+}
+math::Vector3 render::Camera::convertScreenPointToCameraPosition(const math::Vector2& screenPoint) const
 {
 	math::Matrix4x4 invMat = (getProjectMatrix() * getViewMatrix()).getInverse();
-	math::Vector3 pos = this->convertLocalPostitionToWorld(this->getPosition());
 	math::Vector3 dir;
-	float w = 1;
-	float h = 1;
-	if (getDimensions() == DimensionsType::TWO)
-	{
-		w = _viewParameter.xRight - _viewParameter.xLeft;
-		h = _viewParameter.yTop - _viewParameter.yBottom;
-	}
-	else if (getDimensions() == DimensionsType::THREE)
-	{
-		w = 0.5f * (_viewParameter.xRight - _viewParameter.xLeft);
-		h = 0.5f * (_viewParameter.yTop - _viewParameter.yBottom);
-	}
 
-	math::Vector4 nearVec = math::Vector4((screenPoint.getX() - w) / w, (screenPoint.getY() - h) / h, -1, 1.0f);
-	math::Vector4 farVec = math::Vector4((screenPoint.getX() - w) / w, (screenPoint.getY() - h) / h, 1, 1.0f);
+	float w = _viewParameter.xRight - _viewParameter.xLeft;
+	float h = _viewParameter.yTop - _viewParameter.yBottom;
+
+	float halfW = 0.5f * w;
+	float halfH = 0.5f * h;
+
+	float pw = screenPoint.getX() / halfW;
+	float ph = screenPoint.getY() / halfH;
+
+	math::Vector4 nearVec = math::Vector4(pw, ph, -1, 1.0f);
+	math::Vector4 nearResult = invMat * nearVec;
+	nearResult /= nearResult.getW();
+
+	nearResult.setX(-0.5f * nearResult.getX() / nearResult.getZ());
+	nearResult.setY(-0.5f * nearResult.getY() / nearResult.getZ());
+	nearResult.setZ(1.0f / nearResult.getZ());
+
+	return nearResult;
+}
+
+math::Vector3 render::Camera::convertScreenPointToWorldPosition(const math::Vector2& screenPoint) const
+{
+	math::Vector3 localPos = convertScreenPointToCameraPosition(screenPoint);
+	return this->convertLocalPostitionToWorld(localPos);
+}
+
+math::Ray render::Camera::convertScreenPointToCameraRay(const math::Vector2& screenPoint) const
+{
+	math::Matrix4x4 invMat = (getProjectMatrix() * getViewMatrix()).getInverse();
+	math::Vector3 dir;
+
+	float w = _viewParameter.xRight - _viewParameter.xLeft;
+	float h = _viewParameter.yTop - _viewParameter.yBottom;
+	float d = _viewParameter.zFar - _viewParameter.zNear;
+
+	float halfW = 0.5f * w;
+	float halfH = 0.5f * h;
+
+	float k = _viewParameter.zFar / _viewParameter.zNear;
+
+	float pw = screenPoint.getX() / halfW;
+	float ph = screenPoint.getY() / halfH;
+
+	math::Vector4 nearVec = math::Vector4(pw, ph, -1, 1.0f);
 
 	math::Vector4 nearResult = invMat * nearVec;
-	math::Vector4 farResult = invMat * farVec;
 	nearResult /= nearResult.getW();
-	farResult /= farResult.getW();
 
-	dir = farResult - nearResult;
+	nearResult.setX(-0.5f * nearResult.getX() / nearResult.getZ());
+	nearResult.setY(-0.5f * nearResult.getY() / nearResult.getZ());
+	nearResult.setZ(1.0f / nearResult.getZ());
+
+	math::Vector3 src;
 	
-	return math::Ray(pos, dir);
+	if (_dimensions == DimensionsType::TWO)
+	{
+		src = nearResult;
+		src.setZ(0);
+	}
+
+	dir = nearResult - src;
+	return math::Ray(src, dir);
+}
+
+math::Ray render::Camera::convertScreenPointToWorldRay(const math::Vector2& screenPoint) const
+{
+	math::Ray localRay = convertScreenPointToCameraRay(screenPoint);
+	return convertLocalRayToWorldRay(localRay);
+}
+
+math::Ray render::Camera::convertLocalRayToWorldRay(const math::Ray localRay) const
+{
+	math::Vector3 srcPos = convertLocalPostitionToWorld(localRay.getPoint());
+	math::Vector3 destPos = convertLocalPostitionToWorld(localRay.getDestPoint(1));
+	return math::Ray(srcPos, destPos - srcPos);
 }
 
 void render::Camera::updateViewPort()
 {
+
 }
 
 void render::Camera::onCameraSpaceChange()

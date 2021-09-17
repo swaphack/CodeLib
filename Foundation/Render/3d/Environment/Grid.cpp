@@ -2,7 +2,7 @@
 #include "Graphic/import.h"
 #include "Common/Tool/Tool.h"
 #include "Common/Mesh/Mesh.h"
-#include "Common/View/Cameras.h"
+#include "Common/Scene/Cameras.h"
 
 render::Grid::Grid()
 {

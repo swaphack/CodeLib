@@ -1,5 +1,5 @@
 #include "Polygon.h"
-
+#include "Geometry/base/Physics.h"
 math::Polygon::Polygon() 
 {}
 
@@ -129,6 +129,29 @@ bool math::Polygon::intersects(const Polygon& polygon)
 	{
 		LineSegment2d line(polygon[i], polygon[(i + 1) % polygon.getPointCount()]);
 		if (this->intersects(line))
+		{
+			return true;
+		}
+	}
+
+	return false;
+}
+
+bool math::Polygon::rayHit(const Ray& ray, math::Vector3& point)
+{
+	if (_points.size() < 3)
+	{
+		return false;
+	}
+
+	int nCount = _points.size();
+	for (int i = 0; i < nCount - 2; i++)
+	{
+		math::TrianglePoints points;
+		points.setPoint0(_points[i + 0]);
+		points.setPoint0(_points[i + 1]);
+		points.setPoint0(_points[i + 2]);
+		if (math::Physics::raycast(ray, points, point))
 		{
 			return true;
 		}

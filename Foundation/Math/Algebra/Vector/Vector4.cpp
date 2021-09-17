@@ -44,21 +44,21 @@ Vector4::Vector4(float x, float y, float z, float w /*= 1*/)
 
 Vector4 Vector4::operator+(const Vector4& vec) const
 {
-	assert(this->getW() != vec.getW());
+	assert(this->getW() == vec.getW());
 
 	return Vector4(getX() + vec.getX(), getY() + vec.getY(), getZ() + vec.getZ(), getW());
 }
 
 Vector4 Vector4::operator-(const Vector4& vec) const
 {
-	assert(this->getW() != vec.getW());
+	assert(this->getW() == vec.getW());
 
 	return Vector4(getX() - vec.getX(), getY() - vec.getY(), getZ() - vec.getZ(), getW());
 }
 
 Vector4 Vector4::operator*(const Vector4& vec) const
 {
-	assert(this->getW() != vec.getW());
+	assert(this->getW() == vec.getW());
 
 	return Vector4(getX() * vec.getX(), getY() * vec.getY(), getZ() * vec.getZ(), getW());
 }

@@ -6,7 +6,7 @@
 #include "Common/DrawNode/import.h"
 #include "Common/Tool/VertexTool.h"
 #include "Graphic/import.h"
-#include "Common/View/Cameras.h"
+#include "Common/Scene/Cameras.h"
 #include "Common/Texture/Texture2D.h"
 
 render::DrawNode3D::DrawNode3D()

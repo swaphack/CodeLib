@@ -19,9 +19,6 @@
     <ClCompile Include="Common\Scene\Scene.cpp">
       <Filter>Common\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="Common\View\Camera.cpp">
-      <Filter>Common\View</Filter>
-    </ClCompile>
     <ClCompile Include="Common\Action\Scheduler.cpp">
       <Filter>Common\Action</Filter>
     </ClCompile>
@@ -453,9 +450,6 @@
     <ClCompile Include="3d\ModelFile\ModelFbx.cpp">
       <Filter>3d\ModelFile</Filter>
     </ClCompile>
-    <ClCompile Include="3d\ModelFile\ModelFile.cpp">
-      <Filter>3d\ModelFile</Filter>
-    </ClCompile>
     <ClCompile Include="3d\ModelFile\ModelObj.cpp">
       <Filter>3d\ModelFile</Filter>
     </ClCompile>
@@ -591,14 +585,23 @@
     <ClCompile Include="Box\BoxDrawProtocol.cpp">
       <Filter>Box</Filter>
     </ClCompile>
-    <ClCompile Include="Common\View\Camera2D.cpp">
-      <Filter>Common\View</Filter>
+    <ClCompile Include="Common\Scene\DebugDraw.cpp">
+      <Filter>Common\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="Common\View\Camera3D.cpp">
-      <Filter>Common\View</Filter>
+    <ClCompile Include="3d\Common\ModelFile.cpp">
+      <Filter>3d\Common</Filter>
     </ClCompile>
-    <ClCompile Include="Common\View\Cameras.cpp">
-      <Filter>Common\View</Filter>
+    <ClCompile Include="Common\Scene\Camera.cpp">
+      <Filter>Common\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Scene\Camera2D.cpp">
+      <Filter>Common\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Scene\Camera3D.cpp">
+      <Filter>Common\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Scene\Cameras.cpp">
+      <Filter>Common\Scene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -634,9 +637,6 @@
     </ClInclude>
     <ClInclude Include="Common\Scene\import.h">
       <Filter>Common\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="Common\View\Camera.h">
-      <Filter>Common\View</Filter>
     </ClInclude>
     <ClInclude Include="Common\Action\Scheduler.h">
       <Filter>Common\Action</Filter>
@@ -1194,9 +1194,6 @@
     <ClInclude Include="3d\ModelFile\ModelFbx.h">
       <Filter>3d\ModelFile</Filter>
     </ClInclude>
-    <ClInclude Include="3d\ModelFile\ModelFile.h">
-      <Filter>3d\ModelFile</Filter>
-    </ClInclude>
     <ClInclude Include="3d\ModelFile\import.h">
       <Filter>3d\ModelFile</Filter>
     </ClInclude>
@@ -1326,9 +1323,6 @@
     <ClInclude Include="Common\View\ViewParameter.h">
       <Filter>Common\View</Filter>
     </ClInclude>
-    <ClInclude Include="Common\View\DimensionsType.h">
-      <Filter>Common\View</Filter>
-    </ClInclude>
     <ClInclude Include="Common\DrawNode\TessilationProtocol.h">
       <Filter>Common\DrawNode</Filter>
     </ClInclude>
@@ -1374,14 +1368,26 @@
     <ClInclude Include="Box\import.h">
       <Filter>Box</Filter>
     </ClInclude>
-    <ClInclude Include="Common\View\Camera2D.h">
-      <Filter>Common\View</Filter>
+    <ClInclude Include="Common\Scene\DebugDraw.h">
+      <Filter>Common\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="Common\View\Camera3D.h">
-      <Filter>Common\View</Filter>
+    <ClInclude Include="3d\Common\ModelFile.h">
+      <Filter>3d\Common</Filter>
     </ClInclude>
-    <ClInclude Include="Common\View\Cameras.h">
-      <Filter>Common\View</Filter>
+    <ClInclude Include="Common\Scene\Camera.h">
+      <Filter>Common\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Scene\Camera2D.h">
+      <Filter>Common\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Scene\Camera3D.h">
+      <Filter>Common\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Scene\Cameras.h">
+      <Filter>Common\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Scene\DimensionsType.h">
+      <Filter>Common\Scene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

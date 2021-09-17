@@ -1,7 +1,7 @@
 #include "BoxDraw.h"
 #include "2d/Primitive/PrimitiveNode.h"
 #include "BoxDrawProtocol.h"
-#include "Common/View/Cameras.h"
+#include "Common/Scene/Cameras.h"
 
 static render::BoxDraw* sIntance = nullptr;
 
@@ -72,12 +72,6 @@ void render::BoxDraw::removeBox(BoxDrawProtocol* box)
 	}
 	this->notify(render::NodeNotifyType::GEOMETRY);
 }
-
-void render::BoxDraw::updateNode()
-{
-	Node::updateNode();
-}
-
 render::PrimitiveNode* render::BoxDraw::getRenderNode2d()
 {
 	return _drawNode2d;

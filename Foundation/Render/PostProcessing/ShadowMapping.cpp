@@ -3,7 +3,7 @@
 #include "Common/Shader/ShaderProgram.h"
 #include "Common/Texture/Texture2D.h"
 #include "Common/FrameRender/import.h"
-#include "Common/View/Camera.h"
+#include "Common/Scene/Camera.h"
 #include "Common/Tool/VertexTool.h"
 #include "Graphic/import.h"
 #include "3d/Common/Model.h"

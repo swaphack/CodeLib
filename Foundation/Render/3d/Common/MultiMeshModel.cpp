@@ -3,7 +3,7 @@
 #include "Common/DrawNode/import.h"
 #include "Common/Tool/VertexTool.h"
 #include "Common/Fragment/import.h"
-#include "Common/View/Cameras.h"
+#include "Common/Scene/Cameras.h"
 
 render::MultiMeshModel::MultiMeshModel()
 {
@@ -22,33 +22,25 @@ bool render::MultiMeshModel::init()
 		return false;
 	}
 
+	Box3DDrawProtocol::initBox3D(this);
+
 	FragmentDepthTest* pDepthTest = this->getFragOperator()->getHandle<FragmentDepthTest>();
 	if (pDepthTest)
 	{
 		pDepthTest->setEnabled(true);
 	}
 
-	addNotifyListener(NodeNotifyType::BODY, [this]() {
-		onMultiDrawNodeBodyChange();
-	});
-
 	this->setCamera(G_CAMERAS->getCamera3D());
 	return true;
-}
-
-void render::MultiMeshModel::onMultiDrawNodeBodyChange()
-{
-	VertexTool::setTexture3DVertices(&_cubeVertex, math::Vector3(), _volume, _anchor);
-
-	updateMultiDrawNode3DMesh();
-}
-
-void render::MultiMeshModel::updateMultiDrawNode3DMesh()
-{
 }
 
 void render::MultiMeshModel::afterDrawNode()
 {
 	this->drawAllChildren();
+}
+
+bool render::MultiMeshModel::containPoint(const math::Vector2& touchPoint)
+{
+	return Box3DDrawProtocol::containsTouchPoint(touchPoint);
 }
 

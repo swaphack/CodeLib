@@ -33,13 +33,13 @@ void render::CoordinateSystem::onCoordianteSystemBodyChange()
 	VertexTool::setTexture3DVertices(&cube, math::Vector3(), getVolume(), getAnchorPoint());
 
 	this->removeAllPoints();
-	this->appendPoint(cube.front.getLeftBottomPosition());
-	this->appendPoint(cube.front.getRightBottomPosition());
+	this->appendPoint(cube.front.getLeftBottomPosition(), phy::Color4F(1,0,0));
+	this->appendPoint(cube.front.getRightBottomPosition(), phy::Color4F(1, 0, 0));
 
-	this->appendPoint(cube.front.getLeftBottomPosition());
-	this->appendPoint(cube.front.getLeftTopPosition());
+	this->appendPoint(cube.front.getLeftBottomPosition(), phy::Color4F(0, 1, 0));
+	this->appendPoint(cube.front.getLeftTopPosition(), phy::Color4F(0, 1, 0));
 
-	this->appendPoint(cube.front.getLeftBottomPosition());
-	this->appendPoint(cube.back.getRightBottomPosition());
+	this->appendPoint(cube.front.getLeftBottomPosition(), phy::Color4F(0, 0, 1));
+	this->appendPoint(cube.back.getRightBottomPosition(), phy::Color4F(0, 0, 1));
 }
 

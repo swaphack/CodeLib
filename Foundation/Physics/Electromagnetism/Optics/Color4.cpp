@@ -54,6 +54,10 @@ void phy::Color4B::adjust()
 
 phy::Color4F::Color4F()
 {
+	this->setRed(1);
+	this->setGreen(1);
+	this->setBlue(1);
+	this->setAlpha(1);
 }
 
 phy::Color4F::Color4F(float r, float g, float b, float a)
@@ -62,6 +66,8 @@ phy::Color4F::Color4F(float r, float g, float b, float a)
 	this->setGreen(g);
 	this->setBlue(b);
 	this->setAlpha(a);
+
+	adjust();
 }
 
 phy::Color4F::Color4F(float r, float g, float b)
@@ -70,6 +76,8 @@ phy::Color4F::Color4F(float r, float g, float b)
 	this->setGreen(g);
 	this->setBlue(b);
 	this->setAlpha(1);
+
+	adjust();
 }
 
 phy::Color4F::Color4F(const Color3F& color, float a)
@@ -78,6 +86,8 @@ phy::Color4F::Color4F(const Color3F& color, float a)
 	this->setGreen(color.getGreen());
 	this->setBlue(color.getBlue());
 	this->setAlpha(a);
+
+	adjust();
 }
 
 phy::Color4F::~Color4F()

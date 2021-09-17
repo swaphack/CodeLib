@@ -86,6 +86,8 @@ namespace render
 		const RectVertex* getFaceVertex(CubeFace face) const;
 
 		const RectVertex* getCubMapFaceVertex(CubeFace face) const;
+
+		void toTriangles(std::vector<math::TrianglePoints>& trianglePoints) const;
 	};
 
 	// 9宫格 复用点信息

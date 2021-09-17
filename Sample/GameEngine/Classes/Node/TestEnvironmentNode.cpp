@@ -12,9 +12,7 @@ TestEnvironmentNode::~TestEnvironmentNode()
 
 void TestEnvironmentNode::initNodes()
 {
-	this->addGrid();
-
-	this->testCamera();
+	//this->addGrid();
 
 	this->init3DSkyBox();
 
@@ -87,126 +85,6 @@ void TestEnvironmentNode::init2DSkyBox()
 	pRepeateAction->setAction(pRotateByAction);
 
 	pSkyBox->getActionProxy()->runAction(pRepeateAction);
-}
-void TestEnvironmentNode::testCamera()
-{
-	Camera* pCamera = G_CAMERAS->getCamera3D();
-
-	G_KEYBOARDMANAGER->addKeyboardFunc(this, pCamera, [this](sys::BoardKey key, sys::ButtonStatus type) {
-		Camera* pCamera = G_CAMERAS->getCamera3D();
-
-		if (type == sys::ButtonStatus::BUTTON_DOWN)
-		{
-			_spaceSpeed += 1.0f;
-		}
-		else
-		{
-			_spaceSpeed = 0.0f;
-		}
-
-		math::Tool::clamp(_spaceSpeed, 0.0f, 20.0f);
-
-		if (key == sys::BoardKey::K1)
-		{
-			_viewType = 0;
-			_mouseScroll = 1;
-		}
-		else if (key == sys::BoardKey::K2)
-		{
-			_viewType = 1;
-			_mouseScroll = 1;
-		}
-		else if (key == sys::BoardKey::KA)
-		{// 左边
-			pCamera->setPosition(pCamera->getPosition() - _spaceSpeed * pCamera->getRight());
-		}
-		else if (key == sys::BoardKey::KD)
-		{// 右边
-			pCamera->setPosition(pCamera->getPosition() + _spaceSpeed * pCamera->getRight());
-		}
-		else if (key == sys::BoardKey::KW)
-		{// 前面
-			pCamera->setPosition(pCamera->getPosition() + _spaceSpeed * pCamera->getFront());
-		}
-		else if (key == sys::BoardKey::KS)
-		{// 后面
-			pCamera->setPosition(pCamera->getPosition() - _spaceSpeed * pCamera->getFront());
-		}
-		else if (key == sys::BoardKey::KQ)
-		{// 下面
-			pCamera->setPosition(pCamera->getPosition() - _spaceSpeed * pCamera->getUp());
-		}
-		else if (key == sys::BoardKey::KE)
-		{// 上面
-			pCamera->setPosition(pCamera->getPosition() + _spaceSpeed * pCamera->getUp());
-		}
-		else if (key == sys::BoardKey::KL)
-		{
-			pCamera->setRotationY(pCamera->getRotationY() - _spaceSpeed);
-		}
-		else if (key == sys::BoardKey::KJ)
-		{
-			pCamera->setRotationY(pCamera->getRotationY() + _spaceSpeed);
-		}
-		else if (key == sys::BoardKey::KK)
-		{
-			pCamera->setRotationX(pCamera->getRotationX() + _spaceSpeed);
-		}
-		else if (key == sys::BoardKey::KI)
-		{
-			pCamera->setRotationX(pCamera->getRotationX() - _spaceSpeed);
-		}
-		else if (key == sys::BoardKey::KU)
-		{
-			pCamera->setRotationZ(pCamera->getRotationZ() + _spaceSpeed);
-		}
-		else if (key == sys::BoardKey::KO)
-		{
-			pCamera->setRotationZ(pCamera->getRotationZ() - _spaceSpeed);
-		}
-	});
-
-	
-	G_MOUSEMANAGER->addMouseScrollFunc(this, pCamera, [this](sys::ScrollEvent evt, float param) {
-		Camera* pCamera = G_CAMERAS->getCamera3D();
-
-		if (_scrollEvt != evt)
-		{
-			_mouseScroll = 1;
-		}
-		else
-		{
-			_mouseScroll *= 2.0f;
-		}
-
-		math::Tool::clamp(_mouseScroll, 0.0f, 32.0f);
-
-		_scrollEvt = evt;
-
-		float value = param * _mouseScroll;
-
-		float zNear = pCamera->getViewParameter().zNear;
-		float zFar = pCamera->getViewParameter().zFar;
-		if (zFar + value <= zNear)
-		{
-			return;
-		}
-		if (_viewType == 0)
-		{
-			if (pCamera->getDimensions() == DimensionsType::THREE)
-			{
-				if (zNear + value <= 0)
-				{
-					return;
-				}
-			}
-			pCamera->setViewDistance(zNear + value, zFar);
-		}
-		else
-		{
-			pCamera->setViewDistance(zNear, zFar + value);
-		}
-	});
 }
 
 void TestEnvironmentNode::addGrid()

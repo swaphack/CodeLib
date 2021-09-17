@@ -3,7 +3,7 @@
 #include "Graphic/import.h"
 #include "Common/Mesh/import.h"
 #include "Common/Texture/Texture2D.h"
-#include "Common/View/Cameras.h"
+#include "Common/Scene/Cameras.h"
 
 render::DrawNode2D::DrawNode2D()
 {

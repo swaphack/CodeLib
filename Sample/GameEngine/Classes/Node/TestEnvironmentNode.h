@@ -13,18 +13,9 @@ protected:
 	void init3DSkyBox();
 	void init2DSkyBox();
 
-	void testCamera();
-
 	void addGrid();
 
 	void testMatrix();
 
 	void testMultiPort();
-private:
-	int _viewType = 0;
-
-	float _spaceSpeed = 0.0f;
-	float _mouseScroll = 0.0f;
-
-	sys::ScrollEvent _scrollEvt = sys::ScrollEvent::NONE;
 };

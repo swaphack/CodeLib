@@ -1,6 +1,5 @@
 #include "ViewPort.h"
 #include "Graphic/import.h"
-#include "Camera.h"
 using namespace render;
 
 

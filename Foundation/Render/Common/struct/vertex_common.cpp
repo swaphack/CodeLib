@@ -257,15 +257,25 @@ const render::RectVertex* render::CubeVertex::getCubMapFaceVertex(CubeFace face)
 		return &bottom;
 		break;
 	case render::CubeFace::FRONT:
-		return &back;
+		return &front;
 		break;
 	case render::CubeFace::BACK:
-		return &front;
+		return &back;
 		break;
 	default:
 		break;
 	}
 	return nullptr;
+}
+
+void render::CubeVertex::toTriangles(std::vector<math::TrianglePoints>& trianglePoints) const
+{
+	front.toTriangles(trianglePoints);
+	back.toTriangles(trianglePoints);
+	top.toTriangles(trianglePoints);
+	bottom.toTriangles(trianglePoints);
+	left.toTriangles(trianglePoints);
+	right.toTriangles(trianglePoints);
 }
 
 //////////////////////////////////////////////////////////////////////////

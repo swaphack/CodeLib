@@ -24,6 +24,12 @@ namespace render
 		Camera* getCamera2D();
 		// 2d摄像机
 		void setCamera2D(Camera* camera);
+		// 设计时摄像头
+		void setDesignCamera(Camera* camera);
+		// 设计时摄像头
+		Camera* getDesignCamera() const;
+		// 运行时摄像头
+		Camera* getRunningCamera3D() const;
 		// 设置视窗参数
 		void setViewPort(float left, float right, float bottom, float top);
 	public:
@@ -36,6 +42,8 @@ namespace render
 		Camera* _camera2D = nullptr;
 		// 3d
 		Camera* _camera3D = nullptr;
+		// 设计时的摄像头
+		Camera* _designCamera = nullptr;
 	};
 
 #define G_CAMERAS sys::Instance<Cameras>::getInstance()

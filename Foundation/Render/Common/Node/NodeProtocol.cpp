@@ -1,5 +1,9 @@
 #include "NodeProtocol.h"
 
+#include "Common/Scene/Camera.h"
+#include "Common/Scene/Cameras.h"
+#include "Common/Scene/Scene.h"
+
 using namespace render;
 
 //////////////////////////////////////////////////////////////////////////
@@ -415,4 +419,44 @@ void render::DirectionProtocol::setRight(const math::Vector3& right)
 void render::DirectionProtocol::setFront(const math::Vector3& front)
 {
 	_front = front;
+}
+
+
+//////////////////////////////////////////////////////////////////////////
+render::DrawNodeProtocol::DrawNodeProtocol()
+{
+}
+
+render::DrawNodeProtocol::~DrawNodeProtocol()
+{
+
+}
+
+void render::DrawNodeProtocol::setCamera(const Camera* camera)
+{
+	_camera = (Camera*)camera;
+}
+
+Camera* render::DrawNodeProtocol::getCamera() const
+{
+	if (G_CAMERAS->getDesignCamera())
+	{
+		return G_CAMERAS->getDesignCamera();
+	}
+	return _camera;
+}
+
+Camera* render::DrawNodeProtocol::getRealCamera() const
+{
+	return _camera;
+}
+
+void render::DrawNodeProtocol::setScene(Scene* scene)
+{
+	_scene = scene;
+}
+
+Scene* render::DrawNodeProtocol::getScene() const
+{
+	return _scene;
 }

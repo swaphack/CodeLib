@@ -24,7 +24,7 @@ private:
 	void testCubeMap();
 
 	void testFog();
-	void testCamera();
+	void addOperateToDesignCamera();
 
 	void testClipPlane();
 private:

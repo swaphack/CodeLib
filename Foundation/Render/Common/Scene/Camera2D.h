@@ -5,17 +5,17 @@
 namespace render
 {
 	/**
-	*	3DÉãÏñ»ú
+	*	2DÉãÏñ»ú
 	*/
-	class Camera3D : public Camera
+	class Camera2D : public Camera
 	{
 	public:
-		Camera3D();
-		virtual ~Camera3D();
+		Camera2D();
+		virtual ~Camera2D();
 	public:
+		virtual bool init();
 	protected:
 		virtual void updateView();
 		virtual void updateViewPort();
-
 	};
 }

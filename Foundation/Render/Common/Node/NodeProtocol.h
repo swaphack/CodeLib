@@ -4,6 +4,9 @@
 
 namespace render
 {
+	class Camera;
+	class Scene;
+
 	// 空间属性
 	class SpaceProtocol
 	{
@@ -200,6 +203,37 @@ namespace render
 		math::Vector3 _defaultRight;
 		// 默认前方
 		math::Vector3 _defaultFront;
+	};
+
+	// 绘制
+	class DrawNodeProtocol
+	{
+	public:
+		DrawNodeProtocol();
+		virtual ~DrawNodeProtocol();
+	public:
+		/**
+		*	设置摄像机
+		*/
+		void setCamera(const Camera* camera);
+		/**
+		*	获取摄像机
+		*/
+		Camera* getCamera() const;
+		/**
+		*	获取实际关联摄像机
+		*/
+		Camera* getRealCamera() const;
+	public:
+		// 设置所属场景
+		void setScene(Scene* scene);
+		// 获取场景
+		Scene* getScene() const;
+	protected:
+		// 所属摄像机
+		Camera* _camera = nullptr;
+		// 场景
+		Scene* _scene = nullptr;
 	};
 	
 }

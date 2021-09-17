@@ -189,17 +189,16 @@ void TestModelNode::testObj()
 
 void TestModelNode::testFbx()
 {
-	//render::BoxDraw::getInstance()->getRenderNode()->setDrawMode(DrawMode::POINTS);
 	std::string filename = "Resource/Model/fbx/LANCER_EVOLUTION/LANCEREVOX.FBX";
 	ModelFbx* pModel = CREATE_NODE(ModelFbx);
 	pModel->setBoxVisible(true);
+	pModel->setTouchEnabled(true);
 	pModel->setBoxLineWidth(5);
 	//pModel->load(filename);
-
-	pModel->loadAsyn(filename, [](render::ModelFile* node) {
-		Utility::loadDefaultShader(node);
-	});
-
+	
+	//pModel->loadAsyn(filename, [](render::ModelFile* node) {
+	//	Utility::loadDefaultShader(node);
+	//});
 	pModel->setScale(100);
 	pModel->setPosition(512, 384);
 	pModel->setRotation(90, 0, 0);
@@ -218,7 +217,7 @@ void TestModelNode::testFbx()
 	pModel->getActionProxy()->runAction(pRepeateAction);
 }
 
-void TestModelNode::testCamera()
+void TestModelNode::addOperateToDesignCamera()
 {
 	Camera* camera = this->getCamera();
 	G_KEYBOARDMANAGER->addKeyboardDelegate(this, camera, KEYBOARD_DELEGATE_SELECTOR(TestModelNode::onKeyBoardCamera));

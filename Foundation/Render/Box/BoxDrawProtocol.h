@@ -52,6 +52,10 @@ namespace render
 		*	节点
 		*/
 		render::Node* getBoxNode() const;
+		/**
+		*	是否包含点击点
+		*/
+		virtual bool containsTouchPoint(const math::Vector2& touchPoint);
 	public:
 		/**
 		*	盒子顶点
@@ -83,12 +87,29 @@ namespace render
 		Box2DDrawProtocol();
 		virtual ~Box2DDrawProtocol();
 	public:
+		void initBox2D(render::Node* node);
+	public:
 		/**
 		*	盒子顶点
 		*/
 		void setBoxVertices(const render::RectVertex& rectVertex);
-
+		/**
+		*	本地坐标
+		*/
 		const render::RectVertex& getLocalRectVertex() const;
+		/**
+		*	是否包含点击点
+		*/
+		virtual bool containsTouchPoint(const math::Vector2& touchPoint);
+	protected:
+		/**
+		*	形状改变
+		*/
+		void onBox2DCubeChange();
+		/**
+		*	形状改变
+		*/
+		void onBox2DWorldCubeChange();
 	protected:
 		// 本地矩形框
 		render::RectVertex _localRectVertex;
@@ -105,12 +126,29 @@ namespace render
 		Box3DDrawProtocol();
 		virtual ~Box3DDrawProtocol();
 	public:
+		void initBox3D(render::Node* node);
+	public:
 		/**
 		*	盒子顶点
 		*/
 		void setBoxVertices(const render::CubeVertex& cubeVertex);
-
+		/**
+		*	本地坐标
+		*/
 		const render::CubeVertex& getLocalCubeVertex() const;
+		/**
+		*	是否包含点击点
+		*/
+		virtual bool containsTouchPoint(const math::Vector2& touchPoint);
+	protected:
+		/**
+		*	形状改变
+		*/
+		void onBox3DCubeChange();
+		/**
+		*	形状改变
+		*/
+		void onBox3DWorldCubeChange();
 	protected:
 		// 本地矩形框
 		render::CubeVertex _localCubeVertex;

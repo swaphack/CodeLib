@@ -484,9 +484,6 @@
     <ClInclude Include="Geometry\shape\TrianglePoints.h">
       <Filter>Geometry\shape</Filter>
     </ClInclude>
-    <ClInclude Include="Geometry\shape\Circle.h">
-      <Filter>Geometry\shape</Filter>
-    </ClInclude>
     <ClInclude Include="Geometry\shape\import.h">
       <Filter>Geometry\shape</Filter>
     </ClInclude>
@@ -544,6 +541,9 @@
     </ClInclude>
     <ClInclude Include="Geometry\shape\CubePoints.h">
       <Filter>Geometry\shape</Filter>
+    </ClInclude>
+    <ClInclude Include="Geometry\2d\Circle.h">
+      <Filter>Geometry\2d</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -773,9 +773,6 @@
     <ClCompile Include="Geometry\base\Physics.cpp">
       <Filter>Geometry\base</Filter>
     </ClCompile>
-    <ClCompile Include="Geometry\shape\Circle.cpp">
-      <Filter>Geometry\shape</Filter>
-    </ClCompile>
     <ClCompile Include="Geometry\shape\TrianglePoints.cpp">
       <Filter>Geometry\shape</Filter>
     </ClCompile>
@@ -797,6 +794,9 @@
     </ClCompile>
     <ClCompile Include="Geometry\shape\CubePoints.cpp">
       <Filter>Geometry\shape</Filter>
+    </ClCompile>
+    <ClCompile Include="Geometry\2d\Circle.cpp">
+      <Filter>Geometry\2d</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

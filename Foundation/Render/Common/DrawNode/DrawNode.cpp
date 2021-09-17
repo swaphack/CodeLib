@@ -10,7 +10,7 @@
 #include "UniformShaderApply.h"
 #include "FragmentOperator.h"
 #include "Common/Fragment/import.h"
-#include "Common/View/Camera.h"
+#include "Common/Scene/Camera.h"
 
 using namespace render;
 

@@ -2,11 +2,13 @@
 
 #include "Common/Node/Node.h"
 #include "DimensionsType.h"
-#include "ViewParameter.h"
+#include "Common/View/ViewParameter.h"
+#include "mathlib.h"
 
 namespace render
 {
 	class Scene;
+	class DebugDraw;
 
 	/**
 	*	摄像机
@@ -48,8 +50,20 @@ namespace render
 		// 中心点位置
 		math::Vector3 getCenterPosition();
 	public:
+		// 调试绘制
+		DebugDraw* getDebugDraw() const;
+		// 视图绘制是否显示
+		void setViewDrawVisible(bool bVisible);
+		// 获取坐标
+		math::Vector3 convertScreenPointToCameraPosition(const math::Vector2& screenPoint) const;
+		// 获取所在世界坐标
+		math::Vector3 convertScreenPointToWorldPosition(const math::Vector2& screenPoint) const;
 		// 获取射线
-		math::Ray getRayFromScreenPoint(const math::Vector2& screenPoint) const;
+		math::Ray convertScreenPointToCameraRay(const math::Vector2& screenPoint) const;
+		// 获取所在世界射线
+		math::Ray convertScreenPointToWorldRay(const math::Vector2& screenPoint) const;
+		// 将本地射线转为世界射线
+		math::Ray convertLocalRayToWorldRay(const math::Ray localRay) const;
 	public:
 		// 绘制场景
 		void drawScene(Node* scene);
@@ -74,5 +88,9 @@ namespace render
 		math::Matrix4x4 _viewMatrix;
 		// 2d视野参数
 		ViewParameter _viewParameter;
+		// 调试绘制
+		DebugDraw* _debugDraw = nullptr;
+		// 视图性转绘制
+		DebugDraw* _viewShapeDraw = nullptr;
 	};
 }

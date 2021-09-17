@@ -7,7 +7,7 @@
 #include "DrawTextureCache.h"
 #include "UniformShaderApply.h"
 #include "Common/Shader/ShaderProgram.h"
-#include "Common/View/Camera.h"
+#include "Common/Scene/Camera.h"
 
 using namespace render;
 

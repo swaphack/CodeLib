@@ -18,6 +18,8 @@ namespace math
 		void setDirection(const Vector3& direction);
 		// 方向
 		const Vector3& getDirection() const;
+		// 获取目标点，缩放后的方向向量与起始点的和
+		Vector3 getDestPoint(float scaler = 1) const;
 	private:
 		// 起始点
 		Vector3 _point;

@@ -327,6 +327,7 @@ void TestUINode::testWidget()
 {
 	auto pWidget = CREATE_NODE(ui::CtrlWidget);
 	pWidget->setBoxVisible(true);
+	pWidget->setTouchEnabled(true);
 	pWidget->setAnchorPoint(0.5f, 0.5f);
 	pWidget->setPosition(512, 384);
 	pWidget->setVolume(200, 100);

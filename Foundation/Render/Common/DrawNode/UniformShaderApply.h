@@ -8,6 +8,7 @@
 namespace render
 {
 	class Node;
+	class Camera;
 	class DrawTextureCache;
 	class Mesh;
 	class ShaderProgram;
@@ -118,8 +119,14 @@ namespace render
 		void setTempMatrix(const math::Matrix4x4& matrix);
 
 		void reloadTempMatrix();
-
+		/**
+		*	获取世界矩阵
+		*/ 
 		math::Matrix4x4 getWorldMatrix(const Node* node);
+		/**
+		*	获取摄像头
+		*/
+		Camera* getCamera(const Node* node);
 	protected:
 		/**
 		*	vertex

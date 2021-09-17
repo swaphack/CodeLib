@@ -2,9 +2,9 @@
 #include "macros.h"
 phy::Color3B::Color3B()
 {
-	this->setRed(255);
-	this->setGreen(255);
-	this->setBlue(255);
+	this->setRed(COLOR_UCHAR_VALUE_MAX);
+	this->setGreen(COLOR_UCHAR_VALUE_MAX);
+	this->setBlue(COLOR_UCHAR_VALUE_MAX);
 }
 
 phy::Color3B::Color3B(uint8_t r, uint8_t g, uint8_t b)
@@ -35,10 +35,19 @@ void phy::Color3B::adjust()
 }
 
 phy::Color3F::Color3F() 
-{}
+{
+	this->setRed(1);
+	this->setGreen(1);
+	this->setBlue(1);
+}
 
 phy::Color3F::Color3F(float r, float g, float b)
 {
+	this->setRed(r);
+	this->setGreen(g);
+	this->setBlue(b);
+
+	adjust();
 }
 
 phy::Color3F::~Color3F() 

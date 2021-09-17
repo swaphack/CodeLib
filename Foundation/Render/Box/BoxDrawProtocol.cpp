@@ -1,6 +1,11 @@
 #include "BoxDrawProtocol.h"
 #include "Graphic/import.h"
+#include "Common/Scene/DebugDraw.h"
+#include "Common/Scene/Camera.h"
+#include "Common/Scene/Camera3D.h"
+#include "Common/Scene/Cameras.h"
 #include "BoxDraw.h"
+#include "Common/Tool/VertexTool.h"
 
 render::BoxDrawProtocol::BoxDrawProtocol()
 {
@@ -66,6 +71,11 @@ render::Node* render::BoxDrawProtocol::getBoxNode() const
 	return m_pBoxNode;
 }
 
+bool render::BoxDrawProtocol::containsTouchPoint(const math::Vector2& touchPoint)
+{
+	return false;
+}
+
 void render::BoxDrawProtocol::getBoxPoints(std::vector<math::TrianglePoints>& vecPoints) const
 {
 	vecPoints = _boxPoints;
@@ -86,24 +96,25 @@ render::Box2DDrawProtocol::~Box2DDrawProtocol()
 {
 
 }
-/*
-void render::Box2DDrawProtocol::drawBox()
+
+void render::Box2DDrawProtocol::initBox2D(render::Node* node)
 {
-	if (!isBoxVisible())
+	if (node == nullptr)
 	{
 		return;
 	}
-	GLVertex::setColor(_boxColor);
-	GLState::setLineWidth(_boxLineWidth);
 
-	GLVertex::beginMode(ShapeMode::LINE_LOOP);
-	GLVertex::setVertex(_boxVertex.getLeftBottom());
-	GLVertex::setVertex(_boxVertex.getRightBottom());
-	GLVertex::setVertex(_boxVertex.getRightTop());
-	GLVertex::setVertex(_boxVertex.getLeftTop());
-	GLVertex::endMode();
+	this->setBoxNode(node);
+
+	// 添加属性改变监听
+	this->getBoxNode()->addNotifyListener(NodeNotifyType::BODY, [this]() {
+		onBox2DCubeChange();
+	});
+	this->getBoxNode()->addNotifyListener(NodeNotifyType::SPACE, [this]() {
+		onBox2DWorldCubeChange();
+	});
 }
-*/
+
 void render::Box2DDrawProtocol::setBoxVertices(const render::RectVertex& rectVertex)
 {
 	_boxPoints.clear();
@@ -113,6 +124,44 @@ void render::Box2DDrawProtocol::setBoxVertices(const render::RectVertex& rectVer
 const render::RectVertex& render::Box2DDrawProtocol::getLocalRectVertex() const
 {
 	return _localRectVertex;
+}
+
+bool render::Box2DDrawProtocol::containsTouchPoint(const math::Vector2& touchPoint)
+{
+	math::Polygon rect = _worldRectVertex;
+
+	return rect.contains(touchPoint);
+}
+
+void render::Box2DDrawProtocol::onBox2DCubeChange()
+{
+	if (this->getBoxNode() == nullptr)
+	{
+		return;
+	}
+
+	auto pBoxNode = this->getBoxNode();
+
+	VertexTool::setTexture2DVertices(&_localRectVertex, math::Vector3(), pBoxNode->getVolume(), pBoxNode->getAnchorPoint());
+
+	onBox2DWorldCubeChange();
+}
+
+void render::Box2DDrawProtocol::onBox2DWorldCubeChange()
+{
+	if (this->getBoxNode() == nullptr)
+	{
+		return;
+	}
+
+	auto pBoxNode = this->getBoxNode();
+
+	_worldRectVertex.setLeftBottomPosition(pBoxNode->convertLocalPostitionToWorld(_localRectVertex.getLeftBottomPosition()));
+	_worldRectVertex.setRightBottomPosition(pBoxNode->convertLocalPostitionToWorld(_localRectVertex.getRightBottomPosition()));
+	_worldRectVertex.setRightTopPosition(pBoxNode->convertLocalPostitionToWorld(_localRectVertex.getRightTopPosition()));
+	_worldRectVertex.setLeftTopPosition(pBoxNode->convertLocalPostitionToWorld(_localRectVertex.getLeftTopPosition()));
+
+	setBoxVertices(_worldRectVertex);
 }
 
 /////////////////////////////////////////////////////////////////////////
@@ -125,71 +174,87 @@ render::Box3DDrawProtocol::~Box3DDrawProtocol()
 {
 
 }
+void render::Box3DDrawProtocol::initBox3D(render::Node* node)
+{
+	if (node == nullptr)
+	{
+		return;
+	}
+
+	this->setBoxNode(node);
+
+	// 添加属性改变监听
+	this->getBoxNode()->addNotifyListener(NodeNotifyType::BODY, [this]() {
+		onBox3DCubeChange();
+	});
+	this->getBoxNode()->addNotifyListener(NodeNotifyType::SPACE, [this]() {
+		onBox3DWorldCubeChange();
+	});
+}
 void render::Box3DDrawProtocol::setBoxVertices(const render::CubeVertex& cubeVertex)
 {
 	_boxPoints.clear();
-	cubeVertex.front.toTriangles(_boxPoints);
-	cubeVertex.back.toTriangles(_boxPoints);
-	cubeVertex.left.toTriangles(_boxPoints);
-	cubeVertex.right.toTriangles(_boxPoints);
-	cubeVertex.top.toTriangles(_boxPoints);
-	cubeVertex.bottom.toTriangles(_boxPoints);
+	cubeVertex.toTriangles(_boxPoints);
 }
 const render::CubeVertex& render::Box3DDrawProtocol::getLocalCubeVertex() const
 {
 	return _localCubeVertex;
 }
-/*
-void render::Box3DDrawProtocol::drawBox()
+bool render::Box3DDrawProtocol::containsTouchPoint(const math::Vector2& touchPoint)
 {
-	if (!isBoxVisible())
+	if (this->getBoxNode() == nullptr || this->getBoxNode()->getCamera() == nullptr)
+		return false;
+	auto pCamera = this->getBoxNode()->getCamera();
+	math::Ray cameraRay = pCamera->convertScreenPointToCameraRay(touchPoint);
+	pCamera->getDebugDraw()->drawLine(cameraRay.getPoint(), cameraRay.getDestPoint(10000), phy::Color4F(1.0f,0,0,1.0f));
+
+	math::Ray worldRay = pCamera->convertLocalRayToWorldRay(cameraRay);
+
+	std::vector<math::TrianglePoints> trianglePoints;
+	_worldCubeVertex.toTriangles(trianglePoints);
+
+	math::Vector3 point;
+	for (auto item : trianglePoints)
+	{
+		if (math::Physics::raycast(worldRay, item, point))
+		{
+			return true;
+		}
+	}
+	return false;
+}
+
+void render::Box3DDrawProtocol::onBox3DCubeChange()
+{
+	if (this->getBoxNode() == nullptr)
 	{
 		return;
 	}
-	GLVertex::setColor(_boxColor);
-	GLState::setLineWidth(_boxLineWidth);
+	auto pBoxNode = this->getBoxNode();
 
-	GLVertex::beginMode(ShapeMode::LINE_LOOP);
-	GLVertex::setVertex(_boxVertex.getFrontLeftBottom());
-	GLVertex::setVertex(_boxVertex.getFrontRightBottom());
-	GLVertex::setVertex(_boxVertex.getFrontRightTop());
-	GLVertex::setVertex(_boxVertex.getFrontLeftTop());
-	GLVertex::endMode();
-
-	GLVertex::beginMode(ShapeMode::LINE_LOOP);
-	GLVertex::setVertex(_boxVertex.getBackLeftBottom());
-	GLVertex::setVertex(_boxVertex.getBackRightBottom());
-	GLVertex::setVertex(_boxVertex.getBackRightTop());
-	GLVertex::setVertex(_boxVertex.getBackLeftTop());
-	GLVertex::endMode();
-
-	GLVertex::beginMode(ShapeMode::LINE_LOOP);
-	GLVertex::setVertex(_boxVertex.getBackRightBottom());
-	GLVertex::setVertex(_boxVertex.getFrontLeftBottom());
-	GLVertex::setVertex(_boxVertex.getFrontLeftTop());
-	GLVertex::setVertex(_boxVertex.getBackRightTop());
-	GLVertex::endMode();
-
-	GLVertex::beginMode(ShapeMode::LINE_LOOP);
-	GLVertex::setVertex(_boxVertex.getFrontRightBottom());
-	GLVertex::setVertex(_boxVertex.getBackLeftBottom());
-	GLVertex::setVertex(_boxVertex.getBackLeftTop());
-	GLVertex::setVertex(_boxVertex.getFrontRightTop());
-	GLVertex::endMode();
-
-	GLVertex::beginMode(ShapeMode::LINE_LOOP);
-	GLVertex::setVertex(_boxVertex.getFrontLeftTop());
-	GLVertex::setVertex(_boxVertex.getFrontRightTop());
-	GLVertex::setVertex(_boxVertex.getBackLeftTop());
-	GLVertex::setVertex(_boxVertex.getBackRightTop());
-	GLVertex::endMode();
-
-	GLVertex::beginMode(ShapeMode::LINE_LOOP);
-	GLVertex::setVertex(_boxVertex.getBackRightBottom());
-	GLVertex::setVertex(_boxVertex.getBackLeftBottom());
-	GLVertex::setVertex(_boxVertex.getFrontRightBottom());
-	GLVertex::setVertex(_boxVertex.getFrontLeftBottom());
-	GLVertex::endMode();
+	render::VertexTool::setTexture3DVertices(&_localCubeVertex, 
+		math::Vector3(), pBoxNode->getVolume(), pBoxNode->getAnchorPoint());
+	onBox3DWorldCubeChange();
 }
-*/
 
+void render::Box3DDrawProtocol::onBox3DWorldCubeChange()
+{
+	if (this->getBoxNode() == nullptr)
+	{
+		return;
+	}
+
+	auto pBoxNode = this->getBoxNode();
+
+	_worldCubeVertex.setFrontLeftBottomPosition(pBoxNode->convertLocalPostitionToWorld(_localCubeVertex.front.getLeftBottomPosition()));
+	_worldCubeVertex.setFrontRightBottomPosition(pBoxNode->convertLocalPostitionToWorld(_localCubeVertex.front.getRightBottomPosition()));
+	_worldCubeVertex.setFrontRightTopPosition(pBoxNode->convertLocalPostitionToWorld(_localCubeVertex.front.getRightTopPosition()));
+	_worldCubeVertex.setFrontLeftTopPosition(pBoxNode->convertLocalPostitionToWorld(_localCubeVertex.front.getLeftTopPosition()));
+
+	_worldCubeVertex.setBackLeftBottomPosition(pBoxNode->convertLocalPostitionToWorld(_localCubeVertex.back.getLeftBottomPosition()));
+	_worldCubeVertex.setBackRightBottomPosition(pBoxNode->convertLocalPostitionToWorld(_localCubeVertex.back.getRightBottomPosition()));
+	_worldCubeVertex.setBackRightTopPosition(pBoxNode->convertLocalPostitionToWorld(_localCubeVertex.back.getRightTopPosition()));
+	_worldCubeVertex.setBackLeftTopPosition(pBoxNode->convertLocalPostitionToWorld(_localCubeVertex.back.getLeftTopPosition()));
+
+	setBoxVertices(_worldCubeVertex);
+}

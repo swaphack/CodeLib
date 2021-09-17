@@ -3,7 +3,10 @@
 #include "Graphic/import.h"
 #include "Common/Tool/Tool.h"
 #include "Box/BoxDraw.h"
-#include "Common/View/Cameras.h"
+#include "Camera2D.h"
+#include "Camera3D.h"
+#include "Cameras.h"
+#include "DebugDraw.h"
 
 using namespace render;
 
@@ -23,18 +26,20 @@ bool Scene::init()
 	{
 		return false;
 	}
+	Camera3D* designCamera = CREATE_NODE(Camera3D);
+	this->addChild(designCamera, INT_MIN);
+	G_CAMERAS->setDesignCamera(designCamera);
 
 	Camera3D* camera3D = CREATE_NODE(Camera3D);
-	this->addChild(camera3D, INT_MAX);
+	this->addChild(camera3D, INT_MIN);
 	G_CAMERAS->setCamera3D(camera3D);
 
 	Camera2D* camera2D = CREATE_NODE(Camera2D);
-	this->addChild(camera2D, INT_MAX);
+	this->addChild(camera2D, INT_MIN);
 	G_CAMERAS->setCamera2D(camera2D);
 
-	BoxDraw* box = CREATE_NODE(BoxDraw);
-	this->addChild(box, INT_MAX);
-
+	BoxDraw* boxDraw = CREATE_NODE(BoxDraw);
+	this->addChild(boxDraw, INT_MAX);
 
 	return true;
 }
@@ -42,7 +47,7 @@ bool Scene::init()
 void Scene::visit()
 {
 	// Ä£ÐÍ¾ØÕó
-	GLMatrix::applyModelView();
+	//GLMatrix::applyModelView();
 
 	this->updateNode();
 
