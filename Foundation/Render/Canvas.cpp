@@ -50,8 +50,6 @@ void Canvas::setViewPort(float x, float y, float width, float height)
 	}
 
 	G_CAMERAS->setViewPort(x, x + width, y, y + height);
-
-	Tool::setGLViewSize(width, height);
 }
 
 Scene* Canvas::getCurScene()

@@ -4,25 +4,25 @@
 
 using namespace render;
 
-math::Volume Tool::GL_VIEW_SIZE = math::Volume();
+math::Size Tool::GL_VIEW_SIZE = math::Size();
 
-void Tool::setGLViewSize(float width, float height)
+void Tool::setViewSize(float width, float height)
 {
 	float max = width <= height ? width : height;
-	GL_VIEW_SIZE.set(width, height, max);
+	GL_VIEW_SIZE.set(width, height);
 }
 
-const math::Volume& Tool::getGLViewSize()
+const math::Size& Tool::getViewSize()
 {
 	return GL_VIEW_SIZE;
 }
 
-float Tool::getGLViewWidth()
+float Tool::getViewWidth()
 {
 	return GL_VIEW_SIZE.getWidth();
 }
 
-float Tool::getGLViewHeight()
+float Tool::getViewHeight()
 {
 	return GL_VIEW_SIZE.getHeight();
 }
@@ -127,91 +127,6 @@ void Tool::convertToAngle(const math::Vector3& src, math::Vector3& dest)
 	float z = RADIAN_TO_ANGLE(src.getZ());
 
 	dest.set(x, y, z);
-}
-
-void Tool::convertToOGLPoisition(float x, float y, float z, math::Vector3& dest)
-{
-	const math::Volume& volume = GL_VIEW_SIZE;
-
-	dest.set(x / volume.getDepth(), y / volume.getDepth(), z / volume.getDepth());
-}
-
-math::Vector3 Tool::convertToOGLPoisition(float x, float y, float z)
-{
-	const math::Volume& volume = GL_VIEW_SIZE;
-
-	return math::Vector3(x / volume.getDepth(), y / volume.getDepth(), z / volume.getDepth());
-}
-
-math::Vector3 Tool::convertToOGLPoisition(const math::Vector3& src)
-{
-	return convertToOGLPoisition(src.getX(), src.getY(), src.getZ());
-}
-
-void Tool::convertToOGLPoisition(const math::Vector3& src, math::Vector3& dest)
-{
-	convertToOGLPoisition(src.getX(), src.getY(), src.getZ(), dest);
-}
-
-void Tool::convertToOGLPoisition(float* inPos, float* outPos)
-{
-	const math::Volume& volume = GL_VIEW_SIZE;
-
-	outPos[0] = inPos[0] / volume.getDepth();
-	outPos[1] = inPos[1] / volume.getDepth();
-	outPos[2] = inPos[2] / volume.getDepth();
-}
-
-math::Vector3 Tool::convertToWindowPosition(float x, float y, float z)
-{
-	const math::Volume& volume = GL_VIEW_SIZE;
-
-	return math::Vector3(x * volume.getDepth(), y * volume.getDepth(), z * volume.getDepth());
-}
-
-math::Vector3 Tool::convertToWindowPosition(const math::Vector3& src)
-{
-	return convertToWindowPosition(src.getX(), src.getY(), src.getZ());
-}
-
-math::Volume Tool::convertToOGLVolume(const math::Volume& src)
-{
-	const math::Volume& volume = GL_VIEW_SIZE;
-
-	return math::Volume(src.getWidth() / volume.getDepth() * 2 - 1, src.getHeight() / volume.getDepth() * 2 - 1, src.getDepth());
-}
-
-math::Vector3 Tool::getRotationPosition(const math::Vector3& vector, const math::Vector3& rotation)
-{
-	float sinx, siny, sinz;
-	float cosx, cosy, cosz;
-	float ax, ay, az;
-
-	ax = ANGLE_TO_RADIAN(rotation.getX());
-	ay = ANGLE_TO_RADIAN(rotation.getY());
-	az = ANGLE_TO_RADIAN(rotation.getZ());
-
-	sinx = sin(ax);
-	siny = sin(ay);
-	sinz = sin(az);
-
-	cosx = cos(ax);
-	cosy = cos(ay);
-	cosz = cos(az);
-
-	float x = vector.getX() * (cosy * cosz - sinx * siny * sinz)
-		- vector.getY() * cosx * sinz
-		+ vector.getZ() * (siny * cosz + sinx * cosy * sinz);
-
-	float y = vector.getX() * (cosy * sinz + sinx * siny * cosz)
-		+ vector.getY() * cosx * cosz
-		+ vector.getZ() * (siny * sinz - sinx * cosy * cosz);
-
-	float z = vector.getX() * (-cosx * siny)
-		+ vector.getY() * sinx
-		+ vector.getZ() * cosx * cosy;
-
-	return math::Vector3(x, y, z);
 }
 
 void Tool::calNormal(const math::Vector3& p1, const math::Vector3& p2, const math::Vector3& p3, math::Vector3& normal)

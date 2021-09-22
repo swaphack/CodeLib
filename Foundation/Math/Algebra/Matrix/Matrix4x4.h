@@ -34,6 +34,7 @@ namespace math
 		Matrix4x4(const Matrix<float, 4, 4>& mat);
 		Matrix4x4(const Matrix4x4& mat);
 		Matrix4x4(const Matrix4x1& mat);
+		Matrix4x4(const Matrix<float, 3, 3>& mat);
 		Matrix4x4(const Matrix3x3& mat);
 		Matrix4x4(const SquareMatrix4& mat);
 		Matrix4x4(const SquareMatrix<float, 4>& mat);
@@ -133,6 +134,7 @@ namespace math
 		Matrix4x4& operator=(const Matrix4x4& mat);
 		Matrix4x4& operator=(const Matrix4x1& mat);
 		Matrix4x4& operator=(const Matrix<float, 4, 4>& mat);
+		Matrix4x4& operator=(const Matrix<float, 3, 3>& mat);
 		Matrix4x4& operator=(const Matrix3x3& mat);
 
 		operator SquareMatrix4() const;

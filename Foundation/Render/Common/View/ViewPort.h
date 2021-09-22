@@ -12,22 +12,13 @@ namespace render
 		ViewPort();
 		virtual ~ViewPort();
 	public:
-		// 设置视窗位置
-		void setViewPosition(float x, float y);
-		// 获取视窗位置
-		const math::Vector2& getViewPosition() const;
-		// 设置视窗大小
-		void setViewSize(float width, float height);
-		// 获取视窗大小
-		const math::Size& getViewSize() const;
 		// 设置视窗大小
 		void setViewRect(float x, float y, float width, float height);
-
 	public:
 		// 设置子视窗
 		void setSubViewRect(uint32_t index, float x, float y, float width, float height);
 		// 获取子视窗
-		math::Rect getSubViewRect(uint32_t index);
+		math::Rect getSubViewRect(uint32_t index) const;
 	public:
 		// 重置视图
 		void initViewPort();

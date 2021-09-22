@@ -15,7 +15,6 @@ namespace render
 	public:
 		virtual bool init();
 	protected:
-		virtual void updateView();
 		virtual void updateViewPort();
 	};
 }

@@ -98,8 +98,6 @@ namespace render
 		Canvas* _canvas;
 		// 最后一次定时刷新的周期
 		uint64_t _lastClock = 0;
-		// 窗体大小
-		math::Size _frameSize;
 		// 刷新间隔
 		float _refreshInterval = 0;
 		// 刷新间隔

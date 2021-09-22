@@ -24,7 +24,7 @@ void TestPostProcessing::initNodes()
 
 void TestPostProcessing::testFramePostProcessing()
 {
-	auto frameSize = render::Canvas::getInstance()->getView()->getViewSize();
+	auto frameSize = render::Tool::getViewSize();
 
 	std::string filepath = "Resource/Image/world.jpg";
 
@@ -47,7 +47,7 @@ void TestPostProcessing::testFramePostProcessing()
 
 void TestPostProcessing::testPixelPostProcessing()
 {
-	const auto& frameSize = render::Tool::getGLViewSize();
+	const auto& frameSize = render::Tool::getViewSize();
 
 	render::PixelPostProcessingNode* pNode = CREATE_NODE(render::PixelPostProcessingNode);
 
@@ -60,7 +60,7 @@ void TestPostProcessing::testPixelPostProcessing()
 
 void TestPostProcessing::testImage()
 {
-	const auto& frameSize = render::Tool::getGLViewSize();
+	const auto& frameSize = render::Tool::getViewSize();
 
 	std::string filepath = "Resource/Image/world_texture.jpg";
 

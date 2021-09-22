@@ -40,7 +40,7 @@ bool render::PixelPostProcessingNode::init()
 void render::PixelPostProcessingNode::beforeDrawNode()
 {
 	GLDebug::showError();
-	const auto& size = Tool::getGLViewSize();
+	const auto& size = Tool::getViewSize();
 	float width = size.getWidth();
 	float height = size.getHeight();
 

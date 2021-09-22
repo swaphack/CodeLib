@@ -17,7 +17,14 @@ Matrix4x4::Matrix4x4(const Matrix4x4& mat)
 	*this = mat;
 }
 
+Matrix4x4::Matrix4x4(const Matrix<float, 3, 3>& mat) 
+:Matrix4x4()
+{
+	*this = mat;
+}
+
 Matrix4x4::Matrix4x4(const Matrix3x3& mat)
+: Matrix4x4()
 {
 	*this = mat;
 }
@@ -341,6 +348,19 @@ math::Matrix4x4& math::Matrix4x4::operator=(const Matrix<float, 4, 4>& mat)
 {
 	assert(mat.getWidth() == this->getWidth() && mat.getHeight() == this->getHeight());
 
+	for (int i = 0; i < mat.getHeight(); i++)
+	{
+		for (int j = 0; j < mat.getWidth(); j++)
+		{
+			this->setValue(i, j, mat.getValue(i, j));
+		}
+	}
+
+	return *this;
+}
+
+math::Matrix4x4& math::Matrix4x4::operator=(const Matrix<float, 3, 3>& mat)
+{
 	for (int i = 0; i < mat.getHeight(); i++)
 	{
 		for (int j = 0; j < mat.getWidth(); j++)

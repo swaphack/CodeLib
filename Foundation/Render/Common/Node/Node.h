@@ -146,6 +146,8 @@ namespace render
 	public:
 		// 世界矩阵
 		const math::Matrix4x4& getWorldMatrix() const;
+		// 世界转本地矩阵
+		const math::Matrix4x4& getWorldInverseMatrix() const;
 		// 相对父节点的矩阵
 		const math::Matrix4x4& getLocalMatrix() const;
 		// 将世界坐标转化为本地坐标
@@ -163,11 +165,6 @@ namespace render
 	protected:
 		// 在目标节点的前方
 		bool isInFrontOfNode(const Node* target) const;
-	protected:
-		// 更新空间矩阵
-		virtual void startUpdateTranform();
-		// 逆转空间矩阵
-		virtual void endUpdateTranform();
 	public:
 		// 添加事件监听
 		void addNotifyListener(NodeNotifyType id, const NotifyDelegate& func);

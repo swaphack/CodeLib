@@ -206,7 +206,7 @@ void TestModelNode::testFbx()
 	this->addChild(pModel);
 
 	//Utility::loadDefaultShader(pModel);
-
+	/*
 	RotateByAction* pRotateByAction = CREATE_ACTION(RotateByAction);
 	pRotateByAction->setDifferentRotation(0, 0, 180);
 	pRotateByAction->setDuration(4);
@@ -215,6 +215,7 @@ void TestModelNode::testFbx()
 	pRepeateAction->setAction(pRotateByAction);
 
 	pModel->getActionProxy()->runAction(pRepeateAction);
+	*/
 }
 
 void TestModelNode::addOperateToDesignCamera()

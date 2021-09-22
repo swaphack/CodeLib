@@ -137,11 +137,11 @@ void CtrlFile::autoResize()
 	math::Size viewSize;
 	if (this->isRootView() || !this->isRelativeWithParent())
 	{
-		viewSize.set(render::Tool::getGLViewWidth(), render::Tool::getGLViewHeight());
+		viewSize.set(render::Tool::getViewWidth(), render::Tool::getViewHeight());
 	}
 	else if (this->getParent() == nullptr)
 	{
-		viewSize.set(render::Tool::getGLViewWidth(), render::Tool::getGLViewHeight());
+		viewSize.set(render::Tool::getViewWidth(), render::Tool::getViewHeight());
 	}
 	else
 	{

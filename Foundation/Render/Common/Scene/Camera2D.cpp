@@ -23,24 +23,14 @@ bool render::Camera2D::init()
 	return true;
 }
 
-void render::Camera2D::updateView()
-{
-	GLMatrix::loadOrtho(
-		_viewParameter.xLeft,
-		_viewParameter.xRight,
-		_viewParameter.yBottom,
-		_viewParameter.yTop,
-		_viewParameter.zNear,
-		_viewParameter.zFar);
-
-	GLDebug::showError();
-}
-
 void render::Camera2D::updateViewPort()
 {
+	float w = _viewParameter.getWidth();
+	float h = _viewParameter.getHeight();
+
 	_projectMatrix = math::Matrix4x4::ortho(
-		_viewParameter.xLeft, _viewParameter.xRight,
-		_viewParameter.yBottom, _viewParameter.yTop,
+		-0.5f * w, 0.5f * w,
+		-0.5f * h, 0.5f * h,
 		_viewParameter.zNear, _viewParameter.zFar);
 
 	_viewShapeDraw->cleanup();

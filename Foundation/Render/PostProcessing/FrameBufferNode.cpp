@@ -24,8 +24,8 @@ bool render::FrameBufferNode::init()
 	}
 
 	_frameBuffer->bindFrameBuffer();
-	_frameBuffer->setParameter(FrameBufferParameter::FRAMEBUFFER_DEFAULT_WIDTH, (int)Tool::getGLViewWidth());
-	_frameBuffer->setParameter(FrameBufferParameter::FRAMEBUFFER_DEFAULT_HEIGHT, (int)Tool::getGLViewHeight());
+	_frameBuffer->setParameter(FrameBufferParameter::FRAMEBUFFER_DEFAULT_WIDTH, (int)Tool::getViewWidth());
+	_frameBuffer->setParameter(FrameBufferParameter::FRAMEBUFFER_DEFAULT_HEIGHT, (int)Tool::getViewHeight());
 	_frameBuffer->unbindFrameBuffer();
 
 	return true;

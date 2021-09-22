@@ -12,7 +12,7 @@ TestEnvironmentNode::~TestEnvironmentNode()
 
 void TestEnvironmentNode::initNodes()
 {
-	//this->addGrid();
+	this->addGrid();
 
 	this->init3DSkyBox();
 
@@ -122,6 +122,6 @@ void TestEnvironmentNode::testMatrix()
 
 void TestEnvironmentNode::testMultiPort()
 {
-	math::Size size = Canvas::getInstance()->getView()->getViewSize();
+	math::Size size = Tool::getViewSize();
 	Canvas::getInstance()->setViewPort(0, 0, size.getWidth() * 0.5f, size.getHeight() * 0.5f);
 }

@@ -94,7 +94,7 @@ void TestShaderNode::testSubroutineUniform()
 
 void TestShaderNode::testImageShader()
 {
-	auto frameSize = Canvas::getInstance()->getView()->getViewSize();
+	auto frameSize = render::Tool::getViewSize();
 
 	std::string filepath = "Resource/Image/world.jpg";
 
@@ -267,7 +267,7 @@ void TestShaderNode::testClipShader()
 
 void TestShaderNode::testTessellation()
 {
-	auto frameSize = Canvas::getInstance()->getView()->getViewSize();
+	auto frameSize = render::Tool::getViewSize();
 
 	std::string filepath = "Resource/Image/world.jpg";
 

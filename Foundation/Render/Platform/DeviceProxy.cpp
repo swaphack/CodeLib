@@ -18,7 +18,7 @@ DeviceProxy::~DeviceProxy()
 
 void DeviceProxy::onMouseButtonHandler(sys::MouseKey key, sys::ButtonStatus type, float x, float y)
 {
-	const math::Volume& size = Tool::getGLViewSize();
+	const math::Size& size = Tool::getViewSize();
 	float xx = x;
 	float yy = size.getHeight() - y;
 
@@ -34,7 +34,7 @@ void DeviceProxy::onMouseButtonHandler(sys::MouseKey key, sys::ButtonStatus type
 
 void DeviceProxy::onMouseMoveHandler(float x, float y)
 {
-	const math::Volume& size = Tool::getGLViewSize();
+	const math::Size& size = Tool::getViewSize();
 
 	float xx = x;
 	float yy = size.getHeight() - y;

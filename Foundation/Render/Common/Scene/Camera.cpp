@@ -54,13 +54,10 @@ bool Camera::init()
 
 void Camera::setViewPort(float left, float right, float bottom, float top)
 {
-	float w = 0.5f * (left + right);
-	float h = 0.5f * (bottom + top);
-
-	_viewParameter.xLeft = -w;
-	_viewParameter.xRight = w;
-	_viewParameter.yBottom = -h;
-	_viewParameter.yTop = h;
+	_viewParameter.xLeft = left;
+	_viewParameter.xRight = right;
+	_viewParameter.yBottom = bottom;
+	_viewParameter.yTop = top;
 
 	this->notify(NodeNotifyType::VIEWSIZE);
 }
@@ -81,18 +78,6 @@ const ViewParameter& Camera::getViewParameter()const
 DimensionsType Camera::getDimensions() const
 {
 	return _dimensions;
-}
-void render::Camera::updateCameraView()
-{
-	GLMatrix::applyProjection();
-
-	GLDebug::showError();
-	this->startUpdateTranform();
-	GLDebug::showError();
-	this->updateView();
-	GLDebug::showError();
-	this->endUpdateTranform();
-	GLDebug::showError();
 }
 
 void Camera::setDimensions(DimensionsType d)
@@ -115,29 +100,8 @@ void render::Camera::drawScene(Node* scene)
 void Camera::visit()
 {
 	this->updateNode();
-	
-	//this->updateCameraView();
 
 	this->drawNode();
-}
-
-void Camera::updateView()
-{
-}
-
-void Camera::startUpdateTranform()
-{
-	//PRINT("%s\n", _worldMatrix.toString().c_str());
-	GLMatrix::loadIdentity();
-	
-	GLMatrix::multMatrix(_worldMatrix);
-
-	GLDebug::showError();
-}
-
-void Camera::endUpdateTranform()
-{
-
 }
 
 const math::Matrix4x4& render::Camera::getProjectMatrix() const
@@ -148,28 +112,6 @@ const math::Matrix4x4& render::Camera::getProjectMatrix() const
 const math::Matrix4x4& render::Camera::getViewMatrix() const
 {
 	return _viewMatrix;
-}
-
-math::Matrix4x4 render::Camera::getProjectMatrix(float znear, float zfar)
-{
-	math::Matrix4x4 matrix;
-
-	if (getDimensions() == DimensionsType::TWO)
-	{
-		matrix = math::Matrix4x4::ortho(
-			_viewParameter.xLeft, _viewParameter.xRight,
-			_viewParameter.yBottom, _viewParameter.yTop,
-			znear, zfar);
-	}
-	else if (getDimensions() == DimensionsType::THREE)
-	{
-		matrix = math::Matrix4x4::frustum(
-			_viewParameter.xLeft, _viewParameter.xRight,
-			_viewParameter.yBottom, _viewParameter.yTop,
-			znear, zfar);
-	}
-
-	return matrix;
 }
 
 math::Matrix4x4 render::Camera::lookAt(const math::Vector3& position)
@@ -186,11 +128,7 @@ math::Matrix4x4 render::Camera::lookAtCenter()
 
 math::Vector3 render::Camera::getCenterPosition()
 {
-	math::Vector3 center;
-	center.setX(0.5f * (_viewParameter.xLeft + _viewParameter.xRight));
-	center.setY(0.5f * (_viewParameter.yBottom + _viewParameter.yTop));
-
-	return center;
+	return math::Vector3();
 }
 render::DebugDraw* render::Camera::getDebugDraw() const
 {
@@ -203,45 +141,22 @@ void render::Camera::setViewDrawVisible(bool bVisible)
 		_viewShapeDraw->setVisible(bVisible);
 	}
 }
-math::Vector3 render::Camera::convertScreenPointToCameraPosition(const math::Vector2& screenPoint) const
+math::Vector3 render::Camera::project(const math::Vector2& worldPoint) const
 {
-	math::Matrix4x4 invMat = (getProjectMatrix() * getViewMatrix()).getInverse();
-	math::Vector3 dir;
-
-	float w = _viewParameter.xRight - _viewParameter.xLeft;
-	float h = _viewParameter.yTop - _viewParameter.yBottom;
-
-	float halfW = 0.5f * w;
-	float halfH = 0.5f * h;
-
-	float pw = screenPoint.getX() / halfW;
-	float ph = screenPoint.getY() / halfH;
-
-	math::Vector4 nearVec = math::Vector4(pw, ph, -1, 1.0f);
-	math::Vector4 nearResult = invMat * nearVec;
-	nearResult /= nearResult.getW();
-
-	nearResult.setX(-0.5f * nearResult.getX() / nearResult.getZ());
-	nearResult.setY(-0.5f * nearResult.getY() / nearResult.getZ());
-	nearResult.setZ(1.0f / nearResult.getZ());
-
-	return nearResult;
+	return _projectMatrix * _viewMatrix * worldPoint;
+}
+math::Vector3 render::Camera::unproject(const math::Vector2& viewPoint) const
+{
+	return (_projectMatrix * _viewMatrix).getInverse() * viewPoint;
 }
 
-math::Vector3 render::Camera::convertScreenPointToWorldPosition(const math::Vector2& screenPoint) const
-{
-	math::Vector3 localPos = convertScreenPointToCameraPosition(screenPoint);
-	return this->convertLocalPostitionToWorld(localPos);
-}
-
-math::Ray render::Camera::convertScreenPointToCameraRay(const math::Vector2& screenPoint) const
+math::Ray render::Camera::convertScreenPointToRay(const math::Vector2& screenPoint) const
 {
 	math::Matrix4x4 invMat = (getProjectMatrix() * getViewMatrix()).getInverse();
-	math::Vector3 dir;
 
-	float w = _viewParameter.xRight - _viewParameter.xLeft;
-	float h = _viewParameter.yTop - _viewParameter.yBottom;
-	float d = _viewParameter.zFar - _viewParameter.zNear;
+	float w = _viewParameter.getWidth();
+	float h = _viewParameter.getHeight();
+	float d = _viewParameter.getDepth();
 
 	float halfW = 0.5f * w;
 	float halfH = 0.5f * h;
@@ -252,37 +167,118 @@ math::Ray render::Camera::convertScreenPointToCameraRay(const math::Vector2& scr
 	float ph = screenPoint.getY() / halfH;
 
 	math::Vector4 nearVec = math::Vector4(pw, ph, -1, 1.0f);
+	math::Vector4 farVec = math::Vector4(pw, ph, 1, 1.0f);
+
+	math::Vector4 nearResult = invMat * nearVec;
+	math::Vector4 farResult = invMat * farVec;
+	nearResult /= nearResult.getW();
+	farVec /= farVec.getW();
+
+	math::Vector3 dir = farVec - nearResult;
+	return math::Ray(nearResult, dir);
+}
+
+math::Vector3 render::Camera::convertScreenToViewPort(const math::Vector2& screenPoint) const
+{
+	float w = _viewParameter.getWidth();
+	float h = _viewParameter.getHeight();
+
+	float x = screenPoint.getX() / w;
+	float y = screenPoint.getY() / h;
+
+	return math::Vector3(x,y,0);
+}
+
+math::Vector3 render::Camera::convertScreenToWorldPoint(const math::Vector2& screenPoint) const
+{
+	math::Matrix4x4 invMat = (getProjectMatrix() * getViewMatrix()).getInverse();
+
+	float w = _viewParameter.getWidth();
+	float h = _viewParameter.getHeight();
+	float d = _viewParameter.getDepth();
+
+	float halfW = 0.5f * w;
+	float halfH = 0.5f * h;
+
+	float pw = screenPoint.getX() / halfW;
+	float ph = screenPoint.getY() / halfH;
+
+	math::Vector4 nearVec = math::Vector4(pw, ph, -1, 1.0f);
 
 	math::Vector4 nearResult = invMat * nearVec;
 	nearResult /= nearResult.getW();
 
-	nearResult.setX(-0.5f * nearResult.getX() / nearResult.getZ());
-	nearResult.setY(-0.5f * nearResult.getY() / nearResult.getZ());
-	nearResult.setZ(1.0f / nearResult.getZ());
-
-	math::Vector3 src;
-	
-	if (_dimensions == DimensionsType::TWO)
-	{
-		src = nearResult;
-		src.setZ(0);
-	}
-
-	dir = nearResult - src;
-	return math::Ray(src, dir);
+	return nearResult;
 }
 
-math::Ray render::Camera::convertScreenPointToWorldRay(const math::Vector2& screenPoint) const
+math::Ray render::Camera::convertViewPortPointToRay(const math::Vector3& viewPortPoint) const
 {
-	math::Ray localRay = convertScreenPointToCameraRay(screenPoint);
-	return convertLocalRayToWorldRay(localRay);
+	math::Matrix4x4 invMat = (getProjectMatrix() * getViewMatrix()).getInverse();
+
+	float pw = viewPortPoint.getX() * 2 - 1;
+	float ph = viewPortPoint.getY() * 2 - 1;
+
+	math::Vector4 nearVec = math::Vector4(pw, ph, -1, 1.0f);
+	math::Vector4 farVec = math::Vector4(pw, ph, 1, 1.0f);
+
+	math::Vector4 nearResult = invMat * nearVec;
+	math::Vector4 farResult = invMat * farVec;
+	nearResult /= nearResult.getW();
+	farVec /= farVec.getW();
+
+	math::Vector3 dir = farVec - nearResult;
+
+	return math::Ray(nearResult, dir);
 }
 
-math::Ray render::Camera::convertLocalRayToWorldRay(const math::Ray localRay) const
+math::Vector3 render::Camera::convertViewPortToWorldPoint(const math::Vector3& viewPortPoint) const
 {
-	math::Vector3 srcPos = convertLocalPostitionToWorld(localRay.getPoint());
-	math::Vector3 destPos = convertLocalPostitionToWorld(localRay.getDestPoint(1));
-	return math::Ray(srcPos, destPos - srcPos);
+	math::Matrix4x4 invMat = (getProjectMatrix() * getViewMatrix()).getInverse();
+
+	float pw = viewPortPoint.getX() * 2 - 1;
+	float ph = viewPortPoint.getY() * 2 - 1;
+
+	math::Vector4 nearVec = math::Vector4(pw, ph, -1, 1.0f);
+
+	math::Vector4 nearResult = invMat * nearVec;
+	nearResult /= nearResult.getW();
+
+	return nearResult;
+}
+
+math::Vector3 render::Camera::convertViewPortToScreenPoint(const math::Vector2& viewPortPoint) const
+{
+	float w = _viewParameter.getWidth();
+	float h = _viewParameter.getHeight();
+	float d = _viewParameter.getDepth();
+
+	float x = viewPortPoint.getX() * w;
+	float y = viewPortPoint.getX() * h;
+	float z = viewPortPoint.getX() * d;
+
+	return math::Vector3(x + _viewParameter.xLeft, y + _viewParameter.yBottom, z + _viewParameter.zNear);
+}
+
+math::Vector3 render::Camera::convertWorldToViewPort(const math::Vector3& worldPoint) const
+{
+	math::Vector3 value = project(worldPoint);
+
+	float x = value.getX() * 0.5f + 0.5f;
+	float y = value.getY() * 0.5f + 0.5f;
+	float z = value.getZ() * 0.5f + 0.5f;
+
+	return math::Vector3(x, y, z);
+}
+
+math::Vector3 render::Camera::convertWorldToScreenPoint(const math::Vector2& worldPoint) const
+{
+	math::Vector3 pos = convertWorldToViewPort(worldPoint);
+
+	float w = _viewParameter.getWidth();
+	float h = _viewParameter.getHeight();
+	float d = _viewParameter.getDepth();
+
+	return math::Vector3(pos.getX() * w, pos.getY() * h, pos.getZ() * d);
 }
 
 void render::Camera::updateViewPort()
@@ -292,11 +288,15 @@ void render::Camera::updateViewPort()
 
 void render::Camera::onCameraSpaceChange()
 {
-	math::Matrix4x4 mat;
+	
 	math::Vector3 pos = _worldMatrix.getPosition();
-	math::Vector3 rotate = _worldMatrix.getEularRadian();
-	pos *= -1.0f;
-	math::Matrix4x4::getRST(rotate, math::Vector3(1,1,1), pos, mat);
-	_viewMatrix = mat;
+
+	math::Matrix4x4 matT;
+	matT.setRow(3, -1 * pos);
+
+	math::Matrix3x3 rotate = _worldMatrix;
+	math::Matrix4x4 matR(rotate.getTranspose());
+
+	_viewMatrix = matR * matT;
 }
 

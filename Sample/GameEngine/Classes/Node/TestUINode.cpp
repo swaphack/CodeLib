@@ -19,7 +19,7 @@ TestUINode::~TestUINode()
 
 void TestUINode::initNodes()
 {
-	//this->testMask();
+	this->testMask();
 
 	//this->testScissor();
 	
@@ -35,7 +35,7 @@ void TestUINode::initNodes()
 	
 	//this->testButton();
 	//
-	this->testWidget();
+	//this->testWidget();
 	
 	//this->testText();
 }
@@ -265,7 +265,7 @@ void TestUINode::testStencil()
 
 void TestUINode::testImage()
 {
-	auto frameSize = Canvas::getInstance()->getView()->getViewSize();
+	auto frameSize = Tool::getViewSize();
 
 	std::string filepath = "Resource/Image/world.jpg";
 

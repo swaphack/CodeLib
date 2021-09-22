@@ -20,8 +20,8 @@ Fog::~Fog()
 
 void Fog::onDraw()
 {
-	float nearValue = _near / Tool::getGLViewSize().getDepth();
-	float farValue = _far / Tool::getGLViewSize().getDepth();
+	float nearValue = _near ;
+	float farValue = _far;
 
 	GLState::enable(EnableMode::FOG);
 	GLState::setFogHint(_fogEffect);

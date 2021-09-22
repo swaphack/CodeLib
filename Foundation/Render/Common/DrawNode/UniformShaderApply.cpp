@@ -1037,7 +1037,7 @@ void render::UniformShaderApply::updateNearestLightUniformValue(Node* node, Shad
 			if (bSupportShadow)
 			{
 				math::Matrix4x4 lightMatrix;
-				math::Matrix4x4 lightProject = pCamera->getProjectMatrix(pCamera->getViewParameter().zNear, pCamera->getViewParameter().zFar);
+				math::Matrix4x4 lightProject = pCamera->getProjectMatrix();
 				math::Vector3 center = pCamera->getCenterPosition();
 				math::Matrix4x4 lightView = math::Matrix4x4::lookAt(lightPos, center, math::Vector3(0, 1, 0));
 				lightMatrix = lightProject * lightView;
@@ -1199,7 +1199,7 @@ void render::UniformShaderApply::updateAllLightsUniformValue(Node* node, ShaderP
 				if (bSupportShadow)
 				{
 					math::Matrix4x4 lightMatrix;
-					math::Matrix4x4 lightProject = pCamera->getProjectMatrix(pCamera->getViewParameter().zNear, pCamera->getViewParameter().zFar);
+					math::Matrix4x4 lightProject = pCamera->getProjectMatrix();
 					math::Vector3 center = pCamera->getCenterPosition();
 					math::Matrix4x4 lightView = math::Matrix4x4::lookAt(lightPos, center, math::Vector3(0, 1, 0));
 					lightMatrix = lightProject * lightView;

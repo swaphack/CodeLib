@@ -262,7 +262,7 @@ void ui::CtrlWidget::onCtrlWidgetBodyChange()
 	math::Vector2 pos0 = _worldRectVertex.getLeftBottomPosition();
 	math::Vector2 pos1 = _worldRectVertex.getRightTopPosition();
 
-	_clipRect.setOrigin(pos0 + 0.5f * math::Vector2(Tool::getGLViewWidth(), Tool::getGLViewHeight()));
+	_clipRect.setOrigin(pos0 + 0.5f * math::Vector2(Tool::getViewWidth(), Tool::getViewHeight()));
 	_clipRect.setSize(pos1 - pos0);
 }
 

@@ -37,7 +37,7 @@ phy::Color4B render::Pixel::readPixelColor(float x, float y)
 
 void render::Pixel::dumpStencil()
 {
-	const math::Volume& volume = Tool::getGLViewSize();
+	const math::Size& volume = Tool::getViewSize();
 	sys::MemoryData data;
 	data.resize(volume.getWidth() * volume.getHeight(), sizeof(float));
 	loadRectPixel(0, 0, volume.getWidth(), volume.getHeight(), ReadPixelDataFormat::STENCIL_INDEX, ReadPixelDataType::FLOAT, data.getPtr());

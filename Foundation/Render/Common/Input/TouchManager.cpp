@@ -68,7 +68,7 @@ void render::TouchManager::addTouchInfo(TouchType type, const math::Vector2& tou
 {
 	TouchSlotInfo info;
 	info.type = type;
-	info.touchPoint = touchPoint - math::Vector2(0.5f * Tool::getGLViewWidth(), 0.5f * Tool::getGLViewHeight());
+	info.touchPoint = touchPoint;
 
 	_waitAddTouches.push_back(info);
 }

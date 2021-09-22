@@ -7,7 +7,7 @@
 render::Camera3D::Camera3D()
 {
 	this->setDimensions(DimensionsType::THREE);
-	this->setViewDistance(0.1f, 1000000);
+	this->setViewDistance(0.1f, 1000);
 }
 
 render::Camera3D::~Camera3D()
@@ -24,23 +24,14 @@ bool render::Camera3D::init()
 	return true;
 }
 
-void render::Camera3D::updateView()
-{
-	GLMatrix::loadFrustum(
-		_viewParameter.xLeft,
-		_viewParameter.xRight,
-		_viewParameter.yBottom,
-		_viewParameter.yTop,
-		_viewParameter.zNear,
-		_viewParameter.zFar);
-	GLDebug::showError();
-}
-
 void render::Camera3D::updateViewPort()
 {
+	float w = _viewParameter.getWidth();
+	float h = _viewParameter.getHeight();
+
 	_projectMatrix = math::Matrix4x4::frustum(
-		_viewParameter.xLeft, _viewParameter.xRight,
-		_viewParameter.yBottom, _viewParameter.yTop,
+		-0.5f * w, 0.5f * w,
+		-0.5f * h, 0.5f * h,
 		_viewParameter.zNear, _viewParameter.zFar);
 
 	_viewShapeDraw->cleanup();

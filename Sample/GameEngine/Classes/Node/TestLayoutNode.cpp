@@ -23,7 +23,7 @@ void TestLayoutNode::initNodes()
 
 void TestLayoutNode::testLayout()
 {
-	auto frameSize = Canvas::getInstance()->getView()->getViewSize();
+	auto frameSize = render::Tool::getViewSize();
 
 	CtrlFile* pDisplay = CREATE_NODE(CtrlFile);
 	pDisplay->setFilePath("Resource/Layout/Test.xml");

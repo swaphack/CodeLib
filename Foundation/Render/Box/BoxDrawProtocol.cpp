@@ -205,10 +205,8 @@ bool render::Box3DDrawProtocol::containsTouchPoint(const math::Vector2& touchPoi
 	if (this->getBoxNode() == nullptr || this->getBoxNode()->getCamera() == nullptr)
 		return false;
 	auto pCamera = this->getBoxNode()->getCamera();
-	math::Ray cameraRay = pCamera->convertScreenPointToCameraRay(touchPoint);
+	math::Ray cameraRay = pCamera->convertScreenPointToRay(touchPoint);
 	pCamera->getDebugDraw()->drawLine(cameraRay.getPoint(), cameraRay.getDestPoint(10000), phy::Color4F(1.0f,0,0,1.0f));
-
-	math::Ray worldRay = pCamera->convertLocalRayToWorldRay(cameraRay);
 
 	std::vector<math::TrianglePoints> trianglePoints;
 	_worldCubeVertex.toTriangles(trianglePoints);
@@ -216,7 +214,7 @@ bool render::Box3DDrawProtocol::containsTouchPoint(const math::Vector2& touchPoi
 	math::Vector3 point;
 	for (auto item : trianglePoints)
 	{
-		if (math::Physics::raycast(worldRay, item, point))
+		if (math::Physics::raycast(cameraRay, item, point))
 		{
 			return true;
 		}

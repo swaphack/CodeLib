@@ -25,7 +25,7 @@ void TestImageNode::initNodes()
 
 void TestImageNode::testImage()
 {
-	auto frameSize = Canvas::getInstance()->getView()->getViewSize();
+	auto frameSize = render::Tool::getViewSize();
 	
 	if (0)
 	{

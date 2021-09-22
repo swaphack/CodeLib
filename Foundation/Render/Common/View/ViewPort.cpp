@@ -1,5 +1,6 @@
 #include "ViewPort.h"
 #include "Graphic/import.h"
+#include "Common/Tool/Tool.h"
 using namespace render;
 
 
@@ -9,28 +10,6 @@ ViewPort::ViewPort()
 
 ViewPort::~ViewPort()
 {
-}
-
-void ViewPort::setViewPosition(float x, float y)
-{
-	_viewRect.setOrigin(x, y);
-	this->setDirty(true);
-}
-
-const math::Vector2& ViewPort::getViewPosition() const
-{
-	return _viewRect.getOrigin();
-}
-
-void ViewPort::setViewSize(float width, float height)
-{
-	_viewRect.setSize(width, height);
-	this->setDirty(true);
-}
-
-const math::Size& ViewPort::getViewSize() const
-{
-	return _viewRect.getSize();
 }
 
 void render::ViewPort::setViewRect(float x, float y, float width, float height)
@@ -45,7 +24,7 @@ void render::ViewPort::setSubViewRect(uint32_t index, float x, float y, float wi
 	this->setDirty(true);
 }
 
-math::Rect render::ViewPort::getSubViewRect(uint32_t index)
+math::Rect render::ViewPort::getSubViewRect(uint32_t index) const
 {
 	// TODO: 在此处插入 return 语句
 	auto it = _subViewRect.find(index);
@@ -71,7 +50,12 @@ void ViewPort::updateView()
 
 void render::ViewPort::initViewPort()
 {
+	if (!isDirty())
+	{
+		return;
+	}
 	GLState::setViewport(_viewRect);
+
 	if (_subViewRect.size() != 0)
 	{
 		for (const auto& item : _subViewRect)
@@ -79,6 +63,8 @@ void render::ViewPort::initViewPort()
 			GLState::setViewportIndexed(item.first, item.second);
 		}
 	}
+
+	setDirty(false);
 }
 
 void ViewPort::applyConfig()

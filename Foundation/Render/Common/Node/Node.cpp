@@ -425,29 +425,6 @@ bool render::Node::containPoint(const math::Vector2& touchPoint)
 	return false;
 }
 
-void Node::startUpdateTranform()
-{
-	if (!this->isRelativeWithParent())
-	{
-		GLMatrix::pushMatrix();
-		GLMatrix::loadIdentity();
-	}
-
-	GLMatrix::multMatrix(_localMatrix);
-
-	GLDebug::showError();
-}
-
-void Node::endUpdateTranform()
-{
-	GLMatrix::multMatrix(_localInverseMatrix);
-
-	if (!this->isRelativeWithParent())
-	{
-		GLMatrix::popMatrix();
-	}
-}
-
 void Node::notifyEvents()
 {
 	// 数值计算
@@ -506,7 +483,11 @@ void Node::sortChildren()
 // 还未对旋转后坐标进行计算
 void Node::calSpaceData()
 {
-	//Tool::convertToOGLPoisition(_position, _obPosition);
+	if (_camera != nullptr)
+	{
+		//_obPosition = _camera->convertRealToWorldPoint(_position);
+		_obPosition = _position;
+	}
 
 	Tool::convertToRadian(_rotation, _obRotation);
 
@@ -517,7 +498,7 @@ void Node::calSpaceData()
 
 void Node::calRealSpaceByMatrix()
 {
-	math::Matrix4x4::getRST(_obRotation, getScale(), _position, _localMatrix);
+	math::Matrix4x4::getRST(_obRotation, getScale(), _obPosition, _localMatrix);
 
 	math::SquareMatrix4 sm = _localMatrix;
 	_localInverseMatrix = sm.getInverse();
@@ -566,6 +547,11 @@ void Node::onChildrenChange()
 const math::Matrix4x4& Node::getWorldMatrix() const
 {
 	return _worldMatrix;
+}
+
+const math::Matrix4x4& render::Node::getWorldInverseMatrix() const
+{
+	return _worldInverseMatrix;
 }
 
 const math::Matrix4x4& Node::getLocalMatrix() const
@@ -617,16 +603,11 @@ void Node::drawNode()
 	{
 		return;
 	}
-
-	this->startUpdateTranform();
-
 	this->beforeDrawNode();
 
 	this->draw();
 
 	this->afterDrawNode();
-
-	this->endUpdateTranform();
 
 	GLDebug::showError();
 }
