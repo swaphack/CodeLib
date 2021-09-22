@@ -35,16 +35,16 @@ void render::DebugDraw::cleanup()
 
 void render::DebugDraw::drawW2LLine(const math::Vector3& src, const math::Vector3& dest, const phy::Color4F& color)
 {
-	math::Vector3 srcPos = _drawNode->convertWorldPostitionToLocal(src);
-	math::Vector3 destPos = _drawNode->convertWorldPostitionToLocal(dest);
+	math::Vector3 srcPos = _drawNode->convertWorldToLocalPoint(src);
+	math::Vector3 destPos = _drawNode->convertWorldToLocalPoint(dest);
 
 	this->drawLine(srcPos, destPos, color);
 }
 
 void render::DebugDraw::drawL2WLine(const math::Vector3& src, const math::Vector3& dest, const phy::Color4F& color)
 {
-	math::Vector3 srcPos = _drawNode->convertLocalPostitionToWorld(src);
-	math::Vector3 destPos = _drawNode->convertLocalPostitionToWorld(dest);
+	math::Vector3 srcPos = _drawNode->convertLocalToWorldPoint(src);
+	math::Vector3 destPos = _drawNode->convertLocalToWorldPoint(dest);
 
 	this->drawLine(srcPos, destPos, color);
 }

@@ -88,10 +88,10 @@ void SystemEnv::updateCamera()
 		Camera* pCamera = G_CAMERAS->getDesignCamera();
 		if (pCamera)
 		{
-			pCamera->setVisible(false);
+			//pCamera->setVisible(false);
 			auto size = Tool::getViewSize();
 			float d = sqrt(powf(size.getWidth(), 2) + powf(size.getHeight(), 2));
-			pCamera->setViewDistance(d - 220, d * 300);
+			pCamera->setViewDistance(d - 300, d * 300);
 			pCamera->setPositionZ(d);
 
 			Utility::loadPrimitiveShader(pCamera->getDebugDraw()->getRenderNode());
@@ -110,7 +110,7 @@ void SystemEnv::updateCamera()
 		Camera* pCamera = G_CAMERAS->getCamera3D();
 		if (pCamera)
 		{
-			//pCamera->setVisible(false);
+			pCamera->setVisible(false);
 
 			auto size = Tool::getViewSize();
 			float d = sqrt(powf(size.getWidth(), 2) + powf(size.getHeight(), 2));
@@ -133,9 +133,9 @@ void SystemEnv::updateCamera()
 		Camera* pCamera = G_CAMERAS->getCamera2D();
 		if (pCamera)
 		{
-			//pCamera->setVisible(false);
+			pCamera->setVisible(false);
 
-			pCamera->setPositionZ(size.getWidth() * 0.25f);
+			pCamera->setPositionZ(0.0f);
 			Utility::loadPrimitiveShader(pCamera->getDebugDraw()->getRenderNode());
 
 			render::Sphere* pSphere = CREATE_NODE(render::Sphere);

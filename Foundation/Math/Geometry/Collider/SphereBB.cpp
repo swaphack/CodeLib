@@ -39,7 +39,7 @@ bool math::SphereBB::contains(const Vector3& point)
 
 bool math::SphereBB::hitRay(const Ray& ray) const
 {
-	const auto& srcPoint = ray.getPoint();
+	const auto& srcPoint = ray.getSrcPoint();
 	const auto& direction = ray.getDirection();
 
 	float a = direction.getSqrMagnitude();

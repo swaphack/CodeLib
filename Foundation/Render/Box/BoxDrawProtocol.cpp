@@ -156,10 +156,10 @@ void render::Box2DDrawProtocol::onBox2DWorldCubeChange()
 
 	auto pBoxNode = this->getBoxNode();
 
-	_worldRectVertex.setLeftBottomPosition(pBoxNode->convertLocalPostitionToWorld(_localRectVertex.getLeftBottomPosition()));
-	_worldRectVertex.setRightBottomPosition(pBoxNode->convertLocalPostitionToWorld(_localRectVertex.getRightBottomPosition()));
-	_worldRectVertex.setRightTopPosition(pBoxNode->convertLocalPostitionToWorld(_localRectVertex.getRightTopPosition()));
-	_worldRectVertex.setLeftTopPosition(pBoxNode->convertLocalPostitionToWorld(_localRectVertex.getLeftTopPosition()));
+	_worldRectVertex.setLeftBottomPosition(pBoxNode->convertLocalToWorldPoint(_localRectVertex.getLeftBottomPosition()));
+	_worldRectVertex.setRightBottomPosition(pBoxNode->convertLocalToWorldPoint(_localRectVertex.getRightBottomPosition()));
+	_worldRectVertex.setRightTopPosition(pBoxNode->convertLocalToWorldPoint(_localRectVertex.getRightTopPosition()));
+	_worldRectVertex.setLeftTopPosition(pBoxNode->convertLocalToWorldPoint(_localRectVertex.getLeftTopPosition()));
 
 	setBoxVertices(_worldRectVertex);
 }
@@ -205,8 +205,8 @@ bool render::Box3DDrawProtocol::containsTouchPoint(const math::Vector2& touchPoi
 	if (this->getBoxNode() == nullptr || this->getBoxNode()->getCamera() == nullptr)
 		return false;
 	auto pCamera = this->getBoxNode()->getCamera();
-	math::Ray cameraRay = pCamera->convertScreenPointToRay(touchPoint);
-	pCamera->getDebugDraw()->drawLine(cameraRay.getPoint(), cameraRay.getDestPoint(10000), phy::Color4F(1.0f,0,0,1.0f));
+	math::Ray cameraRay = pCamera->convertScreenPointToWorldRay(touchPoint);
+	pCamera->getDebugDraw()->drawW2LLine(cameraRay.getSrcPoint(), cameraRay.getDestPoint(10000), phy::Color4F(1.0f,0,0,1.0f));
 
 	std::vector<math::TrianglePoints> trianglePoints;
 	_worldCubeVertex.toTriangles(trianglePoints);
@@ -244,15 +244,15 @@ void render::Box3DDrawProtocol::onBox3DWorldCubeChange()
 
 	auto pBoxNode = this->getBoxNode();
 
-	_worldCubeVertex.setFrontLeftBottomPosition(pBoxNode->convertLocalPostitionToWorld(_localCubeVertex.front.getLeftBottomPosition()));
-	_worldCubeVertex.setFrontRightBottomPosition(pBoxNode->convertLocalPostitionToWorld(_localCubeVertex.front.getRightBottomPosition()));
-	_worldCubeVertex.setFrontRightTopPosition(pBoxNode->convertLocalPostitionToWorld(_localCubeVertex.front.getRightTopPosition()));
-	_worldCubeVertex.setFrontLeftTopPosition(pBoxNode->convertLocalPostitionToWorld(_localCubeVertex.front.getLeftTopPosition()));
+	_worldCubeVertex.setFrontLeftBottomPosition(pBoxNode->convertLocalToWorldPoint(_localCubeVertex.front.getLeftBottomPosition()));
+	_worldCubeVertex.setFrontRightBottomPosition(pBoxNode->convertLocalToWorldPoint(_localCubeVertex.front.getRightBottomPosition()));
+	_worldCubeVertex.setFrontRightTopPosition(pBoxNode->convertLocalToWorldPoint(_localCubeVertex.front.getRightTopPosition()));
+	_worldCubeVertex.setFrontLeftTopPosition(pBoxNode->convertLocalToWorldPoint(_localCubeVertex.front.getLeftTopPosition()));
 
-	_worldCubeVertex.setBackLeftBottomPosition(pBoxNode->convertLocalPostitionToWorld(_localCubeVertex.back.getLeftBottomPosition()));
-	_worldCubeVertex.setBackRightBottomPosition(pBoxNode->convertLocalPostitionToWorld(_localCubeVertex.back.getRightBottomPosition()));
-	_worldCubeVertex.setBackRightTopPosition(pBoxNode->convertLocalPostitionToWorld(_localCubeVertex.back.getRightTopPosition()));
-	_worldCubeVertex.setBackLeftTopPosition(pBoxNode->convertLocalPostitionToWorld(_localCubeVertex.back.getLeftTopPosition()));
+	_worldCubeVertex.setBackLeftBottomPosition(pBoxNode->convertLocalToWorldPoint(_localCubeVertex.back.getLeftBottomPosition()));
+	_worldCubeVertex.setBackRightBottomPosition(pBoxNode->convertLocalToWorldPoint(_localCubeVertex.back.getRightBottomPosition()));
+	_worldCubeVertex.setBackRightTopPosition(pBoxNode->convertLocalToWorldPoint(_localCubeVertex.back.getRightTopPosition()));
+	_worldCubeVertex.setBackLeftTopPosition(pBoxNode->convertLocalToWorldPoint(_localCubeVertex.back.getLeftTopPosition()));
 
 	setBoxVertices(_worldCubeVertex);
 }

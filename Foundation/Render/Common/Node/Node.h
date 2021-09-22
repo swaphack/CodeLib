@@ -151,9 +151,9 @@ namespace render
 		// 相对父节点的矩阵
 		const math::Matrix4x4& getLocalMatrix() const;
 		// 将世界坐标转化为本地坐标
-		math::Vector3 convertWorldPostitionToLocal(const math::Vector3& point) const;
+		math::Vector3 convertWorldToLocalPoint(const math::Vector3& point) const;
 		// 将本地坐标转化为世界坐标
-		math::Vector3 convertLocalPostitionToWorld(const math::Vector3& point) const;
+		math::Vector3 convertLocalToWorldPoint(const math::Vector3& point) const;
 	public:
 		// 是否点击点落在改节点上
 		virtual bool containTouchPoint(const math::Vector2& touchPoint);

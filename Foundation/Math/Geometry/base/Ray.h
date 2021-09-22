@@ -11,9 +11,9 @@ namespace math
 		~Ray();
 	public:
 		// 起始点
-		void setPoint(const Vector3& srcPoint);
+		void setSrcPoint(const Vector3& srcPoint);
 		// 起始点
-		const Vector3& getPoint() const;
+		const Vector3& getSrcPoint() const;
 		// 方向
 		void setDirection(const Vector3& direction);
 		// 方向

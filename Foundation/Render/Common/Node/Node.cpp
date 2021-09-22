@@ -483,11 +483,7 @@ void Node::sortChildren()
 // 还未对旋转后坐标进行计算
 void Node::calSpaceData()
 {
-	if (_camera != nullptr)
-	{
-		//_obPosition = _camera->convertRealToWorldPoint(_position);
-		_obPosition = _position;
-	}
+	_obPosition = _position;
 
 	Tool::convertToRadian(_rotation, _obRotation);
 
@@ -559,12 +555,12 @@ const math::Matrix4x4& Node::getLocalMatrix() const
 	return _localMatrix;
 }
 
-math::Vector3 render::Node::convertWorldPostitionToLocal(const math::Vector3& point) const
+math::Vector3 render::Node::convertWorldToLocalPoint(const math::Vector3& point) const
 {
 	return math::Matrix4x4::transpose(point, _worldInverseMatrix);
 }
 
-math::Vector3 render::Node::convertLocalPostitionToWorld(const math::Vector3& point) const
+math::Vector3 render::Node::convertLocalToWorldPoint(const math::Vector3& point) const
 {
 	return math::Matrix4x4::transpose(point, _worldMatrix);
 }

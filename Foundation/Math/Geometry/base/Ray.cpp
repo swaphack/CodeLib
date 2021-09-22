@@ -12,12 +12,12 @@ math::Ray::~Ray()
 {
 }
 
-void math::Ray::setPoint(const Vector3& srcPoint)
+void math::Ray::setSrcPoint(const Vector3& srcPoint)
 {
 	_point = srcPoint;
 }
 
-const Vector3& math::Ray::getPoint() const
+const Vector3& math::Ray::getSrcPoint() const
 {
 	return _point;
 }

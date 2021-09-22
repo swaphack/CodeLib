@@ -7,6 +7,8 @@
 
 using namespace render;
 
+#define USE_CAMERA_VIEW
+
 Camera::Camera()
 {
 	_position.set(0,0,0);
@@ -150,7 +152,7 @@ math::Vector3 render::Camera::unproject(const math::Vector2& viewPoint) const
 	return (_projectMatrix * _viewMatrix).getInverse() * viewPoint;
 }
 
-math::Ray render::Camera::convertScreenPointToRay(const math::Vector2& screenPoint) const
+math::Ray render::Camera::convertScreenPointToLocalRay(const math::Vector2& screenPoint) const
 {
 	math::Matrix4x4 invMat = (getProjectMatrix() * getViewMatrix()).getInverse();
 
@@ -163,19 +165,36 @@ math::Ray render::Camera::convertScreenPointToRay(const math::Vector2& screenPoi
 
 	float k = _viewParameter.zFar / _viewParameter.zNear;
 
-	float pw = screenPoint.getX() / halfW;
-	float ph = screenPoint.getY() / halfH;
+	float pw = (screenPoint.getX() - halfW) / halfW;
+	float ph = (screenPoint.getY() - halfH) / halfH;
 
 	math::Vector4 nearVec = math::Vector4(pw, ph, -1, 1.0f);
 	math::Vector4 farVec = math::Vector4(pw, ph, 1, 1.0f);
 
+
 	math::Vector4 nearResult = invMat * nearVec;
 	math::Vector4 farResult = invMat * farVec;
 	nearResult /= nearResult.getW();
-	farVec /= farVec.getW();
+	farResult /= farResult.getW();
 
-	math::Vector3 dir = farVec - nearResult;
+#ifdef USE_CAMERA_VIEW
+	math::Vector3 src;
+	math::Vector3 dir = nearResult - src;
+
+	return math::Ray(src, dir);
+#else
+
+	math::Vector3 dir = farResult - nearResult;
 	return math::Ray(nearResult, dir);
+#endif // USE_CAMERA_VIEW
+}
+
+math::Ray render::Camera::convertScreenPointToWorldRay(const math::Vector2& screenPoint) const
+{
+	math::Ray ray = convertScreenPointToLocalRay(screenPoint);
+	math::Vector3 src = convertLocalToWorldPoint(ray.getSrcPoint());
+	math::Vector3 dest = convertLocalToWorldPoint(ray.getDestPoint(1));
+	return math::Ray(src, dest);
 }
 
 math::Vector3 render::Camera::convertScreenToViewPort(const math::Vector2& screenPoint) const
@@ -200,8 +219,8 @@ math::Vector3 render::Camera::convertScreenToWorldPoint(const math::Vector2& scr
 	float halfW = 0.5f * w;
 	float halfH = 0.5f * h;
 
-	float pw = screenPoint.getX() / halfW;
-	float ph = screenPoint.getY() / halfH;
+	float pw = (screenPoint.getX() - halfW) / halfW;
+	float ph = (screenPoint.getY() - halfH) / halfH;
 
 	math::Vector4 nearVec = math::Vector4(pw, ph, -1, 1.0f);
 
@@ -297,6 +316,6 @@ void render::Camera::onCameraSpaceChange()
 	math::Matrix3x3 rotate = _worldMatrix;
 	math::Matrix4x4 matR(rotate.getTranspose());
 
-	_viewMatrix = matR * matT;
+	_viewMatrix = matT * matR;
 }
 

@@ -42,7 +42,7 @@ bool math::Physics::raycast(const Ray& ray, const math::TrianglePoints& points, 
     double inv_det = 1.f / det;
 
     //calculate distance from V1 to ray origin
-    math::Vector3 t = ray.getPoint() - points[0];
+    math::Vector3 t = ray.getSrcPoint() - points[0];
 
     //Calculate u parameter and test bound
     double u = math::Vector3::dot(t, p) * inv_det;
@@ -68,7 +68,7 @@ bool math::Physics::raycast(const Ray& ray, const math::TrianglePoints& points, 
     //ray intersection
     if (k > EPSILON)
     {
-        point = ray.getPoint() + ray.getDirection() * k;
+        point = ray.getSrcPoint() + ray.getDirection() * k;
         return true;
     }
 
@@ -86,7 +86,7 @@ int math::Physics::getRayPosition(const Ray& ray, const Plane& plane, float& a, 
 	b = 0;
 	c = 0;
 
-	const Vector3& srcPoint = ray.getPoint();
+	const Vector3& srcPoint = ray.getSrcPoint();
 	const Vector3& direction = ray.getDirection();
 
 	a = -(plane.getParamA() * srcPoint.getX() + plane.getParamB() * srcPoint.getY() + plane.getParamC() * srcPoint.getZ() + plane.getParamD());
