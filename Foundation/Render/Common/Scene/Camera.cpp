@@ -38,6 +38,7 @@ bool Camera::init()
 	this->addChild(_viewShapeDraw, INT_MAX);
 
 	_debugDraw = CREATE_NODE(DebugDraw);
+	_debugDraw->setPointSize(10);
 	_debugDraw->setCamera(this);
 	this->addChild(_debugDraw, INT_MAX);
 
@@ -154,6 +155,20 @@ math::Vector3 render::Camera::unproject(const math::Vector2& viewPoint) const
 
 math::Ray render::Camera::convertScreenPointToLocalRay(const math::Vector2& screenPoint) const
 {
+
+#ifdef USE_CAMERA_VIEW
+	float w = _viewParameter.getWidth();
+	float h = _viewParameter.getHeight();
+	float d = _viewParameter.getDepth();
+
+	float halfW = 0.5f * w;
+	float halfH = 0.5f * h;
+
+	math::Vector3 src;
+	math::Vector3 dest = math::Vector3(screenPoint.getX() - halfW, screenPoint.getY() - halfH, -_viewParameter.zNear);
+	math::Vector3 dir = dest - src;
+	return math::Ray(src, dir);
+#else
 	math::Matrix4x4 invMat = (getProjectMatrix() * getViewMatrix()).getInverse();
 
 	float w = _viewParameter.getWidth();
@@ -177,13 +192,6 @@ math::Ray render::Camera::convertScreenPointToLocalRay(const math::Vector2& scre
 	nearResult /= nearResult.getW();
 	farResult /= farResult.getW();
 
-#ifdef USE_CAMERA_VIEW
-	math::Vector3 src;
-	math::Vector3 dir = nearResult - src;
-
-	return math::Ray(src, dir);
-#else
-
 	math::Vector3 dir = farResult - nearResult;
 	return math::Ray(nearResult, dir);
 #endif // USE_CAMERA_VIEW
@@ -194,7 +202,7 @@ math::Ray render::Camera::convertScreenPointToWorldRay(const math::Vector2& scre
 	math::Ray ray = convertScreenPointToLocalRay(screenPoint);
 	math::Vector3 src = convertLocalToWorldPoint(ray.getSrcPoint());
 	math::Vector3 dest = convertLocalToWorldPoint(ray.getDestPoint(1));
-	return math::Ray(src, dest);
+	return math::Ray(src, dest - src);
 }
 
 math::Vector3 render::Camera::convertScreenToViewPort(const math::Vector2& screenPoint) const

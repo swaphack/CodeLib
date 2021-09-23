@@ -177,6 +177,14 @@ void render::DrawNode::setShaderProgramFunc(const ShaderProgramFunc& func)
 	_material->setProgramFunc(func);
 }
 
+void render::DrawNode::forceUpdateMeshData()
+{
+	if (_mesh == nullptr) return;
+
+	_mesh->initMeshOtherDetail();
+	_mesh->updateBufferData();
+}
+
 void render::DrawNode::beforeDraw()
 {
 	_fragOperator->begin();

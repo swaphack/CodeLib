@@ -52,6 +52,33 @@ void ui::CtrlLayout::setColorShaderProgram(render::ShaderProgram* shaderProgram)
 	}
 }
 
+void ui::CtrlLayout::setCamera(const render::Camera* camera)
+{
+	CtrlWidget::setCamera(camera);
+	if (_backgroundImage)
+	{
+		_backgroundImage->setCamera(camera);
+	}
+	if (_backgroundMask)
+	{
+		_backgroundMask->setCamera(camera);
+	}
+}
+
+void ui::CtrlLayout::setUseDesignCamera(bool bUsed)
+{
+	CtrlWidget::setUseDesignCamera(bUsed);
+
+	if (_backgroundImage)
+	{
+		_backgroundImage->setUseDesignCamera(bUsed);
+	}
+	if (_backgroundMask)
+	{
+		_backgroundMask->setUseDesignCamera(bUsed);
+	}
+}
+
 void ui::CtrlLayout::setBackgroundColor(const phy::Color4B& color)
 {
 	_backgroundMask->setColor(color);

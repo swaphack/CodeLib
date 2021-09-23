@@ -19,6 +19,10 @@ namespace render
 		virtual bool init();
 	public:
 		/**
+		*	设置点大小
+		*/
+		void setPointSize(int size);
+		/**
 		*	清空
 		*/
 		void cleanup();

@@ -47,6 +47,9 @@ namespace ui
 		void setAttribute(const std::string& name, const sys::CSSSize& value);
 		void setAttribute(const std::string& name, const render::BlendParam& value);
 		void setAttribute(const std::string& name, const MarginState& value);
+		void setAttribute(const std::string& name, const math::Matrix2x2& value);
+		void setAttribute(const std::string& name, const math::Matrix3x3& value);
+		void setAttribute(const std::string& name, const math::Matrix4x4& value);
 
 // 		template<typename T>
 // 		void setAttribute(const std::string& name, const T& value);
@@ -76,6 +79,9 @@ namespace ui
 		bool getAttribute(const std::string& name, sys::CSSSize& defaultValue);
 		bool getAttribute(const std::string& name, render::BlendParam& defaultValue);
 		bool getAttribute(const std::string& name, MarginState& defaultValue);
+		bool getAttribute(const std::string& name, math::Matrix2x2& defaultValue);
+		bool getAttribute(const std::string& name, math::Matrix3x3& defaultValue);
+		bool getAttribute(const std::string& name, math::Matrix4x4& defaultValue);
 
 // 		template<typename T>
 // 		bool getAttribute(const std::string& name, T& defaultValue);

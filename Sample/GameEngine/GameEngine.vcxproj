@@ -142,6 +142,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Classes\Env\SystemEnv.cpp" />
+    <ClCompile Include="Classes\Env\TerrianNode.cpp" />
+    <ClCompile Include="Classes\Env\TestEnvironmentNode.cpp" />
+    <ClCompile Include="Classes\Env\TestNode.cpp" />
+    <ClCompile Include="Classes\Env\Utility.cpp" />
     <ClCompile Include="Classes\GLRenderApplication.cpp" />
     <ClCompile Include="Classes\Main.cpp" />
     <ClCompile Include="Classes\Node\TestAlgNode.cpp" />
@@ -154,12 +158,9 @@
     <ClCompile Include="Classes\Node\TestPostProcessing.cpp" />
     <ClCompile Include="Classes\Node\TestTextureNode.cpp" />
     <ClCompile Include="Classes\Node\TestXFBNode.cpp" />
-    <ClCompile Include="Classes\Node\Utility.cpp" />
     <ClCompile Include="Classes\Node\TestAudioNode.cpp" />
     <ClCompile Include="Classes\Node\TestBufferNode.cpp" />
     <ClCompile Include="Classes\Node\TestDrawNode.cpp" />
-    <ClCompile Include="Classes\Node\TestEnvironmentNode.cpp" />
-    <ClCompile Include="Classes\Node\TestNode.cpp" />
     <ClCompile Include="Classes\Node\TestImageNode.cpp" />
     <ClCompile Include="Classes\Node\TestLayoutNode.cpp" />
     <ClCompile Include="Classes\Node\TestMediaNode.cpp" />
@@ -174,11 +175,14 @@
   <ItemGroup>
     <ClInclude Include="Classes\Env\import.h" />
     <ClInclude Include="Classes\Env\SystemEnv.h" />
+    <ClInclude Include="Classes\Env\TerrianNode.h" />
+    <ClInclude Include="Classes\Env\TestEnvironmentNode.h" />
+    <ClInclude Include="Classes\Env\TestNode.h" />
+    <ClInclude Include="Classes\Env\Utility.h" />
     <ClInclude Include="Classes\GLRenderApplication.h" />
     <ClInclude Include="Classes\Node\import.h" />
     <ClInclude Include="Classes\Node\TestAlgNode.h" />
     <ClInclude Include="Classes\Node\TestComputeShader.h" />
-    <ClInclude Include="Classes\Node\TestEnvironmentNode.h" />
     <ClInclude Include="Classes\Node\TestFrameBufferNode.h" />
     <ClInclude Include="Classes\Node\TestLightingNode.h" />
     <ClInclude Include="Classes\Node\TestMathNode.h" />
@@ -186,12 +190,10 @@
     <ClInclude Include="Classes\Node\TestPostProcessing.h" />
     <ClInclude Include="Classes\Node\TestTextureNode.h" />
     <ClInclude Include="Classes\Node\TestXFBNode.h" />
-    <ClInclude Include="Classes\Node\Utility.h" />
     <ClInclude Include="Classes\Node\TestAudioNode.h" />
     <ClInclude Include="Classes\Node\TestBufferNode.h" />
     <ClInclude Include="Classes\Node\TestDrawNode.h" />
     <ClInclude Include="Classes\Node\TestFragmentNode.h" />
-    <ClInclude Include="Classes\Node\TestNode.h" />
     <ClInclude Include="Classes\Node\TestImageNode.h" />
     <ClInclude Include="Classes\Node\TestLayoutNode.h" />
     <ClInclude Include="Classes\Node\TestMediaNode.h" />

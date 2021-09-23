@@ -82,6 +82,26 @@ void ui::CtrlScale9Image::setTexShaderProgram(render::ShaderProgram* shaderProgr
 	}
 }
 
+void ui::CtrlScale9Image::setCamera(const render::Camera* camera)
+{
+	CtrlWidget::setCamera(camera);
+
+	if (_texture2D)
+	{
+		_texture2D->setCamera(camera);
+	}
+}
+
+void ui::CtrlScale9Image::setUseDesignCamera(bool bUsed)
+{
+	CtrlWidget::setUseDesignCamera(bUsed);
+
+	if (_texture2D)
+	{
+		_texture2D->setUseDesignCamera(bUsed);
+	}
+}
+
 render::DrawScale9Texture2D* ui::CtrlScale9Image::getRenderNode() const
 {
 	return _texture2D;

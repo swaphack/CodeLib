@@ -229,6 +229,48 @@ void ui::WidgetProperty::setAttribute(const std::string& name, const MarginState
 	setAttribute(name, str);
 }
 
+void ui::WidgetProperty::setAttribute(const std::string& name, const math::Matrix2x2& value)
+{
+	if (name.empty())
+	{
+		return;
+	}
+	std::string str = getCString(
+		"%f,%f,%f,%f", 
+		value[0], value[1], 
+		value[2], value[3]);
+	setAttribute(name, str);
+}
+
+void ui::WidgetProperty::setAttribute(const std::string& name, const math::Matrix3x3& value)
+{
+	if (name.empty())
+	{
+		return;
+	}
+	std::string str = getCString(
+		"%f,%f,%f,%f,%f,%f,%f,%f,%f", 
+		value[0], value[1], value[2],
+		value[3], value[4], value[5], 
+		value[6], value[7], value[8]);
+	setAttribute(name, str);
+}
+
+void ui::WidgetProperty::setAttribute(const std::string& name, const math::Matrix4x4& value)
+{
+	if (name.empty())
+	{
+		return;
+	}
+	std::string str = getCString(
+		"%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f",
+		value[0], value[1], value[2], value[3], 
+		value[4], value[5], value[6], value[7],
+		value[8], value[9], value[10], value[11], 
+		value[12], value[13], value[14], value[15]);
+	setAttribute(name, str);
+}
+
 bool WidgetProperty::getAttribute(const std::string& name, bool& defaultValue)
 {
 	int value = 0;
@@ -602,6 +644,85 @@ bool ui::WidgetProperty::getAttribute(const std::string& name, MarginState& defa
 	}
 
 	defaultValue = MarginState(atoi(params[0].getString()), atoi(params[1].getString()), atoi(params[2].getString()), atoi(params[3].getString()));
+
+	return true;
+}
+
+bool ui::WidgetProperty::getAttribute(const std::string& name, math::Matrix2x2& defaultValue)
+{
+	const std::string& value = getAttribute(name);
+	if (value.empty())
+	{
+		return false;
+	}
+
+	sys::String val = value;
+	std::vector<sys::String> params;
+
+	val.split(",", params);
+
+	if (params.size() != 4)
+	{
+		return false;
+	}
+
+	defaultValue = math::Matrix2x2(
+		atoi(params[0].getString()), atoi(params[1].getString()),
+		atoi(params[2].getString()), atoi(params[3].getString()));
+
+	return true;
+}
+
+bool ui::WidgetProperty::getAttribute(const std::string& name, math::Matrix3x3& defaultValue)
+{
+	const std::string& value = getAttribute(name);
+	if (value.empty())
+	{
+		return false;
+	}
+
+	sys::String val = value;
+	std::vector<sys::String> params;
+
+	val.split(",", params);
+
+	if (params.size() != 9)
+	{
+		return false;
+	}
+
+	defaultValue = math::Matrix3x3(
+		atoi(params[0].getString()), atoi(params[1].getString()), atoi(params[2].getString()), 
+		atoi(params[3].getString()), atoi(params[4].getString()), atoi(params[5].getString()), 
+		atoi(params[6].getString()), atoi(params[7].getString()), atoi(params[8].getString()));
+
+	return true;
+}
+
+bool ui::WidgetProperty::getAttribute(const std::string& name, math::Matrix4x4& defaultValue)
+{
+	const std::string& value = getAttribute(name);
+	if (value.empty())
+	{
+		return false;
+	}
+
+	sys::String val = value;
+	std::vector<sys::String> params;
+
+	val.split(",", params);
+
+	if (params.size() != 16)
+	{
+		return false;
+	}
+
+	defaultValue = math::Matrix4x4(
+		atoi(params[0].getString()), atoi(params[1].getString()),atoi(params[2].getString()), atoi(params[3].getString()),
+		atoi(params[4].getString()), atoi(params[5].getString()), atoi(params[6].getString()), atoi(params[7].getString()),
+		atoi(params[8].getString()), atoi(params[9].getString()), atoi(params[10].getString()), atoi(params[11].getString()),
+		atoi(params[12].getString()), atoi(params[13].getString()), atoi(params[14].getString()), atoi(params[15].getString())
+	);
 
 	return true;
 }

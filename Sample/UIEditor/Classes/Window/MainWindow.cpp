@@ -34,8 +34,10 @@ bool ue::MainWindow::init()
 
 	auto size = render::Tool::getViewSize();
 	this->setAnchorPoint(math::Vector2(0, 0));
-	this->setPosition(math::Vector2(-0.5f * size.getWidth(), -0.5f * size.getHeight()));
+	//this->setPosition(math::Vector2(-0.5f * size.getWidth(), -0.5f * size.getHeight()));
 	this->setVolume(size);
+
+	updateCamera();
 
 	return true;
 }
@@ -83,4 +85,42 @@ ui::CtrlWidget* ue::MainWindow::createWidgetProperty(const std::string& widgetNa
 	}
 
 	return pRoot;
+}
+
+void ue::MainWindow::updateCamera()
+{
+	auto size = render::Tool::getViewSize();
+	{
+		render::Camera* pCamera = G_CAMERAS->getDesignCamera();
+		if (pCamera)
+		{
+			pCamera->setVisible(false);
+			float d = sqrt(powf(size.getWidth(), 2) + powf(size.getHeight(), 2));
+			pCamera->setViewDistance(d - 300, d * 300);
+			pCamera->setRotationX(15);
+			pCamera->setPositionY(300);
+			pCamera->setPositionZ(d);
+
+		}
+	}
+	{
+		render::Camera* pCamera = G_CAMERAS->getCamera3D();
+		if (pCamera)
+		{
+			pCamera->setVisible(false);
+
+			float d = sqrt(powf(size.getWidth(), 2) + powf(size.getHeight(), 2));
+			pCamera->setViewDistance(d - 200, d * 200);
+			pCamera->setPositionZ(d);
+		}
+
+	}
+	{
+		render::Camera* pCamera = G_CAMERAS->getCamera2D();
+		if (pCamera)
+		{
+			pCamera->setVisible(true);
+			pCamera->setPositionZ(0.0f);
+		}
+	}
 }

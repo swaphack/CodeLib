@@ -1,6 +1,6 @@
 #pragma once
 
-#include "TestNode.h"
+#include "../Env/TestNode.h"
 
 class TestAlgNode : public TestNode
 {

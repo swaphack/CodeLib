@@ -83,9 +83,9 @@ void render::PixelPostProcessingNode::updateTextureSize()
 	auto pMesh = getMesh();
 	if (pMesh)
 	{
-		pMesh->getMeshDetail()->setVertices(4, vertices, 2);
-		pMesh->getMeshDetail()->setUVs(4, uvs, 2);
-		pMesh->getMeshDetail()->setIndices(6, indices, 1);
+		pMesh->setVertices(4, vertices, 2);
+		pMesh->setUVs(4, uvs, 2);
+		pMesh->setIndices(6, indices, 1);
 	}
 
 	this->updateMeshData();

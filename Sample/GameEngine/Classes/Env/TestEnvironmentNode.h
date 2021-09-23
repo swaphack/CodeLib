@@ -10,10 +10,6 @@ public:
 protected:
 	virtual void initNodes();
 protected:
-	void init3DSkyBox();
-	void init2DSkyBox();
-
-	void addGrid();
 
 	void testMatrix();
 

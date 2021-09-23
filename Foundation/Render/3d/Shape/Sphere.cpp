@@ -177,10 +177,10 @@ void render::Sphere::updateSphere()
 		}
 	}
 
-	pMesh->getMeshDetail()->setVertices(nCount0 + nCount1 + nCount2, &pVertices[0]);
-	pMesh->getMeshDetail()->setUVs(nCount0 + nCount1 + nCount2, &pUVs[0]);
-	pMesh->getMeshDetail()->setColors(nCount0 + nCount1 + nCount2, &pColors[0]);
-	pMesh->getMeshDetail()->setIndices(pIndices.size(), &pIndices[0]);
+	pMesh->setVertices(nCount0 + nCount1 + nCount2, &pVertices[0]);
+	pMesh->setUVs(nCount0 + nCount1 + nCount2, &pUVs[0]);
+	pMesh->setColors(nCount0 + nCount1 + nCount2, &pColors[0]);
+	pMesh->setIndices(pIndices.size(), &pIndices[0]);
 
 	updateMeshData();
 }

@@ -589,6 +589,9 @@
     <ClInclude Include="Record\OperateRecord.h">
       <Filter>Record</Filter>
     </ClInclude>
+    <ClInclude Include="Type\macros.h">
+      <Filter>Type</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Framework\Application.cpp">

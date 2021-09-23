@@ -21,6 +21,9 @@ namespace render
 		Mesh();
 		virtual ~Mesh();
 	public:
+		/**
+		*	网格信息
+		*/
 		void setMeshDetail(sys::MeshDetail* detail);
 		/**
 		*	网格信息
@@ -38,6 +41,47 @@ namespace render
 		*	网格缓存
 		*/
 		ArrayBuffer* getVertexBuffer() const;
+	public:
+		/**
+		*	设置顶点坐标信息
+		*/
+		void setVertices(int len, const float* vertexes, int unitSize = 3);
+		/**
+		*	设置顶点
+		*/
+		void setVertices(const std::vector<math::Vector3>& points);
+		/**
+		*	设置法线坐标信息
+		*/
+		void setNormals(int len, const float* normals, int unitSize = 3);
+		/**
+		*	设置顶点
+		*/
+		void setNormals(const std::vector<math::Vector3>& normals);
+		/**
+		*	设置颜色坐标信息
+		*/
+		void setColors(int len, const float* colors, int unitSize = 4);
+		/**
+		*	设置颜色
+		*/
+		void setColors(const std::vector<phy::Color4F>& colors);
+		/**
+		*	设置纹理坐标信息
+		*/
+		void setUVs(int len, const float* texCoords, int unitSize = 2);
+		/**
+		*	设置纹理坐标
+		*/
+		void setUVs(const std::vector<math::Vector2>& uvs);
+		/**
+		*	设置三角形索引
+		*/
+		void setIndices(int size, const uint32_t* indices, int unitSize = 1);
+		/**
+		*	设置顶点顺序
+		*/
+		void setIndices(const std::vector<int>& indices);
 	public:
 		/**
 		*	绘制图形方式

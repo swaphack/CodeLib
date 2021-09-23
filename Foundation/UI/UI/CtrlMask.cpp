@@ -36,6 +36,26 @@ void ui::CtrlMask::setColorShaderProgram(render::ShaderProgram* shaderProgram)
 	}
 }
 
+void ui::CtrlMask::setCamera(const render::Camera* camera)
+{
+	CtrlWidget::setCamera(camera);
+
+	if (_maskNode)
+	{
+		_maskNode->setCamera(camera);
+	}
+}
+
+void ui::CtrlMask::setUseDesignCamera(bool bUsed)
+{
+	CtrlWidget::setUseDesignCamera(bUsed);
+
+	if (_maskNode)
+	{
+		_maskNode->setUseDesignCamera(bUsed);
+	}
+}
+
 void ui::CtrlMask::onColorChange()
 {
 	if (_maskNode)

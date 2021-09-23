@@ -22,6 +22,21 @@ namespace render
 	class Material : public sys::Object
 	{
 	public:
+		struct MaterialParameter
+		{
+			std::string name;
+			std::string typeName;
+		};
+
+#define CREATE_UNIFORM(TYPE, FUNC)  \
+void render::Material::setUniform(const std::string& name, const TYPE& value) \
+{ \
+	if (_shaderProgram == nullptr)  return; \
+	auto pUniform = _shaderProgram->getUniform(name); \
+	if (pUniform) pUniform->FUNC(value); \
+}
+
+	public:
 		Material();
 		virtual ~Material();
 	public:
@@ -54,6 +69,11 @@ namespace render
 		*	应用材质
 		*/ 
 		void applyMaterial();
+	public: // 设置值
+		/**
+		*	应用材质
+		*/
+		void setUniform(const std::string& name, const math::Matrix4x4& value);
 	protected:
 		/**
 		*	基础信息

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "TestNode.h"
+#include "../Env/TestNode.h"
 
 // Íø¸ñ
 class TestMeshNode : public TestNode

@@ -439,9 +439,13 @@ void render::DrawNodeProtocol::setCamera(const Camera* camera)
 
 Camera* render::DrawNodeProtocol::getCamera() const
 {
-	if (G_CAMERAS->getDesignCamera())
+	if (_bUsedDesignCamera)
 	{
-		return G_CAMERAS->getDesignCamera();
+		if (G_CAMERAS->getDesignCamera() 
+			&& G_CAMERAS->getDesignCamera()->isVisible())
+		{
+			return G_CAMERAS->getDesignCamera();
+		}
 	}
 	return _camera;
 }
@@ -449,6 +453,16 @@ Camera* render::DrawNodeProtocol::getCamera() const
 Camera* render::DrawNodeProtocol::getRealCamera() const
 {
 	return _camera;
+}
+
+void render::DrawNodeProtocol::setUseDesignCamera(bool bUsed)
+{
+	_bUsedDesignCamera = bUsed;
+}
+
+bool render::DrawNodeProtocol::isUsedDesignCamera() const
+{
+	return _bUsedDesignCamera;
 }
 
 void render::DrawNodeProtocol::setScene(Scene* scene)

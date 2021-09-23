@@ -46,5 +46,5 @@ namespace render
 		Camera* _designCamera = nullptr;
 	};
 
-#define G_CAMERAS sys::Instance<Cameras>::getInstance()
+#define G_CAMERAS sys::Instance<render::Cameras>::getInstance()
 }

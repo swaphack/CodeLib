@@ -121,6 +121,14 @@
     <ClInclude Include="Struct\ObjectDetail.h" />
     <ClInclude Include="Struct\OneToOneRelationship.h" />
     <ClInclude Include="Struct\OneToManyRelationship.h" />
+    <ClInclude Include="Terrian\DiamondSquareTerrian.h" />
+    <ClInclude Include="Terrian\IFSystem.h" />
+    <ClInclude Include="Terrian\import.h" />
+    <ClInclude Include="Terrian\LSystem.h" />
+    <ClInclude Include="Terrian\MidpointTerrian.h" />
+    <ClInclude Include="Terrian\Terrian.h" />
+    <ClInclude Include="Terrian\TerrianHelper.h" />
+    <ClInclude Include="Terrian\Tree.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
@@ -155,6 +163,13 @@
     <ClCompile Include="Struct\ObjectDetail.cpp" />
     <ClCompile Include="Struct\OneToOneRelationship.cpp" />
     <ClCompile Include="Struct\OneToManyRelationship.cpp" />
+    <ClCompile Include="Terrian\DiamondSquareTerrian.cpp" />
+    <ClCompile Include="Terrian\IFSystem.cpp" />
+    <ClCompile Include="Terrian\LSystem.cpp" />
+    <ClCompile Include="Terrian\MidpointTerrian.cpp" />
+    <ClCompile Include="Terrian\Terrian.cpp" />
+    <ClCompile Include="Terrian\TerrianHelper.cpp" />
+    <ClCompile Include="Terrian\Tree.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

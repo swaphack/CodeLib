@@ -63,13 +63,7 @@
     <ClCompile Include="Classes\Node\TestUtilityNode.cpp">
       <Filter>Classes\Node</Filter>
     </ClCompile>
-    <ClCompile Include="Classes\Node\Utility.cpp">
-      <Filter>Classes\Node</Filter>
-    </ClCompile>
     <ClCompile Include="Classes\Node\TestTextureNode.cpp">
-      <Filter>Classes\Node</Filter>
-    </ClCompile>
-    <ClCompile Include="Classes\Node\TestEnvironmentNode.cpp">
       <Filter>Classes\Node</Filter>
     </ClCompile>
     <ClCompile Include="Classes\Node\TestFragmentNode.cpp">
@@ -87,9 +81,6 @@
     <ClCompile Include="Classes\Node\TestLightingNode.cpp">
       <Filter>Classes\Node</Filter>
     </ClCompile>
-    <ClCompile Include="Classes\Node\TestNode.cpp">
-      <Filter>Classes\Node</Filter>
-    </ClCompile>
     <ClCompile Include="Classes\Node\TestXFBNode.cpp">
       <Filter>Classes\Node</Filter>
     </ClCompile>
@@ -103,6 +94,18 @@
       <Filter>Classes\Node</Filter>
     </ClCompile>
     <ClCompile Include="Classes\Env\SystemEnv.cpp">
+      <Filter>Classes\Env</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Env\TestEnvironmentNode.cpp">
+      <Filter>Classes\Env</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Env\TerrianNode.cpp">
+      <Filter>Classes\Env</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Env\TestNode.cpp">
+      <Filter>Classes\Env</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Env\Utility.cpp">
       <Filter>Classes\Env</Filter>
     </ClCompile>
   </ItemGroup>
@@ -155,13 +158,7 @@
     <ClInclude Include="Classes\Node\TestFragmentNode.h">
       <Filter>Classes\Node</Filter>
     </ClInclude>
-    <ClInclude Include="Classes\Node\Utility.h">
-      <Filter>Classes\Node</Filter>
-    </ClInclude>
     <ClInclude Include="Classes\Node\TestTextureNode.h">
-      <Filter>Classes\Node</Filter>
-    </ClInclude>
-    <ClInclude Include="Classes\Node\TestEnvironmentNode.h">
       <Filter>Classes\Node</Filter>
     </ClInclude>
     <ClInclude Include="Classes\Node\TestFrameBufferNode.h">
@@ -174,9 +171,6 @@
       <Filter>Classes\Node</Filter>
     </ClInclude>
     <ClInclude Include="Classes\Node\TestLightingNode.h">
-      <Filter>Classes\Node</Filter>
-    </ClInclude>
-    <ClInclude Include="Classes\Node\TestNode.h">
       <Filter>Classes\Node</Filter>
     </ClInclude>
     <ClInclude Include="Classes\Node\TestXFBNode.h">
@@ -195,6 +189,18 @@
       <Filter>Classes\Env</Filter>
     </ClInclude>
     <ClInclude Include="Classes\Env\import.h">
+      <Filter>Classes\Env</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Env\TestEnvironmentNode.h">
+      <Filter>Classes\Env</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Env\TerrianNode.h">
+      <Filter>Classes\Env</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Env\Utility.h">
+      <Filter>Classes\Env</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Env\TestNode.h">
       <Filter>Classes\Env</Filter>
     </ClInclude>
   </ItemGroup>

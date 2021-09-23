@@ -1,6 +1,6 @@
 #include "TestLightingNode.h"
 #include "render.h"
-#include "Utility.h"
+#include "../Env/Utility.h"
 
 TestLightingNode::TestLightingNode()
 {

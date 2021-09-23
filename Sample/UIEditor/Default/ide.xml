@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <root>
 	<IDE>
-		<Design>Default/Layout/main_view.xml</Design>
+		<Design>Default/Layout/main_view_test.xml</Design>
 		<Control>Default/Layout/Widget/widget.config.xml</Control>
 	</IDE>
 	<Shader>

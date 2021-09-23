@@ -54,6 +54,81 @@ render::ArrayBuffer* render::Mesh::getVertexBuffer() const
 	return _vertexBuffer;
 }
 
+void render::Mesh::setVertices(int len, const float* vertexes, int unitSize)
+{
+	getMeshDetail()->setVertices(len, vertexes, unitSize);
+}
+
+void render::Mesh::setVertices(const std::vector<math::Vector3>& points)
+{
+	int nCount = points.size();
+	auto pVertice = (float*)getMeshDetail()->createVertices(nCount, sizeof(float), 3);
+	for (int i = 0; i < nCount; i++)
+	{
+		memcpy(pVertice + i * 3, points[i].getValue(), 3 * sizeof(float));
+	}
+}
+
+void render::Mesh::setNormals(int len, const float* normals, int unitSize)
+{
+	getMeshDetail()->setNormals(len, normals, unitSize);
+}
+
+void render::Mesh::setNormals(const std::vector<math::Vector3>& normals)
+{
+	int nCount = normals.size();
+	auto pVertice = (float*)getMeshDetail()->createNormals(nCount, sizeof(float), 3);
+	for (int i = 0; i < nCount; i++)
+	{
+		memcpy(pVertice + i * 3, normals[i].getValue(), 3 * sizeof(float));
+	}
+}
+
+void render::Mesh::setColors(int len, const float* colors, int unitSize)
+{
+	getMeshDetail()->setColors(len, colors, unitSize);
+}
+
+void render::Mesh::setColors(const std::vector<phy::Color4F>& colors)
+{
+	int nCount = colors.size();
+	auto pVertice = (float*)getMeshDetail()->createColors(nCount, sizeof(float), 4);
+	for (int i = 0; i < nCount; i++)
+	{
+		memcpy(pVertice + i * 4, colors[i].getValue(), 4 * sizeof(float));
+	}
+}
+
+void render::Mesh::setUVs(int len, const float* texCoords, int unitSize)
+{
+	getMeshDetail()->setUVs(len, texCoords, unitSize);
+}
+
+void render::Mesh::setUVs(const std::vector<math::Vector2>& uvs)
+{
+	int nCount = uvs.size();
+	auto pVertice = (float*)getMeshDetail()->createUVs(nCount, sizeof(float), 2);
+	for (int i = 0; i < nCount; i++)
+	{
+		memcpy(pVertice + i * 2, uvs[i].getValue(), 2 * sizeof(float));
+	}
+}
+
+void render::Mesh::setIndices(int size, const uint32_t* indices, int unitSize)
+{
+	getMeshDetail()->setIndices(size, indices, unitSize);
+}
+
+void render::Mesh::setIndices(const std::vector<int>& indices)
+{
+	int nCount = indices.size();
+	auto pVertice = (float*)getMeshDetail()->createIndices(nCount, sizeof(uint32_t), 1);
+	for (int i = 0; i < nCount; i++)
+	{
+		memcpy(pVertice + i, &indices[i], sizeof(uint32_t));
+	}
+}
+
 void render::Mesh::setDrawMode(DrawMode mode)
 {
 	_drawMode = mode;

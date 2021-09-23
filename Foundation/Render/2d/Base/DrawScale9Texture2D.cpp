@@ -145,17 +145,17 @@ void DrawScale9Texture2D::updateScale9ImageMeshData()
 		float uvs[32] = { 0 };
 		memcpy(uvs, _scale9Vertex.uvs, sizeof(uvs));
 
-		pMesh->getMeshDetail()->setVertices(16, _scale9Vertex.vertices, 3);
-		pMesh->getMeshDetail()->setColors(16, _scale9Vertex.colors, 4);
-		pMesh->getMeshDetail()->setUVs(16, uvs, 2);
+		pMesh->setVertices(16, _scale9Vertex.vertices, 3);
+		pMesh->setColors(16, _scale9Vertex.colors, 4);
+		pMesh->setUVs(16, uvs, 2);
 
 		if (getTexture() != nullptr)
 		{
-			pMesh->getMeshDetail()->setIndices(54, _scale9Vertex.indices);
+			pMesh->setIndices(54, _scale9Vertex.indices);
 		}
 		else
 		{
-			pMesh->getMeshDetail()->setIndices(0, nullptr);
+			pMesh->setIndices(0, nullptr);
 		}
 	}
 	this->updateMeshData();

@@ -106,17 +106,17 @@ void DrawTexture2D::updateTexture2DMeshData()
 		float (*arrPtr)[8] = &uvs;
 		render::VertexTool::setTexture2DFlip(&uvs, _bFlipX, _bFlipY);
 
-		pMesh->getMeshDetail()->setVertices(4, _rectVertex.vertices, 3);
-		pMesh->getMeshDetail()->setColors(4, _rectVertex.colors, 4);
-		pMesh->getMeshDetail()->setUVs(4, uvs, 2);
+		pMesh->setVertices(4, _rectVertex.vertices, 3);
+		pMesh->setColors(4, _rectVertex.colors, 4);
+		pMesh->setUVs(4, uvs, 2);
 
 		if (getTexture() != nullptr)
 		{
-			pMesh->getMeshDetail()->setIndices(6, _rectVertex.indices);
+			pMesh->setIndices(6, _rectVertex.indices);
 		}
 		else
 		{
-			pMesh->getMeshDetail()->setIndices(0, nullptr);
+			pMesh->setIndices(0, nullptr);
 		}
 	}
 	this->updateMeshData();

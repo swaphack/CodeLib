@@ -38,8 +38,13 @@ namespace sys
 		MeshDetail();
 		virtual ~MeshDetail();
 	public:
+		/**
+		*	名称
+		*/
 		const std::string& getName() const;
-
+		/**
+		*	设置名称
+		*/
 		void setName(const std::string& name);
 		/**
 		*	顶点坐标信息

@@ -105,7 +105,7 @@ void render::MultiFaceCube::updateMultiDrawNode3DMesh()
 			return;
 		}
 		CubeFace face = (CubeFace)i;
-		pMesh->getMeshDetail()->setVertices(4, _localCubeVertex.getFaceVertex(face)->vertices, 3);
+		pMesh->setVertices(4, _localCubeVertex.getFaceVertex(face)->vertices, 3);
 	}
 
 	this->updateMeshData();

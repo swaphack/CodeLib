@@ -28,6 +28,11 @@ bool render::DebugDraw::init()
 	return true;
 }
 
+void render::DebugDraw::setPointSize(int size)
+{
+	_drawNode->setPointSize(size);
+}
+
 void render::DebugDraw::cleanup()
 {
 	_drawNode->removeAllPoints();

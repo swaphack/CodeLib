@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../Node/TestNode.h"
+#include "TestNode.h"
 
 class SystemEnv : public TestNode
 {
@@ -17,6 +17,11 @@ private:
 	void updateCamera();
 
 	void addOperateToDesignCamera();
+
+	void init3DSkyBox();
+	void init2DSkyBox();
+
+	void addGrid();
 private:
 	int _viewType = 0;
 

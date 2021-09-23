@@ -20,6 +20,14 @@ namespace ui
 		*	设置着色器
 		*/
 		virtual void setColorShaderProgram(render::ShaderProgram* shaderProgram);
+		/**
+		*	设置摄像机
+		*/
+		virtual void setCamera(const render::Camera* camera);
+		/**
+		*	使用设计摄像头
+		*/
+		virtual void setUseDesignCamera(bool bUsed);
 	protected:
 		virtual void onColorChange();
 	private:

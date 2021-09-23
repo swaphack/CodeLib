@@ -164,6 +164,30 @@
     <ClInclude Include="Mesh\Core\PolygonReduction.h">
       <Filter>Mesh\Core</Filter>
     </ClInclude>
+    <ClInclude Include="Terrian\Terrian.h">
+      <Filter>Terrian</Filter>
+    </ClInclude>
+    <ClInclude Include="Terrian\Tree.h">
+      <Filter>Terrian</Filter>
+    </ClInclude>
+    <ClInclude Include="Terrian\LSystem.h">
+      <Filter>Terrian</Filter>
+    </ClInclude>
+    <ClInclude Include="Terrian\IFSystem.h">
+      <Filter>Terrian</Filter>
+    </ClInclude>
+    <ClInclude Include="Terrian\MidpointTerrian.h">
+      <Filter>Terrian</Filter>
+    </ClInclude>
+    <ClInclude Include="Terrian\DiamondSquareTerrian.h">
+      <Filter>Terrian</Filter>
+    </ClInclude>
+    <ClInclude Include="Terrian\TerrianHelper.h">
+      <Filter>Terrian</Filter>
+    </ClInclude>
+    <ClInclude Include="Terrian\import.h">
+      <Filter>Terrian</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Sort">
@@ -195,6 +219,9 @@
     </Filter>
     <Filter Include="Mesh\Core">
       <UniqueIdentifier>{3ccbf977-430f-4872-b255-57d2001c2c76}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Terrian">
+      <UniqueIdentifier>{d235acf9-e6d6-4b3b-9cf7-72c34c5b51dc}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -291,6 +318,27 @@
     </ClCompile>
     <ClCompile Include="Mesh\Core\PolygonReduction.cpp">
       <Filter>Mesh\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Terrian\Terrian.cpp">
+      <Filter>Terrian</Filter>
+    </ClCompile>
+    <ClCompile Include="Terrian\Tree.cpp">
+      <Filter>Terrian</Filter>
+    </ClCompile>
+    <ClCompile Include="Terrian\LSystem.cpp">
+      <Filter>Terrian</Filter>
+    </ClCompile>
+    <ClCompile Include="Terrian\IFSystem.cpp">
+      <Filter>Terrian</Filter>
+    </ClCompile>
+    <ClCompile Include="Terrian\MidpointTerrian.cpp">
+      <Filter>Terrian</Filter>
+    </ClCompile>
+    <ClCompile Include="Terrian\DiamondSquareTerrian.cpp">
+      <Filter>Terrian</Filter>
+    </ClCompile>
+    <ClCompile Include="Terrian\TerrianHelper.cpp">
+      <Filter>Terrian</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

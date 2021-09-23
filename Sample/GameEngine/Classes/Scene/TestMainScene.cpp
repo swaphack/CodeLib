@@ -30,7 +30,6 @@ bool TestMainScene::init()
 
 void TestMainScene::initNodes()
 {
-	this->addChild(CREATE_NODE(TestEnvironmentNode));
 
 	this->addChild(CREATE_NODE(TestModelNode));
 
@@ -66,4 +65,8 @@ void TestMainScene::initNodes()
 void TestMainScene::initEnv()
 {
 	this->addChild(CREATE_NODE(SystemEnv));
+	this->addChild(CREATE_NODE(TerrianNode));
+
+
+	this->addChild(CREATE_NODE(TestEnvironmentNode));
 }

@@ -55,6 +55,34 @@ void ui::CtrlButton::setTexShaderProgram(render::ShaderProgram* shaderProgram)
 	}
 }
 
+void ui::CtrlButton::setCamera(const render::Camera* camera)
+{
+	CtrlWidget::setCamera(camera);
+
+	if (_btnText)
+	{
+		_btnText->setCamera(camera);
+	}
+	if (_btnImage)
+	{
+		_btnImage->setCamera(camera);
+	}
+}
+
+void ui::CtrlButton::setUseDesignCamera(bool bUsed)
+{
+	CtrlWidget::setUseDesignCamera(bUsed);
+
+	if (_btnText)
+	{
+		_btnText->setUseDesignCamera(bUsed);
+	}
+	if (_btnImage)
+	{
+		_btnImage->setUseDesignCamera(bUsed);
+	}
+}
+
 void ui::CtrlButton::setString(const std::string& text)
 {
 	TextProtocol::setString(text);

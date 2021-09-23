@@ -1038,8 +1038,8 @@ void render::UniformShaderApply::updateNearestLightUniformValue(Node* node, Shad
 			{
 				math::Matrix4x4 lightMatrix;
 				math::Matrix4x4 lightProject = pCamera->getProjectMatrix();
-				math::Vector3 center = pCamera->getCenterPosition();
-				math::Matrix4x4 lightView = math::Matrix4x4::lookAt(lightPos, center, math::Vector3(0, 1, 0));
+				math::Vector3 center = lightPos + pLight->getFront();
+				math::Matrix4x4 lightView = math::Matrix4x4::lookAt(lightPos, center, pLight->getUp());
 				lightMatrix = lightProject * lightView;
 
 				pUniform->setMatrix4x4(1, lightMatrix.getValue());
@@ -1200,8 +1200,8 @@ void render::UniformShaderApply::updateAllLightsUniformValue(Node* node, ShaderP
 				{
 					math::Matrix4x4 lightMatrix;
 					math::Matrix4x4 lightProject = pCamera->getProjectMatrix();
-					math::Vector3 center = pCamera->getCenterPosition();
-					math::Matrix4x4 lightView = math::Matrix4x4::lookAt(lightPos, center, math::Vector3(0, 1, 0));
+					math::Vector3 center = lightPos + pLight->getFront();
+					math::Matrix4x4 lightView = math::Matrix4x4::lookAt(lightPos, center, pLight->getUp());
 					lightMatrix = lightProject * lightView;
 					pUniform->setMatrix4x4(1, lightMatrix.getValue());
 				}
@@ -1345,11 +1345,6 @@ math::Matrix4x4 render::UniformShaderApply::getWorldMatrix(const Node* node)
 
 render::Camera* render::UniformShaderApply::getCamera(const Node* node)
 {
-	if (G_CAMERAS->getDesignCamera() != nullptr)
-	{
-		return G_CAMERAS->getDesignCamera();
-	}
-
 	if (node == nullptr)
 	{
 		return nullptr;

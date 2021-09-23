@@ -41,6 +41,13 @@ math::Matrix3x3::Matrix3x3(const Matrix3x3& mat)
 	this->assign(mat.getValue());
 }
 
+math::Matrix3x3::Matrix3x3(float m00, float m01, float m02, float m10, float m11, float m12, float m20, float m21, float m22)
+{
+	this->setValue(0, m00); this->setValue(1, m01); this->setValue(2, m02);
+	this->setValue(3, m10); this->setValue(4, m11); this->setValue(5, m12);
+	this->setValue(0, m20); this->setValue(0, m21); this->setValue(0, m22);
+}
+
 math::Matrix3x3& math::Matrix3x3::operator=(const Matrix3x3& mat)
 {
 	this->assign(mat.getValue());

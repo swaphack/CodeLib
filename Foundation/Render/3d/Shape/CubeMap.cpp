@@ -120,9 +120,9 @@ void render::CubeMap::updateDrawNode3DMesh()
 	auto pMesh = getMesh();
 	if (pMesh)
 	{
-		pMesh->getMeshDetail()->setVertices(36, vertices, 3);
-		pMesh->getMeshDetail()->setNormals(36, normals, 3);
-		pMesh->getMeshDetail()->setIndices(36, indices, 1);
+		pMesh->setVertices(36, vertices, 3);
+		pMesh->setNormals(36, normals, 3);
+		pMesh->setIndices(36, indices, 1);
 	}
 
 	this->updateMeshData();

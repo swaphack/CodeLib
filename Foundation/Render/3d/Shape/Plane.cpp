@@ -39,10 +39,10 @@ void render::Plane::onPlaneBodyChanged()
 		float uvs[8] = { 0 };
 		memcpy(uvs, _rectVertex.uvs, sizeof(uvs));
 
-		pMesh->getMeshDetail()->setVertices(4, _rectVertex.vertices, 3);
-		pMesh->getMeshDetail()->setColors(4, _rectVertex.colors, 4);
-		pMesh->getMeshDetail()->setUVs(4, uvs, 2);
-		pMesh->getMeshDetail()->setIndices(6, _rectVertex.indices);
+		pMesh->setVertices(4, _rectVertex.vertices, 3);
+		pMesh->setColors(4, _rectVertex.colors, 4);
+		pMesh->setUVs(4, uvs, 2);
+		pMesh->setIndices(6, _rectVertex.indices);
 	}
 
 	this->updateMeshData();

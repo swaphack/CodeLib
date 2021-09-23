@@ -319,6 +319,17 @@ math::Matrix4x4::Matrix4x4(const float value[4][4])
 	}
 }
 
+math::Matrix4x4::Matrix4x4(float m00, float m01, float m02, float m03,
+	float m10, float m11, float m12, float m13,
+	float m20, float m21, float m22, float m23,
+	float m30, float m31, float m32, float m33)
+{
+	this->setValue(0, m00); this->setValue(1, m01); this->setValue(2, m02); this->setValue(3, m03);
+	this->setValue(4, m10); this->setValue(5, m11); this->setValue(6, m12); this->setValue(7, m13);
+	this->setValue(8, m20); this->setValue(9, m21); this->setValue(10, m22); this->setValue(11, m23);
+	this->setValue(12, m30); this->setValue(13, m31); this->setValue(14, m32); this->setValue(15, m33);
+}
+
 math::Matrix4x4::Matrix4x4(const Matrix4x1& mat)
 {
 	*this = mat;
@@ -605,21 +616,28 @@ math::Matrix4x4 math::Matrix4x4::perspective(float fovyInDegrees, float aspectRa
 
 math::Matrix4x4 math::Matrix4x4::lookAt(const Vector3& eye, const Vector3& center, const Vector3& up)
 {
-	math::Vector3 f = math::Vector3::normalize(center - eye);
-	math::Vector3 u = math::Vector3::normalize(up);
-	math::Vector3 s = math::Vector3::normalize(math::Vector3::cross(f, u));
-	u = math::Vector3::cross(s, f);
+	math::Vector3 x,y, z;
+
+	z = eye - center;
+	z.normalize();
+	y = up;
+	x = Vector3::cross(y, z);
+	y = Vector3::cross(z, x);
 
 	math::Matrix4x4 Result;
-	Result.setValue(0, 0, s.getX());
-	Result.setValue(1, 0, s.getY());
-	Result.setValue(2, 0, s.getZ());
-	Result.setValue(0, 1, u.getX());
-	Result.setValue(1, 1, u.getY());
-	Result.setValue(2, 1, u.getZ());
-	Result.setValue(0, 2, -f.getX());
-	Result.setValue(1, 2, -f.getY());
-	Result.setValue(2, 2, -f.getZ());
+	Result.setValue(0, 0, x.getX());
+	Result.setValue(1, 0, x.getY());
+	Result.setValue(2, 0, x.getZ());
+	Result.setValue(3, 0, -math::Vector3::dot(x, eye));
+	Result.setValue(0, 1, y.getX());
+	Result.setValue(1, 1, y.getY());
+	Result.setValue(2, 1, y.getZ());
+	Result.setValue(3, 1, -math::Vector3::dot(y, eye));
+	Result.setValue(0, 2, z.getX());
+	Result.setValue(1, 2, z.getY());
+	Result.setValue(2, 2, z.getZ());
+	Result.setValue(3, 2, -math::Vector3::dot(z, eye));
+
 	return Result;
 }
 

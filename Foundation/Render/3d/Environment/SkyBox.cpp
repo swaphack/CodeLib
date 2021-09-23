@@ -60,8 +60,8 @@ void render::SkyBox::updateDrawNode3DMesh()
 	auto pMesh = getMesh();
 	if (pMesh)
 	{
-		pMesh->getMeshDetail()->setVertices(24, vertices, 3);
-		pMesh->getMeshDetail()->setIndices(36, indices, 1);
+		pMesh->setVertices(24, vertices, 3);
+		pMesh->setIndices(36, indices, 1);
 	}
 
 	this->updateMeshData();

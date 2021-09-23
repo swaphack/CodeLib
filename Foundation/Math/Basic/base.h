@@ -4,6 +4,39 @@
 
 namespace math
 {
+
+#define INT8_SIZE sizeof(int8_t)
+#define UINT8_SIZE sizeof(uint8_t)
+#define INT16_SIZE sizeof(int16_t)
+#define UINT16_SIZE sizeof(uint16_t)
+#define INT32_SIZE sizeof(int32_t)
+#define UINT32_SIZE sizeof(uint32_t)
+#define INT64_SIZE sizeof(int64_t)
+#define UINT64_SIZE sizeof(uint64_t)
+#define FLOAT_SIZE sizeof(float)
+#define DOUBLE_SIZE sizeof(double)
+
+#define INT8_NAME typeid(int8_t).name()
+#define UINT8_NAME typeid(uint8_t).name()
+#define INT16_NAME typeid(int16_t).name()
+#define UINT16_NAME typeid(uint16_t).name()
+#define INT32_NAME typeid(int32_t).name()
+#define UINT32_NAME typeid(uint32_t).name()
+#define INT64_NAME typeid(int64_t).name()
+#define UINT64_NAME typeid(uint64_t).name()
+
+#define CHAR_NAME typeid(char).name()
+#define UCHAR_NAME typeid(unsigned char).name()
+#define SHORT_NAME typeid(short).name()
+#define USHORT_NAME typeid(unsigned short).name()
+#define INT_NAME typeid(int).name()
+#define UINT_NAME typeid(unsigned int).name()
+#define LONG_NAME typeid(long long).name()
+#define ULONG_NAME typeid(unsigned long long).name()
+
+#define FLOAT_NAME typeid(float).name()
+#define DOUBLE_NAME typeid(double).name()
+
 	/**
 	*	‘≤÷‹¬ 
 	*/

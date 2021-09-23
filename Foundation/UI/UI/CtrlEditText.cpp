@@ -85,6 +85,24 @@ void ui::CtrlEditText::setTexShaderProgram(render::ShaderProgram* shaderProgram)
 	if (_ctrlTextPlaceholder) _ctrlTextPlaceholder->setTexShaderProgram(shaderProgram);
 }
 
+void ui::CtrlEditText::setCamera(const render::Camera* camera)
+{
+	CtrlEditBox::setCamera(camera);
+
+	if (_ctrlCursor) _ctrlCursor->setCamera(camera);
+	if (_ctrlText) _ctrlText->setCamera(camera);
+	if (_ctrlTextPlaceholder) _ctrlTextPlaceholder->setCamera(camera);
+}
+
+void ui::CtrlEditText::setUseDesignCamera(bool bUsed)
+{
+	CtrlEditBox::setUseDesignCamera(bUsed);
+
+	if (_ctrlCursor) _ctrlCursor->setUseDesignCamera(bUsed);
+	if (_ctrlText) _ctrlText->setUseDesignCamera(bUsed);
+	if (_ctrlTextPlaceholder) _ctrlTextPlaceholder->setUseDesignCamera(bUsed);
+}
+
 void ui::CtrlEditText::setPlaceholderString(const std::string& text)
 {
 	_ctrlTextPlaceholder->setString(text);

@@ -231,6 +231,7 @@
     <ClInclude Include="Time\TimeClock.h" />
     <ClInclude Include="Type\Bit.h" />
     <ClInclude Include="Type\import.h" />
+    <ClInclude Include="Type\macros.h" />
     <ClInclude Include="Type\String.h" />
   </ItemGroup>
   <ItemGroup>

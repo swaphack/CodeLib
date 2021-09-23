@@ -215,7 +215,7 @@ namespace render
 		/**
 		*	设置摄像机
 		*/
-		void setCamera(const Camera* camera);
+		virtual void setCamera(const Camera* camera);
 		/**
 		*	获取摄像机
 		*/
@@ -224,6 +224,14 @@ namespace render
 		*	获取实际关联摄像机
 		*/
 		Camera* getRealCamera() const;
+		/**
+		*	使用设计摄像头
+		*/
+		virtual void setUseDesignCamera(bool bUsed);
+		/**
+		*	使用设计摄像头
+		*/
+		bool isUsedDesignCamera() const;
 	public:
 		// 设置所属场景
 		void setScene(Scene* scene);
@@ -234,6 +242,8 @@ namespace render
 		Camera* _camera = nullptr;
 		// 场景
 		Scene* _scene = nullptr;
+		// 使用设计摄像头
+		bool _bUsedDesignCamera = true;
 	};
 	
 }

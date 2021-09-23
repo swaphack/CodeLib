@@ -105,6 +105,25 @@ void ui::CtrlImage::setTexShaderProgram(ShaderProgram* shaderProgram)
 	}
 }
 
+void ui::CtrlImage::setCamera(const render::Camera* camera)
+{
+	CtrlWidget::setCamera(camera);
+	if (_texture2D)
+	{
+		_texture2D->setUseDesignCamera(camera);
+	}
+}
+
+void ui::CtrlImage::setUseDesignCamera(bool bUsed)
+{
+	CtrlWidget::setUseDesignCamera(bUsed);
+
+	if (_texture2D)
+	{
+		_texture2D->setUseDesignCamera(bUsed);
+	}
+}
+
 render::DrawTexture2D* ui::CtrlImage::getRenderNode() const
 {
 	return _texture2D;

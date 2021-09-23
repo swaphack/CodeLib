@@ -8,12 +8,10 @@ Matrix2x2::Matrix2x2()
 
 }
 
-Matrix2x2::Matrix2x2(float a00, float a01, float a10, float a11)
+Matrix2x2::Matrix2x2(float m00, float m01, float m10, float m11)
 {
-	(*this)[0] = a00;
-	(*this)[1] = a01;
-	(*this)[2] = a10;
-	(*this)[3] = a11;
+	this->setValue(0, m00); this->setValue(1, m01); 
+	this->setValue(2, m10); this->setValue(3, m11);
 }
 
 math::Matrix2x2::Matrix2x2(const Matrix2x2& mat)
