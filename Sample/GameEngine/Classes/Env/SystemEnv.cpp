@@ -92,6 +92,8 @@ void SystemEnv::updateCamera()
 			auto size = Tool::getViewSize();
 			float d = sqrt(powf(size.getWidth(), 2) + powf(size.getHeight(), 2));
 			pCamera->setViewDistance(d - 300, d * 300);
+			pCamera->setRotationX(15);
+			pCamera->setPositionY(300);
 			pCamera->setPositionZ(d);
 
 			Utility::loadPrimitiveShader(pCamera->getDebugDraw()->getRenderNode());
@@ -207,11 +209,11 @@ void SystemEnv::addOperateToDesignCamera()
 		}
 		else if (key == sys::BoardKey::KL)
 		{
-			pCamera->setRotationY(pCamera->getRotationY() - _spaceSpeed);
+			pCamera->setRotationY(pCamera->getRotationY() + _spaceSpeed);
 		}
 		else if (key == sys::BoardKey::KJ)
 		{
-			pCamera->setRotationY(pCamera->getRotationY() + _spaceSpeed);
+			pCamera->setRotationY(pCamera->getRotationY() - _spaceSpeed);
 		}
 		else if (key == sys::BoardKey::KK)
 		{
