@@ -125,6 +125,10 @@ namespace render
 		*	初始化其他数据
 		*/
 		void initMeshOtherDetail();
+		/**
+		*	强制更新纹理数据
+		*/
+		void forceUpdateMeshData();
 	protected:
 		/**
 		*	初始化法线数据

@@ -26,6 +26,6 @@ namespace render
 	protected:
 		void onGridChange();
 	protected:
-		int _gradWidth = 10;
+		int _gridWidth = 10;
 	};
 }

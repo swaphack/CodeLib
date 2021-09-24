@@ -43,8 +43,8 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>../System/;../../Lib/include/freetype/;../../Lib/include/;../../Lib/include/fbx;../Physics/;../Math/;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <BrowseInformation>true</BrowseInformation>
+      <AdditionalIncludeDirectories>../System/;../../Lib/include/freetype/;../../Lib/include/;../../Lib/include/fbx;../Physics/;../Algorithm/;../Math/;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <BrowseInformation>false</BrowseInformation>
       <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>false</MinimalRebuild>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -96,6 +96,7 @@
     <ClCompile Include="3d\Environment\PointLight.cpp" />
     <ClCompile Include="3d\Environment\SkyBox.cpp" />
     <ClCompile Include="3d\Environment\SpotLight.cpp" />
+    <ClCompile Include="3d\Environment\Terrian.cpp" />
     <ClCompile Include="3d\Map\LSystem.cpp" />
     <ClCompile Include="3d\ModelFile\Model3DS.cpp" />
     <ClCompile Include="3d\ModelFile\ModelFbx.cpp" />
@@ -308,6 +309,7 @@
     <ClInclude Include="3d\Environment\SkyBox.h" />
     <ClInclude Include="3d\Environment\SpotLight.h" />
     <ClInclude Include="3d\Environment\import.h" />
+    <ClInclude Include="3d\Environment\Terrian.h" />
     <ClInclude Include="3d\import.h" />
     <ClInclude Include="3d\macros.h" />
     <ClInclude Include="3d\Map\common.h" />

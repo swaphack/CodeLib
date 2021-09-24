@@ -24,6 +24,9 @@ bool render::Grid::init()
 	addNotifyListener(NodeNotifyType::GEOMETRY, [this]() {
 		this->onGridChange();
 	});
+
+	this->getMesh()->setDrawMode(DrawMode::LINES);
+
 	return true;
 }
 
@@ -72,19 +75,18 @@ void render::Grid::onGridChange()
 		pIndice[2 * widthCount + i * 2] = 2 * widthCount + i * 2;
 		pIndice[2 * widthCount + i * 2 + 1] = 2 * widthCount + i * 2 + 1;
 	}
-	this->getMesh()->setDrawMode(DrawMode::LINES);
 	this->updateMeshData();
 }
 
 void render::Grid::setGridWidth(int width)
 {
-	_gradWidth = width;
+	_gridWidth = width;
 
 	this->notify(NodeNotifyType::GEOMETRY);
 }
 
 int render::Grid::getGridWidth() const
 {
-	return _gradWidth;
+	return _gridWidth;
 }
 

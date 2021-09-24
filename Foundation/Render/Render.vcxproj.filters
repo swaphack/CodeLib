@@ -603,6 +603,9 @@
     <ClCompile Include="Common\Scene\Cameras.cpp">
       <Filter>Common\Scene</Filter>
     </ClCompile>
+    <ClCompile Include="3d\Environment\Terrian.cpp">
+      <Filter>3d\Environment</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Common\Node\import.h">
@@ -1388,6 +1391,9 @@
     </ClInclude>
     <ClInclude Include="Common\Scene\DimensionsType.h">
       <Filter>Common\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="3d\Environment\Terrian.h">
+      <Filter>3d\Environment</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

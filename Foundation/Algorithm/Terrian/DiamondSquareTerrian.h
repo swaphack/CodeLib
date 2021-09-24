@@ -59,6 +59,10 @@ namespace alg
         ~DiamondSquareTerrian();
     public:
         /**
+        *   Æ«ÒÆÖµ
+        */
+        void setOffset(float min, float max);
+        /**
         *   ÉèÖÃ¶¥µã
         */
         void setPoints(const math::Vector3& leftBottom, const math::Vector3& rightBottom,
@@ -93,6 +97,6 @@ namespace alg
         /**
         *    Æ«ÒÆ
         */
-        math::Vector3 _offset;
+        math::FloatInterval _offset;
     };
 }

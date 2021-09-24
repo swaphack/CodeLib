@@ -9,6 +9,12 @@ alg::DiamondSquareTerrian::~DiamondSquareTerrian()
 {
 }
 
+void alg::DiamondSquareTerrian::setOffset(float min, float max)
+{
+    _offset.setMinValue(min);
+    _offset.setMaxThreshold(max);
+}
+
 void alg::DiamondSquareTerrian::setPoints(const math::Vector3& leftBottom, const math::Vector3& rightBottom, const math::Vector3& rightTop, const math::Vector3& leftTop)
 {
     _leftBottom = leftBottom;
@@ -19,8 +25,8 @@ void alg::DiamondSquareTerrian::setPoints(const math::Vector3& leftBottom, const
 
 std::vector<alg::DiamondSquareTerrian::Quadrilateral> alg::DiamondSquareTerrian::createQuads(int count)
 {
-    math::Vector3 offset0 = _offset;
-    math::Vector3 offset1 = -1.0f * _offset;
+    math::Vector3 offset0(0, _offset.getMinValue(), 0);
+    math::Vector3 offset1(0, _offset.getMaxValue(), 0);
 
     math::Vector3 minOffset, maxOffset;
     TerrianHelper::getRange(offset0, offset1, minOffset, maxOffset);

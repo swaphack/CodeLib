@@ -53,6 +53,10 @@ bool render::DrawNode::init()
 		this->onDrawNodeColorChange();
 	});
 
+	addNotifyListener(NodeNotifyType::MESH, [this]() {
+		this->updateMeshData();
+	});
+
 	initBufferObject();
 
 	return true;
@@ -175,14 +179,6 @@ void render::DrawNode::setShaderProgram(ShaderProgram* program)
 void render::DrawNode::setShaderProgramFunc(const ShaderProgramFunc& func)
 {
 	_material->setProgramFunc(func);
-}
-
-void render::DrawNode::forceUpdateMeshData()
-{
-	if (_mesh == nullptr) return;
-
-	_mesh->initMeshOtherDetail();
-	_mesh->updateBufferData();
 }
 
 void render::DrawNode::beforeDraw()

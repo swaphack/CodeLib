@@ -97,10 +97,6 @@ namespace render
 		*	设置着色器处理函数
 		*/
 		void setShaderProgramFunc(const ShaderProgramFunc& func);
-		/**
-		*	强制更新纹理数据
-		*/
-		void forceUpdateMeshData();
 	protected:
 		/**
 		*	绘制前工作

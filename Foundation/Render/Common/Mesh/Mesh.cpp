@@ -62,10 +62,11 @@ void render::Mesh::setVertices(int len, const float* vertexes, int unitSize)
 void render::Mesh::setVertices(const std::vector<math::Vector3>& points)
 {
 	int nCount = points.size();
-	auto pVertice = (float*)getMeshDetail()->createVertices(nCount, sizeof(float), 3);
+	int nLength = 3;
+	auto pVertice = (float*)getMeshDetail()->createVertices(nCount, sizeof(float), nLength);
 	for (int i = 0; i < nCount; i++)
 	{
-		memcpy(pVertice + i * 3, points[i].getValue(), 3 * sizeof(float));
+		memcpy(pVertice + i * nLength, points[i].getValue(), nLength * sizeof(float));
 	}
 }
 
@@ -77,10 +78,11 @@ void render::Mesh::setNormals(int len, const float* normals, int unitSize)
 void render::Mesh::setNormals(const std::vector<math::Vector3>& normals)
 {
 	int nCount = normals.size();
-	auto pVertice = (float*)getMeshDetail()->createNormals(nCount, sizeof(float), 3);
+	int nLength = 3;
+	auto pVertice = (float*)getMeshDetail()->createNormals(nCount, sizeof(float), nLength);
 	for (int i = 0; i < nCount; i++)
 	{
-		memcpy(pVertice + i * 3, normals[i].getValue(), 3 * sizeof(float));
+		memcpy(pVertice + i * nLength, normals[i].getValue(), nLength * sizeof(float));
 	}
 }
 
@@ -92,10 +94,11 @@ void render::Mesh::setColors(int len, const float* colors, int unitSize)
 void render::Mesh::setColors(const std::vector<phy::Color4F>& colors)
 {
 	int nCount = colors.size();
-	auto pVertice = (float*)getMeshDetail()->createColors(nCount, sizeof(float), 4);
+	int nLength = 4;
+	auto pVertice = (float*)getMeshDetail()->createColors(nCount, sizeof(float), nLength);
 	for (int i = 0; i < nCount; i++)
 	{
-		memcpy(pVertice + i * 4, colors[i].getValue(), 4 * sizeof(float));
+		memcpy(pVertice + i * nLength, colors[i].getValue(), nLength * sizeof(float));
 	}
 }
 
@@ -107,10 +110,11 @@ void render::Mesh::setUVs(int len, const float* texCoords, int unitSize)
 void render::Mesh::setUVs(const std::vector<math::Vector2>& uvs)
 {
 	int nCount = uvs.size();
-	auto pVertice = (float*)getMeshDetail()->createUVs(nCount, sizeof(float), 2);
+	int nLength = 2;
+	auto pVertice = (float*)getMeshDetail()->createUVs(nCount, sizeof(float), nLength);
 	for (int i = 0; i < nCount; i++)
 	{
-		memcpy(pVertice + i * 2, uvs[i].getValue(), 2 * sizeof(float));
+		memcpy(pVertice + i * nLength, uvs[i].getValue(), nLength * sizeof(float));
 	}
 }
 
@@ -122,11 +126,11 @@ void render::Mesh::setIndices(int size, const uint32_t* indices, int unitSize)
 void render::Mesh::setIndices(const std::vector<int>& indices)
 {
 	int nCount = indices.size();
-	auto pVertice = (float*)getMeshDetail()->createIndices(nCount, sizeof(uint32_t), 1);
-	for (int i = 0; i < nCount; i++)
-	{
-		memcpy(pVertice + i, &indices[i], sizeof(uint32_t));
-	}
+	int nLength =1;
+
+	auto pVertice = (uint32_t*)getMeshDetail()->createIndices(nCount, sizeof(uint32_t), nLength);
+
+	memcpy(pVertice, &indices[0], nCount * sizeof(uint32_t));
 }
 
 void render::Mesh::setDrawMode(DrawMode mode)
@@ -381,6 +385,12 @@ void render::Mesh::initMeshOtherDetail()
 			this->initDetailTangentData();
 		}
 	}
+}
+
+void render::Mesh::forceUpdateMeshData()
+{
+	this->initMeshOtherDetail();
+	this->updateBufferData();
 }
 
 void render::Mesh::initDetailNormalData()

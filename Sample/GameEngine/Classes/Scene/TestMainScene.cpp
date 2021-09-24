@@ -31,7 +31,7 @@ bool TestMainScene::init()
 void TestMainScene::initNodes()
 {
 
-	this->addChild(CREATE_NODE(TestModelNode));
+	//this->addChild(CREATE_NODE(TestModelNode));
 
 	//this->addChild(CREATE_NODE(TestShaderNode));
 	//this->addChild(CREATE_NODE(TestTextNode));

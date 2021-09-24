@@ -17,9 +17,9 @@ void SystemEnv::initNodes()
 	this->updateCamera();
 	this->addFPS();
 	this->addCoordinate();
-
+	
 	this->addGrid();
-
+	
 	this->init3DSkyBox();
 
 	this->addOperateToDesignCamera();
@@ -109,7 +109,7 @@ void SystemEnv::updateCamera()
 			pSphere->setVolume(50, 50, 50);
 			pSphere->setCamera(pCamera);
 			pCamera->addChild(pSphere);
-
+			
 			Utility::loadDefaultShader(pSphere);
 
 		}
@@ -131,7 +131,7 @@ void SystemEnv::updateCamera()
 			pSphere->setVolume(40, 40, 40);
 			pSphere->setCamera(pCamera);
 			pCamera->addChild(pSphere);
-
+			
 			Utility::loadDefaultShader(pSphere);
 		}
 		
@@ -150,7 +150,7 @@ void SystemEnv::updateCamera()
 			pSphere->setVolume(30, 30, 30);
 			pSphere->setCamera(pCamera);
 			pCamera->addChild(pSphere);
-
+			
 			Utility::loadDefaultShader(pSphere);
 		}
 	}
@@ -306,17 +306,6 @@ void SystemEnv::init3DSkyBox()
 	this->addChild(pSkyBox);
 
 	Utility::loadShaderVF(pSkyBox, "Shader/env/skybox.vs", "Shader/env/skybox.fs");
-	/*
-	pSkyBox->setShaderProgramFunc([pSkyBox](ShaderProgram* program) {
-		auto pUniform = program->getUniform("matrix.view");
-		if (pUniform)
-		{
-			math::Matrix4x4 viewMat = pSkyBox->getCamera()->getViewMatrix();
-			math::Matrix4x4 mat = math::Matrix3x3(viewMat);
-			pUniform->setMatrix4x4(mat);
-		}
-	});
-	*/
 }
 
 void SystemEnv::init2DSkyBox()

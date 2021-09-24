@@ -34,6 +34,8 @@ namespace render
 		VIEWSIZE,
 		// 文件改变
 		FILE,
+		// 网格
+		MESH,
 	};
 
 	// 推送委托
