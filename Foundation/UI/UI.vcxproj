@@ -75,6 +75,7 @@
     <ClInclude Include="Display\CtrlFile.h" />
     <ClInclude Include="Display\import.h" />
     <ClInclude Include="Display\UIProxy.h" />
+    <ClInclude Include="Display\UIShaderHelper.h" />
     <ClInclude Include="Layout\import.h" />
     <ClInclude Include="Layout\LayoutItem.h" />
     <ClInclude Include="Layout\LayoutItemBase.h" />
@@ -122,6 +123,7 @@
   <ItemGroup>
     <ClCompile Include="Display\CtrlFile.cpp" />
     <ClCompile Include="Display\UIProxy.cpp" />
+    <ClCompile Include="Display\UIShaderHelper.cpp" />
     <ClCompile Include="Layout\LayoutItem.cpp" />
     <ClCompile Include="Layout\LayoutItemBase.cpp" />
     <ClCompile Include="Loader\2dLoader\ButtonLoader.cpp" />

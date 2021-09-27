@@ -17,9 +17,8 @@ void TestXFBNode::initNodes()
 	const char* varings[] = { "out_addValue", "out_subValue" };
 
 	render::GLDebug::showError();
-	auto xfbObj = CREATE_OBJECT(render::TransformFeedbackBufferObject);
-	xfbObj->loadVertexProgram("Shader/xfb/xfb_add.vs");
-	xfbObj->setWatchVaryings(2, varings);
+	auto xfbObj = CREATE_OBJECT(render::XFeedback);
+	xfbObj->loadVertexProgram("Shader/xfb/xfb_add.vs", 2, varings);
 	xfbObj->setWatchPrimitiveMode(TransformFeedbackPrimitiveMode::POINTS, 1);
 	xfbObj->setBufferSize(2 * UNIT_SIZE);
 	xfbObj->setTargetBufferRange(0, 0, 2 * UNIT_SIZE);

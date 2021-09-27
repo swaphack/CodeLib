@@ -139,6 +139,7 @@
     <ClCompile Include="Common\Buffer\TextureBuffer.cpp" />
     <ClCompile Include="Common\Buffer\TransformFeedbackBuffer.cpp" />
     <ClCompile Include="Common\Buffer\UniformBuffer.cpp" />
+    <ClCompile Include="Common\DrawNode\DrawCore.cpp" />
     <ClCompile Include="Common\DrawNode\DrawNode.cpp" />
     <ClCompile Include="Common\DrawNode\DrawNode2D.cpp" />
     <ClCompile Include="Common\DrawNode\DrawNode3D.cpp" />
@@ -147,7 +148,6 @@
     <ClCompile Include="Common\DrawNode\FragmentOperator.cpp" />
     <ClCompile Include="Common\DrawNode\MultiDrawNode.cpp" />
     <ClCompile Include="Common\DrawNode\TessilationProtocol.cpp" />
-    <ClCompile Include="Common\DrawNode\UniformShaderApply.cpp" />
     <ClCompile Include="Common\Fragment\FragmentBlend.cpp" />
     <ClCompile Include="Common\Fragment\FragmentDepthTest.cpp" />
     <ClCompile Include="Common\Fragment\FragmentHandle.cpp" />
@@ -169,7 +169,9 @@
     <ClCompile Include="Common\Input\TouchManager.cpp" />
     <ClCompile Include="Common\Input\TouchProtocol.cpp" />
     <ClCompile Include="Common\Material\Material.cpp" />
+    <ClCompile Include="Common\Material\MaterialSetting.cpp" />
     <ClCompile Include="Common\Material\Materials.cpp" />
+    <ClCompile Include="Common\Material\MaterialGlobalParameter.cpp" />
     <ClCompile Include="Common\Mesh\Mesh.cpp" />
     <ClCompile Include="Common\Mesh\Meshes.cpp" />
     <ClCompile Include="Common\Node\ComputeQueue.cpp" />
@@ -230,8 +232,8 @@
     <ClCompile Include="Common\VAO\VertexAttribPointer.cpp" />
     <ClCompile Include="Common\View\MultiSampling.cpp" />
     <ClCompile Include="Common\View\ViewPort.cpp" />
-    <ClCompile Include="Common\XFB\TransformFeedback.cpp" />
-    <ClCompile Include="Common\XFB\TransformFeedbackBufferObject.cpp" />
+    <ClCompile Include="Common\XFB\XFBBufferObject.cpp" />
+    <ClCompile Include="Common\XFB\XFeedback.cpp" />
     <ClCompile Include="GPU\GPUCalculator.cpp" />
     <ClCompile Include="GPU\GPUComputeObject.cpp" />
     <ClCompile Include="Graphic\Command\DrawCommand.cpp" />
@@ -267,7 +269,7 @@
     <ClCompile Include="Particle\PariticleNode.cpp" />
     <ClCompile Include="Particle\ParticleData.cpp" />
     <ClCompile Include="Particle\ParticleProtocol.cpp" />
-    <ClCompile Include="Particle\TransformFeedbackParticleNode.cpp" />
+    <ClCompile Include="Particle\FeedbackParticleNode.cpp" />
     <ClCompile Include="Platform\DeviceProxy.cpp" />
     <ClCompile Include="Platform\Windows\GlutWindow.cpp" />
     <ClCompile Include="Platform\Windows\GLWindow.cpp" />
@@ -366,6 +368,7 @@
     <ClInclude Include="Common\Buffer\TextureBuffer.h" />
     <ClInclude Include="Common\Buffer\TransformFeedbackBuffer.h" />
     <ClInclude Include="Common\Buffer\UniformBuffer.h" />
+    <ClInclude Include="Common\DrawNode\DrawCore.h" />
     <ClInclude Include="Common\DrawNode\DrawNode.h" />
     <ClInclude Include="Common\DrawNode\DrawNode2D.h" />
     <ClInclude Include="Common\DrawNode\DrawNode3D.h" />
@@ -376,7 +379,6 @@
     <ClInclude Include="Common\DrawNode\MultiDrawNode.h" />
     <ClInclude Include="Common\DrawNode\import.h" />
     <ClInclude Include="Common\DrawNode\TessilationProtocol.h" />
-    <ClInclude Include="Common\DrawNode\UniformShaderApply.h" />
     <ClInclude Include="Common\Fragment\FragmentBlend.h" />
     <ClInclude Include="Common\Fragment\FragmentDepthTest.h" />
     <ClInclude Include="Common\Fragment\FragmentHandle.h" />
@@ -406,8 +408,11 @@
     <ClInclude Include="Common\Input\TouchProtocol.h" />
     <ClInclude Include="Common\macros.h" />
     <ClInclude Include="Common\Material\import.h" />
+    <ClInclude Include="Common\Material\macros.h" />
     <ClInclude Include="Common\Material\Material.h" />
+    <ClInclude Include="Common\Material\MaterialSetting.h" />
     <ClInclude Include="Common\Material\Materials.h" />
+    <ClInclude Include="Common\Material\MaterialGlobalParameter.h" />
     <ClInclude Include="Common\Mesh\import.h" />
     <ClInclude Include="Common\Mesh\Mesh.h" />
     <ClInclude Include="Common\Mesh\Meshes.h" />
@@ -485,8 +490,8 @@
     <ClInclude Include="Common\View\ViewPort.h" />
     <ClInclude Include="Common\View\ViewParameter.h" />
     <ClInclude Include="Common\XFB\import.h" />
-    <ClInclude Include="Common\XFB\TransformFeedback.h" />
-    <ClInclude Include="Common\XFB\TransformFeedbackBufferObject.h" />
+    <ClInclude Include="Common\XFB\XFBBufferObject.h" />
+    <ClInclude Include="Common\XFB\XFeedback.h" />
     <ClInclude Include="ext-config.h" />
     <ClInclude Include="GPU\GPUCalculator.h" />
     <ClInclude Include="GPU\GPUComputeObject.h" />
@@ -530,7 +535,7 @@
     <ClInclude Include="Particle\PariticleNode.h" />
     <ClInclude Include="Particle\ParticleData.h" />
     <ClInclude Include="Particle\ParticleProtocol.h" />
-    <ClInclude Include="Particle\TransformFeedbackParticleNode.h" />
+    <ClInclude Include="Particle\FeedbackParticleNode.h" />
     <ClInclude Include="Platform\DeviceProxy.h" />
     <ClInclude Include="Platform\import.h" />
     <ClInclude Include="Platform\Windows\GlutWindow.h" />

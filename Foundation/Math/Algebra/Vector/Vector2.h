@@ -13,6 +13,7 @@ namespace math
 	public:
 		Vector2();
 		Vector2(float x, float y);
+		Vector2(const float* value);
 		Vector2(const Vector<float, 2>& vector);
 		Vector2(const Vector2& point);
 		virtual ~Vector2();

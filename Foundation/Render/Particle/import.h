@@ -1,5 +1,5 @@
 #pragma once
 
 #include "PariticleNode.h"
-#include "TransformFeedbackParticleNode.h"
+#include "FeedbackParticleNode.h"
 #include "ComputeParticleNode.h"

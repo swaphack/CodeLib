@@ -1,4 +1,4 @@
-#include "UniformShaderApply.h"
+#include "DrawCore.h"
 
 #include "Common/Shader/import.h"
 #include "Common/Node/import.h"
@@ -15,46 +15,121 @@
 #include "Common/Material/import.h"
 #include "2d/Primitive/PrimitiveNode.h"
 
-render::UniformShaderApply::UniformShaderApply()
+render::DrawCore::DrawCore()
 {
-
 }
 
-render::UniformShaderApply::~UniformShaderApply()
+render::DrawCore::~DrawCore()
 {
-
 }
 
-void render::UniformShaderApply::startUpdateShaderUniformValue(Node* node, ShaderProgram* program, Mesh* pMesh, Material* pMaterial, DrawTextureCache* textureCache)
+void render::DrawCore::beginApply(const DrawCoreParameter& parameter)
 {
-	if (node == nullptr || program == nullptr || pMesh == nullptr || pMaterial == nullptr || textureCache == nullptr)
+	if (parameter.material == nullptr || parameter.textureCache == nullptr)
+	{
+		return;
+	}
+	parameter.material->applyMaterial();
+
+	const auto pDetail = parameter.material->getMaterialDetail();
+	if (pDetail == nullptr)
+	{
+		return;
+	}
+	auto pTexture = parameter.textureCache->getTexture(pDetail->getAmbientTextureMap());
+	if (pTexture)
+	{
+		pTexture->enableTexture(0);
+	}
+#if 0
+	nTextureID = this->getTexture(pDetail->getDiffuseTextureMap());
+	GLTexture::activeTexture(ActiveTextureName::TEXTURE1);
+	GLTexture::bindTexture2D(nTextureID);
+
+	nTextureID = this->getTexture(pDetail->getSpecularTextureMap());
+	GLTexture::activeTexture(ActiveTextureName::TEXTURE2);
+	GLTexture::bindTexture2D(nTextureID);
+#endif // 0
+}
+
+void render::DrawCore::endApply(const DrawCoreParameter& parameter)
+{
+	if (parameter.material == nullptr || parameter.textureCache == nullptr)
+	{
+		return;
+	}
+	const auto pDetail = parameter.material->getMaterialDetail();
+	if (pDetail == nullptr)
+	{
+		return;
+	}
+	auto pTexture = parameter.textureCache->getTexture(pDetail->getAmbientTextureMap());
+	if (pTexture)
+	{
+		pTexture->unbindTexture();
+	}
+#if 0
+	nTextureID = this->getTexture(pDetail->getDiffuseTextureMap());
+	GLTexture::activeTexture(ActiveTextureName::TEXTURE1);
+	GLTexture::bindTexture2D(nTextureID);
+
+	nTextureID = this->getTexture(pDetail->getSpecularTextureMap());
+	GLTexture::activeTexture(ActiveTextureName::TEXTURE2);
+	GLTexture::bindTexture2D(nTextureID);
+#endif // 0
+}
+
+void render::DrawCore::beginApplyWithShader(const DrawCoreParameter& parameter)
+{
+	if (parameter.program == nullptr || parameter.material == nullptr)
 	{
 		return;
 	}
 
-	updateEnvUniformVallue(node, program);
-	updateMatrixUniformValue(node, program);
-
-	applyLightShader(node, program);
-
-	updateMaterialUniformValue(program, pMaterial, textureCache);
-	updateTexturesUnifromValue(program, pMaterial, textureCache);
+	parameter.program->use();
+	GLDebug::showError();
+	this->startUpdateShaderUniformValue(parameter);
+	GLDebug::showError();
+	this->startUpdateShaderVertexValue(parameter);
+	GLDebug::showError();
+	parameter.material->runProgramFunc();
+	GLDebug::showError();
 }
 
-void render::UniformShaderApply::startUpdateShaderVertexValue(ShaderProgram* program, Mesh* pMesh)
+void render::DrawCore::endApplyWithShader(const DrawCoreParameter& parameter)
 {
-	if (pMesh == nullptr)
+	this->endUpdateShaderUniformValue(parameter);
+	this->endUpdateShaderVertexValue(parameter);
+
+	if (parameter.program)
+	{
+		parameter.program->unuse();
+	}
+}
+
+void render::DrawCore::startUpdateShaderUniformValue(const DrawCoreParameter& parameter)
+{
+	updateEnvUniformVallue(parameter);
+	updateMatrixUniformValue(parameter);
+
+	applyLightShader(parameter);
+
+	updateMaterialUniformValue(parameter);
+	updateTexturesUnifromValue(parameter);
+
+	updateSelfDefinedUniformValue(parameter);
+}
+
+void render::DrawCore::startUpdateShaderVertexValue(const DrawCoreParameter& parameter)
+{
+	if (parameter.mesh == nullptr || parameter.program == nullptr 
+		|| parameter.material == nullptr || parameter.material->getMaterialSetting() == nullptr)
 	{
 		return;
 	}
 
-	if (program == nullptr)
-	{
-		return;
-	}
-
-	auto detail = pMesh->getMeshDetail();
-	auto vao = pMesh->getVertexArrayObject();
+	auto detail = parameter.mesh->getMeshDetail();
+	auto vao = parameter.mesh->getVertexArrayObject();
 	GLDebug::showError();
 	vao->bindVertexArray();
 	GLDebug::showError();
@@ -74,8 +149,10 @@ void render::UniformShaderApply::startUpdateShaderVertexValue(ShaderProgram* pro
 	uint32_t nTangentSize = tangents.getSize();
 	uint32_t nBitangentSize = bitangents.getSize();
 
+	auto program = parameter.program;
+
 	int nOffset = 0;
-	for (auto item : _vertexAttribIndices)
+	for (auto item : parameter.material->getMaterialSetting()->getAttribs())
 	{
 		if (item.first == VertexDataType::POSITION)
 		{
@@ -174,27 +251,25 @@ void render::UniformShaderApply::startUpdateShaderVertexValue(ShaderProgram* pro
 	GLDebug::showError();
 }
 
-void render::UniformShaderApply::endUpdateShaderUniformValue(ShaderProgram* program, Material* pMaterial, DrawTextureCache* textureCache)
+void render::DrawCore::endUpdateShaderUniformValue(const DrawCoreParameter& parameter)
 {
 	GLState::setLineWidth(1);
-	releaseMaterialUniformValue(program, pMaterial, textureCache);
-	releaseTextureUniformValue(program, pMaterial, textureCache);
+	releaseMaterialUniformValue(parameter);
+	releaseTextureUniformValue(parameter);
 }
 
-void render::UniformShaderApply::endUpdateShaderVertexValue(ShaderProgram* program, Mesh* pMesh)
+void render::DrawCore::endUpdateShaderVertexValue(const DrawCoreParameter& parameter)
 {
-	if (pMesh == nullptr)
+	if (parameter.mesh == nullptr || parameter.program == nullptr 
+		|| parameter.material == nullptr || parameter.material->getMaterialSetting() == nullptr)
 	{
 		return;
 	}
 
-	if (program == nullptr)
-	{
-		return;
-	}
+	auto program = parameter.program;
 
-	auto vao = pMesh->getVertexArrayObject();
-	for (auto item : _vertexAttribIndices)
+	auto vao = parameter.mesh->getVertexArrayObject();
+	for (auto item : parameter.material->getMaterialSetting()->getAttribs())
 	{
 		auto pAttrib = program->getAttrib(item.second);
 		if (!pAttrib) continue;
@@ -209,24 +284,26 @@ void render::UniformShaderApply::endUpdateShaderVertexValue(ShaderProgram* progr
 	vao->unbindBuffer();
 }
 
-void render::UniformShaderApply::updateEnvUniformVallue(Node* node, ShaderProgram* program)
+void render::DrawCore::updateEnvUniformVallue(const DrawCoreParameter& parameter)
 {
-	if (program == nullptr || node == nullptr)
+	if (parameter.program == nullptr || parameter.node == nullptr 
+		|| parameter.material == nullptr || parameter.material->getMaterialSetting() == nullptr)
 	{
 		return;
 	}
-	auto pCamera = getCamera(node);
+	auto pCamera = getCamera(parameter.node);
 	if (pCamera == nullptr)
 	{
 		return;
 	}
-	auto pPrimitiveNode = node->as<PrimitiveNode>();
+	auto pPrimitiveNode = parameter.node->as<PrimitiveNode>();
 	if (pPrimitiveNode)
 	{
 		GLState::setLineWidth(pPrimitiveNode->getPointSize());
 	}
+	auto program = parameter.program;
 	math::Vector3 viewPos = pCamera->getWorldMatrix().getPosition();
-	for (auto item : _mapEnvUniform)
+	for (auto item : parameter.material->getMaterialSetting()->getEnvUniforms())
 	{
 		auto pUniform = program->getUniform(item.second);
 		if (!pUniform)
@@ -240,14 +317,13 @@ void render::UniformShaderApply::updateEnvUniformVallue(Node* node, ShaderProgra
 		else if (item.first == EnvUniformType::LIGHT_COUNT)
 		{
 			pUniform->setValue((int)G_ENVIRONMENT->getAllLights().size());
-		}	
+		}
 		else if (item.first == EnvUniformType::GAMMA)
 		{
 			pUniform->setValue(G_ENVIRONMENT->getGamma());
 		}
 		else if (item.first == EnvUniformType::POINT_SIZE)
 		{
-			auto pPrimitiveNode = node->as<PrimitiveNode>();
 			if (pPrimitiveNode)
 			{
 				pUniform->setValue(pPrimitiveNode->getPointSize());
@@ -256,14 +332,17 @@ void render::UniformShaderApply::updateEnvUniformVallue(Node* node, ShaderProgra
 	}
 }
 
-void render::UniformShaderApply::updateMatrixUniformValue(Node* node, ShaderProgram* program)
+void render::DrawCore::updateMatrixUniformValue(const DrawCoreParameter& parameter)
 {
-	if (program == nullptr || node == nullptr)
+	if (parameter.node == nullptr || parameter.program == nullptr
+		|| parameter.material == nullptr || parameter.material->getMaterialSetting() == nullptr)
 	{
 		return;
 	}
 
-	auto pCamera = getCamera(node);
+	auto program = parameter.program;
+
+	auto pCamera = getCamera(parameter.node);
 	if (pCamera == nullptr)
 	{
 		return;
@@ -271,11 +350,11 @@ void render::UniformShaderApply::updateMatrixUniformValue(Node* node, ShaderProg
 
 	math::Matrix4x4 projMat = pCamera->getProjectMatrix();
 	math::Matrix4x4 viewMat = pCamera->getViewMatrix();
-	math::Matrix4x4 modelMat = getWorldMatrix(node);
+	math::Matrix4x4 modelMat = getWorldMatrix(parameter.node);
 
 	math::Matrix3x3 normalMat = modelMat.getInverse().getTranspose();
 
-	for (auto item : _mapMatrixUniform)
+	for (auto item : parameter.material->getMaterialSetting()->getMatrixUniforms())
 	{
 		auto pUniform = program->getUniform(item.second);
 		if (!pUniform)
@@ -303,19 +382,25 @@ void render::UniformShaderApply::updateMatrixUniformValue(Node* node, ShaderProg
 	}
 }
 
-void render::UniformShaderApply::updateMaterialUniformValue(ShaderProgram* program, Material* pMaterial, DrawTextureCache* textureCache)
+void render::DrawCore::updateMaterialUniformValue(const DrawCoreParameter& parameter)
 {
-	if (program == nullptr || pMaterial == nullptr)
+	if (parameter.node == nullptr || parameter.program == nullptr
+		|| parameter.textureCache == nullptr
+		|| parameter.material == nullptr || parameter.material->getMaterialSetting() == nullptr)
 	{
 		return;
 	}
-	const auto pDetail = pMaterial->getMaterialDetail();
+
+	const auto pDetail = parameter.material->getMaterialDetail();
 	if (pDetail == nullptr)
 	{
 		return;
 	}
+	auto program = parameter.program;
+	auto textureCache = parameter.textureCache;
+
 	GLDebug::showError();
-	for (auto item : _mapMaterialUniform)
+	for (auto item : parameter.material->getMaterialSetting()->getMaterialUniforms())
 	{
 		auto pUniform = program->getUniform(item.second);
 		if (!pUniform)
@@ -461,18 +546,24 @@ void render::UniformShaderApply::updateMaterialUniformValue(ShaderProgram* progr
 	}
 }
 
-void render::UniformShaderApply::updateTexturesUnifromValue(ShaderProgram* program, Material* pMaterial, DrawTextureCache* textureCache)
+void render::DrawCore::updateTexturesUnifromValue(const DrawCoreParameter& parameter)
 {
-	if (program == nullptr)
+	if (parameter.program == nullptr
+		|| parameter.textureCache == nullptr
+		|| parameter.material == nullptr || parameter.material->getMaterialSetting() == nullptr)
 	{
 		return;
 	}
-	const auto pDetail = pMaterial->getMaterialDetail();
+
+	const auto pDetail = parameter.material->getMaterialDetail();
 	if (pDetail == nullptr)
 	{
 		return;
 	}
-	for (auto item : _mapTextureUniform)
+	auto program = parameter.program;
+	auto textureCache = parameter.textureCache;
+
+	for (auto item : parameter.material->getMaterialSetting()->getTextureUniforms())
 	{
 		auto pUniform = program->getUniform(item.second);
 		if (!pUniform)
@@ -597,19 +688,23 @@ void render::UniformShaderApply::updateTexturesUnifromValue(ShaderProgram* progr
 	}
 }
 
-void render::UniformShaderApply::releaseMaterialUniformValue(ShaderProgram* program, Material* pMaterial, DrawTextureCache* textureCache)
+void render::DrawCore::releaseMaterialUniformValue(const DrawCoreParameter& parameter)
 {
-	if (program == nullptr || pMaterial == nullptr)
+	if (parameter.program == nullptr
+		|| parameter.textureCache == nullptr
+		|| parameter.material == nullptr || parameter.material->getMaterialSetting() == nullptr)
 	{
 		return;
 	}
 
-	const auto pDetail = pMaterial->getMaterialDetail();
+	const auto pDetail = parameter.material->getMaterialDetail();
 	if (pDetail == nullptr)
 	{
 		return;
 	}
-	for (auto item : _mapMaterialUniform)
+	auto program = parameter.program;
+	auto textureCache = parameter.textureCache;
+	for (auto item : parameter.material->getMaterialSetting()->getMaterialUniforms())
 	{
 		auto pUniform = program->getUniform(item.second);
 		if (!pUniform)
@@ -694,19 +789,23 @@ void render::UniformShaderApply::releaseMaterialUniformValue(ShaderProgram* prog
 	GLDebug::showError();
 }
 
-void render::UniformShaderApply::releaseTextureUniformValue(ShaderProgram* program, Material* pMaterial, DrawTextureCache* textureCache)
+void render::DrawCore::releaseTextureUniformValue(const DrawCoreParameter& parameter)
 {
-	if (program == nullptr || pMaterial == nullptr)
+	if (parameter.program == nullptr
+		|| parameter.textureCache == nullptr
+		|| parameter.material == nullptr || parameter.material->getMaterialSetting() == nullptr)
 	{
 		return;
 	}
 
-	const auto pDetail = pMaterial->getMaterialDetail();
+	const auto pDetail = parameter.material->getMaterialDetail();
 	if (pDetail == nullptr)
 	{
 		return;
 	}
-	for (auto item : _mapTextureUniform)
+	auto program = parameter.program;
+	auto textureCache = parameter.textureCache;
+	for (auto item : parameter.material->getMaterialSetting()->getTextureUniforms())
 	{
 		auto pUniform = program->getUniform(item.second);
 		if (!pUniform)
@@ -748,114 +847,12 @@ void render::UniformShaderApply::releaseTextureUniformValue(ShaderProgram* progr
 	}
 }
 
-void render::UniformShaderApply::addVertexData(VertexDataType vat, const std::string& name)
+
+void render::DrawCore::applyLightShader(const DrawCoreParameter& parameter)
 {
-	_vertexAttribIndices[vat] = name;
-}
+	if (parameter.node == nullptr) return;
 
-std::string render::UniformShaderApply::getVertexName(VertexDataType vat) const
-{
-	auto it = _vertexAttribIndices.find(vat);
-	if (it == _vertexAttribIndices.end())
-	{
-		return "";
-	}
-
-	return it->second;
-}
-
-void render::UniformShaderApply::beginApply(Material* pMaterial, DrawTextureCache* textureCache)
-{
-	if (pMaterial == nullptr || textureCache == nullptr)
-	{
-		return;
-	}
-	pMaterial->applyMaterial();
-
-	const auto pDetail = pMaterial->getMaterialDetail();
-	if (pDetail == nullptr)
-	{
-		return;
-	}
-	auto pTexture = textureCache->getTexture(pDetail->getAmbientTextureMap());
-	if (pTexture)
-	{
-		pTexture->enableTexture(0);
-	}
-#if 0
-	nTextureID = this->getTexture(pDetail->getDiffuseTextureMap());
-	GLTexture::activeTexture(ActiveTextureName::TEXTURE1);
-	GLTexture::bindTexture2D(nTextureID);
-
-	nTextureID = this->getTexture(pDetail->getSpecularTextureMap());
-	GLTexture::activeTexture(ActiveTextureName::TEXTURE2);
-	GLTexture::bindTexture2D(nTextureID);
-#endif // 0
-}
-
-void render::UniformShaderApply::endApply(Material* pMaterial, DrawTextureCache* textureCache)
-{
-	if (pMaterial == nullptr || textureCache == nullptr)
-	{
-		return;
-	}
-	const auto pDetail = pMaterial->getMaterialDetail();
-	if (pDetail == nullptr)
-	{
-		return;
-	}
-	auto pTexture = textureCache->getTexture(pDetail->getAmbientTextureMap());
-	if (pTexture)
-	{
-		pTexture->unbindTexture();
-	}
-#if 0
-	nTextureID = this->getTexture(pDetail->getDiffuseTextureMap());
-	GLTexture::activeTexture(ActiveTextureName::TEXTURE1);
-	GLTexture::bindTexture2D(nTextureID);
-
-	nTextureID = this->getTexture(pDetail->getSpecularTextureMap());
-	GLTexture::activeTexture(ActiveTextureName::TEXTURE2);
-	GLTexture::bindTexture2D(nTextureID);
-#endif // 0
-}
-
-void render::UniformShaderApply::beginApplyWithShader(Node* node, ShaderProgram* program, Mesh* pMesh, Material* pMaterial, DrawTextureCache* textureCache)
-{
-	if (node == nullptr || program == nullptr || pMesh == nullptr || pMaterial == nullptr)
-	{
-		return;
-	}
-
-	program->use();
-	GLDebug::showError();
-	this->startUpdateShaderUniformValue(node, program, pMesh, pMaterial, textureCache);
-	GLDebug::showError();
-	this->startUpdateShaderVertexValue(program, pMesh);
-	GLDebug::showError();
-	pMaterial->runProgramFunc();
-	GLDebug::showError();
-}
-
-void render::UniformShaderApply::endApplyWithShader(ShaderProgram* program, Mesh* pMesh, Material* pMaterial, DrawTextureCache* textureCache)
-{
-	if (program == nullptr || pMesh == nullptr || pMaterial == nullptr || textureCache == nullptr)
-	{
-		return;
-	}
-
-	this->endUpdateShaderUniformValue(program, pMaterial, textureCache);
-	this->endUpdateShaderVertexValue(program, pMesh);
-
-	if (program)
-	{
-		program->unuse();
-	}
-}
-
-void render::UniformShaderApply::applyLightShader(Node* node, ShaderProgram* program)
-{
-	LightProtocol* pLight = node->as<LightProtocol>();
+	LightProtocol* pLight = parameter.node->as<LightProtocol>();
 	if (pLight == nullptr)
 	{
 		return;
@@ -865,33 +862,35 @@ void render::UniformShaderApply::applyLightShader(Node* node, ShaderProgram* pro
 	{
 		if (pLight->isSupportedMultiLight())
 		{
-			updateAllLightsUniformValue(node, program);
+			updateAllLightsUniformValue(parameter);
 		}
 		else
 		{
-			updateNearestLightUniformValue(node, program);
+			updateNearestLightUniformValue(parameter);
 		}
 	}
 }
 
-void render::UniformShaderApply::updateNearestLightUniformValue(Node* node, ShaderProgram* program)
+void render::DrawCore::updateNearestLightUniformValue(const DrawCoreParameter& parameter)
 {
-	if (node == nullptr || program == nullptr)
+	if (parameter.node == nullptr || parameter.program == nullptr
+		|| parameter.material == nullptr || parameter.material->getMaterialSetting() == nullptr)
 	{
 		return;
 	}
+
 	if (!G_ENVIRONMENT->hasLight())
 	{
 		return;
 	}
 
-	auto pCamera = getCamera(node);
+	auto pCamera = getCamera(parameter.node);
 	if (pCamera == nullptr)
 	{
 		return;
 	}
 
-	math::Vector3 nodePos = getWorldMatrix(node).getPosition();
+	math::Vector3 nodePos = getWorldMatrix(parameter.node).getPosition();
 	float fPos = -1;
 	Light* pLight = nullptr;
 	const auto& lights = G_ENVIRONMENT->getAllLights();
@@ -923,12 +922,12 @@ void render::UniformShaderApply::updateNearestLightUniformValue(Node* node, Shad
 	halfVector.normalize();
 
 	bool bSupportShadow = false;
-	if (node->is<LightProtocol>())
+	if (parameter.node->is<LightProtocol>())
 	{
-		bSupportShadow = node->as<LightProtocol>()->isCastShadow();
+		bSupportShadow = parameter.node->as<LightProtocol>()->isCastShadow();
 	}
-
-	for (auto item : _mapSingleLightUniform)
+	auto program = parameter.program;
+	for (auto item : parameter.material->getMaterialSetting()->getSingleLightUniforms())
 	{
 		auto pUniform = program->getUniform(item.second);
 		if (!pUniform)
@@ -1049,14 +1048,15 @@ void render::UniformShaderApply::updateNearestLightUniformValue(Node* node, Shad
 	}
 }
 
-void render::UniformShaderApply::updateAllLightsUniformValue(Node* node, ShaderProgram* program)
+void render::DrawCore::updateAllLightsUniformValue(const DrawCoreParameter& parameter)
 {
-	if (node == nullptr || program == nullptr)
+	if (parameter.node == nullptr || parameter.program == nullptr
+		|| parameter.material == nullptr || parameter.material->getMaterialSetting() == nullptr)
 	{
 		return;
 	}
 
-	auto pCamera = getCamera(node);
+	auto pCamera = getCamera(parameter.node);
 	if (pCamera == nullptr)
 	{
 		return;
@@ -1071,26 +1071,25 @@ void render::UniformShaderApply::updateAllLightsUniformValue(Node* node, ShaderP
 
 	const math::Matrix4x4& viewMat = pCamera->getViewMatrix();
 	bool bSupportShadow = false;
-	if (node->is<LightProtocol>())
+	if (parameter.node->is<LightProtocol>())
 	{
-		bSupportShadow = node->as<LightProtocol>()->isCastShadow();
+		bSupportShadow = parameter.node->as<LightProtocol>()->isCastShadow();
 	}
-
+	auto program = parameter.program;
 	math::Vector3 viewPos = pCamera->getWorldMatrix().getPosition();
 	for (auto light : mapLights)
 	{
 		auto pLight = light.second;
 		int index = light.first;
 
-		
+
 		math::Vector3 lightPos = pLight->getWorldMatrix().getPosition();
-		math::Vector3 nodePos = getWorldMatrix(node).getPosition();
+		math::Vector3 nodePos = getWorldMatrix(parameter.node).getPosition();
 		math::Vector3 viewDirection = viewPos - nodePos;
 		math::Vector3 lightDirection = lightPos - nodePos;
 		math::Vector3 halfVector = lightDirection + viewDirection;
-		
 
-		for (auto item : _mapMultiLightsUniform)
+		for (auto item : parameter.material->getMaterialSetting()->getMultiLightsUniforms())
 		{
 			std::string text = getCString(item.second.c_str(), index);
 			auto pUniform = program->getUniform(text);
@@ -1212,128 +1211,72 @@ void render::UniformShaderApply::updateAllLightsUniformValue(Node* node, ShaderP
 	}
 }
 
-void render::UniformShaderApply::removeVertexDatas()
+void render::DrawCore::updateSelfDefinedUniformValue(const DrawCoreParameter& parameter)
 {
-	_vertexAttribIndices.clear();
-}
-
-std::string render::UniformShaderApply::getUniformName(MultiLightsUniformType vut) const
-{
-	auto it = _mapMultiLightsUniform.find(vut);
-	if (it == _mapMultiLightsUniform.end())
+	if (parameter.program == nullptr
+		|| parameter.material == nullptr || parameter.material->getMaterialSetting() == nullptr)
 	{
-		return "";
+		return;
 	}
 
-	return it->second;
-}
-
-std::string render::UniformShaderApply::getUniformName(SingleLightUniformType vut) const
-{
-	auto it = _mapSingleLightUniform.find(vut);
-	if (it == _mapSingleLightUniform.end())
+	const auto pDetail = parameter.material->getMaterialDetail();
+	if (pDetail == nullptr)
 	{
-		return "";
+		return;
 	}
-
-	return it->second;
-}
-
-void render::UniformShaderApply::addUniform(MultiLightsUniformType vut, const std::string& name)
-{
-	_mapMultiLightsUniform[vut] = name;
-}
-
-std::string render::UniformShaderApply::getUniformName(MaterialUniformType vut) const
-{
-	auto it = _mapMaterialUniform.find(vut);
-	if (it == _mapMaterialUniform.end())
+	auto program = parameter.program;
+	for (auto item : parameter.material->getMaterialSetting()->getSelfDefinedUniforms())
 	{
-		return "";
+		auto pUniform = program->getUniform(item.first);
+		if (!pUniform)
+		{
+			if (item.second.Type == MaterialSetting::UniformType::Integer)
+			{
+				pUniform->setValue(item.second.asInt());
+			}
+			else if (item.second.Type == MaterialSetting::UniformType::Float)
+			{
+				pUniform->setValue(item.second.asFloat());
+			}
+			else if (item.second.Type == MaterialSetting::UniformType::Vec2)
+			{
+				pUniform->setValue2(1, item.second.asVector2().getValue());
+			}
+			else if (item.second.Type == MaterialSetting::UniformType::Vec3)
+			{
+				pUniform->setValue3(1, item.second.asVector3().getValue());
+			}
+			else if (item.second.Type == MaterialSetting::UniformType::Vec4)
+			{
+				pUniform->setValue4(1, item.second.asVector4().getValue());
+			}
+			else if (item.second.Type == MaterialSetting::UniformType::Mat2x2)
+			{
+				pUniform->setMatrix2x2(item.second.asMatrix2x2().getValue());
+			}
+			else if (item.second.Type == MaterialSetting::UniformType::Mat3x3)
+			{
+				pUniform->setMatrix3x3(item.second.asMatrix3x3().getValue());
+			}
+			else if (item.second.Type == MaterialSetting::UniformType::Mat4x4)
+			{
+				pUniform->setMatrix4x4(4, item.second.asMatrix4x4().getValue());
+			}
+		}
 	}
-
-	return it->second;
 }
 
-void render::UniformShaderApply::addUniform(SingleLightUniformType vut, const std::string& name)
-{
-	_mapSingleLightUniform[vut] = name;
-}
-
-std::string render::UniformShaderApply::getUniformName(TextureUniformType vut) const
-{
-	auto it = _mapTextureUniform.find(vut);
-	if (it == _mapTextureUniform.end())
-	{
-		return "";
-	}
-
-	return it->second;
-}
-
-void render::UniformShaderApply::addUniform(MaterialUniformType vut, const std::string& name)
-{
-	_mapMaterialUniform[vut] = name;
-}
-
-std::string render::UniformShaderApply::getUniformName(MatrixUniformType vut) const
-{
-	auto it = _mapMatrixUniform.find(vut);
-	if (it == _mapMatrixUniform.end())
-	{
-		return "";
-	}
-
-	return it->second;
-}
-
-void render::UniformShaderApply::addUniform(TextureUniformType vut, const std::string& name)
-{
-	_mapTextureUniform[vut] = name;
-}
-
-std::string render::UniformShaderApply::getUniformName(EnvUniformType vut) const
-{
-	auto it = _mapEnvUniform.find(vut);
-	if (it == _mapEnvUniform.end())
-	{
-		return "";
-	}
-
-	return it->second;
-}
-
-void render::UniformShaderApply::addUniform(MatrixUniformType vut, const std::string& name)
-{
-	_mapMatrixUniform[vut] = name;
-}
-
-void render::UniformShaderApply::addUniform(EnvUniformType vut, const std::string& name)
-{
-	_mapEnvUniform[vut] = name;
-}
-
-void render::UniformShaderApply::removeUniformDatas()
-{
-	_mapEnvUniform.clear();
-	_mapTextureUniform.clear();
-	_mapMaterialUniform.clear();
-	_mapMatrixUniform.clear();
-	_mapSingleLightUniform.clear();
-	_mapMultiLightsUniform.clear();
-}
-
-void render::UniformShaderApply::setTempMatrix(const math::Matrix4x4& matrix)
+void render::DrawCore::setTempMatrix(const math::Matrix4x4& matrix)
 {
 	_tempMatrix = matrix;
 }
 
-void render::UniformShaderApply::reloadTempMatrix()
+void render::DrawCore::resetTempMatrix()
 {
 	_tempMatrix.loadIdentity();
 }
 
-math::Matrix4x4 render::UniformShaderApply::getWorldMatrix(const Node* node)
+math::Matrix4x4 render::DrawCore::getWorldMatrix(const Node* node)
 {
 	if (node == nullptr)
 	{
@@ -1343,7 +1286,7 @@ math::Matrix4x4 render::UniformShaderApply::getWorldMatrix(const Node* node)
 	return _tempMatrix * node->getWorldMatrix();
 }
 
-render::Camera* render::UniformShaderApply::getCamera(const Node* node)
+render::Camera* render::DrawCore::getCamera(const Node* node)
 {
 	if (node == nullptr)
 	{
@@ -1351,4 +1294,3 @@ render::Camera* render::UniformShaderApply::getCamera(const Node* node)
 	}
 	return node->getCamera();
 }
-

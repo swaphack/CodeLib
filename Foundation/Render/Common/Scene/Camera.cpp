@@ -131,7 +131,7 @@ math::Matrix4x4 render::Camera::lookAtCenter()
 
 math::Vector3 render::Camera::getCenterPosition()
 {
-	return math::Vector3();
+	return this->getPosition() + this->getFront();
 }
 render::DebugDraw* render::Camera::getDebugDraw() const
 {

@@ -42,10 +42,18 @@ void ui::CtrlLayout::setTexShaderProgram(render::ShaderProgram* shaderProgram)
 	{
 		_backgroundImage->setTexShaderProgram(shaderProgram);
 	}
+	if (_backgroundMask)
+	{
+		_backgroundMask->setTexShaderProgram(shaderProgram);
+	}
 }
 
 void ui::CtrlLayout::setColorShaderProgram(render::ShaderProgram* shaderProgram)
 {
+	if (_backgroundImage)
+	{
+		_backgroundImage->setColorShaderProgram(shaderProgram);
+	}
 	if (_backgroundMask)
 	{
 		_backgroundMask->setColorShaderProgram(shaderProgram);

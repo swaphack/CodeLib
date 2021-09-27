@@ -1,6 +1,7 @@
 #include "UIProxy.h"
 #include "Layout/import.h"
 #include "Loader/import.h"
+#include "UIShaderHelper.h"
 
 using namespace ui;
 
@@ -100,18 +101,6 @@ bool UIProxy::saveFile(CtrlWidget* layout, const std::string& filepath, const ma
 	bool result = tinyxml2::XML_SUCCESS == doc.SaveFile(filepath.c_str());
 
 	return result;
-}
-
-void ui::UIProxy::setTexShader(const std::string& vertexShader, const std::string& fragmentShader)
-{
-	_texShader.vertex = vertexShader;
-	_texShader.fragment = fragmentShader;
-}
-
-void ui::UIProxy::setColorShader(const std::string& vertexShader, const std::string& fragmentShader)
-{
-	_colorShader.vertex = vertexShader;
-	_colorShader.fragment = fragmentShader;
 }
 
 void UIProxy::registerElementParser(const std::string& name, const CreateElementFunc& func)
@@ -375,10 +364,7 @@ CtrlWidget* UIProxy::initWidget(tinyxml2::XMLElement* xmlNode, const math::Size&
 	auto pWidget = element->getWidget();
 	if (pWidget)
 	{
-		auto shaderProgram = G_SHANDER->createVertexFragmentProgram(_texShader.vertex, _texShader.fragment);
-		pWidget->setTexShaderProgram(shaderProgram);
-		shaderProgram = G_SHANDER->createVertexFragmentProgram(_colorShader.vertex, _colorShader.fragment);
-		pWidget->setColorShaderProgram(shaderProgram);
+		UIShaderHelper::loadShader(pWidget);
 	}
 	delete element;
 

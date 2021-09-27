@@ -22,13 +22,13 @@ ue::UIEditorApplication::~UIEditorApplication()
 
 void ue::UIEditorApplication::show()
 {
-	MainWindow* pWindow = CREATE_NODE(MainWindow);
-	getCanvas()->pushScene(pWindow);
-
 	_ideConfig.loadXml(G_FILEPATH->getFilePath(IDE_CONFIG_FILEPATH));
 	_projectConfig.loadXml(G_FILEPATH->getFilePath(PROJECT_CONFIG_FILEPATH));
-	G_UIPROXY->setTexShader(_ideConfig.getShader().TexVertex, _ideConfig.getShader().TexFragment);
-	G_UIPROXY->setColorShader(_ideConfig.getShader().ColorVertex, _ideConfig.getShader().ColorFragment);
+	ui::UIShaderHelper::setTexShader(_ideConfig.getShader().TexVertex, _ideConfig.getShader().TexFragment);
+	ui::UIShaderHelper::setColorShader(_ideConfig.getShader().ColorVertex, _ideConfig.getShader().ColorFragment);
+
+	MainWindow* pWindow = CREATE_NODE(MainWindow);
+	getCanvas()->pushScene(pWindow);
 
 	pWindow->setUIFile(_ideConfig.getIDE().Design);
 	pWindow->setWidgetFile(_ideConfig.getIDE().Control);

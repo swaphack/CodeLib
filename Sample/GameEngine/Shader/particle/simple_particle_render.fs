@@ -7,5 +7,5 @@ void main()
 {
 	//color = texture(texSampler0, gl_PointCoord);
 
-	color = vec4(1.0);
+	color = vec4(1.0,1.0,1.0,1.0);
 }

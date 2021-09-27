@@ -4,39 +4,44 @@
 
 namespace render
 {
-	class TransformFeedbackBufferObject;
+	class XFeedback;
 	class VertexArrayBufferObject;
 	class ShaderProgram;
 
 	/**
 	*	使用反馈的粒子节点
 	*/
-	class TransformFeedbackParticleNode : public PariticleNode
+	class FeedbackParticleNode : public PariticleNode
 	{
 	public:
-		TransformFeedbackParticleNode();
-		virtual ~TransformFeedbackParticleNode();
+		FeedbackParticleNode();
+		virtual ~FeedbackParticleNode();
 	public:
 		virtual bool init();
 	protected:
 		// 更新时间
 		virtual void update(float dt);
+		virtual void draw();
 		// 参数改变
 		virtual void updateParticleParameter();
 	public:
 		/**
 		*	更新反馈
 		*/
-		TransformFeedbackBufferObject* getUpdateObject() const;
+		XFeedback* getUpdateObject() const;
 		/**
-		*	加载着色器
+		*	加载渲染着色器
 		*/
-		void loadShaderProgram(const std::string& vpath, const std::string& fpath);
+		void loadRenderProgram(const std::string& vpath, const std::string& fpath);
+		/**
+		*	加载xfb着色器
+		*/
+		void loadXFBProgram(const std::string& vpath, const std::string& watchVarying);
 	private:
 		/**
 		*	更新反馈
 		*/
-		TransformFeedbackBufferObject* _updateObject = nullptr;
+		XFeedback* _feedback = nullptr;
 		/**
 		*	更新数据
 		*/
@@ -46,8 +51,8 @@ namespace render
 		*/
 		VertexArrayBufferObject* _renderBufferObject = nullptr;
 		/**
-		*	渲染
+		*	渲染着色器
 		*/
-		ShaderProgram* _shaderProgram = nullptr;
+		ShaderProgram* _renderProgram = nullptr;
 	};
 }

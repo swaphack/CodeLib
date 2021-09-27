@@ -19,6 +19,11 @@ Vector2::Vector2(float x, float y)
 	this->setY(y);
 }
 
+Vector2::Vector2(const float* value)
+{
+	this->assign(value);
+}
+
 Vector2::Vector2(const Vector2& point)
 {
 	this->setX(point.getX());

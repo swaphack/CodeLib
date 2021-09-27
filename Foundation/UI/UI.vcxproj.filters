@@ -137,6 +137,9 @@
     <ClInclude Include="UI\CtrlTableView.h">
       <Filter>UI</Filter>
     </ClInclude>
+    <ClInclude Include="Display\UIShaderHelper.h">
+      <Filter>Display</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Display">
@@ -266,6 +269,9 @@
     </ClCompile>
     <ClCompile Include="UI\CtrlTableView.cpp">
       <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Display\UIShaderHelper.cpp">
+      <Filter>Display</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

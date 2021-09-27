@@ -321,7 +321,7 @@
     <ClCompile Include="3d\Shape\CubeMap.cpp">
       <Filter>3d\Shape</Filter>
     </ClCompile>
-    <ClCompile Include="Common\XFB\TransformFeedback.cpp">
+    <ClCompile Include="Common\XFB\XFBBufferObject.cpp">
       <Filter>Common\XFB</Filter>
     </ClCompile>
     <ClCompile Include="Common\VAO\VertexArrayAttrib.cpp">
@@ -435,7 +435,7 @@
     <ClCompile Include="Common\VAO\VertexArrayBufferObject.cpp">
       <Filter>Common\VAO</Filter>
     </ClCompile>
-    <ClCompile Include="Common\XFB\TransformFeedbackBufferObject.cpp">
+    <ClCompile Include="Common\XFB\XFeedback.cpp">
       <Filter>Common\XFB</Filter>
     </ClCompile>
     <ClCompile Include="Common\DrawNode\MultiDrawNode.cpp">
@@ -513,7 +513,7 @@
     <ClCompile Include="Particle\ParticleProtocol.cpp">
       <Filter>Particle</Filter>
     </ClCompile>
-    <ClCompile Include="Particle\TransformFeedbackParticleNode.cpp">
+    <ClCompile Include="Particle\FeedbackParticleNode.cpp">
       <Filter>Particle</Filter>
     </ClCompile>
     <ClCompile Include="GPU\GPUCalculator.cpp">
@@ -524,9 +524,6 @@
     </ClCompile>
     <ClCompile Include="3d\Environment\LightProtocol.cpp">
       <Filter>3d\Environment</Filter>
-    </ClCompile>
-    <ClCompile Include="Common\DrawNode\UniformShaderApply.cpp">
-      <Filter>Common\DrawNode</Filter>
     </ClCompile>
     <ClCompile Include="PostProcessing\PixelPostProcessingNode.cpp">
       <Filter>PostProcessing</Filter>
@@ -605,6 +602,15 @@
     </ClCompile>
     <ClCompile Include="3d\Environment\Terrian.cpp">
       <Filter>3d\Environment</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Material\MaterialSetting.cpp">
+      <Filter>Common\Material</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Material\MaterialGlobalParameter.cpp">
+      <Filter>Common\Material</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\DrawNode\DrawCore.cpp">
+      <Filter>Common\DrawNode</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1038,7 +1044,7 @@
     <ClInclude Include="3d\Shape\CubeMap.h">
       <Filter>3d\Shape</Filter>
     </ClInclude>
-    <ClInclude Include="Common\XFB\TransformFeedback.h">
+    <ClInclude Include="Common\XFB\XFBBufferObject.h">
       <Filter>Common\XFB</Filter>
     </ClInclude>
     <ClInclude Include="Common\VAO\import.h">
@@ -1179,7 +1185,7 @@
     <ClInclude Include="Common\VAO\VertexArrayBufferObject.h">
       <Filter>Common\VAO</Filter>
     </ClInclude>
-    <ClInclude Include="Common\XFB\TransformFeedbackBufferObject.h">
+    <ClInclude Include="Common\XFB\XFeedback.h">
       <Filter>Common\XFB</Filter>
     </ClInclude>
     <ClInclude Include="Common\DrawNode\MultiDrawNode.h">
@@ -1199,9 +1205,6 @@
     </ClInclude>
     <ClInclude Include="3d\ModelFile\import.h">
       <Filter>3d\ModelFile</Filter>
-    </ClInclude>
-    <ClInclude Include="Common\DrawNode\macros.h">
-      <Filter>Common\DrawNode</Filter>
     </ClInclude>
     <ClInclude Include="3d\Environment\PointLight.h">
       <Filter>3d\Environment</Filter>
@@ -1275,7 +1278,7 @@
     <ClInclude Include="Particle\ParticleProtocol.h">
       <Filter>Particle</Filter>
     </ClInclude>
-    <ClInclude Include="Particle\TransformFeedbackParticleNode.h">
+    <ClInclude Include="Particle\FeedbackParticleNode.h">
       <Filter>Particle</Filter>
     </ClInclude>
     <ClInclude Include="GPU\GPUCalculator.h">
@@ -1289,9 +1292,6 @@
     </ClInclude>
     <ClInclude Include="3d\Environment\LightProtocol.h">
       <Filter>3d\Environment</Filter>
-    </ClInclude>
-    <ClInclude Include="Common\DrawNode\UniformShaderApply.h">
-      <Filter>Common\DrawNode</Filter>
     </ClInclude>
     <ClInclude Include="PostProcessing\PixelPostProcessingNode.h">
       <Filter>PostProcessing</Filter>
@@ -1394,6 +1394,21 @@
     </ClInclude>
     <ClInclude Include="3d\Environment\Terrian.h">
       <Filter>3d\Environment</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Material\MaterialSetting.h">
+      <Filter>Common\Material</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Material\MaterialGlobalParameter.h">
+      <Filter>Common\Material</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Material\macros.h">
+      <Filter>Common\Material</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\DrawNode\DrawCore.h">
+      <Filter>Common\DrawNode</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\DrawNode\macros.h">
+      <Filter>Common\DrawNode</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

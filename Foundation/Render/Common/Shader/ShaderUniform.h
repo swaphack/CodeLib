@@ -26,15 +26,16 @@ namespace render
 		*/
 		uint32_t getUniformID();
 	public:
-		void setValue1(int len, const float* v);
-		void setValue2(int len, const float* v);
-		void setValue3(int len, const float* v);
-		void setValue4(int len, const float* v);
+		// count * v.length()
+		void setValue1(int count, const float* v);
+		void setValue2(int count, const float* v);
+		void setValue3(int count, const float* v);
+		void setValue4(int count, const float* v);
 
-		void setValue1(int len, const int32_t* v);
-		void setValue2(int len, const int32_t* v);
-		void setValue3(int len, const int32_t* v);
-		void setValue4(int len, const int32_t* v);
+		void setValue1(int count, const int32_t* v);
+		void setValue2(int count, const int32_t* v);
+		void setValue3(int count, const int32_t* v);
+		void setValue4(int count, const int32_t* v);
 
 		void setValue(float v0);
 		void setValue(float v0, float v1);

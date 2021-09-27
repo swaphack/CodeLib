@@ -27,8 +27,5 @@ public:
 	static void loadShaderVTGF(render::DrawNode* node, const std::string& vpath, const std::string& tepath, const std::string& gpath, const std::string& fpath);
 	static void loadShaderVTGF(render::DrawNode* node, const std::string& vpath, const std::string& tcpath, const std::string& tepath, const std::string& gpath, const std::string& fpath);
 
-	static void initShaderAttrib();
 	static void runRotateAction(render::Node* node);
-public:
-	static bool bInitShaderAttrib;
 };

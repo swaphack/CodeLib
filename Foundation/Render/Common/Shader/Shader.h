@@ -81,5 +81,9 @@ namespace render
 		*	³ÌÐò
 		*/
 		ShaderProgram* _program = nullptr;
+		/**
+		*	uniform Ãû×Ö
+		*/
+		std::set<std::string> _uniformName;
 	};
 }

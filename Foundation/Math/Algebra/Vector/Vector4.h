@@ -15,6 +15,7 @@ namespace math
 	public:
 		Vector4();
 		Vector4(float x, float y, float z, float w = 1);
+		Vector4(const float* value);
 		Vector4(const Vector& vector);
 		Vector4(const Vector2& vector);
 		Vector4(const Vector3& vector);

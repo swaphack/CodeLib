@@ -6,11 +6,11 @@
 #include "Common/Texture/import.h"
 #include "Common/Shader/ShaderProgram.h"
 #include "DrawTextureCache.h"
-#include "macros.h"
-#include "UniformShaderApply.h"
+#include "DrawCore.h"
 #include "FragmentOperator.h"
 #include "Common/Fragment/import.h"
 #include "Common/Scene/Camera.h"
+#include "macros.h"
 
 using namespace render;
 
@@ -197,9 +197,17 @@ void DrawNode::onDraw()
 
 	auto program = _material->getShaderProgram();
 
+	DrawCoreParameter parameter;
+	parameter.node = this;
+	parameter.program = program;
+	parameter.mesh = _mesh;
+	parameter.material = _material;
+	parameter.textureCache = _textureCache;
+
 	if (program != nullptr)
 	{
-		G_UNIFORMSHADERAPPLY->beginApplyWithShader(this, program,  _mesh, _material, _textureCache);
+
+		G_DRAWCORE->beginApplyWithShader(parameter);
 
 		DrawMode mode = _mesh->getDrawMode();
 		if (isTessilationEnable())
@@ -217,19 +225,18 @@ void DrawNode::onDraw()
 		}
 
 		GLDebug::showError();
-		G_UNIFORMSHADERAPPLY->endApplyWithShader(program, _mesh, _material, _textureCache);
+		G_DRAWCORE->endApplyWithShader(parameter);
 	}
 	else
 	{
-		G_UNIFORMSHADERAPPLY->beginApply(_material, _textureCache);
+		G_DRAWCORE->beginApply(parameter);
 
 		GLDebug::showError();
 		_mesh->drawWithClientArray();
 
 		GLDebug::showError();
-		G_UNIFORMSHADERAPPLY->endApply(_material, _textureCache);
+		G_DRAWCORE->endApply(parameter);
 	}
-
 	GLDebug::showError();
 }
 
@@ -266,25 +273,15 @@ void render::DrawNode::updateMeshData()
 		{
 			program->use();
 			// 计算法线
-			std::string name = G_UNIFORMSHADERAPPLY->getVertexName(VertexDataType::NORMAL);
-			if (!name.empty())
+			if (_material->hasAttrib(VertexDataType::NORMAL))
 			{
-				auto pUnitValue = program->getAttrib(name);
-				if (pUnitValue)
-				{
-					_mesh->setComputeNormal(true);
-				}
+				_mesh->setComputeNormal(true);
 			}
 
 			// 计算切线
-			name = G_UNIFORMSHADERAPPLY->getVertexName(VertexDataType::TANGENT);
-			if (!name.empty())
+			if (_material->hasAttrib(VertexDataType::TANGENT))
 			{
-				auto pUnitValue = program->getAttrib(name);
-				if (pUnitValue)
-				{
-					_mesh->setComputeTangent(true);
-				}
+				_mesh->setComputeTangent(true);
 			}
 			program->unuse();
 		}

@@ -18,4 +18,6 @@ void main()
 	vec4 c1 = fragColor * texture(tex.texture0, fragTexcoord);
 	
 	color = c1;
+
+	color = vec4(1,1,1,1);
 }

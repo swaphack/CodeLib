@@ -13,44 +13,44 @@ ShaderUniform::~ShaderUniform()
 {
 
 }
-void ShaderUniform::setValue1(int len, const float* v)
+void ShaderUniform::setValue1(int count, const float* v)
 {
-	GLShader::setUniformValue1(getUniformID(), len, v);
+	GLShader::setUniformValue1(getUniformID(), count, v);
 }
 
-void ShaderUniform::setValue2(int len, const float* v)
+void ShaderUniform::setValue2(int count, const float* v)
 {
-	GLShader::setUniformValue2(getUniformID(), len, v);
+	GLShader::setUniformValue2(getUniformID(), count, v);
 }
 
-void ShaderUniform::setValue3(int len, const float* v)
+void ShaderUniform::setValue3(int count, const float* v)
 {
-	GLShader::setUniformValue3(getUniformID(), len, v);
+	GLShader::setUniformValue3(getUniformID(), count, v);
 }
 
-void ShaderUniform::setValue4(int len, const float* v)
+void ShaderUniform::setValue4(int count, const float* v)
 {
-	GLShader::setUniformValue4(getUniformID(), len, v);
+	GLShader::setUniformValue4(getUniformID(), count, v);
 }
 
-void ShaderUniform::setValue1(int len, const int32_t* v)
+void ShaderUniform::setValue1(int count, const int32_t* v)
 {
-	GLShader::setUniformValue1(getUniformID(), len, v);
+	GLShader::setUniformValue1(getUniformID(), count, v);
 }
 
-void ShaderUniform::setValue2(int len, const int32_t* v)
+void ShaderUniform::setValue2(int count, const int32_t* v)
 {
-	GLShader::setUniformValue2(getUniformID(), len, v);
+	GLShader::setUniformValue2(getUniformID(), count, v);
 }
 
-void ShaderUniform::setValue3(int len, const int32_t* v)
+void ShaderUniform::setValue3(int count, const int32_t* v)
 {
-	GLShader::setUniformValue3(getUniformID(), len, v);
+	GLShader::setUniformValue3(getUniformID(), count, v);
 }
 
-void ShaderUniform::setValue4(int len, const int32_t* v)
+void ShaderUniform::setValue4(int count, const int32_t* v)
 {
-	GLShader::setUniformValue4(getUniformID(), len, v);
+	GLShader::setUniformValue4(getUniformID(), count, v);
 }
 
 void ShaderUniform::setValue(float v0)

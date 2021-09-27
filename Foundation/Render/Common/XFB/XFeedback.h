@@ -8,7 +8,7 @@
 namespace render
 {
 	class ShaderProgram;
-	class TransformFeedback;
+	class XFBBufferObject;
 	class TransformFeedbackBuffer;
 	class VertexArrayObject;
 	class ArrayBuffer;
@@ -19,11 +19,11 @@ namespace render
 	/**
 	*	顶点反馈对象
 	*/
-	class TransformFeedbackBufferObject : public sys::Object
+	class XFeedback : public sys::Object
 	{
 	public:
-		TransformFeedbackBufferObject();
-		virtual ~TransformFeedbackBufferObject();
+		XFeedback();
+		virtual ~XFeedback();
 	public:
 		/**
 		*	获取着色器
@@ -36,7 +36,11 @@ namespace render
 		/**
 		*	只加载顶点着色器
 		*/
-		void loadVertexProgram(const std::string& vertexFilepath);
+		void loadVertexProgram(const std::string& vertexFilepath, const std::string& watchVarying);
+		/**
+		*	只加载顶点着色器
+		*/
+		void loadVertexProgram(const std::string& vertexFilepath, int count, const char** varyings);
 		/**
 		*	加载顶点和片元着色器
 		*/
@@ -58,10 +62,6 @@ namespace render
 		*	设置绑定对象所在的缓存区域
 		*/
 		void setTargetBufferRange(int index, uint32_t offset, uint32_t size);
-		/**
-		*	监听变量
-		*/
-		void setWatchVaryings(int count, const char** varyings);
 		/**
 		*	基础图形类型
 		*/
@@ -96,11 +96,11 @@ namespace render
 		/**
 		*	顶点反馈
 		*/
-		TransformFeedback* _transformFeedback = nullptr;
+		XFBBufferObject* _XFBObject = nullptr;
 		/**
 		*	反馈所存放的缓存
 		*/
-		TransformFeedbackBuffer* _transformFeedbackBuffer = nullptr;
+		TransformFeedbackBuffer* _XFBBuffer = nullptr;
 		/**
 		*	缓存大小
 		*/

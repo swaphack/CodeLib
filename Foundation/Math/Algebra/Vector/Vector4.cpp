@@ -42,6 +42,11 @@ Vector4::Vector4(float x, float y, float z, float w /*= 1*/)
 	this->setW(w);
 }
 
+Vector4::Vector4(const float* value)
+{
+	this->assign(value);
+}
+
 Vector4 Vector4::operator+(const Vector4& vec) const
 {
 	assert(this->getW() == vec.getW());

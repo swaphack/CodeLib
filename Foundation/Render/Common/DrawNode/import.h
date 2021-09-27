@@ -1,6 +1,5 @@
 #pragma once
 
-#include "UniformShaderApply.h"
 #include "DrawNode.h"
 #include "DrawProtocol.h"
 #include "FragmentOperator.h"

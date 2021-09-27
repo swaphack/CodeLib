@@ -197,6 +197,15 @@ namespace render
 		*	 Õ∑≈
 		*/
 		void releaseProgram();
+	public: // …Ë÷√Uniform
+		void setUniformValue(const std::string& name, int value);
+		void setUniformValue(const std::string& name, float value);
+		void setUniformValue(const std::string& name, const math::Vector2& value);
+		void setUniformValue(const std::string& name, const math::Vector3& value);
+		void setUniformValue(const std::string& name, const math::Vector4& value);
+		void setUniformValue(const std::string& name, const math::Matrix2x2& value);
+		void setUniformValue(const std::string& name, const math::Matrix3x3& value);
+		void setUniformValue(const std::string& name, const math::Matrix4x4& value);
 	private:
 		/**
 		*	≥Ã–Ú±‡∫≈

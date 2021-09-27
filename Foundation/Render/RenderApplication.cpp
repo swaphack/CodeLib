@@ -1,4 +1,6 @@
 #include "RenderApplication.h"
+#include "Common/Material/MaterialGlobalParameter.h"
+
 #include <ctime>
 #include <direct.h>
 
@@ -36,7 +38,7 @@ void RenderApplication::init()
 
 void RenderApplication::update()
 {
-	sys::TimeClock::startRecord();
+	sys::TimeClock::endRecord();
 
 	if (_lastClock == INVALID_CLOCK)
 	{
@@ -61,8 +63,6 @@ void RenderApplication::update()
 	}
 
 	checkAutoRealsePool();
-
-	sys::TimeClock::endRecord();
 }
 
 void RenderApplication::dispose()
@@ -117,6 +117,10 @@ void RenderApplication::initFilePath()
 
 void RenderApplication::initRender()
 {
+	G_MATERIALGLOBALPARAMETER;
+
+	sys::TimeClock::startRecord();
+
 	_canvas = new Canvas();
 }
 

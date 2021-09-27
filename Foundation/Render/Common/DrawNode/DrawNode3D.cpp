@@ -3,7 +3,7 @@
 #include "Common/Fragment/import.h"
 #include "Common/Material/import.h"
 #include "Common/Mesh/import.h"
-#include "Common/DrawNode/import.h"
+#include "FragmentOperator.h"
 #include "Common/Tool/VertexTool.h"
 #include "Graphic/import.h"
 #include "Common/Scene/Cameras.h"

@@ -1,4 +1,4 @@
 #pragma once
 
-#include "TransformFeedback.h"
-#include "TransformFeedbackBufferObject.h"
+#include "XFeedback.h"
+#include "XFBBufferObject.h"

@@ -615,6 +615,10 @@ void render::Node::afterDrawNode()
 
 void render::Node::drawAllChildren()
 {
+	if (!isVisible())
+	{
+		return;
+	}
 	for (auto item : _children)
 	{
 		item->drawNode();

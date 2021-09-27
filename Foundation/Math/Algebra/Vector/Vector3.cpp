@@ -19,6 +19,11 @@ Vector3::Vector3(float x, float y, float z /*= 0*/)
 	this->setZ(z);
 }
 
+Vector3::Vector3(const float* value)
+{
+	this->assign(value);
+}
+
 Vector3::Vector3(const Vector2& vector)
 {
 	this->setX(vector.getX());

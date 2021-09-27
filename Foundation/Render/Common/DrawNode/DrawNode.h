@@ -125,7 +125,7 @@ namespace render
 		*/
 		virtual void onColorChange();
 		/**
-		*	当前接点的颜色改变
+		*	当前节点的颜色改变
 		*/
 		void onDrawNodeColorChange();
 		/**

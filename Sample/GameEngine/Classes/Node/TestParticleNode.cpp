@@ -105,13 +105,14 @@ void TestParticleNode::testCollideParticle()
 
 void TestParticleNode::testXFBParticle()
 {
-	render::TransformFeedbackParticleNode* node = CREATE_NODE(render::TransformFeedbackParticleNode);
+	render::FeedbackParticleNode* node = CREATE_NODE(render::FeedbackParticleNode);
 	node->setPosition(512, 384);
 	node->setAnchorPoint(0.5f, 0.5f);
-	node->setVolume(512, 384);
+	node->setVolume(512, 384, 768);
 	node->setSpeedAcceleration(10, 0, 0);
 	node->setParticleCount(999);
-	node->loadShaderProgram("Shader/particle/simple_particle_render.vs", "Shader/particle/simple_particle_render.fs");
+	node->loadXFBProgram("Shader/particle/simple_particle_update.vs", "out_Position");
+	node->loadRenderProgram("Shader/particle/simple_particle_render.vs", "Shader/particle/simple_particle_render.fs");
 	node->start();
 	this->addChild(node);
 }

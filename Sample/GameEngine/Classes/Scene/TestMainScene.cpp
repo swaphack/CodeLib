@@ -41,7 +41,7 @@ void TestMainScene::initNodes()
 	//this->addChild(CREATE_NODE(TestDrawNode));
 	//this->addChild(CREATE_NODE(TestUINode));
 	//
-	//this->addChild(CREATE_NODE(TestParticleNode));
+	this->addChild(CREATE_NODE(TestParticleNode));
 	//
 	//this->addChild(CREATE_NODE(TestTextureNode));
 	//
@@ -65,7 +65,7 @@ void TestMainScene::initNodes()
 void TestMainScene::initEnv()
 {
 	this->addChild(CREATE_NODE(SystemEnv));
-	this->addChild(CREATE_NODE(TerrianNode));
+	//this->addChild(CREATE_NODE(TerrianNode));
 
 
 	this->addChild(CREATE_NODE(TestEnvironmentNode));

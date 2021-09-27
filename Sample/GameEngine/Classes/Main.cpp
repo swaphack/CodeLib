@@ -25,7 +25,7 @@ int main(int argc, char** argv)                  // ´°¿ÚÏÔÊ¾×´Ì¬
 	*/
 	int width = 1024;
 	int height = 768;
-	int millis = 17;
+	int millis = 8;
 
 	/*
 	render::GLWindow* pWindow = new render::GLWindow();

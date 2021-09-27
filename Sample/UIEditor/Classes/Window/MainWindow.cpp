@@ -1,6 +1,6 @@
 #include "MainWindow.h"
 #include "UIDesign/import.h"
-
+#include "ui.h"
 ue::MainWindow::MainWindow()
 {
 	_viewLayout = CREATE_NODE(UIDesignWindow);
@@ -34,7 +34,7 @@ bool ue::MainWindow::init()
 
 	auto size = render::Tool::getViewSize();
 	this->setAnchorPoint(math::Vector2(0, 0));
-	//this->setPosition(math::Vector2(-0.5f * size.getWidth(), -0.5f * size.getHeight()));
+	this->setPosition(math::Vector2(-0.5f * size.getWidth(), -0.5f * size.getHeight()));
 	this->setVolume(size);
 
 	updateCamera();
@@ -94,12 +94,17 @@ void ue::MainWindow::updateCamera()
 		render::Camera* pCamera = G_CAMERAS->getDesignCamera();
 		if (pCamera)
 		{
-			pCamera->setVisible(false);
+			pCamera->setVisible(true);
+
+			pCamera->getDebugDraw()->setVisible(false);
+
 			float d = sqrt(powf(size.getWidth(), 2) + powf(size.getHeight(), 2));
 			pCamera->setViewDistance(d - 300, d * 300);
 			pCamera->setRotationX(15);
 			pCamera->setPositionY(300);
 			pCamera->setPositionZ(d);
+
+			ui::UIShaderHelper::loadColorShader(pCamera->getDebugDraw()->getRenderNode());
 
 		}
 	}
@@ -108,10 +113,12 @@ void ue::MainWindow::updateCamera()
 		if (pCamera)
 		{
 			pCamera->setVisible(false);
-
+			pCamera->getDebugDraw()->setVisible(false);
 			float d = sqrt(powf(size.getWidth(), 2) + powf(size.getHeight(), 2));
 			pCamera->setViewDistance(d - 200, d * 200);
 			pCamera->setPositionZ(d);
+
+			ui::UIShaderHelper::loadColorShader(pCamera->getDebugDraw()->getRenderNode());
 		}
 
 	}
@@ -119,8 +126,13 @@ void ue::MainWindow::updateCamera()
 		render::Camera* pCamera = G_CAMERAS->getCamera2D();
 		if (pCamera)
 		{
+			float d = sqrt(powf(size.getWidth(), 2) + powf(size.getHeight(), 2));
+
 			pCamera->setVisible(true);
-			pCamera->setPositionZ(0.0f);
+			pCamera->getDebugDraw()->setVisible(false);
+			pCamera->setPositionZ(d);
+
+			ui::UIShaderHelper::loadColorShader(pCamera->getDebugDraw()->getRenderNode());
 		}
 	}
 }

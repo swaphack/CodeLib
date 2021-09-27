@@ -12,11 +12,11 @@ namespace render
 	/**
 	*	顶点反馈对象
 	*/
-	class TransformFeedback : public BufferObject
+	class XFBBufferObject : public BufferObject
 	{
 	public:
-		TransformFeedback();
-		virtual ~TransformFeedback();
+		XFBBufferObject();
+		virtual ~XFBBufferObject();
 	public:
 		uint32_t getTransformFeedbackID() const;
 		/**
@@ -42,35 +42,6 @@ namespace render
 		*	index offset size 
 		*/
 		void setBufferRange(uint32_t index, ptrdiff_t offset, ptrdiff_t size);
-	public:
-		/**
-		*	设置关联着色器程序
-		*/
-		void setShaderProgram(ShaderProgram* program);
-		/**
-		*	获取关联着色器程序
-		*/
-		ShaderProgram* getShaderProgram() const;
-		/**
-		*	设置监视参数
-		*/
-		void setFeedbackVaryings(int count, const char* const* varyings, TransformFeedbackBufferMode mode);
-		/**
-		*	开始监视
-		*/
-		void beginWatch(TransformFeedbackPrimitiveMode mode);
-		/**
-		*	暂停监视
-		*/
-		void pauseWatch();
-		/**
-		*	恢复监视
-		*/
-		void resumeWatch();
-		/**
-		*	结束监视
-		*/
-		void endWatch();
 	protected:
 		/**
 		*	初始化顶点反馈对象

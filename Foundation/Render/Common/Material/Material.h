@@ -4,6 +4,7 @@
 
 #include "mathlib.h"
 #include "Common/Shader/ShaderProgramDelegate.h"
+#include "macros.h"
 
 namespace sys
 {
@@ -18,24 +19,10 @@ namespace render
 	class Mesh;
 	class Node;
 	class DrawTextureCache;
+	class MaterialSetting;
 
 	class Material : public sys::Object
 	{
-	public:
-		struct MaterialParameter
-		{
-			std::string name;
-			std::string typeName;
-		};
-
-#define CREATE_UNIFORM(TYPE, FUNC)  \
-void render::Material::setUniform(const std::string& name, const TYPE& value) \
-{ \
-	if (_shaderProgram == nullptr)  return; \
-	auto pUniform = _shaderProgram->getUniform(name); \
-	if (pUniform) pUniform->FUNC(value); \
-}
-
 	public:
 		Material();
 		virtual ~Material();
@@ -48,6 +35,7 @@ void render::Material::setUniform(const std::string& name, const TYPE& value) \
 		*	shader
 		*/
 		ShaderProgram* getShaderProgram();
+	public:
 		/**
 		*	材质信息
 		*/
@@ -56,6 +44,10 @@ void render::Material::setUniform(const std::string& name, const TYPE& value) \
 		*	材质信息
 		*/
 		sys::MaterialDetail* getMaterialDetail() const;
+		/**
+		*	材质配置
+		*/
+		MaterialSetting* getMaterialSetting() const;
 	public:
 		/**
 		*	shader设置函数
@@ -65,15 +57,23 @@ void render::Material::setUniform(const std::string& name, const TYPE& value) \
 		*	执行函数
 		*/ 
 		void runProgramFunc();
+	public:
 		/**
 		*	应用材质
 		*/ 
 		void applyMaterial();
-	public: // 设置值
-		/**
-		*	应用材质
-		*/
+	public: // 设置Uniform
+		void setUniform(const std::string& name, int value);
+		void setUniform(const std::string& name, float value);
+		void setUniform(const std::string& name, const math::Vector2& value);
+		void setUniform(const std::string& name, const math::Vector3& value);
+		void setUniform(const std::string& name, const math::Vector4& value);
+		void setUniform(const std::string& name, const math::Matrix2x2& value);
+		void setUniform(const std::string& name, const math::Matrix3x3& value);
 		void setUniform(const std::string& name, const math::Matrix4x4& value);
+	public:
+		bool hasAttrib(const std::string& name) const;
+		bool hasAttrib(const VertexDataType& type) const;
 	protected:
 		/**
 		*	基础信息
@@ -87,5 +87,9 @@ void render::Material::setUniform(const std::string& name, const TYPE& value) \
 		*	shader设置函数
 		*/
 		ShaderProgramFunc _programFunc = nullptr;
+		/**
+		*	shader参数配置
+		*/
+		MaterialSetting* _materialSetting = nullptr;
 	};
 }

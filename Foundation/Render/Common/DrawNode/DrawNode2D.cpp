@@ -4,6 +4,8 @@
 #include "Common/Mesh/import.h"
 #include "Common/Texture/Texture2D.h"
 #include "Common/Scene/Cameras.h"
+#include "Common/Fragment/import.h"
+#include "FragmentOperator.h"
 
 render::DrawNode2D::DrawNode2D()
 {

@@ -142,7 +142,7 @@ void SystemEnv::updateCamera()
 		{
 			//pCamera->setVisible(false);
 
-			pCamera->setPositionZ(0.0f);
+			pCamera->setPositionZ(0);
 			Utility::loadPrimitiveShader(pCamera->getDebugDraw()->getRenderNode());
 
 			render::Sphere* pSphere = CREATE_NODE(render::Sphere);

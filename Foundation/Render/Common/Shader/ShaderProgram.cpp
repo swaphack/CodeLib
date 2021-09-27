@@ -420,3 +420,59 @@ void render::ShaderProgram::removeAllSubroutineUniforms()
 	}
 	_subroutineUniforms.clear();
 }
+
+void render::ShaderProgram::setUniformValue(const std::string& name, int value)
+{
+	auto pUniform = getUniform(name);
+	if (pUniform == nullptr) return;
+	pUniform->setValue(value);
+}
+
+void render::ShaderProgram::setUniformValue(const std::string& name, float value)
+{
+	auto pUniform = getUniform(name);
+	if (pUniform == nullptr) return;
+	pUniform->setValue(value);
+}
+
+void render::ShaderProgram::setUniformValue(const std::string& name, const math::Vector2& value)
+{
+	auto pUniform = getUniform(name);
+	if (pUniform == nullptr) return;
+	pUniform->setValue2(1, value.getValue());
+}
+
+void render::ShaderProgram::setUniformValue(const std::string& name, const math::Vector3& value)
+{
+	auto pUniform = getUniform(name);
+	if (pUniform == nullptr) return;
+	pUniform->setValue3(1, value.getValue());
+}
+
+void render::ShaderProgram::setUniformValue(const std::string& name, const math::Vector4& value)
+{
+	auto pUniform = getUniform(name);
+	if (pUniform == nullptr) return;
+	pUniform->setValue4(1, value.getValue());
+}
+
+void render::ShaderProgram::setUniformValue(const std::string& name, const math::Matrix2x2& value)
+{
+	auto pUniform = getUniform(name);
+	if (pUniform == nullptr) return;
+	pUniform->setMatrix2x2(value);
+}
+
+void render::ShaderProgram::setUniformValue(const std::string& name, const math::Matrix3x3& value)
+{
+	auto pUniform = getUniform(name);
+	if (pUniform == nullptr) return;
+	pUniform->setMatrix3x3(value);
+}
+
+void render::ShaderProgram::setUniformValue(const std::string& name, const math::Matrix4x4& value)
+{
+	auto pUniform = getUniform(name);
+	if (pUniform == nullptr) return;
+	pUniform->setMatrix4x4(value);
+}
