@@ -90,7 +90,7 @@ void render::DebugDraw::drawOrtho(const ViewParameter& paramter, const phy::Colo
 
 void render::DebugDraw::drawFrustum(const ViewParameter& paramter, const phy::Color4F& color)
 {
-	float zNear = -paramter.zNear;
+	float zNear = paramter.zNear;
 	math::Vector3 nearLeftBottom(paramter.xLeft, paramter.yBottom, zNear);
 	math::Vector3 nearRightBottom(paramter.xRight, paramter.yBottom, zNear);
 	math::Vector3 nearRightTop(paramter.xRight, paramter.yTop, zNear);

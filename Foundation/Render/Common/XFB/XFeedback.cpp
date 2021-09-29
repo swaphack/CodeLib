@@ -152,7 +152,8 @@ void render::XFeedback::run()
 	GLDebug::showError();
 	GLTransformFeedback::beginTransformFeedback(_primitiveMode);
 	GLDebug::showError();
-	GLBufferObjects::drawArrays(DrawMode::POINTS, 0, _watchCount);
+	//GLTransformFeedback::drawTransformFeedback(DrawTransformFeedbackMode::POINTS, _XFBObject->getTransformFeedbackID());
+	GLBufferObjects::drawArrays((DrawMode)_primitiveMode, 0, _watchCount);
 	GLDebug::showError();
 	GLTransformFeedback::endTransformFeedback();
 
@@ -161,7 +162,7 @@ void render::XFeedback::run()
 		GLState::disable(EnableMode::RASTERIZER_DISCARD);
 	}
 
-	GLRender::flush();
+	GLRender::finish();
 	//
 	GLDebug::showError();
 	_shaderProgram->unuse();

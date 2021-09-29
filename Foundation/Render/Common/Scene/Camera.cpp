@@ -33,9 +33,9 @@ bool Camera::init()
 		return false;
 	}
 
-	_viewShapeDraw = CREATE_NODE(DebugDraw);
-	_viewShapeDraw->setCamera(this);
-	this->addChild(_viewShapeDraw, INT_MAX);
+	_shapeDraw = CREATE_NODE(DebugDraw);
+	_shapeDraw->setCamera(this);
+	this->addChild(_shapeDraw, INT_MAX);
 
 	_debugDraw = CREATE_NODE(DebugDraw);
 	_debugDraw->setPointSize(10);
@@ -137,11 +137,15 @@ render::DebugDraw* render::Camera::getDebugDraw() const
 {
 	return _debugDraw;
 }
-void render::Camera::setViewDrawVisible(bool bVisible)
+DebugDraw* render::Camera::getShapeDraw() const
 {
-	if (_viewShapeDraw)
+	return _shapeDraw;
+}
+void render::Camera::setShapeVisible(bool bVisible)
+{
+	if (_shapeDraw)
 	{
-		_viewShapeDraw->setVisible(bVisible);
+		_shapeDraw->setVisible(bVisible);
 	}
 }
 math::Vector3 render::Camera::project(const math::Vector2& worldPoint) const

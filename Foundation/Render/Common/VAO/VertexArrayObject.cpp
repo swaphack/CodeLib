@@ -1,7 +1,9 @@
 #include "VertexArrayObject.h"
+
 #include "Graphic/import.h"
 #include "Common/Buffer/Buffer.h"
 #include "VertexArrayAttrib.h"
+#include "VertexAttribPointer.h"
 
 using namespace render;
 
@@ -66,6 +68,34 @@ void render::VertexArrayObject::removeAllVertexAttribs()
 	}
 
 	_mapVertexAttrib.clear();
+}
+
+void render::VertexArrayObject::enableVertexArrayAttrib(uint32_t index)
+{
+	auto attrib = getVertexAttrib<VertexArrayAttrib>(index);
+	if (attrib != nullptr)
+	{
+		attrib->enableVertexArrayAttrib();
+	}
+}
+
+void render::VertexArrayObject::disableVertexArrayAttrib(uint32_t index)
+{
+	auto attrib = getVertexAttrib<VertexArrayAttrib>(index);
+	if (attrib != nullptr)
+	{
+		attrib->disableVertexArrayAttrib();
+	}
+}
+
+void render::VertexArrayObject::setVertexAttribPointer(uint32_t index, uint32_t count, VertexAttribPointerType type, uint32_t stride, uint32_t offset)
+{
+	auto attrib = getVertexAttrib<VertexAttribPointer>(index);
+	if (attrib != nullptr)
+	{
+		attrib->enableVertexArrayAttrib();
+		attrib->setVertexAttribPointer(count, type, stride, offset);
+	}
 }
 
 void render::VertexArrayObject::initVAO()

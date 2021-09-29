@@ -7,6 +7,8 @@
 #include "Graphic/import.h"
 #include "ShaderProgramPipeline.h"
 #include "ShaderProgramUniform.h"
+#include "Common/VAO/VertexArrayObject.h"
+#include "Common/VAO/VertexArrayBufferObject.h"
 
 using namespace render;
 
@@ -475,4 +477,54 @@ void render::ShaderProgram::setUniformValue(const std::string& name, const math:
 	auto pUniform = getUniform(name);
 	if (pUniform == nullptr) return;
 	pUniform->setMatrix4x4(value);
+}
+
+void render::ShaderProgram::enableAttrib(VertexArrayBufferObject* vabo, const std::string& name)
+{
+	if (vabo == nullptr) return;
+	auto attrib = getAttrib(name);
+	if (attrib)
+	{
+		vabo->enableVertexArrayAttrib(attrib->getAttribID());
+	}
+}
+
+void render::ShaderProgram::disableAttrib(VertexArrayBufferObject* vabo, const std::string& name)
+{
+	if (vabo == nullptr) return;
+	auto attrib = getAttrib(name);
+	if (attrib)
+	{
+		vabo->disableVertexArrayAttrib(attrib->getAttribID());
+	}
+}
+
+void render::ShaderProgram::enableAttrib(VertexArrayObject* vao, const std::string& name)
+{
+	if (vao == nullptr) return;
+	auto attrib = getAttrib(name);
+	if (attrib)
+	{
+		vao->enableVertexArrayAttrib(attrib->getAttribID());
+	}
+}
+
+void render::ShaderProgram::disableAttrib(VertexArrayObject* vao, const std::string& name)
+{
+	if (vao == nullptr) return;
+	auto attrib = getAttrib(name);
+	if (attrib)
+	{
+		vao->disableVertexArrayAttrib(attrib->getAttribID());
+	}
+}
+
+void render::ShaderProgram::bindAttribPointer(VertexArrayObject* vao, const std::string& name, int size, VertexAttribPointerType type, uint32_t offset)
+{
+	if (vao == nullptr) return;
+	auto attrib = getAttrib(name);
+	if (attrib)
+	{
+		vao->setVertexAttribPointer(attrib->getAttribID(), size, type, 0, offset);
+	}
 }

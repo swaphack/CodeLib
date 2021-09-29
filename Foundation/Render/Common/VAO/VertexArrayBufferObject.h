@@ -28,7 +28,7 @@ namespace render
 		/**
 		*	设置引用数据
 		*/
-		void setVertexBuffer(int index, uint32_t count, VertexAttribPointerType type, uint32_t stride, uint32_t offset);
+		void setVertexAttribPointer(int index, uint32_t count, VertexAttribPointerType type, uint32_t stride, uint32_t offset);
 		/**
 		*	绑定
 		*/
@@ -49,6 +49,10 @@ namespace render
 		*	激活字段
 		*/
 		void enableVertexArrayAttrib(uint32_t index);
+		/**
+		*	失效字段
+		*/
+		void disableVertexArrayAttrib(uint32_t index);
 	protected:
 		/**
 		*	初始化

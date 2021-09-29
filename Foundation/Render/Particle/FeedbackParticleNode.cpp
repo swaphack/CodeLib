@@ -44,38 +44,19 @@ bool render::FeedbackParticleNode::init()
 	_feedback->setInputFunc([this](ShaderProgram* program) {
 		GLDebug::showError();
 
-		_updateBufferObject->bindVertexArray();
 		_updateBufferObject->bindBuffer();
+		_updateBufferObject->bindVertexArray();
 		GLDebug::showError();
-		auto in_position = program->getAttrib("in_position");
-		if (in_position)
-		{
-			_updateBufferObject->enableVertexArrayAttrib(in_position->getAttribID());
-		}
+		program->enableAttrib(_updateBufferObject, "in_position");
 		GLDebug::showError();
-		auto in_speedAcceleration = program->getAttrib("in_speedAcceleration");
-		if (in_speedAcceleration) 
-		{
-			_updateBufferObject->enableVertexArrayAttrib(in_speedAcceleration->getAttribID());
-		}
+		program->enableAttrib(_updateBufferObject, "in_speedAcceleration");
 		GLDebug::showError();
-		auto in_angleAcceleration = program->getAttrib("in_angleAcceleration");
-		if (in_angleAcceleration)
-		{
-			_updateBufferObject->enableVertexArrayAttrib(in_angleAcceleration->getAttribID());
-		}
+		program->enableAttrib(_updateBufferObject, "in_angleAcceleration");
 		//_updateBufferObject->unbindVertexArray();
 		GLDebug::showError();
-		auto lifeTime = program->getUniform("lifeTime");
-		if (lifeTime) lifeTime->setValue(_passedTime);
-		GLDebug::showError();
-		auto deltaTime = program->getUniform("deltaTime");
-		if (deltaTime) deltaTime->setValue(_deltaTime);
-		GLDebug::showError();
-		auto maxTime = program->getUniform("maxTime");
-		if (maxTime) maxTime->setValue(10.0f);
-		
-		GLDebug::showError();
+		program->setUniformValue("lifeTime", _passedTime);
+		program->setUniformValue("deltaTime", _deltaTime);
+		program->setUniformValue("maxTime", 10.0f);
 		GLDebug::showError();
 	});
 
@@ -174,29 +155,30 @@ void render::FeedbackParticleNode::updateParticleParameter()
 	_renderBufferObject->bindBuffer();
 	_renderBufferObject->resizeBuffer(posSize);
 	_renderBufferObject->bindVertexArray();
-	_renderBufferObject->setVertexBuffer(0, 3, VertexAttribPointerType::FLOAT, 0, 0);
+	_renderBufferObject->setVertexAttribPointer(0, 3, VertexAttribPointerType::FLOAT, 0, 0);
 	_renderBufferObject->unbindVertexArray();
 	_renderBufferObject->unbindBuffer();
 
 	GLDebug::showError();
 
 	_updateBufferObject->bindBuffer();
+	_updateBufferObject->bindVertexArray();
+
 	_updateBufferObject->resizeBuffer(len);
 	for (int i = 0; i < _particleCount; i++)
 	{
-		math::Vector3 pos(sys::Random::getNumber(getWidth() / 2, getWidth()) , sys::Random::getNumber(getHeight() / 2, getHeight()), sys::Random::getNumber(getDepth() / 2, getDepth()));
-		math::Vector3 speed(sys::Random::getNumber(1.0f,2.0f), sys::Random::getNumber(1.0f,2.0f), sys::Random::getNumber(1.0f,2.0f));
-		math::Vector3 angle(sys::Random::getNumber(1.0f,2.0f), sys::Random::getNumber(1.0f,2.0f), sys::Random::getNumber(1.0f,2.0f));
+		math::Vector3 pos(sys::Random::getNumber(0,100) , sys::Random::getNumber(0, 100), sys::Random::getNumber(-100, 100));
+		math::Vector3 speed(sys::Random::getNumber(1.0f,20.0f), sys::Random::getNumber(1.0f,20.0f), sys::Random::getNumber(1.0f,20.0f));
+		math::Vector3 angle(sys::Random::getNumber(1.0f,20.0f), sys::Random::getNumber(1.0f,20.0f), sys::Random::getNumber(1.0f,20.0f));
 
 		_updateBufferObject->setSubBuffer(3 * i, 3 * UNIT_SIZE, pos.getValue());
 		_updateBufferObject->setSubBuffer(posSize + 3 * i, 3 * UNIT_SIZE, speed.getValue());
 		_updateBufferObject->setSubBuffer(posSize + speedSize + 3 * i, 3 * UNIT_SIZE, angle.getValue());
 	}
 
-	_updateBufferObject->bindVertexArray();
-	_updateBufferObject->setVertexBuffer(0, 3, VertexAttribPointerType::FLOAT, 0, 0);
-	_updateBufferObject->setVertexBuffer(1, 3, VertexAttribPointerType::FLOAT, 0, posSize);
-	_updateBufferObject->setVertexBuffer(2, 3, VertexAttribPointerType::FLOAT, 0, posSize + speedSize);
+	_updateBufferObject->setVertexAttribPointer(0, 3, VertexAttribPointerType::FLOAT, 0, 0);
+	_updateBufferObject->setVertexAttribPointer(1, 3, VertexAttribPointerType::FLOAT, 0, posSize);
+	_updateBufferObject->setVertexAttribPointer(2, 3, VertexAttribPointerType::FLOAT, 0, posSize + speedSize);
 
 	_updateBufferObject->unbindVertexArray();
 	_updateBufferObject->unbindBuffer();

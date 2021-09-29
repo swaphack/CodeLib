@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Common/Buffer/BufferObject.h"
-
+#include "Graphic/GLAPI/macros.h"
 namespace render
 {
 	class ArrayBuffer;
@@ -67,6 +67,20 @@ namespace render
 		*	删除顶点属性指针
 		*/
 		void removeAllVertexAttribs();
+	public:
+		/**
+		*	使顶点属性指针生效
+		*/
+		void enableVertexArrayAttrib(uint32_t index);
+
+		/**
+		*	使顶点属性指针失效
+		*/
+		void disableVertexArrayAttrib(uint32_t index);
+		/**
+		*	设置顶点属性值
+		*/
+		void setVertexAttribPointer(uint32_t index, uint32_t count, VertexAttribPointerType type, uint32_t stride, uint32_t offset);
 	protected:
 		/**
 		*	生成vao

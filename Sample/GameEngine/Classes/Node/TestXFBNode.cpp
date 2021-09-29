@@ -34,8 +34,8 @@ void TestXFBNode::initNodes()
 	vab->setSubBuffer(0, UNIT_SIZE, &num0);
 	vab->setSubBuffer(UNIT_SIZE, UNIT_SIZE, &num1);
 
-	vab->setVertexBuffer(0, 1, VertexAttribPointerType::FLOAT, 0, 0);
-	vab->setVertexBuffer(1, 1, VertexAttribPointerType::FLOAT, 0, UNIT_SIZE);
+	vab->setVertexAttribPointer(0, 1, VertexAttribPointerType::FLOAT, 0, 0);
+	vab->setVertexAttribPointer(1, 1, VertexAttribPointerType::FLOAT, 0, UNIT_SIZE);
 	vab->unbindVertexArray();
 
 	xfbObj->setInputFunc([vab](render::ShaderProgram* program) {

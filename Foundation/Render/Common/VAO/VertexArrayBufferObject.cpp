@@ -28,7 +28,7 @@ void render::VertexArrayBufferObject::setSubBuffer(uint32_t offset, uint32_t siz
 	GLDebug::showError();
 }
 
-void render::VertexArrayBufferObject::setVertexBuffer(int index, uint32_t count, VertexAttribPointerType type, uint32_t stride, uint32_t offset)
+void render::VertexArrayBufferObject::setVertexAttribPointer(int index, uint32_t count, VertexAttribPointerType type, uint32_t stride, uint32_t offset)
 {
 	GLDebug::showError();
 	auto pData = _vao->getVertexAttrib<VertexAttribPointer>(index);
@@ -62,9 +62,12 @@ void render::VertexArrayBufferObject::unbindVertexArray()
 
 void render::VertexArrayBufferObject::enableVertexArrayAttrib(uint32_t index)
 {
-	_vao->bindVertexArray();
-	auto pData = _vao->getVertexAttrib<VertexAttribPointer>(index);
-	pData->enableVertexArrayAttrib();
+	_vao->enableVertexArrayAttrib(index);
+}
+
+void render::VertexArrayBufferObject::disableVertexArrayAttrib(uint32_t index)
+{
+	_vao->disableVertexArrayAttrib(index);
 }
 
 void render::VertexArrayBufferObject::initVABO()

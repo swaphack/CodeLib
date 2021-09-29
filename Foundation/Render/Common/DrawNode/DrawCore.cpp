@@ -160,13 +160,8 @@ void render::DrawCore::startUpdateShaderVertexValue(const DrawCoreParameter& par
 			{
 				return;
 			}
-			auto pAttrib = program->getAttrib(item.second);
-			if (pAttrib)
-			{
-				VertexAttribPointer* pointer = vao->getVertexAttrib<VertexAttribPointer>(pAttrib->getAttribID());
-				pointer->enableVertexArrayAttrib();
-				pointer->setVertexAttribPointer(vertices.getUnitSize(), VertexAttribPointerType::FLOAT, nOffset);
-			}
+			program->bindAttribPointer(vao, item.second, 
+				vertices.getUnitSize(), VertexAttribPointerType::FLOAT, nOffset);
 
 			nOffset += nVerticeSize;
 		}
@@ -176,13 +171,8 @@ void render::DrawCore::startUpdateShaderVertexValue(const DrawCoreParameter& par
 			{
 				continue;
 			}
-			auto pAttrib = program->getAttrib(item.second);
-			if (pAttrib)
-			{
-				VertexAttribPointer* pointer = vao->getVertexAttrib<VertexAttribPointer>(pAttrib->getAttribID());
-				pointer->enableVertexArrayAttrib();
-				pointer->setVertexAttribPointer(colors.getUnitSize(), VertexAttribPointerType::FLOAT, nOffset);
-			}
+			program->bindAttribPointer(vao, item.second,
+				colors.getUnitSize(), VertexAttribPointerType::FLOAT, nOffset);
 			nOffset += nColorSize;
 		}
 		else if (item.first == VertexDataType::UV)
@@ -191,13 +181,8 @@ void render::DrawCore::startUpdateShaderVertexValue(const DrawCoreParameter& par
 			{
 				continue;
 			}
-			auto pAttrib = program->getAttrib(item.second);
-			if (pAttrib)
-			{
-				VertexAttribPointer* pointer = vao->getVertexAttrib<VertexAttribPointer>(pAttrib->getAttribID());
-				pointer->enableVertexArrayAttrib();
-				pointer->setVertexAttribPointer(texcoords.getUnitSize(), VertexAttribPointerType::FLOAT, nOffset);
-			}
+			program->bindAttribPointer(vao, item.second,
+				texcoords.getUnitSize(), VertexAttribPointerType::FLOAT, nOffset);
 			nOffset += nUVSize;
 		}
 		else if (item.first == VertexDataType::NORMAL)
@@ -206,13 +191,8 @@ void render::DrawCore::startUpdateShaderVertexValue(const DrawCoreParameter& par
 			{
 				continue;
 			}
-			auto pAttrib = program->getAttrib(item.second);
-			if (pAttrib)
-			{
-				VertexAttribPointer* pointer = vao->getVertexAttrib<VertexAttribPointer>(pAttrib->getAttribID());
-				pointer->enableVertexArrayAttrib();
-				pointer->setVertexAttribPointer(normals.getUnitSize(), VertexAttribPointerType::FLOAT, nOffset);
-			}
+			program->bindAttribPointer(vao, item.second,
+				normals.getUnitSize(), VertexAttribPointerType::FLOAT, nOffset);
 			nOffset += nNormalSize;
 		}
 		else if (item.first == VertexDataType::TANGENT)
@@ -221,13 +201,8 @@ void render::DrawCore::startUpdateShaderVertexValue(const DrawCoreParameter& par
 			{
 				continue;
 			}
-			auto pAttrib = program->getAttrib(item.second);
-			if (pAttrib)
-			{
-				VertexAttribPointer* pointer = vao->getVertexAttrib<VertexAttribPointer>(pAttrib->getAttribID());
-				pointer->enableVertexArrayAttrib();
-				pointer->setVertexAttribPointer(tangents.getUnitSize(), VertexAttribPointerType::FLOAT, nOffset);
-			}
+			program->bindAttribPointer(vao, item.second,
+				tangents.getUnitSize(), VertexAttribPointerType::FLOAT, nOffset);
 			nOffset += nTangentSize;
 		}
 		else if (item.first == VertexDataType::BITANGENT)
@@ -236,13 +211,8 @@ void render::DrawCore::startUpdateShaderVertexValue(const DrawCoreParameter& par
 			{
 				continue;
 			}
-			auto pAttrib = program->getAttrib(item.second);
-			if (pAttrib)
-			{
-				VertexAttribPointer* pointer = vao->getVertexAttrib<VertexAttribPointer>(pAttrib->getAttribID());
-				pointer->enableVertexArrayAttrib();
-				pointer->setVertexAttribPointer(bitangents.getUnitSize(), VertexAttribPointerType::FLOAT, nOffset);
-			}
+			program->bindAttribPointer(vao, item.second,
+				bitangents.getUnitSize(), VertexAttribPointerType::FLOAT, nOffset);
 			nOffset += nBitangentSize;
 		}
 		GLDebug::showError();

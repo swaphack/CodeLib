@@ -58,7 +58,7 @@ void* render::Buffer::getMapBuffer(AccessType type)
 	return GLBufferObjects::getMapBuffer(_target, type);
 }
 
-void render::Buffer::getMapBuffer(uint32_t index, ptrdiff_t offset, ptrdiff_t size)
+void render::Buffer::bindMapBuffer(uint32_t index, ptrdiff_t offset, ptrdiff_t size)
 {
 	GLBufferObjects::bindBufferRange(_target, index, _bufferID, offset, size);
 }

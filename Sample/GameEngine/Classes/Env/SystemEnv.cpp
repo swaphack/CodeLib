@@ -103,6 +103,7 @@ void SystemEnv::updateCamera()
 			pCamera->setPositionZ(d);
 
 			Utility::loadPrimitiveShader(pCamera->getDebugDraw()->getRenderNode());
+			Utility::loadPrimitiveShader(pCamera->getShapeDraw()->getRenderNode());
 
 			render::Sphere* pSphere = CREATE_NODE(render::Sphere);
 			pSphere->setRadius(25);
@@ -125,6 +126,7 @@ void SystemEnv::updateCamera()
 			pCamera->setPositionZ(d);
 
 			Utility::loadPrimitiveShader(pCamera->getDebugDraw()->getRenderNode());
+			Utility::loadPrimitiveShader(pCamera->getShapeDraw()->getRenderNode());
 
 			render::Sphere* pSphere = CREATE_NODE(render::Sphere);
 			pSphere->setRadius(20);
@@ -144,6 +146,7 @@ void SystemEnv::updateCamera()
 
 			pCamera->setPositionZ(0);
 			Utility::loadPrimitiveShader(pCamera->getDebugDraw()->getRenderNode());
+			Utility::loadPrimitiveShader(pCamera->getShapeDraw()->getRenderNode());
 
 			render::Sphere* pSphere = CREATE_NODE(render::Sphere);
 			pSphere->setRadius(15);

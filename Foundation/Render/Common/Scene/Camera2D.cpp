@@ -33,6 +33,14 @@ void render::Camera2D::updateViewPort()
 		-0.5f * h, 0.5f * h,
 		_viewParameter.zNear, _viewParameter.zFar);
 
-	_viewShapeDraw->cleanup();
-	_viewShapeDraw->drawOrtho(_viewParameter);
+	ViewParameter parameter;
+	parameter.xLeft = -0.5f * w;
+	parameter.xRight = 0.5f * w;
+	parameter.yBottom = -0.5f * h;
+	parameter.yTop = 0.5f * h;
+	parameter.zNear = -_viewParameter.zNear;
+	parameter.zFar = -_viewParameter.zFar;
+
+	_shapeDraw->cleanup();
+	_shapeDraw->drawOrtho(parameter);
 }

@@ -51,8 +51,10 @@ namespace render
 	public:
 		// 调试绘制
 		DebugDraw* getDebugDraw() const;
+		// 调试绘制
+		DebugDraw* getShapeDraw() const;
 		// 视图绘制是否显示
-		void setViewDrawVisible(bool bVisible);
+		void setShapeVisible(bool bVisible);
 		// 投影
 		math::Vector3 project(const math::Vector2& worldPoint) const;
 		// 逆投影
@@ -95,11 +97,11 @@ namespace render
 		math::Matrix4x4 _projectMatrix;
 		// 视图矩阵
 		math::Matrix4x4 _viewMatrix;
-		// 2d视野参数
+		// 视野参数
 		ViewParameter _viewParameter;
 		// 调试绘制
 		DebugDraw* _debugDraw = nullptr;
-		// 视图性转绘制
-		DebugDraw* _viewShapeDraw = nullptr;
+		// 视图形状绘制
+		DebugDraw* _shapeDraw = nullptr;
 	};
 }

@@ -15,6 +15,9 @@ namespace render
 	class ShaderProgramPipeline;
 	class ShaderProgramUniform;
 
+	class VertexArrayBufferObject;
+	class VertexArrayObject;
+
 	/**
 	*	着色器控制程序
 	*	glCreateProgram
@@ -206,6 +209,14 @@ namespace render
 		void setUniformValue(const std::string& name, const math::Matrix2x2& value);
 		void setUniformValue(const std::string& name, const math::Matrix3x3& value);
 		void setUniformValue(const std::string& name, const math::Matrix4x4& value);
+	public:// attrib生效
+		void enableAttrib(VertexArrayBufferObject* vabo, const std::string& name);
+		void disableAttrib(VertexArrayBufferObject* vabo, const std::string& name);
+		void enableAttrib(VertexArrayObject* vao, const std::string& name);
+		void disableAttrib(VertexArrayObject* vao, const std::string& name);
+	public:// 绑定attrib
+		void bindAttribPointer(VertexArrayObject* vao, const std::string& name,
+			int size, VertexAttribPointerType type, uint32_t offset);
 	private:
 		/**
 		*	程序编号

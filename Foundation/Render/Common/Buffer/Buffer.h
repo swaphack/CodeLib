@@ -53,7 +53,7 @@ namespace render
 		/**
 		*	设置数据范围
 		*/
-		void getMapBuffer(uint32_t index, ptrdiff_t offset, ptrdiff_t size);
+		void bindMapBuffer(uint32_t index, ptrdiff_t offset, ptrdiff_t size);
 		/**
 		*	获取关联数据
 		*/
