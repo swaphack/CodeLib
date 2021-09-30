@@ -101,11 +101,36 @@ namespace render
 		*	获取摄像头
 		*/
 		Camera* getCamera(const Node* node);
+	public:
+		/**
+		*	重置绘制调用次数
+		*/
+		void beginRecordDrawCall();
+		/**
+		*	增加绘制调用次数
+		*/
+		void increaseDrawCall();
+		/**
+		*	重置绘制调用次数
+		*/
+		void endRecordDrawCall();
+		/**
+		*	获取绘制调用次数
+		*/
+		int getDrawCallCount();
 	private:
 		/**
 		*	临时矩阵
 		*/
 		math::Matrix4x4 _tempMatrix;
+		/**
+		*	绘制调用次数
+		*/
+		int _drawCallCount = 0;
+		/**
+		*	一次完整绘制调用次数
+		*/
+		int _oneDrawCallCount = 0;
 	};
 
 #define G_DRAWCORE sys::Instance<render::DrawCore>::getInstance()

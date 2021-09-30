@@ -98,9 +98,25 @@ namespace render
 		*/
 		const render::RectVertex& getLocalRectVertex() const;
 		/**
+		*	世界坐标
+		*/
+		const render::RectVertex& getWorldRectVertex() const;
+		/**
+		*	多边形
+		*/
+		const math::Polygon& getBoxPolygon() const;
+		/**
+		*	包围盒
+		*/
+		const math::Rect& getBoxRect() const;
+		/**
 		*	是否包含点击点
 		*/
 		virtual bool containsTouchPoint(const math::Vector2& touchPoint);
+		/**
+		*	是否与其他2d盒子相交
+		*/
+		virtual bool isOverlap(const Box2DDrawProtocol* box2d);
 	protected:
 		/**
 		*	形状改变
@@ -115,6 +131,11 @@ namespace render
 		render::RectVertex _localRectVertex;
 		// 世界矩形框
 		render::RectVertex _worldRectVertex;
+
+		// 世界多边形
+		math::Polygon _boxPolygon;
+		// 世界包围盒
+		math::Rect _boxRect;
 	};
 
 	/**

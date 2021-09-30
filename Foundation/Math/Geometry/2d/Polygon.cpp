@@ -61,7 +61,7 @@ void math::Polygon::setPoint(int index, const math::Vector3& point)
 	_points[index] = point;
 }
 
-bool math::Polygon::contains(const Vector2& point)
+bool math::Polygon::contains(const Vector2& point) const
 {
 	int32_t sum = 0;
 	Vector2 p0;
@@ -84,7 +84,7 @@ bool math::Polygon::contains(const Vector2& point)
 	return sum % 2 == 1;
 }
 
-bool math::Polygon::includes(const Vector2& point)
+bool math::Polygon::includes(const Vector2& point) const
 {
 	int32_t sum = 0;
 	Vector2 p0;
@@ -109,25 +109,28 @@ bool math::Polygon::includes(const Vector2& point)
 	return sum % 2 == 1;
 }
 
-bool math::Polygon::contains(const LineSegment2d& line)
+bool math::Polygon::contains(const LineSegment2d& line) const
 {
 	bool one = contains(line.getSrc());
 	bool two = contains(line.getDest());
 	return one && two;
 }
 
-bool math::Polygon::intersects(const LineSegment2d& line)
+bool math::Polygon::intersects(const LineSegment2d& line) const
 {
 	bool one = contains(line.getSrc());
 	bool two = contains(line.getDest());
 	return (one && !two) || (!one && two);
 }
 
-bool math::Polygon::intersects(const Polygon& polygon)
+bool math::Polygon::intersects(const Polygon& polygon) const
 {
-	for (int32_t i = 0; i < _points.size(); i++)
+	if (polygon.getPointCount() == 0 || getPointCount() == 0)
+		return false;
+	int pointCount = polygon.getPointCount();
+	for (int32_t i = 0; i < pointCount; i++)
 	{
-		LineSegment2d line(polygon[i], polygon[(i + 1) % polygon.getPointCount()]);
+		LineSegment2d line(polygon[i], polygon[(i + 1) % pointCount]);
 		if (this->intersects(line))
 		{
 			return true;
@@ -137,7 +140,7 @@ bool math::Polygon::intersects(const Polygon& polygon)
 	return false;
 }
 
-bool math::Polygon::rayHit(const Ray& ray, math::Vector3& point)
+bool math::Polygon::rayHit(const Ray& ray, math::Vector3& point) const
 {
 	if (_points.size() < 3)
 	{
@@ -158,6 +161,35 @@ bool math::Polygon::rayHit(const Ray& ray, math::Vector3& point)
 	}
 
 	return false;
+}
+
+math::Rect math::Polygon::getBoundingBox() const
+{
+	math::Rect rect;
+
+	if (_points.size() < 3)
+	{
+		return rect;
+	}
+	math::Vector3 min = _points[0];
+	math::Vector3 max = _points[1];
+
+	for (int i = 1; i < _points.size(); i++)
+	{
+		if (min.getX() > _points[i].getX())
+			min.setX(_points[i].getX());
+		if (min.getY() > _points[i].getY())
+			min.setY(_points[i].getY());
+
+		if (max.getX() < _points[i].getX())
+			max.setX(_points[i].getX());
+		if (max.getY() < _points[i].getY())
+			max.setY(_points[i].getY());
+	}
+
+	rect.setOrigin(min);
+	rect.setSize(max - min);
+	return rect;
 }
 
 math::Polygon& math::Polygon::operator=(const Polygon& polygon)

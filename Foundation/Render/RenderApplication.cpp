@@ -1,6 +1,6 @@
 #include "RenderApplication.h"
 #include "Common/Material/MaterialGlobalParameter.h"
-
+#include "Common/DrawNode/DrawCore.h"
 #include <ctime>
 #include <direct.h>
 
@@ -46,6 +46,7 @@ void RenderApplication::update()
 	}
 
 	G_TOUCHMANAGER->process();
+	G_DRAWCORE->beginRecordDrawCall();
 
 	long nowClock = clock();
 
@@ -61,7 +62,7 @@ void RenderApplication::update()
 		// 避免双缓区存产生抖动
 		_canvas->draw();
 	}
-
+	G_DRAWCORE->endRecordDrawCall();
 	checkAutoRealsePool();
 }
 

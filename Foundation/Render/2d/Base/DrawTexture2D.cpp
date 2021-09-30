@@ -53,7 +53,7 @@ void DrawTexture2D::setTextureWithRect(const std::string& filepath)
 	{
 		this->setVolume(0, 0, 0);
 	}
-
+	updateUVWithTexture();
 	this->notify(NodeNotifyType::TEXTURE);
 }
 
@@ -69,8 +69,22 @@ void render::DrawTexture2D::setTextureWithRect(const Texture* texture)
 	{
 		this->setVolume(0, 0, 0);
 	}
-
+	updateUVWithTexture();
 	this->notify(NodeNotifyType::TEXTURE);
+}
+
+void render::DrawTexture2D::setUV(const math::Rect& rect, const math::Size& size)
+{
+	if (size.getWidth() == 0 || size.getHeight() == 0)
+		return;
+
+	float uvs[8] = {
+		rect.getMinX()/size.getWidth(), rect.getMinY() / size.getHeight(),
+		rect.getMaxX() / size.getWidth(), rect.getMinY() / size.getHeight(),
+		rect.getMaxX() / size.getWidth(), rect.getMaxY() / size.getHeight(),
+		rect.getMinX() / size.getWidth(), rect.getMaxY() / size.getHeight(),
+	};
+	memcpy(_rectVertex.uvs, uvs, sizeof(uvs));
 }
 
 void DrawTexture2D::setFlipX(bool status)
@@ -93,6 +107,14 @@ void DrawTexture2D::setFlipY(bool status)
 bool DrawTexture2D::isFlipY()
 {
 	return _bFlipY;
+}
+
+void render::DrawTexture2D::updateUVWithTexture()
+{
+	if (getTexture() == nullptr) return;
+	math::Size size(getTexture()->getWidth(), getTexture()->getHeight());
+	math::Rect rect(math::Vector2(), math::Size(this->getWidth(), this->getHeight()));
+	VertexTool::setTexture2DCoords(&_rectVertex, size, rect);
 }
 
 void DrawTexture2D::updateTexture2DMeshData()

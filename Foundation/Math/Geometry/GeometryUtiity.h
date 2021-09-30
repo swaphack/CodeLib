@@ -2,7 +2,7 @@
 
 #include "Algebra/Vector/import.h"
 #include "2d/Size.h"
-
+#include <vector>
 namespace math
 {
 	/**

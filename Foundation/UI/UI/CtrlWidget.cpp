@@ -32,13 +32,14 @@ bool ui::CtrlWidget::init()
 	// 添加属性改变监听
 	addNotifyListener(NodeNotifyType::SPACE, [this]() {
 		onCtrlWidgetBodyChange();
+		updateChildrenVisibleState();
 	});
 
 	// 添加属性改变监听
 	addNotifyListener(NodeNotifyType::BODY, [this]() {
 		onCtrlWidgetBodyChange();
-
 		broadcastBodyChange();
+		updateChildrenVisibleState();
 	});
 
 	this->addTouchFunc(render::TouchType::ENDED, [this](const math::Vector2& touchPoint) {
@@ -295,6 +296,32 @@ void ui::CtrlWidget::onParentBodyChange()
 	}
 
 	//broadcastBodyChange();
+}
+
+void ui::CtrlWidget::updateChildrenVisibleState()
+{
+	if (true)
+	{
+		return;
+	}
+	if (!isClippingEnabled())
+	{
+		for (auto item : _children)
+		{
+			item->setSkipDraw(false);
+		}
+	}
+	else
+	{
+		for (auto item : _children)
+		{
+			auto pBox = dynamic_cast<Box2DDrawProtocol*>(item);
+			if (pBox)
+			{
+				item->setSkipDraw(!this->isOverlap(pBox));
+			}
+		}
+	}
 }
 
 void ui::CtrlWidget::addProtectedWidget(CtrlWidget* widget)

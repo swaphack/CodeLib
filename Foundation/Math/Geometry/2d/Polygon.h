@@ -7,6 +7,7 @@
 #include "Geometry/base/Ray.h"
 #include <cstdint>
 #include "Basic/base.h"
+#include "Rect.h"
 
 namespace math
 {
@@ -50,28 +51,32 @@ namespace math
 		/**
 		*	是否包含点
 		*/
-		bool contains(const Vector2& point);
+		bool contains(const Vector2& point) const;
 
 		/**
 		*	点是否在内部
 		*/
-		bool includes(const Vector2& point);
+		bool includes(const Vector2& point) const;
 		/**
 		*	是否包含线段
 		*/
-		bool contains(const LineSegment2d& line);
+		bool contains(const LineSegment2d& line) const;
 		/**
 		*	是否与线段相交
 		*/
-		bool intersects(const LineSegment2d& line);
+		bool intersects(const LineSegment2d& line) const;
 		/**
 		*	是否与多边形相交
 		*/
-		bool intersects(const Polygon& polygon);
+		bool intersects(const Polygon& polygon) const;
 		/**
 		*	是否与射线相交
 		*/
-		bool rayHit(const Ray& ray, math::Vector3& point);
+		bool rayHit(const Ray& ray, math::Vector3& point) const;
+		/**
+		*	包围盒
+		*/
+		math::Rect getBoundingBox() const;
 	public:
 		/**
 		*	重载=

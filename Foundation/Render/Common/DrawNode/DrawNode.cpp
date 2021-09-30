@@ -217,6 +217,7 @@ void DrawNode::onDraw()
 		}
 
 		GLDebug::showError();
+		G_DRAWCORE->increaseDrawCall();
 		_mesh->drawWithBufferObject();
 		
 		if (isTessilationEnable())

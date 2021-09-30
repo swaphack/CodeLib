@@ -29,9 +29,13 @@ namespace math
 		float getMaxX() const;
 		float getMinY() const;
 		float getMaxY() const;
-
+		/**
+		*	起始点
+		*/
 		const Vector2& getOrigin() const;
-		
+		/**
+		*	大小
+		*/
 		const Size& getSize() const;
 	public:
 		/**
@@ -101,9 +105,9 @@ namespace math
 	public:
 		Rect& operator=(const Rect& rect);
 	protected:
-		// 原点
+		// 起始点
 		Vector2 _origin;
-		// 面积
+		// 大小
 		Size _size;
 	};
 }

@@ -1,6 +1,8 @@
 #pragma once
 
-#include "Algebra/import.h"
+#include "Algebra/Vector/Vector.h"
+#include "Algebra/Vector/Vector2.h"
+#include "Algebra/Vector/Vector3.h"
 
 namespace math
 {
@@ -13,6 +15,7 @@ namespace math
 		Size();
 		Size(float w, float h);
 		Size(const Vector2& size);
+		Size(const Vector3& size);
 		Size(const Size& size);
 		virtual ~Size();
 	public:

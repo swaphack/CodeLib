@@ -21,6 +21,10 @@ namespace render
 		void setTextureWithRect(const std::string& filepath);
 		// 设置图片纹理
 		void setTextureWithRect(const Texture* texture);
+	public:
+		// 设置纹理坐标
+		void setUV(const math::Rect& rect, const math::Size& size);
+	public:
 		// 设置水平翻转
 		void setFlipX(bool status);
 		// 是否水平翻转

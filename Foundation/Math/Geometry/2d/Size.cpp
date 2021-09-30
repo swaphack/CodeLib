@@ -19,6 +19,12 @@ Size::Size(const Vector2& size)
 	this->setHeight(size.getY());
 }
 
+Size::Size(const Vector3& size)
+{
+	this->setWidth(size.getX());
+	this->setHeight(size.getY());
+}
+
 Size::Size(const Size& size)
 {
 	this->setWidth(size.getWidth());

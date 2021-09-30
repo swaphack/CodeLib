@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <root width="1024" height="768" layout="1" fontPath="Default/Font/font_3.ttf">
 	<Layout name="body" showMask="1" maskColor="180,180,180,125" clip="1" marginState="1,1,1,1" size="100%,100%">
-		<ListView name="property" direction="2" marginState="1,1,1,1" size="100%,100%" clip="0" moveMultiple="5" verticalScroll="1" enableTouch="1">
+		<ListView name="property" direction="2" marginState="1,1,1,1" size="100%,100%" clip="0" moveMultiple="10" verticalScroll="1" enableTouch="1">
 			<ListView direction="0" size="100%,35">
 				<Text text="Type" size="50,100%" fontSize="20" textColor="255,255,255" />
 				<ListView size="180,100%" showMask="1" maskColor="100,100,100,125">
@@ -74,7 +74,7 @@
 						<ListView direction="0" size="50%,100%">
 							<Button name="MarginLeft" normalImage="Default/Image/arrow_black.png" selectedImage="Default/Image/arrow_red.png" size="39,41" rotation="0,0,-90" anchorPoint="0.5,0.5,0"/>
 						</ListView>
-						<ListView direction="1" size="50%,100%">
+						<ListView direction="0" size="50%,100%">
 							<Button name="MarginRight" normalImage="Default/Image/arrow_black.png" selectedImage="Default/Image/arrow_red.png" size="39,41" rotation="0,0,90" anchorPoint="0.5,0.5,0"/>
 						</ListView>
 					</ListView>

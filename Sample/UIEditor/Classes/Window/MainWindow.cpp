@@ -1,6 +1,7 @@
 #include "MainWindow.h"
 #include "UIDesign/import.h"
 #include "ui.h"
+#include "render.h"
 ue::MainWindow::MainWindow()
 {
 	auto proxy = ui::UIProxy::getInstance();
@@ -148,8 +149,8 @@ void ue::MainWindow::addFPS()
 
 	ui::CtrlText* pCtrlText = CREATE_NODE(ui::CtrlText);
 	pCtrlText->setUseDesignCamera(false);
-	pCtrlText->setVolume(100, 50);
-	pCtrlText->setDimensions(100, 50);
+	pCtrlText->setVolume(200, 100);
+	pCtrlText->setDimensions(200, 100);
 	pCtrlText->setFontPath("Resource/Font/font_3.ttf");
 	pCtrlText->setFontSize(22);
 	pCtrlText->setScale(1);
@@ -165,7 +166,8 @@ void ue::MainWindow::addFPS()
 	pCallFunc->setFunc([](sys::Object* sender) {
 		uint64_t diffTime = sys::TimeClock::getDifferenceOfRecordTime();
 		int fps = 1000 / diffTime;
-		std::string text = getCString("FPS %d", fps);
+		int drawCount = G_DRAWCORE->getDrawCallCount();
+		std::string text = getCString("FPS %d\nDraw Call %d", fps, drawCount);
 		((ui::CtrlText*)sender)->setString(text);
 	});
 

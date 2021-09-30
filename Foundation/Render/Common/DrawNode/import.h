@@ -6,3 +6,8 @@
 
 #include "DrawNode2D.h"
 #include "DrawNode3D.h"
+#include "DrawCore.h"
+#include "DrawTextureCache.h"
+
+#include "MultiDrawNode.h"
+#include "TessilationProtocol.h"

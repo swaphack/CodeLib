@@ -1264,3 +1264,23 @@ render::Camera* render::DrawCore::getCamera(const Node* node)
 	}
 	return node->getCamera();
 }
+
+void render::DrawCore::beginRecordDrawCall()
+{
+	_drawCallCount = 0;
+}
+
+void render::DrawCore::increaseDrawCall()
+{
+	_drawCallCount++;
+}
+
+void render::DrawCore::endRecordDrawCall()
+{
+	_oneDrawCallCount = _drawCallCount;
+}
+
+int render::DrawCore::getDrawCallCount()
+{
+	return _oneDrawCallCount;
+}

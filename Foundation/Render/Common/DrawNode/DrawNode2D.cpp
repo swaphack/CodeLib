@@ -59,13 +59,6 @@ void render::DrawNode2D::onDrawNode2DColorChange()
 
 void render::DrawNode2D::onDrawNode2DTextureChange()
 {
-	if (getTexture() != nullptr)
-	{
-		math::Size size(getTexture()->getWidth(), getTexture()->getHeight());
-		math::Rect rect(math::Vector2(), math::Size(this->getWidth(), this->getHeight()));
-		VertexTool::setTexture2DCoords(&_rectVertex, size, rect);
-	}
-
 	updateDrawNode2DMesh();
 }
 

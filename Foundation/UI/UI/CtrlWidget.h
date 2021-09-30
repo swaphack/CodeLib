@@ -148,6 +148,10 @@ namespace ui
 		*	父节点节点形状改变
 		*/
 		void onParentBodyChange();
+		/**
+		*	更新裁剪状态
+		*/
+		void updateChildrenVisibleState();
 	protected:
 		/**
 		*	添加内部访问控件

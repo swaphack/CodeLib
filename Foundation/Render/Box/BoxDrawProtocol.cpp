@@ -126,14 +126,48 @@ const render::RectVertex& render::Box2DDrawProtocol::getLocalRectVertex() const
 	return _localRectVertex;
 }
 
+const render::RectVertex& render::Box2DDrawProtocol::getWorldRectVertex() const
+{
+	return _worldRectVertex;
+}
+
+const math::Polygon& render::Box2DDrawProtocol::getBoxPolygon() const
+{
+	return _boxPolygon;
+}
+
+const math::Rect& render::Box2DDrawProtocol::getBoxRect() const
+{
+	return _boxRect;
+}
+
 bool render::Box2DDrawProtocol::containsTouchPoint(const math::Vector2& touchPoint)
 {
 	if (this->getBoxNode() == nullptr || this->getBoxNode()->getCamera() == nullptr)
 		return false;
 	auto pCamera = this->getBoxNode()->getCamera();
 	math::Vector3 localPoint = pCamera->convertScreenToLocalPoint(touchPoint);
-	math::Polygon rect = _worldRectVertex;
-	return rect.contains(localPoint);
+	return _boxRect.contains(localPoint);
+}
+
+bool render::Box2DDrawProtocol::isOverlap(const Box2DDrawProtocol* box2d)
+{
+	if (box2d == nullptr)
+	{
+		return false;
+	}
+	if (!this->getBoxRect().isOverlap(box2d->getBoxRect()))
+	{
+		return false;
+	}
+
+	if (this->getBoxPolygon().getPointCount() == 0
+		|| box2d->getBoxPolygon().getPointCount() == 0)
+	{
+		return true;
+	}
+
+	return this->getBoxPolygon().intersects(box2d->getBoxPolygon());
 }
 
 void render::Box2DDrawProtocol::onBox2DCubeChange()
@@ -164,6 +198,8 @@ void render::Box2DDrawProtocol::onBox2DWorldCubeChange()
 	_worldRectVertex.setRightTopPosition(pBoxNode->convertLocalToWorldPoint(_localRectVertex.getRightTopPosition()));
 	_worldRectVertex.setLeftTopPosition(pBoxNode->convertLocalToWorldPoint(_localRectVertex.getLeftTopPosition()));
 
+	_boxPolygon = _worldRectVertex;
+	_boxRect = _boxPolygon.getBoundingBox();
 	setBoxVertices(_worldRectVertex);
 }
 

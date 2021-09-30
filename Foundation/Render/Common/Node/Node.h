@@ -122,7 +122,7 @@ namespace render
 		// 绘制,重写
 		virtual void draw();
 
-		void drawAllChildren();
+		virtual void drawAllChildren();
 	public:
 		// 获取动作代理
 		ActionProxy* getActionProxy();

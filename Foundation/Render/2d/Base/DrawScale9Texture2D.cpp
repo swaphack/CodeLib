@@ -95,6 +95,31 @@ void render::DrawScale9Texture2D::setTextureWithRect(const Texture* texture)
 	this->notify(NodeNotifyType::TEXTURE);
 }
 
+void render::DrawScale9Texture2D::setUV(const math::Rect& rect, const math::Size& size)
+{
+	if (size.getWidth() == 0 || size.getHeight() == 0)
+		return;
+
+	float x0 = rect.getMinX();
+	float x1 = rect.getMinX() + _scale9Margin.getLeft().getRealValue(size.getWidth());
+	float x2 = rect.getMaxX() - _scale9Margin.getRight().getRealValue(size.getWidth());
+	float x3 = rect.getMaxX();
+
+	x0 /= size.getWidth(); x1 /= size.getWidth(); x2 /= size.getWidth(); x3 /= size.getWidth();
+
+	float y0 = rect.getMinY();
+	float y1 = rect.getMinY() + _scale9Margin.getBottom().getRealValue(size.getHeight());
+	float y2 = rect.getMaxY() - _scale9Margin.getTop().getRealValue(size.getHeight());
+	float y3 = rect.getMaxY();
+
+	y0 /= size.getHeight(); y1 /= size.getHeight(); y2 /= size.getHeight(); y3 /= size.getHeight();
+
+	_scale9Vertex.setLayerUVs0(math::Vector2(x0, y0), math::Vector2(x1, y0), math::Vector2(x2, y0), math::Vector2(x3, y0));
+	_scale9Vertex.setLayerUVs1(math::Vector2(x0, y1), math::Vector2(x1, y1), math::Vector2(x2, y1), math::Vector2(x3, y1));
+	_scale9Vertex.setLayerUVs2(math::Vector2(x0, y2), math::Vector2(x1, y2), math::Vector2(x2, y2), math::Vector2(x3, y2));
+	_scale9Vertex.setLayerUVs3(math::Vector2(x0, y3), math::Vector2(x1, y3), math::Vector2(x2, y3), math::Vector2(x3, y3));
+}
+
 void DrawScale9Texture2D::setFlipX(bool status)
 {
 	_bFlipX = status;
