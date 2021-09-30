@@ -54,7 +54,7 @@ void SystemEnv::addFPS()
 	render::DelayAction* pDelayAction = CREATE_ACTION(DelayAction);
 	pDelayAction->setDuration(1);
 
-	render::SequenceAction* pAction2 = render::CREATE_ACTION(render::SequenceAction);
+	render::SequenceAction* pAction2 = CREATE_ACTION(render::SequenceAction);
 	pAction2->addAction(pCallFunc);
 	pAction2->addAction(pDelayAction);
 

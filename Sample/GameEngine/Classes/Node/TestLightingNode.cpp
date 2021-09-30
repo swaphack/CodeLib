@@ -66,7 +66,7 @@ void TestLightingNode::addStar()
 	pLight->setQuadraticAttenuation(1.0f / 100000.0f);
 	pLightShape->addChild(pLight);
 
-	render::EllipseAction* pAction = render::CREATE_ACTION(render::EllipseAction);
+	render::EllipseAction* pAction = CREATE_ACTION(render::EllipseAction);
 	pAction->setControlParameters(math::Vector3(512, 384, 0), 512, 384, math::Vector3(0, 0, 0));
 	pAction->setDuration(10);
 
@@ -133,23 +133,23 @@ void TestLightingNode::addGround()
 		if (gamma) gamma->setValue(2.2f);
 	});
 
-	render::MoveByAction* pAction0 = render::CREATE_ACTION(render::MoveByAction);
+	render::MoveByAction* pAction0 = CREATE_ACTION(render::MoveByAction);
 	pAction0->setDifferentPosition(math::Vector3(0, 0, 600));
 	pAction0->setDuration(10);
 
-	render::MoveByAction* pAction1 = render::CREATE_ACTION(render::MoveByAction);
+	render::MoveByAction* pAction1 = CREATE_ACTION(render::MoveByAction);
 	pAction1->setDifferentPosition(math::Vector3(0, 0, -600));
 	pAction1->setDuration(10);
 
-	render::SequenceAction* pAction2 = render::CREATE_ACTION(render::SequenceAction);
+	render::SequenceAction* pAction2 = CREATE_ACTION(render::SequenceAction);
 	pAction2->addAction(pAction0);
 	pAction2->addAction(pAction1);
 
-	render::RotateByAction* pAction3 = render::CREATE_ACTION(render::RotateByAction);
+	render::RotateByAction* pAction3 = CREATE_ACTION(render::RotateByAction);
 	pAction3->setDifferentRotation(math::Vector3(0, 360, 0));
 	pAction3->setDuration(20);
 
-	render::SpawnAction* pAction4 = render::CREATE_ACTION(render::SpawnAction);
+	render::SpawnAction* pAction4 = CREATE_ACTION(render::SpawnAction);
 	pAction4->addAction(pAction2);
 	pAction4->addAction(pAction3);
 
