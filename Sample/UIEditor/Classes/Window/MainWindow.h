@@ -34,8 +34,9 @@ namespace ue
 		*	创建控件属性
 		*/
 		ui::CtrlWidget* createWidgetProperty(const std::string& widgetName);
-
+	protected:
 		void updateCamera();
+		void addFPS();
 	private:
 		UIDesignWindow* _viewLayout = nullptr;
 

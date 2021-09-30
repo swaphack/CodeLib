@@ -13,15 +13,22 @@ namespace render
 	class Cameras : public sys::Object
 	{
 	public:
+		enum class CameraType
+		{
+			TWO,
+			THREE,
+			DESIGN,
+		};
+	public:
 		Cameras();
 		virtual ~Cameras();
 	public:
 		// 3d摄像机
-		Camera* getCamera3D();
+		Camera* getCamera3D() const;
 		// 3d摄像机
 		void setCamera3D(Camera* camera);
 		// 2d摄像机
-		Camera* getCamera2D();
+		Camera* getCamera2D() const;
 		// 2d摄像机
 		void setCamera2D(Camera* camera);
 		// 设计时摄像头
@@ -37,13 +44,17 @@ namespace render
 		*	绘制场景
 		*/
 		void drawScene(Node* scene);
+	protected:
+		void updateViewSize();
+		// 设置摄像机
+		void setCamera(CameraType eType, Camera* camera);
+		// 获取摄像机
+		Camera* getCamera(CameraType eType) const;
 	private:
-		// 2d
-		Camera* _camera2D = nullptr;
-		// 3d
-		Camera* _camera3D = nullptr;
-		// 设计时的摄像头
-		Camera* _designCamera = nullptr;
+		// 摄像机
+		std::map<CameraType, Camera*> _cameras;
+	private:
+		math::Vector4 _viewPort;
 	};
 
 #define G_CAMERAS sys::Instance<render::Cameras>::getInstance()

@@ -31,7 +31,7 @@ namespace render
 		Node* _target;
 	};
 
-#define CREATE_ACTION(ACTION_TYPE) createAction<ACTION_TYPE>()
+#define CREATE_ACTION(ACTION_TYPE) render::createAction<ACTION_TYPE>()
 
 	template<typename T, typename = std::enable_if<std::is_base_of<Action, T>::value, T>::type>
 	T* createAction()

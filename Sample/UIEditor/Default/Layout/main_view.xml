@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <root width="1024" height="768" layout="1" fontPath="Default/Font/font_3.ttf">
-	<Layout showMask="1" maskColor="255,255,255,125" margin="0,0,0,0" marginState="1,1,0,1" size="100%,100%">  
+	<Layout showMask="1" maskColor="0,0,0,125" margin="0,0,0,0" marginState="1,1,0,1" size="100%,100%">  
 		<UIDesignMenuBar name="MenuBar" filepath="Default/Layout/main_view_menu.xml" margin="0,0,0,0" marginState="1,1,0,1" size="0,40"/>
 		<Layout margin="40,0,0,0" marginState="1,1,1,1">
 			<Layout margin="0,0,0,0" marginState="1,0,1,1" size="300,0">

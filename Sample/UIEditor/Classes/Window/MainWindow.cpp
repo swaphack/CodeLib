@@ -3,9 +3,6 @@
 #include "ui.h"
 ue::MainWindow::MainWindow()
 {
-	_viewLayout = CREATE_NODE(UIDesignWindow);
-	this->addChild(_viewLayout, 0);
-
 	auto proxy = ui::UIProxy::getInstance();
 
 	proxy->registerElementParser(UI_DESIGN_MENUBAR, []() { return new ui::TFileLoader<UIDesignMenuBar>(); });
@@ -32,12 +29,18 @@ bool ue::MainWindow::init()
 		return false;
 	}
 
+	ui::UIShaderHelper::loadColorShader(G_BOXDRAW->getRenderNode2d());
+	ui::UIShaderHelper::loadColorShader(G_BOXDRAW->getRenderNode3d());
+
 	auto size = render::Tool::getViewSize();
-	this->setAnchorPoint(math::Vector2(0, 0));
-	this->setPosition(math::Vector2(-0.5f * size.getWidth(), -0.5f * size.getHeight()));
-	this->setVolume(size);
+	_viewLayout = CREATE_NODE(UIDesignWindow);
+	_viewLayout->setAnchorPoint(0.5f, 0.5f);
+	_viewLayout->setPosition(0,0);
+	_viewLayout->setVolume(size);
+	this->addChild(_viewLayout, 0);
 
 	updateCamera();
+	addFPS();
 
 	return true;
 }
@@ -94,9 +97,7 @@ void ue::MainWindow::updateCamera()
 		render::Camera* pCamera = G_CAMERAS->getDesignCamera();
 		if (pCamera)
 		{
-			pCamera->setVisible(true);
-
-			pCamera->getDebugDraw()->setVisible(false);
+			pCamera->setVisible(false);
 
 			float d = sqrt(powf(size.getWidth(), 2) + powf(size.getHeight(), 2));
 			pCamera->setViewDistance(d - 300, d * 300);
@@ -105,6 +106,7 @@ void ue::MainWindow::updateCamera()
 			pCamera->setPositionZ(d);
 
 			ui::UIShaderHelper::loadColorShader(pCamera->getDebugDraw()->getRenderNode());
+			ui::UIShaderHelper::loadColorShader(pCamera->getShapeDraw()->getRenderNode());
 
 		}
 	}
@@ -113,12 +115,12 @@ void ue::MainWindow::updateCamera()
 		if (pCamera)
 		{
 			pCamera->setVisible(false);
-			pCamera->getDebugDraw()->setVisible(false);
 			float d = sqrt(powf(size.getWidth(), 2) + powf(size.getHeight(), 2));
 			pCamera->setViewDistance(d - 200, d * 200);
 			pCamera->setPositionZ(d);
 
 			ui::UIShaderHelper::loadColorShader(pCamera->getDebugDraw()->getRenderNode());
+			ui::UIShaderHelper::loadColorShader(pCamera->getShapeDraw()->getRenderNode());
 		}
 
 	}
@@ -128,11 +130,54 @@ void ue::MainWindow::updateCamera()
 		{
 			float d = sqrt(powf(size.getWidth(), 2) + powf(size.getHeight(), 2));
 
-			pCamera->setVisible(true);
 			pCamera->getDebugDraw()->setVisible(false);
+			pCamera->getShapeDraw()->setVisible(false);
+
+			pCamera->setVisible(true);
 			pCamera->setPositionZ(d);
 
 			ui::UIShaderHelper::loadColorShader(pCamera->getDebugDraw()->getRenderNode());
+			ui::UIShaderHelper::loadColorShader(pCamera->getShapeDraw()->getRenderNode());
 		}
 	}
+}
+
+void ue::MainWindow::addFPS()
+{
+	auto size = render::Tool::getViewSize();
+
+	ui::CtrlText* pCtrlText = CREATE_NODE(ui::CtrlText);
+	pCtrlText->setUseDesignCamera(false);
+	pCtrlText->setVolume(100, 50);
+	pCtrlText->setDimensions(100, 50);
+	pCtrlText->setFontPath("Resource/Font/font_3.ttf");
+	pCtrlText->setFontSize(22);
+	pCtrlText->setScale(1);
+	pCtrlText->setPosition(-size.getWidth() * 0.5f, -size.getHeight() * 0.5f, 0);
+	pCtrlText->setAnchorPoint(0, 0, 0);
+	pCtrlText->setTextHorizontalAlignment(sys::HorizontalAlignment::LEFT);
+	pCtrlText->setTextVerticalAlignment(sys::VerticalAlignment::TOP);
+	pCtrlText->setTextColor(phy::Color3B(255, 255, 255));
+	ui::UIShaderHelper::loadShader(pCtrlText);
+	this->addChild(pCtrlText, 1);
+
+	render::CallFuncN* pCallFunc = CREATE_ACTION(render::CallFuncN);
+	pCallFunc->setFunc([](sys::Object* sender) {
+		uint64_t diffTime = sys::TimeClock::getDifferenceOfRecordTime();
+		int fps = 1000 / diffTime;
+		std::string text = getCString("FPS %d", fps);
+		((ui::CtrlText*)sender)->setString(text);
+	});
+
+	render::DelayAction* pDelayAction = CREATE_ACTION(render::DelayAction);
+	pDelayAction->setDuration(1);
+
+	render::SequenceAction* pAction2 = CREATE_ACTION(render::SequenceAction);
+	pAction2->addAction(pCallFunc);
+	pAction2->addAction(pDelayAction);
+
+	render::RepeateForeverAction* pRepeateForeverAction = CREATE_ACTION(render::RepeateForeverAction);
+	pRepeateForeverAction->setAction(pAction2);
+
+	pCtrlText->getActionProxy()->runAction(pRepeateForeverAction);
 }

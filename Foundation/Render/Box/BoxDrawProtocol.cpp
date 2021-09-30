@@ -128,9 +128,12 @@ const render::RectVertex& render::Box2DDrawProtocol::getLocalRectVertex() const
 
 bool render::Box2DDrawProtocol::containsTouchPoint(const math::Vector2& touchPoint)
 {
+	if (this->getBoxNode() == nullptr || this->getBoxNode()->getCamera() == nullptr)
+		return false;
+	auto pCamera = this->getBoxNode()->getCamera();
+	math::Vector3 localPoint = pCamera->convertScreenToLocalPoint(touchPoint);
 	math::Polygon rect = _worldRectVertex;
-
-	return rect.contains(touchPoint);
+	return rect.contains(localPoint);
 }
 
 void render::Box2DDrawProtocol::onBox2DCubeChange()

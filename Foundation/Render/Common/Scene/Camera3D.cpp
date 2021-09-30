@@ -2,7 +2,7 @@
 #include "Graphic/import.h"
 #include "Cameras.h"
 #include "DebugDraw.h"
-
+#include "Common/Tool/Tool.h"
 
 render::Camera3D::Camera3D()
 {
@@ -28,6 +28,9 @@ void render::Camera3D::updateViewPort()
 {
 	float w = _viewParameter.getWidth();
 	float h = _viewParameter.getHeight();
+
+	if (w == 0) w = render::Tool::getViewWidth();
+	if (h == 0) h = render::Tool::getViewHeight();
 
 	_projectMatrix = math::Matrix4x4::frustum(
 		-0.5f * w, 0.5f * w,

@@ -157,6 +157,18 @@ math::Vector3 render::Camera::unproject(const math::Vector2& viewPoint) const
 	return (_projectMatrix * _viewMatrix).getInverse() * viewPoint;
 }
 
+math::Vector3 render::Camera::convertScreenToLocalPoint(const math::Vector2& screenPoint) const
+{
+	float w = _viewParameter.getWidth();
+	float h = _viewParameter.getHeight();
+	float d = _viewParameter.getDepth();
+
+	float halfW = 0.5f * w;
+	float halfH = 0.5f * h;
+
+	return math::Vector3(screenPoint.getX() - halfW, screenPoint.getY() - halfH, -_viewParameter.zNear);
+}
+
 math::Ray render::Camera::convertScreenPointToLocalRay(const math::Vector2& screenPoint) const
 {
 

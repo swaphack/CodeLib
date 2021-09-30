@@ -183,7 +183,6 @@ ui::CtrlButton* ue::UIDesignDirectory::createFileItem(int height, const std::str
 		pWidget->setString(name);
 		pWidget->getTextControl()->setTextHorizontalAlignment(sys::HorizontalAlignment::LEFT);
 		pWidget->getTextControl()->setTextVerticalAlignment(sys::VerticalAlignment::BOTTOM);
-
 		pWidget->addClickFunc([this, fullpath](CtrlWidget*) {
 			G_PANELEVT->setSelectFile(fullpath);
 		});

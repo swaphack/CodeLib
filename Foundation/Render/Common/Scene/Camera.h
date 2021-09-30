@@ -60,6 +60,8 @@ namespace render
 		// 逆投影
 		math::Vector3 unproject(const math::Vector2& viewPoint) const;
 
+		// 屏幕坐标转为世界坐标
+		math::Vector3 convertScreenToLocalPoint(const math::Vector2& screenPoint) const;
 		// 屏幕射线转为视图射线
 		math::Ray convertScreenPointToLocalRay(const math::Vector2& screenPoint) const;
 		// 屏幕射线转为视图射线

@@ -40,7 +40,7 @@ namespace ue
 		static T* createWidget()
 		{
 			auto pNode = CREATE_NODE(T);
-
+			ui::UIShaderHelper::loadShader(pNode);
 			return pNode;
 		}
 		/**
