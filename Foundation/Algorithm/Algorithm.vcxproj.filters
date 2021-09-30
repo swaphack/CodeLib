@@ -188,6 +188,12 @@
     <ClInclude Include="Terrian\import.h">
       <Filter>Terrian</Filter>
     </ClInclude>
+    <ClInclude Include="Box\Container2D.h">
+      <Filter>Box</Filter>
+    </ClInclude>
+    <ClInclude Include="Box\import.h">
+      <Filter>Box</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Sort">
@@ -222,6 +228,9 @@
     </Filter>
     <Filter Include="Terrian">
       <UniqueIdentifier>{d235acf9-e6d6-4b3b-9cf7-72c34c5b51dc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Box">
+      <UniqueIdentifier>{8f010b8d-0786-4caa-8a55-18383efb9cac}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -339,6 +348,9 @@
     </ClCompile>
     <ClCompile Include="Terrian\TerrianHelper.cpp">
       <Filter>Terrian</Filter>
+    </ClCompile>
+    <ClCompile Include="Box\Container2D.cpp">
+      <Filter>Box</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

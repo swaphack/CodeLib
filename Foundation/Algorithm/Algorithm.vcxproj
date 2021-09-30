@@ -67,6 +67,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="algorithm.h" />
+    <ClInclude Include="Box\Container2D.h" />
+    <ClInclude Include="Box\import.h" />
     <ClInclude Include="Map\Base\CombineSlots.h" />
     <ClInclude Include="Map\Base\import.h" />
     <ClInclude Include="Map\Base\Map.h" />
@@ -131,6 +133,7 @@
     <ClInclude Include="Terrian\Tree.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Box\Container2D.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Map\Base\CombineSlots.cpp" />
     <ClCompile Include="Map\Base\MapCell.cpp" />
