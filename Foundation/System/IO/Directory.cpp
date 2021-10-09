@@ -32,14 +32,14 @@ void Directory::getDirectory(const std::string& fullpath, std::string& dir)
 	}
 }
 
-void sys::Directory::getAllFiles(const std::string& dir, std::vector<std::string>& files)
+void sys::Directory::getAllFiles(const std::string& dir, std::vector<std::string>& files, const std::string& filter)
 {
 	if (access(dir.c_str(), 0) == -1)
 	{
 		return;
 	}
 	std::string dirNew = dir;
-	dirNew += "/*.*";
+	dirNew += "/" + filter;
 
 	intptr_t handle;
 	_finddata_t findData;
@@ -64,7 +64,7 @@ void sys::Directory::getAllFiles(const std::string& dir, std::vector<std::string
 		}
 		else
 		{
-			files.push_back(findData.name);
+			files.push_back(dir + "/" + findData.name);
 		}
 	} while (_findnext(handle, &findData) == 0);
 

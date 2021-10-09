@@ -5,7 +5,7 @@
 
 namespace sys
 {
-	class ImageHelp
+	class ImageHelper
 	{
 	public:
 		/**

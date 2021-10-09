@@ -60,6 +60,8 @@ void TestMainScene::initNodes()
 	//this->addChild(CREATE_NODE(TestMathNode));
 
 	//this->addChild(CREATE_NODE(TestAlgNode));
+
+	this->addChild(CREATE_NODE(TestTool));
 }
 
 void TestMainScene::initEnv()

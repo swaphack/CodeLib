@@ -61,8 +61,10 @@ namespace sys
 		String& remove(size_t offset, size_t count);
 		// 插入字符串
 		String& insert(size_t offset, const std::string& value);
-		// 移除从指定位置开始的一段字符串
+		// 移除从指定位置开始，一段固定长度的字符串
 		String subString(size_t offset, size_t count);
+		// 移除从指定位置开始的一段字符串
+		String subString(size_t offset);
 
 		// 开始位置查找匹配字符的索引位置
 		int32_t findFirstOf(char value);

@@ -20,8 +20,9 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
-    <ProjectGuid>{8875629C-9901-40EA-B9A3-F43FA6E683B1}</ProjectGuid>
-    <RootNamespace>GameEngine</RootNamespace>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{3cffd700-8006-4cb4-bc07-1b33edb9976f}</ProjectGuid>
+    <RootNamespace>TexturePacker</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -72,11 +73,11 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <LinkIncremental>true</LinkIncremental>
-  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
@@ -85,15 +86,31 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>../../Foundation/Physics/;../../Foundation/Math/;../../Foundation/Algorithm/;../../Foundation/System/;../../Foundation/Tool/;../../Foundation/Render/;../../Foundation/UI/;../../Lib/include/;../../Lib/include/fbx/;../../Lib/include/tinyxml2;../../Lib/include/freetype/;/Classes/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../Foundation/Physics/;../../Foundation/Math/;../../Foundation/Algorithm/;../../Foundation/System/;../../Foundation/Render/;../../Foundation/UI/;../../Lib/include/;../../Lib/include/fbx/;../../Lib/include/freetype/;/Classes/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>freeglut.lib;glew32d.lib;opengl32.lib;zlib.lib;libpng16.lib;freetype263.lib;avutil.lib;avcodec.lib;avdevice.lib;avfilter.lib;avformat.lib;swscale.lib;swresample.lib;postproc.lib;libjpeg.lib;fmod_vc.lib;System.lib;Render.lib;UI.lib;Math.lib;libobj.lib;lib3ds.lib;libfbxsdk-md.lib;wininet.lib;libxml2-md.lib;zlib-md.lib;libtga.lib;libtiff.lib;Algorithm.lib;Text.lib;tinyxml2.lib;Imm32.lib;Physics.lib;Tool.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>../../Lib/lib/freetype;../../Lib/lib/jpeg;../../Lib/lib/png;../../Lib/lib/zlib;../../Lib/lib/fmod;../../Lib/lib/3ds;../../Lib/lib/obj;../../Lib/lib/fbx;../../Lib/lib/tga;../../Lib/lib/freeglut;../../Lib/lib/glew;../../Lib/lib/tiff;../../Lib/lib/ffmpeg;../../Lib/lib/tinyxml2;$(OutDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>freeglut.lib;glew32d.lib;opengl32.lib;zlib.lib;libpng16.lib;freetype263.lib;avutil.lib;avcodec.lib;avdevice.lib;avfilter.lib;avformat.lib;swscale.lib;swresample.lib;postproc.lib;libjpeg.lib;fmod_vc.lib;System.lib;Render.lib;UI.lib;Math.lib;libobj.lib;lib3ds.lib;libfbxsdk-md.lib;wininet.lib;libxml2-md.lib;zlib-md.lib;libtga.lib;libtiff.lib;Algorithm.lib;Text.lib;tinyxml2.lib;Imm32.lib;Physics.lib;Tool.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -105,22 +122,6 @@
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
-    </Link>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <ClCompile>
-      <WarningLevel>Level3</WarningLevel>
-      <FunctionLevelLinking>true</FunctionLevelLinking>
-      <IntrinsicFunctions>true</IntrinsicFunctions>
-      <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <ConformanceMode>true</ConformanceMode>
-    </ClCompile>
-    <Link>
-      <SubSystem>Console</SubSystem>
-      <EnableCOMDATFolding>true</EnableCOMDATFolding>
-      <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
@@ -141,71 +142,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Classes\Env\SystemEnv.cpp" />
-    <ClCompile Include="Classes\Env\TerrianNode.cpp" />
-    <ClCompile Include="Classes\Env\TestEnvironmentNode.cpp" />
-    <ClCompile Include="Classes\Env\TestNode.cpp" />
-    <ClCompile Include="Classes\Env\Utility.cpp" />
-    <ClCompile Include="Classes\GLRenderApplication.cpp" />
-    <ClCompile Include="Classes\Main.cpp" />
-    <ClCompile Include="Classes\Node\TestAlgNode.cpp" />
-    <ClCompile Include="Classes\Node\TestComputeShader.cpp" />
-    <ClCompile Include="Classes\Node\TestFragmentNode.cpp" />
-    <ClCompile Include="Classes\Node\TestFrameBufferNode.cpp" />
-    <ClCompile Include="Classes\Node\TestLightingNode.cpp" />
-    <ClCompile Include="Classes\Node\TestMathNode.cpp" />
-    <ClCompile Include="Classes\Node\TestMeshNode.cpp" />
-    <ClCompile Include="Classes\Node\TestPostProcessing.cpp" />
-    <ClCompile Include="Classes\Node\TestTextureNode.cpp" />
-    <ClCompile Include="Classes\Node\TestTool.cpp" />
-    <ClCompile Include="Classes\Node\TestXFBNode.cpp" />
-    <ClCompile Include="Classes\Node\TestAudioNode.cpp" />
-    <ClCompile Include="Classes\Node\TestBufferNode.cpp" />
-    <ClCompile Include="Classes\Node\TestDrawNode.cpp" />
-    <ClCompile Include="Classes\Node\TestImageNode.cpp" />
-    <ClCompile Include="Classes\Node\TestLayoutNode.cpp" />
-    <ClCompile Include="Classes\Node\TestMediaNode.cpp" />
-    <ClCompile Include="Classes\Node\TestModelNode.cpp" />
-    <ClCompile Include="Classes\Node\TestParticleNode.cpp" />
-    <ClCompile Include="Classes\Node\TestShaderNode.cpp" />
-    <ClCompile Include="Classes\Node\TestTextNode.cpp" />
-    <ClCompile Include="Classes\Node\TestUINode.cpp" />
-    <ClCompile Include="Classes\Node\TestUtilityNode.cpp" />
-    <ClCompile Include="Classes\Scene\TestMainScene.cpp" />
+    <ClInclude Include="Classes\TexturePacker.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Classes\Env\import.h" />
-    <ClInclude Include="Classes\Env\SystemEnv.h" />
-    <ClInclude Include="Classes\Env\TerrianNode.h" />
-    <ClInclude Include="Classes\Env\TestEnvironmentNode.h" />
-    <ClInclude Include="Classes\Env\TestNode.h" />
-    <ClInclude Include="Classes\Env\Utility.h" />
-    <ClInclude Include="Classes\GLRenderApplication.h" />
-    <ClInclude Include="Classes\Node\import.h" />
-    <ClInclude Include="Classes\Node\TestAlgNode.h" />
-    <ClInclude Include="Classes\Node\TestComputeShader.h" />
-    <ClInclude Include="Classes\Node\TestFrameBufferNode.h" />
-    <ClInclude Include="Classes\Node\TestLightingNode.h" />
-    <ClInclude Include="Classes\Node\TestMathNode.h" />
-    <ClInclude Include="Classes\Node\TestMeshNode.h" />
-    <ClInclude Include="Classes\Node\TestPostProcessing.h" />
-    <ClInclude Include="Classes\Node\TestTextureNode.h" />
-    <ClInclude Include="Classes\Node\TestTool.h" />
-    <ClInclude Include="Classes\Node\TestXFBNode.h" />
-    <ClInclude Include="Classes\Node\TestAudioNode.h" />
-    <ClInclude Include="Classes\Node\TestBufferNode.h" />
-    <ClInclude Include="Classes\Node\TestDrawNode.h" />
-    <ClInclude Include="Classes\Node\TestFragmentNode.h" />
-    <ClInclude Include="Classes\Node\TestImageNode.h" />
-    <ClInclude Include="Classes\Node\TestLayoutNode.h" />
-    <ClInclude Include="Classes\Node\TestMediaNode.h" />
-    <ClInclude Include="Classes\Node\TestModelNode.h" />
-    <ClInclude Include="Classes\Node\TestParticleNode.h" />
-    <ClInclude Include="Classes\Node\TestShaderNode.h" />
-    <ClInclude Include="Classes\Node\TestTextNode.h" />
-    <ClInclude Include="Classes\Node\TestUINode.h" />
-    <ClInclude Include="Classes\Node\TestUtilityNode.h" />
-    <ClInclude Include="Classes\Scene\TestMainScene.h" />
+    <ClCompile Include="Classes\main.cpp" />
+    <ClCompile Include="Classes\TexturePacker.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

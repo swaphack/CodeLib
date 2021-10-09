@@ -20,7 +20,7 @@ bool ModelObj::load(const std::string& filepath)
 		return false;
 	}
 
-	sys::ModelDetailObj* pFile = sys::Loader::loadModel<sys::ModelDetailObj>(fullpath);
+	sys::ModelDetailObj* pFile = sys::ResourceLoader::loadModel<sys::ModelDetailObj>(fullpath);
 	if (!pFile)
 	{
 		return false;
@@ -40,7 +40,7 @@ bool render::ModelObj::loadAsyn(const std::string& filepath, const LoadedModelCa
 	}
 	this->setAsynLoadedCallback(func);
 	this->startThread([this, fullpath]() {
-		sys::ModelDetailObj* pFile = sys::Loader::loadModel<sys::ModelDetailObj>(fullpath);
+		sys::ModelDetailObj* pFile = sys::ResourceLoader::loadModel<sys::ModelDetailObj>(fullpath);
 		if (!pFile)
 		{
 			return;

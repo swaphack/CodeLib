@@ -123,7 +123,7 @@ Texture2D* TextureCache::createTexture2D(const sys::TextDefine& textDefine)
 	{
 		return nullptr;
 	}
-	sys::LabelImage* image = sys::Loader::loadLabel<sys::LabelImage>(textDefine);
+	sys::LabelImage* image = sys::ResourceLoader::loadLabel<sys::LabelImage>(textDefine);
 	if (image == nullptr)
 	{
 		return nullptr;
@@ -192,23 +192,23 @@ sys::ImageDetail* render::TextureCache::loadImageDetail(const sys::ImageDefine& 
 	// png
 	if (imageDefine.format == sys::ImageFormat::PNG)
 	{
-		image = sys::Loader::loadImage<sys::ImagePNG>(imageDefine.filepath);
+		image = sys::ResourceLoader::loadImage<sys::ImagePNG>(imageDefine.filepath);
 	}
 	else if (imageDefine.format == sys::ImageFormat::JPEG)
 	{
-		image = sys::Loader::loadImage<sys::ImageJPEG>(imageDefine.filepath);
+		image = sys::ResourceLoader::loadImage<sys::ImageJPEG>(imageDefine.filepath);
 	}
 	else if (imageDefine.format == sys::ImageFormat::TARGA)
 	{
-		image = sys::Loader::loadImage<sys::ImageTarga>(imageDefine.filepath);
+		image = sys::ResourceLoader::loadImage<sys::ImageTarga>(imageDefine.filepath);
 	}
 	else if (imageDefine.format == sys::ImageFormat::BMP)
 	{
-		image = sys::Loader::loadImage<sys::ImageBMP>(imageDefine.filepath);
+		image = sys::ResourceLoader::loadImage<sys::ImageBMP>(imageDefine.filepath);
 	}
 	else if (imageDefine.format == sys::ImageFormat::TIFF)
 	{
-		image = sys::Loader::loadImage<sys::ImageTIFF>(imageDefine.filepath);
+		image = sys::ResourceLoader::loadImage<sys::ImageTIFF>(imageDefine.filepath);
 	}
 
 	if (image == nullptr)

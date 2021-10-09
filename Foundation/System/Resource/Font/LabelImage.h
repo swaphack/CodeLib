@@ -41,7 +41,7 @@ namespace sys
 		uint32_t getLineHeight() const;
 		void setLineHeight(uint32_t val);
 
-		// 写入当行文本
+		// 写入单行文本
 		void writeOneLineBlock(int width, int height, const char* buffer, int deltaY);
 		// 写入多行文本
 		void writeMultiLineBlock(int width, int height, const char* buffer, int deltaY);

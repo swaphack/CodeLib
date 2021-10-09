@@ -379,6 +379,16 @@ String String::subString(size_t offset, size_t count)
 	return String(getString() + offset, count);
 }
 
+String sys::String::subString(size_t offset)
+{
+	if (offset >= getSize())
+	{
+		return String();
+	}
+
+	return String(getString() + offset, getSize() - offset);
+}
+
 
 int32_t String::findFirstOf(char value)
 {

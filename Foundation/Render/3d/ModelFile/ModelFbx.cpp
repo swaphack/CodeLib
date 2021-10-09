@@ -19,7 +19,7 @@ bool ModelFbx::load(const std::string& filepath)
 	{
 		return false;
 	}
-	sys::ModelDetailFbx* pFile = sys::Loader::loadModel<sys::ModelDetailFbx>(fullpath);
+	sys::ModelDetailFbx* pFile = sys::ResourceLoader::loadModel<sys::ModelDetailFbx>(fullpath);
 	if (!pFile)
 	{
 		return false;
@@ -39,7 +39,7 @@ bool render::ModelFbx::loadAsyn(const std::string& filepath, const LoadedModelCa
 	}
 	this->setAsynLoadedCallback(func);
 	this->startThread([fullpath, this]() {
-		sys::ModelDetailFbx* pFile = sys::Loader::loadModel<sys::ModelDetailFbx>(fullpath);
+		sys::ModelDetailFbx* pFile = sys::ResourceLoader::loadModel<sys::ModelDetailFbx>(fullpath);
 		if (!pFile)
 		{
 			return;

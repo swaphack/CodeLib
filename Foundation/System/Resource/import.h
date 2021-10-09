@@ -12,5 +12,5 @@
 #include "LocalResource.h"
 #include "ResourceMgr.h"
 
-#include "Loader.h"
+#include "ResourceLoader.h"
 #include "extensions.h"

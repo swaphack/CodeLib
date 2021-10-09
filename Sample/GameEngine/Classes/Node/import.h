@@ -23,3 +23,4 @@
 
 #include "TestMathNode.h"
 #include "TestAlgNode.h"
+#include "TestTool.h"

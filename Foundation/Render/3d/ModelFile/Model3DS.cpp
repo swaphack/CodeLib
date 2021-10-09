@@ -17,7 +17,7 @@ bool Model3DS::load(const std::string& filepath)
 	{
 		return false;
 	}
-	sys::ModelDetail3DS* pFile = sys::Loader::loadModel<sys::ModelDetail3DS>(fullpath);
+	sys::ModelDetail3DS* pFile = sys::ResourceLoader::loadModel<sys::ModelDetail3DS>(fullpath);
 	if (!pFile)
 	{
 		return false;
@@ -37,7 +37,7 @@ bool render::Model3DS::loadAsyn(const std::string& filepath, const LoadedModelCa
 	}
 	this->setAsynLoadedCallback(func);
 	this->startThread([this, fullpath]() {
-		sys::ModelDetail3DS* pFile = sys::Loader::loadModel<sys::ModelDetail3DS>(fullpath);
+		sys::ModelDetail3DS* pFile = sys::ResourceLoader::loadModel<sys::ModelDetail3DS>(fullpath);
 		if (!pFile)
 		{
 			return;

@@ -45,7 +45,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>../../Lib/include/tinyxml2;../System/;../Physics/;../Math/;../../Lib/include/;../../Lib/include/freetype;../../Lib/include/fbx</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../Lib/include/tinyxml2;../System/;../Physics/;../Algorithm/;../Math/;../../Lib/include/;../../Lib/include/freetype;../../Lib/include/fbx;$(ProjectDir)</AdditionalIncludeDirectories>
       <BrowseInformation>true</BrowseInformation>
     </ClCompile>
     <Link>
@@ -71,11 +71,16 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Document\import.h" />
-    <ClInclude Include="Document\XmlConfig.h" />
+    <ClInclude Include="Document\XmlHelper.h" />
+    <ClInclude Include="Texture\import.h" />
+    <ClInclude Include="Texture\TextureAtlas.h" />
+    <ClInclude Include="Texture\TexturePacker.h" />
     <ClInclude Include="toollib.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Document\XmlConfig.cpp" />
+    <ClCompile Include="Document\XmlHelper.cpp" />
+    <ClCompile Include="Texture\TextureAtlas.cpp" />
+    <ClCompile Include="Texture\TexturePacker.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -158,6 +158,7 @@
     <ClInclude Include="Platform\macros.h" />
     <ClInclude Include="Platform\Windows\import.h" />
     <ClInclude Include="Platform\Windows\Window.h" />
+    <ClInclude Include="Platform\Windows\WindowsHelper.h" />
     <ClInclude Include="Process\Pipe.h" />
     <ClInclude Include="Record\OperateRecord.h" />
     <ClInclude Include="Resource\extensions.h" />
@@ -169,7 +170,7 @@
     <ClInclude Include="Resource\Image\ImageBMP.h" />
     <ClInclude Include="Resource\Image\ImageDefine.h" />
     <ClInclude Include="Resource\Image\ImageDetail.h" />
-    <ClInclude Include="Resource\Image\ImageHelp.h" />
+    <ClInclude Include="Resource\Image\ImageHelper.h" />
     <ClInclude Include="Resource\Image\ImageJPEG.h" />
     <ClInclude Include="Resource\Image\ImagePNG.h" />
     <ClInclude Include="Resource\Image\ImageTarga.h" />
@@ -177,7 +178,7 @@
     <ClInclude Include="Resource\Image\import.h" />
     <ClInclude Include="Resource\import.h" />
     <ClInclude Include="Resource\IResource.h" />
-    <ClInclude Include="Resource\Loader.h" />
+    <ClInclude Include="Resource\ResourceLoader.h" />
     <ClInclude Include="Resource\LocalResource.h" />
     <ClInclude Include="Resource\Media\AudioDetail.h" />
     <ClInclude Include="Resource\Media\IMediaLoader.h" />
@@ -293,12 +294,13 @@
     <ClCompile Include="Net\Socket.cpp" />
     <ClCompile Include="Net\EndPoint.cpp" />
     <ClCompile Include="Platform\Windows\Window.cpp" />
+    <ClCompile Include="Platform\Windows\WindowsHelper.cpp" />
     <ClCompile Include="Record\OperateRecord.cpp" />
     <ClCompile Include="Resource\Font\LabelImage.cpp" />
     <ClCompile Include="Resource\Image\ImageBMP.cpp" />
     <ClCompile Include="Resource\Image\ImageDefine.cpp" />
     <ClCompile Include="Resource\Image\ImageDetail.cpp" />
-    <ClCompile Include="Resource\Image\ImageHelp.cpp" />
+    <ClCompile Include="Resource\Image\ImageHelper.cpp" />
     <ClCompile Include="Resource\Image\ImageJPEG.cpp" />
     <ClCompile Include="Resource\Image\ImagePNG.cpp" />
     <ClCompile Include="Resource\Image\ImageTarga.cpp" />

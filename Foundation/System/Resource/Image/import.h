@@ -9,4 +9,4 @@
 #include "ImageTarga.h"
 #include "ImageTIFF.h"
 
-#include "ImageHelp.h"
+#include "ImageHelper.h"

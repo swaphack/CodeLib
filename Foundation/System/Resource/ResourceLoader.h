@@ -7,7 +7,10 @@
 
 namespace sys
 {
-	class Loader
+	/**
+	*	资源加载
+	*/
+	class ResourceLoader
 	{
 	public:
 		// 加载文件

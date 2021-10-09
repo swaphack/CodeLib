@@ -26,7 +26,6 @@ void MultiStream::initSteam(uint32_t width, uint32_t height, uint32_t depth /*= 
 	_depth = depth;
 }
 
-
 void MultiStream::expendStream(uint32_t width, uint32_t height, uint32_t depth /*= 1*/, bool bBottom/* = false*/)
 {
 	if (width == 0 || height == 0 || depth == 0)

@@ -1,8 +1,8 @@
-#include "ImageHelp.h"
+#include "ImageHelper.h"
 #include "../extensions.h"
 #include "IO/Directory.h"
 
-bool sys::ImageHelp::saveToPNG(const ImageDetail& detail, const std::string& fullpath)
+bool sys::ImageHelper::saveToPNG(const ImageDetail& detail, const std::string& fullpath)
 {
 	int unitSize = getImageUnitSize(detail.getDataFormat());
 	if (unitSize == -1)
@@ -86,7 +86,7 @@ bool sys::ImageHelp::saveToPNG(const ImageDetail& detail, const std::string& ful
 	return true;
 }
 
-bool sys::ImageHelp::saveToJPEG(const ImageDetail& detail, const std::string& fullpath)
+bool sys::ImageHelper::saveToJPEG(const ImageDetail& detail, const std::string& fullpath)
 {
 	int unitSize = getImageUnitSize(detail.getDataFormat());
 	if (unitSize == -1)
@@ -142,7 +142,7 @@ bool sys::ImageHelp::saveToJPEG(const ImageDetail& detail, const std::string& fu
 	return true;
 }
 
-int sys::ImageHelp::getImageUnitSize(ImageDataFormat dataFormat)
+int sys::ImageHelper::getImageUnitSize(ImageDataFormat dataFormat)
 {
 	switch (dataFormat)
 	{
@@ -171,7 +171,7 @@ int sys::ImageHelp::getImageUnitSize(ImageDataFormat dataFormat)
 	return -1;
 }
 
-int sys::ImageHelp::getPNGColorType(ImageDataFormat dataFormat)
+int sys::ImageHelper::getPNGColorType(ImageDataFormat dataFormat)
 {	
 	switch (dataFormat)
 	{
@@ -200,7 +200,7 @@ int sys::ImageHelp::getPNGColorType(ImageDataFormat dataFormat)
 	return -1;
 }
 
-int sys::ImageHelp::getJPEGColorType(ImageDataFormat dataFormat)
+int sys::ImageHelper::getJPEGColorType(ImageDataFormat dataFormat)
 {
 	switch (dataFormat)
 	{

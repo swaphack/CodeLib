@@ -67,8 +67,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="algorithm.h" />
-    <ClInclude Include="Box\Container2D.h" />
-    <ClInclude Include="Box\import.h" />
     <ClInclude Include="Map\Base\CombineSlots.h" />
     <ClInclude Include="Map\Base\import.h" />
     <ClInclude Include="Map\Base\Map.h" />
@@ -117,6 +115,10 @@
     <ClInclude Include="Mesh\Core\Voronoi.h" />
     <ClInclude Include="Mesh\import.h" />
     <ClInclude Include="Mesh\macros.h" />
+    <ClInclude Include="Pack\BinPacking1D.h" />
+    <ClInclude Include="Pack\BinPacking2D.h" />
+    <ClInclude Include="Pack\import.h" />
+    <ClInclude Include="Pack\Bin2D.h" />
     <ClInclude Include="Sort\Sort.h" />
     <ClInclude Include="Struct\import.h" />
     <ClInclude Include="Struct\OneToOneDoubleRelationship.h" />
@@ -133,7 +135,6 @@
     <ClInclude Include="Terrian\Tree.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Box\Container2D.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Map\Base\CombineSlots.cpp" />
     <ClCompile Include="Map\Base\MapCell.cpp" />
@@ -162,6 +163,9 @@
     <ClCompile Include="Mesh\Core\ProgressiveMeshes.cpp" />
     <ClCompile Include="Mesh\Core\QuadricErrorMetrics.cpp" />
     <ClCompile Include="Mesh\Core\Voronoi.cpp" />
+    <ClCompile Include="Pack\BinPacking1D.cpp" />
+    <ClCompile Include="Pack\BinPacking2D.cpp" />
+    <ClCompile Include="Pack\Bin2D.cpp" />
     <ClCompile Include="Struct\OneToOneDoubleRelationship.cpp" />
     <ClCompile Include="Struct\ObjectDetail.cpp" />
     <ClCompile Include="Struct\OneToOneRelationship.cpp" />

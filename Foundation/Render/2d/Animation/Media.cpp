@@ -96,7 +96,7 @@ void Media::loadFromURL(const std::string& url, bool defaultSize)
 	SAFE_DELETE(_media);
 	//this->stop();
 
-	_media = sys::Loader::loadMedia<sys::MediaFFmpeg>(_filepath);
+	_media = sys::ResourceLoader::loadMedia<sys::MediaFFmpeg>(_filepath);
 	if (!_media)
 	{
 		return;

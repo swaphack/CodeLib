@@ -46,3 +46,32 @@ math::Size::~Size()
 {
 
 }
+
+/////////////////////////////////////////////////
+IntSize::IntSize()
+{
+
+}
+
+IntSize::IntSize(int w, int h)
+{
+	this->setWidth(w);
+	this->setHeight(h);
+}
+
+IntSize::IntSize(const IntSize& size)
+{
+	this->setWidth(size.getWidth());
+	this->setHeight(size.getHeight());
+}
+
+IntSize::~IntSize()
+{
+	
+}
+
+void IntSize::set(int w, int h)
+{
+	this->setWidth(w);
+	this->setHeight(h);
+}

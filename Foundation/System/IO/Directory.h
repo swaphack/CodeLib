@@ -13,7 +13,7 @@ namespace sys
 		// 获取目录
 		static void getDirectory(const std::string& fullpath, std::string& dir);
 		// 获取所有文件
-		static void getAllFiles(const std::string& dir, std::vector<std::string>& files);
+		static void getAllFiles(const std::string& dir, std::vector<std::string>& files, const std::string& filter = "*.*");
 		// 创建文件
 		static int32_t createFile(const std::string& filename);
 		// 删除文件

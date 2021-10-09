@@ -145,7 +145,7 @@ bool render::Texture2D::saveToPNG(const std::string& filepath, TextureExternalFo
 		return false;
 	}
 	GLDebug::showError();
-	return sys::ImageHelp::saveToPNG(detail, filepath);
+	return sys::ImageHelper::saveToPNG(detail, filepath);
 }
 
 render::Texture2D* render::Texture2D::getEmptyTexture()

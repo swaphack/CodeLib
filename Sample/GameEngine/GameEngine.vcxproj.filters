@@ -108,6 +108,9 @@
     <ClCompile Include="Classes\Env\Utility.cpp">
       <Filter>Classes\Env</Filter>
     </ClCompile>
+    <ClCompile Include="Classes\Node\TestTool.cpp">
+      <Filter>Classes\Node</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Classes\GLRenderApplication.h">
@@ -202,6 +205,9 @@
     </ClInclude>
     <ClInclude Include="Classes\Env\TestNode.h">
       <Filter>Classes\Env</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Node\TestTool.h">
+      <Filter>Classes\Node</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

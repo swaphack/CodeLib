@@ -1,3 +1,3 @@
 #pragma once
 
-#include "XmlConfig.h"
+#include "XmlHelper.h"

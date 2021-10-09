@@ -26,4 +26,21 @@ namespace math
 	public:
 		operator Vector2()  const;
 	};
+
+	/**
+	*	Ãæ»ý
+	*/
+	struct IntSize : public Vector<int, 2>
+	{
+	public:
+		IntSize();
+		IntSize(int w, int h);
+		IntSize(const IntSize& size);
+		virtual ~IntSize();
+	public:
+		CREATE_INDEX_VALUE(Width, 0, int);
+		CREATE_INDEX_VALUE(Height, 1, int);
+
+		void set(int w, int h);
+	};
 }

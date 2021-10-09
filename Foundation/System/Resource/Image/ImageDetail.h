@@ -34,7 +34,7 @@ namespace sys
 		uint8_t * getPixels() const;
 		// 获取像素单位大小
 		uint8_t getUnitSize() const;
-
+		// 获取指针
 		uint8_t* getPtr(uint32_t offset) const;
 		// 水平翻转
 		void flipX();
@@ -47,11 +47,11 @@ namespace sys
 		void setPixels(uint8_t * val, uint32_t width, uint32_t height, int nUnitSize);
 	protected:
 		// 图片宽度
-		uint32_t _width;
+		uint32_t _width = 0;
 		// 图片高度
-		uint32_t _height;
+		uint32_t _height = 0;
 		// 图片格式
-		ImageDataFormat _format;
+		ImageDataFormat _format = ImageDataFormat::RGB;
 		// 图片像素数据
 		MemoryData _data;
 	};

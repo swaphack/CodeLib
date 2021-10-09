@@ -188,11 +188,17 @@
     <ClInclude Include="Terrian\import.h">
       <Filter>Terrian</Filter>
     </ClInclude>
-    <ClInclude Include="Box\Container2D.h">
-      <Filter>Box</Filter>
+    <ClInclude Include="Pack\BinPacking1D.h">
+      <Filter>Pack</Filter>
     </ClInclude>
-    <ClInclude Include="Box\import.h">
-      <Filter>Box</Filter>
+    <ClInclude Include="Pack\BinPacking2D.h">
+      <Filter>Pack</Filter>
+    </ClInclude>
+    <ClInclude Include="Pack\import.h">
+      <Filter>Pack</Filter>
+    </ClInclude>
+    <ClInclude Include="Pack\Bin2D.h">
+      <Filter>Pack</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -229,7 +235,7 @@
     <Filter Include="Terrian">
       <UniqueIdentifier>{d235acf9-e6d6-4b3b-9cf7-72c34c5b51dc}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Box">
+    <Filter Include="Pack">
       <UniqueIdentifier>{8f010b8d-0786-4caa-8a55-18383efb9cac}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -349,8 +355,14 @@
     <ClCompile Include="Terrian\TerrianHelper.cpp">
       <Filter>Terrian</Filter>
     </ClCompile>
-    <ClCompile Include="Box\Container2D.cpp">
-      <Filter>Box</Filter>
+    <ClCompile Include="Pack\BinPacking1D.cpp">
+      <Filter>Pack</Filter>
+    </ClCompile>
+    <ClCompile Include="Pack\BinPacking2D.cpp">
+      <Filter>Pack</Filter>
+    </ClCompile>
+    <ClCompile Include="Pack\Bin2D.cpp">
+      <Filter>Pack</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

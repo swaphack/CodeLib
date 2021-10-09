@@ -151,7 +151,7 @@ std::string File::getFileName(const std::string& fullpath, bool containsFormat)
 	int index = path.findLastOf("/");
 	if (index == -1) return fullpath;
 
-	std::string name = fullpath.substr(index,  fullpath.size() - index);
+	std::string name = fullpath.substr(index + 1,  fullpath.size() - index - 1);
 
 	if (!containsFormat)
 	{
