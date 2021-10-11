@@ -108,9 +108,11 @@ namespace alg
 				offsetX += temp.getWidth();
 				items.push_back(temp);
 			}
-			// 合并两个箱子
-			void combine(const Box& box)
+			// 合并两个箱子,垂直方向叠加
+			void combineRow(const Box& box)
 			{
+				offsetX = 0;
+
 				for (const auto& item : box.items)
 				{
 					Item temp = item;
@@ -118,9 +120,8 @@ namespace alg
 					temp.y = offsetY;
 					items.push_back(temp);
 				}
-				offsetX = 0;
-				offsetY += box.height;
 				height += box.height;
+				offsetY += box.height;
 			}
 			// 移除所有物品
 			void removeAllItems()

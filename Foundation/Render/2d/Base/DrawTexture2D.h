@@ -4,6 +4,7 @@
 #include "Common/struct/vertex_common.h"
 #include "Common/DrawNode/DrawNode2D.h"
 #include "Common/DrawNode/DrawProtocol.h"
+#include "Common/Texture/TexFrame.h"
 
 namespace render
 {
@@ -26,6 +27,10 @@ namespace render
 		*	设置纹理坐标
 		*/
 		void setUV(const math::Rect& rect, const math::Size& size);
+		/**
+		*	设置纹理帧
+		*/
+		void setTexFrame(const TexFrame& texFrame);
 	public:
 		// 设置水平翻转
 		void setFlipX(bool status);

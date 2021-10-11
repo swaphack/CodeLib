@@ -90,6 +90,16 @@ void MultiStream::writeBlock(uint32_t x, uint32_t y, uint32_t width, uint32_t he
 	}
 }
 
+void sys::MultiStream::writeBlockWithReverseY(uint32_t x, uint32_t y, uint32_t width, uint32_t height, const char* inData, uint32_t z)
+{
+	char* faceData = _data.getPtr(_width * _heigth * z);
+	for (uint32_t i = 0; i < height; i++)
+	{
+		uint32_t yy = height - i - 1;
+		memcpy(faceData + (i + y) * _width + x, inData + yy * width, width);
+	}
+}
+
 void MultiStream::moveBlock(uint32_t srcX, uint32_t srcY, uint32_t width, uint32_t height, uint32_t destX, uint32_t destY, uint32_t z /*= 0*/)
 {
 	if (width == 0 || height == 0)

@@ -85,7 +85,7 @@ bool alg::BinPacking2D::getPackWay(int width, PackingMethod method, std::vector<
 		}
 		if (box.height == 0)
 		{
-			box.height = vecItems[0].height;
+			box.height = vecItems[0].getHeight();
 		}
 		if (!box.canAddItem(vecItems[0]))
 		{
@@ -164,17 +164,20 @@ bool alg::BinPacking2D::getHybridPackWay(int width, int height, PackingMethod me
 	{
 		for (const auto& item : box.items)
 		{
-			auto it = finalBoxes.find(item.id);
+			auto it = finalBoxes.find(box.id);
 			if (it == finalBoxes.end())
 			{
-				Box box;
-				box.id = box.id;
-				box.width = width;
-				box.height = height;
+				Box temp;
+				temp.id = box.id;
+				temp.width = width;
+				temp.height = 0;
 
-				finalBoxes[item.id] = box;
+				finalBoxes[box.id] = temp;
 			}
-			finalBoxes[item.id].combine(mapBoxes[item.id]);
+			{
+				auto& temp = finalBoxes[box.id];
+				temp.combineRow(mapBoxes[item.id]);
+			}
 		}
 	}
 

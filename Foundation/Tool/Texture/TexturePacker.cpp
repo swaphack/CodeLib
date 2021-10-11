@@ -57,7 +57,7 @@ void tool::TexturePacker::removeAllDirectories()
 	_dirs.clear();
 }
 
-bool tool::TexturePacker::pack(const std::string& filepath)
+bool tool::TexturePacker::packPNG(const std::string& filepath)
 {
 	std::vector<std::string> files;
 	for (const auto& item : _dirs)
@@ -105,6 +105,8 @@ bool tool::TexturePacker::pack(const std::string& filepath)
 	multiStream.initSteam(4 * _size.getWidth(), _size.getHeight());
 
 	TextureAtlas altas;
+	int width = 0;
+	int height = 0;
 	for (const auto& item : items)
 	{
 		std::string name = ids[item.id];
@@ -113,8 +115,16 @@ bool tool::TexturePacker::pack(const std::string& filepath)
 		auto pDetail = mapDetails[name];
 		if (pDetail)
 		{
-			multiStream.writeBlock(4 * item.x, item.y,
-				4 * item.width, item.height,
+			width = item.width;
+			height = item.height;
+
+			pDetail->expandFormat();
+			if (item.rotate)
+			{
+				pDetail->rotate90();
+			}
+			multiStream.writeBlockWithReverseY(4 * item.x, item.y,
+				pDetail->getUnitSize() * width, height,
 				(const char*)pDetail->getPixels());
 		}
 	}	

@@ -41,6 +41,8 @@ namespace sys
 		void readBlock(uint32_t x, uint32_t y, uint32_t width, uint32_t height, MemoryData& outData, uint32_t z = 0);
 		// 写入一组2维数据到流中
 		void writeBlock(uint32_t x, uint32_t y, uint32_t width, uint32_t height, const char* inData, uint32_t z = 0);
+		// 写入一组2维数据到流中,y方向翻转
+		void writeBlockWithReverseY(uint32_t x, uint32_t y, uint32_t width, uint32_t height, const char* inData, uint32_t z = 0);
 		// 移动内存流
 		void moveBlock(uint32_t srcX, uint32_t srcY, uint32_t width, uint32_t height, uint32_t destX, uint32_t destY, uint32_t z = 0);
 

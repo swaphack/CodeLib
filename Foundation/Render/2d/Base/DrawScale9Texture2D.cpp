@@ -2,7 +2,6 @@
 #include "Common/DrawNode/FragmentOperator.h"
 #include "Common/Fragment/import.h"
 #include "Common/Texture/Texture2D.h"
-#include "Common/Texture/TexFrame.h"
 #include "Common/Tool/VertexTool.h"
 #include "Common/Tool/Tool.h"
 #include "Common/View/import.h"
@@ -118,6 +117,13 @@ void render::DrawScale9Texture2D::setUV(const math::Rect& rect, const math::Size
 	_scale9Vertex.setLayerUVs1(math::Vector2(x0, y1), math::Vector2(x1, y1), math::Vector2(x2, y1), math::Vector2(x3, y1));
 	_scale9Vertex.setLayerUVs2(math::Vector2(x0, y2), math::Vector2(x1, y2), math::Vector2(x2, y2), math::Vector2(x3, y2));
 	_scale9Vertex.setLayerUVs3(math::Vector2(x0, y3), math::Vector2(x1, y3), math::Vector2(x2, y3), math::Vector2(x3, y3));
+}
+
+void render::DrawScale9Texture2D::setTexFrame(const TexFrame& texFrame)
+{
+	if (texFrame.getTexture() == nullptr) return;
+	this->setTexture(texFrame.getTexture());
+	this->setUV(texFrame.getRect(), math::Size(texFrame.getTexture()->getWidth(), texFrame.getTexture()->getHeight()));
 }
 
 void DrawScale9Texture2D::setFlipX(bool status)

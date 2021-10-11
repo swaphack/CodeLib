@@ -31,7 +31,7 @@ bool alg::Bin2D::pack(std::vector<Item>& items)
 	BinPacking2D binPack;
 	for (const auto& item : _items)
 	{
-		binPack.addItem(item.id, item.height, item.width);
+		binPack.addItem(item.id, item.width, item.height);
 	}
 	binPack.sortItems(true);
 	if (!binPack.getHybridPackWay(_width, _height, BinPacking2D::PackingMethod::BFDH, boxes))
@@ -44,8 +44,8 @@ bool alg::Bin2D::pack(std::vector<Item>& items)
 		{
 			Item temp;
 			temp.id = item.id;
-			temp.width = item.width;
-			temp.height = item.height;
+			temp.width = item.getWidth();
+			temp.height = item.getHeight();
 			temp.x = item.x;
 			temp.y = item.y;
 			temp.rotate = item.rotate;

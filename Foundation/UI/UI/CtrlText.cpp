@@ -2,7 +2,6 @@
 #include "Common/Texture/TextureCache.h"
 #include "Common/Texture/Texture.h"
 #include "Common/Texture/Texture2D.h"
-#include "Common/Texture/TexFrame.h"
 #include "Common/Tool/VertexTool.h"
 #include "Common/Mesh/import.h"
 

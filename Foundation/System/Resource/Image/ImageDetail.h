@@ -40,11 +40,18 @@ namespace sys
 		void flipX();
 		// 垂直翻转
 		void flipY();
+		// 旋转90度
+		void rotate90();
+		// 扩展格式，只处理RGB=>RGBA BGR=>BGRA
+		void expandFormat();
 	public:
 		// 设置图片格式 一个像素所有的rgba类型
 		void setDataFormat(ImageDataFormat val);
 		// 设置图片像素数据
 		void setPixels(uint8_t * val, uint32_t width, uint32_t height, int nUnitSize);
+	public:
+		// 获取像素单位大小
+		static uint8_t getUnitSize(ImageDataFormat val);
 	protected:
 		// 图片宽度
 		uint32_t _width = 0;

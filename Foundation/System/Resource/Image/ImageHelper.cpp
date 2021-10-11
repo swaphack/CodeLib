@@ -83,6 +83,8 @@ bool sys::ImageHelper::saveToPNG(const ImageDetail& detail, const std::string& f
 	png_free_data(png_ptr, info_ptr, PNG_FREE_ALL, -1);
 	png_destroy_write_struct(&png_ptr, nullptr);
 
+	free(row);
+
 	return true;
 }
 

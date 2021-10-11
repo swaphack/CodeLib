@@ -2,7 +2,6 @@
 #include "Common/DrawNode/FragmentOperator.h"
 #include "Common/Fragment/import.h"
 #include "Common/Texture/Texture2D.h"
-#include "Common/Texture/TexFrame.h"
 #include "Common/Tool/VertexTool.h"
 #include "Common/Tool/Tool.h"
 #include "Common/View/import.h"
@@ -85,6 +84,13 @@ void render::DrawTexture2D::setUV(const math::Rect& rect, const math::Size& size
 		rect.getMinX() / size.getWidth(), rect.getMaxY() / size.getHeight(),
 	};
 	memcpy(_rectVertex.uvs, uvs, sizeof(uvs));
+}
+
+void render::DrawTexture2D::setTexFrame(const TexFrame& texFrame)
+{
+	if (texFrame.getTexture() == nullptr) return;
+	this->setTexture(texFrame.getTexture());
+	this->setUV(texFrame.getRect(), math::Size(texFrame.getTexture()->getWidth(), texFrame.getTexture()->getHeight()));
 }
 
 void DrawTexture2D::setFlipX(bool status)

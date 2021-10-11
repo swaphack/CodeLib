@@ -54,9 +54,9 @@ namespace tool
 		void removeAllDirectories();
 	public:
 		/**
-		*	生成
+		*	png打包生成
 		*/
-		bool pack(const std::string& filepath);
+		bool packPNG(const std::string& filepath);
 	public:
 		math::IntSize _size;
 		// 单个图片路径

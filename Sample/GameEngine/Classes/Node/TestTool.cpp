@@ -16,8 +16,8 @@ void TestTool::initNodes()
 void TestTool::testTexturePack()
 {
 	tool::TexturePacker packer;
-	packer.addDirectory("H:/Github/CodeLib/Sample/UIEditor/Default/Image");
-	packer.addImage("H:/Github/CodeLib/Sample/UIEditor/Resource/Image/ExampleDiffuseAmbientLighting.png");
-	packer.setSize(1024, 1024);
-	packer.pack("H:/Github/CodeLib/Sample/GameEngine/Resource/texture_pack");
+	packer.addDirectory("H:/Github/CodeLib/Sample/GameEngine/Resource/UI");
+	//packer.addImage("H:/Github/CodeLib/Sample/UIEditor/Resource/Image/ExampleDiffuseAmbientLighting.png");
+	packer.setSize(512, 512);
+	packer.packPNG("H:/Github/CodeLib/Sample/GameEngine/Resource/ATLAS/ui");
 }

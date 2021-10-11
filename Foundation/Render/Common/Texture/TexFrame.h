@@ -25,7 +25,7 @@ namespace render
 		void setTextureWithRect(const Texture* texture, const math::Rect& rect);
 		// 设置纹理和显示区域,默认显示区域为全部
 		void setTextureWithRect(const Texture* texture);
-
+	public:
 		TexFrame& operator=(const TexFrame& value);
 	private:
 		// 纹理对象

@@ -1,7 +1,6 @@
 #include "CtrlScale9Image.h"
 #include "Common/Tool/VertexTool.h"
 #include "Common/Texture/Texture2D.h"
-#include "Common/Texture/TexFrame.h"
 #include "Common/Tool/VertexTool.h"
 #include "Common/Tool/Tool.h"
 #include "Common/View/import.h"
