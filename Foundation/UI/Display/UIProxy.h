@@ -128,6 +128,10 @@ namespace ui
 		bool loadWidget(CtrlWidget* pCtrlWidget, tinyxml2::XMLElement* xmlNode);
 		// 加载根元素
 		CtrlWidget* loadRoot(tinyxml2::XMLElement* xmlNode, const math::Size& size);
+		// 加载界面信息
+		void loadInfo(tinyxml2::XMLElement* xmlNode);
+		// 加载纹理
+		void loadTextures(tinyxml2::XMLElement* xmlNode);
 		//////////////////////////////////////////////////////////////////////////
 		// 保存布局
 		bool saveWidget(CtrlWidget* item, tinyxml2::XMLElement* xmlNode);

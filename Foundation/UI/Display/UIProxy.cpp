@@ -2,7 +2,7 @@
 #include "Layout/import.h"
 #include "Loader/import.h"
 #include "UIShaderHelper.h"
-
+#include "toollib.h"
 using namespace ui;
 
 #define LAYOUT_ROOT_NAME	"root"
@@ -10,6 +10,15 @@ using namespace ui;
 #define LAYOUT_SIZE_HEIGHT	"height"
 #define LAYOUT_DIRECTION	"layout"
 #define LAYOUT_FONT_PATH	"fontPath"
+
+#define TEXTURE_TYPE "type"
+#define TEXTURE_TYPE_ATLAS "atlas"
+#define TEXTURE_TYPE_IMAGE "image"
+
+#define TEXTURE_IMAGE "image"
+#define TEXTURE_ATLAS "atlas"
+
+
 
 
 void UIProxy::init()
@@ -404,19 +413,10 @@ CtrlWidget* UIProxy::loadRoot(tinyxml2::XMLElement* xmlNode, const math::Size& s
 		return nullptr;
 	}
 
-	int width = xmlNode->IntAttribute(LAYOUT_SIZE_WIDTH);
-	int height = xmlNode->IntAttribute(LAYOUT_SIZE_HEIGHT);
+	loadInfo(xmlNode);
+	loadTextures(xmlNode);
 
-	_designSize.setWidth(width);
-	_designSize.setHeight(height);
-
-	_designDirection = (LayoutDirection)xmlNode->IntAttribute(LAYOUT_DIRECTION);
-	if (xmlNode->Attribute(LAYOUT_FONT_PATH))
-	{
-		_defaultFontPath = xmlNode->Attribute(LAYOUT_FONT_PATH);
-	}
-
-	tinyxml2::XMLElement* firstChild = xmlNode->FirstChildElement();
+	tinyxml2::XMLElement* firstChild = xmlNode->FirstChildElement("Layout");
 	if (firstChild == nullptr)
 	{
 		return nullptr;
@@ -430,6 +430,61 @@ CtrlWidget* UIProxy::loadRoot(tinyxml2::XMLElement* xmlNode, const math::Size& s
 	loadWidget(pWidget, firstChild->FirstChildElement());
 
 	return pWidget;
+}
+
+void ui::UIProxy::loadInfo(tinyxml2::XMLElement* xmlNode)
+{
+	if (xmlNode == nullptr)
+	{
+		return;
+	}
+	int width = xmlNode->IntAttribute(LAYOUT_SIZE_WIDTH);
+	int height = xmlNode->IntAttribute(LAYOUT_SIZE_HEIGHT);
+
+	_designSize.setWidth(width);
+	_designSize.setHeight(height);
+
+	_designDirection = (LayoutDirection)xmlNode->IntAttribute(LAYOUT_DIRECTION);
+	if (xmlNode->Attribute(LAYOUT_FONT_PATH))
+	{
+		_defaultFontPath = xmlNode->Attribute(LAYOUT_FONT_PATH);
+	}
+}
+
+void ui::UIProxy::loadTextures(tinyxml2::XMLElement* xmlNode)
+{
+	if (xmlNode == nullptr)
+	{
+		return;
+	}
+	tinyxml2::XMLElement* pTexture = xmlNode->FirstChildElement("Texture");
+	if (pTexture == nullptr)
+	{
+		return;
+	}
+
+	tool::TexturePacker texPacker;
+	auto pChild = pTexture->FirstChildElement();
+	while (pChild)
+	{
+		std::string type;
+		std::string altas;
+		std::string image;
+		if (pChild->Attribute(TEXTURE_TYPE)) type = pChild->Attribute(TEXTURE_TYPE);
+		if (pChild->Attribute(TEXTURE_ATLAS)) altas = pChild->Attribute(TEXTURE_ATLAS);
+		if (pChild->Attribute(TEXTURE_IMAGE)) image = pChild->Attribute(TEXTURE_IMAGE);
+		if (type == TEXTURE_TYPE_IMAGE)
+		{
+			G_TEXTURE_CACHE->createTexture2D(image);
+		}
+		else if (type == TEXTURE_TYPE_ATLAS)
+		{
+			texPacker.loadTextureAtlas(altas);
+			G_TEXTURE_CACHE->addTexAltas(image, texPacker.getTextureAtlas());
+		}
+
+		pChild = pChild->NextSiblingElement();
+	}
 }
 
 bool UIProxy::saveWidget(CtrlWidget* item, tinyxml2::XMLElement* xmlNode)

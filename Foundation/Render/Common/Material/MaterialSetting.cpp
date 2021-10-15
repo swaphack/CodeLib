@@ -33,9 +33,9 @@ void render::MaterialSetting::removeAllUniforms(bool bContainSelfDefined)
 	}
 }
 
-void render::MaterialSetting::addSelfDefineUniform(const std::string& name, UniformType type, void* value)
+void render::MaterialSetting::addSelfDefineUniform(const std::string& name, UniformType type, uint32_t size, void* value)
 {
-	UniformParameter parameter(name, type, value);
+	UniformParameter parameter(name, type, size, value);
 	_mapSelfDefinedUniforms[name] = parameter;
 }
 
@@ -43,6 +43,21 @@ void render::MaterialSetting::addSelfDefineUniform(const std::string& name, Unif
 void render::MaterialSetting::removeAllSelfDefineUniforms()
 {
 	_mapSelfDefinedUniforms.clear();
+}
+
+bool render::MaterialSetting::equalsSelfDefinedUniforms(const MaterialSetting& ms) const
+{
+	if (ms.getSelfDefinedUniforms().size() != _mapSelfDefinedUniforms.size())
+	{
+		return false;
+	}
+	for (auto& item : ms.getSelfDefinedUniforms())
+	{
+		auto it = _mapSelfDefinedUniforms.find(item.first);
+		if (it != _mapSelfDefinedUniforms.end()) return false;
+		if (!it->second.equals(item.second)) return false;
+	}
+	return true;
 }
 
 void render::MaterialSetting::initParameters(ShaderProgram* shaderProgram)

@@ -47,6 +47,7 @@ void RenderApplication::update()
 
 	G_TOUCHMANAGER->process();
 	G_DRAWCORE->beginRecordDrawCall();
+	G_AUDIO->process();
 
 	long nowClock = clock();
 
@@ -118,7 +119,7 @@ void RenderApplication::initFilePath()
 
 void RenderApplication::initRender()
 {
-	G_MATERIALGLOBALPARAMETER;
+	G_MATERIALGLOBALPARAMETER->init();
 
 	sys::TimeClock::startRecord();
 

@@ -149,8 +149,8 @@ void ue::MainWindow::addFPS()
 
 	ui::CtrlText* pCtrlText = CREATE_NODE(ui::CtrlText);
 	pCtrlText->setUseDesignCamera(false);
-	pCtrlText->setVolume(200, 100);
-	pCtrlText->setDimensions(200, 100);
+	pCtrlText->setVolume(200, 120);
+	pCtrlText->setDimensions(200, 120);
 	pCtrlText->setFontPath("Resource/Font/font_3.ttf");
 	pCtrlText->setFontSize(22);
 	pCtrlText->setScale(1);
@@ -167,7 +167,8 @@ void ue::MainWindow::addFPS()
 		uint64_t diffTime = sys::TimeClock::getDifferenceOfRecordTime();
 		int fps = 1000 / diffTime;
 		int drawCount = G_DRAWCORE->getDrawCallCount();
-		std::string text = getCString("FPS %d\nDraw Call %d", fps, drawCount);
+		int undrawCount = G_DRAWCORE->getUnDrawCallCount();
+		std::string text = getCString("FPS %d\nDraw Call %d\nNot Draw Call %d", fps, drawCount, undrawCount);
 		((ui::CtrlText*)sender)->setString(text);
 	});
 

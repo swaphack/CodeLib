@@ -181,7 +181,6 @@ void render::Mesh::drawWithBufferObject()
 
 	if (nVerticeSize == 0)
 	{
-		//PRINT("Mesh Vertice is NULL\n");
 		return;
 	}
 
@@ -190,16 +189,18 @@ void render::Mesh::drawWithBufferObject()
 	{
 		return;
 	}
-	/*
-	if (nColorSize == 0 && nUVSize == 0)
-	{
-		PRINT("Mesh Color or UI is NULL\n");
-		return;
-	}
-	*/
+
 	GLDebug::showError();
 	_indiceBuffer->bindBuffer();
-	GLBufferObjects::drawElements(_drawMode, nIndiceLength, IndexDataType::UNSIGNED_INT, nullptr);
+	if (_modelMatrices.getLength() > 0)
+	{
+		int primaryCount = _modelMatrices.getLength() / _modelMatrices.getUnitSize();
+		GLBufferObjects::drawElementsInstanced(_drawMode, nIndiceLength, IndexDataType::UNSIGNED_INT, nullptr, primaryCount);
+	}
+	else
+	{
+		GLBufferObjects::drawElements(_drawMode, nIndiceLength, IndexDataType::UNSIGNED_INT, nullptr);
+	}
 
 	GLDebug::showError();
 }
@@ -303,12 +304,13 @@ void render::Mesh::updateBufferData()
 	uint32_t nNormalSize = _detail->getNormals().getSize();
 	uint32_t nTangentSize = _detail->getTangents().getSize();
 	uint32_t nBitangentSize = _detail->getBitangents().getSize();
+	uint32_t nModelMatricesSize = _modelMatrices.getSize();
 
 	_vertexBuffer->bindBuffer();
 
 	GLDebug::showError();
 
-	uint32_t nTotalSize = nVerticeSize + nColorSize + nUVSize + nNormalSize + nTangentSize + nBitangentSize;
+	uint32_t nTotalSize = nVerticeSize + nColorSize + nUVSize + nNormalSize + nTangentSize + nBitangentSize + nModelMatricesSize;
 	_vertexBuffer->setBufferData(nTotalSize, nullptr, BufferDataUsage::STATIC_DRAW);
 
 	int nOffset = 0;
@@ -350,6 +352,12 @@ void render::Mesh::updateBufferData()
 	{
 		_vertexBuffer->setBufferSubData(nOffset, nBitangentSize, _detail->getBitangents().getPtr());
 		nOffset += nBitangentSize;
+	}
+	GLDebug::showError();
+	if (nModelMatricesSize > 0)
+	{
+		_vertexBuffer->setBufferSubData(nOffset, nModelMatricesSize, _modelMatrices.getPtr());
+		nOffset += nModelMatricesSize;
 	}
 	_vertexBuffer->unbindBuffer();
 	GLDebug::showError();
@@ -622,5 +630,37 @@ void render::Mesh::calTrianglesVertexTangent(const sys::MeshMemoryData& vertices
 		}
 		memcpy(tangents + i * 3, tangent.getValue(), 3 * sizeof(float));
 	}
+}
+
+void render::Mesh::setModelMatrices(int len, const float* vertexes, int unitSize)
+{
+	_modelMatrices.init(len * unitSize, vertexes, sizeof(float));
+	_modelMatrices.setUnitSize(unitSize);
+}
+
+void render::Mesh::setModelMatrices(int len, const math::Matrix4x4* vertexes)
+{
+	float* value = (float*)createModelMatrices(len, sizeof(float));
+	for (int i = 0; i < len; i++)
+	{
+		memcpy(value + i * 16, vertexes->getValue(), 16 * sizeof(float));
+	}
+}
+
+char* render::Mesh::createModelMatrices(size_t len, uint32_t typeSize, int unitSize)
+{
+	_modelMatrices.resize(len * unitSize, typeSize);
+	_modelMatrices.setUnitSize(unitSize);
+	return _modelMatrices.getPtr();
+}
+
+const sys::MeshMemoryData& render::Mesh::getModelMatrices() const
+{
+	return _modelMatrices;
+}
+
+bool render::Mesh::equals(const Mesh& mesh) const
+{
+	return _detail->equals(*mesh.getMeshDetail());
 }
 

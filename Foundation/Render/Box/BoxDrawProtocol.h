@@ -117,6 +117,10 @@ namespace render
 		*	是否与其他2d盒子相交
 		*/
 		virtual bool isOverlap(const Box2DDrawProtocol* box2d);
+		/**
+		*	是否在画布内
+		*/
+		bool isInCanvas();
 	protected:
 		/**
 		*	形状改变
@@ -136,6 +140,8 @@ namespace render
 		math::Polygon _boxPolygon;
 		// 世界包围盒
 		math::Rect _boxRect;
+		// 在画布内
+		bool _bInCanvas = true;
 	};
 
 	/**

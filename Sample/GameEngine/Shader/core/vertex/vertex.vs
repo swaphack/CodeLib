@@ -8,3 +8,4 @@ layout(location = 6) in vec2 v_texcoord1;
 layout(location = 7) in vec2 v_texcoord2;
 layout(location = 8) in vec2 v_texcoord3;
 layout(location = 9) in vec2 v_texcoord4;
+layout(location = 10) in mat4 v_modeMat;

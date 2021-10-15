@@ -35,27 +35,52 @@ bool ui::CtrlScale9Image::init()
 	return true;
 }
 
-void ui::CtrlScale9Image::setImagePath(const std::string& path)
-{
-	_imageDefine.setFilePath(path);
-
-	_texture2D->setTextureWithRect(path);
-}
-
 void ui::CtrlScale9Image::loadImage(const std::string& path)
 {
 	_imageDefine.setFilePath(path);
-	_texture2D->setTexture(path);
+	_texture2D->loadImage(path);
 }
 
 void ui::CtrlScale9Image::loadTexture(const render::Texture* texture)
 {
-	_texture2D->setTextureWithRect(texture);
+	_texture2D->loadTexture(texture);
+}
+
+void ui::CtrlScale9Image::loadTextureChip(const std::string& chipName)
+{
+	_imageDefine.setFilePath(chipName);
+	_texture2D->loadTextureChip(chipName);
 }
 
 const std::string& ui::CtrlScale9Image::getImagePath()
 {
 	return _imageDefine.filepath;
+}
+
+void ui::CtrlScale9Image::setNativeSize()
+{
+	_texture2D->setNativeTextureSize();
+	this->setVolume(_texture2D->getVolume());
+}
+
+void ui::CtrlScale9Image::setFlipX(bool status)
+{
+	_texture2D->setFlipX(status);
+}
+
+bool ui::CtrlScale9Image::isFlipX()
+{
+	return _texture2D->isFlipX();
+}
+
+void ui::CtrlScale9Image::setFlipY(bool status)
+{
+	_texture2D->setFlipY(status);
+}
+
+bool ui::CtrlScale9Image::isFlipY()
+{
+	return _texture2D->isFlipY();
 }
 
 void ui::CtrlScale9Image::setMargin(float top, float right, float bottom, float left)

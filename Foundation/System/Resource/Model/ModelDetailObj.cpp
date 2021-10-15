@@ -109,7 +109,7 @@ bool ModelDetailObj::load(const std::string& fullpath)
 				}
 			}
 
-			pMesh->setMaterial(pData->MeshMaterial.name);
+			pMesh->setMaterialName(pData->MeshMaterial.name);
 
 			int nVertCount = pData->Vertices.size();
 			if (nVertCount > 0)

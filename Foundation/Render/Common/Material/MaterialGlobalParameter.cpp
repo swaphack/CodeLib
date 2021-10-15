@@ -2,7 +2,6 @@
 
 render::MaterialGlobalParameter::MaterialGlobalParameter()
 {
-	this->init();
 }
 
 render::MaterialGlobalParameter::~MaterialGlobalParameter()
@@ -68,6 +67,7 @@ void render::MaterialGlobalParameter::init()
 	this->addVertexData(render::VertexDataType::NORMAL, "v_normal");
 	this->addVertexData(render::VertexDataType::TANGENT, "v_tangent");
 	this->addVertexData(render::VertexDataType::BITANGENT, "v_bitangent");
+	this->addVertexData(render::VertexDataType::MODEL_MATRIX, "v_modeMat");
 
 
 	this->addUniform(render::EnvUniformType::VIEW_POSITION, "env.viewPos");

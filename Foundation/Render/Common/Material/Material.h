@@ -34,7 +34,7 @@ namespace render
 		/**
 		*	shader
 		*/
-		ShaderProgram* getShaderProgram();
+		ShaderProgram* getShaderProgram() const;
 	public:
 		/**
 		*	材质信息
@@ -62,6 +62,8 @@ namespace render
 		*	应用材质
 		*/ 
 		void applyMaterial();
+
+		bool equals(const Material& material) const;
 	public: // 设置Uniform
 		void setUniform(const std::string& name, int value);
 		void setUniform(const std::string& name, float value);

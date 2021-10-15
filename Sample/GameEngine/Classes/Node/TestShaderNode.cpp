@@ -99,7 +99,7 @@ void TestShaderNode::testImageShader()
 	std::string filepath = "Resource/Image/world.jpg";
 
 	CtrlImage* pImage = CREATE_NODE(CtrlImage);
-	pImage->setImagePath(filepath);
+	pImage->loadImage(filepath);
 	pImage->setAnchorPoint(Vector2(0.5f, 0.5f));
 	pImage->setVolume(800, 600);
 	pImage->setPosition(Vector2(512, 384));
@@ -273,7 +273,7 @@ void TestShaderNode::testTessellation()
 
 	CtrlImage* pImage = CREATE_NODE(CtrlImage);
 	pImage->setName("Tess");
-	pImage->setImagePath(filepath);
+	pImage->loadImage(filepath);
 	pImage->setAnchorPoint(Vector2(0.5f, 0.5f));
 	pImage->setVolume(800, 600);
 	pImage->setPosition(Vector2(512, 384));

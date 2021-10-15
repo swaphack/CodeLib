@@ -161,7 +161,7 @@ void TestUINode::testScissor()
 
 
 	CtrlImage* pImage = CREATE_NODE(CtrlImage);
-	pImage->setImagePath("Resource/Image/sqi.png");
+	pImage->loadImage("Resource/Image/sqi.png");
 	pImage->setVolume(200, 400, 0);
 	pImage->setScale(1, 1, 1);
 	Utility::loadDefaultShader(pImage);
@@ -172,7 +172,7 @@ void TestUINode::testScrollView()
 {
 	CtrlScrollView* pScrollView = CREATE_NODE(CtrlScrollView);
 	pScrollView->getBackgroundImage()->setVisible(false);
-	pScrollView->getBackgroundImage()->setImagePath("Resource/Image/sqi.png");
+	pScrollView->getBackgroundImage()->loadImage("Resource/Image/sqi.png");
 
 	pScrollView->getBackgroundMask()->setVisible(false);
 	pScrollView->getBackgroundMask()->setColor(phy::Color4B(255,255,255,255));
@@ -188,7 +188,7 @@ void TestUINode::testScrollView()
 	for (int i = 0; i < 10; i++)
 	{
 		CtrlImage* pImage = CREATE_NODE(CtrlImage);
-		pImage->setImagePath("Resource/Image/sqi.png");
+		pImage->loadImage("Resource/Image/sqi.png");
 		pImage->setVolume(200, 200, 0);
 		Utility::loadDefaultShader(pImage);
 		pScrollView->addItem(pImage);
@@ -199,7 +199,7 @@ void TestUINode::testListView()
 {
 	CtrlListView* pListView = CREATE_NODE(CtrlListView);
 	pListView->getBackgroundImage()->setVisible(false);
-	pListView->getBackgroundImage()->setImagePath("Resource/Image/sqi.png");
+	pListView->getBackgroundImage()->loadImage("Resource/Image/sqi.png");
 
 	pListView->getBackgroundMask()->setVisible(true);
 	pListView->getBackgroundMask()->setColor(phy::Color4B(120, 120, 120, 180));
@@ -218,7 +218,7 @@ void TestUINode::testListView()
 	for (int i = 0; i < 10; i++)
 	{
 		CtrlImage* pImage = CREATE_NODE(CtrlImage);
-		pImage->setImagePath("Resource/Image/sqi.png");
+		pImage->loadImage("Resource/Image/sqi.png");
 		pImage->setVolume(200, 200, 0);
 		Utility::loadDefaultShader(pImage);
 		pListView->addItem(pImage);
@@ -254,7 +254,7 @@ void TestUINode::testStencil()
 	pStencil->setStencilNode(pMask);
 
 	CtrlImage* pImage = CREATE_NODE(CtrlImage);
-	pImage->setImagePath("Resource/Image/sqi.png");
+	pImage->loadImage("Resource/Image/sqi.png");
 	pImage->setVolume(300, 300, 0);
 	pImage->setAnchorPoint(0, 0, 0);
 	pImage->setPosition(0, 0, 0.0f);
@@ -270,7 +270,7 @@ void TestUINode::testImage()
 	std::string filepath = "Resource/Image/world.jpg";
 
 	CtrlImage* pImage = CREATE_NODE(CtrlImage);
-	pImage->setImagePath(filepath);
+	pImage->loadImage(filepath);
 	pImage->setAnchorPoint(math::Vector2(0.5f, 0.5f));
 	pImage->setVolume(500, 500);
 	pImage->setRotation(0, 0, 45);
@@ -282,7 +282,7 @@ void TestUINode::testImage()
 	for (size_t i = 0; i < 1; i++)
 	{
 		pImage = CREATE_NODE(CtrlImage);
-		pImage->setImagePath(filepath);
+		pImage->loadImage(filepath);
 		pImage->setAnchorPoint(math::Vector2(0.5f, 0.5f));
 		pImage->setVolume(500, 500);
 		pImage->setRotation(0, 0, 15);

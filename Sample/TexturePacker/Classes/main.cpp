@@ -9,8 +9,5 @@ int main(int argc, char** argv)
 	bin2D.addItem(2, 3, 5);
 	bin2D.addItem(3, 6, 7);
 	bin2D.addItem(4, 6, 8);
-
-	bin2D.getPackWay()
-
 	return 1;
 }

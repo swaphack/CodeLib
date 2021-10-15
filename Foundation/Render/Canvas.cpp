@@ -35,8 +35,6 @@ void Canvas::update(float interval)
 	{
 		G_ACTIONMANAGER->update(interval);
 	}
-
-	G_AUDIO->update();
 }
 
 void Canvas::setViewPort(float x, float y, float width, float height)

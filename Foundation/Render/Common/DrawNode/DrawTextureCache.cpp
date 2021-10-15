@@ -28,7 +28,9 @@ void render::DrawTextureCache::addTexture(const std::string& name, const std::st
 	this->addTexture(name, pTexture, fullpath);
 }
 
-void render::DrawTextureCache::addTexture(const std::string& name, const Texture* texture, const std::string& fullpath)
+void render::DrawTextureCache::addTexture(
+	const std::string& name, const Texture* texture,
+	const std::string& fullpath, const math::Rect& rect, bool rotate)
 {
 	if (texture == nullptr) return;
 
@@ -39,6 +41,8 @@ void render::DrawTextureCache::addTexture(const std::string& name, const Texture
 		info.name = name;
 		info.texture = (Texture*)texture;
 		info.fullpath = fullpath;
+		info.rect = rect;
+		info.rotate = rotate;
 		info.increase();
 		_textureInfos.insert(std::make_pair(name, info));
 	}
@@ -58,16 +62,13 @@ void render::DrawTextureCache::removeTexture(const std::string& name)
 	it->second.descrease();
 	if (it->second.refCount == 0)
 	{
-		if (it->second.refCount == 0)
+		if (it->second.fullpath.empty())
 		{
-			if (it->second.fullpath.empty())
-			{
-				G_TEXTURE_CACHE->removeTexture(it->second.texture);
-			}
-			else
-			{
-				G_TEXTURE_CACHE->removeTexture2D(it->second.fullpath);
-			}
+			G_TEXTURE_CACHE->removeTexture(it->second.texture);
+		}
+		else
+		{
+			G_TEXTURE_CACHE->removeTexture2D(it->second.fullpath);
 		}
 		_textureInfos.erase(it);
 	}

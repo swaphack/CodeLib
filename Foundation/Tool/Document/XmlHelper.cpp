@@ -63,6 +63,18 @@ void tool::XmlHelper::appendElementWithChildren(const std::string& nodeName, con
 	m_pDocument->RootElement()->InsertEndChild(pElement);
 }
 
+void tool::XmlHelper::appendElementWithChildren(const std::string& nodeName, const std::vector<std::pair<std::string, std::string>>& value)
+{
+	tinyxml2::XMLElement* pElement = m_pDocument->NewElement(nodeName.c_str());
+	for (const auto& item : value)
+	{
+		tinyxml2::XMLElement* pChild = m_pDocument->NewElement(item.first.c_str());
+		pChild->SetText(item.second.c_str());
+		pElement->InsertEndChild(pChild);
+	}
+	m_pDocument->RootElement()->InsertEndChild(pElement);
+}
+
 tinyxml2::XMLElement* XmlHelper::getElement(const std::string& nodePath, const std::string& spot)
 {
 	if (nodePath.empty())

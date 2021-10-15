@@ -20,7 +20,15 @@ namespace sys
 		/**
 		*	获取名称
 		*/
-		const std::string& getName();
+		const std::string& getName() const;
+		/**
+		*	设置名称
+		*/
+		void setTexture(const std::string& name);
+		/**
+		*	获取名称
+		*/
+		const std::string& getTexture() const;
 		/**
 		*	设置Ambient纹理
 		*/
@@ -28,7 +36,7 @@ namespace sys
 		/**
 		*	获取Ambient纹理
 		*/
-		const std::string& getAmbientTextureMap();
+		const std::string& getAmbientTextureMap() const;
 		/**
 		*	设置Diffuse纹理
 		*/
@@ -36,7 +44,7 @@ namespace sys
 		/**
 		*	获取Diffuse纹理
 		*/
-		const std::string& getDiffuseTextureMap();
+		const std::string& getDiffuseTextureMap() const;
 		/**
 		*	设置Specular纹理
 		*/
@@ -44,7 +52,7 @@ namespace sys
 		/**
 		*	获取Specular纹理
 		*/
-		const std::string& getSpecularTextureMap();
+		const std::string& getSpecularTextureMap() const;
 		/**
 		*	设置Alpha纹理
 		*/
@@ -52,7 +60,7 @@ namespace sys
 		/**
 		*	获取Alpha纹理
 		*/
-		const std::string& getAlphaTextureMap();
+		const std::string& getAlphaTextureMap() const;
 		/**
 		*	设置凹凸纹理
 		*/
@@ -60,7 +68,7 @@ namespace sys
 		/**
 		*	获取凹凸纹理
 		*/
-		const std::string& getBumpTextureMap();
+		const std::string& getBumpTextureMap() const;
 		/**
 		*	设置法线纹理
 		*/
@@ -68,7 +76,7 @@ namespace sys
 		/**
 		*	获取法线纹理
 		*/
-		const std::string& getNormalTextureMap();
+		const std::string& getNormalTextureMap() const;
 		/**
 		*	设置阴影纹理
 		*/
@@ -76,7 +84,7 @@ namespace sys
 		/**
 		*	获取阴影纹理
 		*/
-		const std::string& getShadowTextureMap();
+		const std::string& getShadowTextureMap() const;
 		/**
 		*	环境光
 		*/
@@ -144,10 +152,13 @@ namespace sys
 		*	辐射光颜色
 		*/
 		const float* getEmission() const;
+	public:
 		/**
 		*	赋值
 		*/
 		MaterialDetail& operator = (const MaterialDetail& value);
+
+		bool equals(const MaterialDetail& detail);
 	protected:
 		// 名称
 		std::string _name;

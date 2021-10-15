@@ -91,6 +91,9 @@
     <Filter Include="Record">
       <UniqueIdentifier>{bf8cd5e1-7e35-4b74-9d5d-dcac32970b0f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource\Atlas">
+      <UniqueIdentifier>{d7c76a5e-8dae-4b0e-adde-6ce73320e9bb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Base\import.h">
@@ -595,6 +598,12 @@
     <ClInclude Include="Platform\Windows\WindowsHelper.h">
       <Filter>Platform\Windows</Filter>
     </ClInclude>
+    <ClInclude Include="Resource\Atlas\TextureAtlas.h">
+      <Filter>Resource\Atlas</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\Atlas\import.h">
+      <Filter>Resource\Atlas</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Framework\Application.cpp">
@@ -920,6 +929,9 @@
     </ClCompile>
     <ClCompile Include="Platform\Windows\WindowsHelper.cpp">
       <Filter>Platform\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource\Atlas\TextureAtlas.cpp">
+      <Filter>Resource\Atlas</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

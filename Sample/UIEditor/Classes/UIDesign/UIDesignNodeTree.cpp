@@ -166,8 +166,8 @@ ui::CtrlButton* ue::UIDesignNodeTree::createHasChildrenNode(int height, const st
 
 	if (pWidget)
 	{
-		pWidget->setNormalImage("Default/Image/dir_bg.png");
-		pWidget->setSelectedImage("Default/Image/dir_bg_2.png");
+		pWidget->setNormalImage("Default/Atlas/ui.png[dir_bg.png]");
+		pWidget->setSelectedImage("Default/Atlas/ui.png[dir_bg_2.png]");
 		pWidget->setTextColor(phy::Color3B(255, 255, 255));
 		pWidget->setFontSize(CONST_ITEM_HEIGHT);
 		pWidget->setFontPath("Default/Font/font_3.ttf");
@@ -209,8 +209,8 @@ ui::CtrlButton* ue::UIDesignNodeTree::createNoChildrenNode(int height, const std
 
 	if (pWidget)
 	{
-		pWidget->setNormalImage("Default/Image/file_bg.png");
-		pWidget->setSelectedImage("Default/Image/file_bg_2.png");
+		pWidget->setNormalImage("Default/Atlas/ui.png[file_bg.png]");
+		pWidget->setSelectedImage("Default/Atlas/ui.png[file_bg_2.png]");
 		pWidget->setTextColor(phy::Color3B(0, 0, 0));
 		pWidget->setFontSize(CONST_ITEM_HEIGHT);
 		pWidget->setFontPath("Default/Font/font_3.ttf");

@@ -18,19 +18,27 @@ namespace render
 	public:
 		virtual bool init();
 	public:
-		// 设置图片纹理
-		void setTextureWithRect(const std::string& filepath);
-		// 设置图片纹理
-		void setTextureWithRect(const Texture* texture);
+		// 混合读取方式，纹理或者纹理碎片
+		void loadImage(const std::string& mixFilePath);
+		// 根据图片路径加载
+		void loadTexture(const std::string& filepath);
+		// 根据纹理加载
+		void loadTexture(const Texture* texture);
+		// 根据碎片范围加载图片
+		void loadTexture(const Texture* texture, const sys::TextureChip& chip);
+		// 根据碎片名字加载图片
+		void loadTextureChip(const std::string& chipname);
+		// 设置成纹理大小
+		void setNativeTextureSize();
 	public:
 		/**
 		*	设置纹理坐标
 		*/
-		void setUV(const math::Rect& rect, const math::Size& size);
+		void setUV(const math::Rect& rect, const math::Size& size, bool rotate = false);
 		/**
 		*	设置纹理帧
 		*/
-		void setTexFrame(const TexFrame& texFrame);
+		void setTexFrame(const TexFrame* texFrame);
 	public:
 		// 设置水平翻转
 		void setFlipX(bool status);
@@ -54,5 +62,7 @@ namespace render
 		bool _bFlipX = false;
 		// 是否垂直翻转
 		bool _bFlipY = false;
+		// 纹理帧
+		TexFrame* _texFrame = nullptr;
 	};
 }

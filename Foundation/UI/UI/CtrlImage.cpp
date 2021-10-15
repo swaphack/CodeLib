@@ -31,28 +31,33 @@ bool CtrlImage::init()
 	return true;
 }
 
-void CtrlImage::setImagePath(const std::string& path)
-{
-	_imageDefine.setFilePath(path);
-
-	_texture2D->setTextureWithRect(path);
-}
-
 void ui::CtrlImage::loadImage(const std::string& path)
 {
 	_imageDefine.setFilePath(path);
 
-	_texture2D->setTexture(path);
+	_texture2D->loadImage(path);
 }
 
 void ui::CtrlImage::loadTexture(const render::Texture* texture)
 {
-	_texture2D->setTextureWithRect(texture);
+	_texture2D->loadTexture(texture);
+}
+
+void ui::CtrlImage::loadTextureChip(const std::string& chipName)
+{
+	_imageDefine.setFilePath(chipName);
+	_texture2D->loadTextureChip(chipName);
 }
 
 const std::string& CtrlImage::getImagePath()
 {
 	return _imageDefine.filepath;
+}
+
+void ui::CtrlImage::setNativeSize()
+{
+	_texture2D->setNativeTextureSize();
+	this->setVolume(_texture2D->getVolume());
 }
 
 void CtrlImage::setFlipX(bool status)

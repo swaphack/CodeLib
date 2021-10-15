@@ -91,6 +91,84 @@ Texture2D* TextureCache::getTexture2D(const std::string& path)
 	return it->second;
 }
 
+std::string render::TextureCache::getTexFrameName(const std::string& path, const std::string name) const
+{
+	return path + "[" + name + "]";
+}
+
+void render::TextureCache::addTexAltas(const std::string& path, const sys::TextureAtlas& texAltas)
+{
+	Texture* texture = this->createTexture2D(path);
+	if (texture)
+	{
+		this->addTexAltas(path, texture, texAltas);
+	}
+}
+
+void render::TextureCache::addTexAltas(const std::string& path, const Texture* texture, const sys::TextureAtlas& texAltas)
+{
+	if (texture == nullptr || texture->getWidth() == 0 || texture->getHeight() == 0)
+	{
+		return;
+	}
+	for (const auto& item : texAltas.getAllChips())
+	{
+		float y = texture->getHeight() - item.second.y - item.second.height;
+		if (y < 0)
+		{
+			PRINT("error: TextureCache::addTexAltas Y value is lower than 0!!!");
+			y = 0;
+		}
+		math::Rect rect(item.second.x, y, item.second.width, item.second.height);
+		this->addTexFrame(path, texture, item.first, rect);
+	}
+}
+
+void render::TextureCache::addTexFrame(const std::string& path, const TexFrame& texFrame)
+{
+	if (texFrame.getName().empty())
+	{
+		return;
+	}
+	std::string fullname = getTexFrameName(path, texFrame.getName());
+	_texFrames[fullname] = texFrame;
+}
+
+void render::TextureCache::addTexFrame(const std::string& path, const Texture* texture, const std::string& name, const math::Rect& rect)
+{
+	if (texture == nullptr || texture->getWidth() == 0 || texture->getHeight() == 0) return;
+
+	math::Rect percentRect(rect.getMinX() / texture->getWidth(), rect.getMinY() / texture->getHeight(),
+		rect.getWidth() / texture->getWidth(), rect.getHeight() / texture->getHeight());
+
+	TexFrame texFrame;
+	texFrame.setName(name);
+	texFrame.setRect(percentRect);
+	texFrame.setTexture(texture);
+	this->addTexFrame(path, texFrame);
+}
+
+const TexFrame* render::TextureCache::getTexFrame(const std::string& path, const std::string name) const
+{
+	std::string fullname = getTexFrameName(path, name);
+	return getTexFrame(fullname);
+}
+
+const TexFrame* render::TextureCache::getTexFrame(const std::string& pathname) const
+{
+	auto it = _texFrames.find(pathname);
+	if (it != _texFrames.end())
+	{
+		return &it->second;
+	}
+	return nullptr;
+}
+
+void render::TextureCache::removeTexFrames(const std::string& path)
+{
+	_texFrames.erase(path);
+}
+
 Texture2D* render::TextureCache::createTexture2D(const phy::Color4B& color)
 {
 	Texture2D* texture2D = CREATE_OBJECT(Texture2D);

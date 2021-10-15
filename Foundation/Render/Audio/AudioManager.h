@@ -26,7 +26,7 @@ namespace render
 		~AudioManager();
 	public:
 		void init();
-		void update();
+		void process();
 		void close();
 		void dispose();
 

@@ -29,7 +29,7 @@ void TestPostProcessing::testFramePostProcessing()
 	std::string filepath = "Resource/Image/world.jpg";
 
 	ui::CtrlImage* pImage = CREATE_NODE(ui::CtrlImage);
-	pImage->setImagePath(filepath);
+	pImage->loadImage(filepath);
 	pImage->setAnchorPoint(0, 0);
 	pImage->setPosition(100, 100);
 	pImage->setVolume(512, 384);
@@ -65,7 +65,7 @@ void TestPostProcessing::testImage()
 	std::string filepath = "Resource/Image/world_texture.jpg";
 
 	ui::CtrlImage* pImage = CREATE_NODE(ui::CtrlImage);
-	pImage->setImagePath(filepath);
+	pImage->loadImage(filepath);
 	pImage->setAnchorPoint(math::Vector2());
 	pImage->setVolume(frameSize.getWidth(), frameSize.getHeight());
 	Utility::loadShaderVF(pImage, "Shader/texture/texture.vs", "Shader/texture/texture.fs");

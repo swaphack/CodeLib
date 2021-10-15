@@ -8,12 +8,21 @@ namespace render
 	*/
 	enum class VertexDataType
 	{
+		// 位置
 		POSITION,
+		// 颜色
 		COLOR,
+		// 纹理坐标
 		UV,
+		// 法线
 		NORMAL,
+		// 切线
 		TANGENT,
+		// 二重切线
 		BITANGENT,
+		// 模型矩阵
+		MODEL_MATRIX = 10,
+
 		MAX,
 	};
 	/**

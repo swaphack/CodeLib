@@ -217,6 +217,13 @@ namespace render
 	public:// 绑定attrib
 		void bindAttribPointer(VertexArrayObject* vao, const std::string& name,
 			int size, VertexAttribPointerType type, uint32_t offset);
+
+		void bindAttribPointer(VertexArrayObject* vao, const std::string& name,
+			int size, VertexAttribPointerType type, uint32_t stride, uint32_t offset);
+		// 4x4 4个vec4
+		void bindMat4AttribPointer(VertexArrayObject* vao, const std::string& name, uint32_t offset);
+		// 3x3 3个vec3
+		void bindMat3AttribPointer(VertexArrayObject* vao, const std::string& name, uint32_t offset);
 	private:
 		/**
 		*	程序编号

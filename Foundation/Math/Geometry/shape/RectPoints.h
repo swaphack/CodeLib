@@ -13,6 +13,7 @@ namespace math
 	{
 	public:
 		RectPoints();
+		RectPoints(const Rect& rect);
 		RectPoints(const Vector3& leftBottom, const Vector3& rightBottom, const Vector3& rightTop, const Vector3& leftTop);
 		RectPoints(const Vector3* points);
 		virtual ~RectPoints();

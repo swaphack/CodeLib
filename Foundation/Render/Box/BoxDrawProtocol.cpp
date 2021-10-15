@@ -6,6 +6,7 @@
 #include "Common/Scene/Cameras.h"
 #include "BoxDraw.h"
 #include "Common/Tool/VertexTool.h"
+#include "Common/Tool/Tool.h"
 
 render::BoxDrawProtocol::BoxDrawProtocol()
 {
@@ -143,6 +144,10 @@ const math::Rect& render::Box2DDrawProtocol::getBoxRect() const
 
 bool render::Box2DDrawProtocol::containsTouchPoint(const math::Vector2& touchPoint)
 {
+	if (!isInCanvas())
+	{
+		return false;
+	}
 	if (this->getBoxNode() == nullptr || this->getBoxNode()->getCamera() == nullptr)
 		return false;
 	auto pCamera = this->getBoxNode()->getCamera();
@@ -168,6 +173,16 @@ bool render::Box2DDrawProtocol::isOverlap(const Box2DDrawProtocol* box2d)
 	}
 
 	return this->getBoxPolygon().intersects(box2d->getBoxPolygon());
+}
+
+bool render::Box2DDrawProtocol::isInCanvas()
+{
+	bool include = _boxRect.getMinX() <= Tool::getViewWidth()
+		&& _boxRect.getMaxX() >= 0
+		&& _boxRect.getMinY() <= Tool::getViewWidth()
+		&& _boxRect.getMaxY() >= 0;
+
+	return include;
 }
 
 void render::Box2DDrawProtocol::onBox2DCubeChange()
@@ -201,6 +216,9 @@ void render::Box2DDrawProtocol::onBox2DWorldCubeChange()
 	_boxPolygon = _worldRectVertex;
 	_boxRect = _boxPolygon.getBoundingBox();
 	setBoxVertices(_worldRectVertex);
+
+	_bInCanvas = isInCanvas();
+	//this->getBoxNode()->setSkipDraw(!_bInCanvas);
 }
 
 /////////////////////////////////////////////////////////////////////////

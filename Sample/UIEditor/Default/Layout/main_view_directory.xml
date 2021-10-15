@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <root width="1024" height="768" layout="1" fontPath="Default/Font/font_3.ttf">
+	<Texture>
+		<item type="atlas" atlas="Default/Atlas/ui.atlas" image="Default/Atlas/ui.png"/>
+  	</Texture>
 	<Layout name="body" showMask="1" maskColor="0,0,0,200" margin="0,0,0,0" marginState="1,1,1,1" clip="1" size="0,0">
 		<ListView name="directory" direction="2" verticalScroll="1" enableTouch="1" size="100%,100%" >
 		</ListView>

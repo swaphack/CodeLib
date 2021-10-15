@@ -79,6 +79,10 @@ namespace sys
 		void resize(size_t len, uint32_t typeSize = 1);
 	public:
 		MemoryData& operator=(const MemoryData& data);
+		/**
+		*	内存相同
+		*/
+		bool equals(const MemoryData& data) const;
 	private:
 		/**
 		*	长度

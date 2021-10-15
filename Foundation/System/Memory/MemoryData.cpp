@@ -267,3 +267,13 @@ sys::MemoryData& sys::MemoryData::operator=(const MemoryData& data)
 	return *this;
 }
 
+bool sys::MemoryData::equals(const MemoryData& data) const
+{
+	if (getLength() != data.getLength() || getTypeSize() != data.getTypeSize())
+	{
+		return false;
+	}
+
+	return memcmp(_value, data.getValue(), getLength() * getTypeSize()) == 0;
+}
+

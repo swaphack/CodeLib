@@ -29,7 +29,7 @@ bool SequenceFrame::init()
 
 	addNotifyListener(NodeNotifyType::ANIMATION, [&](){
 		Texture2D* texture = getNextTexture();
-		_drawNode->setTextureWithRect(texture);
+		_drawNode->loadTexture(texture);
 	});
 
 	return true;

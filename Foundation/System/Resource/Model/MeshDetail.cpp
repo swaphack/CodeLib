@@ -56,12 +56,12 @@ const MeshMemoryData& MeshDetail::getUVs() const
 	return _uvs;
 }
 
-void MeshDetail::setMaterial(const std::string& name)
+void MeshDetail::setMaterialName(const std::string& name)
 {
 	_materialName = name;
 }
 
-const std::string& MeshDetail::getMaterial() const
+const std::string& MeshDetail::getMaterialName() const
 {
 	return _materialName;
 }
@@ -166,6 +166,15 @@ const std::string& MeshDetail::getName() const
 void MeshDetail::setName(const std::string& name)
 {
 	_meshName = name;
+}
+
+bool MeshDetail::equals(const MeshDetail& detail)
+{
+	return _indices.equals(detail.getIndices())
+		&& _vertices.equals(detail.getVertices())
+		&& _normals.equals(detail.getNormals())
+		&& _colors.equals(detail.getColors())
+		&& _uvs.equals(detail.getUVs());
 }
 
 

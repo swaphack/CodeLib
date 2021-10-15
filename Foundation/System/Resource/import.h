@@ -5,6 +5,7 @@
 #include "Image/import.h"
 #include "Model/import.h"
 #include "Media/import.h"
+#include "Atlas/import.h"
 
 #include "IResource.h"
 #include "Resource.h"

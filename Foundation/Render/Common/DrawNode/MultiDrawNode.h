@@ -15,7 +15,7 @@ namespace render
 	class ShaderProgram;
 	class Texture;
 	class DrawTextureCache;
-
+	struct DrawParameter;
 
 	/**
 	*	多网格节点
@@ -35,15 +35,23 @@ namespace render
 		/**
 		*	材质
 		*/
-		Materials* getMaterials();
+		Materials* getMaterials() const;
 		/**
 		*	网格
 		*/
-		Meshes* getMeshes();
+		Meshes* getMeshes() const;
 		/**
 		*	片元处理
 		*/
-		FragmentOperator* getFragOperator();
+		FragmentOperator* getFragOperator() const;
+		/**
+		*	获取纹理缓存
+		*/
+		DrawTextureCache* getDrawTextureCache() const;
+		/**
+		*	获取绘制参数
+		*/
+		DrawParameter* getDrawParameter(const std::string& meshName);
 	public:
 		/**
 		*	材质
@@ -100,6 +108,8 @@ namespace render
 		*/
 		void setShaderProgramFunc(const ShaderProgramFunc& func);
 	protected:
+		// 优化绘制
+		virtual void optimizeDraw();
 		/**
 		*	绘制前工作
 		*/
@@ -121,6 +131,10 @@ namespace render
 		*	更新mesh数据
 		*/
 		virtual void updateMeshData();
+		/**
+		*	初始化渲染参数
+		*/
+		void initDrawParameters();
 	protected:
 		virtual void onColorChange();
 
@@ -134,5 +148,7 @@ namespace render
 		FragmentOperator* _fragOperator = nullptr;
 		// 纹理缓存
 		DrawTextureCache* _textureCache = nullptr;
+		// 绘制参数
+		std::map<std::string, DrawParameter> _drawParameters;
 	};
 }

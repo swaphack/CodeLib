@@ -106,8 +106,6 @@ bool ui::CtrlListView::init()
 		_content->getActionProxy()->stopAllActions();
 		_content->getActionProxy()->runAction(render::MoveToAction::create(1.0f, pos));
 
-		//_content->setPosition(pos);
-
 		_touchPosition = touchPoint;
 	});
 

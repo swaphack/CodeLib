@@ -26,7 +26,7 @@ void render::Material::setShaderProgram(ShaderProgram* shaderProgram)
 	_materialSetting->setShaderProgram(shaderProgram);
 }
 
-render::ShaderProgram* render::Material::getShaderProgram()
+render::ShaderProgram* render::Material::getShaderProgram() const
 {
 	return _shaderProgram;
 }
@@ -82,18 +82,27 @@ void render::Material::applyMaterial()
 	}
 }
 
+bool render::Material::equals(const Material& material) const
+{
+	if (_shaderProgram != material.getShaderProgram()) return false;
+	if (!_detail->equals(*material.getMaterialDetail())) return false;
+	return _materialSetting->equalsSelfDefinedUniforms(*material.getMaterialSetting());
+}
+
 #define CREATE_VALUE_TYPE(T,Type,name, value) \
-T* data = (T*)malloc(sizeof(T)); \
+uint32_t size = sizeof(T);\
+T* data = (T*)malloc(size); \
 if (data == nullptr) return; \
-memcpy(data, &value, sizeof(T)); \
-_materialSetting->addSelfDefineUniform(name, Type, data);
+memcpy(data, &value, size); \
+_materialSetting->addSelfDefineUniform(name, Type, size, data);
 
 #define CREATE_FLOAT_ARRAY_TYPE(Type,name, value) \
 if (value.getSize() == 0) return;\
-float* data = (float*)malloc(value.getSize());\
+uint32_t size = value.getSize();\
+float* data = (float*)malloc(size);\
 if (data == nullptr) return; \
-memcpy(data, value.getValue(), value.getSize());\
-_materialSetting->addSelfDefineUniform(name, Type, data);
+memcpy(data, value.getValue(), size);\
+_materialSetting->addSelfDefineUniform(name, Type, size, data);
 
 void render::Material::setUniform(const std::string& name, int value)
 {

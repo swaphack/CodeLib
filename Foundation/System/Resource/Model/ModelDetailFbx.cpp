@@ -200,7 +200,7 @@ void handNodeMesh(ModelDetailFbx* file, FbxNode* node)
 		ASSERT(nMatCount == 1);
 		FbxGeometryElementMaterial* pMaterialElement = pMeshData->GetElementMaterial(0);
 		FbxSurfaceMaterial* lMaterial = node->GetMaterial(pMaterialElement->GetIndexArray().GetAt(0));
-		pMesh->setMaterial(lMaterial->GetName());
+		pMesh->setMaterialName(lMaterial->GetName());
 	}
 
 	{

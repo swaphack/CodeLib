@@ -146,6 +146,25 @@ namespace render
 		*	计算三角形顶点法线
 		*/
 		void calTrianglesVertexTangent(const sys::MeshMemoryData& vertices, const sys::MeshMemoryData& uvs, const sys::MeshMemoryData& indices, float* tangents);
+	public:
+		/**
+		*	设置模型矩阵
+		*/
+		void setModelMatrices(int len, const float* vertexes, int unitSize = 16);
+		/**
+		*	设置模型矩阵
+		*/
+		void setModelMatrices(int len, const math::Matrix4x4* vertexes);
+		/**
+		*	创建模型矩阵
+		*/
+		char* createModelMatrices(size_t len, uint32_t typeSize, int unitSize = 16);
+		/**
+		*	获得模型矩阵
+		*/
+		const sys::MeshMemoryData& getModelMatrices() const;
+	public:
+		bool equals(const Mesh& mesh) const;
 	private:
 		sys::MeshDetail* _detail = nullptr;
 		/**
@@ -172,5 +191,8 @@ namespace render
 		*	是否计算切线
 		*/
 		bool _bComputeTangent = false;
+	private:// 额外数据		
+		// 模型矩阵
+		sys::MeshMemoryData _modelMatrices;
 	};
 }

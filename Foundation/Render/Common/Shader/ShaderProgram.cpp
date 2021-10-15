@@ -522,9 +522,57 @@ void render::ShaderProgram::disableAttrib(VertexArrayObject* vao, const std::str
 void render::ShaderProgram::bindAttribPointer(VertexArrayObject* vao, const std::string& name, int size, VertexAttribPointerType type, uint32_t offset)
 {
 	if (vao == nullptr) return;
+	bindAttribPointer(vao, name, size, type, 0, offset);
+}
+
+void render::ShaderProgram::bindAttribPointer(VertexArrayObject* vao, const std::string& name, int size, VertexAttribPointerType type, uint32_t stride, uint32_t offset)
+{
+	if (vao == nullptr) return;
 	auto attrib = getAttrib(name);
 	if (attrib)
 	{
-		vao->setVertexAttribPointer(attrib->getAttribID(), size, type, 0, offset);
+		vao->setVertexAttribPointer(attrib->getAttribID(), size, type, stride, offset);
+	}
+}
+
+void render::ShaderProgram::bindMat4AttribPointer(VertexArrayObject* vao, const std::string& name, uint32_t offset)
+{
+	if (vao == nullptr) return;
+	auto attrib = getAttrib(name);
+	if (attrib)
+	{
+		uint32_t size = sizeof(float);
+		VertexAttribPointerType type = VertexAttribPointerType::FLOAT;
+		uint32_t iOffset = 4 * size;
+		uint32_t stride = 16 * size;
+		vao->setVertexAttribPointer(attrib->getAttribID(), size, type, stride, offset);
+		vao->setVertexAttribPointer(attrib->getAttribID() + 1, size, type, stride, offset + iOffset);
+		vao->setVertexAttribPointer(attrib->getAttribID() + 2, size, type, stride, offset + 2 * iOffset);
+		vao->setVertexAttribPointer(attrib->getAttribID() + 3, size, type, stride, offset + 3 * iOffset);
+
+		GLBufferObjects::setVertexAttribDivisor(attrib->getAttribID(), 1);
+		GLBufferObjects::setVertexAttribDivisor(attrib->getAttribID() + 1, 1);
+		GLBufferObjects::setVertexAttribDivisor(attrib->getAttribID() + 2, 1);
+		GLBufferObjects::setVertexAttribDivisor(attrib->getAttribID() + 3, 1);
+	}
+}
+
+void render::ShaderProgram::bindMat3AttribPointer(VertexArrayObject* vao, const std::string& name, uint32_t offset)
+{
+	if (vao == nullptr) return;
+	auto attrib = getAttrib(name);
+	if (attrib)
+	{
+		int size = sizeof(float);
+		VertexAttribPointerType type = VertexAttribPointerType::FLOAT;
+		uint32_t iOffset = 3 * size;
+		uint32_t stride = 9 * size;
+		vao->setVertexAttribPointer(attrib->getAttribID(), size, type, stride, offset);
+		vao->setVertexAttribPointer(attrib->getAttribID() + 1, size, type, stride, offset + iOffset);
+		vao->setVertexAttribPointer(attrib->getAttribID() + 2, size, type, stride, offset + 2 * iOffset);
+
+		GLBufferObjects::setVertexAttribDivisor(attrib->getAttribID(), 1);
+		GLBufferObjects::setVertexAttribDivisor(attrib->getAttribID() + 1, 1);
+		GLBufferObjects::setVertexAttribDivisor(attrib->getAttribID() + 2, 1);
 	}
 }

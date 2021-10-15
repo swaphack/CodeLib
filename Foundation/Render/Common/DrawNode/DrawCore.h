@@ -9,22 +9,12 @@ namespace render
 
 	class Node;
 	class Camera;
-	class DrawTextureCache;
-	class Mesh;
-	class ShaderProgram;
-	class Material;
 
-	/**
-	*	绘制参数
-	*/
-	struct DrawCoreParameter
-	{
-		Node* node = nullptr;
-		ShaderProgram* program = nullptr;
-		Mesh* mesh = nullptr;
-		Material* material = nullptr;
-		DrawTextureCache* textureCache = nullptr;
-	};
+	class DrawNode;
+	class MultiDrawNode;
+	class ShaderProgram;
+	class Texture;
+	struct DrawParameter;
 
 	/**
 	*	绘制核心
@@ -36,53 +26,66 @@ namespace render
 		virtual ~DrawCore();
 	public:
 		/**
+		*	渲染节点
+		*/
+		void render(DrawNode* node);
+		/**
+		*	渲染节点
+		*/
+		void render(MultiDrawNode* node);
+		/**
+		*	渲染
+		*/
+		void render(DrawParameter* parameter);
+	public:
+		/**
 		*	使用代码设置材质
 		*/
-		void beginApply(const DrawCoreParameter& parameter);
+		void beginApply(DrawParameter* parameter);
 		/**
 		*	使用代码
 		*/
-		void endApply(const DrawCoreParameter& parameter);
+		void endApply(DrawParameter* parameter);
 	public:
 		/**
 		*	使用shader设置材质
 		*/
-		void beginApplyWithShader(const DrawCoreParameter& parameter);
+		void beginApplyWithShader(DrawParameter* parameter);
 		/**
 		*	使用shader
 		*/
-		void endApplyWithShader(const DrawCoreParameter& parameter);
+		void endApplyWithShader(DrawParameter* parameter);
 	public:
 		// 开始更新着色器uniform值
-		void startUpdateShaderUniformValue(const DrawCoreParameter& parameter);
+		void startUpdateShaderUniformValue(const DrawParameter* parameter);
 		// 结束更新着色器attrib值
-		void startUpdateShaderVertexValue(const DrawCoreParameter& parameter);
+		void startUpdateShaderVertexValue(const DrawParameter* parameter);
 		// 结束更新着色器uniform值
-		void endUpdateShaderUniformValue(const DrawCoreParameter& parameter);
+		void endUpdateShaderUniformValue(const DrawParameter* parameter);
 		// 结束更新着色器attrib值
-		void endUpdateShaderVertexValue(const DrawCoreParameter& parameter);
+		void endUpdateShaderVertexValue(const DrawParameter* parameter);
 	protected:
 		// 更新环境
-		void updateEnvUniformVallue(const DrawCoreParameter& parameter);
+		void updateEnvUniformVallue(const DrawParameter* parameter);
 		// 更新矩阵
-		void updateMatrixUniformValue(const DrawCoreParameter& parameter);
+		void updateMatrixUniformValue(const DrawParameter* parameter);
 		// 更新材质
-		void updateMaterialUniformValue(const DrawCoreParameter& parameter);
+		void updateMaterialUniformValue(const DrawParameter* parameter);
 		// 更新纹理
-		void updateTexturesUnifromValue(const DrawCoreParameter& parameter);
+		void updateTexturesUnifromValue(const DrawParameter* parameter);
 
-		void releaseMaterialUniformValue(const DrawCoreParameter& parameter);
-		void releaseTextureUniformValue(const DrawCoreParameter& parameter);
+		void releaseMaterialUniformValue(const DrawParameter* parameter);
+		void releaseTextureUniformValue(const DrawParameter* parameter);
 	protected:
 		// 应用光照着色器
-		void applyLightShader(const DrawCoreParameter& parameter);
+		void applyLightShader(const DrawParameter* parameter);
 		// 更新单色光源，距离最近
-		void updateNearestLightUniformValue(const DrawCoreParameter& parameter);
+		void updateNearestLightUniformValue(const DrawParameter* parameter);
 		// 更新所有光源
-		void updateAllLightsUniformValue(const DrawCoreParameter& parameter);
+		void updateAllLightsUniformValue(const DrawParameter* parameter);
 	protected:
 		// 自定义类型
-		void updateSelfDefinedUniformValue(const DrawCoreParameter& parameter);
+		void updateSelfDefinedUniformValue(const DrawParameter* parameter);
 	public:
 		/**
 		*	设置临时矩阵
@@ -111,6 +114,10 @@ namespace render
 		*/
 		void increaseDrawCall();
 		/**
+		*	增加未绘制调用次数
+		*/
+		void increaseUnDrawCall();
+		/**
 		*	重置绘制调用次数
 		*/
 		void endRecordDrawCall();
@@ -118,6 +125,41 @@ namespace render
 		*	获取绘制调用次数
 		*/
 		int getDrawCallCount();
+		/**
+		*	获取未绘制调用次数
+		*/
+		int getUnDrawCallCount();
+	public:
+		/**
+		*	添加绘制参数
+		*/
+		void addDrawParameter(DrawParameter* parameter);
+		/**
+		*	移除所有绘制参数
+		*/
+		void removeAllDrawParameters();
+	public:
+		/**
+		*	合批
+		*/
+		void batch();
+		/**
+		*	绘制合批
+		*/
+		void drawBatch();
+		/**
+		*	取消合批
+		*/
+		void unbatch();
+	protected:
+		/**
+		*	是否同一个对象
+		*/
+		bool isSameObject(DrawParameter* a, DrawParameter* b);
+		/**
+		*	是否同一个材质
+		*/
+		bool isSameMaterial(DrawParameter* a, DrawParameter* b);
 	private:
 		/**
 		*	临时矩阵
@@ -128,9 +170,33 @@ namespace render
 		*/
 		int _drawCallCount = 0;
 		/**
+		*	未绘制调用次数
+		*/
+		int _undrawCallCount = 0;
+		/**
 		*	一次完整绘制调用次数
 		*/
 		int _oneDrawCallCount = 0;
+		/**
+		*	一次完整未绘制调用次数
+		*/
+		int _oneUnDrawCallCount = 0;
+
+	private:
+		struct BatchDrawParameter
+		{
+			DrawParameter* root = nullptr;
+			std::vector<DrawParameter*> parameters;
+			BatchDrawParameter(DrawParameter* node)
+			{
+				root = node;
+				parameters.push_back(node);
+			}
+		};
+		// 合批处理
+		std::vector<BatchDrawParameter> _batchDrawParameters;
+		// 合图处理
+		std::vector<BatchDrawParameter> _packDrawParameters;
 	};
 
 #define G_DRAWCORE sys::Instance<render::DrawCore>::getInstance()

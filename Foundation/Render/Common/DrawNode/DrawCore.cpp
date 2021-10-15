@@ -1,7 +1,8 @@
 #include "DrawCore.h"
 
 #include "Common/Shader/import.h"
-#include "Common/Node/import.h"
+#include "Common/DrawNode/DrawNode.h"
+#include "Common/DrawNode/MultiDrawNode.h"
 #include "Graphic/import.h"
 #include "Common/VAO/import.h"
 #include "Common/Buffer/import.h"
@@ -14,6 +15,7 @@
 #include "system.h"
 #include "Common/Material/import.h"
 #include "2d/Primitive/PrimitiveNode.h"
+#include "macros.h"
 
 render::DrawCore::DrawCore()
 {
@@ -23,91 +25,143 @@ render::DrawCore::~DrawCore()
 {
 }
 
-void render::DrawCore::beginApply(const DrawCoreParameter& parameter)
+void render::DrawCore::render(DrawNode* node)
 {
-	if (parameter.material == nullptr || parameter.textureCache == nullptr)
+	if (node == nullptr) return;
+
+	auto drawParameter = node->getDrawParameter();
+
+	render(drawParameter);
+}
+
+void render::DrawCore::render(MultiDrawNode* node)
+{
+	if (node == nullptr) return;
+	auto pMeshes = node->getMeshes();
+	for (auto item : pMeshes->getMeshes())
+	{
+		auto drawParameter = node->getDrawParameter(item.first);
+		render(drawParameter);
+	}
+
+	GLDebug::showError();
+}
+
+void render::DrawCore::render(DrawParameter* parameter)
+{
+	if (parameter == nullptr) return;
+
+	auto program = parameter->program;
+	auto mesh = parameter->mesh;
+	if (mesh == nullptr) return;
+	this->setTempMatrix(mesh->getMeshDetail()->getMatrix());
+	if (program != nullptr)
+	{
+		this->beginApplyWithShader(parameter);
+
+		DrawMode mode = mesh->getDrawMode();
+		if (parameter->tessilation)
+		{
+			auto pro = dynamic_cast<TessilationProtocol*>(parameter->node);
+			if (pro)
+			{
+				pro->updateTessilation();
+				mesh->setDrawMode(DrawMode::PATCHES);
+			}
+		}
+
+		GLDebug::showError();
+		this->increaseDrawCall();
+		mesh->drawWithBufferObject();
+
+		if (parameter->tessilation)
+		{
+			mesh->setDrawMode(mode);
+		}
+		GLDebug::showError();
+		this->endApplyWithShader(parameter);
+	}
+	else
+	{
+		this->beginApply(parameter);
+
+		GLDebug::showError();
+		mesh->drawWithClientArray();
+
+		GLDebug::showError();
+		this->endApply(parameter);
+	}
+	this->resetTempMatrix();
+	GLDebug::showError();
+}
+
+void render::DrawCore::beginApply(DrawParameter* drawParameter)
+{
+	if (drawParameter == nullptr || drawParameter->material == nullptr || drawParameter->textureCache == nullptr)
 	{
 		return;
 	}
-	parameter.material->applyMaterial();
+	drawParameter->material->applyMaterial();
 
-	const auto pDetail = parameter.material->getMaterialDetail();
+	const auto pDetail = drawParameter->material->getMaterialDetail();
 	if (pDetail == nullptr)
 	{
 		return;
 	}
-	auto pTexture = parameter.textureCache->getTexture(pDetail->getAmbientTextureMap());
+	auto pTexture = drawParameter->textureCache->getTexture(pDetail->getAmbientTextureMap());
 	if (pTexture)
 	{
 		pTexture->enableTexture(0);
 	}
-#if 0
-	nTextureID = this->getTexture(pDetail->getDiffuseTextureMap());
-	GLTexture::activeTexture(ActiveTextureName::TEXTURE1);
-	GLTexture::bindTexture2D(nTextureID);
-
-	nTextureID = this->getTexture(pDetail->getSpecularTextureMap());
-	GLTexture::activeTexture(ActiveTextureName::TEXTURE2);
-	GLTexture::bindTexture2D(nTextureID);
-#endif // 0
 }
 
-void render::DrawCore::endApply(const DrawCoreParameter& parameter)
+void render::DrawCore::endApply(DrawParameter* drawParameter)
 {
-	if (parameter.material == nullptr || parameter.textureCache == nullptr)
+	if (drawParameter == nullptr || drawParameter->material == nullptr || drawParameter->textureCache == nullptr)
 	{
 		return;
 	}
-	const auto pDetail = parameter.material->getMaterialDetail();
+	const auto pDetail = drawParameter->material->getMaterialDetail();
 	if (pDetail == nullptr)
 	{
 		return;
 	}
-	auto pTexture = parameter.textureCache->getTexture(pDetail->getAmbientTextureMap());
+	auto pTexture = drawParameter->textureCache->getTexture(pDetail->getAmbientTextureMap());
 	if (pTexture)
 	{
 		pTexture->unbindTexture();
 	}
-#if 0
-	nTextureID = this->getTexture(pDetail->getDiffuseTextureMap());
-	GLTexture::activeTexture(ActiveTextureName::TEXTURE1);
-	GLTexture::bindTexture2D(nTextureID);
-
-	nTextureID = this->getTexture(pDetail->getSpecularTextureMap());
-	GLTexture::activeTexture(ActiveTextureName::TEXTURE2);
-	GLTexture::bindTexture2D(nTextureID);
-#endif // 0
 }
 
-void render::DrawCore::beginApplyWithShader(const DrawCoreParameter& parameter)
+void render::DrawCore::beginApplyWithShader(DrawParameter* drawParameter)
 {
-	if (parameter.program == nullptr || parameter.material == nullptr)
+	if (drawParameter == nullptr || drawParameter->program == nullptr || drawParameter->material == nullptr)
 	{
 		return;
 	}
 
-	parameter.program->use();
+	drawParameter->program->use();
 	GLDebug::showError();
-	this->startUpdateShaderUniformValue(parameter);
+	this->startUpdateShaderUniformValue(drawParameter);
 	GLDebug::showError();
-	this->startUpdateShaderVertexValue(parameter);
+	this->startUpdateShaderVertexValue(drawParameter);
 	GLDebug::showError();
-	parameter.material->runProgramFunc();
+	drawParameter->material->runProgramFunc();
 	GLDebug::showError();
 }
 
-void render::DrawCore::endApplyWithShader(const DrawCoreParameter& parameter)
+void render::DrawCore::endApplyWithShader(DrawParameter* drawParameter)
 {
-	this->endUpdateShaderUniformValue(parameter);
-	this->endUpdateShaderVertexValue(parameter);
+	this->endUpdateShaderUniformValue(drawParameter);
+	this->endUpdateShaderVertexValue(drawParameter);
 
-	if (parameter.program)
+	if (drawParameter->program)
 	{
-		parameter.program->unuse();
+		drawParameter->program->unuse();
 	}
 }
 
-void render::DrawCore::startUpdateShaderUniformValue(const DrawCoreParameter& parameter)
+void render::DrawCore::startUpdateShaderUniformValue(const DrawParameter* parameter)
 {
 	updateEnvUniformVallue(parameter);
 	updateMatrixUniformValue(parameter);
@@ -120,16 +174,16 @@ void render::DrawCore::startUpdateShaderUniformValue(const DrawCoreParameter& pa
 	updateSelfDefinedUniformValue(parameter);
 }
 
-void render::DrawCore::startUpdateShaderVertexValue(const DrawCoreParameter& parameter)
+void render::DrawCore::startUpdateShaderVertexValue(const DrawParameter* parameter)
 {
-	if (parameter.mesh == nullptr || parameter.program == nullptr 
-		|| parameter.material == nullptr || parameter.material->getMaterialSetting() == nullptr)
+	if (parameter == nullptr || parameter->mesh == nullptr || parameter->program == nullptr
+		|| parameter->material == nullptr || parameter->material->getMaterialSetting() == nullptr)
 	{
 		return;
 	}
 
-	auto detail = parameter.mesh->getMeshDetail();
-	auto vao = parameter.mesh->getVertexArrayObject();
+	auto detail = parameter->mesh->getMeshDetail();
+	auto vao = parameter->mesh->getVertexArrayObject();
 	GLDebug::showError();
 	vao->bindVertexArray();
 	GLDebug::showError();
@@ -141,6 +195,7 @@ void render::DrawCore::startUpdateShaderVertexValue(const DrawCoreParameter& par
 	const sys::MeshMemoryData& normals = detail->getNormals();
 	const sys::MeshMemoryData& tangents = detail->getTangents();
 	const sys::MeshMemoryData& bitangents = detail->getBitangents();
+	const sys::MeshMemoryData& modelMatrices = parameter->mesh->getModelMatrices();
 
 	uint32_t nVerticeSize = vertices.getSize();
 	uint32_t nColorSize = colors.getSize();
@@ -148,11 +203,12 @@ void render::DrawCore::startUpdateShaderVertexValue(const DrawCoreParameter& par
 	uint32_t nNormalSize = normals.getSize();
 	uint32_t nTangentSize = tangents.getSize();
 	uint32_t nBitangentSize = bitangents.getSize();
+	uint32_t nModelMatricesSize = modelMatrices.getSize();
 
-	auto program = parameter.program;
+	auto program = parameter->program;
 
 	int nOffset = 0;
-	for (auto item : parameter.material->getMaterialSetting()->getAttribs())
+	for (auto item : parameter->material->getMaterialSetting()->getAttribs())
 	{
 		if (item.first == VertexDataType::POSITION)
 		{
@@ -215,31 +271,56 @@ void render::DrawCore::startUpdateShaderVertexValue(const DrawCoreParameter& par
 				bitangents.getUnitSize(), VertexAttribPointerType::FLOAT, nOffset);
 			nOffset += nBitangentSize;
 		}
+		else if (item.first == VertexDataType::MODEL_MATRIX)
+		{
+			if (nModelMatricesSize == 0)
+			{
+				continue;
+			}
+			program->bindMat4AttribPointer(vao, item.second, nOffset);
+
+			nOffset += nModelMatricesSize;
+			/*
+			glEnableVertexAttribArray(3);
+			glVertexAttribPointer(3, 4, GL_FLOAT, GL_FALSE, sizeof(glm::mat4), (void*)0);
+			glEnableVertexAttribArray(4);
+			glVertexAttribPointer(4, 4, GL_FLOAT, GL_FALSE, sizeof(glm::mat4), (void*)(sizeof(glm::vec4)));
+			glEnableVertexAttribArray(5);
+			glVertexAttribPointer(5, 4, GL_FLOAT, GL_FALSE, sizeof(glm::mat4), (void*)(2 * sizeof(glm::vec4)));
+			glEnableVertexAttribArray(6);
+			glVertexAttribPointer(6, 4, GL_FLOAT, GL_FALSE, sizeof(glm::mat4), (void*)(3 * sizeof(glm::vec4)));
+
+			glVertexAttribDivisor(3, 1);
+			glVertexAttribDivisor(4, 1);
+			glVertexAttribDivisor(5, 1);
+			glVertexAttribDivisor(6, 1);
+			*/
+		}
 		GLDebug::showError();
 	}
 
 	GLDebug::showError();
 }
 
-void render::DrawCore::endUpdateShaderUniformValue(const DrawCoreParameter& parameter)
+void render::DrawCore::endUpdateShaderUniformValue(const DrawParameter* parameter)
 {
 	GLState::setLineWidth(1);
 	releaseMaterialUniformValue(parameter);
 	releaseTextureUniformValue(parameter);
 }
 
-void render::DrawCore::endUpdateShaderVertexValue(const DrawCoreParameter& parameter)
+void render::DrawCore::endUpdateShaderVertexValue(const DrawParameter* parameter)
 {
-	if (parameter.mesh == nullptr || parameter.program == nullptr 
-		|| parameter.material == nullptr || parameter.material->getMaterialSetting() == nullptr)
+	if (parameter == nullptr || parameter->mesh == nullptr || parameter->program == nullptr
+		|| parameter->material == nullptr || parameter->material->getMaterialSetting() == nullptr)
 	{
 		return;
 	}
 
-	auto program = parameter.program;
+	auto program = parameter->program;
 
-	auto vao = parameter.mesh->getVertexArrayObject();
-	for (auto item : parameter.material->getMaterialSetting()->getAttribs())
+	auto vao = parameter->mesh->getVertexArrayObject();
+	for (auto item : parameter->material->getMaterialSetting()->getAttribs())
 	{
 		auto pAttrib = program->getAttrib(item.second);
 		if (!pAttrib) continue;
@@ -254,26 +335,26 @@ void render::DrawCore::endUpdateShaderVertexValue(const DrawCoreParameter& param
 	vao->unbindBuffer();
 }
 
-void render::DrawCore::updateEnvUniformVallue(const DrawCoreParameter& parameter)
+void render::DrawCore::updateEnvUniformVallue(const DrawParameter* parameter)
 {
-	if (parameter.program == nullptr || parameter.node == nullptr 
-		|| parameter.material == nullptr || parameter.material->getMaterialSetting() == nullptr)
+	if (parameter == nullptr || parameter->program == nullptr || parameter->node == nullptr
+		|| parameter->material == nullptr || parameter->material->getMaterialSetting() == nullptr)
 	{
 		return;
 	}
-	auto pCamera = getCamera(parameter.node);
+	auto pCamera = getCamera(parameter->node);
 	if (pCamera == nullptr)
 	{
 		return;
 	}
-	auto pPrimitiveNode = parameter.node->as<PrimitiveNode>();
+	auto pPrimitiveNode = parameter->node->as<PrimitiveNode>();
 	if (pPrimitiveNode)
 	{
 		GLState::setLineWidth(pPrimitiveNode->getPointSize());
 	}
-	auto program = parameter.program;
+	auto program = parameter->program;
 	math::Vector3 viewPos = pCamera->getWorldMatrix().getPosition();
-	for (auto item : parameter.material->getMaterialSetting()->getEnvUniforms())
+	for (auto item : parameter->material->getMaterialSetting()->getEnvUniforms())
 	{
 		auto pUniform = program->getUniform(item.second);
 		if (!pUniform)
@@ -302,17 +383,17 @@ void render::DrawCore::updateEnvUniformVallue(const DrawCoreParameter& parameter
 	}
 }
 
-void render::DrawCore::updateMatrixUniformValue(const DrawCoreParameter& parameter)
+void render::DrawCore::updateMatrixUniformValue(const DrawParameter* parameter)
 {
-	if (parameter.node == nullptr || parameter.program == nullptr
-		|| parameter.material == nullptr || parameter.material->getMaterialSetting() == nullptr)
+	if (parameter == nullptr || parameter->node == nullptr || parameter->program == nullptr
+		|| parameter->material == nullptr || parameter->material->getMaterialSetting() == nullptr)
 	{
 		return;
 	}
 
-	auto program = parameter.program;
+	auto program = parameter->program;
 
-	auto pCamera = getCamera(parameter.node);
+	auto pCamera = getCamera(parameter->node);
 	if (pCamera == nullptr)
 	{
 		return;
@@ -320,11 +401,11 @@ void render::DrawCore::updateMatrixUniformValue(const DrawCoreParameter& paramet
 
 	math::Matrix4x4 projMat = pCamera->getProjectMatrix();
 	math::Matrix4x4 viewMat = pCamera->getViewMatrix();
-	math::Matrix4x4 modelMat = getWorldMatrix(parameter.node);
+	math::Matrix4x4 modelMat = getWorldMatrix(parameter->node);
 
 	math::Matrix3x3 normalMat = modelMat.getInverse().getTranspose();
 
-	for (auto item : parameter.material->getMaterialSetting()->getMatrixUniforms())
+	for (auto item : parameter->material->getMaterialSetting()->getMatrixUniforms())
 	{
 		auto pUniform = program->getUniform(item.second);
 		if (!pUniform)
@@ -352,25 +433,25 @@ void render::DrawCore::updateMatrixUniformValue(const DrawCoreParameter& paramet
 	}
 }
 
-void render::DrawCore::updateMaterialUniformValue(const DrawCoreParameter& parameter)
+void render::DrawCore::updateMaterialUniformValue(const DrawParameter* parameter)
 {
-	if (parameter.node == nullptr || parameter.program == nullptr
-		|| parameter.textureCache == nullptr
-		|| parameter.material == nullptr || parameter.material->getMaterialSetting() == nullptr)
+	if (parameter == nullptr || parameter->node == nullptr || parameter->program == nullptr
+		|| parameter->textureCache == nullptr
+		|| parameter->material == nullptr || parameter->material->getMaterialSetting() == nullptr)
 	{
 		return;
 	}
 
-	const auto pDetail = parameter.material->getMaterialDetail();
+	const auto pDetail = parameter->material->getMaterialDetail();
 	if (pDetail == nullptr)
 	{
 		return;
 	}
-	auto program = parameter.program;
-	auto textureCache = parameter.textureCache;
+	auto program = parameter->program;
+	auto textureCache = parameter->textureCache;
 
 	GLDebug::showError();
-	for (auto item : parameter.material->getMaterialSetting()->getMaterialUniforms())
+	for (auto item : parameter->material->getMaterialSetting()->getMaterialUniforms())
 	{
 		auto pUniform = program->getUniform(item.second);
 		if (!pUniform)
@@ -516,24 +597,24 @@ void render::DrawCore::updateMaterialUniformValue(const DrawCoreParameter& param
 	}
 }
 
-void render::DrawCore::updateTexturesUnifromValue(const DrawCoreParameter& parameter)
+void render::DrawCore::updateTexturesUnifromValue(const DrawParameter* parameter)
 {
-	if (parameter.program == nullptr
-		|| parameter.textureCache == nullptr
-		|| parameter.material == nullptr || parameter.material->getMaterialSetting() == nullptr)
+	if (parameter->program == nullptr
+		|| parameter->textureCache == nullptr
+		|| parameter->material == nullptr || parameter->material->getMaterialSetting() == nullptr)
 	{
 		return;
 	}
 
-	const auto pDetail = parameter.material->getMaterialDetail();
+	const auto pDetail = parameter->material->getMaterialDetail();
 	if (pDetail == nullptr)
 	{
 		return;
 	}
-	auto program = parameter.program;
-	auto textureCache = parameter.textureCache;
+	auto program = parameter->program;
+	auto textureCache = parameter->textureCache;
 
-	for (auto item : parameter.material->getMaterialSetting()->getTextureUniforms())
+	for (auto item : parameter->material->getMaterialSetting()->getTextureUniforms())
 	{
 		auto pUniform = program->getUniform(item.second);
 		if (!pUniform)
@@ -658,23 +739,23 @@ void render::DrawCore::updateTexturesUnifromValue(const DrawCoreParameter& param
 	}
 }
 
-void render::DrawCore::releaseMaterialUniformValue(const DrawCoreParameter& parameter)
+void render::DrawCore::releaseMaterialUniformValue(const DrawParameter* parameter)
 {
-	if (parameter.program == nullptr
-		|| parameter.textureCache == nullptr
-		|| parameter.material == nullptr || parameter.material->getMaterialSetting() == nullptr)
+	if (parameter == nullptr || parameter->program == nullptr
+		|| parameter->textureCache == nullptr
+		|| parameter->material == nullptr || parameter->material->getMaterialSetting() == nullptr)
 	{
 		return;
 	}
 
-	const auto pDetail = parameter.material->getMaterialDetail();
+	const auto pDetail = parameter->material->getMaterialDetail();
 	if (pDetail == nullptr)
 	{
 		return;
 	}
-	auto program = parameter.program;
-	auto textureCache = parameter.textureCache;
-	for (auto item : parameter.material->getMaterialSetting()->getMaterialUniforms())
+	auto program = parameter->program;
+	auto textureCache = parameter->textureCache;
+	for (auto item : parameter->material->getMaterialSetting()->getMaterialUniforms())
 	{
 		auto pUniform = program->getUniform(item.second);
 		if (!pUniform)
@@ -759,23 +840,23 @@ void render::DrawCore::releaseMaterialUniformValue(const DrawCoreParameter& para
 	GLDebug::showError();
 }
 
-void render::DrawCore::releaseTextureUniformValue(const DrawCoreParameter& parameter)
+void render::DrawCore::releaseTextureUniformValue(const DrawParameter* parameter)
 {
-	if (parameter.program == nullptr
-		|| parameter.textureCache == nullptr
-		|| parameter.material == nullptr || parameter.material->getMaterialSetting() == nullptr)
+	if (parameter == nullptr || parameter->program == nullptr
+		|| parameter->textureCache == nullptr
+		|| parameter->material == nullptr || parameter->material->getMaterialSetting() == nullptr)
 	{
 		return;
 	}
 
-	const auto pDetail = parameter.material->getMaterialDetail();
+	const auto pDetail = parameter->material->getMaterialDetail();
 	if (pDetail == nullptr)
 	{
 		return;
 	}
-	auto program = parameter.program;
-	auto textureCache = parameter.textureCache;
-	for (auto item : parameter.material->getMaterialSetting()->getTextureUniforms())
+	auto program = parameter->program;
+	auto textureCache = parameter->textureCache;
+	for (auto item : parameter->material->getMaterialSetting()->getTextureUniforms())
 	{
 		auto pUniform = program->getUniform(item.second);
 		if (!pUniform)
@@ -818,11 +899,11 @@ void render::DrawCore::releaseTextureUniformValue(const DrawCoreParameter& param
 }
 
 
-void render::DrawCore::applyLightShader(const DrawCoreParameter& parameter)
+void render::DrawCore::applyLightShader(const DrawParameter* parameter)
 {
-	if (parameter.node == nullptr) return;
+	if (parameter == nullptr || parameter->node == nullptr) return;
 
-	LightProtocol* pLight = parameter.node->as<LightProtocol>();
+	LightProtocol* pLight = parameter->node->as<LightProtocol>();
 	if (pLight == nullptr)
 	{
 		return;
@@ -841,10 +922,10 @@ void render::DrawCore::applyLightShader(const DrawCoreParameter& parameter)
 	}
 }
 
-void render::DrawCore::updateNearestLightUniformValue(const DrawCoreParameter& parameter)
+void render::DrawCore::updateNearestLightUniformValue(const DrawParameter* parameter)
 {
-	if (parameter.node == nullptr || parameter.program == nullptr
-		|| parameter.material == nullptr || parameter.material->getMaterialSetting() == nullptr)
+	if (parameter == nullptr || parameter->node == nullptr || parameter->program == nullptr
+		|| parameter->material == nullptr || parameter->material->getMaterialSetting() == nullptr)
 	{
 		return;
 	}
@@ -854,13 +935,13 @@ void render::DrawCore::updateNearestLightUniformValue(const DrawCoreParameter& p
 		return;
 	}
 
-	auto pCamera = getCamera(parameter.node);
+	auto pCamera = getCamera(parameter->node);
 	if (pCamera == nullptr)
 	{
 		return;
 	}
 
-	math::Vector3 nodePos = getWorldMatrix(parameter.node).getPosition();
+	math::Vector3 nodePos = getWorldMatrix(parameter->node).getPosition();
 	float fPos = -1;
 	Light* pLight = nullptr;
 	const auto& lights = G_ENVIRONMENT->getAllLights();
@@ -892,12 +973,12 @@ void render::DrawCore::updateNearestLightUniformValue(const DrawCoreParameter& p
 	halfVector.normalize();
 
 	bool bSupportShadow = false;
-	if (parameter.node->is<LightProtocol>())
+	if (parameter->node->is<LightProtocol>())
 	{
-		bSupportShadow = parameter.node->as<LightProtocol>()->isCastShadow();
+		bSupportShadow = parameter->node->as<LightProtocol>()->isCastShadow();
 	}
-	auto program = parameter.program;
-	for (auto item : parameter.material->getMaterialSetting()->getSingleLightUniforms())
+	auto program = parameter->program;
+	for (auto item : parameter->material->getMaterialSetting()->getSingleLightUniforms())
 	{
 		auto pUniform = program->getUniform(item.second);
 		if (!pUniform)
@@ -1018,15 +1099,15 @@ void render::DrawCore::updateNearestLightUniformValue(const DrawCoreParameter& p
 	}
 }
 
-void render::DrawCore::updateAllLightsUniformValue(const DrawCoreParameter& parameter)
+void render::DrawCore::updateAllLightsUniformValue(const DrawParameter* parameter)
 {
-	if (parameter.node == nullptr || parameter.program == nullptr
-		|| parameter.material == nullptr || parameter.material->getMaterialSetting() == nullptr)
+	if (parameter == nullptr || parameter->node == nullptr || parameter->program == nullptr
+		|| parameter->material == nullptr || parameter->material->getMaterialSetting() == nullptr)
 	{
 		return;
 	}
 
-	auto pCamera = getCamera(parameter.node);
+	auto pCamera = getCamera(parameter->node);
 	if (pCamera == nullptr)
 	{
 		return;
@@ -1041,11 +1122,11 @@ void render::DrawCore::updateAllLightsUniformValue(const DrawCoreParameter& para
 
 	const math::Matrix4x4& viewMat = pCamera->getViewMatrix();
 	bool bSupportShadow = false;
-	if (parameter.node->is<LightProtocol>())
+	if (parameter->node->is<LightProtocol>())
 	{
-		bSupportShadow = parameter.node->as<LightProtocol>()->isCastShadow();
+		bSupportShadow = parameter->node->as<LightProtocol>()->isCastShadow();
 	}
-	auto program = parameter.program;
+	auto program = parameter->program;
 	math::Vector3 viewPos = pCamera->getWorldMatrix().getPosition();
 	for (auto light : mapLights)
 	{
@@ -1054,12 +1135,12 @@ void render::DrawCore::updateAllLightsUniformValue(const DrawCoreParameter& para
 
 
 		math::Vector3 lightPos = pLight->getWorldMatrix().getPosition();
-		math::Vector3 nodePos = getWorldMatrix(parameter.node).getPosition();
+		math::Vector3 nodePos = getWorldMatrix(parameter->node).getPosition();
 		math::Vector3 viewDirection = viewPos - nodePos;
 		math::Vector3 lightDirection = lightPos - nodePos;
 		math::Vector3 halfVector = lightDirection + viewDirection;
 
-		for (auto item : parameter.material->getMaterialSetting()->getMultiLightsUniforms())
+		for (auto item : parameter->material->getMaterialSetting()->getMultiLightsUniforms())
 		{
 			std::string text = getCString(item.second.c_str(), index);
 			auto pUniform = program->getUniform(text);
@@ -1181,21 +1262,21 @@ void render::DrawCore::updateAllLightsUniformValue(const DrawCoreParameter& para
 	}
 }
 
-void render::DrawCore::updateSelfDefinedUniformValue(const DrawCoreParameter& parameter)
+void render::DrawCore::updateSelfDefinedUniformValue(const DrawParameter* parameter)
 {
-	if (parameter.program == nullptr
-		|| parameter.material == nullptr || parameter.material->getMaterialSetting() == nullptr)
+	if (parameter == nullptr || parameter->program == nullptr
+		|| parameter->material == nullptr || parameter->material->getMaterialSetting() == nullptr)
 	{
 		return;
 	}
 
-	const auto pDetail = parameter.material->getMaterialDetail();
+	const auto pDetail = parameter->material->getMaterialDetail();
 	if (pDetail == nullptr)
 	{
 		return;
 	}
-	auto program = parameter.program;
-	for (auto item : parameter.material->getMaterialSetting()->getSelfDefinedUniforms())
+	auto program = parameter->program;
+	for (auto item : parameter->material->getMaterialSetting()->getSelfDefinedUniforms())
 	{
 		auto pUniform = program->getUniform(item.first);
 		if (!pUniform)
@@ -1268,6 +1349,7 @@ render::Camera* render::DrawCore::getCamera(const Node* node)
 void render::DrawCore::beginRecordDrawCall()
 {
 	_drawCallCount = 0;
+	_undrawCallCount = 0;
 }
 
 void render::DrawCore::increaseDrawCall()
@@ -1275,12 +1357,156 @@ void render::DrawCore::increaseDrawCall()
 	_drawCallCount++;
 }
 
+void render::DrawCore::increaseUnDrawCall()
+{
+	_undrawCallCount++;
+}
+
 void render::DrawCore::endRecordDrawCall()
 {
 	_oneDrawCallCount = _drawCallCount;
+	_oneUnDrawCallCount = _undrawCallCount;
 }
 
 int render::DrawCore::getDrawCallCount()
 {
 	return _oneDrawCallCount;
+}
+
+int render::DrawCore::getUnDrawCallCount()
+{
+	return _oneUnDrawCallCount;
+}
+
+void render::DrawCore::addDrawParameter(DrawParameter* parameter)
+{
+	if (parameter == nullptr)
+	{
+		return;
+	}
+
+	bool bFind = false;
+	for (auto& item : _batchDrawParameters)
+	{
+		if (isSameObject(item.root, parameter))
+		{
+			item.parameters.push_back(parameter);
+			bFind = true;
+			break;
+		}
+	}
+
+	if (!bFind)
+	{
+		_batchDrawParameters.push_back(BatchDrawParameter(parameter));
+	}
+
+	bFind = false;
+	for (auto& item : _packDrawParameters)
+	{
+		if (isSameMaterial(item.root, parameter))
+		{
+			item.parameters.push_back(parameter);
+			bFind = true;
+			break;
+		}
+	}
+	if (!bFind)
+	{
+		_packDrawParameters.push_back(BatchDrawParameter(parameter));
+	}
+}
+
+void render::DrawCore::removeAllDrawParameters()
+{
+	_batchDrawParameters.clear();
+	_packDrawParameters.clear();
+}
+
+void render::DrawCore::batch()
+{
+	int unitSize = sizeof(float);
+	size_t matrixSize = 16 * sizeof(float);
+	for (auto& item : _batchDrawParameters)
+	{
+		int count = item.parameters.size();
+		auto root = item.root;
+		float* ptr = (float*)root->mesh->createModelMatrices(count, unitSize, 16);
+		for (int i = 0; i < count; i++)
+		{
+			auto node = item.parameters[i]->node;
+			memcpy(ptr + i * 16, node->getWorldMatrix().getValue(), matrixSize);
+			node->setSkipDraw(true);
+		}
+		root->mesh->forceUpdateMeshData();
+		root->node->setSkipDraw(false);
+	}
+	/*
+	for (auto& item : _packDrawParameters)
+	{
+		int count = item.parameters.size();
+		if (count == 1) continue;
+
+		auto root = item.root;
+		float* ptr = (float*)root->mesh->createModelMatrices(count, unitSize, 16);
+		for (int i = 0; i < count; i++)
+		{
+			auto node = item.parameters[i]->node;
+			memcpy(ptr + i * 16, node->getWorldMatrix().getValue(), matrixSize);
+			node->setSkipDraw(true);
+		}
+		root->mesh->forceUpdateMeshData();
+		root->node->setSkipDraw(false);
+	}
+	*/
+}
+
+void render::DrawCore::drawBatch()
+{
+
+}
+
+void render::DrawCore::unbatch()
+{
+	int unitSize = sizeof(float);
+	int matrixSize = 16 * sizeof(float);
+	for (auto& item : _batchDrawParameters)
+	{
+		int count = item.parameters.size();
+		auto root = item.root;
+
+		root->mesh->createModelMatrices(0, 0, 0);
+		root->mesh->forceUpdateMeshData();
+
+		if (count == 1) continue;
+		
+		for (int i = 0; i < count; i++)
+		{
+			auto node = item.parameters[i]->node;
+			node->setSkipDraw(false);
+		}
+	}
+
+	this->removeAllDrawParameters();
+}
+
+bool render::DrawCore::isSameObject(DrawParameter* a, DrawParameter* b)
+{
+	if (a == nullptr || b == nullptr) return false;
+
+	if (a->tessilation != b->tessilation) return false;
+	if (!a->material->equals(*b->material)) return false;
+	if (!a->mesh->equals(*b->mesh)) return false;
+
+	return true;
+}
+
+bool render::DrawCore::isSameMaterial(DrawParameter* a, DrawParameter* b)
+{
+	if (a == nullptr || b == nullptr) return false;
+
+	if (a->tessilation != b->tessilation) return false;
+	if (!a->material->equals(*b->material)) return false;
+
+	return true;
 }

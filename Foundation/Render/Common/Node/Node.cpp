@@ -25,7 +25,7 @@ Node::Node()
 , _zOrder(0)
 {
 	this->setVisible(true);
-
+	this->setTouchNode(this);
 	_notify = G_NOTIFYCENTER->alloct(this);
 }
 
@@ -312,6 +312,21 @@ ActionProxy* Node::getActionProxy()
 	return _actionProxy;
 }
 
+void render::Node::scheduleOnce(float delayTime, const std::function<void(float interval)>& func)
+{
+	this->getActionProxy()->runAction(Scheduler::createOnce(delayTime, func));
+}
+
+void render::Node::scheduleUpdate(float delayTime, float totalTime, float intervalTime, const std::function<void(float interval)>& func)
+{
+	this->getActionProxy()->runAction(Scheduler::createSchedule(delayTime, totalTime, intervalTime, func));
+}
+
+void render::Node::scheduleForever(float delayTime, float intervalTime, const std::function<void(float interval)>& func)
+{
+	this->getActionProxy()->runAction(Scheduler::createForever(delayTime, intervalTime, func));
+}
+
 void render::Node::scheduleUpdate()
 {
 	this->getActionProxy()->runAction(getScheduler());
@@ -567,6 +582,10 @@ math::Vector3 render::Node::convertLocalToWorldPoint(const math::Vector3& point)
 
 void render::Node::setSkipDraw(bool status)
 {
+	if (status == true)
+	{
+		int a = 1;
+	}
 	_bSkipDraw = status;
 }
 
@@ -575,9 +594,21 @@ bool render::Node::isSkipDraw() const
 	return _bSkipDraw;
 }
 
+void render::Node::setSkipDrawChildren(bool status)
+{
+	_bSkipDrawChildren = status;
+}
+
+bool render::Node::isSkipDrawChildren() const
+{
+	return _bSkipDrawChildren;
+}
+
 void render::Node::updateNode()
 {
 	this->notifyEvents();
+
+	this->optimizeNode();
 
 	for (auto item : _children)
 	{
@@ -589,19 +620,33 @@ void render::Node::beforeDrawNode()
 {
 }
 
+void render::Node::optimizeNode()
+{
+	this->optimizeDraw();
+}
+
+void render::Node::optimizeDraw()
+{
+
+}
+
 void Node::drawNode()
 {
-	if (this->isSkipDraw())
-	{
-		return;
-	}
 	if (!this->isVisible())
 	{
 		return;
 	}
+
 	this->beforeDrawNode();
 
-	this->draw();
+	if (!this->isSkipDraw())
+	{
+		this->draw();
+	}
+	else
+	{
+		G_DRAWCORE->increaseUnDrawCall();
+	}
 
 	this->afterDrawNode();
 
@@ -615,7 +660,7 @@ void render::Node::afterDrawNode()
 
 void render::Node::drawAllChildren()
 {
-	if (!isVisible())
+	if (isSkipDrawChildren())
 	{
 		return;
 	}

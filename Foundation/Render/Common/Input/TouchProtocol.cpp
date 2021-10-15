@@ -10,6 +10,15 @@ TouchProtocol::TouchProtocol()
 {
 }
 
+void TouchProtocol::setTouchNode(Node* node)
+{
+	_touchNode = node;
+}
+Node* TouchProtocol::getTouchNode() const
+{
+	return _touchNode;
+}
+
 TouchProtocol::~TouchProtocol()
 {
 	this->removeAllTouchDelegates();

@@ -8,6 +8,7 @@
 #include "Graphic/import.h"
 #include "Common/Mesh/import.h"
 #include "Common/Material/import.h"
+#include "Common/Texture/TextureCache.h"
 
 using namespace render;
 
@@ -15,10 +16,13 @@ DrawScale9Texture2D::DrawScale9Texture2D()
 	:_bFlipX(false)
 	, _bFlipY(false)
 {
+	_texFrame = CREATE_OBJECT(TexFrame);
+	_texFrame->retain();
 }
 
 DrawScale9Texture2D::~DrawScale9Texture2D()
 {
+	SAFE_RELEASE(_texFrame);
 }
 
 bool DrawScale9Texture2D::init()
@@ -34,7 +38,7 @@ bool DrawScale9Texture2D::init()
 	});
 
 	addNotifyListener(NodeNotifyType::TEXTURE, [this]() {
-		this->onScale9ImageChange();
+		//this->onScale9ImageChange();
 		updateScale9ImageMeshData();
 	});
 
@@ -42,7 +46,6 @@ bool DrawScale9Texture2D::init()
 	addNotifyListener(NodeNotifyType::GEOMETRY, [this]() {
 		this->onScale9BodyChange();
 		this->onScale9ImageChange();
-		updateScale9ImageMeshData();
 	});
 
 	return true;
@@ -51,79 +54,96 @@ bool DrawScale9Texture2D::init()
 void DrawScale9Texture2D::onScale9BodyChange()
 {
 	VertexTool::setTexture2DScale9Vertices(&_scale9Vertex, math::Vector3(), this->getVolume(), this->getAnchorPoint(), _scale9Margin);
+	updateScale9ImageMeshData();
 }
 
 void DrawScale9Texture2D::onScale9ImageChange()
 {
-	if (getTexture() != nullptr)
-	{
-		VertexTool::setTexture2DScale9Coords(&_scale9Vertex, math::Size(getTexture()->getWidth(), getTexture()->getHeight()), _scale9Margin);
-	}
+	VertexTool::setTexture2DScale9Coords(&_scale9Vertex, _texFrame->getRect(), _texFrame->isRotated(), _texFrame->getFrameSize(), _scale9Margin);
+
+	updateScale9ImageMeshData();
 }
 
-void DrawScale9Texture2D::setTextureWithRect(const std::string& filepath)
+void render::DrawScale9Texture2D::loadImage(const std::string& mixFilePath)
 {
-	this->setTexture(filepath);
-
-	auto pTexture = this->getTexture();
+	auto pTexFrame = G_TEXTURE_CACHE->getTexFrame(mixFilePath);
+	if (pTexFrame != nullptr)
+	{
+		this->setTexFrame(pTexFrame);
+		return;
+	}
+	auto pTexture = G_TEXTURE_CACHE->getTexture2D(mixFilePath);
 	if (pTexture)
 	{
-		this->setVolume(pTexture->getWidth(), pTexture->getHeight(), pTexture->getDepth());
+		this->loadTexture(pTexture);
 	}
-	else
-	{
-		this->setVolume(0, 0, 0);
-	}
+}
 
+void DrawScale9Texture2D::loadTexture(const std::string& filepath)
+{
+	this->setTexture(filepath);
+	auto pTexture = this->getTexture();
+	_texFrame->loadTexture(pTexture);
 	this->notify(NodeNotifyType::TEXTURE);
 }
 
-void render::DrawScale9Texture2D::setTextureWithRect(const Texture* texture)
+void render::DrawScale9Texture2D::loadTexture(const Texture* texture)
 {
 	this->setTexture(texture);
-
-	if (texture)
-	{
-		this->setVolume(texture->getWidth(), texture->getHeight(), texture->getDepth());
-	}
-	else
-	{
-		this->setVolume(0, 0, 0);
-	}
-
+	_texFrame->loadTexture(texture);
 	this->notify(NodeNotifyType::TEXTURE);
 }
 
-void render::DrawScale9Texture2D::setUV(const math::Rect& rect, const math::Size& size)
+void render::DrawScale9Texture2D::loadTexture(const Texture* texture, const sys::TextureChip& chip)
+{
+	math::Size size;
+	if (texture)
+	{
+		size.set(texture->getWidth(), texture->getHeight());
+	}
+	this->setTexture(texture);
+	_texFrame->setTexture(texture);
+	_texFrame->setName(chip.name);
+	this->setUV(math::Rect(chip.x, chip.y, chip.width, chip.height), size, chip.rotate);
+	this->notify(NodeNotifyType::GEOMETRY);
+}
+
+void render::DrawScale9Texture2D::loadTextureChip(const std::string& chipname)
+{
+	auto texFrame = G_TEXTURE_CACHE->getTexFrame(chipname);
+	if (texFrame == nullptr) return;
+	setTexFrame(texFrame);
+}
+
+void render::DrawScale9Texture2D::setNativeTextureSize()
+{
+	this->setVolume(_texFrame->getFrameSize());
+}
+
+void render::DrawScale9Texture2D::setUV(const math::Rect& rect, const math::Size& size, bool rotate)
 {
 	if (size.getWidth() == 0 || size.getHeight() == 0)
 		return;
 
-	float x0 = rect.getMinX();
-	float x1 = rect.getMinX() + _scale9Margin.getLeft().getRealValue(size.getWidth());
-	float x2 = rect.getMaxX() - _scale9Margin.getRight().getRealValue(size.getWidth());
-	float x3 = rect.getMaxX();
+	math::Rect temp;
+	temp.setOrigin(rect.getMinX() / size.getWidth(), rect.getMinY() / size.getHeight());
+	temp.setSize(rect.getWidth() / size.getWidth(), rect.getHeight() / size.getHeight());
 
-	x0 /= size.getWidth(); x1 /= size.getWidth(); x2 /= size.getWidth(); x3 /= size.getWidth();
-
-	float y0 = rect.getMinY();
-	float y1 = rect.getMinY() + _scale9Margin.getBottom().getRealValue(size.getHeight());
-	float y2 = rect.getMaxY() - _scale9Margin.getTop().getRealValue(size.getHeight());
-	float y3 = rect.getMaxY();
-
-	y0 /= size.getHeight(); y1 /= size.getHeight(); y2 /= size.getHeight(); y3 /= size.getHeight();
-
-	_scale9Vertex.setLayerUVs0(math::Vector2(x0, y0), math::Vector2(x1, y0), math::Vector2(x2, y0), math::Vector2(x3, y0));
-	_scale9Vertex.setLayerUVs1(math::Vector2(x0, y1), math::Vector2(x1, y1), math::Vector2(x2, y1), math::Vector2(x3, y1));
-	_scale9Vertex.setLayerUVs2(math::Vector2(x0, y2), math::Vector2(x1, y2), math::Vector2(x2, y2), math::Vector2(x3, y2));
-	_scale9Vertex.setLayerUVs3(math::Vector2(x0, y3), math::Vector2(x1, y3), math::Vector2(x2, y3), math::Vector2(x3, y3));
+	_texFrame->setRect(temp);
+	_texFrame->setRotate(rotate);
+	this->notify(NodeNotifyType::GEOMETRY);
 }
 
-void render::DrawScale9Texture2D::setTexFrame(const TexFrame& texFrame)
+void render::DrawScale9Texture2D::setTexFrame(const TexFrame* texFrame)
 {
-	if (texFrame.getTexture() == nullptr) return;
-	this->setTexture(texFrame.getTexture());
-	this->setUV(texFrame.getRect(), math::Size(texFrame.getTexture()->getWidth(), texFrame.getTexture()->getHeight()));
+	if (texFrame == nullptr || texFrame->getTexture() == nullptr) return;
+	auto pTexture = texFrame->getTexture();
+	this->setTexture(pTexture);
+	auto pTexFrame = (TexFrame*)texFrame;
+	SAFE_RETAIN(pTexFrame);
+	SAFE_RELEASE(_texFrame);
+	_texFrame = pTexFrame;
+	this->notify(NodeNotifyType::GEOMETRY);
 }
 
 void DrawScale9Texture2D::setFlipX(bool status)
@@ -175,6 +195,8 @@ void DrawScale9Texture2D::updateScale9ImageMeshData()
 	{
 		float uvs[32] = { 0 };
 		memcpy(uvs, _scale9Vertex.uvs, sizeof(uvs));
+
+		render::VertexTool::setTexture2DScale9Flip(&uvs, _bFlipX, _bFlipY);
 
 		pMesh->setVertices(16, _scale9Vertex.vertices, 3);
 		pMesh->setColors(16, _scale9Vertex.colors, 4);

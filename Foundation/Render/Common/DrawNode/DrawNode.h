@@ -4,6 +4,7 @@
 #include "Common/Shader/ShaderProgramDelegate.h"
 #include "DrawProtocol.h"
 #include "TessilationProtocol.h"
+#include "macros.h"
 
 namespace render
 {
@@ -14,6 +15,7 @@ namespace render
 	class Texture;
 	class DrawTextureCache;
 	class Camera;
+	struct DrawParameter;
 
 	/**
 	*	绘制节点
@@ -34,15 +36,23 @@ namespace render
 		/**
 		*	片元处理
 		*/
-		FragmentOperator* getFragOperator();
+		FragmentOperator* getFragOperator() const;
 		/**
 		*	材质
 		*/
-		Material* getMaterial();
+		Material* getMaterial() const;
 		/**
 		*	网格
 		*/
-		Mesh* getMesh();
+		Mesh* getMesh() const;
+		/**
+		*	渲染参数
+		*/
+		DrawParameter* getDrawParameter();
+		/**
+		*	获取纹理缓存
+		*/
+		DrawTextureCache* getDrawTextureCache() const;
 	public:
 		/**
 		*	设置纹理
@@ -94,10 +104,16 @@ namespace render
 		*/
 		void setShaderProgram(ShaderProgram* program);
 		/**
+		*	获取着色器
+		*/
+		ShaderProgram* getShaderProgram() const;
+		/**
 		*	设置着色器处理函数
 		*/
 		void setShaderProgramFunc(const ShaderProgramFunc& func);
 	protected:
+		// 优化绘制
+		virtual void optimizeDraw();
 		/**
 		*	绘制前工作
 		*/
@@ -119,6 +135,10 @@ namespace render
 		*	更新缓存数据
 		*/
 		virtual void updateMeshData();
+		/**
+		*	初始化渲染参数
+		*/
+		void initDrawParameter();
 	protected:
 		/**
 		*	颜色改变
@@ -141,5 +161,7 @@ namespace render
 		FragmentOperator* _fragOperator = nullptr;
 		// 纹理缓存
 		DrawTextureCache* _textureCache = nullptr;
+		// 绘制参数
+		DrawParameter _drawParameter;
 	};
 }

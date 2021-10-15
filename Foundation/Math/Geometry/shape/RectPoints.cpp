@@ -6,6 +6,14 @@ math::RectPoints::RectPoints()
 {
 }
 
+math::RectPoints::RectPoints(const Rect& rect)
+{
+	this->setLeftBottom(math::Vector3(rect.getMinX(), rect.getMinY()));
+	this->setRightBottom(math::Vector3(rect.getMaxX(), rect.getMinY()));
+	this->setRightTop(math::Vector3(rect.getMaxX(), rect.getMaxY()));
+	this->setLeftTop(math::Vector3(rect.getMinX(), rect.getMaxY()));
+}
+
 math::RectPoints::RectPoints(const Vector3& leftBottom, const Vector3& rightBottom, const Vector3& rightTop, const Vector3& leftTop)
 {
 	this->setLeftBottom(leftBottom);

@@ -4,7 +4,7 @@
 #include <map>
 #include <vector>
 
-namespace tool
+namespace sys
 {
 
 	/**
@@ -29,13 +29,21 @@ namespace tool
 		~TextureAtlas();
 	public:
 		/**
-		*	解包配置文件
+		*	图片路径
 		*/
-		void unpack(const std::string& filepath);
+		void setImage(const std::string& imgFilePath);
 		/**
-		*	生成配置文件
+		*	图片路径
 		*/
-		void pack(const std::string& filepath);
+		const std::string& getImagePath() const;
+		/**
+		*	纹理配置路径
+		*/
+		void setAltasPath(const std::string& altasFilePath);
+		/**
+		*	纹理配置路径
+		*/
+		const std::string& getAltasPath() const;
 	public:
 		/**
 		*	添加纹理碎片
@@ -64,5 +72,9 @@ namespace tool
 	private:
 		// 碎片
 		std::map<std::string, TextureChip> _chips;
+		// 纹理集配置路径
+		std::string _altasFilePath;
+		// 图片路径
+		std::string _imgFilePath;
 	};
 }

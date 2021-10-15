@@ -23,7 +23,7 @@ void ui::Scale9ImageLoader::parseAttributes()
 	LOAD_WIDGET_ATTRIBUTE(PROPERTY_SCALE9_MARGIN, setMargin, margin);
 	LOAD_WIDGET_ATTRIBUTE(PROPERTY_COLOR, setImageColor, color);
 	LOAD_WIDGET_ATTRIBUTE(PROPERTY_BLEND, setImageBlend, blend);
-	LOAD_WIDGET_STRING_ATTRIBUTE(PROPERTY_PATH, setImagePath, filepath);
+	LOAD_WIDGET_STRING_ATTRIBUTE(PROPERTY_PATH, loadImage, filepath);
 
 	WidgetLoader::parseAttributes();
 }

@@ -7,6 +7,7 @@
 #include "Camera3D.h"
 #include "Cameras.h"
 #include "DebugDraw.h"
+#include "Common/DrawNode/DrawCore.h"
 
 using namespace render;
 
@@ -46,9 +47,15 @@ bool Scene::init()
 
 void Scene::visit()
 {
+	// 合批处理
+
 	this->updateNode();
 
+	G_DRAWCORE->batch();
+
 	this->drawNode();
+
+	G_DRAWCORE->unbatch();
 }
 
 void render::Scene::addChild(Node* node)

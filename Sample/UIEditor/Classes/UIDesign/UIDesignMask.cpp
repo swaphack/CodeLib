@@ -41,7 +41,7 @@ bool ue::UIDesignMask::init()
 			{
 				ui::CtrlImage* pImage = render::createNode<ui::CtrlImage>();
 				if (pImage == nullptr) return;
-				pImage->setImagePath(pNode->getNormalImage());
+				pImage->loadImage(pNode->getNormalImage());
 				pImage->setPosition(m_pTempPosition);
 
 

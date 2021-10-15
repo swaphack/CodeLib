@@ -5,7 +5,7 @@
 		<Control>Default/Layout/Widget/widget.config.xml</Control>
 	</IDE>
 	<Shader>
-		<TexVertex>Default/Shader/ui_texture.vs</TexVertex>
+		<TexVertex>Default/Shader/ui_texture_batch.vs</TexVertex>
 		<TexFragment>Default/Shader/ui_texture.fs</TexFragment>
 		<ColorVertex>Default/Shader/ui_color.vs</ColorVertex>
 		<ColorFragment>Default/Shader/ui_color.fs</ColorFragment>

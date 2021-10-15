@@ -143,6 +143,7 @@ bool ui::CtrlScrollView::init()
 		_touchPosition = touchPoint;
 	});
 
+	this->scheduleForever(0, 0.1f, [this](float dt) {	this->updateScrollDrawState(); });
 
 	return true;
 }
@@ -301,6 +302,14 @@ void CtrlScrollView::initItems()
 void CtrlScrollView::initContent()
 {
 	
+}
+
+void ui::CtrlScrollView::updateScrollDrawState()
+{
+	for (auto& item : _scrollWidgets)
+	{
+		item->updateDrawState();
+	}
 }
 
 void CtrlScrollView::setInnerSize(const math::Size& size)

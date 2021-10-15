@@ -3,20 +3,27 @@
 
 using namespace render;
 
-void VertexTool::setTexture2DCoords(RectVertex* texRect, const math::Size& size, const math::Rect& rect)
+void VertexTool::setTexture2DCoords(RectVertex* texRect, const math::Rect& rect, bool rotate)
 {
 	if (texRect == nullptr) return;
-	// left down
-	texRect->setLeftDownUV(math::Vector2(rect.getX() / size.getWidth(), rect.getY() / size.getHeight()));
 
-	// right down
-	texRect->setRightDownUV(math::Vector2(rect.getMaxX() / size.getWidth(), rect.getY() / size.getHeight()));
-
-	// right up
-	texRect->setRightUpUV(math::Vector2(rect.getMaxX() / size.getWidth(), rect.getMaxY() / size.getHeight()));
-
-	// left up
-	texRect->setLeftUpUV(math::Vector2(rect.getX() / size.getWidth(), rect.getMaxY() / size.getHeight()));
+	math::RectPoints rectPoints(rect);
+	float uvs[8] = { 0 };
+	if (rotate)
+	{
+		uvs[0] = rectPoints.getRightBottom().getX(); uvs[1] = rectPoints.getRightBottom().getY();
+		uvs[2] = rectPoints.getRightTop().getX(); uvs[3] = rectPoints.getRightTop().getY();
+		uvs[4] = rectPoints.getLeftTop().getX(); uvs[5] = rectPoints.getLeftTop().getY();
+		uvs[6] = rectPoints.getLeftBottom().getX(); uvs[7] = rectPoints.getLeftBottom().getY();
+	}
+	else
+	{
+		uvs[0] = rectPoints.getLeftBottom().getX(); uvs[1] = rectPoints.getLeftBottom().getY();
+		uvs[2] = rectPoints.getRightBottom().getX(); uvs[3] = rectPoints.getRightBottom().getY();
+		uvs[4] = rectPoints.getRightTop().getX(); uvs[5] = rectPoints.getRightTop().getY();
+		uvs[6] = rectPoints.getLeftTop().getX(); uvs[7] = rectPoints.getLeftTop().getY();
+	}
+	memcpy(texRect->uvs, uvs, sizeof(uvs));
 }
 
 void VertexTool::setTexture2DVertices(RectVertex* texRect, const math::Vector3& position, const math::Volume& volume, const math::Vector3& anchor)
@@ -88,51 +95,73 @@ void render::VertexTool::setTexture2DFlip(float(*uvs)[8], bool bFlipX, bool bFli
 
 	if (bFlipX)
 	{
-		float x0 = (*uvs)[0];
-		float x1 = (*uvs)[2];
-		float x2 = (*uvs)[4];
-		float x3 = (*uvs)[6];
-
-		(*uvs)[0] = x1;
-		(*uvs)[2] = x0;
-
-		(*uvs)[4] = x3;
-		(*uvs)[6] = x2;
+		for (int i = 0; i < 2; i++)
+		{
+			int idx0 = 4 * i;
+			int idx1 = 4 * i + 2;
+			(*uvs)[idx0] = (*uvs)[idx0] + (*uvs)[idx1];
+			(*uvs)[idx1] = (*uvs)[idx0] - (*uvs)[idx1];
+			(*uvs)[idx0] = (*uvs)[idx0] - (*uvs)[idx1];
+		}
 	}
 
 	if (bFlipY)
 	{
-		float y0 = (*uvs)[1];
-		float y1 = (*uvs)[3];
-		float y2 = (*uvs)[5];
-		float y3 = (*uvs)[7];
+		for (int i = 0; i < 2; i++)
+		{
+			int idx0 = 2 * i + 1;
+			int idx1 = 8 - (2 * i + 1);
 
-		(*uvs)[1] = y3;
-		(*uvs)[3] = y2;
-
-		(*uvs)[5] = y1;
-		(*uvs)[7] = y0;
+			(*uvs)[idx0] = (*uvs)[idx0] + (*uvs)[idx1];
+			(*uvs)[idx1] = (*uvs)[idx0] - (*uvs)[idx1];
+			(*uvs)[idx0] = (*uvs)[idx0] - (*uvs)[idx1];
+		}
 	}
 }
 
-void render::VertexTool::setTexture2DScale9Coords(SimpleScale9Vertex* scale9Vertex, const math::Size& size, const sys::CSSMargin& margin)
+void render::VertexTool::setTexture2DScale9Coords(SimpleScale9Vertex* scale9Vertex, const math::Rect& rect, bool rotate, const math::Size& size, const sys::CSSMargin& margin)
 {
 	if (scale9Vertex == nullptr) return;
 
-	float x0 = 0;
-	float x1 = margin.getLeft().getRealValue(size.getWidth()) / size.getWidth();
-	float x2 = 1 - margin.getRight().getRealValue(size.getWidth()) / size.getWidth();
-	float x3 = 1;
+	if (size.getWidth() == 0 || size.getHeight() == 0)
+		return;
 
-	float y0 = 0;
-	float y1 = margin.getBottom().getRealValue(size.getHeight()) / size.getHeight();
-	float y2 = 1 - margin.getTop().getRealValue(size.getHeight()) / size.getHeight();
-	float y3 = 1;
+	float x0 = rect.getMinX();
+	float x1 = rect.getMinX();
+	float x2 = rect.getMaxX();
+	float x3 = rect.getMaxX();
 
-	scale9Vertex->setLayerUVs0(math::Vector2(x0, y0), math::Vector2(x1, y0), math::Vector2(x2, y0), math::Vector2(x3, y0));
-	scale9Vertex->setLayerUVs1(math::Vector2(x0, y1), math::Vector2(x1, y1), math::Vector2(x2, y1), math::Vector2(x3, y1));
-	scale9Vertex->setLayerUVs2(math::Vector2(x0, y2), math::Vector2(x1, y2), math::Vector2(x2, y2), math::Vector2(x3, y2));
-	scale9Vertex->setLayerUVs3(math::Vector2(x0, y3), math::Vector2(x1, y3), math::Vector2(x2, y3), math::Vector2(x3, y3));
+	float y0 = rect.getMinY();
+	float y1 = rect.getMinY();
+	float y2 = rect.getMaxY();
+	float y3 = rect.getMaxY();
+
+	if (rotate)
+	{
+		x1 += margin.getLeft().getRealValue(size.getHeight()) / size.getHeight();
+		x2 -= margin.getRight().getRealValue(size.getHeight()) / size.getHeight();
+
+		y1 += margin.getBottom().getRealValue(size.getWidth()) / size.getWidth();
+		y2 -= margin.getTop().getRealValue(size.getWidth()) / size.getWidth();
+
+		scale9Vertex->setLayerUVs0(math::Vector2(x0, y3), math::Vector2(x0, y2), math::Vector2(x0, y1), math::Vector2(x0, y0));
+		scale9Vertex->setLayerUVs1(math::Vector2(x1, y3), math::Vector2(x1, y2), math::Vector2(x1, y1), math::Vector2(x1, y0));
+		scale9Vertex->setLayerUVs2(math::Vector2(x2, y3), math::Vector2(x2, y2), math::Vector2(x2, y1), math::Vector2(x2, y0));
+		scale9Vertex->setLayerUVs3(math::Vector2(x3, y3), math::Vector2(x3, y2), math::Vector2(x3, y1), math::Vector2(x3, y0));
+	}
+	else
+	{
+		x1 += margin.getLeft().getRealValue(size.getWidth()) / size.getWidth();
+		x2 -= margin.getRight().getRealValue(size.getWidth()) / size.getWidth();
+
+		y1 += margin.getBottom().getRealValue(size.getHeight()) / size.getHeight();
+		y2 -= margin.getTop().getRealValue(size.getHeight()) / size.getHeight();
+
+		scale9Vertex->setLayerUVs0(math::Vector2(x0, y0), math::Vector2(x1, y0), math::Vector2(x2, y0), math::Vector2(x3, y0));
+		scale9Vertex->setLayerUVs1(math::Vector2(x0, y1), math::Vector2(x1, y1), math::Vector2(x2, y1), math::Vector2(x3, y1));
+		scale9Vertex->setLayerUVs2(math::Vector2(x0, y2), math::Vector2(x1, y2), math::Vector2(x2, y2), math::Vector2(x3, y2));
+		scale9Vertex->setLayerUVs3(math::Vector2(x0, y3), math::Vector2(x1, y3), math::Vector2(x2, y3), math::Vector2(x3, y3));
+	}
 }
 
 void render::VertexTool::setTexture2DScale9Vertices(SimpleScale9Vertex* scale9Vertex, const math::Vector3& position, const math::Volume& volume, const math::Vector3& anchor, const sys::CSSMargin& margin)
@@ -163,4 +192,40 @@ void render::VertexTool::setTexture2DScale9Vertices(SimpleScale9Vertex* scale9Ve
 	scale9Vertex->setLayerPoints2(math::Vector3(x0, y2, z0), math::Vector3(x1, y2, z0), math::Vector3(x2, y2, z0), math::Vector3(x3, y2, z0));
 	scale9Vertex->setLayerPoints3(math::Vector3(x0, y3, z0), math::Vector3(x1, y3, z0), math::Vector3(x2, y3, z0), math::Vector3(x3, y3, z0));
 
+}
+
+void render::VertexTool::setTexture2DScale9Flip(float(*uvs)[32], bool bFlipX, bool bFlipY)
+{
+	if (uvs == nullptr) return;
+
+	if (bFlipX)
+	{
+		for (int i = 0; i < 4; i++)
+		{
+			for (int j = 0; j < 2; j++)
+			{
+				int idx0 = i * 8 + 2 * j;
+				int idx1 = i * 8 + 6 - 2 * j;
+				(*uvs)[idx0] = (*uvs)[idx0] + (*uvs)[idx1];
+				(*uvs)[idx1] = (*uvs)[idx0] - (*uvs)[idx1];
+				(*uvs)[idx0] = (*uvs)[idx0] - (*uvs)[idx1];
+			}
+		}
+	}
+
+	if (bFlipY)
+	{
+		for (int i = 0; i < 4; i++)
+		{
+			for (int j = 0; j < 2; j++)
+			{
+				int idx0 = j * 8 + 2 * i + 1;
+				int idx1 = 3 * 8 + 4 * i + 2 - idx0;
+
+				(*uvs)[idx0] = (*uvs)[idx0] + (*uvs)[idx1];
+				(*uvs)[idx1] = (*uvs)[idx0] - (*uvs)[idx1];
+				(*uvs)[idx0] = (*uvs)[idx0] - (*uvs)[idx1];
+			}
+		}
+	}
 }

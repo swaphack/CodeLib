@@ -2,6 +2,9 @@
 
 namespace render
 {
+	/**
+	*	细分着色器
+	*/
 	class TessilationProtocol
 	{
 	public:
@@ -41,7 +44,6 @@ namespace render
 		*	细分内部等级
 		*/
 		const float* getTessInnerLevel() const;
-	protected:
 		/**
 		*	更新细分
 		*/

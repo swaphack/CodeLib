@@ -172,7 +172,7 @@ bool ModelDetail3DS::load(const std::string& fullpath)
 					{
 						continue;
 					}
-					pMesh->setMaterial(pMatData->name);
+					pMesh->setMaterialName(pMatData->name);
 					int nFaceCount = 3 * item0.second.size();
 					if (nFaceCount > 0)
 					{

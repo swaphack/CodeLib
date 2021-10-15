@@ -14,6 +14,10 @@ namespace render
 	public:
 		TouchProtocol();
 		virtual ~TouchProtocol();
+	protected:
+		void setTouchNode(Node* node);
+	public:
+		Node* getTouchNode() const;
 	public:
 		// 设置可点击性
 		void setTouchEnabled(bool status);
@@ -63,6 +67,8 @@ namespace render
 		bool _bTouchSwallowed = false;
 		// 裁剪节点
 		bool _bClippingEnabled = false;
+		// 触摸节点
+		Node* _touchNode = nullptr;
 
 		std::map<TouchType, std::vector<TouchDelegate>> _touchDelegates;
 		std::map<TouchType, std::vector<TouchFunc>> _touchFuncs;

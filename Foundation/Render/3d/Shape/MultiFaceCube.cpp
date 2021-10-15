@@ -84,7 +84,7 @@ void render::MultiFaceCube::initBufferObject()
 		auto pMesh = CREATE_OBJECT(sys::MeshDetail);
 		_meshes->addMesh(name, pMesh);
 
-		pMesh->setMaterial(name);
+		pMesh->setMaterialName(name);
 
 		CubeFace face = (CubeFace)i;
 

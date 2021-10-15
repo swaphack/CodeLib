@@ -22,7 +22,8 @@ namespace render
 		/**
 		*	添加纹理
 		*/
-		void addTexture(const std::string& name, const Texture* texture, const std::string& fullpath = "");
+		void addTexture(const std::string& name, const Texture* texture, 
+			const std::string& fullpath = "", const math::Rect& rect = math::Rect(0,0,1,1), bool rotate = false);
 		/**
 		*	移除纹理
 		*/
@@ -42,10 +43,18 @@ namespace render
 	private:
 		struct TextureInfo
 		{
+			// 名称
 			std::string name;
+			// 完整路径
 			std::string fullpath;
+			// 应用次数
 			int refCount = 0;
+			// 纹理
 			Texture* texture = nullptr;
+			// 矩形
+			math::Rect rect = math::Rect(0,0,1,1);
+			// 是否旋转
+			bool rotate = false;
 			// 增加引用次数
 			void increase();
 			// 减少引用次数

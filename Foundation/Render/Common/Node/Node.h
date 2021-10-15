@@ -108,9 +108,18 @@ namespace render
 		void setSkipDraw(bool status);
 		// 是否跳过绘制
 		bool isSkipDraw()  const;
+		// 跳过绘制孩子节点
+		void setSkipDrawChildren(bool status);
+		// 是否跳过绘制孩子节点
+		bool isSkipDrawChildren()  const;
 	public:
 		// 更新节点, 更新节点逻辑
 		virtual void updateNode();
+	public:
+		// 优化处理
+		void optimizeNode();
+		// 优化绘制
+		virtual void optimizeDraw();
 	public:
 		// 绘制节点 矩阵变换->测试和预处理->绘制当前界面
 		virtual void drawNode();
@@ -126,6 +135,19 @@ namespace render
 	public:
 		// 获取动作代理
 		ActionProxy* getActionProxy();
+		/**
+		*	定时执行一次
+		*/
+		void scheduleOnce(float delayTime, const std::function<void(float interval)>& func);
+		/**
+		*	定时执行
+		*/
+		void scheduleUpdate(float delayTime, float totalTime, float intervalTime, const std::function<void(float interval)>& func);
+		/**
+		*	定时永久执行
+		*/
+		void scheduleForever(float delayTime, float intervalTime, const std::function<void(float interval)>& func);
+	public:
 		/**
 		*	开启定时器
 		*/
@@ -213,6 +235,8 @@ namespace render
 		std::vector<Node*> _children;
 		// 跳过绘制
 		bool _bSkipDraw = false;
+		// 跳过绘制孩子节点
+		bool _bSkipDrawChildren = false;
 		// 是否可见
 		bool _bVisibled = false;
 		// 是否可点击

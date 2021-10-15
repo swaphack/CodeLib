@@ -41,7 +41,7 @@ bool Media::init()
 		Texture2D* texture = getNextTexture();
 		if (texture)
 		{
-			_drawNode->setTextureWithRect(texture);
+			_drawNode->loadTexture(texture);
 		}
 		sys::AudioDetail* audio = _media->getNextAudio();
 		if (audio && audio->getData())

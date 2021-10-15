@@ -44,7 +44,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>../Math/;../System/;../Physics/;../Render/;../../Lib/include/;../../Lib/include/fbx/;../../Lib/include/freetype/;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../Math/;../System/;../Physics/;../Tool/;../Render/;../../Lib/include/;../../Lib/include/fbx/;../../Lib/include/tinyxml2/;../../Lib/include/freetype/;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <BrowseInformation>false</BrowseInformation>
       <MinimalRebuild>false</MinimalRebuild>
       <FunctionLevelLinking>true</FunctionLevelLinking>

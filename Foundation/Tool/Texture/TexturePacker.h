@@ -1,9 +1,11 @@
 #pragma once
 
-#include "mathlib.h"
 #include <string>
 #include <set>
 #include <map>
+
+#include "mathlib.h"
+#include "system.h"
 
 namespace tool
 {
@@ -53,15 +55,26 @@ namespace tool
 		*/
 		void removeAllDirectories();
 	public:
+		const sys::TextureAtlas& getTextureAtlas() const;
 		/**
-		*	png打包生成
+		*	加载图集配置
 		*/
-		bool packPNG(const std::string& filepath);
+		void loadTextureAtlas(const std::string& altasFilePath);
+		/**
+		*	生成图集配置
+		*/
+		void saveTextureAtlas(const std::string& altasFilePath);
+		/**
+		*	打包成png
+		*/
+		bool packPNG(const std::string& imgFilePath, const std::string& altasFilePath);
 	public:
 		math::IntSize _size;
 		// 单个图片路径
 		std::set<std::string> _images;
 		// 图片目录
 		std::set<std::string> _dirs;
+		// 纹理
+		sys::TextureAtlas _textureAtlas;
 	};
 }

@@ -25,18 +25,12 @@
     <ClInclude Include="Texture\import.h">
       <Filter>Texture</Filter>
     </ClInclude>
-    <ClInclude Include="Texture\TextureAtlas.h">
-      <Filter>Texture</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Document\XmlHelper.cpp">
       <Filter>Document</Filter>
     </ClCompile>
     <ClCompile Include="Texture\TexturePacker.cpp">
-      <Filter>Texture</Filter>
-    </ClCompile>
-    <ClCompile Include="Texture\TextureAtlas.cpp">
       <Filter>Texture</Filter>
     </ClCompile>
   </ItemGroup>

@@ -36,7 +36,7 @@ void AudioManager::init()
 	}
 }
 
-void AudioManager::update()
+void AudioManager::process()
 {
 	if (!_system) return;
 

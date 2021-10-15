@@ -33,8 +33,9 @@ UniformParameter(const std::string& name, T value) \
 {\
 Type = UT; \
 Name = name; \
-Data = (T*)malloc(sizeof(T)); \
-memcpy(Data, &value, sizeof(T));\
+Size = sizeof(T);\
+Data = (T*)malloc(Size); \
+memcpy(Data, &value, Size);\
 }
 
 #define CONSTRUCT_FLOAT_ARRAY_TYPE(UT, T) \
@@ -42,8 +43,9 @@ UniformParameter(const std::string& name, const T& value) \
 {\
 Type = UT; \
 Name = name; \
-Data = (float*)malloc(value.getSize());\
-memcpy(Data, value.getValue(), value.getSize());\
+Size = value.getSize();\
+Data = (float*)malloc(Size);\
+memcpy(Data, value.getValue(), Size);\
 }
 
 #define AS_VALUE_TYPE(T, Func, UT, DefaultValue) \
@@ -72,13 +74,15 @@ if (Data == nullptr || UT != Type ) {\
 		public:
 			std::string Name;
 			UniformType Type = UniformType::Integer;
+			uint32_t Size = 0;
 			void* Data = nullptr;
 		public:
 			UniformParameter() {}
-			UniformParameter(const std::string& name, UniformType type, void* value) 
+			UniformParameter(const std::string& name, UniformType type, uint32_t size, void* value) 
 			{
 				Name = name;
 				Type = type;
+				Size = size;
 				Data = value;
 			}
 
@@ -109,6 +113,15 @@ if (Data == nullptr || UT != Type ) {\
 			{
 				SAFE_FREE(Data);
 			}
+			// 是否相同
+			bool equals(const UniformParameter& parameter) const
+			{
+				if (Name != parameter.Name || Type != parameter.Type)
+				{
+					return false;
+				}
+				return memcmp(Data, parameter.Data, Size);
+			}
 		};
 	public:
 		MaterialSetting();
@@ -118,7 +131,7 @@ if (Data == nullptr || UT != Type ) {\
 		void setShaderProgram(ShaderProgram* shaderProgram);
 		void removeAllUniforms(bool bContainSelfDefined = false);
 		// 添加自定义uniform
-		void addSelfDefineUniform(const std::string& name, UniformType type, void* value);
+		void addSelfDefineUniform(const std::string& name, UniformType type, uint32_t size, void* value);
 		void removeAllSelfDefineUniforms();
 	public:
 		inline const std::map<EnvUniformType, std::string>& getEnvUniforms() const { return _mapEnvUniforms; }
@@ -130,6 +143,9 @@ if (Data == nullptr || UT != Type ) {\
 		inline const std::map<std::string, UniformParameter>& getSelfDefinedUniforms() const { return _mapSelfDefinedUniforms; }
 
 		inline const std::map<VertexDataType, std::string>& getAttribs() const { return _mapAttribs; }
+	public:
+		// 自定义参数是否相同
+		bool equalsSelfDefinedUniforms(const MaterialSetting& ms) const;
 	protected:
 		// 初始化参数
 		void initParameters(ShaderProgram* shaderProgram);

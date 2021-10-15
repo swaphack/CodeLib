@@ -161,6 +161,8 @@
     <ClInclude Include="Platform\Windows\WindowsHelper.h" />
     <ClInclude Include="Process\Pipe.h" />
     <ClInclude Include="Record\OperateRecord.h" />
+    <ClInclude Include="Resource\Atlas\import.h" />
+    <ClInclude Include="Resource\Atlas\TextureAtlas.h" />
     <ClInclude Include="Resource\extensions.h" />
     <ClInclude Include="Resource\Font\ILabelLoader.h" />
     <ClInclude Include="Resource\Font\LabelImage.h" />
@@ -296,6 +298,7 @@
     <ClCompile Include="Platform\Windows\Window.cpp" />
     <ClCompile Include="Platform\Windows\WindowsHelper.cpp" />
     <ClCompile Include="Record\OperateRecord.cpp" />
+    <ClCompile Include="Resource\Atlas\TextureAtlas.cpp" />
     <ClCompile Include="Resource\Font\LabelImage.cpp" />
     <ClCompile Include="Resource\Image\ImageBMP.cpp" />
     <ClCompile Include="Resource\Image\ImageDefine.cpp" />

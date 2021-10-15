@@ -32,7 +32,7 @@ void TestImageNode::testImage()
 		std::string filepath = "Resource/Image/world.jpg";
 
 		CtrlImage* pImage = CREATE_NODE(CtrlImage);
-		pImage->setImagePath(filepath);
+		pImage->loadImage(filepath);
 		pImage->setAnchorPoint(0.5f, 0.5f);
 		pImage->setPosition(512, 384);
 		pImage->setVolume(frameSize);
@@ -47,7 +47,7 @@ void TestImageNode::testImage()
 		std::string filepath = "Resource/Image/2k_earth_specular_map.tif";
 
 		CtrlImage* pImage = CREATE_NODE(CtrlImage);
-		pImage->setImagePath(filepath);
+		pImage->loadImage(filepath);
 		pImage->setAnchorPoint(0.5f, 0.5f);
 		pImage->setPosition(512, 384);
 		pImage->setVolume(512, 384);
@@ -62,7 +62,7 @@ void TestImageNode::testGrayImage()
 	std::string filepath = "Resource/Image/image_skin_brand_0.png";
 
 	CtrlImage* pImage = CREATE_NODE(CtrlImage);
-	pImage->setImagePath(filepath);
+	pImage->loadImage(filepath);
 	pImage->setAnchorPoint(0.5f, 0.5f);
 	pImage->setPosition(512, 384);
 	pImage->setVolume(512, 384);
@@ -74,7 +74,7 @@ void TestImageNode::testGrayImage()
 void TestImageNode::testDifferentImages()
 {
 	CtrlImage* pImage = CREATE_NODE(CtrlImage);
-	pImage->setImagePath("Resource/Model/Obj/SCI_FRS_13_HD/lights_lod0.bmp");
+	pImage->loadImage("Resource/Model/Obj/SCI_FRS_13_HD/lights_lod0.bmp");
 	pImage->setPosition(0, 0, 0);
 	pImage->setScale(1, 1, 1);
 	pImage->setVolume(100, 100);
@@ -82,7 +82,7 @@ void TestImageNode::testDifferentImages()
 	this->addChild(pImage);
 
 	pImage = CREATE_NODE(CtrlImage);
-	pImage->setImagePath("Resource/Model/Obj/SCI_FRS_13_HD/BRAKES.png");
+	pImage->loadImage("Resource/Model/Obj/SCI_FRS_13_HD/BRAKES.png");
 	pImage->setPosition(200, 200, 0);
 	pImage->setScale(1, 1, 1);
 	pImage->setVolume(100, 100);
@@ -90,7 +90,7 @@ void TestImageNode::testDifferentImages()
 	this->addChild(pImage);
 
 	pImage = CREATE_NODE(CtrlImage);
-	pImage->setImagePath("Resource/Model/Obj/SCI_FRS_13_HD/grille2.tga");
+	pImage->loadImage("Resource/Model/Obj/SCI_FRS_13_HD/grille2.tga");
 	pImage->setPosition(400, 400, 0);
 	pImage->setScale(1, 1, 1);
 	pImage->setVolume(100, 100);
@@ -98,7 +98,7 @@ void TestImageNode::testDifferentImages()
 	this->addChild(pImage);
 
 	pImage = CREATE_NODE(CtrlImage);
-	pImage->setImagePath("Resource/Image/1.jpg");
+	pImage->loadImage("Resource/Image/1.jpg");
 	pImage->setPosition(600, 600, 0);
 	pImage->setScale(1, 1, 1);
 	pImage->setVolume(100, 100);
@@ -109,7 +109,7 @@ void TestImageNode::testDifferentImages()
 void TestImageNode::testMoveImage()
 {
 	CtrlImage* pImage = CREATE_NODE(CtrlImage);
-	pImage->setImagePath("Resource/Image/world.jpg");
+	pImage->loadImage("Resource/Image/world.jpg");
 	pImage->setPosition(512, 384, 0);
 	this->addChild(pImage);
 
@@ -195,7 +195,7 @@ void TestImageNode::onKeyBoard(Node* node, sys::BoardKey key, sys::ButtonStatus 
 void TestImageNode::testPixelImage()
 {
 	CtrlImage* pImage = CREATE_NODE(CtrlImage);
-	pImage->setImagePath("Resource/Image/sqi.png");
+	pImage->loadImage("Resource/Image/sqi.png");
 	pImage->setPosition(512, 384, 0);
 	this->addChild(pImage);
 
@@ -241,7 +241,7 @@ void TestImageNode::testImages()
 	for (int i = 0; i < 10; i++)
 	{
 		auto pChild = CREATE_NODE(CtrlImage);
-		pChild->setImagePath(filepath);
+		pChild->loadImage(filepath);
 		pChild->setAnchorPoint(0.0f, 0.0f);
 		pChild->setPosition(20 * i, 20 * i);
 		pChild->setVolume(200, 200);
@@ -260,7 +260,7 @@ void TestImageNode::testScale9Image()
 	/*
 	{
 		auto pChild = CREATE_NODE(CtrlImage);
-		pChild->setImagePath(filepath);
+		pChild->loadImage(filepath);
 		pChild->setAnchorPoint(0.0f, 0.0f);
 		pChild->setPosition(500, 500);
 		pChild->setVolume(200, 200);
@@ -269,7 +269,7 @@ void TestImageNode::testScale9Image()
 	*/
 	{
 		auto pChild = CREATE_NODE(CtrlScale9Image);
-		pChild->setImagePath(filepath);
+		pChild->loadImage(filepath);
 		pChild->setAnchorPoint(0.0f, 0.0f);
 		pChild->setVolume(400, 400);
 		pChild->setMargin(50, 50, 50, 50);

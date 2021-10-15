@@ -3,6 +3,7 @@
 #include "tinyxml2.h"
 #include <string>
 #include <map>
+#include <vector>
 #include <functional>
 
 namespace tool
@@ -45,6 +46,10 @@ namespace tool
 		*	保存xml文件
 		*/
 		void appendElementWithChildren(const std::string& nodeName, const std::map<std::string, std::string>& value);
+		/**
+		*	保存xml文件
+		*/
+		void appendElementWithChildren(const std::string& nodeName, const std::vector<std::pair<std::string, std::string>>& value);
 	private:
 		tinyxml2::XMLDocument* m_pDocument = nullptr;
 	};

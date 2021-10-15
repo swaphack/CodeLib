@@ -140,6 +140,10 @@ namespace ui
 		*/
 		void broadcastBodyChange();
 		/**
+		*	通知子节点位置改变
+		*/
+		void broadcastPositionChange();
+		/**
 		*	刷新布局
 		*/
 		void refreshLayout();
@@ -149,9 +153,23 @@ namespace ui
 		*/
 		void onParentBodyChange();
 		/**
-		*	更新裁剪状态
+		*	父节点节点位置改变
 		*/
-		void updateChildrenVisibleState();
+		void onParentPositionChange();
+	public:
+		/**
+		*	更新绘制状态
+		*/
+		void updateDrawState();
+		/**
+		*	更新所有绘制状态
+		*/
+		void updateAllDrawState();
+	protected:
+		/** 
+		*	批量绘制
+		*/
+		void batchRender();
 	protected:
 		/**
 		*	添加内部访问控件

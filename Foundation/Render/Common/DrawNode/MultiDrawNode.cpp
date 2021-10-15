@@ -60,19 +60,31 @@ void MultiDrawNode::draw()
 	this->afterDraw();
 }
 
-Materials* render::MultiDrawNode::getMaterials()
+Materials* render::MultiDrawNode::getMaterials() const
 {
 	return _materiales;
 }
 
-Meshes* render::MultiDrawNode::getMeshes()
+Meshes* render::MultiDrawNode::getMeshes() const
 {
 	return _meshes;
 }
 
-FragmentOperator* render::MultiDrawNode::getFragOperator()
+FragmentOperator* render::MultiDrawNode::getFragOperator() const
 {
 	return _fragOperator;
+}
+
+DrawTextureCache* render::MultiDrawNode::getDrawTextureCache() const
+{
+	return _textureCache;
+}
+
+DrawParameter* render::MultiDrawNode::getDrawParameter(const std::string& meshName)
+{
+	auto it = _drawParameters.find(meshName);
+	if (it == _drawParameters.end()) return nullptr;
+	return &it->second;
 }
 
 render::Material* render::MultiDrawNode::getMaterial(const std::string& name)
@@ -200,6 +212,17 @@ void render::MultiDrawNode::setShaderProgramFunc(const ShaderProgramFunc& func)
 	}
 }
 
+void render::MultiDrawNode::optimizeDraw()
+{
+	if (!this->isVisible()) return;
+	this->initDrawParameters();
+
+	for (auto& item : _drawParameters)
+	{
+		G_DRAWCORE->addDrawParameter(&item.second);
+	}
+}
+
 void render::MultiDrawNode::beforeDraw()
 {
 	_fragOperator->begin();
@@ -209,45 +232,7 @@ void render::MultiDrawNode::beforeDraw()
 
 void MultiDrawNode::onDraw()
 {
-	for (auto item : _meshes->getMeshes())
-	{
-		auto pMesh = item.second;
-		auto nMatID = pMesh->getMeshDetail()->getMaterial();
-		auto pMaterial = _materiales->getMaterial(nMatID);
-		if (pMaterial == nullptr)
-		{// 临时处理
-			continue;
-		}
-		auto program = pMaterial->getShaderProgram();
-
-		DrawCoreParameter parameter;
-		parameter.node = this;
-		parameter.program = program;
-		parameter.mesh = pMesh;
-		parameter.material = pMaterial;
-		parameter.textureCache = _textureCache;
-
-		G_DRAWCORE->setTempMatrix(pMesh->getMeshDetail()->getMatrix());
-		if (program != nullptr)
-		{
-			G_DRAWCORE->beginApplyWithShader(parameter);
-
-			pMesh->drawWithBufferObject();
-
-			G_DRAWCORE->endApplyWithShader(parameter);
-		}
-		else
-		{
-			G_DRAWCORE->beginApply(parameter);
-
-			pMesh->drawWithClientArray();
-
-			G_DRAWCORE->endApply(parameter);
-		}
-		G_DRAWCORE->resetTempMatrix();
-	}
-
-	GLDebug::showError();
+	G_DRAWCORE->render(this);
 }
 
 void render::MultiDrawNode::afterDraw()
@@ -263,7 +248,7 @@ void render::MultiDrawNode::initBufferObject()
 	pModelDetail->addMaterial(DRAW_MATERIAL_INDEX, pMat);
 
 	auto pMesh = CREATE_OBJECT(sys::MeshDetail);
-	pMesh->setMaterial(DRAW_MATERIAL_INDEX);
+	pMesh->setMaterialName(DRAW_MATERIAL_INDEX);
 	pModelDetail->addMesh(DRAW_MESH_INDEX, pMesh);
 
 	_materiales->setModelDetail(pModelDetail);
@@ -290,7 +275,7 @@ void render::MultiDrawNode::updateMeshData()
 				continue;
 			}
 
-			auto pMaterial = _materiales->getMaterial(pMesh->getMeshDetail()->getMaterial());
+			auto pMaterial = _materiales->getMaterial(pMesh->getMeshDetail()->getMaterialName());
 			if (!pMaterial)
 			{
 				continue;
@@ -322,6 +307,35 @@ void render::MultiDrawNode::updateMeshData()
 	if (_meshes)
 	{
 		_meshes->updateBufferData();
+	}
+}
+
+void render::MultiDrawNode::initDrawParameters()
+{
+	if (this->getMeshes() == nullptr || this->getMaterials() == nullptr)
+	{
+		return;
+	}
+	_drawParameters.clear();
+
+	auto pMateriales = this->getMaterials();
+	for (auto item : this->getMeshes()->getMeshes())
+	{
+		auto pMesh = item.second;
+		auto nMatID = pMesh->getMeshDetail()->getMaterialName();
+		auto pMaterial = pMateriales->getMaterial(nMatID);
+		if (pMaterial == nullptr)
+		{// 临时处理
+			continue;
+		}
+		auto program = pMaterial->getShaderProgram();
+		DrawParameter& drawParameter = _drawParameters[item.first];
+		drawParameter.node = this;
+		drawParameter.program = program;
+		drawParameter.mesh = pMesh;
+		drawParameter.material = pMaterial;
+		drawParameter.textureCache = _textureCache;
+		drawParameter.matrix = pMesh->getMeshDetail()->getMatrix();
 	}
 }
 

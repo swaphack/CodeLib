@@ -97,11 +97,11 @@ namespace sys
 		/**
 		*	设置材质
 		*/
-		void setMaterial(const std::string& name);
+		void setMaterialName(const std::string& name);
 		/**
 		*	获取材质
 		*/
-		const std::string& getMaterial() const;
+		const std::string& getMaterialName() const;
 		/**
 		*	设置三角形索引
 		*/
@@ -147,6 +147,9 @@ namespace sys
 		*	分配顶点索引
 		*/
 		char* createIndices(size_t len, uint32_t typeSize, int unitSize = 1);
+	public:
+		// 判断indices, vertices，normals, colors, uvs是否一致
+		bool equals(const MeshDetail& detail);
 	private:
 		std::string _meshName;
 		// 材质

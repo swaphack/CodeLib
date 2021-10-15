@@ -32,14 +32,13 @@ bool ui::CtrlWidget::init()
 	// 添加属性改变监听
 	addNotifyListener(NodeNotifyType::SPACE, [this]() {
 		onCtrlWidgetBodyChange();
-		updateChildrenVisibleState();
+		broadcastPositionChange();
 	});
 
 	// 添加属性改变监听
 	addNotifyListener(NodeNotifyType::BODY, [this]() {
 		onCtrlWidgetBodyChange();
 		broadcastBodyChange();
-		updateChildrenVisibleState();
 	});
 
 	this->addTouchFunc(render::TouchType::ENDED, [this](const math::Vector2& touchPoint) {
@@ -280,6 +279,19 @@ void ui::CtrlWidget::broadcastBodyChange()
 	}
 }
 
+void ui::CtrlWidget::broadcastPositionChange()
+{
+	for (auto item : _protectedWidgets)
+	{
+		item->onParentPositionChange();
+	}
+
+	for (auto item : _widgets)
+	{
+		item->onParentPositionChange();
+	}
+}
+
 void ui::CtrlWidget::refreshLayout()
 {
 	onParentBodyChange();
@@ -294,32 +306,40 @@ void ui::CtrlWidget::onParentBodyChange()
 			_layoutItem->resize(getParent()->getSize());
 		}
 	}
-
-	//broadcastBodyChange();
 }
 
-void ui::CtrlWidget::updateChildrenVisibleState()
+void ui::CtrlWidget::onParentPositionChange()
 {
-	if (true)
+}
+
+void ui::CtrlWidget::updateDrawState()
+{
+	this->setSkipDraw(!this->isInCanvas());
+}
+
+void ui::CtrlWidget::updateAllDrawState()
+{
+	updateDrawState();
+	for (auto& child : _children)
 	{
-		return;
-	}
-	if (!isClippingEnabled())
-	{
-		for (auto item : _children)
+		auto pWidget = child->as<CtrlWidget>();
+		if (pWidget)
 		{
-			item->setSkipDraw(false);
+			pWidget->updateAllDrawState();
 		}
 	}
-	else
+}
+
+void ui::CtrlWidget::batchRender()
+{
+	for (auto& child : _children)
 	{
-		for (auto item : _children)
+		auto pWidget = child->as<CtrlWidget>();
+		if (pWidget) pWidget->batchRender();
+		auto pDrawNode = child->as<render::DrawNode>();
+		if (pDrawNode)
 		{
-			auto pBox = dynamic_cast<Box2DDrawProtocol*>(item);
-			if (pBox)
-			{
-				item->setSkipDraw(!this->isOverlap(pBox));
-			}
+
 		}
 	}
 }

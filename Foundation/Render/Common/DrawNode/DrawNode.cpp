@@ -83,31 +83,41 @@ void DrawNode::draw()
 	this->afterDraw();
 }
 
-FragmentOperator* render::DrawNode::getFragOperator()
+FragmentOperator* render::DrawNode::getFragOperator() const
 {
 	return _fragOperator;
 }
 
-render::Material* render::DrawNode::getMaterial()
+render::Material* render::DrawNode::getMaterial() const
 {
 	return _material;
 }
 
-render::Mesh* render::DrawNode::getMesh()
+render::Mesh* render::DrawNode::getMesh() const
 {
 	return _mesh;
 }
 
+DrawParameter* render::DrawNode::getDrawParameter()
+{
+	return &_drawParameter;
+}
+
+DrawTextureCache* render::DrawNode::getDrawTextureCache() const
+{
+	return _textureCache;
+}
+
 void render::DrawNode::setTexture(const std::string& fullpath)
 {
-	_material->getMaterialDetail()->setAmbientTextureMap(MAT_TEXTURE_NAME);
+	_material->getMaterialDetail()->setTexture(MAT_TEXTURE_NAME);
 	_textureCache->removeTexture(MAT_TEXTURE_NAME);
 	_textureCache->addTexture(MAT_TEXTURE_NAME, fullpath);
 }
 
 void render::DrawNode::setTexture(const Texture* texture)
 {
-	_material->getMaterialDetail()->setAmbientTextureMap(MAT_TEXTURE_NAME);
+	_material->getMaterialDetail()->setTexture(MAT_TEXTURE_NAME);
 	_textureCache->removeTexture(MAT_TEXTURE_NAME);
 	_textureCache->addTexture(MAT_TEXTURE_NAME, texture);
 }
@@ -176,9 +186,22 @@ void render::DrawNode::setShaderProgram(ShaderProgram* program)
 	_material->setShaderProgram(program);
 }
 
+ShaderProgram* render::DrawNode::getShaderProgram() const
+{
+	return _material->getShaderProgram();
+}
+
 void render::DrawNode::setShaderProgramFunc(const ShaderProgramFunc& func)
 {
 	_material->setProgramFunc(func);
+}
+
+void render::DrawNode::optimizeDraw()
+{
+	if (!this->isVisible()) return;
+	this->initDrawParameter();
+
+	G_DRAWCORE->addDrawParameter(&_drawParameter);
 }
 
 void render::DrawNode::beforeDraw()
@@ -194,51 +217,7 @@ void DrawNode::onDraw()
 	{
 		return;
 	}
-
-	auto program = _material->getShaderProgram();
-
-	DrawCoreParameter parameter;
-	parameter.node = this;
-	parameter.program = program;
-	parameter.mesh = _mesh;
-	parameter.material = _material;
-	parameter.textureCache = _textureCache;
-
-	if (program != nullptr)
-	{
-
-		G_DRAWCORE->beginApplyWithShader(parameter);
-
-		DrawMode mode = _mesh->getDrawMode();
-		if (isTessilationEnable())
-		{
-			this->updateTessilation();
-			_mesh->setDrawMode(DrawMode::PATCHES);
-		}
-
-		GLDebug::showError();
-		G_DRAWCORE->increaseDrawCall();
-		_mesh->drawWithBufferObject();
-		
-		if (isTessilationEnable())
-		{
-			_mesh->setDrawMode(mode);
-		}
-
-		GLDebug::showError();
-		G_DRAWCORE->endApplyWithShader(parameter);
-	}
-	else
-	{
-		G_DRAWCORE->beginApply(parameter);
-
-		GLDebug::showError();
-		_mesh->drawWithClientArray();
-
-		GLDebug::showError();
-		G_DRAWCORE->endApply(parameter);
-	}
-	GLDebug::showError();
+	G_DRAWCORE->render(this);
 }
 
 void render::DrawNode::afterDraw()
@@ -253,7 +232,7 @@ void render::DrawNode::initBufferObject()
 	_material->setMaterialDetail(pMaterialDetail);
 
 	auto pMeshDetail = CREATE_OBJECT(sys::MeshDetail);
-	pMeshDetail->setMaterial(DRAW_MATERIAL_INDEX);
+	pMeshDetail->setMaterialName(DRAW_MATERIAL_INDEX);
 	_mesh->setMeshDetail(pMeshDetail);
 }
 
@@ -290,6 +269,16 @@ void render::DrawNode::updateMeshData()
 
 	_mesh->initMeshOtherDetail();
 	_mesh->updateBufferData();
+}
+
+void render::DrawNode::initDrawParameter()
+{
+	_drawParameter.node = this;
+	_drawParameter.program = _material ? _material->getShaderProgram() : nullptr;
+	_drawParameter.mesh = _mesh;
+	_drawParameter.material = _material;
+	_drawParameter.textureCache = _textureCache;
+	_drawParameter.tessilation = isTessilationEnable();
 }
 
 void render::DrawNode::onColorChange()

@@ -101,7 +101,7 @@ phy::Color4B ui::CtrlLayout::getBackgroundColor() const
 
 void ui::CtrlLayout::setBackgroundImagePath(const std::string& filepath)
 {
-	_backgroundImage->setImagePath(filepath);
+	_backgroundImage->loadImage(filepath);
 }
 
 const std::string& ui::CtrlLayout::getBackgroundImagePath() const

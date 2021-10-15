@@ -22,19 +22,23 @@ namespace ui
 		/**
 		*	设置图片路径
 		*/ 
-		void setImagePath(const std::string& path);
-		/**
-		*	加载图片
-		*/
 		void loadImage(const std::string& path);
 		/**
 		*	加载纹理
 		*/
 		void loadTexture(const render::Texture* texture);
 		/**
+		*	加载纹理碎片
+		*/
+		void loadTextureChip(const std::string& chipName);
+		/**
 		*	获取图片路径
 		*/ 
 		const std::string& getImagePath();
+		/**
+		*	设置成纹理大小
+		*/  
+		void setNativeSize();
 	public:
 		// 设置水平翻转
 		void setFlipX(bool status);
