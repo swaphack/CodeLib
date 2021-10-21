@@ -43,7 +43,7 @@ namespace render
 		TexFrame& operator=(const TexFrame& value);
 	private:
 		// 纹理对象
-		Texture* _texture;
+		Texture* _texture = nullptr;
 		// 名称
 		std::string _name;
 		// 显示区域

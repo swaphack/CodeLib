@@ -9,6 +9,7 @@
 #include "Common/Mesh/import.h"
 #include "Common/Material/import.h"
 #include "Common/Texture/TextureCache.h"
+#include "Common/DrawNode/DrawTextureCache.h"
 
 using namespace render;
 
@@ -104,6 +105,12 @@ void render::DrawTexture2D::setNativeTextureSize()
 	this->setVolume(_texFrame->getFrameSize());
 }
 
+void render::DrawTexture2D::cleanTexture()
+{
+	_texFrame->setTexture(nullptr);
+	_textureCache->removeTexture(MAT_TEXTURE_NAME);
+}
+
 void render::DrawTexture2D::setUV(const math::Rect& rect, const math::Size& size, bool rotate)
 {
 	if (size.getWidth() == 0 || size.getHeight() == 0)
@@ -171,15 +178,7 @@ void DrawTexture2D::updateTexture2DMeshData()
 		pMesh->setVertices(4, _rectVertex.vertices, 3);
 		pMesh->setColors(4, _rectVertex.colors, 4);
 		pMesh->setUVs(4, uvs, 2);
-
-		if (getTexture() != nullptr)
-		{
-			pMesh->setIndices(6, _rectVertex.indices);
-		}
-		else
-		{
-			pMesh->setIndices(0, nullptr);
-		}
+		pMesh->setIndices(6, _rectVertex.indices);
 	}
 	this->updateMeshData();
 }

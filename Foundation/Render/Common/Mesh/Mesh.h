@@ -158,13 +158,29 @@ namespace render
 		/**
 		*	创建模型矩阵
 		*/
-		char* createModelMatrices(size_t len, uint32_t typeSize, int unitSize = 16);
+		char* createModelMatrices(size_t len, int unitSize = 16);
 		/**
 		*	获得模型矩阵
 		*/
 		const sys::MeshMemoryData& getModelMatrices() const;
 	public:
+		/**
+		*	批量绘制
+		*/
+		void setBatchDraw(bool bBatch);
+		/**
+		*	批量绘制
+		*/
+		bool isBatchDraw() const;
+	public:
+		/**
+		*	相等
+		*/
 		bool equals(const Mesh& mesh) const;
+		/**
+		*	相同布局
+		*/
+		bool sameLayout(const Mesh& mesh) const;
 	private:
 		sys::MeshDetail* _detail = nullptr;
 		/**
@@ -194,5 +210,7 @@ namespace render
 	private:// 额外数据		
 		// 模型矩阵
 		sys::MeshMemoryData _modelMatrices;
+		// 批量绘制
+		bool _bBatchDraw = false;
 	};
 }

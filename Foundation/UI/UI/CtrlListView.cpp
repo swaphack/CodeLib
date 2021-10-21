@@ -104,7 +104,10 @@ bool ui::CtrlListView::init()
 		}
 
 		_content->getActionProxy()->stopAllActions();
-		_content->getActionProxy()->runAction(render::MoveToAction::create(1.0f, pos));
+		if (_content->getPosition() != pos)
+		{
+			_content->getActionProxy()->runAction(render::MoveToAction::create(1.0f, pos));
+		}
 
 		_touchPosition = touchPoint;
 	});

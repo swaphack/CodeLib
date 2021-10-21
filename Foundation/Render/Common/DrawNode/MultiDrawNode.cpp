@@ -32,6 +32,10 @@ MultiDrawNode::~MultiDrawNode()
 	SAFE_RELEASE(_meshes);
 	SAFE_RELEASE(_fragOperator);
 	SAFE_RELEASE(_textureCache);
+	for (auto& item : _drawParameters)
+	{
+		G_DRAWCORE->removeDrawParameter(&item.second);
+	}
 }
 
 bool render::MultiDrawNode::init()
@@ -43,6 +47,10 @@ bool render::MultiDrawNode::init()
 
 	addNotifyListener(NodeNotifyType::COLOR, [this]() {
 		this->onDrawNodeColorChange();
+	});
+
+	addNotifyListener(NodeNotifyType::VISIBLE, [this]() {
+		this->initDrawParameters();
 	});
 
 
@@ -99,7 +107,6 @@ render::Mesh* render::MultiDrawNode::getMesh(const std::string& name)
 
 void render::MultiDrawNode::setTexture(const std::string& fullpath)
 {
-	_textureCache->removeTexture(MAT_TEXTURE_NAME);
 	_textureCache->addTexture(MAT_TEXTURE_NAME, fullpath);
 
 	for (auto item : _materiales->getMaterials())
@@ -110,7 +117,6 @@ void render::MultiDrawNode::setTexture(const std::string& fullpath)
 
 void render::MultiDrawNode::setTexture(const Texture* texture)
 {
-	_textureCache->removeTexture(MAT_TEXTURE_NAME);
 	_textureCache->addTexture(MAT_TEXTURE_NAME, texture);
 
 	for (auto item : _materiales->getMaterials())
@@ -121,7 +127,6 @@ void render::MultiDrawNode::setTexture(const Texture* texture)
 
 void render::MultiDrawNode::setAmbientTexture(const std::string& fullpath)
 {
-	_textureCache->removeTexture(MAT_TEXTURE_AMBIENT);
 	_textureCache->addTexture(MAT_TEXTURE_AMBIENT, fullpath);
 
 	for (auto item : _materiales->getMaterials())
@@ -132,7 +137,6 @@ void render::MultiDrawNode::setAmbientTexture(const std::string& fullpath)
 
 void render::MultiDrawNode::setDiffuseTexture(const std::string& fullpath)
 {
-	_textureCache->removeTexture(MAT_TEXTURE_DIFFUSE);
 	_textureCache->addTexture(MAT_TEXTURE_DIFFUSE, fullpath);
 
 	for (auto item : _materiales->getMaterials())
@@ -143,7 +147,6 @@ void render::MultiDrawNode::setDiffuseTexture(const std::string& fullpath)
 
 void render::MultiDrawNode::setSpecularTexture(const std::string& fullpath)
 {
-	_textureCache->removeTexture(MAT_TEXTURE_SPECULAR);
 	_textureCache->addTexture(MAT_TEXTURE_SPECULAR, fullpath);
 
 	for (auto item : _materiales->getMaterials())
@@ -154,7 +157,6 @@ void render::MultiDrawNode::setSpecularTexture(const std::string& fullpath)
 
 void render::MultiDrawNode::setAlphaTexture(const std::string& fullpath)
 {
-	_textureCache->removeTexture(MAT_TEXTURE_ALPHA);
 	_textureCache->addTexture(MAT_TEXTURE_ALPHA, fullpath);
 
 	for (auto item : _materiales->getMaterials())
@@ -165,7 +167,6 @@ void render::MultiDrawNode::setAlphaTexture(const std::string& fullpath)
 
 void render::MultiDrawNode::setBumpTexture(const std::string& fullpath)
 {
-	_textureCache->removeTexture(MAT_TEXTURE_BUMP);
 	_textureCache->addTexture(MAT_TEXTURE_BUMP, fullpath);
 
 	for (auto item : _materiales->getMaterials())
@@ -176,7 +177,6 @@ void render::MultiDrawNode::setBumpTexture(const std::string& fullpath)
 
 void render::MultiDrawNode::setNormalTexture(const std::string& fullpath)
 {
-	_textureCache->removeTexture(MAT_TEXTURE_NORMAL);
 	_textureCache->addTexture(MAT_TEXTURE_NORMAL, fullpath);
 
 	for (auto item : _materiales->getMaterials())
@@ -187,7 +187,6 @@ void render::MultiDrawNode::setNormalTexture(const std::string& fullpath)
 
 void render::MultiDrawNode::setShadowTexture(const Texture* texture)
 {
-	_textureCache->removeTexture(MAT_TEXTURE_SHADOW);
 	_textureCache->addTexture(MAT_TEXTURE_SHADOW, texture);
 
 	for (auto item : _materiales->getMaterials())
@@ -215,12 +214,6 @@ void render::MultiDrawNode::setShaderProgramFunc(const ShaderProgramFunc& func)
 void render::MultiDrawNode::optimizeDraw()
 {
 	if (!this->isVisible()) return;
-	this->initDrawParameters();
-
-	for (auto& item : _drawParameters)
-	{
-		G_DRAWCORE->addDrawParameter(&item.second);
-	}
 }
 
 void render::MultiDrawNode::beforeDraw()
@@ -308,6 +301,8 @@ void render::MultiDrawNode::updateMeshData()
 	{
 		_meshes->updateBufferData();
 	}
+
+	this->initDrawParameters();
 }
 
 void render::MultiDrawNode::initDrawParameters()
@@ -331,11 +326,12 @@ void render::MultiDrawNode::initDrawParameters()
 		auto program = pMaterial->getShaderProgram();
 		DrawParameter& drawParameter = _drawParameters[item.first];
 		drawParameter.node = this;
-		drawParameter.program = program;
 		drawParameter.mesh = pMesh;
 		drawParameter.material = pMaterial;
 		drawParameter.textureCache = _textureCache;
 		drawParameter.matrix = pMesh->getMeshDetail()->getMatrix();
+
+		G_DRAWCORE->addDrawParameter(&drawParameter);
 	}
 }
 

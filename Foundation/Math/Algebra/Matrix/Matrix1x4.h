@@ -2,7 +2,6 @@
 
 #include "Matrix.h"
 #include "../Vector/Vector3.h"
-#include "Matrix4x4.h"
 
 namespace math
 {
@@ -18,7 +17,5 @@ namespace math
 		virtual ~Matrix1x4();
 	public:
 		operator Vector3() const;
-
-		Matrix1x4 operator*(const Matrix4x4& mat) const;
 	};
 }

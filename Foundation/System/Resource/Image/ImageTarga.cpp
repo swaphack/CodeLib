@@ -1,5 +1,5 @@
 #include "ImageTarga.h"
-#include "../extensions.h"
+#include "third_party.h"
 #include "Base/macros.h"
 using namespace sys;
 

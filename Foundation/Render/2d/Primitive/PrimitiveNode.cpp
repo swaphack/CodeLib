@@ -32,9 +32,9 @@ bool render::PrimitiveNode::init()
 void render::PrimitiveNode::onPrimitiveChange()
 {
 	int nVertexCount = _vertexes.size();
-	auto pVertice = (float*)getMesh()->getMeshDetail()->createVertices(nVertexCount, sizeof(float), 3);
-	auto pColor = (float*)getMesh()->getMeshDetail()->createColors(nVertexCount, sizeof(float), 4);
-	auto indice = (uint32_t*)getMesh()->getMeshDetail()->createIndices(nVertexCount, sizeof(uint32_t), 1);
+	auto pVertice = (float*)getMesh()->getMeshDetail()->createVertices(nVertexCount, 3);
+	auto pColor = (float*)getMesh()->getMeshDetail()->createColors(nVertexCount, 4);
+	auto indice = (uint32_t*)getMesh()->getMeshDetail()->createIndices(nVertexCount, 1);
 
 	for (int i = 0; i < nVertexCount; i++)
 	{

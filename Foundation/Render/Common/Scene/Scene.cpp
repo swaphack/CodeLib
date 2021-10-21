@@ -51,11 +51,11 @@ void Scene::visit()
 
 	this->updateNode();
 
-	G_DRAWCORE->batch();
+	G_DRAWCORE->processDraw();
 
 	this->drawNode();
 
-	G_DRAWCORE->unbatch();
+	//G_DRAWCORE->unbatch();
 }
 
 void render::Scene::addChild(Node* node)

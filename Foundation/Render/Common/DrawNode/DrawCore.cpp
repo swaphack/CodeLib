@@ -23,6 +23,17 @@ render::DrawCore::DrawCore()
 
 render::DrawCore::~DrawCore()
 {
+	removeAllDrawParameters();
+}
+
+void render::DrawCore::setDrawType(DrawType type)
+{
+	_drawType = type;
+}
+
+render::DrawCore::DrawType render::DrawCore::getDrawType() const
+{
+	return _drawType;
 }
 
 void render::DrawCore::render(DrawNode* node)
@@ -38,7 +49,7 @@ void render::DrawCore::render(MultiDrawNode* node)
 {
 	if (node == nullptr) return;
 	auto pMeshes = node->getMeshes();
-	for (auto item : pMeshes->getMeshes())
+	for (const auto& item : pMeshes->getMeshes())
 	{
 		auto drawParameter = node->getDrawParameter(item.first);
 		render(drawParameter);
@@ -49,9 +60,9 @@ void render::DrawCore::render(MultiDrawNode* node)
 
 void render::DrawCore::render(DrawParameter* parameter)
 {
-	if (parameter == nullptr) return;
+	if (parameter == nullptr || parameter->material == nullptr) return;
 
-	auto program = parameter->program;
+	auto program = parameter->material->getShaderProgram();
 	auto mesh = parameter->mesh;
 	if (mesh == nullptr) return;
 	this->setTempMatrix(mesh->getMeshDetail()->getMatrix());
@@ -135,12 +146,12 @@ void render::DrawCore::endApply(DrawParameter* drawParameter)
 
 void render::DrawCore::beginApplyWithShader(DrawParameter* drawParameter)
 {
-	if (drawParameter == nullptr || drawParameter->program == nullptr || drawParameter->material == nullptr)
+	if (drawParameter == nullptr || drawParameter->material == nullptr)
 	{
 		return;
 	}
-
-	drawParameter->program->use();
+	if (drawParameter->material->getShaderProgram())
+		drawParameter->material->getShaderProgram()->use();
 	GLDebug::showError();
 	this->startUpdateShaderUniformValue(drawParameter);
 	GLDebug::showError();
@@ -152,13 +163,15 @@ void render::DrawCore::beginApplyWithShader(DrawParameter* drawParameter)
 
 void render::DrawCore::endApplyWithShader(DrawParameter* drawParameter)
 {
+	if (drawParameter == nullptr || drawParameter->material == nullptr)
+	{
+		return;
+	}
 	this->endUpdateShaderUniformValue(drawParameter);
 	this->endUpdateShaderVertexValue(drawParameter);
 
-	if (drawParameter->program)
-	{
-		drawParameter->program->unuse();
-	}
+	if (drawParameter->material->getShaderProgram())
+		drawParameter->material->getShaderProgram()->unuse();
 }
 
 void render::DrawCore::startUpdateShaderUniformValue(const DrawParameter* parameter)
@@ -176,8 +189,10 @@ void render::DrawCore::startUpdateShaderUniformValue(const DrawParameter* parame
 
 void render::DrawCore::startUpdateShaderVertexValue(const DrawParameter* parameter)
 {
-	if (parameter == nullptr || parameter->mesh == nullptr || parameter->program == nullptr
-		|| parameter->material == nullptr || parameter->material->getMaterialSetting() == nullptr)
+	if (parameter == nullptr || parameter->mesh == nullptr
+		|| parameter->material == nullptr
+		|| parameter->material->getMaterialSetting() == nullptr
+		|| parameter->material->getShaderProgram() == nullptr)
 	{
 		return;
 	}
@@ -205,23 +220,24 @@ void render::DrawCore::startUpdateShaderVertexValue(const DrawParameter* paramet
 	uint32_t nBitangentSize = bitangents.getSize();
 	uint32_t nModelMatricesSize = modelMatrices.getSize();
 
-	auto program = parameter->program;
+	auto program = parameter->material->getShaderProgram();
 
 	int nOffset = 0;
-	for (auto item : parameter->material->getMaterialSetting()->getAttribs())
+	for (const auto& item : parameter->material->getShaderProgram()->getShaderProperty()->getAttribs())
 	{
-		if (item.first == VertexDataType::POSITION)
+		VertexDataType type = (VertexDataType)item.first;
+		if (type == VertexDataType::POSITION)
 		{
 			if (nVerticeSize == 0)
 			{
 				return;
 			}
-			program->bindAttribPointer(vao, item.second, 
+			program->bindAttribPointer(vao, item.second,
 				vertices.getUnitSize(), VertexAttribPointerType::FLOAT, nOffset);
 
 			nOffset += nVerticeSize;
 		}
-		else if (item.first == VertexDataType::COLOR)
+		else if (type == VertexDataType::COLOR)
 		{
 			if (nColorSize == 0)
 			{
@@ -231,7 +247,7 @@ void render::DrawCore::startUpdateShaderVertexValue(const DrawParameter* paramet
 				colors.getUnitSize(), VertexAttribPointerType::FLOAT, nOffset);
 			nOffset += nColorSize;
 		}
-		else if (item.first == VertexDataType::UV)
+		else if (type == VertexDataType::UV)
 		{
 			if (nUVSize == 0)
 			{
@@ -241,7 +257,7 @@ void render::DrawCore::startUpdateShaderVertexValue(const DrawParameter* paramet
 				texcoords.getUnitSize(), VertexAttribPointerType::FLOAT, nOffset);
 			nOffset += nUVSize;
 		}
-		else if (item.first == VertexDataType::NORMAL)
+		else if (type == VertexDataType::NORMAL)
 		{
 			if (nNormalSize == 0)
 			{
@@ -251,7 +267,7 @@ void render::DrawCore::startUpdateShaderVertexValue(const DrawParameter* paramet
 				normals.getUnitSize(), VertexAttribPointerType::FLOAT, nOffset);
 			nOffset += nNormalSize;
 		}
-		else if (item.first == VertexDataType::TANGENT)
+		else if (type == VertexDataType::TANGENT)
 		{
 			if (nTangentSize == 0)
 			{
@@ -261,7 +277,7 @@ void render::DrawCore::startUpdateShaderVertexValue(const DrawParameter* paramet
 				tangents.getUnitSize(), VertexAttribPointerType::FLOAT, nOffset);
 			nOffset += nTangentSize;
 		}
-		else if (item.first == VertexDataType::BITANGENT)
+		else if (type == VertexDataType::BITANGENT)
 		{
 			if (nBitangentSize == 0)
 			{
@@ -271,7 +287,7 @@ void render::DrawCore::startUpdateShaderVertexValue(const DrawParameter* paramet
 				bitangents.getUnitSize(), VertexAttribPointerType::FLOAT, nOffset);
 			nOffset += nBitangentSize;
 		}
-		else if (item.first == VertexDataType::MODEL_MATRIX)
+		else if (type == VertexDataType::MODEL_MATRIX)
 		{
 			if (nModelMatricesSize == 0)
 			{
@@ -311,16 +327,18 @@ void render::DrawCore::endUpdateShaderUniformValue(const DrawParameter* paramete
 
 void render::DrawCore::endUpdateShaderVertexValue(const DrawParameter* parameter)
 {
-	if (parameter == nullptr || parameter->mesh == nullptr || parameter->program == nullptr
-		|| parameter->material == nullptr || parameter->material->getMaterialSetting() == nullptr)
+	if (parameter == nullptr || parameter->mesh == nullptr
+		|| parameter->material == nullptr
+		|| parameter->material->getShaderProgram() == nullptr
+		|| parameter->material->getMaterialSetting() == nullptr)
 	{
 		return;
 	}
 
-	auto program = parameter->program;
+	auto program = parameter->material->getShaderProgram();
 
 	auto vao = parameter->mesh->getVertexArrayObject();
-	for (auto item : parameter->material->getMaterialSetting()->getAttribs())
+	for (const auto& item : parameter->material->getShaderProgram()->getShaderProperty()->getAttribs())
 	{
 		auto pAttrib = program->getAttrib(item.second);
 		if (!pAttrib) continue;
@@ -337,8 +355,11 @@ void render::DrawCore::endUpdateShaderVertexValue(const DrawParameter* parameter
 
 void render::DrawCore::updateEnvUniformVallue(const DrawParameter* parameter)
 {
-	if (parameter == nullptr || parameter->program == nullptr || parameter->node == nullptr
-		|| parameter->material == nullptr || parameter->material->getMaterialSetting() == nullptr)
+	if (parameter == nullptr
+		|| parameter->node == nullptr
+		|| parameter->material == nullptr
+		|| parameter->material->getMaterialSetting() == nullptr
+		|| parameter->material->getShaderProgram() == nullptr)
 	{
 		return;
 	}
@@ -352,28 +373,29 @@ void render::DrawCore::updateEnvUniformVallue(const DrawParameter* parameter)
 	{
 		GLState::setLineWidth(pPrimitiveNode->getPointSize());
 	}
-	auto program = parameter->program;
+	auto program = parameter->material->getShaderProgram();
 	math::Vector3 viewPos = pCamera->getWorldMatrix().getPosition();
-	for (auto item : parameter->material->getMaterialSetting()->getEnvUniforms())
+	for (const auto& item : parameter->material->getShaderProgram()->getShaderProperty()->getEnvUniforms())
 	{
 		auto pUniform = program->getUniform(item.second);
 		if (!pUniform)
 		{
 			continue;
 		}
-		if (item.first == EnvUniformType::VIEW_POSITION)
+		EnvUniformType type = (EnvUniformType)item.first;
+		if (type == EnvUniformType::VIEW_POSITION)
 		{
 			pUniform->setValue3(1, viewPos.getValue());
 		}
-		else if (item.first == EnvUniformType::LIGHT_COUNT)
+		else if (type == EnvUniformType::LIGHT_COUNT)
 		{
 			pUniform->setValue((int)G_ENVIRONMENT->getAllLights().size());
 		}
-		else if (item.first == EnvUniformType::GAMMA)
+		else if (type == EnvUniformType::GAMMA)
 		{
 			pUniform->setValue(G_ENVIRONMENT->getGamma());
 		}
-		else if (item.first == EnvUniformType::POINT_SIZE)
+		else if (type == EnvUniformType::POINT_SIZE)
 		{
 			if (pPrimitiveNode)
 			{
@@ -385,13 +407,16 @@ void render::DrawCore::updateEnvUniformVallue(const DrawParameter* parameter)
 
 void render::DrawCore::updateMatrixUniformValue(const DrawParameter* parameter)
 {
-	if (parameter == nullptr || parameter->node == nullptr || parameter->program == nullptr
-		|| parameter->material == nullptr || parameter->material->getMaterialSetting() == nullptr)
+	if (parameter == nullptr
+		|| parameter->node == nullptr
+		|| parameter->material == nullptr
+		|| parameter->material->getMaterialSetting() == nullptr
+		|| parameter->material->getShaderProgram() == nullptr)
 	{
 		return;
 	}
 
-	auto program = parameter->program;
+	auto program = parameter->material->getShaderProgram();
 
 	auto pCamera = getCamera(parameter->node);
 	if (pCamera == nullptr)
@@ -405,26 +430,27 @@ void render::DrawCore::updateMatrixUniformValue(const DrawParameter* parameter)
 
 	math::Matrix3x3 normalMat = modelMat.getInverse().getTranspose();
 
-	for (auto item : parameter->material->getMaterialSetting()->getMatrixUniforms())
+	for (const auto& item : parameter->material->getShaderProgram()->getShaderProperty()->getMatrixUniforms())
 	{
 		auto pUniform = program->getUniform(item.second);
 		if (!pUniform)
 		{
 			continue;
 		}
-		if (item.first == MatrixUniformType::PROJECT_MATRIX)
+		MatrixUniformType type = (MatrixUniformType)item.first;
+		if (type == MatrixUniformType::PROJECT_MATRIX)
 		{
 			pUniform->setMatrix4x4(projMat);
 		}
-		else if (item.first == MatrixUniformType::VIEW_MATRIX)
+		else if (type == MatrixUniformType::VIEW_MATRIX)
 		{
 			pUniform->setMatrix4x4(viewMat);
 		}
-		else if (item.first == MatrixUniformType::MODEL_MATRIX)
+		else if (type == MatrixUniformType::MODEL_MATRIX)
 		{
 			pUniform->setMatrix4x4(modelMat);
 		}
-		else if (item.first == MatrixUniformType::NORMAL_MATRIX)
+		else if (type == MatrixUniformType::NORMAL_MATRIX)
 		{
 			pUniform->setMatrix3x3(normalMat);
 		}
@@ -435,9 +461,12 @@ void render::DrawCore::updateMatrixUniformValue(const DrawParameter* parameter)
 
 void render::DrawCore::updateMaterialUniformValue(const DrawParameter* parameter)
 {
-	if (parameter == nullptr || parameter->node == nullptr || parameter->program == nullptr
+	if (parameter == nullptr
+		|| parameter->node == nullptr
 		|| parameter->textureCache == nullptr
-		|| parameter->material == nullptr || parameter->material->getMaterialSetting() == nullptr)
+		|| parameter->material == nullptr
+		|| parameter->material->getMaterialSetting() == nullptr
+		|| parameter->material->getShaderProgram() == nullptr)
 	{
 		return;
 	}
@@ -447,34 +476,35 @@ void render::DrawCore::updateMaterialUniformValue(const DrawParameter* parameter
 	{
 		return;
 	}
-	auto program = parameter->program;
+	auto program = parameter->material->getShaderProgram();
 	auto textureCache = parameter->textureCache;
 
 	GLDebug::showError();
-	for (auto item : parameter->material->getMaterialSetting()->getMaterialUniforms())
+	for (const auto& item : parameter->material->getShaderProgram()->getShaderProperty()->getMaterialUniforms())
 	{
 		auto pUniform = program->getUniform(item.second);
 		if (!pUniform)
 		{
 			continue;
 		}
-		if (item.first == MaterialUniformType::MATERIAL_EMISSION)
+		MaterialUniformType type = (MaterialUniformType)item.first;
+		if (type == MaterialUniformType::MATERIAL_EMISSION)
 		{
 			pUniform->setValue4(1, pDetail->getEmission());
 		}
-		else if (item.first == MaterialUniformType::MATERIAL_COLOR_AMBIENT)
+		else if (type == MaterialUniformType::MATERIAL_COLOR_AMBIENT)
 		{
 			pUniform->setValue4(1, pDetail->getAmbient());
 		}
-		else if (item.first == MaterialUniformType::MATERIAL_COLOR_DIFFUSE)
+		else if (type == MaterialUniformType::MATERIAL_COLOR_DIFFUSE)
 		{
 			pUniform->setValue4(1, pDetail->getDiffuse());
 		}
-		else if (item.first == MaterialUniformType::MATERIAL_COLOR_SPECULAR)
+		else if (type == MaterialUniformType::MATERIAL_COLOR_SPECULAR)
 		{
 			pUniform->setValue4(1, pDetail->getSpecular());
 		}
-		else if (item.first == MaterialUniformType::MATERIAL_TEXTURE)
+		else if (type == MaterialUniformType::MATERIAL_TEXTURE)
 		{
 			auto pTexture = textureCache->getTexture(pDetail->getAmbientTextureMap());
 			if (pTexture == nullptr || !pTexture->isValid())
@@ -490,7 +520,7 @@ void render::DrawCore::updateMaterialUniformValue(const DrawParameter* parameter
 			}
 			GLDebug::showError();
 		}
-		else if (item.first == MaterialUniformType::MATERIAL_TEXTURE_DIFFUSE)
+		else if (type == MaterialUniformType::MATERIAL_TEXTURE_DIFFUSE)
 		{
 			auto pTexture = textureCache->getTexture(pDetail->getDiffuseTextureMap());
 			if (pTexture == nullptr || !pTexture->isValid())
@@ -506,7 +536,7 @@ void render::DrawCore::updateMaterialUniformValue(const DrawParameter* parameter
 			}
 			GLDebug::showError();
 		}
-		else if (item.first == MaterialUniformType::MATERIAL_TEXTURE_SPECULAR)
+		else if (type == MaterialUniformType::MATERIAL_TEXTURE_SPECULAR)
 		{
 			auto pTexture = textureCache->getTexture(pDetail->getSpecularTextureMap());
 			if (pTexture == nullptr || !pTexture->isValid())
@@ -522,7 +552,7 @@ void render::DrawCore::updateMaterialUniformValue(const DrawParameter* parameter
 			}
 			GLDebug::showError();
 		}
-		else if (item.first == MaterialUniformType::MATERIAL_TEXTURE_ALPHA)
+		else if (type == MaterialUniformType::MATERIAL_TEXTURE_ALPHA)
 		{
 			auto pTexture = textureCache->getTexture(pDetail->getAlphaTextureMap());
 			if (pTexture == nullptr || !pTexture->isValid())
@@ -538,7 +568,7 @@ void render::DrawCore::updateMaterialUniformValue(const DrawParameter* parameter
 			}
 			GLDebug::showError();
 		}
-		else if (item.first == MaterialUniformType::MATERIAL_TEXTURE_BUMP)
+		else if (type == MaterialUniformType::MATERIAL_TEXTURE_BUMP)
 		{
 			auto pTexture = textureCache->getTexture(pDetail->getBumpTextureMap());
 			if (pTexture == nullptr || !pTexture->isValid())
@@ -554,7 +584,7 @@ void render::DrawCore::updateMaterialUniformValue(const DrawParameter* parameter
 			}
 			GLDebug::showError();
 		}
-		else if (item.first == MaterialUniformType::MATERIAL_TEXTURE_NORMAL)
+		else if (type == MaterialUniformType::MATERIAL_TEXTURE_NORMAL)
 		{
 			auto pTexture = textureCache->getTexture(pDetail->getNormalTextureMap());
 			if (pTexture == nullptr || !pTexture->isValid())
@@ -570,7 +600,7 @@ void render::DrawCore::updateMaterialUniformValue(const DrawParameter* parameter
 			}
 			GLDebug::showError();
 		}
-		else if (item.first == MaterialUniformType::MATERIAL_TEXTURE_SHADOW)
+		else if (type == MaterialUniformType::MATERIAL_TEXTURE_SHADOW)
 		{
 			auto pTexture = textureCache->getTexture(pDetail->getShadowTextureMap());
 			if (pTexture == nullptr || !pTexture->isValid())
@@ -586,11 +616,11 @@ void render::DrawCore::updateMaterialUniformValue(const DrawParameter* parameter
 			}
 			GLDebug::showError();
 		}
-		else if (item.first == MaterialUniformType::MATERIAL_SHININESS)
+		else if (type == MaterialUniformType::MATERIAL_SHININESS)
 		{
 			pUniform->setValue(pDetail->getSpecularShiness());
 		}
-		else if (item.first == MaterialUniformType::MATERIAL_STRENGTH)
+		else if (type == MaterialUniformType::MATERIAL_STRENGTH)
 		{
 			pUniform->setValue(pDetail->getSpecularStrength());
 		}
@@ -599,9 +629,11 @@ void render::DrawCore::updateMaterialUniformValue(const DrawParameter* parameter
 
 void render::DrawCore::updateTexturesUnifromValue(const DrawParameter* parameter)
 {
-	if (parameter->program == nullptr
+	if (parameter == nullptr
 		|| parameter->textureCache == nullptr
-		|| parameter->material == nullptr || parameter->material->getMaterialSetting() == nullptr)
+		|| parameter->material == nullptr
+		|| parameter->material->getMaterialSetting() == nullptr
+		|| parameter->material->getShaderProgram() == nullptr)
 	{
 		return;
 	}
@@ -611,15 +643,16 @@ void render::DrawCore::updateTexturesUnifromValue(const DrawParameter* parameter
 	{
 		return;
 	}
-	auto program = parameter->program;
+	auto program = parameter->material->getShaderProgram();
 	auto textureCache = parameter->textureCache;
 
-	for (auto item : parameter->material->getMaterialSetting()->getTextureUniforms())
+	for (const auto& item : parameter->material->getShaderProgram()->getShaderProperty()->getTextureUniforms())
 	{
 		auto pUniform = program->getUniform(item.second);
+		TextureUniformType textureID = (TextureUniformType)item.first;
 		if (!pUniform)
 		{
-			if (item.first == TextureUniformType::TEXTURE0)
+			if (textureID == TextureUniformType::TEXTURE0)
 			{
 				return;
 			}
@@ -628,7 +661,6 @@ void render::DrawCore::updateTexturesUnifromValue(const DrawParameter* parameter
 				continue;
 			}
 		}
-		TextureUniformType textureID = item.first;
 		if (textureID == TextureUniformType::TEXTURE0)
 		{
 			auto pTexture = textureCache->getTexture(pDetail->getAmbientTextureMap());
@@ -741,9 +773,11 @@ void render::DrawCore::updateTexturesUnifromValue(const DrawParameter* parameter
 
 void render::DrawCore::releaseMaterialUniformValue(const DrawParameter* parameter)
 {
-	if (parameter == nullptr || parameter->program == nullptr
+	if (parameter == nullptr
 		|| parameter->textureCache == nullptr
-		|| parameter->material == nullptr || parameter->material->getMaterialSetting() == nullptr)
+		|| parameter->material == nullptr
+		|| parameter->material->getMaterialSetting() == nullptr
+		|| parameter->material->getShaderProgram() == nullptr)
 	{
 		return;
 	}
@@ -753,16 +787,17 @@ void render::DrawCore::releaseMaterialUniformValue(const DrawParameter* paramete
 	{
 		return;
 	}
-	auto program = parameter->program;
+	auto program = parameter->material->getShaderProgram();
 	auto textureCache = parameter->textureCache;
-	for (auto item : parameter->material->getMaterialSetting()->getMaterialUniforms())
+	for (const auto& item : parameter->material->getShaderProgram()->getShaderProperty()->getMaterialUniforms())
 	{
 		auto pUniform = program->getUniform(item.second);
 		if (!pUniform)
 		{
 			continue;
 		}
-		if (item.first == MaterialUniformType::MATERIAL_TEXTURE)
+		MaterialUniformType type = (MaterialUniformType)item.first;
+		if (type == MaterialUniformType::MATERIAL_TEXTURE)
 		{
 			auto pTexture = textureCache->getTexture(pDetail->getAmbientTextureMap());
 			if (pTexture)
@@ -773,7 +808,7 @@ void render::DrawCore::releaseMaterialUniformValue(const DrawParameter* paramete
 
 			GLDebug::showError();
 		}
-		else if (item.first == MaterialUniformType::MATERIAL_TEXTURE_DIFFUSE)
+		else if (type == MaterialUniformType::MATERIAL_TEXTURE_DIFFUSE)
 		{
 			auto pTexture = textureCache->getTexture(pDetail->getDiffuseTextureMap());
 			if (pTexture)
@@ -784,7 +819,7 @@ void render::DrawCore::releaseMaterialUniformValue(const DrawParameter* paramete
 
 			GLDebug::showError();
 		}
-		else if (item.first == MaterialUniformType::MATERIAL_TEXTURE_SPECULAR)
+		else if (type == MaterialUniformType::MATERIAL_TEXTURE_SPECULAR)
 		{
 			auto pTexture = textureCache->getTexture(pDetail->getSpecularTextureMap());
 			if (pTexture)
@@ -794,7 +829,7 @@ void render::DrawCore::releaseMaterialUniformValue(const DrawParameter* paramete
 			}
 			GLDebug::showError();
 		}
-		else if (item.first == MaterialUniformType::MATERIAL_TEXTURE_ALPHA)
+		else if (type == MaterialUniformType::MATERIAL_TEXTURE_ALPHA)
 		{
 			auto pTexture = textureCache->getTexture(pDetail->getAlphaTextureMap());
 			if (pTexture)
@@ -804,7 +839,7 @@ void render::DrawCore::releaseMaterialUniformValue(const DrawParameter* paramete
 			}
 			GLDebug::showError();
 		}
-		else if (item.first == MaterialUniformType::MATERIAL_TEXTURE_BUMP)
+		else if (type == MaterialUniformType::MATERIAL_TEXTURE_BUMP)
 		{
 			auto pTexture = textureCache->getTexture(pDetail->getBumpTextureMap());
 			if (pTexture)
@@ -814,7 +849,7 @@ void render::DrawCore::releaseMaterialUniformValue(const DrawParameter* paramete
 			}
 			GLDebug::showError();
 		}
-		else if (item.first == MaterialUniformType::MATERIAL_TEXTURE_NORMAL)
+		else if (type == MaterialUniformType::MATERIAL_TEXTURE_NORMAL)
 		{
 			auto pTexture = textureCache->getTexture(pDetail->getNormalTextureMap());
 			if (pTexture)
@@ -824,7 +859,7 @@ void render::DrawCore::releaseMaterialUniformValue(const DrawParameter* paramete
 			}
 			GLDebug::showError();
 		}
-		else if (item.first == MaterialUniformType::MATERIAL_TEXTURE_SHADOW)
+		else if (type == MaterialUniformType::MATERIAL_TEXTURE_SHADOW)
 		{
 			auto pTexture = textureCache->getTexture(pDetail->getShadowTextureMap());
 			if (pTexture)
@@ -842,9 +877,11 @@ void render::DrawCore::releaseMaterialUniformValue(const DrawParameter* paramete
 
 void render::DrawCore::releaseTextureUniformValue(const DrawParameter* parameter)
 {
-	if (parameter == nullptr || parameter->program == nullptr
+	if (parameter == nullptr
 		|| parameter->textureCache == nullptr
-		|| parameter->material == nullptr || parameter->material->getMaterialSetting() == nullptr)
+		|| parameter->material == nullptr
+		|| parameter->material->getMaterialSetting() == nullptr
+		|| parameter->material->getShaderProgram() == nullptr)
 	{
 		return;
 	}
@@ -854,16 +891,17 @@ void render::DrawCore::releaseTextureUniformValue(const DrawParameter* parameter
 	{
 		return;
 	}
-	auto program = parameter->program;
+	auto program = parameter->material->getShaderProgram();
 	auto textureCache = parameter->textureCache;
-	for (auto item : parameter->material->getMaterialSetting()->getTextureUniforms())
+	for (const auto& item : parameter->material->getShaderProgram()->getShaderProperty()->getTextureUniforms())
 	{
 		auto pUniform = program->getUniform(item.second);
 		if (!pUniform)
 		{
 			continue;
 		}
-		if (item.first == TextureUniformType::TEXTURE0)
+		TextureUniformType type = (TextureUniformType)item.first;
+		if (type == TextureUniformType::TEXTURE0)
 		{
 			auto pTexture = textureCache->getTexture(pDetail->getAmbientTextureMap());
 			if (pTexture)
@@ -874,7 +912,7 @@ void render::DrawCore::releaseTextureUniformValue(const DrawParameter* parameter
 
 			GLDebug::showError();
 		}
-		else if (item.first == TextureUniformType::TEXTURE1)
+		else if (type == TextureUniformType::TEXTURE1)
 		{
 			auto pTexture = textureCache->getTexture(pDetail->getDiffuseTextureMap());
 			if (pTexture)
@@ -885,7 +923,7 @@ void render::DrawCore::releaseTextureUniformValue(const DrawParameter* parameter
 
 			GLDebug::showError();
 		}
-		else if (item.first == TextureUniformType::TEXTURE2)
+		else if (type == TextureUniformType::TEXTURE2)
 		{
 			auto pTexture = textureCache->getTexture(pDetail->getSpecularTextureMap());
 			if (pTexture)
@@ -924,8 +962,11 @@ void render::DrawCore::applyLightShader(const DrawParameter* parameter)
 
 void render::DrawCore::updateNearestLightUniformValue(const DrawParameter* parameter)
 {
-	if (parameter == nullptr || parameter->node == nullptr || parameter->program == nullptr
-		|| parameter->material == nullptr || parameter->material->getMaterialSetting() == nullptr)
+	if (parameter == nullptr
+		|| parameter->node == nullptr
+		|| parameter->material == nullptr
+		|| parameter->material->getMaterialSetting() == nullptr
+		|| parameter->material->getShaderProgram() == nullptr)
 	{
 		return;
 	}
@@ -945,7 +986,7 @@ void render::DrawCore::updateNearestLightUniformValue(const DrawParameter* param
 	float fPos = -1;
 	Light* pLight = nullptr;
 	const auto& lights = G_ENVIRONMENT->getAllLights();
-	for (auto& item : lights)
+	for (const auto& item : lights)
 	{
 		auto pTempLight = item.second;
 		if (pTempLight)
@@ -977,20 +1018,20 @@ void render::DrawCore::updateNearestLightUniformValue(const DrawParameter* param
 	{
 		bSupportShadow = parameter->node->as<LightProtocol>()->isCastShadow();
 	}
-	auto program = parameter->program;
-	for (auto item : parameter->material->getMaterialSetting()->getSingleLightUniforms())
+	auto program = parameter->material->getShaderProgram();
+	for (const auto& item : parameter->material->getShaderProgram()->getShaderProperty()->getSingleLightUniforms())
 	{
 		auto pUniform = program->getUniform(item.second);
 		if (!pUniform)
 		{
 			continue;
 		}
-
-		if (item.first == SingleLightUniformType::LIGHT_ENABLED)
+		SingleLightUniformType type = (SingleLightUniformType)item.first;
+		if (type == SingleLightUniformType::LIGHT_ENABLED)
 		{
 			pUniform->setValue(1);
 		}
-		else if (item.first == SingleLightUniformType::LIGHT_LOCAL)
+		else if (type == SingleLightUniformType::LIGHT_LOCAL)
 		{
 			if (pLight->is<PointLight>() || pLight->is<SpotLight>())
 			{
@@ -1001,15 +1042,15 @@ void render::DrawCore::updateNearestLightUniformValue(const DrawParameter* param
 				pUniform->setValue(0);
 			}
 		}
-		else if (item.first == SingleLightUniformType::LIGHT_SPOT)
+		else if (type == SingleLightUniformType::LIGHT_SPOT)
 		{
 			pUniform->setValue(pLight->is<SpotLight>() ? 1 : 0);
 		}
-		else if (item.first == SingleLightUniformType::LIGHT_POSITION)
+		else if (type == SingleLightUniformType::LIGHT_POSITION)
 		{
 			pUniform->setValue3(1, lightPos.getValue());
 		}
-		else if (item.first == SingleLightUniformType::LIGHT_DIRECTION)
+		else if (type == SingleLightUniformType::LIGHT_DIRECTION)
 		{
 			auto pPointLight = pLight->as<PointLight>();
 			if (pPointLight)
@@ -1030,19 +1071,19 @@ void render::DrawCore::updateNearestLightUniformValue(const DrawParameter* param
 				}
 			}
 		}
-		else if (item.first == SingleLightUniformType::LIGHT_HALF_VECTOR)
+		else if (type == SingleLightUniformType::LIGHT_HALF_VECTOR)
 		{
 			pUniform->setValue3(1, halfVector.getValue());
 		}
-		else if (item.first == SingleLightUniformType::LIGHT_COLOR)
+		else if (type == SingleLightUniformType::LIGHT_COLOR)
 		{
 			pUniform->setValue4(1, pLight->getColor());
 		}
-		else if (item.first == SingleLightUniformType::LIGHT_AMBIENT)
+		else if (type == SingleLightUniformType::LIGHT_AMBIENT)
 		{
 			pUniform->setValue4(1, pLight->getAmbient());
 		}
-		else if (item.first == SingleLightUniformType::LIGHT_SPOT_EXPONENT)
+		else if (type == SingleLightUniformType::LIGHT_SPOT_EXPONENT)
 		{
 			auto pSpotLight = pLight->as<SpotLight>();
 			if (pSpotLight)
@@ -1050,7 +1091,7 @@ void render::DrawCore::updateNearestLightUniformValue(const DrawParameter* param
 				pUniform->setValue(pSpotLight->getExponent());
 			}
 		}
-		else if (item.first == SingleLightUniformType::LIGHT_SPOT_COST_CUTOFF)
+		else if (type == SingleLightUniformType::LIGHT_SPOT_COST_CUTOFF)
 		{
 			auto pSpotLight = pLight->as<SpotLight>();
 			if (pSpotLight)
@@ -1058,7 +1099,7 @@ void render::DrawCore::updateNearestLightUniformValue(const DrawParameter* param
 				pUniform->setValue(pSpotLight->getCutOff());
 			}
 		}
-		else if (item.first == SingleLightUniformType::LIGHT_CONSTANT_ATTENUATION)
+		else if (type == SingleLightUniformType::LIGHT_CONSTANT_ATTENUATION)
 		{
 			auto pPointLight = pLight->as<PointLight>();
 			if (pPointLight)
@@ -1066,7 +1107,7 @@ void render::DrawCore::updateNearestLightUniformValue(const DrawParameter* param
 				pUniform->setValue(pPointLight->getConstantAttenuation());
 			}
 		}
-		else if (item.first == SingleLightUniformType::LIGHT_LINEAR_ATTENUATION)
+		else if (type == SingleLightUniformType::LIGHT_LINEAR_ATTENUATION)
 		{
 			auto pPointLight = pLight->as<PointLight>();
 			if (pPointLight)
@@ -1074,7 +1115,7 @@ void render::DrawCore::updateNearestLightUniformValue(const DrawParameter* param
 				pUniform->setValue(pPointLight->getLinearAttenuation());
 			}
 		}
-		else if (item.first == SingleLightUniformType::LIGHT_QUADRATIC_ATTENUATION)
+		else if (type == SingleLightUniformType::LIGHT_QUADRATIC_ATTENUATION)
 		{
 			auto pPointLight = pLight->as<PointLight>();
 			if (pPointLight)
@@ -1082,7 +1123,7 @@ void render::DrawCore::updateNearestLightUniformValue(const DrawParameter* param
 				pUniform->setValue(pPointLight->getQuadraticAttenuation());
 			}
 		}
-		else if (item.first == SingleLightUniformType::LIGHT_SPACE_MATRIX)
+		else if (type == SingleLightUniformType::LIGHT_SPACE_MATRIX)
 		{
 			if (bSupportShadow)
 			{
@@ -1101,8 +1142,11 @@ void render::DrawCore::updateNearestLightUniformValue(const DrawParameter* param
 
 void render::DrawCore::updateAllLightsUniformValue(const DrawParameter* parameter)
 {
-	if (parameter == nullptr || parameter->node == nullptr || parameter->program == nullptr
-		|| parameter->material == nullptr || parameter->material->getMaterialSetting() == nullptr)
+	if (parameter == nullptr
+		|| parameter->node == nullptr
+		|| parameter->material == nullptr
+		|| parameter->material->getMaterialSetting() == nullptr
+		|| parameter->material->getShaderProgram() == nullptr)
 	{
 		return;
 	}
@@ -1126,9 +1170,9 @@ void render::DrawCore::updateAllLightsUniformValue(const DrawParameter* paramete
 	{
 		bSupportShadow = parameter->node->as<LightProtocol>()->isCastShadow();
 	}
-	auto program = parameter->program;
+	auto program = parameter->material->getShaderProgram();
 	math::Vector3 viewPos = pCamera->getWorldMatrix().getPosition();
-	for (auto light : mapLights)
+	for (const auto& light : mapLights)
 	{
 		auto pLight = light.second;
 		int index = light.first;
@@ -1140,19 +1184,20 @@ void render::DrawCore::updateAllLightsUniformValue(const DrawParameter* paramete
 		math::Vector3 lightDirection = lightPos - nodePos;
 		math::Vector3 halfVector = lightDirection + viewDirection;
 
-		for (auto item : parameter->material->getMaterialSetting()->getMultiLightsUniforms())
+		for (const auto& item : parameter->material->getShaderProgram()->getShaderProperty()->getMultiLightsUniforms())
 		{
 			std::string text = getCString(item.second.c_str(), index);
 			auto pUniform = program->getUniform(text);
+			MultiLightsUniformType type = (MultiLightsUniformType)item.first;
 			if (!pUniform)
 			{
 				continue;
 			}
-			else if (item.first == MultiLightsUniformType::MULTI_LIGHT_ENABLED)
+			else if (type == MultiLightsUniformType::MULTI_LIGHT_ENABLED)
 			{
 				pUniform->setValue(1);
 			}
-			else if (item.first == MultiLightsUniformType::MULTI_LIGHT_LOCAL)
+			else if (type == MultiLightsUniformType::MULTI_LIGHT_LOCAL)
 			{
 				if (pLight->is<PointLight>() || pLight->is<SpotLight>())
 				{
@@ -1163,15 +1208,15 @@ void render::DrawCore::updateAllLightsUniformValue(const DrawParameter* paramete
 					pUniform->setValue(0);
 				}
 			}
-			else if (item.first == MultiLightsUniformType::MULTI_LIGHT_SPOT)
+			else if (type == MultiLightsUniformType::MULTI_LIGHT_SPOT)
 			{
 				pUniform->setValue(pLight->is<SpotLight>() ? 1 : 0);
 			}
-			else if (item.first == MultiLightsUniformType::MULTI_LIGHT_POSITION)
+			else if (type == MultiLightsUniformType::MULTI_LIGHT_POSITION)
 			{
 				pUniform->setValue3(1, lightPos.getValue());
 			}
-			else if (item.first == MultiLightsUniformType::MULTI_LIGHT_DIRECTION)
+			else if (type == MultiLightsUniformType::MULTI_LIGHT_DIRECTION)
 			{
 				auto pPointLight = pLight->as<PointLight>();
 				if (pPointLight)
@@ -1192,19 +1237,19 @@ void render::DrawCore::updateAllLightsUniformValue(const DrawParameter* paramete
 					}
 				}
 			}
-			else if (item.first == MultiLightsUniformType::MULTI_LIGHT_HALF_VECTOR)
+			else if (type == MultiLightsUniformType::MULTI_LIGHT_HALF_VECTOR)
 			{
 				pUniform->setValue3(1, halfVector.getValue());
 			}
-			else if (item.first == MultiLightsUniformType::MULTI_LIGHT_COLOR)
+			else if (type == MultiLightsUniformType::MULTI_LIGHT_COLOR)
 			{
 				pUniform->setValue4(1, pLight->getColor());
 			}
-			else if (item.first == MultiLightsUniformType::MULTI_LIGHT_AMBIENT)
+			else if (type == MultiLightsUniformType::MULTI_LIGHT_AMBIENT)
 			{
 				pUniform->setValue4(1, pLight->getAmbient());
 			}
-			else if (item.first == MultiLightsUniformType::MULTI_LIGHT_SPOT_EXPONENT)
+			else if (type == MultiLightsUniformType::MULTI_LIGHT_SPOT_EXPONENT)
 			{
 				auto pSpotLight = pLight->as<SpotLight>();
 				if (pSpotLight)
@@ -1212,7 +1257,7 @@ void render::DrawCore::updateAllLightsUniformValue(const DrawParameter* paramete
 					pUniform->setValue(pSpotLight->getExponent());
 				}
 			}
-			else if (item.first == MultiLightsUniformType::MULTI_LIGHT_SPOT_COST_CUTOFF)
+			else if (type == MultiLightsUniformType::MULTI_LIGHT_SPOT_COST_CUTOFF)
 			{
 				auto pSpotLight = pLight->as<SpotLight>();
 				if (pSpotLight)
@@ -1220,7 +1265,7 @@ void render::DrawCore::updateAllLightsUniformValue(const DrawParameter* paramete
 					pUniform->setValue(pSpotLight->getCutOff());
 				}
 			}
-			else if (item.first == MultiLightsUniformType::MULTI_LIGHT_CONSTANT_ATTENUATION)
+			else if (type == MultiLightsUniformType::MULTI_LIGHT_CONSTANT_ATTENUATION)
 			{
 				auto pPointLight = pLight->as<PointLight>();
 				if (pPointLight)
@@ -1228,7 +1273,7 @@ void render::DrawCore::updateAllLightsUniformValue(const DrawParameter* paramete
 					pUniform->setValue(pPointLight->getConstantAttenuation());
 				}
 			}
-			else if (item.first == MultiLightsUniformType::MULTI_LIGHT_LINEAR_ATTENUATION)
+			else if (type == MultiLightsUniformType::MULTI_LIGHT_LINEAR_ATTENUATION)
 			{
 				auto pPointLight = pLight->as<PointLight>();
 				if (pPointLight)
@@ -1236,7 +1281,7 @@ void render::DrawCore::updateAllLightsUniformValue(const DrawParameter* paramete
 					pUniform->setValue(pPointLight->getLinearAttenuation());
 				}
 			}
-			else if (item.first == MultiLightsUniformType::MULTI_LIGHT_QUADRATIC_ATTENUATION)
+			else if (type == MultiLightsUniformType::MULTI_LIGHT_QUADRATIC_ATTENUATION)
 			{
 				auto pPointLight = pLight->as<PointLight>();
 				if (pPointLight)
@@ -1244,7 +1289,7 @@ void render::DrawCore::updateAllLightsUniformValue(const DrawParameter* paramete
 					pUniform->setValue(pPointLight->getQuadraticAttenuation());
 				}
 			}
-			else if (item.first == MultiLightsUniformType::MULTI_LIGHT_SPACE_MATRIX)
+			else if (type == MultiLightsUniformType::MULTI_LIGHT_SPACE_MATRIX)
 			{
 				if (bSupportShadow)
 				{
@@ -1264,8 +1309,10 @@ void render::DrawCore::updateAllLightsUniformValue(const DrawParameter* paramete
 
 void render::DrawCore::updateSelfDefinedUniformValue(const DrawParameter* parameter)
 {
-	if (parameter == nullptr || parameter->program == nullptr
-		|| parameter->material == nullptr || parameter->material->getMaterialSetting() == nullptr)
+	if (parameter == nullptr
+		|| parameter->material == nullptr
+		|| parameter->material->getMaterialSetting() == nullptr
+		|| parameter->material->getShaderProgram() == nullptr)
 	{
 		return;
 	}
@@ -1275,8 +1322,8 @@ void render::DrawCore::updateSelfDefinedUniformValue(const DrawParameter* parame
 	{
 		return;
 	}
-	auto program = parameter->program;
-	for (auto item : parameter->material->getMaterialSetting()->getSelfDefinedUniforms())
+	auto program = parameter->material->getShaderProgram();
+	for (const auto& item : parameter->material->getMaterialSetting()->getSelfDefinedUniforms())
 	{
 		auto pUniform = program->getUniform(item.first);
 		if (!pUniform)
@@ -1384,110 +1431,267 @@ void render::DrawCore::addDrawParameter(DrawParameter* parameter)
 	{
 		return;
 	}
-
-	bool bFind = false;
-	for (auto& item : _batchDrawParameters)
+	if (parameter->material->getShaderProgram() == nullptr)
 	{
-		if (isSameObject(item.root, parameter))
+		return;
+	}
+	if (getDrawType() == DrawType::Default)
+	{
+		return;
+	}
+	if (parameter->data != nullptr)
+	{
+		auto bdp = (BatchDrawParameter*)parameter->data;
+		bdp->redraw = true;
+		_redrawParameters.insert(bdp);
+		return;
+	}
+	if (getDrawType() == DrawType::Batch)
+	{
+		this->addBatchDrawParameter(parameter);
+	}
+	else if (getDrawType() == DrawType::Pack)
+	{
+		this->addPackDrawParameter(parameter);
+	}
+}
+
+void render::DrawCore::removeDrawParameter(DrawParameter* parameter)
+{
+	if (parameter == nullptr)
+	{
+		return;
+	}
+
+	if (parameter == nullptr)
+	{
+		return;
+	}
+	if (parameter->data == nullptr)
+	{
+		return;
+	}
+
+	BatchDrawParameter* bdp = ((BatchDrawParameter*)parameter->data);
+	bdp->remove(parameter);
+	bdp->redraw = true;
+
+	if (bdp->root == nullptr)
+	{
+		auto it0 = std::find(_batchDrawParameters.begin(), _batchDrawParameters.end(), bdp);
+		if (it0 != _batchDrawParameters.end())
 		{
-			item.parameters.push_back(parameter);
-			bFind = true;
-			break;
+			_batchDrawParameters.erase(it0);
 		}
-	}
-
-	if (!bFind)
-	{
-		_batchDrawParameters.push_back(BatchDrawParameter(parameter));
-	}
-
-	bFind = false;
-	for (auto& item : _packDrawParameters)
-	{
-		if (isSameMaterial(item.root, parameter))
+		auto it1 = std::find(_packDrawParameters.begin(), _packDrawParameters.end(), bdp);
+		if (it1 != _packDrawParameters.end())
 		{
-			item.parameters.push_back(parameter);
-			bFind = true;
-			break;
+			_packDrawParameters.erase(it1);
 		}
+
+		SAFE_DELETE(bdp);
+		_redrawParameters.erase(bdp);
 	}
-	if (!bFind)
+	else
 	{
-		_packDrawParameters.push_back(BatchDrawParameter(parameter));
+		_redrawParameters.insert(bdp);
 	}
 }
 
 void render::DrawCore::removeAllDrawParameters()
 {
+	for (auto& item : _batchDrawParameters)
+	{
+		SAFE_DELETE(item);
+	}
+	for (auto& item : _packDrawParameters)
+	{
+		SAFE_DELETE(item);
+	}
 	_batchDrawParameters.clear();
 	_packDrawParameters.clear();
 }
 
-void render::DrawCore::batch()
+void render::DrawCore::addBatchDrawParameter(DrawParameter* parameter)
 {
-	int unitSize = sizeof(float);
-	size_t matrixSize = 16 * sizeof(float);
+	if (parameter == nullptr)
+	{
+		return;
+	}
+
+	bool bFind = false;
 	for (auto& item : _batchDrawParameters)
 	{
-		int count = item.parameters.size();
-		auto root = item.root;
-		float* ptr = (float*)root->mesh->createModelMatrices(count, unitSize, 16);
-		for (int i = 0; i < count; i++)
+		if (isSameObject(item->root, parameter))
 		{
-			auto node = item.parameters[i]->node;
-			memcpy(ptr + i * 16, node->getWorldMatrix().getValue(), matrixSize);
-			node->setSkipDraw(true);
+			item->add(parameter);
+			bFind = true;
+			break;
 		}
-		root->mesh->forceUpdateMeshData();
-		root->node->setSkipDraw(false);
 	}
-	/*
-	for (auto& item : _packDrawParameters)
-	{
-		int count = item.parameters.size();
-		if (count == 1) continue;
 
-		auto root = item.root;
-		float* ptr = (float*)root->mesh->createModelMatrices(count, unitSize, 16);
-		for (int i = 0; i < count; i++)
-		{
-			auto node = item.parameters[i]->node;
-			memcpy(ptr + i * 16, node->getWorldMatrix().getValue(), matrixSize);
-			node->setSkipDraw(true);
-		}
-		root->mesh->forceUpdateMeshData();
-		root->node->setSkipDraw(false);
+	if (!bFind)
+	{
+		_batchDrawParameters.push_back(new BatchDrawParameter(parameter));
 	}
-	*/
+
+	_redrawParameters.insert((BatchDrawParameter*)parameter->data);
 }
 
-void render::DrawCore::drawBatch()
+void render::DrawCore::addPackDrawParameter(DrawParameter* parameter)
 {
+	if (parameter == nullptr) return;
+	bool bFind = false;
+	for (auto& item : _packDrawParameters)
+	{
+		if (isSameMaterial(item->root, parameter))
+		{
+			item->add(parameter);
+			bFind = true;
+			break;
+		}
+	}
+	if (!bFind)
+	{
+		_packDrawParameters.push_back(new BatchDrawParameter(parameter));
+	}
 
+	_redrawParameters.insert((BatchDrawParameter*)parameter->data);
+}
+
+void render::DrawCore::processDraw()
+{
+	if (getDrawType() == DrawType::Default)
+	{
+		return;
+	}
+	if (_redrawParameters.size() == 0) 
+		return;
+
+	if (getDrawType() == DrawType::Batch)
+	{
+		this->processBatchDraw();
+	}
+	else if (getDrawType() == DrawType::Pack)
+	{
+		this->processPackDraw();
+	}
+
+	_redrawParameters.clear();
+}
+
+void render::DrawCore::processBatchDraw()
+{
+	int unitSize = sizeof(float);
+	size_t matrixSize = 16 * unitSize;
+	for (const auto& item : _redrawParameters)
+	{
+		if (item->redraw == false) continue;
+		item->redraw = false;
+		auto root = item->root;
+
+		int count = 0;
+		
+		for (int i = 0; i < item->children.size(); i++)
+		{
+			auto node = item->children[i]->node;
+			if (node->isRecursiveVisible())
+			{
+				count++;
+			}
+		}
+
+		float* ptr = (float*)root->mesh->createModelMatrices(count, 16);
+		for (int i = 0; i < count; i++)
+		{
+			auto node = item->children[i]->node;
+			memcpy(ptr + i * 16, node->getWorldMatrix().getValue(), matrixSize);
+			node->setSkipDraw(true);
+		}
+		root->mesh->forceUpdateMeshData();
+		root->mesh->setBatchDraw(true);
+		root->node->setSkipDraw(false);
+	}
+}
+
+void render::DrawCore::processPackDraw()
+{
+	for (const auto& item : _redrawParameters)
+	{
+		if (item->redraw == false) continue;
+		item->redraw = false;
+
+		int count = item->children.size();
+
+		auto root = item->root;
+		if (item->tempMeshDtail)
+		{
+			root->mesh->setMeshDetail(item->tempMeshDtail);
+			root->mesh->forceUpdateMeshData();
+			SAFE_RELEASE(item->tempMeshDtail);
+			item->tempMeshDtail = nullptr;
+		}
+		auto pMeshDetail = CREATE_OBJECT(sys::MeshDetail);
+		for (int i = 0; i < count; i++)
+		{
+			auto node = item->children[i]->node;
+			node->setSkipDraw(true);
+		}
+		if (item->packMeshes(pMeshDetail))
+		{
+			item->tempMeshDtail = root->mesh->getMeshDetail();
+			SAFE_RETAIN(item->tempMeshDtail);
+			root->mesh->setMeshDetail(pMeshDetail);
+			root->mesh->forceUpdateMeshData();
+			root->mesh->setBatchDraw(false);
+
+			root->node->setSkipDraw(false);
+		}
+	}
 }
 
 void render::DrawCore::unbatch()
 {
-	int unitSize = sizeof(float);
 	int matrixSize = 16 * sizeof(float);
-	for (auto& item : _batchDrawParameters)
+	for (const auto& item : _batchDrawParameters)
 	{
-		int count = item.parameters.size();
-		auto root = item.root;
+		int count = item->children.size();
+		auto root = item->root;
 
-		root->mesh->createModelMatrices(0, 0, 0);
+		root->mesh->createModelMatrices(0, 0);
 		root->mesh->forceUpdateMeshData();
+		root->mesh->setBatchDraw(false);
 
 		if (count == 1) continue;
-		
+
 		for (int i = 0; i < count; i++)
 		{
-			auto node = item.parameters[i]->node;
+			auto node = item->children[i]->node;
 			node->setSkipDraw(false);
 		}
 	}
 
-	this->removeAllDrawParameters();
+	for (const auto& item : _packDrawParameters)
+	{
+		int count = item->children.size();
+		auto root = item->root;
+
+		if (item->tempMeshDtail)
+		{
+			root->mesh->setMeshDetail(item->tempMeshDtail);
+			SAFE_RELEASE(item->tempMeshDtail);
+			item->tempMeshDtail = nullptr;
+		}
+		root->mesh->forceUpdateMeshData();
+		root->mesh->setBatchDraw(false);
+
+		if (count == 1) continue;
+		for (int i = 0; i < count; i++)
+		{
+			auto node = item->children[i]->node;
+			node->setSkipDraw(false);
+		}
+	}
 }
 
 bool render::DrawCore::isSameObject(DrawParameter* a, DrawParameter* b)
@@ -1497,7 +1701,7 @@ bool render::DrawCore::isSameObject(DrawParameter* a, DrawParameter* b)
 	if (a->tessilation != b->tessilation) return false;
 	if (!a->material->equals(*b->material)) return false;
 	if (!a->mesh->equals(*b->mesh)) return false;
-
+	if (!isSameTexture(a, b)) return false;
 	return true;
 }
 
@@ -1507,6 +1711,215 @@ bool render::DrawCore::isSameMaterial(DrawParameter* a, DrawParameter* b)
 
 	if (a->tessilation != b->tessilation) return false;
 	if (!a->material->equals(*b->material)) return false;
+	if (!a->mesh->sameLayout(*b->mesh)) return false;
+	if (!isSameTexture(a, b)) return false;
+	return true;
+}
+
+bool render::DrawCore::isSameTexture(DrawParameter* a, DrawParameter* b)
+{
+	if (a == nullptr || b == nullptr) return false;
+
+	auto texCacheA = a->textureCache;
+	auto texCacheB = b->textureCache;
+
+	auto materialDetailA = a->material->getMaterialDetail();
+	auto materialDetailB = b->material->getMaterialDetail();
+
+	if (texCacheA->getTexture(materialDetailA->getTexture()) != texCacheB->getTexture(materialDetailB->getTexture()))
+	{
+		return false;
+	}
+
+	return true;
+}
+
+/////////////////////////////////////////////////////////////////////////////////
+render::DrawCore::BatchDrawParameter::BatchDrawParameter(DrawParameter* parameter)
+{
+	root = parameter;
+	this->add(parameter);
+}
+bool render::DrawCore::BatchDrawParameter::contains(DrawParameter* parameter)
+{
+	if (parameter == nullptr) return false;
+	if (parameter == root) return true;
+	for (auto item : children)
+	{
+		if (item == parameter)
+		{
+			return true;
+		}
+	}
+	return false;
+}
+
+void render::DrawCore::BatchDrawParameter::remove(DrawParameter* parameter)
+{
+	if (parameter == nullptr) return;
+	if (parameter == root)
+	{
+		children.erase(children.begin());
+		root = children.size() > 0 ? children[0] : nullptr;
+		redraw = true;
+	}
+	else
+	{
+		auto it = std::find(children.begin(), children.end(), parameter);
+		if (it != children.end())
+		{
+			children.erase(it);
+			redraw = true;
+		}
+	}
+	parameter->data = nullptr;
+}
+
+void render::DrawCore::BatchDrawParameter::add(DrawParameter* parameter)
+{
+	if (parameter == nullptr) return;
+	children.push_back(parameter);
+	parameter->data = this;
+	redraw = true;
+}
+
+bool concat_ptr_memory_vertices(
+	sys::MeshDetail* dest,
+	const std::vector<sys::MeshDetail*>& srcs,
+	const std::vector<math::Matrix4x4>& mats)
+{
+	uint32_t verticeCount = 0;
+	for (size_t i = 0; i < srcs.size(); i++)
+	{
+		verticeCount += srcs[i]->getVertices().getVerticeCount();
+	}
+	if (verticeCount == 0) return false;
+	uint32_t unitSize = srcs[0]->getVertices().getUnitSize();
+	float* ptr = (float*)dest->createVertices(verticeCount, unitSize);
+	uint32_t offset = 0; 
+	for (size_t i = 0; i < srcs.size(); i++)
+	{
+		float* vptr = (float*)srcs[i]->getVertices().getPtr();
+		uint32_t vcount = srcs[i]->getVertices().getVerticeCount();
+		if (vcount > 4)
+		{
+			int a = 1;
+		}
+		for (size_t j = 0; j < vcount; j++)
+		{
+			math::Vector3 pos(vptr + j * unitSize);
+			pos = mats[i] * pos;
+			memcpy(ptr + offset + j * unitSize, pos.getValue(), pos.getSize()); 
+		}
+		offset += srcs[i]->getVertices().getLength();
+	}
+
+	return true;
+}
+
+bool concat_ptr_memory_indices(
+	sys::MeshDetail* dest,
+	const std::vector<sys::MeshDetail*>& srcs)
+{
+	uint32_t verticeCount = 0;
+	uint32_t data[6] = { 0,1,2,0,2,3 };	
+	for (size_t i = 0; i < srcs.size(); i++)
+	{
+		verticeCount += srcs[i]->getIndices().getVerticeCount();
+	}
+	if (verticeCount == 0) return false;
+	uint32_t unitSize = srcs[0]->getIndices().getUnitSize();
+	uint32_t* ptr = (uint32_t*)dest->createIndices(verticeCount, unitSize);
+	uint32_t offset = 0; 
+	uint32_t voffset = 0;
+	for (size_t i = 0; i < srcs.size(); i++)
+	{
+		uint32_t* vptr = (uint32_t*)srcs[i]->getIndices().getPtr();
+		uint32_t icount = srcs[i]->getIndices().getVerticeCount();
+		uint32_t vcount = srcs[i]->getVertices().getVerticeCount();
+		if (icount > 6)
+		{
+			int a = 1;
+		}
+		for (size_t j = 0; j < icount; j++)
+		{
+			ptr[offset + j] = vptr[j] + voffset;
+		}
+		offset += srcs[i]->getIndices().getLength();
+		voffset += vcount;
+	}
+	return true;
+}
+
+bool concat_ptr_memory_colors(
+	sys::MeshDetail* dest,
+	const std::vector<sys::MeshDetail*>& srcs)
+{
+	uint32_t verticeCount = 0;
+	for (size_t i = 0; i < srcs.size(); i++)
+	{
+		verticeCount += srcs[i]->getColors().getVerticeCount();
+	}
+	if (verticeCount == 0) return false;
+	uint32_t unitSize = srcs[0]->getColors().getUnitSize();
+	float* ptr = (float*)dest->createColors(verticeCount, unitSize);
+	uint32_t offset = 0; 
+	for (size_t i = 0; i < srcs.size(); i++)
+	{
+		memcpy(ptr + offset, srcs[i]->getColors().getPtr(), srcs[i]->getColors().getSize());
+		offset += srcs[i]->getColors().getLength();
+	}
+
+	return true;
+}
+
+bool concat_ptr_memory_uvs(
+	sys::MeshDetail* dest,
+	const std::vector<sys::MeshDetail*>& srcs)
+{
+	uint32_t verticeCount = 0;
+	for (size_t i = 0; i < srcs.size(); i++)
+	{
+		verticeCount += srcs[i]->getUVs().getVerticeCount();
+	}
+	if (verticeCount == 0) return false;
+	uint32_t unitSize = srcs[0]->getUVs().getUnitSize();
+	float* ptr = (float*)dest->createUVs(verticeCount, unitSize);
+	uint32_t offset = 0;
+	for (size_t i = 0; i < srcs.size(); i++)
+	{
+		memcpy(ptr + offset, srcs[i]->getUVs().getPtr(), srcs[i]->getUVs().getSize());
+		offset += srcs[i]->getUVs().getLength();
+	}
+
+	return true;
+}
+
+
+bool render::DrawCore::BatchDrawParameter::packMeshes(sys::MeshDetail* meshDetail)
+{
+	if (meshDetail == nullptr) return false;
+
+	std::vector<sys::MeshDetail*> vecMeshDetails;
+	std::vector<math::Matrix4x4> vecMatrices;
+	
+	for (const auto & item : children)
+	{
+		if (item->node->isRecursiveVisible())
+		{
+			vecMeshDetails.push_back(item->mesh->getMeshDetail());
+			vecMatrices.push_back(item->node->getWorldMatrix() * item->matrix);
+		}
+	}
+
+	if (!concat_ptr_memory_vertices(meshDetail, vecMeshDetails, vecMatrices)) return false;
+	if (!concat_ptr_memory_colors(meshDetail, vecMeshDetails)) return false;
+	if (!concat_ptr_memory_uvs(meshDetail, vecMeshDetails)) return false;
+	if (!concat_ptr_memory_indices(meshDetail, vecMeshDetails)) return false;
+
+	//CONCAT_PTR_MEMORY_DATAS(meshDetail, vecMeshDetails, createNormals, getNormals);
+	//CONCAT_PTR_MEMORY_DATAS(meshDetail, vecMeshDetails, createTangents, getTangents);
+	//CONCAT_PTR_MEMORY_DATAS(meshDetail, vecMeshDetails, createBitangents, getBitangents);
 
 	return true;
 }

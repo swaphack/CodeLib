@@ -612,6 +612,9 @@
     <ClCompile Include="Common\DrawNode\DrawCore.cpp">
       <Filter>Common\DrawNode</Filter>
     </ClCompile>
+    <ClCompile Include="Common\Shader\ShaderProperty.cpp">
+      <Filter>Common\Shader</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Common\Node\import.h">
@@ -1409,6 +1412,9 @@
     </ClInclude>
     <ClInclude Include="Common\DrawNode\macros.h">
       <Filter>Common\DrawNode</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Shader\ShaderProperty.h">
+      <Filter>Common\Shader</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

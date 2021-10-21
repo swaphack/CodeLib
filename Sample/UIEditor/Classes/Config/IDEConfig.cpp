@@ -11,9 +11,11 @@ const ue::IDEConfig::IDESetting& ue::IDEConfig::getIDE() const
 	return _ide;
 }
 
-const ue::IDEConfig::ShaderSetting& ue::IDEConfig::getShader() const
+const ue::IDEConfig::ShaderSetting* ue::IDEConfig::getShader() const
 {
-	return _shader;
+	if (_ide.ShaderMode >=0 && _ide.ShaderMode < _shaders.size())
+		return &_shaders[_ide.ShaderMode];
+	return nullptr;
 }
 
 void ue::IDEConfig::Dispose()
@@ -43,31 +45,43 @@ void ue::IDEConfig::loadXml(const std::string& filepath)
 		{
 			_ide.Control = child->GetText();
 		}
+		child = element->FirstChildElement("ShaderModel");
+		if (child && child->GetText())
+		{
+			_ide.ShaderMode = atoi(child->GetText());
+		}
 	}
 	element = _helper.getElement("Shader");
 	if (element)
 	{
-		auto child = element->FirstChildElement("TexVertex");
-		if (child && child->GetText())
+		auto item = element->FirstChildElement();
+		while (item != nullptr)
 		{
-			_shader.TexVertex = child->GetText();
-		}
+			ShaderSetting shader;
+			auto child = item->FirstChildElement("TexVertex");
+			if (child && child->GetText())
+			{
+				shader.TexVertex = child->GetText();
+			}
 
-		child = element->FirstChildElement("TexFragment");
-		if (child && child->GetText())
-		{
-			_shader.TexFragment = child->GetText();
-		}
-		child = element->FirstChildElement("ColorVertex");
-		if (child && child->GetText())
-		{
-			_shader.ColorVertex = child->GetText();
-		}
+			child = item->FirstChildElement("TexFragment");
+			if (child && child->GetText())
+			{
+				shader.TexFragment = child->GetText();
+			}
+			child = item->FirstChildElement("ColorVertex");
+			if (child && child->GetText())
+			{
+				shader.ColorVertex = child->GetText();
+			}
 
-		child = element->FirstChildElement("ColorFragment");
-		if (child && child->GetText())
-		{
-			_shader.ColorFragment = child->GetText();
+			child = item->FirstChildElement("ColorFragment");
+			if (child && child->GetText())
+			{
+				shader.ColorFragment = child->GetText();
+			}
+			_shaders.push_back(shader);
+			item = item->NextSiblingElement();
 		}
 	}
 

@@ -1,5 +1,5 @@
 #include "ModelDetail3DS.h"
-#include "../extensions.h"
+#include "third_party.h"
 #include "mathlib.h"
 #include "Base/macros.h"
 #include "MaterialDetail.h"
@@ -104,9 +104,9 @@ bool ModelDetail3DS::load(const std::string& fullpath)
 				int nVertices = pMeshData->nvertices;
 				if (pMeshData->vertices)
 				{
-					float* verticeData = (float*)pMesh->createVertices(nVertices, sizeof(float), 3);
+					float* verticeData = (float*)pMesh->createVertices(nVertices, 3);
 
-					float* colorData = (float*)pMesh->createColors(nVertices, sizeof(float), 4);
+					float* colorData = (float*)pMesh->createColors(nVertices, 4);
 
 					for (int j = 0; j < pMeshData->nvertices; j++)
 					{
@@ -127,7 +127,7 @@ bool ModelDetail3DS::load(const std::string& fullpath)
 
 				if (pMeshData->texcos)
 				{
-					float* texCoordData = (float*)pMesh->createUVs(nVertices, sizeof(float), 2);
+					float* texCoordData = (float*)pMesh->createUVs(nVertices, 2);
 					for (int j = 0; j < pMeshData->nvertices; j++)
 					{
 						memcpy(texCoordData + 2 * j, pMeshData->texcos[j], 2 * sizeof(float));
@@ -135,7 +135,7 @@ bool ModelDetail3DS::load(const std::string& fullpath)
 				}
 				else
 				{
-					float* texCoordData = (float*)pMesh->createUVs(nVertices, sizeof(float), 2);
+					float* texCoordData = (float*)pMesh->createUVs(nVertices, 2);
 					for (int j = 0; j < pMeshData->nvertices; j++)
 					{
 						float uv[3] = { 0 };
@@ -150,7 +150,7 @@ bool ModelDetail3DS::load(const std::string& fullpath)
 
 			if (pMeshData->nfaces)
 			{	
-				float* normalData = (float*)pMesh->createNormals(3 * pMeshData->nfaces, sizeof(float), 3);
+				float* normalData = (float*)pMesh->createNormals(3 * pMeshData->nfaces, 3);
 				lib3ds_mesh_calculate_vertex_normals(pMeshData, (float(*)[3])normalData);
 
 				std::map<int, std::vector<int>> mapMat;
@@ -176,7 +176,7 @@ bool ModelDetail3DS::load(const std::string& fullpath)
 					int nFaceCount = 3 * item0.second.size();
 					if (nFaceCount > 0)
 					{
-						uint32_t* indices = (uint32_t*)pMesh->createIndices(nFaceCount, sizeof(uint32_t), 1);
+						uint32_t* indices = (uint32_t*)pMesh->createIndices(nFaceCount, 1);
 						int j = 0;
 						for (auto idx : item0.second)
 						{

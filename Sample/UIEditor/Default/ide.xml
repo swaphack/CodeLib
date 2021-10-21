@@ -1,18 +1,33 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <root>
-	<IDE>
-		<Design>Default/Layout/main_view_test.xml</Design>
-		<Control>Default/Layout/Widget/widget.config.xml</Control>
-	</IDE>
 	<Shader>
-		<TexVertex>Default/Shader/ui_texture_batch.vs</TexVertex>
-		<TexFragment>Default/Shader/ui_texture.fs</TexFragment>
-		<ColorVertex>Default/Shader/ui_color.vs</ColorVertex>
-		<ColorFragment>Default/Shader/ui_color.fs</ColorFragment>
+		<Default>
+			<TexVertex>Default/Shader/ui_texture.vs</TexVertex>
+			<TexFragment>Default/Shader/ui_texture.fs</TexFragment>	
+			<ColorVertex>Default/Shader/ui_color.vs</ColorVertex>
+			<ColorFragment>Default/Shader/ui_color.fs</ColorFragment>
+		</Default>
+		<Batch>
+			<TexVertex>Default/Shader/ui_texture_batch.vs</TexVertex>
+			<TexFragment>Default/Shader/ui_texture_batch.fs</TexFragment>	
+			<ColorVertex>Default/Shader/ui_color_batch.vs</ColorVertex>
+			<ColorFragment>Default/Shader/ui_color_batch.fs</ColorFragment>
+		</Batch>
+		<Pack>
+			<TexVertex>Default/Shader/ui_texture_pack.vs</TexVertex>
+			<TexFragment>Default/Shader/ui_texture_pack.fs</TexFragment>	
+			<ColorVertex>Default/Shader/ui_color_pack.vs</ColorVertex>
+			<ColorFragment>Default/Shader/ui_color_pack.fs</ColorFragment>
+		</Pack>
 	</Shader>
 	<Text>
 		<FontPath>Default/Font/font_3.ttf</FontPath>
 		<FontSize>24</FontSize>
 		<TextColor>255,255,255</TextColor>
 	</Text>
+	<IDE>
+		<Design>Default/Layout/main_view_test.xml</Design>
+		<Control>Default/Layout/Widget/widget.config.xml</Control>
+		<ShaderModel>2</ShaderModel>
+	</IDE>
 </root>

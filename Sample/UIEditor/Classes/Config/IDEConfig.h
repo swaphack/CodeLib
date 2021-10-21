@@ -17,6 +17,8 @@ namespace ue
 			std::string Design;
 			// 控件配置
 			std::string Control;
+			// 着色器模式 0-默认，1-合批，2-合图
+			int ShaderMode = 0;
 		};
 
 		struct ShaderSetting
@@ -47,7 +49,7 @@ namespace ue
 		// ide配置文件
 		const IDESetting& getIDE() const;
 		// 着色器配置
-		const ShaderSetting& getShader() const;
+		const ShaderSetting* getShader() const;
 	public:
 		// 加载配置
 		void loadXml(const std::string& filepath);
@@ -59,7 +61,7 @@ namespace ue
 		// 文本 配置
 		TextSetting _text;
 		// 着色器配置
-		ShaderSetting _shader;
+		std::vector<ShaderSetting> _shaders;
 		// ide 配置
 		IDESetting _ide;
 	};

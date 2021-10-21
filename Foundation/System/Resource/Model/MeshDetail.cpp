@@ -1,5 +1,5 @@
 #include "MeshDetail.h"
-#include "../extensions.h"
+#include "third_party.h"
 
 using namespace sys;
 
@@ -68,6 +68,10 @@ const std::string& MeshDetail::getMaterialName() const
 
 void MeshDetail::setIndices(int size, const uint32_t* indices, int unitSize)
 {
+	if (size == 0)
+	{
+		int a = 1;
+	}
 	_indices.init(size, indices);
 	_indices.setUnitSize(unitSize);
 }
@@ -109,51 +113,55 @@ void sys::MeshDetail::setBitangents(int len, const float* normals, int unitSize 
 	_bitangents.setUnitSize(unitSize);
 }
 
-char* sys::MeshDetail::createVertices(size_t len, uint32_t typeSize, int unitSize)
+char* sys::MeshDetail::createVertices(size_t len, int unitSize)
 {
-	_vertices.resize(len * unitSize, typeSize);
+	_vertices.resize(len * unitSize, sizeof(float));
 	_vertices.setUnitSize(unitSize);
 	return _vertices.getPtr();
 }
 
-char* sys::MeshDetail::createNormals(size_t len, uint32_t typeSize, int unitSize)
+char* sys::MeshDetail::createNormals(size_t len, int unitSize)
 {
-	_normals.resize(len * unitSize, typeSize);
+	_normals.resize(len * unitSize, sizeof(float));
 	_normals.setUnitSize(unitSize);
 	return _normals.getPtr();
 }
 
-char* sys::MeshDetail::createTangents(size_t len, uint32_t typeSize, int unitSize /*= 3*/)
+char* sys::MeshDetail::createTangents(size_t len, int unitSize /*= 3*/)
 {
-	_tangents.resize(len * unitSize, typeSize);
+	_tangents.resize(len * unitSize, sizeof(float));
 	_tangents.setUnitSize(unitSize);
 	return _tangents.getPtr();
 }
 
-char* sys::MeshDetail::createBitangents(size_t len, uint32_t typeSize, int unitSize /*= 3*/)
+char* sys::MeshDetail::createBitangents(size_t len, int unitSize /*= 3*/)
 {
-	_bitangents.resize(len * unitSize, typeSize);
+	_bitangents.resize(len * unitSize, sizeof(float));
 	_bitangents.setUnitSize(unitSize);
 	return _bitangents.getPtr();
 }
 
-char* sys::MeshDetail::createColors(size_t len, uint32_t typeSize, int unitSize)
+char* sys::MeshDetail::createColors(size_t len, int unitSize)
 {
-	_colors.resize(len * unitSize, typeSize);
+	_colors.resize(len * unitSize, sizeof(float));
 	_colors.setUnitSize(unitSize);
 	return _colors.getPtr();
 }
 
-char* sys::MeshDetail::createUVs(size_t len, uint32_t typeSize, int unitSize)
+char* sys::MeshDetail::createUVs(size_t len, int unitSize)
 {
-	_uvs.resize(len * unitSize, typeSize);
+	_uvs.resize(len * unitSize, sizeof(float));
 	_uvs.setUnitSize(unitSize);
 	return _uvs.getPtr();
 }
 
-char* sys::MeshDetail::createIndices(size_t len, uint32_t typeSize, int unitSize)
+char* sys::MeshDetail::createIndices(size_t len, int unitSize)
 {
-	_indices.resize(len * unitSize, typeSize);
+	if (len == 0)
+	{
+		int a = 1;
+	}
+	_indices.resize(len * unitSize, sizeof(uint32_t));
 	_indices.setUnitSize(unitSize);
 	return _indices.getPtr();
 }
@@ -174,7 +182,18 @@ bool MeshDetail::equals(const MeshDetail& detail)
 		&& _vertices.equals(detail.getVertices())
 		&& _normals.equals(detail.getNormals())
 		&& _colors.equals(detail.getColors())
-		&& _uvs.equals(detail.getUVs());
+		&& _uvs.equals(detail.getUVs())
+		&& _tangents.equals(detail.getTangents())
+		&& _bitangents.equals(detail.getBitangents());
 }
 
-
+bool sys::MeshDetail::sameLayout(const MeshDetail& detail)
+{
+	return _indices.getVerticeCount() == detail.getIndices().getVerticeCount()
+		&& _vertices.getVerticeCount() == detail.getVertices().getVerticeCount()
+		&& _normals.getVerticeCount() == detail.getNormals().getVerticeCount()
+		&& _colors.getVerticeCount() == detail.getColors().getVerticeCount()
+		&& _uvs.getVerticeCount() == detail.getUVs().getVerticeCount()
+		&& _tangents.getVerticeCount() == detail.getTangents().getVerticeCount()
+		&& _bitangents.getVerticeCount() == detail.getBitangents().getVerticeCount();
+}

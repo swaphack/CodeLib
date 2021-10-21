@@ -163,10 +163,12 @@
     <ClInclude Include="Record\OperateRecord.h" />
     <ClInclude Include="Resource\Atlas\import.h" />
     <ClInclude Include="Resource\Atlas\TextureAtlas.h" />
-    <ClInclude Include="Resource\extensions.h" />
+    <ClInclude Include="Resource\Font\FaceLibrary.h" />
     <ClInclude Include="Resource\Font\ILabelLoader.h" />
     <ClInclude Include="Resource\Font\LabelImage.h" />
     <ClInclude Include="Resource\Font\import.h" />
+    <ClInclude Include="Resource\Font\LabelLibrary.h" />
+    <ClInclude Include="Resource\Font\LabelStream.h" />
     <ClInclude Include="Resource\Font\TextDefine.h" />
     <ClInclude Include="Resource\Image\IImageLoader.h" />
     <ClInclude Include="Resource\Image\ImageBMP.h" />
@@ -299,7 +301,10 @@
     <ClCompile Include="Platform\Windows\WindowsHelper.cpp" />
     <ClCompile Include="Record\OperateRecord.cpp" />
     <ClCompile Include="Resource\Atlas\TextureAtlas.cpp" />
+    <ClCompile Include="Resource\Font\LabelLibrary.cpp" />
+    <ClCompile Include="Resource\Font\FaceLibrary.cpp" />
     <ClCompile Include="Resource\Font\LabelImage.cpp" />
+    <ClCompile Include="Resource\Font\LabelStream.cpp" />
     <ClCompile Include="Resource\Image\ImageBMP.cpp" />
     <ClCompile Include="Resource\Image\ImageDefine.cpp" />
     <ClCompile Include="Resource\Image\ImageDetail.cpp" />

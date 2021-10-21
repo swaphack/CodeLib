@@ -4,6 +4,11 @@
 #include <string>
 #include <map>
 
+namespace sys
+{
+	class MeshDetail;
+}
+
 namespace render
 {
 
@@ -22,8 +27,27 @@ namespace render
 	class DrawCore
 	{
 	public:
+		enum class DrawType
+		{
+			// 默认
+			Default,
+			// 合批
+			Batch,
+			// 合图
+			Pack,
+		};
+	public:
 		DrawCore();
 		virtual ~DrawCore();
+	public:
+		/**
+		*	渲染方式
+		*/
+		void setDrawType(DrawType type);
+		/**
+		*	渲染方式
+		*/
+		DrawType getDrawType() const;
 	public:
 		/**
 		*	渲染节点
@@ -135,22 +159,40 @@ namespace render
 		*/
 		void addDrawParameter(DrawParameter* parameter);
 		/**
+		*	移除绘制参数
+		*/
+		void removeDrawParameter(DrawParameter* parameter);
+		/**
 		*	移除所有绘制参数
 		*/
 		void removeAllDrawParameters();
+	protected:
+		/**
+		*	添加批量绘制参数
+		*/
+		void addBatchDrawParameter(DrawParameter* parameter);
+		/**
+		*	添加打包绘制参数
+		*/
+		void addPackDrawParameter(DrawParameter* parameter);
 	public:
 		/**
-		*	合批
+		*	处理
 		*/
-		void batch();
-		/**
-		*	绘制合批
-		*/
-		void drawBatch();
+		void processDraw();
 		/**
 		*	取消合批
 		*/
 		void unbatch();
+	protected:
+		/**
+		*	合批
+		*/
+		void processBatchDraw();
+		/**
+		*	打包
+		*/
+		void processPackDraw();
 	protected:
 		/**
 		*	是否同一个对象
@@ -160,6 +202,10 @@ namespace render
 		*	是否同一个材质
 		*/
 		bool isSameMaterial(DrawParameter* a, DrawParameter* b);
+		/**
+		*	纹理是否相同
+		*/
+		bool isSameTexture(DrawParameter* a, DrawParameter* b);
 	private:
 		/**
 		*	临时矩阵
@@ -181,22 +227,37 @@ namespace render
 		*	一次完整未绘制调用次数
 		*/
 		int _oneUnDrawCallCount = 0;
-
 	private:
 		struct BatchDrawParameter
 		{
+		public:
+			// 子节点
+			std::vector<DrawParameter*> children;
+			// 根节点
 			DrawParameter* root = nullptr;
-			std::vector<DrawParameter*> parameters;
-			BatchDrawParameter(DrawParameter* node)
-			{
-				root = node;
-				parameters.push_back(node);
-			}
+			// 临时
+			sys::MeshDetail* tempMeshDtail = nullptr;
+			// 重新绘制
+			bool redraw = true;
+		public:
+			BatchDrawParameter(DrawParameter* parameter);
+			// 是否包含
+			bool contains(DrawParameter* parameter);
+			// 移除
+			void remove(DrawParameter* parameter);
+			// 添加
+			void add(DrawParameter* parameter);
+			// 打包网格
+			bool packMeshes(sys::MeshDetail* meshDetail);
 		};
 		// 合批处理
-		std::vector<BatchDrawParameter> _batchDrawParameters;
+		std::vector<BatchDrawParameter*> _batchDrawParameters;
 		// 合图处理
-		std::vector<BatchDrawParameter> _packDrawParameters;
+		std::vector<BatchDrawParameter*> _packDrawParameters;
+		// 须重新绘制的参数
+		std::set<BatchDrawParameter*> _redrawParameters;
+
+		DrawType _drawType = DrawType::Batch;
 	};
 
 #define G_DRAWCORE sys::Instance<render::DrawCore>::getInstance()

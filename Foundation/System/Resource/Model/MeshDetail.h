@@ -21,9 +21,10 @@ namespace sys
 		}
 		virtual ~MeshMemoryData(){}
 	public:
-		void setUnitSize(uint32_t size) { _unitSize = size; }
-		uint32_t getUnitSize() const { return _unitSize; }
-	protected:
+		inline void setUnitSize(uint32_t size) { _unitSize = size; }
+		inline uint32_t getUnitSize() const { return _unitSize; }
+		// 顶点数量
+		inline uint32_t getVerticeCount() const { if (getUnitSize() == 0) return getLength(); else return getLength() / getUnitSize(); }
 	private:
 		// 每个单位大小
 		uint32_t _unitSize = 0;
@@ -122,34 +123,36 @@ namespace sys
 		/**
 		*	分配顶点
 		*/
-		char* createVertices(size_t len, uint32_t typeSize, int unitSize = 3);
+		char* createVertices(size_t len, int unitSize = 3);
 		/**
 		*	分配法线
 		*/
-		char* createNormals(size_t len, uint32_t typeSize, int unitSize = 3);
+		char* createNormals(size_t len, int unitSize = 3);
 		/**
 		*	分配切线
 		*/
-		char* createTangents(size_t len, uint32_t typeSize, int unitSize = 3);
+		char* createTangents(size_t len, int unitSize = 3);
 		/**
 		*	分配辅助切线
 		*/
-		char* createBitangents(size_t len, uint32_t typeSize, int unitSize = 3);
+		char* createBitangents(size_t len, int unitSize = 3);
 		/**
 		*	分配颜色
 		*/
-		char* createColors(size_t len, uint32_t typeSize, int unitSize = 4);
+		char* createColors(size_t len, int unitSize = 4);
 		/**
 		*	分配纹理坐标
 		*/
-		char* createUVs(size_t len, uint32_t typeSize, int unitSize = 2);
+		char* createUVs(size_t len, int unitSize = 2);
 		/**
 		*	分配顶点索引
 		*/
-		char* createIndices(size_t len, uint32_t typeSize, int unitSize = 1);
+		char* createIndices(size_t len, int unitSize = 1);
 	public:
-		// 判断indices, vertices，normals, colors, uvs是否一致
+		// 判断indices, vertices，normals, colors, uvs数据是否一致
 		bool equals(const MeshDetail& detail);
+		// 判断indices, vertices，normals, colors, uvs结构是否一致
+		bool sameLayout(const MeshDetail& detail);
 	private:
 		std::string _meshName;
 		// 材质

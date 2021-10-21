@@ -202,27 +202,6 @@ Vector3 math::Matrix4x4::getEularAngle() const
 	return radian;
 }
 
-Matrix4x1 Matrix4x4::operator*(const Matrix4x1& mat) const
-{
-	float value[4] = { 0 };
-	value[0] = getValue(0) * mat.getValue(0) + getValue(1) * mat.getValue(1) + getValue(2) * mat.getValue(2) + getValue(3) * mat.getValue(3);
-	value[1] = getValue(4) * mat.getValue(0) + getValue(5) * mat.getValue(1) + getValue(6) * mat.getValue(2) + getValue(7) * mat.getValue(3);
-	value[2] = getValue(8) * mat.getValue(0) + getValue(9) * mat.getValue(1) + getValue(10) * mat.getValue(2) + getValue(11) * mat.getValue(3);
-	value[3] = getValue(12) * mat.getValue(0) + getValue(13) * mat.getValue(1) + getValue(14) * mat.getValue(2) + getValue(15) * mat.getValue(3);
-
-	return Matrix4x1(value);
-}
-
-Vector4 Matrix4x4::operator*(const Vector4& mat) const
-{
-	float x = getValue(0) * mat.getValue(0) + getValue(1) * mat.getValue(1) + getValue(2) * mat.getValue(2) + getValue(3) * mat.getValue(3);
-	float y = getValue(4) * mat.getValue(0) + getValue(5) * mat.getValue(1) + getValue(6) * mat.getValue(2) + getValue(7) * mat.getValue(3);
-	float z = getValue(8) * mat.getValue(0) + getValue(9) * mat.getValue(1) + getValue(10) * mat.getValue(2) + getValue(11) * mat.getValue(3);
-	float w = getValue(12) * mat.getValue(0) + getValue(13) * mat.getValue(1) + getValue(14) * mat.getValue(2) + getValue(15) * mat.getValue(3);
-
-	return Vector4(x, y, z, w);
-}
-
 Matrix4x4 Matrix4x4::operator*(const Matrix4x4& mat) const
 {
 	float value[16] = { 0 };
@@ -665,14 +644,6 @@ math::Matrix4x4 math::Matrix4x4::getTSR(const Vector3& translate, const Vector3&
 	return matTranslate * matScale * matRotate;
 }
 
-Vector3 math::Matrix4x4::transpose(const Vector3& src, const Matrix4x4& mat)
-{
-	Matrix1x4 srcMatrix(src);
-	Matrix1x4 result = srcMatrix * mat;
-	Vector3 pos = (Vector3)result;
-	return pos;
-}
-
 math::Matrix4x4 math::Matrix4x4::getFrontViewMatrix()
 {
 	Matrix4x4 mat;
@@ -807,3 +778,46 @@ void math::Matrix4x4::setShearZ(float radian)
 	(*this)[6] = offset;
 }
 
+//////////////////////////////////////////////////////////////////////
+Matrix4x1 math::operator*(const Matrix4x4& mat0, const Matrix4x1& mat1)
+{
+	float value[4] = { 0 };
+	value[0] = mat0.getValue(0) * mat1.getValue(0) + mat0.getValue(1) * mat1.getValue(1) + mat0.getValue(2) * mat1.getValue(2) + mat0.getValue(3) * mat1.getValue(3);
+	value[1] = mat0.getValue(4) * mat1.getValue(0) + mat0.getValue(5) * mat1.getValue(1) + mat0.getValue(6) * mat1.getValue(2) + mat0.getValue(7) * mat1.getValue(3);
+	value[2] = mat0.getValue(8) * mat1.getValue(0) + mat0.getValue(9) * mat1.getValue(1) + mat0.getValue(10) * mat1.getValue(2) + mat0.getValue(11) * mat1.getValue(3);
+	value[3] = mat0.getValue(12) * mat1.getValue(0) + mat0.getValue(13) * mat1.getValue(1) + mat0.getValue(14) * mat1.getValue(2) + mat0.getValue(15) * mat1.getValue(3);
+
+	return Matrix4x1(value);
+}
+
+Matrix1x4 math::operator*(const Matrix1x4& mat0, const Matrix4x4& mat1)
+{
+	float value[4] = { 0 };
+	value[0] = mat0.getValue(0) * mat1.getValue(0) + mat0.getValue(1) * mat1.getValue(4) + mat0.getValue(2) * mat1.getValue(8) + mat0.getValue(3) * mat1.getValue(12);
+	value[1] = mat0.getValue(0) * mat1.getValue(1) + mat0.getValue(1) * mat1.getValue(5) + mat0.getValue(2) * mat1.getValue(9) + mat0.getValue(3) * mat1.getValue(13);
+	value[2] = mat0.getValue(0) * mat1.getValue(2) + mat0.getValue(1) * mat1.getValue(6) + mat0.getValue(2) * mat1.getValue(10) + mat0.getValue(3) * mat1.getValue(14);
+	value[3] = mat0.getValue(0) * mat1.getValue(3) + mat0.getValue(1) * mat1.getValue(7) + mat0.getValue(2) * mat1.getValue(11) + mat0.getValue(3) * mat1.getValue(15);
+
+	return Matrix4x1(value);
+}
+
+Vector4 math::operator*(const Matrix4x4& mat, const Vector4& vec)
+{
+	Matrix4x4 mat0;
+	mat0.setRow(3, vec);
+
+	Matrix4x4 mat1 = mat * mat0;
+	return Vector4(mat1.getValue(3, 0), mat1.getValue(3, 1), mat1.getValue(3, 2), mat1.getValue(3, 3));
+}
+
+Vector3 math::operator*(const Matrix4x4& mat, const Vector3& vec)
+{
+	Vector4 dest = mat * Vector4(vec);
+	if (dest.getW() == 0) return Vector3(dest.getX(), dest.getY(), dest.getZ());
+	else return Vector3(dest.getX() / dest.getW(), dest.getY() / dest.getW(), dest.getZ() / dest.getW());
+}
+
+Vector3 math::operator*(const Matrix4x4& mat, const Vector2& vec)
+{
+	return mat * Vector3(vec);
+}

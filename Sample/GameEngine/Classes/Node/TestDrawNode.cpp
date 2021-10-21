@@ -53,7 +53,7 @@ void TestDrawNode::testDrawNode()
 		math::Vector3 cameraRadian = Tool::convertToRadian(cameraRotate);
 		math::Matrix4x4 mat; 
 		mat.setRotate(1.0f * cameraRadian);
-		auto pos = math::Matrix4x4::transpose(vector, mat);
+		auto pos = mat * vector;
 
 		pDrawNode->setPosition(cameraPos + pos);
 		pDrawNode->setRotation(-1.0f * cameraRotate);

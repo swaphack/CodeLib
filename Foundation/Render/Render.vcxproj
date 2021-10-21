@@ -197,6 +197,7 @@
     <ClCompile Include="Common\Shader\Shader.cpp" />
     <ClCompile Include="Common\Shader\ShaderProgramPipeline.cpp" />
     <ClCompile Include="Common\Shader\ShaderProgramUniform.cpp" />
+    <ClCompile Include="Common\Shader\ShaderProperty.cpp" />
     <ClCompile Include="Common\Shader\ShaderSubroutineUniform.cpp" />
     <ClCompile Include="Common\Shader\ShaderUniform.cpp" />
     <ClCompile Include="Common\Shader\ShaderUniformBlock.cpp" />
@@ -446,6 +447,7 @@
     <ClInclude Include="Common\Shader\ShaderProgramDelegate.h" />
     <ClInclude Include="Common\Shader\ShaderProgramPipeline.h" />
     <ClInclude Include="Common\Shader\ShaderProgramUniform.h" />
+    <ClInclude Include="Common\Shader\ShaderProperty.h" />
     <ClInclude Include="Common\Shader\ShaderSubroutineUniform.h" />
     <ClInclude Include="Common\Shader\ShaderUniform.h" />
     <ClInclude Include="Common\Shader\ShaderUniformBlock.h" />

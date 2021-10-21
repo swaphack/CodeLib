@@ -1,5 +1,5 @@
 #include "ImagePNG.h"
-#include "../extensions.h"
+#include "third_party.h"
 #include <cstdlib>
 #include <cstdio>
 

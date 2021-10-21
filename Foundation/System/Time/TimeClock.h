@@ -63,6 +63,10 @@ namespace sys
 		*	结束记录
 		*/
 		static void endRecord();
+		/**
+		*	显示时间
+		*/
+		static void showTime();
 	private:
 		// 总毫秒数
 		timeb _timeColock;

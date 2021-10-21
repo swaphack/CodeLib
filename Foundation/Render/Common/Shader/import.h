@@ -12,4 +12,6 @@
 #include "VertexFragmentShaderProgram.h"
 #include "ComputeShaderProgram.h"
 
+#include "ShaderProperty.h"
+
 #include "ShaderManager.h"

@@ -1,5 +1,5 @@
 #include "ImageHelper.h"
-#include "../extensions.h"
+#include "third_party.h"
 #include "IO/Directory.h"
 
 bool sys::ImageHelper::saveToPNG(const ImageDetail& detail, const std::string& fullpath)

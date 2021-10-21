@@ -1,5 +1,5 @@
 #include "ModelDetailFbx.h"
-#include "../extensions.h"
+#include "third_party.h"
 #include "Base/macros.h"
 #include "MaterialDetail.h"
 #include "MeshDetail.h"
@@ -54,7 +54,7 @@ void handNodeMesh(ModelDetailFbx* file, FbxNode* node)
 	{
 		FbxVector4* lControlPoints = pMeshData->GetControlPoints();
 
-		float* verticeData = (float*)pMesh->createVertices(nPointCount, sizeof(float), 3);
+		float* verticeData = (float*)pMesh->createVertices(nPointCount, 3);
 
 		for (int i = 0; i < nPointCount; i++)
 		{
@@ -76,7 +76,7 @@ void handNodeMesh(ModelDetailFbx* file, FbxNode* node)
 		auto vector = leNormal->GetDirectArray();
 
 		int nVerticeCount = vector.GetCount();
-		float* normalData = (float*)pMesh->createNormals(nVerticeCount, sizeof(float), 3);
+		float* normalData = (float*)pMesh->createNormals(nVerticeCount, 3);
 
 		for (int i = 0; i < nVerticeCount; i++)
 		{
@@ -97,7 +97,7 @@ void handNodeMesh(ModelDetailFbx* file, FbxNode* node)
 		auto vector = leTangent->GetDirectArray();
 
 		int nVerticeCount = vector.GetCount();
-		float* normalData = (float*)pMesh->createTangents(nVerticeCount, sizeof(float), 3);
+		float* normalData = (float*)pMesh->createTangents(nVerticeCount, 3);
 
 		for (int i = 0; i < nVerticeCount; i++)
 		{
@@ -118,7 +118,7 @@ void handNodeMesh(ModelDetailFbx* file, FbxNode* node)
 		auto vector = leBinormal->GetDirectArray();
 
 		int nVerticeCount = vector.GetCount();
-		float* normalData = (float*)pMesh->createBitangents(nVerticeCount, sizeof(float), 3);
+		float* normalData = (float*)pMesh->createBitangents(nVerticeCount, 3);
 
 		for (int i = 0; i < nVerticeCount; i++)
 		{
@@ -139,7 +139,7 @@ void handNodeMesh(ModelDetailFbx* file, FbxNode* node)
 		auto vector = leUV->GetDirectArray();
 
 		int nVerticeCount = vector.GetCount();
-		float* uvData = (float*)pMesh->createUVs(nVerticeCount, sizeof(float), 2);
+		float* uvData = (float*)pMesh->createUVs(nVerticeCount, 2);
 
 		for (int i = 0; i < nVerticeCount; i++)
 		{
@@ -160,7 +160,7 @@ void handNodeMesh(ModelDetailFbx* file, FbxNode* node)
 		auto vector = leVtxc->GetDirectArray();
 
 		int nVerticeCount = vector.GetCount();
-		float* colorData = (float*)pMesh->createColors(nVerticeCount, sizeof(float), 4);
+		float* colorData = (float*)pMesh->createColors(nVerticeCount, 4);
 
 		for (int i = 0; i < nVerticeCount; i++)
 		{
@@ -174,7 +174,7 @@ void handNodeMesh(ModelDetailFbx* file, FbxNode* node)
 	}
 	else
 	{
-		float* colorData = (float*)pMesh->createColors(nPointCount, sizeof(float), 4);
+		float* colorData = (float*)pMesh->createColors(nPointCount, 4);
 
 		for (int i = 0; i < nPointCount; i++)
 		{
@@ -188,7 +188,7 @@ void handNodeMesh(ModelDetailFbx* file, FbxNode* node)
 	}
 
 	int nIndexCount = pMeshData->GetPolygonVertexCount();
-	uint32_t* indices = (uint32_t*)pMesh->createIndices(nIndexCount, sizeof(uint32_t), 1);
+	uint32_t* indices = (uint32_t*)pMesh->createIndices(nIndexCount, 1);
 	for (int i = 0; i < nIndexCount; i++)
 	{
 		indices[i] = pMeshData->GetPolygonVertices()[i];

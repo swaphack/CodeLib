@@ -107,8 +107,11 @@ void MemoryData::init(size_t len, const void* value, uint32_t typeSize)
 	_typeSize = typeSize;
 	_length = len;
 	_value = (char*)malloc(size);
-	memset(_value, 0, size);
-	if (value)
+	if (_value)
+	{
+		memset(_value, 0, size);
+	}
+	if (value && _value)
 	{
 		memcpy(_value, value, size);
 	}
@@ -202,11 +205,13 @@ void MemoryData::insert(size_t offset, size_t size, const char* value)
 	}
 	size_t length = _length + size;
 	char* val = (char*)malloc(length);
-
-	uint32_t s1 = offset;
-	memcpy(val, _value, s1);
-	memcpy(val + s1, value, size);
-	memcpy(val + s1 + size, _value + offset, _length - offset);
+	if (val)
+	{
+		uint32_t s1 = offset;
+		memcpy(val, _value, s1);
+		memcpy(val + s1, value, size);
+		memcpy(val + s1 + size, _value + offset, _length - offset);
+	}
 
 	this->clear();
 
@@ -232,13 +237,15 @@ void MemoryData::remove(size_t offset, size_t size)
 		return;
 	}
 	char* val = (char*)malloc(length);
-
-	uint32_t s1 = offset;
-	if (s1 > 0)
+	if (val)
 	{
-		memcpy(val, _value, s1);
+		uint32_t s1 = offset;
+		if (s1 > 0)
+		{
+			memcpy(val, _value, s1);
+		}
+		memcpy(val + s1, _value + len, _length - len);
 	}
-	memcpy(val + s1, _value + len, _length - len);
 
 	this->clear();
 
@@ -251,7 +258,10 @@ void MemoryData::resize(size_t len, uint32_t typeSize)
 {
 	uint32_t size = len * typeSize;
 	char* val = (char*)malloc(size);
-	memset(val, 0, size);
+	if (val)
+	{
+		memset(val, 0, size);
+	}
 
 	this->clear();
 
@@ -274,6 +284,6 @@ bool sys::MemoryData::equals(const MemoryData& data) const
 		return false;
 	}
 
-	return memcmp(_value, data.getValue(), getLength() * getTypeSize()) == 0;
+	return memcmp(_value, data.getValue(), getSize()) == 0;
 }
 

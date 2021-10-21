@@ -125,3 +125,9 @@ void sys::TimeClock::endRecord()
 	//PRINTLN("Different Time : %d", (int32_t)_recordDiffTime);
 	_recordTime = time;
 }
+
+void sys::TimeClock::showTime()
+{
+	uint64_t time = getNow()->getTotalMilliseconds();
+	PRINTLN("Different Time : %d", (int32_t)time);
+}

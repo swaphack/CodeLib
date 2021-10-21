@@ -520,9 +520,6 @@
     <ClInclude Include="Resource\Media\import.h">
       <Filter>Resource\Media</Filter>
     </ClInclude>
-    <ClInclude Include="Resource\extensions.h">
-      <Filter>Resource</Filter>
-    </ClInclude>
     <ClInclude Include="Resource\Model\ModelDetail3DS.h">
       <Filter>Resource\Model</Filter>
     </ClInclude>
@@ -603,6 +600,15 @@
     </ClInclude>
     <ClInclude Include="Resource\Atlas\import.h">
       <Filter>Resource\Atlas</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\Font\FaceLibrary.h">
+      <Filter>Resource\Font</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\Font\LabelStream.h">
+      <Filter>Resource\Font</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\Font\LabelLibrary.h">
+      <Filter>Resource\Font</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -932,6 +938,15 @@
     </ClCompile>
     <ClCompile Include="Resource\Atlas\TextureAtlas.cpp">
       <Filter>Resource\Atlas</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource\Font\FaceLibrary.cpp">
+      <Filter>Resource\Font</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource\Font\LabelStream.cpp">
+      <Filter>Resource\Font</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource\Font\LabelLibrary.cpp">
+      <Filter>Resource\Font</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

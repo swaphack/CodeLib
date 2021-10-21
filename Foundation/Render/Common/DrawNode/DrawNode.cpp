@@ -34,6 +34,9 @@ DrawNode::~DrawNode()
 	SAFE_RELEASE(_material);
 	SAFE_RELEASE(_mesh);
 	SAFE_RELEASE(_fragOperator);
+	SAFE_RELEASE(_textureCache);
+
+	G_DRAWCORE->removeDrawParameter(&_drawParameter);
 }
 
 bool render::DrawNode::init()
@@ -51,6 +54,10 @@ bool render::DrawNode::init()
 
 	addNotifyListener(NodeNotifyType::COLOR, [this]() {
 		this->onDrawNodeColorChange();
+	});
+
+	addNotifyListener(NodeNotifyType::VISIBLE, [this]() {
+		this->initDrawParameter();
 	});
 
 	addNotifyListener(NodeNotifyType::MESH, [this]() {
@@ -111,63 +118,54 @@ DrawTextureCache* render::DrawNode::getDrawTextureCache() const
 void render::DrawNode::setTexture(const std::string& fullpath)
 {
 	_material->getMaterialDetail()->setTexture(MAT_TEXTURE_NAME);
-	_textureCache->removeTexture(MAT_TEXTURE_NAME);
 	_textureCache->addTexture(MAT_TEXTURE_NAME, fullpath);
 }
 
 void render::DrawNode::setTexture(const Texture* texture)
 {
 	_material->getMaterialDetail()->setTexture(MAT_TEXTURE_NAME);
-	_textureCache->removeTexture(MAT_TEXTURE_NAME);
 	_textureCache->addTexture(MAT_TEXTURE_NAME, texture);
 }
 
 void render::DrawNode::setAmbientTexture(const std::string& fullpath)
 {
 	_material->getMaterialDetail()->setAmbientTextureMap(MAT_TEXTURE_NAME);
-	_textureCache->removeTexture(MAT_TEXTURE_NAME);
 	_textureCache->addTexture(MAT_TEXTURE_NAME, fullpath);
 }
 
 void render::DrawNode::setDiffuseTexture(const std::string& fullpath)
 {
 	_material->getMaterialDetail()->setDiffuseTextureMap(MAT_TEXTURE_DIFFUSE);
-	_textureCache->removeTexture(MAT_TEXTURE_DIFFUSE);
 	_textureCache->addTexture(MAT_TEXTURE_DIFFUSE, fullpath);
 }
 
 void render::DrawNode::setSpecularTexture(const std::string& fullpath)
 {
 	_material->getMaterialDetail()->setSpecularTextureMap(MAT_TEXTURE_SPECULAR);
-	_textureCache->removeTexture(MAT_TEXTURE_SPECULAR);
 	_textureCache->addTexture(MAT_TEXTURE_SPECULAR, fullpath);
 }
 
 void render::DrawNode::setAlphaTexture(const std::string& fullpath)
 {
 	_material->getMaterialDetail()->setAlphaTextureMap(MAT_TEXTURE_ALPHA);
-	_textureCache->removeTexture(MAT_TEXTURE_ALPHA);
 	_textureCache->addTexture(MAT_TEXTURE_ALPHA, fullpath);
 }
 
 void render::DrawNode::setBumpTexture(const std::string& fullpath)
 {
 	_material->getMaterialDetail()->setBumpTextureMap(MAT_TEXTURE_BUMP);
-	_textureCache->removeTexture(MAT_TEXTURE_BUMP);
 	_textureCache->addTexture(MAT_TEXTURE_BUMP, fullpath);
 }
 
 void render::DrawNode::setNormalTexture(const std::string& fullpath)
 {
 	_material->getMaterialDetail()->setNormalTextureMap(MAT_TEXTURE_NORMAL);
-	_textureCache->removeTexture(MAT_TEXTURE_NORMAL);
 	_textureCache->addTexture(MAT_TEXTURE_NORMAL, fullpath);
 }
 
 void render::DrawNode::setShadowTexture(const Texture* texture)
 {
 	_material->getMaterialDetail()->setShadowTextureMap(MAT_TEXTURE_SHADOW);
-	_textureCache->removeTexture(MAT_TEXTURE_SHADOW);
 	_textureCache->addTexture(MAT_TEXTURE_SHADOW, texture);
 }
 
@@ -199,9 +197,7 @@ void render::DrawNode::setShaderProgramFunc(const ShaderProgramFunc& func)
 void render::DrawNode::optimizeDraw()
 {
 	if (!this->isVisible()) return;
-	this->initDrawParameter();
-
-	G_DRAWCORE->addDrawParameter(&_drawParameter);
+	
 }
 
 void render::DrawNode::beforeDraw()
@@ -269,16 +265,19 @@ void render::DrawNode::updateMeshData()
 
 	_mesh->initMeshOtherDetail();
 	_mesh->updateBufferData();
+	
+	this->initDrawParameter();
 }
 
 void render::DrawNode::initDrawParameter()
 {
 	_drawParameter.node = this;
-	_drawParameter.program = _material ? _material->getShaderProgram() : nullptr;
 	_drawParameter.mesh = _mesh;
 	_drawParameter.material = _material;
 	_drawParameter.textureCache = _textureCache;
 	_drawParameter.tessilation = isTessilationEnable();
+	_drawParameter.matrix = math::Matrix4x4();
+	G_DRAWCORE->addDrawParameter(&_drawParameter);
 }
 
 void render::DrawNode::onColorChange()

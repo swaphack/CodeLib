@@ -1,5 +1,9 @@
 #pragma once
 
+namespace sys
+{
+	class MeshDetail;
+}
 
 namespace render
 {
@@ -27,12 +31,14 @@ namespace render
 	struct DrawParameter
 	{
 		Node* node = nullptr;
-		ShaderProgram* program = nullptr;
 		Mesh* mesh = nullptr;
 		Material* material = nullptr;
 		DrawTextureCache* textureCache = nullptr;
 		// 是否细分
 		bool tessilation = false;
 		math::Matrix4x4 matrix;
+
+		// 额外数据
+		void* data = nullptr;
 	};
 }

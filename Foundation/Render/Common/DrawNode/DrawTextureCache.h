@@ -47,20 +47,12 @@ namespace render
 			std::string name;
 			// 完整路径
 			std::string fullpath;
-			// 应用次数
-			int refCount = 0;
 			// 纹理
 			Texture* texture = nullptr;
 			// 矩形
 			math::Rect rect = math::Rect(0,0,1,1);
 			// 是否旋转
 			bool rotate = false;
-			// 增加引用次数
-			void increase();
-			// 减少引用次数
-			void descrease();
-			// 释放
-			void dispose();
 		};
 		// 图片引用次数
 		std::map<std::string, TextureInfo> _textureInfos;

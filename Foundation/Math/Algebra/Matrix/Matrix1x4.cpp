@@ -56,13 +56,3 @@ math::Matrix1x4::~Matrix1x4()
 {
 
 }
-
-math::Matrix1x4 math::Matrix1x4::operator*(const math::Matrix4x4& mat) const
-{
-	Matrix<float, 4, 4> mat0;
-	mat0.setRow(0, this->getValue());
-	Matrix<float, 4, 4> mat1(mat);
-
-	Matrix4x4 mat2 = mat0 * mat1;
-	return Matrix1x4(mat2[0], mat2[1], mat2[2], mat2[3]);
-}

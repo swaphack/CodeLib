@@ -24,9 +24,9 @@ Node::Node()
 , _bRelativeToParent(true)
 , _zOrder(0)
 {
+	_notify = G_NOTIFYCENTER->alloct(this);
 	this->setVisible(true);
 	this->setTouchNode(this);
-	_notify = G_NOTIFYCENTER->alloct(this);
 }
 
 Node::~Node()
@@ -278,7 +278,7 @@ void* Node::getUserData() const
 void Node::setZOrder(int z)
 {
 	_zOrder = z;
-	setDirty(true);
+	this->notify(render::NodeNotifyType::NODE);
 }
 
 int Node::getZOrder() const
@@ -294,11 +294,25 @@ void Node::setVisible( bool status )
 	}
 
 	_bVisibled = status;
+	this->notify(render::NodeNotifyType::VISIBLE);
 }
 
 bool Node::isVisible() const
 {
 	return _bVisibled;
+}
+
+bool render::Node::isRecursiveVisible() const
+{
+	if (!this->isVisible())
+	{
+		return false;
+	}
+	if (this->getParent())
+	{
+		return this->getParent()->isRecursiveVisible();
+	}
+	return true;
 }
 
 ActionProxy* Node::getActionProxy()
@@ -572,20 +586,16 @@ const math::Matrix4x4& Node::getLocalMatrix() const
 
 math::Vector3 render::Node::convertWorldToLocalPoint(const math::Vector3& point) const
 {
-	return math::Matrix4x4::transpose(point, _worldInverseMatrix);
+	return  _worldInverseMatrix * point;
 }
 
 math::Vector3 render::Node::convertLocalToWorldPoint(const math::Vector3& point) const
 {
-	return math::Matrix4x4::transpose(point, _worldMatrix);
+	return _worldMatrix * point;
 }
 
 void render::Node::setSkipDraw(bool status)
 {
-	if (status == true)
-	{
-		int a = 1;
-	}
 	_bSkipDraw = status;
 }
 
@@ -731,7 +741,7 @@ void render::Node::calDirectionWithRotate()
 	math::Matrix4x4 mat; 
 	mat.setRotate(_obRotation);
 
-	setRight(math::Matrix4x4::transpose(getDefaultRight(), mat));
-	setUp(math::Matrix4x4::transpose(getDefaultUp(), mat));
-	setFront(math::Matrix4x4::transpose(getDefaultFront(), mat));
+	setRight(mat * getDefaultRight());
+	setUp(mat * getDefaultUp());
+	setFront(mat * getDefaultFront());
 }

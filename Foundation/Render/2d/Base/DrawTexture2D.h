@@ -30,6 +30,8 @@ namespace render
 		void loadTextureChip(const std::string& chipname);
 		// 设置成纹理大小
 		void setNativeTextureSize();
+		// 清空纹理
+		void cleanTexture();
 	public:
 		/**
 		*	设置纹理坐标

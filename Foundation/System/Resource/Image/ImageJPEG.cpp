@@ -1,5 +1,5 @@
 #include "ImageJPEG.h"
-#include "../extensions.h"
+#include "third_party.h"
 using namespace sys;
 
 

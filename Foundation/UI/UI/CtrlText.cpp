@@ -219,6 +219,7 @@ void ui::CtrlText::onTextBodyChange()
 void CtrlText::onTextTextureChange()
 {
 	render::Texture2D* texture = G_TEXTURE_CACHE->createTexture2D(_textDefine);
+	_texture2D->cleanTexture();
 	_texture2D->loadTexture(texture);
 	_texture2D->setNativeTextureSize();
 }

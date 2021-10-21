@@ -1,5 +1,5 @@
 #include "MediaFFmpeg.h"
-#include "../extensions.h"
+#include "third_party.h"
 
 #include <string>
 

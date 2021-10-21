@@ -43,53 +43,24 @@ void render::DrawTextureCache::addTexture(
 		info.fullpath = fullpath;
 		info.rect = rect;
 		info.rotate = rotate;
-		info.increase();
+		SAFE_RETAIN(info.texture);
 		_textureInfos.insert(std::make_pair(name, info));
-	}
-	else
-	{
-		it->second.increase();
 	}
 }
 
 void render::DrawTextureCache::removeTexture(const std::string& name)
 {
 	auto it = _textureInfos.find(name);
-	if (it == _textureInfos.end())
-	{
-		return;
-	}
-	it->second.descrease();
-	if (it->second.refCount == 0)
-	{
-		if (it->second.fullpath.empty())
-		{
-			G_TEXTURE_CACHE->removeTexture(it->second.texture);
-		}
-		else
-		{
-			G_TEXTURE_CACHE->removeTexture2D(it->second.fullpath);
-		}
-		_textureInfos.erase(it);
-	}
+	if (it == _textureInfos.end()) return;
+	SAFE_RELEASE(it->second.texture);
+	_textureInfos.erase(it);
 }
 
 void render::DrawTextureCache::removeAllTextures()
 {
-	for (auto item : _textureInfos)
+	for (auto& item : _textureInfos)
 	{
-		item.second.dispose();
-		if (item.second.refCount == 0)
-		{
-			if (item.second.fullpath.empty())
-			{
-				G_TEXTURE_CACHE->removeTexture(item.second.texture);
-			}
-			else
-			{
-				G_TEXTURE_CACHE->removeTexture2D(item.second.fullpath);
-			}
-		}
+		SAFE_RELEASE(item.second.texture);
 	}
 	_textureInfos.clear();
 }
@@ -114,24 +85,4 @@ render::Texture* render::DrawTextureCache::getTexture(const std::string& name)
 	}
 
 	return it->second.texture;
-}
-/////////////////////////////////////////////////////////////////////////
-void render::DrawTextureCache::TextureInfo::increase()
-{
-	refCount++;
-	SAFE_RETAIN(texture);
-}
-
-void render::DrawTextureCache::TextureInfo::descrease()
-{
-	refCount--;
-	SAFE_RELEASE(texture);
-}
-
-void render::DrawTextureCache::TextureInfo::dispose()
-{
-	while (refCount > 0)
-	{
-		this->descrease();
-	}
 }

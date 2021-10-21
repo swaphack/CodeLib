@@ -24,8 +24,13 @@ void ue::UIEditorApplication::show()
 {
 	_ideConfig.loadXml(G_FILEPATH->getFilePath(IDE_CONFIG_FILEPATH));
 	_projectConfig.loadXml(G_FILEPATH->getFilePath(PROJECT_CONFIG_FILEPATH));
-	ui::UIShaderHelper::setTexShader(_ideConfig.getShader().TexVertex, _ideConfig.getShader().TexFragment);
-	ui::UIShaderHelper::setColorShader(_ideConfig.getShader().ColorVertex, _ideConfig.getShader().ColorFragment);
+	auto pShaderSetting = _ideConfig.getShader();
+	if (pShaderSetting)
+	{
+		ui::UIShaderHelper::setTexShader(pShaderSetting->TexVertex, pShaderSetting->TexFragment);
+		ui::UIShaderHelper::setColorShader(pShaderSetting->ColorVertex, pShaderSetting->ColorFragment);
+	}
+	G_DRAWCORE->setDrawType((render::DrawCore::DrawType)_ideConfig.getIDE().ShaderMode);
 
 	MainWindow* pWindow = CREATE_NODE(MainWindow);
 	getCanvas()->pushScene(pWindow);

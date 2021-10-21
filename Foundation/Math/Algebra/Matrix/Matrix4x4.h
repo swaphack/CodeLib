@@ -4,6 +4,7 @@
 #include "../Vector/Vector3.h"
 #include "../Vector/Vector4.h"
 #include "Matrix4x1.h"
+#include "Matrix1x4.h"
 #include "SquareMatrix.h"
 
 namespace math
@@ -132,8 +133,6 @@ namespace math
 		*/
 		void setShearZ(float radianX);
 	public:
-		Matrix4x1 operator*(const Matrix4x1& mat) const;
-		Vector4 operator*(const Vector4& mat) const;
 		Matrix4x4 operator*(const Matrix4x4& mat) const;
 		Matrix4x4& operator=(const Matrix4x4& mat);
 		Matrix4x4& operator=(const Matrix4x1& mat);
@@ -167,9 +166,6 @@ namespace math
 		// tsr
 		static Matrix4x4 getTSR(const Vector3& translate, const Vector3& scale, const Vector3& rotate);
 
-		// 坐标计算
-		static Vector3 transpose(const Vector3& src, const Matrix4x4& mat);
-
 		// 主视图
 		static Matrix4x4 getFrontViewMatrix();
 		// 后视图
@@ -183,4 +179,11 @@ namespace math
 		// 右视图
 		static Matrix4x4 getRightViewMatrix();
 	};
+
+
+	Matrix4x1 operator*(const Matrix4x4& mat0, const Matrix4x1& mat1);
+	Matrix1x4 operator*(const Matrix1x4& mat0, const Matrix4x4& mat1);
+	Vector4 operator*(const Matrix4x4& mat, const Vector4& vec);
+	Vector3 operator*(const Matrix4x4& mat, const Vector3& vec);
+	Vector3 operator*(const Matrix4x4& mat, const Vector2& vec);
 }

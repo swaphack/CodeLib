@@ -26,8 +26,6 @@ namespace render
 			Mat4x4,
 		};
 
-
-
 #define CONSTRUCT_VALUE_TYPE(UT, T) \
 UniformParameter(const std::string& name, T value) \
 {\
@@ -35,7 +33,7 @@ Type = UT; \
 Name = name; \
 Size = sizeof(T);\
 Data = (T*)malloc(Size); \
-memcpy(Data, &value, Size);\
+if (Data) memcpy(Data, &value, Size);\
 }
 
 #define CONSTRUCT_FLOAT_ARRAY_TYPE(UT, T) \
@@ -45,11 +43,11 @@ Type = UT; \
 Name = name; \
 Size = value.getSize();\
 Data = (float*)malloc(Size);\
-memcpy(Data, value.getValue(), Size);\
+if (Data) memcpy(Data, value.getValue(), Size);\
 }
 
 #define AS_VALUE_TYPE(T, Func, UT, DefaultValue) \
-T as##Func() \
+T as##Func() const \
 {\
 if (Data == nullptr || UT != Type ) {\
 	return DefaultValue;\
@@ -59,7 +57,7 @@ if (Data == nullptr || UT != Type ) {\
 }
 
 #define AS_FLOAT_ARRAY_TYPE(T,Func, UT, DefaultValue) \
-T as##Func() \
+T as##Func() const \
 {\
 if (Data == nullptr || UT != Type ) {\
 	return DefaultValue;\
@@ -78,7 +76,7 @@ if (Data == nullptr || UT != Type ) {\
 			void* Data = nullptr;
 		public:
 			UniformParameter() {}
-			UniformParameter(const std::string& name, UniformType type, uint32_t size, void* value) 
+			UniformParameter(const std::string& name, UniformType type, uint32_t size, void* value)
 			{
 				Name = name;
 				Type = type;
@@ -129,38 +127,17 @@ if (Data == nullptr || UT != Type ) {\
 	public:
 		// 设置shaderprogram
 		void setShaderProgram(ShaderProgram* shaderProgram);
-		void removeAllUniforms(bool bContainSelfDefined = false);
 		// 添加自定义uniform
 		void addSelfDefineUniform(const std::string& name, UniformType type, uint32_t size, void* value);
+		// 移除自定义uniform
 		void removeAllSelfDefineUniforms();
-	public:
-		inline const std::map<EnvUniformType, std::string>& getEnvUniforms() const { return _mapEnvUniforms; }
-		inline const std::map<MatrixUniformType, std::string>& getMatrixUniforms() const { return _mapMatrixUniforms; }
-		inline const std::map<TextureUniformType, std::string>& getTextureUniforms() const { return _mapTextureUniforms; }
-		inline const std::map<MaterialUniformType, std::string>& getMaterialUniforms() const { return _mapMaterialUniforms; }
-		inline const std::map<SingleLightUniformType, std::string>& getSingleLightUniforms() const { return _mapSingleLightUniforms; }
-		inline const std::map<MultiLightsUniformType, std::string>& getMultiLightsUniforms() const { return _mapMultiLightsUniforms; }
+		// 自定义uniform
 		inline const std::map<std::string, UniformParameter>& getSelfDefinedUniforms() const { return _mapSelfDefinedUniforms; }
-
-		inline const std::map<VertexDataType, std::string>& getAttribs() const { return _mapAttribs; }
 	public:
 		// 自定义参数是否相同
 		bool equalsSelfDefinedUniforms(const MaterialSetting& ms) const;
-	protected:
-		// 初始化参数
-		void initParameters(ShaderProgram* shaderProgram);
 	private:
 		ShaderProgram* _shaderProgram = nullptr;
-		// 默认参数
-		std::map<EnvUniformType, std::string> _mapEnvUniforms;
-		std::map<MatrixUniformType, std::string> _mapMatrixUniforms;
-		std::map<TextureUniformType, std::string> _mapTextureUniforms;
-		std::map<MaterialUniformType, std::string> _mapMaterialUniforms;
-		std::map<SingleLightUniformType, std::string> _mapSingleLightUniforms;
-		std::map<MultiLightsUniformType, std::string> _mapMultiLightsUniforms;
-
-		std::map<VertexDataType, std::string> _mapAttribs;
-
 		// 自定义
 		std::map<std::string, UniformParameter> _mapSelfDefinedUniforms;
 	};

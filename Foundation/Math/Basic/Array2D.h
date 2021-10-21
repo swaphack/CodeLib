@@ -32,9 +32,9 @@ namespace math
 			this->assign(val);
 			free(val);
 		}
-		Array2D(const Array2D& mat)
+		Array2D(const Array2D& ary)
 		{
-			*this = mat;
+			*this = ary;
 		}
 		virtual ~Array2D()
 		{
@@ -272,28 +272,44 @@ namespace math
 		*/
 		Array2D transpose() const
 		{
-			Array2D mat;
+			Array2D ary;
 
 			for (int i = 0; i < Height; i++)
 			{
 				for (int j = 0; j < Width; j++)
 				{
-					mat.setValue(i, j, getValue(i, j));
+					ary.setValue(i, j, getValue(i, j));
 				}
 			}
 
-			return mat;
+			return ary;
+		}
+
+		bool equals(const Array2D& ary)
+		{
+			for (size_t i = 0; i < Height; i++)
+			{
+				for (size_t j = 0; j < Width; j++)
+				{
+					if (this->getValue(i, j) != ary.getValue(i, j))
+					{
+						return false;
+					}
+				}
+			}
+
+			return true;
 		}
 	public:
 		/**
 		*	¸´ÖÆ¾ØÕóÔªËØ
 		*/
-		Array2D& operator=(const Array2D& mat)
+		Array2D& operator=(const Array2D& ary)
 		{
-			int len = mat.Width * mat.Height;
+			int len = ary.Width * ary.Height;
 			for (int i = 0; i < len; i++)
 			{
-				setValue(i, mat.getValue(i));
+				setValue(i, ary.getValue(i));
 			}
 
 			return *this;

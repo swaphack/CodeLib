@@ -27,7 +27,7 @@ void TestEnvironmentNode::testMatrix()
 
 	math::Vector3 up(0, 0, 1);
 
-	math::Vector3 result = math::Matrix4x4::transpose(up, mat);
+	math::Vector3 result = mat * up;
 
 	std::vector<math::Vector3> vecData;
 	vecData.push_back(math::Vector3(1, 2, 4));

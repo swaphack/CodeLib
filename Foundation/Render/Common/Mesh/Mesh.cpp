@@ -3,6 +3,7 @@
 #include "Common/VAO/import.h"
 #include "Graphic/import.h"
 #include "Common/Material/import.h"
+#include "Common/DrawNode/DrawCore.h"
 
 render::Mesh::Mesh()
 {
@@ -28,9 +29,8 @@ render::Mesh::~Mesh()
 
 void render::Mesh::setMeshDetail(sys::MeshDetail* detail)
 {
-	SAFE_RELEASE(_detail);
 	SAFE_RETAIN(detail);
-
+	SAFE_RELEASE(_detail);
 	_detail = detail;
 }
 
@@ -63,7 +63,7 @@ void render::Mesh::setVertices(const std::vector<math::Vector3>& points)
 {
 	int nCount = points.size();
 	int nLength = 3;
-	auto pVertice = (float*)getMeshDetail()->createVertices(nCount, sizeof(float), nLength);
+	auto pVertice = (float*)getMeshDetail()->createVertices(nCount, nLength);
 	for (int i = 0; i < nCount; i++)
 	{
 		memcpy(pVertice + i * nLength, points[i].getValue(), nLength * sizeof(float));
@@ -79,7 +79,7 @@ void render::Mesh::setNormals(const std::vector<math::Vector3>& normals)
 {
 	int nCount = normals.size();
 	int nLength = 3;
-	auto pVertice = (float*)getMeshDetail()->createNormals(nCount, sizeof(float), nLength);
+	auto pVertice = (float*)getMeshDetail()->createNormals(nCount, nLength);
 	for (int i = 0; i < nCount; i++)
 	{
 		memcpy(pVertice + i * nLength, normals[i].getValue(), nLength * sizeof(float));
@@ -95,7 +95,7 @@ void render::Mesh::setColors(const std::vector<phy::Color4F>& colors)
 {
 	int nCount = colors.size();
 	int nLength = 4;
-	auto pVertice = (float*)getMeshDetail()->createColors(nCount, sizeof(float), nLength);
+	auto pVertice = (float*)getMeshDetail()->createColors(nCount, nLength);
 	for (int i = 0; i < nCount; i++)
 	{
 		memcpy(pVertice + i * nLength, colors[i].getValue(), nLength * sizeof(float));
@@ -111,7 +111,7 @@ void render::Mesh::setUVs(const std::vector<math::Vector2>& uvs)
 {
 	int nCount = uvs.size();
 	int nLength = 2;
-	auto pVertice = (float*)getMeshDetail()->createUVs(nCount, sizeof(float), nLength);
+	auto pVertice = (float*)getMeshDetail()->createUVs(nCount, nLength);
 	for (int i = 0; i < nCount; i++)
 	{
 		memcpy(pVertice + i * nLength, uvs[i].getValue(), nLength * sizeof(float));
@@ -128,7 +128,7 @@ void render::Mesh::setIndices(const std::vector<int>& indices)
 	int nCount = indices.size();
 	int nLength =1;
 
-	auto pVertice = (uint32_t*)getMeshDetail()->createIndices(nCount, sizeof(uint32_t), nLength);
+	auto pVertice = (uint32_t*)getMeshDetail()->createIndices(nCount, nLength);
 
 	memcpy(pVertice, &indices[0], nCount * sizeof(uint32_t));
 }
@@ -194,7 +194,11 @@ void render::Mesh::drawWithBufferObject()
 	_indiceBuffer->bindBuffer();
 	if (_modelMatrices.getLength() > 0)
 	{
-		int primaryCount = _modelMatrices.getLength() / _modelMatrices.getUnitSize();
+		int primaryCount = 1;
+		if (isBatchDraw())
+		{
+			primaryCount = _modelMatrices.getVerticeCount();
+		}
 		GLBufferObjects::drawElementsInstanced(_drawMode, nIndiceLength, IndexDataType::UNSIGNED_INT, nullptr, primaryCount);
 	}
 	else
@@ -422,7 +426,7 @@ void render::Mesh::initDetailNormalData()
 
 	int nLength = nCount / nUnitSize;
 
-	float* normals = (float*)getMeshDetail()->createNormals(nLength, sizeof(float), 3);
+	float* normals = (float*)getMeshDetail()->createNormals(nLength, 3);
 	this->calTrianglesVertexNormal(getMeshDetail()->getVertices(), getMeshDetail()->getIndices(), normals);
 }
 
@@ -447,7 +451,7 @@ void render::Mesh::initDetailTangentData()
 	int nUnitSize = getMeshDetail()->getVertices().getUnitSize();
 
 	int nLength = nCount / nUnitSize;
-	float* tangents = (float*)getMeshDetail()->createTangents(nLength, sizeof(float), 3);
+	float* tangents = (float*)getMeshDetail()->createTangents(nLength, 3);
 	this->calTrianglesVertexTangent(getMeshDetail()->getVertices(), getMeshDetail()->getUVs(), getMeshDetail()->getIndices(), tangents);
 }
 
@@ -487,7 +491,7 @@ void render::Mesh::calTrianglesVertexNormal(const sys::MeshMemoryData& vertices,
 		vecPoint.push_back(pos);
 	}
 
-	int nPointCount = indices.getLength() / indices.getUnitSize();
+	int nPointCount = indices.getVerticeCount();
 	int nTriangleCount = nPointCount / 3;
 
 	uint32_t* pIndice = (uint32_t*)indices.getValue();
@@ -572,7 +576,7 @@ void render::Mesh::calTrianglesVertexTangent(const sys::MeshMemoryData& vertices
 		vecUV.push_back(uv);
 	}
 
-	int nPointCount = indices.getLength() / indices.getUnitSize();
+	int nPointCount = indices.getVerticeCount();
 	int nTriangleCount = nPointCount / 3;
 
 	uint32_t* pIndice = (uint32_t*)indices.getValue();
@@ -647,9 +651,9 @@ void render::Mesh::setModelMatrices(int len, const math::Matrix4x4* vertexes)
 	}
 }
 
-char* render::Mesh::createModelMatrices(size_t len, uint32_t typeSize, int unitSize)
+char* render::Mesh::createModelMatrices(size_t len, int unitSize)
 {
-	_modelMatrices.resize(len * unitSize, typeSize);
+	_modelMatrices.resize(len * unitSize, sizeof(float));
 	_modelMatrices.setUnitSize(unitSize);
 	return _modelMatrices.getPtr();
 }
@@ -659,8 +663,25 @@ const sys::MeshMemoryData& render::Mesh::getModelMatrices() const
 	return _modelMatrices;
 }
 
+void render::Mesh::setBatchDraw(bool bBatch)
+{
+	_bBatchDraw = bBatch;
+}
+
+bool render::Mesh::isBatchDraw() const
+{
+	return _bBatchDraw;
+}
+
 bool render::Mesh::equals(const Mesh& mesh) const
 {
+	if (getDrawMode() != mesh.getDrawMode()) return false;
 	return _detail->equals(*mesh.getMeshDetail());
+}
+
+bool render::Mesh::sameLayout(const Mesh& mesh) const
+{
+	if (getDrawMode() != mesh.getDrawMode()) return false;
+	return _detail->sameLayout(*mesh.getMeshDetail());
 }
 

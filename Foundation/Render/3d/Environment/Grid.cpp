@@ -42,8 +42,8 @@ void render::Grid::onGridChange()
 	int halfWidth = widthCount / 2;
 	int halfHeight = heightCount / 2;
 
-	float* pVertice = (float*)this->getMesh()->getMeshDetail()->createVertices(2 * (widthCount + heightCount), sizeof(float), 3);
-	uint32_t* pIndice = (uint32_t*)this->getMesh()->getMeshDetail()->createIndices(2 * (widthCount + heightCount), sizeof(uint32_t), 1);
+	float* pVertice = (float*)this->getMesh()->getMeshDetail()->createVertices(2 * (widthCount + heightCount), 3);
+	uint32_t* pIndice = (uint32_t*)this->getMesh()->getMeshDetail()->createIndices(2 * (widthCount + heightCount), 1);
 
 	for (int i = 0; i < widthCount; i++)
 	{

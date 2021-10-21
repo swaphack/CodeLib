@@ -165,10 +165,12 @@ void ue::MainWindow::addFPS()
 	render::CallFuncN* pCallFunc = CREATE_ACTION(render::CallFuncN);
 	pCallFunc->setFunc([](sys::Object* sender) {
 		uint64_t diffTime = sys::TimeClock::getDifferenceOfRecordTime();
+		if (diffTime == 0) return;
 		int fps = 1000 / diffTime;
 		int drawCount = G_DRAWCORE->getDrawCallCount();
 		int undrawCount = G_DRAWCORE->getUnDrawCallCount();
 		std::string text = getCString("FPS %d\nDraw Call %d\nNot Draw Call %d", fps, drawCount, undrawCount);
+		PRINTLN("============\n%s\n", text.c_str());
 		((ui::CtrlText*)sender)->setString(text);
 	});
 

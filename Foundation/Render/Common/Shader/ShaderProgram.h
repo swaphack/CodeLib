@@ -18,6 +18,8 @@ namespace render
 	class VertexArrayBufferObject;
 	class VertexArrayObject;
 
+	class ShaderProperty;
+
 	/**
 	*	着色器控制程序
 	*	glCreateProgram
@@ -224,6 +226,9 @@ namespace render
 		void bindMat4AttribPointer(VertexArrayObject* vao, const std::string& name, uint32_t offset);
 		// 3x3 3个vec3
 		void bindMat3AttribPointer(VertexArrayObject* vao, const std::string& name, uint32_t offset);
+	public:
+		ShaderProperty* getShaderProperty();
+		const ShaderProperty* getShaderProperty() const;
 	private:
 		/**
 		*	程序编号
@@ -257,6 +262,10 @@ namespace render
 		*	管线
 		*/
 		std::map<std::string, ShaderProgramPipeline*> _programPipelines;
+		/**
+		*	属性
+		*/
+		ShaderProperty* _shaderProperty = nullptr;
 	};
 
 }

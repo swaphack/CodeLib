@@ -103,6 +103,8 @@ namespace render
 		void setVisible(bool status);
 		// 是否可见
 		bool isVisible()  const;
+		// 是否可见(递归检测其父节点是否可见)
+		bool isRecursiveVisible()  const;
 	public:
 		// 跳过绘制
 		void setSkipDraw(bool status);

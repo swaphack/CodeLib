@@ -45,7 +45,7 @@ bool OBB::contains(const Vector3& point)
 	math::Matrix4x4 mat;
 	math::Matrix4x4::getRST(_rotation, math::Vector3(1, 1, 1), _center, mat);
 
-	math::Vector3 pos = math::Matrix4x4::transpose(point, mat.getInverse());
+	math::Vector3 pos = mat.getInverse() * point;
 
 	AABB box(math::Vector3(0, 0, 0), _volume);
 

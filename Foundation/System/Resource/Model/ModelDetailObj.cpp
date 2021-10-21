@@ -1,6 +1,6 @@
 #include "ModelDetailObj.h"
 #include "mathlib.h"
-#include "../extensions.h"
+#include "third_party.h"
 #include "IO/Directory.h"
 #include "MaterialDetail.h"
 #include "MeshDetail.h"
@@ -114,13 +114,13 @@ bool ModelDetailObj::load(const std::string& fullpath)
 			int nVertCount = pData->Vertices.size();
 			if (nVertCount > 0)
 			{
-				float* verticeData = (float*)pMesh->createVertices(nVertCount, sizeof(float), 3);
+				float* verticeData = (float*)pMesh->createVertices(nVertCount, 3);
 
-				float* normalData = (float*)pMesh->createNormals(nVertCount, sizeof(float), 3);
+				float* normalData = (float*)pMesh->createNormals(nVertCount, 3);
 
-				float* texCoordData = (float*)pMesh->createUVs(nVertCount, sizeof(float), 2);
+				float* texCoordData = (float*)pMesh->createUVs(nVertCount, 2);
 
-				float* colorData = (float*)pMesh->createColors(nVertCount, sizeof(float), 4);
+				float* colorData = (float*)pMesh->createColors(nVertCount, 4);
 
 				for (int i = 0; i < nVertCount; i++)
 				{
@@ -153,7 +153,7 @@ bool ModelDetailObj::load(const std::string& fullpath)
 			int nIdxCount = pData->Indices.size();
 			if (nIdxCount> 0)
 			{
-				uint32_t* indices = (uint32_t*)pMesh->createIndices(nIdxCount, sizeof(uint32_t), 1);
+				uint32_t* indices = (uint32_t*)pMesh->createIndices(nIdxCount, 1);
 				for (int i = 0; i < nIdxCount; i++)
 				{
 					indices[i] = pData->Indices[i];

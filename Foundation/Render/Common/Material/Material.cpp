@@ -3,6 +3,7 @@
 #include "Common/Node/import.h"
 #include "Graphic/import.h"
 #include "MaterialSetting.h"
+#include "Common/DrawNode/DrawCore.h"
 
 render::Material::Material()
 {
@@ -96,6 +97,7 @@ if (data == nullptr) return; \
 memcpy(data, &value, size); \
 _materialSetting->addSelfDefineUniform(name, Type, size, data);
 
+
 #define CREATE_FLOAT_ARRAY_TYPE(Type,name, value) \
 if (value.getSize() == 0) return;\
 uint32_t size = value.getSize();\
@@ -103,6 +105,7 @@ float* data = (float*)malloc(size);\
 if (data == nullptr) return; \
 memcpy(data, value.getValue(), size);\
 _materialSetting->addSelfDefineUniform(name, Type, size, data);
+
 
 void render::Material::setUniform(const std::string& name, int value)
 {
@@ -146,9 +149,9 @@ void render::Material::setUniform(const std::string& name, const math::Matrix4x4
 
 bool render::Material::hasAttrib(const std::string& name) const
 {
-	if (_materialSetting == nullptr) return false;
+	if (_shaderProgram == nullptr) return false;
 
-	for (auto item : _materialSetting->getAttribs())
+	for (auto item : _shaderProgram->getShaderProperty()->getAttribs())
 	{
 		if (item.second == name) 
 			return true;
@@ -159,11 +162,11 @@ bool render::Material::hasAttrib(const std::string& name) const
 
 bool render::Material::hasAttrib(const VertexDataType& type) const
 {
-	if (_materialSetting == nullptr) return false;
+	if (_shaderProgram == nullptr) return false;
 
-	for (auto item : _materialSetting->getAttribs())
+	for (auto item : _shaderProgram->getShaderProperty()->getAttribs())
 	{
-		if (item.first == type)
+		if ((VertexDataType)item.first == type)
 			return true;
 	}
 

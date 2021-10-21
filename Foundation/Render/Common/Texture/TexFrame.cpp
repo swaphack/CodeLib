@@ -22,10 +22,11 @@ void TexFrame::setTexture(const Texture* texture)
 	{
 		return;
 	}
-
+	auto pTexture = (Texture*)texture;
+	SAFE_RETAIN(pTexture);
 	SAFE_RELEASE(_texture);
-	_texture = (Texture*)texture;
-	SAFE_RETAIN(_texture);
+	_texture = pTexture;
+	
 }
 
 const Texture* TexFrame::getTexture() const

@@ -201,15 +201,7 @@ void DrawScale9Texture2D::updateScale9ImageMeshData()
 		pMesh->setVertices(16, _scale9Vertex.vertices, 3);
 		pMesh->setColors(16, _scale9Vertex.colors, 4);
 		pMesh->setUVs(16, uvs, 2);
-
-		if (getTexture() != nullptr)
-		{
-			pMesh->setIndices(54, _scale9Vertex.indices);
-		}
-		else
-		{
-			pMesh->setIndices(0, nullptr);
-		}
+		pMesh->setIndices(54, _scale9Vertex.indices);
 	}
 	this->updateMeshData();
 }

@@ -9,18 +9,22 @@
 #include "ShaderProgramUniform.h"
 #include "Common/VAO/VertexArrayObject.h"
 #include "Common/VAO/VertexArrayBufferObject.h"
-
+#include "ShaderProperty.h"
 using namespace render;
 
 
 ShaderProgram::ShaderProgram()
 {
 	this->initProgram();
+
+	_shaderProperty = new ShaderProperty();
 }
 
 ShaderProgram::~ShaderProgram()
 {
 	this->releaseProgram();
+
+	delete _shaderProperty;
 }
 
 uint32_t ShaderProgram::getProgramID() const
@@ -89,6 +93,8 @@ bool ShaderProgram::link()
 	}
 
 	detachAllShaders();
+
+	_shaderProperty->initShaderProgram(this);
 
 	GLDebug::showError();
 
@@ -575,4 +581,14 @@ void render::ShaderProgram::bindMat3AttribPointer(VertexArrayObject* vao, const 
 		GLBufferObjects::setVertexAttribDivisor(attrib->getAttribID() + 1, 1);
 		GLBufferObjects::setVertexAttribDivisor(attrib->getAttribID() + 2, 1);
 	}
+}
+
+ShaderProperty* render::ShaderProgram::getShaderProperty()
+{
+	return _shaderProperty;
+}
+
+const ShaderProperty* render::ShaderProgram::getShaderProperty() const
+{
+	return _shaderProperty;
 }
