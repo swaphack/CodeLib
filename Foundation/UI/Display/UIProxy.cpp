@@ -463,15 +463,15 @@ void ui::UIProxy::loadTextures(tinyxml2::XMLElement* xmlNode)
 		return;
 	}
 
-	tool::TexturePacker texPacker;
+	tool::ImageAtlasPacker texPacker;
 	auto pChild = pTexture->FirstChildElement();
 	while (pChild)
 	{
 		std::string type;
-		std::string altas;
+		std::string atlas;
 		std::string image;
 		if (pChild->Attribute(TEXTURE_TYPE)) type = pChild->Attribute(TEXTURE_TYPE);
-		if (pChild->Attribute(TEXTURE_ATLAS)) altas = pChild->Attribute(TEXTURE_ATLAS);
+		if (pChild->Attribute(TEXTURE_ATLAS)) atlas = pChild->Attribute(TEXTURE_ATLAS);
 		if (pChild->Attribute(TEXTURE_IMAGE)) image = pChild->Attribute(TEXTURE_IMAGE);
 		if (type == TEXTURE_TYPE_IMAGE)
 		{
@@ -479,8 +479,8 @@ void ui::UIProxy::loadTextures(tinyxml2::XMLElement* xmlNode)
 		}
 		else if (type == TEXTURE_TYPE_ATLAS)
 		{
-			texPacker.loadTextureAtlas(altas);
-			G_TEXTURE_CACHE->addTexAltas(image, texPacker.getTextureAtlas());
+			texPacker.loadTextureAtlas(atlas);
+			G_TEXTURE_CACHE->addTexAtlas(image, texPacker.getTextureAtlas());
 		}
 
 		pChild = pChild->NextSiblingElement();

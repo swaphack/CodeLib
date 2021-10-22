@@ -133,20 +133,21 @@ sys::VerticalAlignment CtrlText::getTextVerticalAlignment() const
 
 void CtrlText::setDimensions(float width, float height)
 {
-	_textDefine.width = width;
-	_textDefine.height = height;
+	_textDefine.size.setWidth(width);
+	_textDefine.size.setHeight(height);
 
 	this->notify(render::NodeNotifyType::TEXT);
 }
 
 void CtrlText::setDimensions(const math::Size& size)
 {
-	this->setDimensions(size.getWidth(), size.getHeight());
+	_textDefine.size = size;
+	this->notify(render::NodeNotifyType::TEXT);
 }
 
-math::Size CtrlText::getDimensions() const
+const math::Size& CtrlText::getDimensions() const
 {
-	return math::Size(_textDefine.width, _textDefine.height);
+	return _textDefine.size;
 }
 
 void CtrlText::setTextColor(const phy::Color3B& color)

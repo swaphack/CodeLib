@@ -28,6 +28,15 @@ namespace render
 		virtual ~Material();
 	public:
 		/**
+		*	节点
+		*/
+		void setNode(Node* node);
+		/**
+		*	节点
+		*/
+		Node* getNode();
+	public:
+		/**
 		*	shader
 		*/
 		void setShaderProgram(ShaderProgram* shaderProgram);
@@ -93,5 +102,7 @@ namespace render
 		*	shader参数配置
 		*/
 		MaterialSetting* _materialSetting = nullptr;
+		// 节点
+		Node* _node = nullptr;
 	};
 }

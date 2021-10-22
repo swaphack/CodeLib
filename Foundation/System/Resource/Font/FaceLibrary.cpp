@@ -3,6 +3,7 @@
 #include "LabelStream.h"
 #include "Text/CharsetHelper.h"
 #include "Base/macros.h"
+#include "Resource/Image/ImageDetail.h"
 
 using namespace sys;
 
@@ -46,6 +47,7 @@ bool FaceLibrary::load(const TextDefine& textDefine, LabelStream* stream)
 
 	_border = textDefine.border;
 	_fontSize = (int)textDefine.fontSize;
+
 	FT_Face face = (FT_Face)_face;
 	float scalY = 1.0f * face->max_advance_height / face->units_per_EM;
 	stream->setLineHeight(ceil(scalY * _fontSize));
@@ -53,9 +55,8 @@ bool FaceLibrary::load(const TextDefine& textDefine, LabelStream* stream)
 	{
 		return false;
 	}
-	char* text = (char*)textDefine.text.c_str();
 	int length = -1;
-	wchar_t* dest = CharsetHelper::convertToWideCharWnd(text, length);
+	wchar_t* dest = CharsetHelper::convertToWideCharWnd(textDefine.text.c_str(), length);
 	if (dest == nullptr || length == -1)
 	{
 		return false;
@@ -63,21 +64,19 @@ bool FaceLibrary::load(const TextDefine& textDefine, LabelStream* stream)
 
 	uint32_t rect_width = 0;
 	uint32_t rect_height = 0;
+
 	bool bFixedWidth = stream->isFixedWidth();
-	if (bFixedWidth)
-	{
+	if (bFixedWidth) 
 		rect_width = stream->getFixedWidth();
-	}
+
 	rect_height = stream->getLineHeight();
 
-	int offset_width = 0;
-
 	wchar_t* ptr = dest;
+	int offset_width = 0;
 	int offset = 0;
+
 	while (*ptr != 0 && offset < length)
 	{
-		this->loadChar(*ptr, (int)textDefine.fontSize);
-
 		uint64_t ch = *ptr;
 		if (ch == '\n')
 		{
@@ -90,13 +89,12 @@ bool FaceLibrary::load(const TextDefine& textDefine, LabelStream* stream)
 			offset++;
 			continue;
 		}
-		FT_CHAR_DATA* data = getCharData(ch);
+		FT_CHAR_DATA* data = this->loadChar(ch, (int)textDefine.fontSize);
 		int font_width = static_cast<int>(_fontSize * 0.5f);
 		int font_height = _fontSize;
 
 		if (data)
 		{
-			font_width = data->advX;
 			font_width = data->width;
 			font_height = data->height;
 		}
@@ -136,6 +134,48 @@ bool FaceLibrary::load(const TextDefine& textDefine, LabelStream* stream)
 
 	free(dest);
 
+	return true;
+}
+
+bool sys::FaceLibrary::load(const TextDefine& textDefine, std::map<std::string, ImageDetail*>& mapData)
+{
+	if (_face == nullptr) return false;
+
+	if (textDefine.text.empty())
+	{
+		return false;
+	}
+	int length = -1;
+	wchar_t* dest = CharsetHelper::convertToWideCharWnd(textDefine.text.c_str(), length);
+	if (dest == nullptr || length == -1)
+	{
+		return false;
+	}
+	_fontSize = (int)textDefine.fontSize;
+	wchar_t* ptr = dest;
+	int offset = 0;
+	while (*ptr != 0 && offset < length)
+	{
+		uint64_t ch = *ptr;
+		if (ch == '\n')
+		{
+			ptr++;
+			offset++;
+			continue;
+		}
+
+		FT_CHAR_DATA* data = this->loadChar(ch, (int)textDefine.fontSize);
+		if (data)
+		{
+			sys::ImageDetail* detail = new sys::ImageDetail();
+			detail->setDataFormat(sys::ImageDataFormat::RED);
+			detail->setPixels(data->data, data->width, data->height, 1);
+			mapData[getCString("%ld", ch)] = detail;
+		}
+		ptr++;
+		offset++;
+	}
+	free(dest);
 	return true;
 }
 
@@ -264,6 +304,8 @@ void FaceLibrary::dispose()
 
 void FaceLibrary::writeStream(uint64_t ch, LabelStream* stream, const phy::Color3B& color)
 {
+	if (stream == nullptr) return;
+
 	if (ch == '\n')
 	{
 		if (stream->isFixedWidth())
@@ -283,11 +325,8 @@ void FaceLibrary::writeStream(uint64_t ch, LabelStream* stream, const phy::Color
 		width = data->width;
 		height = data->height;
 
-		//deltaX = data->deltaX;
-		//deltaX = data->deltaX;
 		charWidth = width;
 		deltaX = 0;
-
 	}
 
 	MemoryData memData(charWidth * RGBA_PIXEL_UNIT * height);

@@ -31,10 +31,8 @@ Node::Node()
 
 Node::~Node()
 {
-	this->removeAllChildren();
-	SAFE_RELEASE(_actionProxy);
+	this->cleanup();
 	G_NOTIFYCENTER->release(this);
-	G_COMPUTEQUEUE->remove(this);
 }
 
 bool Node::init()
@@ -76,9 +74,21 @@ Node* Node::getParent() const
 
 void Node::removeFromParent()
 {
+	this->removeFromParentWithCleanup(true);
+}
+void render::Node::removeFromParentWithCleanup(bool clean)
+{
+	if (clean) this->cleanup();
+
 	ASSERT(this->getParent() != nullptr);
 
 	this->getParent()->removeChild(this);
+}
+
+void render::Node::cleanup()
+{
+	this->removeAllChildren();
+	SAFE_RELEASE(_actionProxy);
 }
 void render::Node::setChildrenScene(Scene* scene)
 {
@@ -294,7 +304,7 @@ void Node::setVisible( bool status )
 	}
 
 	_bVisibled = status;
-	this->notify(render::NodeNotifyType::VISIBLE);
+	this->notifyToAll(render::NodeNotifyType::Draw);
 }
 
 bool Node::isVisible() const
@@ -528,24 +538,22 @@ void Node::calRealSpaceByMatrix()
 	math::SquareMatrix4 sm = _localMatrix;
 	_localInverseMatrix = sm.getInverse();
 
-	//G_COMPUTEQUEUE->pushBack(this, [this]() {
-		if (this->getParent() != nullptr)
+	if (this->getParent() != nullptr)
+	{
+		if (this->isRelativeWithParent())
 		{
-			if (this->isRelativeWithParent())
-			{
-				const math::Matrix4x4& mat = this->getParent()->getWorldMatrix();
-				_worldMatrix = _localMatrix * mat;
-			}
-			else
-			{
-				_worldMatrix = _localMatrix;
-			}
+			const math::Matrix4x4& mat = this->getParent()->getWorldMatrix();
+			_worldMatrix = _localMatrix * mat;
 		}
 		else
 		{
 			_worldMatrix = _localMatrix;
 		}
-	//});
+	}
+	else
+	{
+		_worldMatrix = _localMatrix;
+	}
 
 	//if (isClippingEnabled())
 	{

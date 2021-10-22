@@ -4,6 +4,7 @@
 #include "Graphic/import.h"
 #include "Common/Material/import.h"
 #include "Common/DrawNode/DrawCore.h"
+#include "Common/Node/Node.h"
 
 render::Mesh::Mesh()
 {
@@ -25,6 +26,16 @@ render::Mesh::~Mesh()
 	SAFE_RELEASE(_vertexArrayObject);
 	SAFE_RELEASE(_indiceBuffer);
 	SAFE_RELEASE(_vertexBuffer);
+}
+
+void render::Mesh::setNode(Node* node)
+{
+	_node = node;
+}
+
+render::Node* render::Mesh::getNode()
+{
+	return _node;
 }
 
 void render::Mesh::setMeshDetail(sys::MeshDetail* detail)
@@ -135,7 +146,10 @@ void render::Mesh::setIndices(const std::vector<int>& indices)
 
 void render::Mesh::setDrawMode(DrawMode mode)
 {
+	if (_drawMode == mode) return;
+
 	_drawMode = mode;
+	if (_node) _node->notify(render::NodeNotifyType::Draw);
 }
 
 DrawMode render::Mesh::getDrawMode() const

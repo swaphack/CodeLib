@@ -1,6 +1,6 @@
 #include "Material.h"
 #include "Common/Shader/import.h"
-#include "Common/Node/import.h"
+#include "Common/Node/Node.h"
 #include "Graphic/import.h"
 #include "MaterialSetting.h"
 #include "Common/DrawNode/DrawCore.h"
@@ -16,6 +16,16 @@ render::Material::~Material()
 	SAFE_RELEASE(_shaderProgram);
 
 	SAFE_DELETE(_materialSetting);
+}
+
+void render::Material::setNode(Node* node)
+{
+	_node = node;
+}
+
+render::Node* render::Material::getNode()
+{
+	return _node;
 }
 
 void render::Material::setShaderProgram(ShaderProgram* shaderProgram)
@@ -53,6 +63,7 @@ render::MaterialSetting* render::Material::getMaterialSetting() const
 void render::Material::setProgramFunc(const ShaderProgramFunc& func)
 {
 	_programFunc = func;
+	if (_node) _node->notify(render::NodeNotifyType::Draw);
 }
 
 void render::Material::applyMaterial()
@@ -95,7 +106,8 @@ uint32_t size = sizeof(T);\
 T* data = (T*)malloc(size); \
 if (data == nullptr) return; \
 memcpy(data, &value, size); \
-_materialSetting->addSelfDefineUniform(name, Type, size, data);
+_materialSetting->addSelfDefineUniform(name, Type, size, data);\
+if (_node) _node->notify(render::NodeNotifyType::Draw);
 
 
 #define CREATE_FLOAT_ARRAY_TYPE(Type,name, value) \
@@ -104,7 +116,8 @@ uint32_t size = value.getSize();\
 float* data = (float*)malloc(size);\
 if (data == nullptr) return; \
 memcpy(data, value.getValue(), size);\
-_materialSetting->addSelfDefineUniform(name, Type, size, data);
+_materialSetting->addSelfDefineUniform(name, Type, size, data); \
+if (_node) _node->notify(render::NodeNotifyType::Draw);
 
 
 void render::Material::setUniform(const std::string& name, int value)

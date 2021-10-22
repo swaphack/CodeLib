@@ -39,7 +39,7 @@ namespace sys
 		/**
 		*	纹理配置路径
 		*/
-		void setAltasPath(const std::string& altasFilePath);
+		void setAtlasPath(const std::string& atlasFilePath);
 		/**
 		*	纹理配置路径
 		*/
@@ -73,7 +73,7 @@ namespace sys
 		// 碎片
 		std::map<std::string, TextureChip> _chips;
 		// 纹理集配置路径
-		std::string _altasFilePath;
+		std::string _atlasFilePath;
 		// 图片路径
 		std::string _imgFilePath;
 	};

@@ -22,6 +22,15 @@ namespace render
 		virtual ~Mesh();
 	public:
 		/**
+		*	节点
+		*/
+		void setNode(Node* node);
+		/**
+		*	节点
+		*/
+		Node* getNode();
+	public:
+		/**
 		*	网格信息
 		*/
 		void setMeshDetail(sys::MeshDetail* detail);
@@ -212,5 +221,7 @@ namespace render
 		sys::MeshMemoryData _modelMatrices;
 		// 批量绘制
 		bool _bBatchDraw = false;
+		// 节点
+		Node* _node = nullptr;
 	};
 }

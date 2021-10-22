@@ -27,7 +27,7 @@ bool render::Mask::init()
 		this->onMaskBodyChange();
 	});
 
-	this->setDrawMode(DrawMode::TRIANGLE_FAN);
+	this->setDrawMode(DrawMode::TRIANGLES);
 
 	return true;
 }

@@ -29,6 +29,7 @@ namespace sys
 	};
 
 	class LabelStream;
+	class ImageDetail;
 
 	/**
 	*	单面（固定大小）字体库
@@ -47,6 +48,8 @@ namespace sys
 	public:
 		// 加载文本
 		bool load(const TextDefine& textDefine, LabelStream* stream);
+		// 加载字符
+		bool load(const TextDefine& textDefine, std::map<std::string, ImageDetail*>& mapData);
 	protected:
 		// 获取字符数据
 		FT_CHAR_DATA* getCharData(uint64_t ch);

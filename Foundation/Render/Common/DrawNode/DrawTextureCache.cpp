@@ -1,6 +1,6 @@
 #include "DrawTextureCache.h"
 #include "Common/Texture/import.h"
-
+#include "Common/Node/Node.h"
 
 render::DrawTextureCache::DrawTextureCache()
 {
@@ -10,6 +10,16 @@ render::DrawTextureCache::DrawTextureCache()
 render::DrawTextureCache::~DrawTextureCache()
 {
 	this->removeAllTextures();
+}
+
+void render::DrawTextureCache::setNode(Node* node)
+{
+	_node = node;
+}
+
+render::Node* render::DrawTextureCache::getNode()
+{
+	return _node;
 }
 
 void render::DrawTextureCache::addTexture(const std::string& name, const std::string& fullpath)
@@ -46,6 +56,7 @@ void render::DrawTextureCache::addTexture(
 		SAFE_RETAIN(info.texture);
 		_textureInfos.insert(std::make_pair(name, info));
 	}
+	if (_node)_node->notify(render::NodeNotifyType::Draw);
 }
 
 void render::DrawTextureCache::removeTexture(const std::string& name)

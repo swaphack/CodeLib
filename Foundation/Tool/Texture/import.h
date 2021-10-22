@@ -1,3 +1,5 @@
 #pragma once
 
-#include "TexturePacker.h"
+#include "AtlasPacker.h"
+#include "ImageAtlasPacker.h"
+#include "TextAtlasPacker.h"

@@ -72,13 +72,17 @@
   <ItemGroup>
     <ClInclude Include="Document\import.h" />
     <ClInclude Include="Document\XmlHelper.h" />
+    <ClInclude Include="Texture\TextAtlasPacker.h" />
     <ClInclude Include="Texture\import.h" />
-    <ClInclude Include="Texture\TexturePacker.h" />
+    <ClInclude Include="Texture\ImageAtlasPacker.h" />
+    <ClInclude Include="Texture\AtlasPacker.h" />
     <ClInclude Include="toollib.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Document\XmlHelper.cpp" />
-    <ClCompile Include="Texture\TexturePacker.cpp" />
+    <ClCompile Include="Texture\TextAtlasPacker.cpp" />
+    <ClCompile Include="Texture\ImageAtlasPacker.cpp" />
+    <ClCompile Include="Texture\AtlasPacker.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

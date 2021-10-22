@@ -3,6 +3,7 @@
 #include "Base/macros.h"
 #include "FaceLibrary.h"
 #include "LabelStream.h"
+#include "Resource/Image/ImageDetail.h"
 
 sys::LabelLibrary::LabelLibrary()
 {
@@ -44,6 +45,17 @@ bool sys::LabelLibrary::load(const TextDefine& textDefine, LabelStream* stream)
 	}
 
 	return lib->load(textDefine, stream);
+}
+
+bool sys::LabelLibrary::load(const TextDefine& textDefine, std::map<std::string, ImageDetail*>& mapData)
+{
+	auto lib = getFontLibrary(textDefine.filepath, textDefine.fontSize);
+	if (lib == nullptr)
+	{
+		return false;
+	}
+
+	return lib->load(textDefine, mapData);
 }
 
 void sys::LabelLibrary::cleanup()

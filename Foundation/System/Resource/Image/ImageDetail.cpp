@@ -33,6 +33,13 @@ void ImageDetail::setPixels(uint8_t * val, uint32_t width, uint32_t height, int 
 	_height = height;
 }
 
+void ImageDetail::setPixels(const MemoryData& data, uint32_t width, uint32_t height, int nUnitSize)
+{
+	_data = data;
+	_width = width;
+	_height = height;
+}
+
 uint8_t sys::ImageDetail::getUnitSize(ImageDataFormat val)
 {
 	uint8_t size = 0;
@@ -159,24 +166,42 @@ void sys::ImageDetail::rotate90()
 
 void sys::ImageDetail::expandFormat()
 {
-	if (_format == ImageDataFormat::RGB
-		|| _format == ImageDataFormat::BGR)
+	if (_format == ImageDataFormat::RGBA
+		|| _format == ImageDataFormat::BGRA)
 	{
-		uint8_t oldUnitSize = 3;
-		uint8_t newUnitSize = 4;
-
-		uint8_t temp = 255;
-		sys::MemoryData data(_width * _height * newUnitSize);
-		for (int i = 0; i < _height; i++)
-		{
-			for (int j = 0; j < _width; j++)
-			{
-				data.set(newUnitSize * (i * _width + j), oldUnitSize, _data.getPtr(oldUnitSize * (i * _width + j)));
-				data.set(newUnitSize * (i * _width + j) + 3, 1, (char*)&temp);
-			}
-		}
-		_data = data;
-		_format = _format == ImageDataFormat::RGB ? ImageDataFormat::RGBA : ImageDataFormat::BGRA;
+		return;
 	}
 
+	uint8_t newUnitSize = 4;
+	uint8_t oldUnitSize = sys::ImageDetail::getUnitSize(_format);
+	uint8_t one = 255;
+	uint8_t zero = 0;
+
+	sys::MemoryData data(_width * _height * newUnitSize);
+	for (int i = 0; i < _height; i++)
+	{
+		for (int j = 0; j < _width; j++)
+		{
+			char* ptr = _data.getPtr(oldUnitSize * (i * _width + j));
+			data.set(newUnitSize * (i * _width + j), oldUnitSize, ptr);
+			if (_format == ImageDataFormat::RED)
+			{
+				data.set(newUnitSize * (i * _width + j) + 1, 1, ptr);
+				data.set(newUnitSize * (i * _width + j) + 2, 1, ptr);
+				data.set(newUnitSize * (i * _width + j) + 3, 1, ptr);
+			}
+			else if (_format == ImageDataFormat::RG)
+			{
+				data.set(newUnitSize * (i * _width + j) + 2, 1, (char*)&one);
+				data.set(newUnitSize * (i * _width + j) + 3, 1, (char*)&one);
+			}
+			else if (_format == ImageDataFormat::RGB || _format == ImageDataFormat::BGR)
+			{
+				data.set(newUnitSize * (i * _width + j) + 3, 1, (char*)&one);
+			}
+		}
+	}
+
+	_data = data;
+	_format = ImageDataFormat::RGBA;
 }

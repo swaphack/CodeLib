@@ -38,9 +38,9 @@ namespace render
 	public:// 纹理片段
 		std::string getTexFrameName(const std::string& path, const std::string name) const;
 		// 添加纹理集
-		void addTexAltas(const std::string& path, const sys::TextureAtlas& texAltas);
+		void addTexAtlas(const std::string& path, const sys::TextureAtlas& texAtlas);
 		// 添加纹理集
-		void addTexAltas(const std::string& path, const Texture* texture, const sys::TextureAtlas& texAltas);
+		void addTexAtlas(const std::string& path, const Texture* texture, const sys::TextureAtlas& texAtlas);
 		// 添加
 		void addTexFrame(const std::string& path, const TexFrame& texFrame);
 		// 添加

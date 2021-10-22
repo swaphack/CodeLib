@@ -573,9 +573,6 @@
     <ClCompile Include="Common\Node\ComputeQueue.cpp">
       <Filter>Common\Node</Filter>
     </ClCompile>
-    <ClCompile Include="3d\Map\LSystem.cpp">
-      <Filter>3d\Map</Filter>
-    </ClCompile>
     <ClCompile Include="Box\BoxDraw.cpp">
       <Filter>Box</Filter>
     </ClCompile>
@@ -1360,9 +1357,6 @@
       <Filter>3d\Map</Filter>
     </ClInclude>
     <ClInclude Include="3d\Map\common.h">
-      <Filter>3d\Map</Filter>
-    </ClInclude>
-    <ClInclude Include="3d\Map\LSystem.h">
       <Filter>3d\Map</Filter>
     </ClInclude>
     <ClInclude Include="Box\BoxDraw.h">

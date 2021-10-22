@@ -27,9 +27,8 @@ void alg::Bin2D::addItem(int id, int width, int height)
 bool alg::Bin2D::pack(std::vector<Item>& items)
 {
 	std::vector<BinPacking2D::Box> boxes;
-
 	BinPacking2D binPack;
-	for (const auto& item : _items)
+	for (auto& item : _items)
 	{
 		binPack.addItem(item.id, item.width, item.height);
 	}
@@ -44,14 +43,14 @@ bool alg::Bin2D::pack(std::vector<Item>& items)
 		{
 			Item temp;
 			temp.id = item.id;
-			temp.width = item.getWidth();
-			temp.height = item.getHeight();
+			temp.rotate = item.rotate;
 			temp.x = item.x;
 			temp.y = item.y;
-			temp.rotate = item.rotate;
+			temp.width = item.getWidth();
+			temp.height = item.getHeight();
 			items.push_back(temp);
 		}
 	}
 
-	return true;
+	return items.size() > 0;
 }

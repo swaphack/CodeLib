@@ -36,8 +36,8 @@ namespace render
 		FILE,
 		// 网格
 		MESH,
-		// 可见性
-		VISIBLE,
+		// 重新绘制
+		Draw,
 	};
 
 	// 推送委托

@@ -22,7 +22,7 @@ void LayoutLoader::parseAttributes()
 	bool showBgImage = false;
 	bool showBgMask = false;
 	std::string bgImagePath;
-	phy::Color4B bgMaskColor = phy::Color4B(0,0,0,255);
+	phy::Color4B bgMaskColor = phy::Color4B(255, 255, 255,255);
 
 	LOAD_WIDGET_ATTRIBUTE(PROPERTY_IMAGE_SHOW, setBackgroudImageVisible, showBgImage);
 	LOAD_WIDGET_ATTRIBUTE(PROPERTY_MASK_SHOW, setBackgroudMaskVisible, showBgMask);

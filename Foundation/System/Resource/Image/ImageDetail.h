@@ -49,6 +49,8 @@ namespace sys
 		void setDataFormat(ImageDataFormat val);
 		// 设置图片像素数据
 		void setPixels(uint8_t * val, uint32_t width, uint32_t height, int nUnitSize);
+		// 设置图片像素数据
+		void setPixels(const MemoryData& data, uint32_t width, uint32_t height, int nUnitSize);
 	public:
 		// 获取像素单位大小
 		static uint8_t getUnitSize(ImageDataFormat val);

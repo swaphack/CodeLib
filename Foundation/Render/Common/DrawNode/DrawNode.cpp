@@ -17,9 +17,11 @@ using namespace render;
 DrawNode::DrawNode()
 {
 	_material = CREATE_OBJECT(Material);
+	_material->setNode(this);
 	SAFE_RETAIN(_material);
 
 	_mesh = CREATE_OBJECT(Mesh);
+	_mesh->setNode(this);
 	SAFE_RETAIN(_mesh);
 
 	_fragOperator = CREATE_OBJECT(FragmentOperator);
@@ -56,7 +58,7 @@ bool render::DrawNode::init()
 		this->onDrawNodeColorChange();
 	});
 
-	addNotifyListener(NodeNotifyType::VISIBLE, [this]() {
+	addNotifyListener(NodeNotifyType::Draw, [this]() {
 		this->initDrawParameter();
 	});
 
@@ -182,6 +184,7 @@ const render::Texture* render::DrawNode::getTexture() const
 void render::DrawNode::setShaderProgram(ShaderProgram* program)
 {
 	_material->setShaderProgram(program);
+	this->notify(render::NodeNotifyType::Draw);
 }
 
 ShaderProgram* render::DrawNode::getShaderProgram() const

@@ -53,7 +53,11 @@ namespace render
 		// 获取父节点
 		Node* getParent() const;
 		// 从父节点移除
-		virtual void removeFromParent();
+		void removeFromParent();
+		// 从父节点移除，是否清空
+		virtual void removeFromParentWithCleanup(bool clean);
+		// 清空
+		virtual void cleanup();
 		// 设置场景
 		void setChildrenScene(Scene* scene);
 	public:

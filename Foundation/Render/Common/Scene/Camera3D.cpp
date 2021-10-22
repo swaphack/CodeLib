@@ -45,6 +45,6 @@ void render::Camera3D::updateViewPort()
 	parameter.zNear = -_viewParameter.zNear;
 	parameter.zFar = -_viewParameter.zFar;
 
-	_shapeDraw->cleanup();
+	_shapeDraw->removeAllPoints();
 	_shapeDraw->drawFrustum(parameter);
 }

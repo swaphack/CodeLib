@@ -19,14 +19,14 @@ const std::string& sys::TextureAtlas::getImagePath() const
 	return _imgFilePath;
 }
 
-void sys::TextureAtlas::setAltasPath(const std::string& altasFilePath)
+void sys::TextureAtlas::setAtlasPath(const std::string& atlasFilePath)
 {
-	_altasFilePath = altasFilePath;
+	_atlasFilePath = atlasFilePath;
 }
 
 const std::string& sys::TextureAtlas::getAltasPath() const
 {
-	return _altasFilePath;
+	return _atlasFilePath;
 }
 
 void sys::TextureAtlas::addChip(const std::string& name, int width, int height, int x, int y, bool rotate)

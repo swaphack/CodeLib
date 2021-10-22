@@ -88,7 +88,11 @@ namespace ui
 		/**
 		*	从父节点移除
 		*/
-		virtual void removeFromParent();
+		virtual void removeFromParentWithCleanup(bool clean);
+		/**
+		*	清空
+		*/ 
+		virtual void cleanup();
 		/**
 		*	获取控件个数
 		*/

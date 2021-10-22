@@ -1622,7 +1622,6 @@ void render::DrawCore::processPackDraw()
 		item->redraw = false;
 
 		int count = item->children.size();
-
 		auto root = item->root;
 		if (item->tempMeshDtail)
 		{
@@ -1898,7 +1897,7 @@ bool concat_ptr_memory_uvs(
 
 bool render::DrawCore::BatchDrawParameter::packMeshes(sys::MeshDetail* meshDetail)
 {
-	if (meshDetail == nullptr) return false;
+	if (meshDetail == nullptr || children.size() == 0) return false;
 
 	std::vector<sys::MeshDetail*> vecMeshDetails;
 	std::vector<math::Matrix4x4> vecMatrices;
@@ -1911,6 +1910,8 @@ bool render::DrawCore::BatchDrawParameter::packMeshes(sys::MeshDetail* meshDetai
 			vecMatrices.push_back(item->node->getWorldMatrix() * item->matrix);
 		}
 	}
+
+	if (vecMeshDetails.size() == 0 || vecMatrices.size() == 0) return false;
 
 	if (!concat_ptr_memory_vertices(meshDetail, vecMeshDetails, vecMatrices)) return false;
 	if (!concat_ptr_memory_colors(meshDetail, vecMeshDetails)) return false;

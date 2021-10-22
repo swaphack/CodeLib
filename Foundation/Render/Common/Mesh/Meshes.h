@@ -24,6 +24,15 @@ namespace render
 		virtual ~Meshes();
 	public:
 		/**
+		*	节点
+		*/
+		void setNode(Node* node);
+		/**
+		*	节点
+		*/
+		Node* getNode();
+	public:
+		/**
 		*	模型数据
 		*/
 		void setModelDetail(const sys::ModelDetail* modelDetail);
@@ -56,5 +65,7 @@ namespace render
 	private:
 		// 纹理网格
 		std::map<std::string, Mesh*> _meshes;
+		// 节点
+		Node* _node = nullptr;
 	};
 }

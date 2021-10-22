@@ -10,16 +10,28 @@ TestTool::~TestTool()
 
 void TestTool::initNodes()
 {
-	this->testTexturePack();
+	this->packImageTexture();
+	this->packTextTexture();
 }
 
-void TestTool::testTexturePack()
+void TestTool::packImageTexture()
 {
 	std::string root = "H:/Github/CodeLib/Sample/GameEngine/Resource/";
 
-	tool::TexturePacker packer;
+	tool::ImageAtlasPacker packer;
+	packer.setReverseY(true);
 	packer.addDirectory(root + "/UI");
-	//packer.addImage("H:/Github/CodeLib/Sample/UIEditor/Resource/Image/ExampleDiffuseAmbientLighting.png");
 	packer.setSize(512, 512);
-	packer.packPNG(root + "/ATLAS/ui.png", root + "/ATLAS/ui.atlas");
+	packer.packImage(root + "/ATLAS/ui.png", root + "/ATLAS/ui.atlas");
+}
+
+void TestTool::packTextTexture()
+{
+	std::string root = "H:/Github/CodeLib/Sample/GameEngine/Resource/";
+
+	tool::TextAtlasPacker packer;
+	packer.setReverseY(false);
+	packer.setText("qertyuiopasdfghjklzxcvbnm1234567890-=[]\;',./`~!@#$%^&*()_+{}|:\"<>?", root + "Font/font_3.ttf", 32);
+	packer.setSize(512, 512);
+	packer.packImage(root + "/ATLAS/text.png", root + "/ATLAS/text.atlas");
 }

@@ -5,6 +5,7 @@
 namespace render
 {
 	class Texture;
+	class Node;
 
 	/**
 	*	绘制所需要的纹理缓存
@@ -14,6 +15,15 @@ namespace render
 	public:
 		DrawTextureCache();
 		virtual ~DrawTextureCache();
+	public:
+		/**
+		*	节点
+		*/
+		void setNode(Node* node);
+		/**
+		*	节点
+		*/
+		Node* getNode();
 	public:
 		/**
 		*	添加纹理
@@ -56,5 +66,8 @@ namespace render
 		};
 		// 图片引用次数
 		std::map<std::string, TextureInfo> _textureInfos;
+
+		// 节点
+		Node* _node = nullptr;
 	};
 }

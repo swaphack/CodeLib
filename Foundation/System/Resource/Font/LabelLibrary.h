@@ -2,10 +2,13 @@
 
 #include "Base/Instance.h"
 #include "TextDefine.h"
+
+
 namespace sys
 {
 	class FaceLibrary;
 	class LabelStream;
+	class ImageDetail;
 
 	/**
 	*	文本库
@@ -18,6 +21,8 @@ namespace sys
 	public:
 		// 加载文本
 		bool load(const TextDefine& textDefine, LabelStream* stream);
+		// 加载文本
+		bool load(const TextDefine& textDefine, std::map<std::string, ImageDetail*>& mapData);
 		// 清空
 		void cleanup();
 	protected:

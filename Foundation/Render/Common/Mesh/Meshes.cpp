@@ -19,6 +19,16 @@ render::Meshes::~Meshes()
 	this->removeAllMeshes();
 }
 
+void render::Meshes::setNode(Node* node)
+{
+	_node = node;
+}
+
+Node* render::Meshes::getNode()
+{
+	return _node;
+}
+
 void render::Meshes::setModelDetail(const sys::ModelDetail* modelDetail)
 {
 	if (modelDetail == nullptr)
@@ -47,7 +57,7 @@ void Meshes::addMesh(const std::string& name, sys::MeshDetail* mesh)
 	SAFE_RETAIN(pMesh);
 
 	pMesh->setMeshDetail(mesh);
-
+	pMesh->setNode(_node);
 	_meshes[name] = pMesh;
 }
 

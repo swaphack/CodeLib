@@ -30,6 +30,15 @@ namespace render
 		virtual ~Materials();
 	public:
 		/**
+		*	节点
+		*/
+		void setNode(Node* node);
+		/**
+		*	节点
+		*/
+		Node* getNode();
+	public:
+		/**
 		*	模型数据
 		*/
 		void setModelDetail(const sys::ModelDetail* modelDetail);
@@ -75,5 +84,7 @@ namespace render
 	private:
 		// 模型材质
 		std::map<std::string, Material*> _materials;
+		// 节点
+		Node* _node = nullptr;
 	};
 }

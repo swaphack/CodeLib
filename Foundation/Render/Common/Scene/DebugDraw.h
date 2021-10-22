@@ -25,7 +25,7 @@ namespace render
 		/**
 		*	清空
 		*/
-		void cleanup();
+		void removeAllPoints();
 		/**
 		*	画一条世界直线
 		*/

@@ -35,10 +35,8 @@ namespace sys
 		// 显示的文本
 		std::string text;
 
-		// 宽度
-		float width = 0;
-		// 高度
-		float height = 0;
+		// 大小
+		math::Size size;
 
 		// 颜色
 		phy::Color3B color;

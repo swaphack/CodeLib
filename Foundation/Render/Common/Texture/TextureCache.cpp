@@ -96,27 +96,27 @@ std::string render::TextureCache::getTexFrameName(const std::string& path, const
 	return path + "[" + name + "]";
 }
 
-void render::TextureCache::addTexAltas(const std::string& path, const sys::TextureAtlas& texAltas)
+void render::TextureCache::addTexAtlas(const std::string& path, const sys::TextureAtlas& texAtlas)
 {
 	Texture* texture = this->createTexture2D(path);
 	if (texture)
 	{
-		this->addTexAltas(path, texture, texAltas);
+		this->addTexAtlas(path, texture, texAtlas);
 	}
 }
 
-void render::TextureCache::addTexAltas(const std::string& path, const Texture* texture, const sys::TextureAtlas& texAltas)
+void render::TextureCache::addTexAtlas(const std::string& path, const Texture* texture, const sys::TextureAtlas& texAtlas)
 {
 	if (texture == nullptr || texture->getWidth() == 0 || texture->getHeight() == 0)
 	{
 		return;
 	}
-	for (const auto& item : texAltas.getAllChips())
+	for (const auto& item : texAtlas.getAllChips())
 	{
 		float y = texture->getHeight() - item.second.y - item.second.height;
 		if (y < 0)
 		{
-			PRINT("error: TextureCache::addTexAltas Y value is lower than 0!!!");
+			PRINT("error: TextureCache::addTexAtlas Y value is lower than 0!!!");
 			y = 0;
 		}
 		math::Rect rect(item.second.x, y, item.second.width, item.second.height);

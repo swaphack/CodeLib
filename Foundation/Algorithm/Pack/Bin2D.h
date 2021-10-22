@@ -3,6 +3,7 @@
 #include "mathlib.h"
 #include <vector>
 #include <map>
+#include <string>
 
 namespace alg
 {
@@ -15,10 +16,10 @@ namespace alg
 		struct Item
 		{
 			int id = 0;
-			int width = 0;
-			int height = 0;
 			int x = 0;
 			int y = 0;
+			int width = 0;
+			int height = 0;
 			bool rotate = false;
 		};
 	public:

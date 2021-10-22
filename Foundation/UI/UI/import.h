@@ -5,6 +5,7 @@
 #include "CtrlLayout.h"
 #include "CtrlImage.h"
 #include "CtrlText.h"
+#include "CtrlTextAtlas.h"
 
 #include "CtrlButton.h"
 

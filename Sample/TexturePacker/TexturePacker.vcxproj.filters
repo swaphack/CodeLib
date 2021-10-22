@@ -6,14 +6,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Classes\TexturePacker.h">
-      <Filter>Classes</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="Classes\TexturePacker.cpp">
-      <Filter>Classes</Filter>
-    </ClCompile>
     <ClCompile Include="Classes\main.cpp">
       <Filter>Classes</Filter>
     </ClCompile>

@@ -140,6 +140,9 @@
     <ClInclude Include="Display\UIShaderHelper.h">
       <Filter>Display</Filter>
     </ClInclude>
+    <ClInclude Include="UI\CtrlTextAtlas.h">
+      <Filter>UI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Display">
@@ -272,6 +275,9 @@
     </ClCompile>
     <ClCompile Include="Display\UIShaderHelper.cpp">
       <Filter>Display</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\CtrlTextAtlas.cpp">
+      <Filter>UI</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

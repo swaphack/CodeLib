@@ -168,33 +168,34 @@ namespace render
 		DirectionProtocol();
 		virtual ~DirectionProtocol();
 	public:
+		// 上边
 		const math::Vector3& getUp() const;
-
+		// 右边
 		const math::Vector3& getRight() const;
-
+		// 前方
 		const math::Vector3& getFront() const;
 	
 		void setZDirection(ZDirectionType type);
 
 		ZDirectionType getZDirection() const;
-
+		// 默认上边
 		const math::Vector3& getDefaultUp() const;
-
+		// 默认右边
 		const math::Vector3& getDefaultRight() const;
-
+		// 默认前方
 		const math::Vector3& getDefaultFront() const;
 	protected:
 		void setUp(const math::Vector3& up);
 		void setRight(const math::Vector3& right);
 		void setFront(const math::Vector3& front);
 	protected:
-		// 头方向
+		// 上边
 		math::Vector3 _up;
-		// 右边方向
+		// 右边
 		math::Vector3 _right;
 		// 前方
 		math::Vector3 _front;
-
+		// z轴朝向
 		ZDirectionType _zDirection = ZDirectionType::OUTSIDE;
 
 		// 默认头方向

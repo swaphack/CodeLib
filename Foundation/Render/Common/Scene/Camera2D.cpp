@@ -45,6 +45,6 @@ void render::Camera2D::updateViewPort()
 	parameter.zNear = -_viewParameter.zNear;
 	parameter.zFar = -_viewParameter.zFar;
 
-	_shapeDraw->cleanup();
+	_shapeDraw->removeAllPoints();
 	_shapeDraw->drawOrtho(parameter);
 }

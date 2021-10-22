@@ -10,5 +10,7 @@ public:
 protected:
 	virtual void initNodes();
 private:
-	void testTexturePack();
+	void packImageTexture();
+
+	void packTextTexture();
 };

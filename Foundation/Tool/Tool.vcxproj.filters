@@ -19,10 +19,16 @@
     <ClInclude Include="Document\XmlHelper.h">
       <Filter>Document</Filter>
     </ClInclude>
-    <ClInclude Include="Texture\TexturePacker.h">
+    <ClInclude Include="Texture\ImageAtlasPacker.h">
       <Filter>Texture</Filter>
     </ClInclude>
     <ClInclude Include="Texture\import.h">
+      <Filter>Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture\TextAtlasPacker.h">
+      <Filter>Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture\AtlasPacker.h">
       <Filter>Texture</Filter>
     </ClInclude>
   </ItemGroup>
@@ -30,7 +36,13 @@
     <ClCompile Include="Document\XmlHelper.cpp">
       <Filter>Document</Filter>
     </ClCompile>
-    <ClCompile Include="Texture\TexturePacker.cpp">
+    <ClCompile Include="Texture\ImageAtlasPacker.cpp">
+      <Filter>Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture\TextAtlasPacker.cpp">
+      <Filter>Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture\AtlasPacker.cpp">
       <Filter>Texture</Filter>
     </ClCompile>
   </ItemGroup>

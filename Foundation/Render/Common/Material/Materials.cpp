@@ -3,7 +3,7 @@
 #include "Common/Shader/import.h"
 #include "Common/Buffer/import.h"
 #include "Common/View/import.h"
-
+#include "Common/Node/Node.h"
 #include "Common/VAO/import.h"
 #include "Material.h"
 
@@ -16,6 +16,16 @@ render::Materials::Materials()
 
 render::Materials::~Materials()
 {
+}
+
+void render::Materials::setNode(Node* node)
+{
+	_node = node;
+}
+
+render::Node* render::Materials::getNode()
+{
+	return _node;
 }
 
 void render::Materials::setModelDetail(const sys::ModelDetail* modelDetail)
@@ -45,8 +55,8 @@ void Materials::addMaterial(const std::string& name, sys::MaterialDetail* materi
 	Material* pMat = CREATE_OBJECT(Material);
 	SAFE_RETAIN(pMat);
 
-
 	pMat->setMaterialDetail(material);
+	pMat->setNode(_node);
 
 	_materials[name] = pMat;
 }

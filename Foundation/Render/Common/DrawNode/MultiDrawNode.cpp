@@ -14,9 +14,11 @@ using namespace render;
 MultiDrawNode::MultiDrawNode()
 {
 	_materiales = CREATE_OBJECT(Materials);
+	_materiales->setNode(this);
 	SAFE_RETAIN(_materiales);
 
 	_meshes = CREATE_OBJECT(Meshes);
+	_meshes->setNode(this);
 	SAFE_RETAIN(_meshes);
 
 	_fragOperator = CREATE_OBJECT(FragmentOperator);
@@ -49,7 +51,7 @@ bool render::MultiDrawNode::init()
 		this->onDrawNodeColorChange();
 	});
 
-	addNotifyListener(NodeNotifyType::VISIBLE, [this]() {
+	addNotifyListener(NodeNotifyType::Draw, [this]() {
 		this->initDrawParameters();
 	});
 

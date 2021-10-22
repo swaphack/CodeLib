@@ -115,6 +115,7 @@
     <ClInclude Include="UI\CtrlStencil.h" />
     <ClInclude Include="UI\CtrlTableView.h" />
     <ClInclude Include="UI\CtrlText.h" />
+    <ClInclude Include="UI\CtrlTextAtlas.h" />
     <ClInclude Include="UI\CtrlWidget.h" />
     <ClInclude Include="UI\import.h" />
     <ClInclude Include="UI\macros.h" />
@@ -153,6 +154,7 @@
     <ClCompile Include="UI\CtrlStencil.cpp" />
     <ClCompile Include="UI\CtrlTableView.cpp" />
     <ClCompile Include="UI\CtrlText.cpp" />
+    <ClCompile Include="UI\CtrlTextAtlas.cpp" />
     <ClCompile Include="UI\CtrlWidget.cpp" />
     <ClCompile Include="UI\TextProtocol.cpp" />
   </ItemGroup>

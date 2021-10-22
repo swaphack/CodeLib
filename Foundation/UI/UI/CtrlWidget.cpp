@@ -16,8 +16,7 @@ ui::CtrlWidget::~CtrlWidget()
 {
 	SAFE_RELEASE(_layoutItem);
 
-	this->removeAllProtectedWidgets();
-	this->removeAllWidgets();
+	this->cleanup();
 }
 
 bool ui::CtrlWidget::init()
@@ -179,12 +178,13 @@ ui::CtrlWidget* ui::CtrlWidget::getFirstWidget() const
 	return _widgets[0];
 }
 
-void ui::CtrlWidget::removeFromParent()
+void ui::CtrlWidget::removeFromParentWithCleanup(bool clean)
 {
 	if (this->getParent() == nullptr)
 	{
 		return;
 	}
+	if (clean) this->cleanup();
 
 	if (this->getParent()->is<CtrlWidget>())
 	{
@@ -199,6 +199,14 @@ void ui::CtrlWidget::removeFromParent()
 	}
 
 	this->setParent(nullptr);
+}
+
+void ui::CtrlWidget::cleanup()
+{
+	this->removeAllProtectedWidgets();
+	this->removeAllWidgets();
+
+	render::Node::cleanup();
 }
 
 int ui::CtrlWidget::getWidgetCount() const
@@ -306,10 +314,13 @@ void ui::CtrlWidget::onParentBodyChange()
 			_layoutItem->resize(getParent()->getSize());
 		}
 	}
+
+	this->notify(render::NodeNotifyType::Draw);
 }
 
 void ui::CtrlWidget::onParentPositionChange()
 {
+	this->notifyToAll(render::NodeNotifyType::Draw);
 }
 
 void ui::CtrlWidget::updateDrawState()
