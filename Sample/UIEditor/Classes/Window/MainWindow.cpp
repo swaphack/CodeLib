@@ -34,6 +34,8 @@ bool ue::MainWindow::init()
 	{
 		ui::UIShaderHelper::loadColorShader(boxDraw->getRenderNode2d());
 		ui::UIShaderHelper::loadColorShader(boxDraw->getRenderNode3d());
+
+		//boxDraw->setAllBoxesVisibled(true);
 	}
 
 	auto size = render::Tool::getViewSize();
@@ -171,8 +173,9 @@ void ue::MainWindow::addFPS()
 		if (diffTime == 0) return;
 		int fps = 1000 / diffTime;
 		int drawCount = G_DRAWCORE->getDrawCallCount();
-		int undrawCount = G_DRAWCORE->getUnDrawCallCount();
-		std::string text = getCString("FPS %d\nDraw Call %d\nNot Draw Call %d", fps, drawCount, undrawCount);
+		//int undrawCount = G_DRAWCORE->getUnDrawCallCount();
+		int vertexCount = G_DRAWCORE->getVertexCount();
+		std::string text = getCString("FPS %d\nDraw Call %d\nVertices %d", fps, drawCount, vertexCount);
 		//PRINTLN("============\n%s\n", text.c_str());
 		((ui::CtrlText*)sender)->setString(text);
 	});

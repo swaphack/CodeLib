@@ -108,8 +108,6 @@ namespace render
 		*/
 		void setShaderProgramFunc(const ShaderProgramFunc& func);
 	protected:
-		// 优化绘制
-		virtual void optimizeDraw();
 		/**
 		*	绘制前工作
 		*/

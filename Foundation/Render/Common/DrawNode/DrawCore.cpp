@@ -93,6 +93,7 @@ void render::DrawCore::render(DrawParameter* parameter)
 
 		GLDebug::showError();
 		this->increaseDrawCall();
+		this->addVertexCount(mesh->getMeshDetail()->getVertices().getVerticeCount());
 		this->drawWithBufferObject(parameter);
 
 		if (parameter->tessilation)
@@ -1543,6 +1544,7 @@ void render::DrawCore::beginRecordDrawCall()
 {
 	_drawCallCount = 0;
 	_undrawCallCount = 0;
+	_vertexCount = 0;
 }
 
 void render::DrawCore::increaseDrawCall()
@@ -1555,10 +1557,16 @@ void render::DrawCore::increaseUnDrawCall()
 	_undrawCallCount++;
 }
 
+void render::DrawCore::addVertexCount(int count)
+{
+	_vertexCount += count;
+}
+
 void render::DrawCore::endRecordDrawCall()
 {
 	_oneDrawCallCount = _drawCallCount;
 	_oneUnDrawCallCount = _undrawCallCount;
+	_oneVertexCount = _vertexCount;
 }
 
 int render::DrawCore::getDrawCallCount()
@@ -1569,6 +1577,11 @@ int render::DrawCore::getDrawCallCount()
 int render::DrawCore::getUnDrawCallCount()
 {
 	return _oneUnDrawCallCount;
+}
+
+int render::DrawCore::getVertexCount()
+{
+	return _oneVertexCount;
 }
 
 void render::DrawCore::addDrawParameter(DrawParameter* parameter)

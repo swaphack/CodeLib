@@ -32,7 +32,7 @@ void TestTool::packTextTexture()
 	std::string text = "QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm234567890-=[]\;',./`~!@#$%^&*()_+{}|:\"<>?";
 
 	tool::TextAtlasPacker packer;
-	packer.setReverseY(false);
+	packer.setReverseY(true);
 	packer.setText(text, root + "Font/font_3.ttf", 20);
 	packer.setSize(512, 512);
 	packer.packImage(root + "/ATLAS/text20.png", root + "/ATLAS/text20.atlas");

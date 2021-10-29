@@ -1,7 +1,6 @@
 #include "TouchProtocol.h"
 #include "Common/Node/Node.h"
 #include "TouchManager.h"
-
 using namespace render;
 
 
@@ -23,8 +22,6 @@ TouchProtocol::~TouchProtocol()
 {
 	this->removeAllTouchDelegates();
 	this->removeAllTouchFuncs();
-
-	this->setTouchEnabled(false);
 }
 
 void TouchProtocol::setTouchEnabled(bool status)
@@ -35,14 +32,6 @@ void TouchProtocol::setTouchEnabled(bool status)
 	}
 
 	_bTouchEnabled = status;
-	if (status)
-	{
-		G_TOUCHMANAGER->addTarget(this);
-	}
-	else
-	{
-		G_TOUCHMANAGER->removeTarget(this);
-	}
 }
 
 bool TouchProtocol::isTouchEnabled()
@@ -77,7 +66,9 @@ bool render::TouchProtocol::containTouchPoint(const math::Vector2& touchPoint)
 
 bool render::TouchProtocol::isInFrontOf(const TouchProtocol* target) const
 {
-	return false;
+	if (target == nullptr || target->getTouchNode() == nullptr) return false;
+	if (getTouchNode() == nullptr) return false;
+	return getTouchNode()->isInFrontOfNode(target->getTouchNode());
 }
 
 bool TouchProtocol::onTouchBegan(const math::Vector2& touchPoint)

@@ -130,11 +130,6 @@ namespace render
 		// 更新节点, 更新节点逻辑
 		virtual void updateNode();
 	public:
-		// 优化处理
-		void optimizeNode();
-		// 优化绘制
-		virtual void optimizeDraw();
-	public:
 		// 绘制节点 矩阵变换->测试和预处理->绘制当前界面
 		virtual void drawNode();
 		// 绘制前
@@ -195,14 +190,12 @@ namespace render
 	public:
 		// 点击点是否落在该节点上
 		virtual bool containTouchPoint(const math::Vector2& touchPoint);
+		// 在目标节点的前方
+		bool isInFrontOfNode(const Node* target) const;
 	protected:
 		// 是否点击点落在该节点上
 		virtual bool containPoint(const math::Vector2& touchPoint);
-	public:
-		virtual bool isInFrontOf(const TouchProtocol* target) const;
-	protected:
-		// 在目标节点的前方
-		bool isInFrontOfNode(const Node* target) const;
+		
 	public:
 		// 添加事件监听
 		void addNotifyListener(NodeNotifyType id, const NotifyDelegate& func);
@@ -216,7 +209,7 @@ namespace render
 		void notify(NodeNotifyType id);
 		// 广播事件
 		void broadcastFunc(const std::function<void(Node*)>& func, bool recursive = false);
-	protected:
+		// 通知事件
 		void notifyEvents();
 	protected:
 		// 对子节点进行排序

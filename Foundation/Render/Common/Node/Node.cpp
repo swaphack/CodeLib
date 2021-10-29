@@ -51,6 +51,8 @@ bool Node::init()
 
 	this->setCamera(G_CAMERAS->getCamera3D());
 
+	G_TOUCHMANAGER->addTarget(this);
+
 	return true;
 }
 
@@ -88,6 +90,7 @@ void render::Node::removeFromParentWithCleanup(bool clean)
 void render::Node::cleanup()
 {
 	this->removeAllChildren();
+	G_TOUCHMANAGER->removeTarget(this);
 	SAFE_RELEASE(_actionProxy);
 }
 void render::Node::setChildrenScene(Scene* scene)
@@ -346,6 +349,85 @@ bool render::Node::isRecursiveVisible() const
 	return true;
 }
 
+void render::Node::setSkipDraw(bool status)
+{
+	_bSkipDraw = status;
+}
+
+bool render::Node::isSkipDraw() const
+{
+	return _bSkipDraw;
+}
+
+void render::Node::setSkipDrawChildren(bool status)
+{
+	_bSkipDrawChildren = status;
+}
+
+bool render::Node::isSkipDrawChildren() const
+{
+	return _bSkipDrawChildren;
+}
+
+void render::Node::updateNode()
+{
+	this->notifyEvents();
+
+	for (auto item : _children)
+	{
+		item->updateNode();
+	}
+}
+
+void Node::drawNode()
+{
+	if (!this->isVisible())
+	{
+		return;
+	}
+
+	this->beforeDrawNode();
+
+	if (!this->isSkipDraw())
+	{
+		this->draw();
+	}
+	else
+	{
+		G_DRAWCORE->increaseUnDrawCall();
+	}
+
+	this->afterDrawNode();
+
+	GLDebug::showError();
+}
+
+void render::Node::beforeDrawNode()
+{
+}
+
+void render::Node::afterDrawNode()
+{
+	this->drawAllChildren();
+}
+
+void Node::draw()
+{
+
+}
+
+void render::Node::drawAllChildren()
+{
+	if (isSkipDrawChildren())
+	{
+		return;
+	}
+	for (auto item : _children)
+	{
+		item->drawNode();
+	}
+}
+
 ActionProxy* Node::getActionProxy()
 {
 	if (_actionProxy == nullptr)
@@ -403,13 +485,33 @@ Node* Node::getFirstClippingNodeOfParents() const
 	return this->getParent()->getFirstClippingNodeOfParents();
 }
 
-void Node::draw()
+const math::Matrix4x4& Node::getWorldMatrix() const
 {
+	return _worldMatrix;
+}
 
+const math::Matrix4x4& render::Node::getWorldInverseMatrix() const
+{
+	return _worldInverseMatrix;
+}
+
+const math::Matrix4x4& Node::getLocalMatrix() const
+{
+	return _localMatrix;
+}
+
+math::Vector3 render::Node::convertWorldToLocalPoint(const math::Vector3& point) const
+{
+	return  _worldInverseMatrix * point;
+}
+
+math::Vector3 render::Node::convertLocalToWorldPoint(const math::Vector3& point) const
+{
+	return _worldMatrix * point;
 }
 
 bool render::Node::containTouchPoint(const math::Vector2& touchPoint)
-{ 
+{
 	if (!isVisible() || this->isSkipDraw())
 		return false;
 
@@ -430,11 +532,6 @@ bool render::Node::containTouchPoint(const math::Vector2& touchPoint)
 	return containPoint(touchPoint);
 }
 
-bool render::Node::isInFrontOf(const TouchProtocol* target) const
-{
-	return isInFrontOfNode(dynamic_cast<const Node*>(target));
-}
-
 bool render::Node::isInFrontOfNode(const Node* target) const
 {
 	if (target == nullptr || target->getParent() == nullptr)
@@ -443,7 +540,7 @@ bool render::Node::isInFrontOfNode(const Node* target) const
 	}
 	if (this->getParent() == nullptr)
 	{
-		return false;
+		return true;
 	}
 
 	// 从根节点开始比较两个位置关系
@@ -487,6 +584,55 @@ bool render::Node::containPoint(const math::Vector2& touchPoint)
 	return false;
 }
 
+void render::Node::addNotifyListener(NodeNotifyType id, const NotifyDelegate& func)
+{
+	_notify->addListen(id, func);
+}
+
+void render::Node::addNotifyListener(NodeNotifyType id, void* target, const NotifyDelegate& func)
+{
+	_notify->addTargetListen(id, target, func);
+}
+
+void render::Node::removeNotifyListener(NodeNotifyType id, void* target)
+{
+	_notify->removeTargetListen(id, target);
+}
+
+void Node::notify(NodeNotifyType id)
+{
+	_notify->addMark(id);
+	setDirty(true);
+}
+
+void render::Node::notifyToAll(NodeNotifyType id)
+{
+	this->notify(id);
+
+	for (auto it = _children.begin(); it != _children.end(); it++)
+	{
+		(*it)->notifyToAll(id);
+	}
+}
+
+void render::Node::broadcastFunc(const std::function<void(Node*)>& func, bool recursive /*= false*/)
+{
+	if (func == nullptr)
+	{
+		return;
+	}
+
+	func(this);
+
+	if (recursive)
+	{
+		for (auto it = _children.begin(); it != _children.end(); it++)
+		{
+			(*it)->broadcastFunc(func, recursive);
+		}
+	}
+}
+
 void Node::notifyEvents()
 {
 	// 数值计算
@@ -515,7 +661,7 @@ void Node::sortChildren()
 			oIt = orderNodes.begin();
 			while (oIt != orderNodes.end())
 			{
-				if ( node->getZOrder() < (*oIt)->getZOrder())
+				if (node->getZOrder() < (*oIt)->getZOrder())
 				{
 					orderNodes.insert(oIt, node);
 					bInsert = true;
@@ -554,6 +700,22 @@ void Node::calSpaceData()
 	calDirectionWithRotate();
 }
 
+void Node::onSpaceChange()
+{
+	this->notifyToAll(NodeNotifyType::SPACE);
+	//this->notify(NodeNotifyType::SPACE);
+}
+
+void Node::onBodyChange()
+{
+	this->notify(NodeNotifyType::BODY);
+}
+
+void Node::onChildrenChange()
+{
+	this->notify(NodeNotifyType::NODE);
+}
+
 void Node::calRealSpaceByMatrix()
 {
 	math::Matrix4x4::getRST(_obRotation, getScale(), _obPosition, _localMatrix);
@@ -581,182 +743,6 @@ void Node::calRealSpaceByMatrix()
 	//if (isClippingEnabled())
 	{
 		_worldInverseMatrix = _worldMatrix.getInverse();
-	}
-}
-
-void Node::onSpaceChange()
-{
-	this->notifyToAll(NodeNotifyType::SPACE);
-	//this->notify(NodeNotifyType::SPACE);
-}
-
-void Node::onBodyChange()
-{
-	this->notify(NodeNotifyType::BODY);
-}
-
-void Node::onChildrenChange()
-{
-	this->notify(NodeNotifyType::NODE);
-}
-
-const math::Matrix4x4& Node::getWorldMatrix() const
-{
-	return _worldMatrix;
-}
-
-const math::Matrix4x4& render::Node::getWorldInverseMatrix() const
-{
-	return _worldInverseMatrix;
-}
-
-const math::Matrix4x4& Node::getLocalMatrix() const
-{
-	return _localMatrix;
-}
-
-math::Vector3 render::Node::convertWorldToLocalPoint(const math::Vector3& point) const
-{
-	return  _worldInverseMatrix * point;
-}
-
-math::Vector3 render::Node::convertLocalToWorldPoint(const math::Vector3& point) const
-{
-	return _worldMatrix * point;
-}
-
-void render::Node::setSkipDraw(bool status)
-{
-	_bSkipDraw = status;
-}
-
-bool render::Node::isSkipDraw() const
-{
-	return _bSkipDraw;
-}
-
-void render::Node::setSkipDrawChildren(bool status)
-{
-	_bSkipDrawChildren = status;
-}
-
-bool render::Node::isSkipDrawChildren() const
-{
-	return _bSkipDrawChildren;
-}
-
-void render::Node::updateNode()
-{
-	this->notifyEvents();
-
-	this->optimizeNode();
-
-	for (auto item : _children)
-	{
-		item->updateNode();
-	}
-}
-
-void render::Node::beforeDrawNode()
-{
-}
-
-void render::Node::optimizeNode()
-{
-	this->optimizeDraw();
-}
-
-void render::Node::optimizeDraw()
-{
-
-}
-
-void Node::drawNode()
-{
-	if (!this->isVisible())
-	{
-		return;
-	}
-
-	this->beforeDrawNode();
-
-	if (!this->isSkipDraw())
-	{
-		this->draw();
-	}
-	else
-	{
-		G_DRAWCORE->increaseUnDrawCall();
-	}
-
-	this->afterDrawNode();
-
-	GLDebug::showError();
-}
-
-void render::Node::afterDrawNode()
-{
-	this->drawAllChildren();
-}
-
-void render::Node::drawAllChildren()
-{
-	if (isSkipDrawChildren())
-	{
-		return;
-	}
-	for (auto item : _children)
-	{
-		item->drawNode();
-	}
-}
-
-void Node::notify(NodeNotifyType id)
-{
-	_notify->addMark(id);
-	setDirty(true);
-}
-
-void render::Node::addNotifyListener(NodeNotifyType id, const NotifyDelegate& func)
-{
-	_notify->addListen(id, func);
-}
-
-void render::Node::addNotifyListener(NodeNotifyType id, void* target, const NotifyDelegate& func)
-{
-	_notify->addTargetListen(id, target, func);
-}
-
-void render::Node::removeNotifyListener(NodeNotifyType id, void* target)
-{
-	_notify->removeTargetListen(id, target);
-}
-
-void render::Node::notifyToAll(NodeNotifyType id)
-{
-	this->notify(id);
-
-	for (auto it = _children.begin(); it != _children.end(); it++)
-	{
-		(*it)->notifyToAll(id);
-	}
-}
-
-void render::Node::broadcastFunc(const std::function<void(Node*)>& func, bool recursive /*= false*/)
-{
-	if (func == nullptr)
-	{
-		return;
-	}
-
-	func(this);
-
-	if (recursive)
-	{
-		for (auto it = _children.begin(); it != _children.end(); it++)
-		{
-			(*it)->broadcastFunc(func, recursive);
-		}
 	}
 }
 

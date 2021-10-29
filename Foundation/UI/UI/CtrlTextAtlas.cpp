@@ -143,6 +143,16 @@ const phy::Color3B& ui::CtrlTextAtlas::getTextColor() const
 	return _textDefine.color;
 }
 
+ui::CtrlWidget* ui::CtrlTextAtlas::getContent() const
+{
+	return _content;
+}
+
+math::Size ui::CtrlTextAtlas::getContentSize() const
+{
+	return _content->getSize();
+}
+
 void ui::CtrlTextAtlas::setTexShaderProgram(render::ShaderProgram* shaderProgram)
 {
 	SAFE_RETAIN(shaderProgram);
@@ -176,43 +186,6 @@ void ui::CtrlTextAtlas::setUseDesignCamera(bool bUsed)
 	});
 }
 
-void ui::CtrlTextAtlas::getOrgin(const math::Size& size, math::Vector3& anchor, math::Vector3& position)
-{
-	math::Volume volume = math::Volume(size.getWidth(), size.getHeight());
-
-	if (_textDefine.verticalAlignment == sys::VerticalAlignment::BOTTOM)
-	{
-		position.setY(0);
-		position.setX(-_volume.getHeight() * 0.5f);
-	}
-	else if (_textDefine.verticalAlignment == sys::VerticalAlignment::MIDDLE)
-	{
-		anchor.setY(0.5f);
-		position.setY(-_volume.getHeight() * 0.5f);
-	}
-	else if (_textDefine.verticalAlignment == sys::VerticalAlignment::TOP)
-	{
-		anchor.setY(1.0f);
-		//position.setY(_volume.getHeight());
-	}
-
-	if (_textDefine.horizontalAlignment == sys::HorizontalAlignment::LEFT)
-	{
-		anchor.setX(0.0f);
-		position.setX(-_volume.getWidth() * 0.5f);
-	}
-	else if (_textDefine.horizontalAlignment == sys::HorizontalAlignment::CENTER)
-	{
-		anchor.setX(0.5f);
-		position.setX(-volume.getWidth() * 0.5f);
-	}
-	else if (_textDefine.horizontalAlignment == sys::HorizontalAlignment::RIGHT)
-	{
-		anchor.setX(1.0f);
-		//position.setX(_volume.getWidth() * 1.0f);
-	}
-}
-
 void ui::CtrlTextAtlas::onTextBodyChange()
 {
 	if (_content == nullptr)
@@ -225,11 +198,13 @@ void ui::CtrlTextAtlas::onTextBodyChange()
 
 	if (_volume.getWidth() != 0 && _volume.getHeight() != 0)
 	{
-		math::Size size = math::Size(w, h);
+		math::Size srcSize = math::Size(w, h);
 		math::Vector3 anchor;
 		math::Vector3 orgin;
 
-		getOrgin(size, anchor, orgin);
+		getOrgin(srcSize, getSize(),
+			_textDefine.horizontalAlignment, _textDefine.verticalAlignment,
+			anchor, orgin);
 
 		_content->setPosition(orgin);
 		_content->setAnchorPoint(anchor);
@@ -314,43 +289,35 @@ void ui::CtrlTextAtlas::onTextChange()
 			if (pTexture2D)
 			{
 				std::string name = getCString("%ld", ch);
-				posX = offsetX;
-				if (height == 0)
-				{
-					if (width == 0)
-					{
-						posY = data->deltaY;
-					}
-					else
-					{
-						posY = -offsetY + data->deltaY;
-					}
-				}
-				else
-				{
-					posY = height - offsetY + data->deltaY - offsetHeight;
-				}
+				
 				dataWidth = data->rotate ? data->height : data->width;
 				dataHeight = data->rotate ? data->width : data->height;
-				dataWidth = data->width;
-				dataHeight = data->height;
-				pTexture2D->setRotationZ(data->rotate ?  90 : 0);
+				if (width > 0 && offsetX + dataWidth >= width)
+				{
+					offsetX = 0;
+					offsetY += offsetHeight;
+				}
+				posX = offsetX;
+				if (height == 0){
+					if (width == 0) posY = data->deltaY;
+					else posY = -offsetY + data->deltaY;
+				} else {
+					posY = height - offsetY + data->deltaY - offsetHeight;
+				}
+				//pTexture2D->setTextureRotateEnabled(false);
+				//pTexture2D->setRotationZ(data->rotate ? 90 : 0);
+				pTexture2D->setFlipX(data->rotate);
 				pTexture2D->setCamera(_content->getCamera());
 				pTexture2D->setUseDesignCamera(_content->isUsedDesignCamera());
 				pTexture2D->setShaderProgram(_shaderProgram);
 				pTexture2D->loadImage(G_TEXTURE_CACHE->getTexFrameName(_textDefine.filepath, name));
 				pTexture2D->setPosition(posX, posY);
 				pTexture2D->setAnchorPoint(0, 0);
-				pTexture2D->setVolume(dataWidth, dataHeight);
+				pTexture2D->setVolume(data->width, data->height);
 				pTexture2D->setColor(_textDefine.color);
 				pTexture2D->setNativeTextureSize();
 				_content->addChild(pTexture2D);
 				offsetX += dataWidth;
-			}
-			if (width > 0 && offsetX >= width)
-			{
-				offsetX = 0;
-				offsetY += offsetHeight;
 			}
 		}
 		
@@ -362,4 +329,43 @@ void ui::CtrlTextAtlas::onTextChange()
 	float h = height == 0 ? offsetY + offsetHeight : height;
 	_content->setAnchorPoint(0,0);
 	_content->setVolume(w, h);
+}
+
+
+void ui::CtrlTextAtlas::getOrgin(
+	const math::Size& srcSize, const math::Size& destSize,
+	sys::HorizontalAlignment horizontal, sys::VerticalAlignment vertical,
+	math::Vector3& anchor, math::Vector3& position)
+{
+	if (vertical == sys::VerticalAlignment::BOTTOM)
+	{
+		anchor.setY(0);
+		position.setX(0);
+	}
+	else if (vertical == sys::VerticalAlignment::MIDDLE)
+	{
+		anchor.setY(0.5f);
+		position.setY((destSize.getHeight() - srcSize.getHeight()) * 0.5f);
+	}
+	else if (vertical == sys::VerticalAlignment::TOP)
+	{
+		anchor.setY(1.0f);
+		position.setY(destSize.getHeight() - srcSize.getHeight());
+	}
+
+	if (horizontal == sys::HorizontalAlignment::LEFT)
+	{
+		anchor.setX(0.0f);
+		position.setX(0);
+	}
+	else if (horizontal == sys::HorizontalAlignment::CENTER)
+	{
+		anchor.setX(0.5f);
+		position.setX((destSize.getWidth() - srcSize.getWidth()) * 0.5f);
+	}
+	else if (horizontal == sys::HorizontalAlignment::RIGHT)
+	{
+		anchor.setX(1.0f);
+		position.setX(destSize.getWidth() - srcSize.getWidth());
+	}
 }

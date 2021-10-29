@@ -99,6 +99,15 @@ namespace ui
 		const phy::Color3B& getTextColor() const;
 	public:
 		/**
+		*	内容
+		*/
+		ui::CtrlWidget* getContent() const;
+		/**
+		*	内容大小
+		*/
+		math::Size getContentSize()const;
+	public:
+		/**
 		*	设置着色器
 		*/
 		virtual void setTexShaderProgram(render::ShaderProgram* shaderProgram);
@@ -111,13 +120,15 @@ namespace ui
 		*/
 		virtual void setUseDesignCamera(bool bUsed);
 	protected:
+		virtual void onTextBodyChange();
+		virtual void onTextChange();
+	public:
 		/**
 		*	文字图片信息
 		*/
-		void getOrgin(const math::Size& size, math::Vector3& anchor, math::Vector3& position);
-
-		virtual void onTextBodyChange();
-		virtual void onTextChange();
+		static void getOrgin(const math::Size& srcSize, const math::Size& destSize, 
+			sys::HorizontalAlignment horizontal, sys::VerticalAlignment vertical,
+			math::Vector3& anchor, math::Vector3& position);
 	protected:
 		// 管理所有项的节点
 		ui::CtrlWidget* _content = nullptr;

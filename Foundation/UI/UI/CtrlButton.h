@@ -142,6 +142,8 @@ namespace ui
 		*	µã»÷Ëõ·Å
 		*/
 		float getTouchScale() const;
+	protected:
+		void onButtonBodyChange();
 	private:
 		struct ButtonImage
 		{

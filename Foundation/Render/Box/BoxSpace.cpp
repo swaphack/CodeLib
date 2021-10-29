@@ -120,7 +120,6 @@ void render::BoxSpace::updateBox(BoxDrawProtocol* box)
 			_quadTree.add(id, box);
 		}
 	}
-	
 }
 
 void render::BoxSpace::removeBox(BoxDrawProtocol* box)

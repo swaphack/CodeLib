@@ -213,11 +213,6 @@ void render::MultiDrawNode::setShaderProgramFunc(const ShaderProgramFunc& func)
 	}
 }
 
-void render::MultiDrawNode::optimizeDraw()
-{
-	if (!this->isVisible()) return;
-}
-
 void render::MultiDrawNode::beforeDraw()
 {
 	_fragOperator->begin();

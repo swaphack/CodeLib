@@ -197,12 +197,6 @@ void render::DrawNode::setShaderProgramFunc(const ShaderProgramFunc& func)
 	_material->setProgramFunc(func);
 }
 
-void render::DrawNode::optimizeDraw()
-{
-	if (!this->isVisible()) return;
-	
-}
-
 void render::DrawNode::beforeDraw()
 {
 	_fragOperator->begin();

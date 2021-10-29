@@ -50,6 +50,10 @@ bool ui::CtrlButton::init()
 	this->addTouchFunc(render::TouchType::CANCELED, [this](const math::Vector2& touchPoint) {
 		this->setScale(1.0f);
 	});
+
+	this->addNotifyListener(render::NodeNotifyType::BODY, [this]() {
+		this->onButtonBodyChange();
+	});
 	return true;
 }
 
@@ -241,3 +245,50 @@ float ui::CtrlButton::getTouchScale() const
 { 
 	return _touchScale; 
 }
+
+void ui::CtrlButton::onButtonBodyChange()
+{
+	_btnTextAtlas->setVolume(this->getVolume());
+	_btnTextAtlas->setDimensions(this->getSize());
+	_btnTextAtlas->setAnchorPoint(0, 0);
+	_btnTextAtlas->setPosition(0, 0);
+}
+
+/*
+void ui::CtrlTextAtlas::getOrgin(const math::Size& size, math::Vector3& anchor, math::Vector3& position)
+{
+	math::Volume volume = math::Volume(size.getWidth(), size.getHeight());
+
+	if (_textDefine.verticalAlignment == sys::VerticalAlignment::BOTTOM)
+	{
+		position.setY(0);
+		position.setX(-_volume.getHeight() * 0.5f);
+	}
+	else if (_textDefine.verticalAlignment == sys::VerticalAlignment::MIDDLE)
+	{
+		anchor.setY(0.5f);
+		position.setY(-_volume.getHeight() * 0.5f);
+	}
+	else if (_textDefine.verticalAlignment == sys::VerticalAlignment::TOP)
+	{
+		anchor.setY(1.0f);
+		//position.setY(_volume.getHeight());
+	}
+
+	if (_textDefine.horizontalAlignment == sys::HorizontalAlignment::LEFT)
+	{
+		anchor.setX(0.0f);
+		position.setX(-_volume.getWidth() * 0.5f);
+	}
+	else if (_textDefine.horizontalAlignment == sys::HorizontalAlignment::CENTER)
+	{
+		anchor.setX(0.5f);
+		position.setX(-volume.getWidth() * 0.5f);
+	}
+	else if (_textDefine.horizontalAlignment == sys::HorizontalAlignment::RIGHT)
+	{
+		anchor.setX(1.0f);
+		//position.setX(_volume.getWidth() * 1.0f);
+	}
+}
+*/

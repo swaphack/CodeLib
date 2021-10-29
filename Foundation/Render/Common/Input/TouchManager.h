@@ -32,6 +32,7 @@ namespace render
 		void onTouchBegan(const math::Vector2& touchPoint);
 		void onTouchMoved(const math::Vector2& touchPoint);
 		void onTouchEnded(const math::Vector2& touchPoint);
+		void onTouchCanceled(const math::Vector2& touchPoint);
 		// 对触摸进行处理
 		void handTouch();
 	private:

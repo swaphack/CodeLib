@@ -41,6 +41,21 @@ bool render::BoxDraw::init()
 	return true;
 }
 
+void render::BoxDraw::setAllBoxesVisibled(bool status)
+{
+	if (_showAllBoxes == status)
+	{
+		return;
+	}
+	_showAllBoxes = status;
+	this->notify(render::NodeNotifyType::GEOMETRY);
+}
+
+bool render::BoxDraw::isAllBoxesVisibled() const
+{
+	return _showAllBoxes;
+}
+
 render::PrimitiveNode* render::BoxDraw::getRenderNode2d()
 {
 	return _drawNode2d;
@@ -60,7 +75,10 @@ void render::BoxDraw::refreshBoxes()
 	{
 		auto pBoxNode = item.second->getBoxNode();
 		if (pBoxNode == nullptr) continue;
-		if (!pBoxNode->isVisible() || !item.second->isBoxVisible()) continue;
+		if (!isAllBoxesVisibled())
+		{
+			if (!pBoxNode->isVisible() || !item.second->isBoxVisible()) continue;
+		}
 
 		std::vector<math::TrianglePoints> vecPoints;
 		item.second->getBoxPoints(vecPoints);

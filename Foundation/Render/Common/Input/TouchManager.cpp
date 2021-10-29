@@ -78,12 +78,6 @@ void render::TouchManager::addTouchInfo(TouchType type, const math::Vector2& tou
 
 void TouchManager::onTouchBegan(const math::Vector2& touchPoint)
 {
-	for (auto item : _temps)
-	{
-		item->onTouchCanceled(touchPoint);
-	}
-	_temps.clear();
-
 	std::vector<render::BoxDrawProtocol*> boxes;
 	if (!G_BOXSPACE->containsTouchPoint(touchPoint, boxes))
 	{
@@ -137,6 +131,15 @@ void TouchManager::onTouchEnded(const math::Vector2& touchPoint)
 	//_temps.clear();
 }
 
+void render::TouchManager::onTouchCanceled(const math::Vector2& touchPoint)
+{
+	for (auto item : _temps)
+	{
+		item->onTouchCanceled(touchPoint);
+	}
+	_temps.clear();
+}
+
 void render::TouchManager::handTouch()
 {
 
@@ -152,6 +155,7 @@ void render::TouchManager::handTouch()
 	{
 		if (item.type == TouchType::BEGAN)
 		{
+			onTouchCanceled(item.touchPoint);
 			onTouchBegan(item.touchPoint);
 		}
 		else if (item.type == TouchType::MOVED)

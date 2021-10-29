@@ -45,11 +45,15 @@ namespace render
 		// 设置水平翻转
 		void setFlipX(bool status);
 		// 是否水平翻转
-		bool isFlipX();
+		bool isFlipX() const;
 		// 设置垂直翻转
 		void setFlipY(bool status);
 		// 是否垂直翻转
-		bool isFlipY();
+		bool isFlipY() const;
+		// 是否允许纹理旋转
+		void setTextureRotateEnabled(bool status);
+		// 是否允许纹理旋转
+		bool isTextureRotateEnabled() const;
 	protected:
 		/**
 		*	根据纹理更改UV
@@ -64,6 +68,8 @@ namespace render
 		bool _bFlipX = false;
 		// 是否垂直翻转
 		bool _bFlipY = false;
+		// 是否允许纹理旋转
+		bool _textureRotateEnabled = true;
 		// 纹理帧
 		TexFrame* _texFrame = nullptr;
 	};

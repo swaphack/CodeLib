@@ -125,6 +125,8 @@ void tool::TextAtlasPacker::saveTexAltas(const std::string& imgFilePath, const s
 	multiStream.initSteam(unitSize * _size.getWidth(), _size.getHeight());
 
 	_textureAtlas.removeAllChips();
+
+	float offsetY = 0;
 	for (const auto& item : items)
 	{
 		std::string name = ids[item.id];
@@ -134,11 +136,15 @@ void tool::TextAtlasPacker::saveTexAltas(const std::string& imgFilePath, const s
 		auto pDetail = it->second;
 		if (pDetail == nullptr) continue;
 		
+		//offsetY = _size.getHeight() - item.y;
 		_textureAtlas.addChip(sys::File::getFileName(name), item.width, item.height, item.x, item.y, item.rotate,
 			pDetail->getAdvanceX(), pDetail->getAdvanceY(), pDetail->getDeltaX(), pDetail->getDeltaY());
-
 		pDetail->expandFormat();
-		if (item.rotate) pDetail->rotate270();
+		pDetail->flipY();
+		if (item.rotate)
+		{
+			pDetail->rotate90();
+		}
 
 		if (isReverseY())
 		{

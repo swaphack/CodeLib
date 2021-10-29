@@ -19,6 +19,8 @@ DrawTexture2D::DrawTexture2D()
 {
 	_texFrame = CREATE_OBJECT(TexFrame);
 	_texFrame->retain();
+
+	setTextureRotateEnabled(true);
 }
 
 DrawTexture2D::~DrawTexture2D()
@@ -145,7 +147,7 @@ void DrawTexture2D::setFlipX(bool status)
 	this->notify(NodeNotifyType::TEXTURE);
 }
 
-bool DrawTexture2D::isFlipX()
+bool DrawTexture2D::isFlipX() const
 {
 	return _bFlipX;
 }
@@ -156,14 +158,30 @@ void DrawTexture2D::setFlipY(bool status)
 	this->notify(NodeNotifyType::TEXTURE);
 }
 
-bool DrawTexture2D::isFlipY()
+bool DrawTexture2D::isFlipY() const
 {
 	return _bFlipY;
 }
 
+void render::DrawTexture2D::setTextureRotateEnabled(bool status)
+{
+	_textureRotateEnabled = status;
+	this->notify(NodeNotifyType::GEOMETRY);
+}
+
+bool render::DrawTexture2D::isTextureRotateEnabled() const
+{
+	return _textureRotateEnabled;
+}
+
 void render::DrawTexture2D::updateUVWithTexture()
 {
-	VertexTool::setTexture2DCoords(&_rectVertex, _texFrame->getRect(), _texFrame->isRotated());
+	bool rotated = _texFrame->isRotated();
+	if (!isTextureRotateEnabled())
+	{
+		rotated = false;
+	}
+	VertexTool::setTexture2DCoords(&_rectVertex, _texFrame->getRect(), rotated);
 	this->updateTexture2DMeshData();
 }
 

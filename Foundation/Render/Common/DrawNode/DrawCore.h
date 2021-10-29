@@ -160,6 +160,10 @@ namespace render
 		*/
 		void increaseUnDrawCall();
 		/**
+		*	增加未绘制调用次数
+		*/
+		void addVertexCount(int count);
+		/**
 		*	重置绘制调用次数
 		*/
 		void endRecordDrawCall();
@@ -171,6 +175,10 @@ namespace render
 		*	获取未绘制调用次数
 		*/
 		int getUnDrawCallCount();
+		/**
+		*	获取绘制调用次数
+		*/
+		int getVertexCount();
 	public:
 		/**
 		*	添加绘制参数
@@ -238,6 +246,10 @@ namespace render
 		*/
 		int _undrawCallCount = 0;
 		/**
+		*	顶点数
+		*/
+		int _vertexCount = 0;
+		/**
 		*	一次完整绘制调用次数
 		*/
 		int _oneDrawCallCount = 0;
@@ -245,6 +257,10 @@ namespace render
 		*	一次完整未绘制调用次数
 		*/
 		int _oneUnDrawCallCount = 0;
+		/**
+		*	一次完整绘制顶点数
+		*/
+		int _oneVertexCount = 0;
 	private:
 		struct BatchDrawParameter
 		{
