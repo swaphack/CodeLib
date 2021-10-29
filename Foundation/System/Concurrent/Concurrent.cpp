@@ -60,12 +60,12 @@ void Concurrent::setWriteFunc(WriteFunc func)
 	_writeFunc = func;
 }
 
-bool Concurrent::isSetReadFunc()
+bool Concurrent::isSetReadFunc() const
 {
 	return _readFunc != nullptr;
 }
 
-bool Concurrent::isSetWriteFunc()
+bool Concurrent::isSetWriteFunc() const
 {
 	return _writeFunc != nullptr;
 }

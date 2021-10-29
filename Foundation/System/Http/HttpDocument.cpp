@@ -83,11 +83,11 @@ bool HttpDocument::save(std::string& msg)
 	return true;
 }
 
-std::string HttpDocument::getStatus(int32_t index)
+const std::string& HttpDocument::getStatus(int32_t index) const
 {
 	if (index < 0 || index >= _headerSection.size())
 	{
-		return "";
+		return _emptyStatus;
 	}
 
 	return _statusSection[index];
@@ -103,11 +103,11 @@ void HttpDocument::setStatus(int32_t index, const std::string& value)
 	_statusSection[index] = value;
 }
 
-std::string HttpDocument::getHeader(const std::string& key)
+const std::string& HttpDocument::getHeader(const std::string& key) const
 {
 	if (key.empty())
 	{
-		return "";
+		return _emptyStatus;
 	}
 
 	std::map<std::string, std::string>::const_iterator it = _headerSection.find(key);
@@ -116,7 +116,7 @@ std::string HttpDocument::getHeader(const std::string& key)
 		return it->second;
 	}
 
-	return "";
+	return _emptyStatus;
 }
 
 bool HttpDocument::getIntegerHeader(const std::string& key, int32_t& value)
@@ -174,17 +174,17 @@ void HttpDocument::setBody(const std::string& value)
 	_bodySection = value;
 }
 
-const std::string& HttpDocument::getBody()
+const std::string& HttpDocument::getBody() const
 {
 	return _bodySection;
 }
 
-int32_t HttpDocument::getBodySize()
+int32_t HttpDocument::getBodySize() const
 {
 	return _bodySection.size();
 }
 
-int32_t HttpDocument::getStreamSize()
+int32_t HttpDocument::getStreamSize() const
 {
 	return _stream->getCursor();
 }
@@ -282,7 +282,7 @@ bool HttpDocument::readBodySection()
 void HttpDocument::resetStatusSection()
 {
 	_statusSection.clear();
-	_statusSection.push_back("");
-	_statusSection.push_back("");
-	_statusSection.push_back("");
+	_statusSection.push_back(_emptyStatus);
+	_statusSection.push_back(_emptyStatus);
+	_statusSection.push_back(_emptyStatus);
 }

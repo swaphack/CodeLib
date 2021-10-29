@@ -86,18 +86,18 @@ bool TouchProtocol::onTouchBegan(const math::Vector2& touchPoint)
 	{
 		return false;
 	}
-	bool include = this->containTouchPoint(touchPoint);
-	if (include)
-	{
+	//bool include = this->containTouchPoint(touchPoint);
+	//if (include)
+	//{
 		dispatchTouchEvent(TouchType::BEGAN, touchPoint);
-	}
-	else
-	{
-		onTouchCanceled(touchPoint);
-	}
-	
+	//}
+	//else
+	//{
+	//	onTouchCanceled(touchPoint);
+	//}
+	//return include;
 
-	return include;
+	return true;
 }
 
 bool TouchProtocol::onTouchMoved(const math::Vector2& touchPoint)
@@ -107,17 +107,17 @@ bool TouchProtocol::onTouchMoved(const math::Vector2& touchPoint)
 		return false;
 	}
 
-	bool include = this->containTouchPoint(touchPoint);
-	if (include)
-	{
+	//bool include = this->containTouchPoint(touchPoint);
+	//if (include)
+	//{
 		dispatchTouchEvent(TouchType::MOVED, touchPoint);
-	}
-	else
-	{
-		onTouchCanceled(touchPoint);
-	}
-
-	return include;
+	//}
+	//else
+	//{
+	//	onTouchCanceled(touchPoint);
+	//}
+	//return include;
+	return true;
 }
 
 bool TouchProtocol::onTouchEnded(const math::Vector2& touchPoint)
@@ -127,17 +127,17 @@ bool TouchProtocol::onTouchEnded(const math::Vector2& touchPoint)
 		return false;
 	}
 
-	bool include = this->containTouchPoint(touchPoint);
-	if (include)
-	{
+	//bool include = this->containTouchPoint(touchPoint);
+	//if (include)
+	//{
 		dispatchTouchEvent(TouchType::ENDED, touchPoint);
-	}
-	else
-	{
-		onTouchCanceled(touchPoint);
-	}
-
-	return include;
+	//}
+	//else
+	//{
+	//	onTouchCanceled(touchPoint);
+	//}
+	//return include;
+	return true;
 }
 
 void TouchProtocol::onTouchCanceled(const math::Vector2& touchPoint)

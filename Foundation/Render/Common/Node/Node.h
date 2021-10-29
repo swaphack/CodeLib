@@ -92,6 +92,14 @@ namespace render
 		int indexOfChild(const Node* node) const;
 		// 是否是目标的后代节点
 		bool isDescendantsOf(const Node* parent) const;
+		// 所有子节点
+		const std::vector<Node*>& getAllChildren() const;
+		// 所有子节点
+		std::vector<Node*>& getAllChildren();
+		// 遍历所有子节点
+		void foreachChild(const std::function<void(Node*)>& handler);
+		// 遍历所有子节点
+		void foreachChildWitchRecrusive(const std::function<void(Node*)>& handler);
 	public:
 		// 设置数据
 		void setUserData(void* data);
@@ -168,9 +176,11 @@ namespace render
 		virtual void update(float dt);
 	public:
 		// 是否和父节点关联
-		bool isRelativeWithParent();
+		bool isRelativeWithParent() const;
 		// 设置是否和父节点关联
 		void setRelativeWithParent(bool status);
+		// 获取裁剪的父节点
+		Node* getFirstClippingNodeOfParents() const;
 	public:
 		// 世界矩阵
 		const math::Matrix4x4& getWorldMatrix() const;
@@ -183,10 +193,10 @@ namespace render
 		// 将本地坐标转化为世界坐标
 		math::Vector3 convertLocalToWorldPoint(const math::Vector3& point) const;
 	public:
-		// 是否点击点落在改节点上
+		// 点击点是否落在该节点上
 		virtual bool containTouchPoint(const math::Vector2& touchPoint);
 	protected:
-		// 是否点击点落在改节点上
+		// 是否点击点落在该节点上
 		virtual bool containPoint(const math::Vector2& touchPoint);
 	public:
 		virtual bool isInFrontOf(const TouchProtocol* target) const;

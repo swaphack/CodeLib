@@ -10,7 +10,7 @@ ForeverTask::~ForeverTask()
 
 }
 
-bool ForeverTask::isOver()
+bool ForeverTask::isOver() const
 {
 	return false;
 }

@@ -72,14 +72,14 @@ String String::operator+(const std::string& value)
 	return temp;
 }
 
-char String::operator[](size_t index)
+char String::operator[](size_t index) const
 {
 	ASSERT(index < getSize() && index >= 0);
 
 	return _data->getValue(index);
 }
 
-char& String::at(size_t index)
+char& String::at(size_t index) const
 {
 	ASSERT(index < getSize() && index >= 0);
 
@@ -199,7 +199,7 @@ String& String::concat(const std::string& value1, const std::string& value2, con
 	return *this;
 }
 
-bool String::contains(const std::string& value)
+bool String::contains(const std::string& value) const
 {
 	if (getString() == nullptr || value.empty())
 	{
@@ -248,12 +248,12 @@ bool String::contains(const std::string& value)
 }
 
 
-bool String::compare(const std::string& value)
+bool String::compare(const std::string& value) const
 {
 	return this->compare(0, value);
 }
 
-bool String::compare(size_t offset, const std::string& value)
+bool String::compare(size_t offset, const std::string& value) const
 {
 	if (this->getSize() != value.size())
 	{
@@ -262,7 +262,7 @@ bool String::compare(size_t offset, const std::string& value)
 	return this->compare(0, value, value.size());
 }
 
-bool String::compare(size_t offset, const std::string& value, size_t count)
+bool String::compare(size_t offset, const std::string& value, size_t count) const
 {
 	for (size_t i = 0; i < count; i++)
 	{
@@ -275,7 +275,7 @@ bool String::compare(size_t offset, const std::string& value, size_t count)
 	return true;
 }
 
-bool String::endWith(const std::string& value)
+bool String::endWith(const std::string& value) const
 {
 	if (value.empty())
 	{
@@ -299,7 +299,7 @@ bool String::endWith(const std::string& value)
 	return true;
 }
 
-bool String::startWith(const std::string& value)
+bool String::startWith(const std::string& value) const
 {
 	if (value.empty())
 	{
@@ -390,7 +390,7 @@ String sys::String::subString(size_t offset)
 }
 
 
-int32_t String::findFirstOf(char value)
+int32_t String::findFirstOf(char value) const
 {
 	int32_t offset = 0;
 
@@ -410,7 +410,7 @@ int32_t String::findFirstOf(char value)
 	return offset;
 }
 
-int32_t String::findFirstOf(const std::string& value)
+int32_t String::findFirstOf(const std::string& value) const
 {
 	int32_t offset = 0;
 	size_t index = 0;
@@ -452,7 +452,7 @@ int32_t String::findFirstOf(const std::string& value)
 	return offset;
 }
 
-int32_t String::findLastOf(char value)
+int32_t String::findLastOf(char value) const
 {
 	int32_t offset = getSize() - 1;
 
@@ -472,7 +472,7 @@ int32_t String::findLastOf(char value)
 	return offset;
 }
 
-int32_t String::findLastOf(const std::string& value)
+int32_t String::findLastOf(const std::string& value) const
 {
 	int32_t offset = getSize() - 1;
 	size_t index = 0;
@@ -514,7 +514,7 @@ int32_t String::findLastOf(const std::string& value)
 	return offset;
 }
 
-bool String::isLine()
+bool String::isLine() const
 {
 	return this->endWith(LINE_MARK);
 }
@@ -755,7 +755,7 @@ void String::split(const std::string& spot, std::vector<std::string>& dest)
 	}
 }
 
-bool String::empty()
+bool String::empty() const
 {
 	return this->compare("") || getString() == nullptr;
 }

@@ -20,9 +20,9 @@ namespace sys
 		// 设置鼠标移动监听事件
 		void setMoveHandler(Object* target, MOUSE_MOVE_HANDLER handler);
 
-		void onButtonHandler(MouseKey Key, ButtonStatus type, float x, float y);
-		void onScrollHandler(ScrollEvent type, float param);
-		void onMoveHandler(float x, float y);
+		void onButtonHandler(MouseKey Key, ButtonStatus type, float x, float y) const;
+		void onScrollHandler(ScrollEvent type, float param) const;
+		void onMoveHandler(float x, float y) const;
 	protected:
 	private:
 		// 按钮事件

@@ -185,125 +185,6 @@ bool render::Mesh::isComputeTangent()
 	return _bComputeTangent;
 }
 
-void render::Mesh::drawWithBufferObject()
-{
-	if (_detail == nullptr)
-	{
-		return;
-	}
-	uint32_t nVerticeSize = _detail->getVertices().getSize();
-
-	if (nVerticeSize == 0)
-	{
-		return;
-	}
-
-	uint32_t nIndiceLength = _detail->getIndices().getLength();
-	if (nIndiceLength == 0)
-	{
-		return;
-	}
-
-	GLDebug::showError();
-	_indiceBuffer->bindBuffer();
-	if (_modelMatrices.getLength() > 0)
-	{
-		int primaryCount = 1;
-		if (isBatchDraw())
-		{
-			primaryCount = _modelMatrices.getVerticeCount();
-		}
-		GLBufferObjects::drawElementsInstanced(_drawMode, nIndiceLength, IndexDataType::UNSIGNED_INT, nullptr, primaryCount);
-	}
-	else
-	{
-		GLBufferObjects::drawElements(_drawMode, nIndiceLength, IndexDataType::UNSIGNED_INT, nullptr);
-	}
-
-	GLDebug::showError();
-}
-
-void render::Mesh::drawWithClientArray()
-{
-	if (_detail == nullptr)
-	{
-		return;
-	}
-	const sys::MeshMemoryData& vertices = _detail->getVertices();
-	if (vertices.getLength() == 0)
-	{
-		//PRINT("Mesh Vertice is NULL\n");
-		return;
-	}
-
-	const sys::MeshMemoryData& indices = _detail->getIndices();
-	if (indices.getLength() == 0)
-	{
-		return;
-	}
-
-	const sys::MeshMemoryData& colors = _detail->getColors();
-	const sys::MeshMemoryData& texcoords = _detail->getUVs();
-	const sys::MeshMemoryData& normals = _detail->getNormals();
-	const sys::MeshMemoryData& tangents = _detail->getTangents();
-	const sys::MeshMemoryData& bitangents = _detail->getBitangents();
-
-	if (vertices.getLength() > 0)
-	{
-		GLClientArrays::enableClientState(ClientArrayType::VERTEX_ARRAY);
-		GLClientArrays::setVertexPointer(vertices.getUnitSize(), DataType::FLOAT, 0, vertices.getValue());
-		GLDebug::showError();
-	}
-	if (colors.getLength() > 0)
-	{
-		GLClientArrays::enableClientState(ClientArrayType::COLOR_ARRAY);
-		GLClientArrays::setColorPointer(colors.getUnitSize(), DataType::FLOAT, 0, colors.getValue());
-		GLDebug::showError();
-	}
-
-	if (texcoords.getLength() > 0)
-	{
-		GLClientArrays::enableClientState(ClientArrayType::TEXTURE_COORD_ARRAY);
-		GLClientArrays::setTexCoordPointer(texcoords.getUnitSize(), DataType::FLOAT, 0, texcoords.getValue());
-		GLDebug::showError();
-	}
-
-	if (normals.getLength() > 0)
-	{
-		GLClientArrays::enableClientState(ClientArrayType::NORMAL_ARRAY);
-		GLClientArrays::setNormalPointer(DataType::FLOAT, 0, normals.getValue());
-		GLDebug::showError();
-	}
-	/*
-	if (tangents.getLength() > 0)
-	{
-		GLClientArrays::enableClientState(ClientArrayType::TANGENT_ARRAY);
-		GLClientArrays::setTangentPointer(DataType::FLOAT, 0, bitangents.getValue());
-		GLDebug::showError();
-	}
-
-	if (bitangents.getLength() > 0)
-	{
-		GLClientArrays::enableClientState(ClientArrayType::BITANGENT_ARRAY);
-		GLClientArrays::setBitangentPointer(DataType::FLOAT, 0, bitangents.getValue());
-		GLDebug::showError();
-	}
-	*/
-	{
-		GLClientArrays::drawElements(_drawMode, indices.getLength(), IndexDataType::UNSIGNED_INT, indices.getValue());
-		GLDebug::showError();
-	}
-
-	GLClientArrays::disableClientState(ClientArrayType::VERTEX_ARRAY);
-	GLClientArrays::disableClientState(ClientArrayType::NORMAL_ARRAY);
-	GLClientArrays::disableClientState(ClientArrayType::TEXTURE_COORD_ARRAY);
-	GLClientArrays::disableClientState(ClientArrayType::COLOR_ARRAY);
-	/*
-	GLClientArrays::disableClientState(ClientArrayType::BITANGENT_ARRAY);
-	GLClientArrays::disableClientState(ClientArrayType::TANGENT_ARRAY);
-	*/
-}
-
 void render::Mesh::updateBufferData()
 {
 	if (!_detail)
@@ -689,13 +570,19 @@ bool render::Mesh::isBatchDraw() const
 
 bool render::Mesh::equals(const Mesh& mesh) const
 {
-	if (getDrawMode() != mesh.getDrawMode()) return false;
+	if (getDrawMode() != mesh.getDrawMode())
+	{
+		return false;
+	}
 	return _detail->equals(*mesh.getMeshDetail());
 }
 
 bool render::Mesh::sameLayout(const Mesh& mesh) const
 {
-	if (getDrawMode() != mesh.getDrawMode()) return false;
+	if (getDrawMode() != mesh.getDrawMode())
+	{
+		return false;
+	}
 	return _detail->sameLayout(*mesh.getMeshDetail());
 }
 

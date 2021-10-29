@@ -42,12 +42,12 @@ MemoryPointer::MemoryPointer(const MemoryData& data)
 	_size = data.getLength() * data.getTypeSize();
 }
 
-char* MemoryPointer::getPtr()
+char* MemoryPointer::getPtr() const
 {
 	return _value;
 }
 
-size_t MemoryPointer::getSize()
+size_t MemoryPointer::getSize() const
 {
 	return _size;
 }

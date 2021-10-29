@@ -81,9 +81,24 @@ bool IElement::save(tinyxml2::XMLElement* pXmlNode, bool clean/* = true*/)
 	return true;
 }
 
+const std::string& ui::IElement::getFontPath() const
+{
+	return _defaultFontPath;
+}
+
 void ui::IElement::setFontPath(const std::string& fontPath)
 {
 	_defaultFontPath = fontPath;
+}
+
+const std::string& ui::IElement::getFontImagePath() const
+{
+	return _defaultFontImagePath;
+}
+
+void ui::IElement::setFontImagePath(const std::string& fontImagePath)
+{
+	_defaultFontImagePath = fontImagePath;
 }
 
 const math::Size& ui::IElement::getParentSize() const
@@ -119,9 +134,4 @@ void ui::IElement::setLayoutItem(LayoutItem* item)
 LayoutItem* ui::IElement::getLayoutItem()
 {
 	return _layoutItem;
-}
-
-const std::string& ui::IElement::getFontPath()
-{
-	return _defaultFontPath;
 }

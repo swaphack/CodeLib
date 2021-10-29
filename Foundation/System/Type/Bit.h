@@ -10,7 +10,7 @@ namespace sys
 		Bit();
 		virtual ~Bit();
 	public:
-		bool isZero(uint64_t idx);
+		bool isZero(uint64_t idx) const;
 		void set(uint64_t idx, uint8_t value);
 		void setZero(uint64_t idx);
 		void setOne(uint64_t idx);

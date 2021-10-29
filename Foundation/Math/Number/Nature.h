@@ -18,8 +18,8 @@ namespace math
 		Nature(uint64_t value);
 		Nature(const Nature& value);
 	public:
-		Nature operator+(const Nature& value);
-		Nature operator-(const Nature& value);
+		Nature operator+(const Nature& value) const;
+		Nature operator-(const Nature& value) const;
 		Nature operator*(const Nature& value) const;
 
 		Nature& operator+=(const Nature& value);

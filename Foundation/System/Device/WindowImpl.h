@@ -16,23 +16,23 @@ namespace sys
 		// 窗口位置x
 		void setPositionX(float posX);
 		// 窗口位置x
-		float getPositionX();
+		float getPositionX() const;
 		// 窗口位置y
 		void setPositionY(float posY);
 		// 窗口位置y
-		float getPositionY();
+		float getPositionY() const;
 		// 窗口高度
 		void setWidth(float width);
 		// 窗口宽度
-		float getWidth();
+		float getWidth() const;
 		// 窗口高度
 		void setHeight(float height);
 		// 窗口高度
-		float getHeight();
+		float getHeight() const;
 		// 标题
 		void setTile(const std::string& name);
 		// 标题
-		std::string getTitle();
+		const std::string& getTitle() const;
 	protected:
 		// 窗口宽度
 		float _width = 0;

@@ -31,6 +31,7 @@ void ue::UIEditorApplication::show()
 		ui::UIShaderHelper::setColorShader(pShaderSetting->ColorVertex, pShaderSetting->ColorFragment);
 	}
 	G_DRAWCORE->setDrawType((render::DrawCore::DrawType)_ideConfig.getIDE().ShaderMode);
+	G_DRAWCORE->setDebugDrawMode((DrawMode)_ideConfig.getIDE().DebugMode);
 
 	MainWindow* pWindow = CREATE_NODE(MainWindow);
 	getCanvas()->pushScene(pWindow);

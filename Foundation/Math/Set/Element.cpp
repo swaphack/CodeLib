@@ -13,7 +13,7 @@ math::Element::~Element()
 *	 Ù”⁄
 */
 
-bool math::Element::isBelongTo(const Set& set)
+bool math::Element::isBelongTo(const Set& set) const
 {
 	return set.contains(*this);
 }
@@ -22,7 +22,7 @@ bool math::Element::isBelongTo(const Set& set)
 *	≤ª Ù”⁄
 */
 
-bool math::Element::isNotBelongTo(const Set& set)
+bool math::Element::isNotBelongTo(const Set& set) const
 {
 	return !set.contains(*this);
 }

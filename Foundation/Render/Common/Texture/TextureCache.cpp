@@ -66,12 +66,16 @@ void TextureCache::removeTexture2D(const std::string& path)
 
 void TextureCache::removeAllTextures()
 {
-	auto iter = _textures.begin();
-	while (iter != _textures.end())
+	for (auto item : _texFrames)
 	{
-		SAFE_RELEASE(iter->second);
-		iter++;
+		SAFE_RELEASE(item.second);
 	}
+	for (auto item : _textures)
+	{
+		SAFE_RELEASE(item.second);
+	}
+	_textures.clear();
+	_texFrames.clear();
 	_texture2Ds.clear();
 }
 
@@ -96,7 +100,7 @@ std::string render::TextureCache::getTexFrameName(const std::string& path, const
 	return path + "[" + name + "]";
 }
 
-void render::TextureCache::addTexAtlas(const std::string& path, const sys::TextureAtlas& texAtlas)
+void render::TextureCache::addTexAtlas(const std::string& path, const sys::ImageTextureAtlas& texAtlas)
 {
 	Texture* texture = this->createTexture2D(path);
 	if (texture)
@@ -105,7 +109,7 @@ void render::TextureCache::addTexAtlas(const std::string& path, const sys::Textu
 	}
 }
 
-void render::TextureCache::addTexAtlas(const std::string& path, const Texture* texture, const sys::TextureAtlas& texAtlas)
+void render::TextureCache::addTexAtlas(const std::string& path, const Texture* texture, const sys::ImageTextureAtlas& texAtlas)
 {
 	if (texture == nullptr || texture->getWidth() == 0 || texture->getHeight() == 0)
 	{
@@ -113,38 +117,46 @@ void render::TextureCache::addTexAtlas(const std::string& path, const Texture* t
 	}
 	for (const auto& item : texAtlas.getAllChips())
 	{
-		float y = texture->getHeight() - item.second.y - item.second.height;
+		float y = texture->getHeight() - item.second->y - item.second->height;
 		if (y < 0)
 		{
-			PRINT("error: TextureCache::addTexAtlas Y value is lower than 0!!!");
+			PRINTLN("error: TextureCache::addTexAtlas Y value is lower than 0!!!");
 			y = 0;
 		}
-		math::Rect rect(item.second.x, y, item.second.width, item.second.height);
-		this->addTexFrame(path, texture, item.first, rect);
+		math::Rect rect(item.second->x, y, item.second->width, item.second->height);
+		this->addTexFrame(path, texture, item.first, rect, item.second->rotate);
 	}
 }
 
-void render::TextureCache::addTexFrame(const std::string& path, const TexFrame& texFrame)
+void render::TextureCache::addTexFrame(const std::string& path, const TexFrame* texFrame)
 {
-	if (texFrame.getName().empty())
+	if (texFrame->getName().empty())
 	{
 		return;
 	}
-	std::string fullname = getTexFrameName(path, texFrame.getName());
-	_texFrames[fullname] = texFrame;
+	std::string fullname = getTexFrameName(path, texFrame->getName());
+	this->removeTexFrames(fullname);
+	auto pTexFrame = (TexFrame*)texFrame;
+	SAFE_RETAIN(pTexFrame);
+	_texFrames[fullname] = pTexFrame;
 }
 
-void render::TextureCache::addTexFrame(const std::string& path, const Texture* texture, const std::string& name, const math::Rect& rect)
+void render::TextureCache::addTexFrame(const std::string& path, const Texture* texture, const std::string& name, const math::Rect& rect, bool rotate)
 {
 	if (texture == nullptr || texture->getWidth() == 0 || texture->getHeight() == 0) return;
 
 	math::Rect percentRect(rect.getMinX() / texture->getWidth(), rect.getMinY() / texture->getHeight(),
 		rect.getWidth() / texture->getWidth(), rect.getHeight() / texture->getHeight());
 
-	TexFrame texFrame;
-	texFrame.setName(name);
-	texFrame.setRect(percentRect);
-	texFrame.setTexture(texture);
+	if (rotate == true)
+	{
+		int a = 1;
+	}
+	TexFrame* texFrame = CREATE_OBJECT(TexFrame);
+	texFrame->setName(name);
+	texFrame->setRect(percentRect);
+	texFrame->setTexture(texture);
+	texFrame->setRotate(rotate);
 	this->addTexFrame(path, texFrame);
 }
 
@@ -159,14 +171,19 @@ const TexFrame* render::TextureCache::getTexFrame(const std::string& pathname) c
 	auto it = _texFrames.find(pathname);
 	if (it != _texFrames.end())
 	{
-		return &it->second;
+		return it->second;
 	}
 	return nullptr;
 }
 
 void render::TextureCache::removeTexFrames(const std::string& path)
 {
-	_texFrames.erase(path);
+	auto it = _texFrames.find(path);
+	if (it != _texFrames.end())
+	{
+		SAFE_RELEASE(it->second);
+		_texFrames.erase(it);
+	}
 }
 
 Texture2D* render::TextureCache::createTexture2D(const phy::Color4B& color)

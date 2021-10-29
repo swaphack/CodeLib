@@ -41,7 +41,7 @@ void CacheIdentity::setInControl(bool status)
 	}
 }
 
-bool CacheIdentity::isInControl()
+bool CacheIdentity::isInControl() const
 {
 	return _bInCacheControl;
 }

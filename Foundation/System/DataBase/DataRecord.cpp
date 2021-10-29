@@ -23,14 +23,14 @@ void DataRecord::setValue(const std::string& key, const std::string& value)
 	_values[key] = value;
 }
 
-std::string DataRecord::getValue(const std::string& key)
+std::string DataRecord::getValue(const std::string& key) const
 {
 	if (key.empty())
 	{
 		return "";
 	}
 
-	std::map<std::string, std::string>::const_iterator iter = _values.find(key);
+	auto iter = _values.find(key);
 	if (iter != _values.end())
 	{
 		return iter->second;

@@ -53,7 +53,7 @@ namespace sys
 		// 追加数据到本地
 		bool append(const char* data, size_t size);
 		// 判断文件是否存在
-		bool exists();
+		bool exists() const;
 		// 关闭
 		bool close();
 	private:

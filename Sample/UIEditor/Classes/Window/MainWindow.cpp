@@ -29,9 +29,12 @@ bool ue::MainWindow::init()
 	{
 		return false;
 	}
-
-	ui::UIShaderHelper::loadColorShader(G_BOXDRAW->getRenderNode2d());
-	ui::UIShaderHelper::loadColorShader(G_BOXDRAW->getRenderNode3d());
+	auto boxDraw = G_BOXSPACE->getBoxDraw();
+	if (boxDraw)
+	{
+		ui::UIShaderHelper::loadColorShader(boxDraw->getRenderNode2d());
+		ui::UIShaderHelper::loadColorShader(boxDraw->getRenderNode3d());
+	}
 
 	auto size = render::Tool::getViewSize();
 	_viewLayout = CREATE_NODE(UIDesignWindow);

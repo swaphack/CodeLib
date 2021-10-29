@@ -87,11 +87,19 @@ namespace ui
 		/**
 		*	默认字体
 		*/
-		const std::string& getFontPath();
+		const std::string& getFontPath() const;
 		/**
 		*	设置默认字体
 		*/
 		void setFontPath(const std::string& fontPath);
+		/**
+		*	默认字体图片路径
+		*/
+		const std::string& getFontImagePath() const;
+		/**
+		*	设置默认字体图片路径
+		*/
+		void setFontImagePath(const std::string& fontImagePath);
 	public:
 		/**
 		*	获取布局
@@ -152,8 +160,10 @@ namespace ui
 		math::Size _designSize;
 		// 布局方向
 		LayoutDirection _designDirection;
-		// 默认字体
+		// 默认字体ttf路径
 		std::string _defaultFontPath;
+		// 默认字体图片路径
+		std::string _defaultFontImagePath;
 	}; 
 
 	#define G_UIPROXY ui::UIProxy::getInstance()

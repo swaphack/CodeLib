@@ -147,10 +147,11 @@ ui::CtrlButton* ue::UIDesignDirectory::createDirItem(int height, const std::stri
 		pWidget->setSelectedImage("Default/Atlas/ui.png[dir_bg_2.png]");
 		pWidget->setTextColor(phy::Color3B(255, 255, 255));
 		pWidget->setFontSize(CONST_ITEM_HEIGHT);
-		pWidget->setFontPath("Default/Font/font_3.ttf");
+		pWidget->setFontImagePath(G_UIPROXY->getFontImagePath());
+		pWidget->setFontPath(G_UIPROXY->getFontPath());
 		pWidget->setString(name);
-		pWidget->getTextControl()->setTextHorizontalAlignment(sys::HorizontalAlignment::LEFT);
-		pWidget->getTextControl()->setTextVerticalAlignment(sys::VerticalAlignment::BOTTOM);
+		pWidget->setTextHorizontalAlignment(sys::HorizontalAlignment::LEFT);
+		pWidget->setTextVerticalAlignment(sys::VerticalAlignment::BOTTOM);
 		pWidget->addClickFunc([this, fullpath](CtrlWidget*) {
 			this->onChangeFoldState(fullpath);
 			this->updateRootPanel(false);
@@ -179,10 +180,11 @@ ui::CtrlButton* ue::UIDesignDirectory::createFileItem(int height, const std::str
 		pWidget->setSelectedImage("Default/Atlas/ui.png[file_bg_2.png]");
 		pWidget->setTextColor(phy::Color3B(0, 0, 0));
 		pWidget->setFontSize(CONST_ITEM_HEIGHT);
-		pWidget->setFontPath("Default/Font/font_3.ttf");
+		pWidget->setFontImagePath(G_UIPROXY->getFontImagePath());
+		pWidget->setFontPath(G_UIPROXY->getFontPath());
 		pWidget->setString(name);
-		pWidget->getTextControl()->setTextHorizontalAlignment(sys::HorizontalAlignment::LEFT);
-		pWidget->getTextControl()->setTextVerticalAlignment(sys::VerticalAlignment::BOTTOM);
+		pWidget->setTextHorizontalAlignment(sys::HorizontalAlignment::LEFT);
+		pWidget->setTextVerticalAlignment(sys::VerticalAlignment::BOTTOM);
 		pWidget->addClickFunc([this, fullpath](CtrlWidget*) {
 			G_PANELEVT->setSelectFile(fullpath);
 		});

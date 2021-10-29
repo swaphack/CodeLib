@@ -14,7 +14,7 @@ namespace sys
 		// 数据
 		MemoryData data;
 		// 游标
-		int32_t pos;
+		int32_t pos = 0;
 	public:
 		NetData();
 		NetData(const std::string& value);
@@ -26,19 +26,19 @@ namespace sys
 		/**
 		*	当前指针位置
 		*/
-		const char* getPtr();
+		const char* getPtr() const;
 		/**
 		*	大小
 		*/
-		uint32_t getSize();
+		uint32_t getSize() const;
 		/**
 		*	当前指针位置
 		*/
-		const char* getCursorPtr();
+		const char* getCursorPtr() const;
 		/**
 		*	剩余未读取空间大小
 		*/
-		int32_t getRemainSize();
+		int32_t getRemainSize() const;
 		/**
 		*	初始化
 		*/

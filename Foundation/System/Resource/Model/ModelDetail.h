@@ -30,7 +30,7 @@ namespace sys
 		/**
 		*	获取模型材质
 		*/
-		MaterialDetail* getMaterial(const std::string& name);
+		MaterialDetail* getMaterial(const std::string& name) const;
 		/**
 		*	获取模型材质
 		*/
@@ -51,7 +51,7 @@ namespace sys
 		/**
 		*	获取模型网格
 		*/
-		MeshDetail* getMesh(const std::string& name);
+		MeshDetail* getMesh(const std::string& name) const;
 		/**
 		*	获取模型网格
 		*/

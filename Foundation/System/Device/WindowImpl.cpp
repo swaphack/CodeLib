@@ -21,27 +21,27 @@ void WindowImpl::initWindow(const std::string& title, float width, float height,
 	_posY = posY;
 }
 
-std::string WindowImpl::getTitle()
+const std::string& WindowImpl::getTitle() const
 {
 	return _title;
 }
 
-float WindowImpl::getHeight()
+float WindowImpl::getHeight() const
 {
 	return _height;
 }
 
-float WindowImpl::getWidth()
+float WindowImpl::getWidth() const
 {
 	return _width;
 }
 
-float WindowImpl::getPositionY()
+float WindowImpl::getPositionY() const
 {
 	return _posY;
 }
 
-float WindowImpl::getPositionX()
+float WindowImpl::getPositionX() const
 {
 	return _posX;
 }

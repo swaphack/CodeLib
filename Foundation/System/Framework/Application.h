@@ -27,7 +27,7 @@ namespace sys
 		virtual ~Application();
 	public:
 		// 检查自动释放池
-		void checkAutoRealsePool();
+		void checkAutoReleasePool();
 
 		// 添加一个协议管理
 		void addProtocolManager(const std::string& protocolName, Object* protocolManager);

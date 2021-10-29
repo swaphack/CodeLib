@@ -28,6 +28,7 @@
 	<IDE>
 		<Design>Default/Layout/main_view_test.xml</Design>
 		<Control>Default/Layout/Widget/widget.config.xml</Control>
-		<ShaderModel>2</ShaderModel>
+		<ShaderMode>2</ShaderMode>
+		<DebugMode>-1</DebugMode>
 	</IDE>
 </root>

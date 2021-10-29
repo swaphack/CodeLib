@@ -4,5 +4,6 @@
 #include "LabelImage.h"
 #include "TextDefine.h"
 #include "LabelStream.h"
+#include "FontCharDetail.h"
 #include "FaceLibrary.h"
-#include "LabelLibrary.h"
+#include "FontLibrary.h"

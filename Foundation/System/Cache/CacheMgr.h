@@ -18,9 +18,9 @@ namespace sys
 		static CacheMgr* getInstance();
 	public:
 		// 按id获取cache
-		CacheIdentity* getCache(int32_t nID);
+		CacheIdentity* getCache(int32_t nID) const;
 		// 按名称获取cache
-		CacheIdentity* getCache(const std::string& name);
+		CacheIdentity* getCache(const std::string& name) const;
 		// 添加cache
 		void addCache(CacheIdentity* pCache);
 		// 移除cache

@@ -188,17 +188,29 @@
     <ClInclude Include="Terrian\import.h">
       <Filter>Terrian</Filter>
     </ClInclude>
-    <ClInclude Include="Pack\BinPacking1D.h">
-      <Filter>Pack</Filter>
+    <ClInclude Include="Space\Index\BinaryTree.h">
+      <Filter>Space\Index</Filter>
     </ClInclude>
-    <ClInclude Include="Pack\BinPacking2D.h">
-      <Filter>Pack</Filter>
+    <ClInclude Include="Space\Index\QuadTree.h">
+      <Filter>Space\Index</Filter>
     </ClInclude>
-    <ClInclude Include="Pack\import.h">
-      <Filter>Pack</Filter>
+    <ClInclude Include="Space\Index\import.h">
+      <Filter>Space\Index</Filter>
     </ClInclude>
-    <ClInclude Include="Pack\Bin2D.h">
-      <Filter>Pack</Filter>
+    <ClInclude Include="Space\import.h">
+      <Filter>Space</Filter>
+    </ClInclude>
+    <ClInclude Include="Space\Bin\Bin2D.h">
+      <Filter>Space\Bin</Filter>
+    </ClInclude>
+    <ClInclude Include="Space\Bin\BinPacking1D.h">
+      <Filter>Space\Bin</Filter>
+    </ClInclude>
+    <ClInclude Include="Space\Bin\BinPacking2D.h">
+      <Filter>Space\Bin</Filter>
+    </ClInclude>
+    <ClInclude Include="Space\Bin\import.h">
+      <Filter>Space\Bin</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -235,8 +247,14 @@
     <Filter Include="Terrian">
       <UniqueIdentifier>{d235acf9-e6d6-4b3b-9cf7-72c34c5b51dc}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Pack">
-      <UniqueIdentifier>{8f010b8d-0786-4caa-8a55-18383efb9cac}</UniqueIdentifier>
+    <Filter Include="Space">
+      <UniqueIdentifier>{c7e85049-6fdf-45f8-9835-c16b8384b409}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Space\Index">
+      <UniqueIdentifier>{a067dd2b-6439-47b3-a3d7-1757f3379404}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Space\Bin">
+      <UniqueIdentifier>{3a19625d-bb58-486a-820d-2e6c2ba2d4f9}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -355,14 +373,14 @@
     <ClCompile Include="Terrian\TerrianHelper.cpp">
       <Filter>Terrian</Filter>
     </ClCompile>
-    <ClCompile Include="Pack\BinPacking1D.cpp">
-      <Filter>Pack</Filter>
+    <ClCompile Include="Space\Bin\Bin2D.cpp">
+      <Filter>Space\Bin</Filter>
     </ClCompile>
-    <ClCompile Include="Pack\BinPacking2D.cpp">
-      <Filter>Pack</Filter>
+    <ClCompile Include="Space\Bin\BinPacking1D.cpp">
+      <Filter>Space\Bin</Filter>
     </ClCompile>
-    <ClCompile Include="Pack\Bin2D.cpp">
-      <Filter>Pack</Filter>
+    <ClCompile Include="Space\Bin\BinPacking2D.cpp">
+      <Filter>Space\Bin</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

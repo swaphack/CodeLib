@@ -36,13 +36,17 @@ namespace sys
 		uint8_t getUnitSize() const;
 		// 获取指针
 		uint8_t* getPtr(uint32_t offset) const;
+		// 获取指针
+		uint8_t getValue(uint32_t offset) const;
 		// 水平翻转
 		void flipX();
 		// 垂直翻转
 		void flipY();
 		// 旋转90度
 		void rotate90();
-		// 扩展格式，只处理RGB=>RGBA BGR=>BGRA
+		// 旋转-90度
+		void rotate270();
+		// 扩展格式，RED,RG,RGB=>RGBA BGR=>BGRA
 		void expandFormat();
 	public:
 		// 设置图片格式 一个像素所有的rgba类型

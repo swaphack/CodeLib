@@ -23,12 +23,12 @@ const math::Vector3& math::BoundingBox::getCenter() const
 	return _center;
 }
 
-bool math::BoundingBox::contains(const Vector2& point)
+bool math::BoundingBox::contains(const Vector2& point) const
 {
 	return false;
 }
 
-bool math::BoundingBox::contains(const Vector3& point)
+bool math::BoundingBox::contains(const Vector3& point) const
 {
 	return false;
 }

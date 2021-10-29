@@ -1,12 +1,13 @@
 #include "ButtonLoader.h"
 #include "Display/UIProxy.h"
 
-#define PROPERTY_TEXT		"text"
-#define PROPERTY_FONTPATH	"fontPath"
-#define PROPERTY_FONTSIZE	"fontSize"
-#define PROPERTY_TEXTCOLOR	"textColor"
-#define PROPERTY_HORIZONTAL	"horizontal"
-#define PROPERTY_VERTICAL	"vertical"
+#define PROPERTY_TEXT			"text"
+#define PROPERTY_FONTPATH		"fontPath"
+#define PROPERTY_FONTSIZE		"fontSize"
+#define PROPERTY_FONTIMAGEPATH	"fontImagePath"
+#define PROPERTY_TEXTCOLOR		"textColor"
+#define PROPERTY_HORIZONTAL		"horizontal"
+#define PROPERTY_VERTICAL		"vertical"
 
 #define PROPERTY_NORMAL_IMAGE		"normalImage"
 #define PROPERTY_SELECTED_IMAGE		"selectedImage"
@@ -24,7 +25,8 @@ void ui::ButtonLoader::parseAttributes()
 {
 	std::string text;
 	phy::Color3B color;
-	std::string fontpath;
+	std::string fontPath;
+	std::string fontImagePath;
 	float fontSize = 0;
 	int horizontal = 1;
 	int vertical = 1;
@@ -36,8 +38,9 @@ void ui::ButtonLoader::parseAttributes()
 	LOAD_WIDGET_ATTRIBUTE(PROPERTY_TEXT, setString, text);
 
 	LOAD_WIDGET_ATTRIBUTE(PROPERTY_TEXTCOLOR, setTextColor, color);
-	LOAD_WIDGET_STRING_ATTRIBUTE(PROPERTY_FONTPATH, setFontPath, fontpath);
+	LOAD_WIDGET_STRING_ATTRIBUTE(PROPERTY_FONTPATH, setFontPath, fontPath);
 	LOAD_WIDGET_ATTRIBUTE(PROPERTY_FONTSIZE, setFontSize, fontSize);
+	LOAD_WIDGET_STRING_ATTRIBUTE(PROPERTY_FONTIMAGEPATH, setFontImagePath, fontImagePath);
 	LOAD_WIDGET_CAST_ATTRIBUTE(PROPERTY_HORIZONTAL, setTextHorizontalAlignment, horizontal, sys::HorizontalAlignment);
 	LOAD_WIDGET_CAST_ATTRIBUTE(PROPERTY_VERTICAL, setTextVerticalAlignment, vertical, sys::VerticalAlignment);
 
@@ -45,9 +48,13 @@ void ui::ButtonLoader::parseAttributes()
 	LOAD_WIDGET_ATTRIBUTE(PROPERTY_SELECTED_IMAGE, setSelectedImage, selectedImage);
 	LOAD_WIDGET_ATTRIBUTE(PROPERTY_DISABLED_IMAGE, setDisabledImage, disabledImage);
 
-	if (fontpath.empty())
+	if (fontPath.empty())
 	{
 		getCastWidget()->setFontPath(getFontPath());
+	}
+	if (fontImagePath.empty())
+	{
+		getCastWidget()->setFontImagePath(getFontImagePath());
 	}
 
 	WidgetLoader::parseAttributes();
@@ -62,6 +69,8 @@ void ui::ButtonLoader::saveAttributes()
 	SAVE_WIDGET_ATTRIBUTE(PROPERTY_TEXTCOLOR, getTextColor);
 	SAVE_WIDGET_ATTRIBUTE(PROPERTY_FONTPATH, getFontPath);
 	SAVE_WIDGET_ATTRIBUTE(PROPERTY_FONTSIZE, getFontSize);
+	SAVE_WIDGET_ATTRIBUTE(PROPERTY_FONTIMAGEPATH, getFontImagePath);
+
 	SAVE_WIDGET_CAST_ATTRIBUTE(PROPERTY_HORIZONTAL, getTextHorizontalAlignment, int);
 	SAVE_WIDGET_CAST_ATTRIBUTE(PROPERTY_VERTICAL, getTextVerticalAlignment, int);
 

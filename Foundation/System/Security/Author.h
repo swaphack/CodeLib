@@ -19,10 +19,9 @@ namespace sys
 		std::string password;
 	public:
 		Author()
-			:host(""), port(0), username(""), password("")
 		{}
 		Author(const std::string& host, int32_t port)
-			:host(host), port(port), username(""), password("")
+			:host(host), port(port)
 		{}
 	};
 }

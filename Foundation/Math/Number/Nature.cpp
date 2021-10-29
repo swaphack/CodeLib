@@ -32,12 +32,12 @@ Nature::Nature(const Nature& value)
 	*this = value;
 }
 
-Nature Nature::operator+(const Nature& value)
+Nature Nature::operator+(const Nature& value)const
 {
 	return Nature(_value + value.value());
 }
 
-Nature Nature::operator-(const Nature& value)
+Nature Nature::operator-(const Nature& value)const
 {
 	return Nature(_value - value.value());
 }

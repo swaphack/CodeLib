@@ -30,7 +30,7 @@ void math::AABB::set(const Vector3& center, const Vector3& volume)
 	_maxPos = center + volume * 0.5f;
 }
 
-bool AABB::contains(const Vector2& point32)
+bool AABB::contains(const Vector2& point32) const
 {
 	return point32.getX() >= _minPos.getX()
 		&& point32.getX() <= _maxPos.getX()
@@ -38,7 +38,7 @@ bool AABB::contains(const Vector2& point32)
 		&& point32.getY() <= _maxPos.getY();
 }
 
-bool AABB::contains(const Vector3& point32)
+bool AABB::contains(const Vector3& point32) const
 {
 	return point32.getX() >= _minPos.getX()
 		&& point32.getX() <= _maxPos.getX()
@@ -48,17 +48,17 @@ bool AABB::contains(const Vector3& point32)
 		&& point32.getZ() <= _maxPos.getZ();
 }
 
-bool AABB::contains(const LineSegment2d& line)
+bool AABB::contains(const LineSegment2d& line) const
 {
 	return contains(line.getSrc()) && contains(line.getDest());
 }
 
-bool AABB::contains(const LineSegment3d& line)
+bool AABB::contains(const LineSegment3d& line) const
 {
 	return contains(line.getSrc()) && contains(line.getDest());
 }
 
-bool AABB::intersects(const LineSegment2d& line)
+bool AABB::intersects(const LineSegment2d& line) const
 {
 	if (!contains(line.getSrc()) && !contains(line.getDest()))
 	{
@@ -68,7 +68,7 @@ bool AABB::intersects(const LineSegment2d& line)
 	return true;
 }
 
-bool AABB::intersects(const LineSegment3d& line)
+bool AABB::intersects(const LineSegment3d& line) const
 {
 	if (!contains(line.getSrc()) && !contains(line.getDest()))
 	{
@@ -78,7 +78,7 @@ bool AABB::intersects(const LineSegment3d& line)
 	return true;
 }
 
-bool AABB::contains(const AABB& bounds)
+bool AABB::contains(const AABB& bounds) const
 {
 	return bounds.getMin().getX() >= getMin().getX()
 		&& bounds.getMax().getX() <= getMax().getX()
@@ -88,7 +88,7 @@ bool AABB::contains(const AABB& bounds)
 		&& bounds.getMax().getZ() <= getMax().getZ();
 }
 
-bool AABB::intersects(const AABB& bounds)
+bool AABB::intersects(const AABB& bounds) const
 {
 	float x0 = bounds.getMin().getX();
 	float x1 = bounds.getMax().getX();
@@ -133,10 +133,12 @@ const Vector3& math::AABB::getVolume() const
 	return _volume; 
 }
 
-void AABB::operator=(const AABB& aabb)
+AABB& AABB::operator=(const AABB& aabb)
 {
 	_center = aabb._center;
 	_volume = aabb._volume;
+
+	return *this;
 }
 
 bool AABB::hitRay(const Ray& ray) const

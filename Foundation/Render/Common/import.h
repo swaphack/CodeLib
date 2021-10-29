@@ -11,6 +11,8 @@
 #include "Audio/import.h"
 #include "DrawNode/import.h"
 #include "Texture/import.h"
+#include "Text/import.h"
+
 #include "Buffer/import.h"
 #include "VAO/import.h"
 #include "Fragment/import.h"

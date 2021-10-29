@@ -34,7 +34,7 @@ std::string CommandLine::popCommand()
 	return head;
 }
 
-bool CommandLine::empty()
+bool CommandLine::empty() const
 {
 	return _commandLines.empty();
 }

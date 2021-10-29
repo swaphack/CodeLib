@@ -12,6 +12,6 @@ namespace sys
 		ConcurrentFile(const std::string& filepath);
 		virtual ~ConcurrentFile();
 	private:
-		FILE* _fptr;
+		FILE* _fptr = nullptr;
 	};
 }

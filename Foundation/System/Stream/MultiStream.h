@@ -70,10 +70,10 @@ namespace sys
 		// 数据
 		MemoryData _data;
 		// 宽度
-		uint32_t _width;
+		uint32_t _width = 0;
 		// 高度
-		uint32_t _heigth;
+		uint32_t _heigth = 0;
 		// 深度
-		uint32_t _depth;
+		uint32_t _depth = 0;
 	};
 }

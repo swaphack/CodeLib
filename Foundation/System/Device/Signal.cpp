@@ -18,7 +18,7 @@ void Signal::setMessage(void* msg)
 	_msg = msg;
 }
 
-void* Signal::getMessage()
+void* Signal::getMessage() const
 {
 	return _msg;
 }

@@ -30,9 +30,8 @@ render::Node* render::Material::getNode()
 
 void render::Material::setShaderProgram(ShaderProgram* shaderProgram)
 {
-	SAFE_RELEASE(_shaderProgram);
 	SAFE_RETAIN(shaderProgram);
-
+	SAFE_RELEASE(_shaderProgram);
 	_shaderProgram = shaderProgram;
 	_materialSetting->setShaderProgram(shaderProgram);
 }
@@ -96,8 +95,14 @@ void render::Material::applyMaterial()
 
 bool render::Material::equals(const Material& material) const
 {
-	if (_shaderProgram != material.getShaderProgram()) return false;
-	if (!_detail->equals(*material.getMaterialDetail())) return false;
+	if (_shaderProgram != material.getShaderProgram())
+	{
+		return false;
+	}
+	if (!_detail->equals(*material.getMaterialDetail()))
+	{
+		return false;
+	}
 	return _materialSetting->equalsSelfDefinedUniforms(*material.getMaterialSetting());
 }
 

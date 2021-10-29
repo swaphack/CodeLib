@@ -19,11 +19,11 @@ namespace sys
 		/**
 		*	数据
 		*/
-		char* getPtr();
+		char* getPtr() const;
 		/**
 		*	大小
 		*/
-		size_t getSize();
+		size_t getSize() const;
 		/**
 		*	重置
 		*/

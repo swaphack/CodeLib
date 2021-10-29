@@ -7,6 +7,7 @@ namespace render
 {
 	enum class BoxDrawType
 	{
+		NONE,
 		TWO,
 		THREE,
 	};
@@ -20,6 +21,14 @@ namespace render
 		BoxDrawProtocol();
 		virtual ~BoxDrawProtocol();
 	public:
+		/**
+		*	盒子编号
+		*/
+		void setBoxID(int id);
+		/**
+		*	盒子编号
+		*/
+		int getBoxID() const;
 		/**
 		*	是否显示矩形框
 		*/
@@ -45,7 +54,7 @@ namespace render
 		*/
 		void setBoxLineWidth(float width);
 		/**
-		*	矩形框宽度
+		*	绘制方式2维或3维
 		*/
 		BoxDrawType getBoxDrawType() const;
 		/**
@@ -73,9 +82,11 @@ namespace render
 		// 三角形
 		std::vector<math::TrianglePoints> _boxPoints;
 		// 盒子渲染类型
-		BoxDrawType _boxDrawType = BoxDrawType::THREE;
+		BoxDrawType _boxDrawType = BoxDrawType::NONE;
 		// 节点
-		render::Node* m_pBoxNode = nullptr;
+		render::Node* _boxNode = nullptr;
+		// 盒子编号
+		int _boxID = 0;
 	};
 
 	/**
@@ -109,6 +120,8 @@ namespace render
 		*	包围盒
 		*/
 		const math::Rect& getBoxRect() const;
+
+		void setBoxRect(const math::Rect& rect);
 		/**
 		*	是否包含点击点
 		*/

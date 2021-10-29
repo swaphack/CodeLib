@@ -23,9 +23,9 @@ namespace sys
 		void stop();
 	private:
 		// 接受行处理
-		ReceiveLineCallback _receiveLineHandler;
+		ReceiveLineCallback _receiveLineHandler = nullptr;
 		// 是否正在运行
-		bool _running;
+		bool _running = false;
 	};
 
 

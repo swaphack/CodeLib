@@ -19,7 +19,7 @@ namespace sys
 		/**
 		*	是否自动释放
 		*/
-		virtual bool isOver();
+		virtual bool isOver() const;
 	public:
 		/**
 		*	设置次数
@@ -28,7 +28,7 @@ namespace sys
 		/**
 		*	获取次数
 		*/
-		uint32_t getCount();
+		uint32_t getCount() const;
 	private:
 		// 次数
 		uint32_t m_nCount = 0;

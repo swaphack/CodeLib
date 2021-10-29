@@ -8,7 +8,7 @@
 #include "ButtonLoader.h"
 #include "EditTextLoader.h"
 #include "Scale9ImageLoader.h"
-
+#include "TextAtlasLoader.h"
 
 #include "ScrollViewLoader.h"
 #include "ListViewLoader.h"

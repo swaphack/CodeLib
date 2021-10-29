@@ -35,7 +35,7 @@ namespace sys
 		/**
 		*	是否结束
 		*/
-		virtual bool isOver();
+		virtual bool isOver() const;
 	public:
 		/**
 		*	设置任务执行函数

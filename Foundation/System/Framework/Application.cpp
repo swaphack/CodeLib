@@ -74,7 +74,7 @@ void Application::clearProtocolManagers()
 	_protocolManagers.clear();
 }
 
-void Application::checkAutoRealsePool()
+void Application::checkAutoReleasePool()
 {
 	G_AUTORELEASEPOOL->checkAutoRelease();
 }

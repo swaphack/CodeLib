@@ -22,6 +22,11 @@ uint8_t* sys::ImageDetail::getPtr(uint32_t offset) const
 	return (uint8_t*)_data.getPtr(offset);
 }
 
+uint8_t sys::ImageDetail::getValue(uint32_t offset) const
+{
+	return *_data.getPtr(offset);
+}
+
 ImageDetail::~ImageDetail()
 {
 }
@@ -164,6 +169,32 @@ void sys::ImageDetail::rotate90()
 	_data = data;
 }
 
+void sys::ImageDetail::rotate270()
+{
+	if (_data.getSize() == 0)
+	{
+		return;
+	}
+
+	uint32_t width = _height;
+	uint32_t height = _width;
+
+	uint8_t unitSize = getUnitSize();
+
+	sys::MemoryData data(height * width * unitSize);
+	for (int i = 0; i < _height; i++)
+	{
+		for (int j = 0; j < _width; j++)
+		{
+			data.set(unitSize * (j * _height + i), unitSize, _data.getPtr(unitSize * (i * _width + j)));
+		}
+	}
+
+	_width = width;
+	_height = height;
+	_data = data;
+}
+
 void sys::ImageDetail::expandFormat()
 {
 	if (_format == ImageDataFormat::RGBA
@@ -172,8 +203,8 @@ void sys::ImageDetail::expandFormat()
 		return;
 	}
 
-	uint8_t newUnitSize = 4;
 	uint8_t oldUnitSize = sys::ImageDetail::getUnitSize(_format);
+	uint8_t newUnitSize = sys::ImageDetail::getUnitSize(ImageDataFormat::RGBA);
 	uint8_t one = 255;
 	uint8_t zero = 0;
 
@@ -183,20 +214,24 @@ void sys::ImageDetail::expandFormat()
 		for (int j = 0; j < _width; j++)
 		{
 			char* ptr = _data.getPtr(oldUnitSize * (i * _width + j));
-			data.set(newUnitSize * (i * _width + j), oldUnitSize, ptr);
 			if (_format == ImageDataFormat::RED)
 			{
-				data.set(newUnitSize * (i * _width + j) + 1, 1, ptr);
-				data.set(newUnitSize * (i * _width + j) + 2, 1, ptr);
-				data.set(newUnitSize * (i * _width + j) + 3, 1, ptr);
+				uint8_t temp = (*ptr);
+				uint8_t value = temp == zero ? zero : one;
+				data.set(newUnitSize * (i * _width + j), oldUnitSize, (char*)&value);
+				data.set(newUnitSize * (i * _width + j) + 1, 1, (char*)&value);
+				data.set(newUnitSize * (i * _width + j) + 2, 1, (char*)&value);
+				data.set(newUnitSize * (i * _width + j) + 3, 1, (char*)&temp);
 			}
 			else if (_format == ImageDataFormat::RG)
 			{
+				data.set(newUnitSize * (i * _width + j), oldUnitSize, ptr);
 				data.set(newUnitSize * (i * _width + j) + 2, 1, (char*)&one);
 				data.set(newUnitSize * (i * _width + j) + 3, 1, (char*)&one);
 			}
 			else if (_format == ImageDataFormat::RGB || _format == ImageDataFormat::BGR)
 			{
+				data.set(newUnitSize * (i * _width + j), oldUnitSize, ptr);
 				data.set(newUnitSize * (i * _width + j) + 3, 1, (char*)&one);
 			}
 		}

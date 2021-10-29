@@ -32,11 +32,19 @@ namespace ui
 		/**
 		*	默认字体
 		*/
-		const std::string& getFontPath();
+		const std::string& getFontPath() const;
 		/**
 		*	设置默认字体
 		*/
 		void setFontPath(const std::string& fontPath);
+		/**
+		*	默认字体Image
+		*/
+		const std::string& getFontImagePath() const;
+		/**
+		*	设置默认字体Image
+		*/
+		void setFontImagePath(const std::string& fontImagePath);
 		/**
 		*	默认字体
 		*/
@@ -66,6 +74,8 @@ namespace ui
 		LayoutItem* _layoutItem = nullptr;
 		// 默认字体
 		std::string _defaultFontPath;
+		// 默认字体图片
+		std::string _defaultFontImagePath;
 		// 父节点大小
 		math::Size _parentSize;
 	};

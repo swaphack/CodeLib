@@ -26,16 +26,16 @@ namespace sys
 		// 堵塞执行
 		bool join();
 		// 停止
-		bool isFinish();
+		bool isFinish() const;
 		// 获取线程id
-		int32_t getID();
+		int32_t getID() const;
 	private:
 		// 控制线程
 		std::thread m_pThread;
 		// 线程id
-		size_t m_nID;
+		size_t m_nID = 0;
 		// 是否结束
-		bool m_bFinish;
+		bool m_bFinish = false;
 	};
 
 	template<class _Fn, class... _Args>

@@ -172,7 +172,7 @@ void Socket::shutDown( int32_t type )
 	::shutdown(_sock, type);
 }
 
-bool Socket::hasError()
+bool Socket::hasError() const
 {
 #ifdef _WIN32
 	int32_t error = ::WSAGetLastError();
@@ -205,27 +205,27 @@ void Socket::close()
 	_sock = INVALID_SOCKET_VALUE;
 }
 
-int32_t Socket::getID()
+int32_t Socket::getID() const
 {
 	return _sock;
 }
 
-const std::string& Socket::getLocalIP()
+const std::string& Socket::getLocalIP() const
 {
 	return _localEP.addr;
 }
 
-int32_t Socket::getLocalPort()
+int32_t Socket::getLocalPort() const
 {
 	return _localEP.port;
 }
 
-const std::string& Socket::getRemoteIP()
+const std::string& Socket::getRemoteIP() const
 {
 	return _remoteEP.addr;
 }
 
-int32_t Socket::getRemotePort()
+int32_t Socket::getRemotePort() const
 {
 	return _remoteEP.port;
 }

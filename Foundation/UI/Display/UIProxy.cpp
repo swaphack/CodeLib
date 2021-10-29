@@ -10,10 +10,12 @@ using namespace ui;
 #define LAYOUT_SIZE_HEIGHT	"height"
 #define LAYOUT_DIRECTION	"layout"
 #define LAYOUT_FONT_PATH	"fontPath"
+#define LAYOUT_FONT_IMAGE_PATH	"fontImagePath"
 
 #define TEXTURE_TYPE "type"
 #define TEXTURE_TYPE_ATLAS "atlas"
 #define TEXTURE_TYPE_IMAGE "image"
+#define TEXTURE_TYPE_TEXT "text"
 
 #define TEXTURE_IMAGE "image"
 #define TEXTURE_ATLAS "atlas"
@@ -28,6 +30,7 @@ void UIProxy::init()
 	this->registerElementParser(ELEMENT_NAME_LAYOUT, []() { return new LayoutLoader(); });
 	this->registerElementParser(ELEMENT_NAME_IMAGE, []() { return new ImageLoader(); });
 	this->registerElementParser(ELEMENT_NAME_TEXT, []() { return new TextLoader(); });
+	this->registerElementParser(ELEMENT_NAME_TEXT_ATLAS, []() { return new TextAtlasLoader(); });
 	this->registerElementParser(ELEMENT_NAME_BUTTON, []() { return new ButtonLoader(); });
 	this->registerElementParser(ELEMENT_NAME_EDITTEXT, []() { return new EditTextLoader(); });
 	this->registerElementParser(ELEMENT_NAME_SCALE9_IMAGE, []() { return new Scale9ImageLoader(); });
@@ -253,7 +256,7 @@ LayoutDirection UIProxy::getDesignDirection() const
 	return _designDirection;
 }
 
-const std::string& ui::UIProxy::getFontPath()
+const std::string& ui::UIProxy::getFontPath() const
 {
 	return _defaultFontPath;
 }
@@ -261,6 +264,16 @@ const std::string& ui::UIProxy::getFontPath()
 void ui::UIProxy::setFontPath(const std::string& fontPath)
 {
 	_defaultFontPath = fontPath;
+}
+
+const std::string& ui::UIProxy::getFontImagePath() const
+{
+	return _defaultFontImagePath;
+}
+
+void ui::UIProxy::setFontImagePath(const std::string& fontImagePath)
+{
+	_defaultFontImagePath = fontImagePath;
 }
 
 ui::LayoutItem* ui::UIProxy::getLayoutItem(ui::CtrlWidget* item)
@@ -366,6 +379,7 @@ CtrlWidget* UIProxy::initWidget(tinyxml2::XMLElement* xmlNode, const math::Size&
 	}
 
 	element->setFontPath(_defaultFontPath);
+	element->setFontImagePath(_defaultFontImagePath);
 	if (!element->load(xmlNode, parentSize))
 	{
 		return nullptr;
@@ -449,6 +463,10 @@ void ui::UIProxy::loadInfo(tinyxml2::XMLElement* xmlNode)
 	{
 		_defaultFontPath = xmlNode->Attribute(LAYOUT_FONT_PATH);
 	}
+	if (xmlNode->Attribute(LAYOUT_FONT_IMAGE_PATH))
+	{
+		_defaultFontImagePath = xmlNode->Attribute(LAYOUT_FONT_IMAGE_PATH);
+	}
 }
 
 void ui::UIProxy::loadTextures(tinyxml2::XMLElement* xmlNode)
@@ -463,7 +481,8 @@ void ui::UIProxy::loadTextures(tinyxml2::XMLElement* xmlNode)
 		return;
 	}
 
-	tool::ImageAtlasPacker texPacker;
+	tool::ImageAtlasPacker imageAtlasPacker;
+	tool::TextAtlasPacker textAtlasPacker;
 	auto pChild = pTexture->FirstChildElement();
 	while (pChild)
 	{
@@ -479,8 +498,13 @@ void ui::UIProxy::loadTextures(tinyxml2::XMLElement* xmlNode)
 		}
 		else if (type == TEXTURE_TYPE_ATLAS)
 		{
-			texPacker.loadTextureAtlas(atlas);
-			G_TEXTURE_CACHE->addTexAtlas(image, texPacker.getTextureAtlas());
+			imageAtlasPacker.loadTextureAtlas(atlas);
+			G_TEXTURE_CACHE->addTexAtlas(image, imageAtlasPacker.getTextureAtlas());
+		}
+		else if (type == TEXTURE_TYPE_TEXT)
+		{
+			textAtlasPacker.loadTextureAtlas(atlas);
+			G_TEXT_CACHE->addTexAtlas(image, textAtlasPacker.getTextureAtlas());
 		}
 
 		pChild = pChild->NextSiblingElement();

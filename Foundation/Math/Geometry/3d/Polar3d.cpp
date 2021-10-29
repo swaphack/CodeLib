@@ -79,24 +79,24 @@ Polar3d& Polar3d::operator/=(float ratio)
 	return *this;
 }
 
-Polar3d Polar3d::operator*(float ratio)
+Polar3d Polar3d::operator*(float ratio) const
 {
 	return Polar3d(ratio * this->getRadius(), this->getRadianX(), this->getRadianZ());
 }
 
-Polar3d Polar3d::operator/(float ratio)
+Polar3d Polar3d::operator/(float ratio) const
 {
 	assert(ratio != 0);
 
 	return Polar3d(this->getRadius() / ratio, this->getRadianX(), this->getRadianZ());
 }
 
-bool Polar3d::operator==(const Polar3d& polar)
+bool Polar3d::operator==(const Polar3d& polar) const
 {
 	return polar.getRadianX() == getRadianX() && polar.getRadianZ() == getRadianZ() && polar.getRadius() == getRadius();
 }
 
-bool Polar3d::operator!=(const Polar3d& polar)
+bool Polar3d::operator!=(const Polar3d& polar) const
 {
 	return polar.getRadianX() != getRadianX() || polar.getRadianZ() != getRadianZ() || polar.getRadius() != getRadius();
 }

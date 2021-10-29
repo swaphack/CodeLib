@@ -71,7 +71,7 @@ void TestUINode::testEditBox()
 			PRINT("Input Text %s\n", pNode->getString().c_str());
 		}
 	});
-	Utility::loadDefaultShader(pEditLabel->getTextControl());
+	Utility::loadDefaultShader(pEditLabel);
 	this->addChild(pEditLabel);
 }
 
@@ -318,8 +318,7 @@ void TestUINode::testButton()
 	pBtn->setTextColor(phy::Color3B(255,255,255));
 	pBtn->setFontPath("Resource/Font/font_3.ttf");
 	pBtn->setNormalImage("Resource/Image/sqi.png");
-	Utility::loadDefaultShader(pBtn->getTextControl());
-	Utility::loadDefaultShader(pBtn->getImageControl());
+	Utility::loadDefaultShader(pBtn);
 	this->addChild(pBtn);
 }
 

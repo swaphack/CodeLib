@@ -100,7 +100,7 @@ Vector2& Vector2::operator/=(float k)
 	return *this;
 }
 
-bool Vector2::operator==(const Vector2& vec)
+bool Vector2::operator==(const Vector2& vec) const
 {
 	return getX() == vec.getX() && getY() == vec.getY();
 }
@@ -113,7 +113,7 @@ Vector2& Vector2::operator=(const Vector3& vec)
 	return *this;
 }
 
-bool Vector2::operator!=(const Vector2& vec)
+bool Vector2::operator!=(const Vector2& vec) const
 {
 	return getX() != vec.getX() || getY() != vec.getY();
 }

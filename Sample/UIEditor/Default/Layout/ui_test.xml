@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<root width="1024" height="768" layout="1" fontPath="Default/Font/font_3.ttf">
+<root width="1024" height="768" layout="1" fontPath="Default/Font/font_3.ttf" fontImagePath="Default/Atlas/text22.png">
+  <Texture>
+    <item type="atlas" atlas="Default/Atlas/ui.atlas" image="Default/Atlas/ui.png"/>
+    <item type="text" atlas="Default/Atlas/text20.atlas" image="Default/Atlas/text20.png"/>
+    <item type="text" atlas="Default/Atlas/text22.atlas" image="Default/Atlas/text22.png"/>
+    <item type="text" atlas="Default/Atlas/text32.atlas" image="Default/Atlas/text32.png"/>
+  </Texture>
   <Layout name="body" showMask="1" maskColor="255,255,255,100" margin="0,0,0,0" size="100%,100%"> 
+    <TextAtlas name="TypeText" size="100%,100%" dimensions="400,200" text="QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm234567890-=[]\;',./`~!@#$%^&*()_+{}|:" horizontal="0" textColor="255,0,0" />
   </Layout>
 </root>

@@ -52,13 +52,13 @@ namespace sys
 		// 解析字符串，是否是http请求文档
 		bool parseRequest(const char* msg, int32_t size);
 		// 请求方式
-		std::string getMethod();
+		const std::string& getMethod() const;
 		void setMethod(const std::string& method);
 		// 请求地址
-		std::string getUrl();
+		const std::string& getUrl() const;
 		void setUrl(const std::string& url);
 		// 版本
-		std::string getHttpVersion();
+		const std::string& getHttpVersion() const;
 		void setHttpVersion(const std::string& version);
 	};
 

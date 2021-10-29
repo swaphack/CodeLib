@@ -45,10 +45,15 @@ void ue::IDEConfig::loadXml(const std::string& filepath)
 		{
 			_ide.Control = child->GetText();
 		}
-		child = element->FirstChildElement("ShaderModel");
+		child = element->FirstChildElement("ShaderMode");
 		if (child && child->GetText())
 		{
 			_ide.ShaderMode = atoi(child->GetText());
+		}
+		child = element->FirstChildElement("DebugMode");
+		if (child && child->GetText())
+		{
+			_ide.DebugMode = atoi(child->GetText());
 		}
 	}
 	element = _helper.getElement("Shader");

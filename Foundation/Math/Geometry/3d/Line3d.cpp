@@ -57,7 +57,7 @@ const Vector3& Line3d::getDirection() const
 	return _direction;
 }
 
-float Line3d::getDistanceWithPoint(const Vector3& point)
+float Line3d::getDistanceWithPoint(const Vector3& point) const
 {
 	Vector3 vec = point - _point;
 	
@@ -68,7 +68,7 @@ float Line3d::getDistanceWithPoint(const Vector3& point)
 	return a / b;
 }
 
-bool Line3d::contains(const Vector3& point)
+bool Line3d::contains(const Vector3& point) const
 {
 	Vector3 diff = point - _point;
 
@@ -79,7 +79,7 @@ bool Line3d::contains(const Vector3& point)
 	return a == b && b == c;
 }
 
-bool Line3d::isParallel(const Line3d& line)
+bool Line3d::isParallel(const Line3d& line) const
 {
 	Vector3 v0 = getDirection();
 	Vector3 v1 = line.getDirection();
@@ -87,7 +87,7 @@ bool Line3d::isParallel(const Line3d& line)
 	return Vector3::cross(v0, v1).getMagnitude() == 0;
 }
 
-bool Line3d::isIntersect(const Line3d& line)
+bool Line3d::isIntersect(const Line3d& line) const
 {
 	if (isParallel(line))
 	{
@@ -106,7 +106,7 @@ bool Line3d::isIntersect(const Line3d& line)
 	return Vector3::cross(d, v).getMagnitude() == 0;
 }
 
-bool math::Line3d::getIntersectPoint(const Line3d& line, Vector3& point)
+bool math::Line3d::getIntersectPoint(const Line3d& line, Vector3& point) const
 {
 	Vector3 v1 = Vector3::normalize(this->_direction);
 	Vector3 v2 = Vector3::normalize(line.getDirection());

@@ -17,7 +17,7 @@ void DataSheet::setKey(const std::string& key)
 	_key = key;
 }
 
-const std::string& DataSheet::getKey()
+const std::string& DataSheet::getKey() const
 {
 	return _key;
 }
@@ -48,18 +48,19 @@ void DataSheet::setRecord(const std::string& key, const IDataRecord* record)
 	_keyRecords[key] = (IDataRecord*)record;
 }
 
-const IDataRecord* DataSheet::getRecord(const std::string& key)
+const IDataRecord* DataSheet::getRecord(const std::string& key) const 
 {
-	if (_keyRecords.find(key) == _keyRecords.end())
+	auto it = _keyRecords.find(key);
+	if (it == _keyRecords.end())
 	{
 		return nullptr;
 	}
 
-	return _keyRecords[key];
+	return it->second;
 }
 
 
-int32_t DataSheet::count()
+int32_t DataSheet::count()const
 {
 	return _records.size();
 }

@@ -90,7 +90,7 @@ void FilePath::setSearchPath(const std::vector<std::string>& paths)
 	}
 }
 
-const std::vector<std::string>& FilePath::getSearchPath()
+const std::vector<std::string>& FilePath::getSearchPaths() const
 {
 	return _searchPaths;
 }

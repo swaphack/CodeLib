@@ -59,12 +59,12 @@ bool Thread::join()
 	return false;
 }
 
-bool Thread::isFinish()
+bool Thread::isFinish() const
 {
 	return m_bFinish;
 }
 
-int32_t Thread::getID()
+int32_t Thread::getID() const
 {
 	return m_nID;
 }

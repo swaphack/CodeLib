@@ -7,6 +7,21 @@ Rect::Rect()
 
 }
 
+Rect::Rect(float x, float y)
+{
+	_origin.setX(x);
+	_origin.setY(y);
+}
+
+
+Rect::Rect(float x, float y, float w, float h)
+{
+	_origin.setX(x);
+	_origin.setY(y);
+	_size.setWidth(w);
+	_size.setHeight(h);
+}
+
 Rect::Rect(const Vector2& orgin, const Size& size)
 {
 	_origin = orgin;
@@ -19,42 +34,9 @@ Rect::Rect(const Vector2& orgin, const Vector2& size)
 	_size = size;
 }
 
-Rect::Rect(float x, float y, float w, float h)
+Rect::~Rect()
 {
-	_origin.setX(x);
-	_origin.setY(y);
-	_size.setWidth(w);
-	_size.setHeight(h);
-}
 
-float Rect::getMaxY() const
-{
-	return getY() + getHeight();
-}
-
-float Rect::getMinY() const
-{
-	return getY();
-}
-
-float Rect::getMaxX() const
-{
-	return getX() + getWidth();
-}
-
-float Rect::getMinX() const
-{
-	return getX();
-}
-
-float Rect::getHeight() const
-{
-	return _size.getHeight();
-}
-
-float Rect::getWidth() const
-{
-	return _size.getWidth();
 }
 
 float Rect::getY() const
@@ -65,6 +47,67 @@ float Rect::getY() const
 float Rect::getX() const
 {
 	return _origin.getX();
+}
+
+
+float Rect::getMinX() const
+{
+	return getX();
+}
+
+float math::Rect::getMiddleX() const
+{
+	return getX() + getWidth() * 0.5f;
+}
+
+float Rect::getMaxX() const
+{
+	return getX() + getWidth();
+}
+
+float Rect::getMinY() const
+{
+	return getY();
+}
+
+float math::Rect::getMiddleY() const
+{
+	return getY() + getHeight() * 0.5f;
+}
+
+float Rect::getMaxY() const
+{
+	return getY() + getHeight();
+}
+
+float Rect::getWidth() const
+{
+	return _size.getWidth();
+}
+
+float math::Rect::getHalfWidth() const
+{
+	return 0.5f * getWidth();
+}
+
+float Rect::getHeight() const
+{
+	return _size.getHeight();
+}
+
+float math::Rect::getHalfHeight() const
+{
+	return 0.5f * getHeight();
+}
+
+const Vector2& Rect::getOrigin() const
+{
+	return _origin;
+}
+
+const Size& Rect::getSize() const
+{
+	return _size;
 }
 
 void Rect::set(float x, float y, float w, float h)
@@ -161,10 +204,13 @@ Rect Rect::unionRect(const Rect& rect) const
 
 bool math::Rect::isOverlap(const Rect& rect) const
 {
-	return (getMinX() >= rect.getMinX() && getMinX() >= rect.getMaxX())
-		|| (getMinY() >= rect.getMinY() && getMinY() >= rect.getMaxY())
-		|| (getMinX() >= rect.getMinX() && getMaxX() >= rect.getMaxX())
-		|| (getMaxX() >= rect.getMinY() && getMaxY() >= rect.getMaxY());
+	bool ret = true;
+	if (getMaxX() < rect.getMinX() || getMaxY() < rect.getMinY()
+		|| rect.getMaxX() < getMinX() || rect.getMaxY() < getMinY())
+	{
+		ret = false;
+	}
+	return ret;
 }
 
 math::Vector3 math::Rect::getAnchorPointByPosition(float x, float y)
@@ -179,20 +225,11 @@ Rect& Rect::operator=(const Rect& rect)
 	return *this;
 }
 
-const Vector2& Rect::getOrigin() const
+bool Rect::operator==(const Rect& rect) const
 {
-	return _origin;
+	return _origin == rect._origin && _size == rect._size;
 }
 
-const Size& Rect::getSize() const
-{
-	return _size;
-}
-
-Rect::~Rect()
-{
-
-}
 
 void Rect::setOrigin(float x, float y)
 {

@@ -19,7 +19,7 @@ namespace sys
 		// 设置搜索路径
 		void setSearchPath(const std::vector<std::string>& paths);
 		// 获取搜索路径
-		const std::vector<std::string>& getSearchPath();
+		const std::vector<std::string>& getSearchPaths() const;
 		// 清空所有已缓存的路径
 		void clearAllFilepaths();
 	private:

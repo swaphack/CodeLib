@@ -15,18 +15,7 @@ namespace render
 		BoxDraw();
 		virtual ~BoxDraw();
 	public:
-		static BoxDraw* getInstance();
-	public:
 		virtual bool init();
-	public:
-		/**
-		*	添加盒子
-		*/
-		void addBox(BoxDrawProtocol* box);
-		/**
-		*	移除盒子
-		*/
-		void removeBox(BoxDrawProtocol* box);
 	public:
 		/**
 		*	2d渲染节点
@@ -36,16 +25,12 @@ namespace render
 		*	3d渲染节点
 		*/
 		render::PrimitiveNode* getRenderNode3d();
-	protected:
-		void onBoxChanged();
+	public:
+		void refreshBoxes();
 	private:
 		// 绘制节点
 		PrimitiveNode* _drawNode2d = nullptr;
 		// 绘制节点
 		PrimitiveNode* _drawNode3d = nullptr;
-		// 盒子
-		std::set<BoxDrawProtocol*> _boxes;
 	};
-
-#define G_BOXDRAW render::BoxDraw::getInstance()
 }

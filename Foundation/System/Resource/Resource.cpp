@@ -30,7 +30,7 @@ void Resource::dispose()
 	SAFE_DELETE(_cache);
 }
 
-CacheGroup* Resource::getCache()
+CacheGroup* Resource::getCache()const
 {
 	return _cache;
 }
@@ -45,7 +45,7 @@ void Resource::setUrl(const std::string& url)
 	_url = url;
 }
 
-std::string Resource::getUrl()
+const std::string& Resource::getUrl()const
 {
 	return	_url;
 }
@@ -74,7 +74,7 @@ void Resource::setCacheEnable(bool status)
 	}
 }
 
-bool Resource::isCacheEnable()
+bool Resource::isCacheEnable() const
 {
 	return _bCacheEnabled;
 }

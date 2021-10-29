@@ -26,27 +26,27 @@ namespace sys
 		// 名称
 		virtual std::string getName() { return ""; }
 		// 缓存
-		virtual CacheGroup* getCache();
+		virtual CacheGroup* getCache() const;
 		// 加载文件数据
 		virtual bool loadFileData(const std::string& filename, GetDataCallback handler);
 	public:
 		// 设置资源位置
 		void setUrl(const std::string& url);
 		// 获取资源位置
-		std::string getUrl();
+		const std::string& getUrl() const;
 
 		// 设置是否使用缓存
 		void setCacheEnable(bool status);
 		// 是否使用缓存
-		bool isCacheEnable();
+		bool isCacheEnable() const;
 		// 清空缓存
 		void clearCache();
 	protected:
 		// 资源位置
 		std::string _url;
 		// 缓存是否可用
-		bool _bCacheEnabled;
+		bool _bCacheEnabled = false;
 		// 缓存
-		CacheGroup* _cache;
+		CacheGroup* _cache = nullptr;
 	};
 }

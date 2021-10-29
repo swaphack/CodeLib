@@ -36,6 +36,16 @@ render::DrawCore::DrawType render::DrawCore::getDrawType() const
 	return _drawType;
 }
 
+void render::DrawCore::setDebugDrawMode(DrawMode mode)
+{
+	_debugDrawMode = mode;
+}
+
+DrawMode render::DrawCore::getDebugDrawMode() const
+{
+	return _debugDrawMode;
+}
+
 void render::DrawCore::render(DrawNode* node)
 {
 	if (node == nullptr) return;
@@ -83,7 +93,7 @@ void render::DrawCore::render(DrawParameter* parameter)
 
 		GLDebug::showError();
 		this->increaseDrawCall();
-		mesh->drawWithBufferObject();
+		this->drawWithBufferObject(parameter);
 
 		if (parameter->tessilation)
 		{
@@ -97,7 +107,7 @@ void render::DrawCore::render(DrawParameter* parameter)
 		this->beginApply(parameter);
 
 		GLDebug::showError();
-		mesh->drawWithClientArray();
+		this->drawWithClientArray(parameter);
 
 		GLDebug::showError();
 		this->endApply(parameter);
@@ -1364,6 +1374,142 @@ void render::DrawCore::updateSelfDefinedUniformValue(const DrawParameter* parame
 	}
 }
 
+void render::DrawCore::drawWithBufferObject(const DrawParameter* parameter)
+{
+	if (parameter == nullptr || parameter->mesh == nullptr) return;
+
+	auto detail = parameter->mesh->getMeshDetail();
+	if (detail == nullptr)
+	{
+		return;
+	}
+	uint32_t nVerticeSize = detail->getVertices().getSize();
+
+	if (nVerticeSize == 0)
+	{
+		return;
+	}
+
+	uint32_t nIndiceLength = detail->getIndices().getLength();
+	if (nIndiceLength == 0)
+	{
+		return;
+	}
+
+	auto drawMode = parameter->mesh->getDrawMode();
+
+	GLDebug::showError();
+	parameter->mesh->getIndiceBuffer()->bindBuffer();
+	if (parameter->mesh->getModelMatrices().getLength() > 0)
+	{
+		int primaryCount = 1;
+		if (parameter->mesh->isBatchDraw())
+		{
+			primaryCount = parameter->mesh->getModelMatrices().getVerticeCount();
+		}
+		GLBufferObjects::drawElementsInstanced(drawMode, nIndiceLength, IndexDataType::UNSIGNED_INT, nullptr, primaryCount);
+		if (_debugDrawMode != DrawMode::NONE)
+		{
+			GLBufferObjects::drawElementsInstanced(_debugDrawMode, nIndiceLength, IndexDataType::UNSIGNED_INT, nullptr, primaryCount);
+		}
+
+	}
+	else
+	{
+		GLBufferObjects::drawElements(drawMode, nIndiceLength, IndexDataType::UNSIGNED_INT, nullptr);
+		if (_debugDrawMode != DrawMode::NONE)
+		{
+			GLBufferObjects::drawElements(_debugDrawMode, nIndiceLength, IndexDataType::UNSIGNED_INT, nullptr);
+		}
+	}
+
+	GLDebug::showError();
+}
+
+void render::DrawCore::drawWithClientArray(const DrawParameter* parameter)
+{
+	if (parameter == nullptr || parameter->mesh == nullptr) return;
+
+	auto detail = parameter->mesh->getMeshDetail();
+	if (detail == nullptr)
+	{
+		return;
+	}
+	const sys::MeshMemoryData& vertices = detail->getVertices();
+	if (vertices.getLength() == 0)
+	{
+		//PRINT("Mesh Vertice is NULL\n");
+		return;
+	}
+
+	const sys::MeshMemoryData& indices = detail->getIndices();
+	if (indices.getLength() == 0)
+	{
+		return;
+	}
+
+	const sys::MeshMemoryData& colors = detail->getColors();
+	const sys::MeshMemoryData& texcoords = detail->getUVs();
+	const sys::MeshMemoryData& normals = detail->getNormals();
+	const sys::MeshMemoryData& tangents = detail->getTangents();
+	const sys::MeshMemoryData& bitangents = detail->getBitangents();
+
+	if (vertices.getLength() > 0)
+	{
+		GLClientArrays::enableClientState(ClientArrayType::VERTEX_ARRAY);
+		GLClientArrays::setVertexPointer(vertices.getUnitSize(), DataType::FLOAT, 0, vertices.getValue());
+		GLDebug::showError();
+	}
+	if (colors.getLength() > 0)
+	{
+		GLClientArrays::enableClientState(ClientArrayType::COLOR_ARRAY);
+		GLClientArrays::setColorPointer(colors.getUnitSize(), DataType::FLOAT, 0, colors.getValue());
+		GLDebug::showError();
+	}
+
+	if (texcoords.getLength() > 0)
+	{
+		GLClientArrays::enableClientState(ClientArrayType::TEXTURE_COORD_ARRAY);
+		GLClientArrays::setTexCoordPointer(texcoords.getUnitSize(), DataType::FLOAT, 0, texcoords.getValue());
+		GLDebug::showError();
+	}
+
+	if (normals.getLength() > 0)
+	{
+		GLClientArrays::enableClientState(ClientArrayType::NORMAL_ARRAY);
+		GLClientArrays::setNormalPointer(DataType::FLOAT, 0, normals.getValue());
+		GLDebug::showError();
+	}
+	/*
+	if (tangents.getLength() > 0)
+	{
+		GLClientArrays::enableClientState(ClientArrayType::TANGENT_ARRAY);
+		GLClientArrays::setTangentPointer(DataType::FLOAT, 0, bitangents.getValue());
+		GLDebug::showError();
+	}
+
+	if (bitangents.getLength() > 0)
+	{
+		GLClientArrays::enableClientState(ClientArrayType::BITANGENT_ARRAY);
+		GLClientArrays::setBitangentPointer(DataType::FLOAT, 0, bitangents.getValue());
+		GLDebug::showError();
+	}
+	*/
+	{
+		GLClientArrays::drawElements(parameter->mesh->getDrawMode(), indices.getLength(), IndexDataType::UNSIGNED_INT, indices.getValue());
+		GLDebug::showError();
+	}
+
+	GLClientArrays::disableClientState(ClientArrayType::VERTEX_ARRAY);
+	GLClientArrays::disableClientState(ClientArrayType::NORMAL_ARRAY);
+	GLClientArrays::disableClientState(ClientArrayType::TEXTURE_COORD_ARRAY);
+	GLClientArrays::disableClientState(ClientArrayType::COLOR_ARRAY);
+	/*
+	GLClientArrays::disableClientState(ClientArrayType::BITANGENT_ARRAY);
+	GLClientArrays::disableClientState(ClientArrayType::TANGENT_ARRAY);
+	*/
+}
+
 void render::DrawCore::setTempMatrix(const math::Matrix4x4& matrix)
 {
 	_tempMatrix = matrix;
@@ -1696,7 +1842,7 @@ void render::DrawCore::unbatch()
 bool render::DrawCore::isSameObject(DrawParameter* a, DrawParameter* b)
 {
 	if (a == nullptr || b == nullptr) return false;
-
+	if (a->node->getFirstClippingNodeOfParents() != b->node->getFirstClippingNodeOfParents()) return false;
 	if (a->tessilation != b->tessilation) return false;
 	if (!a->material->equals(*b->material)) return false;
 	if (!a->mesh->equals(*b->mesh)) return false;
@@ -1707,7 +1853,7 @@ bool render::DrawCore::isSameObject(DrawParameter* a, DrawParameter* b)
 bool render::DrawCore::isSameMaterial(DrawParameter* a, DrawParameter* b)
 {
 	if (a == nullptr || b == nullptr) return false;
-
+	if (a->node->getFirstClippingNodeOfParents() != b->node->getFirstClippingNodeOfParents()) return false;
 	if (a->tessilation != b->tessilation) return false;
 	if (!a->material->equals(*b->material)) return false;
 	if (!a->mesh->sameLayout(*b->mesh)) return false;

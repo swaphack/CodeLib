@@ -19,11 +19,11 @@ namespace math
 		/**
 		*	 Ù”⁄
 		*/
-		bool isBelongTo(const Set& set);
+		bool isBelongTo(const Set& set) const;
 		/**
 		*	≤ª Ù”⁄
 		*/
-		bool isNotBelongTo(const Set& set);
+		bool isNotBelongTo(const Set& set) const;
 	public:
 		bool operator==(const Element& value) const
 		{

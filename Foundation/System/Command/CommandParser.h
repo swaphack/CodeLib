@@ -18,13 +18,13 @@ namespace sys
 		~CommandParams();
 	public:
 		void setKey(const std::string& key);
-		const std::string& getKey();
+		const std::string& getKey() const;
 
 		void addParam(const std::string& param);
 		void removeParam(const std::string& param);
 		void removeAllParams();
 
-		int32_t getParamsCount();
+		int32_t getParamsCount() const;
 		std::string item(int32_t index);
 	private:
 		// ¹Ø¼ü×Ö

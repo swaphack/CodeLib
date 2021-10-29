@@ -17,7 +17,7 @@ namespace sys
 		// 去除命令
 		std::string popCommand();
 		// 是否为空
-		bool empty();
+		bool empty() const;
 		// 清空
 		void clear();
 	private:

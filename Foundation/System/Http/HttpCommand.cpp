@@ -25,7 +25,7 @@ void HttpCommand::setSessionID(const std::string& id)
 	_sessionID = id;
 }
 
-const std::string& HttpCommand::getSessionID()
+const std::string& HttpCommand::getSessionID() const
 {
 	return _sessionID;
 }
@@ -45,12 +45,12 @@ const std::string& HttpCommand::getMessage()
 	return _msg;
 }
 
-int32_t HttpCommand::getMessageSize()
+int32_t HttpCommand::getMessageSize() const
 {
 	return _msg.size();
 }
 
-bool HttpCommand::isMessageEmpty()
+bool HttpCommand::isMessageEmpty() const
 {
 	return _msg.empty();
 }

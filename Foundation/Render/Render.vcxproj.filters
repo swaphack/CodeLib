@@ -612,6 +612,12 @@
     <ClCompile Include="Common\Shader\ShaderProperty.cpp">
       <Filter>Common\Shader</Filter>
     </ClCompile>
+    <ClCompile Include="Common\Text\TextCache.cpp">
+      <Filter>Common\Text</Filter>
+    </ClCompile>
+    <ClCompile Include="Box\BoxSpace.cpp">
+      <Filter>Box</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Common\Node\import.h">
@@ -1410,6 +1416,15 @@
     <ClInclude Include="Common\Shader\ShaderProperty.h">
       <Filter>Common\Shader</Filter>
     </ClInclude>
+    <ClInclude Include="Common\Text\TextCache.h">
+      <Filter>Common\Text</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Text\import.h">
+      <Filter>Common\Text</Filter>
+    </ClInclude>
+    <ClInclude Include="Box\BoxSpace.h">
+      <Filter>Box</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Common">
@@ -1540,6 +1555,9 @@
     </Filter>
     <Filter Include="Box">
       <UniqueIdentifier>{73158dde-99e6-4ace-a2cb-d61fa18e96c0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common\Text">
+      <UniqueIdentifier>{c5c59eca-58bd-4403-9a2d-a1de13a64df7}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

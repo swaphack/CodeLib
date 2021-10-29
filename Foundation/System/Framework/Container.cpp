@@ -20,10 +20,9 @@ void Dictionary::addObject( Object* object )
 	{
 		return;
 	}
+	SAFE_RETAIN(object);
 
-	this->removeObject(object->getID());
-
-	object->retain();
+	this->removeObject(object->getID());	
 	
 	_objects[object->getID()] = object;
 }
@@ -35,13 +34,13 @@ void Dictionary::removeObject(Object* object)
 		return;
 	}
 
-	std::map<uint64_t, Object*>::iterator it = _objects.begin();
+	auto it = _objects.begin();
 
 	while (it != _objects.end())
 	{
 		if (it->second == object)
 		{
-			it->second->release();
+			SAFE_RELEASE(it->second);
 			_objects.erase(it);
 			break;
 		}
@@ -51,12 +50,12 @@ void Dictionary::removeObject(Object* object)
 
 void Dictionary::removeObject(uint64_t id)
 {
-	if (_objects.find(id) == _objects.end())
+	auto it = _objects.find(id);
+	if (it == _objects.end())
 	{
 		return;
 	}
-
-	_objects[id]->release();
+	SAFE_RELEASE(it->second);
 
 	_objects.erase(id);
 }
@@ -73,12 +72,9 @@ Object* Dictionary::getObject(uint64_t id)
 
 void Dictionary::clear()
 {
-	std::map<uint64_t, Object*>::iterator it = _objects.begin();
-
-	while (it != _objects.end())
+	for (auto item : _objects)
 	{
-		it->second->release();
-		it++;
+		SAFE_RELEASE(item.second);
 	}
 
 	_objects.clear();
@@ -139,8 +135,7 @@ void List::addObject( Object* object )
 	{
 		return;
 	}
-
-	object->retain();
+	SAFE_RETAIN(object);
 
 	_objects.push_back(object);
 }
@@ -152,13 +147,13 @@ void List::removeObject(Object* object)
 		return;
 	}
 
-	std::vector<Object*>::iterator it = _objects.begin();
+	auto it = _objects.begin();
 
 	while (it != _objects.end())
 	{
 		if (object == (*it))
 		{
-			object->release();
+			SAFE_RELEASE(object);
 			_objects.erase(it);
 			break;
 		}
@@ -168,14 +163,14 @@ void List::removeObject(Object* object)
 
 void List::removeObject(uint64_t id)
 {
-	std::vector<Object*>::iterator it = _objects.begin();
+	auto it = _objects.begin();
 
 	while (it != _objects.end())
 	{
 		Object* object = (*it);
 		if (object->getID() == id)
 		{
-			object->release();
+			SAFE_RELEASE(object);
 
 			_objects.erase(it);
 			break;
@@ -203,12 +198,9 @@ Object* List::getObject(uint64_t id)
 
 void List::clear()
 {
-	std::vector<Object*>::iterator it = _objects.begin();
-
-	while (it != _objects.end())
+	for (auto item : _objects)
 	{
-		(*it)->release();
-		it++;
+		SAFE_RELEASE(item);
 	}
 
 	_objects.clear();

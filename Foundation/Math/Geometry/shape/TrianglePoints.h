@@ -25,7 +25,7 @@ namespace math
 		/*
 		*	是否有共边
 		*/
-		bool hasSameEdge(const TrianglePoints& target, LineSegment3d& side);
+		bool hasSameEdge(const TrianglePoints& target, LineSegment3d& side) const;
 	public:
 		/*
 		*	重心 中线交点

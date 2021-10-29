@@ -265,15 +265,36 @@ bool render::Node::isDescendantsOf(const Node* parent) const
 	return false;
 }
 
-// void Node::foreachChild(std::function<void(Node*)> handler)
-// {
-// 	std::vector<Object*>::iterator iter = _children.begin();
-// 	while (iter != _children.end())
-// 	{
-// 		handler(dynamic_cast<Node*>(*iter));
-// 		iter++;
-// 	}
-// }
+const std::vector<Node*>& render::Node::getAllChildren() const
+{
+	return _children;
+}
+
+std::vector<Node*>& render::Node::getAllChildren()
+{
+	return _children;
+}
+
+void Node::foreachChild(const std::function<void(Node*)>& handler)
+{
+	if (handler == nullptr) return;
+
+	for (auto child: _children)
+	{
+		handler(child);
+	}
+}
+
+void Node::foreachChildWitchRecrusive(const std::function<void(Node*)>& handler)
+{
+	if (handler == nullptr) return;
+
+	for (auto child : _children)
+	{
+		handler(child);
+		child->foreachChildWitchRecrusive(handler);
+	}
+}
 
 void Node::setUserData( void* data )
 {
@@ -365,7 +386,7 @@ void render::Node::update(float dt)
 {
 }
 
-bool Node::isRelativeWithParent()
+bool Node::isRelativeWithParent() const
 {
 	return _bRelativeToParent;
 }
@@ -373,6 +394,13 @@ bool Node::isRelativeWithParent()
 void Node::setRelativeWithParent(bool status)
 {
 	_bRelativeToParent = status;
+}
+
+Node* Node::getFirstClippingNodeOfParents() const
+{
+	if (this->getParent() == nullptr) return nullptr;
+	if (this->getParent()->isClippingEnabled()) return this->getParent();
+	return this->getParent()->getFirstClippingNodeOfParents();
 }
 
 void Node::draw()
@@ -390,18 +418,13 @@ bool render::Node::containTouchPoint(const math::Vector2& touchPoint)
 		return false;
 	}
 
-	auto parent = this->getParent();
-	while (parent != nullptr)
+	auto parent = this->getFirstClippingNodeOfParents();
+	if (parent != nullptr)
 	{
-		if (parent->isClippingEnabled())
+		if (!parent->containPoint(touchPoint))
 		{
-			if (!parent->containPoint(touchPoint))
-			{
-				return false;
-			}
+			return false;
 		}
-
-		parent = parent->getParent();
 	}
 
 	return containPoint(touchPoint);

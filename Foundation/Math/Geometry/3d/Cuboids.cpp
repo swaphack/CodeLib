@@ -101,19 +101,19 @@ void Cuboids::set(const Vector3& orgin, const Volume& size)
 	this->_size = size;
 }
 
-bool Cuboids::contains(float x, float y, float z)
+bool Cuboids::contains(float x, float y, float z) const
 {
 	return (x >= getMinX() && x <= getMaxX())
 		&& (y >= getMinY() && y <= getMaxY())
 		&& (z >= getMinZ() && z <= getMaxZ());
 }
 
-bool Cuboids::contains(const Vector3& point)
+bool Cuboids::contains(const Vector3& point) const
 {
 	return contains(point.getX(), point.getY(), point.getZ());
 }
 
-bool Cuboids::intersect(const Cuboids& cuboids)
+bool Cuboids::intersect(const Cuboids& cuboids) const
 {
 	Vector3 points[8];
 

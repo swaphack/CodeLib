@@ -35,23 +35,23 @@ namespace math
 		/**
 		*	点到直线的距离
 		*/
-		float getDistanceWithPoint(const Vector3& point);
+		float getDistanceWithPoint(const Vector3& point) const;
 		/**
 		*	是否包含点
 		*/
-		bool contains(const Vector3& point);
+		bool contains(const Vector3& point) const;
 		/**
 		*	是否平行
 		*/
-		bool isParallel(const Line3d& line);
+		bool isParallel(const Line3d& line) const;
 		/**
 		*	是否相交
 		*/
-		bool isIntersect(const Line3d& line);
+		bool isIntersect(const Line3d& line) const;
 		/**
 		*	求两直线的交点
 		*/
-		bool getIntersectPoint(const Line3d& line, Vector3& point);
+		bool getIntersectPoint(const Line3d& line, Vector3& point) const;
 	private:
 		/**
 		* 点

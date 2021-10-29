@@ -13,6 +13,6 @@ namespace sys
 		ForeverTask();
 		virtual ~ForeverTask();
 	public:
-		virtual bool isOver() override;
+		virtual bool isOver() const override;
 	};
 }

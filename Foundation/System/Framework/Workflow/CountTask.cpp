@@ -16,7 +16,7 @@ CountTask::~CountTask()
 
 }
 
-bool CountTask::isOver()
+bool CountTask::isOver()const
 {
 	return m_nCount <= 0;
 }
@@ -26,7 +26,7 @@ void CountTask::setCount(uint32_t nCount)
 	m_nCount = nCount;
 }
 
-uint32_t CountTask::getCount()
+uint32_t CountTask::getCount() const
 {
 	return m_nCount;
 }

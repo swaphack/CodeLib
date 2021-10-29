@@ -13,7 +13,7 @@ Bit::~Bit()
 
 }
 
-bool Bit::isZero(uint64_t idx)
+bool Bit::isZero(uint64_t idx) const
 {
 	if (idx >= m_nLength)
 	{

@@ -14,9 +14,9 @@ ResourceMgr::~ResourceMgr()
 {
 	this->dispose();
 }
-Resource* ResourceMgr::getResource(ResourceType type)
+Resource* ResourceMgr::getResource(ResourceType type) const
 {
-	std::map<ResourceType, IResource*>::iterator iter = _getResMethods.find(type);
+	auto iter = _getResMethods.find(type);
 	if (iter != _getResMethods.end())
 	{
 		return dynamic_cast<Resource*>(iter->second);
@@ -39,7 +39,7 @@ void ResourceMgr::addMethod(ResourceType type, IResource* res)
 
 void ResourceMgr::removeMethod(ResourceType type)
 {
-	std::map<ResourceType, IResource*>::iterator iter = _getResMethods.find(type);
+	auto iter = _getResMethods.find(type);
 	if (iter == _getResMethods.end())
 	{
 		return;
@@ -59,7 +59,7 @@ void ResourceMgr::init()
 
 void ResourceMgr::dispose()
 {
-	std::map<ResourceType, IResource*>::iterator iter = _getResMethods.begin();
+	auto iter = _getResMethods.begin();
 	while (iter != _getResMethods.end())
 	{
 		SAFE_DELETE(iter->second);

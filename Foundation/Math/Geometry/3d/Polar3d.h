@@ -23,15 +23,15 @@ namespace math
 	public:
 		void set(float r, float radianX, float radianZ);
 	public:
-		virtual Polar3d& operator=(const Polar3d& polar);
-		virtual Polar3d& operator=(const Vector3& vector);
-		virtual Polar3d& operator*=(float ratio);
-		virtual Polar3d& operator/=(float ratio);
-		virtual Polar3d operator*(float ratio);
-		virtual Polar3d operator/(float ratio);
+		Polar3d& operator=(const Polar3d& polar);
+		Polar3d& operator=(const Vector3& vector);
+		Polar3d& operator*=(float ratio);
+		Polar3d& operator/=(float ratio);
+		Polar3d operator*(float ratio) const;
+		Polar3d operator/(float ratio) const;
 
-		virtual bool operator==(const Polar3d& polar);
-		virtual bool operator!=(const Polar3d& polar);
+		bool operator==(const Polar3d& polar) const;
+		bool operator!=(const Polar3d& polar) const;
 	public:
 		operator Vector3() const;
 	};

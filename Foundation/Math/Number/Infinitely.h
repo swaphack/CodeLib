@@ -25,9 +25,9 @@ namespace math
 		*/
 		InfinitelyGreat inverse();
 	public:
-		InfinitelySmall operator+(const InfinitelySmall& value);
-		InfinitelySmall operator*(const InfinitelySmall& value);
-		InfinitelySmall operator+(const Number& value);
+		InfinitelySmall operator+(const InfinitelySmall& value) const;
+		InfinitelySmall operator*(const InfinitelySmall& value) const;
+		InfinitelySmall operator+(const Number& value) const;
 	};
 
 	/**
@@ -39,6 +39,6 @@ namespace math
 		/**
 		*	µ¹Êý
 		*/
-		InfinitelySmall inverse();
+		InfinitelySmall inverse() const;
 	};
 }

@@ -7,15 +7,25 @@
 #include "BoxDraw.h"
 #include "Common/Tool/VertexTool.h"
 #include "Common/Tool/Tool.h"
+#include "BoxSpace.h"
 
 render::BoxDrawProtocol::BoxDrawProtocol()
 {
-
 }
 
 render::BoxDrawProtocol::~BoxDrawProtocol()
 {
-	this->setBoxVisible(false);
+	G_BOXSPACE->removeBox(this);
+}
+
+void render::BoxDrawProtocol::setBoxID(int id)
+{
+	_boxID = id;
+}
+
+int render::BoxDrawProtocol::getBoxID() const
+{
+	return _boxID;
 }
 
 void render::BoxDrawProtocol::setBoxVisible(bool bVisible)
@@ -23,18 +33,7 @@ void render::BoxDrawProtocol::setBoxVisible(bool bVisible)
 	if (_bBoxVisible == bVisible) return;
 
 	_bBoxVisible = bVisible;
-
-	if (BoxDraw::getInstance() == nullptr) 
-		return;
-
-	if (bVisible)
-	{
-		BoxDraw::getInstance()->addBox(this);
-	}
-	else
-	{
-		BoxDraw::getInstance()->removeBox(this);
-	}
+	G_BOXSPACE->updateBox(this);
 }
 
 bool render::BoxDrawProtocol::isBoxVisible() const
@@ -69,7 +68,7 @@ render::BoxDrawType render::BoxDrawProtocol::getBoxDrawType() const
 
 render::Node* render::BoxDrawProtocol::getBoxNode() const
 {
-	return m_pBoxNode;
+	return _boxNode;
 }
 
 bool render::BoxDrawProtocol::containsTouchPoint(const math::Vector2& touchPoint)
@@ -84,7 +83,7 @@ void render::BoxDrawProtocol::getBoxPoints(std::vector<math::TrianglePoints>& ve
 
 void render::BoxDrawProtocol::setBoxNode(render::Node* node)
 {
-	m_pBoxNode = node;
+	_boxNode = node;
 }
 
 /////////////////////////////////////////////////////////////////////////
@@ -114,6 +113,9 @@ void render::Box2DDrawProtocol::initBox2D(render::Node* node)
 	this->getBoxNode()->addNotifyListener(NodeNotifyType::SPACE, [this]() {
 		onBox2DWorldCubeChange();
 	});
+
+
+	G_BOXSPACE->addBox(this);
 }
 
 void render::Box2DDrawProtocol::setBoxVertices(const render::RectVertex& rectVertex)
@@ -142,17 +144,18 @@ const math::Rect& render::Box2DDrawProtocol::getBoxRect() const
 	return _boxRect;
 }
 
+void render::Box2DDrawProtocol::setBoxRect(const math::Rect& rect)
+{
+	_boxRect = rect;
+}
+
 bool render::Box2DDrawProtocol::containsTouchPoint(const math::Vector2& touchPoint)
 {
-	if (!isInCanvas())
-	{
-		return false;
-	}
 	if (this->getBoxNode() == nullptr || this->getBoxNode()->getCamera() == nullptr)
 		return false;
 	auto pCamera = this->getBoxNode()->getCamera();
-	math::Vector3 localPoint = pCamera->convertScreenToLocalPoint(touchPoint);
-	return _boxRect.contains(localPoint);
+	math::Vector3 localPointA = pCamera->convertScreenToLocalPoint(touchPoint);
+	return _boxRect.contains(localPointA);
 }
 
 bool render::Box2DDrawProtocol::isOverlap(const Box2DDrawProtocol* box2d)
@@ -219,6 +222,8 @@ void render::Box2DDrawProtocol::onBox2DWorldCubeChange()
 
 	_bInCanvas = isInCanvas();
 	//this->getBoxNode()->setSkipDraw(!_bInCanvas);
+
+	G_BOXSPACE->updateBox(this);
 }
 
 /////////////////////////////////////////////////////////////////////////
@@ -247,6 +252,8 @@ void render::Box3DDrawProtocol::initBox3D(render::Node* node)
 	this->getBoxNode()->addNotifyListener(NodeNotifyType::SPACE, [this]() {
 		onBox3DWorldCubeChange();
 	});
+
+	G_BOXSPACE->addBox(this);
 }
 void render::Box3DDrawProtocol::setBoxVertices(const render::CubeVertex& cubeVertex)
 {
@@ -312,4 +319,6 @@ void render::Box3DDrawProtocol::onBox3DWorldCubeChange()
 	_worldCubeVertex.setBackLeftTopPosition(pBoxNode->convertLocalToWorldPoint(_localCubeVertex.back.getLeftTopPosition()));
 
 	setBoxVertices(_worldCubeVertex);
+
+	G_BOXSPACE->updateBox(this);
 }

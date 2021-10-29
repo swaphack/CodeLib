@@ -38,7 +38,7 @@ bool HttpReqDocument::parseRequest(const char* msg, int32_t size)
 	return parse(std::string(msg, size));
 }
 
-std::string HttpReqDocument::getMethod()
+const std::string& HttpReqDocument::getMethod() const
 {
 	return getStatus(0);
 }
@@ -48,7 +48,7 @@ void HttpReqDocument::setMethod(const std::string& method)
 	setStatus(0, method);
 }
 
-std::string HttpReqDocument::getUrl()
+const std::string& HttpReqDocument::getUrl() const
 {
 	return getStatus(1);
 }
@@ -58,7 +58,7 @@ void HttpReqDocument::setUrl(const std::string& url)
 	setStatus(1, url);
 }
 
-std::string HttpReqDocument::getHttpVersion()
+const std::string& HttpReqDocument::getHttpVersion() const
 {
 	return getStatus(2);
 }

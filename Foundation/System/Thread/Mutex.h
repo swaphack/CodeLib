@@ -38,12 +38,12 @@ namespace sys
 		// 解锁
 		void unlock();
 		// 是否加锁
-		bool isLock();
+		bool isLock() const;
 	private:
 		std::recursive_mutex m_pMutex;
 		// 守护锁
 		std::unique_lock<std::recursive_mutex> m_pLock;
 		// 互斥锁的个数
-		int32_t m_nLockCount;
+		int32_t m_nLockCount = 0;
 	};
 }

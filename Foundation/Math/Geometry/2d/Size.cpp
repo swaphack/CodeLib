@@ -37,6 +37,16 @@ void Size::set(float w, float h)
 	this->setHeight(h);
 }
 
+bool math::Size::operator==(const Size& vec) const
+{
+	return getWidth() == vec.getWidth() && getHeight() == vec.getHeight();
+}
+
+bool math::Size::operator!=(const Size& vec) const
+{
+	return getWidth() != vec.getWidth() || getHeight() != vec.getHeight();
+}
+
 Size::operator Vector2() const
 {
 	return Vector2(getWidth(), getHeight());

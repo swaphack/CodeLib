@@ -27,7 +27,7 @@ namespace math
 		*	是否包含点
 		*	各个坐标面的投影都包含点
 		*/
-		bool contiains(const Vector3& point)
+		bool contiains(const Vector3& point) const
 		{
 
 			Polygon pxoy;
@@ -56,7 +56,7 @@ namespace math
 		*	两多面体是否相交
 		*	
 		*/
-		bool intersects(const Polyhedron& polyhedron)
+		bool intersects(const Polyhedron& polyhedron) const
 		{
 			return false;
 		}

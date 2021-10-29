@@ -27,8 +27,8 @@ namespace sys
 		String operator+(const std::string& value);
 
 		// 获取索引的字符
-		char operator[](size_t index);
-		char& at(size_t index);
+		char operator[](size_t index) const;
+		char& at(size_t index) const;
 
 		// 尾部追加字符
 		void append(size_t count, char value);
@@ -45,16 +45,16 @@ namespace sys
 		String& concat(const std::string& value1, const std::string& value2, const std::string& value3);
 
 		// 是否包含
-		bool contains(const std::string& value);
+		bool contains(const std::string& value) const;
 
 		// 比较两字符串是否相同
-		bool compare(const std::string& value);
-		bool compare(size_t offset, const std::string& value);
-		bool compare(size_t offset, const std::string& value, size_t count);
+		bool compare(const std::string& value) const;
+		bool compare(size_t offset, const std::string& value) const;
+		bool compare(size_t offset, const std::string& value, size_t count) const;
 		// 以指定字符串结尾
-		bool endWith(const std::string& value);
+		bool endWith(const std::string& value) const;
 		// 以指定字符串开头
-		bool startWith(const std::string& value);
+		bool startWith(const std::string& value) const;
 		// 移除从指定位置开始的一段字符串
 		String& removeAt(size_t offset);
 		// 移除从指定位置开始的一段字符串
@@ -67,15 +67,15 @@ namespace sys
 		String subString(size_t offset);
 
 		// 开始位置查找匹配字符的索引位置
-		int32_t findFirstOf(char value);
+		int32_t findFirstOf(char value) const;
 		// 开始位置查找匹配字符串的索引位置
-		int32_t findFirstOf(const std::string& value);
+		int32_t findFirstOf(const std::string& value) const;
 		// 结束位置查找匹配字符的索引位置
-		int32_t findLastOf(char value);
+		int32_t findLastOf(char value) const;
 		// 结束位置查找匹配字符的索引位置
-		int32_t findLastOf(const std::string& value);
+		int32_t findLastOf(const std::string& value) const;
 		// 是否是句子
-		bool isLine();
+		bool isLine() const;
 
 		// 去掉所有空格
 		String trim();
@@ -103,7 +103,7 @@ namespace sys
 		// 分割
 		void split(const std::string& spot, std::vector<std::string>& dest);
 		// 是否数据为空
-		bool empty();
+		bool empty() const;
 		// 反转
 		String reverse();
 

@@ -16,7 +16,6 @@ namespace ui
 	*	在指定框内显示
 	*	垂直对齐方式：顶对齐，底对齐，居中
 	*/
-
 	class CtrlTextAtlas : public CtrlWidget, public TextProtocol
 	{
 	public:
@@ -28,11 +27,11 @@ namespace ui
 		/**
 		*	设置图集名称
 		*/
-		void setAtlas(const std::string& atlasName);
+		void setImagePath(const std::string& imagePath);
 		/**
 		*	获取图集名称
 		*/
-		const std::string& getAtlasName() const;
+		const std::string& getImagePath() const;
 		/**
 		*	设置显示的文本
 		*/
@@ -118,11 +117,15 @@ namespace ui
 		void getOrgin(const math::Size& size, math::Vector3& anchor, math::Vector3& position);
 
 		virtual void onTextBodyChange();
-		virtual void onTextTextureChange();
-	private:
+		virtual void onTextChange();
+	protected:
+		// 管理所有项的节点
+		ui::CtrlWidget* _content = nullptr;
 		// 文本结构
 		sys::TextDefine _textDefine;
 		// 图集名称
 		std::string _atlasName;
+		// 着色器
+		render::ShaderProgram* _shaderProgram = nullptr;
 	};
 }

@@ -8,23 +8,23 @@ InfinitelyGreat InfinitelySmall::inverse()
 	return InfinitelyGreat();
 }
 
-InfinitelySmall InfinitelySmall::operator+(const InfinitelySmall& value)
+InfinitelySmall InfinitelySmall::operator+(const InfinitelySmall& value) const
 {
 	return InfinitelySmall();
 }
 
-InfinitelySmall InfinitelySmall::operator+(const Number& value)
+InfinitelySmall InfinitelySmall::operator+(const Number& value) const
 {
 	return InfinitelySmall();
 }
 
-InfinitelySmall InfinitelySmall::operator*(const InfinitelySmall& value)
+InfinitelySmall InfinitelySmall::operator*(const InfinitelySmall& value) const
 {
 	return InfinitelySmall();
 }
 
 //////////////////////////////////////////////////////////////////////////
-InfinitelySmall InfinitelyGreat::inverse()
+InfinitelySmall InfinitelyGreat::inverse() const
 {
 	return InfinitelySmall();
 }

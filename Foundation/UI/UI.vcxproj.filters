@@ -143,6 +143,9 @@
     <ClInclude Include="UI\CtrlTextAtlas.h">
       <Filter>UI</Filter>
     </ClInclude>
+    <ClInclude Include="Loader\2dLoader\TextAtlasLoader.h">
+      <Filter>Loader\2dLoader</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Display">
@@ -278,6 +281,9 @@
     </ClCompile>
     <ClCompile Include="UI\CtrlTextAtlas.cpp">
       <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Loader\2dLoader\TextAtlasLoader.cpp">
+      <Filter>Loader\2dLoader</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

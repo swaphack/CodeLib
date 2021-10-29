@@ -45,7 +45,6 @@ void RenderApplication::update()
 		_lastClock = clock();
 	}
 
-	G_TOUCHMANAGER->process();
 	G_DRAWCORE->beginRecordDrawCall();
 	G_AUDIO->process();
 
@@ -64,7 +63,7 @@ void RenderApplication::update()
 		_canvas->draw();
 	}
 	G_DRAWCORE->endRecordDrawCall();
-	checkAutoRealsePool();
+	checkAutoReleasePool();
 }
 
 void RenderApplication::dispose()
@@ -111,7 +110,7 @@ void RenderApplication::initFilePath()
 {
 	std::string path;
 	sys::Directory::getCurrentDirectory(path);
-	std::vector<std::string> allPaths = G_FILEPATH->getSearchPath();
+	std::vector<std::string> allPaths = G_FILEPATH->getSearchPaths();
 	allPaths.push_back("");
 	allPaths.push_back(path);
 	G_FILEPATH->setSearchPath(allPaths);

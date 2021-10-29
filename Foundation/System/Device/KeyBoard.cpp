@@ -19,7 +19,7 @@ void Keyboard::setKeyhandler(Object* target, KEYBOARD_BUTTON_HANDLER handler)
 	_buttonHandler.second = handler;
 }
 
-void Keyboard::onKeyEvent(BoardKey key, ButtonStatus status)
+void Keyboard::onKeyEvent(BoardKey key, ButtonStatus status) const
 {
 	if (_buttonHandler.first && _buttonHandler.second)
 	{

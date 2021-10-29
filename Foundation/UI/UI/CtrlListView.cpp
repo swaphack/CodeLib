@@ -103,12 +103,12 @@ bool ui::CtrlListView::init()
 			if (pos.getY() > max) pos.setY(max);
 		}
 
-		_content->getActionProxy()->stopAllActions();
-		if (_content->getPosition() != pos)
-		{
-			_content->getActionProxy()->runAction(render::MoveToAction::create(1.0f, pos));
-		}
-
+		//_content->getActionProxy()->stopAllActions();
+		//if (_content->getPosition() != pos)
+		//{
+		//	_content->getActionProxy()->runAction(render::MoveToAction::create(1.0f, pos));
+		//}
+		_content->setPosition(pos);
 		_touchPosition = touchPoint;
 	});
 

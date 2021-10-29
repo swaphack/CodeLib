@@ -607,8 +607,17 @@
     <ClInclude Include="Resource\Font\LabelStream.h">
       <Filter>Resource\Font</Filter>
     </ClInclude>
-    <ClInclude Include="Resource\Font\LabelLibrary.h">
+    <ClInclude Include="Resource\Font\FontLibrary.h">
       <Filter>Resource\Font</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\Atlas\FontTextureAtlas.h">
+      <Filter>Resource\Atlas</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\Font\FontCharDetail.h">
+      <Filter>Resource\Font</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\Atlas\ImageTextureAtlas.h">
+      <Filter>Resource\Atlas</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -945,8 +954,17 @@
     <ClCompile Include="Resource\Font\LabelStream.cpp">
       <Filter>Resource\Font</Filter>
     </ClCompile>
-    <ClCompile Include="Resource\Font\LabelLibrary.cpp">
+    <ClCompile Include="Resource\Font\FontLibrary.cpp">
       <Filter>Resource\Font</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource\Atlas\FontTextureAtlas.cpp">
+      <Filter>Resource\Atlas</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource\Font\FontCharDetail.cpp">
+      <Filter>Resource\Font</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource\Atlas\ImageTextureAtlas.cpp">
+      <Filter>Resource\Atlas</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

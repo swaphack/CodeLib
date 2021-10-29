@@ -20,7 +20,7 @@ Client::~Client()
 	SAFE_DELETE(_socket);
 }
 
-int32_t Client::getID()
+int32_t Client::getID() const
 {
 	return _ID;
 }
@@ -52,7 +52,7 @@ bool Client::disconnect()
 	return true;
 }
 
-bool Client::isConnected()
+bool Client::isConnected() const
 {
 	return _bConnected;
 }

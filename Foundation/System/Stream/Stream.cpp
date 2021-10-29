@@ -81,17 +81,17 @@ IStreamBase* Stream::getStream() const
 	return _baseStream;
 }
 
-bool Stream::isOutOfLength()
+bool Stream::isOutOfLength() const
 {
 	return _cursor > getLength() || _cursor < 0;
 }
 
-bool Stream::isOutOfCapacity()
+bool Stream::isOutOfCapacity() const
 {
 	return _cursor > _capacity;
 }
 
-char* Stream::getPtr()
+char* Stream::getPtr() const
 {
 	if (getStream() == nullptr)
 	{

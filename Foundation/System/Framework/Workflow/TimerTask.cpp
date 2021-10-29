@@ -14,7 +14,7 @@ TimerTask::~TimerTask()
 
 }
 
-bool TimerTask::isOver()
+bool TimerTask::isOver() const
 {
 	return m_nTime == 0;
 }
@@ -24,7 +24,7 @@ void TimerTask::setTime(uint64_t nTime)
 	m_nTime = nTime;
 }
 
-uint64_t TimerTask::getTime()
+uint64_t TimerTask::getTime() const
 {
 	return m_nTime;
 }

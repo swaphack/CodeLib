@@ -27,11 +27,21 @@ void TestTool::packImageTexture()
 
 void TestTool::packTextTexture()
 {
-	std::string root = "H:/Github/CodeLib/Sample/GameEngine/Resource/";
+	std::string root = "H:/Github/CodeLib/Sample/UIEditor/Default/";
+
+	std::string text = "QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm234567890-=[]\;',./`~!@#$%^&*()_+{}|:\"<>?";
 
 	tool::TextAtlasPacker packer;
 	packer.setReverseY(false);
-	packer.setText("qertyuiopasdfghjklzxcvbnm1234567890-=[]\;',./`~!@#$%^&*()_+{}|:\"<>?", root + "Font/font_3.ttf", 32);
+	packer.setText(text, root + "Font/font_3.ttf", 20);
 	packer.setSize(512, 512);
-	packer.packImage(root + "/ATLAS/text.png", root + "/ATLAS/text.atlas");
+	packer.packImage(root + "/ATLAS/text20.png", root + "/ATLAS/text20.atlas");
+
+	packer.setText(text, root + "Font/font_3.ttf", 22);
+	packer.setSize(512, 512);
+	packer.packImage(root + "/ATLAS/text22.png", root + "/ATLAS/text22.atlas");
+
+	packer.setText(text, root + "Font/font_3.ttf", 32);
+	packer.setSize(512, 512);
+	packer.packImage(root + "/ATLAS/text32.png", root + "/ATLAS/text32.atlas");
 }

@@ -27,12 +27,12 @@ void math::SphereBB::set(const Vector3& center, float radius)
 	this->_radius = radius;
 }
 
-bool math::SphereBB::contains(const Vector2& point)
+bool math::SphereBB::contains(const Vector2& point) const
 {
 	return (this->_center - point).getSqrMagnitude() <= powf(this->_radius, 2);
 }
 
-bool math::SphereBB::contains(const Vector3& point)
+bool math::SphereBB::contains(const Vector3& point) const
 {
 	return (this->_center - point).getSqrMagnitude() <= powf(this->_radius, 2);
 }

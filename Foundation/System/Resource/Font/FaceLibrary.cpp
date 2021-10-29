@@ -4,20 +4,13 @@
 #include "Text/CharsetHelper.h"
 #include "Base/macros.h"
 #include "Resource/Image/ImageDetail.h"
+#include "FontCharDetail.h"
 
 using namespace sys;
 
 #define FREETYPE_PIXEL_UNIT 64
 #define RGBA_PIXEL_UNIT 4
 
-sys::FT_CHAR_DATA::FT_CHAR_DATA()
-{
-}
-
-sys::FT_CHAR_DATA::~FT_CHAR_DATA()
-{
-}
-//////////////////////////////////////////////////////////////////////////
 FaceLibrary::FaceLibrary()
 	:  _face(nullptr)
 	, _fontSize(0)
@@ -89,14 +82,14 @@ bool FaceLibrary::load(const TextDefine& textDefine, LabelStream* stream)
 			offset++;
 			continue;
 		}
-		FT_CHAR_DATA* data = this->loadChar(ch, (int)textDefine.fontSize);
+		FontCharDetail* data = this->loadChar(ch, (int)textDefine.fontSize);
 		int font_width = static_cast<int>(_fontSize * 0.5f);
 		int font_height = _fontSize;
 
 		if (data)
 		{
-			font_width = data->width;
-			font_height = data->height;
+			font_width = data->getWidth();
+			font_height = data->getHeight();
 		}
 
 		font_width *= RGBA_PIXEL_UNIT;
@@ -137,7 +130,7 @@ bool FaceLibrary::load(const TextDefine& textDefine, LabelStream* stream)
 	return true;
 }
 
-bool sys::FaceLibrary::load(const TextDefine& textDefine, std::map<std::string, ImageDetail*>& mapData)
+bool sys::FaceLibrary::load(const TextDefine& textDefine, int& lineHeight, std::map<std::string, FontCharDetail*>& mapData)
 {
 	if (_face == nullptr) return false;
 
@@ -145,13 +138,19 @@ bool sys::FaceLibrary::load(const TextDefine& textDefine, std::map<std::string, 
 	{
 		return false;
 	}
+	_border = textDefine.border;
+	_fontSize = (int)textDefine.fontSize;
+
+	FT_Face face = (FT_Face)_face;
+	float scalY = 1.0f * face->max_advance_height / face->units_per_EM;
+	lineHeight = ceil(scalY * _fontSize);
+
 	int length = -1;
 	wchar_t* dest = CharsetHelper::convertToWideCharWnd(textDefine.text.c_str(), length);
 	if (dest == nullptr || length == -1)
 	{
 		return false;
 	}
-	_fontSize = (int)textDefine.fontSize;
 	wchar_t* ptr = dest;
 	int offset = 0;
 	while (*ptr != 0 && offset < length)
@@ -164,13 +163,20 @@ bool sys::FaceLibrary::load(const TextDefine& textDefine, std::map<std::string, 
 			continue;
 		}
 
-		FT_CHAR_DATA* data = this->loadChar(ch, (int)textDefine.fontSize);
+		FontCharDetail* data = this->loadChar(ch, (int)textDefine.fontSize);
 		if (data)
 		{
-			sys::ImageDetail* detail = new sys::ImageDetail();
-			detail->setDataFormat(sys::ImageDataFormat::RED);
-			detail->setPixels(data->data, data->width, data->height, 1);
-			mapData[getCString("%ld", ch)] = detail;
+			sys::FontCharDetail* detail = CREATE_OBJECT(sys::FontCharDetail);
+			if (detail)
+			{
+				detail->setAdvance(data->getAdvanceX(), data->getAdvanceY());
+				detail->setDelta(data->getDeltaX(), data->getDeltaY());
+				detail->setDataFormat(data->getDataFormat());
+				detail->setPixels(data->getPtr(0), data->getWidth(), data->getHeight(), ImageDetail::getUnitSize(data->getDataFormat()));
+				SAFE_RETAIN(detail);
+				mapData[getCString("%ld", ch)] = detail;
+			}
+			
 		}
 		ptr++;
 		offset++;
@@ -179,7 +185,7 @@ bool sys::FaceLibrary::load(const TextDefine& textDefine, std::map<std::string, 
 	return true;
 }
 
-FT_CHAR_DATA* FaceLibrary::getCharData(uint64_t ch)
+const FontCharDetail* FaceLibrary::getCharData(uint64_t ch) const
 {
 	auto it = _datas.find(ch);
 	if (it == _datas.end())
@@ -187,14 +193,25 @@ FT_CHAR_DATA* FaceLibrary::getCharData(uint64_t ch)
 		return nullptr;
 	}
 
-	return &it->second;
+	return it->second;
 }
 
-FT_CHAR_DATA* FaceLibrary::loadChar(uint64_t ch, int fontSize)
+FontCharDetail* sys::FaceLibrary::getCharData(uint64_t ch)
+{
+	auto it = _datas.find(ch);
+	if (it == _datas.end())
+	{
+		return nullptr;
+	}
+
+	return it->second;
+}
+
+FontCharDetail* FaceLibrary::loadChar(uint64_t ch, int fontSize)
 {
 	if (_face == nullptr) return nullptr;
 
-	FT_CHAR_DATA* data = getCharData(ch);
+	FontCharDetail* data = getCharData(ch);
 	if (data != nullptr)
 	{
 		return data;
@@ -243,20 +260,18 @@ FT_CHAR_DATA* FaceLibrary::loadChar(uint64_t ch, int fontSize)
 
 	float scaleY = 1.0f * face->max_advance_height / face->units_per_EM;
 
-	data = &_datas[ch];
-	data->width = width;
-	data->height = height;
-	data->advX = face->glyph->metrics.horiAdvance / FREETYPE_PIXEL_UNIT;
-	data->advY = face->glyph->metrics.vertAdvance / FREETYPE_PIXEL_UNIT;
-	data->deltaX = bbox.xMin;
-	data->deltaY = bbox.yMin - _fontSize * face->descender / face->units_per_EM * scaleY;
-	data->data.init(width * height, (char*)bitmap.buffer);
+	data = CREATE_OBJECT(FontCharDetail);
+	data->setDataFormat(sys::ImageDataFormat::RED);
+	data->setAdvance(face->glyph->metrics.horiAdvance / FREETYPE_PIXEL_UNIT, face->glyph->metrics.vertAdvance / FREETYPE_PIXEL_UNIT);
+	data->setDelta(bbox.xMin, bbox.yMin - _fontSize * face->descender / face->units_per_EM * scaleY);
+	data->setPixels(bitmap.buffer, width, height, sys::ImageDetail::getUnitSize(sys::ImageDataFormat::RED));
 
-	if (data->deltaY < 0)
+	if (data->getDeltaY() < 0)
 	{
 		PRINT("Error: deltaY value is < 0");
 	}
-
+	data->retain();
+	_datas[ch] = data;
 	return data;
 }
 
@@ -294,6 +309,11 @@ bool FaceLibrary::init(void* lib, const std::string& filepath, int size)
 
 void FaceLibrary::dispose()
 {
+	for (auto item : _datas)
+	{
+		SAFE_RELEASE(item.second);
+	}
+	_datas.clear();
 	if (_face)
 	{
 		FT_Face face = (FT_Face)_face;
@@ -314,7 +334,7 @@ void FaceLibrary::writeStream(uint64_t ch, LabelStream* stream, const phy::Color
 		}
 		return;
 	}
-	FT_CHAR_DATA* data = getCharData(ch);
+	FontCharDetail* data = getCharData(ch);
 	int width = static_cast<int>(_fontSize * 0.5f);
 	int height = _fontSize;
 	int charWidth = width;
@@ -322,8 +342,8 @@ void FaceLibrary::writeStream(uint64_t ch, LabelStream* stream, const phy::Color
 
 	if (data)
 	{
-		width = data->width;
-		height = data->height;
+		width = data->getWidth();
+		height = data->getHeight();
 
 		charWidth = width;
 		deltaX = 0;
@@ -337,31 +357,28 @@ void FaceLibrary::writeStream(uint64_t ch, LabelStream* stream, const phy::Color
 	{
 		return;
 	}
+
+	uint8_t ary0[RGBA_PIXEL_UNIT] = { 0, 0, 0, 0 };
+	uint8_t ary1[RGBA_PIXEL_UNIT] = { color.getRed(), color.getGreen(), color.getBlue(), 0 };
+	uint8_t _vl = 0;
+	uint8_t bit = 0;
 	for (int j = 0; j < height; j++)
 	{
 		for (int i = 0; i < width; i++)
 		{
-			uint8_t _vl = 0;
-			if (data)
-			{
-				_vl = data->data.getValue(i + width * j);
-			}
+			_vl = 0;
+			if (data) _vl = data->getValue(i + width * j);
+			if (_border) _vl = 255;
 
-			if (_border)
-			{
-				_vl = 255;
-			}
-
-			uint8_t bit = _vl == 0 ? 0 : _vl;
+			bit = _vl == 0 ? 0 : _vl;
 			if (bit == 0)
 			{
-				uint8_t ary[RGBA_PIXEL_UNIT] = { 0, 0, 0, 0 };
-				memData.set(RGBA_PIXEL_UNIT * ((height - j - 1) * charWidth + i + deltaX), RGBA_PIXEL_UNIT, (char*)ary);
+				memData.set(RGBA_PIXEL_UNIT * ((height - j - 1) * charWidth + i + deltaX), RGBA_PIXEL_UNIT, (char*)ary0);
 			}
 			else
 			{
-				uint8_t ary[RGBA_PIXEL_UNIT] = { color.getRed(), color.getGreen(), color.getBlue(), bit };
-				memData.set(RGBA_PIXEL_UNIT * ((height - j - 1) * charWidth + i + deltaX), RGBA_PIXEL_UNIT, (char*)ary);
+				ary1[3] = bit;
+				memData.set(RGBA_PIXEL_UNIT * ((height - j - 1) * charWidth + i + deltaX), RGBA_PIXEL_UNIT, (char*)ary1);
 			}
 		}
 	}
@@ -369,7 +386,7 @@ void FaceLibrary::writeStream(uint64_t ch, LabelStream* stream, const phy::Color
 	int deltaY = 0;
 	if (data)
 	{
-		deltaY = data->deltaY;
+		deltaY = data->getDeltaY();
 	}
 	deltaY = deltaY < 0 ? 0 : deltaY;
 

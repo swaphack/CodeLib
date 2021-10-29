@@ -33,7 +33,5 @@ namespace sys
 		static wchar_t* convertToWideCharWnd(const char *str, int32_t& length);
 
 		static void convertToWideChar(const char* str, std::string& text);
-	protected:
-	private:
 	};
 }

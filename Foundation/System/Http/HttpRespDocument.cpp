@@ -35,7 +35,7 @@ bool HttpRespDocument::parseResponse(const char* msg, int32_t size)
 	return parse(std::string(msg, size));
 }
 
-std::string HttpRespDocument::getHttpVersion()
+const std::string& HttpRespDocument::getHttpVersion() const
 {
 	return getStatus(0);
 }
@@ -45,7 +45,7 @@ void HttpRespDocument::setHttpVersion(const std::string& version)
 	setStatus(0, version);
 }
 
-std::string HttpRespDocument::getResponseCode()
+const std::string& HttpRespDocument::getResponseCode() const
 {
 	return getStatus(1);
 }
@@ -60,7 +60,7 @@ void HttpRespDocument::setResponseCode(int32_t code)
 	setResponseCode(getCString("%d", code));
 }
 
-std::string HttpRespDocument::getDescribe()
+const std::string& HttpRespDocument::getDescribe() const
 {
 	return getStatus(2);
 }
@@ -112,7 +112,7 @@ void HttpRespDocument::setResource(IResource* pResource)
 	_resource = pResource;
 }
 
-IResource* HttpRespDocument::getResource()
+IResource* HttpRespDocument::getResource() const
 {
 	return _resource;
 }

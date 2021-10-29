@@ -126,7 +126,7 @@ void StringStream::writeLine()
 	this->writeString(LINE_MARK, ext);
 }
 
-bool StringStream::readEnd()
+bool StringStream::readEnd()const
 {
 	return getCursor() >= getCapacity();
 }

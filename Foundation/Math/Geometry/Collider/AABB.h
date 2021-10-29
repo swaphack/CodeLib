@@ -47,40 +47,40 @@ namespace math
 		/**
 		*	是否包含点
 		*/
-		virtual bool contains(const Vector2& point32);
+		virtual bool contains(const Vector2& point32) const;
 		/**
 		*	是否包含点
 		*/
-		virtual bool contains(const Vector3& point32);
+		virtual bool contains(const Vector3& point32) const;
 	public:
 		/**
 		*	是否包含线段
 		*/
-		bool contains(const LineSegment2d& line);
+		bool contains(const LineSegment2d& line) const;
 		/**
 		*	是否包含线段
 		*/
-		bool contains(const LineSegment3d& line);
+		bool contains(const LineSegment3d& line) const;
 		/**
 		*	是否与线段相交
 		*/
-		bool intersects(const LineSegment2d& line);
+		bool intersects(const LineSegment2d& line) const;
 		/**
 		*	是否与线段相交
 		*/
-		bool intersects(const LineSegment3d& line);
+		bool intersects(const LineSegment3d& line) const;
 		/**
 		*	是否包含盒子
 		*/
-		bool contains(const AABB& bounds);
+		bool contains(const AABB& bounds) const;
 		/**
 		*	两盒子是否相交
 		*/
-		bool intersects(const AABB& bounds);
+		bool intersects(const AABB& bounds) const;
 		/**
 		*	重载=
 		*/
-		void operator=(const AABB& aabb);
+		AABB& operator=(const AABB& aabb);
 	public:
 		/**
 		*	是否与射线相交

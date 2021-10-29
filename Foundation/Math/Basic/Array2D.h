@@ -49,9 +49,9 @@ namespace math
 			return (T*)_values;
 		}
 		/**
-		*	单元值
+		*	复制到目标
 		*/
-		void setValue(T* array, int len) const
+		void copyTo(T* array, int len) const
 		{
 			int length = getLength();
 			assert(len <= length);

@@ -20,7 +20,7 @@ namespace math
 		/**
 		*	°üº¬¶¥µã
 		*/
-		bool hasVertex(const T& value)
+		bool hasVertex(const T& value) const
 		{
 			for (int i = 0; i < Length; i++)
 			{
@@ -29,6 +29,8 @@ namespace math
 					return true;
 				}
 			}
+
+			return false;
 		}
 	};
 

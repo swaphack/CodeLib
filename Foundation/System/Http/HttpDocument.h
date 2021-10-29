@@ -58,12 +58,12 @@ namespace sys
 		bool save(std::string& msg);
 
 		// 获取状态参数
-		std::string getStatus(int32_t index);
+		const std::string& getStatus(int32_t index)  const;
 		// 设置状态参数
 		void setStatus(int32_t index, const std::string& value);
 
 		// 获取报头参数
-		std::string getHeader(const std::string& key);
+		const std::string& getHeader(const std::string& key) const;
 		// 整形格式报头参数
 		bool getIntegerHeader(const std::string& key, int32_t& value);
 
@@ -79,11 +79,11 @@ namespace sys
 		// 可选的消息体
 		void setBody(const std::string& value);
 		// 可选的消息体
-		const std::string& getBody();
+		const std::string& getBody()  const;
 		// 可选消息体长度
-		int32_t getBodySize();
+		int32_t getBodySize() const;
 		// 获取流长度
-		int32_t getStreamSize();
+		int32_t getStreamSize() const;
 	protected:
 		// 解析状态行
 		bool readStatusSection();
@@ -101,5 +101,7 @@ namespace sys
 		std::map<std::string, std::string> _headerSection;
 		// 报体段
 		std::string _bodySection;
+
+		std::string _emptyStatus;
 	};
 }

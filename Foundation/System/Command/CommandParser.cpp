@@ -19,7 +19,7 @@ void CommandParams::setKey(const std::string& key)
 	_key = key;
 }
 
-const std::string& CommandParams::getKey()
+const std::string& CommandParams::getKey() const
 {
 	return _key;
 }
@@ -43,7 +43,7 @@ void CommandParams::removeAllParams()
 	_params.clear();
 }
 
-int32_t CommandParams::getParamsCount()
+int32_t CommandParams::getParamsCount() const
 {
 	return _params.size();
 }

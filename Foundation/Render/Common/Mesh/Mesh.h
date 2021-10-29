@@ -119,14 +119,6 @@ namespace render
 		bool isComputeTangent();
 	public:
 		/**
-		*	使用缓存对象绘制
-		*/
-		void drawWithBufferObject();
-		/**
-		*	使用客户端数据绘制
-		*/
-		void drawWithClientArray();
-		/**
 		*	更新顶点信息
 		*/
 		void updateBufferData();

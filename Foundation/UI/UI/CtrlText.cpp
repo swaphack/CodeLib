@@ -29,7 +29,7 @@ bool CtrlText::init()
 	}
 
 	addNotifyListener(render::NodeNotifyType::TEXT, [this](){
-		onTextTextureChange();
+		onTextChange();
 		onTextBodyChange();
 	});	
 
@@ -133,21 +133,21 @@ sys::VerticalAlignment CtrlText::getTextVerticalAlignment() const
 
 void CtrlText::setDimensions(float width, float height)
 {
-	_textDefine.size.setWidth(width);
-	_textDefine.size.setHeight(height);
+	_textDefine.dimensions.setWidth(width);
+	_textDefine.dimensions.setHeight(height);
 
 	this->notify(render::NodeNotifyType::TEXT);
 }
 
 void CtrlText::setDimensions(const math::Size& size)
 {
-	_textDefine.size = size;
+	_textDefine.dimensions = size;
 	this->notify(render::NodeNotifyType::TEXT);
 }
 
 const math::Size& CtrlText::getDimensions() const
 {
-	return _textDefine.size;
+	return _textDefine.dimensions;
 }
 
 void CtrlText::setTextColor(const phy::Color3B& color)
@@ -217,7 +217,7 @@ void ui::CtrlText::onTextBodyChange()
 	}
 }
 
-void CtrlText::onTextTextureChange()
+void CtrlText::onTextChange()
 {
 	render::Texture2D* texture = G_TEXTURE_CACHE->createTexture2D(_textDefine);
 	_texture2D->cleanTexture();

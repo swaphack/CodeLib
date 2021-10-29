@@ -17,7 +17,7 @@ namespace sys
 		// 设置关键字
 		virtual void setKey(const std::string& key);
 		// 查找关键字
-		virtual const std::string& getKey();
+		virtual const std::string& getKey() const;
 		// 创建一条带主键的记录
 		virtual IDataRecord* create();
 		// 索引记录
@@ -25,9 +25,9 @@ namespace sys
 		// 按照主键设置记录
 		virtual void setRecord(const std::string& key, const IDataRecord* record);
 		// 按照主键查找
-		virtual const IDataRecord* getRecord(const std::string& key);
+		virtual const IDataRecord* getRecord(const std::string& key) const;
 		// 记录个数
-		virtual int32_t count();
+		virtual int32_t count() const;
 		// 清除所有记录
 		virtual void clear();
 	private:

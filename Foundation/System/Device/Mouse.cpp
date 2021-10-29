@@ -31,7 +31,7 @@ void Mouse::setMoveHandler(Object* target, MOUSE_MOVE_HANDLER handler)
 	_moveHandler.second = handler;
 }
 
-void Mouse::onButtonHandler(MouseKey Key, ButtonStatus type, float x, float y)
+void Mouse::onButtonHandler(MouseKey Key, ButtonStatus type, float x, float y) const
 {
 	if (_buttonHandler.first && _buttonHandler.second)
 	{
@@ -39,7 +39,7 @@ void Mouse::onButtonHandler(MouseKey Key, ButtonStatus type, float x, float y)
 	}
 }
 
-void Mouse::onScrollHandler(ScrollEvent type, float param)
+void Mouse::onScrollHandler(ScrollEvent type, float param) const
 {
 	if (_scrollHandler.first && _scrollHandler.second)
 	{
@@ -47,7 +47,7 @@ void Mouse::onScrollHandler(ScrollEvent type, float param)
 	}
 }
 
-void Mouse::onMoveHandler(float x, float y)
+void Mouse::onMoveHandler(float x, float y) const
 {
 	if (_moveHandler.first && _moveHandler.second)
 	{

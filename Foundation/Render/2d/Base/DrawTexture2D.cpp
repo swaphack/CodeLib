@@ -128,6 +128,8 @@ void render::DrawTexture2D::setUV(const math::Rect& rect, const math::Size& size
 void render::DrawTexture2D::setTexFrame(const TexFrame* texFrame)
 {
 	if (texFrame == nullptr || texFrame->getTexture() == nullptr) return;
+	if (_texFrame == texFrame) return;
+
 	auto pTexture = texFrame->getTexture();
 	this->setTexture(pTexture);
 	auto pTexFrame = (TexFrame*)texFrame;

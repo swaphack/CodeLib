@@ -38,10 +38,10 @@ namespace sys
 
 		struct ReadData : public Data
 		{
-			char* data;
-			int32_t offset;
-			int32_t size;
-			ReadDataCallback callback;
+			char* data = nullptr;
+			int32_t offset = 0;
+			int32_t size = 0;
+			ReadDataCallback callback = nullptr;
 
 			ReadData(char* data, int32_t offset, int32_t size, ReadDataCallback callback)
 				:Data(EventType::READ)
@@ -55,8 +55,8 @@ namespace sys
 
 		struct WriteData : public Data
 		{
-			const char* data;
-			int32_t size;
+			const char* data = nullptr;
+			int32_t size = 0;
 
 			WriteData(const char* data, int32_t size)
 				:Data(EventType::WRITE)
@@ -93,9 +93,9 @@ namespace sys
 		// 设置写入函数
 		void setWriteFunc(WriteFunc func);
 		// 是否设置读取函数
-		bool isSetReadFunc();
+		bool isSetReadFunc() const;
 		// 是否设置写入函数
-		bool isSetWriteFunc();
+		bool isSetWriteFunc() const;
 	private:
 		void init();
 	protected:

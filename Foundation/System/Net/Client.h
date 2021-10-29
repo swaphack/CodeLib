@@ -17,7 +17,7 @@ namespace sys
 		Client(const std::string& ip, int32_t port);
 		virtual ~Client();
 	public:
-		int32_t getID();
+		int32_t getID() const;
 		// 设置远程信息
 		void setRemote(const std::string& ip, int32_t port);
 		// 连接服务器
@@ -25,7 +25,7 @@ namespace sys
 		// 断开连接
 		bool disconnect();
 		// 是否连接成功
-		bool isConnected();
+		bool isConnected() const;
 		/*
 		 * 更新
 		 * 接收数据

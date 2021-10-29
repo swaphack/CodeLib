@@ -30,10 +30,10 @@ namespace math
 		virtual Polar2d& operator*=(float ratio);
 		virtual Polar2d& operator/=(float ratio);
 
-		virtual Polar2d operator+(float radian);
-		virtual Polar2d operator-(float radian);
-		virtual Polar2d operator*(float ratio);
-		virtual Polar2d operator/(float ratio);
+		virtual Polar2d operator+(float radian) const;
+		virtual Polar2d operator-(float radian) const;
+		virtual Polar2d operator*(float ratio) const;
+		virtual Polar2d operator/(float ratio) const;
 
 		virtual bool operator==(const Polar2d& polar);
 		virtual bool operator!=(const Polar2d& polar);

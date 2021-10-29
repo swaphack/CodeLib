@@ -128,7 +128,7 @@ namespace ui
 		void getOrgin(const math::Size& size, math::Vector3& anchor, math::Vector3& position);
 
 		virtual void onTextBodyChange();
-		virtual void onTextTextureChange();
+		virtual void onTextChange();
 	private:
 		// 文本结构
 		sys::TextDefine _textDefine;

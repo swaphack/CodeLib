@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<root width="1024" height="768" layout="1" fontPath="Default/Font/font_3.ttf">
+<root width="1024" height="768" layout="1" fontPath="Default/Font/font_3.ttf"fontImagePath="Default/Atlas/text20.png">
   	<Texture>
 		<item type="atlas" atlas="Default/Atlas/ui.atlas" image="Default/Atlas/ui.png"/>
+    	<item type="text" atlas="Default/Atlas/text20.atlas" image="Default/Atlas/text20.png"/>
+   	 	<item type="text" atlas="Default/Atlas/text22.atlas" image="Default/Atlas/text22.png"/>
+    	<item type="text" atlas="Default/Atlas/text32.atlas" image="Default/Atlas/text32.png"/>
   	</Texture>
 	<Layout showMask="1" maskColor="0,0,0,125" margin="0,0,0,0" marginState="1,1,0,1" size="100%,100%">  
 		<UIDesignMenuBar name="MenuBar" filepath="Default/Layout/main_view_menu.xml" margin="0,0,0,0" marginState="1,1,0,1" size="0,40"/>

@@ -17,14 +17,14 @@ namespace sys
 		// 解析字符串，是否是http请求文档
 		bool parseResponse(const char* msg, int32_t len);
 		// 版本
-		std::string getHttpVersion();
+		const std::string& getHttpVersion() const;
 		void setHttpVersion(const std::string& version);
 		// 状态码
-		std::string getResponseCode();
+		const std::string& getResponseCode() const;
 		void setResponseCode(const std::string& code);
 		void setResponseCode(int32_t code);
 		// 说明
-		std::string getDescribe();
+		const std::string& getDescribe() const;
 		void setDescribe(const std::string& desc);
 
 		// 消息体文本格式
@@ -40,7 +40,7 @@ namespace sys
 		// 设置资源管理
 		void setResource(IResource* pResource);
 		// 获取资源管理
-		IResource* getResource();
+		IResource* getResource() const;
 	private:
 		// 资源
 		IResource* _resource = nullptr;

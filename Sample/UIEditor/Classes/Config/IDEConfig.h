@@ -19,6 +19,8 @@ namespace ue
 			std::string Control;
 			// 着色器模式 0-默认，1-合批，2-合图
 			int ShaderMode = 0;
+			// 调试模式 参考enum DrawMode
+			int DebugMode = 0;
 		};
 
 		struct ShaderSetting

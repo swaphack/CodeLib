@@ -170,10 +170,11 @@ ui::CtrlButton* ue::UIDesignNodeTree::createHasChildrenNode(int height, const st
 		pWidget->setSelectedImage("Default/Atlas/ui.png[dir_bg_2.png]");
 		pWidget->setTextColor(phy::Color3B(255, 255, 255));
 		pWidget->setFontSize(CONST_ITEM_HEIGHT);
-		pWidget->setFontPath("Default/Font/font_3.ttf");
+		pWidget->setFontImagePath(G_UIPROXY->getFontImagePath());
+		pWidget->setFontPath(G_UIPROXY->getFontPath());
 		pWidget->setString(name);
-		pWidget->getTextControl()->setTextHorizontalAlignment(sys::HorizontalAlignment::LEFT);
-		pWidget->getTextControl()->setTextVerticalAlignment(sys::VerticalAlignment::BOTTOM);
+		pWidget->setTextHorizontalAlignment(sys::HorizontalAlignment::LEFT);
+		pWidget->setTextVerticalAlignment(sys::VerticalAlignment::BOTTOM);
 		pWidget->addClickFunc([this, node](CtrlWidget*) {
 			std::vector<int> vecIndex;
 			auto pTemp = node;
@@ -213,10 +214,11 @@ ui::CtrlButton* ue::UIDesignNodeTree::createNoChildrenNode(int height, const std
 		pWidget->setSelectedImage("Default/Atlas/ui.png[file_bg_2.png]");
 		pWidget->setTextColor(phy::Color3B(0, 0, 0));
 		pWidget->setFontSize(CONST_ITEM_HEIGHT);
-		pWidget->setFontPath("Default/Font/font_3.ttf");
+		pWidget->setFontImagePath(G_UIPROXY->getFontImagePath());
+		pWidget->setFontPath(G_UIPROXY->getFontPath());
 		pWidget->setString(name);
-		pWidget->getTextControl()->setTextHorizontalAlignment(sys::HorizontalAlignment::LEFT);
-		pWidget->getTextControl()->setTextVerticalAlignment(sys::VerticalAlignment::BOTTOM);
+		pWidget->setTextHorizontalAlignment(sys::HorizontalAlignment::LEFT);
+		pWidget->setTextVerticalAlignment(sys::VerticalAlignment::BOTTOM);
 
 		pWidget->addClickFunc([this, node](CtrlWidget*) {
 			std::vector<int> vecIndex;

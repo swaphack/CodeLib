@@ -17,6 +17,16 @@ XmlHelper::~XmlHelper()
 	delete m_pDocument;
 }
 
+tinyxml2::XMLDocument* tool::XmlHelper::getDocument()
+{
+	return m_pDocument;
+}
+
+tinyxml2::XMLElement* tool::XmlHelper::getRoot()
+{
+	return m_pDocument->RootElement();
+}
+
 bool XmlHelper::loadFile(const std::string& filepath)
 {
 	if (filepath.empty())
@@ -38,6 +48,29 @@ void tool::XmlHelper::saveTo(const std::string& filepath)
 	tinyxml2::XMLError error = m_pDocument->SaveFile(filepath.c_str());
 	if (error != tinyxml2::XML_SUCCESS)
 	{
+	}
+}
+
+void tool::XmlHelper::getRootAttributes(std::map<std::string, std::string>& value)
+{
+	auto root = getRoot();
+	if (root == nullptr) return;
+
+	auto attribute = root->FirstAttribute();
+	while (attribute)
+	{
+		value[attribute->Name()] = attribute->Value();
+		attribute = attribute->Next();
+	}	
+}
+
+void tool::XmlHelper::setRootAttributes(const std::map<std::string, std::string>& value)
+{
+	auto root = getRoot();
+	if (root == nullptr) return;
+	for (const auto& item : value)
+	{
+		root->SetAttribute(item.first.c_str(), item.second.c_str());
 	}
 }
 

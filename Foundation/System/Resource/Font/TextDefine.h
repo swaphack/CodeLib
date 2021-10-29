@@ -36,7 +36,7 @@ namespace sys
 		std::string text;
 
 		// ´óÐ¡
-		math::Size size;
+		math::Size dimensions;
 
 		// ÑÕÉ«
 		phy::Color3B color;

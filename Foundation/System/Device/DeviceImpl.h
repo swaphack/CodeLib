@@ -15,9 +15,9 @@ namespace sys
 		virtual ~DeviceImpl();
 	public:
 		// МќХЬ
-		virtual Keyboard* getKeyboard();
+		virtual Keyboard* getKeyboard() const;
 		// ЪѓБъ
-		virtual Mouse* getMouse();
+		virtual Mouse* getMouse() const;
 	protected:
 		// МќХЬ
 		Keyboard* _keyboard = nullptr;

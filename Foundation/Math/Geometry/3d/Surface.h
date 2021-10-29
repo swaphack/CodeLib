@@ -42,7 +42,7 @@ namespace math
 		*	是否包含点
 		*	先判断是否共面，再判断投影是否包含
 		*/
-		bool contains(const Vector3& point)
+		bool contains(const Vector3& point) const
 		{
 			if (!isCoplanar(*this, point))
 			{ // 不共面

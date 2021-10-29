@@ -62,7 +62,7 @@ void MultMutex::unlock()
 	m_nLockCount--;
 }
 
-bool MultMutex::isLock()
+bool MultMutex::isLock() const
 {
 	return m_nLockCount != 0;
 }

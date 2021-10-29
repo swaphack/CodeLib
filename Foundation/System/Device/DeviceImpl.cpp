@@ -16,12 +16,12 @@ DeviceImpl::~DeviceImpl()
 	SAFE_DELETE(_mouse);
 }
 
-Keyboard* DeviceImpl::getKeyboard()
+Keyboard* DeviceImpl::getKeyboard() const
 {
 	return _keyboard;
 }
 
-Mouse* DeviceImpl::getMouse()
+Mouse* DeviceImpl::getMouse() const
 {
 	return _mouse;
 }

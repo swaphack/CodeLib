@@ -1,12 +1,14 @@
 #include "CtrlButton.h"
 #include "CtrlText.h"
 #include "CtrlImage.h"
+#include "CtrlTextAtlas.h"
 #include "Layout/LayoutItem.h"
 
 ui::CtrlButton::CtrlButton()
 {
 	_btnImage = CREATE_NODE(CtrlImage);
 	_btnImage->setName("button_image");
+	//_btnImage->setVisible(false);
 	this->addProtectedWidget(_btnImage);
 
 	_btnText = CREATE_NODE(CtrlText);
@@ -14,7 +16,15 @@ ui::CtrlButton::CtrlButton()
 	_btnText->setName("button_text");
 	_btnText->setTextHorizontalAlignment(sys::HorizontalAlignment::CENTER);
 	_btnText->setTextVerticalAlignment(sys::VerticalAlignment::MIDDLE);
+	_btnText->setVisible(false);
 	this->addProtectedWidget(_btnText);
+
+	_btnTextAtlas = CREATE_NODE(CtrlTextAtlas);
+	_btnTextAtlas->setAnchorPoint(0.5f, 0.5f);
+	_btnTextAtlas->setName("button_text");
+	_btnTextAtlas->setTextHorizontalAlignment(sys::HorizontalAlignment::CENTER);
+	_btnTextAtlas->setTextVerticalAlignment(sys::VerticalAlignment::MIDDLE);
+	this->addProtectedWidget(_btnTextAtlas);
 
 	this->setTouchEnabled(true);
 }
@@ -49,6 +59,10 @@ void ui::CtrlButton::setTexShaderProgram(render::ShaderProgram* shaderProgram)
 	{
 		_btnText->setTexShaderProgram(shaderProgram);
 	}
+	if (_btnTextAtlas)
+	{
+		_btnTextAtlas->setTexShaderProgram(shaderProgram);
+	}
 	if (_btnImage)
 	{
 		_btnImage->setTexShaderProgram(shaderProgram);
@@ -62,6 +76,10 @@ void ui::CtrlButton::setCamera(const render::Camera* camera)
 	if (_btnText)
 	{
 		_btnText->setCamera(camera);
+	}
+	if (_btnTextAtlas)
+	{
+		_btnTextAtlas->setCamera(camera);
 	}
 	if (_btnImage)
 	{
@@ -77,6 +95,10 @@ void ui::CtrlButton::setUseDesignCamera(bool bUsed)
 	{
 		_btnText->setUseDesignCamera(bUsed);
 	}
+	if (_btnTextAtlas)
+	{
+		_btnTextAtlas->setUseDesignCamera(bUsed);
+	}
 	if (_btnImage)
 	{
 		_btnImage->setUseDesignCamera(bUsed);
@@ -87,11 +109,12 @@ void ui::CtrlButton::setString(const std::string& text)
 {
 	TextProtocol::setString(text);
 	_btnText->setString(text);
+	_btnTextAtlas->setString(text);
 }
 
-void ui::CtrlButton::setFontPath(const std::string& fonturl)
+void ui::CtrlButton::setFontPath(const std::string& fontUrl)
 {
-	_btnText->setFontPath(fonturl);
+	_btnText->setFontPath(fontUrl);
 }
 
 const std::string& ui::CtrlButton::getFontPath() const
@@ -108,10 +131,20 @@ float ui::CtrlButton::getFontSize() const
 {
 	return _btnText->getFontSize();
 }
+void ui::CtrlButton::setFontImagePath(const std::string& fontImageUrl)
+{
+	_btnTextAtlas->setImagePath(fontImageUrl);
+}
+
+const std::string& ui::CtrlButton::getFontImagePath() const
+{
+	return _btnTextAtlas->getImagePath();
+}
 
 void ui::CtrlButton::setTextColor(const phy::Color3B& color)
 {
 	_btnText->setTextColor(color);
+	_btnTextAtlas->setTextColor(color);
 }
 
 const phy::Color3B& ui::CtrlButton::getTextColor() const
@@ -122,6 +155,7 @@ const phy::Color3B& ui::CtrlButton::getTextColor() const
 void ui::CtrlButton::setTextHorizontalAlignment(sys::HorizontalAlignment alignment)
 {
 	_btnText->setTextHorizontalAlignment(alignment);
+	_btnTextAtlas->setTextHorizontalAlignment(alignment);
 }
 
 sys::HorizontalAlignment ui::CtrlButton::getTextHorizontalAlignment() const
@@ -132,16 +166,12 @@ sys::HorizontalAlignment ui::CtrlButton::getTextHorizontalAlignment() const
 void ui::CtrlButton::setTextVerticalAlignment(sys::VerticalAlignment alignment)
 {
 	_btnText->setTextVerticalAlignment(alignment);
+	_btnText->setTextVerticalAlignment(alignment);
 }
 
 sys::VerticalAlignment ui::CtrlButton::getTextVerticalAlignment() const
 {
 	return _btnText->getTextVerticalAlignment();
-}
-
-ui::CtrlText* ui::CtrlButton::getTextControl() const
-{
-	return _btnText;
 }
 
 void ui::CtrlButton::setEnableState(bool bEnabled)

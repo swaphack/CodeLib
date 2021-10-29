@@ -74,7 +74,7 @@ float Plane::getParamD() const
 	return _paramD;
 }
 
-float Plane::getDistanceWithPoint(const Vector3& point)
+float Plane::getDistanceWithPoint(const Vector3& point) const
 {
 	float a = _paramA * point.getX() + _paramB * point.getY() + _paramC * point.getZ() + _paramD;
 	float b = sqrt(pow(_paramA, 2) + pow(_paramB, 2) + pow(_paramC, 2));
@@ -82,7 +82,7 @@ float Plane::getDistanceWithPoint(const Vector3& point)
 	return a / b;
 }
 
-bool math::Plane::getIntersectPointWithLine(const Line3d& line, Vector3& point)
+bool math::Plane::getIntersectPointWithLine(const Line3d& line, Vector3& point) const
 {
 	float delta = Vector3::dot(_normal, line.getDirection());
 	if (delta == 0)
@@ -100,7 +100,7 @@ bool math::Plane::getIntersectPointWithLine(const Line3d& line, Vector3& point)
 	return true;
 }
 
-bool math::Plane::getIntersectLineWithPlane(const Plane& plane, Line3d& line)
+bool math::Plane::getIntersectLineWithPlane(const Plane& plane, Line3d& line) const
 {
 	Vector3 direction = Vector3::cross(this->getNormal(), plane.getNormal());
 
@@ -124,7 +124,7 @@ bool math::Plane::getIntersectLineWithPlane(const Plane& plane, Line3d& line)
 	return true;
 }
 
-bool math::Plane::getIntersectPointWithTwoPlanes(const Plane& plane1, const Plane& plane2, Vector3& point)
+bool math::Plane::getIntersectPointWithTwoPlanes(const Plane& plane1, const Plane& plane2, Vector3& point) const
 {
 	Matrix3x3 mat;
 	mat.setRow(0, math::Vector3(getParamA(), getParamB(), getParamC()));

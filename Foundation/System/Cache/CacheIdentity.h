@@ -15,7 +15,7 @@ namespace sys
 		int32_t getID();
 		// 缓存管理
 		void setInControl(bool status);
-		bool isInControl();
+		bool isInControl() const;
 	protected:
 		// 生成id，由cachemgr生成
 		void makeID();

@@ -24,6 +24,15 @@ namespace math
 
 		void set(float w, float h);
 	public:
+		/**
+		*	相等
+		*/
+		bool operator==(const Size& vec) const;
+		/**
+		*	不相等
+		*/
+		bool operator!=(const Size& vec) const;
+	public:
 		operator Vector2()  const;
 	};
 

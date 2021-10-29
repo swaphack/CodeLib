@@ -10,7 +10,7 @@ namespace math
 		// ÖÐÐÄµã
 		Vector3 center;
 		// °ë¾¶
-		float radius;
+		float radius = 0;
 
 		Sphere(Vector3 center, float radius)
 			:center(center), radius(radius)

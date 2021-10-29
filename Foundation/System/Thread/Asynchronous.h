@@ -12,11 +12,11 @@ namespace sys
 	struct AsynchronousResult
 	{
 		// 是否结束
-		bool completed;
+		bool completed = false;
 		// 扩展
-		void* object;
+		void* object = nullptr;
 		// 回调处理
-		AsynchronousCallback callback;
+		AsynchronousCallback callback = nullptr;
 
 		AsynchronousResult()
 			:completed(false)
@@ -30,7 +30,7 @@ namespace sys
 	template<class _Fn>
 	struct AsynchronousHandler : public AsynchronousResult
 	{
-		_Fn handler;
+		_Fn handler = nullptr;
 
 		AsynchronousHandler()
 			:handler(nullptr)

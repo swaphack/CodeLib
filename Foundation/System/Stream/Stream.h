@@ -31,21 +31,21 @@ namespace sys
 		// 获取数据流
 		IStreamBase* getStream() const;
 		// 游标是否超出长度
-		bool isOutOfLength();
+		bool isOutOfLength() const;
 		// 游标是否超出容量
-		bool isOutOfCapacity();
+		bool isOutOfCapacity() const;
 		// 获取当前指针
-		char* getPtr();
+		char* getPtr() const;
 		// 设置分配的数据流内存长度
 		void setCapacity(size_t capacity);
 		// 设置数据流长度
 		void setLength(size_t length);
 	protected:
 		// 游标
-		size_t _cursor;
+		size_t _cursor = 0;
 		// 分配的内存长度
-		size_t _capacity;
+		size_t _capacity = 0;
 		// 基础数据流
-		IStreamBase* _baseStream;
+		IStreamBase* _baseStream = nullptr;
 	};
 }

@@ -31,7 +31,7 @@ namespace math
 		/**
 		*	Î¬¶È¸öÊý
 		*/
-		int getDimensionCount()
+		int getDimensionCount() const
 		{
 			return Count;
 		}

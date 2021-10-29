@@ -132,7 +132,7 @@ namespace ui
 		// 更新滑动空间draw状态
 		void updateScrollDrawState();
 	protected:
-		// 管理所有项的位置
+		// 管理所有项的节点
 		CtrlLayout* _content = nullptr;
 		// 项
 		std::vector<ui::CtrlWidget*> _scrollWidgets;
@@ -144,6 +144,6 @@ namespace ui
 		// 水平方向是否可以滑动
 		bool _bVerticalScroll = false;
 		// 移动系数
-		float _movingMultiple = 2;
+		float _movingMultiple = 1;
 	};
 }

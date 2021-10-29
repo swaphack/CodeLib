@@ -2,6 +2,9 @@
 #include "TouchProtocol.h"
 #include "Common/Node/Node.h"
 #include "Common/Tool/Tool.h"
+#include "Box/BoxSpace.h"
+#include "Box/BoxDrawProtocol.h"
+
 using namespace render;
 
 TouchManager::TouchManager()
@@ -20,7 +23,8 @@ void render::TouchManager::addTarget(TouchProtocol* target)
 		return;
 	}
 
-	_targets.insert(target);
+	_targets[target->getTouchNode()] = target;
+	setDirty(true);
 }
 
 void render::TouchManager::removeTarget(TouchProtocol* target)
@@ -32,11 +36,7 @@ void render::TouchManager::removeTarget(TouchProtocol* target)
 
 	if (!_targets.empty())
 	{
-		auto it = _targets.find(target);
-		if (it != _targets.end())
-		{
-			_targets.erase(it);
-		}
+		_targets.erase(target->getTouchNode());
 	}
 
 	if (!_temps.empty())
@@ -47,6 +47,7 @@ void render::TouchManager::removeTarget(TouchProtocol* target)
 			_temps.erase(it);
 		}
 	}
+	setDirty(true);
 }
 
 void render::TouchManager::addBeganTouchPoint(const math::Vector2& touchPoint)
@@ -71,57 +72,78 @@ void render::TouchManager::addTouchInfo(TouchType type, const math::Vector2& tou
 	info.touchPoint = touchPoint;
 
 	_waitAddTouches.push_back(info);
+
+	this->handTouch();
 }
 
-void render::TouchManager::process()
+void TouchManager::onTouchBegan(const math::Vector2& touchPoint)
 {
+	for (auto item : _temps)
+	{
+		item->onTouchCanceled(touchPoint);
+	}
+	_temps.clear();
+
+	std::vector<render::BoxDrawProtocol*> boxes;
+	if (!G_BOXSPACE->containsTouchPoint(touchPoint, boxes))
+	{
+		return;
+	}
+
+	std::vector<TouchProtocol*> temps;
+	for (auto item : boxes)
+	{
+		auto it = _targets.find(item->getBoxNode());
+		if (it != _targets.end())
+		{
+			temps.push_back(it->second);
+		}
+	}
+
+	// 判断两对象的优先级
+	std::sort(temps.begin(), temps.end(), [](const TouchProtocol* a, const TouchProtocol* b)
+	{
+		return a->isInFrontOf(b);
+	});
+
+	for (auto item : temps)
+	{
+		if (item->onTouchBegan(touchPoint))
+		{
+			_temps.push_back(item);
+			if (item->isTouchSwallowed())
+			{
+				break;
+			}
+		}
+	}
+}
+
+void TouchManager::onTouchMoved(const math::Vector2& touchPoint)
+{
+	for (auto item : _temps)
+	{
+		item->onTouchMoved(touchPoint);
+	}
+}
+
+void TouchManager::onTouchEnded(const math::Vector2& touchPoint)
+{
+	for (auto item : _temps)
+	{
+		item->onTouchEnded(touchPoint);
+	}
+
+	//_temps.clear();
+}
+
+void render::TouchManager::handTouch()
+{
+
 	if (_waitAddTouches.empty())
 	{
 		return;
 	}
-	/*
-	if (_waitAddTouches[0].type != TouchType::BEGAN)
-	{// 开始不是began，移除所有直到began开始
-		auto it = _waitAddTouches.begin();
-		do
-		{
-			if ((*it).type != TouchType::BEGAN)
-			{
-				it = _waitAddTouches.erase(it);
-			}
-			else
-			{
-				break;
-			}
-		} while (!_waitAddTouches.empty());
-	}
-
-	std::vector<TouchSlotInfo> touchInfos;
-	auto it = _waitAddTouches.begin();
-	do
-	{// 获取一个完整的点击操作
-		touchInfos.push_back(*it);
-
-		if ((*it).type == TouchType::ENDED)
-		{			
-			break;
-		}
-		it++;
-	} while (!_waitAddTouches.empty());
-
-	if (!touchInfos.empty()) return;
-
-	int size = touchInfos.size();
-	if (touchInfos[size - 1].type != TouchType::ENDED)
-	{
-		return;
-	}
-
-	for (size_t i = 0; i < size; i++)
-	{
-		_waitAddTouches.erase(_waitAddTouches.begin());
-	}
-	*/
 
 	std::vector<TouchSlotInfo> touchInfos = _waitAddTouches;
 	_waitAddTouches.clear();
@@ -139,69 +161,6 @@ void render::TouchManager::process()
 		else if (item.type == TouchType::ENDED)
 		{
 			onTouchEnded(item.touchPoint);
-		}
-	}
-}
-
-void TouchManager::onTouchBegan(const math::Vector2& touchPoint)
-{
-	_temps.clear();
-
-	for (auto item : _targets)
-	{
-		if (item->containTouchPoint(touchPoint))
-		{
-			_temps.push_back(item);
-		}
-		else
-		{
-			item->onTouchCanceled(touchPoint);
-		}
-	}
-
-	// 判断两对象的优先级
-	std::sort(_temps.begin(), _temps.end(), [](const TouchProtocol* a, const TouchProtocol* b)
-	{
-		return a->isInFrontOf(b);
-	});
-
-	for (auto item : _temps)
-	{
-		if (item->onTouchBegan(touchPoint))
-		{
-			// 吞噬点击
-			if (item->isTouchSwallowed())
-			{
-				break;
-			}
-		}
-	}
-}
-
-void TouchManager::onTouchMoved(const math::Vector2& touchPoint)
-{
-	for (auto item : _temps)
-	{
-		item->onTouchMoved(touchPoint);
-
-		// 吞噬点击
-		if (item->isTouchSwallowed())
-		{
-			break;
-		}
-	}
-}
-
-void TouchManager::onTouchEnded(const math::Vector2& touchPoint)
-{
-	for (auto item : _temps)
-	{
-		item->onTouchEnded(touchPoint);
-
-		// 吞噬点击
-		if (item->isTouchSwallowed())
-		{
-			break;
 		}
 	}
 }

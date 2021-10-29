@@ -36,7 +36,7 @@ math::TrianglePoints::~TrianglePoints()
 {
 }
 
-bool math::TrianglePoints::hasSameEdge(const TrianglePoints& target, LineSegment3d& side)
+bool math::TrianglePoints::hasSameEdge(const TrianglePoints& target, LineSegment3d& side) const
 {
 	std::vector<Vector3> points;
 

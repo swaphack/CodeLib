@@ -1,5 +1,5 @@
 #include "LabelImage.h"
-#include "LabelLibrary.h"
+#include "FontLibrary.h"
 #include "Base/macros.h"
 #include "physicslib.h"
 #include <map>
@@ -22,12 +22,12 @@ LabelImage::~LabelImage()
 
 bool LabelImage::load(const TextDefine& textDefine)
 {
-	uint32_t fixedWidth = (uint32_t)textDefine.size.getWidth() * RGBA_PIXEL_UNIT;
+	uint32_t fixedWidth = (uint32_t)textDefine.dimensions.getWidth() * RGBA_PIXEL_UNIT;
 	if (fixedWidth > 0)
 	{
 		_stream->setFixedWidth(fixedWidth);
 	}
-	uint32_t fixedHeight = (uint32_t)textDefine.size.getHeight();
+	uint32_t fixedHeight = (uint32_t)textDefine.dimensions.getHeight();
 	if (fixedHeight > 0)
 	{
 		_stream->setFixedHeight(fixedHeight);

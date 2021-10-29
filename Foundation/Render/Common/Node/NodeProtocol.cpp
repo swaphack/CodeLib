@@ -474,3 +474,13 @@ Scene* render::DrawNodeProtocol::getScene() const
 {
 	return _scene;
 }
+
+void render::DrawNodeProtocol::setDrawOrder(int order)
+{
+	_drawOrder = order;
+}
+
+int render::DrawNodeProtocol::getDrawOrder() const
+{
+	return _drawOrder;
+}

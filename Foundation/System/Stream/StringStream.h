@@ -39,6 +39,6 @@ namespace sys
 		// 写入空行
 		void writeLine();
 		// 是否读到结束
-		bool readEnd();
+		bool readEnd() const;
 	};
 }

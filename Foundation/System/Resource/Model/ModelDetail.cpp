@@ -55,7 +55,7 @@ void ModelDetail::removeAllMaterials()
 	_materials.clear();
 }
 
-MaterialDetail* ModelDetail::getMaterial(const std::string& name)
+MaterialDetail* ModelDetail::getMaterial(const std::string& name) const
 {
 	auto it = _materials.find(name);
 	if (it == _materials.end())
@@ -101,7 +101,7 @@ void ModelDetail::removeAllMeshes()
 	_meshes.clear();
 }
 
-MeshDetail* ModelDetail::getMesh(const std::string& name)
+MeshDetail* ModelDetail::getMesh(const std::string& name) const
 {
 	auto it = _meshes.find(name);
 	if (it == _meshes.end())

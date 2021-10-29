@@ -39,20 +39,20 @@ namespace sys
 		// 关闭指定Socket IO
 		void shutDown(int32_t type);
 		// 是否连接有误
-		bool hasError();
+		bool hasError() const;
 		// 关闭socket
 		void close();
 		// 获取socketID
-		int32_t getID();
+		int32_t getID() const;
 
 		// 获取本地ip
-		const std::string& getLocalIP();
+		const std::string& getLocalIP() const;
 		// 获取本地端口
-		int32_t getLocalPort();
+		int32_t getLocalPort() const;
 		// 获取远程ip
-		const std::string& getRemoteIP();
+		const std::string& getRemoteIP() const;
 		// 获取远程端口
-		int32_t getRemotePort();
+		int32_t getRemotePort() const;
 	protected:
 		// 初始化默认socket环境
 		// 非堵塞

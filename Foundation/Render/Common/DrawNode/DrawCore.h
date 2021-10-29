@@ -3,6 +3,7 @@
 #include "mathlib.h"
 #include <string>
 #include <map>
+#include "Graphic/GLAPI/macros.h"
 
 namespace sys
 {
@@ -48,6 +49,14 @@ namespace render
 		*	渲染方式
 		*/
 		DrawType getDrawType() const;
+		/**
+		*	渲染方式
+		*/
+		void setDebugDrawMode(DrawMode mode);
+		/**
+		*	渲染方式
+		*/
+		DrawMode getDebugDrawMode() const;
 	public:
 		/**
 		*	渲染节点
@@ -110,6 +119,15 @@ namespace render
 	protected:
 		// 自定义类型
 		void updateSelfDefinedUniformValue(const DrawParameter* parameter);
+	protected:
+		/**
+		*	使用缓存对象绘制
+		*/
+		void drawWithBufferObject(const DrawParameter* parameter);
+		/**
+		*	使用客户端数据绘制
+		*/
+		void drawWithClientArray(const DrawParameter* parameter);
 	public:
 		/**
 		*	设置临时矩阵
@@ -256,8 +274,10 @@ namespace render
 		std::vector<BatchDrawParameter*> _packDrawParameters;
 		// 须重新绘制的参数
 		std::set<BatchDrawParameter*> _redrawParameters;
-
+		// 绘制方式
 		DrawType _drawType = DrawType::Batch;
+		// 调试绘制方式
+		DrawMode _debugDrawMode = DrawMode::NONE;
 	};
 
 #define G_DRAWCORE sys::Instance<render::DrawCore>::getInstance()

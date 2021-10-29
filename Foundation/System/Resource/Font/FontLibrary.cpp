@@ -1,21 +1,21 @@
-#include "LabelLibrary.h"
+#include "FontLibrary.h"
 #include "third_party.h"
 #include "Base/macros.h"
 #include "FaceLibrary.h"
 #include "LabelStream.h"
-#include "Resource/Image/ImageDetail.h"
+#include "FontCharDetail.h"
 
-sys::LabelLibrary::LabelLibrary()
+sys::FontLibrary::FontLibrary()
 {
 	this->init();
 }
 
-sys::LabelLibrary::~LabelLibrary()
+sys::FontLibrary::~FontLibrary()
 {
 	this->dispose();
 }
 
-sys::FaceLibrary* sys::LabelLibrary::getFontLibrary(const std::string& filepath, int size)
+sys::FaceLibrary* sys::FontLibrary::getFontLibrary(const std::string& filepath, int size)
 {
 	auto it1 = _fontLibs.find(filepath);
 	if (it1 != _fontLibs.end())
@@ -36,7 +36,7 @@ sys::FaceLibrary* sys::LabelLibrary::getFontLibrary(const std::string& filepath,
 	return fontLib;
 }
 
-bool sys::LabelLibrary::load(const TextDefine& textDefine, LabelStream* stream)
+bool sys::FontLibrary::load(const TextDefine& textDefine, LabelStream* stream)
 {
 	auto lib = getFontLibrary(textDefine.filepath, textDefine.fontSize);
 	if (lib == nullptr)
@@ -47,7 +47,7 @@ bool sys::LabelLibrary::load(const TextDefine& textDefine, LabelStream* stream)
 	return lib->load(textDefine, stream);
 }
 
-bool sys::LabelLibrary::load(const TextDefine& textDefine, std::map<std::string, ImageDetail*>& mapData)
+bool sys::FontLibrary::load(const TextDefine& textDefine, int& lineHeight, std::map<std::string, FontCharDetail*>& mapData)
 {
 	auto lib = getFontLibrary(textDefine.filepath, textDefine.fontSize);
 	if (lib == nullptr)
@@ -55,10 +55,21 @@ bool sys::LabelLibrary::load(const TextDefine& textDefine, std::map<std::string,
 		return false;
 	}
 
-	return lib->load(textDefine, mapData);
+	return lib->load(textDefine, lineHeight, mapData);
 }
 
-void sys::LabelLibrary::cleanup()
+const sys::FontCharDetail* sys::FontLibrary::getCharDetail(const std::string& filepath, int size, uint64_t ch)
+{
+	auto lib = getFontLibrary(filepath, size);
+	if (lib == nullptr)
+	{
+		return false;
+	}
+
+	return lib->getCharData(ch);
+}
+
+void sys::FontLibrary::cleanup()
 {
 	for (auto& item1 : _fontLibs)
 	{
@@ -70,7 +81,7 @@ void sys::LabelLibrary::cleanup()
 	_fontLibs.clear();
 }
 
-void sys::LabelLibrary::init()
+void sys::FontLibrary::init()
 {
 	FT_Library library;
 	auto error = FT_Init_FreeType(&library);
@@ -83,7 +94,7 @@ void sys::LabelLibrary::init()
 	_library = library;
 }
 
-void sys::LabelLibrary::dispose()
+void sys::FontLibrary::dispose()
 {
 	this->cleanup();
 

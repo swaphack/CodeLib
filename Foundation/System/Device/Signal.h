@@ -12,8 +12,8 @@ namespace sys
 		// 设置消息
 		virtual void setMessage(void* msg);
 		// 获取消息
-		virtual void* getMessage();
+		virtual void* getMessage() const;
 	private:
-		void* _msg;
+		void* _msg = nullptr;
 	};
 }

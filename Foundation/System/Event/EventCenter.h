@@ -53,7 +53,7 @@ namespace sys
 		/**
 		*	派发事件
 		*/
-		void dispatch(const Event* evt);
+		void dispatch(const Event* evt) const;
 	private:
 		// 事件接口
 		std::set<EventProtocol*> _eventProtocols;

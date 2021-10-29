@@ -37,11 +37,11 @@ namespace math
 		/**
 		*	是否包含点
 		*/
-		virtual bool contains(const Vector2& point);
+		virtual bool contains(const Vector2& point) const;
 		/**
 		*	是否包含点
 		*/
-		virtual bool contains(const Vector3& point);
+		virtual bool contains(const Vector3& point) const;
 		/**
 		*	是否与射线相交
 		*/

@@ -35,12 +35,12 @@ void math::OBB::set(const Vector3& center, const Vector3& size)
 	_volume = size;
 }
 
-bool OBB::contains(const Vector2& point)
+bool OBB::contains(const Vector2& point) const
 {
 	return contains(Vector3(point));
 }
 
-bool OBB::contains(const Vector3& point)
+bool OBB::contains(const Vector3& point) const
 {
 	math::Matrix4x4 mat;
 	math::Matrix4x4::getRST(_rotation, math::Vector3(1, 1, 1), _center, mat);
@@ -52,31 +52,33 @@ bool OBB::contains(const Vector3& point)
 	return box.contains(pos);
 }
 
-bool OBB::contains(const LineSegment2d& line)
+bool OBB::contains(const LineSegment2d& line) const
 {
 	return contains(line.getSrc()) && contains(line.getDest());
 }
 
-bool OBB::contains(const LineSegment3d& line)
+bool OBB::contains(const LineSegment3d& line) const
 {
 	return contains(line.getSrc()) && contains(line.getDest());
 }
 
-bool math::OBB::intersects(const LineSegment2d& line)
+bool math::OBB::intersects(const LineSegment2d& line) const
 {
 	return contains(line.getSrc()) || contains(line.getDest());
 }
 
-bool math::OBB::intersects(const LineSegment3d& line)
+bool math::OBB::intersects(const LineSegment3d& line) const
 {
 	return contains(line.getSrc()) || contains(line.getDest());
 }
 
-void OBB::operator=(const OBB& obb)
+OBB& OBB::operator=(const OBB& obb)
 {
 	this->_center = obb._center;
 	this->_volume = obb._volume;
 	this->_rotation = obb._rotation;
+
+	return *this;
 }
 
 bool math::OBB::hitRay(const Ray& ray) const

@@ -238,6 +238,11 @@ namespace render
 		void setScene(Scene* scene);
 		// 获取场景
 		Scene* getScene() const;
+	public:
+		// 绘制顺序
+		void setDrawOrder(int order);
+		// 绘制顺序
+		int getDrawOrder() const;
 	protected:
 		// 所属摄像机
 		Camera* _camera = nullptr;
@@ -245,6 +250,8 @@ namespace render
 		Scene* _scene = nullptr;
 		// 使用设计摄像头
 		bool _bUsedDesignCamera = true;
+		// 绘制顺序
+		int _drawOrder = 0;
 	};
 	
 }

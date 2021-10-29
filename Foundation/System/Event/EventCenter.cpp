@@ -117,7 +117,7 @@ void sys::EventCenter::removeAllEventListeners()
 	_eventFuncs.clear();
 }
 
-void sys::EventCenter::dispatch(const Event* evt)
+void sys::EventCenter::dispatch(const Event* evt) const
 {
 	if (evt == nullptr)
 	{

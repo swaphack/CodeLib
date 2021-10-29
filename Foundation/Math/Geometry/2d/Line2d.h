@@ -62,19 +62,19 @@ namespace math
 		/**
 		*	包含点
 		*/
-		bool contains(const Vector2& point);
+		bool contains(const Vector2& point) const;
 		/**
 		*	是否平行
 		*/
-		bool isParallel(const Line2d& line);
+		bool isParallel(const Line2d& line) const;
 		/**
 		*	是否相交
 		*/
-		bool isIntersect(const Line2d& line);
+		bool isIntersect(const Line2d& line) const;
 		/**
 		*	点与直线的位置关系
 		*/
-		PointAndLinePosition2DType getPointPositionType(const Vector2& point);
+		PointAndLinePosition2DType getPointPositionType(const Vector2& point) const;
 	protected:
 		float _paramA = 0;
 		float _paramB = 0;

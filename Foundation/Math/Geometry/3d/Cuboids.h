@@ -39,15 +39,15 @@ namespace math
 		/**
 		*	包含点
 		*/
-		bool contains(float x, float y, float z);
+		bool contains(float x, float y, float z) const;
 		/**
 		*	包含点
 		*/
-		bool contains(const Vector3& point);
+		bool contains(const Vector3& point) const;
 		/**
 		*	相交
 		*/
-		bool intersect(const Cuboids& cuboids);
+		bool intersect(const Cuboids& cuboids) const;
 	public:
 		Cuboids& operator=(const Cuboids& cuboids);
 	private:

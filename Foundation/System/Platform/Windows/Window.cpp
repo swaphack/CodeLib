@@ -54,6 +54,7 @@ Window* Windows::getWindow(HWND hwnd)
 
 
 //////////////////////////////////////////////////////////////////////////
+Signal signal;
 LRESULT CALLBACK WndProc(
 	HWND hWnd,                          // 窗口的句柄
 	UINT32 uMsg,                          // 窗口的消息
@@ -64,10 +65,8 @@ LRESULT CALLBACK WndProc(
 	if (window)
 	{
 		Tuple3<UINT32, WPARAM, LPARAM> params(uMsg, wParam, lParam);
-		Signal* signal = new Signal();
-		signal->setMessage(&params);
-		bool result = window->onRecvSignal(signal);
-		delete signal;
+		signal.setMessage(&params);
+		bool result = window->onRecvSignal(&signal);
 		if (result)
 		{
 			return 0;
@@ -119,7 +118,7 @@ void Window::initWindow(const std::string& title, int32_t width, int32_t height)
 	
 }
 
-bool Window::onRecvSignal(Signal* signal)
+bool Window::onRecvSignal(const Signal* signal)
 {
 	if (signal == nullptr)
 	{
@@ -237,7 +236,7 @@ void Window::listen()
 	dispose();
 }
 
-bool Window::onHandSignal(Signal* signal)
+bool Window::onHandSignal(const Signal* signal)
 {
 	if (signal == nullptr)
 	{

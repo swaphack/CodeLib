@@ -18,7 +18,7 @@ namespace sys
 		// 窗口句柄
 		inline HWND getWnd() { return _wnd; }
 		// 接受信号的处理
-		virtual bool onRecvSignal(Signal* signal);
+		virtual bool onRecvSignal(const Signal* signal);
 	protected:
 		// 初始化窗口
 		virtual bool init();
@@ -27,7 +27,7 @@ namespace sys
 		// 监听窗口
 		virtual void listen();
 		// 处理接收到的信息
-		virtual bool onHandSignal(Signal* signal);
+		virtual bool onHandSignal(const Signal* signal);
 	protected:
 		// 窗口句柄
 		HWND _wnd;

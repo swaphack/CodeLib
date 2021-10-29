@@ -75,72 +75,72 @@ int render::Terrian::getFractalCount() const
 
 void render::Terrian::onTerrianChange()
 {
-    this->startThread([this]() {
-    int aryIndex[4] = { 0, 1, 2, 3 };
-    math::Vector3 aryPoint[4] = { math::Vector3() };
-
-    std::vector<math::Vector3> points;
-    std::vector<int> indices;
-    std::vector<phy::Color4F> colorData;
-
-    alg::DiamondSquareTerrian terrian;
-    terrian.setOffset(_terrianHeight.getMinValue(), _terrianHeight.getMaxValue());
-    terrian.setPoints(math::Vector3(0, 0, 0), math::Vector3(getTerrianWidth(), 0, 0),
-        math::Vector3(getTerrianWidth(), 0, getTerrianLength()), math::Vector3(0, 0, getTerrianLength()));
-
-    std::map<std::string, int> keys;
-    math::Vector3 origin(_anchor.getX() * getTerrianWidth(), 0, _anchor.getY() * getTerrianLength());
-    auto polygons = terrian.createQuads(_fractalCount);
-    if (polygons.size() >= 0)
-    {
-        for (int i = 0; i < polygons.size(); i++)
+    this->startThread([this]()
         {
-            aryPoint[0] = polygons[i].leftBottom;
-            aryPoint[1] = polygons[i].rightBottom;
-            aryPoint[2] = polygons[i].rightTop;
-            aryPoint[3] = polygons[i].leftTop;
+            int aryIndex[4] = { 0, 1, 2, 3 };
+            math::Vector3 aryPoint[4] = { math::Vector3() };
 
-            for (int j = 0; j < 4; j++)
+            std::vector<math::Vector3> points;
+            std::vector<int> indices;
+            std::vector<phy::Color4F> colorData;
+
+            alg::DiamondSquareTerrian terrian;
+            terrian.setOffset(_terrianHeight.getMinValue(), _terrianHeight.getMaxValue());
+            terrian.setPoints(math::Vector3(0, 0, 0), math::Vector3(getTerrianWidth(), 0, 0),
+                math::Vector3(getTerrianWidth(), 0, getTerrianLength()), math::Vector3(0, 0, getTerrianLength()));
+
+            std::map<std::string, int> keys;
+            math::Vector3 origin(_anchor.getX() * getTerrianWidth(), 0, _anchor.getY() * getTerrianLength());
+            auto polygons = terrian.createQuads(_fractalCount);
+            if (polygons.size() >= 0)
             {
-                math::Vector3 value = aryPoint[j];
-                std::string key = value.toString();
-                auto it = keys.find(key);
-                if (it == keys.end())
+                for (int i = 0; i < polygons.size(); i++)
                 {
-                    int index = points.size();
-                    keys[key] = index;
+                    aryPoint[0] = polygons[i].leftBottom;
+                    aryPoint[1] = polygons[i].rightBottom;
+                    aryPoint[2] = polygons[i].rightTop;
+                    aryPoint[3] = polygons[i].leftTop;
 
-                    phy::Color4F color(
-                        value.getX() / getTerrianWidth(), 
-                        value.getY() / _terrianHeight.getMaxValue(),
-                        value.getZ() / getTerrianLength());
-                    colorData.push_back(color);
+                    for (int j = 0; j < 4; j++)
+                    {
+                        math::Vector3 value = aryPoint[j];
+                        std::string key = value.toString();
+                        auto it = keys.find(key);
+                        if (it == keys.end())
+                        {
+                            int index = points.size();
+                            keys[key] = index;
 
-                    value -= origin;
-                    points.push_back(value);
+                            phy::Color4F color(
+                                value.getX() / getTerrianWidth(),
+                                value.getY() / _terrianHeight.getMaxValue(),
+                                value.getZ() / getTerrianLength());
+                            colorData.push_back(color);
 
-                    aryIndex[j] = index;
-                }
-                else
-                {
-                    aryIndex[j] = it->second;
+                            value -= origin;
+                            points.push_back(value);
+
+                            aryIndex[j] = index;
+                        }
+                        else
+                        {
+                            aryIndex[j] = it->second;
+                        }
+                    }
+                    //z轴向外 0, 1, 2, 0, 2, 3
+                    indices.push_back(aryIndex[0]);
+                    indices.push_back(aryIndex[2]);
+                    indices.push_back(aryIndex[1]);
+
+                    indices.push_back(aryIndex[0]);
+                    indices.push_back(aryIndex[3]);
+                    indices.push_back(aryIndex[2]);
                 }
             }
-            //z轴向外 0, 1, 2, 0, 2, 3
-            indices.push_back(aryIndex[0]);
-            indices.push_back(aryIndex[2]);
-            indices.push_back(aryIndex[1]);
 
-            indices.push_back(aryIndex[0]);
-            indices.push_back(aryIndex[3]);
-            indices.push_back(aryIndex[2]);
-        }
-    }
-
-    this->getMesh()->setVertices(points);
-    this->getMesh()->setColors(colorData);
-    this->getMesh()->setIndices(indices);
-    this->notify(NodeNotifyType::MESH);
-
+            this->getMesh()->setVertices(points);
+            this->getMesh()->setColors(colorData);
+            this->getMesh()->setIndices(indices);
+            this->notify(NodeNotifyType::MESH);
     });
 }

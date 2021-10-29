@@ -116,6 +116,7 @@
     <ClCompile Include="Audio\macros.cpp" />
     <ClCompile Include="Box\BoxDraw.cpp" />
     <ClCompile Include="Box\BoxDrawProtocol.cpp" />
+    <ClCompile Include="Box\BoxSpace.cpp" />
     <ClCompile Include="Canvas.cpp" />
     <ClCompile Include="Common\Action\Action.cpp" />
     <ClCompile Include="Common\Action\ActionManager.cpp" />
@@ -222,6 +223,7 @@
     <ClCompile Include="Common\Texture\TextureCache.cpp" />
     <ClCompile Include="Common\Texture\TextureCubeMap.cpp" />
     <ClCompile Include="Common\Texture\TextureCubeMapArray.cpp" />
+    <ClCompile Include="Common\Text\TextCache.cpp" />
     <ClCompile Include="Common\Tool\VertexTool.cpp" />
     <ClCompile Include="Common\Tool\Tool.cpp" />
     <ClCompile Include="Common\Transform\Transform.cpp" />
@@ -342,6 +344,7 @@
     <ClInclude Include="Audio\macros.h" />
     <ClInclude Include="Box\BoxDraw.h" />
     <ClInclude Include="Box\BoxDrawProtocol.h" />
+    <ClInclude Include="Box\BoxSpace.h" />
     <ClInclude Include="Box\import.h" />
     <ClInclude Include="Canvas.h" />
     <ClInclude Include="Common\Action\Action.h" />
@@ -474,6 +477,8 @@
     <ClInclude Include="Common\Texture\TextureCache.h" />
     <ClInclude Include="Common\Texture\TextureCubeMap.h" />
     <ClInclude Include="Common\Texture\TextureCubeMapArray.h" />
+    <ClInclude Include="Common\Text\import.h" />
+    <ClInclude Include="Common\Text\TextCache.h" />
     <ClInclude Include="Common\Tool\import.h" />
     <ClInclude Include="Common\Tool\VertexTool.h" />
     <ClInclude Include="Common\Tool\Tool.h" />

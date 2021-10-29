@@ -19,9 +19,9 @@ namespace sys
 		// 队列头元素
 		NetData* topData();
 		// 队列中元素个数
-		int32_t count();
+		int32_t count() const;
 		// 队列是否为空
-		bool empty();
+		bool empty() const;
 		// 释放队列元素
 		void dispose();
 	private:

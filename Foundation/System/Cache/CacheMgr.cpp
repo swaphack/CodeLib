@@ -32,9 +32,9 @@ CacheMgr* CacheMgr::getInstance()
 	return s_CacheMgr;
 }
 
-CacheIdentity* CacheMgr::getCache(int32_t nID)
+CacheIdentity* CacheMgr::getCache(int32_t nID) const
 {
-	std::map<int32_t, CacheIdentity*>::iterator iter = _idCaches.find(nID);
+	auto iter = _idCaches.find(nID);
 	if (iter == _idCaches.end())
 	{
 		return nullptr;
@@ -42,11 +42,11 @@ CacheIdentity* CacheMgr::getCache(int32_t nID)
 	return iter->second;
 }
 
-CacheIdentity* CacheMgr::getCache(const std::string& name)
+CacheIdentity* CacheMgr::getCache(const std::string& name) const
 {
 	ASSERT(!name.empty());
 
-	std::map<std::string, CacheIdentity*>::iterator iter = _nameCaches.find(name);
+	auto iter = _nameCaches.find(name);
 	if (iter == _nameCaches.end())
 	{
 		return nullptr;

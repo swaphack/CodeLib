@@ -8,6 +8,7 @@
 namespace ui
 {
 	class CtrlText;
+	class CtrlTextAtlas;
 	class CtrlImage;
 
 	// 按钮
@@ -40,7 +41,7 @@ namespace ui
 		/**
 		*	设置字库路径
 		*/
-		void setFontPath(const std::string& fonturl);
+		void setFontPath(const std::string& fontUrl);
 		/**
 		*	获取字库路径
 		*/
@@ -53,6 +54,15 @@ namespace ui
 		*	获取字体大小
 		*/
 		float getFontSize()  const;
+
+		/**
+		*	设置字库路径
+		*/
+		void setFontImagePath(const std::string& fontImageUrl);
+		/**
+		*	获取字库路径
+		*/
+		const std::string& getFontImagePath()  const;
 		/**
 		*	设置颜色
 		*/
@@ -77,10 +87,6 @@ namespace ui
 		*	获取文本垂直对齐方式
 		*/
 		sys::VerticalAlignment getTextVerticalAlignment() const;
-		/**
-		*	获取文本控件
-		*/
-		CtrlText* getTextControl() const;
 	public:
 		/**
 		*	有效
@@ -147,6 +153,8 @@ namespace ui
 		ButtonImage _btnImagePath;
 		// 文本
 		CtrlText* _btnText = nullptr;
+		// 文本
+		CtrlTextAtlas* _btnTextAtlas = nullptr;
 		// 图片
 		CtrlImage* _btnImage = nullptr;
 		// 点击缩放

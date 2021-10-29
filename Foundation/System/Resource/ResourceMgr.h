@@ -21,7 +21,7 @@ namespace sys
 		virtual ~ResourceMgr();
 	public:
 		// 资源管理
-		Resource* getResource(ResourceType type);
+		Resource* getResource(ResourceType type) const;
 		// 添加一种新的获取资源的方式
 		void addMethod(ResourceType type, IResource* res);
 		// 移除就有的获取资源的方式

@@ -14,6 +14,7 @@ namespace math
 	{
 	public:
 		Rect();
+		Rect(float x, float y);
 		Rect(float x, float y, float w, float h);
 		Rect(const Vector2& orgin, const Size& size);
 		Rect(const Vector2& orgin, const Vector2& size);
@@ -22,13 +23,18 @@ namespace math
 		float getX() const;
 		float getY() const;
 
-		float getWidth() const;
-		float getHeight() const;
-
 		float getMinX() const;
+		float getMiddleX() const;
 		float getMaxX() const;
 		float getMinY() const;
+		float getMiddleY() const;
 		float getMaxY() const;
+
+		float getWidth() const;
+		float getHalfWidth() const;
+		float getHeight() const;
+		float getHalfHeight() const;
+
 		/**
 		*	起始点
 		*/
@@ -104,6 +110,7 @@ namespace math
 		math::Vector3 getAnchorPointByPosition(float x, float y);
 	public:
 		Rect& operator=(const Rect& rect);
+		bool operator==(const Rect& rect) const;
 	protected:
 		// 起始点
 		Vector2 _origin;

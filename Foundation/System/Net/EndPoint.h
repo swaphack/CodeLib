@@ -13,9 +13,9 @@ namespace sys
 		// ipµØÖ·
 		std::string addr;
 		// ip¶Ë¿Ú
-		int32_t port;
+		int32_t port = 0;
 		// ÊÇ·ñipv6
-		bool ipv6;
+		bool ipv6 = false;
 	public:
 		EndPoint();
 		EndPoint(const std::string& addr, int32_t port, bool ipv6);

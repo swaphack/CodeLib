@@ -15,7 +15,7 @@ namespace sys
 		// 设置session id
 		void setSessionID(const std::string& id);
 		// 获取session id
-		const std::string& getSessionID();
+		const std::string& getSessionID() const;
 		// 设置消息
 		virtual void setMessage(const std::string& msg, int32_t size);
 		// 生成消息
@@ -23,9 +23,9 @@ namespace sys
 		// 获取消息
 		const std::string& getMessage();
 		// 消息大小
-		int32_t getMessageSize();
+		int32_t getMessageSize() const;
 		// 是否有值
-		virtual bool isMessageEmpty();
+		virtual bool isMessageEmpty() const;
 	private:
 		// 消息
 		std::string _msg;

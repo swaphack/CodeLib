@@ -16,7 +16,7 @@ namespace sys
 		TimerTask(uint64_t nTime);
 		virtual ~TimerTask();
 	public:
-		virtual bool isOver() override;
+		virtual bool isOver() const override;
 	public:
 		/**
 		*	设置时间
@@ -25,7 +25,7 @@ namespace sys
 		/**
 		*	获取时间
 		*/
-		uint64_t getTime();
+		uint64_t getTime() const;
 	private:
 		// 时间
 		uint64_t m_nTime = 0;

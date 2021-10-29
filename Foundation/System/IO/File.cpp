@@ -259,7 +259,7 @@ bool File::append(const char* data, size_t size)
 	return writtenSize != size;
 }
 
-bool File::exists()
+bool File::exists() const
 {
 	return m_pFile != nullptr;
 }

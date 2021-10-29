@@ -72,11 +72,11 @@ namespace math
 		/**
 		*	相等
 		*/
-		virtual bool operator==(const Vector2& vec);
+		bool operator==(const Vector2& vec) const;
 		/**
 		*	不相等
 		*/
-		virtual bool operator!=(const Vector2& vec);
+		bool operator!=(const Vector2& vec) const;
 	public:
 		/**
 		*	点积

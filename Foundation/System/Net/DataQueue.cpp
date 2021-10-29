@@ -47,12 +47,12 @@ NetData* DataQueue::topData()
 	return _datas.front();
 }
 
-int32_t DataQueue::count()
+int32_t DataQueue::count() const
 {
 	return _datas.size();
 }
 
-bool DataQueue::empty()
+bool DataQueue::empty() const
 {
 	return _datas.empty();
 }

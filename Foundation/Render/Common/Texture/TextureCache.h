@@ -38,14 +38,14 @@ namespace render
 	public:// 纹理片段
 		std::string getTexFrameName(const std::string& path, const std::string name) const;
 		// 添加纹理集
-		void addTexAtlas(const std::string& path, const sys::TextureAtlas& texAtlas);
+		void addTexAtlas(const std::string& path, const sys::ImageTextureAtlas& texAtlas);
 		// 添加纹理集
-		void addTexAtlas(const std::string& path, const Texture* texture, const sys::TextureAtlas& texAtlas);
+		void addTexAtlas(const std::string& path, const Texture* texture, const sys::ImageTextureAtlas& texAtlas);
 		// 添加
-		void addTexFrame(const std::string& path, const TexFrame& texFrame);
+		void addTexFrame(const std::string& path, const TexFrame* texFrame);
 		// 添加
 		void addTexFrame(const std::string& path, const Texture* texture, 
-			const std::string& name, const math::Rect& rect);
+			const std::string& name, const math::Rect& rect, bool rotate = false);
 		// 获取
 		const TexFrame* getTexFrame(const std::string& path, const std::string name) const;
 		// 获取 path[name];
@@ -74,7 +74,7 @@ namespace render
 		// 缓存的纹理
 		std::map<uint32_t, Texture*> _textures;
 		// 缓存的纹理集,{图片名称[纹理名称], 纹理信息}
-		std::map<std::string, TexFrame> _texFrames;
+		std::map<std::string, TexFrame*> _texFrames;
 	};
 
 	#define G_TEXTURE_CACHE sys::Instance<render::TextureCache>::getInstance()

@@ -98,7 +98,7 @@ Polar2d& Polar2d::operator/=(float ratio)
 	return *this;
 }
 
-Polar2d Polar2d::operator+(float radian)
+Polar2d Polar2d::operator+(float radian) const
 {
 	radian = this->getRadian() + radian;
 
@@ -107,7 +107,7 @@ Polar2d Polar2d::operator+(float radian)
 	return Polar2d(this->getRadius(), radian);
 }
 
-Polar2d Polar2d::operator-(float radian)
+Polar2d Polar2d::operator-(float radian) const
 {
 	radian = this->getRadian() - radian;
 
@@ -116,12 +116,12 @@ Polar2d Polar2d::operator-(float radian)
 	return Polar2d(this->getRadius(), radian);
 }
 
-Polar2d Polar2d::operator*(float ratio)
+Polar2d Polar2d::operator*(float ratio) const
 {
 	return Polar2d(ratio * this->getRadius(), this->getRadian());
 }
 
-Polar2d Polar2d::operator/(float ratio)
+Polar2d Polar2d::operator/(float ratio) const
 {
 	assert(ratio != 0);
 

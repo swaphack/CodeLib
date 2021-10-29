@@ -36,7 +36,7 @@ void Task::finish()
 	_event = nullptr;
 }
 
-bool Task::isOver()
+bool Task::isOver() const
 {
 	return true;
 }

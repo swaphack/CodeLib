@@ -2,22 +2,18 @@
 #include "2d/Primitive/PrimitiveNode.h"
 #include "BoxDrawProtocol.h"
 #include "Common/Scene/Cameras.h"
+#include "BoxSpace.h"
 
 static render::BoxDraw* sIntance = nullptr;
 
 render::BoxDraw::BoxDraw()
 {
-	sIntance = this;
+	G_BOXSPACE->setBoxDraw(this);
 }
 
 render::BoxDraw::~BoxDraw()
 {
-	sIntance = nullptr;
-}
-
-render::BoxDraw* render::BoxDraw::getInstance()
-{
-	return sIntance;
+	G_BOXSPACE->setBoxDraw(nullptr);
 }
 
 bool render::BoxDraw::init()
@@ -39,39 +35,12 @@ bool render::BoxDraw::init()
 	this->addChild(_drawNode2d);
 
 	addNotifyListener(render::NodeNotifyType::GEOMETRY, [this]() {
-		this->onBoxChanged();
+		this->refreshBoxes();
 	});
 
 	return true;
 }
 
-void render::BoxDraw::addBox(BoxDrawProtocol* box)
-{
-	if (box == nullptr) return;
-
-	_boxes.insert(box);
-
-	if (box->getBoxNode())
-	{
-		box->getBoxNode()->addNotifyListener(render::NodeNotifyType::SPACE, this,  [this]() {
-			this->onBoxChanged();
-		});
-	}
-
-	this->notify(render::NodeNotifyType::GEOMETRY);
-}
-
-void render::BoxDraw::removeBox(BoxDrawProtocol* box)
-{
-	if (box == nullptr) return;
-
-	_boxes.erase(box);
-	if (box->getBoxNode())
-	{
-		box->getBoxNode()->removeNotifyListener(render::NodeNotifyType::SPACE, this);
-	}
-	this->notify(render::NodeNotifyType::GEOMETRY);
-}
 render::PrimitiveNode* render::BoxDraw::getRenderNode2d()
 {
 	return _drawNode2d;
@@ -82,20 +51,24 @@ render::PrimitiveNode* render::BoxDraw::getRenderNode3d()
 	return _drawNode3d;
 }
 
-void render::BoxDraw::onBoxChanged()
+void render::BoxDraw::refreshBoxes()
 {
 	_drawNode2d->removeAllPoints();
 	_drawNode3d->removeAllPoints();
 
-	for (auto item : _boxes)
+	for (const auto& item : G_BOXSPACE->getAllBoxes())
 	{
+		auto pBoxNode = item.second->getBoxNode();
+		if (pBoxNode == nullptr) continue;
+		if (!pBoxNode->isVisible() || !item.second->isBoxVisible()) continue;
+
 		std::vector<math::TrianglePoints> vecPoints;
-		item->getBoxPoints(vecPoints);
+		item.second->getBoxPoints(vecPoints);
 		for (auto point : vecPoints)
 		{
 			phy::Color4F color;
-			phy::convertColor4BTo4F(item->getBoxColor(), color);
-			if (item->getBoxDrawType() == render::BoxDrawType::TWO)
+			phy::convertColor4BTo4F(item.second->getBoxColor(), color);
+			if (item.second->getBoxDrawType() == render::BoxDrawType::TWO)
 			{
 				_drawNode2d->appendPoint(point.getPoint0(), color);
 				_drawNode2d->appendPoint(point.getPoint1(), color);

@@ -36,11 +36,29 @@ namespace tool
 		*	移除所有图片
 		*/
 		void removeAllDirectories();
+
 	public:
+		// 纹理集
+		const sys::ImageTextureAtlas& getTextureAtlas() const;
+
+		/**
+		*	加载图集配置
+		*/
+		void loadTextureAtlas(const std::string& atlasFilePath);
+		/**
+		*	生成图集配置
+		*/
+		void saveTextureAtlas(const std::string& atlasFilePath);
+	protected:
+		/**
+		*	保存成png图片和纹理集配置
+		*/
+		void saveTexAltas(const std::string& imgFilePath, const std::string& atlasFilePath, const std::map<std::string, sys::ImageDetail*>& mapDetails);
 		/**
 		*	加载图片信息
 		*/
 		void loadImageDetails(std::map<std::string, sys::ImageDetail*>& mapDetails, const std::string& format = "*.png");
+	public:
 		/**
 		*	打包成png
 		*/
@@ -50,5 +68,8 @@ namespace tool
 		std::set<std::string> _images;
 		// 图片目录
 		std::set<std::string> _dirs;
+
+		// 纹理集
+		sys::ImageTextureAtlas _textureAtlas;
 	};
 }

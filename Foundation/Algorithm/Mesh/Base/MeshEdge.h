@@ -96,7 +96,7 @@ namespace alg
 		/**
 		*	获取方向
 		*/
-		math::Vector3 getDirection(const MeshVertex* destPoint)const;
+		math::Vector3 getDirection(const MeshVertex* destPoint) const;
 
 		/**
 		*	获取另一个端点

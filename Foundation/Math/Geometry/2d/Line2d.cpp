@@ -107,14 +107,14 @@ float Line2d::getDistanceWithPoint(const Vector2& point)
 	return a / b;
 }
 
-bool Line2d::contains(const Vector2& point)
+bool Line2d::contains(const Vector2& point) const
 {
 	float a = _paramA * point.getX() + _paramB * point.getY() + _paramC;
 
 	return a == 0;
 }
 
-bool Line2d::isParallel(const Line2d& line)
+bool Line2d::isParallel(const Line2d& line) const
 {
 	Vector2 v0 = getDirection();
 	Vector2 n1 = line.getNormal();
@@ -122,7 +122,7 @@ bool Line2d::isParallel(const Line2d& line)
 	return Vector2::dot(v0, n1) == 0;
 }
 
-bool Line2d::isIntersect(const Line2d& line)
+bool Line2d::isIntersect(const Line2d& line) const
 {
 	Vector2 v0 = getDirection();
 	Vector2 n1 = line.getNormal();
@@ -130,7 +130,7 @@ bool Line2d::isIntersect(const Line2d& line)
 	return Vector2::dot(v0, n1) != 0;
 }
 
-PointAndLinePosition2DType math::Line2d::getPointPositionType(const Vector2& point)
+PointAndLinePosition2DType math::Line2d::getPointPositionType(const Vector2& point) const
 {
 	float a = _paramA * point.getX() + _paramB * point.getY() + _paramC;
 

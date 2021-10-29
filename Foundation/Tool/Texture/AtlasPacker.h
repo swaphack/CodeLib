@@ -37,31 +37,13 @@ namespace tool
 		*/
 		bool isReverseY() const;
 	public:
-		// 纹理集
-		const sys::TextureAtlas& getTextureAtlas() const;
-	public:
-		/**
-		*	加载图集配置
-		*/
-		void loadTextureAtlas(const std::string& atlasFilePath);
-		/**
-		*	生成图集配置
-		*/
-		void saveTextureAtlas(const std::string& atlasFilePath);
-	public:
 		/**
 		*	保存成rgba 32位png图片
 		*/
 		void saveImage(const std::string& imgFilePath, uint8_t* data, sys::ImageDataFormat format = sys::ImageDataFormat::RGBA);
-		/**
-		*	保存成png图片和纹理集配置
-		*/
-		void saveTexAltas(const std::string& imgFilePath, const std::string& atlasFilePath, const std::map<std::string, sys::ImageDetail*>& mapDetails);
 	protected:
 		// 大小
 		math::IntSize _size;
-		// 纹理集
-		sys::TextureAtlas _textureAtlas;
 		// y轴是否相反
 		bool _reverseY = false;
 	};

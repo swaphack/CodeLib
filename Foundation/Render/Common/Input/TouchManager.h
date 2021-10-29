@@ -9,9 +9,10 @@
 namespace render
 {
 	class TouchProtocol;
+	class Node;
 
 	// 触摸管理
-	class TouchManager 
+	class TouchManager : public sys::DirtyProtocol
 	{
 	public:
 		TouchManager();
@@ -24,9 +25,6 @@ namespace render
 		void addBeganTouchPoint(const math::Vector2& touchPoint);
 		void addMovedTouchPoint(const math::Vector2& touchPoint);
 		void addEndedTouchPoint(const math::Vector2& touchPoint);
-	public:
-		// 处理
-		void process();
 	protected:
 		// 添加接触信息
 		void addTouchInfo(TouchType type, const math::Vector2& touchPoint);
@@ -34,6 +32,8 @@ namespace render
 		void onTouchBegan(const math::Vector2& touchPoint);
 		void onTouchMoved(const math::Vector2& touchPoint);
 		void onTouchEnded(const math::Vector2& touchPoint);
+		// 对触摸进行处理
+		void handTouch();
 	private:
 		struct TouchSlotInfo
 		{
@@ -42,7 +42,7 @@ namespace render
 
 			TouchSlotInfo() {}
 		};
-		std::set<TouchProtocol*> _targets;
+		std::map<Node*, TouchProtocol*> _targets;
 		std::vector<TouchProtocol*> _temps;
 		// 待添加点击
 		std::vector<TouchSlotInfo> _waitAddTouches;

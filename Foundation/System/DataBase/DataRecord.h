@@ -14,7 +14,7 @@ namespace sys
 		/**
 		*	获取指定参数的值
 		*/
-		virtual std::string getValue(const std::string& key);
+		virtual std::string getValue(const std::string& key) const;
 		/**
 		*	设置键值对
 		*/
