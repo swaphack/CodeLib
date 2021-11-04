@@ -40,21 +40,39 @@ void tool::ImageAtlasPacker::removeAllDirectories()
 	_dirs.clear();
 }
 
+void tool::ImageAtlasPacker::setAtlas(const std::string& imgFilePath, const std::string& atlasFilePath)
+{
+	_textureAtlas.setAtlasPath(atlasFilePath);
+	_textureAtlas.setImagePath(imgFilePath);
+}
+
 const sys::ImageTextureAtlas& tool::ImageAtlasPacker::getTextureAtlas() const
 {
 	return _textureAtlas;
 }
 
-void tool::ImageAtlasPacker::loadTextureAtlas(const std::string& atlasFilePath)
+sys::ImageTextureAtlas& tool::ImageAtlasPacker::getTextureAtlas()
+{
+	return _textureAtlas;
+}
+
+void tool::ImageAtlasPacker::loadTextureAtlas(const std::string& imageFilePath, const std::string& atlasFilePath)
 {
 	_textureAtlas.removeAllChips();
-	_textureAtlas.setAtlasPath(atlasFilePath);
 
 	XmlHelper helper;
 	if (!helper.loadFile(atlasFilePath))
 	{
 		return;
 	}
+	std::map<std::string, std::string> attributes;
+	helper.getRootAttributes(attributes);
+	if (attributes.size() > 0)
+	{
+		auto it = attributes.find("imagePath");
+		if (it != attributes.end()) _textureAtlas.setImagePath(it->second.c_str());
+	}
+
 	helper.foreach([this](tinyxml2::XMLElement* element) {
 		if (element == nullptr) return;
 		sys::ImageTextureChip* chip = CREATE_OBJECT(sys::ImageTextureChip);
@@ -77,9 +95,12 @@ void tool::ImageAtlasPacker::loadTextureAtlas(const std::string& atlasFilePath)
 
 void tool::ImageAtlasPacker::saveTextureAtlas(const std::string& atlasFilePath)
 {
-	_textureAtlas.setAtlasPath(atlasFilePath);
-
 	XmlHelper helper;
+
+	std::map<std::string, std::string> attributes;
+	attributes["imagePath"] = _textureAtlas.getImagePath();
+	helper.setRootAttributes(attributes);
+
 	for (const auto& item : _textureAtlas.getAllChips())
 	{
 		std::vector<std::pair<std::string, std::string>> values;
@@ -100,6 +121,7 @@ void tool::ImageAtlasPacker::saveTexAltas(const std::string& imgFilePath, const 
 	std::map<int, std::string> ids;
 
 	alg::Bin2D bin;
+	bin.setAutoRotate(isAutoRotate());
 	bin.setSize(_size.getWidth(), _size.getHeight());
 	for (const auto& item : mapDetails)
 	{

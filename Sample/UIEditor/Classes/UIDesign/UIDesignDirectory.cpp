@@ -143,8 +143,8 @@ ui::CtrlButton* ue::UIDesignDirectory::createDirItem(int height, const std::stri
 
 	if (pWidget)
 	{
-		pWidget->setNormalImage("Default/Atlas/ui.png[dir_bg.png]");
-		pWidget->setSelectedImage("Default/Atlas/ui.png[dir_bg_2.png]");
+		pWidget->setNormalImage("Default/Atlas/ui.atlas[dir_bg.png]");
+		pWidget->setSelectedImage("Default/Atlas/ui.atlas[dir_bg_2.png]");
 		pWidget->setTextColor(phy::Color3B(255, 255, 255));
 		pWidget->setFontSize(CONST_ITEM_HEIGHT);
 		pWidget->setFontImagePath(G_UIPROXY->getFontImagePath());
@@ -176,8 +176,8 @@ ui::CtrlButton* ue::UIDesignDirectory::createFileItem(int height, const std::str
 
 	if (pWidget)
 	{
-		pWidget->setNormalImage("Default/Atlas/ui.png[file_bg.png]");
-		pWidget->setSelectedImage("Default/Atlas/ui.png[file_bg_2.png]");
+		pWidget->setNormalImage("Default/Atlas/ui.atlas[file_bg.png]");
+		pWidget->setSelectedImage("Default/Atlas/ui.atlas[file_bg_2.png]");
 		pWidget->setTextColor(phy::Color3B(0, 0, 0));
 		pWidget->setFontSize(CONST_ITEM_HEIGHT);
 		pWidget->setFontImagePath(G_UIPROXY->getFontImagePath());

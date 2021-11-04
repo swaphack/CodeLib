@@ -19,7 +19,6 @@ Node::Node()
 ,_userData(nullptr)
 ,_parent(nullptr)
 ,_bVisibled(false)
-,_bTouchEnabled(false)
 ,_actionProxy(nullptr)
 , _bRelativeToParent(true)
 , _zOrder(0)
@@ -52,6 +51,9 @@ bool Node::init()
 	this->setCamera(G_CAMERAS->getCamera3D());
 
 	G_TOUCHMANAGER->addTarget(this);
+
+	onSpaceChange();
+	onBodyChange();
 
 	return true;
 }
@@ -510,28 +512,6 @@ math::Vector3 render::Node::convertLocalToWorldPoint(const math::Vector3& point)
 	return _worldMatrix * point;
 }
 
-bool render::Node::containTouchPoint(const math::Vector2& touchPoint)
-{
-	if (!isVisible() || this->isSkipDraw())
-		return false;
-
-	if (getScene() != Canvas::getInstance()->getCurScene())
-	{
-		return false;
-	}
-
-	auto parent = this->getFirstClippingNodeOfParents();
-	if (parent != nullptr)
-	{
-		if (!parent->containPoint(touchPoint))
-		{
-			return false;
-		}
-	}
-
-	return containPoint(touchPoint);
-}
-
 bool render::Node::isInFrontOfNode(const Node* target) const
 {
 	if (target == nullptr || target->getParent() == nullptr)
@@ -761,4 +741,14 @@ void render::Node::calDirectionWithRotate()
 	setRight(mat * getDefaultRight());
 	setUp(mat * getDefaultUp());
 	setFront(mat * getDefaultFront());
+}
+
+void render::Node::setClippingEnabled(bool status)
+{
+	_bClippingEnabled = status;
+}
+
+bool render::Node::isClippingEnabled() const
+{
+	return _bClippingEnabled;
 }

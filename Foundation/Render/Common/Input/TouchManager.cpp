@@ -3,7 +3,7 @@
 #include "Common/Node/Node.h"
 #include "Common/Tool/Tool.h"
 #include "Box/BoxSpace.h"
-#include "Box/BoxDrawProtocol.h"
+#include "Box/BoxProtocol.h"
 
 using namespace render;
 
@@ -78,7 +78,7 @@ void render::TouchManager::addTouchInfo(TouchType type, const math::Vector2& tou
 
 void TouchManager::onTouchBegan(const math::Vector2& touchPoint)
 {
-	std::vector<render::BoxDrawProtocol*> boxes;
+	std::vector<render::BoxProtocol*> boxes;
 	if (!G_BOXSPACE->containsTouchPoint(touchPoint, boxes))
 	{
 		return;

@@ -15,11 +15,11 @@ namespace render
 	/**
 	*	绘制包围盒
 	*/
-	class BoxDrawProtocol
+	class BoxProtocol
 	{
 	public:
-		BoxDrawProtocol();
-		virtual ~BoxDrawProtocol();
+		BoxProtocol();
+		virtual ~BoxProtocol();
 	public:
 		/**
 		*	盒子编号
@@ -61,16 +61,19 @@ namespace render
 		*	节点
 		*/
 		render::Node* getBoxNode() const;
-		/**
-		*	是否包含点击点
-		*/
-		virtual bool containsTouchPoint(const math::Vector2& touchPoint);
 	public:
 		/**
 		*	盒子顶点
 		*/
 		void getBoxPoints(std::vector<math::TrianglePoints>& vecPoints) const;
+		/**
+		*	盒子顶点
+		*/
+		const std::vector<math::TrianglePoints>& getBoxPoints() const;
 	protected:
+		/**
+		*	设置所属节点
+		*/
 		void setBoxNode(render::Node* node);
 	protected:
 		// 是否显示框
@@ -92,11 +95,11 @@ namespace render
 	/**
 	*	绘制2d包围盒
 	*/
-	class Box2DDrawProtocol : public BoxDrawProtocol
+	class Box2DProtocol : public BoxProtocol
 	{
 	public:
-		Box2DDrawProtocol();
-		virtual ~Box2DDrawProtocol();
+		Box2DProtocol();
+		virtual ~Box2DProtocol();
 	public:
 		void initBox2D(render::Node* node);
 	public:
@@ -117,23 +120,18 @@ namespace render
 		*/
 		const math::Polygon& getBoxPolygon() const;
 		/**
-		*	包围盒
+		*	获取包围盒
 		*/
 		const math::Rect& getBoxRect() const;
-
-		void setBoxRect(const math::Rect& rect);
 		/**
-		*	是否包含点击点
+		*	设置包围盒
 		*/
-		virtual bool containsTouchPoint(const math::Vector2& touchPoint);
+		void setBoxRect(const math::Rect& rect);
+	public:
 		/**
 		*	是否与其他2d盒子相交
 		*/
-		virtual bool isOverlap(const Box2DDrawProtocol* box2d);
-		/**
-		*	是否在画布内
-		*/
-		bool isInCanvas();
+		virtual bool isOverlap(const Box2DProtocol* box2d);
 	protected:
 		/**
 		*	形状改变
@@ -153,18 +151,16 @@ namespace render
 		math::Polygon _boxPolygon;
 		// 世界包围盒
 		math::Rect _boxRect;
-		// 在画布内
-		bool _bInCanvas = true;
 	};
 
 	/**
 	*	绘制3d包围盒
 	*/
-	class Box3DDrawProtocol : public BoxDrawProtocol
+	class Box3DProtocol : public BoxProtocol
 	{
 	public:
-		Box3DDrawProtocol();
-		virtual ~Box3DDrawProtocol();
+		Box3DProtocol();
+		virtual ~Box3DProtocol();
 	public:
 		void initBox3D(render::Node* node);
 	public:
@@ -177,9 +173,19 @@ namespace render
 		*/
 		const render::CubeVertex& getLocalCubeVertex() const;
 		/**
-		*	是否包含点击点
+		*	世界坐标
 		*/
-		virtual bool containsTouchPoint(const math::Vector2& touchPoint);
+		const render::CubeVertex& getWorldCubeVertex() const;
+		/**
+		*	获取包围盒
+		*/
+		const math::Cuboids& getBoxCuboids() const;
+		/**
+		*	设置包围盒
+		*/
+		void setBoxCuboids(const math::Cuboids& cuboids);
+	public:
+
 	protected:
 		/**
 		*	形状改变
@@ -194,5 +200,10 @@ namespace render
 		render::CubeVertex _localCubeVertex;
 		// 世界矩形框
 		render::CubeVertex _worldCubeVertex;
+
+		// 世界多边形
+		math::Polygon _boxPolygon;
+		// 世界包围盒
+		math::Cuboids _boxCuboids;
 	};
 }

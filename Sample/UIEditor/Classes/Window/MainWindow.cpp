@@ -35,7 +35,7 @@ bool ue::MainWindow::init()
 		ui::UIShaderHelper::loadColorShader(boxDraw->getRenderNode2d());
 		ui::UIShaderHelper::loadColorShader(boxDraw->getRenderNode3d());
 
-		//boxDraw->setAllBoxesVisibled(true);
+		boxDraw->setAllBoxesVisibled(true);
 	}
 
 	auto size = render::Tool::getViewSize();

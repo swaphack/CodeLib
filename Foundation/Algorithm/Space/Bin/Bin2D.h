@@ -34,6 +34,10 @@ namespace alg
 		*	添加物品
 		*/
 		void addItem(int id, int width, int height);
+		/**
+		*	自动旋转
+		*/
+		void setAutoRotate(bool rotated);
 	public:
 		/**
 		*	打包
@@ -44,6 +48,8 @@ namespace alg
 		int _width = 0;
 		// 高度
 		int _height = 0;
+		// 自动旋转
+		bool _autoRotate = false;
 		// 物品
 		std::vector<Item> _items;
 	};

@@ -82,6 +82,14 @@ namespace render
 		// 设置混合条件
 		void setBlend(const BlendParam& blend);
 		// 设置颜色
+		void setBlendColor(uint8_t r, uint8_t g, uint8_t b);
+		// 设置颜色
+		void setBlendColor(float r, float g, float b);
+		// 设置颜色
+		void setBlendColor(uint8_t r, uint8_t g, uint8_t b, uint8_t a);
+		// 设置颜色
+		void setBlendColor(float r, float g, float b, float a);
+		// 设置颜色
 		void setBlendColor(const phy::Color3B& color);
 		// 设置颜色
 		void setBlendColor(const phy::Color3F& color);

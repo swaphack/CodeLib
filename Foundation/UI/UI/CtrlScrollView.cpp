@@ -304,14 +304,6 @@ void CtrlScrollView::initContent()
 	
 }
 
-void ui::CtrlScrollView::updateScrollDrawState()
-{
-	for (auto& item : _scrollWidgets)
-	{
-		item->updateDrawState();
-	}
-}
-
 void CtrlScrollView::setInnerSize(const math::Size& size)
 {
 	if (_content != nullptr)

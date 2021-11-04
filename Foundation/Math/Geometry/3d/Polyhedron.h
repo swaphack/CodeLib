@@ -29,7 +29,6 @@ namespace math
 		*/
 		bool contiains(const Vector3& point) const
 		{
-
 			Polygon pxoy;
 			Polygon pyoz;
 			Polygon pxoz;

@@ -1,4 +1,4 @@
-<root>
+<root imagePath="ui.png">
     <item>
         <name>arrow_black.png</name>
         <width>40</width>

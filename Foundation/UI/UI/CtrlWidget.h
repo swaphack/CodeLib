@@ -17,7 +17,7 @@ namespace ui
 	*/
 	class CtrlWidget : 
 		public render::Node,
-		public render::Box2DDrawProtocol
+		public render::Box2DProtocol
 	{
 	public:
 		// 点击处理函数
@@ -160,15 +160,6 @@ namespace ui
 		*	父节点节点位置改变
 		*/
 		void onParentPositionChange();
-	public:
-		/**
-		*	更新绘制状态
-		*/
-		void updateDrawState();
-		/**
-		*	更新所有绘制状态
-		*/
-		void updateAllDrawState();
 	protected:
 		/** 
 		*	批量绘制

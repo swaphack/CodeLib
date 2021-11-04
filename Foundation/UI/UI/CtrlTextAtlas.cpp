@@ -249,18 +249,21 @@ void ui::CtrlTextAtlas::onTextChange()
 	bool bBreak = false;
 	int dataWidth = 0;
 	int dataHeight = 0;
+	uint64_t ch = 0;
+	std::string name;
 
 	while (*ptr != 0 && offset < length)
 	{
 		bBreak = false;
-		uint64_t ch = *ptr;
-		if (ch == 10) {
+		ch = *ptr;
+		if (ch == 10) {// 换行
 			offsetY += offsetHeight;
-			bBreak = true;
-		} else if (ch == 13) {
 			offsetX = 0;
 			bBreak = true;
-		} else if (ch == 32) {
+		} else if (ch == 13) { // 行首
+			offsetX = 0;
+			bBreak = true;
+		} else if (ch == 32) { // 空格
 			offsetX += 0.5f * fontSize;
 			if (width > 0 && offsetX >= width)
 			{
@@ -276,7 +279,9 @@ void ui::CtrlTextAtlas::onTextChange()
 			offset++;
 			continue;
 		}
-		auto data = pFontAtlas->getChip(getCString("%d", ch));
+
+		name = G_TEXT_CACHE->getCharName(ch);
+		auto data = pFontAtlas->getChip(name);
 		if (data == nullptr)
 		{// 空格
 			ptr++;
@@ -288,8 +293,6 @@ void ui::CtrlTextAtlas::onTextChange()
 			render::DrawTexture2D* pTexture2D = CREATE_NODE(render::DrawTexture2D);
 			if (pTexture2D)
 			{
-				std::string name = getCString("%ld", ch);
-				
 				dataWidth = data->rotate ? data->height : data->width;
 				dataHeight = data->rotate ? data->width : data->height;
 				if (width > 0 && offsetX + dataWidth >= width)
@@ -306,11 +309,10 @@ void ui::CtrlTextAtlas::onTextChange()
 				}
 				//pTexture2D->setTextureRotateEnabled(false);
 				//pTexture2D->setRotationZ(data->rotate ? 90 : 0);
-				pTexture2D->setFlipX(data->rotate);
 				pTexture2D->setCamera(_content->getCamera());
 				pTexture2D->setUseDesignCamera(_content->isUsedDesignCamera());
 				pTexture2D->setShaderProgram(_shaderProgram);
-				pTexture2D->loadImage(G_TEXTURE_CACHE->getTexFrameName(_textDefine.filepath, name));
+				pTexture2D->loadImage(G_TEXT_CACHE->getAtlasName(_textDefine.filepath, name));
 				pTexture2D->setPosition(posX, posY);
 				pTexture2D->setAnchorPoint(0, 0);
 				pTexture2D->setVolume(data->width, data->height);

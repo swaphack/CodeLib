@@ -1,26 +1,26 @@
-#include "TestAlgNode.h"
+#include "TestAlgorithm.h"
 #include "system.h"
 #include "algorithm.h"
 #include "../Env/Utility.h"
 
-TestAlgNode::TestAlgNode()
+TestAlgorithm::TestAlgorithm()
 {
 
 }
 
-TestAlgNode::~TestAlgNode()
+TestAlgorithm::~TestAlgorithm()
 {
 
 }
 
-void TestAlgNode::initNodes()
+void TestAlgorithm::initNodes()
 {
 	//this->testMeshMapFindPath();
 
 	this->testDelaunay();
 }
 
-void TestAlgNode::testRayMapFindPath()
+void TestAlgorithm::testRayMapFindPath()
 {
 	alg::map::RayMap* pMap = CREATE_OBJECT(alg::map::RayMap);
 	pMap->addPoint(math::Vector3(0, 0));
@@ -45,7 +45,7 @@ void TestAlgNode::testRayMapFindPath()
 	int a = 0;
 }
 
-void TestAlgNode::testMeshMapFindPath()
+void TestAlgorithm::testMeshMapFindPath()
 {
 	alg::map::MeshMap* pMap = CREATE_OBJECT(alg::map::MeshMap);
 	pMap->addPoint(math::Vector3(0, 0));
@@ -70,7 +70,7 @@ void TestAlgNode::testMeshMapFindPath()
 	int a = 0;
 }
 
-void TestAlgNode::testWFCCreateMap()
+void TestAlgorithm::testWFCCreateMap()
 {
 #define SLOT_COUNT 12
 #define RECT_WIDTH 4
@@ -139,7 +139,7 @@ void TestAlgNode::testWFCCreateMap()
 const float ALG_WIDTH = 1000;
 const float ALG_HEIGHT = 700;
 
-void TestAlgNode::testDelaunay()
+void TestAlgorithm::testDelaunay()
 {
 	int horizontal = 10;
 	int vertical = 10;
@@ -183,7 +183,7 @@ void TestAlgNode::testDelaunay()
 	drawSegments(lineSegments);
 }
 
-void TestAlgNode::drawTriangles(const std::vector<math::TrianglePoints>& vecTrianglePoints)
+void TestAlgorithm::drawTriangles(const std::vector<math::TrianglePoints>& vecTrianglePoints)
 {
 	render::PrimitiveNode* pNode = CREATE_NODE(render::PrimitiveNode);
 	pNode->setDrawMode(DrawMode::TRIANGLES);
@@ -206,7 +206,7 @@ void TestAlgNode::drawTriangles(const std::vector<math::TrianglePoints>& vecTria
 	this->addChild(pNode);
 }
 
-void TestAlgNode::drawPolygons(const std::vector<math::Polygon>& vecPolygons)
+void TestAlgorithm::drawPolygons(const std::vector<math::Polygon>& vecPolygons)
 {
 	int i = vecPolygons.size();
 	for (auto polygon : vecPolygons)
@@ -217,7 +217,7 @@ void TestAlgNode::drawPolygons(const std::vector<math::Polygon>& vecPolygons)
 	}
 }
 
-void TestAlgNode::drawPolygon(const math::Polygon& polygon)
+void TestAlgorithm::drawPolygon(const math::Polygon& polygon)
 {
 	if (polygon.getPointCount() < 3) return;
 
@@ -242,7 +242,7 @@ void TestAlgNode::drawPolygon(const math::Polygon& polygon)
 	this->addChild(pNode);
 }
 
-void TestAlgNode::drawSegments(const std::vector<math::LineSegment2d>& vecSegments)
+void TestAlgorithm::drawSegments(const std::vector<math::LineSegment2d>& vecSegments)
 {
 	render::PrimitiveNode* pNode = CREATE_NODE(render::PrimitiveNode);
 	pNode->setPosition(10, 10);

@@ -28,16 +28,11 @@ namespace render
 		void setTouchSwallowed(bool status);
 		// 是否吞噬点击
 		bool isTouchSwallowed();
-
-		// 设置是否裁剪
-		void setClippingEnabled(bool status);
-		// 是否裁剪
-		bool isClippingEnabled();
 	public:
 		virtual bool isInFrontOf(const TouchProtocol* target) const;
 	public:
 		// 是否点击点落在改节点上,须重写
-		virtual bool containTouchPoint(const math::Vector2& touchPoint);
+		bool containsTouchPoint(const math::Vector2& touchPoint);
 	public:// 触摸处理
 		virtual bool onTouchBegan(const math::Vector2& touchPoint);
 		virtual bool onTouchMoved(const math::Vector2& touchPoint);
@@ -65,8 +60,6 @@ namespace render
 		bool _bTouchEnabled = false;
 		// 吞噬点击
 		bool _bTouchSwallowed = false;
-		// 裁剪节点
-		bool _bClippingEnabled = false;
 		// 触摸节点
 		Node* _touchNode = nullptr;
 

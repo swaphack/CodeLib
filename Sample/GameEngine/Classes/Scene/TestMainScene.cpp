@@ -1,6 +1,7 @@
 #include "TestMainScene.h"
 #include "../Node/import.h"
 #include "../Env/import.h"
+#include "../Tool/import.h"
 
 TestMainScene::TestMainScene()
 {
@@ -28,13 +29,13 @@ bool TestMainScene::init()
 
 	this->initNodes();
 	this->initEnv();
+	this->initTool();
 
 	return true;
 }
 
 void TestMainScene::initNodes()
 {
-
 	//this->addChild(CREATE_NODE(TestModelNode));
 
 	//this->addChild(CREATE_NODE(TestShaderNode));
@@ -45,7 +46,7 @@ void TestMainScene::initNodes()
 	//this->addChild(CREATE_NODE(TestDrawNode));
 	//this->addChild(CREATE_NODE(TestUINode));
 	//
-	this->addChild(CREATE_NODE(TestParticleNode));
+	//this->addChild(CREATE_NODE(TestParticleNode));
 	//
 	//this->addChild(CREATE_NODE(TestTextureNode));
 	//
@@ -61,11 +62,6 @@ void TestMainScene::initNodes()
 	//
 	//this->addChild(CREATE_NODE(TestMeshNode));
 	//
-	//this->addChild(CREATE_NODE(TestMathNode));
-
-	//this->addChild(CREATE_NODE(TestAlgNode));
-
-	this->addChild(CREATE_NODE(TestTool));
 }
 
 void TestMainScene::initEnv()
@@ -73,6 +69,14 @@ void TestMainScene::initEnv()
 	this->addChild(CREATE_NODE(SystemEnv));
 	//this->addChild(CREATE_NODE(TerrianNode));
 
-
 	this->addChild(CREATE_NODE(TestEnvironmentNode));
+}
+
+void TestMainScene::initTool()
+{
+	//this->addChild(CREATE_NODE(TestMathNode));
+
+	//this->addChild(CREATE_NODE(TestAlgorithm));
+
+	this->addChild(CREATE_NODE(TestTexturePack));
 }

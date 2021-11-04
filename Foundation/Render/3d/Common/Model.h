@@ -3,7 +3,7 @@
 #include "Common/DrawNode/DrawNode3D.h"
 #include "3d/Environment/LightProtocol.h"
 #include "Common/struct/vertex_common.h"
-#include "Box/BoxDrawProtocol.h"
+#include "Box/BoxProtocol.h"
 #include <map>
 #include <string>
 
@@ -21,7 +21,7 @@ namespace render
 	class Model : 
 		public DrawNode3D,
 		public LightProtocol,
-		public Box3DDrawProtocol
+		public Box3DProtocol
 	{
 	public:
 		Model();

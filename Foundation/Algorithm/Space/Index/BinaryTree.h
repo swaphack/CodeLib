@@ -93,7 +93,7 @@ namespace alg
 		/**
 		*	添加节点
 		*/
-		void addNode(TreeNode* node, const T& data)
+		void addNode(TreeNode* &node, const T& data)
 		{
 			if (node == nullptr) return;
 
@@ -123,7 +123,7 @@ namespace alg
 		/**
 		*	移除节点, 是否移除当前节点
 		*/
-		bool removeNode(TreeNode* node, const T& data)
+		bool removeNode(TreeNode* & node, const T& data)
 		{
 			if (node == nullptr) return false;
 			if (isEqual(node->data, data))
@@ -134,12 +134,12 @@ namespace alg
 			if (removeNode(node->left, data))
 			{
 				node->left = nullptr;
-				return false;
+				return true;
 			}
 			if (removeNode(node->right, data))
 			{
 				node->right = nullptr;
-				return false;
+				return true;
 			}
 
 			return false;
@@ -147,7 +147,7 @@ namespace alg
 		/**
 		*	清空节点
 		*/
-		void cleanNode(TreeNode* node)
+		void cleanNode(TreeNode* & node)
 		{
 			if (node == nullptr) return;
 			cleanNode(node->left);

@@ -4,7 +4,7 @@
 
 namespace render
 {
-	class BoxDrawProtocol;
+	class BoxProtocol;
 	class PrimitiveNode;
 	/**
 	*	ºÐ×Ó»æÖÆ

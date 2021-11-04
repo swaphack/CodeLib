@@ -129,8 +129,6 @@ namespace ui
 		virtual void initItems();
 		// 初始化管理项
 		virtual void initContent();
-		// 更新滑动空间draw状态
-		void updateScrollDrawState();
 	protected:
 		// 管理所有项的节点
 		CtrlLayout* _content = nullptr;

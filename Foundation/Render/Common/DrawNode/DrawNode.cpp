@@ -66,6 +66,9 @@ bool render::DrawNode::init()
 		this->updateMeshData();
 	});
 
+	onBlendChange();
+	onColorChange();
+
 	initBufferObject();
 
 	return true;

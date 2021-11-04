@@ -1,22 +1,22 @@
-#include "TestMathNode.h"
+#include "TestMath.h"
 #include "mathlib.h"
 
-TestMathNode::TestMathNode()
+TestMath::TestMath()
 {
 
 }
 
-TestMathNode::~TestMathNode()
+TestMath::~TestMath()
 {
 
 }
 
-void TestMathNode::initNodes()
+void TestMath::initNodes()
 {
 	testProject();
 }
 
-void TestMathNode::testMath()
+void TestMath::testMath()
 {
 	math::CartesianCoordinateSystem3D system;
 	system.loadIdentity();
@@ -26,7 +26,7 @@ void TestMathNode::testMath()
 	int a = 1;
 }
 
-void TestMathNode::testMatrix()
+void TestMath::testMatrix()
 {
 	float data2x2[4] = {
 		1, 2,
@@ -61,7 +61,7 @@ void TestMathNode::testMatrix()
 	PRINT("mul:\n%s\n", mul33.toString().c_str());
 }
 
-void TestMathNode::testProject()
+void TestMath::testProject()
 {
 	math::Vector3 center = math::Vector3(20, 10, 0);
 	math::Vector3 rotation = math::Vector3(45, 0, 0);

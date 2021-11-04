@@ -89,25 +89,25 @@ namespace alg
 		/**
 		*	Ìí¼Ó
 		*/
-		void add(const Key& id, const Element& item)
+		bool add(const Key& id, const Element& item)
 		{
 			if (_root == nullptr)
 			{
-				return;
+				return false;
 			}
 
-			addNode(_root, id, item);
+			return addNode(_root, id, item);
 		}
 		/**
 		*	ÒÆ³ý
 		*/
 		void remove(const Key& id)
 		{
-			if (_root == nullptr) return;
-			if (removeNode(_root, id))
+			if (_root == nullptr)
 			{
-				_root = nullptr;
+				return;
 			}
+			removeNode(_root, id);
 		}
 		/**
 		*	²éÕÒ

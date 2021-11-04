@@ -1,6 +1,6 @@
 #include "BoxDraw.h"
 #include "2d/Primitive/PrimitiveNode.h"
-#include "BoxDrawProtocol.h"
+#include "BoxProtocol.h"
 #include "Common/Scene/Cameras.h"
 #include "BoxSpace.h"
 
@@ -82,6 +82,7 @@ void render::BoxDraw::refreshBoxes()
 
 		std::vector<math::TrianglePoints> vecPoints;
 		item.second->getBoxPoints(vecPoints);
+		if (vecPoints.size() == 0) continue;
 		for (auto point : vecPoints)
 		{
 			phy::Color4F color;

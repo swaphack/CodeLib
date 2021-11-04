@@ -4,6 +4,7 @@
 #include "Common/Tool/VertexTool.h"
 #include "Common/Fragment/import.h"
 #include "Common/Scene/Cameras.h"
+#include "Box/BoxSpace.h"
 
 render::MultiMeshModel::MultiMeshModel()
 {
@@ -22,7 +23,7 @@ bool render::MultiMeshModel::init()
 		return false;
 	}
 
-	Box3DDrawProtocol::initBox3D(this);
+	Box3DProtocol::initBox3D(this);
 
 	FragmentDepthTest* pDepthTest = this->getFragOperator()->getHandle<FragmentDepthTest>();
 	if (pDepthTest)
@@ -41,6 +42,6 @@ void render::MultiMeshModel::afterDrawNode()
 
 bool render::MultiMeshModel::containPoint(const math::Vector2& touchPoint)
 {
-	return Box3DDrawProtocol::containsTouchPoint(touchPoint);
+	return G_BOXSPACE->containsTouchPoint3D(this, touchPoint);
 }
 

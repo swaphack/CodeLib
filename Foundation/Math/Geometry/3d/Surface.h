@@ -44,7 +44,7 @@ namespace math
 		*/
 		bool contains(const Vector3& point) const
 		{
-			if (!isCoplanar(*this, point))
+			if (!GeometryUtiity::isCoplanarSurface(*this, point))
 			{ // ²»¹²Ãæ
 				return false;
 			}
@@ -57,7 +57,7 @@ namespace math
 			Polygon pyoz(GeometryUtiity::projectSurfaceOnYOZ(*this));
 			Polygon pxoz(GeometryUtiity::projectSurfaceOnXOZ(*this));
 
-			if (pxoy.contains(pxy) || pyoz.contains(pyz) || pyoz.contains(pxz))
+			if (pxoy.contains(pxy) && pyoz.contains(pyz) && pyoz.contains(pxz))
 			{
 				return true;
 			}

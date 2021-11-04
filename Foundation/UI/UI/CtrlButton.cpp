@@ -9,6 +9,8 @@ ui::CtrlButton::CtrlButton()
 	_btnImage = CREATE_NODE(CtrlImage);
 	_btnImage->setName("button_image");
 	//_btnImage->setVisible(false);
+	_btnImage->getLayoutItem()->setMarginState(true, true, true, true);
+	_btnImage->getLayoutItem()->setMargin(0, 0, 0, 0);
 	this->addProtectedWidget(_btnImage);
 
 	_btnText = CREATE_NODE(CtrlText);
@@ -20,10 +22,12 @@ ui::CtrlButton::CtrlButton()
 	this->addProtectedWidget(_btnText);
 
 	_btnTextAtlas = CREATE_NODE(CtrlTextAtlas);
+	_btnTextAtlas->setBoxVisible(true);
 	_btnTextAtlas->setAnchorPoint(0.5f, 0.5f);
-	_btnTextAtlas->setName("button_text");
+	_btnTextAtlas->setName("button_text_atlas");
 	_btnTextAtlas->setTextHorizontalAlignment(sys::HorizontalAlignment::CENTER);
 	_btnTextAtlas->setTextVerticalAlignment(sys::VerticalAlignment::MIDDLE);
+	//_btnTextAtlas->setVisible(false);
 	this->addProtectedWidget(_btnTextAtlas);
 
 	this->setTouchEnabled(true);
@@ -51,8 +55,11 @@ bool ui::CtrlButton::init()
 		this->setScale(1.0f);
 	});
 
+	this->addNotifyListener(render::NodeNotifyType::TEXT, [this]() {
+		this->onButtonTextChange();
+	});
 	this->addNotifyListener(render::NodeNotifyType::BODY, [this]() {
-		this->onButtonBodyChange();
+		this->onButtonTextChange();
 	});
 	return true;
 }
@@ -158,24 +165,28 @@ const phy::Color3B& ui::CtrlButton::getTextColor() const
 
 void ui::CtrlButton::setTextHorizontalAlignment(sys::HorizontalAlignment alignment)
 {
-	_btnText->setTextHorizontalAlignment(alignment);
-	_btnTextAtlas->setTextHorizontalAlignment(alignment);
+	if (_textHoriztontalAlignment == alignment) return;
+	_textHoriztontalAlignment = alignment;
+	this->notify(render::NodeNotifyType::TEXT);
+
 }
 
 sys::HorizontalAlignment ui::CtrlButton::getTextHorizontalAlignment() const
 {
-	return _btnText->getTextHorizontalAlignment();
+	return _textHoriztontalAlignment;
 }
 
 void ui::CtrlButton::setTextVerticalAlignment(sys::VerticalAlignment alignment)
 {
-	_btnText->setTextVerticalAlignment(alignment);
-	_btnText->setTextVerticalAlignment(alignment);
+	if (_textVerticalAlignment == alignment) return;
+	_textVerticalAlignment = alignment;
+
+	this->notify(render::NodeNotifyType::TEXT);
 }
 
 sys::VerticalAlignment ui::CtrlButton::getTextVerticalAlignment() const
 {
-	return _btnText->getTextVerticalAlignment();
+	return _textVerticalAlignment;
 }
 
 void ui::CtrlButton::setEnableState(bool bEnabled)
@@ -246,49 +257,60 @@ float ui::CtrlButton::getTouchScale() const
 	return _touchScale; 
 }
 
-void ui::CtrlButton::onButtonBodyChange()
+void ui::CtrlButton::onButtonTextChange()
 {
-	_btnTextAtlas->setVolume(this->getVolume());
-	_btnTextAtlas->setDimensions(this->getSize());
-	_btnTextAtlas->setAnchorPoint(0, 0);
-	_btnTextAtlas->setPosition(0, 0);
+	sys::CSSMargin margin;
+	ui::MarginState mariginState;
+
+	_btnText->setTextHorizontalAlignment(_textHoriztontalAlignment);
+	_btnText->setTextVerticalAlignment(_textVerticalAlignment);
+
+	_btnTextAtlas->setTextHorizontalAlignment(_textHoriztontalAlignment);
+	_btnTextAtlas->setTextVerticalAlignment(_textVerticalAlignment);
+
+
+	if (_textVerticalAlignment == sys::VerticalAlignment::BOTTOM)
+	{
+		margin.setBottom(sys::NumberType::Fixed, 0);
+		mariginState.Bottom = true;
+	}
+	else if (_textVerticalAlignment == sys::VerticalAlignment::MIDDLE)
+	{
+		_btnText->setAnchorPointX(0.5f);
+		_btnText->setPositionX(this->getWidth() * 0.5f);
+
+		_btnTextAtlas->setAnchorPointX(0.5f);
+		_btnTextAtlas->setPositionX(this->getWidth() * 0.5f);
+	}
+	else if (_textVerticalAlignment == sys::VerticalAlignment::TOP)
+	{
+		margin.setTop(sys::NumberType::Fixed, 0);
+		mariginState.Top = true;
+	}
+
+	if (_textHoriztontalAlignment == sys::HorizontalAlignment::LEFT)
+	{
+		margin.setLeft(sys::NumberType::Fixed, 0);
+		mariginState.Left = true;
+	}
+	else if (_textHoriztontalAlignment == sys::HorizontalAlignment::CENTER)
+	{
+		_btnText->setAnchorPointY(0.5f);
+		_btnText->setPositionY(this->getHeight() * 0.5f);
+
+		_btnTextAtlas->setAnchorPointY(0.5f);
+		_btnTextAtlas->setPositionY(this->getHeight() * 0.5f);
+	}
+	else if (_textHoriztontalAlignment == sys::HorizontalAlignment::RIGHT)
+	{
+		margin.setRight(sys::NumberType::Fixed, 0);
+		mariginState.Right = true;
+	}
+
+	_btnText->getLayoutItem()->setMarginState(mariginState);
+	_btnText->getLayoutItem()->setMargin(margin);
+
+	_btnTextAtlas->getLayoutItem()->setMarginState(mariginState);
+	_btnTextAtlas->getLayoutItem()->setMargin(margin);
+	_btnTextAtlas->setPosition(-0.5f * getVolume());
 }
-
-/*
-void ui::CtrlTextAtlas::getOrgin(const math::Size& size, math::Vector3& anchor, math::Vector3& position)
-{
-	math::Volume volume = math::Volume(size.getWidth(), size.getHeight());
-
-	if (_textDefine.verticalAlignment == sys::VerticalAlignment::BOTTOM)
-	{
-		position.setY(0);
-		position.setX(-_volume.getHeight() * 0.5f);
-	}
-	else if (_textDefine.verticalAlignment == sys::VerticalAlignment::MIDDLE)
-	{
-		anchor.setY(0.5f);
-		position.setY(-_volume.getHeight() * 0.5f);
-	}
-	else if (_textDefine.verticalAlignment == sys::VerticalAlignment::TOP)
-	{
-		anchor.setY(1.0f);
-		//position.setY(_volume.getHeight());
-	}
-
-	if (_textDefine.horizontalAlignment == sys::HorizontalAlignment::LEFT)
-	{
-		anchor.setX(0.0f);
-		position.setX(-_volume.getWidth() * 0.5f);
-	}
-	else if (_textDefine.horizontalAlignment == sys::HorizontalAlignment::CENTER)
-	{
-		anchor.setX(0.5f);
-		position.setX(-volume.getWidth() * 0.5f);
-	}
-	else if (_textDefine.horizontalAlignment == sys::HorizontalAlignment::RIGHT)
-	{
-		anchor.setX(1.0f);
-		//position.setX(_volume.getWidth() * 1.0f);
-	}
-}
-*/

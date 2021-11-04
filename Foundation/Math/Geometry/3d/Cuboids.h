@@ -12,6 +12,7 @@ namespace math
 	{
 	public:
 		Cuboids();
+		Cuboids(float x, float y, float z, float width, float height, float depth);
 		Cuboids(const Vector3& origin, const Volume& size);
 		Cuboids(const Cuboids& cuboids);
 		virtual ~Cuboids();
@@ -22,15 +23,22 @@ namespace math
 		float getWidth() const;
 		float getHeight() const;
 		float getDepth() const;
+		float getHalfWidth() const;
+		float getHalfHeight() const;
+		float getHalfDepth() const;
 		float getMinX() const;
+		float getMiddleX() const;
 		float getMaxX() const;
 		float getMinY() const;
+		float getMiddleY() const;
 		float getMaxY() const;
 		float getMinZ() const;
+		float getMiddleZ() const;
 		float getMaxZ() const;
 
+
 		const Vector3& getOrigin() const;
-		const Volume& getSize() const;
+		const Volume& getVolume() const;
 	public:
 		/**
 		*	设置参数
@@ -45,9 +53,9 @@ namespace math
 		*/
 		bool contains(const Vector3& point) const;
 		/**
-		*	相交
+		*	部分重叠
 		*/
-		bool intersect(const Cuboids& cuboids) const;
+		bool isOverlap(const Cuboids& cuboids) const;
 	public:
 		Cuboids& operator=(const Cuboids& cuboids);
 	private:

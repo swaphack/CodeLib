@@ -28,6 +28,7 @@ namespace tool
 		*	获取高度
 		*/
 		int getHeight() const;
+	public:
 		/**
 		*	y轴反调
 		*/
@@ -38,6 +39,15 @@ namespace tool
 		bool isReverseY() const;
 	public:
 		/**
+		*	自动旋转
+		*/
+		void setAutoRotate(bool rotate);
+		/**
+		*	自动旋转
+		*/
+		bool isAutoRotate() const;
+	public:
+		/**
 		*	保存成rgba 32位png图片
 		*/
 		void saveImage(const std::string& imgFilePath, uint8_t* data, sys::ImageDataFormat format = sys::ImageDataFormat::RGBA);
@@ -46,5 +56,7 @@ namespace tool
 		math::IntSize _size;
 		// y轴是否相反
 		bool _reverseY = false;
+		// 自动旋转
+		bool _autoRotate = false;
 	};
 }

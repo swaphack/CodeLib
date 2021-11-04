@@ -123,6 +123,7 @@
     <ClInclude Include="Space\import.h" />
     <ClInclude Include="Space\Index\BinaryTree.h" />
     <ClInclude Include="Space\Index\import.h" />
+    <ClInclude Include="Space\Index\OcTree.h" />
     <ClInclude Include="Space\Index\QuadTree.h" />
     <ClInclude Include="Struct\import.h" />
     <ClInclude Include="Struct\OneToOneDoubleRelationship.h" />

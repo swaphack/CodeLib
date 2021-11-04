@@ -36,15 +36,24 @@ namespace tool
 		*	移除所有图片
 		*/
 		void removeAllDirectories();
-
 	public:
-		// 纹理集
+		/**
+		*	设置图集信息
+		*/
+		void setAtlas(const std::string& imgFilePath, const std::string& atlasFilePath);
+	public:
+		/**
+		*	图集
+		*/
 		const sys::ImageTextureAtlas& getTextureAtlas() const;
-
+		/**
+		*	图集
+		*/
+		sys::ImageTextureAtlas& getTextureAtlas();
 		/**
 		*	加载图集配置
 		*/
-		void loadTextureAtlas(const std::string& atlasFilePath);
+		void loadTextureAtlas(const std::string& imageFilePath, const std::string& atlasFilePath);
 		/**
 		*	生成图集配置
 		*/

@@ -16,16 +16,26 @@ namespace tool
 		~TextAtlasPacker();
 	public:
 		/**
-		*	加载图片信息
+		*	设置文本信息
 		*/
 		void setText(const std::string& content, const std::string& fontFilePath, int fontSize);
+		/**
+		*	设置图集信息
+		*/
+		void setAtlas(const std::string& imgFilePath, const std::string& atlasFilePath);
 	public:
-		// 纹理集
+		/**
+		*	图集
+		*/
 		const sys::FontTextureAtlas& getTextureAtlas() const;
+		/**
+		*	图集
+		*/ 
+		sys::FontTextureAtlas& getTextureAtlas();
 		/**
 		*	加载图集配置
 		*/
-		void loadTextureAtlas(const std::string& atlasFilePath);
+		void loadTextureAtlas(const std::string& imageFilePath, const std::string& atlasFilePath);
 		/**
 		*	生成图集配置
 		*/

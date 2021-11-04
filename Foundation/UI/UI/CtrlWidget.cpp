@@ -26,7 +26,7 @@ bool ui::CtrlWidget::init()
 		return false;
 	}
 
-	Box2DDrawProtocol::initBox2D(this);
+	Box2DProtocol::initBox2D(this);
 
 	// 添加属性改变监听
 	addNotifyListener(NodeNotifyType::SPACE, [this]() {
@@ -65,7 +65,7 @@ void ui::CtrlWidget::setColorShaderProgram(render::ShaderProgram* shaderProgram)
 
 bool ui::CtrlWidget::containPoint(const math::Vector2& touchPoint)
 {
-	return Box2DDrawProtocol::containsTouchPoint(touchPoint);
+	return G_BOXSPACE->containsTouchPoint2D(this, touchPoint);
 }
 
 void ui::CtrlWidget::beforeDrawNode()
@@ -321,24 +321,6 @@ void ui::CtrlWidget::onParentBodyChange()
 void ui::CtrlWidget::onParentPositionChange()
 {
 	this->notifyToAll(render::NodeNotifyType::Draw);
-}
-
-void ui::CtrlWidget::updateDrawState()
-{
-	this->setSkipDraw(!this->isInCanvas());
-}
-
-void ui::CtrlWidget::updateAllDrawState()
-{
-	updateDrawState();
-	for (auto& child : _children)
-	{
-		auto pWidget = child->as<CtrlWidget>();
-		if (pWidget)
-		{
-			pWidget->updateAllDrawState();
-		}
-	}
 }
 
 void ui::CtrlWidget::batchRender()

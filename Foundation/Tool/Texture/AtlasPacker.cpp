@@ -34,6 +34,16 @@ bool tool::AtlasPacker::isReverseY() const
 	return _reverseY;
 }
 
+void tool::AtlasPacker::setAutoRotate(bool rotate)
+{
+	_autoRotate = rotate;
+}
+
+bool tool::AtlasPacker::isAutoRotate() const
+{
+	return _autoRotate;
+}
+
 void tool::AtlasPacker::saveImage(const std::string& imgFilePath, uint8_t* data, sys::ImageDataFormat format)
 {
 	if (imgFilePath.empty() || data == nullptr

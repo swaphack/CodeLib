@@ -20,7 +20,3 @@
 #include "TestLightingNode.h"
 #include "TestXFBNode.h"
 #include "TestMeshNode.h"
-
-#include "TestMathNode.h"
-#include "TestAlgNode.h"
-#include "TestTool.h"

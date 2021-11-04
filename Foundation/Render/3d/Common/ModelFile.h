@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Common/DrawNode/MultiDrawNode.h"
-#include "Box/BoxDrawProtocol.h"
+#include "Box/BoxProtocol.h"
 
 namespace render
 {
@@ -11,7 +11,7 @@ namespace render
 	// 从配置加载模型
 	class ModelFile :
 		public MultiDrawNode,
-		public Box3DDrawProtocol
+		public Box3DProtocol
 	{	
 	public:
 		ModelFile();

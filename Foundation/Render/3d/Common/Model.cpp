@@ -1,5 +1,5 @@
 #include "Model.h"
-
+#include "Box/BoxSpace.h"
 using namespace render;
 
 
@@ -19,13 +19,13 @@ bool render::Model::init()
 		return false;
 	}
 
-	Box3DDrawProtocol::initBox3D(this);
+	Box3DProtocol::initBox3D(this);
 
 	return true;
 }
 
 bool render::Model::containPoint(const math::Vector2& touchPoint)
 {
-	return Box3DDrawProtocol::containsTouchPoint(touchPoint);
+	return G_BOXSPACE->containsTouchPoint3D(this, touchPoint);
 }
 

@@ -8,6 +8,12 @@ Cuboids::Cuboids()
 
 }
 
+Cuboids::Cuboids(float x, float y, float z, float width, float height, float depth)
+	:Cuboids(math::Vector3(x, y, z), math::Volume(width, height, depth))
+{
+
+}
+
 Cuboids::Cuboids(const Vector3& origin, const Volume& size)
 {
 	this->_origin = origin;
@@ -55,9 +61,29 @@ float Cuboids::getDepth() const
 	return this->_size.getDepth();
 }
 
+float math::Cuboids::getHalfWidth() const
+{
+	return 0.5f * getWidth();
+}
+
+float math::Cuboids::getHalfHeight() const
+{
+	return 0.5f * getHeight();
+}
+
+float math::Cuboids::getHalfDepth() const
+{
+	return 0.5f * getDepth();
+}
+
 float Cuboids::getMinX() const
 {
 	return getX();
+}
+
+float math::Cuboids::getMiddleX() const
+{
+	return getX() + getHalfWidth();
 }
 
 float Cuboids::getMaxX() const
@@ -70,6 +96,11 @@ float Cuboids::getMinY() const
 	return getY();
 }
 
+float math::Cuboids::getMiddleY() const
+{
+	return getY() + getHalfHeight();
+}
+
 float Cuboids::getMaxY() const
 {
 	return this->getMinY() + this->getHeight();
@@ -78,6 +109,11 @@ float Cuboids::getMaxY() const
 float Cuboids::getMinZ() const
 {
 	return getZ();
+}
+
+float math::Cuboids::getMiddleZ() const
+{
+	return getZ() + getHalfDepth();
 }
 
 float Cuboids::getMaxZ() const
@@ -90,7 +126,7 @@ const Vector3& Cuboids::getOrigin() const
 	return _origin;
 }
 
-const Volume& Cuboids::getSize() const
+const Volume& Cuboids::getVolume() const
 {
 	return _size;
 }
@@ -113,7 +149,7 @@ bool Cuboids::contains(const Vector3& point) const
 	return contains(point.getX(), point.getY(), point.getZ());
 }
 
-bool Cuboids::intersect(const Cuboids& cuboids) const
+bool Cuboids::isOverlap(const Cuboids& cuboids) const
 {
 	Vector3 points[8];
 

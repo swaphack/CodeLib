@@ -1,4 +1,4 @@
-#include "BoxDrawProtocol.h"
+#include "BoxProtocol.h"
 #include "Graphic/import.h"
 #include "Common/Scene/DebugDraw.h"
 #include "Common/Scene/Camera.h"
@@ -9,95 +9,99 @@
 #include "Common/Tool/Tool.h"
 #include "BoxSpace.h"
 
-render::BoxDrawProtocol::BoxDrawProtocol()
+render::BoxProtocol::BoxProtocol()
 {
 }
 
-render::BoxDrawProtocol::~BoxDrawProtocol()
+render::BoxProtocol::~BoxProtocol()
 {
 	G_BOXSPACE->removeBox(this);
 }
 
-void render::BoxDrawProtocol::setBoxID(int id)
+void render::BoxProtocol::setBoxID(int id)
 {
 	_boxID = id;
 }
 
-int render::BoxDrawProtocol::getBoxID() const
+int render::BoxProtocol::getBoxID() const
 {
 	return _boxID;
 }
 
-void render::BoxDrawProtocol::setBoxVisible(bool bVisible)
+void render::BoxProtocol::setBoxVisible(bool bVisible)
 {
 	if (_bBoxVisible == bVisible) return;
 
 	_bBoxVisible = bVisible;
-	G_BOXSPACE->updateBox(this);
+	if (_boxNode)
+	{
+		_boxNode->notify(render::NodeNotifyType::Draw);
+	}
+	//G_BOXSPACE->updateBox(this);
 }
 
-bool render::BoxDrawProtocol::isBoxVisible() const
+bool render::BoxProtocol::isBoxVisible() const
 {
 	return _bBoxVisible;
 }
 
-void render::BoxDrawProtocol::setBoxColor(const phy::Color4B& color)
+void render::BoxProtocol::setBoxColor(const phy::Color4B& color)
 {
 	_boxColor = color;
 }
 
-const phy::Color4B& render::BoxDrawProtocol::getBoxColor() const
+const phy::Color4B& render::BoxProtocol::getBoxColor() const
 {
 	return _boxColor;
 }
 
-float render::BoxDrawProtocol::getBoxLineWidth() const
+float render::BoxProtocol::getBoxLineWidth() const
 {
 	return _boxLineWidth;
 }
 
-void render::BoxDrawProtocol::setBoxLineWidth(float width)
+void render::BoxProtocol::setBoxLineWidth(float width)
 {
 	_boxLineWidth = width;
 }
 
-render::BoxDrawType render::BoxDrawProtocol::getBoxDrawType() const
+render::BoxDrawType render::BoxProtocol::getBoxDrawType() const
 {
 	return _boxDrawType;
 }
 
-render::Node* render::BoxDrawProtocol::getBoxNode() const
+render::Node* render::BoxProtocol::getBoxNode() const
 {
 	return _boxNode;
 }
 
-bool render::BoxDrawProtocol::containsTouchPoint(const math::Vector2& touchPoint)
-{
-	return false;
-}
-
-void render::BoxDrawProtocol::getBoxPoints(std::vector<math::TrianglePoints>& vecPoints) const
+void render::BoxProtocol::getBoxPoints(std::vector<math::TrianglePoints>& vecPoints) const
 {
 	vecPoints = _boxPoints;
 }
 
-void render::BoxDrawProtocol::setBoxNode(render::Node* node)
+const std::vector<math::TrianglePoints>& render::BoxProtocol::getBoxPoints() const
+{
+	return _boxPoints;
+}
+
+void render::BoxProtocol::setBoxNode(render::Node* node)
 {
 	_boxNode = node;
 }
 
 /////////////////////////////////////////////////////////////////////////
-render::Box2DDrawProtocol::Box2DDrawProtocol()
+render::Box2DProtocol::Box2DProtocol()
 {
 	_boxDrawType = BoxDrawType::TWO;
 }
 
-render::Box2DDrawProtocol::~Box2DDrawProtocol()
+render::Box2DProtocol::~Box2DProtocol()
 {
 
 }
 
-void render::Box2DDrawProtocol::initBox2D(render::Node* node)
+void render::Box2DProtocol::initBox2D(render::Node* node)
 {
 	if (node == nullptr)
 	{
@@ -118,47 +122,41 @@ void render::Box2DDrawProtocol::initBox2D(render::Node* node)
 	G_BOXSPACE->addBox(this);
 }
 
-void render::Box2DDrawProtocol::setBoxVertices(const render::RectVertex& rectVertex)
+void render::Box2DProtocol::setBoxVertices(const render::RectVertex& rectVertex)
 {
 	_boxPoints.clear();
 	rectVertex.toTriangles(_boxPoints);
+
+	_boxPolygon = rectVertex;
+	_boxRect = _boxPolygon.getBoundingBox();
 }
 
-const render::RectVertex& render::Box2DDrawProtocol::getLocalRectVertex() const
+const render::RectVertex& render::Box2DProtocol::getLocalRectVertex() const
 {
 	return _localRectVertex;
 }
 
-const render::RectVertex& render::Box2DDrawProtocol::getWorldRectVertex() const
+const render::RectVertex& render::Box2DProtocol::getWorldRectVertex() const
 {
 	return _worldRectVertex;
 }
 
-const math::Polygon& render::Box2DDrawProtocol::getBoxPolygon() const
+const math::Polygon& render::Box2DProtocol::getBoxPolygon() const
 {
 	return _boxPolygon;
 }
 
-const math::Rect& render::Box2DDrawProtocol::getBoxRect() const
+const math::Rect& render::Box2DProtocol::getBoxRect() const
 {
 	return _boxRect;
 }
 
-void render::Box2DDrawProtocol::setBoxRect(const math::Rect& rect)
+void render::Box2DProtocol::setBoxRect(const math::Rect& rect)
 {
 	_boxRect = rect;
 }
 
-bool render::Box2DDrawProtocol::containsTouchPoint(const math::Vector2& touchPoint)
-{
-	if (this->getBoxNode() == nullptr || this->getBoxNode()->getCamera() == nullptr)
-		return false;
-	auto pCamera = this->getBoxNode()->getCamera();
-	math::Vector3 localPointA = pCamera->convertScreenToLocalPoint(touchPoint);
-	return _boxRect.contains(localPointA);
-}
-
-bool render::Box2DDrawProtocol::isOverlap(const Box2DDrawProtocol* box2d)
+bool render::Box2DProtocol::isOverlap(const Box2DProtocol* box2d)
 {
 	if (box2d == nullptr)
 	{
@@ -178,17 +176,7 @@ bool render::Box2DDrawProtocol::isOverlap(const Box2DDrawProtocol* box2d)
 	return this->getBoxPolygon().intersects(box2d->getBoxPolygon());
 }
 
-bool render::Box2DDrawProtocol::isInCanvas()
-{
-	bool include = _boxRect.getMinX() <= Tool::getViewWidth()
-		&& _boxRect.getMaxX() >= 0
-		&& _boxRect.getMinY() <= Tool::getViewWidth()
-		&& _boxRect.getMaxY() >= 0;
-
-	return include;
-}
-
-void render::Box2DDrawProtocol::onBox2DCubeChange()
+void render::Box2DProtocol::onBox2DCubeChange()
 {
 	if (this->getBoxNode() == nullptr)
 	{
@@ -202,7 +190,7 @@ void render::Box2DDrawProtocol::onBox2DCubeChange()
 	onBox2DWorldCubeChange();
 }
 
-void render::Box2DDrawProtocol::onBox2DWorldCubeChange()
+void render::Box2DProtocol::onBox2DWorldCubeChange()
 {
 	if (this->getBoxNode() == nullptr)
 	{
@@ -216,27 +204,22 @@ void render::Box2DDrawProtocol::onBox2DWorldCubeChange()
 	_worldRectVertex.setRightTopPosition(pBoxNode->convertLocalToWorldPoint(_localRectVertex.getRightTopPosition()));
 	_worldRectVertex.setLeftTopPosition(pBoxNode->convertLocalToWorldPoint(_localRectVertex.getLeftTopPosition()));
 
-	_boxPolygon = _worldRectVertex;
-	_boxRect = _boxPolygon.getBoundingBox();
 	setBoxVertices(_worldRectVertex);
-
-	_bInCanvas = isInCanvas();
-	//this->getBoxNode()->setSkipDraw(!_bInCanvas);
 
 	G_BOXSPACE->updateBox(this);
 }
 
 /////////////////////////////////////////////////////////////////////////
-render::Box3DDrawProtocol::Box3DDrawProtocol()
+render::Box3DProtocol::Box3DProtocol()
 {
 	_boxDrawType = BoxDrawType::THREE;
 }
 
-render::Box3DDrawProtocol::~Box3DDrawProtocol()
+render::Box3DProtocol::~Box3DProtocol()
 {
 
 }
-void render::Box3DDrawProtocol::initBox3D(render::Node* node)
+void render::Box3DProtocol::initBox3D(render::Node* node)
 {
 	if (node == nullptr)
 	{
@@ -255,38 +238,36 @@ void render::Box3DDrawProtocol::initBox3D(render::Node* node)
 
 	G_BOXSPACE->addBox(this);
 }
-void render::Box3DDrawProtocol::setBoxVertices(const render::CubeVertex& cubeVertex)
+void render::Box3DProtocol::setBoxVertices(const render::CubeVertex& cubeVertex)
 {
 	_boxPoints.clear();
 	cubeVertex.toTriangles(_boxPoints);
-}
-const render::CubeVertex& render::Box3DDrawProtocol::getLocalCubeVertex() const
+
+	//_boxPolygon = rectVertex;
+	//_boxCuboids = _boxPolygon.getBoundingBox();
+}	
+
+const render::CubeVertex& render::Box3DProtocol::getLocalCubeVertex() const
 {
 	return _localCubeVertex;
 }
-bool render::Box3DDrawProtocol::containsTouchPoint(const math::Vector2& touchPoint)
+
+const render::CubeVertex& render::Box3DProtocol::getWorldCubeVertex() const
 {
-	if (this->getBoxNode() == nullptr || this->getBoxNode()->getCamera() == nullptr)
-		return false;
-	auto pCamera = this->getBoxNode()->getCamera();
-	math::Ray cameraRay = pCamera->convertScreenPointToWorldRay(touchPoint);
-	pCamera->getDebugDraw()->drawW2LLine(cameraRay.getSrcPoint(), cameraRay.getDestPoint(10000), phy::Color4F(1.0f,0,0,1.0f));
-
-	std::vector<math::TrianglePoints> trianglePoints;
-	_worldCubeVertex.toTriangles(trianglePoints);
-
-	math::Vector3 point;
-	for (auto item : trianglePoints)
-	{
-		if (math::Physics::raycast(cameraRay, item, point))
-		{
-			return true;
-		}
-	}
-	return false;
+	return _worldCubeVertex;
 }
 
-void render::Box3DDrawProtocol::onBox3DCubeChange()
+const math::Cuboids& render::Box3DProtocol::getBoxCuboids() const
+{
+	return _boxCuboids;
+}
+
+void render::Box3DProtocol::setBoxCuboids(const math::Cuboids& cuboids)
+{
+	_boxCuboids = cuboids;
+}
+
+void render::Box3DProtocol::onBox3DCubeChange()
 {
 	if (this->getBoxNode() == nullptr)
 	{
@@ -299,7 +280,7 @@ void render::Box3DDrawProtocol::onBox3DCubeChange()
 	onBox3DWorldCubeChange();
 }
 
-void render::Box3DDrawProtocol::onBox3DWorldCubeChange()
+void render::Box3DProtocol::onBox3DWorldCubeChange()
 {
 	if (this->getBoxNode() == nullptr)
 	{

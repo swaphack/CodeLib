@@ -1,9 +1,9 @@
-<root fontSize="22" lineHeight="26">
+<root fontSize="22" imagePath="text22.png" lineHeight="26">
     <item>
         <name>100</name>
         <width>9</width>
         <height>16</height>
-        <x>83</x>
+        <x>92</x>
         <y>0</y>
         <advX>11</advX>
         <advY>22</advY>
@@ -14,7 +14,7 @@
         <name>101</name>
         <width>9</width>
         <height>12</height>
-        <x>70</x>
+        <x>88</x>
         <y>20</y>
         <advX>11</advX>
         <advY>22</advY>
@@ -25,8 +25,8 @@
         <name>102</name>
         <width>9</width>
         <height>15</height>
-        <x>492</x>
-        <y>0</y>
+        <x>0</x>
+        <y>20</y>
         <advX>11</advX>
         <advY>22</advY>
         <deltaX>1</deltaX>
@@ -36,8 +36,8 @@
         <name>103</name>
         <width>9</width>
         <height>15</height>
-        <x>501</x>
-        <y>0</y>
+        <x>9</x>
+        <y>20</y>
         <advX>11</advX>
         <advY>22</advY>
         <deltaX>1</deltaX>
@@ -47,7 +47,7 @@
         <name>104</name>
         <width>11</width>
         <height>16</height>
-        <x>122</x>
+        <x>127</x>
         <y>0</y>
         <advX>11</advX>
         <advY>22</advY>
@@ -58,7 +58,7 @@
         <name>105</name>
         <width>6</width>
         <height>16</height>
-        <x>133</x>
+        <x>138</x>
         <y>0</y>
         <advX>11</advX>
         <advY>22</advY>
@@ -69,7 +69,7 @@
         <name>106</name>
         <width>7</width>
         <height>19</height>
-        <x>55</x>
+        <x>66</x>
         <y>0</y>
         <advX>11</advX>
         <advY>22</advY>
@@ -80,7 +80,7 @@
         <name>107</name>
         <width>9</width>
         <height>16</height>
-        <x>139</x>
+        <x>144</x>
         <y>0</y>
         <advX>11</advX>
         <advY>22</advY>
@@ -91,7 +91,7 @@
         <name>108</name>
         <width>6</width>
         <height>16</height>
-        <x>148</x>
+        <x>153</x>
         <y>0</y>
         <advX>11</advX>
         <advY>22</advY>
@@ -102,7 +102,7 @@
         <name>109</name>
         <width>11</width>
         <height>11</height>
-        <x>161</x>
+        <x>164</x>
         <y>20</y>
         <advX>11</advX>
         <advY>22</advY>
@@ -113,7 +113,7 @@
         <name>110</name>
         <width>11</width>
         <height>11</height>
-        <x>172</x>
+        <x>175</x>
         <y>20</y>
         <advX>11</advX>
         <advY>22</advY>
@@ -124,7 +124,7 @@
         <name>111</name>
         <width>9</width>
         <height>12</height>
-        <x>86</x>
+        <x>108</x>
         <y>20</y>
         <advX>11</advX>
         <advY>22</advY>
@@ -135,7 +135,7 @@
         <name>112</name>
         <width>9</width>
         <height>14</height>
-        <x>45</x>
+        <x>54</x>
         <y>20</y>
         <advX>11</advX>
         <advY>22</advY>
@@ -146,7 +146,7 @@
         <name>113</name>
         <width>10</width>
         <height>15</height>
-        <x>0</x>
+        <x>18</x>
         <y>20</y>
         <advX>11</advX>
         <advY>22</advY>
@@ -157,7 +157,7 @@
         <name>114</name>
         <width>9</width>
         <height>11</height>
-        <x>183</x>
+        <x>186</x>
         <y>20</y>
         <advX>11</advX>
         <advY>22</advY>
@@ -168,7 +168,7 @@
         <name>115</name>
         <width>7</width>
         <height>12</height>
-        <x>79</x>
+        <x>101</x>
         <y>20</y>
         <advX>11</advX>
         <advY>22</advY>
@@ -179,7 +179,7 @@
         <name>116</name>
         <width>7</width>
         <height>14</height>
-        <x>54</x>
+        <x>72</x>
         <y>20</y>
         <advX>11</advX>
         <advY>22</advY>
@@ -190,7 +190,7 @@
         <name>117</name>
         <width>11</width>
         <height>11</height>
-        <x>203</x>
+        <x>204</x>
         <y>20</y>
         <advX>11</advX>
         <advY>22</advY>
@@ -201,7 +201,7 @@
         <name>118</name>
         <width>9</width>
         <height>11</height>
-        <x>99</x>
+        <x>117</x>
         <y>20</y>
         <advX>11</advX>
         <advY>22</advY>
@@ -212,7 +212,7 @@
         <name>119</name>
         <width>11</width>
         <height>11</height>
-        <x>108</x>
+        <x>126</x>
         <y>20</y>
         <advX>11</advX>
         <advY>22</advY>
@@ -223,7 +223,7 @@
         <name>120</name>
         <width>9</width>
         <height>11</height>
-        <x>119</x>
+        <x>137</x>
         <y>20</y>
         <advX>11</advX>
         <advY>22</advY>
@@ -234,7 +234,7 @@
         <name>121</name>
         <width>11</width>
         <height>14</height>
-        <x>34</x>
+        <x>43</x>
         <y>20</y>
         <advX>11</advX>
         <advY>22</advY>
@@ -245,7 +245,7 @@
         <name>122</name>
         <width>9</width>
         <height>11</height>
-        <x>128</x>
+        <x>146</x>
         <y>20</y>
         <advX>11</advX>
         <advY>22</advY>
@@ -256,7 +256,7 @@
         <name>123</name>
         <width>6</width>
         <height>20</height>
-        <x>0</x>
+        <x>46</x>
         <y>0</y>
         <advX>11</advX>
         <advY>22</advY>
@@ -267,7 +267,7 @@
         <name>124</name>
         <width>3</width>
         <height>20</height>
-        <x>6</x>
+        <x>52</x>
         <y>0</y>
         <advX>11</advX>
         <advY>22</advY>
@@ -278,7 +278,7 @@
         <name>125</name>
         <width>6</width>
         <height>20</height>
-        <x>9</x>
+        <x>0</x>
         <y>0</y>
         <advX>11</advX>
         <advY>22</advY>
@@ -287,11 +287,10 @@
     </item>
     <item>
         <name>126</name>
-        <width>5</width>
-        <height>10</height>
-        <x>214</x>
+        <width>10</width>
+        <height>5</height>
+        <x>261</x>
         <y>20</y>
-        <rotate>1</rotate>
         <advX>11</advX>
         <advY>22</advY>
         <deltaX>1</deltaX>
@@ -301,7 +300,7 @@
         <name>33</name>
         <width>3</width>
         <height>16</height>
-        <x>302</x>
+        <x>315</x>
         <y>0</y>
         <advX>11</advX>
         <advY>22</advY>
@@ -312,7 +311,7 @@
         <name>34</name>
         <width>5</width>
         <height>8</height>
-        <x>234</x>
+        <x>233</x>
         <y>20</y>
         <advX>11</advX>
         <advY>22</advY>
@@ -323,7 +322,7 @@
         <name>35</name>
         <width>9</width>
         <height>16</height>
-        <x>316</x>
+        <x>327</x>
         <y>0</y>
         <advX>11</advX>
         <advY>22</advY>
@@ -334,7 +333,7 @@
         <name>36</name>
         <width>11</width>
         <height>19</height>
-        <x>62</x>
+        <x>55</x>
         <y>0</y>
         <advX>11</advX>
         <advY>22</advY>
@@ -345,7 +344,7 @@
         <name>37</name>
         <width>10</width>
         <height>18</height>
-        <x>73</x>
+        <x>82</x>
         <y>0</y>
         <advX>11</advX>
         <advY>22</advY>
@@ -356,7 +355,7 @@
         <name>38</name>
         <width>9</width>
         <height>16</height>
-        <x>325</x>
+        <x>336</x>
         <y>0</y>
         <advX>11</advX>
         <advY>22</advY>
@@ -367,7 +366,7 @@
         <name>39</name>
         <width>5</width>
         <height>8</height>
-        <x>244</x>
+        <x>252</x>
         <y>20</y>
         <advX>11</advX>
         <advY>22</advY>
@@ -378,7 +377,7 @@
         <name>40</name>
         <width>6</width>
         <height>20</height>
-        <x>15</x>
+        <x>40</x>
         <y>0</y>
         <advX>11</advX>
         <advY>22</advY>
@@ -389,7 +388,7 @@
         <name>41</name>
         <width>6</width>
         <height>20</height>
-        <x>21</x>
+        <x>6</x>
         <y>0</y>
         <advX>11</advX>
         <advY>22</advY>
@@ -400,7 +399,7 @@
         <name>42</name>
         <width>7</width>
         <height>9</height>
-        <x>219</x>
+        <x>226</x>
         <y>20</y>
         <advX>11</advX>
         <advY>22</advY>
@@ -409,11 +408,10 @@
     </item>
     <item>
         <name>43</name>
-        <width>10</width>
-        <height>11</height>
-        <x>146</x>
+        <width>11</width>
+        <height>10</height>
+        <x>215</x>
         <y>20</y>
-        <rotate>1</rotate>
         <advX>11</advX>
         <advY>22</advY>
         <deltaX>0</deltaX>
@@ -423,7 +421,7 @@
         <name>44</name>
         <width>4</width>
         <height>7</height>
-        <x>249</x>
+        <x>257</x>
         <y>20</y>
         <advX>11</advX>
         <advY>22</advY>
@@ -432,11 +430,10 @@
     </item>
     <item>
         <name>45</name>
-        <width>2</width>
-        <height>11</height>
-        <x>192</x>
+        <width>11</width>
+        <height>2</height>
+        <x>286</x>
         <y>20</y>
-        <rotate>1</rotate>
         <advX>11</advX>
         <advY>22</advY>
         <deltaX>0</deltaX>
@@ -446,7 +443,7 @@
         <name>46</name>
         <width>4</width>
         <height>4</height>
-        <x>255</x>
+        <x>282</x>
         <y>20</y>
         <advX>11</advX>
         <advY>22</advY>
@@ -457,7 +454,7 @@
         <name>47</name>
         <width>9</width>
         <height>20</height>
-        <x>27</x>
+        <x>12</x>
         <y>0</y>
         <advX>11</advX>
         <advY>22</advY>
@@ -476,10 +473,21 @@
         <deltaY>3</deltaY>
     </item>
     <item>
+        <name>49</name>
+        <width>7</width>
+        <height>16</height>
+        <x>370</x>
+        <y>0</y>
+        <advX>11</advX>
+        <advY>22</advY>
+        <deltaX>2</deltaX>
+        <deltaY>3</deltaY>
+    </item>
+    <item>
         <name>50</name>
         <width>9</width>
         <height>16</height>
-        <x>370</x>
+        <x>377</x>
         <y>0</y>
         <advX>11</advX>
         <advY>22</advY>
@@ -490,7 +498,7 @@
         <name>51</name>
         <width>8</width>
         <height>16</height>
-        <x>379</x>
+        <x>386</x>
         <y>0</y>
         <advX>11</advX>
         <advY>22</advY>
@@ -501,7 +509,7 @@
         <name>52</name>
         <width>9</width>
         <height>16</height>
-        <x>387</x>
+        <x>394</x>
         <y>0</y>
         <advX>11</advX>
         <advY>22</advY>
@@ -512,7 +520,7 @@
         <name>53</name>
         <width>8</width>
         <height>16</height>
-        <x>170</x>
+        <x>354</x>
         <y>0</y>
         <advX>11</advX>
         <advY>22</advY>
@@ -523,7 +531,7 @@
         <name>54</name>
         <width>9</width>
         <height>16</height>
-        <x>407</x>
+        <x>414</x>
         <y>0</y>
         <advX>11</advX>
         <advY>22</advY>
@@ -534,7 +542,7 @@
         <name>55</name>
         <width>9</width>
         <height>16</height>
-        <x>416</x>
+        <x>423</x>
         <y>0</y>
         <advX>11</advX>
         <advY>22</advY>
@@ -545,7 +553,7 @@
         <name>56</name>
         <width>8</width>
         <height>16</height>
-        <x>425</x>
+        <x>432</x>
         <y>0</y>
         <advX>11</advX>
         <advY>22</advY>
@@ -556,7 +564,7 @@
         <name>57</name>
         <width>9</width>
         <height>16</height>
-        <x>433</x>
+        <x>440</x>
         <y>0</y>
         <advX>11</advX>
         <advY>22</advY>
@@ -567,7 +575,7 @@
         <name>58</name>
         <width>4</width>
         <height>12</height>
-        <x>95</x>
+        <x>97</x>
         <y>20</y>
         <advX>11</advX>
         <advY>22</advY>
@@ -578,7 +586,7 @@
         <name>59</name>
         <width>4</width>
         <height>15</height>
-        <x>21</x>
+        <x>39</x>
         <y>20</y>
         <advX>11</advX>
         <advY>22</advY>
@@ -589,7 +597,7 @@
         <name>60</name>
         <width>9</width>
         <height>14</height>
-        <x>25</x>
+        <x>79</x>
         <y>20</y>
         <advX>11</advX>
         <advY>22</advY>
@@ -598,11 +606,10 @@
     </item>
     <item>
         <name>61</name>
-        <width>5</width>
-        <height>11</height>
-        <x>156</x>
+        <width>11</width>
+        <height>5</height>
+        <x>271</x>
         <y>20</y>
-        <rotate>1</rotate>
         <advX>11</advX>
         <advY>22</advY>
         <deltaX>0</deltaX>
@@ -612,7 +619,7 @@
         <name>62</name>
         <width>9</width>
         <height>14</height>
-        <x>61</x>
+        <x>63</x>
         <y>20</y>
         <advX>11</advX>
         <advY>22</advY>
@@ -623,7 +630,7 @@
         <name>63</name>
         <width>7</width>
         <height>16</height>
-        <x>442</x>
+        <x>449</x>
         <y>0</y>
         <advX>11</advX>
         <advY>22</advY>
@@ -634,7 +641,7 @@
         <name>64</name>
         <width>11</width>
         <height>16</height>
-        <x>449</x>
+        <x>178</x>
         <y>0</y>
         <advX>11</advX>
         <advY>22</advY>
@@ -645,7 +652,7 @@
         <name>65</name>
         <width>11</width>
         <height>15</height>
-        <x>10</x>
+        <x>28</x>
         <y>20</y>
         <advX>11</advX>
         <advY>22</advY>
@@ -656,7 +663,7 @@
         <name>66</name>
         <width>11</width>
         <height>16</height>
-        <x>460</x>
+        <x>456</x>
         <y>0</y>
         <advX>11</advX>
         <advY>22</advY>
@@ -667,7 +674,7 @@
         <name>67</name>
         <width>10</width>
         <height>16</height>
-        <x>471</x>
+        <x>467</x>
         <y>0</y>
         <advX>11</advX>
         <advY>22</advY>
@@ -678,7 +685,7 @@
         <name>68</name>
         <width>11</width>
         <height>16</height>
-        <x>481</x>
+        <x>477</x>
         <y>0</y>
         <advX>11</advX>
         <advY>22</advY>
@@ -689,7 +696,7 @@
         <name>69</name>
         <width>10</width>
         <height>16</height>
-        <x>92</x>
+        <x>488</x>
         <y>0</y>
         <advX>11</advX>
         <advY>22</advY>
@@ -700,7 +707,7 @@
         <name>70</name>
         <width>10</width>
         <height>16</height>
-        <x>102</x>
+        <x>498</x>
         <y>0</y>
         <advX>11</advX>
         <advY>22</advY>
@@ -711,7 +718,7 @@
         <name>71</name>
         <width>10</width>
         <height>16</height>
-        <x>112</x>
+        <x>101</x>
         <y>0</y>
         <advX>11</advX>
         <advY>22</advY>
@@ -722,7 +729,7 @@
         <name>72</name>
         <width>9</width>
         <height>16</height>
-        <x>154</x>
+        <x>111</x>
         <y>0</y>
         <advX>11</advX>
         <advY>22</advY>
@@ -733,7 +740,7 @@
         <name>73</name>
         <width>7</width>
         <height>16</height>
-        <x>163</x>
+        <x>120</x>
         <y>0</y>
         <advX>11</advX>
         <advY>22</advY>
@@ -744,7 +751,7 @@
         <name>74</name>
         <width>9</width>
         <height>16</height>
-        <x>178</x>
+        <x>159</x>
         <y>0</y>
         <advX>11</advX>
         <advY>22</advY>
@@ -755,7 +762,7 @@
         <name>75</name>
         <width>10</width>
         <height>16</height>
-        <x>187</x>
+        <x>168</x>
         <y>0</y>
         <advX>11</advX>
         <advY>22</advY>
@@ -766,7 +773,7 @@
         <name>76</name>
         <width>11</width>
         <height>16</height>
-        <x>197</x>
+        <x>189</x>
         <y>0</y>
         <advX>11</advX>
         <advY>22</advY>
@@ -777,7 +784,7 @@
         <name>77</name>
         <width>11</width>
         <height>16</height>
-        <x>208</x>
+        <x>200</x>
         <y>0</y>
         <advX>11</advX>
         <advY>22</advY>
@@ -788,7 +795,7 @@
         <name>78</name>
         <width>11</width>
         <height>16</height>
-        <x>219</x>
+        <x>211</x>
         <y>0</y>
         <advX>11</advX>
         <advY>22</advY>
@@ -799,7 +806,7 @@
         <name>79</name>
         <width>9</width>
         <height>16</height>
-        <x>230</x>
+        <x>222</x>
         <y>0</y>
         <advX>11</advX>
         <advY>22</advY>
@@ -810,7 +817,7 @@
         <name>80</name>
         <width>10</width>
         <height>16</height>
-        <x>239</x>
+        <x>231</x>
         <y>0</y>
         <advX>11</advX>
         <advY>22</advY>
@@ -821,7 +828,7 @@
         <name>81</name>
         <width>9</width>
         <height>19</height>
-        <x>46</x>
+        <x>73</x>
         <y>0</y>
         <advX>11</advX>
         <advY>22</advY>
@@ -832,7 +839,7 @@
         <name>82</name>
         <width>11</width>
         <height>16</height>
-        <x>249</x>
+        <x>241</x>
         <y>0</y>
         <advX>11</advX>
         <advY>22</advY>
@@ -843,7 +850,7 @@
         <name>83</name>
         <width>9</width>
         <height>16</height>
-        <x>260</x>
+        <x>252</x>
         <y>0</y>
         <advX>11</advX>
         <advY>22</advY>
@@ -854,7 +861,7 @@
         <name>84</name>
         <width>11</width>
         <height>16</height>
-        <x>269</x>
+        <x>261</x>
         <y>0</y>
         <advX>11</advX>
         <advY>22</advY>
@@ -865,7 +872,7 @@
         <name>85</name>
         <width>11</width>
         <height>16</height>
-        <x>280</x>
+        <x>272</x>
         <y>0</y>
         <advX>11</advX>
         <advY>22</advY>
@@ -876,7 +883,7 @@
         <name>86</name>
         <width>11</width>
         <height>16</height>
-        <x>291</x>
+        <x>283</x>
         <y>0</y>
         <advX>11</advX>
         <advY>22</advY>
@@ -887,7 +894,7 @@
         <name>87</name>
         <width>11</width>
         <height>16</height>
-        <x>396</x>
+        <x>294</x>
         <y>0</y>
         <advX>11</advX>
         <advY>22</advY>
@@ -898,7 +905,7 @@
         <name>88</name>
         <width>11</width>
         <height>16</height>
-        <x>305</x>
+        <x>403</x>
         <y>0</y>
         <advX>11</advX>
         <advY>22</advY>
@@ -909,7 +916,7 @@
         <name>89</name>
         <width>10</width>
         <height>16</height>
-        <x>334</x>
+        <x>305</x>
         <y>0</y>
         <advX>11</advX>
         <advY>22</advY>
@@ -920,7 +927,7 @@
         <name>90</name>
         <width>9</width>
         <height>16</height>
-        <x>344</x>
+        <x>318</x>
         <y>0</y>
         <advX>11</advX>
         <advY>22</advY>
@@ -931,7 +938,7 @@
         <name>91</name>
         <width>5</width>
         <height>20</height>
-        <x>41</x>
+        <x>35</x>
         <y>0</y>
         <advX>11</advX>
         <advY>22</advY>
@@ -939,10 +946,21 @@
         <deltaY>1</deltaY>
     </item>
     <item>
+        <name>92</name>
+        <width>9</width>
+        <height>20</height>
+        <x>26</x>
+        <y>0</y>
+        <advX>11</advX>
+        <advY>22</advY>
+        <deltaX>1</deltaX>
+        <deltaY>1</deltaY>
+    </item>
+    <item>
         <name>93</name>
         <width>5</width>
         <height>20</height>
-        <x>36</x>
+        <x>21</x>
         <y>0</y>
         <advX>11</advX>
         <advY>22</advY>
@@ -951,11 +969,10 @@
     </item>
     <item>
         <name>94</name>
-        <width>8</width>
-        <height>9</height>
-        <x>226</x>
+        <width>9</width>
+        <height>8</height>
+        <x>238</x>
         <y>20</y>
-        <rotate>1</rotate>
         <advX>11</advX>
         <advY>22</advY>
         <deltaX>1</deltaX>
@@ -963,11 +980,10 @@
     </item>
     <item>
         <name>95</name>
-        <width>2</width>
-        <height>7</height>
-        <x>253</x>
+        <width>7</width>
+        <height>2</height>
+        <x>297</x>
         <y>20</y>
-        <rotate>1</rotate>
         <advX>11</advX>
         <advY>22</advY>
         <deltaX>2</deltaX>
@@ -977,7 +993,7 @@
         <name>96</name>
         <width>5</width>
         <height>8</height>
-        <x>239</x>
+        <x>247</x>
         <y>20</y>
         <advX>11</advX>
         <advY>22</advY>
@@ -988,7 +1004,7 @@
         <name>97</name>
         <width>9</width>
         <height>11</height>
-        <x>194</x>
+        <x>195</x>
         <y>20</y>
         <advX>11</advX>
         <advY>22</advY>
@@ -999,7 +1015,7 @@
         <name>98</name>
         <width>9</width>
         <height>16</height>
-        <x>353</x>
+        <x>345</x>
         <y>0</y>
         <advX>11</advX>
         <advY>22</advY>
@@ -1010,7 +1026,7 @@
         <name>99</name>
         <width>9</width>
         <height>11</height>
-        <x>137</x>
+        <x>155</x>
         <y>20</y>
         <advX>11</advX>
         <advY>22</advY>

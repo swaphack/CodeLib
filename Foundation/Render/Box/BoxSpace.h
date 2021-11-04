@@ -5,8 +5,13 @@
 
 namespace render
 {
-	class BoxDrawProtocol;
+	class BoxProtocol;
+	class Box2DProtocol;
+	class Box3DProtocol;
 	class BoxDraw;
+	class Box2DSpace;
+	class Box3DSpace;
+
 	/**
 	*	包围盒空间
 	*/
@@ -26,9 +31,13 @@ namespace render
 		BoxDraw* getBoxDraw();
 	public:
 		/**
-		*	最小矩形大小
+		*	2d划分的矩形大小
 		*/
-		void setMinRectSize(int width, int height);
+		void setMinBox2DSize(int width, int height);
+		/**
+		*	3d划分的矩形大小
+		*/
+		void setMinBox3DSize(int width, int height, int depth);
 	public:
 		/**
 		*	获取增长的盒子编号
@@ -38,15 +47,15 @@ namespace render
 		/**
 		*	添加
 		*/
-		void addBox(BoxDrawProtocol* box);
+		void addBox(BoxProtocol* box);
 		/**
 		*	更新盒子
 		*/
-		void updateBox(BoxDrawProtocol* box);
+		void updateBox(BoxProtocol* box);
 		/**
 		*	移除
 		*/
-		void removeBox(BoxDrawProtocol* box);
+		void removeBox(BoxProtocol* box);
 		/**
 		*	移除所有盒子
 		*/
@@ -54,39 +63,47 @@ namespace render
 		/**
 		*	获取所有盒子
 		*/
-		const std::map<int, BoxDrawProtocol*>& getAllBoxes() const;
+		const std::map<int, BoxProtocol*>& getAllBoxes() const;
 	public:
 		/**
 		*	包含触摸点
 		*/
-		bool containsTouchPoint(const math::Vector2& touchPoint, std::vector<BoxDrawProtocol*>& boxes);
+		bool containsTouchPoint(const math::Vector2& touchPoint, std::vector<BoxProtocol*>& boxes);
 		/**
 		*	包含共享点的盒子信息
 		*/
-		bool getBoxesOfSharedPoint(const math::Vector3& worldPoint, std::vector<BoxDrawProtocol*>& boxes);
+		bool getBoxesOfIncludedPoint(const math::Vector3& worldPoint, std::vector<BoxProtocol*>& boxes);
+		/**
+		*	是否包含点击点
+		*/
+		bool containsTouchPoint2D(Box2DProtocol* boxProtocol, const math::Vector2& touchPoint);
+		/**
+		*	包含共享点的盒子信息
+		*/
+		bool containsTouchPoint3D(Box3DProtocol* boxProtocol, const math::Vector2& touchPoint);
 	protected:
 		/**
 		*	注册事件
 		*/
-		void registerBoxEvent(BoxDrawProtocol* box);
+		void registerBoxEvent(BoxProtocol* box);
 		/**
 		*	移除事件
 		*/
-		void unregisterBoxEvent(BoxDrawProtocol* box);
+		void unregisterBoxEvent(BoxProtocol* box);
 		/**
 		*	获取键值
 		*/
 		std::string getRectKey(const math::Rect& rect);
 	private:
 		// 盒子
-		std::map<int, BoxDrawProtocol*> _boxes;
+		std::map<int, BoxProtocol*> _boxes;
 		// 盒子绘制
 		BoxDraw* _boxDraw = nullptr;
 		// 盒子编号
 		int _increaseBoxID = 0;
-		// 最小矩形大小
-		int _minRectWidth = 20;
-		int _minRectHeight = 20;
+
+		Box2DSpace* _2dSpace;
+		Box3DSpace* _3dSpace;
 	};
 
 #define G_BOXSPACE sys::Instance<render::BoxSpace>::getInstance()

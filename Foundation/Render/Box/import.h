@@ -1,5 +1,5 @@
 #pragma once
 
-#include "BoxDrawProtocol.h"
+#include "BoxProtocol.h"
 #include "BoxDraw.h"
 #include "BoxSpace.h"

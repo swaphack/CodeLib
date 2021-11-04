@@ -12,5 +12,6 @@ public:
 protected:
 	void initNodes();
 	void initEnv();
+	void initTool();
 };
 

@@ -188,14 +188,10 @@ namespace render
 		// 将本地坐标转化为世界坐标
 		math::Vector3 convertLocalToWorldPoint(const math::Vector3& point) const;
 	public:
-		// 点击点是否落在该节点上
-		virtual bool containTouchPoint(const math::Vector2& touchPoint);
 		// 在目标节点的前方
 		bool isInFrontOfNode(const Node* target) const;
-	protected:
 		// 是否点击点落在该节点上
 		virtual bool containPoint(const math::Vector2& touchPoint);
-		
 	public:
 		// 添加事件监听
 		void addNotifyListener(NodeNotifyType id, const NotifyDelegate& func);
@@ -227,6 +223,11 @@ namespace render
 		void calRealSpaceByMatrix();
 		// 计算旋转后的方向
 		void calDirectionWithRotate();
+	public:
+		// 设置是否裁剪
+		void setClippingEnabled(bool status);
+		// 是否裁剪
+		bool isClippingEnabled() const;
 	protected:
 		// opengl 位置
 		math::Vector3 _obPosition;
@@ -248,8 +249,8 @@ namespace render
 		bool _bSkipDrawChildren = false;
 		// 是否可见
 		bool _bVisibled = false;
-		// 是否可点击
-		bool _bTouchEnabled = false;
+		// 是否开启裁剪
+		bool _bClippingEnabled = false;
 		// 是否和父节点关联
 		bool _bRelativeToParent = false;
 		// 通知

@@ -24,6 +24,11 @@ void alg::Bin2D::addItem(int id, int width, int height)
 	_items.push_back(item);
 }
 
+void alg::Bin2D::setAutoRotate(bool rotated)
+{
+	_autoRotate = rotated;
+}
+
 bool alg::Bin2D::pack(std::vector<Item>& items)
 {
 	std::vector<BinPacking2D::Box> boxes;
@@ -32,7 +37,7 @@ bool alg::Bin2D::pack(std::vector<Item>& items)
 	{
 		binPack.addItem(item.id, item.width, item.height);
 	}
-	binPack.sortItems(true);
+	binPack.sortItems(_autoRotate);
 	if (!binPack.getHybridPackWay(_width, _height, BinPacking2D::PackingMethod::BFDH, boxes))
 	{
 		return false;

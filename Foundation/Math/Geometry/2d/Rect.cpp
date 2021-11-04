@@ -57,7 +57,7 @@ float Rect::getMinX() const
 
 float math::Rect::getMiddleX() const
 {
-	return getX() + getWidth() * 0.5f;
+	return getX() + getHalfWidth();
 }
 
 float Rect::getMaxX() const
@@ -72,7 +72,7 @@ float Rect::getMinY() const
 
 float math::Rect::getMiddleY() const
 {
-	return getY() + getHeight() * 0.5f;
+	return getY() + getHalfHeight();
 }
 
 float Rect::getMaxY() const

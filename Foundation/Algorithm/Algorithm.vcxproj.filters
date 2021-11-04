@@ -212,6 +212,9 @@
     <ClInclude Include="Space\Bin\import.h">
       <Filter>Space\Bin</Filter>
     </ClInclude>
+    <ClInclude Include="Space\Index\OcTree.h">
+      <Filter>Space\Index</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Sort">

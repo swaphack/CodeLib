@@ -148,16 +148,13 @@
     <ClCompile Include="Classes\Env\Utility.cpp" />
     <ClCompile Include="Classes\GLRenderApplication.cpp" />
     <ClCompile Include="Classes\Main.cpp" />
-    <ClCompile Include="Classes\Node\TestAlgNode.cpp" />
     <ClCompile Include="Classes\Node\TestComputeShader.cpp" />
     <ClCompile Include="Classes\Node\TestFragmentNode.cpp" />
     <ClCompile Include="Classes\Node\TestFrameBufferNode.cpp" />
     <ClCompile Include="Classes\Node\TestLightingNode.cpp" />
-    <ClCompile Include="Classes\Node\TestMathNode.cpp" />
     <ClCompile Include="Classes\Node\TestMeshNode.cpp" />
     <ClCompile Include="Classes\Node\TestPostProcessing.cpp" />
     <ClCompile Include="Classes\Node\TestTextureNode.cpp" />
-    <ClCompile Include="Classes\Node\TestTool.cpp" />
     <ClCompile Include="Classes\Node\TestXFBNode.cpp" />
     <ClCompile Include="Classes\Node\TestAudioNode.cpp" />
     <ClCompile Include="Classes\Node\TestBufferNode.cpp" />
@@ -172,6 +169,9 @@
     <ClCompile Include="Classes\Node\TestUINode.cpp" />
     <ClCompile Include="Classes\Node\TestUtilityNode.cpp" />
     <ClCompile Include="Classes\Scene\TestMainScene.cpp" />
+    <ClCompile Include="Classes\Tool\TestAlgorithm.cpp" />
+    <ClCompile Include="Classes\Tool\TestMath.cpp" />
+    <ClCompile Include="Classes\Tool\TestTexturePack.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Classes\Env\import.h" />
@@ -182,15 +182,12 @@
     <ClInclude Include="Classes\Env\Utility.h" />
     <ClInclude Include="Classes\GLRenderApplication.h" />
     <ClInclude Include="Classes\Node\import.h" />
-    <ClInclude Include="Classes\Node\TestAlgNode.h" />
     <ClInclude Include="Classes\Node\TestComputeShader.h" />
     <ClInclude Include="Classes\Node\TestFrameBufferNode.h" />
     <ClInclude Include="Classes\Node\TestLightingNode.h" />
-    <ClInclude Include="Classes\Node\TestMathNode.h" />
     <ClInclude Include="Classes\Node\TestMeshNode.h" />
     <ClInclude Include="Classes\Node\TestPostProcessing.h" />
     <ClInclude Include="Classes\Node\TestTextureNode.h" />
-    <ClInclude Include="Classes\Node\TestTool.h" />
     <ClInclude Include="Classes\Node\TestXFBNode.h" />
     <ClInclude Include="Classes\Node\TestAudioNode.h" />
     <ClInclude Include="Classes\Node\TestBufferNode.h" />
@@ -206,6 +203,10 @@
     <ClInclude Include="Classes\Node\TestUINode.h" />
     <ClInclude Include="Classes\Node\TestUtilityNode.h" />
     <ClInclude Include="Classes\Scene\TestMainScene.h" />
+    <ClInclude Include="Classes\Tool\import.h" />
+    <ClInclude Include="Classes\Tool\TestAlgorithm.h" />
+    <ClInclude Include="Classes\Tool\TestMath.h" />
+    <ClInclude Include="Classes\Tool\TestTexturePack.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

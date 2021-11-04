@@ -1,49 +1,25 @@
 #include "BoxSpace.h"
-#include "BoxDrawProtocol.h"
+#include "BoxProtocol.h"
 #include "BoxDraw.h"
 #include "algorithm.h"
 #include "Common/Scene/Scene.h"
 #include "Common/Scene/Camera.h"
 #include "Common/Tool/Tool.h"
-
-// 盒子空间
-alg::QuadTree<math::Rect, int, render::BoxDrawProtocol*> _quadTree;
+#include "Box2DSpace.h"
+#include "Box3DSpace.h"
 
 render::BoxSpace::BoxSpace()
 {
-	_quadTree.setLeafItemCount(8);
-	_quadTree.setCondtionIncludeFunc([this](const math::Rect& a, const int& b) {
-		auto it = _boxes.find(b);
-		if (it != _boxes.end())
-		{
-			auto box = static_cast<render::Box2DDrawProtocol*>(it->second);
-			if (box)
-			{
-				return a.isOverlap(box->getBoxRect());
-			}
-		}
-		return false;
-	});
-	_quadTree.setCondtionDivideFunc([this](const math::Rect& a, std::vector<math::Rect>& b) {
-		if (a.getSize() == math::Size()) return false;
-		float w = a.getHalfWidth();
-		float h = a.getHalfHeight();
-		if (w <= 0 || h <= 0
-			|| w < _minRectWidth || h < _minRectHeight)
-		{
-			return false;
-		}
-		b.push_back(math::Rect(a.getMinX(), a.getMinY(), w, h));
-		b.push_back(math::Rect(a.getMiddleX(), a.getMinY(), w, h));
-		b.push_back(math::Rect(a.getMinX(), a.getMiddleY(), w, h));
-		b.push_back(math::Rect(a.getMiddleX(), a.getMiddleY(), w, h));
-		return b.size() > 0;
-	});
+	_2dSpace = new Box2DSpace();
+	_3dSpace = new Box3DSpace();
 }
 
 render::BoxSpace::~BoxSpace()
 {
 	this->removeAllBoxes();
+
+	delete _2dSpace;
+	delete _3dSpace;
 }
 
 void render::BoxSpace::setBoxDraw(BoxDraw* boxDraw)
@@ -55,7 +31,8 @@ void render::BoxSpace::setBoxDraw(BoxDraw* boxDraw)
 		return;
 	}
 	math::Size size = render::Tool::getViewSize();
-	_quadTree.initRoot(math::Rect(-0.5f * size, size));
+	_2dSpace->init(-0.5f * size, size);
+	_3dSpace->init(-0.5f * size, size);
 }
 
 render::BoxDraw* render::BoxSpace::getBoxDraw()
@@ -63,10 +40,14 @@ render::BoxDraw* render::BoxSpace::getBoxDraw()
 	return _boxDraw;
 }
 
-void render::BoxSpace::setMinRectSize(int width, int height)
+void render::BoxSpace::setMinBox2DSize(int width, int height)
 {
-	_minRectWidth = width;
-	_minRectHeight = height;
+	_2dSpace->setMinBoxSize(width, height);
+}
+
+void render::BoxSpace::setMinBox3DSize(int width, int height, int depth)
+{
+	_3dSpace->setMinBoxSize(width, height, depth);
 }
 
 int render::BoxSpace::getBoxIncreaseID()
@@ -74,16 +55,19 @@ int render::BoxSpace::getBoxIncreaseID()
 	return _increaseBoxID++;
 }
 
-void render::BoxSpace::addBox(BoxDrawProtocol* box)
+void render::BoxSpace::addBox(BoxProtocol* box)
 {
 	if (box == nullptr) return;
 
-	box->setBoxID(getBoxIncreaseID());
-	_boxes[box->getBoxID()] = box;
+	int id = getBoxIncreaseID();
+
+	box->setBoxID(id);
+	_boxes[id] = box;
+
 	this->registerBoxEvent(box);
 }
 
-void render::BoxSpace::updateBox(BoxDrawProtocol* box)
+void render::BoxSpace::updateBox(BoxProtocol* box)
 {
 	if (box == nullptr) return;
 
@@ -93,7 +77,8 @@ void render::BoxSpace::updateBox(BoxDrawProtocol* box)
 	}
 
 	int id = box->getBoxID();
-	_quadTree.remove(id);
+	_2dSpace->removeBox(id);
+	_3dSpace->removeBox(id);
 	_boxes.erase(id);
 
 	auto pBoxNode = box->getBoxNode();
@@ -106,30 +91,36 @@ void render::BoxSpace::updateBox(BoxDrawProtocol* box)
 		}
 	}
 
-	if (box->getBoxDrawType() == render::BoxDrawType::TWO)
+	_boxes[id] = box;
+
+	auto type = box->getBoxDrawType();
+	if (type == render::BoxDrawType::TWO)
 	{
-		auto pBox = static_cast<Box2DDrawProtocol*>(box);
+		auto pBox = static_cast<Box2DProtocol*>(box);
+		if (pBox)
+		{			
+			_2dSpace->addBox(pBox);
+		}
+	}
+	else if (type == render::BoxDrawType::THREE)
+	{
+		auto pBox = static_cast<Box3DProtocol*>(box);
 		if (pBox)
 		{
-			const auto& rect = pBox->getBoxRect();
-			if (rect.getSize() == math::Size())
-			{// 排除无大小矩形
-				return;
-			}
-			_boxes[id] = box;
-			_quadTree.add(id, box);
+			_3dSpace->addBox(pBox);
 		}
 	}
 }
 
-void render::BoxSpace::removeBox(BoxDrawProtocol* box)
+void render::BoxSpace::removeBox(BoxProtocol* box)
 {
 	if (box == nullptr) return;
 
 	this->unregisterBoxEvent(box);
 
 	int id = box->getBoxID();
-	_quadTree.remove(id);
+	_2dSpace->removeBox(id);
+	_3dSpace->removeBox(id);
 	_boxes.erase(id);
 }
 
@@ -142,27 +133,28 @@ void render::BoxSpace::removeAllBoxes()
 
 	_boxes.clear();
 
-	_quadTree.clear();
+	_2dSpace->removeAllBoxes();
+	_3dSpace->removeAllBoxes();
 }
 
-const std::map<int, render::BoxDrawProtocol*>& render::BoxSpace::getAllBoxes() const
+const std::map<int, render::BoxProtocol*>& render::BoxSpace::getAllBoxes() const
 {
 	return _boxes;
 }
 
-bool render::BoxSpace::containsTouchPoint(const math::Vector2& touchPoint, std::vector<render::BoxDrawProtocol*>& boxes)
+bool render::BoxSpace::containsTouchPoint(const math::Vector2& touchPoint, std::vector<render::BoxProtocol*>& boxes)
 {
 	if (_boxDraw == nullptr) return false;
 	auto pCamera = _boxDraw->getCamera();
 	if (pCamera == nullptr) return false;
 
 	math::Vector3 worldPoint = pCamera->convertScreenToLocalPoint(touchPoint);
-	std::vector<BoxDrawProtocol*> temps;
-	if (getBoxesOfSharedPoint(worldPoint, temps))
+	std::vector<BoxProtocol*> temps;
+	if (getBoxesOfIncludedPoint(worldPoint, temps))
 	{
 		for (const auto& item : temps)
 		{
-			if (item->containsTouchPoint(touchPoint))
+			if (item->getBoxNode()->containsTouchPoint(touchPoint))
 			{
 				boxes.push_back(item);
 			}
@@ -172,48 +164,56 @@ bool render::BoxSpace::containsTouchPoint(const math::Vector2& touchPoint, std::
 	return boxes.size() > 0;
 }
 
-bool render::BoxSpace::getBoxesOfSharedPoint(const math::Vector3& worldPoint, std::vector<render::BoxDrawProtocol*>& boxes)
+bool render::BoxSpace::getBoxesOfIncludedPoint(const math::Vector3& worldPoint, std::vector<render::BoxProtocol*>& boxes)
 {
 	int key = _increaseBoxID + 1;
-	render::Box2DDrawProtocol* pro = nullptr;
-	{
-		math::Rect rect(worldPoint.getX(), worldPoint.getY(), 0, 0);
-		render::Box2DDrawProtocol* pro = new render::Box2DDrawProtocol();
-		pro->setBoxRect(rect);
-		_quadTree.add(key, pro);
-		_boxes[key] = pro;
-	}
 
-	
-	std::map<int, render::BoxDrawProtocol*> target;
-	bool result = _quadTree.findNode(key, target);
-
+	// 二维
+	std::map<int, render::Box2DProtocol*> box2Ds;
+	if (_2dSpace->getBoxesOfIncludedPoint(key, worldPoint, box2Ds))
 	{
-		delete pro;
-		_quadTree.remove(key);
-		_boxes.erase(key);
-	}
-	
-	if (!result)
-	{
-		return false;
-	}
-	for (const auto& item : target)
-	{
-		auto it = _boxes.find(item.first);
-		if (it != _boxes.end())
+		for (const auto& item : box2Ds)
 		{
-			auto pBoxNode = it->second->getBoxNode();
-			if (pBoxNode == nullptr) continue;
-			if (!pBoxNode->isTouchEnabled() || !pBoxNode->isVisible()) continue;
-			boxes.push_back(it->second);
+			auto it = _boxes.find(item.first);
+			if (it != _boxes.end())
+			{
+				auto pBoxNode = it->second->getBoxNode();
+				if (pBoxNode == nullptr) continue;
+				if (!pBoxNode->isTouchEnabled() || !pBoxNode->isVisible()) continue;
+				boxes.push_back(it->second);
+			}
 		}
 	}
-
+	// 三维
+	std::map<int, render::Box3DProtocol*> box3Ds;
+	if (_3dSpace->getBoxesOfIncludedPoint(key, worldPoint, box3Ds))
+	{
+		for (const auto& item : box3Ds)
+		{
+			auto it = _boxes.find(item.first);
+			if (it != _boxes.end())
+			{
+				auto pBoxNode = it->second->getBoxNode();
+				if (pBoxNode == nullptr) continue;
+				if (!pBoxNode->isTouchEnabled() || !pBoxNode->isVisible()) continue;
+				boxes.push_back(it->second);
+			}
+		}
+	}
 	return boxes.size() > 0;
 }
 
-void render::BoxSpace::registerBoxEvent(BoxDrawProtocol* box)
+bool render::BoxSpace::containsTouchPoint2D(Box2DProtocol* boxProtocol, const math::Vector2& touchPoint)
+{
+	return _2dSpace->containsTouchPoint(boxProtocol, touchPoint);
+}
+
+bool render::BoxSpace::containsTouchPoint3D(Box3DProtocol* boxProtocol, const math::Vector2& touchPoint)
+{
+	return _3dSpace->containsTouchPoint(boxProtocol, touchPoint);
+}
+
+void render::BoxSpace::registerBoxEvent(BoxProtocol* box)
 {
 	if (box == nullptr) return;
 
@@ -230,7 +230,7 @@ void render::BoxSpace::registerBoxEvent(BoxDrawProtocol* box)
 	}
 }
 
-void render::BoxSpace::unregisterBoxEvent(BoxDrawProtocol* box)
+void render::BoxSpace::unregisterBoxEvent(BoxProtocol* box)
 {
 	if (box == nullptr) return;
 

@@ -54,7 +54,7 @@ bool ue::Panel::touchFrontWidget(ui::CtrlWidget* widget, const math::Vector2& to
 
 	if (!contain)
 	{
-		if (!widget->containTouchPoint(touchPoint))
+		if (!widget->containsTouchPoint(touchPoint))
 		{
 			return false;
 		}

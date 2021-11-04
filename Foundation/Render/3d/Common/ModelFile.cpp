@@ -3,6 +3,7 @@
 #include "Common/Mesh/import.h"
 #include "Common/DrawNode/DrawTextureCache.h"
 #include "Common/Tool/VertexTool.h"
+#include "Box/BoxSpace.h"
 
 render::ModelFile::ModelFile()
 {
@@ -21,7 +22,7 @@ bool render::ModelFile::init()
 		return false;
 	}
 
-	Box3DDrawProtocol::initBox3D(this);
+	Box3DProtocol::initBox3D(this);
 
 	// 添加属性改变监听
 	addNotifyListener(NodeNotifyType::MODEL, [this]() {
@@ -55,7 +56,7 @@ void render::ModelFile::setAsynLoadedCallback(const LoadedModelCallback& func)
 
 bool render::ModelFile::containPoint(const math::Vector2& touchPoint)
 {
-	return Box3DDrawProtocol::containsTouchPoint(touchPoint);
+	return G_BOXSPACE->containsTouchPoint3D(this, touchPoint);
 }
 
 void render::ModelFile::onDraw()

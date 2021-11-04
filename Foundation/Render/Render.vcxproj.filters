@@ -576,7 +576,7 @@
     <ClCompile Include="Box\BoxDraw.cpp">
       <Filter>Box</Filter>
     </ClCompile>
-    <ClCompile Include="Box\BoxDrawProtocol.cpp">
+    <ClCompile Include="Box\BoxProtocol.cpp">
       <Filter>Box</Filter>
     </ClCompile>
     <ClCompile Include="Common\Scene\DebugDraw.cpp">
@@ -616,6 +616,12 @@
       <Filter>Common\Text</Filter>
     </ClCompile>
     <ClCompile Include="Box\BoxSpace.cpp">
+      <Filter>Box</Filter>
+    </ClCompile>
+    <ClCompile Include="Box\Box2DSpace.cpp">
+      <Filter>Box</Filter>
+    </ClCompile>
+    <ClCompile Include="Box\Box3DSpace.cpp">
       <Filter>Box</Filter>
     </ClCompile>
   </ItemGroup>
@@ -1368,7 +1374,7 @@
     <ClInclude Include="Box\BoxDraw.h">
       <Filter>Box</Filter>
     </ClInclude>
-    <ClInclude Include="Box\BoxDrawProtocol.h">
+    <ClInclude Include="Box\BoxProtocol.h">
       <Filter>Box</Filter>
     </ClInclude>
     <ClInclude Include="Box\import.h">
@@ -1423,6 +1429,12 @@
       <Filter>Common\Text</Filter>
     </ClInclude>
     <ClInclude Include="Box\BoxSpace.h">
+      <Filter>Box</Filter>
+    </ClInclude>
+    <ClInclude Include="Box\Box2DSpace.h">
+      <Filter>Box</Filter>
+    </ClInclude>
+    <ClInclude Include="Box\Box3DSpace.h">
       <Filter>Box</Filter>
     </ClInclude>
   </ItemGroup>

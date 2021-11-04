@@ -55,6 +55,7 @@ bool render::MultiDrawNode::init()
 		this->initDrawParameters();
 	});
 
+	onColorChange();
 
 	initBufferObject();
 

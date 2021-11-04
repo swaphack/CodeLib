@@ -66,7 +66,7 @@ void TextureCache::removeTexture2D(const std::string& path)
 
 void TextureCache::removeAllTextures()
 {
-	for (auto item : _texFrames)
+	for (auto item : _texAtlasFrames)
 	{
 		SAFE_RELEASE(item.second);
 	}
@@ -75,8 +75,9 @@ void TextureCache::removeAllTextures()
 		SAFE_RELEASE(item.second);
 	}
 	_textures.clear();
-	_texFrames.clear();
 	_texture2Ds.clear();
+	_texAtlasFrames.clear();
+	_texAtlas.clear();
 }
 
 Texture2D* TextureCache::getTexture2D(const std::string& path)
@@ -95,94 +96,150 @@ Texture2D* TextureCache::getTexture2D(const std::string& path)
 	return it->second;
 }
 
-std::string render::TextureCache::getTexFrameName(const std::string& path, const std::string name) const
+void render::TextureCache::addTexAtlas(const std::string& imagePath, const std::string& atlasPath, const sys::ImageTextureAtlas& texAtlas)
 {
-	return path + "[" + name + "]";
-}
-
-void render::TextureCache::addTexAtlas(const std::string& path, const sys::ImageTextureAtlas& texAtlas)
-{
-	Texture* texture = this->createTexture2D(path);
+	Texture* texture = this->createTexture2D(imagePath);
 	if (texture)
 	{
-		this->addTexAtlas(path, texture, texAtlas);
+		this->addTexAtlas(imagePath, atlasPath, texture, texAtlas);
 	}
 }
 
-void render::TextureCache::addTexAtlas(const std::string& path, const Texture* texture, const sys::ImageTextureAtlas& texAtlas)
+void render::TextureCache::addTexAtlas(const std::string& imagePath, const std::string& atlasPath, const Texture* texture, const sys::ImageTextureAtlas& texAtlas)
 {
 	if (texture == nullptr || texture->getWidth() == 0 || texture->getHeight() == 0)
 	{
 		return;
 	}
-	for (const auto& item : texAtlas.getAllChips())
-	{
-		float y = texture->getHeight() - item.second->y - item.second->height;
-		if (y < 0)
-		{
-			PRINTLN("error: TextureCache::addTexAtlas Y value is lower than 0!!!");
-			y = 0;
-		}
-		math::Rect rect(item.second->x, y, item.second->width, item.second->height);
-		this->addTexFrame(path, texture, item.first, rect, item.second->rotate);
-	}
+
+	//for (const auto& item : texAtlas.getAllChips())
+	//{
+	//	float y = texture->getHeight() - item.second->y - item.second->height;
+	//	if (y < 0)
+	//	{
+	//		PRINTLN("error: TextureCache::addTexAtlas Y value is lower than 0!!!");
+	//		y = 0;
+	//	}
+	//	math::Rect rect(item.second->x, y, item.second->width, item.second->height);
+	//	this->addTexFrame(atlasPath, texture, item.first, rect, item.second->rotate, false);
+	//}
+
+	_texAtlas[atlasPath] = texAtlas;
 }
 
-void render::TextureCache::addTexFrame(const std::string& path, const TexFrame* texFrame)
+std::string render::TextureCache::getFrameName(const std::string& atlasPath, const std::string& name, bool preload)
+{
+	std::string atlasPathName = _getFrameName(atlasPath, name);
+	if (preload)
+	{
+		auto pTexFrame = getTexFrame(atlasPathName);
+		if (pTexFrame == nullptr)
+		{
+			_preloadTexFrame(atlasPath, name);
+		}
+	}
+	return atlasPathName;
+}
+
+const sys::ImageTextureAtlas* render::TextureCache::getTexAtlas(const std::string& atlasPath) const
+{
+	auto it = _texAtlas.find(atlasPath);
+	if (it == _texAtlas.end()) return nullptr;
+
+	return &it->second;
+}
+
+void render::TextureCache::removeTexAtlas(const std::string& atlasPath)
+{
+	auto it = _texAtlas.find(atlasPath);
+	if (it == _texAtlas.end()) return;
+	const auto& allChips = it->second.getAllChips();
+	for (const auto& item : allChips)
+	{
+		this->removeTexFrame(item.first);
+	}
+	_texAtlas.erase(it);
+}
+
+bool render::TextureCache::containsTexAtlas(const std::string& atlasPath) const
+{
+	auto it = _texAtlas.find(atlasPath);
+	return it != _texAtlas.end();
+}
+
+void render::TextureCache::addTexFrame(const std::string& atlasPath, const TexFrame* texFrame, bool cleanup)
 {
 	if (texFrame->getName().empty())
 	{
 		return;
 	}
-	std::string fullname = getTexFrameName(path, texFrame->getName());
-	this->removeTexFrames(fullname);
+	std::string fullname = _getFrameName(atlasPath, texFrame->getName());
+	if (cleanup)
+	{
+		this->removeTexFrame(fullname);
+	}
 	auto pTexFrame = (TexFrame*)texFrame;
 	SAFE_RETAIN(pTexFrame);
-	_texFrames[fullname] = pTexFrame;
+	_texAtlasFrames[fullname] = pTexFrame;
 }
 
-void render::TextureCache::addTexFrame(const std::string& path, const Texture* texture, const std::string& name, const math::Rect& rect, bool rotate)
+void render::TextureCache::addTexFrame(const std::string& atlasPath, const Texture* texture, const std::string& name, const math::Rect& rect, bool rotate, bool cleanup)
 {
 	if (texture == nullptr || texture->getWidth() == 0 || texture->getHeight() == 0) return;
 
 	math::Rect percentRect(rect.getMinX() / texture->getWidth(), rect.getMinY() / texture->getHeight(),
 		rect.getWidth() / texture->getWidth(), rect.getHeight() / texture->getHeight());
 
-	if (rotate == true)
-	{
-		int a = 1;
-	}
 	TexFrame* texFrame = CREATE_OBJECT(TexFrame);
 	texFrame->setName(name);
 	texFrame->setRect(percentRect);
 	texFrame->setTexture(texture);
 	texFrame->setRotate(rotate);
-	this->addTexFrame(path, texFrame);
+	this->addTexFrame(atlasPath, texFrame, cleanup);
 }
 
-const TexFrame* render::TextureCache::getTexFrame(const std::string& path, const std::string name) const
+const TexFrame* render::TextureCache::getTexFrame(const std::string& atlasPathName, bool preload)
 {
-	std::string fullname = getTexFrameName(path, name);
-	return getTexFrame(fullname);
-}
-
-const TexFrame* render::TextureCache::getTexFrame(const std::string& pathname) const
-{
-	auto it = _texFrames.find(pathname);
-	if (it != _texFrames.end())
+	auto pTexFrame = _getTexFrame(atlasPathName);
+	if (pTexFrame) return pTexFrame;
+	if (preload)
 	{
-		return it->second;
+		std::size_t fpos = atlasPathName.find_first_of('[');
+		std::size_t epos = atlasPathName.find_first_of(']');
+		if (fpos != -1 && epos != -1)
+		{
+			std::string atlasPath = atlasPathName.substr(0, fpos);
+			std::string name = atlasPathName.substr(fpos+1, epos - fpos - 1);
+			_preloadTexFrame(atlasPath, name);
+		}
+		else
+		{
+			return nullptr;
+		}
+		
 	}
-	return nullptr;
+	return _getTexFrame(atlasPathName);
 }
 
-void render::TextureCache::removeTexFrames(const std::string& path)
+const TexFrame* render::TextureCache::getTexFrame(const std::string& atlasPath, const std::string name, bool preload)
 {
-	auto it = _texFrames.find(path);
-	if (it != _texFrames.end())
+	std::string atlasPathName = _getFrameName(atlasPath, name);
+	auto pTexFrame = _getTexFrame(atlasPathName);
+	if (pTexFrame) return pTexFrame;
+	if (preload)
+	{
+		_preloadTexFrame(atlasPath, name);
+	}
+	return _getTexFrame(atlasPathName);
+}
+
+void render::TextureCache::removeTexFrame(const std::string& path)
+{
+	auto it = _texAtlasFrames.find(path);
+	if (it != _texAtlasFrames.end())
 	{
 		SAFE_RELEASE(it->second);
-		_texFrames.erase(it);
+		_texAtlasFrames.erase(it);
 	}
 }
 
@@ -318,6 +375,46 @@ sys::ImageDetail* render::TextureCache::loadImageDetail(const sys::ImageDefine& 
 	}
 
 	return image;
+}
+
+std::string render::TextureCache::_getFrameName(const std::string& atlasPath, const std::string& name) const
+{
+	return atlasPath + "[" + name + "]";
+}
+
+const TexFrame* render::TextureCache::_getTexFrame(const std::string& atlasPathName) const
+{
+	auto it = _texAtlasFrames.find(atlasPathName);
+	if (it != _texAtlasFrames.end())
+	{
+		return it->second;
+	}
+
+	return nullptr;
+}
+
+void render::TextureCache::_preloadTexFrame(const std::string& atlasPath, const std::string& name)
+{
+	auto pTextureAtlas = getTexAtlas(atlasPath);
+	if (pTextureAtlas)
+	{
+		auto pCharData = pTextureAtlas->getChip(name);
+		if (pCharData)
+		{
+			auto pTexture = G_TEXTURE_CACHE->getTexture2D(pTextureAtlas->getImagePath());
+			if (pTexture)
+			{
+				float y = pTexture->getHeight() - pCharData->y - pCharData->height;
+				if (y < 0)
+				{
+					PRINTLN("error: TextureCache::addTexAtlas Y value is lower than 0!!!");
+					y = 0;
+				}
+				math::Rect rect(pCharData->x, y, pCharData->width, pCharData->height);
+				G_TEXTURE_CACHE->addTexFrame(atlasPath, pTexture, name, rect, pCharData->rotate, false);
+			}
+		}
+	}
 }
 
 Texture2D* TextureCache::createTexture2D(const std::string& path)

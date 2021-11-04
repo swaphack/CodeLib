@@ -49,19 +49,22 @@ bool render::TouchProtocol::isTouchSwallowed()
 	return _bTouchSwallowed;
 }
 
-void render::TouchProtocol::setClippingEnabled(bool status)
+bool render::TouchProtocol::containsTouchPoint(const math::Vector2& touchPoint)
 {
-	_bClippingEnabled = status;
-}
+	if (getTouchNode() == nullptr) return false;
+	if (!getTouchNode()->isVisible() || getTouchNode()->isSkipDraw())
+		return false;
 
-bool render::TouchProtocol::isClippingEnabled()
-{
-	return _bClippingEnabled;
-}
+	auto parent = getTouchNode()->getFirstClippingNodeOfParents();
+	if (parent != nullptr)
+	{
+		if (!parent->containPoint(touchPoint))
+		{
+			return false;
+		}
+	}
 
-bool render::TouchProtocol::containTouchPoint(const math::Vector2& touchPoint)
-{
-	return false;
+	return getTouchNode()->containPoint(touchPoint);
 }
 
 bool render::TouchProtocol::isInFrontOf(const TouchProtocol* target) const
@@ -77,7 +80,7 @@ bool TouchProtocol::onTouchBegan(const math::Vector2& touchPoint)
 	{
 		return false;
 	}
-	//bool include = this->containTouchPoint(touchPoint);
+	//bool include = this->containsTouchPoint(touchPoint);
 	//if (include)
 	//{
 		dispatchTouchEvent(TouchType::BEGAN, touchPoint);
@@ -98,7 +101,7 @@ bool TouchProtocol::onTouchMoved(const math::Vector2& touchPoint)
 		return false;
 	}
 
-	//bool include = this->containTouchPoint(touchPoint);
+	//bool include = this->containsTouchPoint(touchPoint);
 	//if (include)
 	//{
 		dispatchTouchEvent(TouchType::MOVED, touchPoint);
@@ -118,7 +121,7 @@ bool TouchProtocol::onTouchEnded(const math::Vector2& touchPoint)
 		return false;
 	}
 
-	//bool include = this->containTouchPoint(touchPoint);
+	//bool include = this->containsTouchPoint(touchPoint);
 	//if (include)
 	//{
 		dispatchTouchEvent(TouchType::ENDED, touchPoint);

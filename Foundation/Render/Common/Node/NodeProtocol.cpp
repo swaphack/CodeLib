@@ -21,24 +21,40 @@ SpaceProtocol::~SpaceProtocol()
 
 void SpaceProtocol::setPosition(float x, float y)
 {
+	if (_position.getX() == x && _position.getY() == y)
+	{
+		return;
+	}
 	_position.set(x, y);
 	onSpaceChange();
 }
 
 void SpaceProtocol::setPosition(float x, float y, float z)
 {
+	if (_position.getX() == x && _position.getY() == y && _position.getZ() == z)
+	{
+		return;
+	}
 	_position.set(x, y, z);
 	onSpaceChange();
 }
 
 void SpaceProtocol::setPosition(const math::Vector3& position)
 {
+	if (_position == position)
+	{
+		return;
+	}
 	_position = position;
 	onSpaceChange();
 }
 
 void SpaceProtocol::setPosition(const math::Vector2& position)
 {
+	if (_position.getX() == position.getX() && _position.getY() == position.getY())
+	{
+		return;
+	}
 	_position = position;
 
 	onSpaceChange();
@@ -51,24 +67,40 @@ const math::Vector3& SpaceProtocol::getPosition() const
 
 void SpaceProtocol::setScale(float x, float y, float z)
 {
+	if (_scale.getX() == x && _scale.getY() == y && _scale.getZ() == z)
+	{
+		return;
+	}
 	_scale.set(x, y, z);
 	onSpaceChange();
 }
 
 void render::SpaceProtocol::setScale(const math::Vector2& scale)
 {
+	if (_scale.getX() == scale.getX() && _scale.getY() == scale.getY())
+	{
+		return;
+	}
 	_scale = scale;
 	onSpaceChange();
 }
 
 void SpaceProtocol::setScale(const math::Vector3& scale)
 {
+	if (_scale == scale)
+	{
+		return;
+	}
 	_scale = scale;
 	onSpaceChange();
 }
 
 void SpaceProtocol::setScale(float scale)
 {
+	if (_scale.getX() == scale && _scale.getY() == scale && _scale.getZ() == scale)
+	{
+		return;
+	}
 	_scale.set(scale, scale, scale);
 	onSpaceChange();
 }
@@ -80,12 +112,20 @@ const math::Vector3& SpaceProtocol::getScale() const
 
 void SpaceProtocol::setRotation(float x, float y, float z)
 {
+	if (_rotation.getX() == x && _rotation.getY() == y && _rotation.getZ() == z)
+	{
+		return;
+	}
 	_rotation.set(x, y, z);
 	onSpaceChange();
 }
 
 void SpaceProtocol::setRotation(const math::Vector3& rotation)
 {
+	if (_rotation == rotation)
+	{
+		return;
+	}
 	_rotation = rotation;
 	onSpaceChange();
 }
@@ -97,18 +137,30 @@ const math::Vector3& SpaceProtocol::getRotation() const
 
 void SpaceProtocol::setPositionX(float x)
 {
+	if (_position.getX() == x)
+	{
+		return;
+	}
 	_position.setX(x);
 	onSpaceChange();
 }
 
 void SpaceProtocol::setPositionY(float y)
 {
+	if (_position.getY() == y)
+	{
+		return;
+	}
 	_position.setY(y);
 	onSpaceChange();
 }
 
 void SpaceProtocol::setPositionZ(float z)
 {
+	if (_position.getZ() == z)
+	{
+		return;
+	}
 	_position.setZ(z);
 	onSpaceChange();
 }
@@ -130,18 +182,30 @@ float SpaceProtocol::getPositionZ() const
 
 void SpaceProtocol::setScaleX(float x)
 {
+	if (_scale.getX() == x)
+	{
+		return;
+	}
 	_scale.setX(x);
 	onSpaceChange();
 }
 
 void SpaceProtocol::setScaleY(float y)
 {
+	if (_scale.getY() == y)
+	{
+		return;
+	}
 	_scale.setY(y);
 	onSpaceChange();
 }
 
 void SpaceProtocol::setScaleZ(float z)
 {
+	if (_scale.getZ() == z)
+	{
+		return;
+	}
 	_scale.setZ(z);
 	onSpaceChange();
 }
@@ -163,18 +227,30 @@ float SpaceProtocol::getScaleZ() const
 
 void SpaceProtocol::setRotationX(float x)
 {
+	if (_rotation.getX() == x)
+	{
+		return;
+	}
 	_rotation.setX(x);
 	onSpaceChange();
 }
 
 void SpaceProtocol::setRotationY(float y)
 {
+	if (_rotation.getY() == y)
+	{
+		return;
+	}
 	_rotation.setY(y);
 	onSpaceChange();
 }
 
 void SpaceProtocol::setRotationZ(float z)
 {
+	if (_rotation.getZ() == z)
+	{
+		return;
+	}
 	_rotation.setZ(z);
 	onSpaceChange();
 }
@@ -208,24 +284,40 @@ BodyProtocol::~BodyProtocol()
 
 void BodyProtocol::setAnchorPoint(float x, float y, float z)
 {
+	if (_anchor.getX() == x && _anchor.getY() == y && _anchor.getZ() == z)
+	{
+		return;
+	}
 	_anchor.set(x, y, z);
 	onBodyChange();
 }
 
 void BodyProtocol::setAnchorPoint(float x, float y)
 {
+	if (_anchor.getX() == x && _anchor.getY() == y)
+	{
+		return;
+	}
 	_anchor.set(x, y);
 	onBodyChange();
 }
 
 void BodyProtocol::setAnchorPoint(const math::Vector3& anchor)
 {
+	if (_anchor == anchor)
+	{
+		return;
+	}
 	_anchor = anchor;
 	onBodyChange();
 }
 
 void BodyProtocol::setAnchorPoint(const math::Vector2& anchor)
 {
+	if (_anchor.getX() == anchor.getX() && _anchor.getY() == anchor.getY())
+	{
+		return;
+	}
 	_anchor = anchor;
 	onBodyChange();
 }
@@ -237,24 +329,40 @@ const math::Vector3& BodyProtocol::getAnchorPoint() const
 
 void BodyProtocol::setVolume(float w, float h, float d)
 {
+	if (_volume.getWidth() == w && _volume.getHeight() == h && _volume.getDepth() == d)
+	{
+		return;
+	}
 	_volume.set(w, h, d);
 	onBodyChange();
 }
 
 void BodyProtocol::setVolume(float w, float h)
 {
+	if (_volume.getWidth() == w && _volume.getHeight() == h)
+	{
+		return;
+	}
 	_volume.set(w, h);
 	onBodyChange();
 }
 
 void BodyProtocol::setVolume(const math::Volume& volume)
 {
+	if (_volume == volume)
+	{
+		return;
+	}
 	_volume = volume;
 	onBodyChange();
 }
 
 void BodyProtocol::setVolume(const math::Size& size)
 {
+	if (_volume.getWidth() == size.getWidth() && _volume.getHeight() == size.getHeight())
+	{
+		return;
+	}
 	_volume.set(size.getWidth(), size.getHeight());
 	onBodyChange();
 }
@@ -266,18 +374,30 @@ const math::Volume& BodyProtocol::getVolume() const
 
 void BodyProtocol::setWidth(float w)
 {
+	if (_volume.getWidth() == w)
+	{
+		return;
+	}
 	_volume.setWidth(w);
 	onBodyChange();
 }
 
 void BodyProtocol::setHeight(float h)
 {
+	if (_volume.getHeight() == h)
+	{
+		return;
+	}
 	_volume.setHeight(h);
 	onBodyChange();
 }
 
 void BodyProtocol::setDepth(float d)
 {
+	if (_volume.getDepth() == d)
+	{
+		return;
+	}
 	_volume.setDepth(d);
 	onBodyChange();
 }
@@ -309,6 +429,10 @@ float render::BodyProtocol::getAnchorPointX() const
 
 void render::BodyProtocol::setAnchorPointX(float value)
 {
+	if (_anchor.getX() == value)
+	{
+		return;
+	}
 	_anchor.setX(value);
 
 	onBodyChange();
@@ -321,6 +445,10 @@ float render::BodyProtocol::getAnchorPointY() const
 
 void render::BodyProtocol::setAnchorPointY(float value)
 {
+	if (_anchor.getY() == value)
+	{
+		return;
+	}
 	_anchor.setY(value);
 
 	onBodyChange();
@@ -333,6 +461,10 @@ float render::BodyProtocol::getAnchorPointZ() const
 
 void render::BodyProtocol::setAnchorPointZ(float value)
 {
+	if (_anchor.getZ() == value)
+	{
+		return;
+	}
 	_anchor.setZ(value);
 
 	onBodyChange();

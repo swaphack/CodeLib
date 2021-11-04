@@ -18,15 +18,25 @@ void tool::TextAtlasPacker::setText(const std::string& content, const std::strin
     _textDefine.filepath = fontFilePath;
 }
 
+void tool::TextAtlasPacker::setAtlas(const std::string& imgFilePath, const std::string& atlasFilePath)
+{
+	_textureAtlas.setAtlasPath(atlasFilePath);
+	_textureAtlas.setImagePath(imgFilePath);
+}
+
 const sys::FontTextureAtlas& tool::TextAtlasPacker::getTextureAtlas() const
 {
 	return _textureAtlas;
 }
 
-void tool::TextAtlasPacker::loadTextureAtlas(const std::string& atlasFilePath)
+sys::FontTextureAtlas& tool::TextAtlasPacker::getTextureAtlas()
+{
+	return _textureAtlas;
+}
+
+void tool::TextAtlasPacker::loadTextureAtlas(const std::string& imageFilePath, const std::string& atlasFilePath)
 {
 	_textureAtlas.removeAllChips();
-	_textureAtlas.setAtlasPath(atlasFilePath);
 
 	XmlHelper helper;
 	if (!helper.loadFile(atlasFilePath))
@@ -42,6 +52,8 @@ void tool::TextAtlasPacker::loadTextureAtlas(const std::string& atlasFilePath)
 		if (it != attributes.end()) _textureAtlas.setFontSize(atoi(it->second.c_str()));
 		it = attributes.find("lineHeight");
 		if (it != attributes.end()) _textureAtlas.setLineHeight(atoi(it->second.c_str()));
+		it = attributes.find("imagePath");
+		if (it != attributes.end()) _textureAtlas.setImagePath(it->second.c_str());
 	}
 
 	helper.foreach([this](tinyxml2::XMLElement* element) {
@@ -74,13 +86,12 @@ void tool::TextAtlasPacker::loadTextureAtlas(const std::string& atlasFilePath)
 
 void tool::TextAtlasPacker::saveTextureAtlas(const std::string& atlasFilePath)
 {
-	_textureAtlas.setAtlasPath(atlasFilePath);
-
 	XmlHelper helper;
 
 	std::map<std::string, std::string> attributes;
 	attributes["fontSize"] = getCString("%d", _textureAtlas.getFontSize());
 	attributes["lineHeight"] = getCString("%d", _textureAtlas.getLineHeight());
+	attributes["imagePath"] = _textureAtlas.getImagePath();
 	helper.setRootAttributes(attributes);
 
 	for (const auto& item : _textureAtlas.getAllChips())
@@ -107,6 +118,7 @@ void tool::TextAtlasPacker::saveTexAltas(const std::string& imgFilePath, const s
 	std::map<int, std::string> ids;
 
 	alg::Bin2D bin;
+	bin.setAutoRotate(isAutoRotate());
 	bin.setSize(_size.getWidth(), _size.getHeight());
 	for (const auto& item : mapDetails)
 	{

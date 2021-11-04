@@ -26,6 +26,7 @@ namespace math
 		float getMinX() const;
 		float getMiddleX() const;
 		float getMaxX() const;
+
 		float getMinY() const;
 		float getMiddleY() const;
 		float getMaxY() const;

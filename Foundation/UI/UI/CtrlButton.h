@@ -143,7 +143,7 @@ namespace ui
 		*/
 		float getTouchScale() const;
 	protected:
-		void onButtonBodyChange();
+		void onButtonTextChange();
 	private:
 		struct ButtonImage
 		{
@@ -165,5 +165,9 @@ namespace ui
 		bool _selected = false;
 		// 生效
 		bool _enableButton = false;
+		// 文本水平对齐方式
+		sys::HorizontalAlignment _textHoriztontalAlignment = sys::HorizontalAlignment::CENTER;
+		// 文本垂直对齐方式
+		sys::VerticalAlignment _textVerticalAlignment = sys::VerticalAlignment::MIDDLE;
 	};
 }

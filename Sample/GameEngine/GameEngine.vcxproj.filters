@@ -16,6 +16,9 @@
     <Filter Include="Classes\Env">
       <UniqueIdentifier>{3139719b-d13b-4797-a0c1-a14f5b4f8c40}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Classes\Tool">
+      <UniqueIdentifier>{d997a6ed-d8db-4393-9931-bc7aea4945b7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Classes\GLRenderApplication.cpp">
@@ -87,12 +90,6 @@
     <ClCompile Include="Classes\Node\TestMeshNode.cpp">
       <Filter>Classes\Node</Filter>
     </ClCompile>
-    <ClCompile Include="Classes\Node\TestMathNode.cpp">
-      <Filter>Classes\Node</Filter>
-    </ClCompile>
-    <ClCompile Include="Classes\Node\TestAlgNode.cpp">
-      <Filter>Classes\Node</Filter>
-    </ClCompile>
     <ClCompile Include="Classes\Env\SystemEnv.cpp">
       <Filter>Classes\Env</Filter>
     </ClCompile>
@@ -108,8 +105,14 @@
     <ClCompile Include="Classes\Env\Utility.cpp">
       <Filter>Classes\Env</Filter>
     </ClCompile>
-    <ClCompile Include="Classes\Node\TestTool.cpp">
-      <Filter>Classes\Node</Filter>
+    <ClCompile Include="Classes\Tool\TestTexturePack.cpp">
+      <Filter>Classes\Tool</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Tool\TestMath.cpp">
+      <Filter>Classes\Tool</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Tool\TestAlgorithm.cpp">
+      <Filter>Classes\Tool</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -182,12 +185,6 @@
     <ClInclude Include="Classes\Node\TestMeshNode.h">
       <Filter>Classes\Node</Filter>
     </ClInclude>
-    <ClInclude Include="Classes\Node\TestMathNode.h">
-      <Filter>Classes\Node</Filter>
-    </ClInclude>
-    <ClInclude Include="Classes\Node\TestAlgNode.h">
-      <Filter>Classes\Node</Filter>
-    </ClInclude>
     <ClInclude Include="Classes\Env\SystemEnv.h">
       <Filter>Classes\Env</Filter>
     </ClInclude>
@@ -206,8 +203,17 @@
     <ClInclude Include="Classes\Env\TestNode.h">
       <Filter>Classes\Env</Filter>
     </ClInclude>
-    <ClInclude Include="Classes\Node\TestTool.h">
-      <Filter>Classes\Node</Filter>
+    <ClInclude Include="Classes\Tool\import.h">
+      <Filter>Classes\Tool</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Tool\TestTexturePack.h">
+      <Filter>Classes\Tool</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Tool\TestMath.h">
+      <Filter>Classes\Tool</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Tool\TestAlgorithm.h">
+      <Filter>Classes\Tool</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

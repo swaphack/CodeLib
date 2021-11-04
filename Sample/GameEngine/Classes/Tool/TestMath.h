@@ -2,11 +2,11 @@
 
 #include "../Env/TestNode.h"
 
-class TestMathNode : public TestNode
+class TestMath : public TestNode
 {
 public:
-	TestMathNode();
-	virtual ~TestMathNode();
+	TestMath();
+	virtual ~TestMath();
 protected:
 	virtual void initNodes();
 protected:

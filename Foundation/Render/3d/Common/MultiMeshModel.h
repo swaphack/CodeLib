@@ -3,14 +3,14 @@
 #include "Common/DrawNode/MultiDrawNode.h"
 #include "3d/Environment/LightProtocol.h"
 #include "Common/struct/vertex_common.h"
-#include "Box/BoxDrawProtocol.h"
+#include "Box/BoxProtocol.h"
 
 namespace render
 {
 	class MultiMeshModel : 
 		public MultiDrawNode,
 		public LightProtocol,
-		public Box3DDrawProtocol
+		public Box3DProtocol
 	{
 	public:
 		MultiMeshModel();

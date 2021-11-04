@@ -498,13 +498,21 @@ void ui::UIProxy::loadTextures(tinyxml2::XMLElement* xmlNode)
 		}
 		else if (type == TEXTURE_TYPE_ATLAS)
 		{
-			imageAtlasPacker.loadTextureAtlas(atlas);
-			G_TEXTURE_CACHE->addTexAtlas(image, imageAtlasPacker.getTextureAtlas());
+			if (!G_TEXTURE_CACHE->containsTexAtlas(atlas))
+			{
+				imageAtlasPacker.loadTextureAtlas(image, atlas);
+				imageAtlasPacker.setAtlas(image, atlas);
+				G_TEXTURE_CACHE->addTexAtlas(image, atlas, imageAtlasPacker.getTextureAtlas());
+			}
 		}
 		else if (type == TEXTURE_TYPE_TEXT)
 		{
-			textAtlasPacker.loadTextureAtlas(atlas);
-			G_TEXT_CACHE->addTexAtlas(image, textAtlasPacker.getTextureAtlas());
+			if (!G_TEXTURE_CACHE->containsTexAtlas(atlas))
+			{
+				textAtlasPacker.loadTextureAtlas(image, atlas);
+				textAtlasPacker.setAtlas(image, atlas);
+				G_TEXT_CACHE->addTexAtlas(image, atlas, textAtlasPacker.getTextureAtlas());
+			}
 		}
 
 		pChild = pChild->NextSiblingElement();
