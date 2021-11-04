@@ -12,6 +12,8 @@
 
 using namespace render;
 
+#define DEFAULT_ZORDER 0
+
 //////////////////////////////////////////////////////////////////////////
 
 Node::Node()
@@ -118,15 +120,34 @@ void render::Node::addChild(Node* node, int zOrder)
 	{
 		return;
 	}
-	node->setZOrder(zOrder);
+	node->setZOrder(zOrder, false);
 	node->setParent(this);
-
-	SAFE_RETAIN(node);
-	_children.push_back(node);
-
 	node->setChildrenScene(getScene());
+	SAFE_RETAIN(node);
 
-	onChildrenChange();
+	int count = _children.size();
+	bool insert = false;
+	for (int i = count - 1; i >= 0; i--)
+	{
+		if (_children[i]->getZOrder() <= zOrder)
+		{
+			_children.insert(_children.begin() + i + 1, node);
+			insert = true;
+			break;
+		}
+	}
+	if (!insert)
+	{
+		_children.push_back(node);
+	}
+	
+
+	/*
+	if (zOrder != DEFAULT_ZORDER)
+	{
+		onChildrenChange();
+	}
+	*/
 }
 
 void Node::removeChild( Node* node )
@@ -147,8 +168,12 @@ void Node::removeChild( Node* node )
 	{
 		_children.erase(it);
 	}
-
-	onChildrenChange();
+	/*
+	if (node->getZOrder() != DEFAULT_ZORDER)
+	{
+		onChildrenChange();
+	}
+	*/
 }
 
 void Node::removeAllChildren()
@@ -165,7 +190,7 @@ void Node::removeAllChildren()
 	}
 
 	_children.clear();
-	onChildrenChange();
+	//onChildrenChange();
 }
 
 Node* Node::getChildByID( long id ) const
@@ -311,10 +336,15 @@ void* Node::getUserData() const
 	return _userData;
 }
 
-void Node::setZOrder(int z)
+void Node::setZOrder(int z, bool dirty)
 {
+	if (_zOrder == z) return;
 	_zOrder = z;
-	this->notify(render::NodeNotifyType::NODE);
+
+	if (dirty && this->getParent())
+	{
+		this->getParent()->notify(render::NodeNotifyType::NODE);
+	}
 }
 
 int Node::getZOrder() const
@@ -627,7 +657,7 @@ void Node::notifyEvents()
 void Node::sortChildren()
 {
 	std::vector<Node*> orderNodes;
-	bool bInsert;
+	bool bInsert = false;
 	std::vector<Node*>::iterator oIt;
 
 	auto it = _children.begin();

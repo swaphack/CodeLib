@@ -106,8 +106,8 @@ namespace render
 		// 获取数据
 		void* getUserData() const;
 	public:
-		// 设置z轴坐标
-		void setZOrder(int z);
+		// 设置z轴坐标, 父节点是否重新绘制
+		void setZOrder(int z, bool dirty = true);
 		// 获取z轴坐标
 		int getZOrder()  const;
 	public:

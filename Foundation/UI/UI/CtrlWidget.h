@@ -161,11 +161,6 @@ namespace ui
 		*/
 		void onParentPositionChange();
 	protected:
-		/** 
-		*	批量绘制
-		*/
-		void batchRender();
-	protected:
 		/**
 		*	添加内部访问控件
 		*/

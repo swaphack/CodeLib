@@ -323,20 +323,6 @@ void ui::CtrlWidget::onParentPositionChange()
 	this->notifyToAll(render::NodeNotifyType::Draw);
 }
 
-void ui::CtrlWidget::batchRender()
-{
-	for (auto& child : _children)
-	{
-		auto pWidget = child->as<CtrlWidget>();
-		if (pWidget) pWidget->batchRender();
-		auto pDrawNode = child->as<render::DrawNode>();
-		if (pDrawNode)
-		{
-
-		}
-	}
-}
-
 void ui::CtrlWidget::addProtectedWidget(CtrlWidget* widget)
 {
 	if (widget == nullptr)
