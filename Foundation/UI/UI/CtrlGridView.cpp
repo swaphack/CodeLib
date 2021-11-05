@@ -28,7 +28,7 @@ void ui::CtrlGridView::initItems()
 
 	math::Vector2 maxValue;
 
-	if (_scrollDirection == ScrollDirection::HORIZONTAL_LEFT_TO_RIGHT)
+	if (_scrollDirection == ScrollDirection::LeftToRight)
 	{
 		auto iter = _scrollWidgets.begin();
 		while (iter != _scrollWidgets.end())
@@ -54,7 +54,7 @@ void ui::CtrlGridView::initItems()
 		}
 		_content->setVolume(abs(posX) + maxValue.getX(), getHeight());
 	}
-	else if (_scrollDirection == ScrollDirection::HORIZONTAL_RIGHT_TO_LEFT)
+	else if (_scrollDirection == ScrollDirection::RightToLeft)
 	{
 		auto iter = _scrollWidgets.begin();
 		while (iter != _scrollWidgets.end())
@@ -82,7 +82,7 @@ void ui::CtrlGridView::initItems()
 		}
 		_content->setVolume(abs(posX) + maxValue.getX(), getHeight());
 	}
-	else if (_scrollDirection == ScrollDirection::VERTICAL_TOP_TO_BOTTOM)
+	else if (_scrollDirection == ScrollDirection::TopToBottom)
 	{
 		auto iter = _scrollWidgets.begin();
 		while (iter != _scrollWidgets.end())
@@ -109,7 +109,7 @@ void ui::CtrlGridView::initItems()
 		}
 		_content->setVolume(getWidth(), abs(posY) + maxValue.getY());
 	}
-	else if (_scrollDirection == ScrollDirection::VERTICAL_BOTTOM_TO_TOP)
+	else if (_scrollDirection == ScrollDirection::BottomToTop)
 	{
 		auto iter = _scrollWidgets.begin();
 		while (iter != _scrollWidgets.end())

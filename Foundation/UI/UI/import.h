@@ -17,5 +17,6 @@
 
 #include "CtrlScrollView.h"
 #include "CtrlListView.h"
+#include "CtrlTableView.h"
 #include "CtrlGridView.h"
 #include "CtrlMixGridView.h"

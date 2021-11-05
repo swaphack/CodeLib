@@ -36,6 +36,7 @@ void UIProxy::init()
 	this->registerElementParser(ELEMENT_NAME_SCALE9_IMAGE, []() { return new Scale9ImageLoader(); });
 	this->registerElementParser(ELEMENT_NAME_SCROLLVIEW, []() { return new ScrollViewLoader(); });
 	this->registerElementParser(ELEMENT_NAME_LISTVIEW, []() { return new ListViewLoader(); });
+	this->registerElementParser(ELEMENT_NAME_TABLEVIEW, []() { return new TableViewLoader(); });
 	this->registerElementParser(ELEMENT_NAME_GRIDVIEW, []() { return new GridViewLoader(); });
 	this->registerElementParser(ELEMENT_NAME_FILE, []() { return new FileLoader(); });
 }

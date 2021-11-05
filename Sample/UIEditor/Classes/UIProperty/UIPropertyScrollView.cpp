@@ -16,6 +16,7 @@ void ue::UIPropertyScrollView::initPropertyUI(ui::CtrlWidget* root)
 	}
 	UIPropertyLayout::initPropertyUI(root);
 
+	root->findWidgetByName("ScrollDirection", m_pScrollDirection);
 	root->findWidgetByName("HorizontalScroll", m_pHorizontalScroll);
 	root->findWidgetByName("VerticalScroll", m_pVerticalScroll);
 	root->findWidgetByName("MoveMultiple", m_pMoveMultiple);
@@ -49,6 +50,11 @@ void ue::UIPropertyScrollView::readWidgetProperty()
 		m_pVerticalScroll->setSelectState(pScrollView->isVerticalScroll());
 	}
 
+	if (m_pScrollDirection)
+	{
+		m_pScrollDirection->setString(getCString("%d", (int)pScrollView->getDirection()));
+	}
+
 	if (m_pMoveMultiple)
 	{
 		m_pMoveMultiple->setString(getCString("%0.2f", pScrollView->getMovingMultiple()));
@@ -78,6 +84,12 @@ void ue::UIPropertyScrollView::writeWidgetProperty()
 	if (m_pVerticalScroll)
 	{
 		pScrollView->setVerticalScroll(m_pVerticalScroll->isSelected());
+	}
+
+	if (m_pScrollDirection)
+	{
+		int value = atoi(m_pScrollDirection->getString().c_str());
+		pScrollView->setDirection((ui::ScrollDirection)value);
 	}
 
 	if (m_pMoveMultiple)

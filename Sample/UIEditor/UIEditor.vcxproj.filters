@@ -120,6 +120,12 @@
     <ClCompile Include="Classes\UIProperty\UIPropertyNode.cpp">
       <Filter>Classes\UIProperty</Filter>
     </ClCompile>
+    <ClCompile Include="Classes\UIProperty\UIPropertyTableView.cpp">
+      <Filter>Classes\UIProperty</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\UIDesign\UIDesignDir.cpp">
+      <Filter>Classes\UIDesign</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Classes\UIEditorApplication.h">
@@ -229,6 +235,15 @@
     </ClInclude>
     <ClInclude Include="Classes\UIProperty\UIPropertyNode.h">
       <Filter>Classes\UIProperty</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\UIProperty\UIPropertyTableView.h">
+      <Filter>Classes\UIProperty</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\UIDesign\UIDesignDir.h">
+      <Filter>Classes\UIDesign</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\UIDesign\common.h">
+      <Filter>Classes\UIDesign</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

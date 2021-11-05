@@ -16,7 +16,6 @@ void ue::UIPropertyListView::initPropertyUI(ui::CtrlWidget* root)
 	}
 	UIPropertyScrollView::initPropertyUI(root);
 
-	root->findWidgetByName("ScrollDirection", m_pScrollDirection);
 	root->findWidgetByName("WidthValue", m_pWidthValue);
 	root->findWidgetByName("HeightValue", m_pHeightValue);
 
@@ -37,11 +36,6 @@ void ue::UIPropertyListView::readWidgetProperty()
 	if (pListView == nullptr)
 	{
 		return;
-	}
-
-	if (m_pScrollDirection)
-	{
-		m_pScrollDirection->setString(getCString("%d", (int)pListView->getDirection()));
 	}
 
 	if (m_pWidthValue)
@@ -74,13 +68,7 @@ void ue::UIPropertyListView::writeWidgetProperty()
 	if (pListView == nullptr)
 	{
 		return;
-	}
-
-	if (m_pScrollDirection)
-	{
-		int value = atoi(m_pScrollDirection->getString().c_str());
-		pListView->setDirection((ui::ScrollDirection)value);
-	}
+	}	
 
 	sys::CSSSize size;
 	if (m_pWidthValue)

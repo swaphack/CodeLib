@@ -6,6 +6,20 @@
 
 namespace ui
 {
+	// 滑动方向
+	enum class ScrollDirection
+	{
+		None = -1,
+		// 水平从左往右
+		LeftToRight,
+		// 水平从右往左
+		RightToLeft,
+		// 水平从上往下
+		TopToBottom,
+		// 水平从下往上
+		BottomToTop,
+	};
+
 	class CtrlScrollView;
 
 	class ScrollItem : public CtrlWidget
@@ -119,6 +133,15 @@ namespace ui
 		*	设置水平方向是否可以滑动
 		*/
 		void setVerticalScroll(bool scroll);
+	public:
+		/**
+		*	设置滑动方向
+		*/
+		void setDirection(ScrollDirection direction);
+		/**
+		*	获取滑动方向
+		*/
+		ScrollDirection getDirection();
 	public:// 重写
 		virtual void addWidget(CtrlWidget* item);
 		virtual void addWidget(CtrlWidget* item, int zOrder);
@@ -129,6 +152,8 @@ namespace ui
 		virtual void initItems();
 		// 初始化管理项
 		virtual void initContent();
+		// 处理触摸
+		virtual void handMovedTouch(const math::Vector2& touchPoint);
 	protected:
 		// 管理所有项的节点
 		CtrlLayout* _content = nullptr;
@@ -143,5 +168,7 @@ namespace ui
 		bool _bVerticalScroll = false;
 		// 移动系数
 		float _movingMultiple = 1;
+		// 滑动方向
+		ScrollDirection _scrollDirection = ScrollDirection::None;
 	};
 }

@@ -8,6 +8,7 @@
 #include "UIDesignView.h"
 #include "UIDesignProperty.h"
 #include "UIDesignDirectory.h"
+#include "UIDesignDir.h"
 #include "UIDesignWindow.h"
 #include "UIDesignNodeTree.h"
 

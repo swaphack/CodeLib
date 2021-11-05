@@ -86,9 +86,10 @@ void render::Node::removeFromParentWithCleanup(bool clean)
 {
 	if (clean) this->cleanup();
 
-	ASSERT(this->getParent() != nullptr);
-
-	this->getParent()->removeChild(this);
+	if (this->getParent())
+	{
+		this->getParent()->removeChild(this);
+	}	
 }
 
 void render::Node::cleanup()

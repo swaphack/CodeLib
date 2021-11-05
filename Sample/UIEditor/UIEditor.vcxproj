@@ -26,6 +26,7 @@
     <ClCompile Include="Classes\Panel\Panel.cpp" />
     <ClCompile Include="Classes\Panel\PanelEvent.cpp" />
     <ClCompile Include="Classes\Panel\SinglePanel.cpp" />
+    <ClCompile Include="Classes\UIDesign\UIDesignDir.cpp" />
     <ClCompile Include="Classes\UIDesign\UIDesignMask.cpp" />
     <ClCompile Include="Classes\UIDesign\UIDesignNodeTree.cpp" />
     <ClCompile Include="Classes\UIDesign\UIDesignMenuBar.cpp" />
@@ -48,6 +49,7 @@
     <ClCompile Include="Classes\UIProperty\UIPropertyNode.cpp" />
     <ClCompile Include="Classes\UIProperty\UIPropertyProtocol.cpp" />
     <ClCompile Include="Classes\UIProperty\UIPropertyScrollView.cpp" />
+    <ClCompile Include="Classes\UIProperty\UIPropertyTableView.cpp" />
     <ClCompile Include="Classes\UIProperty\UIPropertyText.cpp" />
     <ClCompile Include="Classes\UIProperty\UIPropertyWidget.cpp" />
     <ClCompile Include="Classes\Window\MainWindow.cpp" />
@@ -61,8 +63,10 @@
     <ClInclude Include="Classes\Panel\Panel.h" />
     <ClInclude Include="Classes\Panel\PanelEvent.h" />
     <ClInclude Include="Classes\Panel\SinglePanel.h" />
+    <ClInclude Include="Classes\UIDesign\common.h" />
     <ClInclude Include="Classes\UIDesign\import.h" />
     <ClInclude Include="Classes\UIDesign\macros.h" />
+    <ClInclude Include="Classes\UIDesign\UIDesignDir.h" />
     <ClInclude Include="Classes\UIDesign\UIDesignMask.h" />
     <ClInclude Include="Classes\UIDesign\UIDesignNodeTree.h" />
     <ClInclude Include="Classes\UIDesign\UIDesignMenuBar.h" />
@@ -86,6 +90,7 @@
     <ClInclude Include="Classes\UIProperty\UIPropertyNode.h" />
     <ClInclude Include="Classes\UIProperty\UIPropertyProtocol.h" />
     <ClInclude Include="Classes\UIProperty\UIPropertyScrollView.h" />
+    <ClInclude Include="Classes\UIProperty\UIPropertyTableView.h" />
     <ClInclude Include="Classes\UIProperty\UIPropertyText.h" />
     <ClInclude Include="Classes\UIProperty\UIPropertyWidget.h" />
     <ClInclude Include="Classes\Window\MainWindow.h" />

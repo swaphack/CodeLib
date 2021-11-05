@@ -1,17 +1,17 @@
-#include "UIDesignDirectory.h"
+#include "UIDesignDir.h"
 #include "render.h"
 #include "Panel/PanelEvent.h"
 
-ue::UIDesignDirectory::UIDesignDirectory()
+ue::UIDesignDir::UIDesignDir()
 {
 
 }
 
-ue::UIDesignDirectory::~UIDesignDirectory()
+ue::UIDesignDir::~UIDesignDir()
 {
 }
 
-bool ue::UIDesignDirectory::init()
+bool ue::UIDesignDir::init()
 {
 	if (!Panel::init())
 	{
@@ -20,22 +20,52 @@ bool ue::UIDesignDirectory::init()
 	return true;
 }
 
-void ue::UIDesignDirectory::initUI()
+int ue::UIDesignDir::getDataCount()
 {
-	m_pRootWidget->findWidgetByName("directory", _listview);
+	return getTotalDirCount(_dirDetail);
+}
+
+math::Size ue::UIDesignDir::getDataSize(int index)
+{
+	return math::Size(this->getWidth(), CONST_ITEM_HEIGHT);
+}
+
+ui::CtrlWidget* ue::UIDesignDir::getDataCell(int index)
+{
+	int tempCount = 0;
+	bool bFile = false;
+	DirDetail detail = getDirDetail(_dirDetail, index, tempCount, bFile);
+	if (detail.name == "") return nullptr;
+	if (!bFile)
+	{// д©б╪
+		return createDirItem(CONST_ITEM_HEIGHT, detail.name, detail.fullpath);
+	}
+	else
+	{
+		return createFileItem(CONST_ITEM_HEIGHT, detail.name, detail.fullpath);
+	}
+}
+
+void ue::UIDesignDir::initUI()
+{
+	m_pRootWidget->findWidgetByName("directory", _tableView);
+	if (_tableView)
+	{
+		_tableView->setTableData(this);
+	}
 	this->setDirectory("H:/Github/CodeLib/Sample/UIEditor/Resource/");
 }
 
-void ue::UIDesignDirectory::initEvent()
+void ue::UIDesignDir::initEvent()
 {
 }
 
-void ue::UIDesignDirectory::initText()
+void ue::UIDesignDir::initText()
 {
 
 }
 
-void ue::UIDesignDirectory::setDirectory(const std::string& root)
+void ue::UIDesignDir::setDirectory(const std::string& root)
 {
 	_root = root;
 
@@ -44,16 +74,19 @@ void ue::UIDesignDirectory::setDirectory(const std::string& root)
 	this->updateRootPanel(true);
 }
 
-void ue::UIDesignDirectory::updateRootPanel(bool cleanFold)
+void ue::UIDesignDir::updateRootPanel(bool cleanFold)
 {
-	_listview->removeAllItems();
 	if (cleanFold)
 		_dirFoldInfo.clear();
 
-	this->updateRootList(_listview, _dirDetail);
+	if (_tableView)
+	{
+		_tableView->reload();
+	}
+	//this->updateRootList(_listview, _dirDetail);
 }
 
-void ue::UIDesignDirectory::updateRootList(ui::CtrlListView* layout, const DirDetail& detail, int layer)
+void ue::UIDesignDir::updateRootList(ui::CtrlListView* layout, const DirDetail& detail, int layer)
 {
 	if (layout == nullptr)
 	{
@@ -75,7 +108,7 @@ void ue::UIDesignDirectory::updateRootList(ui::CtrlListView* layout, const DirDe
 		pItem->setSelectState(isFolded);
 		layout->addItem(pItem);
 	}
-	
+
 	// нд╪Ч
 	if (!isFolded)
 	{
@@ -96,7 +129,7 @@ void ue::UIDesignDirectory::updateRootList(ui::CtrlListView* layout, const DirDe
 	}
 }
 
-ui::CtrlButton* ue::UIDesignDirectory::createDirItem(int height, const std::string& name, const std::string& fullpath)
+ui::CtrlButton* ue::UIDesignDir::createDirItem(int height, const std::string& name, const std::string& fullpath)
 {
 	auto pWidget = createWidget<ui::CtrlButton>();
 	if (pWidget == nullptr)
@@ -105,6 +138,7 @@ ui::CtrlButton* ue::UIDesignDirectory::createDirItem(int height, const std::stri
 	}
 
 	auto pItem = pWidget->getLayoutItem();
+	//pItem->setMarginState(false, false, false, false);
 
 	pItem->setMargin(2, 2, 2, 2);
 	pItem->getSize().setWidth(sys::NumberType::Percent, ONE_HUNDRED);
@@ -124,12 +158,12 @@ ui::CtrlButton* ue::UIDesignDirectory::createDirItem(int height, const std::stri
 		pWidget->addClickFunc([this, fullpath](CtrlWidget*) {
 			this->onChangeFoldState(fullpath);
 			this->updateRootPanel(false);
-		});
+			});
 	}
 	return pWidget;
 }
 
-ui::CtrlButton* ue::UIDesignDirectory::createFileItem(int height, const std::string& name, const std::string& fullpath)
+ui::CtrlButton* ue::UIDesignDir::createFileItem(int height, const std::string& name, const std::string& fullpath)
 {
 	auto pWidget = createWidget<ui::CtrlButton>();
 	if (pWidget == nullptr)
@@ -138,8 +172,8 @@ ui::CtrlButton* ue::UIDesignDirectory::createFileItem(int height, const std::str
 	}
 
 	auto pItem = pWidget->getLayoutItem();
-
-	pItem->setMargin(2, 2, 2, 2);
+	
+	//pItem->setMarginState(false, false, false, false);
 	pItem->getSize().setWidth(sys::NumberType::Percent, ONE_HUNDRED);
 	pItem->getSize().setHeight(sys::NumberType::Fixed, height);
 
@@ -156,13 +190,62 @@ ui::CtrlButton* ue::UIDesignDirectory::createFileItem(int height, const std::str
 		pWidget->setTextVerticalAlignment(sys::VerticalAlignment::BOTTOM);
 		pWidget->addClickFunc([this, fullpath](CtrlWidget*) {
 			G_PANELEVT->setSelectFile(fullpath);
-		});
+			});
 	}
-	
+
 	return pWidget;
 }
 
-void ue::UIDesignDirectory::onChangeFoldState(const std::string& name)
+int ue::UIDesignDir::getTotalDirCount(const DirDetail& detail)
+{
+	int count = 1;
+
+	if (detail.files.size() == 0 && detail.subDirs.size() == 0)
+	{
+		return count;
+	}
+	for (const auto& item : detail.subDirs)
+	{
+		if (isDirFolded(item.fullpath)) continue;
+		count += getTotalDirCount(item);
+	}
+	count += detail.files.size();
+	return count;
+}
+
+ue::DirDetail ue::UIDesignDir::getDirDetail(const DirDetail& detail, int index, int tempCount, bool& bFile)
+{
+	DirDetail tempDetail;
+	tempCount += 1;
+	if (index == tempCount - 1)
+	{
+		bFile = false;
+		return detail;
+	}
+	if (detail.files.size() == 0 && detail.subDirs.size() == 0)
+	{
+		bFile = false;
+		return tempDetail;
+	}
+	for (const auto& item : detail.subDirs)
+	{
+		if (isDirFolded(item.fullpath)) continue;
+		auto result = getDirDetail(item, index, tempCount, bFile);
+		if (result.name != "") return result;
+	}
+	if (index < tempCount + detail.files.size())
+	{
+		int offset = index - tempCount;
+		tempDetail.name = detail.files[offset];
+		tempDetail.fullpath = detail.fullpath +"/" + detail.name;
+		bFile = true;
+		return tempDetail;
+	}
+	tempCount += detail.files.size();
+	return tempDetail;
+}
+
+void ue::UIDesignDir::onChangeFoldState(const std::string& name)
 {
 	auto it = _dirFoldInfo.find(name);
 	if (it != _dirFoldInfo.end())
@@ -175,7 +258,7 @@ void ue::UIDesignDirectory::onChangeFoldState(const std::string& name)
 	}
 }
 
-bool ue::UIDesignDirectory::isDirFolded(const std::string& name)
+bool ue::UIDesignDir::isDirFolded(const std::string& name)
 {
 	auto it = _dirFoldInfo.find(name);
 

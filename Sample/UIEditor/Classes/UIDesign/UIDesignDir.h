@@ -6,13 +6,26 @@
 namespace ue
 {
 	// 目录栏
-	class UIDesignDirectory : public Panel
+	class UIDesignDir : public Panel, public ui::TableDataProtocol
 	{
 	public:
-		UIDesignDirectory();
-		virtual ~UIDesignDirectory();
+		UIDesignDir();
+		virtual ~UIDesignDir();
 	public:
 		virtual bool init();
+	public:
+		/**
+		*	总数量
+		*/
+		virtual int getDataCount();
+		/**
+		*  大小
+		*/
+		virtual math::Size getDataSize(int index);
+		/**
+		*  控件
+		*/
+		virtual ui::CtrlWidget* getDataCell(int index);
 	protected:
 		/**
 		*	初始化
@@ -58,6 +71,14 @@ namespace ue
 		*	创建文件名字
 		*/
 		ui::CtrlButton* createFileItem(int height, const std::string& name, const std::string& fullpath);
+		/**
+		*	获取总的目录（包含文件）数
+		*/
+		int getTotalDirCount(const DirDetail& detail);
+		/**
+		*	获取目录（包含文件）信息
+		*/
+		DirDetail getDirDetail(const DirDetail& detail, int index, int tempCount, bool& bFile);
 	private:
 		const float CONST_OFFSET_Y = 5;
 		const float CONST_ITEM_HEIGHT = 20;
@@ -68,6 +89,6 @@ namespace ue
 		// 对折信息
 		std::map<std::string, bool> _dirFoldInfo;
 
-		ui::CtrlListView* _listview = nullptr;
+		ui::CtrlTableView* _tableView = nullptr;
 	};
 }

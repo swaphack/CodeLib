@@ -4,18 +4,6 @@
 
 namespace ui
 {
-	// 滑动方向
-	enum class ScrollDirection
-	{
-		// 水平从左往右
-		HORIZONTAL_LEFT_TO_RIGHT,
-		// 水平从右往左
-		HORIZONTAL_RIGHT_TO_LEFT,
-		// 水平从上往下
-		VERTICAL_TOP_TO_BOTTOM,
-		// 水平从下往上
-		VERTICAL_BOTTOM_TO_TOP,
-	};
 
 	// 列表
 	class CtrlListView : public CtrlScrollView
@@ -26,14 +14,6 @@ namespace ui
 	public:
 		virtual bool init();
 	public:
-		/**
-		*	设置滑动方向
-		*/
-		void setDirection(ScrollDirection direction);
-		/**
-		*	获取滑动方向
-		*/
-		ScrollDirection getDirection();
 		/**
 		*	设置项的大小
 		*/
@@ -68,15 +48,14 @@ namespace ui
 		*/
 		virtual void addItem(CtrlWidget* item, int zOrder = 0);
 	protected:
-		virtual bool onTouchMoved(float x, float y, bool include);
+		// 处理触摸
+		virtual void handMovedTouch(const math::Vector2& touchPoint);
 	protected:
 		// 初始化滑动项
 		virtual void initItems();
 		// 初始化管理项
 		virtual void initContent();
 	protected:
-		// 滑动方向
-		ScrollDirection _scrollDirection = ScrollDirection::HORIZONTAL_LEFT_TO_RIGHT;
 		// 项的大小
 		sys::CSSSize _itemSize;
 		// 是否使用设置的大小

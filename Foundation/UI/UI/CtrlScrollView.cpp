@@ -99,51 +99,12 @@ bool ui::CtrlScrollView::init()
 
 
 	this->addTouchFunc(render::TouchType::BEGAN, [this](const math::Vector2& touchPoint) {
-
 		_touchPosition = touchPoint;
 
 	});
 	this->addTouchFunc(render::TouchType::MOVED, [this](const math::Vector2& touchPoint) {
-		if (!_bHorizontalScroll && !_bVerticalScroll) return;
-
-		math::Vector2 delta = touchPoint;
-		delta -= _touchPosition;
-
-		delta *= getMovingMultiple();
-
-		float offX = -getAnchorPoint().getX() * getWidth();
-		float offY = -getAnchorPoint().getY() * getHeight();
-
-		math::Vector3 pos = _content->getPosition();
-
-		float min = 0;
-		float max = 0;
-
-		if (_bHorizontalScroll)
-		{
-			pos.setX(pos.getX() + delta.getX());
-			min = getWidth() - _content->getWidth() + offX;
-			max = 0 + offX;
-			if (pos.getX() < min) pos.setX(min);
-			if (pos.getX() > max) pos.setX(max);
-		}
-
-		if (_bVerticalScroll)
-		{
-			pos.setY(pos.getY() + delta.getY());
-
-			min = getHeight() - _content->getHeight() + offY;
-			max = 0 + offY;
-			if (pos.getY() < min) pos.setY(min);
-			if (pos.getY() > max) pos.setY(max);
-		}
-
-		_content->setPosition(pos);
-		
-		_touchPosition = touchPoint;
+		this->handMovedTouch(touchPoint);
 	});
-
-	//this->scheduleForever(0, 0.1f, [this](float dt) {	this->updateScrollDrawState(); });
 
 	return true;
 }
@@ -178,9 +139,8 @@ void ui::CtrlScrollView::addItem(CtrlWidget* item, const sys::CSSSize& size, int
 	{
 		return;
 	}
-	//ScrollItem* pScrollItem = ScrollItem::create(item, size, this);
 	item->getLayoutItem()->setSize(size);
-	_content->addWidget(item, zOrder);
+	_content->addWidget(item);
 	_scrollWidgets.push_back(item);
 
 	notify(NodeNotifyType::GEOMETRY);
@@ -192,30 +152,26 @@ void CtrlScrollView::removeItem(CtrlWidget* item)
 	{
 		return;
 	}
-	
-	auto iter = _scrollWidgets.begin();
-	while (iter != _scrollWidgets.end())
+	auto it = std::find(_scrollWidgets.begin(), _scrollWidgets.end(), item);
+	if (it != _scrollWidgets.end())
 	{
-		if ((*iter) == item)
-		{
-			_content->removeWidget(*iter);
-			_scrollWidgets.erase(iter);
-			break;
-		}
-		iter++;
-	}
+		_content->removeWidget(item);
+		_scrollWidgets.erase(it);
 
-	notify(NodeNotifyType::GEOMETRY);
+		notify(NodeNotifyType::GEOMETRY);
+	}
 }
 
 void CtrlScrollView::removeAllItems()
 {
-	auto iter = _scrollWidgets.begin();
-	while (iter != _scrollWidgets.end())
+	if (_scrollWidgets.size() == 0)
 	{
-		//(*iter)->removeAllWidgets();
-		(*iter)->removeFromParent();
-		iter++;
+		return;
+	}
+
+	for (auto & item : _scrollWidgets)
+	{
+		item->removeFromParent();
 	}
 
 	_scrollWidgets.clear();
@@ -274,6 +230,20 @@ void ui::CtrlScrollView::setVerticalScroll(bool scroll)
 	_bVerticalScroll = scroll;
 }
 
+void ui::CtrlScrollView::setDirection(ScrollDirection direction)
+{
+	if (_scrollDirection == direction) return;
+
+	_scrollDirection = direction;
+
+	notify(NodeNotifyType::GEOMETRY);
+}
+
+ui::ScrollDirection ui::CtrlScrollView::getDirection()
+{
+	return _scrollDirection;
+}
+
 void ui::CtrlScrollView::addWidget(CtrlWidget* item)
 {
 	this->addItem(item);
@@ -296,12 +266,59 @@ void ui::CtrlScrollView::removeAllWidgets()
 
 void CtrlScrollView::initItems()
 {
-	
+	/*
+	_content->removeAllChildren();
+	for (auto& item : _scrollWidgets)
+	{
+		item->isOverlap()
+	}
+	*/
 }
 
 void CtrlScrollView::initContent()
 {
 	
+}
+
+void ui::CtrlScrollView::handMovedTouch(const math::Vector2& touchPoint)
+{
+	if (!_bHorizontalScroll && !_bVerticalScroll) return;
+
+	math::Vector2 delta = touchPoint;
+	delta -= _touchPosition;
+
+	delta *= getMovingMultiple();
+
+	float offX = -getAnchorPoint().getX() * getWidth();
+	float offY = -getAnchorPoint().getY() * getHeight();
+
+	math::Vector3 pos = _content->getPosition();
+
+	float min = 0;
+	float max = 0;
+
+	if (_bHorizontalScroll)
+	{
+		pos.setX(pos.getX() + delta.getX());
+		min = getWidth() - _content->getWidth() + offX;
+		max = 0 + offX;
+		if (pos.getX() < min) pos.setX(min);
+		if (pos.getX() > max) pos.setX(max);
+	}
+
+	if (_bVerticalScroll)
+	{
+		pos.setY(pos.getY() + delta.getY());
+
+		min = getHeight() - _content->getHeight() + offY;
+		max = 0 + offY;
+		if (pos.getY() < min) pos.setY(min);
+		if (pos.getY() > max) pos.setY(max);
+	}
+
+	_content->setPosition(pos);
+
+	_touchPosition = touchPoint;
 }
 
 void CtrlScrollView::setInnerSize(const math::Size& size)

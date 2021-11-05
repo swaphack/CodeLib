@@ -14,6 +14,11 @@ TouchManager::TouchManager()
 
 TouchManager::~TouchManager()
 {
+	for (auto item : _temps)
+	{
+		SAFE_RELEASE(item->getTouchNode());
+	}
+	_temps.clear();
 }
 
 void render::TouchManager::addTarget(TouchProtocol* target)
@@ -44,6 +49,7 @@ void render::TouchManager::removeTarget(TouchProtocol* target)
 		auto it = std::find(_temps.begin(), _temps.end(), target);
 		if (it != _temps.end())
 		{
+			SAFE_RELEASE(target->getTouchNode());
 			_temps.erase(it);
 		}
 	}
@@ -104,6 +110,7 @@ void TouchManager::onTouchBegan(const math::Vector2& touchPoint)
 	{
 		if (item->onTouchBegan(touchPoint))
 		{
+			SAFE_RETAIN(item->getTouchNode());
 			_temps.push_back(item);
 			if (item->isTouchSwallowed())
 			{
@@ -136,6 +143,7 @@ void render::TouchManager::onTouchCanceled(const math::Vector2& touchPoint)
 	for (auto item : _temps)
 	{
 		item->onTouchCanceled(touchPoint);
+		SAFE_RELEASE(item->getTouchNode());
 	}
 	_temps.clear();
 }

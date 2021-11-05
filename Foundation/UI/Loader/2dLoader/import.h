@@ -12,6 +12,7 @@
 
 #include "ScrollViewLoader.h"
 #include "ListViewLoader.h"
+#include "TableViewLoader.h"
 #include "GridViewLoader.h"
 
 #include "FileLoader.h"

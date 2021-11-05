@@ -9,6 +9,7 @@ ue::MainWindow::MainWindow()
 	proxy->registerElementParser(UI_DESIGN_MENUBAR, []() { return new ui::TFileLoader<UIDesignMenuBar>(); });
 	proxy->registerElementParser(UI_DESIGN_WIDGET, []() { return new ui::TFileLoader<UIDesignWidget>(); });
 	proxy->registerElementParser(UI_DESIGN_DIRECTORY, []() { return new ui::TFileLoader<UIDesignDirectory>(); });
+	proxy->registerElementParser(UI_DESIGN_DIR, []() { return new ui::TFileLoader<UIDesignDir>(); });
 	proxy->registerElementParser(UI_DESIGN_VIEW, []() { return new ui::TFileLoader<UIDesignView>(); });
 	proxy->registerElementParser(UI_DESIGN_PROPERTY, []() { return new ui::TFileLoader<UIDesignProperty>(); });
 	proxy->registerElementParser(UI_DESIGN_NODE_TREE, []() { return new ui::TFileLoader<UIDesignNodeTree>(); });

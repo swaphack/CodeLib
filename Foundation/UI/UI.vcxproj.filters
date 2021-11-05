@@ -146,6 +146,9 @@
     <ClInclude Include="Loader\2dLoader\TextAtlasLoader.h">
       <Filter>Loader\2dLoader</Filter>
     </ClInclude>
+    <ClInclude Include="Loader\2dLoader\TableViewLoader.h">
+      <Filter>Loader\2dLoader</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Display">
@@ -283,6 +286,9 @@
       <Filter>UI</Filter>
     </ClCompile>
     <ClCompile Include="Loader\2dLoader\TextAtlasLoader.cpp">
+      <Filter>Loader\2dLoader</Filter>
+    </ClCompile>
+    <ClCompile Include="Loader\2dLoader\TableViewLoader.cpp">
       <Filter>Loader\2dLoader</Filter>
     </ClCompile>
   </ItemGroup>

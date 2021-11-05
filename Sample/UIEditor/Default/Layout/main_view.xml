@@ -16,7 +16,7 @@
 			<UIDesignView name="DesignView" filepath="Default/Layout/main_view_scene.xml" margin="0,280,0,300" marginState="1,1,1,1"/>
 			<Layout margin="0,0,0,0" marginState="1,1,1,0" size="280,0">
 				<UIDesignProperty name="DesignProperty" filepath="Default/Layout/main_view_property.xml" size="100%, 50%" margin="0,0,0,0" marginState="1,1,0,1"/>
-				<UIDesignDirectory name="DesignDirectory" filepath="Default/Layout/main_view_directory.xml" size="100%, 50%" margin="0,0,0,0" marginState="0,1,1,1"/>
+				<UIDesignDir name="DesignDir" filepath="Default/Layout/main_view_dir.xml" size="100%, 50%" margin="0,0,0,0" marginState="0,1,1,1"/>
 			</Layout>
 			<UIDesignMask name="DesignMask" filepath="Default/Layout/main_view_mask.xml" margin="0,0,0,0" marginState="1,1,1,1"/>
 		</Layout>

@@ -38,6 +38,7 @@ bool ue::UIDesignProperty::init()
 	//m_mapWidgetPropertyProtocol[ELEMENT_NAME_FILE] = new UIPropertyWidget();
 	m_mapWidgetPropertyProtocol[ELEMENT_NAME_SCROLLVIEW] = new UIPropertyScrollView();
 	m_mapWidgetPropertyProtocol[ELEMENT_NAME_LISTVIEW] = new UIPropertyListView();
+	m_mapWidgetPropertyProtocol[ELEMENT_NAME_TABLEVIEW] = new UIPropertyTableView();
 	m_mapWidgetPropertyProtocol[ELEMENT_NAME_GRIDVIEW] = new UIPropertyGridView();
 
 	G_PANELEVT->addEventListener(PANEL_SELECT_VIEW_WIDGET, this, [this](const sys::Event* evt) {

@@ -4,6 +4,7 @@ using namespace render;
 
 ui::CtrlListView::CtrlListView()
 {
+	_scrollDirection = ScrollDirection::LeftToRight;
 }
 
 ui::CtrlListView::~CtrlListView()
@@ -17,114 +18,7 @@ bool ui::CtrlListView::init()
 		return false;
 	}
 
-	this->removeTouchFunc(render::TouchType::MOVED);
-	this->addTouchFunc(render::TouchType::MOVED, [this](const math::Vector2& touchPoint) {
-		math::Vector2 delta = touchPoint;
-		delta -= _touchPosition;
-
-		delta *= getMovingMultiple();
-
-		math::Vector3 pos = _content->getPosition();
-
-		float min = 0;
-		float max = 0;
-
-		if (_scrollDirection == ScrollDirection::HORIZONTAL_LEFT_TO_RIGHT)
-		{
-			if (!_bHorizontalScroll) return;
-
-			pos.setX(pos.getX() + delta.getX());
-			if (getWidth() > _content->getWidth())
-			{
-				min = 0;
-				max = 0;
-			}
-			else
-			{
-				min = getWidth() - _content->getWidth();
-				max = 0;
-			}
-
-			if (pos.getX() < min) pos.setX(min);
-			if (pos.getX() > max) pos.setX(max);
-		}
-		else if (_scrollDirection == ScrollDirection::HORIZONTAL_RIGHT_TO_LEFT)
-		{
-			if (!_bHorizontalScroll) return;
-
-			pos.setX(pos.getX() + delta.getX());
-			if (getWidth() > _content->getWidth())
-			{
-				min = getWidth()-_content->getWidth();
-				max = getWidth()-_content->getWidth();
-			}
-			else
-			{
-				min = getWidth() - _content->getWidth();
-				max = 0;
-			}
-			if (pos.getX() < min) pos.setX(min);
-			if (pos.getX() > max) pos.setX(max);
-		}
-		else if (_scrollDirection == ScrollDirection::VERTICAL_TOP_TO_BOTTOM)
-		{
-			if (!_bVerticalScroll) return;
-
-			pos.setY(pos.getY() + delta.getY());
-			if (getHeight() > _content->getHeight())
-			{
-				min = getHeight() - _content->getHeight();
-				max = getHeight() - _content->getHeight();
-			}
-			else
-			{
-				min = getHeight() - _content->getHeight();
-				max = 0;
-			}
-			if (pos.getY() < min) pos.setY(min);
-			if (pos.getY() > max) pos.setY(max);
-		}
-		else if (_scrollDirection == ScrollDirection::VERTICAL_BOTTOM_TO_TOP)
-		{
-			if (!_bVerticalScroll) return;
-
-			pos.setY(pos.getY() + delta.getY());
-			if (getHeight() > _content->getHeight())
-			{
-				min = 0;
-				max = 0;
-			}
-			else
-			{
-				min = getHeight() - _content->getHeight();
-				max = 0;
-			}
-			if (pos.getY() < min) pos.setY(min);
-			if (pos.getY() > max) pos.setY(max);
-		}
-
-		//_content->getActionProxy()->stopAllActions();
-		//if (_content->getPosition() != pos)
-		//{
-		//	_content->getActionProxy()->runAction(render::MoveToAction::create(1.0f, pos));
-		//}
-		_content->setPosition(pos);
-		_touchPosition = touchPoint;
-	});
-
 	return true;
-}
-
-void ui::CtrlListView::setDirection(ScrollDirection direction)
-{
-	_scrollDirection = direction;
-
-	notify(NodeNotifyType::GEOMETRY);
-}
-
-ui::ScrollDirection ui::CtrlListView::getDirection()
-{
-	return _scrollDirection;
 }
 
 void ui::CtrlListView::setItemSize(const sys::CSSSize& size)
@@ -174,55 +68,43 @@ void ui::CtrlListView::initItems()
 	float posX = 0;
 	float posY = 0;
 
-	if (_scrollDirection == ScrollDirection::HORIZONTAL_LEFT_TO_RIGHT)
+	if (_scrollDirection == ScrollDirection::LeftToRight)
 	{
-		auto iter = _scrollWidgets.begin();
-		while (iter != _scrollWidgets.end())
+		for (auto& item : _scrollWidgets)
 		{
-			ui::CtrlWidget* pItem = *iter;
-			pItem->getLayoutItem()->unsetRightMargin();
-			pItem->getLayoutItem()->setLeftMargin(posX);
-			posX += pItem->getWidth();
-			iter++;
+			item->getLayoutItem()->unsetRightMargin();
+			item->getLayoutItem()->setLeftMargin(posX);
+			posX += item->getWidth();
 		}
 		_content->setVolume(abs(posX), getHeight());
 	}
-	else if (_scrollDirection == ScrollDirection::HORIZONTAL_RIGHT_TO_LEFT)
+	else if (_scrollDirection == ScrollDirection::RightToLeft)
 	{
-		auto iter = _scrollWidgets.begin();
-		while (iter != _scrollWidgets.end())
+		for (auto& item : _scrollWidgets)
 		{
-			ui::CtrlWidget* pItem = *iter;
-			pItem->getLayoutItem()->unsetLeftMargin();
-			pItem->getLayoutItem()->setRightMargin(posX);
-			posX += pItem->getWidth();
-			iter++;
+			item->getLayoutItem()->unsetLeftMargin();
+			item->getLayoutItem()->setRightMargin(posX);
+			posX += item->getWidth();
 		}
 		_content->setVolume(abs(posX), getHeight());
 	}
-	else if (_scrollDirection == ScrollDirection::VERTICAL_TOP_TO_BOTTOM)
+	else if (_scrollDirection == ScrollDirection::TopToBottom)
 	{
-		auto iter = _scrollWidgets.begin();
-		while (iter != _scrollWidgets.end())
+		for (auto& item : _scrollWidgets)
 		{
-			ui::CtrlWidget* pItem = *iter;
-			pItem->getLayoutItem()->unsetBottomMargin();
-			pItem->getLayoutItem()->setTopMargin(posY);
-			posY += pItem->getHeight();
-			iter++;
+			item->getLayoutItem()->unsetBottomMargin();
+			item->getLayoutItem()->setTopMargin(posY);
+			posY += item->getHeight();
 		}
 		_content->setVolume(getWidth(), abs(posY));
 	}
-	else if (_scrollDirection == ScrollDirection::VERTICAL_BOTTOM_TO_TOP)
+	else if (_scrollDirection == ScrollDirection::BottomToTop)
 	{
-		auto iter = _scrollWidgets.begin();
-		while (iter != _scrollWidgets.end())
+		for (auto& item : _scrollWidgets)
 		{
-			ui::CtrlWidget* pItem = *iter;
-			pItem->getLayoutItem()->unsetTopMargin();
-			pItem->getLayoutItem()->setBottomMargin(posY);
-			posY += pItem->getHeight();
-			iter++;
+			item->getLayoutItem()->unsetTopMargin();
+			item->getLayoutItem()->setBottomMargin(posY);
+			posY += item->getHeight();
 		}
 		_content->setVolume(getWidth(), abs(posY));
 	}
@@ -235,32 +117,32 @@ void ui::CtrlListView::initContent()
 
 	if (_showInCenter)
 	{
-		if (_scrollDirection == ScrollDirection::HORIZONTAL_LEFT_TO_RIGHT
-			|| _scrollDirection == ScrollDirection::HORIZONTAL_RIGHT_TO_LEFT)
+		if (_scrollDirection == ScrollDirection::LeftToRight
+			|| _scrollDirection == ScrollDirection::RightToLeft)
 		{
 			_content->setPosition(0.5f *(getWidth() - _content->getWidth()) + offX, 0 + offY);
 		}
-		else if(_scrollDirection == ScrollDirection::VERTICAL_TOP_TO_BOTTOM
-			|| _scrollDirection == ScrollDirection::VERTICAL_BOTTOM_TO_TOP)
+		else if(_scrollDirection == ScrollDirection::TopToBottom
+			|| _scrollDirection == ScrollDirection::BottomToTop)
 		{
 			_content->setPosition(0 + offX, 0.5f * (getHeight() - _content->getHeight()) + offY);
 		}
 	}
 	else
 	{
-		if (_scrollDirection == ScrollDirection::HORIZONTAL_LEFT_TO_RIGHT)
+		if (_scrollDirection == ScrollDirection::LeftToRight)
 		{
 			_content->setPosition(0 + offX, 0 + offY);
 		}
-		else if (_scrollDirection == ScrollDirection::HORIZONTAL_RIGHT_TO_LEFT)
+		else if (_scrollDirection == ScrollDirection::RightToLeft)
 		{
 			_content->setPosition(getWidth() - _content->getWidth() + offX, 0 + offY);
 		}
-		else if (_scrollDirection == ScrollDirection::VERTICAL_TOP_TO_BOTTOM)
+		else if (_scrollDirection == ScrollDirection::TopToBottom)
 		{
 			_content->setPosition(0 + offX, getHeight() - _content->getHeight() + offY);
 		}
-		else if (_scrollDirection == ScrollDirection::VERTICAL_BOTTOM_TO_TOP)
+		else if (_scrollDirection == ScrollDirection::BottomToTop)
 		{
 			_content->setPosition(0 + offX, 0 + offY);
 		}
@@ -283,8 +165,91 @@ void ui::CtrlListView::addItem(CtrlWidget* item, int zOrder)
 	}
 }
 
-bool ui::CtrlListView::onTouchMoved(float x, float y, bool include)
+void ui::CtrlListView::handMovedTouch(const math::Vector2& touchPoint)
 {
+	math::Vector2 delta = touchPoint;
+	delta -= _touchPosition;
 
-	return true;
+	delta *= getMovingMultiple();
+
+	math::Vector3 pos = _content->getPosition();
+
+	float min = 0;
+	float max = 0;
+
+	if (_scrollDirection == ScrollDirection::LeftToRight)
+	{
+		if (!_bHorizontalScroll) return;
+
+		pos.setX(pos.getX() + delta.getX());
+		if (getWidth() > _content->getWidth())
+		{
+			min = 0;
+			max = 0;
+		}
+		else
+		{
+			min = getWidth() - _content->getWidth();
+			max = 0;
+		}
+
+		if (pos.getX() < min) pos.setX(min);
+		if (pos.getX() > max) pos.setX(max);
+	}
+	else if (_scrollDirection == ScrollDirection::RightToLeft)
+	{
+		if (!_bHorizontalScroll) return;
+
+		pos.setX(pos.getX() + delta.getX());
+		if (getWidth() > _content->getWidth())
+		{
+			min = getWidth() - _content->getWidth();
+			max = getWidth() - _content->getWidth();
+		}
+		else
+		{
+			min = getWidth() - _content->getWidth();
+			max = 0;
+		}
+		if (pos.getX() < min) pos.setX(min);
+		if (pos.getX() > max) pos.setX(max);
+	}
+	else if (_scrollDirection == ScrollDirection::TopToBottom)
+	{
+		if (!_bVerticalScroll) return;
+
+		pos.setY(pos.getY() + delta.getY());
+		if (getHeight() > _content->getHeight())
+		{
+			min = getHeight() - _content->getHeight();
+			max = getHeight() - _content->getHeight();
+		}
+		else
+		{
+			min = getHeight() - _content->getHeight();
+			max = 0;
+		}
+		if (pos.getY() < min) pos.setY(min);
+		if (pos.getY() > max) pos.setY(max);
+	}
+	else if (_scrollDirection == ScrollDirection::BottomToTop)
+	{
+		if (!_bVerticalScroll) return;
+
+		pos.setY(pos.getY() + delta.getY());
+		if (getHeight() > _content->getHeight())
+		{
+			min = 0;
+			max = 0;
+		}
+		else
+		{
+			min = getHeight() - _content->getHeight();
+			max = 0;
+		}
+		if (pos.getY() < min) pos.setY(min);
+		if (pos.getY() > max) pos.setY(max);
+	}
+	_content->setPosition(pos);
+	_touchPosition = touchPoint;
 }
