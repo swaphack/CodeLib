@@ -17,7 +17,6 @@ bool ui::CtrlTableView::init()
 		return false;
 	}
 
-
 	return true;
 }
 
@@ -66,9 +65,11 @@ void ui::CtrlTableView::reload()
 			fWidth += cell.size.getWidth();
 		}
 
-		_content->setAnchorPoint(0, 0);
+		//_content->setAnchorPoint(0, 0);
 		_content->setPosition(0, 0);
 		_content->setVolume(fWidth, fHeight);
+		//_content->getLayoutItem()->unsetRightMargin();
+		//_content->getLayoutItem()->setLeftMargin(0);
 	}
 	else if (_scrollDirection == ScrollDirection::RightToLeft)
 	{
@@ -81,9 +82,12 @@ void ui::CtrlTableView::reload()
 			fWidth -= cell.size.getWidth();
 		}
 
-		_content->setAnchorPoint(1, 0);
+		//_content->setAnchorPoint(1, 0);
 		_content->setPosition(this->getWidth() - fTotalWidth, 0);
 		_content->setVolume(fTotalWidth, fHeight);
+
+		//_content->getLayoutItem()->unsetLeftMargin();
+		//_content->getLayoutItem()->setRightMargin(0);
 	}
 	else if (_scrollDirection == ScrollDirection::TopToBottom)
 	{
@@ -96,9 +100,12 @@ void ui::CtrlTableView::reload()
 			fHeight -= cell.size.getHeight();
 		}
 
-		_content->setAnchorPoint(0, 1);
+		//_content->setAnchorPoint(0, 1);
 		_content->setPosition(0, this->getHeight() - fTotalHeight);
 		_content->setVolume(fWidth, fTotalHeight);
+
+		//_content->getLayoutItem()->unsetBottomMargin();
+		//_content->getLayoutItem()->setTopMargin(0);
 	}
 	else if (_scrollDirection == ScrollDirection::BottomToTop)
 	{
@@ -112,9 +119,12 @@ void ui::CtrlTableView::reload()
 			fHeight += cell.size.getHeight();
 		}
 
-		_content->setAnchorPoint(0, 1);
+		//_content->setAnchorPoint(0, 1);
 		_content->setPosition(0, 0);
 		_content->setVolume(fWidth, fTotalHeight);
+
+		//_content->getLayoutItem()->unsetTopMargin();
+		//_content->getLayoutItem()->setBottomMargin(0);
 	}
 
 	processData();
@@ -126,33 +136,48 @@ void ui::CtrlTableView::processData()
 
 	int nCount = _sourceData->getDataCount();
 	bool bHide = false;
-	float minX = this->getWidth() - _content->getWidth();
-	float minY = this->getHeight() - _content->getHeight();
 	for (int i = 0; i < nCount; i++)
 	{
 		TableCell& cell = _tabelCells[i];
 
 		bHide = false;
-		if (_scrollDirection == ScrollDirection::LeftToRight
-			|| _scrollDirection == ScrollDirection::RightToLeft)
+		if (_scrollDirection == ScrollDirection::LeftToRight)
 		{
-			float posX = _content->getPositionX() - minX;
-			if (cell.position.getX() + cell.size.getWidth() < posX || cell.position.getX() > posX + this->getWidth())
+			float minX = cell.position.getX() + _content->getPositionX();
+			float maxX = minX + cell.size.getWidth();
+			if (minX > this->getHeight() || maxX < 0)
 			{
 				bHide = true;
 			}
 		}
-		else if (_scrollDirection == ScrollDirection::TopToBottom
-			|| _scrollDirection == ScrollDirection::BottomToTop)
+		else if (_scrollDirection == ScrollDirection::RightToLeft)
 		{
-			float posY0 = -(_content->getPositionY() - this->getHeight());
-			float posY1 = -_content->getPositionY();
-			if (cell.position.getY() - cell.size.getHeight() > posY0 || cell.position.getY() < posY1)
+			float maxX = cell.position.getX() + _content->getPositionX();
+			float minX = maxX - cell.size.getWidth();
+			if (minX > this->getWidth() || maxX < 0)
 			{
 				bHide = true;
 			}
 		}
-		
+		else if (_scrollDirection == ScrollDirection::TopToBottom)
+		{
+			float maxY = cell.position.getY() + _content->getPositionY();
+			float minY = maxY - cell.size.getHeight();
+			if (minY > this->getHeight() || maxY < 0)
+			{
+				bHide = true;
+			}
+		}
+		else if (_scrollDirection == ScrollDirection::BottomToTop)
+		{
+			float minY = cell.position.getY() + _content->getPositionY();
+			float maxY = minY + cell.size.getHeight();
+			if (minY > this->getHeight() || maxY < 0)
+			{
+				bHide = true;
+			}
+		}
+		//bHide = false;
 		if (bHide)
 		{
 			if (cell.widget == nullptr) continue;
@@ -168,22 +193,14 @@ void ui::CtrlTableView::processData()
 					cell.widget = widget;
 					widget->setPosition(cell.position);
 					widget->setVolume(cell.size);
-					if (_scrollDirection == ScrollDirection::LeftToRight)
+					if (_scrollDirection == ScrollDirection::LeftToRight
+						|| _scrollDirection == ScrollDirection::RightToLeft)
 					{
 						widget->getLayoutItem()->unsetRightMargin();
 						widget->getLayoutItem()->setLeftMargin(cell.position.getX());
 					}
-					else if (_scrollDirection == ScrollDirection::RightToLeft)
-					{
-						widget->getLayoutItem()->unsetLeftMargin();
-						widget->getLayoutItem()->setRightMargin(cell.position.getX());
-					}
-					else if (_scrollDirection == ScrollDirection::TopToBottom)
-					{
-						widget->getLayoutItem()->unsetBottomMargin();
-						widget->getLayoutItem()->setTopMargin(cell.position.getY());
-					}
-					else if (_scrollDirection == ScrollDirection::BottomToTop)
+					else if (_scrollDirection == ScrollDirection::TopToBottom
+						|| _scrollDirection == ScrollDirection::BottomToTop)
 					{
 						widget->getLayoutItem()->unsetTopMargin();
 						widget->getLayoutItem()->setBottomMargin(cell.position.getY());
@@ -285,8 +302,11 @@ void ui::CtrlTableView::handMovedTouch(const math::Vector2& touchPoint)
 		if (pos.getY() < min) pos.setY(min);
 		if (pos.getY() > max) pos.setY(max);
 	}
-	_content->setPosition(pos);
 	_touchPosition = touchPoint;
-
+	if (pos == _content->getPosition())
+	{
+		return;
+	}
+	_content->setPosition(pos);
 	processData();
 }

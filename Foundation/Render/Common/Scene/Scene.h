@@ -2,6 +2,8 @@
 
 #include "Common/Node/Node.h"
 
+#include <set>
+
 namespace render
 {
 	class ViewPort;
@@ -16,10 +18,14 @@ namespace render
 		// 遍历和绘制场景
 		virtual void visit();
 	public:
-		// 添加子节点
+		/**
+		*	添加子节点
+		*/
 		virtual void addChild(Node* node);
-
-		// 添加子节点
+		/**
+		*	添加子节点
+		*/
 		virtual void addChild(Node* node, int zOrder);
+	
 	};
 }

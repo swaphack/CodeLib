@@ -14,11 +14,11 @@ TouchManager::TouchManager()
 
 TouchManager::~TouchManager()
 {
-	for (auto item : _temps)
+	for (auto item : _tempTriggers)
 	{
 		SAFE_RELEASE(item->getTouchNode());
 	}
-	_temps.clear();
+	_tempTriggers.clear();
 }
 
 void render::TouchManager::addTarget(TouchProtocol* target)
@@ -44,13 +44,13 @@ void render::TouchManager::removeTarget(TouchProtocol* target)
 		_targets.erase(target->getTouchNode());
 	}
 
-	if (!_temps.empty())
+	if (!_tempTriggers.empty())
 	{
-		auto it = std::find(_temps.begin(), _temps.end(), target);
-		if (it != _temps.end())
+		auto it = std::find(_tempTriggers.begin(), _tempTriggers.end(), target);
+		if (it != _tempTriggers.end())
 		{
 			SAFE_RELEASE(target->getTouchNode());
-			_temps.erase(it);
+			_tempTriggers.erase(it);
 		}
 	}
 	setDirty(true);
@@ -111,7 +111,7 @@ void TouchManager::onTouchBegan(const math::Vector2& touchPoint)
 		if (item->onTouchBegan(touchPoint))
 		{
 			SAFE_RETAIN(item->getTouchNode());
-			_temps.push_back(item);
+			_tempTriggers.push_back(item);
 			if (item->isTouchSwallowed())
 			{
 				break;
@@ -122,7 +122,7 @@ void TouchManager::onTouchBegan(const math::Vector2& touchPoint)
 
 void TouchManager::onTouchMoved(const math::Vector2& touchPoint)
 {
-	for (auto item : _temps)
+	for (auto item : _tempTriggers)
 	{
 		item->onTouchMoved(touchPoint);
 	}
@@ -130,22 +130,38 @@ void TouchManager::onTouchMoved(const math::Vector2& touchPoint)
 
 void TouchManager::onTouchEnded(const math::Vector2& touchPoint)
 {
-	for (auto item : _temps)
+	for (auto item : _tempTriggers)
 	{
 		item->onTouchEnded(touchPoint);
 	}
 
-	//_temps.clear();
+	//_tempTriggers.clear();
 }
 
 void render::TouchManager::onTouchCanceled(const math::Vector2& touchPoint)
 {
-	for (auto item : _temps)
+	for (auto item : _tempTriggers)
 	{
 		item->onTouchCanceled(touchPoint);
 		SAFE_RELEASE(item->getTouchNode());
 	}
-	_temps.clear();
+	_tempTriggers.clear();
+}
+
+void render::TouchManager::onCheckTriggerTouch(const math::Vector2& touchPoint)
+{
+	auto temps = _tempTriggers;
+	for (auto item : temps)
+	{
+		if (!item->containsTouchPoint(touchPoint))
+		{
+			auto it = std::find(_tempTriggers.begin(), _tempTriggers.end(), item);
+			if (it != _tempTriggers.end()) _tempTriggers.erase(it);
+
+			item->onTouchCanceled(touchPoint);
+			SAFE_RELEASE(item->getTouchNode());
+		}
+	}
 }
 
 void render::TouchManager::handTouch()
@@ -168,10 +184,12 @@ void render::TouchManager::handTouch()
 		}
 		else if (item.type == TouchType::MOVED)
 		{
+			onCheckTriggerTouch(item.touchPoint);
 			onTouchMoved(item.touchPoint);
 		}
 		else if (item.type == TouchType::ENDED)
 		{
+			onCheckTriggerTouch(item.touchPoint);
 			onTouchEnded(item.touchPoint);
 		}
 	}

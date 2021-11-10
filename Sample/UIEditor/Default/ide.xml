@@ -26,7 +26,7 @@
 		<TextColor>255,255,255</TextColor>
 	</Text>
 	<IDE>
-		<Design>Default/Layout/main_view_test.xml</Design>
+		<Design>Default/Layout/ui_test.xml</Design>
 		<Control>Default/Layout/Widget/widget.config.xml</Control>
 		<ShaderMode>2</ShaderMode>
 		<DebugMode>-1</DebugMode>

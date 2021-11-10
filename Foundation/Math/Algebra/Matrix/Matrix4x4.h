@@ -158,7 +158,7 @@ namespace math
 		static Matrix4x4 frustum(float left, float right, float bottom, float top,
 			float znear, float zfar);
 
-		static Matrix4x4 perspective(float fovyInDegrees, float aspectRatio,	float znear, float zfar);
+		static Matrix4x4 perspective(float fovyInDegrees, float aspectRatio, float znear, float zfar);
 
 		static Matrix4x4 lookAt(const Vector3& eye, const Vector3& center, const Vector3& up);
 		// rst

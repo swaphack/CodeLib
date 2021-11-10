@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <root width="1024" height="768" layout="1" fontPath="Resource/Font/font_3.ttf">
+	<Texture>
+		<item type="atlas" atlas="Default/Atlas/ui.atlas" image="Default/Atlas/ui.png"/>
+  	</Texture>
 	<Layout name="body" showMask="1" maskColor="180,180,180,125" marginState="1,1,1,1" size="100%,100%">
 		<ListView direction="2" marginState="1,1,1,1" margin="0,5,0,5" size="100%,100%" clip="0" moveMultiple="5" verticalScroll="1" enableTouch="1">
 			<File filepath="Default/Layout/Widget/property.node.xml" marginState="1,1,0,1" size="100%,430"/>
@@ -8,18 +11,18 @@
 				<ListView direction="2" size="100%,150">
 					<ListView direction="2" size="100%,100%" showMask="1" maskColor="150,150,150,200">
 						<ListView direction="0" size="100%,33%" center="1">
-							<Button name="MarginTop" normalImage="Default/Image/arrow_black.png" selectedImage="Default/Image/arrow_red.png" size="39,41"/>
+							<Button name="MarginTop" normalImage="Default/Atlas/ui.atlas[arrow_black.png]" selectedImage="Default/Atlas/ui.atlas[arrow_red.png]" size="39,41"/>
 						</ListView>
 						<ListView direction="0" size="100%,33%">
 							<ListView direction="0" size="50%,100%">
-								<Button name="MarginLeft" normalImage="Default/Image/arrow_black.png" selectedImage="Default/Image/arrow_red.png" size="39,41" rotation="0,0,-90" anchorPoint="0.5,0.5,0"/>
+								<Button name="MarginLeft" normalImage="Default/Atlas/ui.atlas[arrow_black.png]" selectedImage="Default/Atlas/ui.atlas[arrow_red.png]" size="39,41" rotation="0,0,-90" anchorPoint="0.5,0.5,0"/>
 							</ListView>
 							<ListView direction="1" size="50%,100%">
-								<Button name="MarginRight" normalImage="Default/Image/arrow_black.png" selectedImage="Default/Image/arrow_red.png" size="39,41" rotation="0,0,90" anchorPoint="0.5,0.5,0"/>
+								<Button name="MarginRight" normalImage="Default/Atlas/ui.atlas[arrow_black.png]" selectedImage="Default/Atlas/ui.atlas[arrow_red.png]" size="39,41" rotation="0,0,90" anchorPoint="0.5,0.5,0"/>
 							</ListView>
 						</ListView>
 						<ListView direction="0" size="100%,33%" center="1">
-							<Button name="MarginBottom" normalImage="Default/Image/arrow_black.png" selectedImage="Default/Image/arrow_red.png" size="39,41" rotation="0,0,180" anchorPoint="0.5,0.5,0"/>
+							<Button name="MarginBottom" normalImage="Default/Atlas/ui.atlas[arrow_black.png]" selectedImage="Default/Atlas/ui.atlas[arrow_red.png]" size="39,41" rotation="0,0,180" anchorPoint="0.5,0.5,0"/>
 						</ListView>
 					</ListView>
 				</ListView>

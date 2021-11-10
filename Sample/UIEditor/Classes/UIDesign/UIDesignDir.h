@@ -84,11 +84,11 @@ namespace ue
 		const float CONST_ITEM_HEIGHT = 20;
 		// 根目录
 		std::string _root;
-		// 目录信息
-		DirDetail _dirDetail;
 		// 对折信息
 		std::map<std::string, bool> _dirFoldInfo;
-
+		// 目录信息
+		std::vector<SimpleDirInfo> _simpleDirInfo;
+		// 表格
 		ui::CtrlTableView* _tableView = nullptr;
 	};
 }

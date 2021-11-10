@@ -86,6 +86,9 @@ Canvas* RenderApplication::getCanvas() const
 
 void RenderApplication::setFrameSize( int width, int height )
 {
+	_frameSize.setWidth(width);
+	_frameSize.setHeight(height);
+
 	Tool::setViewSize(width, height);
 
 	_canvas->setViewPort(0, 0, width, height);
@@ -94,6 +97,11 @@ void RenderApplication::setFrameSize( int width, int height )
 	{
 		item->onWindowSizeChange(Tool::getViewSize());
 	}
+}
+
+const math::Size& render::RenderApplication::getFrameSize() const
+{
+	return _frameSize;
 }
 
 void RenderApplication::setRefreshInterval( float interval )

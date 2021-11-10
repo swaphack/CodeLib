@@ -100,6 +100,11 @@ void render::Node::cleanup()
 }
 void render::Node::setChildrenScene(Scene* scene)
 {
+	if (scene == nullptr)
+	{
+		return;
+	}
+
 	for (auto it = _children.begin(); it != _children.end(); it++)
 	{
 		(*it)->setChildrenScene(scene);
@@ -285,7 +290,7 @@ bool render::Node::isDescendantsOf(const Node* parent) const
 	const Node* temp = this;
 	while (temp->getParent() != nullptr)
 	{
-		if (temp == parent)
+		if (parent == temp->getParent())
 		{
 			return true;
 		}
@@ -612,7 +617,10 @@ void render::Node::removeNotifyListener(NodeNotifyType id, void* target)
 
 void Node::notify(NodeNotifyType id)
 {
+	G_NOTIFYCENTER->addDirtyNode(this);
+
 	_notify->addMark(id);
+
 	setDirty(true);
 }
 
@@ -714,12 +722,11 @@ void Node::calSpaceData()
 void Node::onSpaceChange()
 {
 	this->notifyToAll(NodeNotifyType::SPACE);
-	//this->notify(NodeNotifyType::SPACE);
 }
 
 void Node::onBodyChange()
 {
-	this->notify(NodeNotifyType::BODY);
+	this->notifyToAll(NodeNotifyType::BODY);
 }
 
 void Node::onChildrenChange()

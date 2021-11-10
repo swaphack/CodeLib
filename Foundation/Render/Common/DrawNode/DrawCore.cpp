@@ -1671,6 +1671,23 @@ void render::DrawCore::removeAllDrawParameters()
 	_packDrawParameters.clear();
 }
 
+float render::DrawCore::getDrawZOrder(Node* node)
+{
+	if (node == nullptr) return 0;
+	if (node->getParent() == nullptr) return 0;
+
+	int index = node->getParent()->indexOfChild(node);
+	float percent = 1.0f * (index + 1) / (node->getParent()->getChildrenCount() + 1);
+
+	auto temp = node->getParent();
+	while (temp)
+	{
+		percent += 1;
+		temp = temp->getParent();
+	}
+	return percent;
+}
+
 void render::DrawCore::addBatchDrawParameter(DrawParameter* parameter)
 {
 	if (parameter == nullptr)

@@ -235,7 +235,7 @@ void LayoutItem::resize(const math::Size& size)
 	else
 	{// 默认左边
 		x = leftX;
-		w = widthX;
+		w = m_pWidget->getWidth() == 0 ? widthX : m_pWidget->getWidth();
 	}
 
 	// 垂直
@@ -253,7 +253,7 @@ void LayoutItem::resize(const math::Size& size)
 	else
 	{// 默认下方
 		y = bottomY;
-		h = heightY;
+		h = m_pWidget->getHeight() == 0 ? heightY : m_pWidget->getHeight();
 	}
 
 	if (w < 0) w = 0;

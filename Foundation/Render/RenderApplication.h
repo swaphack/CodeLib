@@ -102,5 +102,7 @@ namespace render
 		float _refreshInterval = 0;
 		// Ë¢ÐÂ¼ä¸ô
 		std::set<WindowProtocol*> _windowProtocols;
+
+		math::Size _frameSize;
 	};
 }

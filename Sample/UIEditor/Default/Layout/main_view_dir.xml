@@ -4,7 +4,7 @@
 		<item type="atlas" atlas="Default/Atlas/ui.atlas" image="Default/Atlas/ui.png"/>
   	</Texture>
 	<Layout name="body" showMask="1" maskColor="0,0,0,200" margin="0,0,0,0" marginState="1,1,1,1" clip="1" size="0,0">
-		<TableView name="directory" direction="2" verticalScroll="1" enableTouch="1" size="100%,100%" >
+		<TableView name="directory" direction="2" verticalScroll="1" enableTouch="1" size="100%,100%" clip="1" moveMultiple="5" >
 		</TableView>
 	</Layout>
 </root>

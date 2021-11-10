@@ -22,7 +22,9 @@ bool ue::UIDesignDir::init()
 
 int ue::UIDesignDir::getDataCount()
 {
-	return getTotalDirCount(_dirDetail);
+	int nCount = _simpleDirInfo.size();
+	nCount = 100;
+	return nCount;
 }
 
 math::Size ue::UIDesignDir::getDataSize(int index)
@@ -32,17 +34,20 @@ math::Size ue::UIDesignDir::getDataSize(int index)
 
 ui::CtrlWidget* ue::UIDesignDir::getDataCell(int index)
 {
+	if (index < 0 || index >= _simpleDirInfo.size())
+	{
+		return nullptr;
+	}
 	int tempCount = 0;
 	bool bFile = false;
-	DirDetail detail = getDirDetail(_dirDetail, index, tempCount, bFile);
-	if (detail.name == "") return nullptr;
-	if (!bFile)
-	{// Ŀ¼
-		return createDirItem(CONST_ITEM_HEIGHT, detail.name, detail.fullpath);
+	const SimpleDirInfo& detail = _simpleDirInfo.at(index);
+	if (detail.type == 1)
+	{
+		return createFileItem(CONST_ITEM_HEIGHT, detail.name, detail.fullpath);
 	}
 	else
 	{
-		return createFileItem(CONST_ITEM_HEIGHT, detail.name, detail.fullpath);
+		return createDirItem(CONST_ITEM_HEIGHT, detail.name, detail.fullpath);
 	}
 }
 
@@ -69,7 +74,7 @@ void ue::UIDesignDir::setDirectory(const std::string& root)
 {
 	_root = root;
 
-	_dirDetail.setRoot(root);
+	DirList::getAllFiles(root, _simpleDirInfo);
 
 	this->updateRootPanel(true);
 }
@@ -138,9 +143,9 @@ ui::CtrlButton* ue::UIDesignDir::createDirItem(int height, const std::string& na
 	}
 
 	auto pItem = pWidget->getLayoutItem();
-	//pItem->setMarginState(false, false, false, false);
+	pItem->setMarginState(false, true, false, true);
 
-	pItem->setMargin(2, 2, 2, 2);
+	//pItem->setMargin(2, 2, 2, 2);
 	pItem->getSize().setWidth(sys::NumberType::Percent, ONE_HUNDRED);
 	pItem->getSize().setHeight(sys::NumberType::Fixed, height);
 
@@ -172,8 +177,8 @@ ui::CtrlButton* ue::UIDesignDir::createFileItem(int height, const std::string& n
 	}
 
 	auto pItem = pWidget->getLayoutItem();
-	
-	//pItem->setMarginState(false, false, false, false);
+	pItem->setMarginState(false, true, false, true);
+
 	pItem->getSize().setWidth(sys::NumberType::Percent, ONE_HUNDRED);
 	pItem->getSize().setHeight(sys::NumberType::Fixed, height);
 

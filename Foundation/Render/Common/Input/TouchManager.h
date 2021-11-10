@@ -33,6 +33,9 @@ namespace render
 		void onTouchMoved(const math::Vector2& touchPoint);
 		void onTouchEnded(const math::Vector2& touchPoint);
 		void onTouchCanceled(const math::Vector2& touchPoint);
+	protected:
+		// 检查触摸
+		void onCheckTriggerTouch(const math::Vector2& touchPoint);
 		// 对触摸进行处理
 		void handTouch();
 	private:
@@ -44,7 +47,8 @@ namespace render
 			TouchSlotInfo() {}
 		};
 		std::map<Node*, TouchProtocol*> _targets;
-		std::vector<TouchProtocol*> _temps;
+		// 临时触发对象
+		std::vector<TouchProtocol*> _tempTriggers;
 		// 待添加点击
 		std::vector<TouchSlotInfo> _waitAddTouches;
 	};

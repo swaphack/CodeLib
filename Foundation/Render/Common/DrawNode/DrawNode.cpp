@@ -276,7 +276,11 @@ void render::DrawNode::initDrawParameter()
 	_drawParameter.material = _material;
 	_drawParameter.textureCache = _textureCache;
 	_drawParameter.tessilation = isTessilationEnable();
-	_drawParameter.matrix = math::Matrix4x4();
+	
+	auto mat = math::Matrix4x4();
+	float value = G_DRAWCORE->getDrawZOrder(this);
+	mat.setValue(3, 2, value);
+	_drawParameter.matrix = mat;
 	G_DRAWCORE->addDrawParameter(&_drawParameter);
 }
 
@@ -287,7 +291,12 @@ void render::DrawNode::onColorChange()
 
 void render::DrawNode::onDrawNodeColorChange()
 {
-	_material->getMaterialDetail()->setEmission(_color[0], _color[1], _color[2], _color[3]);
+	auto pMaterialDetail = _material->getMaterialDetail();
+	if (pMaterialDetail)
+	{
+		pMaterialDetail->setEmission(_color[0], _color[1], _color[2], _color[3]);
+	}
+	
 }
 
 void render::DrawNode::onBlendChange()

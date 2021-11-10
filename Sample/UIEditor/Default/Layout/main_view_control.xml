@@ -15,7 +15,7 @@
 			
 			<Button name="scrollView" anchorPoint="0.5,0.5,0.5" normalImage="Default/Atlas/ui.atlas[control_scrollView.png]"  horizontal="1" vertical="2" text="ScrollView" fontSize="24" textColor="0,0,0" />
 			<Button name="listView" anchorPoint="0.5,0.5,0.5" normalImage="Default/Atlas/ui.atlas[control_listView.png]" horizontal="1" vertical="2" text="ListView" fontSize="24" textColor="0,0,0" />
-			<Button name="gridView" anchorPoint="0.5,0.5,0.5" normalImage="Default/Atlas/ui.atlas[control_gridView.png]" horizontal="1" vertical="1" text="GridView" fontSize="24" textColor="0,0,0" />
+			<Button name="gridView" anchorPoint="0.5,0.5,0.5" normalImage="Default/Atlas/ui.atlas[control_gridView.png]" horizontal="1" vertical="2" text="GridView" fontSize="24" textColor="0,0,0" />
 			
 		</GridView>
   	</Layout>

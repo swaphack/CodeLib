@@ -192,6 +192,11 @@ namespace render
 		*	移除所有绘制参数
 		*/
 		void removeAllDrawParameters();
+	public:
+		/**
+		*	获取绘制的z值
+		*/
+		float getDrawZOrder(Node* node);
 	protected:
 		/**
 		*	添加批量绘制参数

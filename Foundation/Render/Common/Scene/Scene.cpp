@@ -18,7 +18,6 @@ Scene::Scene()
 
 Scene::~Scene()
 {
-
 }
 
 bool Scene::init()
@@ -49,7 +48,8 @@ void Scene::visit()
 {
 	// 合批处理
 
-	this->updateNode();
+	//this->updateAllDirtyNodes();
+	G_NOTIFYCENTER->updateAllDirtyNodes();
 
 	G_DRAWCORE->processDraw();
 
@@ -68,3 +68,5 @@ void render::Scene::addChild(Node* node, int zOrder)
 	Node::addChild(node, zOrder);
 	node->setChildrenScene(this);
 }
+
+
