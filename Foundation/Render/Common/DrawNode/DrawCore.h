@@ -197,6 +197,10 @@ namespace render
 		*	获取绘制的z值
 		*/
 		float getDrawZOrder(Node* node);
+		/**
+		*	获取节点的所有子节点数
+		*/
+		int getChildrenCount(Node* node);
 	protected:
 		/**
 		*	添加批量绘制参数

@@ -47,7 +47,7 @@ bool ue::MainWindow::init()
 	this->addChild(_viewLayout, 0);
 
 	updateCamera();
-	addFPS();
+	//addFPS();
 
 	return true;
 }

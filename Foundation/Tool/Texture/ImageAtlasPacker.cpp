@@ -75,20 +75,19 @@ void tool::ImageAtlasPacker::loadTextureAtlas(const std::string& imageFilePath, 
 
 	helper.foreach([this](tinyxml2::XMLElement* element) {
 		if (element == nullptr) return;
-		sys::ImageTextureChip* chip = CREATE_OBJECT(sys::ImageTextureChip);
-		chip->name = element->Name();
+		sys::ImageTextureChip chip;
 		auto pChild = element->FirstChildElement("name");
-		if (pChild && pChild->GetText()) chip->name = pChild->GetText();
+		if (pChild && pChild->GetText()) chip.name = pChild->GetText();
 		pChild = element->FirstChildElement("width");
-		if (pChild && pChild->GetText()) chip->width = atoi(pChild->GetText());
+		if (pChild && pChild->GetText()) chip.width = atoi(pChild->GetText());
 		pChild = element->FirstChildElement("height");
-		if (pChild && pChild->GetText()) chip->height = atoi(pChild->GetText());
+		if (pChild && pChild->GetText()) chip.height = atoi(pChild->GetText());
 		pChild = element->FirstChildElement("x");
-		if (pChild && pChild->GetText()) chip->x = atoi(pChild->GetText());
+		if (pChild && pChild->GetText()) chip.x = atoi(pChild->GetText());
 		pChild = element->FirstChildElement("y");
-		if (pChild && pChild->GetText()) chip->y = atoi(pChild->GetText());
+		if (pChild && pChild->GetText()) chip.y = atoi(pChild->GetText());
 		pChild = element->FirstChildElement("rotate");
-		if (pChild && pChild->GetText()) chip->rotate = atoi(pChild->GetText());
+		if (pChild && pChild->GetText()) chip.rotate = atoi(pChild->GetText());
 		_textureAtlas.addChip(chip);
 	});
 }
@@ -105,11 +104,11 @@ void tool::ImageAtlasPacker::saveTextureAtlas(const std::string& atlasFilePath)
 	{
 		std::vector<std::pair<std::string, std::string>> values;
 		values.push_back(std::make_pair("name", item.first));
-		values.push_back(std::make_pair("width", getCString("%d", item.second->width)));
-		values.push_back(std::make_pair("height", getCString("%d", item.second->height)));
-		values.push_back(std::make_pair("x", getCString("%d", item.second->x)));
-		values.push_back(std::make_pair("y", getCString("%d", item.second->y)));
-		if (item.second->rotate)values.push_back(std::make_pair("rotate", getCString("%d", (int)item.second->rotate)));
+		values.push_back(std::make_pair("width", getCString("%d", item.second.width)));
+		values.push_back(std::make_pair("height", getCString("%d", item.second.height)));
+		values.push_back(std::make_pair("x", getCString("%d", item.second.x)));
+		values.push_back(std::make_pair("y", getCString("%d", item.second.y)));
+		if (item.second.rotate)values.push_back(std::make_pair("rotate", getCString("%d", (int)item.second.rotate)));
 		helper.appendElementWithChildren("item", values);
 	}
 	helper.saveTo(atlasFilePath);

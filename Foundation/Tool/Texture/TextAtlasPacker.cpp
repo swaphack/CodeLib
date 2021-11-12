@@ -58,28 +58,27 @@ void tool::TextAtlasPacker::loadTextureAtlas(const std::string& imageFilePath, c
 
 	helper.foreach([this](tinyxml2::XMLElement* element) {
 		if (element == nullptr) return;
-		sys::FontTextureChip* chip = CREATE_OBJECT(sys::FontTextureChip);
-		chip->name = element->Name();
+		sys::FontTextureChip chip;
 		auto pChild = element->FirstChildElement("name");
-		if (pChild && pChild->GetText()) chip->name = pChild->GetText();
+		if (pChild && pChild->GetText()) chip.name = pChild->GetText();
 		pChild = element->FirstChildElement("width");
-		if (pChild && pChild->GetText()) chip->width = atoi(pChild->GetText());
+		if (pChild && pChild->GetText()) chip.width = atoi(pChild->GetText());
 		pChild = element->FirstChildElement("height");
-		if (pChild && pChild->GetText()) chip->height = atoi(pChild->GetText());
+		if (pChild && pChild->GetText()) chip.height = atoi(pChild->GetText());
 		pChild = element->FirstChildElement("x");
-		if (pChild && pChild->GetText()) chip->x = atoi(pChild->GetText());
+		if (pChild && pChild->GetText()) chip.x = atoi(pChild->GetText());
 		pChild = element->FirstChildElement("y");
-		if (pChild && pChild->GetText()) chip->y = atoi(pChild->GetText());
+		if (pChild && pChild->GetText()) chip.y = atoi(pChild->GetText());
 		pChild = element->FirstChildElement("rotate");
-		if (pChild && pChild->GetText()) chip->rotate = atoi(pChild->GetText());
+		if (pChild && pChild->GetText()) chip.rotate = atoi(pChild->GetText());
 		pChild = element->FirstChildElement("advX");
-		if (pChild && pChild->GetText()) chip->advX = atoi(pChild->GetText());
+		if (pChild && pChild->GetText()) chip.advX = atoi(pChild->GetText());
 		pChild = element->FirstChildElement("advY");
-		if (pChild && pChild->GetText()) chip->advY = atoi(pChild->GetText());
+		if (pChild && pChild->GetText()) chip.advY = atoi(pChild->GetText());
 		pChild = element->FirstChildElement("deltaX");
-		if (pChild && pChild->GetText()) chip->deltaX = atoi(pChild->GetText());
+		if (pChild && pChild->GetText()) chip.deltaX = atoi(pChild->GetText());
 		pChild = element->FirstChildElement("deltaY");
-		if (pChild && pChild->GetText()) chip->deltaY = atoi(pChild->GetText());
+		if (pChild && pChild->GetText()) chip.deltaY = atoi(pChild->GetText());
 		_textureAtlas.addChip(chip);
 	});
 }
@@ -98,15 +97,15 @@ void tool::TextAtlasPacker::saveTextureAtlas(const std::string& atlasFilePath)
 	{
 		std::vector<std::pair<std::string, std::string>> values;
 		values.push_back(std::make_pair("name", item.first));
-		values.push_back(std::make_pair("width", getCString("%d", item.second->width)));
-		values.push_back(std::make_pair("height", getCString("%d", item.second->height)));
-		values.push_back(std::make_pair("x", getCString("%d", item.second->x)));
-		values.push_back(std::make_pair("y", getCString("%d", item.second->y)));
-		if (item.second->rotate)values.push_back(std::make_pair("rotate", getCString("%d", (int)item.second->rotate)));
-		values.push_back(std::make_pair("advX", getCString("%d", item.second->advX)));
-		values.push_back(std::make_pair("advY", getCString("%d", item.second->advY)));
-		values.push_back(std::make_pair("deltaX", getCString("%d", item.second->deltaX)));
-		values.push_back(std::make_pair("deltaY", getCString("%d", item.second->deltaY)));
+		values.push_back(std::make_pair("width", getCString("%d", item.second.width)));
+		values.push_back(std::make_pair("height", getCString("%d", item.second.height)));
+		values.push_back(std::make_pair("x", getCString("%d", item.second.x)));
+		values.push_back(std::make_pair("y", getCString("%d", item.second.y)));
+		if (item.second.rotate)values.push_back(std::make_pair("rotate", getCString("%d", (int)item.second.rotate)));
+		values.push_back(std::make_pair("advX", getCString("%d", item.second.advX)));
+		values.push_back(std::make_pair("advY", getCString("%d", item.second.advY)));
+		values.push_back(std::make_pair("deltaX", getCString("%d", item.second.deltaX)));
+		values.push_back(std::make_pair("deltaY", getCString("%d", item.second.deltaY)));
 		helper.appendElementWithChildren("item", values);
 	}
 	helper.saveTo(atlasFilePath);

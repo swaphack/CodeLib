@@ -48,7 +48,7 @@ bool ue::UIDesignView::init()
 			for (size_t i = 0; i < vecIndex.size(); i++)
 			{
 				if (pTemp == nullptr) return;
-				pTemp = pTemp->getChildByIndex(vecIndex[i]);
+				pTemp = pTemp->getChildAt(vecIndex[i]);
 			}
 
 			if (pTemp)

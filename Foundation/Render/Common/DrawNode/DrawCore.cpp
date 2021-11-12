@@ -16,6 +16,9 @@
 #include "Common/Material/import.h"
 #include "2d/Primitive/PrimitiveNode.h"
 #include "macros.h"
+#include <list>
+
+#define UPDATE_NODE_COUNT 100
 
 render::DrawCore::DrawCore()
 {
@@ -1676,16 +1679,32 @@ float render::DrawCore::getDrawZOrder(Node* node)
 	if (node == nullptr) return 0;
 	if (node->getParent() == nullptr) return 0;
 
-	int index = node->getParent()->indexOfChild(node);
-	float percent = 1.0f * (index + 1) / (node->getParent()->getChildrenCount() + 1);
-
-	auto temp = node->getParent();
-	while (temp)
+	int nTotalCount = 0;
+	auto temp = node;
+	while (temp && temp->getParent())
 	{
-		percent += 1;
+		int index = temp->getParent()->indexOfChild(temp);
+		nTotalCount += index + 1;
+		for (int i = 0; i < index; i++)
+		{
+			nTotalCount += getChildrenCount(temp->getParent()->getChildAt(i));
+		}
 		temp = temp->getParent();
 	}
-	return percent;
+	return nTotalCount;
+}
+
+int render::DrawCore::getChildrenCount(Node* node)
+{
+	if (node == nullptr) return 0;
+	int nTotalCount = 0;
+	int nChildrenCount = node->getChildrenCount();
+	for (int i = 0; i < nChildrenCount; i++)
+	{
+		nTotalCount += getChildrenCount(node->getChildAt(i));
+	}
+	nTotalCount += nChildrenCount;
+	return nTotalCount;
 }
 
 void render::DrawCore::addBatchDrawParameter(DrawParameter* parameter)
@@ -1752,16 +1771,28 @@ void render::DrawCore::processDraw()
 	{
 		this->processPackDraw();
 	}
-
-	_redrawParameters.clear();
 }
 
 void render::DrawCore::processBatchDraw()
 {
+	int nMaxCount = UPDATE_NODE_COUNT;
+	std::vector<BatchDrawParameter*> curDrawCall;
+	for (auto& item : _redrawParameters)
+	{
+		curDrawCall.push_back(item);
+		nMaxCount--;
+		if (nMaxCount == 0)
+		{
+			break;
+		}
+	}
+
 	int unitSize = sizeof(float);
 	size_t matrixSize = 16 * unitSize;
-	for (const auto& item : _redrawParameters)
+	for (const auto& item : curDrawCall)
 	{
+		_redrawParameters.erase(item);
+
 		if (item->redraw == false) continue;
 		item->redraw = false;
 		auto root = item->root;
@@ -1792,8 +1823,23 @@ void render::DrawCore::processBatchDraw()
 
 void render::DrawCore::processPackDraw()
 {
-	for (const auto& item : _redrawParameters)
+	// 只更新部分
+	int nMaxCount = UPDATE_NODE_COUNT;
+	std::vector<BatchDrawParameter*> curDrawCall;
+	for (auto& item : _redrawParameters)
 	{
+		curDrawCall.push_back(item);
+		nMaxCount--;
+		if (nMaxCount == 0)
+		{
+			break;
+		}
+	}
+
+	for (const auto& item : curDrawCall)
+	{
+		_redrawParameters.erase(item);
+
 		if (item->redraw == false) continue;
 		item->redraw = false;
 
@@ -2083,7 +2129,9 @@ bool render::DrawCore::BatchDrawParameter::packMeshes(sys::MeshDetail* meshDetai
 		if (item->node->isRecursiveVisible())
 		{
 			vecMeshDetails.push_back(item->mesh->getMeshDetail());
-			vecMatrices.push_back(item->node->getWorldMatrix() * item->matrix);
+			auto mat = item->node->getWorldMatrix();
+			mat.setValue(3, 2, mat.getValue(3, 2) + item->localZOrder);
+			vecMatrices.push_back(mat);
 		}
 	}
 

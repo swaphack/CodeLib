@@ -27,7 +27,7 @@ namespace sys
 		/**
 		*	添加纹理碎片
 		*/
-		void addChip(const ImageTextureChip* chip);
+		void addChip(const ImageTextureChip& chip);
 		/**
 		*	移除纹理碎片
 		*/
@@ -43,9 +43,9 @@ namespace sys
 		/**
 		*	获取所有纹理碎片
 		*/
-		const std::map<std::string, ImageTextureChip*>& getAllChips() const;
+		const std::map<std::string, ImageTextureChip>& getAllChips() const;
 	private:
 		// 碎片
-		std::map<std::string, ImageTextureChip*> _chips;
+		std::map<std::string, ImageTextureChip> _chips;
 	};
 }

@@ -36,8 +36,10 @@ namespace render
 		DrawTextureCache* textureCache = nullptr;
 		// 是否细分
 		bool tessilation = false;
-		math::Matrix4x4 matrix;
 
+		math::Matrix4x4 matrix;
+		// 本地z轴
+		float localZOrder = 0;
 		// 额外数据
 		void* data = nullptr;
 	};

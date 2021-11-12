@@ -148,12 +148,7 @@ void render::Node::addChild(Node* node, int zOrder)
 	}
 	
 
-	/*
-	if (zOrder != DEFAULT_ZORDER)
-	{
-		onChildrenChange();
-	}
-	*/
+	this->notify(render::NodeNotifyType::Draw);
 }
 
 void Node::removeChild( Node* node )
@@ -174,12 +169,8 @@ void Node::removeChild( Node* node )
 	{
 		_children.erase(it);
 	}
-	/*
-	if (node->getZOrder() != DEFAULT_ZORDER)
-	{
-		onChildrenChange();
-	}
-	*/
+	
+	this->notify(render::NodeNotifyType::Draw);
 }
 
 void Node::removeAllChildren()
@@ -196,7 +187,7 @@ void Node::removeAllChildren()
 	}
 
 	_children.clear();
-	//onChildrenChange();
+	this->notify(render::NodeNotifyType::Draw);
 }
 
 Node* Node::getChildByID( long id ) const
@@ -260,7 +251,7 @@ Node* Node::getFirstChild() const
 	return _children.front();
 }
 
-Node* render::Node::getChildByIndex(int index) const
+Node* render::Node::getChildAt(int index) const
 {
 	if (index < 0 || index >= _children.size())
 	{
@@ -350,6 +341,7 @@ void Node::setZOrder(int z, bool dirty)
 	if (dirty && this->getParent())
 	{
 		this->getParent()->notify(render::NodeNotifyType::NODE);
+		this->notify(render::NodeNotifyType::Draw);
 	}
 }
 
@@ -665,6 +657,8 @@ void Node::notifyEvents()
 
 void Node::sortChildren()
 {
+	if (_children.size() == 0) return;
+
 	std::vector<Node*> orderNodes;
 	bool bInsert = false;
 	std::vector<Node*>::iterator oIt;

@@ -149,16 +149,16 @@ bool GLWindow::dispose()
 
 void GLWindow::listen()
 {
+	_close = false;
 	MSG msg;
-	bool done = false;
-
-	while (!done)
+	while (!_close)
 	{
 		if (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE))
 		{
 			if (msg.message == WM_QUIT)
 			{
-				done = TRUE;
+				_close = true;
+				break;
 			}
 			else
 			{
@@ -166,20 +166,17 @@ void GLWindow::listen()
 				DispatchMessage(&msg);                                   // 发送消息
 			}
 		}
-		else // 如果没有消息
+		if (_render)
 		{
-			if (_render)
-			{
-				_render->update();		// 绘制场景
-				SwapBuffers(_dc);			// 交换缓存 (双缓存)
-			}
+			_render->update();		// 绘制场景
+			SwapBuffers(_dc);			// 交换缓存 (双缓存)
 		}
 	}
 	// 关闭程序
 	dispose();
 }
 
-bool GLWindow::onHandSignal(sys::Signal* signal)
+bool GLWindow::onHandSignal(const sys::Signal* signal)
 {
 	if (signal == nullptr)
 	{

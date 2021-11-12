@@ -24,7 +24,7 @@ namespace render
 		// 监听窗口
 		virtual void listen();
 		// 接受信号的处理
-		virtual bool onHandSignal(sys::Signal* signal);
+		virtual bool onHandSignal(const sys::Signal* signal);
 		// 重置外设
 		virtual void initDevice();
 	protected:
@@ -38,5 +38,7 @@ namespace render
 		RenderApplication* _render;
 		// 设备代理
 		DeviceProxy* _deviceProxy;
+		// 关闭
+		bool _close = false;
 	};
 }

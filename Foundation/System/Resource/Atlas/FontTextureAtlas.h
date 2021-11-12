@@ -49,7 +49,7 @@ namespace sys
 		/**
 		*	添加纹理碎片
 		*/
-		void addChip(const FontTextureChip* chip);
+		void addChip(const FontTextureChip& chip);
 		/**
 		*	移除纹理碎片
 		*/
@@ -65,13 +65,13 @@ namespace sys
 		/**
 		*	获取所有纹理碎片
 		*/
-		const std::map<std::string, FontTextureChip*>& getAllChips() const;
+		const std::map<std::string, FontTextureChip>& getAllChips() const;
 	private:
 		// 行高
 		uint32_t _lineHeight = 0;
 		// 字号大小
 		uint32_t _fontSize = 0;
 		// 碎片
-		std::map<std::string, FontTextureChip*> _chips;
+		std::map<std::string, FontTextureChip> _chips;
 	};
 }

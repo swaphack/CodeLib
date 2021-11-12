@@ -343,7 +343,7 @@ bool ui::UIProxy::getVisibleChildren(const render::Node* node, std::vector<rende
 	int count = pNode->getChildrenCount();
 	for (int i = 0; i < count; i++)
 	{
-		children.push_back(pScrollView->getChildByIndex(i));
+		children.push_back(pScrollView->getChildAt(i));
 	}
 
 	return true;
@@ -503,7 +503,8 @@ void ui::UIProxy::loadTextures(tinyxml2::XMLElement* xmlNode)
 			{
 				imageAtlasPacker.loadTextureAtlas(image, atlas);
 				imageAtlasPacker.setAtlas(image, atlas);
-				G_TEXTURE_CACHE->addTexAtlas(image, atlas, imageAtlasPacker.getTextureAtlas());
+				const auto& texAtlas = imageAtlasPacker.getTextureAtlas();
+				G_TEXTURE_CACHE->addTexAtlas(image, atlas, texAtlas);
 			}
 		}
 		else if (type == TEXTURE_TYPE_TEXT)
@@ -512,7 +513,8 @@ void ui::UIProxy::loadTextures(tinyxml2::XMLElement* xmlNode)
 			{
 				textAtlasPacker.loadTextureAtlas(image, atlas);
 				textAtlasPacker.setAtlas(image, atlas);
-				G_TEXT_CACHE->addTexAtlas(image, atlas, textAtlasPacker.getTextureAtlas());
+				const auto& texAtlas = textAtlasPacker.getTextureAtlas();
+				G_TEXT_CACHE->addTexAtlas(image, atlas, texAtlas);
 			}
 		}
 

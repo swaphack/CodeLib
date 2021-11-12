@@ -160,7 +160,7 @@ ui::CtrlButton* ue::UIDesignNodeTree::createHasChildrenNode(int height, const st
 
 	auto pItem = pWidget->getLayoutItem();
 
-	pItem->setMargin(2, 2, 2, 2);
+	pItem->setMarginState(false, true, false, true);
 	pItem->getSize().setWidth(sys::NumberType::Percent, ONE_HUNDRED);
 	pItem->getSize().setHeight(sys::NumberType::Fixed, height);
 
@@ -187,8 +187,8 @@ ui::CtrlButton* ue::UIDesignNodeTree::createHasChildrenNode(int height, const st
 			std::reverse(vecIndex.begin(), vecIndex.end());
 			G_PANELEVT->setSelectTreeNode(vecIndex);
 
-			this->onChangeFoldState(node);
-			this->updateRootPanel();
+			//this->onChangeFoldState(node);
+			//this->updateRootPanel();
 		});
 	}
 	return pWidget;
@@ -204,7 +204,7 @@ ui::CtrlButton* ue::UIDesignNodeTree::createNoChildrenNode(int height, const std
 
 	auto pItem = pWidget->getLayoutItem();
 
-	pItem->setMargin(2, 2, 2, 2);
+	pItem->setMarginState(false, true, false, true);
 	pItem->getSize().setWidth(sys::NumberType::Percent, ONE_HUNDRED);
 	pItem->getSize().setHeight(sys::NumberType::Fixed, height);
 

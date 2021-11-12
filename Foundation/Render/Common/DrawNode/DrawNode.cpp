@@ -277,10 +277,8 @@ void render::DrawNode::initDrawParameter()
 	_drawParameter.textureCache = _textureCache;
 	_drawParameter.tessilation = isTessilationEnable();
 	
-	auto mat = math::Matrix4x4();
-	float value = G_DRAWCORE->getDrawZOrder(this);
-	mat.setValue(3, 2, value);
-	_drawParameter.matrix = mat;
+	int zOrder = G_DRAWCORE->getDrawZOrder(this);
+	_drawParameter.localZOrder = zOrder / 1000.0f;
 	G_DRAWCORE->addDrawParameter(&_drawParameter);
 }
 

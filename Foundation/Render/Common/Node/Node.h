@@ -87,7 +87,7 @@ namespace render
 		// 获取第一个子节点
 		Node* getFirstChild() const;
 		// 按照索引查找子节点
-		Node* getChildByIndex(int index) const;
+		Node* getChildAt(int index) const;
 		// 子节点所在索引
 		int indexOfChild(const Node* node) const;
 		// 是否是目标的后代节点
