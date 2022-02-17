@@ -46,9 +46,6 @@
     <ClInclude Include="ClassicalMechanics\import.h">
       <Filter>ClassicalMechanics</Filter>
     </ClInclude>
-    <ClInclude Include="Definition\BaseUnit.h">
-      <Filter>Definition</Filter>
-    </ClInclude>
     <ClInclude Include="Definition\SIUnit.h">
       <Filter>Definition</Filter>
     </ClInclude>
@@ -70,15 +67,15 @@
     <ClInclude Include="Definition\import.h">
       <Filter>Definition</Filter>
     </ClInclude>
-    <ClInclude Include="Definition\DerivedUnit.h">
+    <ClInclude Include="ClassicalMechanics\MassHelper.h">
+      <Filter>ClassicalMechanics</Filter>
+    </ClInclude>
+    <ClInclude Include="Definition\PhyQuantity.h">
       <Filter>Definition</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Definition\BaseUnit.cpp">
-      <Filter>Definition</Filter>
-    </ClCompile>
     <ClCompile Include="Definition\SIUnit.cpp">
       <Filter>Definition</Filter>
     </ClCompile>
@@ -91,13 +88,11 @@
     <ClCompile Include="Electromagnetism\Optics\Color4.cpp">
       <Filter>Electromagnetism\Optics</Filter>
     </ClCompile>
-    <ClCompile Include="Definition\DerivedUnit.cpp">
+    <ClCompile Include="ClassicalMechanics\MassHelper.cpp">
+      <Filter>ClassicalMechanics</Filter>
+    </ClCompile>
+    <ClCompile Include="Definition\PhyQuantity.cpp">
       <Filter>Definition</Filter>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <Xsd Include="Definition\SI.xsd">
-      <Filter>Definition</Filter>
-    </Xsd>
   </ItemGroup>
 </Project>

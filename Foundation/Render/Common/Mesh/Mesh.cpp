@@ -274,23 +274,13 @@ void render::Mesh::initMeshOtherDetail()
 		return;
 	}
 
-	if (getMeshDetail()->getUVs().getSize() == 0)
+	if (getMeshDetail()->getNormals().getSize() == 0)
 	{
-		if (getMeshDetail()->getNormals().getSize() == 0)
-		{
-			this->initDetailNormalData();
-		}
+		this->initDetailNormalData();
 	}
-	else
+	if (getMeshDetail()->getTangents().getSize() == 0)
 	{
-		if (getMeshDetail()->getNormals().getSize() == 0)
-		{
-			this->initDetailNormalData();
-		}
-		if (getMeshDetail()->getTangents().getSize() == 0)
-		{
-			this->initDetailTangentData();
-		}
+		this->initDetailTangentData();
 	}
 }
 
@@ -583,6 +573,8 @@ bool render::Mesh::sameLayout(const Mesh& mesh) const
 	{
 		return false;
 	}
-	return _detail->sameLayout(*mesh.getMeshDetail());
+
+	return true;
+	//return _detail->sameLayout(*mesh.getMeshDetail());
 }
 

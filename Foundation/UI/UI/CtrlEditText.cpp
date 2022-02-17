@@ -161,11 +161,11 @@ void ui::CtrlEditText::setMultiLine(bool bMulti)
 
 	if (_multiLine)
 	{
-		_ctrlText->setDimensions(this->getSize());
+		_ctrlText->setTextDimensions(this->getSize());
 	}
 	else
 	{
-		_ctrlText->setDimensions(math::Vector2());
+		_ctrlText->setTextDimensions(math::Vector2());
 	}
 }
 

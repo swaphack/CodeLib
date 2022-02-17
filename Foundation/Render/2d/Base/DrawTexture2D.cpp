@@ -35,14 +35,6 @@ bool DrawTexture2D::init()
 		return false;
 	}
 
-	addNotifyListener(NodeNotifyType::BODY, [this]() {
-		this->updateTexture2DMeshData();
-	});
-
-	addNotifyListener(NodeNotifyType::TEXTURE, [this]() {
-		this->updateTexture2DMeshData();
-	});
-
 	addNotifyListener(NodeNotifyType::GEOMETRY, [this]() {
 		this->updateUVWithTexture();
 	});
@@ -182,10 +174,10 @@ void render::DrawTexture2D::updateUVWithTexture()
 		rotated = false;
 	}
 	VertexTool::setTexture2DCoords(&_rectVertex, _texFrame->getRect(), rotated);
-	this->updateTexture2DMeshData();
+	this->updateDrawNode2DMesh();
 }
 
-void DrawTexture2D::updateTexture2DMeshData()
+void DrawTexture2D::updateDrawNode2DMesh()
 {
 	auto pMesh = getMesh();
 	if (pMesh)

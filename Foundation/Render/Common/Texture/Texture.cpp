@@ -5,7 +5,24 @@
 #include "TextureCache.h"
 using namespace render;
 
-Texture::~Texture()
+render::Texture::Texture()
+{
+	_sampler = CREATE_OBJECT(Sampler);
+	SAFE_RETAIN(_sampler);
+
+	this->initTexture();
+}
+
+render::Texture::Texture(TextureTarget target)
+{
+	_sampler = CREATE_OBJECT(Sampler);
+	SAFE_RETAIN(_sampler);
+
+	_textureTarget = target;
+	this->initTexture();
+}
+
+render::Texture::~Texture()
 {
 	SAFE_RELEASE(_sampler);
 	this->releaseTexture();
@@ -390,23 +407,6 @@ void render::Texture::setWidth(uint32_t val)
 int render::Texture::getWidth() const
 {
 	return _width;
-}
-
-render::Texture::Texture(TextureTarget target)
-{
-	_sampler = CREATE_OBJECT(Sampler);
-	SAFE_RETAIN(_sampler);
-
-	_textureTarget = target;
-	this->initTexture();
-}
-
-render::Texture::Texture()
-{
-	_sampler = CREATE_OBJECT(Sampler);
-	SAFE_RETAIN(_sampler);
-
-	this->initTexture();
 }
 
 uint32_t render::Texture::getTextureID() const

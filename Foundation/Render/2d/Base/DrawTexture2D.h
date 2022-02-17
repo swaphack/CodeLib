@@ -62,7 +62,7 @@ namespace render
 		/**
 		*	更新网格数据
 		*/
-		virtual void updateTexture2DMeshData();
+		virtual void updateDrawNode2DMesh();
 	protected:
 		// 是否水平翻转
 		bool _bFlipX = false;

@@ -81,6 +81,10 @@ namespace render
 		*	设置顶点属性值
 		*/
 		void setVertexAttribPointer(uint32_t index, uint32_t count, VertexAttribPointerType type, uint32_t stride, uint32_t offset);
+		/**
+		*	设置顶点属性值 分离，常用于用于矩阵,例如：mat4x4 4个vec4，每多少间隔的顶点会更新
+		*/
+		void setVertexAttribDivisor(uint32_t index, uint32_t divisor);
 	protected:
 		/**
 		*	生成vao

@@ -113,7 +113,7 @@ sys::VerticalAlignment ui::CtrlTextAtlas::getTextVerticalAlignment() const
 	return _textDefine.verticalAlignment;
 }
 
-void ui::CtrlTextAtlas::setDimensions(float width, float height)
+void ui::CtrlTextAtlas::setTextDimensions(float width, float height)
 {
 	_textDefine.dimensions.setWidth(width);
 	_textDefine.dimensions.setHeight(height);
@@ -121,13 +121,13 @@ void ui::CtrlTextAtlas::setDimensions(float width, float height)
 	this->notify(render::NodeNotifyType::TEXT);
 }
 
-void ui::CtrlTextAtlas::setDimensions(const math::Size& size)
+void ui::CtrlTextAtlas::setTextDimensions(const math::Size& size)
 {
 	_textDefine.dimensions = size;
 	this->notify(render::NodeNotifyType::TEXT);
 }
 
-const math::Size& ui::CtrlTextAtlas::getDimensions() const
+const math::Size& ui::CtrlTextAtlas::getTextDimensions() const
 {
 	return _textDefine.dimensions;
 }
@@ -315,7 +315,7 @@ void ui::CtrlTextAtlas::onTextChange()
 				pTexture2D->loadImage(G_TEXT_CACHE->getAtlasName(_textDefine.filepath, name));
 				pTexture2D->setPosition(posX, posY);
 				pTexture2D->setAnchorPoint(0, 0);
-				pTexture2D->setVolume(data->width, data->height);
+				pTexture2D->setVolume(dataWidth, dataHeight);
 				pTexture2D->setColor(_textDefine.color);
 				pTexture2D->setNativeTextureSize();
 				_content->addChild(pTexture2D);

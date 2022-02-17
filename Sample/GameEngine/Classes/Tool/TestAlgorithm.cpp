@@ -107,21 +107,21 @@ void TestAlgorithm::testWFCCreateMap()
 	}
 
 	{
-		//mapAssets->addMatchSlot<8>(0, 1, 2, 3, 4, 5, 6, 7, 8);
-		mapAssets->addMatchSlot<2>(1, 4, 8);
-		mapAssets->addMatchSlot<2>(0, 5, 9);
-		mapAssets->addMatchSlot<2>(2, 7, 11);
-		mapAssets->addMatchSlot<2>(3, 6, 10);
+		//mapAssets->addMatchRule<8>(0, 1, 2, 3, 4, 5, 6, 7, 8);
+		mapAssets->addMatchRule<2>(1, 4, 8);
+		mapAssets->addMatchRule<2>(0, 5, 9);
+		mapAssets->addMatchRule<2>(2, 7, 11);
+		mapAssets->addMatchRule<2>(3, 6, 10);
 
-		mapAssets->addMatchSlot<2>(4, 1, 9);
-		mapAssets->addMatchSlot<2>(5, 0, 8);
-		mapAssets->addMatchSlot<2>(6, 3, 11);
-		mapAssets->addMatchSlot<2>(7, 2, 10);
+		mapAssets->addMatchRule<2>(4, 1, 9);
+		mapAssets->addMatchRule<2>(5, 0, 8);
+		mapAssets->addMatchRule<2>(6, 3, 11);
+		mapAssets->addMatchRule<2>(7, 2, 10);
 
-		mapAssets->addMatchSlot<2>(8, 1, 5);
-		mapAssets->addMatchSlot<2>(9, 0, 4);
-		mapAssets->addMatchSlot<2>(10, 3, 7);
-		mapAssets->addMatchSlot<2>(11, 2, 6);
+		mapAssets->addMatchRule<2>(8, 1, 5);
+		mapAssets->addMatchRule<2>(9, 0, 4);
+		mapAssets->addMatchRule<2>(10, 3, 7);
+		mapAssets->addMatchRule<2>(11, 2, 6);
 	}
 	auto map = new alg::map::RectMap<RECT_WIDTH, RECT_HEIGHT>();
 	auto creator = new alg::map::RectMapCreator<SLOT_COUNT, RECT_WIDTH, RECT_HEIGHT>();

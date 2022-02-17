@@ -31,7 +31,7 @@ namespace render
 		/**
 		*	更新2d节点信息
 		*/
-		void updateDrawNode2DMesh();
+		virtual void updateDrawNode2DMesh();
 	protected:
 		virtual void afterDraw();
 	protected:

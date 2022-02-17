@@ -47,7 +47,8 @@ void ui::CtrlTableView::reload()
 	for (int i = 0; i < nCount; i++)
 	{
 		TableCell& cell = _tabelCells[i];
-		cell.size = _sourceData->getDataSize(i);
+		cell.index = i;
+		cell.size = _sourceData->getDataSize(i, cell.type);
 		fTotalWidth += cell.size.getWidth();
 		fTotalHeight += cell.size.getHeight();
 	}
@@ -180,14 +181,14 @@ void ui::CtrlTableView::processData()
 		//bHide = false;
 		if (bHide)
 		{
-			if (cell.widget == nullptr) continue;
-			else cell.widget->setVisible(false);
+			hideWidget(&cell);
+			
 		}
 		else
 		{
 			if (cell.widget == nullptr)
 			{
-				auto widget = _sourceData->getDataCell(i);
+				auto widget = getWidgetCell(i);
 				if (widget)
 				{
 					cell.widget = widget;
@@ -212,7 +213,6 @@ void ui::CtrlTableView::processData()
 			{
 				cell.widget->setVisible(true);
 			}
-			
 		}
 	}
 }
@@ -309,4 +309,33 @@ void ui::CtrlTableView::handMovedTouch(const math::Vector2& touchPoint)
 	}
 	_content->setPosition(pos);
 	processData();
+}
+
+void ui::CtrlTableView::hideWidget(TableCell* cell)
+{
+	if (cell->widget == nullptr) return;
+	SAFE_RETAIN(cell->widget);
+	cell->widget->removeFromParent();
+	_tableWidgets[cell->type].push_back(cell->widget);
+}
+
+ui::CtrlWidget* ui::CtrlTableView::getWidgetCell(int index)
+{
+	if (_sourceData == nullptr) return nullptr;
+	auto it = _tabelCells.find(index);
+	if (it == _tabelCells.end()) return nullptr;
+	auto widgets = _tableWidgets.find(it->second.type);
+	if (widgets != _tableWidgets.end())
+	{
+		if (widgets->second.size() > 0)
+		{
+			auto widget = widgets->second.front();
+			widgets->second.erase(widgets->second.begin());
+			SAFE_RELEASE(widget);
+			return widget;
+		}
+	}
+	auto pWidget = _sourceData->getDataCell(index, it->second.type);
+
+	return pWidget;
 }

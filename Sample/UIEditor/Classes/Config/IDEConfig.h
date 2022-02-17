@@ -4,6 +4,7 @@
 #include "toollib.h"
 #include "Config.h"
 #include <string>
+#include <map>
 
 namespace ue
 {
@@ -46,6 +47,8 @@ namespace ue
 			phy::Color3B TextColor;
 		};
 	public:
+		IDEConfig();
+		~IDEConfig();
 		// 文本配置
 		const TextSetting& getText() const;
 		// ide配置文件
@@ -63,7 +66,7 @@ namespace ue
 		// 文本 配置
 		TextSetting _text;
 		// 着色器配置
-		std::vector<ShaderSetting> _shaders;
+		std::map<int, ShaderSetting*> _shaders;
 		// ide 配置
 		IDESetting _ide;
 	};

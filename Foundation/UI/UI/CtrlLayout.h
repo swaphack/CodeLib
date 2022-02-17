@@ -34,11 +34,11 @@ namespace ui
 		/**
 		*	…Ë÷√±≥æ∞—’…´
 		*/
-		void setBackgroundColor(const phy::Color4B& color);
+		void setBackgroundMaskColor(const phy::Color4B& color);
 		/**
 		*	±≥æ∞—’…´
 		*/
-		phy::Color4B getBackgroundColor() const;
+		phy::Color4B getBackgroundMaskColor() const;
 		/**
 		*	…Ë÷√±≥æ∞Õº∆¨
 		*/

@@ -27,21 +27,25 @@ int ue::UIDesignDir::getDataCount()
 	return nCount;
 }
 
-math::Size ue::UIDesignDir::getDataSize(int index)
+math::Size ue::UIDesignDir::getDataSize(int index, int& tag)
 {
+	tag = 0;
+	if (index >= 0 && index < _simpleDirInfo.size())
+	{
+		const SimpleDirInfo& detail = _simpleDirInfo.at(index);
+		tag = detail.type;
+	}
 	return math::Size(this->getWidth(), CONST_ITEM_HEIGHT);
 }
 
-ui::CtrlWidget* ue::UIDesignDir::getDataCell(int index)
+ui::CtrlWidget* ue::UIDesignDir::getDataCell(int index, int tag)
 {
 	if (index < 0 || index >= _simpleDirInfo.size())
 	{
 		return nullptr;
 	}
-	int tempCount = 0;
-	bool bFile = false;
 	const SimpleDirInfo& detail = _simpleDirInfo.at(index);
-	if (detail.type == 1)
+	if (tag == 1)
 	{
 		return createFileItem(CONST_ITEM_HEIGHT, detail.name, detail.fullpath);
 	}

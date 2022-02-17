@@ -556,10 +556,10 @@ void render::ShaderProgram::bindMat4AttribPointer(VertexArrayObject* vao, const 
 		vao->setVertexAttribPointer(attrib->getAttribID() + 2, size, type, stride, offset + 2 * iOffset);
 		vao->setVertexAttribPointer(attrib->getAttribID() + 3, size, type, stride, offset + 3 * iOffset);
 
-		GLBufferObjects::setVertexAttribDivisor(attrib->getAttribID(), 1);
-		GLBufferObjects::setVertexAttribDivisor(attrib->getAttribID() + 1, 1);
-		GLBufferObjects::setVertexAttribDivisor(attrib->getAttribID() + 2, 1);
-		GLBufferObjects::setVertexAttribDivisor(attrib->getAttribID() + 3, 1);
+		vao->setVertexAttribDivisor(attrib->getAttribID(), 1);
+		vao->setVertexAttribDivisor(attrib->getAttribID() + 1, 1);
+		vao->setVertexAttribDivisor(attrib->getAttribID() + 2, 1);
+		vao->setVertexAttribDivisor(attrib->getAttribID() + 3, 1);
 	}
 }
 

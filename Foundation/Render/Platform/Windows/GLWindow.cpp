@@ -33,11 +33,13 @@ void GLWindow::createWindow(const std::string& title, int width, int height, int
 
 	ASSERT(_render == nullptr);
 
+	Window::initWindow(title, width, height);
+
 	_bits = 32;
 	_render = render;
 	_render->setRefreshInterval(millis / 1000.0f);
-
-	Window::initWindow(title, width, height);
+	_render->init();
+	_render->setFrameSize((int)getWidth(), (int)getHeight());
 
 	int err = glewInit();
 	if (GLEW_OK != err)
@@ -47,12 +49,7 @@ void GLWindow::createWindow(const std::string& title, int width, int height, int
 	}
 
 	GLVersion::showDetail();
-
-	if (_render)
-	{
-		_render->setFrameSize((int)getWidth(), (int)getHeight());
-		_render->show();
-	}
+	_render->show();
 
 	this->initDevice();
 	this->listen();
@@ -166,11 +163,15 @@ void GLWindow::listen()
 				DispatchMessage(&msg);                                   // 发送消息
 			}
 		}
-		if (_render)
+		else
 		{
-			_render->update();		// 绘制场景
-			SwapBuffers(_dc);			// 交换缓存 (双缓存)
+			if (_render)
+			{
+				_render->update();		// 绘制场景
+				SwapBuffers(_dc);			// 交换缓存 (双缓存)
+			}
 		}
+		Sleep(1);
 	}
 	// 关闭程序
 	dispose();

@@ -54,7 +54,7 @@ void ue::UIPropertyLayout::readWidgetProperty()
 	}
 	if (m_pMaskColor)
 	{
-		phy::Color4B color = pLayout->getBackgroundColor();
+		phy::Color4B color = pLayout->getBackgroundMaskColor();
 		std::string text;
 		sys::ColorConvert::convertToText(color, text);
 
@@ -90,7 +90,7 @@ void ue::UIPropertyLayout::writeWidgetProperty()
 	{
 		phy::Color4B color(255, 255, 255, 255);
 		sys::ColorConvert::convertToColor(m_pMaskColor->getString(), color);
-		pLayout->setBackgroundColor(color);
+		pLayout->setBackgroundMaskColor(color);
 	}
 
 

@@ -1,6 +1,13 @@
 #include "IDEConfig.h"
 
+ue::IDEConfig::IDEConfig()
+{
 
+}
+ue::IDEConfig::~IDEConfig()
+{
+	Dispose();
+}
 const ue::IDEConfig::TextSetting& ue::IDEConfig::getText() const
 {
 	return _text;
@@ -13,13 +20,18 @@ const ue::IDEConfig::IDESetting& ue::IDEConfig::getIDE() const
 
 const ue::IDEConfig::ShaderSetting* ue::IDEConfig::getShader() const
 {
-	if (_ide.ShaderMode >=0 && _ide.ShaderMode < _shaders.size())
-		return &_shaders[_ide.ShaderMode];
-	return nullptr;
+	auto it = _shaders.find(_ide.ShaderMode);
+	if (it == _shaders.end()) return nullptr;
+	return it->second;
 }
 
 void ue::IDEConfig::Dispose()
 {
+	for (auto item : _shaders)
+	{
+		delete item.second;
+	}
+	_shaders.clear();
 }
 
 void ue::IDEConfig::loadXml(const std::string& filepath)
@@ -31,61 +43,42 @@ void ue::IDEConfig::loadXml(const std::string& filepath)
 		return;
 	}
 
-	auto element = _helper.getElement("IDE");
-	if (element)
-	{
-		auto child = element->FirstChildElement("Design");
-		if (child && child->GetText())
-		{
-			_ide.Design = child->GetText();
-		}
-
-		child = element->FirstChildElement("Control");
-		if (child && child->GetText())
-		{
-			_ide.Control = child->GetText();
-		}
-		child = element->FirstChildElement("ShaderMode");
-		if (child && child->GetText())
-		{
-			_ide.ShaderMode = atoi(child->GetText());
-		}
-		child = element->FirstChildElement("DebugMode");
-		if (child && child->GetText())
-		{
-			_ide.DebugMode = atoi(child->GetText());
-		}
-	}
-	element = _helper.getElement("Shader");
+	auto element = _helper.getElement("Shader");
 	if (element)
 	{
 		auto item = element->FirstChildElement();
 		while (item != nullptr)
 		{
-			ShaderSetting shader;
-			auto child = item->FirstChildElement("TexVertex");
-			if (child && child->GetText())
+			auto attribute = item->Attribute("mode");
+			if (attribute)
 			{
-				shader.TexVertex = child->GetText();
-			}
+				int type = atoi(attribute);
+				ShaderSetting* pShader = new ShaderSetting();
 
-			child = item->FirstChildElement("TexFragment");
-			if (child && child->GetText())
-			{
-				shader.TexFragment = child->GetText();
-			}
-			child = item->FirstChildElement("ColorVertex");
-			if (child && child->GetText())
-			{
-				shader.ColorVertex = child->GetText();
-			}
+				auto child = item->FirstChildElement("TexVertex");
+				if (child && child->GetText())
+				{
+					pShader->TexVertex = child->GetText();
+				}
 
-			child = item->FirstChildElement("ColorFragment");
-			if (child && child->GetText())
-			{
-				shader.ColorFragment = child->GetText();
+				child = item->FirstChildElement("TexFragment");
+				if (child && child->GetText())
+				{
+					pShader->TexFragment = child->GetText();
+				}
+				child = item->FirstChildElement("ColorVertex");
+				if (child && child->GetText())
+				{
+					pShader->ColorVertex = child->GetText();
+				}
+
+				child = item->FirstChildElement("ColorFragment");
+				if (child && child->GetText())
+				{
+					pShader->ColorFragment = child->GetText();
+				}
+				_shaders.insert(std::make_pair(type, pShader));
 			}
-			_shaders.push_back(shader);
 			item = item->NextSiblingElement();
 		}
 	}
@@ -108,6 +101,32 @@ void ue::IDEConfig::loadXml(const std::string& filepath)
 		if (child && child->GetText())
 		{
 			sys::ColorConvert::convertToColor(child->GetText(), _text.TextColor);
+		}
+	}
+
+	element = _helper.getElement("IDE");
+	if (element)
+	{
+		auto child = element->FirstChildElement("Design");
+		if (child && child->GetText())
+		{
+			_ide.Design = child->GetText();
+		}
+
+		child = element->FirstChildElement("Control");
+		if (child && child->GetText())
+		{
+			_ide.Control = child->GetText();
+		}
+		child = element->FirstChildElement("ShaderMode");
+		if (child && child->GetText())
+		{
+			_ide.ShaderMode = atoi(child->GetText());
+		}
+		child = element->FirstChildElement("DebugMode");
+		if (child && child->GetText())
+		{
+			_ide.DebugMode = atoi(child->GetText());
 		}
 	}
 }

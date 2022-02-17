@@ -7,24 +7,37 @@ using namespace tool;
 XmlHelper::XmlHelper()
 {
 	m_pDocument = new tinyxml2::XMLDocument();
-
-	auto pRoot = m_pDocument->NewElement("root");
-	m_pDocument->InsertFirstChild(pRoot);
 }
 
 XmlHelper::~XmlHelper()
 {
-	delete m_pDocument;
+	if (m_pDocument != nullptr)
+	{
+		delete m_pDocument;
+	}
 }
 
 tinyxml2::XMLDocument* tool::XmlHelper::getDocument()
 {
+	if (m_pDocument == nullptr || m_pDocument->Error())
+	{
+		return nullptr;
+	}
 	return m_pDocument;
 }
 
 tinyxml2::XMLElement* tool::XmlHelper::getRoot()
 {
-	return m_pDocument->RootElement();
+	auto doc = getDocument();
+	if (doc == nullptr) return nullptr;
+
+	auto root = doc->RootElement();
+	if (root == nullptr)
+	{
+		root = doc->NewElement("root");
+		doc->InsertFirstChild(root);
+	}
+	return root;
 }
 
 bool XmlHelper::loadFile(const std::string& filepath)
@@ -34,9 +47,13 @@ bool XmlHelper::loadFile(const std::string& filepath)
 		return false;
 	}
 
-	tinyxml2::XMLError error = m_pDocument->LoadFile(filepath.c_str());
+	auto doc = getDocument();
+	if (doc == nullptr) return nullptr;
+
+	tinyxml2::XMLError error = doc->LoadFile(filepath.c_str());
 	if (error != tinyxml2::XML_SUCCESS)
 	{
+		PRINT("Load XML File Error %d", error);
 		return false;
 	}
 
@@ -45,9 +62,14 @@ bool XmlHelper::loadFile(const std::string& filepath)
 
 void tool::XmlHelper::saveTo(const std::string& filepath)
 {
-	tinyxml2::XMLError error = m_pDocument->SaveFile(filepath.c_str());
+	auto doc = getDocument();
+	if (doc == nullptr) return;
+
+	tinyxml2::XMLError error = doc->SaveFile(filepath.c_str());
 	if (error != tinyxml2::XML_SUCCESS)
 	{
+		PRINT("Save XML File Error %d", error);
+		return;
 	}
 }
 
@@ -76,46 +98,58 @@ void tool::XmlHelper::setRootAttributes(const std::map<std::string, std::string>
 
 void tool::XmlHelper::appendElementWithAttributes(const std::string& nodeName, const std::map<std::string, std::string>& value)
 {
-	tinyxml2::XMLElement* pElement = m_pDocument->NewElement(nodeName.c_str());
+	auto doc = getDocument();
+	if (doc == nullptr) return;
+
+	tinyxml2::XMLElement* pElement = doc->NewElement(nodeName.c_str());
 	for (const auto& item : value)
 	{
 		pElement->SetAttribute(item.first.c_str(), item.second.c_str());
 	}
-	m_pDocument->RootElement()->InsertEndChild(pElement);
+	doc->RootElement()->InsertEndChild(pElement);
 }
 
 void tool::XmlHelper::appendElementWithChildren(const std::string& nodeName, const std::map<std::string, std::string>& value)
 {
-	tinyxml2::XMLElement* pElement = m_pDocument->NewElement(nodeName.c_str());
+	auto doc = getDocument();
+	if (doc == nullptr) return;
+
+	tinyxml2::XMLElement* pElement = doc->NewElement(nodeName.c_str());
 	for (const auto& item : value)
 	{
-		tinyxml2::XMLElement* pChild = m_pDocument->NewElement(item.first.c_str());
+		tinyxml2::XMLElement* pChild = doc->NewElement(item.first.c_str());
 		pChild->SetText(item.second.c_str());
 		pElement->InsertEndChild(pChild);
 	}
-	m_pDocument->RootElement()->InsertEndChild(pElement);
+	doc->RootElement()->InsertEndChild(pElement);
 }
 
 void tool::XmlHelper::appendElementWithChildren(const std::string& nodeName, const std::vector<std::pair<std::string, std::string>>& value)
 {
-	tinyxml2::XMLElement* pElement = m_pDocument->NewElement(nodeName.c_str());
+	auto doc = getDocument();
+	if (doc == nullptr) return;
+
+	tinyxml2::XMLElement* pElement = doc->NewElement(nodeName.c_str());
 	for (const auto& item : value)
 	{
-		tinyxml2::XMLElement* pChild = m_pDocument->NewElement(item.first.c_str());
+		tinyxml2::XMLElement* pChild = doc->NewElement(item.first.c_str());
 		pChild->SetText(item.second.c_str());
 		pElement->InsertEndChild(pChild);
 	}
-	m_pDocument->RootElement()->InsertEndChild(pElement);
+	doc->RootElement()->InsertEndChild(pElement);
 }
 
 tinyxml2::XMLElement* XmlHelper::getElement(const std::string& nodePath, const std::string& spot)
 {
+	auto doc = getDocument();
+	if (doc == nullptr) return nullptr;
+
 	if (nodePath.empty())
 	{
 		return nullptr;
 	}
 
-	tinyxml2::XMLElement* pRoot = m_pDocument->RootElement();
+	tinyxml2::XMLElement* pRoot = doc->RootElement();
 	if (pRoot == nullptr)
 	{
 		return nullptr;
@@ -176,7 +210,10 @@ void tool::XmlHelper::foreach(const std::function<void(tinyxml2::XMLElement*)>& 
 	{
 		return;
 	}
-	tinyxml2::XMLElement* pRoot = m_pDocument->RootElement();
+	auto doc = getDocument();
+	if (doc == nullptr) return;
+
+	tinyxml2::XMLElement* pRoot = doc->RootElement();
 	if (pRoot == nullptr)
 	{
 		return;

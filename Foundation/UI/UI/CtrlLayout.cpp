@@ -87,12 +87,12 @@ void ui::CtrlLayout::setUseDesignCamera(bool bUsed)
 	}
 }
 
-void ui::CtrlLayout::setBackgroundColor(const phy::Color4B& color)
+void ui::CtrlLayout::setBackgroundMaskColor(const phy::Color4B& color)
 {
 	_backgroundMask->setColor(color);
 }
 
-phy::Color4B ui::CtrlLayout::getBackgroundColor() const
+phy::Color4B ui::CtrlLayout::getBackgroundMaskColor() const
 {
 	phy::Color4B color;
 	convertColor4FTo4B(_backgroundMask->getColor(), color);

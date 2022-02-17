@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <root>
 	<Shader>
-		<Default>
+		<File mode="0">
 			<TexVertex>Default/Shader/ui_texture.vs</TexVertex>
 			<TexFragment>Default/Shader/ui_texture.fs</TexFragment>	
 			<ColorVertex>Default/Shader/ui_color.vs</ColorVertex>
 			<ColorFragment>Default/Shader/ui_color.fs</ColorFragment>
-		</Default>
-		<Batch>
+		</File>
+		<File mode="1">
 			<TexVertex>Default/Shader/ui_texture_batch.vs</TexVertex>
 			<TexFragment>Default/Shader/ui_texture_batch.fs</TexFragment>	
 			<ColorVertex>Default/Shader/ui_color_batch.vs</ColorVertex>
 			<ColorFragment>Default/Shader/ui_color_batch.fs</ColorFragment>
-		</Batch>
-		<Pack>
+		</File>
+		<File mode="2">
 			<TexVertex>Default/Shader/ui_texture_pack.vs</TexVertex>
 			<TexFragment>Default/Shader/ui_texture_pack.fs</TexFragment>	
 			<ColorVertex>Default/Shader/ui_color_pack.vs</ColorVertex>
 			<ColorFragment>Default/Shader/ui_color_pack.fs</ColorFragment>
-		</Pack>
+		</File>
 	</Shader>
 	<Text>
 		<FontPath>Default/Font/font_3.ttf</FontPath>
@@ -26,9 +26,9 @@
 		<TextColor>255,255,255</TextColor>
 	</Text>
 	<IDE>
-		<Design>Default/Layout/main_view_test.xml</Design>
+		<Design>Default/Layout/main_view.xml</Design>
 		<Control>Default/Layout/Widget/widget.config.xml</Control>
-		<ShaderMode>2</ShaderMode>
+		<ShaderMode>0</ShaderMode>
 		<DebugMode>-1</DebugMode>
 	</IDE>
 </root>

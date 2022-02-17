@@ -98,6 +98,11 @@ void render::VertexArrayObject::setVertexAttribPointer(uint32_t index, uint32_t 
 	}
 }
 
+void render::VertexArrayObject::setVertexAttribDivisor(uint32_t index, uint32_t divisor)
+{
+	GLBufferObjects::setVertexAttribDivisor(index, divisor);
+}
+
 void render::VertexArrayObject::initVAO()
 {
 	_vaoID = GLVertexArrays::genVertexArray();

@@ -12,6 +12,7 @@ SpaceProtocol::SpaceProtocol()
 	this->setPosition(0, 0, 0);
 	this->setScale(1, 1, 1);
 	this->setRotation(0, 0, 0);
+	onSpaceChange();
 }
 
 SpaceProtocol::~SpaceProtocol()
@@ -275,6 +276,7 @@ BodyProtocol::BodyProtocol()
 {
 	this->setAnchorPoint(0.5f, 0.5f, 0.5f);
 	this->setVolume(0, 0, 0);
+	onBodyChange();
 }
 
 BodyProtocol::~BodyProtocol()

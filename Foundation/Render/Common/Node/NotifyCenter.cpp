@@ -1,7 +1,7 @@
 #include "NotifyCenter.h"
 #include "Node.h"
 
-#define UPDATE_NODE_COUNT 10
+//#define UPDATE_NODE_COUNT 10
 
 render::NotifyCenter::NotifyCenter()
 {
@@ -131,6 +131,7 @@ void render::NotifyCenter::updateAllDirtyNodes()
 	_waitDirtyNodes.clear();
 	_bHandDirtyEvent = true;
 
+#ifdef UPDATE_NODE_COUNT
 	// 只更新部分
 	int nMaxCount = UPDATE_NODE_COUNT;
 	std::vector<Node*> vecUpdateNodes;
@@ -146,10 +147,17 @@ void render::NotifyCenter::updateAllDirtyNodes()
 	for (auto& item : vecUpdateNodes)
 	{
 		_allDirtyNodes.erase(item);
+#else
+	for (auto& item : _allDirtyNodes)
+	{
+#endif // 
 		SAFE_RETAIN(item);
 		item->updateNode();
 		SAFE_RELEASE(item);
 	}
-	//_allDirtyNodes.clear();
+#ifdef UPDATE_NODE_COUNT
+#else
+	_allDirtyNodes.clear();
+#endif
 	_bHandDirtyEvent = false;
 }

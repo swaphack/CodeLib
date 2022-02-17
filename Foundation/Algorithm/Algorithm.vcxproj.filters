@@ -215,6 +215,15 @@
     <ClInclude Include="Space\Index\OcTree.h">
       <Filter>Space\Index</Filter>
     </ClInclude>
+    <ClInclude Include="Map\Path\TaskPath.h">
+      <Filter>Map\Path</Filter>
+    </ClInclude>
+    <ClInclude Include="Navigation\NavMesh.h">
+      <Filter>Navigation</Filter>
+    </ClInclude>
+    <ClInclude Include="Navigation\NavSystem.h">
+      <Filter>Navigation</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Sort">
@@ -258,6 +267,9 @@
     </Filter>
     <Filter Include="Space\Bin">
       <UniqueIdentifier>{3a19625d-bb58-486a-820d-2e6c2ba2d4f9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Navigation">
+      <UniqueIdentifier>{b36984d5-9fba-4251-89b8-5d8cd583d2c0}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -384,6 +396,9 @@
     </ClCompile>
     <ClCompile Include="Space\Bin\BinPacking2D.cpp">
       <Filter>Space\Bin</Filter>
+    </ClCompile>
+    <ClCompile Include="Map\Path\TaskPath.cpp">
+      <Filter>Map\Path</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

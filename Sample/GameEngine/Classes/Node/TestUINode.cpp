@@ -348,7 +348,7 @@ void TestUINode::testText()
 	pText->setTextColor(phy::Color3B(255, 255, 255));
 	pText->setFontPath("Resource/Font/font_3.ttf");
 	pText->setFontSize(58);
-	pText->setDimensions(400, 100);
+	pText->setTextDimensions(400, 100);
 	Utility::loadDefaultShader(pText);
 
 	this->addChild(pText);

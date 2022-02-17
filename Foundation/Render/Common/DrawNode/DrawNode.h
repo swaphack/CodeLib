@@ -137,6 +137,10 @@ namespace render
 		*	初始化渲染参数
 		*/
 		void initDrawParameter();
+		/**
+		*	初始化渲染参数
+		*/
+		void initZOrderDrawParameter();
 	protected:
 		/**
 		*	颜色改变

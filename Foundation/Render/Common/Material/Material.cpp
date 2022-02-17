@@ -67,6 +67,10 @@ void render::Material::setProgramFunc(const ShaderProgramFunc& func)
 
 void render::Material::applyMaterial()
 {
+	if (_shaderProgram == nullptr)
+	{
+		return;
+	}
 	if (_detail)
 	{
 		GLMaterial::setMaterialAmbient(FaceType::FRONT, _detail->getAmbient());

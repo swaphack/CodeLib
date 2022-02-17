@@ -27,7 +27,7 @@ void LayoutLoader::parseAttributes()
 	LOAD_WIDGET_ATTRIBUTE(PROPERTY_IMAGE_SHOW, setBackgroudImageVisible, showBgImage);
 	LOAD_WIDGET_ATTRIBUTE(PROPERTY_MASK_SHOW, setBackgroudMaskVisible, showBgMask);
 	LOAD_WIDGET_STRING_ATTRIBUTE(PROPERTY_IMAGE_PATH, setBackgroundImagePath, bgImagePath);
-	LOAD_WIDGET_ATTRIBUTE(PROPERTY_MASK_COLOR, setBackgroundColor, bgMaskColor);
+	LOAD_WIDGET_ATTRIBUTE(PROPERTY_MASK_COLOR, setBackgroundMaskColor, bgMaskColor);
 
 	WidgetLoader::parseAttributes();
 }
@@ -39,5 +39,5 @@ void LayoutLoader::saveAttributes()
 	SAVE_WIDGET_ATTRIBUTE(PROPERTY_IMAGE_SHOW, isBackgroudImageVisible);
 	SAVE_WIDGET_ATTRIBUTE(PROPERTY_MASK_SHOW, isBackgroudMaskVisible);
 	SAVE_WIDGET_ATTRIBUTE(PROPERTY_IMAGE_PATH, getBackgroundImage);
-	SAVE_WIDGET_ATTRIBUTE(PROPERTY_MASK_COLOR, getBackgroundColor);
+	SAVE_WIDGET_ATTRIBUTE(PROPERTY_MASK_COLOR, getBackgroundMaskColor);
 }

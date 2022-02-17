@@ -43,7 +43,7 @@ void TextAtlasLoader::parseAttributes()
 
 	LOAD_WIDGET_CAST_ATTRIBUTE(PROPERTY_HORIZONTAL, setTextHorizontalAlignment, horizontal, sys::HorizontalAlignment);
 	LOAD_WIDGET_CAST_ATTRIBUTE(PROPERTY_VERTICAL, setTextVerticalAlignment, vertical, sys::VerticalAlignment);
-	LOAD_WIDGET_ATTRIBUTE(PROPERTY_DIMENSIONS, setDimensions, size);
+	LOAD_WIDGET_ATTRIBUTE(PROPERTY_DIMENSIONS, setTextDimensions, size);
 
 	if (imagePath.empty())
 	{
@@ -65,5 +65,5 @@ void TextAtlasLoader::saveAttributes()
 
 	SAVE_WIDGET_CAST_ATTRIBUTE(PROPERTY_HORIZONTAL, getTextHorizontalAlignment, int);
 	SAVE_WIDGET_CAST_ATTRIBUTE(PROPERTY_VERTICAL, getTextVerticalAlignment, int);
-	SAVE_WIDGET_ATTRIBUTE(PROPERTY_DIMENSIONS, getDimensions);
+	SAVE_WIDGET_ATTRIBUTE(PROPERTY_DIMENSIONS, getTextDimensions);
 }

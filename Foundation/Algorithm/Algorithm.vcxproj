@@ -88,6 +88,7 @@
     <ClInclude Include="Map\Path\AStar.h" />
     <ClInclude Include="Map\Path\import.h" />
     <ClInclude Include="Map\Path\Path.h" />
+    <ClInclude Include="Map\Path\TaskPath.h" />
     <ClInclude Include="Map\Samples\RectMap.h" />
     <ClInclude Include="Map\Samples\CubeMap.h" />
     <ClInclude Include="Map\Samples\import.h" />
@@ -115,6 +116,8 @@
     <ClInclude Include="Mesh\Core\Voronoi.h" />
     <ClInclude Include="Mesh\import.h" />
     <ClInclude Include="Mesh\macros.h" />
+    <ClInclude Include="Navigation\NavMesh.h" />
+    <ClInclude Include="Navigation\NavSystem.h" />
     <ClInclude Include="Sort\Sort.h" />
     <ClInclude Include="Space\Bin\Bin2D.h" />
     <ClInclude Include="Space\Bin\BinPacking1D.h" />
@@ -151,6 +154,7 @@
     <ClCompile Include="Map\Creator\WFCAlgorithm.cpp" />
     <ClCompile Include="Map\Path\AStar.cpp" />
     <ClCompile Include="Map\Path\Path.cpp" />
+    <ClCompile Include="Map\Path\TaskPath.cpp" />
     <ClCompile Include="Map\Samples\RectMapCreator.cpp" />
     <ClCompile Include="Map\Samples\CubeMapCreator.cpp" />
     <ClCompile Include="Map\Samples\MeshMap.cpp" />

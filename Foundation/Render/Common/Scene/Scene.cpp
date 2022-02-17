@@ -48,11 +48,11 @@ void Scene::visit()
 {
 	// 合批处理
 
-	//this->updateAllDirtyNodes();
-	G_NOTIFYCENTER->updateAllDirtyNodes();
+	//G_NOTIFYCENTER->updateAllDirtyNodes();
+	//G_DRAWCORE->processDraw();
+	// Node::visit();
 
-	G_DRAWCORE->processDraw();
-
+	this->updateNode();
 	this->drawNode();
 
 	//G_DRAWCORE->unbatch();

@@ -21,11 +21,11 @@ namespace ui
 		/**
 		*  大小
 		*/
-		virtual math::Size getDataSize(int index) = 0;
+		virtual math::Size getDataSize(int index, int& tag) = 0;
 		/**
 		*  控件
 		*/
-		virtual ui::CtrlWidget* getDataCell(int index) = 0;
+		virtual ui::CtrlWidget* getDataCell(int index, int tag) = 0;
 	};
 	/*
 	*	表格视图
@@ -62,10 +62,22 @@ namespace ui
 	protected:
 		struct TableCell
 		{
+			int index = -1;
 			math::Vector2 position;
+			int type = 0;
 			math::Size size;
 			ui::CtrlWidget* widget = nullptr;
 		};
+
+		/**
+		*	隐藏控件
+		*/
+		void hideWidget(TableCell* cell);
+		/**
+		*	获取控件
+		*/
+		ui::CtrlWidget* getWidgetCell(int index);
+	protected:
 		/**
 		*	数据源
 		*/
@@ -74,5 +86,9 @@ namespace ui
 		*	数据源项
 		*/
 		std::map<int, TableCell> _tabelCells;
+		/**
+		*	控件 {类型，{控件}}
+		*/
+		std::map<int, std::vector<ui::CtrlWidget*>> _tableWidgets;
 	};
 }

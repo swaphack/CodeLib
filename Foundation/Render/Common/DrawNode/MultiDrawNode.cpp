@@ -329,7 +329,7 @@ void render::MultiDrawNode::initDrawParameters()
 		drawParameter.textureCache = _textureCache;
 		drawParameter.matrix = pMesh->getMeshDetail()->getMatrix();
 
-		G_DRAWCORE->addDrawParameter(&drawParameter);
+		//G_DRAWCORE->addDrawParameter(&drawParameter);
 	}
 }
 

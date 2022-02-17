@@ -80,15 +80,15 @@ namespace ui
 		/**
 		*	设置显示区域
 		*/
-		void setDimensions(float width, float height);
+		void setTextDimensions(float width, float height);
 		/**
 		*	设置显示区域
 		*/
-		void setDimensions(const math::Size& size);
+		void setTextDimensions(const math::Size& size);
 		/**
 		*	获取显示区域
 		*/
-		const math::Size& getDimensions() const;
+		const math::Size& getTextDimensions() const;
 		/**
 		*	设置颜色
 		*/

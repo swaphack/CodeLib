@@ -38,26 +38,30 @@ bool ue::MainWindow::init()
 
 		boxDraw->setAllBoxesVisibled(true);
 	}
-
+	
 	auto size = render::Tool::getViewSize();
 	_viewLayout = CREATE_NODE(UIDesignWindow);
+	_viewLayout->setRootView(true);
 	_viewLayout->setAnchorPoint(0.5f, 0.5f);
 	_viewLayout->setPosition(0,0);
 	_viewLayout->setVolume(size);
+	_viewLayout->getLayoutItem()->setMargin(0, 0, 0, 0);
 	this->addChild(_viewLayout, 0);
 
 	updateCamera();
-	//addFPS();
+	addFPS();
 
 	return true;
 }
 
 void ue::MainWindow::setUIFile(const std::string& config)
 {
-	_viewLayout->autoResize();
-	_viewLayout->setFilePath(config);
+	if (_viewLayout)
+	{
+		_viewLayout->autoResize();
+		_viewLayout->setFilePath(config);
+	}
 }
-
 void ue::MainWindow::setWidgetFile(const std::string& config)
 {
 	_widgetConfig.loadXml(config);
@@ -152,21 +156,33 @@ void ue::MainWindow::updateCamera()
 void ue::MainWindow::addFPS()
 {
 	auto size = render::Tool::getViewSize();
+	auto panel = CREATE_NODE(ui::CtrlFile);
+	ui::UIShaderHelper::loadShader(panel);
+	panel->setRootView(true);
+	panel->setAnchorPoint(0.5f, 0.5f);
+	panel->setPosition(0, 0);
+	panel->setVolume(size);
+	panel->getLayoutItem()->setMargin(0, 0, 0, 0);
+	this->addChild(panel, 0);
 
 	ui::CtrlText* pCtrlText = CREATE_NODE(ui::CtrlText);
-	pCtrlText->setUseDesignCamera(false);
+	pCtrlText->setBoxVisible(true);
 	pCtrlText->setVolume(200, 120);
-	pCtrlText->setDimensions(200, 120);
+	pCtrlText->setTextDimensions(200, 120);
 	pCtrlText->setFontPath("Resource/Font/font_3.ttf");
 	pCtrlText->setFontSize(22);
 	pCtrlText->setScale(1);
-	pCtrlText->setPosition(-size.getWidth() * 0.5f, -size.getHeight() * 0.5f, 0);
+	//pCtrlText->setPosition(-size.getWidth() * 0.5f, -size.getHeight() * 0.5f, 0);
 	pCtrlText->setAnchorPoint(0, 0, 0);
 	pCtrlText->setTextHorizontalAlignment(sys::HorizontalAlignment::LEFT);
-	pCtrlText->setTextVerticalAlignment(sys::VerticalAlignment::TOP);
+	pCtrlText->setTextVerticalAlignment(sys::VerticalAlignment::BOTTOM);
 	pCtrlText->setTextColor(phy::Color3B(255, 255, 255));
+	pCtrlText->getLayoutItem()->unsetMarginState();
+	pCtrlText->getLayoutItem()->setLeftMargin(5);
+	pCtrlText->getLayoutItem()->setBottomMargin(5);
+
 	ui::UIShaderHelper::loadShader(pCtrlText);
-	this->addChild(pCtrlText, 1);
+	panel->addWidget(pCtrlText, 1);
 
 	render::CallFuncN* pCallFunc = CREATE_ACTION(render::CallFuncN);
 	pCallFunc->setFunc([](sys::Object* sender) {
@@ -174,10 +190,8 @@ void ue::MainWindow::addFPS()
 		if (diffTime == 0) return;
 		int fps = 1000 / diffTime;
 		int drawCount = G_DRAWCORE->getDrawCallCount();
-		//int undrawCount = G_DRAWCORE->getUnDrawCallCount();
 		int vertexCount = G_DRAWCORE->getVertexCount();
 		std::string text = getCString("FPS %d\nDraw Call %d\nVertices %d", fps, drawCount, vertexCount);
-		//PRINTLN("============\n%s\n", text.c_str());
 		((ui::CtrlText*)sender)->setString(text);
 	});
 

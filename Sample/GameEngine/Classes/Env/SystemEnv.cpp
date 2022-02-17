@@ -30,7 +30,7 @@ void SystemEnv::addFPS()
 	ui::CtrlText* pCtrlText = CREATE_NODE(ui::CtrlText);
 	pCtrlText->setUseDesignCamera(false);
 	pCtrlText->setVolume(100, 50);
-	pCtrlText->setDimensions(100, 50);
+	pCtrlText->setTextDimensions(100, 50);
 	pCtrlText->setFontPath("Resource/Font/font_3.ttf");
 	pCtrlText->setFontSize(22);
 	pCtrlText->setScale(1);

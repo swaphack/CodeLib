@@ -44,6 +44,7 @@ void Canvas::setViewPort(float x, float y, float width, float height)
 	auto pTop = getCurScene();
 	if (pTop)
 	{
+		pTop->setVolume(width, height);
 		pTop->notifyToAll(NodeNotifyType::SPACE);
 	}
 

@@ -131,21 +131,20 @@ sys::VerticalAlignment CtrlText::getTextVerticalAlignment() const
 	return _textDefine.verticalAlignment;
 }
 
-void CtrlText::setDimensions(float width, float height)
+void CtrlText::setTextDimensions(float width, float height)
 {
 	_textDefine.dimensions.setWidth(width);
 	_textDefine.dimensions.setHeight(height);
-
 	this->notify(render::NodeNotifyType::TEXT);
 }
 
-void CtrlText::setDimensions(const math::Size& size)
+void CtrlText::setTextDimensions(const math::Size& size)
 {
 	_textDefine.dimensions = size;
 	this->notify(render::NodeNotifyType::TEXT);
 }
 
-const math::Size& CtrlText::getDimensions() const
+const math::Size& CtrlText::getTextDimensions() const
 {
 	return _textDefine.dimensions;
 }

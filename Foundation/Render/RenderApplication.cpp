@@ -19,7 +19,6 @@ RenderApplication::RenderApplication()
 	ASSERT(s_application == nullptr);
 
 	s_application = this;
-	this->init();
 }
 
 RenderApplication::~RenderApplication()

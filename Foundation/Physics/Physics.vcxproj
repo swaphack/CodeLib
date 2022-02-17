@@ -14,6 +14,7 @@
     <ClInclude Include="ClassicalMechanics\import.h" />
     <ClInclude Include="ClassicalMechanics\MassHelper.h" />
     <ClInclude Include="Definition\import.h" />
+    <ClInclude Include="Definition\PhyQuantity.h" />
     <ClInclude Include="Definition\SIUnit.h" />
     <ClInclude Include="Electromagnetism\import.h" />
     <ClInclude Include="Electromagnetism\Optics\Color.h" />
@@ -27,6 +28,8 @@
     <ClInclude Include="TSM\import.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="ClassicalMechanics\MassHelper.cpp" />
+    <ClCompile Include="Definition\PhyQuantity.cpp" />
     <ClCompile Include="Definition\SIUnit.cpp" />
     <ClCompile Include="Electromagnetism\Optics\Color.cpp" />
     <ClCompile Include="Electromagnetism\Optics\Color3.cpp" />

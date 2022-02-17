@@ -84,14 +84,15 @@ void GlutWindow::createWindow(const std::string& title, int width, int height, i
 		return;
 	}
 
-	_render = render;
-	_render->setRefreshInterval(millis / 1000.0f);
-
 	int mode = GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGBA | GLUT_STENCIL;
 	int left = (GetSystemMetrics(SM_CXSCREEN) - width)* 0.5f;
 	int top = (GetSystemMetrics(SM_CYSCREEN) - height)* 0.5f;
 	
 	this->initWindow(title, width, height, left, top);
+	_render = render;
+	_render->setRefreshInterval(millis / 1000.0f);
+	_render->init();
+	_render->setFrameSize((int)getWidth(), (int)getHeight());
 
 	glutInitDisplayMode(mode);
 	glutInitWindowPosition(left, top);
@@ -115,11 +116,7 @@ void GlutWindow::createWindow(const std::string& title, int width, int height, i
 	glutReshapeFunc(::sizeChange);
 	
 
-	if (_render)
-	{
-		_render->setFrameSize((int)getWidth(), (int)getHeight());
-		_render->show();
-	}
+	_render->show();
 	this->initDevice();
 
 	glutDisplayFunc(::display);

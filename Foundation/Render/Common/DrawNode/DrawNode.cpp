@@ -62,6 +62,10 @@ bool render::DrawNode::init()
 		this->initDrawParameter();
 	});
 
+	addNotifyListener(NodeNotifyType::NODE, [this]() {
+		this->initZOrderDrawParameter();
+	});
+
 	addNotifyListener(NodeNotifyType::MESH, [this]() {
 		this->updateMeshData();
 	});
@@ -276,10 +280,21 @@ void render::DrawNode::initDrawParameter()
 	_drawParameter.material = _material;
 	_drawParameter.textureCache = _textureCache;
 	_drawParameter.tessilation = isTessilationEnable();
-	
+
+	//G_DRAWCORE->addDrawParameter(&_drawParameter);
+}
+
+void render::DrawNode::initZOrderDrawParameter()
+{
+	_drawParameter.node = this;
+	_drawParameter.mesh = _mesh;
+	_drawParameter.material = _material;
+	_drawParameter.textureCache = _textureCache;
+	_drawParameter.tessilation = isTessilationEnable();
+
 	int zOrder = G_DRAWCORE->getDrawZOrder(this);
 	_drawParameter.localZOrder = zOrder / 1000.0f;
-	G_DRAWCORE->addDrawParameter(&_drawParameter);
+	//G_DRAWCORE->addDrawParameter(&_drawParameter);
 }
 
 void render::DrawNode::onColorChange()

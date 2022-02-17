@@ -217,25 +217,13 @@
     <ClInclude Include="Algebra\Theory\Ring.h">
       <Filter>Algebra\Theory</Filter>
     </ClInclude>
-    <ClInclude Include="Function\Elementary\ConstantFunction.h">
-      <Filter>Function\Elementary</Filter>
-    </ClInclude>
     <ClInclude Include="Function\Elementary\ElementaryFunction.h">
-      <Filter>Function\Elementary</Filter>
-    </ClInclude>
-    <ClInclude Include="Function\Elementary\ExponentialFunction.h">
       <Filter>Function\Elementary</Filter>
     </ClInclude>
     <ClInclude Include="Function\Elementary\HyperbolicFunction.h">
       <Filter>Function\Elementary</Filter>
     </ClInclude>
     <ClInclude Include="Function\Elementary\InverseTrigonometricFunction.h">
-      <Filter>Function\Elementary</Filter>
-    </ClInclude>
-    <ClInclude Include="Function\Elementary\LogarithmicFunction.h">
-      <Filter>Function\Elementary</Filter>
-    </ClInclude>
-    <ClInclude Include="Function\Elementary\PowerFunction.h">
       <Filter>Function\Elementary</Filter>
     </ClInclude>
     <ClInclude Include="Function\Elementary\TrigonometricFunction.h">
@@ -587,19 +575,7 @@
     <ClCompile Include="Algebra\Equation\Equation.cpp">
       <Filter>Algebra\Equation</Filter>
     </ClCompile>
-    <ClCompile Include="Function\Elementary\ConstantFunction.cpp">
-      <Filter>Function\Elementary</Filter>
-    </ClCompile>
     <ClCompile Include="Function\Elementary\ElementaryFunction.cpp">
-      <Filter>Function\Elementary</Filter>
-    </ClCompile>
-    <ClCompile Include="Function\Elementary\ExponentialFunction.cpp">
-      <Filter>Function\Elementary</Filter>
-    </ClCompile>
-    <ClCompile Include="Function\Elementary\LogarithmicFunction.cpp">
-      <Filter>Function\Elementary</Filter>
-    </ClCompile>
-    <ClCompile Include="Function\Elementary\PowerFunction.cpp">
       <Filter>Function\Elementary</Filter>
     </ClCompile>
     <ClCompile Include="Function\Elementary\TrigonometricFunction.cpp">
@@ -797,6 +773,12 @@
     </ClCompile>
     <ClCompile Include="Geometry\2d\Circle.cpp">
       <Filter>Geometry\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="Function\Elementary\InverseTrigonometricFunction.cpp">
+      <Filter>Function\Elementary</Filter>
+    </ClCompile>
+    <ClCompile Include="Function\Elementary\HyperbolicFunction.cpp">
+      <Filter>Function\Elementary</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

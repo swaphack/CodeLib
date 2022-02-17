@@ -22,7 +22,6 @@ ui::CtrlButton::CtrlButton()
 	this->addProtectedWidget(_btnText);
 
 	_btnTextAtlas = CREATE_NODE(CtrlTextAtlas);
-	_btnTextAtlas->setBoxVisible(true);
 	_btnTextAtlas->setAnchorPoint(0.5f, 0.5f);
 	_btnTextAtlas->setName("button_text_atlas");
 	_btnTextAtlas->setTextHorizontalAlignment(sys::HorizontalAlignment::CENTER);

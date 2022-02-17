@@ -18,7 +18,7 @@
 #include "macros.h"
 #include <list>
 
-#define UPDATE_NODE_COUNT 100
+//#define UPDATE_NODE_COUNT 100
 
 render::DrawCore::DrawCore()
 {
@@ -1775,6 +1775,7 @@ void render::DrawCore::processDraw()
 
 void render::DrawCore::processBatchDraw()
 {
+#ifdef UPDATE_NODE_COUNT
 	int nMaxCount = UPDATE_NODE_COUNT;
 	std::vector<BatchDrawParameter*> curDrawCall;
 	for (auto& item : _redrawParameters)
@@ -1786,11 +1787,17 @@ void render::DrawCore::processBatchDraw()
 			break;
 		}
 	}
+#endif //  UPDATE_NODE_COUNT
 
 	int unitSize = sizeof(float);
 	size_t matrixSize = 16 * unitSize;
+#ifdef  UPDATE_NODE_COUNT
 	for (const auto& item : curDrawCall)
 	{
+#else
+	for (const auto& item : _redrawParameters)
+	{
+#endif
 		_redrawParameters.erase(item);
 
 		if (item->redraw == false) continue;
@@ -1823,6 +1830,7 @@ void render::DrawCore::processBatchDraw()
 
 void render::DrawCore::processPackDraw()
 {
+#ifdef UPDATE_NODE_COUNT
 	// 只更新部分
 	int nMaxCount = UPDATE_NODE_COUNT;
 	std::vector<BatchDrawParameter*> curDrawCall;
@@ -1839,6 +1847,10 @@ void render::DrawCore::processPackDraw()
 	for (const auto& item : curDrawCall)
 	{
 		_redrawParameters.erase(item);
+#else
+	for (auto& item : _redrawParameters)
+	{
+#endif //  UPDATE_NODE_COUNT
 
 		if (item->redraw == false) continue;
 		item->redraw = false;
@@ -2022,10 +2034,6 @@ bool concat_ptr_memory_vertices(
 	{
 		float* vptr = (float*)srcs[i]->getVertices().getPtr();
 		uint32_t vcount = srcs[i]->getVertices().getVerticeCount();
-		if (vcount > 4)
-		{
-			int a = 1;
-		}
 		for (size_t j = 0; j < vcount; j++)
 		{
 			math::Vector3 pos(vptr + j * unitSize);

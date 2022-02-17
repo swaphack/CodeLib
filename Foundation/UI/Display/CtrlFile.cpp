@@ -112,6 +112,7 @@ bool CtrlFile::loadFile()
 	this->removeAllWidgets();
 	if (widget)
 	{
+		widget->getLayoutItem()->setMargin(0, 0, 0, 0);
 		this->addWidget(widget);
 	}
 

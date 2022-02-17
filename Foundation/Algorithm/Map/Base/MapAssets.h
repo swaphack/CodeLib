@@ -86,7 +86,7 @@ namespace alg
 			*	添加插槽规则
 			*/
 			template<uint32_t Length>
-			void addMatchSlot(uint32_t key, uint32_t start, ...)
+			void addMatchRule(uint32_t key, uint32_t start, ...)
 			{
 				va_list ap;
 				va_start(ap, start);
@@ -97,14 +97,14 @@ namespace alg
 			*	添加插槽规则
 			*/
 			template<uint32_t Length>
-			void addMatchSlot(uint32_t key, uint32_t start, va_list ap)
+			void addMatchRule(uint32_t key, uint32_t start, va_list ap)
 			{
 				_mapSlotRule.addRelation<key, Length>(start, ap);
 			}
 			/**
 			*	移除所有插槽规则
 			*/
-			void removeAllSlotRules()
+			void removeAllMatchRules()
 			{
 				_mapSlotRule.initRelationTable();
 			}

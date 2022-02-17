@@ -21,11 +21,11 @@ namespace ue
 		/**
 		*  大小
 		*/
-		virtual math::Size getDataSize(int index);
+		virtual math::Size getDataSize(int index, int& tag);
 		/**
 		*  控件
 		*/
-		virtual ui::CtrlWidget* getDataCell(int index);
+		virtual ui::CtrlWidget* getDataCell(int index, int tag);
 	protected:
 		/**
 		*	初始化

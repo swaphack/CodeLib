@@ -16,6 +16,8 @@ GLRenderApplication::~GLRenderApplication()
 
 void GLRenderApplication::show()
 {
+	render::RenderApplication::init();
+
 	getCanvas()->pushScene(CREATE_NODE(TestMainScene));
 }
 

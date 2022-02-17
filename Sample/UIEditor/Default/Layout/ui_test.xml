@@ -2,16 +2,11 @@
 <root width="1024" height="768" layout="1" fontPath="Default/Font/font_3.ttf" fontImagePath="Default/Atlas/text_cn22.atlas">
   <Texture>
     <item type="atlas" atlas="Default/Atlas/ui.atlas" image="Default/Atlas/ui.png"/>
-    <item type="text" atlas="Default/Atlas/text20.atlas" image="Default/Atlas/text20.png"/>
-    <item type="text" atlas="Default/Atlas/text22.atlas" image="Default/Atlas/text22.png"/>
-    <item type="text" atlas="Default/Atlas/text32.atlas" image="Default/Atlas/text32.png"/>
     <item type="text" atlas="Default/Atlas/text_cn22.atlas" image="Default/Atlas/text_cn22.png"/>
   </Texture>
   <Layout name="body" showMask="1" maskColor="255,255,255,100" marginState="1,1,1,1" size="100%,100%"> 
-    <Button name="gridView" anchorPoint="0.5,0.5,0.5" normalImage="Default/Atlas/ui.atlas[control_gridView.png]" horizontal="1" vertical="2" text="格子列表" fontSize="24" textColor="0,0,0" marginState="1,0,0,1" margin="20,0,0,20" size="100,100" />
     <Layout name="rect" showMask="1" maskColor="255,255,255,100" marginState="1,1,1,1" margin="100,100,100,100"> 
-      <TextAtlas name="TypeText" size="100%,100%" dimensions="400,200" text="你好，世界！" horizontal="1" vertical="0" textColor="0,0,0" />
+      <TextAtlas name="TypeText" size="100%,100%" dimensions="100,200" text="你好，世界！" horizontal="1" vertical="0" textColor="0,0,0" marginState="1,1,1,1" margin="100,100,100,100"/>
     </Layout>
-    <UIDesignProperty name="DesignProperty" filepath="Default/Layout/main_view_property.xml" size="50%, 50%" margin="0,0,0,0" marginState="1,1,0,0"/>
   </Layout>
 </root>

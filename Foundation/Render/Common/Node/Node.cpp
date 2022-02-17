@@ -56,6 +56,7 @@ bool Node::init()
 
 	onSpaceChange();
 	onBodyChange();
+	onChildrenChange();
 
 	return true;
 }
@@ -63,7 +64,7 @@ bool Node::init()
 void render::Node::visit()
 {
 	this->updateNode();
-	this->drawNode();
+	//this->drawNode();
 }
 
 void Node::setParent( Node* node )
@@ -148,7 +149,7 @@ void render::Node::addChild(Node* node, int zOrder)
 	}
 	
 
-	this->notify(render::NodeNotifyType::Draw);
+	this->notify(render::NodeNotifyType::NODE);
 }
 
 void Node::removeChild( Node* node )
@@ -170,7 +171,7 @@ void Node::removeChild( Node* node )
 		_children.erase(it);
 	}
 	
-	this->notify(render::NodeNotifyType::Draw);
+	this->notify(render::NodeNotifyType::NODE);
 }
 
 void Node::removeAllChildren()
@@ -187,7 +188,7 @@ void Node::removeAllChildren()
 	}
 
 	_children.clear();
-	this->notify(render::NodeNotifyType::Draw);
+	this->notify(render::NodeNotifyType::NODE);
 }
 
 Node* Node::getChildByID( long id ) const
@@ -338,10 +339,16 @@ void Node::setZOrder(int z, bool dirty)
 	if (_zOrder == z) return;
 	_zOrder = z;
 
-	if (dirty && this->getParent())
+	if (dirty)
 	{
-		this->getParent()->notify(render::NodeNotifyType::NODE);
-		this->notify(render::NodeNotifyType::Draw);
+		if (this->getParent())
+		{
+			this->getParent()->notifyToAll(render::NodeNotifyType::NODE);
+		}
+		else 
+		{
+			this->notifyToAll(render::NodeNotifyType::NODE);
+		}
 	}
 }
 
