@@ -46,6 +46,20 @@ void render::PrimitiveNode::onPrimitiveChange()
 	this->updateMeshData();
 }
 
+void render::PrimitiveNode::onDrawNode2DColorChange()
+{
+	for (auto& item : _vertexes)
+	{
+		item.color = _color;
+	}
+	onPrimitiveChange();
+}
+
+void render::PrimitiveNode::onDrawNode2DTextureChange()
+{
+
+}
+
 void PrimitiveNode::setDrawMode(DrawMode mode)
 {
 	getMesh()->setDrawMode(mode);
