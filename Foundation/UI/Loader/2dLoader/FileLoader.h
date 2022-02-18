@@ -17,17 +17,34 @@ namespace ui
 		// ±£´æÊôÐÔ
 		virtual void saveAttributes();
 	public:
-		INIT_LOADER_WIDGET(LayoutItem, CtrlFile, ELEMENT_NAME_FILE);
+		INIT_LOADER_WIDGET(CtrlFile, ELEMENT_NAME_FILE);
 	};
 
 	// ¿Ø¼þ
-	template<typename FileType, typename = std::enable_if<std::is_base_of<ui::CtrlFile, FileType>::value, FileType>::type>
+	template<typename FileType>
 	class TFileLoader : public FileLoader
 	{
+		static_assert(std::is_base_of<ui::CtrlFile, FileType>::value, "FileType must inherit from CtrlFile");
 	public:
-		TFileLoader() {}
-		virtual ~TFileLoader() {}
+		TFileLoader() 
+		{
+			PRINT("File Loader Name %s\n", typeid(FileType).name());
+		}
+		virtual ~TFileLoader() 
+		{
+		}
 	public:
-		INIT_LOADER_WIDGET(LayoutItem, FileType, ELEMENT_NAME_FILE);
+		virtual std::string getName() 
+		{ 
+			return ELEMENT_NAME_FILE; 
+		}
+		FileType* getCastWidget() 
+		{ 
+			return getWidget()->as<FileType>();
+		}
+		virtual void initWidget() 
+		{ 
+			_node = render::createNode<FileType>();
+		}
 	};
 }

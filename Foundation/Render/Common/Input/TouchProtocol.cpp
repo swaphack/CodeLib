@@ -55,7 +55,7 @@ bool render::TouchProtocol::containsTouchPoint(const math::Vector2& touchPoint)
 	if (!getTouchNode()->isVisible() || getTouchNode()->isSkipDraw())
 		return false;
 
-	auto parent = getTouchNode()->getFirstClippingNodeOfParents();
+	auto parent = getTouchNode()->getFirstParentClippingNode();
 	if (parent != nullptr)
 	{
 		if (!parent->containPoint(touchPoint))

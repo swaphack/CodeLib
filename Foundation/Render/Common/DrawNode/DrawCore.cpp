@@ -1930,7 +1930,7 @@ void render::DrawCore::unbatch()
 bool render::DrawCore::isSameObject(DrawParameter* a, DrawParameter* b)
 {
 	if (a == nullptr || b == nullptr) return false;
-	if (a->node->getFirstClippingNodeOfParents() != b->node->getFirstClippingNodeOfParents()) return false;
+	if (a->node->getFirstParentClippingNode() != b->node->getFirstParentClippingNode()) return false;
 	if (a->tessilation != b->tessilation) return false;
 	if (!a->material->equals(*b->material)) return false;
 	if (!a->mesh->equals(*b->mesh)) return false;
@@ -1941,7 +1941,7 @@ bool render::DrawCore::isSameObject(DrawParameter* a, DrawParameter* b)
 bool render::DrawCore::isSameMaterial(DrawParameter* a, DrawParameter* b)
 {
 	if (a == nullptr || b == nullptr) return false;
-	if (a->node->getFirstClippingNodeOfParents() != b->node->getFirstClippingNodeOfParents()) return false;
+	if (a->node->getFirstParentClippingNode() != b->node->getFirstParentClippingNode()) return false;
 	if (a->tessilation != b->tessilation) return false;
 	if (!a->material->equals(*b->material)) return false;
 	if (!a->mesh->sameLayout(*b->mesh)) return false;

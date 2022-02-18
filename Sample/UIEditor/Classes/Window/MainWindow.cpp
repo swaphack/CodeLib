@@ -6,14 +6,14 @@ ue::MainWindow::MainWindow()
 {
 	auto proxy = ui::UIProxy::getInstance();
 
-	proxy->registerElementParser(UI_DESIGN_MENUBAR, []() { return new ui::TFileLoader<UIDesignMenuBar>(); });
-	proxy->registerElementParser(UI_DESIGN_WIDGET, []() { return new ui::TFileLoader<UIDesignWidget>(); });
-	proxy->registerElementParser(UI_DESIGN_DIRECTORY, []() { return new ui::TFileLoader<UIDesignDirectory>(); });
-	proxy->registerElementParser(UI_DESIGN_DIR, []() { return new ui::TFileLoader<UIDesignDir>(); });
-	proxy->registerElementParser(UI_DESIGN_VIEW, []() { return new ui::TFileLoader<UIDesignView>(); });
-	proxy->registerElementParser(UI_DESIGN_PROPERTY, []() { return new ui::TFileLoader<UIDesignProperty>(); });
-	proxy->registerElementParser(UI_DESIGN_NODE_TREE, []() { return new ui::TFileLoader<UIDesignNodeTree>(); });
-	proxy->registerElementParser(UI_DESIGN_MASK, []() { return new ui::TFileLoader<UIDesignMask>(); });
+	proxy->registerElementParser(UI_DESIGN_MENUBAR, new ui::TFileLoader<UIDesignMenuBar>());
+	proxy->registerElementParser(UI_DESIGN_WIDGET, new ui::TFileLoader<UIDesignWidget>());
+	proxy->registerElementParser(UI_DESIGN_DIRECTORY, new ui::TFileLoader<UIDesignDirectory>());
+	proxy->registerElementParser(UI_DESIGN_DIR, new ui::TFileLoader<UIDesignDir>());
+	proxy->registerElementParser(UI_DESIGN_VIEW, new ui::TFileLoader<UIDesignView>());
+	proxy->registerElementParser(UI_DESIGN_PROPERTY, new ui::TFileLoader<UIDesignProperty>());
+	proxy->registerElementParser(UI_DESIGN_NODE_TREE, new ui::TFileLoader<UIDesignNodeTree>());
+	proxy->registerElementParser(UI_DESIGN_MASK, new ui::TFileLoader<UIDesignMask>());
 
 	proxy->registerWidgetCreator(UI_DESIGN_WIDGET_CREATOR, [this](const std::string& name) { return this->createWidget(name); });
 	proxy->registerWidgetPropertyCreator(UI_DESIGN_WIDGET_CREATOR, [this](const std::string& name) { return this->createWidgetProperty(name); });

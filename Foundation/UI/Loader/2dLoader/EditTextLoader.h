@@ -15,6 +15,6 @@ namespace ui
 
 		virtual void saveAttributes();
 	public:
-		INIT_LOADER_WIDGET(LayoutItem, CtrlEditText, ELEMENT_NAME_EDITTEXT);
+		INIT_LOADER_WIDGET(CtrlEditText, ELEMENT_NAME_EDITTEXT);
 	};
 }

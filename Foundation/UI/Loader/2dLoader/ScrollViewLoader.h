@@ -16,6 +16,6 @@ namespace ui
 
 		virtual void saveAttributes();
 	public:
-		INIT_LOADER_WIDGET(LayoutItem, CtrlScrollView, ELEMENT_NAME_SCROLLVIEW);
+		INIT_LOADER_WIDGET(CtrlScrollView, ELEMENT_NAME_SCROLLVIEW);
 	};
 }

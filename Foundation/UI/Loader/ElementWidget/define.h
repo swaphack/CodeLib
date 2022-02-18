@@ -6,15 +6,13 @@ namespace ui
 {
 	/**
 	*	初始化节点加载方法
-	*	@param TL 布局类型
 	*	@param TW 控件类型
 	*	@param NAME 解析节点的名称
 	*/
-#define INIT_LOADER_WIDGET(TL,TW, NAME) \
+#define INIT_LOADER_WIDGET(TW, NAME) \
 public:\
 	virtual std::string getName() { return NAME; }\
 	TW* getCastWidget() { return getWidget()->as<TW>(); }\
-	virtual void initLayoutItem() { _layoutItem = CREATE_OBJECT(TL);  } \
 	virtual void initWidget() { _node = CREATE_NODE(TW);  }
 
 	// 获取当前节点：子类会隐藏父类同名函数

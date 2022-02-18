@@ -16,6 +16,6 @@ namespace ui
 		// ±£¥Ê Ù–‘
 		virtual void saveAttributes();
 	public:
-		INIT_LOADER_WIDGET(LayoutItem, CtrlTableView, ELEMENT_NAME_TABLEVIEW);
+		INIT_LOADER_WIDGET(CtrlTableView, ELEMENT_NAME_TABLEVIEW);
 	};
 }

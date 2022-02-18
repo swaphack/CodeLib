@@ -19,6 +19,6 @@ namespace ui
 		// ±£¥Ê Ù–‘
 		virtual void saveAttributes();
 	public:
-		INIT_LOADER_WIDGET(LayoutItem, CtrlWidget, ELEMENT_NAME_WIDGET);
+		INIT_LOADER_WIDGET(CtrlWidget, ELEMENT_NAME_WIDGET);
 	};
 }

@@ -25,9 +25,7 @@ namespace ui
 		void setWidget(CtrlWidget* node);
 		// 获取控件
 		CtrlWidget* getWidget();
-
-		void setLayoutItem(LayoutItem* item);
-
+		// 获取布局
 		LayoutItem* getLayoutItem();
 		/**
 		*	默认字体
@@ -60,8 +58,6 @@ namespace ui
 		virtual void parseAttributes() = 0;
 		// 保存属性
 		virtual void saveAttributes() = 0;
-		// 初始化布局
-		virtual void initLayoutItem() = 0;
 		// 初始化控件
 		virtual void initWidget() = 0;
 	private:
@@ -70,8 +66,6 @@ namespace ui
 	protected:
 		// ui控件
 		CtrlWidget* _node = nullptr;
-		// 布局配置
-		LayoutItem* _layoutItem = nullptr;
 		// 默认字体
 		std::string _defaultFontPath;
 		// 默认字体图片

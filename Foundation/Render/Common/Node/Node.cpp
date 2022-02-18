@@ -515,11 +515,33 @@ void Node::setRelativeWithParent(bool status)
 	_bRelativeToParent = status;
 }
 
-Node* Node::getFirstClippingNodeOfParents() const
+Node* Node::getFirstParentClippingNode()
 {
-	if (this->getParent() == nullptr) return nullptr;
-	if (this->getParent()->isClippingEnabled()) return this->getParent();
-	return this->getParent()->getFirstClippingNodeOfParents();
+	if (_bFoundClippingNode == true)
+	{
+		return _firstClippingNodeOfParent;
+	}
+
+	_bFoundClippingNode = true;
+	if (this->getParent() == nullptr)
+	{
+		_firstClippingNodeOfParent = nullptr;
+	}
+	else if (this->getParent()->isClippingEnabled())
+	{
+		_firstClippingNodeOfParent = this->getParent();
+	}
+	else
+	{
+		_firstClippingNodeOfParent = this->getParent()->getFirstParentClippingNode();
+	}
+	return _firstClippingNodeOfParent;
+}
+
+void render::Node::resetParentClippingNodeState()
+{
+	_bFoundClippingNode = false;
+	_firstClippingNodeOfParent = nullptr;
 }
 
 const math::Matrix4x4& Node::getWorldMatrix() const
@@ -784,7 +806,14 @@ void render::Node::calDirectionWithRotate()
 
 void render::Node::setClippingEnabled(bool status)
 {
+	if (_bClippingEnabled == status)
+	{
+		return;
+	}
+
 	_bClippingEnabled = status;
+
+	foreachChild([](Node* node) { node->resetParentClippingNodeState(); });
 }
 
 bool render::Node::isClippingEnabled() const

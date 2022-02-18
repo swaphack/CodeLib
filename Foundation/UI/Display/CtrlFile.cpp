@@ -6,7 +6,7 @@ using namespace ui;
 
 CtrlFile::CtrlFile()
 {
-	this->setAnchorPoint(0.0f, 0.0f, 0.0f);
+	
 }
 
 CtrlFile::~CtrlFile()
@@ -20,7 +20,7 @@ bool ui::CtrlFile::init()
 	{
 		return false;
 	}
-
+	this->setAnchorPoint(0.0f, 0.0f, 0.0f);
 	return true;
 }
 

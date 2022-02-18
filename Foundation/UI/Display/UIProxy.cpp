@@ -26,19 +26,19 @@ using namespace ui;
 void UIProxy::init()
 {
 
-	this->registerElementParser(ELEMENT_NAME_WIDGET, []() { return new WidgetLoader(); });
-	this->registerElementParser(ELEMENT_NAME_LAYOUT, []() { return new LayoutLoader(); });
-	this->registerElementParser(ELEMENT_NAME_IMAGE, []() { return new ImageLoader(); });
-	this->registerElementParser(ELEMENT_NAME_TEXT, []() { return new TextLoader(); });
-	this->registerElementParser(ELEMENT_NAME_TEXT_ATLAS, []() { return new TextAtlasLoader(); });
-	this->registerElementParser(ELEMENT_NAME_BUTTON, []() { return new ButtonLoader(); });
-	this->registerElementParser(ELEMENT_NAME_EDITTEXT, []() { return new EditTextLoader(); });
-	this->registerElementParser(ELEMENT_NAME_SCALE9_IMAGE, []() { return new Scale9ImageLoader(); });
-	this->registerElementParser(ELEMENT_NAME_SCROLLVIEW, []() { return new ScrollViewLoader(); });
-	this->registerElementParser(ELEMENT_NAME_LISTVIEW, []() { return new ListViewLoader(); });
-	this->registerElementParser(ELEMENT_NAME_TABLEVIEW, []() { return new TableViewLoader(); });
-	this->registerElementParser(ELEMENT_NAME_GRIDVIEW, []() { return new GridViewLoader(); });
-	this->registerElementParser(ELEMENT_NAME_FILE, []() { return new FileLoader(); });
+	this->registerElementParser(ELEMENT_NAME_WIDGET, new WidgetLoader());
+	this->registerElementParser(ELEMENT_NAME_LAYOUT, new LayoutLoader() );
+	this->registerElementParser(ELEMENT_NAME_IMAGE, new ImageLoader());
+	this->registerElementParser(ELEMENT_NAME_TEXT, new TextLoader());
+	this->registerElementParser(ELEMENT_NAME_TEXT_ATLAS, new TextAtlasLoader());
+	this->registerElementParser(ELEMENT_NAME_BUTTON, new ButtonLoader());
+	this->registerElementParser(ELEMENT_NAME_EDITTEXT, new EditTextLoader());
+	this->registerElementParser(ELEMENT_NAME_SCALE9_IMAGE, new Scale9ImageLoader());
+	this->registerElementParser(ELEMENT_NAME_SCROLLVIEW, new ScrollViewLoader());
+	this->registerElementParser(ELEMENT_NAME_LISTVIEW, new ListViewLoader());
+	this->registerElementParser(ELEMENT_NAME_TABLEVIEW, new TableViewLoader());
+	this->registerElementParser(ELEMENT_NAME_GRIDVIEW, new GridViewLoader());
+	this->registerElementParser(ELEMENT_NAME_FILE, new FileLoader());
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -116,16 +116,16 @@ bool UIProxy::saveFile(CtrlWidget* layout, const std::string& filepath, const ma
 	return result;
 }
 
-void UIProxy::registerElementParser(const std::string& name, const CreateElementFunc& func)
+void UIProxy::registerElementParser(const std::string& name, IElement* element)
 {
-	if (name.empty() || func == nullptr)
+	if (name.empty() || element == nullptr)
 	{
 		return;
 	}
 
 	unregisterElementParser(name);
 
-	_elementParsers[name] = func;
+	_elementParsers[name] = element;
 }
 
 void UIProxy::unregisterElementParser(const std::string& name)
@@ -140,7 +140,7 @@ void UIProxy::unregisterElementParser(const std::string& name)
 	{
 		return;
 	}
-
+	delete iter->second;
 	_elementParsers.erase(iter);
 }
 
@@ -149,6 +149,7 @@ void UIProxy::removeAllElementParsers()
 	ElementParsers::const_iterator iter = _elementParsers.begin();
 	while (iter != _elementParsers.end())
 	{
+		delete iter->second;
 		iter++;
 	}
 
@@ -362,7 +363,7 @@ IElement* UIProxy::getElement(const std::string& name)
 		return nullptr;
 	}
 
-	return it->second();
+	return it->second;
 }
 
 CtrlWidget* UIProxy::initWidget(tinyxml2::XMLElement* xmlNode, const math::Size& parentSize)
@@ -390,7 +391,7 @@ CtrlWidget* UIProxy::initWidget(tinyxml2::XMLElement* xmlNode, const math::Size&
 	{
 		UIShaderHelper::loadShader(pWidget);
 	}
-	delete element;
+	//delete element;
 
 	return pWidget;
 }
@@ -540,10 +541,7 @@ bool UIProxy::saveWidget(CtrlWidget* item, tinyxml2::XMLElement* xmlNode)
 	{
 		return false;
 	}
-
-	pElement->setLayoutItem(getLayoutItem(item));
 	pElement->setWidget(item);
-
 	pElement->save(xmlNode);
 
 	WidgetLoader* pLoader = pElement->as<WidgetLoader>();

@@ -15,6 +15,6 @@ namespace ui
 
 		virtual void saveAttributes();
 	public:
-		INIT_LOADER_WIDGET(LayoutItem, CtrlScale9Image, ELEMENT_NAME_SCALE9_IMAGE);
+		INIT_LOADER_WIDGET(CtrlScale9Image, ELEMENT_NAME_SCALE9_IMAGE);
 	};
 }

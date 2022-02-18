@@ -16,6 +16,6 @@ namespace ui
 		// ±£¥Ê Ù–‘
 		virtual void saveAttributes();
 	public:
-		INIT_LOADER_WIDGET(LayoutItem, CtrlGridView, ELEMENT_NAME_GRIDVIEW);
+		INIT_LOADER_WIDGET(CtrlGridView, ELEMENT_NAME_GRIDVIEW);
 	};
 }

@@ -174,8 +174,10 @@ namespace render
 		bool isRelativeWithParent() const;
 		// 设置是否和父节点关联
 		void setRelativeWithParent(bool status);
-		// 获取裁剪的父节点
-		Node* getFirstClippingNodeOfParents() const;
+		// 获取父节点中第一个裁剪点
+		Node* getFirstParentClippingNode();
+		// 重置裁剪状态
+		void resetParentClippingNodeState();
 	public:
 		// 世界矩阵
 		const math::Matrix4x4& getWorldMatrix() const;
@@ -251,6 +253,10 @@ namespace render
 		bool _bVisibled = false;
 		// 是否开启裁剪
 		bool _bClippingEnabled = false;
+		// 父节点有裁剪
+		Node* _firstClippingNodeOfParent = nullptr;
+		// 是否已查找过
+		bool _bFoundClippingNode = false;
 		// 是否和父节点关联
 		bool _bRelativeToParent = false;
 		// 通知

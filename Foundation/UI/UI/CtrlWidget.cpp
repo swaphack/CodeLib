@@ -9,7 +9,6 @@ int ui::CtrlWidget::s_nScissorCount = 0;
 
 ui::CtrlWidget::CtrlWidget()
 {
-	this->resetLayoutItem();
 }
 
 ui::CtrlWidget::~CtrlWidget()
@@ -25,6 +24,8 @@ bool ui::CtrlWidget::init()
 	{
 		return false;
 	}
+
+	this->resetLayoutItem();
 
 	Box2DProtocol::initBox2D(this);
 
@@ -226,6 +227,10 @@ ui::CtrlWidget* ui::CtrlWidget::getWidgetByIndex(int index) const
 
 void ui::CtrlWidget::setLayoutItem(LayoutItem* item)
 {
+	if (_layoutItem != nullptr)
+	{
+		int a = 1;
+	}
 	SAFE_RETAIN(item);
 	SAFE_RELEASE(_layoutItem);
 	_layoutItem = item;

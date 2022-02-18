@@ -34,17 +34,19 @@ bool IElement::load(tinyxml2::XMLElement* pXmlNode, const math::Size& parentSize
 		pAttribute = (tinyxml2::XMLAttribute*)pAttribute->Next();
 	}
 
-	initLayoutItem();
 	initWidget();
 
 	this->setParentSize(parentSize);
 
 	std::string name = pXmlNode->Name();
 	_nodeProperty->setName(name);
-	if (_layoutItem && _node)
+	if (_node)
 	{
-		_layoutItem->setWidgetName(name);
-		_node->setLayoutItem(_layoutItem);
+		auto layoutItem = getLayoutItem();
+		if (layoutItem) 
+		{ 
+			layoutItem->setWidgetName(name); 
+		}
 	}
 
 	this->parseAttributes();
@@ -65,8 +67,11 @@ bool IElement::save(tinyxml2::XMLElement* pXmlNode, bool clean/* = true*/)
 	}
 
 	this->saveAttributes();
-
-	pXmlNode->SetName(_layoutItem->getWidgetName().c_str());
+	auto layoutItem = _node->getLayoutItem();
+	if (layoutItem)
+	{
+		pXmlNode->SetName(layoutItem->getWidgetName().c_str());
+	}
 	//pXmlNode->SetName(getNodeProperty()->getName().c_str());
 
 	Attributes::const_iterator iterFirst = getNodeProperty()->getAttributeBegin();
@@ -126,12 +131,8 @@ ui::CtrlWidget* ui::IElement::getWidget()
 	return _node;
 }
 
-void ui::IElement::setLayoutItem(LayoutItem* item)
-{
-	_layoutItem = item;
-}
-
 LayoutItem* ui::IElement::getLayoutItem()
 {
-	return _layoutItem;
+	if (_node == nullptr) return nullptr;
+	return _node->getLayoutItem();
 }

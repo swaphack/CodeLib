@@ -102,8 +102,8 @@ namespace render
 		// ºÐ×Ó±àºÅ
 		int _increaseBoxID = 0;
 
-		Box2DSpace* _2dSpace;
-		Box3DSpace* _3dSpace;
+		Box2DSpace* _2dSpace = nullptr;
+		Box3DSpace* _3dSpace = nullptr;
 	};
 
 #define G_BOXSPACE sys::Instance<render::BoxSpace>::getInstance()

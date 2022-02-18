@@ -15,6 +15,6 @@ namespace ui
 
 		virtual void saveAttributes();
 	public:
-		INIT_LOADER_WIDGET(LayoutItem, CtrlTextAtlas, ELEMENT_NAME_TEXT_ATLAS);
+		INIT_LOADER_WIDGET(CtrlTextAtlas, ELEMENT_NAME_TEXT_ATLAS);
 	};
 }
