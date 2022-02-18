@@ -73,6 +73,14 @@ namespace render
 		float getPointSize() const;
 	protected:
 		void onPrimitiveChange();
+		/**
+		*	颜色改变
+		*/
+		virtual void onDrawNode2DColorChange();
+		/**
+		*	纹理改变
+		*/
+		virtual void onDrawNode2DTextureChange();
 	private:
 		// 顶点信息
 		std::vector<PrimitiveVertex> _vertexes;

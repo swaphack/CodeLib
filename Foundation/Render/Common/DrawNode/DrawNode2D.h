@@ -19,15 +19,15 @@ namespace render
 		/**
 		*	形状改变
 		*/
-		void onDrawNode2DBodyChange();
+		virtual void onDrawNode2DBodyChange();
 		/**
 		*	颜色改变
 		*/
-		void onDrawNode2DColorChange();
+		virtual void onDrawNode2DColorChange();
 		/**
 		*	纹理改变
 		*/
-		void onDrawNode2DTextureChange();
+		virtual void onDrawNode2DTextureChange();
 		/**
 		*	更新2d节点信息
 		*/

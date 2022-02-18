@@ -72,7 +72,7 @@ void SystemEnv::addCoordinate()
 	pCoordSystem->setVolume(50, 50, 50);
 	pCoordSystem->setPointSize(5);
 	pCoordSystem->setPosition(100, 668, 0);
-	pCoordSystem->setCamera(G_CAMERAS->getCamera2D());
+	pCoordSystem->setCamera(G_CAMERAS->getCamera3D());
 	Utility::loadShaderVF(pCoordSystem, "Shader/geometry/draw_coordinate_system.vs", "Shader/geometry/draw_coordinate_system.fs");
 
 	this->addChild(pCoordSystem);

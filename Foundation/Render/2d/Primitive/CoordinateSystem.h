@@ -15,7 +15,14 @@ namespace render
 	public:
 		virtual bool init();
 	public:
-		void onCoordianteSystemBodyChange();
+		/**
+		*	大小改变
+		*/
+		virtual void onDrawNode2DBodyChange();
+		/**
+		*	颜色改变
+		*/
+		virtual void onDrawNode2DColorChange();
 	protected:
 	private:
 	};
