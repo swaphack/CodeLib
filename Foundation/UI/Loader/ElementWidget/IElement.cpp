@@ -18,8 +18,7 @@ bool IElement::load(tinyxml2::XMLElement* pXmlNode, const math::Size& parentSize
 	{
 		return false;
 	}
-
-	this->setWidget(nullptr);
+	//this->setWidget(nullptr);
 	if (clean)
 	{
 		_nodeProperty->Clear();
@@ -33,10 +32,9 @@ bool IElement::load(tinyxml2::XMLElement* pXmlNode, const math::Size& parentSize
 
 		pAttribute = (tinyxml2::XMLAttribute*)pAttribute->Next();
 	}
-
-	initWidget();
-
 	this->setParentSize(parentSize);
+
+	this->initWidget();
 
 	std::string name = pXmlNode->Name();
 	_nodeProperty->setName(name);

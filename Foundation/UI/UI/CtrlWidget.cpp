@@ -9,6 +9,10 @@ int ui::CtrlWidget::s_nScissorCount = 0;
 
 ui::CtrlWidget::CtrlWidget()
 {
+	if (_layoutItem != nullptr)
+	{
+		int a = 1;
+	}
 }
 
 ui::CtrlWidget::~CtrlWidget()

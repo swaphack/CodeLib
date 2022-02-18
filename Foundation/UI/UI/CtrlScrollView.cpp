@@ -27,8 +27,11 @@ void ScrollItem::addItem(CtrlWidget* node, const sys::CSSSize& size)
 	this->addWidget(node);
 
 	auto pLayoutItem = node->getLayoutItem();
-	pLayoutItem->setSize(size);
-	this->setLayoutItem(pLayoutItem);
+	if (pLayoutItem)
+	{
+		pLayoutItem->setSize(size);
+		this->setLayoutItem(pLayoutItem);
+	}
 
 	node->resetLayoutItem();
 }
