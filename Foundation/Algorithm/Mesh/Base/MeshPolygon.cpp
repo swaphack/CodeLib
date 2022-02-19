@@ -3,21 +3,21 @@
 #include "MeshEdge.h"
 #include "PointSet.h"
 
-alg::MeshPolygon::MeshPolygon()
+alg::mesh::MeshPolygon::MeshPolygon()
 {
 }
 
-alg::MeshPolygon::MeshPolygon(PointSet* pointSet, const std::vector<math::Vector3>& points)
+alg::mesh::MeshPolygon::MeshPolygon(PointSet* pointSet, const std::vector<math::Vector3>& points)
 {
 	this->setVertexes(pointSet, points);
 }
 
-alg::MeshPolygon::MeshPolygon(const std::vector<MeshVertex*>& vertexes)
+alg::mesh::MeshPolygon::MeshPolygon(const std::vector<MeshVertex*>& vertexes)
 {
 	this->setVertexes(vertexes);
 }
 
-alg::MeshPolygon::~MeshPolygon()
+alg::mesh::MeshPolygon::~MeshPolygon()
 {
 	for (auto item : _vertexes)
 	{
@@ -25,7 +25,7 @@ alg::MeshPolygon::~MeshPolygon()
 	}
 }
 
-void alg::MeshPolygon::setVertexes(PointSet* pointSet, const std::vector<math::Vector3>& points)
+void alg::mesh::MeshPolygon::setVertexes(PointSet* pointSet, const std::vector<math::Vector3>& points)
 {
 	if (pointSet == nullptr) return;
 	this->setPointSet(pointSet);
@@ -40,7 +40,7 @@ void alg::MeshPolygon::setVertexes(PointSet* pointSet, const std::vector<math::V
 	this->setVertexes(vertexes);
 }
 
-void alg::MeshPolygon::setVertexes(const std::vector<MeshVertex*>& vertexes)
+void alg::mesh::MeshPolygon::setVertexes(const std::vector<MeshVertex*>& vertexes)
 {
 	for (int i = 0 ; i < vertexes.size(); i++)
 	{
@@ -53,7 +53,7 @@ void alg::MeshPolygon::setVertexes(const std::vector<MeshVertex*>& vertexes)
 	_vertexes = vertexes;
 }
 
-bool alg::MeshPolygon::hasVertex(const MeshVertex* pVertex) const
+bool alg::mesh::MeshPolygon::hasVertex(const MeshVertex* pVertex) const
 {
 	if (pVertex == nullptr)  return false;
 
@@ -64,7 +64,7 @@ bool alg::MeshPolygon::hasVertex(const MeshVertex* pVertex) const
 	return false;
 }
 
-void alg::MeshPolygon::addVertex(const MeshVertex* pVertex)
+void alg::mesh::MeshPolygon::addVertex(const MeshVertex* pVertex)
 {
 	if (pVertex == nullptr) return;
 
@@ -77,7 +77,7 @@ void alg::MeshPolygon::addVertex(const MeshVertex* pVertex)
 	}
 }
 
-void alg::MeshPolygon::removeVertex(const MeshVertex* pVertex)
+void alg::mesh::MeshPolygon::removeVertex(const MeshVertex* pVertex)
 {
 	if (pVertex == nullptr) return;
 
@@ -90,7 +90,7 @@ void alg::MeshPolygon::removeVertex(const MeshVertex* pVertex)
 	}
 }
 
-bool alg::MeshPolygon::containEdge(const MeshEdge* pEdge) const
+bool alg::mesh::MeshPolygon::containEdge(const MeshEdge* pEdge) const
 {
 	if (pEdge == nullptr) return false;
 	
@@ -116,7 +116,7 @@ bool alg::MeshPolygon::containEdge(const MeshEdge* pEdge) const
 	return false;
 }
 
-void alg::MeshPolygon::addEdge(const MeshEdge* pEdge)
+void alg::mesh::MeshPolygon::addEdge(const MeshEdge* pEdge)
 {
 	if (pEdge == nullptr) return;
 
@@ -124,26 +124,26 @@ void alg::MeshPolygon::addEdge(const MeshEdge* pEdge)
 	this->addVertex(pEdge->getVertex(1));
 }
 
-const alg::MeshVertex* alg::MeshPolygon::getVertex(int index) const
+const alg::mesh::MeshVertex* alg::mesh::MeshPolygon::getVertex(int index) const
 {
 	if (index < 0 || index >= _vertexes.size()) return nullptr;
 
 	return _vertexes[index];
 }
 
-math::Vector3 alg::MeshPolygon::getPosition(int index) const
+math::Vector3 alg::mesh::MeshPolygon::getPosition(int index) const
 {
 	auto pVertex = getVertex(index);
 	if (pVertex == nullptr) return math::Vector3();
 	return pVertex->getPosition();
 }
 
-int alg::MeshPolygon::getVertexCount() const
+int alg::mesh::MeshPolygon::getVertexCount() const
 {
 	return _vertexes.size();
 }
 
-bool alg::MeshPolygon::equal(const MeshPolygon* pPolygon) const
+bool alg::mesh::MeshPolygon::equal(const MeshPolygon* pPolygon) const
 {
 	if (pPolygon == nullptr) return false;
 	if (pPolygon->getVertexCount() != this->getVertexCount())

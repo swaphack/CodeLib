@@ -268,7 +268,7 @@ FontCharDetail* FaceLibrary::loadChar(uint64_t ch, int fontSize)
 
 	if (data->getDeltaY() < 0)
 	{
-		PRINT("Error: deltaY value is < 0");
+		PRINTLN("Error: deltaY value is < 0");
 	}
 	data->retain();
 	_datas[ch] = data;
@@ -286,21 +286,21 @@ bool FaceLibrary::init(void* lib, const std::string& filepath, int size)
 	auto error = FT_New_Face((FT_Library)lib, filepath.c_str(), 0, &face);
 	if (error != 0)
 	{
-		PRINT("ERROR %s, %d", __FILE__, error);
+		PRINTLN("ERROR %s, %d", __FILE__, error);
 		return false;
 	}
 	
 	error = FT_Select_Charmap(face, FT_ENCODING_UNICODE);
 	if (error != 0)
 	{
-		PRINT("ERROR %s, %d", __FILE__, error);
+		PRINTLN("ERROR %s, %d", __FILE__, error);
 		return false;
 	}
 
 	error = FT_Set_Pixel_Sizes(face, 0, size);
 	if (error != 0)
 	{
-		PRINT("ERROR %s, %d", __FILE__, error);
+		PRINTLN("ERROR %s, %d", __FILE__, error);
 		return false;
 	}
 	_face = face;

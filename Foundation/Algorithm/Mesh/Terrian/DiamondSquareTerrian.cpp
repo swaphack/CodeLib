@@ -1,21 +1,21 @@
 #include "DiamondSquareTerrian.h"
 #include "TerrianHelper.h"
 
-alg::DiamondSquareTerrian::DiamondSquareTerrian()
+alg::mesh::DiamondSquareTerrian::DiamondSquareTerrian()
 {
 }
 
-alg::DiamondSquareTerrian::~DiamondSquareTerrian()
+alg::mesh::DiamondSquareTerrian::~DiamondSquareTerrian()
 {
 }
 
-void alg::DiamondSquareTerrian::setOffset(float min, float max)
+void alg::mesh::DiamondSquareTerrian::setOffset(float min, float max)
 {
     _offset.setMinValue(min);
     _offset.setMaxThreshold(max);
 }
 
-void alg::DiamondSquareTerrian::setPoints(const math::Vector3& leftBottom, const math::Vector3& rightBottom, const math::Vector3& rightTop, const math::Vector3& leftTop)
+void alg::mesh::DiamondSquareTerrian::setPoints(const math::Vector3& leftBottom, const math::Vector3& rightBottom, const math::Vector3& rightTop, const math::Vector3& leftTop)
 {
     _leftBottom = leftBottom;
     _rightBottom = rightBottom;
@@ -23,7 +23,7 @@ void alg::DiamondSquareTerrian::setPoints(const math::Vector3& leftBottom, const
     _leftTop = leftTop;
 }
 
-std::vector<alg::DiamondSquareTerrian::Quadrilateral> alg::DiamondSquareTerrian::createQuads(int count)
+std::vector<alg::mesh::DiamondSquareTerrian::Quadrilateral> alg::mesh::DiamondSquareTerrian::createQuads(int count)
 {
     math::Vector3 offset0(0, _offset.getMinValue(), 0);
     math::Vector3 offset1(0, _offset.getMaxValue(), 0);
@@ -58,7 +58,7 @@ std::vector<alg::DiamondSquareTerrian::Quadrilateral> alg::DiamondSquareTerrian:
     return quads;
 }
 
-void alg::DiamondSquareTerrian::autoDivide(const Quadrilateral& quad, const math::Vector3& offset, Quadrilateral& quad0, Quadrilateral& quad1, Quadrilateral& quad2, Quadrilateral& quad3)
+void alg::mesh::DiamondSquareTerrian::autoDivide(const Quadrilateral& quad, const math::Vector3& offset, Quadrilateral& quad0, Quadrilateral& quad1, Quadrilateral& quad2, Quadrilateral& quad3)
 {
     // 3  2
     // 0  1

@@ -1,15 +1,15 @@
 #include "ProgressiveMeshes.h"
 #include "Mesh/Base/import.h"
 
-alg::ProgressiveMeshes::ProgressiveMeshes()
+alg::mesh::ProgressiveMeshes::ProgressiveMeshes()
 {
 }
 
-alg::ProgressiveMeshes::~ProgressiveMeshes()
+alg::mesh::ProgressiveMeshes::~ProgressiveMeshes()
 {
 }
 
-bool alg::ProgressiveMeshes::canContractEdgeReplaceWithDestVertex(
+bool alg::mesh::ProgressiveMeshes::canContractEdgeReplaceWithDestVertex(
 	PointSet* pointSet, 
 	MeshVertex* pSrcVertex, MeshVertex* pDestVertex,
 	std::set<MeshTriangle*>& removeTraingles, std::set<MeshTriangle*>& addTraingles)
@@ -73,7 +73,7 @@ bool alg::ProgressiveMeshes::canContractEdgeReplaceWithDestVertex(
 	return ret;
 }
 
-bool alg::ProgressiveMeshes::canContractEdgeReplaceWithMiddleVertex(
+bool alg::mesh::ProgressiveMeshes::canContractEdgeReplaceWithMiddleVertex(
 	PointSet* pointSet,
 	MeshVertex* pSrcVertex, MeshVertex* pDestVertex,
 	std::set<MeshTriangle*>& removeTraingles, std::set<MeshTriangle*>& addTraingles)
@@ -103,7 +103,7 @@ bool alg::ProgressiveMeshes::canContractEdgeReplaceWithMiddleVertex(
 	return true;
 }
 
-bool alg::ProgressiveMeshes::processContractEdgeReplaceWithMiddleVertex(
+bool alg::mesh::ProgressiveMeshes::processContractEdgeReplaceWithMiddleVertex(
 	PointSet* pointSet, 
 	MeshVertex* pSrcVertex, MeshVertex* pDestVertex, 
 	MeshVertex* pMiddleVertex, 

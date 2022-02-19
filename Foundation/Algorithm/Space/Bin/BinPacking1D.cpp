@@ -1,15 +1,15 @@
 #include "BinPacking1D.h"
 #include <algorithm>
 
-alg::BinPacking1D::BinPacking1D()
+alg::space::BinPacking1D::BinPacking1D()
 {
 }
 
-alg::BinPacking1D::~BinPacking1D()
+alg::space::BinPacking1D::~BinPacking1D()
 {
 }
 
-void alg::BinPacking1D::addItem(int32_t id, int32_t length)
+void alg::space::BinPacking1D::addItem(int32_t id, int32_t length)
 {
 	Item item;
 	item.id = id;
@@ -17,7 +17,7 @@ void alg::BinPacking1D::addItem(int32_t id, int32_t length)
 	_items.push_back(item);
 }
 
-void alg::BinPacking1D::removeItem(int32_t id)
+void alg::space::BinPacking1D::removeItem(int32_t id)
 {
 	for (size_t i = 0; i < _items.size(); i++)
 	{
@@ -29,12 +29,12 @@ void alg::BinPacking1D::removeItem(int32_t id)
 	}
 }
 
-void alg::BinPacking1D::removeAllItems()
+void alg::space::BinPacking1D::removeAllItems()
 {
 	_items.clear();
 }
 
-void alg::BinPacking1D::sortItems()
+void alg::space::BinPacking1D::sortItems()
 {
 	std::map<int32_t, int32_t> mapAreas;
 
@@ -52,7 +52,7 @@ void alg::BinPacking1D::sortItems()
 	});
 }
 
-bool alg::BinPacking1D::getPackWay(int length, PackingMethod method, std::vector<Box>& boxes)
+bool alg::space::BinPacking1D::getPackWay(int length, PackingMethod method, std::vector<Box>& boxes)
 {
 	if (_items.size() == 0)
 	{
@@ -121,7 +121,7 @@ bool alg::BinPacking1D::getPackWay(int length, PackingMethod method, std::vector
 	return true;
 }
 
-bool alg::BinPacking1D::createPackWayWithFFDH(Box& box, const std::vector<Item>& items, std::vector<Item>& remains)
+bool alg::space::BinPacking1D::createPackWayWithFFDH(Box& box, const std::vector<Item>& items, std::vector<Item>& remains)
 {
 	remains = items;
 	for (auto& item : items)
@@ -139,7 +139,7 @@ bool alg::BinPacking1D::createPackWayWithFFDH(Box& box, const std::vector<Item>&
 	return true;
 }
 
-bool alg::BinPacking1D::createPackWayWithNFDH(Box& box, const std::vector<Item>& items, std::vector<Item>& remains)
+bool alg::space::BinPacking1D::createPackWayWithNFDH(Box& box, const std::vector<Item>& items, std::vector<Item>& remains)
 {
 	remains = items;
 	for (auto& item : items)
@@ -161,7 +161,7 @@ bool alg::BinPacking1D::createPackWayWithNFDH(Box& box, const std::vector<Item>&
 	return true;
 }
 
-bool alg::BinPacking1D::createPackWayWithBFDH(Box& box, const std::vector<Item>& items, std::vector<Item>& remains)
+bool alg::space::BinPacking1D::createPackWayWithBFDH(Box& box, const std::vector<Item>& items, std::vector<Item>& remains)
 {
 	remains = items;
 	for (auto& item : items)

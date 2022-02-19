@@ -2,16 +2,16 @@
 #include "Mesh/Base/import.h"
 #include "Delaunay.h"
 
-alg::Voronoi::Voronoi()
+alg::mesh::Voronoi::Voronoi()
 {
     _pointSet = new PointSet();
 }
-alg::Voronoi::~Voronoi()
+alg::mesh::Voronoi::~Voronoi()
 {
     SAFE_DELETE(_pointSet);
 }
 
-bool alg::Voronoi::createWithRect(const math::Rect& rect, Delaunay* delaunay,
+bool alg::mesh::Voronoi::createWithRect(const math::Rect& rect, Delaunay* delaunay,
     std::vector<math::Polygon>& polygons,
     std::vector<math::LineSegment2d>& lineSegments)
 {
@@ -21,7 +21,7 @@ bool alg::Voronoi::createWithRect(const math::Rect& rect, Delaunay* delaunay,
 	}
     _pointSet->cleanup();
 
-	std::set<alg::MeshEdge*> voronoiEdges = generateEdgesMeshTriangle(delaunay->getPointSet()->getTriangles());
+	std::set<alg::mesh::MeshEdge*> voronoiEdges = generateEdgesMeshTriangle(delaunay->getPointSet()->getTriangles());
 	if (voronoiEdges.size() == 0)
 	{
 		return false;
@@ -36,10 +36,10 @@ bool alg::Voronoi::createWithRect(const math::Rect& rect, Delaunay* delaunay,
 	std::map<MeshVertex*, std::vector<MeshEdge*>> samePointEdges;
 	for(auto edge : voronoiEdges)
 	{
-		alg::MeshVertex* pVertex = (alg::MeshVertex*)edge->getVertex(0);
+		alg::mesh::MeshVertex* pVertex = (alg::mesh::MeshVertex*)edge->getVertex(0);
 		samePointEdges[pVertex].push_back(edge);
 
-		pVertex = (alg::MeshVertex*)edge->getVertex(1);
+		pVertex = (alg::mesh::MeshVertex*)edge->getVertex(1);
 		samePointEdges[pVertex].push_back(edge);
 	}
 
@@ -197,14 +197,14 @@ bool alg::Voronoi::createWithRect(const math::Rect& rect, Delaunay* delaunay,
 	return true;
 }
 
-alg::PointSet* alg::Voronoi::getPointSet()
+alg::mesh::PointSet* alg::mesh::Voronoi::getPointSet()
 {
     return _pointSet;
 }
 
-std::set<alg::MeshEdge*> alg::Voronoi::generateEdgesMeshTriangle(const std::map<std::string, MeshTriangle*>& triangles)
+std::set<alg::mesh::MeshEdge*> alg::mesh::Voronoi::generateEdgesMeshTriangle(const std::map<std::string, MeshTriangle*>& triangles)
 {
-	std::set<alg::MeshEdge*> edges;
+	std::set<alg::mesh::MeshEdge*> edges;
 
 	if (_pointSet == nullptr || triangles.size() == 0)
 	{

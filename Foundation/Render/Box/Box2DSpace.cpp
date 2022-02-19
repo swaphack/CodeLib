@@ -5,7 +5,7 @@
 #include "Common/Scene/Camera.h"
 
 // ºÐ×Ó¿Õ¼ä
-alg::QuadTree<math::Rect, int, render::Box2DProtocol*> _quadTree;
+alg::space::QuadTree<math::Rect, int, render::Box2DProtocol*> _quadTree;
 
 render::Box2DSpace::Box2DSpace()
 {

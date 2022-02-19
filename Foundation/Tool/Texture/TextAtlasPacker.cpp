@@ -116,7 +116,7 @@ void tool::TextAtlasPacker::saveTexAltas(const std::string& imgFilePath, const s
 	int id = 0;
 	std::map<int, std::string> ids;
 
-	alg::Bin2D bin;
+	alg::space::Bin2D bin;
 	bin.setAutoRotate(isAutoRotate());
 	bin.setSize(_size.getWidth(), _size.getHeight());
 	for (const auto& item : mapDetails)
@@ -126,7 +126,7 @@ void tool::TextAtlasPacker::saveTexAltas(const std::string& imgFilePath, const s
 		id++;
 	}
 
-	std::vector<alg::Bin2D::Item> items;
+	std::vector<alg::space::Bin2D::Item> items;
 	if (!bin.pack(items)) return;
 
 	sys::ImageDataFormat format = sys::ImageDataFormat::RGBA;

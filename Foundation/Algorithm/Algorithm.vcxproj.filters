@@ -164,30 +164,6 @@
     <ClInclude Include="Mesh\Core\PolygonReduction.h">
       <Filter>Mesh\Core</Filter>
     </ClInclude>
-    <ClInclude Include="Terrian\Terrian.h">
-      <Filter>Terrian</Filter>
-    </ClInclude>
-    <ClInclude Include="Terrian\Tree.h">
-      <Filter>Terrian</Filter>
-    </ClInclude>
-    <ClInclude Include="Terrian\LSystem.h">
-      <Filter>Terrian</Filter>
-    </ClInclude>
-    <ClInclude Include="Terrian\IFSystem.h">
-      <Filter>Terrian</Filter>
-    </ClInclude>
-    <ClInclude Include="Terrian\MidpointTerrian.h">
-      <Filter>Terrian</Filter>
-    </ClInclude>
-    <ClInclude Include="Terrian\DiamondSquareTerrian.h">
-      <Filter>Terrian</Filter>
-    </ClInclude>
-    <ClInclude Include="Terrian\TerrianHelper.h">
-      <Filter>Terrian</Filter>
-    </ClInclude>
-    <ClInclude Include="Terrian\import.h">
-      <Filter>Terrian</Filter>
-    </ClInclude>
     <ClInclude Include="Space\Index\BinaryTree.h">
       <Filter>Space\Index</Filter>
     </ClInclude>
@@ -218,11 +194,41 @@
     <ClInclude Include="Map\Path\TaskPath.h">
       <Filter>Map\Path</Filter>
     </ClInclude>
-    <ClInclude Include="Navigation\NavMesh.h">
-      <Filter>Navigation</Filter>
+    <ClInclude Include="Mesh\Navigation\NavMesh.h">
+      <Filter>Mesh\Navigation</Filter>
     </ClInclude>
-    <ClInclude Include="Navigation\NavSystem.h">
-      <Filter>Navigation</Filter>
+    <ClInclude Include="Mesh\Navigation\NavPoly.h">
+      <Filter>Mesh\Navigation</Filter>
+    </ClInclude>
+    <ClInclude Include="Mesh\Navigation\NavSystem.h">
+      <Filter>Mesh\Navigation</Filter>
+    </ClInclude>
+    <ClInclude Include="Mesh\Navigation\import.h">
+      <Filter>Mesh\Navigation</Filter>
+    </ClInclude>
+    <ClInclude Include="Mesh\Terrian\DiamondSquareTerrian.h">
+      <Filter>Mesh\Terrian</Filter>
+    </ClInclude>
+    <ClInclude Include="Mesh\Terrian\IFSystem.h">
+      <Filter>Mesh\Terrian</Filter>
+    </ClInclude>
+    <ClInclude Include="Mesh\Terrian\import.h">
+      <Filter>Mesh\Terrian</Filter>
+    </ClInclude>
+    <ClInclude Include="Mesh\Terrian\LSystem.h">
+      <Filter>Mesh\Terrian</Filter>
+    </ClInclude>
+    <ClInclude Include="Mesh\Terrian\MidpointTerrian.h">
+      <Filter>Mesh\Terrian</Filter>
+    </ClInclude>
+    <ClInclude Include="Mesh\Terrian\Terrian.h">
+      <Filter>Mesh\Terrian</Filter>
+    </ClInclude>
+    <ClInclude Include="Mesh\Terrian\TerrianHelper.h">
+      <Filter>Mesh\Terrian</Filter>
+    </ClInclude>
+    <ClInclude Include="Mesh\Terrian\Tree.h">
+      <Filter>Mesh\Terrian</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -256,9 +262,6 @@
     <Filter Include="Mesh\Core">
       <UniqueIdentifier>{3ccbf977-430f-4872-b255-57d2001c2c76}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Terrian">
-      <UniqueIdentifier>{d235acf9-e6d6-4b3b-9cf7-72c34c5b51dc}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Space">
       <UniqueIdentifier>{c7e85049-6fdf-45f8-9835-c16b8384b409}</UniqueIdentifier>
     </Filter>
@@ -268,8 +271,11 @@
     <Filter Include="Space\Bin">
       <UniqueIdentifier>{3a19625d-bb58-486a-820d-2e6c2ba2d4f9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Navigation">
-      <UniqueIdentifier>{b36984d5-9fba-4251-89b8-5d8cd583d2c0}</UniqueIdentifier>
+    <Filter Include="Mesh\Navigation">
+      <UniqueIdentifier>{06e6f8cf-9993-4595-a7bf-cda608271378}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Mesh\Terrian">
+      <UniqueIdentifier>{ac57dcab-71b5-4edb-aef9-57338235e48c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -367,27 +373,6 @@
     <ClCompile Include="Mesh\Core\PolygonReduction.cpp">
       <Filter>Mesh\Core</Filter>
     </ClCompile>
-    <ClCompile Include="Terrian\Terrian.cpp">
-      <Filter>Terrian</Filter>
-    </ClCompile>
-    <ClCompile Include="Terrian\Tree.cpp">
-      <Filter>Terrian</Filter>
-    </ClCompile>
-    <ClCompile Include="Terrian\LSystem.cpp">
-      <Filter>Terrian</Filter>
-    </ClCompile>
-    <ClCompile Include="Terrian\IFSystem.cpp">
-      <Filter>Terrian</Filter>
-    </ClCompile>
-    <ClCompile Include="Terrian\MidpointTerrian.cpp">
-      <Filter>Terrian</Filter>
-    </ClCompile>
-    <ClCompile Include="Terrian\DiamondSquareTerrian.cpp">
-      <Filter>Terrian</Filter>
-    </ClCompile>
-    <ClCompile Include="Terrian\TerrianHelper.cpp">
-      <Filter>Terrian</Filter>
-    </ClCompile>
     <ClCompile Include="Space\Bin\Bin2D.cpp">
       <Filter>Space\Bin</Filter>
     </ClCompile>
@@ -399,6 +384,36 @@
     </ClCompile>
     <ClCompile Include="Map\Path\TaskPath.cpp">
       <Filter>Map\Path</Filter>
+    </ClCompile>
+    <ClCompile Include="Mesh\Navigation\NavMesh.cpp">
+      <Filter>Mesh\Navigation</Filter>
+    </ClCompile>
+    <ClCompile Include="Mesh\Navigation\NavPoly.cpp">
+      <Filter>Mesh\Navigation</Filter>
+    </ClCompile>
+    <ClCompile Include="Mesh\Navigation\NavSystem.cpp">
+      <Filter>Mesh\Navigation</Filter>
+    </ClCompile>
+    <ClCompile Include="Mesh\Terrian\DiamondSquareTerrian.cpp">
+      <Filter>Mesh\Terrian</Filter>
+    </ClCompile>
+    <ClCompile Include="Mesh\Terrian\IFSystem.cpp">
+      <Filter>Mesh\Terrian</Filter>
+    </ClCompile>
+    <ClCompile Include="Mesh\Terrian\LSystem.cpp">
+      <Filter>Mesh\Terrian</Filter>
+    </ClCompile>
+    <ClCompile Include="Mesh\Terrian\MidpointTerrian.cpp">
+      <Filter>Mesh\Terrian</Filter>
+    </ClCompile>
+    <ClCompile Include="Mesh\Terrian\Terrian.cpp">
+      <Filter>Mesh\Terrian</Filter>
+    </ClCompile>
+    <ClCompile Include="Mesh\Terrian\TerrianHelper.cpp">
+      <Filter>Mesh\Terrian</Filter>
+    </ClCompile>
+    <ClCompile Include="Mesh\Terrian\Tree.cpp">
+      <Filter>Mesh\Terrian</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

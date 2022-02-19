@@ -1,17 +1,17 @@
 #include "PolygonReduction.h"
 #include "Mesh/Base/import.h"
 
-alg::PolygonReduction::PolygonReduction()
+alg::mesh::PolygonReduction::PolygonReduction()
 {
 	_pointSet = new PointSet();
 }
 
-alg::PolygonReduction::~PolygonReduction()
+alg::mesh::PolygonReduction::~PolygonReduction()
 {
 	SAFE_RELEASE(_pointSet);
 }
 
-float alg::PolygonReduction::getEdgeCost(const MeshVertex* pVertex0, const MeshVertex* pVertex1)
+float alg::mesh::PolygonReduction::getEdgeCost(const MeshVertex* pVertex0, const MeshVertex* pVertex1)
 {
 	if (pVertex0 == nullptr || pVertex1 == nullptr) return  -1;
 	float fMagnitude = (pVertex0->getPosition() - pVertex1->getPosition()).getMagnitude();
@@ -38,7 +38,7 @@ float alg::PolygonReduction::getEdgeCost(const MeshVertex* pVertex0, const MeshV
 	return maxValue * fMagnitude;
 }
 
-void alg::PolygonReduction::updateEdgeCostAtVertex(MeshVertex* pVertex)
+void alg::mesh::PolygonReduction::updateEdgeCostAtVertex(MeshVertex* pVertex)
 {
 	if (pVertex == nullptr) return;
 	auto pCollapseInfo = getCollapseInfo(pVertex);
@@ -66,7 +66,7 @@ void alg::PolygonReduction::updateEdgeCostAtVertex(MeshVertex* pVertex)
 	}
 }
 
-void alg::PolygonReduction::collapse(const std::vector<math::TrianglePoints>& triangles)
+void alg::mesh::PolygonReduction::collapse(const std::vector<math::TrianglePoints>& triangles)
 {
 	std::vector<math::Vector3> vertices;
 	std::vector<int> indices;
@@ -99,7 +99,7 @@ void alg::PolygonReduction::collapse(const std::vector<math::TrianglePoints>& tr
 	this->collapse(vertices, indices);
 }
 
-void alg::PolygonReduction::collapse(const std::vector<math::Vector3>& vertices, const std::vector<int>& indices)
+void alg::mesh::PolygonReduction::collapse(const std::vector<math::Vector3>& vertices, const std::vector<int>& indices)
 {
 	_vertexCollapseInfo.clear();
 
@@ -148,7 +148,7 @@ void alg::PolygonReduction::collapse(const std::vector<math::Vector3>& vertices,
 	}
 }
 
-alg::PolygonReduction::CollapseInfo* alg::PolygonReduction::getCollapseInfo(MeshVertex* pVertex)
+alg::mesh::PolygonReduction::CollapseInfo* alg::mesh::PolygonReduction::getCollapseInfo(MeshVertex* pVertex)
 {
 	if (pVertex == nullptr)
 	{

@@ -2,16 +2,16 @@
 #include "Mesh/Base/import.h"
 #include "mathlib.h"
 
-alg::Delaunay::Delaunay()
+alg::mesh::Delaunay::Delaunay()
 {
 	_pointSet = new PointSet();
 }
-alg::Delaunay::~Delaunay()
+alg::mesh::Delaunay::~Delaunay()
 {
 	SAFE_DELETE(_pointSet);
 }
 
-std::vector<math::TrianglePoints> alg::Delaunay::createWithBowyerWatson(const std::vector<math::Vector3>& srcPoints)
+std::vector<math::TrianglePoints> alg::mesh::Delaunay::createWithBowyerWatson(const std::vector<math::Vector3>& srcPoints)
 {
 	std::vector<math::TrianglePoints> triangles;
 	if (srcPoints.size() < 3) return triangles;
@@ -59,7 +59,7 @@ std::vector<math::TrianglePoints> alg::Delaunay::createWithBowyerWatson(const st
 	return triangles;
 }
 
-std::vector<math::TrianglePoints> alg::Delaunay::createWithBowyerWatson(const math::RectPoints& rect, const std::vector<math::Vector3>& srcPoints)
+std::vector<math::TrianglePoints> alg::mesh::Delaunay::createWithBowyerWatson(const math::RectPoints& rect, const std::vector<math::Vector3>& srcPoints)
 {
 	std::vector<math::TrianglePoints> triangles;
 	if (srcPoints.size() == 0) return triangles;
@@ -106,17 +106,17 @@ std::vector<math::TrianglePoints> alg::Delaunay::createWithBowyerWatson(const ma
 	return triangles;
 }
 
-const alg::PointSet* alg::Delaunay::getPointSet() const
+const alg::mesh::PointSet* alg::mesh::Delaunay::getPointSet() const
 {
 	return _pointSet;
 }
 
-alg::PointSet* alg::Delaunay::getPointSet()
+alg::mesh::PointSet* alg::mesh::Delaunay::getPointSet()
 {
 	return _pointSet;
 }
 
-alg::MeshTriangle* alg::Delaunay::initSuperTriangle()
+alg::mesh::MeshTriangle* alg::mesh::Delaunay::initSuperTriangle()
 {
 	if (_pointSet == nullptr || _pointSet->getPointCount() < 3) return nullptr;
 
@@ -160,9 +160,9 @@ alg::MeshTriangle* alg::Delaunay::initSuperTriangle()
 	return _pointSet->createTriangle(outTriTop, outTriLeft, outTriRight);
 }
 
-std::vector<alg::MeshTriangle*> alg::Delaunay::initRectTriangle(const math::RectPoints& rect)
+std::vector<alg::mesh::MeshTriangle*> alg::mesh::Delaunay::initRectTriangle(const math::RectPoints& rect)
 {
-	std::vector<alg::MeshTriangle*> triangles;
+	std::vector<alg::mesh::MeshTriangle*> triangles;
 
 	if (_pointSet == nullptr) return triangles;
 
@@ -175,7 +175,7 @@ std::vector<alg::MeshTriangle*> alg::Delaunay::initRectTriangle(const math::Rect
 	return triangles;
 }
 
-void alg::Delaunay::generateTriangle(const std::vector<math::Vector3>& points, std::set<MeshTriangle*>& meshTriangles)
+void alg::mesh::Delaunay::generateTriangle(const std::vector<math::Vector3>& points, std::set<MeshTriangle*>& meshTriangles)
 {
 	if (_pointSet == nullptr) return;
 
@@ -239,7 +239,7 @@ void alg::Delaunay::generateTriangle(const std::vector<math::Vector3>& points, s
 	}	
 }
 
-void alg::Delaunay::removeTriangle(
+void alg::mesh::Delaunay::removeTriangle(
 	std::set<MeshTriangle*>& meshTriangles, 
 	std::vector<MeshTriangle*>& badTriangles, int index)
 {

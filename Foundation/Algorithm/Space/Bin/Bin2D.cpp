@@ -1,20 +1,20 @@
 #include "Bin2D.h"
 #include "BinPacking2D.h"
-alg::Bin2D::Bin2D()
+alg::space::Bin2D::Bin2D()
 {
 }
 
-alg::Bin2D::~Bin2D()
+alg::space::Bin2D::~Bin2D()
 {
 }
 
-void alg::Bin2D::setSize(int width, int height)
+void alg::space::Bin2D::setSize(int width, int height)
 {
 	_width = width;
 	_height = height;
 }
 
-void alg::Bin2D::addItem(int id, int width, int height)
+void alg::space::Bin2D::addItem(int id, int width, int height)
 {
 	Item item;
 	item.id = id;
@@ -24,12 +24,12 @@ void alg::Bin2D::addItem(int id, int width, int height)
 	_items.push_back(item);
 }
 
-void alg::Bin2D::setAutoRotate(bool rotated)
+void alg::space::Bin2D::setAutoRotate(bool rotated)
 {
 	_autoRotate = rotated;
 }
 
-bool alg::Bin2D::pack(std::vector<Item>& items)
+bool alg::space::Bin2D::pack(std::vector<Item>& items)
 {
 	std::vector<BinPacking2D::Box> boxes;
 	BinPacking2D binPack;

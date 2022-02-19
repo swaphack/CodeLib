@@ -67,7 +67,7 @@ void TestMainScene::initNodes()
 void TestMainScene::initEnv()
 {
 	this->addChild(CREATE_NODE(SystemEnv));
-	//this->addChild(CREATE_NODE(TerrianNode));
+	this->addChild(CREATE_NODE(TerrianNode));
 
 	this->addChild(CREATE_NODE(TestEnvironmentNode));
 }

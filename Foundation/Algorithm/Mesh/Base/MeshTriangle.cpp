@@ -3,7 +3,7 @@
 #include "MeshEdge.h"
 #include "PointSet.h"
 
-alg::MeshTriangle::MeshTriangle()
+alg::mesh::MeshTriangle::MeshTriangle()
 {
 	for (size_t i = 0; i < TRIANGLE_VERTEX_AND_EDGE_COUNT; i++)
 	{
@@ -12,21 +12,21 @@ alg::MeshTriangle::MeshTriangle()
 	}
 }
 
-alg::MeshTriangle::MeshTriangle(PointSet* pointSet, const math::Vector3& pointA, const math::Vector3& pointB, const math::Vector3& pointC)
+alg::mesh::MeshTriangle::MeshTriangle(PointSet* pointSet, const math::Vector3& pointA, const math::Vector3& pointB, const math::Vector3& pointC)
 {
 	this->setVertexes(pointSet, pointA, pointB, pointC);
 }
 
-alg::MeshTriangle::MeshTriangle(const MeshVertex* pVertexA, const MeshVertex* pVertexB, const MeshVertex* pVertexC)
+alg::mesh::MeshTriangle::MeshTriangle(const MeshVertex* pVertexA, const MeshVertex* pVertexB, const MeshVertex* pVertexC)
 {
 	this->setVertexes(pVertexA, pVertexB, pVertexC);
 }
 
-alg::MeshTriangle::~MeshTriangle()
+alg::mesh::MeshTriangle::~MeshTriangle()
 {
 }
 
-void alg::MeshTriangle::setVertexes(PointSet* pointSet, const math::Vector3& pointA, const math::Vector3& pointB, const math::Vector3& pointC)
+void alg::mesh::MeshTriangle::setVertexes(PointSet* pointSet, const math::Vector3& pointA, const math::Vector3& pointB, const math::Vector3& pointC)
 {
 	if (pointSet == nullptr) return;
 	this->setPointSet(pointSet);
@@ -37,7 +37,7 @@ void alg::MeshTriangle::setVertexes(PointSet* pointSet, const math::Vector3& poi
 	this->setVertexes(pVertexA, pVertexB, pVertexC);
 }
 
-void alg::MeshTriangle::setVertexes(const MeshVertex* pVertexA, const MeshVertex* pVertexB, const MeshVertex* pVertexC)
+void alg::mesh::MeshTriangle::setVertexes(const MeshVertex* pVertexA, const MeshVertex* pVertexB, const MeshVertex* pVertexC)
 {
 	if (pVertexA == nullptr || pVertexB == nullptr || pVertexC == nullptr
 		|| pVertexA->getPointSet() == nullptr || pVertexB->getPointSet() == nullptr || pVertexC->getPointSet() == nullptr) 
@@ -60,14 +60,14 @@ void alg::MeshTriangle::setVertexes(const MeshVertex* pVertexA, const MeshVertex
 	this->setEdges(pEdgeA, pEdgeB, pEdgeC);
 }
 
-void alg::MeshTriangle::setEdges(const MeshEdge* pEdgeA, const MeshEdge* pEdgeB, const MeshEdge* pEdgeC)
+void alg::mesh::MeshTriangle::setEdges(const MeshEdge* pEdgeA, const MeshEdge* pEdgeB, const MeshEdge* pEdgeC)
 {
 	this->setEdge(0, pEdgeA);
 	this->setEdge(1, pEdgeB);
 	this->setEdge(2, pEdgeC);
 }
 
-void alg::MeshTriangle::setVertex(int index, const MeshVertex* pVertex)
+void alg::mesh::MeshTriangle::setVertex(int index, const MeshVertex* pVertex)
 {
 	if (index < 0 || index >= TRIANGLE_VERTEX_AND_EDGE_COUNT) return;
 
@@ -88,7 +88,7 @@ void alg::MeshTriangle::setVertex(int index, const MeshVertex* pVertex)
 	}
 }
 
-int alg::MeshTriangle::getIndexOfVertex(const MeshVertex* pVertex) const
+int alg::mesh::MeshTriangle::getIndexOfVertex(const MeshVertex* pVertex) const
 {
 	if (pVertex == nullptr) return -1;
 	for (size_t i = 0; i < TRIANGLE_VERTEX_AND_EDGE_COUNT; i++)
@@ -98,7 +98,7 @@ int alg::MeshTriangle::getIndexOfVertex(const MeshVertex* pVertex) const
 	return -1;
 }
 
-bool alg::MeshTriangle::hasVertex(const MeshVertex* pVertex) const
+bool alg::mesh::MeshTriangle::hasVertex(const MeshVertex* pVertex) const
 {
 	if (pVertex == nullptr) return false;
 
@@ -109,7 +109,7 @@ bool alg::MeshTriangle::hasVertex(const MeshVertex* pVertex) const
 	return false;
 }
 
-void alg::MeshTriangle::setEdge(int index, const MeshEdge* pEdge)
+void alg::mesh::MeshTriangle::setEdge(int index, const MeshEdge* pEdge)
 {
 	if (index < 0 || index >= TRIANGLE_VERTEX_AND_EDGE_COUNT) return;
 
@@ -142,7 +142,7 @@ void alg::MeshTriangle::setEdge(int index, const MeshEdge* pEdge)
 	}
 }
 
-int alg::MeshTriangle::getIndexOfEdge(const MeshEdge* pEdge) const
+int alg::mesh::MeshTriangle::getIndexOfEdge(const MeshEdge* pEdge) const
 {
 	if (pEdge == nullptr) return -1;
 	for (size_t i = 0; i < TRIANGLE_VERTEX_AND_EDGE_COUNT; i++)
@@ -152,7 +152,7 @@ int alg::MeshTriangle::getIndexOfEdge(const MeshEdge* pEdge) const
 	return -1;
 }
 
-bool alg::MeshTriangle::containEdge(const MeshEdge* pEdge) const
+bool alg::mesh::MeshTriangle::containEdge(const MeshEdge* pEdge) const
 {
 	for (size_t i = 0; i < TRIANGLE_VERTEX_AND_EDGE_COUNT; i++)
 	{
@@ -161,38 +161,38 @@ bool alg::MeshTriangle::containEdge(const MeshEdge* pEdge) const
 	return false;
 }
 
-const alg::MeshVertex* alg::MeshTriangle::getVertex(int index) const
+const alg::mesh::MeshVertex* alg::mesh::MeshTriangle::getVertex(int index) const
 {
 	if (index < 0 || index >= TRIANGLE_VERTEX_AND_EDGE_COUNT) return nullptr;
 
 	return _vertexes[index];
 }
 
-alg::MeshVertex* alg::MeshTriangle::getVertex(int index)
+alg::mesh::MeshVertex* alg::mesh::MeshTriangle::getVertex(int index)
 {
 	if (index < 0 || index >= TRIANGLE_VERTEX_AND_EDGE_COUNT) return nullptr;
 
 	return _vertexes[index];
 }
 
-math::Vector3 alg::MeshTriangle::getPosition(int index)  const
+math::Vector3 alg::mesh::MeshTriangle::getPosition(int index)  const
 {
 	auto pVertex = getVertex(index);
 	if (pVertex == nullptr) return math::Vector3();
 	return pVertex->getPosition();
 }
 
-std::array<alg::MeshVertex*, TRIANGLE_VERTEX_AND_EDGE_COUNT>& alg::MeshTriangle::getVertexes()
+std::array<alg::mesh::MeshVertex*, TRIANGLE_VERTEX_AND_EDGE_COUNT>& alg::mesh::MeshTriangle::getVertexes()
 {
 	return _vertexes;
 }
 
-const std::array<alg::MeshVertex*, TRIANGLE_VERTEX_AND_EDGE_COUNT>& alg::MeshTriangle::getVertexes() const
+const std::array<alg::mesh::MeshVertex*, TRIANGLE_VERTEX_AND_EDGE_COUNT>& alg::mesh::MeshTriangle::getVertexes() const
 {
 	return _vertexes;
 }
 
-std::vector<alg::MeshVertex*> alg::MeshTriangle::getOrderVertexes(const MeshVertex* pFirstVertex, bool bClockWise) const
+std::vector<alg::mesh::MeshVertex*> alg::mesh::MeshTriangle::getOrderVertexes(const MeshVertex* pFirstVertex, bool bClockWise) const
 {
 	std::vector<MeshVertex*> vertexes;
 	if (pFirstVertex == nullptr) pFirstVertex = getVertex(0);
@@ -222,13 +222,13 @@ std::vector<alg::MeshVertex*> alg::MeshTriangle::getOrderVertexes(const MeshVert
 
 	for (auto index : vecOrder)
 	{
-		vertexes.push_back((alg::MeshVertex*)this->getVertex(index));
+		vertexes.push_back((alg::mesh::MeshVertex*)this->getVertex(index));
 	}
 	
 	return vertexes;
 }
 
-std::vector<math::Vector3> alg::MeshTriangle::getOrderdPositions(bool bClockWise) const
+std::vector<math::Vector3> alg::mesh::MeshTriangle::getOrderdPositions(bool bClockWise) const
 {
 	bool bClockWiseOrder = math::GeometryUtiity::isClockWise(this->getPosition(0), this->getPosition(1), this->getPosition(2));
 
@@ -249,14 +249,14 @@ std::vector<math::Vector3> alg::MeshTriangle::getOrderdPositions(bool bClockWise
 	return bClockWise ? cwIndices : ccwIndices;
 }
 
-const alg::MeshEdge* alg::MeshTriangle::getEdge(int index) const
+const alg::mesh::MeshEdge* alg::mesh::MeshTriangle::getEdge(int index) const
 {
 	if (index < 0 || index >= TRIANGLE_VERTEX_AND_EDGE_COUNT) return nullptr;
 
 	return _edges[index];
 }
 
-alg::MeshEdge* alg::MeshTriangle::getEdge(int index)
+alg::mesh::MeshEdge* alg::mesh::MeshTriangle::getEdge(int index)
 {
 
 	if (index < 0 || index >= TRIANGLE_VERTEX_AND_EDGE_COUNT) return nullptr;
@@ -264,7 +264,7 @@ alg::MeshEdge* alg::MeshTriangle::getEdge(int index)
 	return _edges[index];
 }
 
-const alg::MeshEdge* alg::MeshTriangle::getEdgeByVertex(int vertexIndex0, int vertexIndex1) const
+const alg::mesh::MeshEdge* alg::mesh::MeshTriangle::getEdgeByVertex(int vertexIndex0, int vertexIndex1) const
 {
 	auto vertex0 = getVertex(vertexIndex0);
 	auto vertex1 = getVertex(vertexIndex1);
@@ -286,7 +286,7 @@ const alg::MeshEdge* alg::MeshTriangle::getEdgeByVertex(int vertexIndex0, int ve
 	return nullptr;
 }
 
-alg::MeshEdge* alg::MeshTriangle::getEdgeByVertex(int vertexIndex0, int vertexIndex1)
+alg::mesh::MeshEdge* alg::mesh::MeshTriangle::getEdgeByVertex(int vertexIndex0, int vertexIndex1)
 {
 	auto vertex0 = getVertex(vertexIndex0);
 	auto vertex1 = getVertex(vertexIndex1);
@@ -308,17 +308,17 @@ alg::MeshEdge* alg::MeshTriangle::getEdgeByVertex(int vertexIndex0, int vertexIn
 	return nullptr;
 }
 
-std::array<alg::MeshEdge*, TRIANGLE_VERTEX_AND_EDGE_COUNT>& alg::MeshTriangle::getEdges()
+std::array<alg::mesh::MeshEdge*, TRIANGLE_VERTEX_AND_EDGE_COUNT>& alg::mesh::MeshTriangle::getEdges()
 {
 	return _edges;
 }
 
-const std::array<alg::MeshEdge*, TRIANGLE_VERTEX_AND_EDGE_COUNT>& alg::MeshTriangle::getEdges() const
+const std::array<alg::mesh::MeshEdge*, TRIANGLE_VERTEX_AND_EDGE_COUNT>& alg::mesh::MeshTriangle::getEdges() const
 {
 	return _edges;
 }
 
-bool alg::MeshTriangle::intersects(const alg::MeshTriangle* triangle) const
+bool alg::mesh::MeshTriangle::intersects(const alg::mesh::MeshTriangle* triangle) const
 {
 	if (triangle == nullptr) return false;
 
@@ -333,7 +333,7 @@ bool alg::MeshTriangle::intersects(const alg::MeshTriangle* triangle) const
 	return false;
 }
 
-bool alg::MeshTriangle::intersects(const alg::MeshEdge* edge) const
+bool alg::mesh::MeshTriangle::intersects(const alg::mesh::MeshEdge* edge) const
 {
 	if (edge == nullptr) return false;
 	for (auto item : _edges)
@@ -347,17 +347,17 @@ bool alg::MeshTriangle::intersects(const alg::MeshEdge* edge) const
 	return false;
 }
 
-const math::Circle& alg::MeshTriangle::getCircumcircle() const
+const math::Circle& alg::mesh::MeshTriangle::getCircumcircle() const
 {
 	return _circumcircle;
 }
 
-const math::Vector3& alg::MeshTriangle::getNormal() const
+const math::Vector3& alg::mesh::MeshTriangle::getNormal() const
 {
 	return _normal;
 }
 
-const alg::MeshEdge* alg::MeshTriangle::getSharedEdgeWith(const MeshTriangle* triangle) const
+const alg::mesh::MeshEdge* alg::mesh::MeshTriangle::getSharedEdgeWith(const MeshTriangle* triangle) const
 {
 	if (triangle == nullptr) return false;
 	std::vector<int> vecIndices;
@@ -377,7 +377,7 @@ const alg::MeshEdge* alg::MeshTriangle::getSharedEdgeWith(const MeshTriangle* tr
 	return nullptr;
 }
 
-bool alg::MeshTriangle::hasSharedEdgeWith(const MeshTriangle* triangle) const
+bool alg::mesh::MeshTriangle::hasSharedEdgeWith(const MeshTriangle* triangle) const
 {
 	if (triangle == nullptr) return false;
 	std::vector<int> vecIndices;
@@ -392,7 +392,7 @@ bool alg::MeshTriangle::hasSharedEdgeWith(const MeshTriangle* triangle) const
 	return vecIndices.size() == 2;
 }
 
-void alg::MeshTriangle::decompose()
+void alg::mesh::MeshTriangle::decompose()
 {
 	for (int i = 0; i < TRIANGLE_VERTEX_AND_EDGE_COUNT; i++)
 	{
@@ -405,7 +405,7 @@ void alg::MeshTriangle::decompose()
 	}
 }
 
-std::set<alg::MeshTriangle*> alg::MeshTriangle::getSharedEdgeTriangles()
+std::set<alg::mesh::MeshTriangle*> alg::mesh::MeshTriangle::getSharedEdgeTriangles()
 {
 	std::set<MeshTriangle*> neighbors;
 
@@ -433,7 +433,7 @@ std::set<alg::MeshTriangle*> alg::MeshTriangle::getSharedEdgeTriangles()
 	return neighbors;
 }
 
-bool alg::MeshTriangle::equal(const MeshTriangle& vertex)
+bool alg::mesh::MeshTriangle::equal(const MeshTriangle& vertex)
 {
 	for (size_t i = 0; i < TRIANGLE_VERTEX_AND_EDGE_COUNT; i++)
 	{

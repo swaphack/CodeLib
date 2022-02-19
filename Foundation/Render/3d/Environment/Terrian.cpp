@@ -84,7 +84,7 @@ void render::Terrian::onTerrianChange()
             std::vector<int> indices;
             std::vector<phy::Color4F> colorData;
 
-            alg::DiamondSquareTerrian terrian;
+            alg::mesh::DiamondSquareTerrian terrian;
             terrian.setOffset(_terrianHeight.getMinValue(), _terrianHeight.getMaxValue());
             terrian.setPoints(math::Vector3(0, 0, 0), math::Vector3(getTerrianWidth(), 0, 0),
                 math::Vector3(getTerrianWidth(), 0, getTerrianLength()), math::Vector3(0, 0, getTerrianLength()));

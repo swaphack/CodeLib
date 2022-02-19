@@ -1,15 +1,15 @@
 #include "BinPacking2D.h"
 #include <algorithm>
 
-alg::BinPacking2D::BinPacking2D()
+alg::space::BinPacking2D::BinPacking2D()
 {
 }
 
-alg::BinPacking2D::~BinPacking2D()
+alg::space::BinPacking2D::~BinPacking2D()
 {
 }
 
-void alg::BinPacking2D::addItem(int32_t id, int32_t width, int32_t height)
+void alg::space::BinPacking2D::addItem(int32_t id, int32_t width, int32_t height)
 {
 	Item item;
 	item.id = id;
@@ -18,7 +18,7 @@ void alg::BinPacking2D::addItem(int32_t id, int32_t width, int32_t height)
 	_items.push_back(item);
 }
 
-void alg::BinPacking2D::removeItem(int32_t id)
+void alg::space::BinPacking2D::removeItem(int32_t id)
 {
 	for (size_t i = 0; i < _items.size(); i++)
 	{
@@ -30,12 +30,12 @@ void alg::BinPacking2D::removeItem(int32_t id)
 	}
 }
 
-void alg::BinPacking2D::removeAllItems()
+void alg::space::BinPacking2D::removeAllItems()
 {
 	_items.clear();
 }
 
-void alg::BinPacking2D::sortItems(bool rotate)
+void alg::space::BinPacking2D::sortItems(bool rotate)
 {
 	std::map<int32_t, int32_t> mapAreas;
 
@@ -61,7 +61,7 @@ void alg::BinPacking2D::sortItems(bool rotate)
 	});
 }
 
-bool alg::BinPacking2D::getPackWay(int width, PackingMethod method, std::vector<Box>& boxes)
+bool alg::space::BinPacking2D::getPackWay(int width, PackingMethod method, std::vector<Box>& boxes)
 {
 	if (_items.size() == 0)
 	{
@@ -134,7 +134,7 @@ bool alg::BinPacking2D::getPackWay(int width, PackingMethod method, std::vector<
 	return true;
 }
 
-bool alg::BinPacking2D::getHybridPackWay(int width, int height, PackingMethod method, std::vector<Box>& boxes)
+bool alg::space::BinPacking2D::getHybridPackWay(int width, int height, PackingMethod method, std::vector<Box>& boxes)
 {
 	std::vector<Box> firstBoxes;
 	if (!getPackWay(width, method, firstBoxes))
@@ -189,7 +189,7 @@ bool alg::BinPacking2D::getHybridPackWay(int width, int height, PackingMethod me
 	return true;
 }
 
-bool alg::BinPacking2D::createPackWayWithFFDH(Box& box, const std::vector<Item>& items, std::vector<Item>& remains)
+bool alg::space::BinPacking2D::createPackWayWithFFDH(Box& box, const std::vector<Item>& items, std::vector<Item>& remains)
 {
 	remains = items;
 	for (const auto& item : items)
@@ -208,7 +208,7 @@ bool alg::BinPacking2D::createPackWayWithFFDH(Box& box, const std::vector<Item>&
 }
 
 
-bool alg::BinPacking2D::createPackWayWithNFDH(Box& box, const std::vector<Item>& items, std::vector<Item>& remains)
+bool alg::space::BinPacking2D::createPackWayWithNFDH(Box& box, const std::vector<Item>& items, std::vector<Item>& remains)
 {
 	remains = items;
 	for (const auto& item : items)
@@ -230,7 +230,7 @@ bool alg::BinPacking2D::createPackWayWithNFDH(Box& box, const std::vector<Item>&
 	return true;
 }
 
-bool alg::BinPacking2D::createPackWayWithBFDH(Box& box, const std::vector<Item>& items, std::vector<Item>& remains)
+bool alg::space::BinPacking2D::createPackWayWithBFDH(Box& box, const std::vector<Item>& items, std::vector<Item>& remains)
 {
 	remains = items;
 	for (const auto& item : items)

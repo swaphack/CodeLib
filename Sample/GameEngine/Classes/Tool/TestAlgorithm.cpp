@@ -168,8 +168,8 @@ void TestAlgorithm::testDelaunay()
 
 	math::Rect rect = (math::Rect)rectPoints;
 
-	alg::Delaunay delaunay;
-	alg::Voronoi voronoi;
+	alg::mesh::Delaunay delaunay;
+	alg::mesh::Voronoi voronoi;
 
 	auto triagles = delaunay.createWithBowyerWatson(rectPoints, points);
 	//drawTriangles(triagles);

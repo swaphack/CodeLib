@@ -5,7 +5,7 @@
 #include "Common/Scene/Camera.h"
 
 // ºÐ×Ó¿Õ¼ä
-alg::OcTree<math::Cuboids, int, render::Box3DProtocol*> _quadTree;
+alg::space::OcTree<math::Cuboids, int, render::Box3DProtocol*> _quadTree;
 
 render::Box3DSpace::Box3DSpace()
 {

@@ -3,21 +3,21 @@
 #include "MeshEdge.h"
 #include "MeshPolygon.h"
 
-alg::MeshPolygonEdge::MeshPolygonEdge(MeshEdge* edge)
+alg::mesh::MeshPolygonEdge::MeshPolygonEdge(MeshEdge* edge)
 {
     _edge = edge;
 }
 
-alg::MeshPolygonEdge::~MeshPolygonEdge()
+alg::mesh::MeshPolygonEdge::~MeshPolygonEdge()
 {
 }
 
-alg::MeshEdge* alg::MeshPolygonEdge::getEdge() const
+alg::mesh::MeshEdge* alg::mesh::MeshPolygonEdge::getEdge() const
 { 
 	return _edge;
 }
 
-alg::MeshVertex* alg::MeshPolygonEdge::addSharedPointEdge(MeshPolygonEdge* polygonEdge)
+alg::mesh::MeshVertex* alg::mesh::MeshPolygonEdge::addSharedPointEdge(MeshPolygonEdge* polygonEdge)
 {
     if (polygonEdge == nullptr || _edge == polygonEdge->_edge) return nullptr;
     auto point = _edge->getSharedPoint(polygonEdge->_edge);
@@ -29,7 +29,7 @@ alg::MeshVertex* alg::MeshPolygonEdge::addSharedPointEdge(MeshPolygonEdge* polyg
     return point;
 }
 
-std::vector<alg::MeshPolygonEdge*>* alg::MeshPolygonEdge::getPolygonEdges(MeshVertex* point)
+std::vector<alg::mesh::MeshPolygonEdge*>* alg::mesh::MeshPolygonEdge::getPolygonEdges(MeshVertex* point)
 {
     std::vector<MeshPolygonEdge*> values;
     auto it = _sharedPointEdges.find(point);
@@ -37,7 +37,7 @@ std::vector<alg::MeshPolygonEdge*>* alg::MeshPolygonEdge::getPolygonEdges(MeshVe
     return &it->second;
 }
 
-alg::MeshPolygonEdge* alg::MeshPolygonEdge::getConvexPolygonEdge(MeshVertex* endPoint)
+alg::mesh::MeshPolygonEdge* alg::mesh::MeshPolygonEdge::getConvexPolygonEdge(MeshVertex* endPoint)
 {
     if (endPoint == nullptr) return nullptr;
     auto startPoint = _edge->getOtherPoint(endPoint);
@@ -86,7 +86,7 @@ alg::MeshPolygonEdge* alg::MeshPolygonEdge::getConvexPolygonEdge(MeshVertex* end
     }
 }
 
-void alg::MeshPolygonEdge::linkTo(MeshPolygon* polygon)
+void alg::mesh::MeshPolygonEdge::linkTo(MeshPolygon* polygon)
 {
     if (polygon == nullptr)
     {
@@ -95,13 +95,13 @@ void alg::MeshPolygonEdge::linkTo(MeshPolygon* polygon)
     _sharedEdgePolygons.insert(polygon);
 }
 
-void alg::MeshPolygonEdge::_addSharedPointEdge(MeshVertex* point, MeshPolygonEdge* polygonEdge)
+void alg::mesh::MeshPolygonEdge::_addSharedPointEdge(MeshVertex* point, MeshPolygonEdge* polygonEdge)
 {
     if (point == nullptr || polygonEdge == nullptr) return;
     _sharedPointEdges[point].push_back(polygonEdge);
 }
 
-std::map<alg::MeshEdge*, alg::MeshPolygonEdge*> alg::MeshPolygonEdge::createPolygonEdges(const std::set<MeshEdge*>& edges)
+std::map<alg::mesh::MeshEdge*, alg::mesh::MeshPolygonEdge*> alg::mesh::MeshPolygonEdge::createPolygonEdges(const std::set<MeshEdge*>& edges)
 {
     std::map<MeshEdge*, MeshPolygonEdge*> polygonEdges;
 
@@ -126,7 +126,7 @@ std::map<alg::MeshEdge*, alg::MeshPolygonEdge*> alg::MeshPolygonEdge::createPoly
     return polygonEdges;
 }
 
-math::Polygon alg::MeshPolygonEdge::getConvexPolygon(MeshPolygonEdge* polygonEdge)
+math::Polygon alg::mesh::MeshPolygonEdge::getConvexPolygon(MeshPolygonEdge* polygonEdge)
 {
     MeshPolygon polygon;
 

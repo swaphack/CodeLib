@@ -3,7 +3,7 @@
 
 int main(int argc, char** argv)
 {
-	alg::BinPacking2D bin2D;
+	alg::space::BinPacking2D bin2D;
 	bin2D.addItem(0, 10, 10);
 	bin2D.addItem(1, 10, 10);
 	bin2D.addItem(2, 3, 5);

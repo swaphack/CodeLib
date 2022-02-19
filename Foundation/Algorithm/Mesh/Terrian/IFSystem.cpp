@@ -1,51 +1,51 @@
 #include "IFSystem.h"
 
-alg::IFSystem::IFSystem()
+alg::mesh::IFSystem::IFSystem()
 {
 }
 
-const std::string& alg::IFSystem::getOrigin() const
+const std::string& alg::mesh::IFSystem::getOrigin() const
 {
     return _origin;
 }
 
-void alg::IFSystem::setOrigin(const std::string& origin)
+void alg::mesh::IFSystem::setOrigin(const std::string& origin)
 {
     _origin = origin;
 }
 
-void alg::IFSystem::addWord(const std::string& word)
+void alg::mesh::IFSystem::addWord(const std::string& word)
 {
     _words.push_back(word);
 }
 
-void alg::IFSystem::removeWord(const std::string& word)
+void alg::mesh::IFSystem::removeWord(const std::string& word)
 {
     auto it = std::find(_words.begin(), _words.end(), word);
     if (it != _words.end()) _words.erase(it);
 }
 
-void alg::IFSystem::setGenerateSymbol(const std::string& symbol)
+void alg::mesh::IFSystem::setGenerateSymbol(const std::string& symbol)
 {
     _generateSymbol = symbol;
 }
 
-const std::string& alg::IFSystem::getGenerateSymbol()
+const std::string& alg::mesh::IFSystem::getGenerateSymbol()
 {
     return _generateSymbol;
 }
 
-void alg::IFSystem::setWordHandle(const WordHandle& handle)
+void alg::mesh::IFSystem::setWordHandle(const WordHandle& handle)
 {
     _wordHandle = handle;
 }
 
-const alg::IFSystem::WordHandle& alg::IFSystem::getWordHandle() const
+const alg::mesh::IFSystem::WordHandle& alg::mesh::IFSystem::getWordHandle() const
 {
     return _wordHandle;
 }
 
-void alg::IFSystem::addRule(float probability, const std::string& content)
+void alg::mesh::IFSystem::addRule(float probability, const std::string& content)
 {
     if (content.empty() || _generateSymbol.empty())
     {
@@ -70,7 +70,7 @@ void alg::IFSystem::addRule(float probability, const std::string& content)
     _rules[key].push_back(ruleInfo);
 }
 
-std::string alg::IFSystem::getRandomRule(const std::string& key)
+std::string alg::mesh::IFSystem::getRandomRule(const std::string& key)
 {
     if (_rules.size() == 0)
     {
@@ -109,7 +109,7 @@ std::string alg::IFSystem::getRandomRule(const std::string& key)
     return "";
 }
 
-std::string alg::IFSystem::createText(int count)
+std::string alg::mesh::IFSystem::createText(int count)
 {
     if (_origin.empty()
         || _rules.size() == 0
@@ -138,7 +138,7 @@ std::string alg::IFSystem::createText(int count)
     return text;
 }
 
-std::string alg::IFSystem::createRoundText(const std::string& text, const std::map<int, std::vector<std::string>>& keys)
+std::string alg::mesh::IFSystem::createRoundText(const std::string& text, const std::map<int, std::vector<std::string>>& keys)
 {
     if (text.empty() || keys.size() == 0)
     {
@@ -181,7 +181,7 @@ std::string alg::IFSystem::createRoundText(const std::string& text, const std::m
     return roundText.getString();
 }
 
-void alg::IFSystem::parseText(const std::string& text)
+void alg::mesh::IFSystem::parseText(const std::string& text)
 {
     if (text.empty())
     {

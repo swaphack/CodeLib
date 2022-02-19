@@ -4,6 +4,7 @@
 #include <vector>
 
 using namespace alg;
+using namespace alg::mesh;
 
 void testMesh()
 {

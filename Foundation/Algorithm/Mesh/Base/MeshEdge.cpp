@@ -2,7 +2,7 @@
 #include "MeshTriangle.h"
 #include "PointSet.h"
 
-alg::MeshEdge::MeshEdge()
+alg::mesh::MeshEdge::MeshEdge()
 {
 	for (size_t i = 0; i < EDGE_VERTEX_COUNT; i++)
 	{
@@ -10,17 +10,17 @@ alg::MeshEdge::MeshEdge()
 	}
 }
 
-alg::MeshEdge::MeshEdge(PointSet* pointSet, const math::Vector3& pointA, const math::Vector3& pointB)
+alg::mesh::MeshEdge::MeshEdge(PointSet* pointSet, const math::Vector3& pointA, const math::Vector3& pointB)
 {
 	this->setVertexes(pointSet, pointA, pointB);
 }
 
-alg::MeshEdge::MeshEdge(const MeshVertex* pVertexA, const MeshVertex* pVertexB)
+alg::mesh::MeshEdge::MeshEdge(const MeshVertex* pVertexA, const MeshVertex* pVertexB)
 {
 	this->setVertexes(pVertexA, pVertexB);
 }
 
-alg::MeshEdge::~MeshEdge()
+alg::mesh::MeshEdge::~MeshEdge()
 {
 	for (auto item : _vertexes)
 	{
@@ -33,7 +33,7 @@ alg::MeshEdge::~MeshEdge()
 	}
 }
 
-void alg::MeshEdge::setVertexes(PointSet* pointSet, const math::Vector3& pointA, const math::Vector3& pointB)
+void alg::mesh::MeshEdge::setVertexes(PointSet* pointSet, const math::Vector3& pointA, const math::Vector3& pointB)
 {
 	if (pointSet == nullptr) return;
 	this->setPointSet(pointSet);
@@ -43,7 +43,7 @@ void alg::MeshEdge::setVertexes(PointSet* pointSet, const math::Vector3& pointA,
 	this->setVertexes(pVertexA, pVertexB);
 }
 
-void alg::MeshEdge::setVertexes(const MeshVertex* pVertexA, const MeshVertex* pVertexB)
+void alg::mesh::MeshEdge::setVertexes(const MeshVertex* pVertexA, const MeshVertex* pVertexB)
 {
 	if (pVertexA == nullptr || pVertexB == nullptr) return;
 
@@ -54,7 +54,7 @@ void alg::MeshEdge::setVertexes(const MeshVertex* pVertexA, const MeshVertex* pV
 	_lineSegment.setDest(pVertexB->getPosition());
 }
 
-void alg::MeshEdge::setVertex(int index, const MeshVertex* pVertex)
+void alg::mesh::MeshEdge::setVertex(int index, const MeshVertex* pVertex)
 {
 	if (index < 0 || index >= EDGE_VERTEX_COUNT) return;
 
@@ -73,7 +73,7 @@ void alg::MeshEdge::setVertex(int index, const MeshVertex* pVertex)
 	}
 }
 
-bool alg::MeshEdge::hasVertex(const MeshVertex* pVertex) const
+bool alg::mesh::MeshEdge::hasVertex(const MeshVertex* pVertex) const
 {
 	if (pVertex == nullptr) return false;
 
@@ -84,28 +84,28 @@ bool alg::MeshEdge::hasVertex(const MeshVertex* pVertex) const
 	return false;
 }
 
-const alg::MeshVertex* alg::MeshEdge::getVertex(int index) const
+const alg::mesh::MeshVertex* alg::mesh::MeshEdge::getVertex(int index) const
 {
 	if (index < 0 || index >= EDGE_VERTEX_COUNT) return nullptr;
 
 	return _vertexes[index];
 }
 
-alg::MeshVertex* alg::MeshEdge::getVertex(int index)
+alg::mesh::MeshVertex* alg::mesh::MeshEdge::getVertex(int index)
 {
 	if (index < 0 || index >= EDGE_VERTEX_COUNT) return nullptr;
 
 	return _vertexes[index];
 }
 
-math::Vector3 alg::MeshEdge::getPosition(int index) const
+math::Vector3 alg::mesh::MeshEdge::getPosition(int index) const
 {
 	auto pVertex = getVertex(index);
 	if (pVertex == nullptr) return math::Vector3();
 	return pVertex->getPosition();
 }
 
-math::Vector3 alg::MeshEdge::getDirection(const MeshVertex* destPoint)
+math::Vector3 alg::mesh::MeshEdge::getDirection(const MeshVertex* destPoint)
 {
 	if (_vertexes[0] == nullptr || _vertexes[1] == nullptr || destPoint == nullptr)
 	{
@@ -124,19 +124,19 @@ math::Vector3 alg::MeshEdge::getDirection(const MeshVertex* destPoint)
 	return math::Vector3();
 }
 
-const math::LineSegment3d& alg::MeshEdge::getLineSegment() const
+const math::LineSegment3d& alg::mesh::MeshEdge::getLineSegment() const
 {
 	return _lineSegment;
 }
 
-bool alg::MeshEdge::intersects(const MeshEdge* edge) const 
+bool alg::mesh::MeshEdge::intersects(const MeshEdge* edge) const 
 {
 	if (edge == nullptr) return false;
 	math::Vector3 point;
 	return _lineSegment.intersects(edge->getLineSegment(), point);
 }
 
-bool alg::MeshEdge::isAdjacentTriangleIntersect() const
+bool alg::mesh::MeshEdge::isAdjacentTriangleIntersect() const
 {
 	if (_adjacentTriangles.size() > 2)
 	{
@@ -176,7 +176,7 @@ bool alg::MeshEdge::isAdjacentTriangleIntersect() const
 	return nClockWiseState == nCounterClockWiseState;
 }
 
-void alg::MeshEdge::addAdjacentTriangle(const MeshTriangle* triangle)
+void alg::mesh::MeshEdge::addAdjacentTriangle(const MeshTriangle* triangle)
 {
 	if (triangle == nullptr)
 	{
@@ -212,7 +212,7 @@ void alg::MeshEdge::addAdjacentTriangle(const MeshTriangle* triangle)
 	}
 }
 
-void alg::MeshEdge::removeAdjacentTriangle(const MeshTriangle* triangle)
+void alg::mesh::MeshEdge::removeAdjacentTriangle(const MeshTriangle* triangle)
 {
 	if (triangle == nullptr)
 	{
@@ -245,17 +245,17 @@ void alg::MeshEdge::removeAdjacentTriangle(const MeshTriangle* triangle)
 	}
 }
 
-const std::set<alg::MeshTriangle*>& alg::MeshEdge::getAdjacentTriangles() const
+const std::set<alg::mesh::MeshTriangle*>& alg::mesh::MeshEdge::getAdjacentTriangles() const
 {
 	return _adjacentTriangles;
 }
 
-std::set<alg::MeshTriangle*>& alg::MeshEdge::getAdjacentTriangles()
+std::set<alg::mesh::MeshTriangle*>& alg::mesh::MeshEdge::getAdjacentTriangles()
 {
 	return _adjacentTriangles;
 }
 
-bool alg::MeshEdge::equal(const MeshEdge* pEdge) const
+bool alg::mesh::MeshEdge::equal(const MeshEdge* pEdge) const
 {
 	for (size_t i = 0; i < EDGE_VERTEX_COUNT; i++)
 	{
@@ -267,7 +267,7 @@ bool alg::MeshEdge::equal(const MeshEdge* pEdge) const
 	return true;
 }
 
-math::Vector3 alg::MeshEdge::getDirection(const MeshVertex* destPoint) const
+math::Vector3 alg::mesh::MeshEdge::getDirection(const MeshVertex* destPoint) const
 {
 	math::Vector3 dir;
 	if (destPoint == nullptr) return dir;
@@ -281,7 +281,7 @@ math::Vector3 alg::MeshEdge::getDirection(const MeshVertex* destPoint) const
 *	获取另一个端点
 */
 
-alg::MeshVertex* alg::MeshEdge::getOtherPoint(const MeshVertex* onePoint) const
+alg::mesh::MeshVertex* alg::mesh::MeshEdge::getOtherPoint(const MeshVertex* onePoint) const
 {
 	if (onePoint == nullptr) return nullptr;
 	if (onePoint->equal(_vertexes[0]))
@@ -299,14 +299,14 @@ alg::MeshVertex* alg::MeshEdge::getOtherPoint(const MeshVertex* onePoint) const
 *	获取共端点另一个不相同的点
 */
 
-alg::MeshVertex* alg::MeshEdge::GetOtherPointWithSharedPoint(MeshEdge* edge) const
+alg::mesh::MeshVertex* alg::mesh::MeshEdge::GetOtherPointWithSharedPoint(MeshEdge* edge) const
 {
 	auto point = getSharedPoint(edge);
 	if (point == nullptr) return nullptr;
 	return getOtherPoint(point);
 }
 
-alg::MeshVertex* alg::MeshEdge::getSharedPoint(MeshEdge* edge) const
+alg::mesh::MeshVertex* alg::mesh::MeshEdge::getSharedPoint(MeshEdge* edge) const
 {
 	if (edge == nullptr) return nullptr;
 	if (_vertexes[0]->equal(edge->getVertex(0)) || _vertexes[0]->equal(edge->getVertex(1)))

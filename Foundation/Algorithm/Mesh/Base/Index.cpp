@@ -5,23 +5,23 @@
 *	是否是相同的线段
 */
 
-bool alg::LineIndex::operator==(const LineIndex& target) const
+bool alg::mesh::LineIndex::operator==(const LineIndex& target) const
 {
 	return (target.VerticeIndex0 == VerticeIndex0 && target.VerticeIndex1 == VerticeIndex1)
 		|| (target.VerticeIndex0 == VerticeIndex1 && target.VerticeIndex1 == VerticeIndex0);
 }
 
-bool alg::LineIndex::operator!=(const LineIndex& target) const
+bool alg::mesh::LineIndex::operator!=(const LineIndex& target) const
 {
 	return ! (*this == target);
 }
 
-alg::LineIndex::LineIndex(int index0, int index1) :VerticeIndex0(index0), VerticeIndex1(index0)
+alg::mesh::LineIndex::LineIndex(int index0, int index1) :VerticeIndex0(index0), VerticeIndex1(index0)
 {
 
 }
 
-alg::TriangleIndex& alg::TriangleIndex::operator=(const TriangleIndex& target)
+alg::mesh::TriangleIndex& alg::mesh::TriangleIndex::operator=(const TriangleIndex& target)
 {
 	memcpy(VerticeIndex, target.VerticeIndex, sizeof(VerticeIndex));
 	memcpy(EdgeIndex, target.EdgeIndex, sizeof(EdgeIndex));
@@ -30,7 +30,7 @@ alg::TriangleIndex& alg::TriangleIndex::operator=(const TriangleIndex& target)
 	return *this;
 }
 
-bool alg::TriangleIndex::isAllEdgeLinkToOtherTriangle()
+bool alg::mesh::TriangleIndex::isAllEdgeLinkToOtherTriangle()
 {
 	for (int i = 0; i < TRIANGLE_INDEX_COUNT; i++)
 	{
@@ -43,12 +43,12 @@ bool alg::TriangleIndex::isAllEdgeLinkToOtherTriangle()
 	return true;
 }
 
-bool alg::TriangleIndex::hasSameEdge(const TriangleIndex& target, std::vector<LineIndex>& outEdges)
+bool alg::mesh::TriangleIndex::hasSameEdge(const TriangleIndex& target, std::vector<LineIndex>& outEdges)
 {
 	return false;
 }
 
-void alg::TriangleIndex::sort(const TriangleIndex& target, TriangleIndex& outData)
+void alg::mesh::TriangleIndex::sort(const TriangleIndex& target, TriangleIndex& outData)
 {
 	outData = target;
 
