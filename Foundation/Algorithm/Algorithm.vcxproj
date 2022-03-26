@@ -134,15 +134,17 @@
     <ClInclude Include="Space\Bin\BinPacking2D.h" />
     <ClInclude Include="Space\Bin\import.h" />
     <ClInclude Include="Space\import.h" />
-    <ClInclude Include="Space\Index\BinaryTree.h" />
+    <ClInclude Include="Space\Index\CubeSpace.h" />
     <ClInclude Include="Space\Index\import.h" />
-    <ClInclude Include="Space\Index\OcTree.h" />
-    <ClInclude Include="Space\Index\QuadTree.h" />
+    <ClInclude Include="Space\Index\RectSpace.h" />
+    <ClInclude Include="Struct\BinaryTree.h" />
     <ClInclude Include="Struct\import.h" />
+    <ClInclude Include="Struct\OcTree.h" />
     <ClInclude Include="Struct\OneToOneDoubleRelationship.h" />
     <ClInclude Include="Struct\ObjectDetail.h" />
     <ClInclude Include="Struct\OneToOneRelationship.h" />
     <ClInclude Include="Struct\OneToManyRelationship.h" />
+    <ClInclude Include="Struct\QuadTree.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />

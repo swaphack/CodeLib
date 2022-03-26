@@ -164,15 +164,6 @@
     <ClInclude Include="Mesh\Core\PolygonReduction.h">
       <Filter>Mesh\Core</Filter>
     </ClInclude>
-    <ClInclude Include="Space\Index\BinaryTree.h">
-      <Filter>Space\Index</Filter>
-    </ClInclude>
-    <ClInclude Include="Space\Index\QuadTree.h">
-      <Filter>Space\Index</Filter>
-    </ClInclude>
-    <ClInclude Include="Space\Index\import.h">
-      <Filter>Space\Index</Filter>
-    </ClInclude>
     <ClInclude Include="Space\import.h">
       <Filter>Space</Filter>
     </ClInclude>
@@ -187,9 +178,6 @@
     </ClInclude>
     <ClInclude Include="Space\Bin\import.h">
       <Filter>Space\Bin</Filter>
-    </ClInclude>
-    <ClInclude Include="Space\Index\OcTree.h">
-      <Filter>Space\Index</Filter>
     </ClInclude>
     <ClInclude Include="Map\Path\TaskPath.h">
       <Filter>Map\Path</Filter>
@@ -229,6 +217,24 @@
     </ClInclude>
     <ClInclude Include="Mesh\Terrian\Tree.h">
       <Filter>Mesh\Terrian</Filter>
+    </ClInclude>
+    <ClInclude Include="Struct\QuadTree.h">
+      <Filter>Struct</Filter>
+    </ClInclude>
+    <ClInclude Include="Struct\OcTree.h">
+      <Filter>Struct</Filter>
+    </ClInclude>
+    <ClInclude Include="Struct\BinaryTree.h">
+      <Filter>Struct</Filter>
+    </ClInclude>
+    <ClInclude Include="Space\Index\import.h">
+      <Filter>Space\Index</Filter>
+    </ClInclude>
+    <ClInclude Include="Space\Index\RectSpace.h">
+      <Filter>Space\Index</Filter>
+    </ClInclude>
+    <ClInclude Include="Space\Index\CubeSpace.h">
+      <Filter>Space\Index</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

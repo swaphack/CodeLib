@@ -1,5 +1,4 @@
 #pragma once
 
-#include "BinaryTree.h"
-#include "QuadTree.h"
-#include "OcTree.h"
+#include "RectSpace.h"
+#include "CubeSpace.h"
