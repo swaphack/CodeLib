@@ -14,61 +14,24 @@ namespace alg
 		*	|
 		*	------->x
 		*/
-		template<const uint32_t Width, const uint32_t Height>
 		class RectMap : public RayMap
 		{
 		public:
-			RectMap()
-			{
-				this->init2DMap();
-			}
-			virtual ~RectMap()
-			{
-
-			}
+			RectMap(int width, int height);
+			virtual ~RectMap();
 		public:
 			/**
 			*	获取点坐标
 			*/
-			const math::Vector3* getPosition(uint32_t i, uint32_t j) const
-			{
-				assert(i < Width&& j < Height);
-
-				uint32_t nIndex = i * Width + j;
-
-				return getPoint(nIndex);
-			}
+			const math::Vector3* getPosition(uint32_t i, uint32_t j) const;
 		protected:
 			/**
 			*	初始化地图
 			*/
-			void init2DMap()
-			{
-				for (int i = 0; i < Height; i++)
-				{
-					for (int j = 0; j < Width; j++)
-					{
-
-						auto pCell = this->createCell();
-						pCell->setPosition(math::Vector2(static_cast<float>(i), static_cast<float>(j)));
-
-						uint32_t nIndex = pCell->getMapObjectID();
-						int32_t left = nIndex - 1;
-						int32_t right = nIndex + 1;
-						int32_t top = nIndex + Width;
-						int32_t bottom = nIndex - Width;
-
-						std::vector<uint32_t> relation;
-
-						if (j > 0) relation.push_back(left);
-						if (j < Width - 1) relation.push_back(right);
-						if (i > 0) relation.push_back(bottom);
-						if (i < Height - 1) relation.push_back(top);
-
-						this->addRayRelation(nIndex, relation);
-					}
-				}
-			}
+			void init2DMap(int width, int height);
+		private:
+			int _width = 0;
+			int _height = 0;
 		};
 
 	}

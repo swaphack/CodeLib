@@ -77,7 +77,7 @@ namespace alg
 			/**
 			*	随机获取一个未填充点
 			*/
-			bool getRandomUnFillPoint(uint32_t& index);
+			bool getRandomUnfillPoint(uint32_t& index);
 			/**
 			*	随机获取一个已填充点,熵值最小
 			*/

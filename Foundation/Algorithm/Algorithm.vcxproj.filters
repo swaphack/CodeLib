@@ -415,5 +415,29 @@
     <ClCompile Include="Mesh\Terrian\Tree.cpp">
       <Filter>Mesh\Terrian</Filter>
     </ClCompile>
+    <ClCompile Include="Map\Base\RelationTable.cpp">
+      <Filter>Map\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Map\Base\SlotRule.cpp">
+      <Filter>Map\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Map\Base\MapAssets.cpp">
+      <Filter>Map\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Map\Creator\MapCreator.cpp">
+      <Filter>Map\Creator</Filter>
+    </ClCompile>
+    <ClCompile Include="Map\Creator\MapObjects.cpp">
+      <Filter>Map\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Map\Base\Map.cpp">
+      <Filter>Map\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Map\Samples\PointMap.cpp">
+      <Filter>Map\Samples</Filter>
+    </ClCompile>
+    <ClCompile Include="Map\Samples\RectMap.cpp">
+      <Filter>Map\Samples</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

@@ -9,151 +9,62 @@ namespace alg
 		/*
 		*	关系二维表
 		*/
-		template<const uint32_t Column, const uint32_t Row>
 		class RelationTable : public MapObject
 		{
 		public:
-			RelationTable()
-			{
-				this->initRelationTable();
-			}
-			virtual ~RelationTable()
-			{
-
-			}
+			RelationTable();
+			RelationTable(uint32_t count);
+			RelationTable(uint32_t column, const uint32_t row);
+			virtual ~RelationTable();
 		public:
 			/**
-			*	设置值
+			*	设置值a[i][j]
 			*/
-			void setValue(uint32_t i, uint32_t j, uint8_t value)
-			{
-				if (i < Column && j < Row)
-				{
-					_relation[i][j] = value;
-				}
-			}
+			void setValue(uint32_t i, uint32_t j, uint8_t value);
 			/**
-			*	获取值
+			*	获取值a[i][j]
 			*/
-			uint8_t getValue(uint32_t i, uint32_t j) const
-			{
-				if (i < Column && j < Row)
-				{
-					return _relation[i][j];
-				}
-
-				return 0;
-			}
+			uint8_t getValue(uint32_t i, uint32_t j) const;
 
 			/**
 			*	获取关联的列
 			*/
-			bool getColumnRelations(uint32_t column, uint8_t value, std::vector<uint32_t>& relations)  const
-			{
-				if (column >= Column)
-				{
-					return false;
-				}
-
-				for (size_t i = 0; i < Column; i++)
-				{
-					if (getValue(i, column) == value)
-					{
-						relations.push_back(i);
-					}
-				}
-
-				return relations.size() > 0;
-			}
+			bool getColumnValues(uint32_t column, uint8_t value, std::vector<uint32_t>& relations)  const;
 
 			/**
 			*	获取关联的行
 			*/
-			bool getRowRelations(uint32_t row, uint8_t value, std::vector<uint32_t>& relations)  const
-			{
-				if (row >= Row)
-				{
-					return false;
-				}
-
-				for (size_t i = 0; i < Row; i++)
-				{
-					if (getValue(row, i) == value)
-					{
-						relations.push_back(i);
-					}
-				}
-
-				return relations.size() > 0;
-			}
-
+			bool getRowValues(uint32_t row, uint8_t value, std::vector<uint32_t>& relations)  const;
+			/**
+			*	获取值a[i][j]
+			*/
+			bool equal(uint32_t i, uint32_t j, uint8_t value) const;
 		public:
 			/**
 			*	初始化关系表
+			*	column 列数
+			*	row 行数
 			*/
-			void initRelationTable()
-			{
-				for (uint32_t i = 0; i < Column; i++)
-				{
-					for (uint32_t j = 0; j < Row; j++)
-					{
-						_relation[i][j] = 0;
-					}
-				}
-			}
+			void init(uint32_t column, const uint32_t row);
+			/**
+			*	清空
+			*/
+			void cleanup();
+			/**
+			*	列数
+			*/
+			int getColumn() const;
+			/**
+			*	行数
+			*/
+			int getRow() const;
 		private:
+			// 列数
+			int _column = 0;
+			// 行数
+			int _row = 0;
 			// 关系二维数组
-			uint8_t _relation[Column][Row];
-		};
-
-		/*
-		*	关系二维方阵表
-		*/
-		template<const uint32_t Count>
-		class RelationSquareTable : public RelationTable<Count, Count>
-		{
-			typedef RelationTable<Count, Count> base;
-		public:
-			RelationSquareTable() {}
-			virtual ~RelationSquareTable() {}
-		public:
-			/**
-			*	设置值
-			*/
-			void setValue(uint32_t i, uint32_t j, uint8_t value)
-			{
-				base::setValue(i, j, value);
-				base::setValue(j, i, value);
-			}
-
-			/**
-			*	获取值
-			*/
-			bool equal(uint32_t i, uint32_t j, uint8_t value) const
-			{
-				return base::getValue(i, j) == value || base::getValue(j, i) == value;
-			}
-
-			/**
-			*	获取关联的行
-			*/
-			bool getRelations(uint32_t index, uint8_t value, std::vector<uint32_t>& relations) const
-			{
-				if (index >= Count)
-				{
-					return false;
-				}
-
-				for (size_t i = 0; i < Count; i++)
-				{
-					if (base::getValue(index, i) == value)
-					{
-						relations.push_back(i);
-					}
-				}
-
-				return relations.size() > 0;
-			}
+			uint8_t* _relation = nullptr;
 		};
 	}
 }

@@ -21,6 +21,16 @@ bool alg::map::RayMapRelation::findWay(uint32_t toIndex) const
 {
 	return getRelationIndex(toIndex) >= 0;
 }
+
+//////////////////////////////////////////////////////////////////////////
+alg::map::RayMapRelationCreate::~RayMapRelationCreate()
+{
+}
+
+alg::map::MapObject* alg::map::RayMapRelationCreate::create()
+{
+	return new RayMapRelation();
+}
 //////////////////////////////////////////////////////////////////////////
 
 alg::map::RayMap::RayMap()
@@ -30,6 +40,27 @@ alg::map::RayMap::RayMap()
 
 alg::map::RayMap::~RayMap()
 {
+}
+
+
+void alg::map::RayMap::addRayRelation(uint32_t center, int length, uint32_t start, ...)
+{
+	va_list ap;
+	va_start(ap, start);
+	int32_t relationIndex = this->addRelation(length, start, ap);
+	va_end(ap);
+	if (relationIndex < 0) return;
+	_centerRayRelation[center] = relationIndex;
+}
+
+void alg::map::RayMap::addRayRelation(uint32_t Center, const std::vector<uint32_t>& relation)
+{
+	int32_t relationIndex = this->addRelation(relation);
+	if (relationIndex < 0)
+	{
+		return;
+	}
+	_centerRayRelation[Center] = relationIndex;
 }
 
 bool alg::map::RayMap::findNeighborCells(uint32_t srcIndex, std::vector<uint32_t>& neighboors) const
@@ -59,4 +90,3 @@ bool alg::map::RayMap::findNeighborCells(uint32_t srcIndex, std::vector<uint32_t
 
 	return neighboors.size() > 0;
 }
-

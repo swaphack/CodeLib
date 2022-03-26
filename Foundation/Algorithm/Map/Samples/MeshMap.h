@@ -15,7 +15,7 @@ namespace alg
 		*	/	\
 		*	\___/
 		*/
-		struct MeshMapRelation : public MapRelation
+		class MeshMapRelation : public MapRelation
 		{
 		public:
 			MeshMapRelation();
@@ -31,23 +31,23 @@ namespace alg
 			bool findWay(uint32_t fromIndex, uint32_t toIndex, std::vector<uint32_t>& indices) const;
 		private:
 		};
+		class MeshMapRelationCreate : public IMapObjectCreate
+		{
+		public:
+			virtual ~MeshMapRelationCreate();
+		public:
+			virtual MapObject* create();
+		};
 		/**
 		*	网格地图
 		*/
-		class MeshMap : public PointMap<MeshMapRelation>
+		class MeshMap : public PointMap
 		{
 		public:
 			MeshMap();
 			virtual ~MeshMap();
 		public:
-			template<uint32_t Length>
-			void addMeshRelation(uint32_t start, ...)
-			{
-				va_list ap;
-				va_start(ap, start);
-				int32_t relationIndex = this->addRelation<Length>(start, ap);
-				va_end(ap);
-			}
+			void addMeshRelation(int length, uint32_t start, ...);
 			/**
 			*	查找相邻节点
 			*/

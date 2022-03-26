@@ -72,7 +72,7 @@ bool alg::map::WFCAlgorithm::randomFillPoint(MapProtocol* map, CreateMapProtocol
 	bool canFillEmpty = false;
 	uint32_t nIndex = 0;
 
-	if (!getRandomUnFillPoint(nIndex))
+	if (!getRandomUnfillPoint(nIndex))
 	{
 		return false;
 	}
@@ -228,7 +228,7 @@ const std::map<uint32_t, uint32_t>& alg::map::WFCAlgorithm::getResult()
 *	随机获取一个未填充点
 */
 
-bool alg::map::WFCAlgorithm::getRandomUnFillPoint(uint32_t& index)
+bool alg::map::WFCAlgorithm::getRandomUnfillPoint(uint32_t& index)
 {
 	if (isFinish())
 	{

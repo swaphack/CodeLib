@@ -6,77 +6,40 @@ namespace alg
 {
 	namespace map
 	{
-		// 插槽规则
-		template<const int Count, const uint8_t DefaultValue>
-		class SlotRule : public RelationSquareTable<Count>
+		/**
+		*	插槽规则 二维方阵
+		*/
+		class SlotRule
 		{
-			typedef RelationSquareTable<Count> base;
 		public:
-			SlotRule() {}
-			virtual ~SlotRule() {}
+			SlotRule();
+			SlotRule(int count);
+			virtual ~SlotRule();
 		public:
 			/**
-			*	添加插槽规则
+			*	初始化
 			*/
-			template<uint32_t Key, uint32_t Length>
-			void addRelation(uint32_t startIndex, ...)
-			{
-				uint32_t* value = math::GET_PARAMETERS(Length, startIndex);
-				for (int i = 0; i < Length; i++)
-				{
-					base::setValue(Key, value[i], DefaultValue);
-				}
-				free(value);
-			}
+			void init(int count);
 			/**
 			*	添加插槽规则
 			*/
-			template<uint32_t Key, uint32_t Length>
-			void addRelation(uint32_t startIndex, va_list ap)
-			{
-				uint32_t* value = math::GET_PARAMETERS(Length, startIndex, ap);
-				for (int i = 0; i < Length; i++)
-				{
-					base::setValue(Key, value[i], DefaultValue);
-				}
-				free(value);
-			}
-			/**
-			*	添加插槽规则
-			*/
-			template<uint32_t Length>
-			void addRelation(uint32_t key, uint32_t startIndex, va_list ap)
-			{
-				uint32_t* value = math::GET_PARAMETERS(Length, startIndex, ap);
-				for (int i = 0; i < Length; i++)
-				{
-					base::setValue(key, value[i], DefaultValue);
-				}
-				free(value);
-			}
+			void addRelation(uint32_t key, const std::vector<uint32_t>& targets, uint8_t value);
 			/**
 			*	获取关联
 			*/
-			template<uint32_t Key>
-			bool getRelations(std::vector<uint32_t>& relations) const
-			{
-				return base::getRelations(Key, DefaultValue, relations);
-			}
-			/**
-			*	获取关联
-			*/
-			bool getRelations(uint32_t Key, std::vector<uint32_t>& relations) const
-			{
-				return base::getRelations(Key, DefaultValue, relations);
-			}
+			bool getRelations(uint32_t key, uint8_t value, std::vector<uint32_t>& relations) const;
 
 			/**
 			*	判断两者是否有关联
 			*/
-			bool hasRelation(uint32_t src, uint32_t dest)
-			{
-				return base::equal(src, dest, DefaultValue);
-			}
+			bool hasRelation(uint32_t src, uint32_t dest, uint8_t value) const;
+			/**
+			*	重置所有关系
+			*/
+			void resetAllRelations(uint8_t value);
+		private:
+			// 关系表
+			RelationTable _table;
 		};
 	}
 }

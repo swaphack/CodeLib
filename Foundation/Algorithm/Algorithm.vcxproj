@@ -147,16 +147,24 @@
   <ItemGroup>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Map\Base\CombineSlots.cpp" />
+    <ClCompile Include="Map\Base\Map.cpp" />
+    <ClCompile Include="Map\Base\MapAssets.cpp" />
     <ClCompile Include="Map\Base\MapCell.cpp" />
     <ClCompile Include="Map\Base\Module.cpp" />
     <ClCompile Include="Map\Base\MapObject.cpp" />
     <ClCompile Include="Map\Base\MapRelation.cpp" />
+    <ClCompile Include="Map\Base\RelationTable.cpp" />
+    <ClCompile Include="Map\Base\SlotRule.cpp" />
     <ClCompile Include="Map\Base\Slots.cpp" />
+    <ClCompile Include="Map\Creator\MapCreator.cpp" />
+    <ClCompile Include="Map\Creator\MapObjects.cpp" />
     <ClCompile Include="Map\Creator\MultiState.cpp" />
     <ClCompile Include="Map\Creator\WFCAlgorithm.cpp" />
     <ClCompile Include="Map\Path\AStar.cpp" />
     <ClCompile Include="Map\Path\Path.cpp" />
     <ClCompile Include="Map\Path\TaskPath.cpp" />
+    <ClCompile Include="Map\Samples\PointMap.cpp" />
+    <ClCompile Include="Map\Samples\RectMap.cpp" />
     <ClCompile Include="Map\Samples\RectMapCreator.cpp" />
     <ClCompile Include="Map\Samples\CubeMapCreator.cpp" />
     <ClCompile Include="Map\Samples\MeshMap.cpp" />

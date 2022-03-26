@@ -16,7 +16,7 @@ namespace alg
 		*	/\
 		*
 		*/
-		struct RayMapRelation : public MapRelation
+		class RayMapRelation : public MapRelation
 		{
 		public:
 			RayMapRelation();
@@ -31,8 +31,17 @@ namespace alg
 			*/
 			bool findWay(uint32_t toIndex) const;
 		};
+
+		class RayMapRelationCreate : public IMapObjectCreate
+		{
+		public:
+			virtual ~RayMapRelationCreate();
+		public:
+			virtual MapObject* create();
+		};
+
 		//////////////////////////////////////////////////////////////////////////
-		class RayMap : public PointMap<RayMapRelation>
+		class RayMap : public PointMap
 		{
 		public:
 			RayMap();
@@ -41,61 +50,12 @@ namespace alg
 			/**
 			*	添加射线关系
 			*/
-			template<uint32_t Length>
-			void addRayRelation(uint32_t Center, uint32_t start, ...)
-			{
-				va_list ap;
-				va_start(ap, start);
-				int32_t relationIndex = this->addRelation<Length>(start, ap);
-				va_end(ap);
-				if (relationIndex < 0)
-				{
-					return;
-				}
-				_centerRayRelation[Center] = relationIndex;
-			}
+			void addRayRelation(uint32_t center, int length, uint32_t start, ...);
 
 			/**
 			*	添加射线关系
 			*/
-			template<uint32_t Center, uint32_t Length>
-			void addRayRelation(uint32_t start, ...)
-			{
-				va_list ap;
-				va_start(ap, start);
-				int32_t relationIndex = this->addRelation<Length>(start, ap);
-				va_end(ap);
-				if (relationIndex < 0)
-				{
-					return;
-				}
-				_centerRayRelation[Center] = relationIndex;
-			}
-			/**
-			*	添加射线关系
-			*/
-			void addRayRelation(uint32_t Center, const std::vector<uint32_t>& relation)
-			{
-				int32_t relationIndex = this->addRelation(relation);
-				if (relationIndex < 0)
-				{
-					return;
-				}
-				_centerRayRelation[Center] = relationIndex;
-			}
-			/**
-			*	添加射线关系
-			*/
-			template<uint32_t Center>
-			void addRayRelation(const std::vector<uint32_t>& relation)
-			{
-				int32_t relationIndex = this->addRelation(relation);
-				if (relationIndex < 0)
-				{
-					return;
-				}
-				_centerRayRelation[Center] = relationIndex;
-			}
+			void addRayRelation(uint32_t Center, const std::vector<uint32_t>& relation);
 			/**
 			*	查找相邻节点
 			*/

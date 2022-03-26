@@ -17,6 +17,8 @@ namespace alg
 			typedef std::function<bool(const Condtion& a, const Key& b)> CondtionIncludeFunc;
 			typedef std::function<bool(const Condtion& a, std::vector<Condtion>& b)> CondtionDivideFunc;
 
+#define QUAD_TREE_NODE_COUNT 4
+
 			// 节点
 			struct TreeNode
 			{
@@ -25,14 +27,8 @@ namespace alg
 				Condtion cond;
 				// 包含项
 				std::map<Key, Element> items;
-				// 西北
-				TreeNode* NW = nullptr;
-				// 东北
-				TreeNode* NE = nullptr;
-				// 西南
-				TreeNode* SW = nullptr;
-				// 东南
-				TreeNode* SE = nullptr;
+				// 子节点
+				TreeNode* Children[QUAD_TREE_NODE_COUNT] = nullptr;
 			};
 		public:
 			QuadTree()
@@ -145,19 +141,12 @@ namespace alg
 
 				if (!isInclude(node->cond, id)) return false;
 				bool bAdd = false;
-				if (addNode(node->NW, id, item)) bAdd = true;
-				if (addNode(node->NE, id, item)) bAdd = true;
-				if (addNode(node->SW, id, item)) bAdd = true;
-				if (addNode(node->SE, id, item)) bAdd = true;
+				for (int i = 0; i < QUAD_TREE_NODE_COUNT; i++)
+				{
+					if (addNode(node->Children, id, item)) bAdd = true;
+				}
 				if (bAdd)
 				{
-					if (node->NW != nullptr || node->NE != nullptr || node->SW != nullptr || node->SE != nullptr)
-					{
-						if (node->items.size() > 0)
-						{
-							int a = 1;
-						}
-					}
 					return true;
 				}
 
@@ -169,21 +158,20 @@ namespace alg
 					{// 不可再分割
 						return true;
 					}
-					if (b.size() != 4) return false;
-
-					node->NW = createNode(b[0]);
-					node->NE = createNode(b[1]);
-					node->SW = createNode(b[2]);
-					node->SE = createNode(b[3]);
+					if (b.size() != QUAD_TREE_NODE_COUNT) return false;
+					for (int i = 0; i < QUAD_TREE_NODE_COUNT; i++)
+					{
+						node->Children[i] = createNode(b[i]);
+					}
 
 					auto items = node->items;
 					node->items.clear();
 					for (const auto& item : items)
 					{
-						addNode(node->NW, item.first, item.second);
-						addNode(node->NE, item.first, item.second);
-						addNode(node->SW, item.first, item.second);
-						addNode(node->SE, item.first, item.second);
+						for (int i = 0; i < QUAD_TREE_NODE_COUNT; i++)
+						{
+							addNode(node->Children, item.first, item.second);
+						}
 					}
 				}
 
@@ -199,11 +187,10 @@ namespace alg
 				{
 					return false;
 				}
-
-				removeNode(node->NW, id);
-				removeNode(node->NE, id);
-				removeNode(node->SW, id);
-				removeNode(node->SE, id);
+				for (int i = 0; i < QUAD_TREE_NODE_COUNT; i++)
+				{
+					removeNode(node->Children, id);
+				}
 
 				if (node->items.size() == 0)
 				{
@@ -224,11 +211,10 @@ namespace alg
 			void cleanNode(TreeNode*& node)
 			{
 				if (node == nullptr) return;
-
-				cleanNode(node->NW);
-				cleanNode(node->NE);
-				cleanNode(node->SW);
-				cleanNode(node->SE);
+				for (int i = 0; i < QUAD_TREE_NODE_COUNT; i++)
+				{
+					cleanNode(node->Children[i]);
+				}
 
 				delete node;
 			}
@@ -240,10 +226,10 @@ namespace alg
 				if (node == nullptr) return nullptr;
 				if (!isInclude(node->cond, id)) return false;
 
-				findNode(node->NW, id, target);
-				findNode(node->NE, id, target);
-				findNode(node->SW, id, target);
-				findNode(node->SE, id, target);
+				for (int i = 0; i < QUAD_TREE_NODE_COUNT; i++)
+				{
+					findNode(node->Children[i], id, target);
+				}
 
 				if (node->items.size() != 0)
 				{

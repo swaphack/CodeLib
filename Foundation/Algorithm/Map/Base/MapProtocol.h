@@ -16,6 +16,13 @@ namespace alg
 			virtual ~MapProtocol() {}
 		public:
 			/**
+			*	获取单元
+			*/
+			virtual MapCell* getCell(uint32_t nIndex)
+			{
+				return nullptr;
+			}
+			/**
 			*	单元总数
 			*/
 			virtual uint32_t getCellCount() const
@@ -35,13 +42,6 @@ namespace alg
 			virtual float getDistance(uint32_t srcIndex, uint32_t toIndex) const
 			{
 				return -1;
-			}
-			/**
-			*	获取单元
-			*/
-			virtual MapCell* getCell(uint32_t nIndex)
-			{
-				return nullptr;
 			}
 		};
 	}

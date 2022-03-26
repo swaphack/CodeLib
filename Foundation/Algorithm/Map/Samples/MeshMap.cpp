@@ -74,15 +74,32 @@ bool alg::map::MeshMapRelation::findWay(uint32_t fromIndex, uint32_t toIndex, st
 	return indices.size() > 0;
 }
 
+
+
+alg::map::MeshMapRelationCreate::~MeshMapRelationCreate() {}
+
+alg::map::MapObject* alg::map::MeshMapRelationCreate::create()
+{
+	return new MeshMapRelation();
+}
+
 //////////////////////////////////////////////////////////////////////////
 alg::map::MeshMap::MeshMap()
 {
-
+	_mapRelations.setCreateFunc(new MeshMapRelationCreate());
 }
 
 alg::map::MeshMap::~MeshMap()
 {
 	
+}
+
+inline void alg::map::MeshMap::addMeshRelation(int length, uint32_t start, ...)
+{
+	va_list ap;
+	va_start(ap, start);
+	int32_t relationIndex = this->addRelation(length, start, ap);
+	va_end(ap);
 }
 
 bool alg::map::MeshMap::findNeighborCells(uint32_t srcIndex, std::vector<uint32_t>& neighboors) const
