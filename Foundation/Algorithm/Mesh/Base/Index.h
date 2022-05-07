@@ -61,7 +61,7 @@ namespace alg
 			bool isAllEdgeLinkToOtherTriangle();
 
 			/**
-			*	是否是相同的边 未完成
+			*	是否有相同的边 未完成
 			*/
 			bool hasSameEdge(const TriangleIndex& target, std::vector<LineIndex>& outEdges);
 

@@ -97,6 +97,20 @@ namespace math
 
 			matrix.setValue(Count + 1, Count + 1, 1);
 		}
+
+		/**
+		*	齐次坐标系
+		*/
+		Array<float, Count> getPosition(const Array<float, Count>& point)
+		{
+			SquareMatrixF<Count + 1> pointMatrix;
+			for (size_t i = 0; i < Count; i++)
+			{
+				pointMatrix.setValue(i, i, point[i]);
+			}
+			SquareMatrixF<Count + 1> result = pointMatrix * _systemMatrix;
+			return Array<float, Count>(result->getRow(Count + 1)->getValue());
+		}
 	protected:
 		/**
 		*	坐标系矩阵

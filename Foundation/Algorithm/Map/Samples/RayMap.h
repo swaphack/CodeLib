@@ -55,7 +55,7 @@ namespace alg
 			/**
 			*	添加射线关系
 			*/
-			void addRayRelation(uint32_t Center, const std::vector<uint32_t>& relation);
+			void addRayRelation(uint32_t center, const std::vector<uint32_t>& relation);
 			/**
 			*	查找相邻节点
 			*/

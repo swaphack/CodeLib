@@ -17,7 +17,7 @@ bool alg::mesh::ProgressiveMeshes::canContractEdgeReplaceWithDestVertex(
 	if (pointSet == nullptr || pSrcVertex == nullptr || pDestVertex == nullptr) return false;
 
 	
-	for (auto triangle : pSrcVertex->getAdjacentTriangles())
+	for (const auto& triangle : pSrcVertex->getAdjacentTriangles())
 	{
 		// 移除顶点关联的三角形
 		removeTraingles.insert(triangle);
@@ -27,7 +27,7 @@ bool alg::mesh::ProgressiveMeshes::canContractEdgeReplaceWithDestVertex(
 			// 生成新三角形
 			auto vertexes = triangle->getVertexes();
 			std::vector<MeshVertex*> vecVertex;
-			for (auto item : vertexes)
+			for (const auto& item : vertexes)
 			{
 				if (item != pSrcVertex)
 					vecVertex.push_back(item);
@@ -42,9 +42,9 @@ bool alg::mesh::ProgressiveMeshes::canContractEdgeReplaceWithDestVertex(
 		pointSet->removeTriangle(triangle);
 	}
 	bool ret = true;
-	for (auto triangle : addTraingles)
+	for (const auto& triangle : addTraingles)
 	{
-		for (auto edge : triangle->getEdges())
+		for (const auto& edge : triangle->getEdges())
 		{
 			if (edge->isAdjacentTriangleIntersect())
 			{
@@ -58,11 +58,11 @@ bool alg::mesh::ProgressiveMeshes::canContractEdgeReplaceWithDestVertex(
 
 	if (!ret)
 	{
-		for (auto triangle : addTraingles)
+		for (const auto& triangle : addTraingles)
 		{
 			pointSet->removeTriangle(triangle);
 		}
-		for (auto triangle : removeTraingles)
+		for (const auto& triangle : removeTraingles)
 		{
 			pointSet->createTriangle(triangle->getVertex(0), triangle->getVertex(1), triangle->getVertex(2));
 		}
@@ -111,7 +111,7 @@ bool alg::mesh::ProgressiveMeshes::processContractEdgeReplaceWithMiddleVertex(
 {
 	if (pointSet == nullptr || pSrcVertex == nullptr || pDestVertex == nullptr || pMiddleVertex == nullptr) return false;
 
-	for (auto triangle : pSrcVertex->getAdjacentTriangles())
+	for (const auto& triangle : pSrcVertex->getAdjacentTriangles())
 	{
 		// 移除顶点关联的三角形
 		removeTraingles.insert(triangle);
@@ -136,9 +136,9 @@ bool alg::mesh::ProgressiveMeshes::processContractEdgeReplaceWithMiddleVertex(
 		pointSet->removeTriangle(triangle);
 	}
 	bool ret = true;
-	for (auto triangle : addTraingles)
+	for (const auto& triangle : addTraingles)
 	{
-		for (auto edge : triangle->getEdges())
+		for (const auto& edge : triangle->getEdges())
 		{
 			if (edge->isAdjacentTriangleIntersect())
 			{
@@ -152,11 +152,11 @@ bool alg::mesh::ProgressiveMeshes::processContractEdgeReplaceWithMiddleVertex(
 
 	if (!ret)
 	{
-		for (auto triangle : addTraingles)
+		for (const auto& triangle : addTraingles)
 		{
 			pointSet->removeTriangle(triangle);
 		}
-		for (auto triangle : removeTraingles)
+		for (const auto& triangle : removeTraingles)
 		{
 			pointSet->createTriangle(triangle->getVertex(0), triangle->getVertex(1), triangle->getVertex(2));
 		}

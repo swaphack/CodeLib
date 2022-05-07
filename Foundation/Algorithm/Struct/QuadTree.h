@@ -26,7 +26,13 @@ namespace alg
 			// 包含项
 			std::map<Key, Element> items;
 			// 子节点
-			TreeNode* Children[QUAD_TREE_NODE_COUNT] = nullptr;
+			TreeNode* Children[QUAD_TREE_NODE_COUNT];
+
+			TreeNode()
+			{
+				for (int i = 0; i < QUAD_TREE_NODE_COUNT; i++)
+					Children[i] = nullptr;
+			}
 		};
 	public:
 		QuadTree()
@@ -141,7 +147,7 @@ namespace alg
 			bool bAdd = false;
 			for (int i = 0; i < QUAD_TREE_NODE_COUNT; i++)
 			{
-				if (addNode(node->Children, id, item)) bAdd = true;
+				if (addNode(node->Children[i], id, item)) bAdd = true;
 			}
 			if (bAdd)
 			{
@@ -168,7 +174,7 @@ namespace alg
 				{
 					for (int i = 0; i < QUAD_TREE_NODE_COUNT; i++)
 					{
-						addNode(node->Children, item.first, item.second);
+						addNode(node->Children[i], item.first, item.second);
 					}
 				}
 			}
@@ -187,7 +193,7 @@ namespace alg
 			}
 			for (int i = 0; i < QUAD_TREE_NODE_COUNT; i++)
 			{
-				removeNode(node->Children, id);
+				removeNode(node->Children[i], id);
 			}
 
 			if (node->items.size() == 0)

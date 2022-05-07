@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Map/Base/Module.h"
-#include "Map/Base/MapAssets.h"
+#include "Map/Assets/Module.h"
+#include "Map/Assets/MapAssets.h"
 #include "Map/Creator/MapCreator.h"
 #include "CubeMap.h"
 

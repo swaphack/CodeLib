@@ -34,7 +34,7 @@ bool alg::mesh::Voronoi::createWithRect(const math::Rect& rect, Delaunay* delaun
 
 	// 扩展边
 	std::map<MeshVertex*, std::vector<MeshEdge*>> samePointEdges;
-	for(auto edge : voronoiEdges)
+	for(const auto& edge : voronoiEdges)
 	{
 		alg::mesh::MeshVertex* pVertex = (alg::mesh::MeshVertex*)edge->getVertex(0);
 		samePointEdges[pVertex].push_back(edge);
@@ -43,7 +43,7 @@ bool alg::mesh::Voronoi::createWithRect(const math::Rect& rect, Delaunay* delaun
 		samePointEdges[pVertex].push_back(edge);
 	}
 
-	for(auto item : samePointEdges)
+	for(const auto& item : samePointEdges)
 	{
 		if (item.second.size() == 2)
 		{
@@ -59,18 +59,18 @@ bool alg::mesh::Voronoi::createWithRect(const math::Rect& rect, Delaunay* delaun
 
 	std::set<MeshEdge*> allEdges;
 
-	for (auto item : voronoiEdges)
+	for (const auto& item : voronoiEdges)
 	{
 		allEdges.insert(item);
 	}
 
 	// 裁剪
 	std::map<MeshEdge*, std::vector<math::Vector3>> allIntersectPoints;
-    for(auto edge : voronoiEdges)
+    for(const auto& edge : voronoiEdges)
     {
         std::vector<math::Vector3> insetctPoints;
         std::vector<math::Vector3> otherPoints;
-        for(auto item : rectEdges)
+        for(const auto& item : rectEdges)
         {
             // 求交点
             math::Vector2 intersectPoint;
@@ -120,7 +120,7 @@ bool alg::mesh::Voronoi::createWithRect(const math::Rect& rect, Delaunay* delaun
     }
 
     // 交点处理
-    for (auto item : allIntersectPoints)
+    for (const auto& item : allIntersectPoints)
     {
         // 对点进行排序
         std::vector<math::Vector3> edgePoints;
@@ -170,7 +170,7 @@ bool alg::mesh::Voronoi::createWithRect(const math::Rect& rect, Delaunay* delaun
 
     // 转成多边形
     std::set<std::string> keys;
-    for(auto item : polygonEdges)
+    for(const auto& item : polygonEdges)
     {
         lineSegments.push_back(math::LineSegment2d(item.first->getPosition(0), item.first->getPosition(1)));
         auto polygon = MeshPolygonEdge::getConvexPolygon(item.second);

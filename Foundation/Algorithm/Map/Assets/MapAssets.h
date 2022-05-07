@@ -2,8 +2,8 @@
 
 #include <cstdint>
 
-#include "MapObject.h"
-#include "MapObjects.h"
+#include "Map/Base/MapObject.h"
+#include "Map/Base/MapObjects.h"
 #include "Module.h"
 #include "Slots.h"
 #include "CombineSlots.h"
@@ -55,6 +55,14 @@ namespace alg
 			*/
 			std::map<uint32_t, Module*> getAllModules() const;
 		public:
+			/**
+			*	添加插槽规则
+			*/
+			void addMatchRule(uint32_t key, int length, uint32_t start, ...);
+			/**
+			*	添加关联
+			*/
+			void addMatchRule(uint32_t key, uint32_t nLength, uint32_t startIndex, va_list ap);
 			/**
 			*	添加插槽规则
 			*/

@@ -30,12 +30,12 @@ void TestAlgorithm::testRayMapFindPath()
 	pMap->addPoint(math::Vector3(2.5f, 1.5f));
 	pMap->addPoint(math::Vector3(100, 100));
 
-	pMap->addRayRelation<0, 2>(1, 2);
-	pMap->addRayRelation<1, 1>(1);
-	pMap->addRayRelation<2, 3>(0, 4, 5);
-	pMap->addRayRelation<3, 2>(0, 4);
-	pMap->addRayRelation<4, 3>(2, 3, 5);
-	pMap->addRayRelation<5, 2>(2, 4);
+	pMap->addRayRelation(0, 2, 1, 2);
+	pMap->addRayRelation(1, 1,1);
+	pMap->addRayRelation(2, 3, 0, 4, 5);
+	pMap->addRayRelation(3, 2, 0, 4);
+	pMap->addRayRelation(4, 3, 2, 3, 5);
+	pMap->addRayRelation(5, 2, 2, 4);
 
 	std::vector<uint32_t> path;
 
@@ -55,12 +55,12 @@ void TestAlgorithm::testMeshMapFindPath()
 	pMap->addPoint(math::Vector3(2.5f, 1.5f));
 	pMap->addPoint(math::Vector3(100, 100));
 
-	pMap->addMeshRelation<3>(0, 1, 3);
-	pMap->addMeshRelation<3>(0, 2, 3);
-	pMap->addMeshRelation<3>(2, 3, 4);
-	pMap->addMeshRelation<3>(2, 4, 5);
-	pMap->addMeshRelation<3>(2, 3, 5);
-	pMap->addMeshRelation<3>(3, 4, 5);
+	pMap->addMeshRelation(3, 0, 1, 3);
+	pMap->addMeshRelation(3, 0, 2, 3);
+	pMap->addMeshRelation(3, 2, 3, 4);
+	pMap->addMeshRelation(3, 2, 4, 5);
+	pMap->addMeshRelation(3, 2, 3, 5);
+	pMap->addMeshRelation(3, 3, 4, 5);
 
 	std::vector<uint32_t> path;
 
@@ -80,7 +80,7 @@ void TestAlgorithm::testWFCCreateMap()
 
 	uint32_t slotData[SLOT_COUNT] = { 0,1,2,3,4,5,6,7,8,9,10,11 };
 
-	auto mapAssets = new alg::map::MapAssets<alg::map::RectModule, SLOT_COUNT, RELATION_VALUE>();
+	auto mapAssets = new alg::map::MapAssets(SLOT_COUNT, new alg::map::MapModuleCreate());
 	{
 		std::map<uint32_t, uint32_t> slots;
 		slots[(uint32_t)alg::map::RectModuleDirection::LEFT] = slotData[0];
@@ -108,23 +108,23 @@ void TestAlgorithm::testWFCCreateMap()
 
 	{
 		//mapAssets->addMatchRule<8>(0, 1, 2, 3, 4, 5, 6, 7, 8);
-		mapAssets->addMatchRule<2>(1, 4, 8);
-		mapAssets->addMatchRule<2>(0, 5, 9);
-		mapAssets->addMatchRule<2>(2, 7, 11);
-		mapAssets->addMatchRule<2>(3, 6, 10);
+		mapAssets->addMatchRule(1, 2, 4, 8);
+		mapAssets->addMatchRule(0, 2, 5, 9);
+		mapAssets->addMatchRule(2, 2, 7, 11);
+		mapAssets->addMatchRule(3, 2, 6, 10);
 
-		mapAssets->addMatchRule<2>(4, 1, 9);
-		mapAssets->addMatchRule<2>(5, 0, 8);
-		mapAssets->addMatchRule<2>(6, 3, 11);
-		mapAssets->addMatchRule<2>(7, 2, 10);
+		mapAssets->addMatchRule(4, 2, 1, 9);
+		mapAssets->addMatchRule(5, 2, 0, 8);
+		mapAssets->addMatchRule(6, 2, 3, 11);
+		mapAssets->addMatchRule(7, 2, 2, 10);
 
-		mapAssets->addMatchRule<2>(8, 1, 5);
-		mapAssets->addMatchRule<2>(9, 0, 4);
-		mapAssets->addMatchRule<2>(10, 3, 7);
-		mapAssets->addMatchRule<2>(11, 2, 6);
+		mapAssets->addMatchRule(8, 2, 1, 5);
+		mapAssets->addMatchRule(9, 2, 0, 4);
+		mapAssets->addMatchRule(10, 2, 3, 7);
+		mapAssets->addMatchRule(11, 2, 2, 6);
 	}
-	auto map = new alg::map::RectMap<RECT_WIDTH, RECT_HEIGHT>();
-	auto creator = new alg::map::RectMapCreator<SLOT_COUNT, RECT_WIDTH, RECT_HEIGHT>();
+	auto map = new alg::map::RectMap(RECT_WIDTH, RECT_HEIGHT);
+	auto creator = new alg::map::RectMapCreator(SLOT_COUNT, RECT_WIDTH, RECT_HEIGHT);
 	auto wfc = new alg::map::WFCAlgorithm();
 	creator->setSeed(9567);
 	creator->setMapAssets(mapAssets);

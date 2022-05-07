@@ -2,8 +2,8 @@
 
 #include <cstdint>
 
-#include "Map/Base/Module.h"
-#include "Map/Base/MapAssets.h"
+#include "Map/Assets/Module.h"
+#include "Map/Assets/MapAssets.h"
 #include "WFCAlgorithm.h"
 
 namespace alg

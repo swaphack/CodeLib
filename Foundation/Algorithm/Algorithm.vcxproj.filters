@@ -65,12 +65,6 @@
     <ClInclude Include="Map\Base\MapCell.h">
       <Filter>Map\Base</Filter>
     </ClInclude>
-    <ClInclude Include="Map\Base\SlotRule.h">
-      <Filter>Map\Base</Filter>
-    </ClInclude>
-    <ClInclude Include="Map\Base\MapAssets.h">
-      <Filter>Map\Base</Filter>
-    </ClInclude>
     <ClInclude Include="Map\Creator\WFCAlgorithm.h">
       <Filter>Map\Creator</Filter>
     </ClInclude>
@@ -86,12 +80,6 @@
     <ClInclude Include="Map\Base\MapProtocol.h">
       <Filter>Map\Base</Filter>
     </ClInclude>
-    <ClInclude Include="Map\Base\Module.h">
-      <Filter>Map\Base</Filter>
-    </ClInclude>
-    <ClInclude Include="Map\Base\Slots.h">
-      <Filter>Map\Base</Filter>
-    </ClInclude>
     <ClInclude Include="Map\Samples\RectMapCreator.h">
       <Filter>Map\Samples</Filter>
     </ClInclude>
@@ -103,9 +91,6 @@
     </ClInclude>
     <ClInclude Include="Map\Samples\CubeMap.h">
       <Filter>Map\Samples</Filter>
-    </ClInclude>
-    <ClInclude Include="Map\Base\CombineSlots.h">
-      <Filter>Map\Base</Filter>
     </ClInclude>
     <ClInclude Include="Mesh\macros.h">
       <Filter>Mesh</Filter>
@@ -236,6 +221,27 @@
     <ClInclude Include="Space\Index\CubeSpace.h">
       <Filter>Space\Index</Filter>
     </ClInclude>
+    <ClInclude Include="Map\Assets\Slots.h">
+      <Filter>Map\Assets</Filter>
+    </ClInclude>
+    <ClInclude Include="Map\Assets\CombineSlots.h">
+      <Filter>Map\Assets</Filter>
+    </ClInclude>
+    <ClInclude Include="Map\Assets\SlotRule.h">
+      <Filter>Map\Assets</Filter>
+    </ClInclude>
+    <ClInclude Include="Map\Assets\import.h">
+      <Filter>Map\Assets</Filter>
+    </ClInclude>
+    <ClInclude Include="Map\Assets\MapAssets.h">
+      <Filter>Map\Assets</Filter>
+    </ClInclude>
+    <ClInclude Include="Map\Assets\Module.h">
+      <Filter>Map\Assets</Filter>
+    </ClInclude>
+    <ClInclude Include="Mesh\Navigation\NavSegment.h">
+      <Filter>Mesh\Navigation</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Sort">
@@ -283,6 +289,9 @@
     <Filter Include="Mesh\Terrian">
       <UniqueIdentifier>{ac57dcab-71b5-4edb-aef9-57338235e48c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Map\Assets">
+      <UniqueIdentifier>{ac3feb97-ccaf-4711-98c6-4ac48c85d4d8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
@@ -322,20 +331,11 @@
     <ClCompile Include="Map\Creator\MultiState.cpp">
       <Filter>Map\Creator</Filter>
     </ClCompile>
-    <ClCompile Include="Map\Base\Module.cpp">
-      <Filter>Map\Base</Filter>
-    </ClCompile>
-    <ClCompile Include="Map\Base\Slots.cpp">
-      <Filter>Map\Base</Filter>
-    </ClCompile>
     <ClCompile Include="Map\Samples\RectMapCreator.cpp">
       <Filter>Map\Samples</Filter>
     </ClCompile>
     <ClCompile Include="Map\Samples\CubeMapCreator.cpp">
       <Filter>Map\Samples</Filter>
-    </ClCompile>
-    <ClCompile Include="Map\Base\CombineSlots.cpp">
-      <Filter>Map\Base</Filter>
     </ClCompile>
     <ClCompile Include="Map\Creator\WFCAlgorithm.cpp">
       <Filter>Map\Creator</Filter>
@@ -424,12 +424,6 @@
     <ClCompile Include="Map\Base\RelationTable.cpp">
       <Filter>Map\Base</Filter>
     </ClCompile>
-    <ClCompile Include="Map\Base\SlotRule.cpp">
-      <Filter>Map\Base</Filter>
-    </ClCompile>
-    <ClCompile Include="Map\Base\MapAssets.cpp">
-      <Filter>Map\Base</Filter>
-    </ClCompile>
     <ClCompile Include="Map\Creator\MapCreator.cpp">
       <Filter>Map\Creator</Filter>
     </ClCompile>
@@ -444,6 +438,27 @@
     </ClCompile>
     <ClCompile Include="Map\Samples\RectMap.cpp">
       <Filter>Map\Samples</Filter>
+    </ClCompile>
+    <ClCompile Include="Map\Assets\CombineSlots.cpp">
+      <Filter>Map\Assets</Filter>
+    </ClCompile>
+    <ClCompile Include="Map\Assets\SlotRule.cpp">
+      <Filter>Map\Assets</Filter>
+    </ClCompile>
+    <ClCompile Include="Map\Assets\Slots.cpp">
+      <Filter>Map\Assets</Filter>
+    </ClCompile>
+    <ClCompile Include="Map\Assets\MapAssets.cpp">
+      <Filter>Map\Assets</Filter>
+    </ClCompile>
+    <ClCompile Include="Map\Assets\Module.cpp">
+      <Filter>Map\Assets</Filter>
+    </ClCompile>
+    <ClCompile Include="Map\Samples\CubeMap.cpp">
+      <Filter>Map\Samples</Filter>
+    </ClCompile>
+    <ClCompile Include="Mesh\Navigation\NavSegment.cpp">
+      <Filter>Mesh\Navigation</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -9,7 +9,7 @@ namespace alg
 		public:
 			NavSystem();
 			~NavSystem();
-
+		public:
 		private:
 
 		};

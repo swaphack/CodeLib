@@ -10,6 +10,7 @@ namespace math
 	template<typename T, const int Order>
 	class SquareMatrix :  public Matrix<T, Order, Order>
 	{
+		typedef Matrix<T, Order, Order> base;
 	public:
 		SquareMatrix()
 		{
@@ -160,7 +161,26 @@ namespace math
 	};
 
 	template<const int Order>
-	class SquareMatrixF : public SquareMatrix<float, Order> {};
+	class SquareMatrixF : public SquareMatrix<float, Order> 
+	{
+	public:
+		/**
+		*	是否是单位矩阵
+		*/
+		bool isUnitMatrix()
+		{
+			for (int32_t i = 0; i < Order; i++)
+			{
+				for (int32_t j = 0; j < Order; j++)
+				{
+					float value = this->getValue(i, j);
+					if (i == j && value != 1) return false;
+					else if (i != j && value != 0) return false;
+				}
+			}
+			return true;
+		}
+	};
 
 	typedef SquareMatrixF<2> SquareMatrix2;
 	typedef SquareMatrixF<3> SquareMatrix3;

@@ -79,6 +79,7 @@ namespace math
 		float _paramA = 0;
 		float _paramB = 0;
 		float _paramC = 0;
+	protected:
 		/**
 		*	·¨ÏòÁ¿
 		*/

@@ -76,6 +76,7 @@
     <ClInclude Include="Algebra\Coordinate\CurvilinearCoordinateSystem.h" />
     <ClInclude Include="Algebra\Coordinate\import.h" />
     <ClInclude Include="Algebra\Coordinate\PolarCoordinateSystem.h" />
+    <ClInclude Include="Algebra\Coordinate\XYSystem.h" />
     <ClInclude Include="Algebra\Determinant\Determinant.h" />
     <ClInclude Include="Algebra\Determinant\EchelonFormDeterminant.h" />
     <ClInclude Include="Algebra\Determinant\import.h" />
@@ -223,6 +224,8 @@
     <ClCompile Include="Algebra\Coordinate\CartesianCoordinateSystem3D.cpp" />
     <ClCompile Include="Algebra\Coordinate\CartesianCoordinateSystem4D.cpp" />
     <ClCompile Include="Algebra\Coordinate\CoordinateSystem.cpp" />
+    <ClCompile Include="Algebra\Coordinate\PolarCoordinateSystem.cpp" />
+    <ClCompile Include="Algebra\Coordinate\XYSystem.cpp" />
     <ClCompile Include="Algebra\Equation\Equation.cpp" />
     <ClCompile Include="Algebra\Matrix\Matrix.cpp" />
     <ClCompile Include="Algebra\Matrix\Matrix1x4.cpp" />

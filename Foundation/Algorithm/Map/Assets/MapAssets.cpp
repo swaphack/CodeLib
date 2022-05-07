@@ -69,6 +69,25 @@ std::map<uint32_t, alg::map::Module*> alg::map::MapAssets::getAllModules() const
 	}
 	return mapModules;
 }
+void alg::map::MapAssets::addMatchRule(uint32_t key, int length, uint32_t start, ...)
+{
+	uint32_t* value = math::GET_PARAMETERS(length, start);
+	std::vector<uint32_t> targets;
+	targets.resize(length);
+	memcpy(&targets[0], value, length * sizeof(uint32_t));
+	free(value);
+	this->addMatchRule(key, targets);
+}
+void alg::map::MapAssets::addMatchRule(uint32_t key, uint32_t nLength, uint32_t startIndex, va_list ap)
+{
+	uint32_t* value = math::GET_PARAMETERS(nLength, startIndex, ap);
+
+	std::vector<uint32_t> targets;
+	targets.resize(nLength);
+	memcpy(&targets[0], value, nLength * sizeof(uint32_t));
+	free(value);
+	this->addMatchRule(key, targets);
+}
 void alg::map::MapAssets::addMatchRule(uint32_t key, const std::vector<uint32_t>& targets)
 {
 	_mapSlotRule.addRelation(key, targets, 1);

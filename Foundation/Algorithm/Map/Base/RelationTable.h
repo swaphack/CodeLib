@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Map/Base/MapObject.h"
+#include "MapObject.h"
 
 namespace alg
 {

@@ -63,7 +63,7 @@ namespace alg
 			*/
 			bool containEdge(const MeshEdge* pEdge) const;
 			/**
-			*	ÊÇ·ñ°üº¬±ß
+			*	Ìí¼Ó±ß
 			*/
 			void addEdge(const MeshEdge* pEdge);
 		public:

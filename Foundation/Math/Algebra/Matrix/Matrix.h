@@ -84,7 +84,7 @@ namespace math
 			{
 				for (int j = 0; j < mat.getWidth(); j++)
 				{
-					float value = mapRow[i] * mapColumn[j];
+					T value = mapRow[i] * mapColumn[j];
 					result.setValue(i, j, value);
 				}
 			}
@@ -127,7 +127,7 @@ namespace math
 				for (int32_t j = 0; j < Width; j++)
 				{
 					int32_t index = i * Width + j;
-					float value = base::getValue(index) * k;
+					T value = base::getValue(index) * k;
 					base::setValue(index, value);
 				}
 			}
@@ -145,7 +145,7 @@ namespace math
 			{
 				for (int32_t j = 0; j < Width; j++)
 				{
-					float value = base::getValue(i * Width + j) * k;
+					T value = base::getValue(i * Width + j) * k;
 					mat.setValue(i, j, value);
 				}
 			}
@@ -163,7 +163,7 @@ namespace math
 			{
 				for (int32_t j = 0; j < Width; j++)
 				{
-					float value = base::getValue(i * Width + j) / k;
+					T value = base::getValue(i * Width + j) / k;
 					mat.setValue(i, j, value);
 				}
 			}

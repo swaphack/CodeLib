@@ -1,5 +1,5 @@
 #include "CubeMapCreator.h"
-#include "Map/Base/Slots.h"
+#include "Map/Assets/Slots.h"
 alg::map::CubeMapModule::CubeMapModule()
 {
 

@@ -9,7 +9,7 @@ namespace alg
 		public:
 			NavMesh();
 			~NavMesh();
-
+		public:
 		private:
 
 		};

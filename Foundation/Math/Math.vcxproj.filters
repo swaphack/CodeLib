@@ -533,6 +533,9 @@
     <ClInclude Include="Geometry\2d\Circle.h">
       <Filter>Geometry\2d</Filter>
     </ClInclude>
+    <ClInclude Include="Algebra\Coordinate\XYSystem.h">
+      <Filter>Algebra\Coordinate</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
@@ -779,6 +782,12 @@
     </ClCompile>
     <ClCompile Include="Function\Elementary\HyperbolicFunction.cpp">
       <Filter>Function\Elementary</Filter>
+    </ClCompile>
+    <ClCompile Include="Algebra\Coordinate\XYSystem.cpp">
+      <Filter>Algebra\Coordinate</Filter>
+    </ClCompile>
+    <ClCompile Include="Algebra\Coordinate\PolarCoordinateSystem.cpp">
+      <Filter>Algebra\Coordinate</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

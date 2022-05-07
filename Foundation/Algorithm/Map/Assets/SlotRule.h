@@ -1,6 +1,6 @@
 #pragma once
 
-#include "RelationTable.h"
+#include "Map/Base/RelationTable.h"
 
 namespace alg
 {

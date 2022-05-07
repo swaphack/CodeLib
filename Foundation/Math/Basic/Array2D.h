@@ -112,9 +112,6 @@ namespace math
 			T* head = (T*)_values;
 
 			return head[index];
-			//int i = index / Width;
-			//int j = index % Width;
-			//return getValue(i, j);
 		}
 
 		/**

@@ -192,7 +192,7 @@ void alg::mesh::IFSystem::parseText(const std::string& text)
         return;
     }
     std::map<int, std::vector<std::string>> keys;
-    for (auto item : _words)
+    for (const auto& item : _words)
     {
         if (!item.empty())
         {
@@ -205,7 +205,7 @@ void alg::mesh::IFSystem::parseText(const std::string& text)
     do
     {
         bool bFind = false;
-        for (auto item : keys)
+        for (const auto& item : keys)
         {
             if (cursor + item.first > content.getSize())
             {

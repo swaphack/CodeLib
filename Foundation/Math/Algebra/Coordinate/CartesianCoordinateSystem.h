@@ -1,6 +1,6 @@
 #pragma once
 
-#include "CurvilinearCoordinateSystem.h"
+#include "CoordinateSystem.h"
 #include "Algebra/Vector/Vector3.h"
 
 namespace math
@@ -10,15 +10,24 @@ namespace math
 	*	直角坐标系
 	*/
 	template<const int Count>
-	class CartesianCoordinateSystem : public CurvilinearCoordinateSystem<Count>
+	class CartesianCoordinateSystem : public CoordinateSystem<Count>
 	{
+		typedef CoordinateSystem<Count> base;
 	public:
 		CartesianCoordinateSystem()
 		{}
 		virtual ~CartesianCoordinateSystem()
 		{}
 	public:
+		/**
+		*	是否是单位坐标系
+		*/
+		bool isUnitSystem()
+		{
+			return base::_systemMatrix.isUnitMatrix();
+		}
 
+		
 	protected:
 	private:
 	};

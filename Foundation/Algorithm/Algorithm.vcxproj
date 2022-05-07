@@ -67,19 +67,20 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="algorithm.h" />
-    <ClInclude Include="Map\Base\CombineSlots.h" />
+    <ClInclude Include="Map\Assets\CombineSlots.h" />
+    <ClInclude Include="Map\Assets\import.h" />
+    <ClInclude Include="Map\Assets\MapAssets.h" />
+    <ClInclude Include="Map\Assets\Module.h" />
+    <ClInclude Include="Map\Assets\SlotRule.h" />
+    <ClInclude Include="Map\Assets\Slots.h" />
     <ClInclude Include="Map\Base\import.h" />
     <ClInclude Include="Map\Base\Map.h" />
     <ClInclude Include="Map\Base\MapCell.h" />
-    <ClInclude Include="Map\Base\MapAssets.h" />
-    <ClInclude Include="Map\Base\Module.h" />
     <ClInclude Include="Map\Base\MapObject.h" />
     <ClInclude Include="Map\Base\MapObjects.h" />
     <ClInclude Include="Map\Base\MapProtocol.h" />
     <ClInclude Include="Map\Base\MapRelation.h" />
-    <ClInclude Include="Map\Base\Slots.h" />
     <ClInclude Include="Map\Base\RelationTable.h" />
-    <ClInclude Include="Map\Base\SlotRule.h" />
     <ClInclude Include="Map\Creator\import.h" />
     <ClInclude Include="Map\Creator\MapCreator.h" />
     <ClInclude Include="Map\Creator\MultiState.h" />
@@ -119,6 +120,7 @@
     <ClInclude Include="Mesh\Navigation\import.h" />
     <ClInclude Include="Mesh\Navigation\NavMesh.h" />
     <ClInclude Include="Mesh\Navigation\NavPoly.h" />
+    <ClInclude Include="Mesh\Navigation\NavSegment.h" />
     <ClInclude Include="Mesh\Navigation\NavSystem.h" />
     <ClInclude Include="Mesh\Terrian\DiamondSquareTerrian.h" />
     <ClInclude Include="Mesh\Terrian\IFSystem.h" />
@@ -148,16 +150,16 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Map\Base\CombineSlots.cpp" />
+    <ClCompile Include="Map\Assets\CombineSlots.cpp" />
+    <ClCompile Include="Map\Assets\MapAssets.cpp" />
+    <ClCompile Include="Map\Assets\Module.cpp" />
+    <ClCompile Include="Map\Assets\SlotRule.cpp" />
+    <ClCompile Include="Map\Assets\Slots.cpp" />
     <ClCompile Include="Map\Base\Map.cpp" />
-    <ClCompile Include="Map\Base\MapAssets.cpp" />
     <ClCompile Include="Map\Base\MapCell.cpp" />
-    <ClCompile Include="Map\Base\Module.cpp" />
     <ClCompile Include="Map\Base\MapObject.cpp" />
     <ClCompile Include="Map\Base\MapRelation.cpp" />
     <ClCompile Include="Map\Base\RelationTable.cpp" />
-    <ClCompile Include="Map\Base\SlotRule.cpp" />
-    <ClCompile Include="Map\Base\Slots.cpp" />
     <ClCompile Include="Map\Creator\MapCreator.cpp" />
     <ClCompile Include="Map\Creator\MapObjects.cpp" />
     <ClCompile Include="Map\Creator\MultiState.cpp" />
@@ -165,6 +167,7 @@
     <ClCompile Include="Map\Path\AStar.cpp" />
     <ClCompile Include="Map\Path\Path.cpp" />
     <ClCompile Include="Map\Path\TaskPath.cpp" />
+    <ClCompile Include="Map\Samples\CubeMap.cpp" />
     <ClCompile Include="Map\Samples\PointMap.cpp" />
     <ClCompile Include="Map\Samples\RectMap.cpp" />
     <ClCompile Include="Map\Samples\RectMapCreator.cpp" />
@@ -186,6 +189,7 @@
     <ClCompile Include="Mesh\Core\Voronoi.cpp" />
     <ClCompile Include="Mesh\Navigation\NavMesh.cpp" />
     <ClCompile Include="Mesh\Navigation\NavPoly.cpp" />
+    <ClCompile Include="Mesh\Navigation\NavSegment.cpp" />
     <ClCompile Include="Mesh\Navigation\NavSystem.cpp" />
     <ClCompile Include="Mesh\Terrian\DiamondSquareTerrian.cpp" />
     <ClCompile Include="Mesh\Terrian\IFSystem.cpp" />

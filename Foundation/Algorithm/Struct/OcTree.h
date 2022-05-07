@@ -15,7 +15,7 @@ namespace alg
 		typedef std::function<bool(const Condtion& a, const Key& b)> CondtionIncludeFunc;
 		typedef std::function<bool(const Condtion& a, std::vector<Condtion>& b)> CondtionDivideFunc;
 
-#define QUAD_TREE_NODE_COUNT 8
+#define OC_TREE_NODE_COUNT 8
 
 		// 节点
 		struct TreeNode
@@ -26,7 +26,13 @@ namespace alg
 			// 包含项
 			std::map<Key, Element> items;
 			// 子节点
-			TreeNode* Children[QUAD_TREE_NODE_COUNT] = nullptr;
+			TreeNode* Children[OC_TREE_NODE_COUNT];
+
+			TreeNode()
+			{
+				for (int i = 0; i < OC_TREE_NODE_COUNT; i++)
+					Children[i] = nullptr;
+			}
 		};
 	public:
 		OcTree()
@@ -139,9 +145,9 @@ namespace alg
 
 			if (!isInclude(node->cond, id)) return false;
 			bool bAdd = false;
-			for (int i = 0; i < QUAD_TREE_NODE_COUNT; i++)
+			for (int i = 0; i < OC_TREE_NODE_COUNT; i++)
 			{
-				if (addNode(node->Children, id, item)) bAdd = true;
+				if (addNode(node->Children[i], id, item)) bAdd = true;
 			}
 			if (bAdd)
 			{
@@ -156,9 +162,9 @@ namespace alg
 				{// 不可再分割
 					return true;
 				}
-				if (b.size() != QUAD_TREE_NODE_COUNT) return false;
+				if (b.size() != OC_TREE_NODE_COUNT) return false;
 
-				for (int i = 0; i < QUAD_TREE_NODE_COUNT; i++)
+				for (int i = 0; i < OC_TREE_NODE_COUNT; i++)
 				{
 					node->Children[i] = createNode(b[i]);
 				}
@@ -167,9 +173,9 @@ namespace alg
 				node->items.clear();
 				for (const auto& item : items)
 				{
-					for (int i = 0; i < QUAD_TREE_NODE_COUNT; i++)
+					for (int i = 0; i < OC_TREE_NODE_COUNT; i++)
 					{
-						addNode(node->Children, item.first, item.second);
+						addNode(node, item.first, item.second);
 					}
 				}
 			}
@@ -187,9 +193,9 @@ namespace alg
 				return false;
 			}
 
-			for (int i = 0; i < QUAD_TREE_NODE_COUNT; i++)
+			for (int i = 0; i < OC_TREE_NODE_COUNT; i++)
 			{
-				removeNode(node->Children, id);
+				removeNode(node->Children[i], id);
 			}
 
 			if (node->items.size() == 0)
@@ -212,7 +218,7 @@ namespace alg
 		{
 			if (node == nullptr) return;
 
-			for (int i = 0; i < QUAD_TREE_NODE_COUNT; i++)
+			for (int i = 0; i < OC_TREE_NODE_COUNT; i++)
 			{
 				cleanNode(node->Children[i]);
 			}
@@ -227,7 +233,7 @@ namespace alg
 			if (node == nullptr) return nullptr;
 			if (!isInclude(node->cond, id)) return false;
 
-			for (int i = 0; i < QUAD_TREE_NODE_COUNT; i++)
+			for (int i = 0; i < OC_TREE_NODE_COUNT; i++)
 			{
 				findNode(node->Children[i], id, target);
 			}

@@ -94,7 +94,7 @@ alg::map::MeshMap::~MeshMap()
 	
 }
 
-inline void alg::map::MeshMap::addMeshRelation(int length, uint32_t start, ...)
+void alg::map::MeshMap::addMeshRelation(int length, uint32_t start, ...)
 {
 	va_list ap;
 	va_start(ap, start);
