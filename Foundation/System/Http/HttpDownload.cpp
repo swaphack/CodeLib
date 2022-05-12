@@ -1,7 +1,7 @@
 #include "HttpDownload.h"
 #include "Http/import.h"
 #include "Framework/Object.h"
-#include "Net/Client.h"
+#include "Net/TCPClient.h"
 #include "Net/NetData.h"
 #include "Net/DNS.h"
 #include "Stream/StreamWriter.h"
@@ -37,7 +37,7 @@ HttpDownload::~HttpDownload()
 	this->clear();
 }
 
-bool HttpDownload::startTask(const std::string& url, const std::string& filepath, HttpDownloadedCallback callback, int32_t tag)
+bool HttpDownload::startTask(const std::string& url, const std::string& filepath, const HttpDownloadListener& callback, int32_t tag)
 {
 	auto pClient = initClient(url);
 	if (pClient == nullptr)
@@ -58,7 +58,7 @@ bool HttpDownload::startTask(const std::string& url, const std::string& filepath
 		return false;
 	}
 
-	this->addListen(pClient, filepath, HttpDownloadedCallback(), func, tag);
+	this->addListen(pClient, filepath, HttpDownloadListener(), func, tag);
 
 	return true;
 }
@@ -146,7 +146,7 @@ void HttpDownload::onRecvHandle(int32_t id, DataQueue& data)
 	delete pDoc;
 }
 
-void HttpDownload::addListen(Client* client, const std::string& localpath, HttpDownloadedCallback callback, HttpDownloadedFunc func, int32_t tag)
+void HttpDownload::addListen(TCPClient* client, const std::string& localpath, const HttpDownloadListener& callback, HttpDownloadedFunc func, int32_t tag)
 {// 添加一个下载监听
 	if (client == nullptr)
 	{
@@ -189,7 +189,7 @@ void HttpDownload::setDownloadingFunc(HttpDownloadingFunc func)
 	_downloadingFunc = func;
 }
 
-Client* HttpDownload::initClient(const std::string& url)
+TCPClient* HttpDownload::initClient(const std::string& url)
 {
 	if (url.empty())
 	{
@@ -203,7 +203,7 @@ Client* HttpDownload::initClient(const std::string& url)
 
 	this->parseHttpURL(url, ip, port, filepath, values);
 
-	Client* client = new Client(ip, port);
+	TCPClient* client = new TCPClient(ip, port);
 	if (!client->connect())
 	{
 		delete client;

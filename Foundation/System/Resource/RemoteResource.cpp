@@ -51,7 +51,7 @@ bool RemoteResource::loadFileData(const std::string& filename, GetDataCallback h
 
 	_downloadTasks.insert(std::make_pair(s_Tag, task));
 
-	HttpDownloadedCallback downloadHandler = std::make_pair(this, (downloadedCallback)&RemoteResource::onDownloadCallback);
+	HttpDownloadListener downloadHandler(this, (sys::HttpDownloadListener::DownloadedCallback)&RemoteResource::onDownloadCallback);
 
 	HttpDownload download;
 	download.startTask(_url, filename, downloadHandler, 1);

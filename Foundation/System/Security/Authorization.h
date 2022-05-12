@@ -8,7 +8,7 @@
 namespace sys
 {
 	// 发起人
-	class Client;
+	class TCPClient;
 
 	// 授权
 	class Authorization

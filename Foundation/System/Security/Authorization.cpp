@@ -1,6 +1,6 @@
 #include "Authorization.h"
 #include "Author.h"
-#include "Net/Client.h"
+#include "Net/TCPClient.h"
 
 #include <thread>
 
@@ -15,7 +15,7 @@ bool Authorization::isRemoteEnable(const std::string& url, int32_t port)
 		return false;
 	}
 
-	Client* pClient = new Client(url, port);
+	TCPClient* pClient = new TCPClient(url, port);
 	if (!pClient && !pClient->connect())
 	{
 		return false;

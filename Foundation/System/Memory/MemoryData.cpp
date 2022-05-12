@@ -203,6 +203,7 @@ void MemoryData::insert(size_t offset, size_t size, const char* value)
 	{
 		offset = _length;
 	}
+
 	size_t length = _length + size;
 	char* val = (char*)malloc(length);
 	if (val)

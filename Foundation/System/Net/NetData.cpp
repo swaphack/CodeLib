@@ -29,32 +29,8 @@ NetData::NetData(const MemoryData& value)
 	this->init((const char*)data.getValue(), data.getLength());
 }
 
-uint32_t NetData::getSize() const
-{
-	return data.getSize();
-}
-
-const char* NetData::getPtr() const
-{
-	return data.getPtr();
-}
-
 NetData::~NetData()
 {
-}
-
-
-void NetData::insert(const char* value, int32_t len)
-{
-	this->data.insert(this->data.getLength(), len, value);
-	pos = 0;
-}
-
-void NetData::init(const char* value, int32_t len)
-{
-	data.init(len, value);
-
-	pos = 0;
 }
 
 int32_t NetData::getRemainSize() const
@@ -65,6 +41,34 @@ int32_t NetData::getRemainSize() const
 const char* NetData::getCursorPtr() const
 {
 	return data.getPtr(pos);
+}
+
+uint32_t NetData::getSize() const
+{
+	return data.getSize();
+}
+
+const char* NetData::getPtr() const
+{
+	return data.getPtr();
+}
+
+void sys::NetData::resetPos()
+{
+	pos = 0;
+}
+
+void NetData::init(const char* value, int32_t len)
+{
+	data.init(len, value);
+
+	pos = 0;
+}
+
+void NetData::append(const char* value, int32_t len)
+{
+	this->data.insert(this->data.getLength(), len, value);
+	pos = 0;
 }
 
 

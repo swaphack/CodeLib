@@ -67,9 +67,6 @@
     <Filter Include="IO">
       <UniqueIdentifier>{a8e455b0-2257-4e94-8aae-2821f255f81b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Framework\Workflow">
-      <UniqueIdentifier>{80bf64e0-e269-48d9-80a1-4284c28a7522}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Resource\Font">
       <UniqueIdentifier>{fd12e771-541b-4afa-a582-929a8272433e}</UniqueIdentifier>
     </Filter>
@@ -129,7 +126,7 @@
     <ClInclude Include="Framework\Object.h">
       <Filter>Framework</Filter>
     </ClInclude>
-    <ClInclude Include="Net\Client.h">
+    <ClInclude Include="Net\TCPClient.h">
       <Filter>Net</Filter>
     </ClInclude>
     <ClInclude Include="Net\DataQueue.h">
@@ -141,10 +138,10 @@
     <ClInclude Include="Net\NetData.h">
       <Filter>Net</Filter>
     </ClInclude>
-    <ClInclude Include="Net\Server.h">
+    <ClInclude Include="Net\TCPServer.h">
       <Filter>Net</Filter>
     </ClInclude>
-    <ClInclude Include="Net\Socket.h">
+    <ClInclude Include="Net\TCPSocket.h">
       <Filter>Net</Filter>
     </ClInclude>
     <ClInclude Include="Net\SocketRecvHandler.h">
@@ -436,27 +433,6 @@
     <ClInclude Include="Memory\MemoryPointer.h">
       <Filter>Memory</Filter>
     </ClInclude>
-    <ClInclude Include="Framework\Workflow\CountTask.h">
-      <Filter>Framework\Workflow</Filter>
-    </ClInclude>
-    <ClInclude Include="Framework\Workflow\ForeverTask.h">
-      <Filter>Framework\Workflow</Filter>
-    </ClInclude>
-    <ClInclude Include="Framework\Workflow\SequenseWorkFlow.h">
-      <Filter>Framework\Workflow</Filter>
-    </ClInclude>
-    <ClInclude Include="Framework\Workflow\SpawnWorkFlow.h">
-      <Filter>Framework\Workflow</Filter>
-    </ClInclude>
-    <ClInclude Include="Framework\Workflow\Task.h">
-      <Filter>Framework\Workflow</Filter>
-    </ClInclude>
-    <ClInclude Include="Framework\Workflow\TimerTask.h">
-      <Filter>Framework\Workflow</Filter>
-    </ClInclude>
-    <ClInclude Include="Framework\Workflow\WorkFlow.h">
-      <Filter>Framework\Workflow</Filter>
-    </ClInclude>
     <ClInclude Include="Resource\Font\TextDefine.h">
       <Filter>Resource\Font</Filter>
     </ClInclude>
@@ -619,6 +595,27 @@
     <ClInclude Include="Resource\Atlas\ImageTextureAtlas.h">
       <Filter>Resource\Atlas</Filter>
     </ClInclude>
+    <ClInclude Include="Process\import.h">
+      <Filter>Process</Filter>
+    </ClInclude>
+    <ClInclude Include="Process\PipeSever.h">
+      <Filter>Process</Filter>
+    </ClInclude>
+    <ClInclude Include="Process\PipeClient.h">
+      <Filter>Process</Filter>
+    </ClInclude>
+    <ClInclude Include="Process\AnonymousPipes.h">
+      <Filter>Process</Filter>
+    </ClInclude>
+    <ClInclude Include="Process\NamedPipes.h">
+      <Filter>Process</Filter>
+    </ClInclude>
+    <ClInclude Include="Net\SocketModule.h">
+      <Filter>Net</Filter>
+    </ClInclude>
+    <ClInclude Include="Net\UDPSocket.h">
+      <Filter>Net</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Framework\Application.cpp">
@@ -633,16 +630,16 @@
     <ClCompile Include="Framework\Object.cpp">
       <Filter>Framework</Filter>
     </ClCompile>
-    <ClCompile Include="Net\Client.cpp">
+    <ClCompile Include="Net\TCPClient.cpp">
       <Filter>Net</Filter>
     </ClCompile>
     <ClCompile Include="Net\DataQueue.cpp">
       <Filter>Net</Filter>
     </ClCompile>
-    <ClCompile Include="Net\Server.cpp">
+    <ClCompile Include="Net\TCPServer.cpp">
       <Filter>Net</Filter>
     </ClCompile>
-    <ClCompile Include="Net\Socket.cpp">
+    <ClCompile Include="Net\TCPSocket.cpp">
       <Filter>Net</Filter>
     </ClCompile>
     <ClCompile Include="Stream\StreamBase.cpp">
@@ -837,24 +834,6 @@
     <ClCompile Include="Memory\MemoryPointer.cpp">
       <Filter>Memory</Filter>
     </ClCompile>
-    <ClCompile Include="Framework\Workflow\CountTask.cpp">
-      <Filter>Framework\Workflow</Filter>
-    </ClCompile>
-    <ClCompile Include="Framework\Workflow\ForeverTask.cpp">
-      <Filter>Framework\Workflow</Filter>
-    </ClCompile>
-    <ClCompile Include="Framework\Workflow\SpawnWorkFlow.cpp">
-      <Filter>Framework\Workflow</Filter>
-    </ClCompile>
-    <ClCompile Include="Framework\Workflow\Task.cpp">
-      <Filter>Framework\Workflow</Filter>
-    </ClCompile>
-    <ClCompile Include="Framework\Workflow\TimerTask.cpp">
-      <Filter>Framework\Workflow</Filter>
-    </ClCompile>
-    <ClCompile Include="Framework\Workflow\WorkFlow.cpp">
-      <Filter>Framework\Workflow</Filter>
-    </ClCompile>
     <ClCompile Include="Resource\Image\ImageBMP.cpp">
       <Filter>Resource\Image</Filter>
     </ClCompile>
@@ -965,6 +944,27 @@
     </ClCompile>
     <ClCompile Include="Resource\Atlas\ImageTextureAtlas.cpp">
       <Filter>Resource\Atlas</Filter>
+    </ClCompile>
+    <ClCompile Include="Process\Pipe.cpp">
+      <Filter>Process</Filter>
+    </ClCompile>
+    <ClCompile Include="Process\PipeServer.cpp">
+      <Filter>Process</Filter>
+    </ClCompile>
+    <ClCompile Include="Process\PipeClient.cpp">
+      <Filter>Process</Filter>
+    </ClCompile>
+    <ClCompile Include="Process\AnonymousPipes.cpp">
+      <Filter>Process</Filter>
+    </ClCompile>
+    <ClCompile Include="Process\NamedPipes.cpp">
+      <Filter>Process</Filter>
+    </ClCompile>
+    <ClCompile Include="Net\SocketModule.cpp">
+      <Filter>Net</Filter>
+    </ClCompile>
+    <ClCompile Include="Net\UDPSocket.cpp">
+      <Filter>Net</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

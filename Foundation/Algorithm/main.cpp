@@ -1,6 +1,6 @@
 #include "Sort/Sort.h"
 #include "Mesh/import.h"
-
+#include "Work/import.h"
 #include <vector>
 
 using namespace alg;
@@ -34,6 +34,21 @@ void testMesh()
 	if (voronoi.createWithRect(rect, &delaunay, polygons, lineSegments))
 	{
 	}
+}
+
+void testWork()
+{
+	alg::work::WorkFlow base;
+
+	auto cycleWorkFlow = new alg::work::CycleWorkFlow();
+	auto sequenceWorkFlow = new alg::work::SequenceWorkFlow();
+	auto task = new alg::work::Task();
+	task->setTaskFunc([](float dt) { });
+	task->addLimit(new alg::work::TaskCountLimit(100));
+	task->addLimit(new alg::work::TaskTimeLimit(10));
+	sequenceWorkFlow->addTask(task);
+	cycleWorkFlow->addTask(sequenceWorkFlow);
+	base.addTask(cycleWorkFlow);
 }
 
 int main(int argc, char** argv)

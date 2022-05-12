@@ -39,13 +39,18 @@ namespace sys
 		*	剩余未读取空间大小
 		*/
 		int32_t getRemainSize() const;
+	public:
+		/**
+		*	重置位置，从0开始
+		*/
+		void resetPos();
 		/**
 		*	初始化
 		*/
 		void init(const char* value, int32_t len);
 		/**
-		*	在头部插入
+		*	在尾部插入
 		*/
-		void insert(const char* value, int32_t len);
+		void append(const char* value, int32_t len);
 	};
 }

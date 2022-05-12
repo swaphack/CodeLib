@@ -242,6 +242,57 @@
     <ClInclude Include="Mesh\Navigation\NavSegment.h">
       <Filter>Mesh\Navigation</Filter>
     </ClInclude>
+    <ClInclude Include="Work\import.h">
+      <Filter>Work</Filter>
+    </ClInclude>
+    <ClInclude Include="Work\Task\TaskCountLimit.h">
+      <Filter>Work\Task</Filter>
+    </ClInclude>
+    <ClInclude Include="Work\Task\TaskForeverLimit.h">
+      <Filter>Work\Task</Filter>
+    </ClInclude>
+    <ClInclude Include="Work\Task\Task.h">
+      <Filter>Work\Task</Filter>
+    </ClInclude>
+    <ClInclude Include="Work\Task\TaskTimeLimit.h">
+      <Filter>Work\Task</Filter>
+    </ClInclude>
+    <ClInclude Include="Work\Workflow\SequenceWorkFlow.h">
+      <Filter>Work\Workflow</Filter>
+    </ClInclude>
+    <ClInclude Include="Work\Workflow\SpawnWorkFlow.h">
+      <Filter>Work\Workflow</Filter>
+    </ClInclude>
+    <ClInclude Include="Work\Workflow\WorkFlow.h">
+      <Filter>Work\Workflow</Filter>
+    </ClInclude>
+    <ClInclude Include="Work\Task\import.h">
+      <Filter>Work\Task</Filter>
+    </ClInclude>
+    <ClInclude Include="Work\Workflow\import.h">
+      <Filter>Work\Workflow</Filter>
+    </ClInclude>
+    <ClInclude Include="Work\Base\WorkObject.h">
+      <Filter>Work\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Work\Workflow\CycleWorkFlow.h">
+      <Filter>Work\Workflow</Filter>
+    </ClInclude>
+    <ClInclude Include="Work\Base\import.h">
+      <Filter>Work\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Work\Base\WorkData.h">
+      <Filter>Work\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Work\Base\WorkDataMap.h">
+      <Filter>Work\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Work\Task\TaskLimit.h">
+      <Filter>Work\Task</Filter>
+    </ClInclude>
+    <ClInclude Include="Work\Base\StaticData.h">
+      <Filter>Work\Base</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Sort">
@@ -291,6 +342,18 @@
     </Filter>
     <Filter Include="Map\Assets">
       <UniqueIdentifier>{ac3feb97-ccaf-4711-98c6-4ac48c85d4d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Work">
+      <UniqueIdentifier>{ebfd6939-99cc-46ac-a68c-ba8ff93ed5ed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Work\Workflow">
+      <UniqueIdentifier>{4e1bb554-b415-41db-877e-59408050cc8e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Work\Task">
+      <UniqueIdentifier>{ed657551-33b9-417a-8dc0-b056f1a13ed1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Work\Base">
+      <UniqueIdentifier>{50dc8e1a-24b1-44ad-9bd4-4cf857e4618e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -459,6 +522,45 @@
     </ClCompile>
     <ClCompile Include="Mesh\Navigation\NavSegment.cpp">
       <Filter>Mesh\Navigation</Filter>
+    </ClCompile>
+    <ClCompile Include="Work\Task\TaskCountLimit.cpp">
+      <Filter>Work\Task</Filter>
+    </ClCompile>
+    <ClCompile Include="Work\Task\TaskForeverLimit.cpp">
+      <Filter>Work\Task</Filter>
+    </ClCompile>
+    <ClCompile Include="Work\Task\Task.cpp">
+      <Filter>Work\Task</Filter>
+    </ClCompile>
+    <ClCompile Include="Work\Task\TaskTimeLimit.cpp">
+      <Filter>Work\Task</Filter>
+    </ClCompile>
+    <ClCompile Include="Work\Workflow\SequenceWorkFlow.cpp">
+      <Filter>Work\Workflow</Filter>
+    </ClCompile>
+    <ClCompile Include="Work\Workflow\SpawnWorkFlow.cpp">
+      <Filter>Work\Workflow</Filter>
+    </ClCompile>
+    <ClCompile Include="Work\Workflow\WorkFlow.cpp">
+      <Filter>Work\Workflow</Filter>
+    </ClCompile>
+    <ClCompile Include="Work\Base\WorkObject.cpp">
+      <Filter>Work\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Work\Workflow\CycleWorkFlow.cpp">
+      <Filter>Work\Workflow</Filter>
+    </ClCompile>
+    <ClCompile Include="Work\Base\WorkDataMap.cpp">
+      <Filter>Work\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Work\Task\TaskLimit.cpp">
+      <Filter>Work\Task</Filter>
+    </ClCompile>
+    <ClCompile Include="Work\Base\WorkData.cpp">
+      <Filter>Work\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Work\Base\StaticData.cpp">
+      <Filter>Work\Base</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -1,8 +1,7 @@
 #include "DNS.h"
-#include "Socket.h"
+#include "SocketModule.h"
 #include "Base/import.h"
 #include "Type/String.h"
-
 #if PLATFORM_TARGET == EPT_WINDOWS
 #include <WS2tcpip.h>
 #elif PLATFORM_TARGET == EPT_LINUX
@@ -23,7 +22,7 @@ using namespace sys;
 
 void DNS::getFirstIPAddress(const std::string& url, std::string& ip, int32_t& port)
 {
-	Socket::InitSockModule();
+	SocketModule::InitSockModule();
 
 	ip.clear();
 
@@ -70,12 +69,12 @@ void DNS::getFirstIPAddress(const std::string& url, std::string& ip, int32_t& po
 		break;
 	}
 
-	Socket::ReleaseSockModule();
+	SocketModule::ReleaseSockModule();
 }
 
 void DNS::getAllIPAddress(const std::string& url, std::vector<std::pair<std::string, int32_t>>& ipAddresses)
 {
-	Socket::InitSockModule();
+	SocketModule::InitSockModule();
 
 	ipAddresses.clear();
 	if (url.empty())
@@ -127,7 +126,7 @@ void DNS::getAllIPAddress(const std::string& url, std::vector<std::pair<std::str
 		}
 	}
 
-	Socket::ReleaseSockModule();
+	SocketModule::ReleaseSockModule();
 }
 
 void DNS::getIPAddress(struct addrinfo* addr_info, std::string& ip, int32_t& port)

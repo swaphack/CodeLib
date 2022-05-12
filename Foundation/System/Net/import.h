@@ -4,10 +4,11 @@
 
 #include "DNS.h"
 
-#include "Socket.h"
-
 #include "SocketRecvHandler.h"
+#include "SocketModule.h"
 
-#include "Server.h"
+#include "TCPSocket.h"
+#include "TCPServer.h"
+#include "TCPClient.h"
 
-#include "Client.h"
+#include "UDPSocket.h"

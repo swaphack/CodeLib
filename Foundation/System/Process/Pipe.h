@@ -4,6 +4,9 @@
 
 namespace sys
 {
+	/**
+	*	¹ÜµÀ
+	*/
 	class Pipe
 	{
 	public:

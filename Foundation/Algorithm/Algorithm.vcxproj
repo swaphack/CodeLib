@@ -147,6 +147,23 @@
     <ClInclude Include="Struct\OneToOneRelationship.h" />
     <ClInclude Include="Struct\OneToManyRelationship.h" />
     <ClInclude Include="Struct\QuadTree.h" />
+    <ClInclude Include="Work\Base\import.h" />
+    <ClInclude Include="Work\Base\StaticData.h" />
+    <ClInclude Include="Work\Base\WorkDataMap.h" />
+    <ClInclude Include="Work\Base\WorkData.h" />
+    <ClInclude Include="Work\Base\WorkObject.h" />
+    <ClInclude Include="Work\import.h" />
+    <ClInclude Include="Work\Task\TaskCountLimit.h" />
+    <ClInclude Include="Work\Task\TaskForeverLimit.h" />
+    <ClInclude Include="Work\Task\import.h" />
+    <ClInclude Include="Work\Task\Task.h" />
+    <ClInclude Include="Work\Task\TaskLimit.h" />
+    <ClInclude Include="Work\Task\TaskTimeLimit.h" />
+    <ClInclude Include="Work\Workflow\CycleWorkFlow.h" />
+    <ClInclude Include="Work\Workflow\import.h" />
+    <ClInclude Include="Work\Workflow\SequenceWorkFlow.h" />
+    <ClInclude Include="Work\Workflow\SpawnWorkFlow.h" />
+    <ClInclude Include="Work\Workflow\WorkFlow.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
@@ -205,6 +222,19 @@
     <ClCompile Include="Struct\ObjectDetail.cpp" />
     <ClCompile Include="Struct\OneToOneRelationship.cpp" />
     <ClCompile Include="Struct\OneToManyRelationship.cpp" />
+    <ClCompile Include="Work\Base\StaticData.cpp" />
+    <ClCompile Include="Work\Base\WorkDataMap.cpp" />
+    <ClCompile Include="Work\Base\WorkData.cpp" />
+    <ClCompile Include="Work\Base\WorkObject.cpp" />
+    <ClCompile Include="Work\Task\TaskCountLimit.cpp" />
+    <ClCompile Include="Work\Task\TaskForeverLimit.cpp" />
+    <ClCompile Include="Work\Task\Task.cpp" />
+    <ClCompile Include="Work\Task\TaskLimit.cpp" />
+    <ClCompile Include="Work\Task\TaskTimeLimit.cpp" />
+    <ClCompile Include="Work\Workflow\CycleWorkFlow.cpp" />
+    <ClCompile Include="Work\Workflow\SequenceWorkFlow.cpp" />
+    <ClCompile Include="Work\Workflow\SpawnWorkFlow.cpp" />
+    <ClCompile Include="Work\Workflow\WorkFlow.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
